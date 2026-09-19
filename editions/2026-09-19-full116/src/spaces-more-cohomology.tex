@@ -1,0 +1,1826 @@
+% Generated mechanically from frozen input inputs/p10/ja/spaces-more-cohomology.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{83}
+\chapter{空間のコホモロジー詳論}
+
+
+\phantomsection
+\label{spaces-more-cohomology-section-phantom}
+
+
+
+
+
+\section{序論}
+\label{spaces-more-cohomology-section-introduction}
+
+\noindent
+% P10-E0147
+本章では、『空間のコホモロジー』節
+\ref{spaces-cohomology-section-introduction} で始めた議論を続ける。
+また本章は、スキームに対するエタール・コホモロジーの章、すなわち
+『エタール・コホモロジー』節
+\ref{etale-cohomology-section-introduction} の代数空間版とみなすこともできる。
+
+\medskip\noindent
+実際、本章の主な目的は、スキームについて既に証明された結果を
+代数空間の言葉に移し替えることである。本章の結果の一部は
+\cite{Kn} にも見られる。
+
+
+
+
+
+\section{規約}
+\label{spaces-more-cohomology-section-conventions}
+
+\noindent
+常に、すべてのスキームが大 fppf サイト $\Sch_{fppf}$ に
+含まれるものと仮定する。また、考えるすべての環 $A$ は、
+$\Spec(A)$ がこの大サイトの対象に（同型で）なるという性質をもつものとする。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+本章および次章では、$X$ とそれ自身との積（$S$ 上の代数空間の圏における積）を
+$X \times X$ ではなく $X \times_S X$ と書く。
+
+
+
+
+
+
+
+\section{スキームの場合の結果の移送}
+\label{spaces-more-cohomology-section-api}
+
+\noindent
+本節では、スキームについての結果から、（表現可能な）代数空間および
+代数空間の（表現可能な）射についての結果がどのように従うかを簡潔に説明する。
+準連接加群については、さらに強いことが成り立つ
+（スキーム上の準連接加群のエタール・コホモロジーは
+Zariski コホモロジーと一致するためである）。これは既に
+『空間のコホモロジー』節
+\ref{spaces-cohomology-section-higher-direct-image} で論じた。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+いま $X$ がスキーム $X_0$ によって表現されると仮定する
+（不格好だが一時的な記法であり、通常は単に「$X$ はスキームである」と言う）。
+このとき $X$ と $X_0$ の小エタールサイトは同じである：
+$$
+X_\etale = (X_0)_\etale
+$$
+これは『代数空間の性質』節
+\ref{spaces-properties-section-etale-site} で指摘されている。
+さらに、$f : X \to Y$ が $S$ 上の表現可能な代数空間の射であり、
+$f_0 : X_0 \to Y_0$ が $f$ を表現するスキームの射ならば、
+誘導される小エタール・トポスの射は一致する：
+$$
+\xymatrix{
+\Sh(X_\etale) \ar[rr]_{f_{small}} \ar@{=}[d] & &
+\Sh(Y_\etale) \ar@{=}[d] \\
+\Sh((X_0)_\etale) \ar[rr]^{(f_0)_{small}} & &
+\Sh((Y_0)_\etale)
+}
+$$
+『代数空間の性質』補題
+\ref{spaces-properties-lemma-functoriality-etale-site} および
+『位相』補題 \ref{topologies-lemma-morphism-big-small-etale} を参照されたい。
+
+\medskip\noindent
+したがって、スキームのエタール・コホモロジーと、それに対応する
+代数空間のエタール・コホモロジーとの間にはまったく差がない。
+スキームの射に沿う高次順像についても同様である。
+実際、$f : X \to Y$ が $S$ 上の代数空間の射であり、
+（スキームで）表現可能ならば、$X_\etale$ 上の層 $\mathcal{F}$ の
+高次順像 $R^if_*\mathcal{F}$ は $Y$ 上エタール局所的に計算できる
+（『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-higher-direct-images}）。
+したがって、計算や証明はしばしば $Y$ と $X$ がスキームである場合に帰着する。
+
+\medskip\noindent
+本章では、以上を以後断りなく用いる。他の位相についても同じことが成り立つので、
+ここではコホモロジーに関する形で明示的に補題として述べておく。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-cohomology-other-topologies}
+$S$ をスキームとする。
+% P10-E0148
+$\tau \in \{\etale, fppf, ph\}$ とする（ここにさらに加える）。包含関手
+$$
+(\Sch/S)_\tau \longrightarrow (\textit{Spaces}/S)_\tau
+$$
+は特殊余連続関手であり
+（『サイト』定義 \ref{sites-definition-special-cocontinuous-functor}）、
+したがって両トポスを同一視する。
+\end{lemma}
+
+\begin{proof}
+この関手は完全忠実であり、また任意の代数空間はスキームによる
+エタール被覆をもつので、『サイト』補題
+\ref{sites-lemma-equivalence} の条件は直ちに確認できる。
+\end{proof}
+
+
+
+
+
+
+
+\section{固有基底変換}
+\label{spaces-more-cohomology-section-proper-base-change}
+
+\noindent
+代数空間に対する固有基底変換定理は、少し作業すれば、
+スキームに対する固有基底変換定理と Chow の補題から従う。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-surjective-proper}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の
+全射な固有射とする。$\mathcal{F}$ を $X_\etale$ 上の層とする。
+このとき $\mathcal{F} \to f_*f^{-1}\mathcal{F}$ は単射であり、その像は
+二つの写像 $f_*f^{-1}\mathcal{F} \to g_*g^{-1}\mathcal{F}$ の等化子である。
+ここで $g$ は構造射 $g : Y \times_X Y \to X$ である。
+\end{lemma}
+
+\begin{proof}
+$S$ 上の代数空間の任意の全射 $f : Y \to X$ に対し、写像
+$\mathcal{F} \to f_*f^{-1}\mathcal{F}$ は単射である。
+実際、$X$ の幾何点 $\overline{x}$ を取るとき、$\overline{x}$ の上にある
+$Y$ の幾何点 $\overline{y}$ を選び、
+$$
+\mathcal{F}_{\overline{x}} \to
+(f_*f^{-1}\mathcal{F})_{\overline{x}} \to
+(f^{-1}\mathcal{F})_{\overline{y}} = \mathcal{F}_{\overline{x}}
+$$
+を考えればよい。最後の等号については『代数空間の性質』補題
+\ref{spaces-properties-lemma-stalk-pullback} を参照されたい。
+
+\medskip\noindent
+第二の主張は $X$ 上エタール局所的なので、
+% P10-E0605
+$Y$ がアフィンスキームであると仮定してよいし、実際そう仮定する。
+
+\medskip\noindent
+$Z$ がスキームであるような全射固有射 $Z \to Y$ を選ぶ。
+『空間のコホモロジー』補題
+\ref{spaces-cohomology-lemma-weak-chow} を参照されたい。
+$Z \to X$ に対する結果から $Y \to X$ に対する結果が従う。
+$Z \to X$ はスキームの全射固有射であり、したがって ph 被覆である
+（『位相』補題 \ref{topologies-lemma-surjective-proper-ph}）から、
+$Z \to X$ に対する結果は『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-describe-pullback-pi-ph} から従う
+（実際、ある意味でこの補題と同値である）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-h0-proper-over-henselian-pair}
+$(A, I)$ を Hensel 対とする。$X$ を $A$ 上の代数空間とし、
+構造射 $f : X \to \Spec(A)$ が固有であるとする。
+$i : X_0 \to X$ を $X \times_{\Spec(A)} \Spec(A/I)$ の包含とする。
+$X_\etale$ 上の任意の層 $\mathcal{F}$ に対し
+$\Gamma(X, \mathcal{F}) = \Gamma(X_0, i^{-1}\mathcal{F})$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$Y$ がスキームであるような全射固有射 $Y \to X$ を選ぶ。
+『空間のコホモロジー』補題
+\ref{spaces-cohomology-lemma-weak-chow} を参照されたい。図式
+$$
+\xymatrix{
+\Gamma(X_0, \mathcal{F}_0) \ar[r] &
+\Gamma(Y_0, \mathcal{G}_0) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\Gamma((Y \times_X Y)_0, \mathcal{H}_0) \\
+\Gamma(X, \mathcal{F}) \ar[r] \ar[u] &
+\Gamma(Y, \mathcal{G}) \ar@<1ex>[r] \ar@<-1ex>[r] \ar[u] &
+\Gamma(Y \times_X Y, \mathcal{H}) \ar[u]
+}
+$$
+を考える。
+% P10-E0149
+ここで $\mathcal{G}$ および $\mathcal{H}$ は、それぞれ $\mathcal{F}$ の
+$Y$ および $Y \times_X Y$ への逆像であり、添字 $0$ は
+$\Spec(A/I)$ への基底変換を表す。スキームの場合
+（『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-h0-proper-over-henselian-pair}）により、
+中央と右の垂直射は全単射である。補題 \ref{spaces-more-cohomology-lemma-surjective-proper} により、
+左の垂直射も全単射であることが従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-h0-proper-over-henselian-local}
+$A$ を Hensel 局所環とする。$X$ を $A$ 上の代数空間とし、
+$f : X \to \Spec(A)$ が固有射であるとする。
+$X_0 \subset X$ を閉点上の $f$ のファイバーとする。
+$X_\etale$ 上の任意の層 $\mathcal{F}$ に対し
+$\Gamma(X, \mathcal{F}) = \Gamma(X_0, \mathcal{F}|_{X_0})$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-more-cohomology-lemma-h0-proper-over-henselian-pair} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-proper-base-change-f-star}
+$S$ をスキームとする。
+% P10-E0150
+$f : X \to Y$ および $g : Y' \to Y$ を $S$ 上の代数空間の射とし、
+$f$ は固有であると仮定する。
+$X' = Y' \times_Y X$ とおき、射影を $f' : X' \to Y'$ および
+$g' : X' \to X$ とする。$\mathcal{F}$ を $X_\etale$ 上の任意の層とする。
+このとき
+$g^{-1}f_*\mathcal{F} = f'_*(g')^{-1}\mathcal{F}$ である。
+\end{lemma}
+
+\begin{proof}
+問題は $Y'$ 上エタール局所的である。
+スキーム $V$ と全射エタール射 $V \to Y$ を選ぶ。
+さらにスキーム $V'$ と全射エタール射 $V' \to V \times_Y Y'$ を選ぶ。
+すると $Y'$ を $V'$ で、$Y$ を $V$ で置き換えてよい。
+したがって $Y$ と $Y'$ はスキームであると仮定できる。
+さらに $Y$ と $Y'$ 上 Zariski 局所的に議論してよいので、
+$Y$ と $Y'$ はアフィンスキームであると仮定できる。
+
+\medskip\noindent
+$Y$ と $Y'$ がアフィンスキームであると仮定する。
+$X_1$ がスキームであるような全射固有射 $h_1 : X_1 \to X$ を選ぶ。
+『空間のコホモロジー』補題
+\ref{spaces-cohomology-lemma-weak-chow} を参照されたい。
+$X_2 = X_1 \times_X X_1$ とおき、構造射を $h_2 : X_2 \to X$ と記す。
+これはスキームであることに注意する。スキームの場合
+（『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-proper-base-change-f-star}）により、
+補題は Cartesian 図式
+$$
+\vcenter{
+\xymatrix{
+X'_1 \ar[r] \ar[d] & X_1 \ar[d] \\
+Y' \ar[r] & Y
+}
+}
+\quad\text{および}\quad
+\vcenter{
+\xymatrix{
+X'_2 \ar[r] \ar[d] & X_2 \ar[d] \\
+Y' \ar[r] & Y
+}
+}
+$$
+と層 $\mathcal{F}_i = (X_i \to X)^{-1}\mathcal{F}$ について成り立つ。
+補題 \ref{spaces-more-cohomology-lemma-surjective-proper} により完全列
+$0 \to \mathcal{F} \to h_{1, *}\mathcal{F}_1 \to h_{2, *}\mathcal{F}_2$
+を得る。また $X'_2 = X'_1 \times_{X'} X'_1$ なので、
+$(g')^{-1}\mathcal{F}$ についても同様である。したがって
+% P10-E0151
+補題が成り立つことが分かる（若干の詳細は省略する）。
+\end{proof}
+
+\noindent
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+% P10-E0152
+$\overline{x} : \Spec(k) \to S$ を幾何点とする。
+$\overline{x}$ における $f$ のファイバーとは、$\Spec(k)$ 上の代数空間
+$Y_{\overline{x}} = \Spec(k) \times_{\overline{x}, X} Y$ のことである。
+$\mathcal{F}$ が $Y_\etale$ 上の層ならば、
+$\mathcal{F}_{\overline{x}} = p^{-1}\mathcal{F}$ を、
+$\mathcal{F}$ の $(Y_{\overline{x}})_\etale$ への逆像と記す。
+ここで $p : Y_{\overline{x}} \to Y$ は射影である。
+以下では集合 $\Gamma(Y_{\overline{x}}, \mathcal{F}_{\overline{x}})$ を考える。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-proper-pushforward-stalk}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の固有射とし、
+$\overline{x} \to X$ を幾何点とする。
+$Y_\etale$ 上の任意の層 $\mathcal{F}$ に対し、標準写像
+$$
+(f_*\mathcal{F})_{\overline{x}} \longrightarrow
+\Gamma(Y_{\overline{x}}, \mathcal{F}_{\overline{x}})
+$$
+は全単射である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-more-cohomology-lemma-proper-base-change-f-star} の特別な場合である。
+\end{proof}
+
+\begin{theorem}
+\label{spaces-more-cohomology-theorem-proper-base-change}
+$S$ をスキームとし、
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を $S$ 上の代数空間の Cartesian 正方形とする。$f$ は固有であると仮定する。
+$\mathcal{F}$ を $X_\etale$ 上のアーベル捩れ層とする。このとき基底変換写像
+$$
+g^{-1}Rf_*\mathcal{F} \longrightarrow Rf'_*(g')^{-1}\mathcal{F}
+$$
+は同型である。
+\end{theorem}
+
+\begin{proof}
+この証明では、スキームに対する固有基底変換定理の証明で用いた議論の一部を
+繰り返す。詳しくは『エタール・コホモロジー』節
+\ref{etale-cohomology-section-proper-base-change} を参照されたい。
+
+\medskip\noindent
+主張は $Y'$ および $Y$ 上エタール局所的なので、$Y$ と $Y'$ はともに
+アフィンスキームであると仮定してよい。特に、これで $f$ が表現可能な場合の
+定理も証明されたことに注意する（以下でこれを用いる）。
+
+\medskip\noindent
+各 $n \geq 1$ に対し、$\mathcal{F}[n]$ を $n$ で零化される
+$\mathcal{F}$ の切断の部分層とする。このとき
+$\mathcal{F} = \colim \mathcal{F}[n]$ である。
+『空間のコホモロジー』補題
+\ref{spaces-cohomology-lemma-colimit-cohomology} により、関手
+$g^{-1}R^pf_*$ および $R^pf'_*(g')^{-1}$ はフィルター付き余極限と可換である。
+したがって、$\mathcal{F}$ が $n$ で零化される場合を証明すれば十分である。
+
+\medskip\noindent
+$\mathcal{F} \to \mathcal{I}^\bullet$ を
+$\mathbf{Z}/n\mathbf{Z}$-加群の入射層による分解とする。
+補題 \ref{spaces-more-cohomology-lemma-proper-base-change-f-star} により
+$g^{-1}f_*\mathcal{I}^\bullet = f'_*(g')^{-1}\mathcal{I}^\bullet$
+であることに注意する。Leray の非輪状性補題
+（『導来圏』補題 \ref{derived-lemma-leray-acyclicity}）を適用すると、
+$p > 0$ および $m \in \mathbf{Z}$ に対し
+$R^pf'_*(g')^{-1}\mathcal{I}^m = 0$ を証明すれば十分である。
+
+\medskip\noindent
+$Z$ がスキームであるような全射固有射 $h : Z \to X$ を選ぶ。
+『空間のコホモロジー』補題
+\ref{spaces-cohomology-lemma-weak-chow} を参照されたい。
+$h^{-1}\mathcal{I}^m \to \mathcal{J}$ を単射とし、$\mathcal{J}$ を
+$Z_\etale$ 上の $\mathbf{Z}/n\mathbf{Z}$-加群の入射層とする。
+$h$ は全射なので、写像 $\mathcal{I}^m \to h_*\mathcal{J}$ は単射である
+（補題 \ref{spaces-more-cohomology-lemma-surjective-proper} を参照）。
+$\mathcal{I}^m$ は入射的なので、$\mathcal{I}^m$ は
+$h_*\mathcal{J}$ の直和因子である。したがって、望む消滅を
+$h_*\mathcal{J}$ について証明すれば十分である。
+
+\medskip\noindent
+% P10-E0153
+$h'$ を $g$ による基底変換とし、射影を $g'' : Z' \to Z$ と記す。
+スペクトル系列
+$$
+E_2^{p, q} = R^pf'_* R^qh'_* (g'')^{-1}\mathcal{J}
+$$
+があり、$R^{p + q}(f' \circ h')_*(g'')^{-1}\mathcal{J}$ に収束する。
+$h$ および $f \circ h$ は（スキームで）表現可能なので、
+求める結果がこれらについて成り立つことは既に分かっている。
+したがって、このスペクトル系列において $q > 0$ なら
+$E_2^{p, q} = 0$ であり、$p + q > 0$ なら
+$R^{p + q}(f' \circ h')_*(g'')^{-1}\mathcal{J} = 0$ である。
+ゆえに $p > 0$ なら $E_2^{p, 0} = 0$ である。さて、補題
+\ref{spaces-more-cohomology-lemma-proper-base-change-f-star} により
+$$
+E_2^{p, 0} = R^pf'_* h'_* (g'')^{-1}\mathcal{J} =
+R^pf'_* (g')^{-1}h_*\mathcal{J}
+$$
+である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-proper-base-change}
+$S$ をスキームとし、
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を $S$ 上の代数空間の Cartesian 正方形とする。$f$ は固有であると仮定する。
+$E \in D^+(X_\etale)$ のコホモロジー層が捩れ層であるとする。
+このとき基底変換写像 $g^{-1}Rf_*E \to Rf'_*(g')^{-1}E$ は同型である。
+\end{lemma}
+
+\begin{proof}
+これは、スペクトル系列
+$$
+E_2^{p, q} = R^pf_*H^q(E)
+\quad\text{および}\quad
+{E'}_2^{p, q} = R^pf'_*(g')^{-1}H^q(E)
+$$
+を用いた固有基底変換定理（定理 \ref{spaces-more-cohomology-theorem-proper-base-change}）の
+簡単な帰結である。これらはそれぞれ $R^nf_*E$ および
+$R^nf'_*(g')^{-1}E$ に収束する。スペクトル系列は『導来圏』補題
+\ref{derived-lemma-two-ss-complex-functor} で構成されている。
+若干の詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-proper-base-change-stalk}
+$S$ をスキームとする。$f : X \to Y$ を代数空間の固有射とし、
+$\overline{y} \to Y$ を幾何点とする。
+\begin{enumerate}
+\item $X_\etale$ 上のアーベル捩れ層 $\mathcal{F}$ に対し
+$(R^nf_*\mathcal{F})_{\overline{y}} =
+H^n_\etale(X_{\overline{y}}, \mathcal{F}_{\overline{y}})$ である。
+\item コホモロジー層が捩れ層である $E \in D^+(X_\etale)$ に対し\\
+$(R^nf_*E)_{\overline{y}} = H^n_\etale(X_{\overline{y}}, E_{\overline{y}})$
+である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+主張において、$\mathcal{F}_{\overline{y}}$ は $\mathcal{F}$ の
+$X_{\overline{y}} = \overline{y} \times_Y X$ への逆像を表す。
+$\overline{y} \to Y$ による逆像は $\mathcal{F}$ の茎を与えるので、
+第一の主張は定理 \ref{spaces-more-cohomology-theorem-proper-base-change} の特別な場合である。
+第二の主張は補題 \ref{spaces-more-cohomology-lemma-proper-base-change} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-base-change-separably-closed}
+$k'/k$ を分離閉体の拡大とする。$X$ を $k$ 上の固有代数空間とし、
+$\mathcal{F}$ を $X$ 上のアーベル捩れ層とする。このとき $q \geq 0$ に対し、
+$H^q_\etale(X, \mathcal{F}) \to
+H^q_\etale(X_{k'}, \mathcal{F}|_{X_{k'}})$ は同型である。
+\end{lemma}
+
+\begin{proof}
+これは定理 \ref{spaces-more-cohomology-theorem-proper-base-change} の特別な場合である。
+\end{proof}
+
+
+
+
+
+
+
+\section{大トポスと小トポスの比較}
+\label{spaces-more-cohomology-section-compare}
+
+\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+『空間上のトポロジー』補題
+\ref{spaces-topologies-lemma-at-the-bottom-etale} では、比較射
+$\pi_X : (\textit{Spaces}/X)_\etale \to X_{spaces, \etale}$ および
+$i_X : \Sh(X_\etale) \to \Sh((\textit{Spaces}/X)_\etale)$
+を導入した。これらはトポスの射として
+$\pi_X \circ i_X = \text{id}$ を満たし、$\pi_{X, *} = i_X^{-1}$ である。
+より一般に、$f : Y \to X$ が $(\textit{Spaces}/X)_\etale$ の対象ならば、
+$f_{small} = \pi_X \circ i_f$ を満たす射
+$i_f : \Sh(Y_\etale) \to \Sh((\textit{Spaces}/X)_\etale)$
+が存在する。『空間上のトポロジー』補題
+\ref{spaces-topologies-lemma-put-in-T-etale} および
+\ref{spaces-topologies-lemma-morphism-big-small-etale} を参照されたい。
+『空間上のトポロジー』注意
+\ref{spaces-topologies-remark-change-topologies-ringed} では、これらを環付きサイトの射
+$$
+\pi_X :
+((\textit{Spaces}/X)_\etale, \mathcal{O})
+\to
+(X_{spaces, \etale}, \mathcal{O}_X)
+$$
+ならびに環付きトポスの射
+$$
+i_X :
+(\Sh(X_\etale), \mathcal{O}_X)
+\to
+(\Sh((\textit{Spaces}/X)_\etale), \mathcal{O})
+$$
+および
+$$
+i_f :
+(\Sh(Y_\etale), \mathcal{O}_Y)
+\to
+(\Sh((\textit{Spaces}/X)_\etale, \mathcal{O}))
+$$
+へ拡張した。制限 $i_X^{-1} = \pi_{X, *}$（『トポロジー』定義
+\ref{topologies-definition-restriction-small-etale} を参照）は
+$\mathcal{O}$ を $\mathcal{O}_X$ に移すことに注意する。
+同様に、$i_f^{-1}$ は $\mathcal{O}$ を $\mathcal{O}_Y$ に移す。
+『空間上のトポロジー』注意
+\ref{spaces-topologies-remark-change-topologies-ringed} を参照されたい。
+したがって、$(\textit{Spaces}/X)_\etale$ 上の任意の
+$\mathcal{O}$-加群 $\mathcal{F}$ に対し
+$i_X^*\mathcal{F} = i_X^{-1}\mathcal{F}$ および
+$i_f^*\mathcal{F} = i_f^{-1}\mathcal{F}$ である。特に $i_X^*$ と $i_f^*$ は
+完全関手である。関手 $i_X^*$ はしばしば
+$\mathcal{F} \mapsto \mathcal{F}|_{X_\etale}$ と書かれる
+（これは『空間上のトポロジー』定義
+\ref{spaces-topologies-definition-restriction-small-etale} の記法と矛盾しない）。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-describe-pullback}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を $X_\etale$ 上の層とする。このとき
+$\pi_X^{-1}\mathcal{F}$ は、$(\textit{Spaces}/X)_\etale$ の
+$f : Y \to X$ に対する規則
+$$
+(\pi_X^{-1}\mathcal{F})(Y) = \Gamma(Y_\etale, f_{small}^{-1}\mathcal{F})
+$$
+で与えられる。さらに、
+% P10-E0154
+$\pi_Y^{-1}\mathcal{F}$ は平滑被覆、シントミック被覆、fppf 被覆、
+fpqc 被覆、および ph 被覆に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+逆像の推移性と $f_{small} = \pi_X \circ i_f$（上記参照）から
+$i_f^{-1} \pi_X^{-1}\mathcal{F} = f_{small}^{-1}\mathcal{F}$ を得る。
+これにより、$\pi_X^{-1}$ が補題に記した記述をもつことが分かる。
+
+\medskip\noindent
+$\pi_X^{-1}\mathcal{F}$ が ph トポロジーに対する層であることを示すには、
+『空間上のトポロジー』補題
+\ref{spaces-topologies-lemma-characterize-sheaf} により、
+$X$ 上の代数空間の全射固有射 $V \to U$ に対し
+$(\pi_X^{-1}\mathcal{F})(U)$ が二つの写像
+$(\pi_X^{-1}\mathcal{F})(V) \to (\pi_X^{-1}\mathcal{F})(V \times_U V)$
+の等化子であることを示せば十分である。これは補題
+\ref{spaces-more-cohomology-lemma-surjective-proper} で示した。
+
+\medskip\noindent
+平滑被覆、シントミック被覆、および fppf 被覆の場合は、
+『空間上のトポロジー』補題
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf-ph}
+により ph 被覆の場合から従う。
+
+\medskip\noindent
+$\mathcal{U} = \{U_i \to U\}_{i \in I}$ を $X$ 上の代数空間の
+fpqc 被覆とする。$s_i \in (\pi_X^{-1}\mathcal{F})(U_i)$ を、
+$U_i \times_U U_j$ 上で一致する切断とする。$U_i$ 上で $s_i$ に
+制限される一意な $s \in (\pi_X^{-1}\mathcal{F})(U)$ が存在することを
+証明しなければならない。場合 I：$U$ と $U_i$ がスキームである場合。
+これは『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-describe-pullback} から従う。
+場合 II：$U$ がスキームである場合。ここで、$T_i$ がスキームであるような
+全射エタール射 $T_i \to U_i$ を選ぶ。このとき
+$\mathcal{T} = \{T_i \to U\}$ はスキームによる fpqc 被覆であり、
+場合 I により結果は $\mathcal{T}$ に対して成り立つ。
+これが $\mathcal{U}$ に対する結果を導くことの確認は省略する。
+場合 III：一般の場合。$W$ がスキームであるような全射エタール射
+$W \to U$ をとる。このとき
+$\mathcal{W} = \{U_i \times_U W \to W\}$ は、スキーム $W$ の
+（代数空間による）fpqc 被覆である。場合 II により、
+% P10-E0155
+結果は $\mathcal{W}$ に対して成り立つ。
+これが $\mathcal{U}$ に対する結果を導くことの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-injectives}
+$S$ をスキームとし、$Y \to X$ を $(\textit{Spaces}/S)_\etale$ の射とする。
+\begin{enumerate}
+\item $\mathcal{I}$ が $\textit{Ab}((\textit{Spaces}/X)_\etale)$ において
+入射的ならば、
+\begin{enumerate}
+\item $i_f^{-1}\mathcal{I}$ は $\textit{Ab}(Y_\etale)$ において入射的であり、
+\item $\mathcal{I}|_{X_\etale}$ は $\textit{Ab}(X_\etale)$ において入射的である。
+\end{enumerate}
+\item $\mathcal{I}^\bullet$ が
+$\textit{Ab}((\textit{Spaces}/X)_\etale)$ における K-入射複体ならば、
+\begin{enumerate}
+\item $i_f^{-1}\mathcal{I}^\bullet$ は $\textit{Ab}(Y_\etale)$ における
+K-入射複体であり、
+\item $\mathcal{I}^\bullet|_{X_\etale}$ は $\textit{Ab}(X_\etale)$ における
+K-入射複体である。
+\end{enumerate}
+\end{enumerate}
+加群に対する対応する主張は成り立たない。
+\end{lemma}
+
+\begin{proof}
+(1)(b) と (2)(b) は、制限関手 $\pi_{X, *} = i_X^{-1}$ が
+完全関手 $\pi_X^{-1}$ の右随伴であることから形式的に従う。
+『ホモロジー』補題 \ref{homology-lemma-adjoint-preserve-injectives} および
+『導来圏』補題 \ref{derived-lemma-adjoint-preserve-K-injectives} を参照されたい。
+
+\medskip\noindent
+(1)(a) と (2)(a) は二通りに示せる。第一の証明：$i_f^{-1}$ が
+完全関手 $i_{f, !}$ の右随伴であることを用いる。この関手は集合の層について
+『トポロジー』補題 \ref{topologies-lemma-put-in-T-etale} で、
+アーベル層について『サイト上の加群』補題
+\ref{sites-modules-lemma-g-shriek-adjoint} で構成される。
+『サイト上の加群』補題
+\ref{sites-modules-lemma-exactness-lower-shriek} において、これが完全であることが示される。
+第二の証明：『トポロジー』補題
+\ref{topologies-lemma-morphism-big-small-etale} で示される
+$i_f = i_Y \circ f_{big}$ を用いる。$f_{big}$ は局所化なので、
+これによる逆像は入射対象と K-入射対象を保つ。
+『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-cohomology-of-open} および
+\ref{sites-cohomology-lemma-restrict-K-injective-to-open} を参照されたい。
+次に、既に証明した (1)(b) と (2)(b) を関手 $i_Y^{-1}$ に適用して結論を得る。
+
+\medskip\noindent
+加群の場合の反例については、『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-compare-injectives} を参照されたい。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$f : Y \to X$ を $S$ 上の代数空間の射とする。
+『空間上のトポロジー』補題
+\ref{spaces-topologies-lemma-morphism-big-small-etale} (3) の可換図式から、
+環付きサイトの可換図式
+$$
+\xymatrix{
+(Y_{spaces, \etale}, \mathcal{O}_Y) \ar[d]_{f_{spaces, \etale}} &
+((\textit{Spaces}/Y)_\etale, \mathcal{O}) \ar[d]^{f_{big}} \ar[l]^{\pi_Y} \\
+(X_{spaces, \etale}, \mathcal{O}_X) &
+((\textit{Spaces}/X)_\etale, \mathcal{O}) \ar[l]_{\pi_X}
+}
+$$
+を得る。これは $f_{small}^\sharp$、$f_{big}^\sharp$、
+$\pi_X^\sharp$、および $\pi_Y^\sharp$ の定義を書き下せば容易に分かる。
+特に、$(\textit{Spaces}/Y)_\etale$ 上の任意の層 $\mathcal{F}$ に対し
+\begin{equation}
+\label{spaces-more-cohomology-equation-compare-big-small}
+(f_{big, *}\mathcal{F})|_{X_\etale} =
+f_{small, *}(\mathcal{F}|_{Y_\etale})
+\end{equation}
+であり、$\mathcal{F}$ が $\mathcal{O}$-加群の層ならば、
+(\ref{spaces-more-cohomology-equation-compare-big-small}) は $X_\etale$ 上の
+$\mathcal{O}_X$-加群の同型である。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-higher-direct-image}
+$S$ をスキーム、$f : Y \to X$ を $S$ 上の代数空間の射とする。
+\begin{enumerate}
+\item $D((\textit{Spaces}/Y)_\etale)$ の $K$ に対し、\\
+$
+(Rf_{big, *}K)|_{X_\etale} = Rf_{small, *}(K|_{Y_\etale})
+$
+が $D(X_\etale)$ において成り立つ。
+\item $D((\textit{Spaces}/Y)_\etale, \mathcal{O})$ の $K$ に対し、\\
+$
+(Rf_{big, *}K)|_{X_\etale} = Rf_{small, *}(K|_{Y_\etale})
+$
+が $D(\textit{Mod}(X_\etale, \mathcal{O}_X))$ において成り立つ。
+\end{enumerate}
+より一般に、$g : X' \to X$ を $(\textit{Spaces}/X)_\etale$ の対象とし、
+ファイバー積
+$$
+\xymatrix{
+Y' \ar[r]_{g'} \ar[d]_{f'} & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+を考える。このとき
+\begin{enumerate}
+\item[(3)] $D((\textit{Spaces}/Y)_\etale)$ の $K$ に対し、
+$i_g^{-1}(Rf_{big, *}K) = Rf'_{small, *}(i_{g'}^{-1}K)$
+が $D(X'_\etale)$ において成り立つ。
+\item[(4)] $D((\textit{Spaces}/Y)_\etale, \mathcal{O})$ の $K$ に対し、
+$i_g^*(Rf_{big, *}K) = Rf'_{small, *}(i_{g'}^*K)$
+が $D(\textit{Mod}(X'_\etale, \mathcal{O}_{X'}))$ において成り立つ。
+\item[(5)] $D((\textit{Spaces}/Y)_\etale)$ の $K$ に対し、\\
+$g_{big}^{-1}(Rf_{big, *}K) = Rf'_{big, *}((g'_{big})^{-1}K)$
+が $D((\textit{Spaces}/X')_\etale)$ において成り立つ。
+\item[(6)] $D((\textit{Spaces}/Y)_\etale, \mathcal{O})$ の $K$ に対し、\\
+$g_{big}^*(Rf_{big, *}K) = Rf'_{big, *}((g'_{big})^*K)$
+が $D(\textit{Mod}(X'_\etale, \mathcal{O}_{X'}))$ において成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は、$K$ を表すアーベル層の K-入射複体を選び、
+補題 \ref{spaces-more-cohomology-lemma-compare-injectives} と
+(\ref{spaces-more-cohomology-equation-compare-big-small}) を用いることから従う。
+
+\medskip\noindent
+(3) は、$K$ を表すアーベル層の K-入射複体を選び、
+補題 \ref{spaces-more-cohomology-lemma-compare-injectives} と『トポロジー』補題
+\ref{topologies-lemma-morphism-big-small-cartesian-diagram-etale}
+を用いることから従う。
+
+\medskip\noindent
+(5) は『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-localize-cartesian-square} である。
+
+\medskip\noindent
+(6) は『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-localize-cartesian-square-modules} である。
+
+\medskip\noindent
+(2) は次のように証明できる。上で、環付きサイトの射として
+$\pi_X \circ f_{big} = f_{small} \circ \pi_Y$ であることを見た。
+したがって、『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-derived-pushforward-composition} により
+$R\pi_{X, *} \circ Rf_{big, *} = Rf_{small, *} \circ R\pi_{Y, *}$
+を得る。制限関手 $\pi_{X, *}$ と $\pi_{Y, *}$ は完全なので結論を得る。
+
+\medskip\noindent
+(4) は、(6) と $f' : Y' \to X'$ に適用した (2) から従う。
+\end{proof}
+
+\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{H}$ を $(\textit{Spaces}/X)_\etale$ 上のアーベル層とする。
+$H^n_\etale(U, \mathcal{H})$ は $(\textit{Spaces}/X)_\etale$ の
+対象 $U$ 上の $\mathcal{H}$ のコホモロジーを表すことを想起する。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-cohomology}
+$S$ をスキーム、$f : Y \to X$ を $S$ 上の代数空間の射とする。このとき
+\begin{enumerate}
+\item $D(X_\etale)$ の $K$ に対し
+$H^n_\etale(X, \pi_X^{-1}K) = H^n(X_\etale, K)$ である。
+\item $D(X_\etale, \mathcal{O}_X)$ の $K$ に対し
+$H^n_\etale(X, L\pi_X^*K) = H^n(X_\etale, K)$ である。
+\item $D(X_\etale)$ の $K$ に対し
+$H^n_\etale(Y, \pi_X^{-1}K) = H^n(Y_\etale, f_{small}^{-1}K)$ である。
+\item $D(X_\etale, \mathcal{O}_X)$ の $K$ に対し\\
+$H^n_\etale(Y, L\pi_X^*K) = H^n(Y_\etale, Lf_{small}^*K)$ である。
+\item $D((\textit{Spaces}/X)_\etale)$ の $M$ に対し
+$H^n_\etale(Y, M) = H^n(Y_\etale, i_f^{-1}M)$ である。
+\item $D((\textit{Spaces}/X)_\etale, \mathcal{O})$ の $M$ に対し
+$H^n_\etale(Y, M) = H^n(Y_\etale, i_f^*M)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(5) を証明するため、$M$ をアーベル層の K-入射複体で表し、
+補題 \ref{spaces-more-cohomology-lemma-compare-injectives} を適用して定義を書き下す。
+(3) は $i_f^{-1}\pi_X^{-1} = f_{small}^{-1}$ であることから従う。
+(1) は (3) の特別な場合である。
+
+\medskip\noindent
+(6) は非常に一般的な『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-pullback-same-cohomology} から従う。
+次いで (4) は $Lf_{small}^* = i_f^* \circ L\pi_X^*$ から従う。
+(2) は (4) の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-cohomological-descent-etale}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$K \in D(X_\etale)$ に対し、写像
+$$
+K \longrightarrow R\pi_{X, *}\pi_X^{-1}K
+$$
+は同型である。ここで
+$\pi_X : \Sh((\textit{Spaces}/X)_\etale) \to \Sh(X_\etale)$ は上記の射である。
+\end{lemma}
+
+\begin{proof}
+$\pi_X^{-1}$ と $\pi_{X, *} = i_X^{-1}$ はともに完全関手であり、
+合成 $\pi_{X, *} \circ \pi_X^{-1}$ が恒等関手なので、主張は成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-higher-direct-image-proper}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の固有射とする。
+このとき
+\begin{enumerate}
+\item 関手 $\Sh(Y_\etale) \to \Sh((\textit{Spaces}/X)_\etale)$ として
+$\pi_X^{-1} \circ f_{small, *} = f_{big, *} \circ \pi_Y^{-1}$ であり、
+\item コホモロジー層が捩れ層である $D^+(Y_\etale)$ の $K$ に対し\\
+$\pi_X^{-1}Rf_{small, *}K = Rf_{big, *}\pi_Y^{-1}K$ であり、
+\item $f$ が有限ならば、$D(Y_\etale)$ のすべての $K$ に対し
+$\pi_X^{-1}Rf_{small, *}K = Rf_{big, *}\pi_Y^{-1}K$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$\mathcal{F}$ を $Y_\etale$ 上の層とし、
+$g : X' \to X$ を $(\textit{Spaces}/X)_\etale$ の対象とする。
+ファイバー積
+$$
+\xymatrix{
+Y' \ar[r]_{f'} \ar[d]_{g'} & X' \ar[d]^g \\
+Y \ar[r]^f & X
+}
+$$
+を考える。このとき
+$$
+\begin{aligned}
+(f_{big, *}\pi_Y^{-1}\mathcal{F})(X')
+&= (\pi_Y^{-1}\mathcal{F})(Y') \\
+&= ((g'_{small})^{-1}\mathcal{F})(Y') \\
+&= (f'_{small, *}(g'_{small})^{-1}\mathcal{F})(X')
+\end{aligned}
+$$
+であり、第二の等号は補題 \ref{spaces-more-cohomology-lemma-describe-pullback} による。
+一方、再び補題 \ref{spaces-more-cohomology-lemma-describe-pullback} により
+$$
+(\pi_X^{-1}f_{small, *}\mathcal{F})(X') =
+(g_{small}^{-1}f_{small, *}\mathcal{F})(X')
+$$
+である。したがって、集合の層に対する固有基底変換
+（補題 \ref{spaces-more-cohomology-lemma-proper-base-change-f-star}）により、
+これら二つの集合は標準的に同型である。この同型は制限写像と両立し、同型
+$\pi_X^{-1}f_{small, *}\mathcal{F} = f_{big, *}\pi_Y^{-1}\mathcal{F}$
+を定める。よって関手の同型
+$\pi_X^{-1} \circ f_{small, *} = f_{big, *} \circ \pi_Y^{-1}$ を得る。
+
+\medskip\noindent
+(2) の証明。$D(Y_\etale)$ の任意の $K$ に対し、標準基底変換写像\\
+$\pi_X^{-1}Rf_{small, *}K \to Rf_{big, *}\pi_Y^{-1}K$ が存在する。
+『サイト上のコホモロジー』注意
+\ref{sites-cohomology-remark-base-change} を参照されたい。
+これが同型であることを示すには、$(\Sch/X)_\etale$ の任意の対象
+$g : X' \to X$ に対し、\\
+$i_g : \Sh(X'_\etale) \to \Sh((\Sch/X)_\etale)$
+による基底変換写像の逆像が同型であることを示せば十分である。
+% P10-E0156
+% P10-E0157
+前段落と同じ $T', g', f'$ をとる。基底変換写像の逆像は
+\begin{align*}
+g_{small}^{-1}Rf_{small, *}K
+& =
+i_g^{-1}\pi_X^{-1}Rf_{small, *}K \\
+& \to
+i_g^{-1}Rf_{big, *}\pi_Y^{-1}K \\
+& =
+Rf'_{small, *}(i_{g'}^{-1}\pi_Y^{-1}K) \\
+& =
+Rf'_{small, *}((g'_{small})^{-1}K)
+\end{align*}
+である。ここで $\pi_X \circ i_g = g_{small}$、
+$\pi_Y \circ i_{g'} = g'_{small}$、および補題
+\ref{spaces-more-cohomology-lemma-compare-higher-direct-image} を用いた。
+$K$ が下に有界で、その $K$ のコホモロジー層が捩れ層ならば、この写像は
+固有基底変換定理（補題 \ref{spaces-more-cohomology-lemma-proper-base-change}）により同型である。
+
+\medskip\noindent
+(3) の証明。$f$ が有限ならば、関手 $f_{small, *}$ と $f_{big, *}$ は完全である。
+$f_{small}$ については、これは『空間のコホモロジー』補題
+\ref{spaces-cohomology-lemma-finite-higher-direct-image-zero} から従う。
+$f$ の任意の基底変換 $f'$ も有限なので、補題
+\ref{spaces-more-cohomology-lemma-compare-higher-direct-image} (3) から $f_{big, *}$ も完全である
+（高次導来関手は零である）。したがって、この場合は (1) から従う。
+\end{proof}
+
+
+
+\section{fppf トポロジーとエタール・トポロジーの比較}
+\label{spaces-more-cohomology-section-fppf-etale}
+
+\noindent
+本節は『エタール・コホモロジー』節
+\ref{etale-cohomology-section-fppf-etale} の類似である。
+
+\medskip\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+圏 $\textit{Spaces}/X$ 上で fppf トポロジーとエタール・トポロジーを考える。
+恒等関手
+$(\textit{Spaces}/X)_\etale \to (\textit{Spaces}/X)_{fppf}$
+は連続であり、『サイト』命題 \ref{sites-proposition-get-morphism} を適用すると
+サイトの射
+$$
+\epsilon_X :
+(\textit{Spaces}/X)_{fppf} \longrightarrow (\textit{Spaces}/X)_\etale
+$$
+を定める。$\epsilon_{X, *}$ は台となる前層上では恒等関手であり、
+$\epsilon_X^{-1}$ はエタール層にその fppf 層化を対応させることに注意する。
+大エタール・サイトと小エタール・サイトを比較するサイトの射
+$$
+\pi_X : (\textit{Spaces}/X)_\etale \longrightarrow X_{spaces, \etale}
+$$
+を考える。節 \ref{spaces-more-cohomology-section-compare} を参照されたい。その合成はサイトの射
+$$
+a_X = \pi_X \circ \epsilon_X :
+(\textit{Spaces}/X)_{fppf}
+\longrightarrow
+X_{spaces, \etale}
+$$
+を定める。$\mathcal{H}$ が $(\textit{Spaces}/X)_{fppf}$ 上のアーベル層ならば、
+$(\textit{Spaces}/X)_{fppf}$ の対象 $U$ 上の $\mathcal{H}$ のコホモロジーを
+$H^n_{fppf}(U, \mathcal{H})$ と書く。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-comparison-fppf-etale}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $\mathcal{F} \in \Sh(X_\etale)$ に対し
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$
+かつ $a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$ である。
+\item $\mathcal{F} \in \textit{Ab}(X_\etale)$ に対し、$i > 0$ ならば
+$R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$a_X^{-1}\mathcal{F} = \epsilon_X^{-1} \pi_X^{-1}\mathcal{F}$ である。
+補題 \ref{spaces-more-cohomology-lemma-describe-pullback} により、エタール層
+$\pi_X^{-1}\mathcal{F}$ は fppf トポロジーに対する層である。
+したがって、これは $a_X^{-1}\mathcal{F}$ に等しい
+（$\epsilon_X$ による逆像は fppf 層化で与えられる）。さらに、
+$\epsilon_{X, *}$ は台となる前層上では恒等であることを想起する。
+これで (1) は補題 \ref{spaces-more-cohomology-lemma-describe-pullback} における
+$\pi_X^{-1}$ の明示的記述から直ちに従う。
+
+\medskip\noindent
+(2) はスキームの場合、すなわち『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-V-C-all-n-etale-fppf} (1) に帰着して証明する。
+すべての代数空間はエタール局所的にスキームなので、これは「明らかにうまくいく」。
+以下に詳細を記すが、読者には証明を飛ばすことを勧める。
+
+\medskip\noindent
+$(\textit{Spaces}/X)_{fppf}$ 上のアーベル層 $\mathcal{H}$ に対し、\\
+高次順像 $R^p\epsilon_{X, *}\mathcal{H}$ は、
+$(\textit{Spaces}/X)_\etale$ 上の前層\\
+$U \mapsto H^p_{fppf}(U, \mathcal{H})$ に付随する層である。
+『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-higher-direct-images} を参照されたい。
+$(\textit{Spaces}/X)_\etale$ のすべての対象はスキームによる被覆をもつので、
+$U/X$ がスキームであり
+$\xi \in H^p_{fppf}(U, a_X^{-1}\mathcal{F})$ が与えられたとき、
+$\xi$ の $U_i$ への制限が零になるようなエタール被覆
+$\{U_i \to U\}$ を見つけられることを示せば十分である。ここで
+\begin{align*}
+H^p_{fppf}(U, a_X^{-1}\mathcal{F})
+& =
+H^p((\textit{Spaces}/U)_{fppf}, (a_X^{-1}\mathcal{F})|_{\textit{Spaces}/U}) \\
+& =
+H^p((\Sch/U)_{fppf}, (a_X^{-1}\mathcal{F})|_{\Sch/U})
+\end{align*}
+である。第二の同一視は補題
+\ref{spaces-more-cohomology-lemma-compare-cohomology-other-topologies} によるもので、第一は制限に関する一般論
+（『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-cohomology-of-open}）である。
+最初の段落と、スキームの場合の対応する結果
+（『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-describe-pullback-pi-fppf}）を見ると、層
+$(a_X^{-1}\mathcal{F})|_{\Sch/U}$ は「$a_U$ のスキーム版」による逆像と一致する。
+したがって、各 $i$ について我々の類が\\
+$H^p((\Sch/U_i)_{fppf}, (a_X^{-1}\mathcal{F})|_{\Sch/U_i})$
+で消えるようなエタール被覆 $\{U_i \to U\}$ を見つけられる。
+『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-V-C-all-n-etale-fppf} を参照されたい
+（ここで用いるべき正確な主張は、すべての $n$ について $V_n$ が成り立つことであり、
+これはスキームの場合の (2) の主張である）。同じ公式を今度は $U_i$ に用いて
+戻すと、望むとおり $\xi$ の $U_i$ 上への制限は零である。
+\end{proof}
+
+\noindent
+スキームの場合に行われた難しい仕事から、小エタール・サイトに由来する層については
+エタール・コホモロジーと fppf コホモロジーが一致することが分かる。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-cohomological-descent-etale-fppf}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$K \in D^+(X_\etale)$ に対し、写像
+$$
+\pi_X^{-1}K \longrightarrow R\epsilon_{X, *}a_X^{-1}K
+\quad\text{および}\quad
+K \longrightarrow Ra_{X, *}a_X^{-1}K
+$$
+は同型である。ここで
+$a_X : \Sh((\textit{Spaces}/X)_{fppf}) \to \Sh(X_\etale)$ は上記の射である。
+\end{lemma}
+
+\begin{proof}
+第二の主張だけを証明する。第一の主張はより容易で、全く同じ方法で証明される。
+$K$ が単一のアーベル層で与えられる場合に直ちに帰着できる。
+実際、$K$ を下に有界な複体 $\mathcal{F}^\bullet$ で表す。
+層の場合から、$\mathcal{F}^n = a_{X, *} a_X^{-1} \mathcal{F}^n$ であり、
+$q > 0$ に対して層 $R^qa_{X, *}a_X^{-1}\mathcal{F}^n$ は零である。
+Leray の非輪状性補題
+（『導来圏』補題 \ref{derived-lemma-leray-acyclicity}）を
+$a_X^{-1}\mathcal{F}^\bullet$ と関手 $a_{X, *}$ に適用して結論を得る。
+以下では $K = \mathcal{F}$ と仮定する。
+
+\medskip\noindent
+補題 \ref{spaces-more-cohomology-lemma-comparison-fppf-etale} により
+$a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$ である。
+したがって、$q > 0$ に対して
+$R^qa_{X, *}a_X^{-1}\mathcal{F} = 0$ であることを示せば十分である。
+このために
+% P10-E0159
+$a_X = \epsilon_X \circ \pi_X$ と Leray スペクトル系列
+（『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-relative-Leray}）を用いることができる。
+補題 \ref{spaces-more-cohomology-lemma-comparison-fppf-etale} により、$i > 0$ に対して
+$R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$ である。
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$ であり、
+補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale} により、$j > 0$ に対して
+$R^j\pi_{X, *}(\pi_X^{-1}\mathcal{F}) = 0$ である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-cohomology-etale-fppf}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。上記の
+$a_X : \Sh((\textit{Spaces}/X)_{fppf}) \to \Sh(X_\etale)$ に対し、
+\begin{enumerate}
+\item $X_\etale$ 上のアーベル層 $\mathcal{F}$ について
+$H^q(X_\etale, \mathcal{F}) = H^q_{fppf}(X, a_X^{-1}\mathcal{F})$ であり、
+\item $K \in D^+(X_\etale)$ について
+$H^q(X_\etale, K) = H^q_{fppf}(X, a_X^{-1}K)$ である。
+\end{enumerate}
+例：$A$ がアーベル群ならば
+$H^q_\etale(X, \underline{A}) = H^q_{fppf}(X, \underline{A})$ である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale-fppf} と
+『サイト上のコホモロジー』注意
+\ref{sites-cohomology-remark-before-Leray} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-push-pull-fppf-etale}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の代数空間の射とする。
+このとき、トポスの可換図式
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{fppf}) \ar[rr]_{f_{big, fppf}} \ar[d]_{\epsilon_X} & &
+\Sh((\textit{Spaces}/Y)_{fppf}) \ar[d]^{\epsilon_Y} \\
+\Sh((\textit{Spaces}/X)_\etale) \ar[rr]^{f_{big, \etale}} & &
+\Sh((\textit{Spaces}/Y)_\etale)
+}
+$$
+および
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{fppf}) \ar[rr]_{f_{big, fppf}} \ar[d]_{a_X} & &
+\Sh((\textit{Spaces}/Y)_{fppf}) \ar[d]^{a_Y} \\
+\Sh(X_\etale) \ar[rr]^{f_{small}} & &
+\Sh(Y_\etale)
+}
+$$
+が存在し、
+% P10-E0160
+$a_X = \pi_X \circ \epsilon_X$ および $a_Y = \pi_X \circ \epsilon_X$ である。
+\end{lemma}
+
+\begin{proof}
+これは関係する射の定義を書き下せば直ちに従う。
+『空間上のトポロジー』節
+\ref{spaces-topologies-section-fppf} および節 \ref{spaces-more-cohomology-section-compare} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-proper-push-pull-fppf-etale}
+補題 \ref{spaces-more-cohomology-lemma-push-pull-fppf-etale} において $f$ が固有ならば、
+\begin{enumerate}
+\item $a_Y^{-1} \circ f_{small, *} = f_{big, fppf, *} \circ a_X^{-1}$ であり、
+\item コホモロジー層が捩れ層である $D^+(X_\etale)$ の $K$ に対し\\
+$a_Y^{-1}(Rf_{small, *}K) = Rf_{big, fppf, *}(a_X^{-1}K)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。補題 \ref{spaces-more-cohomology-lemma-compare-higher-direct-image-proper} (1) の証明を
+繰り返してもよいが、ここではその結果から導く。
+$\epsilon_{Y, *}$ は台となる前層上では恒等関手なので、同型を反映する。
+補題 \ref{spaces-more-cohomology-lemma-comparison-fppf-etale} により
+$\epsilon_{Y, *} \circ a_Y^{-1} = \pi_Y^{-1}$ であり、$X$ についても同様である。
+標準写像
+$a_Y^{-1}f_{small, *}\mathcal{F} \to f_{big, fppf, *}a_X^{-1}\mathcal{F}$
+が同型であることを示すには、
+\begin{align*}
+\pi_Y^{-1}f_{small, *}\mathcal{F}
+& =
+\epsilon_{Y, *}a_Y^{-1}f_{small, *}\mathcal{F} \\
+& \to 
+\epsilon_{Y, *}f_{big, fppf, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *} \epsilon_{X, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *}\pi_X^{-1}\mathcal{F}
+\end{align*}
+が同型であることを示せば十分である。これは補題
+\ref{spaces-more-cohomology-lemma-compare-higher-direct-image-proper} (1) である。
+
+\medskip\noindent
+(2) を示すため、次を用いる。
+\begin{align*}
+R\epsilon_{Y, *}Rf_{big, fppf, *}a_X^{-1}K
+& =
+Rf_{big, \etale, *}R\epsilon_{X, *}a_X^{-1}K \\
+& =
+Rf_{big, \etale, *}\pi_X^{-1}K \\
+& =
+\pi_Y^{-1}Rf_{small, *}K \\
+& =
+R\epsilon_{Y, *} a_Y^{-1}Rf_{small, *}K
+\end{align*}
+% P10-E0158
+% P10-E0161
+第一の等号は補題 \ref{spaces-more-cohomology-lemma-push-pull-fppf-etale} の可換図式と
+『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-derived-pushforward-composition} による。
+次の第二の等号は補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale-fppf} である。
+第三は補題 \ref{spaces-more-cohomology-lemma-compare-higher-direct-image-proper} (2) であり、
+第四は再び補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale-fppf} である。
+したがって基底変換写像
+$a_Y^{-1}(Rf_{small, *}K) \to Rf_{big, fppf, *}(a_X^{-1}K)$ は同型
+$$
+R\epsilon_{Y, *}a_Y^{-1}Rf_{small, *}K \to
+R\epsilon_{Y, *}Rf_{big, fppf, *}a_X^{-1}K
+$$
+を誘導する。次の注意により証明が完了する：$L$ が $D^+(Y_\etale)$ に属し、
+$M$ が $D^+((\textit{Spaces}/Y)_{fppf})$ に属する写像
+$\alpha : a_Y^{-1}L \to M$ について、$R\epsilon_{Y, *}\alpha$ が同型ならば
+この写像も同型である。実際、$H^i(\alpha)$ が同型であることを
+$i$ について帰納的に示す。十分小さいすべての $i$ についてこれは成り立つ。
+$i \leq i_0$ について成り立つとする。この範囲では
+$H^i(M) = a_Y^{-1}H^i(L)$ なので、補題
+\ref{spaces-more-cohomology-lemma-comparison-fppf-etale} により、$j > 0$ および $i \leq i_0$ に対し
+$R^j\epsilon_{Y, *}H^i(M) = 0$ である。ゆえにスペクトル系列の議論により
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = H^{i_0 + 1}(R\epsilon_{Y, *}M)$ である。
+したがって
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = \pi_Y^{-1}H^{i_0 + 1}(L) =
+\epsilon_{Y, *}a_Y^{-1}H^{i_0 + 1}(L)$ である。
+これは望むとおり $H^{i_0 + 1}(\alpha)$ が同型であることを意味する
+（$\epsilon_{Y, *}$ は台となる前層上で恒等なので同型を反映する）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-finite-push-pull-fppf-etale}
+補題 \ref{spaces-more-cohomology-lemma-push-pull-fppf-etale} において $f$ が有限ならば、
+$D^+(X_\etale)$ の $K$ に対し
+$a_Y^{-1}(Rf_{small, *}K) = Rf_{big, fppf, *}(a_X^{-1}K)$ である。
+\end{lemma}
+
+\begin{proof}
+$V$ がスキームであるような全射エタール射 $V \to Y$ をとる。
+基底変換写像が同型であることは、$V$ に制限した後で証明すれば十分である。
+よって $Y$ がスキームであると仮定してよい。射は有限、したがって表現可能なので、
+$X$ と $Y$ がともにスキームであると仮定してよい。この場合、結果は
+スキームの場合（『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-V-C-all-n-etale-fppf} (2)）から、
+節 \ref{spaces-more-cohomology-section-api}、特に補題
+\ref{spaces-more-cohomology-lemma-compare-cohomology-other-topologies} で論じたトポスの比較を用いて従う。
+いくつかの詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-descent-sheaf-fppf-etale}
+補題 \ref{spaces-more-cohomology-lemma-push-pull-fppf-etale} において、$f$ が平坦、局所有限表示、
+かつ全射であると仮定する。このとき関手
+$$
+\Sh(Y_\etale) \longrightarrow
+\left\{
+(\mathcal{G}, \mathcal{H}, \alpha)
+\middle|
+\begin{matrix}
+\mathcal{G} \in \Sh(X_\etale),\ \mathcal{H} \in \Sh((\Sch/Y)_{fppf}), \\
+\alpha : a_X^{-1}\mathcal{G} \to f_{big, fppf}^{-1}\mathcal{H}
+\text{ は同型}
+\end{matrix}
+\right\}
+$$
+は、$\mathcal{F}$ を
+$(f_{small}^{-1}\mathcal{F}, a_Y^{-1}\mathcal{F}, can)$ に送る同値である。
+\end{lemma}
+
+\begin{proof}
+関手 $a_X^{-1}$ は完全忠実である（補題
+\ref{spaces-more-cohomology-lemma-comparison-fppf-etale} により
+$a_{X, *}a_X^{-1} = \text{id}$ である）。したがって忘却関手\\
+$(\mathcal{G}, \mathcal{H}, \alpha) \mapsto \mathcal{H}$ は三つ組の圏を
+$\Sh((\Sch/Y)_{fppf})$ の充満部分圏と同一視する。
+さらに、関手 $a_Y^{-1}$ は完全忠実なので、補題の関手も完全忠実である。
+
+\medskip\noindent
+エタール被覆 $\{Y_i \to Y\}$ が与えられたとする。
+$f_i : X_i \to Y_i$ を $f$ の基底変換とし、
+$f_{ij} = f_i \times f_j : X_i \times_X X_j  \to Y_i \times_Y Y_j$ と記す。
+主張：すべての $i, j$ について補題が $f_i$ と $f_{ij}$ に対して真ならば、
+$f$ に対しても真である。これを見るため、与えられたエタール被覆が四つのサイト
+$Y_\etale, X_\etale, (\Sch/Y)_{fppf}, (\Sch/X)_{fppf}$
+のそれぞれにおける終対象のエタール被覆を定めることに注意する。
+したがって、四つの場合のそれぞれで層の圏はこの被覆に関する貼り合わせデータの圏と
+同値である（『サイト』補題 \ref{sites-lemma-mapping-property-glue}）。
+ここで圏の巨大な可換図式が主張の証明を完了する。詳細は省略する。
+この主張により $Y$ 上でエタール局所的に作業できる。特に、
+$Y$ がスキームであると仮定してよい。
+
+\medskip\noindent
+$Y$ がスキームであると仮定する。スキーム $X'$ と全射エタール射
+$s : X' \to X$ を選ぶ。$f' = f \circ s : X' \to Y$ とおくと、
+$f'$ は全射、局所有限表示、かつ平坦である。
+主張：補題が $f'$ に対して真ならば、$f$ に対しても真である。
+実際、$f$ に対する三つ組 $(\mathcal{G}, \mathcal{H}, \alpha)$ が与えられたとき、
+$s$ によって逆像をとると、$f'$ に対する三つ組
+$(s_{small}^{-1}\mathcal{G}, \mathcal{H}, s_{big, fppf}^{-1}\alpha)$ を得る。
+この三つ組に対する解は、$a_Y^{-1}\mathcal{F} = \mathcal{H}$ を満たす
+$Y_\etale$ 上の層 $\mathcal{F}$ を与える。証明の最初の段落により、これは
+三つ組が本質像に属することを意味する。これで $X$ と $Y$ がともに
+スキームである場合に帰着される。この場合は『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-descent-sheaf-fppf-etale} から、
+節 \ref{spaces-more-cohomology-section-api}、特に補題
+\ref{spaces-more-cohomology-lemma-compare-cohomology-other-topologies} の議論を介して従う。
+\end{proof}
+
+
+
+\section{fppf トポロジーとエタール・トポロジーの比較：加群}
+\label{spaces-more-cohomology-section-fppf-etale-modules}
+
+\noindent
+節 \ref{spaces-more-cohomology-section-fppf-etale} の議論を続けるが、本節では加群の層について
+何が起こるかを簡潔に論じる。
+
+\medskip\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。節
+\ref{spaces-more-cohomology-section-fppf-etale} で導入したサイトの射 $\epsilon_X$、$\pi_X$、
+およびそれらの合成 $a_X$ は、環付きサイトの射へ自然に拡張される。
+第一の射を
+$$
+\epsilon_X :
+((\textit{Spaces}/X)_{fppf}, \mathcal{O})
+\longrightarrow
+((\textit{Spaces}/X)_\etale, \mathcal{O})
+$$
+と書く。実際、これらの層は同じ台となる前層をもつので、構造層に同じ記号を
+用いてよいことに注意する。第二の射は
+$$
+\pi_X :
+((\textit{Spaces}/X)_\etale, \mathcal{O})
+\longrightarrow
+(X_\etale, \mathcal{O}_X)
+$$
+である。第三の射は
+$$
+a_X :
+((\textit{Spaces}/X)_{fppf}, \mathcal{O})
+\longrightarrow
+(X_\etale, \mathcal{O}_X)
+$$
+である。これらのサイト上の準連接加群について既知の事実を復習する。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-review-quasi-coherent}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とし、$\mathcal{F}$ を
+準連接 $\mathcal{O}_X$-加群とする。
+\begin{enumerate}
+\item 規則
+$$
+\mathcal{F}^a : (\textit{Spaces}/X)_\etale \longrightarrow \textit{Ab},\quad
+(f : Y \to X) \longmapsto \Gamma(Y, f^*\mathcal{F})
+$$
+は fpqc 被覆、したがって fppf 被覆およびエタール被覆に対する層条件を満たす。
+\item $(\textit{Spaces}/X)_\etale$ 上で
+$\mathcal{F}^a = \pi_X^*\mathcal{F}$ である。
+\item $(\textit{Spaces}/X)_{fppf}$ 上で
+$\mathcal{F}^a = a_X^*\mathcal{F}$ である。
+\item 規則 $\mathcal{F} \mapsto \mathcal{F}^a$ は、準連接
+$\mathcal{O}_X$-加群と
+$((\textit{Spaces}/X)_\etale, \mathcal{O})$ 上の準連接加群との間の同値を定める。
+\item 規則 $\mathcal{F} \mapsto \mathcal{F}^a$ は、準連接
+$\mathcal{O}_X$-加群と
+$((\textit{Spaces}/X)_{fppf}, \mathcal{O})$ 上の準連接加群との間の同値を定める。
+\item $\epsilon_{X, *}a_X^*\mathcal{F} = \pi_X^*\mathcal{F}$ および
+$a_{X, *}a_X^*\mathcal{F} = \mathcal{F}$ である。
+\item $i > 0$ に対し $R^i\epsilon_{X, *}(a_X^*\mathcal{F}) = 0$ および
+$R^ia_{X, *}(a_X^*\mathcal{F}) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は準連接加群の fppf 降下の帰結である。実際、
+$\{f_i : U_i \to U\}$ が $(\textit{Spaces}/X)_\etale$ における
+fpqc 被覆であるとする。構造射を $g : U \to X$ と記す。
+$s_i|_{U_i \times_U U_j} = s_j|_{U_i \times_U U_j}$ を満たす切断の族
+$s_i \in \Gamma(U_i , f_i^*g^*\mathcal{F})$ があるとする。
+% P10-E0163
+対応する切断 $s \in \Gamma(U, g^*\mathcal{F})$ を見つけなければならない。
+$s_i$ を写像の族
+$\varphi_i : f_i^*\mathcal{O}_U = \mathcal{O}_{U_i} \to f_i^*g^*\mathcal{F}$
+と解釈し直すことができ、これは $U$ 上の準連接層
+$\mathcal{O}_U$ と $g^*\mathcal{F}$ に付随する標準降下データと両立する。
+したがって、『空間上の降下』命題
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent} により、
+これらを写像 $\mathcal{O}_U \to g^*\mathcal{F}$ に（一意に）降下でき、
+それが求める切断 $s$ を与える。
+
+\medskip\noindent
+(2)--(7) はスキームに対する対応する主張から導く。
+各 $X_i$ がスキームであるようなエタール被覆
+$\{X_i \to X\}_{i \in I}$ を選ぶ。$X_i \times_X X_j$ もスキームである。
+この被覆は三つのサイト
+$(\textit{Spaces}/X)_{fppf}$、$(\textit{Spaces}/X)_\etale$、および $X_\etale$
+のそれぞれで終対象の被覆を誘導する。したがって、これらのサイト上の層の圏は
+これらの被覆に関する降下データと同値である。『サイト』補題
+\ref{sites-lemma-mapping-property-glue} を参照されたい。
+(2), (3) は局所的である（貼り合わせの主張があるため）。
+準連接性は局所的性質なので、(4), (5) も局所的である。
+明らかに (6), (7) も局所的である。したがって、$X$ がスキームである場合に
+補題の (2)--(7) を証明すれば十分である。
+
+\medskip\noindent
+$X$ がスキームであると仮定する。埋め込み
+$(\Sch/X)_\etale \subset (\textit{Spaces}/X)_\etale$ および
+$(\Sch/X)_{fppf} \subset (\textit{Spaces}/X)_{fppf}$ は、補題
+\ref{spaces-more-cohomology-lemma-compare-cohomology-other-topologies} により環付きトポスの同値を定める。
+(2)--(7) はスキームの場合、すなわち『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-review-quasi-coherent} から従う。
+この同値を介して準連接性を移すには、準連接性が加群の内在的性質であることを用いる。
+『サイト上の加群』節 \ref{sites-modules-section-local} を参照されたい。
+若干の詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-cohomological-descent-etale-fppf-modules}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対し、写像
+$$
+\pi_X^*\mathcal{F} \longrightarrow R\epsilon_{X, *}(a_X^*\mathcal{F})
+\quad\text{および}\quad
+\mathcal{F} \longrightarrow Ra_{X, *}(a_X^*\mathcal{F})
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-more-cohomology-lemma-review-quasi-coherent} (6), (7) の直ちに従う帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-vanishing-adequate}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3$ を準連接
+$\mathcal{O}_X$-加群の複体とする。$(\textit{Spaces}/X)_\etale$ 上で
+$$
+\mathcal{H}_\etale =
+\Ker(\pi_X^*\mathcal{F}_2 \to \pi_X^*\mathcal{F}_3)/
+\Im(\pi_X^*\mathcal{F}_1 \to \pi_X^*\mathcal{F}_2)
+$$
+とおき、$(\textit{Spaces}/X)_{fppf}$ 上で
+$$
+\mathcal{H}_{fppf} =
+\Ker(a_X^*\mathcal{F}_2 \to a_X^*\mathcal{F}_3)/
+\Im(a_X^*\mathcal{F}_1 \to a_X^*\mathcal{F}_2)
+$$
+とおく。このとき $\mathcal{H}_\etale = \epsilon_{X, *}\mathcal{H}_{fppf}$ であり、
+$(\textit{Spaces}/X)_\etale$ の任意のアフィン対象 $U$ と $p > 0$ に対し
+$$
+H^p_\etale(U, \mathcal{H}_\etale) = H^p_{fppf}(U, \mathcal{H}_{fppf}) = 0
+$$
+である。
+\end{lemma}
+
+\noindent
+より強いことが成り立つ。すなわち、$(\textit{Spaces}/X)_{fppf}$ 上の加群で、
+fppf 局所的に補題の加群のように見えるものを
+% P10-E0164
+adequate 加群と呼ぶ。これらはすべての $\mathcal{O}$-加群の圏の弱 Serre 部分圏をなし、
+そのコホモロジーは『Adequate 加群』節
+\ref{adequate-section-adequate} で研究される。
+
+\begin{proof}
+$(\textit{Spaces}/X)_\etale$ の任意の対象 $f : U \to X$ に対し、
+節 \ref{spaces-more-cohomology-section-compare} で論じた関手 $i_f^* = i_f^{-1}$ を介する
+$\mathcal{H}_\etale$ の $U_\etale$ への制限
+$\mathcal{H}_\etale|_{U_\etale}$ を考える。層
+$\mathcal{H}_\etale|_{U_\etale}$ は複体 $f^*\mathcal{F}_\bullet$ の次数 $1$ の
+ホモロジーに等しい。これは環付きサイト $U_\etale \to X_\etale$ の射として
+$i_f \circ \pi_X = f$ であるためである。特に
+$\mathcal{H}_\etale|_{U_\etale}$ は準連接 $\mathcal{O}_U$-加群である。
+次に、$g : V \to U$ を $(\textit{Spaces}/X)_\etale$ における平坦射とする。
+サイトの射 $V_\etale \to X_\etale$ として
+$$
+i_{f \circ g}^* \circ \pi_X^* = (f \circ g)^* = g^* \circ f^*
+$$
+であり、$g$ は平坦、したがって $g^*$ は完全なので、
+$$
+\mathcal{H}_\etale|_{V_\etale} =
+g^*\left(\mathcal{H}_\etale|_{U_\etale}\right)
+$$
+を得る。
+以上の準備により補題を証明できる。
+
+\medskip\noindent
+$f : U \to X$ を上記のものとし、
+$\mathcal{U} = \{g_i : U_i \to U\}_{i \in I}$ を fppf 被覆とする。
+補題 \ref{spaces-more-cohomology-lemma-review-quasi-coherent} (1) を
+$\mathcal{H}_\etale|_{U_\etale}$ と上記の事実に適用すると、
+$\mathcal{H}_\etale$ と被覆 $\mathcal{U}$ に対して層条件が成り立つ。
+したがって $\mathcal{H}_\etale$ は既に fppf 層であり、これは前層として
+$\mathcal{H}_{fppf}$ が $\mathcal{H}_\etale$ に等しいことを意味する。
+特に $\mathcal{H}_\etale = \epsilon_{X, *}\mathcal{H}_{fppf}$ である。
+
+\medskip\noindent
+最後に消滅を証明するため、『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-cech-vanish-collection} を用いる。
+$\mathcal{B}$ を $(\textit{Spaces}/X)_{fppf}$ のアフィン対象全体とし、
+$\text{Cov}$ を、$U$ と $U_i$ がアフィンである有限 fppf 被覆
+$\mathcal{U} = \{U_i \to U\}_{i = 1, \ldots, n}$ 全体とする。このとき
+$$
+{\check H}^p(\mathcal{U}, \mathcal{H}_\etale) =
+{\check H}^p(\mathcal{U}, \left(\mathcal{H}_\etale|_{U_\etale}\right)^a)
+$$
+である。実際、$U$ 上平坦なアフィン・スキーム
+$U_{i_0} \times_U \ldots \times_U U_{i_p}$ 上での
+$\mathcal{H}_\etale$ の値は、最初の段落により、準連接加群
+$\mathcal{H}_\etale|_{U_\etale}$ の逆像の値と一致する。
+したがって、『降下』補題
+\ref{descent-lemma-standard-covering-Cech-quasi-coherent} により消滅を得る。
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-cohomological-descent-etale-fppf-modules-unbounded}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$K \in D_\QCoh(\mathcal{O}_X)$ に対し、写像
+$$
+L\pi_X^*K \longrightarrow R\epsilon_{X, *}(La_X^*K)
+\quad\text{および}\quad
+K \longrightarrow Ra_{X, *}(La_X^*K)
+$$
+は同型である。ここで
+$a_X : \Sh((\textit{Spaces}/X)_{fppf}) \to \Sh(X_\etale)$ は上記の射である。
+\end{lemma}
+
+\begin{proof}
+問題は $X$ 上エタール局所的なので、$X$ はアフィンであると仮定してよい。
+$X = \Spec(A)$ とする。このとき『空間の導来圏』補題
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site} および
+『スキームの導来圏』補題 \ref{perfect-lemma-affine-compare-bounded} により
+$D_\QCoh(\mathcal{O}_X) = D(A)$ である。したがって、$K$ を表す準連接
+$\mathcal{O}_X$-加群の対応する複体 $\mathcal{K}^\bullet$ をもつ
+$A$-加群の K-平坦複体
+% P10-E0165
+$K^\bullet$ を選べる。$\mathcal{K}^\bullet$ は
+$\mathcal{O}_X$-加群の K-平坦複体であると主張する。
+
+\medskip\noindent
+主張の証明。『スキームの導来圏』補題
+\ref{perfect-lemma-affine-K-flat} により、$\widetilde{K}^\bullet$ はスキーム
+$(\Spec(A), \mathcal{O}_{\Spec(A)})$ 上 K-平坦である。
+次に、$\epsilon$ を『空間の導来圏』補題
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site} のものとすると
+$\mathcal{K}^\bullet = \epsilon^*\widetilde{K}^\bullet$ である。
+したがって、『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-pullback-K-flat-points} と、スキームのエタール・サイトが
+十分多くの点をもつこと（『エタール・コホモロジー』注意
+\ref{etale-cohomology-remarks-enough-points}）により、
+$\mathcal{K}^\bullet$ は K-平坦である。
+
+\medskip\noindent
+この主張により
+$La_X^*K = a_X^*\mathcal{K}^\bullet$ および
+$L\pi_X^*K = \pi_X^*\mathcal{K}^\bullet$ である。
+証明の第一部は、準連接加群の逆像 $a_X^*\mathcal{K}^n$ が
+$\epsilon_{X, *}$、それぞれ $a_{X, *}$ に対して非輪状であることを示している。
+ならば Leray の非輪状性補題で証明は終わるはずではないか。
+実はそうではない。Leray の非輪状性補題は下に有界な複体にしか適用できないからである。
+しかし次の段落では、我々の複体が準連接加群の下に有界な複体の導来極限なので、
+結果が下に有界な場合から従うことを示す。
+
+\medskip\noindent
+$\pi_X^*\mathcal{K}^\bullet$ と $a_X^*\mathcal{K}^\bullet$ のコホモロジー層は、
+補題 \ref{spaces-more-cohomology-lemma-vanishing-adequate} により
+$(\textit{Spaces}/X)_\etale$ のアフィン対象上で高次コホモロジー群が消滅する。
+したがって、『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-is-limit-dimension} により
+$$
+L\pi_X^*K = R\lim \tau_{\geq -n}(L\pi_X^*K)
+\quad\text{および}\quad
+La_X^*K = R\lim \tau_{\geq -n}(La_X^*K)
+$$
+である。
+
+\medskip\noindent
+% P10-E0166
+$L\pi_X^*K = R\epsilon_{X, *}(La_X^*\mathcal{F})$ の証明。
+上記により
+$$
+R\epsilon_{X, *}La_X^*K =
+R\lim R\epsilon_{X, *}(\tau_{\geq -n}(La_X^*K))
+$$
+である。『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-Rf-commutes-with-Rlim} を参照されたい。
+$\tau_{\geq -n}(La_X^*K)$ は
+$\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)$ で表されるが、これは
+$a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)$ と同じとは限らない。
+しかし、系
+$$
+\{\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)\}_{n \geq 1}
+\quad\text{および}\quad
+\{a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)\}_{n \geq 1}
+$$
+は pro-系として同型であることは明らかである。
+Leray の非輪状性補題
+（『導来圏』補題 \ref{derived-lemma-leray-acyclicity}）と補題の第一部により
+$$
+R\epsilon_{X, *}(a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)) =
+\pi_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)
+$$
+である。次に、系
+$$
+\{\tau_{\geq -n}(\pi_X^*\mathcal{K}^\bullet)\}_{n \geq 1}
+\quad\text{および}\quad
+\{\pi_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)\}_{n \geq 1}
+$$
+が pro-系として同型であることを用いる。最後に、すべてを次のようにまとめる。
+\begin{align*}
+R\epsilon_{X, *}La_X^*K
+& =
+R\epsilon_{X, *} (R\lim \tau_{\geq -n}(La_X^*K)) \\
+& =
+R\lim R\epsilon_{X, *}(\tau_{\geq -n}(La_X^*K)) \\
+& =
+R\lim R\epsilon_{X, *}(\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)) \\
+& =
+R\lim R\epsilon_{X, *}(a_X^*(\tau_{\geq -n}\mathcal{K}^\bullet)) \\
+& =
+R\lim \pi_X^*(\tau_{\geq -n}\mathcal{K}^\bullet) \\
+& =
+R\lim \tau_{\geq -n}(\pi_X^*\mathcal{K}^\bullet) \\
+& =
+R\lim \tau_{\geq -n}(L\pi_X^*K) \\
+& =
+L\pi_X^*K
+\end{align*}
+ここで第四および第六の等号では、同型な pro-系は同じ $R\lim$ をもつことを用いた
+（細部は省略する）。補題 \ref{spaces-more-cohomology-lemma-vanishing-adequate} で証明された複体
+$\tau_{\geq -n}a_X^*\mathcal{K}^\bullet$ の項のコホモロジーについて
+より多くを用いれば、この段階を避けられる。実際、そこから直接
+$R\epsilon_{X, *}(\tau_{\geq -n}(a_X^*\mathcal{K}^\bullet)) =
+\tau_{\geq -n}(\pi_X^*\mathcal{K}^\bullet)$ が従う。
+
+\medskip\noindent
+% P10-E0167
+等式 $K = Ra_{X, *}(La_X^*\mathcal{F})$ も全く同じ方法で証明される。
+最後の段階で『空間の導来圏』補題
+\ref{spaces-perfect-lemma-nice-K-injective} による
+$K = R\lim \tau_{\geq -n}K$ を用いる。
+\end{proof}
+
+
+
+
+
+
+
+\section{ph トポロジーとエタール・トポロジーの比較}
+\label{spaces-more-cohomology-section-ph-etale}
+
+\noindent
+本節は『エタール・コホモロジー』節
+\ref{etale-cohomology-section-ph-etale} の類似である。
+
+\medskip\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+圏 $\textit{Spaces}/X$ 上で ph トポロジーとエタール・トポロジーを考える。
+『空間上のトポロジー』補題
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf-ph} により、
+すべてのエタール被覆は ph 被覆なので、恒等関手
+$(\textit{Spaces}/X)_\etale \to (\textit{Spaces}/X)_{ph}$ は連続である。
+したがって、『サイト』命題 \ref{sites-proposition-get-morphism} を適用すると、
+サイトの射
+$$
+\epsilon_X :
+(\textit{Spaces}/X)_{ph} \longrightarrow (\textit{Spaces}/X)_\etale
+$$
+を定める。$\epsilon_{X, *}$ は台となる前層上では恒等関手であり、
+$\epsilon_X^{-1}$ はエタール層にその ph 層化を対応させることに注意する。
+大エタール・サイトと小エタール・サイトを比較するサイトの射
+$$
+\pi_X : (\textit{Spaces}/X)_\etale \longrightarrow X_{spaces, \etale}
+$$
+を考える。節 \ref{spaces-more-cohomology-section-compare} を参照されたい。その合成はサイトの射
+$$
+a_X = \pi_X \circ \epsilon_X :
+(\textit{Spaces}/X)_{ph}
+\longrightarrow
+X_{spaces, \etale}
+$$
+を定める。$\mathcal{H}$ が $(\textit{Spaces}/X)_{ph}$ 上のアーベル層ならば、
+$(\textit{Spaces}/X)_{ph}$ の対象 $U$ 上の $\mathcal{H}$ のコホモロジーを
+$H^n_{ph}(U, \mathcal{H})$ と書く。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-comparison-ph-etale}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $\mathcal{F} \in \Sh(X_\etale)$ に対し
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$
+かつ $a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$ である。
+\item 捩れ層 $\mathcal{F} \in \textit{Ab}(X_\etale)$ に対し、$i > 0$ ならば
+$R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$a_X^{-1}\mathcal{F} = \epsilon_X^{-1} \pi_X^{-1}\mathcal{F}$ である。
+補題 \ref{spaces-more-cohomology-lemma-describe-pullback} により、エタール層
+$\pi_X^{-1}\mathcal{F}$ は ph トポロジーに対する層である。
+したがって、これは $a_X^{-1}\mathcal{F}$ に等しい
+（$\epsilon_X$ による逆像は ph 層化で与えられる）。さらに、
+$\epsilon_{X, *}$ は台となる前層上では恒等であることを想起する。
+これで (1) は補題 \ref{spaces-more-cohomology-lemma-describe-pullback} における
+$\pi_X^{-1}$ の明示的記述から直ちに従う。
+
+\medskip\noindent
+(2) はスキームの場合、すなわち『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-V-C-all-n-etale-ph} (1) に帰着して証明する。
+すべての代数空間はエタール局所的にスキームなので、これは「明らかにうまくいく」。
+以下に詳細を記すが、読者には証明を飛ばすことを勧める。
+
+\medskip\noindent
+$(\textit{Spaces}/X)_{ph}$ 上のアーベル層 $\mathcal{H}$ に対し、\\
+高次順像 $R^p\epsilon_{X, *}\mathcal{H}$ は
+$(\textit{Spaces}/X)_\etale$ 上の前層\\
+$U \mapsto H^p_{ph}(U, \mathcal{H})$ に付随する層である。
+『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-higher-direct-images} を参照されたい。
+$(\textit{Spaces}/X)_\etale$ のすべての対象はスキームによる被覆をもつので、
+$U/X$ がスキームであり
+$\xi \in H^p_{ph}(U, a_X^{-1}\mathcal{F})$ が与えられたとき、
+$\xi$ の $U_i$ への制限が零になるようなエタール被覆
+$\{U_i \to U\}$ を見つけられることを示せば十分である。ここで
+\begin{align*}
+H^p_{ph}(U, a_X^{-1}\mathcal{F})
+& =
+H^p((\textit{Spaces}/U)_{ph}, (a_X^{-1}\mathcal{F})|_{\textit{Spaces}/U}) \\
+& =
+H^p((\Sch/U)_{ph}, (a_X^{-1}\mathcal{F})|_{\Sch/U})
+\end{align*}
+である。第二の同一視は補題
+\ref{spaces-more-cohomology-lemma-compare-cohomology-other-topologies} によるもので、第一は制限に関する一般論
+（『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-cohomology-of-open}）である。
+最初の段落と、スキームの場合の対応する結果
+（『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-describe-pullback-pi-ph}）を見ると、層
+$(a_X^{-1}\mathcal{F})|_{\Sch/U}$ は「$a_U$ のスキーム版」による逆像と一致する。
+したがって、各 $i$ について我々の類が
+$H^p((\Sch/U_i)_{ph}, (a_X^{-1}\mathcal{F})|_{\Sch/U_i})$
+で消えるようなエタール被覆 $\{U_i \to U\}$ を見つけられる。
+『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-V-C-all-n-etale-ph} を参照されたい
+（ここで用いるべき正確な主張は、すべての $n$ について $V_n$ が成り立つことであり、
+これはスキームの場合の (2) の主張である）。同じ公式を今度は $U_i$ に用いて
+戻すと、望むとおり $\xi$ の $U_i$ 上への制限は零である。
+\end{proof}
+
+\noindent
+スキームの場合に行われた難しい仕事から、小エタール・サイトに由来する
+アーベル捩れ層については、エタール・コホモロジーと ph コホモロジーが一致する。
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-cohomological-descent-etale-ph}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+コホモロジー層が捩れ層である $K \in D^+(X_\etale)$ に対し、写像
+$$
+\pi_X^{-1}K \longrightarrow R\epsilon_{X, *}a_X^{-1}K
+\quad\text{および}\quad
+K \longrightarrow Ra_{X, *}a_X^{-1}K
+$$
+は同型である。ここで
+$a_X : \Sh((\textit{Spaces}/X)_{ph}) \to \Sh(X_\etale)$ は上記の射である。
+\end{lemma}
+
+\begin{proof}
+第二の主張だけを証明する。第一の主張はより容易で、全く同じ方法で証明される。
+$K$ が単一のアーベル捩れ層で与えられる場合に帰着できる。
+実際、$K$ をアーベル捩れ層の下に有界な複体 $\mathcal{F}^\bullet$ で表す。
+これは『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-torsion} により可能である。
+層の場合から、$\mathcal{F}^n = a_{X, *} a_X^{-1} \mathcal{F}^n$ であり、
+$q > 0$ に対して層 $R^qa_{X, *}a_X^{-1}\mathcal{F}^n$ は零である。
+Leray の非輪状性補題
+（『導来圏』補題 \ref{derived-lemma-leray-acyclicity}）を
+$a_X^{-1}\mathcal{F}^\bullet$ と関手 $a_{X, *}$ に適用して結論を得る。
+以下では $K = \mathcal{F}$ とし、$\mathcal{F}$ はアーベル捩れ層であると仮定する。
+
+\medskip\noindent
+補題 \ref{spaces-more-cohomology-lemma-comparison-ph-etale} により
+$a_{X, *}a_X^{-1}\mathcal{F} = \mathcal{F}$ である。
+したがって、$q > 0$ に対し
+$R^qa_{X, *}a_X^{-1}\mathcal{F} = 0$ であることを示せば十分である。
+このために
+% P10-E0168
+$a_X = \epsilon_X \circ \pi_X$ と Leray スペクトル系列
+（『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-relative-Leray}）を用いることができる。
+補題 \ref{spaces-more-cohomology-lemma-comparison-ph-etale} により、$i > 0$ に対し
+$R^i\epsilon_{X, *}(a_X^{-1}\mathcal{F}) = 0$ である。
+$\epsilon_{X, *}a_X^{-1}\mathcal{F} = \pi_X^{-1}\mathcal{F}$ であり、
+補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale} により、$j > 0$ に対し
+$R^j\pi_{X, *}(\pi_X^{-1}\mathcal{F}) = 0$ である。これで証明が完了する。
+\end{proof}
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-compare-cohomology-etale-ph}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。上記の
+$a_X : \Sh((\textit{Spaces}/X)_{ph}) \to \Sh(X_\etale)$ に対し、
+\begin{enumerate}
+\item $X_\etale$ 上のアーベル捩れ層 $\mathcal{F}$ について\\
+$H^q(X_\etale, \mathcal{F}) = H^q_{ph}(X, a_X^{-1}\mathcal{F})$ であり、
+\item コホモロジー層が捩れ層である $K \in D^+(X_\etale)$ について\\
+$H^q(X_\etale, K) = H^q_{ph}(X, a_X^{-1}K)$ である。
+\end{enumerate}
+例：$A$ がアーベル捩れ群ならば
+$H^q_\etale(X, \underline{A}) = H^q_{ph}(X, \underline{A})$ である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale-ph} と
+『サイト上のコホモロジー』注意
+\ref{sites-cohomology-remark-before-Leray} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-push-pull-ph-etale}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の代数空間の射とする。
+このとき、トポスの可換図式
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{ph}) \ar[rr]_{f_{big, ph}} \ar[d]_{\epsilon_X} & &
+\Sh((\textit{Spaces}/Y)_{ph}) \ar[d]^{\epsilon_Y} \\
+\Sh((\textit{Spaces}/X)_\etale) \ar[rr]^{f_{big, \etale}} & &
+\Sh((\textit{Spaces}/Y)_\etale)
+}
+$$
+および
+$$
+\xymatrix{
+\Sh((\textit{Spaces}/X)_{ph}) \ar[rr]_{f_{big, ph}} \ar[d]_{a_X} & &
+\Sh((\textit{Spaces}/Y)_{ph}) \ar[d]^{a_Y} \\
+\Sh(X_\etale) \ar[rr]^{f_{small}} & &
+\Sh(Y_\etale)
+}
+$$
+が存在し、
+% P10-E0169
+$a_X = \pi_X \circ \epsilon_X$ および $a_Y = \pi_X \circ \epsilon_X$ である。
+\end{lemma}
+
+\begin{proof}
+これは関係する射の定義を書き下せば直ちに従う。
+『空間上のトポロジー』節
+\ref{spaces-topologies-section-ph} および節 \ref{spaces-more-cohomology-section-compare} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-more-cohomology-lemma-proper-push-pull-ph-etale}
+補題 \ref{spaces-more-cohomology-lemma-push-pull-ph-etale} において $f$ が固有ならば、
+\begin{enumerate}
+\item $a_Y^{-1} \circ f_{small, *} = f_{big, ph, *} \circ a_X^{-1}$ であり、
+\item コホモロジー層が捩れ層である $D^+(X_\etale)$ の $K$ に対し\\
+$a_Y^{-1}(Rf_{small, *}K) = Rf_{big, ph, *}(a_X^{-1}K)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。補題 \ref{spaces-more-cohomology-lemma-compare-higher-direct-image-proper} (1) の証明を
+繰り返してもよいが、ここではその結果から導く。
+$\epsilon_{Y, *}$ は台となる前層上では恒等関手なので、同型を反映する。
+補題 \ref{spaces-more-cohomology-lemma-comparison-ph-etale} により
+$\epsilon_{Y, *} \circ a_Y^{-1} = \pi_Y^{-1}$ であり、$X$ についても同様である。
+標準写像
+$a_Y^{-1}f_{small, *}\mathcal{F} \to f_{big, ph, *}a_X^{-1}\mathcal{F}$
+が同型であることを示すには、
+\begin{align*}
+\pi_Y^{-1}f_{small, *}\mathcal{F}
+& =
+\epsilon_{Y, *}a_Y^{-1}f_{small, *}\mathcal{F} \\
+& \to 
+\epsilon_{Y, *}f_{big, ph, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *} \epsilon_{X, *}a_X^{-1}\mathcal{F} \\
+& =
+f_{big, \etale, *}\pi_X^{-1}\mathcal{F}
+\end{align*}
+が同型であることを示せば十分である。これは補題
+\ref{spaces-more-cohomology-lemma-compare-higher-direct-image-proper} (1) である。
+
+\medskip\noindent
+(2) を示すため、次を用いる。
+\begin{align*}
+R\epsilon_{Y, *}Rf_{big, ph, *}a_X^{-1}K
+& =
+Rf_{big, \etale, *}R\epsilon_{X, *}a_X^{-1}K \\
+& =
+Rf_{big, \etale, *}\pi_X^{-1}K \\
+& =
+\pi_Y^{-1}Rf_{small, *}K \\
+& =
+R\epsilon_{Y, *} a_Y^{-1}Rf_{small, *}K
+\end{align*}
+% P10-E0170
+% P10-E0171
+第一の等号は補題 \ref{spaces-more-cohomology-lemma-push-pull-ph-etale} の可換図式と
+『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-derived-pushforward-composition} による。
+次の第二の等号は補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale-ph} である。
+第三は補題 \ref{spaces-more-cohomology-lemma-compare-higher-direct-image-proper} (2) であり、
+第四は再び補題 \ref{spaces-more-cohomology-lemma-cohomological-descent-etale-ph} である。
+したがって基底変換写像
+$a_Y^{-1}(Rf_{small, *}K) \to Rf_{big, ph, *}(a_X^{-1}K)$ は同型
+$$
+R\epsilon_{Y, *}a_Y^{-1}Rf_{small, *}K \to
+R\epsilon_{Y, *}Rf_{big, ph, *}a_X^{-1}K
+$$
+を誘導する。次の注意により証明が完了する：コホモロジー層が捩れ層である
+$D^+(Y_\etale)$ の $L$ と、$D^+((\textit{Spaces}/Y)_{ph})$ の $M$ をもち、
+$\alpha : a_Y^{-1}L \to M$ である写像を考える。
+$R\epsilon_{Y, *}\alpha$ が同型ならば、$\alpha$ は同型である。
+実際、$H^i(\alpha)$ が同型であることを $i$ について帰納的に示す。
+十分小さいすべての $i$ についてこれは成り立つ。
+$i \leq i_0$ について成り立つとする。この範囲では
+$H^i(M) = a_Y^{-1}H^i(L)$ なので、補題
+\ref{spaces-more-cohomology-lemma-comparison-ph-etale} により、$j > 0$ および $i \leq i_0$ に対し
+$R^j\epsilon_{Y, *}H^i(M) = 0$ である。ゆえにスペクトル系列の議論により
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = H^{i_0 + 1}(R\epsilon_{Y, *}M)$ である。
+したがって
+$\epsilon_{Y, *}H^{i_0 + 1}(M) = \pi_Y^{-1}H^{i_0 + 1}(L) =
+\epsilon_{Y, *}a_Y^{-1}H^{i_0 + 1}(L)$ である。
+これは望むとおり $H^{i_0 + 1}(\alpha)$ が同型であることを意味する
+（$\epsilon_{Y, *}$ は台となる前層上で恒等なので同型を反映する）。
+\end{proof}

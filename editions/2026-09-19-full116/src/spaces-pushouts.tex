@@ -1,0 +1,3489 @@
+% Generated mechanically from frozen input inputs/p10/ja/spaces-pushouts.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{80}
+\chapter{代数空間の押し出し}
+
+
+
+\phantomsection
+\label{spaces-pushouts-section-phantom}
+
+
+\section{はじめに}
+\label{spaces-pushouts-section-introduction}
+
+\noindent
+本章の目的は、代数空間の圏における押し出しを論じることである。
+これは仮定をさまざまに変えて行うことができる。
+\cite{Temkin-Tyomkin} には、一方の射がアフィンで他方が閉埋め込みである
+かなり一般的な押し出し構成が与えられている。
+Section \ref{spaces-pushouts-section-pushouts} ではその特別な場合、すなわち一方の射が
+アフィンで他方が肥厚である場合を論じる。
+これは変形理論でしばしば現れる状況である。
+
+\medskip\noindent
+Sections \ref{spaces-pushouts-section-formal-glueing} および
+\ref{spaces-pushouts-section-formal-glueing-spaces} では、次の図式を論じる。
+$$
+\xymatrix{
+f^{-1}(X \setminus Z) \ar[r] \ar[d] & Y \ar[d]^f \\
+X \setminus Z \ar[r] & X
+}
+$$
+ここで $f$ は代数空間の準コンパクトかつ準分離な射、
+$Z \to X$ は有限表示の閉埋め込みであり、
+写像 $f^{-1}(Z) \to Z$ は同型、さらに $f$ は
+$f^{-1}(Z)$ に沿って平坦である。この状況で、
+Section \ref{spaces-pushouts-section-formal-glueing} では $X \setminus Z$ 上と
+$Y$ 上の準連接加群を貼り合わせて $X$ 上の準連接加群を得る。
+また Section \ref{spaces-pushouts-section-formal-glueing-spaces} では、
+$X \setminus Z$ 上と $Y$ 上の代数空間を貼り合わせて
+$X$ 上の代数空間を得る。
+
+\medskip\noindent
+Section \ref{spaces-pushouts-section-coequalizer-glue} では、ネーター代数空間の
+固有双有理射から、ある意味で代数空間における余等化子図式が
+どのように生じるかを論じる。
+
+\medskip\noindent
+Section \ref{spaces-pushouts-section-compactifications} では、
+Section \ref{spaces-pushouts-section-elementary-dsitnguished-squares} における
+基本識別平方の構成を用い、代数空間の枠組みで
+永田のコンパクト化定理を証明する。
+
+
+
+
+
+
+\section{規約}
+\label{spaces-pushouts-section-conventions}
+
+\noindent
+すべてのスキームは大 fppf サイト $\Sch_{fppf}$ に含まれるものと
+常に仮定する。また、考察するすべての環 $A$ は、
+$\Spec(A)$ がこの大サイトの対象（に同型）であるという性質をもつ。
+
+\medskip\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+本章および次章では、$S$ 上の代数空間の圏における
+$X$ とそれ自身との積を $X \times X$ ではなく
+$X \times_S X$ と書く。
+
+
+
+
+\section{代数空間の余極限}
+\label{spaces-pushouts-section-pushouts-generalities}
+
+\noindent
+代数空間の余極限について簡潔に論じる。$S$ をスキームとする。
+$\mathcal{I} \to (\Sch/S)_{fppf}$, $i \mapsto X_i$ を図式とする
+（Categories, Section \ref{categories-section-limits} 参照）。
+各 $i$ に対し、$X_i$ 上エタールなスキームを対象とする
+小エタールサイト $X_{i, \etale}$ を考えることができる
+（Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site} 参照）。
+$\mathcal{I}$ の各射 $i \to j$ から射 $X_i \to X_j$ が得られ、
+したがって引き戻し関手
+$X_{j, \etale} \to X_{i, \etale}$ が得られる。
+ゆえに $\mathcal{I}^{opp}$ から圏の $2$-圏への擬関手を得る。次を
+$$
+\lim_i X_{i, \etale}
+$$
+$2$-極限と記す（将来の参照をここに挿入することを参照）。
+これは具体的に何を意味するか。この極限の対象は、
+$\mathcal{I}$ 上のエタール射の系 $U_i \to X_i$ であって、
+$\mathcal{I}$ の各 $i \to j$ に対して図式
+$$
+\xymatrix{
+U_i \ar[r] \ar[d] & U_j \ar[d] \\
+X_i \ar[r] & X_j
+}
+$$
+がカルテジアンとなるものである。対象間の射は明らかな仕方で定義する。
+各 $i \to j$ に対して合成 $X_i \to X_j \to T$ が $f_i$ に等しいような
+射の族 $f_i : X_i \to T$ があるとする。このとき関手
+$T_\etale \to \lim X_{i, \etale}$ を得る。
+この記法を用いて補題を述べることができる。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-colimit-agrees}
+$S$ をスキームとする。上のような $S$ 上のスキームの図式
+$\mathcal{I} \to (\Sch/S)_{fppf}$, $i \mapsto X_i$ をとる。次を仮定する。
+\begin{enumerate}
+\item スキームの圏で $X = \colim X_i$ が存在する。
+\item $\coprod X_i \to X$ は全射である。
+\item $U \to X$ がエタールで $U_i = X_i \times_X U$ ならば、
+スキームの圏で $U = \colim U_i$ である。
+\item $\lim X_{i, \etale}$ の対象 $(U_i \to X_i)$ で
+$U_i \to X_i$ が分離なものはすべて、関手
+$X_\etale \to \lim X_{i, \etale}$ の本質像に属する。
+\end{enumerate}
+このとき、$S$ 上の代数空間の圏でも $X = \colim X_i$ である。
+\end{lemma}
+
+\begin{proof}
+$Z$ を $S$ 上の代数空間とする。各 $i \to j$ に対し合成
+$X_i \to X_j \to Z$ が $f_i$ に等しいような射の族
+$f_i : X_i \to Z$ があるとする。$f_i$ が合成
+$X_i \to X \to Z$ として回収されるような代数空間の射
+$f : X \to Z$ を構成しなければならない。
+$W \to Z$ を、スキームから $Z$ への全射エタール射とする。
+$W$ はアフィンスキームの非交和であるとしてよく、とくに
+$W \to Z$ は分離であるとしてよい。各 $i$ に対して
+$U_i = W \times_{Z, f_i} X_i$ とおき、射影を
+$h_i : U_i \to W$ と記す。このとき $U_i \to X_i$ は、
+$U_i \to X_i$ が分離である $\lim X_{i, \etale}$ の対象をなす。
+仮定 (4) により、エタール射 $U \to X$ と（関手的な）同型
+$U_i = X_i \times_X U$ をとれる。仮定 (3) により、合成
+$U_i \to U \to W$ が $h_i$ となる射 $h : U \to W$ が存在する。
+$g : U \to Z$ を $h$ と写像 $W \to Z$ の合成とする。
+証明を終えるには、$g : U \to Z$ が射 $X \to Z$ に降下することを
+示せばよい。そのため、射
+$(h, h) : U \times_X U \to W \times_S W$.
+$U_i \times_{X_i} U_i \to U \times_X U$ と合成すると、
+$W \times_Z W$ を経由する $(h_i, h_i)$ を得る。
+仮定 (3) により $U \times_X U$ はスキーム
+$U_i \times_{X_i} U_i$ の余極限であるから、
+$(h, h)$ は $W \times_Z W$ を経由する。したがって二つの合成
+$U \times_X U \to U \to W \to Z$ は等しい。
+各 $U_i \to X_i$ は全射であり、さらに仮定 (2) により
+$U \to X$ は全射である。$Z$ はエタール位相に関する層なので、
+$g : U \to Z$ は望むとおり $f : X \to Z$ に降下する。
+\end{proof}
+
+\noindent
+余錐が余極限であることは、余錐上 fpqc 局所的に検査できる。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-pushout-fpqc-local}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$\mathcal{I} \to (\Sch/S)_{fppf}$, $i \mapsto X_i$ を
+$B$ 上の代数空間の図式とする。$(X, X_i \to X)$ を、
+$B$ 上の代数空間の圏におけるこの図式の余錐とする
+（Categories, Remark \ref{categories-remark-cones-and-cocones}）。
+次を満たす fpqc 被覆 $\{U_a \to X\}_{a \in A}$ が存在するとする。
+\begin{enumerate}
+\item すべての $a \in A$ に対して
+$U_a = \colim X_i \times_X U_a$
+が $B$ 上の代数空間の圏で成り立つ。
+\item すべての $a, b \in A$ に対して
+$U_a \times_X U_b = \colim X_i \times_X U_a \times_X U_b$
+が $B$ 上の代数空間の圏で成り立つ。
+\end{enumerate}
+このとき $B$ 上の代数空間の圏で $X = \colim X_i$ である。
+\end{lemma}
+
+\begin{proof}
+実際、$B$ 上の代数空間 $Y$ に対して、$B$ 上の射 $X \to Y$ を
+与えることは、すべての $a, b \in A$ について重なり
+$U_a \times_X U_b$ 上で一致する射 $U_a \to Y$ の族を
+与えることと同じである。Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms} を参照せよ。
+\end{proof}
+
+\noindent
+Lemmas \ref{spaces-pushouts-lemma-colimit-agrees} および
+\ref{spaces-pushouts-lemma-pushout-fpqc-local} の共通の部分的一般化を与える。
+これはとくに、余極限の構成を全代数空間の圏の部分圏へ
+帰着するために用いることができる。
+
+\medskip\noindent
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$\mathcal{I}$ を添字圏とし、$i \mapsto X_i$ を
+$B$ 上の代数空間の圏における図式とする
+（Categories, Section \ref{categories-section-limits} 参照）。
+各 $i$ に対し、小エタールサイト
+$X_{i, spaces, \etale}$
+を考えることができ、その対象は $X_i$ 上エタールな代数空間である
+（Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site} 参照）。
+$\mathcal{I}$ の各射 $i \to j$ から射 $X_i \to X_j$ が得られ、
+したがって引き戻し関手
+$X_{j, spaces, \etale} \to X_{i, spaces, \etale}$ が得られる。
+ゆえに $\mathcal{I}^{opp}$ から圏の $2$-圏への擬関手を得る。次を
+$$
+\lim_i X_{i, spaces, \etale}
+$$
+$2$-極限と記す（将来の参照をここに挿入することを参照）。
+これは具体的に何を意味するか。この極限の対象は、
+$B$ 上の代数空間の射の圏における図式
+$i \mapsto (U_i \to X_i)$ であって、
+$\mathcal{I}$ の各 $i \to j$ に対して図式
+$$
+\xymatrix{
+U_i \ar[r] \ar[d] & U_j \ar[d] \\
+X_i \ar[r] & X_j
+}
+$$
+がカルテジアンとなるものである。対象間の射は明らかな仕方で定義する。
+各 $i \to j$ に対して合成 $X_i \to X_j \to Z$ が $f_i$ に等しいような、
+$B$ 上の代数空間の射の族 $f_i : X_i \to Z$ があるとする。
+このとき関手
+$Z_{spaces, \etale} \to \lim X_{i, spaces, \etale}$ を得る。
+この記法を用いて次の補題を述べることができる。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-colimit-check-etale-locally}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$\mathcal{I} \to (\Sch/S)_{fppf}$, $i \mapsto X_i$ を
+$B$ 上の代数空間の図式とする。$(X, X_i \to X)$ を、
+$B$ 上の代数空間の圏におけるこの図式の余錐とする
+（Categories, Remark \ref{categories-remark-cones-and-cocones}）。
+次を仮定する。
+\begin{enumerate}
+\item 基底変換関手
+$X_{spaces, \'etale} \to \lim X_{i, spaces, \etale}$,
+$U$ を $U_i = X_i \times_X U$ に送るものは同値である。
+\item 次が与えられたとする。
+\begin{enumerate}
+\item $B'$ は $B$ 上アフィンかつエタールである。
+\item $Z$ は $B'$ 上のアフィンスキームである。
+\item $U \to X \times_B B'$ は代数空間のエタール射で、
+$U$ はアフィンである。
+\item $f_i : U_i \to Z$ は、図式
+$i \mapsto U_i = U \times_X X_i$ の $B'$ 上の余錐である。
+\end{enumerate}
+このとき $f_i$ が合成 $U_i \to U \to Z$ に等しくなるような
+$B'$ 上の一意な射 $f : U \to Z$ が存在する。
+\end{enumerate}
+このとき、$B$ 上の全代数空間の圏で $X = \colim X_i$ である。
+\end{lemma}
+
+\begin{proof}
+この段落では $B$ がアフィンスキームである場合に帰着する。
+$B' \to B$ を代数空間のエタール射とする。
+$B$, $X_i$, $X$ をそれぞれ $B'$, $X_i \times_B B'$,
+$X \times_B B'$ で置き換えても条件 (1), (2) は保たれることに注意する。
+$B_a$ がアフィンであるエタール被覆
+$\{B_a \to B\}_{a \in A}$ をとる。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-cover-by-union-affines} を参照せよ。
+$a \in A$ に対し、$X$ および図式の $B_a$ への基底変換を
+$X_a$, $X_{a, i}$ と記す。$a, b \in A$ に対し、
+$X$ および図式の $B_a \times_B B_b$ への基底変換を
+$X_{a, b}$, $X_{a, b, i}$ と記す。
+Lemma \ref{spaces-pushouts-lemma-pushout-fpqc-local} により、
+$X_a = \colim X_{a, i}$ および
+$X_{a, b} = \colim X_{a, b, i}$ を証明すれば十分である。
+これにより、$B = B_a$（アフィンスキーム）または
+$B = B_a \times_B B_b$（分離スキーム）の場合に帰着する。
+同じ議論をもう一度繰り返すと、$B$ はアフィンスキームであると
+仮定してよいことがわかる（ここでは、分離スキームのアフィン開集合の
+共通部分がアフィンであることを用いる）。
+
+\medskip\noindent
+$B$ はアフィンスキームであると仮定する。
+$Z$ を $B$ 上の代数空間とする。次の写像が
+$$
+\Mor_B(X, Z) \longrightarrow \lim \Mor_B(X_i, Z)
+$$
+全単射であることを示さなければならない。
+
+\medskip\noindent
+単射性の証明。すべての $i$ について合成
+$f_i, g_i : X_i \to Z$ が等しいような射
+$f, g : X \to Z$ をとる。アフィンスキーム $Z'$ と
+エタール射 $Z' \to Z$ を選ぶ。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-cover-by-union-affines} により、
+そのようなアフィンで $Z$ を被覆できる。
+$U = X \times_{f, Z} Z'$ および $U' = X \times_{g, Z} Z'$ とおき、
+射影を $p : U \to X$, $p' : U' \to X$ と記す。
+すべての $i$ について $f_i = g_i$ なので、
+$$
+U_i = X_i \times_{f_i, Z} Z' = X_i \times_{g_i, Z} Z' = U'_i
+$$
+が遷移射と両立して成り立つ。(1) により、表示した同一視と両立し、
+$p = p' \circ \epsilon$ を満たす $X$ 上の代数空間の一意な同型
+$\epsilon : U \to U'$ が存在する。$U_a$ がアフィンである
+エタール被覆 $\{h_a : U_a \to U\}$ を選ぶ。
+(2) により
+$f \circ p \circ h_a = g \circ p' \circ \epsilon \circ h_a =
+g \circ p \circ h_a$ である。
+$\{h_a : U_a \to U\}$ はエタール被覆なので
+$f \circ p = g \circ p$ を得る。このようにして得られる射
+$p : U \to X$ の族はエタール被覆をなすから、$f = g$ である。
+
+\medskip\noindent
+全射性の証明。$f_i : X_i \to Z$ を、証明の第1段落で表示した
+写像の右辺の元とする。族
+$f_{c, i} \in \lim_i \Mor_B(X_i \times_X U_c, Z)$ が射
+$f_c : U_c \to Z$ から生じるようなエタール被覆
+$\{U_c \to X\}_{c \in C}$ を見つければ十分である。
+実際、上で証明した一意性により射 $f_c$ は
+$U_c \times_X U_b$ 上で一致し、したがって降下して
+所望の射 $f : X \to Z$ を与える。
+この被覆を得るため、まず各 $Z_a$ がアフィンであるエタール被覆
+$\{g_a : Z_a \to Z\}_{a \in A}$ を選ぶ。次に
+$U_{a, i} = X_i \times_{f_i, Z} Z_a$ とおく。
+(1) により、$X$ 上エタールなある代数空間 $U_a$ に対して
+$U_{a, i} = X_i \times_X U_a$ となる。さらに $U_{a, b}$ が
+アフィンであるエタール被覆
+$\{U_{a, b} \to U_a\}_{b \in B_a}$
+を選び、射
+$$
+U_{a, b, i} = X_i \times_X U_{a, b} \to
+X_i \times_X U_a = X_i \times_{f_i, Z} Z_a \to Z_a
+$$
+を考える。(2) により、これらの射と両立する射
+$f_{a, b} : U_{a, b} \to Z_a$ を得る。
+$C = \coprod_{a \in A} B_a$ とおき、$b \in B_a$ に対応する
+$c \in C$ に対して $U_c = U_{a, b}$ および
+$f_c = g_a \circ f_{a, b} : U_c \to Z$ とおけば結論を得る。
+\end{proof}
+
+\noindent
+これらの考えを応用し、一般の場合を分離代数空間の場合に帰着する。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-colimit-separated-enough}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$\mathcal{I} \to (\Sch/S)_{fppf}$, $i \mapsto X_i$ を
+$B$ 上の代数空間の図式とする。次を仮定する。
+\begin{enumerate}
+\item 各 $X_i$ は $B$ 上分離である。
+\item $B$ 上分離な代数空間の圏で $X = \colim X_i$ が存在する。
+\item $\coprod X_i \to X$ は全射である。
+\item $U \to X$ が代数空間のエタール分離射で
+$U_i = X_i \times_X U$ ならば、$B$ 上分離な代数空間の圏で
+$U = \colim U_i$ である。
+\item $\lim X_{i, spaces, \etale}$ の対象 $(U_i \to X_i)$ で
+$U_i \to X_i$ が分離なものはすべて、ある代数空間の
+エタール分離射 $U \to X$ に対して
+$U_i = X_i \times_X U$ という形である。
+\end{enumerate}
+このとき、$B$ 上の全代数空間の圏で $X = \colim X_i$ である。
+\end{lemma}
+
+\begin{proof}
+読者には、代わりに Lemma \ref{spaces-pushouts-lemma-colimit-check-etale-locally}
+とその証明を参照することを勧める。
+
+\medskip\noindent
+$Z$ を $B$ 上の代数空間とする。各 $i \to j$ に対して合成
+$X_i \to X_j \to Z$ が $f_i$ に等しいような射の族
+$f_i : X_i \to Z$ があるとする。$f_i$ が合成
+$X_i \to X \to Z$ として回収されるような $B$ 上の代数空間の射
+$f : X \to Z$ を構成しなければならない。
+$W \to Z$ を、スキームから $Z$ への全射エタール射とする。
+$W$ はアフィンスキームの非交和であるとしてよく、とくに
+$W \to Z$ は分離で、$W$ は $B$ 上分離であるとしてよい。
+各 $i$ に対して $U_i = W \times_{Z, f_i} X_i$ とおき、
+射影を $h_i : U_i \to W$ と記す。このとき $U_i \to X_i$ は、
+$U_i \to X_i$ が分離である $\lim X_{i, spaces, \etale}$ の対象をなす。
+仮定 (5) により、代数空間のエタール分離射 $U \to X$ と
+（関手的な）同型 $U_i = X_i \times_X U$ をとれる。
+仮定 (4) により、合成 $U_i \to U \to W$ が $h_i$ となる
+$B$ 上の射 $h : U \to W$ が存在する。
+$g : U \to Z$ を $h$ と写像 $W \to Z$ の合成とする。
+証明を終えるには、$g : U \to Z$ が射 $X \to Z$ に
+降下することを示せばよい。そのため、射
+$(h, h) : U \times_X U \to W \times_S W$.
+$U_i \times_{X_i} U_i \to U \times_X U$ と合成すると、
+$W \times_Z W$ を経由する $(h_i, h_i)$ を得る。
+仮定 (4) により $U \times_X U$ は $B$ 上分離な代数空間の圏で
+代数空間 $U_i \times_{X_i} U_i$ の余極限だから、
+$(h, h)$ は $W \times_Z W$ を経由する。したがって二つの合成
+$U \times_X U \to U \to W \to Z$ は等しい。
+各 $U_i \to X_i$ は全射であり、さらに仮定 (2) により
+$U \to X$ は全射である。$Z$ はエタール位相に関する層なので、
+$g : U \to Z$ は望むとおり $f : X \to Z$ に降下する。
+\end{proof}
+
+
+
+
+
+\section{エタール層の降下}
+\label{spaces-pushouts-section-glueing-etale}
+
+\noindent
+本節は、\'Etale Cohomology, Section
+\ref{etale-cohomology-section-glueing-etale} の代数空間版である。
+
+\medskip\noindent
+結果を簡潔に述べるため、いくつか記法を導入する。
+$S$ をスキームとする。
+$\mathcal{U} = \{f_i : X_i \to X\}$ を、
+終域を固定した $S$ 上の代数空間の射の族とする。
+$\mathcal{U}$ に関するエタール層の {\it 降下データ}とは、
+次を満たす族
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$ である。
+\begin{enumerate}
+\item $\mathcal{F}_i$ は $\Sh(X_{i, \etale})$ の対象である。
+\item $\varphi_{ij} :
+\text{pr}_{0, small}^{-1} \mathcal{F}_i
+\longrightarrow
+\text{pr}_{1, small}^{-1} \mathcal{F}_j$
+は $\Sh((X_i \times_X X_j)_\etale)$ における同型である。
+\end{enumerate}
+さらに {\it コサイクル条件}、すなわち図式
+$$
+\xymatrix{
+\text{pr}_{0, small}^{-1}\mathcal{F}_i
+\ar[dr]_{\text{pr}_{02, small}^{-1}\varphi_{ik}}
+\ar[rr]^{\text{pr}_{01, small}^{-1}\varphi_{ij}} & &
+\text{pr}_{1, small}^{-1}\mathcal{F}_j
+\ar[dl]^{\text{pr}_{12, small}^{-1}\varphi_{jk}} \\
+& \text{pr}_{2, small}^{-1}\mathcal{F}_k
+}
+$$
+が $\Sh((X_i \times_X X_j \times_X X_k)_\etale)$ で可換であることを
+要求する。{\it 降下データの射}の概念は明らかであり、
+降下データの圏を得る。降下データ
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$
+が {\it 有効}であるとは、$\Sh(X_\etale)$ の対象
+$\mathcal{F}$ と同型
+$\varphi_i : f_{i, small}^{-1} \mathcal{F} \to \mathcal{F}_i$
+で $\Sh(X_{i, \etale})$ に属し、$\varphi_{ij}$ と両立するもの、
+すなわち
+$$
+\varphi_{ij} =
+\text{pr}_{1, small}^{-1} (\varphi_j) \circ
+\text{pr}_{0, small}^{-1} (\varphi_i^{-1})
+$$
+を満たすものが存在することをいう。
+これは次のようにも述べられる。$\Sh(X_\etale)$ の対象
+$\mathcal{F}$ が与えられると、{\it 標準降下データ}
+$(f_{i, small}^{-1}\mathcal{F}_i, c_{ij})$ を得る。
+ここで $c_{ij}$ は標準同型
+$$
+c_{ij} : \text{pr}_{0, small}^{-1} f_{i, small}^{-1}\mathcal{F}
+\longrightarrow
+\text{pr}_{1, small}^{-1} f_{j, small}^{-1}\mathcal{F}
+$$
+である。降下データ
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$
+が有効であるための必要十分条件は、それが
+$\Sh(X_\etale)$ のある $\mathcal{F}$ に付随する
+標準降下データと同型であることである。
+
+\medskip\noindent
+族が一つの射 $\{X \to Y\}$ だけからなるとき、降下データを
+対 $(\mathcal{F}, \varphi)$ とみなす。ここで $\mathcal{F}$ は
+$\Sh(X_\etale)$ の対象であり、$\varphi$ は
+$$
+\text{pr}_{0, small}^{-1} \mathcal{F}
+\longrightarrow
+\text{pr}_{1, small}^{-1} \mathcal{F}
+$$
+という $\Sh((X \times_Y X)_\etale)$ における同型であって、
+コサイクル条件、すなわち
+$$
+\xymatrix{
+\text{pr}_{0, small}^{-1}\mathcal{F}
+\ar[dr]_{\text{pr}_{02, small}^{-1}\varphi}
+\ar[rr]^{\text{pr}_{01, small}^{-1}\varphi} & &
+\text{pr}_{1, small}^{-1}\mathcal{F}
+\ar[dl]^{\text{pr}_{12, small}^{-1}\varphi} \\
+& \text{pr}_{2, small}^{-1}\mathcal{F}
+}
+$$
+が $\Sh((X \times_Y X \times_Y X)_\etale)$ で可換であることを満たす。
+降下データの射および有効性の概念も先ほどとまったく同様である。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glue-etale-sheaf-etale}
+$S$ をスキームとする。$\{f_i : X_i \to X\}$ を
+代数空間のエタール被覆とする。関手
+$$
+\Sh(X_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{f_i : X_i \to X\}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site} では、
+$X$ 上エタールな代数空間を対象とし、エタール被覆をもつサイト
+$X_{spaces, \etale}$ を定義した。さらに、代数空間の射、
+すなわち順像と逆像に両立する同一視
+$\Sh(X_\etale) = \Sh(X_{spaces, \etale})$ がある。
+したがって補題の主張は、Sites, Section
+\ref{sites-section-glueing-sheaves} のはるかに一般的な議論から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-reduce-to-scheme-base}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とし、
+$\{Y_i \to Y\}_{i \in I}$ を代数空間のエタール被覆とする。
+各 $i \in I$ について関手
+$$
+\Sh(Y_{i, \etale})
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}
+\{X \times_Y Y_i \to Y_i\}
+$$
+が圏同値であり、各 $i, j \in I$ について関手
+$$
+\Sh((Y_i \times_Y Y_j)_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}
+\{X \times_Y Y_i \times_Y Y_j \to Y_i \times_Y Y_j\}
+$$
+も圏同値ならば、関手
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{X \to Y\}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-pushouts-lemma-glue-etale-sheaf-etale} と定義から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-representable-case}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は（スキームで）表現可能で、$f$ は次のいずれかの性質をもつと仮定する：
+全射かつ整、全射かつ固有、または
+全射かつ平坦かつ局所有限表示。このとき
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{X \to Y\}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+補題の主張に現れる代数空間の射の各性質は任意の基底変換で保たれる。
+Spaces, Section \ref{spaces-section-lists} の一覧を参照せよ。
+したがって Lemma \ref{spaces-pushouts-lemma-reduce-to-scheme-base} を適用し、
+$Y$ 上エタール局所的に議論できる。これにより $Y$ が
+スキームである場合に帰着する。細部の一部は省略する。
+この場合 $X$ もスキームであり、結果は \'Etale Cohomology, Lemmas
+\ref{etale-cohomology-lemma-glue-etale-sheaf-integral-surjective},
+\ref{etale-cohomology-lemma-glue-etale-sheaf-proper-surjective}、または
+\ref{etale-cohomology-lemma-glue-etale-sheaf-fppf-cover} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-reduce-to-scheme-source}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射、
+$\pi : X' \to X$ を代数空間の射とする。次を仮定する。
+\begin{enumerate}
+\item $f \circ \pi$ は（スキームで）表現可能である。
+\item $f \circ \pi$ は次のいずれかの性質をもつ：
+全射かつ整、全射かつ固有、または
+全射かつ平坦かつ局所有限表示。
+\end{enumerate}
+このとき
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{X \to Y\}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-pushouts-lemma-representable-case} および Stacks, Lemma
+\ref{stacks-lemma-compare-descent-condition} から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glue-etale-sheaf-proper-surjective}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射で、
+次のいずれかの性質をもつものとする：全射かつ整、全射かつ固有、
+または全射かつ平坦かつ局所有限表示。このとき関手
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{X \to Y\}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+固有全射の基底変換は固有かつ全射であることに注意する。
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-proper} および
+\ref{spaces-morphisms-lemma-base-change-surjective} を参照せよ。
+したがって Lemma \ref{spaces-pushouts-lemma-reduce-to-scheme-base} により、
+$Y$ 上エタール局所的に議論してよい。ゆえに $Y$ が
+アフィンスキームである場合に帰着する。細部の一部は省略する。
+
+\medskip\noindent
+$Y$ はアフィンであると仮定する。Lemma
+\ref{spaces-pushouts-lemma-reduce-to-scheme-source} により、$X'$ がスキームで、
+$X' \to Y$ が全射かつ整、全射かつ固有、または
+全射かつ平坦かつ局所有限表示となるような射
+$X' \to X$ を見つければ十分である。
+
+\medskip\noindent
+$X \to Y$ が整かつ全射の場合、整射は表現可能なので
+$X = X'$ ととることができる。
+
+\medskip\noindent
+$f$ が固有かつ全射ならば、代数空間 $X$ は準コンパクトかつ分離である。
+Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-quasi-compact} および Lemma
+\ref{spaces-morphisms-lemma-separated-over-separated} を参照せよ。
+スキーム $X'$ と全射有限射 $X' \to X$ を選ぶ。
+Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-there-is-a-scheme-finite-over} を参照せよ。
+このとき $X' \to Y$ は全射かつ固有である。
+
+\medskip\noindent
+最後に、$X \to Y$ が全射かつ平坦かつ局所有限表示ならば、
+アフィンエタール被覆 $\{U_i \to X\}$ をとり、
+$X'$ を非交和 $\coprod U_i$ に等しいものとおける。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glue-etale-sheaf-fppf}
+$S$ をスキームとする。
+$\{f_i : X_i \to X\}$ を $S$ 上の代数空間の fppf 被覆とする。
+関手
+$$
+\Sh(X_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{f_i : X_i \to X\}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+射 $f : \coprod X_i \to X$ に Lemma
+\ref{spaces-pushouts-lemma-glue-etale-sheaf-proper-surjective} を適用する。
+すると形式的な議論により、$f$ に関する降下データは
+この被覆に関する降下データと同じものであることがわかる。
+Descent, Lemma \ref{descent-lemma-family-is-one} と比較せよ。
+細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glue-etale-sheaf-modification}
+$S$ をスキームとする。$f : Y' \to Y$ を $S$ 上の代数空間の
+固有射とする。$i : Z \to Y$ を閉埋め込みとし、
+$E = Z \times_Y Y'$ とおく。図式は
+$$
+\xymatrix{
+E \ar[d]_g \ar[r]_j & Y' \ar[d]^f \\
+Z \ar[r]^i & Y
+}
+$$
+$f$ が $Y \setminus Z$ 上で同型ならば、関手
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\Sh(Y'_\etale) \times_{\Sh(E_\etale)} \Sh(Z_\etale)
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+$X = Y' \coprod Z \to Y$ は固有全射であることに注意する。
+したがって圏同値
+$$
+\Sh(Y'_\etale) \times_{\Sh(E_\etale)} \Sh(Z_\etale)
+\longrightarrow
+\text{次の族に関するエタール層の降下データ：}\{X \to Y\}
+$$
+で $Y$ からの逆像関手と両立するものを構成すれば十分である。
+実際、そうすれば Lemma
+\ref{spaces-pushouts-lemma-glue-etale-sheaf-proper-surjective} を用いて結論できる。
+そこで、Categories, Example
+\ref{categories-example-2-fibre-product-categories} の記法に従い、
+$(\mathcal{G}', \mathcal{G}, \alpha)$ を
+$\Sh(Y'_\etale) \times_{\Sh(E_\etale)} \Sh(Z_\etale)$ の対象とする。
+$Y'$ 成分では $\mathcal{G}'$、$Z$ 成分では $\mathcal{G}$ をとることに
+より定義される $X$ 上の層 $\mathcal{F}$ を考えることができる。次を得る。
+$$
+X \times_Y X = Y' \times_Y Y' \amalg
+Y' \times_Y Z \amalg Z \times_Y Y' \amalg Z \times_Y Z =
+Y' \times_Y Y' \amalg E \amalg E \amalg Z
+$$
+この代数空間への $\mathcal{F}$ の二つの逆像の間の同型は、
+成分 $E$, $E$, $Z$ 上では明らかである。
+証明の本質的な部分は、$Y' \times_Y Y'$ 上でコサイクル条件を満たす同型
+$\text{pr}_{0, small}^{-1}\mathcal{G}' \to
+\text{pr}_{1, small}^{-1}\mathcal{G}'$
+を見つけることである。しかし、$Y' \to Y$ が
+$Y \setminus Z$ 上で同型であるという仮定により、
+$$
+h : Y \coprod E \times_Z E \longrightarrow Y' \times_Y Y'
+$$
+は全射固有射である（実際、二つの閉埋め込みの非交和なので有限射である）。
+したがって、$h_{small}$ による
+$\text{pr}_{0, small}^{-1}\mathcal{G}'$ と
+$\text{pr}_{1, small}^{-1}\mathcal{G}'$ の逆像の間に、
+あるコサイクル条件を満たす同型を構成すれば十分である。
+対角成分については、その方法は明らかである。
+$E \times_Z E$ への逆像については、両方の層が射
+$E \times_Z E \to Z$ による $\mathcal{G}$ の逆像へ
+さらに引き戻されることを用いる。細部は省略する。
+\end{proof}
+
+
+
+
+
+
+\section{代数空間のエタール射の降下}
+\label{spaces-pushouts-section-descending-etale}
+
+\noindent
+本節では、Section \ref{spaces-pushouts-section-glueing-etale} で得た
+エタール層の貼り合わせに関する結果と代数空間の柔軟性を組み合わせ、
+代数空間のエタール射に関するいくつかの降下命題を得る。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-descend-etale-proper-surjective}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+固有全射とする。$f$ に関する任意の降下データ $(U/X, \varphi)$
+（Descent on Spaces, Definition
+\ref{spaces-descent-definition-descent-datum}）で、
+$U$ が $X$ 上エタールなものは有効である
+（Descent on Spaces, Definition
+\ref{spaces-descent-definition-effective}）。
+より正確には、代数空間のエタール射 $V \to Y$ で、
+それに対応する標準降下データが $(U/X, \varphi)$ と
+同型になるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$U$ から
+$\Sh(X_{spaces, \etale}) = \Sh(X_\etale)$ における表現可能層
+$\mathcal{F} = h_U$ が生じることを思い出そう。
+Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site} を参照せよ。
+$f$ に関する $U$ 上の降下データは、ちょうど
+$\{X \to Y\}$ に関するエタール層の降下データ
+$(\mathcal{F}, \varphi)$ を与える。
+Lemma \ref{spaces-pushouts-lemma-glue-etale-sheaf-proper-surjective} により、
+この降下データは有効である。$\mathcal{G}$ を対応する
+$Y_\etale$ 上の層とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-sheaf-gives-space} により、
+$\mathcal{G}$ に対応する代数空間のエタール射 $V \to Y$ を得る。
+集合論的条件の検証は省略する\footnote{$\mathcal{F}$ が
+対応する条件を満たすことから従う。}。
+与えられた同型 $\mathcal{F} \to f_{small}^{-1}\mathcal{G}$ は、
+降下データと両立する同型 $U \to V \times_Y X$ に対応する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glue-etale-space-modification}
+$S$ をスキームとする。$f : Y' \to Y$ を $S$ 上の代数空間の
+固有射とする。$i : Z \to Y$ を閉埋め込みとし、
+$E = Z \times_Y Y'$ とおく。図式は
+$$
+\xymatrix{
+E \ar[d]_g \ar[r]_j & Y' \ar[d]^f \\
+Z \ar[r]^i & Y
+}
+$$
+$f$ が $Y \setminus Z$ 上で同型ならば、関手
+$$
+Y_{spaces, \etale}
+\longrightarrow
+Y'_{spaces, \etale} \times_{E_{spaces, \etale}} Z_{spaces, \etale}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+$(V' \to Y', W \to Z, \alpha)$ を右辺の対象とする。
+$V'$ および $W$ からそれぞれ表現可能層
+$\mathcal{G}' = h_{V'}$ と $\mathcal{G} = h_W$ が生じ、それらは
+それぞれ
+$\Sh(Y'_{spaces, \etale}) = \Sh(Y'_\etale)$ と
+$\Sh(Z_{spaces, \etale}) = \Sh(Z_\etale)$ に属することを思い出そう。
+Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site} を参照せよ。
+同型 $\alpha : V' \times_{Y'} E \to W \times_Z E$ は、
+$E$ 上の層の同型
+$j_{small}^{-1}\mathcal{G}' \to g_{small}^{-1}\mathcal{G}$ を定める。
+Lemma \ref{spaces-pushouts-lemma-glue-etale-sheaf-modification} により、
+この同型と両立して $\mathcal{G}'$ および $\mathcal{G}$ に
+引き戻される $Y$ 上の一意な層 $\mathcal{F}$ を得る。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-sheaf-gives-space} により、
+$\mathcal{F}$ に対応する代数空間のエタール射 $V \to Y$ を得る。
+集合論的条件の検証は省略する\footnote{$\mathcal{G}$ と
+$\mathcal{G}'$ が対応する条件を満たすことから従う。}。
+与えられた同型 $\mathcal{G}' \to f_{small}^{-1}\mathcal{F}$
+および $\mathcal{G} \to i_{small}^{-1}\mathcal{F}$ は、
+望むとおり $\alpha$ と両立する同型
+$V' \to V \times_Y Y'$ および $W \to V \times_Y Z$ に対応する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{肥厚とアフィン射に沿う押し出し}
+\label{spaces-pushouts-section-pushouts}
+
+\noindent
+本節は More on Morphisms, Section
+\ref{more-morphisms-section-pushouts} の類似である。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-pushout-along-thickening-schemes}
+$S$ をスキームとする。$X \to X'$ を $S$ 上のスキームの肥厚、
+$X \to Y$ を $S$ 上のスキームのアフィン射とする。
+$Y' = Y \amalg_X X'$ をスキームの圏における押し出しとする
+（More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} 参照）。
+このとき $Y'$ は $S$ 上の代数空間の圏においても押し出しである。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{spaces-pushouts-lemma-colimit-agrees} および More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-pushout-along-thickening},
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout}、および
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}
+から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-pushout-along-thickening}
+$S$ をスキームとする。$X \to X'$ を $S$ 上の代数空間の肥厚、
+$X \to Y$ を $S$ 上の代数空間のアフィン射とする。
+このとき $S$ 上の代数空間の圏に押し出し
+$$
+\xymatrix{
+X \ar[r] \ar[d]_f
+&
+X' \ar[d]^{f'}
+\\
+Y \ar[r]
+&
+Y \amalg_X X'
+}
+$$
+が存在する。さらに $Y' = Y \amalg_X X'$ は $Y$ の肥厚であり、
+$$
+\mathcal{O}_{Y'} = \mathcal{O}_Y \times_{f_*\mathcal{O}_X} f'_*\mathcal{O}_{X'}
+$$
+が $Y_\etale = (Y')_\etale$ 上の層として成り立つ。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射エタール射 $V \to Y$ を選ぶ。
+$U = V \times_Y X$ とおく。これは $V$ 上アフィンなスキームで、
+全射エタール射 $U \to X$ をもつ。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thickening-equivalence} により、
+$U = U' \times_{X'} X$ となる全射エタール射
+$U' \to X'$ が存在する。とくにスキームの射
+$U \to U'$ も肥厚である。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を適用し、
+スキームの圏における押し出し $V' = V \amalg_U U'$ を得る。
+
+\medskip\noindent
+この手続きを繰り返し、スキームの圏における押し出し
+$$
+\xymatrix{
+U \times_X U \ar[d] \ar[r] & U' \times_{X'} U' \ar[d] \\
+V \times_Y V \ar[r] & R'
+}
+$$
+を構成する。射
+$$
+U \times_X U \to U \to V',\quad
+U' \times_{X'} U' \to U' \to V',\quad
+V \times_Y V \to V \to V'
+$$
+を考える。いずれの場合も第1射影を用いる。
+これらは明らかに貼り合わさって射 $t' : R' \to V'$ を与え、
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}
+によりこれはエタールである。同様にエタール射
+$s' : R' \to V'$ を得る。
+射 $j' = (t', s') : R' \to V' \times_S V'$ は
+（$t'$ がエタールなので）非分岐であり、閉部分スキーム
+$V \times_Y V \subset R'$ への制限はモノ射である。
+$V \times_Y V \subset R'$ は肥厚だから、$j'$ 自身もモノ射である。
+最後に、スキームの押し出しの関手性を用いて射
+$c' : R' \times_{s', V', t'} R' \to R'$ を構成できるので、
+$j'$ は同値関係である（細部は省略する）。
+ここで $Y' = V'/R'$ とおく。Spaces, Theorem
+\ref{spaces-theorem-presentation} を参照せよ。
+
+\medskip\noindent
+射 $X' = U'/U' \times_{X'} U' \to V'/R' = Y'$ および
+$Y = V/V \times_Y V \to V'/R' = Y'$ がある。
+構成により、これらは可換図式
+$$
+\xymatrix{
+X \ar[r] \ar[d]_f & X' \ar[d]^{f'} \\
+Y \ar[r] & Y'
+}
+$$
+に組み込まれる。$Y \to Y'$ は肥厚なので
+$Y_\etale = (Y')_\etale$ である。More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thickening-equivalence} を参照せよ。
+図式の可換性から、このサイト上の層の写像
+$$
+\mathcal{O}_{Y'}
+\longrightarrow
+\mathcal{O}_Y \times_{f_*\mathcal{O}_X} f'_*\mathcal{O}_{X'}
+$$
+を得る。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} により、
+この写像はスキーム $V'$ へ制限すると同型であるから、
+それ自身も同型である。
+
+\medskip\noindent
+証明を終えるため、上の図式が代数空間の圏における押し出しであることを
+示す。$Z$ を代数空間とし、$a' : X' \to Z$ および
+$b : Y \to Z$ を代数空間の射とする。
+Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening-schemes} により、
+次の可換図式に組み込まれる一意な射 $h : V' \to Z$ を得る。
+$$
+\vcenter{
+\xymatrix{
+U' \ar[d] \ar[r] & V' \ar[d]^h \\
+X' \ar[r]^{a'} & Z
+}
+}
+\quad\text{および}\quad
+\vcenter{
+\xymatrix{
+V \ar[r] \ar[d] & V' \ar[d]^h \\
+Y \ar[r]^b & Z
+}
+}
+$$
+一意性から $h \circ t' = h \circ s'$ が従う。
+したがって $h$ は $V' \to Y' \to Z$ と一意に分解し、結論を得る。
+\end{proof}
+
+\noindent
+次の補題では、Categories, Example
+\ref{categories-example-2-fibre-product-categories} で定義された
+圏のファイバー積を用いる。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-categories-spaces-over-pushout}
+$S$ を基礎スキームとする。$X \to X'$ を $S$ 上の代数空間の肥厚、
+$X \to Y$ を $S$ 上の代数空間のアフィン射とする。
+$Y' = Y \amalg_X X'$ を押し出しとする
+（Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening} 参照）。
+基底変換により関手
+$$
+F :
+(\textit{Spaces}/Y')
+\longrightarrow
+(\textit{Spaces}/Y) \times_{(\textit{Spaces}/Y')} (\textit{Spaces}/X')
+$$
+を得る。これは
+$V' \longmapsto (V' \times_{Y'} Y, V' \times_{Y'} X', 1)$
+で与えられ、$(\Sch/Y')$ を
+$(\Sch/Y) \times_{(\Sch/Y')} (\Sch/X')$ の中へ送る。
+関手 $F$ は左随伴
+$$
+G :
+(\textit{Spaces}/Y) \times_{(\textit{Spaces}/Y')} (\textit{Spaces}/X')
+\longrightarrow
+(\textit{Spaces}/Y')
+$$
+をもち、これは三つ組 $(V, U', \varphi)$ を
+$S$ 上の代数空間の圏における押し出し
+$V \amalg_{(V \times_Y X)} U'$ へ送る。
+関手 $G$ は $(\Sch/Y) \times_{(\Sch/Y')} (\Sch/X')$ を
+$(\Sch/Y')$ の中へ送る。
+\end{lemma}
+
+\begin{proof}
+証明は完全に形式的である。
+射 $X \to X'$ と $X \to Y$ は表現可能なので、
+$F$ が $(\Sch/Y')$ を
+$(\Sch/Y) \times_{(\Sch/Y')} (\Sch/X')$ の中へ送ることは明らかである。
+
+\medskip\noindent
+$G$ を構成しよう。$(V, U', \varphi)$ をファイバー積圏の対象とし、
+$U = U' \times_{X'} X$ とおく。$U \to U'$ は肥厚である。
+$\varphi : V \times_Y X \to U' \times_{X'} X = U$ は同型なので、
+$X \to Y$ 上の射 $U \to V$ で $U$ をファイバー積
+$X \times_Y V$ と同一視するものが得られる。とくに
+$U \to V$ はアフィンである。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-affine} を参照せよ。
+したがって Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening} を適用し、
+押し出し $V' = V \amalg_U U'$ を得る。
+$V'$ が押し出しであること、および $Y'$ への射として $U$ 上で
+一致する射 $V \to Y$ と $U' \to X'$ が与えられていることから得られる
+射を $V' \to Y'$ と記す。
+$G(V, U', \varphi) = V'$ とおけば関手 $G$ を得る。
+
+\medskip\noindent
+$(V, U', \varphi)$ が
+$(\Sch/Y) \times_{(\Sch/Y')} (\Sch/X')$ の対象ならば、
+$U = U' \times_{X'} X$ もスキームであり、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} により
+スキームの圏で押し出し $V' = V \amalg_U U'$ を作れる。
+Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening-schemes} により、
+これはスキームの圏においても押し出しである。したがって $G$ は
+$(\Sch/Y) \times_{(\Sch/Y')} (\Sch/X')$ を $(\Sch/Y')$ の中へ送る。
+
+\medskip\noindent
+$G$ が $F$ の左随伴であることを証明しよう。
+$Z$ を $Y'$ 上の代数空間とする。次を示さなければならない。
+$$
+\Mor(V', Z) = \Mor((V, U', \varphi), F(Z))
+$$
+ここで射集合はそれぞれの圏でとる。
+$g' : V' \to Z$ を射とする。$g'$ と射 $V \to V'$、
+それぞれ $U' \to V'$ との合成を
+$\tilde g$、それぞれ $\tilde f'$ と記す。
+$\tilde g$、それぞれ $\tilde f'$ を
+$Y \to Y'$、それぞれ $X' \to Y'$ で基底変換し、射
+$g : V \to Z \times_{Y'} Y$、
+それぞれ $f' : U' \to Z \times_{Y'} X'$ を得る。
+このとき $(g, f')$ は上の等式の右辺の元である（細部は省略する）。
+逆に、$(g, f') : (V, U', \varphi) \to F(Z)$ を右辺の元とする。
+$g$、それぞれ $f$ と
+$Z \times_{Y'} X' \to Z$、それぞれ
+$Z \times_{Y'} Y \to Z$ との合成
+$\tilde g : V \to Z$、それぞれ
+$\tilde f' : U' \to Z$ を考えることができる。
+このとき $\tilde g$ と $\tilde f'$ は $U$ から $Z$ への射として一致する。
+押し出しの普遍性により射 $g' : V' \to Z$、すなわち左辺の元を得る。
+これらの構成が互いに逆であることの検証は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-diagram}
+$S$ をスキームとする。代数空間の可換図式
+$$
+\xymatrix{
+A \ar[r] \ar[d] & C \ar[d] \ar[r] & E \ar[d] \\
+B \ar[r] & D \ar[r] & F
+}
+$$
+が $S$ 上にあるとする。$A, B, C, D$ および
+$A, B, E, F$ がカルテジアン平方をなし、
+$B \to D$ が全射エタールであると仮定する。
+このとき $C, D, E, F$ はカルテジアン平方をなす。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-equivalence-categories-spaces-over-pushout}
+Lemma \ref{spaces-pushouts-lemma-categories-spaces-over-pushout} の状況で、
+関手 $F \circ G$ は恒等関手と同型である。
+\end{lemma}
+
+\begin{proof}
+$F \circ G$ が恒等関手と同型であることを、
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout}
+の対応する主張に帰着して証明する。
+
+\medskip\noindent
+スキーム $Y_1$ と全射エタール射 $Y_1 \to Y$ を選ぶ。
+$X_1 = Y_1 \times_Y X$ とおく。これは $Y_1$ 上アフィンなスキームで、
+全射エタール射 $X_1 \to X$ をもつ。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thickening-equivalence} により、
+$X_1 = X_1' \times_{X'} X$ となる全射エタール射
+$X'_1 \to X'$ が存在する。とくにスキームの射
+$X_1 \to X_1'$ も肥厚である。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を適用し、
+スキームの圏における押し出し
+$Y_1' = Y_1 \amalg_{X_1} X_1'$ を得る。
+Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening} の証明では、
+$Y'$ を $Y_1'$ 上のエタール同値関係による商として構成し、
+可換図式
+\begin{equation}
+\label{spaces-pushouts-equation-cube}
+\vcenter{
+\xymatrix{
+& X \ar[rr] \ar'[d][dd] & & X' \ar[dd] \\
+X_1 \ar[rr] \ar[dd] \ar[ru] & & X_1' \ar[dd] \ar[ru] & \\
+& Y \ar'[r][rr] & & Y' \\
+Y_1 \ar[rr] \ar[ru] & & Y_1' \ar[ru]
+}
+}
+\end{equation}
+を得た。ここで前面と背面以外のすべての平方はカルテジアンであり
+（前面と背面は押し出し）、北東向きの射は全射エタールである。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout}
+で前面の平方に対して構成された関手を $F_1$, $G_1$ と記す。
+このとき圏の図式
+$$
+\xymatrix{
+(\Sch/Y_1') \ar@<-1ex>[r]_-{F_1} \ar[d] &
+(\Sch/Y_1) \times_{(\Sch/Y_1')} (\Sch/X_1') \ar[d] \ar@<-1ex>[l]_-{G_1} \\
+(\textit{Spaces}/Y') \ar@<-1ex>[r]_-F &
+(\textit{Spaces}/Y) \times_{(\textit{Spaces}/Y')} (\textit{Spaces}/X')
+\ar@<-1ex>[l]_-G
+}
+$$
+は可換である。これは基底変換関手に関する簡単な考察と、
+Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening-schemes} による
+スキームでの押し出しと空間での押し出しとの一致から従う。
+
+\medskip\noindent
+$(V, U', \varphi)$ を
+$(\textit{Spaces}/Y) \times_{(\textit{Spaces}/Y')} (\textit{Spaces}/X')$
+の対象とする。$G(V, U', \varphi) = V \amalg_U U'$ となるように
+$U = U' \times_{X'} X$ と記す。スキーム $V_1$ と
+全射エタール射 $V_1 \to Y_1 \times_Y V$ を選び、
+$U_1 = V_1 \times_Y X$ とおく。このとき
+$$
+U_1 = V_1 \times_Y X
+\longrightarrow
+(Y_1 \times_Y V) \times_Y X =
+X_1 \times_Y V = X_1 \times_X X \times_Y V = X_1 \times_X U
+$$
+も全射エタールである。More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thickening-equivalence}
+により、肥厚 $U_1 \to U_1'$ と全射エタール射
+$U_1' \to X_1' \times_{X'} U'$ で、その $X_1 \times_X U$ への
+基底変換が表示した射になるものが存在する。このとき
+$(V_1, U'_1, \varphi_1)$ は
+$(\Sch/Y_1) \times_{(\Sch/Y_1')} (\Sch/X_1')$ の対象である。
+Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening} の証明では、
+$G(V, U', \varphi) = V \amalg_U U'$ を
+$G_1(V_1, U_1', \varphi_1) = V_1 \amalg_{U_1} U_1'$ 上の
+エタール同値関係による商として構成し、可換図式
+\begin{equation}
+\label{spaces-pushouts-equation-cube-over}
+\vcenter{
+\xymatrix{
+& U \ar[rr] \ar'[d][dd] & & U' \ar[dd] \\
+U_1 \ar[rr] \ar[dd] \ar[ru] & & U_1' \ar[dd] \ar[ru] & \\
+& V \ar'[r][rr] & & G(V, U', \varphi) \\
+V_1 \ar[rr] \ar[ru] & & G_1(V_1, U_1', \varphi_1) \ar[ru]
+}
+}
+\end{equation}
+を得た。ここで前面と背面以外のすべての平方はカルテジアンであり
+（前面と背面は押し出し）、北東向きの射は全射エタールである。
+とくに
+$$
+G_1(V_1, U_1', \varphi_1) \to G(V, U', \varphi)
+$$
+は全射エタールである。
+
+\medskip\noindent
+最後に補題の証明に入る。随伴射
+$(V, U', \varphi) \to F(G(V, U', \varphi))$ が同型であることを
+示さなければならない。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout}
+により
+$(V_1, U_1', \varphi_1) \to F_1(G_1(V_1, U_1', \varphi_1))$
+は同型である。$F$ と $F_1$ が基底変換で与えられることを思い出そう。
+(\ref{spaces-pushouts-equation-cube-over}) の性質と Lemma \ref{spaces-pushouts-lemma-diagram} を用いると、
+$V \to G(V, U', \varphi) \times_{Y'} Y$ および
+$U' \to G(V, U', \varphi) \times_{Y'} X'$ が同型であることがわかる。
+すなわち $(V, U', \varphi) \to F(G(V, U', \varphi))$ は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-space-over-pushout-flat-modules}
+$S$ を基礎スキームとする。
+$X \to X'$ を $S$ 上の代数空間の肥厚、
+$X \to Y$ を $S$ 上の代数空間のアフィン射とする。
+$Y' = Y \amalg_X X'$ を押し出しとする
+（Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening} 参照）。
+$V' \to Y'$ を $S$ 上の代数空間の射とし、
+$V = Y \times_{Y'} V'$, $U' = X' \times_{Y'} V'$, および
+$U = X \times_{Y'} V'$ とおく。次の二つの圏の間に同値がある。
+\begin{enumerate}
+\item $Y'$ 上平坦な準連接 $\mathcal{O}_{V'}$-加群の圏。
+\item 次を満たす三つ組 $(\mathcal{G}, \mathcal{F}', \varphi)$ の圏。
+\begin{enumerate}
+\item $\mathcal{G}$ は $Y$ 上平坦な準連接
+$\mathcal{O}_V$-加群である。
+\item $\mathcal{F}'$ は $X$ 上平坦な準連接
+$\mathcal{O}_{U'}$-加群である。
+\item $\varphi : (U \to V)^*\mathcal{G} \to (U \to U')^*\mathcal{F}'$
+は $\mathcal{O}_U$-加群の同型である。
+\end{enumerate}
+\end{enumerate}
+この同値は $\mathcal{G}'$ を
+$((V \to V')^*\mathcal{G}', (U' \to V')^*\mathcal{G}', can)$
+へ送る。$\mathcal{G}'$ が三つ組
+$(\mathcal{G}, \mathcal{F}', \varphi)$ に対応するとする。このとき
+\begin{enumerate}
+\item[(a)] $\mathcal{G}'$ が有限型 $\mathcal{O}_{V'}$-加群であるための
+必要十分条件は、$\mathcal{G}$ と $\mathcal{F}'$ がそれぞれ
+有限型 $\mathcal{O}_Y$-加群と
+$\mathcal{O}_{U'}$-加群であることである。
+\item[(b)] $V' \to Y'$ が局所有限表示ならば、
+$\mathcal{G}'$ が有限表示 $\mathcal{O}_{V'}$-加群であるための
+必要十分条件は、$\mathcal{G}$ と $\mathcal{F}'$ がそれぞれ
+有限表示 $\mathcal{O}_Y$-加群と
+$\mathcal{O}_{U'}$-加群であることである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+準逆関手は三つ組 $(\mathcal{G}, \mathcal{F}', \varphi)$ に
+ファイバー積
+$$
+(V \to V')_*\mathcal{G}
+\times_{(U \to V')_*\mathcal{F}}
+(U' \to V')_*\mathcal{F}'
+$$
+を対応させる。ここで
+$\mathcal{F} = (U \to U')^*\mathcal{F}'$ である。
+これが機能するのは、$V'$ と $Y'$ 上エタールなアフィン上で
+More on Algebra, Lemma
+\ref{more-algebra-lemma-relative-flat-module-over-fibre-product}
+の同値が回収されるからである。細部は省略する。
+
+\medskip\noindent
+部分 (a), (b) はエタール局所化
+（Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules}）により、
+$V'$ と $Y'$ がアフィンである場合に帰着する。
+この場合、結果は More on Algebra, Lemmas
+\ref{more-algebra-lemma-relative-finite-module-over-fibre-product} および
+\ref{more-algebra-lemma-relative-finitely-presented-module-over-fibre-product}
+から従う。
+\end{proof}
+
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-equivalence-categories-spaces-pushout-flat}
+Lemma \ref{spaces-pushouts-lemma-equivalence-categories-spaces-over-pushout} の状況を考える。
+ある三つ組 $(V, U', \varphi)$ に対して
+$V' = G(V, U', \varphi)$ ならば、次が成り立つ。
+\begin{enumerate}
+\item $V' \to Y'$ が局所有限型であるための必要十分条件は、
+$V \to Y$ と $U' \to X'$ が局所有限型であることである。
+\item $V' \to Y'$ が平坦であるための必要十分条件は、
+$V \to Y$ と $U' \to X'$ が平坦であることである。
+\item $V' \to Y'$ が平坦かつ局所有限表示であるための必要十分条件は、
+$V \to Y$ と $U' \to X'$ が平坦かつ局所有限表示であることである。
+\item $V' \to Y'$ が滑らかであるための必要十分条件は、
+$V \to Y$ と $U' \to X'$ が滑らかであることである。
+\item $V' \to Y'$ がエタールであるための必要十分条件は、
+$V \to Y$ と $U' \to X'$ がエタールであることである。
+\item 必要に応じてここにさらに追加する。
+\end{enumerate}
+$W'$ が $Y'$ 上平坦ならば、随伴射
+$G(F(W')) \to W'$ は同型である。したがって $F$ と $G$ は、
+$Y'$ 上平坦な空間の圏と、$V \to Y$ および
+$U' \to X'$ が平坦である三つ組 $(V, U', \varphi)$ の圏との間の、
+互いに準逆な関手を定める。
+\end{lemma}
+
+\begin{proof}
+図式 (\ref{spaces-pushouts-equation-cube}) を、Lemma
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-over-pushout} の証明と同様に選ぶ。
+
+\medskip\noindent
+部分 (1)--(5) の証明。
+$(V, U', \varphi)$ を
+$(\textit{Spaces}/Y) \times_{(\textit{Spaces}/Y')} (\textit{Spaces}/X')$
+の対象とする。図式 (\ref{spaces-pushouts-equation-cube-over}) を、Lemma
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-over-pushout}
+の証明と同様に構成する。
+$G(V, U', \varphi) \to Y'$ の $Y'_1$ への基底変換は
+$G_1(V_1, U_1', \varphi_1) \to Y_1'$ である。
+したがって (1)--(5) は、スキームに関する More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}
+の対応する主張から直ちに従う。
+
+\medskip\noindent
+$W' \to Y'$ が平坦であるとする。スキーム $W'_1$ と全射エタール射
+$W'_1 \to Y_1' \times_{Y'} W'$ を選ぶ。
+$W'_1 \to W'$ は全射エタール射の合成なので全射エタールである。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}
+を $Y'_1$ 上の $W'_1$ と図式の前面に適用すると
+（関手 $G_1$, $F_1$ は Lemma
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-over-pushout} の証明と同様）、
+$G_1(F_1(W_1')) \to W_1'$ は同型である。
+次に $G(F(W'))$ の押し出しとしての構成、すなわち
+Lemma \ref{spaces-pushouts-lemma-pushout-along-thickening} における構成により、
+$G_1(F_1(W'_1)) \to G(F(W))$ は全射エタールである。
+したがって $G(F(W)) \to W$ はエタールである。
+たとえば Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-local} を参照せよ。
+しかし $G(F(W)) \to W$ は（構成により）基礎にある被約代数空間上で
+同型なので、それ自身も同型である。
+\end{proof}
+
+
+
+
+
+
+
+\section{閉埋め込みと整射に沿う押し出し}
+\label{spaces-pushouts-section-pushouts-II}
+
+\noindent
+本節は More on Morphisms, Section
+\ref{more-morphisms-section-pushouts-II} の類似である。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-pushout-along-closed-immersion-and-integral}
+More on Morphisms, Situation
+\ref{more-morphisms-situation-pushout-along-closed-immersion-and-integral}
+において、$Y \amalg_Z X$ をスキームの圏における押し出しとする
+（More on Morphisms, Proposition
+\ref{more-morphisms-proposition-pushout-along-closed-immersion-and-integral}）。
+このとき $Y \amalg_Z X$ は $S$ 上の代数空間の圏においても
+押し出しである。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{spaces-pushouts-lemma-colimit-agrees}、補題の主張で引用した命題、
+および More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-pushout-functor} および
+\ref{more-morphisms-lemma-pushout-functor-equivalence-flat} から従う。
+Lemma \ref{spaces-pushouts-lemma-colimit-agrees} の条件 (1), (2) は直ちに従う。
+(3), (4) を見るには、エタール射が局所準有限であることに注意し、
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-functor-equivalence-flat} の圏同値が
+More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-pushout-functor} の押し出し構成を用いて
+構成されることを使う。細部の一部は省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{押し出しと導来圏}
+\label{spaces-pushouts-section-pushouts-derived}
+
+\noindent
+本節では、押し出しのもとでの加群の導来圏の振る舞いを論じる。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-pushout-along-thickening-derived}
+$S$ をスキームとする。補題 \ref{spaces-pushouts-lemma-pushout-along-thickening}
+のような、$S$ 上の代数空間の圏における押し出し
+$$
+\xymatrix{
+X \ar[r]_i \ar[d]_f & X' \ar[d]^{f'}
+\\
+Y \ar[r]^j & Y'
+}
+$$
+を考える。$i$ が肥厚であると仮定する。このとき関手
+\footnote{すべての関手は導来引き戻しで与えられる。}
+$$
+D(\mathcal{O}_{Y'}) \longrightarrow
+D(\mathcal{O}_Y) \times_{D(\mathcal{O}_X)} D(\mathcal{O}_{X'})
+$$
+の本質的像は、$M \in D(\mathcal{O}_Y)$ と
+$K' \in D(\mathcal{O}_{X'})$ が擬連接であるような
+任意の三つ組 $(M, K', \alpha)$ を含む。
+\end{lemma}
+
+\begin{proof}
+$(M, K', \alpha)$ を補題の関手の終域の対象とする。
+ここで $\alpha : Lf^*M \to Li^*K'$ は同型であり、
+射 $\beta : M \to Rf_*Li^*K'$ に随伴する。
+したがって次の射を得る。
+$$
+Rj_*M \xrightarrow{Rj_*\beta}
+Rj_*Rf_*Li^*K' = Rf'_*Ri_*Li^*K' \leftarrow Rf'_*K'
+$$
+ここで左向きの矢印は $K' \to Ri_*Li^*K'$ から得られる。
+完全三角形
+$$
+M' \to Rj_*M \oplus Rf'_*K' \to Rj_*Rf_*Li^*K' \to M'[1]
+$$
+を $D(\mathcal{O}_{Y'})$ において選ぶ。最初の矢印により標準射
+$Lj^*M' \to M$ および $L(f')^*M' \to K'$ が定まり、
+これらは $\alpha$ と両立する。したがって、射
+$Lj^*M' \to M$ および $L(f')^*M' \to K$ が同型であることを
+示せば十分である。これは $Y'$ 上エタール局所的に確認できるので、
+$Y'$ がエタールであると仮定してよい。
+
+\medskip\noindent
+$Y'$ がアフィンで、$M \in D(\mathcal{O}_Y)$ と
+$K' \in D(\mathcal{O}_{X'})$ が擬連接であると仮定する。
+この押し出しが環のファイバー積
+$$
+\xymatrix{
+B & B' \ar[l] \\
+A \ar[u] & A' \ar[l] \ar[u]
+}
+$$
+に対応しているとする。ここで $B' \to B$ は局所冪零な核 $I$ をもつ全射である
+（したがって $A' \to A$ も局所冪零な核 $I$ をもつ全射である）。
+$M$ と $K'$ に関する仮定から、$M$ は $D(A)$ の擬連接対象に由来し、
+$K'$ は $D(B')$ の擬連接対象に由来する。これについては
+Derived Categories of Spaces, Lemmas
+\ref{spaces-perfect-lemma-pseudo-coherent},
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}, および
+\ref{spaces-perfect-lemma-descend-pseudo-coherent}
+ならびに
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-affine-compare-bounded} および
+\ref{perfect-lemma-pseudo-coherent-affine} を参照せよ。
+さらに、順像と導来引き戻しは加群の導来圏上の対応する演算と一致する。
+これについては
+Derived Categories of Spaces, Remark
+\ref{spaces-perfect-remark-match-total-direct-images}
+ならびに
+Derived Categories of Schemes, Lemmas
+\ref{perfect-lemma-quasi-coherence-pushforward} および
+\ref{perfect-lemma-quasi-coherence-pullback} を参照せよ。
+これにより、次の段落で述べる命題に帰着する。
+（厳密には、これらの参照から、対象 $M'$ が
+$D_\QCoh(\mathcal{O}_{Y'})$ に属することが分かる。
+実際、これは $D(\mathcal{O}_{Y'})$ の三角部分圏である。）
+
+\medskip\noindent
+上のような環の図式と三つ組 $(M, K', \alpha)$ が与えられ、
+$M \in D(A)$ と $K' \in D(B')$ は擬連接で、
+$\alpha : M \otimes_A^\mathbf{L} B \to K' \otimes_{B'}^\mathbf{L} B$
+は同型であるとする。さらに、$D(A')$ に完全三角形
+$$
+M' \to M \oplus K' \to K' \otimes_{B'}^\mathbf{L} B \to M'[1]
+$$
+があると仮定する。目標は、誘導される射
+$M' \otimes_{A'}^\mathbf{L} A \to M$ および
+$M' \otimes_{A'}^\mathbf{L} B' \to K'$ が同型であることを示すことである。
+そのために、$M$ を表す有限自由 $A$ 加群からなる
+上に有界な複体 $E^\bullet$ を選ぶ。$(B', I)$ はヘンゼル対であり
+(More on Algebra, Lemma \ref{more-algebra-lemma-locally-nilpotent-henselian})
+$B = B'/I$ なので、More on Algebra, Lemma
+\ref{more-algebra-lemma-lift-complex-finite-projectives}
+を適用すると、自由 $B'$ 加群からなる上に有界な複体 $P^\bullet$ で、
+$\alpha$ が同型
+$E^\bullet \otimes_A B \cong P^\bullet \otimes_{B'} B$
+によって表されるものが存在することが分かる。そこで、$B'$ 加群の
+複体の短完全列
+$$
+0 \to L^\bullet \to
+E^\bullet \oplus P^\bullet \to P^\bullet \otimes_{B'} B \to 0
+$$
+を考えることができる。
+More on Algebra, Lemma
+\ref{more-algebra-lemma-finitely-presented-module-over-fibre-product}
+により、$L^\bullet$ は有限射影 $A'$ 加群からなる上に有界な複体であり
+（実際、本件では $L^n$ が有限自由であることを直接示すのはかなり容易である）、
+$L^\bullet \otimes_{A'} A = E^\bullet$ および
+$L^\bullet \otimes_{A'} B' = P^\bullet$ が成り立つ。
+この短完全列から $D(A')$ における完全三角形
+$$
+L^\bullet \to M \oplus K' \to K' \otimes_{B'}^\mathbf{L} B \to (L^\bullet)[1]
+$$
+を得る（Derived Categories, Section
+\ref{derived-section-canonical-delta-functor}）。これは三角圏の一般的性質
+（Derived Categories, Section
+\ref{derived-section-elementary-results}）により、与えられた完全三角形と
+同型である。言い換えると、$L^\bullet$ は与えられた射と両立する形で
+$M'$ を表す。したがって射
+$M' \otimes_{A'}^\mathbf{L} A \to M$ および
+$M' \otimes_{A'}^\mathbf{L} B' \to K'$ は同型である。
+実際、対応する主張が $L^\bullet$ について成り立つことを上で見た。
+\end{proof}
+
+
+
+
+
+
+
+\section{基本識別平方の構成}
+\label{spaces-pushouts-section-elementary-dsitnguished-squares}
+
+\noindent
+基本識別平方は Derived Categories of Spaces, Section
+\ref{spaces-perfect-section-induction} で定義された。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-elementary-distinguished-square-pushout}
+$S$ をスキームとする。$(U \subset W, f : V \to W)$ を
+基本識別平方とする。このとき
+$$
+\xymatrix{
+U \times_W V \ar[r] \ar[d] &
+V \ar[d]^f \\
+U \ar[r] & W
+}
+$$
+は $S$ 上の代数空間の圏における押し出しである。
+\end{lemma}
+
+\begin{proof}
+$U \amalg V \to W$ は全射エタール射であることに注意する。
+ファイバー積
+$$
+(U \amalg V) \times_W (U \amalg V)
+$$
+は四つの部分、すなわち
+$U = U \times_W U$, $U \times_W V$, $V \times_W U$,
+および $V \times_W V$ の非交和である。全射エタール射
+$$
+V \amalg (U \times_W V) \times_U (U \times_W V) \longrightarrow V \times_W V
+$$
+が存在する。実際、$f$ は $W \setminus U$ 上で同型を誘導する
+（これは基本識別平方の定義の一部である）。
+$B$ を $S$ 上の代数空間とし、$g : V \to B$ と $h : U \to B$ を、
+$U \times_W V$ への制限が一致する $S$ 上の射とする。
+上で与えた $(U \amalg V) \times_W (U \amalg V)$ の記述から、
+$h \amalg g : U \amalg V \to B$ は二つの射影を等化する。
+$B$ はエタール位相に関する層なので、望むとおり
+$h \amalg g$ の $W$ を経由する一意な因子分解を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-construct-elementary-distinguished-square}
+$S$ をスキームとする。$V$, $U$ を $S$ 上の代数空間とする。
+$V' \subset V$ を開部分空間とし、$f' : V' \to U$ を
+$S$ 上の代数空間の分離エタール射とする。このとき、
+$S$ 上の代数空間の圏に押し出し
+$$
+\xymatrix{
+V' \ar[r] \ar[d] &
+V \ar[d]^f \\
+U \ar[r] & W
+}
+$$
+が存在し、さらに $(U \subset W, f : V \to W)$ は
+基本識別平方である。
+\end{lemma}
+
+\begin{proof}
+$W$ を $U \amalg V$ 上のエタール同値関係 $R$ による商として構成する。
+このような商は、たとえば Bootstrap, Theorem
+\ref{bootstrap-theorem-final-bootstrap} により代数空間である。
+さらに Lemma \ref{spaces-pushouts-lemma-elementary-distinguished-square-pushout} の証明から、
+$$
+R = U \amalg V' \amalg V' \amalg V \amalg
+(V' \times_U V' \setminus \Delta_{V'/U}(V'))
+$$
+と取ればよい。$V' \to U$ は分離であると仮定したから、
+$\Delta_{V'/U}$ の像は閉であり、したがってその補集合は開部分空間である。
+射 $j : R \to (U \amalg V) \times_S (U \amalg V)$ は
+$$
+u,\ v',\ v',\ v,\ (v'_1, v'_2) \mapsto
+(u, u),\ (f'(v'), v'),\ (v', f'(v')),\ (v, v),\ (v'_1, v'_2)
+$$
+で与えられる。ここでは明らかな記法を用いた。これがモノ射かつ
+同値関係であり、誘導射 $s, t : R \to U \amalg V$ がエタールであることは
+直ちに確認できる。$W = (U \amalg V)/R$ を商代数空間とする。
+補題の主張にあるような可換図式を得る。証明を終えるには、この図式が
+基本識別平方であることを示せば十分である。実際、その場合には
+Lemma \ref{spaces-pushouts-lemma-elementary-distinguished-square-pushout} により
+この図式は押し出しである。したがって $U \to W$ が開であり、
+$f$ がエタールで、かつ $W \setminus U$ 上の同型であることを示す必要がある。
+これは $R$ の選び方から従う。詳細は省略する。
+\end{proof}
+
+
+
+
+
+
+\section{準連接加群の形式的貼り合わせ}
+\label{spaces-pushouts-section-formal-glueing}
+
+\noindent
+本節は More on Algebra, Section
+\ref{more-algebra-section-formal-glueing} の類似である。
+スキームの射の場合、この結果は Joyet の論文 \cite{Joyet} にあり、
+これは読み始めるのに適した文献である。スタックの降下問題への応用については
+Moret-Bailly の論文 \cite{MB} を参照せよ。スキームのアフィン射の場合、
+論文 \cite{Ferrand-Raynaud} の付録にも主張があるが、閉部分スキームが
+有限生成イデアルで切り出されるという仮定（Joyet の論文にある仮定）を
+追加する必要がある。そうでなければ結果は成り立たない。
+この内容を（高次）導来圏へ一般化し、非平坦な状況への応用も見込むものは
+\cite[Section 5]{Bhatt-Algebraize} にある。
+
+\medskip\noindent
+まず、閉部分集合上に支持をもつアーベル層に関する補題から始める。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-stalk-pushforward-with-support}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+$Z \subset X$ を閉部分空間で、$f^{-1}Z \to Z$ が整かつ普遍単射であるものとする。
+$\overline{y}$ を $Y$ の幾何点、$\overline{x} = f(\overline{y})$ とする。
+$|f^{-1}Z|$ 上に支持をもつ $D(Y_\etale)$ の任意の対象 $Q$ に対して、
+$$
+(Rf_*Q)_{\overline{x}} = Q_{\overline{y}}
+$$
+が $D(\textit{Ab})$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+代数空間の可換図式
+$$
+\xymatrix{
+f^{-1}Z \ar[r]_{i'} \ar[d]_{f'} & Y \ar[d]_f \\
+Z \ar[r]^i & X
+}
+$$
+を考える。Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-complexes-with-support-on-closed} により、
+$D(f^{-1}Z_\etale)$ のある対象 $K'$ を用いて $Q = Ri'_*K'$ と書ける。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-injective-push-pull} により、
+$K = Rf'_*K'$ とおけば $K' = (f')^{-1}K$ である。
+したがって $Rf_*Q = Rf_*Ri'_*K' = Ri_*Rf'_*K' = Ri_*K$ である。
+$\overline{z}$ を $\overline{x}$ に対応する $Z$ の幾何点、
+$\overline{z}'$ を $\overline{y}$ に対応する $f^{-1}Z$ の幾何点とする。
+補題の結論は次のように得られる。
+$$
+Q_{\overline{y}} = (Ri'_*K')_{\overline{y}} = K'_{\overline{z}'} =
+(f')^{-1}K_{\overline{z}'} = K_{\overline{z}} = Ri_*K_{\overline{x}} =
+Rf_*Q_{\overline{x}}
+$$
+中央の等号は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-pullback} にある引き戻しの茎の記述から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-stalk-formal-glueing}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+$Z \subset X$ を閉部分空間で、$f^{-1}Z \to Z$ が整かつ普遍単射であるものとする。
+$\overline{y}$ を $Y$ の幾何点、$\overline{x} = f(\overline{y})$ とする。
+$\mathcal{G}$ を $Y$ 上のアーベル層とする。このとき、2項複体の写像
+$$
+\left(f_*\mathcal{G}_{\overline{x}} \to
+(f \circ j')_*(\mathcal{G}|_V)_{\overline{x}}\right)
+\longrightarrow
+\left(\mathcal{G}_{\overline{y}} \to j'_*(\mathcal{G}|_V)_{\overline{y}}\right)
+$$
+は核の間に同型を、余核の間に単射を誘導する。
+ここで $V = Y \setminus f^{-1}Z$ であり、$j' : V \to Y$ は包含射である。
+\end{lemma}
+
+\begin{proof}
+完全三角形
+$$
+\mathcal{G} \to Rj'_*\mathcal{G}|_V \to Q \to \mathcal{G}[1]
+$$
+を $D(Y_\etale)$ において選ぶ。$Q$ のコホモロジー層は
+$|f^{-1}Z|$ 上に支持をもつ。$Rf_*$ を適用すると
+$$
+Rf_*\mathcal{G} \to Rf_*Rj'_*\mathcal{G}|_V \to Rf_*Q
+\to Rf_*\mathcal{G}[1]
+$$
+を得る。$\overline{x}$ における茎を取ると完全列
+$$
+0 \to
+(R^{-1}f_*Q)_{\overline{x}} \to
+f_*\mathcal{G}_{\overline{x}} \to
+(f \circ j')_*(\mathcal{G}|_V)_{\overline{x}} \to
+(R^0f_*Q)_{\overline{x}}
+$$
+を得る。これを完全列
+$$
+0 \to
+H^{-1}(Q)_{\overline{y}} \to
+\mathcal{G}_{\overline{y}} \to
+j'_*(\mathcal{G}|_V)_{\overline{y}} \to
+H^0(Q)_{\overline{y}}
+$$
+と比較できる。Lemma \ref{spaces-pushouts-lemma-stalk-pushforward-with-support} により
+$Q_{\overline{y}} = Rf_*Q_{\overline{x}}$ なので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-stalk-of-pushforward}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$f : Y \to X$ を準コンパクトかつ準分離な射とする。
+$\overline{x}$ を $X$ の幾何点とし、
+$\Spec(\mathcal{O}_{X, \overline{x}}) \to X$
+を標準射とする。$Y$ 上の準連接加群 $\mathcal{G}$ に対して
+$$
+f_*\mathcal{G}_{\overline{x}} =
+\Gamma(Y \times_X \Spec(\mathcal{O}_{X, \overline{x}}), p^*\mathcal{F})
+$$
+が成り立つ。ここで
+$p : Y \times_X \Spec(\mathcal{O}_{X, \overline{x}}) \to Y$
+は射影である。
+\end{lemma}
+
+\begin{proof}
+$h : \Spec(\mathcal{O}_{X, \overline{x}}) \to X$ とおけば
+$f_*\mathcal{G}_{\overline{x}} =
+\Gamma(\Spec(\mathcal{O}_{X, \overline{x}}), h^*f_*\mathcal{G})$
+であることに注意する。$h$ は平坦なので Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} を適用でき、
+結論が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-stalk-of-module-with-support}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$i : Z \to X$ を有限表示の閉埋め込みとする。
+$Q \in D_\QCoh(\mathcal{O}_X)$ は $|Z|$ 上に支持をもつとする。
+$\overline{x}$ を $X$ の幾何点とし、
+$I_{\overline{x}} \subset \mathcal{O}_{X, \overline{x}}$ を
+$Z$ のイデアル層の茎とする。このときコホモロジー加群
+$H^n(Q_{\overline{x}})$ は $I_{\overline{x}}$-冪ねじれである
+（More on Algebra, Definition
+\ref{more-algebra-definition-f-power-torsion} 参照）。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $U$ とエタール射 $U \to X$ を、$\overline{x}$ が
+$U$ の幾何点 $\overline{u}$ に持ち上がるように選ぶ。このとき $X$ を $U$、
+$Z$ を $U \times_X Z$、$Q$ をその制限 $Q|_U$、$\overline{x}$ を
+$\overline{u}$ で置き換えることができる。したがって
+$X = \Spec(A)$ はアフィンであると仮定してよい。
+$I \subset A$ を $Z$ を定めるイデアルとする。
+$i : Z \to X$ は有限表示なので、イデアル
+$I = (f_1, \ldots, f_r)$ は有限生成である。
+対象 $Q$ は $A$ 加群の複体 $M^\bullet$ に由来する。これについては
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}
+および
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-affine-compare-bounded} を参照せよ。
+$Q$ のコホモロジー層は $Z$ 上に支持をもつので、各 $f \in I$ に対し
+局所化 $M^\bullet_f$ は非輪状である。$x \in H^p(M^\bullet)$ を取る。
+上のことから、各 $i$ に対して $H^p(M^\bullet)$ において
+$f_i^{n_i}x = 0$ となる $n_i$ を選べる。$n = \sum n_i$ とおけば
+$I^n$ は $x$ を零化する。したがって $H^p(M^\bullet)$ は
+$I$-冪ねじれである。環準同型
+$A \to \mathcal{O}_{X, \overline{x}}$ は平坦であり、
+$I_{\overline{x}} = I\mathcal{O}_{X, \overline{x}}$ なので結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-formal-glueing-on-closed}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+$Z \subset X$ を閉部分空間とする。$f^{-1}Z \to Z$ は同型であり、
+$f$ は $f^{-1}Z$ のすべての点で平坦であると仮定する。
+$|f^{-1}Z|$ 上に支持をもつ $D_\QCoh(\mathcal{O}_Y)$ の任意の $Q$ に対し
+$Lf^*Rf_*Q = Q$.
+\end{lemma}
+
+\begin{proof}
+標準射 $Lf^*Rf_*Q \to Q$ が同型であることを、$\overline{y}$ における
+茎で確認する。$\overline{y}$ が $f^{-1}Z$ に属さなければ両辺は零なので、
+結論は成り立つ。$\overline{y}$ の像 $\overline{x}$ が $Z$ に属すると仮定する。
+Lemma \ref{spaces-pushouts-lemma-stalk-pushforward-with-support} により
+$Rf_*Q_{\overline{x}} = Q_{\overline{y}}$ であり、$f$ は
+$\overline{y}$ において平坦なので
+$$
+(Lf^*Rf_*Q)_{\overline{y}} =
+(Rf_*Q)_{\overline{x}}
+\otimes_{\mathcal{O}_{X, \overline{x}}}
+\mathcal{O}_{Y, \overline{y}} =
+Q_{\overline{y}} \otimes_{\mathcal{O}_{X, \overline{x}}}
+\mathcal{O}_{Y, \overline{y}}
+$$
+したがって、標準射
+$$
+Q_{\overline{y}} \otimes_{\mathcal{O}_{X, \overline{x}}}
+\mathcal{O}_{Y, \overline{y}}
+\longrightarrow Q_{\overline{y}}
+$$
+が導来圏において同型であることを確認すればよい。
+$I_{\overline{x}} \subset \mathcal{O}_{X, \overline{x}}$ を
+$Z$ を定めるイデアル層の茎とする。$Z \to X$ は局所有限表示なので
+このイデアルは有限生成であり、$Y$ 上の $Q$ に
+Lemma \ref{spaces-pushouts-lemma-stalk-of-module-with-support} を適用すると、
+$Q_{\overline{y}}$ のコホモロジー群は
+$I_{\overline{y}} = I_{\overline{x}}\mathcal{O}_{Y, \overline{y}}$-冪ねじれである。
+したがって、それらは $I_{\overline{x}}$-冪ねじれでもある。環準同型
+$\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{Y, \overline{y}}$
+は平坦であり、$f^{-1}Z \to Z$ は同型であると仮定したので、
+$I_{\overline{x}}$ と $I_{\overline{y}}$ で割ると同型を誘導する。
+したがって
+$Q_{\overline{y}} \otimes_{\mathcal{O}_{X, \overline{x}}}
+\mathcal{O}_{Y, \overline{y}}$
+のコホモロジー加群は More on Algebra, Lemma
+\ref{more-algebra-lemma-neighbourhood-isomorphism} により
+$Q_{\overline{y}}$ のコホモロジー加群に等しい。これで証明が完了する。
+\end{proof}
+
+\begin{situation}
+\label{spaces-pushouts-situation-formal-glueing}
+ここで $S$ は基礎スキーム、$f : Y \to X$ は $S$ 上の代数空間の
+準コンパクトかつ準分離な射、$Z \to X$ は有限表示の閉埋め込みである。
+$f^{-1}(Z) \to Z$ は同型であり、$f$ はすべての点
+$x \in |f^{-1}Z|$ で平坦であると仮定する。
+$U = X \setminus Z$ および $V = Y \setminus f^{-1}(Z)$ とおく。図式は
+$$
+\xymatrix{
+V \ar[r]_{j'} \ar[d]_{f|_V} & Y \ar[d]^f \\
+U \ar[r]^j & X
+}
+$$
+\end{situation}
+
+\noindent
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、
+$\textit{QCoh}(Y \to X, Z)$ を次の三つ組
+$(\mathcal{H}, \mathcal{G}, \varphi)$ の圏として定義する。
+$\mathcal{H}$ は準連接 $\mathcal{O}_U$ 加群の層、
+$\mathcal{G}$ は準連接 $\mathcal{O}_Y$ 加群の層であり、
+$\varphi : f^*\mathcal{H} \to \mathcal{G}|_V$ は
+$\mathcal{O}_V$ 加群の同型である。標準関手
+\begin{equation}
+\label{spaces-pushouts-equation-formal-glueing-modules}
+\QCoh(\mathcal{O}_X) \longrightarrow \textit{QCoh}(Y \to X, Z)
+\end{equation}
+は $\mathcal{F}$ を系 $(\mathcal{F}|_U, f^*\mathcal{F}, can)$ に写す。
+アフィンの場合に与えた証明との類比により、反対向きの関手を構成する。
+対象 $(\mathcal{H}, \mathcal{G}, \varphi)$ に $\mathcal{O}_X$ 加群
+\begin{equation}
+\label{spaces-pushouts-equation-reverse}
+\Ker(j_*\mathcal{H} \oplus f_*\mathcal{G} \to (f \circ j')_*\mathcal{G}|_V)
+\end{equation}
+を対応させる。$Z \to X$ は有限表示なので、$j$ と $j'$ は
+準コンパクトな射である。したがって $f_*$, $j_*$, $(f \circ j')_*$ は
+準連接加群を準連接加群に写す（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}）。ゆえに加群
+(\ref{spaces-pushouts-equation-reverse}) は準連接である。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-adjoint}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、関手
+(\ref{spaces-pushouts-equation-reverse}) は関手
+(\ref{spaces-pushouts-equation-formal-glueing-modules}) の右随伴である。
+\end{lemma}
+
+\begin{proof}
+これは $f^*$ と $f_*$、および $j^*$ と $j_*$ の随伴性から
+容易に従う。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-reverse-commutes-with-flat-base-change}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、$X' \to X$ を
+代数空間の平坦射とする。$Z' = X' \times_X Z$ および
+$Y' = X' \times_X Y$ とおく。引き戻し
+$\QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_{X'})$ および
+$\QCoh(Y \to X, Z) \to \QCoh(Y' \to X', Z')$ は関手
+(\ref{spaces-pushouts-equation-reverse}) および
+\ref{spaces-pushouts-equation-formal-glueing-modules}) と両立する。
+\end{lemma}
+
+\begin{proof}
+これは引き戻しが引き戻しと可換であり、平坦引き戻しが
+準コンパクトかつ準分離な射に沿う順像と可換であることから従う。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} を参照せよ。
+\end{proof}
+
+\begin{proposition}
+\label{spaces-pushouts-proposition-formal-glueing-modules}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、関手
+(\ref{spaces-pushouts-equation-formal-glueing-modules}) は同値であり、その準逆は
+(\ref{spaces-pushouts-equation-reverse}) で与えられる。
+\end{proposition}
+
+\begin{proof}
+まず、$X$ と $Y$ がアフィンスキームで、射 $f$ が平坦である特別な場合を扱う。
+$X = \Spec(R)$, $Y = \Spec(S)$ とする。このとき $f$ は平坦環準同型
+$R \to S$ に対応する。さらに $Z \subset X$ は有限生成イデアル
+$I \subset R$ で切り出される。生成元 $f_1, \ldots, f_t \in I$ を選ぶ。
+加群による準連接加群の記述（Schemes, Section
+\ref{schemes-section-quasi-coherent-affine}）から、圏
+$\textit{QCoh}(Y \to X, Z)$
+は More on Algebra, Remark \ref{more-algebra-remark-glueing-data} の圏
+$\text{Glue}(R \to S, f_1, \ldots, f_t)$
+と標準的に同値であり、関手
+(\ref{spaces-pushouts-equation-formal-glueing-modules}) および (\ref{spaces-pushouts-equation-reverse}) は
+それぞれ関手 $\text{Can}$ および $H^0$ に対応する。
+したがって、この場合の結論は More on Algebra, Proposition
+\ref{more-algebra-proposition-equivalence} から従う。
+
+\medskip\noindent
+一般の場合に戻る。$\mathcal{F}$ を $X$ 上の準連接加群とする。
+まず
+$$
+\alpha :
+\mathcal{F}
+\longrightarrow
+\Ker\left(j_*\mathcal{F}|_U \oplus f_*f^*\mathcal{F} \to
+(f \circ j')_*f^*\mathcal{F}|_V\right)
+$$
+が同型であることを示す。$(\mathcal{H}, \mathcal{G}, \varphi)$ を
+$\QCoh(Y \to X, Z)$ の対象とする。さらに
+$$
+\beta :
+f^*\Ker\left(
+j_*\mathcal{H} \oplus f_*\mathcal{G} \to (f \circ j')_*\mathcal{G}|_V
+\right)
+\longrightarrow
+\mathcal{G}
+$$
+および
+$$
+\gamma :
+j^*\Ker\left(
+j_*\mathcal{H} \oplus f_*\mathcal{G} \to (f \circ j')_*\mathcal{G}|_V
+\right)
+\longrightarrow
+\mathcal{H}
+$$
+が同型であることを示す。これらの主張を示すには茎を見れば十分である。
+$\overline{y}$ を、$X$ の幾何点 $\overline{x}$ に写る $Y$ の幾何点とする。
+
+\medskip\noindent
+$\QCoh(Y \to X, Z)$ の対象 $(\mathcal{H}, \mathcal{G}, \varphi)$ を固定する。
+Lemma \ref{spaces-pushouts-lemma-stalk-formal-glueing} と図式追跡（省略する）により、標準射
+$$
+\Ker(j_*\mathcal{H} \oplus f_*\mathcal{G} \to
+(f \circ j')_*\mathcal{G}|_V)_{\overline{x}}
+\longrightarrow
+\Ker(
+j_*\mathcal{H}_{\overline{x}} \oplus \mathcal{G}_{\overline{y}}
+\to
+j'_*\mathcal{G}_{\overline{y}}
+)
+$$
+は同型である。
+
+\medskip\noindent
+とくに $\overline{y}$ が $V$ の幾何点ならば
+$j'_*\mathcal{G}_{\overline{y}} = \mathcal{G}_{\overline{y}}$ であり、
+したがってこの核は $\mathcal{H}_{\overline{x}}$ に等しい。
+これから、この場合には $\alpha_{\overline{x}}$, $\beta_{\overline{x}}$,
+$\beta_{\overline{y}}$ が同型であることが容易に従う。
+
+\medskip\noindent
+次に、$\overline{y}$ が $f^{-1}Z$ の点であると仮定する。
+$I_{\overline{x}} \subset \mathcal{O}_{X, \overline{x}}$ および
+$I_{\overline{y}} \subset \mathcal{O}_{Y, \overline{y}}$ を、それぞれ
+$Z$ および $f^{-1}Z$ を切り出すイデアルの茎とする。
+このとき $I_{\overline{x}}$ は有限生成イデアルであり、
+$I_{\overline{y}} = I_{\overline{x}}\mathcal{O}_{Y, \overline{y}}$ である。
+また $\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{Y, \overline{y}}$
+は平坦局所準同型であり、同型
+$\mathcal{O}_{X, \overline{x}}/I_{\overline{x}} =
+\mathcal{O}_{Y, \overline{y}}/I_{\overline{y}}$
+を誘導する。ここで圏の図式
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_X) \ar[r]_-{(\ref{spaces-pushouts-equation-formal-glueing-modules})} \ar[d] &
+\QCoh(Y \to X, Z) \ar[d] \ar@/_2pc/[l]^{(\ref{spaces-pushouts-equation-reverse})} \\
+\text{Mod}_{\mathcal{O}_{X, \overline{x}}} \ar[r]^-{\text{Can}} &
+\text{Glue}(\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{Y, \overline{y}},
+f_1, \ldots, f_t) \ar@/^2pc/[l]_{H^0}
+}
+$$
+を用いてブートストラップできる。すなわち、証明の第1段落と同様に
+$$
+\text{Glue}(\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{Y, \overline{y}},
+f_1, \ldots, f_t)
+=
+\QCoh(\Spec(\mathcal{O}_{Y, \overline{y}}) \to
+\Spec(\mathcal{O}_{X, \overline{x}}), V(I_{\overline{x}}))
+$$
+と同一視する。右の垂直関手は引き戻しで与えられ、内側の正方形が
+可換であることは明らかである。証明の第3段落で行った核の茎の計算と
+Lemma \ref{spaces-pushouts-lemma-stalk-of-pushforward} から、外側の正方形
+（曲線の矢印を用いるもの）が可換であることが従う。
+したがって、証明の第1段落で扱ったアフィンスキームの平坦射の場合を
+用いて結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-derived-equivalent}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、関手 $Rf_*$ は
+$D_{\QCoh, |f^{-1}Z|}(\mathcal{O}_Y)$ と
+$D_{\QCoh, |Z|}(\mathcal{O}_X)$ の間の同値を誘導し、その準逆は
+$Lf^*$ で与えられる。
+\end{lemma}
+
+\begin{proof}
+$f$ は準コンパクトかつ準分離なので、$Rf_*$ は
+$D_{\QCoh, |f^{-1}Z|}(\mathcal{O}_Y)$ から
+$D_{\QCoh, |Z|}(\mathcal{O}_X)$ への関手を定める。
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-quasi-coherence-direct-image} を参照せよ。
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-quasi-coherence-pullback} により、$Lf^*$ は
+$D_{\QCoh, |Z|}(\mathcal{O}_X)$ を
+$D_{\QCoh, |f^{-1}Z|}(\mathcal{O}_Y)$ に写す。
+Lemma \ref{spaces-pushouts-lemma-formal-glueing-on-closed} で、
+$D_{\QCoh, |f^{-1}Z|}(\mathcal{O}_Y)$ の $Q$ に対して
+$Lf^*Rf_*Q = Q$ であることを見た。Derived Categories, Lemma
+\ref{derived-lemma-fully-faithful-adjoint-kernel-zero} の双対により、
+証明を終えるには $D_{\QCoh, |Z|}(\mathcal{O}_X)$ の $K$ に対し
+$Lf^*K = 0$ ならば $K = 0$ であることを示せば十分である。
+これは、$f$ が $f^{-1}Z$ のすべての点で平坦であり、
+$f^{-1}Z \to Z$ が全射であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-dominate-by-fpqc-covering}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、族
+$\{U \to X, Y \to X\}$ を細分する fpqc 被覆
+$\{X_i \to X\}_{i \in I}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+fpqc 被覆の定義と一般的性質については Topologies, Section
+\ref{topologies-section-fpqc} を参照せよ。とくに、まず各 $X_i$ が
+アフィンであるエタール被覆 $\{X_i \to X\}$ を選び、$Y$, $Z$, $U$ を
+各 $X_i$ へ基底変換することで、$X$ がアフィンの場合に帰着できる。
+この場合 $U$ は準コンパクトなので、アフィン開部分の有限和
+$U = U_1 \cup \ldots \cup U_n$ である。
+また $Z$ は準コンパクトであり、したがって $f^{-1}Z$ も準コンパクトである。
+ゆえに、アフィンスキーム $W$ とエタール射 $h : W \to Y$ を、
+$h^{-1}f^{-1}Z \to f^{-1}Z$ が全射となるように選べる。
+$W = \Spec(B)$ および $h^{-1}f^{-1}Z = V(J)$ とし、ここで
+$J \subset B$ は有限型イデアルであるとする。
+Pro-\'etale Cohomology, Lemma \ref{proetale-lemma-localization} により、
+局所化 $B \to B'$ で、$\Spec(B')$ の点がちょうど
+$h^{-1}f^{-1}Z = V(J)$ へ特殊化する $W = \Spec(B)$ の点に対応するものが
+存在する。仮定により $f : Y \to X$ は $f^{-1}Z$ のすべての点で
+平坦なので、合成 $\Spec(B') \to \Spec(B) = W \to Y \to X$ は平坦である。
+このとき Topologies, Lemma
+\ref{topologies-lemma-recognize-fpqc-covering} により
+$\{\Spec(B') \to X, U_1 \to X, \ldots, U_n \to X\}$ は fpqc 被覆である。
+\end{proof}
+
+
+
+
+\section{代数空間の形式的貼り合わせ}
+\label{spaces-pushouts-section-formal-glueing-spaces}
+
+\noindent
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、次の形の
+$S$ 上の代数空間の可換図式
+$$
+\xymatrix{
+U' \ar[d] & V' \ar[l] \ar[d] \ar[r] & Y' \ar[d] \\
+U & V \ar[l] \ar[r] & Y
+}
+$$
+（両方の正方形はカルテジアンである）からなる圏
+$\textit{Spaces}(Y \to X, Z)$ を考える。標準関手
+\begin{equation}
+\label{spaces-pushouts-equation-formal-glueing-spaces}
+\textit{Spaces}/X \longrightarrow \textit{Spaces}(Y \to X, Z)
+\end{equation}
+は $X' \to X$ を射
+$U \times_X X' \leftarrow V \times_X X' \rightarrow Y \times_X X'$
+に写す。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-equivalence-on-affine}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、関手
+(\ref{spaces-pushouts-equation-formal-glueing-spaces}) は次の同値に制限される。
+\begin{enumerate}
+\item $X$ 上アフィンな代数空間の圏から、$U' \to U$, $V' \to V$,
+$Y' \to Y$ がアフィンである $(U' \leftarrow V' \rightarrow Y')$ からなる
+$\textit{Spaces}(Y \to X, Z)$ の充満部分圏への同値。
+\item 閉埋め込み $X' \to X$ の圏から、$U' \to U$, $V' \to V$,
+$Y' \to Y$ が閉埋め込みである $(U' \leftarrow V' \rightarrow Y')$ からなる
+$\textit{Spaces}(Y \to X, Z)$ の充満部分圏への同値。
+\item 有限射について (2) と同じ主張。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+アフィンな $X$ 上の代数空間の圏は、準連接 $\mathcal{O}_X$-代数の層
+$\mathcal{A}$ の圏と同値である。$U' \to U$, $V' \to V$, $Y' \to Y$
+がアフィンである $(U' \leftarrow V' \rightarrow Y')$ からなる
+$\textit{Spaces}(Y \to X, Z)$ の充満部分圏は、
+$\QCoh(Y \to X, Z)$ の代数対象の圏と同値である。いずれの場合も、
+これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-algebras}
+から従い、準逆は任意の基底変換と可換な相対スペクトル構成
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec}）で与えられる。
+したがって補題の (1) は Proposition
+\ref{spaces-pushouts-proposition-formal-glueing-modules} から従う。
+
+\medskip\noindent
+(2) の完全忠実性は (1) から従う。本質的全射性については、(1) により、
+$X' \to X$ が閉埋め込みであることと
+$U \times_X X' \to U$ および $Y \times_X X' \to Y$ がともに閉埋め込みで
+あることが同値であると示す問題に帰着する。
+Lemma \ref{spaces-pushouts-lemma-dominate-by-fpqc-covering} により、
+$\{U \to X, Y \to X\}$ は fpqc 被覆で細分できる。
+したがって結論は Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-closed-immersion} から従う。
+
+\medskip\noindent
+(3) については、(2) を証明した議論と Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-finite} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-reflects-isomorphisms}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、関手
+(\ref{spaces-pushouts-equation-formal-glueing-spaces}) は同型を反映する。
+\end{lemma}
+
+\begin{proof}
+基底変換に関する形式的議論により、次を示す問題に帰着する。
+代数空間の射 $a : X' \to X$ に対して
+$U \times_X X' \to U$ と $Y \times_X X' \to Y$ が同型ならば、
+この射は同型である。Lemma \ref{spaces-pushouts-lemma-dominate-by-fpqc-covering} により、
+族 $\{U \to X, Y \to X\}$ は fpqc 被覆で細分できる。
+したがって結論は Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-isomorphism} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-fully-faithful-on-separated}
+Situation \ref{spaces-pushouts-situation-formal-glueing} において、関手
+(\ref{spaces-pushouts-equation-formal-glueing-spaces}) は $X$ 上分離な代数空間上で
+完全忠実である。より正確には、$X'_2 \to X$ が分離ならば全単射
+$$
+\Mor_X(X'_1, X'_2)
+\longrightarrow
+\Mor_{\textit{Spaces}(Y \to X, Z)}(F(X'_1), F(X'_2))
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+$X'_2 \to X$ は分離なので、$X$ 上の射 $X'_1 \to X'_2$ のグラフ
+$i : X'_1 \to X'_1 \times_X X'_2$ は閉埋め込みである。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal} を参照せよ。
+さらに、閉埋め込み $i : T \to X'_1 \times_X X'_2$ が射のグラフであることと
+$\text{pr}_1 \circ i$ が同型であることは同値である。同じことが次にも成り立つ。
+\begin{enumerate}
+\item $U$ 上の射 $U \times_X X'_1 \to U \times_X X'_2$ のグラフ。
+\item $V$ 上の射 $V \times_X X'_1 \to V \times_X X'_2$ のグラフ。
+\item $Y$ 上の射 $Y \times_X X'_1 \to Y \times_X X'_2$ のグラフ。
+\end{enumerate}
+さらに、(1), (2), (3) の射が貼り合わさって圏
+$\textit{Spaces}(Y \to X, Z)$ の射をなすならば、これらのグラフは
+貼り合わさって
+$\textit{Spaces}(Y \times_X (X'_1 \times_X X'_2) \to X'_1 \times_X X'_2,
+Z \times_X (X'_1 \times_X X'_2))$
+の対象を与え、その三つ組の射は閉埋め込みである。
+Lemmas \ref{spaces-pushouts-lemma-equivalence-on-affine} および
+\ref{spaces-pushouts-lemma-reflects-isomorphisms} を適用すれば証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{貼り合わせと Beauville--Laszlo 定理}
+\label{spaces-pushouts-section-glueing-beauville-laszlo}
+
+\noindent
+$R \to R'$ を環準同型とし、$f \in R$ を、
+$$
+0 \to R \to R_f \oplus R' \to R'_f \to 0
+$$
+が短完全列となるような元とする。これは、すべての $n$ に対して
+$R/f^nR \cong R'/f^nR'$ であり、$(R \to R', f)$ が
+More on Algebra, Section \ref{more-algebra-section-beauville-laszlo}
+の意味で貼り合わせ対であることを含意する。
+$X = \Spec(R)$, $U = \Spec(R_f)$, $X' = \Spec(R')$,
+$U' = \Spec(R'_f)$ とおく。図式は
+$$
+\xymatrix{
+U' \ar[r] \ar[d] & X' \ar[d] \\
+U \ar[r] & X
+}
+$$
+この状況では、対象が可換図式
+$$
+\xymatrix{
+V \ar[d] & V' \ar[l] \ar[d] \ar[r] & Y' \ar[d] \\
+U & U' \ar[l] \ar[r] & X'
+}
+$$
+である圏 $\textit{Spaces}(U \leftarrow U' \to X')$ を考えることができる。
+ここで両方の正方形はカルテジアンであり、射は明らかな仕方で定義される。
+この圏の対象は、矢印を記法から省略して $(V, V', Y')$ と書く。
+関手
+\begin{equation}
+\label{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}
+\textit{Spaces}/X
+\longrightarrow
+\textit{Spaces}(U \leftarrow U' \to X')
+\end{equation}
+は基底変換、すなわち
+$Y \mapsto (U \times_X Y, U' \times_X Y, X' \times_X Y)$ で与えられる。
+
+\medskip\noindent
+More on Algebra, Section \ref{more-algebra-section-beauville-laszlo} で、
+すべての $R$ 加群 $M$ がその貼り合わせデータから復元できるわけではないことを
+見た。同様に、関手 (\ref{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}) は
+$X$ 上のすべての空間の圏では完全忠実にならない。
+$X$ 上の代数空間の適切な部分圏を取り出すため、補題が必要である。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glueable}
+$(R \to R', f)$ を上の貼り合わせ対とする。$Y$ を $X$ 上の代数空間とする。
+次は同値である。
+\begin{enumerate}
+\item $Y_i$ がアフィンで、$\Gamma(Y_i, \mathcal{O}_{Y_i})$ が
+$R$ 加群として貼り合わせ可能であるようなエタール被覆
+$\{Y_i \to Y\}_{i \in I}$ が存在する。
+\item $W$ がアフィンである任意のエタール射 $W \to Y$ に対し、
+$\Gamma(W, \mathcal{O}_W)$ は貼り合わせ可能な $R$ 加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) が (1) を含意することは直ちに分かる。
+$\{Y_i \to Y\}$ は (1) のようなものとし、$W \to Y$ は (2) のようなものとする。
+このとき $\{Y_i \times_Y W \to W\}_{i \in I}$ はエタール被覆であり、
+$W_j$ がアフィンであるエタール被覆
+$\{W_j \to W\}_{j = 1, \ldots, m}$ でこれを細分できる
+（Topologies, Lemma \ref{topologies-lemma-etale-affine}）。
+したがって証明を終えるには、次の三つの代数的主張を示せば十分である。
+\begin{enumerate}
+\item $R \to A \to B$ が環準同型で、$A \to B$ がエタール、かつ $A$ が
+$R$ 加群として貼り合わせ可能ならば、$B$ も $R$ 加群として貼り合わせ可能である。
+\item 貼り合わせ可能な $R$ 加群の有限直積は貼り合わせ可能である。
+\item $R \to A \to B$ が環準同型で、$A \to B$ が忠実エタール、かつ $B$ が
+$R$ 加群として貼り合わせ可能ならば、$A$ も $R$ 加群として貼り合わせ可能である。
+\end{enumerate}
+実際、第1の主張から $\Gamma(W_j, \mathcal{O}_{W_j})$ が貼り合わせ可能な
+$R$ 加群であること、第2の主張から $\prod \Gamma(W_j, \mathcal{O}_{W_j})$
+が貼り合わせ可能な $R$ 加群であること、第3の主張から
+$\Gamma(W, \mathcal{O}_W)$ が貼り合わせ可能な $R$ 加群であることが従う。
+
+\medskip\noindent
+エタール $R$-代数準同型 $A \to B$ を考える。
+$A' = A \otimes_R R'$ および $B' = B \otimes_R R' = A' \otimes_A B$
+とおく。このとき (1) と (3) は次の事実から従う。
+(a) $A$（それぞれ $B$）が貼り合わせ可能であることと、列
+$$
+0 \to A \to A_f \oplus A' \to A'_f \to 0,
+\quad\text{それぞれ}\quad
+0 \to B \to B_f \oplus B' \to B'_f \to 0,
+$$
+が完全であることは同値である。(b) 第2の列は、第1の列に関手
+$- \otimes_A B$ を適用したものに等しい。(c) $A \to B$ は（忠実）平坦である。
+(2) の証明は省略する。
+\end{proof}
+
+\noindent
+$(R \to R', f)$ を上の貼り合わせ対とする。$X = \Spec(R)$ 上の代数空間
+$Y$ が Lemma \ref{spaces-pushouts-lemma-glueable} の同値な条件を満たすとき、
+{\it $(R \to R', f)$ に対して貼り合わせ可能である} という。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glueing-affines}
+$(R \to R', f)$ を上の貼り合わせ対とする。関手
+(\ref{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}) は、
+$(R \to R', f)$ に対して貼り合わせ可能なアフィン $Y/X$ の圏と、
+$V$, $V'$, $Y'$ がアフィンである
+$\textit{Spaces}(U \leftarrow U' \to X')$ の対象 $(V, V', Y')$
+からなる充満部分圏との間の同値に制限される。
+\end{lemma}
+
+\begin{proof}
+$V$, $V'$, $Y'$ がアフィンである
+$\textit{Spaces}(U \leftarrow U' \to X')$ の対象 $(V, V', Y')$ を取る。
+$V = \Spec(A_1)$, $Y' = \Spec(A')$ と書く。圏
+$\textit{Spaces}(U \leftarrow U' \to X')$ の定義から、$V'$ は
+$A_1 \otimes_{R_f} R'_f = A_1 \otimes_R R'$ のスペクトルであり、同時に
+$A'_f$ のスペクトルでもある。したがって $R'_f$-代数の同型
+$\varphi : A'_f \to A_1 \otimes_R R'$ を得る。
+More on Algebra, Theorem \ref{more-algebra-theorem-BL-glueing} により、
+一意な貼り合わせ可能 $R$ 加群 $A$ と、$\varphi$ と両立する加群の同型
+$A_f \to A_1$ および $A \otimes_R R' \to A'$ が存在する。列
+$$
+0 \to A \to A_1 \oplus A' \to A'_f \to 0
+$$
+は短完全なので、$A_1$ と $A'$ 上の乗法は $A$ 上の一意な
+$R$-代数構造を定め、射 $A \to A_1$ および $A \to A'$ は環準同型となる。
+この構成が、補題の主張にある部分圏へ制限した関手
+(\ref{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}) の準逆を定めることの
+確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glueing-affines-etale}
+$P$ を射の次の性質の一つとする。「有限」、「閉埋め込み」、「平坦」、
+「有限型」、「平坦かつ有限表示」、「エタール」。
+Lemma \ref{spaces-pushouts-lemma-glueing-affines} の同値のもとで、性質 $P$ をもつ射は、
+各成分が性質 $P$ をもつ三つ組の射に対応する。
+\end{lemma}
+
+\begin{proof}
+$P'$ を環準同型の次の性質の一つとする。「有限」、「全射」、「平坦」、
+「有限型」、「平坦かつ有限表示」、「エタール」。
+代数に翻訳すると、主張は次のようになる。$A \to B$ が $R$-代数準同型で、
+$A$ と $B$ が $(R \to R', f)$ に対して貼り合わせ可能ならば、
+$A_f \to B_f$ および $A \otimes_R R' \to B \otimes_R R'$ が
+性質 $P'$ をもつことと、$A \to B$ が性質 $P'$ をもつことは同値である。
+
+\medskip\noindent
+More on Algebra, Lemmas \ref{more-algebra-lemma-faithful-descent} および
+\ref{more-algebra-lemma-BL-flat} により、この代数的主張は
+$P'$ が「有限」または「平坦」の場合に成り立つ。
+
+\medskip\noindent
+$A_f \to B_f$ と $A \otimes_R R' \to B \otimes_R R'$ が全射ならば、
+$N = B/A$ は $N_f = 0$ かつ $N \otimes_R R' = 0$ を満たす $R$ 加群なので、
+More on Algebra, Lemma \ref{more-algebra-lemma-BL-faithful} により零である。
+したがって $A \to B$ は全射である。
+
+\medskip\noindent
+$A_f \to B_f$ と $A \otimes_R R' \to B \otimes_R R'$ が有限型ならば、
+$A_f[x_1, \ldots, x_n] \to B_f$ および
+$(A \otimes_R R')[x_1, \ldots, x_n] \to B \otimes_R R'$ が全射となる
+$A$-代数準同型 $A[x_1, \ldots, x_n] \to B$ を選べる
+（細部は省略する）。前の結果により $A[x_1, \ldots, x_n] \to B$ は全射である。
+したがって $A \to B$ は有限型である。
+
+\medskip\noindent
+$A_f \to B_f$ と $A \otimes_R R' \to B \otimes_R R'$ が平坦かつ有限表示ならば、
+すでに示したことから $A \to B$ は平坦かつ有限型である。全射
+$A[x_1, \ldots, x_n] \to B$ を選び、その核を $I$ と書く。
+$B$ の $A$ 上の平坦性により、$I_f$ は
+$A_f[x_1, \ldots, x_n] \to B_f$ の核であり、$I \otimes_R R'$ は
+$A \otimes_R R'[x_1, \ldots, x_n] \to B \otimes_R R'$ の核である。
+したがって $I_f$ は有限 $A_f[x_1, \ldots, x_n]$ 加群であり、
+$I \otimes_R R'$ は有限 $(A \otimes_R R')[x_1, \ldots, x_n]$ 加群である。
+$I$ を $A[x_1, \ldots, x_n]$ 上の加群とみなし、More on Algebra, Lemma
+\ref{more-algebra-lemma-faithful-descent} を適用すると、$I$ は有限生成イデアル
+であると分かる。したがって $A \to B$ は平坦かつ有限表示である。
+
+\medskip\noindent
+$A_f \to B_f$ と $A \otimes_R R' \to B \otimes_R R'$ がエタールならば、
+すでに示したことから $A \to B$ は平坦かつ有限表示である。
+$\Spec(B) \to \Spec(A)$ のファイバーは
+$\Spec(B_f) \to \Spec(A_f)$ または
+$\Spec(B/fB) \to \Spec(A/fA)$ のファイバーと同型なので、
+$A \to B$ は非分岐である。Morphisms, Lemmas
+\ref{morphisms-lemma-unramified-over-field} および
+\ref{morphisms-lemma-unramified-etale-fibres} を参照せよ。
+たとえば Morphisms, Lemma
+\ref{morphisms-lemma-flat-unramified-etale} により、$A \to B$ はエタールである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glueing-f}
+$(R \to R', f)$ を上の貼り合わせ対とする。関手
+(\ref{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}) は、
+$(R \to R', f)$ に対して貼り合わせ可能な代数空間 $Y/X$ からなる
+充満部分圏上で忠実である。
+\end{lemma}
+
+\begin{proof}
+$Y$ と $Z$ は $(R \to R', f)$ に対して貼り合わせ可能であるとし、
+$X$ 上の代数空間の二つの射 $f, g : Y \to Z$ を取り、$f$ と $g$ は圏
+$\textit{Spaces}(U \leftarrow U' \to X')$ で同じ射に写るとする。
+$f$ と $g$ の等化子 $E \to Y$ が同型であることを示せばよい。
+$Y$ 上エタール局所的に議論して、$Y$ はアフィンスキームであると仮定してよい。
+このとき $E$ はスキームであり、射 $E \to Y$ は単射かつ局所準有限である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-properties-diagonal} を参照せよ。
+さらに、$E \to Y$ の $U$ および $X'$ への基底変換は同型である。
+$Y$ はアフィン開部分 $V = U \times_X Y$ とアフィン閉部分
+$V(f) \times_X Y$ との互いに素な合併であるから、$E$ もそれらの
+同型な逆像の互いに素な合併である。特に $E$ は準コンパクトである。
+Zariski の主定理（More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite}）により、
+$E$ は準アフィンである。
+$B = \Gamma(E, \mathcal{O}_E)$ および $A = \Gamma(Y, \mathcal{O}_Y)$
+とおくと、$R$-代数準同型 $A \to B$ を得る。
+$E \to Y$ は $U$ および $X'$ への基底変換後に同型となるので、
+$A \otimes_R R'_f$ への写像として一致する環準同型
+$B \to A_f$ および $B \to A \otimes_R R'$ を得る。
+$A$ は $(R \to R', f)$ に対して貼り合わせ可能だから、写像
+$A \to B$ の左逆である環準同型 $B \to A$ を得る。
+対応する射 $Y = \Spec(A) \to \Spec(B)$ は、$U$ および $X'$ への
+基底変換後にはそうであるため、各点を開部分スキーム
+$E \subset \Spec(B)$ に写す。したがって $Y$ 上の射 $Y \to E$ を得る。
+$E \to Y$ は単射なので、$Y \to E$ は所望の同型である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glueing-ff}
+$(R \to R', f)$ を上の貼り合わせ対とする。関手
+(\ref{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}) は、次の条件を満たす
+代数空間 $Y/X$ からなる充満部分圏上で完全忠実である。
+(a) $(R \to R', f)$ に対して貼り合わせ可能である。
+(b) 対角射 $Y \to Y \times_X Y$ はアフィンである。
+\end{lemma}
+
+\begin{proof}
+$Y, Z$ を、ともに $(R \to R', f)$ に対して貼り合わせ可能な
+$X$ 上の代数空間とし、$Z$ の対角射はアフィンであると仮定する。
+$U$ 上の射 $a : U \times_X Y \to U \times_X Z$ と、$X'$ 上の射
+$b : X' \times_X Y \to X' \times_X Z$ が、$U'$ 上で同じ射
+$c : U' \times_X Y \to U' \times_X Z$ を誘導するとする。
+$U$ および $X'$ への基底変換によってそれぞれ $a$, $b$ を与える
+$X$ 上の射 $f : Y \to Z$ を構成したい。
+Lemma \ref{spaces-pushouts-lemma-glueing-f} の忠実性により、$f$ を $Y$ 上エタール局所的に
+構成すれば十分である（細部は省略する）。したがって $Y$ は
+アフィンであると仮定してよいし、実際そう仮定する。
+
+\medskip\noindent
+$y \in |Y|$ を一点とする。$y$ が開部分 $U \subset X$ に写るならば、
+$U \times_X Y$ は $Y$ の開部分であり、その上で射 $f$ は定義されている
+（単に $a$ を取ればよい）。したがって $y$ は $X$ の閉部分集合
+$V(f)$ に写ると仮定してよい。$R/fR = R'/fR'$ なので、$y$ に写る
+一意な点 $y' \in |X' \times_X Y|$ が存在する。$y'$ の像を
+$z' = b(y') \in |X' \times_X Z|$ および $z \in |Z|$ と書く。
+$W$ がアフィンであるようなエタール近傍
+$(W, w) \to (Z, z)$ を選ぶ。このとき
+$$
+(U \times_X W) \times_{U \times_X Z, a} (U \times_X Y),\quad
+(U' \times_X W) \times_{U' \times_X Z, c} (U' \times_X Y),
+$$
+および
+$$
+(X' \times_X W) \times_{X' \times_X Z, b} (X' \times_X Y)
+$$
+はアフィンな各成分をもつ
+$\textit{Spaces}(U \leftarrow U' \to X')$ の対象をなす
+（ここで $Z$ の対角射がアフィンであることを用いる）。
+したがって Lemma \ref{spaces-pushouts-lemma-glueing-affines} により、
+$(R \to R', f)$ に対して貼り合わせ可能な一意なアフィンスキーム $V$ で、
+$$
+(U \times_X V, U' \times_X V, X' \times_X V)
+$$
+が上に表示した三つ組となるものが存在する。アフィンの場合の完全忠実性
+（Lemma \ref{spaces-pushouts-lemma-glueing-affines}）により、上の構成における
+$U$ および $X'$ 上の第1、第2射影と一致する一意な射
+$V \to W$ および $V \to Y$ を得る。
+Lemma \ref{spaces-pushouts-lemma-glueing-affines-etale} により、射 $V \to Y$ はエタールである。
+証明を終えるには、$y$ に写る点 $v \in |V|$ が存在することを示せば十分である
+（そのとき $f$ は $y$ のエタール近傍、すなわち $V$ 上で定義される）。
+$w$ に写る一意な点 $w' \in |X' \times_X W|$ が存在する。
+一意性により、$w'$ は写像
+$|X' \times_X W| \to |X' \times_X Z|$ で $z'$ に写る。
+ここでカルテジアン図式
+$$
+\xymatrix{
+X' \times_X V \ar[r] \ar[d] & X' \times_X W \ar[d] \\
+X' \times_X Y \ar[r] & X' \times_X Z
+}
+$$
+を考えると、$y'$ と $w'$ に写る点
+$v' \in |X' \times_X V|$ が存在することが分かる。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を参照せよ。
+もちろん $v'$ の $|V|$ における像 $v$ は $y$ に写り、証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-glueing-quasi-affines}
+$(R \to R', f)$ を上の貼り合わせ対とする。
+$V$, $V'$, $Y'$ が準アフィンである
+$\textit{Spaces}(U \leftarrow U' \to X')$ の任意の対象 $(V, V', Y')$ は、
+$X$ 上の分離代数空間 $Y$ の関手
+(\ref{spaces-pushouts-equation-beauville-laszlo-glueing-spaces}) による像と同型である。
+\end{lemma}
+
+\begin{proof}
+Properties, Lemma \ref{properties-lemma-quasi-affine-presentation}
+のように $n'$, $T' \to Y'$ および $n_1$, $T_1 \to V$ を選ぶ。
+図式
+$$
+\xymatrix{
+& &
+T_1 \times_V V' \times_Y T' \ar[ld] \ar[rd] \\
+T_1 \ar[d] &
+T_1 \times_V V' \ar[l] \ar[dr] & &
+V' \times_{Y'} T' \ar[r] \ar[dl] &
+T' \ar[d] \\
+V & &
+V' \ar[rr] \ar[ll] & &
+Y'
+}
+$$
+を考える。$T_1 \times_V V'$ と $V' \times_{Y'} T'$ はアフィンである。
+実際、射 $V' \to V$ と $V' \to Y'$ は、それぞれアフィン射
+$U' \to U$ と $U' \to X'$ の基底変換としてアフィンである。
+構成から
+$$
+\mathbf{A}^{n'}_{T_1 \times_V V'} \cong
+T_1 \times_V V' \times_{Y'} T' \cong
+\mathbf{A}^{n_1}_{V' \times_{Y'} T'}
+$$
+であることが分かる。言い換えると、アフィンスキーム
+$\mathbf{A}^{n'}_{T_1}$ と $\mathbf{A}^{n_1}_{T'}$ は、
+$\textit{Spaces}(U \leftarrow U' \to X')$ のアフィンな対象をなす
+三つ組の一部である。Lemma \ref{spaces-pushouts-lemma-glueing-affines} により、
+アフィンスキームの射 $T \to X$ と、上に表示した同型と両立する同型
+$U \times_X T \cong \mathbf{A}^{n'}_{T_1}$ および
+$X' \times_X T \cong \mathbf{A}^{n_1}_{T'}$ が存在する。
+これらの同型は射
+$$
+U \times_X T \longrightarrow V
+\quad\text{および}\quad
+X' \times_X T \longrightarrow Y'
+$$
+を与える。これらは $n = n' + n_1$ として Properties, Lemma
+\ref{properties-lemma-quasi-affine-presentation} の性質を満たし、さらに圏
+$\textit{Spaces}(U \leftarrow U' \to X')$ において三つ組
+$(U \times_X T, U' \times_X T, X' \times_X T)$ から三つ組
+$(V, V', Y')$ への射を定める。
+
+\medskip\noindent
+Lemma \ref{spaces-pushouts-lemma-glueing-affines} により、
+$\textit{Spaces}(U \leftarrow U' \to X')$ における像が三つ組
+$$
+((U \times_X T) \times_V (U \times_X T),
+(U' \times_X T) \times_{V'} (U' \times_X T),
+(X' \times_X T) \times_{Y'} (X' \times_X T))
+$$
+と同型であるアフィンスキーム $W$ が存在する。
+この構成の完全忠実性により、$U, U', X'$ への基底変換が
+射影となる二つの射 $p_0, p_1 : W \to T$ を得る。
+Lemma \ref{spaces-pushouts-lemma-glueing-affines-etale} により、射 $p_0, p_1$ は
+平坦かつ有限表示であり、射
+$(p_0, p_1) : W \to T \times_X T$ は閉埋め込みである。
+実際、$W \to T \times_X T$ は同値関係である。上で用いた補題により、
+対称性、反射性、推移性は $U$ および $X'$ への基底変換後に確認してよく、
+そこでは明らかである（細部は省略する）。したがって商層
+$$
+Y = T/W
+$$
+は、たとえば Bootstrap, Theorem
+\ref{bootstrap-theorem-final-bootstrap} により代数空間である。
+$Y/X$ が三つ組 $(V, V', Y')$ に写ることは明らかである。
+対角射 $\Delta : Y \to Y \times_X Y$ を準コンパクト全射平坦射
+$T \times_X T \to Y \times_X Y$ で基底変換すると、閉埋め込み
+$W \to T \times_X T$ になる。したがって Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-closed-immersion} により、
+$\Delta$ は閉埋め込みである。ゆえに代数空間 $Y$ は分離的であり、証明は完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{余等化子と貼り合わせ}
+\label{spaces-pushouts-section-coequalizer-glue}
+
+\noindent
+$X$ を Noether 代数空間、$Z \to X$ を閉部分空間とする。
+$X' \to X$ を $Z$ における爆発とする。この節では、$Z_n$ を $X$ における
+$Z$ の $n$ 次無限小近傍とするとき、$X'$、$Z_n$ および貼り合わせデータから
+$X$ を復元できることを示す。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-coequalizer}
+$S$ をスキームとする。
+$$
+g : Y \longrightarrow X
+$$
+を $S$ 上の代数空間の射とする。$X$ は局所 Noether であり、$g$ は固有であると仮定する。
+$R = Y \times_X Y$ とおき、その射影を $t, s : R \to Y$ とする。
+$S$ 上の代数空間の圏において、$s, t : R \to Y$ の余等化子 $X'$ が存在する。
+さらに次が成り立つ。
+\begin{enumerate}
+\item 射 $X' \to X$ は有限である。
+\item 射 $Y \to X'$ は固有である。
+\item 射 $Y \to X'$ は全射である。
+\item 射 $X' \to X$ は普遍単射である。
+\item $g$ が全射ならば、射 $X' \to X$ は普遍同相である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$s$ または $t$ と $g$ との合成を $h : R \to X$ と書く。このとき
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-proper} および
+\ref{spaces-morphisms-lemma-composition-proper} により、$h$ は固有である。層
+$$
+g_*\mathcal{O}_Y
+\quad\text{および}\quad
+h_*\mathcal{O}_R
+$$
+は Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent} により
+連接 $\mathcal{O}_X$-代数である。$X$-射 $s$, $t$ は、第1の代数から
+第2の代数への $\mathcal{O}_X$-代数準同型 $s^\sharp, t^\sharp$ を誘導する。
+$$
+\mathcal{A} = \text{等化子}\left(s^\sharp, t^\sharp :
+g_*\mathcal{O}_Y \longrightarrow h_*\mathcal{O}_R\right)
+$$
+とおく。このとき $\mathcal{A}$ は連接 $\mathcal{O}_X$-代数であり、
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec} のように
+$$
+X' = \underline{\Spec}_X(\mathcal{A})
+$$
+を定義できる。Morphisms of Spaces, Remark
+\ref{spaces-morphisms-remark-factorization-quasi-compact-quasi-separated}
+および $\underline{\Spec}$ 構成の関手性により、分解
+$$
+Y \longrightarrow X' \longrightarrow X
+$$
+が存在し、射 $g' : Y \to X'$ は $s$ と $t$ を等化する。
+
+\medskip\noindent
+$X'$ が $s$ と $t$ の余等化子であることを示す前に、$Y \to X'$ と
+$X' \to X$ が所望の性質をもつことを示す。$\mathcal{A}$ は連接
+$\mathcal{O}_X$-加群なので、$X' \to X$ が代数空間の有限射であることは明らかである。
+これで (1) が示された。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence} により、
+射 $Y \to X'$ は固有である。これで (2) が示された。
+$Y' = \underline{\Spec}_X(g_*\mathcal{O}_Y)$ とする $Y \to Y' \to X$ を
+$g$ の Stein 分解と書く。More on Morphisms of Spaces, Theorem
+\ref{spaces-more-morphisms-theorem-stein-factorization-Noetherian} を参照せよ。
+もちろん、上で考えた射と両立する射 $Y \to Y' \to X' \to X$ を得る。
+$\mathcal{O}_{X'} \subset g_*\mathcal{O}_Y$ は有限拡大なので、
+$Y' \to X'$ は有限全射である。細部の一部は省略する。ヒントとして、
+Algebra, Lemma \ref{algebra-lemma-integral-overring-surjective}
+を用い、エタール局所化によってアフィンの場合へ帰着せよ。
+$Y \to Y'$ は全射（幾何学的に連結なファイバーをもつ）なので、
+$Y \to X'$ は全射である。これで (3) が示された。
+$X' \to X$ が普遍単射であることを示すには、$X' \to X' \times_X X'$ が
+全射であることを示さなければならない。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-universally-injective} および
+Lemma \ref{spaces-morphisms-lemma-universally-injective} を参照せよ。
+$Y \to X'$ は全射であり、さらに Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-surjective} および
+\ref{spaces-morphisms-lemma-composition-surjective}
+により全射の基底変換と合成は全射なので、
+$Y \times_X Y \to X' \times_X X'$ は全射である。
+一方、$Y \to X'$ は $s$ と $t$ を等化するから、
+$Y \times_X Y \to X' \times_X X'$ は $X' \to X' \times_X X'$ を経由する。
+したがって後者の写像は全射である。これで (4) が示された。
+最後に $g$ が全射ならば、$g$ は $X' \to X$ を経由するので、
+$X' \to X$ は全射である。全射、普遍単射、有限である射は
+普遍同相である（普遍全単射かつ普遍閉だから）ので、(5) が示された。
+
+\medskip\noindent
+$Y \to X'$ が $S$ 上の代数空間の圏における $s$ と $t$ の余等化子であることを、
+証明の残りで示す。$X'$ は局所 Noether である
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian})。
+さらに、$Y \to X'$ は $s$ と $t$ を等化するので、
+$Y \times_{X'} Y \to Y \times_X Y$ は同型である（これは圏論的な主張である）。
+したがって $Y \to X'$ が $s$ と $t$ の余等化子であることを示す際には、
+$X = X'$ と仮定してよいし、実際そう仮定する。言い換えると、
+$\mathcal{O}_X$ は写像
+$s^\sharp, t^\sharp : g_*\mathcal{O}_Y \to h_*\mathcal{O}_R$ の等化子である。
+
+\medskip\noindent
+$X_1$ が局所 Noether であるような $S$ 上の代数空間の平坦射
+$X_1 \to X$ を取る。$g, h, s, t$ の $X_1$ への基底変換をそれぞれ
+$g_1 : Y_1 \to X_1$, $h_1 : R_1 \to X_1$ および
+$s_1, t_1 : R_1 \to Y_1$ と書く。もちろん $g_1$ は固有であり、
+$R_1 = Y_1 \times_{X_1} Y_1$ である。準連接加群の順像に対する
+平坦基底変換 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} が成り立つので、
+$\mathcal{O}_{X_1}$ は写像
+$s_1^\sharp, t_1^\sharp : g_{1, *}\mathcal{O}_{Y_1} \to
+h_{1, *}\mathcal{O}_{R_1}$ の等化子である。したがって、すべての仮定は
+この基底変換で保たれる。
+
+\medskip\noindent
+ここで Lemma \ref{spaces-pushouts-lemma-colimit-check-etale-locally} の条件 (1) と (2) を確認する。
+条件 (1) は Lemma \ref{spaces-pushouts-lemma-descend-etale-proper-surjective} と、
+$g$ が固有全射であること（$X = X'$ だから）から従う。
+条件 (2) を確認するため、上の基底変換に関する注意により、
+次の段落で論じ証明する主張へ帰着する。
+
+\medskip\noindent
+$S = \Spec(A)$ と $X = X'$ はアフィンスキームであり、$Z$ は $S$ 上の
+アフィンスキームであると仮定する。写像
+$$
+\Mor_S(X, Z) \longrightarrow
+\text{等化子}(s, t : \Mor_S(Y, Z) \to \Mor_S(R, Z))
+$$
+が全単射であることを示さなければならない。しかし、これは $X = X'$ から明らかである。
+実際、この等式から $\mathcal{O}_X$ は写像
+$s^\sharp, t^\sharp : g_*\mathcal{O}_Y \to h_*\mathcal{O}_R$ の等化子であり、
+したがって
+$$
+\Gamma(X, \mathcal{O}_X) =
+\text{等化子}\left(
+s^\sharp, t^\sharp : \Gamma(Y, \mathcal{O}_Y) \to
+\Gamma(R, \mathcal{O}_R)
+\right)
+$$
+となる。すなわち
+$$
+\Mor_S(X, Z) = \Hom_A(\Gamma(Z, \mathcal{O}_Z), \Gamma(X, \mathcal{O}_X))
+$$
+であり、$Y$ と $R$ についても同様である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-morphism-to-affine-scheme} を参照せよ。
+\end{proof}
+
+\noindent
+以下の状況で議論する。
+
+\begin{situation}
+\label{spaces-pushouts-situation-coequalizer-glue}
+$S$ をスキーム、$X$ を $S$ 上の局所 Noether 代数空間とする。
+$Z \to X$ を閉埋め込みとし、$U \subset X$ をその補開部分空間とする。
+最後に、$f^{-1}(U) \to U$ が同型となるような代数空間の固有射
+$f : X' \to X$ を取る。
+\end{situation}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-coequalizer-glue}
+Situation \ref{spaces-pushouts-situation-coequalizer-glue} において $Y = X' \amalg Z$ および
+$R = Y \times_X Y$ とおき、その射影を $t, s : R \to Y$ とする。
+$S$ 上の代数空間の圏において、$s, t : R \to Y$ の余等化子 $X_1$ が存在する。
+射 $X_1 \to X$ は有限普遍同相であり、$U$ 上で同型であり、
+$Z \to X$ は $X_1$ へ持ち上がる。
+\end{lemma}
+
+\begin{proof}
+$X_1$ の存在と $X_1 \to X$ が有限普遍同相であることは
+Lemma \ref{spaces-pushouts-lemma-coequalizer} の特別な場合である。$X_1$ の形成は
+$X$ 上のエタール局所化と可換である
+（Lemma \ref{spaces-pushouts-lemma-coequalizer} の証明を参照せよ）。
+したがって射 $X_1 \to X$ は $U$ 上で同型である。
+$Z \to X$ が $X_1$ へ持ち上がることは構成から直ちに分かる。
+\end{proof}
+
+\noindent
+Situation \ref{spaces-pushouts-situation-coequalizer-glue} において、$n \geq 1$ に対し
+$Z_n \subset X$ を $X$ における $Z$ の $n$ 次無限小近傍、すなわち
+$Z$ を切り出すイデアル層の $n$ 乗で定義される閉部分スキームとする。
+$Y_n = X' \amalg Z_n$ および $R_n = Y_n \times_X Y_n$ と、
+Lemma \ref{spaces-pushouts-lemma-coequalizer-glue} のような余等化子
+$$
+\xymatrix{
+R_n \ar@<1ex>[r] \ar@<-1ex>[r] & Y_n \ar[r] & X_n \ar[r] & X
+}
+$$
+を考える。写像 $Y_n \to Y_{n + 1}$ および $R_n \to R_{n + 1}$ は射
+\begin{equation}
+\label{spaces-pushouts-equation-system-coequalizers}
+X_1 \to X_2 \to X_3 \to \ldots \to X
+\end{equation}
+を誘導する。射 $X_n \to X$ は普遍同相なので、これらの射はいずれも普遍同相である。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-essentially-constant}
+Situation \ref{spaces-pushouts-situation-coequalizer-glue} において $X$ は準コンパクトであると仮定する。
+(\ref{spaces-pushouts-equation-system-coequalizers}) において、十分大きなすべての $n$ に対し、
+$X_n \to X_{n + m}$ が閉埋め込み $X \to X_{n + m}$ を経由するような $m$ が存在する。
+\end{lemma}
+
+\begin{proof}
+まず $X_n$ の構成と、$n$ を増加させたときの変化をもう少し詳しく調べる。
+$X_n = \underline{\Spec}(\mathcal{A}_n)$
+であり、ここで $\mathcal{A}_n$ は $g_{n , *}\mathcal{O}_{Y_n}$ から
+$h_{n, *}\mathcal{O}_{R_n}$ への $s_n^\sharp$ と $t_n^\sharp$ の等化子である。
+ここで $g_n : Y_n = X' \amalg Z_n \to X$ と
+$h_n : R_n = Y_n \times_X Y_n \to X$ は所与の射である。
+$\mathcal{I} \subset \mathcal{O}_X$ を $Z$ に対応する連接イデアル層とする。このとき
+$$
+g_{n, *}\mathcal{O}_{Y_n} =
+f_*\mathcal{O}_{X'} \times \mathcal{O}_X/\mathcal{I}^n
+$$
+同様に分解
+$$
+R_n = X' \times_X X' \amalg X' \times_X Z_n \amalg
+Z_n \times_X X' \amalg Z_n \times_X Z_n
+$$
+を得る。$Z_n \to X$ は単射なので、$X' \times_X Z_n = Z_n \times_X X'$ であり、
+この同一視は $X$ への二つの射、$X'$ への二つの射、および $Z_n$ への二つの射と両立する。
+$X$ への射を $f_n : X' \times_X Z_n \to X$ と書く。また
+$$
+\mathcal{A} = \text{等化子}(
+\xymatrix{
+f_*\mathcal{O}_{X'} \ar@<1ex>[r] \ar@<-1ex>[r] &
+(f \times f)_*\mathcal{O}_{X' \times_X X'}
+}
+)
+$$
+とおく。上の注意から
+$$
+\mathcal{A}_n =
+\text{等化子}(
+\xymatrix{
+\mathcal{A} \times \mathcal{O}_X/\mathcal{I}^n \ar@<1ex>[r] \ar@<-1ex>[r] &
+f_{n, *}\mathcal{O}_{X' \times_X Z_n}
+}
+)
+$$
+であることが分かる。連接 $\mathcal{O}_X$-代数の標準的な写像
+$$
+\mathcal{O}_X \to \ldots \to \mathcal{A}_3 \to \mathcal{A}_2 \to \mathcal{A}_1
+$$
+を得る。補題の主張は、十分大きな $n$ に対して、
+$\mathcal{A}_{n + m} \to \mathcal{A}_n$ の像が $\mathcal{O}_X$ と同型になるような
+$m \geq 0$ が存在するということである。これは $X$ 上エタール局所的に確認してよい。
+したがって Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} により、
+$X$ はアフィン Noether スキームであると仮定してよい。
+
+\medskip\noindent
+$X_n \to X$ は $U$ 上で同型なので、$\mathcal{O}_X \to \mathcal{A}_n$ の核の
+台は $|Z|$ に含まれる。$X$ は Noether なので、核の列
+$\mathcal{J}_n = \Ker(\mathcal{O}_X \to \mathcal{A}_n)$ は安定する
+（Cohomology of Spaces, Lemma \ref{spaces-cohomology-lemma-acc-coherent}）。
+$\mathcal{J}_{n_0} = \mathcal{J}_{n_0 + 1} = \ldots = \mathcal{J}$ としよう。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-power-ideal-kills-sheaf}
+により、ある $t \geq 0$ に対して $\mathcal{I}^t \mathcal{J} = 0$ である。
+一方、$\mathcal{O}_X$-代数準同型
+$\mathcal{A}_n \to \mathcal{O}_X/\mathcal{I}^n$ が存在するから、
+すべての $n$ に対して $\mathcal{J} \subset \mathcal{I}^n$ である。
+Artin--Rees（Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-Artin-Rees}）により、ある $c  \geq 0$ と
+すべての $n \gg 0$ に対して
+$\mathcal{J} \cap \mathcal{I}^n \subset \mathcal{I}^{n - c}\mathcal{J}$ である。
+したがって $\mathcal{J} = 0$ である。
+
+\medskip\noindent
+前の段落のように $n \geq n_0$ を取る。このとき
+$\mathcal{O}_X \to \mathcal{A}_n$ は単射である。したがって、
+$\mathcal{A}_{n + m} \to \mathcal{A}_n$ の像が $\mathcal{O}_X$ の像と
+等しくなるような $m \geq 0$ を見つければ十分である。
+$\mathcal{A}_n$ は短完全列
+$$
+0 \to \Ker(\mathcal{A} \to f_{n, *}\mathcal{O}_{X' \times_X Z_n})
+\to \mathcal{A}_n \to \mathcal{O}_X/\mathcal{I}^n \to 0
+$$
+に入り、$\mathcal{A}_{n + m}$ についても同様である。したがって、ある $m \geq 0$ に対して
+$$
+\Ker(\mathcal{A} \to f_{n + m, *}\mathcal{O}_{X' \times_X Z_{n + m}})
+\subset
+\Im(\mathcal{I}^n \to \mathcal{A})
+$$
+を示せば十分である。このため $X$ 上エタール局所的に議論してよく、
+$X$ は Noether なので、$X$ は Noether アフィンスキームであると仮定してよい。
+$X = \Spec(R)$ とし、$\mathcal{I}$ はイデアル $I \subset R$ に対応するとする。
+有限 $R$-代数 $A$ に対して $\mathcal{A} = \widetilde{A}$ とし、
+有限 $R$-代数 $B$ に対して $f_*\mathcal{O}_{X'} = \widetilde{B}$ とする。
+このとき $R \to A \subset B$ であり、これらの写像は $I$ の任意の元を
+可逆にすると同型になる。
+
+\medskip\noindent
+Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-theorem-formal-functions} の記法では、
+$f_{n, *}\mathcal{O}_{X' \times_X Z_n}$ は
+$f_*(\mathcal{O}_{X'}/I^n\mathcal{O}_{X'})$ に等しいことに注意せよ。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-ML-cohomology-powers-ideal}
+により、次を満たす $c \geq 0$ が存在する。
+$$
+\Ker(B \to \Gamma(X, f_*(\mathcal{O}_{X'}/I^{n + m + c}\mathcal{O}_{X'}))
+$$
+は $I^{n + m}B$ に含まれる。一方、$R \to B$ は有限であり、$I$ の任意の元を
+可逆にすると同型になるから、十分大きな $m$ に対して
+$I^{n + m}B \subset \Im(I^n \to B)$ である（これは $n$ と独立に選べる）。
+$A \subset B$ なので、これで証明は完了する。
+\end{proof}
+
+\begin{remark}
+\label{spaces-pushouts-remark-essentially-constant}
+Lemma \ref{spaces-pushouts-lemma-essentially-constant} の意味は、系
+$X_1 \to X_2 \to X_3 \to \ldots$ が値 $X$ をもって本質的に定常であるということである。
+Categories, Definition
+\ref{categories-definition-essentially-constant-diagram} を参照せよ。
+\end{remark}
+
+
+
+
+
+
+\section{コンパクト化}
+\label{spaces-pushouts-section-compactifications}
+
+\noindent
+この節は More on Flatness, Section
+\ref{flat-section-compactifications} の類似である。この節の定理は
+\cite{CLO} の主定理である。
+
+\medskip\noindent
+$B$ を、ある基礎スキーム $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+$B$ 上の代数空間 $X$ について、$B$ 上固有な代数空間 $\overline{X}$ への
+準コンパクト開埋め込み $X \to \overline{X}$ が存在するとき、
+このとき {\it $B$ 上のコンパクト化をもつ}、または
+{\it $B$ 上コンパクト化可能である} という。$X$ が $B$ 上のコンパクト化をもつならば、
+$X \to B$ は分離的かつ有限型である。この節の主定理は、その逆も成り立つというものである。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-check-separated}
+$S$ をスキームとし、$X \to Y$ を $S$ 上の代数空間の射とする。
+$(U \subset X, f : V \to X)$ が基本識別平方で、$U \to Y$ と $V \to Y$ が分離的、
+$U \times_X V \to U \times_Y V$ が閉ならば、$X \to Y$ は分離的である。
+\end{lemma}
+
+\begin{proof}
+$\Delta : X \to X \times_Y X$ が閉埋め込みであることを確認すればよい。
+$X \times_Y X$ は四つの部分
+$U \times_Y U$, $U \times_Y V$, $V \times_Y U$, $V \times_Y V$
+で与えられるエタール被覆をもつ。ここで
+$(U \times_Y U) \times_{(X \times_Y X), \Delta} X  = U$,
+$(U \times_Y V) \times_{(X \times_Y X), \Delta} X = U \times_X V$,
+$(V \times_Y U) \times_{(X \times_Y X), \Delta} X = V \times_X U$、および
+$(V \times_Y V) \times_{(X \times_Y X), \Delta} X = V$。
+したがって補題の仮定は、ちょうど $\Delta$ が閉埋め込みであることを述べている。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-separate-disjoint-locally-closed-by-blowing-up}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離的な代数空間とし、
+$U \subset X$ を準コンパクト開部分とする。
+\begin{enumerate}
+\item $Z_1, Z_2 \subset X$ が有限表示の閉部分空間で
+$Z_1 \cap Z_2 \cap U = \emptyset$ ならば、$Z_1$ と $Z_2$ の狭義変換が
+互いに素となるような $U$-許容爆発 $X' \to X$ が存在する。
+\item $T_1, T_2 \subset |U|$ が互いに素な構成可能閉部分集合ならば、
+$T_1$ と $T_2$ の閉包が互いに素となるような $U$-許容爆発
+$X' \to X$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$Z_i \to X$ が有限表示であるという仮定は、$Z_i$ の準連接イデアル層
+$\mathcal{I}_i$ が有限型であることを意味する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation} を参照せよ。
+$\mathcal{I}_1 \mathcal{I}_2$ で切り出される閉部分空間を $Z \subset X$ と書く。
+$Z \cap U$ は $Z_1 \cap U$ と $Z_2 \cap U$ の非交和である。
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-separate-disjoint-opens-by-blowing-up}
+により、$Z_1$ と $Z_2$ の狭義変換が互いに素となるような
+$U \cap Z$-許容爆発 $Z' \to Z$ が存在する。この爆発の中心を $Y \subset Z$ と書く。
+$Y \to X$ は $Y \to Z$ と $Z \to X$ の合成として有限表示の閉埋め込みである
+（Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-admissible-blowup} および
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-finite-presentation}）。
+したがって $Y$ の爆発 $X' \to X$ は $U$-許容爆発である。
+狭義変換の一般的性質により、$X' \to X$ に関する $Z_1, Z_2$ の狭義変換は、
+$Z' \to Z$ に関する $Z_1, Z_2$ の狭義変換と同じである。
+Divisors on Spaces, Lemma \ref{spaces-divisors-lemma-strict-transform}.
+を参照せよ。これで (1) が示された。
+
+\medskip\noindent
+(2) の証明。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-quasi-coherent-finite-type-ideals}
+により、$T_i = V(\mathcal{J}_i)$（集合論的に）となる有限型準連接イデアル層
+$\mathcal{J}_i \subset \mathcal{O}_U$ が存在する。
+Limits of Spaces, Lemma \ref{spaces-limits-lemma-extend} により、
+$U$ への制限が $\mathcal{J}_i$ となる有限型準連接イデアル層
+$\mathcal{I}_i \subset \mathcal{O}_X$ が存在する。
+閉部分空間 $Z_i = V(\mathcal{I}_i)$ に (1) の結果を適用すればよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-blowup-iso-along}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の準コンパクトかつ準分離的な
+代数空間の固有射とする。$V \subset Y$ を準コンパクト開部分とし、
+$U = f^{-1}(V)$ とおく。$T \subset |V|$ を、$f|_U : U \to V$ が $V$ における
+$T$ のある開近傍上で同型となるような閉部分集合とする。
+このとき、$f$ の狭義変換 $f' : X' \to Y'$ が $|Y'|$ における $T$ の閉包の
+ある開近傍上で同型となるような $V$-許容爆発 $Y' \to Y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$f|_U$ が同型となる最大の開部分の補集合を $T' \subset |V|$ とする。
+このとき $T', T$ は $|V|$ で閉であり、$T \cap T' = \emptyset$ である。
+$|V|$ はスペクトル位相空間なので
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-quasi-separated-spectral})
+、$T \subset T_c$, $T' \subset T'_c$, $T_c \cap T'_c = \emptyset$ を満たす
+$|V|$ の構成可能閉部分集合 $T_c, T'_c$ を見つけられる
+（$T'$ を含み $T$ と交わらない $|V|$ の準コンパクト開部分 $W$ を選び
+$T_c = |V| \setminus W$ とおく。次に $T_c$ を含み $T'$ と交わらない
+$|V|$ の準コンパクト開部分 $W'$ を選び $T'_c = |V| \setminus W'$ とおく）。
+Lemma \ref{spaces-pushouts-lemma-separate-disjoint-locally-closed-by-blowing-up} により、
+$Y$ をある $V$-許容爆発で置き換え、$T_c$ と $T'_c$ の $|Y|$ における閉包が
+互いに素であると仮定してよい。開部分 $|Y| \setminus \overline{T}'_c$ に対応する
+$Y$ の開部分空間を $Y_0$ とし、$V_0 = V \cap Y_0$,
+$U_0 = U \times_V V_0$, $X_0 = X \times_Y Y_0$ とおく。
+$U_0 \to V_0$ は同型なので、$X_0$ の狭義変換 $X'_0$ が $Y'_0$ へ
+同型に写るような $V_0$-許容爆発 $Y'_0 \to Y_0$ が存在する。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-zariski-after-blowup} を参照せよ。
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-extend-admissible-blowups}
+により、$Y_0$ への制限が $Y'_0 \to Y_0$ となる $V$-許容爆発
+$Y' \to Y$ が存在する。$f' : X' \to Y'$ を $f$ の狭義変換とすると、
+$f'$ は $Y'_0$ 上で同型に制限されるので、所望の主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-blowup-etale-along}
+$S$ をスキームとする。$S$ 上の準コンパクトかつ準分離的な代数空間の図式
+$$
+\xymatrix{
+X \ar[d]_f & U \ar[l] \ar[d]_{f|_U} & A \ar[d] \ar[l] \\
+Y & V \ar[l] & B \ar[l]
+}
+$$
+を考える。次を仮定する。
+\begin{enumerate}
+\item $f$ は固有である。
+\item $V$ は $Y$ の準コンパクト開部分であり、$U = f^{-1}(V)$ である。
+\item $B \subset V$ と $A \subset U$ は閉部分空間である。
+\item $f|_A : A \to B$ は同型であり、$f$ は $A$ のすべての点でエタールである。
+\end{enumerate}
+このとき、狭義変換 $f' : X' \to Y'$ が次を満たすような $V$-許容爆発
+$Y' \to Y$ が存在する。$|X'|$ における $|A|$ の閉包の任意の幾何点
+$\overline{a}$ に対し、$\mathcal{O}_{Y', f'(\overline{a})} \to \mathcal{O}$ が
+有限平坦となるような商 $\mathcal{O}_{X', \overline{a}} \to \mathcal{O}$ が存在する。
+\end{lemma}
+
+\noindent
+証明から分かるように、より強いことが成り立つが、主張はすでに十分長く、
+後で必要となるのはこの形だけである。
+
+\begin{proof}
+$f|_U$ がエタールとなる最大の開部分の補集合を $T' \subset |U|$ とする。
+$T'$ は $|U|$ で閉であり、$|A|$ と交わらない。$|U|$ はスペクトル位相空間なので
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-quasi-separated-spectral})
+、$|A| \subset T_c$, $T' \subset T'_c$, $T_c \cap T'_c = \emptyset$ を満たす
+$|U|$ の構成可能閉部分集合 $T_c, T'_c$ が存在する
+（Lemma \ref{spaces-pushouts-lemma-blowup-iso-along} の証明を参照せよ）。
+Lemma \ref{spaces-pushouts-lemma-separate-disjoint-locally-closed-by-blowing-up} により、
+$T_c$ と $T'_c$ の $|X_1|$ における閉包が互いに素となるような
+$U$-許容爆発 $X_1 \to X$ が存在する。開部分
+$|X_1| \setminus \overline{T}'_c$ に対応する $X_1$ の開部分空間を
+$X_{1, 0}$ とし、$U_0 = U \cap X_{1, 0}$ とおく。構成により、$A$ の
+スキーム論的像 $\overline{A}_1 \subset X_1$ は $X_{1, 0}$ に含まれる。
+
+\medskip\noindent
+$Y$ を $V$-許容爆発で置き換えて狭義変換を取ることにより、
+$X_{1, 0} \to Y$ は平坦、準有限かつ有限表示であると仮定してよい。
+More on Morphisms of Spaces, Lemmas
+\ref{spaces-more-morphisms-lemma-flat-after-blowing-up} および
+\ref{spaces-more-morphisms-lemma-flat-fp-dimension-over-dense-open} を参照せよ。
+可換図式
+$$
+\vcenter{
+\xymatrix{
+X_1 \ar[rr] \ar[rd] & & X \ar[ld] \\
+& Y
+}
+}
+\quad\text{および次の図式}\quad
+\vcenter{
+\xymatrix{
+\overline{A}_1 \ar[rr] \ar[rd] & & \overline{A} \ar[ld] \\
+& \overline{B}
+}
+}
+$$
+というスキーム論的像の図式を考える。射 $\overline{A}_1 \to \overline{A}$ は固有なので全射である。
+実際、そのスキーム論的像は $\overline{A}$ に等しくなければならず、
+射 $\overline{A}_1 \to \overline{A}$ に Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-scheme-theoretic-image-is-proper} を適用できる。
+幾何点 $\overline{a}$ の $\overline{A}_1$ の幾何点 $\overline{a}_1$ への持ち上げを選び、
+$\mathcal{O} = \mathcal{O}_{X_1, \overline{a}_1}$ とおけば、エタール局所環に関する主張が従う。
+実際、$X_1 \to Y$ は $X_{1, 0} \supset \overline{A}_1$ 上で平坦かつ準有限なので、写像
+$\mathcal{O}_{Y', f'(\overline{a})} \to \mathcal{O}_{X_1, \overline{a}_1}$
+は有限平坦である。Algebra, Lemmas
+\ref{algebra-lemma-quasi-finite-strict-henselization}
+および \ref{algebra-lemma-characterize-henselian} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-replaced-by-strict-transform}
+$S$ をスキームとし、$X \to B$ と $Y \to B$ を $S$ 上の代数空間の射とする。
+$U \subset X$ を開部分空間とする。$V \to X \times_B Y$ を、第1射影との合成が
+$U$ に写る準コンパクト射とする。$Z \subset X \times_B Y$ を
+$V \to X \times_B Y$ のスキーム論的像とし、$X' \to X$ を $U$-許容爆発とする。
+このとき $V \to X' \times_B Y$ のスキーム論的像は、この爆発に関する
+$Z$ の狭義変換である。
+\end{lemma}
+
+\begin{proof}
+$Z' \to Z$ を狭義変換と書く。射 $Z' \to X'$ は閉埋め込み
+$Z' \to X' \times_B Y$ を誘導する（定義により $Z'$ は
+$X' \times_X Z$ の閉部分空間だからである）。したがって証明を終えるには、
+$V \to Z'$ のスキーム論的像 $Z''$ が $Z'$ であることを示せばよい。
+$Z'' \subset Z'$ は $V \to Z'$ が $Z''$ を経由する閉部分空間である。
+$V \to X \times_B Y$ と $V \to X' \times_B Y$ はともに準コンパクトである
+（後者は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-permanence}
+と、$X' \times_B Y \to X \times_B Y$ が固有射の基底変換として分離的であることから従う）。
+したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}
+により $Z \cap (U \times_B Y) = Z'' \cap (U \times_B Y)$ である。
+したがって包含射 $Z'' \to Z'$ は $Z' \to Z$ の例外因子 $E$ の外で同型である。
+しかし $Z'$ の構造層は $E$ に台をもつ非零切断をもたない
+（狭義変換の定義による）。ゆえに全射
+$\mathcal{O}_{Z'} \to \mathcal{O}_{Z''}$ は同型でなければならない。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-compactification-dominates}
+$S$ をスキームとし、$B$ を $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+$U$ を $B$ 上有限型かつ分離的な代数空間とし、$V \to U$ をエタール射とする。
+$V$ が $B$ 上のコンパクト化 $V \subset Y$ をもつならば、$V \to U$ が
+固有射 $V' \to U$ へ延長されるような $V$-許容爆発 $Y' \to Y$ と
+開部分 $V \subset V' \subset Y'$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$V \to Y \times_B U$ という「対角」射のスキーム論的像
+$Z \subset Y \times_B U$ を考える。$Y$ を $V$-許容爆発で置き換えると、
+$Z$ はその爆発に関する狭義変換で置き換えられる。
+Lemma \ref{spaces-pushouts-lemma-replaced-by-strict-transform} を参照せよ。したがって
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-zariski-after-blowup}
+により $Z \to Y$ は開埋め込みであると仮定してよい。その像を
+$V' \subset Y$ と書く。射影 $Y \times_B U \to U$ は固有であり、
+$V' \cong Z$ は $Y \times_B U$ の閉部分空間なので、誘導される射
+$V' \to U$ は固有である。
+\end{proof}
+
+\noindent
+次の補題は、$\mathbf{Z}$ 上有限型の代数空間の上の有限型分離代数空間について述べる。
+準コンパクトかつ準分離的な代数空間に対する版も成り立つ
+（本質的に同じ証明による）が、この節の主定理から直ちに従う。
+まずスキームの場合にこの補題の証明を読むことを強く勧める。
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-two-compactifications}
+$B$ を $\mathbf{Z}$ 上有限型の代数空間とし、$U$ を $B$ 上有限型かつ分離的な
+代数空間とする。$(U_2 \subset U, f : U_1 \to U)$ を基本識別平方とする。
+$U_1$ と $U_2$ が $B$ 上のコンパクト化をもち、$U_1 \times_U U_2 \to U$ の像が
+稠密であると仮定する。このとき $U$ は $B$ 上のコンパクト化をもつ。
+\end{lemma}
+
+\begin{proof}
+$i = 1, 2$ に対して $B$ 上のコンパクト化 $U_i \subset X_i$ を選ぶ。
+$U_i$ は $X_i$ でスキーム論的に稠密であると仮定してよい。
+Lemma \ref{spaces-pushouts-lemma-compactification-dominates} により、開部分 $V_i \subset X_i$ と、
+$U_i \to U$ を延長する固有射 $\psi_i : V_i \to U$ が存在すると仮定してよい。図式は
+$$
+\xymatrix{
+U_i \ar[r] \ar[d] & V_i \ar[r] \ar[dl]^{\psi_i} & X_i \\
+U
+}
+$$
+閉部分集合 $|U| \setminus |U_2|$ に対応する被約閉部分空間を
+$Z_1 \subset U$ と書く。$f^{-1}Z_1$ は $Z_1$ へ同型に写る
+$U_1$ の閉部分空間であることを思い出そう。閉部分集合
+$|U| \setminus \Im(|f|) =
+|U_2| \setminus \Im(|U_1 \times_U U_2| \to |U_2|)$.
+に対応する被約閉部分空間を $Z_2 \subset U$ と書く。集合論的に
+$$
+U = U_2 \amalg Z_1 = Z_2 \amalg \Im(f) =
+Z_2 \amalg \Im(U_1 \times_U U_2 \to U_2) \amalg Z_1
+$$
+である。$\psi_i$ による $Z_i$ の逆像を $Z_{i, i} \subset V_i$ と書く。
+$\psi_2$ は $Z_2$ のある開近傍上で同型である。また、$f^{-1}Z_1$ と交わらない
+ある閉部分空間 $T \subset V_1$ に対して
+$Z_{1, 1} = \psi_1^{-1}Z_1 = f^{-1}Z_1 \amalg T$ であり、さらに
+$\psi_1$ は $f^{-1}Z_1$ に沿ってエタールである。
+$\psi_i$ による $Z_j$ の逆像を $Z_{i, j} \subset V_i$ と書く。
+$\psi_i : Z_{i, j} \to Z_j$ は固有射である。$Z_i$ と $Z_j$ は $U$ の
+互いに素な閉部分空間なので、$Z_{i, i}$ と $Z_{i, j}$ は $V_i$ の
+互いに素な閉部分空間である。
+
+\medskip\noindent
+$X_i$ における $Z_{i, i}$ と $Z_{i, j}$ のスキーム論的像をそれぞれ
+$\overline{Z}_{i, i}$ と $\overline{Z}_{i, j}$ と書く。
+$|Z_{i, j}|$ は $|\overline{Z}_{i, j}|$ で稠密であることを思い出そう。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-immersion} を参照せよ。
+$X_i$ を $V_i$-許容爆発で置き換え、$\overline{Z}_{i, i}$ と
+$\overline{Z}_{i, j}$ は互いに素であると仮定してよい。
+Lemma \ref{spaces-pushouts-lemma-separate-disjoint-locally-closed-by-blowing-up} を参照せよ。
+これは $X_1$ と $X_2$ の両方について成り立つと仮定する。
+$X_i$ をさらに $V_i$-許容爆発で置き換えてもこの性質は保たれる。
+したがって $X_1$ を別の $V_1$-許容爆発で置き換え、
+$|\overline{Z}_{1, 1}|$ は $|T|$ と $|f^{-1}Z_1|$ の $|X_1|$ における
+閉包の非交和であると仮定してよい。
+
+\medskip\noindent
+$V_{12} = V_1 \times_U V_2$ とおく。閉埋め込み
+$V_{12} = V_1 \times_U V_2 \to V_1 \times_B V_2$
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map})
+と開埋め込み $V_1 \times_B V_2 \to X_1 \times_B X_2$ の合成である埋め込み
+$V_{12} \to X_1 \times_B X_2$ を得る。$V_{12} \to X_1 \times_B X_2$ の
+スキーム論的像を $X_{12} \subset X_1 \times_B X_2$ とする。射影
+$$
+p_1 : X_{12} \to X_1
+\quad\text{および}\quad
+p_2 : X_{12} \to X_2
+$$
+は、$X_1$ と $X_2$ が $B$ 上固有なので固有である。$X_1$ を
+$V_1$-許容爆発で置き換えると、$X_{12}$ はこの爆発に関する狭義変換で置き換えられる。
+Lemma \ref{spaces-pushouts-lemma-replaced-by-strict-transform} を参照せよ。
+
+\medskip\noindent
+$\psi : V_{12} \to U$ を合成
+$\psi = \psi_1 \circ p_1|_{V_{12}} = \psi_2 \circ p_2|_{V_{12}}$.
+とする。閉部分空間
+$$
+Z_{12, 2} =
+(p_1|_{V_{12}})^{-1}Z_{1, 2} =
+(p_2|_{V_{12}})^{-1}Z_{2, 2} =
+\psi^{-1}Z_2 \subset V_{12}
+$$
+を考える。$\psi_2 : V_2 \to U$ は $Z_2$ のある開近傍上で同型であり、
+$V_{12} = V_1 \times_U V_2$ なので、射
+$p_1|_{V_{12}} : V_{12} \to V_1$ は $Z_{1, 2}$ のある開近傍上で同型である。
+Lemma \ref{spaces-pushouts-lemma-blowup-iso-along} により、$p_1$ の狭義変換
+$p'_1 : X'_{12} \to X'_1$ が $|X'_1|$ における $|Z_{1, 2}|$ の閉包の
+ある開近傍上で同型となるような $V_1$-許容爆発 $X_1' \to X_1$ が存在する。
+$X_1$ を $X'_1$ で、$X_{12}$ を $X'_{12}$ で置き換え、$p_1$ は
+$|\overline{Z}_{1, 2}|$ のある開近傍上で同型であると仮定してよい。
+
+\medskip\noindent
+前の段落の結果から
+$$
+X_{12} \cap (\overline{Z}_{1, 2} \times_B \overline{Z}_{2, 1}) = \emptyset
+$$
+であることが分かる。ここで交わりは $X_1 \times_B X_2$ 内で取る。
+実際、$X_{12}$ における逆像 $p_1^{-1}\overline{Z}_{1, 2}$ は
+$\overline{Z}_{1, 2}$ へ同型に写る。特に $|Z_{12, 2}|$ は
+$|p_1^{-1}\overline{Z}_{1, 2}|$ で稠密である。したがって $p_2$ は
+$|p_1^{-1}\overline{Z}_{1, 2}|$ を $|\overline{Z}_{2, 2}|$ に写す。
+$|\overline{Z}_{2, 2}| \cap |\overline{Z}_{2, 1}| = \emptyset$ なので結論が従う。
+
+\medskip\noindent
+議論を完結する前に、もう一度爆発を行う必要がある。すなわち、台位相空間が
+$$
+|W_2| =
+|V_2| \cup (|X_2| \setminus |\overline{Z}_{2, 1}|) =
+|X_2| \setminus \left(|\overline{Z}_{2, 1}| \setminus |Z_{2, 1}|\right)
+$$
+となる開部分空間を $V_2 \subset W_2 \subset X_2$ とする。
+$p_2(p_1^{-1}\overline{Z}_{1, 2})$ は $W_2$ に含まれるので、$X_2$ を
+$W_2$-許容爆発で、$X_{21}$ を対応する狭義変換で置き換えても、
+$p_1$ が $\overline{Z}_{1, 2}$ のある開近傍上で同型であるという性質は保たれる。
+$\overline{Z}_{2, 1} \cap W_2 = \overline{Z}_{2, 1} \cap V_2 = Z_{2, 1}$
+なので、$Z_{2, 1}$ は $W_2$ と $V_2$ の閉部分空間である。
+$X_{12}$ の開部分空間として
+$V_{12} = V_1 \times_U V_2 = p_1^{-1}(V_1) = p_2^{-1}(V_2)$ である。
+実際、これは射 $\psi : V_{12} \to U$ が延長される $X_{12}$ の最大の
+開部分空間である。細部は省略する\footnote{実際、$V_1 \times_U V_2$ は
+$U$ 上固有なので、$\psi$ が $X_{12}$ のより大きな開部分へ延長されるならば、
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence}.
+により $V_1 \times_U V_2$ はこの開部分で閉となる。
+$V_{12} \subset X_{12}$ は稠密なので等号を得る。}。
+$V_{12}$ の閉部分空間について次の等式が成り立つ。
+$$
+p_2^{-1}Z_{2, 1} = p_2^{-1} \psi_2^{-1} Z_1 =
+p_1^{-1} \psi_1^{-1} Z_1= p_1^{-1}Z_{1, 1} =
+p_1^{-1}f^{-1}Z_1 \amalg p_1^{-1}T
+$$
+ここ以下では、$p_2$ の $V_{12}$ への制限などを単に $p_2$ と書くという
+軽微な記法の濫用を行う。$Z_{2, 1}$ は $W_2$ の閉部分空間なので、
+$p_2^{-1}(Z_{2, 1})$ は $p_2^{-1}(W_2)$ の閉部分空間である。
+したがって $p_1^{-1}f^{-1}Z_1$ も $p_2^{-1}(W_2)$ の閉部分空間である。
+最後に、$\psi_1$ は $f^{-1}Z_1$ に沿ってエタールであり、
+$V_{12} = V_1 \times_U V_2$ なので、射 $p_2 : X_{12} \to X_2$ は
+$p_1^{-1}f^{-1}Z_1$ の各点でエタールである。
+そこで Lemma \ref{spaces-pushouts-lemma-blowup-etale-along} を、射 $p_2 : X_{12} \to X_2$、
+開部分 $W_2$、閉部分空間 $Z_{2, 1} \subset W_2$、および閉部分空間
+$p_1^{-1}f^{-1}Z_1 \subset p_2^{-1}(W_2)$ に適用できる。
+したがって $X_2$ を $W_2$-許容爆発で、$X_{12}$ を対応する狭義変換で置き換えると、
+$|p_1^{-1}f^{-1}Z_1|$ の閉包の任意の幾何点 $\overline{y}$ に対し、
+$\mathcal{O}_{X_2, p_2(\overline{y})} \to \mathcal{O}$ が有限平坦となるような
+局所環準同型 $\mathcal{O}_{X_{12}, \overline{y}} \to \mathcal{O}$ を得る。
+
+\medskip\noindent
+代数空間
+$$
+W_2 = U \coprod\nolimits_{U_2} (X_2 \setminus \overline{Z}_{2, 1}),
+$$
+と、第1段落の $T \subset V_1$ を用いて押し出しで得られる代数空間
+$$
+W_1 = U \coprod\nolimits_{U_1}
+(X_1 \setminus \overline{Z}_{1, 2} \cup \overline{T}),
+$$
+を考える。Lemma \ref{spaces-pushouts-lemma-construct-elementary-distinguished-square} を参照せよ。
+Lemma \ref{spaces-pushouts-lemma-check-separated} を適用して $W_i \to B$ が分離的であることを示す。
+まず $U \to B$ と $X_i \to B$ は分離的である。準コンパクト埋め込み
+$U_i \to U \times_B (X_i \setminus \overline{Z}_{i, j})$ が閉であることを
+付値判定法で確認しよう。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed} を参照せよ。
+$B$ 上の付値環 $A$ とその分数体 $K$、および両立する射
+$(u, x_i) : \Spec(A) \to U \times_B X_i$ と $u_i : \Spec(K) \to U_i$ を取る。
+$\psi_i$ は固有なので、$u$ と $u_i$ と両立する一意な
+$v_i : \Spec(A) \to V_i$ が存在する。$X_i$ は $B$ 上固有なので $x_i = v_i$ である。
+$v_i$ が $U_i \subset V_i$ を経由しないならば、$x_i$ は $\Spec(A)$ の閉点を
+$Z_{i, j}$ に、また $i = 1$ の場合には $T$ に写す。
+$W_i$ の構成で $\overline{Z}_{i, j}$ と $\overline{T}$ を除いているので、
+これで証明が完了する。
+
+\medskip\noindent
+一方、分数体 $K$ をもつ任意の $B$ 上の付値環 $A$ と、$B$ 上の任意の射
+$$
+\gamma : \Spec(K) \to \Im(U_1 \times_U U_2 \to U)
+$$
+に対して、$A$ を付値環の拡大で置き換えれば、ある $i$ と、$\gamma$ を延長する射
+$h_i : \Spec(A) \to W_i$ が存在すると主張する。実際、まず固有性の付値判定法により
+$\gamma$ を射 $g_2 : \Spec(A) \to X_2$ へ延長する。$g_2$ の像が
+$\overline{Z}_{2, 1}$ と交わらないならば、$W_2$ への所望の射を得る。
+そうでなければ、$g_2$ による閉点の像の上にある幾何点を
+$\overline{z} \in \overline{Z}_{2, 1}$ と書く。空間の写像
+$|p_1^{-1}f^{-1}Z_1| \to |\overline{Z}_{2, 1}|$ は閉であり、その像は稠密開部分
+$|Z_{2, 1}|$ を含むので、これを $|p_1^{-1}f^{-1}Z_1|$ の閉包にある
+$X_{12}$ の幾何点 $\overline{y}$ へ持ち上げられる。$A$ をその狭義 Hensel 化で置き換えると
+(More on Algebra, Lemma \ref{more-algebra-lemma-henselization-valuation-ring})
+、次の図式を得る。
+$$
+\xymatrix{
+A \ar@{..>}[rr] & & A' \\
+\mathcal{O}_{X_2, \overline{z}} \ar[r] \ar[u] &
+\mathcal{O}_{X_{12}, \overline{y}} \ar[r] &
+\mathcal{O} \ar@{..>}[u]
+}
+$$
+ここで $\mathcal{O}_{X_{12}, \overline{y}} \to \mathcal{O}$ は、証明の第5段落で
+得た写像である。横の合成は有限平坦なので、図式を可換にする付値環の拡大
+$A'/A$ と点線の矢印が存在する。$A$ を $A'$ で置き換えると、閉点を
+$|p_1^{-1}f^{-1}Z_1|$ の閉包へ写す持ち上げ
+$g_{12} : \Spec(A) \to X_{12}$ を得るということである。
+すると $g_1 = p_1 \circ g_{12} : \Spec(A) \to X_1$ は、その閉点を
+$|f^{-1}Z_1|$ の閉包へ写す射である。$|f^{-1}Z_1|$ の閉包は $|T|$ の閉包と
+交わらず、$|\overline{Z}_{1, 2}|$ と交わらない $|\overline{Z}_{1, 1}|$ に含まれる。
+したがって $g_1$ は所望の射 $h_1 : \Spec(A) \to W_1$ を定める。
+
+\medskip\noindent
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-find-common-blowups} のような図式
+$$
+\xymatrix{
+W_1' \ar[d] \ar[r] & W & W_2' \ar[l] \ar[d] \\
+W_1 & U \ar[l] \ar[lu] \ar[u] \ar[ru] \ar[r] & W_2
+}
+$$
+を考える。前の段落により、$\Im(\gamma) \subset \Im(U_1 \times_U U_2 \to U)$
+を満たす任意の実線図式
+$$
+\xymatrix{
+\Spec(K) \ar[r]_\gamma  \ar[d] & W \ar[d] \\
+\Spec(A) \ar@{..>}[ru] \ar[r] & B
+}
+$$
+に対して、必要なら $A$ を付値環の拡大で置き換えると、ある $i$ と
+$\gamma$ の延長 $h_i : \Spec(A) \to W_i$ が存在する。
+$W'_i \to W_i$ の固有性の付値判定法を用いると、$h_i$ を
+$h'_i : \Spec(A) \to W'_i$ へ持ち上げられる。したがって、必要なら $A$ を
+拡大した後で図式の点線矢印が存在する。$W$ は $B$ 上分離的なので、
+拡大を選ぶ必要はなく、矢印も一意である。
+Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-usual-enough}
+および \ref{spaces-morphisms-lemma-separated-implies-valuative} を参照せよ。
+最後に点線矢印の存在から、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-refined-valuative-criterion-universally-closed}
+により $W \to B$ は普遍閉である。$W \to B$ はすでに有限型かつ分離的なので、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-pushouts-lemma-filter-Noetherian-space}
+$S$ をスキーム、$X$ を $S$ 上の Noether 代数空間とする。
+$U \subset X$ を真の稠密開部分空間とする。このとき、次を満たす
+アフィンスキーム $V$ とエタール射 $V \to X$ が存在する。
+\begin{enumerate}
+\item 開部分空間 $W = U \cup \Im(V \to X)$ は $U$ より真に大きい。
+\item $(U \subset W, V \to W)$ は識別平方である。
+\item $U \times_W V \to U$ の像は稠密である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated} のような層化
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+と射 $f_p : V_p \to U_p$ を選ぶ。$U_p \not \subset U$ となる最小の整数を $p$ とする
+（$U \not = X$ なので可能である）。エタール射 $f_p|_V : V \to X$ が
+$U$ を経由しないようなアフィン開部分 $V \subset V_p$ を選ぶ。
+開部分 $W = U \cup \Im(V \to X)$ と、$|Z| = |W| \setminus |U|$ を満たす
+被約閉部分空間 $Z \subset W$ を考える。上で引用した補題により
+$f_p$ は対応する性質をもつので、$f^{-1}Z \to Z$ は同型である。
+したがって $(U \subset W, f : V \to W)$ は識別平方である。
+開部分 $I = \Im(U \times_W V \to U)$ は $U$ で稠密とは限らない。
+台集合が $|U| \setminus \overline{|I|}$ である代数空間 $U' \subset U$ は
+Noether なので、稠密開部分スキーム $U'' \subset U'$ を見つけられる。
+たとえば Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme} を参照せよ。
+次に稠密アフィン開部分 $U''' \subset U''$ を見つけられる。Properties, Lemmas
+\ref{properties-lemma-Noetherian-irreducible-components} および
+\ref{properties-lemma-maximal-points-affine} を参照せよ。
+$f$ を $V \amalg U''' \to X$ で置き換えれば、すべて明らかである。
+\end{proof}
+
+\begin{theorem}
+\label{spaces-pushouts-theorem-nagata}
+\begin{reference}
+\cite{CLO}
+\end{reference}
+$S$ をスキームとし、$B$ を $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+$X \to B$ を分離的有限型射とする。このとき $X$ は $B$ 上のコンパクト化をもつ。
+\end{theorem}
+
+\begin{proof}
+まず Noether の場合へ帰着する。この段落は読み飛ばすことを強く勧める。
+初めに $S$ を $\Spec(\mathbf{Z})$ で置き換えてよい。
+Spaces, Section \ref{spaces-section-change-base-scheme} および
+Properties of Spaces, Definition \ref{spaces-properties-definition-separated} を参照せよ。
+$X' \to B$ が有限表示かつ分離的であるような閉埋め込み $X \to X'$ が存在する。
+Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-separated-closed-in-finite-presentation} を参照せよ。
+$B$ 上の $X'$ のコンパクト化が得られれば、その中で $X$ のスキーム論的閉包を取ることで
+$B$ 上の $X$ のコンパクト化を得る。したがって $X \to B$ は分離的かつ有限表示であると
+仮定してよい。アフィン遷移射をもつ
+$\Spec(\mathbf{Z})$ 上有限型の Noether 代数空間の系の有向極限
+$B = \lim B_i$ と書ける。Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-approximate} を参照せよ。
+$B$ への基底変換が $X \to B$ となる有限表示射 $X_i \to B_i$ と $i$ を選べる。
+Limits of Spaces, Lemma \ref{spaces-limits-lemma-descend-finite-presentation} を参照せよ。
+$i$ を大きくして $X_i \to B_i$ は分離的であると仮定してよい。
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-separated-morphism} を参照せよ。
+$B_i$ 上の $X_i$ のコンパクト化が得られれば、その $B$ への基底変換は
+$B$ 上の $X$ のコンパクト化となる。これで次の段落の場合へ帰着した。
+
+\medskip\noindent
+さらに $B$ が $\mathbf{Z}$ 上有限型であると仮定する。代数空間のエタール射
+$U \to X$ であって、$U$ が $\Spec(\mathbf{Z})$ 上のコンパクト化
+$Y$ をもつものを取る。射
+$$
+U \longrightarrow B \times_{\Spec(\mathbf{Z})} Y
+$$
+は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-loc-finite-type-loc-quasi-finite}
+により分離的かつ準有限である
+（表示した射は埋め込みを経由して因数分解されるのでモノ射である）。
+したがって Zariski の主定理 (More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-quasi-finite-separated-pass-through-finite})
+により、$B \times_{\Spec(\mathbf{Z})} Y$ 上有限な代数空間 $Y'$ への
+$U$ の開埋め込みが存在する。このとき $Y' \to B$ は、2つの固有射の合成
+$Y' \to B \times_{\Spec(\mathbf{Z})} Y \to B$ であるため固有である
+（Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-finite-proper},
+\ref{spaces-morphisms-lemma-composition-proper}、および
+\ref{spaces-morphisms-lemma-base-change-proper} を用いる）。
+ゆえに $U$ は $B$ 上のコンパクト化をもつ。
+
+\medskip\noindent
+スキームである稠密開部分空間 $U \subset X$ が存在する
+(Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme})。
+実際、$U$ をアフィンスキームに選べる
+(Properties, Lemmas \ref{properties-lemma-Noetherian-irreducible-components}
+および \ref{properties-lemma-maximal-points-affine})。
+したがって $U$ は $\Spec(\mathbf{Z})$ 上のコンパクト化をもつ。
+これは直接容易に示せるが、スキームに対する定理
+More on Flatness, Theorem \ref{flat-theorem-nagata} からも従う。
+前の段落により $U$ は $B$ 上のコンパクト化をもつ。
+Noether 帰納法により、$B$ 上のコンパクト化をもつ極大な稠密開部分空間
+$U \subset X$ を見つけられる。$U \not = X$ という仮定が矛盾を導くことを示そう。
+実際、Lemma \ref{spaces-pushouts-lemma-filter-Noetherian-space} により、真に大きい開部分
+$U \subset W \subset X$ と、$V$ がアフィンで $U \times_W V$ の像が
+$U$ で稠密となる識別平方 $(U \subset W, f : V \to W)$ を見つけられる。
+$V$ はアフィンなので、前と同様に $B$ 上のコンパクト化をもつ。したがって
+Lemma \ref{spaces-pushouts-lemma-two-compactifications}
+を適用すると $W$ が $B$ 上のコンパクト化をもつことが分かり、これは所望の矛盾である。
+\end{proof}

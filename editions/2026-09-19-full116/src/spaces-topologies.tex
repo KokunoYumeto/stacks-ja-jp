@@ -1,0 +1,1383 @@
+% Generated mechanically from frozen input inputs/p09/ja/src/spaces-topologies.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{72}
+\chapter{代数空間上の位相}
+
+
+\phantomsection
+\label{spaces-topologies-section-phantom}
+
+
+
+
+
+\section{はじめに}
+\label{spaces-topologies-section-introduction}
+
+\noindent
+本章では代数空間の圏上のいくつかの位相を導入する。
+\cite{SGA1}、\cite{Ner}、\cite{LM-B} および \cite{Kn} の内容と比較されたい。
+その前に、同じ基礎圏上で同じ層の概念を与えるサイト
+（Sites, Definition \ref{sites-definition-site} で定義される）
+には多くの異なる選択肢があることを指摘しておく。
+したがって、ここでの選択は参考文献のものと多少異なることがあるが、
+最終的には同じコホモロジー群などを与える。
+
+
+
+
+\section{一般的手順}
+\label{spaces-topologies-section-procedure}
+
+\noindent
+本節では、以下で用いるサイトを作るための一般的手順を説明する。
+読者が Topologies, Section \ref{topologies-section-procedure} を
+読んでいなければ、この議論はほとんど、あるいはまったく意味をなさないであろう。
+
+\medskip\noindent
+$S$ を基礎スキームとする。
+任意の圏 $\Sch_\alpha$ をとる。この圏は
+Sets, Lemma \ref{sets-lemma-construct-category} のように、
+$S$ と、含めたい任意の $S$ 上のスキームの集合から出発して構成する。
+被覆の任意の集合 $\text{Cov}_{fppf}$ を圏 $\Sch_\alpha$ 上に選ぶ。
+これは Sets, Lemma \ref{sets-lemma-coverings-site} のように、
+圏 $\Sch_\alpha$ と fppf 被覆のクラスから出発して選ぶ。
+このように得られる大 fppf サイトを $\Sch_{fppf}$ と記し、
+$(\Sch/S)_{fppf}$ を、対応する $S$ の大 fppf サイトとする。
+（以上は Topologies, Section \ref{topologies-section-fppf} の
+規定どおりである。）
+
+\medskip\noindent
+以上の選択を与えると、$S$ 上の代数空間の圏は同型類の集合をもつ。
+これを見る一つの方法は、任意の $S$ 上の代数空間が $U/R$ の形をもつという
+事実を用いることである。ここで $j : R \to U \times_S U$ は étale 同値関係であり、
+$U, R \in \Ob((\Sch/S)_{fppf})$ である。
+Spaces, Lemma \ref{spaces-lemma-space-presentation} を参照せよ。
+したがって、代数空間の圏の充満部分圏
+$\textit{Spaces}/S$ を見いだせる。この圏は $S$ 上の代数空間からなり、
+対象の集合をもち、各代数空間は
+$\textit{Spaces}/S$ の対象と同型である。
+そのような圏を一つ選んで固定する。
+
+\medskip\noindent
+以下の各節では、位相 $\tau$ を与えたとき、大サイト
+$(\textit{Spaces}/S)_\tau$（それぞれ大サイト
+$(\textit{Spaces}/X)_\tau$。ここで $X$ は $S$ 上の代数空間）の基礎圏を
+$\textit{Spaces}/S$（それぞれ部分圏 $\textit{Spaces}/X$ であり、
+これは $\textit{Spaces}/S$ の部分圏である。Categories, Example
+\ref{categories-example-category-over-X} を参照）とする。
+これをサイトにする手順は通常どおりであり、$\tau$-被覆のクラスを定義し、
+Sets, Lemma \ref{sets-lemma-coverings-site} を用いて
+位相を定める十分大きな被覆の集合を選ぶ。
+
+\medskip\noindent
+{\it 小 étale サイト $X_\etale$}は代数空間 $X$ に対して、
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-etale-site} ですでに定義されていることを指摘しておく。
+その対象は $X$ 上 étale なスキームであり、代数空間の定義によりそのような対象は多数ある。
+% P09-ERR-0312
+しかし、本章の観点からより自然なサイト
+（Topologies, Definition \ref{topologies-definition-big-small-etale} と比較せよ）は、
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-spaces-etale-site} の
+サイト $X_{spaces, \etale}$ である。
+これら二つのサイトは同じトポスを定める。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-compare-etale-sites} を参照せよ。
+本章ではこれらを再定義せず、単に用いることにする。
+
+
+
+
+
+
+\section{Zariski 位相}
+\label{spaces-topologies-section-zariski}
+
+\noindent
+Spaces, Section \ref{spaces-section-Zariski} では、
+開部分空間による代数空間の Zariski 被覆という概念を導入した。
+開部分空間を開埋め込みに置き換えた対応する概念は次のとおりである。
+
+\begin{definition}
+\label{spaces-topologies-definition-zariski-covering}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の Zariski 被覆}とは、射の族
+$\{f_i : X_i \to X\}_{i \in I}$ で、$S$ 上の代数空間からなり、
+各 $f_i$ が開埋め込みであり、かつ
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+すなわち射が共同全射であるものをいう。
+\end{definition}
+
+\noindent
+Zariski 被覆が有用なこともあるが、代数空間の圏上の対応する位相は
+実際には粗すぎて、特に有用とはいえない。それでもサイトを定める。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型ならば、$\{X' \to X\}$ は $X$ の Zariski 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が Zariski 被覆であり、各 $i$ に対して
+Zariski 被覆 $\{X_{ij} \to X_i\}_{j\in J_i}$ が与えられているならば、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は Zariski 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が Zariski 被覆であり、
+$X' \to X$ が代数空間の射ならば、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は Zariski 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Étale 位相}
+\label{spaces-topologies-section-etale}
+
+\noindent
+本節では代数空間の étale 被覆という概念を論じ、
+代数空間の大 étale サイトを定義する。
+Topologies, Section \ref{topologies-section-etale} と比較されたい。
+
+\begin{definition}
+\label{spaces-topologies-definition-etale-covering}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の étale 被覆}とは、射の族
+$\{f_i : X_i \to X\}_{i \in I}$ で、$S$ 上の代数空間からなり、
+各 $f_i$ が étale であり、かつ
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+すなわち射が共同全射であるものをいう。
+\end{definition}
+
+\noindent
+これは Topologies, Definition \ref{topologies-definition-etale-covering}
+とまったく同じである。特に、$X$ およびすべての $X_i$ がスキームならば、
+通常のスキームの étale 被覆という概念を回復する。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski-etale}
+任意の Zariski 被覆は étale 被覆である。
+\end{lemma}
+
+\begin{proof}
+定義および開埋め込みが étale 射であるという事実から明らかである。
+後者は Morphisms, Lemma \ref{morphisms-lemma-open-immersion-etale} から
+Spaces, Lemma
+\ref{spaces-lemma-representable-transformations-property-implication} を介して従う。
+実際、埋め込みは表現可能である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-etale}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型ならば、$\{X' \to X\}$ は $X$ の étale 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が étale 被覆であり、各 $i$ に対して
+étale 被覆 $\{X_{ij} \to X_i\}_{j\in J_i}$ が与えられているならば、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は étale 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が étale 被覆であり、
+$X' \to X$ が代数空間の射ならば、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は étale 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+次の補題は、サイト $(\textit{Spaces}/X)_\etale$ と
+$(\textit{Spaces}/X)_{smooth}$ が同じ層の圏をもつことを述べる。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-etale-dominates-smooth}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$\{X_i \to X\}_{i \in I}$ を $X$ の smooth 被覆とする。
+このとき、étale 被覆 $\{U_j \to X\}_{j \in J}$ が存在する。
+これは $X$ の被覆であり、$\{X_i \to X\}_{i \in I}$ を細分する。
+\end{lemma}
+
+\begin{proof}
+まずスキーム $U$ と全射 étale 射 $U \to X$ を選ぶ。
+各 $i$ に対して、スキーム $W_i$ と全射 étale 射
+$W_i \to X_i$ を選ぶ。このとき $\{W_i \to X\}_{i \in I}$ は
+$\{X_i \to X\}_{i \in I}$ を細分する smooth 被覆である。
+したがって $\{W_i \times_X U \to U\}_{i \in I}$ はスキームの smooth 被覆である。
+More on Morphisms, Lemma \ref{more-morphisms-lemma-etale-dominates-smooth}
+により、étale 被覆 $\{U_j \to U\}$ を選べる。
+この被覆は $\{W_i \times_X U \to U\}$ を細分する。
+このとき $\{U_j \to X\}_{j \in J}$ は、
+$\{X_i \to X\}_{i \in I}$ を細分する étale 被覆である。
+\end{proof}
+
+\begin{definition}
+\label{spaces-topologies-definition-big-etale-site}
+$S$ をスキームとする。大 étale サイト
+{\it $(\textit{Spaces}/S)_\etale$} とは、次のように構成される任意のサイトをいう。
+\begin{enumerate}
+\item Topologies, Section \ref{topologies-section-etale} のように、
+大 étale サイト $(\Sch/S)_\etale$ を選ぶ。
+\item 基礎圏として圏 $\textit{Spaces}/S$ をとる。これは
+$S$ 上の代数空間の圏である
+（これが集合である理由は Section \ref{spaces-topologies-section-procedure} の議論を参照せよ）。
+\item Sets, Lemma \ref{sets-lemma-coverings-site} のように、
+圏 $\textit{Spaces}/S$ と Definition
+\ref{spaces-topologies-definition-etale-covering} の étale 被覆のクラスから出発して
+被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+以上を定義したので、局所化することによって代数空間の étale サイトを得られる。
+
+\begin{definition}
+\label{spaces-topologies-definition-big-small-etale}
+$S$ をスキームとし、$(\textit{Spaces}/S)_\etale$ を
+Definition \ref{spaces-topologies-definition-big-etale-site} のものとする。
+$X$ を $S$ 上の代数空間、すなわち
+$(\textit{Spaces}/S)_\etale$ の対象とする。このとき大 étale サイト
+{\it $(\textit{Spaces}/X)_\etale$} は $X$ のサイトであり、Sites, Section
+\ref{sites-section-localize} で導入された、サイト
+$(\textit{Spaces}/S)_\etale$ の $X$ における局所化である。
+\end{definition}
+
+\noindent
+$X$ を定義のような $S$ 上の代数空間とすると、
+小 étale サイト $X_{spaces, \etale}$ および $X_\etale$ は
+すでに定義されていることを思い出そう。Properties of Spaces, Section
+\ref{spaces-properties-section-etale-site} を参照せよ。
+包含函子 $X_\etale \subset X_{spaces, \etale}$ を用いて
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-compare-etale-sites}）対応するトポスを暗黙に同一視し、
+これを $X$ の小 étale トポスと呼ぶ。
+次に、これらのサイトに付随するトポスの間のいくつかの関係を確立する。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-put-in-T-etale}
+$S$ をスキームとする。$f : Y \to X$ を
+$(\textit{Spaces}/S)_\etale$ の射とする。包含函子
+$Y_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$ は余連続であり、
+トポスの射
+$$
+i_f :
+\Sh(Y_\etale)
+\longrightarrow
+\Sh((\textit{Spaces}/X)_\etale)
+$$
+を誘導する。$\mathcal{G}$ を $(\textit{Spaces}/X)_\etale$ 上の層とすると、
+公式 $(i_f^{-1}\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ が成り立つ。
+函子 $i_f^{-1}$ はさらに、ファイバー積および等化子と可換な左随伴
+$i_{f, !}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+函子 $u : Y_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$ と記す。
+すなわち、étale 射 $j : U \to Y$ が与えられ、
+これが $Y_{spaces, \etale}$ の対象に対応するとき、
+% P09-ERR-0313
+$u(U \to T) = (f \circ j : U \to S)$
+とおく。圏 $Y_{spaces, \etale}$ はファイバー積と等化子をもち、
+$u$ はそれらと可換である。
+% P09-ERR-0314
+$u$ が余連続であることは直ちに分かる。また、函子 $u$ は連続でもある。
+実際、$u$ は被覆を被覆へ移し、ファイバー積と可換である。
+したがって補題は
+Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-at-the-bottom-etale}
+$S$ をスキームとする。$X$ を $(\textit{Spaces}/S)_\etale$ の対象とする。
+包含函子 $X_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$ は
+Sites, Lemma \ref{sites-lemma-bigger-site} の仮定を満たすので、
+サイトの射
+$$
+\pi_X :
+(\textit{Spaces}/X)_\etale
+\longrightarrow
+X_{spaces, \etale}
+$$
+およびトポスの射
+$$
+i_X :
+\Sh(X_\etale)
+\longrightarrow
+\Sh((\textit{Spaces}/X)_\etale)
+$$
+であって $\pi_X \circ i_X = \text{id}$ を満たすものを誘導する。
+さらに、$i_X = i_{\text{id}_X}$ である。ここで
+$i_{\text{id}_X}$ は補題 \ref{spaces-topologies-lemma-put-in-T-etale} におけるものである。
+特に、函子 $i_X^{-1} = \pi_{X, *}$ は
+$i_X^{-1}(\mathcal{G})(U/X) = \mathcal{G}(U/X)$ という規則で記述される。
+\end{lemma}
+
+\begin{proof}
+この場合、函子
+$u : X_{spaces, \etale} \to (\textit{Spaces}/X)_\etale$ は、
+上の補題 \ref{spaces-topologies-lemma-put-in-T-etale} の証明で見た性質に加えて完全忠実であり、
+終対象を終対象へ移す。
+したがって主張は Sites, Lemma \ref{sites-lemma-bigger-site} から従う。
+\end{proof}
+
+\begin{definition}
+\label{spaces-topologies-definition-restriction-small-etale}
+補題 \ref{spaces-topologies-lemma-at-the-bottom-etale} の状況において、函子
+$i_X^{-1} = \pi_{X, *}$ はしばしば
+{\it 小 étale サイトへの制限}と呼ばれる。
+% P09-ERR-0315
+大 étale サイト上の層 $\mathcal{F}$ に対し、この制限をしばしば
+$\mathcal{F}|_{X_\etale}$ と表す。
+\end{definition}
+
+\noindent
+この記法のもとで、大サイト上の層 $\mathcal{F}$ と
+小サイト上の層 $\mathcal{G}$ に対して
+\begin{align*}
+\Mor_{\Sh(X_\etale)}(
+\mathcal{F}|_{X_\etale},
+\mathcal{G})
+& =
+\Mor_{\Sh((\textit{Spaces}/X)_\etale)}(
+\mathcal{F},
+i_{X, *}\mathcal{G}) \\
+\Mor_{\Sh(X_\etale)}(
+\mathcal{G},
+\mathcal{F}|_{X_\etale})
+& =
+\Mor_{\Sh((\textit{Spaces}/X)_\etale)}(
+\pi_X^{-1}\mathcal{G},
+\mathcal{F})
+\end{align*}
+が成り立つ。さらに、
+$(i_{X, *}\mathcal{G})|_{X_\etale} = \mathcal{G}$ および
+$(\pi_X^{-1}\mathcal{G})|_{X_\etale} = \mathcal{G}$ が成り立つ。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-morphism-big-etale}
+$S$ をスキームとする。$f : Y \to X$ を
+$(\textit{Spaces}/S)_\etale$ の射とする。函子
+$$
+u :
+(\textit{Spaces}/Y)_\etale
+\longrightarrow
+(\textit{Spaces}/X)_\etale,
+\quad
+V/Y \longmapsto V/X
+$$
+は余連続であり、連続な右随伴
+$$
+v :
+(\textit{Spaces}/X)_\etale
+\longrightarrow
+(\textit{Spaces}/Y)_\etale,
+\quad
+(U \to X) \longmapsto (U \times_X Y \to Y).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\textit{Spaces}/Y)_\etale)
+\longrightarrow
+\Sh((\textit{Spaces}/X)_\etale)
+$$
+を誘導する。また、
+$f_{big}^{-1}(\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ および
+$f_{big, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$
+が成り立つ。さらに、$f_{big}^{-1}$ は、ファイバー積および等化子と可換な
+左随伴 $f_{big!}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+函子 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換する
+（詳細は省略する。補題 \ref{spaces-topologies-lemma-put-in-T-etale} の証明と比較せよ）。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、
+$f_{big}^{-1}$ の公式と $f_{big!}$ の存在を得る。
+さらに、函子 $v$ が右随伴であるのは、$U/Y$ と $V/X$ が与えられたとき
+$\Mor_X(u(U), V) = \Mor_Y(U, V \times_X Y)$
+が成り立つからである。
+よって Sites, Lemmas \ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用し、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-morphism-big-small-etale}
+$S$ をスキームとする。$f : Y \to X$ を
+$(\textit{Spaces}/S)_\etale$ の射とする。
+\begin{enumerate}
+\item % P09-ERR-0316
+$i_f = f_{big} \circ i_T$ が成り立つ。ここで $i_f$ は
+補題 \ref{spaces-topologies-lemma-put-in-T-etale} におけるもの、$i_T$ は
+補題 \ref{spaces-topologies-lemma-at-the-bottom-etale} におけるものである。
+\item % P09-ERR-0317
+函子 $X_{spaces, \etale} \to T_{spaces, \etale}$、
+$(U \to X) \mapsto (U \times_X Y \to Y)$ は連続であり、サイトの射
+$$
+f_{spaces, \etale} : Y_{spaces, \etale} \longrightarrow X_{spaces, \etale}
+$$
+を誘導する。対応する小 étale トポスの射を
+$$
+f_{small} : \Sh(Y_\etale) \to \Sh(X_\etale)
+$$
+と表す。このとき
+$f_{small, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$
+が成り立つ。
+\item 次のサイトの射の図式は可換である。
+$$
+\xymatrix{
+Y_{spaces, \etale} \ar[d]_{f_{spaces, \etale}} &
+(\textit{Spaces}/Y)_\etale \ar[d]^{f_{big}} \ar[l]^-{\pi_Y}\\
+X_{spaces, \etale} &
+(\textit{Spaces}/X)_\etale \ar[l]_-{\pi_X}
+}
+$$
+したがってトポスの射として
+$f_{small} \circ \pi_Y = \pi_X \circ f_{big}$ である。
+\item
+$f_{small} = \pi_X \circ f_{big} \circ i_Y = \pi_X \circ i_f$
+が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0318
+等式 $i_f = f_{big} \circ i_Y$ は、
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$ という等式から従う。
+後者は上の函子の記述から明らかである。これで (1) が分かる。
+
+\medskip\noindent
+% P09-ERR-0319
+函子 $u : X_{spaces, \etale} \to Y_{spaces, \etale}$、
+$u(U \to X) = (U \times_X Y \to Y)$ がサイトの射と、
+それに対応する小 étale トポスの射を与えることは、
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-functoriality-etale-site} で示されている。
+直像の記述は明らかである。
+
+\medskip\noindent
+(3) は、$\pi_X$ と $\pi_Y$ が包含函子によって与えられ、
+$f_{spaces, \etale}$ と $f_{big}$ が基底変換函子
+$U \mapsto U \times_X Y$ によって与えられることから従う。
+
+\medskip\noindent
+(4) は (3) に $i_Y$ を前合成することで従う。
+\end{proof}
+
+\noindent
+この補題の状況で、定義
+\ref{spaces-topologies-definition-restriction-small-etale} の用語を用いると、
+層 $\mathcal{F}$ が $Y$ の大 étale サイト上にある場合、
+$$
+(f_{big, *}\mathcal{F})|_{X_\etale} =
+f_{small, *}(\mathcal{F}|_{Y_\etale}),
+$$
+が成り立つ。
+% P09-ERR-0320
+この等式は補題のサイトの図式の可換性から明らかである。
+実際、$Y$（それぞれ $X$）の小 étale サイトへの制限は
+$\pi_{Y, *}$（それぞれ $\pi_{X, *}$）によって与えられる。
+引き戻しと制限を含む類似の公式は成り立たない。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-composition-etale}
+$S$ をスキームとする。射 $f : X \to Y$、$g : Y \to Z$ が
+$(\textit{Spaces}/S)_\etale$ において与えられたとき、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$ および
+$g_{small} \circ f_{small} = (g \circ f)_{small}$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+大サイト上の函子については、これは補題
+\ref{spaces-topologies-lemma-morphism-big-etale} における直像と逆像の簡明な記述から従う。
+小サイト上の函子については、補題
+\ref{spaces-topologies-lemma-morphism-big-small-etale} における直像函子の記述から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-morphism-big-small-cartesian-diagram-etale}
+$S$ をスキームとする。次のカルテジアン図式
+$$
+\xymatrix{
+Y' \ar[r]_{g'} \ar[d]_{f'} & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+を考える。これは $(\textit{Spaces}/S)_\etale$ における図式である。
+このとき
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$
+および
+$g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+図式はカルテジアンなので、$U'/X'$ に対して
+$U' \times_{X'} Y' = U' \times_X Y$ である。
+したがって $i_g^{-1} \circ f_{big, *}$ と
+$f'_{small, *} \circ (i_{g'})^{-1}$ はともに、層 $\mathcal{F}$ が
+$(\textit{Spaces}/Y)_\etale$ 上にあるとき、それを
+$U' \mapsto \mathcal{F}(U' \times_{X'} Y')$
+で与えられる $X'_\etale$ 上の層へ移す
+（補題 \ref{spaces-topologies-lemma-put-in-T-etale} および
+\ref{spaces-topologies-lemma-morphism-big-etale} を用いよ）。
+第 2 の等式も同様に証明できるし、より一般的な
+Sites, Lemma \ref{sites-lemma-localize-morphism} から導くこともできる。
+\end{proof}
+
+\begin{remark}
+\label{spaces-topologies-remark-change-topologies-ringed}
+サイト $(\textit{Spaces}/X)_\etale$ と $X_{spaces, \etale}$ には
+構造層が備わっている。小 étale サイトについては、
+Properties of Spaces, Section
+\ref{spaces-properties-section-structure-sheaf} ですでに見た。
+構造層 $\mathcal{O}$ は、大 étale サイト
+$(\textit{Spaces}/X)_\etale$ 上では、対象 $U$ に
+$U$ の構造層の大域切断を対応させることで定義される。
+実際、$U$ 自身が代数空間であり、したがって構造層をもつので、これは意味をもつ。
+$\mathcal{O}_U$ は $U$ の étale サイト上の層だから、
+このように定義した前層 $\mathcal{O}$ は $U$ の被覆に対する層条件を満たす。
+すなわち、$\mathcal{O}$ は層である。
+上で定義した射 $i_f$、$\pi_X$、$i_X$、$f_{small}$、$f_{big}$ を、
+それぞれ環付きサイトまたは環付きトポスの射へ格上げできる。
+これらを順に扱う。
+\begin{enumerate}
+\item 補題 \ref{spaces-topologies-lemma-put-in-T-etale} において、
+$\mathcal{O}$ を $(\textit{Spaces}/X)_\etale$ 上の構造層と表す。
+構成により
+$(i_f^{-1}\mathcal{O})(U/Y) = \mathcal{O}_U(U) = \mathcal{O}_Y(U)$
+である。
+% P09-ERR-0321
+したがって同型 $i_f^\sharp : i_f^{-1}\mathcal{O} \to \mathcal{O}_Y$ を得る。
+\item 補題 \ref{spaces-topologies-lemma-at-the-bottom-etale} では、
+$i_X$ が $i_f$ の $f = \text{id}_X$ の場合であることを指摘したので、
+これは (1) の場合に帰着する。
+\item 補題 \ref{spaces-topologies-lemma-at-the-bottom-etale} における射
+$\pi_X$ は
+$(\pi_{X, *}\mathcal{O})(U) = \mathcal{O}(U) =
+\mathcal{O}_X(U)$
+を満たす。したがって、これを用いて
+$\pi_X^\sharp : \mathcal{O}_X \to \pi_{X, *}\mathcal{O}$
+を定義できる。
+\item 補題 \ref{spaces-topologies-lemma-morphism-big-small-etale} における
+$f_{small}$ の環付きトポスの射への拡張は、
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-morphism-ringed-topoi} で論じられている。
+\item 補題 \ref{spaces-topologies-lemma-morphism-big-small-etale} における函子
+$f_{big}^{-1}$ は、包含函子
+$(\textit{Spaces}/Y)_\etale \to (\textit{Spaces}/X)_\etale$
+による制限にほかならない。
+$\mathcal{O}_1$ を $(\textit{Spaces}/X)_\etale$ 上の構造層、
+$\mathcal{O}_2$ を $(\textit{Spaces}/Y)_\etale$ 上の構造層とする。
+標準同型
+$f_{big}^\sharp : f_{big}^{-1}\mathcal{O}_1 \to \mathcal{O}_2$
+を得る。
+\end{enumerate}
+さらに、これらの定義のもとで合成も正しく振る舞う。
+詳しい主張と証明は省略する。
+\end{remark}
+
+\section{滑らか位相}
+\label{spaces-topologies-section-smooth}
+
+\noindent
+この節では、代数空間の滑らかな被覆という概念を論じ、
+代数空間の大滑らかサイトを定義する。
+Topologies, Section \ref{topologies-section-smooth} と比較せよ。
+
+\begin{definition}
+\label{spaces-topologies-definition-smooth-covering}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の滑らかな被覆}とは、射の族
+$\{f_i : X_i \to X\}_{i \in I}$ であって、その各射は
+$S$ 上の代数空間の射であり、各 $f_i$ が滑らかであり、かつ
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+すなわち射が共同全射となるものをいう。
+\end{definition}
+
+\noindent
+これは Topologies, Definition
+\ref{topologies-definition-smooth-covering} とまったく同じである。
+特に、$X$ とすべての $X_i$ がスキームなら、
+通常のスキームの滑らかな被覆という概念が得られる。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski-etale-smooth}
+任意の étale 被覆は滑らかな被覆であり、したがってなおさら、
+任意の Zariski 被覆は滑らかな被覆である。
+\end{lemma}
+
+\begin{proof}
+定義、étale 射が滑らかであること
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-smooth}）、および補題
+\ref{spaces-topologies-lemma-zariski-etale} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-smooth}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型なら、$\{X' \to X\}$ は
+$X$ の滑らかな被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が滑らかな被覆であり、各
+$i$ に対して $\{X_{ij} \to X_i\}_{j\in J_i}$ が滑らかな被覆なら、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は滑らかな被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が滑らかな被覆であり、
+$X' \to X$ が代数空間の射なら、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は滑らかな被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+続く。
+
+
+
+
+
+
+
+
+\section{Syntomic 位相}
+\label{spaces-topologies-section-syntomic}
+
+\noindent
+この節では、代数空間の syntomic 被覆という概念を論じ、
+代数空間の大 syntomic サイトを定義する。
+Topologies, Section \ref{topologies-section-syntomic} と比較せよ。
+
+\begin{definition}
+\label{spaces-topologies-definition-syntomic-covering}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の syntomic 被覆}とは、射の族
+$\{f_i : X_i \to X\}_{i \in I}$ であって、その各射は
+$S$ 上の代数空間の射であり、各 $f_i$ が syntomic であり、かつ
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+すなわち射が共同全射となるものをいう。
+\end{definition}
+
+\noindent
+これは Topologies, Definition
+\ref{topologies-definition-syntomic-covering} とまったく同じである。
+特に、$X$ とすべての $X_i$ がスキームなら、
+通常のスキームの syntomic 被覆という概念が得られる。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski-etale-smooth-syntomic}
+任意の滑らかな被覆は syntomic 被覆であり、したがってなおさら、
+任意の étale 被覆または Zariski 被覆は syntomic 被覆である。
+\end{lemma}
+
+\begin{proof}
+定義、滑らかな射が syntomic であること
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-syntomic}）、および補題
+\ref{spaces-topologies-lemma-zariski-etale-smooth} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-syntomic}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型なら、$\{X' \to X\}$ は
+$X$ の syntomic 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が syntomic 被覆であり、各
+$i$ に対して $\{X_{ij} \to X_i\}_{j\in J_i}$ が syntomic 被覆なら、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は syntomic 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が syntomic 被覆であり、
+$X' \to X$ が代数空間の射なら、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は syntomic 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+続く。
+
+
+
+
+
+
+
+
+
+
+\section{Fppf 位相}
+\label{spaces-topologies-section-fppf}
+
+\noindent
+この節では代数空間の fppf 被覆という概念を論じ、
+代数空間の大 fppf サイトを定義する。
+Topologies, Section \ref{topologies-section-fppf} と比較せよ。
+
+\begin{definition}
+\label{spaces-topologies-definition-fppf-covering}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の fppf 被覆}とは、射の族
+$\{f_i : X_i \to X\}_{i \in I}$ であって、その各射は
+$S$ 上の代数空間の射であり、各 $f_i$ が平坦かつ
+有限表示で局所的であり、かつ
+$$
+|X| = \bigcup\nolimits_{i \in I} |f_i|(|X_i|),
+$$
+すなわち射が共同全射となるものをいう。
+\end{definition}
+
+\noindent
+これは Topologies, Definition
+\ref{topologies-definition-fppf-covering} とまったく同じである。
+特に、$X$ とすべての $X_i$ がスキームなら、
+通常のスキームの fppf 被覆という概念が得られる。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf}
+任意の syntomic 被覆は fppf 被覆であり、したがってなおさら、
+任意の滑らかな被覆、étale 被覆、または Zariski 被覆は fppf 被覆である。
+\end{lemma}
+
+\begin{proof}
+定義、syntomic 射が平坦かつ有限表示で局所的であること
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-syntomic-locally-finite-presentation} および
+\ref{spaces-morphisms-lemma-syntomic-flat}）、ならびに補題
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-fppf}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型なら、$\{X' \to X\}$ は
+$X$ の fppf 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が fppf 被覆であり、各
+$i$ に対して $\{X_{ij} \to X_i\}_{j\in J_i}$ が fppf 被覆なら、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は fppf 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が fppf 被覆であり、
+$X' \to X$ が代数空間の射なら、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は fppf 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-refine-fppf-schemes}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{U} = \{f_i : X_i \to X\}_{i \in I}$ が
+$X$ の fppf 被覆であると仮定する。このとき細分
+$\mathcal{V} = \{g_i : T_i \to X\}$ が $\mathcal{U}$ に対して存在し、
+各 $T_i$ がスキームであるような fppf 被覆が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：各 $i$ に対してスキーム $T_i$ と全射 étale 射
+$T_i \to X_i$ を選ぶ。そして $\{T_i \to X\}$ が
+fppf 被覆であることを確かめよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-fppf-covering-surjective}
+$S$ をスキームとする。
+$\{f_i : X_i \to X\}_{i \in I}$ を、$S$ 上の代数空間の
+fppf 被覆とする。このとき層の射
+$$
+\coprod X_i \longrightarrow X
+$$
+は全射である。
+\end{lemma}
+
+\begin{proof}
+これは Spaces, Lemma
+\ref{spaces-lemma-surjective-flat-locally-finite-presentation} から従う。
+この補題の意味に戸惑う場合には、Spaces, Remark
+\ref{spaces-remark-warning} も参照せよ。
+\end{proof}
+
+\begin{definition}
+\label{spaces-topologies-definition-big-fppf-site}
+$S$ をスキームとする。大 fppf サイト
+{\it $(\textit{Spaces}/S)_{fppf}$} とは、次のように構成される任意のサイトである。
+\begin{enumerate}
+\item Topologies, Section \ref{topologies-section-fppf} に従って、
+大 fppf サイト $(\Sch/S)_{fppf}$ を選ぶ。
+\item 基礎圏として、圏 $\textit{Spaces}/S$、すなわち
+$S$ 上の代数空間の圏を取る
+（これが集合である理由は Section \ref{spaces-topologies-section-procedure} の議論を参照せよ）。
+\item Sets, Lemma \ref{sets-lemma-coverings-site} に従い、
+圏 $\textit{Spaces}/S$ と定義
+\ref{spaces-topologies-definition-fppf-covering} の fppf 被覆のクラスから出発して、
+被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+以上の定義の後、局所化により代数空間の fppf サイトが得られる。
+
+\begin{definition}
+\label{spaces-topologies-definition-big-small-fppf}
+$S$ をスキームとする。$(\textit{Spaces}/S)_{fppf}$ を定義
+\ref{spaces-topologies-definition-big-fppf-site} におけるものとする。
+$X$ を $S$ 上の代数空間、すなわち
+$(\textit{Spaces}/S)_{fppf}$ の対象とする。このとき
+大 fppf サイト {\it $(\textit{Spaces}/X)_{fppf}$} を $X$ のものとして定め、
+これは
+Sites, Section \ref{sites-section-localize} で導入された、
+サイト $(\textit{Spaces}/S)_{fppf}$ の $X$ における局所化である。
+\end{definition}
+
+\noindent
+次に、これらのサイトに付随するトポスの間のいくつかの関係を確立する。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-morphism-big-fppf}
+$S$ をスキームとする。
+$f : Y \to X$ を $S$ 上の代数空間の射とする。函子
+$$
+u : (\textit{Spaces}/Y)_{fppf} \longrightarrow (\textit{Spaces}/X)_{fppf},
+\quad
+V/Y \longmapsto V/X
+$$
+は余連続であり、連続な右随伴
+% P09-ERR-0322
+$$
+v : (\textit{Spaces}/X)_{fppf} \longrightarrow (\textit{Spaces}/Y)_{fppf},
+\quad
+(U \to Y) \longmapsto (U \times_X Y \to Y).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\textit{Spaces}/Y)_{fppf})
+\longrightarrow
+\Sh((\textit{Spaces}/X)_{fppf})
+$$
+を誘導する。また、
+$f_{big}^{-1}(\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ および
+$f_{big, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$
+が成り立つ。さらに、$f_{big}^{-1}$ は、ファイバー積および等化子と可換な
+左随伴 $f_{big!}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+函子 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換する。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、
+$f_{big}^{-1}$ の公式と $f_{big!}$ の存在を得る。
+さらに、函子 $v$ が右随伴であるのは、
+% P09-ERR-0323
+$U/T$ と $V/X$ が与えられたとき
+$\Mor_X(u(U), V) = \Mor_Y(U, V \times_X Y)$
+が成り立つからである。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用し、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-composition-fppf}
+$S$ をスキームとする。射 $f : X \to Y$、$g : Y \to Z$ が
+$S$ 上の代数空間の射として与えられたとき、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-topologies-lemma-morphism-big-fppf} における
+大サイト上の函子の直像と逆像の簡明な記述から従う。
+\end{proof}
+
+\section{Ph 位相}
+\label{spaces-topologies-section-ph}
+
+\noindent
+この節では ph 位相を定義する。これは étale 被覆と固有全射によって
+生成される位相である。補題 \ref{spaces-topologies-lemma-characterize-sheaf} を参照せよ。
+
+\begin{definition}
+\label{spaces-topologies-definition-ph-covering}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の ph 被覆}とは、射の族
+$\{X_i \to X\}_{i \in I}$ であって、その各射は
+$S$ 上の代数空間の射であり、
+% P09-ERR-0324
+$f_i$ が有限型で局所的で、さらに任意の射 $U \to X$ で
+$U$ がアフィンであるものに対し、標準 ph 被覆
+$\{U_j \to U\}_{j = 1, \ldots, m}$ であって、族
+$\{X_i \times_X U \to U\}_{i \in I}$ を細分するものが存在するという。
+\end{definition}
+
+\noindent
+% P09-ERR-0325
+言い換えると、添字 $i_1, \ldots, i_m \in I$ と射
+$h_j : U_j \to X_{i_j}$ が存在して
+$f_{i_j} \circ h_j = h \circ g_j$ を満たす。
+$X$ とすべての $X_i$ が表現可能なら、これは
+Topologies, Definition \ref{topologies-definition-ph-covering} による
+スキームの ph 被覆と同じであることに注意せよ。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf-ph}
+任意の fppf 被覆は ph 被覆であり、したがってなおさら、
+任意の syntomic 被覆、滑らかな被覆、étale 被覆、または
+Zariski 被覆は ph 被覆である。
+\end{lemma}
+
+\begin{proof}
+fppf 被覆が ph 被覆であることを示せば、残りは補題
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf} から従う。
+$\{X_i \to X\}_{i \in I}$ を、基礎スキーム $S$ 上の代数空間の
+fppf 被覆とする。$U$ をアフィンスキームとし、射
+$U \to X$ を与える。fppf 被覆
+% P09-ERR-0326
+$\{X_i \times_U U \to U\}_{i \in I}$ を fppf 被覆
+$\{T_i \to U\}_{i \in I}$ で細分でき、ここで各 $T_i$ はスキームである
+（補題 \ref{spaces-topologies-lemma-refine-fppf-schemes}）。
+次に More on Morphisms, Lemma
+\ref{more-morphisms-lemma-fppf-ph}
+（およびスキームに対する ph 被覆の定義）により、
+標準 ph 被覆 $\{U_j \to U\}_{j = 1, \ldots, m}$ であって、
+$\{T_i \to U\}_{i \in I}$ を細分するものを見いだせる。
+したがって定義により $\{X_i \to X\}_{i \in I}$ は ph 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-surjective-proper-ph}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の
+固有全射とする。このとき $\{Y \to X\}$ は ph 被覆である。
+\end{lemma}
+
+\begin{proof}
+$U \to X$ を、$U$ がアフィンである射とする。
+Chow の補題（Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow} の弱い形）により、
+スキームの固有全射 $V \to U$ であって
+$Y \times_X U \to U$ を経由するものが存在する。
+$V$ の任意の有限アフィン開被覆を取れば、$U$ の標準 ph 被覆であって
+% P09-ERR-0327
+$\{X \times_Y U \to U\}$ を細分するものが得られ、所望の結論となる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-ph}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型なら、$\{X' \to X\}$ は
+$X$ の ph 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が ph 被覆であり、各
+$i$ に対して $\{X_{ij} \to X_i\}_{j\in J_i}$ が ph 被覆なら、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は ph 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が ph 被覆であり、
+$X' \to X$ が代数空間の射なら、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は ph 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は明らかである。$g : X' \to X$ と、(3) における ph 被覆
+$\{X_i \to X\}_{i\in I}$ を考える。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-type} により、射
+$X' \times_X X_i \to X'$ は有限型で局所的である。
+$h' : Z \to X'$ を、アフィンスキームから $X'$ への射とするなら、
+$h = g \circ h' : Z \to X$ とおく。
+$\{X_i \to X\}_{i\in I}$ に関する仮定により、標準 ph 被覆
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$ と、射
+$Z_j \to X_{i(j)}$ であって $h$ を被覆するものが、ある
+$i(j) \in I$ に対して存在する。
+ファイバー積の普遍性により、射
+$Z_j \to X' \times_X X_{i(j)}$ を $h'$ 上にも得る。
+したがって $\{X' \times_X X_i \to X'\}_{i\in I}$ は ph 被覆である。
+これで (3) が示された。
+
+\medskip\noindent
+$\{X_i \to X\}_{i\in I}$ と
+$\{X_{ij} \to X_i\}_{j\in J_i}$ を (2) におけるものとする。
+$h : Z \to X$ をアフィンスキームから $X$ への射とする。
+仮定により、標準 ph 被覆
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$ と、射
+$h_j : Z_j \to X_{i(j)}$ であって $h$ を被覆するものが、ある添字
+$i(j) \in I$ に対して存在する。さらに仮定により、標準 ph 被覆
+$\{Z_{j, l} \to Z_j\}_{l = 1, \ldots, n(j)}$ と、射
+$Z_{j, l} \to X_{i(j)j(l)}$ であって $h_j$ を被覆するものが、ある
+$j(l) \in J_{i(j)}$ に対して存在する。
+Topologies, Lemma \ref{topologies-lemma-refine-by-standard-ph} により、
+族 $\{Z_{j, l} \to Z\}$ は標準 ph 被覆で細分できる。
+したがって $\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は ph 被覆である。
+\end{proof}
+
+\begin{definition}
+\label{spaces-topologies-definition-big-ph-site}
+$S$ をスキームとする。大 ph サイト
+{\it $(\textit{Spaces}/S)_{ph}$} とは、次のように構成される任意のサイトである。
+\begin{enumerate}
+\item Topologies, Section \ref{topologies-section-ph} に従って、
+大 ph サイト $(\Sch/S)_{ph}$ を選ぶ。
+\item 基礎圏として、圏 $\textit{Spaces}/S$、すなわち
+$S$ 上の代数空間の圏を取る
+（これが集合である理由は Section \ref{spaces-topologies-section-procedure} の議論を参照せよ）。
+\item Sets, Lemma \ref{sets-lemma-coverings-site} に従い、
+圏 $\textit{Spaces}/S$ と定義 \ref{spaces-topologies-definition-ph-covering} の
+ph 被覆のクラスから出発して、被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+以上の定義の後、局所化により代数空間の ph サイトが得られる。
+
+\begin{definition}
+\label{spaces-topologies-definition-big-small-ph}
+$S$ をスキームとする。$(\textit{Spaces}/S)_{ph}$ を定義
+\ref{spaces-topologies-definition-big-ph-site} におけるものとする。
+$X$ を $S$ 上の代数空間、すなわち
+$(\textit{Spaces}/S)_{ph}$ の対象とする。このとき
+大 ph サイト {\it $(\textit{Spaces}/X)_{ph}$} を $X$ のものとして定め、
+これは Sites, Section \ref{sites-section-localize} で導入された、
+サイト $(\textit{Spaces}/S)_{ph}$ の $X$ における局所化である。
+\end{definition}
+
+\noindent
+ここで、先に約束した ph 層の特徴づけを与える。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-characterize-sheaf}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を $(\textit{Spaces}/X)_{ph}$ 上の前層とする。
+このとき $\mathcal{F}$ が層であるための必要十分条件は、次の 2 条件である。
+\begin{enumerate}
+\item $\mathcal{F}$ は étale 被覆に対する層条件を満たす。
+\item $f : V \to U$ が $(\textit{Spaces}/X)_{ph}$ の固有全射なら、
+$\mathcal{F}(U)$ は 2 本の写像
+$\mathcal{F}(V) \to \mathcal{F}(V \times_U V)$ の等化子へ全単射に写る。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) が成り立つなら $\mathcal{F}$ が層であることを示す。
+$\{T_i \to T\}$ を ph 被覆、すなわち
+$(\textit{Spaces}/X)_{ph}$ における被覆とする。
+この被覆に対する層条件を検証する。
+$s_i \in \mathcal{F}(T_i)$ を、
+$T_i \times_T T_{i'}$ 上で同じ切断に制限される切断とする。
+このとき、一意的な切断
+% P09-ERR-0328
+$s \in \mathcal{F}$ が存在し、それが $s_i$ に $T_i$ 上で
+制限されることを示す。
+$\{U_j \to T\}$ を、各 $U_j$ がアフィンである étale 被覆とする。
+性質 (1) により、切断 $s_j \in \mathcal{F}(U_j)$ で
+$U_j \cap U_{j'}$ 上で一致するものを構成すれば、$s$ を構成するのに十分である。
+% P09-ERR-0329
+ph 被覆 $\{T_i \times_T U_j \to U_j\}$ を考える。
+このとき
+$s_{ji} = s_i|_{T_i \times_T U_j}$ は、
+$(T_i \times_T U_j) \times_{U_j} (T_{i'} \times_T U_j)$
+上で一致する切断である。
+固有全射 $V_j \to U_j$ と有限アフィン開被覆
+$V_j = \bigcup V_{jk}$ であって、標準 ph 被覆
+$\{V_{jk} \to U_j\}$ が $\{T_i \times_T U_j \to U_j\}$
+を細分するものを選ぶ。
+$s_{jk} \in \mathcal{F}(V_{jk})$ を、暗黙の射による
+$s_{ji}$ の $V_{jk}$ への引き戻しとする。このとき $s_{jk}$ は貼り合わさって
+切断 $s'_j \in \mathcal{F}(V_j)$ となる。
+重なり上の一致をもう一度用いると、$s'_j$ は 2 本の写像
+$\mathcal{F}(V_j) \to \mathcal{F}(V_j \times_{U_j} V_j)$
+の等化子に属することが分かる。したがって (2) により、$s'_j$ は
+一意的な切断 $s_j \in \mathcal{F}(U_j)$ から来る。
+これらの切断 $s_j$ が所望の性質をすべてもつことの検証は省略する。
+\end{proof}
+
+\noindent
+次に、これらのサイトに付随するトポスの間のいくつかの関係を確立する。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-morphism-big-ph}
+$S$ をスキームとする。
+$f : Y \to X$ を $S$ 上の代数空間の射とする。函子
+$$
+u : (\textit{Spaces}/Y)_{ph} \longrightarrow (\textit{Spaces}/X)_{ph},
+\quad
+V/Y \longmapsto V/X
+$$
+は余連続であり、連続な右随伴
+% P09-ERR-0330
+$$
+v : (\textit{Spaces}/X)_{ph} \longrightarrow (\textit{Spaces}/Y)_{ph},
+\quad
+(U \to Y) \longmapsto (U \times_X Y \to Y).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\textit{Spaces}/Y)_{ph})
+\longrightarrow
+\Sh((\textit{Spaces}/X)_{ph})
+$$
+を誘導する。また、
+$f_{big}^{-1}(\mathcal{G})(U/Y) = \mathcal{G}(U/X)$ および
+$f_{big, *}(\mathcal{F})(U/X) = \mathcal{F}(U \times_X Y/Y)$
+が成り立つ。さらに、$f_{big}^{-1}$ は、ファイバー積および等化子と可換な
+左随伴 $f_{big!}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+函子 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換する。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、
+$f_{big}^{-1}$ の公式と $f_{big!}$ の存在を得る。
+さらに、函子 $v$ が右随伴であるのは、
+% P09-ERR-0331
+$U/T$ と $V/X$ が与えられたとき
+$\Mor_X(u(U), V) = \Mor_Y(U, V \times_X Y)$
+が成り立つからである。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用し、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-composition-ph}
+$S$ をスキームとする。射 $f : X \to Y$、$g : Y \to Z$ が
+$S$ 上の代数空間の射として与えられたとき、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{spaces-topologies-lemma-morphism-big-ph} における
+大サイト上の函子の直像と逆像の簡明な記述から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-cech-enough}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$P$ を $(\textit{Spaces}/X)_{fppf}$ の対象の性質であって、
+$\{U_i \to U\}$ が $(\textit{Spaces}/X)_{fppf}$ における被覆なら常に
+$$
+P(U_{i_0} \times_U \ldots \times_U U_{i_p})
+\text{ がすべての }
+p \geq 0,\ i_0, \ldots, i_p \in I
+\Rightarrow P(U)
+$$
+を満たすものとする。$P(U)$ がすべての $U$ に対して成り立ち、
+その各対象がアフィンで $X$ 上平坦かつ有限表示で局所的なら、
+$P(X)$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$U$ を $X$ 上有限表示で局所的な分離代数空間とする。
+étale 被覆 $\{U_i \to U\}_{i \in I}$ を、そこで各
+% P09-ERR-0332
+$V_i$ がアフィンとなるよう選べる。
+$U$ は分離的だから
+$U_{i_0} \times_U \ldots \times_U U_{i_p}$ は常にアフィンである。
+したがって常に
+$P(U_{i_0} \times_U \ldots \times_U U_{i_p})$ が成り立つ。
+よって $P(U)$ が成り立つ。アフィンスキームの非交和であるスキーム
+$U$ と全射 étale 射 $U \to X$ を選ぶ。
+すると $U \times_X \ldots \times_X U$（$p + 1$ 個の因子をもつ）は、
+$X$ 上 étale な分離代数空間である。
+したがって上で示したことにより
+$P(U \times_X \ldots \times_X U)$ が成り立つ。
+ゆえに $P(X)$ が真である。
+\end{proof}
+
+\section{Fpqc 位相}
+\label{spaces-topologies-section-fpqc}
+
+\noindent
+代数空間の fpqc 被覆という概念を簡単に論じる。
+Topologies, Section \ref{topologies-section-fpqc} と比較せよ。
+Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent} において、
+% P09-ERR-0333
+擬連接層がこれらに沿って降下することを示す。
+
+\begin{definition}
+\label{spaces-topologies-definition-fpqc-covering}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+{\it $X$ の fpqc 被覆}とは、代数空間の射の族
+$\{f_i : X_i \to X\}_{i \in I}$ であって、各 $f_i$ が平坦であり、
+さらに任意のアフィンスキーム $Z$ と射 $h : Z \to X$ に対し、
+標準 fpqc 被覆
+$\{g_j : Z_j \to Z\}_{j = 1, \ldots, m}$ であって、族
+$\{X_i \times_X Z \to Z\}_{i \in I}$ を細分するものが存在するという。
+\end{definition}
+
+\noindent
+% P09-ERR-0334
+言い換えると、添字 $i_1, \ldots, i_m \in I$ と射
+$h_j : Z_j \to X_{i_j}$ が存在して
+$f_{i_j} \circ h_j = h \circ g_j$ を満たす。
+$X$ とすべての $X_i$ が表現可能なら、これは
+Topologies, Lemma
+\ref{topologies-lemma-fpqc-covering-affines-mapping-in} による
+スキームの fpqc 被覆と同じであることに注意せよ。
+
+\begin{lemma}
+\label{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc}
+任意の fppf 被覆は fpqc 被覆であり、したがってなおさら、
+任意の syntomic 被覆、滑らかな被覆、étale 被覆、または
+Zariski 被覆は fpqc 被覆である。
+\end{lemma}
+
+\begin{proof}
+fppf 被覆が fpqc 被覆であることを示せば、残りは補題
+\ref{spaces-topologies-lemma-zariski-etale-smooth-syntomic-fppf} から従う。
+$\{f_i : U_i \to U\}_{i \in I}$ を、$S$ 上の代数空間の
+fppf 被覆とする。定義により、$f_i$ は平坦であり、これは定義
+\ref{spaces-topologies-definition-fpqc-covering} の第 1 条件を確認する。
+第 2 条件を確認するため、$V \to U$ を $V$ がアフィンである射とする。
+étale 被覆 $\{V_{ij} \to V \times_U U_i\}$ を、
+各 $V_{ij}$ がアフィンとなるよう選べる。
+すると合成
+$f_{ij} : V_{ij} \to V \times_U U_i \to V$ は、
+そのような射の合成として平坦かつ有限表示で局所的である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-presentation}、
+\ref{spaces-morphisms-lemma-composition-flat}、
+\ref{spaces-morphisms-lemma-etale-flat}、および
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation}）。
+したがってこれらの射は開であり
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}）、さらに
+$$
+|V| = \bigcup_{i \in I} \bigcup_{j \in J_i} f_{ij}(|V_{ij}|)
+$$
+は $|V|$ の開被覆である。$|V|$ は準コンパクトなので、
+この被覆は有限細分をもつ。
+$V_{i_1j_1}, \ldots, V_{i_Nj_N}$ がその役割を果たすとする。
+すると $\{V_{i_kj_k} \to V\}_{k = 1, \ldots, N}$ は
+$V$ の標準 fpqc 被覆であり、族
+% P09-ERR-0335
+$\{U_i \times_U V \to V\}$ を細分する。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-fpqc}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X' \to X$ が同型なら、$\{X' \to X\}$ は
+$X$ の fpqc 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が fpqc 被覆であり、各
+$i$ に対して $\{X_{ij} \to X_i\}_{j\in J_i}$ が fpqc 被覆なら、
+$\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は fpqc 被覆である。
+\item $\{X_i \to X\}_{i\in I}$ が fpqc 被覆であり、
+$X' \to X$ が代数空間の射なら、
+$\{X' \times_X X_i \to X'\}_{i\in I}$ は fpqc 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は明らかである。$g : X' \to X$ と、(3) における fpqc 被覆
+$\{X_i \to X\}_{i\in I}$ を考える。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-flat} により、射
+$X' \times_X X_i \to X'$ は平坦である。
+$h' : Z \to X'$ を、アフィンスキームから $X'$ への射とするなら、
+$h = g \circ h' : Z \to X$ とおく。
+$\{X_i \to X\}_{i\in I}$ に関する仮定により、標準 fpqc 被覆
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$ と、射
+$Z_j \to X_{i(j)}$ であって $h$ を被覆するものが、ある
+$i(j) \in I$ に対して存在する。
+ファイバー積の普遍性により、射
+$Z_j \to X' \times_X X_{i(j)}$ を $h'$ 上にも得る。
+したがって $\{X' \times_X X_i \to X'\}_{i\in I}$ は fpqc 被覆である。
+これで (3) が示された。
+
+\medskip\noindent
+$\{X_i \to X\}_{i\in I}$ と
+$\{X_{ij} \to X_i\}_{j\in J_i}$ を (2) におけるものとする。
+$h : Z \to X$ をアフィンスキームから $X$ への射とする。
+仮定により、標準 fpqc 被覆
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$ と、射
+$h_j : Z_j \to X_{i(j)}$ であって $h$ を被覆するものが、ある添字
+$i(j) \in I$ に対して存在する。さらに仮定により、標準 fpqc 被覆
+$\{Z_{j, l} \to Z_j\}_{l = 1, \ldots, n(j)}$ と、射
+$Z_{j, l} \to X_{i(j)j(l)}$ であって $h_j$ を被覆するものが、ある
+$j(l) \in J_{i(j)}$ に対して存在する。
+Topologies, Lemma \ref{topologies-lemma-fpqc-affine-axioms} により、
+族 $\{Z_{j, l} \to Z\}$ は標準 fpqc 被覆である。
+したがって $\{X_{ij} \to X\}_{i \in I, j\in J_i}$ は fpqc 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-recognize-fpqc-covering}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\{f_i : X_i \to X\}_{i \in I}$ が、終域 $X$ をもつ代数空間の
+射の族であると仮定する。$U \to X$ を、スキームから $X$ への
+全射 étale 射とする。このとき
+$\{f_i : X_i \to X\}_{i \in I}$ が $X$ の fpqc 被覆であるための
+必要十分条件は、
+$\{U \times_X X_i \to U\}_{i \in I}$ が $U$ の fpqc 被覆であることである。
+\end{lemma}
+
+\begin{proof}
+$\{X_i \to X\}_{i \in I}$ が fpqc 被覆なら、補題
+\ref{spaces-topologies-lemma-fpqc} により
+$\{U \times_X X_i \to U\}_{i \in I}$ も fpqc 被覆である。
+$\{U \times_X X_i \to U\}_{i \in I}$ が fpqc 被覆であると仮定する。
+$h : Z \to X$ をアフィンスキームから $X$ への射とする。
+すると $U \times_X Z \to Z$ はスキームの全射 étale 射であり、
+特に開である。したがって有限個のアフィン開
+$W_1, \ldots, W_t$ を $U \times_X Z$ の中に、その像が
+$Z$ を被覆するように見いだせる。
+各 $j$ に対し、$\{U \times_X X_i \to U\}_{i \in I}$ が
+fpqc 被覆であるという条件を射 $W_j \to U$ に適用し、
+標準 fpqc 被覆 $\{W_{jl} \to W_j\}$ であって、
+$\{W_j \times_X X_i \to W_j\}_{i \in I}$ を細分するものを得る。
+したがって $\{W_{jl} \to Z\}$ は $Z$ の標準 fpqc 被覆であり
+（Topologies, Lemma \ref{topologies-lemma-fpqc-affine-axioms} を参照）、
+$\{Z \times_X X_i \to X\}$ を細分する。これで結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-topologies-lemma-refine-fpqc-schemes}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{U} = \{f_i : X_i \to X\}_{i \in I}$ が
+$X$ の fpqc 被覆であると仮定する。このとき細分
+$\mathcal{V} = \{g_i : T_i \to X\}$ が $\mathcal{U}$ に対して存在し、
+各 $T_i$ がスキームであるような fpqc 被覆となる。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：各 $i$ に対してスキーム $T_i$ と全射 étale 射
+$T_i \to X_i$ を選ぶ。そして $\{T_i \to X\}$ が
+fpqc 被覆であることを確かめよ。
+\end{proof}
+
+\noindent
+続く。

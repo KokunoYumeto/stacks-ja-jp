@@ -1,0 +1,4687 @@
+% Generated mechanically from frozen input inputs/p04/ja/constructions.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{26}
+\chapter{スキームの構成}
+
+
+
+\phantomsection
+\label{constructions-section-phantom}
+
+
+\section{はじめに}
+\label{constructions-section-introduction}
+
+\noindent
+本章では、与えられたスキームから新たなスキームを構成する方法を導入する。
+基本的な参考文献は \cite{EGA} である。
+
+
+
+
+
+\section{相対的貼り合わせ}
+\label{constructions-section-relative-glueing}
+
+\noindent
+次の補題は、スキーム $X$ を $S$ 上に構成しようとしていて、さらに $X$ の、$S$ の
+アフィン開集合への制限を構成する方法がすでに分かっている場合に有用である。実際の結果は完全に
+一般的であり、（局所）環付き空間の設定でも成り立つが、証明はスキームの言葉で書く。
+
+\begin{lemma}
+\label{constructions-lemma-relative-glueing}
+$S$ をスキームとする。
+$\mathcal{B}$ を $S$ の位相の基とする。
+次のデータが与えられていると仮定する。
+\begin{enumerate}
+\item 各 $U \in \mathcal{B}$ に対し、スキーム $f_U : X_U \to U$（$U$ 上のもの）。
+\item $U, V \in \mathcal{B}$ かつ $V \subset U$ に対し、射
+$\rho^U_V : X_V \to X_U$（$U$ 上のもの）。
+\end{enumerate}
+さらに、次を仮定する。
+\begin{enumerate}
+\item[(a)] 各 $\rho^U_V$ はスキームの同型
+$X_V \to f_U^{-1}(V)$（$V$ 上のもの）を誘導する。
+\item[(b)] $W, V, U \in \mathcal{B}$ かつ
+$W \subset V \subset U$ に対し、$\rho^U_W = \rho^U_V \circ \rho ^V_W$ が成り立つ。
+\end{enumerate}
+このとき、スキームの射 $f : X \to S$ と、同型 $i_U : f^{-1}(U) \to X_U$
+（$U \in \mathcal{B}$ にわたる）が存在し、$V, U \in \mathcal{B}$ かつ
+$V \subset U$ に対して合成
+$$
+\xymatrix{
+X_V \ar[r]^{i_V^{-1}} &
+f^{-1}(V) \ar[rr]^{inclusion} & &
+f^{-1}(U) \ar[r]^{i_U} &
+X_U
+}
+$$
+は射 $\rho^U_V$ に等しい。さらに、$X$ は $S$ 上の一意な同型を除いて一意である。
+\end{lemma}
+
+\begin{proof}
+スキームの章、補題 \ref{schemes-lemma-glue-functors} を用いる。
+まず、スキームの圏から集合の圏への反変関手 $F$ を定義する。すなわち、スキーム
+$T$ に対して
+$$
+F(T) =
+\left\{
+\begin{matrix}
+(g, \{h_U\}_{U \in \mathcal{B}}),
+\ g : T \to S, \ h_U : g^{-1}(U) \to X_U, \\
+f_U \circ h_U = g|_{g^{-1}(U)},
+\ h_U|_{g^{-1}(V)} = \rho^U_V \circ h_V
+\ \forall\ V, U \in \mathcal{B}, V \subset U
+\end{matrix}
+\right\}.
+$$
+制限写像 $F(T) \to F(T')$ は、射 $T' \to T$ が与えられたとき、単に合成によって
+得られる。各 $W \in \mathcal{B}$ に対して、部分関手 $F_W \subset F$ を考える。
+これは系 $(g, \{h_U\})$ のうち、$g(T) \subset W$ を満たすものからなる。
+
+\medskip\noindent
+まず、$F$ が Zariski 位相に関する層条件を満たすことを示す。$T$ をスキームとし、
+$T = \bigcup V_i$ を開被覆とし、元 $\xi_i \in F(V_i)$ が
+$\xi_i|_{V_i \cap V_j} = \xi_j|_{V_i \cap V_j}$ を満たすとする。
+$\xi_i = (g_i, \{h_{i, U}\})$ と書く。
+すると、射 $g_i$ は一意な大域射 $g : T \to S$ に貼り合わさることが直ちに分かる。
+また、$g^{-1}(U) = \bigcup g_i^{-1}(U)$ であることも明らかである。したがって、射
+$h_{i, U} : g_i^{-1}(U) \to X_U$ は一意な射 $h_U : g^{-1}(U) \to X_U$ に
+貼り合わさる。系 $(g, \{h_U\})$ が $F(T)$ の元であることは容易に確認できる。
+ゆえに $F$ は Zariski 位相に関する層条件を満たす。
+
+\medskip\noindent
+次に、各 $F_W$（$W \in \mathcal{B}$）が表現可能であることを確認する。
+すなわち、関手の変換
+$$
+F_W \longrightarrow \Mor(-, X_W), \ (g, \{h_U\}) \longmapsto h_W
+$$
+が同型であると主張する。これを見るため、$T$ をスキームとし、
+$\alpha : T \to X_W$ を射とする。$g = f_W \circ \alpha$ とおく。
+任意の $U \in \mathcal{B}$ で $U \subset W$ を満たすものに対して、
+$h_U : g^{-1}(U) \to X_U$ を合成
+$(\rho^W_U)^{-1} \circ \alpha|_{g^{-1}(U)}$ と定義できる。これは像
+$\alpha(g^{-1}(U))$ が $f_W^{-1}(U)$ に含まれ、補題の条件 (a) が成り立つためである。
+等式 $f_U \circ h_U = g|_{g^{-1}(U)}$ がこのような $U$ に対して成り立つことは明らかである。
+さらに $V \in \mathcal{B}$ かつ $V \subset U \subset W$ なら、補題の性質 (b) により
+$\rho^U_V \circ h_V = h_U|_{g^{-1}(V)}$ である。$h_U$ を任意の元
+$U \in \mathcal{B}$ に対しても定義しなければならない。$\mathcal{B}$ は $S$ の位相の基であるから、
+開被覆 $U \cap W = \bigcup U_i$ であって $U_i \in \mathcal{B}$ を満たすものを取れる。
+$g$ の像は $W$ に含まれるので
+$g^{-1}(U) = g^{-1}(U \cap W) = \bigcup g^{-1}(U_i)$
+である。射
+$h_i = \rho^U_{U_i} \circ h_{U_i} : g^{-1}(U_i) \to X_U$
+を考える。補題の条件 (b) を用いれば
+$h_i|_{g^{-1}(U_i) \cap g^{-1}(U_j)} = h_j|_{g^{-1}(U_i) \cap g^{-1}(U_j)}$
+であることを容易に証明できる。したがって、これらの射は貼り合わさって、求める射
+$h_U : g^{-1}(U) \to X_U$ を与える。系 $(g, \{h_U\})$ が $F_W(T)$ の元であり、
+上の表示写像のもとで $\alpha$ に写ることの（容易な）確認は省略する。
+
+\medskip\noindent
+次に、各 $F_W \subset F$ が開埋め込みによって表現可能であることを確認する。
+これは定義から明らかである。
+
+\medskip\noindent
+最後に、族 $(F_W)_{W \in \mathcal{B}}$ が $F$ を被覆することを確認しなければならない。
+これは構成と $\mathcal{B}$ が $S$ の位相の基であることから明らかである。
+
+\medskip\noindent
+$X$ を関手 $F$ を表現するスキームとする。$(f, \{i_U\}) \in F(X)$ を
+「普遍族」とする。各 $F_W$ は（上で表示した関手の射により）$X_W$ で表現されるから、
+$i_W : f^{-1}(W) \to X_W$ は求める同型である。これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-relative-glueing-sheaves}
+$S$ をスキームとする。
+$\mathcal{B}$ を $S$ の位相の基とする。
+次のデータが与えられていると仮定する。
+\begin{enumerate}
+\item 各 $U \in \mathcal{B}$ に対し、スキーム $f_U : X_U \to U$（$U$ 上のもの）。
+\item 各 $U \in \mathcal{B}$ に対し、準連接層 $\mathcal{F}_U$（$X_U$ 上のもの）。
+\item 各組 $U, V \in \mathcal{B}$ で $V \subset U$ を満たすものに対し、射
+$\rho^U_V : X_V \to X_U$。
+\item  各組 $U, V \in \mathcal{B}$ で $V \subset U$ を満たすものに対し、射
+$\theta^U_V : (\rho^U_V)^*\mathcal{F}_U \to \mathcal{F}_V$。
+\end{enumerate}
+さらに、次を仮定する。
+\begin{enumerate}
+\item[(a)] 各 $\rho^U_V$ はスキームの同型
+$X_V \to f_U^{-1}(V)$（$V$ 上のもの）を誘導する。
+\item[(b)] 各 $\theta^U_V$ は同型である。
+\item[(c)] $W, V, U \in \mathcal{B}$ かつ
+$W \subset V \subset U$ に対し、$\rho^U_W = \rho^U_V \circ \rho ^V_W$ が成り立つ。
+\item[(d)] $W, V, U \in \mathcal{B}$ かつ
+$W \subset V \subset U$ に対し、
+$\theta^U_W = \theta^V_W \circ (\rho^V_W)^*\theta^U_V$ が成り立つ。
+\end{enumerate}
+このとき、スキームの射 $f : X \to S$、準連接層 $\mathcal{F}$（$X$ 上のもの）、
+および同型 $i_U : f^{-1}(U) \to X_U$ と
+$\theta_U : i_U^*\mathcal{F}_U \to \mathcal{F}|_{f^{-1}(U)}$
+（$U \in \mathcal{B}$ にわたる）が存在し、$V, U \in \mathcal{B}$ かつ
+$V \subset U$ に対して合成
+$$
+\xymatrix{
+X_V \ar[r]^{i_V^{-1}} &
+f^{-1}(V) \ar[rr]^{inclusion} & &
+f^{-1}(U) \ar[r]^{i_U} &
+X_U
+}
+$$
+は射 $\rho^U_V$ であり、合成
+\begin{equation}
+\label{constructions-equation-glue}
+(\rho^U_V)^*\mathcal{F}_U
+=
+(i_V^{-1})^*((i_U^*\mathcal{F}_U)|_{f^{-1}(V)})
+\xrightarrow{\theta_U|_{f^{-1}(V)}}
+(i_V^{-1})^*(\mathcal{F}|_{f^{-1}(V)})
+\xrightarrow{\theta_V^{-1}}
+\mathcal{F}_V
+\end{equation}
+は $\theta^U_V$ に等しい。さらに、$(X, \mathcal{F})$ は $S$ 上の一意な同型を除いて
+一意である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-relative-glueing} により、スキーム $X$（$S$ 上のもの）と同型 $i_U$ を得る。
+$\mathcal{F}'_U = i_U^*\mathcal{F}_U$ とおく（$U \in \mathcal{B}$）。
+これは準連接 $\mathcal{O}_{f^{-1}(U)}$-加群である。写像
+$$
+\mathcal{F}'_U|_{f^{-1}(V)} =
+i_U^*\mathcal{F}_U|_{f^{-1}(V)} =
+i_V^*(\rho^U_V)^*\mathcal{F}_U \xrightarrow{i_V^*\theta^U_V}
+i_V^*\mathcal{F}_V = \mathcal{F}'_V
+$$
+は同型 $(\theta')^U_V : \mathcal{F}'_U|_{f^{-1}(V)} \to \mathcal{F}'_V$
+を定める。ただし $V \subset U$ は $\mathcal{B}$ の元であるとする。
+条件 (d) は、三つの元 $W \subset V \subset U$（$\mathcal{B}$ のもの）がある場合に
+これらが両立することをちょうど意味する。したがって、$U_1, U_2 \in \mathcal{B}$ に
+対して、共通部分 $U_1 \cap U_2 = \bigcup V_j$ を元 $V_j$（$\mathcal{B}$ のもの）で被覆し、
+$$
+\varphi_{12} :
+\mathcal{F}'_{U_1}|_{f^{-1}(U_1 \cap U_2)}
+\longrightarrow
+\mathcal{F}'_{U_2}|_{f^{-1}(U_1 \cap U_2)}
+$$
+を
+$$
+\varphi_{12}|_{V_j} =
+\left((\theta')^{U_2}_{V_j}\right)^{-1}
+\circ
+(\theta')^{U_1}_{V_j}.
+$$
+により取ることで、よく定義された同型を得られる。これらの写像が実際に
+$\varphi_{12}$ に貼り合わさることの確認と、層の貼り合わせデータのコサイクル条件
+（層の章、節 \ref{sheaves-section-glueing-sheaves}）の確認は省略する。
+層の章、補題 \ref{sheaves-lemma-glue-sheaves} により、$\mathcal{F}$（$X$ 上のもの）を得る。
+(\ref{constructions-equation-glue}) の確認は省略する。
+\end{proof}
+
+\begin{remark}
+\label{constructions-remark-relative-glueing-functorial}
+補題 \ref{constructions-lemma-relative-glueing} および
+\ref{constructions-lemma-relative-glueing-sheaves} で説明した構成には関手性がある。すなわち、
+補題 \ref{constructions-lemma-relative-glueing} におけるものと同様な二組のデータ
+$(f_U : X_U \to U, \rho^U_V)$ および
+$(g_U : Y_U \to U, \sigma^U_V)$ が与えられているとする。各 $U \in \mathcal{B}$ に
+対して、射 $h_U : X_U \to Y_U$（$U$ 上のもの）であって、制限
+$\rho^U_V$ および $\sigma^U_V$ と両立するものが与えられているとする。関手性とは、これにより、
+スキームの射 $h : X \to Y$（$S$ 上のもの）であって射 $h_U$ に戻るように制限されるものが
+生じることを意味する。ここで $f : X \to S$ はデータ
+$(f_U : X_U \to U, \rho^U_V)$ から得られ、$g : Y \to S$ はデータ
+$(g_U : Y_U \to U, \sigma^U_V)$ から得られる。
+
+\medskip\noindent
+同様に、補題 \ref{constructions-lemma-relative-glueing-sheaves} におけるものと同様な二組のデータ
+$(f_U : X_U \to U, \mathcal{F}_U, \rho^U_V, \theta^U_V)$ および
+$(g_U : Y_U \to U, \mathcal{G}_U, \sigma^U_V, \eta^U_V)$
+が与えられているとする。各 $U \in \mathcal{B}$ に対して、射
+$h_U : X_U \to Y_U$（$U$ 上のもの）であって、制限 $\rho^U_V$ および
+$\sigma^U_V$ と両立するものと、射
+$\tau_U : h_U^*\mathcal{G}_U \to \mathcal{F}_U$ であって写像
+$\theta^U_V$ および $\eta^U_V$ と両立するものが与えられているとする。
+関手性とは、これらにより、スキームの射 $h : X \to Y$（$S$ 上のもの）であって
+射 $h_U$ に戻るように制限されるものと、射 $h^*\mathcal{G} \to \mathcal{F}$ であって
+写像 $h_U$ に戻るように制限されるものが生じることを意味する。ここで
+$(f : X \to S, \mathcal{F})$ はデータ
+$(f_U : X_U \to U, \mathcal{F}_U, \rho^U_V, \theta^U_V)$ から得られ、
+$(g : Y \to S, \mathcal{G})$ はデータ
+$(g_U : Y_U \to U, \mathcal{G}_U, \sigma^U_V, \eta^U_V)$ から得られる。
+
+\medskip\noindent
+確認は省略し、相対的貼り合わせデータと相対的対象との間の「圏同値」の適切な定式化も
+省略する。
+\end{remark}
+
+
+
+
+\section{貼り合わせによる相対スペクトル}
+\label{constructions-section-spec-via-glueing}
+
+\begin{situation}
+\label{constructions-situation-relative-spec}
+ここで $S$ はスキームであり、$\mathcal{A}$ は準連接
+$\mathcal{O}_S$-代数である。これは、$\mathcal{A}$ が
+$\mathcal{O}_S$-代数の層であって、$\mathcal{O}_S$-加群として準連接であることを
+意味する。
+\end{situation}
+
+\noindent
+本節では、スキームの射
+$$
+\underline{\Spec}_S(\mathcal{A}) \longrightarrow S
+$$
+を、スペクトル $\Spec(\Gamma(U, \mathcal{A}))$ を貼り合わせることにより構成する方法を
+概説する。ここで $U$ は $S$ のアフィン開集合を走る。まず、アフィン上での
+$\mathcal{A}$ の値のスペクトルが、
+補題 \ref{constructions-lemma-relative-glueing} における適切なスキームの族をなすことを示す。
+
+\begin{lemma}
+\label{constructions-lemma-spec-inclusion}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+$U \subset U' \subset S$ をアフィン開集合とする。
+$A = \mathcal{A}(U)$ および $A' = \mathcal{A}(U')$ とおく。
+環の写像 $A' \to A$ は射 $\Spec(A) \to \Spec(A')$ を誘導し、図式
+$$
+\xymatrix{
+\Spec(A) \ar[r] \ar[d] &
+\Spec(A') \ar[d] \\
+U \ar[r] &
+U'
+}
+$$
+はカルテシアンである。
+\end{lemma}
+
+\begin{proof}
+$R = \mathcal{O}_S(U)$ および $R' = \mathcal{O}_S(U')$ とおく。
+写像 $R \otimes_{R'} A' \to A$ は同型であることに注意する。これは $\mathcal{A}$ が
+準連接だからである（例えばスキームの章、補題 \ref{schemes-lemma-widetilde-pullback} を参照）。
+結論は、スキームの章、補題
+\ref{schemes-lemma-fibre-product-affine-schemes} におけるアフィンスキームのファイバー積の
+記述から従う。
+\end{proof}
+
+\noindent
+特に、補題の射 $\Spec(A) \to \Spec(A')$ は開埋め込みである。
+
+\begin{lemma}
+\label{constructions-lemma-transitive-spec}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+$U \subset U' \subset U'' \subset S$ をアフィン開集合とする。
+$A = \mathcal{A}(U)$、$A' = \mathcal{A}(U')$ および $A'' = \mathcal{A}(U'')$ とおく。
+補題 \ref{constructions-lemma-spec-inclusion} の射 $\Spec(A) \to \Spec(A')$ と
+$\Spec(A') \to \Spec(A'')$ の合成は、補題 \ref{constructions-lemma-spec-inclusion} の射
+$\Spec(A) \to \Spec(A'')$ である。
+\end{lemma}
+
+\begin{proof}
+写像 $A'' \to A$ は $A'' \to A'$ と $A' \to A$ の合成であるから従う
+（$\mathcal{A}$ は層である）。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-glue-relative-spec}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+次の性質をもつスキームの射
+$$
+\pi : \underline{\Spec}_S(\mathcal{A}) \longrightarrow S
+$$
+が存在する。
+\begin{enumerate}
+\item 各アフィン開集合 $U \subset S$ に対し、同型
+$i_U : \pi^{-1}(U) \to \Spec(\mathcal{A}(U))$（$U$ 上のもの）が存在する。
+\item アフィン開集合 $U \subset U' \subset S$ に対し、合成
+$$
+\xymatrix{
+\Spec(\mathcal{A}(U)) \ar[r]^{i_U^{-1}} &
+\pi^{-1}(U) \ar[rr]^{inclusion} & &
+\pi^{-1}(U') \ar[r]^{i_{U'}} &
+\Spec(\mathcal{A}(U'))
+}
+$$
+は上の補題 \ref{constructions-lemma-spec-inclusion} の開埋め込みである。
+\end{enumerate}
+さらに、$\underline{\Spec}_S(\mathcal{A})$ は $S$ 上の一意な同型を除いて一意である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-relative-glueing}、
+\ref{constructions-lemma-spec-inclusion}、および
+\ref{constructions-lemma-transitive-spec} から直ちに従う。
+一意性は補題 \ref{constructions-lemma-relative-glueing} の最後の文で述べられている。
+\end{proof}
+
+
+\section{関手としての相対スペクトル}
+\label{constructions-section-spec}
+
+\noindent
+状況 \ref{constructions-situation-relative-spec} に置く。すなわち、$S$ はスキームであり、
+$\mathcal{A}$ は準連接な $\mathcal{O}_S$-代数の層である。
+
+\medskip\noindent
+任意の $f : T \to S$ に対して、引き戻し $f^*\mathcal{A}$ は準連接な
+$\mathcal{O}_T$-代数の層である。組 $(f : T \to S, \varphi)$ であって、
+$f$ がスキームの射、$\varphi : f^*\mathcal{A} \to \mathcal{O}_T$ が
+$\mathcal{O}_T$-代数の射であるものを考える。これは
+$f^{-1}\mathcal{O}_S$-代数準同型
+$\varphi : f^{-1}\mathcal{A} \to \mathcal{O}_T$ を与えることと同じである。層の章、補題
+\ref{sheaves-lemma-adjointness-tensor-restrict} を参照。これはまた、
+$\mathcal{O}_S$-代数の写像 $\varphi : \mathcal{A} \to f_*\mathcal{O}_T$ を
+与えることとも同じである。層の章、補題
+\ref{sheaves-lemma-adjoint-push-pull-modules} を参照。以後、特に断らずに
+$\varphi$ の三つの見方をすべて用いる。
+
+\medskip\noindent
+このような組 $(f : T \to S, \varphi)$ と射 $a : T' \to T$ が与えられると、
+第二の組 $(f' = f \circ a, \varphi' = a^*\varphi)$ を得る。これを
+$(f, \varphi)$ の引き戻しという。$\varphi' = a^*\varphi$ は合成
+$\mathcal{A} \to f_*\mathcal{O}_T \to f'_*\mathcal{O}_{T'}$ として記述できる。
+ここで第二の写像は $f_*a^\sharp$ であり、
+$a^\sharp : \mathcal{O}_T \to a_*\mathcal{O}_{T'}$ である。このようにして関手
+\begin{eqnarray}
+\label{constructions-equation-spec}
+F : \Sch^{opp} & \longrightarrow & \textit{Sets} \\
+T & \longmapsto & F(T) = \{\text{pairs }(f, \varphi) \text{ as above}\}
+\nonumber
+\end{eqnarray}
+を定義した。
+
+\begin{lemma}
+\label{constructions-lemma-spec-base-change}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+$F$ を上の $(S, \mathcal{A})$ に付随する関手とする。
+$g : S' \to S$ をスキームの射とする。
+$\mathcal{A}' = g^*\mathcal{A}$ とおく。$F'$ を上の
+$(S', \mathcal{A}')$ に付随する関手とする。
+このとき、関手の標準同型
+$$
+F' \cong h_{S'} \times_{h_S} F
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+組 $(f' : T \to S', \varphi' : (f')^*\mathcal{A}' \to \mathcal{O}_T)$ は、組
+$(f, \varphi : f^*\mathcal{A} \to \mathcal{O}_T)$ と、$f$ の
+$f = g \circ f'$ という分解を与えることと同じである。実際、この記法では
+$(f')^* \mathcal{A}' = (f')^*g^*\mathcal{A} = f^*\mathcal{A}$ である。
+これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-spec-affine}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+$F$ を上の $(S, \mathcal{A})$ に付随する関手とする。
+$S$ がアフィンなら、$F$ はアフィンスキーム
+$\Spec(\Gamma(S, \mathcal{A}))$ によって表現される。
+\end{lemma}
+
+\begin{proof}
+$S = \Spec(R)$ および $A = \Gamma(S, \mathcal{A})$ と書く。
+すると $A$ は $R$-代数であり、$\mathcal{A} = \widetilde A$ である。
+環の写像 $R \to A$ は標準写像
+$$
+f_{univ} : \Spec(A)
+\longrightarrow
+S = \Spec(R).
+$$
+を与える。スキームの章、補題 \ref{schemes-lemma-widetilde-pullback} により
+$f_{univ}^*\mathcal{A} =  \widetilde{A \otimes_R A}$ である。
+したがって、標準写像
+$$
+\varphi_{univ} :
+f_{univ}^*\mathcal{A} = \widetilde{A \otimes_R A}
+\longrightarrow
+\widetilde A = \mathcal{O}_{\Spec(A)}
+$$
+がある。これは $A$-加群の写像 $A \otimes_R A \to A$、
+$a \otimes a' \mapsto aa'$ から得られる。この場合、組
+$(f_{univ}, \varphi_{univ})$ が $F$ を表現すると主張する。言い換えると、任意のスキーム
+$T$ に対して写像
+$$
+\Mor(T, \Spec(A)) \longrightarrow \{\text{pairs } (f, \varphi)\},\quad
+a \longmapsto (f_{univ} \circ a, a^*\varphi_{univ})
+$$
+が全単射であると主張する。
+
+\medskip\noindent
+逆写像を構成する。任意の組 $(f : T \to S, \varphi)$ から、誘導される環の写像
+$$
+\xymatrix{
+A = \Gamma(S, \mathcal{A}) \ar[r]^{f^*} &
+\Gamma(T, f^*\mathcal{A}) \ar[r]^{\varphi} &
+\Gamma(T, \mathcal{O}_T)
+}
+$$
+を得る。これは、スキームの章、補題
+\ref{schemes-lemma-morphism-into-affine} によりスキームの射 $T \to \Spec(A)$ を誘導する。
+
+\medskip\noindent
+この写像が上で表示した写像の逆であることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-spec}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+関手 $F$ はスキームによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+スキームの章、補題 \ref{schemes-lemma-glue-functors} を用いる。
+
+\medskip\noindent
+まず、$F$ が Zariski 位相に関する層条件を満たすことを確認する。すなわち、
+$T$ をスキームとし、$T = \bigcup_{i \in I} U_i$ を開被覆とし、
+$(f_i, \varphi_i) \in F(U_i)$ が
+$(f_i, \varphi_i)|_{U_i \cap U_j} = (f_j, \varphi_j)|_{U_i \cap U_j}$ を満たすとする。
+すると、射 $f_i : U_i \to S$ はスキームの射 $f : T \to S$ であって
+$f|_{U_i} = f_i$ を満たすものに貼り合わさる。スキームの章、節
+\ref{schemes-section-glueing-schemes} を参照。したがって
+$f_i^*\mathcal{A} = f^*\mathcal{A}|_{U_i}$ であり、仮定により射 $\varphi_i$ は
+$U_i \cap U_j$ 上で一致する。ゆえに層の章、節
+\ref{sheaves-section-glueing-sheaves} により、これらは
+$\mathcal{O}_T$-代数の射 $f^*\mathcal{A} \to \mathcal{O}_T$ に貼り合わさる。
+これで、$F$ が Zariski 位相に関する層条件を満たすことが証明された。
+
+\medskip\noindent
+$S = \bigcup_{i \in I} U_i$ をアフィン開被覆とする。$F_i \subset F$ を、組
+$(f : T \to S, \varphi)$ であって $f(T) \subset U_i$ を満たすものからなる部分関手とする。
+
+\medskip\noindent
+各 $F_i$ が表現可能であることを示さなければならない。これは、補題
+\ref{constructions-lemma-spec-base-change} により、$F_i$ が、$U_i$ に準連接
+$\mathcal{O}_{U_i}$-代数 $\mathcal{A}|_{U_i}$ を備えて得られる関手と
+同一視されるため成り立つ。したがって、結論は補題 \ref{constructions-lemma-spec-affine} から従う。
+
+\medskip\noindent
+次に、$F_i \subset F$ が開埋め込みによって表現可能であることを示す。
+$(f : T \to S, \varphi) \in F(T)$ とする。$V_i = f^{-1}(U_i)$ とおく。
+$F_i$ の定義から、$a : T' \to T$ が与えられたとき
+$a^*(f, \varphi) \in F_i(T')$ であるための必要十分条件は
+$a(T') \subset V_i$ である。これが示すべきことであった。
+
+\medskip\noindent
+最後に、族 $(F_i)_{i \in I}$ が $F$ を被覆することを示さなければならない。
+$(f : T \to S, \varphi) \in F(T)$ とする。$V_i = f^{-1}(U_i)$ とおく。
+$S = \bigcup_{i \in I} U_i$ は $S$ の開被覆であるから、
+$T = \bigcup_{i \in I} V_i$ は $T$ の開被覆である。また、
+$(f, \varphi)|_{V_i} \in F_i(V_i)$ である。これで補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-glueing-gives-functor-spec}
+状況 \ref{constructions-situation-relative-spec} のもとで考える。
+補題 \ref{constructions-lemma-glue-relative-spec} で構成したスキーム
+$\pi : \underline{\Spec}_S(\mathcal{A}) \to S$ と、関手 $F$ を表現するスキームは、
+$S$ 上のスキームとして標準同型である。
+\end{lemma}
+
+\begin{proof}
+$X \to S$ を関手 $F$ を表現するスキームとする。
+\par\noindent
+$\mathcal{O}_S$-代数の層
+$\mathcal{R} = \pi_*\mathcal{O}_{\underline{\Spec}_S(\mathcal{A})}$ を考える。
+$\underline{\Spec}_S(\mathcal{A})$ の構成により、同型
+$\mathcal{A}(U) \to \mathcal{R}(U)$ がある。
+\par\noindent
+これは各アフィン開集合 $U \subset S$ に対するものであり、補題
+\ref{constructions-lemma-glue-relative-spec} の (1) から従う。開集合 $U \subset U' \subset S$ に
+対し、これらの同型は制限写像と両立する。これは補題
+\ref{constructions-lemma-glue-relative-spec} の (2) から従う。したがって層の章、補題
+\ref{sheaves-lemma-restrict-basis-equivalence-modules} により、これらの同型は
+$\mathcal{O}_S$-代数の同型
+\par\noindent
+$\varphi : \mathcal{A} \to \mathcal{R}$ から生じる。
+ゆえに、これは元 $(\pi, \varphi) \in F(\underline{\Spec}_S(\mathcal{A}))$ を与える。
+$X$ は関手 $F$ を表現するから、対応するスキームの射
+$can : \underline{\Spec}_S(\mathcal{A}) \to X$ を得る。
+\par\noindent
+これは $S$ 上の射である。
+
+\medskip\noindent
+$U \subset S$ を任意のアフィン開集合とする。$F_U \subset F$ を $F$ の部分関手とする。
+これは、組 $(f, \varphi)$（スキーム $T$ 上のもの）であって
+$f(T) \subset U$ を満たすものに対応する。
+明らかに基底変換 $X_U$ は $F_U$ を表現する。さらに補題
+\ref{constructions-lemma-spec-affine} により、$F_U$ は
+$\Spec(\mathcal{A}(U)) = \pi^{-1}(U)$ によって表現される。言い換えると
+$X_U \cong \pi^{-1}(U)$ である。この同一視が射 $can$ の $U$ への基底変換によって
+もたらされることの確認は省略する。
+\end{proof}
+
+\begin{definition}
+\label{constructions-definition-relative-spec}
+$S$ をスキームとする。$\mathcal{A}$ を準連接な $\mathcal{O}_S$-代数の層とする。
+{\it $\mathcal{A}$ の $S$ 上の相対スペクトル}、または単に
+{\it $\mathcal{A}$ の $S$ 上のスペクトル}とは、補題
+\ref{constructions-lemma-glue-relative-spec} で構成され、関手 $F$（\ref{constructions-equation-spec}）を表現する
+スキームをいう。補題 \ref{constructions-lemma-glueing-gives-functor-spec} を参照。これを
+$\pi : \underline{\Spec}_S(\mathcal{A}) \to S$ と書く。「普遍族」は
+$\mathcal{O}_S$-代数の射
+$$
+\mathcal{A}
+\longrightarrow
+\pi_*\mathcal{O}_{\underline{\Spec}_S(\mathcal{A})}
+$$
+である。
+\end{definition}
+
+\noindent
+次の補題は、とりわけ相対スペクトルを取る操作が基底変換と可換であることを述べる。
+
+\begin{lemma}
+\label{constructions-lemma-spec-properties}
+$S$ をスキームとする。$\mathcal{A}$ を準連接な
+$\mathcal{O}_S$-代数の層とする。
+$\pi : \underline{\Spec}_S(\mathcal{A}) \to S$ を $\mathcal{A}$ の $S$ 上の
+相対スペクトルとする。
+\begin{enumerate}
+\item 各アフィン開集合 $U \subset S$ に対して逆像 $\pi^{-1}(U)$ はアフィンである。
+\item 各射 $g : S' \to S$ に対して
+$S' \times_S \underline{\Spec}_S(\mathcal{A}) =
+\underline{\Spec}_{S'}(g^*\mathcal{A})$ である。
+\item
+普遍写像
+$$
+\mathcal{A}
+\longrightarrow
+\pi_*\mathcal{O}_{\underline{\Spec}_S(\mathcal{A})}
+$$
+は $\mathcal{O}_S$-代数の同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は貼り合わせによる相対スペクトルの記述から従う。補題
+\ref{constructions-lemma-glue-relative-spec} を参照。(2) は補題
+\ref{constructions-lemma-spec-base-change} から直ちに従う。(3) は $S$ 上局所的な主張であり、
+$S$ がアフィンの場合には例えば補題 \ref{constructions-lemma-spec-affine} により明らかなので従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-canonical-morphism}
+$f : X \to S$ をスキームの準コンパクトかつ準分離的な射とする。スキームの章、補題
+\ref{schemes-lemma-push-forward-quasi-coherent} により、層 $f_*\mathcal{O}_X$ は準連接な
+$\mathcal{O}_S$-代数の層である。$S$ 上のスキームの標準射
+$$
+can : X \longrightarrow \underline{\Spec}_S(f_*\mathcal{O}_X)
+$$
+がある。任意のアフィン開集合 $U \subset S$ に対し、制限 $can|_{f^{-1}(U)}$ は、
+スキームの章、補題 \ref{schemes-lemma-morphism-into-affine} から得られる標準射
+$$
+f^{-1}(U) \longrightarrow \Spec(\Gamma(f^{-1}(U), \mathcal{O}_X))
+$$
+と同一視される。
+\end{lemma}
+
+\begin{proof}
+この射は、$\underline{\Spec}$ を関手 $F$ を表現するスキームとする定義により、
+標準写像 $\varphi : f^*f_*\mathcal{O}_X \to \mathcal{O}_X$ から得られる
+（これは順像と引き戻しの随伴性により
+$\text{id} : f_*\mathcal{O}_X \to f_*\mathcal{O}_X$ に対応する）。
+$f^{-1}(U)$ への制限に関する主張は、アフィン上の相対スペクトルの記述から従う。
+補題 \ref{constructions-lemma-spec-affine} を参照。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{アフィン n 次元空間}
+\label{constructions-section-affine-n-space}
+
+\noindent
+相対スペクトルの応用として、アフィン $n$-空間を底スキーム
+$S$ 上に次のように定義する。任意の整数 $n \geq 0$ に対して、
+$\mathcal{O}_S$-代数の準連接層
+$\mathcal{O}_S[T_1, \ldots, T_n]$ を考えることができる。これは
+$\mathcal{O}_S$-加群の層としては、多重添字で添字付けられた
+$\mathcal{O}_S$ のコピーの直和にほかならないため、準連接である。
+
+\begin{definition}
+\label{constructions-definition-affine-n-space}
+$S$ をスキーム、$n \geq 0$ とする。$S$ 上のスキーム
+$$
+\mathbf{A}^n_S =
+\underline{\Spec}_S(\mathcal{O}_S[T_1, \ldots, T_n])
+$$
+を {\it アフィン $n$-空間（$S$ 上）} と呼ぶ。
+$S = \Spec(R)$ がアフィンなら、これを
+{\it アフィン $n$-空間（$R$ 上）} とも呼び、$\mathbf{A}^n_R$ と表す。
+\end{definition}
+
+\noindent
+$\mathbf{A}^n_R = \Spec(R[T_1, \ldots, T_n])$ であることに注意する。
+スキームの任意の射 $g : S' \to S$ に対して
+$g^*\mathcal{O}_S[T_1, \ldots, T_n] = \mathcal{O}_{S'}[T_1, \ldots, T_n]$
+であり、したがって $\mathbf{A}^n_{S'} = S' \times_S \mathbf{A}^n_S$ は底変換である。
+ゆえに、アフィン $n$-空間は別の仕方では公式
+$$
+\mathbf{A}^n_S = S \times_{\Spec(\mathbf{Z})} \mathbf{A}^n_{\mathbf{Z}}.
+$$
+によって定義できる。また、$S$-スキーム $f : X \to S$ から
+$\mathbf{A}^n_S$ への射は、$\mathcal{O}_S$-代数の準同型
+$\mathcal{O}_S[T_1, \ldots, T_n] \to f_*\mathcal{O}_X$
+によって与えられる。これは明らかに $T_i$ の像を与えることと同じである。
+言い換えれば、$X$ から $\mathbf{A}^n_S$ への $S$ 上の射を与えることは、
+$n$ 個の元 $h_1, \ldots, h_n \in \Gamma(X, \mathcal{O}_X)$ を与えることと同じである。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{ベクトル束}
+\label{constructions-section-vector-bundle}
+
+\noindent
+$S$ をスキームとする。
+$\mathcal{E}$ を $\mathcal{O}_S$-加群の準連接層とする。
+加群の章、補題 \ref{modules-lemma-whole-tensor-algebra-permanence} により、
+対称代数 $\text{Sym}(\mathcal{E})$、すなわち $\mathcal{E}$ の
+$\mathcal{O}_S$ 上の対称代数は
+$\mathcal{O}_S$-代数の準連接層である。
+したがって、これに相対スペクトルを適用することができる。
+
+\begin{definition}
+\label{constructions-definition-vector-bundle}
+$S$ をスキームとする。$\mathcal{E}$ を準連接な
+$\mathcal{O}_S$-加群とする\footnote{ここでは $\mathcal{E}$ が有限局所自由であるという
+条件を読者は予想するかもしれない。\cite[II, Definition 1.7.8]{EGA} と整合させるため、
+ここではこの条件を課さない。}。
+{\it $\mathcal{E}$ に付随するベクトル束} とは
+$$
+\mathbf{V}(\mathcal{E}) = \underline{\Spec}_S(\text{Sym}(\mathcal{E})).
+$$
+のことである。
+\end{definition}
+
+\noindent
+$\mathcal{E}$ に付随するベクトル束には、さらに少し構造が備わっている。
+すなわち、次数付け
+$$
+\pi_*\mathcal{O}_{\mathbf{V}(\mathcal{E})} =
+\bigoplus\nolimits_{n \geq 0} \text{Sym}^n(\mathcal{E}).
+$$
+があり、これにより $\pi_*\mathcal{O}_{\mathbf{V}(\mathcal{E})}$ は
+次数付き $\mathcal{O}_S$-代数となる。逆に、$\mathcal{E}$ はその次数 $1$ の部分から
+復元できる。そこで、抽象的なベクトル束を次のように定義する。
+
+\begin{definition}
+\label{constructions-definition-abstract-vector-bundle}
+$S$ をスキームとする。{\it ベクトル束 $\pi : V \to S$（$S$ 上）} とは、
+$\pi_*\mathcal{O}_V$ に次数付き $\mathcal{O}_S$-代数の構造
+$\pi_*\mathcal{O}_V = \bigoplus\nolimits_{n \geq 0} \mathcal{E}_n$
+が与えられ、$\mathcal{E}_0 = \mathcal{O}_S$ であり、かつ写像
+$$
+\text{Sym}^n(\mathcal{E}_1) \longrightarrow \mathcal{E}_n
+$$
+がすべての $n \geq 0$ に対して同型となるようなスキームのアフィン射をいう。
+{\it $S$ 上のベクトル束の射} とは、誘導される写像
+$f : V \to V'$ であって
+$$
+f^* : \pi'_*\mathcal{O}_{V'} \longrightarrow \pi_*\mathcal{O}_V
+$$
+が与えられた次数付けと両立するものをいう。
+\end{definition}
+
+\noindent
+$S$ 上のベクトル束の一例は、アフィン $n$-空間
+$\mathbf{A}^n_S$（$S$ 上）である。定義 \ref{constructions-definition-affine-n-space} を参照。
+これは
+$\mathcal{O}_S[T_1, \ldots, T_n] = \text{Sym}(\mathcal{O}_S^{\oplus n})$
+だからである。
+
+\begin{lemma}
+\label{constructions-lemma-category-vector-bundles}
+スキーム $S$ 上のベクトル束の圏は、準連接 $\mathcal{O}_S$-加群の圏と反同値である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：一方の向きでは関手
+$\underline{\Spec}_S(\text{Sym}^*_{\mathcal{O}_S}(-))$
+を用い、他方の向きでは関手
+$(\pi : V \to S) \leadsto (\pi_*\mathcal{O}_V)_1$ を用いる。ここで下付き添字は
+次数 $1$ の部分を取ることを表す。
+\end{proof}
+
+
+
+
+\section{錐}
+\label{constructions-section-cone}
+
+\noindent
+代数幾何において、錐は次数付き代数に対応する。本書の規約では、
+次数付き環または代数 $A$ には、非負整数による次数付け
+$A = \bigoplus_{d \geq 0} A_d$ が備わっている。代数の章、
+節 \ref{algebra-section-graded} を参照。
+
+\begin{definition}
+\label{constructions-definition-cone}
+$S$ をスキームとする。$\mathcal{A}$ を次数付き準連接
+$\mathcal{O}_S$-代数とする。$\mathcal{O}_S \to \mathcal{A}_0$ が
+同型であると仮定する\footnote{$\mathcal{A}$ が $\mathcal{A}_1$ によって
+$\mathcal{O}_S$ 上生成されるという仮定を課すことが多い。
+\cite[II, (8.3.1)]{EGA} と整合させるため、ここでは仮定しない。}。
+{\it $\mathcal{A}$ に付随する錐}、または
+{\it $\mathcal{A}$ に付随するアフィン錐} とは
+$$
+C(\mathcal{A}) = \underline{\Spec}_S(\mathcal{A}).
+$$
+のことである。
+\end{definition}
+
+\noindent
+次数付き $\mathcal{O}_S$-代数の層に付随する錐には、さらに少し構造が備わっている。
+すなわち、次数付け
+$$
+\pi_*\mathcal{O}_{C(\mathcal{A})} =
+\bigoplus\nolimits_{n \geq 0} \mathcal{A}_n
+$$
+が得られる。そこで、抽象的な錐を次のように定義できる。
+
+\begin{definition}
+\label{constructions-definition-abstract-cone}
+$S$ をスキームとする。{\it 錐 $\pi : C \to S$（$S$ 上）} とは、
+$\pi_*\mathcal{O}_C$ に次数付き $\mathcal{O}_S$-代数の構造
+$\pi_*\mathcal{O}_C = \bigoplus\nolimits_{n \geq 0} \mathcal{A}_n$
+が与えられ、$\mathcal{A}_0 = \mathcal{O}_S$ となるようなスキームのアフィン射をいう。
+{\it 錐の射} で $\pi : C \to S$ から $\pi' : C' \to S$ へのものとは、
+誘導される写像
+$f : C \to C'$ であって
+$$
+f^* : \pi'_*\mathcal{O}_{C'} \longrightarrow \pi_*\mathcal{O}_C
+$$
+が与えられた次数付けと両立するものをいう。
+\end{definition}
+
+\noindent
+任意のベクトル束は錐の一例である。実際、$S$ 上のベクトル束の圏は
+$S$ 上の錐の圏の充満部分圏である。
+
+
+
+
+
+
+
+
+
+\section{次数付き環の Proj}
+\label{constructions-section-proj}
+
+\noindent
+この節では、\cite[II, Section 2]{EGA} に従って次数付き環の Proj を構成する。
+
+\medskip\noindent
+$S$ を次数付き環とする。位相空間 $\text{Proj}(S)$ を考える。これは代数の章、
+節 \ref{algebra-section-proj} で $S$ に付随させたものである。
+この空間に環の層 $\mathcal{O}_{\text{Proj}(S)}$ を入れ、得られる組
+$(\text{Proj}(S), \mathcal{O}_{\text{Proj}(S)})$ がスキームとなるようにする。
+
+\medskip\noindent
+$\text{Proj}(S)$ は開集合 $D_{+}(f)$、ただし
+$f \in S_d$、$d \geq 1$、からなる基をもち、これらを {\it 標準開集合} と呼ぶことを
+思い出す。代数の章、節 \ref{algebra-section-proj} を参照。この用語を使うときは、
+たとえ明記し忘れても $f$ が正次数の斉次元であることを常に含意する。
+さらに、二つの標準開集合の共通部分も標準開集合であり、
+$D_{+}(f) \cap D_{+}(g) = D_{+}(fg)$ である。ここで
+$f, g \in S$ は正次数の斉次元である。
+
+\begin{lemma}
+\label{constructions-lemma-standard-open}
+$S$ を次数付き環とする。$f \in S$ を正次数の斉次元とする。
+\begin{enumerate}
+\item $g\in S$ が正次数の斉次元で
+$D_{+}(g) \subset D_{+}(f)$ ならば、次が成り立つ。
+\begin{enumerate}
+\item $f$ は $S_g$ で可逆であり、
+$f^{\deg(g)}/g^{\deg(f)}$ は $S_{(g)}$ で可逆である。
+\item $g^e = af$ であり、ここで $e \geq 1$、$a \in S$ は斉次元である。
+\item 標準的な $S$-代数写像 $S_f \to S_g$ がある。
+\item 標準的な $S_0$-代数写像 $S_{(f)} \to S_{(g)}$ があり、
+これは写像 $S_f \to S_g$ と両立する。
+\item 写像 $S_{(f)} \to S_{(g)}$ は同型
+$$
+(S_{(f)})_{g^{\deg(f)}/f^{\deg(g)}} \cong S_{(g)},
+$$
+を誘導する。
+\item これらの写像は、位相空間の可換図式
+$$
+\xymatrix{
+D_{+}(g) \ar[d] &
+\{\mathbf{Z}\text{-graded primes of }S_g\} \ar[l] \ar[r] \ar[d] &
+\Spec(S_{(g)}) \ar[d] \\
+D_{+}(f) &
+\{\mathbf{Z}\text{-graded primes of }S_f\} \ar[l] \ar[r] &
+\Spec(S_{(f)})
+}
+$$
+を誘導する。ここで水平写像は同相写像、垂直写像は開埋め込みである。
+\item 両立する標準的な $S_f$-加群写像および $S_{(f)}$-加群写像
+$M_f \to M_g$ および $M_{(f)} \to M_{(g)}$ が、任意の次数付き
+$S$-加群 $M$ に対して存在する。
+\item 写像 $M_{(f)} \to M_{(g)}$ は同型
+$$
+(M_{(f)})_{g^{\deg(f)}/f^{\deg(g)}} \cong M_{(g)}.
+$$
+を誘導する。
+\end{enumerate}
+\item $D_{+}(f)$ の任意の開被覆は、形
+$D_{+}(f) = \bigcup_{i = 1}^n D_{+}(g_i)$ の有限開被覆に細分できる。
+\item $g_1, \ldots, g_n \in S$ を正次数の斉次元とする。このとき
+$D_{+}(f) \subset \bigcup D_{+}(g_i)$ であることと、
+$g_1^{\deg(f)}/f^{\deg(g_1)}, \ldots, g_n^{\deg(f)}/f^{\deg(g_n)}$
+が $S_{(f)}$ の単位イデアルを生成することとは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D_{+}(g) = \Spec(S_{(g)})$ であることを、環写像
+$S \to S_g \leftarrow S_{(g)}$ による同一視とともに思い出す。代数の章、補題
+\ref{algebra-lemma-topology-proj} を参照。したがって
+$f^{\deg(g)}/g^{\deg(f)}$ は $S_{(g)}$ の元で、どの素イデアルにも含まれず、
+ゆえに可逆である。代数の章、補題 \ref{algebra-lemma-Zariski-topology} を参照。
+これで (a) が従う。$f$ の $S_g$ における逆元を $a/g^d$ と書く。
+$a$ を次数 $d\deg(g) - \deg(f)$ の斉次成分で置き換えてよい。
+これは $g^d - af$ が $g$ のある冪で零化されることを意味し、したがって
+$g^e = af$ となる。ここで、ある $a \in S$ は斉次で次数
+$e\deg(g) - \deg(f)$ をもつ。
+これで (b) が示された。(c) については、(a) と局所化の普遍性から写像
+$S_f \to S_g$ が存在する。または、$b/f^n$ を $a^nb/g^{ne}$ に写すことで
+これを定義できる。これは明らかに、次数ゼロ部分の部分環の写像
+$S_{(f)} \to S_{(g)}$ も誘導する。同様に、$M_f \to M_g$ および
+$M_{(f)} \to M_{(g)}$ を、$x/f^n$ を $a^nx/g^{ne}$ に写すことで定義できる。
+$S_{(g)}$、resp.\ $M_{(g)}$ を $S_{(f)}$、resp.\ $M_{(f)}$ の
+主局所化として表す主張は、上の公式から明らかである。
+位相空間の可換図式の写像は上で与えた環写像に対応する。
+水平矢印は代数の章、補題 \ref{algebra-lemma-topology-proj} により同相写像である。
+垂直矢印は、左のものが開部分集合の包含だから、開埋め込みである。
+
+\medskip\noindent
+開集合 $D_{+}(f)$ は $\Spec(S_{(f)})$ と同相なので準コンパクトである。
+代数の章、補題 \ref{algebra-lemma-quasi-compact} を参照。
+したがって第二の主張は、標準開集合が位相の基をなすことから直ちに従う。
+
+\medskip\noindent
+第三の主張は代数の章、補題 \ref{algebra-lemma-Zariski-topology} から直ちに従う。
+\end{proof}
+
+
+\noindent
+層の章、節 \ref{sheaves-section-bases} では、基上の層という概念を定義し、
+それが空間上の層という概念と本質的に同値であることを示した。層の章、補題
+\ref{sheaves-lemma-extend-off-basis} および
+\ref{sheaves-lemma-extend-off-basis-structures} を参照。さらに、層の章、補題
+\ref{sheaves-lemma-cofinal-systems-coverings-standard-case} では、
+各標準開集合について余終的な開被覆系上で層条件を確認すれば十分であることを示した。
+上の補題により、標準開集合による有限被覆上で確認すれば十分である。
+
+\begin{definition}
+\label{constructions-definition-standard-covering}
+$S$ を次数付き環とする。
+$D_{+}(f) \subset \text{Proj}(S)$ が標準開集合であると仮定する。
+$D_{+}(f)$ の {\it 標準開被覆} とは、被覆
+$D_{+}(f) = \bigcup_{i = 1}^n D_{+}(g_i)$ であって、
+$g_1, \ldots, g_n \in S$ が正次数の斉次元であるものをいう。
+\end{definition}
+
+\noindent
+$S$ を次数付き環、$M$ を次数付き $S$-加群とする。標準開集合の基上の前層
+$\widetilde M$ を定義する。$U \subset \text{Proj}(S)$ が標準開集合であると仮定する。
+$f, g \in S$ が正次数の斉次元で $D_{+}(f) = D_{+}(g)$ を満たすなら、
+上の補題 \ref{constructions-lemma-standard-open} により、互いに逆な標準写像
+$M_{(f)} \to M_{(g)}$ および $M_{(g)} \to M_{(f)}$ がある。
+したがって、任意の $f$ で $U = D_{+}(f)$ を満たすものを選び、
+$$
+\widetilde M(U) = M_{(f)}.
+$$
+と定義してよい。$D_{+}(g) \subset D_{+}(f)$ なら、上の補題
+\ref{constructions-lemma-standard-open} により標準写像
+$$
+\widetilde M(D_{+}(f)) = M_{(f)} \longrightarrow
+M_{(g)} = \widetilde M(D_{+}(g)).
+$$
+があることに注意する。これは明らかに、標準開集合の基上のアーベル群の前層を定義する。
+$M = S$ なら、$\widetilde S$ は標準開集合の基上の環の前層である。一般の $M$ に対しては、
+$\widetilde M$ が標準開集合の基上の $\widetilde S$-加群の前層であることが分かる。
+
+\medskip\noindent
+$\widetilde M$ の点 $x \in \text{Proj}(S)$ における茎を計算しよう。
+$x$ が斉次素イデアル $\mathfrak p \subset S$ に対応すると仮定する。
+茎の定義から
+$$
+\widetilde M_x
+=
+\colim_{f\in S_d, d > 0, f\not\in \mathfrak p} M_{(f)}
+$$
+であることが分かる。ここで集合
+$\{f \in S_d, d > 0, f \not \in \mathfrak p\}$ は規則
+$f \geq f' \Leftrightarrow D_{+}(f) \subset D_{+}(f')$ によって前順序付けられている。
+$f_1, f_2 \in S \setminus \mathfrak p$ が正次数の斉次元なら、この順序において
+$f_1f_2 \geq f_1$ である。代数の章、節 \ref{algebra-section-proj} では、
+$M_{(\mathfrak p)}$ を、分数 $x/f$ であって、$x, f$ が斉次で、
+$\deg(x) = \deg(f)$、$f \not \in \mathfrak p$ を満たすものを元とする加群として定義した。
+$\mathfrak p \in \text{Proj}(S)$ なので、正次数の斉次元
+$f_0 \in S$ で $f_0 \not\in \mathfrak p$ を満たすものが少なくとも一つ存在する。
+したがって $x/f = f_0x/ff_0$ であり、$M_{(\mathfrak p)}$ の元の分母は常に
+正次数をもつと仮定してよいことが分かる。これらの注意から容易に
+$$
+\widetilde M_x = M_{(\mathfrak p)}.
+$$
+が従う。
+
+\medskip\noindent
+次に、標準開被覆に対する層条件を確認する。
+$D_{+}(f) = \bigcup_{i = 1}^n D_{+}(g_i)$ なら、この被覆に対する層条件は列
+$$
+0 \to M_{(f)} \to \bigoplus M_{(g_i)} \to \bigoplus M_{(g_ig_j)}.
+$$
+が完全であることと同値である。$D_{+}(g_i) = D_{+}(fg_i)$ であることに注意すると、
+この列を
+$$
+0 \to M_{(f)} \to \bigoplus M_{(fg_i)} \to \bigoplus M_{(fg_ig_j)}.
+$$
+と書き直せる。補題 \ref{constructions-lemma-standard-open} により、
+$g_1^{\deg(f)}/f^{\deg(g_1)}, \ldots, g_n^{\deg(f)}/f^{\deg(g_n)}$
+は $S_{(f)}$ の単位イデアルを生成し、加群
+$M_{(fg_i)}$、$M_{(fg_ig_j)}$ は、$S_{(f)}$-加群 $M_{(f)}$ を
+これらの元およびその積で主局所化したものである。したがって、
+加群 $M_{(f)}$（$S_{(f)}$ 上）と元
+$g_1^{\deg(f)}/f^{\deg(g_1)}, \ldots, g_n^{\deg(f)}/f^{\deg(g_n)}$
+に代数の章、補題 \ref{algebra-lemma-cover-module} を適用できる。
+この列は完全であると結論する。上の注意により、$\widetilde M$ は
+標準開集合の基上の層であることが分かる。
+
+\medskip\noindent
+以上から、層の章、節 \ref{sheaves-section-bases} の結果により、一意な環の層
+$\mathcal{O}_{\text{Proj}(S)}$ で標準開集合上 $\widetilde S$ と一致するものが存在すると結論する。
+上の茎の計算と代数の章、補題 \ref{algebra-lemma-proj-prime} により、
+この環の層の茎はすべて局所環であることに注意する。
+
+\medskip\noindent
+同様に、任意の次数付き $S$-加群 $M$ に対して、一意な
+$\mathcal{O}_{\text{Proj}(S)}$-加群の層 $\mathcal{F}$ で標準開集合上
+$\widetilde M$ と一致するものが存在する。層の章、補題
+\ref{sheaves-lemma-extend-off-basis-module} を参照。
+
+\begin{definition}
+\label{constructions-definition-structure-sheaf}
+$S$ を次数付き環とする。
+\begin{enumerate}
+\item {\it 斉次スペクトルの構造層 $\mathcal{O}_{\text{Proj}(S)}$（$S$ の）} とは、
+一意な環の層 $\mathcal{O}_{\text{Proj}(S)}$ で、標準開集合の基上で
+$\widetilde S$ と一致するもののことである。
+\item 局所環付き空間 $(\text{Proj}(S), \mathcal{O}_{\text{Proj}(S)})$ を
+$S$ の {\it 斉次スペクトル} と呼び、$\text{Proj}(S)$ と表す。
+\item $\mathcal{O}_{\text{Proj}(S)}$-加群の層で、$\widetilde M$ を
+$\text{Proj}(S)$ のすべての開集合へ拡張するものを、
+$\mathcal{O}_{\text{Proj}(S)}$-加群の層（$M$ に付随する）と呼ぶ。
+この層も $\widetilde M$ と表す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ここまでに得た結果をまとめる。
+
+\begin{lemma}
+\label{constructions-lemma-proj-sheaves}
+$S$ を次数付き環とする。$M$ を次数付き $S$-加群とする。
+$\widetilde M$ を $\mathcal{O}_{\text{Proj}(S)}$-加群の層で $M$ に付随するものとする。
+\begin{enumerate}
+\item 任意の正次数の斉次元 $f \in S$ に対して
+$$
+\Gamma(D_{+}(f), \mathcal{O}_{\text{Proj}(S)}) = S_{(f)}.
+$$
+である。
+\item 任意の正次数の斉次元 $f\in S$ に対して
+$\Gamma(D_{+}(f), \widetilde M) = M_{(f)}$ であり、これは $S_{(f)}$-加群としての等式である。
+\item $D_{+}(g) \subset D_{+}(f)$ ならば、$\mathcal{O}_{\text{Proj}(S)}$ と
+$\widetilde M$ 上の制限写像は、補題 \ref{constructions-lemma-standard-open} の写像
+$S_{(f)} \to S_{(g)}$ および $M_{(f)} \to M_{(g)}$ である。
+\item $\mathfrak p$ を $S$ の斉次素イデアルで $S_{+}$ を含まないものとし、
+$x \in \text{Proj}(S)$ を対応する点とする。このとき
+$\mathcal{O}_{\text{Proj}(S), x} = S_{(\mathfrak p)}$ である。
+\item $\mathfrak p$ を $S$ の斉次素イデアルで $S_{+}$ を含まないものとし、
+$x \in \text{Proj}(S)$ を対応する点とする。このとき
+$(\widetilde M)_x = M_{(\mathfrak p)}$ であり、これは $S_{(\mathfrak p)}$-加群としての等式である。
+\item
+\label{constructions-item-map}
+標準的な環写像
+$
+S_0 \longrightarrow \Gamma(\text{Proj}(S), \widetilde S)
+$
+と、標準的な $S_0$-加群写像
+$
+M_0 \longrightarrow \Gamma(\text{Proj}(S), \widetilde M)
+$
+があり、上の標準開集合上の切断および茎の記述と両立する。
+\end{enumerate}
+さらに、これらの同一視はすべて次数付き $S$-加群 $M$ に関して関手的である。
+特に、関手 $M \mapsto \widetilde M$ は次数付き $S$-加群の圏から
+$\mathcal{O}_{\text{Proj}(S)}$-加群の圏への完全関手である。
+\end{lemma}
+
+\begin{proof}
+主張 (1) -- (5) は上の議論から明らかである。(6) は、制限写像と両立する標準写像
+$M_0 \to M_{(f)}$、$x \mapsto x/1$ があることから分かる。この制限写像は (3) で記述した。
+関手 $M \mapsto \widetilde M$ の完全性は、関手 $M \mapsto M_{(\mathfrak p)}$ が完全であること
+（代数の章、補題 \ref{algebra-lemma-proj-prime} を参照）と、短完全列の完全性は茎上で確認できること
+（加群の章、補題 \ref{modules-lemma-abelian} を参照）から従う。
+\end{proof}
+
+\begin{remark}
+\label{constructions-remark-global-sections-not-isomorphism}
+$M_0$ から $\widetilde M$ の大域切断への写像は、一般には同型から程遠い。
+自明な例として、$S = k[x, y, z]$（または任意個の変数）を
+$1 = \deg(x) = \deg(y) = \deg(z)$ として取り、
+$M = S/(x^{100}, y^{100}, z^{100})$ と取る。
+$\widetilde M = 0$ だが $M_0 = k$ であることは容易に分かる。
+\end{remark}
+
+
+\begin{lemma}
+\label{constructions-lemma-standard-open-proj}
+$S$ を次数付き環とする。$f \in S$ を正次数の斉次元とする。
+$D(g) \subset \Spec(S_{(f)})$ が標準開集合であると仮定する。
+このとき、正次数の斉次元 $h \in S$ であって、代数の章、補題
+\ref{algebra-lemma-topology-proj} の同相写像のもとで
+$D(g)$ が $D_{+}(h) \subset D_{+}(f)$ に対応するものが存在する。
+実際、$h$ は、$g = h/f^n$ がある $n$ に対して成り立つように取れる。
+\end{lemma}
+
+\begin{proof}
+$g = h/f^n$ と書く。ここである $h$ は正次数の斉次元であり、
+ある $n \geq 1$ が存在する。$D_{+}(h)$ が $D_{+}(f)$ に含まれないなら、
+$h$ を $hf$ で、$n$ を $n + 1$ で置き換える。
+すると $h$ は求める形をもち、$D_{+}(h) \subset D_{+}(f)$ は
+$D(g) \subset \Spec(S_{(f)})$ に対応する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-proj-scheme}
+$S$ を次数付き環とする。
+局所環付き空間 $\text{Proj}(S)$ はスキームである。
+標準開集合 $D_{+}(f)$ はアフィン開集合である。
+任意の次数付き $S$-加群 $M$ に対して、層 $\widetilde M$ は
+$\mathcal{O}_{\text{Proj}(S)}$-加群の準連接層である。
+\end{lemma}
+
+\begin{proof}
+標準開集合 $D_{+}(f) \subset \text{Proj}(S)$ を考える。
+補題 \ref{constructions-lemma-standard-open} および \ref{constructions-lemma-proj-sheaves} により
+$\Gamma(D_{+}(f), \mathcal{O}_{\text{Proj}(S)}) = S_{(f)}$ であり、
+同相写像 $\varphi : D_{+}(f) \to \Spec(S_{(f)})$ がある。
+任意の標準開集合 $D(g) \subset \Spec(S_{(f)})$ に対して、補題
+\ref{constructions-lemma-standard-open-proj} のような $h \in S_{+}$ を選べる。
+すると $\varphi^{-1}(D(g)) = D_{+}(h)$ であり、補題
+\ref{constructions-lemma-proj-sheaves} および \ref{constructions-lemma-standard-open} により
+$$
+\Gamma(D_{+}(h), \mathcal{O}_{\text{Proj}(S)})
+=
+S_{(h)}
+=
+(S_{(f)})_{h^{\deg(f)}/f^{\deg(h)}}
+=
+(S_{(f)})_g
+=
+\Gamma(D(g), \mathcal{O}_{\Spec(S_{(f)})}).
+$$
+が分かる。したがって、$\mathcal{O}_{\text{Proj}(S)}$ の $D_{+}(f)$ への制限は、
+同相写像 $\varphi$ のもとで、スキームの章、節
+\ref{schemes-section-affine-schemes} で定義した層
+$\mathcal{O}_{\Spec(S_{(f)})}$ にちょうど対応する。
+これより、$D_{+}(f)$ は $\Spec(S_{(f)})$ と同型なアフィンスキームであり、
+その同型は $\varphi$ である。したがって $\text{Proj}(S)$ はスキームである。
+
+\medskip\noindent
+まったく同様に、$\widetilde M$ が $\mathcal{O}_{\text{Proj}(S)}$-加群の
+準連接層であることを示せる。実際、上の議論は
+$$
+\widetilde M|_{D_{+}(f)} \cong \varphi^*\left(\widetilde{M_{(f)}}\right)
+$$
+を示し、これにより $\widetilde M$ が準連接であることが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-proj-separated}
+$S$ を次数付き環とする。
+スキーム $\text{Proj}(S)$ は分離的である。
+\end{lemma}
+
+\begin{proof}
+標準射 $\text{Proj}(S) \to \Spec(\mathbf{Z})$ が分離的であることを示せばよい。
+スキームの章、補題 \ref{schemes-lemma-characterize-separated} を用いる。
+したがって、任意の標準開集合の対 $D_{+}(f)$ と $D_{+}(g)$ に対して
+$D_{+}(f) \cap D_{+}(g) = D_{+}(fg)$ がアフィンであること（これは明らか）と、環写像
+$$
+S_{(f)} \otimes_{\mathbf{Z}} S_{(g)} \longrightarrow S_{(fg)}
+$$
+が全射であることを示せば十分である。$s$ を $S_{(fg)}$ の任意の元とすると、これは
+$s = h/(f^ng^m)$ という形をもち、ここで $h \in S$ は次数
+$n\deg(f) + m\deg(g)$ の斉次元である。$h$ に適当な単項式
+$f^ig^j$ を掛け、$n = n' \deg(g)$ および
+$m = m' \deg(f)$ と仮定してよい。このとき $s$ を
+$s = h/f^{(n' + m')\deg(g)} \cdot f^{m'\deg(g)}/g^{m'\deg(f)}$ と書き直せる。
+したがって $s$ は確かに表示された矢印の像に属する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-proj-quasi-compact}
+$S$ を次数付き環とする。
+スキーム $\text{Proj}(S)$ が準コンパクトであるための必要十分条件は、有限個の斉次元
+$f_1, \ldots, f_n \in S_{+}$ で
+$S_{+} \subset \sqrt{(f_1, \ldots, f_n)}$ を満たすものが存在することである。
+この場合 $\text{Proj}(S) = D_+(f_1) \cup \ldots \cup D_+(f_n)$ である。
+\end{lemma}
+
+\begin{proof}
+そのような元の族が与えられると、標準アフィン開集合
+$D_{+}(f_i)$ は $\text{Proj}(S)$ を被覆する。代数の章、補題
+\ref{algebra-lemma-topology-proj} を参照。逆に、$\text{Proj}(S)$ が準コンパクトなら、
+有限個の標準開集合 $D_{+}(f_i)$、$i = 1, \ldots, n$ で被覆でき、
+上で参照した補題により $S_{+} \subset \sqrt{(f_1, \ldots, f_n)}$ が分かる。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-structure-morphism-proj}
+$S$ を次数付き環とする。スキーム $\text{Proj}(S)$ には、アフィンスキーム
+$\Spec(S_0)$ への標準射があり、これは位相空間上では代数の章、定義
+\ref{algebra-definition-proj} の写像と一致する。
+\end{lemma}
+
+\begin{proof}
+上で見たように、$\widetilde S$、resp.\ $\widetilde M$ の構成は
+$S_0$-代数の層、resp.\ $S_0$-加群の層を与える。
+したがって、スキームの章、補題 \ref{schemes-lemma-morphism-into-affine} により射を得る。
+この射を $D_{+}(f)$ に制限すると、標準的な環写像 $S_0 \to S_{(f)}$ から得られる。
+写像 $S \to S_f$、$S_{(f)} \to S_f$ は $S_0$-代数写像である。補題
+\ref{constructions-lemma-standard-open} を参照。したがって、斉次素イデアル
+$\mathfrak p \subset S$ が $\mathbf{Z}$-次数付き素イデアル
+$\mathfrak p' \subset S_f$ と（通常の）素イデアル
+$\mathfrak p'' \subset S_{(f)}$ に対応するなら、それぞれの $S_0$ における逆像は同じである。
+\end{proof}
+
+
+\begin{lemma}
+\label{constructions-lemma-proj-valuative-criterion}
+$S$ を次数付き環とする。$S$ が $S_0$ 上有限生成な代数なら、射
+$\text{Proj}(S) \to \Spec(S_0)$ は付値判定法の存在部分と一意性部分を満たす。
+スキームの章、定義 \ref{schemes-definition-valuative-criterion} を参照。
+\end{lemma}
+
+\begin{proof}
+一意性部分は、$\text{Proj}(S)$ が分離的であることから従う（補題
+\ref{constructions-lemma-proj-separated} およびスキームの章、補題
+\ref{schemes-lemma-separated-implies-valuative}）。$x_i \in S_{+}$ を斉次元、
+$i = 1, \ldots, n$ とし、これらが $S$ を $S_0$ 上生成するように選ぶ。
+$d_i = \deg(x_i)$ とおき、$d = \text{lcm}\{d_i\}$ とおく。
+スキームの章、定義 \ref{schemes-definition-valuative-criterion} における図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & \text{Proj}(S) \ar[d] \\
+\Spec(A) \ar[r] & \Spec(S_0)
+}
+$$
+が与えられていると仮定する。$v : K^* \to \Gamma$ を $A$ の付値とする。
+代数の章、定義 \ref{algebra-definition-value-group} を参照。
+正次数の斉次元 $f \in S_{+}$ で、$\Spec(K)$ が $D_{+}(f)$ に写るものを選べる。
+すると環写像の可換図式
+$$
+\xymatrix{
+K & S_{(f)} \ar[l]^{\varphi} \\
+A \ar[u] & S_0 \ar[l] \ar[u]
+}
+$$
+を得る。添字を付け替えて、$\varphi(x_i^{\deg(f)}/f^{d_i})$ は
+$i = 1, \ldots, r$ に対して零でなく、$i = r + 1, \ldots, n$ に対して
+零であると仮定してよい。開集合 $D_{+}(x_i)$ は $\text{Proj}(S)$ を被覆するので
+$r \geq 1$ である。$i_0 \in \{1, \ldots, r\}$ を、
+$\gamma_i = (d/d_i)v(\varphi(x_i^{\deg(f)}/f^{d_i}))$ が $\Gamma$ において
+最小となる添字とする。
+便宜上 $x_0 = x_{i_0}$ および $d_0 = d_{i_0}$ とおく。
+環写像 $\varphi$ は写像 $\varphi' : S_{(fx_0)} \to K$ を経由し、これにより環写像
+$S_{(x_0)} \to S_{(fx_0)} \to K$ を得る。代数 $S_{(x_0)}$ は $S_0$ 上、元
+$x_1^{e_1} \ldots x_n^{e_n}/x_0^{e_0}$、ただし
+$\sum e_i d_i = e_0 d_0$、によって生成される。$e_i > 0$ がある
+$i > r$ に対して成り立つなら、
+$\varphi'(x_1^{e_1} \ldots x_n^{e_n}/x_0^{e_0}) = 0$ である。
+$e_i = 0$ が $i > r$ に対して成り立つなら
+\begin{align*}
+d \deg(f) v(\varphi'(x_1^{e_1} \ldots x_r^{e_r}/x_0^{e_0}))
+& =
+d v(\varphi'(x_1^{e_1 \deg(f)} \ldots x_r^{e_r \deg(f)}/x_0^{e_0 \deg(f)})) \\
+& =
+d \sum e_i v(\varphi'(x_i^{\deg(f)}/f^{d_i}))
+- e_0 v(\varphi'(x_0^{\deg(f)}/f^{d_0})) \\
+& =
+\sum e_i d_i \gamma_i - e_0 d_0 \gamma_0 \\
+& \geq
+\sum e_i d_i \gamma_0 - e_0 d_0 \gamma_0 = 0
+\end{align*}
+である。これは $\gamma_0$ が $\gamma_i$ のうち最小だからである。
+したがって $S_{(x_0)}$ は $A$ に写り、その写像は $\varphi'$ による。
+対応するスキームの射
+$\Spec(A) \to \Spec(S_{(x_0)}) = D_{+}(x_0)
+\subset \text{Proj}(S)$
+は、この証明の最初の可換図式にはまる射を与える。
+\end{proof}
+
+\noindent
+補題 \ref{constructions-lemma-proj-valuative-criterion} の証明で、その補題の仮定のもとでは射
+$\text{Proj}(S) \to \Spec(S_0)$ が準コンパクトでもあることを見た。
+したがって、スキームの章、命題
+\ref{schemes-proposition-characterize-universally-closed} により、補題の状況では
+$\text{Proj}(S) \to \Spec(S_0)$ が普遍閉であることが分かる。
+次数付き環 $S$ に何らかの仮定を置かなければこれらの結果が成り立たないことを示す例を挙げる。
+
+\begin{example}
+\label{constructions-example-not-existence-valuative-big-proj}
+$\mathbf{C}[X_1, X_2, X_3, \ldots]$ を次数付き $\mathbf{C}$-代数とし、
+各 $X_i$ の次数を $1$ とする。環写像
+$$
+\mathbf{C}[X_1, X_2, X_3, \ldots]
+\longrightarrow
+\mathbf{C}[t^\alpha ; \alpha \in \mathbf{Q}_{\geq 0}]
+$$
+で $X_i$ を $t^{1/i}$ に写すものを考える。右辺は付値環 $A$ となる。
+これはイデアル $\mathfrak m = (t^\alpha ; \alpha > 0)$ で局所化して得られる。
+$K$ を $A$ の分数体とする。上の写像は射
+$\Spec(K) \to \text{Proj}(\mathbf{C}[X_1, X_2, X_3, \ldots])$ を与えるが、
+これは $\Spec(A)$ 全体上で定義された射には延長しない。
+その理由は、$\Spec(A)$ の像は $D_{+}(X_i)$ のいずれかに含まれるはずだが、
+その場合 $X_{i + 1}/X_i$ は $A$ の元に写らなければならず、実際には
+$t^{1/(i + 1) - 1/i}$ に写るため、そうならないからである。
+\end{example}
+
+\begin{example}
+\label{constructions-example-not-existence-valuative-small-proj}
+$R = \mathbf{C}[t]$ とし、
+$$
+S = R[X_1, X_2, X_3, \ldots]/(X_i^2 - tX_{i + 1}).
+$$
+とおく。次数付けは $R = S_0$ および $\deg(X_i) = 2^{i - 1}$ を満たすものとする。
+$\mathfrak p \in \text{Proj}(S)$ なら $t \not \in \mathfrak p$ であることに注意する
+（そうでなければ $\mathfrak p$ はすべての $X_i$ を含まねばならず、
+斉次スペクトルの元には許されない）。したがって
+$D_{+}(X_i) = D_{+}(X_{i + 1})$ であり、これはすべての $i$ に対して成り立つ。
+ゆえに $\text{Proj}(S)$ は準コンパクトであり、
+実際 $D_{+}(X_1)$ に等しいのでアフィンである。射
+$\text{Proj}(S) \to \Spec(R)$ の像が $D(t)$ であることは容易に分かる。
+したがって射 $\text{Proj}(S) \to \Spec(R)$ は閉でない。
+ゆえに付値判定法は適用できない。適用できれば射が閉であることが従うからである
+（スキームの章、命題 \ref{schemes-proposition-characterize-universally-closed} を参照）。
+\end{example}
+
+\begin{example}
+\label{constructions-example-trivial-proj}
+$A$ を環とする。
+$S = A[T]$ を次数付き $A$ 代数とし、$T$ の次数を $1$ とする。
+このとき標準射 $\text{Proj}(S) \to \Spec(A)$
+（補題 \ref{constructions-lemma-structure-morphism-proj} を参照）は同型である。
+\end{example}
+
+\begin{example}
+\label{constructions-example-open-subset-proj}
+$X = \Spec(A)$ をアフィンスキームとし、$U \subset X$ を開部分スキームとする。
+$A[T]$ を $\deg T = 1$ とおいて次数付ける。$S$ を $A[T]$ の部分環で、
+$A$ とすべての $fT^i$ によって生成されるものと定義する。ここで $i \ge 0$ であり、
+$f \in A$ は $D(f) \subset U$ を満たすものとする。$S$ は
+$S_0 = A$ と $\text{Proj}(S) \cong U$ を満たす次数付き環であり、
+この同型は補題 \ref{constructions-lemma-structure-morphism-proj} の標準射
+$\text{Proj}(S) \to \Spec(A)$ を包含 $U \subset X$ と同一視すると主張する。
+
+\medskip\noindent
+$\mathfrak p \in \text{Proj}(S)$ が、すべての $fT \in S_1$ が
+$\mathfrak p$ に属するという性質をもつと仮定する。
+すると、すべての生成元 $fT^i$ で $i \ge 1$ を満たすものは $\mathfrak p$ に属する。
+実際、$(fT^i)^2 = (fT)(fT^{2i-1}) \in \mathfrak p$ であり、
+$\mathfrak p$ は根基的だからである。しかしこのとき $\mathfrak p \supset S_+$ となり、
+これは不可能である。したがって $\text{Proj}(S)$ は標準アフィン開部分集合
+$\{D_+(fT)\}_{fT \in S_1}$ によって被覆される。
+
+\medskip\noindent
+$fT \in S_1$ なら、包含 $S \subset A[T]$ は $S[(fT)^{-1}]$ と
+$A[T, T^{-1}, f^{-1}]$ の次数付き同型を誘導することに注意する。
+したがって標準開部分集合 $D_+(fT) \cong \Spec(S_{(fT)})$ は
+$\Spec(A[T, T^{-1}, f^{-1}]_0) = \Spec(A[f^{-1}])$ と同型である。
+この同型が標準射 $\text{Proj}(S) \to \Spec(A)$ の制限であることは明らかである。
+さらに $gT \in S_1$ なら、次数付き環として
+$S[(fT)^{-1}, (gT)^{-1}] \cong A[T, T^{-1}, f^{-1}, g^{-1}]$ であるから、
+$D_+(fT) \cap D_+(gT) \cong \Spec(A[f^{-1}, g^{-1}])$ である。
+ゆえに $\text{Proj}(S)$ は開部分スキーム $D_+(fT)$ の和であり、
+これらは標準射のもとで開部分スキーム $D(f) \subset X$ と同型で、
+$\text{Proj}(S)$ における交わり方も $X$ におけるものと同じである。
+標準射は $\text{Proj}(S)$ をすべての $D(f) \subset U$ の和、すなわち
+$U$ と同型にすると結論する。
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Proj 上の準連接層}
+\label{constructions-section-quasi-coherent-proj}
+
+\noindent
+$S$ を次数付き環とする。$M$ を次数付き $S$-加群とする。補題
+\ref{constructions-lemma-proj-sheaves} で、加群の準連接層 $\widetilde{M}$（$\text{Proj}(S)$ 上）と写像
+\begin{equation}
+\label{constructions-equation-map-global-sections}
+M_0 \longrightarrow \Gamma(\text{Proj}(S), \widetilde{M})
+\end{equation}
+をどのように構成するかを見た。これは次数 $0$ 部分（$M$ のもの）から
+$\widetilde{M}$ の大域切断への写像である。次数 $0$ 部分で、
+第 $n$ 捩り $M(n)$（次数付き加群 $M$ のもの）のそれ
+（代数の章、節 \ref{algebra-section-graded} を参照）は $M_n$ に等しい。
+したがって写像
+\begin{equation}
+\label{constructions-equation-map-global-sections-degree-n}
+M_n \longrightarrow \Gamma(\text{Proj}(S), \widetilde{M(n)}).
+\end{equation}
+を得ることができる。この操作を任意の準連接層 $\mathcal{F}$（$\text{Proj}(S)$ 上）に
+対して行えるようにしたい。構造層の第 $n$ 捩りとのテンソル積を取ることで
+これを行う。定義 \ref{constructions-definition-twist} を参照。二つの概念を関係付けるため、
+次の補題を用いる。
+
+\begin{lemma}
+\label{constructions-lemma-widetilde-tensor}
+$S$ を次数付き環とする。
+$(X, \mathcal{O}_X) = (\text{Proj}(S), \mathcal{O}_{\text{Proj}(S)})$ を
+補題 \ref{constructions-lemma-proj-scheme} のスキームとする。
+$f \in S_{+}$ を斉次元とする。$x \in X$ を、斉次素イデアル
+$\mathfrak p \subset S$ に対応する点とする。
+$M$、$N$ を次数付き $S$-加群とする。$\mathcal{O}_{\text{Proj}(S)}$-加群の標準写像
+$$
+\widetilde M \otimes_{\mathcal{O}_X} \widetilde N
+\longrightarrow
+\widetilde{M \otimes_S N}
+$$
+があり、これは標準写像
+$
+M_{(f)} \otimes_{S_{(f)}} N_{(f)}
+\to
+(M \otimes_S N)_{(f)}
+$
+を $D_{+}(f)$ 上の切断に誘導し、標準写像
+$
+M_{(\mathfrak p)} \otimes_{S_{(\mathfrak p)}} N_{(\mathfrak p)}
+\to
+(M \otimes_S N)_{(\mathfrak p)}
+$
+を $x$ における茎に誘導する。さらに、次の図式
+$$
+\xymatrix{
+M_0 \otimes_{S_0} N_0 \ar[r] \ar[d] &
+(M \otimes_S N)_0 \ar[d] \\
+\Gamma(X, \widetilde M \otimes_{\mathcal{O}_X} \widetilde N) \ar[r] &
+\Gamma(X, \widetilde{M \otimes_S N})
+}
+$$
+は可換であり、ここで垂直写像は
+(\ref{constructions-equation-map-global-sections}) によって与えられる。
+\end{lemma}
+
+\begin{proof}
+表示された射を構成することは、$\mathcal{O}_X$-双線形写像
+$$
+\widetilde M \times \widetilde N
+\longrightarrow
+\widetilde{M \otimes_S N}
+$$
+を構成することと同じである。加群の章、節
+\ref{modules-section-tensor-product} を参照。制限写像と両立するように、
+開集合 $D_{+}(f)$ 上の切断についてこれを定義すれば十分である。
+$D_{+}(f)$ 上では $S_{(f)}$-双線形写像
+$M_{(f)} \times N_{(f)} \to (M \otimes_S N)_{(f)}$、
+$(x/f^n, y/f^m) \mapsto (x \otimes y)/f^{n + m}$ を用いる。詳細は省略する。
+\end{proof}
+
+\begin{remark}
+\label{constructions-remark-not-isomorphism}
+一般には、上の補題 \ref{constructions-lemma-widetilde-tensor} で構成した写像は同型でない。
+例を挙げる。$k$ を体とする。$S = k[x, y, z]$ とし、$k$ は次数 $0$ にあり、
+$\deg(x) = 1$、$\deg(y) = 2$、$\deg(z) = 3$ とする。
+$M = S(1)$ および $N = S(2)$ とする。記法については代数の章、節
+\ref{algebra-section-graded} を参照。このとき $M \otimes_S N = S(3)$ である。
+次に注意する。
+\begin{eqnarray*}
+S_z
+& = &
+k[x, y, z, 1/z] \\
+S_{(z)}
+& = &
+k[x^3/z, xy/z, y^3/z^2]
+\cong
+k[u, v, w]/(uw - v^3) \\
+M_{(z)} & = & S_{(z)} \cdot x + S_{(z)} \cdot y^2/z \subset S_z \\
+N_{(z)} & = & S_{(z)} \cdot y + S_{(z)} \cdot x^2 \subset S_z \\
+S(3)_{(z)} & = & S_{(z)} \cdot z \subset S_z
+\end{eqnarray*}
+極大イデアル $\mathfrak m = (u, v, w) \subset S_{(z)}$ を考える。
+$M_{(z)}/\mathfrak mM_{(z)}$ と $N_{(z)}/\mathfrak mN_{(z)}$ はともに
+次元 $2$ であり、その底は $\kappa(\mathfrak m)$ であることは難しくない。しかし
+$S(3)_{(z)}/\mathfrak mS(3)_{(z)}$ は次元 $1$ である。
+したがって写像 $M_{(z)} \otimes N_{(z)} \to S(3)_{(z)}$ は同型でない。
+\end{remark}
+
+
+
+
+
+
+
+
+\section{Proj 上の可逆層}
+\label{constructions-section-invertible-on-proj}
+
+\noindent
+代数の章、節 \ref{algebra-section-graded} で、次数付き環上の次数付き加群に付随する
+捩り加群 $M(n)$ の構成を思い出す。
+
+\begin{definition}
+\label{constructions-definition-twist}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とおく。
+\begin{enumerate}
+\item $\mathcal{O}_X(n) = \widetilde{S(n)}$ と定義する。これを第 $n$
+{\it $\text{Proj}(S)$ の構造層の捩り} と呼ぶ。
+\item 任意の $\mathcal{O}_X$-加群の層 $\mathcal{F}$ に対して
+$\mathcal{F}(n) = \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(n)$ とおく。
+\end{enumerate}
+\end{definition}
+
+\noindent
+いくつかの標準写像を構成するため、補題 \ref{constructions-lemma-widetilde-tensor} を用いる。
+$S(n) \otimes_S S(m) = S(n + m)$ なので、標準写像
+\begin{equation}
+\label{constructions-equation-multiply}
+\mathcal{O}_X(n) \otimes_{\mathcal{O}_X} \mathcal{O}_X(m)
+\longrightarrow
+\mathcal{O}_X(n + m).
+\end{equation}
+がある。これらの写像は一般には同型でない。注意
+\ref{constructions-remark-not-isomorphism} の例を参照。同じ例は、一般に
+$\mathcal{O}_X(n)$ が $X$ 上の可逆層では {\it ない} ことを示す。
+任意の $\mathcal{O}_X$-加群 $\mathcal{F}$ とテンソル積を取ることで、写像
+\begin{equation}
+\label{constructions-equation-multiply-on-sheaf}
+\mathcal{O}_X(n) \otimes_{\mathcal{O}_X} \mathcal{F}(m)
+\longrightarrow
+\mathcal{F}(n + m).
+\end{equation}
+を得る。大域切断上の写像
+(\ref{constructions-equation-map-global-sections-degree-n}) は次数付き環の写像
+\begin{equation}
+\label{constructions-equation-global-sections}
+S \longrightarrow \bigoplus\nolimits_{n \geq 0} \Gamma(X, \mathcal{O}_X(n)).
+\end{equation}
+を与える。また、任意の $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して、写像
+(\ref{constructions-equation-multiply-on-sheaf}) は次数付き加群構造
+\begin{equation}
+\label{constructions-equation-global-sections-module}
+\bigoplus\nolimits_{n \geq 0} \Gamma(X, \mathcal{O}_X(n))
+\times
+\bigoplus\nolimits_{m \in \mathbf{Z}} \Gamma(X, \mathcal{F}(m))
+\longrightarrow
+\bigoplus\nolimits_{m \in \mathbf{Z}} \Gamma(X, \mathcal{F}(m))
+\end{equation}
+を与え、(\ref{constructions-equation-global-sections}) を介して $S$-加群構造も与える。
+さらに一般に、任意の次数付き $S$-加群 $M$ が与えられると
+$M(n) = M \otimes_S S(n)$ である。したがって写像
+\begin{equation}
+\label{constructions-equation-multiply-more-generally}
+\widetilde M(n)
+=
+\widetilde M
+\otimes_{\mathcal{O}_X}
+\mathcal{O}_X(n)
+\longrightarrow
+\widetilde{M(n)}.
+\end{equation}
+を得る。大域切断上では (\ref{constructions-equation-map-global-sections-degree-n}) が
+次数付き $S$-加群の写像
+\begin{equation}
+\label{constructions-equation-global-sections-more-generally}
+M \longrightarrow
+\bigoplus\nolimits_{n \in \mathbf{Z}} \Gamma(X, \widetilde{M(n)}).
+\end{equation}
+を定義する。以下は、定義からほとんど直ちに従う重要な事実である。
+
+\begin{lemma}
+\label{constructions-lemma-when-invertible}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とおく。
+$f \in S$ を次数 $d > 0$ の斉次元とする。層
+$\mathcal{O}_X(nd)|_{D_{+}(f)}$ は可逆であり、実際すべての
+$n \in \mathbf{Z}$ に対して自明である（加群の章、定義
+\ref{modules-definition-invertible} を参照）。写像 (\ref{constructions-equation-multiply}) を
+$D_{+}(f)$ に制限したもの
+$$
+\mathcal{O}_X(nd)|_{D_{+}(f)} \otimes_{\mathcal{O}_{D_{+}(f)}}
+\mathcal{O}_X(m)|_{D_{+}(f)}
+\longrightarrow
+\mathcal{O}_X(nd + m)|_{D_{+}(f)},
+$$
+写像 (\ref{constructions-equation-multiply-on-sheaf}) を $D_+(f)$ に制限したもの
+$$
+\mathcal{O}_X(nd)|_{D_{+}(f)} \otimes_{\mathcal{O}_{D_{+}(f)}}
+\mathcal{F}(m)|_{D_{+}(f)}
+\longrightarrow
+\mathcal{F}(nd + m)|_{D_{+}(f)},
+$$
+および写像 (\ref{constructions-equation-multiply-more-generally}) を
+$D_{+}(f)$ に制限したもの
+$$
+\widetilde M(nd)|_{D_{+}(f)}
+=
+\widetilde M|_{D_{+}(f)}
+\otimes_{\mathcal{O}_{D_{+}(f)}}
+\mathcal{O}_X(nd)|_{D_{+}(f)}
+\longrightarrow
+\widetilde{M(nd)}|_{D_{+}(f)}
+$$
+は、すべての $n, m \in \mathbf{Z}$ に対して同型である。
+\end{lemma}
+
+\begin{proof}
+次数付き $S$-加群の写像 $S \to S(nd)$ および $M \to M(nd)$ で
+$x \mapsto f^n x$ によって与えられるものは、$f$ を逆にすると同型になる。
+第一の写像は $S_{(f)} \cong S(nd)_{(f)}$ を示し、これは同型
+$\mathcal{O}_{D_{+}(f)} \cong \mathcal{O}_X(nd)|_{D_{+}(f)}$ を与える。
+第二の写像は、写像
+$S(nd)_{(f)} \otimes_{S_{(f)}} M_{(f)} \to M(nd)_{(f)}$
+が同型であることを示す。写像 (\ref{constructions-equation-multiply-on-sheaf}) の場合は、
+写像 (\ref{constructions-equation-multiply}) の場合から従う。
+\end{proof}
+
+
+\begin{lemma}
+\label{constructions-lemma-apply-modules}
+$S$ を次数付き環とする。$M$ を次数付き $S$-加群とする。
+$X = \text{Proj}(S)$ とおく。$X$ が標準開集合 $D_+(f)$、
+$f \in S_1$、によって被覆されると仮定する。例えば、$S$ が $S_1$ によって
+$S_0$ 上生成される場合である。このとき層 $\mathcal{O}_X(n)$ は可逆であり、写像
+(\ref{constructions-equation-multiply})、(\ref{constructions-equation-multiply-on-sheaf})、および
+(\ref{constructions-equation-multiply-more-generally}) は同型である。
+特に、これらの写像は同型
+$$
+\mathcal{O}_X(1)^{\otimes n} \cong
+\mathcal{O}_X(n)
+\quad
+\text{and}
+\quad
+\widetilde{M} \otimes_{\mathcal{O}_X} \mathcal{O}_X(n) =
+\widetilde{M}(n) \cong \widetilde{M(n)}
+$$
+を誘導する。したがって (\ref{constructions-equation-map-global-sections-degree-n}) は写像
+\begin{equation}
+\label{constructions-equation-map-global-sections-degree-n-simplified}
+M_n \longrightarrow \Gamma(X, \widetilde{M}(n))
+\end{equation}
+となり、(\ref{constructions-equation-global-sections-more-generally}) は写像
+\begin{equation}
+\label{constructions-equation-global-sections-more-generally-simplified}
+M \longrightarrow
+\bigoplus\nolimits_{n \in \mathbf{Z}} \Gamma(X, \widetilde{M}(n)).
+\end{equation}
+となる。
+\end{lemma}
+
+\begin{proof}
+補題の仮定のもとで、$X$ は開部分集合 $D_{+}(f)$、$f \in S_1$、によって被覆され、
+補題は上の補題 \ref{constructions-lemma-when-invertible} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-where-invertible}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とおく。整数 $d \geq 1$ を固定する。
+$X$ の次の開部分集合は等しい。
+\begin{enumerate}
+\item 最大の開部分集合 $W = W_d \subset X$ で、各
+$\mathcal{O}_X(dn)|_W$ が可逆で、すべての乗法写像
+$\mathcal{O}_X(nd)|_W \otimes_{\mathcal{O}_W} \mathcal{O}_X(md)|_W
+\to \mathcal{O}_X(nd + md)|_W$
+（\ref{constructions-equation-multiply} を参照）が同型となるもの。
+\item 開部分集合 $D_{+}(fg)$ の和。ただし $f, g \in S$ は斉次で
+$\deg(f) = \deg(g) + d$ を満たす。
+\end{enumerate}
+さらに、すべての写像
+$\widetilde M(nd)|_W = \widetilde M|_W \otimes_{\mathcal{O}_W}
+\mathcal{O}_X(nd)|_W \to \widetilde{M(nd)}|_W$
+（\ref{constructions-equation-multiply-more-generally} を参照）は同型である。
+\end{lemma}
+
+\begin{proof}
+$x \in D_{+}(fg)$ かつ $\deg(f) = \deg(g) + d$ なら、
+$D_{+}(fg)$ 上で層 $\mathcal{O}_X(dn)$ は元
+$(f/g)^n = f^{2n}/(fg)^n$ によって生成される。このことと、補題
+\ref{constructions-lemma-when-invertible} の証明と同様の議論により、$x$ は (1) で定義した
+開部分集合 $W$ に属する。
+
+\medskip\noindent
+逆に、$\mathcal{O}_X(dn)$ がすべての $n$ に対して、ある開近傍
+$V$（$x \in X$ のもの）上階数 1 の自由加群であり、すべての乗法写像
+$\mathcal{O}_X(nd)|_V \otimes_{\mathcal{O}_V} \mathcal{O}_X(md)|_V
+\to \mathcal{O}_X(nd + md)|_V$ が同型であると仮定する。
+$h \in S_{+}$ を斉次元で $x \in D_{+}(h) \subset V$ を満たすように選べる。
+構造層の捩りの定義により、元 $s$ が $(S_h)_d$ に存在し、
+$s^n$ が $(S_h)_{nd}$ の基底を $S_{(h)}$-加群としてなすと結論できる。
+これはすべての $n \in \mathbf{Z}$ に対して成り立つ。
+$s = f/h^m$ と書ける。ここである $m \geq 1$ と
+$f \in S_{d + m \deg(h)}$ が存在する。$g = h^m$ とおけば $s = f/g$ である。
+構成により $x \in D_{+}(g)$ であることに注意する。
+$g^d \in (S_h)_{d\deg(g)}$ であることにも注意する。
+仮定により、これを $s^{\deg(g)} = f^{\deg(g)}/g^{\deg(g)}$ の倍数、すなわち
+$g^d = a/g^e \cdot f^{\deg(g)}/g^{\deg(g)}$ と書ける。
+すると $g^{d + e + \deg(g)} = a f^{\deg(g)}$、したがって
+$x \in D_{+}(f)$ でもあると結論する。ゆえに $x$ は (2) で定義した集合の元である。
+
+\medskip\noindent
+生成切断 $s = f/g$ がアフィン開集合 $D_{+}(fg)$ 上に存在し、その冪が加群の層
+$\mathcal{O}_X(nd)$ を自由に生成することから、乗法写像
+$\widetilde M(nd)|_W = \widetilde M|_W \otimes_{\mathcal{O}_W}
+\mathcal{O}_X(nd)|_W \to \widetilde{M(nd)}|_W$
+（\ref{constructions-equation-multiply-more-generally} を参照）が同型であることが容易に従う。
+補題 \ref{constructions-lemma-when-invertible} の証明と比較せよ。
+\end{proof}
+
+
+\noindent
+加群の章、補題 \ref{modules-lemma-s-open} から次を思い出す。可逆層
+$\mathcal{L}$（局所環付き空間 $X$ 上）と、大域切断 $s$（$\mathcal{L}$ の）が与えられると、集合
+$X_s = \{x \in X \mid s \not \in \mathfrak m_x\mathcal{L}_x\}$ は開である。
+
+\begin{lemma}
+\label{constructions-lemma-principal-open}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とおく。整数 $d \geq 1$ を固定する。
+$W = W_d \subset X$ を補題 \ref{constructions-lemma-where-invertible} で定義した開部分スキームとする。
+$n \geq 1$ かつ $f \in S_{nd}$ とする。$s \in \Gamma(W, \mathcal{O}_W(nd))$ を、
+(\ref{constructions-equation-global-sections}) による $f$ の像を $W$ に制限した切断とする。このとき
+$$
+W_s = D_{+}(f) \cap W.
+$$
+\end{lemma}
+
+\begin{proof}
+$D_{+}(ab) \subset W$ を標準アフィン開集合とし、$a, b \in S$ は斉次で
+$\deg(a) = \deg(b) + d$ を満たすとする。
+$D_{+}(ab) \cap D_{+}(f) = D_{+}(abf)$ であることに注意する。
+一方、$s$ の $D_{+}(ab)$ への制限は元
+$f/1 = b^nf/a^n (a/b)^n \in (S_{ab})_{nd}$ に対応する。
+補題 \ref{constructions-lemma-where-invertible} の証明で、$(a/b)^n$ が
+$\mathcal{O}_W(nd)$ の $D_{+}(ab)$ 上の生成元であることを見た。
+$W_s \cap D_{+}(ab)$ は $b^nf/a^n \in \mathcal{O}_X(D_{+}(ab))$ に
+付随する主開集合であると結論する。したがって補題の結果は明らかである。
+\end{proof}
+
+\noindent
+次の補題は、後に豊富な可逆層をもつスキームの特徴付けに用いる性質を述べる。
+
+\begin{lemma}
+\label{constructions-lemma-ample-on-proj}
+$S$ を次数付き環とする。
+$X = \text{Proj}(S)$ とおく。
+$Y \subset X$ を準コンパクトな開部分スキームとする。
+$\mathcal{O}_Y(n)$ を $\mathcal{O}_X(n)$ の $Y$ への制限とする。
+次を満たす整数 $d \geq 1$ が存在する。
+\begin{enumerate}
+\item 部分スキーム $Y$ は補題 \ref{constructions-lemma-where-invertible} で定義した開集合
+$W_d$ に含まれる。
+\item 層 $\mathcal{O}_Y(dn)$ はすべての $n \in \mathbf{Z}$ に対して可逆である。
+\item 式 (\ref{constructions-equation-multiply}) のすべての写像
+$\mathcal{O}_Y(nd) \otimes_{\mathcal{O}_Y} \mathcal{O}_Y(m)
+\longrightarrow
+\mathcal{O}_Y(nd + m)$
+は同型である。
+\item すべての写像
+$\widetilde M(nd)|_Y = \widetilde M|_Y \otimes_{\mathcal{O}_Y}
+\mathcal{O}_X(nd)|_Y \to \widetilde{M(nd)}|_Y$
+（\ref{constructions-equation-multiply-more-generally} を参照）は同型である。
+\item $f \in S_{nd}$ が与えられると、$s \in \Gamma(Y, \mathcal{O}_Y(nd))$ を
+(\ref{constructions-equation-global-sections}) による $f$ の像を $Y$ に制限したものと表す。このとき
+$D_{+}(f) \cap Y = Y_s$ である。
+\item $Y$ の位相の基は開集合 $Y_s$ の族によって与えられる。ここで
+\par\noindent
+$s \in \Gamma(Y, \mathcal{O}_Y(nd))$、$n \geq 1$ である。
+\item $Y$ の位相の基は、アフィンであるような開集合 $Y_s \subset Y$ によって与えられる。
+ここで
+\par\noindent
+$s \in \Gamma(Y, \mathcal{O}_Y(nd))$、$n \geq 1$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Y$ は準コンパクトなので、有限個の斉次元 $f_i \in S_{+}$、
+$i = 1, \ldots, n$ で、標準開集合 $D_{+}(f_i)$ が $Y$ の開被覆を与えるものが存在する。
+$d_i = \deg(f_i)$ とおき、$d = d_1 \ldots d_n$ とおく。
+$D_{+}(f_i) = D_{+}(f_i^{d/d_i})$ であることに注意する。したがって、補題
+\ref{constructions-lemma-where-invertible} の特徴付け (2)、または補題
+\ref{constructions-lemma-when-invertible} を用いた (1) により、$Y \subset W_d$ が直ちに分かる。
+(1) が (2)、(3)、(4) を含意することは補題 \ref{constructions-lemma-where-invertible} から従う。
+（(3) は (4) の特別な場合であることに注意する。）主張 (5) は補題
+\ref{constructions-lemma-principal-open} から従う。主張 (6) と (7) は、開部分集合 $D_{+}(f)$ が
+$X$ の位相の基をなし、かつアフィンであることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-comparison-proj-quasi-coherent}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とおく。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$M = \bigoplus_{n \in \mathbf{Z}} \Gamma(X, \mathcal{F}(n))$ とおき、
+(\ref{constructions-equation-global-sections-module}) および (\ref{constructions-equation-global-sections}) を用いて
+次数付き $S$-加群とみなす。このとき標準的な $\mathcal{O}_X$-加群写像
+$$
+\widetilde{M} \longrightarrow \mathcal{F}
+$$
+があり、これは $\mathcal{F}$ に関して関手的で、誘導される写像
+$M_0 \to \Gamma(X, \mathcal{F})$ は恒等写像である。
+\end{lemma}
+
+\begin{proof}
+$f \in S$ を次数 $d > 0$ の斉次元とする。補題 \ref{constructions-lemma-proj-sheaves} により、
+$\widetilde{M}|_{D_{+}(f)}$ は $S_{(f)}$-加群 $M_{(f)}$ に対応することを思い出す。
+したがって標準写像
+$$
+M_{(f)} \longrightarrow \Gamma(D_+(f), \mathcal{F}),\quad
+m/f^n \longmapsto m|_{D_+(f)} \otimes f|_{D_+(f)}^{-n}
+$$
+を定義できる。これは $f|_{D_+(f)}$ が可逆層
+$\mathcal{O}_X(d)|_{D_+(f)}$ の自明化切断だから意味をもつ。補題
+\ref{constructions-lemma-when-invertible} とその証明を参照。$\widetilde{M}$ は準連接なので、
+スキームの章、補題 \ref{schemes-lemma-compare-constructions} により、これから標準写像
+$$
+\widetilde{M}|_{D_+(f)} \longrightarrow \mathcal{F}|_{D_+(f)}
+$$
+を得る。表示された写像が共通部分上で貼り合わさることを示せば、大域写像を得る。
+この証明は省略する。最後の主張の証明も省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Proj の関手性}
+\label{constructions-section-functoriality-proj}
+
+\noindent
+次数付き環写像 $\psi : A \to B$ は、付随する射影斉次スペクトルの射を
+常に与えるとは限らない。その理由は、斉次素イデアルの逆像
+$\psi^{-1}(\mathfrak q)$（ここで $\mathfrak q \subset B$）が、無関係イデアル
+$A_{+}$ を含みうるからである。これは $\mathfrak q$ が $B_{+}$ を含まない
+場合にも起こりうる。正しい結果は次のように述べられる。
+
+\begin{lemma}
+\label{constructions-lemma-morphism-proj}
+$A$、$B$ を二つの次数付き環とする。
+$X = \text{Proj}(A)$ および $Y = \text{Proj}(B)$ とおく。
+$\psi : A \to B$ を次数付き環写像とする。次のようにおく。
+$$
+U(\psi)
+=
+\bigcup\nolimits_{f \in A_{+}\ \text{homogeneous}} D_{+}(\psi(f))
+\subset Y.
+$$
+このとき、スキームの標準射
+$$
+r_\psi :
+U(\psi)
+\longrightarrow
+X
+$$
+と、$\mathbf{Z}$-次数付き $\mathcal{O}_{U(\psi)}$-代数の写像
+$$
+\theta = \theta_\psi :
+r_\psi^*\left(
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_X(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_{U(\psi)}(d).
+$$
+がある。三つ組 $(U(\psi), r_\psi, \theta)$ は次の性質によって特徴付けられる。
+\begin{enumerate}
+\item すべての $d \geq 0$ に対して図式
+$$
+\xymatrix{
+A_d \ar[d] \ar[rr]_{\psi} & &
+B_d \ar[d] \\
+\Gamma(X, \mathcal{O}_X(d)) \ar[r]^-\theta &
+\Gamma(U(\psi), \mathcal{O}_Y(d)) &
+\Gamma(Y, \mathcal{O}_Y(d)) \ar[l]
+}
+$$
+は可換である。
+\item 任意の斉次元 $f \in A_{+}$ に対して
+$r_\psi^{-1}(D_{+}(f)) = D_{+}(\psi(f))$ であり、$r_\psi$ の
+$D_{+}(\psi(f))$ への制限は環写像
+$A_{(f)} \to B_{(\psi(f))}$ に対応し、この環写像は $\psi$ により誘導される。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+条件 (2) がスキームの射と開部分集合 $U(\psi)$ を一意に決定することは明らかである。
+$f \in A_d$ を $d \geq 1$ として選ぶ。$\mathcal{O}_X(n)|_{D_{+}(f)}$ は
+$A_{(f)}$-加群 $(A_f)_n$ に対応し、$\mathcal{O}_Y(n)|_{D_{+}(\psi(f))}$ は
+$B_{(\psi(f))}$-加群 $(B_{\psi(f)})_n$ に対応することに注意する。
+言い換えれば、$\theta$ を $D_{+}(\psi(f))$ に制限すると、
+$\mathbf{Z}$-次数付き $B_{(\psi(f))}$-代数の写像
+$$
+A_f \otimes_{A_{(f)}} B_{(\psi(f))}
+\longrightarrow
+B_{\psi(f)}
+$$
+に対応する。条件 (1) は $A$ のすべての元の像を決定する。
+$f$ は可逆元で $\psi(f)$ に写るので、$1/f^m$ は $1/\psi(f)^m$ に写る。
+これより $\theta$ が一意に決定されることが容易に従い、具体的には規則
+$$
+a/f^m \otimes b/\psi(f)^e \longmapsto \psi(a)b/\psi(f)^{m + e}.
+$$
+によって与えられる。存在を示すため、上の一意性の証明が、射 $r$ と写像 $\theta$ について、
+形 $D_{+}(\psi(f)) \subset U(\psi)$ の各標準開集合から $D_{+}(f)$ への
+制限上の良定義な処方を与えたことに注意する。
+これらを $r_f$ および $\theta_f$ と呼ぶ。したがって、
+$D_{+}(f) \subset D_{+}(g)$ であり、$f, g \in A_{+}$ が斉次元である場合に、
+$r_g$ の $D_{+}(\psi(f))$ への制限が $r_f$ と一致することだけを確認すればよい。
+これは上で与えた $r$ と $\theta$ の公式から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-morphism-proj-transitive}
+$A$、$B$、$C$ を次数付き環とする。
+$X = \text{Proj}(A)$、$Y = \text{Proj}(B)$ および $Z = \text{Proj}(C)$ とおく。
+$\varphi : A \to B$、$\psi : B \to C$ を次数付き環写像とする。このとき
+$$
+U(\psi \circ \varphi) = r_\psi^{-1}(U(\varphi))
+\quad
+\text{and}
+\quad
+r_{\psi \circ \varphi}
+=
+r_\varphi \circ r_\psi|_{U(\psi \circ \varphi)}.
+$$
+である。さらに、明らかな記法のもとで
+$$
+\theta_\psi \circ r_\psi^*\theta_\varphi
+=
+\theta_{\psi \circ \varphi}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-surjective-graded-rings-map-proj}
+上の補題 \ref{constructions-lemma-morphism-proj} と同じ仮定および記法を用いる。
+$A_d \to B_d$ がすべての $d \gg 0$ に対して全射であると仮定する。このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item $r_\psi : Y \to X$ は閉埋め込みである。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は全射だが、
+一般には同型でない（$A \to B$ が全射であってもそうである）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は $U(\psi)$ の定義と、$D_{+}(f) = D_{+}(f^n)$ が任意の
+$n > 0$ に対して成り立つことから従う。斉次元 $f \in A_{+}$ に対して
+$A_{(f)} \to B_{(\psi(f))}$ は全射である。実際、$B_{(\psi(f))}$ の任意の元は
+$b/\psi(f)^n$ という分数で $n$ をいくらでも大きくして表せる
+（これにより $b \in B$ の次数は大きくなる）。これで (2) が示される。
+同じ議論は写像
+$$
+A_f \to B_{\psi(f)}
+$$
+が全射であることを示し、これにより $\theta$ の全射性が示される。
+この写像が同型でない例として、次数付き環 $A = k[x, y]$ を考える。ここで
+$k$ は体であり、$\deg(x) = 1$、$\deg(y) = 2$ とする。
+$I = (x)$ とおくと、$B = k[y]$ である。この場合
+$\mathcal{O}_Y(1) = 0$ であることに注意する。しかし
+$r_\psi^*\mathcal{O}_X(1)$ が零でないことは容易に分かる。
+（これほど自明でない例もある。）
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-eventual-iso-graded-rings-map-proj}
+上の補題 \ref{constructions-lemma-morphism-proj} と同じ仮定および記法を用いる。
+$A_d \to B_d$ がすべての $d \gg 0$ に対して同型であると仮定する。このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item $r_\psi : Y \to X$ は同型である。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{constructions-lemma-surjective-graded-rings-map-proj} から従う。
+斉次元 $f \in A_{+}$ をとる。$\psi$ に関する仮定から
+$A_f \to B_f$ は同型である（詳細は省略する）。したがって、
+$r_\psi$ と $\theta$ の $D_{+}(f)$ 上への制限が同型であることは明らかである。
+これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-surjective-graded-rings-generated-degree-1-map-proj}
+上の補題 \ref{constructions-lemma-morphism-proj} と同じ仮定および記法を用いる。
+$A_d \to B_d$ が $d \gg 0$ に対して全射であり、$A$ が $A_1$ によって
+$A_0$ 上生成されると仮定する。このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item $r_\psi : Y \to X$ は閉埋め込みである。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-eventual-iso-graded-rings-map-proj} および
+\ref{constructions-lemma-morphism-proj-transitive} により、$B$ を $A \to B$ の像で置き換えても、
+$X$ も層 $\mathcal{O}_X(n)$ も変わらない。したがって、$A \to B$ が全射であると
+仮定してよい。補題 \ref{constructions-lemma-surjective-graded-rings-map-proj} により (1)、(2)、
+および (3) の全射性を得る。補題 \ref{constructions-lemma-apply-modules} により、
+$\mathcal{O}_X(n)$ と $\mathcal{O}_Y(n)$ はいずれも可逆である。
+したがって $\theta$ は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-base-change-map-proj}
+\begin{reference}
+\cite[II, Proposition 2.8.10]{EGA}
+\end{reference}
+上の補題 \ref{constructions-lemma-morphism-proj} と同じ仮定および記法を用いる。
+環写像 $R \to A_0$ と環写像 $R \to R'$ が存在し、
+$B = R' \otimes_R A$ を満たすと仮定する。このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item 図式
+$$
+\xymatrix{
+Y = \text{Proj}(B) \ar[r]_{r_\psi} \ar[d] &
+\text{Proj}(A) = X \ar[d] \\
+\Spec(R') \ar[r] &
+\Spec(R)
+}
+$$
+はファイバー積図式である。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+標準開集合 $D_{+}(f)$（ここで $f \in A_{+}$ は斉次元）上で何が起こるかを
+調べれば、直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-localization-map-proj}
+上の補題 \ref{constructions-lemma-morphism-proj} と同じ仮定および記法を用いる。
+$g \in A_0$ で、$\psi$ が同型 $A_g \to B$ を誘導するものが存在すると仮定する。
+このとき $U(\psi) = Y$ であり、$r_\psi : Y \to X$ は開埋め込みであって、
+$Y$ を $D(g) \subset \Spec(A_0)$ の逆像と同型に写す。さらに写像 $\theta$ は同型である。
+\end{lemma}
+
+\begin{proof}
+これは上の補題 \ref{constructions-lemma-base-change-map-proj} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-d-uple}
+$S$ を次数付き環とする。$d \geq 1$ とする。代数の章、節
+\ref{algebra-section-graded} の記法に従って $S' = S^{(d)}$ とおく。
+$X = \text{Proj}(S)$ および $X' = \text{Proj}(S')$ とおく。次を満たす
+スキームの標準同型 $i : X \to X'$ が存在する。
+\begin{enumerate}
+\item 任意の次数付き $S$-加群 $M$ に対し、$M' = M^{(d)}$ とおけば、
+標準同型 $\widetilde{M} \to i^*\widetilde{M'}$ がある。
+\item 標準同型
+$\mathcal{O}_{X}(nd) \to i^*\mathcal{O}_{X'}(n)$
+がある。
+\end{enumerate}
+これらの同型は、補題 \ref{constructions-lemma-widetilde-tensor} の乗法写像、したがって写像
+(\ref{constructions-equation-multiply})、
+(\ref{constructions-equation-multiply-on-sheaf})、
+(\ref{constructions-equation-global-sections})、
+(\ref{constructions-equation-global-sections-module})、
+(\ref{constructions-equation-multiply-more-generally})、および
+(\ref{constructions-equation-global-sections-more-generally}) と両立する
+（正確な主張については証明を参照）。
+\end{lemma}
+
+\begin{proof}
+単射な環写像 $S' \to S$（われわれの規約では次数付き環の準同型ではない）は、
+写像 $j : \Spec(S) \to \Spec(S')$ を誘導する。次数付き素イデアル
+$\mathfrak p \subset S$ が与えられると、
+$\mathfrak p' = j(\mathfrak p) = S' \cap \mathfrak p$ は $S'$ の
+次数付き素イデアルである。さらに、$f \in S_+$ が斉次で
+$f \not \in \mathfrak p$ なら、$f^d \in S'_+$ かつ
+$f^d \not \in \mathfrak p'$ である。逆に、$\mathfrak p' \subset S'$ が
+ある斉次元 $f \in S'_+$ を含まない次数付き素イデアルなら、
+$\mathfrak p = \{g \in S \mid g^d \in \mathfrak p'\}$ は、$S$ の次数付き素イデアルであり、
+$f$ を含まず、$j$ によるその像は $\mathfrak p'$ である。
+$\mathfrak p$ がイデアルであることを見るには、$g, h \in \mathfrak p$ なら
+二項公式により $(g + h)^{2d} \in \mathfrak p'$ であり、したがって
+$g + h \in \mathfrak p'$ であることに注意する。ここで $\mathfrak p'$ は素イデアルである。
+こうして、$j$ は同相写像 $i : X \to X'$ を誘導することが分かる。
+さらに、斉次元 $f \in S_+$ が与えられると、$S_{(f)} \cong S'_{(f^d)}$ である。
+これらの同型は補題 \ref{constructions-lemma-standard-open} の制限写像と両立するので、
+$i^\sharp : i^{-1}\mathcal{O}_{X'} \to \mathcal{O}_X$ という構造層の同型が
+$X$ と $X'$ 上に存在することが分かり、
+したがって $i$ はスキームの同型である。
+
+\medskip\noindent
+$M$ を次数付き $S$-加群とする。斉次元 $f \in S_+$ が与えられると
+$M_{(f)} \cong M'_{(f^d)}$ であるから、上とまったく同様に (1) の同型を得る。
+(2) の同型は、$M = S(nd)$ とした (1) の特別な場合であり、このとき
+$M' = S'(n)$ である。$M$ と $N$ を次数付き $S$-加群とする。このとき
+$$
+M' \otimes_{S'} N' =
+(M \otimes_S N)^{(d)} =
+(M \otimes_S N)'
+$$
+であり、これは定義から直接確認できる。以上を踏まえると、補題
+\ref{constructions-lemma-widetilde-tensor} の乗法写像との両立性は、図式
+$$
+\xymatrix{
+\widetilde M \otimes_{\mathcal{O}_X} \widetilde N
+\ar[d]_{(1) \otimes (1)} \ar[r] &
+\widetilde{M \otimes_S N} \ar[d]^{(1)} \\
+i^*(\widetilde{M'} \otimes_{\mathcal{O}_{X'}} \widetilde{N'}) \ar[r] &
+i^*(\widetilde{M' \otimes_{S'} N'})
+}
+$$
+の可換性である。これは、開集合 $D_+(f) = D_+(f^d)$ 上で写像の構成を
+調べれば分かる。そこでは上の横矢印は写像
+$M_{(f)} \times N_{(f)} \to (M \otimes_S N)_{(f)}$
+で与えられ、下の横矢印は写像
+$M'_{(f^d)} \times N'_{(f^d)} \to (M' \otimes_{S'} N')_{(f^d)}$
+で与えられる。これらの写像は同一視
+$M_{(f)} = M'_{(f^d)}$ などを通じて一致するので、所望の両立性を得る。
+他の両立性の証明は省略する。
+\end{proof}
+
+\section{Proj への射}
+\label{constructions-section-morphisms-proj}
+
+\noindent
+$S$ を次数付き環とする。
+$X = \text{Proj}(S)$ を $S$ の斉次スペクトルとする。
+$d \geq 1$ を整数とする。開部分スキーム
+\begin{equation}
+\label{constructions-equation-Ud}
+U_d = \bigcup\nolimits_{f  \in S_d} D_{+}(f)
+\quad\subset\quad
+X = \text{Proj}(S)
+\end{equation}
+を考える。$d | d' \Rightarrow U_d \subset U_{d'}$ であり、
+$X = \bigcup_d U_d$ であることに注意する。$X$ も $U_d$ も
+準コンパクトであるとは限らない。代数の章、補題
+\ref{algebra-lemma-topology-proj} を参照。次のように書く。
+$\mathcal{O}_{U_d}(n) = \mathcal{O}_X(n)|_{U_d}$。
+補題 \ref{constructions-lemma-when-invertible} により、$\mathcal{O}_{U_d}(nd)$ は
+$n \in \mathbf{Z}$ に対して可逆 $\mathcal{O}_{U_d}$-加群であり、
+(\ref{constructions-equation-multiply}) のすべての乗法写像
+$\mathcal{O}_{U_d}(nd) \otimes_{\mathcal{O}_{U_d}} \mathcal{O}_{U_d}(m)
+\to \mathcal{O}_{U_d}(nd + m)$ は同型である。特に
+$\mathcal{O}_{U_d}(nd) \cong \mathcal{O}_{U_d}(d)^{\otimes n}$ である。
+大域切断上の次数付き環写像 (\ref{constructions-equation-global-sections}) と $U_d$ への制限を
+合わせると、次数付き環の準同型
+\begin{equation}
+\label{constructions-equation-psi-d}
+\psi^d : S^{(d)} \longrightarrow \Gamma_*(U_d, \mathcal{O}_{U_d}(d)).
+\end{equation}
+を得る。記法 $S^{(d)}$ については、代数の章、節
+\ref{algebra-section-graded} を参照。記法 $\Gamma_*$ については、加群の章、定義
+\ref{modules-definition-gamma-star} を参照。さらに、$U_d$ は開集合
+$D_{+}(f)$、$f \in S_d$ によって被覆されるので、
+$\mathcal{O}_{U_d}(d)$ は写像
+$\psi^d_1 : S^{(d)}_1 = S_d \to \Gamma(U_d, \mathcal{O}_{U_d}(d))$ の像に属する
+切断によって大域生成される。加群の章、定義
+\ref{modules-definition-globally-generated} を参照。
+
+\medskip\noindent
+$Y$ をスキームとし、$\varphi : Y \to X$ をスキームの射とする。
+像 $\varphi(Y)$ が開部分スキーム $U_d$ に含まれると仮定する。これは $X$ の
+開部分スキームである。
+加群の章、定義 \ref{modules-definition-gamma-star} に続く議論により、
+次数付き環の準同型
+$$
+\Gamma_*(U_d, \mathcal{O}_{U_d}(d))
+\longrightarrow
+\Gamma_*(Y, \varphi^*\mathcal{O}_X(d)).
+$$
+を得る。これと $\psi^d$ の合成は、次数付き環の準同型
+\begin{equation}
+\label{constructions-equation-psi-phi-d}
+\psi_\varphi^d :
+S^{(d)}
+\longrightarrow
+\Gamma_*(Y, \varphi^*\mathcal{O}_X(d))
+\end{equation}
+を与える。これは、可逆層 $\varphi^*\mathcal{O}_X(d)$ が写像
+$(S^{(d)})_1 = S_d \to \Gamma(Y, \varphi^*\mathcal{O}_X(d))$ の像に属する
+切断によって大域生成されるという性質をもつ。
+
+\begin{lemma}
+\label{constructions-lemma-converse-construction}
+$S$ を次数付き環とし、$X = \text{Proj}(S)$ とする。
+$d \geq 1$ とし、上のように $U_d \subset X$ とする。
+$Y$ をスキームとする。$\mathcal{L}$ を $Y$ 上の可逆層とする。
+$\psi : S^{(d)} \to \Gamma_*(Y, \mathcal{L})$ を次数付き環の準同型とし、
+$\mathcal{L}$ は写像
+$\psi|_{S_d} : S_d \to \Gamma(Y, \mathcal{L})$ の像に属する切断によって
+生成されると仮定する。このとき、射 $\varphi : Y \to X$ で
+$\varphi(Y) \subset U_d$ を満たすものと、同型
+$\alpha : \varphi^*\mathcal{O}_{U_d}(d) \to \mathcal{L}$ が存在し、
+$\psi_\varphi^d$ は $\psi$ と、$\alpha$ を介して一致する。すなわち図式
+$$
+\xymatrix{
+\Gamma_*(Y, \mathcal{L}) &
+\Gamma_*(Y, \varphi^*\mathcal{O}_{U_d}(d)) \ar[l]^-\alpha &
+\Gamma_*(U_d, \mathcal{O}_{U_d}(d)) \ar[l]^-{\varphi^*} \\
+S^{(d)} \ar[u]^\psi & &
+S^{(d)} \ar[u]^{\psi^d} \ar[ul]^{\psi^d_\varphi} \ar[ll]_{\text{id}}
+}
+$$
+は可換である。さらに、対 $(\varphi, \alpha)$ は一意である。
+\end{lemma}
+
+\begin{proof}
+$f \in S_d$ をとる。$s = \psi(f) \in \Gamma(Y, \mathcal{L})$ と書く。
+開集合 $Y_s$ 上では $s$ は消えず、$s$ による乗法が同型
+$\mathcal{O}_{Y_s} \to \mathcal{L}|_{Y_s}$ を誘導する。加群の章、補題
+\ref{modules-lemma-s-open} を参照。この写像の逆を $x \mapsto x/s$ と書き、
+$\mathcal{L}$ の冪についても同様に書く。これを用いて環写像
+$\psi_{(f)} : S_{(f)} \to \Gamma(Y_s, \mathcal{O}_Y)$ を、分数 $a/f^n$ を
+$\psi(a)/s^n$ に写すことによって定義する。
+スキームの章、補題 \ref{schemes-lemma-morphism-into-affine} により、これは射
+$\varphi_f : Y_s \to \Spec(S_{(f)}) = D_{+}(f)$ に対応する。
+また、同型 $\alpha_f : \varphi_f^*\mathcal{O}_{D_{+}(f)}(d) \to \mathcal{L}|_{Y_s}$ を
+導入する。これは、自明化切断 $f$（$D_{+}(f)$ 上）の引き戻しを、自明化切断
+$s$（$Y_s$ 上）に写す。
+この選択のもとで、補題の図式は、$Y$ を $Y_s$ で、$\varphi$ を $\varphi_f$ で、
+$\alpha$ を $\alpha_f$ で置き換えても可換である。確認は省略する。
+
+\medskip\noindent
+$f' \in S_d$ をもう一つの元とし、
+$s' = \psi(f') \in \Gamma(Y, \mathcal{L})$ と書く。このとき
+$Y_s \cap Y_{s'} = Y_{ss'}$ であり、同様に
+$D_{+}(f) \cap D_{+}(f') = D_{+}(ff')$ である。
+補題 \ref{constructions-lemma-ample-on-proj} で、$D_{+}(f') \cap D_{+}(f)$ は、
+$D_{+}(f)$ の点のうち、$\mathcal{O}_X(d)$ の切断（$f'$ により定められる）が
+消えないもの全体に等しいことを見た。したがって
+$\varphi_f^{-1}(D_{+}(f') \cap D_{+}(f)) = Y_s \cap Y_{s'}
+= \varphi_{f'}^{-1}(D_{+}(f') \cap D_{+}(f))$ である。
+$D_{+}(f) \cap D_{+}(f')$ 上で、分数 $f/f'$ は構造層の可逆切断であり、
+その逆は $f'/f$ である。さらに
+$\psi_{(f')}(f/f') = \psi(f)/s' = s/s'$ および
+$\psi_{(f)}(f'/f) = \psi(f')/s = s'/s$ である。次の図式を可換にする
+一意な環写像 $S_{(ff')} \to \Gamma(Y_{ss'}, \mathcal{O}_Y)$ が存在すると主張する。
+$$
+\xymatrix{
+\Gamma(Y_s, \mathcal{O}_Y) \ar[r] &
+\Gamma(Y_{ss'}, \mathcal{O}_Y) &
+\Gamma(Y_{s, '} \mathcal{O}_Y) \ar[l]\\
+S_{(f)} \ar[r] \ar[u]^{\psi_{(f)}} &
+S_{(ff')} \ar[u] &
+S_{(f')} \ar[l] \ar[u]^{\psi_{(f')}}
+}
+$$
+実際、規則 $x/(ff')^n \mapsto \psi(x)/(ss')^n$ を用いることができ、上の公式により
+これは「機能する」。一意性は、$\text{Proj}(S)$ が分離的であることから従う。
+補題 \ref{constructions-lemma-proj-separated} とその証明を参照。これにより、射
+$\varphi_f$ と $\varphi_{f'}$ は $Y_s \cap Y_{s'}$ 上で一致する。
+$\alpha_f$ と $\alpha_{f'}$ の制限は $Y_s \cap Y_{s'}$ 上で一致する。実際、正則関数
+$s/s'$ と $\psi_{(f')}(f/f')$ が一致するからである。これにより、射 $\psi_f$ は
+$Y$ から $U_d \subset X$ への大域射に貼り合わさり、写像 $\alpha_f$ は
+補題の条件を満たす同型に貼り合わさることが示された。
+
+\medskip\noindent
+対 $(\varphi, \alpha)$ が一意であることがなお残っている。
+$(\varphi', \alpha')$ を第二のそのような対とする。$f \in S_d$ とする。
+補題の図式の可換性により、$D_{+}(f)$ の $\varphi$ と $\varphi'$ のもとでの逆像は
+いずれも $Y_{\psi(f)}$ に等しい。開集合 $D_{+}(f)$ は $X$ の位相の基をなし、
+$X$ は sober 位相空間なので（スキームの章、補題
+\ref{schemes-lemma-scheme-sober} を参照）、写像 $\varphi$ と $\varphi'$ は
+台となる位相空間上で同一である。$s = \psi(f)$ を用いて、可逆層 $\mathcal{L}$ を
+$Y_{\psi(f)}$ 上で自明化する。図式の可換性により、
+$\alpha^{\otimes n}(\psi^d_{\varphi}(x)) =
+\psi(x) = (\alpha')^{\otimes n}(\psi^d_{\varphi'}(x))$ がすべての
+$x \in S_{nd}$ に対して成り立つ。$\psi^d_{\varphi}$ と $\psi^d_{\varphi'}$ の構成により、
+$\psi^d_{\varphi}(x) = \varphi^\sharp(x/f^n) \psi^d_{\varphi}(f^n)$ が
+$Y_{\psi(f)}$ 上で成り立ち、
+$\psi^d_{\varphi'}$ についても同様である。補題の図式の可換性から
+$\varphi^\sharp(x/f^n) = (\varphi')^\sharp(x/f^n)$ を得る。したがって
+$\varphi$ と $\varphi'$ は、$Y_{\psi(f)}$ からアフィンスキーム
+$D_{+}(f) = \Spec(S_{(f)})$ への同じ射を誘導する。
+ゆえに $\varphi$ と $\varphi'$ は射として同一である。最後に、補題の図式の可換性が、
+$\varphi$ を与えたときに一意な $\alpha$ を指定することを示す必要がある。
+確認は省略する。
+\end{proof}
+
+\noindent
+補題の前の議論を続ける。$S$ を次数付き環とする。
+$Y$ をスキームとする。次の条件を満たす {\it 三つ組}
+$(d, \mathcal{L}, \psi)$ を考える。
+\begin{enumerate}
+\item $d \geq 1$ は整数である。
+\item $\mathcal{L}$ は可逆 $\mathcal{O}_Y$-加群である。
+\item $\psi : S^{(d)} \to \Gamma_*(Y, \mathcal{L})$ は次数付き環の準同型であり、
+$\mathcal{L}$ は大域切断 $\psi(f)$、$f \in S_d$ によって生成される。
+\end{enumerate}
+射 $h : Y' \to Y$ と三つ組 $(d, \mathcal{L}, \psi)$（$Y$ 上）が与えられると、
+これを三つ組 $(d, h^*\mathcal{L}, h^* \circ \psi)$ に引き戻すことができる。
+二つの三つ組 $(d, \mathcal{L}, \psi)$ と
+$(d, \mathcal{L}', \psi')$ が同じ整数 $d$ をもつとき、同型
+$\beta : \mathcal{L} \to \mathcal{L}'$ が存在し、
+$\beta \circ \psi = \psi'$ が、次数付き環写像
+$S^{(d)} \to \Gamma_*(Y, \mathcal{L}')$ として成り立つなら、
+これらは {\it 強同値} であるという。
+
+\medskip\noindent
+各整数 $d \geq 1$ に対し、上で定義した引き戻しを用いて
+\begin{eqnarray*}
+F_d : \Sch^{opp} & \longrightarrow & \textit{Sets}, \\
+Y & \longmapsto &
+\{\text{strict equivalence classes of triples }
+(d, \mathcal{L}, \psi)
+\text{ as above}\}
+\end{eqnarray*}
+を定義する。
+
+\begin{lemma}
+\label{constructions-lemma-proj-functor-strict}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とする。
+開部分スキーム $U_d \subset X$（\ref{constructions-equation-Ud}）は関手 $F_d$ を表現し、
+上で定義した三つ組 $(d, \mathcal{O}_{U_d}(d), \psi^d)$ は普遍族である
+（スキームの章、節 \ref{schemes-section-representable} を参照）。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{constructions-lemma-converse-construction} の言い換えである。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-apply}
+$S$ を、$S_0$-代数として $S_1$ の元によって生成される次数付き環とする。
+この場合、スキーム $X = \text{Proj}(S)$ は、スキーム $Y$ に次の対
+$(\mathcal{L}, \psi)$ 全体の集合を対応させる関手を表現する。
+\begin{enumerate}
+\item $\mathcal{L}$ は可逆 $\mathcal{O}_Y$-加群である。
+\item $\psi : S \to \Gamma_*(Y, \mathcal{L})$ は次数付き環の準同型であり、
+$\mathcal{L}$ は大域切断 $\psi(f)$、$f \in S_1$ によって生成される。
+\end{enumerate}
+ここで上の強同値によって同一視する。
+\end{lemma}
+
+\begin{proof}
+補題の仮定のもとで $X = U_1$ であり、これは上の補題
+\ref{constructions-lemma-proj-functor-strict} の言い換えである。
+\end{proof}
+
+\noindent
+$\text{Proj}(S)$ に対応する関手を、一般の次数付き環 $S$ に対して論じて、
+この節を終える。読者には、この節の残りを飛ばすことを勧める。
+
+\medskip\noindent
+任意の次数付き環 $S$ を固定する。$T$ をスキームとする。
+二つの三つ組 $(d, \mathcal{L}, \psi)$ と
+$(d', \mathcal{L}', \psi')$ を考える。これらは $T$ 上にあり、整数 $d$ と $d'$ は
+異なってもよい。
+可逆層の同型 $\beta : \mathcal{L}^{\otimes d'} \to (\mathcal{L}')^{\otimes d}$ が
+$T$ 上に存在し、$\beta \circ \psi|_{S^{(dd')}}$ と
+$\psi'|_{S^{(dd')}}$ が次数付き環写像
+$S^{(dd')} \to \Gamma_*(Y, (\mathcal{L}')^{\otimes dd'})$ として一致するなら、
+これらの三つ組は {\it 同値} であるという。
+
+\begin{lemma}
+\label{constructions-lemma-equivalent}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とおく。$T$ をスキームとする。
+$(d, \mathcal{L}, \psi)$ と $(d', \mathcal{L}', \psi')$ を $T$ 上の二つの三つ組とする。
+次は同値である。
+\begin{enumerate}
+\item $n = \text{lcm}(d, d')$ とし、$n = ad = a'd'$ と書く。同型
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$ が存在し、
+$\beta \circ \psi|_{S^{(n)}}$ と $\psi'|_{S^{(n)}}$ が次数付き環写像
+$S^{(n)} \to \Gamma_*(Y, (\mathcal{L}')^{\otimes n})$ として一致する。
+\item 三つ組 $(d, \mathcal{L}, \psi)$ と $(d', \mathcal{L}', \psi')$ は同値である。
+\item ある正の整数 $n = ad = a'd'$ に対し、同型
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$ が存在し、
+$\beta \circ \psi|_{S^{(n)}}$ と $\psi'|_{S^{(n)}}$ が次数付き環写像
+$S^{(n)} \to \Gamma_*(Y, (\mathcal{L}')^{\otimes n})$ として一致する。
+\item 射 $\varphi : T \to X$ と $\varphi' : T \to X$ は等しい。これらはそれぞれ
+$(d, \mathcal{L}, \psi)$ と $(d', \mathcal{L}', \psi')$ に付随する射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が (2) を含意し、(2) が (3) を含意することは、より可除な次数と可逆層の冪へ
+制限すれば明らかである。また、補題 \ref{constructions-lemma-converse-construction} の一意性の主張により、
+(3) は (4) を含意する。したがって (4) が (1) を含意することを示せばよい。
+(4) を仮定する。すなわち $\varphi = \varphi'$ とする。すると
+$\mathcal{L} = \varphi^*\mathcal{O}_X(d)$ および
+$\mathcal{L}' = \varphi^*\mathcal{O}_X(d')$ と書いてよい。さらに、これらの同一視のもとで、
+次数付き環写像 $\psi$ と $\psi'$ は、標準的な次数付き環写像
+$$
+S \longrightarrow \bigoplus\nolimits_{n \geq 0} \Gamma(X, \mathcal{O}_X(n))
+$$
+を $S^{(d)}$ と $S^{(d')}$ に制限し、$\varphi$ による引き戻しと合成したものに対応する
+（再び補題 \ref{constructions-lemma-converse-construction} による）。したがって、$\beta$ を同型
+$$
+(\varphi^*\mathcal{O}_X(d))^{\otimes a} =
+\varphi^*\mathcal{O}_X(n) =
+(\varphi^*\mathcal{O}_X(d'))^{\otimes a'}
+$$
+とすればよい。
+\end{proof}
+
+\noindent
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とする。
+開部分スキーム $U_d \subset X = \text{Proj}(S)$（\ref{constructions-equation-Ud}）上には、三つ組
+$(d, \mathcal{O}_{U_d}(d), \psi^d)$ がある。明らかに、$d | d'$ なら、三つ組
+$(d, \mathcal{O}_{U_d}(d), \psi^d)$ と
+$(d', \mathcal{O}_{U_{d'}}(d'), \psi^{d'})$ は、開集合 $U_d$ に制限すると同値である
+（これは $U_{d'}$ の部分集合である）。これと補題 \ref{constructions-lemma-converse-construction} を
+合わせると、射 $Y \to X$ は、おおよそ $Y$ 上の三つ組の同値類に対応する。
+ただし、$Y$ が準コンパクトでなければ、機能する単一の三つ組が存在しないことがあるため、
+これは完全には正しくない。したがって、対応する関手の定義には多少注意を要する。
+
+\medskip\noindent
+次は一つの可能な方法である。$d' = ad$ と仮定する。
+関手の変換 $F_d \to F_{d'}$ で、三つ組
+$(d, \mathcal{L}, \psi)$（$T$ 上）に三つ組
+$(d', \mathcal{L}^{\otimes a}, \psi|_{S^{(d')}})$ を対応させるものを考える。
+補題 \ref{constructions-lemma-equivalent} の含意の一つにより、変換 $F_d \to F_{d'}$ は単射である。
+準コンパクトなスキーム $T$ に対して、上で説明した遷移写像を用いて
+$$
+F(T) = \bigcup\nolimits_{d \in \mathbf{N}} F_d(T)
+$$
+と定義する。これは、準コンパクトなスキームの圏から集合の圏への反変関手を明らかに定める。
+一般のスキーム $T$ に対して
+$$
+F(T)
+=
+\lim_{V \subset T\text{ quasi-compact open}} F(V).
+$$
+と定義する。言い換えれば、元 $\xi$（$F(T)$ のもの）は、元
+$\xi_V \in F(V)$ の両立する選択系に対応する。ここで $V$ は $T$ の
+準コンパクト開集合を走る。引き戻し写像 $F(T) \to F(T')$（スキームの射
+$T' \to T$ に対する）の定義は省略する。
+こうして関手
+\begin{eqnarray*}
+F : \Sch^{opp} & \longrightarrow & \textit{Sets}
+\end{eqnarray*}
+を定義した。
+
+\begin{lemma}
+\label{constructions-lemma-proj-functor}
+$S$ を次数付き環とする。$X = \text{Proj}(S)$ とする。
+上で定義した関手 $F$ はスキーム $X$ によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+上で、関手 $F_d$ は開部分スキーム $U_d \subset X$ に対応することを見た。
+さらに、上で定義した関手の変換 $F_d \to F_{d'}$（$d | d'$ の場合）は、
+包含射 $U_d \to U_{d'}$ に対応する（上の議論を参照）。したがって、$F$ が $X$ によって
+表現されることを示すには、射 $T \to X$ の像が、$T$ が準コンパクトなら
+ある $U_d$ に含まれること、および一般のスキーム $T$ に対して
+$$
+\Mor(T, X)
+=
+\lim_{V \subset T\text{ quasi-compact open}} \Mor(V, X).
+$$
+が成り立つことを示せば十分である。これらの確認は省略する。
+\end{proof}
+
+\section{射影空間}
+\label{constructions-section-projective-space}
+
+\noindent
+射影空間は、代数幾何学で研究される基本的対象の一つである。この節では、多項式環の
+$\text{Proj}$ としての構成だけを与える。後に、その多くの美しい性質を見いだす。
+
+\begin{lemma}
+\label{constructions-lemma-projective-space}
+$S = \mathbf{Z}[T_0, \ldots, T_n]$ とし、$\deg(T_i) = 1$ とする。スキーム
+$$
+\mathbf{P}^n_{\mathbf{Z}} = \text{Proj}(S)
+$$
+は、スキーム $Y$ に次の対 $(\mathcal{L}, (s_0, \ldots, s_n))$ を対応させる関手を
+表現する。
+\begin{enumerate}
+\item $\mathcal{L}$ は可逆 $\mathcal{O}_Y$-加群である。
+\item $s_0, \ldots, s_n$ は $\mathcal{L}$ の大域切断であり、$\mathcal{L}$ を生成する。
+\end{enumerate}
+ただし、次の同値関係によって同一視する。
+$(\mathcal{L}, (s_0, \ldots, s_n)) \sim
+(\mathcal{N}, (t_0, \ldots, t_n))$ $\Leftrightarrow$ 同型
+$\beta : \mathcal{L} \to \mathcal{N}$ で、$\beta(s_i) = t_i$ を
+$i = 0, \ldots, n$ に対して満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+これは上の補題 \ref{constructions-lemma-apply} の特別な場合である。実際、任意の次数付き環 $A$ に対して
+\begin{eqnarray*}
+\Mor_{graded rings}(\mathbf{Z}[T_0, \ldots, T_n], A)
+& = &
+A_1 \times \ldots \times A_1 \\
+\psi & \mapsto & (\psi(T_0), \ldots, \psi(T_n))
+\end{eqnarray*}
+であり、次数 $1$ の部分、すなわち $\Gamma_*(Y, \mathcal{L})$ のその部分は
+$\Gamma(Y, \mathcal{L})$ にほかならない。
+\end{proof}
+
+\begin{definition}
+\label{constructions-definition-projective-space}
+スキーム
+$\mathbf{P}^n_{\mathbf{Z}} = \text{Proj}(\mathbf{Z}[T_0, \ldots, T_n])$
+を {\it 射影 $n$ 次元空間（$\mathbf{Z}$ 上）} と呼ぶ。
+その底変換 $\mathbf{P}^n_S$（スキーム $S$ へのもの）を
+{\it 射影 $n$ 次元空間（$S$ 上）} と呼ぶ。$R$ が環であるとき、
+$\Spec(R)$ への底変換を $\mathbf{P}^n_R$ と表し、
+{\it 射影 $n$ 次元空間（$R$ 上）} と呼ぶ。
+\end{definition}
+
+\noindent
+スキーム $Y$（$S$ 上）と、補題 \ref{constructions-lemma-projective-space} における対
+$(\mathcal{L}, (s_0, \ldots, s_n))$ が与えられると、誘導される
+$\mathbf{P}^n_S$ への射を
+$$
+\varphi_{(\mathcal{L}, (s_0, \ldots, s_n))} :
+Y \longrightarrow \mathbf{P}^n_S
+$$
+と表す。これは意味をもつ。実際、この対は $\mathbf{P}^n_{\mathbf{Z}}$ への射を定め、
+すでに $S$ への構造射があるので、両者を合わせると
+$\mathbf{P}^n_S = \mathbf{P}^n_{\mathbf{Z}} \times S$ への射を得る。
+補題 \ref{constructions-lemma-relative-proj-base-change} により、$\mathbf{P}^n_S$ を次数付き
+$\mathcal{O}_S$-代数 $\mathcal{O}_S[T_0, \ldots, T_n]$ の相対 Proj と同一視できる。
+また、$\varphi_{(\mathcal{L}, (s_0, \ldots, s_n))}$ は、次を満たす一意な
+$S$-射として特徴付けられる。
+$$
+\mathcal{L} =
+\varphi_{(\mathcal{L}, (s_0, \ldots, s_n))}^*\mathcal{O}_{\mathbf{P}^n_S}(1)
+\quad
+\text{and}
+\quad
+s_i = \varphi_{(\mathcal{L}, (s_0, \ldots, s_n))}^*T_i
+$$
+ここで、$T_i$ を $\mathcal{O}_{\mathbf{P}^n_S}(1)$ の大域切断とみなす。この見方は
+補題 \ref{constructions-lemma-glue-relative-proj-twists} の写像 $\psi$ を介する。詳細は省略する。
+
+\begin{lemma}
+\label{constructions-lemma-standard-covering-projective-space}
+射影 $n$ 次元空間（$\mathbf{Z}$ 上）は、$n + 1$ 個の標準開集合
+$$
+\mathbf{P}^n_{\mathbf{Z}} =
+\bigcup\nolimits_{i = 0, \ldots, n} D_{+}(T_i)
+$$
+によって被覆され、各 $D_{+}(T_i)$ は $\mathbf{A}^n_{\mathbf{Z}}$、すなわち
+アフィン $n$ 次元空間（$\mathbf{Z}$ 上）と同型である。
+\end{lemma}
+
+\begin{proof}
+これは
+$\mathbf{Z}[T_0, \ldots, T_n]_{+} = (T_0, \ldots, T_n)$ であり、かつ
+$$
+\Spec
+\left(
+\mathbf{Z}
+\left[\frac{T_0}{T_i}, \ldots, \frac{T_n}{T_i}
+\right]
+\right)
+\cong
+\mathbf{A}^n_{\mathbf{Z}}
+$$
+が明らかな仕方で成り立つからである。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-projective-space-separated}
+$S$ をスキームとする。構造射 $\mathbf{P}^n_S \to S$ は
+\begin{enumerate}
+\item 分離的である。
+\item 準コンパクトである。
+\item 付値判定法の存在部分と一意性部分を満たす。
+\item 普遍閉である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これらの性質はすべて底変換で保たれる（後二者については明らかであり、前二者については
+スキームの章、補題 \ref{schemes-lemma-separated-permanence} および
+\ref{schemes-lemma-quasi-compact-preserved-base-change} を参照）。したがって、射
+$\mathbf{P}^n_{\mathbf{Z}} \to \Spec(\mathbf{Z})$ について証明すれば十分である。
+分離性は補題 \ref{constructions-lemma-proj-separated} である。準コンパクト性は補題
+\ref{constructions-lemma-standard-covering-projective-space} から従う。付値判定法の存在性と
+一意性は補題 \ref{constructions-lemma-proj-valuative-criterion} から従う。普遍閉性は上記と、
+スキームの章、命題 \ref{schemes-proposition-characterize-universally-closed} から従う。
+\end{proof}
+
+\begin{remark}
+\label{constructions-remark-missing-finite-type}
+上の性質の一覧には何が欠けているだろうか。確実に欠けているのは有限型という性質である。
+ここに挙げなかった理由は、この時点では有限型の概念をまだ定義していないからである。
+（もう一つ欠けている性質は「滑らかさ」である。ほかにも多く思いつくだろう。）
+\end{remark}
+
+\begin{lemma}[Segre 埋め込み]
+\label{constructions-lemma-segre-embedding}
+$S$ をスキームとする。閉埋め込み
+$$
+\mathbf{P}^n_S \times_S \mathbf{P}^m_S
+\longrightarrow
+\mathbf{P}^{nm + n + m}_S
+$$
+が存在し、これを {\it Segre 埋め込み} と呼ぶ。
+\end{lemma}
+
+\begin{proof}
+$S = \Spec(\mathbf{Z})$ の場合に証明すれば十分である。したがって添字 $S$ を省き、
+絶対的な設定で議論する。次のように書く。
+$\mathbf{P}^n = \text{Proj}(\mathbf{Z}[X_0, \ldots, X_n])$、
+$\mathbf{P}^m = \text{Proj}(\mathbf{Z}[Y_0, \ldots, Y_m])$、および
+$\mathbf{P}^{nm + n + m} =
+\text{Proj}(\mathbf{Z}[Z_0, \ldots, Z_{nm + n + m}])$。
+$\mathbf{P}^{nm + n + m}$ へ写すには、左辺上の可逆層 $\mathcal{L}$ と、
+それを生成する $(n + 1)(m + 1)$ 個の切断 $s_i$ を書き下せばよい。
+補題 \ref{constructions-lemma-projective-space} を参照。用いる可逆層は
+$$
+\mathcal{L} =
+\text{pr}_1^*\mathcal{O}_{\mathbf{P}^n}(1)
+\otimes
+\text{pr}_2^*\mathcal{O}_{\mathbf{P}^m}(1)
+$$
+である。用いる切断は
+$$
+s_0 = X_0Y_0, \ s_1 = X_1Y_0, \ldots, \ s_n = X_nY_0,
+\ s_{n + 1} = X_0Y_1, \ldots, \ s_{nm + n + m} = X_nY_m.
+$$
+である。これらは $\mathcal{L}$ を生成する。実際、切断 $X_i$ は
+$\mathcal{O}_{\mathbf{P}^n}(1)$ を生成し、切断 $Y_j$ は
+$\mathcal{O}_{\mathbf{P}^m}(1)$ を生成する。誘導される射 $\varphi$ は
+$$
+\varphi^{-1}(D_{+}(Z_{i + (n + 1)j})) = D_{+}(X_i) \times D_{+}(Y_j).
+$$
+を満たす。したがって、これはアフィン射である。$(i, j) = (0, 0)$ の場合に対応する
+環写像は
+$$
+\mathbf{Z}[Z_1/Z_0, \ldots, Z_{nm + n + m}/Z_0]
+\longrightarrow
+\mathbf{Z}[X_1/X_0, \ldots, X_n/X_0, Y_1/Y_0, \ldots, Y_n/Y_0]
+$$
+であり、$Z_i/Z_0$ を元 $X_i/X_0$ に写し（$i \leq n$）、
+元 $Z_{(n + 1)j}/Z_0$ を元 $Y_j/Y_0$ に写す。したがって全射である。
+他のアフィン開部分集合についても同様の議論が成り立つ。ゆえに射 $\varphi$ は
+閉埋め込みである（スキームの章、補題
+\ref{schemes-lemma-closed-local-target} および例
+\ref{schemes-example-closed-immersion-affines} を参照）。
+\end{proof}
+
+\noindent
+次の二つの補題は、後に述べるより一般的な結果の特別な場合であるが、ここで直接証明する
+意味はあるだろう。第一の補題は、因子の章、補題
+\ref{divisors-lemma-closed-subscheme-proj} の特別な場合である。
+
+\begin{lemma}
+\label{constructions-lemma-closed-in-projective-space}
+$R$ を環とする。$Z \subset \mathbf{P}^n_R$ を閉部分スキームとする。次のようにおく。
+$$
+I_d = \Ker\left(
+R[T_0, \ldots, T_n]_d
+\longrightarrow
+\Gamma(Z, \mathcal{O}_{\mathbf{P}^n_R}(d)|_Z)\right)
+$$
+このとき
+\par\noindent
+$I = \bigoplus I_d \subset R[T_0, \ldots, T_n]$ は次数付きイデアルであり、
+\par\noindent
+$Z = \text{Proj}(R[T_0, \ldots, T_n]/I)$ である。
+\end{lemma}
+
+\begin{proof}
+$I$ が次数付きイデアルであることは明らかである。
+\par\noindent
+$Z' = \text{Proj}(R[T_0, \ldots, T_n]/I)$ とおく。
+\par\noindent
+補題 \ref{constructions-lemma-surjective-graded-rings-generated-degree-1-map-proj} により、$Z'$ は
+$\mathbf{P}^n_R$ の閉部分スキームである。等式 $Z = Z'$ を示すには、
+\par\noindent
+標準アフィン開集合
+$D_{+}(T_i)$ 上で確認すれば十分である。斉次座標の番号を付け替えて $i = 0$ と仮定してよい。
+$Z \cap D_{+}(T_0)$、それぞれ
+\par\noindent
+$Z' \cap D_{+}(T_0)$ が、イデアル $J$、それぞれ $J'$ により
+切り出されるとする。ここで、これらは $R[T_1/T_0, \ldots, T_n/T_0]$ のイデアルである。
+このとき $J'$ は元 $F/T_0^{\deg(F)}$ によって生成される。
+\par\noindent
+ただし $F \in I$ は斉次元である。
+$F \in I$ の次数が $d$ であると仮定する。$F$ は
+$\mathcal{O}_{\mathbf{P}^n_R}(d)$ の $Z$ への制限の切断として消えるので、
+\par\noindent
+$F/T_0^d$ は $J$ の元である。
+したがって $J' \subset J$ である。
+
+\medskip\noindent
+逆に、$f \in J$ と仮定する。$f$ の全次数が $d$ であり、これが
+$T_1/T_0, \ldots, T_n/T_0$ に関する次数なら、$f = F/T_0^d$ と書ける。ここで
+$F \in R[T_0, \ldots, T_n]_d$ である。
+$i \in \{1, \ldots, n\}$ をとる。このとき $Z \cap D_{+}(T_i)$ は、あるイデアル
+$J_i \subset R[T_0/T_i, \ldots, T_n/T_i]$ によって切り出される。さらに
+$$
+J \cdot
+R\left[
+\frac{T_1}{T_0}, \ldots, \frac{T_n}{T_0},
+\frac{T_0}{T_i}, \ldots, \frac{T_n}{T_i}
+\right]
+=
+J_i \cdot
+R\left[
+\frac{T_1}{T_0}, \ldots, \frac{T_n}{T_0},
+\frac{T_0}{T_i}, \ldots, \frac{T_n}{T_i}
+\right]
+$$
+である。左辺は $J$ の局所化であり、局所化する元は $T_i/T_0$ である。右辺は
+$J_i$ の局所化であり、局所化する元は $T_0/T_i$ である。したがって
+$T_0^{d_i}F/T_i^{d + d_i}$ は $J_i$ の元である。ここで $d_i$ は十分大きい。これにより
+$T_0^{\max(d_i)}F$ は $I$ の元であることが分かる。実際、各標準アフィン開集合
+$D_{+}(T_i)$ へのその制限は、閉部分スキーム $Z \cap D_{+}(T_i)$ 上で消える。
+ゆえに $f \in J'$ であり、所望の $J \subset J'$ を得る。
+\end{proof}
+
+\noindent
+次の補題は、より一般的な性質の章、補題
+\ref{properties-lemma-ample-quasi-coherent} または
+\ref{properties-lemma-proj-quasi-coherent} の特別な場合である。
+
+\begin{lemma}
+\label{constructions-lemma-quasi-coherent-projective-space}
+$R$ を環とする。$\mathcal{F}$ を $\mathbf{P}^n_R$ 上の準連接層とする。
+$d \geq 0$ に対して
+$$
+M_d
+=
+\Gamma(\mathbf{P}^n_R,
+\mathcal{F} \otimes_{\mathcal{O}_{\mathbf{P}^n_R}}
+\mathcal{O}_{\mathbf{P}^n_R}(d))
+=
+\Gamma(\mathbf{P}^n_R, \mathcal{F}(d))
+$$
+とおく。このとき $M = \bigoplus_{d \geq 0} M_d$ は次数付き
+$R[T_0, \ldots, R_n]$-加群であり、標準同型 $\mathcal{F} = \widetilde{M}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+乗法写像
+$$
+R[T_0, \ldots, R_n]_e \times M_d \longrightarrow M_{d + e}
+$$
+は自然な同型
+$$
+\mathcal{O}_{\mathbf{P}^n_R}(e)
+\otimes_{\mathcal{O}_{\mathbf{P}^n_R}}
+\mathcal{F}(d)
+\longrightarrow
+\mathcal{F}(e + d)
+$$
+から得られる。式 (\ref{constructions-equation-global-sections-module}) を参照。
+写像 $c : \widetilde{M} \to \mathcal{F}$ を構成しよう。各標準アフィン開集合
+$U_i = D_{+}(T_i)$ 上で
+$\Gamma(U_i, \widetilde{M}) = (M[1/T_i])_0$ である。ここで添字 ${}_0$ は
+次数 $0$ の部分を表す。その元は $m/T_i^d$ と書け、ここで $m \in M_d$ である。
+$T_i$ は $\mathcal{O}(1)$ の生成元であり、これは $U_i$ 上での生成元なので、
+$m|_{U_i} = m_i \otimes T_i^d$ と常に書ける。ここで
+$m_i \in \Gamma(U_i, \mathcal{F})$ は一意な切断である。したがって自然な候補は
+$c(m/T_i^d) = m_i$ である。ここでは省略する短い議論により、次を示せれば、
+これは良定義な写像 $c : \widetilde{M} \to \mathcal{F}$ を与える。
+$$
+(T_i/T_j)^d m_i|_{U_i \cap U_j} = m_j|_{U_i \cap U_j}
+$$
+これは $M[1/T_iT_j]$ における等式である。しかしこれは明らかである。実際、共通部分上で
+生成元 $T_i$ と $T_j$ は、いずれも $\mathcal{O}(1)$ の生成元であり、可逆関数 $T_i/T_j$ だけ異なる。
+
+\medskip\noindent
+$c$ の単射性。アフィン開集合 $U_i$ 上で単射性を確認してよい。
+$i \in \{0, \ldots, n\}$ とし、元 $s$ を
+$s = m/T_i^d \in \Gamma(U_i, \widetilde{M})$ で $c(m/T_i^d) = 0$ を満たすものとする。
+上の $c$ の記述により、これは $m_i = 0$ を意味し、したがって
+$m|_{U_i} = 0$ である。ゆえに $T_i^em = 0$ が $M$ で成り立つような $e$ が存在する。
+したがって所望のとおり $s = m/T_i^d = T_i^e/T_i^{e + d} = 0$ である。
+
+\medskip\noindent
+$c$ の全射性。アフィン開集合 $U_i$ 上で全射性を確認してよい。番号を付け替えることにより、
+$U_0$ 上で確認すれば十分である。$s \in \mathcal{F}(U_0)$ とする。
+$\mathcal{F}|_{U_i} = \widetilde{N_i}$ と書こう。これは、ある
+$R[T_0/T_i, \ldots, T_0/T_i]$-加群 $N_i$ に対して、$\mathcal{F}$ が準連接だから可能である。
+すると $s$ は元 $x \in N_0$ に対応する。このとき
+$$
+(N_i)_{T_j/T_i} \cong (N_j)_{T_i/T_j}
+$$
+である（添字は「そこでの主局所化」を表す）。これは環
+$$
+R\left[
+\frac{T_0}{T_i}, \ldots, \frac{T_n}{T_i},
+\frac{T_0}{T_j}, \ldots, \frac{T_n}{T_j}
+\right].
+$$
+上の加群としての同型である。したがって、ある十分大きい整数 $d$ に対し、元
+$s_i \in N_i$、$i = 1, \ldots, n$ で、
+$$
+s = (T_i/T_0)^d s_i
+$$
+が $U_0 \cap U_i$ 上で成り立つものが存在する。次に差
+$$
+t_{ij} = s_i - (T_j/T_i)^d s_j
+$$
+を $U_i \cap U_j$、$0 < i < j$ 上で考える。$s_i$ の選び方により、
+$t_{ij}|_{U_0 \cap U_i \cap U_j} = 0$ である。したがって、ある十分大きい整数
+$e$ に対して $(T_0/T_i)^et_{ij} = 0$ である。
+$s_i' = (T_0/T_i)^es_i$ および $s_0' = s$ とおく。このとき
+$$
+s_a' = (T_b/T_a)^{e + d} s_b'
+$$
+が $U_a \cap U_b$ 上で、すべての $a, b$ に対して成り立つ。これはまさに、元
+$s'_a$ が大域切断 $m \in \Gamma(\mathbf{P}^n_R, \mathcal{F}(e + d))$ に
+貼り合わさるための条件である。さらに、構成により
+$c(m/T_0^{e + d}) = s$ である。したがって $c$ は全射であり、証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-globally-generated-omega-twist-1}
+$X$ をスキームとする。$\mathcal{L}$ を可逆層とし、
+$s_0, \ldots, s_n$ をそれを生成する $\mathcal{L}$ の大域切断とする。
+$\mathcal{F}$ を誘導される写像 $\mathcal{O}_X^{\oplus n + 1} \to \mathcal{L}$ の核とする。
+このとき $\mathcal{F} \otimes \mathcal{L}$ は大域生成される。
+\end{lemma}
+
+\begin{proof}
+実際、$X$ が任意の局所環付き空間でも結果は成り立つ。層 $\mathcal{F}$ は有限局所自由
+$\mathcal{O}_X$-加群で、その階数は $n$ である。元
+$$
+s_{ij} = (0, \ldots, 0, s_j, 0, \ldots, 0, -s_i, 0, \ldots, 0)
+\in \Gamma(X, \mathcal{L}^{\oplus n + 1})
+$$
+では、$s_j$ が第 $i$ 成分に、$-s_i$ が第 $j$ 成分にあり、
+$\mathcal{L}^{\otimes 2}$ では零に写る。したがって
+$s_{ij} \in \Gamma(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L})$ である。
+局所的な計算により、これらの切断が $\mathcal{F} \otimes \mathcal{L}$ を生成することが分かる。
+
+\medskip\noindent
+別証。射 $\varphi : X \to \mathbf{P}^n_\mathbf{Z}$ を考える。これは対
+$(\mathcal{L}, (s_0, \ldots, s_n))$ に付随する射である。
+$\mathcal{O}(1)$ の引き戻しは $\mathcal{L}$ であり、$T_i$ の引き戻しは $s_i$ なので、
+$\mathbf{P}^n_\mathbf{Z}$ の場合に補題を証明すれば十分である。この場合、層
+$\mathcal{F}$ は次数付き $S = \mathbf{Z}[T_0, \ldots, T_n]$-加群 $M$ に対応し、
+この加群は短完全列
+$$
+0 \to M \to S^{\oplus n + 1} \to S(1) \to 0
+$$
+に入る。ここで第二の写像は $T_0, \ldots, T_n$ によって与えられる。
+この場合、上の主張は、元
+$$
+T_{ij} = (0, \ldots, 0, T_j, 0, \ldots, 0, -T_i, 0, \ldots, 0)
+\in M(1)_0
+$$
+が次数付き加群 $M(1)$ を $S$ 上生成するという主張に移される。詳細は省略する。
+\end{proof}
+
+
+\section{可逆層と Proj への射}
+\label{constructions-section-invertible-proj}
+
+\noindent
+$T$ をスキームとし、$\mathcal{L}$ を $T$ 上の可逆層とする。切断
+$s \in \Gamma(T, \mathcal{L})$ に対し、$T_s$ で $s$ が消えない点からなる
+開部分集合を表す。Modules, Lemma \ref{modules-lemma-s-open} を参照。
+次の補題は、補題 \ref{constructions-lemma-apply} のわずかな一般化とみなせる。
+また、補題 \ref{constructions-lemma-morphism-proj} の一般化でもある。
+
+\begin{lemma}
+\label{constructions-lemma-invertible-map-into-proj}
+$A$ を次数付き環とする。
+$X = \text{Proj}(A)$ とおく。
+$T$ をスキームとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_T$-加群とする。
+$\psi : A \to \Gamma_*(T, \mathcal{L})$ を次数付き環の準同型とする。
+次のようにおく。
+$$
+U(\psi) = \bigcup\nolimits_{f \in A_{+}\text{ homogeneous}} T_{\psi(f)}
+$$
+準同型 $\psi$ は、スキームの標準射
+$$
+r_{\mathcal{L}, \psi} :
+U(\psi) \longrightarrow X
+$$
+と、$\mathbf{Z}$-次数付き $\mathcal{O}_T$-代数の写像
+$$
+\theta :
+r_{\mathcal{L}, \psi}^*\left(
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_X(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{L}^{\otimes d}|_{U(\psi)}.
+$$
+を誘導する。三つ組 $(U(\psi), r_{\mathcal{L}, \psi}, \theta)$ は、
+次の性質によって特徴づけられる。
+\begin{enumerate}
+\item 斉次元 $f \in A_{+}$ に対して
+$r_{\mathcal{L}, \psi}^{-1}(D_{+}(f)) = T_{\psi(f)}$ である。
+\item 任意の $d \geq 0$ に対して、図式
+$$
+\xymatrix{
+A_d \ar[d]_{(\ref{constructions-equation-global-sections})} \ar[r]_{\psi} &
+\Gamma(T, \mathcal{L}^{\otimes d}) \ar[d]^{restrict} \\
+\Gamma(X, \mathcal{O}_X(d)) \ar[r]^{\theta} &
+\Gamma(U(\psi), \mathcal{L}^{\otimes d})
+}
+$$
+は可換である。
+\end{enumerate}
+さらに、任意の $d \geq 1$ と任意の開部分スキーム $V \subset T$ で、切断
+$\psi(A_d)$ が $\mathcal{L}^{\otimes d}|_V$ を生成するものに対し、
+射 $r_{\mathcal{L}, \psi}|_V$ は射 $\varphi : V \to \text{Proj}(A)$ と一致し、
+写像 $\theta|_V$ は写像
+$\alpha : \varphi^*\mathcal{O}_X(d) \to \mathcal{L}^{\otimes d}|_V$ と一致する。
+ここで $(\varphi, \alpha)$ は、制限
+$\psi|_{A^{(d)}} : A^{(d)} \to \Gamma_*(V, \mathcal{L}^{\otimes d})$
+に付随する補題 \ref{constructions-lemma-converse-construction} の対である。
+\end{lemma}
+
+\begin{proof}
+(1) と (2) を満たす二つの三つ組 $(U, r : U \to X, \theta)$ および
+$(U', r' : U' \to X, \theta')$ があると仮定する。
+性質 (1) から $U = U' = U(\psi)$ であり、基礎位相空間の写像として
+$r = r'$ である。実際、開集合 $D_{+}(f)$ は $X$ の位相の基底をなし、かつ
+$X$ は sober 位相空間である（Algebra, Section \ref{algebra-section-proj} および
+Schemes, Lemma \ref{schemes-lemma-scheme-sober} を参照）。
+斉次元 $f \in A_{+}$ をとる。
+$\Gamma(D_{+}(f), \bigoplus_{n \in \mathbf{Z}} \mathcal{O}_X(n)) = A_f$
+であることに注意する。これは $\mathbf{Z}$-次数付き代数としての等式である。
+二つの $\mathbf{Z}$-次数付き環写像
+$$
+\theta, \theta' :
+A_f
+\longrightarrow
+\Gamma(T_{\psi(f)}, \bigoplus \mathcal{L}^{\otimes n}).
+$$
+を考える。左辺の $f$ による乗法（それぞれ右辺の $\psi(f)$ による乗法）は
+同型である。また、$\theta(x/1) = \theta'(x/1) = \psi(x)|_{T_{\psi(f)}}$
+であることも分かっている。これは (2) により任意の $x \in A$ に対して成り立つ。
+したがって、望むとおり $\theta = \theta'$ であることが容易に従う。
+次数 $0$ の部分を考えると $r^\sharp = (r')^\sharp$、すなわちスキームの射として
+$r = r'$ であることが従う。これで一意性が示された。
+
+\medskip\noindent
+次に存在を示す。いま示した一意性により、対 $(r, \theta)$ を $T$ 上局所的に
+構成すれば十分である。したがって $T = \Spec(R)$ はアフィンで、
+$\mathcal{L} = \mathcal{O}_T$ であり、ある斉次元 $f \in A_{+}$ に対して
+$\psi(f)$ が $\mathcal{O}_T = \mathcal{O}_T^{\otimes \deg(f)}$ を生成すると
+仮定してよい。言い換えると、$\psi(f) = u \in R^*$ は単元である。この場合、
+$\psi$ は次数付き環写像
+$$
+A \longrightarrow R[x] = \Gamma_*(T, \mathcal{O}_T)
+$$
+であり、$f$ を $ux^{\deg(f)}$ に写す。これは明らかに、$\mathbf{Z}$-次数付き環写像
+$\theta : A_f \to R[x, x^{-1}]$ に一意的に延長される。その際、$1/f$ を
+$u^{-1}x^{-\deg(f)}$ に写す。この写像の次数零部分は
+環写像 $A_{(f)} \to R$ を与え、これは射
+$r : T = \Spec(R) \to \Spec(A_{(f)}) = D_{+}(f) \subset X$ を与える。
+したがって、この特別な場合に $(r, \theta)$ を構成できた。
+
+\medskip\noindent
+補題の最後の主張を示そう。補題 \ref{constructions-lemma-converse-construction} によれば、
+そこで構成された射は、その主張に表示された図式を可換にする唯一の射である。
+本補題の図式の可換性から、$V$ と $A^{(d)}$ への制限後の可換性が従う。
+ゆえに結果を得る。
+\end{proof}
+
+\begin{remark}
+\label{constructions-remark-not-in-invertible-locus}
+仮定は上の補題 \ref{constructions-lemma-invertible-map-into-proj} と同じとする。
+射 $r_{\mathcal{L}, \psi}$ の像は、層 $\mathcal{O}_X(1)$ が可逆である軌跡に
+含まれるとは限らない。例を挙げる。
+$k$ を体とする。
+$S = k[A, B, C]$ を $\deg(A) = 1$, $\deg(B) = 2$, $\deg(C) = 3$ により
+次数付けする。
+$X = \text{Proj}(S)$ とおく。
+$T = \mathbf{P}^2_k = \text{Proj}(k[X_0, X_1, X_2])$ とおく。
+$\mathcal{L} = \mathcal{O}_T(1)$ は可逆であり、
+$\mathcal{O}_T(n) = \mathcal{L}^{\otimes n}$ であることを思い出す。
+写像の合成 $\psi$
+$$
+S \to k[X_0, X_1, X_2] \to \Gamma_*(T, \mathcal{L}).
+$$
+を考える。ここで第一の写像は $A \mapsto X_0$, $B \mapsto X_1^2$,
+$C \mapsto X_2^3$ であり、第二の写像は (\ref{constructions-equation-global-sections}) である。
+補題により、これは射
+$r_{\mathcal{L}, \psi} : T \to X = \text{Proj}(S)$ に対応する。
+この射が全射であることは容易に分かる。一方、
+注意 \ref{constructions-remark-not-isomorphism} で、層 $\mathcal{O}_X(1)$ は
+$X$ のすべての点で可逆ではないことを示した。
+\end{remark}
+
+
+\section{貼り合わせによる相対 Proj}
+\label{constructions-section-relative-proj-via-glueing}
+
+\begin{situation}
+\label{constructions-situation-relative-proj}
+ここで $S$ はスキームであり、$\mathcal{A}$ は準連接次数付き
+$\mathcal{O}_S$-代数である。
+\end{situation}
+
+\noindent
+本節では、スキームの射
+$$
+\underline{\text{Proj}}_S(\mathcal{A}) \longrightarrow S
+$$
+を構成する方法を概説する。その構成は斉次スペクトル
+$\text{Proj}(\Gamma(U, \mathcal{A}))$ を貼り合わせて得る。ここで $U$ は
+$S$ のアフィン開集合全体を動く。まず、アフィン開集合上での $\mathcal{A}$ の値の
+斉次スペクトルが、補題 \ref{constructions-lemma-relative-glueing} と同様に、適切な
+スキームの集まりをなすことを示す。
+
+\begin{lemma}
+\label{constructions-lemma-proj-inclusion}
+状況 \ref{constructions-situation-relative-proj} において、
+$U \subset U' \subset S$ がアフィン開集合であると仮定する。
+$A = \mathcal{A}(U)$ および $A' = \mathcal{A}(U')$ とおく。
+次数付き環の写像 $A' \to A$ は射
+$r : \text{Proj}(A) \to \text{Proj}(A')$ を誘導し、図式
+$$
+\xymatrix{
+\text{Proj}(A) \ar[r] \ar[d] &
+\text{Proj}(A') \ar[d] \\
+U \ar[r] &
+U'
+}
+$$
+はカルテジアンである。さらに、乗法写像と両立する標準同型
+$\theta : r^*\mathcal{O}_{\text{Proj}(A')}(n) \to
+\mathcal{O}_{\text{Proj}(A)}(n)$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$R = \mathcal{O}_S(U)$ および $R' = \mathcal{O}_S(U')$ とおく。
+写像 $R \otimes_{R'} A' \to A$ は同型であることに注意する。これは
+$\mathcal{A}$ が準連接だからである
+（例えば Schemes, Lemma \ref{schemes-lemma-widetilde-pullback} を参照）。
+したがって補題は補題 \ref{constructions-lemma-base-change-map-proj} から従う。
+\end{proof}
+
+\noindent
+特に、補題の射 $\text{Proj}(A) \to \text{Proj}(A')$ は開埋め込みである。
+
+\begin{lemma}
+\label{constructions-lemma-transitive-proj}
+状況 \ref{constructions-situation-relative-proj} において、
+$U \subset U' \subset U'' \subset S$ がアフィン開集合であると仮定する。
+$A = \mathcal{A}(U)$、$A' = \mathcal{A}(U')$ および
+$A'' = \mathcal{A}(U'')$ とおく。
+補題 \ref{constructions-lemma-proj-inclusion} の射
+$r : \text{Proj}(A) \to \text{Proj}(A')$ と
+$r' : \text{Proj}(A') \to \text{Proj}(A'')$ の合成は、
+同じ補題 \ref{constructions-lemma-proj-inclusion} の射
+$r'' : \text{Proj}(A) \to \text{Proj}(A'')$ を与える。
+同型 $\theta$ についても同様の主張が成り立つ。
+\end{lemma}
+
+\begin{proof}
+写像 $A'' \to A$ は $A'' \to A'$ と $A' \to A$ の合成なので、
+補題 \ref{constructions-lemma-morphism-proj-transitive} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-glue-relative-proj}
+状況 \ref{constructions-situation-relative-proj} において、次の性質をもつスキームの射
+$$
+\pi : \underline{\text{Proj}}_S(\mathcal{A}) \longrightarrow S
+$$
+が存在する。
+\begin{enumerate}
+\item 任意のアフィン開集合 $U \subset S$ に対して、同型
+$i_U : \pi^{-1}(U) \to \text{Proj}(A)$ が存在する。ここで $A = \mathcal{A}(U)$ とおく。
+\item アフィン開集合 $U \subset U' \subset S$ に対し、合成
+$$
+\xymatrix{
+\text{Proj}(A) \ar[r]^{i_U^{-1}} &
+\pi^{-1}(U) \ar[rr]^{inclusion} & &
+\pi^{-1}(U') \ar[r]^{i_{U'}} &
+\text{Proj}(A')
+}
+$$
+は、$A = \mathcal{A}(U)$、$A' = \mathcal{A}(U')$ とおくと、
+上の補題 \ref{constructions-lemma-proj-inclusion} の開埋め込みである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-relative-glueing}、\ref{constructions-lemma-proj-inclusion}、および
+\ref{constructions-lemma-transitive-proj} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-glue-relative-proj-twists}
+状況 \ref{constructions-situation-relative-proj} において、補題
+\ref{constructions-lemma-glue-relative-proj} の射
+$\pi : \underline{\text{Proj}}_S(\mathcal{A}) \to S$ には、次の追加構造が備わる。
+準連接 $\mathbf{Z}$-次数付き
+$\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}$-代数の層
+$\bigoplus\nolimits_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)$ と、
+次数付き $\mathcal{O}_S$-代数の射
+$$
+\psi :
+\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{n \geq 0}
+\pi_*\left(\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)\right)
+$$
+が存在し、次の性質によって一意に定まる。
+任意のアフィン開集合 $U \subset S$ で $A = \mathcal{A}(U)$ となるものに対して、
+同型
+$$
+\theta_U :
+i_U^*\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{O}_{\text{Proj}(A)}(n)
+\right)
+\longrightarrow
+\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)
+\right)|_{\pi^{-1}(U)}
+$$
+が $\mathbf{Z}$-次数付き $\mathcal{O}_{\pi^{-1}(U)}$-代数の同型として存在し、
+図式
+$$
+\xymatrix{
+A_n
+\ar[rr]_\psi
+\ar[dr]_-{(\ref{constructions-equation-global-sections})}
+& &
+\Gamma(\pi^{-1}(U),
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)) \\
+&
+\Gamma(\text{Proj}(A),
+\mathcal{O}_{\text{Proj}(A)}(n))
+\ar[ru]_-{\theta_U}
+&
+}
+$$
+は可換である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-relative-glueing-sheaves} を用いて、$\mathbf{Z}$-次数付き代数の層
+$\bigoplus_{n \in \mathbf{Z}} \mathcal{O}_{\text{Proj}(A)}(n)$ を貼り合わせる。
+ここで $A = \mathcal{A}(U)$ であり、$U \subset S$ はアフィン開集合を動き、
+貼り合わせはスキーム $\underline{\text{Proj}}_S(\mathcal{A})$ 上で行う。
+このために必要なデータは補題 \ref{constructions-lemma-proj-inclusion} で構成し、
+補題 \ref{constructions-lemma-relative-glueing-sheaves} の条件 (d) は
+補題 \ref{constructions-lemma-transitive-proj} で確認した。したがって、
+$\mathbf{Z}$-次数付き $\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}$-代数の層
+$\bigoplus_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)$ と、
+同型 $\theta_U$ を得る。これは、すべてのアフィン開集合 $U \subset S$ および
+すべての $n \in \mathbf{Z}$ に対して与えられる。
+任意のアフィン開集合 $U \subset S$ で $A = \mathcal{A}(U)$ となるものに対して写像
+$A \to \Gamma(\text{Proj}(A),
+\bigoplus_{n \geq 0} \mathcal{O}_{\text{Proj}(A)}(n))$ がある。
+したがって、相対的貼り合わせの関手性により写像 $\psi$ が存在する。
+注意 \ref{constructions-remark-relative-glueing-functorial} を参照。
+補題の図式は構成により可換である。
+これは $\mathbf{Z}$-次数付き
+$\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}$-代数の層
+$\bigoplus \mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)$ を特徴づける。
+実際、補題 \ref{constructions-lemma-morphism-proj} の証明は、これらの図式の可換性が写像
+$\theta_U$ を一意に定めることを示している。いくつかの詳細を省略する。
+\end{proof}
+
+
+\section{関手としての相対 Proj}
+\label{constructions-section-relative-proj}
+
+\noindent
+状況 \ref{constructions-situation-relative-proj} に身を置く。
+したがって $S$ はスキームであり、
+$\mathcal{A} = \bigoplus_{d \geq 0} \mathcal{A}_d$ は準連接次数付き
+$\mathcal{O}_S$-代数である。本節では、相対斉次スペクトルが表現する関手を構成することにより、
+$\text{Proj}$ の構成を相対化する。その結果として、スキームの射
+$$
+\underline{\text{Proj}}_S(\mathcal{A}) \longrightarrow S
+$$
+を構成する。これは $S$ のアフィン開集合上では次数付き環の斉次スペクトルの形をとる。
+議論は、節 \ref{constructions-section-spec} の相対スペクトルに関する議論にならう。
+$\text{Proj}(A)$ の形のスキームを貼り合わせる、より容易な方法は、ここで
+$A = \Gamma(U, \mathcal{A})$、$U \subset S$ はアフィン開集合として、
+節 \ref{constructions-section-relative-proj-via-glueing} で説明した。本節の結果がその結果と
+同型であることも示す。
+
+\medskip\noindent
+当面、整数 $d \geq 1$ を固定する。
+Algebra, Section \ref{algebra-section-graded} の記法と同様に
+$\mathcal{A}^{(d)} = \bigoplus_{n \geq 0} \mathcal{A}_{nd}$ と表す。
+$T$ をスキームとする。
+{\it 四つ組 $(d, f : T \to S, \mathcal{L}, \psi)$} を考える。これは $T$ 上の
+四つ組で、次を満たすものとする。
+\begin{enumerate}
+\item $d$ は上で固定した整数である。
+\item $f : T \to S$ はスキームの射である。
+\item $\mathcal{L}$ は可逆 $\mathcal{O}_T$-加群である。
+\item
+$\psi : f^*\mathcal{A}^{(d)} \to \bigoplus_{n \geq 0}\mathcal{L}^{\otimes n}$
+は次数付き $\mathcal{O}_T$-代数の準同型であり、
+$f^*\mathcal{A}_d \to \mathcal{L}$ は全射である。
+\end{enumerate}
+射 $h : T' \to T$ と四つ組 $(d, f, \mathcal{L}, \psi)$ が与えられたとする。
+この四つ組が $T$ 上にあるとき、これを四つ組
+$(d, f \circ h, h^*\mathcal{L}, h^*\psi)$ に引き戻せる。これは $T'$ 上の四つ組である。
+二つの四つ組 $(d, f, \mathcal{L}, \psi)$ と
+$(d, f', \mathcal{L}', \psi')$ が、$T$ 上で同じ整数 $d$ をもつとする。これらは
+$f = f'$ であり、同型 $\beta : \mathcal{L} \to \mathcal{L}'$ が存在して、
+$\beta \circ \psi = \psi'$ が次数付き $\mathcal{O}_T$-代数写像
+$f^*\mathcal{A}^{(d)} \to \bigoplus_{n \geq 0} (\mathcal{L}')^{\otimes n}$
+として成り立つとき、{\it 強同値} であるという。
+
+\medskip\noindent
+各整数 $d \geq 1$ に対して
+\begin{eqnarray*}
+F_d : \Sch^{opp} & \longrightarrow & \textit{Sets}, \\
+T & \longmapsto &
+\{\text{上記の }
+(d, f : T \to S, \mathcal{L}, \psi)
+\text{ の強同値類}\}
+\end{eqnarray*}
+を、上で定義した引き戻しとともに定義する。
+
+\begin{lemma}
+\label{constructions-lemma-proj-base-change}
+状況 \ref{constructions-situation-relative-proj} において、$d \geq 1$ とする。
+$F_d$ を上の $(S, \mathcal{A})$ に付随する関手とする。
+$g : S' \to S$ をスキームの射とする。
+$\mathcal{A}' = g^*\mathcal{A}$ とおく。$F_d'$ を上の
+$(S', \mathcal{A}')$ に付随する関手とする。このとき、関手の標準同型
+$$
+F'_d \cong h_{S'} \times_{h_S} F_d
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+四つ組
+$(d, f' : T \to S', \mathcal{L}',
+\psi' : (f')^*(\mathcal{A}')^{(d)} \to
+\bigoplus_{n \geq 0} (\mathcal{L}')^{\otimes n})$
+は、四つ組
+$(d, f, \mathcal{L},
+\psi : f^*\mathcal{A}^{(d)} \to
+\bigoplus_{n \geq 0} \mathcal{L}^{\otimes n})$
+に、$f$ の $f = g \circ f'$ という分解を加えたものと同じである。
+実際、この対応は $f = g \circ f'$、$\mathcal{L} = \mathcal{L}'$、
+$\psi = \psi'$ によって与えられる。ここでは同一視
+$(f')^*(\mathcal{A}')^{(d)} = (f')^*g^*(\mathcal{A}^{(d)}) =
+f^*\mathcal{A}^{(d)}$
+を用いる。ゆえに補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-relative-proj-affine}
+状況 \ref{constructions-situation-relative-proj} において、$F_d$ を上の
+$(d, S, \mathcal{A})$ に付随する関手とする。
+$S$ がアフィンなら、$F_d$ は開部分スキーム
+$U_d$ (\ref{constructions-equation-Ud}) によって表現される。これはスキーム
+$\text{Proj}(\Gamma(S, \mathcal{A}))$ の開部分スキームである。
+\end{lemma}
+
+\begin{proof}
+$S = \Spec(R)$ および $A = \Gamma(S, \mathcal{A})$ と書く。
+すると $A$ は次数付き $R$-代数であり、$\mathcal{A} = \widetilde A$ である。
+補題を証明するには、関手 $F_d$ を節 \ref{constructions-section-morphisms-proj} で定義した
+三つ組の関手 $F_d^{triples}$ と同一視すればよい。
+
+\medskip\noindent
+$(d, f : T \to S, \mathcal{L}, \psi)$ を四つ組とする。
+$\psi$ を $\mathcal{O}_S$-加群の写像
+$\mathcal{A}^{(d)} \to \bigoplus_{n \geq 0} f_*\mathcal{L}^{\otimes n}$
+とみなしてよい。$\mathcal{A}^{(d)}$ は準連接なので、これは次数付き環の
+$R$-線形準同型
+$A^{(d)} \to \Gamma(S, \bigoplus_{n \geq 0} f_*\mathcal{L}^{\otimes n})$
+と同じものである。明らかに
+$\Gamma(S, \bigoplus_{n \geq 0} f_*\mathcal{L}^{\otimes n}) =
+\Gamma_*(T, \mathcal{L})$ である。したがって、四つ組に三つ組
+$(d, \mathcal{L}, \psi)$ を対応させられる。
+
+\medskip\noindent
+逆に、$(d, \mathcal{L}, \psi)$ を三つ組とする。合成
+$R \to A_0 \to \Gamma(T, \mathcal{O}_T)$ は射
+$f : T \to S = \Spec(R)$ を定める。Schemes, Lemma
+\ref{schemes-lemma-morphism-into-affine} を参照。この $f$ の選択のもとで、写像
+$A^{(d)} \to \Gamma(S, \bigoplus_{n \geq 0} f_*\mathcal{L}^{\otimes n})$
+は $R$-線形であり、したがって $\psi$ に対応する。この写像は四つ組
+$(d, f : T \to S, \mathcal{L}, \psi)$ に使える。
+これが関手の同型 $F_d = F_d^{triples}$ を確立することの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-relative-proj-d}
+状況 \ref{constructions-situation-relative-proj} において、関手 $F_d$ はスキームによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+Schemes, Lemma \ref{schemes-lemma-glue-functors} を用いる。
+
+\medskip\noindent
+まず $F_d$ が Zariski 位相に関する層条件を満たすことを確認する。すなわち、
+$T$ をスキームとし、$T = \bigcup_{i \in I} U_i$ を開被覆とし、
+$(d, f_i, \mathcal{L}_i, \psi_i) \in F_d(U_i)$ が与えられ、
+$(d, f_i, \mathcal{L}_i, \psi_i)|_{U_i \cap U_j}$ と
+$(d, f_j, \mathcal{L}_j, \psi_j)|_{U_i \cap U_j}$ が強同値であると仮定する。
+これは、射 $f_i : U_i \to S$ がスキームの射
+$f : T \to S$ に貼り合わさり、$f|_{I_i} = f_i$ を満たすことを意味する。
+Schemes, Section \ref{schemes-section-glueing-schemes} を参照。
+したがって $f_i^*\mathcal{A}^{(d)} = f^*\mathcal{A}^{(d)}|_{U_i}$ である。
+また、同型
+$\beta_{ij} : \mathcal{L}_i|_{U_i \cap U_j} \to \mathcal{L}_j|_{U_i \cap U_j}$
+が存在し、$\beta_{ij} \circ \psi_i = \psi_j$ となることも意味する。これは
+$U_i \cap U_j$ 上で成り立つ。同型 $\beta_{ij}$ はこの要請によって一意に定まる。
+実際、写像 $f_i^*\mathcal{A}_d \to \mathcal{L}_i$ は全射である。特に
+$\beta_{jk} \circ \beta_{ij} = \beta_{ik}$ が $U_i \cap U_j \cap U_k$ 上で成り立つ。
+したがって Sheaves, Section \ref{sheaves-section-glueing-sheaves} により、
+可逆層 $\mathcal{L}_i$ は可逆 $\mathcal{O}_T$-加群 $\mathcal{L}$ に貼り合わさり、
+射 $\psi_i$ は $\mathcal{O}_T$-代数の射
+$\psi : f^*\mathcal{A}^{(d)} \to \bigoplus_{n \geq 0} \mathcal{L}^{\otimes n}$
+に貼り合わさる。これで $F_d$ が Zariski 位相に関する層条件を満たすことが示された。
+
+\medskip\noindent
+$S = \bigcup_{i \in I} U_i$ をアフィン開被覆とする。
+$F_{d, i} \subset F_d$ を、対 $(f : T \to S, \varphi)$ で
+$f(T) \subset U_i$ を満たすものからなる部分関手とする。
+
+\medskip\noindent
+各 $F_{d, i}$ が表現可能であることを示さなければならない。
+実際、補題 \ref{constructions-lemma-proj-base-change} により、$F_{d, i}$ は
+$U_i$ とその準連接次数付き $\mathcal{O}_{U_i}$-代数
+$\mathcal{A}|_{U_i}$ に付随する関手と同一視される。
+したがって結果は補題 \ref{constructions-lemma-relative-proj-affine} から従う。
+
+\medskip\noindent
+次に、$F_{d, i} \subset F_d$ が開埋め込みによって表現可能であることを示す。
+$(f : T \to S, \varphi) \in F_d(T)$ とする。$V_i = f^{-1}(U_i)$ とおく。
+$F_{d, i}$ の定義から、$a : T' \to T$ が与えられたとき、
+$a^*(f, \varphi) \in F_{d, i}(T')$ であることと
+$a(T') \subset V_i$ であることは同値である。これが示すべきことであった。
+
+\medskip\noindent
+最後に、族 $(F_{d, i})_{i \in I}$ が $F_d$ を覆うことを示す。
+$(f : T \to S, \varphi) \in F_d(T)$ とし、$V_i = f^{-1}(U_i)$ とおく。
+$S = \bigcup_{i \in I} U_i$ は $S$ の開被覆なので、
+$T = \bigcup_{i \in I} V_i$ は $T$ の開被覆である。さらに
+$(f, \varphi)|_{V_i} \in F_{d, i}(V_i)$ である。これで補題の証明は完了する。
+\end{proof}
+
+\noindent
+ここまでで、節 \ref{constructions-section-morphisms-proj} の末尾の内容を現在の相対的な設定で
+やり直し、$\underline{\text{Proj}}_S(\mathcal{A})$ によって表現される関手を
+定義できる。そのため、二つの四つ組
+$(d, f : T \to S, \mathcal{L}, \psi)$ と
+$(d', f' : T \to S, \mathcal{L}', \psi')$ の間の同値という概念を導入する。
+ここで整数 $d, d'$ の値は異なっていてもよい。
+すなわち、$f = f'$ であり、同型
+$\beta : \mathcal{L}^{\otimes d'} \to (\mathcal{L}')^{\otimes d}$ が存在して、
+$\beta \circ \psi|_{f^*\mathcal{A}^{(dd')}} = \psi'|_{f^*\mathcal{A}^{(dd')}}$
+となるとき、これらは {\it 同値} であるという。
+次の補題により、これは同値関係を定める。（これはまったく自明というわけではない。）
+
+
+\begin{lemma}
+\label{constructions-lemma-equivalent-relative}
+状況 \ref{constructions-situation-relative-proj} において、$T$ をスキームとする。
+$(d, f, \mathcal{L}, \psi)$、$(d', f', \mathcal{L}', \psi')$ を
+$T$ 上の二つの四つ組とする。次は同値である。
+\begin{enumerate}
+\item $m = \text{lcm}(d, d')$ とし、$m = ad = a'd'$ と書く。
+$f = f'$ であり、同型
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$
+が存在して、$\beta \circ \psi|_{f^*\mathcal{A}^{(m)}}$ と
+$\psi'|_{f^*\mathcal{A}^{(m)}}$ が次数付き環写像
+$f^*\mathcal{A}^{(m)} \to \bigoplus_{n \geq 0} (\mathcal{L}')^{\otimes mn}$
+として一致する。
+\item 四つ組 $(d, f, \mathcal{L}, \psi)$ と
+$(d', f', \mathcal{L}', \psi')$ は同値である。
+\item $f = f'$ であり、ある正の整数 $m = ad = a'd'$ に対して同型
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$
+が存在して、$\beta \circ \psi|_{f^*\mathcal{A}^{(m)}}$ と
+$\psi'|_{f^*\mathcal{A}^{(m)}}$ が次数付き環写像
+$f^*\mathcal{A}^{(m)} \to \bigoplus_{n \geq 0} (\mathcal{L}')^{\otimes mn}$
+として一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が (2) を含意することは明らかであり、可逆層のより可除な次数と冪へ制限することで
+(2) は (3) を含意する。ある整数 $m = ad = a'd'$ に対して (3) を仮定する。
+$m_0 = \text{lcm}(d, d')$ とし、$m_0 = a_0d = a'_0d'$ と書く。
+(3) の性質をもつ同型
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$
+が与えられている。同じ性質をもつ同型
+$\beta_0 : \mathcal{L}^{\otimes a_0} \to (\mathcal{L}')^{\otimes a'_0}$
+を見つけたい。仮定により、写像
+$\psi : f^*\mathcal{A}_d \to \mathcal{L}$ および
+$\psi' : (f')^*\mathcal{A}_{d'} \to \mathcal{L}'$ は全射なので、写像
+$\psi : f^*\mathcal{A}_{m_0} \to \mathcal{L}^{\otimes a_0}$ および
+$\psi' : (f')^*\mathcal{A}_{m_0} \to (\mathcal{L}')^{\otimes a_0}$ についても同様である。
+したがって $\beta_0$ が存在するなら、条件
+$\beta_0 \circ \psi = \psi'$ によって一意に定まる。これは $T$ 上局所的に
+作業してよいことを意味する。したがって
+$f = f' : T \to S$ の像がアフィン開集合に含まれると仮定してよい。
+言い換えると、$S$ はアフィンであると仮定してよい。この場合、結果は三つ組に対する
+対応する結果（補題 \ref{constructions-lemma-equivalent} を参照）と、アフィンな基底の場合には
+三つ組と四つ組が対応すること（補題 \ref{constructions-lemma-relative-proj-affine} の証明を参照）
+から従う。
+\end{proof}
+
+\noindent
+$d' = ad$ と仮定する。関手の変換 $F_d \to F_{d'}$ で、
+四つ組 $(d, f, \mathcal{L}, \psi)$ が $T$ 上に与えられたとき、四つ組
+$(d', f, \mathcal{L}^{\otimes a}, \psi|_{f^*\mathcal{A}^{(d')}})$
+を対応させるものを考える。
+補題 \ref{constructions-lemma-equivalent-relative} の含意の一つにより、
+変換 $F_d \to F_{d'}$ は単射である。
+準コンパクトスキーム $T$ に対して
+$$
+F(T) = \bigcup\nolimits_{d \in \mathbf{N}} F_d(T)
+$$
+と定義し、遷移写像は上で説明したものとする。これは明らかに、準コンパクトスキームの
+圏上の集合に値をとる反変関手を定める。一般のスキーム $T$ に対して
+$$
+F(T)
+=
+\lim_{V \subset T\text{ quasi-compact open}} F(V).
+$$
+と定義する。言い換えると、$\xi$ を $F(T)$ の元とすると、これは元
+$\xi_V \in F(V)$ の両立する選択系に対応する。ここで $V$ は $T$ の
+準コンパクト開集合全体を動く。
+引き戻し写像 $F(T) \to F(T')$ の定義は省略する。これはスキームの射
+$T' \to T$ に対するものである。
+こうして関手
+\begin{equation}
+\label{constructions-equation-proj}
+F : \Sch^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+を定義した。
+
+\begin{lemma}
+\label{constructions-lemma-relative-proj}
+状況 \ref{constructions-situation-relative-proj} において、上の関手 $F$ はスキームによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+$U_d \to S$ を、上で定義した関手 $F_d$ を表現するスキームとする。
+$\mathcal{L}_d$ および
+$\psi^d : \pi_d^*\mathcal{A}^{(d)} \to
+\bigoplus_{n \geq 0} \mathcal{L}_d^{\otimes n}$ を普遍対象とする。
+$d | d'$ なら、四つ組
+$(d', \pi_d, \mathcal{L}_d^{\otimes d'/d}, \psi^d|_{\mathcal{A}^{(d')}})$
+を考えられ、これは標準射 $U_d \to U_{d'}$ を定める。この射は $S$ 上にある。
+構成により、この射は上で定義した関手の変換
+$F_d \to F_{d'}$ に対応する。
+
+\medskip\noindent
+任意のアフィン開集合 $\Spec(R) = V \subset S$ に対して
+$A = \Gamma(V, \mathcal{A})$ とおくと、基底変換 $U_{d, V}$ と
+$\text{Proj}(A)$ の対応する開部分スキームとの標準同一視がある。
+補題 \ref{constructions-lemma-relative-proj-affine} を参照。さらに、上で構成した射
+$U_{d, V} \to U_{d', V}$ は $\text{Proj}(A)$ における開集合の包含に対応する。
+したがって $U_d \to U_{d'}$ は開埋め込みである。
+
+\medskip\noindent
+これにより $X$ を構成できる。すなわち、スキーム $U_d$ を開埋め込み
+$U_d \to U_{d'}$ に沿って貼り合わせる。技術的には、列
+$d_1 | d_2 | d_3 | \ldots$ を選ぶのが便利である。この列は、各正整数がある
+$d_i$ を割り切るように選び、上の開埋め込みを用いて単に
+$X = \bigcup U_{d_i}$ とするのが便利である。
+このとき $X$ が関手 $F$ を表現することは容易に証明できる。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-glueing-gives-functor-proj}
+状況 \ref{constructions-situation-relative-proj} において、補題 \ref{constructions-lemma-glue-relative-proj} で
+構成したスキーム $\pi : \underline{\text{Proj}}_S(\mathcal{A}) \to S$ と、
+関手 $F$ を表現するスキームとは、$S$ 上のスキームとして標準的に同型である。
+\end{lemma}
+
+\begin{proof}
+$X$ を関手 $F$ を表現するスキームとする。$X$ は $S$ 上のスキームであることに
+注意する。実際、関手 $F$ には自然変換 $F \to h_S$ が備わる。
+$Y = \underline{\text{Proj}}_S(\mathcal{A})$ と書く。
+$X \cong Y$ が $S$-スキームとして成り立つことを示さなければならない。
+二つの議論を与える。
+
+\medskip\noindent
+第一の議論は、補題 \ref{constructions-lemma-relative-proj} の証明における $X$ の構成を用いる。
+これはスキーム $U_d$ の合併としての構成であり、各スキームは $F_d$ を表現する。
+$S$ の各アフィン開集合上で、$X$ をその開集合上の $\mathcal{A}$ の切断の
+斉次スペクトルと同一視できる。これは開集合 $U_d$ について成り立っていたからである。
+さらに、これらの同一視は、より小さなアフィン開集合へのさらなる制限と両立する。
+一方、$Y$ はこれらの斉次スペクトルを貼り合わせて構成された。
+したがって、これらの同型を貼り合わせて $X$ と
+$\underline{\text{Proj}}_S(\mathcal{A})$ の間の所望の同型を得る。
+詳細は省略する。
+
+\medskip\noindent
+第二の議論を述べる。補題 \ref{constructions-lemma-glue-relative-proj-twists} により、
+次数付き代数の射
+$$
+\psi : \pi^*\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{n \geq 0} \mathcal{O}_Y(n)
+$$
+が $Y$ 上に存在し、$S$ のアフィン開集合上の切断では
+(\ref{constructions-equation-global-sections}) と一致する。したがって各 $y \in Y$ に対して、
+開近傍 $V \subset Y$ と整数が存在する。この開近傍は $y$ を含み、その整数を
+$d \geq 1$ と書く。このとき $d | n$ なら層
+$\mathcal{O}_Y(n)|_V$ は可逆であり、乗法写像
+$\mathcal{O}_Y(n)|_V \otimes_{\mathcal{O}_V} \mathcal{O}_Y(m)|_V
+\to \mathcal{O}_Y(n + m)|_V$ は同型である。したがって、$\psi$ を層
+$\pi^*\mathcal{A}^{(d)}|_V$ に制限すると $F_d(V)$ の元が得られる。
+開集合 $V$ は $Y$ を覆うので、「$\psi$」は $F(Y)$ の元を与える。
+したがって標準射 $Y \to X$ を得る。これは $S$ 上の射である。
+この構成は完全に標準的なので、これが同型であることを確かめるには
+$S$ 上局所的に作業してよい。ゆえに $S$ がアフィンの場合に帰着し、
+その場合、結果は明らかである。
+\end{proof}
+
+\begin{definition}
+\label{constructions-definition-relative-proj}
+$S$ をスキームとする。$\mathcal{A}$ を次数付き $\mathcal{O}_S$-代数の準連接層とする。
+{\it $\mathcal{A}$ の $S$ 上の相対斉次スペクトル}、または
+{\it $\mathcal{A}$ の $S$ 上の斉次スペクトル}、または
+{\it $\mathcal{A}$ の $S$ 上の相対 Proj} とは、
+補題 \ref{constructions-lemma-glue-relative-proj} で構成された、関手
+$F$ (\ref{constructions-equation-proj}) を表現するスキームをいう。
+補題 \ref{constructions-lemma-glueing-gives-functor-proj} を参照。
+これを $\pi : \underline{\text{Proj}}_S(\mathcal{A}) \to S$ と表す。
+\end{definition}
+
+\noindent
+相対 Proj には、$\mathbf{Z}$-次数付き代数の準連接層
+$\bigoplus_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)$
+（構造層の捩り）と、次数付き代数の「普遍」準同型
+$$
+\psi_{univ} :
+\mathcal{A}
+\longrightarrow
+\pi_*\left(
+\bigoplus\nolimits_{n \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)
+\right)
+$$
+が備わる。補題 \ref{constructions-lemma-glue-relative-proj-twists} を参照。
+これは必要なら準同型
+$$
+\psi_{univ} :
+\pi^*\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{n \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n)
+$$
+とみなすこともできる。次の補題は、この対象の普遍性を定式化したものである。
+
+
+\begin{lemma}
+\label{constructions-lemma-tie-up-psi}
+状況 \ref{constructions-situation-relative-proj} において、
+$(f : T \to S, d, \mathcal{L}, \psi)$ を四つ組とする。
+$r_{d, \mathcal{L}, \psi} : T \to \underline{\text{Proj}}_S(\mathcal{A})$
+を、付随する $S$-射とする。
+$\mathbf{Z}$-次数付き $\mathcal{O}_T$-代数の同型
+$$
+\theta :
+r_{d, \mathcal{L}, \psi}^*\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(nd)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n}
+$$
+が存在し、次の図式は可換である。
+$$
+\xymatrix{
+\mathcal{A}^{(d)} \ar[rr]_-{\psi}
+ \ar[rd]_-{\psi_{univ}} & &
+f_*\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}}
+\mathcal{L}^{\otimes n}
+\right) \\
+ &
+\pi_*\left(
+\bigoplus\nolimits_{n \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(nd)
+\right) \ar[ru]_\theta
+}
+$$
+この図式の可換性は $\theta$ を一意に定める。
+\end{lemma}
+
+\begin{proof}
+四つ組 $(f : T \to S, d, \mathcal{L}, \psi)$ は $F_d(T)$ の元を定める。
+$U_d \subset \underline{\text{Proj}}_S(\mathcal{A})$ を、層
+$\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(d)$ が可逆であり、かつ
+$\psi_{univ} : \pi^*\mathcal{A}_d \to
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(d)$
+の像によって生成される軌跡とする。補題 \ref{constructions-lemma-relative-proj} の証明を参照すると、
+$U_d$ は関手 $F_d$ を表現する。したがって、四つ組
+$(U_d \to S, d, \mathcal{O}_{U_d}(d), \psi_{univ}|_{\mathcal{A}^{(d)}})$
+が普遍族、すなわち $F_d(U_d)$ における表現対象であることを示せば結果が従う。
+これは $S$ のアフィン開集合に制限した後で示してよい。なぜなら、
+(a) 関手 $F_d$ の形成は基底変換と可換であり
+（補題 \ref{constructions-lemma-proj-base-change} を参照）、(b) 対
+$(\bigoplus_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(n),
+\psi_{univ})$
+は $S$ のアフィン開集合上で貼り合わせて構成されたからである
+（補題 \ref{constructions-lemma-glue-relative-proj-twists} を参照）。
+したがって $S$ はアフィンと仮定してよい。この場合、四つ組の関手 $F_d$ と
+三つ組の関手 $F_d$ は一致し（補題 \ref{constructions-lemma-relative-proj-affine} の証明を参照）、
+さらに補題 \ref{constructions-lemma-proj-functor-strict} により
+$(d, \mathcal{O}_{U_d}(d), \psi^d)$ は $U_d$ 上の普遍三つ組である。
+補題 \ref{constructions-lemma-relative-proj-affine} の証明における同一視を逆にたどると、
+$(U_d \to S, d, \mathcal{O}_{U_d}(d), \psi_{univ}|_{\mathcal{A}^{(d)}})$
+が所望の普遍四つ組であることが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-relative-proj-separated}
+$S$ をスキームとし、$\mathcal{A}$ を次数付き $\mathcal{O}_S$-代数の
+準連接層とする。射
+$\pi : \underline{\text{Proj}}_S(\mathcal{A}) \to S$
+は分離的である。
+\end{lemma}
+
+\begin{proof}
+射が分離的であることを示すには基底上局所的に作業してよい。
+Schemes, Section \ref{schemes-section-separation-axioms} を参照。
+構成により、$\underline{\text{Proj}}_S(\mathcal{A})$ は任意のアフィン
+$U \subset S$ 上で $\text{Proj}(A)$ と同型であり、ここで
+$A = \mathcal{A}(U)$ である。補題 \ref{constructions-lemma-proj-separated} により
+$\text{Proj}(A)$ は分離的である。したがって
+$\text{Proj}(A) \to U$ は分離的である
+（Schemes, Lemma \ref{schemes-lemma-compose-after-separated} を参照）。
+これが求める主張である。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-relative-proj-base-change}
+$S$ をスキームとし、$\mathcal{A}$ を次数付き $\mathcal{O}_S$-代数の準連接層とする。
+$g : S' \to S$ をスキームの任意の射とする。このとき標準同型
+$$
+r :
+\underline{\text{Proj}}_{S'}(g^*\mathcal{A})
+\longrightarrow
+S' \times_S \underline{\text{Proj}}_S(\mathcal{A})
+$$
+と、それに対応する同型
+$$
+\theta :
+r^*\text{pr}_2^*\left(\bigoplus\nolimits_{d \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(d)\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_{S'}(g^*\mathcal{A})}(d)
+$$
+があり、後者は $\mathbf{Z}$-次数付き
+$\mathcal{O}_{\underline{\text{Proj}}_{S'}(g^*\mathcal{A})}$-代数の同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-proj-base-change} と、補題 \ref{constructions-lemma-relative-proj} における
+$\underline{\text{Proj}}_S(\mathcal{A})$ の、スキーム $U_d$ の合併としての
+構成から従う。これらのスキームは関手 $F_d$ を表現する。
+貼り合わせによる相対 Proj の構成で述べると、この同型は
+補題 \ref{constructions-lemma-base-change-map-proj} で構成した同型によって与えられ、
+そこから同型 $\theta$ が得られる。いくつかの詳細を省略する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-apply-relative}
+$S$ をスキームとする。
+$\mathcal{A}$ を次数付き $\mathcal{O}_S$-加群の準連接層で、
+$\mathcal{A}_0$-代数として $\mathcal{A}_1$ によって生成されるものとする。
+この場合、スキーム $X = \underline{\text{Proj}}_S(\mathcal{A})$ は関手
+$F_1$ を表現する。この関手は、スキーム $f : T \to S$ で $S$ 上のものに対し、
+対 $(\mathcal{L}, \psi)$ で次を満たすものの集合を対応させる。
+\begin{enumerate}
+\item $\mathcal{L}$ は可逆 $\mathcal{O}_T$-加群である。
+\item $\psi : f^*\mathcal{A} \to \bigoplus_{n \geq 0} \mathcal{L}^{\otimes n}$
+は次数付き $\mathcal{O}_T$-代数準同型であり、
+$f^*\mathcal{A}_1 \to \mathcal{L}$ は全射である。
+\end{enumerate}
+ここで、上の強同値まで同一視する。さらに、この場合、すべての準連接層
+$\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}(n)$ は可逆
+$\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}$-加群であり、乗法写像は同型
+$
+\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}(n)
+\otimes_{\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}}
+\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}(m) =
+\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}(n + m)$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+補題の仮定のもとで、層
+$\mathcal{O}_{\underline{\text{Proj}}(\mathcal{A})}(n)$ は可逆であり、
+乗法写像は同型である。これは、$S$ のアフィン開集合上で、
+補題 \ref{constructions-lemma-relative-proj} と補題 \ref{constructions-lemma-apply} により従う。
+したがって $X$ は実際に関手 $F_1$ を表現する。
+補題 \ref{constructions-lemma-relative-proj} の証明を参照。
+\end{proof}
+
+
+\section{相対 Proj 上の準連接層}
+\label{constructions-section-quasi-coherent-relative-proj}
+
+\noindent
+相対的な設定で次数付き加群を扱う方法を簡単に論じる。
+
+\medskip\noindent
+状況 \ref{constructions-situation-relative-proj} に身を置く。したがって $S$ はスキームであり、
+$\mathcal{A}$ は準連接次数付き $\mathcal{O}_S$-代数である。
+$\mathcal{M} = \bigoplus_{n \in \mathbf{Z}} \mathcal{M}_n$ を次数付き
+$\mathcal{A}$-加群で、$\mathcal{O}_S$-加群として準連接なものとする。
+$\underline{\text{Proj}}_S(\mathcal{A})$ 上の、これに付随する準連接加群の層を記述する。
+まず、相対 Proj に写るスキーム $T$ 上でのこの層の値を記述する。
+
+\medskip\noindent
+$T$ をスキームとする。$(d, f : T \to S, \mathcal{L}, \psi)$ を、
+節 \ref{constructions-section-relative-proj} と同様な $T$ 上の四つ組とする。
+準連接層 $\widetilde{\mathcal{M}}_T$ で、$\mathcal{O}_T$-加群のものを次のように定義する。
+\begin{equation}
+\label{constructions-equation-widetilde-M}
+\widetilde{\mathcal{M}}_T =
+\left(
+f^*\mathcal{M}^{(d)}
+\otimes_{f^*\mathcal{A}^{(d)}}
+\left(\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n}\right)
+\right)_0
+\end{equation}
+したがって $\widetilde{\mathcal{M}}_T$ は次数 $0$ 部分である。これは、次数付き
+$f^*\mathcal{A}^{(d)}$-加群 $\mathcal{M}^{(d)}$ と
+$\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n}$ のテンソル積の
+次数零部分を意味する。記法では省略したが、層 $\widetilde{\mathcal{M}}_T$ は
+四つ組に依存することに注意する。この構成には、任意の射
+$g : T' \to T$ が与えられたとき
+$\widetilde{\mathcal{M}}_{T'} = g^*\widetilde{\mathcal{M}}_T$
+となるという好ましい性質がある。ここで $\widetilde{\mathcal{M}}_{T'}$ は、
+引き戻した四つ組 $(d, f \circ g, g^*\mathcal{L}, g^*\psi)$ に付随する
+準連接層を表す。
+
+\medskip\noindent
+(\ref{constructions-equation-widetilde-M}) のすべての層は準連接なので、
+アフィン開集合 $\Spec(C) = V \subset T$ 上で構成を明示できる。ただしこれは
+アフィン開集合 $\Spec(R) = U \subset S$ に写るものとする。
+すなわち、$\mathcal{A}|_U$ が次数付き $R$-代数 $A$ に対応し、
+$\mathcal{M}|_U$ が次数付き $A$-加群 $M$ に対応し、
+$\mathcal{L}|_V$ が可逆 $C$-加群 $L$ に対応すると仮定する。
+写像 $\psi$ は次数付き $R$-代数写像
+$\gamma : A^{(d)} \to \bigoplus_{n \geq 0} L^{\otimes n}$
+を生じさせる。（$L$ のテンソル冪であり、これは $C$ 上でとる。）
+すると $(\widetilde{\mathcal{M}}_T)|_V$ は、$C$-加群
+$$
+N_{R, C, A, M, \gamma} =
+\left(
+M^{(d)} \otimes_{A^{(d)}, \gamma}
+\left(\bigoplus\nolimits_{n \in \mathbf{Z}} L^{\otimes n}\right)
+\right)_0
+$$
+に付随する準連接層である。仮定により、さらに $T$ をアフィン開集合
+$V$ で覆い、ある $a \in A_d$ が存在して $\gamma(a) \in L$ が
+$C$-基底となるようにできる。これは加群 $L$ の基底である。この場合、
+$N_{R, C, A, M, \gamma}$ の任意の元は純テンソル
+$\sum m_i \otimes \gamma(a)^{-n_i}$ の和であり、ここで
+$m_i \in M_{n_id}$ である。実際、各 $m_i$ に $a$ の適当な正の冪を掛けて
+項をまとめると、$N_{R, C, A, M, \gamma}$ の各元は
+$m \otimes \gamma(a)^{-n}$ と書ける。ここで $m \in M_{nd}$ かつ
+$n \gg 0$ である。言い換えると、この場合
+$$
+N_{R, C, A, M, \gamma} = M_{(a)} \otimes_{A_{(a)}} C
+$$
+である。ここで写像 $A_{(a)} \to C$ は
+$x/a^n \mapsto \gamma(x)/\gamma(a)^n$ である。言い換えると、これは
+$\widetilde{M}$ の $D_{+}(a) \subset \text{Proj}(A)$ 上での値を
+$\Spec(C)$ へ引き戻したものである。引き戻しは射
+$\Spec(C) \to D_{+}(a)$ に沿って行い、この射は $\gamma$ から得られる。
+
+\begin{lemma}
+\label{constructions-lemma-relative-proj-modules}
+状況 \ref{constructions-situation-relative-proj} において、次数付き
+$\mathcal{A}$-加群の任意の準連接層 $\mathcal{M}$ をとる。これは $S$ 上の層とする。
+この層には、標準的に付随する
+$\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}$-加群の層
+$\widetilde{\mathcal{M}}$ が存在し、次の性質をもつ。
+\begin{enumerate}
+\item スキーム $T$ と四つ組 $(T \to S, d, \mathcal{L}, \psi)$ が与えられ、
+この四つ組は $T$ 上にあり、射
+$h : T \to \underline{\text{Proj}}_S(\mathcal{A})$ に対応するとき、
+標準同型 $\widetilde{\mathcal{M}}_T = h^*\widetilde{\mathcal{M}}$ がある。
+ここで $\widetilde{\mathcal{M}}_T$ は (\ref{constructions-equation-widetilde-M}) によって定義される。
+\item (1) の同型は引き戻しと両立する。
+\item 標準写像
+$$
+\pi^*\mathcal{M}_0 \longrightarrow \widetilde{\mathcal{M}}.
+$$
+がある。
+\item 構成 $\mathcal{M} \mapsto \widetilde{\mathcal{M}}$ は
+$\mathcal{M}$ に関して関手的である。
+\item 構成 $\mathcal{M} \mapsto \widetilde{\mathcal{M}}$ は完全である。
+\item 補題 \ref{constructions-lemma-widetilde-tensor} と同様な標準写像
+$$
+\widetilde{\mathcal{M}}
+\otimes_{\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}}
+\widetilde{\mathcal{N}}
+\longrightarrow
+\widetilde{\mathcal{M} \otimes_\mathcal{A} \mathcal{N}}
+$$
+がある。
+\item (\ref{constructions-equation-global-sections-more-generally}) を一般化する標準写像
+$$
+\pi^*\mathcal{M}
+\longrightarrow
+\bigoplus\nolimits_{n \in \mathbf{Z}}
+\widetilde{\mathcal{M}(n)}
+$$
+が存在する。
+\item $\widetilde{\mathcal{M}}$ の形成は基底変換と可換である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。この補題は複数の部分に分割し、各部分を別々に証明すべきである。
+\end{proof}
+
+
+\section{相対 Proj の関手性}
+\label{constructions-section-functoriality-relative-proj}
+
+\noindent
+本節は、相対 Proj に対する節 \ref{constructions-section-functoriality-proj} の類似である。
+$S$ をスキームとする。次数付き $\mathcal{O}_S$-代数写像
+$\psi : \mathcal{A} \to \mathcal{B}$ は、付随する相対 Proj の射を
+常に生じさせるとは限らない。正しい結果は次のように述べられる。
+
+\begin{lemma}
+\label{constructions-lemma-morphism-relative-proj}
+$S$ をスキームとする。$\mathcal{A}$、$\mathcal{B}$ を二つの次数付き準連接
+$\mathcal{O}_S$-代数とする。次のようにおく。
+$p : X = \underline{\text{Proj}}_S(\mathcal{A}) \to S$ および
+$q : Y = \underline{\text{Proj}}_S(\mathcal{B}) \to S$。
+$\psi : \mathcal{A} \to \mathcal{B}$ を次数付き $\mathcal{O}_S$-代数の
+準同型とする。標準開集合 $U(\psi) \subset Y$ と、$S$ 上のスキームの標準射
+$$
+r_\psi :
+U(\psi)
+\longrightarrow
+X
+$$
+および $\mathbf{Z}$-次数付き $\mathcal{O}_{U(\psi)}$-代数の写像
+$$
+\theta = \theta_\psi :
+r_\psi^*\left(
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_X(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_{U(\psi)}(d).
+$$
+がある。三つ組 $(U(\psi), r_\psi, \theta)$ は次の性質によって特徴づけられる。
+任意のアフィン開集合 $W \subset S$ に対して、三つ組
+$$
+(U(\psi) \cap p^{-1}W,\quad
+r_\psi|_{U(\psi) \cap p^{-1}W} : U(\psi) \cap p^{-1}W \to q^{-1}W,\quad
+\theta|_{U(\psi) \cap p^{-1}W})
+$$
+は、同一視
+は、補題 \ref{constructions-lemma-morphism-proj} において
+$\psi : \mathcal{A}(W) \to \mathcal{B}(W)$ に付随する三つ組に等しい。
+ここでは同一視 $p^{-1}W = \text{Proj}(\mathcal{A}(W))$ および
+$q^{-1}W = \text{Proj}(\mathcal{B}(W))$ を用いる。
+節 \ref{constructions-section-relative-proj-via-glueing} を参照。
+\end{lemma}
+
+\begin{proof}
+局所的な三つ組を貼り合わせればよく、補題は自らを証明する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-morphism-relative-proj-transitive}
+$S$ をスキームとする。$\mathcal{A}$、$\mathcal{B}$、$\mathcal{C}$ を
+準連接次数付き $\mathcal{O}_S$-代数とする。
+$X = \underline{\text{Proj}}_S(\mathcal{A})$、
+$Y = \underline{\text{Proj}}_S(\mathcal{B})$ および
+$Z = \underline{\text{Proj}}_S(\mathcal{C})$ とおく。
+$\varphi : \mathcal{A} \to \mathcal{B}$、
+$\psi : \mathcal{B} \to \mathcal{C}$ を次数付き
+$\mathcal{O}_S$-代数写像とする。このとき
+$$
+U(\psi \circ \varphi) = r_\varphi^{-1}(U(\psi))
+\quad
+\text{and}
+\quad
+r_{\psi \circ \varphi}
+=
+r_\varphi \circ r_\psi|_{U(\psi \circ \varphi)}.
+$$
+さらに、明らかな記法のもとで
+$$
+\theta_\psi \circ r_\psi^*\theta_\varphi
+=
+\theta_{\psi \circ \varphi}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-surjective-graded-rings-map-relative-proj}
+仮定と記法は上の補題 \ref{constructions-lemma-morphism-relative-proj} と同じとする。
+$\mathcal{A}_d \to \mathcal{B}_d$ が $d \gg 0$ に対して全射であると仮定する。
+このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item $r_\psi : Y \to X$ は閉埋め込みである。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は
+全射であるが、一般には同型ではない
+（$\mathcal{A} \to \mathcal{B}$ が全射であっても同様である）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-morphism-relative-proj} と
+補題 \ref{constructions-lemma-surjective-graded-rings-map-proj} を組み合わせると従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-eventual-iso-graded-rings-map-relative-proj}
+仮定と記法は上の補題 \ref{constructions-lemma-morphism-relative-proj} と同じとする。
+$\mathcal{A}_d \to \mathcal{B}_d$ がすべての $d \gg 0$ に対して
+同型であると仮定する。このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item $r_\psi : Y \to X$ は同型である。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-morphism-relative-proj} と
+補題 \ref{constructions-lemma-eventual-iso-graded-rings-map-proj} を組み合わせると従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-surjective-generated-degree-1-map-relative-proj}
+仮定と記法は上の補題 \ref{constructions-lemma-morphism-relative-proj} と同じとする。
+$\mathcal{A}_d \to \mathcal{B}_d$ が全射であり、これは $d \gg 0$ に対して
+成り立つと仮定する。さらに $\mathcal{A}$ が $\mathcal{A}_1$ によって生成され、
+その生成が $\mathcal{A}_0$ 上であると仮定する。
+このとき
+\begin{enumerate}
+\item $U(\psi) = Y$ である。
+\item $r_\psi : Y \to X$ は閉埋め込みである。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_X(n) \to \mathcal{O}_Y(n)$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-morphism-relative-proj} と
+補題 \ref{constructions-lemma-surjective-graded-rings-generated-degree-1-map-proj} を
+組み合わせると従う。
+\end{proof}
+
+
+\section{可逆層と相対 Proj への射}
+\label{constructions-section-invertible-relative-proj}
+
+\noindent
+次の補題がどこかで必要になると思われる。状況は次のとおりである。
+\begin{enumerate}
+\item $S$ をスキームとする。
+\item $\mathcal{A}$ を準連接次数付き $\mathcal{O}_S$-代数とする。
+\item $\pi : \underline{\text{Proj}}_S(\mathcal{A}) \to S$ で
+$S$ 上の相対斉次スペクトルを表す。
+\item $f : X \to S$ をスキームの射とする。
+\item $\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+\item $\psi : f^*\mathcal{A} \to
+\bigoplus_{d \geq 0} \mathcal{L}^{\otimes d}$ を次数付き
+$\mathcal{O}_X$-代数の準同型とする。
+\end{enumerate}
+このデータが与えられたとき
+$$
+U(\psi) = \bigcup\nolimits_{(U, V, a)} U_{\psi(a)}
+$$
+とおく。ここで $(U, V, a)$ は次を満たす。
+\begin{enumerate}
+\item $V \subset S$ はアフィン開集合である。
+\item $U = f^{-1}(V)$ である。
+\item $a \in \mathcal{A}(V)_{+}$ は斉次元である。
+\end{enumerate}
+実際、このとき $\psi(a) \in \Gamma(U, \mathcal{L}^{\otimes \deg(a)})$ であり、
+$U_{\psi(a)}$ は対応する開集合である
+（Modules, Lemma \ref{modules-lemma-s-open} を参照）。
+
+\begin{lemma}
+\label{constructions-lemma-invertible-map-into-relative-proj}
+仮定と記法は上と同じとする。射 $\psi$ は $S$ 上のスキームの標準射
+$$
+r_{\mathcal{L}, \psi} :
+U(\psi) \longrightarrow \underline{\text{Proj}}_S(\mathcal{A})
+$$
+と、次数付き $\mathcal{O}_{U(\psi)}$-代数の写像
+$$
+\theta :
+r_{\mathcal{L}, \psi}^*\left(
+\bigoplus\nolimits_{d \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \geq 0} \mathcal{L}^{\otimes d}|_{U(\psi)}
+$$
+を誘導し、これらは次の性質によって特徴づけられる。
+\begin{enumerate}
+\item 任意の開集合 $V \subset S$ と任意の $d \geq 0$ に対して、図式
+$$
+\xymatrix{
+\mathcal{A}_d(V) \ar[d]_{\psi} \ar[r]_{\psi} &
+\Gamma(f^{-1}(V), \mathcal{L}^{\otimes d}) \ar[d]^{restrict} \\
+\Gamma(\pi^{-1}(V),
+\mathcal{O}_{\underline{\text{Proj}}_S(\mathcal{A})}(d)) \ar[r]^{\theta} &
+\Gamma(f^{-1}(V) \cap U(\psi), \mathcal{L}^{\otimes d})
+}
+$$
+は可換である。
+\item 任意の $d \geq 1$ と任意の開部分スキーム $W \subset X$ で、
+$\psi|_W : f^*\mathcal{A}_d|_W \to \mathcal{L}^{\otimes d}|_W$
+が全射であるものに対し、射 $r_{\mathcal{L}, \psi}$ の制限は、相対斉次スペクトルの
+構成によって存在する射 $W \to \underline{\text{Proj}}_S(\mathcal{A})$ と一致する。
+定義 \ref{constructions-definition-relative-proj} を参照。
+\item 任意のアフィン開集合 $V \subset S$ に対して、制限
+$$
+(U(\psi) \cap f^{-1}(V), r_{\mathcal{L}, \psi}|_{U(\psi) \cap f^{-1}(V)},
+\theta|_{U(\psi) \cap f^{-1}(V)})
+$$
+は $i_V$（補題 \ref{constructions-lemma-glue-relative-proj} を参照）を通じて、
+補題 \ref{constructions-lemma-invertible-map-into-proj} の三つ組
+$(U(\psi'), r_{\mathcal{L}, \psi'}, \theta')$ と一致する。
+この三つ組は写像
+$\psi' : A = \mathcal{A}(V) \to \Gamma_*(f^{-1}(V), \mathcal{L}|_{f^{-1}(V)})$
+に付随し、この写像は $\psi$ から誘導される。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+特徴づけ (3) を用いて、射 $r_{\mathcal{L}, \psi}$ と $\theta$ を
+$S$ 上局所的に構成する。補題 \ref{constructions-lemma-invertible-map-into-proj} の
+一意性を用いて、この構成が貼り合わさることを示す。詳細は省略する。
+\end{proof}
+
+
+\section{可逆層による捩りと相対 Proj}
+\label{constructions-section-twisting-and-proj}
+
+\noindent
+$S$ をスキームとする。
+$\mathcal{A} = \bigoplus_{d \geq 0} \mathcal{A}_d$ を準連接次数付き
+$\mathcal{O}_S$-代数とする。
+$\mathcal{L}$ を $S$ 上の可逆層とする。
+この状況で、もう一つの準連接次数付き $\mathcal{O}_S$-代数
+$$
+\mathcal{B}
+=
+\bigoplus\nolimits_{d \geq 0}
+\mathcal{A}_d \otimes_{\mathcal{O}_S} \mathcal{L}^{\otimes d}
+$$
+を得る。$\mathcal{A}$ と $\mathcal{B}$ の相対斉次スペクトルは
+同型になる。
+
+\begin{lemma}
+\label{constructions-lemma-twisting-and-proj}
+記法 $S$、$\mathcal{A}$、$\mathcal{L}$、$\mathcal{B}$ は上と同じとする。
+標準同型
+$$
+\xymatrix{
+P = \underline{\text{Proj}}_S(\mathcal{A})
+\ar[rr]_g \ar[rd]_\pi & &
+\underline{\text{Proj}}_S(\mathcal{B}) = P'
+\ar[ld]^{\pi'} \\
+& S &
+}
+$$
+があり、次の性質をもつ。
+\begin{enumerate}
+\item 同型
+$\theta_n : g^*\mathcal{O}_{P'}(n)
+\to
+\mathcal{O}_P(n) \otimes \pi^*\mathcal{L}^{\otimes n}$
+があり、これらを合わせると $\mathbf{Z}$-次数付き代数の同型
+$$
+\theta :
+g^*\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{O}_{P'}(n)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{O}_P(n)
+\otimes \pi^*\mathcal{L}^{\otimes n}
+$$
+を与える。
+\item 任意の開集合 $V \subset S$ に対して、図式
+$$
+\xymatrix{
+\mathcal{A}_n(V) \otimes \mathcal{L}^{\otimes n}(V)
+\ar[r]_{multiply} \ar[d]^{\psi \otimes \pi^*}
+&
+\mathcal{B}_n(V) \ar[dd]^\psi \\
+\Gamma(\pi^{-1}V, \mathcal{O}_P(n)) \otimes
+\Gamma(\pi^{-1}V, \pi^*\mathcal{L}^{\otimes n})
+\ar[d]^{multiply} \\
+\Gamma(\pi^{-1}V, \mathcal{O}_P(n) \otimes \pi^*\mathcal{L}^{\otimes n})
+&
+\Gamma(\pi'^{-1}V, \mathcal{O}_{P'}(n)) \ar[l]_-{\theta_n}
+}
+$$
+は可換である。
+\item 必要に応じてここにさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{L} \cong \mathcal{O}_S$ のとき、これは恒等写像である。
+一般には、$S$ の開被覆を選び、その各部分上で $\mathcal{L}$ が自明化されるようにして、
+対応する写像を貼り合わせる。詳細は省略する。
+\end{proof}
+
+
+\section{射影束}
+\label{constructions-section-projective-bundle}
+
+\noindent
+$S$ をスキームとする。
+$\mathcal{E}$ を $\mathcal{O}_S$-加群の準連接層とする。
+加群の章、補題 \ref{modules-lemma-whole-tensor-algebra-permanence} により、
+対称代数 $\text{Sym}(\mathcal{E})$、すなわち
+$\mathcal{E}$ の $\mathcal{O}_S$ 上の対称代数は
+$\mathcal{O}_S$-代数の準連接層である。
+これは次数 $1$ で $\mathcal{O}_S$ 上生成されることに注意する。
+したがって、前節の構成、具体的には
+補題 \ref{constructions-lemma-relative-proj} と \ref{constructions-lemma-apply-relative}
+をこれに適用することができる。
+
+\begin{definition}
+\label{constructions-definition-projective-bundle}
+$S$ をスキームとする。$\mathcal{E}$ を準連接
+$\mathcal{O}_S$-加群とする\footnote{ここでは
+$\mathcal{E}$ が有限局所自由であるという条件を予想する読者もいるかもしれない。
+\cite[II, Definition 4.1.1]{EGA} との整合性を保つため、
+本書ではこの条件を課さない。}。
+記号
+$$
+\pi :
+\mathbf{P}(\mathcal{E}) = \underline{\text{Proj}}_S(\text{Sym}(\mathcal{E}))
+\longrightarrow
+S
+$$
+を用い、これを {\it $\mathcal{E}$ に付随する射影束} と呼ぶ。
+記号 $\mathcal{O}_{\mathbf{P}(\mathcal{E})}(n)$ は
+補題 \ref{constructions-lemma-apply-relative} の可逆
+$\mathcal{O}_{\mathbf{P}(\mathcal{E})}$-加群を表し、
+{\it 構造層の第 $n$ 捻り} と呼ぶ。
+\end{definition}
+
+\noindent
+補題 \ref{constructions-lemma-glue-relative-proj-twists} により、標準的な
+$\mathcal{O}_S$-加群準同型
+$$
+\text{Sym}^n(\mathcal{E})
+\longrightarrow
+\pi_*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(n)
+\quad\text{equivalently}\quad
+\pi^*\text{Sym}^n(\mathcal{E})
+\longrightarrow
+\mathcal{O}_{\mathbf{P}(\mathcal{E})}(n)
+$$
+がすべての $n \geq 0$ に対して存在する。特に $n = 1$ に対して
+$$
+\mathcal{E}
+\longrightarrow
+\pi_*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)
+\quad\text{equivalently}\quad
+\pi^*\mathcal{E}
+\longrightarrow
+\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)
+$$
+があり、補題 \ref{constructions-lemma-apply-relative} により写像
+$\pi^*\mathcal{E} \to \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$
+は全射である。
+これは $\mathbf{P}(\mathcal{E})$ の構成における正規化を覚えておく
+よい方法である。
+
+\medskip\noindent
+注意：文献によっては、スキーム $\mathbf{P}(\mathcal{E})$ は
+$\mathcal{E}$ が $S$ 上有限局所自由である場合にのみ定義される。
+さらに、$\mathbf{P}(\mathcal{E})$ が実際には本書の
+$\mathbf{P}(\mathcal{E}^\vee)$ として定義されることもある。ここで
+$\mathcal{E}^\vee$ は $\mathcal{E}$ の双対である
+（この定義も $\mathcal{E}$ が有限局所自由であるときにのみ行われる）。
+
+\medskip\noindent
+$S$, $\mathcal{E}$, $\mathbf{P}(\mathcal{E}) \to S$ を
+定義 \ref{constructions-definition-projective-bundle} のとおりとする。
+$f : T \to S$ を $S$ 上のスキームとする。
+$\psi : f^*\mathcal{E} \to \mathcal{L}$ を全射とする。ここで
+$\mathcal{L}$ は可逆 $\mathcal{O}_T$-加群である。
+誘導される次数付き $\mathcal{O}_T$-代数写像
+$$
+f^*\text{Sym}(\mathcal{E}) = \text{Sym}(f^*\mathcal{E}) \to
+\text{Sym}(\mathcal{L}) = \bigoplus\nolimits_{n \geq 0} \mathcal{L}^{\otimes n}
+$$
+は、本書が相対 Proj を $S$ 上で関手 $F$ を表現するスキームとして
+構成したことにより、節 \ref{constructions-section-relative-proj} の射
+$$
+\varphi_{\mathcal{L}, \psi} : T \longrightarrow \mathbf{P}(\mathcal{E})
+$$
+に対応する。逆に、射
+$\varphi : T \to \mathbf{P}(\mathcal{E})$ が $S$ 上で与えられたとき、
+$\mathcal{L} = \varphi^*\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$
+と置き、$\psi : f^*\mathcal{E} \to \mathcal{L}$ を
+$\varphi$ による標準的全射
+$\pi^*\mathcal{E} \to \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$
+の引き戻しとすることができる。
+補題 \ref{constructions-lemma-apply-relative} により、これらの構成は
+対 $(\mathcal{L}, \psi)$ の同型類の集合と
+射 $\varphi : T \to \mathbf{P}(\mathcal{E})$ の集合との間の
+互いに逆な全単射であり、後者の射は $S$ 上のものである。
+したがって $\mathbf{P}(\mathcal{E})$ は、$f : T \to S$ に
+$\mathcal{O}_T$-加群としての $f^*\mathcal{E}$ の商であって
+階数 $1$ の局所自由なものの集合を対応させる関手を表現する。
+
+\begin{example}[ベクトル空間の射影空間]
+\label{constructions-example-projective-space}
+$k$ を体とし、$V$ を $k$-ベクトル空間とする。対応する
+{\it 射影空間} は $k$-スキーム
+$$
+\mathbf{P}(V) = \text{Proj}(\text{Sym}(V))
+$$
+である。ここで $\text{Sym}(V)$ は $V$ の $k$ 上の対称代数である。
+もちろん $\mathbf{P}(V) \cong \mathbf{P}^n_k$ である。ただし
+$\dim(V) = n + 1$ とする。実際、$V$ の対称代数は
+$n + 1$ 変数の多項式環と同型である。
+$V$ を $\Spec(k)$ 上の準連接加群とみなせば、$\mathbf{P}(V)$ は
+$\Spec(k)$ 上の対応する射影空間束である。上の議論により、
+$k$-値点 $p$、すなわち $\mathbf{P}(V)$ の点は
+$k$-ベクトル空間の全射 $V \to L_p$ で
+$\dim(L_p) = 1$ を満たすものに対応する。
+より一般に、$X$ を $k$ 上のスキーム、$\mathcal{L}$ を可逆
+$\mathcal{O}_X$-加群とし、
+$\psi : V \to \Gamma(X, \mathcal{L})$ を $k$-線形写像とし、
+$\mathcal{L}$ は $\mathcal{O}_X$-加群として $\psi$ の像に含まれる
+切断により生成されるとする。このとき上の議論から、
+標準的な射
+$$
+\varphi_{\mathcal{L}, \psi} : X \longrightarrow \mathbf{P}(V)
+$$
+という $k$ 上のスキームの標準的な射が得られ、同型
+$\theta : \varphi_{\mathcal{L}, \psi}^*\mathcal{O}_{\mathbf{P}(V)}(1)
+\to \mathcal{L}$ が存在して、$\psi$ は合成
+$$
+V \to
+\Gamma(\mathbf{P}(V), \mathcal{O}_{\mathbf{P}(V)}(1))
+\to
+\Gamma(X, \varphi_{\mathcal{L}, \psi}^*\mathcal{O}_{\mathbf{P}(V)}(1))
+\to
+\Gamma(X, \mathcal{L})
+$$
+と一致する。
+補題 \ref{constructions-lemma-invertible-map-into-proj} を参照せよ。
+$V \subset \Gamma(X, \mathcal{L})$ が部分空間ならば、上で構成した射を
+単に $\varphi_{\mathcal{L}, V}$ と表す。
+$\dim(V) = n + 1$ であり、基底
+$v_0, \ldots, v_n$ を $V$ に選ぶと、図式
+$$
+\xymatrix{
+X \ar@{=}[d] \ar[rr]_{\varphi_{\mathcal{L}, \psi}} & &
+\mathbf{P}(V) \ar[d]^{\cong} \\
+X \ar[rr]^{\varphi_{(\mathcal{L}, (s_0, \ldots, s_n))}} & &
+\mathbf{P}^n_k
+}
+$$
+は可換である。ここで
+$s_i = \psi(v_i) \in \Gamma(X, \mathcal{L})$ であり、
+$\varphi_{(\mathcal{L}, (s_0, \ldots, s_n))}$ は
+節 \ref{constructions-section-projective-space} のもの、右側の垂直矢印は
+同型 $k[T_0, \ldots, T_n] \to \text{Sym}(V)$ であって
+$T_i$ を $v_i$ に送るものに対応する。
+\end{example}
+
+\begin{example}
+\label{constructions-example-projective-bundle}
+$\text{Sym}^n(\mathcal{E}) \to
+\pi_*(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(n))$
+という写像は、$\mathcal{E}$ が局所自由ならば同型であるが、
+一般には同型とは限らない。
+実際、この写像が $n = 1$ に対して単射でない例を与える。
+$S = \Spec(A)$ とし、
+$$
+A = k[u, v, s_1, s_2, t_1, t_2]/I
+$$
+と置く。ここで $k$ は体であり、
+$$
+I = (-us_1 + vt_1 + ut_2, vs_1 + us_2 - vt_2, vs_2, ut_1).
+$$
+である。$\overline{u}$ で $u$ の $A$ における類を表し、
+他の変数についても同様に表す。
+$M = (Ax \oplus Ay)/A(\overline{u}x + \overline{v}y)$ と置くと
+$$
+\text{Sym}(M) = A[x, y]/(\overline{u}x + \overline{v}y)
+= k[x, y, u, v, s_1, s_2, t_1, t_2]/J
+$$
+である。ここで
+$$
+J = (-us_1 + vt_1 + ut_2, vs_1 + us_2 - vt_2, vs_2, ut_1, ux + vy).
+$$
+である。この場合、準連接層 $\mathcal{E} = \widetilde{M}$、すなわち
+$S = \Spec(A)$ 上の層に付随する射影束はスキーム
+$$
+P =
+\text{Proj}(\text{Sym}(M)).
+$$
+である。このスキームはアフィン開被覆
+$P = D_{+}(x) \cup D_{+}(y)$ をもつことに注意する。
+元 $m \in M$ を考える。これは元 $us_1x + vt_2y$ の像である。
+次の等式に注意する。
+$$
+x(us_1x + vt_2y) = (s_1x + s_2y)(ux + vy) \bmod I
+$$
+および
+$$
+y(us_1x + vt_2y) = (t_1x + t_2y)(ux + vy) \bmod I.
+$$
+第一の等式は、$m$ が $\mathcal{O}_P(1)$ の切断として
+$D_{+}(x)$ 上で零に写ることを意味し、第二の等式は
+$\mathcal{O}_P(1)$ の切断として $D_{+}(y)$ 上で零に写ることを意味する。
+したがって $m$ は $\Gamma(P, \mathcal{O}_P(1))$ において
+零に写る。他方、$m \not = 0$ であると主張する。したがって
+$m$ は、零に写る $\mathcal{E}$ の非零大域切断の例を
+$\Gamma(P, \mathcal{O}_P(1))$ において与える。
+矛盾を導くため $m = 0$ と仮定する。この場合、ある元
+$f \in k[u, v, s_1, s_2, t_1, t_2]$ が存在して
+$$
+us_1x + vt_2y = f(ux + vy) \bmod I
+$$
+となる。$I$ は次数 $2$ の斉次多項式によって生成されるので、
+$f$ をその斉次成分に分解し、次数 1 の成分を取ることができる。
+言い換えれば、
+$$
+f = au + bv + \alpha_1s_1 + \alpha_2s_2 + \beta_1t_1 + \beta_2t_2
+$$
+と仮定してよい。ここで
+$a, b, \alpha_1, \alpha_2, \beta_1, \beta_2 \in k$ である。
+得られる条件は
+$$
+\begin{matrix}
+us_1 - u(au + bv + \alpha_1s_1 + \alpha_2s_2 + \beta_1t_1 + \beta_2t_2)
+\in I \\
+vt_2 - v(au + bv + \alpha_1s_1 + \alpha_2s_2 + \beta_1t_1 + \beta_2t_2)
+\in I
+\end{matrix}
+$$
+である。項 $u^2, uv, v^2$ は $I$ の生成元にはないので、
+$a = b = 0$ を得る。したがって関係式
+$$
+\begin{matrix}
+us_1 - u(\alpha_1s_1 + \alpha_2s_2 + \beta_1t_1 + \beta_2t_2)
+\in I \\
+vt_2 - v(\alpha_1s_1 + \alpha_2s_2 + \beta_1t_1 + \beta_2t_2)
+\in I
+\end{matrix}
+$$
+を得る。$I$ の第一生成元を用いて $us_1$ の各出現を
+$vt_1 + ut_2$ で置き換え、$I$ の第二生成元を用いて $vs_1$ の各出現を
+$-us_2 + vt_2$ で置き換え、第三生成元を用いて $vs_2$ の出現を除き、
+第三生成元を用いて $ut_1$ の出現を除くことができる。
+すると関係式
+$$
+\begin{matrix}
+(1 - \alpha_1)vt_1 + (1 - \alpha_1)ut_2 - \alpha_2us_2 - \beta_2ut_2 = 0 \\
+(1 - \alpha_1)vt_2 + \alpha_1us_2 - \beta_1vt_1 - \beta_2vt_2 = 0
+\end{matrix}
+$$
+を得る。これは $\alpha_1$ が $0$ と $1$ の両方でなければならないことを
+意味し、望む矛盾が得られる。
+\end{example}
+
+
+\begin{lemma}
+\label{constructions-lemma-projective-bundle-separated}
+$S$ をスキームとする。
+構造射 $\mathbf{P}(\mathcal{E}) \to S$、すなわち
+$S$ 上の射影束の構造射は分離的である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-relative-proj-separated} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{constructions-lemma-projective-space-bundle}
+$S$ をスキームとし、$n \geq 0$ とする。このとき
+$\mathbf{P}^n_S$ は $S$ 上の射影束である。
+\end{lemma}
+
+\begin{proof}
+次に注意する。
+$$
+\mathbf{P}^n_{\mathbf{Z}} =
+\text{Proj}(\mathbf{Z}[T_0, \ldots, T_n]) =
+\underline{\text{Proj}}_{\Spec(\mathbf{Z})}
+\left(\widetilde{\mathbf{Z}[T_0, \ldots, T_n]}\right)
+$$
+ここで環 $\mathbf{Z}[T_0, \ldots, T_n]$ の次数付けは
+$\deg(T_i) = 1$ により与えられ、$\mathbf{Z}$ の元は次数 $0$ にある。
+$\mathbf{P}^n_S$ は
+$\mathbf{P}^n_{\mathbf{Z}} \times_{\Spec(\mathbf{Z})} S$
+として定義されることを思い出す。
+さらに、相対斉次スペクトルの形成は基底変換と可換である。
+補題 \ref{constructions-lemma-relative-proj-base-change} を参照せよ。
+任意のスキーム $g : S \to \Spec(\mathbf{Z})$ に対して
+$g^*\mathcal{O}_{\Spec(\mathbf{Z})}[T_0, \ldots, T_n]
+= \mathcal{O}_S[T_0, \ldots, T_n]$
+である。以上を合わせると
+$$
+\mathbf{P}^n_S = \underline{\text{Proj}}_S(\mathcal{O}_S[T_0, \ldots, T_n]).
+$$
+を得る。最後に
+$\mathcal{O}_S[T_0, \ldots, T_n] = \text{Sym}(\mathcal{O}_S^{\oplus n + 1})$
+であることに注意する。したがって
+$\mathbf{P}^n_S$ は $S$ 上の射影束である。
+\end{proof}
+
+
+\section{グラスマン多様体}
+\label{constructions-section-grassmannian}
+
+\noindent
+この節では標準的なグラスマン関手を導入し、それらがスキームによって
+表現されることを示す。整数 $k$, $n$ を $0 < k < n$ となるように取る。
+関手
+\begin{equation}
+\label{constructions-equation-gkn}
+G(k, n) : \Sch \longrightarrow \textit{Sets}
+\end{equation}
+を構成する。これは大まかにいえば、$k$-次元部分空間を
+$n$-次元空間の中でパラメータ付けする。しかし技術上の理由から、
+$(n - k)$-次元商をパラメータ付けする方が便利なので、以下では
+そのようにする。
+
+\medskip\noindent
+より正確には、$G(k, n)$ はスキーム $S$ に、全射
+$$
+q : \mathcal{O}_S^{\oplus n} \longrightarrow \mathcal{Q}
+$$
+の同型類からなる集合 $G(k, n)(S)$ を対応させる。ここで
+$\mathcal{Q}$ は有限局所自由 $\mathcal{O}_S$-加群であり、
+その階数は $n - k$ である。これは実際に集合である。例えば
+加群の章、補題 \ref{modules-lemma-set-isomorphism-classes-finite-type-modules}
+から従うし、全射 $q$ の同型類が $q$ の核によって定まり
+（与えられた層の部分層は集合をなす）ことからも従う。
+スキームの射 $f : T \to S$ が与えられたとき、
+$G(k, n)(f) : G(k, n)(S) \to G(k, n)(T)$ を、
+全射 $q : \mathcal{O}_S^{\oplus n} \longrightarrow \mathcal{Q}$
+の同型類を
+$f^*q : \mathcal{O}_T^{\oplus n} \longrightarrow f^*\mathcal{Q}$
+の同型類へ送る写像とする。
+これは (1) $f^*\mathcal{O}_S = \mathcal{O}_T$、
+(2) $f^*$ は加法的である、(3) $f^*$ は局所自由加群を保つ
+（加群の章、補題 \ref{modules-lemma-pullback-locally-free}）、
+および (4) $f^*$ は右完全である
+（加群の章、補題 \ref{modules-lemma-exactness-pushforward-pullback}）
+ことから意味をなす。
+
+\begin{lemma}
+\label{constructions-lemma-gkn-representable}
+$0 < k < n$ とする。
+(\ref{constructions-equation-gkn}) の関手 $G(k, n)$ はスキームによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+$F = G(k, n)$ と置く。この補題を証明するため、
+スキームの章、補題 \ref{schemes-lemma-glue-functors} の判定法を用いる。
+$F$ がザリスキー位相について層条件を満たす理由は、層を
+貼り合わせられることである。層の章、
+節 \ref{sheaves-section-glueing-sheaves} を参照せよ
+（いくつかの詳細は省略する）。
+
+\medskip\noindent
+部分関手の族 $F_i$。
+$I$ を、$\{1, \ldots, n\}$ の部分集合で濃度 $n - k$ のもの全体の集合とする。
+スキーム $S$ と $j \in \{1, \ldots, n\}$ が与えられたとき、
+$e_j$ で $\mathcal{O}_S^{\oplus n}$ の大域切断
+$$
+e_j = (0, \ldots, 0, 1, 0, \ldots, 0)\quad(1\text{ in }j\text{th spot})
+$$
+を表す。もちろん、これらの切断は
+$\mathcal{O}_S^{\oplus n}$ を自由に生成する。同様に、
+$j \in \{1, \ldots, n - k\}$ に対して、$f_j$ で
+$\mathcal{O}_S^{\oplus n - k}$ の大域切断のうち、
+$j$ 番目の成分だけが $1$ で他のすべての成分が零であるものを表す。
+$i \in I$ に対して
+$$
+s_i : \mathcal{O}_S^{\oplus n - k} \longrightarrow \mathcal{O}_S^{\oplus n}
+$$
+を、標準的包含写像 $\mathcal{O}_S \to \mathcal{O}_S^{\oplus n}$ のうち
+$I$ の元に対応するものの直和とする。
+より正確には、$i = \{i_1, \ldots, i_{n - k}\}$ かつ
+$i_1 < i_2 < \ldots < i_{n - k}$ ならば、$s_i$ は
+$f_j$ を $e_{i_j}$ に送る。ただし $j \in \{1, \ldots, n - k\}$ である。
+この記法を用いて
+$$
+F_i(S) = \{q : \mathcal{O}_S^{\oplus n} \to \mathcal{Q} \in F(S) \mid
+q \circ s_i \text{ is surjective}\}
+\subset F(S)
+$$
+と置くことができる。スキームの射 $f : T \to S$ が与えられると、
+引き戻し $f^*s_i$ は $T$ 上の対応する写像である。
+$f^*$ は右完全なので
+（加群の章、補題 \ref{modules-lemma-exactness-pushforward-pullback}）、
+$F_i$ は $F$ の部分関手である。
+
+\medskip\noindent
+$F_i$ の表現可能性。これを証明するため、番号を付け替えた後で
+$i = \{1, \ldots, n - k\}$ と仮定してよい。これは $s_i$ が
+最初の $n - k$ 個の直和因子の包含写像であることを意味する。
+$q \circ s_i$ が全射ならば、これは同じ階数の有限局所自由加群間の
+全射なので、$q \circ s_i$ は同型である
+（加群の章、補題 \ref{modules-lemma-map-finite-locally-free}）。
+したがって $q : \mathcal{O}_S^{\oplus n} \to \mathcal{Q}$ が
+$F_i(S)$ の元ならば、$q \circ s_i$ を用いて
+$\mathcal{Q}$ を $\mathcal{O}_S^{\oplus n - k}$ と同一視できる。
+この同一視の後、
+$$
+q : \mathcal{O}_S^{\oplus n} \longrightarrow \mathcal{O}_S^{\oplus n - k}
+$$
+が得られ、$e_j$ を $f_j$（上の記法）に送る。ただし
+$j = 1, \ldots, n - k$ である。
+$q$ を完全に定めるには、
+$q(e_{n - k + 1}), \ldots, q(e_n)$ の像を
+$\Gamma(S, \mathcal{O}_S^{\oplus n - k})$ において定めればよい。
+したがって $F_i$ は関手
+$$
+S \longmapsto
+\prod\nolimits_{j = n - k + 1, \ldots, n}
+\Gamma(S,  \mathcal{O}_S^{\oplus n - k})
+$$
+と同型である。この関手は、$k(n - k)$ 重自己積、すなわち関手
+$S \mapsto \Gamma(S, \mathcal{O}_S)$ の自己積と
+同型である。スキームの章、例 \ref{schemes-example-global-sections}
+により、後者は $\mathbf{A}^1_\mathbf{Z}$ によって表現される。
+したがって、$F_i$ は $\mathbf{A}^{k(n - k)}_\mathbf{Z}$ によって
+表現される。これは $\Spec(\mathbf{Z})$ 上のファイバー積が
+スキームの圏における積だからである。
+
+\medskip\noindent
+包含 $F_i \subset F$ は開埋め込みによって表現可能である。
+$S$ をスキームとし、
+$q : \mathcal{O}_S^{\oplus n} \to \mathcal{Q}$ を $F(S)$ の元とする。
+加群の章、補題 \ref{modules-lemma-finite-type-surjective-on-stalk}
+により、集合
+$U_i = \{s \in S \mid (q \circ s_i)_s\text{ surjective}\}$ は
+$S$ の開集合である。$\mathcal{O}_{S, s}$ は局所環であり、
+$\mathcal{Q}_s$ は有限 $\mathcal{O}_{S, s}$-加群なので、
+中山の補題（代数の章、補題 \ref{algebra-lemma-NAK}）により
+$$
+s \in U_i \Leftrightarrow
+\left(
+\text{the map }
+\kappa(s)^{\oplus n - k} \to \mathcal{Q}_s/\mathfrak m_s\mathcal{Q}_s
+\text{ induced by }
+(q \circ s_i)_s
+\text{ is surjective}
+\right)
+$$
+である。$f : T \to S$ をスキームの射とし、$t \in T$ を
+$s \in S$ に写る点とする。
+$(f^*\mathcal{Q})_t =
+\mathcal{Q}_s \otimes_{\mathcal{O}_{S, s}} \mathcal{O}_{T, t}$
+であり（層の章、補題 \ref{sheaves-lemma-stalk-pullback-modules}）、
+以下同様である。したがって $(f^*q \circ f^*s_i)_t$ により誘導される写像
+$$
+\kappa(t)^{\oplus n - k} \to (f^*\mathcal{Q})_t/\mathfrak m_t(f^*\mathcal{Q})_t
+$$
+は、上の写像
+$\kappa(s)^{\oplus n - k} \to \mathcal{Q}_s/\mathfrak m_s\mathcal{Q}_s$
+の体拡大 $\kappa(t)/\kappa(s)$ による基底変換である。
+したがって、$s \in U_i$ であることと、$t$ が
+$f^*q$ に対応する開集合に属することは同値である。
+特に、$T \to S$ が $U_i$ を経由することと
+$f^*q \in F_i(T)$ であることは同値であり、求める結論が得られる。
+
+\medskip\noindent
+族 $F_i$, $i \in I$ は $F$ を被覆する。
+$q : \mathcal{O}_S^{\oplus n} \to \mathcal{Q}$ を $F(S)$ の元とする。
+各点 $s$、すなわち $S$ の点に対し、ある $i \in I$ が存在して
+$s_i$ が $s$ の近傍で全射となることを示さなければならない。
+したがって、合成のうち一つ
+$$
+\kappa(s)^{\oplus n - k} \xrightarrow{s_i}
+\kappa(s)^{\oplus n} \rightarrow
+\mathcal{Q}_s/\mathfrak m_s\mathcal{Q}_s
+$$
+が全射であることを示せばよい（前段落を参照）。
+$\mathcal{Q}_s/\mathfrak m_s\mathcal{Q}_s$ は次元 $n - k$ の
+ベクトル空間なので、これはベクトル空間の理論から従う。
+\end{proof}
+
+\begin{definition}
+\label{constructions-definition-grassmannian}
+$0 < k < n$ とする。スキーム $\mathbf{G}(k, n)$、すなわち
+関手 $G(k, n)$ を表現するものを
+{\it $\mathbf{Z}$ 上のグラスマン多様体} と呼ぶ。
+その基底変換 $\mathbf{G}(k, n)_S$ を、スキーム $S$ に対する
+{\it $S$ 上のグラスマン多様体} と呼ぶ。$R$ を環とするとき、
+$\Spec(R)$ への基底変換を $\mathbf{G}(k, n)_R$ と表し、
+{\it $R$ 上のグラスマン多様体} と呼ぶ。
+\end{definition}
+
+\noindent
+補題 \ref{constructions-lemma-gkn-representable} でこれらの関手が実際に
+表現可能であることを示したので、この定義は意味をなす。
+
+\begin{lemma}
+\label{constructions-lemma-projective-space-grassmannian}
+$n \geq 1$ とする。標準同型
+$\mathbf{G}(n, n + 1) = \mathbf{P}^n_\mathbf{Z}$
+がある。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{constructions-lemma-projective-space} により、スキーム
+$\mathbf{P}^n_\mathbf{Z}$ は、スキーム $S$ に対して、対
+$(\mathcal{L}, (s_0, \ldots, s_n))$ の同型類の集合を対応させる
+関手を表現する。この対は可逆加群 $\mathcal{L}$ と、
+$(n + 1)$ 個の大域切断で $\mathcal{L}$ を生成するものからなる。
+このような対が与えられると、商
+$$
+\mathcal{O}_S^{\oplus n + 1} \longrightarrow \mathcal{L},\quad
+(h_0, \ldots, h_n) \longmapsto \sum h_i s_i.
+$$
+を得る。逆に、元
+$q : \mathcal{O}_S^{\oplus n + 1} \to \mathcal{Q}$、すなわち
+$G(n, n + 1)(S)$ の元が与えられると、
+このような対、すなわち
+$(\mathcal{Q}, (q(e_1), \ldots, q(e_{n + 1})))$ を得る。
+ここで $e_i$, $i = 1, \ldots, n + 1$ は自由加群
+$\mathcal{O}_S^{\oplus n + 1}$ の標準生成切断である。
+これらの構成が互いに逆な関手の変換を定めることの確認は省略する。
+\end{proof}

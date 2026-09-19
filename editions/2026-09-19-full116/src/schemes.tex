@@ -1,0 +1,4168 @@
+% Generated mechanically from frozen input inputs/p04/ja/schemes.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{25}
+\chapter{スキーム}
+
+
+
+\phantomsection
+\label{schemes-section-phantom}
+
+
+\section{はじめに}
+\label{schemes-section-introduction}
+
+\noindent
+本章ではスキームを定義する。
+基本的な参考文献は \cite{EGA} である。
+
+
+
+
+
+
+
+
+
+\section{局所環付き空間}
+\label{schemes-section-locally-ringed-spaces}
+
+\noindent
+層の章の節 \ref{sheaves-section-ringed-spaces} で
+環付き空間を定義したことを思い出そう。
+簡単に言えば、環付き空間とは組 $(X, \mathcal{O}_X)$ のことであり、
+これは位相空間 $X$ と環の層 $\mathcal{O}_X$ からなる。
+環付き空間の射 $f : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ は、
+連続写像 $f : X \to Y$ と、環の層の $f$-射
+$f^\sharp : \mathcal{O}_Y \to \mathcal{O}_X$ によって与えられる。
+$f^\sharp$ は写像 $\mathcal{O}_Y \to f_*\mathcal{O}_X$ とみなせる。
+層の章の定義 \ref{sheaves-definition-f-map} および
+補題 \ref{sheaves-lemma-f-map} を参照せよ。
+
+\medskip\noindent
+念頭に置くべきよい幾何学的な例は、
+$\mathcal{C}^\infty$-多様体と
+$\mathcal{C}^\infty$-多様体の射である。実際、$M$ が
+$\mathcal{C}^\infty$-多様体ならば、滑らかな関数の層
+$\mathcal{C}^\infty_M$ は $M$ 上の環の層である。また、多様体の写像
+$f : M \to N$ が滑らかであるための必要十分条件は、
+任意の局所切断 $h$ が $\mathcal{C}^\infty_N$ の局所切断であるとき、合成
+$h \circ f$ が $\mathcal{C}^\infty_M$ の局所切断となることである。
+したがって、滑らかな写像 $f$ から自然に環付き空間の射
+$$
+f : (M , \mathcal{C}^\infty_M) \longrightarrow (N, \mathcal{C}^\infty_N)
+$$
+が得られる。層の章の例 \ref{sheaves-example-continuous-map-ringed} を参照せよ。
+茎に何が起こるかを考えると理解しやすい。すなわち、
+$m \in M$ とし、その像を $f(m) = n \in N$ とする。茎
+$\mathcal{C}^\infty_{M, m}$ は $m$ における滑らかな関数の芽の環であった。
+層の章の例 \ref{sheaves-example-germs-functions} を参照せよ。
+$(M, m)$ 上の関数の芽の代数は局所環であり、その極大イデアルは
+$m$ で消える関数からなる。
+$\mathcal{C}^\infty_{N, n}$ についても同様である。茎上の写像
+$f^\sharp : \mathcal{C}^\infty_{N, n} \to \mathcal{C}^\infty_{M, m}$ は
+極大イデアルを極大イデアルの中へ写す。これは単に
+$f(m) = n$ だからである。
+
+\medskip\noindent
+代数幾何ではスキームを研究する。スキーム上の環の層は、
+その空間の内在的な性質だけから決まるわけではない。
+環 $R$ のスペクトル
+（代数の章の節 \ref{algebra-section-spectrum-ring} を参照）に、
+$R$ から構成される環の層（後述）を備えたものが、
+基本的な構成要素となる。$\mathcal{O}$ を $\Spec(R)$ 上で考えたときの茎は、
+$R$ を各素イデアルで局所化して得られる局所環であることが後に分かる。
+この状況で局所環付き空間を導入する理由は二つある。(1) 一般には、
+スペクトルの連続写像に対応する環の写像を割り当てる仕組みがない。
+このため、写像 $f^\sharp$ を追加のデータとする。(2) これらのスペクトルの射を
+環付き空間の圏で考えると、茎上の写像が局所準同型になるとは限らない。
+しかし幾何学的直観からは局所準同型であるべきなので、
+次のように局所環付き空間を導入する。
+
+\begin{definition}
+\label{schemes-definition-locally-ringed-space}
+局所環付き空間について次を定める。
+\begin{enumerate}
+\item {\it 局所環付き空間 $(X, \mathcal{O}_X)$} とは、
+位相空間 $X$ と環の層 $\mathcal{O}_X$ からなる組であって、
+そのすべての茎が局所環であるものをいう。
+\item 局所環付き空間 $(X, \mathcal{O}_X)$ が与えられたとき、
+$\mathcal{O}_{X, x}$ を {\it $X$ の $x$ における局所環}という。
+$\mathfrak{m}_{X, x}$、または単に $\mathfrak{m}_x$ を
+$\mathcal{O}_{X, x}$ の極大イデアルと書く。さらに、
+{\it $X$ の $x$ における剰余体}とは剰余体
+$\kappa(x) = \mathcal{O}_{X, x}/\mathfrak{m}_x$ のことである。
+\item {\it 局所環付き空間の射}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ とは、
+すべての $x \in X$ に対して誘導される環準同型
+$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ が局所環準同型となる
+環付き空間の射をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+局所環付き空間を論じる際には、通常、記法から環の層
+$\mathcal{O}_X$ を省略し、単に「局所環付き空間 $X$」という。
+また、記号の濫用により、$X$ をその台となる位相空間ともみなす。
+最後に、対応する環の層
+$\mathcal{O}_X$ を {\it $X$ の構造層}と呼ぶ。
+さらに、局所環 $\mathcal{O}_{X, x}$ の極大イデアルを
+$\mathfrak{m}_{X, x}$、または単に $\mathfrak{m}_x$ と書くのが慣例である。
+「$f : X \to Y$ を局所環付き空間の射とする」と言うときは、
+構造層をさらに省略している。この場合も記号の濫用により、
+$f : X\to Y$ を台となる位相空間の連続写像ともみなす。
+$f$ に対応する $f$-射は通常 $f^\sharp$ と書く。
+$f$ が局所環付き空間の射であるという条件は、すべての $x\in X$ に対し、
+茎上の写像
+$$
+f^\sharp_x : \mathcal{O}_{Y, f(x)} \longrightarrow \mathcal{O}_{X, x}
+$$
+が極大イデアル $\mathfrak m_{Y, f(x)}$ を
+$\mathfrak m_{X, x}$ の中へ写すこと、と言い換えられる。
+
+\medskip\noindent
+以上の記法を用いて、局所環付き空間とその射の全体が圏をなすことを示そう。
+そのためには、局所環付き空間の射の合成が再び局所環付き空間の射に
+なることを示せばよい。そこで $f : X \to Y$ および $g : Y \to Z$ を
+局所環付き空間の射とする。$f$ と $g$ の合成は、
+層の章の定義 \ref{sheaves-definition-composition-maps-ringed-spaces} で定義されている。
+$x \in X$ とする。層の章の補題
+\ref{sheaves-lemma-compose-f-maps-stalks} により、合成
+$$
+\mathcal{O}_{Z, g(f(x))}
+\xrightarrow{g^\sharp}
+\mathcal{O}_{Y, f(x)}
+\xrightarrow{f^\sharp}
+\mathcal{O}_{X, x}
+$$
+は射 $g \circ f$ に付随する茎上の写像である。
+局所環準同型の合成は局所環準同型なので、結論が従う。
+
+\medskip\noindent
+この定義の好ましい性質として、関手
+$$
+\textit{Locally ringed spaces}
+\longrightarrow
+\textit{Ringed spaces}
+$$
+が同型を反映すること（さらにそれ以上）が挙げられる。
+以下では、より具体的に述べる。
+
+\begin{lemma}
+\label{schemes-lemma-isomorphism-locally-ringed}
+\begin{slogan}
+局所環付き空間の間の環付き空間としての同型は、
+局所環付き空間としての同型である。
+\end{slogan}
+$X$, $Y$ を局所環付き空間とする。
+$f : X \to Y$ が環付き空間としての同型ならば、
+$f$ は局所環付き空間としての同型である。
+\end{lemma}
+
+\begin{proof}
+これは代数における対応する事実から直ちに従う。
+$A$, $B$ を局所環とする。任意の環同型
+$A \to B$ は局所環同型である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{局所環付き空間の開埋め込み}
+\label{schemes-section-open-immersion}
+
+\begin{definition}
+\label{schemes-definition-immersion-locally-ringed-spaces}
+$f : X \to Y$ を局所環付き空間の射とする。
+$f$ を {\it 開埋め込み}というのは、$f$ が $X$ から
+$Y$ のある開部分集合への同相写像であり、
+写像 $f^{-1}\mathcal{O}_Y \to \mathcal{O}_X$ が同型であるときである。
+\end{definition}
+
+\noindent
+次の構成は、層の章の定義 \ref{sheaves-definition-restriction} (3) と
+平行なものである。
+
+\begin{example}
+\label{schemes-example-open-subspace}
+$X$ を局所環付き空間とする。
+$U \subset X$ を開部分集合とする。
+$\mathcal{O}_U = \mathcal{O}_X|_U$ を $\mathcal{O}_X$ の $U$ への制限とする。
+$u \in U$ に対して茎 $\mathcal{O}_{U, u}$ は茎
+$\mathcal{O}_{X, u}$ に等しく、したがって局所環である。
+ゆえに $(U, \mathcal{O}_U)$ は局所環付き空間であり、射
+$j : (U, \mathcal{O}_U) \to (X, \mathcal{O}_X)$ は開埋め込みである。
+\end{example}
+
+\begin{definition}
+\label{schemes-definition-open-subspace}
+$X$ を局所環付き空間とする。
+$U \subset X$ を開部分集合とする。上の例 \ref{schemes-example-open-subspace} の
+局所環付き空間 $(U, \mathcal{O}_U)$ を、
+{\it $X$ の、$U$ に付随する開部分空間}という。
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-open-immersion}
+$f : X \to Y$ を局所環付き空間の開埋め込みとする。
+$j : V = f(X) \to Y$ を、$Y$ の、$f$ の像に付随する開部分空間とする。
+局所環付き空間の同型 $f' : X \cong V$ が一意に存在し、
+$f = j \circ f'$ を満たす。
+\end{lemma}
+
+\begin{proof}
+$f'$ を、$X$ と $V$ の間の、$f$ が誘導する同相写像とする。
+このとき位相空間の写像として $f = j \circ f'$ である。
+層の同型
+$f^\sharp : f^{-1}(\mathcal{O}_Y) \to \mathcal{O}_X$ があるので、
+環の同型
+$f^\sharp : \Gamma(U, f^{-1}(\mathcal{O}_Y)) \to \Gamma(U, \mathcal{O}_X)$
+が各開部分集合 $U \subset X$ に対して存在する。さらに
+$\mathcal{O}_V = j^{-1}\mathcal{O}_Y$ かつ $f^{-1} = f'^{-1} j^{-1}$
+であるから（層の章の補題 \ref{sheaves-lemma-pullback-composition}）、
+$f^{-1}\mathcal{O}_Y = f'^{-1}\mathcal{O}_V$ である。したがって、
+写像
+$\Gamma(U, f'^{-1}(\mathcal{O}_V)) \to \Gamma(U, f^{-1}(\mathcal{O}_Y))$
+は任意の開部分集合 $U \subset X$ に対して同型である。
+これらを合成すると、各開部分集合 $U \subset X$ に対して
+環の同型
+$$
+\Gamma(U, f'^{-1}(\mathcal{O}_V)) \to \Gamma(U, \mathcal{O}_X)
+$$
+を得る。したがって層の同型
+$f^{-1}(\mathcal{O}_V) \to \mathcal{O}_X$ を得る。言い換えれば、同型
+$f'^{\sharp} : f'^{-1}(\mathcal{O}_V) \to \mathcal{O}_X$ があり、ゆえに
+局所環付き空間の同型
+$(f', f'^{\sharp}) : (X, \mathcal{O}_X) \to (V, \mathcal{O}_V)$
+を得る（補題 \ref{schemes-lemma-isomorphism-locally-ringed} を用いる）。
+構成により、局所環付き空間の射としても $f = j \circ f'$ である。
+
+\medskip\noindent
+別の射
+$f'' : (X, \mathcal{O}_X) \to (V, \mathcal{O}_V)$ があり、
+$f = j \circ f''$ を満たすと仮定する。
+任意の点 $x \in X$ において $j(f'(x)) = j(f''(x))$ である。
+$f'(x) = f''(x)$ が従うのは、$j$ が包含写像だからである。したがって $f'$ と $f''$ は
+位相空間の射として一致する。構造層については、各開部分集合
+$U \subset X$ に対して次の可換図式がある。
+$$
+\xymatrix @R=5em{
+\Gamma(U, f^{-1}(\mathcal{O}_Y)) \ar[d]_\cong\ar[r]^\cong &
+\Gamma(U, \mathcal{O}_X) \\
+\Gamma(U, f'^{-1}(\mathcal{O}_V)) \ar@/^/[ru]^{f'^\sharp}
+\ar@/_/[ru]_{f''^\sharp} &
+}
+$$
+これより $f'^\sharp$ と $f''^\sharp$ は同じ層の射を定めることが分かる。
+\end{proof}
+
+\noindent
+以後、開部分集合とそれに付随する部分空間を区別しない。
+
+\begin{lemma}
+\label{schemes-lemma-restrict-map-to-opens}
+$f : X \to Y$ を局所環付き空間の射とする。
+$U \subset X$ および $V \subset Y$ を開部分集合とする。
+$f(U) \subset V$ と仮定する。このとき、次の図式を局所環付き空間の
+可換正方形とする一意な局所環付き空間の射 $f|_U : U \to V$ が存在する。
+$$
+\xymatrix{
+U \ar[d]_{f|_U} \ar[r] & X \ar[d]^f \\
+V \ar[r] & Y
+}
+$$
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+以下では、上の補題から従う次の事実を断りなく用いる。
+局所環付き空間の任意の射 $f : Y \to X$ と、任意の開部分集合
+$U \subset X$ が与えられ、$f(Y) \subset U$ を満たすとする。このとき、
+一意な局所環付き空間の射 $Y \to U$ が存在し、その合成
+$Y \to U \to X$ は $f$ に等しい。実際、混乱が生じることはまれなので、
+記号の濫用によりこれを $f : Y \to U$ とさえ書くことにする。
+
+
+
+
+
+
+
+
+
+\section{局所環付き空間の閉埋め込み}
+\label{schemes-section-closed-immersion}
+
+\noindent
+加群の章の定義 \ref{modules-definition-closed-immersion} で導入した
+規約に従う。
+
+\begin{definition}
+\label{schemes-definition-closed-immersion-locally-ringed-spaces}
+$i : Z \to X$ を局所環付き空間の射とする。次の条件を満たすとき、
+$i$ を {\it 閉埋め込み}という。
+\begin{enumerate}
+\item 写像 $i$ は $Z$ から $X$ のある閉部分集合への同相写像である。
+\item 写像 $\mathcal{O}_X \to i_*\mathcal{O}_Z$ は全射である。
+その核を $\mathcal{I}$ と書く。
+\item $\mathcal{O}_X$-加群 $\mathcal{I}$ は局所的に切断で生成される。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-closed-local-target}
+$f : Z \to X$ を局所環付き空間の射とする。
+$f$ が閉埋め込みであることを示すには、開被覆
+$X = \bigcup U_i$ であって、各写像
+$f : f^{-1}U_i \to U_i$ が閉埋め込みとなるものが存在することを
+示せば十分である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{example}
+\label{schemes-example-closed-subspace}
+$X$ を局所環付き空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を、$\mathcal{O}_X$-加群の層として
+局所的に切断で生成されるイデアルの層とする。$Z$ を環の層
+$\mathcal{O}_X/\mathcal{I}$ の台とする。これは加群の章の補題
+\ref{modules-lemma-support-sheaf-rings-closed} により $X$ の閉部分集合である。
+$i : Z \to X$ を包含写像と書く。加群の章の補題
+\ref{modules-lemma-i-star-exact} により、環の層 $\mathcal{O}_Z$ で、$Z$ 上にあり、
+$i_*\mathcal{O}_Z = \mathcal{O}_X/\mathcal{I}$ を満たすものが一意に存在する。
+任意の $z \in Z$ に対して、茎 $\mathcal{O}_{Z, z}$ は局所環の非零な商
+$\mathcal{O}_{X, i(z)}/\mathcal{I}_{i(z)}$ に等しく、したがって局所環である。
+ゆえに $i : (Z, \mathcal{O}_Z) \to (X, \mathcal{O}_X)$ は
+局所環付き空間の閉埋め込みである。
+\end{example}
+
+\begin{definition}
+\label{schemes-definition-closed-subspace}
+$X$ を局所環付き空間とする。
+$\mathcal{I}$ を $X$ 上の、局所的に切断で生成されるイデアルの層とする。
+上の例 \ref{schemes-example-closed-subspace} の局所環付き空間
+$(Z, \mathcal{O}_Z)$ を、{\it $X$ の、イデアルの層 $\mathcal{I}$ に付随する
+閉部分空間}という。
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-closed-immersion}
+$f : X \to Y$ を局所環付き空間の閉埋め込みとする。
+$\mathcal{I}$ を写像 $\mathcal{O}_Y \to f_*\mathcal{O}_X$ の核とする。
+$i : Z \to Y$ を、$Y$ の、$\mathcal{I}$ に付随する閉部分空間とする。
+局所環付き空間の同型 $f' : X \cong Z$ が一意に存在し、
+$f = i \circ f'$ を満たす。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-characterize-closed-subspace}
+$X$, $Y$ を局所環付き空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を、局所的に切断で生成される
+イデアルの層とする。$i : Z \to X$ を付随する閉部分空間とする。
+射 $f : Y \to X$ が $Z$ を経由して分解するための必要十分条件は、写像
+$f^*\mathcal{I} \to f^*\mathcal{O}_X = \mathcal{O}_Y$ が零であることである。
+このとき射 $g : Y \to Z$ で $f = i \circ g$ を満たすものは一意である。
+\end{lemma}
+
+\begin{proof}
+$f$ が $Y \to Z \to X$ と分解すれば、写像
+$f^*\mathcal{I} \to \mathcal{O}_Y$ が零であることは明らかである。
+逆に、$f^*\mathcal{I} \to \mathcal{O}_Y$ が零であると仮定する。
+任意の $y \in Y$ を取り、環準同型
+$f^\sharp_y : \mathcal{O}_{X, f(y)} \to \mathcal{O}_{Y, y}$ を考える。
+仮定により合成
+$\mathcal{I}_{f(y)} \to \mathcal{O}_{X, f(y)} \to \mathcal{O}_{Y, y}$
+は零であり、また $f^\sharp_y(1) = 1$ なので、
+$1 \not \in \mathcal{I}_{f(y)}$、すなわち
+$\mathcal{I}_{f(y)} \not = \mathcal{O}_{X, f(y)}$ である。したがって
+$f(Y) \subset Z = \text{Supp}(\mathcal{O}_X/\mathcal{I})$ である。
+よって $f = i \circ g$ となる連続写像 $g : Y \to Z$ がある。
+写像 $f^\sharp : \mathcal{O}_X \to f_*\mathcal{O}_Y$ を考える。
+仮定 $f^*\mathcal{I} \to \mathcal{O}_Y$ が零であることから、合成
+$\mathcal{I} \to \mathcal{O}_X \to f_*\mathcal{O}_Y$ は、
+$f_*$ と $f^*$ の随伴性により零である。
+言い換えれば、環の層の射
+$\overline{f^\sharp} : \mathcal{O}_X/\mathcal{I} \to f_*\mathcal{O}_Y$
+を得る。$f_*\mathcal{O}_Y = i_*g_*\mathcal{O}_Y$ であり、また
+$\mathcal{O}_X/\mathcal{I} = i_*\mathcal{O}_Z$ であることに注意する。
+層の章の補題 \ref{sheaves-lemma-equivalence-categories-closed-structures} により、
+環の層の射 $g^\sharp : \mathcal{O}_Z \to g_*\mathcal{O}_Y$ で、
+$i$ による直像が $\overline{f^\sharp}$ となるものが一意に得られる。
+$(g, g^\sharp)$ が局所環付き空間の射を定めること、および
+$f = i \circ g$ が局所環付き空間の射として成り立つことの確認は省略する。
+$(g, g^\sharp)$ の一意性は上で指摘したとおりである。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-restrict-map-to-closed}
+$f : X \to Y$ を局所環付き空間の射とする。
+$\mathcal{I} \subset \mathcal{O}_Y$ を、局所的に切断で生成される
+イデアルの層とする。$i : Z \to Y$ を、イデアルの層 $\mathcal{I}$ に
+付随する閉部分空間とする。$\mathcal{J}$ を写像
+$f^*\mathcal{I} \to f^*\mathcal{O}_Y = \mathcal{O}_X$ の像とする。
+このイデアルは局所的に切断で生成される。さらに、
+$i' : Z' \to X$ を $X$ の付随する閉部分空間とする。このとき、
+次の図式を局所環付き空間の可換正方形とする一意な局所環付き空間の射
+$f' : Z' \to Z$ が存在する。
+$$
+\xymatrix{
+Z' \ar[d]_{f'} \ar[r]_{i'} & X \ar[d]^f \\
+Z \ar[r]^{i} & Y
+}
+$$
+さらに、この図式は局所環付き空間の圏におけるファイバー積正方形である。
+\end{lemma}
+
+\begin{proof}
+イデアル $\mathcal{J}$ は、加群の章の補題
+\ref{modules-lemma-pullback-locally-generated} により
+局所的に切断で生成される。補題の残りは、上の補題
+\ref{schemes-lemma-characterize-closed-subspace} における、射が閉部分空間を
+経由して分解することの特徴づけから従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{アフィンスキーム}
+\label{schemes-section-affine-schemes}
+
+\noindent
+$R$ を環とする。位相空間 $\Spec(R)$ を、$R$ に付随するものとして考える。
+代数の章の節 \ref{algebra-section-spectrum-ring} を参照せよ。
+この空間に環の層 $\mathcal{O}_{\Spec(R)}$ を備えると、得られる組
+$(\Spec(R), \mathcal{O}_{\Spec(R)})$ はアフィンスキームとなる。
+
+\medskip\noindent
+$\Spec(R)$ は、標準開集合と呼ばれる開集合 $D(f)$、
+$f \in R$ からなる基底を持つことを思い出そう。代数の章の定義
+\ref{algebra-definition-Zariski-topology} を参照せよ。
+さらに、二つの標準開集合の共通部分も標準開集合であり、
+$D(f) \cap D(g) = D(fg)$、$f, g\in R$ である。
+
+\begin{lemma}
+\label{schemes-lemma-standard-open}
+$R$ を環とし、$f \in R$ とする。
+\begin{enumerate}
+\item $g\in R$ かつ $D(g) \subset D(f)$ ならば、次が成り立つ。
+\begin{enumerate}
+\item $f$ は $R_g$ で可逆である。
+\item $g^e = af$ が、ある $e \geq 1$ と $a \in R$ に対して成り立つ。
+\item 標準的な環準同型 $R_f \to R_g$ がある。
+\item 標準的な $R_f$-加群準同型 $M_f \to M_g$ が、任意の
+$R$-加群 $M$ に対して存在する。
+\end{enumerate}
+\item $D(f)$ の任意の開被覆は、
+$D(f) = \bigcup_{i = 1}^n D(g_i)$ の形の有限開被覆で細分できる。
+\item $g_1, \ldots, g_n \in R$ とする。このとき
+$D(f) \subset \bigcup D(g_i)$ であるための必要十分条件は、
+$g_1, \ldots, g_n$ が $R_f$ の単位イデアルを生成することである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D(g) = \Spec(R_g)$ であることを思い出そう（代数の章の補題
+\ref{algebra-lemma-standard-open} を参照）。したがって (a) が成り立つ。
+実際、$f$ の $R_g$ における像はいかなる素イデアルにも含まれず、
+したがって可逆である。代数の章の補題
+\ref{algebra-lemma-Zariski-topology} を参照せよ。
+$f$ の $R_g$ における逆元を $a/g^d$ と書く。
+これは $g^d - af$ が $g$ のある冪で零化されることを意味し、(b) が従う。
+(c) の写像 $R_f \to R_g$ は (a) と局所化の普遍性から存在する。
+あるいは、$b/f^n$ を $a^nb/g^{ne}$ へ写すことで定義できる。
+等式 $M_f = M \otimes_R R_f$ を用いて加群上の写像を得てもよいし、
+$M_f \to M_g$ を $x/f^n$ を $a^nx/g^{ne}$ へ写すことで定義してもよい。
+
+\medskip\noindent
+$D(f)$ は準コンパクトであった。代数の章の補題
+\ref{algebra-lemma-qc-open} を参照せよ。したがって第二の主張は、
+標準開集合が位相の基底をなすことから直ちに従う。
+
+\medskip\noindent
+第三の主張は、代数の章の補題
+\ref{algebra-lemma-Zariski-topology} から直ちに従う。
+\end{proof}
+
+\noindent
+層の章の節 \ref{sheaves-section-bases} で基底上の層という概念を定義し、
+それが空間上の層という概念と本質的に同値であることを示した。
+層の章の補題 \ref{sheaves-lemma-extend-off-basis} および
+\ref{sheaves-lemma-extend-off-basis-structures} を参照せよ。さらに、
+層の章の補題 \ref{sheaves-lemma-cofinal-systems-coverings-standard-case} で、
+各標準開集合について開被覆の共終系だけで層条件を確認すれば十分であることを
+示した。上の補題により、標準開集合による有限被覆だけを確認すれば十分である。
+
+\begin{definition}
+\label{schemes-definition-standard-covering}
+$R$ を環とする。
+\begin{enumerate}
+\item $\Spec(R)$ の {\it 標準開被覆}とは、次の被覆であって、\newline
+$\Spec(R) = \bigcup_{i = 1}^n D(f_i)$ であって
+$f_1, \ldots, f_n \in R$ となるものをいう。
+\item $D(f) \subset \Spec(R)$ を標準開集合とする。$D(f)$ の
+{\it 標準開被覆}とは、被覆 $D(f) = \bigcup_{i = 1}^n D(g_i)$ であって
+$g_1, \ldots, g_n \in R$ となるものをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$R$ を環とし、$M$ を $R$-加群とする。標準開集合の基底上に前層
+$\widetilde M$ を定義する。$U \subset \Spec(R)$ を標準開集合とする。
+$f, g \in R$ が $D(f) = D(g)$ を満たすなら、上の補題
+\ref{schemes-lemma-standard-open} により、互いに逆な標準写像
+$M_f \to M_g$ と $M_g \to M_f$ がある。したがって、任意の $f$ で
+$U = D(f)$ を満たすものを選び、
+$$
+\widetilde M(U) = M_f.
+$$
+と定義できる。$D(g) \subset D(f)$ ならば、上の補題
+\ref{schemes-lemma-standard-open} により標準写像
+$$
+\widetilde M(D(f)) = M_f \longrightarrow M_g = \widetilde M(D(g)).
+$$
+がある。これは明らかに、標準開集合の基底上のアーベル群の前層を定める。
+$M = R$ ならば、$\widetilde R$ は標準開集合の基底上の環の前層である。
+
+\medskip\noindent
+$\widetilde M$ の $x \in \Spec(R)$ における茎を計算しよう。
+$x$ が素イデアル $\mathfrak p \subset R$ に対応すると仮定する。
+茎の定義から
+$$
+\widetilde M_x = \colim_{f\in R, f\not\in \mathfrak p} M_f
+$$
+を得る。ここで集合 $\{f \in R, f \not \in \mathfrak p\}$ には、規則
+$f \geq f' \Leftrightarrow D(f) \subset D(f')$ によって前順序を入れる。
+$f_1, f_2 \in R \setminus \mathfrak p$ ならば、この順序において
+$f_1f_2 \geq f_1$ である。したがって代数の章の補題
+\ref{algebra-lemma-localization-colimit} により
+$$
+\widetilde M_x = M_{\mathfrak p}.
+$$
+を得る。
+
+\medskip\noindent
+次に、標準開被覆について層条件を確認する。
+$D(f) = \bigcup_{i = 1}^n D(g_i)$ ならば、この被覆に関する層条件は
+列
+$$
+0 \to M_f \to \bigoplus M_{g_i} \to \bigoplus M_{g_ig_j}.
+$$
+が完全であることと同値である。$D(g_i) = D(fg_i)$ であるから、
+この列を
+$$
+0 \to M_f \to \bigoplus M_{fg_i} \to \bigoplus M_{fg_ig_j}.
+$$
+と書き直せる。さらに、上の補題 \ref{schemes-lemma-standard-open} により、
+$g_1, \ldots, g_n$ は $R_f$ の単位イデアルを生成する。したがって、
+加群 $M_f$ を $R_f$ 上で考え、元 $g_1, \ldots, g_n$ とともに
+代数の章の補題 \ref{algebra-lemma-cover-module} を適用できる。
+ゆえにこの列は完全である。以上から、$\widetilde M$ は
+標準開集合の基底上の層である。
+
+\medskip\noindent
+したがって、層の章の節 \ref{sheaves-section-bases} の内容から、環の層
+$\mathcal{O}_{\Spec(R)}$ が一意に存在し、標準開集合上で
+$\widetilde R$ と一致する。上での茎の計算により、
+この環の層のすべての茎が局所環であることに注意する。
+
+\medskip\noindent
+同様に、任意の $R$-加群 $M$ に対して、
+$\mathcal{O}_{\Spec(R)}$-加群の層 $\mathcal{F}$ が一意に存在し、
+標準開集合上で $\widetilde M$ と一致する。層の章の補題
+\ref{sheaves-lemma-extend-off-basis-module} を参照せよ。
+
+\begin{definition}
+\label{schemes-definition-structure-sheaf}
+$R$ を環とする。
+\begin{enumerate}
+\item {\it 構造層 $\mathcal{O}_{\Spec(R)}$}（環 $R$ のスペクトルに対するもの）とは、
+一意な環の層 $\mathcal{O}_{\Spec(R)}$ であって、標準開集合の基底上で
+$\widetilde R$ と一致するものをいう。
+\item 局所環付き空間 $(\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+$R$ の {\it スペクトル}といい、$\Spec(R)$ と書く。
+\item $\mathcal{O}_{\Spec(R)}$-加群の層で、$\widetilde M$ を
+$\Spec(R)$ のすべての開集合へ拡張するものを、
+$\mathcal{O}_{\Spec(R)}$-加群の層で $M$ に付随するものという。
+この層も $\widetilde M$ と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ここまでに得た結果をまとめる。
+
+\begin{lemma}
+\label{schemes-lemma-spec-sheaves}
+$R$ を環とし、$M$ を $R$-加群とする。$\widetilde M$ を、
+$\mathcal{O}_{\Spec(R)}$-加群の層で $M$ に付随するものとする。
+\begin{enumerate}
+\item $\Gamma(\Spec(R), \mathcal{O}_{\Spec(R)}) = R$ である。
+\item $\Gamma(\Spec(R), \widetilde M) = M$ が $R$-加群として成り立つ。
+\item すべての $f \in R$ に対して
+$\Gamma(D(f), \mathcal{O}_{\Spec(R)}) = R_f$ である。
+\item すべての $f\in R$ に対して
+$\Gamma(D(f), \widetilde M) = M_f$ は $R_f$-加群として成り立つ。
+\item $D(g) \subset D(f)$ のとき、$\mathcal{O}_{\Spec(R)}$ および
+$\widetilde M$ 上の制限写像は、補題 \ref{schemes-lemma-standard-open} の写像
+$R_f \to R_g$ および $M_f \to M_g$ である。
+\item $\mathfrak p$ を $R$ の素イデアルとし、$x \in \Spec(R)$ を
+対応する点とする。このとき $\mathcal{O}_{\Spec(R), x} = R_{\mathfrak p}$ である。
+\item $\mathfrak p$ を $R$ の素イデアルとし、$x \in \Spec(R)$ を
+対応する点とする。このとき $\widetilde M_x = M_{\mathfrak p}$ が
+$R_{\mathfrak p}$-加群として成り立つ。
+\end{enumerate}
+さらに、これらの同一視はすべて $R$-加群 $M$ に関して関手的である。
+特に、関手 $M \mapsto \widetilde M$ は、$R$-加群の圏から
+$\mathcal{O}_{\Spec(R)}$-加群の圏への完全関手である。
+\end{lemma}
+
+\begin{proof}
+主張 (1) -- (7) は上の議論から明らかである。
+関手 $M \mapsto \widetilde M$ の完全性は、関手
+$M \mapsto M_{\mathfrak p}$ が完全であること、および短完全列の完全性は
+茎で確認できることから従う。加群の章の補題
+\ref{modules-lemma-abelian} を参照せよ。
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-affine-scheme}
+{\it アフィンスキーム}とは、ある $\Spec(R)$（$R$ は環）と
+局所環付き空間として同型な局所環付き空間をいう。
+{\it アフィンスキームの射}とは、局所環付き空間の圏における射をいう。
+\end{definition}
+
+\noindent
+アフィンスキームは、すべての局所環付き空間の中で特別な役割を果たす。
+次節ではこのことを扱う。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{アフィンスキームの圏}
+\label{schemes-section-category-affine-schemes}
+
+\noindent
+$Y$ がアフィンスキームならば、その点は標準的な $1-1$ 対応により
+$\Gamma(Y, \mathcal{O}_Y)$ の素イデアルと対応する。
+
+\begin{lemma}
+\label{schemes-lemma-morphism-into-affine-where-point-goes}
+$X$ を局所環付き空間とする。
+$Y$ をアフィンスキームとする。
+$f \in \Mor(X, Y)$ を局所環付き空間の射とする。点 $x \in X$ が
+与えられたとき、環準同型
+$$
+\Gamma(Y, \mathcal{O}_Y) \xrightarrow{f^\sharp}
+\Gamma(X, \mathcal{O}_X) \to \mathcal{O}_{X, x}
+$$
+を考える。$\mathfrak p \subset \Gamma(Y, \mathcal{O}_Y)$ を
+$\mathfrak m_x$ の逆像とし、$y \in Y$ を対応する点とする。
+このとき $f(x) = y$ である。
+\end{lemma}
+
+\begin{proof}
+可換図式
+$$
+\xymatrix{
+\Gamma(X, \mathcal{O}_X) \ar[r] &
+\mathcal{O}_{X, x} \\
+\Gamma(Y, \mathcal{O}_Y) \ar[r] \ar[u] &
+\mathcal{O}_{Y, f(x)} \ar[u]
+}
+$$
+を考える（層の章の定義 \ref{sheaves-definition-f-map} の後にある
+$f$-射の議論を参照）。右の縦射は局所準同型なので、
+$\mathfrak m_{f(x)}$ は $\mathfrak m_x$ の逆像である。これで結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-f-open}
+$X$ を局所環付き空間とする。
+$f \in \Gamma(X, \mathcal{O}_X)$ とする。集合
+$$
+D(f) = \{x \in X \mid \text{image }f \not\in \mathfrak m_x\}
+$$
+は開である。さらに $f|_{D(f)}$ は逆元を持つ。
+\end{lemma}
+
+\begin{proof}
+これは加群の章の補題 \ref{modules-lemma-s-open} の特別な場合であるが、
+直接の証明も与える。$U \subset X$ および $V \subset X$ を二つの
+開部分集合とし、$f|_U$ が逆元 $g$ を、$f|_V$ が逆元 $h$ を持つとする。
+このとき明らかに $g|_{U\cap V} = h|_{U\cap V}$ である。したがって、
+$f$ が任意の $x \in D(f)$ のある開近傍で可逆であることを示せば十分である。
+$f \not \in \mathfrak m_x$ ならば $f \in \mathcal{O}_{X, x}$ は逆元
+$g \in \mathcal{O}_{X, x}$ を持つ。これは、ある開近傍
+$x \in U \subset X$ が存在し、$g \in \mathcal{O}_X(U)$ かつ
+$g\cdot f|_U = 1$ となることを意味するので、主張は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-f-open-affine}
+上の補題 \ref{schemes-lemma-f-open} において $X$ がアフィンスキームならば、
+開集合 $D(f)$ は以前に定義した標準開集合 $D(f)$ と一致する
+（代数の章の定義 \ref{algebra-definition-spectrum-ring} を参照）。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-morphism-into-affine}
+\begin{reference}
+この事実の参考文献は \cite[II, Err 1, Prop. 1.8.1]{EGA} であり、
+そこでは J. Tate に帰せられている。
+\end{reference}
+$X$ を局所環付き空間とする。
+$Y$ をアフィンスキームとする。写像
+$$
+\Mor(X, Y)
+\longrightarrow
+\Hom(\Gamma(Y, \mathcal{O}_Y), \Gamma(X, \mathcal{O}_X))
+$$
+で $f$ を $f^\sharp$（大域切断上）へ写すものは全単射である。
+\end{lemma}
+
+\begin{proof}
+$Y$ はアフィンなので、
+$(Y, \mathcal{O}_Y) \cong (\Spec(R), \mathcal{O}_{\Spec(R)})$
+を満たす環 $R$ が存在する。証明中、$Y$ とその構造層について、環のスペクトルに関して
+既知の事実から直ちに従う性質を用いる。例えば補題
+\ref{schemes-lemma-spec-sheaves} を参照せよ。
+
+\medskip\noindent
+上の補題に動機づけられ、逆写像を構成する。環準同型
+$\psi_Y : \Gamma(Y, \mathcal{O}_Y) \to \Gamma(X, \mathcal{O}_X)$
+を与える。まず、対応する空間の写像
+$$
+\Psi : X \longrightarrow Y
+$$
+を補題 \ref{schemes-lemma-morphism-into-affine-where-point-goes} の規則で定義する。
+言い換えると、$x \in X$ が与えられたとき、$\Psi(x)$ を、$Y$ の点であって、
+$\Gamma(Y, \mathcal{O}_Y)$ の素イデアルのうち、$\mathfrak m_x$ の合成
+$
+\Gamma(Y, \mathcal{O}_Y) \xrightarrow{\psi_Y}
+\Gamma(X, \mathcal{O}_X) \to
+\mathcal{O}_{X, x}
+$
+による逆像となるものに対応する点と定義する。
+
+\medskip\noindent
+写像 $\Psi : X \to Y$ が連続であることを示す。
+標準開集合 $D(g)$（ここで $g \in \Gamma(Y, \mathcal{O}_Y)$）は、
+$Y$ の位相の基底をなす。したがって $\Psi^{-1}(D(g))$ が開であることを
+示せば十分である。$\Psi$ の構成により、逆像 $\Psi^{-1}(D(g))$ はちょうど
+集合 $D(\psi_Y(g)) \subset X$ であり、補題 \ref{schemes-lemma-f-open} により開である。
+ゆえに $\Psi$ は連続である。
+
+\medskip\noindent
+次に、$\Psi$-射、すなわち $\mathcal{O}_Y$ から $\mathcal{O}_X$ への層の射を構成する。
+層の章の補題 \ref{sheaves-lemma-f-map-basis-below-structures} により、
+制限写像と両立する環準同型
+$\psi_{D(g)} : \Gamma(D(g), \mathcal{O}_Y) \to
+\Gamma(\Psi^{-1}(D(g)), \mathcal{O}_X)$
+を定義すれば十分である。標準同型
+$\Gamma(D(g), \mathcal{O}_Y) = \Gamma(Y, \mathcal{O}_Y)_g$
+がある。これは $Y$ がアフィンスキームだからである。$\psi_Y(g)$ は
+$D(\psi_Y(g))$ 上で可逆なので、標準写像
+$$
+\Gamma(Y, \mathcal{O}_Y)_g
+\longrightarrow
+\Gamma(\Psi^{-1}(D(g)), \mathcal{O}_X)
+=
+\Gamma(D(\psi_Y(g)), \mathcal{O}_X)
+$$
+があり、局所化の普遍性により写像 $\psi_Y$ を延長する。
+ここで標準写像を採る以外に選択肢がないことに注意せよ。
+これと標準的な同一視
+$\Gamma(D(g), \mathcal{O}_Y) = \Gamma(Y, \mathcal{O}_Y)_g$ を組み合わせ、
+$\psi_{D(g)}$ とする。アフィンスキーム上の制限写像も局所化の
+普遍性によって定義されているので、これは局所化と両立する。
+補題 \ref{schemes-lemma-spec-sheaves} および \ref{schemes-lemma-standard-open} を参照せよ。
+
+\medskip\noindent
+以上により、環付き空間の射
+$(\Psi, \psi) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$
+を定義し、大域切断上で $\psi_Y$ を復元した。これが局所環付き空間の射で
+あることを示すには、誘導される局所環上の写像
+$$
+\psi_x : \mathcal{O}_{Y, \Psi(x)} \longrightarrow \mathcal{O}_{X, x}
+$$
+が局所準同型であることを示せばよい。これは補題
+\ref{schemes-lemma-morphism-into-affine-where-point-goes} の証明中の可換図式と
+$\Psi$ の定義から直ちに従う。
+
+\medskip\noindent
+最後に、構成 $(\Psi, \psi) \mapsto \psi_Y$ と構成
+$\psi_Y \mapsto (\Psi, \psi)$ が互いに逆であることを示す。
+明らかに $\psi_Y \mapsto (\Psi, \psi) \mapsto \psi_Y$ である。
+したがって、与えられた $\psi_Y$ を生じる組 $(\Psi, \psi)$ が
+高々一つであることだけを示せばよい。$\Psi$ の一意性は補題
+\ref{schemes-lemma-morphism-into-affine-where-point-goes} で示した。
+$\Psi$ の一意性が与えられたとき、写像 $\psi$ の一意性は
+上の証明中ですでに指摘した。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-category-affine-schemes}
+アフィンスキームの圏は環の圏の反対圏と同値である。
+この同値は、アフィンスキームにその構造層の大域切断を対応させる
+関手によって与えられる。
+\end{lemma}
+
+\begin{proof}
+これは定義 \ref{schemes-definition-affine-scheme} と補題
+\ref{schemes-lemma-morphism-into-affine} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-standard-open-affine}
+$Y$ をアフィンスキームとする。
+$f \in \Gamma(Y, \mathcal{O}_Y)$ とする。
+開部分空間 $D(f)$ はアフィンスキームである。
+\end{lemma}
+
+\begin{proof}
+$Y = \Spec(R)$ かつ $f \in R$ と仮定してよい。アフィンスキームの射
+$\phi : U = \Spec(R_f) \to \Spec(R) = Y$ を考える。これは環準同型
+$R \to R_f$ が誘導する。
+代数の章の補題 \ref{algebra-lemma-standard-open} により、これは
+$D(f)$ 上への同相写像である。一方、写像
+$\phi^{-1}\mathcal{O}_Y \to \mathcal{O}_U$ は茎上で同型であり、
+したがって同型である。ゆえに $\phi$ は開埋め込みである。
+補題 \ref{schemes-lemma-open-immersion} により $D(f)$ は $U$ と同型である。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-affine-schemes}
+アフィンスキームの圏は有限積とファイバー積を持つ。
+言い換えれば有限極限を持つ。さらに、アフィンスキームの圏における積と
+ファイバー積は、局所環付き空間の圏におけるものと同じである。
+式で書けば、局所環付き空間の圏において
+$$
+\Spec(R) \times \Spec(S) =
+\Spec(R \otimes_{\mathbf{Z}} S)
+$$
+であり、環準同型 $R \to A$, $R \to B$ が与えられると
+$$
+\Spec(A) \times_{\Spec(R)} \Spec(B)
+=
+\Spec(A \otimes_R B).
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{schemes-lemma-morphism-into-affine} の適用にすぎない。
+まず、この補題により、アフィンスキーム $\Spec(\mathbf{Z})$ は
+局所環付き空間の圏の終対象である。したがって第一の表示式は第二から従う。
+第二を示すため、任意の局所環付き空間 $X$ に対して
+\begin{eqnarray*}
+\Mor(X, \Spec(A \otimes_R B))
+& = &
+\Hom(A \otimes_R B, \mathcal{O}_X(X)) \\
+& = &
+\Hom(A, \mathcal{O}_X(X))
+\times_{\Hom(R, \mathcal{O}_X(X))}
+\Hom(B, \mathcal{O}_X(X)) \\
+& = &
+\Mor(X, \Spec(A))
+\times_{\Mor(X, \Spec(R))}
+\Mor(X, \Spec(B))
+\end{eqnarray*}
+が成り立つことに注意する。これで式が証明された。
+関連する定義については、圏の章の節
+\ref{categories-section-fibre-products} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-disjoint-union-affines}
+$X$ を局所環付き空間とする。
+$X = U \amalg V$ と仮定し、$U$ と $V$ は開で、
+$U$, $V$ はアフィンスキームであるとする。このとき $X$ は
+アフィンスキームである。
+\end{lemma}
+
+\begin{proof}
+$R = \Gamma(X, \mathcal{O}_X)$ と置く。層の性質により
+$R = \mathcal{O}_X(U) \times \mathcal{O}_X(V)$ であることに注意する。
+補題 \ref{schemes-lemma-morphism-into-affine} により、標準的な局所環付き空間の射
+$X \to \Spec(R)$ がある。代数の章の補題
+\ref{algebra-lemma-spec-product} により、位相空間として
+$\Spec(\mathcal{O}_X(U)) \amalg \Spec(\mathcal{O}_X(V)) =
+\Spec(R)$
+であり、写像は環準同型
+$R \to \mathcal{O}_X(U)$ および $R \to \mathcal{O}_X(V)$ から来る。
+もちろんこれは、$\Spec(R)$ が局所環付き空間の圏でも余積であることを意味する。
+仮定により、射 $X \to \Spec(R)$ は $\Spec(\mathcal{O}_X(U))$ と $U$ の
+同型を誘導し、$V$ についても同様である。したがって
+$X \to \Spec(R)$ は同型である。
+\end{proof}
+
+\section{アフィン上の準連接層}
+\label{schemes-section-quasi-coherent-affine}
+
+\noindent
+加群の章の定義 \ref{modules-definition-quasi-coherent} で、準連接層の
+抽象的な概念を定義したことを思い出そう。本節では、アフィンスキーム
+$\Spec(R)$ 上の任意の準連接層が、層 $\widetilde M$、すなわち
+$R$-加群 $M$ に付随する層に対応することを示す。
+
+\begin{lemma}
+\label{schemes-lemma-compare-constructions}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。$M$ を $R$-加群とする。層
+$\widetilde M$、すなわち $R$-加群 $M$ に付随するもの
+（定義 \ref{schemes-definition-structure-sheaf}）と、層 $\mathcal{F}_M$、すなわち
+$R$-加群 $M$ に付随するもの（加群の章の定義
+\ref{modules-definition-sheaf-associated}）との間には標準同型が存在する。
+この同型は $M$ に関して関手的である。特に層 $\widetilde M$ は準連接である。
+さらに、これらは次の写像性質によって特徴づけられる：
+$$
+\Hom_{\mathcal{O}_X}(\widetilde M, \mathcal{F})
+=
+\Hom_R(M, \Gamma(X, \mathcal{F}))
+$$
+ここで $\mathcal{O}_X$-加群の任意の層 $\mathcal{F}$ をとる。
+写像 $\alpha : \widetilde M \to \mathcal{F}$ は、その大域切断への作用に対応する。
+\end{lemma}
+
+\begin{proof}
+加群の章の補題 \ref{modules-lemma-construct-quasi-coherent-sheaves} により、射
+$\mathcal{F}_M \to \widetilde M$ があり、これは写像
+$M \to \Gamma(X, \widetilde M) = M$ に対応する。$x \in X$ が素イデアル
+$\mathfrak p \subset R$ に対応するとする。茎上に誘導される写像は
+$\mathcal{O}_{X, x} \otimes_R M \to M_{\mathfrak p}$ であり、
+$R_{\mathfrak p} \otimes_R M = M_{\mathfrak p}$ だから同型である。
+したがって写像 $\mathcal{F}_M \to \widetilde M$ は同型である。
+写像性質は層 $\mathcal{F}_M$ の写像性質から従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-widetilde-constructions}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。次の標準同型がある。
+\begin{enumerate}
+\item
+$
+\widetilde{M \otimes_R N}
+\cong
+\widetilde M \otimes_{\mathcal{O}_X} \widetilde N
+$,
+加群の章の節 \ref{modules-section-tensor-product} を参照。
+\item
+$
+\widetilde{\text{T}^n(M)}
+\cong
+\text{T}^n(\widetilde M)
+$,
+$
+\widetilde{\text{Sym}^n(M)}
+\cong
+\text{Sym}^n(\widetilde M)
+$, および
+$
+\widetilde{\wedge^n(M)}
+\cong
+\wedge^n(\widetilde M)
+$,
+加群の章の節 \ref{modules-section-symmetric-exterior} を参照。
+\item $M$ が有限表示 $R$-加群ならば、
+$
+\SheafHom_{\mathcal{O}_X}(\widetilde M, \widetilde N)
+\cong
+\widetilde{\Hom_R(M,  N)}
+$,
+加群の章の節 \ref{modules-section-internal-hom} を参照。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[第一の証明]
+補題 \ref{schemes-lemma-compare-constructions} と加群の章の補題
+\ref{modules-lemma-construct-quasi-coherent-sheaves} により、関手
+$M \mapsto \widetilde M$ は $\pi^*$ とみなせる。ここで $\pi$ は
+環付き空間の射である。加群の引き戻しは、加群の章の補題
+\ref{modules-lemma-tensor-product-pullback} および
+\ref{modules-lemma-pullback-tensor-algebra} によりテンソル構成と可換する。
+射 $\pi : (X, \mathcal{O}_X) \to (\{*\}, R)$ は平坦である。例えば
+$\mathcal{O}_X$ の茎は $R$ の局所化であり（補題
+\ref{schemes-lemma-spec-sheaves}）、したがって $R$ 上平坦だからである。
+よって加群の章の補題 \ref{modules-lemma-pullback-internal-hom} により、
+第一の加群が有限表示ならば $\pi$ による引き戻しは内部 Hom と可換する。
+\end{proof}
+
+\begin{proof}[第二の証明]
+(1) の証明。補題 \ref{schemes-lemma-compare-constructions} により、
+$\widetilde{M \otimes_R N}$ から
+$\widetilde M \otimes_{\mathcal{O}_X} \widetilde N$ への写像を与えるには、
+大域切断上の写像
+$M \otimes_R N \to
+\Gamma(X, \widetilde M \otimes_{\mathcal{O}_X} \widetilde N)$
+を与えればよく、これは加群の層のテンソル積の定義から存在する。
+この写像が同型であることを見るには、茎上で同型であることを
+確かめれば十分である。これは $\widetilde{M}$ の茎の記述
+（補題 \ref{schemes-lemma-spec-sheaves} または加群の章の補題
+\ref{modules-lemma-construct-quasi-coherent-sheaves}）、テンソル積が局所化と
+可換すること（代数の章の補題
+\ref{algebra-lemma-tensor-product-localization}）、および加群の章の補題
+\ref{modules-lemma-stalk-tensor-product} から従う。
+
+\medskip\noindent
+(2) の証明。これは (1) の証明と同様であり、代数の章の補題
+\ref{algebra-lemma-tensor-algebra-localization} と加群の章の補題
+\ref{modules-lemma-stalk-tensor-algebra} を用いる。
+
+\medskip\noindent
+(3) の証明。構成 $M \mapsto \widetilde{M}$ は関手的なので、$R$-線形写像
+$\Hom_R(M, N) \to \Hom_{\mathcal{O}_X}(\widetilde{M}, \widetilde{N})$
+がある。この写像の終域は
+$\SheafHom_{\mathcal{O}_X}(\widetilde M, \widetilde N)$ の大域切断である。
+したがって補題 \ref{schemes-lemma-compare-constructions} により、$\mathcal{O}_X$-加群の写像
+$\widetilde{\Hom_R(M,  N)} \to
+\SheafHom_{\mathcal{O}_X}(\widetilde M, \widetilde N)$
+を得る。茎を比較して、これが同型であることを確かめる。
+$M$ が有限表示 $R$-加群ならば、$\widetilde M$ は $\mathcal{O}_X$-加群として
+大域的な有限表示を持つ。よって代数の章の補題
+\ref{algebra-lemma-hom-from-finitely-presented} と加群の章の補題
+\ref{modules-lemma-stalk-internal-hom} を用いて結論を得る。
+\end{proof}
+
+\begin{proof}[(1) の第三の証明]
+任意の $\mathcal{O}_X$-加群 $\mathcal{F}$ に対し、$M$, $N$, $\mathcal{F}$ に
+関して関手的な次の同型がある。
+\begin{align*}
+\Hom_{\mathcal{O}_X}(\widetilde{M} \otimes _{\mathcal{O} _X} \widetilde{N},
+\mathcal{F})
+& =
+\Hom_{\mathcal{O}_X}(\widetilde{M},
+\SheafHom_{\mathcal{O} _X} (\widetilde{N}, \mathcal{F})) \\
+& =
+\Hom_R(M, \Gamma(X,
+\SheafHom_{\mathcal{O}_X}(\widetilde{N}, \mathcal{F}))) \\
+& =
+\Hom_R(M, \Hom_{\mathcal{O}_X}(\widetilde{N}, \mathcal{F})) \\
+& =
+\Hom_R(M, \Hom_R(N, \Gamma(X,\mathcal{F}))) \\
+& =
+\Hom_R(M \otimes_R N, \Gamma(X, \mathcal{F})) \\
+& =
+\Hom_{\mathcal{O}_X}(\widetilde{M \otimes_R N}, \mathcal{F})
+\end{align*}
+第一の等号は加群の章の補題 \ref{modules-lemma-internal-hom} である。
+第二の等号は $\widetilde{M}$ の普遍性である（補題
+\ref{schemes-lemma-compare-constructions} を参照）。第三の等号は $\SheafHom$ の
+定義により成り立つ。第四の等号は $\widetilde{N}$ の普遍性である。
+第五の等号は代数の章の補題
+\ref{algebra-lemma-hom-from-tensor-product} である。最後の等号は
+$\widetilde{M \otimes_R N}$ の普遍性である。米田の補題
+（圏の章の補題 \ref{categories-lemma-yoneda}）により (1) を得る。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-widetilde-pullback}
+$(X, \mathcal{O}_X) = (\Spec(S), \mathcal{O}_{\Spec(S)})$,
+$(Y, \mathcal{O}_Y) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。$\psi : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を、
+環準同型 $\psi^\sharp : R \to S$ に対応するアフィンスキームの射とする
+（補題 \ref{schemes-lemma-category-affine-schemes} を参照）。
+\begin{enumerate}
+\item $\psi^* \widetilde M = \widetilde{S \otimes_R M}$ が、
+$R$-加群 $M$ に関して関手的に成り立つ。
+\item $\psi_* \widetilde N = \widetilde{N_R}$ が、
+$S$-加群 $N$ に関して関手的に成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+第一の主張は、補題 \ref{schemes-lemma-compare-constructions} の同一視と
+加群の章の補題 \ref{modules-lemma-restrict-quasi-coherent} から従う。
+第二の主張は $\psi^{-1}(D(f)) = D(\psi^\sharp(f))$ であること、および
+$$
+\psi_* \widetilde N(D(f)) = \widetilde N(D(\psi^\sharp(f))) =
+N_{\psi^\sharp(f)} = (N_R)_f = \widetilde{N_R}(D(f))
+$$
+から、望むとおり従う。
+\end{proof}
+
+\noindent
+特に上の補題 \ref{schemes-lemma-widetilde-pullback} は、層 $\widetilde M$ を
+標準アフィン開部分空間 $D(f)$ に制限すると $\widetilde{M_f}$ が得られると
+述べている。以下ではこの事実を断りなく用いる。
+
+\begin{lemma}
+\label{schemes-lemma-quasi-coherent-affine}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+このとき $\mathcal{F}$ は $R$-加群 $\Gamma(X, \mathcal{F})$ に付随する層と
+同型である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。各標準開集合 $D(f)$ は
+準コンパクトなので、$X$ は局所準コンパクト、すなわち各点は
+準コンパクト近傍の近傍基を持つ（位相の章の定義
+\ref{topology-definition-locally-quasi-compact} を参照）。したがって加群の章の
+補題 \ref{modules-lemma-quasi-coherent-module} により、各素イデアル
+$\mathfrak p \subset R$（これは $x \in X$ に対応する）に対して
+開近傍 $x \in U \subset X$ が
+存在し、$\mathcal{F}|_U$ はある $\mathcal{O}_X(U)$-加群 $M$ に付随する
+準連接層と同型になる。言い換えれば、この性質を持つ $U$ による開被覆を得る。
+例えば補題 \ref{schemes-lemma-standard-open} により、この被覆を標準開被覆に
+細分できる。したがって被覆 $\Spec(R) = \bigcup D(f_i)$、
+$R_{f_i}$-加群 $M_i$、および同型
+$\varphi_i : \mathcal{F}|_{D(f_i)} \to \mathcal{F}_{M_i}$ を得る。
+ここではある $R_{f_i}$-加群 $M_i$ を用いた。
+重なり上では同型
+$$
+\xymatrix{
+\mathcal{F}_{M_i}|_{D(f_if_j)}
+\ar[rr]^{\varphi_i^{-1}|_{D(f_if_j)}}
+& &
+\mathcal{F}|_{D(f_if_j)}
+\ar[rr]^{\varphi_j|_{D(f_if_j)}}
+& &
+\mathcal{F}_{M_j}|_{D(f_if_j)}.
+}
+$$
+を得る。これらを $\psi_{ij}$ と書く。三重の重なり上では明らかに
+コサイクル条件
+$$
+\psi_{jk}|_{D(f_if_jf_k)}
+\circ
+\psi_{ij}|_{D(f_if_jf_k)}
+=
+\psi_{ik}|_{D(f_if_jf_k)}
+$$
+が成り立つ。
+
+\medskip\noindent
+開部分空間 $D(f_i)$, $D(f_if_j)$, $D(f_if_jf_k)$ はいずれも
+アフィンスキームであることを思い出そう。したがって補題
+\ref{schemes-lemma-compare-constructions} により、層 $\mathcal{F}_{M_i}$ は層
+$\widetilde M_i$ と同型である。特に
+$\mathcal{F}_{M_i}(D(f_if_j)) = (M_i)_{f_j}$ などが成り立つ。
+また上の補題 \ref{schemes-lemma-compare-constructions} により、$\psi_{ij}$ は一意な
+$R_{f_if_j}$-加群同型
+$$
+\psi_{ij} : (M_i)_{f_j} \longrightarrow (M_j)_{f_i}
+$$
+に対応する。これは $\psi_{ij}$ の $D(f_if_j)$ 上の切断への作用である。
+さらに、これらは任意の三つ組 $i, j, k$ に対して図式
+$$
+\xymatrix{
+(M_i)_{f_jf_k}
+\ar[rd]_{\psi_{ij}}
+\ar[rr]^{\psi_{ik}}
+& &
+(M_k)_{f_if_j} \\
+&
+(M_j)_{f_if_k} \ar[ru]_{\psi_{jk}}
+}
+$$
+が可換であるというコサイクル条件を満たす。
+
+\medskip\noindent
+ここで代数の章の補題 \ref{algebra-lemma-glue-modules} により、$R$-加群
+$M$ が存在し、$M_i = M_{f_i}$ を満たして射 $\psi_{ij}$ と両立する。
+$\mathcal{F}_M = \widetilde M$ を考える。この時点で $\widetilde M$ が、最初に
+与えた準連接層 $\mathcal{F}$ と同型であることを示すのは形式的である。
+実際、層 $\mathcal{F}$ と $\widetilde M$ は、$\mathcal{O}_X$-加群の層の
+同型な貼り合わせデータを、被覆 $X = \bigcup D(f_i)$ に関して与える。
+層の章の節
+\ref{sheaves-section-glueing-sheaves}、特に補題
+\ref{sheaves-lemma-mapping-property-glue} を参照せよ。
+現在の状況では、これは明示的には次の議論に帰着する。$R$-加群写像
+$$
+M \longrightarrow \Gamma(X, \mathcal{F}).
+$$
+を構成しよう。$m \in M$ が与えられると、
+$m_i = m/1 \in M_{f_i} = M_i$ を得る。これは $M$ の構成による。
+$M_i$ の構成により、これは切断
+$s_i \in \mathcal{F}(U_i)$ に対応する（すなわち $\varphi^{-1}_i(m_i)$）。
+$s_i|_{D(f_if_j)} = s_j|_{D(f_if_j)}$ であると主張する。これは $M$ の
+構成により $\psi_{ij}(m_i) = m_j$ であることと、$\psi_{ij}$ の構成から従う。
+$\mathcal{F}$ の層条件により、この切断族は一意な切断 $s$、すなわち
+$\mathcal{F}$ の $X$ 上の切断を与える。$m \mapsto s$ が $R$-加群写像であることの確認は
+読者に委ねる。補題 \ref{schemes-lemma-compare-constructions} により、対応する
+$\mathcal{O}_X$-加群写像
+$$
+\widetilde M \longrightarrow \mathcal{F}.
+$$
+を得る。構成により、この写像は同型 $\varphi_i^{-1}$ に、各
+$D(f_i)$ 上で制限されるので、同型である。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-equivalence-quasi-coherent}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。関手 $M \mapsto \widetilde M$ と
+$\mathcal{F} \mapsto \Gamma(X, \mathcal{F})$ は、圏同値
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_X)
+\ar@<1ex>[r]
+&
+\text{Mod}_R
+\ar@<1ex>[l]
+}
+$$
+を与え、準連接 $\mathcal{O}_X$-加群の圏と $R$-加群の圏との間で
+互いに準逆である。
+\end{lemma}
+
+\begin{proof}
+上の補題 \ref{schemes-lemma-compare-constructions} および
+\ref{schemes-lemma-quasi-coherent-affine} を参照せよ。
+\end{proof}
+
+\noindent
+以下では、アフィンスキーム上の準連接層と $\widetilde M$ の形の層とを
+区別しない。
+
+\begin{lemma}
+\label{schemes-lemma-kernel-cokernel-quasi-coherent}
+$X = \Spec(R)$ をアフィンスキームとする。準連接 $\mathcal{O}_X$-加群の
+写像の核と余核は準連接である。
+\end{lemma}
+
+\begin{proof}
+これは関手 $\widetilde{\ }$ の完全性から従う。実際、補題
+\ref{schemes-lemma-compare-constructions} により、任意の写像
+$\psi : \widetilde{M} \to \widetilde{N}$ は $R$-加群写像
+$\varphi : M \to N$ から来ることがわかる（したがって
+$\Ker(\psi) = \widetilde{\Ker(\varphi)}$ および
+$\Coker(\psi) = \widetilde{\Coker(\varphi)}$ である）。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-colimit-quasi-coherent}
+$X = \Spec(R)$ をアフィンスキームとする。$X$ 上の準連接層の任意の族の
+直和は準連接である。余極限についても同じことが成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}_i$, $i \in I$ を $X$ 上の準連接層の族とする。上の補題
+\ref{schemes-lemma-equivalence-quasi-coherent} により
+$\mathcal{F}_i = \widetilde{M_i}$ と書け、ここで $R$-加群 $M_i$ を用いた。
+$M = \bigoplus M_i$ と置き、層
+$\widetilde{M}$ を考える。各標準開集合 $D(f)$ に対して
+$$
+\widetilde{M}(D(f)) = M_f =
+\left(\bigoplus M_i\right)_f =
+\bigoplus M_{i, f}.
+$$
+したがって準連接 $\mathcal{O}_X$-加群 $\widetilde{M}$ は層
+$\mathcal{F}_i$ の直和である。一般の余極限についても同様の議論が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-extension-quasi-coherent}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。$\mathcal{O}_X$-加群の層の短完全列
+$$
+0 \to
+\mathcal{F}_1 \to
+\mathcal{F}_2 \to
+\mathcal{F}_3 \to
+0
+$$
+があるとする。三つのうち二つが準連接ならば、残る一つも準連接である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}_1$ と $\mathcal{F}_2$ がともに準連接の場合、関手
+$M \mapsto \widetilde M$ は完全なので明らかである。補題
+\ref{schemes-lemma-spec-sheaves} を参照せよ。$\mathcal{F}_2$ と $\mathcal{F}_3$ が
+ともに準連接の場合も同様である。そこで $\mathcal{F}_1 = \widetilde M_1$ と
+$\mathcal{F}_3 = \widetilde M_3$ が準連接であるとする。
+$M_2 = \Gamma(X, \mathcal{F}_2)$ と置く。列
+$$
+0 \to M_1 \to M_2 \to M_3 \to 0
+$$
+が完全であることを示せば十分であると主張する。実際、そうならば
+（補題 \ref{schemes-lemma-compare-constructions} の写像性質を用いて）可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+\widetilde M_1 \ar[r] \ar[d] &
+\widetilde M_2 \ar[r] \ar[d] &
+\widetilde M_3 \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+\mathcal{F}_1 \ar[r] &
+\mathcal{F}_2 \ar[r] &
+\mathcal{F}_3 \ar[r] &
+0
+}
+$$
+を得て、蛇の補題により結論が従う。
+
+\medskip\noindent
+ここでの「正しい」議論は、まず $H^1(X, \mathcal{F}) = 0$ を、
+任意の準連接層 $\mathcal{F}$ に対して示すことであろう。これは実際それほど難しく
+ないが、後まで延期する方がよいだろう。代わりに小さな工夫を用いる。
+
+\medskip\noindent
+$m \in M_3 = \Gamma(X, \mathcal{F}_3)$ をとる。集合
+$$
+I = \{ f \in R \mid \text{the element }fm\text{ comes from }M_2\}.
+$$
+を考える。これは明らかにイデアルである。$1 \in I$ を示せば十分である。
+したがって任意の素イデアル $\mathfrak p$ に対し、$f \in I$ かつ
+$f \not\in \mathfrak p$ となるものが存在することを示せばよい。
+$x \in X$ を $\mathfrak p$ に対応する点とする。全射性は茎上で判定できるので、
+開近傍 $U$、すなわち $x$ の近傍が存在し、$m|_U$ は局所切断
+$s \in \mathcal{F}_2(U)$ から来る。実際、$U = D(f)$ は標準開集合、すなわち
+$f \in R$, $f \not \in \mathfrak p$ と仮定してよい。ある $N \gg 0$ に対して
+$f^N \in I$ であることを示せば、証明が完了する。
+
+\medskip\noindent
+任意の点 $z \in V(f)$ をとり、それが素イデアル $\mathfrak q \subset R$ に
+対応するとする。$g \in R$, $g \not \in \mathfrak q$ であって、
+$m|_{D(g)}$ がある $s' \in \mathcal{F}_2(D(g))$ に持ち上がるものも見つかる。
+差 $s|_{D(fg)} - s'|_{D(fg)}$ を考える。これは元 $m'$、すなわち
+$\mathcal{F}_1(D(fg)) = (M_1)_{fg}$ の元である。ある整数
+$n = n(z)$ に対し、元 $f^n m'$ はある $m'_1 \in (M_1)_g$ から来る。
+$f^n s$ は切断 $\sigma$、すなわち $\mathcal{F}_2$ の
+$D(f) \cup D(g)$ 上の切断に延長する。実際、$f^n s' + m'_1$ の制限と
+$D(f) \cap D(g) = D(fg)$ 上で一致するからである。さらに $\sigma$ は
+$f^n m$ の $D(f) \cup D(g)$ への制限に写る。
+
+\medskip\noindent
+$V(f)$ は準コンパクトなので、有限個の元
+$g_1, \ldots, g_m \in R$、$V(f) \subset \bigcup D(g_j)$、整数 $n > 0$、
+および切断 $\sigma_j \in \mathcal{F}_2(D(f) \cup D(g_j))$ であって、
+$\sigma_j|_{D(f)} = f^n s$ かつ $\sigma_j$ が切断
+$f^nm|_{D(f) \cup D(g_j)}$、すなわち $\mathcal{F}_3$ の切断に写るものが存在する。差
+$$
+\sigma_j|_{D(f) \cup D(g_jg_k)}
+-
+\sigma_k|_{D(f) \cup D(g_jg_k)}.
+$$
+を考える。これらは $\mathcal{F}_1$ の切断であり、その定義域は
+$D(f) \cup D(g_jg_k)$ である。また $D(f)$ 上では零である。特に
+$\mathcal{F}_1(D(g_jg_k)) = (M_1)_{g_jg_k}$ における像は、
+$(M_1)_{g_jg_kf}$ において零である。したがって $f$ のある十分高い冪が
+これらすべてを零化する。言い換えれば、元 $f^N \sigma_j$ は、ある
+$N \gg 0$ に対して層条件の貼り合わせ条件を満たし、望むとおり
+切断 $\sigma $、すなわち $\mathcal{F}_2$ の
+$\bigcup (D(f) \cup D(g_j)) = X$ 上の切断を与える。
+\end{proof}
+
+\section{アフィンスキームの閉部分空間}
+\label{schemes-section-closed-in-affine}
+
+\begin{example}
+\label{schemes-example-closed-immersion-affines}
+$R$ を環とし、$I \subset R$ をイデアルとする。アフィンスキームの射
+$i : Z = \Spec(R/I) \to \Spec(R) = X$ を考える。代数の章の補題
+\ref{algebra-lemma-spec-closed} により、これは $Z$ から $X$ の閉部分集合への
+同相写像である。さらに、$I \subset \mathfrak p \subset R$ が点
+$x = i(z)$、$x \in X$、$z \in Z$ に対応する素イデアルならば、茎上で写像
+$$
+\mathcal{O}_{X, x} = R_{\mathfrak p}
+\longrightarrow
+R_{\mathfrak p}/IR_{\mathfrak p} = \mathcal{O}_{Z, z}
+$$
+を得る。したがって $i$ は局所環付き空間の閉埋め込みである。定義
+\ref{schemes-definition-closed-immersion-locally-ringed-spaces} を参照せよ。
+明らかに、これは例 \ref{schemes-example-closed-subspace} における準連接イデアル層
+$\widetilde I$ に付随する閉部分空間と（同型を除いて）同じである。
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-closed-immersion-affine-case}
+\begin{slogan}
+アフィンスキームでは、閉埋め込みはイデアルに対応する。
+\end{slogan}
+$(X, \mathcal{O}_X) = (\Spec(R), \mathcal{O}_{\Spec(R)})$ を
+アフィンスキームとする。$i : Z \to X$ を局所環付き空間の任意の
+閉埋め込みとする。このとき一意なイデアル $I \subset R$ が存在し、射
+$i : Z \to X$ は、上の例 \ref{schemes-example-closed-immersion-affines} で構成した
+閉埋め込み $\Spec(R/I) \to \Spec(R)$ と同一視できる。
+\end{lemma}
+
+\begin{proof}
+これは少々拍子抜けするほど簡単である。実際、補題
+\ref{schemes-lemma-closed-immersion} により $Z \to X$ を、定義
+\ref{schemes-definition-closed-subspace} と例 \ref{schemes-example-closed-subspace} にある
+イデアル層 $\mathcal{I} \subset \mathcal{O}_X$ に付随する閉部分空間と
+同一視できる。本書の規約により、このイデアル層は $\mathcal{O}_X$-加群の
+層として局所的に切断で生成される。したがって商層
+$\mathcal{O}_X / \mathcal{I}$ は $X$ 上局所的に、写像
+$\bigoplus_{j \in J} \mathcal{O}_U \to \mathcal{O}_U$ の余核である。
+ゆえに定義から $\mathcal{O}_X / \mathcal{I}$ は準連接である。節
+\ref{schemes-section-quasi-coherent-affine} の結果により、これは $\widetilde S$ の形であり、
+ここで $R$-加群 $S$ を用いた。さらに
+$\mathcal{O}_X = \widetilde R \to \widetilde S$ は全射なので、補題
+\ref{schemes-lemma-extension-quasi-coherent} により $\mathcal{I}$ も準連接であり、
+$\mathcal{I} = \widetilde I$ と書ける。もちろん $I \subset R$ かつ
+$S = R/I$ であり、すべて明らかである。
+\end{proof}
+
+\section{スキーム}
+\label{schemes-section-schemes}
+
+\begin{definition}
+\label{schemes-definition-scheme}
+\begin{history}
+\cite{EGA1} では、本書でスキームと呼ぶものを ``pre-sch\'ema'' と呼び、
+``sch\'ema'' という名称は Stacks project で分離スキームと呼ぶものに
+取っておいた。第二版 \cite{EGA1-second} では、用語法が現在標準となった
+ものに変更された。しかし、例えば \cite{Murre-lectures} では
+``prescheme'' という用語に出会うことがある。
+\end{history}
+{\it スキーム}とは、各点がアフィンスキームである開近傍を持つような
+局所環付き空間である。{\it スキームの射}とは局所環付き空間の射である。
+スキームの圏を $\Sch$ と書く。
+\end{definition}
+
+\noindent
+$X$ をスキームとする。以下では言葉を（ごくわずかに）濫用する。
+$U \subset X$ が {\it アフィン開集合}、または {\it 開アフィン}であるとは、
+開部分空間 $U$ がアフィンスキームであることをいう。しばしば
+$U = \Spec(R)$ と書いて、$U$ が $\Spec(R)$ と同型であり、さらに一時的に
+$U$ と $\Spec(R)$ を同一視することを表す。
+
+\begin{lemma}
+\label{schemes-lemma-open-subspace-scheme}
+$X$ をスキームとする。$j : U \to X$ を局所環付き空間の開埋め込みとする。
+このとき $U$ はスキームである。特に $X$ の任意の開部分空間は
+スキームである。
+\end{lemma}
+
+\begin{proof}
+$U \subset X$ とし、$u \in U$ とする。アフィン開近傍
+$u \in V \subset X$ をとる。$V$ の標準開集合は $V$ の位相の基底を
+なすので、$f\in \mathcal{O}_V(V)$ で $u \in D(f) \subset U$ となるものが
+存在する。補題 \ref{schemes-lemma-standard-open-affine} により $D(f)$ は
+アフィンスキームである。これで $U$ の各点がアフィンな開近傍を持つことが
+示された。
+\end{proof}
+
+\noindent
+この補題（またはその証明）から明らかに、任意のスキーム $X$ の位相は
+アフィン開集合からなる基底を持つ（位相の章の節
+\ref{topology-section-bases} を参照）。
+
+\begin{example}
+\label{schemes-example-not-affine}
+$k$ を体とする。アフィンでないスキームの例は、開部分空間
+$U = \Spec(k[x, y]) \setminus \{ (x, y)\}$ で与えられる。これは
+アフィンスキーム $X =\Spec(k[x, y])$ の開部分空間であり、二つの
+アフィン、すなわち $D(x) = \Spec(k[x, y, 1/x])$ と
+$D(y) = \Spec(k[x, y, 1/y])$ で被覆され、その共通部分は
+$D(xy) = \Spec(k[x, y, 1/xy])$ である。$\mathcal{O}_U$ の層性により完全列
+$$
+0 \to
+\Gamma(U, \mathcal{O}_U) \to
+k[x, y, 1/x] \times k[x, y, 1/y] \to
+k[x, y, 1/xy]
+$$
+がある。したがって写像 $k[x, y] \to \Gamma(U, \mathcal{O}_U)$
+（射 $U \to X$ から来る）は同型である。ゆえに $U$ はアフィンではありえない。
+実際、もしアフィンならば補題 \ref{schemes-lemma-category-affine-schemes} により
+$U \cong X$ となるはずだからである。
+\end{example}
+
+\section{スキームの埋め込み}
+\label{schemes-section-immersions}
+
+\noindent
+補題 \ref{schemes-lemma-open-subspace-scheme} で、スキームの任意の開部分空間が
+スキームであることを見た。以下では、スキームの閉部分空間についても
+同じことが成り立つことを証明する。
+
+\medskip\noindent
+$\mathcal{O}_X$-加群の準連接層という概念は任意の環付き空間 $X$ に対して
+定義され、特に $X$ がスキームの場合にも定義されることに注意する。
+節 \ref{schemes-section-quasi-coherent-affine} での議論により、そのような層は任意の
+アフィン開集合 $U \subset X$ 上で $\widetilde M$ の形であり、ここで
+$\mathcal{O}_X(U)$-加群 $M$ を用いることがわかっている。
+
+\begin{lemma}
+\label{schemes-lemma-closed-subspace-scheme}
+$X$ をスキームとし、$i : Z \to X$ を局所環付き空間の閉埋め込みとする。
+\begin{enumerate}
+\item 局所環付き空間 $Z$ はスキームである。
+\item 核 $\mathcal{I}$、すなわち写像
+$\mathcal{O}_X \to i_*\mathcal{O}_Z$ の核は準連接イデアル層である。
+\item 任意のアフィン開集合 $U = \Spec(R)$（$X$ のもの）に対して、射
+$i^{-1}(U) \to U$ は $\Spec(R/I) \to \Spec(R)$ と同一視できる。
+ここであるイデアル $I \subset R$ を用いる。
+\item $\mathcal{I}|_U = \widetilde I$ が成り立つ。
+\end{enumerate}
+特に、切断で局所的に生成される任意のイデアル層は準連接イデアル層であり
+（逆も成り立つ）、$X$ の任意の閉部分空間はスキームである。
+\end{lemma}
+
+\begin{proof}
+$i : Z \to X$ を閉埋め込みとし、$z \in Z$ を点とする。任意のアフィン
+開近傍 $i(z) \in U \subset X$ を選び、$U = \Spec(R)$ と書く。
+補題 \ref{schemes-lemma-closed-immersion-affine-case} により、
+$i^{-1}(U) \to U$ はアフィンスキームの射
+$\Spec(R/I) \to \Spec(R)$ と同一視できる。まず、これは
+$z \in i^{-1}(U) \subset Z$ が $z$ のアフィン近傍であることを意味する。
+したがって $Z$ はスキームである。次に、これは $\mathcal{I}|_U$ が
+$\widetilde I$ であることを意味する。言い換えれば、各点 $x \in i(Z)$ に
+対して、その近傍上で $\mathcal{I}$ が準連接となる開近傍が存在する。
+$\mathcal{I}|_{X \setminus i(Z)}
+\cong \mathcal{O}_{X \setminus i(Z)}$ であることに注意する。したがって
+イデアル層の制限は $X \setminus i(Z)$ 上でも準連接である。ゆえに
+$\mathcal{I}$ は準連接である。
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-immersion}
+$X$ をスキームとする。
+\begin{enumerate}
+\item スキームの射が局所環付き空間の開埋め込みであるとき、それを
+{\it 開埋め込み}と呼ぶ（定義
+\ref{schemes-definition-immersion-locally-ringed-spaces} を参照）。
+\item $X$ の {\it 開部分スキーム}とは、定義
+\ref{schemes-definition-open-subspace} の意味での $X$ の開部分空間である。
+補題 \ref{schemes-lemma-open-subspace-scheme} により $X$ の開部分スキームは
+スキームである。
+\item スキームの射が局所環付き空間の閉埋め込みであるとき、それを
+{\it 閉埋め込み}と呼ぶ（定義
+\ref{schemes-definition-closed-immersion-locally-ringed-spaces} を参照）。
+\item $X$ の {\it 閉部分スキーム}とは、定義
+\ref{schemes-definition-closed-subspace} の意味での $X$ の閉部分空間である。
+補題 \ref{schemes-lemma-closed-subspace-scheme} により閉部分スキームは
+スキームである。
+\item スキームの射 $f : X \to Y$ が $j \circ i$ と分解でき、$i$ が
+閉埋め込み、$j$ が開埋め込みであるとき、これを {\it 埋め込み}、または
+{\it 局所閉埋め込み}と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+節 \ref{schemes-section-open-immersion} と \ref{schemes-section-closed-immersion} の補題から、
+スキームの任意の開埋め込み（それぞれ閉埋め込み）は、終域の開部分スキーム
+（それぞれ閉部分スキーム）の包含写像と同型であることが従う。
+
+\medskip\noindent
+本書の閉埋め込みの定義は Hartshorne と EGA の中間にある。Hartshorne は
+閉埋め込みをスキームの射 $f : X \to Y$ であって、$X$ から $Y$ の
+閉部分集合への同相写像を誘導し、かつ
+$f^\# : \mathcal{O}_Y \to f_*\mathcal{O}_X$ が全射となるものと定義する。
+\cite[Page 85]{H} を参照せよ。補題
+\ref{schemes-lemma-characterize-closed-immersions} で、これが本書の概念と同値である
+ことを示す。\cite{EGA} では Grothendieck と Dieudonn\'e が、まず準連接
+イデアル層を用いる例 \ref{schemes-example-closed-subspace} の構成によって
+閉部分スキームを定義し、次に閉埋め込みを、ある閉部分スキームとの同型を
+誘導する射 $f : X \to Y$ と定義する。補題
+\ref{schemes-lemma-closed-subspace-scheme} により、これは本書の概念と一致する。
+
+\medskip\noindent
+教育上の観点からいえば、上の定義は惨事／悪夢である。この内容を学生に
+教える際には、閉埋め込みをスキームのアフィン射 $f : X \to Y$ であって、
+$f^\# : \mathcal{O}_Y \to f_*\mathcal{O}_X$ が全射となるものと定義する方が便利なことが
+多い。実際、アフィン射という概念（射の章の節
+\ref{morphisms-section-affine}）は非常に自然で理解しやすいことがわかる。
+
+\medskip\noindent
+閉埋め込みについてさらに知るには、射の章の節
+\ref{morphisms-section-closed-immersions} および
+\ref{morphisms-section-closed-immersions-quasi-coherent} を参照されたい。
+
+\medskip\noindent
+局所閉部分スキームと埋め込みについては、本節の末尾で論じる。
+
+\begin{remark}
+\label{schemes-remark-not-reverse-open-closed}
+$f : X \to Y$ がスキームの埋め込みであっても、一般には $f$ を開埋め込みの
+後に閉埋め込みを続けたものとして分解することはできない。射の章の例
+\ref{morphisms-example-thibaut} を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{schemes-lemma-immersion-when-closed}
+$f : Y \to X$ をスキームの埋め込みとする。このとき $f$ が閉埋め込みである
+ための必要十分条件は、$f(Y) \subset X$ が閉部分集合であることである。
+\end{lemma}
+
+\begin{proof}
+$f$ が閉埋め込みならば、定義により $f(Y)$ は閉である。逆に $f(Y)$ が
+閉であるとする。定義により開部分スキーム $U \subset X$ が存在し、$f$ は
+閉埋め込み $i : Y \to U$ と開埋め込み $j : U \to X$ の合成である。
+$\mathcal{I} \subset \mathcal{O}_U$ を閉埋め込み $i$ に付随する準連接
+イデアル層とする。
+$\mathcal{I}|_{U \setminus i(Y)}
+= \mathcal{O}_{U \setminus i(Y)}
+= \mathcal{O}_{X \setminus i(Y)}|_{U \setminus i(Y)}$
+であることに注意する。したがって（層の章の節
+\ref{sheaves-section-glueing-sheaves} を参照）、$\mathcal{I}$ と
+$\mathcal{O}_{X \setminus i(Y)}$ を貼り合わせ、イデアル層
+$\mathcal{J} \subset \mathcal{O}_X$ を得る。$X$ の各点は $\mathcal{J}$ が
+準連接となる近傍を持つので、$\mathcal{J}$ は準連接である
+（特に局所的に切断で生成される）。構成により
+$\mathcal{O}_X/\mathcal{J}$ の台は $U$ に含まれ、そこへの制限は
+$\mathcal{O}_U/\mathcal{I}$ に等しい。したがって $\mathcal{I}$ と
+$\mathcal{J}$ に付随する閉部分空間は標準的に同型である。例
+\ref{schemes-example-closed-subspace} を参照せよ。特に $U$ の閉部分空間で
+$\mathcal{I}$ に付随するものは、$X$ の閉部分空間と同型である。補題
+\ref{schemes-lemma-closed-immersion} により $Y \to U$ は $\mathcal{I}$ に付随する
+閉部分空間と同一視されるので、$Y \to U \to X$ は閉埋め込みである。
+\end{proof}
+
+\noindent
+$f : Y \to X$ を埋め込みとする。
+$Z = \overline{f(Y)} \setminus f(Y)$ は $X$ の閉部分集合であるとし、
+$U = X \setminus Z$ と置く。補題により、$U$ は $X$ の最大の開部分空間で、
+$f : Y \to X$ が $U$ への閉埋め込みを経由して分解するものとなる。
+$X$ の {\it 局所閉部分スキーム}を対 $(Z, U)$ であって、閉部分スキーム
+$Z$（開部分スキーム $U$ のもの）からなり、さらに $X$ のものとして
+$\overline{Z} \cup U = X$ を満たすものと定義する。通常は「$Z$ を $X$ の
+局所閉部分スキームとする」とだけいう。さらに $U$ は射 $Z \to X$ から
+復元できる。以上により、任意の埋め込み $f : Y \to X$ は一意に
+$Y \to Z \to X$ と分解する。ここで $Z$ は $X$ の局所閉部分空間であり、
+$Y \to Z$ は同型である。
+
+\medskip\noindent
+このことの利点は、$X$ の局所閉部分スキーム全体が集合をなすことである。
+明らかな理由から包含と呼ぶ半順序を、この集合上に定義できる。明示的には、
+$Z \to X$ と $Z' \to X$ が $X$ の二つの局所閉部分スキームであるとき、
+{\it $Z$ は $Z'$ に含まれる}とは、射 $Z \to X$ が $Z'$ を経由して分解する
+ことをいう。この場合、もちろん $Z$ は $Z'$ の一意な局所閉部分スキームと
+同一視され、以下同様である。
+
+\medskip\noindent
+埋め込みについてさらに知るには、射の章の節
+\ref{morphisms-section-immersions} を参照されたい。
+
+\section{スキームの Zariski 位相}
+\label{schemes-section-topology}
+
+\noindent
+スキームの Zariski 位相に適合させた位相の基礎事項については、位相の章の節
+\ref{topology-section-introduction} を参照せよ。
+
+\begin{lemma}
+\label{schemes-lemma-scheme-sober}
+$X$ をスキームとする。$X$ の任意の既約閉部分集合は一意な生成点を持つ。
+言い換えれば $X$ はソバー位相空間である。位相の章の定義
+\ref{topology-definition-generic-point} を参照せよ。
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$ を既約閉部分集合とする。各アフィン開集合 $U \subset X$ を
+$U = \Spec(R)$ と書けば、$Z \cap U = V(I)$ であり、ここで
+$I \subset R$ は一意な根基イデアルである。$Z \cap U$ は空であるか既約で
+あることに注意する。後者の場合（少なくとも一つの $U$ について起こる）、
+$I = \mathfrak p$ は素イデアルであり、$\xi$、すなわち $Z \cap U$ の
+生成点である。
+したがって $Z = \overline{\{\xi\}}$、すなわち $\xi$ は $Z$ の生成点である。
+$\xi'$ が第二の生成点ならば、$\xi' \in Z \cap U$ であり、直ちに
+$\xi' = \xi$ が従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-basis-affine-opens}
+$X$ をスキームとする。$X$ のアフィン開集合全体は $X$ の位相の基底をなす。
+\end{lemma}
+
+\begin{proof}
+これは節 \ref{schemes-section-schemes} の開部分スキームに関する議論から従う。
+\end{proof}
+
+\begin{remark}
+\label{schemes-remark-intersection-affine-opens}
+一般に $X$ の二つのアフィン開集合の共通部分はアフィン開集合ではない。
+例 \ref{schemes-example-affine-space-zero-doubled} を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{schemes-lemma-locally-quasi-compact}
+任意のスキームの台位相空間は局所準コンパクトである。位相の章の定義
+\ref{topology-definition-locally-quasi-compact} を参照せよ。
+\end{lemma}
+
+\begin{proof}
+これは上の補題 \ref{schemes-lemma-basis-affine-opens} と、環のスペクトルが
+準コンパクトであるという事実から従う。代数の章の補題
+\ref{algebra-lemma-quasi-compact} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-standard-open-two-affines}
+$X$ をスキームとする。$U, V$ を $X$ のアフィン開集合とし、
+$x \in U \cap V$ とする。アフィン開近傍 $W$、すなわち $x$ の近傍が存在し、
+$W$ は $U$ と $V$ の双方において標準開集合となる。
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$ および $V = \Spec(B)$ と書く。$x$ が素イデアル
+$\mathfrak p \subset A$ と素イデアル $\mathfrak q \subset B$ に対応するとする。
+$f \in A$, $f \not \in \mathfrak p$ で $D(f) \subset U \cap V$ となるものを
+選べる。$D(f)$ の任意の標準開集合は $\Spec(A) = U$ の標準開集合であることに
+注意する。したがって $U \subset V$ と仮定してよい。言い換えれば、今や
+$U$ を $V$ のアフィン開集合とみなせる。次に $g \in B$,
+$g \not \in \mathfrak q$ で $D(g) \subset U$ となるものを選ぶ。この場合
+$D(g) = D(g_A)$ であり、ここで $g_A \in A$ は $g$ の像を表す。この像は
+写像 $B \to A$ による。これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-good-subcover}
+$X$ をスキームとし、$X = \bigcup_i U_i$ をアフィン開被覆とする。
+$V \subset X$ をアフィン開集合とする。標準開被覆
+$V = \bigcup_{j = 1, \ldots, m} V_j$ が存在し、各 $V_j$ はいずれかの $U_i$ の
+標準開集合となる（定義
+\ref{schemes-definition-standard-covering} を参照）。
+\end{lemma}
+
+\begin{proof}
+$v \in V$ をとる。このとき $v \in U_i$ であるような $i$ がある。
+上の補題 \ref{schemes-lemma-standard-open-two-affines} により開集合
+$v \in W_v \subset V \cap U_i$ が存在し、$W_v$ は $V$ と $U_i$ の双方で
+標準開集合となる。$V$ は準コンパクトなので補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-sheaf-on-affines}
+$X$ をスキームとし、$\mathcal{B}$ を $X$ のアフィン開集合全体とする。
+$\mathcal{F}$ を $\mathcal{B}$ 上の集合の前層とする。層の章の定義
+\ref{sheaves-definition-presheaf-basis} を参照せよ。次は同値である。
+\begin{enumerate}
+\item $\mathcal{F}$ は $X$ 上の層を $\mathcal{B}$ に制限したものである。
+\item $\mathcal{F}$ は $\mathcal{B}$ 上の層である。
+\item $\mathcal{F}(\emptyset)$ は一点集合であり、$U = V \cup W$、
+$U, V, W \in \mathcal{B}$、かつ $V, W \subset U$ が標準開集合
+（代数の章の定義 \ref{algebra-definition-Zariski-topology}）であるとき、写像
+$$
+\mathcal{F}(U) \longrightarrow \mathcal{F}(V) \times \mathcal{F}(W)
+$$
+は単射で、その像は対 $(s, t)$ であって
+$s|_{V \cap W} = t|_{V \cap W}$ を満たすもの全体である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は層の章の補題
+\ref{sheaves-lemma-restrict-basis-equivalence} である。(2) が (3) を含意する
+ことは明らかである。したがって (3) が (2) を含意することを示せば十分である。
+層の章の補題 \ref{sheaves-lemma-cofinal-systems-coverings-standard-case} と
+補題 \ref{schemes-lemma-standard-open} により、$\mathcal{B}$ の元の標準開被覆
+（定義 \ref{schemes-definition-standard-covering}）について層条件が成り立つことを
+示せば十分である。$U = U_1 \cup \ldots \cup U_n$ を標準開被覆とし、
+ここで $U \subset X$ はアフィン開集合である。この被覆についての
+層条件を $n$ に関する帰納法で証明する。$n = 0$ ならば $U$ は空であり、
+仮定から層条件を得る。$n = 1$ ならば証明すべきことはない。
+$n = 2$ ならば仮定 (3) そのものである。$n > 2$ ならば
+$U_i = D(f_i)$ と書き、ここで $f_i \in A = \mathcal{O}_X(U)$ である。
+$s_i \in \mathcal{F}(U_i)$ を、
+$s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$ をすべての
+$1 \leq i < j \leq n$ に対して満たす切断とする。
+$U = U_1 \cup \ldots \cup U_n$ なので、
+$1 = \sum_{i = 1, \ldots, n} a_i f_i$ が $A$ において成り立ち、ここで
+ある $a_i \in A$ を用いる。代数の章の補題
+\ref{algebra-lemma-Zariski-topology} を参照せよ。
+$g = \sum_{i = 1, \ldots, n - 1} a_if_i$ と置く。このとき
+$U = D(g) \cup D(f_n)$ である。
+$D(g) = D(gf_1) \cup \ldots \cup D(gf_{n - 1})$ は標準開被覆であることに
+注意する。帰納法により一意な切断 $s' \in \mathcal{F}(D(g))$ が存在し、
+$s_i|_{D(gfi)}$ と $i = 1, \ldots, n - 1$ に対して一致する。
+$s'$ と $s_n$ は $D(gf_n)$ への制限が等しいと主張する。これは帰納法と被覆
+$D(gf_n) = D(gf_nf_1) \cup \ldots \cup D(gf_nf_{n - 1})$ から従う。
+したがって一意な切断 $s \in \mathcal{F}(U)$ が存在し、$D(g)$ への制限は
+$s'$、$D(f_n)$ への制限は $s_n$ である。$s$ が $s_i$ に、$D(f_i)$ 上で
+$i = 1, \ldots, n - 1$ に対して制限されることの確認と、$s$ の一意性の
+確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-scheme-finite-discrete-affine}
+$X$ を、台位相空間が有限離散集合であるスキームとする。このとき $X$ は
+アフィンである。
+\end{lemma}
+
+\begin{proof}
+$X = \{x_1, \ldots, x_n\}$ と書く。このとき $U_i = \{x_i\}$ は $x_i$ の
+開近傍である。補題 \ref{schemes-lemma-basis-affine-opens} によりこれはアフィンである。
+したがって $X$ は有限個のアフィンスキームの非交和であり、補題
+\ref{schemes-lemma-disjoint-union-affines} によりアフィンである。
+\end{proof}
+
+\begin{example}
+\label{schemes-example-scheme-without-closed-points}
+閉点を持たないスキームが存在する。実際、局所整域 $R$ で、スペクトルが
+$(0) = \mathfrak p_0 \subset \mathfrak p_1 \subset \mathfrak p_2
+\subset \ldots \subset \mathfrak m$ の形をしたものをとる。
+すると開部分スキーム $\Spec(R) \setminus \{\mathfrak m\}$ は閉点を持たない。
+そのような環 $R$ の存在を見るため、任意の全順序群 $(\Gamma, \geq)$ に対して
+付値環 $A$ が存在し、その付値群が $(\Gamma, \geq)$ であることを用いる。
+\cite{Krull} を参照せよ。記法については代数の章の節
+\ref{algebra-section-valuation-rings} を参照せよ。ここで
+$\Gamma = \mathbf{Z}x_1 \oplus \mathbf{Z}x_2 \oplus \mathbf{Z}x_3 \oplus
+\ldots$ とし、$\sum_i a_i x_i \geq 0$ と定義するのは、最初の非零の
+$a_i$ が $> 0$ であるか、すべての $a_i = 0$ である場合に限る。したがって
+$x_1 \geq x_2 \geq x_3 \geq  \ldots \geq 0$ である。部分集合
+$x_i + \Gamma_{\geq 0}$ は $(\Gamma, \geq)$ の素イデアルである。代数の章の
+補題 \ref{algebra-lemma-ideals-valuation-ring} の前の記法を参照せよ。
+これらと $\emptyset$ および $\Gamma_{\geq 0}$ だけが素イデアルである。
+したがって代数の章の補題 \ref{algebra-lemma-ideals-valuation-ring} により、
+$A$ はスペクトルが指定した構造を持つ環の例である。
+\end{example}
+
+\section{被約スキーム}
+\label{schemes-section-reduced}
+
+\begin{definition}
+\label{schemes-definition-reduced}
+$X$ をスキームとする。$X$ が {\it 被約}であるとは、すべての局所環
+$\mathcal{O}_{X, x}$ が被約であることをいう。
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-reduced}
+スキーム $X$ が被約であるための必要十分条件は、$\mathcal{O}_X(U)$ が
+任意の開集合 $U \subset X$ に対して被約環であることである。
+\end{lemma}
+
+\begin{proof}
+$X$ が被約であると仮定する。$f \in \mathcal{O}_X(U)$ を $f^n = 0$ を
+満たす切断とする。このとき $f$ の $\mathcal{O}_{U, u}$ における像は、
+すべての $u \in U$ に対して零である。したがって $f$ は零である。
+層の章の補題 \ref{sheaves-lemma-sheaf-subset-stalks} を参照せよ。
+逆に、$\mathcal{O}_X(U)$ がすべての開集合 $U$ に対して被約であると仮定する。
+任意の非零元 $f \in \mathcal{O}_{X, x}$ をとる。任意の代表
+$(U, f \in \mathcal{O}(U))$ は非零であり、これは $f$ の代表なので、
+したがって冪零ではない。
+ゆえに $f$ は $\mathcal{O}_{X, x}$ において冪零ではない。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-affine-reduced}
+アフィンスキーム $\Spec(R)$ が被約であるための必要十分条件は、$R$ が
+被約であることである。
+\end{lemma}
+
+\begin{proof}
+順方向は上の補題 \ref{schemes-lemma-reduced} から直ちに従う。逆方向は、被約環の
+任意の局所化が被約であり、特に被約環の局所環が被約であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-reduced-closed-subscheme}
+$X$ をスキームとし、$T \subset X$ を閉部分集合とする。次の性質を持つ
+閉部分スキーム $Z \subset X$ が一意に存在する：(a) $Z$ の台位相空間は
+$T$ に等しく、(b) $Z$ は被約である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_X$ を、規則
+$$
+\mathcal{I}(U) = \{f \in \mathcal{O}_X(U) \mid
+f(t) = 0\text{ for all }t \in T\cap U\}
+$$
+で定義される部分前層とする。ここで $f(t)$ は、$f$ の剰余体 $\kappa(t)$、
+すなわち $X$ の $t$ におけるものへの像を表す。条件は局所的なので、$\mathcal{I}$ が
+イデアル層であることは明らかである。さらに $U = \Spec(R)$ をアフィン
+開集合とする。$T \cap U = V(I)$ と書け、ここで $I \subset R$ は一意な
+根基イデアルである。素イデアル $\mathfrak p \in V(I)$ で
+$t \in T \cap U$ に対応するものと、元 $f \in R$ が与えられると
+$f(t) = 0 \Leftrightarrow f \in \mathfrak p$ である。したがって代数の章の補題
+\ref{algebra-lemma-Zariski-topology} により
+$\mathcal{I}(U) = \bigcap_{\mathfrak p \in V(I)} \mathfrak p
+= I$ である。
+さらに、任意の標準開集合 $D(g) \subset \Spec(R) = U$ に対して、同じ議論により
+$\mathcal{I}(D(g)) = I_g$ である。よって $\widetilde I$ と
+$\mathcal{I}|_U$ は開集合の基底上で（イデアルとして）一致し、したがって
+等しい。ゆえに $\mathcal{I}$ は準連接イデアル層である。
+
+\medskip\noindent
+ここで $Z$ をイデアル層 $\mathcal{I}$ に付随する閉部分空間として定義できる。
+各アフィン開集合 $U = \Spec(R)$（$X$ のもの）に対して
+$Z \cap U = \Spec(R/I)$ であり、ここで $I$ は根基イデアルである。したがって
+上の補題 \ref{schemes-lemma-affine-reduced} により $Z$ は被約である。構成により
+$Z$ の台閉部分集合は $T$ である。これで性質 (a), (b) を持つ閉部分スキームを
+得た。
+
+\medskip\noindent
+$Z' \subset X$ を性質 (a), (b) を持つ第二の閉部分スキームとする。
+各アフィン開集合 $U = \Spec(R)$（$X$ のもの）に対し
+$Z' \cap U = \Spec(R/I')$ であり、ここであるイデアル $I' \subset R$ を用いる。
+補題 \ref{schemes-lemma-affine-reduced} により環 $R/I'$ は被約なので、$I'$ は根基である。
+$V(I') = T \cap U = V(I)$ なので、代数の章の補題
+\ref{algebra-lemma-Zariski-topology} により $I = I'$ を得る。したがって
+$Z'$ と $Z$ は同じイデアル層で定義され、ゆえに等しい。
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-reduced-induced-scheme}
+$X$ をスキームとし、$Z \subset X$ を閉部分集合とする。$Z$ 上の
+{\it スキーム構造}とは、閉部分スキーム $Z'$（$X$ のもので、台集合が
+$Z$ に等しいもの）によって与えられるものをいう。これを示すため、しばしば「$(Z, \mathcal{O}_Z)$ を
+$Z$ 上のスキーム構造とする」という。$Z$ 上の {\it 被約誘導スキーム構造}とは、
+補題 \ref{schemes-lemma-reduced-closed-subscheme} で構成したものである。
+{\it 被約化 $X_{red}$}（$X$ のもの）とは、$X$ 自身の上の被約誘導
+スキーム構造である。
+\end{definition}
+
+\noindent
+「$Z \subset X$ を $X$ の既約成分とする」というとき、しばしば被約誘導
+スキーム構造を用いて $Z$ を $X$ の被約閉部分スキームとみなす。
+
+\begin{remark}
+\label{schemes-remark-reduced-induced-locally-closed}
+$X$ をスキームとし、$T \subset X$ を局所閉部分集合とする。この状況でも
+「$T$ 上の被約誘導スキーム構造」という語を用いることがある。これは、$T$ を
+開部分スキーム $X \setminus \partial T$（$X$ のもの）の閉部分集合とみなしたときの、
+定義 \ref{schemes-definition-reduced-induced-scheme} による被約誘導スキーム構造を指す。
+ここで $\partial T = \overline{T} \setminus T$ は $T$ の「境界」、すなわち
+$X$ の位相空間における境界である。
+\end{remark}
+
+\begin{lemma}
+\label{schemes-lemma-map-into-reduction}
+$X$ をスキーム、$Z \subset X$ を閉部分スキーム、$Y$ を被約スキームとする。
+射 $f : Y \to X$ が $Z$ を経由して分解するための必要十分条件は、集合論的に
+$f(Y) \subset Z$ であることである。特に任意の射 $Y \to X$ は
+$Y \to X_{red} \to X$ と分解する。
+\end{lemma}
+
+\begin{proof}
+集合論的に $f(Y) \subset Z$ と仮定する。$\mathcal{I} \subset \mathcal{O}_X$ を
+$Z$ のイデアル層とする。任意のアフィン開集合 $U \subset X$、
+$\Spec(B) = V \subset Y$ で $f(V) \subset U$ を満たすもの、および任意の
+$g \in \mathcal{I}(U)$ に対して、引き戻し
+$b = f^\sharp(g) \in \Gamma(V, \mathcal{O}_Y) = B$ は任意の $y \in V$ の
+剰余体において零に写る。言い換えれば
+$b \in \bigcap_{\mathfrak p \subset B} \mathfrak p$ である。$b = 0$ が従う。
+これは $B$ が被約だからである（補題 \ref{schemes-lemma-reduced} および代数の章の補題
+\ref{algebra-lemma-Zariski-topology}）。したがって補題
+\ref{schemes-lemma-characterize-closed-subspace} により $f$ は $Z$ を経由して分解する。
+\end{proof}
+
+\section{スキームの点}
+\label{schemes-section-points}
+
+\noindent
+スキーム $X$ が与えられると、関手
+$$
+h_X : \Sch^{opp}
+\longrightarrow
+\textit{Sets}, \quad
+T \longmapsto \Mor(T, X).
+$$
+を定義できる。圏の章の例 \ref{categories-example-hom-functor} を参照せよ。
+これは $X$ の {\it 点関手}と呼ばれる。スキーム論の興味深い一面は、$X$ の
+内部幾何をこの関手 $h_X$ によって記述することである。本節では $X$ の点を
+記述する簡単な方法を見いだす。
+
+\medskip\noindent
+$X$ をスキームとする。$R$ を極大イデアル $\mathfrak m \subset R$ を持つ
+局所環とする。$f : \Spec(R) \to X$ をスキームの射とする。点
+$x \in X$ を閉点 $\mathfrak m \in \Spec(R)$ の像とする。このとき局所環の
+局所準同型
+$$
+f^\sharp :
+\mathcal{O}_{X, x}
+\longrightarrow
+\mathcal{O}_{\Spec(R), \mathfrak m} = R.
+$$
+を得る。
+
+\begin{lemma}
+\label{schemes-lemma-morphism-from-spec-local-ring}
+$X$ をスキーム、$R$ を局所環とする。上の構成は、射
+$\Spec(R) \to X$ と、対 $(x, \varphi)$ であって点 $x \in X$ および
+局所環の局所準同型 $\varphi : \mathcal{O}_{X, x} \to R$ からなるものとの間の
+全単射な対応を与える。
+\end{lemma}
+
+\begin{proof}
+$A$ を環とする。任意の環準同型 $\psi : A \to R$ に対して、一意な素イデアル
+$\mathfrak p \subset A$ と分解 $A \to A_{\mathfrak p} \to R$ が存在し、最後の
+写像は局所環の局所準同型である。実際
+$\mathfrak p = \psi^{-1}(\mathfrak m)$ である。補題
+\ref{schemes-lemma-morphism-into-affine} により、これは $X$ がアフィンスキームの場合の
+補題を証明する。
+
+\medskip\noindent
+$X$ を一般のスキームとする。任意の $x \in X$ はアフィン開集合
+$U \subset X$ に含まれる。アフィンの場合から、任意の対 $(x, \varphi)$ が
+補題の前の構成の結果として生じることが従う。
+
+\medskip\noindent
+証明を終えるには、任意の射 $f : \Spec(R) \to X$ の像が、像 $x$、すなわち
+$\Spec(R)$ の閉点の像を含む任意のアフィン開集合に含まれることを示せば十分である。
+実際、任意の開近傍 $x \in V \subset X$ で $x$ を含むものをとる。このとき
+$f^{-1}(V) \subset \Spec(R)$ は一意な閉点を含む開集合なので
+$\Spec(R)$ に等しい。
+\end{proof}
+
+\noindent
+上の補題の特別な場合として、各点 $x$（スキーム $X$ のもの）に対して、
+$X$ の $x$ における局所環上の恒等写像に対応する標準射
+\begin{equation}
+\label{schemes-equation-canonical-morphism}
+\Spec(\mathcal{O}_{X, x}) \longrightarrow X
+\end{equation}
+を得る。上の補題は、任意の射 $f : \Spec(R) \to X$ に対して一意な点
+$x \in X$ が存在し、$f$ が
+$\Spec(R) \to \Spec(\mathcal{O}_{X, x}) \to X$ と分解し、最初の写像は
+局所準同型 $\mathcal{O}_{X, x} \to R$ から来る、と言い換えられる。
+
+\medskip\noindent
+スキームの射 $f : X \to S$ と、点 $x$ で点 $s \in S$ に写るものがある場合、
+可換図式
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, x}) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\mathcal{O}_{S, s}) \ar[r] & S
+}
+$$
+を得る。左の縦写像は局所環写像
+$f^\sharp_x : \mathcal{O}_{S, s} \to \mathcal{O}_{X, x}$ に対応する。
+
+\begin{lemma}
+\label{schemes-lemma-specialize-points}
+$X$ をスキームとし、$x, x' \in X$ を $X$ の点とする。$x' \in X$ が $x$ の
+一般化であるための必要十分条件は、$x'$ が標準射
+$\Spec(\mathcal{O}_{X, x}) \to X$ の像に含まれることである。
+\end{lemma}
+
+\begin{proof}
+連続写像は特殊化／一般化の関係を保存する。
+$\Spec(\mathcal{O}_{X, x})$ の各点は閉点の一般化なので、
+$\Spec(\mathcal{O}_{X, x}) \to X$ の像の各点は $x$ の一般化である。
+逆に $x'$ が $x$ の一般化であるとする。アフィン開近傍
+$U = \Spec(R)$（$x$ のもの）を選ぶ。このとき $x' \in U$ である。$\mathfrak p \subset R$ と
+$\mathfrak p' \subset R$ をそれぞれ $x$ と $x'$ に対応する素イデアルとする。
+$x'$ は $x$ の一般化なので $\mathfrak p' \subset \mathfrak p$ である。
+これは $\mathfrak p'$ が射
+$\Spec(\mathcal{O}_{X, x}) = \Spec(R_{\mathfrak p})
+\to \Spec(R) = U \subset X$ の像に含まれることを意味し、望む結論を得る。
+\end{proof}
+
+\noindent
+次に、体のスペクトルからの射を論じる。$(R, \mathfrak m, \kappa)$ を極大
+イデアル $\mathfrak m$ と剰余体 $\kappa$ を持つ局所環とする。$K$ を体とする。
+定義により局所準同型 $R \to K$ は $R \to \kappa \to K$ と分解する。
+すなわち射 $\kappa \to K$ と同じものである。したがって射
+$$
+\Spec(K) \longrightarrow X
+$$
+は対 $(x, \kappa(x) \to K)$ に対応する。$X$ への体のスペクトルからの
+射上に前順序を定義できる。$\Spec(K) \to X$ が
+$\Spec(L) \to X$ を支配するとは、$\Spec(K) \to X$ が
+$\Spec(L) \to X$ を経由して分解することをいう。これは次の概念を示唆する。
+一時的に、二つの射 $p : \Spec(K) \to X$ と $q : \Spec(L) \to X$ が
+{\it 同値}であるとは、第三の体 $\Omega$ と可換図式
+$$
+\xymatrix{
+\Spec(\Omega) \ar[r] \ar[d] &
+\Spec(L) \ar[d]^q \\
+\Spec(K) \ar[r]^p &
+X
+}
+$$
+が存在することをいう。当然ながら、これは三つのスキーム $\Spec(K)$,
+$\Spec(L)$, $\Spec(\Omega)$ の一意な点がすべて同じ $x \in X$ に写ることを
+直ちに含意する。したがって図式は（上の注意により）点 $x \in X$ と体の
+可換図式
+$$
+\xymatrix{
+\Omega &
+L \ar[l] \\
+K \ar[u] &
+\kappa(x) \ar[l] \ar[u]
+}
+$$
+に対応する。これは同値関係を定める。実際、任意の体拡大の族
+$K_i/\kappa$ に対し、ある体拡大 $\Omega/\kappa$ が存在し、すべての
+体拡大 $K_i$ が $\Omega$ に含まれるからである。
+
+\begin{lemma}
+\label{schemes-lemma-characterize-points}
+$X$ をスキームとする。$X$ の点は、体のスペクトルから $X$ への射の同値類と
+全単射に対応する。さらに各同値類は、最小元
+$\Spec(\kappa(x)) \to X$ を（一意な同型を除いて一意に）含む。
+\end{lemma}
+
+\begin{proof}
+上の議論から従う。
+\end{proof}
+
+\noindent
+もちろん射 $\Spec(\kappa(x)) \to X$ は標準射
+$\Spec(\mathcal{O}_{X, x}) \to X$ を経由して分解する。補題
+\ref{schemes-lemma-specialize-points} のこの状況での内容は、射
+$\Spec(\kappa(x')) \to X$ が
+$\Spec(\kappa(x')) \to \Spec(\mathcal{O}_{X, x}) \to X$ と分解することである。
+これは $x'$ が $x$ の一般化であるときに成り立つ。
+スキームの射 $f : X \to S$ と、点 $x$ で点 $s \in S$ に写るものがある場合、可換図式
+$$
+\xymatrix{
+\Spec(\kappa(x)) \ar[r] \ar[d] &
+\Spec(\mathcal{O}_{X, x}) \ar[r] \ar[d] &
+X \ar[d] \\
+\Spec(\kappa(s)) \ar[r] &
+\Spec(\mathcal{O}_{S, s}) \ar[r] &
+S.
+}
+$$
+を得る。
+
+\section{スキームの貼り合わせ}
+\label{schemes-section-glueing-schemes}
+
+\noindent
+$I$ を集合とする。各 $i \in I$ に対して $(X_i, \mathcal{O}_i)$ を局所環付き
+空間とする（実際、以下の構成は環付き空間についても同様に成り立つ）。
+各対 $i, j \in I$ に対して $U_{ij} \subset X_i$ を開部分空間とする。
+各対 $i, j \in I$ に対して
+$$
+\varphi_{ij} : U_{ij} \to U_{ji}
+$$
+を局所環付き空間の同型とする。便宜上 $U_{ii} = X_i$ と仮定する。
+各三つ組 $i, j, k \in I$ に対して次を仮定する。
+\begin{enumerate}
+\item
+$\varphi_{ij}^{-1}(U_{ji} \cap U_{jk}) =  U_{ij} \cap U_{ik}$ が成り立つ。
+\item 図式
+$$
+\xymatrix{
+U_{ij} \cap U_{ik} \ar[rr]_{\varphi_{ik}} \ar[rd]_{\varphi_{ij}} & &
+U_{ki} \cap U_{kj} \\
+& U_{ji} \cap U_{jk} \ar[ru]_{\varphi_{jk}}
+}
+$$
+は可換である。
+\end{enumerate}
+（特に $\varphi_{ii} = \text{id}_{X_i}$ が従う。）上の条件を満たす族
+$(I, (X_i)_{i\in I}, (U_{ij})_{i, j\in I}, (\varphi_{ij})_{i, j\in I})$
+を貼り合わせデータと呼ぶことにする。
+
+\begin{lemma}
+\label{schemes-lemma-glue}
+\begin{slogan}
+二つの局所環付き空間があり、一方の部分空間が他方の部分空間と同型ならば、
+両者を一つの大きな局所環付き空間に貼り合わせることができる。
+\end{slogan}
+局所環付き空間の任意の貼り合わせデータに対して、局所環付き空間 $X$、
+開部分空間 $U_i \subset X$、および局所環付き空間の同型
+$\varphi_i : X_i \to U_i$ が存在し、次を満たす。
+\begin{enumerate}
+\item $X=\bigcup_{i\in I} U_i$。
+\item $\varphi_i(U_{ij}) = U_i \cap U_j$。
+\item $\varphi_{ij} =
+\varphi_j^{-1}|_{U_i \cap U_j} \circ \varphi_i|_{U_{ij}}$。
+\end{enumerate}
+局所環付き空間 $X$ は次の写像性質で特徴づけられる。局所環付き空間 $Y$ に
+対して
+\begin{eqnarray*}
+\Mor(X, Y) & = & \{ (f_i)_{i\in I} \mid
+f_i : X_i \to Y, \ f_j \circ \varphi_{ij} = f_i|_{U_{ij}}\} \\
+f & \mapsto & (f|_{U_i} \circ \varphi_i)_{i \in I} \\
+\Mor(Y, X) & = &
+\left\{
+\begin{matrix}
+\text{open covering }Y = \bigcup\nolimits_{i \in I} V_i\text{ and }
+(g_i : V_i \to X_i)_{i \in I}
+\text{ such that}\\
+g_i^{-1}(U_{ij}) = V_i \cap V_j
+\text{ and }
+g_j|_{V_i \cap V_j} = \varphi_{ij} \circ g_i|_{V_i \cap V_j}
+\end{matrix}
+\right\} \\
+g & \mapsto &
+V_i = g^{-1}(U_i), \ g_i = \varphi_i^{-1} \circ g|_{V_i}
+\end{eqnarray*}
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$X$ を段階的に構成する。集合として
+$$
+X = (\coprod X_i) / \sim.
+$$
+とおく。ここで $x \in X_i$ と $x' \in X_j$ が与えられたとき、$x \sim x'$ と
+定めるのは、$x \in U_{ij}$、$x' \in U_{ji}$、かつ
+$\varphi_{ij}(x) = x'$ である場合である。これは同値関係である。実際、$x \in X_i$、
+$x' \in X_j$、$x'' \in X_k$、$x \sim x'$、$x' \sim x''$ とすると
+$x' \in U_{ji} \cap U_{jk}$ である。したがって貼り合わせデータの条件 (1) により
+$x \in U_{ij} \cap U_{ik}$ であり、$x'' \in U_{ki} \cap U_{kj}$ である。
+条件 (2) により $\varphi_{ik}(x) = x''$ が従う（反射性と対称性は
+$U_{ii} = X_i$ および $\varphi_{ii} = \text{id}_{X_i}$ という仮定から従う）。
+自然な写像を $\varphi_i : X_i \to X$ と書き、
+$U_i = \varphi_i(X_i) \subset X$ と書く。$\varphi_i : X_i \to U_i$ は全単射である。
+
+\medskip\noindent
+$X$ 上の位相を、$U \subset X$ が開であるための必要十分条件が、
+$\varphi_i^{-1}(U)$ がすべての $i$ に対して開であることとなるように定義する。
+これが実際に位相を定義することの確認は読者に委ねる。特に $U_i$ は開である。
+これは $\varphi_j^{-1}(U_i)
+= U_{ji}$ が $X_j$ で、すべての $j$ に対して開だからである。
+さらに任意の開集合 $W \subset X_i$ に対して、像
+$\varphi_i(W) \subset U_i$ は開である。なぜなら
+$\varphi_j^{-1}(\varphi_i(W)) = \varphi_{ji}^{-1}(W \cap U_{ij})$ だからである。
+したがって $\varphi_i : X_i \to U_i$ は同相写像である。
+
+\medskip\noindent
+局所環付き空間を得るには、環の層 $\mathcal{O}_X$ を構成する必要がある。
+これは環の層 $\mathcal{O}_{U_i} := \varphi_{i, *} \mathcal{O}_i$ を貼り合わせて
+行う。実際、可換図式
+$$
+\xymatrix{
+U_{ij} \ar[rr]_{\varphi_{ij}} \ar[rd]_{\varphi_i|_{U_{ij}}}
+& &
+U_{ji} \ar[ld]^{\varphi_j|_{U_{ji}}} \\
+& U_i \cap U_j &
+}
+$$
+において上の矢印は環付き空間の同型である。したがって環の層の一意な同型
+$$
+\mathcal{O}_{U_i}|_{U_i \cap U_j}
+\longrightarrow
+\mathcal{O}_{U_j}|_{U_i \cap U_j}.
+$$
+を得る。これらは層の章の節 \ref{sheaves-section-glueing-sheaves} にある
+コサイクル条件を満たす。その節の結果により $\mathcal{O}_X$ という $X$ 上の
+環の層を得て、$\mathcal{O}_X|_{U_i}$ は上に表示した貼り合わせ写像と
+両立して $\mathcal{O}_{U_i}$ と同型である。特に $(X, \mathcal{O}_X)$ は
+局所環付き空間である。$\mathcal{O}_X$ の茎は対応する点における
+$\mathcal{O}_i$ の茎に等しいからである。
+
+\medskip\noindent
+写像性質の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-glue-schemes}
+\begin{slogan}
+スキームを貼り合わせて新しいスキームを得られる。
+\end{slogan}
+上の補題 \ref{schemes-lemma-glue} で、すべての $X_i$ がスキームであると仮定する。
+このとき得られる局所環付き空間 $X$ はスキームである。
+\end{lemma}
+
+\begin{proof}
+各 $U_i$ はスキームであり、したがって各 $x \in X$ はアフィン近傍を持つので
+明らかである。
+\end{proof}
+
+\noindent
+$X_i$ を $X$ の開部分空間とみなすのが通例であり、その同一視には
+同型 $\varphi_i$ を用いる。
+次の二つの例でもそうする。
+
+\begin{example}[原点を二重化したアフィン空間]
+\label{schemes-example-affine-space-zero-doubled}
+$k$ を体とし、$n \geq 1$ とする。
+$X_1 = \Spec(k[x_1, \ldots, x_n])$、
+$X_2 = \Spec(k[y_1, \ldots, y_n])$ とする。$0_1 \in X_1$ を極大イデアル
+$(x_1, \ldots, x_n) \subset k[x_1, \ldots, x_n]$ に対応する点とし、
+$0_2 \in X_2$ を極大イデアル
+$(y_1, \ldots, y_n) \subset k[y_1, \ldots, y_n]$ に対応する点とする。
+$U_{12} = X_1 \setminus \{0_1\}$ および $U_{21} = X_2 \setminus \{0_2\}$ とする。
+$\varphi_{12} : U_{12} \to U_{21}$ を、$k$-代数の同型
+$k[y_1, \ldots, y_n] \to k[x_1, \ldots, x_n]$ で $y_i$ を $x_i$ に写すものから
+来る同型とする（これは $X_1 \cong X_2$ を誘導し、$0_1$ を $0_2$ に写す）。
+$X$ を貼り合わせデータ
+$(X_1, X_2, U_{12}, U_{21}, \varphi_{12},
+\varphi_{21} = \varphi_{12}^{-1})$ から得られるスキームとする。例の前に導入した
+わずかな記法の濫用により、$X_1, X_2 \subset X$ を開部分スキームとみなす。
+射 $f : X \to \Spec(k[t_1, \ldots, t_n])$ があり、$X_1$ 上（それぞれ $X_2$ 上）
+では $k$-代数写像
+$k[t_1, \ldots, t_n] \to k[x_1, \ldots, x_n]$
+（それぞれ $k[t_1, \ldots, t_n] \to k[y_1, \ldots, y_n]$）で $t_i$ を $x_i$
+（それぞれ $t_i$ を $y_i$）に写すものに対応する。この射が
+$k[t_1, \ldots, t_n]$ と $\Gamma(X, \mathcal{O}_X)$ を同一視することは容易に
+わかる。$f(0_1) = f(0_2)$ なので $X$ はアフィンではない。
+
+\medskip\noindent
+$X_1$ と $X_2$ は $X$ のアフィン開集合であることに注意する。しかし
+$n = 2$ ならば $X_1 \cap X_2$ は例 \ref{schemes-example-not-affine} で記述した
+スキームであり、したがってアフィンではない。ゆえに一般に、スキームの
+アフィン開集合の共通部分はアフィンとは限らない（この事実は任意の
+$n > 1$ についてより一般に成り立つ）。
+
+\medskip\noindent
+この例には別の興味深い特徴もある。$n > 1$ ならば既約閉部分集合
+$T \subset X$ は多数存在する（例えば $X_1$ の閉でない任意の点の閉包をとる）。
+しかし $T = \{0_1\}$ または $T = \{0_2\}$ でない限り
+$0_1 \in T \Leftrightarrow 0_2 \in T$ である。証明は省略する。
+\end{example}
+
+\begin{example}[射影直線]
+\label{schemes-example-projective-line}
+$k$ を体とする。$X_1 = \Spec(k[x])$、$X_2 = \Spec(k[y])$ とする。
+$0 \in X_1$ を極大イデアル $(x) \subset k[x]$ に対応する点とし、
+$\infty \in X_2$ を極大イデアル $(y) \subset k[y]$ に対応する点とする。
+$U_{12} = X_1 \setminus \{0\} = D(x) = \Spec(k[x, 1/x])$ および
+$U_{21} = X_2 \setminus \{\infty\} = D(y) = \Spec(k[y, 1/y])$ とする。
+$\varphi_{12} : U_{12} \to U_{21}$ を $k$-代数の同型
+$k[y, 1/y] \to k[x, 1/x]$ で $y$ を $1/x$ に写すものから来る同型とする。
+$\mathbf{P}^1_k$ を貼り合わせデータ
+$(X_1, X_2, U_{12}, U_{21}, \varphi_{12},
+\varphi_{21} = \varphi_{12}^{-1})$ から得られるスキームとする。例の前に導入した
+わずかな記法の濫用により、$X_i \subset \mathbf{P}^1_k$ を開部分スキームと
+みなす。この場合、$\Gamma(\mathbf{P}^1_k, \mathcal{O}) = k$ であることがわかる。
+実際、$g(x)$ が $x$ の多項式で、$g(1/y)$ も $y$ の多項式であるならば、
+それは定数多項式に限られる。
+$\mathbf{P}^1_k$ は無限なので、$\mathbf{P}^1_k$ はアフィンではない。
+
+\medskip\noindent
+アフィン開集合 $U \subset \mathbf{P}^1_k$ であって、$0$ と $\infty$ の両方を
+含むものが存在すると主張する。実際 $U = \mathbf{P}^1_k \setminus \{1\}$ とする。
+ここで $1$ は $X_1$ の極大イデアル $(x - 1)$ に対応する点であり、同時に
+$X_2$ の極大イデアル $(y - 1)$ に対応する点である。このとき容易に
+$s = 1/(x - 1) = y/(1 - y) \in \Gamma(U, \mathcal{O}_U)$ とわかる。
+実際、$\Gamma(U, \mathcal{O}_U)$ は多項式環 $k[s]$ に等しく、対応する射
+$U \to \Spec(k[s])$ はスキームの同型であることを示せる。詳細は省略する。
+\end{example}
+
+\section{表現可能性の判定条件}
+\label{schemes-section-representable}
+
+\noindent
+この節では、節 \ref{schemes-section-glueing-schemes} の貼り合わせ補題を関手の言葉で
+言い換える。圏論、節 \ref{categories-section-opposite} の内容の一部を想起する。
+スキーム $X$ が与えられると、関手
+$$
+h_X : \Sch^{opp}
+\longrightarrow
+\textit{Sets}, \quad
+T \longmapsto \Mor(T, X).
+$$
+を定義できることを思い出そう。これは {\it $X$ の点関手}と呼ばれる。
+
+\medskip\noindent
+$F$ をスキームの圏から集合の圏への反変関手とする。式で書けば
+$$
+F : \Sch^{opp}
+\longrightarrow
+\textit{Sets}.
+$$
+である。Sites、節 \ref{sites-section-presheaves} と同じ用語を用いる。
+すなわち、スキーム $T$、元 $\xi \in F(T)$、および射 $f : T' \to T$ が
+与えられたとき、元 $f^*\xi$、すなわち $F(f)(\xi)$ を考え、ときには
+$\xi|_{T'}$ とさえ書く。
+
+\begin{definition}
+\label{schemes-definition-representable-functor}
+（圏論、定義 \ref{categories-definition-representable-functor} を参照。）
+$F$ を上のような、スキームの圏から集合の圏への反変関手とする。
+$F$ が {\it スキームにより表現可能}、または単に {\it 表現可能}であるというのは、
+あるスキーム $X$ が存在して $h_X \cong F$ となる場合である。
+\end{definition}
+
+\noindent
+$F$ がスキーム $X$ により表現され、$s : h_X \to F$ が同型であるとする。
+圏論の Yoneda の補題 \ref{categories-lemma-yoneda} により、対
+$(X, s : h_X \to F)$ は、存在すれば一意な同型を除いて一意である。
+さらに Yoneda の補題によれば、上のような任意の反変関手 $F$ と任意の
+スキーム $Y$ に対して全単射
+$$
+\Mor_{\text{Fun}(\Sch^{opp}, \textit{Sets})} (h_Y, F)
+\longrightarrow
+F(Y), \quad
+s \longmapsto s(\text{id}_Y).
+$$
+がある。逆の構成は次のとおりである。任意の $\xi \in F(Y)$ に対して、
+関手の変換 $s_\xi : h_Y \to F$ は任意の射 $f : T \to Y$ に元
+$f^*\xi \in F(T)$ を対応させる。
+
+\medskip\noindent
+特に $F$ が表現可能である場合、あるスキーム $X$ と元 $\xi \in F(X)$ が
+存在し、対応する射 $h_X \to F$ は同型である。この場合、
+{\it 対 $(X, \xi)$ は $F$ を表現する}ともいう。元 $\xi \in F(X)$ は、
+代数スタックを論じる際に理由がより明確になるため、しばしば
+{\it 「普遍族」}と呼ばれる（ここに将来の参照を挿入する）。
+今は、対 $(X, \xi)$ が $F$ を表現するならば、任意の元 $\xi' \in F(T)$ は、
+どの $T$ に対しても $\xi' = f^*\xi$ の形に書け、そのような射
+$f : T \to X$ は一意であることだけを注意しておく。
+
+\begin{example}
+\label{schemes-example-global-sections}
+各スキーム $T$ に集合 $F(T) = \Gamma(T, \mathcal{O}_T)$ を対応させる規則を
+考える。射 $f : T' \to T$ に対して引き戻し写像
+$f^\sharp : \Gamma(T, \mathcal{O}_T) \to \Gamma(T', \mathcal{O}_{T'})$ を用いれば、
+これは反変関手になる。環 $R$ と元 $t \in R$ が与えられると、環準同型
+$\mathbf{Z}[x] \to R$ で $x$ を $t$ に写すものが一意に存在する。したがって補題
+\ref{schemes-lemma-morphism-into-affine} を用いると
+$$
+\Mor(T, \Spec(\mathbf{Z}[x])) =
+\Hom(\mathbf{Z}[x], \Gamma(T, \mathcal{O}_T)) =
+\Gamma(T, \mathcal{O}_T).
+$$
+を得る。これは実際に同型 $h_{\Spec(\mathbf{Z}[x])} \to F$ を与える。
+「普遍族」 $\xi$ は何だろうか。それを得るには、上の同一視を
+$\text{id}_{\Spec(\mathbf{Z}[x])}$ に適用すればよい。上の同一視のもとで、
+明らかに期待どおり
+$\xi = x \in \Gamma(\Spec(\mathbf{Z}[x]),
+\mathcal{O}_{\Spec(\mathbf{Z}[x])}) = \mathbf{Z}[x]$
+を得る。
+\end{example}
+
+\begin{definition}
+\label{schemes-definition-representable-by-open-immersions}
+$F$ をスキームの圏上の集合値反変関手とする。
+\begin{enumerate}
+\item $F$ が {\it Zariski 位相に関する層条件を満たす}というのは、任意の
+スキーム $T$、任意の開被覆 $T = \bigcup_{i \in I} U_i$、および
+$\xi_i \in F(U_i)$ で $\xi_i|_{U_i \cap U_j} =
+\xi_j|_{U_i \cap U_j}$ を満たす任意の元の族に対し、一意な元
+$\xi \in F(T)$ が存在して、$\xi_i = \xi|_{U_i}$ が $F(U_i)$ において
+成り立つ場合である。
+\item {\it 部分関手 $H \subset F$} とは、各スキーム $T$ に部分集合
+$H(T) \subset F(T)$ を対応させ、写像 $F(f) : F(T) \to F(T')$ が
+$H(T)$ を $H(T')$ に写すという条件が、スキームのすべての射
+$f : T' \to T$ について成り立つような規則をいう。
+\item $H \subset F$ を部分関手とする。$H \subset F$ が
+{\it 開埋め込みにより表現可能}であるというのは、すべての対 $(T, \xi)$
+（ここで $T$ はスキームであり、$\xi \in F(T)$ である）に対して、次の性質を持つ
+開部分スキーム $U_\xi \subset T$ が存在する場合である。
+\begin{itemize}
+\item[(*)] 射 $f : T' \to T$ が $U_\xi$ を経由して分解するための必要十分条件は、
+$f^*\xi \in H(T')$ である。
+\end{itemize}
+\item $I$ を集合とする。各 $i \in I$ に対して $H_i \subset F$ を部分関手とする。
+族 $(H_i)_{i \in I}$ が {\it $F$ を被覆する}というのは、任意の
+$\xi \in F(T)$ に対し、開被覆 $T = \bigcup U_i$ で
+$\xi|_{U_i} \in H_i(U_i)$ を満たすものが存在する場合である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+条件 (4) において、$H_i \subset F$ がすべての $i$ に対して開埋め込みにより
+表現可能ならば、$(H_i)_{i \in I}$ が $F$ を被覆することを確かめるには、
+$F(T) = \bigcup H_i(T)$ を、$T$ が体のスペクトルである場合について
+確かめれば十分である。
+
+\begin{lemma}
+\label{schemes-lemma-glue-functors}
+$F$ をスキームの圏上の集合の圏に値を持つ反変関手とする。次を仮定する。
+\begin{enumerate}
+\item $F$ は Zariski 位相に関する層条件を満たす。
+\item 集合 $I$ と部分関手の族 $F_i \subset F$ が存在し、次を満たす。
+\begin{enumerate}
+\item 各 $F_i$ は表現可能である。
+\item 各 $F_i \subset F$ は開埋め込みにより表現可能である。
+\item 族 $(F_i)_{i \in I}$ は $F$ を被覆する。
+\end{enumerate}
+\end{enumerate}
+このとき $F$ は表現可能である。
+\end{lemma}
+
+\begin{proof}
+$X_i$ を $F_i$ を表現するスキームとし、
+$\xi_i \in F_i(X_i) \subset F(X_i)$ を「普遍族」とする。
+$F_j \subset F$ は開埋め込みにより表現可能なので、開集合
+$U_{ij} \subset X_i$ が存在し、$T \to X_i$ が $U_{ij}$ を経由して分解するための
+必要十分条件は $\xi_i|_T \in F_j(T)$ である。特に
+$\xi_i|_{U_{ij}} \in F_j(U_{ij})$ であり、したがって標準射
+$\varphi_{ij} : U_{ij} \to X_j$ で
+$\varphi_{ij}^*\xi_j = \xi_i|_{U_{ij}}$ を満たすものを得る。$U_{ji}$ の定義により、
+これは $\varphi_{ij}$ が $U_{ji}$ を経由して分解することを意味する。
+$(\varphi_{ij} \circ \varphi_{ji})^*\xi_j
+=\varphi_{ji}^*(\varphi_{ij}^*\xi_j) =
+\varphi_{ji}^*\xi_i = \xi_j$ なので、
+$\varphi_{ij} \circ \varphi_{ji} = \text{id}_{U_{ji}}$ を得る。これは、対
+$(X_j, \xi_j)$ が $F_j$ を表現することによる。特に写像
+$\varphi_{ij} : U_{ij} \to U_{ji}$ はスキームの同型である。
+次に
+$\varphi_{ij}^{-1}(U_{ji} \cap U_{jk}) = U_{ij} \cap U_{ik}$
+を示す必要がある。これは、(a) $U_{ji} \cap U_{jk}$ が $U_{ji}$ の開集合のうち、
+$\xi_j$ の制限が $F_k$ の元となるものとして最大であり、(b)
+$U_{ij} \cap U_{ik}$ が $U_{ij}$ の開集合のうち、$\xi_i$ の制限が
+$F_k$ の元となるものとして最大であり、(c) $\varphi_{ij}^*\xi_j = \xi_i$
+だからである。
+さらに、節 \ref{schemes-section-glueing-schemes} のコサイクル条件は、二つの写像
+$\varphi_{jk}|_{U_{ji} \cap U_{jk}} \circ
+\varphi_{ij}|_{U_{ij} \cap U_{ik}}$ と
+$\varphi_{ik}|_{U_{ij} \cap U_{ik}}$ がともに $\xi_k$ を元
+$\xi_i$ に引き戻すことから従う。
+したがって補題 \ref{schemes-lemma-glue-schemes} を適用して、スキーム $X$ であって、
+開被覆 $X = \bigcup U_i$ と同型 $\varphi_i : X_i \to U_i$ を持ち、補題
+\ref{schemes-lemma-glue} の性質を満たすものを得る。
+$\xi_i' = (\varphi_i^{-1})^* \xi_i$ とおく。補題 \ref{schemes-lemma-glue} の条件から
+$\xi_i'|_{U_i \cap U_j} = \xi_j'|_{U_i \cap U_j}$ が従う。
+したがって $F$ が Zariski 位相の層条件を満たすことにより、元
+$\xi' \in F(X)$ で、$\xi_i = \varphi_i^*\xi'|_{U_i}$ をすべての
+$i$ に対して満たすものが存在する。
+$\varphi_i$ は同型なので、$(U_i, \xi'|_{U_i})$ は関手 $F_i$ を表現する。
+
+\medskip\noindent
+対 $(X, \xi')$ が関手 $F$ を表現すると主張する。これを示すため、
+$T$ をスキームとし、$\xi \in F(T)$ とする。一意な射 $g : T \to X$ で
+$g^*\xi' = \xi$ を満たすものを構成する。実際、部分関手 $F_i$ が $F$ を
+被覆するという条件により、開被覆 $T = \bigcup V_i$ が存在し、各 $i$ に対して
+制限 $\xi|_{V_i} \in F_i(V_i)$ が成り立つ。さらに各包含
+$F_i \subset F$ は開埋め込みにより表現可能なので、各 $V_i \subset T$ が
+この性質を持つ最大の開集合であると仮定してよい。
+$(U_i, \xi'|_{U_i})$ は関手 $F_i$ を表現するので、一意な射
+$g_i : V_i \to U_i$ で $g_i^*\xi'|_{U_i} = \xi|_{V_i}$ を満たすものを得る。
+共通部分 $V_i \cap V_j$ 上で射 $g_i$ と $g_j$ は一致する。例えば両者はともに
+$\xi'|_{U_i \cap U_j} \in F_i(U_i \cap U_j)$ を同じ元に引き戻すからである。
+したがって射 $g_i$ は貼り合わさり、望む一意な射 $T \to X$ を与える。
+\end{proof}
+
+\begin{remark}
+\label{schemes-remark-representable-locally-ringed}
+関手 $F$ がすべての局所環付き空間上で定義されているとし、補題
+\ref{schemes-lemma-glue-functors} の条件を次で置き換える。
+\begin{enumerate}
+\item $F$ は局所環付き空間の圏上で層条件を満たす。
+\item 集合 $I$ と部分関手の族 $F_i \subset F$ が存在し、次を満たす。
+\begin{enumerate}
+\item 各 $F_i$ はスキームにより表現可能である。
+\item 各 $F_i \subset F$ は局所環付き空間の圏上で開埋め込みにより
+表現可能である。
+\item 族 $(F_i)_{i \in I}$ は局所環付き空間の圏上の関手として $F$ を被覆する。
+\end{enumerate}
+\end{enumerate}
+詳細を書き下すことは読者に委ねる。このとき最終的な結論は、関手 $F$ が
+局所環付き空間の圏において表現可能であり、その表現対象がスキームである、
+ということである。
+\end{remark}
+
+\section{スキームのファイバー積の存在}
+\label{schemes-section-existence-fibre-products}
+
+\noindent
+スキームの圏に積とファイバー積が存在するかどうかは、非常に基本的な問題である。
+まず積とファイバー積が存在することを抽象的に証明し、次の節ではスキームの
+ファイバー積をどのように合理的に捉えればよいかを示す。
+
+\begin{lemma}
+\label{schemes-lemma-fibre-products}
+スキームの圏は終対象、積、およびファイバー積を持つ。言い換えれば、
+スキームの圏は有限極限を持つ。圏論、補題
+\ref{categories-lemma-finite-limits-exist} を参照。
+\end{lemma}
+
+\begin{proof}
+この証明は飛ばしてほしい。次の節で説明するファイバー積の扱い方を学ぶほうが
+重要である。
+
+\medskip\noindent
+補題 \ref{schemes-lemma-morphism-into-affine} により、スキーム
+$\Spec(\mathbf{Z})$ は局所環付き空間の圏の終対象である。したがって、
+ファイバー積が存在することを示せば十分である。
+
+\medskip\noindent
+$f : X \to S$ および $g : Y \to S$ をスキームの射とする。関手
+\begin{eqnarray*}
+F : \Sch^{opp} & \longrightarrow & \textit{Sets} \\
+T & \longmapsto &
+\Mor(T, X) \times_{\Mor(T, S)} \Mor(T, Y)
+\end{eqnarray*}
+が表現可能であることを示さなければならない。補題
+\ref{schemes-lemma-glue-functors} が関手 $F$ に適用できると主張する。
+これを示せば補題の証明は終わる。
+
+\medskip\noindent
+まず $F$ が Zariski 位相に関する層条件を満たすことを示す。実際、
+$T$ をスキーム、$T = \bigcup_{i \in I} U_i$ を開被覆とし、
+$\xi_i \in F(U_i)$ が
+$\xi_i|_{U_i \cap U_j} =  \xi_j|_{U_i \cap U_j}$ をすべての対
+$i, j$ について満たすとする。
+定義により $\xi_i$ は対 $(a_i, b_i)$ に対応する。ここで
+$a_i : U_i \to X$ および $b_i : U_i \to Y$ は
+$f \circ a_i = g \circ b_i$ を満たすスキームの射である。貼り合わせ条件は
+$a_i|_{U_i \cap U_j} =  a_j|_{U_i \cap U_j}$ および
+$b_i|_{U_i \cap U_j} =  b_j|_{U_i \cap U_j}$ を意味する。
+したがって射 $a_i$ を貼り合わせることにより、局所環付き空間の射
+（すなわちスキームの射）$a : T \to X$ を得る。同様に
+$b : T \to Y$ を得る（例えば補題 \ref{schemes-lemma-glue} の写像性質を参照）。
+さらに、ある開被覆の各要素上で合成 $f \circ a$ と $g \circ b$ は一致する。
+ゆえに $f \circ a = g \circ b$ であり、対 $(a, b)$ は $F(T)$ の元を定め、
+対 $(a_i, b_i)$ に各 $U_i$ 上で制限される。層条件が確かめられた。
+
+\medskip\noindent
+次に部分関手の族を構成する。アフィン開集合による開被覆
+$S = \bigcup\nolimits_{i \in I} U_i$
+を選ぶ。各 $i \in I$ に対して、アフィン開集合による開被覆
+$f^{-1}(U_i) = \bigcup\nolimits_{j \in J_i} V_j$ および
+$g^{-1}(U_i) = \bigcup\nolimits_{k \in K_i} W_k$ を選ぶ。
+$X = \bigcup_{i \in I} \bigcup_{j \in J_i} V_j$ が開被覆であることに注意する。
+$Y$ についても同様である。任意の $i \in I$ と各対
+$(j, k) \in J_i \times K_i$ に対して可換図式
+$$
+\xymatrix{
+    & W_k \ar[d] \ar[rd] &   \\
+V_j \ar[rd] \ar[r] & U_i \ar[rd] & Y \ar[d] \\
+    & X \ar[r]  & S
+}
+$$
+を得る。ここですべての斜めの矢印は開埋め込みである。そのような三つ組に対し、
+関手
+\begin{eqnarray*}
+F_{i, j, k} : \Sch^{opp} & \longrightarrow & \textit{Sets} \\
+T & \longmapsto &
+\Mor(T, V_j) \times_{\Mor(T, U_i)} \Mor(T, W_k).
+\end{eqnarray*}
+を得る。上の大きな可換図式から来る明らかな関手の変換
+$F_{i, j, k} \to F$ があり、これは単射である。したがって
+$F_{i, j, k}$ を $F$ の部分関手とみなせる。
+
+\medskip\noindent
+補題 \ref{schemes-lemma-glue-functors} の条件 (2)(a) を確認する。これは補題
+\ref{schemes-lemma-fibre-product-affine-schemes} から直ちに従う。
+（ここで、アフィンスキームの圏におけるファイバー積が、局所環付き空間の
+圏全体においてもファイバー積であることを用いている。）
+
+\medskip\noindent
+補題 \ref{schemes-lemma-glue-functors} の条件 (2)(b) を確認する。$T$ をスキームとし、
+$\xi \in F(T)$ とする。言い換えれば、$\xi = (a, b)$ であり、
+$a : T \to X$ と $b : T \to Y$ は $f \circ a = g \circ b$ を満たす
+スキームの射である。$V_{i, j, k} = a^{-1}(V_j) \cap b^{-1}(W_k)$ とおく。
+さらに任意の射 $h : T' \to T$ に対し
+$h^*\xi = (a \circ h, b \circ h)$ である。したがって
+$h^*\xi \in F_{i, j, k}(T')$ であるための必要十分条件は
+$a(h(T')) \subset V_j$ および $b(h(T')) \subset W_k$ である。
+言い換えれば、その必要十分条件は $h(T') \subset V_{i, j, k}$ である。
+これで条件 (2)(b) が示された。
+
+\medskip\noindent
+補題 \ref{schemes-lemma-glue-functors} の条件 (2)(c) を確認する。$T$ をスキームとし、
+上のように $\xi = (a, b) \in F(T)$ とする。
+$V_{i, j, k} = a^{-1}(V_j) \cap b^{-1}(W_k)$ とおく。条件 (2)(c) は単に
+$T = \bigcup V_{i, j, k}$ を意味し、これは明らかである。
+したがって補題が証明され、ファイバー積は存在する。
+\end{proof}
+
+\begin{remark}
+\label{schemes-remark-fibre-product-schemes-locally-ringed}
+注意 \ref{schemes-remark-representable-locally-ringed} を用いると、スキームの射の
+ファイバー積が局所環付き空間の圏において存在し、しかもスキームであることを
+示せる。
+\end{remark}
+
+\section{スキームのファイバー積}
+\label{schemes-section-fibre-products}
+
+\noindent
+スキームのファイバー積が存在することはすでに示したが、ここで一般的な定義を
+復習する。
+
+\begin{definition}
+\label{schemes-definition-fibre-product}
+スキームの射 $f : X \to S$ および $g : Y \to S$ が与えられたとき、
+{\it ファイバー積}とは、スキーム $X \times_S Y$ と射影射
+$p : X \times_S Y \to X$ および $q : X \times_S Y \to Y$ であって、
+可換図式
+$$
+\xymatrix{
+X \times_S Y \ar[r]_q \ar[d]_p & Y \ar[d]^g \\
+X \ar[r]^f & S
+}
+$$
+をなし、この形のすべての図式に対して普遍的なものをいう。圏論、定義
+\ref{categories-definition-fibre-products} を参照。
+\end{definition}
+
+\noindent
+言い換えれば、スキームの射からなる任意の実線部分が可換な図式
+$$
+\xymatrix{
+T \ar[rrrd] \ar@{-->}[rrd] \ar[rrdd]
+&
+&
+\\
+&
+&
+X \times_S Y \ar[d] \ar[r]
+&
+Y \ar[d]
+\\
+&
+&
+X \ar[r]
+&
+S
+}
+$$
+が与えられると、図式を可換にする点線の矢印が一意に存在する。
+ファイバー積をどのように捉えるべきかを示す補題をいくつか証明する。
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-affines}
+$f : X \to S$ および $g : Y \to S$ を同じ終域を持つスキームの射とする。
+$X, Y, S$ がすべてアフィンならば、$X \times_S Y$ はアフィンである。
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$、$Y = \Spec(B)$、$S = \Spec(R)$ とする。
+補題 \ref{schemes-lemma-fibre-product-affine-schemes} により、アフィンスキーム
+$\Spec(A \otimes_R B)$ は局所環付き空間の圏におけるファイバー積
+$X \times_S Y$ である。したがって、ましてスキームの圏における
+ファイバー積でもある。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-open-fibre-product}
+$f : X \to S$ および $g : Y \to S$ を同じ終域を持つスキームの射とする。
+$X \times_S Y$、$p$、$q$ をそのファイバー積とする。$U \subset S$、
+$V \subset X$、$W \subset Y$ を、$f(V) \subset U$ および
+$g(W) \subset U$ を満たす開部分スキームとする。このとき標準射
+$V \times_U W \to X \times_S Y$ は開埋め込みであり、
+$V \times_U W$ を $p^{-1}(V) \cap q^{-1}(W)$ と同一視する。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとする。$a : T \to V$ および $b : T \to W$ が
+$f \circ a = g \circ b$ を満たす射であるとする。この等式は $U$ への射の
+等式である。
+このとき両者は $S$ への射としても一致する。ファイバー積の普遍性により、
+一意な射 $T \to X \times_S Y$ を得る。もちろんこの射の像は開集合
+$p^{-1}(V) \cap q^{-1}(W)$ に含まれる。したがって
+$p^{-1}(V) \cap q^{-1}(W)$ は $V$ と $W$ の $U$ 上のファイバー積である。
+結論はファイバー積の一意性から従う。圏論、節
+\ref{categories-section-fibre-products} を参照。
+\end{proof}
+
+\noindent
+特に、補題の状況では $V \times_U W = V \times_S W$ であることがわかる。
+さらに $U, V, W$ がすべてアフィンならば、$V \times_U W$ はアフィンである。
+そしてもちろん、$X \times_S Y$ をそのようなアフィン開集合
+$V \times_U W$ によって被覆できる。これを補題として述べる。
+
+\begin{lemma}
+\label{schemes-lemma-affine-covering-fibre-product}
+\begin{slogan}
+ファイバー積を直接構成するには、各部分の両立するアフィン開被覆から
+スキームのファイバー積のアフィン開被覆を組み立てればよい。
+\end{slogan}
+$f : X \to S$ および $g : Y \to S$ を同じ終域を持つスキームの射とする。
+$S = \bigcup U_i$ を $S$ の任意のアフィン開被覆とする。各 $i \in I$ に対し、
+$f^{-1}(U_i) = \bigcup_{j \in J_i} V_j$ を $f^{-1}(U_i)$ のアフィン開被覆とし、
+$g^{-1}(U_i) = \bigcup_{k \in K_i} W_k$ を $g^{-1}(U_i)$ のアフィン開被覆とする。
+このとき
+$$
+X \times_S Y =
+\bigcup\nolimits_{i \in I}
+\bigcup\nolimits_{j \in J_i, \ k \in K_i}
+V_j \times_{U_i} W_k
+$$
+は $X \times_S Y$ のアフィン開被覆である。
+\end{lemma}
+
+\begin{proof}
+補題の前の議論を参照。
+\end{proof}
+
+\noindent
+言い換えれば、前の補題を用い、アフィンスキームを貼り合わせることによって
+ファイバー積を直接構成することもできた（もちろん、これは補題
+\ref{schemes-lemma-fibre-products} の証明で実際に行ったことにほかならない）。
+スキームのファイバー積の点集合を記述する一つの方法を次に示す。
+
+\begin{lemma}
+\label{schemes-lemma-points-fibre-product}
+$f : X \to S$ および $g : Y \to S$ を同じ終域を持つスキームの射とする。
+点 $z$（$X \times_S Y$ のもの）は、四つ組
+$$
+(x, y, s, \mathfrak p)
+$$
+と全単射に対応する。ここで $x \in X$、$y \in Y$、$s \in S$ は
+$f(x) = s$、$g(y) = s$ を満たす点であり、$\mathfrak p$ は環
+$\kappa(x) \otimes_{\kappa(s)} \kappa(y)$ の素イデアルである。$z$ の剰余体は
+素イデアル $\mathfrak p$ の剰余体に対応する。
+\end{lemma}
+
+\begin{proof}
+$z$ を $X \times_S Y$ の点とし、上のような四つ組を構成する。
+補題 \ref{schemes-lemma-characterize-points} により、$z$ を射
+$\Spec(\kappa(z)) \to X \times_S Y$ とみなせることを思い出そう。
+この射は射 $a : \Spec(\kappa(z)) \to X$ と
+$b : \Spec(\kappa(z)) \to Y$ で $f \circ a = g \circ b$ を満たすものに対応する。
+同じ補題を再び用いると、点 $x \in X$、$y \in Y$ であって同じ点
+$s \in S$ の上にあるものと、体準同型 $\kappa(x) \to \kappa(z)$、
+$\kappa(y) \to \kappa(z)$ を得る。このとき合成
+$\kappa(s) \to \kappa(x) \to \kappa(z)$ と
+$\kappa(s) \to \kappa(y) \to \kappa(z)$ は同じである。言い換えれば環準同型
+$\kappa(x) \otimes_{\kappa(s)} \kappa(y) \to \kappa(z)$ を得る。
+$\mathfrak p$ をこの写像の核とする。
+
+\medskip\noindent
+逆に、四つ組 $(x, y, s, \mathfrak p)$ が与えられると、実線部分が可換な図式
+$$
+\xymatrix{
+X \times_S Y
+\ar@/_/[dddr] \ar@/^/[rrrd]
+& & & \\
+&
+\Spec(\kappa(x) \otimes_{\kappa(s)} \kappa(y)/\mathfrak p)
+\ar[r] \ar[d] \ar@{-->}[lu]
+&
+\Spec(\kappa(y)) \ar[d] \ar[r] &
+Y \ar[dd] \\
+&
+\Spec(\kappa(x)) \ar[r] \ar[d] &
+\Spec(\kappa(s)) \ar[rd] &
+\\
+&
+X \ar[rr] &
+&
+S
+}
+$$
+を得る。節 \ref{schemes-section-points} の議論を参照。したがって点線の矢印を得る。
+対応する点 $z$（$X \times_S Y$ のもの）は
+$\Spec(\kappa(x) \otimes_{\kappa(s)} \kappa(y)/\mathfrak p)$ の生成点の像である。
+二つの構成が互いに逆であることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-immersion}
+$f : X \to S$ および $g : Y \to S$ を同じ終域を持つスキームの射とする。
+\begin{enumerate}
+\item $f : X \to S$ が閉埋め込みならば、$X \times_S Y \to Y$ は閉埋め込みである。
+さらに $X \to S$ が準連接イデアル層 $\mathcal{I} \subset \mathcal{O}_S$ に
+対応するならば、$X \times_S Y \to Y$ はイデアル層
+$\Im(g^*\mathcal{I} \to \mathcal{O}_Y)$ に対応する。
+\item $f : X \to S$ が開埋め込みならば、$X \times_S Y \to Y$ は開埋め込みである。
+\item $f : X \to S$ が埋め込みならば、$X \times_S Y \to Y$ は埋め込みである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \to S$ が準連接イデアル層 $\mathcal{I} \subset \mathcal{O}_S$ に対応する
+閉埋め込みであるとする。補題 \ref{schemes-lemma-restrict-map-to-closed} により、
+閉部分空間 $Z \subset Y$ で、イデアル層
+$\Im(g^*\mathcal{I} \to \mathcal{O}_Y)$ が定めるものは、局所環付き空間の圏に
+おけるファイバー積である。
+補題 \ref{schemes-lemma-closed-subspace-scheme} により $Z$ はスキームである。
+したがって $Z = X \times_S Y$ であり、第一の主張が従う。第二の主張は、例えば
+補題 \ref{schemes-lemma-open-fibre-product} から従う。第三の主張は最初の二つを
+組み合わせればよい。
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-inverse-image-closed-subscheme}
+$f : X \to Y$ をスキームの射とする。$Z \subset Y$ を $Y$ の閉部分スキームとする。
+{\it 逆像 $f^{-1}(Z)$}、すなわち閉部分スキーム $Z$ の逆像とは、閉部分スキーム
+$Z \times_Y X$（$X$ のもの）をいう。上の補題
+\ref{schemes-lemma-fibre-product-immersion} を参照。
+\end{definition}
+
+\noindent
+局所閉部分スキームおよび開部分スキームについても、ときにこの用語を用いる。
+
+\section{代数幾何学における基底変換}
+\label{schemes-section-base-change}
+\enlargethispage{3pt}
+
+\noindent
+スキームの言葉を導入する動機の一つは、特定の体上で多様体を定義するとは
+何を意味するかを非常に精密に述べられることである。例えば多様体
+$X$ が $\mathbf{Q}$ 上にあるということは（多様体、定義
+\ref{varieties-definition-variety}）、有限型、分離的、既約、被約な射
+$X \to \Spec(\mathbf{Q})$ と同義である\footnote{もちろん、代数幾何学者の間でも
+$X$ が $\mathbf{Q}$ 上幾何学的既約であることを要求すべきかどうかについては
+なお議論がある。}。いずれにせよ、より一般には、与えられた
+{\it 基底スキーム}上のスキームを扱うという考え方であり、基底スキームは
+しばしば $S$ と書かれる。「$X$ を $S$ 上のスキームとする」という言い方は、
+単に $X$ に射 $X \to S$ が備わっていることを意味する。図式では
+{\it 構造射} $X \to S$ を $X$ から $S$ へ下向きの矢印として描くようにする。
+多くの場合、$X$ の内部幾何よりも、$S$ に対する $X$ の相対的な性質に
+関心がある。例えば、$X \to S$ のファイバーや、基底変換後に $X$ に何が
+起こるかなどを知りたい。
+
+\medskip\noindent
+慣用的に用いられる言葉をいくつか導入する。もちろん、これは圏のある対象上の
+対象の圏を考えることの特殊な場合にすぎない。圏論、例
+\ref{categories-example-category-over-X} を参照。
+
+\begin{definition}
+\label{schemes-definition-base-change}
+$S$ をスキームとする。
+\begin{enumerate}
+\item $X$ が {\it $S$ 上のスキーム}であるというのは、$X$ にスキームの射
+$X \to S$ が備わっていることをいう。射 $X \to S$ は
+{\it 構造射}と呼ばれることがある。
+\item $R$ を環とする。$X$ が {\it $R$ 上のスキーム}であるというのは、
+$X$ が $\Spec(R)$ 上のスキームであることをいう。
+\item {\it スキームの射 $f : X \to Y$（$S$ 上のもの）}とは、合成
+$X \to Y \to S$（$f$ と $Y$ の構造射との合成）が $X$ の構造射に等しいような
+スキームの射をいう。
+\item $\Mor_S(X, Y)$ を、$X$ から $Y$ への $S$ 上のすべての射の集合とする。
+\item $X$ を $S$ 上のスキームとする。$S' \to S$ をスキームの射とする。
+$X$ の {\it 基底変換}とは、スキーム $X_{S'} = S' \times_S X$
+（$S'$ 上のもの）をいう。
+\item $f : X \to Y$ を $S$ 上のスキームの射とする。$S' \to S$ を
+スキームの射とする。$f$ の {\it 基底変換}とは、誘導される射
+$f' : X_{S'} \to Y_{S'}$（すなわち射
+$\text{id}_{S'} \times_{\text{id}_S} f$）をいう。
+\item $R$ を環とする。$X$ を $R$ 上のスキームとする。$R \to R'$ を環準同型とする。
+{\it 基底変換} $X_{R'}$ とは、スキーム
+$\Spec(R') \times_{\Spec(R)} X$（$R'$ 上のもの）をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+典型的な結果を一つ挙げる。
+
+\begin{lemma}
+\label{schemes-lemma-base-change-immersion}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上のスキームの埋め込み
+（それぞれ閉埋め込み、開埋め込み）とする。このとき $f$ の任意の基底変換は
+埋め込み（それぞれ閉埋め込み、開埋め込み）である。
+\end{lemma}
+
+\begin{proof}
+$f$ の、射 $S' \to S$ による基底変換を、次の可換図式の左上の縦矢印とみなせる。
+$$
+\xymatrix{
+X_{S'} \ar[r] \ar[d] & X \ar[d] \ar@/^4ex/[dd] \\
+Y_{S'} \ar[r] \ar[d] & Y \ar[d] \\
+S' \ar[r] & S
+}
+$$
+この図式から $X_{S'} \cong Y_{S'} \times_Y X$ が従い、補題
+\ref{schemes-lemma-fibre-product-immersion} により結論を得る。
+\end{proof}
+
+\noindent
+実際、この型の結果は非常に典型的なので、それを表す用語がある。次のとおりである。
+
+\begin{definition}
+\label{schemes-definition-preserved-by-base-change}
+性質と基底変換。
+\begin{enumerate}
+\item $\mathcal{P}$ を基底上のスキームの性質とする。$\mathcal{P}$ が
+{\it 任意の基底変換で保たれる}、または単に $\mathcal{P}$ が
+{\it 基底変換で保たれる}というのは、$X/S$ が $\mathcal{P}$ を持つとき、
+任意の基底変換 $X_{S'}/S'$ も $\mathcal{P}$ を持つ場合である。
+\item $\mathcal{P}$ を基底上のスキームの射の性質とする。$\mathcal{P}$ が
+{\it 任意の基底変換で保たれる}、または単に {\it 基底変換で保たれる}
+というのは、$f : X \to Y$（$S$ 上）が $\mathcal{P}$ を持つとき、
+任意の基底変換 $f' : X_{S'} \to Y_{S'}$（$S'$ 上）も $\mathcal{P}$ を
+持つ場合である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ここで「閉埋め込みである」という性質は任意の基底変換で保たれる、と言える。
+
+\begin{definition}
+\label{schemes-definition-fibre}
+$f : X \to S$ をスキームの射とする。$s \in S$ を点とする。
+{\it スキーム論的ファイバー $X_s$（$f$ の $s$ 上のもの）}、または単に
+{\it ファイバー（$f$ の $s$ 上のもの）}とは、次のファイバー積図式に入る
+スキームをいう。
+$$
+\xymatrix{
+X_s = \Spec(\kappa(s)) \times_S X \ar[r] \ar[d] &
+X \ar[d] \\
+\Spec(\kappa(s)) \ar[r] &
+S
+}
+$$
+ファイバー $X_s$ は常に $\kappa(s)$ 上のスキームとみなす。
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-topological}
+$f : X \to S$ をスキームの射とする。図式
+$$
+\vcenter{
+\xymatrix{
+X_s \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\kappa(s)) \ar[r] & S
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+\Spec(\mathcal{O}_{S, s}) \times_S X \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\mathcal{O}_{S, s}) \ar[r] & S
+}
+}
+$$
+を考える。どちらの場合も、これらの図式は位相空間のファイバー平方を誘導する。
+特に上の水平矢印はその像への同相写像である。
+\end{lemma}
+
+\begin{proof}
+$U \subset S$ を $s$ を含むアフィン開集合として選ぶ。下の水平射は $U$ を経由して
+分解する。例えば補題 \ref{schemes-lemma-morphism-from-spec-local-ring} を参照。
+したがって $S$ はアフィンであると仮定してよい。$X$ もアフィンならば、
+結論は代数、注意 \ref{algebra-remark-fundamental-diagram} から従う。
+一般の場合は $X$ をアフィン開集合で被覆すればよい。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-local-ring-fibre}
+$f : X \to S$ をスキームの射とする。$x \in X$ の像を $s \in S$ とする。
+$x$ を $X_s$ の点とみなすと（補題 \ref{schemes-lemma-fibre-topological} を参照）、
+$$
+\mathcal{O}_{X_s, x} \cong
+\mathcal{O}_{X, x}/\mathfrak m_s\mathcal{O}_{X, x} \cong
+\mathcal{O}_{X, x} \otimes_{\mathcal{O}_{S, s}} \kappa(s)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{schemes-lemma-fibre-topological} の証明と同様に、$X$ と $S$ がアフィンである
+場合に帰着する。アフィンの場合、主張は代数、注意
+\ref{algebra-remark-local-ring-fibre} に言い換えられる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{準コンパクト射}
+\label{schemes-section-quasi-compact}
+
+\noindent
+スキームの台位相空間が準コンパクトであるとき、そのスキームを
+{\it 準コンパクト}という。これには次のように定義される相対的な概念がある。
+
+\begin{definition}
+\label{schemes-definition-quasi-compact}
+スキームの射について、台位相空間の写像が準コンパクトであるとき、その射を
+{\it 準コンパクト}という。位相の章の定義
+\ref{topology-definition-quasi-compact} を参照せよ。
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-affine}
+$f : X \to S$ をスキームの射とする。次の条件は同値である。
+\begin{enumerate}
+\item $f : X \to S$ は準コンパクトである。
+\item 任意のアフィン開集合の逆像は準コンパクトである。
+\item $S = \bigcup_{i \in I} U_i$ となるあるアフィン開被覆が存在し、
+$f^{-1}(U_i)$ はすべての $i$ に対して準コンパクトである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) のような被覆 $S = \bigcup_{i \in I} U_i$ が与えられているとする。まず、
+$U \subset S$ を任意のアフィン開集合とする。任意の $u \in U$ に対し、
+$i(u) \in I$ であって $u \in U_{i(u)}$ となる添字を取れる。
+標準開集合は $U_{i(u)}$ の位相の基をなすので、
+$W_u \subset U \cap U_{i(u)}$ であって $U_{i(u)}$ における標準開集合となるものを取れる。
+コンパクト性により、有限個の点 $u_1, \ldots, u_n \in U$ であって
+$U = \bigcup_{j = 1}^n W_{u_j}$ となるものを取れる。各 $j$ に対し、アフィン開集合の有限和として
+$f^{-1}U_{i(u_j)} = \bigcup_{k \in K_j} V_{jk}$ と書く。
+$W_{u_j} \subset U_{i(u_j)}$ は標準開集合だから、
+$f^{-1}(W_{u_j}) \cap V_{jk}$ は $V_{jk}$ の標準開集合であることが分かる。
+代数の章の補題 \ref{algebra-lemma-spec-functorial} を参照せよ。したがって
+$f^{-1}(W_{u_j}) \cap V_{jk}$ はアフィンであり、従って
+$f^{-1}(W_{u_j})$ は有限個のアフィンの和である。これにより、任意のアフィン開集合の逆像は
+有限個のアフィン開集合の和であることが示された。
+
+\medskip\noindent
+次に、任意のアフィン開集合の逆像が有限個のアフィン開集合の和であると仮定する。
+$K \subset S$ を任意の準コンパクト開集合とする。$S$ の位相はアフィン開集合からなる基を
+持つので、$K$ は有限個のアフィン開集合の和である。したがって $K$ の逆像も有限個の
+アフィン開集合の和である。ゆえに $f$ は準コンパクトである。
+
+\medskip\noindent
+最後に、$f$ が準コンパクトであると仮定する。この場合、前段落の議論から、任意のアフィンの
+逆像は有限個のアフィン開集合の和であることが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-preserved-base-change}
+準コンパクトであることは、任意の基底変換で保たれる、基底上のスキームの射の性質である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-composition-quasi-compact}
+準コンパクト射の合成は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+これは定義および位相の章の補題
+\ref{topology-lemma-composition-quasi-compact} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-closed-immersion-quasi-compact}
+閉埋め込みは準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+これは定義および位相の章の補題
+\ref{topology-lemma-closed-in-quasi-compact} から従う。
+\end{proof}
+
+\begin{example}
+\label{schemes-example-open-immersion-not-quasi-compact}
+一般に、開埋め込みは準コンパクトではない。その標準的な例は開部分空間
+$U \subset X$ である。ここで $X = \Spec(k[x_1, x_2, x_3, \ldots])$ とし、
+$U$ は $X \setminus \{0\}$ とし、$0$ は $X$ の点であって極大イデアル
+$(x_1, x_2, x_3, \ldots)$ に対応するものとする。
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-image-quasi-compact-closed}
+$f : X \to S$ をスキームの準コンパクト射とする。次の条件は同値である。
+\begin{enumerate}
+\item $f(X) \subset S$ は閉である。
+\item $f(X) \subset S$ は特殊化の下で安定である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+位相の章の補題 \ref{topology-lemma-open-closed-specialization} により、
+(1) $\Rightarrow$ (2) が成り立つ。(2) を仮定する。$U \subset S$ をアフィン開集合とする。
+$f(X) \cap U$ が閉であることを示せば十分である。$U \cap f(X)$ は $U$ における特殊化の下で
+安定なので、$S$ がアフィンである場合に帰着した。$f$ は準コンパクトだから
+$X = f^{-1}(S)$ は準コンパクトである（$S$ はアフィンである）。従って、
+$X = \bigcup_{i = 1}^n U_i$ と書け、ここで $U_i \subset X$ はアフィン開集合である。
+$S = \Spec(R)$ および $U_i = \Spec(A_i)$ と書き、ここで $R$ は環、$A_i$ はその環上の
+代数とする。このとき
+$f(X) = \Im(\Spec(A_1 \times \ldots \times A_n)
+\to \Spec(R))$ である。従って補題は代数の章の補題
+\ref{algebra-lemma-image-stable-specialization-closed} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-closed}
+$f : X \to S$ をスキームの準コンパクト射とする。このとき $f$ が閉であることと、
+$f$ に沿って特殊化が持ち上がることとは同値である。位相の章の定義
+\ref{topology-definition-lift-specializations} を参照せよ。
+\end{lemma}
+
+\begin{proof}
+位相の章の補題 \ref{topology-lemma-closed-open-map-specialization} によれば、
+$f$ が閉ならば、特殊化は $f$ に沿って持ち上がる。逆に、特殊化が $f$ に沿って持ち上がると
+仮定する。$Z \subset X$ を閉部分集合とする。定義
+\ref{schemes-definition-reduced-induced-scheme} を参照し、$Z$ を誘導される被約スキーム構造を備えた
+スキームとみなしてよい。$Z \subset X$ は閉なので、$f$ の $Z$ への制限も準コンパクトである。
+さらに、位相の章の補題 \ref{topology-lemma-lift-specialization-composition} により、特殊化は
+$Z \to S$ に沿っても持ち上がる。従って、$f(X)$ が閉であることを、特殊化が $f$ に沿って
+持ち上がる場合に示せば十分である。特に、位相の章の補題
+\ref{topology-lemma-lift-specializations-images} により、$f(X)$ は特殊化の下で安定である。
+従って補題 \ref{schemes-lemma-image-quasi-compact-closed} により、$f(X)$ は閉である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{普遍閉性の付値判定法}
+\label{schemes-section-valuative-criterion-universal-closedness}
+
+\noindent
+位相の章の節 \ref{topology-section-proper} では、固有写像について、すべてのファイバーが
+準コンパクトである位相空間の閉写像として、あるいはすべての基底変換が閉写像となる写像として
+論じている。ここでは、代数幾何学における対応する概念を与える。
+
+\begin{definition}
+\label{schemes-definition-universally-closed}
+スキームの射 $f : X \to S$ について、任意の基底変換
+$f' : X_{S'} \to S'$ が閉であるとき、その射は {\it 普遍閉} であるという。
+\end{definition}
+
+\noindent
+実際、「普遍」という形容詞はしばしばこの意味で用いられる。すなわち、射の性質
+$\mathcal{P}$ が与えられたとき、「$X \to S$ は普遍的に $\mathcal{P}$ である」とは、任意の基底変換
+$X_{S'} \to S'$ が $\mathcal{P}$ を持つことにほかならない。
+
+\medskip\noindent
+普遍閉射の性質をより詳しく論じた射の章の節 \ref{morphisms-section-proper} も参照されたい。
+本節では、普遍閉射と、付値判定法の存在部分を満たす射との関係に議論を限定する。
+
+\begin{lemma}
+\label{schemes-lemma-specializations-lift}
+$f : X \to S$ をスキームの射とする。
+\begin{enumerate}
+\item $f$ が普遍閉ならば、$f$ の任意の基底変換に沿って特殊化が持ち上がる。位相の章の定義
+\ref{topology-definition-lift-specializations} を参照せよ。
+\item $f$ が準コンパクトであり、$f$ の任意の基底変換に沿って特殊化が持ち上がるならば、
+$f$ は普遍閉である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は位相の章の補題 \ref{topology-lemma-closed-open-map-specialization} の直接の帰結である。
+(2) は補題 \ref{schemes-lemma-quasi-compact-closed} および
+\ref{schemes-lemma-quasi-compact-preserved-base-change} から従う。
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-valuative-criterion}
+$f : X \to S$ をスキームの射とする。任意の可換な実線図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & S
+}
+$$
+が与えられたとき、$f$ が {\it 付値判定法の存在部分を満たす} とは、ここで $A$ は分数体 $K$ を
+持つ付値環であるとして、点線の矢印が存在することをいう。また、上のような任意の図式について点線の矢印が
+高々一つしか存在しないならば（もちろん存在は要求しない）、$f$ は
+{\it 付値判定法の一意性部分を満たす} という。
+\end{definition}
+
+\noindent
+{\it 付値環} とは、その分数体の中で支配関係に関して極大な局所整域である。代数の章の定義
+\ref{algebra-definition-valuation-ring} を参照せよ。従って付値環のスペクトルには一意な生成点
+$\eta$ と一意な閉点 $0$ があり、もちろん特殊化 $\eta \leadsto 0$ が成り立つ。
+付値環が重要なのは、任意のスキームにおける任意の点の特殊化が、ある付値環のスペクトルからの
+ある射の下での $\eta \leadsto 0$ の像になるからである。正確な結果は次のとおりである。
+
+\begin{lemma}
+\label{schemes-lemma-points-specialize}
+\begin{slogan}
+特殊化は付値環によって検出される。
+\end{slogan}
+$S$ をスキームとし、$s' \leadsto s$ を $S$ の点の特殊化とする。このとき次が成り立つ。
+\begin{enumerate}
+\item 付値環 $A$ と射 $f : \Spec(A) \to S$ が存在し、$\eta$ という $\Spec(A)$ の生成点は
+$s'$ に写り、特殊点は $s$ に写る。
+\item 体拡大 $K/\kappa(s')$ が与えられれば、拡大
+$\kappa(\eta)/\kappa(s')$ が、$f$ によって誘導され、かつ与えられた拡大と同型になるように選べる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$s' \leadsto s$ を $S$ における特殊化とし、$K/\kappa(s')$ を体の拡大とする。
+補題 \ref{schemes-lemma-specialize-points} および補題
+\ref{schemes-lemma-characterize-points} に続く議論により、これは環準同型
+$\mathcal{O}_{S, s} \to \kappa(s') \to K$ を与える。$A \subset K$ を、分数体が $K$ であり、
+$\mathcal{O}_{S, s} \to K$ の像を支配する任意の付値環とする。代数の章の補題
+\ref{algebra-lemma-dominate} を参照せよ。環準同型 $\mathcal{O}_{S, s} \to A$ は射
+$f : \Spec(A) \to S$ を誘導する。補題 \ref{schemes-lemma-morphism-from-spec-local-ring} を参照せよ。
+構成により、この射は求める性質をすべて持つ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-lift-specializations-valuative}
+$f : X \to S$ をスキームの射とする。次の条件は同値である。
+\begin{enumerate}
+\item $f$ の任意の基底変換に沿って特殊化が持ち上がる。
+\item 射 $f$ は付値判定法の存在部分を満たす。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が成り立つと仮定し、定義 \ref{schemes-definition-valuative-criterion} のような実線図式が
+与えられているとする。点線の矢印を見つけるため、仮定は基底変換で安定だから、
+$X \to S$ を $X_{\Spec(A)} \to \Spec(A)$ で置き換えてよい。従って
+$S = \Spec(A)$ と仮定してよい。$x' \in X$ を $\Spec(K) \to X$ の像とすると、補題
+\ref{schemes-lemma-characterize-points} により $\kappa(x') \subset K$ である。仮定により、
+$x' \leadsto x$ となる特殊化が $X$ において存在し、$x$ は $S = \Spec(A)$ の閉点に写る。
+補題 \ref{schemes-lemma-specialize-points} および補題 \ref{schemes-lemma-characterize-points} に続く議論により、
+局所環準同型 $A \to \mathcal{O}_{X, x}$ と環準同型
+$\mathcal{O}_{X, x} \to \kappa(x')$ を得る。合成
+$A \to \mathcal{O}_{X, x} \to \kappa(x') \to K$ は与えられた単射
+$A \to K$ である。$A \to \mathcal{O}_{X, x}$ は局所準同型なので、
+$\mathcal{O}_{X, x} \to K$ の像は $A$ を支配し、従って代数の章の定義
+\ref{algebra-definition-valuation-ring} により $A$ に等しい。従って環準同型
+$\mathcal{O}_{X, x} \to A$、ひいては射 $\Spec(A) \to X$ を得る（補題
+\ref{schemes-lemma-morphism-from-spec-local-ring} およびその後の議論を参照せよ）。これにより (2) が示された。
+
+\medskip\noindent
+逆に、(2) が成り立つと仮定する。次の可換図式を考えれば、任意の基底変換
+$X_{S'} \to S'$、すなわち $f$ の任意の基底変換に対して、付値判定法の存在部分が成り立つことは
+直ちに分かる。
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X_{S'} \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] \ar@{-->}[rru] & S' \ar[r] & S
+}
+$$
+実際、より水平な点線の矢印から、ファイバー積の定義によってもう一方の矢印が得られる。
+従って、$f$ に沿って特殊化が持ち上がることを示せば明らかに十分である。
+$s' \leadsto s$ を $S$ における特殊化とし、$x' \in X$ を $s'$ 上の点とする。
+補題 \ref{schemes-lemma-points-specialize} を $s' \leadsto s$ と体の拡大
+$K = \kappa(x')/\kappa(s')$ に適用する。可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[rr] \ar[d] & & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[rru] &
+\Spec(\mathcal{O}_{S, s}) \ar[r] & S
+}
+$$
+を得て、条件 (2) により点線の矢印を得る。$x$ を $\Spec(A)$ の閉点の $X$ における像とすれば、
+これは求める解である。すなわち $x$ は $x'$ の特殊化であり、$s$ に写る。
+\end{proof}
+
+\begin{proposition}[普遍閉性の付値判定法]
+\label{schemes-proposition-characterize-universally-closed}
+$f$ をスキームの準コンパクト射とする。このとき、$f$ が普遍閉であることと、$f$ が
+付値判定法の存在部分を満たすこととは同値である。
+\end{proposition}
+
+\begin{proof}
+これは上の補題 \ref{schemes-lemma-specializations-lift} および
+\ref{schemes-lemma-lift-specializations-valuative} の形式的な帰結である。
+\end{proof}
+
+\begin{example}
+\label{schemes-example-projective-line-universally-closed}
+$k$ を体とする。構造射
+$p : \mathbf{P}^1_k \to \Spec(k)$、すなわち $k$ 上の射影直線の構造射を考える。
+例 \ref{schemes-example-projective-line} を参照せよ。
+上の付値判定法を用いて、$p$ が普遍閉であることを示そう。構成により
+$\mathbf{P}^1_k$ は二つのアフィン開集合で被覆されるので、$p$ は準コンパクトである。
+可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r]_\xi \ar[d] & \mathbf{P}^1_k \ar[d] \\
+\Spec(A) \ar[r]^\varphi & \Spec(k)
+}
+$$
+が与えられたとする。ここで $A$ は付値環であり、$K$ はその分数体である。
+$\mathbf{P}^1_k$ は、$\Spec(k[x])$ と $\Spec(k[y])$ を、$D(x)$ と $D(y)$ を
+$x = y^{-1}$（より対称的には $xy = 1$）によって貼り合わせて得られることを思い出そう。
+上の図式に対角に入る射 $\Spec(A) \to \mathbf{P}^1_k$ の存在を示すため、対称性により、
+$\xi$ は開集合 $\Spec(k[x])$ に写ると仮定してよい。これにより環の可換図式
+$$
+\xymatrix{
+K & k[x] \ar[l]^{\xi^\sharp} \\
+A \ar[u] & k \ar[u] \ar[l]_{\varphi^\sharp}
+}
+$$
+を得る。代数の章の補題 \ref{algebra-lemma-valuation-ring-x-or-x-inverse} により、
+$\xi^\sharp(x) \in A$ または $\xi^\sharp(x)^{-1} \in A$ のいずれかである。
+前者の場合、上の環の図式に入る環準同型
+$$
+k[x] \to A,
+\ \lambda \mapsto \varphi^\sharp(\lambda),
+\  x \mapsto \xi^\sharp(x)
+$$
+を得るので、目的を達する。後者の場合、環準同型
+$$
+k[y] \to A,
+\ \lambda \mapsto \varphi^\sharp(\lambda),
+\ y \mapsto \xi^\sharp(x)^{-1}.
+$$
+を得ることが分かる。これは射
+$\Spec(A) \to \Spec(k[y]) \to \mathbf{P}^1_k$ を与え、この例の最初の可換図式に対角に入る
+（確認は省略する）。
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{分離公理}
+\label{schemes-section-separation-axioms}
+
+\noindent
+位相空間 $X$ がハウスドルフであることと、対角集合
+$\Delta \subset X \times X$ が閉部分集合であることとは同値である。代数幾何学における類似物は、
+$X$ を基礎スキーム $S$ 上のスキームとするとき、対角射
+$$
+\Delta_{X/S} : X \longrightarrow X \times_S X.
+$$
+を考えることである。これは
+$\text{pr}_1 \circ \Delta_{X/S} = \text{id}_X$ および
+$\text{pr}_2 \circ \Delta_{X/S} = \text{id}_X$ を満たす一意なスキームの射である
+（ファイバー積を持つ任意の圏で存在する）。
+
+\begin{lemma}
+\label{schemes-lemma-diagonal-affines-closed}
+アフィンスキーム間の射の対角射は閉である。
+\end{lemma}
+
+\begin{proof}
+射 $\Spec(S) \to \Spec(R)$ に付随する対角射は、環準同型
+$S \otimes_R S \to S$、$a \otimes b \mapsto ab$ に対応するスペクトル上の射である。
+この準同型は明らかに全射なので、$S \cong S \otimes_R S/J$ であり、ここで
+$J \subset S \otimes_R S$ はあるイデアルである。従って例 \ref{schemes-example-closed-immersion-affines} により、
+$\Delta$ は閉埋め込みである。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-diagonal-immersion}
+\begin{slogan}
+相対スキームの対角射は埋め込みである。
+\end{slogan}
+$X$ を $S$ 上のスキームとする。対角射 $\Delta_{X/S}$ は埋め込みである。
+\end{lemma}
+
+\begin{proof}
+$V \subset X$ がアフィン開集合であってアフィン開集合 $U \subset S$ に写るならば、
+$V \times_U V$ は $X \times_S X$ のアフィン開集合であることを思い出そう。補題
+\ref{schemes-lemma-fibre-product-affines} および \ref{schemes-lemma-open-fibre-product} を参照せよ。
+$W$ を $X \times_S X$ の開部分スキームであって、これらのアフィン開集合
+$V \times_U V$ の和となるものとする。
+補題 \ref{schemes-lemma-closed-local-target} により、各射
+$\Delta_{X/S}^{-1}(V \times_U V) \to V \times_U V$ が閉埋め込みであることを示せば十分である。
+$V = \Delta_{X/S}^{-1}(V \times_U V)$ なので、確認すべきことは
+$\Delta_{V/U}$ が閉埋め込みであることだけであり、これは補題
+\ref{schemes-lemma-diagonal-affines-closed} である。
+\end{proof}
+
+\begin{definition}
+\label{schemes-definition-separated}
+$f : X \to S$ をスキームの射とする。
+\begin{enumerate}
+\item $f$ について、対角射 $\Delta_{X/S}$ が閉埋め込みであるとき {\it 分離的} であるという。
+\item $f$ について、対角射 $\Delta_{X/S}$ が準コンパクト射であるとき
+{\it 準分離的} であるという。
+\item スキーム $Y$ について、射 $Y \to \Spec(\mathbf{Z})$ が分離的であるとき
+{\it 分離的} であるという。
+\item スキーム $Y$ について、射 $Y \to \Spec(\mathbf{Z})$ が準分離的であるとき
+{\it 準分離的} であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+補題 \ref{schemes-lemma-diagonal-immersion} および \ref{schemes-lemma-immersion-when-closed} により、
+$\Delta_{X/S}$ が閉埋め込みであることと、
+$\Delta_{X/S}(X) \subset X \times_S X$ が閉部分集合であることとは同値である。
+さらに補題 \ref{schemes-lemma-closed-immersion-quasi-compact} により、分離射は準分離的である。
+準分離射を導入する理由は、代数多様体を研究する際（特にモジュライや代数スタックなどを
+扱う際）に非分離射が自然に現れるからである。しかし、その多くはなお準分離的である。
+
+\begin{example}
+\label{schemes-example-not-quasi-separated}
+準分離的でない射の例を挙げる。
+$X = X_1 \cup X_2 \to S = \Spec(k)$ とし、
+$X_1 = X_2 = \Spec(k[t_1, t_2, t_3, \ldots])$ を
+$\{0\} = \{(t_1, t_2, t_3, \ldots)\}$ の補集合に沿って貼り合わせたものとする
+（例 \ref{schemes-example-affine-space-zero-doubled} と同様に貼り合わせる）。この場合、
+アフィンスキーム $X_1 \times_S X_2$ の $\Delta_{X/S}$ による逆像はスキーム
+$\Spec(k[t_1, t_2, t_3, \ldots]) \setminus \{0\}$ であり、これは準コンパクトでない。
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-where-are-they-equal}
+$X$, $Y$ を $S$ 上のスキームとし、$a, b : X \to Y$ を $S$ 上のスキームの射とする。
+$Z \subset X$ であって $a|_Z = b|_Z$ となる最大の局所閉部分スキームが存在する。実際、$Z$ は
+$(a, b)$ の等化子である。さらに、$Y$ が $S$ 上分離的ならば、$Z$ は閉部分スキームである。
+\end{lemma}
+
+\begin{proof}
+圏論的な理由により、$(a, b)$ の等化子は次の図式におけるファイバー積 $Z$ である。
+$$
+\xymatrix{
+Z = Y \times_{(Y \times_S Y)} X \ar[r] \ar[d] &
+ X \ar[d]^{(a , b)} \\
+Y \ar[r]^-{\Delta_{Y/S}} & Y \times_S Y
+}
+$$
+従って補題は補題 \ref{schemes-lemma-base-change-immersion}、
+\ref{schemes-lemma-diagonal-immersion} および定義 \ref{schemes-definition-separated} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-characterize-quasi-separated}
+$f : X \to S$ をスキームの射とする。次の条件は同値である。
+\begin{enumerate}
+\item 射 $f$ は準分離的である。
+\item 任意の二つのアフィン開集合 $U, V \subset X$ が $S$ の共通のアフィン開集合に写るならば、
+交わり $U \cap V$ は $X$ の有限個のアフィン開集合の和である。
+\item アフィン開被覆 $S = \bigcup_{i \in I} U_i$ が存在し、各 $i$ に対してアフィン開被覆
+$f^{-1}U_i = \bigcup_{j \in I_i} V_j$ が存在して、各 $i$ および各組 $j, j' \in I_i$ に対し、
+交わり $V_j \cap V_{j'}$ は $X$ の有限個のアフィン開集合の和である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) が (1) を含意することを示す。補題 \ref{schemes-lemma-affine-covering-fibre-product} により、被覆
+$X \times_S X = \bigcup_i \bigcup_{j, j'} V_j \times_{U_i} V_{j'}$ は
+$X \times_S X$ のアフィン開被覆である。さらに、
+$\Delta_{X/S}^{-1}(V_j \times_{U_i} V_{j'}) = V_j \cap V_{j'}$ である。
+従って、この含意は補題 \ref{schemes-lemma-quasi-compact-affine} から従う。
+
+\medskip\noindent
+(1) $\Rightarrow$ (2) は、(2) の仮定の下でファイバー積
+$U \times_S V$ が $X \times_S X$ のアフィン開集合であることから従う。
+(2) $\Rightarrow$ (3) は自明である。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-characterize-separated}
+$f : X \to S$ をスキームの射とする。
+\begin{enumerate}
+\item $f$ が分離的ならば、任意の二つのアフィン開集合 $(U, V)$ が $X$ に含まれ、
+$S$ の共通のアフィン開集合に写るとき、次が成り立つ。
+\begin{enumerate}
+\item 交わり $U \cap V$ はアフィンである。
+\item 環準同型
+$\mathcal{O}_X(U) \otimes_{\mathbf{Z}} \mathcal{O}_X(V)
+\to \mathcal{O}_X(U \cap V)$
+は全射である。
+\end{enumerate}
+\item 任意の二点 $x_1, x_2 \in X$ が共通の点 $s \in S$ 上にあり、アフィン開集合
+$x_1 \in U$、$x_2 \in V$ に含まれ、それらが $S$ の共通のアフィン開集合に写り、かつ
+(a)、(b) を満たすならば、$f$ は分離的である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$ が分離的であると仮定し、$(U, V)$ を (1) のような組とする。
+$W = \Spec(R)$ を、$S$ のアフィン開集合であって $f(U)$ と $f(V)$ の両方を含むものとする。
+$U = \Spec(A)$ および $V = \Spec(B)$ と書き、ここで $R$-代数を $A$ および $B$ と表した。
+補題 \ref{schemes-lemma-open-fibre-product} により、
+$U \times_S V = U \times_W V = \Spec(A \otimes_R B)$ は $X \times_S X$ のアフィン開集合である。
+従って補題 \ref{schemes-lemma-closed-subspace-scheme} により、
+$\Delta^{-1}(U \times_S V) \to U \times_S V$ を
+$\Spec((A \otimes_R B)/J) \to \Spec(A \otimes_R B)$ と同一視でき、ここで
+$J \subset A \otimes_R B$ はあるイデアルである。
+従って $U \cap V = \Delta^{-1}(U \times_S V)$ はアフィンである。
+さらに $A \otimes_{\mathbf{Z}} B \to (A \otimes_R B)/J$ は全射なので、(1)(b) が成り立つ。
+
+\medskip\noindent
+(2) に述べた仮定が成り立つとする。アフィン開集合 $U \times_S V$ の全体は、(2) のような組
+$(U, V)$ を走らせるとき、$X \times_S X$ のアフィン開被覆をなすことは明らかである
+（例えば補題 \ref{schemes-lemma-affine-covering-fibre-product} を参照せよ）。従って補題
+\ref{schemes-lemma-closed-local-target} により、各射
+$U \cap V = \Delta_{X/S}^{-1}(U \times_S V) \to U \times_S V$ が閉埋め込みであることを
+示せば十分である。仮定 (a) により $U \cap V = \Spec(C)$ であり、ここで $C$ はある環である。
+$W = \Spec(R)$ を $S$ のアフィン開集合であって $U$ と $V$ の両方が写るものとして選び、
+$U = \Spec(A)$、$V = \Spec(B)$ と書くと、仮定 (b) は合成
+$$
+A \otimes_{\mathbf{Z}} B \to A \otimes_R B \to C
+$$
+が全射であることを意味する。従って $A \otimes_R B \to C$ は全射であり、
+$\Spec(C) \to \Spec(A \otimes_R B)$ は閉埋め込みであると結論する。
+\end{proof}
+
+\begin{example}
+\label{schemes-example-projective-line-separated}
+$k$ を体とする。構造射
+$p : \mathbf{P}^1_k \to \Spec(k)$、すなわち $k$ 上の射影直線の構造射を考える。
+例 \ref{schemes-example-projective-line} を参照せよ。
+上の補題を用いて $p$ が分離的であることを示そう。構成により $\mathbf{P}^1_k$ は二つの
+アフィン開集合 $U = \Spec(k[x])$ と $V = \Spec(k[y])$ で被覆され、それらの交わりは
+$U \cap V = \Spec(k[x, y]/(xy - 1))$ である（明らかな記法を用いた）。従って、補題
+\ref{schemes-lemma-characterize-separated} の条件 (2)(a) と (2)(b) を、アフィン開集合の組
+$(U, U)$、$(U, V)$、$(V, U)$、$(V, V)$ について確認すれば十分である。
+組 $(U, U)$ と $(V, V)$ については自明である。組 $(U, V)$ については、
+$U \cap V$ がアフィンであること（これは真である）と、環準同型
+$$
+k[x] \otimes_{\mathbf{Z}} k[y] \longrightarrow k[x, y]/(xy - 1)
+$$
+が全射であることを示せばよい。右辺の任意の元は $x$ の多項式と $y$ の多項式の和として
+書けるので、これは明らかである。
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-fibre-product-after-map}
+$f : X \to T$ および $g : Y \to T$ を同じ終域を持つスキームの射とし、
+$h : T \to S$ をスキームの射とする。このとき誘導される射
+$i : X \times_T Y \to X \times_S Y$ は埋め込みである。$T \to S$ が分離的ならば、$i$ は閉埋め込みである。
+$T \to S$ が準分離的ならば、$i$ は準コンパクト射である。
+\end{lemma}
+
+\begin{proof}
+一般圏論により、次の図式
+$$
+\xymatrix{
+X \times_T Y \ar[r] \ar[d] & X \times_S Y \ar[d] \\
+T \ar[r]^{\Delta_{T/S}} \ar[r] & T \times_S T
+}
+$$
+はファイバー積の図式である。補題は補題 \ref{schemes-lemma-diagonal-immersion}、
+\ref{schemes-lemma-fibre-product-immersion} および
+\ref{schemes-lemma-quasi-compact-preserved-base-change} から従う。
+\end{proof}
+
+
+\begin{lemma}
+\label{schemes-lemma-semi-diagonal}
+$g : X \to Y$ を $S$ 上のスキームの射とする。射
+$i : X \to X \times_S Y$ は埋め込みである。$Y$ が $S$ 上分離的ならば、これは閉埋め込みである。
+$Y$ が $S$ 上準分離的ならば、これは準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{schemes-lemma-fibre-product-after-map} を射
+$X = X \times_Y Y \to X \times_S Y$ に適用した特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-section-immersion}
+$f : X \to S$ をスキームの射とする。$s : S \to X$ を $f$ の切断とする
+（式で書けば $f \circ s = \text{id}_S$）。このとき $s$ は埋め込みである。
+$f$ が分離的ならば $s$ は閉埋め込みである。$f$ が準分離的ならば $s$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{schemes-lemma-semi-diagonal} を $g =s$ に適用し、射を
+$i = s : S \to S \times_S X$ とした特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-separated-permanence}
+次の保存性が成り立つ。
+\begin{enumerate}
+\item 分離射の合成は分離的である。
+\item 準分離射の合成は準分離的である。
+\item 分離射の基底変換は分離的である。
+\item 準分離射の基底変換は準分離的である。
+\item 分離射の（ファイバー）積は分離的である。
+\item 準分離射の（ファイバー）積は準分離的である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \to Y \to Z$ を射とし、$X \to Y$ と $Y \to Z$ が分離的であると仮定する。合成
+$$
+X \to X \times_Y X \to X \times_Z X
+$$
+は閉である。最初の射は仮定により閉であり、二番目の射は補題
+\ref{schemes-lemma-fibre-product-after-map} により閉だからである。同じ議論は「準分離的」にも
+（同じ参照を用いて）適用できる。
+
+\medskip\noindent
+$f : X \to Y$ を基礎スキーム $S$ 上のスキームの射とし、$S' \to S$ をスキームの射とする。
+$f' : X_{S'} \to Y_{S'}$ を $f$ の基底変換とする。このとき $f'$ の対角射は
+$$
+\Delta_{f'} :
+X_{S'} = S' \times_S X
+\longrightarrow
+X_{S'} \times_{Y_{S'}} X_{S'} = S' \times _S (X \times_Y X)
+$$
+であり、これは $\Delta_f$ の基底変換であることが容易に分かる。従って (3) と (4) は、
+閉埋め込みと準コンパクト射が任意の基底変換で保たれるという事実から従う（補題
+\ref{schemes-lemma-fibre-product-immersion} および
+\ref{schemes-lemma-quasi-compact-preserved-base-change}）。
+
+\medskip\noindent
+$f : X \to Y$ と $g : U \to V$ を基礎スキーム $S$ 上のスキームの射とすると、$f \times g$ は
+$X \times_S U \to X \times_S V$（$g$ の基底変換）と
+$X \times_S V \to Y \times_S V$（$f$ の基底変換）の合成である。
+従って (5) と (6) は (1)--(4) から従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-compose-after-separated}
+\begin{slogan}
+分離射および準分離射は消去律を満たす。
+\end{slogan}
+$f : X \to Y$ および $g : Y \to Z$ をスキームの射とする。
+$g \circ f$ が分離的ならば $f$ も分離的である。
+$g \circ f$ が準分離的ならば $f$ も準分離的である。
+\end{lemma}
+
+\begin{proof}
+$g \circ f$ が分離的であると仮定する。分解
+$X \to X \times_Y X \to X \times_Z X$ を、$g \circ f$ の対角射について考える。補題
+\ref{schemes-lemma-fibre-product-after-map} により後の射は埋め込みである。仮定により
+$X$ の $X \times_Z X$ における像は閉である。従ってこの像は $X \times_Y X$ においても閉である。
+ゆえに補題 \ref{schemes-lemma-immersion-when-closed} により、
+$X \to X \times_Y X$ は閉埋め込みである。
+
+\medskip\noindent
+$g \circ f$ が準分離的であると仮定する。$V \subset Y$ を $Z$ のアフィン開集合に写る
+アフィン開集合とする。$U_1, U_2 \subset X$ を $V$ に写るアフィン開集合とする。このとき
+$U_1 \cap U_2$ は有限個のアフィン開集合の和である。なぜなら $U_1, U_2$ は $Z$ の共通の
+アフィン開集合に写るからである。$Y$ は $V$ のようなアフィン開集合で被覆できるので、補題
+\ref{schemes-lemma-characterize-quasi-separated} から主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-quasi-compact-permanence}
+$f : X \to Y$ および $g : Y \to Z$ をスキームの射とする。
+$g \circ f$ が準コンパクトで $g$ が準分離的ならば、$f$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+これは、$f$ が合成 $(1, f) : X \to X \times_Z Y \to Y$ に等しいことから従う。
+最初の写像は、準分離射 $X \times_Z Y \to X$ の切断なので、補題
+\ref{schemes-lemma-section-immersion} により準コンパクトである（これは $g$ の基底変換であり、補題
+\ref{schemes-lemma-separated-permanence} を参照せよ）。二番目の写像は $g \circ f$ の基底変換なので
+準コンパクトである。補題 \ref{schemes-lemma-quasi-compact-preserved-base-change} を参照せよ。
+また、補題 \ref{schemes-lemma-composition-quasi-compact} により、準コンパクト射の合成は準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-affine-separated}
+アフィンスキームは分離的である。アフィンスキームから別のスキームへの射は分離的である。
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$ をアフィンスキームとする。補題 \ref{schemes-lemma-diagonal-affines-closed} により、
+$U \to \Spec(\mathbf{Z})$ は閉な対角を持つ。従って定義 \ref{schemes-definition-separated} により
+$U$ は分離的である。$U \to X$ がスキームの射ならば、射
+$U \to X \to \Spec(\mathbf{Z})$ に補題 \ref{schemes-lemma-compose-after-separated} を適用して、
+$U \to X$ は分離的であると結論できる。
+\end{proof}
+
+\noindent
+二つのアフィン開集合の交わりがアフィンであると結論するために、それらの像が一つの
+アフィン開集合に含まれる組だけを考えるという条件が本当に必要なのか疑問に思ったかもしれない。
+実際には不要であることが多い。
+
+\begin{lemma}
+\label{schemes-lemma-curiosity}
+$f : X \to S$ を射とし、$f$ は分離的、$S$ は分離スキームであると仮定する。
+$U \subset X$ および $V \subset X$ をアフィン開集合とする。このとき $U \cap V$ はアフィンである
+（かつ $U \times V$ の閉部分スキームである）。
+\end{lemma}
+
+\begin{proof}
+この場合、補題 \ref{schemes-lemma-separated-permanence} により $X$ は分離的である。従って
+$U \cap V$ は、射 $X \to \Spec(\mathbf{Z})$ に補題
+\ref{schemes-lemma-characterize-separated} を適用するとアフィンである。
+\end{proof}
+
+\noindent
+他方、次の例は、アフィンスキームの像があるアフィンに含まれるとは期待できないことを示す。
+
+\begin{example}
+\label{schemes-example-image-affine-projective}
+例 \ref{schemes-example-not-affine} の非アフィンスキーム
+$U = \Spec(k[x, y]) \setminus \{(x, y)\}$ を考える。他方、スキーム
+$$
+\mathbf{GL}_{2, k} = \Spec(k[a, b, c, d, 1/ad - bc]).
+$$
+を考える。射 $\mathbf{GL}_{2, k} \to U$ があり、これは環準同型
+$x \mapsto a$、$y \mapsto b$ に対応する。これが全射であることは容易に分かり、従ってその像は
+$U$ のいかなるアフィン開集合にも含まれない。実際、アフィンスキーム
+$\mathbf{GL}_{2, k}$ は $\mathbf{P}^1_k$ 上にも全射であり、$\mathbf{P}^1_k$ は
+{\it いかなる} アフィンスキームへの埋め込みさえ持たない。
+\end{example}
+
+\begin{remark}
+\label{schemes-remark-quasi-compact-and-quasi-separated}
+$P$ を次の $4$ つの性質のいずれかとする：「準分離的」、「分離的」、
+「準コンパクトかつ準分離的」、または「準コンパクトかつ分離的」。このとき次が成り立つ。
+\begin{enumerate}
+\item 任意のアフィンスキームは $P$ を持つ。
+\item スキームの射 $f : X \to Y$ が与えられ、$Y$ が $P$ を持つとき、$f$ が $P$ を持つことと
+$X$ が $P$ を持つこととは同値である。
+\item $X \to Y$ および $Z \to Y$ がスキームの射であり、$X$、$Y$、$Z$ が $P$ を持つならば、
+$X \times_Y Z$ は $P$ を持つ。
+\end{enumerate}
+(1) は明らかである。$f : X \to Y$ を (2) のような射とする。$f$ が $P$ を持つならば、
+$X$ も同じ性質を持つ。これは補題 \ref{schemes-lemma-separated-permanence} および
+\ref{schemes-lemma-composition-quasi-compact} を $X \to Y \to \Spec(\mathbf{Z})$ に適用すれば分かる。
+$X$ が $P$ を持つならば、$f$ も同じ性質を持つ。これは補題
+\ref{schemes-lemma-compose-after-separated} および \ref{schemes-lemma-quasi-compact-permanence} を
+$X \to Y \to \Spec(\mathbf{Z})$ に適用すれば分かる。
+$X \to Y$ および $Z \to Y$ を (3) のような射とする。このとき射影
+$X \times_Y Z \to Z$ は $P$ を持つ。これは矢印 $X \to Y$ の基底変換であり、この矢印は
+(2) により $P$ を持つからである。補題 \ref{schemes-lemma-separated-permanence} および
+\ref{schemes-lemma-quasi-compact-preserved-base-change} を参照せよ。従って (2) により
+$X \times_Y Z$ は $P$ を持つ。
+\end{remark}
+
+
+
+
+
+
+\section{分離性の付値判定法}
+\label{schemes-section-valuative-separatedness}
+
+\begin{lemma}
+\label{schemes-lemma-separated-implies-valuative}
+$f : X \to S$ をスキームの射とする。$f$ が分離的ならば、$f$ は付値判定法の一意性部分を満たす。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{schemes-definition-valuative-criterion} のような図式が与えられているとする。その図式に入る二つの射
+$a, b : \Spec(A) \to X$ があると仮定する。$Z \subset \Spec(A)$ を $a$ と $b$ の等化子とする。
+補題 \ref{schemes-lemma-where-are-they-equal} により、これは $\Spec(A)$ の閉部分スキームである。
+仮定により、これは $\Spec(A)$ の生成点を含む。$A$ は整域なので、これから
+$Z = \Spec(A)$ が従う。従って望みどおり $a = b$ である。
+\end{proof}
+
+\begin{lemma}[分離性の付値判定法]
+\label{schemes-lemma-valuative-criterion-separatedness}
+\begin{reference}
+\cite[II Proposition 7.2.3]{EGA}
+\end{reference}
+$f : X \to S$ を射とする。次を仮定する。
+\begin{enumerate}
+\item 射 $f$ は準分離的である。
+\item 射 $f$ は付値判定法の一意性部分を満たす。
+\end{enumerate}
+このとき $f$ は分離的である。
+\end{lemma}
+
+\begin{proof}
+仮定 (1)、命題 \ref{schemes-proposition-characterize-universally-closed}、および補題
+\ref{schemes-lemma-diagonal-immersion} と \ref{schemes-lemma-immersion-when-closed} により、射
+$\Delta_{X/S} : X \to X \times_S X$ が付値判定法の存在部分を満たすことを示せば十分である。
+可換な実線図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & X \times_S X
+}
+$$
+が与えられているとする。右下の矢印は、二つの射
+$a, b : \Spec(A) \to X$、すなわち $S$ 上の二つの射に対応する。(2) により $a = b$ であることが分かる。
+従って $a$ を点線の矢印として用いればよい。
+\end{proof}
+
+
+
+
+
+
+\section{単射}
+\label{schemes-section-monomorphisms}
+
+\begin{definition}
+\label{schemes-definition-monomorphism}
+スキームの圏における単射であるスキームの射を {\it 単射} という。圏の章の定義
+\ref{categories-definition-mono-epi} を参照せよ。
+\end{definition}
+
+\begin{lemma}
+\label{schemes-lemma-monomorphism}
+\begin{slogan}
+スキームの射が単射であることと、その対角射が同型射であることとは同値である。
+\end{slogan}
+$j : X \to Y$ をスキームの射とする。このとき、$j$ が単射であることと、対角射
+$\Delta_{X/Y} : X \to X \times_Y X$ が同型射であることとは同値である。
+\end{lemma}
+
+\begin{proof}
+これはファイバー積を持つ任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-monomorphism-separated}
+スキームの単射は分離的である。
+\end{lemma}
+
+\begin{proof}
+これは、同型射が閉埋め込みであることと、上の補題 \ref{schemes-lemma-monomorphism} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-composition-monomorphism}
+単射の合成は単射である。
+\end{lemma}
+
+\begin{proof}
+任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-base-change-monomorphism}
+単射の基底変換は単射である。
+\end{lemma}
+
+\begin{proof}
+ファイバー積を持つ任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-injective-points}
+$j : X \to Y$ をスキームの射とする。$j$ が点上単射ならば、$j$ は分離的である。
+\end{lemma}
+
+\begin{proof}
+$z$ を $X \times_Y X$ の点とする。このとき $x = \text{pr}_1(z)$ と
+$\text{pr}_2(z)$ は同じ点である。$j$ はこれらの点を $y$ という $Y$ の同じ点に写すからである。
+アフィン開近傍 $V \subset Y$ を $y$ に対して、またアフィン開近傍 $U \subset X$ を $x$ に対して、
+$j(U) \subset V$ となるものを選べる。このとき
+$z \in U \times_V U \subset X \times_Y X$ である。従って $X \times_Y X$ はアフィン開集合
+$U \times_V U$ の和である。$\Delta_{X/Y}^{-1}(U \times_V U) = U$ であり、
+$U \to U \times_V U$ は閉埋め込みなので、$\Delta_{X/Y}$ は閉埋め込みであると結論する
+（補題 \ref{schemes-lemma-diagonal-immersion} の証明の議論を参照せよ）。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-injective-points-surjective-stalks}
+$j : X \to Y$ をスキームの射とする。次を仮定する。
+\begin{enumerate}
+\item $j$ は点上単射である。
+\item 任意の $x \in X$ に対して環準同型
+$j^\sharp_x : \mathcal{O}_{Y, j(x)} \to \mathcal{O}_{X, x}$
+は全射である。
+\end{enumerate}
+このとき $j$ は単射である。
+\end{lemma}
+
+\begin{proof}
+$a, b : Z \to X$ を $j \circ a  = j \circ b$ となるスキームの二つの射とする。
+このとき (1) により、台位相空間の写像として $a = b$ である。任意の $z \in Z$ に対して、
+$a^\sharp_z \circ j^\sharp_{a(z)} = b^\sharp_z \circ j^\sharp_{b(z)}$ が、写像
+$\mathcal{O}_{Y, j(a(z))} \to \mathcal{O}_{Z, z}$ として成り立つ。
+写像 $j^\sharp_x$ の全射性により、$a^\sharp_z = b^\sharp_z$、$\forall z \in Z$ である。
+従って $a^\sharp = b^\sharp$ であり、望みどおりスキームの射として $a = b$ と結論する。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-immersions-monomorphisms}
+スキームの埋め込みは単射である。特に、任意の埋め込みは分離的である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{schemes-lemma-injective-points-surjective-stalks} の判定条件が適用できることを確認すれば分かる。
+より洗練された方法としては、補題 \ref{schemes-lemma-restrict-map-to-opens} および
+\ref{schemes-lemma-characterize-closed-subspace} により、開埋め込みと閉埋め込みが単射であることを用いてもよい。
+従って、そのような射の合成である任意の埋め込みも単射である。
+\end{proof}
+
+\begin{lemma}
+\label{schemes-lemma-subscheme-of-separated-scheme}
+$f : X \to S$ を分離射とする。任意の局所閉部分スキーム $Z \subset X$ は $S$ 上分離的である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{schemes-lemma-immersions-monomorphisms} と、分離射の合成が分離的であるという事実
+（補題 \ref{schemes-lemma-separated-permanence}）から従う。
+\end{proof}
+
+\begin{example}
+\label{schemes-example-Q-over-Z}
+射 $\Spec(\mathbf{Q}) \to \Spec(\mathbf{Z})$ は単射である。これは
+$\mathbf{Q} \otimes_{\mathbf{Z}} \mathbf{Q} = \mathbf{Q}$ だからである。
+より一般に、任意のスキーム $S$ と任意の点 $s \in S$ に対して標準射
+$$
+\Spec(\mathcal{O}_{S, s}) \longrightarrow S
+$$
+は単射である。
+\end{example}
+
+\begin{lemma}
+\label{schemes-lemma-mono-towards-spec-field}
+$k_1, \ldots, k_n$ を体とする。任意のスキームの単射
+$X \to \Spec(k_1 \times \ldots \times k_n)$ に対し、ある部分集合
+$I \subset \{1, \ldots, n\}$ が存在して、$X \cong \Spec(\prod_{i \in I} k_i)$ が
+$\Spec(k_1 \times \ldots \times k_n)$ 上のスキームとして成り立つ。より一般に、
+$X = \coprod_{i \in I} \Spec(k_i)$ が体のスペクトルの非交和で、$Y \to X$ が単射ならば、
+ある部分集合 $J \subset I$ が存在して $Y = \coprod_{i \in J} \Spec(k_i)$ となる。
+\end{lemma}
+
+\begin{proof}
+まず $n = 1$（または $\# I = 1$）の場合に、開かつ閉な部分スキーム
+$\Spec(k_i)$ の逆像を取ることにより帰着する。この場合、$X$ は一点しか持たないのでアフィンである。
+対応する代数の問題は次のとおりである。$k \to R$ が代数準同型であって
+$R \otimes_k R \cong R$ ならば、$R \cong k$ または $R = 0$ である。
+これは次元の理由から成り立つ。代数の章の補題
+\ref{algebra-lemma-epimorphism-over-field} も参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{準連接加群に対する関手性}
+\label{schemes-section-quasi-coherent}
+
+\noindent
+$X$ をスキームとする。$\QCoh(\mathcal{O}_X)$ で、加群の章の定義
+\ref{modules-definition-quasi-coherent} で定義された準連接 $\mathcal{O}_X$-加群の圏を表す。節
+\ref{schemes-section-quasi-coherent-affine} で、圏 $\QCoh(\mathcal{O}_X)$ は $X$ がアフィンならば多くの
+良い性質を持つことを見た。準連接であるという性質は $X$ 上局所的なので、これらの性質は任意の
+スキーム $X$ 上の準連接層の圏に受け継がれる。ここで列挙しておく。
+\begin{enumerate}
+\item $\mathcal{O}_X$-加群の層 $\mathcal{F}$ が準連接であることと、$\mathcal{F}$ の各アフィン開集合
+$U = \Spec(R)$ への制限が $\widetilde M$ の形であり、ここで $R$-加群を $M$ とすることとは同値である。
+\item $\mathcal{O}_X$-加群の層 $\mathcal{F}$ が準連接であることと、あるアフィン開被覆の各要素への
+$\mathcal{F}$ の制限が準連接であることとは同値である。
+\item 準連接層の任意の直和は準連接である。
+\item 準連接層の任意の余極限は準連接である。
+\item
+\label{schemes-item-kernel}
+準連接層の射の核と余核は準連接である。
+\item $\mathcal{O}_X$-加群の短完全列
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$ が与えられたとき、三つのうち
+二つが準連接ならば残りの一つも準連接である。
+\item スキームの射 $f : Y \to X$ が与えられたとき、準連接 $\mathcal{O}_X$-加群の引き戻しは
+準連接 $\mathcal{O}_Y$-加群である。加群の章の補題
+\ref{modules-lemma-pullback-quasi-coherent} を参照せよ。
+\item 二つの準連接 $\mathcal{O}_X$-加群が与えられたとき、そのテンソル積は準連接である。
+加群の章の補題 \ref{modules-lemma-tensor-product-permanence} を参照せよ。
+\item 準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ が与えられたとき、$\mathcal{F}$ 上のテンソル代数、
+対称代数、外積代数は準連接である。加群の章の補題
+\ref{modules-lemma-whole-tensor-algebra-permanence} を参照せよ。
+\item 二つの準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$、$\mathcal{G}$ が与えられ、$\mathcal{F}$ が
+有限表示ならば、内部 Hom
+$\SheafHom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$ は準連接である。加群の章の補題
+\ref{modules-lemma-internal-hom-locally-kernel-direct-sum} および上の (\ref{schemes-item-kernel}) を参照せよ。
+\end{enumerate}
+他方、一般には準連接加群の順像は準連接とは限らない。次はこれが成り立つ場合である。
+
+\begin{lemma}
+\label{schemes-lemma-push-forward-quasi-coherent}
+$f : X \to S$ をスキームの射とする。$f$ が準コンパクトかつ準分離的ならば、
+$f_*$ は準連接 $\mathcal{O}_X$-加群を準連接 $\mathcal{O}_S$-加群に移す。
+\end{lemma}
+
+\begin{proof}
+問題は $S$ 上局所的なので、$S$ はアフィンであると仮定してよい。$X$ は準コンパクトなので、
+$X = \bigcup_{i = 1}^n U_i$ と書け、各 $U_i$ はアフィン開集合である。$f$ は準分離的なので、
+$U_i \cap U_j = \bigcup_{k = 1}^{n_{ij}} U_{ijk}$ と書け、各 $U_{ijk}$ はアフィン開集合である。補題
+\ref{schemes-lemma-characterize-quasi-separated} を参照せよ。$f_i : U_i \to S$ および
+$f_{ijk} : U_{ijk} \to S$ を $f$ の制限とする。任意の開集合 $V$ を $S$ に取り、任意の層
+$\mathcal{F}$ を $X$ 上に取ると、次が成り立つ。
+\begin{eqnarray*}
+f_*\mathcal{F}(V) & = & \mathcal{F}(f^{-1}V) \\
+& = &
+\Ker\left(
+\bigoplus\nolimits_i \mathcal{F}(f^{-1}V \cap U_i)
+\to
+\bigoplus\nolimits_{i, j, k} \mathcal{F}(f^{-1}V \cap U_{ijk})\right) \\
+& = &
+\Ker\left(
+\bigoplus\nolimits_i f_{i, *}(\mathcal{F}|_{U_i})(V)
+\to
+\bigoplus\nolimits_{i, j, k} f_{ijk, *}(\mathcal{F}|_{U_{ijk}})(V)\right) \\
+& = &
+\Ker\left(
+\bigoplus\nolimits_i f_{i, *}(\mathcal{F}|_{U_i})
+\to
+\bigoplus\nolimits_{i, j, k} f_{ijk, *}(\mathcal{F}|_{U_{ijk}})\right)(V)
+\end{eqnarray*}
+言い換えると、層の完全列
+$$
+0 \to f_*\mathcal{F}
+\to \bigoplus f_{i, *}\mathcal{F}_i
+\to \bigoplus f_{ijk, *}\mathcal{F}_{ijk}
+$$
+がある。ここで $\mathcal{F}_i, \mathcal{F}_{ijk}$ は、対応する開集合への $\mathcal{F}$ の制限を表す。
+$\mathcal{F}$ が準連接 $\mathcal{O}_X$-加群ならば、$\mathcal{F}_i$ は準連接
+$\mathcal{O}_{U_i}$-加群であり、$\mathcal{F}_{ijk}$ は準連接 $\mathcal{O}_{U_{ijk}}$-加群である。
+従って補題 \ref{schemes-lemma-widetilde-pullback} により、完全列の第二項と第三項は準連接
+$\mathcal{O}_S$-加群である。従って $f_*\mathcal{F}$ は準連接 $\mathcal{O}_S$-加群であると結論する。
+\end{proof}
+
+\noindent
+これを用いると、スキームの（閉）埋め込みを次のように特徴づけられる。
+
+\begin{lemma}
+\label{schemes-lemma-characterize-closed-immersions}
+$f : X \to Y$ をスキームの射とし、次を仮定する。
+\begin{enumerate}
+\item $f$ は $X$ と $Y$ の閉部分集合との間の同相を誘導する。
+\item $f^\sharp : \mathcal{O}_Y \to f_*\mathcal{O}_X$ は全射である。
+\end{enumerate}
+このとき $f$ はスキームの閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+(1) と (2) を仮定する。(1) により射 $f$ は準コンパクトである（位相の章の補題
+\ref{topology-lemma-closed-in-quasi-compact} を参照せよ）。条件 (1) と (2) から、補題
+\ref{schemes-lemma-injective-points-surjective-stalks} の条件 (1) と (2) が従う。従って
+$f : X \to Y$ は単射である。特に $f$ は分離的である。補題
+\ref{schemes-lemma-monomorphism-separated} を参照せよ。従って上の補題
+\ref{schemes-lemma-push-forward-quasi-coherent} を適用でき、$f_*\mathcal{O}_X$ は準連接
+$\mathcal{O}_Y$-加群であると結論する。従って補題
+\ref{schemes-lemma-extension-quasi-coherent} により $\mathcal{O}_Y \to f_*\mathcal{O}_X$ の核は準連接である。
+準連接層は局所的に切断で生成されるので（加群の章の定義
+\ref{modules-definition-quasi-coherent} を参照せよ）、定義
+\ref{schemes-definition-closed-immersion-locally-ringed-spaces} により $f$ は閉埋め込みである。
+\end{proof}
+
+\noindent
+この補題を用いて次の補題を示せる。
+
+\begin{lemma}
+\label{schemes-lemma-composition-immersion}
+スキームの埋め込みの合成は埋め込みであり、スキームの閉埋め込みの合成は閉埋め込みであり、
+スキームの開埋め込みの合成は開埋め込みである。
+\end{lemma}
+
+\begin{proof}
+開部分空間の開部分空間も開部分空間なので、開埋め込みの場合は明らかである。
+
+\medskip\noindent
+$a : Z \to Y$ と $b : Y \to X$ をスキームの閉埋め込みとする。
+$c = b \circ a$ も閉埋め込みであることを確認する。仮定により $a$ と $b$ は閉部分集合への
+同相写像であり、従って $c = b \circ a$ も閉部分集合への同相写像である。さらに写像
+$\mathcal{O}_X \to c_*\mathcal{O}_Z$ は全射である。実際、これは全射
+$\mathcal{O}_X \to b_*\mathcal{O}_Y$ と
+$b_*\mathcal{O}_Y \to b_*a_*\mathcal{O}_Z$ の合成として分解するからである（後者は $b_*$ が完全なので
+全射である。加群の章の補題 \ref{modules-lemma-i-star-exact} を参照せよ）。従って上の補題
+\ref{schemes-lemma-characterize-closed-immersions} により $c$ は閉埋め込みである。
+
+\medskip\noindent
+最後に埋め込みの場合を考える。$a : Z \to Y$ と $b : Y \to X$ をスキームの埋め込みとする。
+これは、開部分スキーム $V \subset Y$ と $U \subset X$ が存在して、
+$a(Z) \subset V$、$b(Y) \subset U$ となり、$a : Z \to V$ と
+$b : Y \to U$ が閉埋め込みになることを意味する。$Y$ の位相は $U$ の位相から誘導されるので、
+開集合 $U' \subset U$ であって $V = b^{-1}(U')$ となるものを取れる。このとき
+$Z \to V = b^{-1}(U') \to U'$ は閉埋め込みの合成であり、従って閉埋め込みである。
+これにより $Z \to X$ は埋め込みであることが示され、証明が完了する。
+\end{proof}

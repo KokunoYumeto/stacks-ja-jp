@@ -1,0 +1,3042 @@
+% Generated mechanically from frozen input inputs/p11/ja/criteria.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% ja-JP translation of frozen criteria.tex at
+% upstream commit a04446e57ec1fbc252a871afcec7752fb2807b14.
+
+\setcounter{chapter}{96}
+\chapter{表現可能性の判定条件}
+
+
+\phantomsection
+\label{criteria-section-phantom}
+
+
+
+
+
+\section{序論}
+\label{criteria-section-introduction}
+
+\noindent
+本章の目的は、fppf 位相を備えたスキームの圏上のグルーポイドのスタックが
+代数スタックとなることを保証する判定条件を見いだすことである。
+歴史的には、そのためにいくつかの関手の表現可能性を証明することがしばしば
+必要であった。Grothendieck の講義
+\cite{Gr-I},
+\cite{Gr-II},
+\cite{Gr-III},
+\cite{Gr-IV},
+\cite{Gr-V}, および
+\cite{Gr-VI}
+を参照せよ。これが本章の表題の由来である。本章の内容のもう一つの重要な源泉は
+Artin の仕事である。次を参照せよ：
+\cite{ArtinI},
+\cite{ArtinII},
+\cite{Artin-Theorem-Representability},
+\cite{Artin-Construction-Techniques},
+\cite{Artin-Algebraic-Spaces},
+\cite{Artin-Algebraic-Approximation},
+\cite{Artin-Implicit-Function}, および
+\cite{ArtinVersal}。
+
+\medskip\noindent
+本章で用いる記法・規約・用語の一部は扱いにくく、経験を積んだ読者には
+向きが逆であるように見えるかもしれない。これは意図的である。
+説明については『Quot』の節 \ref{quot-section-conventions} を参照せよ。
+
+
+
+\section{規約}
+\label{criteria-section-conventions}
+
+\noindent
+本章で用いる規約は、代数スタックの章で用いたものと同じである。
+『代数スタック』の節 \ref{algebraic-section-conventions} を参照せよ。
+
+
+
+
+\section{既知の結果}
+\label{criteria-section-done-so-far}
+
+\noindent
+代数空間について本章に対応するのは『ブートストラップ』と題する章である。
+『ブートストラップ』の節 \ref{bootstrap-section-introduction} を参照せよ。
+同章には、すでにいくつかの表現可能性の結果が含まれている。
+さらに、そこで扱われる予備的内容の一部は、代数スタックの章でもすでに
+展開してある。以下に列挙する。
+\begin{enumerate}
+\item 代数空間により表現可能な前層の射については、
+『ブートストラップ』の節
+\ref{bootstrap-section-morphism-representable-by-spaces}
+で論じる。代数空間により表現可能な、グルーポイドをファイバーとする圏の
+$1$-射という概念については、『代数スタック』の節
+\ref{algebraic-section-morphisms-representable-by-algebraic-spaces}
+で論じる。
+\item 代数空間により表現可能な前層の射の性質については、
+『ブートストラップ』の節
+\ref{bootstrap-section-representable-by-spaces-properties}
+で論じる。代数空間により表現可能な、グルーポイドをファイバーとする圏の
+$1$-射の性質については、『代数スタック』の節
+\ref{algebraic-section-representable-properties}
+で論じる。
+\item $F$ を層とし、その対角射が代数空間により表現可能であり、かつ
+ある代数空間によるエタール被覆をもつならば、$F$ は代数空間であることを
+証明した。『ブートストラップ』の定理
+\ref{bootstrap-theorem-bootstrap} を参照せよ。
+（これは次項の結果の弱い形である。）
+\item
+\label{criteria-item-bootstrap-final}
+$F$ を層とし、代数空間 $U$ と、代数空間により表現可能、全射、平坦かつ
+局所有限表示な射 $U \to F$ が存在するならば、$F$ は代数空間であることを
+証明した。『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} を参照せよ。
+\item 代数スタックについて、(\ref{criteria-item-bootstrap-final}) の「滑らかな」類似も
+証明した。すなわち、$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドの
+スタックとし、代数空間により表現可能な $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタック $\mathcal{U}$ と、代数空間により表現可能、全射かつ
+滑らかな $1$-射 $u : \mathcal{U} \to \mathcal{X}$ が存在するならば、
+$\mathcal{X}$ は代数スタックである。『代数スタック』の補題
+\ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+を参照せよ。
+\end{enumerate}
+次の課題は、代数スタックについて (\ref{criteria-item-bootstrap-final}) の一般の類似を
+証明することである。それが定理 \ref{criteria-theorem-bootstrap} である。
+
+
+
+\section{グルーポイドのスタックの射}
+\label{criteria-section-1-morphisms}
+
+\noindent
+この節は準備的なものであり、初読時には読み飛ばしてよい。
+
+\begin{lemma}
+\label{criteria-lemma-etale-permanence}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$\mathcal{X} \to \mathcal{Y} \to \mathcal{Z}$ を考える。
+$\mathcal{X} \to \mathcal{Z}$ と $\mathcal{Y} \to \mathcal{Z}$ が
+代数空間により表現可能かつエタールならば、
+$\mathcal{X} \to \mathcal{Y}$ もそうである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{U}$ を $S$ 上の表現可能な、グルーポイドをファイバーとする圏とする。
+$f : \mathcal{U} \to \mathcal{Y}$ を $1$-射とする。
+$\mathcal{X} \times_\mathcal{Y} \mathcal{U}$ が代数空間により表現可能で、
+$\mathcal{U}$ 上エタールであることを示さなければならない。
+合成 $h : \mathcal{U} \to \mathcal{Z}$ を考える。このとき
+$$
+\mathcal{X} \times_\mathcal{Z} \mathcal{U}
+\longrightarrow
+\mathcal{Y} \times_\mathcal{Z} \mathcal{U}
+$$
+は、いずれも代数空間により表現可能で、かつ $\mathcal{U}$ 上エタールな、
+グルーポイドをファイバーとする二つの圏の間の $1$-射である。
+したがって『空間の性質』の補題
+\ref{spaces-properties-lemma-etale-permanence} により、これは代数空間の
+エタール射によって表現される。最後に、$f$ は射
+$\mathcal{U} \to \mathcal{Y} \times_\mathcal{Z} \mathcal{U}$ を誘導し、
+$$
+\mathcal{X} \times_\mathcal{Y} \mathcal{U} =
+(\mathcal{X} \times_\mathcal{Z} \mathcal{U})
+\times_{(\mathcal{Y} \times_\mathcal{Z} \mathcal{U})}
+\mathcal{U}
+$$
+であるから、求める結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-stack-in-setoids-descent}
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックとする。
+$\mathcal{X} \to \mathcal{Y}$ と $\mathcal{Z} \to \mathcal{Y}$ が
+$1$-射であると仮定する。さらに、
+\begin{enumerate}
+\item $\mathcal{Y}$ と $\mathcal{Z}$ は、それぞれ $S$ 上の代数空間
+$Y$ と $Z$ により表現可能であり、
+\item 付随する代数空間の射 $Y \to Z$ は全射、平坦かつ局所有限表示であり、
+\item $\mathcal{Y} \times_\mathcal{Z} \mathcal{X}$ はセトイドの
+スタックである
+\end{enumerate}
+とする。このとき $\mathcal{X}$ はセトイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+これは『スタック』の補題
+\ref{stacks-lemma-stack-in-setoids-descent} の特別な場合である。
+\end{proof}
+
+\noindent
+次の補題は『代数スタック』の補題
+\ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+の類似であり、後でより強い定理 \ref{criteria-theorem-bootstrap} により置き換えられる。
+
+\begin{lemma}
+\label{criteria-lemma-flat-finite-presentation-surjective-diagonal}
+$S$ をスキームとする。
+$u : \mathcal{U} \to \mathcal{X}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする。もし
+\begin{enumerate}
+\item $\mathcal{U}$ が代数空間により表現可能であり、
+\item $u$ が代数空間により表現可能、全射、平坦かつ局所有限表示である
+\end{enumerate}
+ならば、
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$ は
+代数空間により表現可能である。
+\end{lemma}
+
+\begin{proof}
+$S$ 上の二つのスキーム $T_1$, $T_2$ に対し、
+$\mathcal{T}_i = (\Sch/T_i)_{fppf}$ を随伴する表現可能なファイバー圏と書く。
+$1$-射 $f_i : \mathcal{T}_i \to \mathcal{X}$ が与えられたとする。
+『代数スタック』の補題
+\ref{algebraic-lemma-representable-diagonal} によれば、$2$-ファイバー積
+$\mathcal{T}_1 \times_\mathcal{X} \mathcal{T}_2$ が代数空間により
+表現可能であることを証明すれば十分である。『スタック』の補題
+\ref{stacks-lemma-2-fibre-product-stacks-in-setoids-over-stack-in-groupoids}
+により、これはいずれにせよセトイドのスタックである。
+したがって $\mathcal{T}_1 \times_\mathcal{X} \mathcal{T}_2$ は、
+$(\Sch/S)_{fppf}$ 上のある層 $F$ に対応する。『スタック』の補題
+\ref{stacks-lemma-stack-in-setoids-characterize} を参照せよ。
+$\mathcal{U}$ を表現する代数空間を $U$ とする。仮定により
+$$
+\mathcal{T}_i' = \mathcal{U} \times_{u, \mathcal{X}, f_i} \mathcal{T}_i
+$$
+は $S$ 上の代数空間 $T'_i$ により表現可能である。ゆえに
+$\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2'$ は、代数空間
+$T'_1 \times_U T'_2$ により表現可能である。可換図式
+$$
+\xymatrix{
+&
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2 \ar[rr]\ar'[d][dd] & &
+\mathcal{T}_1 \ar[dd] \\
+\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \ar[ur]\ar[rr]\ar[dd] & &
+\mathcal{T}_1' \ar[ur]\ar[dd] \\
+&
+\mathcal{T}_2 \ar'[r][rr] & &
+\mathcal X \\
+\mathcal{T}_2' \ar[rr]\ar[ur] & &
+\mathcal{U} \ar[ur] }
+$$
+を考える。この図式では、下、右、奥、および手前の正方形が
+$2$-ファイバー積である。このとき形式的な議論により、
+$\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \to
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2$ は
+$\mathcal{U} \to \mathcal{X}$ の「基底変換」であることが分かる。
+より正確には、図式
+$$
+\xymatrix{
+\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \ar[d] \ar[r] &
+\mathcal{U} \ar[d] \\
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2 \ar[r] &
+\mathcal{X}
+}
+$$
+は $2$-ファイバー正方形である。
+したがって $T'_1 \times_U T'_2 \to F$ は代数空間により表現可能で、
+平坦、局所有限表示かつ全射である。『代数スタック』の補題
+\ref{algebraic-lemma-map-fibred-setoids-representable-algebraic-spaces},
+\ref{algebraic-lemma-base-change-representable-by-spaces},
+\ref{algebraic-lemma-map-fibred-setoids-property}, および
+\ref{algebraic-lemma-base-change-representable-transformations-property}
+を参照せよ。したがって『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} により $F$ は代数空間であり、
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-second-diagonal}
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とする。
+次は同値である。
+\begin{enumerate}
+\item $\Delta_\Delta : \mathcal{X} \to
+\mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X}$
+は代数空間により表現可能である。
+\item $\mathcal{V}$ が（スキームにより）表現可能であるような任意の $1$-射
+$\mathcal{V} \to \mathcal{X} \times \mathcal{X}$ に対し、ファイバー積
+$\mathcal{Y} =
+\mathcal{X} \times_{\Delta, \mathcal{X} \times \mathcal{X}} \mathcal{V}$
+の対角射は代数空間により表現可能である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは多少頭を悩ませるものの、まったく形式的である。
+実際、
+$\mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X} =
+\mathcal{I}_\mathcal{X}$ は $\mathcal{X}$ の慣性であり、
+$\Delta_\Delta$ は $\mathcal{I}_\mathcal{X}$ の恒等切断であることを思い出そう。
+『圏』の節 \ref{categories-section-inertia} を参照せよ。
+したがって条件 (1) は次を述べる。スキーム $V$、$V$ 上の
+$\mathcal{X}$ の対象 $x$、および $\mathcal{X}_V$ の射
+$\alpha : x \to x$ が与えられたとき、条件
+「$\alpha = \text{id}_x$」は $V$ 上の代数空間を定める。
+（言い換えると、代数空間の単射 $W \to V$ が存在し、スキームの射
+$f : T \to V$ が $W$ を経由することと
+$f^*\alpha = \text{id}_{f^*x}$ であることが同値となる。）
+
+\medskip\noindent
+一方、$V$ をスキームとし、$x, y$ を $V$ 上の $\mathcal{X}$ の対象とする。
+このとき $(x, y)$ は射
+$\mathcal{V} = (\Sch/V)_{fppf} \to \mathcal{X} \times \mathcal{X}$
+を定める。次に $h : V' \to V$ をスキームの射とし、
+$\alpha : h^*x \to h^*y$ と $\beta : h^*x \to h^*y$ を
+$\mathcal{X}_{V'}$ の射とする。このとき $(\alpha, \beta)$ は射
+$\mathcal{V}' = (\Sch/V)_{fppf} \to \mathcal{Y} \times \mathcal{Y}$
+を定める。条件 (2) は、以上のどのような選択に対しても、条件
+「$\alpha = \beta$」が $V$ 上の代数空間を定めることを述べる。
+
+\medskip\noindent
+同値性を見るため、(2) における $(\alpha, \beta)$ が与えられたとする。
+(1) により、条件
+「$\alpha^{-1} \circ \beta = \text{id}_{h^*x}$」が代数空間を定める。
+(2) $\Rightarrow$ (1) は $h = \text{id}_V$ および
+$\beta = \text{id}_x$ と取ることから従う。
+\end{proof}
+
+
+
+\section{対象についての極限保存性}
+\label{criteria-section-limit-preserving}
+
+\noindent
+$S$ をスキームとする。$p : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+次の条件が成り立つとき、$p$ は {\it 対象について極限保存的} であるという。
+以下のデータが任意に与えられたとする。
+\begin{enumerate}
+\item $S$ 上のアフィンスキーム $U_i$ の有向極限として書かれた
+アフィンスキーム $U = \lim_{i \in I} U_i$、
+\item ある $i$ に対する $U_i$ 上の $\mathcal{Y}$ の対象 $y_i$、
+\item $U$ 上の $\mathcal{X}$ の対象 $x$、および
+\item 同型 $\gamma : p(x) \to y_i|_U$。
+\end{enumerate}
+このとき、ある $i' \geq i$、$U_{i'}$ 上の $\mathcal{X}$ の対象
+$x_{i'}$、同型 $\beta : x_{i'}|_U \to x$、および同型
+$\gamma_{i'} : p(x_{i'}) \to y_i|_{U_{i'}}$ が存在し、
+\begin{equation}
+\label{criteria-equation-limit-preserving}
+\vcenter{
+\xymatrix{
+p(x_{i'}|_U) \ar[d]_{p(\beta)} \ar[rr]_{\gamma_{i'}|_U} & &
+(y_i|_{U_{i'}})|_U \ar@{=}[d] \\
+p(x) \ar[rr]^\gamma & & y_i|_U
+}
+}
+\end{equation}
+が可換になる。この状況では、「$(i', x_{i'}, \beta, \gamma_{i'})$ は
+データ (1), (2), (3), (4) により提示された問題の {\it 解} である」という。
+この定義の動機は『空間の極限』の補題
+\ref{spaces-limits-lemma-characterize-relative-limit-preserving} にある。
+
+\begin{lemma}
+\label{criteria-lemma-base-change-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ と $q : \mathcal{Z} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$p : \mathcal{X} \to \mathcal{Y}$ が対象について極限保存的ならば、
+$q$ による $p$ の基底変換
+$p' : \mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Z}$
+も対象について極限保存的である。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。$S$ 上のアフィンスキーム $U_i$ の有向極限を
+$U = \lim_{i \in I} U_i$ とし、ある $i$ に対して $z_i$ を
+$U_i$ 上の $\mathcal{Z}$ の対象とし、$w$ を $U$ 上の
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ の対象とし、
+$\delta : p'(w) \to z_i|_U$ を同型とする。
+$U$ 上の $\mathcal{X}$ のある対象 $x$、$U$ 上の $\mathcal{Z}$ の対象
+$z$、および同型 $\alpha : p(x) \to q(z)$ を用いて
+$w = (U, x, z, \alpha)$ と書ける。$p'(w) = z$ であることに注意すると、
+$\delta : z \to z_i|_U$ である。$y_i = q(z_i)$ および
+$\gamma = q(\delta) \circ \alpha : p(x) \to y_i|_U$ と置く。
+$p$ は対象について極限保存的であるから、ある $i' \geq i$ と
+$U_{i'}$ 上の $\mathcal{X}$ の対象 $x_{i'}$、ならびに同型
+$\beta : x_{i'}|_U \to x$ と
+$\gamma_{i'} : p(x_{i'}) \to y_i|_{U_{i'}}$ が存在し、
+(\ref{criteria-equation-limit-preserving}) が可換になる。このとき、
+$U_{i'}$ 上の $\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ の対象
+$w_{i'} = (U_{i'}, x_{i'}, z_i|_{U_{i'}}, \gamma_{i'})$ を考え、同型
+$$
+w_{i'}|_U = (U, x_{i'}|_U, z_i|_U, \gamma_{i'}|_U)
+\xrightarrow{(\beta, \delta^{-1})}
+(U, x, z, \alpha) = w
+$$
+および
+$$
+p'(w_{i'}) = z_i|_{U_{i'}} \xrightarrow{\text{id}} z_i|_{U_{i'}}
+$$
+を定める。これらを合わせると問題の解が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-composition-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ と $q : \mathcal{Y} \to \mathcal{Z}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$p$ と $q$ が対象について極限保存的ならば、合成 $q \circ p$ もそうである。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。$S$ 上のアフィンスキーム $U_i$ の有向極限を
+$U = \lim_{i \in I} U_i$ とし、ある $i$ に対して $z_i$ を
+$U_i$ 上の $\mathcal{Z}$ の対象とし、$x$ を $U$ 上の
+$\mathcal{X}$ の対象とし、$\gamma : q(p(x)) \to z_i|_U$ を同型とする。
+$q$ は対象について極限保存的であるから、ある $i' \geq i$、
+$U_{i'}$ 上の $\mathcal{Y}$ の対象 $y_{i'}$、同型
+$\beta : y_{i'}|_U \to p(x)$、および同型
+$\gamma_{i'} : q(y_{i'}) \to z_i|_{U_{i'}}$ が存在し、
+(\ref{criteria-equation-limit-preserving}) は可換である。
+$p$ は対象について極限保存的であるから、ある $i'' \geq i'$、
+$U_{i''}$ 上の $\mathcal{X}$ の対象 $x_{i''}$、同型
+$\beta' : x_{i''}|_U \to x$、および同型
+$\gamma'_{i''} : p(x_{i''}) \to y_{i'}|_{U_{i''}}$ が存在し、
+(\ref{criteria-equation-limit-preserving}) は可換である。解として、
+$U_{i''}$ 上の $x_{i''}$ と同型
+$$
+q(p(x_{i''})) \xrightarrow{q(\gamma'_{i''})}
+q(y_{i'})|_{U_{i''}} \xrightarrow{\gamma_{i'}|_{U_{i''}}}
+z_i|_{U_{i''}}
+$$
+および同型 $\beta' : x_{i''}|_U \to x$ を取ればよい。
+(\ref{criteria-equation-limit-preserving}) が可換であることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-representable-by-spaces-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$p$ が代数空間により表現可能ならば、次は同値である。
+\begin{enumerate}
+\item $p$ は対象について極限保存的である。
+\item $p$ は局所有限表示である（『代数スタック』の定義
+\ref{algebraic-definition-relative-representable-property} を参照）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) を仮定する。$S$ 上のアフィンスキーム $U_i$ の有向極限を
+$U = \lim_{i \in I} U_i$ とし、ある $i$ に対して $y_i$ を
+$U_i$ 上の $\mathcal{Y}$ の対象とし、$x$ を $U$ 上の
+$\mathcal{X}$ の対象とし、$\gamma : p(x) \to y_i|_U$ を同型とする。
+$U_i$ 上の代数空間であって、$2$-ファイバー積
+$$
+(\Sch/U_i)_{fppf} \times_{y_i, \mathcal{Y}, p} \mathcal{X}
+$$
+を表現するものを $X_{y_i}$ と書く。ここで
+$\xi = (U, U \to U_i, x, \gamma^{-1})$ は、$U$ 上でこの
+$2$-ファイバー積の対象を定める。$2$-Yoneda の補題により、$\xi$ は
+$U_i$ 上の射 $f_\xi : U \to X_{y_i}$ に対応する。
+『空間の極限』の命題
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}
+により、ある $i' \geq i$ と射 $f_{i'} : U_{i'} \to X_{y_i}$ が存在し、
+$f_\xi$ は $f_{i'}$ と射影 $U \to U_{i'}$ の合成になる。
+また、$2$-Yoneda の補題によれば、$f_{i'}$ は $U_{i'}$ 上の上記
+$2$-ファイバー積の対象
+$\xi_{i'} = (U_{i'}, U_{i'} \to U_i, x_{i'}, \alpha)$ に対応し、
+これを $U$ に制限すると $\xi$ が回復される。特に同型
+$\gamma : x_{i'}|U \to x$ を得る。
+$\alpha : y_i|_{U_{i'}} \to p(x_{i'})$ であることに注意せよ。
+したがって $x_{i'}$、同型 $\gamma : x_{i'}|U \to x$、および同型
+$\beta = \alpha^{-1} : p(x_{i'}) \to y_i|_{U_{i'}}$ を取れば、
+この問題の解になる。
+
+\medskip\noindent
+(1) を仮定する。スキーム $T$ と $1$-射
+$y : (\Sch/T)_{fppf} \to \mathcal{Y}$ を選ぶ。
+$2$-ファイバー積
+$(\Sch/T)_{fppf} \times_{y, \mathcal{Y}, p} \mathcal{X}$ を表現する
+$T$ 上の代数空間を $X_y$ とする。$X_y \to T$ が局所有限表示であることを
+示さなければならない。そのため、『空間の極限』の注
+\ref{spaces-limits-remark-limit-preserving} の判定条件を用いる。
+$T$ 上のアフィンスキームの有向極限として書かれたアフィンスキーム
+$U = \lim_{i \in I} U_i$ を考える。任意の $i \in I$ を選び、
+$y_i = y|_{U_i}$ と置く。また、$i$ 以上の $I$ の元を $i'$ と書く。
+$2$-Yoneda の補題により、$T$ 上の射 $U \to X_y$ は、
+$x$ が $U$ 上の $\mathcal{X}$ の対象で、
+$\alpha : y|_U \to p(x)$ が同型であるような組 $(x, \alpha)$ の
+同型類と全単射に対応する。もちろん、$\alpha$ を与えることは、逆を取る違いを
+除けば、同型 $\gamma : p(x) \to y_i|_U$ を与えることと同じである。
+$T$ 上の射 $U_{i'} \to X_y$ についても同様である。したがって (1) により、
+この状況で標準写像
+$$
+\colim_{i' \geq i} X_y(U_{i'}) \longrightarrow X_y(U)
+$$
+は全射である。『空間の極限』の補題
+\ref{spaces-limits-lemma-surjection-is-enough} から、
+$X_y \to T$ は局所有限表示である。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-open-immersion-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$p$ が代数空間により表現可能な開埋め込みであると仮定する。
+このとき $p$ は対象について極限保存的である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{criteria-lemma-representable-by-spaces-limit-preserving} と、
+（一般原理である『代数スタック』の補題
+\ref{algebraic-lemma-representable-transformations-property-implication}
+を介して）代数空間の開埋め込みが局所有限表示であるという事実から従う。
+『空間の射』の補題
+\ref{spaces-morphisms-lemma-open-immersion-locally-finite-presentation}
+を参照せよ。
+\end{proof}
+
+\noindent
+$S$ をスキームとする。次の補題では、$S$ 上の代数空間 $X$ の
+{\it サイズ} という概念が必要になる。すなわち、基数 $\kappa$ が与えられたとき、
+$\text{size}(U) \leq \kappa$ であるスキーム $U$（『集合』の節
+\ref{sets-section-categories-schemes} を参照）と全射エタール射 $U \to X$ が
+存在することと、$X$ が $\text{size}(X) \leq \kappa$ であることが同値である、と定める。
+
+\begin{lemma}
+\label{criteria-lemma-check-representable-limit-preserving}
+$S$ をスキームとする。ある $T \in \Ob((\Sch/S)_{fppf})$ に対して
+$\kappa = \text{size}(T)$ とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射で、次を満たすものとする。
+\begin{enumerate}
+\item $\mathcal{Y} \to (\Sch/S)_{fppf}$ は対象について極限保存的である。
+\item $S$ 上局所有限表示なアフィンスキーム $V$ と
+$y \in \Ob(\mathcal{Y}_V)$ に対し、ファイバー積
+$(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$ はサイズ
+$\leq \kappa$ の代数空間により表現可能である\footnote{集合論的な問題を
+無視する読者は、サイズに関する条件を外してよい。}。
+\item $\mathcal{X}$ と $\mathcal{Y}$ は Zariski 位相に関するスタックである。
+\end{enumerate}
+このとき $f$ は代数空間により表現可能である。
+\end{lemma}
+
+\begin{proof}
+$V$ を $S$ 上のスキームとし、$y \in \mathcal{Y}_V$ とする。
+$(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$ が
+代数空間により表現可能であることを証明しなければならない。
+
+\medskip\noindent
+場合 I：$V$ はアフィンで、アフィン開集合
+$\Spec(\Lambda) \subset S$ に写るとする。このとき、『代数』の補題
+\ref{algebra-lemma-ring-colimit-fp} により、$V = \lim V_i$ と書け、
+各 $V_i$ は $\Spec(\Lambda)$ 上アフィンかつ有限表示である。
+仮定 (1) により、$y$ はある $i$ に対する $V_i$ 上の対象 $y_i$ から来る。
+仮定 (3) により、ファイバー積
+$(\Sch/V_i)_{fppf} \times_{y_i, \mathcal{Y}} \mathcal{X}$ は
+代数空間 $Z_i$ により表現可能である。このとき
+$(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$ は
+$Z \times_{V_i} V$ により表現可能である。
+
+\medskip\noindent
+場合 II：$V$ は一般とする。各 $V_i$ が $S$ のあるアフィン開集合に写るような
+アフィン開被覆 $V = \bigcup_{i \in I} V_i$ を選ぶ。まず、
+$\mathcal{Z} = (\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+が Zariski 位相についてセトイドのスタックであることを主張する。
+実際、『スタック』の補題
+\ref{stacks-lemma-2-product-stacks-in-groupoids} により、これは
+Zariski 位相についてグルーポイドのスタックである。
+次に $z$ をスキーム $T$ 上の $\mathcal{Z}$ の対象とする。
+$z$ の $(\Sch/V)_{fppf}$ への射影に対応する射を $g : T \to V$ と書く。
+Zariski 層 $\mathit{I} = \mathit{Isom}_{\mathcal{Z}}(z, z)$ を考える。
+場合 I により、$\mathit{I}|_{g^{-1}(V_i)} = *$（単元層）である。
+したがって $\mathcal{I} = *$ である。ゆえに $\mathcal{Z}$ は
+セトイドをファイバーとする。証明を完了するには、Zariski 層
+$Z : T \mapsto \Ob(\mathcal{Z}_T)/\cong$ が代数空間であることを
+示さなければならない。『代数スタック』の補題
+\ref{algebraic-lemma-characterize-representable-by-space} を参照せよ。
+写像 $p : Z \to V$（関手の変換）があり、場合 I により
+$Z_i = p^{-1}(V_i)$ は代数空間である。射 $Z_i \to Z$ は代数空間により
+表現可能な開埋め込みで、$\coprod Z_i \to Z$ は（Zariski 位相において）
+全射である。したがって『ブートストラップ』の補題
+\ref{bootstrap-lemma-glueing-sheaves} により、$Z$ は fppf 位相に関する層である。
+よって『空間』の補題 \ref{spaces-lemma-glueing-algebraic-spaces} を適用でき、
+$Z$ は代数空間であると結論する\footnote{その補題の集合論的条件が満たされる
+ことを見るには、次のように論じる。まず $|I| \leq \text{size}(V)$ となるように
+開被覆を選ぶ。次に、サイズ $\leq \max(\kappa, \text{size}(V))$ のスキーム
+$U_i$ と全射エタール射 $U_i \to Z_i$ を選ぶ。仮定 (2) と『集合』の補題
+\ref{sets-lemma-bound-size-fibre-product} により、これは可能である
+（詳細は省略する）。すると『集合』の補題
+\ref{sets-lemma-what-is-in-it} から、$\coprod U_i$ は
+$(\Sch/S)_{fppf}$ の対象である。ゆえに『空間』の補題
+\ref{spaces-lemma-coproduct-algebraic-spaces} により、
+$\coprod Z_i$ は代数空間である。}。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-check-property-limit-preserving}
+$S$ をスキームとする。$f : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$\mathcal{P}$ を、『代数スタック』の定義
+\ref{algebraic-definition-relative-representable-property} におけるような
+代数空間の射の性質とする。次を仮定する。
+\begin{enumerate}
+\item $f$ は代数空間により表現可能である。
+\item $\mathcal{Y} \to (\Sch/S)_{fppf}$ は対象について極限保存的である。
+\item $S$ 上局所有限表示なアフィンスキーム $V$ と
+$y \in \mathcal{Y}_V$ に対し、得られる代数空間の射
+$f_y : F_y \to V$（『代数スタック』の式
+(\ref{algebraic-equation-representable-by-algebraic-spaces}) を参照）は
+性質 $\mathcal{P}$ をもつ。
+\end{enumerate}
+このとき $f$ は性質 $\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+$V$ を $S$ 上のスキームとし、$y \in \mathcal{Y}_V$ とする。
+$F_y \to V$ が性質 $\mathcal{P}$ をもつことを示さなければならない。
+$\mathcal{P}$ は底上 fppf 局所的であるから、$V$ はアフィンスキームで、
+あるアフィン開集合 $\Spec(\Lambda) \subset S$ に写ると仮定してよい。
+したがって『代数』の補題 \ref{algebra-lemma-ring-colimit-fp} により、
+$V = \lim V_i$ と書け、各 $V_i$ は $\Spec(\Lambda)$ 上アフィンかつ
+有限表示である。仮定 (2) により、$y$ はある $i$ に対する $V_i$ 上の対象
+$y_i$ から来る。仮定 (3) により、射 $F_{y_i} \to V_i$ は性質
+$\mathcal{P}$ をもつ。$\mathcal{P}$ は任意の基底変換で安定であり、かつ
+$F_y = F_{y_i} \times_{V_i} V$ であるから、望むとおり
+$F_y \to V$ は性質 $\mathcal{P}$ をもつ。
+\end{proof}
+
+
+
+\section{対象について形式的に滑らかであること}
+\label{criteria-section-formally-smooth}
+
+\noindent
+$S$ をスキームとする。$p : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+次の条件が成り立つとき、$p$ は {\it 対象について形式的に滑らか} であるという。
+以下のデータが任意に与えられたとする。
+\begin{enumerate}
+\item $S$ 上のアフィンスキームの一次厚化 $U \subset U'$、
+\item $U'$ 上の $\mathcal{Y}$ の対象 $y'$、
+\item $U$ 上の $\mathcal{X}$ の対象 $x$、および
+\item 同型 $\gamma : p(x) \to y'|_U$。
+\end{enumerate}
+このとき、$U'$ 上の $\mathcal{X}$ の対象 $x'$ と同型
+$\beta : x'|_U \to x$ および $\gamma' : p(x') \to y'$ が存在して、
+\begin{equation}
+\label{criteria-equation-formally-smooth}
+\vcenter{
+\xymatrix{
+p(x'|_U) \ar[d]_{p(\beta)} \ar[rr]_{\gamma'|_U} & &
+y'|_U \ar@{=}[d] \\
+p(x) \ar[rr]^\gamma & & y'|_U
+}
+}
+\end{equation}
+が可換になる。この状況では、「$(x', \beta, \gamma')$ はデータ
+(1), (2), (3), (4) により提示された問題の {\it 解} である」という。
+
+\begin{lemma}
+\label{criteria-lemma-base-change-formally-smooth}
+$p : \mathcal{X} \to \mathcal{Y}$ と $q : \mathcal{Z} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$p : \mathcal{X} \to \mathcal{Y}$ が対象について形式的に滑らかならば、
+$q$ による $p$ の基底変換
+$p' : \mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Z}$
+も対象について形式的に滑らかである。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。$U \subset U'$ を $S$ 上のアフィンスキームの
+一次厚化とし、$z'$ を $U'$ 上の $\mathcal{Z}$ の対象とし、$w$ を
+$U$ 上の $\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ の対象とし、
+$\delta : p'(w) \to z'|_U$ を同型とする。
+$U$ 上の $\mathcal{X}$ のある対象 $x$、$U$ 上の $\mathcal{Z}$ の対象
+$z$、および同型 $\alpha : p(x) \to q(z)$ を用いて
+$w = (U, x, z, \alpha)$ と書ける。$p'(w) = z$ であることに注意すると、
+$\delta : z \to z|_U$ である。$y' = q(z')$ および
+$\gamma = q(\delta) \circ \alpha : p(x) \to y'|_U$ と置く。
+$p$ は対象について形式的に滑らかであるから、$U'$ 上の
+$\mathcal{X}$ の対象 $x'$ と、同型 $\beta : x'|_U \to x$ および
+$\gamma' : p(x') \to y'$ が存在し、
+(\ref{criteria-equation-formally-smooth}) が可換になる。このとき、
+$U'$ 上の $\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ の対象
+$w = (U', x', z', \gamma')$ を考え、同型
+$$
+w'|_U = (U, x'|_U, z'|_U, \gamma'|_U)
+\xrightarrow{(\beta, \delta^{-1})}
+(U, x, z, \alpha) = w
+$$
+および
+$$
+p'(w') = z' \xrightarrow{\text{id}} z'
+$$
+を定める。これらを合わせると問題の解が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-composition-formally-smooth}
+$p : \mathcal{X} \to \mathcal{Y}$ と $q : \mathcal{Y} \to \mathcal{Z}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$p$ と $q$ が対象について形式的に滑らかならば、合成 $q \circ p$ もそうである。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。$U \subset U'$ を $S$ 上のアフィンスキームの
+一次厚化とし、$z'$ を $U'$ 上の $\mathcal{Z}$ の対象とし、$x$ を
+$U$ 上の $\mathcal{X}$ の対象とし、
+$\gamma : q(p(x)) \to z'|_U$ を同型とする。
+$q$ は対象について形式的に滑らかであるから、$U'$ 上の
+$\mathcal{Y}$ の対象 $y'$、同型 $\beta : y'|_U \to p(x)$、および同型
+$\gamma' : q(y') \to z'$ が存在し、
+(\ref{criteria-equation-formally-smooth}) は可換である。
+$p$ は対象について形式的に滑らかであるから、$U'$ 上の
+$\mathcal{X}$ の対象 $x'$、同型 $\beta' : x'|_U \to x$、および同型
+$\gamma'' : p(x') \to y'$ が存在し、
+(\ref{criteria-equation-formally-smooth}) は可換である。
+解として、$U'$ 上の $x'$ と同型
+$$
+q(p(x')) \xrightarrow{q(\gamma'')} q(y') \xrightarrow{\gamma'} z'
+$$
+および同型 $\beta' : x'|_U \to x$ を取ればよい。
+(\ref{criteria-equation-formally-smooth}) が可換であることの確認は省略する。
+\end{proof}
+
+\noindent
+代数空間の形式的に滑らかな射の類は任意の基底変換で安定であり、
+fpqc 位相について終域上局所的であることに注意せよ。
+『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-base-change-formally-smooth} および
+\ref{spaces-more-morphisms-lemma-descending-property-formally-smooth}
+を参照せよ。したがって次の補題の条件 (2) は意味をなす。
+
+\begin{lemma}
+\label{criteria-lemma-representable-by-spaces-formally-smooth}
+$p : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$p$ が代数空間により表現可能ならば、次は同値である。
+\begin{enumerate}
+\item $p$ は対象について形式的に滑らかである。
+\item $p$ は形式的に滑らかである（『代数スタック』の定義
+\ref{algebraic-definition-relative-representable-property} を参照）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) を仮定する。$U \subset U'$ を $S$ 上のアフィンスキームの
+一次厚化とし、$y'$ を $U'$ 上の $\mathcal{Y}$ の対象とし、$x$ を
+$U$ 上の $\mathcal{X}$ の対象とし、$\gamma : p(x) \to y'|_U$ を同型とする。
+$2$-ファイバー積
+$$
+(\Sch/U')_{fppf} \times_{y', \mathcal{Y}, p} \mathcal{X}
+$$
+を表現する $U'$ 上の代数空間を $X_{y'}$ と書く。
+$\xi = (U, U \to U', x, \gamma^{-1})$ は、$U$ 上でこの
+$2$-ファイバー積の対象を定める。$2$-Yoneda の補題により、$\xi$ は
+$U'$ 上の射 $f_\xi : U \to X_{y'}$ に対応する。
+仮定により $X_{y'} \to U'$ は形式的に滑らかであるから、射
+$f' : U' \to X_{y'}$ が存在し、$f_\xi$ は $f'$ と射 $U \to U'$ の
+合成になる。また、$2$-Yoneda の補題によれば、$f'$ は $U'$ 上の上記
+$2$-ファイバー積の対象 $\xi' = (U', U' \to U', x', \alpha)$ に対応し、
+これを $U$ に制限すると $\xi$ が回復される。特に同型
+$\gamma : x'|U \to x$ を得る。$\alpha : y' \to p(x')$ であることに
+注意せよ。したがって $x'$、同型 $\gamma : x'|U \to x$、および同型
+$\beta = \alpha^{-1} : p(x') \to y'$ を取れば、この問題の解になる。
+
+\medskip\noindent
+(1) を仮定する。スキーム $T$ と $1$-射
+$y : (\Sch/T)_{fppf} \to \mathcal{Y}$ を選ぶ。
+$2$-ファイバー積
+$(\Sch/T)_{fppf} \times_{y, \mathcal{Y}, p} \mathcal{X}$ を表現する
+$T$ 上の代数空間を $X_y$ とする。$X_y \to T$ が形式的に滑らかであることを
+示さなければならない。したがって、$T$ 上のアフィンスキームの一次厚化
+$U \subset U'$ が与えられたとき、代数空間の $T$ 上の圏における射について
+$X_y(U') \to X_y(U')$ が全射であることを示せば十分である。
+$y' = y|_{U'}$ と置く。$2$-Yoneda の補題により、$T$ 上の射
+$U \to X_y$ は、$x$ が $U$ 上の $\mathcal{X}$ の対象で、
+$\alpha : y|_U \to p(x)$ が同型であるような組 $(x, \alpha)$ の
+同型類と全単射に対応する。もちろん、$\alpha$ を与えることは、逆を取る違いを
+除けば、同型 $\gamma : p(x) \to y'|_U$ を与えることと同じである。
+$T$ 上の射 $U' \to X_y$ についても同様である。したがって (1) は、
+この状況で $X_y(U') \to X_y(U')$ が全射であることを保証し、
+これで証明が完了する。
+\end{proof}
+
+
+
+\section{対象について全射であること}
+\label{criteria-section-formally-surjective}
+
+\noindent
+$S$ をスキームとする。$p : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+次の条件が成り立つとき、$p$ は {\it 対象について全射} であるという。
+以下のデータが任意に与えられたとする。
+\begin{enumerate}
+\item $S$ 上の体 $k$、および
+\item $\Spec(k)$ 上の $\mathcal{Y}$ の対象 $y$。
+\end{enumerate}
+このとき、$S$ 上の体の拡大 $K/k$ と $\Spec(K)$ 上の
+$\mathcal{X}$ の対象 $x$ が存在し、
+$p(x) \cong y|_{\Spec(K)}$ となる。
+
+\begin{lemma}
+\label{criteria-lemma-base-change-surjective}
+$p : \mathcal{X} \to \mathcal{Y}$ と $q : \mathcal{Z} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$p : \mathcal{X} \to \mathcal{Y}$ が対象について全射ならば、
+$q$ による $p$ の基底変換
+$p' : \mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Z}$
+も対象について全射である。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。$z$ を体 $k$ 上の $\mathcal{Z}$ の対象とする。
+$p$ は対象について全射であるから、拡大 $K/k$、$K$ 上の
+$\mathcal{X}$ の対象 $x$、および同型
+$\alpha : p(x) \to q(z)|_{\Spec(K)}$ が存在する。このとき
+$w = (\Spec(K), x, z|_{\Spec(K)}, \alpha)$ は $K$ 上の
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ の対象で、
+$p'(w) = z|_{\Spec(K)}$ を満たす。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-composition-surjective}
+$p : \mathcal{X} \to \mathcal{Y}$ と $q : \mathcal{Y} \to \mathcal{Z}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$p$ と $q$ が対象について全射ならば、合成 $q \circ p$ もそうである。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。$z$ を体 $k$ 上の $\mathcal{Z}$ の対象とする。
+$q$ は対象について全射であるから、体拡大 $K/k$ と $K$ 上の
+$\mathcal{Y}$ の対象 $y$ が存在して、
+$q(y) \cong x|_{\Spec(K)}$ となる。
+$p$ は対象について全射であるから、体拡大 $L/K$ と $L$ 上の
+$\mathcal{X}$ の対象 $x$ が存在して、
+$p(x) \cong y|_{\Spec(L)}$ となる。このとき、体拡大 $L/k$ と
+$L$ 上の $\mathcal{X}$ の対象 $x$ は、望むとおり
+$q(p(x)) \cong z|_{\Spec(L)}$ を満たす。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-representable-by-spaces-surjective}
+$p : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$p$ が代数空間により表現可能ならば、次は同値である。
+\begin{enumerate}
+\item $p$ は対象について全射である。
+\item $p$ は全射である（『代数スタック』の定義
+\ref{algebraic-definition-relative-representable-property} を参照）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) を仮定する。$k$ を体とし、$y$ を $k$ 上の $\mathcal{Y}$ の対象とする。
+$2$-ファイバー積
+$$
+(\Sch/\Spec(k))_{fppf} \times_{y, \mathcal{Y}, p} \mathcal{X}
+$$
+を表現する $k$ 上の代数空間を $X_y$ と書く。
+$p$ は全射であると仮定したから、$X_y$ は空でない。
+したがって体拡大 $K/k$ と $X_y$ の $K$-値点 $x$ を見いだせる。
+$2$-Yoneda の補題により、これは $K$ 上の $\mathcal{X}$ の対象 $x$ と
+同型 $p(x) \cong y|_{\Spec(K)}$ に対応する。ゆえに (1) が成り立つ。
+
+\medskip\noindent
+(1) を仮定する。スキーム $T$ と $1$-射
+$y : (\Sch/T)_{fppf} \to \mathcal{Y}$ を選ぶ。
+$2$-ファイバー積
+$(\Sch/T)_{fppf} \times_{y, \mathcal{Y}, p} \mathcal{X}$ を表現する
+$T$ 上の代数空間を $X_y$ とする。$X_y \to T$ が全射であることを
+示さなければならない。『空間の射』の定義
+\ref{spaces-morphisms-definition-surjective} により、
+$|X_y| \to |T|$ が全射であることを示さなければならない。
+これはちょうど、$T$ 上の体 $k$ と射 $t : \Spec(k) \to T$ が
+与えられたとき、体拡大 $K/k$ と射 $x : \Spec(K) \to X_y$ が存在して、
+$$
+\xymatrix{
+\Spec(K) \ar[d] \ar[r]_x & X_y \ar[d] \\
+\Spec(k) \ar[r]^t & T
+}
+$$
+が可換になることを意味する。$2$-Yoneda の補題により、これはちょうど
+$k \subset K$ と $K$ 上の $\mathcal{X}$ の対象 $x$ であって、
+$p(x) \cong t^*y|_{\Spec(K)}$ を満たすものを見いだすべきことを意味する。
+したがって (1) がこれを保証し、証明が完了する。
+\end{proof}
+
+
+
+\section{代数的射}
+\label{criteria-section-algebraic}
+
+\noindent
+次の概念はときどき有用である。
+
+\begin{definition}
+\label{criteria-definition-algebraic}
+$S$ をスキームとする。$F : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射とする。
+任意のスキーム $T$ と $T$ 上の $\mathcal{Y}$ の任意の対象 $\xi$ に対し、
+$2$-ファイバー積
+$$
+(\Sch/T)_{fppf} \times_{\xi, \mathcal{Y}} \mathcal{X}
+$$
+が $S$ 上の代数スタックであるとき、$F$ は {\it 代数的} であるという。
+\end{definition}
+
+\noindent
+この用語を用いると、『代数スタック』の補題
+\ref{algebraic-lemma-representable-morphism-to-algebraic}
+を一般化する次の結果が得られる。
+
+\begin{lemma}
+\label{criteria-lemma-algebraic-morphism-to-algebraic}
+$S$ をスキームとする。
+$F : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする。もし
+\begin{enumerate}
+\item $\mathcal{Y}$ は代数スタックであり、
+\item $F$ は（上の意味で）代数的である
+\end{enumerate}
+ならば、$\mathcal{X}$ は代数スタックである。
+\end{lemma}
+
+\begin{proof}
+仮定 (1) により、スキーム $T$ と $T$ 上の $\mathcal{Y}$ の対象
+$\xi$ が存在し、対応する $1$-射
+$\xi : (\Sch/T)_{fppf} \to \mathcal{Y}$ は滑らかかつ全射である。
+このとき仮定 (2) により、
+$\mathcal{U} = (\Sch/T)_{fppf} \times_{\xi, \mathcal{Y}} \mathcal{X}$
+は代数スタックである。スキーム $U$ と全射かつ滑らかな $1$-射
+$(\Sch/U)_{fppf} \to \mathcal{U}$ を選ぶ。射影
+$\mathcal{U} \longrightarrow \mathcal{X}$ は、射
+$\xi : (\Sch/T)_{fppf} \to \mathcal{Y}$ の基底変換として全射かつ
+滑らかである。『代数スタック』の補題
+\ref{algebraic-lemma-base-change-representable-transformations-property}
+を参照せよ。このとき合成
+$(\Sch/U)_{fppf} \to \mathcal{U} \to \mathcal{X}$ は、全射かつ
+滑らかな射の合成として全射かつ滑らかである。『代数スタック』の補題
+\ref{algebraic-lemma-composition-representable-transformations-property}
+を参照せよ。したがって『代数スタック』の補題
+\ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+により、$\mathcal{X}$ は代数スタックである。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-map-from-algebraic}
+$S$ をスキームとする。$F : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射とする。
+$\mathcal{X}$ が代数スタックであり、
+$\Delta : \mathcal{Y} \to \mathcal{Y} \times \mathcal{Y}$ が
+代数空間により表現可能ならば、$F$ は代数的である。
+\end{lemma}
+
+\begin{proof}
+表現可能なグルーポイドのスタック $\mathcal{U}$ と、全射かつ滑らかな
+$1$-射 $\mathcal{U} \to \mathcal{X}$ を選ぶ。
+$T$ をスキームとし、$\xi$ を $T$ 上の $\mathcal{Y}$ の対象とする。
+$2$-ファイバー積の射
+$$
+(\Sch/T)_{fppf} \times_{\xi, \mathcal{Y}} \mathcal{U}
+\longrightarrow
+(\Sch/T)_{fppf} \times_{\xi, \mathcal{Y}} \mathcal{X}
+$$
+は、$\mathcal{U} \to \mathcal{X}$ の基底変換として、代数空間により
+表現可能、全射かつ滑らかである。『代数スタック』の補題
+\ref{algebraic-lemma-base-change-representable-by-spaces} および
+\ref{algebraic-lemma-base-change-representable-transformations-property}
+を参照せよ。$\mathcal{Y}$ の対角射に関する仮定により、この射の始域は
+代数空間により表現可能である。『代数スタック』の補題
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。
+したがって『代数スタック』の補題
+\ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+により、終域は代数スタックである。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-diagonals-and-algebraic-morphisms}
+$S$ をスキームとする。$F : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射とする。
+$F$ が代数的で、
+$\Delta : \mathcal{Y} \to \mathcal{Y} \times \mathcal{Y}$ が
+代数空間により表現可能ならば、
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$ も
+代数空間により表現可能である。
+\end{lemma}
+
+\begin{proof}
+$F$ は代数的で、
+$\Delta : \mathcal{Y} \to \mathcal{Y} \times \mathcal{Y}$ は
+代数空間により表現可能であると仮定する。
+$S$ 上のスキーム $U$ と、$U$ 上の $\mathcal{X}$ の二つの対象
+$x_1, x_2$ を取る。『代数スタック』の補題
+\ref{algebraic-lemma-representable-diagonal} により、
+$\mathit{Isom}(x_1, x_2)$ が $U$ 上の代数空間であることを
+示さなければならない。$y_i = F(x_i)$ と置く。集合の層の射
+$$
+f : \mathit{Isom}(x_1, x_2) \to \mathit{Isom}(y_1, y_2)
+$$
+があり、仮定によりその終域は代数空間である。したがって
+『ブートストラップ』の補題
+\ref{bootstrap-lemma-representable-by-spaces-over-space} により、
+$f$ が代数空間により表現可能であることを示せば十分である。
+そこで $U$ 上のスキーム $V$ と同型
+$\beta : y_{1, V} \to y_{2, V}$ を選び、関手
+$$
+(\Sch/V)_{fppf} \to \textit{Sets},\quad
+T/V \mapsto \{\alpha : x_{1, T} \to x_{2, T}
+\text{ in }\mathcal{X}_T \mid F(\alpha) = \beta|_T\}
+$$
+が代数空間であることを示さなければならない。
+$$
+\mathcal{Z} = (\Sch/V)_{fppf} \times_{y_{1, V}, \mathcal{Y}} \mathcal{X}
+$$
+の対象 $z_1 = (V, x_{1, V}, \text{id})$ および
+$z_2 = (V, x_{2, V}, \beta)$ を考える。上の関手が
+$(\Sch/V)_{fppf}$ 上の $\mathit{Isom}(z_1, z_2)$ に等しいことは
+直ちに確認できる。したがって、$F$ が代数的であるという仮定
+（および代数スタックの定義）により、これは代数空間である。
+\end{proof}
+
+
+
+\section{切断の空間}
+\label{criteria-section-spaces-sections}
+
+\noindent
+射 $W \to Z \to U$ が与えられると、$U$ 上のスキーム $U'$ に、
+射 $W \to Z$ の基底変換 $W_{U'} \to Z_{U'}$ の切断
+$\sigma : Z_{U'} \to W_{U'}$ の集合を対応させる関手を考えることができる。
+この節では、この関手に関するいくつかの準備的補題を証明する。
+
+\begin{lemma}
+\label{criteria-lemma-surjection-space-of-sections}
+$Z \to U$ をスキームの有限射とする。
+$W$ を代数空間とし、$W \to Z$ を全射エタール射とする。
+このとき全射エタール射 $U' \to U$ と、射
+$W_{U'} \to Z_{U'}$ の切断
+$$
+\sigma : Z_{U'} \to W_{U'}
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+分離スキーム $W'$ と全射エタール射 $W' \to W$ を選べる。
+したがって $W$ を $W'$ で置き換えることにより、$W$ は分離スキームであると
+仮定してよい。$f : W \to Z$ および $\pi : Z \to U$ と書く。
+$W$ が分離的であるから、$f \circ \pi : W \to U$ は分離的であることに
+注意せよ（『スキーム』の補題
+\ref{schemes-lemma-compose-after-separated} を参照）。
+$u \in U$ を点とする。切断 $\sigma$ が $U'$ 上に存在するような
+$(U, u)$ のエタール近傍 $(U', u')$ を見いだせば明らかに十分である。
+$u$ の上にある $Z$ の点を $z_1, \ldots, z_r$ とする。
+各 $i$ に対し、$z_i$ に写る点 $w_i \in W$ を選ぶ。
+『射についてさらに』の補題
+\ref{more-morphisms-lemma-etale-splits-off-quasi-finite-part-technical-variant}
+の結論が、$Z \to U$ と点 $z_1, \ldots, z_r$、および
+$W \to U$ と点 $w_1, \ldots, w_r$ の双方について成り立つような
+エタール近傍 $(U', u') \to (U, u)$ を選べる。
+したがって $(U, u)$ を $(U', u')$ で置き換えて添字を付け直すと、
+すべての体拡大 $\kappa(z_i)/\kappa(u)$ および
+$\kappa(w_i)/\kappa(u)$ は純非分離的であり、さらに開かつ閉な部分スキームによる
+非交和分解
+$$
+Z = V_1 \amalg \ldots \amalg V_r \amalg A, \quad
+W = W_1 \amalg \ldots \amalg W_r \amalg B
+$$
+で、$z_i \in V_i$、$w_i \in W_i$、かつ $V_i \to U$、$W_i \to U$ が
+有限となるものが存在すると仮定してよい。
+$U$ を $U \setminus \pi(A)$ で置き換えることにより、
+$A = \emptyset$、すなわち $Z = V_1 \amalg \ldots \amalg V_r$ と
+仮定してよい。$W_i$ を $W_i \cap f^{-1}(V_i)$ で、$B$ を
+$B \cup \bigcup W_i \cap f^{-1}(Z \setminus V_i)$ で置き換えることにより、
+$f$ は $W_i$ を $V_i$ に写すと仮定してよい。
+このとき $f_i = f|_{W_i} : W_i \to V_i$ は $U$ 上有限なスキームの射であり、
+したがって有限である（『射』の補題
+\ref{morphisms-lemma-finite-permanence} を参照）。これは仮定により
+エタールでもあり、$f_i^{-1}(\{z_i\}) = w_i$ で、剰余体の同型
+$\kappa(z_i) = \kappa(w_i)$ を誘導する（両者とも $\kappa(u)$ の純非分離拡大で、
+$f$ がエタールであるため $\kappa(w_i)/\kappa(z_i)$ は分離拡大だからである）。
+したがって『エタール射』の補題
+\ref{etale-lemma-finite-etale-one-point} により、$f_i$ は $z_i$ のある近傍
+$V_i'$ 上で同型である。$\pi : Z \to U$ は閉写像であるから、$U$ を縮小すると
+$W_i \to V_i$ は同型であると仮定してよい。これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-space-of-sections}
+$Z \to U$ をスキームの有限局所自由射とする。
+$W$ を代数空間とし、$W \to Z$ をエタール射とする。このとき、関手
+$$
+F : (\Sch/U)_{fppf}^{opp} \longrightarrow \textit{Sets},
+$$
+で、規則
+$$
+U' \longmapsto
+F(U') =
+\{\sigma : Z_{U'} \to W_{U'}\text{ section of }W_{U'} \to Z_{U'}\}
+$$
+により定義されるものは代数空間であり、射 $F \to U$ はエタールである。
+\end{lemma}
+
+\begin{proof}
+まず $W \to Z$ も分離的であると仮定する。
+$U'$ を $U$ 上のスキームとし、$\sigma \in F(U')$ とする。
+『空間の射』の補題 \ref{spaces-morphisms-lemma-section-immersion} により、
+射 $\sigma$ は閉埋め込みである。さらに『空間の性質』の補題
+\ref{spaces-properties-lemma-etale-permanence} により、$\sigma$ は
+エタールである。したがって『空間の射』の補題
+\ref{spaces-morphisms-lemma-etale-universally-injective-open} により、
+$\sigma$ は開埋め込みでもある。言い換えると、
+$Z_\sigma = \sigma(Z_{U'}) \subset W_{U'}$ は開部分空間であり、
+射 $Z_\sigma \to Z_{U'}$ は同型である。特に射 $Z_\sigma \to U'$ は有限である。
+したがって関手の変換
+$$
+F \longrightarrow (W/U)_{fin}, \quad
+\sigma \longmapsto (U' \to U, Z_\sigma)
+$$
+を得る。ここで $(W/U)_{fin}$ は『空間のグルーポイドについてさらに』の節
+\ref{spaces-more-groupoids-section-finite} で導入した射 $W \to U$ の有限部分である。
+この関手の変換が単射であることは明らかである（同型
+$Z_\sigma \to Z_{U'}$ の逆として $Z_\sigma$ から $\sigma$ を回復できるからである）。
+『空間のグルーポイドについてさらに』の命題
+\ref{spaces-more-groupoids-proposition-finite-algebraic-space} により、
+$(W/U)_{fin}$ は $U$ 上エタールな代数空間である。
+したがってこの場合の証明を完了するには、
+$F \to (W/U)_{fin}$ が表現可能な開埋め込みであることを示せば十分である。
+これを見るため、スキームの射 $U' \to U$ と、$Z' \to U'$ が有限であるような
+開部分空間 $Z' \subset W_{U'}$ が与えられたとする。
+射 $T \to U'$ が $U''$ を経由することと
+$Z' \times_{U'} T$ が $Z \times_{U'} T$ に同型に写ることが同値となるような
+開部分スキーム $U'' \subset U'$ が存在することを示せば十分である。
+これは『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-where-isomorphism} から従う
+（ここで $Z \to B$ が有限であるだけでなく平坦かつ局所有限表示であることを用いる）。
+以上により、$W \to Z$ が分離的かつエタールである場合の補題が証明された。
+
+\medskip\noindent
+一般の場合には、分離スキーム $W'$ と全射エタール射 $W' \to W$ を選ぶ。
+射 $W' \to W$ および $W \to Z$ は、その始域が分離的であるから
+分離的であることに注意せよ。補題と同様に、$W' \to Z \to U$ に付随する
+関手を $F'$ と書く。証明の最初の段落で、$F'$ は $U$ 上エタールな
+代数空間により表現可能であることを示した。補題
+\ref{criteria-lemma-surjection-space-of-sections} により、関手の写像
+$F' \to F$ は $\Sch/U$ 上のエタール位相について全射である。
+さらに $U'$ と $\sigma : Z_{U'} \to W_{U'}$ が点
+$\xi \in F(U')$ を定めるならば、ファイバー積
+$$
+F'' = F' \times_{F, \xi} U'
+$$
+は、射
+$$
+W'_{U'} \times_{W_{U'}, \sigma} Z_{U'} \to Z_{U'} \to U'
+$$
+に付随する $\Sch/U'$ 上の関手である。最初の射は分離射の基底変換として
+分離的であるから、最初の段落の結果により、$F''$ は $U'$ 上エタールな
+代数空間である。したがって $F' \to F$ は代数空間により表現可能な、
+全射エタールな関手の変換である。ゆえに『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} により、$F$ は代数空間である。
+$F' \to F$ は代数空間の全射エタール射であり、$F' \to U$ は
+エタールであるから、$F \to U$ もエタールである。
+\end{proof}
+
+
+
+\section{相対射}
+\label{criteria-section-relative-morphisms}
+
+\noindent
+『射についてさらに』の節
+\ref{more-morphisms-section-relative-morphisms} で始めた議論を続ける。
+
+\medskip\noindent
+$S$ をスキームとする。$Z \to B$ と $X \to B$ を $S$ 上の
+代数空間の射とする。スキーム $T$ が与えられたとき、
+$a : T \to B$ が射で、
+$b : T \times_{a, B} Z \to T \times_{a, B} X$ が $T$ 上の射であるような
+組 $(a, b)$ を考えることができる。図示すると
+\begin{equation}
+\label{criteria-equation-hom}
+\vcenter{
+\xymatrix{
+T \times_{a, B} Z \ar[rd] \ar[rr]_b & &
+T \times_{a, B} X \ar[ld] & Z \ar[rd] & & X \ar[ld] \\
+& T \ar[rrr]^a & & & B
+}
+}
+\end{equation}
+である。もちろん、$b$ を、図式
+$$
+\xymatrix{
+T \times_{a, B} Z \ar[r] \ar[d] \ar@/^1pc/[rrr]_-b &
+Z \ar[rd] & & X \ar[ld] \\
+T \ar[rr]^a & & B
+}
+$$
+を可換にする射 $b : T \times_{a, B} Z \to X$ と考えることもできる。
+この状況では、関手
+\begin{equation}
+\label{criteria-equation-hom-functor}
+\mathit{Mor}_B(Z, X) : (\Sch/S)^{opp} \longrightarrow \textit{Sets},
+\quad
+T \longmapsto \{(a, b)\text{ as above}\}
+\end{equation}
+を定義できる。これを $B$ 上のスキームの圏上で定義された関手とみなすこともあり、
+その場合は記法から $a$ を省く。
+
+\begin{lemma}
+\label{criteria-lemma-hom-functor-sheaf}
+$S$ をスキームとする。$Z \to B$ と $X \to B$ を $S$ 上の
+代数空間の射とする。このとき、
+\begin{enumerate}
+\item $\mathit{Mor}_B(Z, X)$ は $(\Sch/S)_{fppf}$ 上の層である。
+\item $T$ が $S$ 上の代数空間ならば、標準的な全単射
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \mathit{Mor}_B(Z, X))
+=
+\{(a, b)\text{ as in }(\ref{criteria-equation-hom})\}
+$$
+がある。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T$ を $S$ 上の代数空間とする。$\{T_i \to T\}$ を $T$ の fppf 被覆とする
+（『空間上の位相』の節 \ref{spaces-topologies-section-fppf} の意味で）。
+すべての $i, j$ に対して
+$(a_i, b_i)|_{T_i \times_T T_j} = (a_j, b_j)|_{T_i \times_T T_j}$
+を満たす $(a_i, b_i) \in \mathit{Mor}_B(Z, X)(T_i)$ が与えられたとする。
+『空間上の降下』の補題
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}
+により、$a_i$ が $T_i \to T$ と $a$ の合成となるような射
+$a : T \to B$ が一意に存在する。このとき
+$\{T_i \times_{a_i, B} Z \to T \times_{a, B} Z\}$ も fppf 被覆であり、
+同じ補題により、$b_i$ が
+$T_i \times_{a_i, B} Z \to T \times_{a, B} Z$ と $b$ の合成となるような射
+$b : T \times_{a, B} Z \to T \times_{a, B} X$ が一意に存在する。
+したがって $(a, b) \in \mathit{Mor}_B(Z, X)(T)$ は、すべての $i$ について
+$T_i$ 上で $(a_i, b_i)$ に制限される。
+
+\medskip\noindent
+特に、前段落の結果が (1) を含意することに注意せよ。
+
+\medskip\noindent
+$T$ を $S$ 上の代数空間とする。(2) を証明するため、表示された二つの集合の間に
+互いに逆な写像を構成する。以下で「組」とは、
+(\ref{criteria-equation-hom}) に収まる組 $(a, b)$ を意味する。
+
+\medskip\noindent
+$v : T \to \mathit{Mor}_B(Z, X)$ を自然変換とする。
+スキーム $U$ と全射エタール射 $p : U \to T$ を選ぶ。
+このとき $v(p) \in \mathit{Mor}_B(Z, X)(U)$ は、$U$ 上の組
+$(a_U, b_U)$ に対応する。$R = U \times_T U$ とし、射影を
+$t, s : R \to U$ とする。$v$ は関手の変換であるから、
+$(a_U, b_U)$ の $s$ と $t$ による引き戻しは一致する。
+したがって $\{U \to T\}$ は fppf 被覆なので、最初の段落の結果を適用して、
+$T$ 上の一意な組 $(a, b)$ が存在すると結論できる。
+
+\medskip\noindent
+逆に、$(a, b)$ を $T$ 上の組とする。$U \to T$、
+$R = U \times_T U$、および $t, s : R \to U$ を上のとおりとする。
+制限 $(a, b)|_U$ は、Yoneda の補題（『圏』の補題
+\ref{categories-lemma-yoneda}）により、関手の変換
+$v : h_U \to \mathit{Mor}_B(Z, X)$ を与える。
+二つの引き戻し $s^*(a, b)|_U$ と $t^*(a, b)|_U$ は等しいから、
+$v$ は二つの写像 $h_t, h_s : h_R \to h_U$ を余等化する。
+『空間』の補題 \ref{spaces-lemma-space-presentation} により
+$T = U/R$ は fppf 商層であり、また (1) により
+$\mathit{Mor}_B(Z, X)$ は fppf 層であるから、$v$ は写像
+$T \to \mathit{Mor}_B(Z, X)$ を経由する。
+
+\medskip\noindent
+上の二つの構成が互いに逆であることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-base-change-hom-functor}
+$S$ をスキームとする。$Z \to B$、$X \to B$、および $B' \to B$ を
+$S$ 上の代数空間の射とする。$Z' = B' \times_B Z$ および
+$X' = B' \times_B X$ と置く。このとき
+$$
+\mathit{Mor}_{B'}(Z', X')
+=
+B' \times_B \mathit{Mor}_B(Z, X)
+$$
+が $\Sh((\Sch/S)_{fppf})$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+関手としての等式は定義から直ちに従う。
+補題 \ref{criteria-lemma-hom-functor-sheaf} により両辺が層であること、および
+層のファイバー積は対応する前層（すなわち関手）のファイバー積と同じであることから、
+層としての等式も従う。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-etale-covering-hom-functor}
+$S$ をスキームとする。$Z \to B$ と $X' \to X \to B$ を
+$S$ 上の代数空間の射とする。次を仮定する。
+\begin{enumerate}
+\item $X' \to X$ はエタールである。
+\item $Z \to B$ は有限局所自由である。
+\end{enumerate}
+このとき $\mathit{Mor}_B(Z, X') \to \mathit{Mor}_B(Z, X)$ は
+代数空間により表現可能かつエタールである。
+$X' \to X$ がさらに全射ならば、
+$\mathit{Mor}_B(Z, X') \to \mathit{Mor}_B(Z, X)$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$\xi = (a, b)$ を
+$\mathit{Mor}_B(Z, X)(U)$ の元とする。関手
+$$
+h_U \times_{\xi, \mathit{Mor}_B(Z, X)} \mathit{Mor}_B(Z, X')
+$$
+が $U$ 上エタールな代数空間により表現可能であることを証明しなければならない。
+$Z_U = U \times_{a, B} Z$ および $W = Z_U \times_{b, X} X'$ と置く。
+このとき $W \to Z_U \to U$ は補題 \ref{criteria-lemma-space-of-sections} の
+状況にあり、そこで定義した層 $F$ は上に表示したファイバー積と同一視される。
+これで補題の第一の主張が従う。第二の主張はこれと補題
+\ref{criteria-lemma-surjection-space-of-sections} から従う。同補題は上の状況で
+$F \to U$ が全射であることを保証する。
+\end{proof}
+
+\begin{proposition}
+\label{criteria-proposition-hom-functor-algebraic-space}
+$S$ をスキームとする。$Z \to B$ と $X \to B$ を $S$ 上の
+代数空間の射とする。$Z \to B$ が有限局所自由ならば、
+$\mathit{Mor}_B(Z, X)$ は代数空間である。
+\end{proposition}
+
+\begin{proof}
+アフィンスキーム $B'_i$ の非交和であるスキーム
+$B' = \coprod B'_i$ と全射エタール射 $B' \to B$ を選ぶ。
+さらに、$B'_i \times_B Z$ は、$\Gamma(B'_i, \mathcal{O}_{B'_i})$-加群として
+有限自由な環のスペクトルであると仮定してよい。
+補題 \ref{criteria-lemma-base-change-hom-functor} と『空間』の補題
+\ref{spaces-lemma-base-change-representable-transformations-property}
+により、射
+$\mathit{Mor}_{B'}(Z', X') \to \mathit{Mor}_B(Z, X)$ は
+全射エタールである。したがって『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} により、$B = B'$ が
+アフィンスキーム $B'_i$ の非交和で、各 $B'_i \times_B Z$ が
+$B'_i$ 上有限自由である場合に命題を証明すれば十分である。
+すると実際、各 $B'_i$ への制限について結果を証明すれば十分である。
+ゆえに $B$ はアフィンで、$\Gamma(Z, \mathcal{O}_Z)$ は
+有限自由 $\Gamma(B, \mathcal{O}_B)$-加群であると仮定してよい。
+
+\medskip\noindent
+アフィンスキームの非交和であるスキーム $X'$ と全射エタール射
+$X' \to X$ を選ぶ。補題 \ref{criteria-lemma-etale-covering-hom-functor} により、射
+$\mathit{Mor}_B(Z, X') \to \mathit{Mor}_B(Z, X)$ は
+代数空間により表現可能、エタールかつ全射である。
+したがって『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} により、$X$ が
+アフィンスキームの非交和である場合に命題を証明すれば十分である。
+これは次の段落で扱う場合に帰着する。
+
+\medskip\noindent
+$X = \coprod_{i \in I} X_i$ はアフィンスキームの非交和、$B$ はアフィン、
+そして $\Gamma(Z, \mathcal{O}_Z)$ は有限自由
+$\Gamma(B, \mathcal{O}_B)$-加群であると仮定する。
+任意の有限部分集合 $E \subset I$ に対し、
+$$
+F_E = \mathit{Mor}_B(Z, \coprod\nolimits_{i \in E} X_i)
+$$
+と置く。『射についてさらに』の補題
+\ref{more-morphisms-lemma-hom-from-finite-free-into-affine} により、
+$F_E$ は代数空間である。射
+$$
+\coprod\nolimits_{E \subset I\text{ finite}} F_E
+\longrightarrow
+\mathit{Mor}_B(Z, X)
+$$
+を考える。各射 $F_E \to \mathit{Mor}_B(Z, X)$ は開埋め込みである。
+これは単に、$b$ が $X$ の開部分スキーム
+$\coprod\nolimits_{i \in E} X_i$ に写るような組 $(a, b)$ を
+パラメータ化する軌跡だからである。さらに、$T$ が準コンパクトならば、
+任意の組 $(a, b)$ に対して、ある有限部分集合 $E \subset I$ が存在し、
+$b$ の像は $\coprod\nolimits_{i \in E} X_i$ に含まれる。
+したがって、表示された矢印は実際に開被覆であり、証明が完了する\footnote{
+いくつかの集合論的議論を除く。すなわち、$\coprod F_E$ が代数空間であることを
+示さなければならない。これは、$|I| \leq \text{size}(X)$ であり、かつ
+$\text{size}(F_E) \leq \text{size}(X)$ であることから従う。
+後者は『射についてさらに』の補題
+\ref{more-morphisms-lemma-hom-from-finite-free-into-affine} の証明における
+$F_E$ の明示的記述から従う。詳細の一部は省略する。}。
+これは『空間』の補題 \ref{spaces-lemma-glueing-algebraic-spaces} による。
+\end{proof}
+
+
+
+\section{スカラー制限}
+\label{criteria-section-restriction-of-scalars}
+
+\noindent
+$X \to Z \to B$ を $S$ 上の代数空間の射とする。
+スキーム $T$ が与えられたとき、$a : T \to B$ が射で、
+$b : T \times_{a, B} Z \to X$ が $Z$ 上の射であるような組 $(a, b)$ を
+考えることができる。図示すると
+\begin{equation}
+\label{criteria-equation-pairs}
+\vcenter{
+\xymatrix{
+& X \ar[d] \\
+T \times_{a, B} Z \ar[d] \ar[ru]^b \ar[r] & Z \ar[d] \\
+T \ar[r]^a & B
+}
+}
+\end{equation}
+である。この状況では、関手
+\begin{equation}
+\label{criteria-equation-restriction-of-scalars}
+\text{Res}_{Z/B}(X) : (\Sch/S)^{opp} \longrightarrow \textit{Sets},
+\quad
+T \longmapsto \{(a, b)\text{ as above}\}
+\end{equation}
+を定義できる。これを $B$ 上のスキームの圏上で定義された関手とみなすこともあり、
+その場合は記法から $a$ を省く。
+
+\begin{lemma}
+\label{criteria-lemma-restriction-of-scalars-sheaf}
+$S$ をスキームとする。$X \to Z \to B$ を $S$ 上の
+代数空間の射とする。このとき、
+\begin{enumerate}
+\item $\text{Res}_{Z/B}(X)$ は $(\Sch/S)_{fppf}$ 上の層である。
+\item $T$ が $S$ 上の代数空間ならば、標準的な全単射
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \text{Res}_{Z/B}(X))
+=
+\{(a, b)\text{ as in }(\ref{criteria-equation-pairs})\}
+$$
+がある。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T$ を $S$ 上の代数空間とする。$\{T_i \to T\}$ を $T$ の fppf 被覆とする
+（『空間上の位相』の節 \ref{spaces-topologies-section-fppf} の意味で）。
+すべての $i, j$ に対して
+$(a_i, b_i)|_{T_i \times_T T_j} = (a_j, b_j)|_{T_i \times_T T_j}$
+を満たす $(a_i, b_i) \in \text{Res}_{Z/B}(X)(T_i)$ が与えられたとする。
+『空間上の降下』の補題
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}
+により、$a_i$ が $T_i \to T$ と $a$ の合成となるような射
+$a : T \to B$ が一意に存在する。このとき
+$\{T_i \times_{a_i, B} Z \to T \times_{a, B} Z\}$ も fppf 被覆であり、
+同じ補題により、$b_i$ が
+$T_i \times_{a_i, B} Z \to T \times_{a, B} Z$ と $b$ の合成となるような射
+$b : T \times_{a, B} Z \to X$ が一意に存在する。
+したがって $(a, b) \in \text{Res}_{Z/B}(X)(T)$ は、すべての $i$ について
+$T_i$ 上で $(a_i, b_i)$ に制限される。
+
+\medskip\noindent
+特に、前段落の結果が (1) を含意することに注意せよ。
+
+\medskip\noindent
+$T$ を $S$ 上の代数空間とする。(2) を証明するため、表示された二つの集合の間に
+互いに逆な写像を構成する。以下で「組」とは、
+(\ref{criteria-equation-pairs}) に収まる組 $(a, b)$ を意味する。
+
+\medskip\noindent
+$v : T \to \text{Res}_{Z/B}(X)$ を自然変換とする。
+スキーム $U$ と全射エタール射 $p : U \to T$ を選ぶ。
+このとき $v(p) \in \text{Res}_{Z/B}(X)(U)$ は、$U$ 上の組
+$(a_U, b_U)$ に対応する。$R = U \times_T U$ とし、射影を
+$t, s : R \to U$ とする。$v$ は関手の変換であるから、
+$(a_U, b_U)$ の $s$ と $t$ による引き戻しは一致する。
+したがって $\{U \to T\}$ は fppf 被覆なので、最初の段落の結果を適用して、
+$T$ 上の一意な組 $(a, b)$ が存在すると結論できる。
+
+\medskip\noindent
+逆に、$(a, b)$ を $T$ 上の組とする。$U \to T$、
+$R = U \times_T U$、および $t, s : R \to U$ を上のとおりとする。
+制限 $(a, b)|_U$ は、Yoneda の補題（『圏』の補題
+\ref{categories-lemma-yoneda}）により、関手の変換
+$v : h_U \to \text{Res}_{Z/B}(X)$ を与える。
+二つの引き戻し $s^*(a, b)|_U$ と $t^*(a, b)|_U$ は等しいから、
+$v$ は二つの写像 $h_t, h_s : h_R \to h_U$ を余等化する。
+『空間』の補題 \ref{spaces-lemma-space-presentation} により
+$T = U/R$ は fppf 商層であり、また (1) により
+$\text{Res}_{Z/B}(X)$ は fppf 層であるから、$v$ は写像
+$T \to \text{Res}_{Z/B}(X)$ を経由する。
+
+\medskip\noindent
+上の二つの構成が互いに逆であることの確認は省略する。
+\end{proof}
+
+\noindent
+もちろん層 $\text{Res}_{Z/B}(X)$ には、関手の自然変換
+$\text{Res}_{Z/B}(X) \to B$ が備わる。以下では断りなくこれを用いる。
+
+\begin{lemma}
+\label{criteria-lemma-etale-base-change-restriction-of-scalars}
+$S$ をスキームとする。$X \to Z \to B$ および $B' \to B$ を
+$S$ 上の代数空間の射とする。
+$Z' = B' \times_B Z$ および $X' = B' \times_B X$ と置く。このとき
+$$
+\text{Res}_{Z'/B'}(X')
+=
+B' \times_B \text{Res}_{Z/B}(X)
+$$
+が $\Sh((\Sch/S)_{fppf})$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+関手としての等式は定義から直ちに従う。
+補題 \ref{criteria-lemma-restriction-of-scalars-sheaf} により両辺が層であること、
+および層のファイバー積は対応する前層（すなわち関手）のファイバー積と
+同じであることから、層としての等式も従う。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-etale-covering-restriction-of-scalars}
+$S$ をスキームとする。$X' \to X \to Z \to B$ を $S$ 上の
+代数空間の射とする。次を仮定する。
+\begin{enumerate}
+\item $X' \to X$ はエタールである。
+\item $Z \to B$ は有限局所自由である。
+\end{enumerate}
+このとき $\text{Res}_{Z/B}(X') \to \text{Res}_{Z/B}(X)$ は
+代数空間により表現可能かつエタールである。
+$X' \to X$ がさらに全射ならば、
+$\text{Res}_{Z/B}(X') \to \text{Res}_{Z/B}(X)$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$\xi = (a, b)$ を
+$\text{Res}_{Z/B}(X)(U)$ の元とする。関手
+$$
+h_U \times_{\xi, \text{Res}_{Z/B}(X)} \text{Res}_{Z/B}(X')
+$$
+が $U$ 上エタールな代数空間により表現可能であることを証明しなければならない。
+$Z_U = U \times_{a, B} Z$ および $W = Z_U \times_{b, X} X'$ と置く。
+このとき $W \to Z_U \to U$ は補題 \ref{criteria-lemma-space-of-sections} の
+状況にあり、そこで定義した層 $F$ は上に表示したファイバー積と同一視される。
+これで補題の第一の主張が従う。第二の主張はこれと補題
+\ref{criteria-lemma-surjection-space-of-sections} から従う。同補題は上の状況で
+$F \to U$ が全射であることを保証する。
+\end{proof}
+
+\noindent
+ここまでの補題を用いれば、$Z \to B$ が有限局所自由であるとき
+$\text{Res}_{Z/B}(X)$ が代数空間であることを、
+$\mathit{Mor}_B(Z, X)$ が代数空間であることの証明とほとんどまったく同じ方法で
+証明できる。命題 \ref{criteria-proposition-hom-functor-algebraic-space} を参照せよ。
+しかしここでは、次の補題と $\mathit{Mor}_B(Z, X)$ が代数空間であるという
+事実からこの結果を直接導く。
+
+\begin{lemma}
+\label{criteria-lemma-fibre-diagram}
+$S$ をスキームとする。$X \to Z \to B$ を $S$ 上の
+代数空間の射とする。次の図式
+$$
+\xymatrix{
+\mathit{Mor}_B(Z, X) \ar[r] & \mathit{Mor}_B(Z, Z) \\
+\text{Res}_{Z/B}(X) \ar[r] \ar[u] & B \ar[u]_{\text{id}_Z}
+}
+$$
+は $(\Sch/S)_{fppf}$ 上の層のカルテジアン図式である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：代数幾何における関手的観点についての演習である。
+\end{proof}
+
+\begin{proposition}
+\label{criteria-proposition-restriction-of-scalars-algebraic-space}
+$S$ をスキームとする。$X \to Z \to B$ を $S$ 上の
+代数空間の射とする。$Z \to B$ が有限局所自由ならば、
+$\text{Res}_{Z/B}(X)$ は代数空間である。
+\end{proposition}
+
+\begin{proof}
+命題 \ref{criteria-proposition-hom-functor-algebraic-space} により、関手
+$\mathit{Mor}_B(Z, X)$ と $\mathit{Mor}_B(Z, Z)$ は代数空間である。
+したがって、補題 \ref{criteria-lemma-fibre-diagram} のカルテジアン図式と、
+代数空間のファイバー積が存在して集合の層の基礎圏におけるファイバー積で
+与えられるという事実から結果が従う（『空間』の補題
+\ref{spaces-lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal}
+を参照）。
+\end{proof}
+
+
+
+\section{有限 Hilbert スタック}
+\label{criteria-section-finite-hilbert-stacks}
+
+\noindent
+この節では、『スタックの例』の節
+\ref{examples-stacks-section-hilbert-d-stack} で導入した有限 Hilbert スタック
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ に関するいくつかの結果を証明する。
+
+\begin{lemma}
+\label{criteria-lemma-map-hilbert}
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $2$-可換図式
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_G \ar[d]_{F'} & \mathcal{X} \ar[d]^F \\
+\mathcal{Y}' \ar[r]^H & \mathcal{Y}
+}
+$$
+と、指定された $2$-同型 $\gamma : H \circ F' \to F \circ G$ を考える。
+この状況では標準的な $1$-射
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}') \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ を得る。
+この射は、『スタックの例』の式
+(\ref{examples-stacks-equation-diagram-hilbert-d-stack}) の忘却 $1$-射と両立する。
+\end{lemma}
+
+\begin{proof}
+対象 $(U, Z, y', x', \alpha')$ を対象
+$(U, Z, H(y'), G(x'), \gamma \star \text{id}_H \star \alpha')$ に写す。
+ここで $\star$ は $2$-射の水平合成を表す。『圏』の定義
+\ref{categories-definition-horizontal-composition} を参照せよ。
+射
+$(f, g, b, a) :
+(U_1, Z_1, y_1', x_1', \alpha_1') \to (U_2, Z_2, y_2', x_2', \alpha_2')$
+には $(f, g, H(b), G(a))$ を対応させる。
+これが $(\Sch/S)_{fppf}$ 上の圏の間の関手を定めることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-cartesian-map-hilbert}
+補題 \ref{criteria-lemma-map-hilbert} の状況で、与えられた正方形が
+$2$-カルテジアンであると仮定する。このとき図式
+$$
+\xymatrix{
+\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}') \ar[r] \ar[d] &
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \ar[d] \\
+\mathcal{Y}' \ar[r] &
+\mathcal{Y}
+}
+$$
+は $2$-カルテジアンである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{criteria-lemma-map-hilbert} により $2$-可換図式が得られ、したがって $1$-射
+（すなわち関手）
+$$
+\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}')
+\longrightarrow
+\mathcal{Y}' \times_\mathcal{Y} \mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+$$
+を得る。この関手が本質的全射である理由を示す。
+右辺の圏の対象は、$S$ 上のスキーム $U$、$\mathcal{Y}'_U$ の対象 $y'$、
+$U$ 上の $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$(U, Z, y, x, \alpha)$、および $\mathcal{Y}_U$ における同型
+$H(y') \to y$ により与えられる。仮定はちょうど、$\mathcal{X}'_Z$ の対象
+$x'$ が存在して、$\alpha$ と両立する同型 $G(x') \cong x$ および
+$\alpha' : y'|_Z \to F'(x')$ が存在することを意味する。
+このとき $(U, Z, y', x', \alpha')$ は、$U$ 上の
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}')$ の対象である。
+詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-etale-covering-hilbert}
+補題 \ref{criteria-lemma-map-hilbert} の状況で、次を仮定する。
+\begin{enumerate}
+\item $\mathcal{Y}' = \mathcal{Y}$ かつ $H = \text{id}_\mathcal{Y}$ である。
+\item $G$ は代数空間により表現可能かつエタールである。
+\end{enumerate}
+このとき
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}) \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は代数空間により表現可能かつ
+エタールである。$G$ がさらに全射ならば、
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}) \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$\xi = (U, Z, y, x, \alpha)$ を $U$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象とする。$2$-ファイバー積
+\begin{equation}
+\label{criteria-equation-to-show}
+(\Sch/U)_{fppf}
+\times_{\xi, \mathcal{H}_d(\mathcal{X}/\mathcal{Y})}
+\mathcal{H}_d(\mathcal{X}'/\mathcal{Y})
+\end{equation}
+が $U$ 上エタールな代数空間により表現可能であることを証明しなければならない。
+この $U'$ 上の対象は、$Z_{U'}$ 上の $\mathcal{X}'$ のファイバー圏の対象
+$x'$ で $G(x') \cong x|_{Z_{U'}}$ を満たすものに対応する。
+仮定により、$2$-ファイバー積
+$$
+(\Sch/Z)_{fppf} \times_{x, \mathcal{X}} \mathcal{X}'
+$$
+は代数空間 $W$ により表現可能で、射影 $W \to Z$ はエタールである。
+すると (\ref{criteria-equation-to-show}) は、補題 \ref{criteria-lemma-space-of-sections} で
+導入した $U$ 上の $W \to Z$ の切断をパラメータ化する代数空間 $F$ により
+表現可能である。$F \to U$ はエタールであるから、
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}) \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は代数空間により表現可能かつ
+エタールであると結論する。最後に $\mathcal{X}' \to \mathcal{X}$ が
+さらに全射ならば、$W \to Z$ も全射であり、補題
+\ref{criteria-lemma-surjection-space-of-sections} により $F \to U$ は全射である。
+したがってこの場合、
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}) \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ も全射である。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-etale-map-hilbert}
+補題 \ref{criteria-lemma-map-hilbert} の状況を考える。
+$G$, $H$ は代数空間により表現可能かつエタールであると仮定する。
+このとき
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}') \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は代数空間により表現可能かつ
+エタールである。さらに $H$ が全射で、誘導される関手
+$\mathcal{X}' \to \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ が
+全射ならば、
+$\mathcal{H}_d(\mathcal{X}'/\mathcal{Y}') \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X}'' = \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ と置く。
+補題 \ref{criteria-lemma-etale-permanence} により、$1$-射
+$\mathcal{X}' \to \mathcal{X}''$ は代数空間により表現可能かつエタールである
+（特に、補題の第二の主張における $\mathcal{X}' \to \mathcal{X}''$ が
+全射であるという条件は意味をなす）。$2$-可換図式
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d] &
+\mathcal{X}'' \ar[r] \ar[d] &
+\mathcal{X} \ar[d] \\
+\mathcal{Y}' \ar[r] &
+\mathcal{Y}' \ar[r] &
+\mathcal{Y}
+}
+$$
+を得る。補題 \ref{criteria-lemma-cartesian-map-hilbert} により、
+$\mathcal{H}_d(\mathcal{X}''/\mathcal{Y}')$ は
+$\mathcal{Y}' \to \mathcal{Y}$ による
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の基底変換である。
+特に『代数スタック』の補題
+\ref{algebraic-lemma-base-change-representable-transformations-property}
+により、
+$\mathcal{H}_d(\mathcal{X}''/\mathcal{Y}') \to
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は代数空間により表現可能かつ
+エタールである。さらに、$H$ が全射ならばこれも全射である。
+したがって、図式の左の正方形について結果を示せれば証明が完了する。
+このようにして $\mathcal{Y}' = \mathcal{Y}$ の場合に帰着し、これは補題
+\ref{criteria-lemma-etale-covering-hilbert} の内容である。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-relative-hilbert}
+$F : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする。
+$\Delta : \mathcal{Y} \to \mathcal{Y} \times \mathcal{Y}$ は
+代数空間により表現可能であると仮定する。このとき、
+$$
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+\mathcal{H}_d(\mathcal{X}) \times \mathcal{Y}
+$$
+は代数空間により表現可能である。『スタックの例』の式
+(\ref{examples-stacks-equation-diagram-hilbert-d-stack}) を参照せよ。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$\xi = (U, Z, p, x, 1)$ を $U$ 上の
+$\mathcal{H}_d(\mathcal{X}) = \mathcal{H}_d(\mathcal{X}/S)$ の対象とする。
+ここで $p$ は単に $U$ の構造射である。すべては $S$ 上にあるので、
+第五成分 $1$ は存在して一意である。また、$y$ を $U$ 上の
+$\mathcal{Y}$ の対象とする。$2$-ファイバー積
+\begin{equation}
+\label{criteria-equation-res-isom}
+(\Sch/U)_{fppf}
+\times_{\xi \times y, \mathcal{H}_d(\mathcal{X}) \times \mathcal{Y}}
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\end{equation}
+が代数空間により表現可能であることを示さなければならない。
+その理由を説明するため、
+$$
+I = \mathit{Isom}_\mathcal{Y}(y|_Z, F(x))
+$$
+を導入する。仮定により、これは $Z$ 上の代数空間である。
+$a : U' \to U$ を $U$ 上のスキームとする。
+(\ref{criteria-equation-res-isom}) の $U'$ 上のファイバー圏の対象を与えるとは
+どういうことか。これは、$U'$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$\xi' = (U', Z', y', x', \alpha')$ と同型
+$(U', Z', p', x', 1) \cong (U, Z, p, x, 1)|_{U'}$ および
+$y' \cong y|_{U'}$ を与えることを意味する。したがって $\xi'$ は、
+ある射
+$$
+\alpha :
+a^*y|_{U' \times_{a, U} Z}
+\longrightarrow
+F(x|_{U' \times_{a, U} Z})
+$$
+に対する
+$(U', U' \times_{a, U} Z, a^*y, x|_{U' \times_{a, U} Z}, \alpha)$
+と同型である。ここでこの射は $U' \times_{a, U} Z$ 上の
+$\mathcal{Y}$ のファイバー圏の射である。したがって $\alpha$ を射
+$b : U' \times_{a, U} Z \to I$ とみなせる。
+このようにして (\ref{criteria-equation-res-isom}) は
+$\text{Res}_{Z/U}(I)$ により表現可能であることが分かり、これは命題
+\ref{criteria-proposition-restriction-of-scalars-algebraic-space} により代数空間である。
+\end{proof}
+
+\noindent
+次の補題は、補題 \ref{criteria-lemma-etale-covering-hilbert} の（部分的な）一般化である。
+
+\begin{lemma}
+\label{criteria-lemma-representable-on-top}
+$F : \mathcal{X} \to \mathcal{Y}$ と $G : \mathcal{X}' \to \mathcal{X}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射とする。
+$G$ が代数空間により表現可能ならば、$1$-射
+$$
+\mathcal{H}_d(\mathcal{X}'/\mathcal{Y})
+\longrightarrow
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+$$
+は代数空間により表現可能である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$\xi = (U, Z, y, x, \alpha)$ を $U$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象とする。$2$-ファイバー積
+\begin{equation}
+\label{criteria-equation-to-show-again}
+(\Sch/U)_{fppf}
+\times_{\xi, \mathcal{H}_d(\mathcal{X}/\mathcal{Y})}
+\mathcal{H}_d(\mathcal{X}'/\mathcal{Y})
+\end{equation}
+が $U$ 上の代数空間により表現可能であることを証明しなければならない。
+射 $a : U' \to U$ の上の対象は、$U' \times_{a, U} Z$ 上の
+$\mathcal{X}'$ の対象 $x'$ で $G(x') \cong x|_{U' \times_{a, U} Z}$ を
+満たすものに対応する。仮定により、$2$-ファイバー積
+$$
+(\Sch/Z)_{fppf} \times_{x, \mathcal{X}} \mathcal{X}'
+$$
+は $Z$ 上の代数空間 $W$ により表現可能である。したがって
+(\ref{criteria-equation-to-show-again}) は $\text{Res}_{Z/U}(W)$ により表現可能であり、
+これは命題 \ref{criteria-proposition-restriction-of-scalars-algebraic-space} により
+代数空間である。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-limit-preserving}
+$F : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする。
+$F$ は代数空間により表現可能かつ局所有限表示であると仮定する。このとき
+$$
+p : \mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \to \mathcal{Y}
+$$
+は対象について極限保存的である。
+\end{lemma}
+
+\begin{proof}
+これは、次を示さなければならないことを意味する。以下が与えられたとする。
+\begin{enumerate}
+\item $S$ 上のアフィンスキーム $U_i$ の有向極限として書かれた
+アフィンスキーム $U = \lim_i U_i$、
+\item ある $i$ に対する $U_i$ 上の $\mathcal{Y}$ の対象 $y_i$、および
+\item $y = y_i|_U$ を満たす、$U$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$\Xi = (U, Z, y, x, \alpha)$。
+\end{enumerate}
+このとき、ある $i' \geq i$ と、$U_{i'}$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$\Xi_{i'} = (U_{i'}, Z_{i'}, y_{i'}, x_{i'}, \alpha_{i'})$ が存在し、
+$\Xi_{i'}|_U = \Xi$ および $y_{i'} = y_i|_{U_{i'}}$ となる。
+実際、最後の二つの等式により (\ref{criteria-equation-limit-preserving}) は可換になる。
+
+\medskip\noindent
+$2$-ファイバー積
+$$
+(\Sch/U_i)_{fppf} \times_{y_i, \mathcal{Y}, F} \mathcal{X}
+$$
+を表現する代数空間を $X_{y_i} \to U_i$ とする。
+$F$ に関する仮定により、$X_{y_i} \to U_i$ は局所有限表示である。
+$\Xi$ と書く。
+$\xi = (Z, Z \to U_i, x, \alpha)$ が上に表示した $2$-ファイバー積の対象で
+あることは明らかであり、したがって $\xi$ は $U_i$ 上の代数空間の射
+$f_\xi : Z \to X_{y_i}$ を与える（$X_{y_i}$ は
+$(\Sch/U_i)_{fppf} \times_{y, \mathcal{Y}, F} \mathcal{X}$ の対象の
+同型類の関手だからである。『代数スタック』の補題
+\ref{algebraic-lemma-characterize-representable-by-space} を参照せよ）。
+『極限』の補題 \ref{limits-lemma-descend-finite-presentation} および
+\ref{limits-lemma-descend-finite-locally-free} により、ある $i' \geq i$ と、
+その $U$ への基底変換が $Z$ となる、次数 $d$ の有限局所自由射
+$Z_{i'} \to U_{i'}$ が存在する。『空間の極限』の命題
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}
+により、$i'$ をより大きな添字で置き換えた後、射
+$f_{i'} : Z_{i'} \to X_{y_i}$ が存在して、図式
+$$
+\xymatrix{
+Z \ar[d] \ar[r] \ar@/^3ex/[rr]^{f_\xi} &
+Z_{i'} \ar[d] \ar[r]_{f_{i'}} & X_{y_i} \ar[d] \\
+U \ar[r] & U_{i'} \ar[r] & U_i
+}
+$$
+が可換であると仮定してよい。
+$\Xi_{i'} = (U_{i'}, Z_{i'}, y_{i'}, x_{i'}, \alpha_{i'})$ と置く。
+ここで、
+\begin{enumerate}
+\item $y_{i'}$ は、$y_i$ を $U_{i'}$ に引き戻して得られる
+$U_{i'}$ 上の $\mathcal{Y}$ の対象である。
+\item $x_{i'}$ は、$1$-射
+$$
+(\Sch/Z_{i'})_{fppf} \to
+\mathcal{S}_{X_{y_i}} \to
+(\Sch/U_i)_{fppf} \times_{y_i, \mathcal{Y}, F} \mathcal{X} \to
+\mathcal{X}
+$$
+に $2$-Yoneda の補題を介して対応する、$Z_{i'}$ 上の
+$\mathcal{X}$ の対象である。ここで中央の矢印は $X_{y_i}$ を定義する同値である
+（『代数スタック』の節
+\ref{algebraic-section-representable-by-algebraic-spaces} および
+\ref{algebraic-section-split} の記法を用いた）。
+\item $\alpha_{i'} : y_{i'}|_{Z_{i'}} \to F(x_{i'})$ は、図式
+$$
+\xymatrix{
+(\Sch/Z_{i'})_{fppf} \ar[r] \ar[rd] &
+(\Sch/U_i)_{fppf} \times_{y_i, \mathcal{Y}, F} \mathcal{X}
+\ar[r] \ar[d] &
+\mathcal{X} \ar[d]^F \\
+& (\Sch/U_{i'})_{fppf} \ar[r] & \mathcal{Y}
+}
+$$
+の $2$-可換性から得られる同型である。
+\end{enumerate}
+射 $f_\xi : Z \to X_{y_i}$ は、$Z$ 上の
+$(\Sch/U_i)_{fppf} \times_{y_i, \mathcal{Y}, F} \mathcal{X}$ の対象
+$\xi = (Z, Z \to U_i, x, \alpha)$ に対応する射であったことを思い出そう。
+構成により、$f_{i'}$ は対象
+$\xi_{i'} = (Z_{i'}, Z_{i'} \to U_i, x_{i'}, \alpha_{i'})$ に対応する射である。
+$f_\xi = f_{i'} \circ (Z \to Z_{i'})$ であるから、対象
+$\xi_{i'} = (Z_{i'}, Z_{i'} \to U_i, x_{i'}, \alpha_{i'})$ を $Z$ に
+引き戻すと $\xi$ になる。したがって $x_{i'}$ を引き戻すと $x$ となり、
+$\alpha_{i'}$ を引き戻すと $\alpha$ となる。
+これは $\Xi_{i'}$ を $U$ に引き戻すと $\Xi$ になることを意味し、
+証明が完了する。
+\end{proof}
+
+
+
+\section{点の有限 Hilbert スタック}
+\label{criteria-section-hilbert-point}
+\enlargethispage{3pt}
+
+\noindent
+$d \geq 1$ を整数とする。『スタックの例』の定義
+\ref{examples-stacks-definition-hilbert-d-stack} で、グルーポイドのスタック
+$\mathcal{H}_d$ を定義した。この節では $\mathcal{H}_d$ が代数スタックであることを
+証明する。以下では一貫して $S = \Spec(\mathbf{Z})$ と仮定する。
+一般の場合はこれから基底変換により従う。
+スキーム $T$ 上の $\mathcal{H}_d$ のファイバー圏は、次数 $d$ の
+有限局所自由射 $\pi : Z \to T$ の圏であることを思い出そう。
+これらを直接分類する代わりに、まず代数の準連接層
+$\pi_*\mathcal{O}_Z$ を調べる。
+
+\medskip\noindent
+$R$ を環とする。一時的に次の定義を置く。
+{\it $R$ 上の自由な $d$ 次元代数} とは、$e_1 = (1, 0, \ldots, 0)$ が
+単位元となるような $R^{\oplus d}$ 上の可換 $R$-代数構造 $m$ のことである\footnote{
+これは、乗法写像
+$m : R^{\oplus d} \otimes_R R^{\oplus d} \to R^{\oplus d}$ と、
+いくつかの公理を満たす環準同型 $\psi : R \to R^{\oplus d}$ の組と
+考える方がよいかもしれない。}。$m$ を $R$-線形写像
+$$
+m : R^{\oplus d} \otimes_R R^{\oplus d} \longrightarrow R^{\oplus d}
+$$
+で、$m(e_1, x) = m(x, e_1) = x$ を満たし、$m$ が可換かつ結合的な環構造を
+定めるものと考える。$m(e_i, e_j) = \sum a_{ij}^ke_k$ と書けば、これは条件
+$$
+\left\{
+\begin{matrix}
+\sum_l a_{ij}^la_{lk}^m = \sum_l a_{il}^ma_{jk}^l & \forall i, j, k, m \\
+a_{ij}^k = a_{ji}^k & \forall i, j, k \\
+a_{i1}^j = \delta_{ij} & \forall i, j
+\end{matrix}
+\right.
+$$
+に帰着する。ここで $\delta_{ij}$ は Kronecker の $\delta$-関数である。
+そこで
+$$
+R_{univ} = \mathbf{Z}[a_{ij}^k]/J
+$$
+と定義する。ここでイデアル $J$ は、上に表示した関係式で生成されるイデアルである。
+構造定数が $J$ を法とする $a_{ij}^k$ の類である、$R_{univ}$ 上の自由な
+$d$ 次元代数 $m$ を
+$$
+m_{univ} :
+R_{univ}^{\oplus d} \otimes_{R_{univ}} R_{univ}^{\oplus d}
+\longrightarrow
+R_{univ}^{\oplus d}
+$$
+と書く。このとき、環 $R$ 上の任意の自由な $d$ 次元代数 $m$ に対し、
+$\psi_*m_{univ} = m$ を満たす $\mathbf{Z}$-代数準同型
+$\psi : R_{univ} \to R$ が一意に存在することは明らかである
+（これは、$m_{univ}$ に基底変換関手 $- \otimes_{R_{univ}} R$ を
+適用して得られるものが $m$ であるという意味である）。言い換えると、
+$X = \Spec(R_{univ})$ と置けば、変動する $T = \Spec(R)$ に対して標準的な同一視
+$$
+X(T) = \{\text{free }d\text{-dimensional algebras }m\text{ over }R\}
+$$
+を得る。Zariski 局所化により、任意のスキーム $T$ に対して一見より一般的な同一視
+\begin{equation}
+\label{criteria-equation-objects}
+X(T) = \{\text{free }d\text{-dimensional algebras }
+m\text{ over }\Gamma(T, \mathcal{O}_T)\}
+\end{equation}
+を得る。
+
+\medskip\noindent
+次に、{\it 自由な $d$ 次元 $R$-代数の同型}について少し述べる。
+$m$, $m'$ を環 $R$ 上の二つの自由な $d$ 次元代数とする。
+{\it $m$ から $m'$ への同型}とは、可逆な $R$-線形写像
+$$
+\varphi : R^{\oplus d} \longrightarrow R^{\oplus d}
+$$
+で、$\varphi(e_1) = e_1$ および
+$$
+m \circ \varphi \otimes \varphi = \varphi \circ m'
+$$
+を満たすもののことである。これらは合成できるので、$R$ 上の自由な
+$d$ 次元代数全体が圏をなすことに注意せよ。このようにして、
+スキームの圏からグルーポイドへの関手
+\begin{equation}
+\label{criteria-equation-FAd}
+FA_d : \Sch_{fppf}^{opp} \longrightarrow \textit{Groupoids}
+\end{equation}
+を得る。すなわち、スキーム $T$ に、上で定義した同型の概念を用いて
+圏の構造を与えた、$\Gamma(T, \mathcal{O}_T)$ 上の自由な
+$d$ 次元代数の集合を対応させる。
+
+\medskip\noindent
+以上から、任意のスキーム $T$ に群
+$$
+G(T) = \{g \in \text{GL}_d(\Gamma(T, \mathcal{O}_T)) \mid g(e_1) = e_1\}
+$$
+を対応させる群値関手 $G$ を考えることが示唆される。
+$G \subset \text{GL}_d$（『グルーポイド』の例
+\ref{groupoids-example-general-linear-group} を参照）は、方程式
+$x_{11} = 1$ および $i > 1$ に対する $x_{i1} = 0$ により切り出される
+閉部分群スキームであることは明らかである。したがって $G$ は
+$\Spec(\mathbf{Z})$ 上の滑らかなアフィン群スキームである。作用
+$$
+a : G \times_{\Spec(\mathbf{Z})} X \longrightarrow X
+$$
+を考える。これは、$T = \Spec(R)$ に対する左辺の $T$-値点 $(g, m)$ に、
+次で与えられる $R$ 上の自由な $d$ 次元代数を対応させる。
+$$
+a(g, m) = g^{-1} \circ m \circ g \otimes g
+$$
+これは、$g$ が自由な $d$ 次元 $R$-代数の同型
+$m \to a(g, m)$ を定めるという意味である。
+$a$ が実際にスキーム $X$ 上の群スキーム $G$ の作用を定めることの確認は省略する。
+
+\begin{lemma}
+\label{criteria-lemma-represent-FAd}
+(\ref{criteria-equation-FAd}) で定義したグルーポイド値関手 $FA_d$ は、
+スキーム $T$ に次の圏を対応させるグルーポイド値関手と同型（！）である。
+\begin{enumerate}
+\item 対象の集合は $X(T)$ である。
+\item 射の集合は $G(T) \times X(T)$ である。
+\item $s : G(T) \times X(T) \to X(T)$ は射影である。
+\item $t : G(T) \times X(T) \to X(T)$ は $a(T)$ である。
+\item 合成は
+\par\noindent
+$G(T) \times X(T) \times_{s, X(T), t} G(T) \times X(T)
+\to G(T) \times X(T)$
+\par\noindent
+$((g, m), (g', m')) \mapsto (gg', m')$ で与えられる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+対象に関する規則は (\ref{criteria-equation-objects}) ですでに見た。
+また上で、任意の自由な $d$ 次元代数 $m$ に対し、$g \in G(T)$ を
+$m$ から $a(g, m)$ への射とみなせることも見た。逆に、任意の射
+$m \to m'$ は、ある元 $g \in G(T)$ に対応し
+$m' = a(g, m)$ を満たす可逆線形写像 $\varphi$ により与えられる。
+\end{proof}
+
+\noindent
+実際、上の補題で記述したグルーポイド $(X, G \times X, s, t, c)$ は、
+『グルーポイド』の補題 \ref{groupoids-lemma-groupoid-from-action} で定義した
+作用 $a : G \times X \to X$ に付随するグルーポイドである。
+$G$ は $\Spec(\mathbf{Z})$ 上滑らかであるから、二つの射
+$s, t : G \times X \to X$ は滑らかである。すなわち、対称性により
+一方について証明すれば十分であり、$s$ は $G \to \Spec(\mathbf{Z})$ の
+基底変換である。したがって $(G \times X, X, s, t, c)$ は
+滑らかなグルーポイドスキームであり、『代数スタック』の定理
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack} により、
+商スタック $[X/G]$ は代数スタックである。
+
+\begin{proposition}
+\label{criteria-proposition-finite-hilbert-point}
+スタック $\mathcal{H}_d$ は上で記述した商スタック $[X/G]$ と同値である。
+特に $\mathcal{H}_d$ は代数スタックである。
+\end{proposition}
+
+\begin{proof}
+『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-quotient-stack} により、商スタック $[X/G]$ は、
+スキーム $T$ にグルーポイド
+$$
+(X(T), G(T) \times X(T), s, t, c)
+$$
+を対応させる「グルーポイド値前層」に付随する、グルーポイドをファイバーとする
+圏のスタック化である。補題 \ref{criteria-lemma-represent-FAd} により、この
+「グルーポイド値前層」は $FA_d$ と同型であるから、$\mathcal{H}_d$ が
+（「グルーポイド値前層」に付随するグルーポイドをファイバーとする圏の）
+$FA_d$ のスタック化であることを証明すれば十分である。そのため、まず関手
+$$
+\Spec : FA_d \longrightarrow \mathcal{H}_d
+$$
+を定義する。スキーム $T$ 上の $\mathcal{H}_d$ のファイバー圏は、
+次数 $d$ の有限局所自由射 $Z \to T$ の圏であることを思い出そう。
+したがって、スキーム $T$ と自由な $d$ 次元
+$\Gamma(T, \mathcal{O}_T)$-代数 $m$ が与えられれば、これに
+$$
+Z = \underline{\Spec}_T(\mathcal{A})
+$$
+を対応させることができる。これは $\mathcal{H}_{d, T}$ の対象であり、
+ここで $\mathcal{A} = \mathcal{O}_T^{\oplus d}$ には $m$ を介して
+$\mathcal{O}_T$-代数構造を与える。さらに $m'$ をもう一つの自由な
+$d$ 次元 $\Gamma(T, \mathcal{O}_T)$-代数とし、
+$\varphi : m \to m'$ をそれらの同型とすると、誘導される
+$\mathcal{O}_T$-線形写像
+$\varphi : \mathcal{O}_T^{\oplus d} \to \mathcal{O}_T^{\oplus d}$ は、
+準連接 $\mathcal{O}_T$-代数の同型
+$$
+\varphi : \mathcal{A}' \longrightarrow \mathcal{A}
+$$
+を誘導する。したがって
+$$
+\underline{\Spec}_T(\varphi) :
+\underline{\Spec}_T(\mathcal{A})
+\longrightarrow
+\underline{\Spec}_T(\mathcal{A}')
+$$
+はファイバー圏 $\mathcal{H}_{d, T}$ の射である。この構成が基底変換と
+両立することの確認は省略する。こうして実際に上で主張した関手
+$\Spec : FA_d \to \mathcal{H}_d$ を得る。
+
+\medskip\noindent
+$\Spec : FA_d \to \mathcal{H}_d$ が $FA_d$ のスタック化と
+$\mathcal{H}_d$ の間の同値を誘導することを示すには、次を確認すれば十分である。
+\begin{enumerate}
+\item 任意の $m, m' \in FA_d(T)$ に対して
+\par\noindent
+$\mathit{Isom}(m, m') = \mathit{Isom}(\Spec(m), \Spec(m'))$ である。
+\item 任意のスキーム $T$ と $\mathcal{H}_{d, T}$ の任意の対象
+$Z \to T$ に対し、被覆 $\{T_i \to T\}$ が存在して、
+$Z|_{T_i}$ はある $m \in FA_d(T_i)$ に対する $\Spec(m)$ と同型である。
+\end{enumerate}
+『スタック』の補題 \ref{stacks-lemma-stackify-groupoids} を参照せよ。
+第一の主張は、$\mathcal{A} = \mathcal{A}' = \mathcal{O}_T^{\oplus d}$ が
+加群として成り立つとき、任意の同型
+$$
+\underline{\Spec}_T(\mathcal{A})
+\longrightarrow
+\underline{\Spec}_T(\mathcal{A}')
+$$
+が必ず大域的可逆行列 $g$ により与えられるという観察から従う。
+第二の主張を証明するため、$\pi : Z \to T$ を次数 $d$ の有限局所自由射とする。
+このとき $\mathcal{A}$ は階数 $d$ の局所自由 $\mathcal{O}_T$-加群の層である。
+元 $1 \in \Gamma(T, \mathcal{A})$ を考える。任意の $t \in T$ に対し、
+この元は $\mathcal{A} \otimes_{\mathcal{O}_{T, t}} \kappa(t)$ において零でない。
+実際、スキーム
+$Z_t = \Spec(\mathcal{A} \otimes_{\mathcal{O}_{T, t}} \kappa(t))$ は
+$\kappa(t)$ 上で次数 $d > 0$ なので空でない。したがって
+$1 : \mathcal{O}_T \to \mathcal{A}$ は局所的に第一基底元として用いることができる
+（例えば、これを見るには『代数』の補題
+\ref{algebra-lemma-cokernel-flat} の (1) と (2) を用いられる）。
+したがって $T$ 上で局所化した後、同型
+$\varphi : \mathcal{A} \to \mathcal{O}_T^{\oplus d}$ で、
+$1 \in \Gamma(\mathcal{A})$ が第一基底元に対応するものが存在すると仮定してよい。
+この状況では、乗法写像
+$\mathcal{A} \otimes_{\mathcal{O}_T} \mathcal{A} \to \mathcal{A}$ は
+$\varphi$ を介して $\Gamma(T, \mathcal{O}_T)$ 上の自由な
+$d$ 次元代数 $m$ に移される。これで証明が完了する。
+\end{proof}
+
+
+
+\section{代数空間の有限 Hilbert スタック}
+\label{criteria-section-spaces-hilbert}
+
+\noindent
+代数空間の有限 Hilbert スタックは代数スタックである。
+
+\begin{lemma}
+\label{criteria-lemma-hilbert-stack-of-space}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+このとき $\mathcal{H}_d(X)$ は代数スタックである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{criteria-lemma-representable-on-top} により、$1$-射
+$$
+\mathcal{H}_d(X) \longrightarrow \mathcal{H}_d
+$$
+は代数空間により表現可能である。命題
+\ref{criteria-proposition-finite-hilbert-point} により、スタック
+$\mathcal{H}_d$ は代数スタックである。したがって『代数スタック』の補題
+\ref{algebraic-lemma-representable-morphism-to-algebraic} により、
+$\mathcal{H}_d(X)$ は代数スタックである。
+\end{proof}
+
+\noindent
+この補題によりブートストラップが可能になる。
+
+\begin{lemma}
+\label{criteria-lemma-hilbert-stack-relative-space}
+$S$ をスキームとする。$F : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射で、次を満たすものとする。
+\begin{enumerate}
+\item $\mathcal{X}$ は代数空間により表現可能である。
+\item $F$ は代数空間により表現可能、全射、平坦かつ局所有限表示である。
+\end{enumerate}
+このとき $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は代数スタックである。
+\end{lemma}
+
+\begin{proof}
+$S$ 上の表現可能なグルーポイドのスタック $\mathcal{U}$ と、
+代数空間により表現可能、滑らかかつ全射な $1$-射
+$f : \mathcal{U} \to \mathcal{H}_d(\mathcal{X})$ を選ぶ。
+これは、補題 \ref{criteria-lemma-hilbert-stack-of-space} により
+$\mathcal{H}_d(\mathcal{X})$ が代数スタックなので可能である。
+$2$-ファイバー積
+$$
+\mathcal{W} =
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\times_{\mathcal{H}_d(\mathcal{X}), f}
+\mathcal{U}
+$$
+を考える。$\mathcal{U}$ は表現可能（特にセトイドのスタック）なので、
+『スタックの例』の補題 \ref{examples-stacks-lemma-faithful-hilbert} と
+『スタック』の補題 \ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids}
+から、$\mathcal{W}$ はセトイドのスタックである。
+$1$-射 $\mathcal{W} \to \mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は、
+射 $f$ の基底変換として代数空間により表現可能、滑らかかつ全射である
+（『代数スタック』の補題
+\ref{algebraic-lemma-base-change-representable-by-spaces} および
+\ref{algebraic-lemma-base-change-representable-transformations-property} を参照）。
+したがって $\mathcal{W}$ が代数空間により表現可能であることを示せれば、
+補題は『代数スタック』の補題
+\ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic} から従う。
+
+\medskip\noindent
+補題 \ref{criteria-lemma-flat-finite-presentation-surjective-diagonal} により、
+$\mathcal{Y}$ の対角射は代数空間により表現可能である。
+補題 \ref{criteria-lemma-relative-hilbert} を適用すると、$1$-射
+$$
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+\mathcal{H}_d(\mathcal{X}) \times \mathcal{Y}
+$$
+は代数空間により表現可能である。$2$-ファイバー積
+$$
+\mathcal{V} =
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\times_{(\mathcal{H}_d(\mathcal{X}) \times \mathcal{Y}), f \times F}
+(\mathcal{U} \times \mathcal{X})
+$$
+を考える。射影 $\mathcal{V} \to \mathcal{U} \times \mathcal{X}$ は、
+直前に表示した射の基底変換として代数空間により表現可能である。
+したがって $\mathcal{V}$ は代数空間である（『ブートストラップ』の補題
+\ref{bootstrap-lemma-representable-by-spaces-over-space} または
+『代数スタック』の補題
+\ref{algebraic-lemma-base-change-by-space-representable-by-space} を参照）。
+$1$-射 $\mathcal{V} \to \mathcal{U}$ は、次の $2$-カルテジアン図式に収まる。
+$$
+\xymatrix{
+\mathcal{V} \ar[d] \ar[r] & \mathcal{X} \ar[d]^F \\
+\mathcal{W} \ar[r] & \mathcal{Y}
+}
+$$
+これは
+$$
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\times_{(\mathcal{H}_d(\mathcal{X}) \times \mathcal{Y}), f \times F}
+(\mathcal{U} \times \mathcal{X})
+=
+(\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\times_{\mathcal{H}_d(\mathcal{X}), f}
+\mathcal{U}) \times_{\mathcal{Y}, F} \mathcal{X}
+$$
+だからである。したがって $\mathcal{V} \to \mathcal{W}$ は $F$ の
+基底変換として代数空間により表現可能、全射、平坦かつ局所有限表示である。
+『代数スタック』の補題
+\ref{algebraic-lemma-map-fibred-setoids-property} により、$\mathcal{V}$ と
+$\mathcal{W}$ に付随する集合の層についても同じことが成り立つ。
+ゆえに『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} により、$\mathcal{W}$ に付随する層は
+代数空間であると結論する。
+\end{proof}
+
+
+
+\section{Hilbert スタックの LCI 軌跡}
+\label{criteria-section-lci}
+
+\noindent
+記法については『スタックの例』の節
+\ref{examples-stacks-section-hilbert-d-stack} を参照されたい。
+$F : \mathcal{X} \longrightarrow \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とし、$F$ は代数空間により表現可能であると
+仮定する。$d \geq 1$ を固定する。
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$(U, Z, y, x, \alpha)$ を考える。$2$-ファイバー積の普遍性により、誘導される
+$1$-射
+$$
+(\Sch/Z)_{fppf}
+\longrightarrow
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}, F} \mathcal{X}
+$$
+があり、これは $U$ 上の代数空間の射により表現される。
+実際、$F$ は代数空間により表現可能なので、$2$-ファイバー積
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}, F} \mathcal{X}$ を表現する
+$U$ 上の代数空間 $X_y$ を選べる。
+$\alpha : y|_Z \to F(x)$ は同型なので、
+$\xi = (Z, Z \to U, x, \alpha)$ は $Z$ 上の $2$-ファイバー積
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}, F} \mathcal{X}$ の対象である。
+したがって $\xi$ は $U$ 上の代数空間の射
+$x_\alpha : Z \to X_y$ を与える。これは $X_y$ が
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}, F} \mathcal{X}$ の対象の
+同型類の関手だからである。『代数スタック』の補題
+\ref{algebraic-lemma-characterize-representable-by-space} を参照せよ。
+図示すると
+\begin{equation}
+\label{criteria-equation-relative-map}
+\vcenter{
+\xymatrix{
+Z \ar[r]_{x_\alpha} \ar[rd] & X_y \ar[d] \\
+& U
+}
+}
+\quad\quad
+\vcenter{
+\xymatrix{
+(\Sch/Z)_{fppf} \ar[rd] \ar[r]_-{x, \alpha} &
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}, F} \mathcal{X} \ar[r] \ar[d] &
+\mathcal{X} \ar[d]^F \\
+& (\Sch/U)_{fppf} \ar[r]^y & \mathcal{Y}
+}
+}
+\end{equation}
+である。$(f, g, b, a) : (U, Z, y, x, \alpha) \to
+(U', Z', y', x', \alpha')$ が $\mathcal{H}_d$ の対象間の射ならば、
+射 $x'_{\alpha'} : Z' \to X'_{y'}$ は射 $g : U' \to U$ による
+$x_\alpha$ の基底変換であることを注意しておく（詳細は省略する）。
+
+\medskip\noindent
+ここでさらに、$F$ は平坦かつ局所有限表示であると仮定する。
+この状況で充満部分圏
+$$
+\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y}) \subset
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+$$
+を次のように定義する。これは、対応する射 $x_\alpha : Z \to X_y$ が
+非分岐かつ局所完全交差射であるような
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$(U, Z, y, x, \alpha)$ からなる。定義については『空間の射』の定義
+\ref{spaces-morphisms-definition-unramified} および
+『空間の射についてさらに』の定義
+\ref{spaces-more-morphisms-definition-lci} を参照せよ。
+
+\begin{lemma}
+\label{criteria-lemma-lci-locus-stack-in-groupoids}
+$S$ をスキームとする。$F : \mathcal{X} \longrightarrow \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射とする。
+$F$ は代数空間により表現可能、平坦かつ局所有限表示であると仮定する。
+このとき $\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ は
+グルーポイドのスタックであり、包含関手
+$$
+\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+$$
+は表現可能な開埋め込みである。
+\end{lemma}
+
+\begin{proof}
+$\Xi = (U, Z, y, x, \alpha)$ を $\mathcal{H}_d$ の対象とする。
+(\ref{criteria-equation-relative-map}) に続く注意から、$U' \to U$ による
+$\Xi$ の引き戻しが $\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ に
+属することと、$x_\alpha$ の基底変換が非分岐かつ局所完全交差射であることは
+同値である。$Z \to U$ は有限局所自由（したがって平坦、局所有限表示かつ
+普遍的閉）であり、$F$ に関する仮定により $X_y \to U$ は平坦かつ
+局所有限表示であることに注意せよ。『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-where-unramified} および
+\ref{spaces-more-morphisms-lemma-where-lci} により、開部分スキーム
+$W \subset U$ が存在して、射 $U' \to U$ が $W$ を経由することと、
+$U' \to U$ による $x_\alpha$ の基底変換が非分岐かつ局所完全交差射で
+あることが同値になる。これは
+$$
+(\Sch/U)_{fppf}
+\times_{\Xi, \mathcal{H}_d(\mathcal{X}/\mathcal{Y})}
+\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+$$
+が $W$ により表現可能であることを含意する。したがって補題の最後の主張が
+成り立つ。最初の主張、すなわち
+$\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ が
+グルーポイドのスタックであることは、これと『代数スタック』の補題
+\ref{algebraic-lemma-open-fibred-category-is-algebraic} から従う。
+\end{proof}
+
+\noindent
+局所完全交差射は「局所的に障害をもたない」。これは、本章で必要とする
+特別な場合よりもはるかに一般の状況で成り立つ。
+
+\begin{lemma}
+\label{criteria-lemma-lci-unobstructed}
+$U \subset U'$ をアフィンスキームの一次厚化とする。
+$X'$ を $U'$ 上平坦な代数空間とし、$X = U \times_{U'} X'$ と置く。
+$Z \to U$ を次数 $d$ の有限局所自由射とする。最後に、
+$f : Z \to X$ を非分岐な局所完全交差射とする。このとき $U'$ 上の
+代数空間の可換図式
+$$
+\xymatrix{
+(Z \subset Z') \ar[rd] \ar[rr]_{(f, f')} & & (X \subset X') \ar[ld] \\
+& (U \subset U')
+}
+$$
+で、$Z' \to U'$ が次数 $d$ の有限局所自由射で、
+$Z = U \times_{U'} Z'$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-unramified-lci} により、非分岐射
+$Z \to X$ の余法層 $\mathcal{C}_{Z/X}$ は有限局所自由
+$\mathcal{O}_Z$-加群である。また『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-transitivity-conormal-lci} により、
+余法層の完全列
+$$
+0 \to i^*\mathcal{C}_{X/X'} \to
+\mathcal{C}_{Z/X'} \to
+\mathcal{C}_{Z/X} \to 0
+$$
+をもつ。$Z$ はアフィンなので、この列は分裂する。分裂
+$$
+\mathcal{C}_{Z/X'} = i^*\mathcal{C}_{X/X'} \oplus \mathcal{C}_{Z/X}
+$$
+を選ぶ。$Z \subset Z''$ を、$X'$ 上の $Z$ の普遍一次厚化とする
+（『空間の射についてさらに』の節
+\ref{spaces-more-morphisms-section-universal-thickening} を参照）。
+$Z \subset Z''$ に対応するイデアルの準連接層を
+$\mathcal{I} \subset \mathcal{O}_{Z''}$ と書く。
+定義により、$\mathcal{C}_{Z/X'}$ は $Z$ 上の層とみなした $\mathcal{I}$ である。
+したがって上の分裂は分裂
+$$
+\mathcal{I} = i^*\mathcal{C}_{X/X'} \oplus \mathcal{C}_{Z/X}
+$$
+を定める。$\mathcal{C}_{Z/X} \subset \mathcal{I}$ を $Z''$ 上の
+イデアルの準連接層とみなし、それが切り出す閉部分スキームを
+$Z' \subset Z''$ とする。$Z'$ が $Z$ の一次厚化であり、補題の主張にある
+一次厚化の可換図式が得られることは明らかである。
+
+\medskip\noindent
+$X' \to U'$ は平坦で、$X = U \times_{U'} X'$ であるから、
+$\mathcal{C}_{X/X'}$ は $\mathcal{C}_{U/U'}$ の $X$ への引き戻しである。
+『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-deform} を参照せよ。構成により
+$\mathcal{C}_{Z/Z'} = i^*\mathcal{C}_{X/X'}$ であることに注意すると、
+$\mathcal{C}_{Z/Z'}$ は $\mathcal{C}_{U/U'}$ の $Z$ への引き戻しと
+同型であると結論する。再び『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-deform}（またはそのスキーム版である
+『射についてさらに』の補題 \ref{more-morphisms-lemma-deform}）を適用すると、
+$Z' \to U'$ は平坦で $Z = U \times_{U'} Z'$ であると結論する。
+最後に『射についてさらに』の補題
+\ref{more-morphisms-lemma-deform-property} により、$Z' \to U'$ は
+次数 $d$ の有限局所自由射である。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-lci-formally-smooth}
+$F : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする。
+$F$ は代数空間により表現可能、平坦かつ局所有限表示であると仮定する。このとき
+$$
+p : \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y}) \to \mathcal{Y}
+$$
+は対象について形式的に滑らかである。
+\end{lemma}
+
+\begin{proof}
+次を示さなければならない。以下が与えられたとする。
+\begin{enumerate}
+\item アフィンスキーム $U$ 上の
+$\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ の対象
+$(U, Z, y, x, \alpha)$、
+\item 一次厚化 $U \subset U'$、および
+\item $y'|_U = y$ を満たす、$U'$ 上の $\mathcal{Y}$ の対象 $y'$。
+\end{enumerate}
+このとき $U'$ 上の $\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ の
+対象 $(U', Z', y', x', \alpha')$ で、$Z = U \times_{U'} Z'$、
+$x = x'|_Z$、および $\alpha = \alpha'|_U$ を満たすものが存在する。
+実際、最後の二つの等式により (\ref{criteria-equation-formally-smooth}) は可換になる。
+
+\medskip\noindent
+式 (\ref{criteria-equation-relative-map}) で構成した射
+$x_\alpha : Z \to X_y$ を考える。同様に、$2$-ファイバー積
+$(\Sch/U')_{fppf} \times_{y', \mathcal{Y}, F} \mathcal{X}$ を表現する
+$U'$ 上の代数空間を $X'_{y'}$ と書く。仮定により、射
+$X'_{y'} \to U'$ は平坦（かつ局所有限表示）である。
+$y'|_U = y$ なので $X_y = U \times_{U'} X'_{y'}$ である。
+したがって補題 \ref{criteria-lemma-lci-unobstructed} を適用して、
+$Z = U \times_{U'} Z'$ を満たす次数 $d$ の有限局所自由射
+$Z' \to U'$ と、$x_\alpha$ を延長する射 $Z' \to X'_{y'}$ を得る。
+構成により、射 $Z' \to X'_{y'}$ は組 $(x', \alpha')$ に対応する。
+$(U', Z', y', x', \alpha')$ が $U'$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象であり、
+$Z = U \times_{U'} Z'$、$x = x'|_Z$、および
+$\alpha = \alpha'|_U$ を満たすことは明らかである。
+補題 \ref{criteria-lemma-lci-locus-stack-in-groupoids} で、
+$\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y}) \subset
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は「開部分スタック」であると見たから、
+$(U', Z', y', x', \alpha')$ は望むとおり
+$\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ の対象である。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-lci-surjective}
+$F : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする。
+$F$ は代数空間により表現可能、平坦、全射かつ局所有限表示であると仮定する。
+このとき
+$$
+\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+\mathcal{Y}
+$$
+は対象について全射である。
+\end{lemma}
+
+\begin{proof}
+次を証明すれば十分である。任意の体 $k$ と $\Spec(k)$ 上の
+$\mathcal{Y}$ の対象 $y$ に対し、整数 $d \geq 1$ と、$U = \Spec(k)$ を
+満たす $\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ の対象
+$(U, Z, y, x, \alpha)$ が存在する。実際、この場合には体の拡大を必要としないという
+強い意味で $p$ が対象について全射であることが分かる。
+
+\medskip\noindent
+$U = \Spec(k)$ 上で $2$-ファイバー積
+$(\Sch/U')_{fppf} \times_{y', \mathcal{Y}, F} \mathcal{X}$ を表現する
+代数空間を $X_y$ と書く。仮定により射 $X_y \to \Spec(k)$ は全射かつ
+局所有限表示（かつ平坦）である。特に $X_y$ は空でない。
+空でないアフィンスキーム $V$ とエタール射 $V \to X_y$ を選ぶ。
+$V \to \Spec(k)$ は（平坦）、全射かつ局所有限表示であることに注意せよ
+（『空間の射』の定義
+\ref{spaces-morphisms-definition-locally-finite-presentation} による）。
+$V \to \Spec(k)$ が Cohen--Macaulay である閉点 $v \in V$
+（すなわち $V$ が $v$ で Cohen--Macaulay）を選ぶ。
+『射についてさらに』の補題
+\ref{more-morphisms-lemma-flat-finite-presentation-CM-open} を参照せよ。
+『射についてさらに』の補題 \ref{more-morphisms-lemma-slice-CM} を適用すると、
+$Z = \{v\}$ である正則埋め込み $Z \to V$ が得られる。
+これは $Z \to V$ が閉埋め込みであることを含意する。さらに
+$Z \to \Spec(k)$ は有限である（例えば『代数』の補題
+\ref{algebra-lemma-isolated-point} による）。したがって
+$Z \to \Spec(k)$ は、ある次数 $d$ の有限局所自由射である。
+さて $Z \to X_y$ は、閉埋め込みとそれに続くエタール射の合成として非分岐である
+（『空間の射』の補題
+\ref{spaces-morphisms-lemma-composition-unramified},
+\ref{spaces-morphisms-lemma-etale-unramified}, および
+\ref{spaces-morphisms-lemma-immersion-unramified} を参照）。
+最後に $Z \to X_y$ は、スキームの正則埋め込みとそれに続く代数空間の
+エタール射の合成として局所完全交差射である
+（『射についてさらに』の補題
+\ref{more-morphisms-lemma-regular-immersion-lci}、
+『空間の射』の補題 \ref{spaces-morphisms-lemma-etale-smooth} および
+\ref{spaces-morphisms-lemma-smooth-syntomic}、ならびに
+『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-flat-lci} および
+\ref{spaces-more-morphisms-lemma-composition-lci} を参照）。
+射 $Z \to X_y$ は、$Z$ 上の $\mathcal{X}$ の対象 $x$ と同型
+$\alpha : y|_Z \to F(x)$ に対応する。こうして
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象
+$(U, Z, y, x, \alpha)$ を得る。射 $Z \to X_y$ について上で述べたことから、
+これは実際に部分圏 $\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$ の
+対象であり、証明が完了する。
+\end{proof}
+
+
+
+\section{代数スタックのブートストラップ}
+\label{criteria-section-bootstrap}
+
+\noindent
+次の定理は本章の主要結果の一つである。
+
+\begin{theorem}
+\label{criteria-theorem-bootstrap}
+\begin{slogan}
+平坦グルーポイドの表現可能性に関する Artin の定理
+\end{slogan}
+$S$ をスキームとする。$F : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射とする。もし
+\begin{enumerate}
+\item $\mathcal{X}$ は代数空間により表現可能であり、
+\item $F$ は代数空間により表現可能、全射、平坦かつ局所有限表示である
+\end{enumerate}
+ならば、$\mathcal{Y}$ は代数スタックである。
+\end{theorem}
+
+\begin{proof}
+補題 \ref{criteria-lemma-flat-finite-presentation-surjective-diagonal} により、
+$\mathcal{Y}$ の対角射は代数空間により表現可能である。
+したがって、$\mathcal{V}$ が表現可能で $f$ が全射かつ滑らかであるような、
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射
+$f : \mathcal{V} \to \mathcal{Y}$ の存在だけを確認すればよい。
+補題 \ref{criteria-lemma-hilbert-stack-relative-space} により、
+$$
+\coprod\nolimits_{d \geq 1} \mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+$$
+は代数スタックである。補題
+\ref{criteria-lemma-lci-locus-stack-in-groupoids} と『代数スタック』の補題
+\ref{algebraic-lemma-open-fibred-category-is-algebraic} から、
+$$
+\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+$$
+も代数スタックである。$(\Sch/S)_{fppf}$ 上の表現可能な
+グルーポイドのスタック $\mathcal{V}$ と、全射かつ滑らかな $1$-射
+$$
+\mathcal{V}
+\longrightarrow
+\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+$$
+を選ぶ。合成
+$$
+\mathcal{V}
+\longrightarrow
+\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+\mathcal{Y}
+$$
+は滑らかかつ全射であると主張する。これにより定理の証明が完了する。
+実際、滑らかさは補題 \ref{criteria-lemma-limit-preserving} と
+\ref{criteria-lemma-lci-formally-smooth} の帰結であり、全射性は補題
+\ref{criteria-lemma-lci-surjective} の帰結である。次の段落で詳細を述べる。
+
+\medskip\noindent
+構成により、
+$\mathcal{V} \to
+\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$
+は代数空間により表現可能、全射かつ滑らかである（したがって、一般原理である
+『代数スタック』の補題
+\ref{algebraic-lemma-representable-transformations-property-implication} と
+『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-smooth-formally-smooth} により、
+局所有限表示かつ形式的に滑らかでもある）。補題
+\ref{criteria-lemma-representable-by-spaces-limit-preserving},
+\ref{criteria-lemma-representable-by-spaces-formally-smooth}, および
+\ref{criteria-lemma-representable-by-spaces-surjective} を適用すると、
+$\mathcal{V} \to
+\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})$
+は対象について極限保存的、対象について形式的に滑らか、かつ対象について
+全射であることが分かる。$1$-射
+$\coprod\nolimits_{d \geq 1} \mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y})
+\to \mathcal{Y}$ は、
+\begin{enumerate}
+\item 対象について極限保存的である。これは
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \to \mathcal{Y}$ については補題
+\ref{criteria-lemma-limit-preserving} であり、これを補題
+\ref{criteria-lemma-lci-locus-stack-in-groupoids},
+\ref{criteria-lemma-open-immersion-limit-preserving}, および
+\ref{criteria-lemma-composition-limit-preserving} と組み合わせると、
+$\mathcal{H}_{d, lci}(\mathcal{X}/\mathcal{Y}) \to \mathcal{Y}$ について得られる。
+\item 補題 \ref{criteria-lemma-lci-formally-smooth} により、対象について形式的に
+滑らかである。
+\item 補題 \ref{criteria-lemma-lci-surjective} により、対象について全射である。
+\end{enumerate}
+補題 \ref{criteria-lemma-composition-limit-preserving},
+\ref{criteria-lemma-composition-formally-smooth}, および
+\ref{criteria-lemma-composition-surjective} を用いると、合成
+$\mathcal{V} \to \mathcal{Y}$ は対象について極限保存的、
+対象について形式的に滑らか、かつ対象について全射であると結論する。
+補題 \ref{criteria-lemma-representable-by-spaces-limit-preserving},
+\ref{criteria-lemma-representable-by-spaces-formally-smooth}, および
+\ref{criteria-lemma-representable-by-spaces-surjective} を用いると、
+$\mathcal{V} \to \mathcal{Y}$ は局所有限表示、形式的に滑らか、かつ全射である。
+最後に、一般原理である『代数スタック』の補題
+\ref{algebraic-lemma-representable-transformations-property-implication} を介して、
+無限小持ち上げ判定法（『空間の射についてさらに』の補題
+\ref{spaces-more-morphisms-lemma-smooth-formally-smooth}）を用いると、
+$\mathcal{V} \to \mathcal{Y}$ は滑らかであることが分かり、証明が完了する。
+\end{proof}
+
+
+
+\section{応用}
+\label{criteria-section-applications}
+
+\noindent
+最初の課題は、「平坦かつ局所有限表示なグルーポイド」に付随する商スタック
+$[U/R]$ が代数スタックであることを示すことである。商スタックの定義については
+『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-quotient-stack} を参照せよ。
+次の補題は準備的なものであり、『代数スタック』の補題
+\ref{algebraic-lemma-smooth-quotient-smooth-presentation} の類似である。
+
+\begin{lemma}
+\label{criteria-lemma-flat-quotient-flat-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$(U, R, s, t, c)$ を $S$ 上の代数空間のグルーポイドとする。
+$s, t$ は平坦かつ局所有限表示であると仮定する。このとき射
+$\mathcal{S}_U \to [U/R]$ は平坦、局所有限表示かつ全射である。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$x : (\Sch/T)_{fppf} \to [U/R]$ を $1$-射とする。
+射影
+$$
+\mathcal{S}_U \times_{[U/R]} (\Sch/T)_{fppf}
+\longrightarrow
+(\Sch/T)_{fppf}
+$$
+が全射、平坦かつ局所有限表示であることを示さなければならない。
+左辺が代数空間 $F$ により表現可能であることはすでに分かっている。
+『代数スタック』の補題 \ref{algebraic-lemma-diagonal-quotient-stack} および
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。
+したがって、対応する代数空間の射 $F \to T$ が全射、局所有限表示かつ
+平坦であることを示さなければならない。ここで扱う代数空間の射の性質は
+終域上 fppf 局所的なので、これを $T$ 上 fppf 局所的に確認してよい。
+構成により、$T$ の fppf 被覆 $\{T_i \to T\}$ が存在して、
+$x|_{(\Sch/T_i)_{fppf}}$ は射 $x_i : T_i \to U$ から来る。
+（$F \times_T T_i$ は $2$-ファイバー積
+$\mathcal{S}_U \times_{[U/R]} (\Sch/T_i)_{fppf}$ を表現するので、
+すべてが $T_i \to T$ による基底変換と両立することに注意せよ。）
+したがって $x$ は $x : T \to U$ から来ると仮定してよい。
+この場合、
+$$
+\mathcal{S}_U \times_{[U/R]} (\Sch/T)_{fppf}
+=
+(\mathcal{S}_U \times_{[U/R]} \mathcal{S}_U)
+\times_{\mathcal{S}_U} (\Sch/T)_{fppf}
+=
+\mathcal{S}_R \times_{\mathcal{S}_U} (\Sch/T)_{fppf}
+$$
+である。第一の等式は『圏』の補題
+\ref{categories-lemma-2-fibre-product-erase-factor} により、第二の等式は
+『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-quotient-stack-2-cartesian} による。
+最後の $2$-ファイバー積は明らかに代数空間
+$F = R \times_{s, U, x} T$ により表現され、射影
+$R \times_{s, U, x} T \to T$ は、平坦かつ局所有限表示な代数空間の射
+$s : R \to U$ の基底変換として平坦かつ局所有限表示である。
+また、$s$ は切断（すなわちグルーポイドの恒等射 $e : U \to R$）をもつので、
+この射影は全射でもある。これで補題が証明された。
+\end{proof}
+
+\noindent
+この節の最初の主要結果は次である。
+
+\begin{theorem}
+\label{criteria-theorem-flat-groupoid-gives-algebraic-stack}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$(U, R, s, t, c)$ を $S$ 上の代数空間のグルーポイドとする。
+$s, t$ は平坦かつ局所有限表示であると仮定する。
+このとき商スタック $[U/R]$ は $S$ 上の代数スタックである。
+\end{theorem}
+
+\begin{proof}
+射
+$$
+(\Sch/U)_{fppf} \longrightarrow [U/R]
+$$
+について定理 \ref{criteria-theorem-bootstrap} の二条件を確認する。
+第一は（$U$ が代数空間なので）自明である。第二は補題
+\ref{criteria-lemma-flat-quotient-flat-presentation} である。
+\end{proof}
+
+
+
+\section{商スタックはいつ代数的か？}
+\label{criteria-section-quotient-algebraic}
+
+\noindent
+『空間のグルーポイド』の節 \ref{spaces-groupoids-section-stacks} で、
+代数空間のグルーポイド $(U, R, s, t, c)$ に付随する商スタック $[U/R]$ を
+定義した。$[U/R]$ は、対角射が代数空間により表現可能な
+グルーポイドのスタックであることに注意せよ
+（『ブートストラップ』の補題 \ref{bootstrap-lemma-quotient-stack-isom} と
+『代数スタック』の補題 \ref{algebraic-lemma-representable-diagonal} を参照）。
+さらに、代数空間 $U$ と $1$-射 $(\Sch/U)_{fppf} \to [U/R]$ が存在し、
+これは、対象の同型類の前層上の写像であって層化後に全射となるものを誘導する
+という意味で「fppf 全射」である。しかし一般には、$[U/R]$ が
+代数スタックになるとは限らない。これは定理 \ref{criteria-theorem-bootstrap} と
+矛盾しない。というのも、$1$-射 $(\Sch/U)_{fppf} \to [U/R]$ は
+平坦かつ局所有限表示とは限らないからである。
+
+\medskip\noindent
+非代数的な商スタックの例を作る最も簡単な方法は、$S$ をスキームとし、
+$G$ を $S$ 上の群スキームで $S$ に自明に作用するものとして、
+$[S/G]$ の形の商を調べることである。実際、以下の補題
+\ref{criteria-lemma-BG-algebraic} で、$[S/G]$ が代数的ならば
+$G \to S$ は平坦かつ局所有限表示でなければならないことを見る。
+明示的な例は『例』の節 \ref{examples-section-not-algebraic-stack} にある。
+
+\begin{lemma}
+\label{criteria-lemma-quotient-algebraic}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$(U, R, s, t, c)$ を $B$ 上の代数空間のグルーポイドとする。
+商スタック $[U/R]$ が代数スタックであることと、代数空間の射
+$g : U' \to U$ で次を満たすものが存在することは同値である。
+\begin{enumerate}
+\item 合成 $U' \times_{g, U, t} R \to R \xrightarrow{s} U$ は層の全射である。
+\item $(U', R', s', t', c')$ を $g$ による
+$(U, R, s, t, c)$ の制限とすると、射 $s', t' : R' \to U'$ は
+平坦かつ局所有限表示である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず $g : U' \to U$ が (1), (2) を満たすと仮定する。
+性質 (1) により $[U'/R'] \to [U/R]$ は同値である。
+『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-quotient-stack-restrict-equivalence} を参照せよ。
+定理 \ref{criteria-theorem-flat-groupoid-gives-algebraic-stack} により、商スタック
+$[U'/R']$ は代数スタックである。したがって『代数スタック』の補題
+\ref{algebraic-lemma-equivalent} により、$[U/R]$ も代数スタックである。
+
+\medskip\noindent
+逆に、$[U/R]$ は代数スタックであると仮定する。スキーム $W$ と
+全射かつ滑らかな $1$-射
+$$
+f : (\Sch/W)_{fppf} \longrightarrow [U/R]
+$$
+を選べる。$2$-Yoneda の補題（『代数スタック』の節
+\ref{algebraic-section-2-yoneda}）により、これは $W$ 上の
+$[U/R]$ の対象 $\xi$ に対応する。『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-quotient-stack-objects} における
+$[U/R]$ の記述により、スキームの全射、平坦かつ局所有限表示な射
+$b : U' \to W$ で、$\xi' = b^*\xi$ が射 $g : U' \to U$ に対応するものを
+見いだせる。$\xi'$ に対応する $1$-射
+$$
+f' : (\Sch/U')_{fppf} \longrightarrow [U/R].
+$$
+は全射、平坦かつ局所有限表示であることに注意せよ。
+『代数スタック』の補題
+\ref{algebraic-lemma-composition-representable-transformations-property}
+を参照せよ。したがって
+$(\Sch/U')_{fppf} \times_{[U/R]} (\Sch/U')_{fppf}$ は代数空間
+$$
+\mathit{Isom}_{[U/R]}(\text{pr}_0^*\xi', \text{pr}_1^*\xi') =
+(U' \times_S U')
+\times_{(g \circ \text{pr}_0, g \circ \text{pr}_1), U \times_S U} R = R'
+$$
+により表現され、これは $s'$ と $t'$ のいずれによっても $U'$ 上
+平坦かつ局所有限表示である。第一の等式については
+『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-quotient-stack-morphisms} を参照せよ。
+第二は制限の定義である。平坦性と局所有限表示性については基底変換を用いる。
+『代数スタック』の補題
+\ref{algebraic-lemma-base-change-representable-transformations-property} を参照せよ。
+この $R'$ の記述と『代数スタック』の補題
+\ref{algebraic-lemma-map-space-into-stack} により、標準的な充満忠実な
+$1$-射 $[U'/R'] \to [U/R]$ を得る。この $1$-射は、$f'$ が平坦、
+局所有限表示かつ全射なので本質的全射である
+（『スタック』の補題
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff} を参照）。
+別の証明には『代数スタック』の注
+\ref{algebraic-remark-flat-fp-presentation} を用いられる。
+最後に『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-quotient-stack-restrict-equivalence} を用いると、
+合成 $U' \times_{g, U, t} R \to R \xrightarrow{s} U$ は層の全射であると
+結論できる。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-group-quotient-algebraic}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$G$ を $B$ 上の群代数空間とする。$X$ を $B$ 上の代数空間とし、
+$a : G \times_B X \to X$ を $B$ 上の $X$ への $G$ の作用とする。
+商スタック $[X/G]$ が代数スタックであることと、代数空間の射
+$\varphi : X' \to X$ で次を満たすものが存在することは同値である。
+\begin{enumerate}
+\item $G \times_B X' \to X$、$(g, x') \mapsto a(g, \varphi(x'))$ は
+層の全射である。
+\item 規則
+$$
+T \longmapsto \{(x'_1, g, x'_2) \in (X' \times_B G \times_B X')(T)
+\mid \varphi(x'_1) = a(g, \varphi(x'_2))\}
+$$
+により与えられる代数空間 $X''$ の二つの射影 $X'' \to X'$ は
+平坦かつ局所有限表示である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この補題は補題 \ref{criteria-lemma-quotient-algebraic} の特別な場合である。
+実際、『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-quotient-stack} により、商スタック $[X/G]$ は、
+『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-groupoid-from-action} における群作用に付随する
+代数空間のグルーポイド $(X, G \times_B X, s, t, c)$ の商スタック
+$[X/G \times_B X]$ に等しい。条件 (1) を得るために小さな観察が一つ必要である。
+すなわち、射 $s : G \times_B X \to X$ は第二射影であり、射
+$t :  G \times_B X \to X$ は作用射 $a$ である。
+したがって補題 \ref{criteria-lemma-quotient-algebraic} の射
+$h : U' \times_{g, U, t} R \to R \xrightarrow{s} U$ は、現在の状況では射
+$$
+X' \times_{\varphi, X, a} (G \times_B X) \xrightarrow{\text{pr}_1} X
+$$
+に対応する。しかし、$G$ の逆元が与える対称性により、この射は補題の主張にある射
+$$
+(G \times_B X) \times_{\text{pr}_1, X, \varphi} X' \xrightarrow{a} X
+$$
+と同型である。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{criteria-lemma-BG-algebraic}
+\begin{slogan}
+ジェルブが代数的であることと、付随する群が平坦かつ局所有限表示であることは同値である
+\end{slogan}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$G$ を $B$ 上の群代数空間とし、$B$ に $G$ の自明な作用を与える。
+このとき商スタック $[B/G]$ が代数スタックであることと、
+$G$ が $B$ 上平坦かつ局所有限表示であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$G$ が $B$ 上平坦かつ局所有限表示ならば、定理
+\ref{criteria-theorem-flat-groupoid-gives-algebraic-stack} により、
+$[B/G]$ は代数スタックである。
+
+\medskip\noindent
+逆に、$[B/G]$ は代数スタックであると仮定する。補題
+\ref{criteria-lemma-group-quotient-algebraic} と作用が自明であることにより、
+代数空間 $B'$ と射 $B' \to B$ が存在して、(1) $B' \to B$ は層の全射、
+(2) 射影
+$$
+B' \times_B G \times_B B' \to B'
+$$
+は平坦かつ局所有限表示となる。$B' \to B$ の基底変換
+$B' \times_B G \times_B B' \to G \times_B B'$ も層の全射であることに
+注意せよ。したがって『空間上の降下』の補題
+\ref{spaces-descent-lemma-curiosity} から、射影
+$G \times_B B' \to B'$ は平坦かつ局所有限表示である。
+(1) により、各 $B_i \to B$ が $B' \to B$ を経由するような fppf 被覆
+$\{B_i \to B\}$ を見いだせる。ゆえに基底変換により
+$G \times_B B_i \to B_i$ は平坦かつ局所有限表示である。
+『空間上の降下』の補題
+\ref{spaces-descent-lemma-descending-property-flat} および
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation}
+により、$G \to B$ は平坦かつ局所有限表示であると結論する。
+\end{proof}
+
+\noindent
+後で、滑らかな $S$-空間を群代数空間 $G$ で割った商スタックは、
+$G$ が滑らかでない場合にも滑らかであることを見る
+（『スタックの射』の補題
+\ref{stacks-morphisms-lemma-smooth-quotient-stack}）。
+
+
+
+\section{エタール位相における代数スタック}
+\label{criteria-section-stacks-etale}
+
+\noindent
+$S$ をスキームとする。大 fppf サイト $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックを扱う代わりに、大エタールサイト
+$(\Sch/S)_\etale$ 上のグルーポイドのスタックを扱うこともできる。
+『代数スタック』の節
+\ref{algebraic-section-representable},
+\ref{algebraic-section-2-yoneda},
+\ref{algebraic-section-representable-morphism},
+\ref{algebraic-section-split},
+\ref{algebraic-section-representable-by-algebraic-spaces},
+\ref{algebraic-section-morphisms-representable-by-algebraic-spaces},
+\ref{algebraic-section-representable-properties}, および
+\ref{algebraic-section-stacks}
+の内容はすべて、$(\Sch/S)_\etale$ 上のグルーポイドをファイバーとする圏に
+対して意味をなす。このように、エタール位相で作業することにより
+代数スタックの第二の概念が得られる。fppf 位相のスタックは当然エタール位相の
+スタックなので、この概念は『代数スタック』の定義
+\ref{algebraic-definition-algebraic-stack} で導入した概念より
+（先験的には）弱い。しかし、次の補題が示すように、両概念は同値である。
+
+\begin{lemma}
+\label{criteria-lemma-stacks-etale}
+$\Sch_{fppf}$ と $\Sch_\etale$ の共通の基礎圏を $\Sch_\alpha$ と書く
+（『スタック上の層』の節 \ref{stacks-sheaves-section-sheaves} および
+『位相』の注 \ref{topologies-remark-choice-sites} を参照）。
+$S$ を $\Sch_\alpha$ の対象とする。次の性質をもつ、
+グルーポイドをファイバーとする圏
+$$
+p : \mathcal{X} \to \Sch_\alpha/S
+$$
+を考える。
+\begin{enumerate}
+\item $\mathcal{X}$ は $(\Sch/S)_\etale$ 上のグルーポイドのスタックである。
+\item 対角射 $\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$ は
+代数空間により表現可能である\footnote{ここでいう代数空間は、対角射が表現可能で
+スキームによる全射エタール被覆をもつエタール位相の層を意味してもよいし、
+『代数空間』の定義 \ref{spaces-definition-algebraic-space} で定義された
+代数空間を意味してもよい。実際、『ブートストラップ』の補題
+\ref{bootstrap-lemma-spaces-etale} により両者に違いはない。}。
+\item $U \in \Ob(\Sch_\alpha/S)$ と、全射かつ滑らかな $1$-射
+$(\Sch/U)_\etale \to \mathcal{X}$ が存在する。
+\end{enumerate}
+このとき $\mathcal{X}$ は、『代数スタック』の定義
+\ref{algebraic-definition-algebraic-stack} の意味で代数スタックである。
+\end{lemma}
+
+\begin{proof}
+補題の性質 (2), (3) と、『代数スタック』の定義
+\ref{algebraic-definition-algebraic-stack} の対応する性質 (2), (3) は
+位相に依存しないことに注意せよ。これは、これらの性質に現れるのが、
+グルーポイドをファイバーとする圏の $2$-ファイバー積、同圏の $1$-射と $2$-射、
+代数空間により表現可能な同圏の $1$-射という概念、およびそのような
+$1$-射が全射かつ滑らかであることの意味だけだからである。
+したがって、性質 (2), (3) をもつエタールなグルーポイドのスタック
+$\mathcal{X}$ が fppf なグルーポイドのスタックでもあることだけを
+証明すればよい。
+
+\medskip\noindent
+(2) を用い、代数空間
+$$
+(\Sch_\alpha/U) \times_\mathcal{X} (\Sch_\alpha/U)
+$$
+を表現するものを $R$ とする。(3) により射影 $s, t : R \to U$ は滑らかである。
+『代数スタック』の補題 \ref{algebraic-lemma-map-space-into-stack} の証明と
+まったく同様に、空間のグルーポイド $(U, R, s, t, c)$ と、標準的な
+充満忠実な $1$-射 $[U/R]_\etale \to \mathcal{X}$ が存在する。
+ここで $[U/R]_\etale$ は、グルーポイド値前層
+$$
+T \longmapsto (U(T), R(T), s(T), t(T), c(T))
+$$
+のエタールスタック化である。次を主張する。$V \to T$ が代数空間 $V$ から
+スキーム $T$ への全射かつ滑らかな射ならば、被覆 $\{V \to T\}$ を細分する
+エタール被覆 $\{T_i \to T\}$ が存在する。これは『射についてさらに』の補題
+\ref{more-morphisms-lemma-etale-dominates-smooth}、またはより一般的な
+『スタック上の層』の補題
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} から従う。
+この主張を用い、『代数スタック』の補題
+\ref{algebraic-lemma-stack-presentation} とまったく同様に論じると、
+$[U/R]_\etale \to \mathcal{X}$ は同値であることが従う。
+
+\medskip\noindent
+次に、$[U/R]$ を fppf 位相における商スタックとする。これは
+『代数スタック』の定理
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack} により
+代数スタックである。したがって $1$-射
+$$
+U \to [U/R]_\etale \to [U/R].
+$$
+がある。$U \to [U/R]_\etale \cong \mathcal{X}$ と
+$U \to [U/R]$ はいずれも全射かつ滑らかである
+（前者は仮定により、後者は上の定理による）。また、いずれの場合にも
+ファイバー積 $U \times_\mathcal{X} U$ と $U \times_{[U/R]} U$ は
+$R$ により表現可能である。したがって $1$-射
+$[U/R]_\etale \to [U/R]$ は充満忠実である
+（商スタックの射は $R$ への射により与えられる。『空間のグルーポイド』の節
+\ref{spaces-groupoids-section-explicit-quotient-stacks} を参照）。
+
+\medskip\noindent
+最後に、任意のスキーム $T$ と射 $t : T \to [U/R]$ に対し、ファイバー積
+$V = T \times_{U/R} U$ は $T$ 上全射かつ滑らかな代数空間である。
+上の主張により、エタール被覆 $\{T_i \to T\}_{i \in I}$ と
+$T$ 上の射 $T_i \to V$ が存在する。これは、$T$ 上の $[U/R]$ の対象
+$t$ がエタール局所的に $U$ から来ることを証明する。
+『スタック』の補題
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff} により、
+$[U/R]_\etale \to [U/R]$ は $(\Sch/S)_\etale$ 上の
+グルーポイドのスタックの同値であると結論する。これで証明が完了する。
+\end{proof}

@@ -1,0 +1,2155 @@
+% Generated mechanically from frozen input inputs/p06/ja/etale.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{40}
+\chapter{スキームのエタール（\'Etale）射}
+
+
+\phantomsection
+\label{etale-section-phantom}
+
+
+
+
+\section{序}
+\label{etale-section-introduction}
+
+\noindent
+本章では、スキームのエタール（\'etale）射を論じる。重要な概念のいくつかは、
+Noether スキームの場合を扱うことによって説明する。主な目標は、読者がエタール
+（\'etale）コホモロジーの専門書を読み始めるのに十分な可換代数の結果を集めることである。
+副次的な目標は、読者が「スキームのエタール（\'etale）位相」という語句を一般的な戯言の
+一例と呼ぶような冒涜に耽っているならば、そう呼ぶのをやめるに足る根拠を
+提示することである。
+
+\medskip\noindent
+スキームおよび可換代数に関する代数幾何の標準的な結果については、
+Stacks project の他の章を参照する。本章で述べる新しい結果については、
+詳しい証明を与える。
+
+
+
+
+\section{規約}
+\label{etale-section-conventions}
+
+\noindent
+本章では、スキームを局所 Noether と仮定し、環を Noether と仮定することが多い。
+ただし必要な場合には各主張でその都度この仮定を明記し、すべての仮定を列挙する。
+一方、以下は頻繁に用いる一般的事実であり、念頭に置くと有用である。
+\begin{enumerate}
+\item $A$ が Noether 環であり、環準同型 $A \to B$ が有限型ならば、これは有限表示である。
+『代数』補題 \ref{algebra-lemma-Noetherian-finite-type-is-finite-presentation} を参照せよ。
+\item 局所 Noether スキーム間の（局所）有限型射は、自動的に（局所）有限表示である。
+『射』補題 \ref{morphisms-lemma-noetherian-finite-type-finite-presentation} を参照せよ。
+\item ここに同様の事項をさらに追加する。
+\end{enumerate}
+
+
+
+
+\section{不分岐射}
+\label{etale-section-unramified-definition}
+
+\noindent
+まず Noether 局所環について「局所環の不分岐準同型」を定義する。単に「不分岐」という
+語を用いることはできない。『代数』節 \ref{algebra-section-unramified} には、これとは異なる
+不分岐環準同型の概念がすでに存在するからである。この概念を少し論じた後で大域化し、
+局所 Noether スキームの不分岐射を記述する。
+
+\begin{definition}
+\label{etale-definition-unramified-rings}
+$A$, $B$ を Noether 局所環とする。局所準同型 $A \to B$ が
+{\it 局所環の不分岐準同型}であるとは、次が成り立つことをいう。
+\begin{enumerate}
+\item $\mathfrak m_AB = \mathfrak m_B$,
+\item $\kappa(\mathfrak m_B)$ は $\kappa(\mathfrak m_A)$ の有限分離拡大である。
+\item $B$ は $A$ 上本質的有限型である（すなわち、有限型 $A$-代数をある素イデアルで
+局所化したものが $B$ である）。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これは『代数』節 \ref{algebra-section-unramified} の定義の局所版である。同節では、
+環準同型 $R \to S$ が不分岐であることを、それが有限型であり、かつ
+$\Omega_{S/R} = 0$ であることによって定義する。ある $g \in S$,
+$g \not \in \mathfrak q$ が存在して $R \to S_g$ が不分岐環準同型となるとき、
+$R \to S$ は素イデアル $\mathfrak q \subset S$ において不分岐であるという。
+『代数』補題 \ref{algebra-lemma-unramified-at-prime} および
+\ref{algebra-lemma-characterize-unramified} により、有限型環準同型 $R \to S$ と、
+$\mathfrak p \subset R$ の上にある $S$ の素イデアル $\mathfrak q$ に対して
+$$
+R \to S\text{ is unramified at }\mathfrak q
+\Leftrightarrow
+\mathfrak pS_{\mathfrak q} = \mathfrak q S_{\mathfrak q}
+\text{ and }
+\kappa(\mathfrak p) \subset \kappa(\mathfrak q)\text{ finite separable}
+$$
+が成り立つ。したがって、局所環の局所準同型について、上の定義の条件は不分岐性と
+密接に関係する。実際、次の補題がすでに得られている。
+
+\begin{lemma}
+\label{etale-lemma-characterize-unramified-Noetherian}
+\begin{slogan}
+不分岐性は茎に関する局所条件である。
+\end{slogan}
+$A$ を Noether 環とし、$A \to B$ を有限型とする。$\mathfrak q$ を
+$\mathfrak p \subset A$ の上にある $B$ の素イデアルとする。このとき、
+$A \to B$ が $\mathfrak q$ において不分岐であることと、
+$A_{\mathfrak p} \to B_{\mathfrak q}$ が局所環の不分岐準同型であることとは同値である。
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ。
+\end{proof}
+
+\noindent
+不分岐性を完備化によって特徴づける。Noether 局所環 $A$ に対し、極大イデアルに関する
+$A$ の完備化を $A^\wedge$ と書く。これはやはり Noether 局所環である。
+『代数』補題 \ref{algebra-lemma-completion-Noetherian-Noetherian} を参照せよ。
+
+\begin{lemma}
+\label{etale-lemma-unramified-completions}
+$A$, $B$ を Noether 局所環とし、$A \to B$ を局所準同型とする。
+\begin{enumerate}
+\item $A \to B$ が局所環の不分岐準同型ならば、$B^\wedge$ は有限
+$A^\wedge$-加群である。
+\item $A \to B$ が局所環の不分岐準同型であり、
+$\kappa(\mathfrak m_A) = \kappa(\mathfrak m_B)$ ならば、
+$A^\wedge \to B^\wedge$ は全射である。
+\item $A \to B$ が局所環の不分岐準同型であり、$\kappa(\mathfrak m_A)$ が
+分離閉ならば、$A^\wedge \to B^\wedge$ は全射である。
+\item $A$ と $B$ が完備離散付値環ならば、$A \to B$ が局所環の不分岐準同型であることと、
+$A$ の一意化元が $B$ の一意化元へ写り、剰余体拡大が有限分離拡大であることとは同値である
+（さらに $B$ は $A$ 上本質的有限型であるものとする）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は『代数』補題 \ref{algebra-lemma-finite-after-completion} の特別な場合である。
+(2) について、$\kappa(\mathfrak m_A)$-ベクトル空間
+$B^\wedge/\mathfrak m_{A^\wedge}B^\wedge$ は $1$ で生成されることに注意する。
+したがって Nakayama の補題（『代数』補題 \ref{algebra-lemma-NAK}）により、
+写像 $A^\wedge \to B^\wedge$ は全射である。(3) は (2) の特別な場合であり、
+(4) は定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-characterize-unramified-completions}
+$A$, $B$ を Noether 局所環とする。$B$ が $A$ 上本質的有限型となる局所準同型
+$A \to B$ をとる。このとき、次は同値である。
+\begin{enumerate}
+\item $A \to B$ は局所環の不分岐準同型である。
+\item $A^\wedge \to B^\wedge$ は局所環の不分岐準同型である。
+\item $A^\wedge \to B^\wedge$ は不分岐である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は、$\mathfrak m_AA^\wedge$ が $A^\wedge$ の極大イデアルであること
+（$B$ についても同様）と、$B \to B^\wedge$ の忠実平坦性から従う。例えば
+$A^\wedge \to B^\wedge$ が不分岐ならば、
+$\mathfrak m_AB^\wedge = (\mathfrak m_AB)B^\wedge = \mathfrak m_BB^\wedge$
+であり、したがって $\mathfrak m_AB = \mathfrak m_B$ である。
+
+\medskip\noindent
+同値な条件 (1), (2) を仮定する。補題 \ref{etale-lemma-unramified-completions} により、
+$A^\wedge \to B^\wedge$ は有限である。ゆえに $A^\wedge \to B^\wedge$ は有限表示であり、
+『代数』補題 \ref{algebra-lemma-characterize-unramified} により、
+$A^\wedge \to B^\wedge$ は $\mathfrak m_{B^\wedge}$ において不分岐である。
+$B^\wedge$ は局所環なので、$A^\wedge \to B^\wedge$ は不分岐である。
+
+\medskip\noindent
+(3) を仮定する。『代数』補題 \ref{algebra-lemma-unramified-at-prime} により、
+$A^\wedge \to B^\wedge$ は局所環の不分岐準同型である。すなわち (2) が成り立つ。
+\end{proof}
+
+\begin{definition}
+\label{etale-definition-unramified-schemes}
+（一般の場合の定義については『射』定義 \ref{morphisms-definition-unramified} を参照せよ。）
+$Y$ を局所 Noether スキームとし、$f : X \to Y$ を局所有限型とする。$x \in X$ とする。
+\begin{enumerate}
+\item 局所環の準同型 $\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ が不分岐ならば、
+$f$ は {\it $x$ において不分岐}であるという。
+\item $f : X \to Y$ が $X$ のすべての点において不分岐ならば、この射は
+{\it 不分岐}であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義がスキームの射に関する章の定義と一致することを示す。とりわけ、
+ある射が不分岐となる点の集合が開であることが保証される。
+
+\begin{lemma}
+\label{etale-lemma-unramified-definition}
+$Y$ を局所 Noether スキームとし、$f : X \to Y$ を局所有限型とする。
+$x \in X$ とする。このとき、定義 \ref{etale-definition-unramified-schemes} の意味で
+$f$ が $x$ において不分岐であることと、『射』定義
+\ref{morphisms-definition-unramified} の意味で不分岐であることとは同値である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{etale-lemma-characterize-unramified-Noetherian} と各定義から従う。
+\end{proof}
+
+\noindent
+不分岐射に関する結果をいくつか列挙する。以下の形の主張は、局所 Noether スキーム間の
+局所有限型射にのみ適用する。各項では project の前の箇所で証明された一般的結果を
+参照するが、Noether の場合にはより容易に証明できることもある。
+\begin{enumerate}
+\item 不分岐性は Zariski 位相に関して始域および終域上局所的である。
+\item 不分岐射は基底変換および合成で保たれる。『射』補題
+\ref{morphisms-lemma-base-change-unramified} および
+\ref{morphisms-lemma-composition-unramified} を参照せよ。
+\item スキームの不分岐射は局所準有限であり、準コンパクトな不分岐射は準有限である。
+『射』補題 \ref{morphisms-lemma-unramified-quasi-finite} を参照せよ。
+\item 不分岐射の相対次元は $0$ である。『射』定義
+\ref{morphisms-definition-relative-dimension-d} および『射』補題
+\ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0} を参照せよ。
+\item ある射が不分岐であることと、そのすべてのファイバーが不分岐であることとは同値である。
+すなわち、不分岐性はスキーム論的ファイバー上で判定できる。『射』補題
+\ref{morphisms-lemma-unramified-etale-fibres} を参照せよ。
+\item $X$ と $Y$ が基底スキーム $S$ 上不分岐ならば、$X$ から $Y$ への任意の
+$S$-射は不分岐である。『射』補題 \ref{morphisms-lemma-unramified-permanence} を参照せよ。
+\end{enumerate}
+
+\section{不分岐射のほかの三つの特徴づけ}
+\label{etale-section-three-other}
+
+\noindent
+次の定理は、ある点において不分岐であることについて、互いに同値な三つの概念を与える。
+一般のスキームに対する主張の（一部）については、『射』補題
+\ref{morphisms-lemma-unramified-at-point} を参照せよ。
+
+\begin{theorem}
+\label{etale-theorem-unramified-equivalence}
+$Y$ を局所 Noether スキームとする。$f : X \to Y$ を局所有限型なスキームの射とし、
+$x$ を $X$ の点とする。このとき、次は同値である。
+\begin{enumerate}
+\item $f$ は $x$ において不分岐である。
+\item $x$ における相対微分加群の茎 $\Omega_{X/Y, x}$ は零である。
+\item $x$ の開近傍 $U$ と $f(x)$ の開近傍 $V$、および可換図式
+$$
+\xymatrix{
+U \ar[rr]_i \ar[rd] & & \mathbf{A}^n_V \ar[ld] \\
+& V
+}
+$$
+が存在し、$i$ は準連接イデアル層 $\mathcal{I}$ によって定義される閉埋入であり、
+$g \in \mathcal{I}_{i(x)}$ に対する微分 $\text{d}g$ が
+$\Omega_{\mathbf{A}^n_V/V, i(x)}$ を生成する。
+\item 対角射 $\Delta_{X/Y} : X \to X \times_Y X$ は $x$ において局所同型である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) と (2) の同値性は『射』補題
+\ref{morphisms-lemma-unramified-at-point} で証明されている。
+
+\medskip\noindent
+$f$ が $x$ において不分岐ならば、$x$ のある開近傍上で $f$ は不分岐である。
+これは本章の定義 \ref{etale-definition-unramified-schemes} から直ちに従うわけではないが、
+『射』定義 \ref{morphisms-definition-unramified} から従う。この同値性は補題
+\ref{etale-lemma-unramified-definition} で示した。$f(U) \subset V$ および
+$x \in U$ を満たすアフィン開集合 $V \subset Y$, $U \subset X$ で、
+$f$ が $U$ 上不分岐、すなわち $f|_U : U \to V$ が不分岐となるものを選ぶ。
+『射』補題 \ref{morphisms-lemma-diagonal-unramified-morphism} により、射
+$U \to U \times_V U$ は開埋入である。したがって (1) は (4) を含意する。
+
+\medskip\noindent
+$\Delta_{X/Y}$ が $x$ において局所同型ならば、『射』補題
+\ref{morphisms-lemma-differentials-diagonal} により $\Omega_{X/Y, x} = 0$ である。
+ゆえに (4) は (2) を含意する。これで (1), (2), (4) がすべて同値であることが分かった。
+
+\medskip\noindent
+(3) を仮定する。図式についての仮定と『射』補題
+\ref{morphisms-lemma-differentials-relative-immersion} から
+$\Omega_{U/V, x} = 0$ が従う。$\Omega_{U/V, x} = \Omega_{X/Y, x}$ であるから、
+(2) が成り立つ。
+
+\medskip\noindent
+最後に (2) を仮定する。(3) を示すには $X$ と $Y$ 上で局所化して、$X$ と $Y$ がアフィンであると
+仮定してよい。$X = \Spec(B)$, $Y = \Spec(A)$ と書く。点 $x \in X$ は素イデアル
+$\mathfrak q \subset B$ に対応する。仮定は $\Omega_{B/A, \mathfrak q} = 0$ である
+（スキーム上の微分と可換代数における微分加群との関係については、『射』補題
+\ref{morphisms-lemma-differentials-affine} を参照せよ）。$Y$ は局所 Noether であり、
+$f$ は局所有限型だから、$A$ は Noether 環であり、
+$B \cong A[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ である。『性質』補題
+\ref{properties-lemma-locally-Noetherian} および『射』補題
+\ref{morphisms-lemma-locally-finite-type-characterize} を参照せよ。特に
+$\Omega_{B/A}$ は有限 $B$-加群である。したがって、ある一つの
+$g \in B$, $g \not \in \mathfrak q$ を選んで、主局所化
+$(\Omega_{B/A})_g$ を零にできる。そこで $B$ を $B_g$ で置き換えれば
+$\Omega_{B/A} = 0$ となる（微分加群の形成は局所化と可換である。『代数』補題
+\ref{algebra-lemma-differentials-localize} を参照せよ）。これは $\text{d}(f_j)$ が標準射
+$\Omega_{A[x_1, \ldots, x_n]/A} \otimes_A B \to \Omega_{B/A}$ の核を生成することを意味する。
+したがって、$A$-代数の全射 $A[x_1, \ldots, x_n] \to B$ は (3) の可換図式を与える。
+これで定理が証明された。
+\end{proof}
+
+\noindent
+この定理をどのように使えるだろうか。いくつか注意を挙げる。
+\begin{enumerate}
+\item $f : X \to Y$ と $g : Y \to Z$ を、局所 Noether スキーム間の局所有限型射とする。
+標準的な短完全列
+$$
+f^*(\Omega_{Y/Z}) \to \Omega_{X/Z} \to \Omega_{X/Y} \to 0
+$$
+が存在する。『射』補題 \ref{morphisms-lemma-triangle-differentials} を参照せよ。
+したがって、この定理から $g \circ f$ が不分岐ならば $f$ も不分岐であることが従う。
+これは『射』補題 \ref{morphisms-lemma-unramified-permanence} である。
+\item $\Omega_{X/Y}$ は対角射の余法層と同型である
+（『射』補題 \ref{morphisms-lemma-differentials-diagonal}）から、
+$X \to Y$ が局所 Noether スキームの局所有限型なモノ射ならば、$X \to Y$ は不分岐である。
+特に、局所 Noether スキームの開埋入および閉埋入は不分岐である。『射』補題
+\ref{morphisms-lemma-open-immersion-unramified} および
+\ref{morphisms-lemma-closed-immersion-unramified} を参照せよ。
+\item この定理からさらに、局所 Noether スキームの局所有限型射 $f : X \to Y$ が
+不分岐でない点の集合は、連接層 $\Omega_{X/Y}$ の台であることが従う。
+これにより「分岐軌跡」にスキーム論的な定義を与えられる。
+\end{enumerate}
+
+\section{不分岐射の関手的特徴づけ}
+\label{etale-section-functorial-unramified}
+
+\noindent
+初等的な代数幾何では、いくつかの射のクラスが関手的に特徴づけられ、そのような記述が
+非常に有用であることを学ぶ。不分岐射にも同様の特徴づけがある。
+
+\begin{theorem}
+\label{etale-theorem-formally-unramified}
+$f : X \to S$ をスキームの射とする。$S$ は局所 Noether スキームであり、
+$f$ は局所有限型であると仮定する。このとき、次は同値である。
+\begin{enumerate}
+\item $f$ は不分岐である。
+\item 射 $f$ は形式的不分岐である。すなわち、任意のアフィン $S$-スキーム $T$ と、
+平方零イデアルによって定義される $T$ の部分スキーム $T_0$ に対して、自然な写像
+$$
+\Hom_S(T, X) \longrightarrow \Hom_S(T_0, X)
+$$
+は単射である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+より一般的な主張と証明については、『射についてさらに』補題
+\ref{more-morphisms-lemma-unramified-formally-unramified} を参照せよ。
+以下では現在の場合の証明の概略を述べる。
+
+\medskip\noindent
+まず、両方の性質が始域および終域上局所的であることを確かめる。これにより
+$S$ と $X$ がアフィンであると仮定してよい。$X = \Spec(B)$,
+$S = \Spec(R)$ とし、$T = \Spec(C)$ とする。$J$ を $C$ の平方零イデアルで
+$T_0 = \Spec(C/J)$ を満たすものとする。次の図式が与えられていると仮定する。
+$$
+\xymatrix{
+& B \ar[d]^\phi \ar[rd]^{\bar{\phi}}
+& \\
+R \ar[r] \ar[ur] & C \ar[r]
+& C/J
+}
+$$
+次に、対応 $\phi' \mapsto \phi' - \phi$ が、$\bar{\phi}$ の持ち上げの集合と加群
+$\text{Der}_R(B, J)$ との間の全単射を与えることを確かめる。したがって、微分加群が
+零であることによる不分岐射の記述、すなわち定理
+\ref{etale-theorem-unramified-equivalence} から (1) $\Rightarrow$ (2) が得られる。
+
+\medskip\noindent
+逆の含意を得るため、平方零イデアル $J = I/I^2$ によって定義される全射
+$q : C = (B \otimes_R B)/I^2 \to B = C/J$ を考える。ここで $I$ は乗法写像
+$B \otimes_R B \to B$ の核である。すでに、例えば $b \mapsto b \otimes 1$ で定義される
+持ち上げ $B \to C$ がある。したがって上と同じ議論により、
+$\text{id} : B \to C/J$ の持ち上げと $\text{Der}_R(B, J)$ との間の全単射が得られる。
+ゆえに仮定から後者の加群は零である。しかし $J \cong \Omega_{B/R}$ であることが
+分かっている。したがって $B/R$ は不分岐である。
+\end{proof}
+
+
+
+\section{不分岐射の位相的性質}
+\label{etale-section-topological-unramified}
+
+\noindent
+まず有用となる位相的結果は、不分岐かつ分離的な射が「よい」切断をもつというものである。
+本節の内容には Noether 仮定を要しない。
+
+\begin{proposition}
+\label{etale-proposition-properties-sections}
+不分岐射の切断について、次が成り立つ。
+\begin{enumerate}
+\item 不分岐射の任意の切断は開埋入である。
+\item 分離射の任意の切断は閉埋入である。
+\item 不分岐分離射の任意の切断は開かつ閉である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+基底スキーム $S$ を固定する。$f : X' \to X$ を任意の $S$-射とすると、そのグラフ
+$\Gamma_f : X' \to X' \times_S X$ は、対角射
+$\Delta_{X/S} : X \to X \times_S X$ を射影
+$X' \times_S X \to X \times_S X$ によって基底変換して得られる。
+$g : X \to S$ が分離的（それぞれ\ 不分岐）ならば、『スキーム』定義
+\ref{schemes-definition-separated}（それぞれ\ 『射』補題
+\ref{morphisms-lemma-diagonal-unramified-morphism}）により、対角射は閉埋入
+（それぞれ開埋入）である。したがって、基底変換であるグラフも同様である
+（『スキーム』補題 \ref{schemes-lemma-base-change-immersion}）。特別な場合
+$X' = S$ に (1)、それぞれ (2) が得られる。(3) は (1) と (2) を合わせれば従う。
+\end{proof}
+
+\noindent
+これで不分岐射の切断を明示的に記述できる。
+
+\begin{theorem}
+\label{etale-theorem-sections-unramified-maps}
+$Y$ を連結スキームとし、$f : X \to Y$ を不分岐かつ分離的とする。
+$f$ の各切断は、ある連結成分の上への同型である。全単射な対応
+$$
+\text{sections of }f
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{connected components }X'\text{ of }X\text{ such that}\\
+\text{the induced map }X' \to Y\text{ is an isomorphism}
+\end{matrix}
+\right\}
+$$
+が存在する。特に、点 $x \in X$ が与えられたとき、$x$ を通る切断は高々一つである。
+\end{theorem}
+
+\begin{proof}
+命題 \ref{etale-proposition-properties-sections} の (3) から直ちに従う。
+\end{proof}
+
+\noindent
+前の定理は、不分岐射の「剛性」をある程度示している。次の命題はそれ自体興味深いだけでなく、
+代数的基本群の理論でも有用であり（\cite[Expos\'e V]{SGA1} を参照）、この剛性をさらに示す。
+より一般的な『射』補題 \ref{morphisms-lemma-value-at-one-point} も参照せよ。
+
+\begin{proposition}
+\label{etale-proposition-equality}
+$S$ をスキームとする。$\pi : X \to S$ を不分岐かつ分離的とする。
+$Y$ を $S$-スキームとし、$y \in Y$ を点とする。$f, g : Y \to X$ を二つの
+$S$-射とする。次を仮定する。
+\begin{enumerate}
+\item $Y$ は連結である。
+\item $x = f(y) = g(y)$ である。
+\item 剰余体上の誘導写像 $f^\sharp, g^\sharp : \kappa(x) \to \kappa(y)$ は等しい。
+\end{enumerate}
+このとき $f = g$ である。
+\end{proposition}
+
+\begin{proof}
+写像 $f, g : Y \to X$ は、構造射 $X_Y \to Y$ の切断である写像
+$f', g' : Y \to X_Y = Y \times_S X$ を定める。$f = g$ であることと
+$f' = g'$ であることとは同値である。構造射 $X_Y \to Y$ は $\pi$ の基底変換であるから、
+やはり不分岐かつ分離的である（『射』補題
+\ref{morphisms-lemma-base-change-unramified} および『スキーム』補題
+\ref{schemes-lemma-separated-permanence} を参照せよ）。したがって定理
+\ref{etale-theorem-sections-unramified-maps} により、$f'$ と $g'$ が $X_Y$ の同じ点を通ることを
+示せば十分である。これはまさに仮定 (2), (3) が保証すること、すなわち
+$f'(y) = g'(y) \in X_Y$ である。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-finitely-many-maps-to-unramified}
+$S$ を Noether スキームとする。$X \to S$ を準コンパクトな不分岐射とする。
+$Y \to S$ を射とし、$Y$ は Noether とする。このとき $\Mor_S(Y, X)$ は有限集合である。
+\end{lemma}
+
+\begin{proof}
+まず $X \to S$ が分離的であると仮定する（実際にはこの場合が多い）。$Y$ は Noether だから
+連結成分は有限個である。したがって $Y$ は連結であると仮定してよい。点 $y \in Y$ を選び、
+その像を $s \in S$ とする。$X \to S$ は不分岐かつ準コンパクトだから、ファイバー
+$X_s$ は有限である。$X_s = \{x_1, \ldots, x_n\}$ と書けば、
+$\kappa(x_i)/\kappa(s)$ は有限次体拡大である。『射』補題
+\ref{morphisms-lemma-unramified-quasi-finite},
+\ref{morphisms-lemma-residue-field-quasi-finite}, および
+\ref{morphisms-lemma-quasi-finite} を参照せよ。各 $i$ について、$\kappa(s)$-代数写像
+$\kappa(x_i) \to \kappa(y)$ は高々有限個である（初等的な体論による）。したがって命題
+\ref{etale-proposition-equality} により $\Mor_S(Y, X)$ は有限である。
+
+\medskip\noindent
+一般の場合を扱う。$X_U \to U$ が有限（特に分離的）となる空でない開集合
+$U \subset S$ が存在する。『射』補題 \ref{morphisms-lemma-generically-finite} を参照せよ
+（上ですでに準コンパクト不分岐射が準有限であることを見た。また『射』補題
+\ref{morphisms-lemma-finite-type-Noetherian-quasi-separated} により $X \to S$ は準分離的なので、
+この補題を適用できる）。$Z \subset S$ を $U$ の補集合上に台をもつ被約閉部分スキームとする。
+Noether 帰納法により $\Mor_Z(Y_Z, X_Z)$ は有限である（詳細は省略する）。第1段落の結果により
+$\Mor_U(Y_U, X_U)$ も有限である。したがって、写像
+$$
+\Mor_S(Y, X) \longrightarrow \Mor_Z(Y_Z, X_Z) \times \Mor_U(Y_U, X_U)
+$$
+が単射であることを示せば十分である。二つの射 $a, b : Y \to X$ が一致する点の集合は
+$Y$ において開であることから、これは従う。実際、対角射
+$\Delta : X \to X \times_S X$ は開である。『射』補題
+\ref{morphisms-lemma-diagonal-unramified-morphism} を参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+\section{普遍単射な不分岐射}
+\label{etale-section-universally-injective-unramified}
+
+\noindent
+スキームの射 $f : X \to Y$ が普遍単射であるとは、$f$ の任意の基底変換が
+（台となる位相空間上）単射であることをいう。『射』定義
+\ref{morphisms-definition-universally-injective} を参照せよ。
+普遍単射な不分岐射は次のように特徴づけられる。
+
+\begin{lemma}
+\label{etale-lemma-universally-injective-unramified}
+$f : X \to S$ をスキームの射とする。このとき、次は同値である。
+\begin{enumerate}
+\item $f$ は不分岐なモノ射である。
+\item $f$ は不分岐かつ普遍単射である。
+\item $f$ は局所有限型なモノ射である。
+\item $f$ は普遍単射、局所有限型、かつ形式的不分岐である。
+\item $f$ は局所有限型であり、任意の $s \in S$ に対して $X_s$ は空であるか、
+$X_s \to s$ が同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+形式的不分岐かつ局所有限型であることは、不分岐であることと同値であることを
+『射についてさらに』補題
+\ref{more-morphisms-lemma-unramified-formally-unramified} で見た。
+したがって (4) と (2) は同値である。モノ射は明らかに普遍単射かつ形式的不分岐だから、
+(3) は (4) を含意する。(1) が (3) を含意することも明らかである。最後に (2) が成り立つなら、
+$\Delta : X \to X \times_S X$ は開埋入
+（『射』補題 \ref{morphisms-lemma-diagonal-unramified-morphism}）であると同時に全射
+（『射』補題 \ref{morphisms-lemma-universally-injective}）であるから同型である。
+すなわち $f$ はモノ射であり、(2) は (1) を含意する。
+
+\medskip\noindent
+モノ射は基底変換で保たれること（『スキーム』補題
+\ref{schemes-lemma-base-change-monomorphism}）と、体のスペクトルへのモノ射の記述
+（『スキーム』補題 \ref{schemes-lemma-mono-towards-spec-field}）から、(3) は (5) を含意する。
+『射』補題 \ref{morphisms-lemma-universally-injective} および
+\ref{morphisms-lemma-unramified-etale-fibres} により、(5) は (4) を含意する。
+\end{proof}
+
+\noindent
+これから閉埋入について次の有用な特徴づけが得られる。
+
+\begin{lemma}
+\label{etale-lemma-characterize-closed-immersion}
+$f : X \to S$ をスキームの射とする。このとき、次は同値である。
+\begin{enumerate}
+\item $f$ は閉埋入である。
+\item $f$ は固有なモノ射である。
+\item $f$ は固有、不分岐、かつ普遍単射である。
+\item $f$ は普遍閉、不分岐、かつモノ射である。
+\item $f$ は普遍閉、不分岐、かつ普遍単射である。
+\item $f$ は普遍閉、局所有限型、かつモノ射である。
+\item $f$ は普遍閉、普遍単射、局所有限型、かつ形式的不分岐である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(4) -- (7) の同値性は補題 \ref{etale-lemma-universally-injective-unramified} から直ちに従う。
+
+\medskip\noindent
+$f : X \to S$ が (6) を満たすとする。『スキーム』補題
+\ref{schemes-lemma-monomorphism-separated} により $f$ は分離的であり、有限なファイバーをもつ。
+したがって『射についてさらに』補題 \ref{more-morphisms-lemma-characterize-finite} により
+$f$ は有限である。すると『射』補題 \ref{morphisms-lemma-finite-monomorphism-closed} から、
+$f$ は閉埋入、すなわち (1) が成り立つ。
+
+\medskip\noindent
+閉埋入は固有かつモノ射であるから (1) $\Rightarrow$ (2) である
+（『射』補題 \ref{morphisms-lemma-closed-immersion-proper} および『スキーム』補題
+\ref{schemes-lemma-immersions-monomorphisms}）。補題
+\ref{etale-lemma-universally-injective-unramified} により (2) は (3) を含意する。
+(3) が (5) を含意することは明らかである。
+\end{proof}
+
+\noindent
+同様の趣旨の結果をもう一つ挙げる。
+
+\begin{lemma}
+\label{etale-lemma-finite-unramified-one-point}
+$\pi : X \to S$ をスキームの射とし、$s \in S$ とする。次を仮定する。
+\begin{enumerate}
+\item $\pi$ は有限である。
+\item $\pi$ は不分岐である。
+\item $\pi^{-1}(\{s\}) = \{x\}$ である。
+\item $\kappa(s) \subset \kappa(x)$ は純非分離拡大である\footnote{条件 (2) のもとでは、
+これは $\kappa(s) = \kappa(x)$ と同値である。}。
+\end{enumerate}
+このとき $s$ の開近傍 $U$ で、
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$ が閉埋入となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+問題は $S$ 上局所的である。したがって $S = \Spec(A)$ と仮定してよい。
+有限射の定義から $X = \Spec(B)$ となる。$\pi$ を定める環準同型
+$\varphi : A \to B$ は有限不分岐環準同型である。$\mathfrak p \subset A$ を $s$ に対応する
+素イデアル、$\mathfrak q \subset B$ を $x$ に対応する素イデアルとする。
+条件 (2), (3), (4) から
+$B_{\mathfrak q}/\mathfrak pB_{\mathfrak q} = \kappa(\mathfrak p)$ が従う。
+『代数』補題 \ref{algebra-lemma-unique-prime-over-localize-below} により
+$B_{\mathfrak q} = B_{\mathfrak p}$ である（有限環準同型は上昇定理を満たすことに注意せよ。
+『代数』節 \ref{algebra-section-going-up} を参照せよ）。したがって
+$B_{\mathfrak p}/\mathfrak pB_{\mathfrak p} = \kappa(\mathfrak p)$ である。
+$B$ は有限 $A$-加群だから、Nakayama の補題（『代数』補題
+\ref{algebra-lemma-NAK}）により $B_{\mathfrak p} = \varphi(A_{\mathfrak p})$ である。
+さらに $B$ が有限 $A$-加群であることを用いると、ある
+$f \in A$, $f \not \in \mathfrak p$ が存在して $B_f = \varphi(A_f)$ となる。これが所望である。
+\end{proof}
+
+\noindent
+上で述べた位相的結果は、定理 \ref{etale-theorem-formally-unramified} と同様の
+\'etale 射の関手的特徴づけを与えるために用いる。
+
+
+
+
+
+\section{不分岐射の例}
+\label{etale-section-examples}
+
+\noindent
+いくつか例を挙げる。
+
+\begin{example}
+\label{etale-example-etale-field-extensions}
+$k$ を体とする。不分岐準コンパクト射 $X \to \Spec(k)$ はアフィンである。
+実際、$X$ は次元 $0$ の Noether スキームなので有限離散集合であり、各点はアフィン開集合を
+与える。ゆえに $X$ はアフィンの有限非交和、したがってアフィンである。Noether 正規化により、
+$X$ は有限 $k$-代数 $A$ のスペクトルでなければならない。この代数は $k$ の有限分離体拡大の
+積である。したがって、$\Spec(k)$ への不分岐準コンパクト射は、有限個の $k$ の有限分離体拡大に対応する。
+特に、始域が連結で終域が一点である不分岐射は、有限分離体拡大でなければならない。
+後で見るように、$X \to \Spec(k)$ が \'etale であることと、不分岐であることとは同値である。
+したがって少なくともこの場合、スキームの \'etale 位相を非常に容易に記述できる。
+もちろん、この位相のコホモロジーは別の話である。
+\end{example}
+
+\begin{example}
+\label{etale-example-standard-etale}
+定理 \ref{etale-theorem-unramified-equivalence} の性質 (3) は、不分岐射の標準的な例を与える。
+環 $R$ と整数 $n$ を固定する。$I = (g_1, \ldots, g_m)$ を
+$R[x_1, \ldots, x_n]$ のイデアルとし、$\mathfrak q \subset R[x_1, \ldots, x_n]$ を
+素イデアルとする。$I \subset \mathfrak q$ であり、行列
+$$
+\left(\frac{\partial g_i}{\partial x_j}\right) \bmod \mathfrak q
+\quad\in\quad
+\text{Mat}(n \times m, \kappa(\mathfrak q))
+$$
+の階数が $n$ であると仮定する。このとき、射
+$f : Z = \Spec(R[x_1, \ldots, x_n]/I) \to \Spec(R)$ は、
+$\mathfrak q$ に対応する点 $x \in Z \subset \mathbf{A}^n_R$ において不分岐である。
+明らかに $m \geq n$ でなければならない。極端な場合 $m = n$、すなわち $g_i$ たちが定める写像
+$\mathbf{A}^n_R \to \mathbf{A}^n_R$ の微分が接空間の同型である場合には、$f$ はさらに
+$x$ において平坦であり、したがって \'etale 射である（『代数』定義
+\ref{algebra-definition-standard-smooth}、補題 \ref{algebra-lemma-standard-smooth}、および例
+\ref{algebra-example-make-standard-smooth} を参照せよ）。
+\end{example}
+
+\begin{example}
+\label{etale-example-number-theory-etale}
+整数環が $\mathcal{O}_L$, $\mathcal{O}_K$ である数体の拡大 $L/K$ を固定する。
+単射 $K \to L$ は射 $f : \Spec(\mathcal{O}_L) \to \Spec(\mathcal{O}_K)$ を定める。
+上で論じたように、我々の意味で $f$ が不分岐となる点は、通常の意味で $f$ が不分岐となる点と
+一致する。通常の意味では、$\Spec(\mathcal{O}_L)$ における分岐軌跡は差イデアルの零点集合で
+定義できる。差イデアルは $\mathcal{O}_L$ のイデアルであり、実際には加群
+$\Omega_{\mathcal{O}_L/\mathcal{O}_K}$ の零化イデアルにほかならない。同様に、判別イデアルは
+$\mathcal{O}_K$ のイデアルであり、差イデアルのノルムである。判別イデアルの零点集合は、
+$L$ で分岐する $K$ の点の集合にちょうど等しい。そこで、$\Spec(\mathcal{O}_L)$ において
+差イデアルが定める閉部分集合の補集合を $X$ と書くと、不分岐射
+$X \to \Spec(\mathcal{O}_K)$ が得られる。さらに離散付値環の任意の局所準同型は平坦なので、
+この射も平坦であり、したがって実際には \'etale である。$L/K$ が有限 Galois 拡大ならば、
+$\Spec(\mathcal{O}_K)$ において判別イデアルが定める閉部分集合の補集合を $Y$ と書くと、
+有限 \'etale 射 $X \to Y$ さえ得られる。したがって、これは有限 \'etale 被覆の例である。
+\end{example}
+
+
+
+
+
+\section{平坦射}
+\label{etale-section-flat-morphisms}
+
+\noindent
+本節では、後で有用となる平坦性の諸性質をまとめる。そのため、定理を正確に述べ、
+証明への参照を与えるだけで十分とする。
+
+\medskip\noindent
+まず Noether 環上の平坦加群について必要な事実を簡単に復習し、その後、ある種の加群の
+「超平面切断」が平坦となるための十分条件を与える Grothendieck の定理を述べる。
+
+\begin{definition}
+\label{etale-definition-flat-rings}
+加群および環の平坦性を次のように定める。
+\begin{enumerate}
+\item 環 $A$ 上の加群 $N$ が {\it 平坦}であるとは、関手
+$M \mapsto M \otimes_A N$ が完全であることをいう。
+\item この関手がさらに忠実であるとき、$N$ は $A$ 上 {\it 忠実平坦}であるという。
+\item 環準同型 $f : A \to B$ が {\it 平坦（それぞれ忠実平坦）}であるとは、関手
+$M \mapsto M \otimes_A B$ が完全（それぞれ忠実かつ完全）であることをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+事実を『代数』章への参照とともに列挙する。
+\begin{enumerate}
+\item 自由加群および射影加群は平坦である。自由加群については明らかであり、射影加群は
+自由加群の直和因子であって $\otimes$ は直和と可換だから従う。
+\item 平坦性は局所的性質である。すなわち、$M$ が $A$ 上平坦であることと、任意の
+$\mathfrak p \in \Spec(A)$ に対して $M_{\mathfrak p}$ が $A_{\mathfrak p}$ 上平坦であることとは
+同値である。『代数』補題 \ref{algebra-lemma-flat-localization} を参照せよ。
+\item $M$ が平坦 $A$-加群で $A \to B$ が環準同型ならば、$M \otimes_A B$ は平坦
+$B$-加群である。『代数』補題 \ref{algebra-lemma-flat-base-change} を参照せよ。
+\item 局所環上の有限平坦加群は自由である。『代数』補題
+\ref{algebra-lemma-finite-flat-local} を参照せよ。
+\item $f : A \to B$ を任意の環の準同型とする。このとき $f$ が平坦であることと、任意の
+$\mathfrak q \in \Spec(B)$ に対して誘導写像
+$A_{f^{-1}(\mathfrak q)} \to B_{\mathfrak q}$ が平坦であることとは同値である。
+『代数』補題 \ref{algebra-lemma-flat-localization} を参照せよ。
+\item $f : A \to B$ が局所環の局所準同型ならば、$f$ が平坦であることと忠実平坦であることとは
+同値である。『代数』補題 \ref{algebra-lemma-local-flat-ff} を参照せよ。
+\item 環準同型 $A \to B$ が忠実平坦であることと、それが平坦であり、スペクトル上の誘導写像が
+全射であることとは同値である。『代数』補題 \ref{algebra-lemma-ff-rings} を参照せよ。
+\item $A$ が Noether 局所環ならば、完備化 $A^\wedge$ は $A$ 上忠実平坦である。
+『代数』補題 \ref{algebra-lemma-completion-faithfully-flat} を参照せよ。
+\item $A$ を Noether 局所環、$M$ を $A$-加群とする。このとき、$M$ が $A$ 上平坦であることと、
+$M \otimes_A A^\wedge$ が $A^\wedge$ 上平坦であることとは同値である（前項と『代数』補題
+\ref{algebra-lemma-flatness-descends} を組み合わせよ）。
+\end{enumerate}
+幾何学的圏へ移る前に、平坦加群を構成する便利な方法を与える Grothendieck の定理を述べる。
+
+\begin{theorem}
+\label{etale-theorem-flatness-grothendieck}
+$A$, $B$ を Noether 局所環とし、$f : A \to B$ を局所準同型とする。$M$ を、$A$-加群として
+平坦な有限 $B$-加群とする。$t \in \mathfrak m_B$ が、$M/\mathfrak m_AM$ 上の $t$ 倍写像を
+単射にする元ならば、$M/tM$ も $A$-平坦である。
+\end{theorem}
+
+\begin{proof}
+『代数』補題 \ref{algebra-lemma-mod-injective} を参照せよ。
+\cite[Section 20]{MatCA} も参照せよ。
+\end{proof}
+
+\begin{definition}
+\label{etale-definition-flat-schemes}
+（『射』定義 \ref{morphisms-definition-flat} を参照せよ。）
+$f : X \to Y$ をスキームの射とし、$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+\begin{enumerate}
+\item $x \in X$ とする。$\mathcal{F}_x$ が平坦 $\mathcal{O}_{Y, f(x)}$-加群であるとき、
+$\mathcal{F}$ は {\it $x \in X$ において $Y$ 上平坦}であるという。ここでは写像
+$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ によって $\mathcal{F}_x$ を
+$\mathcal{O}_{Y, f(x)}$-加群とみなしている。
+\item $x \in X$ とする。$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ が平坦であるとき、
+$f$ は {\it $x \in X$ において平坦}であるという。
+\item $f$ が $X$ のすべての点において平坦であるとき、この射は {\it 平坦}であるという。
+\item 平坦かつ全射な射 $f : X \to Y$ を {\it 忠実平坦}と呼ぶことがある。
+\end{enumerate}
+\end{definition}
+
+\noindent
+結果をもう一度列挙する。
+\begin{enumerate}
+\item 射が平坦であるという性質は、定義により、始域および終域上の Zariski 位相に関して局所的である。
+\item 開埋入は平坦である（局所環上に同型を誘導するので明らかである）。
+\item 平坦射は基底変換および合成で保たれる。『射』補題
+\ref{morphisms-lemma-base-change-flat} および \ref{morphisms-lemma-composition-flat}。
+\item $f : X \to Y$ が平坦ならば、引き戻し関手
+$\QCoh(\mathcal{O}_Y) \to \QCoh(\mathcal{O}_X)$ は完全である。茎を見れば直ちに従う。
+\item $f : X \to Y$ をスキームの射とし、$Y$ は準コンパクトかつ準分離的であると仮定する。
+この場合、関手 $f^*$ が完全ならば $f$ は平坦である（証明は省略する。ヒント：『性質』補題
+\ref{properties-lemma-extend-trivial} を用いて $Y$ が「十分多くの」イデアル層をもつことを示し、
+『代数』補題 \ref{algebra-lemma-flat} の平坦性の特徴づけを用いよ）。
+\end{enumerate}
+
+
+
+\section{平坦射の位相的性質}
+\label{etale-section-topological-flat}
+
+\noindent
+平坦射がもついくつかの開性を以下で「復習」する。
+
+\begin{theorem}
+\label{etale-theorem-flat-open}
+$Y$ を局所 Noether スキームとし、$f : X \to Y$ を局所有限型射とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。$X$ の点のうち、$\mathcal{F}$ が
+$Y$ 上平坦となる点の集合は開である。特に、$f$ が平坦となる点の集合は $X$ において開である。
+\end{theorem}
+
+\begin{proof}
+『射についてさらに』定理 \ref{more-morphisms-theorem-openness-flatness} を参照せよ。
+\end{proof}
+
+\begin{theorem}
+\label{etale-theorem-flat-map-open}
+$Y$ を局所 Noether スキームとし、$f : X \to Y$ を平坦な局所有限型射とする。
+このとき $f$ は（普遍）開である。
+\end{theorem}
+
+\begin{proof}
+『射』補題 \ref{morphisms-lemma-fppf-open} を参照せよ。
+\end{proof}
+
+\begin{theorem}
+\label{etale-theorem-flat-is-quotient}
+忠実平坦な準コンパクト射は Zariski 位相に関する商写像である。
+\end{theorem}
+
+\begin{proof}
+『射』補題 \ref{morphisms-lemma-fpqc-quotient-topology} を参照せよ。
+\end{proof}
+
+\noindent
+平坦射を研究する重要な理由の一つは、平坦射が、別のスキームの点によってパラメータ付けられた
+スキームの族という概念を捉えるのに適切な枠組みを与えることである。素朴には、任意の射
+$f : X \to S$ を $S$ の点でパラメータ付けられた族と考えたくなる。しかし、$f$ に平坦性の
+制約がなければ、このいわゆる族には実に奇妙な現象が起こりうる。例えば、相対次元
+（ファイバーの次元）が族の中で一定である保証はない。Hilbert 多項式のような他の数値的不変量も、
+ファイバーごとに変化しうる。平坦性はこのような現象を防ぎ、したがってファイバーにある種の
+「連続性」を与える。
+
+
+\section{\'Etale 射}
+\label{etale-section-etale-morphisms}
+
+\noindent
+本節では \'etale 射を定義し、その重要な性質をいくつか証明する。最も重要なのは間違いなく、
+定理 \ref{etale-theorem-formally-etale} の関手的特徴づけである。続いて、\'etale 拡大に対して
+不変な環の性質、すなわち、ある環に対して成り立つことと、そのすべての \'etale 拡大に対して
+成り立つことが同値であるような性質もいくつか論じる。これは \'etale コホモロジーの基本原理、
+すなわち \'etale 射は局所同型の代数的類似物である、という原理を動機づける。
+
+\medskip\noindent
+題名が示すように、ここでは \'etale 射のクラスを定義する。基底スキーム $S$ 上のスキームの圏で
+\'etale サイト $S_\etale$ を定義するため、このクラスの射の全射族を被覆とみなすことになる。
+直観的には、\'etale 射は被覆空間の概念を捉えるべきであり、したがって局所同型に近いはずである。
+代数閉体上の多様体を扱うならば、「局所同型」を「形式的局所同型」（完備化後の同型）に置き換える
+ことで、この最後の主張を定義にできる。その後、代数閉包への基底変換が前述の意味で \'etale である
+ことを要求すれば、任意の基礎体上で定義できる。しかし、このように美的でない構成を経由せず、
+少し抽象的ではあるが、より明快な代数的手法を採用する。
+
+\medskip\noindent
+まず Noether 局所環について「局所環の \'etale 準同型」を定義する。単に「\'etale」という語を
+用いることはできない。『代数』節 \ref{algebra-section-etale} には、これとは異なる \'etale 環準同型の
+概念がすでにあるからである。
+
+\begin{definition}
+\label{etale-definition-etale-ring}
+$A$, $B$ を Noether 局所環とする。局所準同型 $f : A \to B$ が
+{\it 局所環の \'etale 準同型}であるとは、それが平坦かつ局所環の不分岐準同型であることをいう
+（定義 \ref{etale-definition-unramified-rings} を参照せよ）。
+\end{definition}
+
+\noindent
+これは『代数』節 \ref{algebra-section-etale} における \'etale 環準同型の定義の局所版である。
+同節の正確な定義は、相対次元 $0$ の滑らかな環準同型であるというものである。
+『代数』補題 \ref{algebra-lemma-etale-standard-smooth} により、\'etale $R$-代数 $S$ は常に
+$$
+S = R[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+という表示をもち、
+$$
+g =
+\det
+\left(
+\begin{matrix}
+\partial f_1/\partial x_1 &
+\partial f_2/\partial x_1 &
+\ldots &
+\partial f_n/\partial x_1 \\
+\partial f_1/\partial x_2 &
+\partial f_2/\partial x_2 &
+\ldots &
+\partial f_n/\partial x_2 \\
+\ldots & \ldots & \ldots & \ldots \\
+\partial f_1/\partial x_n &
+\partial f_2/\partial x_n &
+\ldots &
+\partial f_n/\partial x_n
+\end{matrix}
+\right)
+$$
+の $S$ における像が可逆元となる。次の二つの補題が二つの概念を結びつける。
+
+\begin{lemma}
+\label{etale-lemma-characterize-etale-Noetherian}
+$A$ を Noether 環とし、$A \to B$ を有限型とする。$\mathfrak q$ を
+$\mathfrak p \subset A$ の上にある $B$ の素イデアルとする。このとき、$A \to B$ が
+$\mathfrak q$ において \'etale であることと、$A_{\mathfrak p} \to B_{\mathfrak q}$ が
+局所環の \'etale 準同型であることとは同値である。
+\end{lemma}
+
+\begin{proof}
+『代数』補題 \ref{algebra-lemma-etale}（\'etale 写像の平坦性）、
+\ref{algebra-lemma-etale-at-prime}（\'etale 写像は不分岐）、および
+\ref{algebra-lemma-characterize-etale}（平坦かつ不分岐な写像は \'etale）を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-characterize-etale-completions}
+$A$, $B$ を Noether 局所環とする。$A \to B$ を局所準同型とし、$B$ は $A$ 上本質的有限型とする。
+このとき、次は同値である。
+\begin{enumerate}
+\item $A \to B$ は局所環の \'etale 準同型である。
+\item $A^\wedge \to B^\wedge$ は局所環の \'etale 準同型である。
+\item $A^\wedge \to B^\wedge$ は \'etale である。
+\end{enumerate}
+さらにこの場合、ある $n \geq 1$ に対して $B^\wedge \cong (A^\wedge)^{\oplus n}$ が
+$A^\wedge$-加群として成り立つ。
+\end{lemma}
+
+\begin{proof}
+不分岐環準同型について対応する結果（補題
+\ref{etale-lemma-characterize-unramified-completions}）があるので、(1), (2), (3) の同値性を示すには、
+$A \to B$ が平坦であることと $A^\wedge \to B^\wedge$ が平坦であることとの同値性を
+示せば十分である。環準同型 $A \to A^\wedge$ および $B \to B^\wedge$ は忠実平坦だから、
+これは平坦写像の性質の一覧から明らかである。最後の主張について、補題
+\ref{etale-lemma-unramified-completions} により $B^\wedge$ は有限平坦 $A^\wedge$-加群である。
+したがって節 \ref{etale-section-flat-morphisms} の平坦加群の性質の一覧により有限自由である。
+\end{proof}
+
+\noindent
+上の補題に現れる整数 $n$ は、剰余体拡大の次数
+$[\kappa(\mathfrak m_B) : \kappa(\mathfrak m_A)]$ にほかならない。特に
+$\kappa(\mathfrak m_A)$ が分離閉ならば、$A^\wedge \to B^\wedge$ は同型であり、
+先の主張が正当化される。
+
+\begin{definition}
+\label{etale-definition-etale-schemes-1}
+（『射』定義 \ref{morphisms-definition-etale} を参照せよ。）
+$Y$ を局所 Noether スキームとし、$f : X \to Y$ を局所有限型なスキームの射とする。
+\begin{enumerate}
+\item $x \in X$ とする。$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ が局所環の
+\'etale 準同型であるとき、$f$ は {\it $x \in X$ において \'etale} であるという。
+\item この射がそのすべての点で \'etale であるとき、{\it \'etale} であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義がスキームの射に関する章の定義と一致することを示す。とりわけ、ある射が
+\'etale となる点の集合が開であることが保証される。
+
+\begin{lemma}
+\label{etale-lemma-etale-definition}
+$Y$ を局所 Noether スキームとし、$f : X \to Y$ を局所有限型とする。$x \in X$ とする。
+このとき、$f$ が定義 \ref{etale-definition-etale-schemes-1} の意味で $x$ において \'etale であることと、
+『射』定義 \ref{morphisms-definition-etale} の意味で $x$ において \'etale であることとは同値である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{etale-lemma-characterize-etale-Noetherian} と各定義から従う。
+\end{proof}
+
+\noindent
+\'etale 射に関する結果をいくつか列挙する。以下の形の主張は、局所 Noether スキーム間の
+局所有限型射にのみ適用する。各項では project の前の箇所で証明された一般的結果を参照するが、
+Noether の場合にはより容易に証明できることもある。
+\begin{enumerate}
+\item \'etale 射は不分岐である（各定義から明らかである）。
+\item \'Etale 性は Zariski 位相に関して始域および終域上局所的である。
+\item \'Etale 射は基底変換および合成で保たれる。『射』補題
+\ref{morphisms-lemma-base-change-etale} および \ref{morphisms-lemma-composition-etale} を参照せよ。
+\item スキームの \'Etale 射は局所準有限であり、準コンパクトな \'etale 射は準有限である
+（不分岐射について前に見た結果から従う）。
+\item \'Etale 射の相対次元は $0$ である。『射』定義
+\ref{morphisms-definition-relative-dimension-d} および『射』補題
+\ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0} を参照せよ。
+\item ある射が \'etale であることと、それが平坦であり、すべてのファイバーが \'etale であることとは
+同値である。『射』補題 \ref{morphisms-lemma-etale-flat-etale-fibres} を参照せよ。
+\item \'Etale 射は開である。実際、\'etale 射は平坦であり、定理
+\ref{etale-theorem-flat-map-open} を適用できる。
+\item $X$ と $Y$ が基底スキーム $S$ 上 \'etale ならば、$X$ から $Y$ への任意の
+$S$-射は \'etale である。『射』補題 \ref{morphisms-lemma-etale-permanence} を参照せよ。
+\end{enumerate}
+
+
+
+
+
+
+\section{構造定理}
+\label{etale-section-structure-etale-map}
+
+\noindent
+\'etale 射および不分岐射の局所構造を記述する定理を述べる。この定理はそれ自体明らかに重要で
+あるだけでなく、これまで用いてきた定義よりも幾何学的直観をよく捉える、\'etale 射の別の定義へ
+移ることを可能にする。
+
+\medskip\noindent
+主張には {\it 標準 \'etale 環準同型}の概念が必要である。『代数』定義
+\ref{algebra-definition-standard-etale} を参照せよ。具体的に、$R$ を環とし、
+$f, g \in R[t]$ を次を満たす多項式とする。
+\begin{enumerate}
+\item[(a)] $f$ はモニック多項式である。
+\item[(b)] $f' = \text{d}f/\text{d}t$ は局所化 $R[t]_g/(f)$ において可逆である。
+\end{enumerate}
+このとき写像
+$$
+R \longrightarrow R[t]_g/(f) = R[t, 1/g]/(f)
+$$
+は標準 \'etale 代数であり、任意の標準 \'etale 代数はこの形のものと同型である。
+このような環準同型が平坦かつ不分岐、したがって（もちろん予想どおり）\'etale であることを
+証明するのはよい演習である。標準 \'etale 環準同型の特別な場合は、$f$ をモニック多項式とする
+任意の環準同型
+$$
+R \longrightarrow R[t]_{f'}/(f) = R[t, 1/f']/(f)
+$$
+であり、任意の標準 \'etale 代数はこのうちの一つの主局所化と（同型で）ある。
+
+\begin{theorem}
+\label{etale-theorem-structure-etale}
+$f : A \to B$ を局所環の \'etale 準同型とする。このとき、次を満たす
+$f, g \in A[t]$ が存在する。
+\begin{enumerate}
+\item $B' = A[t]_g/(f)$ は標準 \'etale である。上の (a), (b) を参照せよ。
+\item $B$ は $B'$ をある素イデアルで局所化したものと同型である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+ある有限型 $A$-代数 $B'$ によって
+$B = B'_{\mathfrak q}$ と書く（$B$ は $A$ 上本質的有限型なので可能である）。補題
+\ref{etale-lemma-characterize-etale-Noetherian} により、$A \to B'$ は $\mathfrak q$ において
+\'etale である。そこで『代数』命題 \ref{algebra-proposition-etale-locally-standard} を適用すれば、
+$B'$ のある主局所化が標準 \'etale であることが分かる。
+\end{proof}
+
+\noindent
+局所環の不分岐準同型に対する版は次のとおりである。
+
+\begin{theorem}
+\label{etale-theorem-structure-unramified}
+$f : A \to B$ を局所環の不分岐射とする。このとき、次を満たす
+$f, g \in A[t]$ が存在する。
+\begin{enumerate}
+\item $B' = A[t]_g/(f)$ は標準 \'etale である。上の (a), (b) を参照せよ。
+\item $B$ は $B'$ をある素イデアルで局所化したものの商と同型である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+ある有限型 $A$-代数 $B'$ によって
+$B = B'_{\mathfrak q}$ と書く（$B$ は $A$ 上本質的有限型なので可能である）。補題
+\ref{etale-lemma-characterize-unramified-Noetherian} により、$A \to B'$ は $\mathfrak q$ において
+不分岐である。そこで『代数』命題 \ref{algebra-proposition-unramified-locally-standard} を
+適用すれば、$B'$ のある主局所化が標準 \'etale $A$-代数の商であることが分かる。
+\end{proof}
+
+\noindent
+標準的な持ち上げの議論を用いると、後で本質的に用いる次の幾何学的主張が得られる。
+
+\begin{theorem}
+\label{etale-theorem-geometric-structure}
+$\varphi : X \to Y$ をスキームの射、$x \in X$ とする。$V \subset Y$ を
+$\varphi(x)$ のアフィン開近傍とする。$\varphi$ が $x$ において \'etale ならば、
+$x \in U$ および $\varphi(U) \subset V$ を満たすアフィン開集合 $U \subset X$ が存在し、
+次の図式を得る。
+$$
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \ar[r]_-j & \Spec(R[t]_{f'}/(f)) \ar[d] \\
+Y & V \ar[l] \ar@{=}[r] & \Spec(R)
+}
+$$
+ここで $j$ は開埋入であり、$f \in R[t]$ はモニックである。
+\end{theorem}
+
+\begin{proof}
+主張は少し異なるが、これは『射』補題
+\ref{morphisms-lemma-etale-locally-standard-etale} と同値である。
+不分岐射に対する変種については、『多様体』補題
+\ref{varieties-lemma-geometric-structure-unramified} も参照せよ。
+\end{proof}
+
+
+\section{\'Etale 射と滑らかな射}
+\label{etale-section-etale-smooth}
+
+\noindent
+\'etale 射は相対次元零の滑らかな射である。射影 $\mathbf{A}^n_S \to S$ は、相対次元 $n$ の
+滑らかな射の標準的な例である。任意の滑らかな射は \'etale 局所的にこの形になる。
+正確な主張は次のとおりである。
+
+\begin{theorem}
+\label{etale-theorem-smooth-etale-over-n-space}
+$\varphi : X \to Y$ をスキームの射、$x \in X$ とする。$\varphi$ が $x$ において滑らかならば、
+整数 $n \geq 0$ と、$x \in U$ および $\varphi(U) \subset V$ を満たすアフィン開集合
+$V \subset Y$, $U \subset X$ が存在し、次の可換図式が存在する。
+$$
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \ar[r]_-\pi &
+\mathbf{A}^n_R \ar[d] \ar@{=}[r] &  \Spec(R[x_1, \ldots, x_n]) \ar[dl] \\
+Y & V \ar[l] \ar@{=}[r] & \Spec(R)
+}
+$$
+ここで $\pi$ は \'etale である。
+\end{theorem}
+
+\begin{proof}
+『射』補題 \ref{morphisms-lemma-smooth-etale-over-affine-space} を参照せよ。
+\end{proof}
+
+
+
+
+\section{\'Etale 射の位相的性質}
+\label{etale-section-topological-etale}
+
+\noindent
+\'etale 射および不分岐射の位相的性質をいくつか述べる。まず Grothendieck が
+{\it \'etale 射の基本性質}と呼ぶものを与える。\cite[Expos\'e I.5]{SGA1} を参照せよ。
+
+\begin{theorem}
+\label{etale-theorem-etale-radicial-open}
+$f : X \to Y$ をスキームの射とする。このとき、次は同値である。
+\begin{enumerate}
+\item $f$ は開埋入である。
+\item $f$ は普遍単射かつ \'etale である。
+\item $f$ は局所有限表示な平坦モノ射である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+開埋入の任意の基底変換は開埋入だから、開埋入は普遍単射である。さらに『射』補題
+\ref{morphisms-lemma-open-immersion-etale} により \'etale である。したがって (1) は (2) を含意する。
+
+\medskip\noindent
+$f$ は普遍単射かつ \'etale であると仮定する。$f$ は \'etale だから、平坦かつ局所有限表示である。
+『射』補題 \ref{morphisms-lemma-etale-flat} および
+\ref{morphisms-lemma-etale-locally-finite-presentation} を参照せよ。補題
+\ref{etale-lemma-universally-injective-unramified} により $f$ はモノ射である。したがって (2) は (3) を含意する。
+
+\medskip\noindent
+$f$ は平坦、局所有限表示、かつモノ射であると仮定する。『射』補題
+\ref{morphisms-lemma-fppf-open} により $f$ は開である。そこで $Y$ を $f(X)$ で置き換え、
+$f$ は全射であると仮定してよい。このとき $f$ は開かつ全単射なので同相であり、したがって
+$f$ は準コンパクトである。ゆえに『降下』補題
+\ref{descent-lemma-flat-surjective-quasi-compact-monomorphism-isomorphism} により $f$ は同型である。
+これで示された。
+\end{proof}
+
+\noindent
+同様の趣旨の結果をもう一つ挙げる。
+
+\begin{lemma}
+\label{etale-lemma-finite-etale-one-point}
+$\pi : X \to S$ をスキームの射、$s \in S$ とする。次を仮定する。
+\begin{enumerate}
+\item $\pi$ は有限である。
+\item $\pi$ は \'etale である。
+\item $\pi^{-1}(\{s\}) = \{x\}$ である。
+\item $\kappa(s) \subset \kappa(x)$ は純非分離拡大である\footnote{条件 (2) のもとでは、
+これは $\kappa(s) = \kappa(x)$ と同値である。}。
+\end{enumerate}
+このとき $s$ の開近傍 $U$ で、
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$ が同型となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{etale-lemma-finite-unramified-one-point} により、$s$ の開近傍 $U$ で
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$ が閉埋入となるものが存在する。しかし \'etale かつ
+閉埋入である射は開埋入である（例えば定理 \ref{etale-theorem-etale-radicial-open} による）。
+したがって $U$ を縮小すれば同型が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-relative-frobenius-etale}
+$U \to X$ をスキームの \'etale 射とし、$X$ は標数 $p$ のスキームとする。
+このとき相対 Frobenius 射 $F_{U/X} : U \to U \times_{X, F_X} X$ は同型である。
+\end{lemma}
+
+\begin{proof}
+『多様体』補題 \ref{varieties-lemma-relative-frobenius} により、射 $F_{U/X}$ は普遍同相である。
+これは $X$ 上 \'etale なスキーム間の射なので、$F_{U/X}$ は \'etale である
+（『射』補題 \ref{morphisms-lemma-etale-permanence}）。したがって定理
+\ref{etale-theorem-etale-radicial-open} により $F_{U/X}$ は同型である。
+\end{proof}
+
+
+
+
+
+
+\section{\'Etale 位相の位相的不変性}
+\label{etale-section-topological-invariance}
+
+\noindent
+次に、概略的にいえば \'etale 性は位相的性質であることを述べる、きわめて重要な定理を与える。
+
+\begin{theorem}
+\label{etale-theorem-etale-topological}
+$X$ と $Y$ を基底スキーム $S$ 上の二つのスキームとする。$S_0$ を、同じ台位相空間をもつ
+$S$ の閉部分スキームとする（例えば $S$ における $S_0$ のイデアル層が平方零である場合）。
+基底変換 $S_0 \times_S X$（それぞれ\ $S_0 \times_S Y$）を $X_0$（それぞれ\ $Y_0$）と書く。
+$X$ が $S$ 上 \'etale ならば、写像
+$$
+\Mor_S(Y, X) \longrightarrow \Mor_{S_0}(Y_0, X_0)
+$$
+は全単射である。
+\end{theorem}
+
+\begin{proof}
+$Y \to S$ によって基底変換し、$Y = S$ と仮定してよい。この場合、定理は、任意の $S$-射
+$\sigma_0 : S_0 \to X$ が、\'etale 構造射 $f : X \to S$ の切断 $S \to X$ を通って一意的に
+分解することを述べている。
+
+\medskip\noindent
+一意性を示す。$\sigma_0$ が二つの切断 $\sigma, \sigma'$ を通って分解すると仮定する。
+$X \to S$ は \'etale なので、対角射 $\Delta : X \to X \times_S X$ は開埋入である
+（『射』補題 \ref{morphisms-lemma-diagonal-unramified-morphism}）。任意の $s \in S$ に対して
+$(\sigma, \sigma')(s) = (\sigma_0(s), \sigma_0(s))$ だから、射
+$(\sigma, \sigma') : S \to X \times_S X$ はこの開集合を通って分解する。
+したがって $\sigma = \sigma'$ である。
+
+\medskip\noindent
+存在を示すため、まずアフィンの場合に帰着する（読者にはこの段階を読み飛ばすことを勧める）。
+$X = \bigcup X_i$ を、各 $X_i$ が $S$ のあるアフィン開集合 $S_i$ に写るようなアフィン開被覆とする。
+任意の $s \in S$ に対して $\sigma_0(s) \in X_i$ を満たす $i$ を選べる。
+$\sigma_0(U_0) \subset X_{i, 0}$ を満たす $s$ のアフィン開近傍 $U \subset S_i$ を選ぶ。
+$X' = X_i \times_S U = X_i \times_{S_i} U$ はアフィンであることに注意せよ。
+$\sigma_0|_{U_0} : U_0 \to X'_0$ を $U \to X'$ に持ち上げられれば、一意性により、これらの
+局所的持ち上げは大域射 $S \to X$ に貼り合わさる。したがって $S$ と $X$ はアフィンと仮定してよい。
+
+\medskip\noindent
+$S$ と $X$ がアフィンの場合の存在を示す。$S = \Spec(A)$, $X = \Spec(B)$ と書く。
+このとき $A \to B$ は \'etale、特に相対次元 $0$ の滑らかな写像である。
+$|S_0| = |S|$ だから、$S_0 = \Spec(A/I)$ であり、$I \subset A$ は局所冪零である。
+したがって存在は『代数』補題 \ref{algebra-lemma-smooth-strong-lift} から従う。
+\end{proof}
+
+\noindent
+前の定理の証明から、約束した \'etale 射の関手的特徴づけの一方向も得られる。次の定理は
+『\'Etale コホモロジー』定理 \ref{etale-cohomology-theorem-topological-invariance} で強められる。
+
+\begin{theorem}[圏の顕著な同値（Une equivalence remarquable de cat\'egories）]
+\label{etale-theorem-remarkable-equivalence}
+\begin{reference}
+\cite[IV, Theorem 18.1.2]{EGA}
+\end{reference}
+$S$ をスキームとする。$S_0 \subset S$ を同じ台位相空間をもつ閉部分スキームとする
+（例えば $S$ における $S_0$ のイデアル層が平方零である場合）。関手
+$$
+X \longmapsto X_0 = S_0 \times_S X
+$$
+は圏の同値
+$$
+\{
+\text{schemes }X\text{ \'etale over }S
+\}
+\leftrightarrow
+\{
+\text{schemes }X_0\text{ \'etale over }S_0
+\}
+$$
+を定める。
+\end{theorem}
+
+\begin{proof}
+定理 \ref{etale-theorem-etale-topological} により、この関手は充満忠実である。
+本質的全射であることを示せばよい。$Y \to S_0$ をスキームの \'etale 射とする。
+
+\medskip\noindent
+$S$ と $Y$ がアフィンならば結果が成り立つと仮定する。この場合、各 $V_j$ が $S$ のある
+アフィン開集合に写るようなアフィン開被覆 $Y = \bigcup V_j$ を選ぶ。仮定したアフィンの場合により、
+$W_{j, 0} \cong V_j$（$S_0$ 上のスキームとして）を満たす \'etale 射 $W_j \to S$ を選べる。
+$W_{j, j'} \subset W_j$ を、その台位相空間が $V_j \cap V_{j'}$ に対応する開部分スキームとする。
+$S_0$ 上のスキームとして同型
+$$
+W_{j, j', 0} \cong V_j \cap V_{j'} \cong W_{j', j, 0}
+$$
+があるから、充満忠実性により、$S$ 上のスキームの同型
+$\theta_{j, j'} : W_{j, j'} \to W_{j', j}$ が得られる。これらの同型が『スキーム』節
+\ref{schemes-section-glueing-schemes} のコサイクル条件を満たすことの確認は省略する。
+『スキーム』補題 \ref{schemes-lemma-glue-schemes} を適用し、同一視 $\theta_{j, j'}$ に沿って
+スキーム $W_j$ を貼り合わせることで、スキーム $X \to S$ を得る。構成により
+$X \to S$ が \'etale かつ $X_0 \cong Y$ であることは明らかである。
+
+\medskip\noindent
+したがって $S$ と $Y$ がアフィンの場合に補題を示せば十分である。
+$S = \Spec(R)$, $S_0 = \Spec(R/I)$ と書き、$I$ は局所冪零とする。
+『代数』補題 \ref{algebra-lemma-etale-standard-smooth} により、$Y$ は環 $\overline{A}$ の
+スペクトルであり、
+$$
+\overline{A} = (R/I)[x_1, \ldots, x_n]/(\overline{f}_1, \ldots, \overline{f}_n)
+$$
+かつ
+$$
+\overline{g} =
+\det
+\left(
+\begin{matrix}
+\partial \overline{f}_1/\partial x_1 &
+\partial \overline{f}_2/\partial x_1 &
+\ldots &
+\partial \overline{f}_n/\partial x_1 \\
+\partial \overline{f}_1/\partial x_2 &
+\partial \overline{f}_2/\partial x_2 &
+\ldots &
+\partial \overline{f}_n/\partial x_2 \\
+\ldots & \ldots & \ldots & \ldots \\
+\partial \overline{f}_1/\partial x_n &
+\partial \overline{f}_2/\partial x_n &
+\ldots &
+\partial \overline{f}_n/\partial x_n
+\end{matrix}
+\right)
+$$
+の $\overline{A}$ における像が可逆元となる。任意の持ち上げ
+$f_i \in R[x_1, \ldots, x_n]$ を選び、
+$$
+A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+とおく。$I$ は局所冪零なので、イデアル $IA$ も局所冪零である
+（『代数』補題 \ref{algebra-lemma-locally-nilpotent}）。$\overline{A} = A/IA$ に注意せよ。
+したがって『代数』補題 \ref{algebra-lemma-locally-nilpotent-unit} により、$f_i$ の偏微分行列の
+行列式は代数 $A$ において可逆である。ゆえに $R \to A$ は \'etale であり、証明が完了する。
+\end{proof}
+
+
+
+\section{関手的特徴づけ}
+\label{etale-section-functorial-etale}
+
+\noindent
+最後に、約束した関手的特徴づけを述べる。したがって、スキームの \'etale 射については、
+次の四つの見方がある。
+\begin{enumerate}
+\item 相対次元 $0$ の滑らかな射として見る。
+\item 局所有限表示、平坦、かつ不分岐な射として見る。
+\item 構造定理を用いる。
+\item 関手的特徴づけを用いる。
+\end{enumerate}
+
+\begin{theorem}
+\label{etale-theorem-formally-etale}
+$f : X \to S$ を局所有限表示な射とする。このとき、次は同値である。
+\begin{enumerate}
+\item $f$ は \'etale である。
+\item 任意のアフィン $S$-スキーム $Y$ と、平方零イデアルによって定義される閉部分スキーム
+$Y_0 \subset Y$ に対して、自然な写像
+$$
+\Mor_S(Y, X) \longrightarrow \Mor_S(Y_0, X)
+$$
+は全単射である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+これは『射についてさらに』補題
+\ref{more-morphisms-lemma-etale-formally-etale} である。
+\end{proof}
+
+\noindent
+この特徴づけは、$X$ を定義する方程式の解が冪零な厚化を通して一意的に持ち上がることを述べる。
+
+
+
+\section{不分岐射の \'Etale 局所構造}
+\label{etale-section-unramified-etale-local}
+
+\noindent
+『射についてさらに』節 \ref{more-morphisms-section-etale-localization} には、準有限射の
+\'etale 局所構造に関するいくつかの結果がある。本節では、それを本章で見た不分岐射の位相的性質と
+組み合わせる。念頭に置くべき基本的な全体像は
+$$
+\xymatrix{
+V \ar[r] \ar[dr] & X_U \ar[d] \ar[r] & X \ar[d]^f \\
+& U \ar[r] & S
+}
+$$
+である。『射についてさらに』式 (\ref{more-morphisms-equation-basic-diagram}) を参照せよ。
+まず非常に一般的な場合から始める。
+
+\begin{lemma}
+\label{etale-lemma-unramified-etale-local}
+$f : X \to S$ をスキームの射とする。$x_1, \ldots, x_n \in X$ を、$S$ における像が同じ点
+$s$ であるような点とする。$f$ は各 $x_i$ において不分岐であると仮定する。このとき
+\'etale 近傍 $(U, u) \to (S, s)$ と開部分集合
+$V_{i, j} \subset X_U$, $i = 1, \ldots, n$, $j = 1, \ldots, m_i$ で、次を満たすものが存在する。
+\begin{enumerate}
+\item $V_{i, j} \to U$ は $u$ を通る閉埋入である。
+\item $i = i'$ かつ $j = j'$ でない限り、$u$ は $V_{i, j} \cap V_{i', j'}$ の像に含まれない。
+\item $x_i$ に写る $(X_U)_u$ の任意の点は、ある $V_{i, j}$ に含まれる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『射』定義 \ref{morphisms-definition-unramified} により、各 $x_i$ には $S$ 上局所有限型な開近傍が
+存在する。$X$ を $\{x_1, \ldots, x_n\}$ の開近傍で置き換え、$f$ は局所有限型であると仮定してよい。
+『射についてさらに』補題
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var} を適用し、\'etale 近傍
+$(U, u)$ と、$U$ 上有限な開部分集合 $V_{i, j}$ を得る。補題
+\ref{etale-lemma-finite-unramified-one-point} により、必要なら $U$ を縮小して
+$V_{i, j} \to U$ を閉埋入にできる。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-unramified-etale-local-technical}
+$f : X \to S$ をスキームの射とする。$x_1, \ldots, x_n \in X$ を、$S$ における像が同じ点
+$s$ であるような点とする。$f$ は分離的であり、$f$ は各 $x_i$ において不分岐であると仮定する。
+このとき \'etale 近傍 $(U, u) \to (S, s)$ と非交和分解
+$$
+X_U =
+W \amalg \coprod\nolimits_{i, j} V_{i, j}
+$$
+で、次を満たすものが存在する。
+\begin{enumerate}
+\item $V_{i, j} \to U$ は $u$ を通る閉埋入である。
+\item ファイバー $W_u$ は、どの $x_i$ に写る点も含まない。
+\end{enumerate}
+特に $f^{-1}(\{s\}) = \{x_1, \ldots, x_n\}$ ならば、ファイバー $W_u$ は空である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{etale-lemma-unramified-etale-local} を適用する。$U$ はアフィンと仮定してよく、すると $X_U$ は
+分離的である。このとき $V_{i, j} \to X_U$ は閉写像である。『射』補題
+\ref{morphisms-lemma-image-proper-scheme-closed} を参照せよ。
+$(i, j) \not = (i', j')$ とする。$V_{i, j} \cap V_{i', j'}$ は $V_{i, j}$ において閉であり、
+$U$ におけるその像は $u$ を含まない。したがって $U$ を縮小して
+$V_{i, j} \cap V_{i', j'} = \emptyset$ と仮定してよい。さらに $\bigcup V_{i, j}$ は
+$X_U$ の開かつ閉な部分スキームなので、開かつ閉な補集合 $W$ をもつ。これで証明が完了する。
+\end{proof}
+
+\noindent
+次の補題はある意味で前の補題よりはるかに弱いが、ここで明記しておくと有用である。
+有限不分岐射は、基底上 \'etale 局所的には閉埋入であることを述べている。
+
+\begin{lemma}
+\label{etale-lemma-finite-unramified-etale-local}
+$f : X \to S$ をスキームの有限不分岐射とし、$s \in S$ とする。このとき \'etale 近傍
+$(U, u) \to (S, s)$ と有限非交和分解
+$$
+X_U = \coprod\nolimits_j V_j
+$$
+で、各 $V_j \to U$ が閉埋入となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$X \to S$ は有限なので、$s$ 上のファイバーは $X$ の点からなる有限集合
+$\{x_1, \ldots, x_n\}$ である。この集合に補題
+\ref{etale-lemma-unramified-etale-local-technical} を適用する（有限射は分離的である。『射』節
+\ref{morphisms-section-integral} を参照せよ）。$U$ における $W$ の像は、$X_U \to U$ が有限、
+したがって固有なので閉集合であり、$u$ を含まない。これを $U$ から取り除けば
+$W = \emptyset$ となり、所望の結果を得る。
+\end{proof}
+
+
+
+
+\section{\'Etale 射の \'Etale 局所構造}
+\label{etale-section-etale-local-etale}
+
+\noindent
+これは少し自明すぎるかもしれないが、\'etale 射についての直観を形づくる助けにはなるだろう。
+節 \ref{etale-section-unramified-etale-local} の結果をそのまま写し、「閉埋入」を「同型」に置き換える。
+
+\begin{lemma}
+\label{etale-lemma-etale-etale-local}
+$f : X \to S$ をスキームの射とする。$x_1, \ldots, x_n \in X$ を、$S$ における像が同じ点
+$s$ であるような点とする。$f$ は各 $x_i$ において \'etale であると仮定する。このとき
+\'etale 近傍 $(U, u) \to (S, s)$ と開部分集合
+$V_{i, j} \subset X_U$, $i = 1, \ldots, n$, $j = 1, \ldots, m_i$ で、次を満たすものが存在する。
+\begin{enumerate}
+\item $V_{i, j} \to U$ は同型である。
+\item $i = i'$ かつ $j = j'$ でない限り、$u$ は $V_{i, j} \cap V_{i', j'}$ の像に含まれない。
+\item $x_i$ に写る $(X_U)_u$ の任意の点は、ある $V_{i, j}$ に含まれる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 射は不分岐なので、補題 \ref{etale-lemma-unramified-etale-local} を適用できる。
+このとき $V_{i, j} \to U$ は閉埋入かつ \'etale である。したがって、例えば定理
+\ref{etale-theorem-etale-radicial-open} により開埋入である。$U$ を各 $V_{i, j} \to U$ の像の共通部分で
+置き換えれば補題を得る。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-etale-etale-local-technical}
+$f : X \to S$ をスキームの射とする。$x_1, \ldots, x_n \in X$ を、$S$ における像が同じ点
+$s$ であるような点とする。$f$ は分離的であり、$f$ は各 $x_i$ において \'etale であると仮定する。
+このとき \'etale 近傍 $(U, u) \to (S, s)$ とスキームの有限非交和分解
+$$
+X_U =
+W \amalg \coprod\nolimits_{i, j} V_{i, j}
+$$
+で、次を満たすものが存在する。
+\begin{enumerate}
+\item $V_{i, j} \to U$ は同型である。
+\item ファイバー $W_u$ は、どの $x_i$ に写る点も含まない。
+\end{enumerate}
+特に $f^{-1}(\{s\}) = \{x_1, \ldots, x_n\}$ ならば、ファイバー $W_u$ は空である。
+\end{lemma}
+
+\begin{proof}
+\'etale 射は不分岐なので、補題 \ref{etale-lemma-unramified-etale-local-technical} を適用できる。
+補題 \ref{etale-lemma-etale-etale-local} の証明と同様に、射 $V_{i, j} \to U$ は開埋入である。
+$U$ をそれらの像の共通部分で置き換えれば所望の結果を得る。
+\end{proof}
+
+\noindent
+次の補題はある意味で前の補題よりはるかに弱いが、ここで明記しておくと有用である。
+有限 \'etale 射は、基底上 \'etale 局所的には「位相的被覆空間」、すなわち基底のコピーの
+有限積であることを述べている。
+
+\begin{lemma}
+\label{etale-lemma-finite-etale-etale-local}
+$f : X \to S$ をスキームの有限 \'etale 射とし、$s \in S$ とする。このとき \'etale 近傍
+$(U, u) \to (S, s)$ とスキームの有限非交和分解
+$$
+X_U = \coprod\nolimits_j V_j
+$$
+で、各 $V_j \to U$ が同型となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+\'etale 射は不分岐なので、補題 \ref{etale-lemma-finite-unramified-etale-local} を適用できる。
+補題 \ref{etale-lemma-etale-etale-local} の証明と同様に、$V_{i, j} \to U$ は開埋入である。
+$U$ をそれらの像の共通部分で置き換えれば所望の結果を得る。
+\end{proof}
+
+
+
+
+\section{永続性}
+\label{etale-section-properties-permanence}
+
+\noindent
+以下では、Noether 局所環の \'etale 準同型（定義 \ref{etale-definition-etale-ring}）について、
+いくつかの「永続性」を述べる。Noether 局所環の完備化および Hensel 化に対する類似の内容については、
+『代数についてさらに』節 \ref{more-algebra-section-permanence-completion} および
+\ref{more-algebra-section-permanence-henselization} を参照せよ。
+
+\begin{lemma}
+\label{etale-lemma-etale-dimension}
+$A$, $B$ を Noether 局所環とし、$A \to B$ を局所環の \'etale 準同型とする。
+このとき $\dim(A) = \dim(B)$ である。
+\end{lemma}
+
+\begin{proof}
+例えば『代数』補題 \ref{algebra-lemma-dimension-base-fibre-equals-total} を参照せよ。
+\end{proof}
+
+\begin{proposition}
+\label{etale-proposition-etale-depth}
+$A$, $B$ を Noether 局所環とし、$f : A \to B$ を局所環の \'etale 準同型とする。
+このとき $\text{depth}(A) = \text{depth}(B)$ である。
+\end{proposition}
+
+\begin{proof}
+『代数』補題 \ref{algebra-lemma-apply-grothendieck} を参照せよ。
+\end{proof}
+
+\begin{proposition}
+\label{etale-proposition-etale-CM}
+\begin{slogan}
+Cohen--Macaulay 性は \'etale 写像に沿って上昇し、かつ降下する。
+\end{slogan}
+$A$, $B$ を Noether 局所環とし、$f : A \to B$ を局所環の \'etale 準同型とする。
+このとき $A$ が Cohen--Macaulay であることと $B$ がそうであることとは同値である。
+\end{proposition}
+
+\begin{proof}
+局所環 $A$ が Cohen--Macaulay であることと $\dim(A) = \text{depth}(A)$ であることとは同値である。
+これら二つの不変量はいずれも \'etale 拡大で保たれるので、主張が従う。
+\end{proof}
+
+\begin{proposition}
+\label{etale-proposition-etale-regular}
+$A$, $B$ を Noether 局所環とし、$f : A \to B$ を局所環の \'etale 準同型とする。
+このとき $A$ が正則であることと $B$ がそうであることとは同値である。
+\end{proposition}
+
+\begin{proof}
+$B$ が正則ならば、『代数』補題 \ref{algebra-lemma-flat-under-regular} により $A$ は正則である。
+$A$ は正則であると仮定し、$\mathfrak m$ を $A$ の極大イデアルとする。このとき
+$\dim_{\kappa(\mathfrak m)} \mathfrak m/\mathfrak m^2 =
+\dim(A) = \dim(B)$ である（補題 \ref{etale-lemma-etale-dimension} を参照せよ）。一方、
+$\mathfrak mB$ は $B$ の極大イデアルなので
+$\mathfrak m_B/\mathfrak m_B = \mathfrak mB/\mathfrak m^2B$ は高々 $\dim(B)$ 個の元で生成される。
+したがって $B$ は正則である（少し一般的な『代数』補題
+\ref{algebra-lemma-flat-over-regular-with-regular-fibre} を用いてもよい）。
+\end{proof}
+
+
+\begin{proposition}
+\label{etale-proposition-etale-reduced}
+$A$, $B$ を Noether 局所環とし、$f : A \to B$ を局所環の \'etale 準同型とする。
+このとき $A$ が被約であることと $B$ がそうであることとは同値である。
+\end{proposition}
+
+\begin{proof}
+$A \to B$ の忠実平坦性から、$B$ が被約ならば $A$ も被約であることは明らかである。
+『代数』補題 \ref{algebra-lemma-descent-reduced} も参照せよ。逆に $A$ は被約であると仮定する。
+仮定により、$B$ は有限型 $A$-代数 $B'$ をある素イデアル $\mathfrak q$ で局所化したものである。
+$B'$ をさらに局所化して、$B'$ は $A$ 上 \'etale であると仮定してよい。補題
+\ref{etale-lemma-characterize-etale-Noetherian} を参照せよ。すると『代数』補題
+\ref{algebra-lemma-reduced-goes-up} を $A \to B'$ に適用でき、$B'$ は被約である。
+したがって $B$ も被約である。
+\end{proof}
+
+\begin{remark}
+\label{etale-remark-technicality-needed}
+「被約性」に関する結果は、\'etale 局所環準同型 $A \to B$ の定義を弱め、$B$ が $A$ 上
+本質的有限型であるという仮定を外すと成り立たない。実際、Noether 局所整域 $A$ の完備化
+$A^\wedge$ が非被約となることがある。『例』節
+\ref{examples-section-local-completion-nonreduced} を参照せよ。しかし環準同型
+$A \to A^\wedge$ は平坦であり、$\mathfrak m_AA^\wedge$ は $A^\wedge$ の極大イデアルである。
+またもちろん $A$ と $A^\wedge$ の剰余体は同じである。このため、この概念を本質的有限型の
+環拡大（$A$ が Noether でない場合には本質的有限表示の環拡大）に対してのみ考えることが重要である。
+\end{remark}
+
+\begin{proposition}
+\label{etale-proposition-etale-normal}
+\begin{reference}
+\cite[Expose I, Theorem 9.5 part (i)]{SGA1}
+\end{reference}
+$A$, $B$ を Noether 局所環とし、$f : A \to B$ を局所環の \'etale 準同型とする。
+このとき $A$ が正規整域であることと $B$ がそうであることとは同値である。
+\end{proposition}
+
+\begin{proof}
+正規性の降下については『代数』補題 \ref{algebra-lemma-descent-normal} を参照せよ。
+逆に $A$ は正規であると仮定する。仮定により、$B$ は有限型 $A$-代数 $B'$ をある素イデアル
+$\mathfrak q$ で局所化したものである。$B'$ をさらに局所化して、$B'$ は $A$ 上 \'etale であると
+仮定してよい。補題 \ref{etale-lemma-characterize-etale-Noetherian} を参照せよ。すると『代数』補題
+\ref{algebra-lemma-normal-goes-up} を $A \to B'$ に適用でき、$B'$ は正規である。
+したがって $B$ は正規整域である。
+\end{proof}
+
+\noindent
+前の諸命題は、\'etale 写像を「局所同型」と考えたい理由をある程度示している。定義が「正しい」ことを
+非常によく示す別の性質は、有限型 $\mathbf{C}$-スキームについて、ある射が \'etale であることと、
+対応する解析空間上の射（複素位相を入れた $\mathbf{C}$-値点）が解析的な意味で局所同型
+（始域上局所的な開埋め込み）であることとが同値になることである。この事実は、構造定理と、解析化が
+完備局所環の形成と可換であることを用いて証明できる。詳細は読者に委ねる。
+
+
+
+
+
+
+
+
+\section{\'Etale 射の降下}
+\label{etale-section-descending-etale}
+
+\noindent
+本節で用いる言葉を理解するため、『降下』節 \ref{descent-section-descent-datum} を参照することを勧める。
+$f : X \to S$ をスキームの射とする。引き戻し関手
+\begin{equation}
+\label{etale-equation-descent-etale}
+\text{schemes }U\text{ \'etale over }S \longrightarrow
+\begin{matrix}
+\text{descent data }(V, \varphi)\text{ relative to }X/S \\
+\text{ with }V\text{ \'etale over }X
+\end{matrix}
+\end{equation}
+を考える。これは $U$ を標準降下データ $(X \times_S U, can)$ に送る。
+
+\begin{lemma}
+\label{etale-lemma-faithful}
+$f : X \to S$ が全射ならば、関手 (\ref{etale-equation-descent-etale}) は忠実である。
+\end{lemma}
+
+\begin{proof}
+$a, b : U_1 \to U_2$ を $S$ 上 \'etale なスキーム間の二つの射とする。$a$ と $b$ の $X$ への
+基底変換が一致すると仮定する。$a = b$ を示す必要がある。命題 \ref{etale-proposition-equality} により、
+$a$ と $b$ が点および剰余体上で一致することを示せば十分である。任意の $u \in U_1$ に対し、
+$u$ に写る点 $v \in X \times_S U_1$ を選べるので、これは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-fully-faithful}
+$f : X \to S$ は商的であり、$f$ の任意の \'etale 基底変換も商的であると仮定する。
+このとき関手 (\ref{etale-equation-descent-etale}) は充満忠実である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{etale-lemma-faithful} により関手は忠実である。$U_1 \to S$ と $U_2 \to S$ を \'etale 射とし、
+$a : X \times_S U_1 \to X \times_S U_2$ を標準降下データと両立する射とする。
+$a$ がある射 $U_1 \to U_2$ の基底変換であることを示す。
+
+\medskip\noindent
+$U'_2 \subset U_2$ を開部分スキームとし、$W = a^{-1}(X \times_S U'_2)$ とおく。
+これは $X \times_S U_1$ の開部分スキームであり、$V_1 = X \times_S U_1$ 上の標準降下データと
+両立する。すなわち、射影 $V_1 \times_{U_1} V_1 \to V_1$ による $W$ の二つの逆像は一致する。
+$V_1 \to U_1$ は $X \to S$ の基底変換として全射なので、$W$ はある部分集合
+$U'_1 \subset U_1$ の逆像である。$W$ は開であり、$f$ についての仮定により
+$U'_1 \subset U_1$ は開である。
+
+\medskip\noindent
+$U_2 = \bigcup U_{2, i}$ をアフィン開被覆とする。前段落の結果から、
+$X \times_S U_{1, i} = a^{-1}(X \times_S U_{2, i})$ を満たす開被覆
+$U_1 = \bigcup U_{1, i}$ を得る。基底変換が射
+$a_i : X \times_S U_{1, i} \to X \times_S U_{2, i}$ となる射
+$U_{1, i} \to U_{2, i}$ の存在を示せれば、忠実性を用いてこれらを射 $U_1 \to U_2$ に
+貼り合わせられる。このようにして $U_2$ がアフィンの場合に帰着する。特に
+$U_2 \to S$ は分離的である（『スキーム』補題
+\ref{schemes-lemma-compose-after-separated}）。
+
+\medskip\noindent
+$U_2 \to S$ は分離的であると仮定する。このとき、$a$ のグラフ $\Gamma_a$ は
+$$
+V = (X \times_S U_1) \times_X (X \times_S U_2) = X \times_S U_1 \times_S U_2
+$$
+の閉部分スキームである。『スキーム』補題 \ref{schemes-lemma-semi-diagonal} を参照せよ。
+一方、このグラフは例えば \'etale 射の切断なので開である
+（命題 \ref{etale-proposition-properties-sections}）。$a$ は降下データの射だから、射影
+$V \times_{U_1 \times_S U_2} V \to V$ による $\Gamma_a \subset V$ の二つの逆像は一致する。
+したがって証明の第2段落と同様に議論して、$X$ への基底変換が $\Gamma_a$ となる開かつ閉な
+部分スキーム $\Gamma \subset U_1 \times_S U_2$ を得る。すると $\Gamma \to U_1$ は \'etale 射で、
+$X$ への基底変換は同型である。これは $\Gamma \to U_1$ が普遍全単射であることを意味し、
+定理 \ref{etale-theorem-etale-radicial-open} により同型である。したがって $\Gamma$ はある射
+$U_1 \to U_2$ のグラフであり、この射の基底変換は所望どおり $a$ である。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-fully-faithful-cases}
+$f : X \to S$ をスキームの射とする。次の場合、関手
+(\ref{etale-equation-descent-etale}) は充満忠実である。
+\begin{enumerate}
+\item $f$ は全射かつ普遍閉である（例えば有限、整、または固有）。
+\item $f$ は全射かつ普遍開である（例えば局所有限表示かつ平坦、滑らか、または etale）。
+\item $f$ は全射、準コンパクト、かつ平坦である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{etale-lemma-fully-faithful} から従う。例えば、位相空間の閉全射は商的である
+（『位相』補題 \ref{topology-lemma-closed-morphism-quotient-topology}）。有限射、整射、固有射は
+普遍閉である。『射』補題 \ref{morphisms-lemma-integral-universally-closed},
+\ref{morphisms-lemma-finite-proper} および定義 \ref{morphisms-definition-proper} を参照せよ。
+一方、位相空間の開全射は商的である（『位相』補題
+\ref{topology-lemma-open-morphism-quotient-topology}）。平坦かつ局所有限表示な射、滑らかな射、
+\'etale 射は普遍開である。『射』補題 \ref{morphisms-lemma-fppf-open},
+\ref{morphisms-lemma-smooth-open}, \ref{morphisms-lemma-etale-open} を参照せよ。
+全射、準コンパクト、平坦な場合は『射』補題
+\ref{morphisms-lemma-fpqc-quotient-topology} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-reduce-to-affine}
+$f : X \to S$ をスキームの射とする。$(V, \varphi)$ を $X/S$ に関する降下データとし、
+$V \to X$ は \'etale とする。$S = \bigcup S_i$ を開被覆とする。次を仮定する。
+\begin{enumerate}
+\item 降下データ $(V, \varphi)$ の $X \times_S S_i/S_i$ への引き戻しは有効である。
+\item $X \times_S (S_i \cap S_j) \to (S_i \cap S_j)$ に対する関手
+(\ref{etale-equation-descent-etale}) は充満忠実である。
+\item $X \times_S (S_i \cap S_j \cap S_k) \to (S_i \cap S_j \cap S_k)$ に対する関手
+(\ref{etale-equation-descent-etale}) は忠実である。
+\end{enumerate}
+このとき $(V, \varphi)$ は有効である。
+\end{lemma}
+
+\begin{proof}
+（降下データの引き戻しは『降下』定義 \ref{descent-definition-pullback-functor} で定義される。）
+$X_i = X \times_S S_i$ とおき、$(V_i, \varphi_i)$ を $(V, \varphi)$ の $X_i/S_i$ への引き戻しと書く。
+仮定 (1) により、\'etale 射 $U_i \to S_i$ と、$can$ および $\varphi_i$ と両立する同型
+$X_i \times_{S_i} U_i \to V_i$ を選べる。仮定 (2) により同型
+$\psi_{ij} : U_i \times_{S_i} (S_i \cap S_j) \to
+U_j \times_{S_j} (S_i \cap S_j)$ を得る。仮定 (3) により、これらの同型はコサイクル条件を満たす。
+したがって $(U_i, \psi_{ij})$ は Zariski 被覆 $\{S_i \to S\}$ に関する降下データである。
+すると『降下』補題 \ref{descent-lemma-Zariski-refinement-coverings-equivalence}
+（本質的には『スキーム』節 \ref{schemes-section-glueing-schemes} の言い換え）により、
+スキームの射 $U \to S$ と、$\psi_{ij}$ と両立する同型 $U \times_S S_i \to U_i$ が存在する。
+同型 $U \times_S S_i \to U_i$ は対応する同型 $X_i \times_S U \to V_i$ を定め、これらは標準降下
+データおよび $\varphi$ と両立する射 $X \times_S U \to V$ に貼り合わさる。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-split-henselian}
+$(A, I)$ を Hensel 対とする。$U \to \Spec(A)$ を準コンパクト、分離的、\'etale な射とし、
+$U \times_{\Spec(A)} \Spec(A/I) \to \Spec(A/I)$ は有限であるとする。このとき
+$$
+U = U_{fin} \amalg U_{away}
+$$
+と分解し、$U_{fin} \to \Spec(A)$ は有限であり、$U_{away}$ は $Z$ 上の点をもたない。
+\end{lemma}
+
+\begin{proof}
+Zariski の主定理により、スキーム $U$ は準アフィンである。実際、$T$ がアフィンで
+$T \to \Spec(A)$ が有限となる開埋入 $U \to T$ を選べる。『射についてさらに』補題
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite} を参照せよ。
+$Z = \Spec(A/I)$ と書き、基底変換を $U_Z \to T_Z$ と書く。$U_Z \to Z$ は有限だから、
+$U_Z \to T_Z$ は開であると同時に閉である。したがって『代数についてさらに』補題
+\ref{more-algebra-lemma-characterize-henselian-pair} により、$T'_Z = U_Z$ を満たす一意な分解
+$T = T' \amalg T''$ を得る。$U_{fin} = U \cap T'$, $U_{away} = U \cap T''$ とおく。
+$T'_Z \subset U_Z$ なので、$T'$ のすべての閉点は $U$ に含まれる。したがって
+$T' \subset U$、ゆえに $U_{fin} = T'$ であり、$U_{fin} \to \Spec(A)$ は有限である。
+分解の一意性の証明は省略する。
+\end{proof}
+
+\begin{proposition}
+\label{etale-proposition-effective}
+$f : X \to S$ を全射な整射とする。関手 (\ref{etale-equation-descent-etale}) は同値
+$$
+\begin{matrix}
+\text{schemes quasi-compact,}\\
+\text{separated, \'etale over }S
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{descent data }(V, \varphi)\text{ relative to }X/S\text{ with}\\
+V\text{ quasi-compact, separated, \'etale over }X
+\end{matrix}
+$$
+を誘導する。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{etale-lemma-fully-faithful-cases} により、関手 (\ref{etale-equation-descent-etale}) は充満忠実であり、
+任意の基底変換 $S \to S'$ の後でもそうである。$(V, \varphi)$ を $X/S$ に関する降下データとし、
+$V \to X$ は準コンパクト、分離的、かつ \'etale とする。補題 \ref{etale-lemma-reduce-to-affine} により、
+有効性を $S$ 上 Zariski 局所的に証明すれば十分である。特に $S$ はアフィンと仮定する。
+
+\medskip\noindent
+$S$ がアフィンならば、有向集合 $\Lambda$ と、$\Spec(\mathbf{Z})$ 上有限型なアフィンスキームの
+有限射からなる逆系 $X_\lambda \to S_\lambda$ で
+$(X \to S) = \lim (X_\lambda \to S_\lambda)$ を満たすものを選べる。『代数』補題
+\ref{algebra-lemma-limit-integral} を参照せよ。極限は極限と可換するので、
+$X \times_S X = \lim X_\lambda \times_{S_\lambda} X_\lambda$ および
+$X \times_S X \times_S X = \lim
+X_\lambda \times_{S_\lambda} X_\lambda \times_{S_\lambda} X_\lambda$ を得る。
+$V \to X$ は有限表示射であることに注意せよ。『極限』補題
+\ref{limits-lemma-descend-finite-presentation} により、ある $\lambda$ と、$X_\lambda/S_\lambda$ に関する
+降下データ $(V_\lambda, \varphi_\lambda)$ で、その $X/S$ への引き戻しが $(V, \varphi)$ となるものを
+選べる。$(V_\lambda, \varphi_\lambda)$ が有効であることを示せば十分である。
+$V_\lambda$ は構成により準コンパクトである。必要なら $\lambda$ を大きくして、
+$V_\lambda \to X_\lambda$ は分離的かつ \'etale と仮定してよい。『極限』補題
+\ref{limits-lemma-descend-separated-finite-presentation} および \ref{limits-lemma-descend-etale} を参照せよ。
+したがって $f$ は有限全射で、$S$ は $\mathbf{Z}$ 上有限型なアフィンであると仮定してよい。
+
+\medskip\noindent
+$S' \subset S$ を、$(V, \varphi)$ の $X' = X \times_S S'$ への引き戻し
+$(V', \varphi')$ が有効となる開集合とする。以下で、$S' \not = S$ ならば、降下データが有効となる
+より大きな開集合が存在することを示す。$S$ は Noether であり、その台位相空間も Noether なので、
+これで証明が完了する。閉集合 $Z = S \setminus S'$ のある既約成分の一般点を $\xi \in S$ とする。
+$\xi \in S'' \subset S$ が、降下データが有効となる開集合ならば、第1段落の貼り合わせの議論により、
+降下データは $S' \cup S''$ 上で有効である。したがって以下では $S$ を $\xi$ のアフィン開近傍で
+置き換えてよい。
+
+\medskip\noindent
+このような置き換えを一度行い、$Z$ は一般点 $Z$ をもつ既約集合であると仮定してよい。
+$Z$ に誘導される被約閉部分スキーム構造を入れる。さらに縮小して、
+$X_Z = X \times_S Z = f^{-1}(Z) \to Z$ は平坦であると仮定してよい。『射』命題
+\ref{morphisms-proposition-generic-flatness} を参照せよ。$(V_Z, \varphi_Z)$ を降下データの $X_Z/Z$ への
+引き戻しとする。『射についてさらに』補題
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend} により、この降下データは
+有効であり、基底変換が降下データと両立する形で $V_Z$ と同型になる \'etale 射 $U_Z \to Z$ を得る。
+もちろん $U_Z \to Z$ は準コンパクトかつ分離的である（『降下』補題
+\ref{descent-lemma-descending-property-quasi-compact} および
+\ref{descent-lemma-descending-property-separated}）。さらに縮小して、$U_Z \to Z$ は有限であると
+仮定してよい。『射』補題 \ref{morphisms-lemma-generically-finite} を参照せよ。
+
+\medskip\noindent
+$S = \Spec(A)$ とし、$I \subset A$ を $Z \subset S$ に対応する素イデアルとする。
+$(A^h, IA^h)$ を対 $(A, I)$ の Hensel 化とし、$S^h = \Spec(A^h)$,
+$Z^h = V(IA^h) \cong Z$ と書く。$S^h$ への基底変換後に有効性を示せば十分であると主張する。
+実際、$\{S^h \to S, S' \to S\}$ は fpqc 被覆である（『代数についてさらに』補題
+\ref{more-algebra-lemma-henselization-flat} により $A \to A^h$ は平坦である）。また『射についてさらに』補題
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend} により、分離的な \'etale 射には
+fpqc 降下が成り立つ。すなわち、$U^h \to S^h$ と $U' \to S'$ を、それぞれ引き戻し
+$(V^h, \varphi^h)$ と $(V', \varphi')$ に対応する対象とすると、必要な同型
+$$
+U^h \times_S S^h \to S^h \times_S V^h
+\quad\text{and}\quad
+U^h \times_S S' \to S^h \times_S U'
+$$
+は第1段落で述べた充満忠実性から得られる。これにより、次段落の状況に帰着する。
+
+\medskip\noindent
+ここで $S = \Spec(A)$, $Z = V(I)$, $S' = S \setminus Z$ とし、$(A, I)$ は Hensel 対である。
+降下データ $(V', \varphi')$ に対応する $U' \to S'$ と、降下データ $(V_Z, \varphi_Z)$ に対応する
+有限 \'etale 射 $U_Z \to Z$ がある。もはや $A$ が $\mathbf{Z}$ 上有限型であるとは限らないが、
+以下の議論では $A$ が Noether であることさえ用いない。『代数についてさらに』補題
+\ref{more-algebra-lemma-finite-etale-equivalence} により、$Z$ への制限が $U_Z \to Z$ と同型になる
+有限 \'etale 射 $U_{fin} \to S$ を選べる。$X = \Spec(B)$, $Y = V(IB)$ と書く。
+$(B, IB)$ は Hensel 対であり（『代数についてさらに』補題
+\ref{more-algebra-lemma-integral-over-henselian-pair}）、$V \to X$ の $Y$ への制限は
+$U_Z \to Z$ の基底変換として有限だから、標準的な非交和分解
+$$
+V = V_{fin} \amalg V_{away}
+$$
+があり、$V_{fin} \to X$ は有限で、$V_{away}$ は $Y$ 上の点をもたない。補題
+\ref{etale-lemma-split-henselian} を参照せよ。$X \times_S X$ 上でのこの分解の一意性により、
+$\varphi$ は分解を保ち、降下データの圏で
+$$
+(V, \varphi) = (V_{fin}, \varphi_{fin}) \amalg (V_{away}, \varphi_{away})
+$$
+を得る。『代数についてさらに』補題 \ref{more-algebra-lemma-finite-etale-equivalence} により、
+$Y$ 上で与えられた同型 $Y \times_Z U_Z \to V \times_X Y$ と両立する一意な同型
+$$
+X \times_S U_{fin} \longrightarrow V_{fin}
+$$
+が存在する。一意性により、この同型は降下データと両立する。すなわち
+$(X \times_S U_{fin}, can) \cong (V_{fin}, \varphi_{fin})$ である。
+$U'_{fin} = U_{fin} \times_S S'$ と書く。充満忠実性により射 $U'_{fin} \to U'$ を得るが、
+これは開かつ閉な部分スキームの包含である。そこで
+$U = U_{fin} \amalg_{U'_{fin}} U'$ とおく（『スキーム』節
+\ref{schemes-section-glueing-schemes} のスキームの貼り合わせ）。射
+$X \times_S U_{fin} \to V$ と $X \times_S U' \to V$ は、所望の同型
+$X \times_S U \to V$ に貼り合わさる。
+\end{proof}
+
+
+
+
+
+\section{正規交差因子}
+\label{etale-section-normal-crossings}
+
+\noindent
+定義は次のとおりである。
+
+\begin{definition}
+\label{etale-definition-strict-normal-crossings}
+$X$ を局所 Noether スキームとする。$X$ 上の {\it 単純正規交差因子}とは、任意の $p \in D$ に対して
+局所環 $\mathcal{O}_{X, p}$ が正則であり、正則パラメータ系
+$x_1, \ldots, x_d \in \mathfrak m_p$ と $1 \leq r \leq d$ が存在して、
+$\mathcal{O}_{X, p}$ において $D$ が $x_1 \ldots x_r$ で切り出されるような有効 Cartier 因子
+$D \subset X$ のことをいう。
+\end{definition}
+
+\noindent
+局所 Noether スキーム $X$ 上の有効 Cartier 因子 $E$ で、集合論的に $E \subset D$ を満たす
+単純正規交差因子 $D$ が存在するものにしばしば出会う。この場合、$D$ の既約成分への分解を
+$D = \bigcup_{i \in I} D_i$ とすると、$a_i \geq 0$ を用いて $E = \sum a_i D_i$ と書ける。
+$D' = \bigcup_{a_i > 0} D_i$ は単純正規交差因子であり、集合論的に $E = D'$ であることに注意せよ。
+上の状況では、$E$ は {\it 単純正規交差因子上に台をもつ}という。
+
+\begin{lemma}
+\label{etale-lemma-strict-normal-crossings}
+$X$ を局所 Noether スキーム、$D \subset X$ を有効 Cartier 因子とする。$D_i \subset D$,
+$i \in I$ を、$X$ の被約閉部分スキームとみなしたその既約成分とする。このとき、次は同値である。
+\begin{enumerate}
+\item $D$ は単純正規交差因子である。
+\item $D$ は被約で、各 $D_i$ は有効 Cartier 因子であり、任意の有限部分集合 $J \subset I$ に対して
+スキーム論的交叉 $D_J = \bigcap_{j \in J} D_j$ は正則スキームで、その各既約成分は $X$ において
+余次元 $|J|$ をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D$ は単純正規交差因子であると仮定する。$p \in D$ を選び、定義
+\ref{etale-definition-strict-normal-crossings} のような正則パラメータ系
+$x_1, \ldots, x_d \in \mathfrak m_p$ と $1 \leq r \leq d$ を選ぶ。
+$\mathcal{O}_{X, p}/(x_i)$ は正則局所環、特に整域なので、$p$ を通る $D$ の既約成分
+$D_1, \ldots, D_r$ は $\mathcal{O}_{X, p}$ の高さ1の素イデアル
+$(x_1), \ldots, (x_r)$ と $1$ 対 $1$ に対応する。『代数』補題
+\ref{algebra-lemma-regular-ring-CM} により、交叉 $D_{i_1} \cap \ldots \cap D_{i_s}$ は $p$ の
+ある開近傍において余次元 $s$ をもち、この交叉の $p$ における局所環は正則である。
+これは任意の $p \in D$ について成り立つので、(2) が従う。
+
+\medskip\noindent
+(2) を仮定し、$p \in D$ とする。$\mathcal{O}_{X, p}$ は有限次元なので、$p$ が含まれうる成分
+$D_i$ の個数は高々 $\dim(\mathcal{O}_{X, p})$ である。ある $r \geq 1$ に対して
+$p \in D_1, \ldots, D_r$ とする。$x_1, \ldots, x_r \in \mathfrak m_p$ を
+$D_1, \ldots, D_r$ の局所方程式とする。このとき $x_1$ は $\mathcal{O}_{X, p}$ の零因子でなく、
+$\mathcal{O}_{X, p}/(x_1) = \mathcal{O}_{D_1, p}$ は正則である。したがって『代数』補題
+\ref{algebra-lemma-regular-mod-x} により $\mathcal{O}_{X, p}$ は正則である。
+$D_1 \cap \ldots \cap D_r$ は正則、したがって正規なスキームなので、その既約成分の非交和である
+（『性質』補題 \ref{properties-lemma-normal-Noetherian}）。$Z \subset D_1 \cap \ldots \cap D_r$ を
+$p$ を含む既約成分とする。このとき
+$\mathcal{O}_{Z, p} = \mathcal{O}_{X, p}/(x_1, \ldots, x_r)$ は余次元 $r$ の正則環である
+（すでに $\mathcal{O}_{X, p}$ は正則、したがって Cohen--Macaulay であり、この環は鎖状なので
+余次元に曖昧さはない。『代数』補題 \ref{algebra-lemma-regular-ring-CM} および
+\ref{algebra-lemma-CM-dim-formula} を参照せよ）。したがって
+$\dim(\mathcal{O}_{Z, p}) = \dim(\mathcal{O}_{X, p}) - r$ である。
+$\mathfrak m_{Z, p}$ の極小生成系に写る元 $x_{r + 1}, \ldots, x_n \in \mathfrak m_p$ をさらに選ぶ。
+Nakayama の補題により $\mathfrak m_p = (x_1, \ldots, x_n)$ となり、$D$ は正規交差因子である。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-smooth-pullback-strict-normal-crossings}
+\begin{slogan}
+滑らかな射による単純正規交差因子の引き戻しは、単純正規交差因子である。
+\end{slogan}
+$X$ を局所 Noether スキーム、$D \subset X$ を単純正規交差因子とする。
+$f : Y \to X$ がスキームの滑らかな射ならば、引き戻し $f^*D$ は $Y$ 上の単純正規交差因子である。
+\end{lemma}
+
+\begin{proof}
+$f$ は平坦なので、『因子』補題 \ref{divisors-lemma-pullback-effective-Cartier-defined} により
+引き戻しが定義され、主張には意味がある。$q \in f^*D$ が $p \in D$ に写るとする。
+定義 \ref{etale-definition-strict-normal-crossings} のような正則パラメータ系
+$x_1, \ldots, x_d \in \mathfrak m_p$ と $1 \leq r \leq d$ を選ぶ。$f$ は滑らかだから、局所環準同型
+$\mathcal{O}_{X, p} \to \mathcal{O}_{Y, q}$ は平坦であり、ファイバー環
+$$
+\mathcal{O}_{Y, q}/\mathfrak m_p \mathcal{O}_{Y, q} =
+\mathcal{O}_{Y_p, q}
+$$
+は正則局所環である（例えば『代数』補題
+\ref{algebra-lemma-characterize-smooth-over-field}）。$\mathcal{O}_{Y_p, q}$ の正則パラメータ系に写る元
+$y_1, \ldots, y_n \in \mathfrak m_q$ を選ぶ。このとき
+$x_1, \ldots, x_d, y_1, \ldots, y_n$ は極大イデアル $\mathfrak m_q$ を生成する。
+したがって『代数』補題 \ref{algebra-lemma-dimension-base-fibre-equals-total} により
+$\mathcal{O}_{Y, q}$ は次元 $d + n$ の正則局所環であり、
+$x_1, \ldots, x_d, y_1, \ldots, y_n$ は正則パラメータ系である。$f^*D$ は
+$\mathcal{O}_{Y, q}$ において $x_1 \ldots x_r$ で切り出されるので、補題が従う。
+\end{proof}
+
+\noindent
+正規交差因子の定義は次のとおりである。
+
+\begin{definition}
+\label{etale-definition-normal-crossings}
+$X$ を局所 Noether スキームとする。$X$ 上の {\it 正規交差因子}とは、任意の $p \in D$ に対して、
+像が $p$ を含む \'etale 射 $U \to X$ が存在し、$D \times_X U$ が $U$ 上の単純正規交差因子と
+なるような有効 Cartier 因子 $D \subset X$ のことをいう。
+\end{definition}
+
+\noindent
+例えば $D = V(x^2 + y^2)$ は $\Spec(\mathbf{R}[x, y])$ 上の正規交差因子である
+（ただし単純ではない）。実際、\'etale 被覆 $\Spec(\mathbf{C}[x, y])$ へ引き戻すと
+$(x - iy)(x + iy) = 0$ を得る。
+
+\begin{lemma}
+\label{etale-lemma-smooth-pullback-normal-crossings}
+\begin{slogan}
+滑らかな射による正規交差因子の引き戻しは、正規交差因子である。
+\end{slogan}
+$X$ を局所 Noether スキーム、$D \subset X$ を正規交差因子とする。
+$f : Y \to X$ がスキームの滑らかな射ならば、引き戻し $f^*D$ は $Y$ 上の正規交差因子である。
+\end{lemma}
+
+\begin{proof}
+$f$ は平坦なので、『因子』補題 \ref{divisors-lemma-pullback-effective-Cartier-defined} により
+引き戻しが定義され、主張には意味がある。$q \in f^*D$ が $p \in D$ に写るとする。
+定義 \ref{etale-definition-normal-crossings} のように、像が $p$ を含み、
+$D \times_X U \subset U$ が単純正規交差因子となる \'etale 射 $U \to X$ を選ぶ。
+$V = Y \times_X U$ とおく。$V \to Y$ は $U \to X$ の基底変換なので \'etale である
+（『射』補題 \ref{morphisms-lemma-base-change-etale}）。また補題
+\ref{etale-lemma-smooth-pullback-strict-normal-crossings} により、引き戻し $D \times_X V$ は
+$V$ 上の単純正規交差因子である。したがって $q \in f^*D$ に対して定義
+\ref{etale-definition-normal-crossings} の条件を確認でき、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-characterize-normal-crossings-normalization}
+$X$ を局所 Noether スキーム、$D \subset X$ を閉部分スキームとする。このとき、次は同値である。
+\begin{enumerate}
+\item $D$ は $X$ における正規交差因子である。
+\item $D$ は被約で、正規化 $\nu : D^\nu \to D$ は不分岐であり、任意の $n \geq 1$ に対してスキーム
+$$
+Z_n = D^\nu \times_D \ldots \times_D D^\nu
+\setminus \{(p_1, \ldots, p_n) \mid p_i = p_j\text{ for some }i\not = j\}
+$$
+は正則で、射 $Z_n \to X$ は局所完全交叉射であり、その余法層は階数 $n$ の局所自由層である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず条件 (2) をどのように理解すべきか説明する。不分岐射の対角射は開である
+（『射』補題 \ref{morphisms-lemma-diagonal-unramified-morphism}）。一方、$D^\nu \to D$ は分離的なので、
+対角射 $D^\nu \to D^\nu \times_D D^\nu$ は閉である。したがって $Z_n$ は
+$D^\nu \times_D \ldots \times_D D^\nu$ の開かつ閉な部分スキームである。また $Z_n \to X$ は合成
+$$
+Z_n \to D^\nu \times_D \ldots \times_D D^\nu \to \ldots \to
+D^\nu \times_D D^\nu \to D^\nu \to D \to X
+$$
+であり、各矢印は不分岐なので、不分岐である。不分岐射は形式的不分岐であるから
+（『射についてさらに』補題 \ref{more-morphisms-lemma-unramified-formally-unramified}）、
+$Z_n \to X$ は余法層 $\mathcal{C}_n = \mathcal{C}_{Z_n/X}$ をもつ。『射についてさらに』定義
+\ref{more-morphisms-definition-universal-thickening} を参照せよ。
+
+\medskip\noindent
+『射についてさらに』補題 \ref{more-morphisms-lemma-normalization-and-smooth} により、正規化の形成は
+\'etale 局所化と可換する。局所環が正則であること、射が不分岐であること、射が局所完全交叉であること、
+または射が不分岐で、その余法層が所与の階数の局所自由層であることは、\'etale 局所的に判定できる
+（『代数についてさらに』補題 \ref{more-algebra-lemma-regular-etale-extension}、『降下』補題
+\ref{descent-lemma-descending-property-unramified}、『射についてさらに』補題
+\ref{more-morphisms-lemma-descending-property-lci}、および『降下』補題
+\ref{descent-lemma-finite-locally-free-descends} を参照せよ）。
+
+\medskip\noindent
+前段落の注意と正規交差因子の定義により、単純正規交差因子
+$D = \bigcup_{i \in I} D_i$ が (2) を満たすことを証明すれば十分である。この場合
+$D^\nu = \coprod D_i$ であり、$D^\nu \to D$ は不分岐である（不分岐性は始域上局所的であり、
+$D_i \to D$ は不分岐な閉埋入だからである）。同様に、$Z_1 = D^\nu \to X$ は局所完全交叉射である。
+実際、これは始域上局所的に判定でき、各射 $D_i \to X$ は Cartier 因子の包含として正則埋入である
+（補題 \ref{etale-lemma-strict-normal-crossings} および『射についてさらに』補題
+\ref{more-morphisms-lemma-regular-immersion-lci} を参照せよ）。有効 Cartier 因子の余法層は可逆なので、
+余法層に関する要件も満たされる。同様に、$n \geq 2$ に対するスキーム $Z_n$ は、位数 $n$ の
+部分集合 $J \subset I$ を走らせたスキーム $D_J = \bigcap_{j \in J} D_j$ の非交和である。
+$D_J \to X$ は余次元 $n$ の正則埋入である（単純正規交差の定義と、『因子』補題
+\ref{divisors-lemma-Noetherian-scheme-regular-ideal} により茎上で判定できることによる）。
+したがって同じ仕方で $Z_n \to X$ が必要な性質をもつことが従う。いくつかの詳細は省略する。
+
+\medskip\noindent
+(2) を仮定し、$p \in D$ とする。$D^\nu \to D$ は不分岐なので、有限である
+（『射』補題 \ref{morphisms-lemma-finite-integral}）。したがって $D^\nu \to X$ は有限不分岐である。
+補題 \ref{etale-lemma-finite-unramified-etale-local} と \'etale 局所化（第2段落の議論と正規交差因子の定義により
+許される）により、$D^\nu = \coprod_{i \in I} D_i$、$I$ は有限、各 $D_i \to U$ は閉埋入である場合に
+帰着する。必要なら $X$ を縮小し、すべての $i \in I$ に対して $p \in D_i$ と仮定してよい。
+$Z_1 =  D^\nu \to X$ が不分岐な局所完全交叉射で、余法層が階数 $1$ の局所自由層であるという条件から、
+$D_i \subset X$ は有効 Cartier 因子である。『射についてさらに』補題
+\ref{more-morphisms-lemma-lci} および『因子』補題
+\ref{divisors-lemma-regular-immersion-noetherian} を参照せよ。証明を終えるため、
+$X = \Spec(A)$ はアフィンで、$D_i = V(f_i)$、$f_i \in A$ は非零因子であると仮定してよい。
+$I = \{1, \ldots, r\}$ ならば $p \in Z_r = V(f_1, \ldots, f_r)$ である。上と同じ参照から、
+$(f_1, \ldots, f_r)$ は $A$ の Koszul 正則イデアルである。余法層の階数が $r$ なので、
+$f_1, \ldots, f_r$ は $\mathcal{O}_{X, p}$ において $Z_r$ を定義するイデアルの極小生成系である。
+したがって $f_1, \ldots, f_r$ は $\mathcal{O}_{X, p}$ の正則列であり、
+$\mathcal{O}_{X, p}/(f_1, \ldots, f_r)$ は正則である。ゆえに『代数』補題
+\ref{algebra-lemma-regular-mod-x} により $f_1, \ldots, f_r$ は $\mathcal{O}_{X, p}$ の正則パラメータ系へ
+拡張できる。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{etale-lemma-characterize-normal-crossings}
+$X$ を局所 Noether スキーム、$D \subset X$ を閉部分スキームとする。$X$ が J-2 または Nagata ならば、
+次は同値である。
+\begin{enumerate}
+\item $D$ は $X$ における正規交差因子である。
+\item 任意の $p \in D$ に対して、$D$ の狭義 Hensel 化 $\mathcal{O}_{X, p}^{sh}$ のスペクトルへの
+引き戻しは単純正規交差因子である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) は直ちに従い、$X$ が J-2 または Nagata であるという仮定を必要としない。
+実際、$p \in D$ とし、$D$ の引き戻しが $U$ 上の単純正規交差因子となる \'etale 近傍
+$(U, u) \to (X, p)$ を選ぶ。このとき $\mathcal{O}_{X, p}^{sh} = \mathcal{O}_{U, u}^{sh}$ であり、
+$\Spec(\mathcal{O}_{U, u}^{sh})$ 上の $D$ の跡は、$\mathcal{O}_{U, u}$ ですでにそうであるため、
+正則パラメータ系の一部で切り出される。
+
+\medskip\noindent
+逆向きの含意を示すため、補題 \ref{etale-lemma-characterize-normal-crossings-normalization} の判定法を用いる。
+正規化 $D^\nu \to D$ の形成は狭義 Hensel 化と可換する。『射についてさらに』補題
+\ref{more-morphisms-lemma-normalization-and-henselization} を参照せよ。$D^\nu \to D$ が有限であることを
+示せれば、$D^\nu \to D$ およびスキーム $Z_n$ はすべて必要な性質を満たす。それらはすべて局所環の
+レベルで判定できるからである（ただし射 $D^\nu \to D$ の有限性は局所環上では判定できない）。
+詳細な確認は省略する。
+
+\medskip\noindent
+$X$ が Nagata ならば、『射』補題 \ref{morphisms-lemma-nagata-normalization} により
+$D^\nu \to D$ は有限である。
+
+\medskip\noindent
+$X$ は J-2 であると仮定し、点 $p \in D$ を選ぶ。$D^\nu \to D$ が $p$ の近傍上で有限であることを
+示す。仮定により、$\mathcal{O}_{X, p}^{sh}$ の正則パラメータ系
+$f_1, \ldots, f_d$ と $1 \leq r \leq d$ が存在し、
+$\Spec(\mathcal{O}_{X, p}^{sh})$ 上の $D$ の跡は $f_1 \ldots f_r$ で切り出される。このとき
+$$
+D^\nu \times_X \Spec(\mathcal{O}_{X, p}^{sh}) = 
+\coprod\nolimits_{i = 1, \ldots, r} V(f_i)
+$$
+である。$f_i$ が $f_i \in \mathcal{O}_U(U)$ から来るようなアフィン \'etale 近傍
+$(U, u) \to (X, p)$ を選び、$D_i = V(f_i) \subset U$ とおく。$\mathcal{O}_{D_i, u}$ の狭義 Hensel 化は
+正則環 $\mathcal{O}_{X, p}^{sh}/(f_i)$ である。したがって $\mathcal{O}_{D_i, u}$ は正則である
+（例えば『代数についてさらに』補題 \ref{more-algebra-lemma-henselization-regular}）。$X$ は J-2 なので、
+$D_i$ の正則軌跡は開である。そこで $U$ を Zariski 開集合で置き換え、各 $i$ に対して $D_i$ は
+正則であると仮定してよい。すると
+$$
+\coprod\nolimits_{i = 1, \ldots, r} D_i = D^\nu \times_X U
+\longrightarrow D \times_X U
+$$
+は正規化射であり、明らかに有限である。言い換えると、$D^\nu \to D$ の基底変換が有限となる
+$(X, p)$ の \'etale 近傍 $(U, u)$ を得た。したがって降下により $D^\nu \to D$ は有限である
+（『降下』補題 \ref{descent-lemma-descending-property-finite}）。これで証明が完了する。
+\end{proof}

@@ -1,0 +1,2601 @@
+% Generated mechanically from frozen input inputs/p03/ja/tex/injectives.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{18}
+\chapter{入射対象}
+
+
+
+\phantomsection
+\label{injectives-section-phantom}
+
+
+\section{序論}
+\label{injectives-section-introduction}
+
+\noindent
+今後の章では，環付きサイト上の加群の層のコホモロジーを扱うために，
+入射対象と K-入射複体の存在を用いる。本章では，まずサイト上の加群について，
+次により一般に Grothendieck アーベル圏について，入射対象と
+K-入射複体を構成する方法を説明する。
+
+\medskip\noindent
+アーベル群の圏と環上の加群の圏が十分多くの入射対象をもつことは，
+すでに分かっている。《代数詳論》第
+\ref{more-algebra-section-abelian-groups} 節および第
+\ref{more-algebra-section-injectives-modules} 節を参照せよ。
+
+
+
+
+
+\section{加群に対する Baer の議論}
+\label{injectives-section-baer}
+
+\noindent
+任意の $R$-加群 $M$ を入射加群に埋め込めることを示すには，
+より集合論的な別の方法がある。この方法では，押し出しの超限余極限によって
+入射加群を構成する。この方法は《代数詳論》第
+\ref{more-algebra-section-injectives-modules} 節の方法よりいくぶん抽象的で
+複雑だが，より一般的でもある。この方法は Baer に始まるものらしく，
+Cartan と Eilenberg が \cite{Cartan-Eilenberg} で，Grothendieck が
+\cite{Tohoku} で改めて論じた。後者では，Grothendieck はこの方法を用いて，
+他の多くのアーベル圏が十分多くの入射対象をもつことを示している。
+一般の場合には後で戻る（第 \ref{injectives-section-grothendieck-categories} 節）。
+
+\medskip\noindent
+まず，いくつか集合論的な注意を述べる。
+$\{B_{\beta}\}_{\beta \in \alpha}$ を，順序数 $\alpha$ で添字づけられた，
+ある圏 $\mathcal{C}$ の対象の帰納系とする。
+$\colim_{\beta \in \alpha} B_\beta$ が $\mathcal{C}$ に存在すると仮定する。
+$A$ が $\mathcal{C}$ の対象ならば，自然な写像
+\begin{equation}
+\label{injectives-equation-compare}
+\colim_{\beta \in \alpha} \Mor_\mathcal{C}(A, B_\beta)
+\longrightarrow
+\Mor_\mathcal{C}(A, \colim_{\beta \in \alpha} B_\beta).
+\end{equation}
+がある。実際，ある $\beta$ に対して写像 $A \to B_\beta$ が与えられると，
+$B_\beta \to \colim_{\beta \in \alpha} B_\alpha$ と合成して，
+$A$ から余極限への写像を自然に得る。左辺の余極限は集合の圏における
+余極限であることに注意せよ。一般に，(\ref{injectives-equation-compare}) は
+単射とも全射とも限らない。
+
+\begin{example}
+\label{injectives-example-not-surjective}
+集合の圏を考える。$A = \mathbf{N}$ とし，$B_n = \{1, \ldots, n\}$ を
+自然数で添字づけられた帰納系とする。ここで $n \leq m$ に対する
+$B_n \to B_m$ は明らかな写像である。このとき
+$\colim B_n = \mathbf{N}$ であるから，写像 $A \to \colim B_n$ であって，
+どの $m$ に対しても $A \to B_m$ として分解しないものがある。したがって，
+$\colim \Mor(A, B_n) \to \Mor(A, \colim B_n)$
+は全射でない。
+\end{example}
+
+\begin{example}
+\label{injectives-example-not-injective}
+次に，この写像が単射でない例を与える。$B_n =
+\mathbf{N}/\{1,  2, \ldots, n\}$，すなわち $\mathbf{N}$ の最初の
+$n$ 個の元を一つの元に潰した商集合とする。$n \leq m$ に対して自然な写像
+$B_n \to B_m$ があるので，$\{B_n\}$ は $\mathbf{N}$ 上の集合の系をなす。
+$\colim B_n = \{*\}$，すなわち一点集合であることは容易に分かる。
+したがって，任意の集合 $A$ に対して $\Mor(A, \colim B_n)$ は一点集合である。
+しかし，$\colim \Mor(A , B_n)$ は一点集合では{\bf ない}。
+自然な射影 $\mathbf{N} \to \mathbf{N}/\{1, 2, \ldots, n\}$ からなる
+写像族 $A \to B_n$ と，$A$ 全体を $1$ の類へ送る写像族 $A \to B_n$ を
+考える。この二つの写像族は各段階で相異なるので
+$\colim \Mor(A, B_n)$ においても相異なるが，同じ写像
+$A \to \colim B_n$ を誘導する。
+\end{example}
+
+\noindent
+それでも，有限集合からの写像を考えるなら，
+(\ref{injectives-equation-compare}) は常に同型である。
+
+\begin{lemma}
+\label{injectives-lemma-out-of-finite}
+(\ref{injectives-equation-compare}) において $\mathcal{C}$ が集合の圏であり，
+$A$ が{\it 有限集合}であるとする。このとき，この写像は全単射である。
+\end{lemma}
+
+\begin{proof}
+$f : A \to \colim B_\beta$ とする。$f$ の像は有限であり，その元を
+$c_1, \ldots, c_r \in \colim B_\beta$ とする。余極限の定義により，
+これらはすべて，十分大きな $\beta \in \alpha$ に対する $B_\beta$ の
+ある元から来る。したがって，有限段階で $f$ を持ち上げる写像
+$\widetilde{f} : A \to B_\beta$ を定義できる。
+これで (\ref{injectives-equation-compare}) が全射であることが示された。
+次に，二つの写像 $f : A \to B_\gamma$，$f' : A \to B_{\gamma'}$ が
+同じ写像 $A \to \colim B_\beta$ を定めると仮定する。
+すると，$A$ の有限個の各元は余極限の同じ点へ送られる。
+集合の余極限の定義により，$\beta \geq \gamma, \gamma'$ であって，
+$A$ の有限個の元が $f$ と $f'$ により $B_\beta$ の同じ点へ送られるものが
+存在する。これで (\ref{injectives-equation-compare}) が単射であることが示された。
+\end{proof}
+
+\noindent
+この補題で最も興味深いのは $\alpha = \omega$ の場合，すなわち
+$\{B_\beta\}$ が例 \ref{injectives-example-not-surjective} と
+\ref{injectives-example-not-injective} のような自然数上の系
+$\{B_n\}_{n \in \mathbf{N}}$ である場合である。
+本質的な考えは，長い合成の鎖 $B_1 \to B_2 \to \ldots$ に比べて
+$A$ が「小さい」ため，有限段階を経由して分解せざるを得ないということである。
+この補題のより一般的な形は《集合》補題
+\ref{sets-lemma-map-from-set-lifts} にある。
+次に，これを加群の圏へ一般化する。
+
+\begin{definition}
+\label{injectives-definition-small}
+$\mathcal{C}$ を圏，$I \subset \text{Arrows}(\mathcal{C})$ とし，
+$\alpha$ を順序数とする。$I$ に属する遷移写像をもつ $\alpha$ 上の
+任意の系 $\{B_\beta\}$ に対して写像 (\ref{injectives-equation-compare}) が
+同型になるとき，$\mathcal{C}$ の対象 $A$ は
+{\it $I$ に関して $\alpha$-小である}という。
+\end{definition}
+
+\noindent
+本節の残りでは，固定した可換環 $R$ 上の加群の圏に限って考える。
+また $I$ は単射，すなわち $R$ 上の加群の圏における
+{\it 単射準同型}全体とする。この場合，定義に現れる任意の系
+$\{B_\beta\}$ に対して，各写像
+$$
+B_\beta \to \colim_{\beta \in \alpha} B_\beta
+$$
+は単射である。したがって，写像 (\ref{injectives-equation-compare}) は
+{\it 単射}である。実際，$B_\beta$ を加群
+$B = \colim_{\beta \in \alpha} B_\beta$ の部分加群とみなすことができ，
+そのとき $B = \bigcup_{\beta \in \alpha} B_\beta$ である。
+$B_\alpha$ を余極限における像と同一視するなら，これは記号の濫用ではない。
+ここで，「大きな」順序数 $\alpha$ に対して加群が常に小さいことを示したい。
+
+\begin{proposition}
+\label{injectives-proposition-modules-are-small}
+$R$ を環，$M$ を $R$-加群とする。
+$\kappa$ を $M$ の部分加群全体の集合の濃度とする。
+$\alpha$ が，その共終性が $\kappa$ より大きい順序数ならば，
+$M$ は単射に関して $\alpha$-小である。
+\end{proposition}
+
+\begin{proof}
+証明は直接的だが，まず特別な場合を考えよう。
+$M$ が有限ならば，主張は次のことである：極限順序数でパラメータづけられ，
+遷移写像が単射である任意の帰納系 $\{B_\beta\}$ に対して，
+任意の写像 $M \to \colim B_\beta$ はある $B_\beta$ を経由して分解する。
+これは補題 \ref{injectives-lemma-out-of-finite} で証明した。
+
+\medskip\noindent
+一般の場合の証明を始める。
+写像 (\ref{injectives-equation-compare}) が全射であることだけを示せばよい。
+$f : M \to \colim B_\beta$ を写像とする。
+$B_\beta$ を余極限 $B = \bigcup_\beta B_\beta$ の部分対象とみなし，
+$M$ の部分対象 $\{f^{-1}(B_\beta)\}$ を考える。
+その一つ，例えば $f^{-1}(B_\beta)$ が $M$ 全体ならば，
+写像は $B_\beta$ を経由して分解する。
+
+\medskip\noindent
+そこで逆に，すべての $f^{-1}(B_\beta)$ が $M$ の真の部分対象であると
+仮定する。しかし，
+$$
+\bigcup f^{-1}(B_\beta) = f^{-1}\left(\bigcup B_\beta\right) = M.
+$$
+であることが分かっている。仮定により，$f^{-1}(B_\alpha)$ のうちに現れる
+$M$ の相異なる部分対象は高々 $\kappa$ 個である。
+したがって，濃度が高々 $\kappa$ の部分集合 $S \subset \alpha$ であって，
+$\beta'$ が $S$ を動くとき，$f^{-1}(B_{\beta'})$ が
+すべての $f^{-1}(B_\alpha)$ を動くものを選べる。
+
+\medskip\noindent
+ところが，$\alpha$ の共終性は $\kappa$ より大きいので，$S$ は
+上界 $\widetilde{\alpha} < \alpha$ をもつ。特に，すべての
+$f^{-1}(B_{\beta'})$（$\beta' \in S$）は
+$f^{-1}(B_{\widetilde{\alpha}})$ に含まれる。
+したがって $f^{-1}(B_{\widetilde{\alpha}}) = M$ である。
+特に，写像 $f$ は $B_{\widetilde{\alpha}}$ を経由して分解する。
+\end{proof}
+
+\noindent
+この補題から，多数の入射対象の存在を導ける。Baer の判定法を想起しよう。
+
+\begin{lemma}[Baer の判定法]
+\label{injectives-lemma-criterion-baer}
+\begin{reference}
+\cite[Theorem 1]{Baer}
+\end{reference}
+$R$ を環とする。$R$-加群 $Q$ が入射的であるための必要十分条件は，
+イデアル $\mathfrak{a} \subset R$ に対する任意の可換図式
+$$
+\xymatrix{
+\mathfrak{a} \ar[d] \ar[r] &  Q \\
+R \ar@{-->}[ru]
+}
+$$
+において点線の矢印が存在することである。
+\end{lemma}
+
+\begin{proof}
+これは《代数詳論》補題
+\ref{more-algebra-lemma-characterize-injective-bis} の (1) と (3) の
+同値性である。そこで与えられた証明は初等的であることに注意せよ
+（$\text{Ext}$ 群も，$R$-加群の圏における入射対象または射影対象の存在も
+用いていない）。
+\end{proof}
+
+\noindent
+$M$ が $R$-加群ならば，一般には補題 \ref{injectives-lemma-criterion-baer} のような
+一部だけ完成した図式が与えられる。その図式において，\emph{押し出し}
+$$
+\xymatrix{
+\mathfrak{a} \ar[d]  \ar[r] &  M \ar[d] \\
+R \ar[r] &  R \oplus_{\mathfrak{a}} M.
+}
+$$
+を作ることができる。ここで縦の写像は単射であり，図式は可換である。
+要点は，$M$ をより大きな加群 $R \oplus_{\mathfrak{a}} M$ へ
+拡大\emph{すれば}，$\mathfrak{a} \to M$ を $R$ へ拡張できることである。
+
+\medskip\noindent
+Baer の議論の要点は，この手続きを超限回繰り返すことである。
+そのため，まず $R$-加群 $M$ が与えられたとき，次の（巨大な）押し出し
+\begin{equation}
+\label{injectives-equation-huge-diagram}
+\vcenter{
+\xymatrix{
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+\mathfrak{a} \ar[r] \ar[d] & M \ar[d] \\
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+R \ar[r] &  \mathbf{M}(M).
+}
+}
+\end{equation}
+を定義する。上の水平矢印は，$\varphi$ に対応する直和因子の元
+$a \in \mathfrak a$ を元 $\varphi(a) \in M$ へ送る。
+左の縦矢印は，$\varphi$ に対応する直和因子の $a \in \mathfrak a$ を，
+$\varphi$ に対応する直和因子の元 $a \in R$ へそのまま送る。
+この構成の基本的性質を次の補題にまとめる。
+
+\begin{lemma}
+\label{injectives-lemma-construction}
+$R$ を環とする。
+\begin{enumerate}
+\item 構成 $M \mapsto (M \to \mathbf{M}(M))$ は $M$ に関して関手的である。
+\item 写像 $M \to \mathbf{M}(M)$ は単射である。
+\item 任意のイデアル $\mathfrak{a}$ と任意の $R$-加群準同型
+$\varphi : \mathfrak a \to M$ に対して，図式
+$$
+\xymatrix{
+\mathfrak{a} \ar[d] \ar[r]_\varphi &  M \ar[d] \\
+R \ar[r]^{\varphi'} & \mathbf{M}(M)
+}
+$$
+を可換にする $R$-加群準同型 $\varphi' : R \to \mathbf{M}(M)$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) と (3) は構成から直ちに従う。(1) を示すため，
+$\chi : M \to N$ を $R$-加群準同型とする。望ましい写像
+$\mathbf{M}(M) \to \mathbf{M}(N)$ を誘導する標準的な可換図式
+$$
+\xymatrix{
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+\mathfrak{a} \ar[r] \ar[d] \ar[rrd] & M \ar[rrd]^\chi \\
+\bigoplus_{\mathfrak a}
+\bigoplus_{\varphi \in \Hom_R(\mathfrak a, M)}
+R \ar[rrd] & &
+\bigoplus_{\mathfrak a}
+\bigoplus_{\psi \in \Hom_R(\mathfrak a, N)}
+\mathfrak{a} \ar[r] \ar[d] & N \\
+& & \bigoplus_{\mathfrak a}
+\bigoplus_{\psi \in \Hom_R(\mathfrak a, N)}
+R
+}
+$$
+が存在すると主張する。中央の東南東向きの矢印は，$\varphi$ に対応する
+直和因子 $\mathfrak a$ を $\text{id}_{\mathfrak a}$ により，
+$\psi = \chi \circ \varphi$ に対応する直和因子 $\mathfrak a$ へ送る。
+下の東南東向きの矢印についても同様である。詳細は省略する。
+\end{proof}
+
+\noindent
+ここでの考えは，関手 $\mathbf{M}$ を超限回適用することである。
+各順序数 $\alpha$ に対して，$R$-加群の圏上の関手
+$\mathbf{M}_\alpha$ と自然な単射 $N \to \mathbf{M}_\alpha(N)$ を定義する。
+これは超限再帰によって行う。まず，$\mathbf{M}_1 = \mathbf{M}$ は
+上で定義した関手である。順序数 $\alpha$ が与えられ，
+$\alpha' < \alpha$ に対して $\mathbf{M}_{\alpha'}$ が定義されているとする。
+$\alpha$ が直前の順序数 $\widetilde{\alpha}$ をもつなら，
+$$
+\mathbf{M}_\alpha = \mathbf{M} \circ \mathbf{M}_{\widetilde{\alpha}}.
+$$
+と置く。そうでない場合，すなわち $\alpha$ が極限順序数なら，
+$$
+\mathbf{M}_{\alpha}(N) =
+\colim_{\alpha' < \alpha} \mathbf{M}_{\alpha'}(N).
+$$
+と置く。$\mathbf{M}_{\alpha}(N)$ が順序数上の帰納系をなすことは
+（例えば帰納的に）明らかなので，この定義は意味をもつ。
+
+\begin{theorem}
+\label{injectives-theorem-baer-grothendieck}
+$\kappa$ を $R$ のイデアル全体の集合の濃度とし，$\alpha$ を，
+その共終性が $\kappa$ より大きい順序数とする。このとき
+$\mathbf{M}_\alpha(N)$ は入射 $R$-加群であり，
+$N \to \mathbf{M}_\alpha(N)$ は関手的な単射埋め込みである。
+\end{theorem}
+
+\begin{proof}
+Baer の判定法（補題 \ref{injectives-lemma-criterion-baer}）により，
+$\mathfrak{a} \subset R$ がイデアルならば任意の写像
+$f : \mathfrak{a} \to \mathbf{M}_\alpha(N)$ が
+$R \to \mathbf{M}_\alpha(N)$ へ拡張することを示せば十分である。
+$\alpha$ は極限順序数なので，
+$$
+\mathbf{M}_{\alpha}(N) =
+\colim_{\beta < \alpha} \mathbf{M}_{\beta}(N),
+$$
+である。したがって命題 \ref{injectives-proposition-modules-are-small} により，
+$$
+\Hom_R(\mathfrak{a}, \mathbf{M}_{\alpha}(N)) =
+\colim_{\beta < \alpha} \Hom_R(\mathfrak a, \mathbf{M}_{\beta}(N)).
+$$
+を得る。特に，ある $\beta' < \alpha$ が存在して，$f$ は部分加群
+$\mathbf{M}_{\beta'}(N)$ を経由して
+$$
+f : \mathfrak{a} \to \mathbf{M}_{\beta'}(N) \to
+\mathbf{M}_{\alpha}(N).
+$$
+のように分解する。しかし，関手 $\mathbf{M}$ の基本的性質
+（補題 \ref{injectives-lemma-construction} の (3) 参照）により，写像
+$\mathfrak{a} \to \mathbf{M}_{\beta'}(N)$ は
+$$
+R \to \mathbf{M}( \mathbf{M}_{\beta'}(N)) =
+\mathbf{M}_{\beta' + 1}(N),
+$$
+へ拡張できる。最後の対象は $\mathbf{M}_{\alpha}(N)$ に埋め込まれる
+（$\alpha$ は極限順序数なので $\beta' + 1 < \alpha$ である）。
+特に，$f$ は $\mathbf{M}_{\alpha}(N)$ へ拡張できる。
+\end{proof}
+
+
+
+
+\section{$G$-加群}
+\label{injectives-section-G-modules}
+
+\noindent
+後で（《微分次数付き代数》第
+\ref{dga-section-modules-noncommutative} 節），代数上の加群の圏が
+関手的な入射埋め込みをもつことを見る。その構成は《代数詳論》第
+\ref{more-algebra-section-injectives-modules} 節の構成とまったく同じである。
+
+\begin{lemma}
+\label{injectives-lemma-G-modules}
+$G$ を位相群，$R$ を環とする。$R\text{-}G$-加群の圏
+$\text{Mod}_{R, G}$（《エタール・コホモロジー》定義
+\ref{etale-cohomology-definition-G-module-continuous} 参照）は，
+関手的な入射埋め込みをもつ。特に，離散 $G$-加群の圏について成り立つ。
+\end{lemma}
+
+\begin{proof}
+補題の前の注意により，圏 $\text{Mod}_{R[G]}$ は関手的な入射埋め込みを
+もつ。忘却関手 $v : \text{Mod}_{R, G} \to \text{Mod}_{R[G]}$ を考える。
+この関手は充満忠実であり，単射を単射に移し，右随伴
+$$
+u : M \mapsto u(M) = \{x \in M \mid x\text{ の固定部分群は開である}\}
+$$
+をもつ。$v(M) = 0 \Rightarrow M = 0$ なので，《ホモロジー》補題
+\ref{homology-lemma-adjoint-functorial-injectives} から結論が従う。
+\end{proof}
+
+
+
+\section{空間上のアーベル群の層}
+\label{injectives-section-abelian-sheaves-space}
+
+
+\begin{lemma}
+\label{injectives-lemma-abelian-sheaves-space}
+$X$ を位相空間とする。$X$ 上のアーベル群の層の圏は，十分多くの
+入射対象をもつ。実際，関手的な入射埋め込みをもつ。
+\end{lemma}
+
+\begin{proof}
+アーベル群 $A$ に対して，《代数詳論》第
+\ref{more-algebra-section-injectives-modules} 節で構成した関手的な
+入射埋め込みを $j : A \to J(A)$ と書く。$\mathcal{F}$ を
+$X$ 上のアーベル群の層とする。《層》例
+\ref{sheaves-example-sheaf-product-pointwise} により，対応
+$$
+\mathcal{I} : U \mapsto
+\mathcal{I}(U) = \prod\nolimits_{x\in U} J(\mathcal{F}_x)
+$$
+はアーベル群の層である。$s \in \mathcal{F}(U)$ を
+$\prod_{x \in U} j(s_x)$ へ送る標準写像
+$\mathcal{F} \to \mathcal{I}$ がある。ここで
+$s_x \in \mathcal{F}_x$ は $x$ における $s$ の芽を表す。
+この写像は単射である。例えば《層》補題
+\ref{sheaves-lemma-sheaf-subset-stalks} を参照せよ。
+
+\medskip\noindent
+次を証明すればよい：各点 $x \in X$ に入射アーベル群 $I_x$ を対応させる
+規則 $x \mapsto I_x$ が与えられると，層
+$\mathcal{I} : U \mapsto \prod_{x \in U} I_x$ は入射的である。等式
+$$
+\mathcal{I} = \prod\nolimits_{x \in X} i_{x, *}I_x
+$$
+に注意せよ。右辺は摩天楼層 $i_{x, *}I_x$ の積である
+（記号については《層》第
+\ref{sheaves-section-skyscraper-sheaves} 節を参照）。等式
+$$
+\Mor_{\textit{Ab}}(\mathcal{F}_x, I_x)
+=
+\Mor_{\textit{Ab}(X)}(\mathcal{F}, i_{x, *}I_x).
+$$
+が成り立つ。《層》補題
+\ref{sheaves-lemma-stalk-skyscraper-adjoint} を参照せよ。
+したがって各 $i_{x, *}I_x$ が入射的であることは明らかである。
+ゆえに $\mathcal{I}$ の入射性は《ホモロジー》補題
+\ref{homology-lemma-product-injectives} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{環付き空間上の加群の層}
+\label{injectives-section-sheaves-modules-space}
+
+
+\begin{lemma}
+\label{injectives-lemma-sheaves-modules-space}
+$(X, \mathcal{O}_X)$ を環付き空間とする。《層》第
+\ref{sheaves-section-ringed-spaces} 節を参照せよ。
+$X$ 上の $\mathcal{O}_X$-加群の層の圏は十分多くの入射対象をもつ。
+実際，関手的な入射埋め込みをもつ。
+\end{lemma}
+
+\begin{proof}
+任意の環 $R$ と任意の $R$-加群 $M$ に対して，《代数詳論》第
+\ref{more-algebra-section-injectives-modules} 節で構成した関手的な
+入射埋め込みを $j : M \to J_R(M)$ と書く。$\mathcal{F}$ を
+$X$ 上の $\mathcal{O}_X$-加群の層とする。《層》例
+\ref{sheaves-example-sheaf-product-pointwise} および
+\ref{sheaves-example-sheaf-product-pointwise-algebraic-structure} により，対応
+$$
+\mathcal{I} : U \mapsto
+\mathcal{I}(U) = \prod\nolimits_{x\in U} J_{\mathcal{O}_{X, x}}(\mathcal{F}_x)
+$$
+はアーベル群の層である。$s \in \mathcal{F}(U)$ を
+$\prod_{x \in U} j(s_x)$ へ送る標準写像
+$\mathcal{F} \to \mathcal{I}$ がある。ここで
+$s_x \in \mathcal{F}_x$ は $x$ における $s$ の芽を表す。
+この写像は単射である。例えば《層》補題
+\ref{sheaves-lemma-sheaf-subset-stalks} を参照せよ。
+
+\medskip\noindent
+次を証明すればよい：各点 $x \in X$ に入射
+$\mathcal{O}_{X, x}$-加群 $I_x$ を対応させる規則
+$x \mapsto I_x$ が与えられると，層
+$\mathcal{I} : U \mapsto \prod_{x \in U} I_x$ は入射的である。等式
+$$
+\mathcal{I} = \prod\nolimits_{x \in X} i_{x, *}I_x
+$$
+に注意せよ。右辺は摩天楼層 $i_{x, *}I_x$ の積である
+（記号については《層》第
+\ref{sheaves-section-skyscraper-sheaves} 節を参照）。等式
+$$
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, I_x)
+=
+\Hom_{\mathcal{O}_X}(\mathcal{F}, i_{x, *}I_x).
+$$
+が成り立つ。《層》補題
+\ref{sheaves-lemma-stalk-skyscraper-adjoint} を参照せよ。
+したがって各 $i_{x, *}I_x$ は入射 $\mathcal{O}_X$-加群である
+（《ホモロジー》補題 \ref{homology-lemma-adjoint-preserve-injectives}
+を参照するか，直接論じればよい）。ゆえに $\mathcal{I}$ の入射性は
+《ホモロジー》補題 \ref{homology-lemma-product-injectives} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{圏上のアーベル群の前層}
+\label{injectives-section-injectives-presheaves}
+
+\noindent
+$\mathcal{C}$ を圏とする。これは $\Ob(\mathcal{C})$ が集合であることを
+意味することを想起せよ。一方では，$\mathcal{C}$ 上のアーベル群の前層を
+考える。《サイト》第 \ref{sites-section-presheaves} 節を参照せよ。
+他方では，$\Ob(\mathcal{C})$ の元で添字づけられたアーベル群の族，
+言い換えれば，対象の台集合が $\Ob(\mathcal{C})$ である離散圏上の
+前層を考える。この離散圏を単に $\Ob(\mathcal{C})$ と書くことにする。
+自然な関手
+$$
+i : \Ob(\mathcal{C}) \longrightarrow \mathcal{C}
+$$
+があり，したがって自然な制限関手，すなわち忘却関手
+$$
+v = i^p :
+\textit{PAb}(\mathcal{C})
+\longrightarrow
+\textit{PAb}(\Ob(\mathcal{C}))
+$$
+がある。《サイト》第 \ref{sites-section-functoriality-PSh} 節と比較せよ。
+$\mathcal{C}$ 上の前層を $B$，$\Ob(\mathcal{C})$ 上の前層を $A$ で表す。
+
+\medskip\noindent
+さらに，$\Ob(\mathcal{C})$ 上のアーベル群の前層に
+$\mathcal{C}$ 上のアーベル群の前層を対応させる二つの関手
+$i_p$ と ${}_pi$ がある。《サイト》第
+\ref{sites-section-functoriality-PSh} 節および第
+\ref{sites-section-more-functoriality-PSh} 節を参照せよ。
+ここでは $u = {}_pi$ を用いる。今の場合，これは
+$$
+uA(U) = \prod\nolimits_{U' \to U} A(U').
+$$
+で定義される。したがって，その元は族 $(a_\phi)_\phi$ であり，
+$\phi$ は終域が $U$ である $\mathcal{C}$ のすべての射を動く。
+$g : V \to U$ に対応する $uA$ の制限写像は，元
+$(a_\phi)_\phi$ を元 $(a_{g \circ \psi})_\psi$ へ送る。
+
+\medskip\noindent
+標準的な全射 $vuA \to A$ と標準的な単射 $B \to uvB$ がある。
+今の簡単な場合に
+$$
+\Mor_{\textit{PAb}(\mathcal{C})}(B, uA)
+=
+\Mor_{\textit{PAb}(\Ob(\mathcal{C}))}(vB, A).
+$$
+を示すことは読者に委ねる。一般の場合は《サイト》第
+\ref{sites-section-functoriality-PSh} 節にある。
+したがって対 $(u, v)$ は随伴関手の対の一例である。《圏論》第
+\ref{categories-section-adjoint} 節を参照せよ。
+
+\medskip\noindent
+ここで，上の状況について次の事実を列挙できる。
+\begin{enumerate}
+\item 関手 $u$ と $v$ は完全である。これは上で与えたこれらの関手の
+明示的記述から従う。
+\item 特に，関手 $v$ は単射を単射に移す。
+\item 圏 $\textit{PAb}(\Ob(\mathcal{C}))$ は十分多くの入射対象をもつ。
+\item 実際，《ホモロジー》定義
+\ref{homology-definition-functorial-injective-embedding} の意味で，
+関手的な入射埋め込み $A \mapsto \big(A \to J(A)\big)$ がある。
+すなわち，$J(A)$ を前層 $U\mapsto J(A(U))$ とすればよい。
+ここで $J(-)$ は，環 $\mathbf{Z}$ に対して《代数詳論》第
+\ref{more-algebra-section-injectives-modules} 節で構成した関手である。
+\end{enumerate}
+これらを合わせると，$\textit{PAb}(\mathcal{C})$ の対象 $B$ を
+入射対象へ埋め込む手続き $B \to uJ(vB)$ を得る。《ホモロジー》補題
+\ref{homology-lemma-adjoint-functorial-injectives} を参照せよ。
+
+\begin{proposition}
+\label{injectives-proposition-presheaves-injectives}
+圏上のアーベル群の前層には，関手的な入射埋め込みが存在する。
+\end{proposition}
+
+\begin{proof}
+上の議論を参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{サイト上のアーベル群の層}
+\label{injectives-section-injectives-sheaves}
+
+\noindent
+$\mathcal{C}$ をサイトとする。本節では，$\mathcal{C}$ 上の
+アーベル群の層が十分多くの入射対象をもつことを証明する。
+
+\medskip\noindent
+$i : \textit{Ab}(\mathcal{C}) \longrightarrow \textit{PAb}(\mathcal{C})$
+を，アーベル群の層からアーベル群の前層への忘却関手とする。
+また，
+${}^\# : \textit{PAb}(\mathcal{C}) \longrightarrow \textit{Ab}(\mathcal{C})$
+を層化関手とする。${}^\#$ は $i$ の左随伴であり，完全であり，
+任意のアーベル群の層 $\mathcal{F}$ に対して
+$i\mathcal{F}^\# = \mathcal{F}$ であることを想起せよ。最後に，
+$\mathcal{G} \to J(\mathcal{G})$ を，第
+\ref{injectives-section-injectives-presheaves} 節で得た入射前層への
+標準的な埋め込みとする。
+
+\medskip\noindent
+$\textit{Ab}(\mathcal{C})$ の任意の層 $\mathcal{F}$ と任意の順序数
+$\beta$ に対し，層 $J_\beta(\mathcal{F})$ を超限再帰によって定める。
+$J_0(\mathcal{F}) = \mathcal{F}$ と置き，
+$J_1(\mathcal{F}) = J(i\mathcal{F})^\#$ と定める。
+標準写像 $i\mathcal{F} \to J(i\mathcal{F})$ を層化すると，関手的な写像
+$$
+\mathcal{F} \longrightarrow J_1(\mathcal{F})
+$$
+を得る。$\#$ は完全なので，これは単射である。
+$J_{\alpha + 1}(\mathcal{F}) = J_1(J_\alpha(\mathcal{F}))$ と置く。
+すると標準的な単射
+$J_\alpha(\mathcal{F}) \to J_{\alpha + 1}(\mathcal{F})$ が得られる。
+極限順序数 $\beta$ に対しては
+$$
+J_\beta(\mathcal{F}) = \colim_{\alpha < \beta} J_\alpha(\mathcal{F}).
+$$
+と定める。これは有向余極限であることに注意せよ。したがって，任意の順序数
+$\alpha < \beta$ に対して単射
+$J_\alpha(\mathcal{F}) \to J_\beta(\mathcal{F})$ がある。
+
+\begin{lemma}
+\label{injectives-lemma-map-into-next-one}
+上の記法のもとで，$\mathcal{G}_1 \to \mathcal{G}_2$ を
+$\mathcal{C}$ 上のアーベル群の層の単射とする。$\alpha$ を順序数とし，
+$\mathcal{G}_1 \to J_\alpha(\mathcal{F})$ を層の射とする。このとき，
+次の図式を可換にする射
+$\mathcal{G}_2 \to J_{\alpha + 1}(\mathcal{F})$ が存在する。
+$$
+\xymatrix{
+\mathcal{G}_1 \ar[d] \ar[r] & \mathcal{G}_2 \ar[d] \\
+J_{\alpha}(\mathcal{F}) \ar[r] & J_{\alpha + 1}(\mathcal{F}) }
+$$
+\end{lemma}
+
+\begin{proof}
+写像 $i\mathcal{G}_1 \to i\mathcal{G}_2$ は単射である。したがって
+$i\mathcal{G}_1 \to iJ_\alpha(\mathcal{F})$ は
+$i\mathcal{G}_2 \to J(iJ_\alpha(\mathcal{F}))$ へ延長され，これに
+層化関手を適用すれば所望の写像が得られる。
+\end{proof}
+
+\noindent
+この補題は，系 $\{J_{\alpha}(\mathcal{F})\}$ がある意味で
+$\mathcal{F}$ の入射埋め込みをなすことを述べている。もちろん，すべての
+$\alpha$ は集合ではなく類をなすので，それらすべてにわたる極限を取ることは
+できない。しかし次の補題を併用すれば，すべての単射
+$\mathcal{G}_1 \to \mathcal{G}_2$ について入射性を調べる必要はない。
+
+\begin{lemma}
+\label{injectives-lemma-map-into-smaller}
+$\mathcal{G}_i$（$i\in I$）を $\mathcal{C}$ 上のアーベル群の層の集合と
+する。このとき，次を満たす順序数 $\beta$ が存在する。任意の層
+$\mathcal{F}$，任意の $i\in I$，および任意の写像
+$\varphi : \mathcal{G}_i \to J_\beta(\mathcal{F})$ に対し，
+$\varphi$ が $J_\alpha(\mathcal{F})$ を経由するような
+$\alpha < \beta$ が存在する。
+\end{lemma}
+
+\begin{proof}
+すべての $\mathcal{G}_i$ の直和を取ることにより，単一の層
+$\mathcal{G}$ の場合に帰着する。
+
+\medskip\noindent
+集合
+$$
+S = \coprod\nolimits_{U \in \Ob(\mathcal{C})} \mathcal{G}(U).
+$$
+および
+$$
+T_\beta
+=
+\coprod\nolimits_{U \in \Ob(\mathcal{C})} J_\beta(\mathcal{F})(U)
+$$
+を考える。集合 $T_\beta$ の間の遷移写像は単射である。
+$\beta$ の共終性が十分大きければ
+$T_\beta = \colim_{\alpha < \beta} T_\alpha$ である。《サイト》補題
+\ref{sites-lemma-colimit-over-ordinal-sections} を参照せよ。
+射 $\mathcal{G} \to J_\beta(\mathcal{F})$ が
+$J_\alpha(\mathcal{F})$ を経由するための必要十分条件は，対応する写像
+$S \to T_\beta$ が $T_\alpha$ を経由することである。《集合論》補題
+\ref{sets-lemma-map-from-set-lifts} により，$\beta$ の共終性が $S$ の
+濃度より大きければ，補題の結論が成り立つ。したがって，任意に大きな
+共終性をもつ順序数が存在することから補題が従う。《集合論》命題
+\ref{sets-proposition-exist-ordinals-large-cofinality} を参照せよ。
+\end{proof}
+
+\noindent
+$\mathcal{C}$ の対象 $X$ に対し，
+$\Gamma(U, \mathbf{Z}_X) = \oplus_{U \to X} \mathbf{Z}$ で定まる
+アーベル群の前層を $\mathbf{Z}_X$ と書くことを想起せよ。《サイト上の加群》
+第 \ref{sites-modules-section-free-abelian-presheaf} 節を参照せよ。
+この前層に付随する層を $\mathbf{Z}_X^\#$ と書く。《サイト上の加群》第
+\ref{sites-modules-section-free-abelian-sheaf} 節を参照せよ。
+これは性質
+\begin{equation}
+\label{injectives-equation-free-sheaf-on}
+\Mor_{\textit{Ab}(\mathcal{C})}(\mathbf{Z}_X^\#, \mathcal{G})
+=
+\mathcal{G}(X)
+\end{equation}
+によって特徴づけられる。ここで，左辺の元 $\varphi$ は右辺の
+$\varphi(1 \cdot \text{id}_X)$ に写される。これらの層を用いて，入射的な
+アーベル群の層を特徴づけることができる。
+
+\begin{lemma}
+\label{injectives-lemma-characterize-injectives}
+$\mathcal{J}$ を，次の性質をもつアーベル群の層とする。任意の
+$X\in \Ob(\mathcal{C})$，任意のアーベル群の部分層
+$\mathcal{S} \subset \mathbf{Z}_X^\#$，および任意の射
+$\varphi : \mathcal{S} \to \mathcal{J}$ に対し，$\varphi$ を延長する射
+$\mathbf{Z}_X^\# \to \mathcal{J}$ が存在する。このとき
+$\mathcal{J}$ は入射的なアーベル群の層である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} \to \mathcal{G}$ をアーベル群の層の単射とし，
+$\varphi : \mathcal{F} \to \mathcal{J}$ を射とする。《代数詳論》補題
+\ref{more-algebra-lemma-injective-abelian} の証明と同様に論じると，
+$\mathcal{F} \not = \mathcal{G}$ のとき，次を満たすアーベル群の層
+$\mathcal{F}'$ を見つければ十分であることが分かる：
+$\mathcal{F} \subset \mathcal{F}' \subset \mathcal{G}$
+であり，(a) 包含 $\mathcal{F} \subset \mathcal{F}'$ は真であり，
+(b) $\varphi$ は $\mathcal{F}'$ へ延長できる。
+$\mathcal{F}'$ を得るため，包含
+$\mathcal{F}(X) \subset \mathcal{G}(X)$ が真となる
+$\mathcal{C}$ の対象 $X$ を取る。$s \in \mathcal{G}(X)$，
+$s \not \in \mathcal{F}(X)$ を選ぶ。(\ref{injectives-equation-free-sheaf-on}) により
+切断 $s$ に対応する射を $\psi : \mathbf{Z}_X^\# \to \mathcal{G}$ とし，
+$\mathcal{S} = \psi^{-1}(\mathcal{F})$ と置く。仮定により，射
+$$
+\mathcal{S} \xrightarrow{\psi} \mathcal{F} \xrightarrow{\varphi} \mathcal{J}
+$$
+は $\varphi' : \mathbf{Z}_X^\# \to \mathcal{J}$ へ延長できる。
+$\varphi$ と同様に，$\varphi'$ は $\psi$ の核を零に写すことに注意せよ。
+したがって $\varphi'$ から射
+$\varphi'' : \Im(\psi) \to \mathcal{J}$
+が得られ，構成によりこれは共通部分
+$\mathcal{F} \cap \Im(\psi)$ 上で $\varphi$ と一致する。
+ゆえに $\varphi$ と $\varphi''$ を貼り合わせると，$\varphi$ の，真に大きい
+部分層 $\mathcal{F}' = \mathcal{F} + \Im(\psi)$ への延長が得られる。
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-sheaves-injectives}
+サイト上のアーベル群の層の圏は十分多くの入射対象をもつ。実際，
+関手的な入射埋め込みが存在する。《ホモロジー》定義
+\ref{homology-definition-functorial-injective-embedding} を参照せよ。
+\end{theorem}
+
+\begin{proof}
+$\mathcal{G}_i$（$i \in I$）を，各 $\mathbf{Z}_X^\#$ のすべての部分層が
+いずれかの $\mathcal{G}_i$ として現れるようなアーベル群の層の集合とする。
+この集合に補題 \ref{injectives-lemma-map-into-smaller} を適用して順序数 $\beta$ を得る。
+任意のアーベル群の層 $\mathcal{F}$ に対し，写像
+$\mathcal{F} \to J_\beta(\mathcal{F})$ は $\mathcal{F}$ の入射対象への
+単射であると主張する。構成により，対応
+$\mathcal{F} \mapsto \big(\mathcal{F} \to J_\beta(\mathcal{F})\big)$
+が実際に関手的であることに注意せよ。
+
+\medskip\noindent
+この主張を証明するには，補題 \ref{injectives-lemma-characterize-injectives} により，
+ある $\mathbf{Z}_X^\#$ の部分層 $\mathcal{G}$ からの任意の射
+$\gamma : \mathcal{G} \to J_\beta(\mathcal{F})$ を
+$\mathbf{Z}_X^\#$ 全体へ延長すれば十分である。補題
+\ref{injectives-lemma-map-into-smaller} により，ある $\alpha < \beta$ に対して
+$\gamma$ は $J_\alpha(\mathcal{F})$ を経由する。最後に補題
+\ref{injectives-lemma-map-into-next-one} を適用すると，$\gamma$ を
+$\mathbf{Z}_X^\# \to J_{\alpha + 1}(\mathcal{F})$ へ延長できる。これを
+$J_{\alpha + 1}(\mathcal{F}) \to J_\beta(\mathcal{F})$ と合成すれば，
+所望の延長が得られる。
+\end{proof}
+
+
+
+
+
+
+\section{環付きサイト上の加群}
+\label{injectives-section-sheaves-modules}
+
+\noindent
+$\mathcal{C}$ をサイトとし，$\mathcal{O}$ を $\mathcal{C}$ 上の環の層とする。
+《代数詳論》第 \ref{more-algebra-section-injectives-modules} 節との類比により，
+十分多くの入射的な $\mathcal{O}$-加群が存在することを証明しよう。
+まず，単射
+$$
+\bigoplus\nolimits_{U, \mathcal{I}}
+j_{U!}\mathcal{O}_U/\mathcal{I}
+\longrightarrow
+\mathcal{J}
+$$
+を選ぶ。ここで $\mathcal{J}$ は入射的なアーベル群の層であり，その存在は
+前節から従う。また，直和は $\mathcal{C}$ のすべての対象 $U$ と，すべての
+$\mathcal{O}$-部分加群 $\mathcal{I} \subset j_{U!}\mathcal{O}_U$ にわたる。
+局所化関手 $j_U : \mathcal{C}/U \to \mathcal{C}$ に対する制限関手と
+零による拡張関手については，《サイト上の加群》第
+\ref{sites-modules-section-localize} 節を参照せよ。
+
+\medskip\noindent
+任意の $\mathcal{O}$-加群の層 $\mathcal{F}$ に対し，その自然な
+$\mathcal{O}$-加群構造とともに
+$$
+\mathcal{F}^\vee
+=
+\SheafHom(\mathcal{F}, \mathcal{J})
+$$
+と書く。ここに内部 Hom への将来の参照を挿入する。
+さらに，$\mathcal{O}$-加群の層の標準的な平坦分解が必要になる。
+これは次のように構成できる。任意の $\mathcal{O}$-加群 $\mathcal{F}$ に対し，
+$$
+F(\mathcal{F})
+=
+\bigoplus\nolimits_{U \in \Ob(\mathcal{C}), s \in \mathcal{F}(U)}
+j_{U!}\mathcal{O}_U.
+$$
+と書く。これは平坦な $\mathcal{O}$-加群の層であり，標準的な全射
+$F(\mathcal{F}) \to \mathcal{F}$ を備える。《サイト上の加群》補題
+\ref{sites-modules-lemma-module-quotient-flat} を参照せよ。さらに構成
+$\mathcal{F} \mapsto F(\mathcal{F})$ は $\mathcal{F}$ に関して関手的である。
+
+\begin{lemma}
+\label{injectives-lemma-vee-exact-sheaves}
+関手 $\mathcal{F} \mapsto \mathcal{F}^\vee$ は完全である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{J}$ が入射的なアーベル群の層だからである。
+\end{proof}
+
+\noindent
+評価によって与えられる標準写像
+$ev : \mathcal{F} \to (\mathcal{F}^\vee)^\vee$ がある。すなわち，
+$x \in \mathcal{F}(U)$ に対し，
+$ev(x) \in (\mathcal{F}^\vee)^\vee =
+\SheafHom(\mathcal{F}^\vee, \mathcal{J})$ を写像
+$\varphi \mapsto \varphi(x)$ とする。
+
+\begin{lemma}
+\label{injectives-lemma-ev-injective-sheaves}
+任意の $\mathcal{O}$-加群 $\mathcal{F}$ に対し，評価写像
+$ev : \mathcal{F} \to (\mathcal{F}^\vee)^\vee$ は単射である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{J}$ の定義から確認できる。実際，
+$s \in \mathcal{F}(U)$ が零でないとする。随伴によって $s$ に対応する
+$\mathcal{O}$-加群の写像を
+$j_{U!}\mathcal{O}_U \to \mathcal{F}$ とし，その核を
+$\mathcal{I}$ とする。$s$ を零に写さない零でない写像
+$\mathcal{F} \supset j_{U!}\mathcal{O}_U/\mathcal{I}
+\to \mathcal{J}$ が存在する。$\mathcal{J}$ は入射的な
+$\mathcal{O}$-加群なので，これは写像
+$\varphi : \mathcal{F} \to \mathcal{J}$ へ延長される。
+すると $ev(s)(\varphi) = \varphi(s) \not = 0$ となり，主張が従う。
+\end{proof}
+
+\noindent
+$\mathcal{O}$-加群の標準的な全射
+$F(\mathcal{F}) \to \mathcal{F}$ から，上で見たように，
+$\mathcal{O}$-加群の標準的な単射
+$$
+(\mathcal{F}^\vee)^\vee \longrightarrow (F(\mathcal{F}^\vee))^\vee.
+$$
+が得られる。$J(\mathcal{F}) = (F(\mathcal{F}^\vee))^\vee$ と置く。
+$ev$ とこの表示写像との合成により，$\mathcal{F}$ に関して関手的な写像
+$\mathcal{F} \to J(\mathcal{F})$ が得られる。
+
+\begin{lemma}
+\label{injectives-lemma-JM-injective-sheaves}
+$\mathcal{O}$ を環の層とする。任意の $\mathcal{O}$-加群
+$\mathcal{F}$ に対し，$\mathcal{O}$-加群 $J(\mathcal{F})$ は入射的である。
+\end{lemma}
+
+\begin{proof}
+関手 $\Hom_\mathcal{O}(\mathcal{G}, J(\mathcal{F}))$ が完全であることを
+示せばよい。ここで
+\begin{eqnarray*}
+\Hom_\mathcal{O}(\mathcal{G}, J(\mathcal{F}))
+& = &
+\Hom_\mathcal{O}(\mathcal{G}, (F(\mathcal{F}^\vee))^\vee) \\
+& = &
+\Hom_\mathcal{O}
+(\mathcal{G}, \SheafHom(F(\mathcal{F}^\vee), \mathcal{J})) \\
+& = &
+\Hom(\mathcal{G} \otimes_\mathcal{O} F(\mathcal{F}^\vee), \mathcal{J})
+\end{eqnarray*}
+である。したがって，$F(\mathcal{F}^\vee)$ が平坦であり，
+$\mathcal{J}$ が入射的であることから所望の結論が従う。
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-sheaves-modules-injectives}
+$\mathcal{C}$ をサイトとし，$\mathcal{O}$ を $\mathcal{C}$ 上の環の層とする。
+サイト上の $\mathcal{O}$-加群の層の圏は十分多くの入射対象をもつ。
+実際，関手的な入射埋め込みが存在する。《ホモロジー》定義
+\ref{homology-definition-functorial-injective-embedding} を参照せよ。
+\end{theorem}
+
+\begin{proof}
+本節の議論から従う。
+\end{proof}
+
+\begin{proposition}
+\label{injectives-proposition-presheaves-modules}
+$\mathcal{C}$ を圏とし，$\mathcal{O}$ を $\mathcal{C}$ 上の環の前層とする。
+$\mathcal{O}$-加群の前層の圏 $\textit{PMod}(\mathcal{O})$ は，
+関手的な入射埋め込みをもつ。
+\end{proposition}
+
+\begin{proof}
+第 \ref{injectives-section-injectives-presheaves} 節の議論に沿って証明することも
+できるが，ここでは上の定理を用いる。対象 $U$ の被覆の集合を，$f$ が
+同型であるすべての一元集合 $\{f : V \to U\}$ からなるものとして，
+$\mathcal{C}$ にサイトの構造を入れる。これがサイトを定めることの確認は
+省略する。この位相に対する層は前層と同じである（証明は省略する）。
+したがって上の定理を適用できる。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{アーベル圏の埋め込み}
+\label{injectives-section-embedding}
+
+\noindent
+本節では，任意のアーベル圏が，十分多くの点をもつサイト上の
+アーベル群の層の圏へ埋め込まれることを示す。用いるサイトは次の補題で
+記述されるものである。
+
+\begin{lemma}
+\label{injectives-lemma-site-abelian-category}
+$\mathcal{A}$ をアーベル圏とし，
+$$
+\text{Cov} = \{\{f : V \to U\} \mid f\text{ は全射}\}.
+$$
+と置く。このとき $(\mathcal{A}, \text{Cov})$ はサイトである。《サイト》定義
+\ref{sites-definition-site} を参照せよ。
+\end{lemma}
+
+\begin{proof}
+圏に関する本書の規約により，$\Ob(\mathcal{A})$ は集合であることに注意せよ。
+同型射は全射であり，全射の合成は全射である。また，$\mathcal{A}$ における
+全射の底変換も全射である。《ホモロジー》補題
+\ref{homology-lemma-epimorphism-universal-abelian-category} を参照せよ。
+\end{proof}
+
+\noindent
+$\mathcal{A}$ を前加法圏とする。この場合，米田埋め込み
+$\mathcal{A} \to \textit{PSh}(\mathcal{A})$，$X \mapsto h_X$ は関手
+$\mathcal{A} \to \textit{PAb}(\mathcal{A})$ を経由する。
+
+\begin{lemma}
+\label{injectives-lemma-embedding}
+$\mathcal{A}$ をアーベル圏とし，$\mathcal{C} = (\mathcal{A}, \text{Cov})$
+を補題 \ref{injectives-lemma-site-abelian-category} で定めたサイトとする。
+このとき $X \mapsto h_X$ は充満忠実な完全関手
+$$
+\mathcal{A} \longrightarrow \textit{Ab}(\mathcal{C}).
+$$
+を定める。さらに，サイト $\mathcal{C}$ は十分多くの点をもつ。
+\end{lemma}
+
+\begin{proof}
+$f : V \to U$ を $\mathcal{A}$ の全射とし，$K = \Ker(f)$ と置く。
+$V \times_U V = \Ker((f, -f) : V \oplus V \to U)$ であることを想起せよ。
+《ホモロジー》例 \ref{homology-example-fibre-product-pushouts} を参照せよ。
+特に，単射 $K \oplus K \to V \times_U V$ が存在する。
+$p, q : V \times_U V \to V$ を二つの射影とする。写像
+$p - q : V \times_U V \to V$ は $f \circ (p  - q) = 0$ を満たすので，
+$K \to V$ を経由する。この写像を $c : V \times_U V \to K$ と書く。
+合成 $K \oplus K \to V \times_U V \to K$ は全射なので，$c$ も全射である。
+したがって
+$$
+V \times_U V \xrightarrow{p - q} V \to U \to 0
+$$
+は $\mathcal{A}$ の完全列である。ゆえに，$\mathcal{A}$ の対象 $X$ に対し，
+列
+$$
+0 \to
+\Hom_\mathcal{A}(U, X) \to
+\Hom_\mathcal{A}(V, X) \to
+\Hom_\mathcal{A}(V \times_U V, X)
+$$
+はアーベル群の完全列である。《ホモロジー》補題
+\ref{homology-lemma-check-exactness} を参照せよ。これは $h_X$ が
+$\mathcal{C}$ 上の層条件を満たすことを意味する。
+
+\medskip\noindent
+この関手は《圏論》補題 \ref{categories-lemma-yoneda} により充満忠実である。
+また，《ホモロジー》補題 \ref{homology-lemma-check-exactness} により，
+アーベル圏の間の左完全関手である。右完全性を示すため，
+$X \to Y$ を $\mathcal{A}$ の全射とする。$U$ を $\mathcal{A}$ の対象とし，
+$s \in h_Y(U) = \Mor_\mathcal{A}(U, Y)$ を $U$ 上の $h_Y$ の切断とする。
+《ホモロジー》補題
+\ref{homology-lemma-epimorphism-universal-abelian-category} により，射影
+$U \times_Y X \to U$ は全射である。したがって
+$\{V = U \times_Y X \to U\}$ は $U$ の被覆であり，$s|_V$ は
+$h_X$ の切断へ持ち上がる。これは $h_X \to h_Y$ がアーベル群の層の全射で
+あることを示す。《サイト》補題 \ref{sites-lemma-mono-epi-sheaves} を参照せよ。
+
+\medskip\noindent
+サイト $\mathcal{C}$ は《サイト》命題
+\ref{sites-proposition-criterion-points} により十分多くの点をもつ。
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-embedding}
+Freyd--Mitchell 埋め込み定理は，任意のアーベル圏 $\mathcal{A}$ から
+ある環上の加群の圏への充満忠実な完全関手が存在することを述べる。
+補題 \ref{injectives-lemma-embedding} はこれほど強くない。しかし，いずれにせよ
+サイト上のアーベル群の層を詳しく理解する必要があるため，この結果は
+Stacks プロジェクトに適している。さらに，$\mathcal{C}$ 上のアーベル群の
+層の圏では「図式追跡」が使える。例えば，各対象上の切断を用いて論じてもよく，
+$\mathcal{C}$ が十分多くの点をもつことを使って茎の水準で論じてもよい。
+補題 \ref{injectives-lemma-embedding} から Freyd--Mitchell 埋め込み定理を導く方法は，
+注意 \ref{injectives-remark-embedding-freyd} を参照せよ。
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-embedding-big}
+$\mathcal{A}$ が「大きな」アーベル圏，すなわち $\mathcal{A}$ の対象が
+類をなす場合，補題 \ref{injectives-lemma-embedding} は使えない。この場合，任意の
+対象の集合 $E \subset \Ob(\mathcal{A})$ に対し，
+$\Ob(\mathcal{A}')$ が集合であり $E \subset \Ob(\mathcal{A}')$ となる
+アーベル充満部分圏 $\mathcal{A}' \subset \mathcal{A}$ が存在する。
+そこで補題 \ref{injectives-lemma-embedding} を $\mathcal{A}'$ に適用できる。
+これを用いると，図式追跡に依存する結果が $\mathcal{A}$ でも成り立つことを
+証明できる。
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-embedding-freyd}
+$\mathcal{C}$ をサイトとする。$\textit{Ab}(\mathcal{C})$ は十分多くの
+入射対象をもつことに注意せよ。定理 \ref{injectives-theorem-sheaves-injectives} を
+参照せよ。（$\mathcal{C}$ が十分多くの点をもつ場合，これは直接的である。
+実際，$I$ が入射 $\mathbf{Z}$-加群で $p$ が点なら，$p_*I$ は入射的な層である。）
+また，$\textit{Ab}(\mathcal{C})$ は余生成対象をもつ（詳細は省略する）。
+したがって補題 \ref{injectives-lemma-embedding} により，$\mathcal{B}$ が余生成対象と
+十分多くの入射対象をもつような充満忠実な完全埋め込み
+$\mathcal{A} \to \mathcal{B}$ を得る。これを $\mathcal{A}^{opp}$ に適用すると，
+充満忠実な完全関手
+$i : \mathcal{A} \to \mathcal{D} = \mathcal{B}^{opp}$
+を得る。ここで $\mathcal{D}$ は十分多くの射影対象と生成対象をもつ。
+したがって $\mathcal{D}$ は射影的生成対象 $P$ をもつ。
+$R = \Mor_\mathcal{D}(P, P)$ と置く。このとき
+$$
+\mathcal{A} \longrightarrow \text{Mod}_R, \quad
+X \longmapsto \Hom_\mathcal{D}(P, X).
+$$
+が充満忠実な完全関手であることを確認できる。言い換えれば，上の注意
+\ref{injectives-remark-embedding} で述べた Freyd--Mitchell 定理が得られる。
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-embed-exact-category}
+補題 \ref{injectives-lemma-site-abelian-category} および \ref{injectives-lemma-embedding} の
+証明は {\it 完全圏} に対しても成り立つ。 \cite[Appendix A]{Buhler} および
+\cite[1.1.4]{BBD} を参照せよ。ここで手短に復習し，Stacks プロジェクトで
+必要になればさらに詳細を加えることにする。
+
+\medskip\noindent
+$\mathcal{A}$ を加法圏とする。$\mathcal{A}$ の射の対 $(i, p)$ で，
+$i : A \to B$，$p : B \to C$，$i$ が $p$ の核，$p$ が $i$ の余核であるものを
+{\it 核・余核対} という。核・余核対の集合 $\mathcal{E}$ が与えられたとき，
+ある射 $p$ に対して $(i, p) \in \mathcal{E}$ となるなら，
+$i : A \to B$ を {\it 許容単射} という。同様に，ある射 $i$ に対して
+$(i, p) \in \mathcal{E}$ となるなら，射 $p : B \to C$ を
+{\it 許容全射} という。次の公理が成り立つとき，対
+$(\mathcal{A}, \mathcal{E})$ を {\it 完全圏} という。
+\begin{enumerate}
+\item $\mathcal{E}$ は核・余核対の同型について閉じている。
+\item 任意の対象 $A$ に対し，射 $1_A$ は許容全射かつ許容単射である。
+\item 許容単射は合成について閉じている。
+\item 許容全射は合成について閉じている。
+\item 許容単射 $i : A \to B$ の任意の射 $A \to A'$ による押し出しが存在し，
+誘導される射 $i' : A' \to B'$ は許容単射である。
+\item 許容全射 $p : B \to C$ の任意の射 $C' \to C$ による底変換が存在し，
+誘導される射 $p' : B' \to C'$ は許容全射である。
+\end{enumerate}
+このような構造が与えられたとき，被覆，すなわち $\text{Cov}$ の元を
+許容全射によって与えて $\mathcal{C} = (\mathcal{A}, \text{Cov})$ と置く。
+上の公理から，これがサイトであることが直ちに従う。補題
+\ref{injectives-lemma-embedding} とまったく同様に，関手
+$$
+F : \mathcal{A} \longrightarrow \textit{Ab}(\mathcal{C}), \quad
+X \longmapsto h_X
+$$
+を考える。この関手は充満忠実かつ完全であり，完全性を反映する。
+さらに，$F$ の本質像に属する対象どうしの任意の拡大も $F$ の本質像に属する。
+\end{remark}
+
+
+
+
+
+\section{Grothendieck の AB 条件}
+\label{injectives-section-grothendieck-conditions}
+
+\noindent
+本節とこれに続くいくつかの節は，主として「大きな」アーベル圏，すなわち
+《圏論》注意 \ref{categories-remark-big-categories} に挙げた圏に関係する。
+念頭に置くべきよい例は，環付きサイト上の加群の層の圏である。
+
+\medskip\noindent
+Grothendieck は論文 \cite{Tohoku} において，非常に一般的な状況で
+入射対象の存在を証明した。彼は，特別な性質をもつアーベル圏を選び出すため，
+次の条件を用いた。
+
+\begin{definition}
+\label{injectives-definition-grothendieck-conditions}
+$\mathcal{A}$ をアーベル圏とする。次の条件に名前を付ける。
+\begin{enumerate}
+\item[AB3] $\mathcal{A}$ は直和をもつ。
+\item[AB4] $\mathcal{A}$ は AB3 を満たし，直和は完全である。
+\item[AB5] $\mathcal{A}$ は AB3 を満たし，フィルター余極限は完全である。
+\end{enumerate}
+双対な概念は次のとおりである。
+\begin{enumerate}
+\item[AB3*] $\mathcal{A}$ は直積をもつ。
+\item[AB4*] $\mathcal{A}$ は AB3* を満たし，直積は完全である。
+\item[AB5*] $\mathcal{A}$ は AB3* を満たし，余フィルター極限は完全である。
+\end{enumerate}
+$\mathcal{A}$ の対象 $U$ が {\it 生成対象} であるとは，
+$\mathcal{A}$ における任意の $N \subset M$，$N \not = M$ に対し，
+$N$ を経由しない射 $U \to M$ が存在することをいう。
+$\mathcal{A}$ が AB5 を満たし生成対象をもつとき，$\mathcal{A}$ を
+{\it Grothendieck アーベル圏} という。
+\end{definition}
+
+\noindent
+説明：アーベル圏における直和は余積である。アーベル圏が直和をもつ
+（すなわち AB3 を満たす）なら，余極限をもつ。《圏論》補題
+\ref{categories-lemma-colimits-coproducts-coequalizers} を参照せよ。
+同様に，$\mathcal{A}$ が AB3* を満たすなら極限をもつ。《圏論》補題
+\ref{categories-lemma-limits-products-equalizers} を参照せよ。
+直和の完全性とは次を意味する。添字集合 $I$ と $\mathcal{A}$ における短完全列
+$$
+0 \to A_i \to B_i \to C_i \to 0,\quad i \in I
+$$
+が与えられたとき，列
+$$
+0 \to
+\bigoplus\nolimits_{i \in I} A_i \to
+\bigoplus\nolimits_{i \in I} B_i \to
+\bigoplus\nolimits_{i \in I} C_i \to 0
+$$
+も完全である。AB4 を仮定しなければ，一般にはこの列が右で完全であること
+だけが成り立つ（すなわち，直和が存在するなら，直和を取る関手は右完全である）。
+同様に，フィルター余極限の完全性とは次を意味する。有向集合 $I$ と，
+$I$ 上の $\mathcal{A}$ における短完全列の系
+$$
+0 \to A_i \to B_i \to C_i \to 0
+$$
+が与えられたとき，列
+$$
+0 \to
+\colim_{i \in I} A_i \to
+\colim_{i \in I} B_i \to
+\colim_{i \in I} C_i \to 0
+$$
+も完全である。AB5 を仮定しなければ，一般にはこの列が右で完全であること
+だけが成り立つ（すなわち，余極限が存在するなら，余極限を取る関手は
+右完全である）。AB4* と AB5* についても同様に説明できる。
+
+
+
+\section{Grothendieck 圏における入射対象}
+\label{injectives-section-grothendieck-categories}
+
+\noindent
+生成対象が存在することから，Grothendieck アーベル圏 $\mathcal{A}$ の
+任意の対象 $M$ に対し，その部分対象は集合をなすことが従う。
+（一般の「大きな」アーベル圏では，これは成り立つとは限らない。）
+
+\begin{lemma}
+\label{injectives-lemma-set-of-subobjects}
+$\mathcal{A}$ を生成対象 $U$ をもつアーベル圏とし，$X$ を
+$\mathcal{A}$ の対象とする。$\kappa$ を $\Mor(U, X)$ の濃度とすると，
+次が成り立つ。
+\begin{enumerate}
+\item $\kappa$ より大きい基数で添字づけられた，$X$ の部分対象の
+真に増加する（または真に減少する）鎖は存在しない。
+\item $\alpha$ が共終性 $> \kappa$ の順序数なら，$\alpha$ で添字づけられた
+$X$ の部分対象の任意の増加列（または減少列）は最終的に定常である。
+\item $X$ の部分対象の集合の濃度は $\leq 2^\kappa$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) について，$\kappa' > \kappa$ を基数とし，
+$X_i$（$i \in \kappa'$）が真に増加すると仮定する。各 $i$ に対し，
+$X_{i + 1}$ を経由するが $X_i$ を経由しない
+$\phi_i \in \Mor(U, X)$ を取る。このとき射 $\phi_i$ は互いに異なり，
+$\kappa$ の定義に矛盾する。
+
+\medskip\noindent
+(2) は共終性の定義と (1) から従う。
+
+\medskip\noindent
+(3) を証明する。任意の部分対象 $Y \subset X$ に対し，
+$S_Y \in \mathcal{P}(\Mor(U, X))$（冪集合）を
+$S_Y = \{\phi \in \Mor(U,X) : \phi)\text{ が }Y\text{ を経由する}\}$
+と定める。このとき $Y = Y'$ であるための必要十分条件は
+$S_Y = S_{Y'}$ である。したがって部分対象の集合の濃度は，この冪集合の
+濃度以下である。
+\end{proof}
+
+\noindent
+補題 \ref{injectives-lemma-set-of-subobjects} により，次の定義は意味をもつ。
+
+\begin{definition}
+\label{injectives-definition-size}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，$M$ を $\mathcal{A}$ の
+対象とする。$M$ の {\it 大きさ} $|M|$ とは，$M$ の部分対象の集合の濃度である。
+\end{definition}
+
+\begin{lemma}
+\label{injectives-lemma-size-goes-down}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。
+$0 \to M' \to M \to M'' \to 0$ が $\mathcal{A}$ の短完全列なら，
+$|M'|, |M''| \leq |M|$ である。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-set-iso-classes-bounded-size}
+$\mathcal{A}$ を生成対象 $U$ をもつ Grothendieck アーベル圏とする。
+\begin{enumerate}
+\item $|M| \leq \kappa$ なら，$M$ は高々 $\kappa$ 個の $U$ のコピーの
+直和の商である。
+\item 任意の基数 $\kappa$ に対し，$|M| \leq \kappa$ を満たす対象 $M$ の
+同型類は集合をなす。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) について，任意の真の部分対象 $M' \subset M$ に対し，その像が
+$M'$ に含まれない射 $\varphi_{M'} : U \to M$ を選ぶ。このとき
+$\bigoplus_{M' \subset M} \varphi_{M'} : \bigoplus_{M' \subset M} U \to M$
+は全射である。(1) から (2) が従うことは明らかである。
+\end{proof}
+
+\begin{proposition}
+\label{injectives-proposition-objects-are-small}
+$\mathcal{A}$ を Grothendieck アーベル圏，$M$ を $\mathcal{A}$ の対象とし，
+$\kappa = |M|$ と置く。$\alpha$ が共終性が $\kappa$ より大きい順序数なら，
+$M$ は単射に関して $\alpha$-小である。
+\end{proposition}
+
+\begin{proof}
+命題 \ref{injectives-proposition-modules-are-small} と比較せよ。写像
+(\ref{injectives-equation-compare}) が全射であることだけを示せばよい。
+$f : M \to \colim B_\beta$ を写像とする。$B_\beta$ を余極限
+$B = \bigcup_\beta B_\beta$ の部分対象とみなし，$M$ の部分対象
+$\{f^{-1}(B_\beta)\}$ を考える。そのうちの一つ，例えば
+$f^{-1}(B_\beta)$ が $M$ 全体なら，写像は $B_\beta$ を経由する。
+
+\medskip\noindent
+$\mathcal{A}$ は AB5 を満たすので，
+$$
+\colim f^{-1}(B_\beta) = f^{-1}\left(\colim B_\beta\right) = M.
+$$
+仮定により，$f^{-1}(B_\alpha)$ の中に現れる $M$ の異なる部分対象は
+高々 $\kappa$ 個である。したがって，濃度が高々 $\kappa$ の部分集合
+$S \subset \alpha$ で，$\beta'$ が $S$ を動くとき
+$f^{-1}(B_{\beta'})$ が \emph{すべての} $f^{-1}(B_\alpha)$ を動くものを
+見つけることができる。
+
+\medskip\noindent
+しかし，$\alpha$ の共終性は $\kappa$ より大きいので，$S$ は
+$\widetilde{\alpha} < \alpha$ なる上界をもつ。特に，
+すべての $f^{-1}(B_{\beta'})$（$\beta' \in S$）は
+$f^{-1}(B_{\widetilde{\alpha}})$ に含まれる。したがって
+$f^{-1}(B_{\widetilde{\alpha}}) = M$ である。特に，写像 $f$ は
+$B_{\widetilde{\alpha}}$ を経由する。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-characterize-injective}
+\begin{slogan}
+対象が入射的であることを確かめるには，生成対象の部分対象に対して
+持ち上げが存在することだけを確かめればよい。
+\end{slogan}
+$\mathcal{A}$ を生成対象 $U$ をもつ Grothendieck アーベル圏とする。
+$\mathcal{A}$ の対象 $I$ が入射的であるための必要十分条件は，
+任意の部分対象 $M \subset U$ に対する可換図式
+$$
+\xymatrix{
+M \ar[d] \ar[r] &  I \\
+U \ar@{-->}[ru]
+}
+$$
+において点線の矢印が存在することである。
+\end{lemma}
+
+\begin{proof}
+加群の場合については補題 \ref{injectives-lemma-criterion-baer} を参照せよ。
+単射 $A \subset B$ と射 $\varphi : A \to I$ を選ぶ。部分対象
+$A \subset A' \subset B$ と，$\varphi$ を延長する射
+$\varphi' : A' \to I$ からなる対 $(A', \varphi')$ の集合を $S$ とする。
+この集合に明らかな仕方で半順序を入れる。全順序部分集合 $T \subset S$ を
+選ぶ。このとき
+$$
+A' = \colim_{t \in T} A_t \xrightarrow{\colim_{t \in T} \varphi_t} I
+$$
+は上界である。したがって Zorn の補題により，集合 $S$ は極大元
+$(A', \varphi')$ をもつ。$A' = B$ と主張する。そうでなければ，
+$A'$ を経由しない射 $\psi : U \to B$ を選ぶ。
+$N = A' \cap \psi(U)$，$M = \psi^{-1}(N)$ と置く。このとき写像
+$$
+M \to N \to A' \xrightarrow{\varphi'} I
+$$
+は射 $\chi : U \to I$ へ延長できる。$\chi|_{\Ker(\psi)} = 0$ なので，
+$\chi$ は
+$$
+U \to \Im(\psi) \xrightarrow{\varphi''} I
+$$
+と因数分解する。$\varphi'$ と $\varphi''$ は
+$N = A' \cap \Im(\psi)$ 上で一致するので，これらを合わせると射
+$A' + \Im(\psi) \to I$ が定まり，$A'$ の極大性に矛盾する。
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-injective-embedding-grothendieck}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。このとき
+$\mathcal{A}$ は関手的な入射埋め込みをもつ。
+\end{theorem}
+
+\begin{proof}
+定理 \ref{injectives-theorem-baer-grothendieck} の証明と比較せよ。
+$\mathcal{A}$ の生成対象 $U$ を選ぶ。対象 $M$ に対し，次の押し出し図式に
+よって $\mathbf{M}(M)$ を定める。
+$$
+\xymatrix{
+\bigoplus_{N \subset U}
+\bigoplus_{\varphi \in \Hom(N, M)}
+N \ar[r] \ar[d] & M \ar[d] \\
+\bigoplus_{N \subset U}
+\bigoplus_{\varphi \in \Hom(N, M)}
+U \ar[r] &  \mathbf{M}(M).
+}
+$$
+$M \mapsto \mathbf{M}(M)$ は関手であり，関手的な単射
+$M \to \mathbf{M}(M)$ が存在することに注意せよ。超限帰納法により，
+任意の順序数 $\alpha$ に対して関手 $\mathbf{M}_\alpha(M)$ を定める。
+すなわち，$\mathbf{M}_0(M) = M$ と置く。
+$\mathbf{M}_\alpha(M)$ が与えられたとき，
+$\mathbf{M}_{\alpha + 1}(M) = \mathbf{M}(\mathbf{M}_\alpha(M))$ と置く。
+極限順序数 $\beta$ に対しては
+$$
+\mathbf{M}_\beta(M) = \colim_{\alpha < \beta} \mathbf{M}_\alpha(M).
+$$
+と置く。最後に，共終性が $|U|$ より大きい任意の順序数 $\alpha$ を選ぶ。
+そのような順序数は《集合論》命題
+\ref{sets-proposition-exist-ordinals-large-cofinality} により存在する。
+$M \to \mathbf{M}_\alpha(M)$ が所望の関手的な入射埋め込みであると主張する。
+実際，$N \subset U$ を部分対象とし，
+$\varphi : N \to \mathbf{M}_\alpha(M)$ を射とすると，命題
+\ref{injectives-proposition-objects-are-small} により，ある $\alpha' < \alpha$ に対して
+$\varphi$ は $\mathbf{M}_{\alpha'}(M)$ を経由する。
+$\mathbf{M}(-)$ の構成により，$\varphi$ は $U$ から
+$\mathbf{M}_{\alpha' + 1}(M)$ への射へ延長され，したがって
+$\mathbf{M}_\alpha(M)$ への射へも延長される。補題
+\ref{injectives-lemma-characterize-injective} により，
+$\mathbf{M}_\alpha(M)$ は入射的である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Grothendieck 圏における K-入射対象}
+\label{injectives-section-K-injective}
+
+\noindent
+本節の内容は Serp\'e の論文 \cite{serpe} に基づく。この論文は，
+Spaltenstein による \cite{Spaltenstein} のいくつかの結果を一般の
+Grothendieck アーベル圏へ拡張している。補題
+\ref{injectives-lemma-characterize-K-injective} は Serp\'e の論文では暗黙にしか
+述べられていない。ここでは，定理
+\ref{injectives-theorem-injective-embedding-grothendieck} に対する Grothendieck の
+証明を模倣する。
+
+\begin{lemma}
+\label{injectives-lemma-surjection-bounded-size}
+$\mathcal{A}$ を生成対象 $U$ をもつ Grothendieck アーベル圏とする。
+基数上の関数 $c$ を
+$c(\kappa) = |\bigoplus_{\alpha \in \kappa} U|$ によって定める。
+$\pi : M \to N$ が全射なら，$N$ へ全射的に写る部分対象
+$M' \subset M$ で $|M'| \leq c(|N|)$ を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+任意の真の部分対象 $N' \subset N$ に対し，合成 $U \to M \to N$ が
+$N'$ を経由しないような射 $\varphi_{N'} : U \to M$ を選ぶ。
+$$
+M' = \Im\left(
+\bigoplus\nolimits_{N' \subset N} \varphi_{N'} :
+\bigoplus\nolimits_{N' \subset N} U \longrightarrow M\right)
+$$
+と置けば，$M'$ が求めるものである。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-acyclic-quotient-complexes-bounded-size}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。次を満たす基数
+$\kappa$ が存在する。任意の非輪状複体 $M^\bullet$ に対し，
+\begin{enumerate}
+\item $M^\bullet$ が零でなければ，上に有界で非輪状であり，
+$|N^n| \leq \kappa$ を満たす零でない部分複体 $N^\bullet$ が存在する。
+\item 複体の全射
+$$
+\bigoplus\nolimits_{i \in I} M_i^\bullet \longrightarrow M^\bullet
+$$
+で，各 $M_i^\bullet$ が上に有界かつ非輪状であり，
+$|M_i^n| \leq \kappa$ を満たすものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$ の生成対象 $U$ を選び，補題
+\ref{injectives-lemma-surjection-bounded-size} の関数を $c$ と書く。
+$\kappa = \sup \{c^n(|U|), n = 1, 2, 3, \ldots\}$ と置く。
+$n \in \mathbf{Z}$ とし，$\psi : U \to M^n$ を射とする。
+(1) と (2) を証明するには，$\psi$ が $N^n$ を経由するような，上に有界で
+非輪状かつ $|N^m| \leq \kappa$ を満たす部分複体
+$N^\bullet \subset M^\bullet$ が存在することを示せば十分である。
+そのため，
+$N^n = \Im(\psi)$，
+$N^{n + 1} = \Im(U \to M^n \to M^{n + 1})$ と置き，
+$m \geq n + 2$ に対して $N^m = 0$ とする。
+ある $k \leq n$ に対し，すべての $n > m \geq k$ について
+$N^m \subset M^m$ が次を満たすように構成されたと仮定する。
+\begin{enumerate}
+\item すべての $m \geq k$ に対し $\text{d}(N^m) \subset N^{m + 1}$。
+\item すべての $m \geq k + 1$ に対し
+$\Im(N^{m - 1} \to N^m) = \Ker(N^m \to N^{m + 1})$。
+\item すべての $m \geq k$ に対し
+$|N^m| \leq c^{\max\{n - m, 0\}}(|U|)$。
+\end{enumerate}
+$M^\bullet$ は非輪状なので，部分対象
+$\text{d}^{-1}(\Ker(N^k \to N^{k + 1})) \subset M^{k - 1}$ は
+$\Ker(N^k \to N^{k + 1})$ へ全射的に写る。したがって補題
+\ref{injectives-lemma-surjection-bounded-size} により，
+$\Ker(N^k \to N^{k + 1})$ へ全射的に写り，
+$|N^{k - 1}| \leq c^{n - k + 1}(|U|)$ を満たす
+$N^{k - 1} \subset M^{k - 1}$ を選べる。$k$ に関する帰納法で証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-characterize-K-injective}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，$\kappa$ を補題
+\ref{injectives-lemma-acyclic-quotient-complexes-bounded-size} の基数とする。
+複体 $I^\bullet$ が次を満たすと仮定する。
+\begin{enumerate}
+\item 各 $I^j$ は入射的である。
+\item $|M^n| \leq \kappa$ を満たす任意の上に有界な非輪状複体
+$M^\bullet$ に対し，
+$\Hom_{K(\mathcal{A})}(M^\bullet, I^\bullet) = 0$ である。
+\end{enumerate}
+このとき $I^\bullet$ は K-入射複体である。
+\end{lemma}
+
+\begin{proof}
+$M^\bullet$ を非輪状複体とする。順序数 $\alpha$ に関する帰納法で，
+非輪状部分複体 $K_\alpha^\bullet \subset M^\bullet$ を次のように構成する。
+$\alpha = 0$ に対して $K_0^\bullet = 0$ と置く。
+$\alpha > 0$ のときは次のように進める。
+\begin{enumerate}
+\item $\alpha = \beta + 1$ かつ $K_\beta^\bullet = M^\bullet$ なら，
+$K_\alpha^\bullet = K_\beta^\bullet$ とする。
+\item $\alpha = \beta + 1$ かつ $K_\beta^\bullet \not = M^\bullet$ なら，
+$M^\bullet/K_\beta^\bullet$ は零でない非輪状複体である。補題
+\ref{injectives-lemma-acyclic-quotient-complexes-bounded-size} にあるような部分複体
+$N_\alpha^\bullet \subset M^\bullet/K_\beta^\bullet$ を選ぶ。最後に，
+$K_\alpha^\bullet \subset M^\bullet$ を $N_\alpha^\bullet$ の逆像とする。
+\item $\alpha$ が極限順序数なら，
+$K_\beta^\bullet = \colim K_\alpha^\bullet$ と置く。
+\end{enumerate}
+十分大きい順序数 $\alpha$ に対して
+$M^\bullet = K_\alpha^\bullet$ であることは明らかである。
+$$
+\Hom_{K(\mathcal{A})}(K_\alpha^\bullet, I^\bullet)
+$$
+が零であることを $\alpha$ に関する超限帰納法で証明する。
+$\alpha = 0$ の場合は $K_0^\bullet$ が零なので成り立つ。
+$\beta$ について成り立ち，$\alpha = \beta + 1$ とする。
+上のリストの (1) の場合は明らかである。(2) の場合，複体の短完全列
+$$
+0 \to K_\beta^\bullet \to K_\alpha^\bullet \to N_\alpha^\bullet \to 0
+$$
+がある。$I^\bullet$ の各成分は入射的なので，完全列
+$$
+\Hom_{K(\mathcal{A})}(K_\beta^\bullet, I^\bullet) \leftarrow
+\Hom_{K(\mathcal{A})}(K_\alpha^\bullet, I^\bullet) \leftarrow
+\Hom_{K(\mathcal{A})}(N_\alpha^\bullet, I^\bullet)
+$$
+を得る。帰納法の仮定により左の項は零であり，$I^\bullet$ に関する仮定により
+右の項も零である。したがって中央の群も零である。
+最後に $\alpha$ を極限順序数とする。このとき
+$$
+\Hom^\bullet(K_\alpha^\bullet, I^\bullet) =
+\lim_{\beta < \alpha} \Hom^\bullet(K_\beta^\bullet, I^\bullet)
+$$
+である。《代数詳論》第 \ref{more-algebra-section-hom-complexes} 節の記法を
+用いている。これらの複体は《代数詳論》式
+(\ref{more-algebra-equation-cohomology-hom-complex}) により
+$K(\mathcal{A})$ における射を計算する。各 $j$ について $I^j$ は
+入射的なので，この系の遷移写像は全射であることに注意せよ。
+さらに，極限順序数 $\alpha$ に対して極限と値は一致する
+（上の表示式を参照）。したがって《ホモロジー》補題
+\ref{homology-lemma-ML-over-ordinals} を適用して結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-functorial-homotopies}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，
+$(K_i^\bullet)_{i \in I}$ を非輪状複体の集合とする。
+関手 $M^\bullet \mapsto \mathbf{M}^\bullet(M^\bullet)$ と自然変換
+$j_{M^\bullet} : M^\bullet \to \mathbf{M}^\bullet(M^\bullet)$ で，
+次を満たすものが存在する。
+\begin{enumerate}
+\item $j_{M^\bullet}$ は各次数で単射な擬同型である。
+\item 任意の $i \in I$ と $w : K_i^\bullet \to M^\bullet$ に対し，
+射 $j_{M^\bullet} \circ w$ は零写像にホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+各 $i \in I$ に対し，零写像にホモトピックで各次数で単射な複体の写像
+$K_i^\bullet \to L_i^\bullet$ で，$L_i^\bullet$ が零に擬同型であるものを
+選ぶ。例えば，$L_i^\bullet$ として $K_i^\bullet$ の恒等写像の錐を取ればよい。
+次の押し出し図式によって $\mathbf{M}^\bullet(M^\bullet)$ を定める。
+$$
+\xymatrix{
+\bigoplus_{i \in I}
+\bigoplus_{w : K_i^\bullet \to M^\bullet}
+K_i^\bullet \ar[r] \ar[d] & M^\bullet \ar[d] \\
+\bigoplus_{i \in I}
+\bigoplus_{w : K_i^\bullet \to M^\bullet}
+L_i^\bullet \ar[r] &  \mathbf{M}^\bullet(M^\bullet).
+}
+$$
+このとき $M^\bullet \mapsto \mathbf{M}^\bullet(M^\bullet)$ は関手である。
+右の垂直矢印が関手的な単射 $j_{M^\bullet}$ を定める。
+$j_{M^\bullet}$ の余核は写像 $K_i^\bullet \to L_i^\bullet$ の余核の直和と
+同型であり，したがって非輪状である。ゆえに $j_{M^\bullet}$ は擬同型である。
+(2) は構成から成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-functorial-injective}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。
+関手 $M^\bullet \mapsto \mathbf{N}^\bullet(M^\bullet)$ と自然変換
+$j_{M^\bullet} : M^\bullet \to \mathbf{N}^\bullet(M^\bullet)$ で，
+次を満たすものが存在する。
+\begin{enumerate}
+\item $j_{M^\bullet}$ は各次数で単射な擬同型である。
+\item 任意の $n \in \mathbf{Z}$ に対し，写像
+$M^n \to \mathbf{N}^n(M^\bullet)$ は部分対象
+$I^n \subset \mathbf{N}^n(M^\bullet)$ を経由し，$I^n$ は
+$\mathcal{A}$ の入射対象である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+関手的な入射埋め込み $i_M : M \to I(M)$ を選ぶ。定理
+\ref{injectives-theorem-injective-embedding-grothendieck} を参照せよ。
+任意の複体 $M^\bullet$ に対し，項
+$J^n(M^\bullet) = I(M^n) \oplus I(M^{n + 1})$ と微分
+$$
+d_{J^\bullet(M^\bullet)} =
+\left(
+\begin{matrix}
+0 & 1 \\
+0 & 0
+\end{matrix}
+\right)
+$$
+をもつ複体を $J^\bullet(M^\bullet)$ と書く。写像
+$i_{M^n} : M^n \to I(M^n)$ および
+$i_{M^{n + 1}} \circ d : M^n \to M^{n + 1} \to I(M^{n + 1})$ によって
+$M^n$ を $I(M^n) \oplus I(M^{n + 1})$ へ写すと，複体の標準的な単射
+$u_{M^\bullet} : M^\bullet \to J^\bullet(M^\bullet)$ が得られる。
+したがって，$M^\bullet$ に関して関手的な複体の短完全列
+$$
+0 \to M^\bullet \xrightarrow{u_{M^\bullet}}
+J^\bullet(M^\bullet) \xrightarrow{v_{M^\bullet}}
+Q^\bullet(M^\bullet) \to 0
+$$
+が得られる。
+$$
+\mathbf{N}^\bullet(M^\bullet) = C(v_{M^\bullet})^\bullet[-1].
+$$
+と置く。ここで
+$$
+\mathbf{N}^n(M^\bullet) = Q^{n - 1}(M^\bullet) \oplus J^n(M^\bullet)
+$$
+であり，その微分は
+$$
+\left(
+\begin{matrix}
+- d^{n - 1}_{Q^\bullet(M^\bullet)} & - v^n_{M^\bullet} \\
+0 & d^n_{J^\bullet(M)}
+\end{matrix}
+\right)
+$$
+である。したがって $u$ から誘導される複体の写像
+$j_{M^\bullet} : M^\bullet \to \mathbf{N}^\bullet(M^\bullet)$ がある。
+これは構成により単射であり，入射的な部分対象を経由する。
+また，上の複体の短完全列に付随するコホモロジーの長完全列を調べれば，
+$j_{M^\bullet}$ が擬同型であることが分かる。
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-K-injective-embedding-grothendieck}
+\begin{slogan}
+Grothendieck アーベル圏における K-入射複体の存在。
+\end{slogan}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。
+任意の複体 $M^\bullet$ に対し，擬同型 $M^\bullet \to I^\bullet$ で，
+すべての $n$ について $M^n \to I^n$ が単射，$I^n$ が
+$\mathcal{A}$ の入射対象，かつ $I^\bullet$ が K-入射複体となるものが
+存在する。さらに，この構成は $M^\bullet$ に関して関手的である。
+\end{theorem}
+
+\begin{proof}
+定理 \ref{injectives-theorem-baer-grothendieck} および定理
+\ref{injectives-theorem-injective-embedding-grothendieck} の証明と比較せよ。
+補題 \ref{injectives-lemma-acyclic-quotient-complexes-bounded-size} および
+\ref{injectives-lemma-characterize-K-injective} にあるような基数 $\kappa$ を選ぶ。
+上に有界な非輪状複体の集合 $(K_i^\bullet)_{i \in I}$ で，
+$|K^n| \leq \kappa$ を満たす任意の上に有界な非輪状複体 $K^\bullet$ が，
+ある $i \in I$ に対して $K_i^\bullet$ と同型になるものを選ぶ。
+これは補題 \ref{injectives-lemma-set-iso-classes-bounded-size} により可能である。
+補題 \ref{injectives-lemma-functorial-homotopies} で構成した関手を
+$\mathbf{M}^\bullet(-)$，補題 \ref{injectives-lemma-functorial-injective} で
+構成した関手を $\mathbf{N}^\bullet(-)$ と書く。これらの関手はいずれも
+単射な自然変換 $\text{id} \to \mathbf{M}$ および
+$\text{id} \to \mathbf{N}$ を伴う。
+
+\medskip\noindent
+超限再帰を用いて関手の列 $\mathbf{T}_\alpha(-)$ と，対応する自然変換
+$\text{id} \to \mathbf{T}_\alpha$ を定める。すなわち
+$\mathbf{T}_0(M^\bullet) = M^\bullet$ と置く。
+$\mathbf{T}_\alpha$ が与えられたとき，
+$$
+\mathbf{T}_{\alpha + 1}(M^\bullet) =
+\mathbf{N}^\bullet(\mathbf{M}^\bullet(\mathbf{T}_\alpha(M^\bullet)))
+$$
+と置く。$\beta$ が極限順序数なら
+$$
+\mathbf{T}_\beta(M^\bullet) =
+\colim_{\alpha < \beta} \mathbf{T}_\alpha(M^\bullet)
+$$
+と置く。この系の遷移写像は単射な擬同型である。AB5 により，余極限は
+なお $M^\bullet$ と擬同型である。$U$ を $\mathcal{A}$ の生成対象とするとき，
+$\alpha$ の共終性が $\max(\kappa, |U|)$ より大きければ，
+$M^\bullet \to \mathbf{T}_\alpha(M^\bullet)$ が求める写像であると主張する。
+すなわち，補題 \ref{injectives-lemma-characterize-K-injective} の条件 (1) と (2) を
+確認すれば十分である。
+
+\medskip\noindent
+(1) については補題 \ref{injectives-lemma-characterize-injective} の判定法を用いる。
+$M \subset U$ とし，ある $n \in \mathbf{Z}$ に対して
+$\varphi : M \to \mathbf{T}^n_\alpha(M^\bullet)$ を射とする。
+命題 \ref{injectives-proposition-objects-are-small} により，ある
+$\alpha' < \alpha$ に対して $\varphi$ は
+$\mathbf{T}^n_{\alpha'}(M^\bullet)$ を経由する。特に，関手
+$\mathbf{N}^\bullet(-)$ の構成により，$\varphi$ は
+$\mathcal{A}$ の入射対象を経由するので，$U$ 上の射へ持ち上がる。
+
+\medskip\noindent
+(2) について，$K^\bullet$ を $|K^n| \leq \kappa$ を満たす上に有界な
+非輪状複体とし，$w : K^\bullet  \to \mathbf{T}_\alpha(M^\bullet)$ を
+複体の射とする。このとき，ある $i \in I$ に対して
+$K^\bullet \cong K_i^\bullet$ である。さらに，再び命題
+\ref{injectives-proposition-objects-are-small} により，ある $\alpha' < \alpha$ に対して
+$w$ は $\mathbf{T}^n_{\alpha'}(M^\bullet)$ を経由する。
+特に，関手 $\mathbf{M}^\bullet(-)$ の構成により，$w$ は零写像に
+ホモトピックである。これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+\section{Grothendieck アーベル圏に関する補足}
+\label{injectives-section-additional-Grothendieck}
+
+\noindent
+本節では，Grothendieck アーベル圏に関するいくつかのフォークロア的な
+結果をまとめる。
+
+\begin{lemma}
+\label{injectives-lemma-grothendieck-brown}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，
+$F : \mathcal{A}^{opp} \to \textit{Sets}$ を関手とする。
+このとき，$F$ が表現可能であるための必要十分条件は，$F$ が余極限と可換，
+すなわち任意の図式 $\mathcal{I} \to \mathcal{A}$，
+$i \in \mathcal{I}$ に対して
+$$
+F(\colim_i N_i) = \lim F(N_i)
+$$
+が成り立つことである。
+\end{lemma}
+
+\begin{proof}
+$F$ が表現可能なら，余極限の定義により余極限と可換である。
+
+\medskip\noindent
+$F$ が余極限と可換すると仮定する。このとき
+$F(M \oplus N) = F(M) \times F(N)$ であり，これを用いて $F(M)$ に
+群構造を定めることができる。したがって，加法的かつ右完全な関手
+$F : \mathcal{A} \to \textit{Ab}$ を得る。すなわち，短完全列
+$0 \to K \to L \to M \to 0$ を完全列
+$F(K) \leftarrow F(L) \leftarrow F(M) \leftarrow 0$ へ移す
+（《ホモロジー》第 \ref{homology-section-functors} 節と比較せよ）。
+
+\medskip\noindent
+$U$ を $\mathcal{A}$ の生成対象とする。
+$A = \bigoplus_{s \in F(U)} U$ と置き，
+$s_{univ} = (s)_{s \in F(U)} \in F(A) = \prod_{s \in F(U)} F(U)$ とする。
+$s_{univ}$ の $A'$ への制限が零となる最大の部分対象
+$A' \subset A$ を取る。$\mathcal{A}$ が Grothendieck 圏であり，
+$F$ が余極限と可換するため，これは存在する。さらに $F$ が余極限と
+可換するので，$F(A)$ において $s_{univ}$ へ写る一意な元
+$\overline{s}_{univ} \in F(A/A')$ が存在する。$A/A'$ が $F$ を
+表現すると主張する。言い換えれば，米田写像
+$$
+\overline{s}_{univ} : h_{A/A'} \longrightarrow F
+$$
+は同型である。$M \in \Ob(\mathcal{A})$ および $s \in F(M)$ を取る。
+全射
+$$
+c_M :
+A_M = \bigoplus\nolimits_{\varphi \in \Hom_\mathcal{A}(U, M)} U
+\longrightarrow
+M.
+$$
+を考える。これにより
+$F(c_M)(s) = (s_\varphi) \in \prod_\varphi F(U)$ を得る。
+写像
+$$
+\psi :
+A_M = \bigoplus\nolimits_{\varphi \in \Hom_\mathcal{A}(U, M)} U
+\longrightarrow
+\bigoplus\nolimits_{s \in F(U)} U = A
+$$
+を，$\varphi$ に対応する直和因子から $s_\varphi$ に対応する直和因子への
+$U$ 上の恒等写像によって定める。構成により，$s_{univ}$ は
+$(s_\varphi)_\varphi$ へ写る。言い換えれば，図式
+$$
+\xymatrix{
+A' \ar[r] &
+A \ar@{..>}[r]_{s_{univ}} & F \\
+K \ar[r] \ar[u]^{?} & A_M \ar[u]^\psi \ar[r] &
+M \ar@{..>}[u]_s
+}
+$$
+の右の正方形は可換である。$K = \Ker(A_M \to M)$ と置く。
+$s$ の $K$ への制限は零なので，$A'$ の定義により
+$\psi(K) \subset A'$ である。したがって射 $M \to A/A'$ が誘導される。
+この構成は写像 $h_{A/A'}(M) \to F(M)$ の逆を与える（詳細は省略する）。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-grothendieck-products}
+Grothendieck アーベル圏は Ab3* を満たす。
+\end{lemma}
+
+\begin{proof}
+$M_i$（$i \in I$）を，集合 $I$ で添字づけられた $\mathcal{A}$ の
+対象の族とする。関手 $F = \prod_{i \in I} h_{M_i}$ は余極限と可換する。
+したがって補題 \ref{injectives-lemma-grothendieck-brown} を適用できる。
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-existence-D}
+導来圏に関する章では，一貫して「小さな」アーベル圏を扱う
+（Stacks プロジェクトの規約も同様である）。「大きな」アーベル圏
+$\mathcal{A}$ については，導来圏の射が集合をなすかどうか明らかでないため，
+導来圏 $D(\mathcal{A})$ が存在するかどうかも明らかでない。
+一般には実際に成り立たない。《例》補題
+\ref{examples-lemma-big-abelian-category} を参照せよ。
+しかし $\mathcal{A}$ が Grothendieck アーベル圏で，
+$K^\bullet, L^\bullet$ が $K(\mathcal{A})$ の対象なら，定理
+\ref{injectives-theorem-K-injective-embedding-grothendieck} により，K-入射複体
+$I^\bullet$ への擬同型 $L^\bullet \to I^\bullet$ が存在し，《導来圏》補題
+\ref{derived-lemma-K-injective} により
+$$
+\Hom_{D(\mathcal{A})}(K^\bullet, L^\bullet) =
+\Hom_{K(\mathcal{A})}(K^\bullet, I^\bullet)
+$$
+となる。右辺は集合である。Grothendieck アーベル圏の例には，環上の加群の圏，
+より一般には環付きサイト上の加群の層の圏がある。
+\end{remark}
+
+\begin{lemma}
+\label{injectives-lemma-derived-products}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。このとき，
+\begin{enumerate}
+\item $D(\mathcal{A})$ は直和と直積の両方をもつ。
+\item 直和は任意の複体の各次数での直和を取ることによって得られる。
+\item 直積は K-入射複体の各次数での直積を取ることによって得られる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K^\bullet_i$（$i \in I$）を，集合 $I$ で添字づけられた
+$D(\mathcal{A})$ の対象の族とする。各次数での直和
+$\bigoplus_{i \in I} K^\bullet_i$ が $D(\mathcal{A})$ における直和で
+あると主張する。実際，$I^\bullet$ を K-入射複体とすると，
+\begin{align*}
+\Hom_{D(\mathcal{A})}(\bigoplus\nolimits_{i \in I} K^\bullet_i, I^\bullet)
+& =
+\Hom_{K(\mathcal{A})}(\bigoplus\nolimits_{i \in I} K^\bullet_i, I^\bullet) \\
+& =
+\prod\nolimits_{i \in I} \Hom_{K(\mathcal{A})}(K^\bullet_i, I^\bullet) \\
+& =
+\prod\nolimits_{i \in I} \Hom_{D(\mathcal{A})}(K^\bullet_i, I^\bullet)
+\end{align*}
+となり，所望の主張を得る。定理
+\ref{injectives-theorem-K-injective-embedding-grothendieck} により任意の複体を
+K-入射複体で表せるので，これで十分である。直積を構成するには，各 $i$ に対し
+K-入射分解 $K_i^\bullet \to I_i^\bullet$ を選ぶ。このとき
+$\prod_{i \in I} I_i^\bullet$ が $D(\mathcal{A})$ における直積であると
+主張する。これは《導来圏》補題
+\ref{derived-lemma-product-K-injective} から従う。
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-direct-sum-product-derived}
+$R$ を環とし，$M_n$（$n \in \mathbf{Z}$）を $R$-加群とする。
+$E_n = M_n[-n] \in D(R)$ と書く。このとき
+$E = \bigoplus M_n[-n]$ は，$D(R)$ における対象 $E_n$ の直和でも
+直積でもある。直和であることは補題 \ref{injectives-lemma-derived-products} の
+証明を見れば分かる。直積であることを示すため，入射分解
+$M_n \to I_n^\bullet$ を取る。補題 \ref{injectives-lemma-derived-products} の証明により，
+$D(R)$ において
+$$
+\prod E_n = \prod I_n^\bullet[-n]
+$$
+である。$\text{Mod}_R$ における直積は完全なので，
+$\prod I_n^\bullet[-n]$ は $E$ と擬同型である。より一般に，
+$\mathcal{A}$ が Ab4* を満たす Grothendieck アーベル圏であるとき，
+同じ議論が $D(\mathcal{A})$ で成り立つ。
+\end{remark}
+
+\begin{lemma}
+\label{injectives-lemma-RF-commutes-with-Rlim}
+$F : \mathcal{A} \to \mathcal{B}$ をアーベル圏の加法関手とし，次を仮定する。
+\begin{enumerate}
+\item $\mathcal{A}$ は Grothendieck アーベル圏である。
+\item $\mathcal{B}$ は完全な可算直積をもつ。
+\item $F$ は可算直積と可換する。
+\end{enumerate}
+このとき $RF : D(\mathcal{A}) \to D(\mathcal{B})$ は導来極限と可換する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$ は十分多くの K-入射対象をもつので，$RF$ は存在する
+（定理 \ref{injectives-theorem-K-injective-embedding-grothendieck} および
+《導来圏》補題 \ref{derived-lemma-K-injective-defined}）。
+主張の意味は，$K = R\lim K_n$ なら
+$RF(K) = R\lim RF(K_n)$ となることである。記法については《導来圏》定義
+\ref{derived-definition-derived-limit} を参照せよ。$RF$ は三角圏の完全関手
+なので，$D(\mathcal{A})$ の対象の可算直積と $RF$ が可換することを
+示せば十分である。補題 \ref{injectives-lemma-derived-products} の証明で，
+$D(\mathcal{A})$ における直積は K-入射複体の直積を取ることによって
+計算され，さらに K-入射複体の直積も K-入射的であることを見た。
+また，《導来圏》補題 \ref{derived-lemma-products} では，
+$D(\mathcal{B})$ における直積が各次数での直積によって計算されることを見た。
+$RF$ は K-入射代表に $F$ を適用することで計算され，仮定により $F$ は
+可算直積と可換するので，補題が従う。
+\end{proof}
+
+\noindent
+次の補題は，Cartan--Eilenberg 分解の存在
+（《導来圏》第 \ref{derived-section-cartan-eilenberg} 節）の
+一種の一般化である。
+
+\begin{lemma}
+\label{injectives-lemma-K-injective-embedding-filtration}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，$K^\bullet$ を
+$\mathcal{A}$ のフィルター付き複体とする。《ホモロジー》定義
+\ref{homology-definition-filtered-complex} を参照せよ。このとき，
+$\mathcal{A}$ のフィルター付き複体の射 $j : K^\bullet \to J^\bullet$ で，
+次を満たすものが存在する。
+\begin{enumerate}
+\item $J^n$，$F^pJ^n$，$J^n/F^pJ^n$ および
+$F^pJ^n/F^{p'}J^n$ は $\mathcal{A}$ の入射対象である。
+\item $J^\bullet$，$F^pJ^\bullet$，$J^\bullet/F^pJ^\bullet$ および
+$F^pJ^\bullet/F^{p'}J^\bullet$ は K-入射複体である。
+\item $j$ は擬同型
+$K^\bullet \to J^\bullet$，
+$F^pK^\bullet \to F^pJ^\bullet$，
+$K^\bullet/F^pK^\bullet \to J^\bullet/F^pJ^\bullet$，および
+$F^pK^\bullet/F^{p'}K^\bullet \to F^pJ^\bullet/F^{p'}J^\bullet$
+を誘導する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+定理 \ref{injectives-theorem-K-injective-embedding-grothendieck} により，擬同型
+$i : K^\bullet \to I^\bullet$ と
+$i^p : F^pK^\bullet \to I^{p, \bullet}$，および可換図式
+$$
+\vcenter{
+\xymatrix{
+K^\bullet \ar[d]_i & F^pK^\bullet \ar[l] \ar[d]_{i^p} \\
+I^\bullet & I^{p, \bullet} \ar[l]_{\alpha^p}
+}
+}
+\quad\text{および}\quad
+\vcenter{
+\xymatrix{
+F^{p'}K^\bullet \ar[d]_{i^{p'}} &
+F^pK^\bullet \ar[l] \ar[d]_{i^p} \\
+I^{p', \bullet} &
+I^{p, \bullet} \ar[l]_{\alpha^{p p'}}
+}
+}
+\quad\text{（}p' \leq p\text{ に対して）}
+$$
+を得る。ここで
+$\alpha^p \circ \alpha^{p' p} = \alpha^{p'}$ および
+$\alpha^{p'p''} \circ \alpha^{pp'} = \alpha^{pp''}$ である。
+問題は，写像 $\alpha^p : I^{p, \bullet} \to I^\bullet$ が単射とは
+限らないことである。各 $p$ に対し，$I^{p, \bullet}$ から，
+各項が $\mathcal{A}$ の入射対象である非輪状 K-入射複体
+$J^{p, \bullet}$ への単射
+$t^p : I^{p, \bullet} \to J^{p, \bullet}$ を選ぶ
+（まず恒等写像の錐へ写し，次に上の定理を用いる）。
+次の図式を可換にする複体の写像
+$s^p : I^\bullet \to J^{p, \bullet}$ を選ぶ。
+$$
+\xymatrix{
+K^\bullet \ar[d]_i & F^pK^\bullet \ar[l] \ar[d]_{i^p} \\
+I^\bullet \ar[rd]_{s^p} & I^{p, \bullet} \ar[d]^{t^p} \\
+& J^{p, \bullet}
+}
+$$
+これは可能である。実際，合成
+$F^pK^\bullet \to J^{p, \bullet}$ は，$J^{p, \bullet}$ が非輪状かつ
+K-入射的なので零写像にホモトピックである
+（《導来圏》補題 \ref{derived-lemma-K-injective}）。
+対象 $J^{p, n - 1}$ は入射的であり，射
+$F^pK^n \to K^n \to I^n$ は単射なので，このホモトピーを与える写像
+$F^pK^n \to J^{p, n - 1}$ を写像
+$h^n : I^n \to J^{p, n - 1}$ へ持ち上げられる。
+そこで $s^p = h \circ \text{d} + \text{d} \circ h$ と置く。
+（注意：$t^p = s^p \circ \alpha^p$ とはならないので，以下でこれを
+用いないよう注意する必要がある。）
+
+\medskip\noindent
+$$
+J^\bullet = I^\bullet \times \prod\nolimits_p J^{p, \bullet}
+$$
+を考える。$D(\mathcal{A})$ における直積は K-入射複体の直積を取ることで
+与えられ（補題 \ref{injectives-lemma-derived-products}），$J^{p, \bullet}$ は
+$D(\mathcal{A})$ で $0$ と同型なので，
+$J^\bullet \to I^\bullet$ は $D(\mathcal{A})$ における同型である。
+写像
+$$
+j = i \times (s^p \circ i)_{p \in \mathbf{Z}} :
+K^\bullet
+\longrightarrow
+I^\bullet \times \prod\nolimits_p J^{p, \bullet} = J^\bullet
+$$
+を考える。上の注意により，これは擬同型である。また，これは単射でもある。
+$p \in \mathbf{Z}$ に対し，$F^pJ^\bullet \subset J^\bullet$ を
+$$
+\Im\left(
+\alpha^p \times (t^{p'} \circ \alpha^{pp'})_{p' \leq p} :
+I^{p, \bullet}
+\to
+I^\bullet \times \prod\nolimits_{p' \leq p} J^{p', \bullet}
+\right)
+\times \prod\nolimits_{p' > p} J^{p', \bullet}
+$$
+とする。$\alpha^{pp} = \text{id}$ で $t^p$ は単射なので，この複体は
+$I^{p, \bullet} \times \prod_{p' > p} J^{p, \bullet}$ と同型である。
+したがって（上と同様に論じれば）
+$F^pJ^\bullet$ は $I^{p, \bullet}$ と擬同型である。
+上の図式の可換性により $j(F^pK^\bullet) \subset F^pJ^\bullet$ であり，
+対応する複体の写像 $F^pK^\bullet \to F^pJ^\bullet$ は，今述べたことから
+擬同型である。最後に，
+$F^{p + 1}J^\bullet \subset F^pJ^\bullet$ を示すには，
+$\alpha^{p + 1p} \circ \alpha^{pp'} = \alpha^{p + 1p'}$ と，証明の
+第1段落にある最初の表示図式の可換性を用いる。
+
+\medskip\noindent
+$j : K^\bullet \to J^\bullet$ が補題で求めた解であると主張する。
+実際，$F^pJ^n$ は
+$I^{p, n} \times \prod_{p' > p} J^{p', n}$ と同型であり，
+入射対象の直積は入射的なので，$F^pJ^n$ は $\mathcal{A}$ の入射対象である。
+すると単射 $F^pJ^n \to J^n$ は分裂するので，商 $J^n/F^pJ^n$ も，
+入射対象 $J^n$ の直和因子として入射的である。
+$F^pJ^n/F^{p'}J^n$ についても同様である。特にこれは
+$0 \to F^pJ^\bullet \to J^\bullet \to J^\bullet/F^pJ^\bullet \to 0$
+が各次数で分裂する複体の短完全列であり，したがって定義により
+$K(\mathcal{A})$ の識別三角形を定めることを意味する。
+$J^\bullet$ と $F^pJ^\bullet$ は K-入射複体なので，《導来圏》補題
+\ref{derived-lemma-triangle-K-injective} により
+$J^\bullet/F^pJ^\bullet$ も K-入射的である。同様の議論により
+$F^pJ^\bullet/F^{p'}J^\bullet$ も K-入射的である。
+構成により $j : K^\bullet \to J^\bullet$ と，誘導される写像
+$F^pK^\bullet \to F^pJ^\bullet$ は擬同型である。関係する複体の
+コホモロジー長完全列を用いると，
+$K^\bullet/F^pK^\bullet \to J^\bullet/F^pJ^\bullet$ および
+$F^pK^\bullet/F^{p'}K^\bullet \to F^pJ^\bullet/F^{p'}J^\bullet$
+についても同じことが成り立つ。
+\end{proof}
+
+\begin{remark}
+\label{injectives-remark-ext-into-filtered-complex}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，$K^\bullet$ を
+$\mathcal{A}$ のフィルター付き複体とする。《ホモロジー》定義
+\ref{homology-definition-filtered-complex} を参照せよ。記法を簡潔にするため，
+$K^\bullet$，$F^pK^\bullet$，$\text{gr}^pK^\bullet$ が表す
+$D(\mathcal{A})$ の対象をそれぞれ $K$，$F^pK$，$\text{gr}^pK$ と書く。
+$M \in D(\mathcal{A})$ とする。補題
+\ref{injectives-lemma-K-injective-embedding-filtration} を用いると，
+$\mathcal{A}$ の双次数対象からなるスペクトル系列
+$(E_r, d_r)_{r \geq 1}$ で，$d_r$ の双次数が $(r, -r + 1)$ であり，
+$$
+E_1^{p, q} = \Ext^{p + q}(M, \text{gr}^pK)
+$$
+を満たすものを構成できる。すべての $n$ について
+$$
+\Ext^n(M, F^pK) = 0 \text{（} p \gg 0\text{）}
+\quad\text{かつ}\quad
+\Ext^n(M, F^pK) = \Ext^n(M, K) \text{（} p \ll 0\text{）}
+$$
+なら，このスペクトル系列は有界で
+$\Ext^{p + q}(M, K)$ に収束する。実際，$M$ を表す任意の複体
+$M^\bullet$ を選び，補題にある
+$j : K^\bullet \to J^\bullet$ を選んで，複体
+$$
+\Hom^\bullet(M^\bullet, J^\bullet)
+$$
+を考える。これは《代数詳論》第
+\ref{more-algebra-section-hom-complexes} 節とまったく同様に定義される。
+$F^p\Hom^\bullet(M^\bullet, J^\bullet) =
+\Hom^\bullet(M^\bullet, F^pJ^\bullet)$
+と置くと，フィルター付き複体を得る。《ホモロジー》第
+\ref{homology-section-filtered-complex} 節のスペクトル系列は，上で述べた
+微分と項をもつ。詳細は省略する。有界性と収束は《ホモロジー》補題
+\ref{homology-lemma-ss-converges-trivial} から従う。
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-spectral-sequences-ext}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，
+$M, K$ を $D(\mathcal{A})$ の対象とする。$K$ を表す複体
+$K^\bullet$ を任意に選び，フィルター
+$F^pK^\bullet = \tau_{\leq -p}K^\bullet$ と注意
+\ref{injectives-remark-ext-into-filtered-complex} の議論を用いると，
+$$
+E_1^{p, q} = \Ext^{2p + q}(M, H^{-p}(K))
+$$
+をもつスペクトル系列が得られる。このスペクトル系列は，$K$ を表す複体
+$K^\bullet$ の選び方に依存しない。$p = -j$ および
+$q = i + 2j$ と付け替えると，$d'_r$ の双次数が $(r, -r + 1)$ で，
+$$
+(E'_2)^{i, j} = \Ext^i(M, H^j(K))
+$$
+を満たすスペクトル系列 $(E'_r, d'_r)_{r \geq 2}$ を得る。
+$M \in D^-(\mathcal{A})$ かつ $K \in D^+(\mathcal{A})$ なら，
+$E_r$ と $E'_r$ はともに有界で $\Ext^{p + q}(M, K)$ に収束する。
+フィルター $F^pK^\bullet = \sigma_{\geq p}K^\bullet$ を用いると，
+$$
+E_1^{p, q} = \Ext^q(M, K^p)
+$$
+を得る。$M \in D^-(\mathcal{A})$ で $K^\bullet$ が下に有界なら，
+このスペクトル系列は有界で $\Ext^{p + q}(M, K)$ に収束する。
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-ext-from-filtered-complex}
+$\mathcal{A}$ を Grothendieck アーベル圏，$K \in D(\mathcal{A})$ とする。
+$M^\bullet$ を $\mathcal{A}$ のフィルター付き複体とする。《ホモロジー》定義
+\ref{homology-definition-filtered-complex} を参照せよ。記法を簡潔にするため，
+$M^\bullet$，$M^\bullet/F^pM^\bullet$，$\text{gr}^pM^\bullet$ が表す
+$D(\mathcal{A})$ の対象をそれぞれ $M$，$M/F^pM$，$\text{gr}^pM$ と書く。
+注意 \ref{injectives-remark-ext-into-filtered-complex} と双対的に，
+$\mathcal{A}$ の双次数対象からなるスペクトル系列
+$(E_r, d_r)_{r \geq 1}$ で，$d_r$ の双次数が $(r, -r + 1)$ であり，
+$$
+E_1^{p, q} = \Ext^{p + q}(\text{gr}^{-p}M, K)
+$$
+を満たすものを構成できる。すべての $n$ について
+$$
+\Ext^n(M/F^pM, K) = 0 \text{（} p \ll 0\text{）}
+\quad\text{かつ}\quad
+\Ext^n(M/F^pM, K) = \Ext^n(M, K) \text{（} p \gg 0\text{）}
+$$
+なら，このスペクトル系列は有界で
+$\Ext^{p + q}(M, K)$ に収束する。実際，定理
+\ref{injectives-theorem-K-injective-embedding-grothendieck} により，
+各項が入射的で $K$ を表す K-入射複体 $I^\bullet$ を選ぶ。
+複体
+$$
+\Hom^\bullet(M^\bullet, I^\bullet)
+$$
+を考える。これは《代数詳論》第
+\ref{more-algebra-section-hom-complexes} 節とまったく同様に定義される。
+$$
+F^p\Hom^\bullet(M^\bullet, I^\bullet) =
+\Hom^\bullet(M^\bullet/F^{-p + 1}M^\bullet, I^\bullet)
+$$
+と置くと，フィルター付き複体を得る（フィルターの符号とずれに注意せよ）。
+《ホモロジー》第 \ref{homology-section-filtered-complex} 節の
+スペクトル系列は，上で述べた微分と項をもつ。詳細は省略する。
+有界性と収束は《ホモロジー》補題
+\ref{homology-lemma-ss-converges-trivial} から従う。
+\end{remark}
+
+\begin{remark}
+\label{injectives-remark-spectral-sequences-ext-variant}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，
+$M, K$ を $D(\mathcal{A})$ の対象とする。$M$ を表す複体
+$M^\bullet$ を任意に選び，フィルター
+$F^pM^\bullet = \tau_{\leq -p}M^\bullet$ と注意
+\ref{injectives-remark-ext-into-filtered-complex} の議論を用いると，
+$$
+E_1^{p, q} = \Ext^{2p + q}(H^p(M), K)
+$$
+をもつスペクトル系列が得られる。このスペクトル系列は，$M$ を表す複体
+$M^\bullet$ の選び方に依存しない。$p = -j$ および $q = i + 2j$ と
+付け替えると，$d'_r$ の双次数が $(r, -r + 1)$ で，
+$$
+(E'_2)^{i, j} = \Ext^i(H^{-j}(M), K)
+$$
+を満たすスペクトル系列 $(E'_r, d'_r)_{r \geq 2}$ を得る。
+$M \in D^-(\mathcal{A})$ かつ $K \in D^+(\mathcal{A})$ なら，
+$E_r$ と $E'_r$ は有界で $\Ext^{p + q}(M, K)$ に収束する。
+フィルター $F^pM^\bullet = \sigma_{\geq p}M^\bullet$ を用いると，
+$$
+E_1^{p, q} = \Ext^q(M^{-p}, K)
+$$
+を得る。$K \in D^+(\mathcal{A})$ で $M^\bullet$ が上に有界なら，
+このスペクトル系列は有界で $\Ext^{p + q}(M, K)$ に収束する。
+\end{remark}
+
+\begin{lemma}
+\label{injectives-lemma-represent-by-filtered-complex}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。
+対象 $E \in D(\mathcal{A})$，$\mathbf{Z}$ 上の $D(\mathcal{A})$ の
+対象の逆系 $\{E^i\}_{i \in \mathbf{Z}}$，および両立する写像の系
+$E^i \to E$ が与えられたとする。図で表すと
+$$
+\ldots \to E^{i + 1} \to E^i \to E^{i - 1} \to \ldots \to E
+$$
+である。このとき $\mathcal{A}$ のフィルター付き複体 $K^\bullet$
+（《ホモロジー》定義 \ref{homology-definition-filtered-complex}）で，
+$K^\bullet$ が $E$ を表し，$F^iK^\bullet$ が，与えられた写像と両立する
+仕方で $E^i$ を表すものが存在する。
+\end{lemma}
+
+\begin{proof}
+定理 \ref{injectives-theorem-K-injective-embedding-grothendieck} により，$E$ を表し，
+すべての項 $I^n$ が $\mathcal{A}$ の入射対象である K-入射複体
+$I^\bullet$ を選べる。$E^0$ を表す複体 $G^{0, \bullet}$ を選び，
+$E^0 \to E$ を表す複体の写像
+$\varphi^0 : G^{0, \bullet} \to I^\bullet$ を選ぶ。
+$i > 0$ に対しては，帰納的に $E^i \to E^{i - 1}$ を複体の写像
+$\delta : G^{i, \bullet} \to G^{i - 1, \bullet}$ で表し，
+$\varphi^i = \delta \circ \varphi^{i - 1}$ と置く。
+$i < 0$ に対しては，帰納的に $E^{i + 1} \to E^i$ を，各次数で単射な
+複体の写像
+$\delta : G^{i + 1, \bullet} \to G^{i, \bullet}$ で表す
+（例えば《導来圏》補題 \ref{derived-lemma-make-injective} を用いればよい）。
+次を主張する。写像 $E^i \to E$ を表し，可換図式
+$$
+\xymatrix{
+G^{i + 1, \bullet} \ar[r]_\delta \ar[d]_{\varphi^{i + 1}} &
+G^{i, \bullet} \ar[ld]^{\varphi^i} \\
+I^\bullet
+}
+$$
+に収まる複体の写像 $\varphi^i : G^{i, \bullet} \to I^\bullet$ を
+見つけることができる。実際，まず写像 $E^i \to E$ を表す任意の複体の写像
+$\varphi : G^{i, \bullet} \to I^\bullet$ を選ぶ。
+すると $\varphi \circ \delta$ と $\varphi^{i + 1}$ は，あるホモトピー
+$h^p : G^{i + 1, p} \to I^{p - 1}$ によってホモトピックである。
+$I^\bullet$ の各項は入射的で，$\delta$ は各次数で単射なので，
+$h^p$ を $(h')^p : G^{i, p} \to I^{p - 1}$ へ持ち上げられる。
+そこで $\varphi^i = \varphi + h' \circ d + d \circ h'$ と置けば，
+主張したものが得られる。
+
+\medskip\noindent
+次に，各 $i$ に対し，各次数で単射な複体の写像
+$a^i : G^{i, \bullet} \to J^{i, \bullet}$ で，
+$J^{i, \bullet}$ が非輪状かつ K-入射的で，各 $J^{i, p}$ が
+$\mathcal{A}$ の入射対象であるものを選ぶ。そのためには，まず
+$G^{i, \bullet}$ を恒等写像の錐へ写し，次に上で引用した定理を適用すればよい。
+上と同様に論じると，図式
+$$
+\xymatrix{
+G^{i, \bullet} \ar[r]_\delta \ar[d]_{a^i} &
+G^{i - 1, \bullet} \ar[d]^{a^{i - 1}} \\
+J^{i, \bullet} \ar[r]^{\delta'} &
+J^{i - 1, \bullet}
+}
+$$
+を可換にする複体の写像
+$\delta' : J^{i, \bullet} \to J^{i - 1, \bullet}$ を見つけられる。
+（錐の関手性と定理における関手性を用いてこれを得ることもできる。）
+そこで写像
+$$
+\xymatrix{
+G^{i + 1, \bullet} \times \prod\nolimits_{p > i + 1} J^{p, \bullet}
+\ar[r] \ar[rd] &
+G^{i, \bullet} \times \prod\nolimits_{p > i} J^{p, \bullet}
+\ar[r] \ar[d] &
+G^{i - 1, \bullet} \times \prod\nolimits_{p > i - 1} J^{p, \bullet}
+\ar[ld] \\
+& I^\bullet \times \prod\nolimits_p J^{p, \bullet}
+}
+$$
+を考える。$J^{p, \bullet}$ 上の矢印は明らかなもの
+（恒等写像または零写像）である。因子 $G^{i, \bullet}$ 上では，
+$\delta : G^{i, \bullet} \to G^{i - 1, \bullet}$，
+$\varphi^i : G^{i, \bullet} \to I^\bullet$，
+$p > i$ に対する零写像
+$0 : G^{i, \bullet} \to J^{p, \bullet}$，
+$p = i$ に対する写像
+$a^i : G^{i, \bullet} \to J^{p, \bullet}$，および
+$p < i$ に対する写像
+$(\delta')^{i - p} \circ a^i = a^p \circ \delta^{i - p} :
+G^{i, \bullet} \to J^{p, \bullet}$
+を用いる。図式のすべての矢印が各次数で単射であることの確認は省略する。
+こうしてフィルター付き複体を得る。$D(\mathcal{A})$ における直積は
+K-入射複体の直積を取ることで与えられ
+（補題 \ref{injectives-lemma-derived-products}），$J^{p, \bullet}$ は
+$D(\mathcal{A})$ で零なので，この図式は導来圏において与えられた図式を
+表すことが分かる。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-represent-by-filtered-complex-bis}
+補題 \ref{injectives-lemma-represent-by-filtered-complex} の状況で，第2の逆系
+$\{(E')^i\}_{i \in \mathbf{Z}}$ と，両立する写像の系
+$(E')^i \to E$ も与えられたとする。このとき，$\mathcal{A}$ の
+双フィルター付き複体 $K^\bullet$ で，$K^\bullet$ が $E$，
+$F^iK^\bullet$ が $E^i$，$(F')^iK^\bullet$ が $(E')^i$ を，
+それぞれ与えられた写像と両立する仕方で表すものが存在する。
+\end{lemma}
+
+\begin{proof}
+まず補題を用いて $K^\bullet$ と $F$ を選べる。次に，
+$\{(E')^i\}_{i \in \mathbf{Z}}$ と写像 $(E')^i \to E$ に対して働く
+$(K')^\bullet$ と $F'$ を選べる。補題
+\ref{injectives-lemma-K-injective-embedding-filtration} により，
+$K^\bullet$ は K-入射複体であると仮定してよい。
+与えられた同一視
+$(K')^\bullet \cong E \cong K^\bullet$
+に対応する複体の写像 $(K')^\bullet \to K^\bullet$ を選べる。
+さらに，各次数で単射な写像 $(K')^\bullet \to J^\bullet$ で，
+$J^\bullet$ が非輪状かつ K-入射的であるものを選べる。
+（そのためには，まず $(K')^\bullet$ を恒等写像の錐へ写し，次に定理
+\ref{injectives-theorem-K-injective-embedding-grothendieck} を適用する。）
+すると $(K')^\bullet \to K^\bullet \times J^\bullet$ と
+$K^\bullet \to K^\bullet \times J^\bullet$ はともに各次数で単射な
+擬同型である（補題 \ref{injectives-lemma-derived-products} により，この直積は
+$E$ を表す）。あとは，これらの写像による $K^\bullet$ と
+$(K')^\bullet$ のフィルターの像を取れば結論が得られる。
+\end{proof}
+
+
+
+
+
+\section{Gabriel--Popescu 定理}
+\label{injectives-section-gabriel-popescu}
+
+\noindent
+本節では \cite{GP} の主定理を論じる。証明法は Jacob Lurie のノートと
+Akhil Mathew のノートに従い，これらはさらに \cite{Kuhn} における
+Kuhn の説明に従っている。 \cite{Takeuchi} も参照せよ。
+
+\medskip\noindent
+$\mathcal{A}$ を Grothendieck アーベル圏とし，$U$ を $\mathcal{A}$ の
+生成対象とする。定義 \ref{injectives-definition-grothendieck-conditions} を参照せよ。
+$R = \Hom_\mathcal{A}(U, U)$ と置く。関手
+$G : \mathcal{A} \to \text{Mod}_R$ を
+$$
+G(A) = \Hom_\mathcal{A}(U, A)
+$$
+によって定め，その標準的な右 $R$-加群構造を入れる。
+
+\begin{lemma}
+\label{injectives-lemma-gabriel-popescu-left-adjoint}
+上の関手 $G$ は左随伴 $F : \text{Mod}_R \to \mathcal{A}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+この補題に二つの証明を与える。
+
+\medskip\noindent
+第1の証明では随伴関手定理を用いる。《圏論》定理
+\ref{categories-theorem-adjoint-functor} を参照せよ。
+$G : \mathcal{A} \to \text{Mod}_R$ は左完全であり，直積を直積へ移す。
+したがって $G$ は極限と可換する。定理の集合論的条件を確認するため，
+$M$ を $\text{Mod}_R$ の対象とする。十分大きい基数 $\kappa$ を選び，
+$|A| \leq \kappa$ を満たす任意の対象 $A$ がその元と同型になるような
+$\mathcal{A}$ の対象の集合を $E$ と書く。これは補題
+\ref{injectives-lemma-set-iso-classes-bounded-size} により可能である。
+$I = \coprod_{A \in E} \Hom_R(M, G(A))$ と置く。
+元 $i \in I$ を対 $(A_i, f_i)$ とみなす。最後に，$A$ を
+$\mathcal{A}$ の任意の対象，$f : M \to G(A)$ を任意の写像とする。
+$\Im(f) \subset G(A) = \Hom_\mathcal{A}(U, A)$ の元を写像
+$u : U \to A$ とみなす。
+$$
+A' = \Im(\bigoplus\nolimits_{u \in \Im(f)} U \xrightarrow{u} A)
+$$
+と置く。$G$ は左完全なので，$G(A') \subset G(A)$ は $\Im(f)$ を含み，
+$f$ を経由させる写像 $f' : M \to G(A')$ を得る。一方，対象 $A'$ は
+高々 $|M|$ 個の $U$ のコピーの直和の商である。したがって
+$\kappa = |\bigoplus_{|M|} U|$ なら，$(A', f')$ は $E$ の元
+$(A_i, f_i)$ と同型であり，所望のように $f$ は
+$M \xrightarrow{f_i} G(A_i) \to G(A)$ と因数分解する。
+
+\medskip\noindent
+第2の証明では $F$ を構成し，ある意味で
+「$F(M) = M \otimes_R U$」であることを示す。実際，任意の $R$-加群
+$M$ に対し，分解
+$$
+\bigoplus\nolimits_{j \in J} R \to
+\bigoplus\nolimits_{i \in I} R \to
+M \to 0
+$$
+を選べる。対応する完全列
+$$
+\bigoplus\nolimits_{j \in J} U \to
+\bigoplus\nolimits_{i \in I} U \to
+F(M) \to 0
+$$
+によって $F(M)$ を定める。この構成は分解の選び方に依存せず，
+関手的である。詳細は省略する。$\mathcal{A}$ の任意の $A$ に対し，
+完全列
+$$
+0 \to \Hom_\mathcal{A}(F(M), A) \to
+\prod\nolimits_{i \in I} G(A) \to
+\prod\nolimits_{j \in J} G(A)
+$$
+を得る。これは列
+$$
+0 \to \Hom_R(M, G(A)) \to
+\Hom_R(\bigoplus\nolimits_{i \in I} R, G(A)) \to
+\Hom_R(\bigoplus\nolimits_{j \in J} R, G(A))
+$$
+と同型であり，$F$ が $G$ の左随伴であることを示す。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-F-G-monos}
+$f : M \to G(A)$ を $\text{Mod}_R$ における単射とする。このとき，
+随伴する写像 $f' : F(M) \to A$ も単射である。
+\end{lemma}
+
+\begin{proof}
+写像 $R^{\oplus n} \to M$ を選び，対応する写像
+$U^{\oplus n} \to F(M)$ を考える。合成
+$U \to U^{\oplus n} \to F(M) \to A$ が $0$ となる写像
+$v : U \to U^{\oplus n}$ を考える。この矢印 $v : U \to U^{\oplus n}$ は，
+$G(A)$ で零に写る $R^{\oplus n}$ の元 $v$ である。$f$ は単射なので，
+$v$ は $M$ で零に写る。補題
+\ref{injectives-lemma-gabriel-popescu-left-adjoint} の証明における $F(M)$ の構成から，
+これは $U \to U^{\oplus n} \to F(M)$ が零であることを意味する。
+$U$ は生成対象なので，
+$$
+\Ker(U^{\oplus n} \to F(M) \to A) = \Ker(U^{\oplus n} \to F(M))
+$$
+を得る。証明を完了するため，全射
+$\bigoplus_{i \in I} R \to M$ を選び，対応する全射
+$$
+\pi : \bigoplus\nolimits_{i \in I} U \longrightarrow F(M)
+$$
+を考える。$f'$ が単射であることを示すには，
+$\bigoplus_{i \in I} U$ の部分対象として
+$\Ker(\pi) = \Ker(f' \circ \pi)$ であることを示せば十分である。
+ここで $\bigoplus_{i \in I} U$ を，有限部分集合 $I' \subset I$ を動かした
+部分対象 $\bigoplus_{i \in I'} U$ のフィルター余極限として書ける。
+$\mathcal{A}$ では AB5 によりフィルター余極限が完全なので，
+$$
+\Ker(\pi) =
+\colim_{I' \subset I\text{ は有限}}
+\left(\bigoplus\nolimits_{i \in I'} U\right)
+\bigcap \Ker(\pi)
+$$
+および
+$$
+\Ker(f' \circ \pi) =
+\colim_{I' \subset I\text{ は有限}}
+\left(\bigoplus\nolimits_{i \in I'} U\right)
+\bigcap \Ker(f' \circ \pi)
+$$
+を得る。上の最初の表示等式により，各 $I'$ について両者は等しいので，
+全体でも等しい。
+\end{proof}
+
+\begin{theorem}
+\label{injectives-theorem-gabriel-popescu}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。このとき，
+（非可換でもよい）環 $R$ と関手
+$G : \mathcal{A} \to \text{Mod}_R$ および
+$F : \text{Mod}_R \to \mathcal{A}$ で，次を満たすものが存在する。
+\begin{enumerate}
+\item $F$ は $G$ の左随伴である。
+\item $G$ は充満忠実である。
+\item $F$ は完全である。
+\end{enumerate}
+さらに，これらの関手は上で構成したものである。
+\end{theorem}
+
+\begin{proof}
+まず $G$ が充満忠実であること，または同値なこととして
+$F \circ G \to \text{id}$ が同型であることを証明する。《圏論》補題
+\ref{categories-lemma-adjoint-fully-faithful} を参照せよ。
+まず，対象 $A$ に対して写像 $F(G(A)) \to A$ は全射である。実際，構成により
+任意の写像 $U \to A$ は $F(G(A))$ を経由する。一方，
+$F(G(A)) \to A$ は写像 $\text{id} : G(A) \to G(A)$ に随伴するので，
+補題 \ref{injectives-lemma-F-G-monos} により単射である。
+
+\medskip\noindent
+関手 $F$ は左随伴なので右完全である。$\text{Mod}_R$ は十分多くの
+射影対象をもつので，$F$ が完全であることを示すには，第1左導来関手
+$L_1F$ が零であることを示せば十分である。$R$-加群 $M$ に対して
+$L_1F(M) = 0$ を証明するため，$P$ が自由である $R$-加群の完全列
+$0 \to K \to P \to M \to 0$ を選ぶ。$F(K) \to F(P)$ が単射であることを
+示せば十分である。この列を，$P_i$ が有限自由 $R$-加群である列
+$0 \to K_i \to P_i \to M_i \to 0$ のフィルター余極限として書ける。
+実際，$P$ をそのように書き，$K_i = K \cap P_i$ および
+$M_i = \Im(P_i \to M)$ と置けばよい。$F$ は左随伴なので余極限と可換し，
+$\mathcal{A}$ は Grothendieck アーベル圏なので，各
+$F(K_i) \to F(P_i)$ が単射なら $F(K) \to F(P)$ も単射である。
+したがって，$K \subset P = R^{\oplus n}$ の場合に
+$F(K) \to F(P)$ が単射であることを確かめれば十分である。この場合，
+補題 \ref{injectives-lemma-F-G-monos} を適用すると
+$F(K) \to U^{\oplus n}$ が単射であることが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{injectives-lemma-gabriel-popescu}
+\begin{reference}
+\cite[Corollary 4.1]{serpe}
+\end{reference}
+$\mathcal{A}$ を Grothendieck アーベル圏とし，$R$，$F$，$G$ を
+Gabriel--Popescu 定理（定理 \ref{injectives-theorem-gabriel-popescu}）における
+ものとする。このとき導来関手
+$$
+RG : D(\mathcal{A}) \to D(\text{Mod}_R)
+\quad\text{および}\quad
+F : D(\text{Mod}_R) \to D(\mathcal{A})
+$$
+が得られ，$F$ は $RG$ の左随伴，$RG$ は充満忠実で，
+$F \circ RG = \text{id}$ である。
+\end{lemma}
+
+\begin{proof}
+関手の存在と随伴性は，定理 \ref{injectives-theorem-gabriel-popescu}，
+\ref{injectives-theorem-K-injective-embedding-grothendieck}，および《導来圏》補題
+\ref{derived-lemma-K-injective-defined}，
+\ref{derived-lemma-right-derived-exact-functor}，
+\ref{derived-lemma-derived-adjoint-functors} から従う。
+$D(\mathcal{A})$ の対象に対する $RG$ は，適切な代表複体
+$I^\bullet$（例えば K-入射複体）に $G$ を適用することで計算でき，
+$F \circ G = \text{id}$ により
+$F(G(I^\bullet)) = I^\bullet$ となるので，
+$F \circ RG = \text{id}$ が従う。これから《圏論》補題
+\ref{categories-lemma-adjoint-fully-faithful} により
+$RG$ の充満忠実性が従う。
+\end{proof}
+
+
+
+
+
+\section{Brown 表現可能性と Grothendieck アーベル圏}
+\label{injectives-section-brown}
+
+\noindent
+本節では，Grothendieck アーベル圏の導来圏に対する表現可能性定理を
+手短に証明する。まず《導来圏》第 \ref{derived-section-brown} 節にある
+コンパクト生成三角圏の場合を読むべきである。その後は，本節を読む代わりに，
+この種のより一般的な結果について文献を参照するのも有益である。例えば
+\cite{Franke}，\cite{Neeman}，\cite{Krause}，または《導来圏》第
+\ref{derived-section-brown-bis} 節を参照せよ。
+
+\begin{lemma}
+\label{injectives-lemma-brown}
+$\mathcal{A}$ を Grothendieck アーベル圏とする。直和を直積へ移す反変
+コホモロジー関手 $H : D(\mathcal{A}) \to \textit{Ab}$ は表現可能である。
+\end{lemma}
+
+\begin{proof}
+$R, F, G, RG$ を補題 \ref{injectives-lemma-gabriel-popescu} におけるものとし，
+関手 $H \circ F : D(\text{Mod}_R) \to \textit{Ab}$ を考える。
+$F$ は左随伴なので直和を直和へ移し，したがって $H \circ F$ は直和を
+直積へ移す。一方，導来圏 $D(\text{Mod}_R)$ は単一のコンパクト対象，
+すなわち $R$ によって生成される。《導来圏》補題
+\ref{derived-lemma-brown} により，$H \circ F$ は表現可能である。
+それを表す対象を $L \in D(\text{Mod}_R)$ とする。
+$D(\text{Mod}_R)$ において識別三角形
+$$
+M \to L \to RG(F(L)) \to M[1]
+$$
+を選ぶ。$F \circ RG = \text{id}$ なので $F(M) = 0$ である。
+したがって $H(F(M)) = 0$ であり，ゆえに $\Hom(M, L) = 0$ である。
+これから $L \to RG(F(L))$ は直和因子の包含であることが従う。
+《導来圏》補題 \ref{derived-lemma-split} を参照せよ。
+$D(\mathcal{A})$ の $A$ に対して
+\begin{align*}
+H(A)
+& =
+H(F(RG(A)) \\
+& =
+\Hom(RG(A), L) \\
+& \to
+\Hom(RG(A), RG(F(L))) \\
+& =
+\Hom(F(RG(A)), F(L)) \\
+& =
+\Hom(A, F(L))
+\end{align*}
+を得る。ここで矢印は $A$ に関して関手的な左逆をもつ。言い換えれば，
+$H$ は表現可能関手の直和因子である。$D(\mathcal{A})$ は Karoubi 完備なので
+（《導来圏》補題
+\ref{derived-lemma-projectors-have-images-triangulated}），結論が従う。
+\end{proof}
+
+\begin{proposition}
+\label{injectives-proposition-brown}
+$\mathcal{A}$ を Grothendieck アーベル圏，$\mathcal{D}$ を三角圏とする。
+$F : D(\mathcal{A}) \to \mathcal{D}$ を，直和を直和へ移す三角圏の
+完全関手とする。このとき $F$ は完全な右随伴をもつ。
+\end{proposition}
+
+\begin{proof}
+$\mathcal{D}$ の対象 $Y$ に対し，反変関手
+$$
+D(\mathcal{A}) \to \textit{Ab},\quad
+W \mapsto \Hom_\mathcal{D}(F(W), Y)
+$$
+を考える。$F$ は完全なので，これはコホモロジー関手である。また，
+$F$ は直和を直和へ移すので，この関手は直和を直積へ移す。したがって補題
+\ref{injectives-lemma-brown} により，
+$\Hom_{D(\mathcal{A})}(W, X) = \Hom_\mathcal{D}(F(W), Y)$
+を満たす $D(\mathcal{A})$ の対象 $X$ が存在する。随伴の存在は《圏論》補題
+\ref{categories-lemma-adjoint-exists} から従い，完全性は《導来圏》補題
+\ref{derived-lemma-adjoint-is-exact} から従う。
+\end{proof}

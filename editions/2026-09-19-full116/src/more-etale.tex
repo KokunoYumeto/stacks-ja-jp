@@ -1,0 +1,4668 @@
+% Generated mechanically from frozen input inputs/p08/ja/more-etale.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{62}
+\chapter{エタール・コホモロジー（続）}
+
+
+
+\phantomsection
+\label{more-etale-section-phantom}
+
+
+
+\section{序論}
+\label{more-etale-section-introduction}
+
+\noindent
+本章は、スキームのエタール・コホモロジーを扱う一連の章の第2章である。
+第1章については、\'Etale Cohomology, Section
+\ref{etale-cohomology-section-introduction} を参照せよ。
+
+\medskip\noindent
+前章との大まかな分担は、いわゆる「シュリーク関手」
+（コンパクト台付きコホモロジーとその右随伴）に関する事項、
+およびこの材料を用いる事項を本章に収める、というものである。
+
+
+
+
+
+
+\section{切断の延長}
+\label{more-etale-section-growing}
+
+\noindent
+本節では、次の型の結果を論じる。
+
+\begin{lemma}
+\label{more-etale-lemma-section-support-in-locally-closed-pre}
+$X$ をスキームとし、$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。
+$\varphi : U' \to U$ を $X_\etale$ の射とする。$Z' \subset U'$ を
+閉部分スキームとし、合成 $Z' \to U' \to U$ が像 $Z \subset U$ をもつ
+閉埋め込みであるとする。このとき標準的な全単射
+$$
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+\{s' \in \mathcal{F}(U') \mid \text{Supp}(s') \subset Z'\}
+$$
+が存在し、$\varphi^{-1}(Z) = Z'$ ならばこれは制限によって与えられる。
+\end{lemma}
+
+\begin{proof}
+$U'$ の閉部分スキーム $Z'' = \varphi^{-1}(Z)$ を考える。
+$Z'$ は $U'$ で閉だから、$Z' \subset Z''$ は閉である。
+一方、$Z' \to Z''$ は（$Z$ 上エタールなスキーム間の射として）
+エタール射であり、したがって開である。ゆえに、ある閉部分集合 $T$ に対して
+$Z'' = Z' \amalg T$ である。開被覆
+$U' = (U' \setminus T) \cup (U' \setminus Z')$ により
+$$
+\{s' \in \mathcal{F}(U') \mid \text{Supp}(s') \subset Z'\} =
+\{s' \in \mathcal{F}(U' \setminus T) \mid \text{Supp}(s') \subset Z'\}
+$$
+であり、エタール被覆
+$\{U' \setminus T \to U, U \setminus Z \to U\}$ により
+$$
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+\{s' \in \mathcal{F}(U' \setminus T) \mid \text{Supp}(s') \subset Z'\}
+$$
+である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-section-support-in-locally-closed}
+$X$ をスキームとし、$Z \subset X$ を局所閉部分スキームとする。
+$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。$Z$ を閉部分スキームとして
+含む開部分スキーム $U, U' \subset X$ が与えられると、標準的な全単射
+$$
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+\{s \in \mathcal{F}(U') \mid \text{Supp}(s) \subset Z\}
+$$
+が存在し、$U' \subset U$ ならばこれは制限によって与えられる。
+\end{lemma}
+
+\begin{proof}
+$Z$ は $U \cap U'$ の閉部分スキームだから、$U' \subset U$ の場合を
+証明すれば十分である。この場合は補題
+\ref{more-etale-lemma-section-support-in-locally-closed-pre} の特別な場合である。
+\end{proof}
+
+\noindent
+後で役立つ、少し非標準的な記法を導入しよう。すなわち、上の補題
+\ref{more-etale-lemma-section-support-in-locally-closed} の状況で
+$$
+H_Z(\mathcal{F}) = \{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\}
+$$
+と書く。ここで $U \subset X$ は、$Z$ を閉部分スキームとして含む
+任意の開部分スキームである。この記法に伴う不精確さが気になる読者は、
+$\partial Z = \overline{Z}\setminus Z$ を $X$ における $Z$ の「境界」として、
+$U = X \setminus \partial Z$ を選んでもよい。しかし、以下の多くの議論では、
+異なる開部分スキームを柔軟に選べることが役割を果たす。
+この構成には次の性質がある。
+\begin{enumerate}
+\item
+\label{more-etale-item-inclusion}
+$Z \subset Z'$ を $X$ の局所閉部分スキームとし、$Z$ が $Z'$ で閉であるとする。
+このとき次の自然な単射を得る：
+$$
+H_Z(\mathcal{F}) \to H_{Z'}(\mathcal{F}).
+$$
+\item
+\label{more-etale-item-pullback}
+$f : Y \to X$ をスキームの射とし、$Z \subset X$ を局所閉部分スキームとする。
+このとき自然な引き戻し写像
+$f^* : H_Z(\mathcal{F}) \to H_{f^{-1}Z}(f^{-1}\mathcal{F})$ が存在する。
+\end{enumerate}
+次の状況にもこの記法を拡張しておくと便利である。$W \in X_\etale$ と
+局所閉部分スキーム $Z \subset W$ が与えられたとする。このとき
+$$
+H_Z(\mathcal{F}) =
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset Z\} =
+H_Z(\mathcal{F}|_{W_\etale})
+$$
+と書く。ここで $U \subset W$ は、上とまったく同様に、$Z$ を
+閉部分スキームとして含む任意の開部分スキームである\footnote{実際、補題
+\ref{more-etale-lemma-section-support-in-locally-closed-pre} は、$X$ 上の $Z$ が
+$X_\etale$ のある対象 $W$ の局所閉部分スキームと同型であるとき、
+$W$ の選択が無関係であることを示している。}。
+
+
+
+
+
+
+
+\section{コンパクト台付き切断}
+\label{more-etale-section-compact-support}
+
+\noindent
+本節の参考文献は \cite[Exposee XVII, Section 6]{SGA4} である。
+$f : X \to Y$ を、分離的かつ局所有限型なスキームの射とする。
+本節では、$f_!\mathcal{F} \subset f_*\mathcal{F}$ を $Y$ に相対的に
+固有な台をもつ切断からなる部分層（適切な意味で定義する）とすることにより、
+関手
+$f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$
+を定義する。
+
+\medskip\noindent
+警告：関手 $f_!$ は、導来圏上のある関手 $Rf_!$ の第0コホモロジー層
+（将来の参照を挿入）であるが、$Rf_!$ は $f_!$ の導来関手ではない。
+
+\begin{lemma}
+\label{more-etale-lemma-f-shriek-separated}
+$f : X \to Y$ を局所有限型なスキームの射とし、$\mathcal{F}$ を
+$X_\etale$ 上のアーベル層とする。対応
+$$
+Y_\etale \longrightarrow \textit{Ab},\quad
+V \longmapsto \{s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V) \mid
+\text{Supp}(s) \subset X_V \text{ は次の基底上固有：}V\}
+$$
+は $f_*\mathcal{F}$ のアーベル部分層である。
+\end{lemma}
+
+\noindent
+警告：$f$ が分離的でなければ、この層は「正しいもの」ではない。
+
+\begin{proof}
+切断の台は閉であることを思い出そう
+（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-support-section-closed}）。したがって、
+Cohomology of Schemes, Section
+\ref{coherent-section-proper-over-base} の結果を適用できる。
+上の補題と Cohomology of Schemes, Lemma
+\ref{coherent-lemma-union-closed-proper-over-base} により、
+$f_*\mathcal{F}(V)$ の考えている部分集合は部分群である。
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-base-change-closed-proper-over-base} により、
+この対応は部分前層を定める。
+最後に、$s \in f_*\mathcal{F}(V)$ とエタール被覆
+$\{V_i \to V\}$ があり、$s|_{V_i}$ の台が $V_i$ 上固有であるとする。
+$s|_{V_i}$ の台は $s|_V$ の台の逆像であることに注意せよ
+（茎による台の特徴づけと \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-stalk-pullback} を用いる）。したがって、
+Descent, Lemma
+\ref{descent-lemma-descending-property-proper-over-base} により、
+$s$ の台は $V$ 上固有である。これで、この対応が層条件を満たすことが示された。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-separated-etale-shriek}
+$j : U \to X$ を分離的なエタール射とし、$\mathcal{F}$ を
+$U_\etale$ 上のアーベル層とする。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale}
+の単射
+$j_!\mathcal{F} \to j_*\mathcal{F}$ の像は、補題
+\ref{more-etale-lemma-f-shriek-separated} の部分層である。
+\end{lemma}
+
+\noindent
+別の方法として、この補題を後へ移し、両方の層の茎の記述を用いて
+証明することもできる。
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale} の証明における
+$j_!\mathcal{F} \to j_*\mathcal{F}$ の構成は、前層の写像
+$j_{p!}\mathcal{F} \to j_*\mathcal{F}$ の構成を介しており、その像は明らかに
+補題 \ref{more-etale-lemma-f-shriek-separated} の部分層に含まれる。
+$j_!\mathcal{F}$ は $j_{p!}\mathcal{F}$ の層化なので、
+$j_!\mathcal{F} \to j_*\mathcal{F}$ の像もこの部分層に含まれる。
+逆に、$s \in j_*\mathcal{F}(V)$ の台 $Z$ が $V$ 上固有であるとする。
+このとき $Z \to V$ は有限で、その像 $Z' \subset V$ は閉である。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-characterize-finite} を参照せよ。
+$s$ の $V \setminus Z'$ への制限は零であり、零切断は
+$j_!\mathcal{F} \to j_*\mathcal{F}$ の像に含まれる。
+一方、$v \in Z'$ ならば、エタール近傍
+$(V', v') \to (V, v)$ と、開かつ閉な部分スキームへの分解
+$U_{V'} = W \amalg U'_1 \amalg \ldots \amalg U'_n$ であって、
+$U'_i \to V'$ が同型であり、かつ
+$T_{V'} \subset U'_1 \amalg \ldots \amalg U'_n$ となるものを取れる。
+\'Etale Morphisms, Lemma
+\ref{etale-lemma-etale-etale-local-technical} を参照せよ。
+同型 $U'_i \to V'$ を逆にし、$s$ を引き戻すことで、$n$ 個の射
+$\varphi'_i : V' \to U$ と $V'$ 上の切断 $s'_i$ を得る。
+すると $V'$ 上の $j_{p!}\mathcal{F}$ の切断
+$\sum (\varphi'_i, s'_i)$ は、構成により $s$ の $V'$ への制限へ写る。
+$j_{p!}\mathcal{F}(V')$ の公式については、\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale} の証明を参照せよ。
+したがって $s$ はエタール局所的に
+$j_!\mathcal{F} \to j_*\mathcal{F}$ の像に入り、証明が完了する。
+\end{proof}
+
+\begin{definition}
+\label{more-etale-definition-f-shriek-separated}
+$f : X \to Y$ を分離的（！）かつ局所有限型なスキームの射とし、
+$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。補題
+\ref{more-etale-lemma-f-shriek-separated} で構成した部分層
+$f_!\mathcal{F} \subset f_*\mathcal{F}$ を
+{\it コンパクト台付き直像}と呼ぶ。
+\end{definition}
+
+\noindent
+補題 \ref{more-etale-lemma-separated-etale-shriek} により、両方の定義が適用できる場合には
+一致するので、これは \'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-extension-zero} と矛盾しない。
+次は整合性の確認である。
+
+\begin{lemma}
+\label{more-etale-lemma-proper-f-shriek}
+$f : X \to Y$ をスキームの固有射とする。このとき $f_! = f_*$ である。
+\end{lemma}
+
+\begin{proof}
+$f_!$ の構成から直ちに従う。
+\end{proof}
+
+\noindent
+次の観察は非常に有用である。
+
+\begin{remark}[開埋め込みに関する共変性]
+\label{more-etale-remark-covariance-f-shriek-separated}
+$f : X \to Y$ を分離的かつ局所有限型なスキームの射とし、
+$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。
+$X' \subset X$ を開部分スキームとし、$f$ の制限を
+$f' : X' \to Y$ と書く。標準的な単射
+$$
+f'_!(\mathcal{F}|_{X'}) \longrightarrow f_!\mathcal{F}
+$$
+が存在する。実際、$V \in Y_\etale$ とし、$V$ 上固有な台 $Z'$ をもつ切断
+$s' \in f'_*(\mathcal{F}|_{X'})(V) = \mathcal{F}(X' \times_Y V)$
+を考える。このとき $Z'$ は $X \times_Y V$ でも閉である。
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-functoriality-closed-proper-over-base} を参照せよ。
+したがって、$X' \times_Y V$ への制限が $s'$ で、
+$X \times_Y V \setminus Z'$ への制限が零である一意な切断
+$s \in \mathcal{F}(X \times_Y V) = f_*\mathcal{F}(V)$ が存在する。
+補題 \ref{more-etale-lemma-section-support-in-locally-closed} を参照せよ。
+この構成は制限写像と両立し、したがって所望の層の写像
+$f'_!(\mathcal{F}|_{X'}) \to f_!\mathcal{F}$ を誘導する。この写像は明らかに
+単射である。構成により、$\mathcal{F}$ に関して関手的な可換図式
+$$
+\xymatrix{
+f'_!(\mathcal{F}|_{X'}) \ar[r] \ar[d] &
+f_!\mathcal{F} \ar[d] \\
+f'_*(\mathcal{F}|_{X'}) &
+f_*\mathcal{F} \ar[l]
+}
+$$
+を得る。$X'' \subset X'$ が開で、
+$f'' = f|_{X''} : X'' \to Y$ とすると、今構成した標準写像の合成
+$f''_!\mathcal{F}|_{X''} \to f'_!\mathcal{F}|_{X'} \to f_!\mathcal{F}$
+は標準写像 $f''_!\mathcal{F}|_{X''} \to f_!\mathcal{F}$ に等しいことも明らかである。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-compactify-f-shriek-separated}
+$Y$ をスキームとする。$j : X \to \overline{X}$ を $Y$ 上のスキームの
+開埋め込みとし、$\overline{X}$ は $Y$ 上固有であるとする。
+構造射を $f : X \to Y$ および
+$\overline{f} : \overline{X} \to Y$ と書く。
+$\mathcal{F} \in \textit{Ab}(X_\etale)$ に対し、標準的な同型（証明を参照）
+$$
+f_!\mathcal{F} \longrightarrow \overline{f}_!j_!\mathcal{F}
+$$
+が存在する。補題 \ref{more-etale-lemma-proper-f-shriek} により
+$\overline{f}_! = \overline{f}_*$ だから、関手として
+$\overline{f}_* \circ j_! = f_!$ を得る：
+$\textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$。
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-open} により
+$(j_!\mathcal{F})|_X = \mathcal{F}$ である。したがって、表示した矢印は
+$\mathcal{G} = j_!\mathcal{F}$ に対する注意
+\ref{more-etale-remark-covariance-f-shriek-separated} の単射
+$f_!(\mathcal{G}|_X) \to \overline{f}_!\mathcal{G}$ である。
+この写像の明示的な性質から、次を示せば十分である。
+$V \in Y_\etale$ とし、
+$s \in \overline{f}_!\mathcal{G}(V) = \overline{f}_*\mathcal{G}(V) =
+\mathcal{G}(\overline{X}_V)$ を切断とすると、$s$ の台は開部分スキーム
+$X_V \subset \overline{X}_V$ に含まれる。
+これは、$\overline{X} \setminus X$ の幾何点における
+$\mathcal{G}$ の茎が零であることから直ちに従う。
+\end{proof}
+
+\noindent
+$f_!\mathcal{F}$ の茎を、ファイバー上のコンパクト台付き切断と関連づけたい。
+そのために定義が必要である。
+
+\begin{definition}
+\label{more-etale-definition-compact-support}
+$X$ を体 $k$ 上分離的かつ局所有限型なスキームとし、$\mathcal{F}$ を
+$X_\etale$ 上のアーベル層とする。$H^0_c(X, \mathcal{F}) \subset
+H^0(X, \mathcal{F})$ を、台が $k$ 上固有である切断全体とする。
+$H^0_c(X, \mathcal{F})$ の元を {\it コンパクト台付き切断}と呼ぶ。
+\end{definition}
+
+\noindent
+警告：$X$ が $k$ 上分離的でなければ、この定義は「正しいもの」ではない。
+
+\begin{lemma}
+\label{more-etale-lemma-proper-compact-support}
+$X$ を体 $k$ 上の固有スキームとする。このとき
+$H^0_c(X, \mathcal{F}) = H^0(X, \mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+$H^0_c$ の構成から直ちに従う。
+\end{proof}
+
+\begin{remark}[開埋め込みとコンパクト台付き切断]
+\label{more-etale-remark-covariance-compact-support}
+$X$ を体 $k$ 上分離的かつ局所有限型なスキームとし、$\mathcal{F}$ を
+$X_\etale$ 上のアーベル層とする。注意
+\ref{more-etale-remark-covariance-f-shriek-separated} とまったく同様に、
+開部分スキーム $X' \subset X$ に対して単射
+$$
+H^0_c(X', \mathcal{F}|_{X'}) \longrightarrow H^0_c(X, \mathcal{F})
+$$
+が存在し、これらの写像によって $H^0_c$ は $X$ の Zariski サイト上の
+「余層」となる。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-compactify-compact-support}
+$k$ を体とする。$j : X \to \overline{X}$ を $k$ 上のスキームの開埋め込みとし、
+$\overline{X}$ は $k$ 上固有であるとする。
+$\mathcal{F} \in \textit{Ab}(X_\etale)$ に対して標準的な同型（証明を参照）
+$$
+H^0_c(X, \mathcal{F}) \longrightarrow
+H^0_c(\overline{X}, j_!\mathcal{F}) =
+H^0(\overline{X}, j_!\mathcal{F})
+$$
+が存在する。右の等号は補題 \ref{more-etale-lemma-proper-compact-support} による。
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-open} により
+$(j_!\mathcal{F})|_X = \mathcal{F}$ である。したがって、表示した矢印は
+$\mathcal{G} = j_!\mathcal{F}$ に対する注意
+\ref{more-etale-remark-covariance-compact-support} の単射
+$H^0_c(X, \mathcal{G}|_X) \to H^0_c(\overline{X}, \mathcal{G})$ である。
+この写像の明示的な性質から、次を示せば十分である。
+$s \in H^0(\overline{X}, \mathcal{G})$ が切断ならば、$s$ の台は開部分
+$X$ に含まれる。これは $\overline{X} \setminus X$ の幾何点における
+$\mathcal{G}$ の茎が零であることから直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-stalk-f-shriek-separated}
+$f : X \to Y$ を分離的かつ局所有限型なスキームの射とし、$\mathcal{F}$ を
+$X_\etale$ 上のアーベル層とする。このとき任意の幾何点
+$\overline{y} : \Spec(k) \to Y$ に対して標準的な同型
+$$
+(f_!\mathcal{F})_{\overline{y}}
+\longrightarrow
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+$(f_*\mathcal{F})_{\overline{y}} = \colim f_*\mathcal{F}(V)$ であった。
+ここで余極限は $\overline{y}$ のエタール近傍
+$(V, \overline{v})$ 全体にわたる。
+$s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V)$ ならば、$s$ を引き戻して
+$(X_V)_{\overline{v}} = X_{\overline{y}}$ 上の $\mathcal{F}$ の切断を得る。
+したがって標準写像
+$$
+c_{\overline{y}} :
+(f_*\mathcal{F})_{\overline{y}}
+\longrightarrow 
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})
+$$
+を得る。この写像が部分群
+$(f_!\mathcal{F})_{\overline{y}}$ と
+$H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$ の間の全単射を
+誘導すると主張する。この主張から補題が従うだけでなく、補題の同一視が
+$\mathcal{F}$ の切断を $f$ の幾何ファイバーへ引き戻すことで与えられることも分かる。
+
+\medskip\noindent
+任意の元
+$s \in (f_!\mathcal{F})_{\overline{y}} \subset (f_*\mathcal{F})_{\overline{y}}$
+は、$c_{\overline{y}}$ によって
+$H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \subset
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$ の元へ写る。
+実際、切断の台を取る操作は引き戻しと可換であり、固有性は基底変換で
+保たれる。これで少なくとも補題の主張にある写像は得られた。
+これが同型であることを示すため、$Y$ 上 Zariski 局所的に議論してよい。
+したがって $Y$ はアフィンであると仮定する。
+
+\medskip\noindent
+以下で使う観察を述べる。開部分スキーム $X' \subset X$ が与えられ、
+$f' = f|_{X'}$ とすると、可換図式
+$$
+\xymatrix{
+(f'_!(\mathcal{F}|_{X'}))_{\overline{y}} \ar[r] \ar[d] &
+H^0_c(X'_{\overline{y}}, \mathcal{F}|_{X'_{\overline{y}}}) \ar[d] \\
+(f_!\mathcal{F})_{\overline{y}} \ar[r] &
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})
+}
+$$
+を得る。横の矢印は上で構成した写像であり、縦の矢印は注意
+\ref{more-etale-remark-covariance-f-shriek-separated} および
+\ref{more-etale-remark-covariance-compact-support} で与えたものである。
+理由は次の通りである。$\overline{y}$ のエタール近傍
+$(V, \overline{v})$ と切断
+$s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V)$ が与えられ、その台 $Z$ が
+$X'_V$ に含まれ、かつ $V$ 上固有であるとする。このとき $s$ は
+$(f'_!(\mathcal{F}|_{X'}))_{\overline{y}}$ と
+$(f_!\mathcal{F})_{\overline{y}}$ の両方の元を与え、これらは図式の縦矢印で
+対応する。横矢印によるこれらの像は、$s$ の $X_{\overline{y}}$ への引き戻し
+$s|_{X_{\overline{y}}}$ である。その台 $Z_{\overline{y}}$ は
+$X'_{\overline{y}}$ に含まれるので、この制限は
+$H^0_c(X'_{\overline{y}}, \mathcal{F}|_{X'_{\overline{y}}})$ と
+$H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$ の
+両立する元の組を与える。
+
+\medskip\noindent
+$s \in (f_!\mathcal{F})_{\overline{y}}$ が
+$H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$ の零へ写るとする。
+$s$ は、$V$ 上固有な台 $Z$ をもつ
+$s \in f_*\mathcal{F}(V) = \mathcal{F}(X_V)$ に対応するとする。
+$V$ はアフィンと仮定してよく、そのとき $Z$ は準コンパクトである。
+そこで $Z$ の像を含む準コンパクト開部分スキーム $X' \subset X$ を選べる。
+すると $Z$ は $X'_V$ に含まれるので、前段落と同様に、$s$ は
+$f' = f|_{X'}$ に対するある元
+$s' \in f'_!(\mathcal{F}|_{X'})(V)$ の像である。
+$s'$ は
+$H^0_c(X'_{\overline{y}}, \mathcal{F}|_{X'_{\overline{y}}})$ の零へ写る。
+したがって単射性を示すには $X$ を $X'$ で置き換えてよい。すなわち、
+$X$ が準コンパクトな場合に帰着する。この場合を以下で証明する。
+
+\medskip\noindent
+$t \in H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$ とする。
+$t$ の台は準コンパクト開部分スキーム
+$W \subset X_{\overline{y}}$ に含まれる。したがって、
+$X'_{\overline{y}}$ が $W$ を含むような準コンパクト開部分スキーム
+$X' \subset X$ を取れる。
+すると $t$ が単射
+$H^0_c(X'_{\overline{y}}, \mathcal{F}|_{X'_{\overline{y}}}) \to
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}})$
+の像に含まれることは明らかである。したがって全射性を示すには、
+$X$ を $X'$ で置き換えてよい。すなわち、$X$ が準コンパクトな場合に帰着する。
+この場合を以下で証明する。
+
+\medskip\noindent
+証明の最後の段落では、$X$ が準コンパクトで $Y$ がアフィンの場合に補題を示す。
+More on Flatness, Theorem \ref{flat-theorem-nagata} により、$Y$ 上のコンパクト化
+$j : X \to \overline{X}$ が存在する。$\mathcal{G} = j_!\mathcal{F}$ とおく。
+すると \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-open} により
+$\mathcal{F} = \mathcal{G}|_X$ である。上の議論から可換図式
+$$
+\xymatrix{
+(f_!\mathcal{F})_{\overline{y}} \ar[r] \ar[d] &
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[d] \\
+(\overline{f}_!\mathcal{G})_{\overline{y}} \ar[r] &
+H^0_c(\overline{X}_{\overline{y}}, \mathcal{G}|_{\overline{X}_{\overline{y}}})
+}
+$$
+を得る。補題 \ref{more-etale-lemma-compactify-f-shriek-separated} および
+\ref{more-etale-lemma-compactify-compact-support} により、縦の写像は同型である。
+したがって固有射 $\overline{X} \to Y$ の場合に帰着する。
+固有射の場合、補題 \ref{more-etale-lemma-proper-f-shriek}、
+\ref{more-etale-lemma-proper-compact-support} および直像に対する固有基底変換
+（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-pushforward-stalk}）により、
+この写像は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-base-change-f-shriek-separated}
+$f$ が分離的かつ局所有限型であるようなスキームの Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。$X_\etale$ 上の任意のアーベル層 $\mathcal{F}$ に対して
+$f'_!(g')^{-1}\mathcal{F} = g^{-1}f_!\mathcal{F}$ である。
+\end{lemma}
+
+\begin{proof}
+きわめて一般に、引き戻し写像
+$g^{-1}f_*\mathcal{F} \to f'_*(g')^{-1}\mathcal{F}$ が存在する。
+Sites, Section \ref{sites-section-pullback} を参照せよ。
+この写像は $g^{-1}f_!\mathcal{F}$ を部分層
+$f'_!(g')^{-1}\mathcal{F}$ へ送り、補題の同型を誘導すると主張する。
+
+\medskip\noindent
+幾何点 $\overline{y}': \Spec(k) \to Y'$ を選び、$Y$ におけるその像を
+$\overline{y} = g \circ \overline{y}'$ と書く。可換図式
+$$
+\xymatrix{
+(f_*\mathcal{F})_{\overline{y}} \ar[r] \ar[d] &
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[d] \\
+(f'_*(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[r] &
+H^0(X'_{\overline{y}'}, (g')^{-1}\mathcal{F}|_{X'_{\overline{y}'}})
+}
+$$
+がある。ここで横の写像は補題
+\ref{more-etale-lemma-stalk-f-shriek-separated} の証明で用いた写像である。
+縦の写像は上の引き戻し写像である。問題となる4本の写像はいずれも
+スキームの射に沿って局所切断を引き戻すことで与えられ、その背後にある
+スキームの射の図式が可換なので、この図式は可換である。
+補題の主張にある図式は Cartesian だから
+$X'_{\overline{y}'} = X_{\overline{y}}$ である。
+したがって補題 \ref{more-etale-lemma-stalk-f-shriek-separated} とその証明により、
+可換図式
+$$
+\xymatrix{
+(f_*\mathcal{F})_{\overline{y}} \ar[rrr] \ar[ddd] & & &
+H^0(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[ddd] \\
+& (f_!\mathcal{F})_{\overline{y}} \ar[r] \ar@{..>}[d] \ar[lu] &
+H^0_c(X_{\overline{y}}, \mathcal{F}|_{X_{\overline{y}}}) \ar[d] \ar[ru] \\
+& (f'_!(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[r] \ar[ld] &
+H^0_c(X'_{\overline{y}'}, (g')^{-1}\mathcal{F}|_{X'_{\overline{y}'}}) \ar[rd]\\
+(f'_*(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[rrr] & & &
+H^0(X'_{\overline{y}'}, (g')^{-1}\mathcal{F}|_{X'_{\overline{y}'}})
+}
+$$
+を得る。内側の正方形の横矢印は同型であり、右側の2本の縦矢印は等号である。
+また、南東、南西、北東、北西方向の矢印は単射である。
+したがって、この図式に収まる一意な全単射の点線矢印が存在する。
+これより
+$g^{-1}f_!\mathcal{F} \subset g^{-1}f_*\mathcal{F} \to f'_*(g')^{-1}\mathcal{F}$
+は部分層
+$f'_!(g')^{-1}\mathcal{F} \subset f'_*(g')^{-1}\mathcal{F}$ へ写る。
+実際、これは茎上で成り立つ。\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks} を参照せよ。
+同じ定理により誘導写像は同型であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-f-shriek-composition}
+$f : X \to Y$ および $g : Y \to Z$ を、合成可能な分離的かつ局所有限型な
+スキームの射とする。$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。
+このとき $(g \circ f)_*\mathcal{F}$ の部分層として
+$g_!f_!\mathcal{F} = (g \circ f)_!\mathcal{F}$ である。
+\end{lemma}
+
+\begin{proof}
+読者には、ぜひ自分でこれを証明することを勧めたい。
+$W \in Z_\etale$ とし、
+$s \in (g \circ f)_*\mathcal{F}(W) = \mathcal{F}(X_W)$ とする。
+$s$ の台を $T \subset X_W$ と書く。これは閉部分集合である。
+$s$ が $(g \circ f)_!\mathcal{F}$ の切断であることと、$T$ が $W$ 上
+固有であることは同値である。また
+$f_!\mathcal{F} \subset f_*\mathcal{F}$ であり、したがって
+$g_!f_!\mathcal{F} \subset g_!f_*\mathcal{F} \subset g_*f_*\mathcal{F}$
+である。一方、$s$ が $g_!f_!\mathcal{F}$ の切断であることは、
+(a) $T$ が $Y_W$ 上固有であり、かつ (b) $f_!\mathcal{F}$ の切断として
+見た $s$ の台 $T'$ が $W$ 上固有であることと同値である。
+(a) が成り立つなら、$T$ の $Y_W$ における像は閉であり、
+$f_!\mathcal{F} \subset f_*\mathcal{F}$ なので、$T' \subset Y_W$ は
+$T$ の像であることが分かる（詳細は省略する。茎を見よ）。
+
+\medskip\noindent
+したがって示すべきことは、閉部分集合 $T \subset X_W$ が $W$ 上固有で
+あることと、$T$ が $Y_W$ 上固有で、かつ $Y_W$ における $T$ の像が
+$W$ 上固有であることが同値だということである。$T$ には誘導される
+被約閉部分スキーム構造を入れる。
+$T$ が $W$ 上固有ならば、Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-scheme-closed} により
+$T \to Y_W$ は固有であり、Cohomology of Schemes, Lemma
+\ref{coherent-lemma-functoriality-closed-proper-over-base} により
+$Y_W$ における $T$ の像は $W$ 上固有である。
+逆に、$T$ が $Y_W$ 上固有で、$T$ の $Y_W$ における像が $W$ 上固有ならば、
+$T \to W$ は固有射の合成として固有である（この問題をスキームの射についての
+問題にするため、$Y_W$ における $T$ の閉像に誘導される被約スキーム構造を
+入れる）。Morphisms, Lemma
+\ref{morphisms-lemma-composition-proper} を参照せよ。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-f-shriek-base-change-composition}
+上で構成した関手間の同型は、次の2つの性質を満たす。
+\begin{enumerate}
+\item $f : X \to Y$、$g : Y \to Z$、$h : Z \to T$ を、合成可能な
+分離的かつ局所有限型なスキームの射とする。このとき図式
+$$
+\xymatrix{
+(h \circ g \circ f)_! \ar[r] \ar[d] &
+(h \circ g)_! \circ f_! \ar[d] \\
+h_! \circ (g \circ f)_! \ar[r] &
+h_! \circ g_! \circ f_!
+}
+$$
+は可換である。ここで矢印は補題 \ref{more-etale-lemma-f-shriek-composition} のものである。
+\item スキームの図式
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_c & X \ar[d]^f \\
+Y' \ar[d]_{g'} \ar[r]_b & Y \ar[d]^g \\
+Z' \ar[r]^a & Z
+}
+$$
+があり、両方の正方形が Cartesian で、$f$ と $g$ が分離的かつ
+局所有限型であるとする。このとき図式
+$$
+\xymatrix{
+a^{-1} \circ (g \circ f)_! \ar[d] \ar[rr] & &
+(g' \circ f')_! \circ c^{-1} \ar[d] \\
+a^{-1} \circ g_! \circ f_! \ar[r] &
+g'_! \circ b^{-1} \circ f_! \ar[r] &
+g'_! \circ f'_! \circ c^{-1}
+}
+$$
+は可換である。ここで横の矢印は補題
+\ref{more-etale-lemma-base-change-f-shriek-separated} のものであり、矢印は補題
+\ref{more-etale-lemma-f-shriek-composition} のものである。
+\end{enumerate}
+(1) は直像について同様の可換図式があることから成り立つ。
+(2) は、直像の基底変換写像のきわめて一般的な両立性
+（Sites, Remark \ref{sites-remark-compose-base-change}）と、補題
+\ref{more-etale-lemma-base-change-f-shriek-separated} および
+\ref{more-etale-lemma-f-shriek-composition} の同型が対応する直像の写像を用いて
+構成されていることから成り立つ。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-colim-f-shriek-separated}
+$f : X \to Y$ を分離的かつ局所有限型なスキームの射とする。
+$X = \bigcup_{i \in I} X_i$ を、任意の $i, j \in I$ に対して
+$X_i \cup X_j \subset X_k$ となる $k$ が存在するような開被覆とする。
+$f$ の制限を $f_i : X_i \to Y$ と書く。このとき
+$$
+f_!\mathcal{F} = \colim_{i \in I} f_{i, !}(\mathcal{F}|_{X_i})
+$$
+であり、これは $\mathcal{F} \in \textit{Ab}(X_\etale)$ に関して関手的である。
+遷移写像は注意 \ref{more-etale-remark-covariance-f-shriek-separated} で構成したものである。
+\end{lemma}
+
+\begin{proof}
+右辺から左辺への標準写像が、$Y_\etale$ の準コンパクトな対象 $V$ 上で
+評価したとき全単射であることを示せば十分である。
+右辺の余極限は有向であり、単射な遷移写像をもつことに注意せよ。
+したがって Sites, Lemma
+\ref{sites-lemma-directed-colimits-sections} を用いて余極限を評価できる。
+ゆえに、主張は、$V$ 上固有な閉部分集合 $Z \subset X_V$ が準コンパクトで、
+したがってある $i$ に対する $X_{i, V}$ に含まれる、という観察に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-f-shriek-separated-direct-sums}
+$f : X \to Y$ を分離的かつ局所有限型なスキームの射とする。
+このとき関手 $f_!$ は直和と可換である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} = \bigoplus \mathcal{F}_i$ とする。写像
+$\bigoplus f_!\mathcal{F}_i \to f_!\mathcal{F}$ が同型であることを示すには、
+これらの層が $Y_\etale$ の準コンパクトな対象 $V$ 上で同じ切断をもつことを
+示せば十分である。$Y$ を $V$ で置き換えると、
+$H^0(Y, f_!\mathcal{F}) \subset H^0(X, \mathcal{F})$ が
+$
+\bigoplus H^0(Y, f_!\mathcal{F}_i)
+\subset \bigoplus H^0(X, \mathcal{F}_i)
+\subset H^0(X, \bigoplus \mathcal{F}_i)$
+に等しいことを示せば十分である。この場合、$X$ をその準コンパクトな開集合の
+合併として書き、補題 \ref{more-etale-lemma-colim-f-shriek-separated} を用いることで、
+$X$ も準コンパクトな場合に帰着する。そのとき \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-colimit} により
+$H^0(X, \mathcal{F}) = \bigoplus H^0(X, \mathcal{F}_i)$ である。
+切断の台を見れば、読者は容易に結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-f-shriek-separated-colimits}
+$f : X \to Y$ を分離的かつ局所準有限なスキームの射とする。このとき
+\begin{enumerate}
+\item $\mathcal{F}$ が $\textit{Ab}(X_\etale)$ の対象で、
+$\overline{y} : \Spec(k) \to Y$ が幾何点ならば
+$$
+(f_!\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+であり、これは $\mathcal{F}$ に関して関手的である。
+\item 関手 $f_!$ は完全である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+構成により関手 $f_!$ は左完全である。右完全性は茎上で調べられる
+（\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks}）。したがって (1) を
+証明すれば十分である。
+
+\medskip\noindent
+$\overline{y} : \Spec(k) \to Y$ を幾何点とする。
+スキーム $X_{\overline{y}}$ の台位相空間は離散であり
+（Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-fibres}）、各点の剰余体は
+$k$ の有限拡大として $k$ に等しい。したがって
+$\{\overline{x} : \Spec(k) \to X : f(\overline{x}) = \overline{y}\}$ は
+$X_{\overline{y}}$ の点集合に等しい。ゆえに茎の計算は、より一般的な補題
+\ref{more-etale-lemma-stalk-f-shriek-separated} から従う。
+\end{proof}
+
+\section{有限台付き切断}
+\label{more-etale-section-finite-support}
+
+\noindent
+本節では、Section \ref{more-etale-section-compact-support} の構成を、必ずしも
+分離的でない局所準有限射へ拡張する。
+
+\medskip\noindent
+$f : X \to Y$ を局所準有限なスキームの射とし、$\mathcal{F}$ を
+$X_\etale$ 上のアーベル層とする。$Y_\etale$ の $V$ が与えられたとき、
+基底変換を $X_V = X \times_Y V$ と書く。有限形式和の群
+\begin{equation}
+\label{more-etale-equation-formal-sum}
+s = \sum\nolimits_{i = 1, \ldots, n} (Z_i, s_i)
+\end{equation}
+を考える。ここで $Z_i \subset X_V$ は、射 $Z_i \to V$ が有限であるような
+局所閉部分スキームであり\footnote{$f$ は局所準有限だから、射
+$Z_i \to V$ が有限であることと固有であることは同値である。}、
+$s_i \in H_{Z_i}(\mathcal{F})$ である。ここで Section
+\ref{more-etale-section-growing} と同様に
+$$
+H_{Z_i}(\mathcal{F}) =
+\{s_i \in \mathcal{F}(U_i) \mid \text{Supp}(s_i) \subset Z_i\}
+$$
+とおく。$U_i \subset X_V$ は、$Z_i$ を閉部分スキームとして含む
+開部分スキームである。これらの形式和を次の関係で割って考える。
+\begin{enumerate}
+\item
+\label{more-etale-item-sum}
+$(Z, s) + (Z, s') = (Z, s + s')$,
+\item
+\label{more-etale-item-sub}
+$(Z, s) = (Z', s)$（ただし $Z \subset Z'$）。
+\end{enumerate}
+第2の関係には意味があることに注意せよ。$Z \to V$ は有限で、
+$Z' \to V$ は分離的なので、包含 $Z \to Z'$ は閉であり、
+(\ref{more-etale-item-inclusion}) で論じた写像を使える。
+
+\medskip\noindent
+形式和 (\ref{more-etale-equation-formal-sum}) のアーベル群をこれらの関係で割った商を
+$f_{p!}\mathcal{F}(V)$ と書く。第1の関係から、$f_{p!}\mathcal{F}(V)$ は、
+$V$ 上有限な局所閉部分スキーム $Z \subset X_V$ 全体にわたるアーベル群
+$H_Z(\mathcal{F})$ の直和の商である。第2の関係から、実際には余極限
+\begin{equation}
+\label{more-etale-equation-colimit-definition}
+f_{p!}\mathcal{F}(V) = \colim_Z H_Z(\mathcal{F})
+\end{equation}
+を取っていることが分かる。この公式は、われわれの構成を抽象的に考えるうえで
+便利である。
+
+\medskip\noindent
+次に、この構成を $Y_\etale$ 上のアーベル群の前層
+$f_{p!}\mathcal{F}$ にする自然な方法があることを確認する。
+$Y_\etale$ の射 $V' \to V$ が与えられると、基底変換射
+$X_{V'} \to X_V$ を得る。$Z \subset X_V$ が $V$ 上有限な局所閉部分スキーム
+ならば、スキーム論的逆像 $Z' \subset X_{V'}$ は $V'$ 上有限である。
+さらに、$U \subset X_V$ が開部分で、$Z$ が $U$ で閉ならば、
+逆像 $U' \subset X_{V'}$ は開部分で、$Z'$ が $U'$ で閉である。
+したがって $\mathcal{F}$ の制限写像
+$\mathcal{F}(U) \to \mathcal{F}(U')$ は
+$H_Z(\mathcal{F})$ を $H_{Z'}(\mathcal{F})$ へ送る。これは上の
+(\ref{more-etale-item-pullback}) で論じた関手性の特別な場合である。
+これらの写像は、そのような $X_V$ の局所閉部分スキームの包含
+$Z_1 \subset Z_2$ と明らかに両立し、写像
+$$
+f_{p!}\mathcal{F}(V) = \colim_Z H_Z(\mathcal{F})
+\longrightarrow
+\colim_{Z'} H_{Z'}(\mathcal{F}) =
+f_{p!}\mathcal{F}(V')
+$$
+を得る。これらの写像によって、実際に $f_{p!}\mathcal{F}$ は
+$Y_\etale$ 上のアーベル群の前層となる。詳細は省略する。
+
+\medskip\noindent
+最後に、$f_{p!}\mathcal{F}$ の構成は
+$\textit{Ab}(X_\etale)$ の $\mathcal{F}$ に関して関手的である。
+したがって、局所準有限射 $f : X \to Y$ が与えられると、関手
+$$
+f_{p!} :
+\textit{Ab}(X_\etale)
+\longrightarrow
+\textit{PAb}(Y_\etale)
+$$
+を構成したことになる。これは $X_\etale$ 上のアーベル層の圏から
+$Y_\etale$ 上のアーベル前層の圏への関手である。
+この関手の層化として $f_!$ を定義する前に、両方が適用できる場合、
+これが Section \ref{more-etale-section-compact-support} の構成、および
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-extension-by-zero} の構成と一致することを確認しよう。
+
+\begin{lemma}
+\label{more-etale-lemma-finite-support-f-shriek-separated}
+$f : X \to Y$ を分離的かつ局所準有限なスキームの射とする。
+$\mathcal{F} \in \textit{Ab}(X_\etale)$ に関して関手的に、アーベル前層の
+標準的な同型（！）
+$$
+f_{p!}\mathcal{F} \longrightarrow f_!\mathcal{F}
+$$
+が存在し、これは Definition \ref{more-etale-definition-f-shriek-separated} の層
+$f_!\mathcal{F}$ を上で構成した前層 $f_{p!}\mathcal{F}$ と同一視する。
+\end{lemma}
+
+\begin{proof}
+$V$ を $Y_\etale$ の対象とする。$Z \subset X_V$ が局所閉で $V$ 上有限ならば、
+$f$ は分離的なので、射 $Z \to X_V$ は閉埋め込みである。
+さらに、$Z_i$（$i = 1, \ldots, n$）が $V$ 上有限な $X_V$ の閉部分スキーム
+ならば、$Z_1 \cup \ldots \cup Z_n$（スキーム論的合併）は $V$ 上有限な
+閉部分スキームである。したがって、この場合、$f_{p!}\mathcal{F}(V)$ を定義する
+余極限 (\ref{more-etale-equation-colimit-definition}) は有向であり、
+$f_{!p}\mathcal{F}(V)$ は、台が $V$ 上有限な
+$\mathcal{F}(X_V)$ の切断全体に単に等しい。
+$V$ 上固有な $X_V$ の任意の閉部分集合は、実際には $V$ 上有限である
+（$f$ が局所準有限だから）。したがって、これは定義そのものにより
+$f_!\mathcal{F}(V)$ に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-finite-support-stalk}
+$f : X \to Y$ を局所準有限なスキームの射とし、
+$\overline{y} : \Spec(k) \to Y$ を幾何点とする。
+$\textit{Ab}(X_\etale)$ の $\mathcal{F}$ に関して関手的に
+$$
+(f_{p!}\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+前層の $\overline{y}$ における茎は、$\overline{y}$ のエタール近傍
+$(V, \overline{v})$ 全体にわたる通常の余極限で定義されることを思い出そう。
+\'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-stalk} を参照せよ。
+そこで、(\ref{more-etale-equation-formal-sum}) の形の
+$s = \sum_{i = 1, \ldots, n} (Z_i, s_i)$ が
+$f_{p!}\mathcal{F}(V)$ の元であり、$(V, \overline{v})$ は
+$\overline{y}$ のエタール近傍であるとする。このとき
+$$
+X_{\overline{y}} = (X_V)_{\overline{v}} \supset Z_{i, \overline{v}}
+$$
+であり、$s_i$ は $X_V$ における $Z_i$ の開近傍上の
+$\mathcal{F}$ の切断なので、$s$ を
+$$
+\sum\nolimits_{i = 1, \ldots, n} 
+\sum\nolimits_{\overline{x} \in Z_{i, \overline{v}}}
+\left(\text{切断 }s_i\text{ が定める類：}\mathcal{F}_{\overline{x}}\right)
+\quad\in\quad
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+へ送ることができる。これが制限写像と両立し、関係
+(\ref{more-etale-item-sum}) $(Z, s) + (Z, s') - (Z, s + s')$ および、
+$Z \subset Z'$ のときの (\ref{more-etale-item-sub}) $(Z, s) - (Z', s)$ が零へ写ることの
+確認は省略する。こうして写像
+$$
+(f_{p!}\mathcal{F})_{\overline{y}}
+\longrightarrow
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+を得る。
+
+\medskip\noindent
+この矢印が全射であることを示そう。そのためには
+$f(\overline{x}) = \overline{y}$ を満たす $\overline{x}$ を選び、直和因子
+$\mathcal{F}_{\overline{x}}$ の元 $s$ が像に入ることを示せば十分である。
+$s$ は、$\overline{x}$ のエタール近傍 $(U, \overline{u})$ に対する元
+$s \in \mathcal{F}(U)$ に対応するとする。$f$ は局所準有限だから、
+射 $U \to Y$ も局所準有限である。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}
+により、$\overline{y}$ のエタール近傍 $(V, \overline{v})$、開部分スキーム
+$$
+W \subset U \times_Y V,
+$$
+および $\overline{u}$ と $\overline{v}$ へ写る幾何点 $\overline{w}$ であって、
+$W \to V$ が有限で、$\overline{w}$ が $\overline{v}$ へ写る $W$ の唯一の
+幾何点となるものを取れる。（ここで使っている幾何点の言葉と、補題の主張で
+使われている点および剰余体拡大の言葉との間の翻訳は省略する。）
+$W \to X_V = X \times_Y V$ はエタールであることに注意せよ。
+$\overline{w}$ の像 $\overline{w}'$ のアフィン開近傍
+$W' \subset X_V$ を選ぶ。$\overline{w}$ は $\overline{v}$ 上の
+$W$ の唯一の点であり、$W \to V$ は閉なので、$V$ を
+$\overline{v}$ の開近傍で置き換えた後、$W \to X_V$ の像が
+$W'$ に含まれると仮定してよい。このとき $W \to W'$ は有限かつエタールであり、
+$W$ には $\overline{w}'$ の上にある幾何点 $\overline{w}$ がただ一つ存在する。
+したがって $W \to W'$ は、$W'$ における $\overline{w}'$ のある開近傍上で
+開埋め込みである。\'Etale Morphisms, Lemma
+\ref{etale-lemma-finite-etale-one-point} を参照せよ。
+$V$ と $W'$ を縮小することで、$W \to W'$ は同型であると仮定してよい。
+したがって $s$ は、$V$ 上有限な開部分スキーム $W' \subset X_V$ 上の
+$\mathcal{F}$ の切断 $s'$ とみなせる。ゆえに定義により、$(W', s')$ は
+$j_{p!}\mathcal{F}(V)$ の元を定め、これは所望通り $s$ へ写る。
+
+\medskip\noindent
+この矢印が単射であることを示そう。そのため、
+(\ref{more-etale-equation-formal-sum}) の形の
+$s = \sum_{i = 1, \ldots, n} (Z_i, s_i)$ を
+$f_{p!}\mathcal{F}(V)$ の元とする。ここで $(V, \overline{v})$ は
+$\overline{y}$ のエタール近傍である。$s$ は上で構成した写像のもとで
+零へ写ると仮定する。まず、$(V, \overline{v})$ をそのエタール近傍で
+置き換えた後、開かつ閉な部分スキームへの分解
+$Z_i = Z_{i, 1} \amalg \ldots \amalg Z_{i, m_i}$ であって、各
+$Z_{i, j}$ が $\overline{v}$ 上にちょうど一つの幾何点をもつものが
+存在すると仮定してよい。明らかな直和分解
+$$
+H_{Z_i}(\mathcal{F}) = \bigoplus H_{Z_{i, j}}(\mathcal{F})
+$$
+のもとで、元 $s_i$ は $\sum s_{i, j}$ に対応するとする。
+関係 (\ref{more-etale-item-sum}) および (\ref{more-etale-item-sub}) を用いて、$s$ を
+\linebreak[4]
+$\sum_{i = 1, \ldots, n} \sum_{j = 1, \ldots, m_i} (Z_{i, j}, s_{i, j})$
+で置き換えてよい。言い換えると、$Z_i$ は $\overline{v}$ 上に一意な
+幾何点をもつと仮定してよい。われわれの $Z_i$ の $\overline{v}$ 上の
+幾何点に対応する、$\overline{y}$ 上の $X$ の幾何点を
+$\overline{x}_1, \ldots, \overline{x}_m$ とする。一つの
+$j \in \{1, \ldots, m\}$ に対し、$\overline{x}_j$ が $Z_i$ の点に
+対応するような添字 $i$ は複数ありうることに注意せよ。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}
+を両方の $X_V \to V$ に適用し、$(V, \overline{v})$ をそのエタール近傍で
+置き換えた後、開部分スキーム
+$$
+W_j \subset X \times_Y V,\quad j = 1, \ldots, m
+$$
+と、$\overline{x}_j$ および $\overline{v}$ へ写る $W_j$ の幾何点
+$\overline{w}_j$ であって、$W_j \to V$ が有限で、$\overline{w}_j$ が
+$\overline{v}$ へ写る $W_j$ の唯一の幾何点となるものが存在すると仮定してよい。
+$V$ を縮小した後、各 $Z_i \subset W_j$ がある $j$ に対して成り立ち、写像
+$H_{Z_i}(\mathcal{F}) \to H_{W_j}(\mathcal{F})$ があると仮定してよい。
+したがって関係 (\ref{more-etale-item-sub}) により、われわれの元は、ある
+$t_j \in H_{W_j}(\mathcal{F})$ に対する形
+$$
+\sum\nolimits_{j = 1, \ldots, m} (W_j, t_j)
+$$
+の元と同値である。明らかに、この元は単に直和因子
+$\mathcal{F}_{\overline{x}_j}$ における $t_j$ の類へ写る。
+$s$ は零へ写るので、$t_j$ は $\mathcal{F}_{\overline{x}_j}$ の零へ写る。
+これは、$t_j$ が $W_j$ における $\overline{w}_j$ の開近傍上で
+零に制限されることを意味する。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-zero-over-image} を参照せよ。
+$V$ をもう一度縮小すると、所望通りすべての $j$ について $t_j = 0$ となる。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-finite-support-etale-shriek}
+$f = j : U \to X$ をスキームのエタール射とする。
+$j_{p!}$ で \'Etale Cohomology, Equation
+(\ref{etale-cohomology-equation-j-p-shriek}) の構成を表し、
+$f_{p!}$ で上の構成を表す。
+$\mathcal{F} \in \textit{Ab}(X_\etale)$ に関して関手的に、アーベル前層の
+標準写像
+$$
+j_{p!}\mathcal{F} \longrightarrow f_{p!}\mathcal{F}
+$$
+が存在し、これは \'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-extension-zero} の層
+$j_!\mathcal{F} = (j_{p!}\mathcal{F})^\#$ を
+$(f_{p!}\mathcal{F})^\#$ と同一視する。
+\end{lemma}
+
+\begin{proof}
+この補題の証明を読む前に、\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale} の証明を読まれたい。
+$V$ を $X_\etale$ の対象とする。次を思い出そう。
+$$
+j_{p!}\mathcal{F}(V) =
+\bigoplus\nolimits_{\varphi : V \to U} \mathcal{F}(V \xrightarrow{\varphi} U)
+$$
+$\varphi$ が与えられると、$\varphi$ のグラフの像として開部分スキーム
+$Z_\varphi \subset U_V = U \times_X V$ を得る。
+$\varphi$ により $U$ 上の同型 $V \to Z_\varphi$ を得るので、元
+$$
+s_\varphi \in \mathcal{F}(V \xrightarrow{\varphi} U) =
+\mathcal{F}(Z_\varphi) = H_{Z_\varphi}(\mathcal{F})
+$$
+を $Z_{\varphi}$ 上の $\mathcal{F}$ の切断とみなせる。
+$Z_\varphi \subset U_V$ は開なので、実際
+$H_{Z_\varphi}(\mathcal{F}) = \mathcal{F}(Z_\varphi)$ であり、
+$s_\varphi$ を $H_{Z_\varphi}(\mathcal{F})$ の元とみなせる。
+以上を踏まえ、写像 $j_{p!}\mathcal{F} \to f_{p!}\mathcal{F}$ を規則
+$$
+\sum\nolimits_{i = 1, \ldots, n} s_{\varphi_i}
+\longmapsto
+\sum\nolimits_{i = 1, \ldots, n} (Z_{\varphi_i}, s_{\varphi_i})
+$$
+で定義する。右辺は (\ref{more-etale-equation-formal-sum}) の形の和である。
+これが制限写像と両立し、$\mathcal{F}$ に関して関手的であることの確認は省略する。
+
+\medskip\noindent
+証明を終えるため、幾何点 $\overline{y} : \Spec(k) \to Y$ が与えられると、
+可換図式
+$$
+\xymatrix{
+(j_{p!}\mathcal{F})_{\overline{y}} \ar[r] \ar[d] &
+\bigoplus_{j(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+\ar@{=}[d] \\
+(f_{p!}\mathcal{F})_{\overline{y}} \ar[r] &
+\bigoplus_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+}
+$$
+があると主張する。上の横矢印は \'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-describe-jshriek} の証明で構成したものであり、
+下の横矢印は補題 \ref{more-etale-lemma-finite-support-stalk} の証明で構成したものである。
+右の縦矢印は明らかな等号であり、左の縦矢印は前段落で定義した写像の茎上の
+写像である。この主張は、ここに現れるすべての矢印と、挙げた参照先の矢印の
+明示的な記述から直ちに従う。横矢印は同型なので、左の縦矢印も同型である。
+したがって \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks} により、われわれの写像は
+層化の間の同型を誘導する。
+\end{proof}
+
+\begin{definition}
+\label{more-etale-definition-f-shriek-lqf}
+$f : X \to Y$ を局所準有限なスキームの射とする。
+{\it コンパクト台付き直像}を関手
+$$
+f_! : \textit{Ab}(X_\etale) \longrightarrow \textit{Ab}(Y_\etale)
+$$
+として定義する。具体的には $f_!\mathcal{F} = (f_{p!}\mathcal{F})^\#$、
+すなわち $f_!\mathcal{F}$ は上で構成した前層
+$f_{p!}\mathcal{F}$ の層化である。
+\end{definition}
+
+\noindent
+補題 \ref{more-etale-lemma-finite-support-f-shriek-separated} により、これは両方の定義が
+適用できるとき Definition \ref{more-etale-definition-f-shriek-separated} と矛盾しない。
+また補題 \ref{more-etale-lemma-finite-support-etale-shriek} により、両方の定義が
+適用できるとき \'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-extension-zero} とも矛盾しない。
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-f-shriek-stalk}
+$f : X \to Y$ を局所準有限なスキームの射とする。このとき
+\begin{enumerate}
+\item $\mathcal{F}$ が $\textit{Ab}(X_\etale)$ の対象で、
+$\overline{y} : \Spec(k) \to Y$ が幾何点ならば
+$$
+(f_!\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathcal{F}_{\overline{x}}
+$$
+であり、これは $\mathcal{F}$ に関して関手的である。
+\item 関手 $f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$ は
+完全であり、直和と可換である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+茎の公式は補題 \ref{more-etale-lemma-finite-support-stalk} から直ちに従う
+（実際、同値である）。関手の完全性は、この公式と、完全性を茎上で
+調べられることから直ちに従う。\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks} を参照せよ。
+\end{proof}
+
+\begin{remark}[開埋め込みに関する共変性]
+\label{more-etale-remark-covariance-lqf-f-shriek}
+$f : X \to Y$ を局所準有限なスキームの射とし、$\mathcal{F}$ を
+$X_\etale$ 上のアーベル層とする。$X' \subset X$ を開部分スキームとし、
+$f$ の制限を $f' : X' \to Y$ と書く。標準写像
+$$
+f'_!(\mathcal{F}|_{X'}) \longrightarrow f_!\mathcal{F}
+$$
+が存在すると主張する。この写像は、次のように構成する標準写像
+$$
+f'_{p!}(\mathcal{F}|_{X'}) \to f_{p!}\mathcal{F}
+$$
+の層化とする。$V \in Y_\etale$ とし、(\ref{more-etale-equation-formal-sum}) の形の切断
+$s' = \sum_{i = 1, \ldots, n} (Z'_i, s'_i)$ で、
+$f'_{p!}(\mathcal{F}|_{X'})(V)$ の元を定めるものを考える。
+$Z'_i \subset X'_V$ は $X_V$ の局所閉部分スキームともみなせ、
+$H_{Z'_i}(\mathcal{F}|_{X'}) = H_{Z'_i}(\mathcal{F})$ である。
+$s'$ をまったく同じ和
+$s = \sum_{i = 1, \ldots, n} (Z'_i, s'_i)$ へ写すが、今度はこれを
+$f_{p!}\mathcal{F}(V)$ の元とみなす。この構成が制限写像と両立し、
+$\mathcal{F}$ に関して関手的であることの確認は省略する。
+この構成は次の性質をもつ。
+\begin{enumerate}
+\item 写像 $f'_{p!}\mathcal{F}' \to f_{p!}\mathcal{F}$ および
+$f'_!\mathcal{F}' \to f_!\mathcal{F}$ は、補題
+\ref{more-etale-lemma-finite-support-stalk} および
+\ref{more-etale-lemma-lqf-f-shriek-stalk} における茎の記述と両立する。
+\item $f$ が分離的ならば、写像
+$f'_{p!}\mathcal{F}' \to f_{p!}\mathcal{F}$ は、注意
+\ref{more-etale-remark-covariance-f-shriek-separated} で構成した写像と、補題
+\ref{more-etale-lemma-finite-support-f-shriek-separated} の同型を介して同じである。
+\item $X'' \subset X'$ が別の開部分ならば、合成
+$f''_{p!}(\mathcal{F}|_{X''}) \to f'_{p!}(\mathcal{F}|_{X'}) \to
+f_{p!}\mathcal{F}$ は、包含 $X'' \subset X$ に対する写像
+$f''_{p!}(\mathcal{F}|_{X''}) \to f_{p!}\mathcal{F}$ である。
+層化すると、同じことが
+$f''_!(\mathcal{F}|_{X''}) \to f'_!(\mathcal{F}|_{X'}) \to f_!\mathcal{F}$
+についても成り立つ。
+\item 写像 $f'_!\mathcal{F}' \to f_!\mathcal{F}$ は単射である。
+これは茎上で調べられるからである。
+\end{enumerate}
+これらの主張はすべて、上のような有限和で元を表し、その元に何が起こるかを
+考えれば容易に証明できる。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-colimit-f-shriek}
+$f : X \to Y$ を局所準有限なスキームの射とし、
+$X = \bigcup_{i \in I} X_i$ を開被覆とする。このとき完全複体
+$$
+\ldots \to
+\bigoplus\nolimits_{i_0, i_1, i_2} f_{i_0i_1i_2, !}
+\mathcal{F}|_{X_{i_0i_1i_2}} \to
+\bigoplus\nolimits_{i_0, i_1} f_{i_0i_1, !} \mathcal{F}|_{X_{i_0i_1}} \to
+\bigoplus\nolimits_{i_0} f_{i_0, !} \mathcal{F}|_{X_{i_0}}
+\to f_!\mathcal{F} \to 0
+$$
+が存在し、$\mathcal{F} \in \textit{Ab}(X_\etale)$ に関して関手的である。
+詳細は証明を参照せよ。
+\end{lemma}
+
+\begin{proof}
+通常通り $X_{i_0 \ldots i_p} = X_{i_0} \cap \ldots \cap X_{i_p}$ とおき、
+$f$ の $X_{i_0 \ldots i_p}$ への制限を $f_{i_0 \ldots i_p}$ と書く。
+複体の写像は注意 \ref{more-etale-remark-covariance-lqf-f-shriek} で構成した写像に、
+{\v C}ech 複体と同じ符号規則を入れたものである。
+完全性は補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} の茎の記述から容易に従う。
+詳細は省略する。
+\end{proof}
+
+\begin{remark}[別の構成]
+\label{more-etale-remark-alternative-lqf-f-shriek}
+補題 \ref{more-etale-lemma-lqf-colimit-f-shriek} は、局所準有限射 $f$ に対する関手
+$f_!$ の別の構成を与える。実際、局所準有限なスキームの射
+$f : X \to Y$ が与えられたとき、各 $f_i : X_i \to Y$ が分離的になるような
+開被覆 $X = \bigcup_{i \in I} X_i$ を選べる。例えば $X$ のアフィン開被覆を
+選べばよい。このとき $f_!\mathcal{F}$ を、補題の複体の最後から2番目の写像の
+余核、すなわち
+$$
+f_!\mathcal{F} = \Coker\left(
+\bigoplus\nolimits_{i_0, i_1} f_{i_0i_1, !} \mathcal{F}|_{X_{i_0i_1}} \to
+\bigoplus\nolimits_{i_0} f_{i_0, !} \mathcal{F}|_{X_{i_0}}
+\right)
+$$
+として定義できる。射 $f_{i_0}$ と $f_{i_0i_1}$ は分離的なので、
+Section \ref{more-etale-section-compact-support} の $f_{i_0, !}$ と
+$f_{i_0i_1, !}$ の構成を使える。その後、分離的な場合、すなわち補題
+\ref{more-etale-lemma-lqf-f-shriek-separated-colimits} を用いて $f_!$ の茎を計算し、
+補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} の結果を得られる。
+そうすれば、本節の他の結果もすべてここから導ける。
+\end{remark}
+
+\begin{remark}
+\label{more-etale-remark-construct-map-presheaves-downstairs}
+$g : Y' \to Y$ をスキームの射とする。$Y'_\etale$ 上のアーベル前層
+$\mathcal{G}'$ に対し、$g_*\mathcal{G}'$ で前層
+$V \mapsto \mathcal{G}'(Y' \times_Y V)$ を表す。
+$\alpha : \mathcal{G} \to g_*\mathcal{G}'$ が $Y_\etale$ 上の
+アーベル前層の写像ならば、$Y_\etale$ 上のアーベル層の一意な写像
+$\alpha^\# : \mathcal{G}^\# \to g_*((\mathcal{G}')^\#)$ であって、図式
+$$
+\xymatrix{
+\mathcal{G} \ar[d] \ar[r]_\alpha & g_*\mathcal{G}' \ar[d] \\
+\mathcal{G}^\# \ar[r]^-{\alpha^\#} & g_*((\mathcal{G}')^\#)
+}
+$$
+を可換にするものが存在する。ここで縦の写像は標準写像
+$\mathcal{G} \to \mathcal{G}^\#$ および
+$\mathcal{G}' \to (\mathcal{G}')^\#$ から来る。
+$\alpha^\#$ に随伴する写像を
+$\alpha' : g^{-1}\mathcal{G}^\# \to (\mathcal{G}')^\#$ とする。
+幾何点 $\overline{y}' : \Spec(k) \to Y'$ の $Y$ における像が
+$\overline{y} = g \circ \overline{y}'$ ならば、写像
+$$
+\alpha'_{\overline{y}'} :
+\mathcal{G}_{\overline{y}} =
+(\mathcal{G}^\#)_{\overline{y}} =
+(g^{-1}\mathcal{G}^\#)_{\overline{y}'}
+\longrightarrow
+(\mathcal{G}')^\#_{\overline{y}'} =
+\mathcal{G}'_{\overline{y}'}
+$$
+は次のように与えられる。エタール近傍
+$(V, \overline{v})$ 上の $\mathcal{G}$ の切断 $s$ が茎で定める類を、
+$g_*\mathcal{G}'(V) = \mathcal{G}'(Y' \times_Y V)$ の切断
+$\alpha(s)$ が、エタール近傍
+$(Y' \times_Y V, (\overline{y}', \overline{v}))$ 上で
+$\overline{y}'$ における $\mathcal{G}'$ の茎に定める類へ写す。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-base-change-f-shriek}
+$f$ が局所準有限であるようなスキームの Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。$\textit{Ab}(X_\etale)$ の $\mathcal{F}$ に関して関手的な同型
+$g^{-1}f_!\mathcal{F} \to f'_!(g')^{-1}\mathcal{F}$ が存在し、これは補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} の茎の記述と両立する
+（正確な主張は証明を参照）。
+\end{lemma}
+
+\begin{proof}
+注意 \ref{more-etale-remark-construct-map-presheaves-downstairs} の規約のもと、
+$Y_\etale$ 上のアーベル前層の写像
+$$
+c : f_{p!}\mathcal{F} \longrightarrow g_*f'_{p!}(g')^{-1}\mathcal{F}
+$$
+を明示的に構成する。注意
+\ref{more-etale-remark-construct-map-presheaves-downstairs} の議論により、これは標準写像
+$g^{-1}f_!\mathcal{F} \to f'_!(g')^{-1}\mathcal{F}$ を定める。
+最後に、この写像が茎上の同型を誘導することを示し、
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks} により結論する。
+
+\medskip\noindent
+写像 $c$ の構成。$V \in Y_\etale$ とし、
+(\ref{more-etale-equation-formal-sum}) の形の切断
+$s = \sum_{i = 1, \ldots, n} (Z_i, s_i)$ で、
+$f_{p!}\mathcal{F}(V)$ の元を定めるものを考える。
+$V$ における $g_*f'_{p!}(g')^{-1}\mathcal{F}$ の値は、
+$V' = V \times_Y Y'$ としたときの
+$f'_{p!}(g')^{-1}\mathcal{F}(V')$ である。
+$Z_i$ の $V'$ への基底変換を $Z'_i \subset X'_{V'}$ と書く。
+(\ref{more-etale-item-pullback}) により引き戻し写像
+$H_{Z_i}(\mathcal{F}) \to H_{Z'_i}((g')^{-1}\mathcal{F})$ がある。
+引き戻しによる $s_i$ の像を
+$s'_i \in H_{Z'_i}((g')^{-1}\mathcal{F})$ と書き、
+(\ref{more-etale-equation-formal-sum}) の形の
+$c(s) = \sum_{i = 1, \ldots, n} (Z'_i, s'_i)$ とおく。これは
+$f'_{p!}(g')^{-1}\mathcal{F}(V')$ の元を定める。
+この構成が関係 (\ref{more-etale-item-sum})、(\ref{more-etale-item-sub}) および制限写像と
+両立することの確認は省略する。構成は明らかに $\mathcal{F}$ に関して関手的である。
+
+\medskip\noindent
+$\overline{y}' : \Spec(k) \to Y'$ を幾何点とし、その $Y$ における像を
+$\overline{y} = g \circ \overline{y}'$ とする。
+ファイバー積の推移律により
+$X'_{\overline{y}'} = X_{\overline{y}}$ であることに注意せよ。
+したがって $g'$ は全単射
+$\{f'(\overline{x}') = \overline{y}'\} \to
+\{f(\overline{x}) = \overline{y}\}$ を与える。
+$\overline{x}'$ が $\overline{x}$ へ写るならば、\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-stalk-pullback} により
+$((g')^{-1}\mathcal{F})_{\overline{x}'} = \mathcal{F}_{\overline{x}}$ である。
+ここで図式
+$$
+\xymatrix{
+(g^{-1}f_!\mathcal{F})_{\overline{y}'} \ar@{=}[r] \ar[d] &
+(f_!\mathcal{F})_{\overline{y}} \ar[r] \ar[ld] &
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{x}} \ar[d]
+\\
+(f'_!(g')^{-1}\mathcal{F})_{\overline{y}'} \ar[rr] & &
+\bigoplus\nolimits_{f'(\overline{x}') = \overline{y}'}
+(g')^{-1}\mathcal{F}_{\overline{x}'}
+}
+$$
+が可換であると主張する。横の矢印は補題
+\ref{more-etale-lemma-finite-support-stalk} の証明で与えたものであり、右の縦矢印は
+今述べたことによる等号である。南西方向の矢印は注意
+\ref{more-etale-remark-construct-map-presheaves-downstairs} で引き戻し写像として記述され、
+すなわち上の構成 $c$ によって単に与えられる。
+すると補題 \ref{more-etale-lemma-finite-support-stalk} の証明にある、和
+$\sum (Z_i, z_i)$ の $\overline{x}$ における茎での像の簡明な記述から、
+図式の可換性が直ちに分かる。これで補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-separated-shriek-composition}
+$f' : X \to Y'$ および $g : Y' \to Y$ を合成可能なスキームの射とし、
+$f'$ と $f = g \circ f'$ は局所準有限、$g$ は分離的かつ局所有限型とする。
+このとき関手の標準的な同型 $g_! \circ f'_! = f_!$ が存在する。
+この同型は次と両立する。
+\begin{enumerate}
+\item[(a)] 注意 \ref{more-etale-remark-covariance-f-shriek-separated} および
+\ref{more-etale-remark-covariance-lqf-f-shriek} における開埋め込みに関する共変性。
+\item[(b)] 補題 \ref{more-etale-lemma-lqf-base-change-f-shriek} および
+\ref{more-etale-lemma-base-change-f-shriek-separated} の基底変換同型。
+\item[(c)] $f'$ が分離的な場合、補題
+\ref{more-etale-lemma-f-shriek-composition} の同型に、補題
+\ref{more-etale-lemma-finite-support-f-shriek-separated} の同一視を介して等しいこと。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。
+注意 \ref{more-etale-remark-construct-map-presheaves-downstairs} の規約のもと、
+$Y_\etale$ 上のアーベル前層の写像
+$$
+c : f_{p!}\mathcal{F} \longrightarrow g_*f'_{p!}\mathcal{F}
+$$
+を明示的に構成する。注意
+\ref{more-etale-remark-construct-map-presheaves-downstairs} の議論により、これは標準写像
+$c^\# : f_!\mathcal{F} \to g_*f'_!\mathcal{F}$ を定める。
+$c^\#$ の像が部分層 $g_!f'_!\mathcal{F}$ に含まれることを示し、写像
+$c' : f_!\mathcal{F} \to g_!f'_!\mathcal{F}$ を得る。
+次に (a)、(b)、(c) を証明する。最後に (b) を用いて
+$c'$ が同型であることを示す。
+
+\medskip\noindent
+写像 $c$ の構成。$V \in Y_\etale$ とし、
+(\ref{more-etale-equation-formal-sum}) の形の和
+$s = \sum (Z_i, s_i)$ で、$f_{p!}\mathcal{F}(V)$ の元を定めるものを考える。
+$Z_i \subset X_V = X \times_Y V$ は、$V$ 上有限な局所閉部分スキームである。
+$V' = Y' \times_Y V$ とおくと
+$X_{V'} = X \times_{Y'} V' = X_V$ を得る。したがって
+$Z_i \subset X_{V'}$ は局所閉であり、$g$ が分離的なので
+$Z_i$ は $V'$ 上有限である
+（Morphisms, Lemma \ref{morphisms-lemma-finite-permanence}）。
+そこで $c(s) = \sum (Z_i, s_i)$ とおく。ただし今度はこれを
+$f'_{p!}\mathcal{F}(V') = (g_*f'_{p!}\mathcal{F})(V)$ の元とみなす。
+この構成は明らかに関係 (\ref{more-etale-item-sum})、(\ref{more-etale-item-sub}) および制限写像と
+両立するので、写像 $c$ を得る。
+
+\medskip\noindent
+上の議論において、$V'$ 上の $f'_!\mathcal{F}$ の切断
+$c(s) = \sum (Z_i, s_i)$ は
+$V' \setminus \Im(\coprod Z_i \to V')$ 上で零に制限されることに注意せよ。
+$\Im(\coprod Z_i \to V')$ は $V$ 上固有なので（例えば Morphisms, Lemma
+\ref{morphisms-lemma-scheme-theoretic-image-is-proper} による）、
+$c(s)$ は $V$ 上の
+$g_!f'_!\mathcal{F} \subset g_*f'_!\mathcal{F}$ の切断を定める。
+$f_!\mathcal{F}$ の各局所切断は局所的には $f_{p!}\mathcal{F}$ の局所切断から
+来るので、$c^\#$ の像は $g_!f'_!\mathcal{F}$ に含まれる。
+したがって、証明の第1段落で予告した通り、$c^\#$ を分解する誘導写像
+$c' : f_!\mathcal{F} \to g_!f'_!\mathcal{F}$ を得る。
+
+\medskip\noindent
+(a) の証明。$Y'_1 \subset Y'$ を開部分スキームとし、
+$X_1 = (f')^{-1}(W')$ とおく。図式
+$$
+\xymatrix{
+X_1 \ar[d]_{f'_1} \ar[r]_a \ar@/_2em/[dd]_{f_1} &
+X \ar[d]^{f'} \ar@/^2em/[dd]^f \\
+Y'_1 \ar[d]_{g_1} \ar[r]_{b'} &
+Y' \ar[d]^g \\
+Y \ar@{=}[r] &
+Y
+}
+$$
+を得る。横の矢印は開埋め込みである。このとき図式
+$$
+\xymatrix{
+f_{1, !}\mathcal{F}|_{X_1} \ar[r]_{c'_1} \ar[dd] &
+g_{1, !}f'_{1, !}\mathcal{F}|_{X_1} \ar@{=}[d] \\
+& g_{1, !}(f'_!\mathcal{F})|_{Y'_1} \ar[d] \\
+f_!\mathcal{F} \ar[r]^{c'} &
+g_!f'_!\mathcal{F} \ar[r] & g_*f'_!\mathcal{F}
+}
+$$
+は可換であると主張する。左の縦矢印は注意
+\ref{more-etale-remark-covariance-lqf-f-shriek} のものであり、右の縦矢印は注意
+\ref{more-etale-remark-covariance-f-shriek-separated} のものである。
+図式の等号は、$f'_1$ が $f'$ の $Y'_1$ への制限であり、われわれの
+$f'_!$ の構成が基底上局所的であることから生じる。
+最後に可換性を示すため、$Y_\etale$ の対象 $V$ と、
+(\ref{more-etale-equation-formal-sum}) の形の形式和
+$s_1 = \sum (Z_{1, i}, s_{1, i})$ で、
+$f_{1, p!}\mathcal{F}|_{X_1}(V)$ の元を定めるものを選ぶ。
+これは $Z_{1, i} \subset X_1 \times_Y V$ が $V$ 上有限な局所閉部分スキームで、
+$s_{1, i} \in H_{Z_{1, i}}(\mathcal{F})$ であることを意味する。
+この切断を関連する写像に沿って追跡するが、両方の経路で
+$g_*f'_!\mathcal{F}(V) = f'_!\mathcal{F}(Y' \times_Y V)$ の同じ元に
+到達することだけ示せばよい。図式のどちら側を回っても、最終的に元
+$\sum (Z_{1, i}, s_{1, i})$ を得ることは直ちに分かる。ただし今度は
+$Z_{1, i}$ を、$Y' \times_Y V$ 上有限な
+$X \times_{Y'} (Y' \times_Y V) = X \times_Y V$ の局所閉部分スキームとみなす。
+
+\medskip\noindent
+(b) の証明。$b : Y_1 \to Y$ をスキームの射とする。
+Cartesian な正方形からなる可換図式
+$$
+\xymatrix{
+X_1 \ar[d]_{f'_1} \ar[r]_a \ar@/_2em/[dd]_{f_1} &
+X \ar[d]^{f'} \ar@/^2em/[dd]^f \\
+Y'_1 \ar[d]_{g_1} \ar[r]_{b'} &
+Y' \ar[d]^g \\
+Y_1 \ar[r]^b &
+Y
+}
+$$
+を作る。われわれの構成は補題
+\ref{more-etale-lemma-lqf-base-change-f-shriek} および
+\ref{more-etale-lemma-base-change-f-shriek-separated} の基底変換写像と両立する、
+すなわち図式
+$$
+\xymatrix{
+b^{-1}f_!\mathcal{F} \ar[rr] \ar[d]_{b^{-1}c'} & &
+f_{1, !}a^{-1}\mathcal{F} \ar[d]^{c_1'} \\
+b^{-1}g_!f'_!\mathcal{F} \ar[r] \ar[d] &
+g_{1, !}(b')^{-1}f'_!\mathcal{F} \ar[r] \ar[d] &
+g_{1, !}f'_{1, !}a^{-1}\mathcal{F} \ar[d] \\
+b^{-1}g_*f'_!\mathcal{F} \ar[r] &
+g_{1, *}(b')^{-1}f'_!\mathcal{F} \ar[r] &
+g_{1, *}f'_{1, !}a^{-1}\mathcal{F}
+}
+$$
+の上側の長方形は可換であると主張する。この確認は完全に定型的なので、
+読者には省略するよう勧めたい。中央行から下段へ向かう矢印は単射だから、
+外側の図式が可換であることを示せば十分である。
+そのためには $b^{-1}f_!\mathcal{F}$ の局所切断を取り、どちらの経路を
+たどっても $g_{1, *}f'_{1, !}a^{-1}\mathcal{F}$ の同じ局所切断に到達することを
+示せばよい。実際には、上のような $f_{p!}\mathcal{F}(V)$ の切断
+$s = \sum (Z_i, s_i)$ を $b$ により引き戻した局所切断について確認すれば十分である
+（このような引き戻しがアーベル層 $b^{-1}f_!\mathcal{F}$ を生成するからである）。
+$V$、$V' = Y' \times_Y V$、$Z_i$ の $Y_1 \to Y$ による基底変換をそれぞれ
+$V_1$、$V'_1$、$Z_{1, i}$ と書く。$Z_i$ は
+$X_V = X_{V'}$ の局所閉部分スキームなので、$Z_{1, i}$ は
+$(X_1)_{V_1} = (X_1)_{V'_1}$ の局所閉部分スキームである。
+すると $b^{-1}c'$ は $s$ の引き戻しを、
+$f'_{p!}\mathcal{F}(V') = (g_*f'_{p!}\mathcal{F})(V)$ の元とみなした局所切断
+$c(s) \sum (Z_i, s_i)$ の引き戻しへ送る。下側の2つの基底変換写像の合成は、
+これを $f'_{1, p!}a^{-1}\mathcal{F}(V'_1) =
+g_{1, *}f'_{1, p!}a^{-1}\mathcal{F}(V_1)$ の元とみなした
+$\sum (Z_{i, 1}, s_{1, i})$ へ単に送る。
+一方、図式の上側の基底変換写像は $s$ の引き戻しを、
+$f_{1, !}a^{-1}\mathcal{F}(V_1)$ の元とみなした
+$\sum (Z_{1, i}, s_{1, i})$ へ送る。最後に、$c'_1$ はその構成そのものにより、
+これを $f'_{1, p!}a^{-1}\mathcal{F}(V'_1) =
+g_{1, *}f'_{1, p!}a^{-1}\mathcal{F}(V_1)$ の元とみなした
+$\sum (Z_{i, 1}, s_{1, i})$ へ確かに送り、可換性が確認された。
+
+\medskip\noindent
+(c) の証明。両方の写像の定義を比較すれば従う。詳細は省略する。
+
+\medskip\noindent
+証明を終えるには、任意の幾何点
+$\overline{y} : \Spec(k) \to Y$ による $c'$ の引き戻しが同型であることを
+示せば十分である。実際、$\overline{y}$ による引き戻しは
+$\overline{y}$ における茎を取ることと同じであり
+（\'Etale Cohomology, Remark
+\ref{etale-cohomology-remark-stalk-pullback}）、したがって
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks} を使える。
+今示した両立性 (b) により、$Y$ は $k$ のスペクトルであると仮定してよく、
+$c'$ が同型であることを示せばよい。そのためには、誘導写像
+$$
+\bigoplus\nolimits_{x \in X} \mathcal{F}_x = H^0(Y, f_!\mathcal{F})
+\longrightarrow
+H^0(Y, g_!f'_!\mathcal{F}) = H^0_c(Y', f'_!\mathcal{F})
+$$
+が同型であることを示せば十分である。等号は補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} および
+\ref{more-etale-lemma-stalk-f-shriek-separated} による。
+$X$ は、剰余体 $k$ をもつ Artin 局所環のスペクトルの非交和であることを
+思い出そう。Varieties, Lemma
+\ref{varieties-lemma-algebraic-scheme-dim-0} を参照せよ。
+左辺と右辺は直和と可換するので（詳細は省略）、$\mathcal{F}$ は
+ある $x \in X$ に台をもつ摩天楼層 $x_*A$ であると仮定してよい。
+このとき補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} により、
+$f'_!\mathcal{F}$ は $Y$ における $x$ の像 $y'$ での摩天楼層である。
+この場合、われわれの構成が所望の恒等写像
+$A \to H^0_c(Y', y'_*A) = A$ を与えることは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-shriek-composition}
+$f : X \to Y$ および $g : Y \to Z$ を合成可能な局所準有限な
+スキームの射とする。このとき関手の標準的な同型
+$$
+(g \circ f)_! \longrightarrow g_! \circ f_!
+$$
+が存在する。これらの同型は次の性質を満たす。
+\begin{enumerate}
+\item $f$ と $g$ が分離的ならば、この同型は補題
+\ref{more-etale-lemma-f-shriek-composition} の同型と一致する。
+\item $g$ が分離的ならば、この同型は補題
+\ref{more-etale-lemma-lqf-separated-shriek-composition} の同型と一致する。
+\item 幾何点 $\overline{z} : \Spec(k) \to Z$ に対し、図式
+$$
+\xymatrix{
+((g \circ f)_!\mathcal{F})_{\overline{z}} \ar[d] \ar[rr] & &
+\bigoplus\nolimits_{g(f(\overline{x})) = \overline{z}}
+\mathcal{F}_{\overline{x}} \ar@{=}[d] \\
+(g_!f_!\mathcal{F})_{\overline{z}} \ar[r] &
+\bigoplus\nolimits_{g(\overline{y}) = \overline{z}}
+(f_!\mathcal{F})_{\overline{y}} \ar[r] &
+\bigoplus\nolimits_{g(f(\overline{x})) = \overline{z}}
+\mathcal{F}_{\overline{x}}
+}
+$$
+は可換である。ここで横の矢印は補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} により与えられる。
+\item $h : Z \to T$ を第3の局所準有限なスキームの射とする。
+このとき図式
+$$
+\xymatrix{
+(h \circ g \circ f)_! \ar[r] \ar[d] &
+(h \circ g)_! \circ f_! \ar[d] \\
+h_! \circ (g \circ f)_! \ar[r] &
+h_! \circ g_! \circ f_!
+}
+$$
+は可換である。
+\item スキームの図式
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_c & X \ar[d]^f \\
+Y' \ar[d]_{g'} \ar[r]_b & Y \ar[d]^g \\
+Z' \ar[r]^a & Z
+}
+$$
+があり、両方の正方形は Cartesian、$f$ と $g$ は局所準有限であるとする。
+このとき図式
+$$
+\xymatrix{
+a^{-1} \circ (g \circ f)_! \ar[d] \ar[rr] & &
+(g' \circ f')_! \circ c^{-1} \ar[d] \\
+a^{-1} \circ g_! \circ f_! \ar[r] &
+g'_! \circ b^{-1} \circ f_! \ar[r] &
+g'_! \circ f'_! \circ c^{-1}
+}
+$$
+は可換である。ここで横の矢印は補題
+\ref{more-etale-lemma-lqf-base-change-f-shriek} のものである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$ と $g$ が分離的ならば、これは補題
+\ref{more-etale-lemma-f-shriek-composition} の特別な場合である。
+$g$ が分離的ならば、これは補題
+\ref{more-etale-lemma-lqf-separated-shriek-composition} の特別な場合であり、さらに
+$f$ と $g$ が分離的な場合と一致する。
+
+\medskip\noindent
+一般の場合の構成。$g$ の制限 $g_i : Y_i \to Z$ が分離的になるような
+開被覆 $Y = \bigcup Y_i$ を選ぶ。$X_i = f^{-1}(Y_i)$ とおき、
+$f$ の制限を $f_i : X_i \to Y_i$ と書く。また $h = g \circ f$ とし、
+$h$ の制限を $h_i : X_i \to Z$ と書く。次の図式を考える。
+$$
+\xymatrix{
+\bigoplus\nolimits_{i_0, i_1}
+h_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}} \ar[r] \ar[d] &
+\bigoplus\nolimits_{i_0} h_{i_0, !}\mathcal{F}|_{X_{i_0}} \ar[r] \ar[d] &
+h_!\mathcal{F} \ar[r] \ar@{..>}[dd] &
+0 \\
+\bigoplus\nolimits_{i_0, i_1}
+g_{i_0i_1, !} f_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}} \ar[r] \ar[d] &
+\bigoplus\nolimits_{i_0}
+g_{i_0, !} f_{i_0, !}\mathcal{F}|_{X_{i_0}} \ar[d] \\
+\bigoplus\nolimits_{i_0, i_1}
+g_{i_0i_1, !} (f_!\mathcal{F})|_{Y_{i_0i_1}} \ar[r] &
+\bigoplus\nolimits_{i_0}
+g_{i_0, !} (f_!\mathcal{F})|_{Y_{i_0}} \ar[r] &
+g_!f_!\mathcal{F} \ar[r] &
+0
+}
+$$
+補題 \ref{more-etale-lemma-lqf-colimit-f-shriek} により、図式の上段と下段は完全である。
+補題 \ref{more-etale-lemma-lqf-separated-shriek-composition} により、左上の正方形は可換である。
+左下の正方形の縦矢印は、$f_!$ の構成が基底上局所的であることから
+$(f_!\mathcal{F})|_{Y_{i_0i_1}} = f_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}}$ および
+$(f_!\mathcal{F})|_{Y_{i_0}} = f_{i_0, !}\mathcal{F}|_{X_{i_0}}$
+であることによって生じる。さらに、これらの等号は、左下の正方形の横写像を
+定義するために（$Y_{i_0i_1} \subset Y_{i_0}$ に対する開埋め込みの共変性と
+ともに）用いる同一視
+$((f_!\mathcal{F})|_{Y_{i_0}})|_{Y_{i_0i_1}} =
+(f_!\mathcal{F})|_{Y_{i_0i_1}}$ および
+$(f_{i_0, !}\mathcal{F}|_{X_{i_0}})|_{Y_{i_0i_1}} =
+f_{i_0i_1, !}\mathcal{F}|_{X_{i_0i_1}}$ と（もちろん）両立する。
+したがって、この正方形も可換である。
+このようにして、図式に示した一意な点線矢印が存在し、さらにこの矢印は
+同型であることが分かる。
+
+\medskip\noindent
+性質 (1)--(5) の証明。開被覆 $Y = \bigcup Y_i$ を固定する。
+$Y \to Z$ がたまたま分離的ならば、補題
+\ref{more-etale-lemma-lqf-separated-shriek-composition} の写像を使うことで、上の大きな
+図式に収まる点線矢印を得る（同補題の性質そのものによる）。
+これは (2) を証明し、さらに補題
+\ref{more-etale-lemma-lqf-separated-shriek-composition} と補題
+\ref{more-etale-lemma-f-shriek-composition} の写像の両立性により (1) も証明する。
+次に、$Z$ 上の任意のスキーム $Z'$ に対し、開被覆
+$Y' = \bigcup b^{-1}(Y_i)$ を用いて構成した写像
+$(g' \circ f')_! \to g'_! \circ f'_!$ について (5) の両立性を得る。
+これは補題 \ref{more-etale-lemma-lqf-separated-shriek-composition} で構成した写像の
+対応する両立性から明らかである。
+特に幾何点 $\overline{z} : \Spec(k) \to Z$ を考えられる。
+$X_{\overline{z}} \to Y_{\overline{z}} \to \Spec(k)$ は分離射なので、
+$\overline{z}$ による
+$(g \circ f)_!\mathcal{F} \to g_! f_! \mathcal{F}$ の基底変換は、補題
+\ref{more-etale-lemma-f-shriek-composition} の写像に等しい。
+これより (3) が得られることは直ちに分かる。
+もちろん (3) により、開被覆 $Y = \bigcup Y_i$ を用いて構成した関手の変換
+$(g \circ f)_! \to g_! \circ f_!$ は、その開被覆の選択に依存しない。
+最後に、既に証明した (3) を用いて茎上で何が起こるかを見れば (4) が従う。
+\end{proof}
+
+\section{局所準有限射の重み付けとトレース写像}
+\label{more-etale-section-weightings}
+
+\noindent
+本節の参考文献は
+\cite[Exposee XVII, Proposition 6.2.5]{SGA4} である。
+
+\medskip\noindent
+$f : X \to Y$ をスキームの局所準有限射とする。
+$w : X \to \mathbf{Z}$ を $f$ の重み付けとする。More on Morphisms,
+Definition \ref{more-morphisms-definition-weighting} を参照せよ。
+$\mathcal{F}$ を $Y_\etale$ 上のアーベル層とする。
+本節では、$Y_\etale$ 上のアーベル層の写像
+$$
+\text{Tr}_{f, w, \mathcal{F}} :
+f_!f^{-1}\mathcal{F}
+\longrightarrow
+\mathcal{F}
+$$
+であって、次の性質によって特徴づけられるものが存在することを示す。
+$Y$ の幾何点 $\overline{y}$ における茎上では、写像
+$$
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}} w(\overline{x}) :
+(f_!f^{-1}\mathcal{F})_{\overline{y}} =
+\bigoplus\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{y}}
+\longrightarrow
+\mathcal{F}_{\overline{y}}
+$$
+を得る。ここで、示した通り、矢印は $\overline{x}$ に対応する直和因子上で
+整数 $w(\overline{x})$ を掛けることによって与えられる。
+矢印の左側の等号は、補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} と
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-stalk-pullback} を合わせると従う。
+
+\medskip\noindent
+射 $f : X \to Y$ が平坦、局所準有限、かつ局所有限表示ならば、
+標準的な重み付けが存在し、基底変換と両立する標準的なトレース写像を得る。
+例 \ref{more-etale-example-trace-for-flat-quasi-finite} を参照せよ。
+$Y$ が局所 Noether 単枝スキームで、$f : X \to Y$ が局所準有限ならば、
+$f$ の（自然な）重み付けを定義することもでき、この場合にもトレース写像を得る。
+例 \ref{more-etale-example-trace-for-quasi-finite-over-normal} を参照せよ。
+
+\begin{lemma}
+\label{more-etale-lemma-f-shriek-projection}
+$f : X \to Y$ をスキームの局所準有限射とする。
+$\Lambda$ を環とする。
+$\mathcal{F}$ を $X_\etale$ 上の $\Lambda$ 加群の層とし、
+$\mathcal{G}$ を $Y_\etale$ 上の $\Lambda$ 加群の層とする。
+$Y_\etale$ 上の $\Lambda$ 加群の層の標準的な同型
+$$
+can :
+f_!\mathcal{F} \otimes_\Lambda \mathcal{G}
+\longrightarrow
+f_!(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+Definition \ref{more-etale-definition-f-shriek-lqf} により
+$f_!\mathcal{F} = (f_{p!}\mathcal{F})^\#$ であることを思い出そう。
+ここで $f_{p!}\mathcal{F}$ は Section \ref{more-etale-section-finite-support} で
+構成した前層である。したがって、矢印を構成するには
+$Y_\etale$ 上の前層の写像
+$$
+f_{p!}\mathcal{F} \otimes_{p, \Lambda} \mathcal{G}
+\longrightarrow
+f_{p!}(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})
+$$
+を構成すれば十分である。ここで記号 $\otimes_{p, \Lambda}$ は
+前層のテンソル積を表す。Modules on Sites, Section
+\ref{sites-modules-section-tensor-product} を参照せよ。
+$V$ を $Y_\etale$ の対象とする。次を思い出そう。
+$$
+f_{p!}\mathcal{F}(V) = \colim_Z H_Z(\mathcal{F})
+\quad\text{かつ}\quad
+f_{p!}(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})(V) =
+\colim_Z H_Z(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})
+$$
+Section \ref{more-etale-section-finite-support} を参照せよ。写像を純テンソル上で規則
+$$
+(Z, s) \otimes t \longmapsto (Z, s \otimes f^{-1}t)
+$$
+によって定義し（記法は以下を参照）、線形に
+$(f_{p!}\mathcal{F} \otimes_{p, \Lambda} \mathcal{G})(V) =
+f_{p!}\mathcal{F}(V) \otimes_\Lambda \mathcal{G}(V)$
+のすべてへ拡張する。用いた記法は次の通りである。
+\begin{enumerate}
+\item $Z \subset X_V$ は $V$ 上有限な局所閉部分スキームである。
+\item $s \in H_Z(\mathcal{F})$ である。すなわち、$Z \subset U$ が閉となる
+ある開部分 $U \subset X_V$ に対し、$s \in \mathcal{F}(U)$ かつ
+$\text{Supp}(s) \subset Z$ である。
+\item $t \in \mathcal{G}(V)$ であり、その像は
+$f^{-1}t \in f^{-1}\mathcal{G}(U)$ である。
+\end{enumerate}
+$s \in \mathcal{F}(U)$ の台は $Z$ に含まれるので、
+$s \otimes f^{-1}t$ の台も $Z$ に含まれることは明らかである。
+したがって対 $(Z, s \otimes f^{-1}t)$ を考えることには意味がある。
+この構成が余極限 $\colim_Z H_Z(\mathcal{F})$ の遷移写像と可換し、
+制限写像と両立することは直ちに分かる。最後に、この構成が補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} の $f_!$ の茎の同一視と両立することも
+同様に明らかである。言い換えると、われわれが構成した写像 $can$ は、
+幾何点 $\overline{y}$ における茎上で可換図式
+$$
+\xymatrix{
+(f_!\mathcal{F} \otimes_\Lambda \mathcal{G})_{\overline{y}}
+\ar[r]_-{can_{\overline{y}}} \ar[d] &
+f_!(\mathcal{F} \otimes_\Lambda f^{-1}\mathcal{G})_{\overline{y}} \ar[d] \\
+(\bigoplus \mathcal{F}_{\overline{x}})
+\otimes_\Lambda \mathcal{G}_{\overline{y}} \ar[r] &
+\bigoplus
+(\mathcal{F}_{\overline{x}} \otimes_\Lambda \mathcal{G}_{\overline{y}})
+}
+$$
+に収まる。ここで直和は $\overline{y}$ 上にある幾何点
+$\overline{x}$ にわたり、縦の矢印は補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} の同一視であり、下の横矢印は明らかな同型である。
+したがって、所望通り $can$ は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-trace-map-exists}
+$f : X \to Y$ をスキームの局所準有限射とし、
+$w : X \to \mathbf{Z}$ を $f$ の重み付けとする。
+$Y$ 上の任意のアーベル層 $\mathcal{F}$ に対し、指定された茎上の振る舞いをもつ
+一意なトレース写像
+$\text{Tr}_{f, w, \mathcal{F}} : f_!f^{-1}\mathcal{F} \to \mathcal{F}$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{more-etale-lemma-f-shriek-projection} により、
+これらの層の幾何点における茎の記述と両立する同一視
+$f_!f^{-1}\mathcal{F} = f_!\underline{\mathbf{Z}} \otimes \mathcal{F}$
+がある。したがって、茎上で指定された振る舞いをもつ写像
+$$
+\text{Tr}_{f, w, \underline{\mathbf{Z}}} :
+f_!\underline{\mathbf{Z}}
+\longrightarrow
+\underline{\mathbf{Z}}
+$$
+を構成すれば十分である。Definition
+\ref{more-etale-definition-f-shriek-lqf} により
+$f_!\underline{\mathbf{Z}} = (f_{p!}\underline{\mathbf{Z}})^\#$ である。
+ここで $f_{p!}\underline{\mathbf{Z}}$ は Section
+\ref{more-etale-section-finite-support} で構成した前層である。
+したがって、$Y_\etale$ 上の前層の写像
+$$
+f_{p!}\underline{\mathbf{Z}} \longrightarrow \underline{\mathbf{Z}}
+$$
+を構成すれば十分である。$V$ を $Y_\etale$ の対象とする。
+Section \ref{more-etale-section-finite-support} から
+$$
+f_{p!}\underline{\mathbf{Z}}(V) = \colim_Z H_Z(\underline{\mathbf{Z}})
+$$
+を思い出そう。ここで余極限は、$V$ 上有限な局所閉部分スキーム
+$Z \subset X_V$ 全体の（半順序）集合にわたる。そのような各 $Z$ に対し、
+余極限を定める写像と両立する写像
+$$
+H_Z(\underline{\mathbf{Z}}) \longrightarrow \underline{\mathbf{Z}}(V)
+$$
+を定義する。
+
+\medskip\noindent
+$Z \subset X_V$ を $V$ 上有限な局所閉部分スキームとする。
+$Z$ を閉集合として含む開部分 $U \subset X_V$ を選ぶ。
+$H_Z(\underline{\mathbf{Z}})$ の元 $s$ は、台が $Z$ に含まれる切断
+$s \in \underline{\mathbf{Z}}(U)$ である。$s$ の値が
+$n \in \mathbf{Z}$ となる開閉部分集合を $U_n \subset U$ とする。
+台の条件により、$n \not = 0$ ならば $Z \cap U_n = U_n$ である。
+したがって $n \not = 0$ ならば、開集合 $U_n$ は（他のすべての補集合として）
+$Z$ でも閉であり、$Z$ は $V$ 上有限なので $U_n \to V$ は有限である。
+重み付けの定義そのものにより、これは関数
+$\int_{U_n \to V} w|_{U_n}$ が $V$ 上局所定数であることを意味するので、
+これを $\underline{\mathbf{Z}}(V)$ の元とみなせる。われわれの構成は
+$(Z, s)$ を元
+$$
+\sum\nolimits_{n \in \mathbf{Z},\ n \not = 0}
+n \left(\int_{U_n \to V} w|_{U_n}\right)
+\quad \in \quad \underline{\mathbf{Z}}(V)
+$$
+へ送る。この和は $V$ 上局所有限なので意味をもつ。詳細は省略する
+（議論全体を通じ、まずアフィン開集合を選び、議論に現れるすべてのスキームが
+準コンパクトになるようにして、和が有限であることを確かめてもよい）。
+この構成が余極限の写像および $f_{p!}\underline{\mathbf{Z}}$ を定める制限写像と
+両立することの確認は省略する。
+
+\medskip\noindent
+$\overline{y}$ を点 $y \in Y$ 上にある $Y$ の幾何点とする。
+$\overline{y}$ における茎を取ると、上の構成は写像
+$$
+(f_!\underline{\mathbf{Z}})_{\overline{y}}
+= \bigoplus\nolimits_{f(\overline{x}) = \overline{y}} \mathbf{Z}
+\longrightarrow
+\mathbf{Z} = \underline{\mathbf{Z}}_{\overline{y}}
+$$
+を定める。証明を終えるため、この写像が $\overline{x}$ に対応する直和因子上で
+$w(\overline{x})$ を掛けることによって与えられることを示す。
+実際、$\overline{y}$ 上にある $\overline{x}$ を選ぶ。
+$X_V$ が $V$ 上有限な開部分 $U$ を含み、$U$ には幾何点
+$\overline{x}$ だけが含まれ、$\overline{y}$ を持ち上げる $X$ の他の幾何点は
+含まれないようなエタール近傍
+$(V, \overline{v}) \to (Y, \overline{y})$ を取れる。
+これは More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var}
+から従う。いくつかの詳細は省略する。このとき $(U, 1)$ は $V$ 上の
+$f_!\underline{\mathbf{Z}}$ の切断を定め、$\overline{x}$ に対応する直和因子では
+$1$ へ、他の直和因子では零へ写る（補題
+\ref{more-etale-lemma-finite-support-stalk} の証明を参照）。
+上の構成は $(U, 1)$ を $\int_{U \to V} w|_U$ へ送るが、これは所望通り
+$\overline{v}$ の近傍で値 $w(\overline{x})$ をもつ定数関数である。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-properties-trace-map}
+$f : X \to Y$ をスキームの局所準有限射とし、
+$w : X \to \mathbf{Z}$ を $f$ の重み付けとする。
+上で構成したトレース写像は次の性質をもつ。
+\begin{enumerate}
+\item $\text{Tr}_{f, w, \mathcal{F}}$ は $\mathcal{F}$ に関して関手的である。
+\item $\text{Tr}_{f, w, \mathcal{F}}$ は任意の基底変換と両立する。
+\item 環 $\Lambda$ と $D(Y_\etale, \Lambda)$ の $K$ が与えられると、
+$K$ に関して関手的で任意の基底変換と両立する
+$\text{Tr}_{f, w, K} : f_!f^{-1}K \to K$ を得る。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{more-etale-lemma-trace-map-exists} の証明におけるトレース写像の構成から
+従う。あるいはもっと簡単に、写像の特徴づけにより、すべての茎上で
+そうならざるをえないことから従う。スキームの Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を取る。このとき関数 $w' = w \circ g' : X' \to \mathbf{Z}$ は
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-base-change} により $f'$ の重み付けである。
+主張 (2) は、図式
+$$
+\xymatrix{
+g^{-1}f_!f^{-1}\mathcal{F}
+\ar[rr]_-{g^{-1}\text{Tr}_{f, w, \mathcal{F}}} \ar@{=}[d] & &
+g^{-1}\mathcal{F} \ar@{=}[d] \\
+f'_!(f')^{-1}g^{-1}\mathcal{F}
+\ar[rr]^-{\text{Tr}_{f', w', g^{-1}\mathcal{F}}} & &
+g^{-1}\mathcal{F}
+}
+$$
+が可換であることを意味する。ここで左の縦の等号は
+$$
+g^{-1}f_!f^{-1}\mathcal{F} =
+f'_!(g')^{-1}f^{-1}\mathcal{F} =
+f'_!(f')^{-1}g^{-1}\mathcal{F}
+$$
+によって与えられ、最初の等号は補題
+\ref{more-etale-lemma-lqf-base-change-f-shriek}（下付きシュリークの基底変換）による。
+この図式の可換性は、トレース写像の茎上での作用の特徴づけと、補題
+\ref{more-etale-lemma-lqf-base-change-f-shriek} の基底変換写像が茎の記述を保つことから従う。
+
+\medskip\noindent
+(1) と (2) が与えられれば、関手
+$f^{-1} : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$ および
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ は、問題の対象を表す
+任意の加群複体に $f^{-1}$ と $f_!$ を適用して得られるので、(3) が従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-trace-composition}
+$f : X \to Y$ および $g : Y \to Z$ を局所準有限射とする。
+$w_f : X \to \mathbf{Z}$ を $f$ の重み付けとし、
+$w_g : Y \to \mathbf{Z}$ を $g$ の重み付けとする。
+$K \in D(Z_\etale, \Lambda)$ に対し、合成
+$$
+(g \circ f)_!(g \circ f)^{-1}K =
+g_! f_! f^{-1} g^{-1}K
+\xrightarrow{g_! \text{Tr}_{f, w_f, g^{-1}K}}
+g_!g^{-1}K
+\xrightarrow{\text{Tr}_{g, w_g, K}}
+K
+$$
+は $\text{Tr}_{g \circ f, w_{g \circ f}, K}$ に等しい。
+ここで $w_{g \circ f}(x) = w_f(x) w_g(f(x))$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{more-etale-lemma-lqf-shriek-composition} により
+$(g \circ f)_! = g_! \circ f_!$ である。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-composition} において、
+$w_{g \circ f}$ が $g \circ f$ の重み付けであることを見たので、
+主張には意味がある。等しさを調べるには茎上で計算すればよい。
+詳細は省略する。
+\end{proof}
+
+\begin{example}[平坦準有限射のトレース]
+\label{more-etale-example-trace-for-flat-quasi-finite}
+$f : X \to Y$ を平坦、局所準有限、かつ局所有限表示なスキームの射とする。
+このとき
+$$
+w(x) = \text{length}_{\mathcal{O}_{X, x}}
+(\mathcal{O}_{X, x}/\mathfrak m_{f(x)} \mathcal{O}_{X, x})
+[\kappa(x) : \kappa(f(x))]_i
+$$
+とおくことで、標準的な正の重み付け $w : X \to \mathbf{Z}$ を得る。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-flat-quasi-finite} を参照せよ。
+したがって補題 \ref{more-etale-lemma-trace-map-exists} および
+\ref{more-etale-lemma-properties-trace-map} により、$f$ に対しトレース写像
+$$
+\text{Tr}_{f, K} : f_!f^{-1}K \longrightarrow K
+$$
+を得る。これは $D(Y_\etale, \Lambda)$ の $K$ に関して関手的であり、
+任意の基底変換と両立する。$f$ の任意の基底変換
+$f' : X' \to Y'$ は同じ性質を満たし、$w$ の制限は $f'$ の標準的な
+重み付けになることに注意せよ。
+\end{example}
+
+\begin{remark}
+\label{more-etale-remark-trace-etale-counit}
+$j : U \to X$ をスキームのエタール射とする。このとき、例
+\ref{more-etale-example-trace-for-flat-quasi-finite} のトレース写像
+$\text{Tr} : j_!j^{-1}K \to K$ は、$j_!$ と $j^{-1}$ の随伴の余単位に等しい。
+われわれはこの余単位に対して、既に \'Etale Cohomology, Section
+\ref{etale-cohomology-section-trace-method} で「トレース」という用語を用いた。
+\end{remark}
+
+\begin{example}[正規スキーム上の準有限射のトレース]
+\label{more-etale-example-trace-for-quasi-finite-over-normal}
+$Y$ を幾何学的単枝な局所 Noether スキームとする。
+例えば $Y$ は正規多様体でよい。$f : X \to Y$ をスキームの局所準有限射とする。
+このとき $f$ の正の重み付け $w : X \to \mathbf{Z}$ が存在し、これは概略、
+$x$ を $\mathcal{O}_{Y, f(x)}^{sh}$ 上の
+$\mathcal{O}_{X, x}^{sh}$ の「一般分離次数」へ送ることで定義される。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weighting-quasi-finite-Noetherian} を参照せよ。
+したがって補題 \ref{more-etale-lemma-trace-map-exists} および
+\ref{more-etale-lemma-properties-trace-map} により、$f$ と $w$ に対しトレース写像
+$$
+\text{Tr}_{f, w, K} : f_!f^{-1}K \longrightarrow K
+$$
+を得る。これは $D(Y_\etale, \Lambda)$ の $K$ に関して関手的であり、
+任意の基底変換と両立する。しかしこの場合、$f$ の基底変換
+$f' : X' \to Y'$ が与えられても、$w$ の $X'$ への制限は一般に
+射 $f'$ に関する「自然な」解釈をもたない。
+\end{example}
+
+\section{局所準有限射の上付きシュリーク}
+\label{more-etale-section-duality-locally-quasi-finite}
+
+\noindent
+スキームの局所準有限射 $f : X \to Y$ に対し、関手
+$f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$ は直和と可換し、
+完全である。補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} を参照せよ。
+これは右随伴をもつことを示唆するので、それを $f^!$ と書くことにする。
+
+\medskip\noindent
+注意：この関手は非導来版である！
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-f-upper-shriek}
+$f : X \to Y$ をスキームの局所準有限射とする。
+\begin{enumerate}
+\item 関手 $f_! : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$ は
+右随伴 $f^! : \textit{Ab}(Y_\etale) \to \textit{Ab}(X_\etale)$ をもつ。
+\item
+$f^!(\overline{y}_*A) = \prod_{f(\overline{x}) = \overline{y}} \overline{x}_*A$
+である。
+\item $\Lambda$ が環ならば、関手
+$f_! : \textit{Mod}(X_\etale, \Lambda) \to \textit{Mod}(Y_\etale, \Lambda)$
+は右随伴
+$f^! : \textit{Mod}(Y_\etale, \Lambda) \to \textit{Mod}(X_\etale, \Lambda)$
+をもち、これは台となるアーベル層上で $f^!$ と一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。摩天楼層の直積からなるクラスを
+$E \subset \Ob(\textit{Ab}(Y_\etale))$ とする。次を主張する。
+\begin{enumerate}
+\item[(a)] $\textit{Ab}(Y_\etale)$ の任意の $\mathcal{G}$ は
+$E$ の元の部分層である。
+\item[(b)] 任意の $\mathcal{G} \in E$ に対し、
+$\mathcal{F}$ に関して関手的な等式
+$\Hom(f_!\mathcal{F}, \mathcal{G}) = \Hom(\mathcal{F}, \mathcal{H})$
+を満たす $\textit{Ab}(X_\etale)$ の対象 $\mathcal{H}$ が存在する。
+\end{enumerate}
+この主張を確認すれば、Homology, Lemma
+\ref{homology-lemma-partially-defined-adjoint} の双対により
+随伴関手 $f^!$ が得られる。
+
+\medskip\noindent
+(a) が成り立つのは、$\mathcal{G}$ を層
+$\prod \overline{y}_*\mathcal{G}_{\overline{y}}$ へ写せるからである。
+ここで直積は $Y$ のすべての幾何点にわたる。
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-exactness-stalks} により、これは単射である。
+（位相空間上のアーベル層という設定で行えば、これは Godement 分解の
+最初の段階である。）
+
+\medskip\noindent
+(b) と補題の (2) は次のように分かる。あるアーベル群
+$A_{\overline{y}}$ に対して
+$\mathcal{G} = \prod \overline{y}_*A_{\overline{y}}$ と仮定する。このとき
+$$
+\Hom(f_!\mathcal{F}, \mathcal{G}) =
+\prod \Hom(f_!\mathcal{F}, \overline{y}_*A_{\overline{y}})
+$$
+である。したがって関手
+$\mathcal{F} \mapsto \Hom(f_!\mathcal{F}, \overline{y}_*A_{\overline{y}})$
+を表現する $X_\etale$ 上のアーベル層
+$\mathcal{H}_{\overline{y}}$ を見つけ、
+$\mathcal{H} = \prod \mathcal{H}_{\overline{y}}$ とすれば十分である。
+これにより、固定した幾何点 $\overline{y} : \Spec(k) \to Y$ と
+固定したアーベル群 $A$ に対して
+$\mathcal{H} = \overline{y}_*A$ である場合へ帰着する。
+この場合には
+$\mathcal{H} = \prod_{f(\overline{x}) = \overline{y}} \overline{x}_*A$
+でよいと主張する。これで補題の (1) と (2) の証明が終わる。
+実際、一方では補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} の茎の記述により
+$$
+\Hom(f_!\mathcal{F}, \overline{y}_*A) =
+\Hom_{\textit{Ab}}((f_!\mathcal{F})_{\overline{y}}, A) =
+\Hom_{\textit{Ab}}(\bigoplus\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{x}}, A)
+$$
+であり、他方では
+$$
+\Hom(\mathcal{F}, \mathcal{H}) =
+\prod\nolimits_{f(\overline{x}) = \overline{y}}
+\Hom(\mathcal{F}, \overline{x}_*A) =
+\prod\nolimits_{f(\overline{x}) = \overline{y}}
+\Hom_{\textit{Ab}}(\mathcal{F}_{\overline{x}}, A)
+$$
+である。これらを $\mathcal{F}$ の関手として同一視することは読者に委ねる。
+
+\medskip\noindent
+(3) の証明。$\textit{Mod}(X_\etale, \Lambda)$ の対象は、
+$\textit{Ab}(X_\etale)$ の対象 $\mathcal{F}$ と写像
+$\Lambda \to \text{End}(\mathcal{F})$ の組にほかならない。
+したがって (1) の関手 $f_!$ と $f^!$ は、(3) のような関手
+$f_!$ と $f^!$ を定める。直接計算すれば、これらが随伴であることが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-etale-upper-shriek}
+$j : U \to X$ をエタール射とする。このとき $j^! = j^{-1}$ である。
+\end{lemma}
+
+\begin{proof}
+これは、Section \ref{more-etale-section-finite-support} で定義した $j_!$ が
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-extension-by-zero} で定義した $j_!$ と
+一致するからである。補題 \ref{more-etale-lemma-finite-support-etale-shriek} を参照せよ。
+最後に、\'Etale Cohomology, Section
+\ref{etale-cohomology-section-extension-by-zero} では関手 $j_!$ は
+$j^{-1}$ の左随伴として定義されるので、随伴関手の一意性から結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-upper-shriek-restriction}
+$f : X \to Y$ および $g : Y \to Z$ を分離的な局所準有限射とする。
+標準的な同型 $(g \circ f)^! \to f^! \circ g^!$ が存在する。
+第三の局所準有限射 $h : Z \to T$ が与えられると、図式
+$$
+\xymatrix{
+(h \circ g \circ f)^! \ar[r] \ar[d] &
+f^! \circ (h \circ g)^! \ar[d] \\
+(g \circ f)^! \circ h^! \ar[r] & f^! \circ g^! \circ h^!
+}
+$$
+は可換である。
+\end{lemma}
+
+\begin{proof}
+随伴関手の一意性により、これは関手 $f_!$ に対する対応する（双対）主張へ
+直ちに移される。補題 \ref{more-etale-lemma-lqf-shriek-composition} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-upper-shriek-restriction-etale}
+$j : U \to X$ および $j' : V \to U$ をエタール射とする。
+同型 $(j \circ j')^{-1} = (j')^{-1} \circ j^{-1}$ と、補題
+\ref{more-etale-lemma-upper-shriek-restriction} の同型
+$(j \circ j')^! = (j')^! \circ j^!$ は、補題
+\ref{more-etale-lemma-etale-upper-shriek} の同型を介して一致する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-base-change-upper-shriek}
+$f$ が局所準有限であるようなスキームの Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。$Y'_\etale$ 上の任意のアーベル層 $\mathcal{F}$ に対し、
+$(g')_*(f')^!\mathcal{F} = f^!g_*\mathcal{F}$ である。
+\end{lemma}
+
+\begin{proof}
+随伴関手の一意性により、これは関手 $f_!$ に対する対応する（双対）主張から
+従う。補題 \ref{more-etale-lemma-lqf-base-change-f-shriek} を参照せよ。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-pointed-sets}
+本節の内容は基点付き集合の層へ一般化できる。
+すなわち、サイト $\mathcal{C}$ に対し、基点付き集合の層の圏を
+$\Sh^*(\mathcal{C})$ と書く。本節と前節の構成は、必要な変更を加えれば、
+基点付き集合の層に適用できる。したがって、スキームの局所準有限射
+$f : X \to Y$ が与えられると、随伴関手の対
+$$
+f_! : \Sh^*(X_\etale) \longrightarrow \Sh^*(Y_\etale)
+\quad\text{かつ}\quad
+f^! : \Sh^*(Y_\etale) \longrightarrow \Sh^*(X_\etale)
+$$
+を得る。この対は、$Y$ の任意の幾何点 $\overline{y}$ に対して、
+$\mathcal{F} \in \Sh^*(X_\etale)$ に関して関手的な同型
+$$
+(f_!\mathcal{F})_{\overline{y}} =
+\coprod\nolimits_{f(\overline{x}) = \overline{y}}
+\mathcal{F}_{\overline{x}}
+$$
+（余積は基点付き集合の圏で取る）と、基点付き集合 $S$ に関して関手的な同型
+$$
+f^!(\overline{y}_*S) =
+\prod\nolimits_{f(\overline{x}) = \overline{y}}
+\overline{x}_*S
+$$
+を満たす。
+$F : \textit{Ab}(X_\etale) \to \Sh^*(X_\etale)$ および
+$F : \textit{Ab}(Y_\etale) \to \Sh^*(Y_\etale)$
+を忘却関手とする。構成間の両立性により、
+$\mathcal{F} \in \textit{Ab}(X_\etale)$ に関して関手的な標準写像
+$$
+f_!F(\mathcal{F}) \longrightarrow F(f_!\mathcal{F})
+$$
+と、$\mathcal{G} \in \textit{Ab}(Y_\etale)$ に関して関手的な標準写像
+$$
+F(f^!\mathcal{G}) \longrightarrow f^!F(\mathcal{G})
+$$
+が存在することが保証される。これらはそれぞれ茎上および摩天楼層上で
+明らかな写像を与える。実際、変換 $F \circ f^! \to f^! \circ F$ は
+同型である（$f^!$ は直積と可換するからである）。
+\end{remark}
+
+\section{局所準有限射の導来上付きシュリーク}
+\label{more-etale-section-derived-duality-locally-quasi-finite}
+
+\noindent
+Section \ref{more-etale-section-duality-locally-quasi-finite} の関手の導来版を取り、
+次を得る。
+
+\begin{lemma}
+\label{more-etale-lemma-lqf-shriek-derived}
+$f : X \to Y$ をスキームの局所準有限射とし、$\Lambda$ を環とする。
+Definition \ref{more-etale-definition-f-shriek-lqf} および補題
+\ref{more-etale-lemma-lqf-f-upper-shriek} の関手 $f_!$ と $f^!$ は、導来圏上に
+随伴関手
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ および
+$Rf^! : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$
+を誘導する。
+\end{lemma}
+
+\noindent
+分離的な場合、関手 $f_!$ は Section
+\ref{more-etale-section-compact-support} で定義されている。
+
+\begin{proof}
+これは Derived Categories, Lemma
+\ref{derived-lemma-derived-adjoint-functors}、$f_!$ が完全であること
+（補題 \ref{more-etale-lemma-lqf-f-shriek-stalk}）、したがって
+$Lf_! = f_!$ であること、および $Y_\etale$ 上の $\Lambda$ 加群の
+K-入射複体が十分にあって $Rf^!$ が定義されることから直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-lqf-shriek-derived-torsion}
+$f : X \to Y$ をスキームの局所準有限射とし、$\Lambda$ を環とする。
+補題 \ref{more-etale-lemma-lqf-shriek-derived} の関手
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ は、
+捩れコホモロジー層をもつ複体を捩れコホモロジー層をもつ複体へ送る。
+これは $f_!$ の茎の記述から直ちに従う。補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-mayer-vietoris-shriek}
+$X$ をスキームとし、$X = U \cup V$ とする。ただし $U$ と $V$ は開である。
+$\Lambda$ を環とし、$K \in D(X_\etale, \Lambda)$ とする。
+明らかな記法のもと、$D(X_\etale, \Lambda)$ に区別三角形
+$$
+j_{U \cap V!}K|_{U \cap V} \to
+j_{U!}K|_U \oplus j_{V!}K|_V \to K \to 
+j_{U \cap V!}K|_{U \cap V}[1]
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+用いる制限関手と下付きシュリーク関手は完全なので、
+$X_\etale$ 上の任意のアーベル層 $\mathcal{F}$ に対し、列
+$$
+0 \to j_{U \cap V!}\mathcal{F}|_{U \cap V} \to
+j_{U!}\mathcal{F}|_U \oplus j_{V!}\mathcal{F}|_V \to \mathcal{F} \to 0
+$$
+が完全であることを示せば十分である。これは茎を見れば分かる。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-triangle-associated-to-open}
+$X$ をスキームとする。$Z \subset X$ を閉部分スキームとし、
+$U \subset X$ をその補集合とする。包含射を
+$i : Z \to X$ および $j : U \to X$ と書く。
+$\Lambda$ を環とし、$K \in D(X_\etale, \Lambda)$ とする。
+$D(X_\etale, \Lambda)$ に区別三角形
+$$
+j_!j^{-1}K \to K \to i_*i^{-1}K \to j_!j^{-1}K[1]
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-ses-associated-to-open} と、関手
+$j_!$、$j^{-1}$、$i_*$、$i^{-1}$ が完全であり、したがってそれらの導来版は
+$K$ を表す任意の層の複体にこれらの関手を適用して計算されることから
+直ちに従う。
+\end{proof}
+
+\section{コンパクト化による導来下付きシュリークのための準備}
+\label{more-etale-section-prelim}
+
+\noindent
+本節では、固有基底変換から直ちに従う、関手のある自然同型の存在に関する
+いくつかの補題を証明する。
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-proper-and-open}
+スキームの可換図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。$f$ と $f'$ は固有で、$g$ と $g'$ は分離的かつ局所準有限とする。
+$\Lambda$ を環とする。$K \in D(X'_\etale, \Lambda)$ に関して関手的に、
+$D(Y_\etale, \Lambda)$ に標準写像
+$$
+g_!Rf'_*K \longrightarrow Rf_*(g'_!K)
+$$
+が存在する。この写像は、(a) $K$ が下に有界で捩れコホモロジー層をもつか、
+または (b) $\Lambda$ が捩れ環ならば同型である。
+\end{lemma}
+
+\begin{proof}
+$K$ を $X'_\etale$ 上の $\Lambda$ 加群の K-入射複体
+$\mathcal{J}^\bullet$ で表す。$X_\etale$ 上の $\Lambda$ 加群の
+K-入射複体 $\mathcal{I}^\bullet$ への擬同型
+$g'_!\mathcal{J}^\bullet \to \mathcal{I}^\bullet$ を選ぶ。
+このとき写像
+$$
+g_!f'_*\mathcal{J}^\bullet =
+g_!f'_!\mathcal{J}^\bullet =
+f_!g'_!\mathcal{J}^\bullet =
+f_*g'_!\mathcal{J}^\bullet \to
+f_*\mathcal{I}^\bullet
+$$
+を考えられる。最初と三番目の等号は補題
+\ref{more-etale-lemma-proper-f-shriek} から来る。二番目の等号は補題
+\ref{more-etale-lemma-f-shriek-composition} から来る。この補題によれば、
+$g_! \circ f'_!$ と $f_! \circ g'_!$ はともに、
+$(g \circ f')_* = (f \circ g')_*$ の部分層として
+$(g \circ f')_! = (f \circ g')_!$ に等しい。
+
+\medskip\noindent
+$\Lambda$ が捩れ、すなわち場合 (b) であると仮定する。
+上の記法のもと、$f_*g'_!\mathcal{J}^\bullet \to
+f_*\mathcal{I}^\bullet$ が同型であることを示せば十分である。
+問題は $Y$ 上局所的である。したがって $f$ のファイバーの次元が
+有界であると仮定してよい。Morphisms, Lemma
+\ref{morphisms-lemma-morphism-finite-type-bounded-dimension} を参照せよ。
+このとき $Rf_*$ のコホモロジー次元は有限である。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper} を参照せよ。
+したがって Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived} により、
+$X'_\etale$ 上の任意の入射的な $\Lambda$ 加群の層 $\mathcal{J}$ と
+$q > 0$ に対して $R^qf_*(g'_!\mathcal{J}) = 0$ であることを示せば
+結果が従う。
+
+\medskip\noindent
+幾何点 $\overline{y}$ における $R^qf_*(g'_!\mathcal{J})$ の茎は、
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk} により
+$H^q(X_{\overline{y}}, (g'_!\mathcal{J})|_{X_{\overline{y}}})$ に等しい。
+$g'_!$ の形成は基底変換と可換するので
+（補題 \ref{more-etale-lemma-base-change-f-shriek-separated}）、これは
+$$
+H^q(X_{\overline{y}}, g'_{\overline{y}, !}(\mathcal{J}|_{X'_{\overline{y}}}))
+$$
+に等しい。ここで
+$g'_{\overline{y}} : X'_{\overline{y}} \to X_{\overline{y}}$ は
+幾何ファイバー間に誘導される射である。
+$Y' \to Y$ は局所準有限なので、$X'_{\overline{y}}$ は、
+$\overline{y}$ 上にある $Y'$ の幾何点 $\overline{y}'$ における
+ファイバー $X'_{\overline{y}'}$ の非交和である。
+$g'_{\overline{y}}$ の $X'_{\overline{y}'}$ への制限を
+$g'_{\overline{y}'} : X'_{\overline{y}'} \to X_{\overline{y}}$
+と書く。したがって上のコホモロジー群は
+$$
+H^q(X_{\overline{y}},
+\bigoplus\nolimits_{\overline{y}'/\overline{y}}
+g'_{\overline{y}', !}(\mathcal{J}|_{X'_{\overline{y}'}}))
+$$
+に等しい。例えば補題 \ref{more-etale-lemma-colim-f-shriek-separated} による
+（Section \ref{more-etale-section-compact-support} の
+$g'_{\overline{y}, !}$ の定義からも明らかである）。
+$X_{\overline{y}}$ 上のエタール・コホモロジーを取ることは直和と可換するので
+（\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-colimit}）、次が零であることを示せば十分である。
+$$
+H^q(X_{\overline{y}}, g'_{\overline{y}', !}(\mathcal{J}|_{X'_{\overline{y}'}}))
+$$
+$g_{\overline{y}'} : X'_{\overline{y}'} \to X_{\overline{y}}$ は
+$\overline{y}$ 上の固有スキーム間の射なので、それ自身固有であることに注意せよ。
+これは局所準有限でもあるから、$g_{\overline{y}'}$ は有限である。
+したがって
+$g'_{\overline{y}', !} = g'_{\overline{y}', *} =
+Rg'_{\overline{y}', *}$ である。
+Leray により、次が零であることを示せばよい。
+$$
+H^q(X'_{\overline{y}'}, \mathcal{J}|_{X'_{\overline{y}'}})
+$$
+$\Lambda$ は捩れなので、これは固有基底変換
+（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk}）から従う。
+実際、$f'$ による $\mathcal{J}$ の高次直像は零である。
+
+\medskip\noindent
+場合 (a) の証明。標準的な議論により、これを場合 (b) から導く。
+誘導される写像 $g_! R^pf'_* K \to R^pf_*(g'_!K)$ が
+すべての $p \in \mathbf{Z}$ に対して同型であることを示す。
+整数 $p_0 \in \mathbf{Z}$ を固定する。$j < a$ に対して
+$H^j(K) = 0$ となる整数 $a$ を取る。
+$a$ に関する降下帰納法により、$p \leq p_0$ に対して
+$g_! R^pf'_* K \to R^pf_*(g'_!K)$ が同型であることを証明する。
+$a > p_0$ ならば、自明な消滅により、写像の左辺と右辺は
+$p \leq p_0$ に対して零である。Derived Categories, Lemma
+\ref{derived-lemma-negative-vanishing} を参照せよ
+（また $g_!$ と $g'_!$ が完全関手であることを用いる）。
+$a \leq p_0$ と仮定する。区別三角形
+$$
+H^a(K)[-a] \to K \to \tau_{\geq a + 1}K
+$$
+を考える。帰納法により $\tau_{\geq a + 1}K$ に対する結果が成り立つ。
+次の段落で $H^a(K)[-a]$ に対する結果を証明する。
+すると、区別三角形の写像
+$$
+\xymatrix{
+g_! Rf'_*(H^a(K)[-a]) \ar[d] \ar[r] &
+g_! Rf'_* K \ar[r] \ar[d] &
+g_! Rf'_* \tau_{\geq a + 1} K \ar[d] \\
+Rf_*(g'_!(H^a(K)[-a])) \ar[r] &
+Rf_*(g'_!K) \ar[r] &
+Rf_*(g'_!\tau_{|geq a + 1}K)
+}
+$$
+に付随するコホモロジー層の長完全列間の写像に五項補題を適用すれば、
+$K$ に対する結果を得る。いくつかの詳細は省略する。
+
+\medskip\noindent
+$\mathcal{F}$ を $X'_\etale$ 上の捩れアーベル層とする。
+証明を終えるため、
+$g_! Rf'_*\mathcal{F} \to R^pf_*(g'_!\mathcal{F})$ が
+すべての $p$ に対して同型であることを示す。
+$\mathcal{F}[n] = \Ker(n : \mathcal{F} \to \mathcal{F})$ とおけば、
+$\mathcal{F} = \bigcup \mathcal{F}[n]$ と書ける。
+場合 (b) により $\mathcal{F}[n]$ に対する同型が成り立つ。
+関手 $g_!$、$g'_!$、$R^pf_*$、$R^pf'_*$ はフィルター付き余極限と可換するので
+（補題 \ref{more-etale-lemma-lqf-f-shriek-separated-colimits} および
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-relative-colimit-general} から従う）、
+証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-proper-and-open-compose}
+スキームの可換図式
+$$
+\xymatrix{
+X' \ar[r]_k \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]_l \ar[d]_{g'} & Y \ar[d]^g \\
+Z' \ar[r]^m & Z
+}
+$$
+を考える。$f$、$f'$、$g$、$g'$ は固有で、
+$k$、$l$、$m$ は分離的かつ局所準有限とする。
+二つの正方形に対する補題 \ref{more-etale-lemma-shriek-proper-and-open} の同型を合成すると、
+外側の長方形に対する同型を得る（正確な主張は証明を参照）。
+\end{lemma}
+
+\begin{proof}
+主張の意味は次の通りである。
+$R(g \circ f)_* = Rg_* \circ Rf_*$ および
+$R(g' \circ f')_* = Rg'_* \circ Rf'_*$ と書くと、
+外側の長方形の同型
+$m_! \circ Rg'_* \circ Rf'_* \to Rg_* \circ Rf_* \circ k_!$
+は、図式の二つの正方形の写像の合成
+$$
+m_! \circ Rg'_* \circ Rf'_* \to
+Rg_* \circ l_! \circ Rf'_* \to
+Rg_* \circ Rf_* \circ k_!
+$$
+に等しい。これを証明するため、$X'_\etale$ 上の $\Lambda$ 加群の
+K-入射複体 $\mathcal{J}^\bullet$ と、$X_\etale$ 上の $\Lambda$ 加群の
+K-入射複体 $\mathcal{I}^\bullet$ への擬同型
+$k_!\mathcal{J}^\bullet \to \mathcal{I}^\bullet$ を選ぶ。
+補題 \ref{more-etale-lemma-shriek-proper-and-open} の証明によれば、標準写像
+$$
+a : l_!f'_*\mathcal{J}^\bullet \to f_*\mathcal{I}^\bullet
+$$
+は擬同型であり、$Rg_*$ を適用するとこの擬同型が第二の矢印を与える。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-K-injective-flat} により、
+複体 $f_*\mathcal{I}^\bullet$ およびそれぞれ
+$f'_*\mathcal{J}^\bullet$ は、$Y_\etale$ およびそれぞれ
+$Y'_\etale$ 上の $\Lambda$ 加群の K-入射複体である。
+（これを用いるのは反則であり、避けることもできる。）
+特に、同じ議論により標準写像
+$$
+b : m_!g'_*f'_*\mathcal{J}^\bullet \to g_*f_*\mathcal{I}^\bullet
+$$
+は擬同型であり、この擬同型が第一の矢印を表す。
+最後に、補題 \ref{more-etale-lemma-shriek-proper-and-open} の証明によれば、
+$f'_*\mathcal{J}^\bullet$ は K-入射的なので、
+$g_*l_!f'_!\mathcal{J}^\bullet$ は
+$Rg_*(l_!f'_*\mathcal{J}^\bullet)$ を表す。
+したがって $Rg_*(a) = g_*(a)$ であり、合成
+$g_*(a) \circ b$ は長方形に対する補題
+\ref{more-etale-lemma-shriek-proper-and-open} の矢印である。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-proper-and-open-compose-horizontal}
+スキームの可換図式
+$$
+\xymatrix{
+X'' \ar[r]_{g'} \ar[d]_{f''} &
+X' \ar[r]_g \ar[d]_{f'} &
+X \ar[d]^f \\
+Y'' \ar[r]^{h'} &
+Y' \ar[r]^h &
+Y
+}
+$$
+を考える。$f$、$f'$、$f''$ は固有で、
+$g$、$g'$、$h$、$h'$ は分離的かつ局所準有限とする。
+二つの正方形に対する補題 \ref{more-etale-lemma-shriek-proper-and-open} の同型を合成すると、
+外側の長方形に対する同型を得る（正確な主張は証明を参照）。
+\end{lemma}
+
+\begin{proof}
+主張の意味は次の通りである。補題
+\ref{more-etale-lemma-f-shriek-composition} の等式を用いて
+$(h \circ h')_! = h_! \circ h'_!$ および
+$(g \circ g')_! = g_! \circ g'_!$ と書くと、
+外側の長方形の同型
+$h_! \circ h'_! \circ Rf''_* \to Rf_* \circ g_! \circ g'_!$
+は、図式の二つの正方形の写像の合成
+$$
+h_! \circ h'_! \circ Rf''_* \to
+h_! \circ Rf'_* \circ g'_! \to
+Rf_* \circ g_! \circ g'_!
+$$
+に等しい。これを証明するため、$X''_\etale$ 上の $\Lambda$ 加群の
+K-入射複体 $\mathcal{I}^\bullet$ と、$X'_\etale$ 上の $\Lambda$ 加群の
+K-入射複体 $\mathcal{J}^\bullet$ への擬同型
+$g'_!\mathcal{I}^\bullet \to \mathcal{J}^\bullet$ を選ぶ。
+次に、$X_\etale$ 上の $\Lambda$ 加群の K-入射複体
+$\mathcal{K}^\bullet$ への擬同型
+$g_!\mathcal{J}^\bullet \to \mathcal{K}^\bullet$ を選ぶ。
+補題 \ref{more-etale-lemma-shriek-proper-and-open} の証明によれば、標準写像
+$$
+h'_!f''_*\mathcal{I}^\bullet \to f'_*\mathcal{J}^\bullet
+\quad\text{かつ}\quad
+h_!f'_*\mathcal{J}^\bullet \to f_*\mathcal{K}^\bullet
+$$
+は擬同型であり、これらの擬同型が上の第一および第二の矢印を定める。
+$g_!$ は完全関手なので
+（補題 \ref{more-etale-lemma-lqf-f-shriek-separated-colimits}）、
+$g_!g'_!\mathcal{I}^\bullet \to \mathcal{K}^\bullet$ は擬同型である。
+したがって標準写像
+$$
+h_!h'_!f''_*\mathcal{I}^\bullet \to f_*\mathcal{K}^\bullet
+$$
+は擬同型であり、導来圏における外側の長方形の写像を表す。
+この写像が他の二つの合成であることは明らかなので、証明は完了する。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-going-around}
+可換図式
+$$
+\xymatrix{
+X'' \ar[r]_{k'} \ar[d]_{f''} & X' \ar[r]_k \ar[d]_{f'} & X \ar[d]^f \\
+Y'' \ar[r]^{l'} \ar[d]_{g''} & Y' \ar[r]^l \ar[d]_{g'} & Y \ar[d]^g \\
+Z'' \ar[r]^{m'} & Z' \ar[r]^m & Z
+}
+$$
+を考える。縦の矢印は固有、横の矢印は分離的かつ局所準有限とする。
+図式の正方形を次のように $A$、$B$、$C$、$D$ と名付ける。
+$$
+\begin{matrix}
+A & B \\
+C & D
+\end{matrix}
+$$
+正方形に対する補題 \ref{more-etale-lemma-shriek-proper-and-open} の写像は
+（ここでは $Rf_* = f_*$ などと書く）
+$$
+\begin{matrix}
+\gamma_A : l'_! \circ f''_* \to f'_* \circ k'_! &
+\gamma_B : l_! \circ f'_* \to f_* \circ k_! \\
+\gamma_C : m'_! \circ g''_* \to g'_* \circ l'_! &
+\gamma_D : m_! \circ g'_* \to g_* \circ l_!
+\end{matrix}
+$$
+である。$2 \times 1$ および $1 \times 2$ の長方形に対しては、
+さらに四つの写像
+$$
+\begin{matrix}
+\gamma_{A + B} :
+(l \circ l')_! \circ f''_* \to f_* \circ (k \circ k')_*  \\
+\gamma_{C + D} :
+(m \circ m')_! \circ g''_* \to g_* \circ (l \circ l')_! \\
+\gamma_{A + C} :
+m'_! \circ (g'' \circ f'')_* \to (g' \circ f')_* \circ k'_! \\
+\gamma_{B + D} :
+m_! \circ (g' \circ f')_* \to (g \circ f)_* \circ k_!
+\end{matrix}
+$$
+がある。補題 \ref{more-etale-lemma-shriek-proper-and-open-compose-horizontal} により
+$$
+\gamma_{A + B} = \gamma_B \circ \gamma_A, \quad
+\gamma_{C + D} = \gamma_D \circ \gamma_C
+$$
+であり、補題 \ref{more-etale-lemma-shriek-proper-and-open-compose} により
+$$
+\gamma_{A + C} = \gamma_A \circ \gamma_C, \quad
+\gamma_{B + D} = \gamma_B \circ \gamma_D
+$$
+である。ここでは、Categories, Section
+\ref{categories-section-formal-cat-cat} の記法を用いて
+$\gamma_{A + B} = (\gamma_B \star \text{id}_{k'_!}) \circ
+(\text{id}_{l_!} \star \gamma_A)$ と書き、他も同様に書く方が正確である。
+以上により、（先験的には）二つの変換
+$$
+m_! \circ m'_! \circ g''_* \circ f''_*
+\longrightarrow
+g_* \circ f_* \circ k_! \circ k'_!
+$$
+を得る。すなわち
+$$
+\gamma_B \circ \gamma_D \circ \gamma_A \circ \gamma_C =
+\gamma_{B + D} \circ \gamma_{A + C}
+$$
+および
+$$
+\gamma_B \circ \gamma_A \circ \gamma_D \circ \gamma_C =
+\gamma_{A + B} \circ \gamma_{C + D}
+$$
+である。この注意の要点は、これらの変換が等しいことを指摘することである。
+実際、これを見るには図式
+$$
+\xymatrix{
+m_! \circ g'_* \circ l'_! \circ f''_* \ar[r]_{\gamma_D} \ar[d]_{\gamma_A} &
+g_* \circ l_! \circ l'_! \circ f''_* \ar[d]^{\gamma_A} \\
+m_! \circ g'_* \circ f'_* \circ k'_! \ar[r]^{\gamma_D} &
+g_* \circ l_! \circ f'_* \circ k'_!
+}
+$$
+が可換であることを示せば十分である。これは正方形 $A$ と $D$ が
+一点でしか接していないことによる。より正確には Categories, Lemma
+\ref{categories-lemma-properties-2-cat-cats}、またはもっと簡単には
+Categories, Definition
+\ref{categories-definition-horizontal-composition} に先立つ議論による。
+\end{remark}
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-proper-and-open-base-change}
+$b : Y_1 \to Y$ をスキームの射とする。スキームの可換図式
+$$
+\vcenter{
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+}
+\quad\text{さらに次をおく}\quad
+\vcenter{
+\xymatrix{
+X'_1 \ar[r]_{g'_1} \ar[d]_{f'_1} & X_1 \ar[d]^{f_1} \\
+Y'_1 \ar[r]^{g_1} & Y_1
+}
+}
+$$
+を考え、後者を $b$ による基底変換とする。
+$f$ と $f'$ は固有で、$g$ と $g'$ は分離的かつ局所準有限と仮定する。
+環 $\Lambda$ と $D(X'_\etale, \Lambda)$ の $K$ に対し、
+$D(Y_{1, \etale}, \Lambda)$ に可換図式
+$$
+\xymatrix{
+b^{-1}g_!Rf'_*K \ar[d] \ar[r] &
+g_{1, !}(b')^{-1}Rf'_*K \ar[r] &
+g_{1, !}Rf'_{1, *}(a')^{-1}K \ar[d] \\
+b^{-1}Rf_*g'_!K \ar[r] &
+Rf_{1, *}a^{-1}g'_!K \ar[r] &
+Rf_{1, *}g'_{1, !}(a')^{-1}K
+}
+$$
+が存在する。ここで $a : X_1 \to X$、$a' : X'_1 \to X'$、
+$b' : Y'_1 \to Y'$ は射影であり、縦の写像は補題
+\ref{more-etale-lemma-shriek-proper-and-open} の矢印、横の矢印は基底変換写像
+（\'Etale Cohomology, Section
+\ref{etale-cohomology-section-base-change-preliminaries} による）および
+補題 \ref{more-etale-lemma-base-change-f-shriek-separated} の基底変換写像である。
+\end{lemma}
+
+\begin{proof}
+$K$ を $X'_\etale$ 上の $\Lambda$ 加群の K-入射複体
+$\mathcal{J}^\bullet$ で表す。$X_\etale$ 上の $\Lambda$ 加群の
+K-入射複体 $\mathcal{I}^\bullet$ への擬同型
+$g'_!\mathcal{J}^\bullet \to \mathcal{I}^\bullet$ を選ぶ。
+補題 \ref{more-etale-lemma-shriek-proper-and-open} の証明では、
+$g_!Rf'_*K \to Rf_*g'_!K$ を
+$$
+g_!f'_*\mathcal{J}^\bullet =
+g_!f'_!\mathcal{J}^\bullet =
+f_!g'_!\mathcal{J}^\bullet =
+f_*g'_!\mathcal{J}^\bullet \to
+f_*\mathcal{I}^\bullet
+$$
+として構成する。
+$X'_{1, \etale}$ 上の $\Lambda$ 加群の K-入射複体
+$\mathcal{J}_1^\bullet$ への擬同型
+$(a')^{-1}\mathcal{J}^\bullet \to \mathcal{J}_1^\bullet$ を選ぶ。
+すると複体の図式
+$$
+\xymatrix{
+g'_{1, !}\mathcal{J}_1^\bullet \ar[rr] & &
+\mathcal{I}_1^\bullet \\
+g'_{1, !}(a')^{-1}\mathcal{J}^\bullet \ar[u] \ar@{=}[r] &
+a^{-1}g'_!\mathcal{J}^\bullet \ar[r] &
+a^{-1}\mathcal{I}^\bullet \ar[u]
+}
+$$
+で、ホモトピーまで可換し、すべての矢印が擬同型であるものを選べる。
+等号は補題 \ref{more-etale-lemma-proper-f-shriek} から来ており、
+$\mathcal{I}_1^\bullet$ は $X_{1, \etale}$ 上の $\Lambda$ 加群の層の
+K-入射複体である。写像
+$g_{1, !}Rf'_{1, *}(a')^{-1}K \to
+Rf_{1, *}g'_{1, !}(a')^{-1}K$ は
+$$
+g_{1, !}f'_{1, *}\mathcal{J}_1^\bullet =
+g_{1, !}f'_{1, !}\mathcal{J}_1^\bullet =
+f_{1, !}g'_{1, !}\mathcal{J}_1^\bullet =
+f_{1, *}g'_{1, !}\mathcal{J}_1^\bullet \to
+f_{1, *}\mathcal{I}_1^\bullet
+$$
+によって与えられる。二つの矢印のそれぞれにある $3$ 個の等号を通じた
+同一視は引き戻し写像と両立する。すなわち、アーベル層の複体の図式
+$$
+\xymatrix{
+b^{-1}g_!f'_*\mathcal{J}^\bullet \ar@{=}[d] \ar[r] &
+g_{1, !}(b')^{-1}f'_*\mathcal{J}^\bullet \ar[r] &
+g_{1, !}f'_{1, *}(a')^{-1}\mathcal{J}^\bullet \ar@{=}[d] \\
+b^{-1}f_*g'_!\mathcal{J}^\bullet \ar[r] &
+f_{1, *}a^{-1}g'_!\mathcal{J}^\bullet \ar[r] &
+f_{1, *}g'_{1, !}(a')^{-1}\mathcal{J}^\bullet
+}
+$$
+は可換である。これを示すには、$g_!, g_{1, !}, g'_!, g'_{1, !}$ を
+$g_*, g_{1, *}, g'_*, g'_{1, *}$ で置き換えた図式が可換であることを
+示せば十分である（シュリーク関手は $*$ 関手の部分関手として定義され、
+基底変換写像もこれと両立するように定義されるからである。補題
+\ref{more-etale-lemma-base-change-f-shriek-separated} の証明を参照せよ）。
+この新しい図式の可換性は、引き戻し写像が図式の水平および垂直合成と
+両立することから従う。Sites, Remarks
+\ref{sites-remark-compose-base-change} および
+\ref{sites-remark-compose-base-change-horizontal} を参照せよ。
+したがって図式をどちらの向きに回っても、$f \circ g' = g \circ f'$ の
+$b$ による基底変換に対する引き戻し写像となる。
+もちろん図式
+$$
+\xymatrix{
+g_{1, !}f'_{1, *}(a')^{-1}\mathcal{J}^\bullet \ar@{=}[d] \ar[r] &
+g_{1, !}f'_{1, *}\mathcal{J}_1^\bullet \ar@{=}[d] \\
+f_{1, *}g'_{1, !}(a')^{-1}\mathcal{J}^\bullet \ar[r] &
+f_{1, *}g'_{1, !}\mathcal{J}_1^\bullet 
+}
+$$
+は可換である。したがって証明を終えるには、図式
+$$
+\xymatrix{
+b^{-1}f_*g'_!\mathcal{J}^\bullet \ar[r] \ar[d] &
+f_{1, *}a^{-1}g'_!\mathcal{J}^\bullet \ar[r] \ar[d] &
+f_{1, *}g'_{1, !}(a')^{-1}\mathcal{J}^\bullet \ar[r] &
+f_{1, *}g'_{1, !}\mathcal{J}_1^\bullet \ar[d] \\
+b^{-1}f_*\mathcal{I}^\bullet \ar[r] &
+f_{1, *}a^{-1}\mathcal{I}^\bullet \ar[rr] & &
+f_{1, *}\mathcal{I}_1^\bullet
+}
+$$
+が導来圏で可換であることを示せば十分だが、これは上での写像の選択により
+成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-lqf-and-proper}
+スキームの可換図式
+$$
+\xymatrix{
+X \ar[r]_f \ar[rd]_g & Y \ar[d]^h \\
+& Z
+}
+$$
+を考える。$f$ と $g$ は局所準有限、$h$ は固有とする。
+$\Lambda$ を環とする。$K \in D(X_\etale, \Lambda)$ に関して関手的に、
+$D(Z_\etale, \Lambda)$ に標準写像
+$$
+g_!K \longrightarrow Rh_*(f_!K)
+$$
+が存在する。この写像は、(a) $K$ が下に有界で捩れコホモロジー層をもつか、
+または (b) $\Lambda$ が捩れ環ならば同型である。
+\end{lemma}
+
+\begin{proof}
+$f$ と $g$ が分離的ならば、これは補題
+\ref{more-etale-lemma-shriek-proper-and-open} の特別な場合である。
+主に $f$ と $g$ が分離的な場合を用いるので、一般の場合の証明は
+読み飛ばすことを読者に勧める。
+
+\medskip\noindent
+$K$ を $X_\etale$ 上の $\Lambda$ 加群の層の複体
+$\mathcal{K}^\bullet$ で表す。$Y_\etale$ 上の $\Lambda$ 加群の層の
+K-入射複体 $\mathcal{I}^\bullet$ への擬同型
+$f_!\mathcal{K}^\bullet \to \mathcal{I}^\bullet$ を選ぶ。写像
+$$
+g_!\mathcal{K}^\bullet =
+h_!f_!\mathcal{K}^\bullet =
+h_*f_!\mathcal{K}^\bullet
+\longrightarrow
+h_*\mathcal{I}^\bullet
+$$
+を考える。ここで等号は補題
+\ref{more-etale-lemma-lqf-separated-shriek-composition} および
+\ref{more-etale-lemma-proper-f-shriek} による。この複体の写像が、補題の主張にある
+写像 $g_!K \to Rh_*(f_!K)$ を定める。
+
+\medskip\noindent
+$\Lambda$ が捩れ、すなわち場合 (b) であると仮定する。
+この写像が同型であることを調べるには、$Z$ 上局所的に作業してよい。
+したがって $h$ のファイバーの次元が有界であると仮定してよい。
+Morphisms, Lemma
+\ref{morphisms-lemma-morphism-finite-type-bounded-dimension} を参照せよ。
+このとき $Rh_*$ のコホモロジー次元は有限である。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper} を参照せよ。
+したがって Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived} により、
+$X_\etale$ 上の任意の $\Lambda$ 加群の層 $\mathcal{F}$ と
+$q > 0$ に対して $R^qh_*(f_!\mathcal{F}) = 0$ であることを示せば、
+$h_*f_!\mathcal{K}^\bullet \to h_*\mathcal{I}^\bullet$ は擬同型である。
+
+\medskip\noindent
+$\mathcal{G} = f_!\mathcal{F}$ は $Y$ 上の $\Lambda$ 加群の層であり、
+その茎が零でないのは $\kappa(y)/\kappa(h(y))$ が有限拡大となる点
+$y \in Y$ に限ることに注意せよ。これは補題
+\ref{more-etale-lemma-lqf-f-shriek-stalk} の $f_!\mathcal{F}$ の茎の記述と、
+$f$ と $g$ がともに局所準有限であることから従う。
+したがって固有基底変換定理
+（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk}）により、
+$H^q(Y_{\overline{z}}, \mathcal{H}) = 0$ を示せば十分である。
+ここで $\mathcal{H}$ は $\kappa(\overline{z})$ 上の固有スキーム
+$Y_{\overline{z}}$ 上の層で、その台は閉点全体の集合に含まれる。
+したがって必要な消滅は \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-supported-in-closed-points} による。
+
+\medskip\noindent
+場合 (a) は、補題 \ref{more-etale-lemma-shriek-proper-and-open} の証明で用いたものと
+まったく同じ議論により場合 (b) から従う
+（補題 \ref{more-etale-lemma-lqf-f-shriek-stalk} を
+補題 \ref{more-etale-lemma-lqf-f-shriek-separated-colimits} の代わりに用いる）。
+\end{proof}
+
+\section{コンパクト化による導来下付きシュリーク}
+\label{more-etale-section-derived-lower-shriek-compactification}
+
+\noindent
+$f : X \to Y$ を有限型かつ分離的なスキームの射とし、
+$Y$ は準コンパクトかつ準分離的とする。$Y$ 上のコンパクト化
+$j : X \to \overline{X}$ を選ぶ。More on Flatness, Theorem
+\ref{flat-theorem-nagata} を参照せよ。
+$\Lambda$ を環とする。$D(X_\etale, \Lambda)$ の対象 $K$ で、
+下に有界かつそのコホモロジー層が捩れであるものからなる
+厳密充満飽和三角部分圏を $D^+_{tors}(X_\etale, \Lambda)$ と書く。
+関手
+$$
+Rf_! = R\overline{f}_* \circ j_! :
+D^+_{tors}(X_\etale, \Lambda)
+\longrightarrow
+D^+_{tors}(Y_\etale, \Lambda)
+$$
+を考える。ここで $\overline{f} : \overline{X} \to Y$ は構造射である。
+これは意味をもつ。実際、注意
+\ref{more-etale-remark-lqf-shriek-derived-torsion} により関手 $j_!$ は
+$D^+_{tors}(X_\etale, \Lambda)$ を
+$D^+_{tors}(\overline{X}_\etale, \Lambda)$ へ送り、
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-torsion-direct-image} により
+$R\overline{f}_*$ は $D^+_{tors}(\overline{X}_\etale, \Lambda)$ を
+$D^+_{tors}(Y_\etale, \Lambda)$ へ送る。
+$\Lambda$ が捩れ環ならば、
+$$
+Rf_! = R\overline{f}_* \circ j_! :
+D(X_\etale, \Lambda)
+\longrightarrow
+D(Y_\etale, \Lambda)
+$$
+と定義する。次が恒例の補題である。
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-well-defined}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の
+有限型分離射とする。上で構成した関手 $Rf_!$ は、標準同型を除いて
+コンパクト化の選択に依存しない。
+\end{lemma}
+
+\begin{proof}
+$\Lambda$ が捩れ環であるときの関手
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ について証明する。
+関手
+$Rf_! : D^+_{tors}(X_\etale, \Lambda) \to
+D^+_{tors}(Y_\etale, \Lambda)$ の場合もまったく同じように証明される。
+
+\medskip\noindent
+$Y$ 上の $X$ のコンパクト化の圏を考える。この圏は More on Flatness,
+Theorem \ref{flat-theorem-nagata} および Lemmas
+\ref{flat-lemma-compactifications-cofiltered} および
+\ref{flat-lemma-compactifyable} により余フィルター的である。
+コンパクト化の各選択
+$$
+j : X \to \overline{X},\quad \overline{f} : \overline{X} \to Y
+$$
+に対し、上の構成は関手
+$R\overline{f}_* \circ j_! :
+D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ を対応させる。
+もう少し明示的に述べよう。$X_\etale$ 上の $\Lambda$ 加群の層の複体
+$\mathcal{K}^\bullet$ が与えられたとき、
+$\overline{X}_\etale$ 上の $\Lambda$ 加群の層の K-入射複体への擬同型
+$j_!\mathcal{K}^\bullet \to \mathcal{I}^\bullet$ を選ぶ。
+すると関手は $\mathcal{K}^\bullet$ を
+$\overline{f}_*\mathcal{I}^\bullet$ へ送る。
+
+\medskip\noindent
+$Y$ 上のコンパクト化 $j_i : X \to \overline{X}_i$ の間の射
+$g : \overline{X}_1 \to \overline{X}_2$ が与えられたとする。
+このとき同型
+$$
+R\overline{f}_{2, *} \circ j_{2, !} =
+R\overline{f}_{2, *} \circ Rg_* \circ j_{1, !} =
+R\overline{f}_{1, *} \circ j_{1, !}
+$$
+を得る。最初の等号では補題 \ref{more-etale-lemma-shriek-lqf-and-proper} を用いた。
+
+\medskip\noindent
+証明を終えるため、$Y$ 上の $X$ のコンパクト化の圏は余フィルター的なので、
+$Y$ 上の $X$ のコンパクト化の射の合成が関手の同型の合成へ送られることを
+示せば十分である\footnote{すなわち、$\alpha, \beta : F \to G$ が関手の射で、
+$\gamma : G \to H$ が $\gamma \circ \alpha = \gamma \circ \beta$ を満たす
+関手の同型ならば、$\alpha = \beta$ と結論できる。}。
+$j_3 : X \to \overline{X}_3$ を第三のコンパクト化とし、
+$h : \overline{X}_2 \to \overline{X}_3$ をコンパクト化の射とする。
+このとき合成
+$$
+R\overline{f}_{3, *} \circ j_{3, !} =
+R\overline{f}_{3, *} \circ Rh_* \circ j_{2, !} =
+R\overline{f}_{2, *} \circ j_{2, !} =
+R\overline{f}_{2, *} \circ Rg_* \circ j_{1, !} =
+R\overline{f}_{1, *} \circ j_{1, !}
+$$
+が、単に $j_3$、$g \circ h$、$j_1$ を用いて構成した関手の同型に
+等しいことを示さなければならない。計算すると、補題
+\ref{more-etale-lemma-shriek-lqf-and-proper} の写像の合成
+$$
+j_{3, !} \to Rh_* \circ j_{2, !} \to Rh_* \circ Rg_* \circ j_{1, !}
+$$
+が、同一視 $R(h \circ g)_* = Rh_* \circ Rg_*$ を介して対応する写像
+$j_{3, !} \to R(h \circ g)_* \circ j_{1, !}$ と一致することを
+証明すれば十分である。補題 \ref{more-etale-lemma-shriek-lqf-and-proper} の写像は
+（$j_1$ と $j_2$ は分離的なので）補題
+\ref{more-etale-lemma-shriek-proper-and-open} の写像の特別な場合である。
+したがって補題 \ref{more-etale-lemma-shriek-proper-and-open-compose} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-composition}
+$f : X \to Y$ および $g : Y \to Z$ を、準コンパクトかつ準分離的な
+スキームの間の有限型分離射とする。このとき標準同型
+$Rg_! \circ Rf_! \to R(g \circ f)_!$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$Z$ 上の $Y$ のコンパクト化 $i : Y \to \overline{Y}$ を選ぶ。
+$\overline{Y}$ 上の $X$ のコンパクト化 $X \to \overline{X}$ を選ぶ。
+ここでは More on Flatness, Theorem
+\ref{flat-theorem-nagata} と補題
+\ref{flat-lemma-compactifyable} を二度用いる。
+$\overline{X}$ における $Y$ の逆像を $U$ とすると、可換図式
+$$
+\xymatrix{
+X \ar[r]_j \ar[d]_f &
+U \ar[dl]^{f'} \ar[r]_{j'} &
+\overline{X} \ar[dl]^{\overline{f}} \\
+Y \ar[r]_i \ar[d]_g &
+\overline{Y} \ar[dl]^{\overline{g}} \\
+Z
+}
+$$
+を得る。このとき
+\begin{align*}
+R(g \circ f)_!
+& =
+R(\overline{g} \circ \overline{f})_* \circ (j' \circ j)_! \\
+& =
+R\overline{g}_* \circ R\overline{f}_* \circ j'_! \circ j_! \\
+& =
+R\overline{g}_* \circ i_! \circ Rf'_* \circ j_! \\
+& =
+Rg_! \circ Rf_!
+\end{align*}
+である。最初の等号は $R(g \circ f)_!$ の定義である。
+第二の等号では、同一視
+$R(\overline{g} \circ \overline{f})_* =
+R\overline{g}_* \circ R\overline{f}_*$ および補題
+\ref{more-etale-lemma-f-shriek-composition} の
+$(j' \circ j)_! = j'_! \circ j_!$ を用いる。
+第三の等号で用いた同一視
+$i_! \circ Rf'_* \to R\overline{f}_* \circ j_!$ は補題
+\ref{more-etale-lemma-shriek-proper-and-open} である。
+最後の第四の等号は $Rg_!$ と $Rf_!$ の定義である。
+証明を終えるため、この同型が行った選択に依存しないことを示す。
+
+\medskip\noindent
+二つの図式
+$$
+\vcenter{
+\xymatrix{
+X \ar[r]_{j_1} \ar[d] &
+U_1 \ar[dl]^{f_1} \ar[r]_{j'_1} &
+\overline{X}_1 \ar[dl]^{\overline{f}_1} \\
+Y \ar[r]_{i_1} \ar[d] &
+\overline{Y}_1 \ar[dl]^{\overline{g}_1} \\
+Z
+}
+}
+\quad\text{かつ}\quad
+\vcenter{
+\xymatrix{
+X \ar[r]_{j_2} \ar[d] &
+U_2 \ar[dl]^{f_2} \ar[r]_{j'_2} &
+\overline{X}_2 \ar[dl]^{\overline{f}_2} \\
+Y \ar[r]_{i_2} \ar[d] &
+\overline{Y}_2 \ar[dl]^{\overline{g}_2} \\
+Z
+}
+}
+$$
+があるとする。まず、$\overline{Y}_1$ と $\overline{Y}_2$ の両方を支配する
+$Z$ 上の $Y$ のコンパクト化 $i : Y \to \overline{Y}$ を選べる。
+More on Flatness, Lemma
+\ref{flat-lemma-compactifications-cofiltered} を参照せよ。
+More on Flatness, Lemma
+\ref{flat-lemma-right-multiplicative-system} および Categories, Lemmas
+\ref{categories-lemma-morphisms-right-localization} および
+\ref{categories-lemma-equality-morphisms-right-localization} により、
+$\overline{Y}$ 上の $X$ のコンパクト化 $X \to \overline{X}$ で、
+射 $\overline{X} \to \overline{X}_1$ および
+$\overline{X} \to \overline{X}_2$ をもち、合成
+$\overline{X} \to \overline{Y} \to \overline{Y}_1$ が合成
+$\overline{X} \to \overline{X}_1 \to \overline{Y}_1$ に等しく、かつ合成
+$\overline{X} \to \overline{Y} \to \overline{Y}_2$ が合成
+$\overline{X} \to \overline{X}_2 \to \overline{Y}_2$ に等しいものを選べる。
+したがって、次のような可換図式がある場合に、われわれの図式が定める写像を
+比較すれば十分である。
+$$
+\xymatrix{
+X \ar[rr]_{j_1} \ar@{=}[d] & &
+U_1 \ar[d]^{h'} \ar[ddll] \ar[rr]_{j'_1} & &
+\overline{X}_1 \ar[d]^h \ar[ddll] \\
+X \ar'[r][rr]^-{j_2} \ar[d] & &
+U_2 \ar'[dl][ddll] \ar'[r][rr]^-{j'_2} & &
+\overline{X}_2 \ar[ddll] \\
+Y \ar[rr]^{i_1} \ar@{=}[d] & & \overline{Y}_1 \ar[d]^k \\
+Y \ar[rr]^{i_2} \ar[d] & & \overline{Y}_2 \ar[dll] \\
+Z
+}
+$$
+各正方形
+$$
+\xymatrix{
+X \ar[r]_{j_1} \ar[d]_{\text{id}} \ar@{}[dr]|A &
+U_1 \ar[d]^{h'} \\
+X \ar[r]^{j_2} &
+U_2
+}
+\quad
+\xymatrix{
+U_2 \ar[r]_{j_2'} \ar[d]_{f_2} \ar@{}[dr]|B &
+\overline{X}_2 \ar[d]^{\overline{f}_2} \\
+Y \ar[r]^{i_2} &
+\overline{Y}_2
+}
+\quad
+\xymatrix{
+U_1 \ar[r]_{j_1'} \ar[d]_{f_1} \ar@{}[dr]|C &
+\overline{X}_1 \ar[d]^{\overline{f}_1} \\
+Y \ar[r]^{i_1} &
+\overline{Y}_1
+}
+\quad
+\xymatrix{
+Y \ar[r]_{i_1} \ar[d]_{\text{id}} \ar@{}[dr]|D &
+\overline{Y}_1 \ar[d]^k \\
+Y \ar[r]^{i_2} &
+\overline{Y}_2
+}
+\quad
+\xymatrix{
+X \ar[r]_{j_1' \circ j_1} \ar[d]_{\text{id}} \ar@{}[dr]|E &
+\overline{X}_1 \ar[d]^h \\
+X \ar[r]^{j_2} &
+\overline{X}_2
+}
+$$
+は、補題 \ref{more-etale-lemma-shriek-proper-and-open} の写像
+（左の縦矢印が恒等射の場合には、補題
+\ref{more-etale-lemma-shriek-lqf-and-proper} の写像と同じである）を適用することで、
+次の同型を与える。
+\begin{align*}
+\gamma_A & :
+j_{2, !} \to Rh'_* \circ j_{1, !}  \\
+\gamma_B & :
+i_{2, !} \circ Rf_{2, *} \to R\overline{f}_{2, *} \circ j'_{2, !} \\
+\gamma_C & :
+i_{1, !} \circ Rf_{1, *} \to R\overline{f}_{1, *} \circ j'_{1, !} \\
+\gamma_D & :
+i_{2, !} \to Rk_* \circ i_{1, !} \\
+\gamma_E & :
+j_{2, !} \to Rh_* \circ (j'_1 \circ j_1)_!
+\end{align*}
+次のように書こう。
+\begin{align*}
+F_1 & = Rf_{1, *} \circ j_{1, !} \\
+F_2 & = Rf_{2, *} \circ j_{2, !} \\
+G_1 & = R\overline{g}_{1, *} \circ i_{1, !} \\
+G_2 & = R\overline{g}_{2, *} \circ i_{2, !} \\
+C_1 & = R(\overline{g}_1 \circ \overline{f}_1)_* \circ (j'_1 \circ j_1)_! \\
+C_2 & = R(\overline{g}_2 \circ \overline{f}_2)_* \circ (j'_2 \circ j_2)_!
+\end{align*}
+証明の最初の段落および補題
+\ref{more-etale-lemma-shriek-well-defined} で与えた構成は、次を用いる。
+\begin{enumerate}
+\item 写像 $G_1 \circ F_1 \to C_1$ には $\gamma_C$。
+\item 写像 $G_2 \circ F_2 \to C_2 $ には $\gamma_B$。
+\item 写像 $F_2 \to F_1$ には $\gamma_A$。
+\item 写像 $G_2 \to G_1$ には $\gamma_D$。
+\item 写像 $C_2 \to C_1$ には $\gamma_E$。
+\end{enumerate}
+したがって、図式
+$$
+\xymatrix{
+C_2 \ar[rr]_{\gamma_E} & &
+C_1 \\
+G_2 \circ F_2 \ar[rr]^{\gamma_D \circ \gamma_A} \ar[u]^{\gamma_B} & &
+G_1 \circ F_1 \ar[u]_{\gamma_C}
+}
+$$
+が可換であることを示さなければならない。補題
+\ref{more-etale-lemma-shriek-proper-and-open-compose} および
+\ref{more-etale-lemma-shriek-proper-and-open-compose-horizontal} と、注意
+\ref{more-etale-remark-going-around} と同じ記法を（濫用して）用いる
+（特に恒等変換との $\star$ 積を記法から省く）。
+次の正方形に対し $\gamma_E = \gamma_F \circ \gamma_A$ と書ける。
+$$
+\xymatrix{
+U_1 \ar[r]_{j'_1} \ar[d]_{h'} \ar@{}[rd]|F &
+\overline{X}_1 \ar[d]^h \\
+U_2 \ar[r]^{j'_2} &
+\overline{X}_2
+}
+$$
+したがって
+$$
+\gamma_E \circ \gamma_B = \gamma_F \circ \gamma_A  \circ \gamma_B
+= \gamma_F \circ \gamma_B \circ \gamma_A
+$$
+である。最後の等号は、二つの正方形 $A$ と $B$ が一点でしか交わらないためである
+（注意 \ref{more-etale-remark-going-around} の最後の議論と同様）。
+したがって $\gamma_C \circ \gamma_D =
+\gamma_F \circ \gamma_B$ を証明すれば十分である。
+これらは両方とも正方形
+$$
+\xymatrix{
+U_1 \ar[r] \ar[d] & \overline{X}_1 \ar[d] \\
+Y \ar[r] & \overline{Y}_2
+}
+$$
+に対する写像に等しいので、結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-pseudo-functor}
+$f : X \to Y$、$g : Y \to Z$、$h : Z \to T$ を、
+準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+このとき、補題 \ref{more-etale-lemma-shriek-composition} の同型の図式
+$$
+\xymatrix{
+Rh_! \circ Rg_! \circ Rf_! \ar[r]_{\gamma_C} \ar[d]^{\gamma_A} &
+R(h \circ g)_! \circ Rf_! \ar[d]_{\gamma_{A + B}} \\
+Rh_! \circ R(g \circ f)_! \ar[r]^{\gamma_{B + C}} &
+R(h \circ g \circ f)_!
+}
+$$
+は可換である（$\gamma$ の意味は証明を参照）。
+\end{lemma}
+
+\begin{proof}
+これを行うため、まず $T$ 上の $Z$ のコンパクト化 $\overline{Z}$、
+次に $\overline{Z}$ 上の $Y$ のコンパクト化 $\overline{Y}$、
+さらに $\overline{Y}$ 上の $X$ のコンパクト化 $\overline{X}$ を選ぶ。
+ここでは More on Flatness, Theorem
+\ref{flat-theorem-nagata} および補題
+\ref{flat-lemma-compactifyable} を用いる。
+$\overline{Y} \to \overline{Z}$ による $Z$ の逆像を
+$W \subset \overline{Y}$ とし、$\overline{X} \to \overline{Y}$ による
+$Y \subset W$ の逆像を $U \subset V \subset \overline{X}$ とする。
+これにより図式
+$$
+\xymatrix{
+X \ar[d]_f \ar[r] & U \ar[r] \ar[d] \ar@{}[dr]|A &
+V \ar[d] \ar[r] \ar@{}[rd]|B & \overline{X} \ar[d] \\
+Y \ar[d]_g \ar[r] & Y \ar[r] \ar[d] & W \ar[r] \ar[d] \ar@{}[rd]|C &
+\overline{Y} \ar[d] \\
+Z \ar[d]_h \ar[r] & Z \ar[d] \ar[r] & Z \ar[d] \ar[r] & \overline{Z} \ar[d] \\
+T \ar[r] & T \ar[r] & T \ar[r] & T
+}
+$$
+を得る。大量の記法を導入せず、補題
+\ref{more-etale-lemma-shriek-composition} の証明とまったく同様に議論すると、
+最初に表示した図式の写像は、補題
+\ref{more-etale-lemma-shriek-proper-and-open} の長方形
+$A + B$、$B + C$、$A$、$C$ に対する写像を、
+補題の主張の図式に示した通り用いることが分かる。補題
+\ref{more-etale-lemma-shriek-proper-and-open-compose} および
+\ref{more-etale-lemma-shriek-proper-and-open-compose-horizontal} により
+$\gamma_{A + B} = \gamma_B \circ \gamma_A$ および
+$\gamma_{B + C} = \gamma_B \circ \gamma_C$ である。
+したがって、$\gamma_A \circ \gamma_C =
+\gamma_C \circ \gamma_A$ ならば所望の等式が成り立つ。
+これは二つの正方形 $A$ と $C$ が一点でしか交わらないため成り立つ
+（注意 \ref{more-etale-remark-going-around} の最後の議論と同様）。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-base-change-shriek}
+Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。スキームは準コンパクトかつ準分離的で、
+$f$ は分離的かつ有限型とする。このとき標準同型
+$$
+g^{-1} \circ Rf_! \to Rf'_! \circ (g')^{-1}
+$$
+が存在する。さらに、これらの同型は補題
+\ref{more-etale-lemma-shriek-composition} の同型と両立する。
+\end{lemma}
+
+\begin{proof}
+$Y$ 上のコンパクト化 $j : X \to \overline{X}$ を選び、
+構造射を $\overline{f} : \overline{X} \to Y$ と書く。
+$j$ と $\overline{f}$ の基底変換をそれぞれ
+$j' : X' \to \overline{X}'$ および
+$\overline{f}' : \overline{X}' \to Y'$ と書く。
+$Rf_! = R\overline{f}_* \circ j_!$ かつ
+$Rf'_! = R\overline{f}'_* \circ j'_!$ なので、同型は
+$$
+g^{-1} \circ R\overline{f}_* \circ j_! \to
+R\overline{f}'_* \circ (\overline{g}')^{-1} \circ j_! \to
+R\overline{f}'_* \circ j'_! \circ (g')^{-1} 
+$$
+によって構成できる。ここで第一の矢印は固有基底変換定理
+（下に有界な捩れの場合には \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change}、$\Lambda$ が捩れの
+場合には \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-mod-n}）による同型であり、
+第二の矢印は補題
+\ref{more-etale-lemma-base-change-f-shriek-separated} の同型である。
+
+\medskip\noindent
+証明を終えるため、二つのことを示さなければならない。
+第一に、こうして得た関手の同型がコンパクト化の選択に依存しないこと、
+第二に、補題のような二つの基底変換図式を縦に重ねたとき、
+これらの基底変換同型が補題 \ref{more-etale-lemma-shriek-composition} の同型と
+両立することである。次の同型が基底変換と両立することを示せれば、
+両方が従うことは省略する直接的な議論から分かる。
+\begin{enumerate}
+\item $f : X \to Y$ と $g : Y \to Z$ が固有であるときの
+$Rg_* \circ Rf_* = R(g \circ f)_*$。
+\item $f : X \to Y$ と $g : Y \to Z$ が分離的かつ準有限であるときの
+$g_! \circ f_! = (g \circ f)_!$。
+\item $f : X \to Y$ と $f' : X' \to Y'$ が固有で、
+$g : Y' \to Y$ と $g' : X' \to X$ が分離的かつ準有限であり
+$f \circ g' = g \circ f'$ を満たすときの
+$g_! \circ Rf'_* = Rf_* \circ g'_!$。
+\end{enumerate}
+(1) については Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-compose-base-change}、(2) については注意
+\ref{more-etale-remark-f-shriek-base-change-composition}、(3) については補題
+\ref{more-etale-lemma-shriek-proper-and-open-base-change} により成り立つ。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-shriek-to-star}
+$f : X \to Y$ を有限型分離射とし、$Y$ は準コンパクトかつ準分離的とする。
+以下で、$D^+_{tors}(X_\etale, \Lambda)$ の $K$ に関して関手的な写像
+$$
+Rf_!K \longrightarrow Rf_*K
+$$
+を構成する。$\Lambda$ が捩れならば
+$D(X_\etale, \Lambda)$ 上で構成する。
+どちらの場合にも、この関手の変換は次と両立する。
+\begin{enumerate}
+\item 補題 \ref{more-etale-lemma-shriek-composition} の同型
+$Rg_! \circ Rf_! \to R(g \circ f)_!$ と、Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-derived-pushforward-composition} の同型
+$Rg_* \circ Rf_* \to R(g \circ f)_*$。
+\item 補題 \ref{more-etale-lemma-base-change-shriek} の同型
+$g^{-1} \circ Rf_! \to Rf'_! \circ (g')^{-1}$ と、
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-base-change} の基底変換写像。
+\end{enumerate}
+実際、$Y$ 上のコンパクト化 $j : X \to \overline{X}$ を選び、
+構造射を $\overline{f} : \overline{X} \to Y$ と書く。
+$Rf_! = R\overline{f}_* \circ j_!$ かつ
+$Rf_* = R\overline{f}_* \circ Rj_*$ なので、関手の変換
+$j_! \to Rj_*$ を構成すれば十分である。このために
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-shriek-into-star-separated-etale} の
+標準変換 $j_! \to j_*$ を用いる。
+得られた変換がコンパクト化の選択に依存しないことの証明と、
+両立性 (1)、(2) の証明は省略する。
+\end{remark}
+
+\section{導来下付きシュリークの性質}
+\label{more-etale-section-derived-lower-shriek-properties}
+
+\noindent
+導来下付きシュリークのいくつかの性質を述べる。
+
+\begin{lemma}
+\label{more-etale-lemma-derived-lower-shriek-commute-direct-sums}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$\Lambda$ を環とする。
+\begin{enumerate}
+\item $K_i \in D^+_{tors}(X_\etale, \Lambda)$、$i \in I$ を対象の族とする。
+$n < a$ かつ $i \in I$ に対して $H^n(K_i) = 0$ となる
+$a \in \mathbf{Z}$ が与えられていると仮定する。このとき
+$Rf_!(\bigoplus_i K_i) = \bigoplus_i Rf_!K_i$ である。
+\item $\Lambda$ が捩れならば、関手
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$
+は直和と可換する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+構成により、$f$ が開埋め込みの場合と $f$ が固有射の場合について
+証明すれば十分である。スキームの任意の開埋め込み $j : U \to X$ に対し、
+関手 $j_! : D(U_\etale) \to D(X_\etale)$ は引き戻し
+$j^{-1} : D(X_\etale) \to D(U_\etale)$ の左随伴なので、直和と可換する。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint-lower-shriek-restrict} を参照せよ。
+固有の場合には $Rf_! = Rf_*$ であり、下に有界な場合には
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-direct-sum-bounded-below-pushforward} から、
+係数環 $\Lambda$ が捩れ環の場合には \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-mod-n-direct-sums} から結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-derived-lower-shriek-bounded}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$\Lambda$ を環とする。Section
+\ref{more-etale-section-derived-lower-shriek-compactification} で構成した関手 $Rf_!$ は
+次の意味で有界である。整数 $N$ が存在し、
+$E \in D^+_{tors}(X_\etale, \Lambda)$、または $\Lambda$ が捩れのとき
+$E \in D(X_\etale, \Lambda)$ に対して次が成り立つ。
+\begin{enumerate}
+\item $i \leq a$ に対して
+$H^i(Rf_!(\tau_{\leq a}E) \to H^i(Rf_!(E))$ は同型である。
+\item $i \geq b$ に対して
+$H^i(Rf_!(E)) \to H^i(Rf_!(\tau_{\geq b - N}E))$ は同型である。
+\item ある $-\infty \leq a \leq b \leq \infty$ に対し、
+$i \not \in [a, b]$ ならば $H^i(E) = 0$ であるとする。このとき
+$i \not \in [a, b + N]$ ならば $H^i(Rf_!(E)) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Lambda$ が捩れであると仮定し、関手
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ を考える。
+構成により、$f$ が開埋め込みの場合と $f$ が固有射の場合について
+証明すれば十分である。スキームの任意の開埋め込み $j : U \to X$ に対し、
+関手 $j_! : D(U_\etale) \to D(X_\etale)$ は完全なので、
+この場合には $N = 0$ として主張が成り立つ。
+$f$ が固有ならば $Rf_! = Rf_*$、すなわち右導来関手である。
+したがって Derived Categories, Lemma
+\ref{derived-lemma-negative-vanishing} により左側の有界性を得る。
+さらにこの場合、Morphisms, Lemma
+\ref{morphisms-lemma-morphism-finite-type-bounded-dimension} および
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper} により
+$f_* : \textit{Mod}(X_\etale, \Lambda)
+\to \textit{Mod}(Y_\etale, \Lambda)$ のコホモロジー次元は有界である。
+したがって Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived} から結論が従う。
+
+\medskip\noindent
+次に $\Lambda$ を任意とし、関手
+$Rf_! : D^+_{tors}(X_\etale, \Lambda) \to
+D^+_{tors}(Y_\etale, \Lambda)$ を考える。
+再び直ちに、$f$ が固有で $Rf_! = Rf_*$ である場合へ帰着する。
+再び (1) は直ちに従う。(3) を示すには、$b - a$ に関する帰納法、
+切断の区別三角形、および \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper} を用いればよい。
+(2) は (3) から従う。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-Rf-shriek-for-quasi-finite}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の準有限分離射とする。
+Section \ref{more-etale-section-derived-lower-shriek-compactification} で構成した関手
+$Rf_!$ は、その共通の定義域への制限上で、Section
+\ref{more-etale-section-derived-duality-locally-quasi-finite} で構成した関手
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ と一致する。
+\end{lemma}
+
+\begin{proof}
+Zariski の主定理（More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite}）により、
+$f = \overline{f} \circ j$ となる開埋め込み
+$j : X \to \overline{X}$ と有限射
+$\overline{f} : \overline{X} \to Y$ を取れる。
+構成により $Rf_! = R\overline{f}_* \circ j_!$ である。
+$\overline{f}$ は有限なので、\'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-finite-higher-direct-image-zero} により
+$R\overline{f}_* = \overline{f}_*$ である。
+例えば補題 \ref{more-etale-lemma-compactify-f-shriek-separated} により
+$\overline{f}_* \circ j_! = f_!$ なので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-relative-mayer-vietoris}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$U$ と $V$ を $X = U \cup V$ を満たす $X$ の準コンパクト開集合とする。
+$f$ の制限を $a : U \to Y$、$b : V \to Y$、
+$c : U \cap V \to Y$ と書く。$\Lambda$ を環とする。
+$D^+_{tors}(X_\etale, \Lambda)$ の $K$、または $\Lambda$ が捩れならば
+$K \in D(X_\etale, \Lambda)$ に対し、$D(Y_\etale, \Lambda)$ に区別三角形
+$$
+Rc_!(K|_{U \cap V}) \to
+Ra_!(K|_U) \oplus Rb_!(K|_V) \to
+Rf_!K \to 
+Rc_!(K|_{U \cap V})[1]
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{more-etale-lemma-mayer-vietoris-shriek}、補題
+\ref{more-etale-lemma-shriek-composition} による
+$Rf_! \circ Rj_{U!} = Ra_!$、および補題
+\ref{more-etale-lemma-Rf-shriek-for-quasi-finite} による
+$Rj_{U!} = j_{U!}$ から従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-relative-triangle-associated-to-open}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$U$ を $X$ の準コンパクト開集合とし、補集合を $Z \subset X$ とする。
+$f$ の制限を $g : U \to Y$ および $h : Z \to Y$ と書く。
+$\Lambda$ を環とする。$D^+_{tors}(X_\etale, \Lambda)$ の $K$、
+または $\Lambda$ が捩れならば $K \in D(X_\etale, \Lambda)$ に対し、
+$D(Y_\etale, \Lambda)$ に区別三角形
+$$
+Rg_!(K|_U) \to
+Rf_!K \to
+Rh_!(K|_Z) \to
+Rg_!(K|_U)[1]
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{more-etale-lemma-triangle-associated-to-open}、補題
+\ref{more-etale-lemma-shriek-composition} による
+$Rf_! \circ Rj_! = Rg_!$ および $Rf_! \circ Ri_!$、ならびに補題
+\ref{more-etale-lemma-Rf-shriek-for-quasi-finite} による
+$Rj_! = j_!$ および $Ri_! = i_! = i_*$ から従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-shriek-and-thickening}
+$f' : X' \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$i : X \to X'$ を厚化とし、$f = f' \circ i$ と書く。
+$\Lambda$ を環とする。$D^+_{tors}(X'_\etale, \Lambda)$ の $K'$、
+または $\Lambda$ が捩れならば $K' \in D(X'_\etale, \Lambda)$ に対し、
+$Rf_!i^{-1}K' = Rf'_!K'$ である。
+\end{lemma}
+
+\begin{proof}
+小エタール・トポスの位相的不変性
+（\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-topological-invariance}）により、
+$i^{-1}$ と $i_* = i_!$ は圏の互いに逆な同値であり、補題
+\ref{more-etale-lemma-shriek-composition} を適用できるので、主張が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-projection-formula-Rf-lower-shriek}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の
+有限型分離射とする。$\Lambda$ を捩れ環とし、
+$E \in D(X_\etale, \Lambda)$ および $K \in D(Y_\etale, \Lambda)$ とする。
+このとき $D(Y_\etale, \Lambda)$ において
+$$
+Rf_!E \otimes_\Lambda^\mathbf{L} K =
+Rf_!(E \otimes_\Lambda^\mathbf{L} f^{-1}K)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$Rf_!$ の構成における
+$j : X \to \overline{X}$ と $\overline{f} : \overline{X} \to Y$ を選ぶ。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-j-shriek-and-tensor} により
+$j_!E \otimes_\Lambda^\mathbf{L} \overline{f}^{-1}K =
+j_!(E \otimes_\Lambda^\mathbf{L} f^{-1}K)$ である。
+次に \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-projection-formula-proper-mod-n} を適用し、
+$f^{-1} = j^{-1} \circ \overline{f}^{-1}$ および
+$Rf_! = R\overline{f}_*j_!$ を用いれば結果を得る。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-Rf-lower-shriek-change-of-rings}
+$\Lambda_1 \to \Lambda_2$ を捩れ環の準同型とする。
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の
+有限型分離射とする。図式
+$$
+\xymatrix{
+D(X_\etale, \Lambda_2) \ar[r]_{res} \ar[d]_{Rf_!} &
+D(X_\etale, \Lambda_1) \ar[d]^{Rf_!} \\
+D(Y_\etale, \Lambda_2) \ar[r]^{res} &
+D(Y_\etale, \Lambda_1)
+}
+$$
+は可換である。ここで $res$ は、与えられた環写像を用いて
+$\Lambda_2$ 加群を $\Lambda_1$ 加群にする「制限」関手である。
+Section \ref{more-etale-section-derived-lower-shriek-compactification} のような分解
+$f = \overline{f} \circ j$ に対して
+$Rf_! = R\overline{f}_* \circ j_!$ と書くと、
+$j_!$ に対する結果は直接分かり、$R\overline{f}_*$ に対する結果は
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-modules-abelian-unbounded} による。
+他方、図式
+$$
+\xymatrix{
+D(X_\etale, \Lambda_1)
+\ar[r]_{- \otimes_{\Lambda_1}^\mathbf{L} \Lambda_2} \ar[d]_{Rf_!} &
+D(X_\etale, \Lambda_2) \ar[d]^{Rf_!} \\
+D(Y_\etale, \Lambda_1)
+\ar[r]^{- \otimes_{\Lambda_1}^\mathbf{L} \Lambda_2} &
+D(Y_\etale, \Lambda_2)
+}
+$$
+も補題 \ref{more-etale-lemma-projection-formula-Rf-lower-shriek} から従う通り可換である。
+\end{remark}
+
+\begin{remark}
+\label{more-etale-remark-projection-formula-for-internal-hom}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の
+有限型分離射とする。$\Lambda$ を捩れ係数環とし、
+$K$ と $L$ を $D(X_\etale, \Lambda)$ の対象とする。
+$K$ と $L$ に関して関手的な標準写像
+$$
+\alpha :
+Rf_*R\SheafHom_\Lambda(K, L)
+\longrightarrow
+R\SheafHom_\Lambda(Rf_!K, Rf_!L)
+$$
+が存在すると主張する。実際、$Rf_!$ の構成における
+$j : X \to \overline{X}$ および
+$\overline{f} : \overline{X} \to Y$ を選ぶ。まず写像
+$$
+\beta :
+Rj_*R\SheafHom_\Lambda(K, L)
+\longrightarrow
+R\SheafHom_\Lambda(j_!K, j_!L)
+$$
+を定義する。導来圏における内部 Hom の構成により、これは写像
+$$
+\beta' :
+Rj_*R\SheafHom_\Lambda(K, L) \otimes_\Lambda^\mathbf{L} j_!K
+\longrightarrow
+j_!L
+$$
+を定義することと同じである。Cohomology on Sites, Section
+\ref{sites-cohomology-section-internal-hom} を参照せよ。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-j-shriek-and-tensor} により
+$\beta'$ の始域は
+$$
+j_!\left(R\SheafHom_\Lambda(K, L) \otimes_\Lambda^\mathbf{L} K\right)
+$$
+に等しい。したがって $\beta' = j_!\beta''$ とおける。
+ここで
+$\beta'' : R\SheafHom_\Lambda(K, L) \otimes_\Lambda^\mathbf{L} K \to L$
+は、上で述べた内部 Hom の普遍性を介して
+$R\SheafHom_\Lambda(K, L)$ 上の恒等射に対応する。
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-projection-formula-for-internal-hom} により、
+標準写像
+$$
+\gamma :
+R\overline{f}_*R\SheafHom_\Lambda(j_!K, j_!L)
+\longrightarrow
+R\SheafHom_\Lambda(R\overline{f}_*j_!K, R\overline{f}_*j_!L)
+$$
+がある。$Rf_! = R\overline{f}_*j_!$ かつ
+$Rf_* = R\overline{f}_* Rj_*$（Leray による）なので、所望の写像
+$\alpha = \gamma \circ R\overline{f}_*\beta$ を得る。
+\end{remark}
+
+\section{導来上付きシュリーク}
+\label{more-etale-section-derived-upper-shriek}
+
+\noindent
+Brown の表現可能性定理によって $Rf^!$ を得る。
+
+\begin{lemma}
+\label{more-etale-lemma-upper-shriek-derived}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$\Lambda$ を捩れ係数環とする。関手
+$Rf_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ は右随伴
+$Rf^! : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$ をもつ。
+\end{lemma}
+
+\begin{proof}
+これは Injectives, Proposition
+\ref{injectives-proposition-brown} と上の補題
+\ref{more-etale-lemma-derived-lower-shriek-commute-direct-sums} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-Rf-upper-shriek-for-quasi-finite}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の
+分離的準有限射とする。$\Lambda$ を捩れ係数環とする。
+補題 \ref{more-etale-lemma-upper-shriek-derived} の関手
+$Rf^! : D(Y_\etale, \Lambda) \to D(X_\etale, \Lambda)$ は、
+補題 \ref{more-etale-lemma-lqf-shriek-derived} の関手 $Rf^!$ と同じである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{more-etale-lemma-Rf-shriek-for-quasi-finite} により
+$Rf_! = f_!$ であるから、随伴の一意性から従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-Rf-upper-shriek-for-etale}
+$j : U \to X$ を、準コンパクトかつ準分離的なスキームの間の
+分離的エタール射とする。$\Lambda$ を捩れ係数環とする。
+関手 $Rj^! : D(X_\etale, \Lambda) \to D(U_\etale, \Lambda)$ は
+$j^{-1}$ に等しい。
+\end{lemma}
+
+\begin{proof}
+$Rj^!$ と $j^{-1}$ はともに $Rj_! = j_!$ の右随伴なので、これは成り立つ。
+例えば補題 \ref{more-etale-lemma-Rf-upper-shriek-for-quasi-finite} および
+\ref{more-etale-lemma-etale-upper-shriek} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-twisted-inverse-image-bounded-below}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$\Lambda$ を捩れ環とする。関手 $Rf^!$ は
+$D^+(Y_\etale, \Lambda)$ を $D^+(X_\etale, \Lambda)$ へ送る。
+より正確には整数 $N \geq 0$ が存在し、
+$K \in D(Y_\etale, \Lambda)$ が $i < a$ に対して $H^i(K) = 0$ を
+満たすならば、$i < a - N$ に対して $H^i(Rf^!K) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{more-etale-lemma-derived-lower-shriek-bounded} で得た整数を $N$ とする。
+構成により、$K \in D(Y_\etale, \Lambda)$ および
+$L \in \in D(X_\etale, \Lambda)$ に対して
+$\Hom_X(L, Rf^!K) = \Hom_Y(Rf_!L, K)$ である。
+$i < a$ に対して $H^i(K) = 0$ と仮定する。
+このとき $L = \tau_{\leq a - N - 1}Rf^!K$ と取る。補題
+\ref{more-etale-lemma-derived-lower-shriek-bounded} により、複体 $Rf_!L$ の
+次数 $\leq a - 1$ のコホモロジー層は零である。
+したがって Derived Categories, Lemma
+\ref{derived-lemma-negative-exts} により
+$\Hom_Y(Rf_!L, K) = 0$ である。
+ゆえに標準写像 $\tau_{\leq a - N - 1}Rf^!K \to Rf^!K$ は零であり、
+$i \leq a - N - 1$ に対して $H^i(Rf^!K) = 0$ となる。
+\end{proof}
+
+\noindent
+$f : X \to Y$ を、準分離的かつ準コンパクトなスキームの間の
+有限型分離射とする。$\Lambda$ を捩れ係数環とする。
+任意の $K \in D(Y_\etale, \Lambda)$ および
+$L \in D(X_\etale, \Lambda)$ に対し、標準写像
+\begin{equation}
+\label{more-etale-equation-sheafy-trace}
+Rf_*R\SheafHom_\Lambda(L, Rf^!K) \longrightarrow R\SheafHom_\Lambda(Rf_!L, K)
+\end{equation}
+を得る。実際、この写像を合成
+$$
+Rf_*R\SheafHom_\Lambda(L, Rf^!K) \to
+R\SheafHom_\Lambda(Rf_!L, Rf_!Rf^!K) \to
+R\SheafHom_\Lambda(Rf_!L, K)
+$$
+として構成する。第一の矢印は注意
+\ref{more-etale-remark-projection-formula-for-internal-hom} であり、
+第二の矢印は随伴の余単位 $Rf_!Rf^!K \to K$ である。
+
+\begin{lemma}
+\label{more-etale-lemma-iso-on-RSheafHom}
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の有限型分離射とする。
+$\Lambda$ を捩れ環とする。任意の
+$K \in D(Y_\etale, \Lambda)$ および
+$L \in D(X_\etale, \Lambda)$ に対して、写像
+(\ref{more-etale-equation-sheafy-trace})
+$$
+Rf_*R\SheafHom_\Lambda(L, Rf^!K) \longrightarrow R\SheafHom_\Lambda(Rf_!L, K)
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+補題を証明するには、任意の $M \in D(Y_\etale, \Lambda)$ に対し、
+写像 (\ref{more-etale-equation-sheafy-trace}) が全単射
+$$
+\Hom_Y(M, Rf_*R\SheafHom_\Lambda(L, Rf^!K))
+\longrightarrow
+\Hom_Y(M, R\SheafHom_\Lambda(Rf_!L, K))
+$$
+を誘導することを示さなければならない。このために、次の等式列を用いる。
+\begin{align*}
+\Hom_Y(M, Rf_*R\SheafHom_\Lambda(L, Rf^!K))
+& =
+\Hom_X(f^{-1}M, R\SheafHom_\Lambda(L, Rf^!K)) \\
+& =
+\Hom_X(f^{-1}M \otimes_\Lambda^\mathbf{L} L, Rf^!K) \\
+& =
+\Hom_Y(Rf_!(f^{-1}M \otimes_\Lambda^\mathbf{L} L), K) \\
+& =
+\Hom_Y(M \otimes_\Lambda^\mathbf{L} Rf_!L, K) \\
+& =
+\Hom_Y(M, R\SheafHom_\Lambda(Rf_!L, K))
+\end{align*}
+第一の等号は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint} による。
+第二の等号は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-internal-hom} による。
+第三の等号は $Rf^!$ の構成による。
+第四の等号は補題
+\ref{more-etale-lemma-projection-formula-Rf-lower-shriek} による
+（これが重要な段階である）。
+第五の等号は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-internal-hom} による。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-iso-global-hom}
+$f : X \to Y$ を、準分離的かつ準コンパクトなスキームの間の有限型分離射とする。
+$\Lambda$ を捩れ環とする。任意の
+$K \in D(Y_\etale, \Lambda)$ および
+$L \in D(X_\etale, \Lambda)$ に対し、写像
+(\ref{more-etale-equation-sheafy-trace}) は大域導来 Hom の同型
+$$
+R\Hom_X(L, Rf^!K) \longrightarrow R\Hom_Y(Rf_!L, K)
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+Cohomology on Sites, Section
+\ref{sites-cohomology-section-global-RHom} の構成により
+$$
+R\Hom_X(L, Rf^!K) =
+R\Gamma(X, R\SheafHom_\Lambda(L, Rf^!K)) =
+R\Gamma(Y, Rf_*R\SheafHom_\Lambda(L, Rf^!K))
+$$
+であり（第二の等号は Leray による）、
+$$
+R\Hom_Y(Rf_!L, K) = R\Gamma(Y, R\SheafHom_\Lambda(Rf_!L, K))
+$$
+である。したがって補題は補題
+\ref{more-etale-lemma-iso-on-RSheafHom} の帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-cartesian-square-Rf-upper-shriek}
+Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。スキームは準コンパクトかつ準分離的で、
+$f$ は分離的かつ有限型とする。このとき
+$Rf^! \circ Rg_* = Rg'_* \circ R(f')^!$ である。
+\end{lemma}
+
+\begin{proof}
+随伴関手の一意性により、これは導来下付きシュリークの基底変換から従う。
+実際、補題 \ref{more-etale-lemma-base-change-shriek} により
+$g^{-1} \circ Rf_! = Rf'_! \circ (g')^{-1}$ である。
+\end{proof}
+
+\begin{remark}
+\label{more-etale-remark-Rf-upper-shriek-change-of-rings}
+$\Lambda_1 \to \Lambda_2$ を捩れ環の準同型とする。
+$f : X \to Y$ を、準コンパクトかつ準分離的なスキームの間の
+有限型分離射とする。図式
+$$
+\xymatrix{
+D(X_\etale, \Lambda_2) \ar[r]_{res} &
+D(X_\etale, \Lambda_1) \\
+D(Y_\etale, \Lambda_2) \ar[r]^{res} \ar[u]^{Rf^!} &
+D(Y_\etale, \Lambda_1) \ar[u]_{Rf^!}
+}
+$$
+は可換である。ここで $res$ は、与えられた環写像を用いて
+$\Lambda_2$ 加群を $\Lambda_1$ 加群にする「制限」関手である。
+これは随伴の一意性、注意
+\ref{more-etale-remark-Rf-lower-shriek-change-of-rings} の第二の可換図式、および等式
+$$
+\Hom_{\Lambda_2}(K_1 \otimes_{\Lambda_1}^\mathbf{L} \Lambda_2, K_2) =
+\Hom_{\Lambda_1}(K_1, res(K_2))
+$$
+により成り立つ。この等式は、$X_\etale$ 上または
+$Y_\etale$ 上のいずれの対象についても、Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-adjoint} の非常に特別な場合である。
+\end{remark}
+
+\section{コンパクト台付きコホモロジー}
+\label{more-etale-section-compactly-supported-cohomology}
+
+\noindent
+$k$ を体、$\Lambda$ を環とする。$X$ を $k$ 上有限型の分離的スキームとし、
+構造射を $f : X \to \Spec(k)$ とする。Section
+\ref{more-etale-section-derived-lower-shriek-compactification} では、関手
+$Rf_! : D^+_{tors}(X_\etale, \Lambda) \to
+D^+_{tors}(\Spec(k), \Lambda)$ と、$\Lambda$ が捩れ環の場合の関手
+$Rf_! : D(X_\etale, \Lambda) \to D(\Spec(k), \Lambda)$ を定義した。
+これを $\Spec(k)$ 上の大域切断関手と合成し、
+コンパクト台付きコホモロジーと呼ぶものを得る。
+
+\begin{definition}
+\label{more-etale-definition-cohomology-compact-support}
+$X$ を体 $k$ 上有限型の分離的スキームとし、$\Lambda$ を環とする。
+$K$ を $D^+_{tors}(X_\etale, \Lambda)$ の対象、
+または $\Lambda$ が捩れの場合には $D(X_\etale, \Lambda)$ の対象とする。
+{\it コンパクト台をもつ $K$ のコホモロジー}、または
+{\it $K$ のコンパクト台付きコホモロジー}とは
+$$
+R\Gamma_c(X, K) = R\Gamma(\Spec(k), Rf_!K)
+$$
+である。ここで $f : X \to \Spec(k)$ は構造射である。
+$H^i_c(X, K) = H^i(R\Gamma_c(X, K))$ と書く。
+\end{definition}
+
+\noindent
+Definition \ref{more-etale-definition-compact-support} と矛盾しないことを、補題
+\ref{more-etale-lemma-compact-support-h0} により確認する。
+この定義の有用性は次の結果にある。
+
+\begin{lemma}
+\label{more-etale-lemma-stalk-R-f-shriek}
+$f : X \to Y$ を有限型分離射とし、
+$Y$ は準コンパクトかつ準分離的とする。
+$K$ を $D^+_{tors}(X_\etale, \Lambda)$ の対象、
+または $\Lambda$ が捩れの場合には $D(X_\etale, \Lambda)$ の対象とする。
+任意の幾何点 $\overline{y} : \Spec(k) \to Y$ に対し、
+$D(\Lambda)$ に標準同型
+$$
+(Rf_!K)_{\overline{y}}
+\longrightarrow
+R\Gamma_c(X_{\overline{y}}, K|_{X_{\overline{y}}})
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{more-etale-lemma-base-change-shriek} と定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-compact-support-h0}
+$X$ を体 $k$ 上有限型の分離的スキームとする。
+$\mathcal{F}$ が捩れアーベル層ならば、Definition
+\ref{more-etale-definition-compact-support} で定義したアーベル群
+$H^0_c(X, \mathcal{F})$ は、Definition
+\ref{more-etale-definition-cohomology-compact-support} で定義したアーベル群
+$H^0_c(X, \mathcal{F})$ と一致する。
+\end{lemma}
+
+\begin{proof}
+$k$ 上のコンパクト化 $j : X \to \overline{X}$ を選ぶ。
+どちらの場合にも、この群は $H^0(\overline{X}, j_!\mathcal{F})$ として
+定義される。最初の版については補題
+\ref{more-etale-lemma-compactify-compact-support} により、第二の版については
+構成によりそうである。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-finiteness-curves}
+$k$ を代数閉体とする。$X$ を $k$ 上有限型の分離的スキームで、
+次元 $\leq 1$ とする。$\Lambda$ を Noether 環とする。
+$\mathcal{F}$ を $X$ 上の構成可能な捩れ $\Lambda$ 加群の層とする。
+このとき $H^q_c(X, \mathcal{F})$ は有限 $\Lambda$ 加群である。
+\end{lemma}
+
+\begin{proof}
+これは \'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-vanishing-affine-curves-coefficients} の帰結である。
+実際、コンパクト化 $j : X \to \overline{X}$ を選ぶ。
+$\overline{X}$ を $X$ のスキーム論的閉包で置き換えると、
+$\dim(\overline{X}) \leq 1$ と仮定してよい。
+このとき $H^q_c(X, \mathcal{F}) =
+H^q(\overline{X}, j_!\mathcal{F})$ であり、定理を適用できる。
+\end{proof}
+
+\begin{remark}[コンパクト台付きコホモロジーの共変性]
+\label{more-etale-remark-covariance-compactly-supported}
+$k$ を体とする。$f : X \to Y$ を、$k$ 上有限型の分離的スキームの射とする。
+$X$、$Y$、$f$ が次の条件のいずれかを満たすとする。
+\begin{enumerate}
+\item $f$ はエタールである。
+\item $f$ は平坦かつ準有限である。
+\item $f$ は準有限で、$Y$ は幾何学的単枝である。
+\item $f$ は準有限で、$f$ の重み付け
+$w : X \to \mathbf{Z}$ が存在する。
+\end{enumerate}
+このときコンパクト台付きコホモロジーは $f$ に関して共変である。
+より正確には、$\Lambda$ を環とする。$K$ を
+$D^+_{tors}(Y_\etale, \Lambda)$ の対象、
+または $\Lambda$ が捩れの場合には $D(Y_\etale, \Lambda)$ の対象とする。
+仮定 (1)--(4) のいずれかのもとで標準写像
+$$
+\text{Tr}_{f, w, K} : f_!f^{-1}K \longrightarrow K
+$$
+が存在する。トレース写像の存在については Section
+\ref{more-etale-section-weightings} を、場合 (2) と (3) については Examples
+\ref{more-etale-example-trace-for-flat-quasi-finite} および
+\ref{more-etale-example-trace-for-quasi-finite-over-normal} を参照せよ。
+$p : X \to \Spec(k)$ および $q : Y \to \Spec(k)$ を構造射とする。
+補題 \ref{more-etale-lemma-shriek-composition} により
+$Rq_! \circ f_! = Rp_!$ であり、補題
+\ref{more-etale-lemma-Rf-shriek-for-quasi-finite} により準有限分離射 $f$ に対して
+$Rf_! = f_!$ である。したがって写像
+\begin{align*}
+R\Gamma_c(X, f^{-1}K)
+& =
+R\Gamma(\Spec(k), Rp_!f^{-1}K) \\
+& =
+R\Gamma(\Spec(k), Rq_!f_!f^{-1}K) \\
+& \xrightarrow{Rq_!\text{Tr}_{f, w, K}}
+R\Gamma(\Spec(k), Rq_!K) \\
+& =
+R\Gamma_c(Y, K)
+\end{align*}
+を考えられる。特に $\Lambda$ が捩れ環ならば、矢印
+$$
+\text{Tr}_f : R\Gamma_c(X, \Lambda) \longrightarrow R\Gamma_c(Y, \Lambda)
+$$
+を得る。この写像は、例えば基礎体拡大を取ることと両立するなど、
+多くの追加の性質をもつ。
+\end{remark}
+
+\section{構成可能性に関する結果}
+\label{more-etale-section-family-smooth-curves-cohomology}
+
+\noindent
+定数係数をもつ曲線の滑らかな射影的族のコホモロジーを「計算」する。
+
+\begin{lemma}
+\label{more-etale-lemma-frobenius-linear-on-vb}
+$p$ を素数とし、$S$ を $\mathbf{F}_p$ 上のスキームとする。
+$\mathcal{E}$ を有限局所自由 $\mathcal{O}_S$ 加群とし、
+$S_\etale$ 上の $\mathcal{O}_S$ 加群とみなす。
+$F : \mathcal{E} \to \mathcal{E}$ を $S_\etale$ 上のアーベル層の準同型とする。
+$S_\etale$ 上の $\mathcal{O}_S$ と $\mathcal{E}$ の局所切断 $a$、$e$ に対し
+$F(a e) = a^pF(e)$ であると仮定する。このとき
+$$
+\Coker(F - 1 : \mathcal{E} \to \mathcal{E})
+$$
+は零であり、
+$$
+\Ker(F - 1 : \mathcal{E} \to \mathcal{E})
+$$
+は $S_\etale$ 上の構成可能アーベル層である。
+\end{lemma}
+
+\noindent
+この補題は \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-F-1} の一般化である。
+
+\begin{proof}
+$S = \Spec(A)$ と仮定してよい。ここで $A$ は $\mathbf{F}_p$ 代数であり、
+$\mathcal{E}$ は自由 $A$ 加群
+$Ae_1 \oplus \ldots \oplus Ae_n$ に付随する準連接加群とする。
+$F(e_i) = \sum a_{ij} e_j$ と書く。
+
+\medskip\noindent
+$F - 1$ の全射性。任意の元 $\sum a_i e_i$、$a_i \in A$ が、
+$A$ を忠実平坦なエタール拡大で置き換えた後に $F - 1$ の像に入ることを
+示せば十分である。次に注意する。
+$$
+F(\sum x_ie_i) - \sum x_i e_i = \sum x_i^p a_{ij} e_j - \sum x_i e_i
+$$
+$A$ 代数
+$$
+A' = A[x_1, \ldots, x_n]/(a_i + x_i - \sum\nolimits_j a_{ji} x_j^p)
+$$
+を考える。計算により $\Omega_{A'/A}$ において
+$\text{d}x_i$ は零であり、したがって $\Omega_{A'/A} = 0$ である。
+$A'$ は $A$ 上有限型なので、これは
+$\Spec(A') \to \Spec(A)$ が不分岐であり、したがって準有限であることを意味する。
+$A'$ は $n$ 個の元で生成され、$n$ 個の方程式で切り出されるから、
+$A'$ は $A$ 上の大域相対完全交叉であると結論できる。
+したがって $A'$ は $A$ 上平坦であり、$A \to A'$ は
+（平坦かつ不分岐な環写像として）エタールである。
+最後に、$\Spec(A') \to \Spec(A)$ のすべての幾何ファイバーが空でないことを
+直接確かめることで、$A \to A'$ が忠実平坦であることを示せる。
+しかし、これは \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-F-1} からも従う。
+最後に、元 $\sum x_i e_i \in A'e_1 \oplus \ldots \oplus A'e_n$ は
+$F - 1$ により $\sum a_i e_i$ へ写る。
+
+\medskip\noindent
+核の構成可能性。上の計算により、$\Ker(F - 1)$ は $S = \Spec(A)$ 上のスキーム
+$$
+\Spec(A[x_1, \ldots, x_n]/(x_i - \sum\nolimits_j a_{ji} x_j^p))
+$$
+によって表現される。これは $S$ 上アフィンかつエタールなスキームなので、
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-constructible} から結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-proper-smooth-family-curves}
+$f : X \to S$ を、次元 $1$ の幾何学的連結ファイバーをもつ
+スキームの固有滑らかな射とする。$\ell$ を素数とする。
+このとき $R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$ は構成可能である。
+\end{lemma}
+
+\begin{proof}
+$S$ はアフィンであると仮定してよい。$S = \Spec(A)$ と書く。
+$A = \bigcup A_i$ をその有限型 $\mathbf{Z}$ 部分代数の和集合として書くと、
+ある $i$ と有限型射
+$f_i : X_i \to S_i = \Spec(A_i)$ で、その $S$ への基底変換が
+$f : X \to S$ となるものを取れる。Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation} を参照せよ。
+$i$ を大きくすれば、$f_i : X_i \to S_i$ は滑らか、固有、かつ相対次元
+$1$ であると仮定してよい。Limits, Lemmas
+\ref{limits-lemma-eventually-proper}
+\ref{limits-lemma-descend-smooth}、および
+\ref{limits-lemma-descend-dimension-d} を参照せよ。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-proper-flat-geom-red} により、$f_i : X_i \to S_i$ の
+$U_i$ 上のファイバーが幾何学的連結となる開部分スキーム
+$U_i \subset S_i$ を得る。このとき $S \to S_i$ は $U_i$ に入る。
+$X \to S$ を $f_i : f_i^{-1}(U_i) \to U_i$ で置き換えることで、
+次の段落で論じる場合へ帰着できる。
+
+\medskip\noindent
+$S$ は Noether であると仮定する。$\ell$ の非消滅によって定義される
+開部分スキームを $U$、$Z = V(\ell) \subset S$ とすれば、
+$S = U \cup Z$ と書ける。
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$ の形成は任意の基底変換と
+可換するので（\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-proper-base-change}）、$U$ 上と $Z$ 上で
+結果を証明すれば十分である。したがって次の二つの場合へ帰着する。
+(a) $\ell$ は $S$ 上可逆である。(b) $\ell$ は $S$ 上零である。
+
+\medskip\noindent
+場合 (a)。この場合、層
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$ は $S$ 上有限局所定数であると
+主張する。まず固有基底変換
+（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-proper-base-change-stalk} の形）と有限性
+（\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-vanishing-affine-curves}）により、
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$ の茎は有限である。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-sp-isom-proper-loc-cst-torsion} により、
+すべての特殊化写像は同型である。したがって \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-characterize-locally-constant-module} により
+主張が成り立つ。
+
+\medskip\noindent
+場合 (b)。ここで $\ell = p$ は素数であり、$S$ は
+$\Spec(\mathbf{F}_p)$ 上のスキームである。
+上と同じ参考文献により、
+$R^qf_*\underline{\mathbf{Z}/p\mathbf{Z}}$ の茎は有限で、
+$q \geq 2$ に対して零であることを既に知っている。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-sections-upstairs} から
+$f_*\underline{\mathbf{Z}/p\mathbf{Z}} =
+\underline{\mathbf{Z}/p\mathbf{Z}}$ が従う。
+$R^1f_*\underline{\mathbf{Z}/p\mathbf{Z}}$ が構成可能であることを
+証明すればよい。Artin--Schreier 列
+$$
+0 \to \underline{\mathbf{Z}/p\mathbf{Z}} \to \mathcal{O}_X
+\xrightarrow{F - 1} \mathcal{O}_X
+\to 0
+$$
+を考える。\'Etale Cohomology, Section
+\ref{etale-cohomology-section-artin-schreier} を参照せよ。
+$f_*\mathcal{O}_X = \mathcal{O}_S$ であり、
+$R^1f_*\mathcal{O}_X$ は $X \to S$ のファイバーの種数に等しい階数をもつ
+有限局所自由 $\mathcal{O}_S$ 加群であることを思い出そう。
+Algebraic Curves, Lemma
+\ref{curves-lemma-genus-in-nodal-family-of-curves} を参照せよ。
+したがって短完全列
+$$
+0 \to
+\Coker(F - 1 : \mathcal{O}_S \to \mathcal{O}_S)
+\to R^1f_*\underline{\mathbf{Z}/p\mathbf{Z}} \to
+\Ker(F - 1 : R^1f_*\mathcal{O}_X \to R^1f_*\mathcal{O}_X)
+\to 0
+$$
+を得る。補題 \ref{more-etale-lemma-frobenius-linear-on-vb} を適用すれば勝ちである。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-proper-smooth-family-curves-modules}
+$f : X \to S$ を、次元 $1$ の幾何学的連結ファイバーをもつ
+スキームの固有滑らかな射とする。$\Lambda$ を Noether 環とする。
+$M$ を整数 $n > 0$ で消去される有限 $\Lambda$ 加群とする。
+このとき $R^qf_*\underline{M}$ は $S$ 上の構成可能な $\Lambda$ 加群の層である。
+\end{lemma}
+
+\begin{proof}
+ある素数 $\ell$ に対して $n = \ell n'$ ならば、有限 $\Lambda$ 加群の
+短完全列 $0 \to M[\ell] \to M \to M' \to 0$ を得て、
+$M'$ は $n'$ で消去される。これは対応する定数層の短完全列を生み、
+さらに完全列
+$$
+R^{q - 1}f_*\underline{M'} \to
+R^qf_*\underline{M[n]} \to
+R^qf_*\underline{M} \to
+R^qf_*\underline{M'} \to
+R^{q + 1}f_*\underline{M[n]}
+$$
+を与える。したがって $M$ が素数で消去される場合に結果を示せれば、
+$n$ に関する帰納法と \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-constructible-abelian} により勝ちである。
+
+\medskip\noindent
+$\ell$ を、$\ell$ が $M$ を消去する素数とする。このとき $\Lambda$ を
+$\mathbf{F}_\ell$ 代数 $\Lambda/\ell \Lambda$ で置き換えられる。
+実際、$\underline{M}$ を $\Lambda$ 加群の層とみなして得る
+$R^qf_*\underline{M}$ は、$\underline{M}$ を
+$\Lambda/\ell \Lambda$ 加群の層とみなして計算した
+$R^qf_*\underline{M}$ と同じである。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-modules-abelian-unbounded} を参照せよ。
+
+\medskip\noindent
+$\ell$ は、$\ell$ が $M$ と $\Lambda$ を消去する素数であると仮定する。
+$M$ が有限自由 $\Lambda$ 加群である場合へ帰着しよう。
+実際、分解
+$$
+\ldots \to
+\Lambda^{\oplus m_2} \to
+\Lambda^{\oplus m_1} \to
+\Lambda^{\oplus m_0} \to
+M \to 0
+$$
+を選ぶ。$\Lambda$ 加群の層上で $f_*$ のコホモロジー次元は有限であることを
+思い出そう。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomological-dimension-proper} および
+Derived Categories, Lemma
+\ref{derived-lemma-unbounded-right-derived} を参照せよ。
+したがって、十分大きなある整数 $a$ に対し、
+$R^qf_*\underline{M}$ は $D(S_\etale, \Lambda)$ の対象
+$$
+Rf_*(\underline{\Lambda^{\oplus m_a}} \to \ldots \to
+\underline{\Lambda^{\oplus m_0}})
+$$
+の第 $q$ コホモロジー層である。Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor} の第一スペクトル系列
+（または切断を用いる議論）により、
+$R^qf_*\underline{\Lambda})$ が構成可能であることを証明すれば十分である。
+
+\medskip\noindent
+ここでようやく、\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-projection-formula-proper-mod-n} による等式
+$$
+(Rf_*\underline{\mathbf{Z}/\ell\mathbf{Z}})
+\otimes_{\mathbf{Z}/\ell\mathbf{Z}}^\mathbf{L} \underline{\Lambda} =
+Rf_*\underline{\Lambda}
+$$
+を用いられる。体 $\mathbf{Z}/\ell\mathbf{Z}$ 上の任意の加群は平坦なので、
+$$
+(R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}})
+\otimes_{\mathbf{Z}/\ell\mathbf{Z}} \underline{\Lambda} =
+R^qf_*\underline{\Lambda}
+$$
+を得る。したがって \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-tensor-constructible} により、
+$R^qf_*\underline{\mathbf{Z}/\ell\mathbf{Z}}$ に対して結果を証明すれば十分である。
+これは補題 \ref{more-etale-lemma-proper-smooth-family-curves} の場合である。
+\end{proof}
+
+
+
+
+
+
+
+\section{構成可能コホモロジーをもつ複体}
+\label{more-etale-section-Dc}
+
+\noindent
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-Dc} で始めた議論を続ける。特に、スキーム
+$X$ と Noether 環 $\Lambda$ に対し、
+$D_c(X_\etale, \Lambda)$ により、コホモロジー層が構成可能な
+$\Lambda$ 加群の層であるような対象からなる
+$D(X_\etale, \Lambda)$ の厳密充満かつ飽和な三角部分圏を表す。
+
+\begin{lemma}
+\label{more-etale-lemma-qf-f-shriek-constructible}
+$f : X \to Y$ を、局所準有限かつ有限表示なスキームの射とする。
+補題 \ref{more-etale-lemma-lqf-shriek-derived} の関手
+$f_! : D(X_\etale, \Lambda) \to D(Y_\etale, \Lambda)$ は
+$D_c(X_\etale, \Lambda)$ を $D_c(Y_\etale, \Lambda)$ の中へ写す。
+\end{lemma}
+
+\begin{proof}
+関手 $f_!$ は完全なので、$X_\etale$ 上の任意の構成可能な
+$\Lambda$ 加群の層 $\mathcal{F}$ に対し、
+$f_!\mathcal{F}$ が構成可能であることを示せば十分である。
+問題は $Y$ 上局所的なので、$Y$ はアフィンであると仮定してよい。
+このとき $X$ は準コンパクトかつ準分離である。Morphisms, Definition
+\ref{morphisms-definition-finite-presentation} を参照せよ。
+$X = \bigcup_{i = 1, \ldots, n} X_i$ を有限アフィン開被覆とする。
+補題 \ref{more-etale-lemma-lqf-colimit-f-shriek} により、
+$f_i : X_i \to Y$ および
+$f_{ii'} : X_i \cap X_{i'} \to Y$ を $f$ の制限とするとき、
+$f_{i, !}\mathcal{F}|_{X_i}$ と
+$f_{ii', !}\mathcal{F}|_{X_i \cap X_{i'}}$ が構成可能であることを
+示せば十分である。$X_i$ と $X_i \cap X_{i'}$ は準コンパクトかつ
+分離なので、$f$ は分離であると仮定してよい。
+Zariski の主定理（More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite-addendum}
+の形）により、$f = g \circ j$ という分解で、
+$j : X \to X'$ が開埋め込み、$g : X' \to Y$ が有限かつ有限表示であるものを
+選べる。補題 \ref{more-etale-lemma-f-shriek-composition} により
+$f_! = g_! \circ j_!$ である。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-jshriek-constructible} により、
+$j_!\mathcal{F}$ は $X'$ 上構成可能である。
+射 $g$ は有限なので、補題 \ref{more-etale-lemma-proper-f-shriek} により
+$g_! = g_*$ である。したがって
+$f_!\mathcal{F} = g_!j_!\mathcal{F} = g_*j_!\mathcal{F}$ は
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-finite-pushforward-constructible} により
+構成可能である。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-constant-shriek-rel-dim-1}
+$S$ を有限次元の Noether アフィンスキームとする。
+$f : X \to S$ を、相対次元 $1$ の分離アフィン滑らかな射とする。
+$\Lambda$ を捩れ Noether 環とし、$M$ を有限 $\Lambda$ 加群とする。
+このとき $Rf_!\underline{M}$ のコホモロジー層は構成可能である。
+\end{lemma}
+
+\begin{proof}
+$d = \dim(S)$ に関する帰納法で結果を証明する。
+
+\medskip\noindent
+基底の場合。$d = 0$ ならば、示すべきことは
+$R^qf_!\underline{M}$ の茎が有限 $\Lambda$ 加群であることだけである。
+$\overline{s}$ を $S$ の幾何点とすると、補題
+\ref{more-etale-lemma-stalk-R-f-shriek} により
+$(R^qf_!\underline{M})_{\overline{s}} = H^q_c(X_{\overline{s}}, \underline{M})$
+である。これは補題 \ref{more-etale-lemma-finiteness-curves} により有限
+$\Lambda$ 加群である。
+
+\medskip\noindent
+帰納段階。$Rf_!\underline{M}|_U$ のコホモロジー層が構成可能となるような
+稠密開部分 $U \subset S$ を見つければ十分である。
+実際、補集合 $S \setminus U$ への $Rf_!\underline{M}$ の制限は、
+帰納法と $Rf_!\underline{M}$ の形成がすべての基底変換と可換すること
+（補題 \ref{more-etale-lemma-base-change-shriek}）により構成可能なコホモロジー層をもつ。
+実際、$\eta \in S$ を $S$ のある既約成分の生成点とする。
+$Rf_!\underline{M}$ の $U$ への制限が構成可能となるような
+$\eta$ の開近傍 $U$ を見つければ十分である。
+次の段落でこれを行う。
+
+\medskip\noindent
+生成点 $\eta \in S$ が与えられたとき、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-make-good-curves} にあるような図式
+$$
+\xymatrix{
+\overline{Y}_1 \amalg \ldots \amalg \overline{Y}_n \ar[rd] &
+Y_1 \amalg \ldots \amalg Y_n \ar[r]_-\nu \ar[d] \ar[l]^j &
+X_V \ar[r] \ar[d] &
+X_U \ar[r] \ar[d] &
+X \ar[d]^f \\
+& T_1 \amalg \ldots \amalg T_n \ar[r] &
+V \ar[r] &
+U \ar[r] &
+S
+}
+$$
+を選ぶ。$Rf_!\underline{M}|_U$ が構成可能であることを示す。
+まず $V \to U$ は有限かつ全射なので、その $V$ への引き戻しが
+構成可能であることを示せば十分である。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-check-constructible} を参照せよ。
+$Rf_!$ の形成は基底変換と可換するので、
+$R(X_V \to V)_!\underline{M}$ が構成可能であることを示せば十分である。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-make-good-curves} の (4) により与えられる
+開部分スキームを $W \subset X_V$ とする。
+$X_V$ における $W$ の補集合に被約誘導スキーム構造を入れたものを
+$Z \subset X_V$ とする。$W$ は各ファイバーで稠密なので、
+$Z \to V$ のファイバーは次元 $0$ であり、したがって
+$Z \to V$ は準有限である。補題
+\ref{more-etale-lemma-relative-triangle-associated-to-open} の区別三角形
+$$
+R(W \to V)_!\underline{M} \to
+R(X_V \to V)_!\underline{M} \to
+R(Z \to V)_!\underline{M} \to
+\ldots
+$$
+と補題 \ref{more-etale-lemma-qf-f-shriek-constructible} から、
+$R(W \to V)_!\underline{M}$ が構成可能なコホモロジー層をもつことを
+示せば十分である。次に
+$$
+R(W \to V)_!\underline{M} = R(\nu^{-1}(W) \to V)_!\underline{M}
+$$
+である。実際、射 $\nu : \nu^{-1}(W) \to W$ は厚化であり、
+補題 \ref{more-etale-lemma-shriek-and-thickening} を適用できる。
+次に、開部分 $j(\nu^{-1}(W))$ の補集合を
+$Z' \subset \coprod \overline{Y}_i$ とする。この場合も
+$Z' \to V$ は準有限である。再び区別三角形
+$$
+R(\nu^{-1}(W) \to V)_!\underline{M} \to
+R(\coprod \overline{Y}_i \to V)_!\underline{M} \to
+R(Z' \to V)_!\underline{M} \to
+\ldots
+$$
+を用いると、
+$$
+R(\coprod \overline{Y}_i \to V)_!\underline{M} =
+\bigoplus\nolimits_i R(\overline{Y}_i \to V)_!\underline{M} =
+\bigoplus\nolimits_i R(T_i \to V)_!R(\overline{Y}_i \to T_i)_!\underline{M}
+$$
+が構成可能なコホモロジー層をもつことを証明すれば十分であると分かる
+（第二の等号は補題 \ref{more-etale-lemma-shriek-composition} による）。
+$R(\overline{Y}_i \to T_i)_!\underline{M}$ に対する結果は
+補題 \ref{more-etale-lemma-proper-smooth-family-curves-modules} であり、
+$T_i \to V$ は有限エタールなので、補題
+\ref{more-etale-lemma-qf-f-shriek-constructible} を適用して証明を終える。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-loc-constant-shriek-rel-dim-1}
+$Y$ を有限次元の Noether アフィンスキームとする。
+$\Lambda$ を捩れ Noether 環とする。
+$\mathcal{F}$ を開部分スキーム $U \subset \mathbf{A}^1_Y$ 上の
+有限型局所定数な $\Lambda$ 加群の層とする。
+$f : U \to Y$ を構造射とするとき、
+$Rf_!\mathcal{F}$ のコホモロジー層は構成可能である。
+\end{lemma}
+
+\begin{proof}
+$\Lambda$ を積
+$\Lambda = \Lambda_1 \times \ldots \times \Lambda_r$
+に分解できる。ここで $\Lambda_i$ はある素数 $\ell_i$ に対して
+$\ell_i$-primary である。したがって、ある素数 $\ell$ と整数 $n > 0$ が存在して
+$\ell^n$ が $\Lambda$（したがって $\mathcal{F}$）を消去すると仮定してよい。
+
+\medskip\noindent
+$U$ は Noether なので、$U$ の連結成分は有限個である。
+したがって $U$ は連結であると仮定してよい。
+$g : U' \to U$ を \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-pullback-filtered-modules} で構成された
+有限エタール被覆とする。\'Etale Cohomology, Section
+\ref{etale-cohomology-section-trace-method} の議論は写像
+$$
+\mathcal{F} \to g_*g^{-1}\mathcal{F} \to \mathcal{F}
+$$
+を与え、その合成は同型である。したがって
+$g_*g^{-1}\mathcal{F}$ に対して結果を証明すれば十分である。
+一方、補題 \ref{more-etale-lemma-shriek-composition} により
+$Rf_!g_*g^{-1}\mathcal{F} = R(f \circ g)_!g^{-1}\mathcal{F}$ である。
+$g$ の選び方により、$g^{-1}\mathcal{F}$ は、$\Lambda$ 加群の定数層で、
+ある有限 $\Lambda$ 加群 $M$ に対する $\underline{M}$ という形のものを
+商とする有限フィルトレーションをもつ。したがって補題
+\ref{more-etale-lemma-constant-shriek-rel-dim-1} で証明した場合へ帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{more-etale-lemma-constructible-shriek-rel-dim-1}
+$Y$ をアフィンスキームとし、$\Lambda$ を Noether 環とする。
+$\mathcal{F}$ を $\mathbf{A}^1_Y$ 上の構成可能な捩れ
+$\Lambda$ 加群の層とする。$f : \mathbf{A}^1_Y \to Y$ を構造射とするとき、
+$Rf_!\mathcal{F}$ のコホモロジー層は構成可能である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ は $n > 0$ で消去されるとする。このとき
+$Rf_!\mathcal{F}$ を変えずに $\Lambda$ を $\Lambda/n\Lambda$ で
+置き換えられる。したがって $\Lambda$ は捩れ環であると仮定する。
+
+\medskip\noindent
+$Y = \Spec(R)$ と書く。$R = \bigcup R_i$ を有限型
+$\mathbf{Z}$ 部分代数の和集合として書けば、ある $i$ に対して
+$\mathcal{F}$ は $\mathbf{A}^1_{R_i}$ 上の構成可能な
+$\Lambda$ 加群の層の引き戻しである。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-category-is-colimit} を参照せよ。
+したがって $Y$ は有限次元の Noether スキームであると仮定してよい。
+
+\medskip\noindent
+$Y$ を次元 $d = \dim(Y)$ の Noether スキーム、
+$\Lambda$ を捩れ環と仮定する。$d$ に関する帰納法で結果を証明する。
+
+\medskip\noindent
+基底の場合。$d = 0$ ならば、示すべきことは
+$R^qf_!\mathcal{F}$ の茎が有限 $\Lambda$ 加群であることだけである。
+$\overline{y}$ を $Y$ の幾何点とすると、補題
+\ref{more-etale-lemma-stalk-R-f-shriek} により
+$(R^qf_!\mathcal{F})_{\overline{y}} = H^q_c(X_{\overline{y}}, \mathcal{F})$
+である。これは補題 \ref{more-etale-lemma-finiteness-curves} により有限
+$\Lambda$ 加群である。
+
+\medskip\noindent
+帰納段階。$Rf_!\mathcal{F}|_V$ のコホモロジー層が構成可能となるような
+稠密開部分 $V \subset Y$ を見つければ十分である。
+実際、補集合 $Y \setminus V$ への $Rf_!\mathcal{F}$ の制限は、
+帰納法と $Rf_!\mathcal{F}$ の形成がすべての基底変換と可換すること
+（補題 \ref{more-etale-lemma-base-change-shriek}）により構成可能なコホモロジー層をもつ。
+構成可能な $\Lambda$ 加群の層の定義により、稠密開部分スキーム
+$U \subset \mathbf{A}^1_Y$ で、$\mathcal{F}|_U$ が有限型局所定数な
+$\Lambda$ 加群の層となるものが存在する。
+その補集合を $Z \subset \mathbf{A}^1_Y$ と表す
+（被約閉部分スキームとみなす）。
+$U$ は、$Y$ の既約成分の生成点
+$\xi_1, \ldots, \xi_n$ 上にある $\mathbf{A}^1_Y \to Y$ の
+各ファイバーのすべての生成点を含むことに注意せよ。
+したがって $Z \to Y$ は $\xi_1, \ldots, \xi_n$ 上で有限ファイバーをもつ。
+$Y$ を稠密開部分で置き換えれば（これは許される）、
+$Z \to Y$ は有限であると仮定してよい。Morphisms, Lemma
+\ref{morphisms-lemma-generically-finite} を参照せよ。
+補題 \ref{more-etale-lemma-relative-triangle-associated-to-open} の区別三角形と、
+$Z \to Y$ に対する結果
+（補題 \ref{more-etale-lemma-qf-f-shriek-constructible}）により、
+$R(U \to Y)_!\mathcal{F}$ が構成可能なコホモロジー層をもつことを
+示す問題へ帰着する。これは補題
+\ref{more-etale-lemma-loc-constant-shriek-rel-dim-1} である。
+\end{proof}
+
+\begin{theorem}
+\label{more-etale-theorem-constructible-shriek}
+$f : X \to Y$ を準コンパクト準分離スキームの分離有限表示射とする。
+$\Lambda$ を Noether 環とする。$K$ を
+$D^+_{tors, c}(X_\etale, \Lambda)$ の対象、または $\Lambda$ が捩れの場合には
+$D_c(X_\etale, \Lambda)$ の対象とする。
+このとき $Rf_!K$ のコホモロジー層は構成可能である。すなわち、
+$Rf_!K$ は $D^+_{tors, c}(Y_\etale, \Lambda)$ に属し、
+$\Lambda$ が捩れの場合には $D_c(Y_\etale, \Lambda)$ に属する。
+\end{theorem}
+
+\begin{proof}
+問題は $Y$ 上局所的なので、$Y$ はアフィンであると仮定してよい。
+帰納原理と補題 \ref{more-etale-lemma-relative-mayer-vietoris} により、
+$X$ もアフィンである場合へ帰着する。
+
+\medskip\noindent
+$X$ と $Y$ をアフィンと仮定する。$X$ は有限表示なので、
+有限表示な閉埋め込み $i : X \to \mathbf{A}^n_Y$ を選べる。
+$p : \mathbf{A}^n_Y \to Y$ を構造射とすると、
+補題 \ref{more-etale-lemma-shriek-composition} により
+$Rf_! = Rp_! \circ Ri_!$ である。補題
+\ref{more-etale-lemma-qf-f-shriek-constructible} により $Ri_! = i_!$ に対する
+結果が得られる。したがって $f$ は射影
+$\mathbf{A}^n_Y \to Y$ であると仮定してよい。
+$f$ は合成
+$$
+X = \mathbf{A}^n_Y \to \mathbf{A}^{n - 1}_Y \to
+\mathbf{A}^{n - 2}_S \to \ldots \to
+\mathbf{A}^1_Y \to Y
+$$
+とみなせるので、$n = 1$ と仮定してよい。
+
+\medskip\noindent
+$Y$ はアフィンで $X = \mathbf{A}^1_Y$ と仮定する。
+$Rf_!$ は有限コホモロジー次元をもつので
+（補題 \ref{more-etale-lemma-derived-lower-shriek-bounded}）、
+$K$ は下に有界であると仮定してよい。
+Derived Categories, Lemma
+\ref{derived-lemma-two-ss-complex-functor} の第一スペクトル系列
+（または切断を用いる議論）により、補題
+\ref{more-etale-lemma-constructible-shriek-rel-dim-1} の結果へ帰着する。
+\end{proof}
+
+
+
+
+
+
+
+\section{応用}
+\label{more-etale-section-applications}
+
+\noindent
+この節では定理 \ref{more-etale-theorem-constructible-shriek} の応用をいくつか与える。
+
+\begin{lemma}
+\label{more-etale-lemma-finiteness-compactly-supported}
+$k$ を代数閉体とする。$X$ を $k$ 上有限型な分離スキームとする。
+$\Lambda$ を Noether 環とする。$K$ を
+$D^+_{tors, c}(X_\etale, \Lambda)$ の対象、または $\Lambda$ が捩れの場合には
+$D_c(X_\etale, \Lambda)$ の対象とする。このときすべての
+$i \in \mathbf{Z}$ に対して、$H^i_c(X, K)$ は有限 $\Lambda$ 加群である。
+\end{lemma}
+
+\begin{proof}
+定理 \ref{more-etale-theorem-constructible-shriek} と、節
+\ref{more-etale-section-compactly-supported-cohomology} における
+コンパクト台コホモロジーの定義から直ちに従う。
+\end{proof}
+
+\begin{proposition}
+\label{more-etale-proposition-loc-cst-torsion}
+$f : X \to S$ をスキームの滑らかな固有射とする。
+$\Lambda$ を Noether 環とする。$\mathcal{F}$ を
+$X_\etale$ 上の有限型局所定数な $\Lambda$ 加群の層とし、
+$X$ のすべての幾何点 $\overline{x}$ に対して茎
+$\mathcal{F}_{\overline{x}}$ が、$\overline{x}$ の剰余標数と互いに素な
+整数 $n > 0$ で消去されると仮定する。このときすべての
+$i \in \mathbf{Z}$ に対して、$R^if_*\mathcal{F}$ は
+$S_\etale$ 上の有限型局所定数な $\Lambda$ 加群の層である。
+\end{proposition}
+
+\begin{proof}
+問題は $S$ 上局所的なので、$S$ はアフィンであると仮定してよい。
+$X$ の点 $x$ に対し、$x$ 上にある $X$ のある（同値に任意の）
+幾何点 $\overline{x}$ について $\mathcal{F}_{\overline{x}}$ を消去する
+最小の整数を $n_x \geq 1$ と表す。
+$X$ は準コンパクトなので（アフィン上固有であることによる）、
+$\mathcal{F}|_{U_j}$ が定数となる有限エタール被覆
+$\{U_j \to X\}_{j = 1, \ldots, m}$ が存在する。
+$U_j \to X$ は開なので、関数 $x \mapsto n_x$ は局所定数であり、
+有限個の値しか取らないと分かる。したがって、開閉部分スキームへの有限分解
+$X = X_1 \amalg \ldots \amalg X_N$ で、
+$n_x = n$ と $x \in X_n$ が同値となるものを得る。
+そこで、誘導された射 $X_n \to S$ と $\mathcal{F}$ の $X_n$ への制限に対して
+補題を証明すれば十分である。ゆえに、整数 $n > 0$ が存在し、
+$\mathcal{F}$ は $n$ で消去され、かつ $n$ は $X$ のすべての剰余体の
+剰余標数と互いに素であると仮定する。
+
+\medskip\noindent
+$f$ は滑らかかつ固有なので、像 $f(X) \subset S$ は開かつ閉である。
+したがって $S$ を $f(X)$ で置き換えて $f(X) = S$ と仮定してよい。
+特に、アフィンスキーム $S$ を定義する環において
+$n$ は可逆であると仮定してよい。
+
+\medskip\noindent
+この段落で $S$ が Noether である場合へ帰着する。
+$S = \Spec(A)$ と書く。ここで $A$ はある
+$\mathbf{Z}[1/n]$ 代数である。$A = \bigcup A_i$ を、その有限型
+$\mathbf{Z}[1/n]$ 部分代数の和集合として書く。ある $i$ と有限型射
+$f_i : X_i \to S_i = \Spec(A_i)$ で、その $S$ への基底変換が
+$f : X \to S$ となるものを取れる。Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation} を参照せよ。
+$i$ を大きくすれば、$f_i : X_i \to S_i$ は滑らかかつ固有であると
+仮定してよい。Limits, Lemmas
+\ref{limits-lemma-eventually-proper}
+\ref{limits-lemma-descend-smooth}、および
+\ref{limits-lemma-descend-dimension-d} を参照せよ。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-category-loc-cst-is-colimit} により、
+ある $i$ と有限型局所定数な $\Lambda$ 加群の層
+$\mathcal{F}_i$ で、その $X$ への引き戻しが $\mathcal{F}$ と
+同型になるものが存在する。
+$\mathcal{F}$ は $n$ で消去されるので、$\mathcal{F}_i$ を
+$\Ker(n : \mathcal{F}_i \to \mathcal{F}_i)$ で置き換え、
+$\mathcal{F}_i$ についても同じことが成り立つと仮定してよい。
+これにより次の段落で論じる場合へ帰着する。
+
+\medskip\noindent
+整数 $n \geq 1$ があり、基底スキーム $S$ は Noether かつ
+$\mathbf{Z}[1/n]$ 上にあり、$\mathcal{F}$ は $n$-捩れであると仮定する。
+定理 \ref{more-etale-theorem-constructible-shriek} により、層
+$R^if_*\mathcal{F}$ は構成可能な $\Lambda$ 加群の層である。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-sp-isom-proper-torsion-loc-ac} により、
+$R^if_*\mathcal{F}$ の特殊化写像は常に同型である。
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-characterize-locally-constant-module} により
+結論を得る。
+\end{proof}
+
+
+
+
+
+
+
+\section{導来上付きシュリークについてさらに}
+\label{more-etale-section-more-derived-upper-shriek}
+
+\noindent
+$\Lambda$ を捩れ環とする。可換図式
+$$
+\xymatrix{
+U \ar[rr]_j \ar[rd]_g & & U' \ar[ld]^{g'} \\
+& Y
+}
+$$
+を考える。ただし各スキームは準コンパクトかつ準分離で、
+$g$ と $g'$ は分離かつ有限型であり、$j$ はエタールである。
+これは $D(Y_\etale, \Lambda)$ に標準写像
+$$
+Rg_!\Lambda \longrightarrow Rg'_!\Lambda
+$$
+を誘導する。実際、補題 \ref{more-etale-lemma-shriek-composition} および
+\ref{more-etale-lemma-Rf-shriek-for-quasi-finite} により
+$Rg_! = Rg'_! \circ j_!$ である。一方、$j_!$ は $j^{-1}$ の左随伴なので、
+余単位 $\text{Tr}_j : j_!\Lambda = j_!j^{-1}\Lambda \to \Lambda$ をもつ。
+これも $j$ のトレース写像と呼ぶ。Remark
+\ref{more-etale-remark-trace-etale-counit} を参照せよ。
+上の写像は合成
+$$
+Rg_!\Lambda = Rg'_!j_!\Lambda
+\xrightarrow{Rg'_! \text{Tr}_j}
+Rg'_!\Lambda
+$$
+として構成される。さらに、分離かつ有限型なある
+$g'' : U'' \to Y$ に対して第二のエタール射 $j' : U' \to U''$ が
+与えられたとする。このとき $j$ と $j'$ に対する写像の合成
+$$
+Rg_!\Lambda \longrightarrow Rg'_!\Lambda \longrightarrow Rg''_!\Lambda
+$$
+は、$j' \circ j$ に対して構成される写像
+$Rg_!\Lambda \longrightarrow Rg''_!\Lambda$ に等しい。
+これはトレース写像に関する対応する主張から従う。
+より一般の場合については補題 \ref{more-etale-lemma-trace-composition} を参照せよ。
+
+\medskip\noindent
+$f : X \to Y$ を、準コンパクト準分離スキームの分離有限型射とする。
+このとき関手
+$$
+X_{affine, \etale}
+\longrightarrow
+\left\{
+\begin{matrix}
+\text{分離かつ有限型なスキーム、基底は }Y\\
+\text{およびそれらの間のエタール射}
+\end{matrix}
+\right\}
+$$
+を得る。したがって上の構成は、$U$ を
+$R(U \to Y)_!\Lambda$ へ写す関手
+$X_{affine, \etale}^{opp} \to D(Y_\etale, \Lambda)$ を定める。
+
+\begin{lemma}
+\label{more-etale-lemma-describe-Rf-upper-shriek}
+$f : X \to Y$ を、準コンパクト準分離スキームの分離有限型射とする。
+$\Lambda$ を捩れ環とし、$K \in D(Y_\etale, \Lambda)$ とする。
+$n \in \mathbf{Z}$ に対して、$H^n(Rf^!K)$ を
+$X_{affine, \etale}$ に制限したコホモロジー層は、前層
+$$
+U \longmapsto \Hom_Y(R(U \to Y)_!\Lambda, K[n])
+$$
+に付随する層である。$R(U \to Y)_!\Lambda$ の関手性については
+上の議論を参照せよ。
+\end{lemma}
+
+\begin{proof}
+$j : U \to X$ を $X_{affine, \etale}$ の対象とし、
+$g = f \circ j$ とおく。$D(X_\etale, \Lambda)$ の任意の $M$ に対して
+$\Hom_X(j_!\Lambda, M[n]) = H^n(U, M)$ であることを思い出そう。
+このとき $H^n(Rf^!K)$ は前層
+$$
+U \mapsto H^n(U, Rf^!K) = \Hom_X(j_!\Lambda, Rf^!K[n]) =
+\Hom_Y(Rf_!j_!\Lambda, K[n] = \Hom_Y(Rg_!\Lambda, K[n])
+$$
+に付随する層である。遷移写像が、上で構成した対象
+$Rg_!\Lambda = R(U \to Y)_!\Lambda$ の間の遷移写像によって与えられることの
+検証は省略する。
+\end{proof}

@@ -1,0 +1,136 @@
+% Generated mechanically from frozen input p12/ja/coding.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{113}
+\chapter{コーディング規約}
+
+
+
+\phantomsection
+\label{coding-section-phantom}
+
+
+\section{スタイル上の注意事項一覧}
+\label{coding-section-style}
+
+\noindent
+これらは今後変わっていくが，現時点でいくつかをここに置いておけば，
+一貫した LaTeX スタイルを促すことができるだろう．
+ソースファイルの内容を「コード\footnote{すべて Knuth のせいである．
+\cite{Knuth} を参照せよ．}」と呼ぶことにする．
+
+\begin{enumerate}
+\item すべての tex ファイルで，各行を高々 80 文字に保つ．
+\item tex ファイルでは字下げを用いない．環境などを視覚的に把握するには，
+字下げの代わりにエディタの構文強調表示を用いる．
+\item 新しい段落を始めるには
+\begin{verbatim}
+\medskip\noindent
+\end{verbatim}
+を用い，環境の直後に新しい段落を始めるには
+\begin{verbatim}
+\noindent
+\end{verbatim}
+を用いる．
+\item 可能なら，数式のコードを行の途中で分割しない．囲みのドル記号を含む
+完全なコードが一行に収まらない場合には，次の行の最初の文字を最初の
+ドル記号とする．それでも収まらない場合には，数学的に自然な箇所を見つけて
+コードを分割する．
+\item 別行立て数式は次のように記述する．
+\begin{verbatim}
+$$
+...
+...
+$$
+\end{verbatim}
+すなわち，単独の行に置いた二重ドル記号で始め，同様に終える．
+\item {\it マクロを一切使わない}．理由は，tex ファイルが読みやすくなり，
+無数のマクロを学ばなくても任意の箇所の編集を始められるからである．
+また，記述が難しくなったり余計な時間がかかったりするわけでもない．
+もちろん，同じ数学的対象が本文中の異なる箇所で異なる TeX コードによって
+記述される可能性があるという欠点はあるが，これは容易に見つけられるはずである．
+\item 使用する定理環境は次のとおりである．plain 型には ``theorem''，
+``proposition''，``lemma'' を用いる．definition 型には ``definition''，
+``example''，``exercise''，``situation'' を用いる．remark 型には
+``remark''，``remarks'' を用いる．もちろん ``proof'' 環境もある．
+\item 環境 ``foo'' は次のように記述する．
+\begin{verbatim}
+\begin{foo}
+...
+...
+\end{foo}
+\end{verbatim}
+これは別行立て数式の記述法と同様である．
+\item ``corollary'' の代わりに単に ``lemma'' 環境を用いる．その結果は結局，
+次のより大きな定理を証明するために使われる可能性が高いからである．
+\item 各 lemma，proposition，theorem の直後に，その lemma，proposition，
+theorem の証明を置く．証明を入れ子にしないこと．
+\item preamble.tex，chapters.tex，fdl.tex は特別な tex ファイルである．
+これらを除き，各 tex ファイルは次の構造をもつ．
+\begin{verbatim}
+\title{Title}
+...
+...
+\end{verbatim}
+\item lemma，proposition，theorem，さらに remark，exercise その他の環境にも，
+できるだけラベルを付ける．lemma にラベルを付ける場合には，たとえば次のようにする．
+\begin{verbatim}
+\begin{lemma}
+\label{coding-lemma-bar}
+...
+\end{lemma}
+\end{verbatim}
+他のすべての環境についても同様である．すなわち，``foo'' という名前の環境の
+ラベルは ``foo-'' で始める．さらに，すべてのラベルを小文字，数字，記号 ``-''
+だけからなるものにする．
+\item 「上の lemma」（proposition などについても同様）とは決して参照しない．
+代わりに次を用いる．
+\begin{verbatim}
+Lemma \ref{coding-lemma-bar} above
+\end{verbatim}
+これにより，後で lemma の位置を移しても基本的に問題が生じない．
+\item ファイル間参照について述べる．タイトルが ``Foo'' である foo.tex 内の
+``lemma-bar'' というラベルをもつ lemma を参照するには，次のコードを用いる．
+\begin{verbatim}
+Foo, Lemma \ref{foo-lemma-bar}
+\end{verbatim}
+これが機能しない場合には，preamble.tex を見て，使用すべき正しい表現を確認する．
+出力ファイルには ``Foo, Lemma $<$link$>$'' と表示されるので，リンクが
+ファイルの外を指すことが明確になる．
+\item 可能な限り，proof 環境内での前方参照を避ける．
+（これについては自動テストを作成できるはずである．）
+\item 数学記号で文を始めない．
+\item lemma，proposition，theorem の直前に「これは次から従う」という型の
+文を置かない．すべての文をピリオドで終える．
+\item 各 lemma，proposition，theorem にすべての仮定を明記する．これにより，
+与えられた lemma，proposition，theorem を読者自身の問題に適用できるかどうかを
+判断しやすくなる．
+\item 証明は短く，pdf または dvi で 1 ページ未満に保つ．証明を lemma などに
+分割すれば，これは常に実現できる．
+\item 定義される性質 foobar には，definition 環境内のコードで
+\begin{verbatim}
+{\it foobar}
+\end{verbatim}
+を用いる．文書の本文中で定義を行う場合も同様である．これにより，何が
+定義されているのかを読者が見分けやすくなる．
+\item その節の外で用いる定義は，すべて独立した definition 環境に置く．
+一時的な定義は本文中で行ってよい．難しいのは数学的構成の場合である
+（これはしばしば，相互に関係する lemma を伴う定義である）．よい解決法は，
+それらを独立した短い節に置き，利用者が定義ではなくその節を参照できるように
+することかもしれない．
+\item 本文中のどこからも実際に参照されない限り，数式に番号を付けない．
+ラベルは後からいつでも追加できる．
+\item lemma，proposition，theorem の主張と証明では，文を短く保つ．たとえば，
+``Let $R$ be a ring and let $M$ be an $R$-module.'' と書く代わりに，
+``Let $R$ be a ring. Let $M$ be an $R$-module.'' と書く．理由は，証明や主張の
+難しい箇所を解析しやすくなるからである．
+\item 節を作るには
+\begin{verbatim}
+\section
+\end{verbatim}
+コマンドを用いるが，subsection と subsubsection の使用は避けるようにする．
+\item 複雑な LaTeX 構成の使用を避ける．
+\end{enumerate}

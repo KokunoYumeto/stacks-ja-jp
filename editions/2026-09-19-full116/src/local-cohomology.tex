@@ -1,0 +1,5041 @@
+% Generated mechanically from frozen input p07/ja/local-cohomology.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{50}
+\chapter{局所コホモロジー}
+
+
+
+\phantomsection
+\label{local-cohomology-section-phantom}
+
+
+\section{序論}
+\label{local-cohomology-section-introduction}
+
+\noindent
+本章では局所コホモロジーの研究を続ける。
+参考文献として \cite{SGA2} がある。
+局所コホモロジーの定義は Dualizing Complexes, 第
+\ref{dualizing-section-local-cohomology} 節にある。
+Noether 環について局所コホモロジーを取ることは、適切な捩れ関手を導来することと
+同じである。これは Dualizing Complexes, 第
+\ref{dualizing-section-local-cohomology-noetherian} 節で示されている。
+深さとの関係については Dualizing Complexes, 第
+\ref{dualizing-section-depth} 節を参照されたい。
+
+\medskip\noindent
+局所コホモロジーの有限性を論じ、それを用いて Grothendieck の有限性定理の
+かなり一般的な形を証明する。定理 \ref{local-cohomology-theorem-finiteness} および
+補題 \ref{local-cohomology-lemma-finiteness-Rjstar}（開埋め込みに沿う連接加群の高次順像）を
+参照されたい。我々の方法には、Faltings の論文に見られるいくつかの非常に
+洗練された議論を取り入れる。\cite{Faltings-annulators} および
+\cite{Faltings-finiteness} を参照されたい。
+
+\medskip\noindent
+応用として Hartshorne--Lichtenbaum 消滅を論じる。また、局所コホモロジーに
+対する Frobenius および微分作用素の作用も扱う。
+
+
+
+
+\section{一般事項}
+\label{local-cohomology-section-generalities}
+
+\noindent
+次の補題は、関手 $R\Gamma_Z$ が台付きコホモロジーと関係することを述べる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-cohomology-is-local-cohomology}
+$A$ を環、$I$ を有限生成イデアルとする。
+$Z = V(I) \subset X = \Spec(A)$ とおく。$K \in D(A)$ が
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-affine-compare-bounded} を通じて
+$\widetilde{K} \in D_\QCoh(\mathcal{O}_X)$ に対応するとき、関手的同型
+$$
+R\Gamma_Z(K) = R\Gamma_Z(X, \widetilde{K})
+$$
+がある。左辺は Dualizing Complexes, 式
+(\ref{dualizing-equation-local-cohomology}) のものであり、右辺は
+Cohomology, 第 \ref{cohomology-section-cohomology-support-bis} 節
+の関手である。
+\end{lemma}
+
+\begin{proof}
+Cohomology, 補題 \ref{cohomology-lemma-triangle-sections-with-support}
+により、区別三角形
+$$
+R\Gamma_Z(X, \widetilde{K})
+\to R\Gamma(X, \widetilde{K})
+\to R\Gamma(U, \widetilde{K})
+\to R\Gamma_Z(X, \widetilde{K})[1]
+$$
+が存在する。ここで $U = X \setminus Z$ である。Derived Categories of
+Schemes, 補題 \ref{perfect-lemma-affine-compare-bounded} により
+$R\Gamma(X, \widetilde{K}) = K$ であることが分かっている。
+$I = (f_1, \ldots, f_r)$ と書く。このとき有限アフィン開被覆
+$\mathcal{U} : U = D(f_1) \cup \ldots \cup D(f_r)$ を得る。
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-alternating-cech-complex-complex-computes-cohomology}
+により、交代 {\v C}ech 複体
+$\text{Tot}(\check{\mathcal{C}}_{alt}^\bullet(\mathcal{U},
+\widetilde{K^\bullet}))$
+は $R\Gamma(U, \widetilde{K})$ を計算する。ここで $K^\bullet$ は任意の
+$A$-加群の複体であって $K$ を表す。定義を展開すると
+$$
+R\Gamma(U, \widetilde{K}) =
+\text{Tot}\left(
+K^\bullet \otimes_A
+(\prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+$$
+を得る。
+$K^\bullet = R\Gamma(X, \widetilde{K^\bullet}) \to
+R\Gamma(U, \widetilde{K}^\bullet)$ は、$A$ から $\prod A_{f_i}$ への
+対角写像によって誘導されることが明らかである。したがって
+$$
+R\Gamma_Z(X, \widetilde{K}) =
+\text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+$$
+を得る。Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-adjoint} により、右辺の複体は
+$R\Gamma_Z(K)$ を計算するので、与えられた $K$ に対して補題が成り立つ。
+
+\medskip\noindent
+最後に、この同型を $K$ について関手的に選べることを示す。
+$A$-加群の複体の写像
+$$
+M^\bullet = \text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+\longrightarrow
+K^\bullet
+$$
+を考える。上の議論により、この矢印は関手
+$R\Gamma_Z(X, \widetilde{\ })$ を適用すると同型になり、また
+$R\Gamma(U, \widetilde{M}^\bullet) = 0$ である（詳細は省略する）。すると
+$$
+R\Gamma_Z(X, \widetilde{K}^\bullet)
+\leftarrow
+R\Gamma_Z(X, \widetilde{M}^\bullet)
+\rightarrow
+R\Gamma(X, \widetilde{M}^\bullet) = M^\bullet = R\Gamma_Z(K^\bullet)
+$$
+を得る。すべての写像は $D(A)$ における同型であり、所望どおり
+$K^\bullet$ について関手的である。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-cohomology}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。
+$X = \Spec(A)$、$Z = V(I)$、$U = X \setminus Z$ とおき、$j : U \to X$
+を包含射とする。$\mathcal{F}$ を準連接 $\mathcal{O}_U$-加群とする。このとき
+\begin{enumerate}
+\item $A$-加群 $M$ が存在し、$\mathcal{F}$ は $\widetilde{M}$ の $U$ への
+制限である。
+\item $M$ が与えられると完全列
+$$
+0 \to H^0_Z(M) \to M \to H^0(U, \mathcal{F}) \to H^1_Z(M) \to 0
+$$
+および同型 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(M)$ が $p \geq 1$
+に対してある。
+\item $M = H^0(U, \mathcal{F})$ と取ることができ、この場合
+$H^0_Z(M) = H^1_Z(M) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M$ の存在は Properties, 補題 \ref{properties-lemma-extend-trivial} と、
+$X$ 上の準連接層が $A$-加群に対応するという事実（Schemes, 補題
+\ref{schemes-lemma-equivalence-quasi-coherent}）から従う。
+次に区別三角形
+$$
+R\Gamma_Z(X, \widetilde{M}) \to R\Gamma(X, \widetilde{M}) \to
+R\Gamma(U, \widetilde{M}|_U) \to R\Gamma_Z(X, \widetilde{M})[1]
+$$
+を考える。これは Cohomology, 補題
+\ref{cohomology-lemma-triangle-sections-with-support} の三角形である。
+$X$ はアフィンなので、Cohomology of Schemes, 補題
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero} により
+$R\Gamma(X, \widetilde{M}) = M$ である。$M$ の選び方から
+$\mathcal{F} = \widetilde{M}|_U$ であり、したがって完全列
+$$
+0 \to H^0_Z(X, \widetilde{M}) \to M \to H^0(U, \mathcal{F}) \to
+H^1_Z(X, \widetilde{M}) \to 0
+$$
+および同型 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(X, \widetilde{M})$ を
+$p \geq 1$ に対して得る。
+補題 \ref{local-cohomology-lemma-local-cohomology-is-local-cohomology} により
+$H^i_Z(M) = H^i_Z(X, \widetilde{M})$ であり、これはすべての $i$ に対して
+成り立つ。したがって
+(1) と (2) が成り立つ。
+最後に $M' = H^0(U, \mathcal{F})$ とおくと、$M \to M'$ の核と余核は
+$I$-冪捩れである。よって $\widetilde{M}|_U \to \widetilde{M'}|_U$ は
+同型であり、(3) のとおり $M'$ を用いることができる。もちろん、このとき
+$H^0_Z(M')$ と $H^0_Z(M')$ はともに零となる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-already-torsion}
+$I, J \subset A$ を環 $A$ の有限生成イデアルとする。
+$M$ が $I$-冪捩れ加群ならば、標準写像
+$$
+H^i_{V(I) \cap V(J)}(M) \to H^i_{V(J)}(M)
+$$
+はすべての $i$ に対して同型である。
+\end{lemma}
+
+\begin{proof}
+Dualizing Complexes, 補題 \ref{dualizing-lemma-local-cohomology-ss} の
+スペクトル系列を用いると、主張は $R\Gamma_I(M) = M$ に帰着する。
+これは Dualizing Complexes, 第
+\ref{dualizing-section-local-cohomology} 節における局所コホモロジーの
+構成から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-multiplicative}
+$S \subset A$ を環 $A$ の乗法的集合とする。
+$M$ を $A$-加群とし、$S^{-1}M = 0$ と仮定する。このとき
+$\colim_{f \in S} H^0_{V(f)}(M) = M$ および
+$\colim_{f \in S} H^1_{V(f)}(M) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+$H^0$ に関する主張は定義から直ちに従う。$H^1$ に関する主張については、
+$R\Gamma_{V(f)}$ と $H^1_{V(f)}$ が余極限と可換であることに注意する。
+したがって、$M$ はある $f \in S$ により零化されると仮定してよい。このとき
+$H^1_{V(ff')}(M) = 0$ がすべての $f' \in S$ に対して成り立つ（例えば
+補題 \ref{local-cohomology-lemma-already-torsion} による）。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-elements-come-from-bigger}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。$\mathfrak p$ を素イデアル、
+$M$ を $A$-加群とする。整数 $i \geq 0$ に対して写像
+$$
+\Psi :
+\colim_{f \in A, f \not \in \mathfrak p} H^i_{V((I, f))}(M)
+\longrightarrow
+H^i_{V(I)}(M)
+$$
+を考える。このとき
+\begin{enumerate}
+\item $\Im(\Psi)$ は $H^i_{V(I)}(M)_\mathfrak p$ において零に写る元の集合である。
+\item $H^{i - 1}_{V(I)}(M)_\mathfrak p = 0$ ならば $\Psi$ は単射である。
+\item $H^{i - 1}_{V(I)}(M)_\mathfrak p = H^i_{V(I)}(M)_\mathfrak p = 0$
+ならば $\Psi$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f \in A$、$f \not \in \mathfrak p$ に対して、Dualizing Complexes,
+補題 \ref{dualizing-lemma-local-cohomology-ss} のスペクトル系列は退化し、
+短完全列
+$$
+0 \to H^1_{V(f)}(H^{i - 1}_{V(I)}(M)) \to
+H^i_{V((I, f))}(M) \to H^0_{V(f)}(H^i_{V(I)}(M)) \to 0
+$$
+を与える。これで (1) が証明され、(2) はこのことと
+補題 \ref{local-cohomology-lemma-multiplicative} から従う。(3) は形式的な帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-isomorphism}
+$I \subset I' \subset A$ を Noether 環 $A$ の有限生成イデアルとする。
+$M$ を $A$-加群とし、$i \geq 0$ を整数とする。写像
+$$
+\Psi : H^i_{V(I')}(M) \to H^i_{V(I)}(M)
+$$
+を考える。このとき次が成り立つ。
+\begin{enumerate}
+\item $H^i_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$ がすべての
+$\mathfrak p \in V(I) \setminus V(I')$ に対して成り立つならば、
+$\Psi$ は全射である。
+\item $H^{i - 1}_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$ がすべての
+$\mathfrak p \in V(I) \setminus V(I')$ に対して成り立つならば、
+$\Psi$ は単射である。
+\item $H^i_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) =
+H^{i - 1}_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$ がすべての
+$\mathfrak p \in V(I) \setminus V(I')$ に対して成り立つならば、
+$\Psi$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明する。$\xi \in H^i_{V(I)}(M)$ とする。$A$ は Noether 環なので、
+最大のイデアル $I \subset I'' \subset I'$ が存在し、$\xi$ はある
+$\xi'' \in H^i_{V(I'')}(M)$ の像である。
+$V(I'') = V(I')$ ならば証明は終わる。そうでなければ、生成点
+$\mathfrak p \in V(I'')$ で $V(I')$ に属さないものを選ぶ。仮定により
+$H^i_{V(I'')}(M)_\mathfrak p =
+H^i_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$ である。
+補題 \ref{local-cohomology-lemma-elements-come-from-bigger} により $I''$ を大きくできるが、
+これは最大性に反する。
+
+\medskip\noindent
+(2) を証明する。$\xi' \in H^i_{V(I')}(M)$ を $\Psi$ の核の元とする。
+$A$ は Noether 環なので、最大のイデアル $I \subset I'' \subset I'$ が存在し、
+$\xi'$ は $H^i_{V(I'')}(M)$ において零に写る。
+$V(I'') = V(I')$ ならば証明は終わる。そうでなければ、生成点
+$\mathfrak p  \in V(I'')$ で $V(I')$ に属さないものを選ぶ。仮定により
+$H^{i - 1}_{V(I'')}(M)_\mathfrak p =
+H^{i - 1}_{\mathfrak pA_\mathfrak p}(M_\mathfrak p) = 0$ である。
+補題 \ref{local-cohomology-lemma-elements-come-from-bigger} により $I''$ を大きくできるが、
+これは最大性に反する。
+
+\medskip\noindent
+(3) は (1) と (2) から形式的に従う。
+\end{proof}
+
+
+
+
+
+\section{Hartshorne の連結性補題}
+\label{local-cohomology-section-hartshorne-connectedness}
+
+\noindent
+この節の表題は次の結果を指す。
+
+\begin{lemma}
+\label{local-cohomology-lemma-depth-2-connected-punctured-spectrum}
+\begin{reference}
+\cite[命題 2.1]{Hartshorne-connectedness}
+\end{reference}
+\begin{slogan}
+Hartshorne の連結性
+\end{slogan}
+$A$ を深さ $\geq 2$ の Noether 局所環とする。このとき $A$、$A^h$、
+$A^{sh}$ の穴あきスペクトルは連結である。
+\end{lemma}
+
+\begin{proof}
+$U$ を $A$ の穴あきスペクトルとする。$U$ が非連結ならば、
+$\Gamma(U, \mathcal{O}_U)$ は非自明な冪等元をもつ。しかし $A$ は局所環なので
+非自明な冪等元をもたない。したがって
+$A \to \Gamma(U, \mathcal{O}_U)$ は同型でない。
+補題 \ref{local-cohomology-lemma-local-cohomology} により、$H^0_\mathfrak m(A)$ または
+$H^1_\mathfrak m(A)$ のいずれかは零でない。ゆえに Dualizing Complexes,
+補題 \ref{dualizing-lemma-depth} により $\text{depth}(A) \leq 1$ となる。
+$A^h$ と $A^{sh}$ に対する結果には More on Algebra, 補題
+\ref{more-algebra-lemma-henselization-depth} を用いればよい。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-catenary-S2-equidimensional}
+\begin{reference}
+\cite[IV, 系 5.10.9]{EGA}
+\end{reference}
+$A$ を鎖状かつ $(S_2)$ である Noether 局所環とする。このとき
+$\Spec(A)$ は等次元である。
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$ とおき、$d = \dim(A) = \dim(X)$ とする。$X$ の中で、
+$X_1$ を次元 $d$ の既約成分の合併、$X_2$ を次元 $< d$ の既約成分の合併
+とする。もちろん $X = X_1 \cup X_2$ である。$X_2 = \emptyset$ ならば
+補題が成り立つ。そうでなければ $Z = X_1 \cap X_2$ は $X$ の閉点を少なくとも
+含むので、$X$ の空でない閉部分集合である。したがって、$z \in Z$ を $Z$ の
+ある既約成分の生成点として選べる。$\mathcal{O}_{Z, z}$ のスペクトルは、$X$ の
+点で $z$ に特殊化するものの集合であることを思い出そう。$z$ は次元 $d$ の
+既約成分と次元 $< d$ の既約成分の両方に含まれるので、非自明な特殊化
+$x_1 \leadsto z$ と $x_2 \leadsto z$ を得て、$x_1$ と $x_2$ の閉包の次元は異なる。
+$X$ は鎖状なので、これは特殊化 $x_1 \leadsto z$ と $x_2 \leadsto z$ の少なくとも
+一方が直近でない場合にしか起こらない。したがって
+$\dim(\mathcal{O}_{Z, z}) \geq 2$ である。よって
+$\text{depth}(\mathcal{O}_{Z, z}) \geq 2$ である。これは $A$ が $(S_2)$
+だからである。しかし $U$ を $\mathcal{O}_{Z, z}$ の穴あきスペクトルとすると
+非連結である。実際、閉部分集合
+$U \cap X_1$ と $U \cap X_2$ は（$z$ の選び方により）互いに素であり、$U$ を
+被覆する。これは 補題 \ref{local-cohomology-lemma-depth-2-connected-punctured-spectrum}
+に反し、証明が完了する。
+\end{proof}
+
+
+
+\section{コホモロジー次元}
+\label{local-cohomology-section-cd}
+
+\noindent
+コホモロジー次元について簡単に述べる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。
+$Y = V(I) \subset X = \Spec(A)$ とおき、$d \geq -1$ を整数とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $H^i_Y(A) = 0$ が $i > d$ に対して成り立つ。
+\item $H^i_Y(M) = 0$ が $i > d$ に対して、任意の $A$-加群 $M$ について成り立つ。
+\item $d = -1$ ならば $Y = \emptyset$ であり、$d = 0$ ならば
+$Y$ は $X$ の開かつ閉な部分集合であり、$d > 0$ ならば
+$H^i(X \setminus Y, \mathcal{F}) = 0$ が $i \geq d$ に対して、任意の
+準連接 $\mathcal{O}_{X \setminus Y}$-加群 $\mathcal{F}$ について成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$R\Gamma_Y(-)$ のコホモロジー次元が有限であることに注意する。これは例えば
+Dualizing Complexes, 補題 \ref{dualizing-lemma-local-cohomology-adjoint}
+による。したがって整数 $i_0$ が存在し、$H^i_Y(M) = 0$ がすべての
+$A$-加群 $M$ および $i \geq i_0$ に対して成り立つ。
+
+\medskip\noindent
+(1) と (2) が同値であることを示す。(2) から (1) が従うことは明らかである。
+(1) を仮定する。$i > d$ に関する降下帰納法により、$H^i_Y(M) = 0$ が
+すべての $A$-加群 $M$ に対して成り立つことを示す。
+$i \geq i_0$ の場合は既に上で示した。帰納段階として $i_0 > i > d$ とする。
+任意の $A$-加群 $M$ を取り、これを短完全列
+$0 \to N \to F \to M \to 0$ に組み込む。ここで $F$ は自由 $A$-加群である。
+$R\Gamma_Y$ は右随伴なので、$H^i_Y(-)$ は直和と可換である。
+したがって仮定 (1) により $H^i_Y(F) = 0$ である。実際、$i > d$ である。
+すると所望どおり $H^i_Y(M) = H^{i + 1}_Y(N) = 0$ を得る。
+
+\medskip\noindent
+$d = -1$ で (2) が成り立つと仮定する。このとき $0 = H^0_Y(A/I) = A/I \Rightarrow A = I
+\Rightarrow Y = \emptyset$ である。したがって (3) が成り立つ。逆の証明は省略する。
+
+\medskip\noindent
+$d = 0$ で (2) が成り立つと仮定する。
+$J = H^0_I(A) = \{x \in A \mid I^nx = 0 \text{ を満たす }n > 0\text{ が存在する}\}$
+とおく。このとき
+$$
+H^1_Y(A) = \Coker(A \to \Gamma(X \setminus Y, \mathcal{O}_{X \setminus Y}))
+\quad\text{および}\quad
+H^1_Y(I) = \Coker(I \to \Gamma(X \setminus Y, \mathcal{O}_{X \setminus Y}))
+$$
+であり、最初の写像の核は $J$ に等しい。補題 \ref{local-cohomology-lemma-local-cohomology}
+を参照せよ。(2) から $I(A/J) = A/J$ を得る。よって $f \in I$ を選び、
+その像が $1$ となるようにできる。ここで像は $A/J$ において取る。
+すると $1 - f \in J$ なので、$I^n(1 - f) = 0$ となる $n > 0$ が存在する。
+したがって $f^n = f^{n + 1}$ であり、$e = f^n \in I$ は冪等元である。
+補元となる冪等元 $e' = 1 - f^n \in J$ を考える。任意の元 $g \in I$ に対して
+$g^m e' = 0$ となる $m > 0$ がある。したがって $I$ はイデアル
+$(e) \subset I$ の根基に含まれる。これは (3) のとおり
+$Y = V(I) = V(e)$ が $X$ において開かつ閉であることを意味する。
+逆に $Y = V(I)$ が開かつ閉ならば、関手 $H^0_Y(-)$ は完全であり、
+その高次導来関手は消滅する。
+
+\medskip\noindent
+$d > 0$ ならば、補題 \ref{local-cohomology-lemma-local-cohomology} から直ちに
+(2) と (3) が同値であることが分かる。
+\end{proof}
+
+\begin{definition}
+\label{local-cohomology-definition-cd}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。整数 $d \geq -1$ のうち
+補題 \ref{local-cohomology-lemma-cd} の同値な条件を満たす最小のものを、
+{\it $I$ の $A$ におけるコホモロジー次元}と呼び、$\text{cd}(A, I)$ と書く。
+\end{definition}
+
+\noindent
+したがって $\text{cd}(A, I) = -1$ となるのは $I = A$ の場合であり、
+$\text{cd}(A, I) = 0$ となるのは $I$ が局所冪零であるか冪等元で生成される場合である。
+次の補題により $\text{cd}(A, I)$ が存在することに注意する。
+
+\begin{lemma}
+\label{local-cohomology-lemma-bound-cd}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。このとき
+\begin{enumerate}
+\item $\text{cd}(A, I)$ は $I$ の生成元の個数以下である。
+\item $\text{cd}(A, I) \leq r$ は、$f_1, \ldots, f_r \in A$ で
+$V(f_1, \ldots, f_r) = V(I)$ を満たすものが存在するとき成り立つ。
+\item $\text{cd}(A, I) \leq c$ は、$\Spec(A) \setminus V(I)$ が $c$ 個の
+アフィン開集合で被覆できるとき成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$R\Gamma_Y(-)$ の明示的な記述が Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-adjoint} にあり、これから (1) が従う。
+(2) は、$R\Gamma_Z$ が閉部分集合 $Z$ のみに依存し、有限生成イデアル
+$I \subset A$ で $V(I) = Z$ を満たすものの選択には依存しないことを用いて
+(1) から導ける。この事実は、Dualizing Complexes, 第
+\ref{dualizing-section-local-cohomology} 節における局所コホモロジーの構成と
+More on Algebra, 補題 \ref{more-algebra-lemma-local-cohomology-closed}
+を組み合わせるか、補題 \ref{local-cohomology-lemma-local-cohomology-is-local-cohomology} を
+用いれば従う。(3) には 補題 \ref{local-cohomology-lemma-cd} と Cohomology of Schemes,
+補題 \ref{coherent-lemma-vanishing-nr-affines} の消滅結果を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-sum}
+$I, J \subset A$ を環 $A$ の有限生成イデアルとする。このとき
+$\text{cd}(A, I + J) \leq \text{cd}(A, I) + \text{cd}(A, J)$ である。
+\end{lemma}
+
+\begin{proof}
+定義と Dualizing Complexes, 補題 \ref{dualizing-lemma-local-cohomology-ss}
+を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-change-rings}
+$A \to B$ を環準同型、$I \subset A$ を有限生成イデアルとする。このとき
+$\text{cd}(B, IB) \leq \text{cd}(A, I)$ である。$A \to B$ が忠実平坦ならば
+等号が成り立つ。
+\end{lemma}
+
+\begin{proof}
+定義と Dualizing Complexes, 補題 \ref{dualizing-lemma-torsion-change-rings}
+を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-local}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。このとき
+$\text{cd}(A, I) = \max \text{cd}(A_\mathfrak p, I_\mathfrak p)$ である。
+\end{lemma}
+
+\begin{proof}
+$Y = V(I)$ および $Y' = V(I_\mathfrak p) \subset \Spec(A_\mathfrak p)$ とする。
+等式
+$R\Gamma_Y(A) \otimes_A A_\mathfrak p = R\Gamma_{Y'}(A_\mathfrak p)$
+が Dualizing Complexes, 補題 \ref{dualizing-lemma-torsion-change-rings}
+により成り立つことを思い出そう。Algebra, 補題
+\ref{algebra-lemma-characterize-zero-local} により結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-dimension}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。$M$ が有限 $A$-加群ならば、
+$H^i_{V(I)}(M) = 0$ が $i > \dim(\text{Supp}(M))$ に対して成り立つ。
+特に $\text{cd}(A, I) \leq \dim(A)$ である。
+\end{lemma}
+
+\begin{proof}
+まず第二の主張を証明する。$\dim(A)$ は Krull 次元を表すことを思い出そう。
+補題 \ref{local-cohomology-lemma-cd-local} により $A$ は局所環であると仮定してよい。
+$V(I) = \emptyset$ ならば結果は成り立つ。$V(I) \not = \emptyset$ ならば、
+$\dim(\Spec(A) \setminus V(I)) < \dim(A)$ である。これは閉点を取り除いているからである。
+$U = \Spec(A) \setminus V(I)$ はスペクトル空間 $\Spec(A)$ の準コンパクト
+開部分集合なので、それ自身スペクトル空間であることに注意する。
+Algebra, 補題 \ref{algebra-lemma-spec-spectral} および
+Topology, 補題 \ref{topology-lemma-spectral-sub} を参照せよ。
+したがって Cohomology, 命題
+\ref{cohomology-proposition-cohomological-dimension-spectral} により
+$H^i(U, \mathcal{F}) = 0$ が $i \geq \dim(A)$ に対して成り立つ。
+補題 \ref{local-cohomology-lemma-cd} により所望の結論が従う。Noether の場合には、読者は
+Grothendieck による Cohomology, 命題
+\ref{cohomology-proposition-vanishing-Noetherian} を用いてもよい。
+
+\medskip\noindent
+第二の主張から第一の主張を導く。$\mathfrak a$ を有限 $A$-加群 $M$ の零化イデアルとし、
+$B = A/\mathfrak a$ とおく。$\Spec(B) = \text{Supp}(M)$ であることを思い出そう。
+Algebra, 補題 \ref{algebra-lemma-support-closed} を参照せよ。
+$J = IB$ とおく。このとき $M$ は $B$-加群であり、
+$H^i_{V(I)}(M) = H^i_{V(J)}(M)$ である。Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-and-restriction} を参照せよ。
+$\text{cd}(B, J) \leq \dim(B) = \dim(\text{Supp}(M))$ が前半で示したことから
+成り立つので、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-is-one}
+$I \subset A$ を環 $A$ の有限生成イデアルとする。
+$\text{cd}(A, I) = 1$ ならば $\Spec(A) \setminus V(I)$ は空でないアフィンスキームである。
+\end{lemma}
+
+\begin{proof}
+これは 補題 \ref{local-cohomology-lemma-cd} と Cohomology of Schemes, 補題
+\ref{coherent-lemma-quasi-compact-h1-zero-covering} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-maximal}
+$(A, \mathfrak m)$ を次元 $d$ の Noether 局所環とする。このとき
+$H^d_\mathfrak m(A)$ は零でなく、$\text{cd}(A, \mathfrak m) = d$ である。
+\end{lemma}
+
+\begin{proof}
+次元の特徴付けの一つにより、$A$ の定義イデアルで $d$ 個の元で生成されるものが
+存在する。Algebra, 命題 \ref{algebra-proposition-dimension} を参照せよ。
+したがって $\text{cd}(A, \mathfrak m) \leq d$ が 補題 \ref{local-cohomology-lemma-bound-cd}
+により成り立つ。よって $H^d_\mathfrak m(A)$ が零でないこと、
+$\text{cd}(A, \mathfrak m) = d$ であること、および
+$\text{cd}(A, \mathfrak m) \geq d$ であることは互いに同値である。
+
+\medskip\noindent
+$A \to A^\wedge$ を $A$ からその完備化への写像とする。
+$A^\wedge$ は $A$ と同じ次元の Noether 局所環であり、極大イデアルは
+$\mathfrak m A^\wedge$ であることに注意する。Algebra, 補題
+\ref{algebra-lemma-completion-Noetherian-Noetherian},
+\ref{algebra-lemma-completion-complete}、
+\ref{algebra-lemma-completion-faithfully-flat} および
+More on Algebra, 補題 \ref{more-algebra-lemma-completion-dimension} を参照せよ。
+補題 \ref{local-cohomology-lemma-cd-change-rings} により、$A^\wedge$ に対して補題を示せば十分である。
+
+\medskip\noindent
+前段落により $A$ は完備局所環であると仮定してよい。このとき $A$ は
+正規化された双対化複体 $\omega_A^\bullet$ をもつ（Dualizing Complexes,
+補題 \ref{dualizing-lemma-ubiquity-dualizing}）。局所双対定理
+（Dualizing Complexes, 補題 \ref{dualizing-lemma-special-case-local-duality}
+の形）により、$H^d_\mathfrak m(A)$ は
+$\text{Ext}^{-d}(A, \omega_A^\bullet) = H^{-d}(\omega_A^\bullet)$ の Matlis 双対である。
+後者は例えば Dualizing Complexes, 補題
+\ref{dualizing-lemma-nonvanishing-generically-local} により零でない。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-bound-dim-local}
+$(A, \mathfrak m)$ を Noether 局所環とする。$I \subset A$ を真のイデアル、
+$\mathfrak p \subset A$ を素イデアルで
+$V(\mathfrak p) \cap V(I) = \{\mathfrak m\}$ を満たすものとする。このとき
+$\dim(A/\mathfrak p) \leq \text{cd}(A, I)$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-cd-change-rings} により
+$\text{cd}(A, I) \geq \text{cd}(A/\mathfrak p, I(A/\mathfrak p))$ である。
+$V(I) \cap V(\mathfrak p) = \{\mathfrak m\}$ なので
+$\text{cd}(A/\mathfrak p, I(A/\mathfrak p)) =
+\text{cd}(A/\mathfrak p, \mathfrak m/\mathfrak p)$ である。
+補題 \ref{local-cohomology-lemma-cd-maximal} により、これは $\dim(A/\mathfrak p)$ に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-blowup}
+$A$ を Noether 環、$I \subset A$ をイデアルとする。
+$b : X' \to X = \Spec(A)$ を $I$ の爆破とする。$b$ のファイバーの次元が
+$\leq d - 1$ ならば、$\text{cd}(A, I) \leq d$ である。
+\end{lemma}
+
+\begin{proof}
+$U = X \setminus V(I)$ とおく。$j : U \to X'$ を標準的な開埋め込みと書く。
+Divisors, 第 \ref{divisors-section-blowing-up} 節を参照せよ。例外因子は
+有効 Cartier 因子なので（Divisors, 補題
+\ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}）、$j$ はアフィンである。
+Divisors, 補題 \ref{divisors-lemma-complement-locally-principal-closed-subscheme}
+を参照せよ。$\mathcal{F}$ を準連接 $\mathcal{O}_U$-加群とする。このとき
+$R^pj_*\mathcal{F} = 0$ が $p > 0$ に対して成り立つ。Cohomology of Schemes,
+補題 \ref{coherent-lemma-relative-affine-vanishing} を参照せよ。一方、
+$R^qb_*(j_*\mathcal{F}) = 0$ が $q \geq d$ に対して、Limits, 補題
+\ref{limits-lemma-higher-direct-images-zero-above-dimension-fibre} により成り立つ。
+したがって Leray スペクトル系列（Cohomology, 補題
+\ref{cohomology-lemma-relative-Leray}）により
+$R^n(b \circ j)_*\mathcal{F} = 0$ が $n \geq d$ に対して成り立つ。
+ゆえに $H^n(U, \mathcal{F}) = 0$ が $n \geq d$ に対して成り立つ
+（Cohomology, 補題 \ref{cohomology-lemma-apply-Leray} による）。
+定義により、これは $\text{cd}(A, I) \leq d$ を意味する。
+\end{proof}
+
+
+
+
+
+
+
+\section{より一般の台}
+\label{local-cohomology-section-supports}
+
+\noindent
+$A$ を Noether 環、$M$ を $A$-加群とする。
+$T \subset \Spec(A)$ を特殊化で安定な部分集合とする
+（Topology, 定義 \ref{topology-definition-specialization}）。
+次のように定義する：
+$$
+H^0_T(M) = \colim_{Z \subset T} H^0_Z(M)
+$$
+ここで余極限は、閉部分集合 $Z$（空間 $\Spec(A)$ の閉部分集合であって
+$T$\footnote{$T$ は特殊化で安定なので、
+$T = \bigcup_{Z \subset T} Z$ である。
+Topology, 補題 \ref{topology-lemma-stable-specialization} を参照せよ。}
+に含まれるもの）からなる有向半順序集合にわたって取る。
+言い換えると、元 $m$（加群 $M$ の元）が $H^0_T(M) \subset M$ に属することと、
+その台 $V(\text{Ann}_R(m))$（元 $m$ の台）が
+$T$ に含まれることは同値である。
+
+\begin{lemma}
+\label{local-cohomology-lemma-support}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$A$-加群 $M$ について、次の条件は同値である。
+\begin{enumerate}
+\item $H^0_T(M) = M$ である。
+\item $\text{Supp}(M) \subset T$ である。
+\end{enumerate}
+このような $A$-加群の圏は、$A$-加群の圏の Serre 部分圏であり、
+直和を取る操作で閉じている。
+\end{lemma}
+
+\begin{proof}
+この同値性は、$M$ の元の台が $M$ の台に含まれ、
+逆に $M$ の台がその各元の台の和集合に等しいことによる。
+これらの加群の圏は Serre 部分圏
+（Homology, 定義 \ref{homology-definition-serre-subcategory}）を
+$\text{Mod}_A$ の中でなす。これは
+Algebra, 補題 \ref{algebra-lemma-support-quotient} による。
+直和についての主張の証明は省略する。
+\end{proof}
+
+\noindent
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$\text{Mod}_{A, T} \subset \text{Mod}_A$ により
+補題 \ref{local-cohomology-lemma-support} の Serre 部分圏を表す。
+$D_T(A) \subset D(A)$ は、$D(A)$ の狭義充満かつ飽和した三角部分圏
+（Derived Categories, 補題 \ref{derived-lemma-cohomology-in-serre-subcategory}）
+であって、$A$-加群の複体のうち、そのコホモロジー加群が
+$\text{Mod}_{A, T}$ に属するものからなる圏を表す。このとき関手
+$$
+D(\text{Mod}_{A, T}) \to D_T(A) \to D(A)
+$$
+を得る。Derived Categories, 第 \ref{derived-section-triangulated-sub} 節
+の議論を参照せよ。
+$RH^0_T : D(A) \to D(\text{Mod}_{A, T})$ により
+$H^0_T$ の右導来拡張を表す。また
+$$
+R\Gamma_T : D^+(A) \to D^+_T(A),
+$$
+により、$RH^0_T : D^+(A) \to D^+(\text{Mod}_{A, T})$ と
+$D^+(\text{Mod}_{A, T}) \to D^+_T(A)$ の合成を表す。$A$ の次元が
+有限である場合\footnote{$\dim(A) = \infty$ の場合、この構成は
+非有界複体に対して予期しない性質をもつことがある。}には、
+$$
+R\Gamma_T : D(A) \to D_T(A)
+$$
+により、$RH^0_T$ と
+$D(\text{Mod}_{A, T}) \to D_T(A)$ の合成を表す。
+
+\begin{lemma}
+\label{local-cohomology-lemma-adjoint}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+関手 $RH^0_T$ は、関手
+$D(\text{Mod}_{A, T}) \to D(A)$ の右随伴である。
+\end{lemma}
+
+\begin{proof}
+関手 $H^0_T(-)$ が包含関手
+$\text{Mod}_{A, T} \to \text{Mod}_A$ の右随伴であることから従う。
+Derived Categories, 補題 \ref{derived-lemma-derived-adjoint-functors} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-adjoint-ext}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+任意の対象 $K$（圏 $D(A)$ の対象）に対して、次が成り立つ。
+$$
+H^i(RH^0_T(K)) = \colim_{Z \subset T\text{ 閉集合}} H^i_Z(K)
+$$
+\end{lemma}
+
+\begin{proof}
+$J^\bullet$ を $K$ を表す K-入射的複体とする。
+定義により $RH^0_T$ は複体
+$$
+H^0_T(J^\bullet) = \colim H^0_Z(J^\bullet)
+$$
+で表される。等式は $H^0_T$ の定義から従う。
+フィルター余極限は完全なので、この複体の次数 $i$ のコホモロジーは
+$\colim H^i(H^0_Z(J^\bullet)) = \colim H^i_Z(K)$
+であり、所望の結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-equal-plus}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+関手 $D^+(\text{Mod}_{A, T}) \to D^+_T(A)$ は同値である。
+\end{lemma}
+
+\begin{proof}
+$M$ を $\text{Mod}_{A, T}$ の対象とする。埋め込み
+$M \to J$ を取り、その行き先を入射的 $A$-加群とする。
+Dualizing Complexes, 命題
+\ref{dualizing-proposition-structure-injectives-noetherian}
+により、加群 $J$ は剰余体の入射包絡の直和である。
+$E$ を素イデアル $\mathfrak p$ の剰余体の入射包絡とする。
+$E$ は $\mathfrak p$-冪捩れなので、
+$H^0_T(E) = 0$ が $\mathfrak p \not \in T$ の場合に成り立ち、
+$H^0_T(E) = E$ が $\mathfrak p \in T$ の場合に成り立つ。
+したがって $H^0_T(J)$ は入射包絡の直和として入射的であり
+（上の命題による）、埋め込み $M \to H^0_T(J)$ を得る。
+よって任意の対象 $M$（圏 $\text{Mod}_{A, T}$ の対象）は入射分解
+$M \to J^\bullet$ であって、各 $J^n$ も $\text{Mod}_{A, T}$ に属するものをもつ。
+したがって $RH^0_T(M) = M$ である。
+
+\medskip\noindent
+次に $K \in D_T^+(A)$ と仮定する。このときスペクトル系列
+$$
+R^qH^0_T(H^p(K)) \Rightarrow R^{p + q}H^0_T(K)
+$$
+(Derived Categories, 補題 \ref{derived-lemma-two-ss-complex-functor})
+は収束し、上で見たように $q = 0$ の項だけが零でない。
+したがって $RH^0_T(K) \to K$ は同型である。
+よって関手 $D^+(\text{Mod}_{A, T}) \to D^+_T(A)$ は同値であり、
+その擬逆は $RH^0_T$ で与えられる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-equal-full}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$\dim(A) < \infty$ ならば、関手
+$D(\text{Mod}_{A, T}) \to D_T(A)$ は同値である。
+\end{lemma}
+
+\begin{proof}
+$\dim(A) = d$ とおく。このとき $H^i_Z(M) = 0$ が $i > d$ に対して、
+任意の閉部分集合 $Z$（空間 $\Spec(A)$ の閉部分集合）について成り立つ。
+補題 \ref{local-cohomology-lemma-cd-dimension} を参照せよ。
+補題 \ref{local-cohomology-lemma-adjoint-ext} により、$H^0_T$ のコホモロジー次元は有界である。
+
+\medskip\noindent
+$K \in D_T(A)$ とする。$RH^0_T(K) \to K$ が同型であることを示す。
+$K$ が下に有界の場合は既に分かっている。
+補題 \ref{local-cohomology-lemma-equal-plus} を参照せよ。一方、$H^0_T$ のコホモロジー次元は
+有界なので、次数 $i$ のコホモロジー（複体
+$RH_T^0(K)$ のもの）は $\tau_{\geq -d + i}K$ のみに依存し、結論を得る。
+したがって $D(\text{Mod}_{A, T}) \to D_T(A)$ は同値であり、
+その擬逆は $RH^0_T$ である。
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-upshot}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+以上の議論の結論は、
+$R\Gamma_T : D^+(A) \to D_T^+(A)$ が包含関手
+$D_T^+(A) \to D^+(A)$ の右随伴である、ということである。
+$\dim(A) < \infty$ ならば、
+$R\Gamma_T : D(A) \to D_T(A)$ は包含関手
+$D_T(A) \to D(A)$ の右随伴である。
+いずれの場合にも次が成り立つ：
+$$
+H^i_T(K) = H^i(R\Gamma_T(K)) = R^iH^0_T(K) =
+\colim_{Z \subset T\text{ 閉集合}} H^i_Z(K)
+$$
+これは 補題 \ref{local-cohomology-lemma-adjoint}, \ref{local-cohomology-lemma-adjoint-ext},
+\ref{local-cohomology-lemma-equal-plus} および \ref{local-cohomology-lemma-equal-full} を組み合わせれば従う。
+\end{remark}
+
+\begin{lemma}
+\label{local-cohomology-lemma-torsion-change-rings}
+$A \to B$ を Noether 環の平坦準同型とする。
+$T \subset \Spec(A)$ を特殊化で安定な部分集合とし、
+$T' \subset \Spec(B)$ を $T$ の逆像とする。
+このとき標準的な写像
+$$
+R\Gamma_T(K) \otimes_A^\mathbf{L} B
+\longrightarrow
+R\Gamma_{T'}(K \otimes_A^\mathbf{L} B)
+$$
+は $K \in D^+(A)$ に対して同型である。$A$ と $B$ の次元が有限ならば、
+これは $K \in D(A)$ に対しても成り立つ。
+\end{lemma}
+
+\begin{proof}
+写像 $R\Gamma_T(K) \to K$ から写像
+$R\Gamma_T(K) \otimes_A^\mathbf{L} B \to K \otimes_A^\mathbf{L} B$.
+を得る。$R\Gamma_T(K) \otimes_A^\mathbf{L} B$ のコホモロジー加群は
+$T'$ に台をもつので、補題の射を得る。
+この射は、$T$ が $\Spec(A)$ の閉部分集合である場合には
+Dualizing Complexes, 補題 \ref{dualizing-lemma-torsion-change-rings} により同型である。
+$H^i_T(K)$ は $H^i_Z(K)$ の余極限であることを思い出そう。
+ここで $Z$ は $T$ の閉部分集合からなる有向集合を動く。
+補題 \ref{local-cohomology-lemma-adjoint-ext} を参照せよ。これに対応して
+$H^i_{T'}(K \otimes_A^\mathbf{L} B) =
+\colim H^i_{Z'}(K \otimes_A^\mathbf{L} B)$ である。ここで $Z'$ は
+$Z$ の逆像である。したがって、$\otimes_A B$ がフィルター余極限と可換であり、
+高次 Tor が消滅することから結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-cohomology-ss}
+$A$ を環とし、$T, T' \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$K \in D^+(A)$ に対してスペクトル系列
+$$
+E_2^{p, q} = H^p_T(H^p_{T'}(K)) \Rightarrow H^{p + q}_{T \cap T'}(K)
+$$
+が存在する。これは Derived Categories, 補題
+\ref{derived-lemma-grothendieck-spectral-sequence} にある形のものである。
+\end{lemma}
+
+\begin{proof}
+$E$ を $D_{T \cap T'}(A)$ の対象とする。このとき
+$$
+\Hom(E, R\Gamma_T(R\Gamma_{T'}(K))) =
+\Hom(E, R\Gamma_{T'}(K)) =
+\Hom(E, K)
+$$
+である。最初の等式は $R\Gamma_T$ の随伴性により、
+二つ目は $R\Gamma_{T'}$ の随伴性による。
+一方、$J^\bullet$ が下に有界な入射的対象の複体であって
+$K$ を表すならば、$H^0_{T'}(J^\bullet)$ は
+入射的 $A$-加群の複体であり、$R\Gamma_{T'}(K)$ を表す。
+したがって $H^0_T(H^0_{T'}(J^\bullet))$ は
+$R\Gamma_T(R\Gamma_{T'}(K))$ を表す複体である。
+よって $R\Gamma_T(R\Gamma_{T'}(K))$ は
+$D^+_{T \cap T'}(A)$ の対象である。この二つの事実を組み合わせると、
+$R\Gamma_{T \cap T'} = R\Gamma_T \circ R\Gamma_{T'}$ を得る。
+主張で引用した補題により、これからスペクトル系列が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-torsion-tensor-product}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$A$ の次元は有限であると仮定する。このとき
+$$
+R\Gamma_T(K) = R\Gamma_T(A) \otimes_A^\mathbf{L} K
+$$
+が $K \in D(A)$ に対して成り立つ。$K, L \in D(A)$ に対しては
+$$
+R\Gamma_T(K \otimes_A^\mathbf{L} L) =
+K \otimes_A^\mathbf{L} R\Gamma_T(L) =
+R\Gamma_T(K) \otimes_A^\mathbf{L} L =
+R\Gamma_T(K) \otimes_A^\mathbf{L} R\Gamma_T(L)
+$$
+が成り立つ。$K$ または $L$ が $D_T(A)$ に属すれば、$K \otimes_A^\mathbf{L} L$ もそうである。
+\end{lemma}
+
+\begin{proof}
+構成により $R\Gamma_T(A)$ は、複体 $J^\bullet$ であって
+$\text{Mod}_{A, T}$ に属するものにより表せる。したがって $K$ を
+K-平坦複体 $K^\bullet$ で表すと、$R\Gamma_T(A) \otimes_A^\mathbf{L} K$ は
+複体 $\text{Tot}(J^\bullet \otimes_A K^\bullet)$（圏
+$\text{Mod}_{A, T}$ 内の複体）で表される。
+写像 $R\Gamma_T(A) \to A$ を用いて、写像
+$R\Gamma_T(A) \otimes_A^\mathbf{L} K\to K$ を得る。
+したがって $R\Gamma_T$ の随伴性により、標準的な写像
+$$
+R\Gamma_T(A) \otimes_A^\mathbf{L} K \longrightarrow R\Gamma_T(K)
+$$
+を得て、先ほど構成した写像はこれを経由する。$R\Gamma_T$ が
+$D(A)$ 内の直和と可換であることに注意する。これは例えば
+補題 \ref{local-cohomology-lemma-adjoint-ext}、有向余極限が直和と可換であること、
+および通常の局所コホモロジーが直和と可換であること
+（例えば Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-adjoint}）による。
+したがって More on Algebra, 注意 \ref{more-algebra-remark-P-resolution}
+により、この写像が $K = A[k]$（ただし $k \in \mathbf{Z}$）
+に対して同型であることを確かめれば十分であり、これは明らかである。
+
+\medskip\noindent
+最後の主張は、導来テンソル積の推移性により、今示した結果から従う。
+\end{proof}
+
+
+
+
+
+\section{局所コホモロジーのフィルトレーション}
+\label{local-cohomology-section-filter-local-cohomology}
+
+\noindent
+補題 \ref{local-cohomology-lemma-local-cohomology-ss} のスペクトル系列に関連する
+いくつかの手法を述べる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-filter-local-cohomology}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$T' \subset T$ を $T$ の極小でない素イデアルの集合とする。
+このとき $T'$ は $\Spec(A)$ の特殊化で安定な部分集合であり、
+任意の $A$-加群 $M$ に対して完全列
+$$
+0 \to
+\colim_{Z, f} H^1_f(H^{i - 1}_Z(M)) \to
+H^i_{T'}(M) \to H^i_T(M) \to
+\bigoplus\nolimits_{\mathfrak p \in T \setminus T'}
+H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)
+$$
+が存在する。ここで余極限は、閉部分集合 $Z \subset T$
+および元 $f \in A$ であって $V(f) \cap Z \subset T'$ を満たすものにわたって取る。
+\end{lemma}
+
+\begin{proof}
+各 $Z$ と $f$ に対して、
+Dualizing Complexes, 補題 \ref{dualizing-lemma-local-cohomology-ss}
+のスペクトル系列は退化し、短完全列
+$$
+0 \to H^1_f(H^{i - 1}_Z(M)) \to
+H^i_{Z \cap V(f)}(M) \to H^0_f(H^i_Z(M)) \to 0
+$$
+を与える。以下ではこの事実を断りなく用いる。
+
+\medskip\noindent
+$\xi \in H^i_T(M)$ の直和への像が零であるとする。
+まず $\xi$ を、ある $\xi' \in H^i_Z(M)$ の像として表す。
+ここで $Z \subset T$ はある閉部分集合である。補題 \ref{local-cohomology-lemma-adjoint-ext} を参照せよ。
+このとき $\xi'$ は $H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)$ において零に写る。
+これは任意の $\mathfrak p \in Z$、$\mathfrak p \not \in T'$ に対して成り立つ。
+このような素イデアルは有限個しかないので、
+$f \in A$ をいずれの素イデアルにも属さないように選び、
+しかも $f$ が $\xi'$ を零化するようにできる。このとき $\xi'$ は
+ある $\xi'' \in H^i_{Z'}(M)$ の像である。
+ここで $Z' = Z \cap V(f)$ とおく。$f$ の選び方により
+$Z' \subset T'$ であり、最後から二番目の項での完全性を得る。
+
+\medskip\noindent
+$\xi \in H^i_{T'}(M)$ が $H^i_T(M)$ において零に写るとする。
+閉部分集合 $Z' \subset Z$ を、$Z' \subset T'$
+かつ $Z \subset T$ であり、$\xi$ が $\xi' \in H^i_{Z'}(M)$ から来て、
+その元が $H^i_Z(M)$ において零に写るように選ぶ。このとき $f \in A$ で
+$V(f) \cap Z = Z'$ を満たすものが存在し、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-zero}
+$A$ を有限次元の Noether 環とする。
+$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$\{M_n\}_{n \geq 0}$ を $A$-加群の逆系とし、
+$i \geq 0$ を整数とする。任意の $m$ に対して
+整数 $m'(m) \geq m$ が存在し、すべての
+$\mathfrak p \in T$ について誘導される写像
+$$
+H^i_{\mathfrak p A_\mathfrak p}(M_{k, \mathfrak p})
+\longrightarrow
+H^i_{\mathfrak p A_\mathfrak p}(M_{m, \mathfrak p})
+$$
+が $k \geq m'(m)$ のとき零であると仮定する。$m'' : \mathbf{N} \to \mathbf{N}$
+を、$2^{\dim(T)}$ 回の自己合成で $m'$ から得られる写像とする。このとき写像
+$H^i_T(M_k) \to H^i_T(M_m)$ は、すべての $k \geq m''(m)$ に対して零である。
+\end{lemma}
+
+\begin{proof}
+まず一般的な注意を述べる。完全列
+$$
+(A_n) \to (B_n) \to (C_n)
+$$
+がアーベル群の逆系の間に与えられているとする。任意の
+$m$ に対して整数 $m'(m) \geq m$ が存在し、
+$$
+A_k \to A_m
+\quad\text{および}\quad
+C_k \to C_m
+$$
+が $k \geq m'(m)$ のとき零であると仮定する。このとき $k \geq m'(m'(m))$
+ならば、写像 $B_k \to B_m$ は零である。
+
+\medskip\noindent
+補題を $\dim(T)$ に関する帰納法で証明する。この次元は
+$\dim(A)$ が有限なので有限である。$T' \subset T$ を
+$T$ の極小でない素イデアルの集合とする。このとき $T'$ は
+$\Spec(A)$ の特殊化で安定な部分集合であり、
+補題の仮定は $T'$ に対しても成り立つ。
+$\dim(T') < \dim(T)$ なので、$T'$ に対して補題が成り立つ。
+任意の $A$-加群 $M$ に対し、完全列
+$$
+H^i_{T'}(M) \to H^i_T(M) \to
+\bigoplus\nolimits_{\mathfrak p \in T \setminus T'}
+H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)
+$$
+が補題 \ref{local-cohomology-lemma-filter-local-cohomology} により存在する。
+したがって証明冒頭の注意により結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-essential-image}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$\{M_n\}_{n \geq 0}$ を $A$-加群の逆系とし、$i \geq 0$ を整数とする。
+$A$ の次元は有限であり、任意の $m$ に対して整数 $m'(m) \geq m$ が存在し、
+すべての $\mathfrak p \in T$ について次が成り立つと仮定する。
+\begin{enumerate}
+\item $H^{i - 1}_{\mathfrak p A_\mathfrak p}(M_{k, \mathfrak p})
+\to H^{i - 1}_{\mathfrak p A_\mathfrak p}(M_{m, \mathfrak p})$
+は $k \geq m'(m)$ のとき零である。
+\item $ H^i_{\mathfrak p A_\mathfrak p}(M_{k, \mathfrak p}) \to
+H^i_{\mathfrak p A_\mathfrak p}(M_{m, \mathfrak p})$
+の像 $G(\mathfrak p, m)$ は $k \geq m'(m)$ に依存せず、さらに
+$G(\mathfrak p, m)$ から
+$H^i_{\mathfrak p A_\mathfrak p}(M_{0, \mathfrak p})$ への写像は単射である。
+\end{enumerate}
+このとき整数 $m_0$ が存在し、任意の $m \geq m_0$ に対して
+整数 $m''(m) \geq m$ が存在して、
+$k \geq m''(m)$ ならば $H^i_T(M_k) \to H^i_T(M_m)$ の像から
+$H^i_T(M_{m_0})$ への写像は単射である。
+\end{lemma}
+
+\begin{proof}
+まず一般的な注意を述べる。完全列
+$$
+(A_n) \to (B_n) \to (C_n) \to (D_n)
+$$
+がアーベル群の逆系の間に与えられているとする。
+整数 $m_0$ が存在し、任意の $m \geq m_0$ に対して
+整数 $m'(m) \geq m$ が存在して、写像
+$$
+\Im(B_k \to B_m) \longrightarrow B_{m_0}
+\quad\text{および}\quad
+\Im(D_k \to D_m) \longrightarrow D_{m_0}
+$$
+が $k \geq m'(m)$ のとき単射であり、$A_k \to A_m$ が
+$k \geq m'(m)$ のとき零であると仮定する。このとき $m \geq m'(m_0)$ かつ $k \geq m'(m'(m))$
+ならば、写像
+$$
+\Im(C_k \to C_m) \to C_{m'(m_0)}
+$$
+は単射である。実際、$c_0 \in C_m$ を $c_3 \in C_k$ の像とし、
+$c_0$ が $C_{m'(m_0)}$ において零に写るとする。次の図式を考える：
+$$
+C_k \to C_{m'(m'(m))} \to C_{m'(m)} \to C_m \to C_{m'(m_0)},\quad
+c_3 \mapsto c_2 \mapsto c_1 \mapsto c_0 \mapsto 0
+$$
+$c_0 = 0$ を示せばよい。
+像 $d_3$（元 $c_3$ の像）は $C_{m_0}$ において零に写るので、
+像 $d_1 \in D_{m'(m)}$ は零である。
+したがって $b_1 \in B_{m'(m)}$ を、その像が
+$c_1$ となるように選べる。$c_3$ は
+$C_{m'(m_0)}$ において零に写るので、元 $a_{-1} \in A_{m'(m_0)}$ で、
+像 $b_{-1} \in B_{m'(m_0)}$（元 $b_1$ の像）に写るものが存在する。
+$a_{-1}$ は $A_{m_0}$ において零に写るので、
+$b_1$ は $B_{m_0}$ において零に写る。したがって像 $b_0 \in B_m$
+は零であり、もちろんこれから所望の $c_0 = 0$ が従う。
+
+\medskip\noindent
+補題を $\dim(T)$ に関する帰納法で証明する。この次元は
+$\dim(A)$ が有限なので有限である。$T' \subset T$ を
+$T$ の極小でない素イデアルの集合とする。このとき $T'$ は
+$\Spec(A)$ の特殊化で安定な部分集合であり、補題の仮定は
+$T'$ に対しても成り立つ。$\dim(T') < \dim(T)$ なので、
+$T'$ に対して補題が成り立つ。任意の $A$-加群 $M$ に対して完全列
+$$
+0 \to \colim_{Z, f} H^1_f(H^{i - 1}_Z(M)) \to
+H^i_{T'}(M) \to H^i_T(M) \to
+\bigoplus\nolimits_{\mathfrak p \in T \setminus T'}
+H^i_{\mathfrak p A_\mathfrak p}(M_\mathfrak p)
+$$
+が補題 \ref{local-cohomology-lemma-filter-local-cohomology} により存在する。
+したがって証明冒頭の注意と、群の系
+$$
+\left\{\colim_{Z, f} H^1_f(H^{i - 1}_Z(M_n))\right\}_{n \geq 0}
+$$
+が補題 \ref{local-cohomology-lemma-zero} により pro-零であることから結論を得る。
+ここでは、その補題の関数 $m''(m)$（加群 $H^{i - 1}_Z(M)$ に対するもの）が
+$Z$ に依存しないことを用いている。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{局所コホモロジーの有限性 I}
+\label{local-cohomology-section-finiteness}
+
+\noindent
+局所コホモロジー加群の有限性に関する Faltings の方法に従う。
+\cite{Faltings-annulators} および \cite{Faltings-finiteness} を参照せよ。
+次の補題は、局所コホモロジー加群が有限加群であることを示すには、
+適切な零化イデアルをもつことを示せば十分であることを述べる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}
+\begin{reference}
+\cite[補題 3]{Faltings-annulators}
+\end{reference}
+$A$ を Noether 環、$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$M$ を有限 $A$-加群とし、$n \geq 0$ とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $H^i_T(M)$ は $i \leq n$ に対して有限である。
+\item イデアル $J \subset A$ で $V(J) \subset T$ を満たすものが存在し、
+$J$ は $H^i_T(M)$ を $i \leq n$ に対して零化する。
+\end{enumerate}
+もし $T = V(I) = Z$ があるイデアル $I \subset A$ に対して成り立つならば、
+これらはさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(3)] ある $e \geq 0$ が存在し、$I^e$ は
+$H^i_Z(M)$ を $i \leq n$ に対して零化する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性を $n$ に関する帰納法で証明する。
+$n = 0$ のとき $H^0_T(M) \subset M$ は有限なので、(1) が成り立つ。
+$H^0_T(M) = \colim H^0_{V(J)}(M)$ であり、ここで $J$ は (2) のようなものを動くので、
+(2) も成り立つ。以下、$n > 0$ と仮定する。
+
+\medskip\noindent
+(1) が成り立つと仮定する。$H^i_J(M) = H^i_{V(J)}(M)$ であることを思い出そう。
+Dualizing Complexes, 補題 \ref{dualizing-lemma-local-cohomology-noetherian} を参照せよ。
+したがって $H^i_T(M) = \colim H^i_J(M)$ である。ここで余極限はイデアル
+$J \subset A$ で $V(J) \subset T$ を満たすものにわたって取る。
+補題 \ref{local-cohomology-lemma-adjoint-ext} を参照せよ。$H^i_T(M)$ は有限生成であり、
+これは $i \leq n$ に対して成り立つので、(2) のような $J \subset A$ を選び、
+$H^i_J(M) \to H^i_T(M)$ が $i \leq n$ に対して全射となるようにできる。
+したがって有限個の生成元はいずれも $J$-冪捩れ元であり、
+$J$ をその適当な冪に置き換えると (2) が成り立つ。
+
+\medskip\noindent
+(2) のような $J$ が存在すると仮定する。$N = H^0_T(M)$ および $M' = M/N$ とおく。
+$R\Gamma_T$ の構成により、
+$H^i_T(N) = 0$ が $i > 0$ に対して成り立ち、$H^0_T(N) = N$ である。
+注意 \ref{local-cohomology-remark-upshot} を参照せよ。したがって
+$H^0_T(M') = 0$ であり、$H^i_T(M') = H^i_T(M)$ が $i > 0$ に対して成り立つ。
+ゆえに $M$ を $M'$ に置き換えてよい。
+したがって $H^0_T(M) = 0$ と仮定してよい。
+これは、$M$ の随伴素イデアルからなる有限集合が
+$T$ と交わらないことを意味する。素イデアル回避補題（Algebra, 補題 \ref{algebra-lemma-silly}）
+により、$f \in J$ を $M$ のいずれの随伴素イデアルにも属さないように選べる。
+このとき短完全列
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+に付随する局所コホモロジーの長完全列は、短完全列
+$$
+0 \to H^i_T(M) \to H^i_T(M/fM) \to H^{i + 1}_T(M) \to 0
+$$
+に分かれる。ただし $i < n$ である。したがって $J^2$ は $H^i_T(M/fM)$ を
+$i < n$ に対して零化する。帰納法の仮定により、$H^i_T(M/fM)$ は
+$i < n$ に対して有限である。短完全列をもう一度用いると、
+$H^{i + 1}_T(M)$ が $i < n$ に対して有限であることを得る。これが所望の結論である。
+
+\medskip\noindent
+$T = V(I)$ の場合の (2) と (3) の同値性の証明は省略する。
+\end{proof}
+
+\noindent
+次の Faltings の結果により、局所コホモロジーの有限性を
+局所環の段階で証明することができる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-local-cohomology-locally}
+\begin{reference}
+これは \cite[Satz 1]{Faltings-finiteness} の特殊な場合である。
+\end{reference}
+$A$ を Noether 環、$I \subset A$ をイデアル、$M$ を有限
+$A$-加群、$n \geq 0$ を整数とする。$Z = V(I)$ とおく。
+次の条件は同値である。
+\begin{enumerate}
+\item 加群 $H^i_Z(M)$ は $i \leq n$ に対して有限である。
+\item すべての $\mathfrak p \in \Spec(A)$ に対して、加群
+$H^i_Z(M)_\mathfrak p$（$i \leq n$）は有限 $A_\mathfrak p$-加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) は直ちに従う。逆を
+$n$ に関する帰納法で証明する。$n = 0$ の場合には (1) と (2) が
+常に成り立つので明らかである。
+
+\medskip\noindent
+$n > 0$ とし、(2) が成り立つと仮定する。$N = H^0_Z(M)$ および $M' = M/N$ とおく。
+Dualizing Complexes, 補題 \ref{dualizing-lemma-divide-by-torsion} により
+$M$ を $M'$ に置き換えてよい。
+したがって $H^0_Z(M) = 0$ と仮定してよい。
+これは $\text{depth}_I(M) > 0$ を意味する
+（Dualizing Complexes, 補題 \ref{dualizing-lemma-depth}）。
+$f \in I$ を $M$ 上の非零因子として選び、短完全列
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+を考える。これから長完全列
+$$
+0 \to H^0_Z(M/fM) \to H^1_Z(M) \to H^1_Z(M) \to H^1_Z(M/fM) \to
+H^2_Z(M) \to \ldots
+$$
+を得て、局所化後にも同様の列を得る。したがって仮定 (2) により、
+加群 $H^i_Z(M/fM)_\mathfrak p$ は $i < n$ に対して有限である。よって
+帰納法の仮定により $H^i_Z(M/fM)$ は $i < n$ に対して有限である。
+
+\medskip\noindent
+$\mathfrak p$ を $A$ の素イデアルであって、
+$H^i_Z(M)$ の随伴素イデアルとなるものとする。ここで $i \leq n$ とする。
+$\mathfrak p$ は元 $x \in H^i_Z(M)$ の零化イデアルであるとする。
+このとき $\mathfrak p \in Z$ なので、
+$f \in \mathfrak p$ である。したがって $fx = 0$ であり、$x$ は
+$H^{i - 1}_Z(M/fM)$ のある元から、上の長完全列の境界写像 $\delta$ により得られる。
+ゆえに $\mathfrak p$ は有限加群 $\Im(\delta)$ の随伴素イデアルである。
+したがって $\text{Ass}(H^i_Z(M))$ は $i \leq n$ に対して有限である。
+Algebra, 補題 \ref{algebra-lemma-finite-ass} を参照せよ。
+
+\medskip\noindent
+次を思い出そう：
+$$
+H^i_Z(M) \subset
+\prod\nolimits_{\mathfrak p \in \text{Ass}(H^i_Z(M))}
+H^i_Z(M)_\mathfrak p
+$$
+これは Algebra, 補題 \ref{algebra-lemma-zero-at-ass-zero} による。
+仮定により右辺の加群は有限かつ $I$-冪捩れなので、
+整数 $e_{\mathfrak p, i} \geq 0$（$i \leq n$、
+$\mathfrak p \in \text{Ass}(H^i_Z(M))$）を選び、
+$I^{e_{\mathfrak p, i}}$ が $H^i_Z(M)_\mathfrak p$ を零化するようにできる。
+したがって $I^e$（ただし $e = \max\{e_{\mathfrak p, i}\}$）は $H^i_Z(M)$ を
+$i \leq n$ に対して零化する。
+補題 \ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator}
+により、$H^i_Z(M)$ は $i \leq n$ に対して有限である。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilate-local-cohomology}
+$A$ を環とし、$J \subset I \subset A$ を有限生成イデアルとする。
+$i \geq 0$ を整数とし、$Z = V(I)$ とおく。
+$H^i_Z(A)$ が $J^n$ によって、ある $n$ に対して零化されるならば、
+$H^i_Z(M)$ は $J^m$ によって、ある $m = m(M)$ に対して零化される。
+これは任意の有限表示 $A$-加群 $M$ であって、
+$M_f$ が有限局所自由 $A_f$-加群であることがすべての $f \in I$ に対して成り立つものについて成り立つ。
+\end{lemma}
+
+\begin{proof}
+零化イデアル $\mathfrak a$（加群 $H^i_Z(M)$ の零化イデアル）を考える。
+$\mathfrak p \subset A$ を $\mathfrak p \not \in Z$ となる素イデアルとする。
+仮定により $f \in I$、$f \not \in \mathfrak p$
+および同型 $\varphi : A_f^{\oplus r} \to M_f$ が存在し、
+これは $A_f$-加群の同型である。分母を払うと
+（さらに $M$ が有限表示であることを用いると）、写像
+$$
+a : A^{\oplus r} \longrightarrow M
+\quad\text{および}\quad
+b : M \longrightarrow A^{\oplus r}
+$$
+であって、$a_f = f^N \varphi$ および $b_f = f^N \varphi^{-1}$ がある $N$ に対して成り立つものを得る。
+さらに $a \circ b$ と $b \circ a$ は
+$f^{2N}$ 倍写像に等しいと仮定してよい。したがって $H^i_Z(M)$ は
+$f^{2N}J^n$ により零化される。すなわち $f^{2N}J^n \subset \mathfrak a$ である。
+
+\medskip\noindent
+$U = \Spec(A) \setminus Z$ は準コンパクトなので、有限個の元
+$f_1, \ldots, f_t$ と整数 $N_1, \ldots, N_t$ を選び、$U = \bigcup D(f_j)$ かつ
+$f_j^{2N_j}J^n \subset \mathfrak a$ とできる。このとき $V(I) = V(f_1, \ldots, f_t)$ であり、
+$I$ は有限生成なので、
+$I^M \subset (f_1, \ldots, f_t)$ がある $M$ に対して成り立つ。
+以上から $J^m \subset \mathfrak a$ が
+$m \gg 0$ に対して成り立つ。例えば $m = M (2N_1 + \ldots + 2N_t) n$ と取ればよい。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-finiteness-for-finite-locally-free}
+$A$ を Noether 環、$I \subset A$ をイデアルとし、$Z = V(I)$ とおく。
+$n \geq 0$ を整数とする。$H^i_Z(A)$ が $0 \leq i \leq n$ に対して有限ならば、
+同じことが $H^i_Z(M)$（$0 \leq i \leq n$）についても成り立つ。
+ここで任意の有限 $A$-加群 $M$ であって、$M_f$ が有限局所自由
+$A_f$-加群であることがすべての $f \in I$ に対して成り立つものを考える。
+\end{lemma}
+
+\begin{proof}
+$H^i_Z(A)$ が $0 \leq i \leq n$ に対して有限であるという仮定から、
+ある $e \geq 0$ が存在し、$I^e$ が
+$H^i_Z(A)$ を $0 \leq i \leq n$ に対して零化することが従う。
+補題 \ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator} を参照せよ。
+すると補題 \ref{local-cohomology-lemma-annihilate-local-cohomology} により、
+$H^i_Z(M)$（$0 \leq i \leq n$）は
+$I^m$ によって、ある $m = m(M, i)$ に対して零化される。同じ $m$ を
+すべての $0 \leq i \leq n$ に対して取ってよい。したがって
+補題 \ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator} により、
+$H^i_Z(M)$ は $0 \leq i \leq n$ に対して有限であり、
+所望の結論を得る。
+\end{proof}
+
+
+
+
+
+\section{順像の有限性 I}
+\label{local-cohomology-section-finiteness-pushforward}
+
+\noindent
+本節では有限性定理の最も易しい非自明な場合を論じる。
+すなわち、第一局所コホモロジーの有限性、あるいは同値なこととして
+$j_*\mathcal{F}$ の有限性を扱う。ここで $j : U \to X$ は開浸入、
+$X$ は局所 Noether、$\mathcal{F}$ は $U$ 上の連接層である。
+Koll\'ar の方法（\cite{Kollar-variants} および
+\cite{Kollar-local-global-hulls}）に従い、
+必要十分条件を得る。命題 \ref{local-cohomology-proposition-kollar} を参照せよ。
+高次順像または高次局所コホモロジー群に関心のある読者は、
+第 \ref{local-cohomology-section-finiteness-pushforward-II} 節または
+第 \ref{local-cohomology-section-finiteness-II} 節へ進むとよい
+（これらは本節の残りとは独立に展開される）。
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points}
+$X$ を局所 Noether 概形とし、$j : U \to X$ を、
+補集合が $Z$ である開部分概形の包含とする。$x \in U$ に対して、
+$i_x : W_x \to U$ を、生成点が $x$ である整閉部分概形とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_U$-加群とする。
+次の条件は同値である。
+\begin{enumerate}
+\item すべての $x \in \text{Ass}(\mathcal{F})$ に対して、
+$\mathcal{O}_X$-加群 $j_*i_{x, *}\mathcal{O}_{W_x}$ は連接である。
+\item $j_*\mathcal{F}$ は連接である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず (1) が (2) を含意することを示す。(1) を仮定する。
+主張は $X$ 上局所的なので、$X$ はアフィンであると仮定してよい。
+このとき $U$ は準コンパクトであり、したがって
+$\text{Ass}(\mathcal{F})$ は有限である
+（Divisors, 補題 \ref{divisors-lemma-finite-ass}）。
+よって随伴点の個数に関する帰納法を用いてよい。$x \in U$ を
+$\mathcal{F}$ の台の既約成分の生成点とする。
+Divisors, 補題 \ref{divisors-lemma-finite-ass} により
+$x \in \text{Ass}(\mathcal{F})$ である。$x$ の選び方により、
+$\dim(\mathcal{F}_x) = 0$ である。ここで次元は
+$\mathcal{O}_{X, x}$-加群としての次元である。
+したがって $\mathcal{F}_x$ は $\mathcal{O}_{X, x}$-加群として有限長である
+（Algebra, 補題 \ref{algebra-lemma-support-point}）。
+そこでこの長さに関する帰納法を用いる。
+
+\medskip\noindent
+$\mathcal{G} = j_*i_{x, *}\mathcal{O}_{W_x}$ とおく。
+これは仮定により連接 $\mathcal{O}_X$-加群である。
+$\mathcal{G}_x = \kappa(x)$ が成り立つ。非零写像
+$\varphi_x : \mathcal{F}_x \to \kappa(x) = \mathcal{G}_x$ を選ぶ。
+Cohomology of Schemes, 補題 \ref{coherent-lemma-map-stalks-local-map}
+により、開集合 $x \in V \subset U$ と写像
+$\varphi_V : \mathcal{F}|_V \to \mathcal{G}|_V$ が存在し、
+その $x$ における茎は $\varphi_x$ である。
+$f \in \Gamma(X, \mathcal{O}_X)$ を $x$ で消えず、
+$D(f) \subset V$ となるように選ぶ。例えば
+Cohomology of Schemes, 補題 \ref{coherent-lemma-homs-over-open} により、
+$\varphi_V$ は写像 $f^n\mathcal{F} \to \mathcal{G}|_U$ へ拡張される。
+ここで $n$ はある整数である。
+$f^n$ 倍写像を前合成すると、写像
+$\mathcal{F} \to \mathcal{G}|_U$ で、その $x$ における茎が非零なものを得る。
+$\mathcal{F}' \subset \mathcal{F}$ をその核とする。
+$\text{Ass}(\mathcal{F}') \subset \text{Ass}(\mathcal{F})$ であることに注意する。
+Divisors, 補題 \ref{divisors-lemma-ses-ass} を参照せよ。
+$\text{length}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) =
+\text{length}_{\mathcal{O}_{X, x}}(\mathcal{F}_x) - 1$
+なので、帰納法の仮定を適用し、$j_*\mathcal{F}'$ が連接であることを得る。
+$\mathcal{G} = j_*(\mathcal{G}|_U) = j_*i_{x, *}\mathcal{O}_{W_x}$
+は連接なので、完全列
+$$
+0 \to j_*\mathcal{F}' \to j_*\mathcal{F} \to \mathcal{G}
+$$
+を考えることができる。Schemes, 補題
+\ref{schemes-lemma-push-forward-quasi-coherent} により、
+層 $j_*\mathcal{F}$ は準連接である。
+したがって $j_*\mathcal{F}$ の $j_*(\mathcal{G}|_U)$ における像は、
+Cohomology of Schemes, 補題
+\ref{coherent-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+により連接である。最後に
+Cohomology of Schemes, 補題 \ref{coherent-lemma-coherent-abelian-Noetherian}
+により、$j_*\mathcal{F}$ は連接である。
+
+\medskip\noindent
+(2) が成り立つと仮定する。上とまったく同様にして、
+$X$ がアフィンである場合に帰着する。$x \in \text{Ass}(\mathcal{F})$ を選び、
+$\mathcal{G} = j_*i_{x, *}\mathcal{O}_{W_x}$ とおく。
+次に非零写像
+$\varphi_x : \mathcal{G}_x = \kappa(x) \to \mathcal{F}_x$ を選ぶ。
+これはまさに $x$ が $\mathcal{F}$ の随伴点であるために存在する。
+上とまったく同様に議論して、$\varphi_x$ は
+$\mathcal{O}_U$-加群の写像
+$\varphi : \mathcal{G}|_U \to \mathcal{F}$ に拡張されると仮定してよい。
+このとき $\varphi$ は単射であり（例えば
+Divisors, 補題 \ref{divisors-lemma-check-injective-on-ass} による）、
+単射
+$\mathcal{G} = j_*(\mathcal{G}|_V) \to j_*\mathcal{F}$ を得る。
+したがって (1) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}
+$A$ を Noether 環、$I \subset A$ をイデアルとする。
+$X = \Spec(A)$、$Z = V(I)$、$U = X \setminus Z$ とおき、
+$j : U \to X$ を包含射とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_U$-加群とする。このとき
+\begin{enumerate}
+\item 有限 $A$-加群 $M$ が存在し、$\mathcal{F}$ は
+$\widetilde{M}$ の $U$ への制限である。
+\item $M$ が与えられると完全列
+$$
+0 \to H^0_Z(M) \to M \to H^0(U, \mathcal{F}) \to H^1_Z(M) \to 0
+$$
+と、同型 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(M)$ が
+$p \geq 1$ に対して存在する。
+\item $M$ および $p \geq 0$ が与えられると、次の条件は同値である。
+\begin{enumerate}
+\item $R^pj_*\mathcal{F}$ は連接である。
+\item $H^p(U, \mathcal{F})$ は有限 $A$-加群である。
+\item $H^{p + 1}_Z(M)$ は有限 $A$-加群である。
+\end{enumerate}
+\item (3) の同値な条件が $p = 0$ に対して成り立つならば、
+$M = \Gamma(U, \mathcal{F})$ と取ることができ、この場合
+$H^0_Z(M) = H^1_Z(M) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties, 補題 \ref{properties-lemma-lift-finite-presentation}
+により、連接 $\mathcal{O}_X$-加群 $\mathcal{F}'$ であって、
+その $U$ への制限が $\mathcal{F}$ と同型であるものが存在する。
+$\mathcal{F}'$ は (1) の有限 $A$-加群 $M$ に対応するとする。
+$R^pj_*\mathcal{F}$ は準連接であり
+（Cohomology of Schemes, 補題
+\ref{coherent-lemma-quasi-coherence-higher-direct-images}）、
+$A$-加群 $H^p(U, \mathcal{F})$ に対応することに注意する。
+補題 \ref{local-cohomology-lemma-local-cohomology-is-local-cohomology} と
+Cohomology, 第 \ref{cohomology-section-cohomology-support} 節および
+第 \ref{cohomology-section-cohomology-support-bis} 節の議論により、
+完全列
+$$
+0 \to H^0_Z(M) \to M \to H^0(U, \mathcal{F}) \to H^1_Z(M) \to 0
+$$
+と、同型 $H^p(U, \mathcal{F}) = H^{p + 1}_Z(M)$ を
+$p \geq 1$ に対して得る。
+ここで $H^j(X, \mathcal{F}') = 0$ が $j > 0$ に対して成り立つことを用いた。
+実際、$X$ はアフィンかつ $\mathcal{F}'$ は準連接である
+（Cohomology of Schemes, 補題
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}）。
+これで (2) が示された。
+(3) と (4) は (2) から直ちに従う。補題
+\ref{local-cohomology-lemma-local-cohomology} も参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-pushforward}
+$X$ を局所 Noether 概形とする。
+$j : U \to X$ を、補集合が $Z$ である開部分概形の包含とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_U$-加群とする。次を仮定する。
+\begin{enumerate}
+\item $X$ は Nagata である。
+\item $X$ は普遍鎖状である。
+\item $x \in \text{Ass}(\mathcal{F})$ および
+$z \in Z \cap \overline{\{x\}}$ に対して
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}) \geq 2$ である。
+\end{enumerate}
+このとき $j_*\mathcal{F}$ は連接である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points} により、
+$j_*i_{x, *}\mathcal{O}_{W_x}$ が連接であることを
+$x \in \text{Ass}(\mathcal{F})$ に対して示せば十分である。
+$\pi : Y \to X$ を、$X$ の $\Spec(\kappa(x))$ における正規化とする。
+Morphisms, 第 \ref{morphisms-section-normalization} 節を参照せよ。
+Morphisms, 補題 \ref{morphisms-lemma-nagata-normalization-finite-general}
+により、射 $\pi$ は有限である。$\pi$ が有限なので、
+$\mathcal{G} = \pi_*\mathcal{O}_Y$ は
+Cohomology of Schemes, 補題 \ref{coherent-lemma-finite-pushforward-coherent}
+により連接 $\mathcal{O}_X$-加群である。
+$W_x = U \cap \pi(Y)$ であることに注意する。したがって
+$\pi|_{\pi^{-1}(U)} : \pi^{-1}(U) \to U$ は $i_x : W_x \to U$ を経由し、
+標準的な写像
+$$
+i_{x, *}\mathcal{O}_{W_x}
+\longrightarrow
+(\pi|_{\pi^{-1}(U)})_*(\mathcal{O}_{\pi^{-1}(U)}) =
+(\pi_*\mathcal{O}_Y)|_U = \mathcal{G}|_U
+$$
+を得る。この写像は単射である（例えば Divisors, 補題
+\ref{divisors-lemma-check-injective-on-ass} による）。したがって
+$j_*i_{x, *}\mathcal{O}_{W_x} \subset j_*\mathcal{G}|_U$ であり、
+$j_*\mathcal{G}|_U$ が連接であることを示せば十分である。
+
+\medskip\noindent
+$j_*(\mathcal{G}|_U)$ が連接であることを示せばよい。
+Divisors, 補題 \ref{divisors-lemma-depth-2-hartog} を
+$$
+\mathcal{G} \longrightarrow j_*(\mathcal{G}|_U)
+$$
+に適用できると主張する。これで証明は終わる。
+$\text{depth}(\mathcal{G}_z) \geq 2$ を $z \in Z$ に対して
+示せば十分である。
+$y_1, \ldots, y_n \in Y$ を $z$ に写る点とする。
+Algebra, 補題 \ref{algebra-lemma-depth-goes-down-finite} により、
+$\text{depth}(\mathcal{O}_{Y, y_i}) \geq 2$ が $i = 1, \ldots, n$
+に対して成り立つことを示せば十分である。もしそうでなければ、
+Properties, 補題 \ref{properties-lemma-criterion-normal} により、
+$\dim(\mathcal{O}_{Y, y_i}) = 1$ となる $i$ が存在する。
+これは $\pi : Y \to \overline{\{x\}}$ に対する次元公式
+（Morphisms, 補題 \ref{morphisms-lemma-dimension-formula}）
+と仮定 (3) に反する。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-sharp-finiteness-pushforward}
+$X$ を整局所 Noether 概形とする。$j : U \to X$ を、
+補集合が $Z$ である空でない開部分概形の包含とする。
+すべての $z \in Z$ と、$\mathfrak p$ を
+$\mathcal{O}_{X, z}^\wedge$ の任意の随伴素イデアルとして、
+$\dim(\mathcal{O}_{X, z}^\wedge/\mathfrak p) \geq 2$ であると仮定する。
+このとき $j_*\mathcal{O}_U$ は連接である。
+\end{lemma}
+
+\begin{proof}
+$X$ はアフィンであると仮定してよい。
+補題 \ref{local-cohomology-lemma-check-finiteness-local-cohomology-locally} および
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local} を用いると、
+$X = \Spec(A)$ で、$(A, \mathfrak m)$ は Noether 局所整域、
+$\mathfrak m \in Z$ である場合に帰着する。
+そこで $d = \dim(A)$ に関する帰納法を用いる。
+（基底の場合は $d = 0, 1$ だが、局所環に関する仮定によりこれらは起こらない。）
+$V = \Spec(A) \setminus \{\mathfrak m\}$ とおく。
+$V$ の局所環の次元は $d$ より真に小さいことに注意する。
+$j' : U \to V$ に対して同じ議論を繰り返し、
+帰納法を用いると、$j'_*\mathcal{O}_U$ は連接
+$\mathcal{O}_V$-加群であることが分かる。
+$f \in A$ を非零元として選び、これは $Z$ 上で消えるものとする。
+$D(f) \cap V \subset U$ なので、ある $n$ が存在して、
+$f^n$ 倍写像が $U$ 上で写像
+$f^n : j'_*\mathcal{O}_U \to \mathcal{O}_V$ へ拡張される。
+これは $V$ 上の写像である
+（例えば Cohomology of Schemes, 補題
+\ref{coherent-lemma-homs-over-open} による）。
+この写像は単射なので、単射
+$$
+j_*\mathcal{O}_U = j''_* j'_* \mathcal{O}_U \to j''_*\mathcal{O}_V
+$$
+を $X$ 上で得る。ここで $j'' : V \to X$ は包含射である。
+したがって $j''_*\mathcal{O}_V$ が連接であることを示せば十分である。
+言い換えると、$X$ は Noether 局所整域のスペクトルであり、
+$Z$ はその閉点のみからなると仮定してよい。
+
+\medskip\noindent
+$X = \Spec(A)$、$(A, \mathfrak m)$ は局所環、
+$Z = \{\mathfrak m\}$ と仮定する。
+$A^\wedge$ を $A$ の完備化とし、
+$X^\wedge = \Spec(A^\wedge)$、$Z^\wedge = \{\mathfrak m^\wedge\}$、
+$U^\wedge = X^\wedge \setminus Z^\wedge$、
+$\mathcal{F}^\wedge = \mathcal{O}_{U^\wedge}$ とおく。
+環 $A^\wedge$ は普遍鎖状かつ Nagata である
+（Algebra, 注意
+\ref{algebra-remark-Noetherian-complete-local-ring-universally-catenary} および
+補題 \ref{algebra-lemma-Noetherian-complete-local-Nagata}）。
+さらに $X^\wedge, Z^\wedge, U^\wedge, \mathcal{F}^\wedge$ に対する
+補題 \ref{local-cohomology-lemma-finiteness-pushforward} の条件 (3) は仮定により成り立つ。
+したがって
+$(U^\wedge \to X^\wedge)_*\mathcal{O}_{U^\wedge}$
+は連接である。射 $c : X^\wedge \to X$ は平坦なので、
+$j_*\mathcal{O}_U$ の引き戻しは
+$(U^\wedge \to X^\wedge)_*\mathcal{O}_{U^\wedge}$ である
+（Cohomology of Schemes, 補題
+\ref{coherent-lemma-flat-base-change-cohomology}）。
+最後に $c$ は忠実平坦なので、
+Descent, 補題 \ref{descent-lemma-finite-type-descends} により
+$j_*\mathcal{O}_U$ は連接である。
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-closure}
+$j : U \to X$ を局所 Noether 概形の開浸入とする。
+$x \in U$ とする。$i_x : W_x \to U$ を生成点 $x$ をもつ整閉部分概形とし、
+$\overline{\{x\}}$ を $X$ における閉包とする。
+このとき可換図式
+$$
+\xymatrix{
+W_x \ar[d]_{i_x} \ar[r]_{j'} & \overline{\{x\}} \ar[d]^i \\
+U \ar[r]^j & X
+}
+$$
+を得る。$j_*i_{x, *}\mathcal{O}_{W_x} = i_*j'_*\mathcal{O}_{W_x}$ である。
+左の垂直射は閉浸入なので、
+$j_*i_{x, *}\mathcal{O}_{W_x}$ が連接であることと
+$j'_*\mathcal{O}_{W_x}$ が連接であることは同値である。
+\end{remark}
+
+\begin{remark}
+\label{local-cohomology-remark-no-finiteness-pushforward}
+$X$ を局所 Noether 概形とし、$j : U \to X$ を、
+補集合が $Z$ である開部分概形の包含とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_U$-加群とする。
+$x \in \text{Ass}(\mathcal{F})$ と
+$z \in Z \cap \overline{\{x\}}$ が存在し、
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}) \leq 1$ ならば、
+$j_*\mathcal{F}$ は連接ではない。これを証明するため、
+$\mathcal{O}_{X, z}$ のスペクトルへの平坦基底変換を行ってよい。
+$X' = \overline{\{x\}}$ とおく。
+仮定から $\mathcal{O}_{X' \cap U} \subset \mathcal{F}$ が従う。
+したがって $j_*\mathcal{O}_{X' \cap U}$ が連接でないことを示せば十分である。
+これは $X' = \{x, z\}$ なので明らかである。実際、
+$j_*\mathcal{O}_{X' \cap U}$ は $\kappa(x)$ に対応し、
+$\mathcal{O}_{X, z}$-加群としては、$x$ が閉点でないため有限ではあり得ない。
+
+\medskip\noindent
+実際、補題 \ref{local-cohomology-lemma-sharp-finiteness-pushforward} の逆も成り立つ。
+整 Noether 概形の開浸入 $j : U \to X$ が与えられ、
+$z \in X \setminus U$ と随伴素イデアル $\mathfrak p$ が存在し、
+後者が完備化 $\mathcal{O}_{X, z}^\wedge$ のものであり、
+$\dim(\mathcal{O}_{X, z}^\wedge/\mathfrak p) = 1$ を満たすものが存在するならば、
+$j_*\mathcal{O}_U$ は連接ではない。
+実際、局所環へ移り、$U$ を穴あきスペクトルまで拡大し、
+完備化へ移れば、上の議論が有限でないことを与える。
+\end{remark}
+
+\begin{proposition}[Koll\'ar]
+\label{local-cohomology-proposition-kollar}
+\begin{reference}
+特殊な場合については \cite{k-coherent} および
+\cite[IV, 命題 7.2.2]{EGA} を参照せよ。
+\end{reference}
+\begin{slogan}
+Hartogs の定理の弱い類似：Noether 概形上で、連接層を、
+その層の台の中で補集合が余次元 2 である開集合へ制限したものは連接である。
+\end{slogan}
+$j : U \to X$ を局所 Noether 概形の開浸入とし、その補集合を $Z$ とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_U$-加群とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $j_*\mathcal{F}$ は連接である。
+\item $x \in \text{Ass}(\mathcal{F})$、
+$z \in Z \cap \overline{\{x\}}$、および任意の随伴素イデアル
+$\mathfrak p$ で、完備化
+$\mathcal{O}_{\overline{\{x\}}, z}^\wedge$ のものに対して
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}^\wedge/\mathfrak p) \geq 2$ である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(2) が成り立つならば、補題
+\ref{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points}、
+注意 \ref{local-cohomology-remark-closure}、および
+補題 \ref{local-cohomology-lemma-sharp-finiteness-pushforward} を組み合わせて (1) を得る。
+(2) が成り立たないならば、注意
+\ref{local-cohomology-remark-no-finiteness-pushforward} の議論
+（および注意 \ref{local-cohomology-remark-closure}）により、
+$j_*i_{x, *}\mathcal{O}_{W_x}$ は、ある
+$x \in \text{Ass}(\mathcal{F})$ に対して有限でない。
+したがって補題
+\ref{local-cohomology-lemma-check-finiteness-pushforward-on-associated-points} により、
+$j_*\mathcal{F}$ は連接でない。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-kollar-finiteness-H1-local}
+$A$ を Noether 環、$I \subset A$ をイデアルとする。
+$Z = V(I)$ とおき、$M$ を有限 $A$-加群とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $H^1_Z(M)$ は有限 $A$-加群である。
+\item すべての $\mathfrak p \in \text{Ass}(M)$ で
+$\mathfrak p \not \in Z$ であるもの、およびすべての
+$\mathfrak q \in V(\mathfrak p + I)$ に対して、
+$(A/\mathfrak p)_\mathfrak q$ の完備化は次元 $1$ の随伴素イデアルをもたない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+命題 \ref{local-cohomology-proposition-kollar} から、補題
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local} を介して直ちに従う。
+\end{proof}
+
+\noindent
+次の補題の定式化には、条件 (1) と (2) が $X$ 上有限型の概形に
+継承されるという利点がある。さらに、これは第
+\ref{local-cohomology-section-finiteness-pushforward-II} 節で高次順像へ一般化する有限性の形である。
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-pushforward-general}
+$X$ を局所 Noether 概形とする。
+$j : U \to X$ を、補集合が $Z$ である開部分概形の包含とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_U$-加群とする。次を仮定する。
+\begin{enumerate}
+\item $X$ は普遍鎖状である。
+\item すべての $z \in Z$ に対して、$\mathcal{O}_{X, z}$ の形式的ファイバーは
+$(S_1)$ を満たす。
+\end{enumerate}
+この状況で、次の条件は同値である。
+\begin{enumerate}
+\item[(a)] $x \in \text{Ass}(\mathcal{F})$ および
+$z \in Z \cap \overline{\{x\}}$ に対して
+$\dim(\mathcal{O}_{\overline{\{x\}}, z}) \geq 2$ である。
+\item[(b)] $j_*\mathcal{F}$ は連接である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x \in \text{Ass}(\mathcal{F})$ とする。命題 \ref{local-cohomology-proposition-kollar}
+により、$A = \mathcal{O}_{\overline{\{x\}}, z}$ が、その完備化の
+随伴素イデアルに関する同命題の条件を満たすことと
+$\dim(A) \geq 2$ であることが同値であると示せば十分である。
+$A$ は普遍鎖状であり（これは明らかである）、
+その形式的ファイバーは $(S_1)$ を満たす。後者は
+More on Algebra, 補題 \ref{more-algebra-lemma-formal-fibres-normal} および
+命題 \ref{more-algebra-proposition-finite-type-over-P-ring} から従う。
+$\mathfrak p' \subset A^\wedge$ を随伴素イデアルとする。
+$A \to A^\wedge$ は平坦なので、
+Algebra, 補題 \ref{algebra-lemma-bourbaki} により、
+$\mathfrak p'$ は $(0) \subset A$ の上にある。
+形式的ファイバー $A^\wedge \otimes_A F$ は $(S_1)$ を満たす。
+ここで $F$ は $A$ の分数体である。
+したがって $\mathfrak p'$ は極小素イデアルである。
+Algebra, 補題 \ref{algebra-lemma-criterion-no-embedded-primes} を参照せよ。
+$A$ は普遍鎖状なので、More on Algebra, 命題
+\ref{more-algebra-proposition-ratliff} により形式的に鎖状である。
+したがって $\dim(A^\wedge/\mathfrak p') = \dim(A)$ となり、
+同値性が示された。
+\end{proof}
+
+
+
+
+
+
+\section{深さと次元}
+\label{local-cohomology-section-dept-dimension}
+
+\noindent
+いくつかの補助補題を与える。
+
+\begin{lemma}
+\label{local-cohomology-lemma-ideal-depth-function}
+$A$ を Noether 環とし、$I \subset A$ をイデアルとする。
+$M$ を有限 $A$-加群とし、$\mathfrak p \in V(I)$ を素イデアルとする。
+$e = \text{depth}_{IA_\mathfrak p}(M_\mathfrak p) < \infty$ と仮定する。
+このとき空でない開集合 $U \subset V(\mathfrak p)$ が存在して、
+$\text{depth}_{IA_\mathfrak q}(M_\mathfrak q) \geq e$ が
+すべての $\mathfrak q \in U$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+深さの定義により $IM_\mathfrak p \not = M_\mathfrak p$ であり、
+$M_\mathfrak p$-正則列
+$f_1, \ldots, f_e \in IA_\mathfrak p$ が存在する。$A$ を主局所化で
+置き換えると、$f_1, \ldots, f_e \in I$ が $M$-正則列をなすと仮定してよい。
+Algebra, 補題 \ref{algebra-lemma-regular-sequence-in-neighbourhood} を参照せよ。
+加群 $M' = M/IM$ を考える。$\mathfrak p \in \text{Supp}(M')$ であり、
+有限加群の台は閉だから、$V(\mathfrak p) \subset \text{Supp}(M')$ を得る。
+したがって $\mathfrak q \in V(\mathfrak p)$ に対して
+$IM_\mathfrak q \not = M_\mathfrak q$ である。ゆえに局所化が完全であることと
+深さの定義から、$\text{depth}_{IA_\mathfrak q}(M_\mathfrak q) \geq e$ が
+任意の $\mathfrak q \in V(I)$ に対して成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-depth-function}
+$A$ を Noether 環とし、$M$ を有限 $A$-加群とする。
+$\mathfrak p$ を素イデアルとし、
+$e = \text{depth}_{A_\mathfrak p}(M_\mathfrak p) < \infty$ と仮定する。
+このとき空でない開集合 $U \subset V(\mathfrak p)$ が存在して、
+$\text{depth}_{A_\mathfrak q}(M_\mathfrak q) \geq e$ が
+すべての $\mathfrak q \in U$ に対して成り立ち、さらに
+有限個を除くすべての $\mathfrak q \in U$ に対して
+$\text{depth}_{A_\mathfrak q}(M_\mathfrak q) > e$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+深さの定義により $\mathfrak p M_\mathfrak p \not = M_\mathfrak p$ であり、
+$M_\mathfrak p$-正則列
+$f_1, \ldots, f_e \in \mathfrak p A_\mathfrak p$ が存在する。$A$ を
+主局所化で置き換えると、$f_1, \ldots, f_e \in \mathfrak p$ が
+$M$-正則列をなすと仮定してよい。Algebra, 補題
+\ref{algebra-lemma-regular-sequence-in-neighbourhood} を参照せよ。
+加群 $M' = M/(f_1, \ldots, f_e)M$ を考える。
+$\mathfrak p \in \text{Supp}(M')$ であり、有限加群の台は閉だから、
+$V(\mathfrak p) \subset \text{Supp}(M')$ を得る。したがって
+$\mathfrak q \in V(\mathfrak p)$ に対して
+$\mathfrak q M_\mathfrak q \not = M_\mathfrak q$ である。ゆえに局所化が
+完全であることと深さの定義から、
+$\text{depth}_{A_\mathfrak q}(M_\mathfrak q) \geq e$ が
+任意の $\mathfrak q \in V(I)$ に対して成り立つ。
+さらに $\mathfrak q$ が加群 $M'$ の随伴素イデアルでなければ、深さは増加する。
+したがって最後の主張は Algebra, 補題 \ref{algebra-lemma-finite-ass} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finite-nr-points-next-S}
+$X$ を双対化複体 $\omega_X^\bullet$ をもつ Noether 概形とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とし、$k \geq 0$ を整数とする。
+$\mathcal{F}$ が $(S_k)$ を満たすと仮定する。このとき次を満たす点
+$x \in X$ は有限個しかない。
+$$
+\text{depth}(\mathcal{F}_x) = k
+\quad\text{かつ}\quad
+\dim(\text{Supp}(\mathcal{F}_x)) > k
+$$
+\end{lemma}
+
+\begin{proof}
+この補題を $k$ に関する帰納法で証明する。基底の場合 $k = 0$ は、
+$\mathcal{F}$ の埋め込まれた随伴点が有限個であるという主張であり、
+これは Divisors, 補題 \ref{divisors-lemma-finite-ass} から従う。
+
+\medskip\noindent
+$k > 0$ とし、より小さいすべての $k$ に対して結果が成り立つと仮定する。
+$X$ は有限個のアフィン開集合で被覆できるので、
+$X = \Spec(A)$ はアフィンであると仮定してよい。このとき $\mathcal{F}$ は、
+連接 $\mathcal{O}_X$-加群であり、有限 $A$-加群 $M$ に付随する。
+この加群は $(S_k)$ を満たす。以下では Algebra, 補題
+\ref{algebra-lemma-one-equation-module} および
+\ref{algebra-lemma-depth-drops-by-one} を断りなく用いる。
+
+\medskip\noindent
+$f \in A$ を $M$ 上の非零因子とする。このとき $M/fM$ は $(S_{k - 1})$ を満たす。
+帰納法により、
+素イデアル $\mathfrak p \in V(f)$ で、
+$\text{depth}((M/fM)_\mathfrak p) = k - 1$ かつ
+$\dim(\text{Supp}((M/fM)_\mathfrak p)) > k - 1$ を満たすものは有限個しかない。
+これらはちょうど、素イデアル $\mathfrak p \in V(f)$ で、
+$\text{depth}(M_\mathfrak p) = k$ かつ
+$\dim(\text{Supp}(M_\mathfrak p)) > k$ を満たすものである。したがって有限性を証明する際に、
+$A$ を $A_f$ で、$M$ を $M_f$ で置き換えてよい。
+
+\medskip\noindent
+$M$ は $(S_k)$ を満たし、$k > 0$ だから、$M$ は埋め込まれた随伴素イデアルを
+もたない（Algebra, 補題 \ref{algebra-lemma-criterion-no-embedded-primes}）。
+したがって $\text{Ass}(M)$ は $M$ の台の生成点全体である。
+ゆえに Dualizing Complexes, 補題 \ref{dualizing-lemma-CM-open} により、集合
+$U = \{\mathfrak q \mid M_\mathfrak q\text{ は Cohen--Macaulay である}\}$
+は $\text{Ass}(M)$ を含む開集合である。素イデアル回避
+（Algebra, 補題 \ref{algebra-lemma-silly}）により、
+$f \in A$ を、$f \not \in \mathfrak p$ が
+$\mathfrak p \in \text{Ass}(M)$ に対して成り立ち、かつ
+$D(f) \subset U$ となるように選べる。
+すると $f$ は $M$ 上の非零因子である
+（Algebra, 補題 \ref{algebra-lemma-ass-zero-divisors}）。上で述べたように
+$A$ を $A_f$ で、$M$ を $M_f$ で置き換えると、$M$ は Cohen--Macaulay
+であることが分かる。したがってすべての $\mathfrak q \subset A$ に対して
+$\dim(M_\mathfrak q) = \text{depth}(M_\mathfrak q)$ である。
+ゆえに補題で記述した集合は空であり、まして有限である。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-sitting-in-degrees}
+$(A, \mathfrak m)$ を正規化された双対化複体 $\omega_A^\bullet$ をもつ
+Noether 局所環とする。$M$ を有限 $A$-加群とする。
+$E^i = \text{Ext}_A^{-i}(M, \omega_A^\bullet)$ とおく。このとき次が成り立つ。
+\begin{enumerate}
+\item $E^i$ は有限 $A$-加群であり、
+$0 \leq i \leq \dim(\text{Supp}(M))$ の場合にのみ零でない。
+\item $\dim(\text{Supp}(E^i)) \leq i$,
+\item $\text{depth}(M)$ は、整数 $\delta \geq 0$ で
+$E^\delta \not = 0$ を満たすもののうち最小である。
+\item $\mathfrak p \in \text{Supp}(E^0 \oplus \ldots \oplus E^i)
+\Leftrightarrow
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) + \dim(A/\mathfrak p) \leq i$,
+\item $E^i$ の零化イデアルは $H^i_\mathfrak m(M)$ の零化イデアルに等しい。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)、(2)、(3) は Dualizing Complexes, 補題
+\ref{dualizing-lemma-sitting-in-degrees} の主張そのものである。
+素イデアル $\mathfrak p$ を $A$ のものとすると、
+$(\omega_A^\bullet)_\mathfrak p[-\dim(A/\mathfrak p)]$ は
+$A_\mathfrak p$ の正規化された双対化複体である。Dualizing Complexes, 補題
+\ref{dualizing-lemma-dimension-function} を参照せよ。したがって
+$$
+E^i_\mathfrak p =
+\text{Ext}^{-i}_A(M, \omega_A^\bullet)_\mathfrak p =
+\text{Ext}^{-i + \dim(A/\mathfrak p)}_{A_\mathfrak p}
+(M_\mathfrak p, (\omega_A^\bullet)_\mathfrak p[-\dim(A/\mathfrak p)])
+$$
+は、$i - \dim(A/\mathfrak p) < \text{depth}_{A_\mathfrak p}(M_\mathfrak p)$
+ならば零であり、$i = \dim(A/\mathfrak p) +
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p)$ ならば零でない。
+これは $A_\mathfrak p$ 上で (3) を用いることによる。これで (4) が示された。
+$E$ を $A$ の剰余体の入射包絡とすると、
+$$
+\Hom_A(H^i_\mathfrak m(M), E) =
+\text{Ext}^{-i}_A(M, \omega_A^\bullet)^\wedge =
+(E^i)^\wedge =
+E^i \otimes_A A^\wedge
+$$
+を得る。これは局所双対定理（Dualizing Complexes, 補題
+\ref{dualizing-lemma-special-case-local-duality} の形）による。
+$A \to A^\wedge$ は忠実平坦だから、Matlis 双対性
+（Dualizing Complexes, 命題 \ref{dualizing-proposition-matlis}）により (5) が従う。
+\end{proof}
+
+
+
+
+
+
+\section{局所コホモロジーの零化イデアル I}
+\label{local-cohomology-section-annihilators}
+
+\noindent
+この節では Faltings による結果を論じる。
+\cite{Faltings-annulators} を参照せよ。
+
+\begin{proposition}
+\label{local-cohomology-proposition-annihilator}
+\begin{reference}
+\cite{Faltings-annulators}.
+\end{reference}
+$A$ を双対化複体をもつ Noether 環とする。
+$T \subset T' \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$s \geq 0$ を整数とし、$M$ を有限 $A$-加群とする。次の条件は同値である。
+\begin{enumerate}
+\item イデアル $J \subset A$ で $V(J) \subset T'$ を満たし、
+$J$ が $H^i_T(M)$ を $i \leq s$ に対して零化するものが存在する。
+\item すべての $\mathfrak p \not \in T'$ と、
+$\mathfrak q \in T$ で $\mathfrak p \subset \mathfrak q$ を満たすものに対して、
+$$
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$\omega_A^\bullet$ を双対化複体とし、$\delta$ をその次元関数とする。
+Dualizing Complexes, 第 \ref{dualizing-section-dimension-function} 節を参照せよ。
+以下では有限 $A$-加群
+$$
+E^i = \Ext_A^i(M, \omega_A^\bullet)
+$$
+が重要な役割を果たす。$\mathfrak p \subset A$ に対し、$H^i_\mathfrak p$ により
+$A_\mathfrak p$-加群の $\mathfrak pA_\mathfrak p$ に関する
+局所コホモロジーを表すことにする。このとき $\mathfrak pA_\mathfrak p$-進完備化を考えると、
+$$
+(E^i)_\mathfrak p =
+\Ext^{\delta(\mathfrak p) + i}_{A_\mathfrak p}(M_\mathfrak p,
+(\omega_A^\bullet)_\mathfrak p[-\delta(\mathfrak p)])
+$$
+は
+$$
+H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(M_\mathfrak p)
+$$
+の Matlis 双対である。これは Dualizing Complexes, 補題
+\ref{dualizing-lemma-special-case-local-duality} による。
+特に次の事実が従う。イデアル $J \subset A$ が
+$(E^i)_\mathfrak p$ を零化することと、$J$ が
+$H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(M_\mathfrak p)$ を零化することは同値である。
+
+\medskip\noindent
+$T_n = \{\mathfrak p \in T \mid \delta(\mathfrak p) \leq n\}$ とおく。
+$\delta$ は有界関数だから、$T_a = \emptyset$ が $a \ll 0$ に対して成り立ち、
+$T_b = T$ が $b \gg 0$ に対して成り立つ。
+
+\medskip\noindent
+(2) を仮定し、(1) のような $J$ の存在を示そう。そのため二重帰納法を用いる。
+$i \leq s$ に対して、帰納法の仮定 $IH_i$ を次のように取る。
+$H^a_T(M)$ は、ある $J \subset A$ で $V(J) \subset T'$ を満たすものにより、
+$0 \leq a \leq i$ に対して零化される。$IH_0$ の場合は明らかである。
+実際、$H^0_T(M)$ は $M$ の部分加群だから有限であり、したがって
+あるイデアル $J$ で $V(J) \subset T$ を満たすものにより零化される。
+
+\medskip\noindent
+帰納段階を考える。$IH_{i - 1}$ がある $0 < i \leq s$ に対して成り立つと仮定する。
+$J'$ を、$V(J') \subset T'$ を満たし、$H^a_T(M)$ を
+$0 \leq a \leq i - 1$ に対して零化するものとして選ぶ
+（帰納法の仮定により可能である）。
+$n$ に関する降下帰納法により、イデアル $J$ で $V(J) \subset T'$ を満たし、
+$J H^i_T(M)$ の随伴素イデアルが $T_n$ に属するものが存在することを示す。
+$n \ll 0$ なら、これは $JH^i_T(M) = 0$ を意味する
+（Algebra, 補題 \ref{algebra-lemma-ass-zero}）。したがって $IH_i$ が成り立つ。
+基底の場合 $n \gg 0$ は明らかである。この場合 $T = T_n$ であり、
+$H^i_T(M)$ のすべての随伴素イデアルは $T$ に属するからである。
+
+\medskip\noindent
+そこで $J$ が $n$ に対する性質をもつものとして与えられたと仮定する。
+$\mathfrak q \in T_n$ とし、$T_\mathfrak q \subset \Spec(A_\mathfrak q)$ を
+$T$ の逆像とする。補題 \ref{local-cohomology-lemma-torsion-change-rings} により
+$H^j_T(M)_\mathfrak q = H^j_{T_\mathfrak q}(M_\mathfrak q)$
+である。補題 \ref{local-cohomology-lemma-local-cohomology-ss} のスペクトル系列
+$$
+H_\mathfrak q^p(H^q_{T_\mathfrak q}(M_\mathfrak q))
+\Rightarrow
+H^{p + q}_\mathfrak q(M_\mathfrak q)
+$$
+を考える。以下で、イデアル $J'' \subset A$ で $V(J'') \subset T'$ を満たし、
+$H^i_\mathfrak q(M_\mathfrak q)$ を $J''$ により、すべての
+$\mathfrak q \in T_n \setminus T_{n - 1}$ に対して零化するものを見いだす。
+$J (J')^i J''$ が $n - 1$ に対して使えると主張する。
+実際、$\mathfrak q \in T_n \setminus T_{n - 1}$ とする。
+上のスペクトル系列はフィルトレーション
+$$
+E_\infty^{0, i} = E_{i + 2}^{0, i} \subset \ldots \subset E_3^{0, i} \subset
+E_2^{0, i} = H^0_\mathfrak q(H^i_{T_\mathfrak q}(M_\mathfrak q))
+$$
+を定める。加群 $E_\infty^{0, i}$ は $J''$ により零化される。
+部分商 $E_j^{0, i}/E_{j + 1}^{0, i}$ は $i + 1 \geq j \geq 2$ に対して
+$J'$ により零化される。実際、$d_j^{0, i}$ の標的は
+$$
+H^j_\mathfrak q(H^{i - j + 1}_{T_\mathfrak q}(M_\mathfrak q)) =
+H^j_\mathfrak q(H^{i - j + 1}_T(M)_\mathfrak q)
+$$
+の部分商であり、$H^{i - j + 1}_T(M)_\mathfrak q$ は $J'$ の選び方により
+$J'$ によって零化される。最後に $J$ の選び方から
+$J H^i_T(M)_\mathfrak q \subset H^0_\mathfrak q(H^i_T(M)_\mathfrak q)$
+である。なぜなら $\Spec(A_\mathfrak q)$ の閉点でない点では
+$\delta$ の値がより大きいからである。したがって望みどおり、
+$\mathfrak q$ は $J(J')^iJ'' H^i_T(M)$ の随伴素イデアルではあり得ない。
+
+\medskip\noindent
+冒頭の注意から、$J''$ は
+$$
+(E^{-\delta(\mathfrak q) - i})_\mathfrak q =
+(E^{-n - i})_\mathfrak q
+$$
+をすべての $\mathfrak q \in T_n \setminus T_{n - 1}$ に対して零化すべきである。
+しかし $J''$ が一つの $\mathfrak q$ に対して使えるなら、その $\mathfrak q$ の
+ある開近傍内のすべての $\mathfrak q$ に対して使える。これは加群
+$E^{-n - i}$ が有限だからである。
+$\Spec(A)$ の任意の部分集合は誘導位相に関して Noether である
+（Topology, 補題 \ref{topology-lemma-Noetherian}）から、
+$J''$ の存在を一つの $\mathfrak q$ に対して示せば十分である。
+
+\medskip\noindent
+Ext 加群は有限だから、$J''$ の存在は
+$$
+\text{Supp}(E^{-n - i}) \cap \Spec(A_\mathfrak q) \subset T'.
+$$
+と同値である。これは、$E^{-n - i}$ の局所化が、すべての
+$\mathfrak p \subset \mathfrak q$、$\mathfrak p \not \in T'$ において零であることと同値である。
+$A_\mathfrak p$ 上の局所双対性を用いると、
+$$
+H^{i + n - \delta(\mathfrak p)}_\mathfrak p(M_\mathfrak p) =
+H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(M_\mathfrak p)
+$$
+が零であることを示せばよい（ここで $\delta$ が次元関数であることを用いた）。
+これは命題の仮定、$i \leq s$、および Dualizing Complexes, 補題
+\ref{dualizing-lemma-depth} により消滅する。
+
+\medskip\noindent
+逆向きの含意を示すため、(2) が成り立たないと仮定し、上の議論を逆にたどる。
+まず $\mathfrak q \in T$、$\mathfrak p \subset \mathfrak q$、
+$\mathfrak p \not \in T'$ を、
+$$
+i = \text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) \leq s
+$$
+が最小となるように選ぶ。このとき
+$H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(M_\mathfrak p)$
+は零でない。これは Dualizing Complexes, 補題
+\ref{dualizing-lemma-depth} の非消滅による。$n = \delta(\mathfrak q)$ とおく。
+するとイデアル $J \subset A$ で $V(J) \subset T'$ を満たし、
+$J(E^{-n - i})_\mathfrak q = 0$ となるものは存在しない。
+したがって $H^i_\mathfrak q(M_\mathfrak q)$ は、イデアル $J \subset A$ で
+$V(J) \subset T'$ を満たすものにより零化されない。$i$ の最小性と上に表示した
+スペクトル系列から、加群 $H^i_T(M)_\mathfrak q$ は
+イデアル $J \subset A$ で $V(J) \subset T'$ を満たすものにより零化されない。
+したがって $H^i_T(M)$ はイデアル $J \subset A$ で
+$V(J) \subset T'$ を満たすものにより零化されない。これで命題の証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-kill-local-cohomology-at-prime}
+$I$ を Noether 環 $A$ のイデアルとする。$M$ を有限 $A$-加群、
+$\mathfrak p \subset A$ を素イデアル、$s \geq 0$ を整数とする。次を仮定する。
+\begin{enumerate}
+\item $A$ は双対化複体をもつ。
+\item $\mathfrak p \not \in V(I)$ である。
+\item すべての素イデアル $\mathfrak p' \subset \mathfrak p$ と、
+$\mathfrak q \in V(I)$ で $\mathfrak p' \subset \mathfrak q$ を満たすものに対して、
+$$
+\text{depth}_{A_{\mathfrak p'}}(M_{\mathfrak p'}) +
+\dim((A/\mathfrak p')_\mathfrak q) > s
+$$
+\end{enumerate}
+このとき $f \in A$、$f \not \in \mathfrak p$ であって、
+$H^i_{V(I)}(M)$ を $i \leq s$ に対して零化するものが存在する。
+\end{lemma}
+
+\begin{proof}
+集合
+$$
+T = V(I)
+\quad\text{および}\quad
+T' = \bigcup\nolimits_{f \in A, f \not \in \mathfrak p} V(f)
+$$
+を考える。これらは $\Spec(A)$ の特殊化で安定な部分集合である。
+$T \subset T'$ かつ $\mathfrak p \not \in T'$ であることに注意する。
+仮定 (3) は命題 \ref{local-cohomology-proposition-annihilator} の仮定 (2) が成り立つことを述べている。
+したがって $J \subset A$ で $V(J) \subset T'$ を満たし、
+$J H^i_{V(I)}(M) = 0$ が $i \leq s$ に対して成り立つものを取れる。
+$f \in A$、$f \not \in \mathfrak p$ を $V(J) \subset V(f)$ となるように選ぶ。
+$f$ のある冪は $H^i_{V(I)}(M)$ を $i \leq s$ に対して零化する。
+\end{proof}
+
+
+
+
+
+\section{局所コホモロジーの有限性 II}
+\label{local-cohomology-section-finiteness-II}
+
+\noindent
+第 \ref{local-cohomology-section-finiteness} 節で始めた局所コホモロジーの有限性の議論を続ける。
+Faltings 零化イデアル定理を用いると、次の基本的結果が容易に証明できる。
+
+\begin{proposition}
+\label{local-cohomology-proposition-finiteness}
+\begin{reference}
+\cite{Faltings-annulators}.
+\end{reference}
+$A$ を双対化複体をもつ Noether 環とする。
+$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$s \geq 0$ を整数とし、$M$ を有限 $A$-加群とする。次の条件は同値である。
+\begin{enumerate}
+\item $H^i_T(M)$ は有限 $A$-加群である（$i \leq s$）。
+\item すべての $\mathfrak p \not \in T$ と、$\mathfrak q \in T$ で
+$\mathfrak p \subset \mathfrak q$ を満たすものに対して、
+$$
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+命題 \ref{local-cohomology-proposition-annihilator} と補題
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator} の形式的帰結である。
+\end{proof}
+
+\noindent
+後で用いるいくつかの補題のほか、この節の残りでは、命題
+\ref{local-cohomology-proposition-finiteness} における「$A$ が双対化複体をもつ」という条件を
+どの程度弱められるかを論じる。大まかに言えば、$A$ の形式的ファイバーが
+$(S_n)$ を満たすと仮定する必要があり、ここで $n$ は十分大きい。
+
+\medskip\noindent
+$A$ を Noether 環、$I \subset A$ をイデアルとする。
+$X = \Spec(A)$ および $Z = V(I) \subset X$ とおき、$M$ を有限 $A$-加群とする。
+次のように定義する。
+\begin{equation}
+\label{local-cohomology-equation-cutoff}
+s_{A, I}(M) =
+\min \{
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) + \dim((A/\mathfrak p)_\mathfrak q)
+\mid
+\mathfrak p \in X \setminus Z, \mathfrak q \in Z,
+\mathfrak p \subset \mathfrak q
+\}
+\end{equation}
+深さに関する規約では $0$ の深さは $\infty$ であるから、素イデアル
+$\mathfrak p$ のうち $M$ の台に属するものだけを考えればよい。$s_{A, I}(M)$ はこの状況の
+重要な不変量であることが後に分かる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-cutoff}
+$A \to B$ を Noether 環の有限準同型とする。$I \subset A$ をイデアルとし、
+$J = IB$ とおく。$M$ を有限 $B$-加群とする。$A$ が普遍鎖状ならば
+$s_{B, J}(M) = s_{A, I}(M)$ である。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p \subset \mathfrak q \subset A$ を、$I \subset \mathfrak q$ かつ
+$I \not \subset \mathfrak p$ を満たす素イデアルとする。$A \to B$ は有限なので、
+$\mathfrak p_i$ を $\mathfrak p$ の上にある素イデアルとすれば、その個数は有限である。
+Algebra, 補題 \ref{algebra-lemma-depth-goes-down-finite} により
+$$
+\text{depth}(M_\mathfrak p) = \min \text{depth}(M_{\mathfrak p_i})
+$$
+である。$\mathfrak p_i \subset \mathfrak q_{ij}$ を $\mathfrak q$ の上にある
+素イデアルとする。$A \to B$ に対する上昇定理
+（Algebra, 補題 \ref{algebra-lemma-integral-going-up}）により、少なくとも一つの
+$\mathfrak q_{ij}$ が存在し、これは各 $i$ について成り立つ。このとき
+$$
+\dim((B/\mathfrak p_i)_{\mathfrak q_{ij}}) =
+\dim((A/\mathfrak p)_\mathfrak q)
+$$
+が次元公式により成り立つ。Algebra, 補題
+\ref{algebra-lemma-dimension-formula} を参照せよ。したがって、$s_{B, J}(M)$ の定義に
+用いる量を組 $(\mathfrak p_i, \mathfrak q_{ij})$ にわたって最小化した値は、
+組 $(\mathfrak p, \mathfrak q)$ に対する量に等しい。これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-change-completion}
+$A$ を双対化複体をもつ Noether 環とし、$I \subset A$ をイデアルとする。
+$M$ を有限 $A$-加群とする。$A', M'$ を $I$-進完備化とし、それぞれ $A, M$ から得られるものとする。
+$\mathfrak p' \subset \mathfrak q'$ を $A'$ の素イデアルで、
+$\mathfrak q' \in V(IA')$ を満たし、$\mathfrak p \subset \mathfrak q$ の上にあるものとする。
+ここで後者は $A$ の素イデアルである。このとき
+$$
+\text{depth}_{A_{\mathfrak p'}}(M'_{\mathfrak p'})
+\geq
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p)
+$$
+かつ
+$$
+\text{depth}_{A_{\mathfrak p'}}(M'_{\mathfrak p'}) +
+\dim((A'/\mathfrak p')_{\mathfrak q'}) =
+\text{depth}_{A_\mathfrak p}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q)
+$$
+\end{lemma}
+
+\begin{proof}
+次が成り立つ。
+$$
+\text{depth}(M'_{\mathfrak p'}) =
+\text{depth}(M_\mathfrak p) +
+\text{depth}(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'})
+\geq \text{depth}(M_\mathfrak p)
+$$
+これは $A \to A'$ の平坦性による。Algebra, 補題
+\ref{algebra-lemma-apply-grothendieck-module} を参照せよ。
+$A \to A'$ のファイバーは Cohen--Macaulay である
+（Dualizing Complexes, 補題
+\ref{dualizing-lemma-dualizing-gorenstein-formal-fibres} および
+More on Algebra, 第
+\ref{more-algebra-section-properties-formal-fibres} 節）から、
+$\text{depth}(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'}) =
+\dim(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'})$。
+したがって
+\begin{align*}
+\text{depth}(M'_{\mathfrak p'}) +
+\dim((A'/\mathfrak p')_{\mathfrak q'})
+& =
+\text{depth}(M_\mathfrak p) +
+\dim(A'_{\mathfrak p'}/\mathfrak p A'_{\mathfrak p'}) +
+\dim((A'/\mathfrak p')_{\mathfrak q'}) \\
+& =
+\text{depth}(M_\mathfrak p) +
+\dim((A'/\mathfrak p A')_{\mathfrak q'}) \\
+& =
+\text{depth}(M_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q)
+\end{align*}
+を得る。第2の等号は $A'$ が鎖状であることによる。第3の等号は
+More on Algebra, 補題 \ref{more-algebra-lemma-completion-dimension} による。
+実際、$(A/\mathfrak p)_\mathfrak q$ と $(A'/\mathfrak p A')_{\mathfrak q'}$ は
+同じ $I$-進完備化をもつ。
+\end{proof}
+
+
+
+
+
+\begin{lemma}
+\label{local-cohomology-lemma-cutoff-completion}
+$A$ を普遍鎖状 Noether 局所環とする。
+$I \subset A$ をイデアルとし、$M$ を有限 $A$-加群とする。このとき
+$$
+s_{A, I}(M) \geq s_{A^\wedge, I^\wedge}(M^\wedge)
+$$
+$A$ の形式的ファイバーが $(S_n)$ を満たすならば、
+$\min(n + 1, s_{A, I}(M)) \leq s_{A^\wedge, I^\wedge}(M^\wedge)$ である。
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$、$X^\wedge = \Spec(A^\wedge)$、$Z = V(I) \subset X$ および
+$Z^\wedge = V(I^\wedge)$ とおく。
+$\mathfrak p' \subset \mathfrak q' \subset A^\wedge$ を
+$\mathfrak p' \not \in Z^\wedge$ かつ
+$\mathfrak q' \in Z^\wedge$ を満たす素イデアルとする。
+$\mathfrak p \subset \mathfrak q$ を対応する $A$ の素イデアルとする。このとき
+$\mathfrak p \not \in Z$ かつ $\mathfrak q \in Z$ である。図式は
+$$
+\xymatrix{
+\mathfrak p' \ar[r] & \mathfrak q' \ar[r] & A^\wedge \\
+\mathfrak p \ar[r] \ar@{-}[u] &
+\mathfrak q \ar[r] \ar@{-}[u] & A \ar[u]
+}
+$$
+次のようにおく。
+\begin{align*}
+a & = \dim(A/\mathfrak p) = \dim(A^\wedge/\mathfrak pA^\wedge),\\
+b & = \dim(A/\mathfrak q) = \dim(A^\wedge/\mathfrak qA^\wedge),\\
+a' & = \dim(A^\wedge/\mathfrak p'),\\
+b' & = \dim(A^\wedge/\mathfrak q')
+\end{align*}
+これらの等式は More on Algebra, 補題
+\ref{more-algebra-lemma-completion-dimension} による。また
+\begin{align*}
+p & = \dim(A^\wedge_{\mathfrak p'}/\mathfrak p A^\wedge_{\mathfrak p'}) =
+\dim((A^\wedge/\mathfrak p A^\wedge)_{\mathfrak p'}) \\
+q & = \dim(A^\wedge_{\mathfrak q'}/\mathfrak p A^\wedge_{\mathfrak q'}) =
+\dim((A^\wedge/\mathfrak q A^\wedge)_{\mathfrak q'})
+\end{align*}
+とおく。$A$ は普遍鎖状であるから、
+$A^\wedge/\mathfrak pA^\wedge = (A/\mathfrak p)^\wedge$
+は次元 $a$ の等次元環である（More on Algebra, 命題
+\ref{more-algebra-proposition-ratliff}）。
+したがって $a = a' + p$ である。同様に $b = b' + q$ である。
+Algebra, 補題 \ref{algebra-lemma-apply-grothendieck-module} を平坦な局所環準同型
+$A_\mathfrak p \to A^\wedge_{\mathfrak p'}$
+に適用すると、
+$$
+\text{depth}(M^\wedge_{\mathfrak p'})
+=
+\text{depth}(M_\mathfrak p) +
+\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'})
+$$
+を得る。$s_{A, I}(M)$ の定義で最小化している量は
+$$
+s(\mathfrak p, \mathfrak q) =
+\text{depth}(M_\mathfrak p) + \dim((A/\mathfrak p)_\mathfrak q) =
+\text{depth}(M_\mathfrak p) + a - b
+$$
+である（最後の等号は $A$ が鎖状であることによる）。
+$s_{A^\wedge, I^\wedge}(M^\wedge)$ の定義で最小化している量は
+$$
+s(\mathfrak p', \mathfrak q') =
+\text{depth}(M^\wedge_{\mathfrak p'}) +
+\dim((A^\wedge/\mathfrak p')_{\mathfrak q'}) =
+\text{depth}(M^\wedge_{\mathfrak p'}) + a' - b'
+$$
+である（最後の等号は $A^\wedge$ が鎖状であることによる）。
+以上で証明を始めるための記号が整った。
+
+\medskip\noindent
+$\mathfrak p \subset \mathfrak q \subset A$ を、
+$\mathfrak p \not \in Z$ かつ $\mathfrak q \in Z$ を満たし、
+$s_{A, I}(M) = s(\mathfrak p, \mathfrak q)$ となる素イデアルとする。
+$\mathfrak q'$ を $\mathfrak q A^\wedge$ の上で極小に選び、
+$\mathfrak p' \subset \mathfrak q'$ を $\mathfrak p A^\wedge$ の上で極小に選べる
+（$A \to A^\wedge$ に対する下降定理を用いる）。
+すると上のような四つの素イデアルが得られ、$p = 0$ かつ $q = 0$ である。
+さらに
+$\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'})=0$
+も $p = 0$ から従う。したがって
+$s(\mathfrak p', \mathfrak q') = s(\mathfrak p, \mathfrak q)$。
+これにより最初の不等式を得る。
+
+\medskip\noindent
+次に、$A$ の形式的ファイバーが $(S_n)$ を満たすと仮定する。このとき
+$\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'})
+\geq \min(n, p)$。
+したがって
+$$
+s(\mathfrak p', \mathfrak q') \geq
+s(\mathfrak p, \mathfrak q) + q + \min(n, p) - p \geq
+s_{A, I}(M) + q + \min(n, p) - p
+$$
+である。問題が生じ得るのは $p > n$ の場合だけである。この場合は
+\begin{align*}
+s(\mathfrak p', \mathfrak q')
+& =
+\text{depth}(M^\wedge_{\mathfrak p'}) +
+\dim((A^\wedge/\mathfrak p')_{\mathfrak q'}) \\
+& =
+\text{depth}(M_\mathfrak p) +
+\text{depth}(A^\wedge_{\mathfrak p'} / \mathfrak p A^\wedge_{\mathfrak p'}) +
+\dim((A^\wedge/\mathfrak p')_{\mathfrak q'}) \\
+& \geq
+0 + n + 1
+\end{align*}
+となる。実際、$(A^\wedge/\mathfrak p')_{\mathfrak q'}$ は少なくとも二つの
+素イデアルをもつ。これで第二の不等式が証明された。
+\end{proof}
+
+\noindent
+次の補題の証明法はより一般的な状況にも適用できるが、そこから得られる
+より強い結果は、後の定理 \ref{local-cohomology-theorem-finiteness} に含まれる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-local-annihilator}
+\begin{reference}
+これは \cite[Satz 1]{Faltings-annulators} の特殊な場合である。
+\end{reference}
+$A$ を Gorenstein Noether 局所環とする。$I \subset A$ をイデアルとし、
+$Z = V(I) \subset \Spec(A)$ とおく。
+$M$ を有限 $A$-加群とする。(\ref{local-cohomology-equation-cutoff}) のように
+$s = s_{A, I}(M)$ とおく。このとき $H^i_Z(M)$ は $i < s$ に対して有限であるが、
+$H^s_Z(M)$ は有限でない。
+\end{lemma}
+
+\begin{proof}
+Gorenstein 局所環は双対化複体をもつので、これは命題
+\ref{local-cohomology-proposition-finiteness} の特殊な場合である。
+後で一般の有限性定理を証明する際に用いるため、この特殊な場合の短い証明が
+あれば有用であろう。
+\end{proof}
+
+\noindent
+次の定理の仮定は、優秀 Noether 環については定義により、
+双対化複体をもつ Noether 環については
+Dualizing Complexes, 補題 \ref{dualizing-lemma-universally-catenary} および
+Dualizing Complexes, 補題
+\ref{dualizing-lemma-dualizing-gorenstein-formal-fibres} により、また
+正則 Noether 環の商についても満たされることに注意する。
+
+\begin{theorem}
+\label{local-cohomology-theorem-finiteness}
+\begin{reference}
+これは \cite[Satz 2]{Faltings-finiteness} の特殊な場合である。
+\end{reference}
+$A$ を Noether 環とし、$I \subset A$ をイデアルとする。
+$Z = V(I) \subset \Spec(A)$ とおく。$M$ を有限 $A$-加群とする。
+(\ref{local-cohomology-equation-cutoff}) のように $s = s_{A, I}(M)$ とおく。次を仮定する。
+\begin{enumerate}
+\item $A$ は普遍鎖状である。
+\item $A$ の局所環の形式的ファイバーは Cohen--Macaulay である。
+\end{enumerate}
+このとき $H^i_Z(M)$ は $0 \leq i < s$ に対して有限であり、
+$H^s_Z(M)$ は有限でない。
+\end{theorem}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-check-finiteness-local-cohomology-locally} により、
+$A$ は局所環であると仮定してよい。
+
+\medskip\noindent
+$A$ が Noether 完備局所環ならば、Cohen の構造定理
+（Algebra, 定理 \ref{algebra-theorem-cohen-structure-theorem}）により、
+$A$ を正則完備局所環 $B$ の商として書ける。
+補題 \ref{local-cohomology-lemma-cutoff} と Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-and-restriction} を用いると、
+正則局所環の場合に帰着する。この場合は補題
+\ref{local-cohomology-lemma-local-annihilator} から従う。実際、正則局所環は Gorenstein である
+（Dualizing Complexes, 補題 \ref{dualizing-lemma-regular-gorenstein}）。
+
+\medskip\noindent
+$A$ を Noether 局所環とし、$\mathfrak m$ をその極大イデアルとする。
+$I \subset \mathfrak m$ と仮定してよい。そうでなければこの主張は自明である。
+$A^\wedge$ を $A$ の完備化とし、$Z^\wedge = V(IA^\wedge)$ とおく。また
+$M^\wedge = M \otimes_A A^\wedge$ を $M$ の完備化とする
+（Algebra, 補題 \ref{algebra-lemma-completion-tensor}）。
+このとき $H^i_Z(M) \otimes_A A^\wedge = H^i_{Z^\wedge}(M^\wedge)$ である。
+これは Dualizing Complexes, 補題
+\ref{dualizing-lemma-torsion-change-rings} と $A \to A^\wedge$ の平坦性
+（Algebra, 補題 \ref{algebra-lemma-completion-flat}）による。
+したがって、$H^i_{Z^\wedge}(M^\wedge)$ が $i < s$ に対して有限であり、
+$i = s$ に対して有限でないことを示せば十分である。Algebra, 補題
+\ref{algebra-lemma-descend-properties-modules} を参照せよ。
+結論が $A^\wedge$ に対して成り立つことは既知なので、
+$s_{A, I}(M) = s_{A^\wedge, I^\wedge}(M^\wedge)$ を示せば十分である。
+これは補題 \ref{local-cohomology-lemma-cutoff-completion} から従う。
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-astute-reader}
+注意深い読者は、$A$ の局所環の形式的ファイバーに課す条件を
+わずかに弱められることに気づいたであろう。すなわち、定理
+\ref{local-cohomology-theorem-finiteness} の状況で、$A$ は普遍鎖状であると仮定する一方、
+形式的ファイバーには何も仮定しないとする。整数 $n$ が与えられ、
+$H^i_Z(M)$ が $i \leq n$ に対して有限であることを示したいとする。
+まったく同じ証明から、$s_{A, I}(M) > n$ であり、かつ
+$A$ の局所環の形式的ファイバーが $(S_n)$ を満たせば十分であると分かる。
+一方、$H^s_Z(M)$ が有限でないことを示したいとし、ここで
+$s = s_{A, I}(M)$ とする。この場合、形式的ファイバーが
+$(S_{s - 1})$ を満たせば、上の議論によって結論が得られる。
+\end{remark}
+
+
+
+
+
+
+
+\section{順像の有限性 II}
+\label{local-cohomology-section-finiteness-pushforward-II}
+
+\noindent
+この節は第 \ref{local-cohomology-section-finiteness-pushforward} 節の続きである。
+ここでは、第 \ref{local-cohomology-section-finiteness-II} 節で行った仕事の成果を得る。
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-Rjstar}
+$X$ を局所 Noether スキームとする。$j : U \to X$ を、補集合が $Z$ である
+開部分スキームの包含とする。$\mathcal{F}$ を連接
+$\mathcal{O}_U$-加群とし、$n \geq 0$ を整数とする。次を仮定する。
+\begin{enumerate}
+\item $X$ は普遍鎖状である。
+\item すべての $z \in Z$ に対して、$\mathcal{O}_{X, z}$ の形式的ファイバーは
+$(S_n)$ を満たす。
+\end{enumerate}
+このとき、次の条件は同値である。
+\begin{enumerate}
+\item[(a)] $x \in \text{Supp}(\mathcal{F})$ および
+$z \in Z \cap \overline{\{x\}}$ に対して
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}_x) +
+\dim(\mathcal{O}_{\overline{\{x\}}, z}) > n$ である。
+\item[(b)] $R^pj_*\mathcal{F}$ は $0 \leq p < n$ に対して連接である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この主張は $X$ 上局所的なので、$X$ はアフィンであると仮定してよい。
+$X = \Spec(A)$ および $Z = V(I)$ と書く。$M$ を有限 $A$-加群とし、
+それに対応する連接 $\mathcal{O}_X$-加群は $\mathcal{F}$ の $U$ からの
+延長であるとする。補題
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local} を参照せよ。
+この補題から、$R^pj_*\mathcal{F}$ が連接であることと
+$H^{p + 1}_Z(M)$ が有限 $A$-加群であることも同値である。
+さらに、式
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}_x) +
+\dim(\mathcal{O}_{\overline{\{x\}}, z})$
+の最小値は、(\ref{local-cohomology-equation-cutoff}) の数 $s_{A, I}(M)$ であることに注意する。
+以上から、定理 \ref{local-cohomology-theorem-finiteness} により補題が従う。
+この適用については注意 \ref{local-cohomology-remark-astute-reader} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-finiteness-for-finite-locally-free}
+$X$ を局所 Noether スキームとする。$j : U \to X$ を、補集合が $Z$ である
+開部分スキームの包含とし、$n \geq 0$ を整数とする。
+$R^pj_*\mathcal{O}_U$ が $0 \leq p < n$ に対して連接ならば、
+$R^pj_*\mathcal{F}$ も $0 \leq p < n$ に対して連接である。
+これは任意の有限局所自由 $\mathcal{O}_U$-加群 $\mathcal{F}$ について成り立つ。
+\end{lemma}
+
+\begin{proof}
+問題は $X$ 上局所的なので、$X$ はアフィンであると仮定してよい。
+$X = \Spec(A)$ および $Z = V(I)$ と書く。補題
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local} を介して、本補題は補題
+\ref{local-cohomology-lemma-local-finiteness-for-finite-locally-free} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilate-Hp}
+\begin{reference}
+\cite[補題 1.9]{Bhatt-local}
+\end{reference}
+$A$ を環とし、$J \subset I \subset A$ を有限生成イデアルとする。
+$p \geq 0$ を整数とし、$U = \Spec(A) \setminus V(I)$ とおく。
+$H^p(U, \mathcal{O}_U)$ が $J^n$ で零化されるような $n$ が存在するならば、
+$H^p(U, \mathcal{F})$ は $J^m$ で零化される。ここで、そのような
+$m = m(\mathcal{F})$ が存在し、
+これは任意の有限局所自由 $\mathcal{O}_U$-加群 $\mathcal{F}$ について成り立つ。
+\end{lemma}
+
+\begin{proof}
+まず、$\mathfrak a$ を $H^p(U, \mathcal{F})$ の零化イデアルとする。
+$u \in U$ とする。開近傍 $u \in U' \subset U$ と同型
+$\varphi : \mathcal{O}_{U'}^{\oplus r} \to \mathcal{F}|_{U'}$
+が存在する。$f \in A$ を $u \in D(f) \subset U'$ となるように選ぶ。
+次の射が存在する。
+$$
+a : \mathcal{O}_U^{\oplus r} \longrightarrow \mathcal{F}
+\quad\text{および}\quad
+b : \mathcal{F} \longrightarrow \mathcal{O}_U^{\oplus r}
+$$
+これらの $D(f)$ 上の制限は、それぞれ $f^N \varphi$ および
+$f^N \varphi^{-1}$ に等しく、これはある $N$ に対して成り立つ。さらに、
+$a \circ b$ と $b \circ a$ はともに $f^{2N}$ 倍写像であると仮定してよい。
+これは Properties, 補題
+\ref{properties-lemma-section-maps-backwards} から従う。実際、$U$ は
+準コンパクトであり（$I$ は有限生成である）、分離的で、かつ
+$\mathcal{F}$ と $\mathcal{O}_U^{\oplus r}$ は有限表示である。
+したがって、$H^p(U, \mathcal{F})$ は $f^{2N}J^n$ で零化される。すなわち
+$f^{2N}J^n \subset \mathfrak a$ である。
+
+\medskip\noindent
+$U$ は準コンパクトなので、有限個の $f_1, \ldots, f_t$ と
+$N_1, \ldots, N_t$ を、$U = \bigcup D(f_i)$ かつ
+$f_i^{2N_i}J^n \subset \mathfrak a$ となるように取れる。
+すると $V(I) = V(f_1, \ldots, f_t)$ である。$I$ は有限生成なので、
+$I^M \subset (f_1, \ldots, f_t)$ となる $M$ が存在する。
+以上より、$J^m \subset \mathfrak a$ が $m \gg 0$ に対して成り立つ。
+例えば $m = M (2N_1 + \ldots + 2N_t) n$ とすればよい。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{局所コホモロジーの零化イデアル II}
+\label{local-cohomology-section-annihilators-II}
+
+\noindent
+第 \ref{local-cohomology-section-annihilators} 節における局所コホモロジーの零化イデアルの議論を、
+有限なコホモロジー加群をもつ下に有界な複体へ拡張する。
+
+\begin{definition}
+\label{local-cohomology-definition-depth-complex}
+$I$ を Noether 環 $A$ のイデアルとし、
+$K \in D^+_{\textit{Coh}}(A)$ とする。{\it $I$-深さ}を $K$ に対して定義し、
+$\text{depth}_I(K)$ と書く。それは、$m \in \mathbf{Z} \cup \{\infty\}$ のうち、
+$H^i_I(K) = 0$ がすべての $i < m$ に対して成り立つ最大のものとする。
+$A$ が極大イデアル $\mathfrak m$ をもつ局所環ならば、
+$\text{depth}_\mathfrak m(K)$ を単に $K$ の{\it 深さ}と呼ぶ。
+\end{definition}
+
+\noindent
+この定義は Algebra, 定義 \ref{algebra-definition-depth} と矛盾しない。
+これは Dualizing Complexes, 補題 \ref{dualizing-lemma-depth} による。
+
+\begin{proposition}
+\label{local-cohomology-proposition-annihilator-complex}
+$A$ を双対化複体をもつ Noether 環とする。
+$T \subset T' \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$s \in \mathbf{Z}$ とし、$K$ を $D_{\textit{Coh}}^+(A)$ の対象とする。
+次の条件は同値である。
+\begin{enumerate}
+\item イデアル $J \subset A$ が存在し、$V(J) \subset T'$ を満たして、
+$J$ は $H^i_T(K)$ を $i \leq s$ に対して零化する。
+\item すべての $\mathfrak p \not \in T'$ と、
+$\mathfrak q \in T$ で $\mathfrak p \subset \mathfrak q$ を満たすものに対して
+$$
+\text{depth}_{A_\mathfrak p}(K_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+この結果は命題 \ref{local-cohomology-proposition-annihilator} の自然な一般化であり、
+読者はまず同命題の証明を読むべきである。
+$\omega_A^\bullet$ を双対化複体とし、$\delta$ をその次元関数とする。
+Dualizing Complexes, 第 \ref{dualizing-section-dimension-function} 節を参照せよ。
+次の有限 $A$-加群が重要な役割を果たす。
+$$
+E^i = \Ext_A^i(K, \omega_A^\bullet)
+$$
+$\mathfrak p \subset A$ に対し、$H^i_\mathfrak p$ と書いて、
+$D(A_\mathfrak p)$ の対象の $\mathfrak pA_\mathfrak p$ に関する
+局所コホモロジーを表す。このとき、次の加群の
+$\mathfrak pA_\mathfrak p$-進完備化は
+$$
+(E^i)_\mathfrak p =
+\Ext^{\delta(\mathfrak p) + i}_{A_\mathfrak p}(K_\mathfrak p,
+(\omega_A^\bullet)_\mathfrak p[-\delta(\mathfrak p)])
+$$
+次の加群の Matlis 双対である。
+$$
+H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(K_\mathfrak p)
+$$
+これは Dualizing Complexes, 補題
+\ref{dualizing-lemma-special-case-local-duality} による。
+とくに、次の事実を得る。イデアル $J \subset A$ が
+$(E^i)_\mathfrak p$ を零化することと、$J$ が
+$H^{-\delta(\mathfrak p) - i}_{\mathfrak p}(K_\mathfrak p)$ を零化することは同値である。
+
+\medskip\noindent
+$T_n = \{\mathfrak p \in T \mid \delta(\mathfrak p) \leq n\}$ とおく。
+$\delta$ は有界関数なので、$T_a = \emptyset$ は $a \ll 0$ に対して成り立ち、
+$T_b = T$ は $b \gg 0$ に対して成り立つ。
+
+\medskip\noindent
+(2) を仮定し、(1) のような $J$ の存在を示そう。そのために二重帰納法を用いる。
+$i \leq s$ に対して、次の帰納法の仮定 $IH_i$ を考える。
+$H^a_T(K)$ は、$J \subset A$ かつ $V(J) \subset T'$ を満たすあるイデアルで
+$a \leq i$ に対して零化される。$IH_i$ は、$i$ が十分小さければ自明である。
+実際、$K$ は下に有界である。
+
+\medskip\noindent
+帰納段階に移る。$IH_{i - 1}$ が成り立つと仮定し、$i \leq s$ とする。
+$J'$ を、$V(J') \subset T'$ を満たし、$H^a_T(K)$ を
+$a \leq i - 1$ に対して零化するように選ぶ
+（帰納法の仮定により、このように選べる）。$n$ に関する下降帰納法により、
+イデアル $J$ が存在し、$V(J) \subset T'$ を満たし、
+$J H^i_T(K)$ の随伴素イデアルが $T_n$ に属することを示す。
+$n \ll 0$ に対して、これは $JH^i_T(K) = 0$ を意味する
+（Algebra, 補題 \ref{algebra-lemma-ass-zero}）。したがって $IH_i$ が成り立つ。
+初期段階 $n \gg 0$ は自明である。この場合は $T = T_n$ であり、
+$H^i_T(K)$ のすべての随伴素イデアルが $T$ に属するからである。
+
+\medskip\noindent
+そこで、上の性質をもつ $J$ が $n$ に対して与えられたと仮定する。
+$\mathfrak q \in T_n$ とする。$T_\mathfrak q \subset \Spec(A_\mathfrak q)$ を
+$T$ の逆像とする。このとき
+$H^j_T(K)_\mathfrak q = H^j_{T_\mathfrak q}(K_\mathfrak q)$
+である。これは補題 \ref{local-cohomology-lemma-torsion-change-rings} による。
+補題 \ref{local-cohomology-lemma-local-cohomology-ss} のスペクトル系列
+$$
+H_\mathfrak q^p(H^q_{T_\mathfrak q}(K_\mathfrak q))
+\Rightarrow
+H^{p + q}_\mathfrak q(K_\mathfrak q)
+$$
+を考える。以下で、イデアル $J'' \subset A$ で $V(J'') \subset T'$ を満たし、
+$H^i_\mathfrak q(K_\mathfrak q)$ が $J''$ で零化されるものを見つける。
+これはすべての $\mathfrak q \in T_n \setminus T_{n - 1}$ に対して成り立つ。
+主張：$J (J')^i J''$ は $n - 1$ に対して求める性質をもつ。
+実際、$\mathfrak q \in T_n \setminus T_{n - 1}$ とする。
+上のスペクトル系列はフィルトレーション
+$$
+E_\infty^{0, i} = E_{i + 2}^{0, i} \subset \ldots \subset E_3^{0, i} \subset
+E_2^{0, i} = H^0_\mathfrak q(H^i_{T_\mathfrak q}(K_\mathfrak q))
+$$
+を定める。加群 $E_\infty^{0, i}$ は $J''$ で零化される。
+部分商 $E_j^{0, i}/E_{j + 1}^{0, i}$ は $i + 1 \geq j \geq 2$ に対して
+$J'$ で零化される。実際、$d_j^{0, i}$ の終域は次の加群の部分商である。
+$$
+H^j_\mathfrak q(H^{i - j + 1}_{T_\mathfrak q}(K_\mathfrak q)) =
+H^j_\mathfrak q(H^{i - j + 1}_T(K)_\mathfrak q)
+$$
+また、$H^{i - j + 1}_T(K)_\mathfrak q$ は $J'$ の選び方により $J'$ で零化される。
+最後に、$J$ の選び方により
+$J H^i_T(K)_\mathfrak q \subset H^0_\mathfrak q(H^i_T(K)_\mathfrak q)$
+である。これは $\Spec(A_\mathfrak q)$ の非閉点における $\delta$ の値が
+より大きいからである。したがって、望みどおり $\mathfrak q$ は
+$J(J')^iJ'' H^i_T(K)$ の随伴素イデアルではない。
+
+\medskip\noindent
+冒頭の考察により、$J''$ は
+$$
+(E^{-\delta(\mathfrak q) - i})_\mathfrak q =
+(E^{-n - i})_\mathfrak q
+$$
+を零化すべきであり、これはすべての
+$\mathfrak q \in T_n \setminus T_{n - 1}$ に対して必要である。
+しかし、$J''$ が一つの $\mathfrak q$ に対して有効ならば、
+$\mathfrak q$ のある開近傍に属するすべての $\mathfrak q$ に対して有効である。
+加群 $E^{-n - i}$ が有限だからである。
+$\Spec(A)$ の任意の部分集合は誘導位相について Noether である
+（Topology, 補題 \ref{topology-lemma-Noetherian}）。したがって、
+$J''$ が一つの $\mathfrak q$ に対して存在することを示せば十分である。
+
+\medskip\noindent
+Ext 加群は有限なので、$J''$ の存在は
+$$
+\text{Supp}(E^{-n - i}) \cap \Spec(A_\mathfrak q) \subset T'.
+$$
+と同値である。これは、$E^{-n - i}$ の局所化が、すべての
+$\mathfrak p \subset \mathfrak q$ かつ $\mathfrak p \not \in T'$ において
+零であることと同値である。$A_\mathfrak p$ 上の局所双対性を用いると、
+次を示せばよいと分かる。
+$$
+H^{i + n - \delta(\mathfrak p)}_\mathfrak p(K_\mathfrak p) =
+H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(K_\mathfrak p)
+$$
+これは零である（ここでは $\delta$ が次元関数であることを用いる）。
+補題の仮定、$i \leq s$、および定義
+\ref{local-cohomology-definition-depth-complex} における深さの定義により、実際に零となる。
+
+\medskip\noindent
+逆の含意を証明するため、(2) が成り立たないと仮定し、上の議論を逆にたどる。
+まず、$\mathfrak q \in T$ と $\mathfrak p \subset \mathfrak q$ を
+$\mathfrak p \not \in T'$ となるように選び、
+$$
+i = \text{depth}_{A_\mathfrak p}(K_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) \leq s
+$$
+が最小となるようにする。このとき
+$H^{i - \dim((A/\mathfrak p)_\mathfrak q)}_\mathfrak p(K_\mathfrak p)$
+は、定義 \ref{local-cohomology-definition-depth-complex} における深さの定義により零でない。
+$n = \delta(\mathfrak q)$ とおく。このとき、$J \subset A$ かつ
+$V(J) \subset T'$ を満たし、$J(E^{-n - i})_\mathfrak q = 0$ となる
+イデアルは存在しない。したがって、$H^i_\mathfrak q(K_\mathfrak q)$ は
+$J \subset A$ かつ $V(J) \subset T'$ を満たすイデアルでは零化されない。
+$i$ の最小性と上で表示したスペクトル系列から、加群
+$H^i_T(K)_\mathfrak q$ は $J \subset A$ かつ
+$V(J) \subset T'$ を満たすイデアルでは零化されない。
+したがって、$H^i_T(K)$ は $J \subset A$ かつ
+$V(J) \subset T'$ を満たすイデアルでは零化されない。これで命題が証明された。
+\end{proof}
+
+
+
+
+
+
+
+\section{局所コホモロジーの有限性 III}
+\label{local-cohomology-section-finiteness-III}
+
+\noindent
+第 \ref{local-cohomology-section-finiteness} 節および第 \ref{local-cohomology-section-finiteness-II} 節における
+局所コホモロジーの有限性の議論を、有限なコホモロジー加群をもつ
+下に有界な複体へ拡張する。
+
+\begin{lemma}
+\label{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator-complex}
+$A$ を Noether 環とする。$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$K$ を $D_{\textit{Coh}}^+(A)$ の対象とし、$n \in \mathbf{Z}$ とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $H^i_T(K)$ は $i \leq n$ に対して有限である。
+\item イデアル $J \subset A$ が存在し、$V(J) \subset T$ を満たして、
+$J$ は $H^i_T(K)$ を $i \leq n$ に対して零化する。
+\end{enumerate}
+$T = V(I) = Z$ があるイデアル $I \subset A$ に対して成り立つならば、
+これらはさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(3)] $e \geq 0$ が存在し、$I^e$ は $H^i_Z(K)$ を
+$i \leq n$ に対して零化する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この補題は補題
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator} の自然な一般化であり、
+読者はまず同補題の証明を読むべきである。
+(1) が成り立つと仮定する。$H^i_J(K) = H^i_{V(J)}(K)$ であることを思い出そう。
+Dualizing Complexes, 補題 \ref{dualizing-lemma-local-cohomology-noetherian} を参照せよ。
+したがって $H^i_T(K) = \colim H^i_J(K)$ であり、ここで余極限は
+イデアル $J \subset A$ で $V(J) \subset T$ を満たすもの全体にわたる。
+補題 \ref{local-cohomology-lemma-adjoint-ext} を参照せよ。$H^i_T(K)$ は $i \leq n$ に対して
+有限生成なので、(2) のような $J \subset A$ を、写像
+$H^i_J(K) \to H^i_T(K)$ が $i \leq n$ に対して全射となるように選べる。
+したがって、その有限個の生成元は $J$ のある冪で零化される元であり、
+$J$ をある冪で置き換えれば (2) が成り立つことが分かる。
+
+\medskip\noindent
+$a \in \mathbf{Z}$ を、$H^i(K) = 0$ が $i < a$ に対して成り立つ整数として取る。
+(2) $\Rightarrow$ (1) を $a$ に関する下降帰納法により証明する。
+$a > n$ ならば、$H^i_T(K) = 0$ が $i \leq n$ に対して成り立つ。
+したがって (1) と (2) はともに真であり、証明すべきことはない。
+
+\medskip\noindent
+(2) のような $J$ があると仮定する。
+$N = H^a_T(K) = H^0_T(H^a(K))$ は、有限 $A$-加群 $H^a(K)$ の
+部分加群として有限である。$n = a$ ならば証明は終わるので、以下では
+$a < n$ と仮定する。$R\Gamma_T$ の構成により、$H^i_T(N) = 0$ が
+$i > 0$ に対して成り立ち、$H^0_T(N) = N$ である。
+注意 \ref{local-cohomology-remark-upshot} を参照せよ。区別三角形
+$$
+N[-a] \to K \to K' \to N[-a + 1]
+$$
+を選ぶ。このとき、$H^a_T(K') = 0$ であり、$H^i_T(K) = H^i_T(K')$ が
+$i > a$ に対して成り立つことが分かる。したがって、$K$ を $K'$ で
+置き換えてよい。ゆえに $H^a_T(K) = 0$ と仮定してよい。
+これは $H^a(K)$ の有限個の随伴素イデアルが $T$ に属さないことを意味する。
+素イデアル回避（Algebra, 補題 \ref{algebra-lemma-silly}）により、$f \in J$ を、
+$H^a(K)$ のどの随伴素イデアルにも含まれないように選べる。
+区別三角形
+$$
+L \to K \xrightarrow{f} K \to L[1]
+$$
+を選ぶ。構成により $H^i(L) = 0$ が $i \leq a$ に対して成り立つ。
+一方、コホモロジーの長完全列
+$$
+0 \to H^{a + 1}_T(L) \to H^{a + 1}_T(K) \xrightarrow{f}
+H^{a + 1}_T(K) \to H^{a + 2}_T(L) \to H^{a + 2}_T(K) \xrightarrow{f} \ldots
+$$
+があり、これは同一視 $H^{a + 1}_T(L) = H^{a + 1}_T(K)$ と短完全列
+$$
+0 \to H^{i - 1}_T(K) \to H^i_T(L) \to H^i_T(K) \to 0
+$$
+へ分かれる。これは $i \leq n$ に対して成り立つ。実際、$f \in J$ である。
+したがって $J^2$ は $H^i_T(L)$ を $i \leq n$ に対して零化する。
+$L$ に帰納法の仮定を適用すると、$H^i_T(L)$ は $i \leq n$ に対して有限である。
+短完全列をもう一度用いれば、望みどおり $H^i_T(K)$ が
+$i \leq n$ に対して有限であることが分かる。
+
+\medskip\noindent
+$T = V(I)$ の場合に (2) と (3) が同値であることの証明は省略する。
+\end{proof}
+
+\begin{proposition}
+\label{local-cohomology-proposition-finiteness-complex}
+$A$ を双対化複体をもつ Noether 環とする。
+$T \subset \Spec(A)$ を特殊化で安定な部分集合とする。
+$s \in \mathbf{Z}$ とし、$K \in D_{\textit{Coh}}^+(A)$ とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $H^i_T(K)$ は有限 $A$-加群である（$i \leq s$ に対して）。
+\item $\mathfrak p \not \in T$、$\mathfrak q \in T$、かつ
+$\mathfrak p \subset \mathfrak q$ を満たすすべてのものに対して
+$$
+\text{depth}_{A_\mathfrak p}(K_\mathfrak p) +
+\dim((A/\mathfrak p)_\mathfrak q) > s
+$$
+である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+命題 \ref{local-cohomology-proposition-annihilator-complex} と補題
+\ref{local-cohomology-lemma-check-finiteness-local-cohomology-by-annihilator-complex} の形式的帰結である。
+\end{proof}
+
+
+
+
+
+
+\section{連接加群の改善}
+\label{local-cohomology-section-improve}
+
+\noindent
+同様の構成は \cite{EGA} に見いだされ、より最近では
+\cite{Kollar-local-global-hulls} および \cite{Kollar-variants} に見いだされる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-get-depth-1-along-Z}
+$X$ を Noether スキームとする。$T \subset X$ を特殊化で安定な部分集合とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。このとき、一意な写像
+$\mathcal{F} \to \mathcal{F}'$ が存在する。これは連接 $\mathcal{O}_X$-加群の
+写像であり、次を満たす。
+\begin{enumerate}
+\item $\mathcal{F} \to \mathcal{F}'$ は全射である。
+\item $\mathcal{F}_x \to \mathcal{F}'_x$ は $x \not \in T$ に対して同型である。
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) \geq 1$ が
+$x \in T$ に対して成り立つ。
+\end{enumerate}
+$f : Y \to X$ が平坦射で $Y$ が Noether ならば、
+$f^*\mathcal{F} \to f^*\mathcal{F}'$ は $f^{-1}(T) \subset Y$ と
+$f^*\mathcal{F}$ に対応する商である。
+\end{lemma}
+
+\begin{proof}
+条件 (3) はちょうど $\text{Ass}(\mathcal{F}') \cap T = \emptyset$ を意味する。
+したがって $\mathcal{F} \to \mathcal{F}'$ は、$\mathcal{F}$ の、台が $T$ に
+含まれる切断の部分層による商である。これで一意性が証明される。
+引き戻しに関する主張は Divisors, 補題 \ref{divisors-lemma-bourbaki} と
+一意性から従う。
+
+\medskip\noindent
+$\mathcal{F} \to \mathcal{F}'$ の存在を示す。一意性により、$X$ 上局所的に
+存在と一意性を証明すれば十分である。細部は省略する。
+したがって $X = \Spec(A)$ はアフィンであり、$\mathcal{F}$ は有限
+$A$-加群 $M$ に付随する連接加群であると仮定してよい。
+$M' = M / H^0_T(M)$ とおく。ここで $H^0_T(M)$ は
+第 \ref{local-cohomology-section-supports} 節で定めたものである。このとき
+$M_\mathfrak p = M'_\mathfrak p$ が $\mathfrak p \not \in T$ に対して成り立ち、
+これで (1) が証明される。一方、
+$H^0_T(M) = \colim H^0_Z(M)$ であり、ここで $Z$ は $X$ の閉部分集合で
+$T$ に含まれるもの全体を走る。したがって Dualizing Complexes, 補題
+\ref{dualizing-lemma-divide-by-torsion} により $H^0_T(M') = 0$、すなわち
+$M'$ の随伴素イデアルはどれも $T$ に属さない。ゆえに
+$\text{depth}(M'_\mathfrak p) \geq 1$ が $\mathfrak p \in T$ に対して成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-get-depth-2-along-Z}
+$j : U \to X$ を Noether スキームの開埋め込みとする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{F}' = j_*(\mathcal{F}|_U)$ が連接であると仮定する。
+このとき $\mathcal{F} \to \mathcal{F}'$ は連接 $\mathcal{O}_X$-加群の
+写像のうち、次を満たす一意なものである。
+\begin{enumerate}
+\item $\mathcal{F}|_U \to \mathcal{F}'|_U$ は同型である。
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) \geq 2$ が
+$x \in X$、$x \not \in U$ に対して成り立つ。
+\end{enumerate}
+$f : Y \to X$ が平坦射で $Y$ が Noether ならば、
+$f^*\mathcal{F} \to f^*\mathcal{F}'$ は $f^{-1}(U) \subset Y$ に
+対応する写像である。
+\end{lemma}
+
+\begin{proof}
+Divisors, 補題 \ref{divisors-lemma-depth-pushforward} の (3) により
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}'_x) \geq 2$ である。
+$\mathcal{F} \to \mathcal{F}'$ の一意性は Divisors, 補題
+\ref{divisors-lemma-depth-2-hartog} から従う。
+平坦引き戻しとの両立性は平坦基底変換から従う。Cohomology of Schemes, 補題
+\ref{coherent-lemma-flat-base-change-cohomology} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-make-S2-along-Z}
+$X$ を Noether スキームとし、$Z \subset X$ を閉部分スキームとする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。$X$ は普遍鎖状であり、
+局所環の形式的ファイバーは $(S_1)$ を満たすと仮定する。
+このとき、一意な写像 $\mathcal{F} \to \mathcal{F}''$ が存在する。
+これは連接 $\mathcal{O}_X$-加群の写像であり、次を満たす。
+\begin{enumerate}
+\item $\mathcal{F}_x \to \mathcal{F}''_x$ は
+$x \in X \setminus Z$ に対して同型である。
+\item $\mathcal{F}_x \to \mathcal{F}''_x$ は全射であり、
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) = 1$ が、$x \in Z$ のうち、
+直接特殊化 $x' \leadsto x$ で $x' \not \in Z$ かつ
+$x' \in \text{Ass}(\mathcal{F})$ を満たすものが存在する点に対して成り立つ。
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 2$ が
+残りの $x \in Z$ に対して成り立つ。
+\end{enumerate}
+$f : Y \to X$ が Cohen--Macaulay 射で $Y$ が Noether ならば、
+$f^*\mathcal{F} \to f^*\mathcal{F}''$ は $f^{-1}(Z) \subset Y$ に関して
+同じ性質を満たす。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} \to \mathcal{F}'$ を、補題 \ref{local-cohomology-lemma-get-depth-1-along-Z} で
+$Z$ という $X$ の部分集合に対して構成した写像とする。$\mathcal{F}'$ は
+$\mathcal{F}$ を、台が $Z$ に含まれる切断の部分層で割った商であることを思い出そう。
+
+\medskip\noindent
+まず一意性を証明する。$\mathcal{F} \to \mathcal{F}''$ を補題のような写像とする。
+分解 $\mathcal{F} \to \mathcal{F}' \to \mathcal{F}''$ を得る。実際、条件 (2) と
+(3) により $\text{Ass}(\mathcal{F}'') \cap Z = \emptyset$ である。
+$U \subset X$ を、$\mathcal{F}'|_U \to \mathcal{F}''|_U$ が同型となる
+最大の開部分スキームとする。$U$ は (2) のような点をすべて含む。
+そこで Divisors, 補題 \ref{divisors-lemma-depth-2-hartog} により
+$\mathcal{F}'' = j_*(\mathcal{F}'|_U)$ と結論できる。これで一意性を得る
+（細部として、このような $\mathcal{F}''$ が二つあるなら、それぞれから得られる
+開集合 $U$ の共通部分を取る）。
+
+\medskip\noindent
+存在を証明する。$\text{Ass}(\mathcal{F}') = \{x_1, \ldots, x_n\}$ は有限であり、
+$x_i \not \in Z$ であることを思い出そう。$Y_i$ を $\{x_i\}$ の閉包とする。
+$Z_{i, j}$ を $Z \cap Y_i$ の既約成分とする。
+$\text{Supp}(\mathcal{F}') \cap Z = \bigcup Z_{i, j}$ であることに注意する。
+$z_{i, j} \in Z_{i, j}$ を生成点とする。次のようにおく。
+$$
+d_{i, j} = \dim(\mathcal{O}_{\overline{\{x_i\}}, z_{i, j}})
+$$
+$d_{i, j} = 1$ ならば、$z_{i, j}$ は (2) のような点の一つである。
+したがって、これらの点では $\mathcal{F}'$ を変更する必要がない。
+さらに、依然として $d_{i, j} = 1$ と仮定すると、補題
+\ref{local-cohomology-lemma-depth-function} により、開近傍
+$z_{i, j} \in V_{i, j} \subset X$ を、
+$\text{depth}_{\mathcal{O}_{X, z}}(\mathcal{F}'_z) \geq 2$ が
+$z \in Z_{i, j} \cap V_{i, j}$、$z \not = z_{i, j}$ に対して
+成り立つように選べる。次のようにおく。
+$$
+Z' = X \setminus
+\left(
+X \setminus Z \cup \bigcup\nolimits_{d_{i, j} = 1} V_{i, j})
+\right)
+$$
+$j' : X \setminus Z' \to X$ と書く。$Z'$ の選び方により、補題
+\ref{local-cohomology-lemma-finiteness-pushforward-general} の仮定は満たされる。
+$\mathcal{F}'' = j'_*(\mathcal{F}'|_{X \setminus Z'})$ とおき、補題
+\ref{local-cohomology-lemma-get-depth-2-along-Z} を適用すれば結論を得る。
+
+\medskip\noindent
+最後の主張は、平坦局所準同型に沿う深さの変化の公式
+（Algebra, 補題 \ref{algebra-lemma-apply-grothendieck-module} を参照せよ）と、
+$f$ が Cohen--Macaulay であることに内在する $f$ のファイバーに関する仮定から
+従う。細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-make-S2-along-T-simple}
+$X$ を局所的に双対化複体をもつ Noether スキームとする。
+$T' \subset X$ を特殊化で安定な部分集合とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。$x \leadsto x'$ が
+$X$ の点の直接特殊化であり、$x' \in T'$ かつ $x \not \in T'$ ならば、
+$\text{depth}(\mathcal{F}_x) \geq 1$ であると仮定する。
+このとき、一意な写像 $\mathcal{F} \to \mathcal{F}''$ が存在する。
+これは連接 $\mathcal{O}_X$-加群の写像であり、次を満たす。
+\begin{enumerate}
+\item $\mathcal{F}_x \to \mathcal{F}''_x$ は $x \not \in T'$ に対して同型である。
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 2$ が
+$x \in T'$ に対して成り立つ。
+\end{enumerate}
+$f : Y \to X$ が Cohen--Macaulay 射で $Y$ が Noether ならば、
+$f^*\mathcal{F} \to f^*\mathcal{F}''$ は $f^{-1}(T') \subset Y$ に関して
+同じ性質を満たす。
+\end{lemma}
+
+\begin{proof}
+一意性を証明する。$\mathcal{F} \to \mathcal{F}''$ を補題のような写像とする。
+$U \subset X$ を、$\mathcal{F}|_U \to \mathcal{F}''|_U$ が同型となる
+最大の開部分スキームとする。(1) により $U$ は集合 $X \setminus T'$ を含む。
+(2) と Divisors, 補題 \ref{divisors-lemma-depth-2-hartog} により、
+$\mathcal{F}'' = j_*(\mathcal{F}|_U)$ と結論できる。ここで
+$j : U \to X$ は包含射である。これで一意性を得る
+（細部として、このような $\mathcal{F}''$ が二つあるなら、それぞれから得られる
+開集合 $U$ の共通部分を取る）。
+
+\medskip\noindent
+存在を証明する。$\mathcal{F} \to \mathcal{F}'$ を、$\mathcal{F}$ に
+補題 \ref{local-cohomology-lemma-get-depth-1-along-Z} を $T'$ を用いて適用して構成した商とする。
+$\mathcal{F}'$ は $\mathcal{F}$ を、台が $T'$ に含まれる切断の部分層で
+割った商であることを思い出そう。次で定義する。
+$$
+\mathcal{F}'' = \colim j_*(\mathcal{F}'|_V)
+$$
+ここで $j : V \to X$ は、$X \setminus V \subset T'$ を満たす
+開部分スキーム全体を走る。$T'$ は特殊化で安定なので、この余極限は
+フィルター付きである。写像 $\mathcal{F}' \to j_*(\mathcal{F}'|_V)$ は
+それぞれ単射である。実際、$\text{Ass}(\mathcal{F}')$ は $T'$ と交わらない。
+したがって $\mathcal{F}' \to \mathcal{F}''$ は単射である。
+
+\medskip\noindent
+$X = \Spec(A)$ がアフィンであり、$\mathcal{F}$ が有限 $A$-加群 $M$ に
+対応すると仮定する。このとき $\mathcal{F}'$ は
+$M' = M / H^0_{T'}(M)$ に対応する。補題
+\ref{local-cohomology-lemma-get-depth-1-along-Z} の証明を参照せよ。補題
+\ref{local-cohomology-lemma-local-cohomology} および \ref{local-cohomology-lemma-adjoint-ext} を適用すると、
+$\mathcal{F}''$ は $A$-加群 $M''$ に対応し、これは短完全列
+$$
+0 \to M' \to M'' \to H^1_{T'}(M') \to 0
+$$
+に入る。命題 \ref{local-cohomology-proposition-finiteness} と、補題の主張にある
+直接特殊化に関する条件により、$M''$ は有限 $A$-加群である。
+これにより $\mathcal{F}''$ は連接であることが分かる。
+
+\medskip\noindent
+$\mathcal{F}''$ の連接性と、上に表示したフィルター余極限における遷移写像の
+単射性から、$\mathcal{F}'' = j_*(\mathcal{F}'|_V)$ が上のような十分小さい
+$V$ のすべてに対して成り立つと結論する。このとき条件 (1) と (2) は補題
+\ref{local-cohomology-lemma-get-depth-2-along-Z} から従う。
+
+\medskip\noindent
+最後の主張は、平坦局所準同型に沿う深さの変化の公式
+（Algebra, 補題 \ref{algebra-lemma-apply-grothendieck-module} を参照せよ）と、
+$f$ が Cohen--Macaulay であることに内在する $f$ のファイバーに関する仮定から
+従う。細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-make-S2-along-T}
+$X$ を局所的に双対化複体をもつ Noether スキームとする。
+$T' \subset T \subset X$ を特殊化で安定な部分集合とし、$x \leadsto x'$ が
+$X$ の点の直接特殊化で $x' \in T'$ ならば $x \in T$ であると仮定する。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。
+このとき、一意な写像 $\mathcal{F} \to \mathcal{F}''$ が存在する。
+これは連接 $\mathcal{O}_X$-加群の写像であり、次を満たす。
+\begin{enumerate}
+\item $\mathcal{F}_x \to \mathcal{F}''_x$ は $x \not \in T$ に対して同型である。
+\item $\mathcal{F}_x \to \mathcal{F}''_x$ は全射であり、
+$\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 1$ が
+$x \in T$、$x \not \in T'$ に対して成り立つ。
+\item $\text{depth}_{\mathcal{O}_{X, x}}(\mathcal{F}''_x) \geq 2$ が
+$x \in T'$ に対して成り立つ。
+\end{enumerate}
+$f : Y \to X$ が Cohen--Macaulay 射で $Y$ が Noether ならば、
+$f^*\mathcal{F} \to f^*\mathcal{F}''$ は
+$f^{-1}(T') \subset f^{-1}(T) \subset Y$ に関して同じ性質を満たす。
+\end{lemma}
+
+\begin{proof}
+まず $\mathcal{F} \to \mathcal{F}'$ を、$\mathcal{F}$ に補題
+\ref{local-cohomology-lemma-get-depth-1-along-Z} を $T$ を用いて適用して構成した商とする。
+次に $\mathcal{F}' \to \mathcal{F}''$ を、補題
+\ref{local-cohomology-lemma-make-S2-along-T-simple} で $T'$ を用いて構成した
+連接加群の一意な写像とする。このとき $\mathcal{F} \to \mathcal{F}''$ は
+求める写像である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Hartshorne--Lichtenbaum 消滅}
+\label{local-cohomology-section-Hartshorne-Lichtenbaum-vanishing}
+
+\noindent
+この消滅結果は Lichtenbaum の定理の局所版である。同定理については
+Duality for Schemes, 第 \ref{duality-section-lichtenbaum} 節を参照せよ。
+この結果を含むさらに多くの事項は \cite{CD} に見いだされる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-top-vanishing}
+$A$ を次元 $d$ の Noether 環とする。$I \subset I' \subset A$ をイデアルとする。
+$I'$ が $A$ の Jacobson 根基に含まれ、$\text{cd}(A, I') < d$ ならば、
+$\text{cd}(A, I) < d$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-cd-dimension} により $\text{cd}(A, I) \leq d$ である。
+補題 \ref{local-cohomology-lemma-isomorphism} を用いて、写像
+$$
+H^d_{V(I')}(A) \to H^d_{V(I)}(A)
+$$
+が全射であることを示す。これで証明は終わる。
+$\mathfrak p \in V(I) \setminus V(I')$ を取る。$I'$ に関する仮定により、
+$\mathfrak p$ は $A$ の極大イデアルではない。したがって
+$\dim(A_\mathfrak p) < d$ である。すると
+$H^d_{\mathfrak pA_\mathfrak p}(A_\mathfrak p) = 0$
+が補題 \ref{local-cohomology-lemma-cd-dimension} により成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-top-vanishing-some-module}
+$A$ を次元 $d$ の Noether 環とし、$I \subset A$ をイデアルとする。
+$H^d_{V(I)}(M) = 0$ がある有限 $A$-加群について成り立ち、その台が次元 $d$ の
+既約成分をすべて含むならば、$\text{cd}(A, I) < d$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-cd-dimension} により $\text{cd}(A, I) \leq d$ である。
+したがって、任意の有限 $A$-加群 $N$ に対して $H^i_{V(I)}(N) = 0$ が
+$i > d$ において成り立つ。性質 $\mathcal{P}$ が有限 $A$-加群 $N$ に対して
+成り立つとは、$H^d_{V(I)}(N) = 0$ であることだとしよう。
+仮定の一つは $\mathcal{P}(M)$ が成り立つことである。次に注意する。
+$\mathcal{P}(N_1 \oplus N_2)
+\Leftrightarrow (\mathcal{P}(N_1) \wedge \mathcal{P}(N_2))$.
+また、$N \to N'$ が全射ならば、
+$\mathcal{P}(N) \Rightarrow \mathcal{P}(N')$ である。実際、上で見たように
+$H^{d + 1}_{V(I)}$ は消滅する。
+$\mathfrak p_1, \ldots, \mathfrak p_n$ を、$A$ の極小素イデアルで
+$\dim(A/\mathfrak p_i) = d$ を満たすものとする。次元に関する理由から、$\mathcal{P}(N)$ は
+$N$ の台が $\{\mathfrak p_1, \ldots, \mathfrak p_n\}$ と交わらなければ成り立つ。
+補題 \ref{local-cohomology-lemma-cd-dimension} を参照せよ。各 $i$ に対して
+$M_i = M/\mathfrak p_i M$ とおく。これは有限 $A$-加群であり、
+$\mathfrak p_i$ で零化され、その台は $V(\mathfrak p_i)$ に等しい
+（ここで $M$ の台に関する仮定を用いる）。最後に、$J \subset A$ が
+イデアルならば $\mathcal{P}(JM_i)$ が成り立つ。実際、$JM_i$ は $M$ のコピーの
+直和の商である。したがって Cohomology of Schemes, 補題
+\ref{coherent-lemma-property-higher-rank-cohomological} により、
+$\mathcal{P}$ はすべての有限 $A$-加群に対して成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-top-coh-divisible}
+$A$ を次元 $d$ の Noether 局所環とする。$f \in A$ を、次元 $d$ の
+どの極小素イデアルにも含まれない元とする。このとき
+$f : H^d_{V(I)}(M) \to H^d_{V(I)}(M)$ は、任意の有限 $A$-加群 $M$ と
+任意のイデアル $I \subset A$ に対して全射である。
+\end{lemma}
+
+\begin{proof}
+$M/fM$ の台の次元は $< d$ である。これは $f$ に関する仮定による。
+したがって補題 \ref{local-cohomology-lemma-cd-dimension} により
+$H^d_{V(I)}(M/fM) = 0$ である。ゆえに
+$H^d_{V(I)}(fM) \to H^d_{V(I)}(M)$ は全射である。
+補題 \ref{local-cohomology-lemma-cd-dimension} により $\text{cd}(A, I) \leq d$ なので、
+全射 $M \to fM$、$x \mapsto fx$ が全射
+$H^d_{V(I)}(M) \to H^d_{V(I)}(fM)$ を誘導することも分かる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-bound-dualizing}
+$A$ を正規化された双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$I \subset A$ をイデアルとする。
+$H^0_{V(I)}(\omega_A^\bullet) = 0$ ならば、$\text{cd}(A, I) < \dim(A)$ である。
+\end{lemma}
+
+\begin{proof}
+$d = \dim(A)$ とおく。$\mathfrak p_1, \ldots, \mathfrak p_n \subset A$ を
+次元 $d$ の極小素イデアルとする。有限 $A$-加群
+$H^{-i}(\omega_A^\bullet)$ は $i \in \{0, \ldots, d\}$ に対してのみ零でなく、
+$H^{-i}(\omega_A^\bullet)$ の台の次元は $\leq i$ であることを思い出そう。
+補題 \ref{local-cohomology-lemma-sitting-in-degrees} を参照せよ。
+$\omega_A = H^{-d}(\omega_A^\bullet)$ とおく。素イデアル回避
+（Algebra, 補題 \ref{algebra-lemma-silly}）により、$f \in A$、
+$f \not \in \mathfrak p_i$ であって、$H^{-i}(\omega_A^\bullet)$ を
+$i < d$ に対して零化するものを選べる。区別三角形
+$$
+\omega_A[d] \to \omega_A^\bullet \to
+\tau_{\geq -d + 1}\omega_A^\bullet \to \omega_A[d + 1]
+$$
+を考える。Derived Categories, 注意
+\ref{derived-remark-truncation-distinguished-triangle} を参照せよ。
+Derived Categories, 補題 \ref{derived-lemma-trick-vanishing-composition} により、
+$f^d$ が $\tau_{\geq -d + 1}\omega_A^\bullet$ の零自己準同型を誘導することが分かる。
+三角圏の公理を用いると、写像
+$$
+\omega_A^\bullet \to \omega_A[d]
+$$
+であって、$\omega_A[d] \to \omega_A^\bullet$ との合成が
+$f^d$ 倍写像となるものを得る。この倍写像は $\omega_A[d]$ 上のものである。
+したがって $f^d$ は $H^d_{V(I)}(\omega_A)$ を零化する。
+補題 \ref{local-cohomology-lemma-top-coh-divisible} により $H^d_{V(I)}(\omega_A) = 0$ と結論する。
+あとは補題 \ref{local-cohomology-lemma-cd-top-vanishing-some-module} と、
+$(\omega_A)_{\mathfrak p_i}$ が零でないという事実から結論が従う
+（例えば Dualizing Complexes, 補題
+\ref{dualizing-lemma-nonvanishing-generically-local} を参照せよ）。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-inverse-system-symbolic-powers}
+$(A, \mathfrak m)$ を完備 Noether 局所整域とする。
+$\mathfrak p \subset A$ を次元 $1$ の素イデアルとする。
+すべての $n \geq 1$ に対して $m \geq n$ が存在し、
+$\mathfrak p^{(m)} \subset \mathfrak p^n$ を満たす。
+\end{lemma}
+
+\begin{proof}
+記号冪 $\mathfrak p^{(m)}$ は写像
+$A \to A_\mathfrak p/\mathfrak p^mA_\mathfrak p$ の核として定義されることを
+思い出そう。局所化は完全なので、短完全列
+$$
+0 \to \mathfrak a_n \to A/\mathfrak p^n \to A/\mathfrak p^{(n)} \to 0
+$$
+において $\mathfrak a_n$ の台が $\{\mathfrak m\}$ に含まれると結論する。
+とくに逆系 $(\mathfrak a_n)$ は Mittag--Leffler である。実際、各
+$\mathfrak a_n$ は Artin $A$-加群である。
+したがって補題は $\lim \mathfrak a_n = 0$ という要請と同値である。
+$f \in \lim \mathfrak a_n$ とする。このとき $f$ は
+$A = \lim A/\mathfrak p^n$ の元である（ここで $A$ が完備であることを用いる）。
+この元は完備化 $A_\mathfrak p^\wedge$ において零に写る。これは
+$A_\mathfrak p$ の完備化である。
+$A_\mathfrak p \to A_\mathfrak p^\wedge$ は忠実平坦なので、$f$ は
+$A_\mathfrak p$ において零に写る。$A$ は整域だから、望みどおり $f$ は零である。
+\end{proof}
+
+\begin{proposition}
+\label{local-cohomology-proposition-Hartshorne-Lichtenbaum-vanishing}
+\begin{reference}
+\cite[定理 3.1]{CD}
+\end{reference}
+$A$ を、完備化が $A^\wedge$ である Noether 局所環とする。
+$I \subset A$ を、次を満たすイデアルとする。
+$$
+\dim V(IA^\wedge + \mathfrak p) \geq 1
+$$
+これはすべての極小素イデアル $\mathfrak p \subset A^\wedge$ のうち、
+次元 $\dim(A)$ のものに対して成り立つ。このとき
+$\text{cd}(A, I) < \dim(A)$ である。
+\end{proposition}
+
+\begin{proof}
+$A \to A^\wedge$ は忠実平坦なので
+$H^d_{V(I)}(A) \otimes_A A^\wedge = H^d_{V(IA^\wedge)}(A^\wedge)$
+が Dualizing Complexes, 補題 \ref{dualizing-lemma-torsion-change-rings} により成り立つ。
+したがって $A$ は完備であると仮定してよい。
+
+\medskip\noindent
+$A$ は完備であると仮定する。$\mathfrak p_1, \ldots, \mathfrak p_n \subset A$ を
+次元 $d$ の極小素イデアルとする。完備局所環
+$A_i = A/\mathfrak p_i$ を考える。Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-and-restriction} により
+$H^d_{V(I)}(A_i) = H^d_{V(IA_i)}(A_i)$ である。補題
+\ref{local-cohomology-lemma-cd-top-vanishing-some-module} により、$(A_i, IA_i)$ について
+本補題を証明すれば十分である。したがって $A$ は完備局所整域であると
+仮定してよい。
+
+\medskip\noindent
+$A$ は完備局所整域であると仮定する。素イデアル
+$\mathfrak p \supset I$ を $\dim(A/\mathfrak p) = 1$ となるように選べる。
+補題 \ref{local-cohomology-lemma-cd-top-vanishing} により、$\mathfrak p$ について
+本補題を証明すれば十分である。
+
+\medskip\noindent
+補題 \ref{local-cohomology-lemma-cd-bound-dualizing} により
+$H^0_{V(\mathfrak p)}(\omega_A^\bullet) = 0$ を示せば十分である。
+次を思い出そう。
+$$
+H^0_{V(\mathfrak p)}(\omega_A^\bullet) =
+\colim \text{Ext}^0_A(A/\mathfrak p^n, \omega_A^\bullet)
+$$
+補題 \ref{local-cohomology-lemma-inverse-system-symbolic-powers} により、この余極限は次と同じである。
+$$
+\colim \text{Ext}^0_A(A/\mathfrak p^{(n)}, \omega_A^\bullet)
+$$
+$\text{depth}(A/\mathfrak p^{(n)}) = 1$ なので、補題
+\ref{local-cohomology-lemma-sitting-in-degrees} により、これらの Ext 群は望みどおり零である。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-affine-complement}
+$(A, \mathfrak m)$ を Noether 局所環とする。$I \subset A$ をイデアルとする。
+$A$ は優秀かつ正規であり、$\dim V(I) \geq 1$ であると仮定する。
+このとき $\text{cd}(A, I) < \dim(A)$ である。とくに $\dim(A) = 2$ ならば、
+$\Spec(A) \setminus V(I)$ はアフィンである。
+\end{lemma}
+
+\begin{proof}
+More on Algebra, 補題
+\ref{more-algebra-lemma-completion-normal-local-ring} により、完備化
+$A^\wedge$ は正規であり、したがって整域である。ゆえに命題
+\ref{local-cohomology-proposition-Hartshorne-Lichtenbaum-vanishing} の仮定が成り立ち、結論を得る。
+アフィン性に関する主張は補題 \ref{local-cohomology-lemma-cd-is-one} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Frobenius 作用}
+\label{local-cohomology-section-frobenius}
+
+\noindent
+$p$ を素数とする。$A$ を、$p = 0$ が $A$ において成り立つ環とする。
+$A$ の{\it Frobenius 自己準同型}とは、写像
+$$
+F : A \longrightarrow A,
+\quad
+a \longmapsto a^p
+$$
+のことである。この節では、Frobenius 作用をもつ加群についての補題を証明する。
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilator-frobenius-module}
+$p$ を素数とする。$(A, \mathfrak m, \kappa)$ を、$p = 0$ が $A$ において
+成り立つ Noether 局所環とする。$M$ を有限 $A$-加群で
+$M \otimes_{A, F} A \cong M$ を満たすものとする。このとき $M$ は有限自由である。
+\end{lemma}
+
+\begin{proof}
+表示 $A^{\oplus m} \to A^{\oplus n} \to M$ を、同型
+$\kappa^{\oplus n} \to M/\mathfrak m M$ を誘導するように選ぶ。
+$T = (a_{ij})$ を写像 $A^{\oplus m} \to A^{\oplus n}$ の行列とする。
+$a_{ij} \in \mathfrak m$ であることに注意する。$F$ による基底変換を適用し、
+基底変換の右完全性を用いると、表示
+$A^{\oplus m} \to A^{\oplus n} \to M$ を得る。その行列は
+$T = (a_{ij}^p)$ である。したがって
+$a_{ij} \in \mathfrak m^p$ となる表示がある。この構成を反復すると、各
+$e \geq 1$ に対し $a_{ij} \in \mathfrak m^e$ となる表示が存在する。
+これは、Fitting イデアル $\text{Fit}_k(M)$（More on Algebra, 定義
+\ref{more-algebra-definition-fitting-ideal}）が $k < n$ に対して
+$\bigcap_{e \geq 1} \mathfrak m^e$ に含まれることを意味する。
+Krull の共通部分定理（Algebra, 補題
+\ref{algebra-lemma-intersect-powers-ideal-module-zero}）によりこれは零なので、
+More on Algebra, 補題
+\ref{more-algebra-lemma-fitting-ideal-finite-locally-free} により
+$M$ は階数 $n$ の自由加群であると結論する。
+\end{proof}
+
+\noindent
+この節では、$f_1, \ldots, f_r$ を環 $A$ の元とするとき、
+$\sum a_if_i = 0$ ならば $a_i \in (f_1, \ldots, f_r)$ となる場合に、
+これらを{\it 独立}と呼ぶ。言い換えると、$I = (f_1, \ldots, f_r)$ とおけば、
+$I/I^2$ は $A/I$ 上自由であり、基底 $f_1, \ldots, f_r$ をもつ。
+
+\begin{lemma}
+\label{local-cohomology-lemma-1}
+\begin{reference}
+\cite{Lech-inequalities} および \cite[補題 1, 299 頁]{MatCA} を参照せよ。
+\end{reference}
+$A$ を環とする。$f_1, \ldots, f_{r - 1}, f_rg_r$ が独立ならば、
+$f_1, \ldots, f_r$ は独立である。
+\end{lemma}
+
+\begin{proof}
+$\sum a_if_i = 0$ とする。このとき $\sum a_ig_rf_i = 0$ である。
+したがって $a_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$ である。
+$a_r = \sum_{i < r} b_i f_i + b f_rg_r$ と書く。このとき
+$0 = \sum_{i < r} (a_i + b_if_r)f_i + bf_r^2g_r$ である。ゆえに
+$a_i + b_i f_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$ であり、これは望みどおり
+$a_i \in (f_1, \ldots, f_r)$ を含意する。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-2}
+\begin{reference}
+\cite{Lech-inequalities} および \cite[補題 2, 300 頁]{MatCA} を参照せよ。
+\end{reference}
+$A$ を環とする。$f_1, \ldots, f_{r - 1}, f_rg_r$ が独立であり、かつ
+$A$-加群 $A/(f_1, \ldots, f_{r - 1}, f_rg_r)$ の長さが有限ならば、
+\begin{align*}
+& \text{length}_A(A/(f_1, \ldots, f_{r - 1}, f_rg_r)) \\
+& =
+\text{length}_A(A/(f_1, \ldots, f_{r - 1}, f_r)) +
+\text{length}_A(A/(f_1, \ldots, f_{r - 1}, g_r))
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+次の完全列が存在すると主張する。
+$$
+0 \to
+A/(f_1, \ldots, f_{r - 1}, g_r) \xrightarrow{f_r}
+A/(f_1, \ldots, f_{r - 1}, f_rg_r) \to
+A/(f_1, \ldots, f_{r - 1}, f_r) \to 0
+$$
+実際、$a f_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$ ならば、
+$\sum_{i < r} a_i f_i + (a + bg_r)f_r = 0$ が、ある
+$b, a_i \in A$ に対して成り立つ。したがって
+$\sum_{i < r} a_i g_r f_i + (a + bg_r)g_rf_r = 0$ であり、これは
+$a + bg_r \in (f_1, \ldots, f_{r - 1}, f_rg_r)$ を含意する。
+ゆえに $a$ は $A/(f_1, \ldots, f_{r - 1}, g_r)$ において零に写る。
+これで主張が証明された。最後に長さの加法性
+（Algebra, 補題 \ref{algebra-lemma-length-additive}）を用いればよい。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-3}
+\begin{reference}
+\cite{Lech-inequalities} および \cite[補題 3, 300 頁]{MatCA} を参照せよ。
+\end{reference}
+$(A, \mathfrak m)$ を局所環とする。$\mathfrak m = (x_1, \ldots, x_r)$ であり、
+$x_1^{e_1}, \ldots, x_r^{e_r}$ がある $e_i > 0$ に対して独立ならば、
+$\text{length}_A(A/(x_1^{e_1}, \ldots, x_r^{e_r})) = e_1\ldots e_r$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-1} と補題 \ref{local-cohomology-lemma-2} および帰納法を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-flat-extension-independent}
+$\varphi : A \to B$ を平坦な環準同型とする。
+$f_1, \ldots, f_r \in A$ が独立ならば、
+$\varphi(f_1), \ldots, \varphi(f_r) \in B$ は独立である。
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$ および $J = \varphi(I)B$ とおく。平坦性により
+$I/I^2 \otimes_A B = J/J^2$ である。したがって $I/I^2$ が $A/I$ 上自由ならば、
+$J/J^2$ は $B/J$ 上自由である。
+\end{proof}
+
+\begin{lemma}[Kunz]
+\label{local-cohomology-lemma-frobenius-flat-regular}
+\begin{reference}
+\cite{Kunz-flat}
+\end{reference}
+$p$ を素数とする。$A$ を $p = 0$ を満たす Noether 環とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $A$ は正則である。
+\item $F : A \to A$、$a \mapsto a^p$ は平坦である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Spec(F) : \Spec(A) \to \Spec(A)$ は恒等写像であることに注意する。
+正則性は局所環を用いて定義され、平坦性も局所環に関する性質である。
+Algebra, 補題 \ref{algebra-lemma-flat-localization} を参照せよ。
+したがって $A$ は極大イデアル $\mathfrak m$ をもつ Noether 局所環であると
+仮定してよく、実際そう仮定する。
+
+\medskip\noindent
+$A$ は正則であると仮定する。$x_1, \ldots, x_d$ を $A$ のパラメータ系とする。
+$F$ を適用すると
+$F(x_1), \ldots, F(x_d) = x_1^p, \ldots, x_d^p$ を得る。これは $A$ の
+パラメータ系である。したがって $F$ は平坦である。Algebra, 補題
+\ref{algebra-lemma-CM-over-regular-flat} および
+\ref{algebra-lemma-regular-ring-CM} を参照せよ。
+
+\medskip\noindent
+逆に $F$ は平坦であると仮定する。$\mathfrak m = (x_1, \ldots, x_r)$ と書き、
+$r$ は最小であるとする。このとき $x_1, \ldots, x_r$ は上で定義した意味で
+独立である。$F$ は平坦なので、$x_1^p, \ldots, x_r^p$ は独立である。
+補題 \ref{local-cohomology-lemma-flat-extension-independent} を参照せよ。したがって補題
+\ref{local-cohomology-lemma-3} により
+$\text{length}_A(A/(x_1^p, \ldots, x_r^p)) = p^r$ である。
+$\chi(n) = \text{length}_A(A/\mathfrak m^n)$ とおく。これは次数 $\dim(A)$ の
+数値多項式であることを思い出そう。Algebra, 命題
+\ref{algebra-proposition-dimension} を参照せよ。$n \gg 0$ を選ぶ。次に注意する。
+$$
+\mathfrak m^{pn + pr} \subset F(\mathfrak m^n)A \subset \mathfrak m^{pn}
+$$
+これは $x_1, \ldots, x_r$ の単項式を見れば分かる。また、
+$$
+A/F(\mathfrak m^n)A = A/\mathfrak m^n \otimes_{A, F} A
+$$
+$F$ の平坦性により、これは長さ
+$\chi(n) \text{length}_A(A/F(\mathfrak m)A)$ をもつ
+（Algebra, 補題 \ref{algebra-lemma-pullback-module}）。上で見たことにより、
+これは $p^r\chi(n)$ に等しい。したがって
+$$
+\chi(pn + pr) \geq p^r\chi(n) \geq \chi(pn)
+$$
+最高次項を見れば、これは $r = \dim(A)$、すなわち $A$ が正則であることを含意する。
+\end{proof}
+
+
+
+
+\section{ある種の加群の構造}
+\label{local-cohomology-section-structure}
+
+\noindent
+正則局所環上のある種の加群の構造について、いくつかの結果を述べる。
+この種の結果、およびさらに多くの結果は
+\cite{Huneke-Sharp}, \cite{Lyubeznik}, \cite{Lyubeznik2} に見いだせる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-structure-torsion-D-module-regular}
+\begin{reference}
+\cite[定理 2.4]{Lyubeznik} の特別な場合
+\end{reference}
+$k$ を標数 $0$ の体とし、$d \geq 1$ とする。
+$A = k[[x_1, \ldots, x_d]]$ とし、その極大イデアルを $\mathfrak m$ とする。
+$M$ を $\mathfrak m$-冪捩れ $A$-加群とし、加法的作用素
+$D_1, \ldots, D_d$ が備わっているとする。これらは Leibniz 則
+$$
+D_i(fz) = \partial_i(f) z + f D_i(z)
+$$
+を $f \in A$ および $z \in M$ に対して満たす。ここで $\partial_i$ は
+$x_i$ に関する微分である。
+このとき $M$ は、$E$（$k$ の入射包絡）のコピーの直和と同型である。
+\end{lemma}
+
+\begin{proof}
+集合 $J$ と同型 $M[\mathfrak m] \to \bigoplus_{j \in J} k$ を選ぶ。
+$\bigoplus_{j \in J} E$ は入射的なので
+（Dualizing Complexes, 補題 \ref{dualizing-lemma-sum-injective-modules}）、
+この同型を $A$-加群準同型
+$\varphi : M \to \bigoplus_{j \in J} E$ に延長できる。
+$\varphi$ は同型、すなわち全単射であると主張する。
+
+\medskip\noindent
+単射性。$z \in M$ を零でない元とする。$M$ は $\mathfrak m$-冪捩れなので、
+元 $f \in A$ であって $fz \in M[\mathfrak m]$ かつ
+$fz \not = 0$ となるものを選べる。
+このとき $\varphi(fz) = f\varphi(z)$ は零でないから、
+$\varphi(z)$ も零でない。
+
+\medskip\noindent
+全射性。$z \in M$ とする。このとき $x_1^n z = 0$ となる
+$n \geq 0$ がある。$z \in x_1M$ を $n$ に関する帰納法で証明する。
+$n = 0$ ならば $z = 0$ なので主張は成り立つ。
+$n > 0$ ならば、$D_1$ を作用させて
+$0 = n x_1^{n - 1} z + x_1^nD_1(z)$ を得る。
+したがって $x_1^{n - 1}(nz + x_1D_1(z)) = 0$ である。帰納法により
+$nz + x_1D_1(z) \in x_1M$ となる。$n$ は可逆なので、
+$z \in x_1M$ と結論する。よって $M$ は $x_1$-可除である。
+$\varphi$ が全射でないならば、元 $e \in \bigoplus_{j \in J} E$ であって
+$M$ に属さないものを選べる。
+上と同様に議論すれば $\mathfrak m e \subset M$ と仮定してよく、
+特に $x_1 e \in M$ である。元 $z_1 \in M$ で
+$x_1 z_1 = x_1 e$ を満たすものが存在する。したがって
+$x_1(z_1 - e) = 0$ である。$e$ を $e - z_1$ で置き換えることにより、
+$e$ は $x_1$ で零化されると仮定してよい。
+したがって、
+$$
+\varphi[x_1] :
+M[x_1]
+\longrightarrow
+\left(\bigoplus\nolimits_{j \in J} E\right)[x_1] =
+\bigoplus\nolimits_{j \in J} E[x_1]
+$$
+が全射であることを証明すれば十分である。$d = 1$ ならば、これは
+$\varphi$ の構成から成り立つ。$d > 1$ ならば、$E[x_1]$ は
+$k[[x_2, \ldots, x_d]]$ の剰余体の入射包絡であることに注意する。
+Dualizing Complexes, 補題 \ref{dualizing-lemma-quotient} を参照せよ。
+$M[x_1]$ は $k[[x_2, \ldots, x_d]]$ 上の加群として
+$\mathfrak m/(x_1)$-冪捩れであり、上に表示した Leibniz 則を満たす
+作用素 $D_2, \ldots, D_d$ が備わっていることに注意する。
+したがって $d$ に関する帰納法により、望みどおり $\varphi[x_1]$ は
+全射であると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-structure-torsion-Frobenius-regular}
+\begin{reference}
+少し議論を補えば \cite[系 3.6]{Huneke-Sharp} から従う。
+また \cite[定理 1.4]{Lyubeznik2} から直接にも従う。
+\end{reference}
+$p$ を素数とする。$(A, \mathfrak m, k)$ を $p = 0$ を満たす
+正則局所環とする。$F : A \to A$, $a \mapsto a^p$ を Frobenius
+自己準同型とする。$M$ を $\mathfrak m$-冪捩れ加群であって
+$M \otimes_{A, F} A \cong M$ を満たすものとする。このとき $M$ は、
+$E$（$k$ の入射包絡）のコピーの直和と同型である。
+\end{lemma}
+
+\begin{proof}
+集合 $J$ と $A$-加群準同型
+$\varphi : M \to \bigoplus_{j \in J} E$ であって、
+$M[\mathfrak m]$ を
+$(\bigoplus_{j \in J} E)[\mathfrak m] = \bigoplus_{j \in J} k$ へ
+同型に写すものを選ぶ。
+$\varphi$ は同型、すなわち全単射であると主張する。
+
+\medskip\noindent
+単射性。$z \in M$ を零でない元とする。$M$ は $\mathfrak m$-冪捩れなので、
+元 $f \in A$ であって $fz \in M[\mathfrak m]$ かつ
+$fz \not = 0$ となるものを選べる。
+このとき $\varphi(fz) = f\varphi(z)$ は零でないから、
+$\varphi(z)$ も零でない。
+
+\medskip\noindent
+全射性。補題 \ref{local-cohomology-lemma-frobenius-flat-regular} により
+$F$ は平坦であることを思い出そう。
+$x_1, \ldots, x_d$ を $\mathfrak m$ の極小生成系とする。
+$$
+M_n = M[x_1^{p^n}, \ldots, x_d^{p^n}]
+$$
+を、$M$ の部分加群であって $x_1^{p^n}, \ldots, x_d^{p^n}$ で
+零化される元からなるものとする。したがって $M_0 = M[\mathfrak m]$ は
+$k$ 上のベクトル空間である。また、$M = \bigcup M_n$ である。
+これは $M$ が $\mathfrak m$-冪捩れであるという仮定による。
+$F^n$ は平坦であり、
+$F^n(x_i) = x_i^{p^n}$ なので、
+$$
+M_n \cong (M \otimes_{A, F^n} A)[x_1^{p^n}, \ldots, x_d^{p^n}] =
+M[x_1, \ldots, x_d] \otimes_{A, F^n} A =
+M_0 \otimes_k A/(x_1^{p^n}, \ldots, x_d^{p^n})
+$$
+を得る。したがって $M_n$ は $A/(x_1^{p^n}, \ldots, x_d^{p^n})$ 上自由である。
+計算により、$A/(x_1^{p^n}, \ldots, x_d^{p^n})$ の任意の元で
+$x_1^{p^n - 1}$ により零化されるものは $x_1$ で割り切れることが分かる。
+例えば、Algebra, 補題
+\ref{algebra-lemma-regular-complete-containing-coefficient-field} による同型
+$A/(x_1^{p^n}, \ldots, x_d^{p^n}) \cong
+k[x_1, \ldots, x_d]/(x_1^{p^n}, \ldots, x_d^{p^n})$
+を用いればよい。
+よって同じことが $M_n$ の任意の元について成り立つ。
+$M$ の各元は $M_n$ にすべての $n \gg 0$ に対して属し、また
+$M$ の各元は $x_1$ のある冪で零化されるので、$M$ は $x_1$-可除であると結論する。
+
+\medskip\noindent
+$x = x_1$ とおく。上で $M$ は $x$-可除であることを見た。
+$\varphi$ が全射でないならば、元 $e \in \bigoplus_{j \in J} E$ であって
+$M$ に属さないものを選べる。
+上と同様に議論すれば $\mathfrak m e \subset M$ と仮定してよく、
+特に $x e \in M$ である。元 $z_1 \in M$ で
+$x z_1 = x e$ を満たすものが存在する。したがって
+$x(z_1 - e) = 0$ である。$e$ を $e - z_1$ で置き換えることにより、
+$e$ は $x$ で零化されると仮定してよい。
+したがって、
+$$
+\varphi[x] :
+M[x]
+\longrightarrow
+\left(\bigoplus\nolimits_{j \in J} E\right)[x] =
+\bigoplus\nolimits_{j \in J} E[x]
+$$
+が全射であることを証明すれば十分である。$d = 1$ ならば、これは
+$\varphi$ の構成から成り立つ。$d > 1$ ならば、$E[x]$ は正則環
+$A/xA$ の剰余体の入射包絡であることに注意する。
+Dualizing Complexes, 補題 \ref{dualizing-lemma-quotient} を参照せよ。
+$M[x]$ は $A/xA$ 上の加群として $\mathfrak m/(x)$-冪捩れであり、
+次が成り立つことに注意する。
+\begin{align*}
+M[x] \otimes_{A/xA, F} A/xA
+& = M[x] \otimes_{A, F} A \otimes_A A/xA \\
+& = (M \otimes_{A, F} A)[x^p] \otimes_A A/xA \\
+& \cong M[x^p] \otimes_A A/xA
+\end{align*}
+前と同様に $F$ の平坦性を用いて議論する。
+$M[x^p] \otimes_A A/xA \to M[x]$、
+$z \otimes 1 \mapsto x^{p - 1}z$ は同型であると主張する。
+これは、上で定義した各加群 $M_n$（$n > 0$）について証明すれば分かる。
+その場合には $A/(x_1^{p^n}, \ldots, x_d^{p^n})$ と $x = x_1$ に対する
+同じ結果から従う。
+したがって $\dim(A)$ に関する帰納法により、望みどおり $\varphi[x]$ は
+全射であると結論する。
+\end{proof}
+
+
+
+
+
+\section{局所コホモロジー上の追加構造}
+\label{local-cohomology-section-additional}
+
+\noindent
+一つの結果例を挙げる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-derivation}
+$A$ を環とし、$I \subset A$ を有限生成イデアルとする。
+$Z = V(I)$ とおく。
+各導分 $\theta : A \to A$ に対し、標準的な加法的作用素 $D$ が
+局所コホモロジー加群 $H^i_Z(A)$ 上に存在し、$\theta$ に関する
+Leibniz 則を満たす。
+\end{lemma}
+
+\begin{proof}
+$f_1, \ldots, f_r$ を $I$ の生成元とする。
+$R\Gamma_Z(A)$ は複体
+$$
+A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}}
+\to \ldots \to A_{f_1\ldots f_r}
+$$
+で計算されることを思い出そう。Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-adjoint} を参照せよ。
+$\theta$ は $A$ の任意の局所化上の、$\theta$ に関する Leibniz 則を満たす
+加法的作用素へ一意的に延長されるので、補題は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-frobenius}
+$p$ を素数とする。$A$ を $p = 0$ を満たす環とする。
+$F : A \to A$, $a \mapsto a^p$ を Frobenius 自己準同型とする。
+$I \subset A$ を有限生成イデアルとし、$Z = V(I)$ とおく。
+同型
+$R\Gamma_Z(A) \otimes_{A, F}^\mathbf{L} A \cong R\Gamma_Z(A)$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+Dualizing Complexes, 補題
+\ref{dualizing-lemma-torsion-change-rings}
+および、$Z = V(f_1^p, \ldots, f_r^p)$ であるという事実から従う
+（ここで $I = (f_1, \ldots, f_r)$ とした）。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-etale-derivation}
+$A$ を環とする。$V \to \Spec(A)$ を準コンパクト、準分離的かつ
+\'etale とする。各導分 $\theta : A \to A$ に対し、標準的な加法的作用素
+$D$ が $H^i(V, \mathcal{O}_V)$ 上に存在し、$\theta$ に関する
+Leibniz 則を満たす。
+\end{lemma}
+
+\begin{proof}
+$V$ が分離的ならば、アフィン開被覆
+$V = \bigcup_{j = 1, \ldots m} V_j$ を用いて議論できる。実際、$V$ は
+分離的なので $V_{j_0 \ldots j_p} = \Spec(B_{j_0 \ldots j_p})$ と書ける。
+Schemes, 補題 \ref{schemes-lemma-characterize-separated} を参照せよ。
+すると、$A$-加群 $H^i(V, \mathcal{O}_V)$ は第 $i$ コホモロジー群であり、
+対応する {\v C}ech 複体は
+$$
+\prod B_{j_0} \to
+\prod B_{j_0j_1} \to
+\prod B_{j_0j_1j_2} \to \ldots
+$$
+であることが分かる。Cohomology of Schemes, 補題
+\ref{coherent-lemma-cech-cohomology-quasi-coherent}
+を参照せよ。各 $B = B_{j_0 \ldots j_p}$ は \'etale $A$-代数である。
+したがって $\Omega_B = \Omega_A \otimes_A B$ であり、$\theta$ は導分
+$\theta_B : B \to B$ に一意的に延長されると結論する。
+これらの写像は {\v C}ech 複体の自己準同型を定め、コホモロジー群上に
+所望の作用素を定める。
+
+\medskip\noindent
+一般の場合には、Cohomology of Schemes, 補題
+\ref{coherent-lemma-hypercoverings} の証明の前半とまったく同様に、
+アフィン開部分による $V$ の超被覆を用いる。詳細は省略する。
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-higher-order-operators}
+補題 \ref{local-cohomology-lemma-derivation} および \ref{local-cohomology-lemma-etale-derivation} は、
+Algebra, 補題 \ref{algebra-lemma-formally-etale-principal-parts} および
+注意 \ref{algebra-remark-formally-etale-differential-operators} を用いれば、
+高階微分作用素も含むように強められる。これが必要になったならば、
+ここで正確な補題を述べて証明することにする。
+\end{remark}
+
+\begin{lemma}
+\label{local-cohomology-lemma-etale-frobenius}
+$p$ を素数とする。$A$ を $p = 0$ を満たす環とする。
+$F : A \to A$, $a \mapsto a^p$ を Frobenius 自己準同型とする。
+$V \to \Spec(A)$ が準コンパクト、準分離的かつ \'etale ならば、同型
+$R\Gamma(V, \mathcal{O}_V) \otimes_{A, F}^\mathbf{L} A \cong
+R\Gamma(V, \mathcal{O}_V)$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+相対 Frobenius 射
+$$
+V \longrightarrow V \times_{\Spec(A), \Spec(F)} \Spec(A)
+$$
+は $V$ の $A$ 上のものであり、同型であることに注意する。
+\'Etale Morphisms,
+補題 \ref{etale-lemma-relative-frobenius-etale} を参照せよ。
+したがって補題はコホモロジーと基底変換から従う。Derived Categories of Schemes,
+補題 \ref{perfect-lemma-compare-base-change} を参照せよ。
+$V$ は $A$ 上 \'etale なので、$A$ 上平坦であることに注意する。
+\end{proof}
+
+
+
+
+
+\section{一様性について I}
+\label{local-cohomology-section-uniform-vanishing}
+
+\noindent
+この節の主な目的は、補題
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e} を定式化し証明することである。
+
+\begin{lemma}
+\label{local-cohomology-lemma-map-tor-1-zero}
+$R$ を環とする。$M \to M'$ を $R$-加群の写像とし、
+$M$ は有限表示であり、$\text{Tor}_1^R(M, N) \to \text{Tor}_1^R(M', N)$ は
+任意の $R$-加群 $N$ に対して零であるとする。
+このとき $M \to M'$ は自由 $R$-加群を経由する。
+\end{lemma}
+
+\begin{proof}
+短完全列の間の写像
+$$
+\xymatrix{
+0 \ar[r] &
+K \ar[r] \ar[d] &
+R^{\oplus r} \ar[r] \ar[d] &
+M \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+K' \ar[r] &
+\bigoplus_{i \in I} R \ar[r] &
+M' \ar[r] &
+0
+}
+$$
+であって、その右の縦射が与えられた写像となるものを選べる。
+この写像を短完全列
+\begin{equation}
+\label{local-cohomology-equation-pushout}
+0 \to K' \to E \to M \to 0
+\end{equation}
+を経由して分解できる。この列は、最初の短完全列を $K \to K'$ に沿って
+押し出したものである。図式追跡により、補題の仮定は境界写像
+$\text{Tor}_1^R(M, N) \to K' \otimes_R N$ であって
+（\ref{local-cohomology-equation-pushout}）から誘導されるものが零であること、すなわち列
+（\ref{local-cohomology-equation-pushout}）が普遍完全であることを含意すると分かる。
+Algebra, 補題 \ref{algebra-lemma-universally-exact-split} により、これは
+（\ref{local-cohomology-equation-pushout}）が分裂することを含意する（ここで
+$M$ が有限表示であることを用いる）。したがって写像 $M \to M'$ は
+$\bigoplus_{i \in I} R$ を経由し、主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e}
+$R$ を環とする。$\alpha : M \to M'$ を $R$-加群の写像とする。
+$P_\bullet \to M$ および $P'_\bullet \to M'$ を射影
+$R$-加群による分解とする。$e \geq 0$ を整数とする。
+次の条件を考える。
+\begin{enumerate}
+\item 複体の写像 $a_\bullet : P_\bullet \to P'_\bullet$ であって、
+コホモロジー上で $\alpha$ を誘導し、$a_i = 0$ が $i > e$ に対して成り立つものが存在する。
+\item 複体の写像 $a_\bullet : P_\bullet \to P'_\bullet$ であって、
+コホモロジー上で $\alpha$ を誘導し、$a_{e + 1} = 0$ となるものが存在する。
+\item 写像 $\Ext^i_R(M', N) \to \Ext^i_R(M, N)$ は、任意の
+$R$-加群 $N$ および $i > e$ に対して零である。
+\item 写像 $\Ext^{e + 1}_R(M', N) \to \Ext^{e + 1}_R(M, N)$ は、任意の
+$R$-加群 $N$ に対して零である。
+\item $N = \Im(P'_{e + 1} \to P'_e)$ とおき、
+$\xi \in \Ext^{e + 1}_R(M', N)$ を標準元とする（証明を参照）。
+このとき $\xi$ は $\Ext^{e + 1}_R(M, N)$ において零に写る。
+\item 写像 $\text{Tor}_i^R(M, N) \to \text{Tor}_i^R(M', N)$ は、任意の
+$R$-加群 $N$ および $i > e$ に対して零である。
+\item 写像 $\text{Tor}_{e + 1}^R(M, N) \to \text{Tor}_{e + 1}^R(M', N)$ は、
+任意の $R$-加群 $N$ に対して零である。
+\end{enumerate}
+このとき常に次の含意が成り立つ。
+$$
+(1) \Leftrightarrow (2) \Leftrightarrow (3) \Leftrightarrow (4)
+\Leftrightarrow (5) \Rightarrow (6) \Leftrightarrow (7)
+$$
+$M$ が $(-e - 1)$-擬連接ならば（例えば $R$ が Noether 環で、
+$M$ が有限 $R$-加群ならば）、すべての条件は同値である。
+\end{lemma}
+
+\begin{proof}
+(2) が (1) を含意することは明らかである。$a_\bullet$ が (1) のとおりならば、
+複体の写像 $a'_\bullet : P_\bullet \to P'_\bullet$ であって、
+$a'_i = a_i$ が $i \leq e + 1$ に対して成り立ち、$a'_i = 0$ が
+$i \geq e + 1$ に対して成り立つものを考えれば、(2) のとおりの複体の写像を得る。
+したがって (1) と (2) は同値である。
+
+\medskip\noindent
+分解を用いた $\Ext$ 関手および $\text{Tor}$ 関手の構成
+（Algebra, 節 \ref{algebra-section-ext} および
+\ref{algebra-section-tor}）から、(1) と (2) は他のすべての条件を
+含意することが分かる。
+
+\medskip\noindent
+(3) が (4) を、(4) が (5) を含意することは明らかである。
+$N$ を (5) のとおりとする。標準写像 $\tilde \xi : P'_{e + 1} \to N$ に
+$P'_{e + 2} \to P'_{e + 1}$ を前合成したものは零である。したがって
+$\xi$ を $\tilde \xi$ の次の群における類として考えられる。
+$$
+\Ext^{e + 1}_R(M', N) =
+\frac{\Ker(\Hom(P'_{e + 1}, N \to \Hom(P'_{e + 2}, N)}{
+\Im(\Hom(P'_e, N \to \Hom(P'_{e + 1}, N)}
+$$
+複体の写像 $a_\bullet : P_\bullet \to P'_\bullet$ であって
+$\alpha$ を持ち上げるものを選ぶ。
+Derived Categories, 補題
+\ref{derived-lemma-morphisms-lift-projective} を参照せよ。
+$\xi$ が $\Ext^{e + 1}_R(M', N)$ において零に写るならば、写像
+$\varphi : P_e \to N$ であって
+$\tilde \xi  \circ a_{e + 1} = \varphi \circ d$ を満たすものが存在する。
+したがって、複体の写像
+$$
+\xymatrix{
+\ldots \ar[r] &
+P_{e + 1} \ar[r] \ar[d]^0 &
+P_e \ar[r] \ar[d]^{a_e - \varphi} &
+P_{e - 1} \ar[r] \ar[d]^{a_{e - 1}} &
+\ldots \\
+\ldots \ar[r] &
+P'_{e + 1} \ar[r] &
+P'_e \ar[r] &
+P'_{e - 1} \ar[r] &
+\ldots
+}
+$$
+であって (2) のとおりのものを得る。ゆえに (1) -- (5) は同値である。
+
+\medskip\noindent
+(6) と (7) の同値性は次元移動から従う。詳細は省略する。
+
+\medskip\noindent
+$M$ は $(-e - 1)$-擬連接であると仮定する（補題中の括弧内の主張は
+More on Algebra, 補題
+\ref{more-algebra-lemma-Noetherian-pseudo-coherent} から従う）。
+(7) が (4) を含意することを示せば証明が完了する。$e$ に関する帰納法を用いる。
+基底の場合は $e = 0$ である。このとき $M$ は有限表示である。
+More on Algebra, 補題 \ref{more-algebra-lemma-n-pseudo-module} を参照せよ。
+さらに補題 \ref{local-cohomology-lemma-map-tor-1-zero} から、$M \to M'$ は自由加群を
+経由すると結論する。もちろん $M \to M'$ が自由加群を経由するならば、
+$\Ext^i_R(M', N) \to \Ext^i_R(M, N)$ はすべての $i > 0$ に対して
+望みどおり零である。
+$e > 0$ と仮定する。短完全列の間の写像
+$$
+\xymatrix{
+0 \ar[r] &
+K \ar[r] \ar[d] &
+R^{\oplus r} \ar[r] \ar[d] &
+M \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+K' \ar[r] &
+\bigoplus_{i \in I} R \ar[r] &
+M' \ar[r] &
+0
+}
+$$
+であって、その右の縦射が与えられた写像となるものを選べる。すると、
+$\text{Tor}_{i + 1}^R(M, N) = \text{Tor}^R_i(K, N)$
+および $\Ext^{i + 1}_R(M, N) = \Ext^i_R(K, N)$ を $i \geq 1$ と任意の
+$R$-加群 $N$ に対して得る。$M', K'$ についても同様である。
+したがって $\text{Tor}_e^R(K, N) \to \text{Tor}_e^R(K', N)$ は任意の
+$R$-加群 $N$ に対して零である。More on Algebra, 補題
+\ref{more-algebra-lemma-cone-pseudo-coherent} により、$K$ は
+$(-e)$-擬連接であることが分かる。帰納法により
+$\Ext^e(K', N) \to \Ext^e(K, N)$ は任意の $R$-加群
+$N$ に対して零であると結論し、所望の結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-cd-sequence-Koszul}
+$I$ を Noether 環 $A$ のイデアルとする。
+任意の $n \geq 1$ に対し、ある $m > n$ が存在して、写像
+$A/I^m \to A/I^n$ は補題
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e} の同値な条件を
+$e = \text{cd}(A, I)$ として満たす。
+\end{lemma}
+
+\begin{proof}
+$\xi \in \Ext^{e + 1}_A(A/I^n, N)$ を、補題
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e} の (5) で構成された元とする。
+$e = \text{cd}(A, I)$ なので、
+$0 = H^{e + 1}_Z(N) = H^{e + 1}_I(N) = \colim \Ext^{e + 1}(A/I^m, N)$
+が成り立つ。これは Dualizing Complexes, 補題
+\ref{dualizing-lemma-local-cohomology-noetherian} および
+\ref{dualizing-lemma-local-cohomology-ext} による。
+したがって、$m \geq n$ であって、$\xi$ が
+$\Ext^{e + 1}_A(A/I^m, N)$ において零に写るようなものを選べ、所望の結果を得る。
+\end{proof}
+
+
+
+
+
+
+\section{一様性について II}
+\label{local-cohomology-section-uniform-vanishing-bis}
+
+\noindent
+$I$ を Noether 環 $A$ のイデアルとする。$M$ を有限
+$A$-加群とし、$i > 0$ とする。More on Algebra, 補題
+\ref{more-algebra-lemma-tor-strictly-pro-zero}
+により、ある $c = c(A, I, M, i)$ が存在して、
+$\text{Tor}^A_i(M, A/I^n) \to \text{Tor}^A_i(M, A/I^{n - c})$
+はすべての $n \geq c$ に対して零となる。この節では、場合によっては
+定数 $c$ であって、すべての $A$-加群 $M$ に同時に通用するものを選べること
+（しかも $i$ のある範囲にわたって選べること）を示す結果を論じる。
+この内容は、\cite{Huneke-uniform} および \cite{AHS} で論じられる
+一様 Artin--Rees と関係している。
+
+\medskip\noindent
+注意 \ref{local-cohomology-remark-strict-pro-isomorphism} では、これを応用して、導来完備化に
+関係する種々の pro 系が強い意味で pro 同型であること（またはそうでないこと）を示す。
+
+\medskip\noindent
+次の補題は大幅に強めることができる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-maps-zero-fixed-torsion}
+$I$ を Noether 環 $A$ のイデアルとする。任意の $m \geq 0$ および
+$i > 0$ に対し、ある $c = c(A, I, m, i) \geq 0$ が存在して、
+任意の $A$-加群 $M$ であって $I^m$ で零化されるものに対し、写像
+$$
+\text{Tor}^A_i(M, A/I^n) \to \text{Tor}^A_i(M, A/I^{n - c})
+$$
+はすべての $n \geq c$ に対して零である。
+\end{lemma}
+
+\begin{proof}
+$i$ に関する帰納法による。基底の場合は $i = 1$ である。短完全列
+$0 \to I^n \to A \to A/I^n \to 0$ は単射
+$\text{Tor}_1^A(M, A/I^n) \subset I^n \otimes_A M$ を定める。
+Algebra, 注意 \ref{algebra-remark-Tor-ring-mod-ideal} を参照せよ。
+$M$ は $I^m$ で零化されるので、写像
+$I^n \otimes_A M \to I^{n - m} \otimes_A M$ は
+$n \geq m$ に対して零であると分かる。したがって $c = m$ とすればよい。
+
+\medskip\noindent
+帰納段階。$i > 1$ とし、$c$ は $i - 1$ に対して通用すると仮定する。
+More on Algebra, 補題 \ref{more-algebra-lemma-tor-strictly-pro-zero} を
+$M = A/I^m$ に適用すると、ある $c' \geq 0$ を選んで、
+$\text{Tor}_i(A/I^m, A/I^n) \to \text{Tor}_i(A/I^m, A/I^{n - c'})$
+が $n \geq c'$ に対して零となるようにできる。$M$ は $I^m$ で零化されるとする。
+短完全列
+$$
+0 \to S \to \bigoplus\nolimits_{i \in I} A/I^m \to M \to 0
+$$
+を選ぶ。対応する Tor の長完全列から完全列
+$$
+\text{Tor}_i^A(\bigoplus\nolimits_{i \in I} A/I^m, A/I^n) \to
+\text{Tor}_i^A(M, A/I^n) \to
+\text{Tor}_{i - 1}^A(S, A/I^n)
+$$
+をすべての整数 $n \geq 0$ に対して得る。$n \geq c + c'$ ならば、写像
+$\text{Tor}_{i - 1}^A(S, A/I^n) \to \text{Tor}_{i - 1}^A(S, A/I^{n - c})$
+は零であり、写像 $\text{Tor}_i^A(A/I^m, A/I^{n - c}) \to 
+\text{Tor}_i^A(A/I^m, A/I^{n - c - c'})$ も零である。これを短完全列と
+組み合わせると、$i$ に対する結果が定数 $c + c'$ で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilates-affine}
+$I = (a_1, \ldots, a_t)$ を Noether 環 $A$ のイデアルとする。
+$a = a_1$ とおき、$B = A[\frac{I}{a}]$ をアフィン・ブローアップ代数とする。
+ある $c > 0$ が存在して、$\text{Tor}_i^A(B, M)$ は $I^c$ で零化される。
+これは任意の $A$-加群 $M$ および $i \geq t$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$B$ は
+$A[x_2, \ldots, x_t]/(a_1x_2 - a_2, \ldots, a_1x_t - a_t)$
+をその $a_1$-捩れで割った商であることを思い出そう。Algebra, 補題
+\ref{algebra-lemma-affine-blowup-quotient-description} を参照せよ。
+$$
+B_\bullet = \text{次の列に関する Koszul 複体：}a_1x_2 - a_2, \ldots, a_1x_t - a_t
+\text{、係数環は }A[x_2, \ldots, x_t]
+$$
+を、次数 $(t - 1), \ldots, 0$ に置かれた鎖複体とみなす。
+複体 $B_\bullet[1/a_1]$ は、列
+$x_2 - a_2/a_1, \ldots, x_t - a_t/a_1$ に関する Koszul 複体と同型であり、
+この列は $A[1/a_1][x_2, \ldots, x_t]$ における正則列である。
+正則列は Koszul 正則なので、増大写像
+$$
+\epsilon : B_\bullet \longrightarrow B
+$$
+は $a_1$ を可逆化すると擬同型になる。錐 $C_\bullet$（$\epsilon$ に関するもの）の
+ホモロジー加群は有限 $A[x_2, \ldots, x_n]$-加群であり、$C_\bullet$ は
+有界なので、ある $c \geq 0$ が存在して、$a_1^c$ がそれらすべてを
+零化すると結論する。Derived Categories, 補題
+\ref{derived-lemma-trick-vanishing-composition} により、必要ならば $c$ を
+より大きな整数で置き換えることで、$a_1^c$ は $C_\bullet$ 上、$D(A)$ において
+零であると分かる。区別三角形
+$$
+B_\bullet \otimes_A^\mathbf{L} M \to
+B \otimes_A^\mathbf{L} M \to
+C_\bullet \otimes_A^\mathbf{L} M
+$$
+を考えれば証明は完了する。実際、第 1 項は $B_\bullet \otimes_A M$ で表され、
+ホモロジー次数 $(t - 1), \ldots, 0$ に置かれている。これは Koszul 複体
+$B_\bullet$ の各項が自由な（したがって平坦な）$A$-加群だからである。よって
+$\text{Tor}_i^A(B, M) = H_i(C_\bullet \otimes_A^\mathbf{L} M)$
+が $i > t - 1$ に対して成り立ち、これは $a_1^c$ で零化される。
+$a_1^cB = I^cB$ であり、この Tor 加群は $B$ 上の加群なので、結論を得る。
+\end{proof}
+
+\noindent
+この節の残りでは、Noether 環 $A$ とイデアル $I \subset A$ を固定する。
+$$
+p : X \to \Spec(A)
+$$
+を、$\Spec(A)$ のイデアル $I$ に沿うブローアップとする。言い換えると、$X$ は
+$\text{Proj}$、すなわち Rees 代数 $\bigoplus_{n \geq 0} I^n$ の射影スキームである。
+Cohomology of Schemes, 補題 \ref{coherent-lemma-coherent-on-proj} および
+\ref{coherent-lemma-recover-tail-graded-module}
+により、整数 $q(A, I) \geq 0$ を選んで、任意の $q \geq q(A, I)$ に対し
+$H^i(X, \mathcal{O}_X(q)) = 0$ が $i > 0$ について成り立ち、かつ
+$H^0(X, \mathcal{O}_X(q)) = I^q$ となるようにできる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-compute-tor-Iq}
+上の状況で、$q \geq q(A, I)$ および任意の $A$-加群 $M$ に対して
+$$
+R\Gamma(X, Lp^*\widetilde{M}(q)) \cong M \otimes_A^\mathbf{L} I^q
+$$
+が $D(A)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+自由分解 $F_\bullet \to M$ を選ぶ。このとき $\widetilde{F}_\bullet$ は
+$\widetilde{M}$ の平坦分解である。したがって $Lp^*\widetilde{M}$ は複体
+$p^*\widetilde{F}_\bullet$ で与えられる。よって $Lp^*\widetilde{M}(q)$ は複体
+$p^*\widetilde{F}_\bullet(q)$ で与えられる。$p^*\widetilde{F}_i(q)$ は、
+$\Gamma(X, -)$ に関して非輪状である。これは $q \geq q(A, I)$ の選び方による。
+また $\Gamma(X, p^*\widetilde{F}_i(q)) = I^qF_i$ が $q \geq q(A, I)$ の
+選び方により成り立つ。したがって $R\Gamma(X, Lp^*\widetilde{M}(q))$ は、
+各項が $I^qF_i$ である複体で与えられる。Derived Categories of Schemes, 補題
+\ref{perfect-lemma-acyclicity-lemma-global} を参照せよ。
+複体 $I^qF_\bullet$ は定義により $M \otimes_A^\mathbf{L} I^q$ を計算するので、
+結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilates}
+上の状況において、$t$ を $I$ の生成元数の上界とする。このとき整数
+$c = c(A, I) \geq 0$ が存在し、任意の $A$-加群 $M$ に対してコホモロジー層
+$H^j(Lp^*\widetilde{M})$ は $I^c$ により零化される（$j \leq -t$ のとき）。
+\end{lemma}
+
+\begin{proof}
+$I = (a_1, \ldots, a_t)$ とする。この問題は $X$ 上アフィン局所的である。
+$1 \leq i \leq t$ に対して、$B_i = A[\frac{I}{a_i}]$ をアフィン・
+ブローアップ代数とする。このとき $X$ は、環 $B_i$ のスペクトルによる
+アフィン開被覆をもつ（Divisors, 補題
+\ref{divisors-lemma-blowing-up-affine} を参照）。
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-pullback}
+に与えられた導来引戻しの記述により、各 $i$ に対してある $c \geq 0$ が存在し、
+$$
+\text{Tor}_j^A(B_i, M)
+$$
+が $I^c$ により零化されること（$j \geq t$ のとき）を示せば十分である。
+これは補題 \ref{local-cohomology-lemma-annihilates-affine} である。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilates-tors}
+上の状況において、$t$ を $I$ の生成元数の上界とする。このとき整数
+$c = c(A, I) \geq 0$ が存在し、任意の $A$-加群 $M$ に対して Tor 加群
+$\text{Tor}_i^A(M, A/I^q)$ は $I^c$ により零化される（$i > t$ かつ
+任意の $q \geq 0$ について）。
+\end{lemma}
+
+\begin{proof}
+$q(A, I)$ を上のものとする。$q \geq q(A, I)$ に対して、補題
+\ref{local-cohomology-lemma-compute-tor-Iq} により
+$$
+R\Gamma(X, Lp^*\widetilde{M}(q)) = M \otimes_A^\mathbf{L} I^q
+$$
+である。Derived Categories of Schemes, 補題
+\ref{perfect-lemma-spectral-sequence} により、有界で収束するスペクトル系列
+$$
+H^a(X, H^b(Lp^*\widetilde{M}(q))) \Rightarrow
+\text{Tor}_{-a - b}^A(M, I^q)
+$$
+がある。$d$ を Cohomology of Schemes, 補題
+\ref{coherent-lemma-vanishing-nr-affines-quasi-separated}
+における整数とする（実際には $d = t$ と取れる。Cohomology of Schemes,
+補題 \ref{coherent-lemma-vanishing-nr-affines} を参照）。すると
+$H^{-i}(X, Lp^*\widetilde{M}(q)) = \text{Tor}_i^A(M, I^q)$ は長さが高々
+$d$ の有限フィルトレーションをもち、その次数付き加群は次の加群の
+部分商である：
+$$
+H^a(X, H^{- i - a}(Lp^*\widetilde{M})(q)),\quad
+a = 0, 1, \ldots, d - 1
+$$
+$i \geq t$ ならば、これらの加群はすべて $I^c$ で零化される。ここで
+$c = c(A, I)$ は補題 \ref{local-cohomology-lemma-annihilates} におけるものである。実際、
+同補題によりコホモロジー層 $H^{- i - a}(Lp^*\widetilde{M})$ はすべて
+$I^c$ で零化される。したがって $\text{Tor}_i^A(M, I^q)$ は $I^{dc}$ により
+零化される（$q \geq q(A, I)$ かつ $i \geq t$ のとき）。短完全系列
+$0 \to I^q \to A \to A/I^q \to 0$ を用いると、$\text{Tor}_i(M, A/I^q)$ は
+$I^{dc}$ により零化される（$q \geq q(A, I)$ かつ $i > t$ のとき）。
+以上より $I^m$ は、$m = \max(dc, q(A, I) - 1)$ とおけば、
+$\text{Tor}_i^A(M, A/I^q)$ を任意の $q \geq 0$ と $i > t$ に対して
+望みどおり零化する。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-tor-maps-vanish}
+$I$ を Noether 環 $A$ のイデアルとし、$t \geq 0$ を $I$ の生成元数の
+上界とする。このとき $N, c \geq 0$ が存在し、写像
+$$
+\text{Tor}_{t + 1}^A(M, A/I^n) \to \text{Tor}_{t + 1}^A(M, A/I^{n - c})
+$$
+は、任意の $A$-加群 $M$ とすべての $n \geq N$ に対して零となる。
+\end{lemma}
+
+\begin{proof}
+$c_1$ を補題 \ref{local-cohomology-lemma-annihilates-tors} で得た定数とする。この定数
+$c_1$ は $\text{Tor}_i$ に、すべての $i > t$ について同時に使えることに
+注意する。
+
+\medskip\noindent
+$I = (a_1, \ldots, a_t)$ とする。$A$-加群 $M$ に対して
+$$
+\ell(M) =
+\#\{i \mid 1 \leq i \leq t,\ a_i^{c_1}\text{ は }M\text{ 上でゼロである}\}
+$$
+と置く。これは $\{0, 1, \ldots, t\}$ の元である。$0 \leq s \leq t$ に関する
+降下帰納法により、次の主張 $H_s$ を証明する：ある $N, c \geq 0$ が存在して、
+すべての加群 $M$ で $\ell(M) \geq s$ を満たすものに対し、写像
+$$
+\text{Tor}_{t + 1 + i}^A(M, A/I^n) \to \text{Tor}_{t + 1 + i}^A(M, A/I^{n - c})
+$$
+は $i = 0, \ldots, s$ およびすべての $n \geq N$ に対して零である。
+
+\medskip\noindent
+基底段階：$s = t$ とする。$\ell(M) = t$ ならば $M$ は
+$(a_1^{c_1}, \ldots, a_t^{c_1}\}$ により、したがって
+$I^{t(c_1 - 1) + 1}$ により零化される。補題
+\ref{local-cohomology-lemma-maps-zero-fixed-torsion} より、$H_t$ は、$c = N$ を補題で得られる整数
+$c(A, I, t(c_1 - 1) + 1, t + 1), \ldots, c(A, I, t(c_1 - 1) + 1, 2t + 1)$
+の最大値に取れば成り立つ。
+
+\medskip\noindent
+帰納段階。$0 \leq s < t$ とし、$N, c$ は $H_{s + 1}$ におけるものとする。
+加群 $M$ で $\ell(M) = s$ を満たすものを考える。このとき、ある $i$ を選んで
+$a_i^{c_1}$ が $M$ 上で非零となるようにできる。したがって
+$\ell(M[a_i^c]) \geq s + 1$ および $\ell(M/a_i^{c_1}M) \geq s + 1$ であり、
+これらに帰納法の仮定を適用できる。完全系列
+$$
+0 \to M[a_i^{c_1}] \to M \xrightarrow{a_i^{c_1}} M \to M/a_i^{c_1}M \to 0
+$$
+を考える。中央の矢印の像を $E \subset M$ と記す。対応する Tor 加群の図式
+$$
+\xymatrix{
+&
+&
+\text{Tor}_{i + 1}(M/a_i^{c_1}M, A/I^q) \ar[d] \\
+\text{Tor}_i(M[a_i^{c_1}], A/I^q) \ar[r] &
+\text{Tor}_i(M, A/I^q) \ar[r] \ar[rd]^0 &
+\text{Tor}_i(E, A/I^q) \ar[d] \\
+&
+&
+\text{Tor}_i(M, A/I^q)
+}
+$$
+を得る。その行と列は（任意の $q$ に対して）完全である。南東向きの矢印は
+$c_1$ の選び方により零である。したがって加群
+$\text{Tor}_i(M, A/I^q)$ は、$\text{Tor}_i(M[a_i^{c_1}], A/I^q)$ の
+ある商加群と $\text{Tor}_{i + 1}(M/a_i^{c_1}M, A/I^q)$ のある部分加群との
+間に挟まれる。ゆえに $H_s$ は、$N$ を $N + c$ で、$c$ を $2c$ で
+置き換えれば成り立つ。細部の一部は省略する。
+\end{proof}
+
+\begin{proposition}
+\label{local-cohomology-proposition-uniform-artin-rees}
+$I$ を Noether 環 $A$ のイデアルとし、$t \geq 0$ を $I$ の生成元数の上界とする。
+このとき $N, c \geq 0$ が存在し、$n \geq N$ に対して写像
+$$
+A/I^n \to A/I^{n - c}
+$$
+は、$e = t$ とした補題 \ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e} の
+同値な条件を満たす。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{local-cohomology-lemma-tor-maps-vanish} と
+\ref{local-cohomology-lemma-characterize-vanishing-tor-ext-above-e} から直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-better-bound}
+論文 \cite{AHS} は、ほかにも多くのことを示すとともに、$A$ が局所環ならば
+命題 \ref{local-cohomology-proposition-uniform-artin-rees} において $e = t$ を
+$e = \dim(A)$ で置き換えても成り立つことを示している。補題
+\ref{local-cohomology-lemma-cd-sequence-Koszul} を見ると、命題
+\ref{local-cohomology-proposition-uniform-artin-rees} において $e = t$ を
+$e = \text{cd}(A, I)$ で置き換えても成り立つかを問うのは自然である。
+これは分かっていない。
+\end{remark}
+
+\begin{remark}
+\label{local-cohomology-remark-strict-pro-isomorphism}
+$I$ を Noether 環 $A$ のイデアルとする。$I = (f_1, \ldots, f_r)$ とする。
+$K_n^\bullet$ を More on Algebra, 状況
+\ref{more-algebra-situation-koszul} における $f_1^n, \ldots, f_r^n$ 上の
+Koszul 複体と記し、対応する対象を $K_n \in D(A)$ と記す。
+$M^\bullet$ を有限 $A$-加群からなる有界複体とし、対応する対象を
+$M \in D(A)$ と記す。$D(A)$ における次の逆系を考える：
+\begin{enumerate}
+\item $M^\bullet/I^nM^\bullet$、すなわち各項が $M^i/I^nM^i$ である複体、
+\item $M \otimes_A^\mathbf{L} A/I^n$,
+\item $M \otimes_A^\mathbf{L} K_n$、および
+\item $M \otimes_P^\mathbf{L} P/J^n$（下を参照）。
+\end{enumerate}
+これらの逆系はすべて pro 対象として同型である。(2) と (3) の間の同型は
+More on Algebra, 補題 \ref{more-algebra-lemma-sequence-Koszul-complexes}
+から従う。(1) と (2) の間の同型は More on Algebra, 補題
+\ref{more-algebra-lemma-derived-completion-plain-completion} に与えられている。
+最後のものについては下を参照されたい。
+
+\medskip\noindent
+しかし、これら pro 系の同型が「強い」ものであるかを問うこともできる。
+この用語と問いは \cite[61, 62 頁]{quillenhomology} の議論に関係している。
+すなわち、圏 $\mathcal{C}$ が与えられたとき、対象を逆系 $(X_n)$ とし、射
+$(X_n) \to (Y_n)$ を組 $(c, \varphi_n)$ により表す。この組は
+$c \geq 0$ と、射 $\varphi_n : X_n \to Y_{n - c}$
+（すべての $n \geq c$ について）からなり、明らかな両立条件を満たし、
+ある同値関係（本質的には $c$ を大きくすることで与えられる）で同一視する。
+これにより「強い pro 圏」を定義できる。そこで、上の逆系が
+この強い pro 圏で同型であるかを問う。
+
+\medskip\noindent
+これは、$M = A[0]$ の場合でさえ (1) と (3) については明らかに成り立ちえない。
+実際、系 $H^0(K_n) = A/(f_1^n, \ldots, f_r^n)$ は一般に、加群の圏において系
+$A/I^n$ と強い意味で pro 同型ではない。例えば
+$A = \mathbf{Z}[x_1, \ldots, x_r]$ および $f_i = x_i$ と取れば、
+$H^0(K_n)$ は $I^{r(n - 1)}$ により零化されない。\footnote{もちろん、対象が
+逆系であり、射が組 $(r, c, \varphi_n)$ により与えられる圏において、これらの
+pro 系が同型であるかを問うことはできる。この組は $r \geq 1$、$c \geq 0$
+および写像 $\varphi_n : X_{rn} \to Y_{n - c}$（$n \geq c$ に対する）からなる。}
+
+\medskip\noindent
+実際、上の結果から、More on Algebra, 補題
+\ref{more-algebra-lemma-derived-completion-plain-completion} で論じた (2) から
+(1) への自然な写像は、強い意味で pro 同型であることが分かる。証明を概説する。
+愚鈍切断を用いる標準的な議論により、まず $M^\bullet$ が一つの有限
+$A$-加群 $M$ を次数 $0$ に置いて得られる場合に帰着する。命題
+\ref{local-cohomology-proposition-uniform-artin-rees} における $N, c \geq 0$ を選ぶ。同命題より、
+$n \geq N$ に対して系 (2) の遷移写像の分解
+$$
+M \otimes_A^\mathbf{L} A/I^n
+\to
+\tau_{\geq -t}(M \otimes_A^\mathbf{L} A/I^n)
+\to
+M \otimes_A^\mathbf{L} A/I^{n - c}
+$$
+を得る。一方、More on Algebra, 補題
+\ref{more-algebra-lemma-tor-strictly-pro-zero} により、別の定数
+$c' = c'(M) \geq 0$ であって、写像
+$\text{Tor}_i^A(M, A/I^{n'}) \to \text{Tor}_i(M, A/I^{n' - c'})$ が
+$i = 1, 2, \ldots, t$ および $n' \geq c'$ に対して零となるものを見つけられる。
+すると Derived Categories, 補題
+\ref{derived-lemma-trick-vanishing-composition} より、写像
+$$
+\tau_{\geq -t}(M \otimes_A^\mathbf{L} A/I^{n + tc'})
+\to
+\tau_{\geq -t}(M \otimes_A^\mathbf{L} A/I^n)
+$$
+は $M \otimes_A^\mathbf{L}A/I^{n + tc'} \to M/I^{n + tc'}M$ を経由する。
+これを先の結果と合わせると、分解
+$$
+M \otimes_A^\mathbf{L}A/I^{n + tc'} \to M/I^{n + tc'}M
+\to M \otimes_A^\mathbf{L} A/I^{n - c}
+$$
+を得るので、望むことが従う。この結果が必要になったときには、改めて注意深く
+定式化し、詳細な証明を与えることにする。
+
+\medskip\noindent
+(4) については、Noether 環 $P$、環準同型 $P \to A$、およびイデアル
+$J \subset P$ で $I = JA$ を満たすものがあるとする。More on Algebra, 第
+\ref{more-algebra-section-derived-base-change} 節により、関手
+$M \otimes_P^\mathbf{L} - : D(P) \to D(A)$ と、(4) における逆系
+$M \otimes_P^\mathbf{L} P/J^n$ を $D(A)$ 内に得る。$P$ が Noether 環ならば、Koszul 複体と
+比較できるため、(4) の系は (1) の系と pro 同型である。$P \to A$ が有限ならば、
+(4) の系は (2) の系と強い意味で pro 同型である。実際、逆系
+$A \otimes_P^\mathbf{L} P/J^n$ は、上の議論により逆系 $A/I^n$ と強い意味で
+pro 同型であり、さらに
+$$
+M \otimes_P^\mathbf{L} P/J^n = M \otimes_A^\mathbf{L}
+(A \otimes_P^\mathbf{L} P/J^n)
+$$
+が More on Algebra, 補題 \ref{more-algebra-lemma-derived-base-change} により
+成り立つからである。
+
+\medskip\noindent
+(4) の標準的な例は、$P = \mathbf{Z}[x_1, \ldots, x_r]$、写像
+$P \to A$ で $x_i$ を $f_i$ に送るもの、および $J = (x_1, \ldots, x_r)$ を
+取るものである。この場合、
+$$
+M \otimes_P^\mathbf{L} P/J^n =
+M \otimes_{A[x_1, \ldots, x_r]}^\mathbf{L}
+A[x_1, \ldots, x_r]/(x_1, \ldots, x_r)^n
+$$
+が成り立つことを示し、上で論じた場合の一つに帰着する（ただしこの場合は、
+$A[x_1, \ldots, x_r]/(x_1, \ldots, x_r)^n$ が高々 $r$ の Tor 次元を
+すべての $n$ に対してもつので、命題 \ref{local-cohomology-proposition-uniform-artin-rees} を用いる段階を
+避けられ、実際にはより容易である）。この場合は
+\cite[命題 3.5.1]{BS} の証明で論じられている。
+\end{remark}
+
+
+
+
+
+
+
+
+\section{一様性について III}
+\label{local-cohomology-section-uniform}
+
+\noindent
+本節では Noether 環 $A$ とイデアル $I \subset A$ を固定する。目標は補題
+\ref{local-cohomology-lemma-bound-two-term-complex} を証明することであり、この補題は後の章で
+持上げ問題を解くために用いる（Algebraization of Formal Spaces, 補題
+\ref{restricted-lemma-get-morphism-general-better} を参照）。
+
+\medskip\noindent
+本節を通じて、
+$$
+p : X \to \Spec(A)
+$$
+により $\Spec(A)$ のイデアル $I$ におけるブローアップを表す。言い換えると、
+$X$ は $\text{Proj}$、すなわち Rees 代数 $\bigoplus_{n \geq 0} I^n$ から得られる
+射影スキームである。さらにファイバー積
+$$
+\xymatrix{
+Y \ar[r] \ar[d] & X \ar[d]^p \\
+\Spec(A/I) \ar[r] & \Spec(A)
+}
+$$
+も考える。このとき $Y$ はブローアップの例外因子であり、したがって $X$ 上の
+有効 Cartier 因子であって
+$\mathcal{O}_X(-1) = \mathcal{O}_X(Y)$ を満たす。$\text{Proj}$ を取る操作は
+基底変換と可換なので、
+$$
+Y = \text{Proj}(\bigoplus\nolimits_{n \geq 0} I^n/I^{n + 1}) = \text{Proj}(S)
+$$
+を得る。ここで $S = \text{Gr}_I(A) = \bigoplus_{n \geq 0} I^n/I^{n + 1}$ である。
+
+\medskip\noindent
+次の記号を用いる：
+$d = d(S) = d(\text{Gr}_I(A)) = d(\bigoplus_{n \geq 0} I^n/I^{n + 1})$
+は $p$ のファイバーの次元の最大値を表す（$0$ と置くのは $X = \emptyset$
+の場合である）。これは良定義である。実際、次が成り立つ。
+\begin{enumerate}
+\item $d \leq t - 1$ であるのは、$I = (a_1, \ldots, a_t)$ ならば
+$X \subset \mathbf{P}^{t - 1}_A$ だからである。
+\item $d$ は、$\text{Proj}(S) \to \Spec(S_0)$ のファイバーの次元の最大値でもある
+（$Y$ が空でない場合）。また $d = 0$ であるのは $Y = \emptyset$ の場合である
+（同値な条件は $S = 0$、さらに同値な条件は
+$I = A$ である）。
+\end{enumerate}
+したがって $d$ は $S = \text{Gr}_I(A)$ の同型類のみに依存する。
+$H^i(X, \mathcal{F}) = 0$ は、任意の連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ と
+$i > d$ に対して Cohomology of Schemes, 補題
+\ref{coherent-lemma-higher-direct-images-zero-above-dimension-fibre} および
+\ref{coherent-lemma-quasi-coherence-higher-direct-images-application} により成り立つ。
+当然、$Y$ 上の連接加群についても同じことが成り立つ。
+
+\medskip\noindent
+次の記号を用いる：
+$q = q(S) = q(\text{Gr}_I(A)) = q(\bigoplus_{n \geq 0} I^n/I^{n + 1})$
+は次のように定義される整数を表す。代数
+$S = \bigoplus_{n \geq 0} I^n/I^{n + 1}$
+は、次数 $1$ で生成される Noether 次数環であり、その係数環は次数 $0$ の部分で
+あることに
+注意する。したがって Cohomology of Schemes, 補題
+\ref{coherent-lemma-coherent-on-proj} および
+\ref{coherent-lemma-recover-tail-graded-module} により、$q(S)$ を、最小の整数
+$q(S) \geq 0$ であって、すべての $q \geq q(S)$ に対して
+$H^i(Y, \mathcal{O}_Y(q)) = 0$ が
+$1 \leq i \leq d$ について成り立ち、かつ
+$H^0(Y, \mathcal{O}_Y(q)) = I^q/I^{q + 1}$ が成り立つものとして定義できる。
+（$S = 0$ ならば $q(S) = 0$ とする。）
+
+\medskip\noindent
+$n \geq 1$ に対して有効 Cartier 因子 $nY$ を考えることができ、これを $Y_n$ と記す。
+
+\begin{lemma}
+\label{local-cohomology-lemma-bound-q-and-d}
+上の $q_0 = q(S)$ と $d = d(S)$ に対して、次が成り立つ。
+\begin{enumerate}
+\item $n \geq 1$、$q \geq q_0$、および $i > 0$ ならば
+$H^i(X, \mathcal{O}_{Y_n}(q)) = 0$ である。
+\item $n \geq 1$ かつ $q \geq q_0$ ならば
+$H^0(X, \mathcal{O}_{Y_n}(q)) = I^q/I^{q + n}$ である。
+\item $q \geq q_0$ かつ $i > 0$ ならば
+$H^i(X, \mathcal{O}_X(q)) = 0$ である。
+\item $q \geq q_0$ ならば $H^0(X, \mathcal{O}_X(q)) = I^q$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$I = A$ ならば $X$ はアフィンであり、主張は自明である。したがって
+$I \not = A$ と仮定してよいし、そう仮定する。このとき $Y$ と $X$ は空でない
+スキームである。
+
+\medskip\noindent
+(1) と (2) を $n$ に関する帰納法で証明する。基底段階 $n = 1$ は、
+$q_0$ の定義そのものである（$Y_1 = Y$ だからである）。
+$\mathcal{O}_X(1) = \mathcal{O}_X(-Y)$ であることを思い出す。したがって短完全系列
+$$
+0 \to \mathcal{O}_{Y_n}(1) \to \mathcal{O}_{Y_{n + 1}} \to \mathcal{O}_Y \to 0
+$$
+がある。したがって $i > 0$ に対して
+$$
+H^i(X, \mathcal{O}_{Y_n}(q + 1)) \to
+H^i(X, \mathcal{O}_{Y_{n + 1}}(q)) \to
+H^i(X, \mathcal{O}_{Y}(q))
+$$
+を得て、両端の項の既知の消滅から中央の項の望む消滅を得る。$i = 0$ に対しては
+可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+I^{q + 1}/I^{q + 1 + n} \ar[d] \ar[r] &
+I^q/I^{q + 1 + n} \ar[d] \ar[r] &
+I^q/I^{q + 1} \ar[d] \ar[r] &
+0 \\
+0 \ar[r] &
+H^0(X, \mathcal{O}_{Y_n}(q + 1)) \ar[r] &
+H^0(X, \mathcal{O}_{Y_{n + 1}}(q)) \ar[r] &
+H^0(Y, \mathcal{O}_Y(q)) \ar[r] &
+0
+}
+$$
+を得る。その行は $q \geq q_0$ に対して完全である（下の行については、長完全
+コホモロジー系列の次の項が $q \geq q_0$ に対して消滅することに注意する）。
+$q \geq q_0$ なので左右の垂直矢印は同型であり、中央の矢印も同型だと結論する。
+
+\medskip\noindent
+同様である (3) と (4) の証明は省略する。実際、形式関手の定理を用いれば
+(1) と (2) から (3) と (4) を導ける（ただし、これは過剰であろう）。
+\end{proof}
+
+\noindent
+記法を導入する。$n \geq c \geq 0$ が与えられたとき、{\it $(A, n, c)$-加群}
+とは、有限 $A$-加群 $M$ であって、$I^n$ により零化され、かつ
+$A/I^n$-加群として $I^c/I^n$-射影的であるものをいう（More on Algebra, 第
+\ref{more-algebra-section-near-projective} 節を参照）。
+
+\medskip\noindent
+次の記号の濫用を用いる。$A$-加群 $M$ が与えられたとき、$p^*M$ により、
+$p$ で引き戻して得られる擬連接加群、すなわち擬連接加群 $\widetilde{M}$
+（$\Spec(A)$ 上で $M$ に対応するもの）の引戻しを表す。例えば
+$\mathcal{O}_{Y_n} = p^*(A/I^n)$ である。短完全系列
+$0 \to K \to L \to M \to 0$ が与えられ、その各項が $A$-加群ならば、完全系列
+$$
+p^*K \to p^*L \to p^*M \to 0
+$$
+を得る。実際、$\widetilde{\ }$ は完全関手であり、$p^*$ は右完全関手である。
+
+\begin{lemma}
+\label{local-cohomology-lemma-almost-exactness}
+$0 \to K \to L \to M \to 0$ を $A$-加群の短完全系列で、$K$ と $L$ は
+$I^n$ により零化され、$M$ は $(A, n, c)$-加群であるものとする。このとき
+$p^*K \to p^*L$ の核はスキーム論的に $Y_c$ 上に台をもつ。
+\end{lemma}
+
+\begin{proof}
+$\Spec(B) \subset X$ をアフィン開集合とする。完全系列を $\Spec(B)$ 上に制限した
+ものは、$B$-加群の系列
+$$
+K \otimes_A B \to L \otimes_A B \to M \otimes_A B \to 0
+$$
+に対応し、これは系列
+$$
+K \otimes_{A/I^n} B/I^nB \to
+L \otimes_{A/I^n} B/I^nB \to
+M \otimes_{A/I^n} B/I^nB \to 0
+$$
+と同型である。したがって最初の写像の核は加群
+$\text{Tor}_1^{A/I^n}(M, B/I^nB)$ の像である。例外因子 $Y$ は
+$I\mathcal{O}_X$ により切り出されることを思い出す。ゆえに
+$\text{Tor}_1^{A/I^n}(M, B/I^nB)$ が $I^c$ により零化されることを示せば十分である。
+$a \in I^c$ による $M$ 上の乗法は有限自由 $A/I^n$-加群を経由するので、これは
+明らかである。
+\end{proof}
+
+\noindent
+標準写像 $\mathcal{O}_X \to \mathcal{O}_X(1)$ があり、これはちょうど $Y$ に沿って消える。
+したがって、任意の連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して常に標準写像
+$\mathcal{F}(q) \to \mathcal{F}(q + n)$ があり、ここで任意の
+$q \in \mathbf{Z}$ と $n \geq 0$ を取れる。
+
+\begin{lemma}
+\label{local-cohomology-lemma-annihilated}
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。このとき、$\mathcal{F}$ が
+スキーム論的に $Y_c$ 上に台をもつことと、標準写像
+$\mathcal{F} \to \mathcal{F}(c)$ が零であることとは同値である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_X \to \mathcal{O}_X(1)$ がちょうど $Y$ に沿って消えるからである。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-vanishing-coh-almost-projective}
+上の $q_0 = q(S)$ と $d = d(S)$ に対し、整数 $n \geq c \geq 0$、
+$(A, n, c)$-加群 $M$、添字 $i \in \{0, 1, \ldots, d\}$、および整数 $q$ が
+与えられているとする。このとき、次の各場合に分ける。
+\begin{enumerate}
+\item $i = d \geq 1$ かつ $q \geq q_0$ の場合、
+$H^d(X, p^*M(q)) = 0$ である。
+\item $i = d - 1 \geq 1$ かつ $q \geq q_0$ の場合、
+$H^{d - 1}(X, p^*M(q)) = 0$ である。
+\item $d - 1 > i > 0$ かつ $q \geq q_0 + (d - 1 - i)c$ の場合、写像
+$H^i(X, p^*M(q)) \to H^i(X, p^*M(q - (d - 1 - i)c))$
+は零である。
+\item $i = 0$、$d \in \{0, 1\}$、かつ $q \geq q_0$ の場合、全射
+$$
+I^qM \longrightarrow H^0(X, p^*M(q))
+$$
+がある。
+\item $i = 0$、$d > 1$、かつ $q \geq q_0 + (d - 1)c$ の場合、写像
+$$
+H^0(X, p^*M(q)) \to H^0(X, p^*M(q - (d - 1)c))
+$$
+の像は、標準写像
+$I^{q - (d - 1)c}M \to H^0(X, p^*M(q - (d - 1)c))$ の像に含まれる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M$ を $(A, n, c)$-加群とする。短完全系列
+$$
+0 \to K \to (A/I^n)^{\oplus r} \to M \to 0
+$$
+を選ぶ。以下では $K$ が $(A, n, c)$-加群であることを用いる（More on Algebra,
+補題 \ref{more-algebra-lemma-ses-near-projective} を参照）。対応する完全系列
+$$
+p^*K \to (\mathcal{O}_{Y_n})^{\oplus r} \to p^*M \to 0
+$$
+を考える。これを短完全系列
+$$
+0 \to \mathcal{F} \to p^*K \to \mathcal{G} \to 0
+\quad\text{および}\quad
+0 \to \mathcal{G} \to (\mathcal{O}_{Y_n})^{\oplus r} \to p^*M \to 0
+$$
+に分ける。補題 \ref{local-cohomology-lemma-almost-exactness} により、連接加群 $\mathcal{F}$ は
+スキーム論的に $Y_c$ 上に台をもつ。
+
+\medskip\noindent
+(1) の証明。$d > 0$ と仮定する。$H^d(X, p^*M(q)) = 0$ を
+$q \geq q_0$ に対して証明しなければならない。$\mathcal{G}$ の捩りの
+$> d$ 次コホモロジーが消滅することと、上の第二の短完全系列に付随する長完全
+コホモロジー系列とにより、$H^d(X, \mathcal{O}_{Y_n}(q)) = 0$ を証明すれば十分である。
+これは補題 \ref{local-cohomology-lemma-bound-q-and-d} により成り立つ。
+
+\medskip\noindent
+(2) の証明。$d > 1$ と仮定する。$H^{d - 1}(X, p^*M(q)) = 0$ を
+$q \geq q_0$ に対して証明しなければならない。前段落と同様に論じると、
+$H^d(X, \mathcal{G}(q)) = 0$ を示せば十分だと分かる。第一の短完全系列と、
+$\mathcal{F}$ の捩りの $> d$ 次コホモロジーが消滅することとを用いれば、
+$H^d(X, p^*K(q))$ が零であることを示せば十分である。これは (1) と、$K$ が
+$(A, n, c)$-加群であること（上を参照）から従う。
+
+\medskip\noindent
+(3) の証明。$0 < i < d - 1$ とし、主張が $i + 1$ に対して成り立つと仮定する。
+ただし $i = d - 2$ の場合には主張 (2) がある。上の第二の短完全系列に付随する
+長完全コホモロジー系列を用いると、単射
+$$
+H^i(X, p^*M(q - (d - 1 - i)c)) \subset
+H^{i + 1}(X, \mathcal{G}(q - (d - 1 - i)c))
+$$
+を得る。実際、$q - (d - 1 - i)c \geq q_0$ から
+$H^i(X, \mathcal{O}_{Y_n}(q - (d - 1 - i)c))$ の消滅が従う（上を参照）。
+したがって、写像
+$H^{i + 1}(X, \mathcal{G}(q)) \to H^{i + 1}(X, \mathcal{G}(q - (d - 1 - i)c))$
+が零であることを示せば十分である。これを調べるため、完全系列間の写像
+$$
+\xymatrix{
+H^{i + 1}(X, p^*K(q)) \ar[r] \ar[d] &
+H^{i + 1}(X, \mathcal{G}(q)) \ar[r] \ar[d] \ar@{..>}[ld] &
+H^{i + 2}(X, \mathcal{F}(q)) \ar[d] \\
+H^{i + 1}(X, p^*K(q - c)) \ar[r] \ar[d] &
+H^{i + 1}(X, \mathcal{G}(q - c)) \ar[r] \ar[d] &
+H^{i + 2}(X, \mathcal{F}(q - c)) \\
+H^{i + 1}(X, p^*K(q - (d - 1 - i)c)) \ar[r] &
+H^{i + 1}(X, \mathcal{G}(q - (d - 1 - i)c))
+}
+$$
+を考える。$\mathcal{F}$ はスキーム論的に $Y_c$ 上に台をもつので、標準写像
+$\mathcal{G}(q) \to \mathcal{G}(q - c)$ は補題 \ref{local-cohomology-lemma-annihilated} により
+$p^*K(q - c)$ を経由する。これが図式の点線矢印を与える。（実際、証明のためには、
+最右端の垂直矢印が零であることに注意すれば、集合の写像として点線矢印を得るのに
+十分である。）したがって、
+$H^{i + 1}(X, p^*K(q - c)) \to
+H^{i + 1}(X, p^*K(q - (d - 1 - i)c))$
+が零であることを示せば十分である。$i = d - 2$ ならば、この矢印の始域は、
+$q - c \geq q_0$ であり $K$ が $(A, n, c)$-加群であるため、(2) により零である。
+$i < d - 2$ ならば、$K$ が $(A, n, c)$-加群なので、帰納法の仮定からこの写像は
+実際に零であることが従う。なぜなら
+$q - c - (q - (d - 1 - i)c) = (d - 2 - i)c = (d - 1 - (i + 1))c$ であり、かつ
+$q - c \geq q_0 + (d - 1 - (i + 1))c$ だからである。これで (3) の証明が完了する。
+
+\medskip\noindent
+(4) の証明。$d \in \{0, 1\}$ かつ $q \geq q_0$ と仮定する。このとき第一の
+短完全系列から全射
+$H^1(X, p^*K(q)) \to H^1(X, \mathcal{G}(q))$
+を得て、この矢印の始域は場合 (1) により零である。したがって、すべての
+$q \in \mathbf{Z}$ に対して写像
+$$
+H^0(X, (\mathcal{O}_{Y_n})^{\oplus r}(q))
+\longrightarrow
+H^0(X, p^*M(q))
+$$
+は全射である。$q \geq q_0$ に対して、その始域は補題
+\ref{local-cohomology-lemma-bound-q-and-d} により $(I^q/I^{q + n})^{\oplus r}$ に等しく、これで
+主張は容易に従う。
+
+\medskip\noindent
+(5) の証明。$d > 1$ と仮定する。(4) の証明と同様に論じると、
+$$
+H^0(X, p^*M(q))
+\longrightarrow
+H^0(X, p^*M(q - (d - 1)c))
+$$
+の像が
+$$
+H^0(X, (\mathcal{O}_{Y_n})^{\oplus r}(q - (d - 1)c))
+\longrightarrow
+H^0(X, p^*M(q - (d - 1)c))
+$$
+の像に含まれることを示せば十分だと分かる。上の包含を示すには、
+$\sigma \in H^0(X, p^*M(q))$ で、その境界が
+$\xi \in H^1(X, \mathcal{G}(q))$ であるものに対して、$\xi$ の
+$H^1(X, \mathcal{G}(q - (d - 1)c))$ における像が零であることを示せば十分である。
+これは (3) の証明とまったく同じ議論から従う。
+\end{proof}
+
+\begin{remark}
+\label{local-cohomology-remark-duals}
+組 $(M, n)$ が与えられ、それが整数 $n \geq 0$ と有限 $A/I^n$-加群 $M$ から
+なるとき、$M^\vee = \Hom_{A/I^n}(M, A/I^n)$ と置く。組 $(\mathcal{F}, n)$ が
+与えられ、それが整数 $n$ と連接 $\mathcal{O}_{Y_n}$-加群 $\mathcal{F}$ からなるとき、
+$$
+\mathcal{F}^\vee =
+\SheafHom_{\mathcal{O}_{Y_n}}(\mathcal{F}, \mathcal{O}_{Y_n})
+$$
+と置く。上のような $(M, n)$ が与えられたとき、標準写像
+$$
+can : p^*(M^\vee) \longrightarrow (p^*M)^\vee
+$$
+がある。実際、表示
+$(A/I^n)^{\oplus s} \to (A/I^n)^{\oplus r} \to M \to 0$
+を選べば、表示
+$\mathcal{O}_{Y_n}^{\oplus s} \to \mathcal{O}_{Y_n}^{\oplus r} \to
+p^*M \to 0$ を得る。双対を取ると完全系列
+$$
+0 \to M^\vee \to (A/I^n)^{\oplus r} \to (A/I^n)^{\oplus s}
+$$
+および
+$$
+0 \to (p^*M)^\vee \to
+\mathcal{O}_{Y_n}^{\oplus r} \to
+\mathcal{O}_{Y_n}^{\oplus s}
+$$
+を得る。第一の系列を $p$ で引き戻すと、望む写像 $can$ を得る。この写像の構成は
+有限 $A/I^n$-加群 $M$ に関して関手的である。$can$ の核と余核は、スキーム論的に
+$Y_c$ 上に台をもつ（$M$ が $(A, n, c)$-加群の場合）。実際、この場合、
+$a \in I^c$ に対して写像 $a : M \to M$ は有限自由 $A/I^n$-加群を経由し、
+その加群に対しては $can$ が同型である。したがって $a$ は $can$ の核と余核を
+零化する。
+\end{remark}
+
+\begin{lemma}
+\label{local-cohomology-lemma-factor-hom}
+上の $q_0 = q(S)$ と $d = d(S)$ に対し、$M$ を $(A, n, c)$-加群とし、
+$\varphi : M \to I^n/I^{2n}$ を $A$-線形写像とする。
+$n \geq \max(q_0 + (1 + d)c, (2 + d)c)$ と仮定し、$d = 0$ ならばさらに
+$n \geq q_0 + 2c$ と仮定する。このとき合成
+$$
+M \xrightarrow{\varphi} I^n/I^{2n} \to
+I^{n - (1 + d)c}/I^{2n - (1 + d)c}
+$$
+は $\sum a_i \psi_i$ の形である。ここで $a_i \in I^c$ かつ
+$\psi_i : M \to I^{n - (2 + d)c}/I^{2n - (2 + d)c}$ である。
+\end{lemma}
+
+\begin{proof}
+$d > 1$ の場合。写像 $p^*(I^q) \to \mathcal{O}_X(q)$ の両立する系が
+$q \geq 0$ に対してあるので、標準写像
+$p^*(I^q/I^{q + \nu}) \to \mathcal{O}_{Y_\nu}(q)$ が $\nu \geq 0$ に対してある。
+これを用い、さらに
+$\varphi$ を引き戻すと、写像
+$$
+\chi : p^*M \longrightarrow \mathcal{O}_{Y_n}(n)
+$$
+であって、合成
+$M \to H^0(X, p^*M) \to H^0(X, \mathcal{O}_{Y_n}(n))$
+が、与えられた準同型 $\varphi$ と写像
+$I^n/I^{2n} \to H^0(X, \mathcal{O}_{Y_n}(n))$ との合成であるものを得る。
+$\mathcal{O}_{Y_n}(n)$ は $Y_n$ 上可逆なので、線形写像 $\chi$ は切断
+$$
+\sigma \in \Gamma(X, (p^*M)^\vee(n))
+$$
+を定める。記法は注意 \ref{local-cohomology-remark-duals} のとおりである。
+注意 \ref{local-cohomology-remark-duals} の議論により、$can : p^*(M^\vee) \to (p^*M)^\vee$ の
+余核と核はスキーム論的に $Y_c$ 上に台をもつ。補題
+\ref{local-cohomology-lemma-annihilated} により、写像
+$(p^*M)^\vee(n) \to (p^*M)^\vee(n - 2c)$ は
+$p^*(M^\vee)(n - 2c)$ を経由する。細部を一つ省略した。したがって $\sigma$ の
+$\Gamma(X, (p^*M)^\vee(n - 2c))$ における像は、ある元
+$$
+\sigma' \in \Gamma(X, p^*(M^\vee)(n - 2c))
+$$
+から来る。補題 \ref{local-cohomology-lemma-vanishing-coh-almost-projective} の (5)、More on Algebra,
+補題 \ref{more-algebra-lemma-dual-near-projective} により $M^\vee$ が
+$(A, n, c)$-加群であること、および
+$n \geq q_0 + (1 + d)c$ なので $n - 2c \geq q_0 + (d - 1)c$ であることから、
+$\sigma'$ の $H^0(X, p^*M^\vee(n - (1 + d)c))$ における像は、ある元 $\tau$ の
+$I^{n - (1 + d)c}M^\vee$ における像であると分かる。
+$\tau = \sum a_i \tau_i$ と書く。ここで
+$\tau_i \in I^{n - (2 + d)c}M^\vee$ である。これは
+$n - (2 + d)c \geq 0$ なので意味をもつ。すると $\tau_i$ は加群の準同型
+$\psi_i : M \to I^{n - (2 + d)c}/I^{2n - (2 + d)c}$ を、評価写像
+$M \otimes M^\vee \to A/I^n$ を用いて定める。
+
+\medskip\noindent
+これが実際に機能することを証明しよう\footnote{この事実について、より泥臭くない
+証明を読者が提案してくれることを期待する。}。$z \in M$ を選び、$\varphi(z)$ と
+$\sum a_i \psi_i(z)$ が $I^{n - (1 + d)c}/I^{2n - (1 + d)c}$ において同じ像を
+もつことを示す。まず元 $z$ は写像
+$p^*z : \mathcal{O}_{Y_n} \to p^*M$ を定め、この写像と $\chi$ との合成は、写像
+$\mathcal{O}_{Y_n} \to \mathcal{O}_{Y_n}(n)$、すなわち $\varphi(z)$ に、写像
+$I^n/I^{2n} \to \Gamma(\mathcal{O}_{Y_n}(n))$ を介して対応するものに等しい。
+次に $z$ と $p^*z$ は評価写像 $e_z : M^\vee \to A/I^n$ および
+$e_{p^*z} : (p^*M)^\vee \to \mathcal{O}_{Y_n}$ を定める。$\chi(p^*z)$ は
+$\varphi(z)$ に対応する切断なので、$e_{p^*z}(\sigma)$ は $\varphi(z)$ に対応する
+切断である。ここおよび以下では記号を濫用する。加群の写像
+$a : \mathcal{F} \to \mathcal{G}$ が $X$ 上で与えられたとき、捩った加群の対応する写像も
+$a : \mathcal{F}(t) \to \mathcal{F}(t)$ と記す。図式
+$$
+\xymatrix{
+p^*(M^\vee) \ar[d]_{can} \ar[r]_{p^*e_z} & \mathcal{O}_{Y_n} \ar@{=}[d] \\
+(p^*M)^\vee \ar[r]^{e_{p^*z}} & \mathcal{O}_{Y_n}
+}
+$$
+は構成 $can$ の関手性により可換である。したがって
+$(p^*e_z)(\sigma')$ は $\Gamma(Y_n, \mathcal{O}_{Y_n}(n - 2c))$ において、
+$\varphi(z)$ の $I^{n - 2c}/I^{2n - 2c}$ における像に対応する切断である。
+次に、$\sigma'$ は $\sum a_i \tau_i$ の
+$H^0(X, p^*M^\vee(n - (1 + d)c))$ における像へ写る。このことから、
+$(p^*e_z)(\sum a_i \tau_i) = \sum a_i p^*e_z(\tau_i)$ は
+$\Gamma(Y_n, \mathcal{O}_{Y_n}(n - (1 + d)c))$ において、$\varphi(z)$ の
+$I^{n - (1 + d)c}/I^{2n - (1 + d)c}$ における像に対応する切断である。
+$\psi_i$ は $\tau_i$ から評価写像を用いて定義されることを思い出す。したがって、
+$$
+\chi_i : p^*M \longrightarrow \mathcal{O}_{Y_n}(n - (2 + d)c)
+$$
+により $\psi_i$ から得られる写像を表すと、上と同じ理由により、$\psi_i(z)$ に
+対応する切断は $\chi_i(p^*z) = e_{p^*z}(\chi_i) = p^*e_z(\tau_i)$ である。
+したがって、$\varphi(z)$ の $\Gamma(Y_n, \mathcal{O}_{Y_n}(n - (1 + d)c))$ に
+おける像は、$\sum a_i\psi_i(z)$ の像に等しい。$n - (1 + d)c \geq q_0$ なので
+$\Gamma(Y_n, \mathcal{O}_{Y_n}(n - (1 + d)c)) =
+I^{n - (1 + d)c}/I^{2n - (1 + d)c}$ であることが補題
+\ref{local-cohomology-lemma-bound-q-and-d} から従い、望む両立性が成り立つと結論する。
+
+\medskip\noindent
+$d = 1$ の場合。ここでは上と同様に論じて
+$$
+\chi : p^*M \longrightarrow \mathcal{O}_{Y_n}(n),\quad
+\sigma \in \Gamma(X, (p^*M)^\vee(n)),\quad
+\sigma' \in \Gamma(X, p^*(M^\vee)(n - 2c)),
+$$
+を得る。次に補題 \ref{local-cohomology-lemma-vanishing-coh-almost-projective} の (4) を用いると、
+$\sigma'$ はある元 $\tau \in I^{n - 2c}M^\vee$ の像であると分かる。議論の残りは
+同じである。
+
+\medskip\noindent
+$d = 0$ の場合。議論は $d = 1$ の場合とまったく同じである。
+\end{proof}
+
+\begin{lemma}
+\label{local-cohomology-lemma-bound-two-term-complex}
+上の $d = d(S)$ と $q_0 = q(S)$ に対して、次が成り立つ。
+\begin{enumerate}
+\item 整数 $n \geq c \geq 0$ が $n \geq \max(q_0 + (1 + d)c, (2 + d)c)$ を満たし、
+\item $K$ が $D(A/I^n)$ の対象で、$H^i(K) = 0$ が $i \not = -1, 0$ に対して
+成り立ち、$H^i(K)$ は $i = -1, 0$ に対して有限であり、さらに
+$\Ext^1_{A/I^c}(K, N)$ が $I^c$ により、すべての有限 $A/I^n$-加群 $N$ について
+零化される
+\end{enumerate}
+ならば、写像
+$$
+\Ext^1_{A/I^n}(K, I^n/I^{2n})
+\longrightarrow
+\Ext^1_{A/I^n}(K, I^{n - (1 + d)c}/I^{2n - 2(1 + d)c})
+$$
+は零である。
+\end{lemma}
+
+\begin{proof}
+$d > 0$ の場合。$K^{-1} \to K^0$ を $K$ を表す複体であって、More on Algebra,
+補題 \ref{more-algebra-lemma-ext-1-annihilated-definite} の (5) におけるものとする。
+ここでは、イデアル $I^c/I^n$ に関して、環 $A/I^n$ 内で同補題を適用する。特に
+$K^{-1}$ は $I^c/I^n$-射影的である。実際、$I^c/I^n$ の元による乗法は
+$K^0$ をさえ経由する。More on Algebra, 補題
+\ref{more-algebra-lemma-map-out-of-almost-free} の (1) により
+$$
+\Ext^1_{A/I^n}(K, I^n/I^{2n}) =
+\Coker(\Hom_{A/I^n}(K^0, I^n/I^{2n}) \to \Hom_{A/I^n}(K^{-1}, I^n/I^{2n}))
+$$
+を得て、他の Ext 群についても同様である。したがって任意の類 $\xi$ で
+$\Ext^1_{A/I^n}(K, I^n/I^{2n})$ に属するものは、ある元
+$\varphi \in \Hom_{A/I^n}(K^{-1}, I^n/I^{2n})$ から来る。$\varphi'$ により
+$\varphi$ の $\Hom_{A/I^n}(K^{-1}, I^{n - (1 + d)c}/I^{2n - (1 + d)c})$ における
+像を表す。補題 \ref{local-cohomology-lemma-factor-hom} により
+$\varphi' = \sum a_i \psi_i$ と書ける。ここで $a_i \in I^c$ かつ
+$\psi_i \in \Hom_{A/I^n}(M, I^{n - (2 + d)c}/I^{2n - (2 + d)c})$ である。
+$h_i : K^0 \to K^{-1}$ を、$a_i \text{id}_{K^{-1}} = h_i \circ d_K^{-1}$ を
+満たすように選ぶ。
+$\psi = \sum \psi_i \circ h_i : K^0 \to I^{n - (2 + d)c}/I^{2n - (2 + d)c}$ と置く。
+すると $\varphi' = \psi \circ \text{d}_K^{-1}$ であるから、$\xi$ はすでに
+$\Ext^1_{A/I^n}(K, I^{n - (1 + d)c}/I^{2n - (1 + d)c})$ において零に写り、まして
+$\Ext^1_{A/I^n}(K, I^{n - (1 + d)c}/I^{2n - 2(1 + d)c})$ においても零に写る。
+
+\medskip\noindent
+$d = 0$ の場合\footnote{$d > 0$ に対して与えた議論も機能するが、少し弱い結果を
+与える。}。$\xi$ と $\varphi$ を上のものとする。図式
+$$
+\xymatrix{
+K^0 \\
+K^{-1} \ar[u] \ar[r]^\varphi & I^n/I^{2n} \ar[r] & I^{n - c}/I^{2n - c}
+}
+$$
+$X$ に引き戻し、写像 $p^*(I^n/I^{2n}) \to \mathcal{O}_{Y_n}(n)$ を用いると、
+実線からなる図式
+$$
+\xymatrix{
+p^*K^0 \ar@{..>}[rrd] \\
+p^*K^{-1} \ar[u] \ar[r] &
+\mathcal{O}_{Y_n}(n) \ar[r] &
+\mathcal{O}_{Y_n}(n - c)
+}
+$$
+を得る。$X$ はアフィン開集合 $U = \Spec(B)$ で被覆でき、各開集合上で次の性質を
+満たす $a \in I$ が存在する：$IB = aB$ であり、$a$ は $B$ 上の非零因子である。
+実際、$X$ はアフィン・ブローアップ代数のスペクトルで被覆できる（Divisors,
+補題 \ref{divisors-lemma-blowing-up-affine} を参照）。写像
+$\mathcal{O}_{Y_n}(n) \to \mathcal{O}_{Y_n}(n - c)$ の $U$ への制限は、擬連接
+$\mathcal{O}_U$-加群の写像であって、$B$-加群写像
+$a^c : B/a^nB \to B/a^nB$ に対応するものと同型である。
+$a^c : K^{-1} \to K^{-1}$ は $K^0$ を経由するので、点線矢印は $U$ 上で存在する。
+言い換えると、$X$ 上局所的に点線矢印を見つけられる。さて、図式に適合する
+点線矢印の層は
+$$
+\mathcal{F} = \SheafHom_{\mathcal{O}_X}(
+\Coker(p^*K^{-1} \to p^*K^0), \mathcal{O}_{Y_n}(n - c))
+$$
+のもとで主等質的であり、これは連接 $\mathcal{O}_X$-加群である。したがって、
+点線矢印を見つけることへの障害は $H^1(X, \mathcal{F})$ の元である。この
+コホモロジー群は $1 > d = 0$ なので零である（$d = d(S)$ の定義に続く議論を
+参照）。これにより、図式に適合する点線矢印
+$\psi : p^*K^0 \to \mathcal{O}_{Y_n}(n - c)$
+を見つけられる。$n - c \geq q_0$ なので、$\psi$ は写像
+$K^0 \to I^{n - c}/I^{2n - c}$ を誘導する。図式を追うと
+$\varphi' = \psi \circ \text{d}_K^{-1}$ と結論でき、前と同様に証明が完了する。
+\end{proof}

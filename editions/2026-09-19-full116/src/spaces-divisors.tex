@@ -1,0 +1,4526 @@
+% Generated mechanically from frozen input inputs/p09/ja/src/spaces-divisors.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{70}
+\chapter{代数空間上の因子}
+
+
+
+\phantomsection
+\label{spaces-divisors-section-phantom}
+
+
+\section{はじめに}
+\label{spaces-divisors-section-introduction}
+
+\noindent
+本章では、代数空間上の因子およびそれに関連する話題を研究する。
+代数空間に関する基本的な参考文献は \cite{Kn} である。
+
+
+
+
+
+
+
+
+
+\section{随伴点と弱随伴点}
+\label{spaces-divisors-section-associated}
+
+\noindent
+スキームの場合には、互いに競合する二つの随伴点の概念を導入した。
+すなわち、通常の随伴点
+(Divisors, Section \ref{divisors-section-associated})
+と弱随伴点
+(Divisors, Section \ref{divisors-section-weakly-associated})
+である。一般の代数空間に対しては、随伴点という概念は基本的に役に立たないため、
+これを導入することさえしない。代数空間が局所 Noether である場合には、
+Noether スキームに対して二つの概念が一致するので
+(Divisors, Lemma \ref{divisors-lemma-ass-weakly-ass})、
+「弱随伴点」の代わりに「随伴点」という語を用いることにする。
+定義を与える前に、補題が一つ必要である。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-associated}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$x \in |X|$ とする。次の条件は同値である。
+\begin{enumerate}
+\item ある \'etale 射 $f : U \to X$ で $U$ がスキームであり、
+ある $u \in U$ が $x$ に写るものに対して、点 $u$ が
+$f^*\mathcal{F}$ の弱随伴点である。
+\item 任意の \'etale 射 $f : U \to X$ で $U$ がスキームであり、
+任意の $u \in U$ が $x$ に写るものに対して、点 $u$ が
+$f^*\mathcal{F}$ の弱随伴点である。
+\item $\mathcal{O}_{X, \overline{x}}$ の極大イデアルが、
+茎 $\mathcal{F}_{\overline{x}}$ の弱随伴素イデアルである。
+\end{enumerate}
+$X$ が局所 Noether ならば、これらはさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(4)] ある \'etale 射 $f : U \to X$ で $U$ がスキームであり、
+ある $u \in U$ が $x$ に写るものに対して、点 $u$ が
+$f^*\mathcal{F}$ の随伴点である。
+\item[(5)] 任意の \'etale 射 $f : U \to X$ で $U$ がスキームであり、
+任意の $u \in U$ が $x$ に写るものに対して、点 $u$ が
+$f^*\mathcal{F}$ の随伴点である。
+\item[(6)] $\mathcal{O}_{X, \overline{x}}$ の極大イデアルが、
+茎 $\mathcal{F}_{\overline{x}}$ の随伴素イデアルである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ とその点 $u$、および \'etale 射
+$f : U \to X$ を選ぶ。ただし、この射は $u$ を $x$ に写すものとする。
+$\overline{x}$ を、$U$ の $u$ 上にある幾何学的点へ持ち上げる。
+ここで
+$\mathcal{O}_{X, \overline{x}} = \mathcal{O}_{U, u}^{sh}$
+であったことを思い出そう。この強 Hensel 化は、選んだ
+$\overline{x}$ の持ち上げに関するものである。次を参照せよ。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-describe-etale-local-ring}。
+さらに、
+$$
+\mathcal{F}_{\overline{x}} =
+(f^*\mathcal{F})_u \otimes_{\mathcal{O}_{U, u}}
+\mathcal{O}_{X, \overline{x}} =
+(f^*\mathcal{F})_u \otimes_{\mathcal{O}_{U, u}}
+\mathcal{O}_{U, u}^{sh}
+$$
+が成り立つ。これは
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-stalk-quasi-coherent}
+による。したがって (1)、(2)、(3) の同値性は
+More on Flatness, Lemma \ref{flat-lemma-weakly-associated-henselization}
+から従う。$X$ が局所 Noether ならば、上の任意の $U$ も局所 Noether である。
+したがって、Divisors, Lemma \ref{divisors-lemma-ass-weakly-ass}
+により、(1) と (4)、および (2) と (5) がそれぞれ同値であることが分かる。
+一方、局所 Noether の場合には局所環 $\mathcal{O}_{X, \overline{x}}$ も
+Noether である
+(Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-local-ring-Noetherian})。
+% P09-ERR-0147
+したがって、同じ補題（または Algebra, Lemma
+\ref{algebra-lemma-ass-weakly-ass}）により、(3) と (6) も同値である。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-weakly-associated}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を $X$ 上の準連接層とする。
+$x \in |X|$ とする。
+\begin{enumerate}
+\item Lemma \ref{spaces-divisors-lemma-associated} の同値な条件 (1)、(2)、(3) が満たされるとき、
+$x$ は $\mathcal{F}$ に {\it 弱随伴する}という。
+% P09-ERR-0148
+\item $\text{WeakAss}(\mathcal{F})$ は、$\mathcal{F}$ の弱随伴点全体の集合を表す。
+\item {\it $X$ の弱随伴点}とは、$\mathcal{O}_X$ の弱随伴点のことである。
+\end{enumerate}
+$X$ が局所 Noether ならば、$x$ が $\mathcal{F}$ の弱随伴点であることと
+同値な意味で、{\it $x$ は $\mathcal{F}$ に随伴する}といい、
+$\text{Ass}(\mathcal{F}) = \text{WeakAss}(\mathcal{F})$ と定める。
+最後に（引き続き $X$ が局所 Noether であると仮定して）、
+$x$ が $X$ の弱随伴点であることと同値な意味で、
+{\it $x$ は $X$ の随伴点である}という。
+\end{definition}
+
+\noindent
+ここで、当然必要となる補題を証明できる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakly-ass-support}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。このとき
+$\text{WeakAss}(\mathcal{F}) \subset \text{Supp}(\mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+これは定義から直ちに従う。$X$ 上の Abel 層の台は
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-support}
+で定義されている。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-ses-weakly-ass}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+を $X$ 上の準連接層の短完全列とする。このとき
+$\text{WeakAss}(\mathcal{F}_2) \subset
+\text{WeakAss}(\mathcal{F}_1) \cup \text{WeakAss}(\mathcal{F}_3)$
+であり、また
+$\text{WeakAss}(\mathcal{F}_1) \subset \text{WeakAss}(\mathcal{F}_2)$
+である。
+\end{lemma}
+
+\begin{proof}
+任意の幾何学的点 $\overline{x} \in X$ に対し、茎の列
+$0 \to \mathcal{F}_{1, \overline{x}} \to
+\mathcal{F}_{2, \overline{x}} \to
+\mathcal{F}_{3, \overline{x}} \to 0$
+は $\mathcal{O}_{X, \overline{x}}$ 加群の短完全列である。
+したがって補題は
+Algebra, Lemma \ref{algebra-lemma-weakly-ass}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakly-ass-zero}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。このとき
+$$
+\mathcal{F} = (0) \Leftrightarrow \text{WeakAss}(\mathcal{F}) = \emptyset
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射 \'etale 射 $f : U \to X$ を選ぶ。
+$\mathcal{F}$ が零であることと $f^*\mathcal{F}$ が零であることは同値である。
+したがって、定義とスキームの場合の補題から主張が従う。次を参照せよ。
+Divisors, Lemma \ref{divisors-lemma-weakly-ass-zero}。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-minimal-support-in-weakly-ass}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$x \in |X|$ とする。次の条件を仮定する。
+\begin{enumerate}
+\item $x \in \text{Supp}(\mathcal{F})$ である。
+\item $x$ は余次元 $0$ の $X$ の点である
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring})。
+\end{enumerate}
+このとき $x \in \text{WeakAss}(\mathcal{F})$ である。さらに、
+$\mathcal{F}$ が有限型 $\mathcal{O}_X$ 加群で、そのスキーム論的台を $Z$
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support})
+とし、$x$ が余次元 $0$ の $Z$ の点であるならば、
+$x \in \text{WeakAss}(\mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+$x \in \text{Supp}(\mathcal{F})$ であるから、茎
+$\mathcal{F}_{\overline{x}}$ は零ではない。したがって
+$\text{WeakAss}(\mathcal{F}_{\overline{x}})$
+は空でない。これは
+Algebra, Lemma \ref{algebra-lemma-weakly-ass-zero}
+による。一方、$\mathcal{O}_{X, \overline{x}}$ のスペクトルは一点集合である。
+よって定義により、$x$ は $\mathcal{F}$ の弱随伴点である。
+% P09-ERR-0149
+最後の主張は、$\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{Z, \overline{z}}$
+が全射であり、$\mathcal{O}_{Z, \overline{z}}$ のスペクトルが一点集合であり、
+$\mathcal{F}_{\overline{x}}$ が $\mathcal{O}_{Z, \overline{z}}$ 上の
+非零加群であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-minimal-support-in-weakly-ass-decent}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$x \in |X|$ とする。次の条件を仮定する。
+\begin{enumerate}
+\item $X$ は decent である（例えば、準分離または局所分離である）。
+\item $x \in \text{Supp}(\mathcal{F})$ である。
+\item $x$ は $\text{Supp}(\mathcal{F})$ の別の点の特殊化ではない。
+\end{enumerate}
+このとき $x \in \text{WeakAss}(\mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+（準分離代数空間は decent である。次を参照せよ。
+Decent Spaces, Section \ref{decent-spaces-section-reasonable-decent}。
+局所分離代数空間も decent である。次を参照せよ。
+Decent Spaces, Lemma \ref{decent-spaces-lemma-locally-separated-decent}。）
+スキーム $U$、点 $u \in U$、および \'etale 射
+$f : U \to X$ を選ぶ。この射は $u$ を $x$ に写すものとする。
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point}
+により、$u' \leadsto u$ が非自明な特殊化ならば、$f(u') \not = x$ である。
+したがって、$u \in \text{Supp}(f^*\mathcal{F})$ は
+$\text{Supp}(f^*\mathcal{F})$ の別の点の特殊化ではない。
+% P09-ERR-0150
+ゆえに Divisors, Lemma \ref{spaces-divisors-lemma-minimal-support-in-weakly-ass}
+により、$u \in \text{WeakAss}(f^*\mathcal{F})$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-finite-ass}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$ 加群とする。このとき、
+$\text{Ass}(\mathcal{F}) \cap W$ は、任意の準コンパクト開集合
+$W \subset |X|$ に対して有限である。
+\end{lemma}
+
+\begin{proof}
+準コンパクトなスキーム $U$ と \'etale 射 $U \to X$ を、
+$W$ が $|U| \to |X|$ の像となるように選ぶ。このとき $U$ は Noether スキームであるから、
+Divisors, Lemma \ref{divisors-lemma-finite-ass}
+を適用すればよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-restriction-injective-open-contains-weakly-ass}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$U \to X$ が \'etale 射であり、
+$\text{WeakAss}(\mathcal{F}) \subset \Im(|U| \to |X|)$
+を満たすならば、$\Gamma(X, \mathcal{F}) \to \Gamma(U, \mathcal{F})$
+は単射である。
+\end{lemma}
+
+\begin{proof}
+$s \in \Gamma(X, \mathcal{F})$ を、$U$ への制限が零となる切断とする。
+$\mathcal{F}' \subset \mathcal{F}$ を写像 $\mathcal{O}_X \to \mathcal{F}$ の像とする。
+この写像は $s$ により定まる。このとき $\mathcal{F}'|_U = 0$ である。
+これは
+$\text{WeakAss}(\mathcal{F}') \cap \Im(|U| \to |X|) = \emptyset$
+を意味する（弱随伴点の定義による）。一方、
+Lemma \ref{spaces-divisors-lemma-ses-weakly-ass} により
+$\text{WeakAss}(\mathcal{F}') \subset \text{WeakAss}(\mathcal{F})$
+である。したがって
+$\text{WeakAss}(\mathcal{F}') = \emptyset$ である。
+よって Lemma \ref{spaces-divisors-lemma-weakly-ass-zero} により $\mathcal{F}' = 0$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakass-pushforward}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+準コンパクトかつ準分離な射とする。$\mathcal{F}$ を準連接
+$\mathcal{O}_X$ 加群とする。$y \in |Y|$ を $|f|$ の像に含まれない点とする。
+このとき、$y$ は $f_*\mathcal{F}$ の弱随伴点ではない。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-pushforward}
+により、$\mathcal{O}_Y$ 加群 $f_*\mathcal{F}$ は準連接なので、この主張には意味がある。
+アフィンスキーム $V$、点 $v \in V$、および \'etale 射
+$V \to Y$ を選ぶ。この射は $v$ を $y$ に写すものとする。
+$f : X \to Y$、$\mathcal{F}$、$y$ をそれぞれ
+$X \times_Y V \to V$、$\mathcal{F}|_{X \times_Y V}$、$v$
+で置き換えてよい。したがって $Y$ はアフィンスキームであると仮定してよい。
+この場合 $X$ は準コンパクトであるから、アフィンスキーム $U$ と全射 \'etale 射
+$U \to X$ を選べる。
+% P09-ERR-0151
+合成を $g : U \to Y$ と表す。このとき
+$f_*\mathcal{F} \subset g_*(\mathcal{F}|_U)$ である。
+Lemma \ref{spaces-divisors-lemma-ses-weakly-ass} により、スキームの場合へ帰着されるが、
+これは Divisors, Lemma \ref{divisors-lemma-weakass-pushforward}
+である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-check-injective-on-weakass}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\varphi : \mathcal{F} \to \mathcal{G}$ を準連接
+$\mathcal{O}_X$ 加群の写像とする。任意の $x \in |X|$ に対して、
+次のうち少なくとも一方が成り立つと仮定する。
+\begin{enumerate}
+\item $\mathcal{F}_{\overline{x}} \to \mathcal{G}_{\overline{x}}$ は単射である。
+\item $x \not \in \text{WeakAss}(\mathcal{F})$ である。
+\end{enumerate}
+このとき $\varphi$ は単射である。
+\end{lemma}
+
+\begin{proof}
+仮定から $\text{WeakAss}(\Ker(\varphi)) = \emptyset$ である。
+したがって Lemma \ref{spaces-divisors-lemma-weakly-ass-zero} により
+$\Ker(\varphi) = 0$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakass-reduced}
+$S$ をスキームとする。$X$ を $S$ 上の被約代数空間とする。
+% P09-ERR-0152
+このとき $X$ の弱随伴点は、ちょうど余次元 $0$ の $X$ の点である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所的に考えれば、これは
+Divisors, Lemma \ref{divisors-lemma-weakass-reduced}
+および
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-codimension-0-points}
+から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{射と弱随伴点}
+\label{spaces-divisors-section-morphisms-weakly-associated}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakly-ass-reverse-functorial}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間のアフィン射とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。このとき
+% P09-ERR-0153
+$$
+\text{WeakAss}_S(f_*\mathcal{F}) \subset f(\text{WeakAss}_X(\mathcal{F}))
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射 \'etale 射 $V \to Y$ を選ぶ。
+$U = X \times_Y V$ とおく。このとき $U \to V$ はスキームのアフィン射である。
+弱随伴点の定義により、問題はスキームの射 $U \to V$ に帰着される。
+この場合は Divisors, Lemma
+\ref{divisors-lemma-weakly-ass-reverse-functorial}
+で扱われている。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-ass-functorial-equal}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間のアフィン射とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$X$ が局所 Noether ならば
+$$
+\text{WeakAss}_Y(f_*\mathcal{F}) =
+f(\text{WeakAss}_X(\mathcal{F}))
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射 \'etale 射 $V \to Y$ を選ぶ。
+$U = X \times_Y V$ とおく。このとき $U \to V$ はスキームのアフィン射であり、
+$U$ は局所 Noether である。弱随伴点の定義により、問題はスキームの射
+$U \to V$ に帰着される。この場合は Divisors, Lemma
+\ref{divisors-lemma-ass-functorial-equal}
+で扱われている。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakly-associated-finite}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の有限射とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。このとき
+$\text{WeakAss}(f_*\mathcal{F}) = f(\text{WeakAss}(\mathcal{F}))$ である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射 \'etale 射 $V \to Y$ を選ぶ。
+$U = X \times_Y V$ とおく。このとき $U \to V$ はスキームの有限射である。
+弱随伴点の定義により、問題はスキームの射 $U \to V$ に帰着される。
+この場合は Divisors, Lemma
+\ref{divisors-lemma-weakly-associated-finite}
+で扱われている。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakly-ass-pullback}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{G}$ を準連接 $\mathcal{O}_Y$ 加群とする。
+$x \in |X|$ とし、$y = f(x) \in |Y|$ とおく。次を仮定する。
+\begin{enumerate}
+% P09-ERR-0154
+\item $y \in \text{WeakAss}_S(\mathcal{G})$ である。
+\item $f$ は $x$ において平坦である。
+\item $f$ のファイバーの $x$ における局所環の次元は零である
+(Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre})。
+\end{enumerate}
+このとき $x \in \text{WeakAss}(f^*\mathcal{G})$ である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$、点 $v \in V$、および \'etale 射
+$V \to Y$ を選ぶ。この射は $v$ を $y$ に写すものとする。
+スキーム $U$、点 $u \in U$、および
+% P09-ERR-0155
+$U \to V \times_Y X$ を選ぶ。この射は $v$ を、$v$ と $x$ の上にある点へ
+写す \'etale 射とする。
+% P09-ERR-0156
+これは、$t \in |V \times_Y X|$ で $(v, y)$ に写るものが存在するので可能である。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を参照せよ。
+定義により、$\mathcal{O}_{U_v, u}$ の次元が零であることが分かる。
+したがって $u$ はファイバー $U_v$ の生成点である。
+弱随伴点の定義により、問題はスキームの射 $U \to V$ に帰着される。
+この場合は
+Divisors, Lemma \ref{divisors-lemma-weakly-ass-pullback}
+で扱われている。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-weakly-ass-change-fields}
+$K/k$ を体の拡大とする。$X$ を $k$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$y \in X_K$ を、像が $x \in X$ である点とする。
+$y$ が引き戻し $\mathcal{F}_K$ の弱随伴点ならば、
+$x$ は $\mathcal{F}$ の弱随伴点である。
+\end{lemma}
+
+\begin{proof}
+これは Divisors, Lemma
+\ref{divisors-lemma-weakly-ass-change-fields}
+を代数空間の言葉に翻訳したものである。翻訳の詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-finite-flat-weak-assassin-up-down}
+$S$ をスキームとする。
+$f : X \to Y$ を代数空間の有限平坦射とする。
+$\mathcal{G}$ を準連接 $\mathcal{O}_Y$ 加群とする。
+$x \in |X|$ を、像が $y \in |Y|$ である点とする。このとき
+% P09-ERR-0157
+$$
+x \in \text{WeakAss}(g^*\mathcal{G})
+\Leftrightarrow
+y \in \text{WeakAss}(\mathcal{G})
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により、スキームの場合
+(More on Flatness, Lemma \ref{flat-lemma-finite-flat-weak-assassin-up-down})
+から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-etale-weak-assassin-up-down}
+$S$ をスキームとする。
+$f : X \to Y$ を代数空間の \'etale 射とする。
+$\mathcal{G}$ を準連接 $\mathcal{O}_Y$ 加群とする。
+$x \in |X|$ を、像が $y \in |Y|$ である点とする。このとき
+$$
+x \in \text{WeakAss}(f^*\mathcal{G})
+\Leftrightarrow
+y \in \text{WeakAss}(\mathcal{G})
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+これは弱随伴点の定義から直ちに従う。実際、スキームの場合の対応する補題
+(More on Flatness, Lemma \ref{flat-lemma-etale-weak-assassin-up-down})
+が、この定義の根拠となっている。
+\end{proof}
+
+
+
+
+
+
+
+\section{相対弱随伴点集合}
+\label{spaces-divisors-section-relative-weak-assassin}
+
+\noindent
+この対象を定義するには、いくつかの補題が必要である。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-locally-noetherian-fibre}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$y \in |Y|$ とする。次の条件は同値である。
+\begin{enumerate}
+\item あるスキーム $V$、点 $v \in V$、および \'etale 射 $V \to Y$ で、
+$v$ が $y$ に写るものに対して、代数空間 $X_v$ は局所 Noether である。
+\item 任意のスキーム $V$、点 $v \in V$、および \'etale 射 $V \to Y$ で、
+$v$ が $y$ に写るものに対して、代数空間 $X_v$ は局所 Noether である。
+\item 体 $k$ と、射 $\Spec(k) \to Y$ で $y$ を表すものが存在し、
+$X_k$ は局所 Noether である。
+\end{enumerate}
+体 $k_0$ と、単射射 $\Spec(k_0) \to Y$ で $y$ を表すものが存在するならば、
+これらはさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(4)] 代数空間 $X_{k_0}$ は局所 Noether である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X_v = v \times_Y X = \Spec(\kappa(v)) \times_Y X$
+であることに注意する。したがって
+(2) $\Rightarrow$ (1) $\Rightarrow$ (3) は明らかである。
+体のスペクトルからの射 $\Spec(k) \to Y$ で、
+$X_k$ が局所 Noether となるものがあると仮定する。
+\'etale 射 $V \to Y$ をスキーム $V$ から取り、
+% P09-ERR-0158
+$v \in V$ を $y$ に写る点とする。このときスキーム
+$v \times_Y \Spec(k)$ は空でない。点
+$w \in v \times_Y \Spec(k)$ を選ぶ。次の射を考える。
+$$
+X_v \longleftarrow X_w \longrightarrow X_k
+$$
+$V \to Y$ は \'etale であり、$w$ は
+$V \times_Y \Spec(k)$ の点とみなせるから、$\kappa(w)/k$ は
+体の有限分離拡大である
+(Morphisms, Lemma \ref{morphisms-lemma-etale-over-field})。
+したがって $X_w \to X_k$ は $w \to \Spec(k)$ の基底変換として
+有限 \'etale 射である。よって $X_w$ は局所 Noether である
+(Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian})。
+射 $X_w \to X_v$ は、全射アフィン平坦射 $w \to v$ の基底変換として、
+全射かつアフィンかつ平坦である。$X_w$ が局所 Noether であることから、
+$X_v$ が局所 Noether であることが従う。実際、全射 \'etale 射
+$U \to X$ を選ぶと、$U_w \to U_v$ は全射かつアフィンかつ平坦である。
+スキーム $U_v$ 上でアフィン局所的に考えれば、
+% P09-ERR-0159
+Algebra, Lemma \ref{algebra-lemma-descent-Noetherian}
+により $U_w$ は局所 Noether であると結論できる。
+
+\medskip\noindent
+最後に、単射射 $\Spec(k_0) \to Y$ で $y$ の類に属するものが与えられた場合に、
+(3) が (4) を導くことを示せば十分である。このとき
+$\Spec(k) \to Y$ は
+$\Spec(k) \to \Spec(k_0) \to Y$ と分解する。上の議論により、
+% P09-ERR-0160
+$X_k$ が局所 Noether であることから $X_{k_0}$ が局所 Noether であることが従う。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-locally-Noetherian-fibre}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$y \in |Y|$ とする。Lemma \ref{spaces-divisors-lemma-locally-noetherian-fibre}
+の同値な条件 (1)、(2)、(3) が満たされるとき、
+{\it $f$ の $y$ 上のファイバーは局所 Noether である}という。
+{\it $f$ のファイバーは局所 Noether である}とは、
+これが任意の $y \in |Y|$ に対して成り立つことをいう。
+\end{definition}
+
+\noindent
+もちろん、ファイバーが局所 Noether であることを保証する通常の方法は、
+射が局所有限型であると仮定することである。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-locally-finite-type-locally-Noetherian-fibres}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ が局所有限型ならば、$f$ のファイバーは局所 Noether である。
+\end{lemma}
+
+\begin{proof}
+これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}
+と、体のスペクトルが Noether であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-assassin}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$x \in |X|$ とし、$y = f(x) \in |Y|$ とおく。
+$\mathcal{F}$ を準連接 $ \mathcal{O}_X$ 加群とする。次の可換図式を考える。
+$$
+\xymatrix{
+X \ar[d] & X \times_Y V \ar[d] \ar[l] & X_v \ar[d] \ar[l] \\
+Y & V \ar[l] & v \ar[l]
+}
+\quad
+\xymatrix{
+X \ar[d] & U \ar[d] \ar[l] & U_v \ar[d] \ar[l] \\
+Y & V \ar[l] & v \ar[l]
+}
+\quad
+\xymatrix{
+x \ar@{|->}[d] &
+x' \ar@{|->}[d] \ar@{|->}[l] &
+u \ar@{|->}[ld] \ar@{|->}[l] \\
+y &
+v \ar@{|->}[l]
+}
+$$
+ここで $V$ と $U$ はスキーム、$V \to Y$ と
+$U \to X \times_Y V$ は \'etale であり、
+$v \in V$、$x' \in |X_v|$、$u \in U$ は最後の図式のように関係する点である。
+% P09-ERR-0161
+$\mathcal{F}|_{X_v}$ と $\mathcal{F}|_{U_v}$ で、
+$\mathcal{F}$ の引き戻しを表す。次の条件は同値である。
+\begin{enumerate}
+\item 上のようなある $V, v, x'$ に対して、$x'$ は
+$\mathcal{F}|_{X_v}$ の弱随伴点である。
+\item 上のような任意の $V \to Y, v, x'$ に対して、$x'$ は
+$\mathcal{F}|_{X_v}$ の弱随伴点である。
+\item 上のようなある $U, V, u, v$ に対して、$u$ は
+$\mathcal{F}|_{U_v}$ の弱随伴点である。
+\item 上のような任意の $U, V, u, v$ に対して、$u$ は
+$\mathcal{F}|_{U_v}$ の弱随伴点である。
+\item ある体 $k$ と射 $\Spec(k) \to Y$ で $y$ を表すもの、および
+ある $t \in |X_k|$ で $x$ に写るものに対して、点 $t$ は
+$\mathcal{F}|_{X_k}$ の弱随伴点である。
+\end{enumerate}
+体 $k_0$ と単射射 $\Spec(k_0) \to Y$ で $y$ を表すものが存在するならば、
+これらはさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(6)] $x_0$ は $\mathcal{F}|_{X_{k_0}}$ の弱随伴点である。
+ここで $x_0 \in |X_{k_0}|$ は $x$ に写る唯一の点である。
+\end{enumerate}
+$f$ の $y$ 上のファイバーが局所 Noether ならば、条件
+(1)、(2)、(3)、(4)、(6) において「弱随伴」を「随伴」で置き換えてよい。
+\end{lemma}
+
+\begin{proof}
+補題におけるような $V, v, x'$ が与えられたとき、
+$U \to X \times_Y V$ と $u \in U$ で $x'$ に写るものを選べることに注意する。
+このとき射 $U_v \to X_v$ は \'etale である。
+したがって (1) と (3)、および (2) と (4) が同値であることは明らかである。
+これらの各条件は (5) を導く。(5) が (2) を導くことを示そう。
+% P09-ERR-0162
+$V, v, x'$ とともに $\Spec(k) \to X$ および $t \in |X_k|$ が与えられ、
+点 $t$ が $\mathcal{F}|_{X_k}$ の弱随伴点であると仮定する。
+点 $w \in v \times_Y \Spec(k)$ を選べる。このとき次の射を得る。
+$$
+X_v \longleftarrow X_w \longrightarrow X_k
+$$
+$V \to Y$ は \'etale であり、$w$ は $V \times_Y \Spec(k)$ の点と
+みなせるから、$\kappa(w)/k$ は体の有限分離拡大である
+(Morphisms, Lemma \ref{morphisms-lemma-etale-over-field})。
+したがって $X_w \to X_k$ は $w \to \Spec(k)$ の基底変換として
+有限 \'etale 射である。よって、任意の点 $x''$ で $X_w$ に属し
+$t$ の上にあるものは、
+Lemma \ref{spaces-divisors-lemma-etale-weak-assassin-up-down} により
+$\mathcal{F}|_{X_w}$ の弱随伴点である。
+$x''$ で $x'$ に写るものを選べる
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian})。
+すると Lemma \ref{spaces-divisors-lemma-weakly-ass-change-fields} により、
+$x'$ は $\mathcal{F}|_{X_v}$ の弱随伴点である。
+
+\medskip\noindent
+証明を終えるには、(6) にあるような $\Spec(k_0) \to Y$ が与えられたとき、
+同値な条件 (1)--(5) が (6) を導くことを示せば十分である。
+この場合、(5) の射 $\Spec(k) \to Y$ は一意的に
+$\Spec(k) \to \Spec(k_0) \to Y$ と分解する。このとき
+$x_0$ は $t$ の、射 $X_k \to X_{k_0}$ による像である。
+したがって、上と同じ補題から (6) が成り立つ。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-relative-weak-assassin}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を準連接 $ \mathcal{O}_X$ 加群とする。
+{\it $\mathcal{F}$ の $X$ における $Y$ 上の相対弱随伴点集合}とは、
+集合 $\text{WeakAss}_{X/Y}(\mathcal{F}) \subset |X|$ のことであり、
+これは Lemma \ref{spaces-divisors-lemma-relative-assassin} の同値な条件を満たす
+$x \in |X|$ からなる。
+$f$ のファイバーが局所 Noether ならば
+(Definition \ref{spaces-divisors-definition-locally-Noetherian-fibre})、
+$\text{Ass}_{X/Y}(\mathcal{F})$ という記号を用いる。
+\end{definition}
+
+\noindent
+この記号により、スキームについて既に証明した結果のいくつかを定式化できる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-bourbaki}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を準連接 $ \mathcal{O}_X$ 加群とする。
+$\mathcal{G}$ を準連接 $ \mathcal{O}_Y$ 加群とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は $Y$ 上平坦である。
+\item $X$ と $Y$ は局所 Noether である。
+\item $f$ のファイバーは局所 Noether である。
+\end{enumerate}
+このとき
+$$
+\text{Ass}_X(\mathcal{F} \otimes_{\mathcal{O}_X} f^*\mathcal{G}) =
+\{x \in \text{Ass}_{X/Y}(\mathcal{F})\text{ であって }
+f(x) \in \text{Ass}_Y(\mathcal{G}) \}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により、これはスキームの場合の結果から直ちに従う。次を参照せよ。
+Divisors, Lemma \ref{divisors-lemma-bourbaki}。
+スキームの場合の結果がより一般的なのは、単に非 Noether 代数空間について
+随伴点を定義していないためである（したがって、この結果を定式化するためだけでも
+$X$ と $X \to Y$ のファイバーが局所 Noether であると仮定する必要がある）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-base-change-relative-assassin}
+$S$ をスキームとする。
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を $S$ 上の代数空間の Cartesian 図式とする。
+$\mathcal{F}$ を準連接 $ \mathcal{O}_X$ 加群とし、
+$\mathcal{F}' = (g')^*\mathcal{F}$ とおく。
+$f$ が局所有限型ならば、次が成り立つ。
+\begin{enumerate}
+\item $x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')
+\Rightarrow g'(x') \in \text{Ass}_{X/Y}(\mathcal{F})$。
+\item $x \in \text{Ass}_{X/Y}(\mathcal{F})$ とする。
+$y' \in |Y'|$ が与えられ、$f(x) = g(y')$ を満たすとき、
+$x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$ で、
+$g'(x') = x$ および $f'(x') = y'$ を満たすものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは \'etale 局所化によりスキームの場合から従う。
+詳細をすべて記す。スキーム $V$ と全射 \'etale 射 $V \to Y$ を選ぶ。
+スキーム $U$ と全射 \'etale 射 $U \to V \times_Y X$ を選ぶ。
+スキーム $V'$ と全射 \'etale 射 $V' \to V \times_Y Y'$ を選ぶ。
+このとき $U' = V' \times_V U$ はスキームであり、射
+$U' \to X'$ は全射かつ \'etale である。
+
+\medskip\noindent
+(1) の証明。$u' \in U'$ で $x'$ に写るものを選ぶ。
+% P09-ERR-0163
+$v' \in V'$ で $u'$ の像を表す。
+このとき、定義により
+$x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$ であることは
+$u' \in \text{Ass}(\mathcal{F}|_{U'_{v'}})$ であることと同値である
+（$\text{Ass}$ を $\text{WeakAss}$ の代わりに書くことに意味がある。
+実際、$U'_{v'}$ は局所 Noether である）。
+Divisors, Lemma \ref{divisors-lemma-base-change-relative-assassin}
+を適用すると、$u \in U$ を $u'$ の像として、
+$\text{Ass}(\mathcal{F}|_{U_v})$ に属する。ここで
+$v \in V$ は $u$ の像である。これはさらに
+$g'(x') \in \text{Ass}_{X/Y}(\mathcal{F})$ を意味する。
+
+\medskip\noindent
+(2) の証明。$u \in U$ で $x$ に写るものを選ぶ。
+% P09-ERR-0164
+$v \in V$ で $u$ の像を表す。このとき、定義により
+$x \in \text{Ass}_{X/Y}(\mathcal{F})$ であることは
+$u \in \text{Ass}(\mathcal{F}|_{U_v})$ であることと同値である。
+点 $v' \in V'$ で、$y' \in |Y'|$ と $v \in V$ に写るものを選ぶ
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により可能である）。
+$t \in \Spec(\kappa(v') \otimes_{\kappa(v)} \kappa(u))$
+を既約成分の生成点とする。$u' \in U'$ を $t$ の像とする。
+Divisors, Lemma \ref{divisors-lemma-base-change-relative-assassin}
+を適用すると、$u' \in \text{Ass}(\mathcal{F}'|_{U'_{v'}})$ である。
+これはさらに $x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$ を意味する。
+ここで $x' \in |X'|$ は $u'$ の像である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-base-change-relative-assassin-quasi-finite}
+Lemma \ref{spaces-divisors-lemma-base-change-relative-assassin} と同じ記号および仮定を用いる。
+$g$ が局所準有限であると仮定する。より一般に、任意の $y' \in |Y'|$
+に対して $y'/g(y')$ の超越次数が $0$ であると仮定してもよい。
+このとき $\text{Ass}_{X'/Y'}(\mathcal{F}')$ は
+$\text{Ass}_{X/Y}(\mathcal{F})$ の逆像である。
+\end{lemma}
+
+\begin{proof}
+像の上の点の超越次数は Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}
+で定義されている。$x' \in |X'|$ とし、その像を $x \in |X|$ とする。
+スキーム $V$ と全射 \'etale 射 $V \to Y$ を選ぶ。
+スキーム $U$ と全射 \'etale 射 $U \to V \times_Y X$ を選ぶ。
+スキーム $V'$ と全射 \'etale 射 $V' \to V \times_Y Y'$ を選ぶ。
+このとき $U' = V' \times_V U$ はスキームであり、射
+$U' \to X'$ は全射かつ \'etale である。
+$u \in U$ で $x$ に写るものを選ぶ。
+% P09-ERR-0165
+$v \in V$ で $u$ の像を表す。このとき、定義により
+$x \in \text{Ass}_{X/Y}(\mathcal{F})$ であることは
+$u \in \text{Ass}(\mathcal{F}|_{U_v})$ であることと同値である。
+点 $u' \in U'$ で、$x' \in |X'|$ と $u \in U$ に写るものを選ぶ
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により可能である）。
+$v' \in V'$ を $u'$ の像とする。このとき、定義により
+$x' \in \text{Ass}_{X'/Y'}(\mathcal{F}')$ であることは
+$u' \in \text{Ass}(\mathcal{F}'|_{U'_{v'}})$ であることと同値である。
+ここで、この補題は
+Divisors, Remark \ref{divisors-remark-base-change-relative-assassin}
+の議論を
+$u' \in \Spec(\kappa(v') \otimes_{\kappa(v)} \kappa(u))$
+に適用することから従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-weak-assassin-finite}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$i : Z \to X$ を有限射とする。
+$\mathcal{G}$ を準連接 $ \mathcal{O}_Z$ 加群とする。このとき
+$\text{WeakAss}_{X/Y}(i_*\mathcal{G}) =
+i(\text{WeakAss}_{Z/Y}(\mathcal{G}))$ である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化によりスキームの場合
+(Divisors, Lemma \ref{divisors-lemma-relative-weak-assassin-finite})
+から従う。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-assassin-constructible}
+$Y$ をスキームとする。$X$ を $Y$ 上有限表示な代数空間とする。
+$\mathcal{F}$ を有限表示準連接 $ \mathcal{O}_X$ 加群とする。
+$U \subset X$ を、$U \to Y$ が準コンパクトとなる開部分空間とする。このとき集合
+$$
+E = \{y \in Y \mid \text{Ass}_{X_y}(\mathcal{F}_y) \subset |U_y|\}
+$$
+は $Y$ において局所構成可能である。
+\end{lemma}
+
+\begin{proof}
+$Y$ はスキームなので、ファイバー
+$X_y = \Spec(\kappa(y)) \times_Y X$ を取ることに意味がある。
+（また、定義により、集合
+$\text{Ass}_{X_y}(\mathcal{F}_y)$ は
+$\text{Ass}_{X/Y}(\mathcal{F}) \to Y$ の $y$ 上のファイバーにほかならないが、
+これは用いない。）問題は $Y$ 上局所的である。実際、$E$ が構成可能であることを、
+$Y$ がアフィンである場合に示せばよい。この場合 $X$ は準コンパクトである。
+アフィンスキーム $W$ と全射 \'etale 射 $\varphi : W \to X$ を選ぶ。
+$\text{Ass}_{X_y}(\mathcal{F}_y)$ は
+$\text{Ass}_{W_y}(\varphi^*\mathcal{F}_y)$ の像であり、
+これは任意の $y \in Y$ に対して成り立つ。
+したがって補題は、開集合 $\varphi^{-1}(U) \subset W$ と射 $W \to Y$
+に対するスキームの場合から従う。スキームの場合は
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-relative-assassin-constructible}
+である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Fitting イデアル}
+\label{spaces-divisors-section-fitting-ideals}
+
+\noindent
+本節は Divisors, Section \ref{divisors-section-fitting-ideals}
+の議論の続きである。$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $ \mathcal{O}_X$ 加群とする。
+この状況では、Fitting イデアルを
+$$
+0 = \text{Fit}_{-1}(\mathcal{F}) \subset \text{Fit}_0(\mathcal{F}) \subset
+\text{Fit}_1(\mathcal{F}) \subset \ldots \subset \mathcal{O}_X
+$$
+次の性質によって特徴づけられる準連接理想層の列として構成できる。
+% P09-ERR-0166
+任意のアフィン $U = \Spec(A)$ で $X$ 上 \'etale なものに対し、
+$\mathcal{F}|_U$ が $A$ 加群 $M$ に対応するならば、
+$\text{Fit}_i(\mathcal{F})|_U$ はイデアル
+$\text{Fit}_i(M) \subset A$ に対応する。
+これはよく定義され、準連接理想層となる。実際、
+$A \to B$ が \'etale 環準同型ならば、第 $i$ Fitting イデアル、すなわち
+$M \otimes_A B$ の $B$ 上の Fitting イデアルは
+More on Algebra, Lemma
+\ref{more-algebra-lemma-fitting-ideal-basics} の (3) により
+$\text{Fit}_i(M) B$ に等しい。より正確には（おそらく）、
+% P09-ERR-0167
+理想層 $\text{Fit}_0(\mathcal{O}_X)$ の存在は、例えば
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent-small-etale}
+における準連接層の記述と、
+Divisors, Lemma \ref{divisors-lemma-base-change-fitting-ideal}
+で与えられる引き戻しの性質から従う。
+
+\medskip\noindent
+このように Fitting イデアルを構成する利点は、その形成が
+\'etale 局所化と可換することが直ちに分かり、したがって
+Fitting イデアルの多くの性質がスキームの場合の対応する性質へ
+直ちに帰着されることである。スキーム上と代数空間上の準連接層の
+性質の間を翻訳するため、しばしば
+Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules}
+の議論を用いる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-base-change-fitting-ideal}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を有限型準連接 $ \mathcal{O}_Y$ 加群とする。このとき
+$f^{-1}\text{Fit}_i(\mathcal{F}) \cdot \mathcal{O}_X =
+\text{Fit}_i(f^*\mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により
+Divisors, Lemma \ref{divisors-lemma-base-change-fitting-ideal}
+へ帰着される。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-fitting-ideal-of-finitely-presented}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限表示 $ \mathcal{O}_X$ 加群とする。
+このとき $\text{Fit}_r(\mathcal{F})$ は有限型準連接イデアルである。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により
+Divisors, Lemma \ref{divisors-lemma-fitting-ideal-of-finitely-presented}
+へ帰着される。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-on-subscheme-cut-out-by-Fit-0}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $ \mathcal{O}_X$ 加群とする。
+$Z_0 \subset X$ を $\text{Fit}_0(\mathcal{F})$ によって切り出される閉部分空間とする。
+$Z \subset X$ を $\mathcal{F}$ のスキーム論的台とする。このとき
+\begin{enumerate}
+\item 閉部分空間として $Z \subset Z_0 \subset X$ である。
+\item $|Z| = |Z_0| = \text{Supp}(\mathcal{F})$ であり、
+これは $|X|$ の閉部分集合である。
+\item 有限型準連接 $ \mathcal{O}_{Z_0}$ 加群 $\mathcal{G}_0$ で
+$$
+(Z_0 \to X)_*\mathcal{G}_0 = \mathcal{F}.
+$$
+を満たすものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Z$ の形成が \'etale 局所化と可換することを思い出そう。次を参照せよ。
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support}
+（ここでは $Z$ を定義するために Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-scheme-theoretic-support}
+を用いている）。したがって (1) と (2) はスキームの場合から従う。次を参照せよ。
+Divisors, Lemma \ref{divisors-lemma-on-subscheme-cut-out-by-Fit-0}。
+(3) における $\mathcal{G}_0$ を得るには、
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-scheme-theoretic-support}
+における $\mathcal{G}$ を $Z$ 上で用い、
+$\mathcal{G}_0 = (Z \to Z_0)_*\mathcal{G}$ とおけばよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-fitting-ideal-generate-locally}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $ \mathcal{O}_X$ 加群とする。
+$x \in |X|$ とする。このとき $\mathcal{F}$ が $r$ 個の元で
+$x$ の \'etale 近傍において生成されることと、
+$\text{Fit}_r(\mathcal{F})_{\overline{x}} = \mathcal{O}_{X, \overline{x}}$
+であることは同値である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により
+Divisors, Lemma \ref{divisors-lemma-fitting-ideal-generate-locally}
+へ帰着される（さらに、Properties of Spaces, Section
+\ref{spaces-properties-section-stalks-structure-sheaf}
+における局所環の記述と、局所環の強 Hensel 化が忠実平坦であることを用いれば、
+強 Hensel 化上での等式が局所環上での等式と同値であることが分かる）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-fitting-ideal-finite-locally-free}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $ \mathcal{O}_X$ 加群とする。
+$r \geq 0$ とする。次の条件は同値である。
+\begin{enumerate}
+\item $\mathcal{F}$ は階数 $r$ の有限局所自由加群である。
+\item $\text{Fit}_{r - 1}(\mathcal{F}) = 0$ かつ
+$\text{Fit}_r(\mathcal{F}) = \mathcal{O}_X$ である。
+\item $\text{Fit}_k(\mathcal{F}) = 0$ が $k < r$ に対して成り立ち、
+$\text{Fit}_k(\mathcal{F}) = \mathcal{O}_X$ が $k \geq r$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により
+Divisors, Lemma \ref{divisors-lemma-fitting-ideal-finite-locally-free}
+へ帰着される。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-locally-free-rank-r-pullback}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $ \mathcal{O}_X$ 加群とする。
+% P09-ERR-0168
+$$
+X = Z_{-1} \supset Z_0 \supset Z_1 \supset Z_2 \ldots
+$$
+は、$\mathcal{F}$ の Fitting イデアルによって定義される閉部分空間であり、
+次の性質をもつ。
+\begin{enumerate}
+\item 共通部分 $\bigcap Z_r$ は空である。
+\item 次の規則で定義される関手
+$(\Sch/X)^{opp} \to \textit{Sets}$ を考える。
+$$
+T \longmapsto
+\left\{
+\begin{matrix}
+\{*\} & \text{もし }\mathcal{F}_T\text{ が局所的に }
+\leq r\text{ 個以下の切断で生成されるなら} \\
+\emptyset & \text{それ以外}
+\end{matrix}
+\right.
+$$
+この関手は開部分空間 $X \setminus Z_r$ によって表現される。
+\item 次の規則で定義される関手
+$F_r : (\Sch/X)^{opp} \to \textit{Sets}$ を考える。
+$$
+T \longmapsto
+\left\{
+\begin{matrix}
+% P09-ERR-0169
+\{*\} & \text{もし }\mathcal{F}_T\text{ は局所自由加群で階数 }r\\
+\emptyset & \text{それ以外}
+\end{matrix}
+\right.
+$$
+この関手は局所閉部分空間 $Z_{r - 1} \setminus Z_r$ によって表現される。
+これは $X$ の部分空間である。
+\end{enumerate}
+$\mathcal{F}$ が有限表示ならば、
+$Z_r \to X$、$X \setminus Z_r \to X$、$Z_{r - 1} \setminus Z_r \to X$
+は有限表示である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により
+Divisors, Lemma \ref{divisors-lemma-locally-free-rank-r-pullback}
+へ帰着される。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-finite-presentation-module}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限表示 $ \mathcal{O}_X$ 加群とする。
+% P09-ERR-0170
+Lemma \ref{spaces-divisors-lemma-locally-free-rank-r-pullback} におけるように
+$X = Z_{-1} \subset Z_0 \subset Z_1 \subset \ldots$ とする。
+$X_r = Z_{r - 1} \setminus Z_r$ とおく。このとき
+$X' = \coprod_{r \geq 0} X_r$ は次の関手を表現する。
+$$
+% P09-ERR-0171
+F_{flat} : \Sch/X \longrightarrow \textit{Sets},\quad\quad
+T \longmapsto
+\left\{
+\begin{matrix}
+% P09-ERR-0172
+\{*\} & \text{もし }\mathcal{F}_T\text{ が次の上で平坦 }T\\
+\emptyset & \text{それ以外}
+\end{matrix}
+\right.
+$$
+さらに、$\mathcal{F}|_{X_r}$ は階数 $r$ の局所自由加群であり、射
+$X_r \to X$ と $X' \to X$ は有限表示である。
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により
+Divisors, Lemma \ref{divisors-lemma-finite-presentation-module}
+へ帰着される。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{有効 Cartier 因子}
+\label{spaces-divisors-section-effective-Cartier-divisors}
+
+\noindent
+% P09-ERR-0173
+何らかの理由により、何よりも先に有効 Cartier 因子の概念を定義するのが
+便利であるように思われる。
+Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-closed-immersions}
+では、閉部分空間と準連接理想層との対応を論じたことに注意する。
+さらに、Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules}
+では、準連接加群の性質、とりわけ「局所的に $1$ 個の元で生成される」
+という性質を論じた。これらの参照から、次の定義が
+スキームに対する定義と両立することが分かる。
+
+\begin{definition}
+\label{spaces-divisors-definition-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $X$ の {\it 局所主閉部分空間}とは、その理想層が局所的に
+$1$ 個の元で生成される閉部分空間である。
+\item $X$ 上の {\it 有効 Cartier 因子}とは、閉部分空間
+$D \subset X$ で、その理想層
+$\mathcal{I}_D \subset \mathcal{O}_X$ が可逆 $ \mathcal{O}_X$ 加群となるものをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+したがって、有効 Cartier 因子は局所主閉部分空間であるが、
+逆は常には成り立たない。有効 Cartier 因子は、可能な限り最も強い意味で
+純余次元 $1$ の閉部分空間である。すなわち、局所的には零因子でない一つの元で
+切り出される。特に、これは至る所疎である。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$D \subset X$ を閉部分空間とする。次の条件は同値である。
+\begin{enumerate}
+\item 部分空間 $D$ は $X$ 上の有効 Cartier 因子である。
+\item あるスキーム $U$ と全射 \'etale 射 $U \to X$ に対し、
+逆像 $D \times_X U$ は $U$ 上の有効 Cartier 因子である。
+\item 任意のスキーム $U$ と任意の \'etale 射 $U \to X$ に対し、
+逆像 $D \times_X U$ は $U$ 上の有効 Cartier 因子である。
+\item 任意の $x \in |D|$ に対し、点付き代数空間の \'etale 射
+$(U, u) \to (X, x)$ で、
+$U = \Spec(A)$ かつ $D \times_X U = \Spec(A/(f))$ となるものが存在する。
+ここで $f \in A$ は零因子ではない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)--(3) の同値性は Definition
+\ref{spaces-divisors-definition-effective-Cartier-divisor}
+と、その前に挙げた参照から従う。
+(1) を仮定し、$x \in |D|$ とする。スキーム $W$ と全射 \'etale 射
+$W \to X$ を選ぶ。$w \in D \times_X W$ で $x$ に写るものを選ぶ。
+(3) により $D \times_X W$ は $W$ 上の有効 Cartier 因子である。
+% P09-ERR-0174
+したがって、Divisors, Lemma
+\ref{divisors-lemma-characterize-effective-Cartier-divisor}
+にあるように、アフィン \'etale 近傍 $U$ を、
+$w$ の $W$ におけるアフィン開近傍を選ぶことで得る。
+
+\medskip\noindent
+(4) を仮定する。このとき Divisors, Lemma
+\ref{divisors-lemma-characterize-effective-Cartier-divisor}
+により $\mathcal{I}_D|_U$ は可逆である。$X$ の \'etale 被覆を、
+このようなすべての $U$ と $X \setminus D$ の族によって得られるので、
+$\mathcal{I}_D$ は可逆 $ \mathcal{O}_X$ 加群である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-complement-locally-principal-closed-subscheme}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$Z \subset X$ を局所主閉部分空間とする。
+$U = X \setminus Z$ とおく。このとき $U \to X$ はアフィン射である。
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0175
+この問題は $X$ 上 \'etale 局所的である。次を参照せよ。
+Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-affine-local}
+および
+Lemma \ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}。
+したがって、これはスキームの場合から従う。スキームの場合は
+Divisors, Lemma
+\ref{divisors-lemma-complement-locally-principal-closed-subscheme}
+である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-complement-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$D \subset X$ を有効 Cartier 因子とする。
+$U = X \setminus D$ とおく。このとき $U \to X$ はアフィン射であり、
+$U$ は $X$ においてスキーム論的に稠密である。
+\end{lemma}
+
+\begin{proof}
+アフィン性は Lemma
+\ref{spaces-divisors-lemma-complement-locally-principal-closed-subscheme}
+による。稠密性の問題は
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretically-dense}
+により $X$ 上 \'etale 局所的である。
+したがって、これはスキームの場合から従う。スキームの場合は
+Divisors, Lemma
+\ref{divisors-lemma-complement-effective-Cartier-divisor}
+である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-effective-Cartier-makes-dimension-drop}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$D \subset X$ を有効 Cartier 因子とする。
+$x \in |D|$ とする。$\dim_x(X) < \infty$ ならば
+$\dim_x(D) < \dim_x(X)$ である。
+\end{lemma}
+
+\begin{proof}
+% P09-ERR-0176
+有効 Cartier 因子の定義と、一点における代数空間の次元の定義
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-at-point})
+はいずれも \'etale 局所的である。したがって、この補題はスキームの場合から従う。
+スキームの場合は
+Divisors, Lemma \ref{divisors-lemma-effective-Cartier-makes-dimension-drop}
+である。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-sum-effective-Cartier-divisors}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$D_1$、$D_2$ が $X$ 上の有効 Cartier 因子として与えられたとき、
+$D = D_1 + D_2$ を $X$ の閉部分空間で、準連接理想層
+% P09-ERR-0177
+$\mathcal{I}_{D_1}\mathcal{I}_{D_2} \subset \mathcal{O}_S$
+に対応するものと定める。これを
+{\it 有効 Cartier 因子 $D_1$ と $D_2$ の和}という。
+\end{definition}
+
+\noindent
+和 $\sum n_iD_i$ は、有限個の有効 Cartier 因子 $D_i$ が
+$X$ 上にあり、非負整数 $n_i$ が与えられたとき、明らかに定義できる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-sum-effective-Cartier-divisors}
+二つの有効 Cartier 因子の和は有効 Cartier 因子である。
+\end{lemma}
+
+\begin{proof}
+省略する。\'Etale 局所的には、次の簡単な代数の事実に帰着される。
+$f_1, f_2 \in A$ が環 $A$ の零因子でない元ならば、
+$f_1f_2 \in A$ も零因子でない。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-sum-closed-subschemes-effective-Cartier}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$Z, Y$ を $X$ の二つの閉部分空間とし、その理想層をそれぞれ
+$\mathcal{I}$ と $\mathcal{J}$ とする。$\mathcal{I}\mathcal{J}$ が
+有効 Cartier 因子 $D \subset X$ を定義するならば、
+$Z$ と $Y$ は有効 Cartier 因子であり、$D = Z + Y$ である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+により、これはスキームの場合へ帰着される。スキームの場合は
+Divisors, Lemma
+\ref{divisors-lemma-sum-closed-subschemes-effective-Cartier}
+である。
+\end{proof}
+
+\noindent
+代数空間の任意の射による閉部分空間の逆像は
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-inverse-image-closed-subspace}
+で定義したことを思い出そう。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-pullback-locally-principal}
+$S$ をスキームとする。
+$f : X' \to X$ を $S$ 上の代数空間の射とする。
+$Z \subset X$ を局所主閉部分空間とする。このとき逆像
+$f^{-1}(Z)$ は $X'$ の局所主閉部分空間である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-pullback-effective-Cartier-divisor}
+$S$ をスキームとする。
+$f : X' \to X$ を $S$ 上の代数空間の射とする。
+$D \subset X$ を有効 Cartier 因子とする。
+{\it $D$ の $f$ による引き戻しは定義される}とは、閉部分空間
+$f^{-1}(D) \subset X'$ が有効 Cartier 因子であることをいう。
+この場合、それを $f^*D$ または $f^{-1}(D)$ と表し、
+{\it 有効 Cartier 因子の引き戻し}という。
+\end{definition}
+
+\noindent
+$f^{-1}(D)$ が有効 Cartier 因子となる条件は、実際にはしばしば満たされる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-pullback-effective-Cartier-defined}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$D \subset Y$ を有効 Cartier 因子とする。
+次の各場合に、$D$ の $f$ による引き戻しは定義される。
+\begin{enumerate}
+\item $f(x) \not \in |D|$ が、$x$ が $X$ の弱随伴点である任意の場合に成り立つ。
+\item $f$ は平坦である。
+% P09-ERR-0178
+\item 必要に応じてさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 局所的に考えれば、この補題はスキームの場合へ帰着される。次を参照せよ。
+Divisors, Lemma
+\ref{divisors-lemma-pullback-effective-Cartier-defined}。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-pullback-effective-Cartier-divisors-additive}
+$S$ をスキームとする。
+$f : X' \to X$ を $S$ 上の代数空間の射とする。
+$D_1$、$D_2$ を $X$ 上の有効 Cartier 因子とする。
+$D_1$ と $D_2$ の引き戻しが定義されるならば、
+$D = D_1 + D_2$ の引き戻しも定義され、
+$f^*D = f^*D_1 + f^*D_2$ である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+\section{有効 Cartier 因子と可逆層}
+\label{spaces-divisors-section-effective-Cartier-invertible}
+
+\noindent
+有効 Cartier 因子は可逆な理想層をもつので
+(Definition \ref{spaces-divisors-definition-effective-Cartier-divisor})、
+次の定義には意味がある。
+
+\begin{definition}
+\label{spaces-divisors-definition-invertible-sheaf-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とし、
+$D \subset X$ を理想層が $\mathcal{I}_D$ である有効 Cartier 因子とする。
+\begin{enumerate}
+\item {\it 可逆層 $\mathcal{O}_X(D)$（$D$ に伴うもの）}を
+$$
+\mathcal{O}_X(D) =
+\SheafHom_{\mathcal{O}_X}(\mathcal{I}_D, \mathcal{O}_X) =
+\mathcal{I}_D^{\otimes -1}.
+$$
+によって定義する。
+\item 通常 $1$ または $1_D$ と表される標準切断とは、
+$\mathcal{O}_X(D)$ の大域切断であり、包含写像
+$\mathcal{I}_D \to \mathcal{O}_X$ に対応するものである。
+\item
+$\mathcal{O}_X(-D) = \mathcal{O}_X(D)^{\otimes -1} = \mathcal{I}_D$
+と書く。
+\item 二つ目の有効 Cartier 因子 $D' \subset X$ が与えられたとき、
+$\mathcal{O}_X(D - D') =
+\mathcal{O}_X(D) \otimes_{\mathcal{O}_X} \mathcal{O}_X(-D')$
+と定義する。
+\end{enumerate}
+\end{definition}
+
+\noindent
+いくつか注意を述べる。後に、対応
+$D \mapsto \mathcal{O}_X(D)$ が有効 Cartier 因子の加法
+(Definition \ref{spaces-divisors-definition-sum-effective-Cartier-divisors})
+を $X$ の Picard 群の加法へ写すことを見る
+(Lemma \ref{spaces-divisors-lemma-invertible-sheaf-sum-effective-Cartier-divisors})。
+しかし、上の定義における式 $D - D'$ には幾何学的意味はない。
+より正確には、$X$ 上の有効 Cartier 因子全体の集合を、
+零元が空の有効 Cartier 因子である可換モノイド
+$\text{EffCart}(X)$ とみなせる。このとき対応
+$(D, D') \mapsto \mathcal{O}_X(D - D')$ は群準同型
+$$
+\text{EffCart}(X)^{gp} \longrightarrow \Pic(X)
+$$
+を定義する。ここで左辺は $\text{EffCart}(X)$ の群完備化である。
+言い換えると、$\mathcal{O}_X(D - D')$ と書くとき、
+$D - D'$ を $\text{EffCart}(X)^{gp}$ の元とみなしてよい。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-conormal-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$D \subset X$ を有効 Cartier 因子とする。このとき余法層について
+% P09-ERR-0179
+$\mathcal{C}_{D/X} = \mathcal{I}_D|D =
+\mathcal{O}_X(D)^{\otimes -1}|_D$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-invertible-sheaf-sum-effective-Cartier-divisors}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$D_1$、$D_2$ を $X$ 上の有効 Cartier 因子とする。
+$D = D_1 + D_2$ とおく。このとき一意な同型
+$$
+\mathcal{O}_X(D_1) \otimes_{\mathcal{O}_X} \mathcal{O}_X(D_2)
+\longrightarrow
+\mathcal{O}_X(D)
+$$
+で、$1_{D_1} \otimes 1_{D_2}$ を $1_D$ に写すものが存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-regular-section}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{L}$ を $X$ 上の可逆層とする。大域切断
+$s \in \Gamma(X, \mathcal{L})$ は、写像
+$\mathcal{O}_X \to \mathcal{L}$、$f \mapsto fs$
+が単射であるとき {\it 正則切断}と呼ばれる。
+\end{definition}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-regular-section-structure-sheaf}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+$f \in \Gamma(X, \mathcal{O}_X)$ とする。次の条件は同値である。
+\begin{enumerate}
+\item $f$ は正則切断である。
+\item 任意の $x \in X$ に対して、像
+$f \in \mathcal{O}_{X, \overline{x}}$ は零因子ではない。
+\item 任意のアフィン $U = \Spec(A)$ で $X$ 上 \'etale なものに対して、
+制限 $f|_U$ は $A$ の零因子でない元である。
+\item スキーム $U$ と全射 \'etale 射 $U \to X$ で、
+$f|_U$ が $\mathcal{O}_U$ の正則切断となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+大域切断 $s$ で、可逆 $ \mathcal{O}_X$ 加群 $\mathcal{L}$ のものは、
+$ \mathcal{O}_X$ 加群の写像 $s : \mathcal{O}_X \to \mathcal{L}$
+とみなせることに注意する。したがって、その双対は写像
+$s : \mathcal{L}^{\otimes -1} \to \mathcal{O}_X$
+である（双対可逆層については Modules on Sites, Lemma
+\ref{sites-modules-lemma-constructions-invertible}
+を参照せよ）。
+
+\begin{definition}
+\label{spaces-divisors-definition-zero-scheme-s}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{L}$ を可逆層とする。$s \in \Gamma(X, \mathcal{L})$ とする。
+$s$ の {\it 零点スキーム}とは、閉部分空間 $Z(s) \subset X$ で、
+準連接理想層 $\mathcal{I} \subset \mathcal{O}_X$ によって定義されるものをいう。
+この理想層は写像 $s : \mathcal{L}^{\otimes -1} \to \mathcal{O}_X$ の像である。
+\end{definition}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-zero-scheme}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{L}$ を可逆 $ \mathcal{O}_X$ 加群とする。
+$s \in \Gamma(X, \mathcal{L})$ とする。
+\begin{enumerate}
+\item 閉埋め込み $i : Z \to X$ で
+% P09-ERR-0180
+$i^*s \in \Gamma(Z, i^*\mathcal{L}))$ が零となるものを考え、
+包含関係で順序づける。零点スキーム $Z(s)$ はこの順序集合の最大元である。
+\item 代数空間の任意の射 $f : Y \to X$ で $S$ 上のものに対して、
+$f^*s = 0$ が $\Gamma(Y, f^*\mathcal{L})$ において成り立つことと、
+$f$ が $Z(s)$ を経由して分解することは同値である。
+\item 零点スキーム $Z(s)$ は $X$ の局所主閉部分空間である。
+\item 零点スキーム $Z(s)$ が $X$ 上の有効 Cartier 因子であることと、
+$s$ が $\mathcal{L}$ の正則切断であることは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-characterize-OD}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $D \subset X$ が有効 Cartier 因子ならば、
+標準切断 $1_D$ で $\mathcal{O}_X(D)$ のものは正則である。
+\item 逆に、$s$ が可逆層 $\mathcal{L}$ の正則切断ならば、
+一意な有効 Cartier 因子 $D = Z(s) \subset X$ と、一意な同型
+$\mathcal{O}_X(D) \to \mathcal{L}$ で $1_D$ を $s$ に写すものが存在する。
+\end{enumerate}
+構成
+$D \mapsto (\mathcal{O}_X(D), 1_D)$ および
+$(\mathcal{L}, s) \mapsto Z(s)$ は、互いに逆な写像
+$$
+\left\{
+\begin{matrix}
+\text{有効 Cartier 因子：}X
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{対 }(\mathcal{L}, s)\text{ であって、可逆}\\
+\mathcal{O}_X\text{ 加群と正則大域切断からなるもの}
+\end{matrix}
+\right\}
+$$
+を与える。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+\section{Noether 代数空間上の有効 Cartier 因子}
+\label{spaces-divisors-section-Noetherian-effective-Cartier}
+
+\noindent
+局所 Noether の状況では、有効 Cartier 因子と正則切断に関する議論の大半が
+いくらか簡明になる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-effective-Cartier-divisor-Sk}
+$S$ をスキームとし、$X$ を $S$ 上の局所 Noether 代数空間とする。
+$D \subset X$ を有効 Cartier 因子とする。
+$X$ が $(S_k)$ ならば、$D$ は $(S_{k - 1})$ である。
+\end{lemma}
+
+\begin{proof}
+代数空間に対する性質 $(S_k)$ の定義
+(Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties})
+と Lemma \ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+により、これはスキームの場合から従う
+(Divisors, Lemma
+\ref{divisors-lemma-effective-Cartier-divisor-Sk})。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-normal-effective-Cartier-divisor-S1}
+$S$ をスキームとし、$X$ を $S$ 上の局所 Noether 正規代数空間とする。
+$D \subset X$ を有効 Cartier 因子とする。このとき
+$D$ は $(S_1)$ である。
+\end{lemma}
+
+\begin{proof}
+代数空間に対する正規性の定義
+(Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties})
+と Lemma \ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+により、これはスキームの場合から従う
+(Divisors, Lemma
+\ref{divisors-lemma-normal-effective-Cartier-divisor-S1})。
+\end{proof}
+
+\noindent
+次の補題は、有効 Cartier 因子を構成するために使える場合がある。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-complement-open-affine-effective-cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の正則 Noether 分離代数空間とする。
+$U \subset X$ を稠密なアフィン開部分空間とする。このとき、
+有効 Cartier 因子 $D \subset X$ で $U = X \setminus D$ を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+$D$ を $X \setminus U$ 上の被約誘導代数空間構造
+(Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space})
+が求める有効 Cartier 因子であると主張する。$D$ の構成は
+\'etale 局所化と可換する。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}
+の証明を参照せよ。全射 \'etale 射 $X' \to X$ で
+$X'$ がアフィンであるものを取る。$X$ は分離であるから、
+$U' = X' \times_X U$ はアフィンである。
+$|X'| \to |X|$ は開写像なので、$U'$ は $X'$ において稠密である。
+$D' = X' \times_X D$ は $X' \setminus U'$ 上の被約誘導スキーム構造なので、
+Divisors, Lemma
+\ref{divisors-lemma-complement-open-affine-effective-cartier-divisor}
+とその証明により、$D'$ は有効 Cartier 因子である。示すべきことはこれである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-Noetherian-regular-separated-pic-effective-Cartier}
+$S$ をスキームとする。$X$ を $S$ 上の正則 Noether 分離代数空間とする。
+このとき、任意の可逆 $ \mathcal{O}_X$ 加群は、
+$$
+\mathcal{O}_X(D - D') =
+\mathcal{O}_X(D) \otimes_{\mathcal{O}_X} \mathcal{O}_X(D')^{\otimes -1}
+$$
+と同型である。ここで $D, D'$ は $X$ におけるある有効 Cartier 因子である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{L}$ を可逆 $ \mathcal{O}_X$ 加群とする。
+稠密アフィン開部分空間 $U \subset X$ で $\mathcal{L}|_U$ が自明となるものを選ぶ。
+これは、$X$ がスキームである稠密開部分空間をもつことから可能である。次を参照せよ。
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}。
+% P09-ERR-0181
+自明化を $s : \mathcal{O}_U \to \mathcal{L}|_U$ と表す。
+$U$ の補集合は有効 Cartier 因子 $D$ である。
+ある $n > 0$ に対して、写像 $s$ が一意に写像
+$$
+s : \mathcal{O}_X(-nD) \longrightarrow \mathcal{L}
+$$
+へ拡張されると主張する。この主張から補題が従う。実際、
+$\mathcal{L} \otimes_{\mathcal{O}_X} \mathcal{O}_X(nD)$
+は正則大域切断をもち、したがって
+Lemma \ref{spaces-divisors-lemma-characterize-OD} により、$\mathcal{O}_X(D')$ と同型である。
+ここで $D'$ はある有効 Cartier 因子である。
+主張を証明するには \'etale 局所的に考えてよい。したがって
+$X$ はアフィン Noether スキームであると仮定してよい。
+$\mathcal{O}_X(-nD) = \mathcal{I}^n$ であり、ここで
+$\mathcal{I} = \mathcal{O}_X(-D)$ は $D$ の、$X$ における理想層なので、
+この場合は Cohomology of Schemes, Lemma
+\ref{coherent-lemma-homs-over-open}
+から従う。
+\end{proof}
+
+\noindent
+次の補題は、実際には別の節に属する。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-smooth-over-valuation-ring-effective-Cartier}
+$R$ を分数体が $K$ である付値環とする。
+$X$ を $R$ 上の代数空間で、$X \to \Spec(R)$ が滑らかとなるものとする。
+任意の有効 Cartier 因子 $D \subset X_K$ に対して、
+有効 Cartier 因子 $D' \subset X$ で $D'_K = D$ を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+$D' \subset X$ を $D \to X_K \to X$ のスキーム論的像とする。
+この射は準コンパクトなので、$D'$ の形成は平坦基底変換と可換する。次を参照せよ。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-base-change-scheme-theoretic-image}。
+特に $D'_K = D$ であることが分かる。したがって
+$X$ はアフィンであると仮定してよい。$X = \Spec(A)$ と書く。
+このとき $X_K = \Spec(A \otimes_R K)$ であり、$D$ はイデアル
+$I \subset A \otimes_R K$ に対応する。
+$J = I \cap A$ が $X$ において有効 Cartier 因子を切り出すことを示す必要がある。
+まず、$A/J$ は $R$ 上平坦であることに注意する
+（これはねじれのない $R$ 加群だからである。More on Algebra, Lemma
+\ref{more-algebra-lemma-valuation-ring-torsion-free-flat}
+を参照せよ）。したがって
+More on Algebra, Lemma
+\ref{more-algebra-lemma-flat-finite-type-valuation-ring-finite-presentation}
+および Algebra, Lemma \ref{algebra-lemma-extension}
+により、$J$ は有限生成である。
+よって、$J_\mathfrak q \subset A_\mathfrak q$ が一つの元で生成されることを、
+各素イデアル $\mathfrak q \subset A$ に対して示せば十分である。
+$\mathfrak p = R \cap \mathfrak q$ とおく。このとき
+$R_\mathfrak p$ は付値環である
+(Algebra, Lemma \ref{algebra-lemma-make-valuation-rings})。
+さらに、$A_\mathfrak q/\mathfrak p A_\mathfrak q$ は正則環である。これは
+Algebra, Lemma
+\ref{algebra-lemma-characterize-smooth-over-field}
+による。したがって More on Algebra, Lemma
+\ref{more-algebra-lemma-picard-group-generic-fibre-regular}
+を適用すると、$I(A_\mathfrak q \otimes_R K)$ は一つの元
+$f \in A_\mathfrak p \otimes_R K$ で生成されることが分かる。
+分母を払うことで、$f \in A_\mathfrak q$ と仮定してよい。
+$\mathfrak c \subset R_\mathfrak p$ を $f$ の内容イデアルとする
+（More on Algebra, Definition
+\ref{more-algebra-definition-content-ideal}
+および More on Flatness, Lemma
+\ref{flat-lemma-flat-finite-type-local-valuation-ring-has-content}
+を参照せよ）。$R_\mathfrak p$ は付値環であり、
+$\mathfrak c$ は有限生成なので
+(More on Algebra, Lemma
+\ref{more-algebra-lemma-content-finitely-generated})、
+$\mathfrak c = (\pi)$ となる $\pi \in R_\mathfrak p$ が存在する
+(Algebra, Lemma
+\ref{algebra-lemma-characterize-valuation-ring})。
+% P09-ERR-0182
+$f$ を $\pi^{-1}f$ で置き換えることにより、
+$f \in A_\mathfrak q$ かつ
+$f \not \in \mathfrak pA_\mathfrak q$ であることが分かる。
+% P09-ERR-0183
+主張：$I_\mathfrak q = (f)$ であり、これにより証明が完了する。
+主張を見るため、$f \in I_\mathfrak q$ に注意する。
+したがって全射
+$A_\mathfrak q/(f) \to A_\mathfrak q/I_\mathfrak q$
+があり、これは $R$ 上 $K$ とテンソルを取ると同型になる。
+よって $A_\mathfrak q/(f)$ が $R_\mathfrak p$ 上平坦ならばよい。
+これは Algebra, Lemma
+\ref{algebra-lemma-grothendieck-general}
+と $f$ の選び方から従う。
+\end{proof}
+
+
+
+
+
+
+\section{相対有効 Cartier 因子}
+\label{spaces-divisors-section-effective-Cartier-morphisms}
+
+\noindent
+次の補題は、基底上平坦な有効 Cartier 因子が、実際に基底上の
+「有効 Cartier 因子の族」であることを示す。例えば、任意のファイバーへの
+制限は有効 Cartier 因子である。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-Cartier}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$D \subset X$ を閉部分空間とする。次を仮定する。
+\begin{enumerate}
+\item $D$ は有効 Cartier 因子である。
+\item $D \to Y$ は平坦射である。
+\end{enumerate}
+% P09-ERR-0184
+このとき、概形の任意の射 $g : Y' \to Y$ に対し、引き戻し
+$(g')^{-1}D$ は $X' = Y' \times_Y X$ 上の有効 Cartier 因子である。
+ここで $g' : X' \to X$ は射影である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+を用いると、有効 Cartier 因子であるという性質は \'etale 局所的である。
+% P09-ERR-0185
+したがって、この補題は直ちにスキームの場合へ帰着される。スキームの場合は
+Divisors, Lemma \ref{divisors-lemma-relative-Cartier}
+である。
+\end{proof}
+
+\noindent
+この補題が次の定義の動機である。
+
+\begin{definition}
+\label{spaces-divisors-definition-relative-effective-Cartier-divisor}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$X/Y$ 上の {\it 相対有効 Cartier 因子}とは、有効 Cartier 因子
+$D \subset X$ で、$D \to Y$ が代数空間の平坦射となるものをいう。
+\end{definition}
+
+
+
+
+
+
+
+
+
+\section{有理型関数と有理型切断}
+\label{spaces-divisors-section-meromorphic-functions}
+
+\noindent
+本節は Divisors, Section
+\ref{divisors-section-meromorphic-functions}
+の類似である。
+% P09-ERR-0186
+注意：この内容については、スキームの場合よりも代数空間の場合の方が、
+いっそう誤りを犯しやすい。
+
+\medskip\noindent
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+任意のスキーム $U$ で $X$ 上 \'etale なものに対して、
+集合 $\mathcal{S}(U) \subset \mathcal{O}_X(U)$ を定義した。
+これは $\mathcal{O}_X$ の $U$ 上の正則切断全体の集合である。
+Definition \ref{spaces-divisors-definition-regular-section}
+を参照せよ。正則切断を \'etale な $V/U$ へ制限しても正則である。
+したがって $\mathcal{S} : U \mapsto \mathcal{S}(U)$ は
+$\mathcal{O}_X$ の（集合の）部分層である。
+$\mathcal{S} = \mathcal{S}_X$ と表して、$X$ への依存性を示すこともある。
+さらに、$\mathcal{S}(U)$ は環 $\mathcal{O}_X(U)$ の乗法的部分集合であり、
+これは各 $U$ に対して成り立つ。したがって、環の前層
+$$
+U \longmapsto \mathcal{S}(U)^{-1} \mathcal{O}_X(U),
+$$
+を $X_\etale$ 上で考え、その層化も考えられる。Modules on Sites, Section
+\ref{sites-modules-section-localizing-sheaves-rings}
+を参照せよ。
+
+\begin{definition}
+\label{spaces-divisors-definition-sheaf-meromorphic-functions}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+{\it $X$ 上の有理型関数の層}とは、上に表示した前層に伴う
+層 {\it $\mathcal{K}_X$} で、$X_\etale$ 上のものをいう。
+$X$ 上の {\it 有理型関数}とは、$\mathcal{K}_X$ の大域切断である。
+\end{definition}
+
+\noindent
+各 $\mathcal{S}(U)$ の各元は $\mathcal{O}_X(U)$ の零因子ではないので、
+環の層の自然な写像 $\mathcal{O}_X \to \mathcal{K}_X$ は単射である。
+さらに、層化と茎を取ることの両立性から、
+$$
+\mathcal{K}_{X, \overline{x}} =
+\mathcal{S}_{\overline{x}}^{-1}\mathcal{O}_{X, \overline{x}}
+$$
+が任意の幾何学的点 $\overline{x}$ で $X$ のものに対して成り立つ。
+集合 $\mathcal{S}_{\overline{x}}$ は
+$\mathcal{O}_{X, \overline{x}}$ の零因子でない元全体の集合の部分集合だが、
+一般にはそれと等しくない。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-describe-S}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$U$ がアフィンかつ $X$ 上 \'etale ならば、集合
+$\mathcal{S}_X(U)$ は $\mathcal{O}_X(U)$ の零因子でない元全体の集合である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-regular-section-structure-sheaf}
+から従う。
+\end{proof}
+
+\noindent
+次に、$\mathcal{F}$ を $ \mathcal{O}_X$ 加群の層で $X_\etale$ 上のものとする。
+前層 $U \mapsto \mathcal{S}(U)^{-1}\mathcal{F}(U)$ を考える。
+その層化は層
+$\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{K}_X$
+である。Modules on Sites, Lemma
+\ref{sites-modules-lemma-simple-invert-module}
+を参照せよ。
+
+\begin{definition}
+\label{spaces-divisors-definition-meromorphic-section}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を $ \mathcal{O}_X$ 加群の層で $X_\etale$ 上のものとする。
+\begin{enumerate}
+% P09-ERR-0187
+\item $\mathcal{K}_X(\mathcal{F})$ で、
+$\mathcal{K}_X$ 加群の層で、前層
+$U \mapsto \mathcal{S}(U)^{-1}\mathcal{F}(U)$ の層化であるものを表す。
+同値な言い方として
+$\mathcal{K}_X(\mathcal{F}) =
+\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{K}_X$ である（上を参照）。
+\item {\it $\mathcal{F}$ の有理型切断}とは、
+$\mathcal{K}_X(\mathcal{F})$ の大域切断である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+特に
+$$
+\mathcal{K}_X(\mathcal{F})_{\overline{x}}
+=
+\mathcal{F}_{\overline{x}}
+\otimes_{\mathcal{O}_{X, \overline{x}}} \mathcal{K}_{X, \overline{x}}
+=
+\mathcal{S}_{\overline{x}}^{-1}\mathcal{F}_{\overline{x}}
+$$
+が任意の幾何学的点 $\overline{x}$ で $X$ のものに対して成り立つ。
+しかし、上で指摘したように、$\mathcal{S}_{\overline{x}}$ が
+\'etale 局所環 $\mathcal{O}_{X, \overline{x}}$ の零因子でない元全体の
+集合になるとは限らないので、注意が必要である。有理型切断の層は一般には
+準連接加群ではないが、準連接加群と共通する性質をいくつかもつ。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-meromorphic-quasi-coherent}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。次を仮定する。
+\begin{enumerate}
+\item[(a)] $X$ のすべての弱随伴点は余次元 $0$ の点である。
+\item[(b)] $X$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}
+の同値な条件を満たす。
+\end{enumerate}
+このとき次が成り立つ。
+\begin{enumerate}
+\item $\mathcal{K}_X$ は準連接 $ \mathcal{O}_X$ 代数の層である。
+\item アフィン $U \in X_\etale$ に対し、$\mathcal{K}_X(U)$ は
+$\mathcal{O}_X(U)$ の全商環である。
+% P09-ERR-0188
+\item 幾何学的点 $\overline{x}$ に対し、集合
+$\mathcal{S}_{\overline{x}}$ は
+$\mathcal{O}_{X, \overline{x}}$ の零因子でない元全体の集合である。
+\item 幾何学的点 $\overline{x}$ に対し、環
+$\mathcal{K}_{X, \overline{x}}$ は
+$\mathcal{O}_{X, \overline{x}}$ の全商環である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-regular-section-structure-sheaf}
+により、
+% P09-ERR-0189
+アフィン $U \in X_\etale$ に対して
+$\mathcal{S}_X(U) \subset \mathcal{O}_X(U)$ は
+$\mathcal{O}_X(U)$ の零因子でない元全体の集合である。
+したがって前層 $\mathcal{S}^{-1}\mathcal{O}_X$ は、
+$$
+U \longmapsto Q(\mathcal{O}_X(U))
+$$
+に $X_{affine, \etale}$ 上で等しい。記号については Algebra, Example
+\ref{algebra-example-localize-at-prime}
+を参照せよ。余次元 $0$ の $X$ の点は $U$ の生成点に対応することに注意する。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}
+を参照せよ。したがって $U = \Spec(A)$ ならば、$A$ は有限個の極小素イデアルをもつ環で、
+$A$ の任意の弱随伴素イデアルは極小である。同じことが $A$ の任意の
+\'etale 拡大に対しても成り立つ（そのスペクトルは $X$ 上 \'etale な
+アフィンスキームなので、前の文における $A$ の役割を果たせる）。
+前層が層かつ準連接であることを示すには、
+$$
+Q(A) \otimes_A B \longrightarrow Q(B)
+$$
+が、$A \to B$ が \'etale 環準同型のとき同型であることを示せば十分である。
+次を参照せよ。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent-small-etale}。
+（表示した矢印を定義するには、$A \to B$ が平坦なので零因子でない元を
+零因子でない元へ写すことに注意すればよい。）
+Algebra, Lemmas
+\ref{algebra-lemma-total-ring-fractions-no-embedded-points} および
+\ref{algebra-lemma-weakly-ass-zero-divisors}
+により、
+$$
+Q(A) = \prod\nolimits_{\mathfrak p \subset A\text{ が極小}} A_\mathfrak p
+\quad\text{かつ}\quad
+Q(B) = \prod\nolimits_{\mathfrak q \subset B\text{ が極小}} B_\mathfrak q
+$$
+である。$A \to B$ は \'etale なので、$B$ の極小素イデアルは、
+$B$ の素イデアルで $A$ の極小素イデアルの上にあるものにちょうど一致する
+（例えば More on Algebra, Lemma
+\ref{more-algebra-lemma-dimension-etale-extension}
+による）。Algebra, Lemmas
+\ref{algebra-lemma-local-dimension-zero-henselian}、
+\ref{algebra-lemma-characterize-henselian} (13)、および
+\ref{algebra-lemma-mop-up}
+により、$A_\mathfrak p \otimes_A B$ は
+$A_\mathfrak p$ 上有限 \'etale な局所環の有限直積である。
+これは明らかに、望む等式
+$A_\mathfrak p \otimes_A B =
+\prod_{\mathfrak q\text{ が次の素イデアルの上にある：}\mathfrak p} B_\mathfrak q$
+を導く。
+
+\medskip\noindent
+ここまでで (1) と (2) が成り立つことが分かった。
+(3) の証明。$s \in \mathcal{O}_{X, \overline{x}}$ を零因子でない元とする。
+このとき \'etale 近傍
+$(U, \overline{u}) \to (X, \overline{x})$
+と、$f \in \mathcal{O}_X(U)$ で $s$ に写るものを取れる。
+$u \in U$ を $\overline{u}$ が定める点とする。
+$\mathcal{O}_{U, u} \to \mathcal{O}_{X, \overline{x}}$
+は（強 Hensel 化として）忠実平坦なので、
+$f$ は $\mathcal{O}_{U, u}$ の零因子でない元へ写る。
+Divisors, Lemma
+\ref{divisors-lemma-meromorphic-weakass-finite}
+により、$U$ を縮小した後、$f$ は零因子でない元となり、
+したがって $\mathcal{S}_X(U)$ の切断となる。
+(4) は茎を計算することにより (3) から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-meromorphic-quasi-coherent-agree}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。次を仮定する。
+\begin{enumerate}
+\item[(a)] $X$ のすべての弱随伴点は余次元 $0$ の点である。
+\item[(b)] $X$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}
+の同値な条件を満たす。
+\item[(c)] $X$ はスキーム $X_0$ によって表現される
+（ぎこちないが一時的な記号である）。
+\end{enumerate}
+このとき有理型関数の層 $\mathcal{K}_X$ は、準連接
+$ \mathcal{O}_X$ 代数の層で、有理型関数の準連接層
+$\mathcal{K}_{X_0}$ に伴うものである。
+\end{lemma}
+
+\begin{proof}
+$\QCoh(\mathcal{O}_X)$ と $\QCoh(\mathcal{O}_{X_0})$ の同値については、
+Properties of Spaces, Section
+\ref{spaces-properties-section-quasi-coherent}
+を参照されたい。この補題が成り立つのは、
+$\mathcal{K}_X$ と $\mathcal{K}_{X_0}$ が準連接であり、
+$X$ と $X_0$ の対応するアフィン開集合上で同じ値をもつからである。
+これは Lemma \ref{spaces-divisors-lemma-meromorphic-quasi-coherent} および
+Divisors, Lemma
+\ref{divisors-lemma-meromorphic-weakass-finite}
+による。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-pullback-meromorphic-sections}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+{\it $f$ に対して有理型関数の引き戻しが定義される}とは、任意の可換図式
+$$
+\xymatrix{
+U \ar[r] \ar[d] & X \ar[d] \\
+V \ar[r] & Y
+}
+$$
+で $U \in X_\etale$、$V \in Y_\etale$ であるもの、および任意の切断
+$s \in \mathcal{S}_Y(V)$ に対して、引き戻し
+$f^\sharp(s) \in \mathcal{O}_X(U)$ が $\mathcal{S}_X(U)$ の元となることをいう。
+\end{definition}
+
+\noindent
+この場合、誘導される写像
+$f^\sharp : f_{small}^{-1}\mathcal{K}_Y \to \mathcal{K}_X$
+が存在する。言い換えると、環付きトポスの射の可換図式
+$$
+\xymatrix{
+(\Sh(X_\etale), \mathcal{K}_X) \ar[r] \ar[d]^{f_{small}} &
+(\Sh(X_\etale), \mathcal{O}_X) \ar[d]^{f_{small}} \\
+(\Sh(Y_\etale), \mathcal{K}_Y) \ar[r] &
+(\Sh(Y_\etale), \mathcal{O}_Y)
+}
+$$
+を得る。$f^*(s) = f^\sharp(s)$ と、切断
+$s \in \Gamma(Y, \mathcal{K}_Y)$ に対して表すこともある。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-pullback-meromorphic-sections-defined}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+% P09-ERR-0191
+次の各場合に、有理型切断の引き戻しが定義される。
+\begin{enumerate}
+\item $X$ の弱随伴点が余次元 $0$ の $Y$ の点へ写される。
+\item $f$ は平坦である。
+% P09-ERR-0192
+\item 必要に応じてさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 局所的に考えると、これはスキームの場合へ翻訳される。次を参照せよ。
+Divisors, Lemma
+\ref{divisors-lemma-pullback-meromorphic-sections-defined}。
+翻訳には、Lemma
+\ref{spaces-divisors-lemma-regular-section-structure-sheaf}
+（正則切断の記述）、Definition
+\ref{spaces-divisors-definition-weakly-associated}
+（弱随伴点の定義）、および Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points}
+（余次元 $0$ の点の記述）を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-compute-meromorphic}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。次を仮定する。
+\begin{enumerate}
+\item[(a)] $X$ のすべての弱随伴点は余次元 $0$ の点である。
+\item[(b)] $X$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}
+の同値な条件を満たす。
+\item[(c)] すべての余次元 $0$ の $X$ の点は、単射
+$\Spec(k) \to X$ によって表現できる。
+\end{enumerate}
+$X^0 \subset |X|$ を余次元 $0$ の $X$ の点全体の集合とする。このとき
+$$
+\mathcal{K}_X =
+\bigoplus\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{O}_{X, \eta} =
+\prod\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{O}_{X, \eta}
+$$
+が成り立つ。ここで $j_\eta : \Spec(\mathcal{O}_{X, \eta}) \to X$
+は Schemes, Section \ref{schemes-section-points}
+の標準写像である。$X^0$ が $X$ のスキーム的軌跡に含まれるので、
+これは意味をもつ。同様に、任意の準連接 $ \mathcal{O}_X$ 加群
+$\mathcal{F}$ に対して
+$$
+\mathcal{K}_X(\mathcal{F}) =
+\bigoplus\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{F}_\eta =
+\prod\nolimits_{\eta \in X^0} j_{\eta, *}\mathcal{F}_\eta
+$$
+を得る。これは $\mathcal{F}$ の有理型切断の層に対する公式である。
+最後に、$X$ の有理関数環は $X$ 上の有理型関数環であり、公式では
+$R(X) = \Gamma(X, \mathcal{K}_X)$ である。
+\end{lemma}
+
+\begin{proof}
+Decent Spaces, Lemma \ref{decent-spaces-lemma-get-reasonable}
+および Section
+\ref{decent-spaces-section-reasonable-decent}
+により、$X$ は decent であることが分かる
+\footnote{逆に $X$ が decent ならば、条件 (c) は自動的に成り立つ。}。
+したがって $X^0 \subset |X|$ は既約成分の生成点全体の集合であり
+(Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-generic-points})、
+(b) により $X^0$ は $|X|$ において局所有限である。
+よって $X^0$ は $|X|$ のすべての稠密開部分集合に含まれる。
+特に、$X^0$ はスキーム的軌跡に含まれる
+(Decent Spaces, Theorem
+\ref{decent-spaces-theorem-decent-open-dense-scheme})。
+したがって局所環 $\mathcal{O}_{X, \eta}$ と射 $j_\eta$ が定義される。
+
+\medskip\noindent
+加群の層の局所有限直和は直積に等しいことに注意する。
+このことと、$X^0$ が $|X|$ において局所有限であることが、
+主張における直和と直積の等式を説明する。
+さらに
+$\mathcal{K}_X(\mathcal{F}) =
+\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{K}_X$
+なので、第二の等式は第一の等式から従う。
+
+\medskip\noindent
+% P09-ERR-0193
+$j : Y = \coprod\nolimits_{\eta \in X^0}
+\Spec(\mathcal{O}_{X, \eta}) \to X$
+を射 $j_\eta$ の積とする。
+$\mathcal{K}_X = j_*\mathcal{O}_Y$ を示す必要がある。
+$\mathcal{K}_Y = \mathcal{O}_Y$ であることに注意する。実際、
+$Y$ は次元 $0$ の局所環のスペクトルの非交和である。
+実際、次元零の局所環では、零因子でない任意の元は単元である。
+次に、Lemma
+\ref{spaces-divisors-lemma-pullback-meromorphic-sections-defined}
+により、$j$ に対して有理型関数の引き戻しが定義されることに注意する。
+これにより写像
+$$
+\mathcal{K}_X \longrightarrow j_*\mathcal{O}_Y.
+$$
+を得る。$U \in X_\etale$ をアフィンとする。Lemma
+\ref{spaces-divisors-lemma-meromorphic-quasi-coherent}
+により、左辺を評価すると
+% P09-ERR-0194
+$\mathcal{O}_X(U)$ の全商環になる。一方、右辺は
+$U$ の余次元 $0$ の点、すなわち $U$ の生成点における局所環の
+直積に等しい。この二つの環は等しい。これは既に Lemma
+\ref{spaces-divisors-lemma-meromorphic-quasi-coherent}
+の証明で見たように、Algebra, Lemmas
+\ref{algebra-lemma-total-ring-fractions-no-embedded-points}
+および
+\ref{algebra-lemma-weakly-ass-zero-divisors}
+による。したがって、写像は同型である。
+
+\medskip\noindent
+最後に $R(X) = \Gamma(X, \mathcal{K}_X)$ を示す必要がある。
+これは、スキーム的軌跡 $X' \subset X$ にスキームの場合
+(Divisors, Lemma
+\ref{divisors-lemma-meromorphic-weakass-finite})
+を適用することから従う。すなわち、$X$ の有理関数環は定義により、
+$X'$ 上の有理関数環と同じである。これは後者が $X$ の
+稠密開部分空間だからである（上を参照）。もちろん、
+$R(X')$ は、$X'$ をスキームとみなしたときの有理関数環と一致する。
+一方、上の $\mathcal{K}_X$ の記述と、上で見たように
+$X^0 \subset |X'|$ が任意の稠密開集合に含まれることから、
+$\Gamma(X, \mathcal{K}_X) = \Gamma(X', \mathcal{K}_{X'})$
+である。最後に Lemma
+\ref{spaces-divisors-lemma-meromorphic-quasi-coherent-agree}
+で記録した両立性を用いる。
+\end{proof}
+
+\begin{definition}
+\label{spaces-divisors-definition-regular-meromorphic-section}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+$\mathcal{L}$ を可逆 $ \mathcal{O}_X$ 加群とする。
+有理型切断 $s$ で $\mathcal{L}$ のものは、誘導される写像
+$\mathcal{K}_X \to \mathcal{K}_X(\mathcal{L})$
+が単射であるとき {\it 正則}であるという。
+\end{definition}
+
+\noindent
+（正則）有理型切断をいつ引き戻せるかを詳しく述べよう。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-meromorphic-sections-pullback}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ に対して有理型関数の引き戻しが定義されると仮定する
+(Definition
+\ref{spaces-divisors-definition-pullback-meromorphic-sections}
+を参照せよ）。
+\begin{enumerate}
+\item $\mathcal{F}$ を $ \mathcal{O}_Y$ 加群の層とする。
+標準的な引き戻し写像
+$f^* : \Gamma(Y, \mathcal{K}_Y(\mathcal{F})) \to
+\Gamma(X, \mathcal{K}_X(f^*\mathcal{F}))$
+が存在し、これは $\mathcal{F}$ の有理型切断に対するものである。
+% P09-ERR-0195
+\item $\mathcal{L}$ を可逆 $ \mathcal{O}_X$ 加群とする。
+正則有理型切断 $s$ で $\mathcal{L}$ のものの引き戻しは、
+正則有理型切断 $f^*s$ で $f^*\mathcal{L}$ のものとなる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-regular-meromorphic-section-exists}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間で、
+Lemma \ref{spaces-divisors-lemma-compute-meromorphic}
+の (a)、(b)、(c) を満たすものとする。このとき任意の可逆
+$ \mathcal{O}_X$ 加群 $\mathcal{L}$ は正則有理型切断をもつ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-compute-meromorphic} の記号を用いる。
+% P09-ERR-0196
+$\mathcal{L}_\eta$ で $\mathcal{L}$ の茎であるものは各 $\eta \in X^0$ に対して定義され、
+階数 $1$ の自由 $ \mathcal{O}_{X, \eta}$ 加群である。
+生成元 $s_\eta \in \mathcal{L}_\eta$ を各 $\eta \in X^0$ に対して選ぶ。
+Lemma \ref{spaces-divisors-lemma-compute-meromorphic}
+における $\mathcal{K}_X$ と $\mathcal{K}_X(\mathcal{L})$ の記述から直ちに、
+$s = \prod s_\eta$ は $\mathcal{L}$ の正則有理型切断であることが従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{相対 Proj}
+\label{spaces-divisors-section-relative-proj}
+
+\noindent
+本節では、代数空間の設定における相対 Proj の構成を再検討する。
+本節の内容は、スキームの場合の
+Constructions, Section
+\ref{constructions-section-relative-proj}
+および Divisors, Section \ref{divisors-section-relative-proj}
+の内容に対応する。
+
+\begin{situation}
+\label{spaces-divisors-situation-relative-proj}
+ここで $S$ はスキーム、$X$ は $S$ 上の代数空間、
+$\mathcal{A}$ は準連接次数付き $\mathcal{O}_X$-代数である。
+\end{situation}
+
+\noindent
+Situation \ref{spaces-divisors-situation-relative-proj} において、代数空間となることが後で分かる
+関手 $F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ を定義する。
+必要な変更を加えつつ、
+Constructions, Section \ref{constructions-section-relative-proj}
+の手順に従う。まず、スキーム $T$ が $S$ 上で与えられたとき、
+{\it $T$ 上の四つ組}を系
+$(d, f : T \to X, \mathcal{L}, \psi)$
+\begin{enumerate}
+\item $d \geq 1$ は整数であり、
+\item $f : T \to X$ は $S$ 上の射であり、
+\item $\mathcal{L}$ は可逆 $\mathcal{O}_T$-加群であり、
+\item
+$\psi : f^*\mathcal{A}^{(d)} \to \bigoplus_{n \geq 0}\mathcal{L}^{\otimes n}$
+は次数付き $\mathcal{O}_T$-代数の準同型であって、
+$f^*\mathcal{A}_d \to \mathcal{L}$ は全射である
+\end{enumerate}
+ものとして定義する。二つの四つ組 $(d, f, \mathcal{L}, \psi)$ と
+$(d', f', \mathcal{L}', \psi')$ が{\it 同値}であるとは、次が成り立つこととする
+\footnote{この定義は
+Constructions, Lemma \ref{constructions-lemma-equivalent-relative}
+に動機づけられている。この定義を選ぶ利点は、同値関係を定めることが
+明らかである点にある。}。
+すなわち $f = f'$ であり、ある正整数 $m = ad = a'd'$ に対して同型
+$\beta : \mathcal{L}^{\otimes a} \to (\mathcal{L}')^{\otimes a'}$
+が存在し、$\beta \circ \psi|_{f^*\mathcal{A}^{(m)}}$ と
+$\psi'|_{f^*\mathcal{A}^{(m)}}$ が次数付き環の写像
+% P09-ERR-0197
+$f^*\mathcal{A}^{(m)} \to \bigoplus_{n \geq 0} (\mathcal{L}')^{\otimes mn}$
+として一致することである。四つ組 $(d, f, \mathcal{L}, \psi)$ と
+射 $h : T' \to T$ が与えられると、引き戻し
+$(d, f \circ h, h^*\mathcal{L}, h^*\psi)$ が得られる。
+引き戻しは同値関係を保つ。最後に、スキーム $T$ が $S$ 上で
+{\it 準コンパクト}であるとき
+$$
+F(T) = \text{上の四つ組の同値類全体 }T
+$$
+とおき、任意のスキーム $T$ が $S$ 上で与えられたとき
+$$
+F(T)
+=
+\lim_{V \subset T\text{ 準コンパクト開}} F(V).
+$$
+とおく。言い換えると、元 $\xi$ が $F(T)$ に属することは、
+元 $\xi_V \in F(V)$ の整合的な選択系に対応する。ここで
+$V$ は $T$ の準コンパクト開部分を走る。こうして関手
+% P09-ERR-0198
+\begin{equation}
+\label{spaces-divisors-equation-proj}
+F : \Sch^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+を定義した。関手の射 $F \to X$ が存在し、これは四つ組
+$(d, f, \mathcal{L}, \psi)$ を $f$ に送る。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj}
+% P09-ERR-0199
+Situation \ref{spaces-divisors-situation-relative-proj} において、上の関手 $F$ は
+代数空間である。任意の射 $g : Z \to X$ で $Z$ がスキームであるもの
+に対して、さらなる基底変換と両立する標準同型
+$\underline{\text{Proj}}_Z(g^*\mathcal{A}) = Z \times_X F$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+第二の主張を証明すれば十分である。Spaces, Lemma
+\ref{spaces-lemma-representable-over-space} を参照せよ。
+射 $g : Z \to X$ で $Z$ がスキームであるものをとる。
+$F'$ を、次数付き準連接 $\mathcal{O}_Z$-代数
+$g^*\mathcal{A}$ に付随する四つ組の関手とする。このとき
+標準同型 $F' = Z \times_X F$ が存在し、四つ組
+$(d, f : T \to Z, \mathcal{L}, \psi)$ で $F'$ に属するものを
+$(d, g \circ f, \mathcal{L}, \psi)$ に送る
+（詳細は省略する。Constructions, Lemma
+\ref{constructions-lemma-proj-base-change} の証明を参照せよ）。
+Constructions, Lemmas
+\ref{constructions-lemma-equivalent-relative},
+\ref{constructions-lemma-relative-proj}, and
+\ref{constructions-lemma-glueing-gives-functor-proj} および
+% P09-ERR-0200
+Definition \ref{constructions-definition-relative-proj}
+により、$F'$ は
+$\underline{\text{Proj}}_Z(g^*\mathcal{A})$
+によって表現される。
+\end{proof}
+
+\noindent
+上の補題により、次の定義が意味をもつことが分かる。
+
+\begin{definition}
+\label{spaces-divisors-definition-relative-proj}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{A}$ を次数付き $\mathcal{O}_X$-代数の準連接層とする。
+$\mathcal{A}$ の $X$ 上の{\it 相対斉次スペクトル}、
+または $\mathcal{A}$ の $X$ 上の{\it 斉次スペクトル}、
+または $\mathcal{A}$ の $X$ 上の{\it 相対 Proj} とは、
+Lemma \ref{spaces-divisors-lemma-relative-proj} の代数空間 $F$ であり、$X$ 上にある。
+これを
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+と表す。
+\end{definition}
+
+\noindent
+特に、相対 Proj の構造射は構成により表現可能である。
+相対 Proj は貼り合わせによって考えることもできる。
+$\varphi : U \to X$ を全射な \'etale 射とし、$U$ をスキームとする。
+$R = U \times_X U$ とおき、その射影を $s, t : R  \to U$ とする。
+Lemma \ref{spaces-divisors-lemma-relative-proj} により、標準同型
+$$
+\gamma : 
+\underline{\text{Proj}}_U(\varphi^*\mathcal{A})
+\longrightarrow
+\underline{\text{Proj}}_X(\mathcal{A}) \times_X U
+$$
+が存在し、これは $U$ 上にある。
+$\alpha : t^*\varphi^*\mathcal{A} \to s^*\varphi^*\mathcal{A}$
+を Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent}
+の標準同型とする。このとき図式
+$$
+\xymatrix{
+&
+\underline{\text{Proj}}_U(\varphi^*\mathcal{A}) \times_{U, s} R
+\ar@{=}[r] &
+\underline{\text{Proj}}_R(s^*\varphi^*\mathcal{A})
+\ar[dd]_{\text{により誘導される }\alpha} \\
+\underline{\text{Proj}}_X(\mathcal{A}) \times_X R
+\ar[ru]_{s^*\gamma} \ar[rd]^{t^*\gamma} \\
+&
+\underline{\text{Proj}}_U(\varphi^*\mathcal{A}) \times_{U, t} R
+\ar@{=}[r] &
+\underline{\text{Proj}}_R(t^*\varphi^*\mathcal{A})
+}
+$$
+は可換である（等号は
+Constructions, Lemma \ref{constructions-lemma-relative-proj-base-change}
+から得られる）。ここで
+% P09-ERR-0201
+$\mathcal{A}_U$, $\mathcal{A}_R$ により、それぞれ
+$\mathcal{A}$ の $U$, $R$ への引き戻しを表すことにする。このとき
+$P = \underline{\text{Proj}}_X(\mathcal{A})$ はスキーム
+$P_U = \underline{\text{Proj}}_U(\mathcal{A}_U)$ による
+\'etale 被覆をもち、$P_U \times_P P_U$ は
+$P_R = \underline{\text{Proj}}_R(\mathcal{A}_R)$ に等しい。
+これらの考察を用いれば、通常どおり \'etale 局所化により、
+相対 Proj に関する結果をスキームの場合から代数空間の場合へ移せる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-twists-of-structure-sheaf}
+Situation \ref{spaces-divisors-situation-relative-proj} において、相対 Proj には
+$\mathbf{Z}$-次数付き代数の準連接層
+$\bigoplus_{n \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_X(\mathcal{A})}(n)$
+と、次数付き代数の標準準同型
+$$
+\psi :
+\pi^*\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{n \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_X(\mathcal{A})}(n)
+$$
+が備わる。これは $X$ 上の任意のスキームへの基底変換の後で
+Constructions, Lemma
+\ref{constructions-lemma-glue-relative-proj-twists}
+と一致する。
+\end{lemma}
+
+\begin{proof}
+Definition \ref{spaces-divisors-definition-relative-proj} の後の議論と同様に、
+スキーム $U$ と全射な \'etale 射 $U \to X$ を選び、
+$R = U \times_X U$ とおき、その射影を $s, t : R \to U$ とし、
+$\mathcal{A}_U = \mathcal{A}|_U$, $\mathcal{A}_R = \mathcal{A}|_R$,
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$,
+$\pi_U : P_U = \underline{\text{Proj}}_U(\mathcal{A}_U)$ および
+% P09-ERR-0202
+$\pi_R : P_R = \underline{\text{Proj}}_U(\mathcal{A}_R)$
+とおく。
+% P09-ERR-0203
+Constructions, Lemma
+\ref{constructions-lemma-glue-relative-proj-twists}
+により、$\mathbf{Z}$-次数付き $\mathcal{O}_{P_U}$-代数の
+準連接層
+$\bigoplus_{n \in \mathbf{Z}} \mathcal{O}_{P_U}(n)$
+と標準写像
+$\psi_U : \pi_U^*\mathcal{A}_U \to \bigoplus_{n \geq 0} \mathcal{O}_{P_U}(n)$
+が得られ、$P_R$ についても同様である。
+Constructions, Lemma
+\ref{constructions-lemma-relative-proj-base-change}
+により、$\mathcal{O}_{P_U}(n)$ と $\psi_U$ を
+いずれかの射影 $P_R \to P_U$ により引き戻すと、
+$\mathcal{O}_{P_R}(n)$ と $\psi_R$ に等しい。
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent}
+により $\mathcal{O}_{P}(n)$ と $\psi$ を得る。
+$X$ 上の任意のスキームへの引き戻しとの両立性の検証は省略する。
+\end{proof}
+
+\noindent
+相対 Proj を構成したので、いくつかの基本的性質に移る。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-base-change}
+$S$ をスキームとする。$g : X' \to X$ を $S$ 上の代数空間の射とし、
+$\mathcal{A}$ を次数付き $\mathcal{O}_X$-代数の準連接層とする。
+このとき標準同型
+$$
+r :
+\underline{\text{Proj}}_{X'}(g^*\mathcal{A})
+\longrightarrow
+X' \times_X \underline{\text{Proj}}_X(\mathcal{A})
+$$
+と、対応する同型
+$$
+\theta :
+r^*\text{pr}_2^*\left(\bigoplus\nolimits_{d \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_X(\mathcal{A})}(d)\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}}
+\mathcal{O}_{\underline{\text{Proj}}_{X'}(g^*\mathcal{A})}(d)
+$$
+で $\mathbf{Z}$-次数付き
+$\mathcal{O}_{\underline{\text{Proj}}_{X'}(g^*\mathcal{A})}$-代数のものが存在する。
+\end{lemma}
+
+\begin{proof}
+$F$ を関手 (\ref{spaces-divisors-equation-proj}) とし、$F'$ を
+$g^*\mathcal{A}$ を用いて $X'$ 上で定義される対応する関手とする。
+関手の標準同型 $r : F' \to X' \times_X F$ が存在すると主張する
+（もちろん $r$ は補題の同型である）。
+全単射
+$r : F'(T) \to X'(T) \times_{X(T)} F(T)$
+を、準コンパクトスキーム $T$ が $S$ 上にある場合について
+構成すれば十分である。まず、
+$\xi = (d', f', \mathcal{L}', \psi')$ が $T$ 上の $F'$ に対する
+四つ組なら、
+$r(\xi) = (f', (d', g \circ f', \mathcal{L}', \psi'))$ とおける。
+これは
+% P09-ERR-0204
+$(g \circ f')^*\mathcal{A}^{(d)} = (f')^*(g^*\mathcal{A})^{(d)}$
+であるため意味をもつ。逆写像は組
+$(f', (d, f, \mathcal{L}, \psi))$ を四つ組
+$(d, f', \mathcal{L}, \psi)$ に送る。最後の主張の証明は省略する
+（ヒント：\'etale 局所化によってスキームの場合に帰着し、
+Constructions, Lemma
+\ref{constructions-lemma-relative-proj-base-change} を適用せよ）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-separated}
+Situation \ref{spaces-divisors-situation-relative-proj} において射
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+は分離的である。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-separated-local}
+と相対 Proj の構成により、これはスキームの場合、すなわち
+Constructions, Lemma
+\ref{constructions-lemma-relative-proj-separated}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-quasi-compact}
+Situation \ref{spaces-divisors-situation-relative-proj} において、次のいずれかが
+成り立つとする。
+\begin{enumerate}
+\item $\mathcal{A}$ は $\mathcal{A}_0$-代数の層として有限型である。
+\item $\mathcal{A}$ は $\mathcal{A}_1$ により
+$\mathcal{A}_0$-代数として生成され、$\mathcal{A}_1$ は
+有限型 $\mathcal{A}_0$-加群である。
+\item 有限型準連接 $\mathcal{A}_0$-部分加群
+$\mathcal{F} \subset \mathcal{A}_{+}$ が存在して、
+$\mathcal{A}_{+}/\mathcal{F}\mathcal{A}$ は
+$\mathcal{A}/\mathcal{F}\mathcal{A}$ の局所冪零なイデアル層である。
+\end{enumerate}
+このとき $\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local}
+と相対 Proj の構成により、これはスキームの場合、すなわち
+Divisors, Lemma
+\ref{divisors-lemma-relative-proj-quasi-compact}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-finite-type}
+Situation \ref{spaces-divisors-situation-relative-proj} において、
+$\mathcal{A}$ が $\mathcal{O}_X$-代数の層として有限型ならば、
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+は有限型である。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-local}
+と相対 Proj の構成により、これはスキームの場合、すなわち
+Divisors, Lemma
+\ref{divisors-lemma-relative-proj-finite-type}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-universally-closed}
+Situation \ref{spaces-divisors-situation-relative-proj} において、
+$\mathcal{O}_X \to \mathcal{A}_0$
+が整な代数写像\footnote{言い換えると、$\mathcal{O}_X$ の
+$\mathcal{A}_0$ における整閉包（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-integral-closure} を参照）は
+$\mathcal{A}_0$ に等しい。}であり、$\mathcal{A}$ が
+$\mathcal{A}_0$-代数として有限型ならば、
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+は普遍閉である。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}
+と相対 Proj の構成により、これはスキームの場合、すなわち
+Divisors, Lemma
+\ref{divisors-lemma-relative-proj-universally-closed}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-proper}
+Situation \ref{spaces-divisors-situation-relative-proj} において、次の条件は同値である。
+\begin{enumerate}
+\item $\mathcal{A}_0$ は有限型 $\mathcal{O}_X$-加群であり、
+$\mathcal{A}$ は $\mathcal{A}_0$-代数として有限型である。
+\item $\mathcal{A}_0$ は有限型 $\mathcal{O}_X$-加群であり、
+$\mathcal{A}$ は $\mathcal{O}_X$-代数として有限型である。
+\end{enumerate}
+これらの条件が成り立つならば、
+$\pi : \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+は固有である。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-proper-local}
+と相対 Proj の構成により、これはスキームの場合、すなわち
+% P09-ERR-0205
+Divisors, Lemma
+\ref{divisors-lemma-relative-proj-universally-closed}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relative-proj-generated-in-degree-1}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+% P09-ERR-0206
+$\mathcal{A}$ を次数付き $\mathcal{O}_X$-加群の準連接層で、
+$\mathcal{A}_0$-代数として $\mathcal{A}_1$ により生成されるものとする。
+$P = \underline{\text{Proj}}_X(\mathcal{A})$ とおくと、次が成り立つ。
+\begin{enumerate}
+\item $P$ は関手 $F_1$ を表現する。この関手は
+$T$ が $S$ 上にあるとき、それに三つ組 $(f, \mathcal{L}, \psi)$ の
+同型類全体を対応させる。ここで $f : T \to X$ は
+$S$ 上の射、$\mathcal{L}$ は可逆 $\mathcal{O}_T$-加群であり、
+$\psi : f^*\mathcal{A} \to \bigoplus_{n \geq 0} \mathcal{L}^{\otimes n}$
+は次数付き $\mathcal{O}_T$-代数の写像で、全射
+$f^*\mathcal{A}_1 \to \mathcal{L}$ を誘導する。
+\item 標準写像 $\pi^*\mathcal{A}_1 \to \mathcal{O}_P(1)$ は全射である。
+\item 各 $\mathcal{O}_P(n)$ は可逆であり、積写像は同型
+$\mathcal{O}_P(n) \otimes_{\mathcal{O}_P} \mathcal{O}_P(m) =
+\mathcal{O}_P(n + m)$
+を誘導する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。スキームの場合については Constructions, Lemma
+\ref{constructions-lemma-apply-relative} を参照せよ。
+\end{proof}
+
+\section{相対 Proj の関手性}
+\label{spaces-divisors-section-functoriality-relative-proj}
+
+\noindent
+本節は Constructions, Section
+\ref{constructions-section-functoriality-relative-proj}
+に対応する。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-morphism-relative-proj}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\psi : \mathcal{A} \to \mathcal{B}$ を準連接次数付き
+$\mathcal{O}_X$-代数の写像とする。
+$P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$ および
+$Q = \underline{\text{Proj}}_X(\mathcal{B}) \to X$ とおく。
+標準開部分空間 $U(\psi) \subset Q$ と、代数空間の標準射
+$$
+r_\psi :
+U(\psi)
+\longrightarrow
+P
+$$
+が存在し、これは $X$ 上にある。さらに
+$\mathbf{Z}$-次数付き $\mathcal{O}_{U(\psi)}$-代数の写像
+$$
+\theta = \theta_\psi :
+r_\psi^*\left(
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_P(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \in \mathbf{Z}} \mathcal{O}_{U(\psi)}(d).
+$$
+が存在する。三つ組 $(U(\psi), r_\psi, \theta)$ は次の性質により
+特徴づけられる。すなわち、スキーム $W$ が $X$ 上 \'etale であるとき、
+三つ組
+$$
+(U(\psi) \times_X W,\quad
+r_\psi|_{U(\psi) \times_X W} : U(\psi) \times_X W \to  P \times_X W,\quad
+\theta|_{U(\psi) \times_X W})
+$$
+は Constructions, Lemma
+\ref{constructions-lemma-morphism-relative-proj}
+の $\psi : \mathcal{A}|_W \to \mathcal{B}|_W$ に付随する三つ組に等しい。
+\end{lemma}
+
+\begin{proof}
+この補題は \'etale 局所化とスキームの場合から従う。
+Definition \ref{spaces-divisors-definition-relative-proj} の後の議論を参照せよ。
+詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-morphism-relative-proj-transitive}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$ を準連接次数付き
+$\mathcal{O}_X$-代数とする。
+$P = \underline{\text{Proj}}_X(\mathcal{A})$,
+$Q = \underline{\text{Proj}}_X(\mathcal{B})$ および
+$R = \underline{\text{Proj}}_X(\mathcal{C})$ とおく。
+$\varphi : \mathcal{A} \to \mathcal{B}$,
+$\psi : \mathcal{B} \to \mathcal{C}$ を次数付き
+$\mathcal{O}_X$-代数の写像とする。このとき
+% P09-ERR-0207
+$$
+U(\psi \circ \varphi) = r_\varphi^{-1}(U(\psi))
+\quad
+\text{かつ}
+\quad
+r_{\psi \circ \varphi}
+=
+r_\varphi \circ r_\psi|_{U(\psi \circ \varphi)}.
+$$
+さらに、明らかな記法のもとで
+$$
+\theta_\psi \circ r_\psi^*\theta_\varphi
+=
+\theta_{\psi \circ \varphi}
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-surjective-graded-rings-map-relative-proj}
+% P09-ERR-0209
+上の Lemma \ref{spaces-divisors-lemma-morphism-relative-proj}
+と同じ仮定と記法を用いる。
+$\mathcal{A}_d \to \mathcal{B}_d$ が $d \gg 0$ に対して全射であるとする。
+このとき
+\begin{enumerate}
+\item $U(\psi) = Q$ である。
+% P09-ERR-0208
+\item $r_\psi : Q \to R$ は閉埋め込みである。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_P(n) \to \mathcal{O}_Q(n)$
+は全射であるが、一般には同型ではない
+（$\mathcal{A} \to \mathcal{B}$ が全射の場合でさえそうである）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により、スキームの場合
+（Constructions, Lemma
+\ref{constructions-lemma-surjective-graded-rings-map-relative-proj}）
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-eventual-iso-graded-rings-map-relative-proj}
+% P09-ERR-0209
+上の Lemma \ref{spaces-divisors-lemma-morphism-relative-proj}
+と同じ仮定と記法を用いる。
+$\mathcal{A}_d \to \mathcal{B}_d$ がすべての $d \gg 0$
+に対して同型であるとする。このとき
+\begin{enumerate}
+\item $U(\psi) = Q$ である。
+\item $r_\psi : Q \to P$ は同型である。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_P(n) \to \mathcal{O}_Q(n)$
+は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により、スキームの場合
+（Constructions, Lemma
+\ref{constructions-lemma-eventual-iso-graded-rings-map-relative-proj}）
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-surjective-generated-degree-1-map-relative-proj}
+% P09-ERR-0209
+上の Lemma \ref{spaces-divisors-lemma-morphism-relative-proj}
+と同じ仮定と記法を用いる。
+$\mathcal{A}_d \to \mathcal{B}_d$ が $d \gg 0$ に対して全射であり、
+$\mathcal{A}$ が $\mathcal{A}_1$ によって
+$\mathcal{A}_0$ 上生成されるとする。このとき
+\begin{enumerate}
+\item $U(\psi) = Q$ である。
+\item $r_\psi : Q \to P$ は閉埋め込みである。
+\item 写像 $\theta : r_\psi^*\mathcal{O}_P(n) \to \mathcal{O}_Q(n)$
+は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\'etale 局所化により、スキームの場合
+（Constructions, Lemma
+\ref{constructions-lemma-surjective-generated-degree-1-map-relative-proj}）
+から従う。
+\end{proof}
+
+\section{可逆層と相対 Proj への射}
+\label{spaces-divisors-section-invertible-relative-proj}
+
+\noindent
+次の補題がどこかで必要になるように思われる。
+状況は次のとおりである。
+\begin{enumerate}
+\item $S$ をスキーム、$Y$ を $S$ 上の代数空間とする。
+\item $\mathcal{A}$ を準連接次数付き $\mathcal{O}_Y$-代数とする。
+\item $\pi : \underline{\text{Proj}}_Y(\mathcal{A}) \to Y$ により、
+$\mathcal{A}$ の $Y$ 上の相対 Proj を表す。
+\item $f : X \to Y$ を $S$ 上の代数空間の射とする。
+\item $\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+\item
+$\psi : f^*\mathcal{A} \to \bigoplus_{d \geq 0} \mathcal{L}^{\otimes d}$
+を次数付き $\mathcal{O}_X$-代数の準同型とする。
+\end{enumerate}
+このデータが与えられたとき、$U(\psi) \subset X$ を
+$$
+|U(\psi)| = \bigcup\nolimits_{d \geq 1}
+\{\text{次の写像が全射となる点 }f^*\mathcal{A}_d \to \mathcal{L}^{\otimes d}
+\text{ の軌跡}\}
+$$
+を満たす開部分空間とする。$U(\psi) \subset X$ の形成は
+任意の射 $X' \to X$ による引き戻しと可換である。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-invertible-map-into-relative-proj}
+% P09-ERR-0210
+上の仮定と記法のもとで、射 $\psi$ は $Y$ 上の代数空間の標準射
+$$
+r_{\mathcal{L}, \psi} :
+U(\psi) \longrightarrow \underline{\text{Proj}}_Y(\mathcal{A})
+$$
+と、次数付き $\mathcal{O}_{U(\psi)}$-代数の写像
+$$
+\theta :
+r_{\mathcal{L}, \psi}^*\left(
+\bigoplus\nolimits_{d \geq 0}
+\mathcal{O}_{\underline{\text{Proj}}_Y(\mathcal{A})}(d)
+\right)
+\longrightarrow
+\bigoplus\nolimits_{d \geq 0} \mathcal{L}^{\otimes d}|_{U(\psi)}
+$$
+を誘導する。これらは次の性質によって特徴づけられる。
+\begin{enumerate}
+\item $V \to Y$ が \'etale で $d \geq 0$ ならば、図式
+% P09-ERR-0211
+$$
+\xymatrix{
+\mathcal{A}_d(V) \ar[d]_{\psi} \ar[r]_{\psi} &
+\Gamma(V \times_Y X, \mathcal{L}^{\otimes d}) \ar[d]^{restrict} \\
+\Gamma(V \times_Y \underline{\text{Proj}}_Y(\mathcal{A}),
+\mathcal{O}_{\underline{\text{Proj}}_Y(\mathcal{A})}(d)) \ar[r]^-\theta &
+\Gamma(V \times_Y U(\psi), \mathcal{L}^{\otimes d})
+}
+$$
+は可換である。
+\item 任意の $d \geq 1$ と、任意の射 $W \to X$ で
+$W$ がスキームであるものに対して、
+$\psi|_W : f^*\mathcal{A}_d|_W \to \mathcal{L}^{\otimes d}|_W$
+が全射ならば、(a) $W \to X$ は $U(\psi)$ を経由し、
+(b) $W \to U(\psi)$ と $r_{\mathcal{L}, \psi}$ の合成は、
+$W \to \underline{\text{Proj}}_Y(\mathcal{A})$ という射に一致する。
+この射は $\underline{\text{Proj}}_Y(\mathcal{A})$ の構成によって存在する。
+Definition \ref{spaces-divisors-definition-relative-proj} を参照せよ。
+\item 可換図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を考える。ここで $X'$ と $Y'$ はスキームである。
+$\mathcal{A}' = g^*\mathcal{A}$ および
+$\mathcal{L}' = (g')^*\mathcal{L}$ とおき、
+% P09-ERR-0212
+$\psi' : (f')^*\mathcal{A} \to
+\bigoplus_{d \geq 0} (\mathcal{L}')^{\otimes d}$
+により $\psi$ の引き戻しを表す。
+$U(\psi')$,
+% P09-ERR-0213
+$r_{\psi', \mathcal{L}'}$, および $\theta'$ により、
+% P09-ERR-0214
+Constructions, Lemma \ref{spaces-divisors-lemma-invertible-map-into-relative-proj}
+で構成される開部分、射、および準同型を表す。このとき
+$U(\psi') = (g')^{-1}(U(\psi))$ であり、
+$r_{\psi', \mathcal{L}'}$ は $r_{\psi, \mathcal{L}}$ の基底変換に、
+Lemma \ref{spaces-divisors-lemma-relative-proj-base-change} の同型
+$\underline{\text{Proj}}_{Y'}(\mathcal{A}') =
+Y' \times_Y \underline{\text{Proj}}_Y(\mathcal{A})$
+を介して一致する。
+さらに、$\theta'$ は $\theta$ の引き戻しである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒントを述べる。まず、準コンパクトスキーム
+$W$ が $X$ 上にあるとき、次は同値である。
+\begin{enumerate}
+\item $W \to X$ は $U(\psi)$ を経由する。
+% P09-ERR-0215
+\item ある $d$ が存在して
+$\psi|_W : f^*\mathcal{A}_d|_W \to \mathcal{L}^{\otimes d}|_W$
+は全射である。
+\end{enumerate}
+これにより、$U(\psi)$ は $X$ の部分関手として記述され、
+その基礎圏は $(\Sch/S)_{fppf}$ である。そのような $W$ と $d$ に対して
+四つ組
+$(d, W \to Y, \mathcal{L}|_W, \psi^{(d)}|_W)$
+を考える。$\underline{\text{Proj}}_Y(\mathcal{A})$ の定義により、
+射 $W \to \underline{\text{Proj}}_Y(\mathcal{A})$ を得る。
+四つ組の同値性の定義から、この射は $d$ の選び方によらないことが分かる。
+これは明らかに関手の変換
+$r_{\psi, \mathcal{L}} : U(\psi) \to
+\underline{\text{Proj}}_Y(\mathcal{A})$
+を定義する。すなわち、代数空間の射である。
+構成により、この射は (2) を満たす。
+Constructions, Lemma
+\ref{constructions-lemma-invertible-map-into-relative-proj}
+で構成された射も同じ性質を満たすので、(3) が成り立つ。
+
+\medskip\noindent
+$\theta$ を構成し、補題の両立性 (1) を確認するには、
+$Y$ と $X$ 上 \'etale 局所的に作業し、
+Definition \ref{spaces-divisors-definition-relative-proj}
+の後の議論と同様に論じる。
+\end{proof}
+
+\section{相対的に豊富な層}
+\label{spaces-divisors-section-relatively-ample}
+
+\noindent
+本節は、代数空間に対する Morphisms, Section
+\ref{morphisms-section-relatively-ample}
+に対応する。相対的に豊富な可逆層を次のように定義する。
+
+\begin{definition}
+\label{spaces-divisors-definition-relatively-ample}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$\mathcal{L}$ が{\it 相対的に豊富}、{\it $f$-相対的に豊富}、
+{\it $X/Y$ 上豊富}、または{\it $f$-豊富}であるとは、
+$f : X \to Y$ が表現可能であり、任意の射 $Z \to Y$ で
+$Z$ がスキームであるものに対し、引き戻し $\mathcal{L}_Z$、すなわち
+$\mathcal{L}$ を $X_Z = Z \times_Y X$ へ引き戻したものが
+Morphisms, Definition
+\ref{morphisms-definition-relatively-ample}
+の意味で $X_Z/Z$ 上豊富であることをいう。
+\end{definition}
+
+\noindent
+相対的に豊富な可逆層に関する問題は、ほとんど常に
+スキームの場合へ帰着する。したがって本節の内容は主として
+整合性の確認である。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relatively-ample-sanity-check}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$Y$ がスキームであるとする。このとき次は同値である。
+\begin{enumerate}
+\item $\mathcal{L}$ は Definition
+\ref{spaces-divisors-definition-relatively-ample}
+の意味で $X/Y$ 上豊富である。
+\item $X$ はスキームであり、$\mathcal{L}$ は Morphisms, Definition
+\ref{morphisms-definition-relatively-ample}
+の意味で $X/Y$ 上豊富である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは定義と Morphisms, Lemma
+\ref{morphisms-lemma-ample-base-change}
+から従う（この補題は、スキームに対する相対的豊富性が
+基底変換で保たれることを述べる）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-ample-base-change}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$Y' \to Y$ を $S$ 上の代数空間の射とする。
+$f' : X' \to Y'$ を $f$ の基底変換とし、
+$\mathcal{L}'$ により $\mathcal{L}$ の $X'$ への引き戻しを表す。
+$\mathcal{L}$ が $f$-豊富ならば、$\mathcal{L}'$ は $f'$-豊富である。
+\end{lemma}
+
+\begin{proof}
+これは定義から直ちに従う。
+（ヒント：基底変換の推移性。）
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relatively-ample-properties}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$-豊富な可逆層が存在するならば、
+$f$ は表現可能、準コンパクト、かつ分離的である。
+\end{lemma}
+
+\begin{proof}
+これは定義と Morphisms, Lemma
+\ref{morphisms-lemma-relatively-ample-separated}
+から明らかである。（疑わしい場合は Algebraic Spaces, Lemma
+\ref{spaces-lemma-representable-transformations-property-implication}
+の原理を参照せよ。）
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-descend-relatively-ample}
+$V \to U$ をアフィンスキームの全射な \'etale 射とする。
+$X$ を $U$ 上の代数空間とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$Y = V \times_U X$ とおき、$\mathcal{N}$ を
+$\mathcal{L}$ の $Y$ への引き戻しとする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{L}$ は $X/U$ 上豊富である。
+\item $\mathcal{N}$ は $Y/V$ 上豊富である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+含意 (1) $\Rightarrow$ (2) は Lemma
+\ref{spaces-divisors-lemma-ample-base-change} から従う。(2) を仮定する。
+これは $Y \to V$ が準コンパクトかつ分離的であり
+（Lemma \ref{spaces-divisors-lemma-relatively-ample-properties}）、
+$Y$ がスキームであることを含意する。したがって射
+$f : X \to U$ は準コンパクトかつ分離的である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-quasi-compact-local} および
+\ref{spaces-morphisms-lemma-separated-local}）。
+$\mathcal{A} = \bigoplus_{d \geq 0} f_*\mathcal{L}^{\otimes d}$
+とおく。これは次数付き $\mathcal{O}_U$-代数の準連接層である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}）。
+随伴により写像
+$\psi : f^*\mathcal{A} \to
+\bigoplus_{d \geq 0} \mathcal{L}^{\otimes d}$
+がある。Lemma \ref{spaces-divisors-lemma-invertible-map-into-relative-proj}
+を適用すると、開部分空間 $U(\psi) \subset X$ と射
+$$
+r_{\mathcal{L}, \psi} : U(\psi) \to
+\underline{\text{Proj}}_U(\mathcal{A})
+$$
+を得る。
+% P09-ERR-0216
+$h : V \to U$ は \'etale であるから、
+$\mathcal{A}|_V =
+(Y \to V)_*(\bigoplus_{d \geq 0} \mathcal{N}^{\otimes d})$
+である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}
+を参照せよ。$\psi'$ は $\psi$ の $Y$ への引き戻しであり、
+Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample} の (5) における
+状況 $(Y \to V, \mathcal{N})$ の随伴写像である。
+$\mathcal{N}$ は $Y/V$ 上豊富であるから、今引用した補題により
+$U(\psi') = Y$ であり、$r_{\mathcal{N}, \psi'}$ は開埋め込みである。
+Lemma \ref{spaces-divisors-lemma-invertible-map-into-relative-proj}
+により $r_{\mathcal{L}, \psi}$ の形成は基底変換と可換である。
+したがって $U(\psi) = X$ であり、可換図式
+$$
+\xymatrix{
+Y \ar[r]_-{r'} \ar[d] &
+\underline{\text{Proj}}_V(\mathcal{A}|_V) \ar[d] \ar[r] &
+V \ar[d] \\
+X \ar[r]^-r &
+\underline{\text{Proj}}_U(\mathcal{A}) \ar[r] &
+U
+}
+$$
+が得られ、その各正方形はファイバー積である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}
+により $r$ は開埋め込みである。したがって $X$ はスキームである。
+そこで Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample} の (5) を適用し、
+$\mathcal{L}$ は $X/U$ 上豊富であると結論できる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-relatively-ample-local}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{L}$ は $X/Y$ 上豊富である。
+\item 任意のスキーム $Z$ と任意の射 $Z \to Y$ に対して、
+代数空間 $X_Z = Z \times_Y X$ はスキームであり、
+引き戻し $\mathcal{L}_Z$ は $X_Z/Z$ 上豊富である。
+\item 任意のアフィンスキーム $Z$ と任意の射 $Z \to Y$ に対して、
+代数空間 $X_Z = Z \times_Y X$ はスキームであり、
+引き戻し $\mathcal{L}_Z$ は $X_Z/Z$ 上豊富である。
+\item スキーム $V$ と全射な \'etale 射 $V \to Y$ が存在し、
+代数空間 $X_V = V \times_Y X$ はスキームであり、
+引き戻し $\mathcal{L}_V$ は $X_V/V$ 上豊富である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) は定義により同値である。
+含意 (2) $\Rightarrow$ (3) は直ちに従う。
+(3) が成り立ち、$Z \to Y$ が (2) にあるものであるとする。このとき
+% P09-ERR-0217
+$X_Z \to Z$ は $Z$ 上アフィン局所的に表現可能である。
+したがって、例えば Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme} により、
+$X_Z$ はスキームである。さらに $\mathcal{L}_Z$ は
+$X_Z/Z$ 上豊富である。実際、これは $Z$ 上局所的に成り立ち、
+Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample}
+を用いることができる。よって (1)、(2)、(3) は同値である。
+これらの条件が (4) を含意することは明らかである。
+
+\medskip\noindent
+(4) を仮定する。$Z \to Y$ を射とし、$Z$ はアフィンとする。
+このとき $U = V \times_Y Z \to Z$ は全射な \'etale 射であり、
+$\mathcal{L}_Z$ を $X_U \to X_Z$ によって引き戻したものは
+$X_U/U$ 上相対的に豊富である。
+% P09-ERR-0218
+もちろん $U$ をアフィン開集合で置き換えてよい。
+Lemma \ref{spaces-divisors-lemma-descend-relatively-ample} により、
+$\mathcal{L}_Z$ は $X_Z/Z$ 上豊富である。
+よって (4) $\Rightarrow$ (3) であり、証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-quasi-affine-O-ample}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+このとき $f$ が準アフィンであるための必要十分条件は
+$\mathcal{O}_X$ が $f$-相対的に豊富であることである。
+\end{lemma}
+
+\begin{proof}
+スキームの場合から従う。Morphisms, Lemma
+\ref{morphisms-lemma-quasi-affine-O-ample}
+を参照せよ。
+\end{proof}
+
+\section{相対的豊富性とコホモロジー}
+\label{spaces-divisors-section-ample-and-proper}
+
+\noindent
+本節では Cohomology of Schemes, Sections
+\ref{coherent-section-applications-formal-functions} および
+\ref{coherent-section-ample-cohomology}
+の結果に関連するいくつかの結果を扱う。
+
+\medskip\noindent
+次の補題は、可能な議論の一例にすぎない。
+
+\begin{lemma}
+% P09-ERR-0219
+\label{spaces-divisors-lemma-vanshing-gives-ample}
+$R$ をネーター環とする。$X$ を $R$ 上の代数空間とし、
+構造射 $f : X \to \Spec(R)$ は固有であるとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{L}$ は $X/R$ 上豊富である
+（Definition \ref{spaces-divisors-definition-relatively-ample}）。
+\item 任意の連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して、
+ある $n_0 \geq 0$ が存在して、
+$H^p(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$
+がすべての $n \geq n_0$ と $p > 0$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+含意 (1) $\Rightarrow$ (2) は Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-proper-ample}
+から従う。仮定 (1) により $X$ はスキームだからである。
+含意 (2) $\Rightarrow$ (1) は Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-Noetherian-h1-zero-invertible}
+である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-ample-on-fibre}
+$Y$ をネータースキームとする。$X$ を $Y$ 上の代数空間とし、
+構造射 $f : X \to Y$ は固有であるとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。
+$y \in Y$ を点とし、$X_y$ はスキームで
+$\mathcal{L}_y$ は $X_y$ 上豊富であるとする。
+このときある $d_0$ が存在し、すべての $d \geq d_0$ に対して
+$$
+R^pf_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})_y = 0
+\text{、ただし }p > 0
+$$
+であり、写像
+$$
+f_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})_y
+\longrightarrow
+H^0(X_y, \mathcal{F}_y \otimes_{\mathcal{O}_{X_y}} \mathcal{L}_y^{\otimes d})
+$$
+は全射である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_{Y, y}$ はネーター局所環であることに注意する。
+標準射 $c : \Spec(\mathcal{O}_{Y, y}) \to Y$ を考える。
+Schemes, Equation (\ref{schemes-equation-canonical-morphism}) を参照せよ。
+これは局所環を同一視するので平坦射である。
+$f' : X' \to \Spec(\mathcal{O}_{Y, y})$ により、一時的に
+$f$ のこの局所環への基底変換を表す。Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology}
+により
+$c^*R^pf_*\mathcal{F} = R^pf'_*\mathcal{F}'$
+である。さらに、ファイバー $X_y$ と $X'_y$ は同一視される。
+したがって、$Y = \Spec(A)$ はネーター局所環
+$(A, \mathfrak m, \kappa)$ のスペクトルであり、
+$y \in Y$ は $\mathfrak m$ に対応すると仮定してよい。この場合
+$$
+R^pf_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})_y =
+H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d})
+$$
+がすべての $p \geq 0$ に対して成り立つ。
+$f_y : X_y \to \Spec(\kappa)$ により射影を表す。
+
+\medskip\noindent
+$B = \text{Gr}_\mathfrak m(A) =
+\bigoplus_{n \geq 0} \mathfrak m^n/\mathfrak m^{n + 1}$
+とおく。層 $\mathcal{B} = f_y^*\widetilde{B}$ で、
+準連接次数付き $\mathcal{O}_{X_y}$-代数であるものを考える。
+Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-theorem-formal-functions}
+の記法を、$I$ を $\mathfrak m$ で置き換えて用いる。
+$X_y$ は $X$ の閉部分空間で、
+$\mathfrak m\mathcal{O}_X$ によって切り出されるから、
+$\mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1}\mathcal{F}$
+を連接 $\mathcal{O}_{X_y}$-加群とみなせる。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-i-star-equivalence} を参照せよ。
+すると
+$\bigoplus_{n \geq 0}
+\mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1}\mathcal{F}$
+は有限型の準連接次数付き $\mathcal{B}$-加群である。
+これは $\mathcal{B}$ 上次数零で生成され、
+% P09-ERR-0220
+その次数零部分
+$\mathcal{F}_y = \mathcal{F}/\mathfrak m \mathcal{F}$
+が連接 $\mathcal{O}_{X_y}$-加群だからである。
+したがって Cohomology of Schemes, Lemma
+\ref{coherent-lemma-graded-finiteness} の (2) により、
+ある $d_0$ が存在して
+$$
+H^p(X_y, \mathfrak m^n \mathcal{F}/ \mathfrak m^{n + 1}\mathcal{F}
+\otimes_{\mathcal{O}_{X_y}} \mathcal{L}_y^{\otimes d}) = 0
+$$
+がすべての $p > 0$, $d \geq d_0$, $n \geq 0$ に対して成り立つ。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-relative-affine-cohomology}
+により、これは
+$
+H^p(X, \mathfrak m^n \mathcal{F}/ \mathfrak m^{n + 1}\mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0
+$
+がすべての $p > 0$, $d \geq d_0$, $n \geq 0$
+に対して成り立つという主張と同じである。
+
+\medskip\noindent
+短完全列
+$$
+0 \to \mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\to \mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\to \mathcal{F}/\mathfrak m^n \mathcal{F} \to 0
+$$
+で連接 $\mathcal{O}_X$-加群からなるものを考える。
+$\mathcal{L}^{\otimes d}$ とのテンソル積は完全関手であり、
+短完全列
+$$
+0 \to
+\mathfrak m^n\mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}
+\to \mathcal{F}/\mathfrak m^{n + 1} \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}
+\to \mathcal{F}/\mathfrak m^n \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d} \to 0
+$$
+を得る。コホモロジー長完全列と上の消滅を用いると、
+帰納法により次を得る。
+\begin{enumerate}
+\item
+$H^p(X, \mathcal{F}/\mathfrak m^n \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0$
+がすべての $p > 0$, $d \geq d_0$, $n \geq 0$ に対して成り立つ。
+\item
+$H^0(X, \mathcal{F}/\mathfrak m^n \mathcal{F}
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) \to
+H^0(X_y, \mathcal{F}_y \otimes_{\mathcal{O}_{X_y}}
+\mathcal{L}_y^{\otimes d})$
+はすべての $d \geq d_0$, $n \geq 1$ に対して全射である。
+\end{enumerate}
+形式関数定理（Cohomology of Spaces, Theorem
+\ref{spaces-cohomology-theorem-formal-functions}）により、
+$\mathfrak m$-進完備化を
+$H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes d})$
+に施したものは、すべての $d \geq d_0$ と $p > 0$
+に対して零である。
+$H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes d})$
+は Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-over-affine-cohomology-finite}
+により有限 $A$-加群なので、Nakayama の補題
+（Algebra, Lemma \ref{algebra-lemma-NAK}）から
+$H^p(X, \mathcal{F} \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes d})$
+はすべての $d \geq d_0$ と $p > 0$ に対して零である。
+$p = 0$ の場合、Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-ML-cohomology-powers-ideal}
+の (3) から
+$H^0(X, \mathcal{F} \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes d}) \to
+H^0(X_y, \mathcal{F}_y \otimes_{\mathcal{O}_{X_y}}
+\mathcal{L}_y^{\otimes d})$
+が全射であると分かる。これは補題の最後の主張を与える。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-ample-in-neighbourhood}
+（より一般的な版については Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-ample-in-neighbourhood} を参照せよ。）
+$Y$ をネータースキームとする。$X$ を $Y$ 上の代数空間とし、
+構造射 $f : X \to Y$ は固有であるとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$y \in Y$ を点とし、$X_y$ はスキームで
+$\mathcal{L}_y$ は $X_y$ 上豊富であるとする。
+このとき開近傍 $V \subset Y$ で $y$ のものが存在し、
+$\mathcal{L}|_{f^{-1}(V)}$ は $f^{-1}(V)/V$ 上豊富である
+（Definition \ref{spaces-divisors-definition-relatively-ample} の意味で）。
+\end{lemma}
+
+\begin{proof}
+$d_0$ を Lemma \ref{spaces-divisors-lemma-ample-on-fibre} から選び、そこでは
+$\mathcal{F} = \mathcal{O}_X$ とする。
+$d \geq d_0$ を、ある $r \geq 0$ と切断
+$s_{y, 0}, \ldots, s_{y, r} \in
+H^0(X_y, \mathcal{L}_y^{\otimes d})$
+で閉埋め込み
+$$
+\varphi_y =
+\varphi_{\mathcal{L}_y^{\otimes d}, (s_{y, 0}, \ldots, s_{y, r})} :
+X_y \to \mathbf{P}^r_{\kappa(y)}.
+$$
+を定めるものが見つかるように選ぶ。これは Morphisms, Lemma
+\ref{morphisms-lemma-finite-type-over-affine-ample-very-ample}
+により可能である。ただし $\varphi_y$ が閉埋め込みであることには
+Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-scheme-closed}
+も用い、可逆層と切断による射影空間への射の記述には
+Constructions, Section
+\ref{constructions-section-projective-space}
+を用いる。$d_0$ の選び方により、$Y$ を $y$ の開近傍で
+置き換えた後、切断
+$s_0, \ldots, s_r \in H^0(X, \mathcal{L}^{\otimes d})$
+で $s_{y, 0}, \ldots, s_{y, r}$ に写るものを選べる。
+$X_{s_i} \subset X$ を、$s_i$ が
+$\mathcal{L}^{\otimes d}$ の生成元となる開部分空間とする。
+$s_{y, i}$ は $\mathcal{L}_y^{\otimes d}$ を生成するから
+$|X_y| \subset U = \bigcup |X_{s_i}|$ である。
+$X \to Y$ は閉であるから、開近傍 $y \in V \subset Y$ が存在して
+$|f|^{-1}(V) \subset U$ となる。$Y$ を $V$ で置き換えた後、
+$s_i$ は $\mathcal{L}^{\otimes d}$ を生成すると仮定してよい。
+したがって射
+$$
+\varphi = \varphi_{\mathcal{L}^{\otimes d}, (s_0, \ldots, s_r)} :
+X \longrightarrow \mathbf{P}^r_Y
+$$
+で
+$\mathcal{L}^{\otimes d} \cong
+\varphi^*\mathcal{O}_{\mathbf{P}^r_Y}(1)$
+となり、その $y$ への基底変換が $\varphi_y$ となるものを得る
+（厳密には、Constructions, Section
+\ref{constructions-section-projective-space}
+に与えられた射影空間への射の構成が、代数空間から射影空間への
+射の記述にも働くことを証明する必要があるが、詳細は省略する）。
+
+\medskip\noindent
+手品を使って証明を終える。「正しい」証明は、
+$\varphi$ が $y$ の開近傍へ基底変換した後に閉埋め込みであることを
+直接示すものである。実際、Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-finite-fibre-finite-in-neighbourhood}
+により、
+% P09-ERR-0221
+$\varphi$ はファイバー $\mathbf{P}^r_{\kappa(y)}$ の開近傍上で
+有限である。ここでこれは $\mathbf{P}^r_Y \to Y$ の $y$ 上の
+ファイバーである。
+$\mathbf{P}^r_Y \to Y$ が閉であることを用い、$Y$ を縮小した後、
+$\varphi$ は有限であると仮定してよい。特に $X$ はスキームである。
+すると
+$\mathcal{L}^{\otimes d} \cong
+\varphi^*\mathcal{O}_{\mathbf{P}^r_Y}(1)$
+は非常に一般的な Morphisms, Lemma
+\ref{morphisms-lemma-pullback-ample-tensor-relatively-ample}
+により豊富である。
+\end{proof}
+
+\section{相対 Proj の閉部分空間}
+\label{spaces-divisors-section-closed-in-relative-proj}
+
+\noindent
+相対 Proj の閉部分空間に関するいくつかの補助補題を述べる。
+本節は Divisors, Section
+\ref{divisors-section-closed-in-relative-proj}
+に対応する。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-closed-subscheme-proj}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{A}$ を準連接次数付き $\mathcal{O}_X$-代数とする。
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+を $\mathcal{A}$ の相対 Proj とする。
+$i : Z \to P$ を閉部分空間とする。
+$\mathcal{I} \subset \mathcal{A}$ により、標準写像
+$$
+\mathcal{A}
+\longrightarrow
+\bigoplus\nolimits_{d \geq 0} \pi_*\left((i_*\mathcal{O}_Z)(d)\right)
+$$
+の核を表す。$\pi$ が準コンパクトならば、同型
+$Z = \underline{\text{Proj}}_X(\mathcal{A}/\mathcal{I})$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+射 $\pi$ は Lemma \ref{spaces-divisors-lemma-relative-proj-separated}
+により分離的である。$\pi$ は準コンパクトなので、$\pi_*$
+は準連接加群を準連接加群へ移す。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward} を参照せよ。
+したがって $\mathcal{I}$ は準連接 $\mathcal{O}_X$-加群である。
+特に、$\mathcal{B} = \mathcal{A}/\mathcal{I}$ は
+準連接次数付き $\mathcal{O}_X$-代数である。関手性による射
+$Z' = \underline{\text{Proj}}_X(\mathcal{B}) \to
+\underline{\text{Proj}}_X(\mathcal{A})$
+は至る所定義され、閉埋め込みである。Lemma
+\ref{spaces-divisors-lemma-surjective-graded-rings-map-relative-proj}
+を参照せよ。したがって $Z = Z'$ が $P$ の閉部分空間として
+成り立つことを証明すれば十分である。
+
+\medskip\noindent
+ここまで述べれば、問題は基底上 \'etale 局所的であり、
+\'etale 局所化によりスキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-closed-subscheme-proj}）
+へ帰着する。
+\end{proof}
+
+\noindent
+閉部分空間が局所的に有限個の方程式で切り出される場合、
+$\mathcal{A}$ の有限型イデアル層によってこれを定義できる。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-closed-subscheme-proj-finite}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ
+準分離的な代数空間とする。
+$\mathcal{A}$ を準連接次数付き $\mathcal{O}_X$-代数とする。
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+を $\mathcal{A}$ の相対 Proj とする。
+$i : Z \to P$ を閉部分スキームとする。
+% P09-ERR-0222
+$\pi$ が準コンパクトで $i$ が有限表示ならば、ある $d > 0$ と
+有限型準連接 $\mathcal{O}_X$-部分加群
+$\mathcal{F} \subset \mathcal{A}_d$ が存在して、
+$Z = \underline{\text{Proj}}_X
+(\mathcal{A}/\mathcal{F}\mathcal{A})$
+となる。
+\end{lemma}
+
+\begin{proof}
+読者はスキームの場合に用いた議論をやり直せる。しかしここでは、
+技巧によってスキームの場合から補題が従うことを示す。
+$\mathcal{I} \subset \mathcal{A}$ を、Lemma
+\ref{spaces-divisors-lemma-closed-subscheme-proj}
+の $Z$ を切り出す準連接次数付きイデアルとする。
+アフィンスキーム $U$ と全射な \'etale 射 $U \to X$ を選ぶ。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}
+を参照せよ。スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-closed-subscheme-proj-finite}）により、
+ある $d > 0$ と有限型準連接 $\mathcal{O}_U$-部分加群
+$\mathcal{F}' \subset \mathcal{I}_d|_U
+\subset \mathcal{A}_d|_U$
+が存在して、$Z \times_X U$ は
+$\underline{\text{Proj}}_U
+(\mathcal{A}|_U/\mathcal{F}'\mathcal{A}|_U)$
+に等しい。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-directed-colimit-finite-type}
+により、有限型準連接部分加群
+$\mathcal{F} \subset \mathcal{I}_d$ で
+$\mathcal{F}' \subset \mathcal{F}|_U$ を満たすものが見つかる。
+$Z' = \underline{\text{Proj}}_X
+(\mathcal{A}/\mathcal{F}\mathcal{A})$
+とおく。このとき $Z' \to P$ は閉埋め込みである
+% P09-ERR-0223
+（Lemma
+\ref{spaces-divisors-lemma-surjective-generated-degree-1-map-relative-proj}）。
+また $Z \subset Z'$ である。これは
+$\mathcal{F}\mathcal{A} \subset \mathcal{I}$ だからである。
+一方、$Z' \times_X U \subset Z \times_X U$ であり、
+これは $\mathcal{F}$ の選び方による。
+したがって、望むとおり $Z = Z'$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-closed-subscheme-proj-finite-type}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ
+準分離的な代数空間とする。
+$\mathcal{A}$ を準連接次数付き $\mathcal{O}_X$-代数とする。
+$\pi : P = \underline{\text{Proj}}_X(\mathcal{A}) \to X$
+を $\mathcal{A}$ の相対 Proj とする。
+% P09-ERR-0224
+$i : Z \to X$ を閉部分空間とする。
+$U \subset X$ を開部分とする。次を仮定する。
+\begin{enumerate}
+\item $\pi$ は準コンパクトである。
+% P09-ERR-0222
+\item $i$ は有限表示である。
+\item $|U| \cap |\pi|(|i|(|Z|)) = \emptyset$ である。
+\item $U$ は準コンパクトである。
+\item $\mathcal{A}_n$ は有限型 $\mathcal{O}_X$-加群であり、
+これはすべての $n$ に対して成り立つ。
+\end{enumerate}
+このとき、ある $d > 0$ と有限型準連接
+$\mathcal{O}_X$-部分加群
+$\mathcal{F} \subset \mathcal{A}_d$ が存在し、
+(a) $Z = \underline{\text{Proj}}_X
+(\mathcal{A}/\mathcal{F}\mathcal{A})$ かつ
+(b) $\mathcal{A}_d/\mathcal{F}$ の支持は $U$ と交わらない。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-closed-subscheme-proj-finite}
+の証明と同じ技巧を用いてスキームの場合へ帰着する。
+$\mathcal{I} \subset \mathcal{A}$ を、Lemma
+\ref{spaces-divisors-lemma-closed-subscheme-proj}
+の $Z$ を切り出す準連接次数付きイデアルとする。
+アフィンスキーム $W$ と全射な \'etale 射 $W \to X$ を選ぶ。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}
+を参照せよ。スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-closed-subscheme-proj-finite-type}）により、
+ある $d > 0$ と有限型準連接 $\mathcal{O}_W$-部分加群
+$\mathcal{F}' \subset \mathcal{I}_d|_W
+\subset \mathcal{A}_d|_W$
+が存在し、(a) $Z \times_X W$ は
+$\underline{\text{Proj}}_W
+(\mathcal{A}|_W/\mathcal{F}'\mathcal{A}|_W)$
+に等しく、(b) $\mathcal{A}_d|_W/\mathcal{F}'$ の支持は
+$U \times_X W$ と交わらない。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-directed-colimit-finite-type}
+により、有限型準連接部分加群
+$\mathcal{F} \subset \mathcal{I}_d$ で
+$\mathcal{F}' \subset \mathcal{F}|_W$ を満たすものが見つかる。
+$Z' = \underline{\text{Proj}}_X
+(\mathcal{A}/\mathcal{F}\mathcal{A})$
+とおく。このとき $Z' \to P$ は閉埋め込みである
+% P09-ERR-0223
+（Lemma
+\ref{spaces-divisors-lemma-surjective-generated-degree-1-map-relative-proj}）。
+また $Z \subset Z'$ である。これは
+$\mathcal{F}\mathcal{A} \subset \mathcal{I}$ だからである。
+一方、$Z' \times_X W \subset Z \times_X W$ であり、
+これは $\mathcal{F}$ の選び方による。
+したがって $Z = Z'$ である。
+最後に、$\mathcal{A}_d/\mathcal{F}$ は $X \setminus U$ 上に
+支持される。実際、$\mathcal{A}_d|_W/\mathcal{F}|_W$ は
+$\mathcal{A}_d|_W/\mathcal{F}'$ の商であり、後者は
+% P09-ERR-0225
+$W \setminus U \times_X W$ 上に支持される。
+これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-conormal-sheaf-section-projective-bundle}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{E}$ を準連接 $\mathcal{O}_X$-加群とする。全単射
+$$
+\left\{
+\begin{matrix}
+\text{射の切断 }\sigma\text{ であるもの} \\
+\text{射 }\mathbf{P}(\mathcal{E}) \to X
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{全射 }\mathcal{E} \to \mathcal{L}\text{ であって} \\
+\mathcal{L}\text{ が可逆 }\mathcal{O}_X\text{-加群であるもの}
+\end{matrix}
+\right\}
+$$
+が存在する。この場合 $\sigma$ は閉埋め込みであり、標準同型
+$$
+\Ker(\mathcal{E} \to \mathcal{L})
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes -1}
+\longrightarrow
+\mathcal{C}_{\sigma(X)/\mathbf{P}(\mathcal{E})}
+$$
+が存在する。全単射と同型はいずれも基底変換と両立する。
+\end{lemma}
+
+\begin{proof}
+これらの構成は基底変換と両立するので、主張を $X$ 上
+\'etale 局所的に確認すれば十分である。したがって $X$ は
+スキームであると仮定してよく、結果は Divisors, Lemma
+\ref{divisors-lemma-conormal-sheaf-section-projective-bundle}
+である。
+\end{proof}
+
+\section{ブローアップ}
+\label{spaces-divisors-section-blowing-up}
+
+\noindent
+ブローアップは代数幾何学における重要な道具である。
+
+\begin{definition}
+\label{spaces-divisors-definition-blow-up}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とし、
+$Z \subset X$ を $\mathcal{I}$ に対応する閉部分空間とする
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-ideals}）。
+{\it $X$ の $Z$ に沿ったブローアップ}、または
+{\it $X$ のイデアル層 $\mathcal{I}$ におけるブローアップ}とは射
+$$
+b :
+\underline{\text{Proj}}_X
+\left(\bigoplus\nolimits_{n \geq 0} \mathcal{I}^n\right)
+\longrightarrow
+X
+$$
+のことである。ブローアップの{\it 例外因子}とは逆像
+$b^{-1}(Z)$ のことである。$Z$ をブローアップの{\it 中心}
+と呼ぶこともある。
+\end{definition}
+
+\noindent
+後で、例外因子が有効 Cartier 因子であることを見る。
+さらに、ブローアップは、$X$ 上の「最小の」代数空間で、
+$Z$ の逆像が有効 Cartier 因子となるものとして特徴づけられる。
+
+\medskip\noindent
+$b : X' \to X$ が $X$ の $Z$ におけるブローアップならば、
+$\mathcal{O}_{X'}(n)$ により構造層の捻りを表すことが多い。
+これらは可逆 $\mathcal{O}_{X'}$-加群であり、
+$\mathcal{O}_{X'}(n) = \mathcal{O}_{X'}(1)^{\otimes n}$
+であることに注意する。実際、$X'$ は準連接次数付き
+$\mathcal{O}_X$-代数の相対 Proj であり、この代数は次数 $1$
+で生成される。
+Lemma \ref{spaces-divisors-lemma-relative-proj-generated-in-degree-1}
+を参照せよ。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blowing-up-affine}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とする。
+$U = \Spec(A)$ を $X$ 上 \'etale なアフィンスキームとし、
+$I \subset A$ を $\mathcal{I}|_U$ に対応するイデアルとする。
+$X' \to X$ が $X$ の $\mathcal{I}$ におけるブローアップならば、
+標準同型
+$$
+U \times_X X' = \text{Proj}(\bigoplus\nolimits_{d \geq 0} I^d)
+$$
+が存在し、これは $U$ 上のスキームの同型である。ここで右辺は
+$I$ の $A$ における Rees 代数の斉次スペクトルである。
+さらに、$U \times_X X'$ はアフィン・
+ブローアップ代数 $A[\frac{I}{a}]$ のスペクトルによる
+アフィン開被覆をもつ。
+\end{lemma}
+
+\begin{proof}
+制限 $\mathcal{I}|_U$ は $\mathcal{I}$ の、射 $U \to X$
+による引き戻しに等しいことに注意する。
+Properties of Spaces, Section
+\ref{spaces-properties-section-modules}
+を参照せよ。したがって Lemma \ref{spaces-divisors-lemma-relative-proj} と
+Divisors, Lemma
+\ref{divisors-lemma-blowing-up-affine}
+を組み合わせれば補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-flat-base-change-blowing-up}
+$S$ をスキームとする。
+$X_1 \to X_2$ を $S$ 上の代数空間の平坦射とする。
+$Z_2 \subset X_2$ を閉部分空間とする。
+$Z_1$ を $Z_2$ の $X_1$ における逆像とする。
+$X'_i$ を $Z_i$ の $X_i$ におけるブローアップとする。
+このとき Cartesian 図式
+$$
+\xymatrix{
+X_1' \ar[r] \ar[d] & X_2' \ar[d] \\
+X_1 \ar[r] & X_2
+}
+$$
+が存在し、これは $S$ 上の代数空間の図式である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I}_2$ を $Z_2$ の $X_2$ におけるイデアル層とする。
+$g : X_1 \to X_2$ により与えられた射を表す。このとき
+$\mathcal{I}_1$ により $Z_1$ のイデアル層を表す。これは
+$g^*\mathcal{I}_2 \to \mathcal{O}_{X_1}$
+の像である（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-inverse-image-closed-subspace}
+およびその定義の後の議論を参照せよ）。
+Lemma \ref{spaces-divisors-lemma-relative-proj-base-change}
+により、$X_1 \times_{X_2} X_2'$ は
+$\bigoplus_{n \geq 0} g^*\mathcal{I}_2^n$
+の相対 Proj である。$g$ は平坦なので、写像
+$g^*\mathcal{I}_2^n \to \mathcal{O}_{X_1}$
+は単射で、その像は $\mathcal{I}_1^n$ である。
+したがって $X_1 \times_{X_2} X_2' = X_1'$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$Z \subset X$ を閉部分空間とする。
+$b : X' \to X$ により $Z$ の $X$ におけるブローアップを表す。
+これは
+次の性質をもつ。
+\begin{enumerate}
+\item
+$b|_{b^{-1}(X \setminus Z)} :
+b^{-1}(X \setminus Z) \to X \setminus Z$
+は同型である。
+\item 例外因子 $E = b^{-1}(Z)$ は $X'$ 上の有効 Cartier 因子である。
+\item 標準同型
+$\mathcal{O}_{X'}(-1) = \mathcal{O}_{X'}(E)$
+が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$U \to X$ を全射な \'etale 射とする。
+ブローアップは平坦基底変換と可換なので
+（Lemma \ref{spaces-divisors-lemma-flat-base-change-blowing-up}）、
+各主張を $U$ への基底変換後に証明できる。
+これによりスキームの場合へ帰着する。この場合の結果は
+Divisors, Lemma
+\ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}
+である。
+\end{proof}
+
+\begin{lemma}[ブローアップの普遍性]
+% P09-ERR-0226
+\label{spaces-divisors-lemma-universal-property-blowing-up}
+\begin{slogan}
+閉部分集合をブローアップして Cartier にせよ。
+\end{slogan}
+$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。
+$Z \subset X$ を閉部分空間とする。
+$\mathcal{C}$ を $(\textit{Spaces}/X)$ の充満部分圏で、
+$Y \to X$ が $Z$ の逆像を $Y$ 上の有効 Cartier 因子とするもの
+からなるものとする。このときブローアップ
+$b : X' \to X$ で、$Z$ の $X$ におけるものは
+$\mathcal{C}$ の終対象である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor}
+により $b : X' \to X$ は $\mathcal{C}$ の対象である。
+$f : Y \to X$ を $\mathcal{C}$ の対象とする。
+一意な射 $Y \to X'$ で $X$ 上にあるものが存在することを
+示さなければならない。
+$D = f^{-1}(Z)$ とおく。
+$\mathcal{I} \subset \mathcal{O}_X$ を $Z$ のイデアル層とし、
+$\mathcal{I}_D$ を $D$ のイデアル層とする。このとき
+$f^*\mathcal{I} \to \mathcal{I}_D$ は可逆
+$\mathcal{O}_Y$-加群への全射である。これは写像
+$\psi : \bigoplus f^*\mathcal{I}^d \to
+\bigoplus \mathcal{I}_D^d$
+へ延長され、これは次数付き $\mathcal{O}_Y$-代数の写像である。
+（$\mathcal{I}_D^d = \mathcal{I}_D^{\otimes d}$ である。
+$D$ が有効 Cartier 因子だからである。）
+% P09-ERR-0227
+Lemma \ref{spaces-divisors-lemma-relative-proj-generated-in-degree-1}
+により、三つ組
+$(f : Y \to X, \mathcal{I}_D, \psi)$
+は射 $Y \to X'$ で $X$ 上にあるものを定める。制限
+$$
+Y \setminus D \longrightarrow
+X' \setminus b^{-1}(Z) = X \setminus Z
+$$
+は一意である。Lemma
+\ref{spaces-divisors-lemma-complement-effective-Cartier-divisor}
+により、開部分 $Y \setminus D$ は $Y$ において
+スキーム論的に稠密である。したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-equality-of-morphisms}
+により射 $Y \to X'$ は一意である
+（また $b$ は Lemma \ref{spaces-divisors-lemma-relative-proj-separated}
+により分離的である）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blow-up-effective-Cartier-divisor}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$Z \subset X$ を有効 Cartier 因子とする。
+$X$ の $Z$ におけるブローアップは $X$ の恒等射である。
+\end{lemma}
+
+\begin{proof}
+ブローアップの普遍性
+（Lemma \ref{spaces-divisors-lemma-universal-property-blowing-up}）
+から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blow-up-reduced-space}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とする。
+$X$ が被約ならば、ブローアップ $X'$ で $X$ の
+$\mathcal{I}$ におけるものは被約である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$U \to X$ を全射な \'etale 射とする。
+ブローアップは平坦基底変換と可換なので
+（Lemma \ref{spaces-divisors-lemma-flat-base-change-blowing-up}）、
+各主張を $U$ への基底変換後に証明できる。
+これによりスキームの場合へ帰着する。この場合の結果は
+Divisors, Lemma
+\ref{divisors-lemma-blow-up-reduced-scheme}
+である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blowup-finite-nr-irreducibles}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$b : X' \to X$ を、$X$ の閉部分空間におけるブローアップとする。
+$X$ が Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-prepare-normalization}
+の同値な条件を満たすならば、$X'$ も同じ条件を満たす。
+\end{lemma}
+
+\begin{proof}
+主張で引用した補題、Lemma
+\ref{spaces-divisors-lemma-blowing-up-affine}
+におけるブローアップの \'etale 局所的記述、および
+Divisors, Lemma
+\ref{divisors-lemma-blow-up-and-irreducible-components}
+から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blow-up-pullback-effective-Cartier}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$b : X' \to X$ を、$X$ の閉部分空間におけるブローアップとする。
+任意の有効 Cartier 因子 $D$ で $X$ 上のものに対して、引き戻し
+$b^{-1}D$ は定義される（Definition
+\ref{spaces-divisors-definition-pullback-effective-Cartier-divisor}
+を参照せよ）。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-divisors-lemma-blowing-up-affine} および
+\ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+により、これは次の代数の事実へ帰着する。
+$A$ を環、$I \subset A$ をイデアル、$a \in I$ とし、
+$x \in A$ を非零因子とする。このとき $x$ の
+$A[\frac{I}{a}]$ における像は非零因子である。
+実際、$x (y/a^n) = 0$ が $A[\frac{I}{a}]$ において
+成り立つと仮定する。このとき $a^mxy = 0$ が $A$ において、
+ある $m$ に対して成り立つ。したがって $a^my = 0$ である。
+これは $x$ が非零因子だからである。よって $y/a^n$ は零であり、
+これは望むとおり $A[\frac{I}{a}]$ において成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blowing-up-two-ideals}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+% P09-ERR-0228
+$\mathcal{I} \subset \mathcal{O}_X$ および $\mathcal{J}$ を
+準連接イデアル層とする。
+$b : X' \to X$ を $X$ の $\mathcal{I}$ におけるブローアップとする。
+$b' : X'' \to X'$ を
+$X'$ の $b^{-1}\mathcal{J} \mathcal{O}_{X'}$
+におけるブローアップとする。このとき $X'' \to X$ は
+$X$ の $\mathcal{I}\mathcal{J}$ におけるブローアップと
+標準的に同型である。
+\end{lemma}
+
+\begin{proof}
+$E \subset X'$ を $b$ の例外因子とする。これは Lemma
+\ref{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor}
+により有効 Cartier 因子である。このとき
+$(b')^{-1}E$ は Lemma
+\ref{spaces-divisors-lemma-blow-up-pullback-effective-Cartier}
+により $X''$ 上の有効 Cartier 因子である。
+$E' \subset X''$ を $b'$ の例外因子とする
+（これも有効 Cartier 因子である）。
+有効 Cartier 因子 $E'' = E' + (b')^{-1}E$ を考える。
+構成により、$E''$ のイデアルは
+$(b \circ b')^{-1}\mathcal{I}
+(b \circ b')^{-1}\mathcal{J} \mathcal{O}_{X''}$
+である。したがって Lemma
+\ref{spaces-divisors-lemma-universal-property-blowing-up}
+により、$X''$ からブローアップ $c : Y \to X$ への標準射が存在する。
+ここでこれは $X$ の $\mathcal{I}\mathcal{J}$ における
+ブローアップである。逆に、$\mathcal{I}\mathcal{J}$ の引き戻しは
+可逆イデアルなので、
+$c^{-1}\mathcal{I}\mathcal{O}_Y$
+は有効 Cartier 因子を定義する。Lemma
+\ref{spaces-divisors-lemma-sum-closed-subschemes-effective-Cartier}
+を参照せよ。したがって
+% P09-ERR-0229
+射 $c' : Y \to X'$ で $X$ 上にあるものが存在する。
+これは Lemma \ref{spaces-divisors-lemma-universal-property-blowing-up} による。
+さらに
+$(c')^{-1}b^{-1}\mathcal{J}\mathcal{O}_Y =
+c^{-1}\mathcal{J}\mathcal{O}_Y$
+も有効 Cartier 因子を定義する。したがって
+% P09-ERR-0229
+射 $c'' : Y \to X''$ で $X'$ 上にあるものが存在する。
+この射が先に構成した射 $X'' \to Y$ の逆射であることの検証は
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-blowing-up-projective}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とする。
+$b : X' \to X$ を、$X$ のイデアル層 $\mathcal{I}$ における
+ブローアップとする。$\mathcal{I}$ が有限型ならば、
+$b : X' \to X$ は固有射である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$U \to X$ を全射な \'etale 射とする。
+ブローアップは平坦基底変換と可換なので
+（Lemma \ref{spaces-divisors-lemma-flat-base-change-blowing-up}）、
+各主張を $U$ への基底変換後に証明できる
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-proper-local} を参照せよ）。
+これによりスキームの場合へ帰着する。この場合、射 $b$ は
+Divisors, Lemma
+\ref{divisors-lemma-blowing-up-projective}
+により射影的であり、したがって Morphisms, Lemma
+\ref{morphisms-lemma-locally-projective-proper}
+により固有である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-composition-finite-type-blowups}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$X$ は準コンパクトかつ準分離的であると仮定する。
+$Z \subset X$ を有限表示の閉部分空間とする。
+$b : X' \to X$ を中心 $Z$ のブローアップとする。
+$Z' \subset X'$ を有限表示の閉部分空間とする。
+$X'' \to X'$ を中心 $Z'$ のブローアップとする。
+有限表示の閉部分空間 $Y \subset X$ が存在して、
+\begin{enumerate}
+\item $|Y| = |Z| \cup |b|(|Z'|)$ であり、
+\item 合成 $X'' \to X$ は $X$ の $Y$ における
+ブローアップと同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Z \to X$ が有限表示であるという条件は、$Z$ が有限型準連接
+イデアル層 $\mathcal{I} \subset \mathcal{O}_X$
+によって切り出されることを意味する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}
+を参照せよ。
+$\mathcal{A} = \bigoplus_{n \geq 0} \mathcal{I}^n$
+と書けば、$X' = \underline{\text{Proj}}(\mathcal{A})$ である。
+$X \setminus Z$ は Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-quasi-coherent-finite-type-ideals}
+により $X$ の準コンパクト開部分空間であることに注意する。
+$b^{-1}(X \setminus Z) \to X \setminus Z$ は同型なので
+（Lemma \ref{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor}）、
+同じ結果により
+$b^{-1}(X \setminus Z) \setminus Z'$ は
+$X'$ の準コンパクト開部分空間である。したがって
+$U = X \setminus (Z \cup b(Z'))$ は $X$ の準コンパクト
+開部分空間である。Lemma
+\ref{spaces-divisors-lemma-closed-subscheme-proj-finite-type}
+により、ある $d > 0$ と有限型
+$\mathcal{O}_X$-部分加群
+$\mathcal{F} \subset \mathcal{I}^d$ が存在し、
+$Z' = \underline{\text{Proj}}
+(\mathcal{A}/\mathcal{F}\mathcal{A})$
+であり、$\mathcal{I}^d/\mathcal{F}$ の支持は
+$X \setminus U$ に含まれる。
+
+\medskip\noindent
+$\mathcal{F} \subset \mathcal{I}^d$ は
+$\mathcal{O}_X$-部分加群なので、
+$\mathcal{F} \subset \mathcal{I}^d \subset \mathcal{O}_X$
+を $X$ 上の有限型準連接イデアル層とみなせる。
+混同を避けるため、これを
+$\mathcal{J} \subset \mathcal{O}_X$ と表す。
+$\mathcal{I}^d / \mathcal{J}$ と
+$\mathcal{O}/\mathcal{I}^d$ は $|X| \setminus |U|$ 上に
+支持されるので、$|V(\mathcal{J})|$ は
+$|X| \setminus |U|$ に含まれる。逆に
+$\mathcal{J} \subset \mathcal{I}^d$ なので
+$|Z| \subset |V(\mathcal{J})|$ である。
+$X \setminus Z \cong X' \setminus b^{-1}(Z)$ 上では、
+イデアル層 $\mathcal{J}$ は $Z'$ を切り出す
+（下の表示式を参照せよ）。したがって
+$|V(\mathcal{J})|$ は $|Z| \cup |b|(|Z'|)$ に等しい。
+さらに
+$|V(\mathcal{I}\mathcal{J})| =
+|Z| \cup |b|(|Z'|)$ である。また
+$\mathcal{I}\mathcal{J}$ は有限型イデアル二つの積なので
+有限型イデアルである。$X'' \to X$ は
+$X$ の $\mathcal{I}\mathcal{J}$ におけるブローアップと
+同型であると主張する。これにより
+$Y = V(\mathcal{I}\mathcal{J})$ とおけば補題の証明が終わる。
+
+\medskip\noindent
+まず、$X$ の $\mathcal{I}\mathcal{J}$ におけるブローアップは、
+$X'$ の $b^{-1}\mathcal{J} \mathcal{O}_{X'}$
+におけるブローアップと同じであることを思い出す。
+Lemma \ref{spaces-divisors-lemma-blowing-up-two-ideals} を参照せよ。
+したがって、$X'$ の
+$b^{-1}\mathcal{J} \mathcal{O}_{X'}$ におけるブローアップが
+$X'$ の $Z'$ におけるブローアップと一致することを示せば十分である。
+次を示す。
+$$
+b^{-1}\mathcal{J} \mathcal{O}_{X'} =
+\mathcal{I}_E^d \mathcal{I}_{Z'}
+$$
+% P09-ERR-0230
+これは $X''$ 上のイデアル層としての等式である。
+$\mathcal{I}_E^d$ は有効 Cartier 因子 $dE$ を切り出すので、
+Lemmas \ref{spaces-divisors-lemma-blow-up-effective-Cartier-divisor} および
+\ref{spaces-divisors-lemma-blowing-up-two-ideals}
+を用いれば、この等式は望む主張を証明する。
+
+\medskip\noindent
+表示されたイデアルの等式を見るには局所的に作業してよい。
+Lemma \ref{spaces-divisors-lemma-blowing-up-affine} と同じ記法
+$A$, $I$, $a \in I$ を用いると、
+% P09-ERR-0231
+$\mathcal{F}$ は $R$-部分加群 $M \subset I^d$ に対応し、
+これはイデアル $J \subset R$ に同型に写る。
+条件
+$Z' = \underline{\text{Proj}}
+(\mathcal{A}/\mathcal{F}\mathcal{A})$
+は、$Z' \cap \Spec(A[\frac{I}{a}])$ が元
+$m/a^d$, $m \in M$ によって生成されるイデアルで
+切り出されることを意味する。元 $m \in M$ が関数
+$f \in J$ に対応するとする。このときアフィン・ブローアップ代数
+$A' = A[\frac{I}{a}]$ において
+$f = (a^dm)/a^d = a^d (m/a^d)$
+である。したがって等式が成り立つ。
+\end{proof}
+
+\section{狭義変換}
+\label{spaces-divisors-section-strict-transform}
+
+\noindent
+本節は Divisors, Section
+\ref{divisors-section-strict-transform}
+に対応する。$S$ をスキーム、$B$ を $S$ 上の代数空間、
+$Z \subset B$ を閉部分空間とする。
+$b : B' \to B$ を $B$ の $Z$ におけるブローアップとし、
+% P09-ERR-0232
+$E \subset B'$ により例外因子 $E = b^{-1}Z$ を表す。
+以下ではしばしば代数空間 $X$ で $B$ 上のものを考え、Cartesian 図式
+$$
+\xymatrix{
+\text{pr}_{B'}^{-1}E \ar[r] \ar[d] &
+X \times_B B' \ar[r]_-{\text{pr}_X} \ar[d]_{\text{pr}_{B'}} &
+X \ar[d]^f \\
+E \ar[r] & B' \ar[r] & B
+}
+$$
+を作る。$E$ は有効 Cartier 因子なので
+（Lemma \ref{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor}）、
+$\text{pr}_{B'}^{-1}E \subset X \times_B B'$ は局所主である
+（Lemma \ref{spaces-divisors-lemma-pullback-locally-principal}）。
+したがって、$\text{pr}_{B'}^{-1}E$ の
+$X \times_B B'$ における補集合の包含射はアフィンであり、
+特に準コンパクトである
+（Lemma
+\ref{spaces-divisors-lemma-complement-locally-principal-closed-subscheme}）。
+従って、準連接 $\mathcal{O}_{X \times_B B'}$-加群
+$\mathcal{G}$ に対して、
+$|\text{pr}_{B'}^{-1}E|$ 上に支持される切断の部分層は
+準連接部分加群である。Limits of Spaces, Definition
+\ref{spaces-limits-definition-subsheaf-sections-supported-on-closed}
+を参照せよ。$\mathcal{G}$ が準連接代数の層、例えば
+$\mathcal{G} = \mathcal{O}_{X \times_B B'}$ ならば、
+この部分層は $\mathcal{G}$ のイデアルである。
+
+\begin{definition}
+\label{spaces-divisors-definition-strict-transform}
+% P09-ERR-0233
+上と同じ $Z \subset B$ および $f : X \to B$ のもとで、次を定義する。
+\begin{enumerate}
+\item 準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ が与えられたとき、
+$\mathcal{F}$ の{\it 狭義変換}で、$B$ の $Z$ における
+ブローアップに関するものとは、商 $\mathcal{F}'$ で、
+$\text{pr}_X^*\mathcal{F}$ を
+$|\text{pr}_{B'}^{-1}E|$ 上に支持される切断の部分加群で割った
+もののことである。
+\item $X$ の{\it 狭義変換}とは閉部分空間
+$X' \subset X \times_B B'$ で、
+$\mathcal{O}_{X \times_B B'}$ の切断で
+$|\text{pr}_{B'}^{-1}E|$ 上に支持されるものからなる準連接イデアルで
+切り出されるもののことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ブローアップに沿って狭義変換をとる操作は、
+ブローアップに用いた閉部分空間に依存することに注意する
+（射 $B' \to B$ だけに依存するのではない）。
+
+\begin{lemma}[\'Etale 局所化と狭義変換]
+\label{spaces-divisors-lemma-strict-transform-local}
+Definition \ref{spaces-divisors-definition-strict-transform} の状況において、図式
+$$
+\xymatrix{
+U \ar[r] \ar[d] & X \ar[d] \\
+V \ar[r] & B
+}
+$$
+を可換な射の図式とし、$U$ と $V$ はスキーム、
+水平射は \'etale とする。
+$V' \to V$ を $V$ の $Z \times_B V$ におけるブローアップとする。
+このとき
+\begin{enumerate}
+\item $V' = V \times_B B'$ であり、射
+$V' \to B'$ および
+$U \times_V V' \to X \times_B B'$ は \'etale である。
+\item 狭義変換 $U'$、すなわち $U$ の
+$V' \to V$ に関するものは $X' \times_X U$ に等しい。
+ここで $X'$ は $X$ の狭義変換で、
+$B' \to B$ に関するものである。
+\item 準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して、
+狭義変換 $\mathcal{F}'$ の $U \times_V V'$ への制限は、
+$\mathcal{F}|_U$ の狭義変換で、$V' \to V$ に関するものである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は、ブローアップが平坦基底変換と可換であること
+（Lemma \ref{spaces-divisors-lemma-flat-base-change-blowing-up}）、
+\'etale 射が平坦であること、および \'etale 射の基底変換が
+\'etale であることから従う。次に (3) は、
+% P09-ERR-0234
+閉部分集合上に支持される切断の層をとる操作が
+\'etale 射による引き戻しと可換であることから従う。
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-sections-supported-on-closed-subset}
+を参照せよ。(2) は (3) を
+$\mathcal{F} = \mathcal{O}_X$ に適用して従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform}
+Definition \ref{spaces-divisors-definition-strict-transform} の状況において、
+\begin{enumerate}
+\item 狭義変換 $X'$ で $X$ のものは、$X$ の閉部分空間
+$f^{-1}Z$ で $X$ に含まれるものにおけるブローアップである。
+\item 準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して、
+狭義変換 $\mathcal{F}'$ は、$X' \to X \times_B B'$ に沿った
+押し出しによる次の加群と標準的に同型である。すなわち、
+$\mathcal{F}$ の狭義変換で、ブローアップ $X' \to X$
+に関するものである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X'' \to X$ を $X$ の $f^{-1}Z$ におけるブローアップとする。
+ブローアップの普遍性
+（Lemma \ref{spaces-divisors-lemma-universal-property-blowing-up}）
+により可換図式
+$$
+\xymatrix{
+X'' \ar[r] \ar[d] & X \ar[d] \\
+B' \ar[r] & B
+}
+$$
+が存在し、従って射 $i : X'' \to X \times_B B'$ が得られる。
+補題の第一の主張は、$i$ が像 $X'$ をもつ閉埋め込みであることをいう。
+第二の主張は、$\mathcal{F}' = i_*\mathcal{F}''$ であることをいう。
+ここで $\mathcal{F}''$ は $\mathcal{F}$ の狭義変換で、
+ブローアップ $X'' \to X$ に関するものである。
+これらの主張は $X$ 上 \'etale 局所的に確認できるので、
+スキームの場合へ帰着する
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform}）。
+いくつかの詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-flat}
+Definition \ref{spaces-divisors-definition-strict-transform} の状況において、
+\begin{enumerate}
+\item $X$ が $B$ 上平坦であり、これは $Z$ 上にある
+すべての点で成り立つならば、
+$X$ の狭義変換は基底変換 $X \times_B B'$ に等しい。
+\item $\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{F}$ が $B$ 上平坦であり、これは $Z$ 上にある
+すべての点で成り立つならば、狭義変換 $\mathcal{F}'$ で
+$\mathcal{F}$ のものは引き戻し
+$\text{pr}_X^*\mathcal{F}$ に等しい。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-flat}）から
+\'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-affine}
+$S$ をスキームとする。$B$ を $S$ 上の代数空間とする。
+$Z \subset B$ を閉部分空間とする。
+$b : B' \to B$ を $Z$ の $B$ におけるブローアップとする。
+$g : X \to Y$ を $B$ 上の空間のアフィン射とする。
+$\mathcal{F}$ を $X$ 上の準連接層とする。
+$g' : X \times_B B' \to Y \times_B B'$ を $g$ の基底変換とする。
+$\mathcal{F}'$ を $\mathcal{F}$ の狭義変換で
+$b$ に関するものとする。
+このとき $g'_*\mathcal{F}'$ は $g_*\mathcal{F}$ の狭義変換である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-affine}）から
+\'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-different-centers}
+$S$ をスキームとする。$B$ を $S$ 上の代数空間とする。
+$Z \subset B$ を閉部分空間とする。
+$D \subset B$ を有効 Cartier 因子とする。
+$Z' \subset B$ を、$Z$ と $D$ のイデアル層の積によって
+切り出される閉部分空間とする。
+$B' \to B$ を $B$ の $Z$ におけるブローアップとする。
+\begin{enumerate}
+\item $B$ の $Z'$ におけるブローアップは
+$B' \to B$ と同型である。
+\item $f : X \to B$ を代数空間の射とし、
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{F}$ の切断で $|f^{-1}D|$ 上に支持されるものからなる
+部分層が零ならば、$\mathcal{F}$ の狭義変換で $Z$ における
+ブローアップに関するものは、$\mathcal{F}$ の狭義変換で
+$B$ の $Z'$ におけるブローアップに関するものと一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-different-centers}）から
+\'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-composition-blowups}
+$S$ をスキームとする。$B$ を $S$ 上の代数空間とする。
+$Z \subset B$ を閉部分空間とする。
+$b : B' \to B$ を中心 $Z$ のブローアップとする。
+$Z' \subset B'$ を閉部分空間とする。
+$B'' \to B'$ を中心 $Z'$ のブローアップとする。
+% P09-ERR-0235
+$Y \subset B$ を閉部分スキームとし、
+$|Y| = |Z| \cup |b|(|Z'|)$ であり、合成 $B'' \to B$ は
+$B$ の $Y$ におけるブローアップと同型であるとする。
+この状況で、任意のスキーム $X$ で $B$ 上のものと
+$\mathcal{F} \in \QCoh(\mathcal{O}_X)$ が与えられると、
+\begin{enumerate}
+\item $\mathcal{F}$ の狭義変換で、$B$ の $Y$ における
+ブローアップに関するものは、$B'' \to B'$ の $Z'$ における
+ブローアップに関して、$\mathcal{F}$ の狭義変換で
+$B' \to B$ という $B$ の $Z$ におけるブローアップに関するものを
+さらに狭義変換したものに等しい。
+\item $X$ の狭義変換で、$B$ の $Y$ における
+ブローアップに関するものは、$B'' \to B'$ の $Z'$ における
+ブローアップに関して、$X$ の狭義変換で
+$B' \to B$ という $B$ の $Z$ におけるブローアップに関するものを
+さらに狭義変換したものに等しい。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-composition-blowups}）から
+\'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-universally-injective}
+Definition \ref{spaces-divisors-definition-strict-transform} の状況において、
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+が $X$ 上の準連接層の完全列で、任意の基底変換
+$T \to B$ の後でも完全であるとする。このとき
+% P09-ERR-0236
+狭義変換 $\mathcal{F}_i'$ で、任意のブローアップ
+$B' \to B$ に関するものも短完全列
+$0 \to \mathcal{F}'_1 \to \mathcal{F}'_2 \to \mathcal{F}'_3 \to 0$
+をなす。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-universally-injective}）から
+\'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-blowup-fitting-ideal}
+$S$ をスキームとする。$B$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $\mathcal{O}_B$-加群とする。
+% P09-ERR-0237
+$Z_k \subset S$ を $\text{Fit}_k(\mathcal{F})$ によって
+切り出される閉部分スキームとする。
+Section \ref{spaces-divisors-section-fitting-ideals} を参照せよ。
+$B' \to B$ を $B$ の $Z_k$ におけるブローアップとし、
+$\mathcal{F}'$ を $\mathcal{F}$ の狭義変換とする。
+このとき $\mathcal{F}'$ は局所的に $\leq k$ 個の切断で
+生成できる。
+\end{lemma}
+
+\begin{proof}
+省略する。スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-blowup-fitting-ideal}）から
+\'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-strict-transform-blowup-fitting-ideal-locally-free}
+$S$ をスキームとする。$B$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を有限型準連接 $\mathcal{O}_B$-加群とする。
+% P09-ERR-0237
+$Z_k \subset S$ を $\text{Fit}_k(\mathcal{F})$ によって
+切り出される閉部分スキームとする。
+Section \ref{spaces-divisors-section-fitting-ideals} を参照せよ。
+$\mathcal{F}$ が階数 $k$ の局所自由加群であり、これは
+$B \setminus Z_k$ 上で成り立つと仮定する。
+$B' \to B$ を $B$ の $Z_k$ におけるブローアップとし、
+$\mathcal{F}'$ を $\mathcal{F}$ の狭義変換とする。
+このとき $\mathcal{F}'$ は階数 $k$ の局所自由加群である。
+\end{lemma}
+
+\begin{proof}
+省略する。スキームの場合
+（Divisors, Lemma
+\ref{divisors-lemma-strict-transform-blowup-fitting-ideal-locally-free}）
+から \'etale 局所化（Lemma
+\ref{spaces-divisors-lemma-strict-transform-local}）によって従う。
+\end{proof}
+
+\section{許容ブローアップ}
+\label{spaces-divisors-section-admissible-blowups}
+
+\noindent
+ブローアップをもう少し制御するため、次の標準的な用語を導入する。
+
+\begin{definition}
+\label{spaces-divisors-definition-admissible-blowup}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$U \subset X$ を開部分空間とする。射
+$X' \to X$ が{\it $U$-許容ブローアップ}であるとは、
+有限表示の閉埋め込み $Z \to X$ で、$Z$ が $U$ と交わらず、
+$X'$ が $X$ の $Z$ におけるブローアップと同型になるものが
+存在することをいう。
+\end{definition}
+
+\noindent
+$Z \to X$ が有限表示であるための必要十分条件は、
+イデアル層 $\mathcal{I}_Z \subset \mathcal{O}_X$ が
+有限型であることであることを思い出す。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}
+を参照せよ。特に、$U$-許容ブローアップは固有射である。
+Lemma \ref{spaces-divisors-lemma-blowing-up-projective} を参照せよ。
+同じ射を生じる中心が複数あり得ることに注意する。
+したがって、$U$ と交わらず $X'$ を生じる何らかの中心が
+存在することだけを要求している。
+最後に、射 $b : X' \to X$ は $U$ 上同型なので
+（Lemma \ref{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor}）、
+記法を濫用して $U$ を $X'$ の開部分空間ともみなすことが多い。
+
+\begin{lemma}
+\label{spaces-divisors-lemma-composition-admissible-blowups}
+$S$ をスキームとする。
+$X$ を $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+$U \subset X$ を準コンパクト開部分空間とする。
+$b : X' \to X$ を $U$-許容ブローアップとする。
+$X'' \to X'$ を $U$-許容ブローアップとする。
+このとき合成 $X'' \to X$ は $U$-許容ブローアップである。
+\end{lemma}
+
+\begin{proof}
+より精密な Lemma
+\ref{spaces-divisors-lemma-composition-finite-type-blowups}
+から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-extend-admissible-blowups}
+$S$ をスキームとする。
+% P09-ERR-0238
+$X$ を準コンパクトかつ準分離的な代数空間とする。
+$U, V \subset X$ を準コンパクト開部分空間とする。
+$b : V' \to V$ を $U \cap V$-許容ブローアップとする。
+このとき $U$-許容ブローアップ $X' \to X$ で、
+$V$ への制限が $V'$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_V$ を有限型準連接イデアル層とし、
+$V(\mathcal{I})$ は $U \cap V$ と交わらず、$V'$ は
+$V$ の $\mathcal{I}$ におけるブローアップと同型であるとする。
+$\mathcal{I}' \subset \mathcal{O}_{U \cup V}$ を準連接イデアル層とし、
+$U$ への制限は $\mathcal{O}_U$、$V$ への制限は
+$\mathcal{I}$ であるとする。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-extend}
+により、有限型準連接イデアル層
+$\mathcal{J} \subset \mathcal{O}_X$ で、$U \cup V$ への制限が
+$\mathcal{I}'$ となるものが存在する。これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-dominate-admissible-blowups}
+$S$ をスキームとする。
+$X$ を $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+$U \subset X$ を準コンパクト開部分空間とする。
+% P09-ERR-0239
+$b_i : X_i \to X$, $i = 1, \ldots, n$ を
+$U$-許容ブローアップとする。$U$-許容ブローアップ
+$b : X' \to X$ が存在し、(a) $b$ は
+$X' \to X_i \to X$ と分解する（$i = 1, \ldots, n$）。さらに、
+(b) 各射 $X' \to X_i$ は $U$-許容ブローアップである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I}_i \subset \mathcal{O}_X$ を有限型準連接イデアル層とし、
+$V(\mathcal{I}_i)$ は $U$ と交わらず、$X_i$ は
+$X$ の $\mathcal{I}_i$ におけるブローアップと同型であるとする。
+$\mathcal{I} = \mathcal{I}_1 \cdot \ldots \cdot \mathcal{I}_n$
+とおき、$X'$ を $X$ の $\mathcal{I}$ におけるブローアップとする。
+このとき Lemma \ref{spaces-divisors-lemma-blowing-up-two-ideals}
+により $X' \to X$ は $b_i$ を経由する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-divisors-lemma-separate-disjoint-opens-by-blowing-up}
+$S$ をスキームとする。
+$X$ を $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+$U, V$ を $X$ の互いに交わらない準コンパクト開部分空間とする。
+このとき $U \cup V$-許容ブローアップ $b : X' \to X$ が存在し、
+$X'$ は開部分空間の非交和
+$X' = X'_1 \amalg X'_2$ であり、
+$b^{-1}(U) \subset X'_1$ かつ
+$b^{-1}(V) \subset X'_2$ となる。
+\end{lemma}
+
+\begin{proof}
+有限型準連接イデアル層 $\mathcal{I}$、それぞれ
+$\mathcal{J}$ を選び、
+$X \setminus U = V(\mathcal{I})$、それぞれ
+$X \setminus V = V(\mathcal{J})$ とする。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-quasi-coherent-finite-type-ideals}
+を参照せよ。このとき
+$|V(\mathcal{I}\mathcal{J})| = |X|$ である。
+したがって $\mathcal{I}\mathcal{J}$ は局所冪零なイデアル層である。
+$\mathcal{I}$ と $\mathcal{J}$ は有限型で、$X$ は準コンパクトなので、
+ある $n > 0$ が存在して
+$\mathcal{I}^n \mathcal{J}^n = 0$ となる。
+$\mathcal{I}$ を $\mathcal{I}^n$ で、$\mathcal{J}$ を
+$\mathcal{J}^n$ で置き換えてよく、そうする。従って
+$\mathcal{I} \mathcal{J} = 0$ である。
+$b : X' \to X$ を $\mathcal{I} + \mathcal{J}$
+におけるブローアップとする。これは $U \cup V$-許容である。
+実際、
+% P09-ERR-0240
+$|V(\mathcal{I} + \mathcal{J})| =
+|X| \setminus |U| \cup |V|$
+である。$X'$ が補題の主張にあるような開部分空間の非交和
+$X' = X'_1 \amalg X'_2$ であることを示す。
+
+\medskip\noindent
+$|V(\mathcal{I} + \mathcal{J})|$ は
+$|U \cup V|$ の補集合なので、$V \cup U$ は $X'$ において
+スキーム論的に稠密である。Lemmas
+\ref{spaces-divisors-lemma-blowing-up-gives-effective-Cartier-divisor} および
+\ref{spaces-divisors-lemma-complement-effective-Cartier-divisor}
+を参照せよ。従って、開かつ閉な部分空間への分解
+$X' = X'_1 \amalg X'_2$ が存在するならば、
+$X'_1$ は $U$ の $X'$ におけるスキーム論的閉包であり、
+同様に $X'_2$ は $V$ の $X'$ におけるスキーム論的閉包である。
+$U \to X'$ と $V \to X'$ は準コンパクトなので、
+スキーム論的閉包をとる操作は \'etale 局所化と可換である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}）。
+従って $X'_1$ と $X'_2$ の存在を検証するには $X$ 上
+\'etale 局所的に作業してよい。これによりスキームの場合へ帰着し、
+これは Divisors, Lemma
+\ref{divisors-lemma-separate-disjoint-opens-by-blowing-up}
+の証明で扱われている。
+\end{proof}
+
+% P09-JA-COMPLETE: frozen source lines 1--4375 translated.

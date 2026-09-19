@@ -1,0 +1,1365 @@
+% Generated mechanically from frozen input inputs/p06/ja/pic.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{43}
+\chapter{曲線の Picard スキーム}
+
+
+
+\phantomsection
+\label{pic-section-phantom}
+
+
+
+\section{序論}
+\label{pic-section-introduction}
+
+\noindent
+本章では、代数閉体上の射影的非特異曲線の Picard スキームを構成するために
+必要なだけの準備を行う。より詳しい議論および歴史的背景については
+\cite{Kleiman-Picard} を参照されたい。
+
+\medskip\noindent
+Stacks project の後の章では、Hilbert 函手と Quot 函手をはるかに一般的な
+設定で論じる。
+
+
+\section{点の Hilbert スキーム}
+\label{pic-section-hilbert-scheme-points}
+
+\noindent
+$X \to S$ をスキームの射とし、$d \geq 0$ を整数とする。
+$S$ 上のスキーム $T$ に対して
+$$
+\Hilbfunctor^d_{X/S}(T) =
+\left\{
+\begin{matrix}
+Z \subset X_T\text{ closed subscheme such that }\\
+Z \to T\text{ is finite locally free of degree }d
+\end{matrix}
+\right\}
+$$
+とおく。$T' \to T$ が $S$ 上のスキームの射で、
+$Z \in \Hilbfunctor^d_{X/S}(T)$ ならば、基底変換
+$Z_{T'} \subset X_{T'}$ は $\Hilbfunctor^d_{X/S}(T')$ の元である。
+このようにして函手
+$$
+\Hilbfunctor^d_{X/S} :
+(\Sch/S)^{opp} \longrightarrow \textit{Sets},\quad
+T \longrightarrow \Hilbfunctor^d_{X/S}(T)
+$$
+を得る。一般に $\Hilbfunctor^d_{X/S}$ は代数空間である
+（ここに将来の参照を挿入する）。本節では、$X \to S$ の一つのファイバー内の
+任意の有限個の点があるアフィン開集合に含まれるならば、
+$\Hilbfunctor^d_{X/S}$ がスキームによって表現可能であることを示す。
+$\Hilbfunctor^d_{X/S}$ がスキームによって表現可能なとき、そのスキームをしばしば
+$\underline{\Hilbfunctor}^d_{X/S}$ と書く。
+
+\begin{lemma}
+\label{pic-lemma-hilb-d-sheaf}
+$X \to S$ をスキームの射とする。函手 $\Hilbfunctor^d_{X/S}$ は fpqc 位相に
+関する層の性質を満たす
+(『スキーム上の位相』の定義 \ref{topologies-definition-sheaf-property-fpqc})。
+\end{lemma}
+
+\begin{proof}
+$\{T_i \to T\}_{i \in I}$ を $S$ 上のスキームの fpqc 被覆とする。
+$X_i = X_{T_i} = X \times_S T_i$ とおく。
+$\{X_i \to X_T\}_{i \in I}$ は $X_T$ の fpqc 被覆であり
+(『スキーム上の位相』の補題 \ref{topologies-lemma-fpqc})、
+$X_{T_i \times_T T_{i'}} = X_i \times_{X_T} X_{i'}$ であることに注意する。
+$Z_i \in \Hilbfunctor^d_{X/S}(T_i)$ が元の族であって、$Z_i$ と $Z_{i'}$ が
+$\Hilbfunctor^d_{X/S}(T_i \times_T T_{i'})$ の同じ元に写ると仮定する。
+閉埋め込みに対する有効降下
+(『降下』の補題 \ref{descent-lemma-closed-immersion}) により、
+閉埋め込み $Z \to X_T$ が存在し、$X_i \to X_T$ によるその基底変換は
+$Z_i \to X_i$ に等しい。すると射 $Z \to T$ の $T_i$ への基底変換は
+$Z_i \to T_i$ である。したがって『降下』の補題 \ref{descent-lemma-descending-property-finite-locally-free} により、
+$Z \to T$ は次数 $d$ の有限局所自由射である。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-hilb-d-limit-preserving}
+$X \to S$ をスキームの射とする。$X \to S$ が有限表示ならば、
+函手 $\Hilbfunctor^d_{X/S}$ は極限を保つ
+(『スキームの極限』の注意 \ref{limits-remark-limit-preserving})。
+\end{lemma}
+
+\begin{proof}
+$T = \lim T_i$ を $S$ 上のアフィンスキームの極限とする。示すべきことは
+$\Hilbfunctor^d_{X/S}(T) = \colim \Hilbfunctor^d_{X/S}(T_i)$ である。
+$Z \to X_T$ が $\Hilbfunctor^d_{X/S}(T)$ の元ならば、
+$Z \to T$ は有限表示であることに注意する。したがって『スキームの極限』の補題 \ref{limits-lemma-descend-finite-presentation} により、ある $i$、
+$T_i$ 上有限表示なスキーム $Z_i$、および $T_i$ 上の射
+$Z_i \to X_{T_i}$ が存在し、その $T$ への基底変換は $Z \to X_T$ を与える。
+『スキームの極限』の補題 \ref{limits-lemma-descend-closed-immersion-finite-presentation} を適用し、
+$i$ を大きくすれば $Z_i \to X_{T_i}$ を閉埋め込みと仮定できる。
+さらに『スキームの極限』の補題 \ref{limits-lemma-descend-finite-locally-free}
+を適用し、必要なら再び $i$ を大きくすれば、$Z_i \to T_i$ を
+次数 $d$ の有限局所自由射と仮定できる。したがって望みどおり
+$Z_i \in \Hilbfunctor^d_{X/S}(T_i)$ である。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$i : X \to Y$ を $S$ 上のスキームの閉埋め込みとする。
+このとき函手の変換
+$$
+\Hilbfunctor^d_{X/S} \longrightarrow \Hilbfunctor^d_{Y/S}
+$$
+があり、元 $Z \in \Hilbfunctor^d_{X/S}(T)$ を
+$\Hilbfunctor^d_{Y/S}$ の元 $i_T(Z) \subset Y_T$ に写す。
+ここで $i_T : X_T \to Y_T$ は $i$ の基底変換である。
+
+\begin{lemma}
+\label{pic-lemma-hilb-d-of-closed}
+$S$ をスキームとし、$i : X \to Y$ をスキームの閉埋め込みとする。
+$\Hilbfunctor^d_{Y/S}$ がスキームによって表現可能ならば
+$\Hilbfunctor^d_{X/S}$ もそうであり、対応するスキームの射
+$\underline{\Hilbfunctor}^d_{X/S} \to \underline{\Hilbfunctor}^d_{Y/S}$
+は閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+$T$ を $S$ 上のスキームとし、$Z \in \Hilbfunctor^d_{Y/S}(T)$ とする。
+断言：閉部分スキーム $T_X \subset T$ が存在し、スキームの射
+$T' \to T$ が $T_X$ を経由することと
+$Z_{T'} \to Y_{T'}$ が $X_{T'}$ を経由することとは同値である。
+これを $\Hilbfunctor^d_{Y/S}$ を表現するスキーム $T_{univ}$ と
+普遍対象\footnote{『圏論』の第 \ref{categories-section-opposite} 節を参照。}
+$Z_{univ} \in \Hilbfunctor^d_{Y/S}(T_{univ})$
+に適用すると、閉部分スキーム $T_{univ, X} \subset T_{univ}$ が得られ、
+$Z_{univ, X} = Z_{univ} \times_{T_{univ}} T_{univ, X}$ は
+$X \times_S T_{univ, X}$ の閉部分スキームとなる。したがってこれは
+$\Hilbfunctor^d_{X/S}(T_{univ, X})$ の元を定める。
+形式的な議論により、$T_{univ, X}$ は普遍対象 $Z_{univ, X}$ をもつ
+$\Hilbfunctor^d_{X/S}$ の表現スキームである。
+
+\medskip\noindent
+断言の証明。$Z' = X_T \times_{Y_T} Z$ を考える。$T' \to T$ を与えると、
+$Z_{T'} \to Y_{T'}$ が $X_{T'}$ を経由することと
+$Z'_{T'} \to Z_{T'}$ が同型であることとは同値である。
+したがって断言は、非常に一般的な『平坦性の続論』の補題 \ref{flat-lemma-Weil-restriction-closed-subschemes} から従う。
+ただし、この特殊な場合には次のように直接証明することもできる。
+まず $T = \Spec(A)$ かつ $Z = \Spec(B)$ の場合に帰着する。
+$T$ をさらに縮小すれば、$A$-加群としての同型
+$\varphi : B \to A^{\oplus d}$ があると仮定してよい。
+このとき、あるイデアル $J \subset B$ に対し $Z' = \Spec(B/J)$ である。
+生成元の族 $g_\beta \in J$ をとり、
+$\varphi(g_\beta) = (g_\beta^1, \ldots, g_\beta^d)$ と書く。
+すると $T_X$ が $\Spec(A/(g_\beta^j))$ で与えられることは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-hilb-d-separated}
+$X \to S$ をスキームの射とする。$X \to S$ が分離的で
+$\Hilbfunctor^d_{X/S}$ が表現可能ならば、
+$\underline{\Hilbfunctor}^d_{X/S} \to S$ は分離的である。
+\end{lemma}
+
+\begin{proof}
+本証明では、基底を明記しない積はすべて $S$ 上でとる。
+$H = \underline{\Hilbfunctor}^d_{X/S}$ とおき、
+$Z \in \Hilbfunctor^d_{X/S}(H)$ を普遍対象とする。
+二つの射影 $H \times H \to H$ によって $Z$ を引き戻して得られる二つの対象
+$Z_1, Z_2 \in \Hilbfunctor^d_{X/S}(H \times H)$ を考える。
+このとき $Z_1 = Z \times H \subset X_{H \times H}$ かつ
+$Z_2 = H \times Z
+\subset X_{H \times H}$ である。$H$ は函手
+$\Hilbfunctor^d_{X/S}$ を表現するので、対角射
+$\Delta : H \to H \times H$ は次の普遍性をもつ。すなわち、スキームの射
+$T \to H \times H$ が $\Delta$ を経由することと、
+$\Hilbfunctor^d_{X/S}(T)$ の元として
+$Z_{1, T} = Z_{2, T}$ であることとは同値である。
+$Z = Z_1 \times_{X_{H \times H}} Z_2$ とおく。このとき
+$T \to H \times H$ が $\Delta$ を経由することと、射
+$Z_T \to Z_{1, T}$ および $Z_T \to Z_{2, T}$ が同型であることとは
+同値である。非常に一般的な『平坦性の続論』の補題 \ref{flat-lemma-Weil-restriction-closed-subschemes} により、
+$\Delta$ は閉埋め込みである。補題 \ref{pic-lemma-hilb-d-of-closed}
+の証明には、この特殊な場合に必要な結果の、より易しい別証明がある。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-hilb-d-An}
+$X \to S$ をアフィンスキームの射とし、$d \geq 0$ とする。
+このとき $\Hilbfunctor^d_{X/S}$ は表現可能である。
+\end{lemma}
+
+\begin{proof}
+$S = \Spec(R)$ とする。十分大きい濃度をもつある集合 $I$ に対し、
+$X$ から $R[x_i; i \in I]$ のスペクトルへの閉埋め込みを選べる。
+したがって補題 \ref{pic-lemma-hilb-d-of-closed} により、
+$A = R[x_i; i \in I]$ として $X = \Spec(A)$ と仮定してよい。
+この場合に『スキーム』の補題 \ref{schemes-lemma-glue-functors} を用いて
+補題を証明する。
+
+\medskip\noindent
+補題の条件 (1) は補題 \ref{pic-lemma-hilb-d-sheaf} から従う。
+
+\medskip\noindent
+濃度 $d$ の各部分集合 $W \subset A$ に対し、
+$\Hilbfunctor^d_{X/S}$ の部分函手 $F_W$ を構成する。
+（$W$ が $x_i$ の単項式の族からなる場合だけを考えれば十分だが、
+ここではそのことを必要としない。）
+すなわち、$Z \in \Hilbfunctor^d_{X/S}(T)$ が $F_W(T)$ に属することを、
+$\mathcal{O}_T$-線形写像
+$$
+\bigoplus\nolimits_{f \in W} \mathcal{O}_T
+\longrightarrow
+(Z \to T)_*\mathcal{O}_Z,\quad
+(g_f) \longmapsto \sum g_f f|_Z
+$$
+が全射である（同値なこととして、同型である）ことによって定める。
+ここで $f \in A$ と $Z \in \Hilbfunctor^d_{X/S}(T)$ に対し、
+$f|_Z$ は射 $Z \to X_T \to X$ による $f$ の引き戻しを表す。
+
+\medskip\noindent
+開性、すなわち補題の条件 (2)(b)。これは『可換代数』の補題 \ref{algebra-lemma-cokernel-flat} から従う。
+
+\medskip\noindent
+被覆性、すなわち補題の条件 (2)(c)。射
+$$
+A \otimes_R \mathcal{O}_T =
+(X_T \to T)_*\mathcal{O}_{X_T} \to (Z \to T)_*\mathcal{O}_Z
+$$
+は全射で、$(Z \to T)_*\mathcal{O}_Z$ は階数 $d$ の有限局所自由加群である。
+したがって各点 $t \in T$ に対し、濃度 $d$ の有限部分集合
+$W \subset A$ を選んで、その像が $d$ 次元 $\kappa(t)$-ベクトル空間
+$((Z \to T)_*\mathcal{O}_Z)_t \otimes_{\mathcal{O}_{T, t}} \kappa(t)$
+の基底をなすようにできる。中山の補題により、$t$ のある開近傍
+$V \subset T$ が存在して $Z_V \in F_W(V)$ となる。
+
+\medskip\noindent
+表現可能性、すなわち補題の条件 (2)(a)。$W \subset A$ の濃度を $d$ とする。
+$F_W$ は $R$ 上のアフィンスキームによって表現可能であると主張する。
+ここでこのアフィンスキームを構成するが、読者には自ら考えてみることを勧める。
+$W$ の元に番号を付けて $f_1, \ldots, f_d$ とする。次のようにして、
+$T_{univ} = \Spec(R_{univ})$ 上の $F_W$ の普遍元
+$Z_{univ} = \Spec(B_{univ})$ を構成する。まず
+$$
+R_{univ} = R[c_{kl}^m, b^l, b_i^l]/\mathfrak a_{univ}
+$$
+とおく。ここでイデアル $\mathfrak a_{univ}$ は後で記述する。
+添字 $k, l, m, i$ はすべて $\{1, \ldots, d\}$ を動く。次に
+$$
+B_{univ} = R_{univ}e_1 \oplus R_{univ}e_2 \oplus \ldots \oplus R_{univ}e_d
+$$
+とおき、これを $R_{univ}$-加群とみなし、
+$$
+e_ke_l = \sum c_{kl}^m e_m
+$$
+という規則で代数構造を定める。閉埋め込み
+$Z_{univ} \to X_{T_{univ}}$ は $R_{univ}$-代数写像
+$$
+\Psi : A \otimes_R R_{univ} \longrightarrow B_{univ}
+$$
+によって与えられ、この写像は $1 \otimes 1$ を $\sum b^le_l$ に、
+$x_i$ を $\sum b_i^le_l$ に写す（存在については後述する）。
+イデアル $\mathfrak a_{univ}$ は次の条件によって定める。
+\begin{enumerate}
+\item $B_{univ}$ 上の乗法は可換、すなわち
+$c_{lk}^m - c_{kl}^m \in \mathfrak a_{univ}$ であること、
+\item $B_{univ}$ 上の乗法は結合的、すなわち
+$c_{lk}^m c_{m n}^p - c_{lq}^p c_{kn}^q \in \mathfrak a_{univ}$ であること、
+\item $\sum b^le_l$ は $B_{univ}$ の乗法単位元 $1$ であること。
+言い換えると、すべての $k$ に対し $(\sum b^le_l)e_k = e_k$、すなわち
+$\sum b^lc_{lk}^m - \delta_{km} \in \mathfrak a_{univ}$
+であること（Kronecker のデルタ）。
+\end{enumerate}
+これにより $B_{univ}$ が $\sum b^le_l$ を単位元 $1$ とする可換
+$R_{univ}$-代数であることを保証したので、準同型 $\Psi$ は存在する。
+最後の条件は次である。
+\begin{enumerate}
+\item[(5)] $f_l$ が $B_{univ}$ の $e_l$ に写ること。
+ある $h_l^m \in R[c_{kl}^m, b^l, b_i^l]$ によって
+$\Psi(f_l) - e_l \equiv \sum h_l^me_m$ と書けば、
+$h_l^m \in \mathfrak a_{univ}$ でなければならない。
+\end{enumerate}
+$\mathfrak a_{univ} \subset R[c_{kl}^m, b^l, b_i^l]$ を
+(1) -- (5) に挙げた元で生成されるイデアルとすれば、
+$F_W$ が $\Spec(R_{univ})$ によって表現されることは明らかである。
+\end{proof}
+
+\begin{proposition}
+\label{pic-proposition-hilb-d-representable}
+$X \to S$ をスキームの射とし、$d \geq 0$ とする。
+$s \in S$ かつ $x_1, \ldots, x_d \in X_s$ であるすべての
+$(s, x_1, \ldots, x_d)$ に対し、
+$x_1, \ldots, x_d \in U$ を満たすアフィン開集合 $U \subset X$
+が存在すると仮定する。このとき $\Hilbfunctor^d_{X/S}$ は
+スキームによって表現可能である。
+\end{proposition}
+
+\begin{proof}
+相対的貼り合わせ (『スキームの構成』の第 \ref{constructions-section-relative-glueing} 節) を用いるか、または
+函手的観点 (『スキーム』の補題 \ref{schemes-lemma-glue-functors})
+を用いることで、$S$ がアフィンの場合に帰着する。詳細は省略する。
+
+\medskip\noindent
+$S$ をアフィンと仮定する。アフィン開集合 $U \subset X$ に対し、
+$F_U \subset \Hilbfunctor^d_{X/S}$ を次の部分函手とする。
+スキーム $T/S$ と元 $Z \in \Hilbfunctor^d_{X/S}(T)$ に対し、
+この元が $F_U(T)$ に属することを $Z \subset U_T$ によって定める。
+『スキーム』の補題 \ref{schemes-lemma-glue-functors} と部分函手 $F_U$
+を用いて結論を得る。
+
+\medskip\noindent
+条件 (1) は補題 \ref{pic-lemma-hilb-d-sheaf} である。
+
+\medskip\noindent
+条件 (2)(a) は $F_U = \Hilbfunctor^d_{U/S}$ であることと、
+補題 \ref{pic-lemma-hilb-d-An} により後者が表現可能であることから従う。
+実際、$Z \in F_U(T)$ ならば $Z$ は $U_T$ の閉部分スキームとみなせ、
+$T$ 上次数 $d$ の有限局所自由なので
+$Z \in \Hilbfunctor^d_{U/S}(T)$ である。逆に
+$Z \in \Hilbfunctor^d_{U/S}(T)$ ならば、
+$Z \to U_T \to X_T$ は閉埋め込みであり\footnote{
+$X \to S$ が分離的ならばこれは明らかである。実際この場合、
+『スキームの射』の補題 \ref{morphisms-lemma-image-proper-scheme-closed} により、
+埋め込み $\varphi : Z \to X_T$ の像は閉であり、したがって
+『スキーム』の補題 \ref{schemes-lemma-immersion-when-closed} により
+閉埋め込みである。$X \to S$ に関する仮定を満たしながら
+$X \to S$ が非分離的である例を知らないので、読者にはこの脚注の残りを
+読み飛ばすことを勧める。一般の場合、$\varphi(Z)$ の閉包にある点
+$x \in X_T$ をとる。$x \in \varphi(Z)$ を示さなければならない。
+$t \in T$ を $x$ の像とする。$X \to S$ に関する仮定により、
+$x$ と $\varphi(Z_t)$ を含むアフィン開集合 $W \subset X_T$ を選べる。
+$\varphi^{-1}(W)$ はファイバー $Z_t$ 全体を含む開集合であり、
+$Z \to T$ は閉写像なので、$T$ を $t$ の開近傍で置き換えれば
+$Z = \varphi^{-1}(W)$ と仮定してよい。このとき
+$W \to T$ は分離的だから、分離的な場合により
+$\varphi(Z) \subset W$ は閉であり、$x \in \varphi(Z)$ が従う。}
+$Z$ を $F_U(T)$ の元とみなせる。
+
+\medskip\noindent
+$T$ を $S$ 上のスキームとし、
+$Z \in \Hilbfunctor^d_{X/S}(T)$ とする。
+$$
+B = (Z \to T)\left((Z \to X_T \to X)^{-1}(X \setminus U)\right)
+$$
+とおく。これは $T$ の閉部分集合であり、開集合
+$T_{Z, U} = T \setminus B$ 上では制限 $Z_{t'}$ が $U_{T'}$ に写ることは
+明らかである。一方、任意の $b \in B$ に対し、ファイバー $Z_b$ は
+$U$ に写らない。したがって射 $T' \to T$ が与えられたとき、
+$Z_{T'} \in F_U(T')$ $\Leftrightarrow$ $T' \to T$ が開集合
+$T_{Z, U}$ を経由することとは同値である。これで条件 (2)(b) が示された。
+
+\medskip\noindent
+条件 (2)(c) は $X/S$ に関する仮定から従う。示すべきことは次だけである。
+$T$ が体のスペクトルで、$Z \subset X_T$ が $T$ 上次数 $d$ の有限平坦な
+閉部分スキームならば、$Z \to X_T \to X$ は $X$ のあるアフィン開集合
+$U$ を経由する。実際、$Z$ の点は高々 $d$ 個であり、それらはすべて
+$T \to S$ の像の点上の $X$ のファイバーに写るので明らかである。
+\end{proof}
+
+\begin{remark}
+\label{pic-remark-when-proposition-applies}
+$f : X \to S$ をスキームの射とする。次の各場合には命題 \ref{pic-proposition-hilb-d-representable} の仮定が満たされ、
+したがってその結論が成り立つ。
+\begin{enumerate}
+\item $X$ が準アフィンである、
+\item $f$ が準アフィンである、
+\item $f$ が準射影的である、
+\item $f$ が局所射影的である、
+\item $X$ 上に豊富な可逆層が存在する、
+\item $X$ 上に $f$-豊富な可逆層が存在する、
+\item $X$ 上に $f$-非常に豊富な可逆層が存在する。
+\end{enumerate}
+実際、いずれの場合にも、ファイバー $X_s$ の任意の有限点集合は
+$X$ のある準コンパクト開集合 $U$ に含まれ、この開集合は豊富な可逆層をもち、
+アフィンスキームの開部分と同型であるか、または次数付き環の
+$\text{Proj}$ の開部分と同型である（いずれも定義を展開すれば従う）。
+したがって『スキームの性質』の補題 \ref{properties-lemma-ample-finite-set-in-affine} により、
+適切なアフィン開集合が存在する。
+\end{remark}
+
+
+
+
+\section{滑らかな曲線上の因子のモジュライ}
+\label{pic-section-divisors}
+
+\noindent
+相対次元 $1$ の滑らかな射 $X \to S$ に対して、函手
+$\Hilbfunctor^d_{X/S}$ は『因子』の第 \ref{divisors-section-effective-Cartier-morphisms} 節で定義された
+相対有効 Cartier 因子をパラメータ付ける。
+
+\begin{lemma}
+\label{pic-lemma-divisors-on-curves}
+$X \to S$ を相対次元 $1$ のスキームの滑らかな射とし、
+$D \subset X$ を閉部分スキームとする。次の条件を考える。
+\begin{enumerate}
+\item $D \to S$ は有限局所自由である、
+\item $D$ は $X/S$ 上の相対有効 Cartier 因子である、
+\item $D \to S$ は局所準有限、平坦、かつ局所有限表示である、
+\item $D \to S$ は局所準有限かつ平坦である。
+\end{enumerate}
+常に
+$$
+(1) \Rightarrow (2) \Leftrightarrow (3) \Rightarrow (4)
+$$
+が成り立つ。$S$ が局所 Noether 的ならば、最後の矢印は同値である。
+$X \to S$ が固有ならば（$S$ は任意）、最初の矢印は同値である。
+\end{lemma}
+
+\begin{proof}
+(2) と (3) の同値性。$S$ が体 $k$ のスペクトルの場合に
+(2) と (3) の同値性を示せば、『因子』の補題 \ref{divisors-lemma-fibre-Cartier} から従う。
+$x \in X$ を閉点とする。$X$ は $k$ 上相対次元 $1$ で滑らかなので、
+$\mathcal{O}_{X, x}$ は次元 $1$ の正則局所環である
+(『多様体』の補題 \ref{varieties-lemma-smooth-regular})。
+したがって $\mathcal{O}_{X, x}$ は離散付値環
+(『可換代数』の補題 \ref{algebra-lemma-characterize-dvr}) であり、
+ゆえに PID である。そこで、$X$ のすべての生成点で消えない
+任意のイデアル層 $\mathcal{I} \subset \mathcal{O}_X$ は可逆である
+(『因子』の補題 \ref{divisors-lemma-effective-Cartier-in-points})。
+言い換えると、生成点を含まない $X$ の任意の閉部分スキームは
+有効 Cartier 因子である。これにより (2) と (3) は同値である。
+
+\medskip\noindent
+$S$ が Noether 的ならば、任意の局所準有限射 $D \to S$ は
+局所有限表示である (『スキームの射』の補題 \ref{morphisms-lemma-noetherian-finite-type-finite-presentation})。
+したがって (3) と (4) は同値である。
+
+\medskip\noindent
+$X \to S$ が固有ならば（$S$ は任意）、$D \to S$ も固有である。
+固有かつ局所準有限な射は有限であり
+(『射の続論』の補題 \ref{more-morphisms-lemma-characterize-finite})、
+有限、平坦かつ有限表示な射は有限局所自由なので
+(『スキームの射』の補題 \ref{morphisms-lemma-finite-flat})、
+(1) と (2) は同値である。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-sum-divisors-on-curves}
+$X \to S$ を相対次元 $1$ のスキームの滑らかな射とする。
+$D_1, D_2 \subset X$ を、それぞれ $S$ 上次数 $d_1$, $d_2$ の
+有限局所自由な閉部分スキームとする。このとき $D_1 + D_2$ は
+$S$ 上次数 $d_1 + d_2$ の有限局所自由である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{pic-lemma-divisors-on-curves} により、$D_1$ と $D_2$ は
+$X/S$ 上の相対有効 Cartier 因子である。したがって『因子』の補題 \ref{divisors-lemma-sum-relative-effective-Cartier-divisor} により、
+$D = D_1 + D_2$ は $X/S$ 上の相対有効 Cartier 因子である。
+ゆえに補題 \ref{pic-lemma-divisors-on-curves} により、
+$D \to S$ は局所準有限、平坦、かつ局所有限表示である。
+全射な整射 $D_1 \amalg D_2 \to D$ に『スキームの射』の補題 \ref{morphisms-lemma-image-universally-closed-separated} を適用すると、
+$D \to S$ は分離的である。すると『スキームの射』の補題 \ref{morphisms-lemma-image-proper-is-proper} により $D \to S$ は固有である。
+これにより $D \to S$ は有限であり
+(『射の続論』の補題 \ref{more-morphisms-lemma-characterize-finite})、
+さらに $D \to S$ は有限局所自由である
+(『スキームの射』の補題 \ref{morphisms-lemma-finite-flat})。
+したがって、$D \to S$ の次数が $d_1 + d_2$ であることを示せば十分である。
+そのためには $X \to S$ の一つのファイバーへ基底変換してよいので、
+ある体 $k$ に対し $S = \Spec(k)$ と仮定してよい。
+この場合、有限個の閉点 $x_1, \ldots, x_n \in X$ が存在して、
+$D_1$ と $D_2$ は $\{x_1, \ldots, x_n\}$ 上に台をもつ。
+実際、次を満たす非零因子
+$f_{i, j} \in \mathcal{O}_{X, x_i}$ が存在する。
+$$
+D_1 = \coprod \Spec(\mathcal{O}_{X, x_i}/(f_{i, 1}))
+\quad\text{and}\quad
+D_2 = \coprod \Spec(\mathcal{O}_{X, x_i}/(f_{i, 2}))
+$$
+このとき
+$$
+D = \coprod \Spec(\mathcal{O}_{X, x_i}/(f_{i, 1}f_{i, 2}))
+$$
+である。これから $D$ が $k$ 上次数 $d_1 + d_2$ をもつことは容易に分かる
+（必要なら『可換代数』の補題 \ref{algebra-lemma-ord-additive} を用いよ）。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-difference-divisors-on-curves}
+$X \to S$ を相対次元 $1$ のスキームの滑らかな射とする。
+$D_1, D_2 \subset X$ を、それぞれ $S$ 上次数 $d_1$, $d_2$ の
+有限局所自由な閉部分スキームとする。$D_1 \subset D_2$
+（閉部分スキームとして）ならば、$S$ 上次数 $d_2 - d_1$ の
+有限局所自由な閉部分スキーム $D \subset X$ が存在して
+$D_2 = D_1 + D$ となる。
+\end{lemma}
+
+\begin{proof}
+証明は補題 \ref{pic-lemma-sum-divisors-on-curves} の証明とほとんど同じである。
+補題 \ref{pic-lemma-divisors-on-curves} により、$D_1$ と $D_2$ は
+$X/S$ 上の相対有効 Cartier 因子である。『因子』の補題 \ref{divisors-lemma-difference-relative-effective-Cartier-divisor} により、
+$D_2 = D_1 + D$ を満たす相対有効 Cartier 因子 $D \subset X$ が存在する。
+ゆえに補題 \ref{pic-lemma-divisors-on-curves} により、
+$D \to S$ は局所準有限、平坦、かつ局所有限表示である。
+$D$ は $D_2$ の閉部分スキームなので $D \to S$ は有限であり、
+したがって $D \to S$ は有限局所自由である
+(『スキームの射』の補題 \ref{morphisms-lemma-finite-flat})。
+よって $D \to S$ の次数が $d_2 - d_1$ であることを示せば十分であり、
+これは補題 \ref{pic-lemma-sum-divisors-on-curves} から従う。
+\end{proof}
+
+\noindent
+$X \to S$ を相対次元 $1$ のスキームの滑らかな射とする。
+補題 \ref{pic-lemma-divisors-on-curves} により、$S$ 上のスキーム $T$ と
+$D \in \Hilbfunctor^d_{X/S}(T)$ に対し、$D$ を $X_T/T$ 上の
+相対有効 Cartier 因子であって $D \to T$ が次数 $d$ の有限局所自由である
+ものとみなせる。したがって補題 \ref{pic-lemma-sum-divisors-on-curves}
+により、函手の変換
+$$
+\Hilbfunctor^{d_1}_{X/S} \times \Hilbfunctor^{d_2}_{X/S}
+\longrightarrow
+\Hilbfunctor^{d_1 + d_2}_{X/S},\quad
+(D_1, D_2) \longmapsto D_1 + D_2
+$$
+を得る。$\Hilbfunctor^d_{X/S}$ がすべての次数 $d$ について表現可能ならば、
+この函手の変換はスキームの射
+$$
+\underline{\Hilbfunctor}^{d_1}_{X/S}
+\times_S
+\underline{\Hilbfunctor}^{d_2}_{X/S}
+\longrightarrow
+\underline{\Hilbfunctor}^{d_1 + d_2}_{X/S}
+$$
+に対応する。これは $S$ 上の射である。
+$\underline{\Hilbfunctor}^0_{X/S} = S$ および
+$\underline{\Hilbfunctor}^1_{X/S} = X$ であることに注意する。
+上の射の特殊な場合として
+$$
+\underline{\Hilbfunctor}^d_{X/S} \times_S X
+\longrightarrow
+\underline{\Hilbfunctor}^{d + 1}_{X/S},\quad
+(D, x) \longmapsto D + x
+$$
+がある。
+
+\begin{lemma}
+\label{pic-lemma-universal-object}
+$X \to S$ を相対次元 $1$ のスキームの滑らかな射とし、
+函手 $\Hilbfunctor^d_{X/S}$ は表現可能であるとする。射
+$\underline{\Hilbfunctor}^d_{X/S} \times_S X \to
+\underline{\Hilbfunctor}^{d + 1}_{X/S}$
+は次数 $d + 1$ の有限局所自由射である。
+\end{lemma}
+
+\begin{proof}
+$D_{univ} \subset X \times_S \underline{\Hilbfunctor}^{d + 1}_{X/S}$
+を普遍対象とする。可換図式
+$$
+\xymatrix{
+\underline{\Hilbfunctor}^d_{X/S} \times_S X \ar[rr] \ar[rd] & &
+D_{univ} \ar[ld] \ar@{^{(}->}[r] &
+\underline{\Hilbfunctor}^{d + 1}_{X/S} \times_S X \\
+& \underline{\Hilbfunctor}^{d + 1}_{X/S}
+}
+$$
+がある。上の水平矢印は $(D', x)$ を $(D' + x, x)$ に写す。
+この射は同型であると主張する。これで補題は明らかに従う。
+実際、$S$ 上のスキーム $T$ を与えると、$D_{univ}$ の $T$-値点
+$\xi$ は対 $\xi = (D, x)$ によって与えられる。ここで
+$D \subset X_T$ は $T$ 上次数 $d + 1$ の有限局所自由な閉部分スキームであり、
+$x : T \to X$ は、そのグラフ $x : T \to X_T$ が $D$ を経由する射である。
+このとき補題 \ref{pic-lemma-difference-divisors-on-curves} により、
+$T$ 上次数 $d$ の有限局所自由なある $D' \subset X_T$ によって
+$D = D' + x$ と書ける。$\xi = (D, x)$ を対 $(D', x)$ に写す写像が
+求める逆写像である。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-hilb-d-smooth}
+$X \to S$ を相対次元 $1$ のスキームの滑らかな射とし、
+函手 $\Hilbfunctor^d_{X/S}$ は表現可能であるとする。
+スキーム $\underline{\Hilbfunctor}^d_{X/S}$ は $S$ 上滑らかで、
+相対次元は $d$ である。
+\end{lemma}
+
+\begin{proof}
+$\underline{\Hilbfunctor}^0_{X/S} = S$ および
+$\underline{\Hilbfunctor}^1_{X/S} = X$ なので、$d = 0, 1$ では結論は正しい。
+$d$ について結論を仮定すると、
+$\underline{\Hilbfunctor}^d_{X/S} \times_S X$ は $S$ 上滑らかである
+(『スキームの射』の補題 \ref{morphisms-lemma-base-change-smooth} および
+\ref{morphisms-lemma-composition-smooth})。また補題 \ref{pic-lemma-universal-object} により
+$\underline{\Hilbfunctor}^d_{X/S} \times_S X \to
+\underline{\Hilbfunctor}^{d + 1}_{X/S}$
+は次数 $d + 1$ の有限局所自由射であるから、結論は
+『降下』の補題 \ref{descent-lemma-smooth-permanence} から従う。
+相対次元が主張どおりであることの確認は省略する
+（ファイバーを調べるか、上の議論で次元を追跡すればよい）。
+\end{proof}
+
+\noindent
+これまでに得た情報を、体上の固有滑らかな曲線の場合についてまとめる。
+
+\begin{proposition}
+\label{pic-proposition-hilb-d}
+$X$ を体 $k$ 上の幾何学的に既約な滑らかな固有曲線とする。
+\begin{enumerate}
+\item 函手 $\Hilbfunctor^d_{X/k}$ は、$k$ 上次元 $d$ の滑らかな固有多様体
+$\underline{\Hilbfunctor}^d_{X/k}$ によって表現可能である。
+\item 体拡大 $k'/k$ に対し、
+$\underline{\Hilbfunctor}^d_{X/k}$ の $k'$-有理点は
+$X_{k'}$ 上の次数 $d$ の有効 Cartier 因子と $1$-対-$1$ に対応する。
+\item $d_1, d_2 \geq 0$ に対し、射
+$$
+\underline{\Hilbfunctor}^{d_1}_{X/k}
+\times_k
+\underline{\Hilbfunctor}^{d_2}_{X/k}
+\longrightarrow
+\underline{\Hilbfunctor}^{d_1 + d_2}_{X/k}
+$$
+が存在し、これは次数 ${d_1 + d_2 \choose d_1}$ の有限局所自由射である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+函手 $\Hilbfunctor^d_{X/k}$ が表現可能であることは、
+命題 \ref{pic-proposition-hilb-d-representable}
+（注意 \ref{pic-remark-when-proposition-applies} も参照）と、
+$X$ が射影的であること
+(『多様体』の補題 \ref{varieties-lemma-dim-1-proper-projective}) から従う。
+スキーム $\underline{\Hilbfunctor}^d_{X/k}$ は
+補題 \ref{pic-lemma-hilb-d-separated} により $k$ 上分離的である。
+スキーム $\underline{\Hilbfunctor}^d_{X/k}$ は
+補題 \ref{pic-lemma-hilb-d-smooth} により $k$ 上滑らかである。
+$X = \underline{\Hilbfunctor}^1_{X/k}$ から始め、
+補題 \ref{pic-lemma-universal-object} の射と帰納法を用いると、射
+$$
+X^d = X \times_k X \times_k \ldots \times_k X \longrightarrow
+\underline{\Hilbfunctor}^d_{X/k},\quad
+(x_1, \ldots, x_d) \longrightarrow x_1 + \ldots + x_d
+$$
+を得る。これは次数 $d!$ の有限局所自由射である。$X$ は $k$ 上固有なので
+$X^d$ もそうであり、『スキームの射』の補題 \ref{morphisms-lemma-image-proper-is-proper} により
+$\underline{\Hilbfunctor}^d_{X/k}$ は $k$ 上固有である。
+$X$ は $k$ 上幾何学的に既約なので、積 $X^d$ は既約であり
+(『多様体』の補題 \ref{varieties-lemma-bijection-irreducible-components})、
+したがって像も既約（実際、幾何学的に既約）である。これで (1) が示された。
+(2) は定義から従う。(3) は可換図式
+$$
+\xymatrix{
+X^{d_1} \times_k X^{d_2} \ar[d] \ar@{=}[r] & X^{d_1 + d_2} \ar[d] \\
+\underline{\Hilbfunctor}^{d_1}_{X/k}
+\times_k
+\underline{\Hilbfunctor}^{d_2}_{X/k}
+\ar[r] &
+\underline{\Hilbfunctor}^{d_1 + d_2}_{X/k}
+}
+$$
+と有限局所自由射の次数の乗法性から従う。
+\end{proof}
+
+\begin{remark}
+\label{pic-remark-universal-object-hilb-d}
+$X$ を命題 \ref{pic-proposition-hilb-d} のような、体 $k$ 上の
+幾何学的に既約な滑らかな固有曲線とし、$d \geq 0$ とする。
+普遍閉対象は
+$$
+D_{univ} \subset \underline{\Hilbfunctor}^{d + 1}_{X/k} \times_k X
+$$
+であり、補題 \ref{pic-lemma-divisors-on-curves} により
+$\underline{\Hilbfunctor}^{d + 1}_{X/k}$ 上の相対有効因子である。
+実際、補題 \ref{pic-lemma-universal-object} の証明にあるように、
+$D_{univ}$ はスキームとして
+$\underline{\Hilbfunctor}^d_{X/k} \times_k X$ と同型である。
+特に $D_{univ}$ は有効 Cartier 因子であり、可逆加群
+$\mathcal{O}(D_{univ})$ を得る。
+$[D] \in \underline{\Hilbfunctor}^{d + 1}_{X/k}$ が次数 $d + 1$ の
+有効 Cartier 因子 $D \subset X$ に対応する $k$-有理点を表すならば、
+$\mathcal{O}(D_{univ})$ のファイバー $[D] \times X$ への制限は
+$\mathcal{O}_X(D)$ である。
+\end{remark}
+
+
+\section{Picard 函手}
+\label{pic-section-picard-functor}
+
+\noindent
+任意のスキーム $X$ に対し、可逆 $\mathcal{O}_X$-加群の同型類の集合を
+$\Pic(X)$ と書く。『加群の層』の定義 \ref{modules-definition-pic}
+を参照されたい。スキームの射 $f : X \to Y$ が与えられると、
+引き戻しは群準同型 $\Pic(Y) \to \Pic(X)$ を定める。
+対応 $X \leadsto \Pic(X)$ はスキームの圏から Abel 群の圏への反変函手である。
+この函手は表現可能ではないが、この構成の相対版は表現可能となることがある。
+
+\medskip\noindent
+スキームの射 $f : X \to S$ に対する Picard 函手を定義しよう。
+構成の考え方は、fppf 位相を用いて高次順像を計算した層
+$R^1f_*\mathbf{G}_m$ をとることである。定義を展開すると、
+次のより直接的な定義に至る。
+
+\begin{definition}
+\label{pic-definition-picard-functor}
+$\Sch_{fppf}$ を『スキーム上の位相』の定義 \ref{topologies-definition-big-small-fppf} のような大サイトとする。
+$f : X \to S$ をこのサイトの射とする。{\it Picard 函手}
+$\Picardfunctor_{X/S}$ とは、函手
+$$
+(\Sch/S)_{fppf} \longrightarrow \textit{Sets},\quad
+T \longmapsto \Pic(X_T)
+$$
+の fppf 層化である。この函手が表現可能ならば、それを表現するスキームを
+$\underline{\Picardfunctor}_{X/S}$ と書く。
+\end{definition}
+
+\noindent
+しばしば用いる注意として、$T \in \Ob((\Sch/S)_{fppf})$ ならば、
+$\Picardfunctor_{X_T/T}$ は $\Picardfunctor_{X/S}$ の
+$(\Sch/T)_{fppf}$ への制限である。
+$S$ 上のスキーム $T$ における $\Picardfunctor_{X/S}$ の値を
+見定めることは非自明である。次の補題が役立つ。
+
+\begin{lemma}
+\label{pic-lemma-flat-geometrically-connected-fibres}
+$f : X \to S$ を定義 \ref{pic-definition-picard-functor} のような射とする。
+すべての $T \in \Ob((\Sch/S)_{fppf})$ に対して
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ が同型ならば、
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/S}(T)
+$$
+はすべての $T$ に対して完全列である。
+\end{lemma}
+
+\begin{proof}
+記号を簡単にするため、$S$ を $T$ で、$X$ を $X_T$ で置き換え、
+$S = T$ と仮定してよい。$\mathcal{N}$ を可逆
+$\mathcal{O}_S$-加群とする。$f^*\mathcal{N} \cong \mathcal{O}_X$ ならば、
+仮定により $f_*f^*\mathcal{N} \cong f_*\mathcal{O}_X \cong \mathcal{O}_S$
+である。$\mathcal{N}$ は局所的に自明なので、標準写像
+$\mathcal{N} \to f_*f^*\mathcal{N}$ は局所的に同型である
+（仮定により $\mathcal{O}_S \to f_*f^*\mathcal{O}_S$ が同型だからである）。
+したがって $\mathcal{N} \to f_*f^*\mathcal{N} \to \mathcal{O}_S$ は同型で、
+$\mathcal{N}$ は自明である。これで最初の矢印が単射であることが示された。
+
+\medskip\noindent
+$\mathcal{L}$ を $\Pic(X) \to \Picardfunctor_{X/S}(S)$ の核に属する
+可逆 $\mathcal{O}_X$-加群とする。このとき fppf 被覆
+$\{S_i \to S\}$ が存在して、$\mathcal{L}$ の $X_{S_i}$ への引き戻しは
+自明な可逆層となる。自明化切断 $s_i$ を選ぶ。
+$\text{pr}_0^*s_i$ と $\text{pr}_1^*s_j$ はともに
+$X_{S_i \times_S S_j}$ 上の $\mathcal{L}$ の自明化切断なので、
+ある乗法単元だけ異なる。
+$$
+f_{ij} \in
+\Gamma(X_{S_i \times_S S_j}, \mathcal{O}_{X_{S_i \times_S S_j}}^*) =
+\Gamma(S_i \times_S S_j, \mathcal{O}_{S_i \times_S S_j}^*)
+$$
+（等号は構造層の順像に関する仮定による。）
+もちろん、これらの元は $S_i \times_S S_j \times_S S_k$ 上で
+コサイクル条件を満たすので、fppf 被覆 $\{S_i \to S\}$ に関する
+可逆層上の降下データを定める。『降下』の命題 \ref{descent-proposition-fpqc-descent-quasi-coherent} により、
+可逆 $\mathcal{O}_S$-加群 $\mathcal{N}$ が存在し、$S_i$ 上の自明化に
+付随する降下データは $\{f_{ij}\}$ である。すると
+$f^*\mathcal{N} \cong \mathcal{L}$ である。実際、降下データから加群への
+函手は忠実充満である（上で引用した命題を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-flat-geometrically-connected-fibres-with-section}
+$f : X \to S$ を定義 \ref{pic-definition-picard-functor} のような射とする。
+$f$ が切断 $\sigma$ をもち、すべての
+$T \in \Ob((\Sch/S)_{fppf})$ に対して
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ が同型であると仮定する。
+このとき
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/S}(T) \to 0
+$$
+は分裂完全列であり、分裂は
+$\sigma_T^* : \Pic(X_T) \to \Pic(T)$ によって与えられる。
+\end{lemma}
+
+\begin{proof}
+$K(T) = \Ker(\sigma_T^* : \Pic(X_T) \to \Pic(T))$ と書く。
+$\sigma$ は $f$ の切断なので、$\Pic(X_T)$ は $\Pic(T)$ と $K(T)$ の
+直和である。したがって補題 \ref{pic-lemma-flat-geometrically-connected-fibres} により、
+すべての $T$ に対して $K(T) \subset \Picardfunctor_{X/S}(T)$ である。
+さらに、構成から $\Picardfunctor_{X/S}$ は前層 $K$ の層化である。
+証明を終えるには $K$ が fppf 被覆に対する層条件を満たすことを示せば十分で、
+これを次の段落で行う。
+
+\medskip\noindent
+$\{T_i \to T\}$ を fppf 被覆とする。$\mathcal{L}_i$ を $K(T_i)$ の元で、
+すべての $i$, $j$ に対し $K(T_i \times_T T_j)$ の同じ元に写るものとする。
+すべての $i$ に対して同型
+$\alpha_i : \mathcal{O}_{T_i} \to \sigma_{T_i}^*\mathcal{L}_i$
+を選ぶ。また同型
+$$
+\varphi_{ij} :
+\mathcal{L}_i|_{X_{T_i \times_T T_j}}
+\longrightarrow
+\mathcal{L}_j|_{X_{T_i \times_T T_j}}
+$$
+を選ぶ。写像
+$$
+\alpha_j|_{T_i \times_T T_j} \circ
+\sigma_{T_i \times_T T_j}^*\varphi_{ij} \circ
+\alpha_i|_{T_i \times_T T_j} :
+\mathcal{O}_{T_i \times_T T_j} \to \mathcal{O}_{T_i \times_T T_j}
+$$
+が $1$ による乗法ではなく、ある $u_{ij}$ による乗法ならば、
+$\varphi_{ij}$ を $u_{ij}^{-1}$ 倍して修正できる。こうした後、自己写像
+$$
+\varphi_{ki}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{jk}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{ij}|_{X_{T_i \times_T T_j \times_T T_k}}
+\quad\text{on}\quad
+\mathcal{L}_i|_{X_{T_i \times_T T_j \times_T T_k}}
+$$
+を考える。これはスキーム $X_{T_i \times_T T_j \times_T T_k}$ 上の
+ある正則関数 $f_{ijk}$ による乗法で与えられる。
+$\varphi_{ij}$ の選び方により、この写像の $\sigma$ による引き戻しは
+$1$ による乗法である。$X$ 上の関数に関する仮定により
+$f_{ijk} = 1$ である。したがって fppf 被覆
+$\{X_{T_i} \to X\}$ に対する降下データを得る。
+『降下』の命題 \ref{descent-proposition-fpqc-descent-quasi-coherent}
+により、可逆 $\mathcal{O}_{X_T}$-加群 $\mathcal{L}$ と同型
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$ が存在し、
+その $X_{T_i}$ への引き戻しは $(\mathcal{L}_i, \alpha_i)$ を復元する
+（細部は省略する）。したがって $\mathcal{L}$ は望みどおり
+$K(T)$ の対象を定める。
+\end{proof}
+
+
+
+\section{表現可能性の判定条件}
+\label{pic-section-representability}
+
+\noindent
+Picard 函手の表現可能性を証明するため、次の判定条件を用いる。
+
+\begin{lemma}
+\label{pic-lemma-criterion}
+$k$ を体とし、$G : (\Sch/k)^{opp} \to \textit{Groups}$ を函手とする。
+『スキーム』の定義 \ref{schemes-definition-representable-by-open-immersions} の用語のもとで、
+次を仮定する。
+\begin{enumerate}
+\item $G$ は Zariski 位相に関する層の性質を満たす、
+\item 次を満たす部分函手 $F \subset G$ が存在する。
+\begin{enumerate}
+\item $F$ は表現可能である、
+\item $F \subset G$ は開埋め込みによって表現可能である、
+\item $k$ の任意の体拡大 $K$ と $g \in G(K)$ に対し、
+$g'g \in F(K)$ を満たす $g' \in G(k)$ が存在する。
+\end{enumerate}
+\end{enumerate}
+このとき $G$ は $k$ 上の群スキームによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+『スキーム』の補題 \ref{schemes-lemma-glue-functors} から従う。
+実際、$I = G(k)$ とし、$i = g' \in I$ に対して
+$F_i \subset G$ を、$k$ 上の $T$ に元
+$g \in G(T)$ で $g'g \in F(T)$ を満たすものの集合を対応させる
+部分函手とする。$g'$ による乗法によって $F_i \cong F$ である。
+写像 $F_i \to G$ は $g'$ による乗法を通じて写像 $F \to G$ と同型なので、
+開埋め込みによって表現可能である。最後に仮定 (2)(c) により、
+族 $(F_i)_{i \in I}$ は $G$ を被覆する。したがって上記の補題を適用でき、
+証明は完了する。
+\end{proof}
+
+
+
+\section{曲線の Picard スキーム}
+\label{pic-section-picard-curve}
+
+\noindent
+本節では補題 \ref{pic-lemma-criterion} を適用し、$k$ が代数閉体で
+$X$ が $k$ 上の滑らかな射影曲線ならば
+$\Picardfunctor_{X/k}$ が表現可能であることを示す。
+このため、スキームの導来圏の章で展開したコホモロジーと基底変換を少し用いる。
+
+\begin{lemma}
+\label{pic-lemma-check-conditions}
+$k$ を体とし、$X$ を $k$ 上の滑らかな射影曲線で
+$k$-有理点をもつものとする。このとき補題 \ref{pic-lemma-flat-geometrically-connected-fibres-with-section}
+の仮定が満たされる。
+\end{lemma}
+
+\begin{proof}
+「$k$-有理点をもつ」という句の意味は、構造射
+$f : X \to \Spec(k)$ が切断をもつということにほかならず、
+これで最初の条件が確認される。『多様体』の補題 \ref{varieties-lemma-regular-functions-proper-variety} により、
+$k' = H^0(X, \mathcal{O}_X)$ は $k$ の体拡大である。
+$X$ は $k$-有理点をもつので $k$-代数準同型 $k' \to k$ があり、
+$k' = k$ と結論する。$k$ は体なので、任意の射
+$T \to \Spec(k)$ は平坦である。したがってコホモロジーと基底変換
+(『スキームのコホモロジー』の補題 \ref{coherent-lemma-flat-base-change-cohomology}) により、
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ は同型である。
+これで証明は完了する。
+\end{proof}
+
+\noindent
+$X$ を体 $k$ 上の滑らかな射影曲線で、$k$-有理点 $\sigma$ をもつものとする。
+このとき函手
+$$
+\Picardfunctor_{X/k, \sigma} : (\Sch/k)^{opp} \longrightarrow \textit{Ab},\quad
+T \longmapsto \Ker(\Pic(X_T) \xrightarrow{\sigma_T^*} \Pic(T))
+$$
+は、補題 \ref{pic-lemma-check-conditions} および
+\ref{pic-lemma-flat-geometrically-connected-fibres-with-section} により、
+$(\Sch/k)_{fppf}$ 上で $\Picardfunctor_{X/k}$ と同型である。
+したがって $\Picardfunctor_{X/k, \sigma}$ の表現可能性を示せば十分である。
+「$\mathcal{L} \in \Picardfunctor_{X/k, \sigma}(T)$」という記法は、
+$T$ が $k$ 上のスキームで、$\mathcal{L}$ が可逆
+$\mathcal{O}_{X_T}$-加群であり、その $\sigma_T$ を介した $T$ への制限が
+$\mathcal{O}_T$ と同型であることを表すものとする。
+
+\begin{lemma}
+\label{pic-lemma-define-open}
+$k$ を体とし、$X$ を $k$ 上の滑らかな射影曲線で、
+$k$-有理点 $\sigma$ をもつものとする。$k$ 上のスキーム $T$ に対し、
+$F(T) \subset \Picardfunctor_{X/k, \sigma}(T)$ を、
+$Rf_{T, *}\mathcal{L}$ が次数 $0$ に置かれた可逆
+$\mathcal{O}_T$-加群と同型であるような $\mathcal{L}$ からなる部分集合とする。
+このとき $F \subset \Picardfunctor_{X/k, \sigma}$ は部分函手であり、
+包含は開埋め込みによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+『スキームの導来圏』の補題 \ref{perfect-lemma-open-where-cohomology-in-degree-i-rank-r-geometric}
+を $i = 0$, $r = 1$ として適用し、『スキーム』の定義 \ref{schemes-definition-representable-by-open-immersions} を用いれば直ちに従う。
+\end{proof}
+
+\noindent
+先へ進むため、次の定義をしておくと便利である。
+
+\begin{definition}
+\label{pic-definition-genus}
+$k$ を体とし、$X$ を $k$ 上の滑らかな射影的かつ幾何学的に既約な
+曲線とする。$X$ の {\it 種数} とは
+$g = \dim_k H^1(X, \mathcal{O}_X)$ のことである。
+\end{definition}
+
+\begin{lemma}
+\label{pic-lemma-open-representable}
+$k$ を体とし、$X$ を $k$ 上の種数 $g$ の滑らかな射影曲線で
+$k$-有理点 $\sigma$ をもつものとする。補題 \ref{pic-lemma-define-open} で定義された開部分函手 $F$ は
+$\underline{\Hilbfunctor}^g_{X/k}$ の開部分スキームによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+本証明では、基底を明記しない積はすべて $\Spec(k)$ 上でとる。
+命題 \ref{pic-proposition-hilb-d} によりスキーム
+$H = \underline{\Hilbfunctor}^g_{X/k}$ は存在する。
+普遍因子 $D_{univ} \subset H \times X$ と、それに付随する可逆層
+$\mathcal{O}(D_{univ})$ を考える
+(注意 \ref{pic-remark-universal-object-hilb-d})。
+$\sigma_H : H \to H \times X$ を介した引き戻しをテンソルして調整し、
+$$
+\mathcal{L}_H =
+\mathcal{O}(D_{univ})
+\otimes_{\mathcal{O}_{H \times X}}
+\text{pr}_H^*\sigma_H^*\mathcal{O}(D_{univ})^{\otimes -1}
+\in
+\Picardfunctor_{X/k, \sigma}(H)
+$$
+を得る。
+Yoneda の補題 (『圏論』の補題 \ref{categories-lemma-yoneda}) により、
+可逆層 $\mathcal{L}_H$ は自然変換
+$$
+h_H \longrightarrow \Picardfunctor_{X/k, \sigma}
+$$
+を定める。$F$ は開部分函手なので、
+$\mathcal{L}_H|_{W \times X}$ が $F(W)$ に属するような最大の開部分
+$W \subset H$ が存在する。この開部分はもちろん、射 $H \times X \to H$ と層
+$\mathcal{F} = \mathcal{O}(D_{univ})$ に対し $i = 0$ および $r = 1$ として
+『スキームの導来圏』の補題 \ref{perfect-lemma-open-where-cohomology-in-degree-i-rank-r-geometric}
+で構成される開部分スキームにほかならない。Yoneda の補題を再び適用すると、
+可換図式
+$$
+\xymatrix{
+h_W \ar[d] \ar[r] & F \ar[d] \\
+h_H \ar[r] & \Picardfunctor_{X/k, \sigma}
+}
+$$
+を得る。証明を終えるため、上の水平射が同型であることを示す。
+
+\medskip\noindent
+$\mathcal{L} \in F(T) \subset \Picardfunctor_{X/k, \sigma}(T)$ とする。
+$Rf_{T, *}\mathcal{L} \cong \mathcal{N}[0]$ となる可逆
+$\mathcal{O}_T$-加群を $\mathcal{N}$ とする。随伴射
+$$
+f_T^*\mathcal{N} \longrightarrow \mathcal{L}
+\quad\text{corresponds to a section }s\text{ of}\quad
+\mathcal{L} \otimes f_T^*\mathcal{N}^{\otimes -1}
+$$
+は、$X_T$ 上の切断に対応する。主張：$s$ の零点スキームは、
+$(T \times X)/T$ 上の相対有効 Cartier 因子 $D$ であり、$T$ 上
+次数 $g$ の有限局所自由である。
+
+\medskip\noindent
+この主張を認めて補題の証明を終えよう。すなわち、$D$ は射
+$m : T \to H$ を定め、$D$ は $D_{univ}$ の引き戻しである。したがって
+$$
+(m \times \text{id}_X)^*\mathcal{O}(D_{univ}) \cong
+\mathcal{O}_{T \times X}(D)
+$$
+である。$\mathcal{O}_{T \times X}(D) \cong
+\mathcal{L} \otimes f_T^*\mathcal{N}^{\otimes -1}$ なので、
+$(m \times \text{id}_X)^*\mathcal{L}_H$ と $\mathcal{L}$ の差は、
+$T$ 上の可逆加群の引き戻しである。ゆえに $m : T \to H$ は上の開部分
+$W \subset H$ を経由する。さらに、上と同様に $\sigma_T$ による引き戻しで
+調整すると、これらの可逆加群は $\Picardfunctor_{X/k, \sigma}(T)$ の同じ元を
+定める。Yoneda の補題を用いて図式を追えば、$m \in h_W(T)$ が
+$\mathcal{L} \in F(T)$ に写ることが分かる。規則 $F(T) \to h_W(T)$、
+$\mathcal{L} \mapsto m$ が上の函手の変換の逆を定めることの確認は省略する。
+
+\medskip\noindent
+主張の証明。$D$ は $T \times X$ の局所主閉部分スキームなので、
+$T$ 上の $D$ の各ファイバーが有効 Cartier 因子であることを示せば十分である。
+補題 \ref{pic-lemma-divisors-on-curves} および
+『因子』の補題 \ref{divisors-lemma-fibre-Cartier} を参照せよ。
+$\mathcal{L}$ のコホモロジーをとる操作は基底変換と可換するから
+(『スキームの導来圏』の補題 \ref{perfect-lemma-flat-proper-perfect-direct-image-general})、
+$K/k$ が体拡大である場合の $T = \Spec(K)$ に帰着する。
+このとき $\mathcal{L}$ は $X_K$ 上の可逆層であり、
+$H^0(X_K, \mathcal{L}) = K$ かつ $H^1(X_K, \mathcal{L}) = 0$ である。したがって
+$$
+\deg(\mathcal{L}) = \chi(X_K, \mathcal{L}) - \chi(X_K, \mathcal{O}_{X_K})
+= 1 - (1 - g) = g
+$$
+である。『多様体』の定義 \ref{varieties-definition-degree-invertible-sheaf} を参照せよ。
+証明を終えるには、$\mathcal{L}$ の非零切断が $X_K$ 上の有効 Cartier 因子を
+定めることを示せばよい。これは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-twist-with-general-divisor}
+$k$ を可分閉体とし、$X$ を $k$ 上の種数 $g$ の滑らかな射影曲線とする。
+$K/k$ を体拡大とし、$\mathcal{L}$ を $X_K$ 上の可逆層とする。このとき、
+$X$ 上の可逆層 $\mathcal{L}_0$ であって
+$\dim_K H^0(X_K,
+\mathcal{L} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}_0|_{X_K}) = 1$ かつ
+$\dim_K H^1(X_K,
+\mathcal{L} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}_0|_{X_K}) = 0$
+となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+この証明は『多様体』の補題 \ref{varieties-lemma-general-degree-g-line-bundle} の証明の変形である。
+先にそちらの証明を読むことを勧める。
+
+\medskip\noindent
+まず豊富な可逆層 $\mathcal{L}_0$ を選び、ある $n \gg 0$ に対して
+$\mathcal{L}$ を
+$\mathcal{L} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}_0^{\otimes n}|_{X_K}$
+で置き換える。これにより、$H^0(X_K, \mathcal{L}) \not = 0$ かつ
+$H^1(X_K, \mathcal{L}) = 0$ と仮定してよいことになる。実際、消滅は
+『スキームのコホモロジー』の補題 \ref{coherent-lemma-vanshing-gives-ample} から従い、非消滅はテンソル積の次数が
+$\gg 0$ であることから従う。
+$t = \dim_K H^0(X_K, \mathcal{L})$ に関する降下帰納法で証明を終える。
+基底の場合 $t = 1$ は自明である。$t > 1$ と仮定する。
+
+\medskip\noindent
+$X$ の $k$-有理点 $x$ に対し、その逆像 $x_K$ は $X_K$ の
+$K$-有理点である。また『多様体』の補題 \ref{varieties-lemma-smooth-separable-closed-points-dense} により、
+$k$-有理点は無限に存在する。したがって、点 $x_K$ の族は $X_K$ で
+Zariski 稠密である。
+
+\medskip\noindent
+$s \in H^0(X_K, \mathcal{L})$ を非零とする。前段落から、$s$ が $x_K$ で
+消えないような $k$-有理点 $x$ が存在する。『多様体』の補題 \ref{varieties-lemma-regular-point-on-curve} と同様に、
+$\mathcal{I}$ を $i : x_K \to X_K$ のイデアル層とする。短完全列
+$$
+0 \to \mathcal{I} \otimes_{\mathcal{O}_{X_K}} \mathcal{L} \to
+\mathcal{L} \to i_*i^*\mathcal{L} \to 0
+$$
+を考える。$H^0(X_K, i_*i^*\mathcal{L}) = H^0(x_K, i^*\mathcal{L})$ は
+$K$ 上 $1$ 次元である。$s$ は $x$ で消えないので、
+$$
+H^0(X_K, \mathcal{L}) \longrightarrow H^0(X, i_*i^*\mathcal{L})
+$$
+は全射である。よって
+$\dim_K H^0(X_K, \mathcal{I} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}) = t - 1$
+となる。最後に、コホモロジーの長完全列から
+$H^1(X_K, \mathcal{I} \otimes_{\mathcal{O}_{X_K}} \mathcal{L}) = 0$
+も分かり、帰納段階の証明が完了する。
+\end{proof}
+
+\begin{proposition}
+\label{pic-proposition-pic-curve}
+$k$ を可分閉体とし、$X$ を $k$ 上の滑らかな射影曲線とする。
+Picard 函手 $\Picardfunctor_{X/k}$ は表現可能である。
+\end{proposition}
+
+\begin{proof}
+$k$ は可分閉なので、$X$ の $k$-有理点 $\sigma$ が存在する。
+『多様体』の補題 \ref{varieties-lemma-smooth-separable-closed-points-dense} を参照せよ。
+上で述べたように、$\sigma$ に沿って自明な可逆加群を分類する函手
+$\Picardfunctor_{X/k, \sigma}$ が表現可能であることを示せば十分である。
+そのため補題 \ref{pic-lemma-criterion} の条件 (1)、(2)(a)、(2)(b)、
+および (2)(c) を確認する。
+
+\medskip\noindent
+函手 $\Picardfunctor_{X/k, \sigma}$ は $\Picardfunctor_{X/k}$ と同型なので、
+fppf 位相に関する層の条件を満たす。より正確には、補題 \ref{pic-lemma-flat-geometrically-connected-fibres-with-section} の証明において
+$\Picardfunctor_{X/k, \sigma}$ に対する層の条件を示した、というべきであり、
+この補題は補題 \ref{pic-lemma-check-conditions} により適用できる。
+これで条件 (1) が証明された。
+
+\medskip\noindent
+部分函手として補題 \ref{pic-lemma-define-open} で定義した $F$ を用いる。
+条件 (2)(b) が従う。条件 (2)(a) は補題 \ref{pic-lemma-open-representable} であり、条件 (2)(c) は補題 \ref{pic-lemma-twist-with-general-divisor} である。
+\end{proof}
+
+\noindent
+実際、上の証明からはさらに多くの情報が得られるので、ここにまとめておく。
+
+\begin{lemma}
+\label{pic-lemma-picard-pieces}
+$k$ を可分閉体とし、$X$ を $k$ 上の種数 $g$ の滑らかな射影曲線とする。
+\begin{enumerate}
+\item $\underline{\Picardfunctor}_{X/k}$ は、$g$ 次元の滑らかな固有多様体
+$\underline{\Picardfunctor}^d_{X/k}$ の非交和である。
+\item $\underline{\Picardfunctor}^d_{X/k}$ の $k$-点は、次数 $d$ の可逆
+$\mathcal{O}_X$-加群に対応する。
+\item $\underline{\Picardfunctor}^0_{X/k}$ は開かつ閉な部分群スキームである。
+\item $d \geq 0$ に対して標準射
+$\gamma_d :
+\underline{\Hilbfunctor}^d_{X/k} \to \underline{\Picardfunctor}^d_{X/k}$
+が存在する。
+\item 射 $\gamma_d$ は $d \geq g$ に対して全射であり、
+$d \geq 2g - 1$ に対して滑らかである。
+\item 射
+$\underline{\Hilbfunctor}^g_{X/k} \to \underline{\Picardfunctor}^g_{X/k}$
+は双有理である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$ の $k$-有理点 $\sigma$ を選ぶ。$\Picardfunctor_{X/k}$ は函手
+$\Picardfunctor_{X/k, \sigma}$ と同型であることを思い出そう。
+『スキームの導来圏』の補題 \ref{perfect-lemma-chi-locally-constant-geometric} により、各
+$d \in \mathbf{Z}$ に対して開部分函手
+$$
+\Picardfunctor^d_{X/k, \sigma} \subset \Picardfunctor_{X/k, \sigma}
+$$
+が存在する。$k$ 上のスキーム $T$ におけるその値は、
+$\chi(X_t, \mathcal{L}_t) = d + 1 - g$ を満たす
+$\mathcal{L} \in \Picardfunctor_{X/k, \sigma}(T)$ からなり、さらに fppf 層として
+$$
+\Picardfunctor_{X/k, \sigma} =
+\coprod\nolimits_{d \in \mathbf{Z}} \Picardfunctor^d_{X/k, \sigma}
+$$
+である。したがって、命題 \ref{pic-proposition-pic-curve} により存在する
+スキーム $\underline{\Picardfunctor}_{X/k}$ には、対応する分解
+$$
+\underline{\Picardfunctor}_{X/k, \sigma} =
+\coprod\nolimits_{d \in \mathbf{Z}} \underline{\Picardfunctor}^d_{X/k, \sigma}
+$$
+がある。ここで $\underline{\Picardfunctor}^d_{X/k, \sigma}$ の点は、
+$X$ 上の次数 $d$ の可逆加群の同型類に対応する。
+
+\medskip\noindent
+$d \geq 0$ を固定する。$\underline{\Hilbfunctor}^d_{X/k} \times_k X$ 上の
+可逆層 $\mathcal{O}(D_{univ})$
+(注意 \ref{pic-remark-universal-object-hilb-d}) から、Yoneda の補題
+(『圏論』の補題 \ref{categories-lemma-yoneda}) により射
+$$
+\gamma_d :
+\underline{\Hilbfunctor}^d_{X/k}
+\longrightarrow
+\underline{\Picardfunctor}^d_{X/k}
+$$
+が得られる。命題 \ref{pic-proposition-pic-curve} および補題 \ref{pic-lemma-open-representable} における $X/k$ の Picard 函手の表現可能性の
+証明から、$\gamma_g$ は $\underline{\Hilbfunctor}^g_{X/k}$ のある空でない
+開部分上で開埋め込みを誘導する。さらにその証明によれば、群スキーム
+$\underline{\Picardfunctor}_{X/k}$ の $k$-有理点によるこの開部分の平行移動は
+開被覆を定める。$\underline{\Hilbfunctor}^g_{X/K}$ は $k$ 上滑らかな
+$g$ 次元スキームなので (命題 \ref{pic-proposition-hilb-d})、群スキーム
+$\underline{\Picardfunctor}_{X/k}$ は $k$ 上滑らかな $g$ 次元スキームである。
+
+
+\medskip\noindent
+『亜群スキーム』の補題 \ref{groupoids-lemma-group-scheme-over-field-separated} により、
+$\underline{\Picardfunctor}_{X/k}$ は分離的である。したがって各
+$d \geq 0$ に対し、$\gamma_d$ の像は $k$ 上の固有多様体である
+(『スキームの射』の補題 \ref{morphisms-lemma-scheme-theoretic-image-is-proper})。
+
+\medskip\noindent
+$d \geq g$ とする。任意の体拡大 $K/k$ と次数 $d$ の可逆
+$\mathcal{O}_{X_K}$-加群 $\mathcal{L}$ に対して
+$\chi(X_K, \mathcal{L}) = d + 1 - g > 0$ である。よって $\mathcal{L}$ は
+非零切断をもち、次数 $d$ のある因子 $D \subset X_K$ に対して
+$\mathcal{L} = \mathcal{O}_{X_K}(D)$ となる。したがって $\gamma_d$ は全射である。
+
+\medskip\noindent
+以上の事実を合わせると、$d \geq g$ に対して
+$\underline{\Picardfunctor}^d_{X/k}$ は固有である。これで (2) の証明が
+完了する。実際、$\underline{\Picardfunctor}^d_{X/k}$ が $d \geq g$ に対して
+固有であることが分かれば、平行移動によりすべての
+$\underline{\Picardfunctor}^d_{X/k}$ が固有となる。
+
+\medskip\noindent
+残るのは、$d \geq 2g - 1$ に対して $\gamma_d$ が滑らかであることの証明である。
+次数 $d$ の可逆 $\mathcal{O}_X$-加群 $\mathcal{L}$ を考える。このとき、
+$\mathcal{L}$ に対応する点上のファイバーは、その自然なスキーム構造を備えた
+$$
+Z = \{D \subset X \mid \mathcal{O}_X(D) \cong \mathcal{L}\} \subset
+\underline{\Hilbfunctor}^d_{X/k}
+$$
+である。同型 $\mathcal{O}_X(D) \to \mathcal{L}$ は非零スカラー倍を除いて
+定まるので、標準切断 $1 \in \mathcal{O}_X(D)$ は非零スカラー倍を除いて
+定まる切断 $s \in \Gamma(X, \mathcal{L})$ に写る。このようにして射
+$$
+Z \longrightarrow
+\text{Proj}(\text{Sym}(\Gamma(X, \mathcal{L})^*))
+$$
+を得る（双対が現れるのは本書の規約による）。この射は同型である。
+実際、$\mathcal{L}$ の切断から対応する有効 Cartier 因子をとることにより、
+表示された射の逆を構成できる。厳密な定式化と証明は省略する。
+『多様体』の補題 \ref{varieties-lemma-vanishing-degree-2g-and-1-line-bundle} により、次数
+$d \geq 2g - 1$ のすべての $\mathcal{L}$ に対して
+$\dim H^0(X, \mathcal{L}) = d + 1 - g$ なので、
+$\text{Proj}(\text{Sym}(\Gamma(X, \mathcal{L})^*))
+\cong \mathbf{P}^{d - g}_k$ である。
+したがって $\dim(Z) = \dim(\mathbf{P}^{d - g}_k) = d - g$ である。
+ゆえに射 $\gamma_d$ のすべてのファイバーの次元は、
+$\underline{\Hilbfunctor}^d_{X/k}$ と $\underline{\Picardfunctor}^d_{X/k}$ の
+次元の差に等しい。したがって $\gamma_d$ は平坦である
+(『可換代数』の補題 \ref{algebra-lemma-CM-over-regular-flat})。
+さらにファイバーは滑らかなので、『スキームの射』の補題 \ref{morphisms-lemma-smooth-flat-smooth-fibres} により $\gamma_d$ は滑らかである。
+\end{proof}
+
+
+
+
+
+\section{Picard 群に関する若干の注意}
+\label{pic-section-remarks-picard}
+
+\noindent
+本節では『多様体』の第 \ref{varieties-section-picard-groups} 節の議論を
+引き継ぎ、Algebraic 『代数曲線』の第 \ref{curves-section-torsion-in-pic} 節でさらに続ける。
+
+\begin{lemma}
+\label{pic-lemma-pic-descends}
+$k$ を体とし、$X$ を $k$ 上の準コンパクトかつ準分離的なスキームで
+$H^0(X, \mathcal{O}_X) = k$ を満たすものとする。$X$ が $k$-有理点をもつならば、
+任意の Galois 拡大 $k'/k$ に対して
+$$
+\Pic(X) = \Pic(X_{k'})^{\text{Gal}(k'/k)}
+$$
+である。さらに、$\Pic(X_{k'})$ 上の $\text{Gal}(k'/k)$ の作用は連続である。
+\end{lemma}
+
+\begin{proof}
+$\text{Gal}(k'/k) = \text{Aut}(k'/k)$ は $\Spec(k')$ に右から作用し、
+したがって $X_{k'} = X \times_{\Spec(k)} \Spec(k')$ にも右から作用する。
+$\Pic(-)$ は反変函手なので、$\Pic(X_{k'})$ には左から作用する。
+$k'/k$ が無限 Galois 拡大ならば、有限 Galois 拡大のフィルター付き余極限として
+$k' = \colim k'_\lambda$ と書ける
+(『体』の補題 \ref{fields-lemma-infinite-galois-limit})。
+このとき $X_{k'} = \lim X_{k_\lambda}$
+(『スキームの極限』の第 \ref{limits-section-limits} 節と同様) であり、『スキームの極限』の補題 \ref{limits-lemma-descend-invertible-modules} により
+$$
+\Pic(X_{k'}) = \colim \Pic(X_{k_\lambda})
+$$
+を得る。また『多様体』の補題 \ref{varieties-lemma-change-fields-pic} により、このアーベル群系の遷移写像は単射である。
+したがって $\Pic(X_{k'})$ の各元は、ある開部分群
+$\text{Gal}(k'/k_\lambda)$ によって固定される。これは作用が連続であることに
+ほかならない。遷移写像の単射性から、固定点に関する主張は $k'/k$ が有限
+Galois 拡大の場合に証明すれば十分である。
+
+\medskip\noindent
+$k'/k$ を Galois 群 $G = \text{Gal}(k'/k)$ をもつ有限 Galois 拡大とする。
+$\mathcal{L}$ を $G$ に固定される $\Pic(X_{k'})$ の元とする。
+Galois 降下 (『降下』の補題 \ref{descent-lemma-galois-descent}) を用いて、
+$\mathcal{L}$ が $X$ 上の可逆層の引き戻しであることを示す。
+$f_\sigma = \text{id}_X \times \Spec(\sigma) : X_{k'} \to X_{k'}$ であり、
+$\sigma$ は $f_\sigma$ による引き戻しを通じて $\Pic(X_{k'})$ に作用することを
+思い出そう。$\mathcal{L}$ は $G$-作用で固定されるので、各 $\sigma \in G$ に
+対して同型 $\varphi_\sigma : \mathcal{L} \to f_\sigma^*\mathcal{L}$ を選べる。
+問題は、コサイクル条件
+$\varphi_{\sigma\tau} = f_\sigma^*\varphi_\tau \circ \varphi_\sigma$ を満たすように
+$\varphi_\sigma$ を選べるかどうかがまだ分からないことである。これが可能で
+あることを示すため、$X$ が $k$-有理点 $x \in X(k)$ をもつことを用いる。
+もちろん $x$ は同様に、すべての $\sigma$ に対して $f_\sigma$ に固定される
+$k'$-有理点 $x' \in X_{k'}$ を定める。$x'$ における $\mathcal{L}$ のファイバーの
+非零元 $s$ を選ぶ。このファイバーは $1$ 次元の
+$k' = \kappa(x')$-ベクトル空間
+$$
+\mathcal{L}_{x'} \otimes_{\mathcal{O}_{X_{k'}, x'}} \kappa(x').
+$$
+である。すると $f_\sigma^*s$ は、$x'$ における
+$f_\sigma^*\mathcal{L}$ のファイバーの非零元である。$\varphi_\sigma$ を
+$(k')^*$ の元倍できるので、$\varphi_\sigma$ が $s$ を $f_\sigma^*s$ に写すと
+仮定してよい。このとき $\varphi_{\sigma\tau}$ と
+$f_\sigma^*\varphi_\tau \circ \varphi_\sigma$ はともに $s$ を
+$f_{\sigma\tau}^*s = f_\tau^*f_\sigma^*s$ に写す。
+$H^0(X_{k'}, \mathcal{O}_{X_{k'}}) = k'$ なので、この二つの同型は一致しなければ
+ならない（一方は他方の大域単元倍であり、$x'$ で一致する）。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{pic-lemma-torsion-descends}
+$k$ を標数 $p > 0$ の体とし、$X$ を $k$ 上の準コンパクトかつ準分離的な
+スキームで $H^0(X, \mathcal{O}_X) = k$ を満たすものとする。
+$n$ を $p$ と互いに素な整数とする。このとき任意の純非分離拡大 $k'/k$ に対して写像
+$$
+\Pic(X)[n] \longrightarrow \Pic(X_{k'})[n]
+$$
+は全単射である。
+\end{lemma}
+
+\begin{proof}
+まず『多様体』の補題 \ref{varieties-lemma-change-fields-pic} により、写像
+$\Pic(X) \to \Pic(X_{k'})$ は単射である。したがって、補題の写像が全射である
+ことを示せばよい。$\mathcal{L}$ を、$\Pic(X_{k'})$ における位数が $n$ を割る
+可逆 $\mathcal{O}_{X_{k'}}$-加群とする。可逆加群の同型
+$\alpha : \mathcal{L}^{\otimes n} \to \mathcal{O}_{X_{k'}}$ を選ぶ。
+対 $(\mathcal{L}, \alpha)$ を $X$ に降下できることを示す。
+
+\medskip\noindent
+$A = k' \otimes_k k'$ とおく。$k'/k$ は純非分離なので、乗法写像
+$A \to k'$ の核は $A$ の局所冪零イデアル $I$ である。
+$$
+X_A = X \times_{\Spec(k)} \Spec(A) = X_{k'} \times_X X_{k'}
+$$
+には二つの射影 $\text{pr}_i : X_A \to X_{k'}$、$i = 0, 1$ があり、
+これらは $A/I$ 上で一致する。したがって可逆加群
+$\mathcal{L}_i = \text{pr}_i^*\mathcal{L}$ は閉部分スキーム
+$X_{A/I} = X_{k'}$ 上で一致する。$X_{A/I} \to X_A$ は肥厚であり、
+$\mathcal{L}_i$ は $n$-torsion なので、『射の続論』の補題 \ref{more-morphisms-lemma-torsion-pic-thickening} により同型
+$\varphi : \mathcal{L}_0 \to \mathcal{L}_1$ が存在する。
+$\varphi$ は $I$ を法として恒等写像に還元されるように選べる。実際、
+$H^0(X, \mathcal{O}_X) = k$ から『スキームのコホモロジー』の補題 \ref{coherent-lemma-flat-base-change-cohomology} により
+$H^0(X_{k'}, \mathcal{O}_{X_{k'}}) = k'$ が従い、$A \to k'$ は全射なので、
+$\varphi$ を $A$ の適当な元倍して調整できる。写像
+$$
+\lambda : \mathcal{O}_{X_A}
+\xrightarrow{\text{pr}_0^*\alpha^{-1}}
+\mathcal{L}_0^{\otimes n}
+\xrightarrow{\varphi^{\otimes n}}
+\mathcal{L}_1^{\otimes n}
+\xrightarrow{\text{pr}_0^*\alpha}
+\mathcal{O}_{X_A}
+$$
+を考える。$H^0(X_A, \mathcal{O}_{X_A}) = A$ なので（参照は上と同じ）、
+$\lambda$ を $A$ の元とみなせる。$\varphi$ は $I$ を法として恒等写像に
+還元されるから、$\lambda = 1 \bmod I$ である。すると $1 + I$ の中に
+$\lambda$ の一意な $n$ 乗根が存在し
+(『可換代数』の補題 \ref{algebra-lemma-lift-nth-roots})、その逆を
+$\varphi$ に掛ければ $\lambda = 1$ となる。
+$(\mathcal{L}, \varphi)$ は fpqc 被覆 $\{X_{k'} \to X\}$ に関する降下データであると
+主張する (『降下』の定義 \ref{descent-definition-descent-datum-quasi-coherent})。これが正しければ、
+『降下』の命題 \ref{descent-proposition-fpqc-descent-quasi-coherent} により
+$\mathcal{L}$ はある可逆 $\mathcal{O}_X$-加群 $\mathcal{N}$ の引き戻しである。
+Picard 群上の写像の単射性から、$\mathcal{N}$ は $\mathcal{L}$ と同じ位数をもつ
+$\Pic(X)$ の torsion 元である。
+
+\medskip\noindent
+主張の証明。そのためには
+$$
+\text{pr}_{12}^*\varphi \circ
+\text{pr}_{01}^*\varphi =
+\text{pr}_{02}^*\varphi
+\quad\text{on}\quad
+X_{k'} \times_X X_{k'} \times_X X_{k'} = X_{k' \otimes_k k' \otimes_k k'}
+$$
+を確認しなければならない。前と同様に、対角射
+$\Delta : X_{k'} \to X_{k' \otimes_k k' \otimes_k k'}$ は肥厚である。
+等式の左辺と右辺は、$p_0^*\alpha$ および $p_2^*\alpha$ と両立する写像
+$a, b : p_0^*\mathcal{L} \to p_2^*\mathcal{L}$ である。ここで
+$p_i : X_{k' \otimes_k k' \otimes_k k'} \to X_{k'}$ は射影である。
+さらに、$a, b$ の $\Delta$ による引き戻しは同じ写像である。
+アフィン局所的に局所自明化をとると、これは $a, b$ が可逆関数による乗法で
+与えられ、その関数が局所冪零イデアルを法として同じ関数に還元され、かつ
+同じ $n$ 乗をもつことを意味する。したがって『可換代数』の補題 \ref{algebra-lemma-lift-nth-roots} により、これらの関数は等しい。
+\end{proof}

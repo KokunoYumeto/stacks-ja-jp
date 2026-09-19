@@ -1,0 +1,6257 @@
+% Generated mechanically from frozen input p07/ja/models.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{54}
+\chapter{半安定還元}
+
+
+
+\phantomsection
+\label{models-section-phantom}
+
+
+\section{序論}
+\label{models-section-introduction}
+
+\noindent
+本章では，曲線に対する半安定還元定理を証明する．
+そのために，Artin と Winters が論文 \cite{Artin-Winters} で
+用いた方法を採用する．
+
+\medskip\noindent
+実際，非特異化に関する結果を一切用いずに，曲線の半安定還元定理を
+証明できることが分かっている．すなわち，Mumford が発展させた
+幾何学的不変式論（GIT）を用いて，半安定曲線のモジュライの存在性と
+射影性を確立する方法がある（\cite{GIT} を参照）．この方法を推進した
+Gieseker は，講義録 \cite{Gieseker}\footnote{Gieseker の講義録は
+代数閉体上で書かれているが，同じ方法は $\mathbf{Z}$ 上でも機能する．}
+において完全な結果を証明した．
+% P07-ERR-0452: frozen English splits the standard adjective “counterintuitive”; Japanese renders the intended sense.
+これは実に驚くべき成果である．正の次元の基底上の曲線族を本格的に
+調べることなく，このような結果を証明できるというのは，いささか
+直観に反するように思われるからである．
+
+\medskip\noindent
+歴史的には，曲線の半安定還元定理の最初の証明は Deligne と Mumford の
+論文 \cite{DM} に見いだされる．そこでは，問題をアーベル多様体の場合へ
+帰着することによって定理を証明している．この場合は Grothendieck らの
+研究によって当時すでに知られていた（\cite{SGA7-I} および
+\cite{SGA7-II} を参照）．
+% P07-ERR-0453: frozen English has an unmatched closing parenthesis after the second citation; Japanese punctuation is balanced.
+アーベル多様体の半安定還元定理は N\'eron モデルの理論を用い，
+この理論はさらに，基底上の双有理群法則の取扱いに依拠する．
+
+\medskip\noindent
+% P07-ERR-0454: frozen English redundantly says “desingularization of singularities”; Japanese uses the intended surface-singularity term.
+Artin と Winters の論文における方法は，正則モデルを得るために
+曲面の特異点解消を用いる．正則モデルの存在を前提とすれば，証明は
+特殊ファイバーに生じ得る形を解析し，体上の $1$ 次元スキームの
+Picard 群の捩れに関する不等式を用いて結論することからなる．
+% P07-ERR-0455: frozen English uses “a paper of Saito”; Japanese attributes the paper directly.
+同様の議論は Saito の論文 \cite{Saito} にも見られる．Saito は
+\'etale コホモロジーを直接用い，慣性群の $\ell$ 進 \'etale
+コホモロジーへの作用によって半安定還元を特徴づけるという，
+より強い結果を得ている．
+
+\medskip\noindent
+この定理を証明する別の方法として，剛体解析幾何の手法を用いることも
+できる．これについては \cite{vanderPut} および
+\cite{Arzdorf-Wewers} を参照されたい．
+
+\medskip\noindent
+Temkin の論文 \cite{Temkin} は付値論的な手法を用いており
+（さらに多くの結果も証明している），その付録 A は各種の証明と
+% P07-ERR-0456: frozen English leaves the compound modifier “2 dimensional” unhyphenated; Japanese renders its ordinary mathematical sense.
+$2$ 次元スキームの特異点解消との関係について，優れた概観を与えている．
+
+\medskip\noindent
+もう一つの概説として，Ahmed Abbes による論文
+\cite{Abbes-ssr} も参照に値する．
+
+
+
+
+
+
+\section{線形代数}
+\label{models-section-linear-algebra}
+
+\noindent
+後で用いるいくつかの補題を述べる．
+
+\begin{lemma}
+\label{models-lemma-recurring}
+\begin{reference}
+\cite[定理 I]{Taussky}
+\end{reference}
+$A = (a_{ij})$ を複素 $n \times n$ 行列とする．
+\begin{enumerate}
+\item $|a_{ii}| > \sum_{j \not = i} |a_{ij}|$ が各 $i$ に対して成り立つならば，
+$\det(A)$ は零でない．
+\item 実ベクトル $m = (m_1, \ldots, m_n)$ が存在して $m_i > 0$ を満たし，
+$|a_{ii} m_i| > \sum_{j \not = i} |a_{ij}m_j|$ が各 $i$ に対して
+成り立つならば，$\det(A)$ は零でない．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A$ が (1) のとおりで $\det(A) = 0$ ならば，非零ベクトル
+$z$ で $Az = 0$ を満たすものが存在する．$r$ を $|z_r|$ が最大となるように選ぶ．このとき
+$$
+|a_{rr} z_r| = |\sum\nolimits_{k \not = r} a_{rk}z_k| \leq
+\sum\nolimits_{k \not = r} |a_{rk}||z_k| \leq
+|z_r| \sum\nolimits_{k \not = r} |a_{rk}| < |a_{rr}||z_r|
+$$
+となり，矛盾する．(2) を示すには，行列 $(a_{ij}m_j)$ に (1) を適用すればよい．
+その行列式は $m_1 \ldots m_n \det(A)$ である．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-recurring-real}
+$A = (a_{ij})$ を実 $n \times n$ 行列で，$a_{ij} \geq 0$ が
+$i \not = j$ に対して成り立つものとする．また，$m = (m_1, \ldots, m_n)$ を
+$m_i > 0$ を満たす実ベクトルとする．$I \subset \{1, \ldots, n\}$ に対し，
+$x_I \in \mathbf{R}^n$ を，その第 $i$ 成分が $m_i$（$i \in I$ のとき），
+それ以外のとき $0$ であるベクトルとする．もし
+\begin{equation}
+\label{models-equation-ineq}
+-a_{ii}m_i \geq \sum\nolimits_{j \not = i} a_{ij}m_j
+\end{equation}
+が各 $i$ に対して成り立つならば，$\Ker(A)$ は，次を満たすベクトル
+$x_I$ たちで張られるベクトル空間である：
+\begin{enumerate}
+\item $a_{ij} = 0$ が $i \in I$, $j \not \in I$ に対して成り立ち，
+\item $i \in I$ に対して (\ref{models-equation-ineq}) で等号が成り立つ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$a_{ij}$ を $a_{ij}m_j$ で置き換えることにより，$m_i = 1$ と
+すべての $i$ に対して仮定してよい．(1) と (2) を満たす
+$I \subset \{1, \ldots, n\}$ に対しては，簡単な計算により $x_I$ が
+$A$ の核に属することが分かる．逆に，$x = (x_1, \ldots, x_n) \in
+\mathbf{R}^n$ を $A$ の核に属する非零ベクトルとする．$x$ の非零成分の
+個数に関する帰納法により，$x$ が (1) と (2) を満たすベクトル $x_I$
+たちの張る空間に属することを示す．$I \subset \{1, \ldots, n\}$ を，
+添字 $r$ で $|x_r|$ が最大となるものの集合とする．$r \in I$ に対して
+$$
+|a_{rr} x_r| = |\sum\nolimits_{k \not = r} a_{rk}x_k| \leq
+\sum\nolimits_{k \not = r} a_{rk}|x_k| \leq
+|x_r| \sum\nolimits_{k \not = r} a_{rk} \leq |a_{rr}||x_r|
+$$
+である．したがって，すべての箇所で等号が成り立つ．特に，
+$a_{rk} = 0$ が $r \in I$，$k \not \in I$ に対して成り立ち，$r \in I$ に対して
+(\ref{models-equation-ineq}) で等号が成り立つ．そこで $x_I$ の適当な倍数を
+$x$ から引けば，非零成分の個数を減らせることが分かる．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-recurring-symmetric-real}
+$A = (a_{ij})$ を対称実 $n \times n$ 行列で，$a_{ij} \geq 0$ が
+$i \not = j$ に対して成り立つものとする．また，$m = (m_1, \ldots, m_n)$ を
+$m_i > 0$ を満たす実ベクトルとする．次を仮定する：
+\begin{enumerate}
+\item $Am = 0$,
+\item 真の非空部分集合 $I \subset \{1, \ldots, n\}$ で，
+$a_{ij} = 0$ が $i \in I$，$j \not \in I$ に対して成り立つものは存在しない．
+\end{enumerate}
+このとき $x^t A x \leq 0$ であり，等号が成り立つことと，$x = qm$
+となるある $q \in \mathbf{R}$ が存在することは同値である．
+\end{lemma}
+
+\begin{proof}[第1の証明]
+$a_{ij}$ を $a_{ij}m_im_j$ で置き換えることにより，$m_i = 1$ と
+すべての $i$ に対して仮定してよい．条件 (1) は，
+$-a_{ii} = \sum_{j \not = i} a_{ij}$ がすべての $i$ に対して
+成り立つことを意味する．
+$x^tAx = \sum_{i, j} x_ia_{ij}x_j$ であったことを思い出そう．すると
+% P07-ERR-0457 and P07-ERR-0458: frozen expansion has two wrong cross terms and a free diagonal index; formulas remain unchanged.
+\begin{align*}
+\sum\nolimits_{i \not = j} -a_{ij}(x_j - x_i)^2 & =
+\sum\nolimits_{i \not = j} -a_{ij}x_j^2 + 2a_{ij}x_ix_i - a_{ij}x_i^2 \\
+& =
+\sum\nolimits_j a_{jj} x_j^2 +
+\sum\nolimits_{i \not = j} 2a_{ij}x_ix_i +
+\sum\nolimits_j a_{jj} x_i^2 \\
+& = 2x^tAx
+\end{align*}
+これは明らかに $\leq 0$ である．等号が成り立つとし，$I$ を，添字
+$i$ で $x_i \not = x_1$ となるものの集合とする．このとき
+$a_{ij} = 0$ が $i \in I$，$j \not \in I$ に対して成り立つ．
+% P07-ERR-0459: frozen proof concludes I is the full set although 1 is not in I; the stated conclusion is retained.
+したがって条件 (2) により $I = \{1, \ldots, n\}$ であり，$x$ は
+$m = (1, \ldots, 1)$ の倍数である．
+\end{proof}
+
+\begin{proof}[第2の証明]
+スペクトル定理により，行列 $A$ の固有値は実数である．すべての固有値が
+$\leq 0$ であると主張する．実際，性質 (1) は，
+$-a_{ii}m_i = \sum_{j \not = i} a_{ij}m_j$ がすべての $i$ に対して
+成り立つことを意味するので，行列 $A' = A - \lambda I$（$\lambda > 0$）は，
+$|a'_{ii}m_i| > \sum a'_{ij}m_j = \sum |a'_{ij}m_j|$ をすべての
+$i$ に対して満たす．
+したがって補題 \ref{models-lemma-recurring} により $A'$ は可逆である．
+これは，対称双線形形式 $x^tAy$ が半負定値，すなわち
+$x^tAx \leq 0$ がすべての $x$ に対して成り立つことを意味する．
+したがって，$A$ の核はベクトル $x$ で $x^tAx = 0$ を満たすものの
+集合に等しい．補題
+\ref{models-lemma-recurring-real} における核の記述から，補題の最後の主張を得る．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-orthogonal-direct-sum}
+$L$ を有限自由 $\mathbf{Z}$ 加群で，整数値対称双線形正定値形式
+$\langle\ ,\ \rangle : L \times L \to \mathbf{Z}$ を備えたものとする．
+$A \subset L$ を $L/A$ が捩れなしとなる
+部分加群とする．
+$B = \{b \in L \mid \langle a, b\rangle = 0,\ \forall a \in A\}$
+とおく．このとき単射
+$$
+A^\#/A \leftarrow L/(A \oplus B) \rightarrow B^\#/B
+$$
+が存在し，その余核は $L^\#/L$ の商である．ここで
+$A^\# = \{a' \in A \otimes \mathbf{Q} \mid
+\langle a, a'\rangle \in \mathbf{Z},\ \forall a \in A\}$
+であり，$B$ および $L$ についても同様に定める．
+\end{lemma}
+
+\begin{proof}
+$L \otimes \mathbf{Q} = A \otimes \mathbf{Q} \oplus B \otimes \mathbf{Q}$
+であることに注意する．これは形式が $A$ 上で非退化だからである
+（正値性による）．射影を
+$\pi_B : L \otimes \mathbf{Q} \to B \otimes \mathbf{Q}$ と書く．
+形式が整数値であるため，$\pi_B(x) \in B^\#$ が $x \in L$ に対して
+成り立つことにも注意する．したがって完全列
+$$
+0 \to A \to L \xrightarrow{\pi_B} B^\# \to Q \to 0
+$$
+を得る．ここで $Q$ は $L \to B^\#$ の余核である．$Q$ は
+$L^\#/L$ の商であることに注意する．実際，写像 $L^\# \to B^\#$ は
+全射である．これは，$\mathbf{Z}$ 加群の写像として分裂する
+$B \to L$ の $\mathbf{Z}$ 線形双対だからである．$A \oplus B$ で割ると
+短完全列
+$$
+0 \to L/(A \oplus B) \to B^\#/B \to Q \to 0
+$$
+を得る．これで補題が証明された．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-coker}
+% P07-ERR-0460: frozen English combines two modules with a singular article; Japanese uses the correct plural construction.
+$L_0$, $L_1$ を有限自由 $\mathbf{Z}$ 加群で，整数値対称双線形正定値形式
+$\langle\ ,\ \rangle : L_i \times L_i \to \mathbf{Z}$ を備えたものとする．
+$\text{d} : L_0 \to L_1$ と
+$\text{d}^* : L_1 \to L_0$ は互いに随伴であるとする．
+$\langle\ ,\ \rangle$ が $L_0$ 上でユニモジュラーならば，同型
+$$
+\Phi :
+\Coker(\text{d}^*\text{d})_{torsion}
+\longrightarrow
+\Im(\text{d})^\#/\Im(\text{d})
+$$
+が存在する．記法は補題 \ref{models-lemma-orthogonal-direct-sum} と同じである．
+\end{lemma}
+
+\begin{proof}
+$x \in L_0$ を，$\Coker(\text{d}^*\text{d})$ の捩れ元の類を表す元とする．
+このとき，ある $a > 0$ に対して $ax = \text{d}^*\text{d}(y)$ と書ける．
+任意の $z \in \Im(\text{d})$ に対し，$z = \text{d}(y')$ と書けば，
+$$
+\langle (1/a)\text{d}(y), z \rangle =
+\langle (1/a)\text{d}(y), \text{d}(y') \rangle =
+\langle x, y' \rangle \in \mathbf{Z}
+$$
+である．ゆえに $(1/a)\text{d}(y) \in \Im(\text{d})^\#$ である．
+$\Phi(x) = (1/a)\text{d}(y) \bmod \Im(\text{d})$ と定める．
+$\Phi$ が良定義で，加法的かつ単射であることの証明は省略する．
+
+\medskip\noindent
+$\Phi$ が全射であることを示すため，$z \in \Im(\text{d})^\#$ とする．
+すると $z$ は線形写像 $L_0 \to \mathbf{Z}$ を，規則
+$x \mapsto \langle z, \text{d}(x)\rangle$ により定める．仮定により $L_0$ 上の対は
+ユニモジュラーなので，ある $x' \in L_0$ が存在して，
+$\langle x', x \rangle = \langle z, \text{d}(x)\rangle$ がすべての
+$x \in L_0$ に対して成り立つ．特に，$x'$ と $\Ker(\text{d})$ との対は零である．
+$\Im(\text{d}^*\text{d}) \otimes \mathbf{Q}$ は
+$\Ker(\text{d}) \otimes \mathbf{Q}$ の直交補空間なので，これは $x'$ が
+$\Coker(\text{d}^*\text{d})$ の捩れ元の類を定めることを意味する．
+$\Phi(x') = z$ と主張する．実際，$a x' = \text{d}^*\text{d}(y)$ と，
+ある $y \in L_0$ および $a > 0$ を用いて書く．任意の $x \in L_0$ に対して
+$$
+\langle z, \text{d}(x)\rangle =
+\langle x', x \rangle =
+\langle (1/a)\text{d}^*\text{d}(y), x \rangle =
+\langle (1/a)\text{d}(y),\text{d}(x) \rangle
+$$
+を得る．したがって $z = \Phi(x')$ であり，証明は完了する．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-recurring-symmetric-integer}
+$A = (a_{ij})$ を対称 $n \times n$ 整数行列とし，$a_{ij} \geq 0$ が
+$i \not = j$ に対して成り立つとする．また，$m = (m_1, \ldots, m_n)$ を
+$m_i > 0$ を満たす整数ベクトルとする．次を仮定する：
+\begin{enumerate}
+\item $Am = 0$,
+\item 真の非空部分集合 $I \subset \{1, \ldots, n\}$ で，$a_{ij} = 0$ が
+$i \in I$ および $j \not \in I$ に対して成り立つものは存在しない．
+\end{enumerate}
+$e$ を，対 $(i, j)$ のうち $i < j$ かつ $a_{ij} > 0$ となるものの個数とする．
+このとき，素数 $\ell$ がすべての $a_{ij}$ および $m_i$ と互いに素ならば，
+$$
+\dim_{\mathbf{F}_\ell}(\Coker(A)[\ell]) \leq 1 - n + e
+$$
+が成り立つ．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-recurring-symmetric-real} により，$A$ の階数は $n - 1$
+である．合成
+$$
+\mathbf{Z}^{\oplus n} \xrightarrow{\text{diag}(m_1, \ldots, m_n)}
+\mathbf{Z}^{\oplus n} \xrightarrow{(a_{ij})}
+\mathbf{Z}^{\oplus n} \xrightarrow{\text{diag}(m_1, \ldots, m_n)}
+\mathbf{Z}^{\oplus n}
+$$
+の行列は $a_{ij}m_im_j$ である．$\ell$ に課した条件により，最初と
+最後の写像の余核は位数が $\ell$ と互いに素な捩れ群である．したがって，
+成分が $a_{ij}m_im_j$ である行列について補題を証明すれば十分である．
+ゆえに $m = (1, \ldots, 1)$ と仮定してよい．
+
+\medskip\noindent
+$m = (1, \ldots, 1)$ と仮定する．$V = \{1, \ldots, n\}$ および
+$E = \{(i, j) \mid i < j\text{ かつ }a_{ij} > 0\}$ とおく．
+$e = (i, j) \in E$ に対して $a_e = a_{ij}$ とおく．また，写像
+$s, t : E \to V$ を $s(i, j) = i$ および $t(i, j) = j$ により定める．
+$\mathbf{Z}(V) = \bigoplus_{i \in V} \mathbf{Z}i$ および
+$\mathbf{Z}(E) = \bigoplus_{e \in E} \mathbf{Z}e$
+とおく．$\mathbf{Z}(V)$ および $\mathbf{Z}(E)$ 上の整数値対称正定値対を
+$$
+\langle i, i \rangle = 1\text{，}i \in V\text{ に対して}, \quad
+\langle e, e \rangle = a_e\text{，}e \in E\text{ に対して}
+$$
+とし，その他のすべての対を零と定める．写像
+$$
+\text{d} : \mathbf{Z}(V) \to \mathbf{Z}(E), \quad
+i \longmapsto
+\sum\nolimits_{e \in E,\ s(e) = i} e - \sum\nolimits_{e \in E,\ t(e) = i} e
+$$
+および
+$$
+\text{d}^*(e) = a_e(s(e) - t(e))
+$$
+を考える．計算により
+% P07-ERR-0461: frozen display switches from the defined \text{d} to a plain italic d; the mathematical token is retained.
+$$
+\langle d(x), y\rangle = \langle x, \text{d}^*(y) \rangle
+$$
+を得る．言い換えれば，$\text{d}$ と $\text{d}^*$ は互いに随伴である．
+次に計算すると
+\begin{align*}
+\text{d}^*\text{d}(i)
+& = 
+\text{d}^*(
+\sum\nolimits_{e \in E,\ s(e) = i} e - \sum\nolimits_{e \in E,\ t(e) = i} e) \\
+& =
+\sum\nolimits_{e \in E,\ s(e) = i} a_e(s(e) - t(e)) -
+\sum\nolimits_{e \in E,\ t(e) = i} a_e(s(e) - t(e))
+\end{align*}
+$i$ の，$\text{d}^*\text{d}(i)$ における係数は
+$$
+\sum\nolimits_{e \in E,\ s(e) = i} a_e +
+\sum\nolimits_{e \in E,\ t(e) = i} a_e = - a_{ii}
+$$
+である．なぜなら $\sum_j a_{ij} = 0$ であり，
+$j \not = i$ の，$\text{d}^*\text{d}(i)$ における係数は $-a_{ij}$
+だからである．したがって $\Coker(A) = \Coker(\text{d}^*\text{d})$ である．
+
+\medskip\noindent
+包含
+$$
+\Im(\text{d}) \oplus \Ker(\text{d}^*) \subset \mathbf{Z}(E)
+$$
+を考える．左辺は直交直和である．明らかに
+$\mathbf{Z}(E)/\Ker(\text{d}^*)$ は捩れなしである．
+$\mathbf{Z}(E)/\Im(\text{d})$ も捩れなしであると主張する．実際，
+$x = \sum x_e e \in \mathbf{Z}(E)$ と $a > 1$ が，$ax = \text{d}y$ を，ある
+$y = \sum y_i i \in \mathbf{Z}(V)$ に対して満たすとする．
+このとき $a x_e = y_{s(e)} - y_{t(e)}$ である．
+性質 (2) により，すべての $y_i$ は法 $a$ で同じ合同類をもつ．したがって
+$y = a y' + (y_1, y_1, \ldots, y_1)$ と書ける．
+$\text{d}(y_1, y_1, \ldots, y_1) = 0$ なので，$x = \text{d}(y')$
+を得る．これが示すべきことであった．
+
+\medskip\noindent
+したがって補題 \ref{models-lemma-orthogonal-direct-sum} を適用して単射
+$$
+\Im(\text{d})^\#/\Im(\text{d}) \leftarrow
+\mathbf{Z}(E)/(\Im(\text{d}) \oplus \Ker(\text{d}^*)) \rightarrow
+\Ker(\text{d}^*)^\#/\Ker(\text{d}^*)
+$$
+を得る．その余核は $a_e$ たちの積によって零化され，この積は
+$\ell$ と互いに素である．$\Ker(\text{d}^*)$ は階数 $1 - n + e$ の
+格子なので，同型
+% P07-ERR-0462: frozen display uses undefined M_{torsion}; the mathematical token is retained.
+$$
+\Phi : M_{torsion} \longrightarrow \Im(\text{d})^\#/\Im(\text{d})
+$$
+の存在を示せば証明が完了することが分かる．これは補題
+\ref{models-lemma-coker} で証明されている．
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{数値型}
+\label{models-section-numerical-types}
+
+\noindent
+議論の一部では，次のデータ構造の組合せ論を用いる．
+
+\begin{definition}
+\label{models-definition-type}
+{\it 数値型} $T$ とは，次のデータ
+$$
+n, m_i, a_{ij}, w_i, g_i
+$$
+で与えられるものをいう．ここで $n \geq 1$ は整数であり，$m_i$，$a_{ij}$，
+$w_i$，$g_i$ は $1 \leq i, j \leq n$ に対する整数であって，次の条件を満たす：
+\begin{enumerate}
+\item $m_i > 0$, $w_i > 0$, $g_i \geq 0$,
+\item 行列 $A = (a_{ij})$ は対称であり，$a_{ij} \geq 0$ が
+$i \not = j$ に対して成り立つ，
+\item 真の非空部分集合 $I \subset \{1, \ldots, n\}$ で，$a_{ij} = 0$ が
+$i \in I$，$j \not \in I$ に対して成り立つものは存在しない，
+\item 各 $i$ に対して $\sum_j a_{ij}m_j = 0$ である，
+\item $w_i | a_{ij}$.
+\end{enumerate}
+\end{definition}
+
+\noindent
+これは扱うには明らかにいささか厄介な構造であるが，滑らかで幾何学的に連結な
+曲線の固有正則モデルの特殊ファイバーに現れるものにほかならない．もちろん，
+これらの型は添字の並べ替えを除いてのみ考える．
+
+\begin{definition}
+\label{models-definition-type-equivalent}
+二つの数値型 $n, m_i, a_{ij}, w_i, g_i$ と
+$n', m'_i, a'_{ij}, w'_i, g'_i$ が{\it 同値な型}であるとは，
+$\sigma$ という $\{1, \ldots, n\}$ の置換が存在して，
+$m_i = m'_{\sigma(i)}$，$a_{ij} = a'_{\sigma(i)\sigma(j)}$，
+$w_i = w'_{\sigma(i)}$，$g_i = g'_{\sigma(i)}$ が成り立つことをいう．
+\end{definition}
+
+\noindent
+数値型には種数がある．
+
+\begin{lemma}
+\label{models-lemma-genus}
+数値型 $n, m_i, a_{ij}, w_i, g_i$ に対し，式
+$$
+g = 1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})
+$$
+は整数である．
+\end{lemma}
+
+\begin{proof}
+$g$ が整数であることを示すには，$\sum a_{ii}m_i$ が偶数であることを
+示せばよい．これは次のように法 $2$ で計算すれば分かる：
+\begin{align*}
+\sum\nolimits_i a_{ii} m_i 
+& \equiv
+\sum\nolimits_{i,\ m_i\text{ は奇数}} a_{ii}m_i \\
+& \equiv
+\sum\nolimits_{i,\ m_i\text{ は奇数}} \sum\nolimits_{j \not = i} a_{ij}m_j \\
+& \equiv
+\sum\nolimits_{i,\ m_i\text{ は奇数}}
+\sum\nolimits_{j \not = i,\ m_j\text{ は奇数}} a_{ij}m_j \\
+& \equiv
+\sum\nolimits_{i < j,\ m_i\text{ と }m_j\text{ は奇数}} a_{ij}(m_i + m_j) \\
+& \equiv
+0
+\end{align*}
+ここでは $a_{ij} = a_{ji}$ と，$\sum_j a_{ij}m_j = 0$ がすべての
+$i$ に対して成り立つことを用いた．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-genus}
+$n, m_i, a_{ij}, w_i, g_i$ が{\it 種数 $g$ の数値型}であるとは，
+$g = 1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$ が補題
+\ref{models-lemma-genus} の整数であることをいう．
+\end{definition}
+
+\noindent
+種数がほとんど常に $\geq 0$ であることを，後で補題
+\ref{models-lemma-genus-nonnegative} において証明する．ただし，負の種数をもつ
+数値型も存在する．
+
+\begin{lemma}
+\label{models-lemma-irreducible}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．
+$n = 1$ ならば，$a_{11} = 0$ かつ $g = 1 + m_1w_1(g_1 - 1)$ である．
+さらに，このような数値型はすべて次のように分類できる：
+\begin{enumerate}
+\item $g < 0$ ならば $g_1 = 0$ であり，種数 $g$ かつ $n = 1$ の数値型は，
+因数分解 $m_1w_1 = 1 - g$ に対応する有限個に限られる．
+\item $g = 0$ ならば，補題 \ref{models-lemma-genus-zero} のとおり
+$m_1 = 1$，$w_1 = 1$，$g_1 = 0$ である．
+\item $g = 1$ ならば $g_1 = 1$ と分かるが，$m_1, w_1$ は任意の正整数でよい．
+これは場合 (\ref{models-item-one})，すなわち補題 \ref{models-lemma-genus-one} の場合である．
+\item $g > 1$ ならば $g_1 > 1$ であり，種数 $g$ かつ $n = 1$ の数値型は，
+因数分解 $m_1w_1(g_1 - 1) = g - 1$ に対応する有限個に限られる．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+自明である．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-diagonal-negative}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．
+$n > 1$ ならば，$a_{ii} < 0$ がすべての $i$ に対して成り立つ．
+\end{lemma}
+
+\begin{proof}
+行列 $A$ に補題 \ref{models-lemma-recurring-symmetric-real} を適用すればよい．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-minus-one}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．
+$n > 1$ と仮定する．$i$ の寄与
+$m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$ が種数 $g$ に対して
+が $< 0$ ならば，$g_i = 0$ かつ $a_{ii} = -w_i$ である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-diagonal-negative} と $w_i > 0$，$g_i \geq 0$，
+$w_i | a_{ii}$ から直ちに従う．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-type-minus-one}
+数値型 $n, m_i, a_{ij}, w_i, g_i$ をとる．$i$ を{\it $(-1)$-添字}というのは，
+$g_i = 0$ かつ $a_{ii} = -w_i$ であるときである．
+\end{definition}
+
+\noindent
+$(-1)$-添字を「収縮」できる．
+
+\begin{lemma}
+\label{models-lemma-contract}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．
+$n$ が $(-1)$-添字であると仮定する．このとき，
+数値型 $T'$ が存在し，これは $n', m'_i, a'_{ij}, w'_i, g'_i$ で与えられて
+次を満たす：
+\begin{enumerate}
+\item $n' = n - 1$,
+\item $m'_i = m_i$,
+\item $a'_{ij} = a_{ij} - a_{in}a_{jn}/a_{nn}$,
+\item $w'_i = w_i/2$，ただし $a_{in}/w_n$ が偶数かつ $a_{in}/w_i$ が奇数の
+場合であり，それ以外の場合は $w'_i = w_i$，
+\item $g'_i =
+\frac{w_i}{w'_i}(g_i - 1) + 1 + \frac{a_{in}^2 - w_na_{in}}{2w'_iw_n}$.
+\end{enumerate}
+さらに $g = g'$ である．
+\end{lemma}
+
+\begin{proof}
+例えば補題 \ref{models-lemma-irreducible} により $n > 1$ であるから，
+$n' \geq 1$ である．$n', m'_i, a'_{ij}, w'_i, g'_i$ について，
+定義 \ref{models-definition-type} の条件 (1)--(5) を確かめる．
+
+\medskip\noindent
+条件 (1) は明らかである．
+
+\medskip\noindent
+条件 (2)．$A' = (a'_{ij})$ の対称性は明らかである．また，補題
+\ref{models-lemma-diagonal-negative} により $a_{nn} < 0$ なので，
+$a'_{ij} \geq a_{ij} \geq 0$ が $i \not = j$ のとき成り立つ．
+
+\medskip\noindent
+条件 (3)．$I \subset \{1, \ldots, n - 1\}$ で，$a'_{ii'} = 0$ が
+$i \in I$ と $i' \in \{1, \ldots, n - 1\} \setminus I$ に対して
+成り立つものがあると仮定する．
+% P07-ERR-0463: frozen proof invokes undefined I'; the mathematical token is retained.
+すると各 $i \in I$ と $i' \in I'$ に対して $a_{in}a_{i'n} = 0$ である．
+したがって，$a_{in} = 0$ がすべての $i \in I$ に対して成り立ち，
+$I \subset \{1, \ldots, n\}$ が $T$ の性質 (3) に矛盾するか，または，
+$a_{i'n} = 0$ がすべての $i' \in \{1, \ldots, n - 1\} \setminus I$
+に対して成り立ち，$I \cup \{n\} \subset \{1, \ldots, n\}$ が
+$T$ の性質 (3) に矛盾する．ゆえに (3) は $T'$ に対して成り立つ．
+
+\medskip\noindent
+条件 (4)．計算すると
+$$
+\sum\nolimits_{j = 1}^{n - 1} a'_{ij}m_j =
+\sum\nolimits_{j = 1}^{n - 1}
+(a_{ij}m_j - \frac{a_{in}a_{jn}m_j}{a_{nn}}) =
+- a_{in}m_n - \frac{a_{in}}{a_{nn}}(-a_{nn}m_n) = 0
+$$
+となり，所望の結果を得る．
+
+\medskip\noindent
+条件 (5)．$w'_i$ が $a_{in}a_{jn}/a_{nn}$ を割ることを示せばよい．
+これは $a_{nn} = -w_n$，$w_n | a_{jn}$，$w_i | a_{in}$ から明らかである．
+
+\medskip\noindent
+$g = g'$ を示すため，まず
+\begin{align*}
+g
+& =
+1 + \sum\nolimits_{i = 1}^n m_i(w_i(g_i - 1) - \frac{1}{2}a_{ii}) \\
+& =
+1 + \sum\nolimits_{i = 1}^{n - 1} m_i(w_i(g_i - 1) - \frac{1}{2}a_{ii})
+-\frac{1}{2}m_nw_n \\
+& =
+1 +  \sum\nolimits_{i = 1}^{n - 1}
+m_i(w_i(g_i - 1) - \frac{1}{2}a_{ii} - \frac{1}{2}a_{in})
+\end{align*}
+と書く．$g'$ の式と比較すると，
+$$
+w'_i(g'_i - 1) - \frac{1}{2}a'_{ii} =
+w_i(g_i - 1) - \frac{1}{2}a_{in} - \frac{1}{2}a_{ii}
+$$
+が $i \leq n - 1$ に対して成り立てば十分である．言い換えれば，
+$$
+g'_i = \frac{2w_i(g_i - 1) - a_{in} - a_{ii} + a'_{ii} + 2w'_i}{2w'_i} =
+\frac{w_i}{w'_i}(g_i - 1) + 1 + \frac{a_{in}^2 - w_na_{in}}{2w'_iw_n}
+$$
+を得る．これが整数 $\geq 0$ であることは，$w'_i$ を (4) のように選べば
+初等的に確かめられる．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-top-genus}
+数値型 $n, m_i, a_{ij}, w_i, g_i$ をとる．$e$ を，対 $(i, j)$ のうち
+$i < j$ かつ $a_{ij} > 0$ であるものの個数とする．このとき，式
+$g_{top} = 1 - n + e$ は $\geq 0$ である．
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-0464: frozen proof makes an invalid isolated-vertex inference; it is retained.
+そうでなければ $e < n - 1$ であり，これは，ある $i$ が存在して
+$a_{ij} = 0$ がすべての $j \not = i$ に対して成り立つことを意味する．
+これは定義 \ref{models-definition-type} の仮定 (3) に矛盾する．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-top-genus}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．{\it $T$ の位相的種数}
+とは，補題 \ref{models-lemma-top-genus} の非負整数 $g_{top} = 1 - n + e$ をいう．
+\end{definition}
+
+\noindent
+種数を位相的種数で評価したい．しかし，これは常に可能なわけではなく，例えば
+補題 \ref{models-lemma-irreducible} の $n = 1$ の数値型では成り立たない．一方，
+次に定義する極小数値型については成り立つ．
+
+\begin{definition}
+\label{models-definition-type-minimal}
+$n, m_i, a_{ij}, w_i, g_i$ という種数 $g$ の数値型が{\it 極小}であるとは，
+$i$ であって $g_i = 0$ かつ $a_{ii} = -w_i$ となるものが存在しないこと，すなわち
+$(-1)$-添字が存在しないことをいう．
+\end{definition}
+
+\noindent
+極小型の種数 $g$ は，$n > 1$ ならば $\max(1, g_{top})$ 以上であることを示す．
+
+\begin{lemma}
+\label{models-lemma-non-irreducible-minimal-type-genus-at-least-one}
+$n, m_i, a_{ij}, w_i, g_i$ が $n > 1$ を満たす極小数値型ならば，
+$g \geq 1$ である．
+\end{lemma}
+
+\begin{proof}
+これは，$g = 1 + \sum \Phi_i$ において，
+$\Phi_i = m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$ が補題
+\ref{models-lemma-minus-one} と極小型の定義により非負だからである．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-nonnegative}
+$n, m_i, a_{ij}, w_i, g_i$ が $n > 1$ を満たす極小数値型ならば，
+$g \geq g_{top}$ である．
+\end{lemma}
+
+\begin{proof}
+固有正則モデルに付随する数値型の場合だけに関心のある読者は，この証明を
+飛ばしてよい．後に幾何学的な状況で再び証明するからである．次のように書ける：
+$$
+g_{top} = 1 - n + \frac{1}{2}\sum\nolimits_{a_{ij} > 0} 1 =
+1 + \sum\nolimits_i (-1 +
+\frac{1}{2}\sum\nolimits_{j \not = i,\ a_{ij} > 0} 1) 
+$$
+一方，
+\begin{align*}
+g & =
+1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii}) \\
+& =
+1 + \sum m_iw_ig_i - \sum m_iw_i +
+\frac{1}{2} \sum\nolimits_{i \not = j} a_{ij}m_j \\
+& =
+1 + \sum\nolimits_i
+m_iw_i(-1 + g_i + \frac{1}{2} \sum\nolimits_{j \not = i} \frac{a_{ij}}{w_i})
+\end{align*}
+である．最初の等号は定義であり，二番目の等号では
+$\sum a_{ij}m_j = 0$ を用いた．また最後の等号では
+% P07-ERR-0465: frozen prose duplicates “uses”; Japanese states the recoverable justification once.
+$a_{ij} = a_{ji}$ を用いて和の順序を入れ替えた．$g_{top}$ の式と比較すると，
+$$
+\Psi_i =
+m_iw_i(-1 + g_i + \frac{1}{2} \sum\nolimits_{j \not = i} \frac{a_{ij}}{w_i})
+- (-1 + \frac{1}{2}\sum\nolimits_{j \not = i,\ a_{ij} > 0} 1)
+$$
+が $\geq 0$ であることが各 $i$ について成り立てば，補題が従う．しかし，これは常に成り立つとは
+限らない．どの添字について $\Psi_i < 0$ となり得るかを解析しよう．まず，
+$$
+(-1 + g_i + \frac{1}{2}\sum\nolimits_{j \not = i} \frac{a_{ij}}{w_i}) \geq
+(-1 + \frac{1}{2}\sum\nolimits_{j \not = i,\ a_{ij} > 0} 1)
+$$
+である．これは $a_{ij}/w_i$ が非負整数だからである．$m_iw_i$ は正整数なので，
+$\Psi_i \geq 0$ である．実際，$m_iw_i = 1$ であるか，または上の不等式の左辺が
+$\geq 0$ ならばよい．後者は，$g_i > 0$ である場合，少なくとも二つの
+$a_{ij} > 0$ となる添字 $j$ がある場合，またはある $j$ に対して
+$a_{ij} > w_i$ となる場合に成り立つ．したがって
+$$
+P = \{i : \Psi_i < 0\}
+$$
+は，次を満たす添字 $i$ の集合である：$m_iw_i > 1$，$g_i = 0$，
+$a_{ij} > 0$ となる $j$ はただ一つであり，$a_{ij} = w_i$ はその $j$ に対して
+成り立つ．さらに
+$$
+i \in P \Rightarrow \Psi_i = \frac{1}{2}(-m_iw_i + 1)
+$$
+証明の方針は，$i \in P$ が与えられたとき，$\Psi_j$ から少し借りられることを
+示すことである．ここで $j$ は $i$ の隣接点，すなわち $a_{ij} > 0$ となる
+添字である．しかし，$j$ が $\Psi_j = 0$ となる添字かもしれないので，
+これはそのままではうまくいかない．
+
+\medskip\noindent
+集合
+$$
+Z = \{j : g_j = 0\text{ であり，}
+j\text{ はちょうど二つの隣接点 }i, k\text{ をもち，}
+a_{ij} = w_j = a_{jk}\}
+$$
+を考える．$j \in Z$ に対して $\Psi_j = 0$ である．列
+$M = (i, j_1, \ldots, j_s)$ であって，$s \geq 0$，$i \in P$，
+$j_1, \ldots, j_s \in Z$ であり，
+$a_{ij_1} > 0, a_{j_1j_2} > 0, \ldots, a_{j_{s - 1}j_s} > 0$.
+を満たすような列を考える．数値型が $P$ に属する二つの添字だけからなる場合，
+またはより一般に，$P$ に属する二つの添字と，すべて $Z$ に属する残りの添字から
+なる場合には，$g_{top} = 0$ であり，補題
+\ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one} により結論を得る．
+したがって，これらの場合は除外してよいし，実際そうする．
+
+\medskip\noindent
+極大な列 $M = (i, j_1, \ldots, j_s)$ をとり，$k$ を $j_s$ の二番目の隣接点とする．
+（$s = 0$ ならば，$k$ は $i$ の唯一の隣接点である．）
+極大性により $k \not \in Z$ であり，今述べたことにより $k \not \in P$ である．
+さらに，
+$w_i = a_{ij_1} = w_{j_1} = a_{j_1j_2} = \ldots = w_{j_s} =
+a_{j_sk}$ である．数値型の定義を見ると，
+\begin{align*}
+m_ia_{ii} + m_{j_1}w_i & = 0,\\
+m_iw_i + m_{j_1}a_{j_1j_1} + m_{j_2}w_i & = 0,\\
+\ldots & \ldots \\
+m_{j_{s - 1}}w_i + m_{j_s}a_{j_sj_s} + m_kw_i & = 0
+\end{align*}
+を得る．数値型は極小なので，最初の等式から $m_{j_1} \geq 2m_i$ が従う．
+次に二番目の等式から $m_{j_2} \geq 3m_i$ が従い，以下同様である．いずれにせよ，
+$m_k \geq 2m_i$ と分かる（$s = 0$ の場合も含む）．
+
+\medskip\noindent
+添字 $k$ を，$t > 0$ および上のような相異なる極大列
+$M_1, \ldots, M_t$ が存在し，
+$M_b = (i_b, j_{b, 1}, \ldots, j_{b, s_b})$
+を満たし，$k$ が $j_{b, s_b}$ の隣接点となることが $b = 1, \ldots, t$ に対して
+ものとする．
+% P07-ERR-0466: frozen aggregation uses Phi_j/Phi_i where the surrounding proof uses Psi_k/Psi_i; retained.
+$\Phi_j + \sum_{b = 1, \ldots, t} \Phi_{i_b} \geq 0$ を示す．上の議論により，
+これで補題の証明が完了する．$M$ を，$M_b$（$b = 1, \ldots, t$）に現れる
+添字の合併とする．次のように書く：
+$$
+\Psi_k =
+-\sum\nolimits_{b = 1, \ldots, t} \Psi_{i_b} + \Psi_k'
+$$
+ここで
+\begin{align*}
+\Psi_k' & =
+m_kw_k\left(-1 + g_k +
+% P07-ERR-0467: frozen summation range omits a comma before t; retained.
+\frac{1}{2} \sum\nolimits_{b = 1, \ldots t}
+(\frac{a_{kj_{b, s_b}}}{w_k} - \frac{m_{i_b}w_{i_b}}{m_kw_k}) +
+\frac{1}{2} \sum\nolimits_{l \not = k,\ l \not \in M}
+\frac{a_{kl}}{w_k}
+\right) \\
+&
+-\left(
+-1 + \frac{1}{2}\sum\nolimits_{l \not = k,\ l \not \in M,\ a_{kl} > 0} 1
+\right)
+\end{align*}
+矛盾を導くため $\Psi_k' < 0$ と仮定する．集合
+$\{l : l \not = k,\ l \not \in M,\ a_{kl} > 0\}$ が空ならば，
+$\{1, \ldots, n\} = M \cup \{k\}$ かつ $g_{top} = 0$ である．実際，
+この場合 $e = n - 1$ であり，補題
+\ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one} により結論が成り立つ．
+したがって，少なくとも一つそのような $l$ が存在し，最初の括弧内の和に
+$(1/2)a_{kl}/w_k \geq 1/2$ を寄与すると仮定してよい．各
+$b = 1, \ldots, t$ に対して
+$$
+\frac{a_{kj_{b, s_b}}}{w_k} - \frac{m_{i_b}w_{i_b}}{m_kw_k} =
+\frac{w_{i_b}}{w_k}(1 - \frac{m_{i_b}}{m_k})
+$$
+である．この式は $\geq \frac{1}{2}$ である．これは前段落により
+$m_k \geq 2m_{i_b}$ だからである．また，この式は $\geq 1$ である．ただし
+$w_k < w_{i_b}$ の場合である．
+したがって $\Psi_k' < 0$ ならば $g_k = 0$ である．$t \geq 2$ の場合，
+または $t = 1$ かつ $w_k < w_{i_1}$ の場合には，$\Psi_k' \geq 0$ となる
+（ここでは上で示した $l$ の存在を用いる）ので，これも矛盾である．
+したがって $t = 1$ かつ $w_k = w_{i_1}$ である．
+% P07-ERR-0468: frozen sentence lacks a verb and uses k where its varying index is l; the k token is retained.
+$l$ に関する和に少なくとも二つの非零項があるか，またはそのような $k$ が一つあり
+$a_{kl} > w_k$ ならば，同様に $\Psi_k' \geq 0$ である．最後に残る可能性は，
+$t = 1$ であり，ある $l$ が一つ存在して $a_{kl} = w_k$ となる場合である．
+これは $k \in Z$ を意味して $M_1$ の極大性に矛盾するので，許されない．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-minus-two}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．$n > 1$ と仮定する．
+$i$ の寄与 $m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})$ が種数 $g$ に対して
+が $0$ ならば，$g_i = 0$ かつ $a_{ii} = -2w_i$ である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-diagonal-negative} と $w_i > 0$，$g_i \geq 0$，
+$w_i | a_{ii}$ から直ちに従う．
+\end{proof}
+
+\noindent
+この関係を満たす添字は，極小数値型の構造において重要な役割を果たすことが
+分かる．そこで名前を与える．
+
+\begin{definition}
+\label{models-definition-type-minus-two}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．$i$ を
+{\it $(-2)$-添字}というのは，$g_i = 0$ かつ $a_{ii} = -2w_i$ であるときである．
+\end{definition}
+
+\noindent
+種数 $g$ の極小数値型が与えられたとき，$(-2)$-添字とは，式
+$$
+g = 1 + \sum m_i(w_i(g_i - 1) - \frac{1}{2} a_{ii})
+$$
+において種数に正の数を寄与しない添字にほかならない．したがって，後で見るように，
+$(-2)$-添字に付随する量を評価するのはいくらか難しい．
+
+\begin{remark}
+\label{models-remark-genus-equality}
+$n, m_i, a_{ij}, w_i, g_i$ を $n > 1$ を満たす極小数値型とする．補題
+\ref{models-lemma-genus-nonnegative} では等号 $g = g_{top}$ が成り立つこともある．
+% P07-ERR-0469: frozen example is a subordinate fragment without a main clause; retained as a conditional fragment.
+例えば，$m_i = w_i = 1$ かつ，$g_i = 0$ がすべての $i$ に対して成り立ち，
+$a_{ij} \in \{0, 1\}$ が $i < j$ に対して成り立つならば．
+\end{remark}
+
+
+\section{数値型の Picard 群}
+\label{models-section-picard-group}
+
+\noindent
+定義は次のとおりである．
+
+\begin{definition}
+\label{models-definition-picard-group}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．{\it $T$ の Picard 群}とは，
+行列 $(a_{ij}/w_i)$ の余核，より正確には
+$$
+\Pic(T) =
+\Coker\left(
+\mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n},\quad
+e_i
+\mapsto
+\sum \frac{a_{ij}}{w_j}e_j
+\right)
+$$
+をいう．ここで $e_i$ は第 $i$ 標準基底ベクトルを表し，
+$\mathbf{Z}^{\oplus n}$ に属する．
+\end{definition}
+
+\begin{lemma}
+\label{models-lemma-picard-rank-1}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．$T$ の Picard 群は
+階数 $1$ の有限生成アーベル群である．
+\end{lemma}
+
+\begin{proof}
+$n = 1$ ならば $A = (a_{ij})$ は零行列であり，結論は明らかである．
+$n > 1$ のとき，行列 $A$ の階数は $n - 1$ である．これは補題
+\ref{models-lemma-recurring-real} または補題 \ref{models-lemma-recurring-symmetric-real}
+から従う．もちろん，各行を $1/w_i$ 倍しても階数は変わらない．
+これで補題が証明された．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-picard-T-and-A}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．このとき
+$\Pic(T) \subset \Coker(A)$ である．ここで $A = (a_{ij})$ とする．
+\end{lemma}
+
+\begin{proof}
+$\Pic(T)$ は $(a_{ij}/w_i)$ の余核なので，交換図式
+$$
+\xymatrix{
+0 \ar[r] &
+\mathbf{Z}^{\oplus n} \ar[rr]_A & &
+\mathbf{Z}^{\oplus n} \ar[rr] & &
+\Coker(A) \ar[r] & 0 \\
+0 \ar[r] &
+\mathbf{Z}^{\oplus n} \ar[rr]^{(a_{ij}/w_i)} \ar[u]_{\text{id}} & &
+\mathbf{Z}^{\oplus n} \ar[rr] \ar[u]_{\text{diag}(w_1, \ldots, w_n)} & &
+\Pic(T) \ar[r] \ar[u] & 0
+}
+$$
+が存在し，その各行は完全である．蛇の補題により
+$\Pic(T) \subset \Coker(A)$ を得る．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-contract-picard-group}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．$n$ が $(-1)$-添字であると
+仮定する．$T'$ を補題 \ref{models-lemma-contract} で構成した数値型とする．単射
+$$
+\Pic(T) \to \Pic(T')
+$$
+であって，その余核が初等アーベル $2$-群となるものが存在する．
+\end{lemma}
+
+\begin{proof}
+$n' = n - 1$ であった．$e_i$ およびそれぞれ $e'_i$ を，第 $i$ 基底ベクトルで，
+それぞれ $\mathbf{Z}^{\oplus n}$ および $\mathbf{Z}^{\oplus n - 1}$ に属する
+ものとする．まず
+$$
+q : \mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n - 1},
+\quad e_n \mapsto 0\text{ かつ }e_i \mapsto e'_i\text{，ただし }i \leq n - 1
+$$
+と書き，
+$$
+p : \mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n - 1},\quad
+e_n \mapsto \sum\nolimits_{j = 1}^{n - 1} \frac{a_{nj}}{w'_j} e'_j
+\text{ かつ }
+e_i \mapsto \frac{w_i}{w'_i} e'_i\text{，ただし }i \leq n - 1
+$$
+とおく．計算（ここでは省略する）により，交換図式
+$$
+\xymatrix{
+\mathbf{Z}^{\oplus n} \ar[rr]_{(a_{ij}/w_i)} \ar[d]_q & &
+\mathbf{Z}^{\oplus n} \ar[d]^p \\
+\mathbf{Z}^{\oplus n'} \ar[rr]^{(a'_{ij}/w'_i)} & &
+\mathbf{Z}^{\oplus n'}
+}
+$$
+が存在することが分かる．上の矢印の余核は $\Pic(T)$ であり，下の矢印の余核は
+$\Pic(T')$ なので，所望の Picard 群の準同型を得る．
+$\frac{w_i}{w'_i} \in \{1, 2\}$ なので，$\Pic(T) \to \Pic(T')$ の余核は
+$2$ により零化される（実際，$2e'_i$ は $p$ の像に属し，これはすべての
+$i \leq n - 1$ に対して成り立つ）．最後に，$\Pic(T) \to \Pic(T')$ が単射であることを示す．
+$L = (l_1, \ldots, l_n)$ を，$\Pic(T)$ の元で $\Pic(T')$ の零元へ写るものの
+代表とする．$q$ は全射なので，図式追跡により $L$ は $p$ の核に属すると仮定して
+よい．これは $l_na_{ni}/w'_i + l_iw_i/w'_i = 0$，すなわち
+$l_i = - a_{ni}/w_i l_n$ を意味する．したがって $L$ は $-l_ne_n$ の，写像
+$(a_{ij}/w_j)$ による像であり，補題が証明された．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-picard-group-genus-nonpositive}
+$n, m_i, a_{ij}, w_i, g_i$ を数値型 $T$ とする．種数 $g$（$T$ のもの）が
+$\leq 0$ ならば，$\Pic(T) = \mathbf{Z}$ である．
+\end{lemma}
+
+\begin{proof}
+$n$ に関する帰納法による．$n = 1$ ならば主張は明らかである．$n > 1$ ならば，
+補題 \ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one} により $T$ は
+極小でない．$T$ を同値な型に置き換えると，$n$ が $(-1)$-添字であると仮定できる．
+補題 \ref{models-lemma-contract-picard-group} により
+$\Pic(T) \subset \Pic(T')$ を得る．補題 \ref{models-lemma-contract} により，
+$T'$ の種数は $T$ の種数に等しく，帰納法によって結論を得る．
+\end{proof}
+
+
+
+
+
+
+
+
+\section{真部分グラフの分類}
+\label{models-section-classify-proper-subgraphs}
+
+\noindent
+この節では，$n, m_i, a_{ij}, w_i, g_i$ という種数 $g$ の数値型が与えられたと
+仮定する．$(-2)$-添字（定義 \ref{models-definition-type-minus-two}）のみからなる
+可能な「部分グラフ」の完全なリストを求め，同時に種数 $1$ の極小数値型を
+すべて分類する．言い換えれば，この節では命題
+\ref{models-proposition-classify-subgraphs} と補題 \ref{models-lemma-genus-one} を証明する．
+
+\medskip\noindent
+方針は次のとおりである．$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．
+$I \subset \{1, \ldots, n\}$ を $(-2)$-添字からなる部分集合で，真の非空部分集合
+$J \subset I$ であって $a_{jj'} = 0$ が $j \in J$，$j' \in I \setminus J$ に
+対して成り立つものが存在しないとする．濃度 $|I|$（$I$ のもの）に関する帰納法を用いる．
+$I = \{i\}$ が $1$ 個の添字からなるとき，$m_i$，$a_{ii}$，$w_i$ に課される条件は，
+定義 \ref{models-definition-type} の $w_i | a_{ii}$ と，補題
+\ref{models-lemma-diagonal-negative} の $a_{ii} < 0$ だけであり，これを基底の場合とする．
+帰納段階では，まず部分集合 $I' \subset I$ で大きさ $|I'| < |I|$ のものに帰納法の仮定を
+適用する．これにより，可能な $m_i, a_{ij}, w_i$（$i, j \in I$）にいくつかの制約が
+加わる．特に，$|I'| < |I| \leq n$ なので，$\sum a_{ij}m_j = 0$ と補題
+\ref{models-lemma-recurring-symmetric-real} から，部分行列 $(a_{ij})_{i, j \in I'}$ は
+負定値であり，その行列式の符号は
+% P07-ERR-0470: frozen induction uses undefined m in the determinant sign; retained.
+$(-1)^m$ となる．残った各可能性について $(a_{ij})_{i, j \in I}$ の行列式を計算する．
+行列式の符号が $-(-1)^{|I|}$ ならば，Sylvester の定理により行列
+$(a_{ij})_{i, j \in I}$ は負半定値でないので，この場合を捨てられる．行列式の符号が
+$(-1)^{|I|}$ ならば $|I| < n$ であり，この場合が真部分グラフとして起こり得ると
+（暫定的に）結論し，この節のいずれかの補題に列挙する．行列式が $0$ ならば，
+（再び補題 \ref{models-lemma-recurring-symmetric-real} により）$|I| = n$ でなければならず，
+% P07-ERR-0471: frozen paragraph says genus 0 although it identifies the genus-one list; retained.
+$g = 0$ である．これらの場合には，可能な $m_i, a_{ij}, w_i$（$i, j \in I$）を
+実際にすべて求め，補題 \ref{models-lemma-genus-one} に列挙する．議論を完了すると，
+種数 $1$ かつ $n > 1$ の極小数値型をすべて得る．実際，種数の公式と前節の注意に
+より，その各々は必ず $(-2)$-添字だけからなり（したがって帰納過程に現れる）．
+最後に，読者は補題 \ref{models-lemma-genus-one} の可能性のリストを調べることで，
+この節で可能として列挙した真部分グラフの配置がすべて，既に種数 $1$ の数値型に
+実際に現れることを確かめられる．
+
+\medskip\noindent
+$i$ と $j$ が $(-2)$-添字であり，$a_{ij} > 0$ を満たすと仮定する．補題
+\ref{models-lemma-recurring-symmetric-real} により行列 $A = (a_{ij})$ は負半定値なので，
+行列
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} \\
+a_{ij} & -2w_j
+\end{matrix}
+\right)
+$$
+は $n = 2$ でない限り負定値である．$n = 2$ の場合は実際に起こり得る．このとき
+行列式 $4w_1w_2 - a_{12}^2$ は零である．$\text{lcm}(w_1, w_2)$ が $a_{12}$ を
+割ることを用いれば，可能性は次のものだけだと容易に分かる：
+$$
+(w_1, w_2, a_{12}) = (w, w, 2w), (w, 4w, 4w), \text{ or }(4w, w, 4w)
+$$
+場合 $(4w, w, 4w)$ は，場合 $(w, 4w, 4w)$ の添字 $i, j$ を交換すれば得られる．
+これらの場合には $g = 1$ である．これにより場合
+(\ref{models-item-two-cycle}) と (\ref{models-item-up4})，すなわち補題 \ref{models-lemma-genus-one} の場合を得る．
+$n > 2$ と仮定すると，上の行列の
+行列式 $4w_iw_j - a_{ij}^2$ は $> 0$ であり，したがって
+$a_{ij}^2/w_iw_j < 4$ である．一方，$\text{lcm}(w_i, w_j) | a_{ij}$ であることが
+分かっているので，$a_{ij}^2/w_iw_j$ は整数である．ゆえに
+$a_{ij}^2/w_iw_j \in \{1, 2, 3\}$ であり，$w_i | w_j$ またはその逆が成り立つ．
+これにより次の可能性を得る：
+$$
+(w_1, w_2, a_{12}) = (w, w, w), (w, 2w, 2w), (w, 3w, 3w),
+(2w, w, 2w), \text{ or }(3w, w, 3w)
+$$
+場合 $(2w, w, 2w)$ は場合 $(w, 2w, 2w)$ の添字 $i, j$ を交換すれば得られ，
+場合 $(3w, w, 3w)$ と $(w, 3w, 3w)$ についても同様である．最初の三つの解から，
+場合 (\ref{models-item-A2})，(\ref{models-item-B2})，(\ref{models-item-G2})，すなわち補題
+\ref{models-lemma-two-by-two} の場合を得る．この補題では，整数 $m_i$ と $m_j$ に対する帰結も
+書き下した．ここでは，$\sum_l a_{kl}m_l = 0$ が各 $k$ に対して成り立つことが，特に
+$a_{ii}m_i + a_{ij}m_j \leq 0$ を $k = i$ に対して，
+$a_{ij}m_i + a_{jj}m_j \leq 0$ を $k = j$ に対して含意することを用いている．
+
+\begin{lemma}
+\label{models-lemma-two-by-two}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet
+}
+$$
+$n > 2$ とする．対 $i, j$ からなる $(-2)$-添字が与えられ，$a_{ij} > 0$ ならば，
+順序を除けば，$m$，$a$，$w$ は次のいずれかである：
+\begin{enumerate}
+\item
+\label{models-item-A2}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w \\
+w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $w$ は任意で，$2m_1 \geq m_2$ かつ $2m_2 \geq m_1$ である．または
+\item
+\label{models-item-B2}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w \\
+2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w
+\end{matrix}
+\right)
+$$
+ここで $w$ は任意で，$m_1 \geq m_2$ かつ $2m_2 \geq m_1$ である．または
+\item
+\label{models-item-G2}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 3w \\
+3w & -6w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+3w
+\end{matrix}
+\right)
+$$
+ここで $w$ は任意で，$2m_1 \geq 3m_2$ かつ $2m_2 \geq m_1$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$i$，$j$，$k$ が三つの $(-2)$-添字であり，$a_{ij} > 0$ かつ
+$a_{jk} > 0$ であると仮定する．言い換えれば，添字 $i$ は $j$ と「交わり」，
+$j$ は $k$ と「交わる」．各対 $(i, j)$，$(i, k)$，$(j, k)$ は補題
+\ref{models-lemma-two-by-two} に列挙されたもののいずれかであることを，以後断りなく用いる．
+補題 \ref{models-lemma-recurring-symmetric-real} により行列 $A = (a_{ij})$ は負半定値なので，
+行列
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} & a_{ik} \\
+a_{ij} & -2w_j & a_{jk} \\
+a_{ik} & a_{jk} & -2w_k
+\end{matrix}
+\right)
+$$
+は $n = 3$ でない限り負定値である．$n = 3$ の場合は起こり得る．このとき，
+行列式\footnote{これは
+$-8w_iw_jw_k + 2a_{ij}^2w_k + 2a_{jk}^2w_i + 2a_{ik}^2w_j +
+2a_{ij}a_{jk}a_{ik}$ である．} は零であり，方程式
+$$
+4 = \frac{a_{ij}^2}{w_iw_j} +
+\frac{a_{jk}^2}{w_jw_k} +
+\frac{a_{ik}^2}{w_iw_k} +
+\frac{a_{ij}a_{ik}a_{jk}}{w_iw_jw_k}
+$$
+を得る．これは整数の方程式である．右辺の最後の項は，次の等式により他の項から
+定まる：
+$$
+\left(\frac{a_{ij}a_{ik}a_{jk}}{w_iw_jw_k}\right)^2 =
+\frac{a_{ij}^2}{w_iw_j} \frac{a_{jk}^2}{w_jw_k} \frac{a_{ik}^2}{w_iw_k}
+$$
+上で見たように，$\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}$ は
+$\{1, 2, 3\}$ に属し，$\frac{a_{ik}^2}{w_iw_k}$ は $\{0, 1, 2, 3\}$ に属する．
+したがって，可能性は次のものだけである：
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{ik}^2}{w_iw_k}) =
+(1, 1, 1), (1, 3, 0), (2, 2, 0),\text{ または } (3, 1, 0)
+$$
+場合 $(3, 1, 0)$ は場合 $(1, 3, 0)$ の添字 $i, j, k$ の順序を逆にすれば得られる．
+これらの各場合で $g = 1$ である．読者はこれらを，場合
+(\ref{models-item-three-cycle})，(\ref{models-item-equal-up3})，(\ref{models-item-equal-down3})，
+(\ref{models-item-up-up})，(\ref{models-item-up-down})，(\ref{models-item-down-up})，すなわち補題
+\ref{models-lemma-genus-one} の場合として見つけられる．$(1, 1, 1)$ に対応する場合は一つ，
+$(1, 3, 0)$ に対応する場合は二つ，$(2, 2, 0)$ に対応する場合は三つである．
+$n > 3$ と仮定すると，不等式
+$$
+4 > \frac{a_{ij}^2}{w_iw_j} + \frac{a_{ik}^2}{w_iw_k} +
+\frac{a_{jk}^2}{w_jw_k} + \frac{a_{ij}a_{ik}a_{jk}}{w_iw_jw_k}
+$$
+を得る．これは整数の不等式である．上で得た数に関する制約を用いると，
+可能性は次のものだけだと分かる：
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{ik}^2}{w_iw_k}) =
+(1, 1, 0), (1, 2, 0),\text{ または }(2, 1, 0)
+$$
+特に $a_{ik} = 0$ である（$a_{ij} > 0$ かつ $a_{jk} > 0$ を仮定していることを
+思い出そう）．場合 $(2, 1, 0)$ は場合 $(1, 2, 0)$ の添字 $i, j, k$ の順序を
+逆にすれば得られる．最初の二つの解から場合 (\ref{models-item-A3})，
+(\ref{models-item-C3})，(\ref{models-item-B3})，すなわち補題 \ref{models-lemma-three-by-three} の場合を
+得る．そこでは整数 $m_i$，$m_j$，$m_k$ に対する帰結も書き下してある．
+
+\begin{lemma}
+\label{models-lemma-three-by-three}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$n > 3$ とする．三つ組 $i, j, k$ からなる $(-2)$-添字が与えられ，
+$a_{ij}, a_{ik}, a_{jk}$ の少なくとも二つが非零ならば，順序を除いて
+$m$，$a$，$w$ は次のいずれかである：
+\begin{enumerate}
+\item
+\label{models-item-A3}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 \\
+w & -2w & w \\
+0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2$ である．または
+\item
+\label{models-item-C3}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 \\
+w & -2w & 2w \\
+0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+2w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + 2m_3$，$2m_3 \geq m_2$ である．または
+\item
+\label{models-item-B3}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 \\
+2w & -4w & 2w \\
+0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$m_3 \geq m_2$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$i$，$j$，$k$，$l$ が四つの $(-2)$-添字であり，$a_{ij} > 0$，
+$a_{jk} > 0$，$a_{kl} > 0$ を満たすと仮定する．言い換えれば，添字 $i$ は $j$ と
+「交わり」，$j$ は $k$ と「交わり」，$k$ は $l$ と「交わる」．補題
+\ref{models-lemma-three-by-three} から $a_{ik} = a_{jl} = 0$ が分かる．行列
+$A = (a_{ij})$ は負半定値なので，行列
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} & 0 & a_{il} \\
+a_{ij} & -2w_j & a_{jk} & 0 \\
+0 & a_{jk} & -2w_k & a_{kl} \\
+a_{il} & 0 & a_{kl} & -2w_l
+\end{matrix}
+\right)
+$$
+は $n = 4$ でない限り負定値である．$n = 4$ の場合は起こり得る．このとき，
+行列式\footnote{これは
+$16w_iw_jw_kw_l - 4a_{ij}^2w_kw_l - 4a_{jk}^2w_iw_l - 4a_{kl}^2w_iw_j -
+4a_{il}^2w_jw_k + a_{ij}^2a_{kl}^2 + a_{jk}^2a_{il}^2 -
+2a_{ij}a_{il}a_{jk}a_{kl}$ である．} は零であり，方程式
+$$
+16 +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{jk}^2}{w_jw_k}\frac{a_{il}^2}{w_iw_l} =
+4\frac{a_{ij}^2}{w_iw_j} + 4\frac{a_{jk}^2}{w_jw_k} + 4\frac{a_{kl}^2}{w_kw_l}
++ 4\frac{a_{il}^2}{w_iw_l} + 2\frac{a_{ij}a_{il}a_{jk}a_{kl}}{w_iw_jw_kw_l}
+$$
+を得る．これは非負整数についての方程式である．この方程式の右辺の最後の項は，
+次の等式により他の項から定まる：
+$$
+\left(\frac{a_{ij}a_{il}a_{jk}a_{kl}}{w_iw_jw_kw_l}\right)^2 =
+\frac{a_{ij}^2}{w_iw_j} \frac{a_{jk}^2}{w_jw_k}
+\frac{a_{kl}^2}{w_kw_l} \frac{a_{il}^2}{w_iw_l}
+$$
+上で見たように，
+$\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l}$
+は $\{1, 2\}$ に属し，$\frac{a_{il}^2}{w_iw_l}$ は $\{0, 1, 2\}$ に属するので，
+可能な解は次のものだけだと結論できる：
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l},
+\frac{a_{il}^2}{w_iw_l}) =
+(1, 1, 1, 1) \text{ または } (2, 1, 2, 0)
+$$
+しかも $g = 1$ である．読者はこれらを，場合
+(\ref{models-item-four-cycle})，(\ref{models-item-up-equal-up})，
+(\ref{models-item-up-equal-down})，(\ref{models-item-down-equal-up})，すなわち補題
+\ref{models-lemma-genus-one} の場合として見つけられる．
+$n > 4$ と仮定すると，不等式
+$$
+16 +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{jk}^2}{w_jw_k}\frac{a_{il}^2}{w_iw_l} >
+4\frac{a_{ij}^2}{w_iw_j} + 4\frac{a_{jk}^2}{w_jw_k} + 4\frac{a_{kl}^2}{w_kw_l}
++ 4\frac{a_{il}^2}{w_iw_l} + 2\frac{a_{ij}a_{il}a_{jk}a_{kl}}{w_iw_jw_kw_l}
+$$
+を得る．これは非負整数についての不等式である．上で与えた数に関する制約を用いると，
+可能性は次のものだけだと分かる：
+$$
+(\frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l},
+\frac{a_{il}^2}{w_iw_l}) =
+(1, 1, 1, 0), (1, 1, 2, 0), (1, 2, 1, 0), \text{ または }(2, 1, 1, 0)
+$$
+特に $a_{il} = 0$ である（他の三つは非零と仮定していたことを思い出そう）．場合
+$(2, 1, 1, 0)$ は場合 $(1, 1, 2, 0)$ の添字 $i, j, k, l$ の順序を逆にすれば得られる．
+最初の三つの解から場合 (\ref{models-item-A4})，(\ref{models-item-C4})，(\ref{models-item-B4})，
+(\ref{models-item-F4})，すなわち補題 \ref{models-lemma-four-by-four} の場合を得る．そこでは整数
+$m_i$，$m_j$，$m_k$，$m_l$ に対する帰結も書き下してある．
+
+\begin{lemma}
+\label{models-lemma-four-by-four}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$n > 4$ とする．四つの $(-2)$-添字 $i, j, k, l$ が与えられ，
+$a_{ij}, a_{jk}, a_{kl}$ が非零ならば，順序を除いて $m$，$a$，$w$ は
+次のいずれかである：
+\begin{enumerate}
+\item
+\label{models-item-A4}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 \\
+w & -2w & w & 0 \\
+0 & w & -2w & w \\
+0 & 0 & w & -2w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4$，
+$2m_4 \geq m_3$ である．または
+\item
+\label{models-item-C4}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 \\
+w & -2w & w & 0 \\
+0 & w & -2w & 2w \\
+0 & 0 & 2w & -4w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + 2m_4$，
+$2m_4 \geq m_3$ である．または
+\item
+\label{models-item-B4}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 \\
+2w & -4w & 2w & 0 \\
+0 & 2w & -4w & 2w \\
+0 & 0 & 2w & -2w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4$，
+$m_4 \geq m_3$ である．または
+\item
+\label{models-item-F4}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 \\
+w & -2w & 2w & 0 \\
+0 & 2w & -4w & 2w \\
+0 & 0 & 2w & -4w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+2w \\
+2w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + 2m_3$，$2m_3 \geq m_2 + m_4$，
+$2m_4 \geq m_3$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+% P07-ERR-0472: frozen source repeats the ij hypothesis; correction remains sidecar-only.
+$i$，$j$，$k$，$l$ が四つの $(-2)$-添字であり，$a_{ij} > 0$，
+$a_{ij} > 0$，$a_{il} > 0$ を満たすと仮定する．言い換えれば，添字 $i$ は添字
+$j$，$k$，$l$ と「交わる」．補題 \ref{models-lemma-three-by-three} から
+$a_{jk} = a_{jl} = a_{kl} = 0$ が分かる．行列 $A = (a_{ij})$ は負半定値なので，行列
+$$
+\left(
+\begin{matrix}
+-2w_i & a_{ij} & a_{ik} & a_{il} \\
+a_{ij} & -2w_j & 0 & 0 \\
+a_{ik} & 0 & -2w_k & 0 \\
+a_{il} & 0 & 0 & -2w_l
+\end{matrix}
+\right)
+$$
+は $n = 4$ でない限り負定値である．$n = 4$ の場合は起こり得る．このとき，
+行列式\footnote{これは
+$16w_iw_jw_kw_l - 4a_{ij}^2w_kw_l - 4a_{ik}^2w_jw_l - 4a_{il}^2w_jw_k$ である．}
+は零であり，方程式
+% P07-ERR-0473: frozen source's w_j w_l denominators remain unchanged.
+$$
+4 = \frac{a_{ij}^2}{w_iw_j} + \frac{a_{ik}^2}{w_iw_k} + \frac{a_{il}^2}{w_jw_l}
+$$
+を得る．これは非負整数についての方程式である．上で見たように，
+$\frac{a_{ij}^2}{w_iw_j}, \frac{a_{ik}^2}{w_iw_k}, \frac{a_{il}^2}{w_iw_l}$
+は $\{1, 2\}$ に属するので，順序を除けば可能性は $4 = 1 + 1 + 2$ だけである．
+これらの各場合で $g = 1$ である．読者はこれらを，場合
+(\ref{models-item-triple-with-up}) および (\ref{models-item-triple-with-down})，すなわち補題
+\ref{models-lemma-genus-one} の場合として見つけられる．
+$n > 4$ と仮定すると，不等式
+$$
+4 > \frac{a_{ij}^2}{w_iw_j} + \frac{a_{ik}^2}{w_iw_k} + \frac{a_{il}^2}{w_jw_l}
+$$
+を得る．これは非負整数についての不等式である．したがって
+$\frac{a_{ij}^2}{w_iw_j} =
+\frac{a_{ik}^2}{w_iw_k} = \frac{a_{il}^2}{w_jw_l} = 1$ かつ
+$w_i = w_j = w_k = w_l$ である．これから場合 (\ref{models-item-D4})，すなわち補題
+\ref{models-lemma-D4} の場合を得る．そこでは整数 $m_i$，$m_j$，$m_k$，$m_l$ に対する
+帰結も書き下してある．
+
+\begin{lemma}
+\label{models-lemma-D4}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] & \bullet \\
+& \bullet
+}
+$$
+$n > 4$ とする．四つの $(-2)$-添字 $i, j, k, l$ が与えられ，
+$a_{ij}, a_{ik}, a_{il}$ が非零ならば，順序を除いて $m$，$a$，$w$ は
+次のようになる：
+\begin{enumerate}
+\item
+\label{models-item-D4}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w & w \\
+w & -2w & 0 & 0 \\
+w & 0 & -2w & 0 \\
+w & 0 & 0 & -2w 
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2 + m_3 + m_4$，$2m_2 \geq m_1$，$2m_3 \geq m_1$，
+$2m_4 \geq m_1$ である．これは $m_1 \geq \max(m_2, m_3, m_4)$ を含意することに注意せよ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$h$，$i$，$j$，$k$，$l$ が五つの $(-2)$-添字であり，$a_{hi} > 0$，
+$a_{ij} > 0$，$a_{jk} > 0$，$a_{kl} > 0$ を満たすと仮定する．言い換えれば，
+添字 $h$ は $i$ と「交わり」，$i$ は $j$ と「交わり」，$j$ は $k$ と「交わり」，
+$k$ は $l$ と「交わる」．補題 \ref{models-lemma-three-by-three} および
+\ref{models-lemma-four-by-four} を適用すると，
+$a_{hj} = a_{hk} = a_{ik} = a_{il} = a_{jl} = 0$
+であり，さらに分数
+$\frac{a_{hi}^2}{w_hw_i}, \frac{a_{ij}^2}{w_iw_j}, \frac{a_{jk}^2}{w_jw_k},
+\frac{a_{kl}^2}{w_kw_l}$ は $\{1, 2\}$ に属し，分数
+$\frac{a_{hl}^2}{w_hw_l} \in \{0, 1, 2\}$ であることが分かる．行列
+$A = (a_{ij})$ は負半定値なので，行列
+$$
+\left(
+\begin{matrix}
+-2w_h & a_{hi} & 0 & 0 & a_{hl} \\
+a_{hi} & -2w_i & a_{ij} & 0 & 0 \\
+0 & a_{ij} & -2w_j & a_{jk} & 0 \\
+0 & 0 & a_{jk} & -2w_k & a_{kl} \\
+a_{hl} & 0 & 0 & a_{kl} & -2w_l
+\end{matrix}
+\right)
+$$
+は $n = 5$ でない限り負定値である．$n = 5$ の場合は起こり得る．このとき，
+行列式\footnote{これは
+$-32w_hw_iw_jw_kw_l +
+8a_{hi}^2w_jw_kw_l +
+8a_{ij}^2w_hw_kw_l +
+8a_{jk}^2w_hw_iw_l +
+8a_{kl}^2w_hw_iw_j +
+8a_{hl}^2w_iw_jw_k -
+2a_{hi}^2a_{jk}^2w_l -
+2a_{hi}^2a_{kl}^2w_j -
+2a_{ij}^2a_{kl}^2w_h -
+2a_{hl}^2a_{ij}^2w_k -
+2a_{hl}^2a_{jk}^2w_i +
+2a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}
+$
+である．}
+は零であり，方程式
+\begin{align*}
+16 + 
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{jk}^2}{w_jw_k} +
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{ij}^2}{w_iw_j} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{jk}^2}{w_jw_k} \\
+= 4\frac{a_{hi}^2}{w_hw_i} +
+4\frac{a_{ij}^2}{w_iw_j} +
+4\frac{a_{jk}^2}{w_jw_k} +
+4\frac{a_{kl}^2}{w_kw_l} +
+4\frac{a_{hl}^2}{w_hw_l} +
+\frac{a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}}{w_hw_iw_jw_kw_l}
+\end{align*}
+を得る．これは非負整数についての方程式である．この方程式の右辺の最後の項は，
+次の等式により他の項から定まる：
+$$
+\left(\frac{a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}}{w_hw_iw_jw_kw_l} \right)^2 =
+\frac{a_{hi}^2}{w_hw_i} \frac{a_{ij}^2}{w_iw_j}
+\frac{a_{jk}^2}{w_jw_k} \frac{a_{kl}^2}{w_kw_l} \frac{a_{hl}^2}{w_hw_l}
+$$
+可能な解は次のものだけだと結論できる：
+$$
+(\frac{a_{hi}^2}{w_hw_i}, \frac{a_{ij}^2}{w_iw_j},
+\frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l}, \frac{a_{hl}^2}{w_hw_l}) =
+(1, 1, 1, 1, 1), (1, 1, 2, 1, 0), (1, 2, 1, 1, 0), \text{ または }(2, 1, 1, 2, 0)
+$$
+場合 $(1, 2, 1, 1, 0)$ は場合 $(1, 1, 2, 1, 0)$ の添字 $h, i, j, k, l$ の順序を
+逆にすれば得られることに注意せよ．これらの各場合で $g = 1$ である．読者はこれらを，場合
+(\ref{models-item-five-cycle}),
+(\ref{models-item-equal-equal-up-equal}), (\ref{models-item-equal-equal-down-equal}),
+(\ref{models-item-up-equal-equal-up}), (\ref{models-item-up-equal-equal-down})，
+(\ref{models-item-down-equal-equal-up})，すなわち補題 \ref{models-lemma-genus-one} の場合として
+見つけられる．$(1, 1, 1, 1, 1)$ に対応する場合は一つ，
+$(1, 1, 2, 1, 0)$ に対応する場合は二つ，$(2, 1, 1, 2, 0)$ に対応する場合は三つである．
+$n > 5$ と仮定すると，不等式
+\begin{align*}
+16 + 
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{jk}^2}{w_jw_k} +
+\frac{a_{hi}^2}{w_hw_i}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{ij}^2}{w_iw_j}\frac{a_{kl}^2}{w_kw_l} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{ij}^2}{w_iw_j} +
+\frac{a_{hl}^2}{w_hw_l}\frac{a_{jk}^2}{w_jw_k} \\
+> 4\frac{a_{hi}^2}{w_hw_i} +
+4\frac{a_{ij}^2}{w_iw_j} +
+4\frac{a_{jk}^2}{w_jw_k} +
+4\frac{a_{kl}^2}{w_kw_l} +
+4\frac{a_{hl}^2}{w_hw_l} +
+\frac{a_{hi}a_{ij}a_{jk}a_{kl}a_{hl}}{w_hw_iw_jw_kw_l}
+\end{align*}
+を得る．これは非負整数についての不等式である．上で与えた数に関する制約を用いると，
+可能性は次のものだけだと分かる：
+$$
+(\frac{a_{hi}^2}{w_hw_i}, \frac{a_{ij}^2}{w_iw_j},
+\frac{a_{jk}^2}{w_jw_k}, \frac{a_{kl}^2}{w_kw_l}, \frac{a_{hl}^2}{w_hw_l}) =
+(1, 1, 1, 1, 0), (1, 1, 1, 2, 0), \text{ または } (2, 1, 1, 1, 0)
+$$
+特に $a_{hl} = 0$ である（他の四つは非零と仮定していたことを思い出そう）．場合
+$(1, 1, 1, 2, 0)$ は場合 $(2, 1, 1, 1, 0)$ の添字 $h, i, j, k, l$ の順序を
+逆にすれば得られることに注意せよ．最初の二つの解から場合 (\ref{models-item-A5})，
+(\ref{models-item-C5})，(\ref{models-item-B5})，すなわち補題 \ref{models-lemma-five-by-five} の場合を得る．
+そこでは整数 $m_h$，$m_i$，$m_j$，$m_k$，$m_l$ に対する帰結も書き下してある．
+
+\begin{lemma}
+\label{models-lemma-five-by-five}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$n > 5$ とする．五つの $(-2)$-添字 $h, i, j, k, l$ が与えられ，
+$a_{hi}, a_{ij}, a_{jk}, a_{kl}$ が非零ならば，順序を除いて $m$，$a$，$w$ は
+次のいずれかである：
+\begin{enumerate}
+\item
+\label{models-item-A5}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & w \\
+0 & 0 & 0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4$，
+$2m_4 \geq m_3 + m_5$，$2m_5 \geq m_4$ である．または
+\item
+\label{models-item-C5}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & 2w \\
+0 & 0 & 0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + 2m_4$，
+$2m_4 \geq m_3 + m_5$，$2m_5 \geq m_4$ である．または
+\item
+\label{models-item-B5}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -4w & 2w \\
+0 & 0 & 0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4$，
+$2m_4 \geq m_3 + m_5$，$m_4 \geq m_3$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$h$，$i$，$j$，$k$，$l$ が五つの $(-2)$-添字であり，$a_{hi} > 0$，
+$a_{hj} > 0$，$a_{hk} > 0$，$a_{hl} > 0$ を満たすと仮定する．言い換えれば，添字
+$h$ は添字 $i$，$j$，$k$，$l$ と「交わる」．補題 \ref{models-lemma-three-by-three} から
+$a_{ij} = a_{ik} = a_{il} = a_{jk} = a_{jl} = a_{kl} = 0$ が分かり，補題
+\ref{models-lemma-D4} から，$w_h = w_i = w_j = w_k = w_l = w$ が，ある整数
+$w > 0$ に対して成り立ち，さらに
+% P07-ERR-0474: frozen source's contradictory -2w assertion remains unchanged.
+$a_{hi} = a_{hj} = a_{hk} = a_{hl} = -2w$ であることが分かる．対応する行列
+$$
+\left(
+\begin{matrix}
+-2w & w & w & w & w \\
+w & -2w & 0 & 0 & 0 \\
+w & 0 & -2w & 0 & 0 \\
+w & 0 & 0 & -2w & 0 \\
+w & 0 & 0 & 0 & -2w
+\end{matrix}
+\right)
+$$
+は特異である．したがって，これは $n = 5$ かつ $g = 1$ のときにしか起こり得ない．
+読者はこれを場合 (\ref{models-item-quadruple})，すなわち補題 \ref{models-lemma-genus-one} の場合として
+見つけられる．
+
+\begin{lemma}
+\label{models-lemma-fourfold}
+次の形の真部分グラフの非存在：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[ld] \ar@{-}[r] \ar@{-}[d] & \bullet \\
+\bullet & \bullet
+}
+$$
+$n > 5$ ならば，五つの $(-2)$-添字
+% P07-ERR-0475: frozen source says five indices but omits l from the name list.
+$h$，$i$，$j$，$k$ で，$a_{hi} > 0$，$a_{hj} > 0$，$a_{hk} > 0$，
+$a_{hl} > 0$ を満たすものは {\bf 存在しない}．
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$h$，$i$，$j$，$k$，$l$ が五つの $(-2)$-添字であり，$a_{hi} > 0$，
+$a_{ij} > 0$，$a_{jk} > 0$，$a_{jl} > 0$ を満たすと仮定する．言い換えれば，添字
+$h$ は $i$ と「交わり」，添字 $j$ は添字 $i$，$k$，$l$ と「交わる」．補題
+\ref{models-lemma-D4} から $a_{ik} = a_{il} = a_{kl} = 0$，
+$w_i = w_j = w_k = w_l = w$，$a_{ij} = a_{jk} = a_{jl} = w$ が，ある整数
+$w$ に対して成り立つことが分かる．補題 \ref{models-lemma-four-by-four} を四つ組
+$h, i, j, k$ および $h, i, j, l$ に適用すると，$a_{hj} = a_{hk} = a_{hl} = 0$ であり，
+$w_h = \frac{1}{2}w$，$w$，$2w$ のいずれかで，それぞれに応じて
+$a_{hi} = w$，$w$，$2w$ であることが分かる．$A$ は負半定値なので，行列
+$$
+\left(
+\begin{matrix}
+-2w_h & a_{hi} & 0 & 0 & 0 \\
+a_{hi} & -2w & w & 0 & 0 \\
+0 & w & -2w & w & w \\
+0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & -2w
+\end{matrix}
+\right)
+$$
+は $n = 5$ でない限り負定値である．読者が計算すれば，この行列の行列式は $0$ であり，
+それは $w_h = \frac{1}{2}w$ または $2w$ のときである．これから場合
+(\ref{models-item-triple-extended-up}) および (\ref{models-item-triple-extended-down})，すなわち補題
+\ref{models-lemma-genus-one} の場合を得る．$w_h = w$ に対しては場合 (\ref{models-item-D5})，
+すなわち補題 \ref{models-lemma-D5} の場合を得る．
+
+\begin{lemma}
+\label{models-lemma-D5}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \\
+& & \bullet
+}
+$$
+$n > 5$ とする．五つの $(-2)$-添字 $h, i, j, k, l$ が与えられ，
+$a_{hi}, a_{ij}, a_{jk}, a_{jl}$ が非零ならば，順序を除いて $m$，$a$，$w$ は
+次のようになる：
+\begin{enumerate}
+\item
+\label{models-item-D5}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & w \\
+0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4 + m_5$，
+$2m_4 \geq m_3$，$2m_5 \geq m_3$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$t > 5$ とし，$i_1, \ldots, i_t$ を $t$ 個の相異なる $(-2)$-添字で，
+$a_{i_ji_{j + 1}}$ が $j = 1, \ldots, t - 1$ に対して非零であるものとする．
+$t$ に関する帰納法により，$n = t$ ならば可能性
+(\ref{models-item-n-cycle}), (\ref{models-item-up-chain-equal-up}),
+(\ref{models-item-up-chain-equal-down}), (\ref{models-item-down-chain-equal-up})
+，すなわち補題 \ref{models-lemma-genus-one} の場合に至り，$n > t$ ならば場合
+(\ref{models-item-An})，(\ref{models-item-Cn})，(\ref{models-item-Bn})，すなわち補題 \ref{models-lemma-long} の場合に
+至ることを示す．まず $a_{i_1i_t}$ が非零ならば，補題
+\ref{models-lemma-five-by-five} の結果から，$w_{i_1} = \ldots = w_{i_t} = w$ であり，
+$a_{i_ji_{j + 1}} = w$ が $j = 1, \ldots, t - 1$ に対して成り立ち，さらに
+$a_{i_1i_t} = w$ であることが直ちに分かる．するとベクトル $(1, \ldots, 1)$ は
+対応する $t \times t$ 行列の核に属する．したがって $n = t$ でなければならず，
+種数は $1$ で，場合 (\ref{models-item-n-cycle})，すなわち補題 \ref{models-lemma-genus-one} の場合である．
+ゆえに $a_{i_1i_t} = 0$ と仮定してよい．帰納法の仮定（または $t = 6$ ならば補題
+\ref{models-lemma-five-by-five}）により，$a_{i_ji_k} = 0$ である（$k > j + 1$ のとき）．さらに，
+% P07-ERR-0476: frozen source includes i_1 in the common internal-weight range.
+$w_{i_1} = \ldots = w_{i_{t - 1}} = w$ がある整数 $w$ に対して成り立ち，
+$w_{i_1}, w_{i_t} \in \{\frac{1}{2}w, w, 2w\}$ である．また，$w_{i_1}$，それぞれ
+$w_{i_t}$ の値が $\frac{1}{2}w$，$w$，$2w$ のいずれであるかに応じて，
+$a_{i_1i_2}$，それぞれ $a_{i_{t - 1}i_t}$ の値は $w$，$w$，$2w$ となる．
+これにより $9$ 通りの可能性を得る．各場合に何が起こるかは容易に判定できる：
+\begin{enumerate}
+\item $(w_{i_1}, w_{i_t}) = (\frac{1}{2}w, \frac{1}{2}w)$ ならば，場合
+(\ref{models-item-up-chain-equal-down})，すなわち補題 \ref{models-lemma-genus-one} の場合である．
+\item $(w_{i_1}, w_{i_t}) = (\frac{1}{2}w, w)$ または $(w, \frac{1}{2}w)$ ならば，
+場合 (\ref{models-item-Bn})，すなわち補題 \ref{models-lemma-long} の場合である．
+\item $(w_{i_1}, w_{i_t}) = (\frac{1}{2}w, 2w)$ または $(2w, \frac{1}{2}w)$ ならば，
+場合 (\ref{models-item-up-chain-equal-up})，すなわち補題 \ref{models-lemma-genus-one} の場合である．
+\item $(w_{i_1}, w_{i_t}) = (w, w)$ ならば，場合 (\ref{models-item-An})，すなわち補題
+\ref{models-lemma-long} の場合である．
+\item $(w_{i_1}, w_{i_t}) = (w, 2w)$ または $(2w, w)$ ならば，場合
+(\ref{models-item-Cn})，すなわち補題 \ref{models-lemma-long} の場合である．
+\item $(w_{i_1}, w_{i_t}) = (2w, 2w)$ ならば，場合
+(\ref{models-item-down-chain-equal-up})，すなわち補題 \ref{models-lemma-genus-one} の場合である．
+\end{enumerate}
+
+\begin{lemma}
+\label{models-lemma-long}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{..}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+$t > 5$ かつ $n > t$ とする．$t$ 個の相異なる $(-2)$-添字
+$i_1, \ldots, i_t$ が与えられ，$a_{i_ji_{j + 1}}$ が
+$j = 1, \ldots, t - 1$ に対して非零ならば，これらの添字の順序を逆にすることを除いて，
+$a$ と $w$ は次のいずれかである：
+\begin{enumerate}
+\item
+\label{models-item-An}
+次で与えられる：$w_{i_1} = w_{i_2} = \ldots = w_{i_t} = w$，
+$a_{i_ji_{j + 1}} = w$，また $a_{i_ji_k} = 0$（$k > j + 1$ のとき）．または
+\item
+\label{models-item-Cn}
+次で与えられる：$w_{i_1} = w_{i_2} = \ldots = w_{i_{t - 1}} = w$，
+% P07-ERR-0477: both frozen terminal weights use undefined j_t.
+$w_{j_t} = 2w$，$a_{i_ji_{j + 1}} = w$（$j < t - 1$ に対して），
+$a_{i_{t - 1}i_t} = 2w$，また $a_{i_ji_k} = 0$（$k > j + 1$ のとき）．または
+\item
+\label{models-item-Bn}
+次で与えられる：$w_{i_1} = w_{i_2} = \ldots = w_{i_{t - 1}} = 2w$，
+$w_{j_t} = w$，$a_{i_ji_{j + 1}} = 2w$，$a_{i_{t - 1}i_t} = 2w$，また
+$a_{i_ji_k} = 0$（$k > j + 1$ のとき）．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$t > 4$ とし，$i_1, \ldots, i_{t + 1}$ を $t + 1$ 個の相異なる $(-2)$-添字で，
+$a_{i_ji_{j + 1}} > 0$ が $j = 1, \ldots, t - 1$ に対して成り立ち，さらに
+% P07-ERR-0478: frozen source uses the undefined j-index family in this edge.
+$a_{j_{t - 1}j_{t + 1}} > 0$ を満たすものとする．補題 \ref{models-lemma-Dn} の図を参照せよ．
+$t$ に関する帰納法により，$n = t + 1$ ならば可能性
+(\ref{models-item-Dn-extended-up}) および (\ref{models-item-Dn-extended-down})
+，すなわち補題 \ref{models-lemma-genus-one} の場合に至り，$n > t + 1$ ならば場合
+(\ref{models-item-Dn})，すなわち補題 \ref{models-lemma-Dn} の場合に至ることを示す．帰納法の仮定
+（または $t = 5$ の場合は補題 \ref{models-lemma-D5}）から，$a_{i_ji_k}$ は，
+$j, k \geq 2$ に対して指定された非零のもの以外では零である．さらに，
+% P07-ERR-0479: frozen source's bare weight subscripts remain unchanged.
+$w_2 = \ldots = w_{t + 1} = w$ がある整数 $w$ に対して成り立ち，非零の
+$a_{i_ji_k}$ は $j, k \geq 2$ に対して $w$ に等しいことが分かる．補題 \ref{models-lemma-long}
+（または $t = 5$ ならば補題 \ref{models-lemma-five-by-five}）を列 $i_1, \ldots, i_t$ と列
+$i_1, \ldots, i_{t - 1}, i_{t + 1}$ に適用すると，$a_{i_1 i_j} = 0$ が
+$j \geq 3$ に対して成り立ち，$w_1$ は $\frac{1}{2}w$，$w$，$2w$ のいずれかで，
+それぞれに応じて $a_{i_1i_2}$ は $w, w, 2w$ のいずれかであると結論できる．
+これにより $3$ 通りの可能性を得る．各場合に何が起こるかは容易に判定できる：
+\begin{enumerate}
+\item $w_1 = \frac{1}{2}w$ ならば，場合 (\ref{models-item-Dn-extended-down})，すなわち補題
+\ref{models-lemma-genus-one} の場合である．
+\item $w_1 = w$ ならば，場合 (\ref{models-item-Dn})，すなわち補題 \ref{models-lemma-Dn} の場合である．
+\item $w_1 = 2w$ ならば，場合 (\ref{models-item-Dn-extended-up})，すなわち補題
+\ref{models-lemma-genus-one} の場合である．
+\end{enumerate}
+
+\begin{lemma}
+\label{models-lemma-Dn}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{..}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \\
+& & & \bullet
+}
+$$
+$t > 4$ かつ $n > t + 1$ とする．$t + 1$ 個の相異なる
+$(-2)$-添字 $i_1, \ldots, i_{t + 1}$ が与えられ，$a_{i_ji_{j + 1}}$ が
+$j = 1, \ldots, t - 1$ に対して非零で，$a_{i_{t - 1}i_{t + 1}}$ も非零ならば，
+$a$ と $w$ は次のようになる：
+\begin{enumerate}
+\item
+\label{models-item-Dn}
+次で与えられる：$w_{i_1} = w_{i_2} = \ldots = w_{i_{t + 1}} = w$，
+$a_{i_ji_{j + 1}} = w$（$j = 1, \ldots, t - 1$ に対して），
+$a_{i_{t - 1}i_{t + 1}} = w$，また $a_{i_ji_k} = 0$（他の対 $(j, k)$ で
+$j > k$ を満たすものに対して）．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$6$ 個の相異なる $(-2)$-添字 $g, h, i, j, k, l$ が与えられ，
+$a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{il}$ が非零であると仮定する．補題
+\ref{models-lemma-E6} の図を参照せよ．補題 \ref{models-lemma-D5} を適用すると，補題
+\ref{models-lemma-E6} の状況でなければならないことが分かる．行列式は $3w^6 > 0$ なので，
+この場合に $n = 6$ となることは決してないと結論できる．
+
+\begin{lemma}
+\label{models-lemma-E6}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & \bullet
+}
+$$
+$n > 6$ とする．$6$ 個の相異なる $(-2)$-添字 $i_1, \ldots, i_6$ が与えられ，
+$a_{12}, a_{23}, a_{34}, a_{45}, a_{36}$ が非零ならば，$m$，$a$，$w$ は
+次のようになる：
+\begin{enumerate}
+\item
+\label{models-item-E6}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5 \\
+m_6
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & w \\
+0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4 + m_6$，
+$2m_4 \geq m_3 + m_5$，
+% P07-ERR-0480: frozen source's fifth-vertex inequality retains m_3.
+$2m_5 \geq m_3$，$2m_6 \geq m_3$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$t \geq 4$ とし，$i_0, \ldots, i_{t + 1}$ を $t + 2$ 個の相異なる $(-2)$-添字で，
+$a_{i_ji_{j + 1}} > 0$ が $j = 1, \ldots, t - 1$ に対して成り立ち，さらに
+$a_{i_0i_2} > 0$ かつ $a_{i_{t - 1}i_{t + 1}} > 0$ を満たすものとする．補題
+\ref{models-lemma-double-triple} の図を参照せよ．補題 \ref{models-lemma-D5} および補題
+\ref{models-lemma-Dn} を適用すると，他のすべての $a_{i_ji_k}$ は $j < k$ に対して零であり，
+$w_{i_0} = \ldots = w_{i_{t + 1}} = w$ がある整数 $w$ に対して成り立ち，必要とされる
+非零の $A$ の非対角成分は $w$ に等しいことが分かる．計算により，対応する行列の
+行列式は零である．したがって $n = t + 2$ であり，場合
+(\ref{models-item-double-triple})，すなわち補題 \ref{models-lemma-genus-one} の場合である．
+
+\begin{lemma}
+\label{models-lemma-double-triple}
+次の形の真部分グラフの非存在：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{..}[r] \ar@{-}[d] &
+\bullet \ar@{-}[d] \ar@{-}[r] & \bullet \\
+& \bullet & \bullet
+}
+$$
+$t \geq 4$ かつ $n > t + 2$ と仮定する．$t + 2$ 個の相異なる
+$(-2)$-添字 $i_0, \ldots, i_{t + 1}$ で，$a_{i_ji_{j + 1}} > 0$ が
+$j = 1, \ldots, t - 1$ に対して成り立ち，さらに $a_{i_0i_2} > 0$ かつ
+$a_{i_{t - 1}i_{t + 1}} > 0$ を満たすものは {\bf 存在しない}．
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$7$ 個の相異なる $(-2)$-添字 $f, g, h, i, j, k, l$ が与えられ，数
+$a_{fg}, a_{gh}, a_{ij}, a_{jh}, a_{kl}, a_{lh}$ が非零であると仮定する．補題
+\ref{models-lemma-E6-completed} の図を参照せよ．補題 \ref{models-lemma-D5} を適用すると，
+対応する行列は
+$$
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & w & -2w & 0 & w & 0 & w \\
+0 & 0 & 0 & -2w & w & 0 & 0 \\
+0 & 0 & w & w & -2w & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -2w & w \\
+0 & 0 & w & 0 & 0 & w & -2w
+\end{matrix}
+\right)
+$$
+となることが分かる．行列式は $0$ なので，$n = 7$ かつ $g = 1$ でなければならず，
+場合 (\ref{models-item-E6-completed})，すなわち補題 \ref{models-lemma-genus-one} の場合を得る．
+
+\begin{lemma}
+\label{models-lemma-E6-completed}
+次の形の真部分グラフの非存在：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & \bullet \ar@{-}[d] \\
+& & \bullet
+}
+$$
+$n > 7$ と仮定する．$7$ 個の相異なる $(-2)$-添字 $f, g, h, i, j, k, l$ で，
+$a_{fg}, a_{gh}, a_{ij}, a_{jh}, a_{kl}, a_{lh}$ が非零となるものは {\bf 存在しない}．
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$7$ 個の相異なる $(-2)$-添字 $f, g, h, i, j, k, l$ が与えられ，数
+$a_{fg}, a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{il}$ が非零であると仮定する．補題
+\ref{models-lemma-E7} の図を参照せよ．補題 \ref{models-lemma-D5} および補題 \ref{models-lemma-Dn} を
+適用すると，補題 \ref{models-lemma-E7} の状況でなければならないことが分かる．
+% P07-ERR-0481: frozen source retains the impossible inequality -8w^7 > 0.
+行列式は $-8w^7 > 0$ なので，この場合に $n = 7$ となることは決してないと結論できる．
+
+\begin{lemma}
+\label{models-lemma-E7}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \ar@{-}[r] & \bullet \\
+& & & \bullet
+}
+$$
+$n > 7$ とする．$7$ 個の相異なる $(-2)$-添字 $i_1, \ldots, i_7$ が与えられ，
+$a_{12}, a_{23}, a_{34}, a_{45}, a_{56}, a_{47}$ が非零ならば，$m$，$a$，$w$ は
+次のようになる：
+\begin{enumerate}
+\item
+\label{models-item-E7}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5 \\
+m_6 \\
+m_7
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & w \\
+0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4$，
+$2m_4 \geq m_3 + m_5 + m_7$，$2m_5 \geq m_4 + m_6$，$2m_6 \geq m_5$，
+$2m_7 \geq m_4$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$8$ 個の相異なる $(-2)$-添字が与えられ，非零成分 $a_{ij}$ をもつ行列 $A$ の配置が
+次の形であると仮定する：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & \bullet
+}
+$$
+または次の形である：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & \bullet
+}
+$$
+補題 \ref{models-lemma-E7} の証明とまったく同様に論じると，最初の配置は場合
+(\ref{models-item-E8})，すなわち補題 \ref{models-lemma-E8} の場合に至り，補題 \ref{models-lemma-genus-one} に新しい場合を
+生じないことが分かる．補題 \ref{models-lemma-E6-completed} の証明とまったく同様に論じると，
+二番目の配置は $n > 8$ ならば起こらないが，$n = 8$ のときは場合
+(\ref{models-item-E7-completed})，すなわち補題 \ref{models-lemma-genus-one} の場合に至ることが分かる．
+
+\begin{lemma}
+\label{models-lemma-E8}
+次の形の真部分グラフの分類：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & \bullet
+}
+$$
+$n > 8$ とする．$8$ 個の相異なる $(-2)$-添字 $i_1, \ldots, i_8$ が与えられ，
+% P07-ERR-0482: frozen source's nonzero-edge list remains unchanged.
+$a_{12}, a_{23}, a_{34}, a_{45}, a_{56}, a_{65}, a_{57}$ が非零ならば，
+$m$，$a$，$w$ は次のようになる：
+\begin{enumerate}
+\item
+\label{models-item-E8}
+次で与えられる：
+$$
+\left(
+\begin{matrix}
+m_1 \\
+m_2 \\
+m_3 \\
+m_4 \\
+m_5 \\
+m_6 \\
+m_7 \\
+m_8
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & 0 & 0 \\
+0 & 0 & 0 & w & -2w & w & 0 & w \\
+0 & 0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & 0 & w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right)
+$$
+ここで $2m_1 \geq m_2$，$2m_2 \geq m_1 + m_3$，$2m_3 \geq m_2 + m_4$，
+$2m_4 \geq m_3 + m_5$，$2m_5 \geq m_4 + m_6 + m_8$，$2m_6 \geq m_5 + m_7$，
+$2m_7 \geq m_6$，$2m_8 \geq m_5$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-E7-completed}
+次の形の真部分グラフの非存在：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] & \bullet \\
+& & & \bullet
+}
+$$
+$n > 8$ と仮定する．$8$ 個の相異なる $(-2)$-添字 $e, f, g, h, i, j, k, l$ で，
+$a_{ef}, a_{fg}, a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{lh}$ が非零となるものは
+{\bf 存在しない}．
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+$9$ 個の相異なる $(-2)$-添字が与えられ，非零成分 $a_{ij}$ をもつ行列 $A$ の配置が
+次の形であると仮定する：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & & \bullet
+}
+$$
+補題 \ref{models-lemma-E6-completed} の証明とまったく同様に論じると，この配置は
+$n > 9$ ならば起こらないが，$n = 9$ のときは場合 (\ref{models-item-E8-completed})，
+すなわち補題 \ref{models-lemma-genus-one} の場合に至ることが分かる．
+
+\begin{lemma}
+\label{models-lemma-E8-completed}
+次の形の真部分グラフの非存在：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] & \bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \ar@{-}[r] & \bullet \\
+& & & & & \bullet
+}
+$$
+$n > 9$ と仮定する．$9$ 個の相異なる $(-2)$-添字 $d, e, f, g, h, i, j, k, l$ で，
+% P07-ERR-0483: frozen source's final nonzero edge a_lh remains unchanged.
+$a_{de}, a_{ef}, a_{fg}, a_{gh}, a_{hi}, a_{ij}, a_{jk}, a_{lh}$ が非零となるものは
+{\bf 存在しない}．
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ．
+\end{proof}
+
+\noindent
+以上の情報をすべてまとめると，次を得る．
+
+\begin{proposition}
+\label{models-proposition-classify-subgraphs}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．
+$I \subset \{1, \ldots, n\}$ を，濃度 $\geq 2$ の $(-2)$-添字からなる真部分集合で，
+空でない真部分集合 $I' \subset I$ であって
+% P07-ERR-0484: frozen source quantifies i' over I rather than I'.
+$a_{i'i} = 0$ が $i' \in I$，$i \in I \setminus I'$ に対して成り立つものが存在しない
+ものとする．このとき，順序を並べ替えることを除いて，$m_i$，$a_{ij}$，$w_i$ は，
+$i, j \in I$ に対して次の補題に列挙されたものとなる：
+\ref{models-lemma-two-by-two},
+\ref{models-lemma-three-by-three},
+\ref{models-lemma-four-by-four},
+\ref{models-lemma-D4},
+\ref{models-lemma-five-by-five},
+\ref{models-lemma-D5},
+\ref{models-lemma-long},
+\ref{models-lemma-Dn},
+\ref{models-lemma-E6},
+\ref{models-lemma-E7}，または
+\ref{models-lemma-E8}.
+\end{proposition}
+
+\begin{proof}
+これは上の議論から従う．節 \ref{models-section-classify-proper-subgraphs} の冒頭の議論を参照せよ．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{種数零および種数一の極小型の分類}
+\label{models-section-classification-genus-one}
+
+\noindent
+この節の内容は表題のとおりである．
+
+\begin{lemma}[種数零]
+\label{models-lemma-genus-zero}
+種数零の極小数値型は次のものだけである：
+$n = 1$, $m_1 = 1$, $a_{11} = 0$, $w_1 = 1$, $g_1 = 0$.
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-non-irreducible-minimal-type-genus-at-least-one} および補題
+\ref{models-lemma-irreducible} から従う．
+\end{proof}
+
+\begin{lemma}[種数一]
+\label{models-lemma-genus-one}
+種数一の極小数値型は，同値を除いて次のものである：
+\begin{enumerate}
+\item
+\label{models-item-one}
+$n = 1$，$a_{11} = 0$，$g_1 = 1$ で，$m_1, w_1 \geq 1$ は任意である．または
+\item
+\label{models-item-two-cycle}
+$n = 2$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w \\
+2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up4}
+$n = 2$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 4w \\
+4w & -8w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-three-cycle}
+$n = 3$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w \\
+w & -2w & w \\
+w & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-equal-up3}
+$n = 3$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 \\
+w & -2w & 3w \\
+0 & 3w & -6w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+3w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-equal-down3}
+$n = 3$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-6w & 3w & 0 \\
+3w & -6w & 3w \\
+0 & 3w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+3w \\
+3w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-up}
+$n = 3$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 \\
+2w & -4w & 4w \\
+0 & 4w & -8w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-down}
+$n = 3$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 \\
+2w & -4w & 2w \\
+0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-down-up}
+$n = 3$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 \\
+2w & -2w & 2w \\
+0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-four-cycle}
+$n = 4$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & w \\
+w & -2w & w & 0 \\
+0 & w & -2w & w \\
+w & 0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-equal-up}
+$n = 4$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 \\
+2w & -4w & 2w & 0 \\
+0 & 2w & -4w & 4w \\
+0 & 0 & 4w & -8w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-equal-down}
+$n = 4$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 \\
+2w & -4w & 2w & 0 \\
+0 & 2w & -4w & 2w \\
+0 & 0 & 2w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-down-equal-up}
+$n = 4$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 \\
+2w & -2w & w & 0 \\
+0 & w & -2w & 2w \\
+0 & 0 & 2w & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-triple-with-up}
+$n = 4$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w & 2w \\
+w & -2w & 0 & 0 \\
+w & 0 & -2w & 0 \\
+2w & 0 & 0 & -4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-triple-with-down}
+$n = 4$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+m \\
+m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 2w & 2w \\
+2w & -4w & 0 & 0 \\
+2w & 0 & -4w & 0 \\
+2w & 0 & 0 & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-five-cycle}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & w \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & w \\
+w & 0 & 0 & w & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-equal-equal-up-equal}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 \\
+0 & w & -2w & 2w & 0 \\
+0 & 0 & 2w & -4w & 2w \\
+0 & 0 & 0 & 2w & -4w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+2w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-equal-equal-down-equal}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+4m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -2w & w \\
+0 & 0 & 0 & w & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+2w \\
+2w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-equal-equal-up}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -4w & 4w \\
+0 & 0 & 0 & 4w & -8w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+2w \\
+4w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-equal-equal-down}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 0 \\
+0 & 0 & 2w & -4w & 2w \\
+0 & 0 & 0 & 2w & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+2w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-down-equal-equal-up}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+2m \\
+2m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & 0 \\
+0 & 0 & w & -2w & 2w \\
+0 & 0 & 0 & 2w & -4w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+w \\
+w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-quadruple}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+m \\
+m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & w & w & w \\
+w & -2w & 0 & 0 & 0 \\
+w & 0 & -2w & 0 & 0 \\
+w & 0 & 0 & -2w & 0 \\
+w & 0 & 0 & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-triple-extended-up}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+2m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-4w & 2w & 0 & 0 & 0 \\
+2w & -2w & w & 0 & 0 \\
+0 & w & -2w & w & w \\
+0 & 0 & w & -2w & 0 \\
+0 & 0 & w & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+2w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-triple-extended-down}
+$n = 5$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+2m \\
+2m \\
+2m \\
+m \\
+m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & 2w & 0 & 0 & 0 \\
+2w & -4w & 2w & 0 & 0 \\
+0 & 2w & -4w & 2w & 2w \\
+0 & 0 & 2w & -4w & 0 \\
+0 & 0 & 2w & 0 & -4w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+2w \\
+2w \\
+2w \\
+2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-n-cycle}
+$n \geq 6$ であり，(\ref{models-item-five-cycle}) を一般化する $n$-サイクルは次のとおりである：
+\begin{enumerate}
+\item $m_1 = \ldots = m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 1) n} = w$, $a_{1n} = w$,
+また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = \ldots = w_n = w$
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-chain-equal-up}
+$n \geq 6$ であり，(\ref{models-item-up-equal-equal-up}) を一般化する鎖は次のとおりである：
+\begin{enumerate}
+\item $m_1 = \ldots = m_{n - 1} = 2m$, $m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 2) (n - 1)} = 2w$, $a_{(n - 1) n} = 4w$,
+また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = w$, $w_2 = \ldots = w_{n - 1} = 2w$, $w_n = 4w$
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-up-chain-equal-down}
+$n \geq 6$ であり，(\ref{models-item-up-equal-equal-down}) を一般化する鎖は次のとおりである：
+\begin{enumerate}
+\item $m_1 = \ldots = m_n = m$,
+% P07-ERR-0485: frozen source's adjacent-edge value remains w.
+\item $a_{12} = \ldots = a_{(n - 1) n} = w$,
+また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = w$, $w_2 = \ldots = w_{n - 1} = 2w$, $w_n = w$
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-down-chain-equal-up}
+$n \geq 6$ であり，(\ref{models-item-down-equal-equal-up}) を一般化する鎖は次のとおりである：
+\begin{enumerate}
+% P07-ERR-0486: frozen source's mixed multiplicity/weight symbols remain unchanged.
+\item $m_1 = w$, $w_2 = \ldots = m_{n - 1} = 2m$, $m_n = m$,
+\item $a_{12} = 2w$, $a_{23} = \ldots = a_{(n - 2) (n - 1)} = w$,
+$a_{(n - 1) n} = 2w$，また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = 2w$, $w_2 = \ldots = w_{n - 1} = w$, $w_n = 2w$
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-Dn-extended-up}
+$n \geq 6$ であり，(\ref{models-item-triple-extended-up}) を一般化する型は次のとおりである：
+\begin{enumerate}
+% P07-ERR-0487: frozen source's multiplicity range omits m_{n-2}.
+\item $m_1 = m$, $m_2 = \ldots = m_{n - 3} = 2m$, $m_{n - 1} = m_n = m$,
+\item $a_{12} = 2w$, $a_{23} = \ldots = a_{(n - 2) (n - 1)} = w$,
+$a_{(n - 2) n} = w$，また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = 2w$, $w_2 = \ldots = w_n = w$
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-Dn-extended-down}
+$n \geq 6$ であり，(\ref{models-item-triple-extended-down}) を一般化する型は次のとおりである：
+\begin{enumerate}
+% P07-ERR-0488: frozen source's multiplicity range omits m_{n-2}.
+\item $m_1 = \ldots = m_{n - 3} = 2m$, $m_{n - 1} = m_n = m$,
+\item $a_{12} = \ldots = a_{(n - 2) (n - 1)} = 2w$,
+$a_{(n - 2) n} = 2w$，また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = w$, $w_2 = \ldots = w_n = 2w$
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-double-triple}
+$n \geq 6$ であり，(\ref{models-item-quadruple}) を一般化する型は次のとおりである：
+\begin{enumerate}
+\item $m_1 = m_2 = m$, $m_3 = \ldots = m_{n - 2} = 2m$, $m_{n - 1} = m_n = m$,
+\item $a_{13} = w$, $a_{23} = \ldots = a_{(n - 2) (n - 1)} = w$,
+$a_{(n - 2) n} = w$，また他の $i < j$ に対して $a_{ij} = 0$ である．
+\item $w_1 = \ldots = w_n = w$,
+\end{enumerate}
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-E6-completed}
+$n = 7$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+m \\
+2m \\
+m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & w & -2w & 0 & w & 0 & w \\
+0 & 0 & 0 & -2w & w & 0 & 0 \\
+0 & 0 & w & w & -2w & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -2w & w \\
+0 & 0 & w & 0 & 0 & w & -2w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-E7-completed}
+$n = 8$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+4m \\
+3m \\
+2m \\
+m \\
+2m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & 0 & w \\
+0 & 0 & 0 & w & -2w & w & 0 & 0 \\
+0 & 0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & w & 0 & 0 & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．または
+\item
+\label{models-item-E8-completed}
+$n = 9$ とし，$m_i, a_{ij}, w_i, g_i$ は次で与えられる：
+$$
+\left(
+\begin{matrix}
+m \\
+2m \\
+3m \\
+4m \\
+5m \\
+6m \\
+4m \\
+2m \\
+3m
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+-2w & w & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+w & -2w & w & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & w & -2w & w & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & w & -2w & w & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & w & -2w & w & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & w & -2w & w & 0 & w \\
+0 & 0 & 0 & 0 & 0 & w & -2w & w & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & w & -2w & 0 \\
+0 & 0 & 0 & 0 & 0 & w & 0 & 0 & -2w \\
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w \\
+w
+\end{matrix}
+\right),
+\quad
+\left(
+\begin{matrix}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{matrix}
+\right)
+$$
+ここで $w$ と $m$ は任意である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは節 \ref{models-section-classify-proper-subgraphs} で証明されている．同節
+\ref{models-section-classify-proper-subgraphs} の冒頭の議論を参照せよ．
+\end{proof}
+
+
+
+
+
+
+\section{数値型の不変量の上界}
+\label{models-section-towards-classification}
+
+\noindent
+曲線の半安定還元の証明では，種数 $g$ の数値型の Picard 群に対する上界を用いる．
+この節ではその上界を証明する．
+
+\begin{lemma}
+\label{models-lemma-bound-neighbours}
+$n, m_i, a_{ij}, w_i, g_i$ を種数 $g$ の数値型とする．$i, j$ が与えられ，
+$a_{ij} > 0$ を満たすとき，$m_ia_{ij} \leq m_j|a_{jj}|$ かつ
+$m_iw_i \leq m_j|a_{jj}|$ である．
+\end{lemma}
+
+\begin{proof}
+各添字 $j$ に対して $m_j a_{jj} + \sum_{i \not = j} m_ia_{ij} = 0$ である．
+したがって，$|a_{jj}|$ と $m_j$ の上界があれば，非零（したがって正）の
+$a_{ij}$ と $m_i$ にも上界が得られる．$w_i$ が $a_{ij}$ を割り切ることを思い出せば，
+補題が成り立つことは容易に分かる．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-bound-heart}
+$g \geq 2$ を固定する．任意の極小数値型 $n, m_i, a_{ij}, w_i, g_i$ で，種数が
+$g$ かつ $n > 1$ であるものに対して，次が成り立つ：
+\begin{enumerate}
+\item 集合 $J \subset \{1, \ldots, n\}$ は $(-2)$-添字でないものからなり，その元の個数は
+$2g - 2$ 以下である．
+\item $j \in J$ に対して $g_j < g$ である．
+\item $j \in J$ に対して $m_j|a_{jj}| \leq 6g - 6$ である．
+\item $j \in J$ および $i \in \{1, \ldots, n\}$ に対して
+$m_ia_{ij} \leq 6g - 6$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$g = 1 + \sum m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$ であることを思い出そう．
+$j \in J$ に対して，$m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$ という種数 $g$ への寄与は
+$> 0$，したがって $\geq 1/2$ である．
+ここでは補題 \ref{models-lemma-minus-one}，定義 \ref{models-definition-type-minus-one}，定義
+\ref{models-definition-type-minimal}，補題 \ref{models-lemma-minus-two}，定義
+\ref{models-definition-type-minus-two} を用いた．以下では，これらの結果を断りなく用いる．
+したがって，$J$ の元の個数は $2(g - 1)$ 以下である．これで (1) が示された．
+
+\medskip\noindent
+$-a_{ii} > 0$ がすべての $i$ に対して成り立つことを，補題
+\ref{models-lemma-diagonal-negative} から思い出そう．したがって，$j \in J$ に対して，
+$m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$ という種数 $g$ への寄与は
+$> m_jw_j(g_j - 1)$ である．ゆえに
+$$
+g - 1 > m_jw_j(g_j - 1) \Rightarrow g_j < (g - 1)/m_jw_j + 1
+$$
+これは確かに $g_j < g$ を含意するので，(2) が示された．
+
+\medskip\noindent
+$j \in J$ に対して $g_j > 0$ ならば，$m_j(w_j(g_j - 1) - \frac{1}{2} a_{jj})$ という
+種数 $g$ への寄与は $\geq -\frac{1}{2}m_ja_{jj}$ であり，直ちに
+$m_j|a_{jj}| \leq 2(g - 1)$ と結論できる．そうでなければ，$a_{jj} = -kw_j$ が
+ある整数 $k \geq 3$ に対して成り立ち（$j \in J$ であるため），次を得る：
+$$
+m_jw_j(-1 + \frac{k}{2}) \leq g - 1
+\Rightarrow
+m_jw_j \leq \frac{2(g - 1)}{k - 2}
+$$
+% P07-ERR-0489: frozen source retains the extra multiplicity in this repeated equality.
+これを $a_{jj} = -km_jw_j$ に代入すると，
+$$
+m_j|a_{jj}| \leq 2(g - 1) \frac{k}{k - 2} \leq 6(g - 1)
+$$
+を得る．これで (3) が示された．
+
+\medskip\noindent
+(4) は補題 \ref{models-lemma-bound-neighbours} と (3) から従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-bound-wm}
+$g \geq 2$ を固定する．任意の極小数値型 $n, m_i, a_{ij}, w_i, g_i$ で，種数が
+$g$ であるものに対して $m_i|a_{ij}| \leq 768g$ である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-bound-neighbours} により，$m_i|a_{ii}| \leq 768g$ をすべての $i$ に対して
+示せば十分である．$J \subset \{1, \ldots, n\}$ を，補題
+\ref{models-lemma-bound-heart} における $(-2)$-添字でないものの集合とする．$J$ は空でない．
+これは $g \geq 2$ だからである．また，同補題により，$m_j|a_{jj}| \leq 6g$ が
+$j \in J$ に対して成り立つ．
+
+\medskip\noindent
+$j \in J$ とし，$i_1, \ldots, i_7$ を $(-2)$-添字の列で，$a_{ji_1}$ および
+$a_{i_1i_2}$，$a_{i_2i_3}$，$a_{i_3i_4}$，$a_{i_4i_5}$，$a_{i_5i_6}$，
+$a_{i_6i_7}$ が非零であるものとする．補題 \ref{models-lemma-bound-neighbours} から
+$m_{i_1}w_{i_1} \leq 6g$ かつ $m_{i_1}a_{ji_1} \leq 6g$ である．$i_1$ は
+$(-2)$-添字なので $a_{i_1i_1} = -2w_{i_1}$ であり，
+$m_{i_1}|a_{i_1i_1}| \leq 12g$ と結論できる．議論を繰り返すと，
+$m_{i_2}w_{i_2} \leq 12g$ かつ $m_{i_2}a_{i_1i_2} \leq 12g$ と結論できる．すると
+$m_{i_2}|a_{i_2i_2}| \leq 24g$ であり，以下同様である．最終的に，
+$m_{i_k}|a_{i_ki_k}| \leq 2^k(6g) \leq 768g$ が $k = 1, \ldots, 7$ に対して成り立つ．
+
+\medskip\noindent
+$I \subset \{1, \ldots, n\} \setminus J$ を極大な連結部分集合とする．言い換えれば，
+空でない真部分集合 $I' \subset I$ で，$a_{i'i} = 0$ が $i' \in I'$ および
+$i \in I \setminus I'$ に対して成り立つものは存在せず，$I$ はこの性質に関して極大である．
+特に，数値型は定義により連結なので，$j \in J$ と $i \in I$ で $a_{ij} > 0$ を満たす
+ものが存在する．命題 \ref{models-proposition-classify-subgraphs} におけるそのような $I$ の分類と
+前段落の結果を用いると，
+% P07-ERR-0490: frozen source retains w_i rather than m_i in this bound.
+$w_i|a_{ii}| \leq 768g$ がすべての $i \in I$ に対して成り立つことが分かる．ただし，
+$I$ が補題 \ref{models-lemma-long} または補題 \ref{models-lemma-Dn} に記述された場合を除く．したがって，
+$a_{ii'}$ が非零となる配置（$i, i' \in I$）は，次のいずれかの形であると仮定してよい：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{..}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet
+}
+$$
+（補題 \ref{models-lemma-long} に詳述された三つの部分場合をもつ），または次の形である：
+$$
+\xymatrix{
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{..}[r] &
+\bullet \ar@{-}[r] &
+\bullet \ar@{-}[r] \ar@{-}[d] &
+\bullet \\
+& & & & \bullet
+}
+$$
+補題 \ref{models-lemma-long} の最初の部分場合について上界が成り立つことを証明し，他の場合は
+読者に委ねる（それらの場合の議論もほとんどまったく同じである）．
+
+\medskip\noindent
+番号を付け直すことにより，$I = \{1, \ldots, t\} \subset \{1, \ldots, n\}$ と仮定してよく，
+ある整数 $w$ が存在して
+$$
+w = w_1 = \ldots = w_t =
+a_{12} = \ldots = a_{(t - 1) t} =
+-\frac{1}{2} a_{i_1i_2} = \ldots = -\frac{1}{2} a_{(t - 1) t}
+$$
+等式 $a_{ii}m_i + \sum_{j \not = i} a_{ij}m_j = 0$ から，
+$$
+2m_2 \geq m_1 + m_3, \ldots, 2m_{t - 1} \geq m_{t - 2} + m_t
+$$
+を得る．$2m_i \geq m_{i - 1} + m_{i + 1}$ で等号が成り立つのは，$i$ が
+$i - 1$ および $i + 1$ 以外の添字と「交わらない」場合，かつその場合に限る．また，
+$i$ が他の添字と交わるならば，その添字は $J$ に属する（$I$ の極大性による）．特に，写像
+$\{1, \ldots, t\} \to \mathbf{Z}$，$i \mapsto m_i$ は凹である．
+
+\medskip\noindent
+$m = \max(m_i, i \in \{1, \ldots, t\})$ とおく．このとき，$m_i|a_{ii}| \leq 2mw$ が
+$i \leq t$ に対して成り立ち，目標は $2mw \leq 768g$ を示すことである．
+$s$，それぞれ $s'$ を，$\{1, \ldots, t\}$ の添字で $m_s = m = m_{s'}$ を満たすもののうち，
+それぞれ最小，最大のものとする．凹性から，$m_i = m$ が $s \leq i \leq s'$ に対して成り立つ．
+$s > 1$ ならば，$2m_s \geq m_{s - 1} + m_{s + 1}$ で等号は成り立たず，$s$ は $J$ の
+ある添字と交わる．この場合，証明の第二段落の結果により $2mw \leq 12g$ である．同様に，
+$s' < t$ ならば，$s'$ は $J$ のある添字と交わり，やはり $2mw \leq 12g$ を得る．一方，
+$s = 1$ かつ $s' = t$ ならば，$a_{ij} = 0$ がすべての $j \in J$ および
+$i \in \{2, \ldots, t - 1\}$ に対して成り立つと結論できる．しかし，
+$(i, j) \in I \times J$ で $a_{ij} > 0$ を満たす対が存在しなければならないことは既に見た．
+したがって，これは $i = 1$ または $i = t$ のときに起こり，前と同じ仕方で
+$2mw \leq 12g$ と結論できる（この場合 $m_1 = m = m_t$ だからである）．
+\end{proof}
+
+\begin{proposition}
+\label{models-proposition-bound-picard-group}
+$g \geq 2$ とする．任意の数値型 $T$ で種数が $g$ であるものと，素数
+$\ell > 768g$ に対して，
+$$
+\dim_{\mathbf{F}_\ell} \Pic(T)[\ell] \leq g
+$$
+が成り立つ．ここで $\Pic(T)$ は定義 \ref{models-definition-picard-group} のとおりである．
+$T$ が極小ならば，さらに
+$$
+\dim_{\mathbf{F}_\ell} \Pic(T)[\ell] \leq g_{top} \leq g
+$$
+が成り立つ．ここで $g_{top}$ は定義 \ref{models-definition-top-genus} のとおりである．
+\end{proposition}
+
+\begin{proof}
+$T$ が $n, m_i, a_{ij}, w_i, g_i$ で与えられるとする．$T$ が極小でなければ，
+$(-1)$-添字が存在する．$T$ を同値な型で置き換えることにより，$n$ が $(-1)$-添字であると
+仮定してよい．補題 \ref{models-lemma-contract-picard-group} を適用すると，
+$\Pic(T) \subset \Pic(T')$ を得る．ここで $T'$ は，補題 \ref{models-lemma-contract} により種数
+$g$ の数値型であり，添字の個数は $n - 1$ である．したがって，極小数値型について補題を
+証明すれば，$n$ に関する帰納法で結論が従う．
+
+\medskip\noindent
+$T$ が種数 $\geq 2$ の極小数値型であると仮定する．補題
+\ref{models-lemma-genus-nonnegative} により $g_{top} \leq g$ であることに注意せよ．
+$A = (a_{ij})$ とすると，補題 \ref{models-lemma-picard-T-and-A} により
+$\Pic(T) \subset \Coker(A)$ である．したがって，$\Coker(A)$ について補題を証明すれば十分である．
+補題 \ref{models-lemma-bound-wm} から，$m_i|a_{ij}| \leq 768g$ がすべての $i, j$ に対して
+成り立つ．ゆえに，補題 \ref{models-lemma-recurring-symmetric-integer} から
+結論が従う．
+\end{proof}
+
+
+
+
+
+
+
+\section{モデル}
+\label{models-section-models}
+
+\noindent
+この章では，$R$ を離散付値環とし，$K$ をその分数体とする．必要ならば，
+$\pi \in R$ で一意化元を表し，$k = R/(\pi)$ で剰余体を表す．
+
+\medskip\noindent
+$V$ を代数的 $K$-スキームとする（Varieties, 定義
+\ref{varieties-definition-algebraic-scheme}）．$V$ の {\it モデル}とは，平坦かつ有限型の射
+\footnote{ときには，モデルが $R$ 上局所有限型であることを許すと便利だが，必要になったときに扱う．}
+$X \to \Spec(R)$ と，同型 $V \to X_K = X \times_{\Spec(R)} \Spec(K)$ を備えたものをいう．
+しばしば $V$ と一般ファイバー $X_K$（$X$ のもの）を同一視し，単に $V = X_K$ と書く．
+特殊ファイバーは $X_k = X \times_{\Spec(R)} \Spec(k)$ である．
+{\it モデルの射 $X \to X'$（$V$ に対する）}とは，スキームの射 $X \to X'$（$R$ 上の）で，
+$V$ 上に恒等射を誘導するものをいう．
+
+\medskip\noindent
+{\it $X$ が $V$ の固有モデルである}とは，$X$ が $V$ のモデルであり，構造射
+$X \to \Spec(R)$ が固有であることをいう．分離モデル，滑らかなモデルについても同様であり，
+% P07-ERR-0495: frozen source retains the unfinished editorial placeholder.
+ここにさらに追加する．{\it $X$ が $V$ の正則モデルである}とは，$X$ が $V$ のモデルであり，
+$X$ が正則スキームであることをいう．正規モデル，簡約モデルについても同様であり，
+ここにさらに追加する．
+
+\medskip\noindent
+$R \subset R'$ を離散付値環の拡大とする（More on Algebra, 定義
+\ref{more-algebra-definition-extension-discrete-valuation-rings}）．これは分数体の拡大
+$K'/K$ を誘導する．代数的スキーム $V$ が $K$ 上で与えられたとき，$V'$ で基底変換
+$V \times_{\Spec(K)} \Spec(K')$ を表す．このとき関手
+$$
+V\text{ の }R\text{ 上のモデル}
+\longrightarrow
+V'\text{ の }R'\text{ 上のモデル}
+$$
+があり，$X$ を $X \times_{\Spec(R)} \Spec(R')$ に送る．
+
+\begin{lemma}
+\label{models-lemma-closure-is-model}
+$V_1 \to V_2$ を $K$ 上の代数的スキームの閉埋め込みとする．$X_2$ が $V_2$ のモデルならば，
+$V_1 \to X_2$ のスキーム論的像は $V_1$ のモデルである．
+\end{lemma}
+
+\begin{proof}
+Morphisms, 補題 \ref{morphisms-lemma-quasi-compact-scheme-theoretic-image} および
+例 \ref{morphisms-example-scheme-theoretic-image} を用いると，これは次の代数的主張に帰着する．
+$A_1$ を $R$ 上平坦な有限型 $R$-代数とする．$A_1 \otimes_R K \to B_2$ を全射とする．
+このとき，$A_2 = A_1 / \Ker(A_1 \to B_2)$ は $R$ 上平坦な有限型 $R$-代数であり，
+$B_2 = A_2 \otimes_R K$ を満たす．詳しい証明は省略する．More on Algebra, 補題
+\ref{more-algebra-lemma-dedekind-torsion-free-flat} を用いて $A_2$ が平坦であることを示せばよい．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-normalization}
+$X$ を幾何学的に正規な多様体 $V$ の $K$ 上のモデルとする．このとき正規化
+$\nu : X^\nu \to X$ は有限であり，$X^\nu$ の完備化 $R^\wedge$ への基底変換は，$X$ の
+基底変換の正規化である．さらに，各 $x \in X^\nu$ に対して
+$\mathcal{O}_{X^\nu, x}$ の完備化は正規である．
+\end{lemma}
+
+\begin{proof}
+$R^\wedge$ は離散付値環である（More on Algebra, 補題
+\ref{more-algebra-lemma-completion-dvr}）ことに注意せよ．$Y = X \times_{\Spec(R)} \Spec(R^\wedge)$
+とおく．$R^\wedge$ は離散付値環なので，
+$$
+Y \setminus Y_k =
+Y \times_{\Spec(R^\wedge)} \Spec(K^\wedge) =
+V \times_{\Spec(K)} \Spec(K^\wedge)
+$$
+を得る．ここで $K^\wedge$ は $R^\wedge$ の分数体である．$V$ は幾何学的に正規なので，
+これは正規スキームである．したがって，補題の前半は Resolution of Surfaces, 補題
+\ref{resolve-lemma-normalization-completion} から従う．
+
+\medskip\noindent
+後半を証明するため，前半により $X$ と $Y$ は正規であると仮定してよい．$x$ が一般ファイバーに
+属するならば，$\mathcal{O}_{X, x} = \mathcal{O}_{V, x}$ は体上本質的有限型の正規局所環である．
+このような環は優秀である（More on Algebra, 命題
+\ref{more-algebra-proposition-ubiquity-excellent}）．
+% P07-ERR-0496: frozen source retains the reversed x-to-y image direction.
+$x$ が特殊ファイバーの点で，その像が $y \in Y$ ならば，Resolution of Surfaces, 補題
+\ref{resolve-lemma-iso-completions} により
+$\mathcal{O}_{X, x}^\wedge = \mathcal{O}_{Y, y}^\wedge$ である．この場合，
+% P07-ERR-0497: source article errors have no Japanese analogue.
+前と同じ参照により $\mathcal{O}_{Y, y}$ は優秀な正規局所整域である．これは $R^\wedge$ が
+優秀だからである．$B$ が優秀な正規局所整域ならば，
+$B^\wedge$ は正規である（$B \to B^\wedge$ が正則であり，More on Algebra, 補題
+\ref{more-algebra-lemma-normal-goes-up} が適用できるため）．これで証明が完了した．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular}
+$X$ を滑らかな曲線 $C$ の $K$ 上のモデルとする．このとき $X$ の特異点解消が存在し，
+任意の特異点解消は $C$ のモデルである．
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-0498: the source's subject-verb disagreement has no Japanese analogue.
+Lipman の定理（Resolution of Surfaces, 定理 \ref{resolve-theorem-resolve}）の条件 (4) を確認する．
+$X^\nu$ の特異点が有限個であるという主張を除けば，これは補題
+\ref{models-lemma-normalization} から明らかである．これを示すには，More on Algebra, 命題
+\ref{more-algebra-proposition-ubiquity-J-2} により $R$ が J-2 であることを用いればよい．
+したがって非特異点の軌跡は $X^\nu$ で開である．$X^\nu$ は次元 $\leq 2$ の正規スキームなので，
+特異点は閉点であり，したがって特異点軌跡が閉であることから，その個数は有限である
+（$X$ は準コンパクトだからである）．$X$ の任意の特異点解消は $X$ の修正であることに注意せよ
+（Resolution of Surfaces, 定義 \ref{resolve-definition-resolution}）．
+% P07-ERR-0499: frozen source's overstatement about the whole normal locus is retained.
+これは Varieties, 補題 \ref{varieties-lemma-modification-normal-iso-over-codimension-1} により，
+$X$ の正規点の軌跡上で同型となる．正規点の集合は $C = X_K$ を含むので，任意の特異点解消は
+$C$ のモデルであると結論できる．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-minimal-model}
+$C$ を $K$ 上の滑らかな射影曲線で，$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．
+{\it 極小モデル}とは，正則固有モデル $X$（$C$ の）で，$X$ が第一種例外曲線を含まないものをいう
+（Resolution of Surfaces, 節 \ref{resolve-section-minus-one}）．
+\end{definition}
+
+\noindent
+厳密には，このようなものを極小正則固有モデル，あるいは相対的極小正則射影モデルと
+呼ぶべきであろう．しかし，この章で行うように離散付値環上のモデルに限る限り，混乱は
+生じないはずである．
+
+\medskip\noindent
+極小モデルは常に存在し（命題 \ref{models-proposition-exists-minimal-model}），種数が $> 0$ ならば一意である
+（補題 \ref{models-lemma-minimal-model-unique}）．
+
+\begin{lemma}
+\label{models-lemma-pre-exists-minimal-model}
+\begin{slogan}
+曲線の正則固有モデルは，極小モデルから逐次的なブローアップによって得られる
+\end{slogan}
+$C$ を $K$ 上の滑らかな射影曲線で，$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．
+$X$ が $C$ の正則固有モデルならば，射の列
+$$
+X = X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0
+$$
+が存在する．これは $C$ の正則固有モデルからなり，各射は第一種例外曲線の縮約であり，
+$X_0$ は極小モデルである．
+\end{lemma}
+
+\begin{proof}
+Resolution of Surfaces, 補題 \ref{resolve-lemma-regular-dim-2-projective} により，$X$ は
+$R$ 上射影的である．したがって More on Morphisms, 補題
+\ref{more-morphisms-lemma-projective} により $X$ は豊富な可逆層をもつ（これは以下で用いる）．
+$E \subset X$ を第一種例外曲線とする．Resolution of Surfaces, 節
+\ref{resolve-section-minus-one} を参照せよ．Resolution of Surfaces, 補題
+\ref{resolve-lemma-contract-ample} により，$E$ を射 $X \to X'$ で縮約でき，$X'$ は正則かつ
+$R$ 上射影的である．明らかに，$X'_k$ の既約成分の個数は $X_k$ の既約成分の個数より
+ちょうど一つ少ない．したがって，このような縮約を有限回行えば極小モデルを得る．
+\end{proof}
+
+\begin{proposition}
+\label{models-proposition-exists-minimal-model}
+$C$ を $K$ 上の滑らかな射影曲線で，$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．
+極小モデルは存在する．
+\end{proposition}
+
+\begin{proof}
+閉埋め込み $C \to \mathbf{P}^n_K$ を選ぶ．$X$ を $C \to \mathbf{P}^n_R$ の
+スキーム論的像とする．補題 \ref{models-lemma-closure-is-model} により，$X \to \Spec(R)$ は
+$C$ の射影的モデルである．補題 \ref{models-lemma-regular} により特異点解消 $X' \to X$ が存在し，
+$X'$ は $C$ のモデルである．$X' \to \Spec(R)$ は固有射の合成なので固有である．そこで補題
+\ref{models-lemma-pre-exists-minimal-model} を適用して極小モデルを得る．
+\end{proof}
+
+
+
+
+
+\section{正則モデルの幾何学}
+\label{models-section-special-fibre}
+
+\noindent
+本節では，固有正則モデル $X$ の幾何学を記述する．これは滑らかな射影曲線
+$C$ に付随し，その曲線は $K$ 上で $H^0(C, \mathcal{O}_C) = K$ を満たす．
+
+\begin{lemma}
+\label{models-lemma-divisor-special-fiber}
+$X$ を滑らかな曲線 $C$ の正則モデルとする．ただしこの曲線は $K$ 上とする．
+\begin{enumerate}
+\item 特殊ファイバー $X_k$ は $X$ 上の有効 Cartier 因子である，
+\item $C_i$ を $X_k$ の各既約成分とすれば，これは $X$ 上の有効 Cartier
+因子である，
+\item $X_k = \sum m_i C_i$（有効 Cartier 因子の和）である．ここで
+$m_i$ は $C_i$ の $X_k$ における重複度である，
+\item $\mathcal{O}_X(X_k) \cong \mathcal{O}_X$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず，$R$ は一意化元 $\pi$ と剰余体 $k = R/(\pi)$ をもつ離散付値環で
+あったことを思い出す．$X \to \Spec(R)$ は平坦なので，元 $\pi$ は $X$ 上
+アフィン局所的に非零因子である（More on Algebra，補題
+\ref{more-algebra-lemma-dedekind-torsion-free-flat}）．したがって
+$U = \Spec(A) \subset X$ がアフィン開部分ならば，
+$$
+X_k \cap U = U_k = \Spec(A \otimes_R k) = \Spec(A/\pi A)
+$$
+であり，$\pi$ は $A$ における非零因子である．したがって Divisors，補題
+\ref{divisors-lemma-characterize-effective-Cartier-divisor} により，
+$X_k = V(\pi)$ は有効 Cartier 因子である．ゆえに (1) が成り立つ．
+
+\medskip\noindent
+上の議論から，対 $(\mathcal{O}_X(X_k), 1)$ は対 $(\mathcal{O}_X, \pi)$ と
+同型であることが分かり，これで (4) が従う．
+
+\medskip\noindent
+Divisors，補題 \ref{divisors-lemma-effective-Cartier-divisor-is-a-sum} により，
+互いに異なる整有効 Cartier 因子 $D_i \subset X$ と整数 $a_i \geq 0$ で，
+$X_k = \sum a_i D_i$ を満たすものが存在する．因子 $D_i$ のうち $a_i = 0$
+となるものは
+取り除いてよい．すると（有効 Cartier 因子の加法の定義から）集合論的に
+$X_k = \bigcup D_i$ であることは明らかである．したがって $C_i = D_i$ が
+$X_k$ の既約成分であり，(2) が従う．$\xi_i$ を $C_i$ の一般点とする．
+このとき $\mathcal{O}_{X, \xi_i}$ は離散付値環である（Divisors，補題
+\ref{divisors-lemma-integral-effective-Cartier-divisor-dvr}）．一意化元
+$\pi_i \in \mathcal{O}_{X, \xi_i}$ は $C_i$ の局所方程式であり，$\pi$ の像は
+$X_k$ の局所方程式である．$X_k = \sum a_i C_i$ なので，$\pi$ と
+$\pi_i^{a_i}$ は $\mathcal{O}_{X, \xi_i}$ において同じイデアルを生成する．
+一方，$C_i$ の $X_k$ における重複度は
+$$
+m_i = \text{length}_{\mathcal{O}_{C_i, \xi_i}} \mathcal{O}_{X_k, \xi_i} =
+\text{length}_{\mathcal{O}_{C_i, \xi_i}} \mathcal{O}_{X, \xi_i}/(\pi) =
+\text{length}_{\mathcal{O}_{C_i, \xi_i}} \mathcal{O}_{X, \xi_i}/(\pi_i^{a_i}) =
+a_i
+$$
+である．Chow Homology，定義
+\ref{chow-definition-cycle-associated-to-closed-subscheme} を参照せよ．
+よって $a_i = m_i$ であり，(3) が証明された．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-gorenstein}
+$X$ を滑らかな曲線 $C$ の正則モデルとする．ただしこの曲線は $K$ 上とする．このとき
+\begin{enumerate}
+\item $X \to \Spec(R)$ は相対次元 $1$ の Gorenstein 射である，
+\item $C_i$ を $X_k$ の既約成分とすれば，これはそれぞれ Gorenstein である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \to \Spec(R)$ は平坦なので，(1) を証明するにはファイバーが Gorenstein
+であることを示せば十分である（Duality for Schemes，補題
+\ref{duality-lemma-gorenstein-morphism}）．一般ファイバーは滑らかな曲線なので
+正則であり，したがって Gorenstein である（Duality for Schemes，補題
+\ref{duality-lemma-regular-gorenstein}）．特殊ファイバー $X_k$ については，
+これが正則な（したがって Gorenstein な）スキーム上の有効 Cartier 因子で
+あることを用いると，例えば Dualizing Complexes，補題
+\ref{dualizing-lemma-gorenstein-divide-by-nonzerodivisor} により Gorenstein
+である．曲線 $C_i$ も同じ議論により Gorenstein である．
+\end{proof}
+
+\begin{situation}
+\label{models-situation-regular-model}
+$R$ を分数体 $K$，剰余体 $k$，一意化元 $\pi$ をもつ離散付値環とする．
+$C$ を $K$ 上の滑らかな射影曲線で $H^0(C, \mathcal{O}_C) = K$ を満たすものとする．
+$X$ を $C$ の固有正則モデルとする．$C_1, \ldots, C_n$ を特殊ファイバー
+$X_k$ の既約成分とする．補題 \ref{models-lemma-divisor-special-fiber} と同様に
+$X_k = \sum m_i C_i$ と書く．
+\end{situation}
+
+\begin{lemma}
+\label{models-lemma-regular-model-connected}
+状況 \ref{models-situation-regular-model} において，特殊ファイバー $X_k$ は連結である．
+\end{lemma}
+
+\begin{proof}
+More on Morphisms，補題
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal} の帰結である．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular-model-pic}
+状況 \ref{models-situation-regular-model} において，完全列
+$$
+0 \to \mathbf{Z} \to \mathbf{Z}^{\oplus n} \to
+\Pic(X) \to \Pic(C) \to 0
+$$
+が存在する．ここで第1の写像は $1$ を $(m_1, \ldots, m_n)$ に送り，
+% P07-ERR-0500
+第2の写像は第 $i$ 基底ベクトルを $\mathcal{O}_X(C_i)$ に送る．
+\end{lemma}
+
+\begin{proof}
+$C \subset X$ は開部分スキームであることに注意する．Divisors，補題
+\ref{divisors-lemma-extend-invertible-module} により，制限写像
+$\Pic(X) \to \Pic(C)$ は全射である．$\mathcal{L}$ を可逆 $\mathcal{O}_X$
+加群とし，同型 $s : \mathcal{O}_C \to \mathcal{L}|_C$ が存在するとする．
+このとき $s$ は $\mathcal{L}$ の正則有理型切断であり，
+$\text{div}_\mathcal{L}(s) = \sum a_i C_i$ であることが分かる．ここで
+$a_i \in \mathbf{Z}$ である（Divisors，定義
+\ref{divisors-definition-divisor-invertible-sheaf}）．Divisors，補題
+\ref{divisors-lemma-normal-c1-injective}（および $X$ が正規であること）により，
+$\mathcal{L} = \mathcal{O}_X(\sum a_iC_i)$ と結論できる．最後に
+$\mathcal{O}_X(\sum a_i C_i) \cong \mathcal{O}_X$ と仮定する．すると元 $g$ が
+$X$ の関数体に存在し，$\text{div}_X(g) = \sum a_i C_i$ を満たす．特に，有理関数
+$g$ は一般ファイバー $C$，すなわち $X$ の一般ファイバー上で零点も極ももたない．
+$C$ は正規スキームなので，これは $g \in H^0(C, \mathcal{O}_C) = K$ を意味する．
+したがって $g = \pi^a u$ である．ここで $a \in \mathbf{Z}$ かつ $u \in R^*$
+である．よって $\text{div}_X(g) = a \sum m_i C_i$ であり，証明は完了する．
+\end{proof}
+
+\noindent
+状況 \ref{models-situation-regular-model} において，任意の可逆 $\mathcal{O}_X$ 加群
+$\mathcal{L}$ と任意の $i$ に対して，整数
+$$
+\deg(\mathcal{L}|_{C_i}) =
+\chi(C_i, \mathcal{L}|_{C_i}) - \chi(C_i, \mathcal{O}_{C_i})
+$$
+を得る．これは Varieties，節 \ref{varieties-section-divisors-curves} と同様に，
+$\mathcal{L}$ の $C_i$ への制限の基礎体 $k$ に関する次数をとったものである
+\footnote{体 $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$ が $k$ より真に大きい
+こともありうる点に注意せよ．この場合，$C_i$ 上の任意の可逆加群の次数
+（上で定義した意味で）は $[\kappa_i : k]$ で割り切れる．}．
+
+\begin{lemma}
+\label{models-lemma-intersection-pairing}
+状況 \ref{models-situation-regular-model} において，$\mathcal{L}$ を可逆
+$\mathcal{O}_X$ 加群とし，
+$a = (a_1, \ldots, a_n) \in \mathbf{Z}^{\oplus n}$ に対して
+$$
+\langle a, \mathcal{L} \rangle = \sum a_i\deg(\mathcal{L}|_{C_i})
+$$
+と定義する．このとき $\langle , \rangle$ は双線形であり，
+$b = (b_1, \ldots, b_n) \in \mathbf{Z}^{\oplus n}$ に対して
+$$
+\left\langle a, \mathcal{O}_X(\sum b_i C_i) \right\rangle =
+\left\langle b, \mathcal{O}_X(\sum a_i C_i) \right\rangle
+$$
+が成り立つ．
+\end{lemma}
+
+\begin{proof}
+双線形性は定義と Varieties，補題
+\ref{varieties-lemma-degree-tensor-product} から直ちに従う．対称性を証明するには，
+$a$ と $b$ が $\mathbf{Z}^{\oplus n}$ の標準基底ベクトルである場合を考えれば
+十分である．したがって，
+$$
+\deg(\mathcal{O}_X(C_j)|_{C_i}) = \deg(\mathcal{O}_X(C_i)|_{C_j})
+$$
+をすべての $1 \leq i, j \leq n$ について示せば十分である．$i = j$ なら
+示すことはない．$i \not = j$ とする．このとき標準切断 $1$ は
+$\mathcal{O}_X(C_j)$ の切断であり，これを制限すると
+$\mathcal{O}_X(C_j)|_{C_i}$ の非零（したがって正則）切断で，
+零スキームがちょうど $C_i \cap C_j$（スキーム論的交叉）となるものを得る．
+言い換えると，$C_i \cap C_j$ は $C_i$ 上の有効 Cartier 因子であり，
+$$
+\deg(\mathcal{O}_X(C_j)|_{C_i}) = \deg(C_i \cap C_j)
+$$
+が Varieties，補題 \ref{varieties-lemma-degree-effective-Cartier-divisor} により
+成り立つ．対称性により他方についても同じ式（！）を得るので，証明は完了する．
+\end{proof}
+
+\noindent
+状況 \ref{models-situation-regular-model} において，$\mathbf{Z}^{\oplus n}$ を集合
+$\{C_1, \ldots, C_n\}$ 上の自由アーベル群とみなすと便利なことが多い．この群の元を
+$\sum a_i C_i$ と表すことにする．ここではこれを形式和とみなすが，同じこととして，
+このような和を $X$ 上で特殊ファイバー $X_k$ に台をもつ Weil 因子とみなしてもよい
+（実際，そうすることもある）．補題 \ref{models-lemma-intersection-pairing} により，この自由
+アーベル群上に対称双線形形式 $(\ \cdot\ )$ を次の規則で定義できる：
+\begin{equation}
+\label{models-equation-form}
+\left(\sum a_i C_i \cdot \sum b_j C_j\right) =
+\left\langle a, \mathcal{O}_X(\sum b_j C_j) \right\rangle =
+\left\langle b, \mathcal{O}_X(\sum a_i C_i) \right\rangle
+\end{equation}
+この双線形形式のいくつかの性質を証明する．
+
+\begin{lemma}
+\label{models-lemma-properties-form}
+状況 \ref{models-situation-regular-model} において，対称双線形形式
+(\ref{models-equation-form}) は次の性質をもつ．
+\begin{enumerate}
+\item $(C_i \cdot C_j) \geq 0$ は $i \not = j$ ならば成り立ち，等号成立と
+$C_i \cap C_j = \emptyset$ であることは同値である，
+\item $(\sum m_i C_i \cdot C_j) = 0$,
+\item 空でない真部分集合 $I \subset \{1, \ldots, n\}$ で，
+$(C_i \cdot C_j) = 0$ が $i \in I$，$j \not \in I$ に対して成り立つものは存在しない，
+\item $(\sum a_i C_i \cdot \sum a_i C_i) \leq 0$ であり，等号成立と，
+$q \in \mathbf{Q}$ が存在して $a_i = qm_i$ が $i = 1, \ldots, n$ に対し成り立つことは
+同値である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-intersection-pairing} の証明で，
+$(C_i \cdot C_j) = \deg(C_i \cap C_j)$ であることを $i \not = j$ のときに見た．
+これは $\geq 0$ であり，
+$> 0 $ となることと $C_i \cap C_j \not = \emptyset$ であることは同値である．
+これで (1) が従う．
+
+\medskip\noindent
+(2) の証明．補題 \ref{models-lemma-divisor-special-fiber} により，
+$\sum m_i C_i$ に付随する可逆層は自明であり，自明層の次数は零なので成立する．
+
+\medskip\noindent
+(3) の証明．これは $X_k$ が連結であること（補題
+\ref{models-lemma-regular-model-connected}）を，(1) の証明で得た交叉積の記述によって
+表したものである．% P07-ERR-0501
+
+\medskip\noindent
+(4) は (1)，(2)，(3) と補題 \ref{models-lemma-recurring-symmetric-real} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-multiple-fibre-normal-bundle}
+状況 \ref{models-situation-regular-model} において $d = \gcd(m_1, \ldots, m_n)$ とおき，
+$D = \sum (m_i/d)C_i$ を有効 Cartier 因子とする．このとき
+$\mathcal{O}_X(D)$ の位数は $d$ を割り（$\Pic(X)$ において），
+% P07-ERR-0502
+$\mathcal{C}_{D/X}$ は可逆 $\mathcal{O}_D$ 加群で，その位数は $d$ を割る
+（$\Pic(D)$ において）．
+\end{lemma}
+
+\begin{proof}
+次が成り立つ：
+$$
+\mathcal{O}_X(D)^{\otimes d} = \mathcal{O}_X(dD) =
+\mathcal{O}_X(X_k) = \mathcal{O}_X
+$$
+これは補題 \ref{models-lemma-divisor-special-fiber} による．$\mathcal{C}_{D/X}$ は
+$\mathcal{O}_X(-D)$ の引き戻しなので，結論が従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular-model-field}
+\begin{reference}
+\cite[補題 2.6]{Artin-Winters}
+\end{reference}
+状況 \ref{models-situation-regular-model} において $d = \gcd(m_1, \ldots, m_n)$ とおく．
+$D = \sum (m_i/d) C_i$ を有効 Cartier 因子とする．このとき，有効 Cartier 因子の列
+$$
+(X_k)_{red} = Z_0 \subset Z_1 \subset \ldots \subset Z_m = D
+$$
+で，$Z_j = Z_{j - 1} + C_{i_j}$ がある $i_j \in \{1, \ldots, n\}$ に対して
+$j = 1, \ldots, m$ で成り立ち，かつ $H^0(Z_j, \mathcal{O}_{Z_j})$ が $k$ の有限
+拡大体となるものが $j = 0, \ldots m$ に対して存在する．
+\end{lemma}
+
+\begin{proof}
+被約化 $D_{red} = (X_k)_{red} = \sum C_i$ は連結で（補題
+\ref{models-lemma-regular-model-connected}），$k$ 上固有である．したがって Varieties，補題
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections} により，
+$H^0(D_{red}, \mathcal{O})$ は体であり，$k$ の有限拡大である．ゆえに
+$Z_0 = D_{red} = (X_k)_{red}$ に対する主張は成り立つ．すでに
+$$
+(X_k)_{red} = Z_0 \subset Z_1 \subset \ldots \subset Z_t \subset D
+$$
+を構成済みであり，$Z_j = Z_{j - 1} + C_{i_j}$ がある
+$i_j \in \{1, \ldots, n\}$ に対して $j = 1, \ldots, t$ で成り立ち，さらに
+$H^0(Z_j, \mathcal{O}_{Z_j})$ が $k$ の有限拡大体であると仮定する．ここで
+$j = 0, \ldots, t$ である．$Z_t = \sum a_i C_i$ と書けば
+$1 \leq a_i \leq m_i/d$ である．$a_i = m_i/d$ がすべての $i$ について成り立つならば
+$Z_t = D$ であり，補題は証明される．そうでなければ，$a_i < m_i/d$ がある $i$ について
+成り立ち，補題 \ref{models-lemma-properties-form} により
+$(Z_t \cdot Z_t) < 0$ が従う．これは $(D - Z_t \cdot Z_t) > 0$ を意味する．
+実際，この補題により $(D \cdot Z_t) = 0$ である．したがって，$i$ で
+$a_i < m_i/d$ かつ $(C_i \cdot Z_t) > 0$ を満たすものが見つかる．
+$Z_{t + 1} = Z_t + C_i$ および $i_{t + 1} = i$ とおく．短完全列
+$$
+0 \to \mathcal{O}_X(-Z_t)|_{C_i} \to \mathcal{O}_{Z_{t + 1}} \to
+\mathcal{O}_{Z_t} \to 0
+$$
+を Divisors，補題 \ref{divisors-lemma-ses-add-divisor} から得る．$i$ の選び方により，
+$\mathcal{O}_X(-Z_t)|_{C_i}$ は固有曲線 $C_i$ 上の負次数の可逆層であるため，
+非零の大域切断をもたない（Varieties，補題
+\ref{varieties-lemma-check-invertible-sheaf-trivial}）．したがって
+$H^0(\mathcal{O}_{Z_{t + 1}}) \subset H^0(\mathcal{O}_{Z_t})$ は体であり（これは
+明らかだが，Algebra，補題 \ref{algebra-lemma-integral-under-field} からも従う），
+$k$ の有限拡大である．よって列を延長できた．例えば
+$t \leq \sum (m_i/d - 1)$ なのでこの過程は必ず停止し，証明は完了する．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-regular-model-genus}
+\begin{reference}
+\cite[補題 2.6]{Artin-Winters}
+\end{reference}
+状況 \ref{models-situation-regular-model} において $d = \gcd(m_1, \ldots, m_n)$ とおく．
+$D = \sum (m_i/d) C_i$ を $X$ 上の有効 Cartier 因子とする．このとき
+$$
+1 - g_C = d [\kappa : k] (1 - g_D)
+$$
+が成り立つ．ここで $g_C$ は $C$ の種数，$g_D$ は $D$ の種数であり，
+$\kappa = H^0(D, \mathcal{O}_D)$ である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-regular-model-field} により，$\kappa$ は体であり $k$ の有限拡大である．
+また $H^0(C, \mathcal{O}_C) = K$ なので，$C$ と $D$ の種数は定義されており
+（Algebraic Curves，定義 \ref{curves-definition-genus} を参照），
+$g_C = \dim_K H^1(C, \mathcal{O}_C)$ および
+$g_D = \dim_\kappa H^1(D, \mathcal{O}_D)$ が成り立つ．
+Derived Categories of Schemes，補題
+\ref{perfect-lemma-chi-locally-constant-geometric}
+により，
+$$
+1 - g_C = \chi(C, \mathcal{O}_C) =
+\chi(X_k, \mathcal{O}_{X_k}) = \dim_k H^0(X_k, \mathcal{O}_{X_k})
+- \dim_k H^1(X_k, \mathcal{O}_{X_k})
+$$
+である．さらに，
+$$
+\chi(X_k, \mathcal{O}_{X_k}) = d \chi(D, \mathcal{O}_D)
+$$
+と主張する．これが示されれば，
+$$
+\chi(D, \mathcal{O}_D) =
+\dim_k H^0(D, \mathcal{O}_D) - \dim_k H^1(D, \mathcal{O}_D) =
+[\kappa : k](1 - g_D)
+$$
+なので補題が従う．有効 Cartier 因子として $X_k = dD$ であることに注意する．
+この主張を証明するため，$1 \leq r \leq d$ について
+$\chi(rD, \mathcal{O}_{rD}) = r \chi(D, \mathcal{O}_D)$ を帰納法で示す．
+初期の場合 $r = 1$ は自明である．$1 \leq r < d$ ならば，短完全列
+% P07-ERR-0503
+$$
+0 \to \mathcal{O}_X(rD)|_D \to \mathcal{O}_{(r + 1)D} \to
+\mathcal{O}_{rD} \to 0
+$$
+を Divisors，補題 \ref{divisors-lemma-ses-add-divisor} から考える．オイラー標数の
+加法性（Varieties，補題 \ref{varieties-lemma-euler-characteristic-additive}）により，
+% P07-ERR-0503
+$\chi(D, \mathcal{O}_X(rD)|_D) = \chi(D, \mathcal{O}_D)$ を示せば十分である．
+これは $\mathcal{O}_X(rD)|_D$ が $\Pic(D)$ のねじれ元であり
+（補題 \ref{models-lemma-multiple-fibre-normal-bundle}），直線束の次数は加法的なので
+（Varieties，補題 \ref{varieties-lemma-degree-tensor-product}），ねじれ可逆層では
+零となることから従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-exceptional-curves-dont-meet}
+状況 \ref{models-situation-regular-model} において，一対の添字 $i, j$ で，
+$C_i$ と $C_j$ が第1種例外曲線であり，$C_i \cap C_j \not = \emptyset$ を
+満たすものをとる．このとき
+$n = 2$, $m_1 = m_2 = 1$, $C_1 \cong \mathbf{P}^1_k$,
+$C_2 \cong \mathbf{P}^1_k$ であり，$C_1$ と $C_2$ は $k$-有理点で交わり，
+$C$ の種数は $0$ である．
+\end{lemma}
+
+\begin{proof}
+同型 $C_i = \mathbf{P}^1_{\kappa_i}$ および
+$C_j = \mathbf{P}^1_{\kappa_j}$ を選ぶ．スキーム $C_i \cap C_j$ は
+$C_i$ と $C_j$ のいずれにおいても空でない有効 Cartier 因子である．したがって
+$$
+(C_i \cdot C_j) = \deg(C_i \cap C_j) \geq \max([\kappa_i: k], [\kappa_j : k])
+$$
+である．最初の等号は補題 \ref{models-lemma-intersection-pairing} の証明で示した．一方，
+自己交叉 $(C_i \cdot C_i)$ は $\mathcal{O}_X(C_i)$ の $C_i$ 上の次数に等しく，
+これは $-[\kappa_i : k]$ である．実際，$C_i$ は第1種例外曲線である．$C_j$ についても
+同様である．補題 \ref{models-lemma-properties-form} により
+$$
+0 \geq (C_i + C_j)^2 = -[\kappa_i : k] + 2(C_i \cdot C_j) - [\kappa_j : k]
+$$
+から $[\kappa_i : k] = \deg(C_i \cap C_j) = [\kappa_j : k]$ が従い，さらに
+$(C_i + C_j)^2 = 0$ である．補題をもう一度見ると，$n = 2$，
+$\{1, 2\} = \{i, j\}$，および $m_1 = m_2$ と結論できる．さらに，スキーム論的
+交叉 $C_i \cap C_j$ は1点 $p$ からなり，その剰余体は $\kappa$ であり，
+$\kappa_i \to \kappa \leftarrow \kappa_j$ は同型である．
+$D = C_1 + C_2$ を $X$ 上の有効 Cartier 因子とする．$D$ は $C_1$ と $C_2$ の
+スキーム論的和であることに注意する（Divisors，補題
+\ref{divisors-lemma-sum-effective-Cartier-divisors-union}）．したがって短完全列
+$$
+0 \to \mathcal{O}_D \to \mathcal{O}_{C_1} \oplus \mathcal{O}_{C_2} \to
+\mathcal{O}_p \to 0
+$$
+を Morphisms，補題 \ref{morphisms-lemma-scheme-theoretic-union} から得る．
+$C_i \cong \mathbf{P}^1_\kappa$ のコホモロジーは既知なので（Cohomology of Schemes，補題
+\ref{coherent-lemma-cohomology-projective-space-over-ring}），コホモロジー長完全列から
+$H^0(D, \mathcal{O}_D) = \kappa$ および $H^1(D, \mathcal{O}_D) = 0$ と結論できる．
+補題 \ref{models-lemma-regular-model-genus} により
+$$
+1 - g_C = d[\kappa : k](1 - 0)
+$$
+であり，ここで $d = m_1 = m_2$ である．したがって $g_C = 0$，
+$d = m_1 = m_2 = 1$，および $\kappa = k$ が従う．
+\end{proof}
+
+
+
+
+
+\section{極小モデルの一意性}
+\label{models-section-uniqueness}
+
+\noindent
+一般ファイバーの種数が正ならば，極小モデルは一意であり（補題
+\ref{models-lemma-minimal-model-unique}），したがって適切な写像性をもつ（補題
+\ref{models-lemma-minimal-model-mapping-property}）．
+
+\begin{lemma}
+\label{models-lemma-minimal-model-unique}
+$C$ を $K$ 上の滑らかな射影曲線で，$H^0(C, \mathcal{O}_C) = K$ かつ種数
+$> 0$ を満たすものとする．$C$ の極小モデルは一意に存在する．
+\end{lemma}
+
+\begin{proof}
+この補題の難しい部分，すなわち極小モデルの存在はすでに証明した（その証明は
+曲面特異点の解消に依存する）．命題 \ref{models-proposition-exists-minimal-model} を参照せよ．
+一意性を示すため，$X$ と $Y$ を二つの極小モデルとする．Resolution of Surfaces，補題
+\ref{resolve-lemma-birational-regular-surfaces} により，$S$-射の図式
+% P07-ERR-0504
+$$
+X = X_0 \leftarrow X_1 \leftarrow \ldots \leftarrow X_n = Y_m
+\to \ldots \to Y_1 \to Y_0 = Y
+$$
+が存在し，各射は閉点におけるブローアップである．射 $X_n \to X_{n - 1}$ の
+例外ファイバーは第1種例外曲線 $E$ である．$E$ は射 $X_n = Y_m \to Y$ のもとで
+1点に縮約されると主張する．これが正しければ，Resolution of Surfaces，補題
+\ref{resolve-lemma-factor-through-contraction} により $X_n \to Y$ は
+$X_{n - 1}$ を経由する．この場合も射 $X_{n - 1} \to Y$ は，Resolution of Surfaces，補題
+\ref{resolve-lemma-proper-birational-regular-surfaces} により例外曲線の縮約の列である．
+したがって $n$ に関する帰納法で結論を得る．（初期の場合 $n = 0$ は，縮約の列
+$X = Y_m \to \ldots \to Y_1 \to Y_0 = Y$ が $Y$ で終わることを意味する．しかし
+$X$ は極小モデルなので第1種例外曲線を含まず，したがって $m = 0$ かつ $X = Y$
+である．）
+
+\medskip\noindent
+主張の証明．$m$ に関する帰納法で，任意の第1種例外曲線 $E \subset Y_m$ が
+射 $Y_m \to Y$ により1点へ写されることを示す．$m = 0$ なら，$Y$ は極小モデル
+なので明らかである．$m > 0$ とする．射 $Y_m \to Y_{m - 1}$ が $E$ を縮約するなら
+完了である．そうでなければ，例外ファイバー $E' \subset Y_m$ は
+$Y_m \to Y_{m - 1}$ に属する別の第1種例外曲線である．$E$ と $E'$ はともに特殊ファイバーの
+既約成分であり，仮定により $g_C > 0$ なので，補題
+\ref{models-lemma-exceptional-curves-dont-meet} から $E \cap E' = \emptyset$ と結論できる．
+すると $E$ の $Y_{m - 1}$ における像は第1種例外曲線である（射
+$Y_m \to Y_{m - 1}$ は $E$ の近傍で同型なので明らかである）．帰納法により
+$Y_{m - 1} \to Y$ はこの曲線を縮約し，証明は完了する．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-minimal-model-mapping-property}
+$C$ を $K$ 上の滑らかな射影曲線で $H^0(C, \mathcal{O}_C) = K$ かつ種数
+$> 0$ を満たすものとする．$X$ を $C$ の極小モデルとする（補題
+\ref{models-lemma-minimal-model-unique}）．$Y$ を $C$ の固有正則モデルとする．このとき，
+第1種例外曲線の縮約の列となるモデルの射 $Y \to X$ が一意に存在する．
+\end{lemma}
+
+\begin{proof}
+射 $X \to Y$ の存在と性質は補題 \ref{models-lemma-pre-exists-minimal-model} および
+極小モデルの一意性から直ちに従う．% P07-ERR-0505 P07-ERR-0506
+射 $Y \to X$ は一意である．実際，$C \subset Y$ はスキーム論的に稠密であり，
+$X$ は分離的である（Morphisms，補題
+\ref{morphisms-lemma-equality-of-morphisms} を参照）．
+\end{proof}
+
+\begin{example}
+\label{models-example-nonunique-in-genus-zero}
+$C$ の種数が $0$ ならば，極小モデルは実際に一意ではない．すなわち，閉部分スキーム
+$$
+X \subset \mathbf{P}^2_R
+$$
+で $T_1T_2 - \pi T_0^2 = 0$ により定義されるものを考える．より正確には，$X$ は
+$\text{Proj}(R[T_0, T_1, T_2]/(T_1T_2 - \pi T_0^2))$ として定義される．このとき
+特殊ファイバー $X_k$ は二つの例外曲線 $C_1$，$C_2$ の和であり，いずれも
+$\mathbf{P}^1_k$ と同型である（補題 \ref{models-lemma-exceptional-curves-dont-meet} とまったく
+同じである）．$(0 : 1 : 0)$ からの射影は射 $X \to \mathbf{P}^1_R$ を定め，これは
+$C_2$ を縮約し，$C_1$ と $\mathbf{P}^1_R$ の特殊ファイバーとの同型を誘導する．
+$(0 : 0 : 1)$ からの射影は射 $X \to \mathbf{P}^1_R$ を定め，これは $C_1$ を縮約し，
+$C_2$ と $\mathbf{P}^1_R$ の特殊ファイバーとの同型を誘導する．より正確には，
+これらの射は次数付き $R$-代数の準同型
+$$
+R[T_0, T_1] \longrightarrow
+R[T_0, T_1, T_2]/(T_1T_2 - \pi T_0^2) \longleftarrow
+R[T_0, T_2]
+$$
+に対応する．補題 \ref{models-lemma-nonuniqueness} でこの現象を調べる．
+\end{example}
+
+
+
+
+
+
+
+
+\section{種数の公式}
+\label{models-section-genus-formula}
+
+\noindent
+固有正則モデルから生じる組合せ構造には，もう一つ制約がある．
+
+\begin{lemma}
+\label{models-lemma-add-component}
+状況 \ref{models-situation-regular-model} において，有効 Cartier 因子
+$D, D' \subset X$ があり，$D' = D + C_i$ がある
+$i \in \{1, \ldots, n\}$ に対して成り立ち，かつ $D' \subset X_k$ とする．% P07-ERR-0507
+このとき
+$$
+\chi(X_k, \mathcal{O}_{D'}) - \chi(X_k, \mathcal{O}_D) =
+\chi(X_k, \mathcal{O}_X(-D)|_{C_i}) =
+-(D \cdot C_i) + \chi(C_i, \mathcal{O}_{C_i})
+$$
+\end{lemma}
+
+\begin{proof}
+第2の等号は，(\ref{models-equation-form}) の双線形形式 $(\ \cdot\ )$ の定義と補題
+\ref{models-lemma-intersection-pairing} から従う．第1の等号を見るため二つの場合に分ける．
+まず $C_i \not \subset D$ なら，$D'$ は $D$ と $C_i$ のスキーム論的和であり
+（Divisors，補題 \ref{divisors-lemma-sum-effective-Cartier-divisors-union}），短完全列
+$$
+0 \to \mathcal{O}_{D'} \to
+\mathcal{O}_D \times \mathcal{O}_{C_i} \to
+\mathcal{O}_{D \cap C_i} \to 0
+$$
+を Morphisms，補題 \ref{morphisms-lemma-scheme-theoretic-union} から得る．さらに完全列
+$$
+0 \to \mathcal{O}_X(-D)|_{C_i} \to
+\mathcal{O}_{C_i} \to \mathcal{O}_{D \cap C_i} \to 0
+$$
+も成り立つ（Divisors，注意 \ref{divisors-remark-ses-regular-section}）ので，
+オイラー標数の加法性（Varieties，補題
+\ref{varieties-lemma-euler-characteristic-additive}）から主張が従う．一方，
+$C_i \subset D$ なら完全列
+$$
+0 \to \mathcal{O}_X(-D)|_{C_i} \to \mathcal{O}_{D'} \to \mathcal{O}_D \to 0
+$$
+を Divisors，補題 \ref{divisors-lemma-ses-add-divisor} から得るので，補題は直ちに従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-formula}
+状況 \ref{models-situation-regular-model} において，
+$$
+g_C = 1 + \sum\nolimits_{i = 1, \ldots, n}
+m_i\left([\kappa_i : k] (g_i - 1) - \frac{1}{2}(C_i \cdot C_i)\right)
+$$
+が成り立つ．ここで $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$，$g_i$ は $C_i$ の
+種数，$g_C$ は $C$ の種数である．
+\end{lemma}
+
+\begin{proof}
+基本的な道具は Derived Categories of Schemes，補題
+\ref{perfect-lemma-chi-locally-constant-geometric} であり，これは
+$$
+1 - g_C = \chi(C, \mathcal{O}_C) =
+\chi(X_k, \mathcal{O}_{X_k})
+$$
+を与える．有効 Cartier 因子の列
+$$
+X_k = D_m \supset D_{m - 1} \supset \ldots \supset D_1 \supset D_0 = \emptyset
+$$
+で，$D_{j + 1} = D_j + C_{i_j}$ を各 $j$ に対して満たすものを選ぶ．（
+$D_{j + 1}$ の非零の重複度を一つずつ1だけ減らせば，このような列を選べることは
+明らかである．）$\chi(\mathcal{O}_{D_0}) = 0$ から始めて補題
+\ref{models-lemma-add-component} を適用すると，
+\begin{align*}
+1 - g_C
+& =
+\chi(X_k, \mathcal{O}_{X_k}) \\
+& =
+\sum\nolimits_j
+\left(-(D_j \cdot C_{i_j}) +  \chi(C_{i_j}, \mathcal{O}_{C_{i_j}})\right) \\
+& =
+- \sum\nolimits_j
+(C_{i_1} + C_{i_2} + \ldots + C_{i_{j - 1}} \cdot C_{i_j}) +
+\sum\nolimits_j \chi(C_{i_j}, \mathcal{O}_{C_{i_j}}) \\
+& =
+-\frac{1}{2}\sum\nolimits_{j \not = j'} (C_{i_{j'}} \cdot C_{i_j}) +
+\sum m_i \chi(C_i, \mathcal{O}_{C_i}) \\
+& =
+\frac{1}{2} \sum m_i(C_i \cdot C_i) + \sum m_i \chi(C_i, \mathcal{O}_{C_i})
+\end{align*}
+を得る．最後の等号には少し説明が必要かもしれない．実際，
+$\sum_j C_{i_j} = \sum m_i C_i$ なので，補題 \ref{models-lemma-properties-form} により
+$(\sum_j C_{i_j} \cdot \sum_j C_{i_j}) = 0$ である．したがって
+$$
+0 = \sum\nolimits_{j \not = j'} (C_{i_{j'}} \cdot C_{i_j}) +
+\sum m_i(C_i \cdot C_i)
+$$
+である．これは積を「非対角」項と「対角」項に分ければ分かる．Varieties，補題
+\ref{varieties-lemma-regular-functions-proper-variety} により，$\kappa_i$ は $k$ の
+有限拡大体であることに注意する．したがって $C_i$ の種数は定義され，
+$\chi(C_i, \mathcal{O}_{C_i}) = [\kappa_i : k](1 - g_i)$ が成り立つ．以上をまとめて
+項を並べ替えると，
+$$
+g_C = - \frac{1}{2}\sum m_i(C_i \cdot C_i) +
+\sum m_i[\kappa_i : k](g_i - 1) + 1
+$$
+を得る．これは補題の主張そのものである．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-numerical-type-of-model}
+状況 \ref{models-situation-regular-model} において，
+$\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$ とし，$g_i$ を $C_i$ の種数とする．データ
+$$
+n, m_i, (C_i \cdot C_j), [\kappa_i : k], g_i
+$$
+は，種数が $C$ の種数に等しい数値型である．
+\end{lemma}
+
+\begin{proof}
+（補題 \ref{models-lemma-genus-formula} の証明で，この補題の主張に用いた量が適切に
+定義されることは確認済みである．）定義 \ref{models-definition-type} の条件 (1)--(5) を
+確かめればよい．
+
+\medskip\noindent
+条件 (1) は明らかである．
+
+\medskip\noindent
+条件 (2)．行列 $(C_i \cdot C_j)$ の対称性は式 (\ref{models-equation-form}) と補題
+\ref{models-lemma-intersection-pairing} から従う．$(C_i \cdot C_j)$ が $i \not = j$ に対して
+非負であることは補題 \ref{models-lemma-properties-form} の (1) である．
+
+\medskip\noindent
+条件 (3) は補題 \ref{models-lemma-properties-form} の (3) である．
+
+\medskip\noindent
+条件 (4) は補題 \ref{models-lemma-properties-form} の (2) である．
+
+\medskip\noindent
+条件 (5) は，$(C_i \cdot C_j)$ が $C_i$ 上の可逆加群の次数であって
+$[\kappa_i : k]$ で割り切れることから従う．Varieties，補題
+\ref{varieties-lemma-divisible} を参照せよ．
+
+\medskip\noindent
+補題 \ref{models-lemma-genus-formula} で証明した種数公式から，数値型の種数は主張どおり
+であることが分かる．定義 \ref{models-definition-genus} を参照せよ．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-numerical-type-model}
+状況 \ref{models-situation-regular-model} において，{\it $X$ に付随する数値型}とは，
+補題 \ref{models-lemma-numerical-type-of-model} で記述した数値型をいう．
+\end{definition}
+
+\noindent
+次に，モデルの極小性と型の極小性を対応させる．
+
+\begin{lemma}
+\label{models-lemma-numerical-type-minimal-model}
+状況 \ref{models-situation-regular-model} において，次は同値である．
+\begin{enumerate}
+\item $X$ は極小モデルである，
+\item $X$ に付随する数値型は極小である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+数値型が極小なら，$i$ で $g_i = 0$ かつ
+$(C_i \cdot C_i) = -[\kappa_i: k]$ を満たすものは存在しない．定義
+\ref{models-definition-type-minimal} を参照せよ．したがって，曲線 $C_i$ のいずれも
+第1種例外曲線ではないことは明らかである．
+
+\medskip\noindent
+逆に，数値型が極小でないと仮定する．すると，ある $i$ が存在して $g_i = 0$ かつ
+$(C_i \cdot C_i) = -[\kappa_i: k]$ となる．これは $C_i$ が第1種例外曲線であることを
+意味すると主張する．実際，可逆層 $\mathcal{O}_X(-C_i)|_{C_i}$ は次数
+$-(C_i \cdot C_i) = [\kappa_i : k]$ をもつ．ここでは $C_i$ を $k$ 上の固有曲線と
+みなしている．したがって次数 $1$ をもち，ここでは $C_i$ を $\kappa_i$ 上の固有曲線と
+みなしている．Algebraic Curves，命題
+\ref{curves-proposition-projective-line} を適用すると，$C_i \cong \mathbf{P}^1_{\kappa_i}$
+が $\kappa_i$ 上のスキームとして成り立つ．体上の $\mathbf{P}^1$ の Picard 群は
+$\mathbf{Z}$ なので，$C_i$ の $X$ における正規層は
+% P07-ERR-0508
+$\mathcal{O}_{\mathbf{P}_{\kappa_i}}(-1)$ と同型であり，証明は完了する．
+\end{proof}
+
+\begin{remark}
+\label{models-remark-numerical-type-not-from-model}
+すべての数値型がモデルから生じるわけではない．その単純な理由は，種数が負の
+数値型が存在することである．正の種数をもつ極小数値型であって，ある離散付値環上の
+モデル（その分数体上の滑らかな射影的幾何学的既約曲線のモデル）に付随する数値型では
+ないものが存在する．% P07-ERR-0509
+簡単な例は
+$n = 1$, $m_1 = 1$, $a_{11} = 0$, $w_1 = 6$, $g_1 = 1$.
+である．実際，この場合，特殊ファイバー $X_k$ は拡大体 $\kappa$ 上にあるため，
+幾何学的に連結ではないはずである．ここでこれは $k$ の次数 $6$ の拡大である．
+これは一般ファイバーが
+幾何学的に連結であることに矛盾する（More on Morphisms，補題
+\ref{more-morphisms-lemma-geometrically-connected-fibres-towards-normal}).
+同様に，$n = 2$，$m_1 = m_2 = 1$，$-a_{11} = -a_{22} = a_{12} = a_{21} = 6$，
+$w_1 = w_2 = 6$，$g_1 = g_2 = 1$ も同じ理由による例となる（詳細は省略する）．
+しかし $w_i$ の最大公約数が $1$ ならば，例は得られていない．
+\end{remark}
+
+\begin{lemma}
+\label{models-lemma-numerical-type-rational-point}
+状況 \ref{models-situation-regular-model} において，$C$ が $K$-有理点をもつと仮定する．このとき
+\begin{enumerate}
+\item $X_k$ は $k$-有理点 $x$ をもち，これは $X_k$ の $k$ 上の滑らかな点である，
+\item $x \in C_i$ ならば $H^0(C_i, \mathcal{O}_{C_i}) = k$ かつ $m_i = 1$ である，
+\item $H^0(X_k, \mathcal{O}_{X_k}) = k$ であり，$X_k$ の種数は $C$ の種数に等しい．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+射 $X \to \Spec(R)$ は固有なので，$K$-有理点は固有性の付値判定法により射
+$a : \Spec(R) \to X$ に延長される（Morphisms，補題
+\ref{morphisms-lemma-characterize-proper}）．$x \in X$ を，$a$ による
+$\Spec(R)$ の閉点の像とする．すると $a$ は $R$-代数準同型
+$\psi : \mathcal{O}_{X, x} \to R$ に対応する（Schemes，節
+\ref{schemes-section-points} を参照）．したがって $\pi \not \in \mathfrak m_x^2$ である
+（$\pi$ の $R$ における像は $\mathfrak m_R^2$ に属さない）．よって
+$\mathcal{O}_{X_k, x} = \mathcal{O}_{X, x}/\pi \mathcal{O}_{X, x}$ は正則である
+（Algebra，補題 \ref{algebra-lemma-regular-ring-CM}）．したがって
+$X_k \to \Spec(k)$ は $x$ で滑らかである（Algebra，補題
+\ref{algebra-lemma-separable-smooth}）．ゆえに $x$ は一意な既約成分
+$C_i$ に含まれ，これは $X_k$ の成分であり，
+$\mathcal{O}_{C_i, x} = \mathcal{O}_{X_k, x}$ かつ $m_i = 1$ である．
+$C_i$ が $k$-有理点をもつことから，体 $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$
+（Varieties，補題 \ref{varieties-lemma-regular-functions-proper-variety}）は $k$ に等しい．
+これで (1) が従う．% P07-ERR-0510
+さらに
+$H^0(X_k, \mathcal{O}_{X_k}) = k$
+である．実際，$H^0(X_k, \mathcal{O}_{X_k})$ は $k$ の体拡大であり（補題
+\ref{models-lemma-regular-model-field}），$H^0(C_i, \mathcal{O}_{C_i}) = k$ へ写る．
+種数の等式は補題 \ref{models-lemma-regular-model-genus} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-reduction-smaller}
+状況 \ref{models-situation-regular-model} において，$X$ は極小モデルであり，
+$\gcd(m_1, \ldots, m_n) = 1$，$H^0((X_k)_{red}, \mathcal{O}) = k$ と仮定する．
+このとき写像
+$$
+H^1(X_k, \mathcal{O}_{X_k}) \to H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}})
+$$
+は全射であり，$(X_k)_{red} \not = X_k$ ならば非自明な核をもつ．
+\end{lemma}
+
+\begin{proof}
+次数 $\geq 2$ のコホモロジーが $X_k$ 上で消滅すること（Cohomology，命題
+\ref{cohomology-proposition-vanishing-Noetherian}）により，$X_k$ 上のアーベル層の任意の
+全射は $H^1$ 上の全射を誘導する．補題 \ref{models-lemma-regular-model-field} の列
+$$
+(X_k)_{red} = Z_0 \subset Z_1 \subset \ldots \subset Z_m = X_k
+$$
+を考える．体の準同型
+$H^0(Z_j, \mathcal{O}_{Z_j}) \to
+H^0((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) = k$
+は単射なので，$H^0(Z_j, \mathcal{O}_{Z_j}) = k$ が
+$j = 0, \ldots, m$ に対して成り立つ．したがって
+$H^0(X_k, \mathcal{O}_{X_k}) \to H^0(Z_{m - 1}, \mathcal{O}_{Z_{m - 1}})$
+は全射である．$C = C_{i_m}$ とおく．すると $X_k = Z_{m - 1} + C$ である．
+$\mathcal{L} = \mathcal{O}_X(-Z_{m - 1})|_C$ とおく．$\mathcal{L}$ は可逆
+$\mathcal{O}_C$ 加群である．補題 \ref{models-lemma-regular-model-field} の証明と同様に完全列
+$$
+0 \to \mathcal{L} \to \mathcal{O}_{X_k} \to \mathcal{O}_{Z_{m - 1}} \to 0
+$$
+を $X_k$ 上の連接層について得る．したがって短完全列
+$$
+0 \to
+H^1(C, \mathcal{L}) \to H^1(X_k, \mathcal{O}_{X_k}) \to
+H^1(Z_{m - 1}, \mathcal{O}_{Z_{m - 1}}) \to 0
+$$
+$\mathcal{L}$ の $C$ 上，$k$ に関する次数は
+% P07-ERR-0511
+$$
+(C \cdot -Z_{m - 1}) = (C \cdot C - X_k) = (C \cdot C)
+$$
+である．$\kappa = H^0(C, \mathcal{O}_C)$ および $w = [\kappa : k]$ とおく．
+可逆層の次数の定義から，
+$$
+\chi(C, \mathcal{L}) =
+\chi(C, \mathcal{O}_C) + (C \cdot C) =
+w(1 - g_C) + (C \cdot C)
+$$
+である．ここで $g_C$ は $C$ の種数である．この式は $< 0$ である．実際，$X$ は極小で，
+したがって $C$ は第1種例外曲線ではない（補題
+\ref{models-lemma-numerical-type-minimal-model} の証明を参照）．ゆえに
+$\dim_k H^1(C, \mathcal{L}) > 0$ であり，証明は完了する．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-genus-reduction-bigger-than}
+状況 \ref{models-situation-regular-model} において，$X_k$ が $k$-有理点 $x$ をもち，それが
+$X_k \to \Spec(k)$ の滑らかな点であると仮定する．このとき
+$$
+\dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) \geq
+g_{top} + g_{geom}(X_k/k)
+$$
+が成り立つ．ここで $g_{geom}$ は Algebraic Curves，節
+\ref{curves-section-genus-geometric-genus} のとおりであり，$g_{top}$ は
+（定義 \ref{models-definition-top-genus} の）$X_k$ に付随する数値型の位相的種数である
+（定義 \ref{models-definition-numerical-type-model}）．% P07-ERR-0514
+\end{lemma}
+
+\begin{proof}
+不等式
+$$
+\dim_k H^1(D, \mathcal{O}_D) \geq g_{top}(D) + g_{geom}(D/k)
+$$
+を，任意の連結被約有効 Cartier 因子 $D \subset (X_k)_{red}$ で $x$ を含むものについて，
+$D$ の既約成分数に関する帰納法で証明する．ここで
+$g_{top}(D) = 1 - m + e$ であり，$m$ は $D$ の既約成分数，$e$ は $D$ の成分のうち
+交わる順序を無視した対の個数である．
+
+\medskip\noindent
+初期の場合：$D$ が一つの既約成分をもつとする．すると $D = C_i$ は $x$ を含む
+一意な既約成分である．この場合 $\dim_k H^1(D, \mathcal{O}_D) = g_i$ かつ
+$g_{top}(D) = 0$ である．$C_i$ は $k$-有理滑らかな点をもつので幾何学的に整である
+（Varieties，補題 \ref{varieties-lemma-variety-with-smooth-rational-point}）．したがって
+$g_i$ は $C_{i, \overline{k}}$ の種数である（Algebraic Curves，補題
+\ref{curves-lemma-genus-base-change}）．また $g_{geom}(D/k)$ は
+$C_{i, \overline{k}}^\nu$ の種数であり，これは $C_{i, \overline{k}}$ の正規化である．
+Algebraic Curves，補題
+\ref{curves-lemma-genus-normalization} を正規化射
+$C_{i, \overline{k}}^\nu \to C_{i, \overline{k}}$ に適用すると，
+\begin{equation}
+\label{models-equation-genus-change-special-component}
+\text{種数 }C_{i, \overline{k}} \geq
+\text{種数 }C_{i, \overline{k}}^\nu
+\end{equation}
+を得る．以上を合わせると，この場合
+$\dim_k H^1(D, \mathcal{O}_D) \geq g_{top}(D) + g_{geom}(D/k)$
+と結論できる．
+
+\medskip\noindent
+帰納段階．$D$ が $1$ 個より多くの既約成分をもつとする．このとき
+$D = C_i + D'$ と書け，$x \in D'$ であり，$D'$ は依然として連結である．これは読者に
+委ねるグラフ理論の演習である（ヒント：$C_i$ を $D$ の成分のうち $x$ から最も
+遠いものとせよ）．不変量がどう変わるか計算する．$x \in D'$ なので
+$H^0(D, \mathcal{O}_D) = H^0(D', \mathcal{O}_{D'}) = k$ である．層の短完全列
+$$
+0 \to \mathcal{O}_D \to \mathcal{O}_{C_i} \oplus \mathcal{O}_{D'}
+\to \mathcal{O}_{C_i \cap D'} \to 0
+$$
+（Morphisms，補題 \ref{morphisms-lemma-scheme-theoretic-union}）とオイラー標数の
+加法性を用いると，
+\begin{align*}
+\dim_k H^1(D, \mathcal{O}_D) - \dim_k H^1(D', \mathcal{O}_{D'})
+& =
+-\chi(\mathcal{O}_{C_i}) + \chi(\mathcal{O}_{C_i \cap D'}) \\
+& =
+w_i(g_i - 1) + \sum\nolimits_{C_j \subset D'} a_{ij}
+\end{align*}
+を得る．補題 \ref{models-lemma-numerical-type-of-model} と同様に，ここで
+$w_i = [\kappa_i : k]$，$\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$ とおき，
+$g_i$ を $C_i$ の種数，$a_{ij} = (C_i \cdot C_j)$ とする．さらに
+$$
+g_{top}(D) - g_{top}(D') = -1 +
+\sum\nolimits_{C_j \subset D'\text{ と交わる }C_i} 1
+$$
+であり，また
+$$
+g_{geom}(D/k) - g_{geom}(D'/k) = g_{geom}(C_i/k)
+$$
+が Algebraic Curves，補題 \ref{curves-lemma-bound-geometric-genus} により成り立つ．
+これらと帰納法の仮定を合わせると，
+$$
+w_i g_i - g_{geom}(C_i/k) +
+\sum\nolimits_{C_j \subset D'\text{ と交わる } C_i} (a_{ij} - 1) - (w_i - 1)
+$$
+が非負であることを示せば十分である．実際，
+\begin{equation}
+\label{models-equation-genus-change}
+w_i g_i \geq [\kappa_i : k]_s g_i \geq g_{geom}(C_i/k)
+\end{equation}
+である．第2の不等式は Algebraic Curves，補題
+\ref{curves-lemma-bound-geometric-genus-curve} による．% P07-ERR-0512
+一方，$w_i$ は $a_{ij}$ を割るので（Varieties，補題
+\ref{varieties-lemma-divisible}），
+\begin{equation}
+\label{models-equation-change-intersections}
+\sum\nolimits_{C_j \subset D'\text{ と交わる } C_i} (a_{ij} - 1) - (w_i - 1)
+\geq 0
+\end{equation}
+であることは明らかである．実際，$C_j \subset D'$ で $C_i$ と交わるものが少なくとも
+一つ存在する．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-equality-genus-reduction-bigger-than}
+補題 \ref{models-lemma-genus-reduction-bigger-than} で等号が成り立つならば，
+\begin{enumerate}
+\item $X_k$ の既約成分のうち $x$ を含む一意なものは，$k$ 上の滑らかな射影的
+幾何学的既約曲線である，
+\item $C \subset X_k$ が別の既約成分ならば，$\kappa = H^0(C, \mathcal{O}_C)$ は
+$k$ の有限分離拡大であり，$C$ は $\kappa$-有理点をもち，$C$ は $\kappa$ 上滑らかである．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-genus-reduction-bigger-than} の証明を見直すと，等号を得るには不等式
+(\ref{models-equation-genus-change-special-component}),
+(\ref{models-equation-genus-change})，および
+(\ref{models-equation-change-intersections})
+がすべて等式でなければならないことが分かる．
+
+\medskip\noindent
+$C_i$ を $x$ を含む既約成分とする．(\ref{models-equation-genus-change-special-component}) の
+等号と Algebraic Curves，補題 \ref{curves-lemma-genus-normalization} から，
+$C_{i, \overline{k}}^\nu \to C_{i, \overline{k}}$ は同型である．したがって
+$C_{i, \overline{k}}$ は滑らかであり，(1) が成り立つ．
+
+\medskip\noindent
+次に，$C_i \subset X_k$ を別の既約成分とする．補題
+\ref{models-lemma-genus-reduction-bigger-than} の証明の帰納段階と同様に，
+$D =  D' + C_i$ と仮定してよい．(\ref{models-equation-genus-change}) の等号から直ちに
+$\kappa_i/k$ は有限分離拡大である．(\ref{models-equation-change-intersections}) の等号から，
+$a_{ij} = 1$ となる $j$ が存在するか，または一意な $C_j \subset D'$ が存在して，
+これが $C_i$ と交わり $a_{ij} = w_i$ である．どちらの場合も，$C_i$ は
+$\kappa_i$-有理点 $c$ をもち，スキーム論的に $c = C_i \cap C_j$ である．
+$\mathcal{O}_{X, c}$ は正則局所環なので，$C_i$ と $C_j$ の局所方程式は局所環
+$\mathcal{O}_{X, c}$ の正則パラメータ系をなす．すると $\mathcal{O}_{C_i, c}$ は
+正則である（Algebra，補題 \ref{algebra-lemma-regular-ring-CM}）．したがって
+$C_i \to \Spec(\kappa_i)$ は $c$ で滑らかである（Algebra，補題
+\ref{algebra-lemma-separable-smooth}）．ゆえに $C_i$ は $\kappa_i$ 上幾何学的に整である
+（Varieties，補題 \ref{varieties-lemma-variety-with-smooth-rational-point}）．最後に
+$C_i$ が $\kappa_i$ 上滑らかであることを示せばよい．次に注意する：
+$$
+C_{i, \overline{k}} = C_i \times_{\Spec(k)} \Spec(\overline{k})
+= \coprod\nolimits_{\kappa_i \to \overline{k}}
+C_i \times_{\Spec(\kappa_i)} \Spec(\overline{k})
+$$
+ここには $[\kappa_i : k]$ 個の成分がある．したがって $C_i$ が $\kappa_i$ 上滑らかで
+なければ，各曲線は滑らかでなく，したがって正規でないため，正規化射によって種数が
+下がる（Algebraic Curves，補題 \ref{curves-lemma-genus-normalization}）．% P07-ERR-0513
+しかしこれは $C_i/k$ の幾何学的種数を下げ，
+$[\kappa_i : k] g_i = g_{geom}(C_i/k)$ に矛盾するので不可能である．
+\end{proof}
+
+
+
+
+
+
+
+
+\section{例外曲線の縮約}
+\label{models-section-contract}
+
+\noindent
+次の補題は，正則固有モデルにおいて第1種例外曲線を縮約したとき，
+交点数がどのように変化するかを述べる．これをここに置く主な目的は，
+補題 \ref{models-lemma-contract} で導入した数値的縮約と比較することである．
+幾何学的縮約と数値的縮約は注意 \ref{models-remark-compare-contractions} で
+比較する．
+
+\begin{lemma}
+\label{models-lemma-blowdown-regular-model}
+状況 \ref{models-situation-regular-model} において，$C_n$ が
+第1種例外曲線であると仮定する．$f : X \to X'$ を
+$C_n$ の縮約とする．$C'_i = f(C_i)$ とおく．$X'_k = \sum m'_i C'_i$ と書く．
+% P07-ERR-0515: frozen source uses singular "is" for a compound subject. Japanese rendering is grammatical.
+このとき，$X'$，$C'_i$，$i = 1, \ldots, n' = n - 1$，および $m'_i = m_i$ は
+状況 \ref{models-situation-regular-model} におけるものとなり，さらに次が成り立つ．
+\begin{enumerate}
+\item $i, j < n$ に対して
+$(C'_i \cdot C'_j) =
+(C_i \cdot C_j) - (C_i \cdot C_n) (C_j \cdot C_n) /(C_n \cdot C_n)$,
+\item $i < n$ に対して，$C_i \cap C_n \not = \emptyset$ ならば，
+写像 $\kappa_i \leftarrow \kappa'_i \rightarrow \kappa_n$ が存在する．
+\end{enumerate}
+ここで $\kappa_i = H^0(C_i, \mathcal{O}_{C_i})$ および
+$\kappa'_i = H^0(C'_i, \mathcal{O}_{C'_i})$ である．
+\end{lemma}
+
+\begin{proof}
+Resolution of Surfaces, 補題 \ref{resolve-lemma-contract-ample} により，
+$C_n$ を射 $f : X \to X'$ によって縮約でき，しかも $X'$ は
+正則かつ $R$ 上射影的である．したがって $X'$ は
+状況 \ref{models-situation-regular-model} におけるものとなる．
+$x \in X'$ を $C_n$ の像とする．
+$f$ は同型 $X \setminus C_n \to X' \setminus \{x\}$ を定めるので，
+$m'_i = m_i$ が $i < n$ に対して成り立つことは明らかである．
+
+\medskip\noindent
+補題の (2) は，射 $C_i \to C'_i$ および $C_n \to x \to C'_i$ が
+存在することから直ちに明らかである．
+
+\medskip\noindent
+Divisors, 補題 \ref{divisors-lemma-blow-up-pullback-effective-Cartier} により，
+引き戻し $f^{-1}C'_i$ が定義される．
+Divisors, 補題 \ref{divisors-lemma-effective-Cartier-divisor-is-a-sum} により，
+$f^{-1}C'_i = C_i + e_i C_n$ がある $e_i \geq 0$ に対して成り立つ．さらに
+$\mathcal{O}_X(C_i + e_i C_n) = \mathcal{O}_X(f^{-1}C'_i) =
+f^*\mathcal{O}_{X'}(C'_i)$
+であり (Divisors, 補題 \ref{divisors-lemma-pullback-effective-Cartier-divisors})，
+可逆層の引き戻しを $C_n$ に制限すると自明な可逆層になるので，
+$$
+0 = \deg_{C_n}(\mathcal{O}_X(C_i + e_i C_n)) =
+(C_i + e_i C_n \cdot C_n) = (C_i \cdot C_n) + e_i(C_n \cdot C_n)
+$$
+を得る．
+% P07-ERR-0516: frozen source types f_j : C_j -> C_j; expected codomain is C'_j. Formula preserved.
+$f_j = f|_{C_j} : C_j \to C_j$ は $k$ 上の固有曲線の間の
+固有双有理射であるから，$\deg_{C'_j}(\mathcal{O}_{X'}(C'_i)|_{C'_j})$ は
+$\deg_{C_j}(f_j^*\mathcal{O}_{X'}(C'_i)|_{C'_j})$ と等しい
+(Varieties, 補題 \ref{varieties-lemma-degree-birational-pullback})．
+可換図式
+$$
+\xymatrix{
+C_j \ar[r] \ar[d]_{f_j} & X \ar[d]^f \\
+C'_j \ar[r] & X'
+}
+$$
+を考え，Divisors, 補題
+\ref{divisors-lemma-pullback-effective-Cartier-divisors} を用いると，
+$$
+(C'_i \cdot C'_j) = \deg_{C'_j}(\mathcal{O}_{X'}(C'_i)|_{C'_j}) =
+\deg_{C_j}(\mathcal{O}_X(C_i + e_i C_n)) = (C_i + e_i C_n \cdot C_j)
+$$
+を得る．先に得た $e_i$ の公式を代入すれば (1) が従う．
+\end{proof}
+
+\begin{remark}
+\label{models-remark-genus-change}
+補題 \ref{models-lemma-blowdown-regular-model} の状況では，
+種数 $g_i$ の $C_i$ と種数 $g'_i$ の $C'_i$ の関係も正確に記述できる．
+公式は
+$$
+g'_i = \frac{w_i}{w'_i}(g_i - 1) + 1 +
+\frac{(C_i \cdot C_n)^2 - w_n(C_i \cdot C_n)}{2w'_iw_n}
+$$
+である．ここで $w_i = [\kappa_i : k]$，$w_n = [\kappa_n : k]$，および
+$w'_i = [\kappa'_i : k]$ である．
+これを証明するため，短完全列
+$$
+0 \to \mathcal{O}_{X'}(-C'_i) \to \mathcal{O}_{X'} \to
+\mathcal{O}_{C'_i} \to 0
+$$
+と，その $X$ への引き戻し
+% P07-ERR-0517: frozen source places C'_i in a divisor on X; expected pulled-back divisor uses C_i. Formula preserved.
+$$
+0 \to \mathcal{O}_X(-C'_i - e_iC_n) \to \mathcal{O}_X \to
+\mathcal{O}_{C_i + e_i C_n} \to 0
+$$
+を考える．ここで $e_i$ は補題 \ref{models-lemma-blowdown-regular-model} の証明におけるものとする．
+$Rf_*f^*\mathcal{L} = \mathcal{L}$ は任意の可逆加群
+$\mathcal{L}$（$X'$ 上）に対して成り立つので（詳細は省略する），
+$$
+Rf_*\mathcal{O}_{C_i + e_i C_n} = \mathcal{O}_{C'_i}
+$$
+が $X'_k$ 上の連接層の複体として成り立つ．
+したがって両辺のオイラー標数は等しく，これは
+$\mathcal{O}_{C_i + e_i C_n}$ の $X_k$ 上でのオイラー標数とも一致する．完全列
+$$
+0 \to \mathcal{O}_{C_i + e_i C_n} \to
+\mathcal{O}_{C_i} \oplus \mathcal{O}_{e_iC_n} \to
+\mathcal{O}_{C_i \cap e_iC_n} \to 0
+$$
+を用い，さらに $\mathcal{O}_{e_iC_n}$ をフィルター付けすると（詳細は省略する），
+$$
+\chi(\mathcal{O}_{C'_i}) =
+\chi(\mathcal{O}_{C_i}) - {e_i + 1 \choose 2}(C_n \cdot C_n)
+- e_i(C_i \cdot C_n)
+$$
+を得る．$e_i = -(C_i \cdot C_n)/(C_n \cdot C_n)$ かつ
+$(C_n \cdot C_n) = -w_n$ であるから，これはこの注意の冒頭で述べた
+公式を与える．この結果が必要になった場合には，補題として定式化し，
+詳しい証明を与えることにする．
+\end{remark}
+
+\begin{remark}
+\label{models-remark-compare-contractions}
+$f : X \to X'$ を補題 \ref{models-lemma-blowdown-regular-model} におけるものとする．
+$n, m_i, a_{ij}, w_i, g_i$ を $X$ に付随する数値型とし，
+$n', m'_i, a'_{ij}, w'_i, g'_i$ を $X'$ に付随する数値型とする．
+補題 \ref{models-lemma-blowdown-regular-model} と注意 \ref{models-remark-genus-change} から，
+$w'_i$ の値を除けば，これは補題 \ref{models-lemma-contract} における
+数値型の縮約と一致することが明らかである．
+幾何学的状況では，$w'_i$ は $w_i$ と $w_n$ の双方を割り切る正の整数である．
+数値的な場合には，$w'_i$ として，$w_i$ を割り切り，かつ公式で与えられる
+$g'_i$ が整数となるような最大の整数を選んだ．
+この選択は数値的な設定でうまく機能し，数値型の Picard 群を比較するのに役立つ
+（補題 \ref{models-lemma-contract-picard-group} を参照）．
+% P07-ERR-0518: frozen source reads "injectivity is every used"; Japanese renders the evident intended meaning.
+ただし，以下で実際に用いるのは単射性だけであり，この単射性はより小さい $w'_i$ に対しても成り立つ．
+\end{remark}
+
+\begin{lemma}
+\label{models-lemma-nonuniqueness}
+$C$ を $K$ 上の滑らかな射影曲線で，$H^0(C, \mathcal{O}_C) = K$ かつ
+種数 $0$ をもつものとする．$C$ の極小モデルが複数存在するならば，
+すべての極小モデルの特殊ファイバーは $\mathbf{P}^1_k$ と同型である．
+\end{lemma}
+
+\noindent
+この補題はさらに強められ，互いに同型でない二つの極小モデルの間の
+双有理変換は，例 \ref{models-example-nonunique-in-genus-zero} におけるような
+初等変換の列に分解できる，と述べることができる．この結果が必要になった場合には，
+ここで正確に定式化して証明することにする．
+
+\begin{proof}
+$X$ を $C$ のある極小モデルとする．$X$ に付随する数値型は
+種数 $0$ であり，かつ極小である（定義 \ref{models-definition-numerical-type-model}
+および補題 \ref{models-lemma-numerical-type-minimal-model}）．
+したがって補題 \ref{models-lemma-genus-zero} により，$X_k$ は被約かつ既約であり，
+$H^0(X_k, \mathcal{O}_{X_k}) = k$ を満たし，種数 $0$ をもつ．
+$Y$ を $C$ の第二の極小モデルで，$X$ と同型でないものとする．
+Resolution of Surfaces, 補題 \ref{resolve-lemma-birational-regular-surfaces} により，
+次の $S$-射の図式が存在する．
+% P07-ERR-0519: frozen source invokes an undefined base symbol S here. Symbol preserved.
+$$
+X = X_0 \leftarrow X_1 \leftarrow \ldots \leftarrow X_n = Y_m
+\to \ldots \to Y_1 \to Y_0 = Y
+$$
+ここで各射は閉点におけるブローアップである．補題を $m$ に関する帰納法で証明する．
+基底の場合は $m = 0$ である．この場合，$Y$ は極小であると仮定したため
+$n = 0$ となるはずだが，$X$ は $Y$ と同型でないので，この場合は生じない．
+すなわち，確認すべきことはない．
+
+\medskip\noindent
+先へ進む前に，$n + 1 = m + 1$ は $X_n = Y_m$ の特殊ファイバーの
+既約成分数に等しいことに注意する．これは $X_k$ と $Y_k$ がともに既約だからである．
+以下で用いるもう一つの観察は，$X' \to X''$ が $C$ の正則固有モデルの射ならば，
+$X' \to X''$ は $X''$ のある開集合上で同型であり，その補集合は $X''$ の
+特殊ファイバーの閉点からなる有限集合である，ということである．
+Varieties, 補題
+\ref{varieties-lemma-modification-normal-iso-over-codimension-1} を参照せよ．
+実際，任意のそのような $X' \to X''$ は閉点におけるブローアップの列であり
+（Resolution of Surfaces, 補題
+\ref{resolve-lemma-proper-birational-regular-surfaces}），ブローアップの回数は，
+$X'$ と $X''$ の特殊ファイバーの既約成分数の差に等しい．
+
+\medskip\noindent
+$E_i \subset Y_i$（$m \geq i \geq 1$）を，射 $Y_i \to Y_{i - 1}$ によって
+縮約される曲線とする．$i$ を，$E_i$ が重複度 $> 1$ を
+$Y_i$ の特殊ファイバーにおいてもつような最大の添字とする．
+このとき，後続のブローアップ $Y_m \to \ldots \to Y_{i + 1} \to Y_i$ は
+$E_i$ 上の同型である．さもなければ，$E_j$ が，ある $j > i$ に対して
+重複度 $> 1$ をもつからである．$E \subset Y_m$ を $E_i$ の逆像とする．
+先に述べたことから，$E \subset Y_m$ は第1種例外曲線である．
+$Y_m \to Y'$ を $E$ の縮約とする（これは Resolution of Surfaces, 補題
+\ref{resolve-lemma-contract-when-quasi-projective} により存在する）．
+射 $Y_m \to X$ は $E$ を縮約しなければならない．なぜなら $X_k$ は被約だからである．
+したがって射 $Y' \to Y$ および $Y' \to X$ が存在し（Resolution of Surfaces, 補題
+\ref{resolve-lemma-factor-through-contraction} による），それらは例外曲線の
+高々 $n - 1 = m - 1$ 個の縮約の合成である（上の議論を参照）．
+$m$ に関する帰納法により結論を得る．したがって，すべての曲線
+$X_i$ および $Y_i$ の特殊ファイバーが被約であると仮定してよい．
+
+\medskip\noindent
+$X_i$ と $Y_i$ のファイバーは被約なので，ブローアップ
+$X_i \to X_{i - 1}$ および $Y_i \to Y_{i - 1}$ は，特殊ファイバーの
+正則点である閉点において行われなければならない．
+実際，$X''$ が $C$ の正則モデルで，$x \in X''$ が特殊ファイバーの閉点であり，
+$\pi \in \mathfrak m_x^2$ ならば，例外ファイバー $E$ を考える．ここで
+$X' \to X''$ は $x$ におけるブローアップである．この例外ファイバーは
+少なくとも重複度 $2$ を $X'$ の特殊ファイバーにおいてもつ（局所計算は省略する）．
+したがって，主張したとおり
+$\mathcal{O}_{X''_k, x} = \mathcal{O}_{X'', x}/\pi$ は正則である
+（Algebra, 補題 \ref{algebra-lemma-regular-ring-CM}）．
+特に $x$ は，それを含む唯一の既約成分 $Z'$，すなわち $X''_k$ の既約成分の上の
+Cartier 因子である（Varieties, 補題 \ref{varieties-lemma-regular-point-on-curve}）．
+したがって，狭義変換 $Z \subset X'$，すなわち $Z'$ の狭義変換は $Z'$ に同型に写る
+（Divisors, 補題 \ref{divisors-lemma-strict-transform} および
+\ref{divisors-lemma-blow-up-effective-Cartier-divisor} を用いる）．
+言い換えると，既約成分 $Z$（$X_i$ のもの）が写像 $X_i \to X_j$（$i > j$）
+のもとで縮約されないならば，その像へ同型に写る．
+
+\medskip\noindent
+これで補題を証明する準備が整った．
+$E \subset Y_m$ を，射 $Y_m \to Y_{m - 1}$ により縮約される第1種例外曲線とする．
+$E$ が射 $Y_m = X_n \to X$ により縮約されるならば，分解
+$Y_{m - 1} \to X$ が存在する（Resolution of Surfaces, 補題
+\ref{resolve-lemma-factor-through-contraction}）．さらに $Y_{m - 1} \to X$ は
+閉点におけるブローアップの列である（Resolution of Surfaces, 補題
+\ref{resolve-lemma-proper-birational-regular-surfaces}）．
+この場合は $m$ を減らして帰納法により結論を得る．
+最後に，$E$ が射 $Y_m \to X$ により縮約されないと仮定する．
+このとき，$E \to X_k$ は全射である．実際，$X_k$ は既約であり，
+上の議論からこの射は同型である．したがって望んだとおり，
+$X_k$ は射影直線と同型である．
+\end{proof}
+
+
+
+
+
+\section{モデルの Picard 群}
+\label{models-section-picard-groups-models}
+
+\noindent
+$R, K, k, \pi, C, X, n, C_1, \ldots, C_n, m_1, \ldots, m_n$ は
+状況 \ref{models-situation-regular-model} におけるものと仮定する．
+補題 \ref{models-lemma-regular-model-pic} で完全列
+$$
+0 \to \mathbf{Z} \to \mathbf{Z}^{\oplus n} \to
+\Pic(X) \to \Pic(C) \to 0
+$$
+を得た．この列を用いて，適切な素数 $\ell$ に対する Picard 群の
+$\ell$-捩れを調べたい．
+
+\begin{lemma}
+\label{models-lemma-characterize-trivial}
+状況 \ref{models-situation-regular-model} において $d = \gcd(m_1, \ldots, m_n)$ とおく．
+$\mathcal{L}$ が可逆 $\mathcal{O}_X$-加群であって，
+\begin{enumerate}
+\item $C$ への制限が自明な可逆加群であり，かつ
+\item 次数 $0$ を各 $C_i$ 上でもつ
+\end{enumerate}
+ならば，$\mathcal{L}^{\otimes d} \cong \mathcal{O}_X$ である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-regular-model-pic} により，
+$\mathcal{L} \cong \mathcal{O}_X(\sum a_i C_i)$ がある
+$a_i \in \mathbf{Z}$ に対して成り立つ．
+$\mathcal{L}|_{C_j}$ の次数は
+% P07-ERR-0520: frozen source sums over j while leaving i free; expected sum_i a_i(C_i dot C_j). Formula preserved.
+$\sum_j a_j(C_i \cdot C_j)$ である．特に
+$(\sum a_i C_i \cdot \sum a_i C_i) = 0$.
+したがって補題 \ref{models-lemma-properties-form} により，
+$(a_1, \ldots, a_n) = q(m_1, \ldots, m_n)$ がある
+$q \in \mathbf{Q}$ に対して成り立つ．ゆえに，$\mathcal{L} = \mathcal{O}_X(lD)$ が
+ある $l \in \mathbf{Z}$ に対して成り立つ．ここで
+$D = \sum (m_i/d) C_i$ は補題 \ref{models-lemma-multiple-fibre-normal-bundle} におけるものであり，
+結論が従う．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-canonical-map-of-pic}
+状況 \ref{models-situation-regular-model} において，$T$ を $X$ に付随する数値型とする．
+標準写像
+$$
+\Pic(C) \to \Pic(T)
+$$
+が存在し，その核はちょうど次のような $C$ 上の可逆加群からなる．すなわち，
+可逆加群 $\mathcal{L}$（$X$ 上）で，
+$\deg_{C_i}(\mathcal{L}|_{C_i}) = 0$ が $i = 1, \ldots, n$ に対して
+成り立つものの制限である可逆加群である．
+\end{lemma}
+
+\begin{proof}
+$w_i = [\kappa_i : k]$ であり，ここで
+% P07-ERR-0521: frozen source has the stray delimiter O_{C_i)}. Token preserved.
+$\kappa_i = H^0(C_i, \mathcal{O}_{C_i)})$ であることを思い出そう．また，
+$C_i$ 上の任意の可逆加群の次数は $w_i$ で割り切れる
+（Varieties, 補題 \ref{varieties-lemma-divisible}）．したがって写像
+$$
+\frac{\deg}{w} : \Pic(X) \to \mathbf{Z}^{\oplus n}, \quad
+\mathcal{L} \mapsto
+(\frac{\deg(\mathcal{L}|_{C_1})}{w_1}, \ldots,
+\frac{\deg(\mathcal{L}|_{C_n})}{w_n})
+$$
+を考えることができる．この写像による $\mathcal{O}_X(C_j)$ の像は
+$$
+((C_j \cdot C_1)/w_1, \ldots, (C_j \cdot C_n)/w_n) =
+(a_{1j}/w_1, \ldots, a_{nj}/w_n)
+$$
+であり，これは第 $j$ 基底ベクトルの，写像
+$(a_{ij}/w_i) : \mathbf{Z}^{\oplus n} \to \mathbf{Z}^{\oplus n}$
+による像にほかならない．この写像は $T$ の Picard 群を
+定義するものである（定義 \ref{models-definition-picard-group} を参照）．
+したがって，補題の標準写像は可換図式
+$$
+\xymatrix{
+\mathbf{Z}^{\oplus n} \ar[r] \ar[d]_{\text{id}} &
+\Pic(X) \ar[r] \ar[d]^{\frac{\deg}{w}} &
+\Pic(C) \ar[r] \ar[d] & 0 \\
+\mathbf{Z}^{\oplus n} \ar[r]^{(a_{ij}/w_i)} &
+\mathbf{Z}^{\oplus n} \ar[r] &
+\Pic(T) \ar[r] & 0
+}
+$$
+から得られる．ここで各行は完全である（上の行については補題
+\ref{models-lemma-regular-model-pic} による）．核の記述は明らかである．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-sequence-torsion}
+状況 \ref{models-situation-regular-model} において $d = \gcd(m_1, \ldots, m_n)$ とおき，
+$T$ を $X$ に付随する数値型とする．$h \geq 1$ を $d$ と互いに素な整数とする．
+完全列
+$$
+0 \to \Pic(X)[h] \to \Pic(C)[h] \to \Pic(T)[h]
+$$
+が存在する．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{models-lemma-regular-model-pic} の完全列の $h$-捩れを取ると，
+$0 \to \Pic(X)[h] \to \Pic(C)[h]$
+の完全性を得る．これは $h$ が $d$ と互いに素だからである．
+補題 \ref{models-lemma-canonical-map-of-pic} の写像を用いると，写像
+$\Pic(C)[h] \to \Pic(T)[h]$ を得て，これは $\Pic(X)[h]$ の元を零に写す．
+逆に，$\xi \in \Pic(C)[h]$ が $\Pic(T)[h]$ の零元に写ると仮定する．
+このとき，可逆 $\mathcal{O}_X$-加群 $\mathcal{L}$ で，
+$\deg(\mathcal{L}|_{C_i}) = 0$ がすべての $i$ に対して成り立ち，
+$C$ への制限が $\xi$ であるものが存在する．
+補題 \ref{models-lemma-characterize-trivial} により，$\mathcal{L}^{\otimes h}$ は
+$d$-捩れである．$d'$ を $dd' \equiv 1 \bmod h$ を満たす整数とする．
+$h$ と $d$ は互いに素なので，そのような整数が存在する．このとき
+$\mathcal{L}^{\otimes dd'}$ は $h$-捩れ可逆層（$X$ 上）であり，
+$C$ への制限は $\xi$ である．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-torsion-embeds}
+状況 \ref{models-situation-regular-model} において，$h$ を $k$ の標数と互いに素な整数とする．
+このとき写像
+$$
+\Pic(X)[h] \longrightarrow \Pic((X_k)_{red})[h]
+$$
+は単射である．
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-0522: frozen source reuses n for the thickening exponent although n already counts components. Token preserved.
+$X \times_{\Spec(R)} \Spec(R/\pi^n)$ は $(X_k)_{red}$ の有限位数の厚化である
+（これは例えば Cohomology of Schemes, 補題
+\ref{coherent-lemma-power-ideal-kills-sheaf} から従う）．したがって標準写像
+$\Pic(X \times_{\Spec(R)} \Spec(R/\pi^n)) \to \Pic((X_k)_{red})$ は，
+More on Morphisms, 補題 \ref{more-morphisms-lemma-torsion-pic-thickening} と
+$h$ に関する仮定により，$h$-捩れ部分を同一視する．
+したがって，$\mathcal{L}$ が $h$-捩れ可逆層（$X$ 上）で，
+$(X_k)_{red}$ への制限が自明な層ならば，$\mathcal{L}$ の
+$X \times_{\Spec(R)} \Spec(R/\pi^n)$ への制限はすべての $n$ に対して自明である．
+よって
+\begin{align*}
+H^0(X, \mathcal{L})^\wedge
+& =
+\lim H^0(X \times_{\Spec(R)} \Spec(R/\pi^n),
+\mathcal{L}|_{X \times_{\Spec(R)} \Spec(R/\pi^n)}) \\
+& \cong
+\lim H^0(X \times_{\Spec(R)} \Spec(R/\pi^n),
+\mathcal{O}_{X \times_{\Spec(R)} \Spec(R/\pi^n)}) \\
+& =
+R^\wedge
+\end{align*}
+を得る．ここで最初と最後の等号には形式関数定理
+（Cohomology of Schemes, 定理 \ref{coherent-theorem-formal-functions}）を用い，
+中央の同型には例えば More on Algebra, 補題
+\ref{more-algebra-lemma-isomorphic-completions} を用いた．
+$H^0(X, \mathcal{L})$ は有限 $R$-加群であり，$R$ は離散付値環なので，
+$H^0(X, \mathcal{L})$ は階数 $1$ の自由 $R$-加群である．
+$s \in H^0(X, \mathcal{L})$ を基底元とする．上の同型を逆にたどると，
+$s|_{X \times_{\Spec(R)} \Spec(R/\pi^n)}$ はすべての $n$ に対して
+自明化を与えることが分かる．$s$ の零点集合は $X$ の閉集合であり，
+$X \to \Spec(R)$ は固有なので，望んだとおり $s$ の零点集合は空である．
+\end{proof}
+
+
+
+
+
+
+\section{半安定還元}
+\label{models-section-semistable-reduction}
+
+\noindent
+この節では，半安定還元の意味を注意深く定義する．
+
+\begin{example}
+\label{models-example-blowup}
+$R$ を一様化元 $\pi$ をもつ離散付値環とする．$n \geq 0$ に対して，環準同型
+$$
+R \longrightarrow A = R[x, y]/(xy - \pi^n)
+$$
+を考える．$X = \Spec(A)$ および $S = \Spec(R)$ とおく．
+$n = 0$ ならば $X \to S$ は滑らかである．すべての $n$ に対して，射
+$X \to S$ は Algebraic Curves, 節 \ref{curves-section-families-nodal} で
+定義された相対次元 $1$ の高々節点型である．
+$n = 1$ ならば $X$ は正則であるが，$n > 1$ ならば $X$ は正則でない．
+実際，$(x, y)$ はもはや極大イデアル $\mathfrak m = (\pi, x, y)$ を生成しない．
+$n > 1$ の場合に状況を改善するため，ブローアップ $b : X' \to X$ を考える．
+これは $X$ の $\mathfrak m$ におけるブローアップである．
+Divisors, 節 \ref{divisors-section-blowing-up} を参照せよ．
+構成により，$X'$ はブローアップ代数 $A[\frac{\mathfrak m}{\pi}]$，
+$A[\frac{\mathfrak m}{x}]$，および $A[\frac{\mathfrak m}{y}]$ に対応する
+三つのアフィン部分で被覆される．
+
+\medskip\noindent
+代数 $A[\frac{\mathfrak m}{\pi}]$ は生成元 $x' = x/\pi$ および
+$y' = y/\pi$ をもち，$x'y' = \pi^{n - 2}$ である．したがって $X'$ の
+この部分は
+% P07-ERR-0523: frozen source omits the quotient slash in this coordinate ring. Formula preserved.
+$R[x', y'](x'y' - \pi^{n - 2})$ のスペクトルである．
+
+\medskip\noindent
+代数 $A[\frac{\mathfrak m}{x}]$ は生成元 $x$ と $u = \pi/x$ をもち，
+関係式 $xu - \pi$ を満たす．この環は
+$y/x = \pi^n/x^2 = u^2\pi^{n - 2}$ を含むことに注意せよ．したがって
+$X'$ のこの部分は正則である．
+
+\medskip\noindent
+対称性により，代数 $A[\frac{\mathfrak m}{y}]$ の場合は
+$A[\frac{\mathfrak m}{x}]$ の場合と同じである．
+
+\medskip\noindent
+したがって，$X' \to S$ は相対次元 $1$ の高々節点型であり，$X'$ は
+一つの点を除いて正則であることが分かる．その点は，上とまったく同じ形で
+$n$ を $n - 2$ に置き換えたアフィン開近傍をもつ．$n$ に関する帰納法により，
+閉点におけるブローアップの列
+$$
+X_{\lfloor n/2 \rfloor} \to \ldots \to X_1 \to X_0 = X
+$$
+が存在し，$X_{\lfloor n/2 \rfloor} \to S$ は相対次元 $1$ の高々節点型で，
+$X_{\lfloor n/2 \rfloor}$ は正則である．
+\end{example}
+
+\begin{lemma}
+\label{models-lemma-etale-local-at-worst-nodal}
+$R$ を離散付値環とする．$X$ を相対次元 $1$ の高々節点型スキーム（$R$ 上）とする．
+$x \in X$ を，$X$ の $R$ 上の特殊ファイバーの点とする．このとき可換図式
+$$
+\xymatrix{
+X \ar[d] &
+U \ar[r] \ar[d] \ar[l] &
+\Spec(A) \ar[dl] \\
+\Spec(R) &
+\Spec(R') \ar[l]
+}
+$$
+が存在し，$R \subset R'$ は離散付値環のエタール拡大，射 $U \to X$ はエタール，
+射 $U \to \Spec(A)$ はエタールであり，点 $x' \in U$ が $x$ に写り，
+$$
+A = R'[u, v]/(uv)
+\quad\text{または}\quad
+A = R'[u, v]/(uv - \pi^n)
+$$
+である．ここで $n \geq 0$ であり，$\pi \in R'$ は一様化元である．
+\end{lemma}
+
+\begin{proof}
+この補題は，すでにはるかに一般的な形で証明されている．
+Algebraic Curves, 補題 \ref{curves-lemma-etale-local-structure-nodal-family} を参照せよ．
+ここでは，そこで与えられた主張を上の主張に読み替えればよい．
+
+\medskip\noindent
+まず，射 $X \to \Spec(R)$ が $x$ で滑らかならば，エタール射
+$U \to \mathbf{A}^1_R = \Spec(R[u])$ が，あるアフィン開近傍
+$U \subset X$（$x$ の近傍）に対して存在する．これは Morphisms, 補題
+\ref{morphisms-lemma-smooth-etale-over-affine-space} である．必要なら座標 $u$ を
+$u + 1$ で置き換えることにより，$x$ が標準開集合
+$D(u) \subset \mathbf{A}^1_R$ の点に写ると仮定してよい．このとき
+$D(u) = \Spec(A)$ であり，$A = R[u, v]/(uv - 1)$ であるから，
+この場合に結果が成り立つことが分かる．
+
+\medskip\noindent
+次に，$x$ がファイバーの特異点であると仮定する．このとき
+Algebraic Curves, 補題 \ref{curves-lemma-etale-local-structure-nodal-family} を適用して，
+図式
+$$
+\xymatrix{
+X \ar[d] &
+U \ar[rr] \ar[l] \ar[rd] & &
+W \ar[r] \ar[ld] &
+\Spec(\mathbf{Z}[u, v, a]/(uv - a)) \ar[d] \\
+\Spec(R) & &
+V \ar[ll] \ar[rr] & & \Spec(\mathbf{Z}[a])
+}
+$$
+を得る．これは引用した補題の主張に挙げられたすべての性質をもつ．
+$x' \in U$ を，補題が与える $x$ に写る点とする．まず $V$ を
+$x'$ の像のアフィン近傍へ縮小する．$V = \Spec(R')$ と書く．このとき
+$R \to R'$ はエタールである．$R$ は離散付値環なので，$R'$ は
+準局所 Dedekind 整域の有限積である（More on Algebra, 補題
+\ref{more-algebra-lemma-Dedekind-etale-extension} を用いる）．したがって，
+例えば素イデアル回避を用いると，標準開集合
+$D(f) \subset V = \Spec(R')$ で，$x'$ の像を含み，$R'_f$ が離散付値環となるものが得られる．
+$R'$ を $R'_f$ で置き換えると，$V = \Spec(R')$ であり，
+$R \subset R'$ が離散付値環のエタール拡大である状況に到達する
+（離散付値環の拡大は More on Algebra, 定義
+\ref{more-algebra-definition-extension-discrete-valuation-rings} で定義されている）．
+
+\medskip\noindent
+射 $V \to \Spec(\mathbf{Z}[a])$ は，像 $h$，すなわち $a$ の $R'$ における像によって定まる．
+このとき $W = \Spec(R'[u, v]/(uv - h))$ である．したがって補題は
+$A = R'[u, v]/(uv - h)$ として成り立つ．$h = 0$ ならば，補題に挙げた
+第一の場合を明らかに得る．$h \not = 0$ ならば，$h = \epsilon \pi^n$ と
+ある $n \geq 0$ に対して書ける．ここで $\epsilon$ は $R'$ の単元である．
+座標を $u_{new} = \epsilon u$ および $v_{new} = v$ に取り替えると，
+補題に挙げた $A$ の第二の同型型を得る．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-blowup-at-worst-nodal}
+$R$ を離散付値環とする．$X$ を，相対次元 $1$ の高々節点型準コンパクトスキームで，
+一般ファイバーが滑らかなもの（$R$ 上）とする．このとき，ある
+$m \geq 0$ と列
+$$
+X_m \to \ldots \to X_1 \to X_0 = X
+$$
+が存在し，次を満たす．
+\begin{enumerate}
+\item $X_{i + 1} \to X_i$ は閉点 $x_i$ におけるブローアップであり，
+$X_i$ はその点で特異である．
+\item $X_i \to \Spec(R)$ は相対次元 $1$ の高々節点型である．
+\item $X_m$ は正則である．
+\end{enumerate}
+\end{lemma}
+
+\noindent
+さらに少し強い主張も成り立つ．すなわち，特異点でどのようにブローアップしても，
+最終的には特異点解消に到達し，途中のすべてのブローアップは
+相対次元 $1$ の高々節点型（$R$ 上）である．
+
+\begin{proof}
+$X$ は準コンパクトなので，特殊ファイバー $X_k$ は準コンパクトである．
+$X_k$ の特異点は高々節点型であるから，$X_k$ は有限個の節点をもち，
+それ以外では $k$ 上滑らかである．$X \to \Spec(R)$ は平坦で，一般ファイバーが
+滑らかなので，$X$ は $R$ 上，$X_k$ の有限個の節点を除いて滑らかである
+（Morphisms, 補題 \ref{morphisms-lemma-smooth-at-point} を用いる）．
+したがって，$X$ は特殊ファイバーの節点を除くすべての点で正則である
+（Algebra, 補題 \ref{algebra-lemma-regular-goes-up} を参照）．
+$x \in X$ をそのような節点とする．図式
+$$
+\xymatrix{
+X \ar[d] &
+U \ar[r] \ar[d] \ar[l] &
+\Spec(A) \ar[dl] \\
+\Spec(R) &
+\Spec(R') \ar[l]
+}
+$$
+を補題 \ref{models-lemma-etale-local-at-worst-nodal} におけるように選ぶ．
+$A = R'[u, v]/(uv)$ の場合は起こり得ないことに注意せよ．実際，この場合には
+$X/R$ の一般ファイバーが特異になる（細部は省略する）．したがって，
+$A = R'[u, v]/(uv - \pi^n)$ がある $n \geq 0$ に対して成り立つ．$x$ は特異点なので，
+$n \geq 2$ である．例 \ref{models-example-blowup} の議論を参照せよ．
+
+\medskip\noindent
+$U$ を縮小して，唯一の点 $u \in U$ が $x$ に写ると仮定してよい．
+$w \in \Spec(A)$ を $u$ の像とする．さらに，$u$ は $U$ において
+$w$ に写る唯一の点であると仮定してよい．二つの水平射はエタールなので，
+$u$ を $U$ の閉部分スキームとみなすと，これは $x \in X$ の
+スキーム論的逆像であり，かつ $w \in \Spec(A)$ のスキーム論的逆像である．
+ブローアップは平坦基底変換と可換なので（Divisors, 補題
+\ref{divisors-lemma-flat-base-change-blowing-up}），可換図式
+$$
+\xymatrix{
+X' \ar[d] &
+U' \ar[l] \ar[d] \ar[r] &
+W' \ar[d] \\
+X & U \ar[l] \ar[r] & \Spec(A)
+}
+$$
+を得る．二つの正方形は引き戻し正方形であり，垂直射はそれぞれ $x, u, w$ の
+$X, U, \Spec(A)$ におけるブローアップである．スキーム $W'$ は
+例 \ref{models-example-blowup} で記述した．
+% P07-ERR-0524: frozen source omits the copula after W'. Japanese supplies the predicate.
+そこで見たとおり，$W'$ は相対次元 $1$ の高々節点型（$R'$ 上）である．したがって
+$W'$ は相対次元 $1$ の高々節点型（$R$ 上）である（Algebraic Curves, 補題
+\ref{curves-lemma-nodal-family-postcompose-etale}）．ゆえに $U'$ は
+相対次元 $1$ の高々節点型（$R$ 上）である（Algebraic Curves, 補題
+\ref{curves-lemma-nodal-family-etale-local-source} を参照）．
+$X' \to X$ は $x$ の補集合上で同型なので，$X'/R$ についても同じことが成り立つ
+（再び Algebraic Curves, 補題
+\ref{curves-lemma-nodal-family-etale-local-source} による）．
+
+\medskip\noindent
+最後に，これらのブローアップを有限回行うと正則モデル $X_m$ に到達することを
+示さなければならない．上で記述したブローアップにより「不変量」$n$ は $2$ だけ
+減少するので，これはかなり明らかである．例 \ref{models-example-blowup} の計算を参照せよ．
+しかし，この不変量を厳密に定義してその性質を証明することを避けるため，
+% P07-ERR-0525: frozen source splits "instead" as "in stead". Japanese renders the intended transition.
+代わりに次のように論じる．$n = 2$ ならば，$W'$ は正則であり，したがって
+$X'$ は $x$ の上にあるすべての点で正則となり，$X$ の特異点数を $1$ だけ減らした．
+$n > 2$ ならば，唯一の特異点 $w'$（$W'$ のもの）は $w$ の上にあり，
+$\kappa(w) = \kappa(w')$ を満たす．したがって $U'$ は唯一の特異点 $u'$ をもち，
+それは $u$ の上にあって $\kappa(u) = \kappa(u')$ を満たす．明らかに，これは
+$X'$ が唯一の特異点 $x'$ をもち，それが $x$ の上にあり，すなわち $u'$ の像であることを意味する．
+したがって，上とまったく同様に論じることで，可換図式
+$$
+\xymatrix{
+X'' \ar[d] &
+U'' \ar[l] \ar[d] \ar[r] &
+W'' \ar[d] \\
+X' & U' \ar[l] \ar[r] & W'
+}
+$$
+を得る．二つの正方形は引き戻し正方形であり，垂直射はそれぞれ $x', u', w'$ の
+$X', U', W'$ におけるブローアップである．このように続けると，
+$\lfloor n/2 \rfloor$ 段階後に停止する整合的なブローアップの列を得る．
+この過程の完了時には，スキーム $X^{(\lfloor n/2 \rfloor)}$ の特異点は
+$X$ より一つ少ない．特異点数に関する帰納法により証明が完了する．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-blowdown-at-worst-nodal}
+$R$ を商体 $K$，剰余体 $k$ をもつ離散付値環とする．
+$X \to \Spec(R)$ は相対次元 $1$ の高々節点型（$R$ 上）であると仮定する．
+$X \to X'$ を第1種例外曲線 $E \subset X$ の縮約とする．
+このとき $X'$ は相対次元 $1$ の高々節点型（$R$ 上）である．
+\end{lemma}
+
+\begin{proof}
+$x' \in X'$ を $E$ の像とする．示すべきことは，$X' \to \Spec(R)$ が
+相対次元 $1$ の高々節点型であること（$x'$ の近傍で）だけである．
+$X \to \Spec(R)$ の閉ファイバーは被約なので，$\pi \in R$ は位数 $1$ で
+$E$ 上に消える．これは直ちに，
+% P07-ERR-0526: frozen source omits the first finite verb in this membership assertion. Japanese supplies it.
+$\pi$ が $\mathfrak m_{x'} \subset \mathcal{O}_{X', x'}$ の元とみなされるが，
+$\mathfrak m_{x'}^2$ には属さないことを意味する．
+$\mathcal{O}_{X', x'}$ は次元 $2$ の正則環であるから
+（Resolution of Surfaces, 節 \ref{resolve-section-minus-one} における縮約の定義による），
+$\mathcal{O}_{X'_k, x'}$ は次元 $1$ の正則環である
+（Algebra, 補題 \ref{algebra-lemma-regular-ring-CM}）．
+一方，曲線 $E$ は少なくとも一つの別の成分 $C$ と交わらなければならず，
+この成分は閉ファイバー $X_k$ の成分である．$x \in E \cap C$ とする．このとき $x$ は特殊ファイバー
+$X_k$ の節点であり，したがって $\kappa(x)/k$ は有限分離拡大である．
+Algebraic Curves, 補題 \ref{curves-lemma-nodal} を参照せよ．
+$x \mapsto x'$ なので，$\kappa(x')/k$ は有限分離拡大である．
+Algebra, 補題 \ref{algebra-lemma-separable-smooth} により，
+$X'_k \to \Spec(k)$ は $x'$ のある開近傍で滑らかである．平坦性と合わせると，
+$X' \to \Spec(R)$ は $x'$ の近傍で滑らかである
+（Morphisms, 補題 \ref{morphisms-lemma-smooth-at-point}）．
+相対次元 $1$ の滑らかな射は相対次元 $1$ の高々節点型なので，これで証明が完了する
+（Algebraic Curves, 補題 \ref{curves-lemma-smooth-relative-dimension-1}）．
+\end{proof}
+
+\begin{lemma}
+\label{models-lemma-semistable}
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．次の条件は同値である．
+\begin{enumerate}
+\item $C$ の固有モデルで，相対次元 $1$ の高々節点型（$R$ 上）であるものが存在する．
+\item $C$ の極小モデルで，相対次元 $1$ の高々節点型（$R$ 上）であるものが存在する．
+\item $C$ の任意の極小モデルは相対次元 $1$ の高々節点型（$R$ 上）である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この主張を理解するため，極小モデルとは第1種例外曲線をもたない正則固有モデルとして
+定義されること（定義 \ref{models-definition-minimal-model}），極小モデルが存在すること
+（命題 \ref{models-proposition-exists-minimal-model}），および $C$ の種数が $> 0$ ならば
+極小モデルが一意であること（補題 \ref{models-lemma-minimal-model-unique}）を思い出そう．
+これらを踏まえれば，(2) $\Rightarrow$ (1) と (3) $\Rightarrow$ (2) は明らかである．
+
+\medskip\noindent
+(1) を仮定する．$X$ を $C$ の固有モデルで，相対次元 $1$ の高々節点型
+（$R$ 上）であるものとする．補題 \ref{models-lemma-blowup-at-worst-nodal} を適用すると，
+$X$ はさらに正則であると仮定してよい．
+$$
+X = X_m \to X_{m - 1} \to \ldots \to X_1 \to X_0
+$$
+を補題 \ref{models-lemma-pre-exists-minimal-model} におけるものとする．
+補題 \ref{models-lemma-blowdown-at-worst-nodal} と帰納法により，$X_0$ は
+相対次元 $1$ の高々節点型（$R$ 上）である．
+
+\medskip\noindent
+証明を完了するには，(2) が (3) を含意することを示せばよい．$C$ の種数が
+$> 0$ ならば極小モデルは一意なので，これは明らかである（上の議論を参照）．
+一方，極小モデルが一意でないならば，補題 \ref{models-lemma-nonuniqueness} により
+任意の極小モデルに対して射 $X \to \Spec(R)$ は滑らかである．実際，その
+特殊ファイバーは $\mathbf{P}^1_k$ と同型となる．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-semistable}
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．補題 \ref{models-lemma-semistable} の
+同値な条件が満たされるとき，$C$ は {\it 半安定還元} をもつという．
+\end{definition}
+
+\begin{lemma}
+\label{models-lemma-good}
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．次の条件は同値である．
+\begin{enumerate}
+\item $C$ の滑らかな固有モデルが存在する．
+\item $C$ の極小モデルで $R$ 上滑らかなものが存在する．
+\item 任意の極小モデルは $R$ 上滑らかである．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$ が滑らかな固有モデルならば，特殊ファイバーは連結であり
+（補題 \ref{models-lemma-regular-model-connected}），かつ滑らかなので既約である．
+これは直ちに極小性を与える．したがって (1) は (2) を含意する．
+証明を完了するには，(2) が (3) を含意することを示せばよい．$C$ の種数が
+$> 0$ ならば極小モデルは一意なので，これは明らかである
+（補題 \ref{models-lemma-minimal-model-unique}）．一方，極小モデルが一意でないならば，
+任意の極小モデルに対して射 $X \to \Spec(R)$ は滑らかである．実際，
+補題 \ref{models-lemma-nonuniqueness} により特殊ファイバーは $\mathbf{P}^1_k$ と同型となる．
+\end{proof}
+
+\begin{definition}
+\label{models-definition-good}
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．補題 \ref{models-lemma-good} の
+同値な条件が満たされるとき，$C$ は {\it 良い還元} をもつという．
+\end{definition}
+
+
+
+
+
+
+
+
+\section{種数ゼロにおける半安定還元}
+\label{models-section-semistable-reduction-genus-zero}
+
+\noindent
+この節では，種数ゼロの曲線に対して半安定還元定理
+（定理 \ref{models-theorem-semistable-reduction}）を証明する．
+
+\medskip\noindent
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．$C$ の種数が $0$ ならば，
+$C$ は二次曲線と同型である．Algebraic Curves, 補題
+\ref{curves-lemma-genus-zero} を参照せよ．したがって，有限分離拡大
+$K'/K$ が存在し，その次数は高々 $2$ で，
+$C(K') \not = \emptyset$ を満たす．
+Algebraic Curves, 補題
+\ref{curves-lemma-smooth-plane-curve-point-over-separable} を参照せよ．
+$R' \subset K'$ を $R$ の整閉包とする．More on Algebra, 注意
+\ref{more-algebra-remark-finite-separable-extension} の議論を参照せよ．
+$C_{K'}$ が $R'_{\mathfrak m}$ 上半安定還元をもつことを，各極大イデアル
+$\mathfrak m$（$R'$ のもの）に対して示す（もちろん現在の場合，
+そのようなイデアルは高々二つである）．$R$ を $R'_{\mathfrak m}$ で，
+$C$ を $C_{K'}$ で置き換えると，次の段落で論じる場合に帰着する．
+
+\medskip\noindent
+この段落では，$R$ は商体 $K$ をもつ離散付値環，$C$ は $K$ 上の滑らかな射影曲線で
+$H^0(C, \mathcal{O}_C) = K$ を満たし，種数 $0$ をもち，さらに $C$ は
+$K$-有理点をもつとする．この場合，Algebraic Curves, 命題
+\ref{curves-proposition-projective-line} により $C \cong \mathbf{P}^1_K$ である．
+したがって $\mathbf{P}^1_R$ をモデルとして用いることができ，$C$ は良い還元と
+半安定還元の両方をもつことが分かる．
+
+\begin{example}
+\label{models-example-extension-necessary-genus-zero}
+$R = \mathbf{R}[[\pi]]$ とし，スキーム
+$$
+X = V(T_1^2 + T_2^2 - \pi T_0^2) \subset \mathbf{P}^2_R
+$$
+を考える．$X$ の $\mathbf{C}[[\pi]]$ への基底変換は，
+例 \ref{models-example-nonunique-in-genus-zero} で定義したスキームと同型である．実際，
+因数分解 $T_1^2 + T_2^2 = (T_1 + iT_2)(T_1 - iT_2)$ が $\mathbf{C}$ 上で成り立つ．
+したがって $X$ は正則で，その特殊ファイバーは既約だが特異である．ゆえに $X$ は
+その一般ファイバーの一意な極小モデルである（補題 \ref{models-lemma-nonuniqueness} を用いる）．
+したがって，種数 $0$ の場合でさえ拡大が必要である．
+\end{example}
+
+
+
+\section{種数1における半安定還元}
+\label{models-section-semistable-reduction-genus-one}
+
+\noindent
+この節では，種数1の曲線に対して半安定還元定理
+（定理 \ref{models-theorem-semistable-reduction}）を証明する．読者には，まず種数
+$\geq 2$ の場合の証明（節 \ref{models-section-semistable-reduction-genus-at-least-two}）を
+読むことを勧める．補題 \ref{models-lemma-genus-one} で与えた種数 $1$ の極小数値型の
+分類を可能な限り利用する．
+
+\medskip\noindent
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．$C$ の種数は $1$ と仮定する．
+素数 $\ell \geq 7$ を，$k$ の標数と異なるように選ぶ．
+% P07-ERR-0527: frozen source has the stray phrase "extension K'/K of such that". Japanese renders the intended clauses.
+有限分離拡大 $K'/K$ を，$C(K') \not = \emptyset$ かつ
+$\Pic(C_{K'})[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2}$ となるように選ぶ．
+Algebraic Curves, 補題 \ref{curves-lemma-torsion-picard-becomes-visible} を参照せよ．
+$R' \subset K'$ を $R$ の整閉包とする．More on Algebra, 注意
+\ref{more-algebra-remark-finite-separable-extension} の議論を参照せよ．
+$R$ を $R'_{\mathfrak m}$ で，ある極大イデアル $\mathfrak m$（$R'$ のもの）について
+置き換え，$C$ を $C_{K'}$ で置き換えてよい．
+これにより次の段落で論じる場合に帰着する．
+
+\medskip\noindent
+この節の残りでは，$R$ は商体 $K$ をもつ離散付値環，$C$ は $K$ 上の滑らかな射影曲線で
+$H^0(C, \mathcal{O}_C) = K$ を満たし，種数 $1$ をもち，$K$-有理点をもち，さらに
+$\Pic(C)[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2}$ を満たすものとする．
+ここで $\ell \geq 7$ は $k$ の標数と異なるある素数である．$C$ が半安定還元を
+もつことを証明する．
+
+\medskip\noindent
+$X$ を $C$ の極小モデルとする．命題 \ref{models-proposition-exists-minimal-model} を参照せよ．
+$T = (n, m_i, (a_{ij}), w_i, g_i)$ を $X$ に付随する数値型とする
+（定義 \ref{models-definition-numerical-type-model}）．このとき $T$ は極小数値型である
+（補題 \ref{models-lemma-numerical-type-minimal-model}）．$C$ は有理点をもつので，
+$i$ が存在して $m_i = w_i = 1$ を満たす（補題
+\ref{models-lemma-numerical-type-rational-point}）．補題 \ref{models-lemma-genus-one} における
+種数 $1$ の極小数値型の分類を見ると，$m = w = 1$ であり，次の場合は除外される．
+(\ref{models-item-up4}),
+(\ref{models-item-equal-down3}),
+(\ref{models-item-up-up}),
+(\ref{models-item-down-up}),
+(\ref{models-item-up-equal-up}),
+(\ref{models-item-down-equal-up}),
+(\ref{models-item-triple-with-down}),
+(\ref{models-item-equal-equal-down-equal}),
+(\ref{models-item-up-equal-equal-up}),
+(\ref{models-item-down-equal-equal-up}),
+(\ref{models-item-triple-extended-down}),
+(\ref{models-item-up-chain-equal-up}),
+(\ref{models-item-down-chain-equal-up}),
+(\ref{models-item-Dn-extended-down})．
+% P07-ERR-0528: frozen source uses singular "is" with the compound subject w_i and m_i. Japanese is grammatical.
+実際，$w_i$ と $m_i$ の両方が $1$ に等しくなる添字は存在しない．
+$e$ を，対 $(i, j)$ で $i < j$ かつ $a_{ij} > 0$ を満たすものの個数とする．
+残る場合について次が成り立つ．
+\begin{enumerate}
+\item[(A)] $e = n - 1$ となるのは次の場合である．
+(\ref{models-item-one}),
+(\ref{models-item-two-cycle}),
+(\ref{models-item-equal-up3}),
+(\ref{models-item-up-down}),
+(\ref{models-item-up-equal-down}),
+(\ref{models-item-triple-with-up}),
+(\ref{models-item-equal-equal-up-equal}),
+(\ref{models-item-up-equal-equal-down}),
+(\ref{models-item-quadruple}),
+(\ref{models-item-triple-extended-up}),
+(\ref{models-item-up-chain-equal-down}),
+(\ref{models-item-Dn-extended-up}),
+(\ref{models-item-double-triple}),
+(\ref{models-item-E6-completed}),
+(\ref{models-item-E7-completed})，および
+(\ref{models-item-E8-completed})．
+\item[(B)] $e = n$ となるのは次の場合である．
+(\ref{models-item-three-cycle}),
+(\ref{models-item-four-cycle}),
+(\ref{models-item-five-cycle})，および
+(\ref{models-item-n-cycle})．
+\end{enumerate}
+これらの場合を別々に論じる．
+
+\medskip\noindent
+場合 (A)．この場合，$\Pic(T)[\ell]$ は自明である（数値型の Picard 群は
+節 \ref{models-section-picard-group} で定義されている）．消滅は，
+$\Pic(T) \subset \Coker(A)$（補題 \ref{models-lemma-picard-T-and-A}）と，
+補題 \ref{models-lemma-recurring-symmetric-integer} による $\Coker(A)[\ell] = 0$ から従う．
+ここで $\ell$ は $a_{ij}$ および $m_i$ と互いに素に選んである．
+補題 \ref{models-lemma-sequence-torsion} および \ref{models-lemma-torsion-embeds} により，埋め込み
+$$
+(\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2} \subset \Pic((X_k)_{red})[\ell].
+$$
+が存在する．Algebraic Curves, 補題 \ref{curves-lemma-bound-torsion-simple} により
+$$
+2 \leq \dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) +
+g_{geom}((X_k)_{red}/k)
+$$
+を得る．Algebraic Curves, 補題 \ref{curves-lemma-bound-geometric-genus} および
+\ref{curves-lemma-bound-geometric-genus-curve} により，
+$g_{geom}((X_k)_{red}/k) \leq \sum w_ig_i$ である．
+補題 \ref{models-lemma-genus-reduction-smaller} の仮定は補題
+\ref{models-lemma-numerical-type-rational-point} により満たされるので，
+$\dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) \leq g = 1$ を得る．
+これらを合わせると
+$$
+2 \leq 1 + \sum w_i g_i
+$$
+を得る．分類表を見ると，数値型は $n = 1$，$w_1 = m_1 = g_1 = 1$ で与えられる．
+至る所で等号が成り立つので，$g_{geom}(C_1/k) = 1$ である．一方，$C_1$ は
+$k$-有理点 $x$ をもち，$C_1 \to \Spec(k)$ は $x$ で滑らかである．したがって
+$C_1$ は幾何学的整である（Varieties, 補題
+\ref{varieties-lemma-variety-with-smooth-rational-point}）．ゆえに
+$g_{geom}(C_1/k) = 1$ は，$C_{1, \overline{k}}$ の正規化の種数と
+$C_{1, \overline{k}}$ の種数の両方に等しい．したがって正規化射
+$C_{1, \overline{k}}^\nu \to C_{1, \overline{k}}$ は同型である
+（Algebraic Curves, 補題 \ref{curves-lemma-genus-normalization}）．
+望んだとおり，$C_1$ は $k$ 上滑らかである．
+
+\medskip\noindent
+場合 (B)．ここでは埋め込み
+$$
+\mathbf{Z}/\ell \mathbf{Z} \subset \Pic(X_k)[\ell]
+$$
+が存在することだけを結論する．型の分類から，$m_i = w_i = 1$ かつ
+$g_i = 0$ であることが各 $i$ に対して成り立つ．したがって各 $C_i$ は $k$ 上の
+種数ゼロの曲線である．さらに，各 $i$ に対してある $j$ が存在し，
+$C_i \cap C_j$ は $k$-有理点である．したがって Algebraic Curves, 命題
+\ref{curves-proposition-projective-line} により $C_i \cong \mathbf{P}^1_k$ である．
+特に，$X_k$ は $C_i$ のスキーム論的合併なので，$X_{\overline{k}}$ は
+$C_{i, \overline{k}}$ のスキーム論的合併である．ゆえに $X_{\overline{k}}$ は
+次元 $1$ の被約連結固有スキーム（$\overline{k}$ 上）で，
+$\dim_{\overline{k}} H^1(X_{\overline{k}}, \mathcal{O}_{X_{\overline{k}}}) = 1$ を満たす．
+また，Varieties, 補題 \ref{varieties-lemma-change-fields-pic} と上の議論により，なお
+% P07-ERR-0529: frozen source has an unclosed parenthesis and omits [ell] in the Picard term. Display preserved.
+$$
+\dim_{\mathbf{F}_\ell}(\Pic(X_{\overline{k}}) \geq 1
+$$
+である．Algebraic Curves, 命題
+\ref{curves-proposition-torsion-picard-reduced-proper} により，
+% P07-ERR-0530: frozen source says "has at only". Japanese renders the intended predicate.
+$X_{\overline{k}}$ は高々多重交差特異点しかもたない．しかし $X_k$ は Gorenstein
+であるから（補題 \ref{models-lemma-gorenstein}），$X_{\overline{k}}$ も Gorenstein である
+（Duality for Schemes, 補題 \ref{duality-lemma-gorenstein-base-change}）．したがって
+Algebraic Curves, 補題 \ref{curves-lemma-multicross-gorenstein-is-nodal} により，
+$X_{\overline{k}}$ は高々節点型である．これで場合 (B) の証明が完了する．
+
+\begin{example}
+\label{models-example-extension-necessary-genus-one}
+$k$ を代数閉体とする．$Z$ を $k$ 上の滑らかな射影曲線で，正の種数 $g$ を
+もつものとする．$n \geq 1$ を $k$ の標数と互いに素な整数とする．
+$\mathcal{L}$ を可逆 $\mathcal{O}_Z$-加群で，位数 $n$ をもつものとする．
+Algebraic Curves, 補題 \ref{curves-lemma-torsion-picard-smooth-projective} を参照せよ．
+同型 $\varphi : \mathcal{L}^{\otimes n} \to \mathcal{O}_Z$ を選ぶ．
+$R = k[[\pi]]$ とおき，その商体を $K = k((\pi))$ とする．$Z_R$ を $Z$ の
+$R$ への基底変換とする．$\mathcal{L}_R$ を $\mathcal{L}$ の $Z_R$ への
+引き戻しとする．有限平坦射
+$$
+p : X \longrightarrow Z_R
+$$
+で，
+$$
+p_*\mathcal{O}_X =
+\text{Sym}^*_{\mathcal{O}_{Z_R}}(\mathcal{L}_R)/(\varphi - \pi) =
+\mathcal{O}_{Z_R} \oplus \mathcal{L}_R \oplus
+\mathcal{L}_R^{\otimes 2} \oplus \ldots \oplus \mathcal{L}_R^{\otimes n - 1}
+$$
+を満たすものを考える．より正確には，$U = \Spec(A) \subset Z$ がアフィン開集合で，
+$\mathcal{L}|_U$ が切断 $s$ により自明化され，$\varphi(s^{\otimes n}) = f$
+（ここで $f$ は単元）を満たすならば，
+% P07-ERR-0531: frozen source tensors the k-algebra A over R although no R-algebra structure was specified. Formula preserved.
+$$
+p^{-1}(U_R) = \Spec\left(
+(A \otimes_R R[[\pi]])[x]/(x^n - \pi f)
+\right)
+$$
+である．一般ファイバーの射 $X_K \to Z_K$ が有限エタールであることを読者は
+確認できる．構造層の記述を見ると，$H^0(X, \mathcal{O}_X) = R$ および
+$H^0(X_K, \mathcal{O}_{X_K}) = K$ である．Riemann--Hurwitz により
+（Algebraic Curves, 補題 \ref{curves-lemma-rhe}），$X_K$ の種数は
+$n(g - 1) + 1$ である．特に $X_K$ の種数は $1$ である（$Z$ の種数が $1$ の場合）．
+一方，上の局所方程式によりスキーム $X$ は正則であり，特殊ファイバー $X_k$ は
+有効 Cartier 因子として被約特殊ファイバーの $n$ 倍である．したがって，
+任意の有限拡大 $K'/K$ で，その上で $X_K$ が半安定還元を得るものは，少なくとも $n$ の分岐指数を
+もって分岐しなければならない（いくつかの細部は省略する）．ゆえに，種数 $1$ の
+曲線が半安定還元を得る拡大の次数には普遍的な上界は存在しない．
+\end{example}
+
+
+
+
+
+
+\section{種数2以上における半安定還元}
+\label{models-section-semistable-reduction-genus-at-least-two}
+
+\noindent
+この節では，種数 $\geq 2$ の曲線に対して半安定還元定理
+（定理 \ref{models-theorem-semistable-reduction}）を証明する．$g \geq 2$ を固定する．
+
+\medskip\noindent
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．$C$ の種数は $g$ と仮定する．
+素数 $\ell > 768g$ を，$k$ の標数と異なるように選ぶ．
+% P07-ERR-0532: frozen source repeats the stray "extension K'/K of such that" phrase. Japanese renders the intended clauses.
+有限分離拡大 $K'/K$ を，$C(K') \not = \emptyset$ かつ
+$\Pic(C_{K'})[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2g}$ となるように選ぶ．
+Algebraic Curves, 補題 \ref{curves-lemma-torsion-picard-becomes-visible} を参照せよ．
+$R' \subset K'$ を $R$ の整閉包とする．More on Algebra, 注意
+\ref{more-algebra-remark-finite-separable-extension} の議論を参照せよ．
+$R$ を $R'_{\mathfrak m}$ で，ある極大イデアル $\mathfrak m$（$R'$ のもの）について
+置き換え，$C$ を $C_{K'}$ で置き換えてよい．これにより次の段落で論じる場合に帰着する．
+
+\medskip\noindent
+この節の残りでは，$R$ は商体 $K$ をもつ離散付値環，$C$ は $K$ 上の滑らかな射影曲線で
+$H^0(C, \mathcal{O}_C) = K$ を満たし，種数 $g$ をもち，$K$-有理点をもち，さらに
+$\Pic(C)[\ell] \cong (\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2g}$ を満たすものとする．
+ここで $\ell \geq 768g$ は $k$ の標数と異なるある素数である．$C$ が半安定還元を
+もつことを証明する．
+
+\medskip\noindent
+この節の残りでは，補題 \ref{models-lemma-numerical-type-rational-point} の結論が
+成り立つことを，今後断りなく用いる．
+
+\medskip\noindent
+$X$ を $C$ の極小モデルとする．命題 \ref{models-proposition-exists-minimal-model} を参照せよ．
+$T = (n, m_i, (a_{ij}), w_i, g_i)$ を $X$ に付随する数値型とする
+（定義 \ref{models-definition-numerical-type-model}）．このとき $T$ は種数 $g$ の極小数値型である
+（補題 \ref{models-lemma-numerical-type-minimal-model}）．
+命題 \ref{models-proposition-bound-picard-group} により
+$$
+\dim_{\mathbf{F}_\ell} \Pic(T)[\ell] \leq g_{top}
+$$
+である．補題 \ref{models-lemma-sequence-torsion} および \ref{models-lemma-torsion-embeds} により，埋め込み
+$$
+(\mathbf{Z}/\ell \mathbf{Z})^{\oplus 2g - g_{top}}
+\subset \Pic((X_k)_{red})[\ell].
+$$
+が存在する．Algebraic Curves, 補題 \ref{curves-lemma-bound-torsion-simple} により
+$$
+2g - g_{top} \leq
+\dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) + g_{geom}(X_k/k)
+$$
+を得る．補題 \ref{models-lemma-genus-reduction-smaller} および
+\ref{models-lemma-genus-reduction-bigger-than} により
+$$
+g \geq \dim_k H^1((X_k)_{red}, \mathcal{O}_{(X_k)_{red}}) \geq
+g_{top} + g_{geom}(X_k/k)
+$$
+である．初等整数論により，これら $3$ 個の不等式が同時に成り立つ唯一の可能性は，
+すべてが等式となる場合である．補題 \ref{models-lemma-genus-reduction-smaller} を見ると，
+$m_i = 1$ がすべての $i$ に対して成り立つ．補題
+\ref{models-lemma-equality-genus-reduction-bigger-than} を見ると，$X_k$ のすべての既約成分は
+$k$ 上滑らかである．
+
+\medskip\noindent
+特に，$X_k$ はその既約成分 $C_i$ のスキーム論的合併なので，
+$X_{\overline{k}}$ は $C_{i, \overline{k}}$ のスキーム論的合併である．
+したがって $X_{\overline{k}}$ は次元 $1$ の被約連結固有スキーム（$\overline{k}$ 上）で，
+$\dim_{\overline{k}} H^1(X_{\overline{k}}, \mathcal{O}_{X_{\overline{k}}}) = g$ を満たす．
+また，Varieties, 補題 \ref{varieties-lemma-change-fields-pic} と上の議論により，なお
+$$
+\dim_{\mathbf{F}_\ell}(\Pic(X_{\overline{k}})[\ell])
+\geq 2g - g_{top} =
+\dim_{\overline{k}} H^1(X_{\overline{k}}, \mathcal{O}_{X_{\overline{k}}})
++ g_{geom}(X_{\overline{k}})
+$$
+である．Algebraic Curves, 命題
+\ref{curves-proposition-torsion-picard-reduced-proper} により，
+% P07-ERR-0533: frozen source repeats the stray phrase "has at only". Japanese renders the intended predicate.
+$X_{\overline{k}}$ は高々多重交差特異点しかもたない．しかし $X_k$ は Gorenstein
+であるから（補題 \ref{models-lemma-gorenstein}），$X_{\overline{k}}$ も Gorenstein である
+（Duality for Schemes, 補題 \ref{duality-lemma-gorenstein-base-change}）．したがって
+$X_{\overline{k}}$ は高々節点型である（Algebraic Curves, 補題
+\ref{curves-lemma-multicross-gorenstein-is-nodal}）．これで証明が完了する．
+
+
+
+
+
+
+
+
+
+
+\section{曲線の半安定還元}
+\label{models-section-semistable-reduction-theorem}
+
+\noindent
+この節で定理の証明を完了する．$g \geq 2$ に対して，$768g < \ell' < \ell$ を
+$> 768g$ である最初の二つの素数とし，
+\begin{equation}
+\label{models-equation-bound}
+B_g = (2g - 2)(\ell^{2g})!
+\end{equation}
+とおく．$B_g$ の正確な形は重要ではない．要点は，これが $g$ のみに依存することである．
+
+\begin{theorem}
+\label{models-theorem-semistable-reduction}
+\begin{reference}
+\cite[系 2.7]{DM}
+\end{reference}
+$R$ を商体 $K$ をもつ離散付値環とする．$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ を満たすものとする．このとき離散付値環の拡大
+$R \subset R'$ で，商体の有限分離拡大 $K'/K$ を誘導し，$C_{K'}$ が
+半安定還元をもつものが存在する．より正確には，次が成り立つ．
+\begin{enumerate}
+\item $C$ の種数がゼロならば，
+% P07-ERR-0534: frozen theorem says degree exactly 2 although the preceding proof establishes degree at most 2. Assertion preserved.
+次数 $2$ の分離拡大 $K'/K$ で，$C_{K'} \cong \mathbf{P}^1_{K'}$ を満たすものが存在する．
+したがって $C_{K'}$ は，滑らかな射影スキーム $\mathbf{P}^1_{R'}$ の一般ファイバーと
+同型である．ここで $R'$ は $R$ の $K'$ における整閉包である．
+\item $C$ の種数が1ならば，有限分離拡大 $K'/K$ で，$C_{K'}$ が
+$R'_\mathfrak m$ 上半安定還元をもつものが存在する．これは，任意の極大イデアル
+$\mathfrak m$ に対して成り立つ．ここで $R'$ は $R$ の $K'$ における整閉包である．さらに，
+$C_{K'}$ の（一意な）極小モデルの $R'_\mathfrak m$ 上の特殊ファイバーは，
+滑らかな種数1の曲線または有理曲線の輪のいずれかである．
+\item $g$ を $C$ の種数とし，これが1より大きいならば，有限分離拡大 $K'/K$ で，次数が高々
+$B_g$（\ref{models-equation-bound}）であり，$C_{K'}$ が $R'_\mathfrak m$ 上半安定還元を
+もつものが存在する．これは，任意の極大イデアル $\mathfrak m$ に対して成り立つ．
+ここで $R'$ は $R$ の $K'$ における整閉包である．
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+種数ゼロの場合は節 \ref{models-section-semistable-reduction-genus-zero} を参照せよ．
+種数1の場合は節 \ref{models-section-semistable-reduction-genus-one} を参照せよ．
+種数が1より大きい場合は節 \ref{models-section-semistable-reduction-genus-at-least-two} を参照せよ．
+次数 $[K' : K]$ の上界については，すべての $\ell$-捩れまたは $\ell'$-捩れを
+可視化するのに必要な拡大次数の上界を用いることができる．これは
+Algebraic Curves, 補題 \ref{curves-lemma-torsion-picard-becomes-visible} で証明されている．
+（$\ell$ と $\ell'$ の両方を用いる理由は，剰余体 $k$ の標数を避ける必要があるからである．）
+\end{proof}
+
+\begin{remark}[上界の改善]
+\label{models-remark-improving-bound}
+文献の結果は，定理 \ref{models-theorem-semistable-reduction} の主張における上界を
+改善できることを示唆している．例えば \cite{DM} では，剰余体が完全ならば
+$C$ とそのヤコビ多様体が半安定還元をもつことは同値であると示されており，
+これは一般の剰余体に対しても成り立つと予想される．アーベル多様体については，
+$\ell$-捩れ上の Galois 作用が自明である任意の $\ell \geq 3$ が剰余標数と異なれば，
+半安定還元をもつ．したがって，
+% P07-ERR-0535: frozen source proposes ell=5 without excluding residue characteristic 5. Formula-level choice preserved.
+$\ell = 5$ を $B_g$ の公式（\ref{models-equation-bound}）で選べると予想される
+（ただし証明にはさらに多くの作業が必要である．必要になった場合には，
+ここで正確な主張を与えて証明することにする）．
+\end{remark}

@@ -1,0 +1,983 @@
+% Generated mechanically from frozen input inputs/p01/ja/sets.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{2}
+\chapter{集合論}
+
+
+
+\phantomsection
+\label{sets-section-phantom}
+
+
+\section{序論}
+\label{sets-section-introduction}
+
+\noindent
+集合論は折に触れて必要になる。本書では、\cite{Kunen} および \cite{Jech} に
+記述されている、選択公理を伴う Zermelo--Fraenkel 集合論（ZFC）を用いる。
+
+\section{すべては集合である}
+\label{sets-section-sets-everything}
+
+\noindent
+多くの数学者は、集合論が数学の基本的な基礎を与えるものと考えている。
+では、これは実際にはどのように働くのだろうか。たとえば「$X$ はスキームで
+ある」という文を、どのように集合論へ翻訳するのか。定義を順に展開すればよい。
+スキームとは、各点がアフィン・スキームである開近傍をもつ局所環付き空間である。
+局所環付き空間とは、構造層の各茎が局所環である環付き空間である。環付き空間とは、
+位相空間 $X$ とその上の環の層 $\mathcal{O}_X$ とからなる対
+$(X, \mathcal{O}_X)$ である。位相空間とは、集合 $X$ と、位相の公理を満たす
+部分集合族 $\tau \subset \mathcal{P}(X)$ とからなる対 $(X, \tau)$ である。
+以下も同様に続く。
+
+\medskip\noindent
+では、集合 $S$ が与えられたとき、それがスキームであるかどうかをどのように
+判定するのか。まず調べるのは、集合 $S$ が順序対であるかどうかである。これは
+（\cite{Jech} の 7 ページを参照）、ある集合 $a, b$ に対して $S$ が
+$(a, b) := \{\{a\}, \{a, b\}\}$ の形をもつこととして定義される。そうであれば、
+次に $a$ が順序対 $(c, d)$ であるかどうかを調べる。そうならば、
+$d \subset \mathcal{P}(c)$ かどうかを確認し、さらにそうならば、$d$ が集合 $c$
+上の位相をなす集合族であるかどうかを確認する。以下も同様に続く。
+
+\medskip\noindent
+したがって、「$x$ はスキームである」という概念を表す、自由変数 $x$ を一つもつ
+集合論の完全な論理式 $\phi_{scheme}(x)$ を書き下すには相当な作業を要するものの、
+それは可能である。どのような数学的対象についても同じことが成り立つはずである。
+
+\section{類}
+\label{sets-section-classes}
+
+\noindent
+非形式的には、ここで「類」という概念を用いる。論理式
+$\phi(x, p_1, \ldots, p_n)$ が与えられたとき、
+$$
+C = \{x : \phi(x, p_1, \ldots, p_n)\}
+$$
+を「類」と呼ぶ。類はそれを定義する論理式より扱いやすいが、厳密にいえば
+数学的対象ではない。たとえば $R$ が環ならば、すべての $R$-加群からなる類を
+考えることができる（結局のところ、「$M$ は $R$-加群である」という文を
+集合論の論理式へ翻訳でき、その論理式が一つの類を定義するからである）。
+集合ではない類を「真の類」という。
+
+\medskip\noindent
+このようにして $R$-加群の圏を考えることができる。これは「大きな」圏、
+すなわち対象が真の類をなす圏である。同様に、スキームの「大きな」圏、
+環の「大きな」圏なども考えることができる。
+
+
+
+\section{順序数}
+\label{sets-section-ordinals}
+
+\noindent
+集合 $T$ が「推移的」であるとは、$x\in T$ ならば $x\subset T$ となることをいう。
+集合 $\alpha$ が「順序数」であるとは、それが推移的であり、$\in$ により整列される
+ことをいう。このとき $\alpha + 1 = \alpha \cup \{\alpha\}$ と定める。これは別の
+順序数であり、$\alpha$ の「後続者」と呼ばれる。ある順序数 $\beta$ が存在して
+$\alpha = \beta + 1$ となるとき、順序数 $\alpha$ を「後続順序数」という。
+最小の順序数は $\emptyset$ であり、$0$ とも表す。$\alpha$ が $0$ でも後続順序数
+でもないとき、$\alpha$ を「極限順序数」といい、
+$$
+\alpha
+=
+\bigcup\nolimits_{\gamma \in \alpha} \gamma.
+$$
+が成り立つ。最初の極限順序数は $\omega$ であり、これは最初の無限順序数でもある。
+最初の非可算順序数 $\omega_1$ は、すべての可算順序数からなる集合である。
+すべての順序数からなる集まりは真の類である。それは次の意味で $\in$ により
+整列されている。順序数からなる任意の空でない集合（さらには類）には最小元がある。
+順序数からなる集合 $A$ に対し、その集合 $A$ の「上限」を
+$\sup_{\alpha \in A} \alpha =
+\bigcup_{\alpha \in A} \alpha$ と定める。これは、すべての $\alpha \in A$ 以上である
+最小の順序数である。任意の整列集合 $(S, <)$ に対し、
+$(S, <) \cong (\alpha, \in)$ となる一意な順序数 $\alpha$ が存在する。これを
+その整列集合の「順序型」という。
+
+\section{集合の階層}
+\label{sets-section-sets-hierarchy}
+
+\noindent
+超限再帰により $V_0 = \emptyset$、
+$V_{\alpha + 1} = P(V_\alpha)$（冪集合）と定め、極限順序数 $\alpha$ に対しては
+$$
+V_\alpha = \bigcup\nolimits_{\beta < \alpha} V_\beta.
+$$
+と定める。各 $V_\alpha$ は推移的集合であることに注意する。
+
+\begin{lemma}
+\label{sets-lemma-axiom-regularity}
+任意の集合は、ある順序数 $\alpha$ に対する $V_\alpha$ の元である。
+\end{lemma}
+
+\begin{proof}
+\cite[Lemma 6.3]{Jech} を参照されたい。
+\end{proof}
+
+\noindent
+\cite[Chapter III]{Kunen} では、この補題が正則性公理（基礎の公理）と同値である
+ことが説明されている。集合 $S$ の「階数」とは、$S \in V_{\alpha + 1}$ となる
+最小の順序数 $\alpha$ をいう。「部分宇宙」とは、文脈から明らかな程度に十分大きい
+$V_\alpha$ の形の集合をいうことにする。
+
+\section{濃度}
+\label{sets-section-cardinals}
+
+\noindent
+集合 $A$ の「濃度」とは、$A$ と $\alpha$ の間に全単射が存在するような最小の
+順序数 $\alpha$ である。これを表すために $\alpha = |A|$ という記法を用いることが
+ある。順序数 $\alpha$ が「基数」であるとは、それがある集合 $A$ の濃度として現れる
+こと、すなわち $\alpha = |A|$ となることをいう。基数にはギリシャ文字
+$\kappa$, $\lambda$ を用いる。最初の無限基数は $\omega$ であり、この文脈では
+$\aleph_0$ と表す。集合の濃度が $\leq \aleph_0$ であるとき、その集合を「可算」と
+いう。$\alpha$ が順序数ならば、$\alpha^+$ を $> \alpha$ である最小の基数と表す。
+これにより $\aleph_1 = \aleph_0^+$、$\aleph_2 = \aleph_1^+$ などと定義でき、実際、
+任意の順序数 $\alpha$ に対する $\aleph_\alpha$ を超限再帰で定義できる。
+$\aleph_1 = \omega_1$ であることに注意する。
+
+\medskip\noindent
+基数 $\kappa, \lambda$ の「和」を $\kappa \oplus \lambda$ と表す。これは
+$\kappa \amalg \lambda$ の濃度である。基数 $\kappa, \lambda$ の「積」を
+$\kappa \otimes \lambda$ と表す。これは $\kappa \times \lambda$ の濃度である。
+$\kappa$ と $\lambda$ が無限基数ならば、
+$\kappa \oplus \lambda = \kappa \otimes \lambda = \max(\kappa, \lambda)$ である。
+基数 $\kappa, \lambda$ の「冪」を $\kappa^\lambda$ と表す。これは $\lambda$ から
+$\kappa$ への（集合の）写像全体の集合の濃度である。基数からなる任意の集合 $K$
+に対し、その集合 $K$ の「上限」は
+$\sup_{\kappa \in K} \kappa = \bigcup_{\kappa \in K} \kappa$ であり、これも基数である。
+
+\section{共終性}
+\label{sets-section-cofinality}
+
+\noindent
+整列集合 $T$ の「共終部分集合」$S$ とは、
+$\forall t \in T \exists s\in S (t \leq s)$ を満たす部分集合 $S \subset T$ のことで
+ある。整列集合の部分集合は（誘導された順序により）整列集合となることに注意する。
+順序数 $\alpha$ が与えられたとき、$\alpha$ の「共終数」
+$\text{cf}(\alpha)$ とは、$\alpha$ のある共終部分集合の順序型として現れる最小の
+順序数 $\beta$ である。順序数の共終数は常に基数である。したがって別の定義として、
+$\alpha$ の共終数を、$\alpha$ の共終部分集合の濃度のうち最小のものとしてもよい。
+
+\begin{lemma}
+\label{sets-lemma-map-from-set-lifts}
+$T = \colim_{\alpha < \beta} T_\alpha$ が、与えられた順序数 $\beta$ 未満の順序数で
+添字付けられた集合の余極限であるとする。また、$\varphi : S \to T$ が集合の写像で
+あるとする。$\beta$ が $S$ で添字付けられた順序数族の極限でなければ、すなわち
+$\beta$ が $\text{cf}(\beta) > |S|$ を満たす順序数であれば、ある $\alpha < \beta$ に対して
+$\varphi$ は $T_\alpha$ への写像に持ち上がる。
+\end{lemma}
+
+\begin{proof}
+各元 $s \in S$ に対し、$T$ において $\varphi(s)$ へ写る元 $t_s \in T_{\alpha_s}$ と
+$\alpha_s < \beta$ を選ぶ。仮定により
+$\alpha = \sup_{s \in S} \alpha_s$ は $\beta$ より真に小さい。したがって、$s$ に
+$t_s$ の $T_\alpha$ における像を対応させる写像
+$\varphi_\alpha : S \to T_\alpha$ が求める解である。
+\end{proof}
+
+\noindent
+次の命題は、本質的には Grothendieck が任意に大きな共終数をもつ順序数の存在を
+示すために用いた議論である。彼はこれを、ある種のアーベル圏に十分な入射対象が
+存在することの証明に用いた。\cite{Tohoku} を参照されたい。
+
+\begin{proposition}
+\label{sets-proposition-exist-ordinals-large-cofinality}
+$\kappa$ を基数とする。このとき、共終数が $\kappa$ より大きい順序数が存在する。
+\end{proposition}
+
+\begin{proof}
+$\kappa$ が有限ならば、$\omega = \text{cf}(\omega)$ をとればよい。そこで
+$\kappa$ は無限であると仮定する。濃度が $\kappa$ より真に大きい最小の順序数
+$\alpha$ を考える。$\text{cf}(\alpha) > \kappa$ であると主張する。
+$\alpha$ は極限順序数であることに注意する。実際、もし $\alpha = \beta + 1$ ならば、
+$|\alpha| = |\beta|$（$\alpha$ と $\beta$ は無限だから）となり、$\alpha$ の最小性に
+反する。（もちろん $\alpha$ は基数でもあるが、これは必要としない。）矛盾を
+導くため、$S \subset \alpha$ が $|S| \leq \kappa$ を満たす共終部分集合であると
+仮定する。$\beta \in S$、すなわち $\beta < \alpha$ に対し、$\alpha$ の最小性から
+$|\beta| \leq \kappa$ である。$\alpha$ は極限順序数であり、$S$ は $\alpha$ で
+共終だから、$\alpha = \bigcup_{\beta \in S} \beta$ を得る。したがって
+$|\alpha| \leq |S| \otimes \kappa \leq \kappa \otimes \kappa \leq \kappa$
+となり、$\alpha$ の選び方に反する。
+\end{proof}
+
+
+
+\section{反映原理}
+\label{sets-section-reflection-principle}
+
+\noindent
+この節の内容の一部は、\cite{Kunen} の「Easy consistency proofs」と題する章にある。
+
+\medskip\noindent
+$\phi(x_1, \ldots, x_n)$ を集合論の論理式とする。この記法は、$\phi$ のすべての
+自由変数が $x_1, \ldots, x_n$ の中に現れることを意味するものと約束する。
+$M$ を集合とする。論理式 $\phi^M(x_1, \ldots, x_n)$ とは、
+$\phi(x_1, \ldots, x_n)$ に現れるすべての $\forall x$ および $\exists x$ を、それぞれ
+$\forall x\in M$ および $\exists x\in M$ で置き換えて得られる論理式である。
+したがって、論理式
+$\phi(x_1, x_2) = \exists x (x\in x_1 \wedge x\in x_2)$ は
+$\phi^M(x_1, x_2) = \exists x \in M (x\in x_1 \wedge x\in x_2)$ に変わる。
+論理式 $\phi^M$ を「$\phi$ の $M$ への相対化」という。
+
+\begin{theorem}
+\label{sets-theorem-reflection-principle}
+集合論の論理式からなる「有限」個の族
+$\phi_1(x_1, \ldots, x_n), \ldots, \phi_m(x_1, \ldots, x_n)$ が与えられたとする。
+$M_0$ を集合とする。このとき、$M_0 \subset M$ を満たし、
+$\forall x_1, \ldots, x_n \in M$ に対して
+$$
+\forall i = 1, \ldots, m, \ \phi_i^{M}(x_1, \ldots, x_n)
+\Leftrightarrow
+\forall i = 1, \ldots, m, \ \phi_i(x_1, \ldots, x_n).
+$$
+となる集合 $M$ が存在する。実際、ある極限順序数 $\alpha$ に対して
+$M = V_\alpha$ ととることができる。
+\end{theorem}
+
+\begin{proof}
+\cite[Theorem 12.14]{Jech} または \cite[Theorem 7.4]{Kunen} を参照されたい。
+\end{proof}
+
+\noindent
+この定理を次のように理解する。任意の $x_1, \ldots, x_n \in M$ が与えられたとき、
+束縛変数がすべての集合を動くものとして論理式が成り立つことと、束縛変数が
+$V_\alpha$ の元を動くものとして論理式が成り立つこととは同値である。この定理は
+集合論の論理式そのものを扱うので、メタ定理である。実際、自由変数が高々
+$x_1, \ldots, x_n$ である論理式の有限リスト $\phi_1, \ldots, \phi_m$ が与えられた
+とき、文
+$$
+\begin{matrix}
+\forall M_0\ \exists M, \ M_0 \subset M\ \forall x_1, \ldots, x_n \in M \\
+\phi_1(x_1, \ldots, x_n) \wedge \ldots \wedge \phi_m(x_1, \ldots, x_n)
+\leftrightarrow
+\phi_1^M(x_1, \ldots, x_n) \wedge \ldots \wedge \phi_m^M(x_1, \ldots, x_n)
+\end{matrix}
+$$
+が ZFC で証明可能である、と述べている。言い換えれば、有限個の論理式
+$\phi_i$ を実際に書き下すたびに、一つの定理が得られる。
+
+\medskip\noindent
+論理式 $\phi_i^M(x_1, \ldots, x_n)$ の意味はそれほど明瞭ではないので、この定理を
+「通常の数学」で用いるのはやや難しい。そこで本書では、反映原理の証明の考え方を
+用いて、必要な存在結果を直接証明する。
+
+\section{スキームの圏の構成}
+\label{sets-section-categories-schemes}
+
+\noindent
+ここでは、最初にスキームの集合が与えられたとき、自然な操作のリストのもとで
+閉じたスキームの「小さい」圏を作るために、上の考え方をどのように適用するかを
+論じる。その前に、スキームの大きさを導入する。スキーム $S$ に対して
+$$
+\text{size}(S) = \max(\aleph_0, \kappa_1, \kappa_2),
+$$
+と定義する。ここで基数 $\kappa_1$ と $\kappa_2$ は次のように定める。
+\begin{enumerate}
+\item $\kappa_1$ を $S$ のアフィン開集合全体の集合の濃度とする。
+\item $\kappa_2$ を、すべてのアフィン開集合 $U \subset S$ に対する
+$\Gamma(U, \mathcal{O}_S)$ の濃度すべての上限とする。
+\end{enumerate}
+
+\begin{lemma}
+\label{sets-lemma-bounded-size}
+任意の基数 $\kappa$ に対し、集合 $A$ で、$A$ の各元がスキームであり、次の性質を
+もつものが存在する。$\text{size}(S) \leq \kappa$ を満たす任意のスキーム $S$ に
+対し、$X \cong S$（スキームの同型）となる元 $X \in A$ が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：任意のスキームが、アフィン・スキームを貼り合わせて得られる
+スキームと同型であることを考えよ。
+\end{proof}
+
+\noindent
+各基数 $\kappa$ に
+\begin{equation}
+\label{sets-equation-bound}
+Bound(\kappa) = \max\{\kappa^{\aleph_0}, \kappa^+\}.
+\end{equation}
+を対応させる関数を $Bound$ と表す。この関数をもっと急速に増大させてもよい。
+たとえば $Bound(\kappa) = \kappa^\kappa$ と定めても、以下の結果は依然として
+成り立つ。任意の順序数 $\alpha$ に対し、対象が $V_\alpha$ の元であるスキームの
+圏の充満部分圏を $\Sch_\alpha$ と表す。これから証明する結果は次のとおりである。
+
+\begin{lemma}
+\label{sets-lemma-construct-category}
+上で定めた記法 $\text{size}$、$Bound$、$\Sch_\alpha$ を用いる。$S_0$ をスキームの
+集合とする。このとき、次の性質をもつ極限順序数 $\alpha$ が存在する。
+\begin{enumerate}
+\item
+\label{sets-item-inclusion}
+$S_0 \subset V_\alpha$ が成り立つ。言い換えれば、
+$S_0 \subset \Ob(\Sch_\alpha)$ である。
+\item
+\label{sets-item-bounded}
+任意の $S \in \Ob(\Sch_\alpha)$ と、
+$\text{size}(T) \leq Bound(\text{size}(S))$ を満たす任意のスキーム $T$ に対し、
+$T \cong S'$ となるスキーム $S' \in \Ob(\Sch_\alpha)$ が存在する。
+\item
+\label{sets-item-limit}
+任意の可算な\footnote{対象の集合と射の集合はいずれも可算である。実際、(3) と
+(4) において $\aleph_0$ を任意の基数に置き換えた形でも補題を証明できる。}
+図式の圏 $\mathcal{I}$ と任意の関手 $F : \mathcal{I} \to \Sch_\alpha$ に対し、
+極限 $\lim_\mathcal{I} F$ が $\Sch_\alpha$ に存在することと $\Sch$ に存在すること
+とは同値であり、さらにこの場合、両者の間の自然な射は同型である。
+\item
+\label{sets-item-colimit}
+任意の可算な添字圏 $\mathcal{I}$ と任意の関手
+$F : \mathcal{I} \to \Sch_\alpha$ に対し、余極限 $\colim_\mathcal{I} F$ が
+$\Sch_\alpha$ に存在することと $\Sch$ に存在することとは同値であり、さらに
+この場合、両者の間の自然な射は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+超限帰納法により、各順序数に順序数を対応させる関数 $f$ を次のように定義する。
+$f(0) = 0$ とする。$f(\alpha)$ が与えられたとき、次を満たす最小の順序数 $\beta$
+を $f(\alpha + 1)$ と定める。
+\begin{enumerate}
+\item $\alpha + 1 \leq \beta$ および $f(\alpha) \leq \beta$ が成り立つ。
+\item 任意の $S \in \Ob(\Sch_{f(\alpha)})$ と、
+$\text{size}(T) \leq Bound(\text{size}(S))$ を満たす任意のスキーム $T$ に対し、
+$T \cong S'$ となるスキーム $S' \in \Ob(\Sch_\beta)$ が存在する。
+\item 任意の可算な添字圏 $\mathcal{I}$ と任意の関手
+$F : \mathcal{I} \to \Sch_{f(\alpha)}$ に対し、極限 $\lim_\mathcal{I} F$ または
+余極限 $\colim_\mathcal{I} F$ が $\Sch$ に存在するならば、それは $\Sch_\beta$ の
+スキームと同型である。
+\end{enumerate}
+$\beta$ の存在は次のように分かる。$\Ob(\Sch_{f(\alpha)})$ は集合なので、
+$\kappa =
+\sup_{S \in \Ob(\Sch_{f(\alpha)})} Bound(\text{size}(S))$
+は存在し、基数である。補題 \ref{sets-lemma-bounded-size} と同様に、$\kappa$ から出発して
+得られるスキームの集合を $A$ とする。可算圏の集合 $CountCat$ で、任意の可算圏が
+$CountCat$ のある元と同型になるものが存在する。したがって上の (3) では、
+$\mathcal{I}$ が $CountCat$ の元であると仮定してよい。これは、(3) の対
+$(\mathcal{I}, F)$ が一つの集合を動くことを意味する。よって、元がスキームである
+集合 $B$ で、(3) の各 $(\mathcal{I}, F)$ について、極限または余極限が存在すれば
+それが $B$ の元と同型になるようなものが存在する。それゆえ、
+$A \cup B \subset V_\beta$ および
+$\beta > \max\{\alpha + 1, f(\alpha)\}$ を満たす任意の $\beta$ を選べば、
+(1)--(3) が成り立つ。空でない順序数の集まりは常に最小元をもつので、
+$f(\alpha + 1)$ は適切に定義される。最後に、$\alpha$ が極限順序数ならば、
+$f(\alpha) = \sup_{\alpha' < \alpha} f(\alpha')$ と定める。
+
+\medskip\noindent
+$S_0 \subset V_{\beta_0}$ となる $\beta_0$ を選ぶ。構成により
+$f(\beta) \geq \beta$ であり、$S_0 \subset V_{f(\beta_0)}$ も成り立つ。さらに
+$f$ は単調非減少なので、任意の $\beta \geq \beta_0$ に対して
+$S_0 \subset V_{f(\beta)}$ が成り立つ。次に、
+$\text{cf}(\beta_1) > \omega = \aleph_0$ を満たす任意の順序数
+$\beta_1 > \beta_0$ を選ぶ。命題
+\ref{sets-proposition-exist-ordinals-large-cofinality} のとおり、順序数の共終数はいくらでも
+大きくなるので、これは可能である。$\alpha = f(\beta_1)$ が補題で課された問題の
+解であると主張する。
+
+\medskip\noindent
+補題の第一の性質は、上で $\beta_1 > \beta_0$ と選んだことから成り立つ。
+
+\medskip\noindent
+その共終数は無限なので、$\beta_1$ は極限順序数であり、
+$f(\beta_1) = \sup_{\beta < \beta_1} f(\beta)$ を得る。したがって
+$\{f(\beta) \mid \beta < \beta_1\} \subset f(\beta_1)$ は共終部分集合である。
+ゆえに
+$$
+V_\alpha = V_{f(\beta_1)} = \bigcup\nolimits_{\beta < \beta_1} V_{f(\beta)}.
+$$
+が分かる。ここで $S \in \Ob(\Sch_\alpha)$ とする。$S \in
+\Ob(\Sch_{f(\beta)})$ となる最小の順序数 $\beta$ を $\beta(S)$ と定める。
+上の議論から常に $\beta(S) < \beta_1$ である。また、
+$\Ob(\Sch_{f(\beta + 1)}) \subset
+\Ob(\Sch_\alpha)$ なので、上の $f$ の構成により、補題の第二の性質が成り立つ。
+
+\medskip\noindent
+$\{S_1, S_2, \ldots\} \subset \Ob(\Sch_\alpha)$ を可算な族とする。写像
+$\omega \to \beta_1$、$n \mapsto \beta(S_n)$ を考える。$\beta_1$ の共終数は
+$> \omega$ なので、この写像の像は共終部分集合にはなれない。したがって、
+$\{S_1, S_2, \ldots\} \subset \Ob(\Sch_{f(\beta)})$ となる
+$\beta < \beta_1$ が存在する。よって任意の関手
+$F : \mathcal{I} \to \Sch_\alpha$ は、部分圏 $\Sch_{f(\beta)}$ のいずれかを経由する。
+したがって、図式 $F$ の余極限または極限であるスキーム $X$ が存在するならば、
+$f$ の構成により、$X$ は $\Sch_\alpha$ の部分圏である
+$\Sch_{f(\beta + 1)}$ の対象と同型である。これで補題の最後の二つの主張が示された。
+\end{proof}
+
+\begin{remark}
+\label{sets-remark-how-to-use-reflection}
+上の補題は反映原理を用いて証明することもできる。ただし、注意が必要である。
+文 $\phi_{scheme}(X)$ が「$X$ はスキームである」という性質を表すとき、論理式
+$\phi_{scheme}^{V_\alpha}(X)$ は何を意味するのだろうか。反映原理が、すべての
+$X \in V_\alpha$ に対して
+$\phi_{scheme}(X) \leftrightarrow \phi_{scheme}^{V_\alpha}(X)$
+となる $\alpha$ を見つけられると述べていることは確かだが、これだけではまったく
+役に立たない。このような二つの主張を組み合わせて初めて、興味深いことが起こる。
+たとえば $\phi_{red}(X, Y)$ が「$X$, $Y$ はスキームであり、$Y$ は $X$ の被約化で
+ある」という性質を表すとする（『スキーム』定義
+\ref{schemes-definition-reduced-induced-scheme} を参照）。論理式の対
+$\phi_1(X, Y) = \phi_{red}(X, Y)$、
+$\phi_2(X) = \exists Y, \phi_1(X, Y)$ に反映原理を適用するとする。このとき、
+反映原理が与える任意の $\alpha$ は、$X \in \Ob(\Sch_\alpha)$ が与えられれば
+$X$ の被約化も $\Sch_\alpha$ の対象になるという性質をもつことが容易に分かる
+（演習として残す）。
+\end{remark}
+
+\begin{lemma}
+\label{sets-lemma-bound-affine}
+$S$ をアフィン・スキームとする。
+$R = \Gamma(S, \mathcal{O}_S)$ とおく。
+このとき $S$ の大きさは $\max\{ \aleph_0, |R|\}$ に等しい。
+\end{lemma}
+
+\begin{proof}
+$\Spec(R)$ のアフィン開部分集合は高々 $\max\{|R|, \aleph_0\}$ 個である。
+実際、任意のアフィン開部分集合 $U \subset \Spec(R)$ は有限個の主開集合の和
+$D(f_1) \cup \ldots \cup D(f_n)$ であるから、アフィン開部分集合の個数は高々
+$\sup_n |R|^n = \max\{|R|, \aleph_0\}$ である（\cite[Ch. I, 10.13]{Kunen}
+を参照）。一方、
+$\Gamma(U, \mathcal{O}) \subset R_{f_1} \times \ldots \times R_{f_n}$
+であり、したがって $|\Gamma(U, \mathcal{O})| \leq
+\max\{\aleph_0, |R_{f_1}|, \ldots, |R_{f_n}|\}$ である。ゆえに
+$|R_f| \leq \max\{\aleph_0, |R|\}$ を示せば十分であるが、その証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sets-lemma-bound-size}
+$S$ をスキームとし、$S = \bigcup_{i \in I} S_i$ を開被覆とする。このとき
+$$
+\text{size}(S) \leq \max\{|I|, \sup_i\{\text{size}(S_i)\}\}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$U \subset S$ を任意のアフィン開部分集合とする。$U$ は準コンパクトなので、
+有限個の元 $i_1, \ldots, i_n \in I$ と、
+$U = U_1 \cup U_2 \cup \ldots \cup U_n$ を満たすアフィン開部分集合
+$U_i \subset U \cap S_i$ が存在する。したがって
+$$
+|\Gamma(U, \mathcal{O}_U)|
+\leq
+|\Gamma(U_1, \mathcal{O})|
+\otimes
+\ldots
+\otimes
+|\Gamma(U_n, \mathcal{O})|
+\leq \sup\nolimits_i\{\text{size}(S_i)\}
+$$
+である。さらに、このことから $S$ のアフィン開部分集合全体の集合の濃度は、
+次の集合の濃度以下であることが分かる：
+$$
+\coprod_{n \in \omega}
+\coprod_{i_1, \ldots, i_n \in I}
+\{\text{affine opens of }S_{i_1}\}
+\times
+\ldots
+\times
+\{\text{affine opens of }S_{i_n}\}.
+$$
+非交和の内部に現れる各集合の濃度は高々
+$\sup_i\{\text{size}(S_i)\}$ である。添字集合の濃度は高々
+$\max\{|I|, \aleph_0\}$ である（\cite[Ch. I, 10.13]{Kunen} を参照）。
+したがって \cite[Lemma 5.8]{Jech} により、非交和の濃度は高々
+$\max\{\aleph_0, |I|\} \otimes \sup_i\{\text{size}(S_i)\}$ である。
+これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{sets-lemma-bound-size-fibre-product}
+$f : X \to S$, $g : Y \to S$ をスキームの射とする。このとき
+$\text{size}(X \times_S Y) \leq \max\{\text{size}(X), \text{size}(Y)\}$
+である。
+\end{lemma}
+
+\begin{proof}
+$S = \bigcup_{k \in K} S_k$ をアフィン開被覆とする。また
+$X = \bigcup_{i \in I} U_i$, $Y = \bigcup_{j \in J} V_j$ をアフィン開被覆で、
+$I$, $J$ の濃度がそれぞれ $\leq \text{size}(X), \text{size}(Y)$ であるものとする。
+各 $i \in I$ に対して、$f(U_i) \subset \bigcup_{k \in K_i} S_k$ を満たす
+$k \in K$ の有限集合 $K_i$ が存在する。各 $j \in J$ に対しても、
+$g(V_j) \subset \bigcup_{k \in K_j} S_k$ を満たす $k \in K$ の有限集合
+$K_j$ が存在する。したがって $f(X), g(Y)$ は
+$S' = \bigcup_{k \in K'} S_k$ に含まれる。ただし
+$K' = \bigcup_{i \in I} K_i \cup \bigcup_{j \in J} K_j$ である。
+$K'$ の濃度は高々 $\max\{\aleph_0, |I|, |J|\}$ であることに注意する。
+補題 \ref{sets-lemma-bound-size} を適用すると、$k \in K'$ に対して
+$\text{size}(f^{-1}(S_k) \times_{S_k} g^{-1}(S_k))
+\leq \max\{\text{size}(X), \text{size}(Y)\}$ を示せば十分であることが分かる。
+言い換えれば、$S$ はアフィンであると仮定してよい。
+
+\medskip\noindent
+$S$ がアフィンであると仮定する。
+$X = \bigcup_{i \in I} U_i$, $Y = \bigcup_{j \in J} V_j$ をアフィン開被覆で、
+$I$, $J$ の濃度がそれぞれ $\leq \text{size}(X), \text{size}(Y)$ であるものとする。
+再び補題 \ref{sets-lemma-bound-size} により、積 $U_i \times_S V_j$ について補題を
+示せば十分である。補題 \ref{sets-lemma-bound-affine} により、
+$$
+|A \otimes_C B| \leq \max\{\aleph_0, |A|, |B|\}.
+$$
+を示せば十分である。この不等式の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sets-lemma-bound-finite-type}
+$S$ をスキームとする。$f : X \to S$ は局所有限型であり、$X$ は準コンパクトで
+あるとする。このとき $\text{size}(X) \leq \text{size}(S)$ である。
+\end{lemma}
+
+\begin{proof}
+有限アフィン開被覆 $X = \bigcup_{i = 1, \ldots n} U_i$ で、各 $U_i$ が
+$S$ のあるアフィン開部分集合 $S_i$ に写るものを取ることができる。したがって
+補題 \ref{sets-lemma-bound-size} により、$S$ と $X$ がともにアフィンである場合に
+帰着する。この場合、補題 \ref{sets-lemma-bound-affine} により
+$$
+|A[x_1, \ldots, x_n]| \leq \max\{\aleph_0, |A|\}.
+$$
+を示せば十分である。この不等式の証明は省略する。
+\end{proof}
+
+\noindent
+『代数』の補題 \ref{algebra-lemma-epimorphism-cardinality} では、$A \to B$ が環の
+エピ射ならば $|B| \leq \max(|A|, \aleph_0)$ であることを示す。スキームに対する
+類似の主張が次の補題である。
+
+\begin{lemma}
+\label{sets-lemma-bound-monomorphism}
+$f : X \to Y$ をスキームのモノ射とする。次の性質の少なくとも一つが成り立つならば、
+$\text{size}(X) \leq \text{size}(Y)$ である：
+\begin{enumerate}
+\item $f$ は準コンパクトである、
+\item $f$ は局所有限表示である、
+\item 必要に応じてここにさらに追加する。
+\end{enumerate}
+しかし、この評価は局所有限型なモノ射に対しては成り立たない。
+\end{lemma}
+
+\begin{proof}
+$Y = \bigcup_{j \in J} V_j$ を $Y$ のアフィン開被覆で
+$|J| \leq \text{size}(Y)$ を満たすものとする。補題 \ref{sets-lemma-bound-size} により、
+$V_j$ の $X$ における逆像の大きさを評価すれば十分である。したがって $Y$ が
+アフィン、すなわち $Y = \Spec(B)$ である場合に帰着する。任意のアフィン開部分集合
+$\Spec(A) \subset X$ に対し、上の注意と補題 \ref{sets-lemma-bound-affine} により
+$|A| \leq \max(|B|, \aleph_0) = \text{size}(Y)$ である。ゆえに、$X$ のアフィン
+開部分集合が高々 $\text{size}(Y)$ 個であることを示せば十分である。$X$ が準コンパクト
+ならばこれは明らかであり、(1) が成り立つ。
+(2) の場合、現れうる $B$-代数 $A$ の同型類の個数は $\text{size}(B)$ で評価される。
+実際、各 $A$ は $B$ 上有限型であり、したがってある $n, m$ と
+$f_j \in B[x_1, \ldots, x_n]$ に対して
+$B[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ と同型である。しかし $X \to Y$ は
+モノ射なので、$Y = \Spec(B)$ 上の射 $\Spec(A) \to X$ は、存在すれば一意である。
+したがって $X$ のアフィン開部分集合の個数は、これらの同型類の個数によって
+評価される。
+
+\medskip\noindent
+補題の最後の主張を示すため、環 $B = \prod_{n \in \mathbf{N}} \mathbf{F}_2$ を考え、
+$Y = \Spec(B)$ とおく。$\mathbf{N}$ 上の各超フィルター $\mathcal{U}$ に対し、
+剰余体が $\mathbf{F}_2$ である極大イデアル $\mathfrak m_\mathcal{U}$ を得る。
+写像 $B \to \mathbf{F}_2$ は元 $(x_n)$ を $\lim_\mathcal{U} x_n$ に送る。
+詳細は省略する。スキームの射
+$X = \coprod_\mathcal{U} \Spec(\mathbf{F}_2) \to Y$ は、すべての点が相異なるので
+モノ射である。しかし、$X$ のアフィン開部分スキーム全体の集合の濃度は
+$\mathbf{N}$ 上の超フィルター全体の集合の濃度に等しく、これは
+$2^{2^{\aleph_0}}$ である。$|B| = 2^{\aleph_0} < 2^{2^{\aleph_0}}$ なので
+結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{sets-lemma-what-is-in-it}
+$\alpha$ を上の補題 \ref{sets-lemma-construct-category} における順序数とする。
+圏 $\Sch_\alpha$ は次の性質を満たす：
+\begin{enumerate}
+\item $X, Y, S \in \Ob(\Sch_\alpha)$ ならば、任意の射
+$f : X \to S$, $g : Y \to S$ に対し、$\Sch_\alpha$ におけるファイバー積
+$X \times_S Y$ が存在し、これはスキームの圏におけるファイバー積でもある。
+\item $\Ob(\Sch_\alpha)$ の元からなる任意の高々可算な族
+$S_1, S_2, \ldots$ に対し、余積 $\coprod_i S_i$ が $\Ob(\Sch_\alpha)$ に
+存在し、スキームの圏における余積でもある。
+\item 任意の $S \in \Ob(\Sch_\alpha)$ と任意の開埋め込み $U \to S$ に対し、
+$V \cong U$ を満たす $V \in \Ob(\Sch_\alpha)$ が存在する。
+\item 任意の $S \in \Ob(\Sch_\alpha)$ と任意の閉埋め込み $T \to S$ に対し、
+$S' \cong T$ を満たす $S' \in \Ob(\Sch_\alpha)$ が存在する。
+\item 任意の $S \in \Ob(\Sch_\alpha)$ と任意の有限型射 $T \to S$ に対し、
+$S' \cong T$ を満たす $S' \in \Ob(\Sch_\alpha)$ が存在する。
+\item スキーム $S$ が開被覆 $S = \bigcup_{i \in I} S_i$ をもち、ある
+$T \in \Ob(\Sch_\alpha)$ に対して (a) すべての $i \in I$ について
+$\text{size}(S_i) \leq \text{size}(T)^{\aleph_0}$、かつ
+(b) $|I| \leq \text{size}(T)^{\aleph_0}$ が成り立つとする。このとき $S$ は
+$\Sch_\alpha$ のある対象と同型である。
+\item 任意の $S \in \Ob(\Sch_\alpha)$ と局所有限型な任意の射
+$f : T \to S$ について、$T$ が高々 $\text{size}(S)^{\aleph_0}$ 個のアフィン
+開部分集合で被覆できるならば、$S' \cong T$ を満たす
+$S' \in \Ob(\Sch_\alpha)$ が存在する。たとえば、$T$ が高々
+$|\mathbf{R}| = 2^{\aleph_0} = \aleph_0^{\aleph_0}$ 個のアフィン開部分集合で
+被覆できるならば、この条件は成り立つ。
+\item 任意の $S \in \Ob(\Sch_\alpha)$ と、局所有限表示または準コンパクトである
+任意のモノ射 $T \to S$ に対し、$S' \cong T$ を満たす
+$S' \in \Ob(\Sch_\alpha)$ が存在する。
+\item $T \in \Ob(\Sch_\alpha)$ がアフィンであるとする。
+$R = \Gamma(T, \mathcal{O}_T)$ と書く。このとき次の各スキームは
+$\Sch_\alpha$ のスキームと同型である：
+\begin{enumerate}
+\item 任意のイデアル $I \subset R$ と完備化 $R^* = \lim_n R/I^n$ に対する
+スキーム $\Spec(R^*)$。
+\item 任意の有限型 $R$-代数 $R'$ に対するスキーム $\Spec(R')$。
+\item 任意の局所化 $S^{-1}R$ に対するスキーム $\Spec(S^{-1}R)$。
+\item 任意の素イデアル $\mathfrak p \subset R$ に対するスキーム
+$\Spec(\overline{\kappa(\mathfrak p)})$。
+\item 任意の部分環 $R' \subset R$ に対するスキーム $\Spec(R')$。
+\item 濃度が高々 $|R|^{\aleph_0}$ である環上の任意の有限型スキーム。
+\item などなど。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+主張 (1) と (2) は定義から直ちに従う。主張 (3) は、$S$ の開部分スキーム
+$U$ の大きさが明らかに $S$ の大きさ以下であることから従う。主張 (4) は (5) から
+従い、主張 (5) は (7) から従う。主張 (6) は、補題 \ref{sets-lemma-bound-size} により
+$S$ の大きさが
+$\leq \max\{|I|, \sup_i \text{size}(S_i)\} \leq \text{size}(T)^{\aleph_0}$
+であることから従う。主張 (7) は (6) から従う。実際、任意のアフィン開部分集合
+$V \subset T$ に対し、補題 \ref{sets-lemma-bound-finite-type} により
+$\text{size}(V) \leq \text{size}(S)$ である。したがって、(7) の状況では (6) を
+適用できることが分かる。(8) は補題 \ref{sets-lemma-bound-monomorphism} から従う。
+
+\medskip\noindent
+主張 (9) は、補題 \ref{sets-lemma-bound-affine} によって、環
+$R^*$, $S^{-1}R$, $\overline{\kappa(\mathfrak p)}$, $R'$ などの濃度の上界に
+翻訳される。おそらく最も興味深いのは環 $R^*$ である。集合として、これは全射
+$R^{\mathbf{N}} \to R^*$ の像である。$|R^{\mathbf{N}}| = |R|^{\aleph_0}$ なので、
+$Bound(\kappa)$ を少なくとも $\kappa^{\aleph_0}$ となるように選んだことから、
+これでうまくいく。やれやれ！（体の代数閉包の濃度は、その体の濃度と同じか、
+または $\aleph_0$ である。）
+\end{proof}
+
+\begin{remark}
+\label{sets-remark-what-is-not-in-it}
+$R$ を環とし、環 $\prod_{\mathfrak p \in \Spec(R)} \kappa(\mathfrak p)$ を考える。
+この環の濃度は $|R|^{2^{|R|}}$ で評価されるが、一般には
+$|R|^{\aleph_0}$ では評価されない。たとえば $R = \mathbf{C}[x]$ ならば
+$|R|^{\aleph_0}$ では評価されず、$R = \prod_{n \in \mathbf{N}} \mathbf{F}_2$
+ならば $|R|^{|R|}$ では評価されない。したがって、上の補題
+\ref{sets-lemma-what-is-in-it} の「などなど」は多少割り引いて受け取るべきである。
+もちろん、fppf/\'etale コホモロジーに関する議論でこれらの環を考える必要が
+生じたならば、上の関数 $Bound$ を関数 $\kappa \mapsto \kappa^{2^\kappa}$ に
+変更すればよい。
+\end{remark}
+
+\noindent
+次の補題では、位相の節 \ref{topologies-section-fpqc} で導入される fpqc 被覆の
+概念を用いる。
+
+\begin{lemma}
+\label{sets-lemma-bound-by-covering}
+$f : X \to Y$ をスキームの射とする。各 $g_j$ が $f$ を経由する fpqc 被覆
+$\{g_j : Y_j \to Y\}_{j \in J}$ が存在すると仮定する。このとき
+$\text{size}(Y) \leq \text{size}(X)$ である。
+\end{lemma}
+
+\begin{proof}
+$V \subset Y$ をアフィン開部分集合とする。定義により、$n \geq 0$、写像
+$a : \{1, \ldots, n\} \to J$、およびアフィン開部分集合
+$V_i \subset Y_{a(i)}$ で
+$V = g_{a(1)}(V_1) \cup \ldots \cup g_{a(n)}(V_n)$ を満たすものが存在する。
+$f \circ h_j = g_j$ を満たす射 $h_j : Y_j \to X$ を取る。このとき
+$h_{a(1)}(V_1) \cup \ldots \cup h_{a(n)}(V_n)$ は $f^{-1}(V)$ の準コンパクトな
+部分集合である。したがって、$i = 1, \ldots, n$ に対して $h_{a(i)}(V_i)$ を含む
+準コンパクト開部分集合 $W \subset f^{-1}(V)$ を取ることができる。特に
+$V = f(W)$ である。
+
+\medskip\noindent
+一方で、このことから $Y$ のアフィン開部分集合全体の集合の濃度は、$X$ の
+準コンパクト開部分集合全体の集合 $S$ の濃度以下であることが分かる。$X$ の任意の
+準コンパクト開部分集合は有限個のアフィン開部分集合の和なので、この集合の濃度は
+高々 $\sup |S|^n = \max(\aleph_0, |S|)$ である。他方、
+$\{V_i \to V\}$ は fpqc 被覆なので
+$\mathcal{O}_Y(V) \subset \prod_{i = 1, \ldots, n} \mathcal{O}_{Y_{a(i)}}(V_i)$
+である。さらに $V_i \to V$ は $W$ を経由するので
+$\mathcal{O}_Y(V) \subset \mathcal{O}_X(W)$ である。$W$ も $X$ の有限個の
+アフィン開部分集合で被覆されるから、$|\mathcal{O}_Y(V)|$ は $X$ の大きさで
+評価されると結論できる。これで、スキームの大きさの定義から補題が従う。
+\end{proof}
+
+\noindent
+次の補題では、位相の節 \ref{topologies-section-fppf} で導入される fppf 被覆の
+概念を用いる。
+
+\begin{lemma}
+\label{sets-lemma-bound-fppf-covering}
+$\{f_i : X_i \to X\}_{i \in I}$ をスキームの fppf 被覆とする。
+$\{X_i \to X\}_{i \in I}$ の細分であり、
+$\text{size}(\coprod W_j) \leq \text{size}(X)$ を満たす fppf 被覆
+$\{W_j \to X\}_{j \in J}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$|A| \leq \text{size}(X)$ を満たすアフィン開被覆
+$X = \bigcup_{a \in A} U_a$ を選ぶ。各 $a$ に対して、有限部分集合
+$I_a \subset I$ と、$i \in I_a$ ごとに準コンパクト開部分集合
+$W_{a, i} \subset X_i$ を
+$U_a = \bigcup_{i \in I_a} f_i(W_{a, i})$ となるように選ぶことができる。
+補題 \ref{sets-lemma-bound-finite-type} により
+$\text{size}(W_{a, i}) \leq \text{size}(X)$ である。したがって補題
+\ref{sets-lemma-bound-size} により
+$\text{size}(\coprod_a \coprod_{i \in I_a} W_{i, a}) \leq \text{size}(X)$
+と結論できる。
+\end{proof}
+
+\section{群作用をもつ集合}
+\label{sets-section-sets-with-group-action}
+
+\noindent
+$G$ を群とする。$G$-集合の「大きな」圏を $G\textit{-Sets}$ と書く。任意の順序数
+$\alpha$ に対し、対象が $V_\alpha$ に属する $G\textit{-Sets}$ の充満部分圏を
+$G\textit{-Sets}_\alpha$ と書く。$G$-集合の大きさとして
+$\text{size}(S) = \max\{\aleph_0, |G|, |S|\}$ を採用する（ここで $|G|$ と
+$|S|$ は基礎集合の濃度である）。上と同様に関数
+$Bound(\kappa) = \kappa^{\aleph_0}$ を用いる。
+
+\begin{lemma}
+\label{sets-lemma-sets-with-group-action}
+$G$, $G\textit{-Sets}_\alpha$, $\text{size}$, $Bound$ について上の記法を用いる。
+$S_0$ を $G$-集合からなる集合とする。次の性質をもつ極限順序数 $\alpha$ が存在する：
+\begin{enumerate}
+\item $S_0 \cup \{{}_GG\} \subset \Ob(G\textit{-Sets}_\alpha)$ である。
+\item 任意の $S \in \Ob(G\textit{-Sets}_\alpha)$ と
+$\text{size}(T) \leq Bound(\text{size}(S))$ を満たす任意の $G$-集合 $T$ に対し、
+$T$ と同型な $S' \in \Ob(G\textit{-Sets}_\alpha)$ が存在する。
+\item 任意の可算な添字圏 $\mathcal{I}$ と任意の関手
+$F : \mathcal{I} \to G\textit{-Sets}_\alpha$ に対し、極限
+$\lim_\mathcal{I} F$ と余極限 $\colim_\mathcal{I} F$ が
+$G\textit{-Sets}_\alpha$ に存在し、$G\textit{-Sets}$ におけるものと一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。上の補題 \ref{sets-lemma-construct-category} の証明と同様であり、しかも
+より容易である。
+\end{proof}
+
+\begin{lemma}
+\label{sets-lemma-what-is-in-it-G-sets}
+$\alpha$ を上の補題 \ref{sets-lemma-sets-with-group-action} における順序数とする。
+圏 $G\textit{-Sets}_\alpha$ は次の性質を満たす：
+\begin{enumerate}
+\item $G$-集合 ${}_GG$ は $G\textit{-Sets}_\alpha$ の対象である。
+\item (余)積、ファイバー積、および押し出しが $G\textit{-Sets}_\alpha$ に存在し、
+$G\textit{-Sets}$ における対応物と一致する。
+\item $G\textit{-Sets}_\alpha$ の対象 $U$ が与えられたとき、任意の $G$-安定部分集合
+$O \subset U$ は $G\textit{-Sets}_\alpha$ のある対象と同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\section{サイトの被覆}
+\label{sets-section-coverings-site}
+
+\noindent
+$\mathcal{C}$ を圏（『圏』の定義 \ref{categories-definition-category} の意味で）とし、
+$\text{Cov}(\mathcal{C})$ を、『サイト』の定義 \ref{sites-definition-site} の性質
+(1), (2), (3) を満たす被覆からなる真の類とする。これらをここに列挙する：
+\begin{enumerate}
+\item $V \to U$ が同型ならば、$\{V \to U\} \in
+\text{Cov}(\mathcal{C})$ である。
+\item $\{U_i \to U\}_{i\in I} \in \text{Cov}(\mathcal{C})$ であり、各 $i$ に対して
+$\{V_{ij} \to U_i\}_{j\in J_i} \in \text{Cov}(\mathcal{C})$ ならば、
+$\{V_{ij} \to U\}_{i \in I, j\in J_i} \in \text{Cov}(\mathcal{C})$ である。
+\item $\{U_i \to U\}_{i\in I}\in \text{Cov}(\mathcal{C})$ であり、
+$V \to U$ が $\mathcal{C}$ の射ならば、すべての $i$ に対して
+$U_i \times_U V$ が存在し、
+$\{U_i \times_U V \to V \}_{i\in I} \in \text{Cov}(\mathcal{C})$ である。
+\end{enumerate}
+順序数 $\alpha$ に対し
+$\text{Cov}(\mathcal{C})_\alpha = \text{Cov}(\mathcal{C}) \cap V_\alpha$ とおく。
+順序数 $\alpha$ と基数 $\kappa$ が与えられたとき、
+$\text{Cov}(\mathcal{C})_{\kappa, \alpha}$ を、$|I| \leq \kappa$ を満たす元
+$\mathcal{U} =
+\{\varphi_i : U_i \to U\}_{i\in I} \in \text{Cov}(\mathcal{C})_\alpha$
+全体の集合とする。
+
+\medskip\noindent
+次の概念を思い出しておく（『サイト』の定義
+\ref{sites-definition-combinatorial-tautological} を参照）。$\mathcal{C}$ において
+同じ終域をもつ二つの射の族 $\{\varphi_i : U_i \to U\}_{i\in I}$ と
+$\{\psi_j : W_j \to U\}_{j\in J}$ は、写像 $\alpha : I \to J$ と
+$\beta : J\to I$ で $\varphi_i = \psi_{\alpha(i)}$ および
+$\psi_j = \varphi_{\beta(j)}$ を満たすものが存在するとき、
+\textit{組合せ的に同値}であるという。これは、終域を固定した射の族の上に
+同値関係を定める。
+
+\begin{lemma}
+\label{sets-lemma-coverings-site}
+上の記法を用いる。$\text{Cov}_0 \subset \text{Cov}(\mathcal{C})$ を
+$\text{Cov}(\mathcal{C})$ に含まれる集合とする。次の性質をもつ基数 $\kappa$ と
+極限順序数 $\alpha$ が存在する：
+\begin{enumerate}
+\item $\text{Cov}_0 \subset \text{Cov}(\mathcal{C})_{\kappa, \alpha}$ である。
+\item 被覆の集合 $\text{Cov}(\mathcal{C})_{\kappa, \alpha}$ は、『サイト』の定義
+\ref{sites-definition-site} の (1), (2), (3)（上記）を満たす。言い換えれば
+$(\mathcal{C}, \text{Cov}(\mathcal{C})_{\kappa, \alpha})$ はサイトである。
+\item $\text{Cov}(\mathcal{C})$ のすべての被覆は、
+$\text{Cov}(\mathcal{C})_{\kappa, \alpha}$ のある被覆と組合せ的に同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これを示すため、まず終域を固定した $\mathcal{C}$ の射の集合すべてからなる集合
+$\mathcal{S}$ を考える。言い換えれば、$\mathcal{S}$ の元は
+$\text{Arrows}(\mathcal{C})$ の部分集合 $T$ で、$T$ のすべての元が同じ終域を
+もつものである。終域を固定した射の族
+$\mathcal{U} = \{\varphi_i : U_i \to U\}_{i\in I}$ に対し、
+$Supp(\mathcal{U}) = \{ \varphi \in \text{Arrows}(\mathcal{C})
+\mid \exists i\in I, \varphi = \varphi_i\}$ と定める。二つの族
+$\mathcal{U} =  \{\varphi_i : U_i \to U\}_{i\in I}$ と
+$\mathcal{V} = \{V_j \to V\}_{j \in J}$ が組合せ的に同値であることと
+$Supp(\mathcal{U}) = Supp(\mathcal{V})$ であることは同値である。
+次に、部分集合 $\mathcal{S}_\tau \subset \mathcal{S}$ を
+$\mathcal{S}_\tau = \{ T \in \mathcal{S} \mid
+\exists\ \mathcal{U} \in \text{Cov}(\mathcal{C}) \ T = Supp(\mathcal{U})\}$
+と定める。各元 $T \in \mathcal{S}_\tau$ に対し、
+$T = \text{Supp}(\mathcal{U})$ を満たす
+$\mathcal{U} \in \text{Cov}(\mathcal{C})_\beta$ が存在するような最小の順序数
+$\beta$ を $\beta(T)$ とする。最後に
+$\beta_0 = \sup_{T \in S_\tau} \beta(T)$ とおく。この時点で、すべての
+$\mathcal{U} \in \text{Cov}(\mathcal{C})$ は
+$\text{Cov}(\mathcal{C})_{\beta_0}$ のある元と組合せ的に同値であることが従う。
+
+\medskip\noindent
+$\kappa$ を、$\aleph_0$、濃度 $|\text{Arrows}(\mathcal{C})|$、
+$$
+\sup\nolimits_{\{U_i \to U\}_{i\in I} \in \text{Cov}(\mathcal{C})_{\beta_0}}
+|I|,
+\quad\text{and}\quad
+\sup\nolimits_{\{U_i \to U\}_{i\in I} \in \text{Cov}_0} |I|.
+$$
+の最大値とする。$\kappa$ は無限基数なので
+$\kappa \otimes \kappa = \kappa$ である。また明らかに
+$\text{Cov}(\mathcal{C})_{\beta_0} =
+\text{Cov}(\mathcal{C})_{\kappa, \beta_0}$ である。
+
+\medskip\noindent
+超限帰納法により、各順序数に順序数を対応させる関数 $f$ を次のように定める。
+$f(0) = 0$ とする。$f(\alpha)$ が与えられたとき、次を満たす最小の順序数
+$\beta$ を $f(\alpha + 1)$ と定める：
+\begin{enumerate}
+\item $\alpha + 1 \leq \beta$ かつ $f(\alpha) \leq \beta$ である。
+\item $\{U_i \to U\}_{i\in I}
+\in \text{Cov}(\mathcal{C})_{\kappa, f(\alpha)}$ であり、各 $i$ に対して
+$\{W_{ij} \to U_i\}_{j\in J_i}
+\in \text{Cov}(\mathcal{C})_{\kappa, f(\alpha)}$ ならば、
+$\{W_{ij} \to U\}_{i \in I, j\in J_i}
+\in \text{Cov}(\mathcal{C})_{\kappa, \beta}$ である。
+\item $\{U_i \to U\}_{i\in I}
+\in \text{Cov}(\mathcal{C})_{\kappa, \alpha}$ であり、
+$W \to U$ が $\mathcal{C}$ の射ならば、
+$\{U_i \times_U W \to W \}_{i\in I}
+\in \text{Cov}(\mathcal{C})_{\kappa, \beta}$ である。
+\end{enumerate}
+$\beta$ の存在を見るには、(2) と (3) に現れる被覆
+$\{W_{ij} \to U\}$ と $\{U_i \times_U W \to W \}$ の全体が明らかに集合を
+なすことに注意すればよい。したがって、これらの被覆をすべて含む $V_\beta$ を
+もつ順序数 $\beta$ が存在する。さらに、被覆 $\{W_{ij} \to U\}$ の添字集合の
+濃度は $\sum_{i \in I} |J_i| \leq \kappa \otimes \kappa = \kappa$ であるから、
+これらの被覆は $\text{Cov}(\mathcal{C})_{\kappa, \beta}$ に含まれる。
+空でない順序数の集まりは最小元をもつので、$f(\alpha + 1)$ は適切に定義される。
+最後に、$\alpha$ が極限順序数ならば
+$f(\alpha) = \sup_{\alpha' < \alpha} f(\alpha')$ と定める。
+
+\medskip\noindent
+$\text{Arrows}(\mathcal{C}) \subset V_{\beta_1}$、
+$\text{Cov}_0 \subset V_{\beta_0}$、および $\beta_1 \geq \beta_0$ を満たす
+順序数 $\beta_1$ を選ぶ。構成により $f(\beta_1) \geq \beta_1$ であり、
+$V_{f(\beta_1)}$ に対しても同じ性質が成り立つ。さらに $f$ は単調非減少なので、
+任意の $\beta \geq \beta_1$ に対してもこれらは成り立つ。次に、共終数が
+$\text{cf}(\beta_2) > \kappa$ を満たす任意の順序数 $\beta_2 > \beta_1$ を選ぶ。
+順序数の共終数はいくらでも大きくなるので、これは可能である（命題
+\ref{sets-proposition-exist-ordinals-large-cofinality} を参照）。対 $\kappa$ と
+$\alpha = f(\beta_2)$ が補題で課された問題の解であると主張する。
+
+\medskip\noindent
+補題の第一および第三の性質は、上での $\kappa$ と
+$\beta_2 > \beta_1 > \beta_0$ の選び方から成り立つ。
+
+\medskip\noindent
+その共終数は無限なので、$\beta_2$ は極限順序数であり、
+$f(\beta_2) = \sup_{\beta < \beta_2} f(\beta)$ を得る。したがって
+$\{f(\beta) \mid \beta < \beta_2\} \subset f(\beta_2)$ は共終部分集合である。
+ゆえに
+$$
+V_\alpha = V_{f(\beta_2)} = \bigcup\nolimits_{\beta < \beta_2} V_{f(\beta)}.
+$$
+が分かる。ここで $\mathcal{U} \in \text{Cov}_{\kappa, \alpha}$ とする。
+$\mathcal{U} \in \text{Cov}_{\kappa, f(\beta)}$ を満たす最小の順序数 $\beta$ を
+$\beta(\mathcal{U})$ と定める。上の議論により、常に
+$\beta(\mathcal{U}) < \beta_2$ である。
+
+\medskip\noindent
+サイトを定義する性質 (1), (2), (3) が対
+$(\mathcal{C}, \text{Cov}_{\kappa, \alpha})$ に対して成り立つことを示さなければ
+ならない。第一の性質は、$\beta_2$ の選び方により $\mathcal{C}$ のすべての射が
+$V_{f(\beta_2)}$ に含まれることから成り立つ。第三の性質については、被覆
+$\mathcal{U} = \{U_i \to U\}_{i \in I}
+\in \text{Cov}(\mathcal{C})_{\kappa, \alpha}$ が与えられれば
+$\beta(\mathcal{U}) < \beta_2$ であり、したがって $\mathcal{U}$ の任意の基底変換は
+$f$ の構成により $\text{Cov}(\mathcal{C})_{\kappa, f(\beta + 1)}$ に含まれ、
+従って $\text{Cov}(\mathcal{C})_{\kappa, \alpha}$ に含まれることを用いる。
+
+\medskip\noindent
+最後に第二の条件について、
+$\{U_i \to U\}_{i\in I}
+\in \text{Cov}(\mathcal{C})_{\kappa, f(\alpha)}$ であり、各 $i$ に対して
+$\mathcal{W}_i = \{W_{ij} \to U_i\}_{j\in J_i}
+\in \text{Cov}(\mathcal{C})_{\kappa, f(\alpha)}$ であるとする。写像
+$I \to \beta_2$, $i \mapsto \beta(\mathcal{W}_i)$ を考える。
+$\beta_2$ の共終数は $> \kappa \geq |I|$ なので、この写像の像は共終部分集合には
+なれない。したがって、すべての $i \in I$ に対して
+$\mathcal{W}_i \in \text{Cov}_{\kappa, f(\beta)}$ となる
+$\beta < \beta_1$ が存在する。よって、被覆
+$\{W_{ij} \to U\}_{i\in I, j \in J_i}$ は、望みどおり
+$\text{Cov}(\mathcal{C})_{\kappa, f(\beta + 1)}
+\subset \text{Cov}(\mathcal{C})_{\kappa, \alpha}$ の元である。
+\end{proof}
+
+\begin{remark}
+\label{sets-remark-better}
+ある極限順序数 $\alpha$ に対し、被覆の集合
+$\text{Cov}(\mathcal{C})_\alpha$ は補題の条件を満たすと思われる。結局これは、
+反映原理を適用すれば得られそうな主張である（節
+\ref{sets-section-reflection-principle} の末尾および注意
+\ref{sets-remark-how-to-use-reflection} で述べた留保を除く）。
+\end{remark}
+
+\section{アーベル圏と入射対象}
+\label{sets-section-abelian-categories-injectives}
+
+\noindent
+次の補題は、サイト上の環の層上の加群の圏に適用できる。
+
+\begin{lemma}
+\label{sets-lemma-abelian-injectives}
+大きな圏 $\mathcal{A}$ が与えられたとする（『圏』の注意
+\ref{categories-remark-big-categories} を参照）。$\mathcal{A}$ はアーベル圏であり、
+十分な入射対象をもつと仮定する。『ホモロジー』の定義
+\ref{homology-definition-abelian-category} および
+\ref{homology-definition-enough-injectives} を参照。このとき、$\mathcal{A}$ の対象の
+任意の集合 $\{A_s\}_{s\in S}$ に対して、次の性質をもつアーベル部分圏
+$\mathcal{A}' \subset \mathcal{A}$ が存在する：
+\begin{enumerate}
+\item 包含関手 $\mathcal{A}' \to \mathcal{A}$ は完全である、
+\item $\Ob(\mathcal{A}')$ は集合である、
+\item $\Ob(\mathcal{A}')$ は各 $s \in S$ に対して $A_s$ を含む、
+\item $\mathcal{A}'$ は十分な入射対象をもち、かつ
+\item $\mathcal{A}'$ の対象が入射的であることと、それが $\mathcal{A}$ の入射対象で
+あることは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}

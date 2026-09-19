@@ -1,0 +1,2825 @@
+% Generated mechanically from frozen input inputs/p11/ja/stacks-properties.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{99}
+\chapter{代数スタックの性質}
+
+
+
+\phantomsection
+\label{stacks-properties-section-phantom}
+
+
+\section{序論}
+\label{stacks-properties-section-introduction}
+
+\noindent
+代数スタックの簡潔な導入については Algebraic Stacks, Section
+\ref{algebraic-section-introduction} を参照し、代数スタックの基礎事項に
+ついては同章の一部を読まれたい。同章ではスキーム、代数空間、代数スタックを
+注意深く区別しているが、本章以降では、これらの概念を互いに置き換えて用いる
+慣例的な用語の濫用を行う。
+
+\medskip\noindent
+本章の目的は、代数スタックのいくつかの基本概念と性質を導入することである。
+表現可能な対角射をもつ準分離代数スタックの場合の基本文献は
+\cite{LM-B} である。
+
+
+
+\section{規約と用語の濫用}
+\label{stacks-properties-section-conventions}
+
+\noindent
+大 fppf サイト $\Sch_{fppf}$ を一つ選ぶ。すべてのスキームは
+$\Sch_{fppf}$ に含まれるものとする。また、考察するすべての環 $A$ は
+$\Spec(A)$ がこの大サイトの対象と（同型で）あるという性質をもつものとする。
+
+\medskip\noindent
+さらに基底スキーム $S$ を固定する。上の規約により、これは
+$\Sch_{fppf}$ の対象である。絶対的な場合だけに関心がある読者は
+$S = \Spec(\mathbf{Z})$ と取ればよい。
+
+\medskip\noindent
+代数スタックに関する規約は次のとおりである。
+\begin{enumerate}
+\item {\it 代数スタック}とは、$S$ 上の代数スタック、すなわちグルーポイドに
+ファイバー化された圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$
+であって、Algebraic Stacks, Definition
+\ref{algebraic-definition-algebraic-stack} の条件を満たすものをいう。
+\item $f : \mathcal{X} \to \mathcal{Y}$ が{\it 代数スタックの射}であるとは、
+$S$ 上の代数スタックの $1$-射、すなわち $(\Sch/S)_{fppf}$ 上で
+グルーポイドにファイバー化された圏の $1$-射であることをいう。Algebraic
+Stacks, Definition \ref{algebraic-definition-morphism-algebraic-stacks}
+を参照せよ。
+\item {\it $2$-射} $\alpha : f \to g$ とは、$S$ 上の代数スタックの
+$2$-圏における $2$-射をいう。Algebraic Stacks, Definition
+\ref{algebraic-definition-morphism-algebraic-stacks} を参照せよ。
+\item 代数スタックの射 $\mathcal{X} \to \mathcal{Z}$ および
+$\mathcal{Y} \to \mathcal{Z}$ が与えられたとき、用語を濫用して
+$2$-ファイバー積 $\mathcal{X} \times_\mathcal{Z} \mathcal{Y}$ を
+{\it ファイバー積}と呼ぶ。
+\item 代数スタック $\mathcal{X}$ と $\mathcal{Y}$ の積を
+$\mathcal{X} \times_S \mathcal{Y}$ と書く。
+\item 二つの代数スタック $\mathcal{X}$ と $\mathcal{Y}$ がこの $2$-圏で
+同値であるとき、しばしば記法を濫用して両者は{\it 同型}であるという。
+\end{enumerate}
+代数空間に関する規約は次のとおりである。
+\begin{enumerate}
+\item $X$ が{\it 代数空間}であるとは、$X$ が $S$ 上の代数空間、すなわち
+$X$ は $(\Sch/S)_{fppf}$ 上の前層であって、Spaces, Definition
+\ref{spaces-definition-algebraic-space} の条件を満たすことをいう。
+\item {\it 代数空間の射} $f :X \to Y$ とは、Spaces, Definition
+\ref{spaces-definition-morphism-algebraic-spaces} で定義される $S$ 上の
+代数空間の射をいう。
+\item 代数空間 $X$ と、それが定める代数スタック
+$\mathcal{S}_X \to (\Sch/S)_{fppf}$ とを区別{\bf しない}。Algebraic
+Stacks, Lemma \ref{algebraic-lemma-representable-algebraic} を参照せよ。
+\item 特に、$X$ から代数スタック $\mathcal{Y}$ への{\it 射}
+$f : X \to \mathcal{Y}$ とは、代数スタックの射
+$f : \mathcal{S}_X \to \mathcal{Y}$ をいう。射 $\mathcal{Y} \to X$
+についても同様である。
+\item さらに、代数スタック $\mathcal{X}$ が与えられたとき、
+{\it $\mathcal{X}$ は代数空間である}というのは、$\mathcal{X}$ が
+代数空間によって表現可能であることをいう。Algebraic Stacks, Definition
+\ref{algebraic-definition-representable-by-algebraic-space} を参照せよ。
+\item 次の記法上の規約を用いる。代数スタックをローマン体の大文字
+（$X, Y, Z, A, B, \ldots$ など）で表すとき、その惰性スタックは自明であり、
+したがってその代数スタックは代数空間であるものとする。Algebraic Stacks,
+Proposition \ref{algebraic-proposition-algebraic-stack-no-automorphisms}
+を参照せよ。
+\end{enumerate}
+スキームに関する規約は次のとおりである。
+\begin{enumerate}
+\item $X$ が{\it スキーム}であるとは、$X$ が $S$ 上のスキーム、すなわち
+$X$ は $(\Sch/S)_{fppf}$ の対象であることをいう。
+\item {\it スキームの射}とは、$S$ 上のスキームの射をいう。
+\item スキーム $X$ と、それが定める代数スタック
+$\mathcal{S}_X \to (\Sch/S)_{fppf}$ とを区別{\bf しない}。Algebraic
+Stacks, Lemma \ref{algebraic-lemma-representable-algebraic} を参照せよ。
+\item 特に、スキーム $X$ から代数スタック $\mathcal{Y}$ への{\it 射}
+$f : X \to \mathcal{Y}$ とは、代数スタックの射
+$f : \mathcal{S}_X \to \mathcal{Y}$ をいう。射 $\mathcal{Y} \to X$
+についても同様である。
+\item さらに、代数スタック $\mathcal{X}$ が与えられたとき、
+{\it $\mathcal{X}$ はスキームである}というのは、$\mathcal{X}$ が
+表現可能であることをいう。Algebraic Stacks, Section
+\ref{algebraic-section-representable} を参照せよ。
+\end{enumerate}
+代数スタックの射に関する規約は次のとおりである。
+\begin{enumerate}
+\item 代数スタックの射 $f : \mathcal{X} \to \mathcal{Y}$ が
+{\it 表現可能}、または{\it スキームによって表現可能}であるとは、任意の
+スキーム $T$ と射 $T \to \mathcal{Y}$ に対してファイバー積
+$T \times_\mathcal{Y} \mathcal{X}$ がスキームであることをいう。
+Algebraic Stacks, Section \ref{algebraic-section-representable-morphism}
+を参照せよ。
+\item 代数スタックの射 $f : \mathcal{X} \to \mathcal{Y}$ が
+{\it 代数空間によって表現可能}であるとは、任意のスキーム $T$ と射
+$T \to \mathcal{Y}$ に対してファイバー積
+$T \times_\mathcal{Y} \mathcal{X}$ が代数空間であることをいう。
+Algebraic Stacks, Definition
+\ref{algebraic-definition-representable-by-algebraic-spaces} を参照せよ。
+この場合、始域が代数空間である射 $Z \to \mathcal{Y}$ に対して
+$Z \times_\mathcal{Y} \mathcal{X}$ は代数空間である。Algebraic Stacks,
+Lemma \ref{algebraic-lemma-base-change-by-space-representable-by-space}
+を参照せよ。
+\item 記法を濫用し、代数スタックの図式が代数スタックの $2$-圏において
+$2$-可換であるとき、その図式は可換であるということがある。
+\end{enumerate}
+代数空間から代数スタックへの任意の射 $X \to \mathcal{Y}$ は代数空間に
+よって表現可能であることに注意する。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。以下ではこの基本的な
+結果を断りなく用いる。
+
+
+
+
+\section{代数空間によって表現可能な射の性質}
+\label{stacks-properties-section-properties-morphisms}
+
+\noindent
+代数スタックの（任意の）射の性質は独立した章で研究する。代数空間によって
+表現可能な射については、全射、滑らかな射、\'etale 射などの意味が既に
+分かっている。これは特に、代数空間から代数スタックへの射
+$X \to \mathcal{Y}$ に適用される。本節では、この仕組みを振り返り、
+適用できる性質を列挙し、いくつかの容易な補題を証明する。
+
+\medskip\noindent
+最初の補題は、平坦、局所有限表示かつ全射な射による基底変換後に代数空間に
+よって表現可能ならば、もとの射も代数空間によって表現可能であると述べる。
+
+\begin{lemma}
+\label{stacks-properties-lemma-check-representable-covering}
+代数スタックの射 $f : \mathcal{X} \to \mathcal{Y}$ を取る。
+$W$ を代数空間とし、$W \to \mathcal{Y}$ は全射、局所有限表示かつ
+平坦であるとする。このとき次は同値である。
+\begin{enumerate}
+\item $f$ は代数空間によって表現可能である。
+\item $W \times_\mathcal{Y} \mathcal{X}$ は代数空間である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) は Algebraic Stacks, Lemma
+\ref{algebraic-lemma-base-change-by-space-representable-by-space} である。
+逆に、$W \to \mathcal{Y}$ は (2) におけるものとする。(1) を証明するには、
+$f$ がファイバー圏上忠実であることを示せば十分である。Algebraic Stacks,
+Lemma \ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}
+を参照せよ。仮定 (2) から、特に
+$W \times_\mathcal{Y} \mathcal{X} \to W$ は忠実である。したがって $f$ の
+忠実性は Stacks, Lemma \ref{stacks-lemma-faithful-descent} から従う。
+\end{proof}
+
+\noindent
+$P$ を、標的上 fppf 局所的で任意の基底変換によって保たれる代数空間の
+射の性質とする。$f : \mathcal{X} \to \mathcal{Y}$ を代数空間によって
+表現可能な代数スタックの射とする。任意のスキーム $T$ と射
+$T \to \mathcal{Y}$ に対して代数空間の射
+$T \times_\mathcal{Y} \mathcal{X} \to T$ が性質 $P$ をもつとき、かつその
+ときに限り、{\it $f$ は性質 $P$ をもつ}という。Algebraic Stacks,
+Definition \ref{algebraic-definition-relative-representable-property}
+を参照せよ。
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ が代数空間によって表現可能で性質 $P$ を
+もつならば、代数スタックの任意の射 $\mathcal{Y}' \to \mathcal{Y}$ に
+よる基底変換
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \to \mathcal{Y}'$
+も性質 $P$ をもつ。Algebraic Stacks, Lemmas
+\ref{algebraic-lemma-base-change-representable-by-spaces} および
+\ref{algebraic-lemma-base-change-representable-transformations-property}
+を参照せよ。性質 $P$ が合成によって保たれるならば、同じことが代数空間に
+よって表現可能な代数スタックの射についても成り立つ。Algebraic Stacks,
+Lemmas \ref{algebraic-lemma-composition-representable-by-spaces} および
+\ref{algebraic-lemma-composition-representable-transformations-property}
+を参照せよ。さらにこの場合、性質 $\mathcal{P}$ をもつ、代数空間によって
+表現可能な射の積
+$\mathcal{X}_1 \times \mathcal{X}_2 \to \mathcal{Y}_1 \times \mathcal{Y}_2$
+も性質 $\mathcal{P}$ をもつ。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-product-representable-transformations-property}
+を参照せよ。
+
+\medskip\noindent
+最後に、$P, P'$ を、標的上 fppf 局所的で任意の基底変換によって保たれる
+代数空間の射の二つの性質とし、任意の射 $f$ に対して
+$P(f) \Rightarrow P'(f)$ が成り立つとする。このとき、代数空間によって
+表現可能な代数スタックの射の対応する性質についても同じ含意が成り立つ。
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-transformations-property-implication}
+を参照せよ。以下および後続の各章では、この事実を{\it 断りなく}用いる。
+
+\medskip\noindent
+以上の議論は、代数空間の射の次の各性質に適用される。
+\newpage
+\raggedbottom
+\begin{enumerate}
+\item 準コンパクト。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-quasi-compact}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-quasi-compact},
+\item 準分離。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-separated}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-quasi-separated},
+\item 普遍閉。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-universally-closed}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-universally-closed},
+\item 普遍開。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-universally-open}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-universally-open},
+\item 普遍的商写像。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-universally-submersive}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-universally-submersive},
+\item 普遍同相。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-universal-homeomorphism}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-universal-homeomorphism},
+\item 全射。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-surjective}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-surjective},
+\item 普遍単射。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-universally-injective}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-universally-injective},
+\item 局所有限型。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-finite-type}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-locally-finite-type},
+\item 局所有限表示。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-finite-presentation}
+および
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation},
+\item 有限型。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-finite-type}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-finite-type},
+\item 有限表示。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-finite-presentation}
+および
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-finite-presentation},
+\item 平坦。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-flat}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-flat},
+\item 開埋入。次を参照せよ：
+Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-immersions}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-open-immersion},
+\item 同型。次を参照せよ：
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-isomorphism},
+\item アフィン。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-affine}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-affine},
+\item 閉埋入。次を参照せよ：
+Morphisms of Spaces, Section \ref{spaces-morphisms-section-immersions}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-closed-immersion},
+\item 分離。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-separated}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-separated},
+\item 固有。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-proper}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-proper},
+\item 準アフィン。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-quasi-affine}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-quasi-affine},
+\item 整。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-integral}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-integral},
+\item 有限。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-integral}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-finite},
+\item （局所）準有限。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-quasi-finite}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-quasi-finite},
+\item syntomic。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-syntomic}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-syntomic},
+\item 滑らか。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-smooth}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-smooth},
+\item 非分岐。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-unramified}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-unramified},
+\item \'etale。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-etale}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-etale},
+\item 有限局所自由。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-finite-locally-free}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-finite-locally-free},
+\item モノ射。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-monomorphism}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-property-monomorphism},
+\item 埋入。次を参照せよ：
+Morphisms of Spaces, Section \ref{spaces-morphisms-section-immersions}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-fppf-property-immersion},
+\item 局所分離。次を参照せよ：
+Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-base-change-separated}
+および
+Descent on Spaces,
+Lemma \ref{spaces-descent-lemma-descending-fppf-property-locally-separated},
+\end{enumerate}
+
+\begin{lemma}
+\label{stacks-properties-lemma-property-spaces-too}
+上のような代数空間の射の性質 $P$ を取る。$f : \mathcal{X} \to \mathcal{Y}$
+を代数空間によって表現可能な代数スタックの射とする。このとき次は同値である。
+\begin{enumerate}
+\item $f$ は $P$ をもつ。
+\item 任意の代数空間 $Z$ と射 $Z \to \mathcal{Y}$ に対して、射
+$Z \times_\mathcal{Y} \mathcal{X} \to Z$ は $P$ をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1) は直ちに従う。(1) を仮定する。
+$Z \to \mathcal{Y}$ は (2) におけるものとする。スキーム $U$ と全射
+\'etale 射 $U \to Z$ を選ぶ。仮定により、射
+$U \times_\mathcal{Y} \mathcal{X} \to U$ は $P$ をもつ。一方、図式
+$$
+\xymatrix{
+U \times_\mathcal{Y} \mathcal{X} \ar[d] \ar[r] &
+Z \times_\mathcal{Y} \mathcal{X} \ar[d] \\
+U \ar[r] & Z
+}
+$$
+は Cartesian であり、$\{U \to Z\}$ は fppf 被覆なので、右の垂直射は
+$P$ をもつ。
+\end{proof}
+
+\noindent
+次の補題は、全射、平坦かつ局所有限表示な射による基底変換後に $P$ を
+確認すれば十分であると述べる。
+
+\begin{lemma}
+\label{stacks-properties-lemma-check-property-covering}
+上のような代数空間の射の性質 $P$ を取る。$f : \mathcal{X} \to \mathcal{Y}$
+を代数空間によって表現可能な代数スタックの射とする。$W$ を代数空間とし、
+$W \to \mathcal{Y}$ は全射、局所有限表示かつ平坦であるとする。
+$V = W \times_\mathcal{Y} \mathcal{X}$ と置く。このとき
+$$
+(f\text{ has }P) \Leftrightarrow (\text{the projection }V \to W\text{ has }P).
+$$
+\end{lemma}
+
+\begin{proof}
+左から右への含意は Lemma \ref{stacks-properties-lemma-property-spaces-too} から従う。
+$V \to W$ が $P$ をもつと仮定する。$T$ をスキームとし、
+$T \to \mathcal{Y}$ を射とする。代数空間の可換図式
+$$
+\xymatrix{
+T \times_\mathcal{Y} \mathcal{X} \ar[d] &
+T \times_\mathcal{Y} V \ar[d] \ar[l] \ar[r] &
+V \ar[d] \\
+T & T \times_\mathcal{Y} W \ar[l] \ar[r] & W
+}
+$$
+を考える。各正方形は Cartesian である。左下の射は全射、平坦かつ
+局所有限表示なので、$\{T \times_\mathcal{Y} V \to T\}$ は fppf 被覆で
+ある。したがって、右の垂直射が性質 $P$ をもつことから、左の垂直射も
+性質 $P$ をもつ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-check-property-weak-covering}
+上のような代数空間の射の性質 $P$ を取る。$f : \mathcal{X} \to \mathcal{Y}$
+を代数空間によって表現可能な代数スタックの射とする。
+$\mathcal{Z} \to \mathcal{Y}$ を、代数空間によって表現可能、全射、平坦
+かつ局所有限表示な代数スタックの射とする。
+$\mathcal{W} = \mathcal{Z} \times_\mathcal{Y} \mathcal{X}$ と置く。このとき
+$$
+(f\text{ has }P) \Leftrightarrow
+(\text{the projection }\mathcal{W} \to \mathcal{Z}\text{ has }P).
+$$
+\end{lemma}
+
+\begin{proof}
+代数空間 $W$ と、全射、平坦かつ局所有限表示な射
+$W \to \mathcal{Z}$ を選ぶ。上の議論により、合成 $W \to \mathcal{Y}$ も
+全射、平坦かつ局所有限表示である。
+$V = W \times_\mathcal{Z} \mathcal{W} = V \times_\mathcal{Y} \mathcal{X}$
+と表す。Lemma \ref{stacks-properties-lemma-check-property-covering} により、$f$ が
+$\mathcal{P}$ をもつことと $V \to W$ がもつことは同値であり、また
+$\mathcal{W} \to \mathcal{Z}$ が $\mathcal{P}$ をもつことと
+$V \to W$ がもつことも同値である。ゆえに補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-check-property-after-precomposing}
+\leavevmode\par
+上のような代数空間の射の性質 $P$ を取る。
+\par\noindent
+$\tau \in \{\etale, smooth, syntomic, fppf\}$ とする。
+$\mathcal{X} \to \mathcal{Y}$ および $\mathcal{Y} \to \mathcal{Z}$ を、
+代数空間によって表現可能な代数スタックの射とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{X} \to \mathcal{Y}$ は全射であり、\'etale、滑らか、
+syntomic、または平坦かつ局所有限表示である。
+\item 合成は $P$ をもつ。
+\item $P$ は $\tau$ 位相において始域上局所的である。
+\end{enumerate}
+このとき $\mathcal{Y} \to \mathcal{Z}$ は性質 $P$ をもつ。
+\end{lemma}
+
+\begin{proof}
+$Z$ をスキームとし、$Z \to \mathcal{Z}$ を射とする。
+$X = \mathcal{X} \times_\mathcal{Z} Z$、
+$Y = \mathcal{Y} \times_\mathcal{Z} Z$ と置く。(1) により
+$\{X \to Y\}$ は代数空間の $\tau$ 被覆であり、(2) により $X \to Z$ は
+性質 $P$ をもつ。(3) から $Y \to Z$ も性質 $P$ をもち、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-representable-in-terms-presentations}
+$g : \mathcal{X}' \to \mathcal{X}$ を代数空間によって表現可能な
+代数スタックの射とする。$[U/R] \to \mathcal{X}$ を表示とする。
+$U' = U \times_\mathcal{X} \mathcal{X}'$ および
+$R' = R \times_\mathcal{X} \mathcal{X}'$ と置く。このとき、
+$(U', R', s', t', c')$ の形の代数空間におけるグルーポイドと、表示
+$[U'/R'] \to \mathcal{X}'$ が存在し、図式
+$$
+\xymatrix{
+[U'/R'] \ar[d]_{[\text{pr}]} \ar[r] & \mathcal{X}' \ar[d]^g \\
+[U/R] \ar[r] & \mathcal{X}
+}
+$$
+は $2$-可換である。ここで射 $[\text{pr}]$ はグルーポイドの射
+$\text{pr} : (U', R', s', t', c') \to (U, R, s, t, c)$ から得られる。
+\end{lemma}
+
+\begin{proof}
+$U \to \mathcal{Y}$ は全射かつ滑らかなので（Algebraic Stacks, Lemma
+\ref{algebraic-lemma-smooth-quotient-smooth-presentation} を参照）、
+その基底変換 $U' \to \mathcal{X}'$ も全射かつ滑らかである。したがって
+Algebraic Stacks, Lemma \ref{algebraic-lemma-stack-presentation} により、
+滑らかなグルーポイド $(U', R', s', t', c')$ と表示
+$[U'/R'] \to \mathcal{X}'$ を得るには
+$R' = U' \times_{\mathcal{X}'} U'$ を示せば十分である。
+$R = V \times_\mathcal{Y} V$ であること（Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-2-cartesian} を参照）を用いると、
+これは
+$$
+R' =
+U \times_\mathcal{X} U \times_\mathcal{X} \mathcal{X}' =
+(U \times_\mathcal{X} \mathcal{X}')
+\times_{\mathcal{X}'}
+(U \times_\mathcal{X} \mathcal{X}')
+$$
+から従う。Categories, Lemmas
+\ref{categories-lemma-associativity-2-fibre-product} および
+\ref{categories-lemma-2-fibre-product-erase-factor} を参照せよ。射影
+$U' \to U$ と $R' \to R$ が所望のグルーポイドの射
+$\text{pr} : (U', R', s', t', c') \to (U, R, s, t, c)$ を与えることは明らかで
+ある。したがって Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-functorial} により、商スタックの射
+$[\text{pr}]$ を得る。
+
+\medskip\noindent
+図式が $2$-可換であることをさらに示す必要がある。図式
+$$
+\xymatrix{
+U' \ar[d]_{\text{pr}_U} \ar[r]_{f'} & \mathcal{X}' \ar[d]^g \\
+U \ar[r]^f & \mathcal{X}
+}
+$$
+は $2$-可換であることは明らかである。ここで
+$\text{pr}_U : U' \to U$ は射影である。$R = U \times_\mathcal{X} U$、
+$t = \text{pr}_0$、$s = \text{pr}_1$ から得られる標準的な $2$-矢印
+$\tau : f \circ t \to f \circ s$ が $\Mor(R, \mathcal{X})$ に存在する。
+同型 $R' \to U' \times_{\mathcal{X}'} U'$ を用いると、同様に同型
+$\tau' : f' \circ t' \to f' \circ s'$ を得る。ここで
+$g \circ f' \circ t' = f \circ t \circ \text{pr}_R$ および
+$g \circ f' \circ s' = f \circ s \circ \text{pr}_R$ であり、ここで
+$\text{pr}_R : R' \to R$ は射影である。したがって
+\begin{equation}
+\label{stacks-properties-equation-verify}
+\tau \star \text{id}_{\text{pr}_R} = \text{id}_g \star \tau'.
+\end{equation}
+が成り立つかを問うことができる。ここで二つの主張を立てる：(1) Equation
+(\ref{stacks-properties-equation-verify}) が成り立てば図式は $2$-可換であり、(2) Equation
+(\ref{stacks-properties-equation-verify}) は実際に成り立つ。両主張の証明は省略する。ヒント：
+(1) は Algebraic Stacks, Lemma
+\ref{algebraic-lemma-map-space-into-stack} における $f = f_{can}$ と
+$f' = f'_{can}$ の構成から従う。(2) は定義を注意深く追うことで従う。
+\end{proof}
+
+\begin{remark}
+\label{stacks-properties-remark-representable-over}
+$\mathcal{Y}$ を代数スタックとする。次の $2$-圏を考える。
+\begin{enumerate}
+\item 対象は、代数空間によって表現可能な射
+$f : \mathcal{X} \to \mathcal{Y}$ である。
+\item $1$-射
+$(g, \beta) :
+(f_1 : \mathcal{X}_1 \to \mathcal{Y})
+\to
+(f_2 : \mathcal{X}_2 \to \mathcal{Y})$
+は、射 $g : \mathcal{X}_1 \to \mathcal{X}_2$ と $2$-射
+$\beta : f_1 \to f_2 \circ g$ からなる。
+\item
+$(g, \beta), (g', \beta') :
+(f_1 : \mathcal{X}_1 \to \mathcal{Y})
+\to
+(f_2 : \mathcal{X}_2 \to \mathcal{Y})$
+の間の $2$-射は、条件
+$(\text{id}_{f_2} \star \alpha) \circ \beta = \beta'$
+を満たす $2$-射 $\alpha : g \to g'$ である。
+\end{enumerate}
+Topologies on Spaces, Section \ref{spaces-topologies-section-procedure} の
+記法との類比により、この $2$-圏を $\textit{Spaces}/\mathcal{Y}$ と表す。
+この $2$-圏における射の圏
+$$
+\Mor_{\textit{Spaces}/\mathcal{Y}}(
+(f_1 : \mathcal{X}_1 \to \mathcal{Y}),
+(f_2 : \mathcal{X}_2 \to \mathcal{Y}))
+$$
+はすべて setoid である。実際、$2$-射 $\alpha$ は、$\mathcal{X}_1$ の各対象
+$x_1$ に対して、$\mathcal{X}_2$ の対応するファイバー圏における同型
+$\alpha_{x_1} : g(x_1) \longrightarrow g'(x_1)$ を割り当て、図式
+$$
+\xymatrix{
+& f_2(x_1) \ar[ld]_{\beta_{x_1}} \ar[rd]^{\beta'_{x_1}} \\
+f_2(g(x_1)) \ar[rr]^{f_2(\alpha_{x_1})} & &
+f_2(g'(x_1))
+}
+$$
+を可換にする規則である。しかし $f_2$ は忠実なので（Algebraic Stacks,
+Lemma \ref{algebraic-lemma-characterize-representable-by-algebraic-spaces}
+を参照）、$\alpha_{x_1}$ が存在するならば一意である。言い換えると、$2$-圏
+$\textit{Spaces}/\mathcal{Y}$ は圏に非常に近い。すなわち $1$-射を
+$1$-射の同型類で置き換えれば圏を得る。以下では、この置換を断りなく
+行うことがある。
+\end{remark}
+
+
+
+
+\clearpage
+\flushbottom
+\section{代数スタックの点}
+\label{stacks-properties-section-points}
+
+\noindent
+$\mathcal{X}$ を代数スタックとする。$K, L$ を二つの体とし、
+$p : \Spec(K) \to \mathcal{X}$ および
+$q : \Spec(L) \to \mathcal{X}$ を射とする。体 $\Omega$ と $2$-可換図式
+$$
+\xymatrix{
+\Spec(\Omega) \ar[r] \ar[d] &
+\Spec(L) \ar[d]^q \\
+\Spec(K) \ar[r]^p &
+\mathcal{X}.
+}
+$$
+が存在するとき、$p$ と $q$ は{\it 同値}であるという。
+
+\begin{lemma}
+\label{stacks-properties-lemma-equivalence}
+上の概念は、体のスペクトルから代数スタック $\mathcal{X}$ への射の上に
+実際に同値関係を定める。
+\end{lemma}
+
+\begin{proof}
+この関係が反射的かつ対称的であることは明らかである。したがって推移的で
+あることを証明すればよい。これは次に帰着する。図式
+$$
+\xymatrix{
+\Spec(\Omega) \ar[r]_b \ar[d]_a &
+\Spec(L) \ar[d]^q & \Spec(\Omega') \ar[l]^{b'} \ar[d]^{a'} \\
+\Spec(K) \ar[r]^p &
+\mathcal{X} &
+\Spec(K') \ar[l]_{p'}
+}
+$$
+が与えられ、両正方形が $2$-可換であるとき、$p$ と $p'$ が同値であることを
+示す必要がある。$2$-Yoneda 補題（Algebraic Stacks, Section
+\ref{algebraic-section-2-yoneda} を参照）により、射 $p$、$p'$、$q$ は、
+それぞれ $\Spec(K)$、$\Spec(K')$、$\Spec(L)$ 上の $\mathcal{X}$ の
+ファイバー圏における対象 $x$、$x'$、$y$ によって与えられる。正方形の
+$2$-可換性は、$\Spec(\Omega)$ と $\Spec(\Omega')$ 上の $\mathcal{X}$ の
+ファイバー圏に同型 $\alpha : a^*x \to b^*y$ および
+$\alpha' : (a')^*x' \to (b')^*y$ が存在することを意味する。任意の体
+$\Omega''$ と、$L$ 上で一致する埋め込み $\Omega \to \Omega''$ および
+$\Omega' \to \Omega''$ を選ぶ。このとき上の図式を
+$$
+\xymatrix{
+& \Spec(\Omega'') \ar[ld]_c \ar[d]^{q'} \ar[rd]^{c'} \\
+\Spec(\Omega) \ar[r]_b \ar[d]_a &
+\Spec(L) \ar[d]^q & \Spec(\Omega') \ar[l]^{b'} \ar[d]^{a'} \\
+\Spec(K) \ar[r]^p &
+\mathcal{X} &
+\Spec(K') \ar[l]_{p'}
+}
+$$
+へ拡張でき、各三角形は可換であり、
+$$
+(q')^*(\alpha')^{-1} \circ (q')^*\alpha :
+(a \circ c)^*x
+\longrightarrow
+(a' \circ c')^*x'
+$$
+は $\Spec(\Omega'')$ 上のファイバー圏における同型である。したがって
+所望のとおり $p$ と $p'$ は同値である。
+\end{proof}
+
+\begin{definition}
+\label{stacks-properties-definition-points}
+$\mathcal{X}$ を代数スタックとする。$\mathcal{X}$ の{\it 点}とは、体の
+スペクトルから $\mathcal{X}$ への射の同値類である。$\mathcal{X}$ の点の
+集合を $|\mathcal{X}|$ と表す。
+\end{definition}
+
+\noindent
+これは代数空間の点の定義と一致する。Properties of Spaces, Definition
+\ref{spaces-properties-definition-points} を参照せよ。さらにスキームに対しては
+通常の点の概念を回復する。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-scheme-points} を参照せよ。
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とすると、誘導される写像
+$|f| : |\mathcal{X}| \to |\mathcal{Y}|$ があり、代表元
+$x : \Spec(K) \to \mathcal{X}$ を代表元
+$f \circ x : \Spec(K) \to \mathcal{Y}$ に送る。これは良定義である。実際、
+$2$-同型な $1$-射は、$1$-射との前合成または後合成後も $2$-同型なままで
+ある。これは、与えられた $1$-射の恒等射を水平方向に前合成または後合成
+できるためである。これは任意の（狭義）$(2, 1)$-圏で成り立つ。代数スタックの
+$2$-可換図式
+$$
+\xymatrix{
+\mathcal{X} \ar[d] \ar[r] & \mathcal{Y} \ar[d] \\
+\mathcal{W} \ar[r] & \mathcal{Z}
+}
+$$
+が与えられると、集合の図式
+$$
+\xymatrix{
+|\mathcal{X}| \ar[d] \ar[r] & |\mathcal{Y}| \ar[d] \\
+|\mathcal{W}| \ar[r] & |\mathcal{Z}|
+}
+$$
+は可換である。特に、$\mathcal{X} \to \mathcal{Y}$ が同値ならば
+$|\mathcal{X}| \to |\mathcal{Y}|$ は全単射である。
+
+\begin{lemma}
+\label{stacks-properties-lemma-points-cartesian}
+代数スタックのファイバー積
+$$
+\xymatrix{
+\mathcal{Z} \times_\mathcal{Y} \mathcal{X} \ar[r] \ar[d] &
+\mathcal{X} \ar[d] \\
+\mathcal{Z} \ar[r] & \mathcal{Y}
+}
+$$
+が与えられたとする。このとき点集合の写像
+$$
+|\mathcal{Z} \times_\mathcal{Y} \mathcal{X}|
+\longrightarrow
+|\mathcal{Z}| \times_{|\mathcal{Y}|} |\mathcal{X}|
+$$
+は全射である。
+\end{lemma}
+
+\begin{proof}
+体 $K$、$L$ と射 $\Spec(K) \to \mathcal{X}$、
+$\Spec(L) \to \mathcal{Z}$ が与えられたとする。これらが
+$|\mathcal{Y}|$ の元として一致するという仮定は、共通拡大 $M/K$ と $M/L$
+が存在し、
+$\Spec(M) \to \Spec(K) \to \mathcal{X} \to \mathcal{Y}$ と
+$\Spec(M) \to \Spec(L) \to \mathcal{Z} \to \mathcal{Y}$ が $2$-同型で
+あることを意味する。これはまさに射
+$\Spec(M) \to \mathcal{Z} \times_\mathcal{Y} \mathcal{X}$ が得られるための
+条件である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-characterize-surjective}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数空間によって表現可能な
+代数スタックの射とする。このとき次は同値である。
+\begin{enumerate}
+\item $|f| : |\mathcal{X}| \to |\mathcal{Y}|$ は全射である。
+\item $f$ は全射である（Section \ref{stacks-properties-section-properties-morphisms} の意味で）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。$T \to \mathcal{Y}$ を、始域がスキームである射とする。
+(2) を証明するには、代数空間の射
+$T \times_\mathcal{Y} \mathcal{X} \to T$ が全射であることを示す必要がある。
+Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-surjective}
+により、これは $|T \times_\mathcal{Y} \mathcal{X}| \to |T|$ が全射である
+ことを示すという意味である。Lemma \ref{stacks-properties-lemma-points-cartesian} を適用すれば、
+これは (1) から従う。
+
+\medskip\noindent
+逆に (2) を仮定する。$y : \Spec(K) \to \mathcal{Y}$ を、体のスペクトルから
+$\mathcal{Y}$ への射とする。仮定により、代数空間の射
+$\Spec(K) \times_{y, \mathcal{Y}} \mathcal{X} \to \Spec(K)$
+は全射である。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-surjective} により、体拡大 $K'/K$ と射
+$\Spec(K') \to \Spec(K) \times_{y, \mathcal{Y}} \mathcal{X}$
+が存在し、図式
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] &
+\Spec(K) \times_{y, \mathcal{Y}} \mathcal{X} \ar[d] \ar[r] &
+\mathcal{X} \ar[d]
+\\
+\Spec(K) \ar@{=}[r] &
+\Spec(K) \ar[r]^-y &
+\mathcal{Y}
+}
+$$
+の左の正方形は可換である。これは $|X| \to |\mathcal{Y}|$ が全射であることを
+示す。
+\end{proof}
+
+\noindent
+表示を用いて点集合を計算する方法を説明する補題を述べる。
+
+\begin{lemma}
+\label{stacks-properties-lemma-points-presentation}
+$\mathcal{X}$ を代数スタックとする。$\mathcal{X} = [U/R]$ を
+$\mathcal{X}$ の表示とする。Algebraic Stacks, Definition
+\ref{algebraic-definition-presentation} を参照せよ。このとき
+$|R| \to |U| \times |U|$ の像は同値関係であり、$|\mathcal{X}|$ はこの
+同値関係による $|U|$ の商である。
+\end{lemma}
+
+\begin{proof}
+仮定は、代数空間における滑らかなグルーポイド $(U, R, s, t, c)$ と同値
+$f : [U/R] \to \mathcal{X}$ があることを意味する。
+$\mathcal{X} = [U/R]$ と仮定してよい。誘導される射
+$p : U \to \mathcal{X}$ は滑らかかつ全射である。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-smooth-quotient-smooth-presentation} を参照せよ。
+したがって Lemma \ref{stacks-properties-lemma-characterize-surjective} により
+$|U| \to |\mathcal{X}|$ は全射である。また
+$R = U \times_\mathcal{X} U$ であることに注意する。Groupoids in Spaces,
+Lemma \ref{spaces-groupoids-lemma-quotient-stack-2-cartesian} を参照せよ。
+ゆえに Lemma \ref{stacks-properties-lemma-points-cartesian} により写像
+$$
+|R| \longrightarrow |U| \times_{|\mathcal{X}|} |U|
+$$
+は全射である。したがって $|R| \to |U| \times |U|$ の像は、$u_1$ と $u_2$
+が $|\mathcal{X}|$ において同じ像をもつような対
+$(u_1, u_2) \in |U| \times |U|$ 全体にちょうど等しい。この二つの主張を
+合わせると補題の結論を得る。
+\end{proof}
+
+\begin{remark}
+\label{stacks-properties-remark-more-general-presentation}
+Lemma \ref{stacks-properties-lemma-points-presentation} の結果は次のように一般化できる。
+$\mathcal{X}$ を代数スタックとする。$U$ を代数空間とし、
+$f : U \to \mathcal{X}$ を全射な射とする（これは
+Section \ref{stacks-properties-section-properties-morphisms} により意味をもつ）。
+$R = U \times_\mathcal{X} U$ と置き、$(U, R, s, t, c)$ を代数空間に
+おけるグルーポイドとし、$f_{can} : [U/R] \to \mathcal{X}$ を
+Algebraic Stacks, Lemma \ref{algebraic-lemma-map-space-into-stack}
+で構成された標準射とする。このとき $|R| \to |U| \times |U|$ の像は
+同値関係であり、$|\mathcal{X}| = |U|/|R|$ である。
+Lemma \ref{stacks-properties-lemma-points-presentation} の証明はそのまま通用する。
+（もちろん一般には $[U/R]$ は代数スタックではなく、また一般には
+$f_{can}$ は同型ではない。）
+\end{remark}
+
+\begin{lemma}
+\label{stacks-properties-lemma-topology-points}
+代数スタックの点集合上に、次の性質をもつ位相が一意に存在する。
+\begin{enumerate}
+\item 代数スタックの任意の射 $\mathcal{X} \to \mathcal{Y}$ に対して、
+写像 $|\mathcal{X}| \to |\mathcal{Y}|$ は連続である。
+\item $U$ が代数空間で、射 $U \to \mathcal{X}$ が平坦かつ局所有限表示
+であるならば、位相空間の写像 $|U| \to |\mathcal{X}|$ は連続かつ開である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$ が代数空間で、全射、平坦かつ局所有限表示な射
+$p : U \to \mathcal{X}$ を選ぶ。代数スタックの定義によりそのような射は
+存在する。実際、滑らかな射は平坦かつ局所有限表示である（Morphisms of
+Spaces, Lemmas
+\ref{spaces-morphisms-lemma-smooth-locally-finite-presentation} および
+\ref{spaces-morphisms-lemma-smooth-flat} を参照）。
+$|\mathcal{X}|$ 上の位相を次の規則で定める。すなわち、
+$W \subset |\mathcal{X}|$ が開であることと $|p|^{-1}(W)$ が $|U|$ で
+開であることは同値とする。これが $p$ の選択に依存しないことを示すため、
+代数空間から $\mathcal{X}$ への別の全射、平坦かつ局所有限表示な射
+$p' : U' \to \mathcal{X}$ を取る。$U'' = U \times_\mathcal{X} U'$ と置けば、
+$2$-可換図式
+$$
+\xymatrix{
+U'' \ar[r] \ar[d] & U' \ar[d] \\
+U \ar[r] & \mathcal{X}
+}
+$$
+を得る。$U \to \mathcal{X}$ と $U' \to \mathcal{X}$ は全射、平坦かつ
+局所有限表示なので、Lemma \ref{stacks-properties-lemma-property-spaces-too} により
+$U'' \to U'$ と $U'' \to U$ も全射、平坦かつ局所有限表示である。
+したがって写像 $|U''| \to |U'|$ と $|U''| \to |U|$ は連続、開かつ全射で
+ある。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-surjective} および Lemma
+\ref{spaces-morphisms-lemma-fppf-open} を参照せよ。これより、上の定義が
+$p : U \to \mathcal{X}$ の選択に依存しないことは明らかである。
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする。
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-lift-morphism-presentations} により、垂直射が全射かつ
+滑らかな $2$-可換図式
+$$
+\xymatrix{
+U \ar[d]_x \ar[r]_a & V \ar[d]^y \\
+\mathcal{X} \ar[r]^f & \mathcal{Y}
+}
+$$
+を取ることができる。付随する集合の可換図式
+$$
+\xymatrix{
+|U| \ar[d]_{|x|} \ar[r]_{|a|} & |V| \ar[d]^{|y|} \\
+|\mathcal{X}| \ar[r]^{|f|} & |\mathcal{Y}|
+}
+$$
+を考える。$W \subset |\mathcal{Y}|$ が開ならば、上の定義により、これは
+$|y|^{-1}(W)$ が $|V|$ で開であることにほかならない。$|a|$ は連続なので、
+$|a|^{-1}|y|^{-1}(W) = |x|^{-1}|f|^{-1}(W)$ は $|W|$ で開である。
+これは定義により $|f|^{-1}(W)$ が $|\mathcal{X}|$ で開であることを意味する。
+したがって $|f|$ は連続である。
+
+\medskip\noindent
+最後に、$U$ が代数空間で $U \to \mathcal{X}$ が平坦かつ局所有限表示ならば、
+$|U| \to |\mathcal{X}|$ が開であることを示さなければならない。
+$V$ を代数空間とし、$V \to \mathcal{X}$ を全射、平坦かつ局所有限表示とする。
+可換図式
+$$
+\xymatrix{
+|U \times_\mathcal{X} V| \ar[r]_e \ar[rd]_f &
+|U| \times_{|\mathcal{X}|} |V| \ar[d]_c \ar[r]_d &
+|V| \ar[d]^b \\
+& |U| \ar[r]^a & |\mathcal{X}|
+}
+$$
+を考える。射 $U \times_\mathcal{X} V \to U$ は全射、すなわち
+$f : |U \times_\mathcal{X} V| \to |U|$ は全射である。左上の水平射も全射で
+ある。Lemma \ref{stacks-properties-lemma-points-cartesian} を参照せよ。射
+$U \times_\mathcal{X} V \to V$ は平坦かつ局所有限表示なので、
+$d \circ e : |U \times_\mathcal{X} V| \to |V|$ は開である。Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-fppf-open} を参照せよ。
+開集合 $W \subset |U|$ を取る。上の性質から
+$b^{-1}(a(W)) = (d \circ e)(f^{-1}(W))$ は開である。構成により、これは
+$a(W)$ が開であることを意味し、所望の結論を得る。
+\end{proof}
+
+\begin{definition}
+\label{stacks-properties-definition-topological-space}
+$\mathcal{X}$ を代数スタックとする。$\mathcal{X}$ の{\it 台位相空間}とは、
+点集合 $|\mathcal{X}|$ に Lemma \ref{stacks-properties-lemma-topology-points} で構成した位相を
+入れたものをいう。
+\end{definition}
+
+\noindent
+$\mathcal{X}$ が代数空間であるとき、この定義は $|\mathcal{X}|$ 上の既存の
+位相と矛盾しない。
+
+\begin{lemma}
+\label{stacks-properties-lemma-space-locally-quasi-compact}
+$\mathcal{X}$ を代数スタックとする。$|\mathcal{X}|$ の各点は準コンパクトな
+開近傍の基本系をもつ。特に $|\mathcal{X}|$ は Topology, Definition
+\ref{topology-definition-locally-quasi-compact} の意味で局所準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+これは、あるスキーム $U$ と位相空間の全射、開かつ連続な写像
+$U \to |\mathcal{X}|$ が存在することから形式的に従う。実際、
+$U \to \mathcal{X}$ が全射かつ滑らかならば、Lemma
+\ref{stacks-properties-lemma-topology-points} により $|U| \to |\mathcal{X}|$ は連続、全射かつ
+開である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{全射な射}
+\label{stacks-properties-section-surjective}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を、代数空間によって表現可能な代数スタック
+の射とする。Section \ref{stacks-properties-section-properties-morphisms} では、$f$ が全射である
+ことの意味をすでに定義した。Lemma \ref{stacks-properties-lemma-characterize-surjective} で、
+これは $|f| : |\mathcal{X}| \to |\mathcal{Y}|$ が全射であることと同値だと
+わかった。これにより、次の定義が可能となる。
+
+\begin{definition}
+\label{stacks-properties-definition-surjective}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする。付随する位相空間
+の写像 $|f| : |\mathcal{X}| \to |\mathcal{Y}|$ が全射であるとき、$f$ は
+{\it 全射}であるという。
+\end{definition}
+
+\noindent
+いくつかの補題を挙げる。
+
+\begin{lemma}
+\label{stacks-properties-lemma-composition-surjective}
+全射な射の合成は全射である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-base-change-surjective}
+全射な射の基底変換は全射である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：Lemma \ref{stacks-properties-lemma-points-cartesian} を用いよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-descent-surjective}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とし、
+$\mathcal{Y}' \to \mathcal{Y}$ を代数スタックの全射な射とする。$f$ の基底変換
+$f' : \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}
+\to \mathcal{Y}'$ が全射ならば、$f$ は全射である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-properties-lemma-points-cartesian} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-surjective-permanence}
+$\mathcal{X} \to \mathcal{Y} \to \mathcal{Z}$ を代数スタックの射とする。
+$\mathcal{X} \to \mathcal{Z}$ が全射ならば、$\mathcal{Y} \to \mathcal{Z}$ も
+全射である。
+\end{lemma}
+
+\begin{proof}
+直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{準コンパクトな代数スタック}
+\label{stacks-properties-section-quasi-compact}
+
+\noindent
+次の定義は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-space} により、代数空間に対する定義と
+同値である。
+
+\begin{definition}
+\label{stacks-properties-definition-quasi-compact}
+$\mathcal{X}$ を代数スタックとする。$|\mathcal{X}|$ が準コンパクトであるとき、
+かつそのときに限り、$\mathcal{X}$ は{\it 準コンパクト}であるという。
+\end{definition}
+
+\begin{lemma}
+\label{stacks-properties-lemma-quasi-compact-stack}
+$\mathcal{X}$ を代数スタックとする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{X}$ は準コンパクトである。
+\item $U$ がアフィンスキームであるような全射で滑らかな射
+$U \to \mathcal{X}$ が存在する。
+\item $U$ が準コンパクトなスキームであるような全射で滑らかな射
+$U \to \mathcal{X}$ が存在する。
+\item $U$ が準コンパクトな代数空間であるような全射で滑らかな射
+$U \to \mathcal{X}$ が存在する。
+\item $\mathcal{U}$ が準コンパクトであるような代数スタックの全射な射
+$\mathcal{U} \to \mathcal{X}$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-properties-lemma-characterize-surjective} を用いる。$\mathcal{U}$ と
+$\mathcal{U} \to \mathcal{X}$ が (5) のとおりであると仮定する。
+$|\mathcal{U}| \to |\mathcal{X}|$ は全射かつ連続なので、
+$|\mathcal{X}|$ は準コンパクトである。よって (5) から (1) が従う。
+(2) $\Rightarrow$ (3) $\Rightarrow$ (4) $\Rightarrow$ (5) は直ちに従う。
+(1)、すなわち $\mathcal{X}$ が準コンパクト、同じく $|\mathcal{X}|$ が
+準コンパクトであると仮定する。スキーム $U$ と全射で滑らかな射
+$U \to \mathcal{X}$ を選ぶ。$|U| \to |\mathcal{X}|$ は開なので、
+$|U'| \to |X|$ が全射（かつ引き続き滑らか）となるような準コンパクト開集合
+$U' \subset U$ が存在する。有限アフィン開被覆
+$U' = U_1 \cup \ldots \cup U_n$ を選ぶ。このとき
+$U_1 \amalg \ldots \amalg U_n \to \mathcal{X}$ は、始域がアフィンスキームで
+ある全射で滑らかな射である（Schemes, Lemma
+\ref{schemes-lemma-disjoint-union-affines}）。したがって (2) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-finite-disjoint-quasi-compact}
+準コンパクトな代数スタックの有限非交和は準コンパクトな代数スタックである。
+\end{lemma}
+
+\begin{proof}
+対応する位相的事実から明らかである。
+\end{proof}
+
+
+\section{スキームの性質によって定義される代数スタックの性質}
+\label{stacks-properties-section-types-properties}
+
+\noindent
+スキームの滑らか位相で局所的な任意の性質は、次の補題を通して代数スタック
+の対応する性質を与える。任意のエタール被覆は滑らかな被覆でもあるから、
+スキームの滑らか位相で局所的な性質はエタール位相でも局所的であることに
+注意する。したがって、スキームの滑らか位相で局所的な性質 $P$ に対し、
+代数空間が $P$ をもつことの意味は既知である。Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties} を参照せよ。
+
+\begin{lemma}
+\label{stacks-properties-lemma-type-property}
+$\mathcal{P}$ を、滑らか位相で局所的なスキームの性質とする。Descent,
+Definition \ref{descent-definition-property-local} を参照せよ。
+$\mathcal{X}$ を代数スタックとする。次は同値である。
+\begin{enumerate}
+\item あるスキーム $U$ とある全射で滑らかな射 $U \to \mathcal{X}$ に対して、
+スキーム $U$ は性質 $\mathcal{P}$ をもつ。
+\item 任意のスキーム $U$ と任意の滑らかな射 $U \to \mathcal{X}$ に対して、
+スキーム $U$ は性質 $\mathcal{P}$ をもつ。
+\item ある代数空間 $U$ とある全射で滑らかな射 $U \to \mathcal{X}$ に対して、
+代数空間 $U$ は性質 $\mathcal{P}$ をもつ。
+\item 任意の代数空間 $U$ と任意の滑らかな射 $U \to \mathcal{X}$ に対して、
+代数空間 $U$ は性質 $\mathcal{P}$ をもつ。
+\end{enumerate}
+$\mathcal{X}$ がスキーム $U$ ならば、これは $\mathcal{P}(U)$ と同値である。
+$\mathcal{X}$ が代数空間 $X$ ならば、これは $X$ が性質 $\mathcal{P}$ をもつ
+ことと同値である。
+\end{lemma}
+
+\begin{proof}
+$U$ を代数空間とし、$U \to \mathcal{X}$ を全射かつ滑らかとする。
+$V$ を代数空間とし、$V \to \mathcal{X}$ を滑らかな射とする。スキーム
+$U'$、$V'$ と全射なエタール射 $U' \to U$、$V' \to V$ を選ぶ。最後に、
+スキーム $W$ と全射なエタール射 $W \to V' \times_\mathcal{X} U'$ を選ぶ。
+このとき $W \to V'$ と $W \to U'$ は、代数空間のエタール射と滑らかな射の
+合成だから、スキームの滑らかな射である。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-smooth} および
+\ref{spaces-morphisms-lemma-composition-smooth} を参照せよ。さらに、
+$U' \to \mathcal{X}$ は全射なので $W \to V'$ も全射である。よって
+$$
+\mathcal{P}(U) \Leftrightarrow
+\mathcal{P}(U') \Rightarrow
+\mathcal{P}(W) \Rightarrow
+\mathcal{P}(V') \Leftrightarrow \mathcal{P}(V)
+$$
+が成り立つ。ここで同値関係は代数空間の性質 $\mathcal{P}$ の定義によるもので、
+二つの含意は Descent, Definition
+\ref{descent-definition-property-local} から得られる。これで
+(3) $\Rightarrow$ (4) が証明された。
+
+\medskip\noindent
+(2) $\Rightarrow$ (1)、(1) $\Rightarrow$ (3)、(4) $\Rightarrow$ (2) は
+直ちに従う。
+\end{proof}
+
+\begin{definition}
+\label{stacks-properties-definition-type-property}
+$\mathcal{X}$ を代数スタックとし、$\mathcal{P}$ を滑らか位相で局所的な
+スキームの性質とする。Lemma \ref{stacks-properties-lemma-type-property} の同値な条件のいずれかが
+成り立つとき、$\mathcal{X}$ は{\it 性質 $\mathcal{P}$ をもつ}という。
+\end{definition}
+
+\begin{remark}
+\label{stacks-properties-remark-list-properties-local-smooth-topology}
+滑らか位相で局所的な性質を次に列挙する（fpqc、fppf およびシントミック位相は
+滑らか位相より強いことを念頭に置く）。
+\begin{enumerate}
+\item 局所ネーター、
+Descent, Lemma \ref{descent-lemma-Noetherian-local-fppf},
+\item Jacobson、
+Descent, Lemma \ref{descent-lemma-Jacobson-local-fppf},
+\item 局所ネーターかつ $(S_k)$、
+Descent, Lemma \ref{descent-lemma-Sk-local-syntomic},
+\item Cohen--Macaulay、
+Descent, Lemma \ref{descent-lemma-CM-local-syntomic},
+\item 被約、
+Descent, Lemma \ref{descent-lemma-reduced-local-smooth},
+\item 正規、
+Descent, Lemma \ref{descent-lemma-normal-local-smooth},
+\item 局所ネーターかつ $(R_k)$、
+Descent, Lemma \ref{descent-lemma-Rk-local-smooth},
+\item 正則、
+Descent, Lemma \ref{descent-lemma-regular-local-smooth},
+\item Nagata、
+Descent, Lemma \ref{descent-lemma-Nagata-local-smooth}.
+\end{enumerate}
+\end{remark}
+
+\noindent
+スキームの芽の滑らか位相で局所的な任意の性質は、代数スタックの対応する性質
+を与える。芽の滑らか位相で局所的な性質はエタール位相でも局所的であることに
+注意する。したがって、スキームの芽の滑らか位相で局所的な性質 $P$ に対し、
+代数空間 $X$ が $x \in |X|$ において性質 $P$ をもつことの意味は既知である。
+Properties of Spaces, Section \ref{stacks-properties-section-types-properties} を参照せよ。
+
+\begin{lemma}
+\label{stacks-properties-lemma-local-source-target-at-point}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ を $\mathcal{X}$ の
+点とする。$\mathcal{P}$ を、滑らか位相で局所的なスキームの芽の性質とする。
+Descent, Definition \ref{descent-definition-local-at-point} を参照せよ。
+次は同値である。
+\begin{enumerate}
+\item $U$ がスキームである任意の滑らかな射 $U \to \mathcal{X}$ と、
+$a(u) = x$ を満たす任意の $u \in U$ に対し、$\mathcal{P}(U, u)$ が成り立つ。
+\item $U$ がスキームであるある滑らかな射 $U \to \mathcal{X}$ と、
+$a(u) = x$ を満たすある $u \in U$ に対し、$\mathcal{P}(U, u)$ が成り立つ。
+\item $U$ が代数空間である任意の滑らかな射 $U \to \mathcal{X}$ と、
+$a(u) = x$ を満たす任意の $u \in |U|$ に対し、代数空間 $U$ は $u$ において
+性質 $\mathcal{P}$ をもつ。
+\item $U$ が代数空間であるある滑らかな射 $U \to \mathcal{X}$ と、
+$a(u) = x$ を満たすある $u \in |U|$ に対し、代数空間 $U$ は $u$ において
+性質 $\mathcal{P}$ をもつ。
+\end{enumerate}
+$\mathcal{X}$ が表現可能ならば、これは $\mathcal{P}(\mathcal{X}, x)$ と同値
+である。$\mathcal{X}$ が代数空間ならば、これは $\mathcal{X}$ が $x$ において
+性質 $\mathcal{P}$ をもつことと同値である。
+\end{lemma}
+
+\begin{proof}
+(3) のとおり $a : U \to \mathcal{X}$ と $u \in |U|$ を取る。また
+$V$ を代数空間とする別の滑らかな射 $b : V \to \mathcal{X}$ と、
+$b(v) = x$ を満たす $v \in |V|$ を取る。スキーム $U'$、エタール射
+$U' \to U$ および $u$ に写る $u' \in U'$ を選ぶ。スキーム $V'$、エタール射
+$V' \to V$ および $v$ に写る $v' \in V'$ を選ぶ。Lemma
+\ref{stacks-properties-lemma-points-cartesian} により、$u'$ と $v'$ に写る点
+$\overline{w} \in |V' \times_\mathcal{X} U'|$ が存在する。スキーム $W$ と
+全射なエタール射 $W \to V' \times_\mathcal{X} U'$ を選ぶ。
+$\overline{w}$ に写る $w \in |W|$ を選ぶことができる（Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-characterize-surjective} を参照）。
+このとき $W \to V'$ と $W \to U'$ は、代数空間のエタール射と滑らかな射の
+合成だから、スキームの滑らかな射である。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-smooth} および
+\ref{spaces-morphisms-lemma-composition-smooth} を参照せよ。したがって
+$$
+\mathcal{P}(U, u)
+\Leftrightarrow
+\mathcal{P}(U', u')
+\Leftrightarrow
+\mathcal{P}(W, w)
+\Leftrightarrow
+\mathcal{P}(V', v')
+\Leftrightarrow
+\mathcal{P}(V, v)
+$$
+外側の二つの同値は Properties of Spaces, Definition
+\ref{spaces-properties-definition-property-at-point} により、残りの二つは
+スキームの芽の性質が滑らか位相で局所的であることの意味により成り立つ。
+これで (4) $\Rightarrow$ (3) が証明された。
+
+\medskip\noindent
+(1) $\Rightarrow$ (2)、(2) $\Rightarrow$ (4)、(3) $\Rightarrow$ (1) は
+直ちに従う。
+\end{proof}
+
+\begin{definition}
+\label{stacks-properties-definition-property-at-point}
+$\mathcal{P}$ を、滑らか位相で局所的なスキームの芽の性質とする。
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ とする。
+Lemma \ref{stacks-properties-lemma-local-source-target-at-point} の同値な条件のいずれかが
+成り立つとき、$\mathcal{X}$ は{\it $x$ において性質 $\mathcal{P}$ をもつ}
+という。
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+\section{代数スタックのモノ射}
+\label{stacks-properties-section-monomorphisms}
+
+\noindent
+代数スタックのモノ射を次のように定義する。Lemma
+\ref{stacks-properties-lemma-monomorphism} で、これが対応する $2$-圏論的概念と両立することを
+見る。
+
+\begin{definition}
+\label{stacks-properties-definition-monomorphism}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする。$f$ が代数空間に
+よって表現可能で、Section \ref{stacks-properties-section-properties-morphisms} の意味でモノ射
+であるとき、この射を{\it モノ射}という。
+\end{definition}
+
+\noindent
+まず基本的な補題をいくつか示す。
+
+\begin{lemma}
+\label{stacks-properties-lemma-base-change-monomorphism}
+$\mathcal{X} \to \mathcal{Y}$ を代数スタックの射とし、
+$\mathcal{Z} \to \mathcal{Y}$ をモノ射とする。このとき
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X} \to \mathcal{X}$ はモノ射である。
+\end{lemma}
+
+\begin{proof}
+Section \ref{stacks-properties-section-properties-morphisms} の一般的な議論から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-composition-monomorphism}
+代数スタックのモノ射の合成はモノ射である。
+\end{lemma}
+
+\begin{proof}
+Section \ref{stacks-properties-section-properties-morphisms} の一般的な議論と Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-composition-monomorphism} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-monomorphism}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする。次は同値である。
+\begin{enumerate}
+\item $f$ はモノ射である。
+\item $f$ は充満忠実である。
+\item 対角射
+$\Delta_f : \mathcal{X} \to \mathcal{X} \times_\mathcal{Y} \mathcal{X}$
+は同値である。
+\item 代数空間 $W$ と全射、平坦かつ局所有限表示な射
+$W \to \mathcal{Y}$ が存在し、$V = \mathcal{X} \times_\mathcal{Y} W$ は
+代数空間で、射 $V \to W$ は代数空間のモノ射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (4) の同値性は Section \ref{stacks-properties-section-properties-morphisms} の一般的な
+議論、特に Lemmas \ref{stacks-properties-lemma-check-representable-covering} および
+\ref{stacks-properties-lemma-check-property-covering} から従う。
+
+\medskip\noindent
+(2) と (3) の同値性は Categories, Lemma
+\ref{categories-lemma-fully-faithful-diagonal-equivalence} である。
+
+\medskip\noindent
+同値な条件 (2) と (3) を仮定する。このとき Algebraic Stacks, Lemma
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces} により、
+$f$ は代数空間によって表現可能である。さらに $2$-Yoneda 補題と充満忠実性を
+合わせると、任意のスキーム $T$ に対して関手
+$$
+\Mor(T, \mathcal{X})
+\longrightarrow
+\Mor(T, \mathcal{Y})
+$$
+は充満忠実である。したがって射 $y : T \to \mathcal{Y}$ が与えられると、
+$y \cong f \circ x$ を満たす射 $x : T \to \mathcal{X}$ は、一意的な
+$2$-同型を除いて高々一つ存在する。特にスキームの射 $h : T' \to T$ に対し、
+$h$ の持ち上げ $\tilde h : T' \to T \times_\mathcal{Y} \mathcal{X}$ は
+高々一つ存在する。ゆえに $T \times_\mathcal{Y} \mathcal{X} \to T$ は
+代数空間のモノ射であり、(1) が成り立つ。
+
+\medskip\noindent
+最後に (1) を仮定する。このとき任意のスキーム $T$ と射
+$y : T \to \mathcal{Y}$ に対し、ファイバー積
+$T \times_\mathcal{Y} \mathcal{X}$ は代数空間で、
+$T \times_\mathcal{Y} \mathcal{X} \to T$ はモノ射である。したがって、
+$x : T \to \mathcal{X}$ が射で $\alpha : f \circ x \to y$ が $2$-射である
+ような対 $(x, \alpha)$ は、一意的な同型を除いてちょうど一つ存在する。
+$2$-Yoneda 補題を適用すれば、これはちょうど $f$ が充満忠実であること、
+すなわち (2) が成り立つことをいう。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-monomorphism-injective-points}
+\begin{slogan}
+スタックのモノ射は点上単射である。
+\end{slogan}
+代数スタックのモノ射が点集合上に誘導する写像は単射である。
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックのモノ射とする。
+$x_i : \Spec(K_i) \to \mathcal{X}$ を、$f \circ x_1$ と $f \circ x_2$ が
+$|\mathcal{Y}|$ の同じ元を定めるような射とする。定義を適用すると、共通拡大
+$\Omega$ と対応する射 $c_i : \Spec(\Omega) \to \Spec(K_i)$、および
+$2$-同型 $\beta : f \circ x_1 \circ c_1 \to f \circ x_1 \circ c_2$ を得る。
+Lemma \ref{stacks-properties-lemma-monomorphism} により $f$ は充満忠実なので、$\beta$ を同型
+$\alpha : x_1 \circ c_1 \to x_1 \circ c_2$ に持ち上げることができる。
+したがって所望のとおり、$x_1$ と $x_2$ は $|\mathcal{X}|$ の同じ点を定める。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-monomorphism-diagonal}
+$\mathcal{X} \to \mathcal{X}' \to \mathcal{Y}$ を代数スタックの射とする。
+$\mathcal{X} \to \mathcal{X}'$ がモノ射ならば、標準図式
+$$
+\xymatrix{
+\mathcal{X} \ar[r] \ar[d] &
+\mathcal{X} \times_\mathcal{Y} \mathcal{X} \ar[d] \\
+\mathcal{X}' \ar[r] &
+\mathcal{X}' \times_\mathcal{Y} \mathcal{X}'
+}
+$$
+はファイバー積正方形である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-properties-lemma-monomorphism} により
+$\mathcal{X} = \mathcal{X} \times_{\mathcal{X}'} \mathcal{X}$ である。
+したがって Categories, Lemma
+\ref{categories-lemma-fibre-product-after-map} を適用すれば結果を得る。
+\end{proof}
+
+
+
+
+
+
+
+\section{代数スタックの埋入}
+\label{stacks-properties-section-immersions}
+
+\noindent
+代数スタックの埋入を次のように定義する。
+
+\begin{definition}
+\label{stacks-properties-definition-immersion}
+埋入。
+\begin{enumerate}
+\item 代数スタックの射が表現可能で、Section
+\ref{stacks-properties-section-properties-morphisms} の意味で開埋入であるとき、その射を
+{\it 開埋入}という。
+\item 代数スタックの射が表現可能で、Section
+\ref{stacks-properties-section-properties-morphisms} の意味で閉埋入であるとき、その射を
+{\it 閉埋入}という。
+\item 代数スタックの射が表現可能で、Section
+\ref{stacks-properties-section-properties-morphisms} の意味で埋入であるとき、その射を
+{\it 埋入}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これは、ここで埋入を考えるには最も便利な方法ではない。埋入を、代数空間に
+よって表現可能で Section \ref{stacks-properties-section-properties-morphisms} の意味で埋入で
+ある代数スタックの射と考える方が少し便利である。閉埋入と開埋入についても
+同様である。これは今定義した概念と明らかに同値なので、以下では断りなく
+この特徴付けを用いる。この概念についていくつかの簡単な補題を証明する。
+
+\begin{lemma}
+\label{stacks-properties-lemma-base-change-immersion}
+$\mathcal{X} \to \mathcal{Y}$ を代数スタックの射とし、
+$\mathcal{Z} \to \mathcal{Y}$ を（それぞれ閉、開）埋入とする。このとき
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X} \to \mathcal{X}$ は
+（それぞれ閉、開）埋入である。
+\end{lemma}
+
+\begin{proof}
+Section \ref{stacks-properties-section-properties-morphisms} の一般的な議論から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-composition-immersion}
+代数スタックの埋入の合成は埋入である。閉埋入と開埋入についても同様である。
+\end{lemma}
+
+\begin{proof}
+Section \ref{stacks-properties-section-properties-morphisms} の一般的な議論と Spaces, Lemma
+\ref{spaces-lemma-composition-immersions} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-check-immersion-covering}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする。$W$ を代数空間
+とし、$W \to \mathcal{Y}$ を全射、平坦かつ局所有限表示な射とする。
+次は同値である。
+\begin{enumerate}
+\item $f$ は（それぞれ開、閉）埋入である。
+\item $V = W \times_\mathcal{Y} \mathcal{X}$ は代数空間で、$V \to W$ は
+（それぞれ開、閉）埋入である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Section \ref{stacks-properties-section-properties-morphisms} の一般的な議論、特に Lemmas
+\ref{stacks-properties-lemma-check-representable-covering} および
+\ref{stacks-properties-lemma-check-property-covering} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-immersion-monomorphism}
+埋入はモノ射である。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-immersions-monomorphisms} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-subspace-induced-topology}
+$f : \mathcal{X} \to \mathcal{Y}$ が埋入ならば、
+$|f| : |\mathcal{X}| \to |\mathcal{Y}|$ は局所閉部分集合の上への同相写像
+である。$f$ がそれぞれ閉埋入、開埋入ならば、$|f|$ はそれぞれ閉、開である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+次の二つの補題は、表示を用いて埋入をどのように考えるかを説明する。
+
+\begin{lemma}
+\label{stacks-properties-lemma-immersion-into-presentation}
+$(U, R, s, t, c)$ を代数空間における滑らかなグルーポイドとし、
+$i : \mathcal{Z} \to [U/R]$ を埋入とする。このとき、$R$-不変な局所閉部分空間
+$Z \subset U$ と表示 $[Z/R_Z] \to \mathcal{Z}$ が存在する。ただし $R_Z$ は
+$R$ の $Z$ への制限であり、図式
+$$
+\xymatrix{
+[Z/R_Z] \ar[dr] \ar[rr] & & \mathcal{Z} \ar[ld]^i \\
+& [U/R]
+}
+$$
+は $2$-可換である。$i$ が閉埋入（それぞれ開埋入）ならば、$Z$ は $U$ の
+閉部分空間（それぞれ開部分空間）である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-properties-lemma-representable-in-terms-presentations} により可換図式
+$$
+\xymatrix{
+[U'/R'] \ar[dr] \ar[rr] & & \mathcal{Z} \ar[ld] \\
+& [U/R]
+}
+$$
+を得る。ここで $U' = \mathcal{Z} \times_{[U/R]} U$ かつ
+$R' = \mathcal{Z} \times_{[U/R]} R$ である。
+$\mathcal{Z} \to [U/R]$ は埋入なので、$U' \to U$ は代数空間の埋入である。
+$U' \to U$ が局所閉部分空間 $Z \subset U$ を経由し、同型 $U' \to Z$ を
+誘導するように $Z$ を取る。$R'$ の構成から
+$R' = U' \times_{U, t} R = R \times_{s, U} U'$ は明らかである。これより
+$Z \cong U'$ は $R$-不変であり、$R' \to R$ の像は $R'$ を $R$ の $Z$ への
+制限 $R_Z = s^{-1}(Z) = t^{-1}(Z)$ と同一視する。よって補題が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-immersion-presentation}
+$(U, R, s, t, c)$ を代数空間における滑らかなグルーポイドとする。
+$\mathcal{X} = [U/R]$ を付随する代数スタックとする。Algebraic Stacks,
+Theorem \ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack} を
+参照せよ。$Z \subset U$ を $R$-不変な局所閉部分空間とする。このとき
+$$
+[Z/R_Z] \longrightarrow [U/R]
+$$
+は代数スタックの埋入である。ただし $R_Z$ は $R$ の $Z$ への制限である。
+$Z \subset U$ が開（それぞれ閉）ならば、この射は代数スタックの開埋入
+（それぞれ閉埋入）である。
+\end{lemma}
+
+\begin{proof}
+Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-invariant-open}（定義に続く議論も参照）により、
+$R$ の局所閉部分空間として $R_Z = s^{-1}(Z) = t^{-1}(Z)$ であることを
+思い出す。したがって二つの射 $R_Z \to Z$ は $s$ と $t$ の基底変換として
+滑らかである。よって
+$(Z, R_Z, s|_{R_Z}, t|_{R_Z}, c|_{R_Z \times_{s, Z, t} R_Z})$
+は代数空間における滑らかなグルーポイドであり、$[Z/R_Z]$ は代数スタックで
+ある。Algebraic Stacks, Theorem
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack} を参照せよ。
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-criterion-fibre-product} の仮定はすべて満たされ、
+$2$-ファイバー積正方形
+$$
+\xymatrix{
+Z \ar[d] \ar[r] & [Z/R_Z] \ar[d] \\
+U \ar[r] & [U/R]
+}
+$$
+を得る。これと Lemma \ref{stacks-properties-lemma-check-representable-covering} から
+$[Z/R_Z] \to [U/R]$ は代数空間によって表現可能である。さらに Lemma
+\ref{stacks-properties-lemma-check-property-covering} から、右の垂直射が埋入（それぞれ閉埋入、
+開埋入）であることと、左の垂直射がそうであることは同値である。
+\end{proof}
+
+\noindent
+開、閉、および局所閉部分スタックを次のように定義できる。
+
+\begin{definition}
+\label{stacks-properties-definition-substacks}
+$\mathcal{X}$ を代数スタックとする。
+\begin{enumerate}
+\item $\mathcal{X}$ の{\it 開部分スタック}とは、$\mathcal{X}'$ が代数スタックで
+$\mathcal{X}' \to \mathcal{X}$ が開埋入であるような厳密充満部分圏
+$\mathcal{X}' \subset \mathcal{X}$ をいう。
+\item $\mathcal{X}$ の{\it 閉部分スタック}とは、$\mathcal{X}'$ が代数スタックで
+$\mathcal{X}' \to \mathcal{X}$ が閉埋入であるような厳密充満部分圏
+$\mathcal{X}' \subset \mathcal{X}$ をいう。
+\item $\mathcal{X}$ の{\it 局所閉部分スタック}とは、$\mathcal{X}'$ が代数スタック
+で $\mathcal{X}' \to \mathcal{X}$ が埋入であるような厳密充満部分圏
+$\mathcal{X}' \subset \mathcal{X}$ をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義は注意して用いる必要がある。実際、
+$f : \mathcal{X} \to \mathcal{Y}$ が代数スタックの同値で、
+$\mathcal{X}' \subset \mathcal{X}$ が開部分スタックであっても、部分圏
+$f(\mathcal{X}')$ が $\mathcal{Y}$ の開部分スタックであるとは限らない。
+問題は、それが{\it 厳密}充満部分圏でない可能性があることだが、問題はそれだけ
+でもある。形式的な主張は次のとおりである。
+
+\begin{lemma}
+\label{stacks-properties-lemma-substack-image}
+任意の埋入 $i : \mathcal{Z} \to \mathcal{X}$ に対し、一意的な局所閉部分スタック
+$\mathcal{X}' \subset \mathcal{X}$ が存在し、$i$ は同値
+$i' : \mathcal{Z} \to \mathcal{X}'$ と包含射
+$\mathcal{X}' \to \mathcal{X}$ の合成として分解する。$i$ が閉埋入
+（それぞれ開埋入）ならば、$\mathcal{X}'$ は $\mathcal{X}$ の閉部分スタック
+（それぞれ開部分スタック）である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-substacks-presentation}
+$[U/R] \to \mathcal{X}$ を代数スタックの表示とする。標準全単射
+$$
+\text{局所閉部分スタック }\mathcal{Z}\text{（}\mathcal{X}\text{ 内）}
+\longrightarrow
+R\text{-不変な局所閉部分空間 }Z\text{（}U\text{ 内）}
+$$
+があり、$\mathcal{Z}$ を $U \times_\mathcal{X} \mathcal{Z}$ に写す。さらに、
+代数スタックの射 $f : \mathcal{Y} \to \mathcal{X}$ が $\mathcal{Z}$ を経由する
+ことと、$\mathcal{Y} \times_\mathcal{X} U \to U$ が $Z$ を経由することは
+同値である。閉部分スタックと開部分スタックについても同様である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{stacks-properties-lemma-immersion-into-presentation} および
+\ref{stacks-properties-lemma-immersion-presentation} により、この写像は全単射である。
+$\mathcal{Y} \to \mathcal{X}$ が $\mathcal{Z}$ を経由するならば、もちろん
+基底変換 $\mathcal{Y} \times_\mathcal{X} U \to U$ は $Z$ を経由する。逆に、
+$\mathcal{Y} \times_\mathcal{X} U \to U$ が $Z$ を経由するような射
+$\mathcal{Y} \to \mathcal{X}$ があると仮定する。任意のスキーム $T$ と射
+$T \to \mathcal{Y}$、すなわち $T$ 上の $\mathcal{Y}$ のファイバー圏の対象
+$y$ に対し、$y$ が実際に $T$ 上の $\mathcal{Z}$ のファイバー圏に属することを
+示す。ファイバー積 $T \times_\mathcal{X} U$ は代数空間で、
+$T \times_\mathcal{X} U \to T$ は全射で滑らかな射である。したがって、各
+$i$ に対して $T_i \to T$ が $T \times_\mathcal{X} U \to T$ を経由するような
+fppf 被覆 $\{T_i \to T\}$ がある。このとき $T_i \to \mathcal{X}$ は
+$\mathcal{Y} \times_\mathcal{X} U$ を経由し、したがって $Z \subset U$ を
+経由する。ゆえに $y|_{T_i}$ は $\mathcal{Z}$ の対象である（$Z$ は
+$\mathcal{X}$ 上で $U$ と $\mathcal{Z}$ のファイバー積だからである）。
+$\mathcal{Z}$ は厳密充満部分スタックなので、所望のとおり $y$ は
+$\mathcal{Z}$ の対象である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-open-substacks}
+$\mathcal{X}$ を代数スタックとする。規則
+$\mathcal{U} \mapsto |\mathcal{U}|$ は、$\mathcal{X}$ の開部分スタックと
+$|\mathcal{X}|$ の開部分集合との間に、包含関係を保つ全単射を定める。
+\end{lemma}
+
+\begin{proof}
+表示 $[U/R] \to \mathcal{X}$ を選ぶ。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-stack-presentation} を参照せよ。Lemma
+\ref{stacks-properties-lemma-substacks-presentation} により、開部分スタックは $U$ の $R$-不変な
+開部分スキームに対応する。一方、Lemmas \ref{stacks-properties-lemma-points-presentation} および
+\ref{stacks-properties-lemma-topology-points} により、後者は $|\mathcal{X}|$ の開部分集合に
+全単射で対応する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-open-image-substack}
+$\mathcal X$ を代数スタックとし、$U$ を代数空間、$U \to \mathcal X$ を
+全射で滑らかな射とする。開埋入 $V \hookrightarrow U$ に対し、代数スタック
+$\mathcal Y$、開埋入 $\mathcal Y \to \mathcal X$ および全射で滑らかな射
+$V \to \mathcal Y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$(\Sch/S)_{fppf}$ の対象 $T$ 上のファイバー圏 $\mathcal{Y}_T$ を、射影
+$V \times_{\mathcal X, y} T \to T$ が全射であるようなすべての
+$y \in \Ob(\mathcal{X}_T)$ からなる $\mathcal{X}_T$ の充満部分圏として、
+グルーポイドにファイバー化された圏 $\mathcal Y$ を定義する。任意の射
+$x : T \to \mathcal X$ に対し、$2$-ファイバー積
+$T \times_{x, \mathcal X} \mathcal Y$ の $T'$ 上のファイバー圏は、
+$V \times_{\mathcal X, y} T' \to T'$ が全射であるような三つ組
+$(f : T' \to T, y \in \mathcal{X}_{T'}, f^*x \simeq y)$ からなる。
+$\mathcal Y \to \mathcal X$ は忠実なので、
+$T \times_{x, \mathcal X} \mathcal Y$ はセトイドにファイバー化されている
+ことに注意する（Stacks, Lemma
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids} を参照）。同型
+$f^*x \simeq y$ は図式
+$$
+\xymatrix{
+V \times_{\mathcal X, y} T' \ar[d] \ar[r] &
+V \times_{\mathcal X, x} T \ar[r] \ar[d] &
+V \ar[d] \\
+T' \ar[r]^f &
+T \ar[r]^x &
+\mathcal X
+}
+$$
+を与え、両正方形はデカルト的である。射
+$V \times_{\mathcal X, x} T \to T$ は基底変換により滑らかで、したがって
+開である。その像を $T_0 \subset T$ とする。デカルト正方形から、
+$V \times_{\mathcal X, y} T' \to T'$ が全射であることと $f$ が $T_0$ に
+値を取ることは同値だとわかる。したがって
+$T \times_{x, \mathcal X} \mathcal Y$ は $T_0$ によって表現可能であり、包含
+$\mathcal Y \to \mathcal X$ は開埋入である。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-open-fibred-category-is-algebraic} により、$\mathcal{Y}$ は
+代数スタックである。最後に射 $V \to \mathcal X$ を $g$ と書くと、
+$V \times_{\mathcal X} V \to V$ は全射である（対角射が切断を与える）。
+したがって $g$ は $\mathcal{Y}_V \to \mathcal{X}_V$ の像に属する。すなわち、
+可換図式
+$$
+\xymatrix{
+V \ar[r] \ar[d]^{g'} & U \ar[d] \\
+\mathcal{Y} \ar[r] & \mathcal{X}
+}
+$$
+に収まる射 $g' : V \to \mathcal{Y}$ を得る。
+$V \times_{g, \mathcal X} \mathcal Y \to V$ はモノ射であり、$(1, g')$ が
+切断を定めるので、実際には同型である。したがって
+$g' : V \to \mathcal Y$ は滑らかな射である。実際、滑らかな射
+$g : V \to \mathcal{X}$ の基底変換だからである。$\mathcal{Y}$ の構成により
+全射でもあり、補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-union-open-substacks}
+$\mathcal X$ を代数スタックとし、$\mathcal{X}_i \subset \mathcal X$ を
+$i \in I$ で添字付けられた開部分スタックの族とする。このとき、
+$\mathcal{X}_i$ が開部分スタックとして被覆する開部分スタックが存在し、これを
+$\bigcup_{i\in I} \mathcal{X}_i \subset \mathcal X$ と書く。
+\end{lemma}
+
+\begin{proof}
+$(\Sch/S)_{fppf}$ の対象 $T$ 上のファイバー圏を、射
+$\coprod_{i \in I} (\mathcal{X}_i \times_{\mathcal X} T) \to T$ が全射と
+なるすべての $x \in \Ob(\mathcal{X}_T)$ からなる $\mathcal{X}_T$ の充満部分圏
+として、ファイバー部分圏 $\mathcal{X}' = \bigcup_{i \in I} \mathcal{X}_i$ を
+定義する。$x_i \in \Ob((\mathcal{X}_i)_T)$ とする。このとき $(x_i, 1)$ は
+$\mathcal{X}_i \times_{\mathcal X} T \to T$ の切断を与えるので、同型を得る。
+したがって $\mathcal{X}_i \subset \mathcal{X}'$ は充満部分圏である。次に
+$x \in \Ob(\mathcal{X}_T)$ とする。このとき
+$\mathcal{X}_i \times_{\mathcal X} T$ は開部分スキーム $T_i \subset T$ により
+表現可能である。$2$-ファイバー積 $\mathcal{X}' \times_{\mathcal X} T$ の
+$T'$ 上のファイバーは、
+$\coprod (\mathcal{X}_i \times_{\mathcal X, y} T') \to T'$ が全射となる
+$(y \in \mathcal{X}_{T'}, f : T' \to T, f^*x \simeq y)$ からなる。同型
+$f^*x \simeq y$ は同型
+$\mathcal{X}_i \times_{\mathcal X, y} T' \simeq T_i \times_T T'$ を誘導する。
+このとき $T_i \times_T T'$ が $T'$ を被覆することと、$f$ が
+$\bigcup T_i$ に値を取ることは同値である。したがって図式
+$$
+\xymatrix{
+T_i \ar[r] \ar[d] &
+\bigcup T_i \ar[r] \ar[d] &
+T \ar[d] \\
+\mathcal{X}_i \ar[r] &
+\mathcal{X}' \ar[r] &
+\mathcal{X}
+}
+$$
+を得て、両正方形はデカルト的である。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-open-fibred-category-is-algebraic} により、
+$\mathcal{X'} \subset \mathcal{X}$ は代数的で、開部分スタックである。また、
+上のデカルト正方形から射
+$\coprod_{i \in I} \mathcal{X}_i \to \mathcal{X}'$ についても明らかであり、
+これで補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-quasi-compact-finite-subcover}
+$\mathcal X$ を代数スタックとし、$\mathcal X' \subset \mathcal X$ を
+準コンパクトな開部分スタックとする。$i \in I$ で添字付けられた開部分スタック
+$\mathcal{X}_i \subset \mathcal X$ の族があり、
+$\mathcal{X}' \subset \bigcup_{i \in I} \mathcal{X}_i$ と仮定する。ただし和は
+Lemma \ref{stacks-properties-lemma-union-open-substacks} のように定義する。このとき、
+$\mathcal{X}' \subset \bigcup_{i \in I'} \mathcal{X}_i$ を満たす有限部分集合
+$I' \subset I$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal X$ は代数的なので、スキーム $U$ と全射で滑らかな射
+$U \to \mathcal X$ が存在する。$U_i \subset U$ を
+$\mathcal{X}_i \times_{\mathcal X} U$ を表現する開部分スキーム、
+$U' \subset U$ を $\mathcal{X}' \times_{\mathcal X} U$ を表現する開部分スキーム
+とする。仮定により $U'\subset \bigcup_{i\in I} U_i$ である。Lemma
+\ref{stacks-properties-lemma-quasi-compact-stack} の証明から、$V \to \mathcal{X}'$ が全射で
+滑らかとなるような準コンパクト開集合 $V \subset U'$ がある。したがって
+$V \subset \bigcup_{i \in I'} U_i$ を満たす有限部分集合 $I' \subset I$ が
+存在する。$\mathcal{X}' \subset \bigcup_{i \in I'} \mathcal{X}_i$ を主張する。
+$T \in \Ob((\Sch/S)_{fppf})$ に対し $x \in \Ob(\mathcal{X}'_T)$ を取る。
+$\mathcal{X}' \to \mathcal{X}$ はモノ射なので、デカルト正方形
+$$
+\xymatrix{
+V \times_\mathcal{X} T \ar[r] \ar[d] &
+T \ar[d]^x \ar@{=}[r] &
+T \ar[d]^x \\
+V \ar[r] &
+\mathcal{X}' \ar[r] &
+\mathcal X
+}
+$$
+を得る。基底変換により $V \times_{\mathcal X} T \to T$ は全射である。
+したがって $\bigcup_{i \in I'} U_i \times_{\mathcal X} T \to T$ も全射である。
+$T_i \subset T$ を $\mathcal{X}_i \times_{\mathcal X} T$ を表現する開部分スキーム
+とする。形式的な議論により、デカルト正方形
+$$
+\xymatrix{
+U_i \times_{\mathcal{X}_i} T_i \ar[r] \ar[d] &
+U \times_{\mathcal X} T \ar[d] \\
+T_i \ar[r] & T
+}
+$$
+を得て、垂直射は基底変換により全射である。
+$U_i \times_{\mathcal{X}_i} T_i \simeq U_i \times_{\mathcal X} T$ なので、
+$\bigcup_{i \in I'} T_i = T$ が従う。したがって和の定義により $x$ は
+$(\bigcup_{i\in I'} \mathcal{X}_i)_T$ の対象である。包含
+$\mathcal{X}' \subset \bigcup_{i \in I'} \mathcal{X}_i$ は自動的に
+開部分スタックであることに注意する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-zariski-open-cover-stack-is-space}
+$\mathcal X$ を代数スタックとする。$\mathcal{X}_i$、$i \in I$ を
+$\mathcal{X}$ の開部分スタックの集合とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{X} = \bigcup_{i \in I} \mathcal{X}_i$。
+\item 各 $\mathcal{X}_i$ は代数空間である。
+\end{enumerate}
+このとき $\mathcal{X}$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+射 $\coprod_{i \in I} \mathcal{X}_i \to \mathcal{X}$ と射
+$\text{id} : \mathcal{X} \to \mathcal{X}$ に Stacks, Lemma
+\ref{stacks-lemma-stack-in-setoids-descent} を適用すると、$\mathcal{X}$ は
+セトイドのスタックである。したがって $\mathcal{X}$ は代数空間である。
+Algebraic Stacks, Proposition
+\ref{algebraic-proposition-algebraic-stack-no-automorphisms} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-zariski-open-cover-stack-is-scheme}
+$\mathcal X$ を代数スタックとする。$\mathcal{X}_i$、$i \in I$ を
+$\mathcal{X}$ の開部分スタックの集合とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{X} = \bigcup_{i \in I} \mathcal{X}_i$。
+\item 各 $\mathcal{X}_i$ はスキームである。
+\end{enumerate}
+このとき $\mathcal{X}$ はスキームである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-properties-lemma-zariski-open-cover-stack-is-space} により $\mathcal{X}$ は
+代数空間である。任意の代数空間は、スキームである最大の開部分空間をもつ。
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-subscheme} を
+参照せよ。したがって $\mathcal{X}$ はスキームである。
+\end{proof}
+
+
+\noindent
+次の補題は More on Groupoids, Lemma
+\ref{more-groupoids-lemma-local-source} の類似である。
+
+\begin{lemma}
+\label{stacks-properties-lemma-local-source}
+$\mathcal{P}, \mathcal{Q}, \mathcal{R}$ を代数空間の射の性質とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{P}, \mathcal{Q}, \mathcal{R}$ は標的上 fppf 局所的で、任意の
+基底変換によって保たれる。
+\item $\text{smooth} \Rightarrow \mathcal{R}$ である。
+\item $\mathcal{Q}$ をもつ任意の射 $f : X \to Y$ に対し、
+$f|_{W(\mathcal{P}, f)}$ が $\mathcal{P}$ をもつような最大の開部分空間
+$W(\mathcal{P}, f) \subset X$ が存在する。
+\item $\mathcal{Q}$ をもつ任意の射 $f : X \to Y$ と、$\mathcal{R}$ をもつ
+任意の射 $Y' \to Y$ に対し、
+$Y' \times_Y W(\mathcal{P}, f) = W(\mathcal{P}, f')$ が成り立つ。ただし
+$f' : X_{Y'} \to Y'$ は $f$ の基底変換である。
+\end{enumerate}
+$f : \mathcal{X} \to \mathcal{Y}$ を、代数空間によって表現可能な代数スタック
+の射とし、$f$ は $\mathcal{Q}$ をもつと仮定する。このとき
+\begin{enumerate}
+\item[(A)] $f|_{\mathcal{X}'}$ が $\mathcal{P}$ をもつような最大の開部分スタック
+$\mathcal{X}' \subset \mathcal{X}$ が存在する。
+\item[(B)] $\mathcal{Z} \to \mathcal{Y}$ が、代数空間によって表現可能で
+$\mathcal{R}$ をもつ代数スタックの射ならば、
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X}'$ は、基底変換
+$\text{id}_\mathcal{Z} \times f$ が性質 $\mathcal{P}$ をもつような
+$\mathcal{Z} \times_\mathcal{Y} \mathcal{X}$ の最大の開部分スタックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射で滑らかな射 $V \to \mathcal{Y}$ を選ぶ。
+$U = V \times_\mathcal{Y} \mathcal{X}$ と置き、$f' : U \to V$ を $f$ の
+基底変換とする。代数空間の射 $f' : U \to V$ は性質 $\mathcal{Q}$ をもつ。
+したがって仮定 (3) により開集合 $W(\mathcal{P}, f') \subset U$ を得る。
+ここで
+$U \times_\mathcal{X} U =
+(V \times_\mathcal{Y} V) \times_\mathcal{Y} \mathcal{X}$
+であるから、射 $f'' : U \times_\mathcal{X} U \to V \times_\mathcal{Y} V$ は
+いずれの射影 $V \times_\mathcal{Y} V \to V$ によっても $f$ の基底変換である。
+$V$ の選び方により、これらの射影は滑らかであり、したがって (2) により性質
+$\mathcal{R}$ をもつ。よって (4) により、二つの射影
+$\text{pr}_i : U \times_\mathcal{X} U \to U$ による
+$W(\mathcal{P}, f')$ の逆像は一致する。言い換えれば、
+$W(\mathcal{P}, f')$ は $U$ の $R$-不変な部分空間である（ここで
+$R = U \times_\mathcal{X} U$）。Lemma
+\ref{stacks-properties-lemma-immersion-into-presentation} を通して $W(\mathcal{P}, f)$ に対応する
+$\mathcal{X}$ の開部分スタックを $\mathcal{X}'$ とする。構成により
+$W(\mathcal{P}, f') = \mathcal{X}' \times_\mathcal{Y} V$ なので、Lemma
+\ref{stacks-properties-lemma-check-property-covering} により $f|_{\mathcal{X}'}$ は性質
+$\mathcal{P}$ をもつ。また、$W(\mathcal{P}, f)$ に同じ最大性が成り立つので、
+$\mathcal{X}'$ は $f|_{\mathcal{X}'}$ が $\mathcal{P}$ をもつような最大の
+開部分スタックである。これで (A) が証明された。
+
+\medskip\noindent
+最後に、$\mathcal{Z} \to \mathcal{Y}$ が代数空間によって表現可能で性質
+$\mathcal{R}$ をもつ代数スタックの射ならば、
+$T = V \times_\mathcal{Y} \mathcal{Z}$ と置く。このとき $T \to V$ は性質
+$\mathcal{R}$ をもつ代数空間の射である。$f'_T : T \times_V U \to T$ を
+$f'$ の基底変換とする。再び (4) により、$W(\mathcal{P}, f'_T)$ は
+$T \times_V U$ における $W(\mathcal{P}, f)$ の逆像である。これから (B) が
+従う。いくつかの詳細は省略する。
+\end{proof}
+
+\begin{remark}
+\label{stacks-properties-remark-local-source-warning}
+警告：Lemma \ref{stacks-properties-lemma-local-source} は注意して用いなければならない。例えば、
+$\mathcal{P}=$「平坦」、$\mathcal{Q}=$「空」、
+$\mathcal{R}=$「平坦かつ局所有限表示」に適用できる。しかし代数空間の射
+$f : X \to Y$ が与えられたとき、$f|_W$ が平坦となる最大の開部分空間
+$W \subset X$ は、$f$ が平坦である点の集合では{\it ない}！
+\end{remark}
+
+\begin{remark}
+\label{stacks-properties-remark-local-source-apply}
+Remark \ref{stacks-properties-remark-local-source-warning} の警告にもかかわらず、Lemma
+\ref{stacks-properties-lemma-local-source} を曖昧さなく用いられる場合がある。それらを列挙する。
+各場合に仮定 (1) と (2) の確認は省略し、(3) と (4) を含意する文献を示す。
+\begin{enumerate}
+\item
+\label{stacks-properties-item-rel-dim-leq-d}
+$\mathcal{Q} = $「局所有限型」、$\mathcal{R} = \emptyset$、
+$\mathcal{P} =$「相対次元 $\leq d$」。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension} および Lemmas
+\ref{spaces-morphisms-lemma-openness-bounded-dimension-fibres} および
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change} を参照せよ。
+\item
+\label{stacks-properties-item-loc-quasi-finite}
+$\mathcal{Q} =$「局所有限型」、$\mathcal{R} = \emptyset$、
+$\mathcal{P} =$「局所準有限」。これは前項の $d = 0$ の場合である。Morphisms
+of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-rel-dimension-0} を参照せよ。
+一方、性質 (3) と (4) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part} に明記されている。
+\item
+\label{stacks-properties-item-unramified}
+$\mathcal{Q} = $「局所有限型」、$\mathcal{R} = \emptyset$、
+$\mathcal{P} =$「不分岐」。これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-where-unramified} である。
+\item
+\label{stacks-properties-item-flat}
+$\mathcal{Q} =$「局所有限表示」、
+$\mathcal{R} =$「平坦かつ局所有限表示」、$\mathcal{P} =$「平坦」。More on
+Morphisms of Spaces, Theorem
+\ref{spaces-more-morphisms-theorem-openness-flatness} および Lemma
+\ref{spaces-more-morphisms-lemma-flat-locus-base-change} を参照せよ。ここでは、
+$f$ が $\mathcal{Q}$ をもつときに限ってこの開集合を考えるため、
+$W(\mathcal{P}, f)$ は常に射 $f$ が平坦である点の集合にちょうど等しいことに
+注意する（同所を参照）。
+\item
+\label{stacks-properties-item-etale}
+$\mathcal{Q} =$「局所有限表示」、
+$\mathcal{R} =$「平坦かつ局所有限表示」、$\mathcal{P}=$「エタール」。不分岐で
+平坦かつ局所有限表示な射はエタールなので、(\ref{stacks-properties-item-unramified}) と
+(\ref{stacks-properties-item-flat}) を組み合わせれば従う。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-unramified-flat-lfp-etale} を参照せよ。
+\item 必要に応じてここに追加する（More on Groupoids, Remark
+\ref{more-groupoids-remark-local-source-apply} のより長い一覧と比較せよ）。
+\end{enumerate}
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+\section{被約代数スタック}
+\label{stacks-properties-section-reduced}
+
+\noindent
+被約代数スタックは Section \ref{stacks-properties-section-types-properties} ですでに定義した。
+
+\begin{lemma}
+\label{stacks-properties-lemma-reduced-closed-substack}
+$\mathcal{X}$ を代数スタックとし、$T \subset |\mathcal{X}|$ を閉部分集合とする。
+次の性質をもつ閉部分スタック $\mathcal{Z} \subset \mathcal{X}$ が一意に存在する。
+(a) $|\mathcal{Z}| = T$ であり、(b) $\mathcal{Z}$ は被約である。
+\end{lemma}
+
+\begin{proof}
+$U$ を代数空間とし、$U \to \mathcal{X}$ を全射で滑らかな射とする。
+$R = U \times_\mathcal{X} U$ と置けば、表示 $[U/R] \to \mathcal{X}$ がある。
+Algebraic Stacks, Lemma \ref{algebraic-lemma-stack-presentation} を参照せよ。
+通常どおり二つの滑らかな射影を $s, t : R \to U$ と書く。Lemma
+\ref{stacks-properties-lemma-points-presentation} により、$T$ は
+$|s|^{-1}(T') = |t|^{-1}(T')$ を満たす閉部分集合 $T' \subset |U|$ に対応する。
+$Z \subset U$ を $T'$ 上の誘導被約代数空間構造とする。Properties of Spaces,
+Definition \ref{spaces-properties-definition-reduced-induced-space} を参照せよ。
+ファイバー積 $Z \times_{U, t} R$ と $R \times_{s, U} Z$ は $R$ の閉部分空間で
+ある（Spaces, Lemma \ref{spaces-lemma-base-change-immersions}）。射影
+$Z \times_{U, t} R \to Z$ と $R \times_{s, U} Z \to Z$ は Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-base-change-smooth} により滑らかである。
+$Z$ は被約なので、Remark \ref{stacks-properties-remark-list-properties-local-smooth-topology} により
+$Z \times_{U, t} R$ と $R \times_{s, U} Z$ は被約である。また
+$$
+|Z \times_{U, t} R| = |t|^{-1}(T') = |s|^{-1}(T') = R \times_{s, U} Z
+$$
+なので、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} の一意性から
+$Z \times_{U, t} R = R \times_{s, U} Z$ が従う。したがって $Z$ は $U$ の
+$R$-不変な閉部分空間である。Lemma \ref{stacks-properties-lemma-substacks-presentation} の対応に
+より、$Z = \mathcal{Z} \times_\mathcal{X} U$ を満たす閉部分スタック
+$\mathcal{Z} \subset \mathcal{X}$ を得る。このとき
+$[Z/R_Z] \to \mathcal{Z}$ は表示である（Lemma
+\ref{stacks-properties-lemma-immersion-into-presentation}）。さらに
+$|\mathcal{Z}| = |Z|/|R_Z| = |T'|/\sim$ は与えられた閉部分集合 $T$ である。
+一意性の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-reduced-stack-determined-by-points}
+$\mathcal{X}$ を代数スタックとする。$\mathcal{X}' \subset \mathcal{X}$ が
+閉部分スタックで、$\mathcal{X}$ が被約かつ
+$|\mathcal{X}'| = |\mathcal{X}|$ ならば、$\mathcal{X}' = \mathcal{X}$ である。
+\end{lemma}
+
+\begin{proof}
+$U$ がスキームである表示 $[U/R] \to \mathcal{X}$ を選ぶ。$\mathcal{X}$ は
+被約なので、被約代数スタックの定義により $U$ は被約である。Lemma
+\ref{stacks-properties-lemma-substacks-presentation} により、$\mathcal{X}'$ は $R$-不変な閉部分
+スキーム $Z \subset U$ に対応する。一方 $|Z| \subset |U|$ は
+$|\mathcal{X}'|$ の逆像であるから、$|Z| = |U|$ である。よって $Z$ は $U$ と
+同じ台点集合をもつ閉部分スキームである。Schemes, Lemma
+\ref{schemes-lemma-map-into-reduction} により、写像
+$\text{id}_U : U \to U$ は $Z \to U$ を経由する。したがって $Z = U$、すなわち
+$\mathcal{X}' = \mathcal{X}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-map-into-reduction}
+$\mathcal{X}$、$\mathcal{Y}$ を代数スタックとする。
+$\mathcal{Z} \subset \mathcal{X}$ を閉部分スタックとし、$\mathcal{Y}$ は被約と
+仮定する。射 $f : \mathcal{Y} \to \mathcal{X}$ が $\mathcal{Z}$ を経由する
+ことと $f(|\mathcal{Y}|) \subset |\mathcal{Z}|$ は同値である。
+\end{lemma}
+
+\begin{proof}
+$f(|\mathcal{Y}|) \subset |\mathcal{Z}|$ と仮定し、
+$\mathcal{Y} \times_\mathcal{X} \mathcal{Z} \to \mathcal{Y}$ を考える。
+$\mathcal{Y}'$ を $\mathcal{Y}$ の閉部分スタックとして、同値
+$\mathcal{Y} \times_\mathcal{X} \mathcal{Z} \to \mathcal{Y}'$ がある。Lemmas
+\ref{stacks-properties-lemma-base-change-immersion} および \ref{stacks-properties-lemma-substack-image} を参照せよ。
+Lemmas \ref{stacks-properties-lemma-points-cartesian}、
+\ref{stacks-properties-lemma-monomorphism-injective-points} および
+\ref{stacks-properties-lemma-immersion-monomorphism} を用いると
+$|\mathcal{Y}'| = |\mathcal{Y}|$ がわかる。したがって補題は Lemma
+\ref{stacks-properties-lemma-reduced-stack-determined-by-points} に帰着された。
+\end{proof}
+
+\begin{definition}
+\label{stacks-properties-definition-reduced-induced-stack}
+$\mathcal{X}$ を代数スタックとし、$Z \subset |\mathcal{X}|$ を閉部分集合とする。
+{\it $Z$ 上の代数スタック構造}とは、$|\mathcal{Z}|$ が $Z$ に等しい
+$\mathcal{X}$ の閉部分スタック $\mathcal{Z}$ によって与えられる構造をいう。
+$Z$ 上の{\it 誘導被約代数スタック構造}とは、Lemma
+\ref{stacks-properties-lemma-reduced-closed-substack} で構成したものをいう。
+{\it $\mathcal{X}$ の被約化 $\mathcal{X}_{red}$}とは、$|\mathcal{X}|$ 上の
+誘導被約代数スタック構造をいう。
+\end{definition}
+
+\noindent
+実際、これを用いて局所閉部分集合上の誘導被約代数スタック構造を定義できる。
+
+\begin{remark}
+\label{stacks-properties-remark-stack-structure-locally-closed-subset}
+$X$ を代数スタックとする。$T \subset |\mathcal{X}|$ を局所閉部分集合とする。
+$\partial T$ を位相空間 $|\mathcal{X}|$ における $T$ の境界とする。式では
+$$
+\partial T = \overline{T} \setminus T.
+$$
+$|\mathcal{U}| = |\mathcal{X}| \setminus \partial T$ を満たす $X$ の開部分スタック
+$\mathcal{U} \subset \mathcal{X}$ を取る。Lemma \ref{stacks-properties-lemma-open-substacks} を
+参照せよ。誘導被約閉部分空間構造を取ることで得られる、
+$|\mathcal{Z}| = T$ を満たす $\mathcal{U}$ の被約閉部分スタックを
+$\mathcal{Z}$ とする。Definition \ref{stacks-properties-definition-reduced-induced-stack} を
+参照せよ。構成により $\mathcal{Z} \to \mathcal{U}$ は代数スタックの閉埋入、
+$\mathcal{U} \to \mathcal{X}$ は開埋入である。したがって Lemma
+\ref{stacks-properties-lemma-composition-immersion} により $\mathcal{Z} \to \mathcal{X}$ は
+代数スタックの埋入である。$\mathcal{Z}$ は被約代数スタックであり、$|X|$ の
+部分集合として $|\mathcal{Z}| = T$ であることに注意する。$\mathcal{Z}$ を
+$T$ 上の{\it 誘導被約部分スタック構造}ということもある。
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{剰余ガーベ}
+\label{stacks-properties-section-residual-gerbe}
+
+\noindent
+Stacks project では、点 $x \in |\mathcal{X}|$ における代数スタック
+$\mathcal{X}$ の{\it 剰余ガーベ}を、代数スタックのモノ射
+$m_x : \mathcal{Z}_x \to \mathcal{X}$ として定義したい。ここで
+$\mathcal{Z}_x$ は一点だけをもち、その点が $m_x$ によって $x$ に写る被約
+代数スタックである。しかし、この概念には多くの問題があることがわかる。
+一般には存在も一意性も明らかではない。代数スタック $\mathcal{Z}_x$ に少し
+強い条件を課すことで、一意性の問題を解決する。一点だけをもつ被約代数
+スタックに関するいくつかの簡単な補題を通して、これをより詳しく論じる。
+
+\begin{lemma}
+\label{stacks-properties-lemma-flat-cover-by-field}
+$\mathcal{Z}$ を代数スタック、$k$ を体とし、
+$\Spec(k) \to \mathcal{Z}$ は全射かつ平坦とする。このとき、$k'$ が体である
+任意の射 $\Spec(k') \to \mathcal{Z}$ は全射かつ平坦である。
+\end{lemma}
+
+\begin{proof}
+ファイバー積正方形
+$$
+\xymatrix{
+T \ar[d] \ar[r] & \Spec(k) \ar[d] \\
+\Spec(k') \ar[r] & \mathcal{Z}
+}
+$$
+を考える。$T \to \Spec(k')$ は平坦かつ全射なので $T$ は空でない。一方、
+$k$ は体だから $T \to \Spec(k)$ は平坦である。したがって
+$T \to \mathcal{Z}$ は平坦かつ全射である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence}（Section
+\ref{stacks-properties-section-properties-morphisms} の議論を介する）から
+$\Spec(k') \to \mathcal{Z}$ は平坦である。また、仮定により
+$|\mathcal{Z}|$ は一点集合なので、全射であることは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-unique-point}
+$\mathcal{Z}$ を代数スタックとする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{Z}$ は被約で、$|\mathcal{Z}|$ は一点集合である。
+\item $k$ を体として全射で平坦な射 $\Spec(k) \to \mathcal{Z}$ が存在する。
+\item $k$ を体として局所有限型、全射かつ平坦な射
+$\Spec(k) \to \mathcal{Z}$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。$W$ をスキームとし、$W \to \mathcal{Z}$ を全射で滑らかな
+射とする。このとき $W$ は被約スキームである。$\eta \in W$ を $W$ の既約成分
+の生成点とする。$W$ は被約なので
+$\mathcal{O}_{W, \eta} = \kappa(\eta)$ である。したがって標準射
+$\eta = \Spec(\kappa(\eta)) \to W$ は平坦であり、合成
+$\eta \to \mathcal{Z}$ も平坦である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-flat} を参照）。$|\mathcal{Z}|$ は
+一点集合なので全射でもある。すなわち (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。$W$ をスキームとし、$W \to \mathcal{Z}$ を全射で滑らかな
+射とする。体 $k$ と全射で平坦な射 $\Spec(k) \to \mathcal{Z}$ を選ぶ。
+このとき $W \times_\mathcal{Z} \Spec(k)$ は $k$ 上滑らかな代数空間なので
+正則であり（Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-smooth-regular} を参照）、特に被約である。
+$W \times_\mathcal{Z} \Spec(k) \to W$ は全射かつ平坦なので、$W$ は被約で
+ある（Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descend-reduced}）。すなわち (1) が成り立つ。
+
+\medskip\noindent
+(3) から (2) が従うことは明らかである。最後に (2) を仮定する。空でない
+アフィンスキーム $W$ と滑らかな射 $W \to \mathcal{Z}$ を選ぶ。閉点
+$w \in W$ を選び、$k = \kappa(w)$ と置く。合成
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow \mathcal{Z}
+$$
+は Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type} および
+\ref{spaces-morphisms-lemma-smooth-locally-finite-type} により局所有限型である。
+Lemma \ref{stacks-properties-lemma-flat-cover-by-field} により平坦かつ全射でもある。
+したがって (3) が成り立つ。
+\end{proof}
+
+\noindent
+次の補題は、前の補題より少し良い一点代数スタックの類を取り出す。
+
+\begin{lemma}
+\label{stacks-properties-lemma-unique-point-better}
+$\mathcal{Z}$ を代数スタックとする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{Z}$ は被約かつ局所ネーターで、$|\mathcal{Z}|$ は一点集合である。
+\item $k$ を体として局所有限表示、全射かつ平坦な射
+$\Spec(k) \to \mathcal{Z}$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) が成り立つと仮定する。Lemma \ref{stacks-properties-lemma-unique-point} により
+$\mathcal{Z}$ は被約で、$|\mathcal{Z}|$ は一点集合である。$W$ をスキームとし、
+$W \to \mathcal{Z}$ を全射で滑らかな射とする。体 $k$ と局所有限表示、全射
+かつ平坦な射 $\Spec(k) \to \mathcal{Z}$ を選ぶ。このとき
+$W \times_\mathcal{Z} \Spec(k)$ は $k$ 上滑らかな代数空間なので局所ネーター
+である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}）。
+$W \times_\mathcal{Z} \Spec(k) \to W$ は平坦、全射かつ局所有限表示なので、
+$\{W \times_\mathcal{Z} \Spec(k) \to W\}$ は fppf 被覆である。したがって
+$W$ は局所ネーターである（Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descend-locally-Noetherian}）。すなわち (1) が成り立つ。
+
+\medskip\noindent
+(1) を仮定する。空でないアフィンスキーム $W$ と滑らかな射
+$W \to \mathcal{Z}$ を選ぶ。閉点 $w \in W$ を選び、$k = \kappa(w)$ と置く。
+$W$ は局所ネーターなので、射 $w : \Spec(k) \to W$ は有限表示である。
+Morphisms, Lemma \ref{morphisms-lemma-closed-immersion-finite-presentation} を
+参照せよ。したがって合成
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow \mathcal{Z}
+$$
+は Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-presentation} および
+\ref{spaces-morphisms-lemma-smooth-locally-finite-presentation} により局所有限表示
+である。Lemma \ref{stacks-properties-lemma-flat-cover-by-field} により平坦かつ全射でもある。
+したがって (2) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-monomorphism-into-point}
+$\mathcal{Z}' \to \mathcal{Z}$ を代数スタックのモノ射とする。体 $k$ と
+局所有限表示、全射かつ平坦な射 $\Spec(k) \to \mathcal{Z}$ が存在すると
+仮定する。このとき $\mathcal{Z}'$ は空であるか、または
+$\mathcal{Z}' \to \mathcal{Z}$ は同値である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Z}'$ は空でないと仮定してよい。この場合、ファイバー積
+$T = \mathcal{Z}' \times_\mathcal{Z} \Spec(k)$ は空でない。Lemma
+\ref{stacks-properties-lemma-points-cartesian} を参照せよ。$T$ は代数空間で、射影
+$T \to \Spec(k)$ はモノ射である。したがって $T = \Spec(k)$ である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-toward-field} を参照せよ。これより
+$\Spec(k) \to \mathcal{Z}$ は $\mathcal{Z}'$ を経由する。射
+$z : \Spec(k) \to \mathcal{Z}$ が $\Spec(k)$ 上の対象 $\xi$ によって与えられる
+とする。今見たことから、$\xi$ は $\Spec(k)$ 上の $\mathcal{Z}'$ の対象
+$\xi'$ と同型である。$z$ は全射、平坦かつ局所有限表示なので、任意のスキーム
+上の $\mathcal{Z}$ の任意の対象は fppf 局所的に $\xi$ の引き戻しと同型であり、
+したがって $\xi'$ の引き戻しとも同型である。グルーポイドのスタックにおける
+対象の降下により、$\mathcal{Z}' \to \mathcal{Z}$ は本質的全射である
+（Lemma \ref{stacks-properties-lemma-monomorphism} により充満忠実でもある）。よって証明された。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-improve-unique-point}
+$\mathcal{Z}$ を代数スタックとし、$\mathcal{Z}$ は Lemma
+\ref{stacks-properties-lemma-unique-point} の同値な条件を満たすと仮定する。このとき、
+代数スタック $\mathcal{Z}'$ が Lemma \ref{stacks-properties-lemma-unique-point-better} の同値な
+条件を満たすような厳密充満部分圏 $\mathcal{Z}' \subset \mathcal{Z}$ が一意に
+存在する。包含射 $\mathcal{Z}' \to \mathcal{Z}$ は代数スタックのモノ射である。
+\end{lemma}
+
+\begin{proof}
+最後の主張は最初の主張と Lemma \ref{stacks-properties-lemma-monomorphism} から直ちに従う。
+体 $k$ と全射、平坦かつ局所有限型な射
+$\Spec(k) \to \mathcal{Z}$ を選ぶ。$U = \Spec(k)$ および
+$R = U \times_\mathcal{Z} U$ と置く。射影 $s, t : R \to U$ は局所有限型で
+ある。$U$ は体のスペクトルなので、$s, t$ は平坦かつ局所有限表示である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation}）。
+Criteria for Representability, Theorem
+\ref{criteria-theorem-flat-groupoid-gives-algebraic-stack} により
+$\mathcal{Z}' = [U/R]$ は代数スタックである。
+Algebraic Stacks, Lemma \ref{algebraic-lemma-map-space-into-stack} により
+標準射
+$$
+f : \mathcal{Z}' \longrightarrow \mathcal{Z}
+$$
+を得て、これは充満忠実である。したがってこの射は代数空間によって表現可能
+である。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces} を参照せよ。
+またモノ射である。Lemma \ref{stacks-properties-lemma-monomorphism} を参照せよ。Criteria for
+Representability, Lemma \ref{criteria-lemma-flat-quotient-flat-presentation}
+により、射 $U \to \mathcal{Z}'$ は全射、平坦かつ局所有限表示である。
+したがって $\mathcal{Z}'$ は Lemma \ref{stacks-properties-lemma-unique-point-better} の同値な条件を
+満たす代数スタックである。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-equivalent} により、$\mathcal{Z}'$ を $\mathcal{Z}$ における
+その本質像で置き換えてよい。よって
+$\mathcal{Z}' \subset \mathcal{Z}$ の一意性を除き、補題の主張をすべて証明した。
+$\mathcal{Z}'' \subset \mathcal{Z}$ を二つ目のそのような代数スタックとする。
+このとき射影
+$$
+\mathcal{Z}'
+\longleftarrow
+\mathcal{Z}' \times_\mathcal{Z} \mathcal{Z}''
+\longrightarrow
+\mathcal{Z}''
+$$
+はモノ射である。Lemma \ref{stacks-properties-lemma-points-cartesian} により中央の代数スタックは
+空でない。したがって Lemma \ref{stacks-properties-lemma-monomorphism-into-point} により二つの
+射影は同型であり、証明された。
+\end{proof}
+
+\begin{example}
+\label{stacks-properties-example-distinct}
+Lemma \ref{stacks-properties-lemma-improve-unique-point} で構成した射が同型でない例を示す。
+この例は、Definition \ref{stacks-properties-definition-residual-gerbe} で剰余ガーベに局所ネーター
+性を課す必要があることを示す。実際、この例は代数空間ですらある！
+$\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$ を副有限位相をもつ
+$\mathbf{Q}$ の絶対 Galois 群とする。
+$$
+U =
+\Spec(\overline{\mathbf{Q}})
+\times_{\Spec(\mathbf{Q})}
+\Spec(\overline{\mathbf{Q}}) =
+\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q}) \times
+\Spec(\overline{\mathbf{Q}})
+$$
+とする（最後の等号の意味の厳密な説明は省略する）。$G$ を、離散位相をもつ
+絶対 Galois 群 $\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$ を
+$\Spec(\overline{\mathbf{Q}})$ 上の定数群スキームとみなしたものとする。
+Groupoids, Example \ref{groupoids-example-constant-group} を参照せよ。このとき
+$G$ は $U$ に自由かつ推移的に作用する。$X = U/G$ と置く。Spaces,
+Definition \ref{spaces-definition-quotient} を参照せよ。このとき $X$ は
+ちょうど一点をもつ非ネーター被約代数空間である。さらに $X$ は（局所）有限型
+な点をもつ：
+$$
+x :
+\Spec(\overline{\mathbf{Q}}) \longrightarrow
+U \longrightarrow X
+$$
+実際、$U$ のすべての点は閉点である！ $X$ は
+$\overline{\mathbf{Q}}$ 上の代数空間なので、$x$ はモノ射である。したがって
+$x$ は Lemma \ref{stacks-properties-lemma-improve-unique-point} で構成した射だが、$x$ は同型ではない。
+実際、$\Spec(\overline{\mathbf{Q}}) \to X$ は $x$ における $X$ の剰余ガーベ
+である。
+\end{example}
+
+\noindent
+後に、代数スタック $\mathcal{X}$ に穏やかな仮定を課せば、すべての点
+$x \in |\mathcal{X}|$ に対して次の補題の同値な条件が満たされることがわかる
+（Morphisms of Stacks, Section
+\ref{stacks-morphisms-section-existence-residual-gerbes} を参照）。
+
+\begin{lemma}
+\label{stacks-properties-lemma-residual-gerbe}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ を点とする。
+次は同値である。
+\begin{enumerate}
+\item 代数スタック $\mathcal{Z}$ とモノ射
+$\mathcal{Z} \to \mathcal{X}$ が存在し、$|\mathcal{Z}|$ は一点集合で、
+$|\mathcal{X}|$ における $|\mathcal{Z}|$ の像は $x$ である。
+\item 被約代数スタック $\mathcal{Z}$ とモノ射
+$\mathcal{Z} \to \mathcal{X}$ が存在し、$|\mathcal{Z}|$ は一点集合で、
+$|\mathcal{X}|$ における $|\mathcal{Z}|$ の像は $x$ である。
+\item 代数スタック $\mathcal{Z}$、モノ射
+$f : \mathcal{Z} \to \mathcal{X}$ および全射で平坦な射
+$z : \Spec(k) \to \mathcal{Z}$ が存在し、$k$ は体で $x = f(z)$ である。
+\end{enumerate}
+さらに、これらの条件が成り立つならば、$\mathcal{Z}_x$ が被約で局所ネーターな
+代数スタックで、$|\mathcal{Z}_x|$ が一点集合かつ写像
+$|\mathcal{Z}_x| \to |\mathcal{X}|$ によって $x$ に写るような厳密充満部分圏
+$\mathcal{Z}_x \subset \mathcal{X}$ が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Z} \to \mathcal{X}$ が (1) のとおりならば、
+$\mathcal{Z}_{red} \to \mathcal{X}$ は (2) のとおりである（代数スタックの
+被約化の概念については Section \ref{stacks-properties-section-reduced} を参照）。したがって
+(1) から (2) が従う。(2) から (1) は直ちに従い、(2) と (3) の同値性は
+Lemma \ref{stacks-properties-lemma-unique-point} から直ちに従う。
+
+\medskip\noindent
+ここまでで (1) -- (3) の同値性を示した。(2) のとおりのモノ射
+$f : \mathcal{Z} \to \mathcal{X}$ を選ぶ。Lemma \ref{stacks-properties-lemma-monomorphism} により
+$f$ は充満忠実である。この関手 $f$ の本質像を
+$\mathcal{Z}' \subset \mathcal{X}$ と書く。このとき
+$f : \mathcal{Z} \to \mathcal{Z}'$ は同値なので、$\mathcal{Z}'$ は代数スタック
+である。Algebraic Stacks, Lemma \ref{algebraic-lemma-equivalent} を参照せよ。
+Lemma \ref{stacks-properties-lemma-improve-unique-point} を適用し、補題の主張のとおりの厳密充満
+部分圏 $\mathcal{Z}_x \subset \mathcal{Z}'$ を得る。これで一意性を除くすべての
+主張が証明された。
+
+\medskip\noindent
+一意性を証明するため、$\mathcal{Z}_x \subset \mathcal{X}$ と
+$\mathcal{Z}'_x \subset \mathcal{X}$ を補題の主張のとおりの二つの厳密充満
+部分圏とする。このとき射影
+$$
+\mathcal{Z}'_x
+\longleftarrow
+\mathcal{Z}'_x \times_\mathcal{X} \mathcal{Z}_x
+\longrightarrow
+\mathcal{Z}_x
+$$
+はモノ射である。Lemma \ref{stacks-properties-lemma-points-cartesian} により中央の代数スタックは
+空でない。したがって Lemma \ref{stacks-properties-lemma-monomorphism-into-point} により二つの
+射影は同型であり、証明された。
+\end{proof}
+
+\noindent
+以上を説明したので、次の定義を置くことができる。
+
+\begin{definition}
+\label{stacks-properties-definition-residual-gerbe}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ とする。
+\begin{enumerate}
+\item Lemma \ref{stacks-properties-lemma-residual-gerbe} の同値な条件 (1)、(2)、(3) が成り立つ
+とき、{\it $x$ における $\mathcal{X}$ の剰余ガーベが存在する}という。
+\item $x$ における $\mathcal{X}$ の剰余ガーベが存在するとき、
+{\it $x$ における $\mathcal{X}$ の剰余ガーベ}\footnote{これは精神的には
+\cite{LM-B} と衝突するが、実際には衝突しない。すなわち同書 Chapter 11 では、
+任意の準分離代数スタック上の任意の点に、剰余ガーベと呼ぶガーベ（必ずしも
+代数的ではない）を対応させる。Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-every-point-residual-gerbe} で、準分離代数スタックの
+すべての点はここでの意味の剰余ガーベをもち、それが同書のものと同値である
+ことを見る。この話題の詳細は \cite[Appendix B]{rydh_etale_devissage} を参照。}
+とは、Lemma \ref{stacks-properties-lemma-residual-gerbe} で構成した厳密充満部分圏
+$\mathcal{Z}_x \subset \mathcal{X}$ をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+特に、$\mathcal{Z}_x$ が存在するならば、それは局所ネーターな被約代数スタック
+であり、ある体と全射、平坦かつ局所有限表示な射
+$$
+\Spec(k) \longrightarrow \mathcal{Z}_x.
+$$
+が存在する。Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-noetherian-singleton-stack-gerbe} で
+$\mathcal{Z}_x$ がガーベであることを見る。剰余ガーベの存在は Morphisms of
+Stacks, Section \ref{stacks-morphisms-section-existence-residual-gerbes} で論じる。
+
+\begin{example}
+\label{stacks-properties-example-residual-gerbe}
+$X$ をスキームとし、$x \in X$ を点とする。このときモノ射 $x \to X$ は
+$x$ における $X$ の剰余ガーベである。ここで通常どおり、$x$ をスキーム
+$x = \Spec(\kappa(x))$ と同一視する。$X$ が代数空間で $x \in |X|$ ならば、
+$x$ における剰余ガーベ（剰余空間と呼ばれる）は常に存在する。Decent Spaces,
+Section \ref{decent-spaces-section-singleton} を参照せよ。
+\end{example}
+
+\noindent
+剰余ガーベは、存在すれば次の補題により正則な代数スタックである。
+
+\begin{lemma}
+\label{stacks-properties-lemma-residual-gerbe-regular}
+$|\mathcal{Z}|$ が一点集合である被約かつ局所ネーターな代数スタック
+$\mathcal{Z}$ は正則である。
+\end{lemma}
+
+\begin{proof}
+$W$ をスキームとし、$W \to \mathcal{Z}$ を全射で滑らかな射とする。$k$ を体
+とし、$\Spec(k) \to \mathcal{Z}$ を全射、平坦かつ局所有限表示とする
+（Lemma \ref{stacks-properties-lemma-unique-point-better} を参照）。代数空間
+$T = W \times_\mathcal{Z} \Spec(k)$ は $k$ 上滑らかなので、特に正則である。
+Spaces over Fields, Lemma \ref{spaces-over-fields-lemma-smooth-regular} を
+参照せよ。$T \to W$ は局所有限表示、平坦かつ全射なので、$W$ は正則である。
+Descent on Spaces, Lemma \ref{spaces-descent-lemma-descend-regular} を参照せよ。
+定義により、これは $\mathcal{Z}$ が正則であることを意味する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-residual-gerbe-points}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ とする。
+$\mathcal{X}$ の剰余ガーベ $\mathcal{Z}_x$ が存在すると仮定する。$K$ を体とし、
+$f : \Spec(K) \to \mathcal{X}$ を $x$ の同値類に属する射とする。このとき
+$f$ は包含射 $\mathcal{Z}_x \to \mathcal{X}$ を経由する。
+\end{lemma}
+
+\begin{proof}
+体 $k$ と全射、平坦かつ局所有限表示な射
+$\Spec(k) \to \mathcal{Z}_x$ を選ぶ。
+$T = \Spec(K) \times_\mathcal{X} \mathcal{Z}_x$ と置く。Lemma
+\ref{stacks-properties-lemma-points-cartesian} により $T$ は空でない。
+$\mathcal{Z}_x \to \mathcal{X}$ はモノ射なので $T \to \Spec(K)$ はモノ射で
+ある。したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-toward-field} により
+$T = \Spec(K)$ であり、補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-residual-gerbe-unique}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ とする。
+$\mathcal{Z}$ を Lemma \ref{stacks-properties-lemma-unique-point-better} の同値な条件を満たす
+代数スタックとし、$\mathcal{Z} \to \mathcal{X}$ を、
+$|\mathcal{Z}| \to |\mathcal{X}|$ の像が $x$ であるようなモノ射とする。
+このとき $x$ における $\mathcal{X}$ の剰余ガーベ $\mathcal{Z}_x$ は存在し、
+$\mathcal{Z} \to \mathcal{X}$ は
+$\mathcal{Z} \to \mathcal{Z}_x \to \mathcal{X}$ と分解する。ここで最初の射は
+同値である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Z}_x \subset \mathcal{X}$ を、関手 $\mathcal{Z} \to \mathcal{X}$ の
+本質像に対応する充満部分圏とする。このとき
+$\mathcal{Z} \to \mathcal{Z}_x$ は同値なので、$\mathcal{Z}_x$ は代数スタック
+である。Algebraic Stacks, Lemma \ref{algebraic-lemma-equivalent} を参照せよ。
+この同値により $\mathcal{Z}_x$ は $\mathcal{Z}$ のすべての性質を受け継ぐので、
+Lemma \ref{stacks-properties-lemma-residual-gerbe} の一意性から $\mathcal{Z}_x$ は $x$ における
+$\mathcal{X}$ の剰余ガーベであることが明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-residual-gerbe-functorial}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする。
+$x \in |\mathcal{X}|$ の像を $y \in |\mathcal{Y}|$ とする。$x$ と $y$ の
+剰余ガーベ $\mathcal{Z}_x \subset \mathcal{X}$ および
+$\mathcal{Z}_y \subset \mathcal{Y}$ が存在するならば、$f$ は可換図式
+$$
+\xymatrix{
+\mathcal{X} \ar[d]_f & \mathcal{Z}_x \ar[l] \ar[d] \\
+\mathcal{Y} & \mathcal{Z}_y \ar[l]
+}
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+体 $k$ と全射、平坦かつ局所有限表示な射
+$\Spec(k) \to \mathcal{Z}_x$ を選ぶ。Lemma \ref{stacks-properties-lemma-residual-gerbe-points}
+により、射 $\Spec(k) \to \mathcal{Y}$ は $\mathcal{Z}_y$ を経由する。
+したがって $\mathcal{Z}_x \times_\mathcal{Y} \mathcal{Z}_y$ は
+$\mathcal{Z}_x$ の空でない部分スタックであり、Lemma
+\ref{stacks-properties-lemma-monomorphism-into-point} により $\mathcal{Z}_x$ に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-properties-lemma-residual-gerbe-isomorphic}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とし、
+$x \in |\mathcal{X}|$ の像を $y \in |\mathcal{Y}|$ とする。$x$ と $y$ の
+剰余ガーベ $\mathcal{Z}_x \subset \mathcal{X}$ および
+$\mathcal{Z}_y \subset \mathcal{Y}$ が存在すると仮定する。また $x$ の同値類に
+属する射 $\Spec(k) \to \mathcal{X}$ が存在し、
+$$
+\Spec(k) \times_\mathcal{X} \Spec(k)
+\longrightarrow
+\Spec(k) \times_\mathcal{Y} \Spec(k)
+$$
+が同型であると仮定する。このとき $\mathcal{Z}_x \to \mathcal{Z}_y$ は同型で
+ある。
+\end{lemma}
+
+\begin{proof}
+$k'/k$ を体の拡大とする。このとき
+$$
+\Spec(k') \times_\mathcal{X} \Spec(k')
+\longrightarrow
+\Spec(k') \times_\mathcal{Y} \Spec(k')
+$$
+は補題の射を忠実平坦な射
+$\Spec(k' \otimes k') \to \Spec(k \otimes k)$ で基底変換したものである。
+したがって補題に記した性質は、$x$ の同値類に属する射
+$\Spec(k) \to \mathcal{X}$ の選択に依存しない。よって
+$\Spec(k) \to \mathcal{Z}_x$ は全射、平坦かつ局所有限表示であると仮定して
+よい。この場合
+$$
+\mathcal{Z}_x = [\Spec(k)/R]
+$$
+であり、$R = \Spec(k) \times_\mathcal{X} \Spec(k)$ である。Lemma
+\ref{stacks-properties-lemma-improve-unique-point} の証明を参照せよ。また
+$R = \Spec(k) \times_\mathcal{Y} \Spec(k)$ でもあるので、Lemma
+\ref{stacks-properties-lemma-residual-gerbe-functorial} の射
+$\mathcal{Z}_x \to \mathcal{Z}_y$ は Algebraic Stacks, Lemma
+\ref{algebraic-lemma-map-space-into-stack} により充満忠実である。例えば Lemma
+\ref{stacks-properties-lemma-residual-gerbe-unique} から結論を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{スタックの次元}
+\label{stacks-properties-section-dimension}
+
+\noindent
+点における代数空間の次元という概念（Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-at-point}）を用いて、点 $x$ における
+代数スタック $\mathcal{X}$ の次元を定義できる。次の補題では、
+$\mathcal{X}$ が準コンパクトでないため、または Examples, Section
+\ref{examples-section-Noetherian-infinite-dimension} に述べた現象に遭遇するため、
+値が $\infty$ となることがある。
+
+\begin{lemma}
+\label{stacks-properties-lemma-dimension-at-point-well-defined}
+$\mathcal{X}$ をスキーム $S$ 上の局所ネーター代数スタックとし、
+$x \in |\mathcal{X}|$ を $\mathcal{X}$ の点とする。$U$ がスキームである表示
+$[U/R] \to \mathcal{X}$（Algebraic Stacks, Definition
+\ref{algebraic-definition-presentation}）を取り、$u \in U$ を $x$ に写る点と
+する。$e : U \to R$ を「恒等」写像、$s : R \to U$ を「始点」写像とする。
+後者は代数空間の滑らかな射である。$R_u$ を $u$ 上の $s : R \to U$ の
+ファイバーとする。元
+$$
+\dim_x(\mathcal{X}) = \dim_u(U) - \dim_{e(u)}(R_u) \in \mathbf{Z} \cup \infty
+$$
+は表示および $x$ 上の点 $u$ の選択に依存しない。
+\end{lemma}
+
+\begin{proof}
+$R \to U$ は滑らかなので、スキーム $R_u$ は $\kappa(u)$ 上滑らかであり、
+したがって有限次元である。一方、スキーム $U$ は局所ネーターだが、これは
+$\dim_u(U)$ が有限であることを保証しない。よって差は
+$\mathbf{Z} \cup \{\infty\}$ の元である。
+
+\medskip\noindent
+スキーム $U'$ をもつ二つ目の表示 $[U'/R'] \to \mathcal{X}$ と、
+$u' \in U'$ を取り、この $u'$ は $x$ に写るものとする。代数空間
+$P = U \times_\mathcal{X} U'$ を考える。
+Lemma \ref{stacks-properties-lemma-points-cartesian} により、$u$ と $u'$ に写る
+$p \in |P|$ が存在する。$P \to U$ と $P \to U'$ は滑らかなので、
+$\dim_p(P) = \dim_u(U) + \dim_p(P_u)$ および
+$\dim_p(P) = \dim_{u'}(U') + \dim_p(P_{u'})$
+である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smoothness-dimension-spaces} を参照せよ。ここで
+$$
+R'_{u'} = \Spec(\kappa(u')) \times_\mathcal{X} U'
+\quad\text{かつ}\quad
+P_u = \Spec(\kappa(u)) \times_\mathcal{X} U'
+$$
+$p \in |P|$ を射 $\Spec(\Omega) \to P$ で表す。$p$ は $u$ と $u'$ の両方に
+写るので、合成 $\Spec(\Omega) \to \Spec(\kappa(u')) \to \mathcal{X}$ と
+$\Spec(\Omega) \to \Spec(\kappa(u)) \to \mathcal{X}$ の間の $2$-射を誘導し、
+これはさらに同型
+$$
+\Spec(\Omega) \times_{\Spec(\kappa(u'))} R'_{u'}
+\cong
+\Spec(\Omega) \times_{\Spec(\kappa(u))} P_u
+$$
+を、$\Omega$-有理点 $(1, e'(u'))$ を $(1, p)$ に写す
+$\Spec(\Omega)$ 上の代数空間の同型として定める（いくつかの詳細は省略する）。
+したがって
+$$
+\dim_{e'(u')}(R'_{u'}) = \dim_p(P_u)
+$$
+が Morphisms of Spaces の補題
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change} により成り立つ。
+対称性により $\dim_{e(u)}(R_u) = \dim_p(P_{u'})$ でもある。すべてを合わせると、
+選択からの独立性を得る。
+\end{proof}
+
+\noindent
+上の補題を用いて次の定義を置くことができる。
+
+\begin{definition}
+\label{stacks-properties-definition-dimension-at-point}
+$\mathcal{X}$ をスキーム $S$ 上の局所ネーター代数スタックとし、
+$x \in |\mathcal{X}|$ を $\mathcal{X}$ の点とする。$U$ がスキームである表示
+$[U/R] \to \mathcal{X}$（Algebraic Stacks, Definition
+\ref{algebraic-definition-presentation}）を取り、$u \in U$ を $x$ に写る点と
+する。{\it $x$ における $\mathcal{X}$ の次元}を、
+$$
+\dim_x(\mathcal{X}) = \dim_u(U)-\dim_{e(u)}(R_u).
+$$
+を満たす元 $\dim_x(\mathcal{X}) \in \mathbf{Z} \cup \infty$ と定義する。
+記法は Lemma \ref{stacks-properties-lemma-dimension-at-point-well-defined} のとおりである。
+\end{definition}
+
+\noindent
+$\mathcal{X}$ がスキームの場合（Topology, Definition
+\ref{topology-definition-Krull}）、またはより一般に $\mathcal{X}$ が局所
+ネーター代数空間の場合（Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-at-point}）、点におけるスタックの
+次元は通常の概念と一致する。
+
+\begin{definition}
+\label{stacks-properties-definition-dimension}
+$S$ をスキームとし、$\mathcal{X}$ を $S$ 上の局所ネーター代数スタックとする。
+$\mathcal{X}$ の{\it 次元} $\dim(\mathcal{X})$ を
+$$
+\dim(\mathcal{X}) = \sup\nolimits_{x \in |\mathcal{X}|} \dim_x(\mathcal{X})
+$$
+と定義する。
+\end{definition}
+
+\noindent
+$\mathcal{X}$ がスキームの場合（Properties, Lemma
+\ref{properties-lemma-dimension}）または代数空間の場合（Properties of Spaces,
+Definition \ref{spaces-properties-definition-dimension}）、この次元の定義は
+通常の概念と一致する。
+
+\begin{remark}
+\label{stacks-properties-remark-dimension-empty-stack}
+$\mathcal{X}$ が体上有限型な空でないスタックならば、$\dim(\mathcal{X})$ は
+整数である。任意の局所ネーター代数スタック $\mathcal{X}$ に対し、
+$\dim(\mathcal{X})$ は $Z\cup \{\pm \infty\}$ に属し、
+$\dim(\mathcal{X}) = -\infty$ であることと $\mathcal{X}$ が空であることは
+同値である。
+\end{remark}
+
+\begin{example}
+\label{stacks-properties-example-dimension-quotient-stack}
+$X$ を体 $k$ 上有限型なスキームとし、$G$ を $X$ に作用する $k$ 上有限型な
+群スキームとする。このとき商スタック $[X/G]$ の次元は
+$\dim(X)-\dim(G)$ に等しい。特に分類スタック $BG=[\Spec(k)/G]$ の次元は
+$-\dim(G)$ である。したがって、スキームや代数空間の場合とは対照的に、
+代数スタックの次元は負の整数となりうる。
+\end{example}
+
+
+
+
+
+
+\section{局所既約性}
+\label{stacks-properties-section-irreducible-local-ring}
+
+\noindent
+点におけるスキームの幾何的枝数は Properties, Section
+\ref{properties-section-unibranch} で、点における代数空間の幾何的枝数は
+Properties of Spaces, Section
+\ref{spaces-properties-section-irreducible-local-ring} で定義した。
+$n \in \mathbf{N}$ とする。局所環 $A$ に対し
+$$
+P_n(A) = \text{その幾何的枝数は所与の自然数である}
+$$
+と置く。滑らかな環準同型 $A \to B$ と、$A$ の素イデアル $\mathfrak p$ の
+上にある $B$ の素イデアル $\mathfrak q$ に対して
+$$
+P_n(A_\mathfrak p) \Leftrightarrow P_n(B_\mathfrak q)
+$$
+が More on Algebra, Lemma
+\ref{more-algebra-lemma-invariance-number-branches-smooth} により成り立つ。
+Properties of Spaces, Remark
+\ref{spaces-properties-remark-list-properties-local-ring-local-etale-topology}
+と同様に、$P_n$ を用い、
+$\mathcal{P}_n(U, u) = P_n(\mathcal{O}_{U, u})$ と置くことで、スキームの芽
+$(U, u)$ のエタール位相で局所的な性質 $\mathcal{P}_n$ を定義できる。点
+$x$ における代数空間 $X$ の対応する性質 $\mathcal{P}_n$（Properties of
+Spaces, Definition \ref{spaces-properties-definition-property-at-point} を参照）は、
+ちょうど「$x$ における $X$ の幾何的枝数は $n$ である」という性質である。
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-number-of-geometric-branches} を参照せよ。
+さらに性質 $\mathcal{P}_n$ は滑らか位相で局所的である。Descent, Definition
+\ref{descent-definition-local-at-point} を参照せよ。これは上に表示した同値、
+または More on Morphisms, Lemma
+\ref{more-morphisms-lemma-number-of-branches-and-smooth} のいずれからも従う。
+したがって Definition \ref{stacks-properties-definition-property-at-point} が適用でき、点における
+代数スタックについての概念を得る。
+
+\begin{definition}
+\label{stacks-properties-definition-number-of-geometric-branches}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ とする。
+\begin{enumerate}
+\item 上で定義した $\mathcal{P}_n$ に対し Lemma
+\ref{stacks-properties-lemma-local-source-target-at-point} の同値な条件が成り立つならば、
+{\it $x$ における $\mathcal{X}$ の幾何的枝数}は $n \in \mathbf{N}$ であり、
+そうでなければ $\infty$ である。
+\item $x$ における $\mathcal{X}$ の幾何的枝数が $1$ ならば、
+$\mathcal{X}$ は{\it $x$ において幾何的単枝}であるという。
+\end{enumerate}
+\end{definition}
+
+
+
+
+
+
+\section{有限性条件と点}
+\label{stacks-properties-section-points-conditions}
+
+\noindent
+この節は、代数スタックの点に対する Decent Spaces, Section
+\ref{decent-spaces-section-points-monomorphisms} の類似である。
+
+\begin{lemma}
+\label{stacks-properties-lemma-UR-quasi-compact-above-x}
+$\mathcal{X}$ を代数スタックとし、$x \in |\mathcal{X}|$ を点とする。
+次は同値である。
+\begin{enumerate}
+\item $x$ の同値類に属するある射 $\Spec(k) \to \mathcal{X}$ は
+準コンパクトである。
+\item $x$ の同値類に属する任意の射 $\Spec(k) \to \mathcal{X}$ は
+準コンパクトである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Spec(k) \to \mathcal{X}$ を $x$ の同値類に属する射とし、$k'/k$ を体の拡大
+とする。$\Spec(k) \to \mathcal{X}$ が準コンパクトであることと
+$\Spec(k') \to \mathcal{X}$ が準コンパクトであることが同値だと示せばよい。
+これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-surjection-from-quasi-compact} と Algebraic Stacks,
+Lemma \ref{algebraic-lemma-representable-transformations-property-implication} の
+原理から従う。
+\end{proof}
+
+\noindent
+Lemma \ref{stacks-properties-lemma-UR-quasi-compact-above-x} の同値な条件を満たす点
+$x \in |\mathcal{X}|$ を「{\it 準コンパクト点}」ということがある。

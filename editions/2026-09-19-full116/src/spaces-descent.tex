@@ -1,0 +1,3612 @@
+% Generated mechanically from frozen input inputs/p09/ja/src/spaces-descent.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{73}
+\chapter{降下と代数空間}
+
+
+\phantomsection
+\label{spaces-descent-section-phantom}
+
+
+\section{はじめに}
+\label{spaces-descent-section-introduction}
+
+\noindent
+代数空間上の位相を扱った章（Topologies on Spaces,
+Section \ref{spaces-topologies-section-introduction} を参照）では、
+代数空間の étale、fppf、smooth、syntomic および fpqc 被覆を導入した。
+本章では、代数空間上のどのような構造が、これらの被覆を通じて
+降下できるかを論じる。
+例えば \cite{Gr-I}、\cite{Gr-II}、\cite{Gr-III}、
+\cite{Gr-IV}、\cite{Gr-V} および \cite{Gr-VI} を参照されたい。
+
+
+
+\section{規約}
+\label{spaces-descent-section-conventions}
+
+\noindent
+すべてのスキームは一つの大 fppf サイト $\Sch_{fppf}$ に含まれるものとする。
+また、考察するすべての環 $A$ は、$\Spec(A)$ がこの大サイトの
+ある対象に（同型で）なるという性質をもつものとする。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+本章および次章以降では、この自己積を $X \times_S X$ と書く
+（これは $X$ とそれ自身との、$S$ 上の代数空間の圏における積である）。
+$X \times X$ とは書かない。
+
+
+
+
+
+
+\section{準連接層の降下データ}
+\label{spaces-descent-section-equivalence}
+
+\noindent
+本節は Descent, Section \ref{descent-section-equivalence} の
+代数空間に対する類似である。
+先に同節を読むのがよい。
+
+\begin{definition}
+\label{spaces-descent-definition-descent-datum-quasi-coherent}
+$S$ をスキームとする。$\{f_i : X_i \to X\}_{i \in I}$ を、
+$S$ 上の代数空間の射の族とし、その終域を $X$ に固定する。
+\begin{enumerate}
+\item 与えられた族に関する{\it 準連接層の降下データ
+$(\mathcal{F}_i, \varphi_{ij})$}とは、準連接層
+$\mathcal{F}_i$（$X_i$ 上、各 $i \in I$ に対して）と、準連接
+$\mathcal{O}_{X_i \times_X X_j}$-加群の同型
+$\varphi_{ij} : \text{pr}_0^*\mathcal{F}_i \to \text{pr}_1^*\mathcal{F}_j$
+（各組 $(i, j) \in I^2$ に対して）であって、
+任意の三つの添字 $(i, j, k) \in I^3$ に対して図式
+$$
+\xymatrix{
+\text{pr}_0^*\mathcal{F}_i \ar[rd]_{\text{pr}_{01}^*\varphi_{ij}}
+\ar[rr]_{\text{pr}_{02}^*\varphi_{ik}} & &
+\text{pr}_2^*\mathcal{F}_k \\
+& \text{pr}_1^*\mathcal{F}_j \ar[ru]_{\text{pr}_{12}^*\varphi_{jk}} &
+}
+$$
+が $\mathcal{O}_{X_i \times_X X_j \times_X X_k}$-加群の図式として
+可換になるものをいう。これを{\it コサイクル条件}という。
+\item {\it 降下データの射
+$\psi : (\mathcal{F}_i, \varphi_{ij}) \to
+(\mathcal{F}'_i, \varphi'_{ij})$}とは、射の族
+$\psi = (\psi_i)_{i\in I}$ であって、その各射が
+$\mathcal{O}_{X_i}$-加群の射
+$\psi_i : \mathcal{F}_i \to \mathcal{F}'_i$ であり、すべての図式
+$$
+\xymatrix{
+\text{pr}_0^*\mathcal{F}_i \ar[r]_{\varphi_{ij}} \ar[d]_{\text{pr}_0^*\psi_i}
+& \text{pr}_1^*\mathcal{F}_j \ar[d]^{\text{pr}_1^*\psi_j} \\
+\text{pr}_0^*\mathcal{F}'_i \ar[r]^{\varphi'_{ij}} &
+\text{pr}_1^*\mathcal{F}'_j \\
+}
+$$
+が可換になるものをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{spaces-descent-lemma-map-families}
+$S$ をスキームとする。
+$\mathcal{U} = \{U_i \to U\}_{i \in I}$ および
+$\mathcal{V} = \{V_j \to V\}_{j \in J}$ を、
+固定した終域をもつ $S$ 上の代数空間の射の族とする。
+$(g, \alpha : I \to J, (g_i)) : \mathcal{U} \to \mathcal{V}$ を、
+固定した終域をもつ写像族の射とする
+（Sites, Definition \ref{sites-definition-morphism-coverings} を参照）。
+$(\mathcal{F}_j, \varphi_{jj'})$ を、族
+$\{V_j \to V\}_{j \in J}$ に関する準連接層の降下データとする。このとき
+\begin{enumerate}
+\item 系
+$$
+\left(g_i^*\mathcal{F}_{\alpha(i)},
+(g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')}\right)
+$$
+は、族 $\{U_i \to U\}_{i \in I}$ に関する降下データである。
+\item この構成は降下データ
+$(\mathcal{F}_j, \varphi_{jj'})$ に関して関手的である。
+\item 固定した終域をもつ写像族の第二の射
+$(g', \alpha' : I \to J, (g'_i))$ が与えられ、
+$g = g'$ であるとき、降下データの関手的同型
+$$
+(g_i^*\mathcal{F}_{\alpha(i)},
+(g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')})
+\cong
+((g'_i)^*\mathcal{F}_{\alpha'(i)},
+(g'_i \times g'_{i'})^*\varphi_{\alpha'(i)\alpha'(i')}).
+$$
+が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：第 (3) 項の降下データの同型を与える写像
+$g_i^*\mathcal{F}_{\alpha(i)} \to (g'_i)^*\mathcal{F}_{\alpha'(i)}$
+は、写像 $\varphi_{\alpha(i)\alpha'(i)}$ を射
+$(g_i, g'_i) : U_i \to V_{\alpha(i)} \times_V V_{\alpha'(i)}$
+によって引き戻したものである。
+\end{proof}
+
+\noindent
+$g : U \to V$ を代数空間の射とする。
+上の補題によれば、終域 $V$ および $U$ をもつ写像族の間に
+「$g$ 上にある」射が存在するならば、それらの写像族に関する
+降下データの圏の間に、良定義な引き戻し関手が存在する。
+
+\begin{definition}
+\label{spaces-descent-definition-descent-datum-effective-quasi-coherent}
+$S$ をスキームとする。
+$\{U_i \to U\}_{i \in I}$ を、固定した終域をもつ
+$S$ 上の代数空間の射の族とする。
+\begin{enumerate}
+\item $\mathcal{F}$ を準連接 $\mathcal{O}_U$-加群とする。
+唯一の降下データで、$\mathcal{F}$ 上にあり被覆
+$\{U \to U\}$ に関するものを
+{\it 自明な降下データ}という。
+% P09-ERR-0337
+\item 自明な降下データの $\{U_i \to U\}$ への引き戻しを
+{\it 標準降下データ}という。記法は $(\mathcal{F}|_{U_i}, can)$ とする。
+\item 与えられた族に関する準連接層の降下データ
+$(\mathcal{F}_i, \varphi_{ij})$ が{\it 有効}であるとは、
+準連接層 $\mathcal{F}$（$U$ 上）が存在して
+$(\mathcal{F}_i, \varphi_{ij})$ が
+$(\mathcal{F}|_{U_i}, can)$ と同型になることをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{spaces-descent-lemma-zariski-descent-effective}
+$S$ をスキームとし、$U$ を $S$ 上の代数空間とする。
+$\{U_i \to U\}$ を $U$ の Zariski 被覆とする
+（Topologies on Spaces,
+Definition \ref{spaces-topologies-definition-zariski-covering} を参照）。
+族 $\mathcal{U} = \{U_i \to U\}$ に関する準連接層の任意の降下データは
+有効である。さらに、準連接 $\mathcal{O}_U$-加群の圏から
+$\{U_i \to U\}$ に関する降下データの圏への関手は完全忠実である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{準連接層の Fpqc 降下}
+\label{spaces-descent-section-fpqc-descent-quasi-coherent}
+
+\noindent
+加群の平坦降下の主な応用は、fpqc 被覆に関する準連接層についての
+対応する降下命題である。
+
+\begin{proposition}
+\label{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+$S$ をスキームとする。
+$\{X_i \to X\}$ を $S$ 上の代数空間の fpqc 被覆とする
+（Topologies on Spaces,
+Definition \ref{spaces-topologies-definition-fpqc-covering} を参照）。
+$\{X_i \to X\}$ に関する準連接層の任意の降下データは有効である。
+さらに、準連接 $\mathcal{O}_X$-加群の圏から
+$\{X_i \to X\}$ に関する降下データの圏への関手は完全忠実である。
+\end{proposition}
+
+\begin{proof}
+これはスキームに対する対応する結果からほぼ形式的に従う
+（Descent, Proposition
+\ref{descent-proposition-fpqc-descent-quasi-coherent} を参照）。
+以下に証明の方針を示す。
+\begin{enumerate}
+\item $\{X_i \to X\}$ が自明な被覆 $\{X \to X\}$ の細分であることから、
+Lemma \ref{spaces-descent-lemma-map-families} によって関手
+$\QCoh(\mathcal{O}_X) \to DD(\{X_i \to X\})$ が得られる。
+これは準連接 $\mathcal{O}_X$-加群の圏から、与えられた族の
+降下データの圏への関手である。
+\item 命題を証明するため、擬逆関手
+$back : DD(\{X_i \to X\}) \to \QCoh(\mathcal{O}_X)$
+を構成する。
+\item 再び Lemma \ref{spaces-descent-lemma-map-families} を適用すると、
+$DD(\{X_i \to X\}) \to DD(\{T_j \to X\})$
+という関手が、$\{T_j \to X\}$ が与えられた族の細分である場合に
+存在することが分かる。
+したがって関手 $back$ を構成する際、各 $X_i$ はスキームであると
+仮定してよい（Topologies on Spaces,
+Lemma \ref{spaces-topologies-lemma-refine-fpqc-schemes} を参照）。
+これにより、すべての $X_i$ がスキームである場合に帰着される。
+\item $X$ 上の準連接層とは、定義により準連接
+$\mathcal{O}_X$-加群であって、$X_\etale$ 上のものである。ここで任意の
+$U \in \Ob(X_\etale)$ に対して、スキームによる fppf 被覆
+$\{U_i \times_X X_i \to U\}$ と、被覆の射
+$g : \{U_i \times_X X_i \to U\} \to \{X_i \to X\}$ が得られる。
+後者は $U \to X$ 上にある。
+% P09-ERR-0338
+降下データ $\xi = (\mathcal{F}_i, \varphi_{ij})$ が与えられると、
+準連接 $\mathcal{O}_U$-加群 $\mathcal{F}_{\xi, U}$ を得る。
+これは Lemma \ref{spaces-descent-lemma-map-families} の引き戻し $g^*\xi$ を
+$U$ の被覆に取り、スキームの fppf 被覆に対する有効性を
+用いて得られるものに対応する
+（Descent, Proposition
+\ref{descent-proposition-fpqc-descent-quasi-coherent} を参照）。
+\item $\xi \mapsto \mathcal{F}_{\xi, U}$ が $\xi$ に関して
+関手的であることを確かめる。省略する。
+\item $\xi \mapsto \mathcal{F}_{\xi, U}$ が射
+$U \to U'$（サイト $X_\etale$ の射）と両立することを確かめる。
+すると層の系 $\mathcal{F}_{\xi, U}$ は準連接層
+$\mathcal{F}_\xi$（$X_\etale$ 上）に対応する
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent-small-etale}
+を参照）。詳細は省略する。
+\item $back : \xi \mapsto \mathcal{F}_\xi$ が第 (1) 項で構成した
+関手の擬逆であることを確かめる。省略する。
+\end{enumerate}
+これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{準連接加群とアフィン}
+\label{spaces-descent-section-alternative-quasi-coherent}
+
+\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$X_{affine, \etale}$ は $X_\etale$ の充満部分圏で、その対象が
+アフィンであり、被覆を標準 étale 被覆と宣言することでサイトに
+なっていることを思い出そう（Properties of Spaces, Definition
+\ref{spaces-properties-definition-affine-etale-site} を参照）。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-alternative} により、引き戻し関手が
+制限によって与えられるトポスの同値
+$g : \Sh(X_{affine, \etale}) \to \Sh(X_\etale)$
+がある。$\mathcal{O}_X$ は $X_\etale$ 上の構造層を表すことを
+思い出そう。したがって環付きトポスの同値
+\begin{equation}
+\label{spaces-descent-equation-alternative-small-ringed}
+(\Sh(X_{affine, \etale}), \mathcal{O}_X|_{X_{affine, \etale}})
+\longrightarrow
+(\Sh(X_\etale), \mathcal{O}_X)
+\end{equation}
+を得る。しばしば $\mathcal{O}_X$ と書いて
+$\mathcal{O}_X|_{X_{affine, \etale}}$ を表す。
+% P09-ERR-0339
+以上を踏まえ、準連接加群についても比較できる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-quasi-coherent-alternative-small}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を $\mathcal{O}_X$-加群の前層で、
+$X_{affine, \etale}$ 上のものとする。次は同値である。
+\begin{enumerate}
+\item 任意の射 $U \to U'$（$X_{affine, \etale}$ の射）に対して写像
+$\mathcal{F}(U') \otimes_{\mathcal{O}_X(U')} \mathcal{O}_X(U)
+\to \mathcal{F}(U)$ が同型である。
+\item $\mathcal{F}$ は、Modules on Sites, Definition
+\ref{sites-modules-definition-site-local} の意味で、環付きサイト
+$(X_{affine, \etale}, \mathcal{O}_X)$ 上の準連接加群である。
+\item 同値 (\ref{spaces-descent-equation-alternative-small-ringed}) によって、
+$\mathcal{F}$ は $X$ 上の準連接加群に対応する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。$\mathcal{F}$ が層であることを示すため、
+$\mathcal{U} = \{U_i \to U\}_{i = 1, \ldots, n}$ を
+$X_{affine, \etale}$ の被覆とする。
+$\mathcal{F}$ と $\mathcal{U}$ に対する層条件は、
+$\mathcal{F}$ に関する仮定により、
+$$
+0 \to \mathcal{F}(U) \to
+\prod \mathcal{F}(U) \otimes_{\mathcal{O}_X(U)} \mathcal{O}_X(U_i) \to
+\prod \mathcal{F}(U) \otimes_{\mathcal{O}_X(U)} \mathcal{O}_X(U_i \times_U U_j)
+$$
+が完全であることに帰着される。これは
+$\mathcal{O}_X(U) \to \prod \mathcal{O}_X(U_i)$ が忠実平坦であり
+（Descent, Lemma \ref{descent-lemma-standard-covering-Cech} と、
+$X_{affine, \etale}$ の被覆が標準 étale 被覆であることによる）、
+Descent, Lemma \ref{descent-lemma-ff-exact} を適用できるため正しい。
+次に、$\mathcal{F}$ が $X_{affine, \etale}$ 上で準連接であることを示す。
+実際、$U$ を $X_{affine, \etale}$ の対象として
+$R = \mathcal{O}_X(U)$ とおき、自由加群による表示
+$$
+\bigoplus\nolimits_{k \in K} R
+\longrightarrow
+\bigoplus\nolimits_{l \in L} R
+\longrightarrow
+\mathcal{F}(U)
+\longrightarrow 0
+$$
+を選ぶ。これは自由 $R$-加群による。
+性質 (1) とテンソル積の右完全性により、
+任意の射 $U' \to U$（$X_{affine, \etale}$ の射）に対して表示
+$$
+\bigoplus\nolimits_{k \in K} \mathcal{O}_X(U')
+\longrightarrow
+\bigoplus\nolimits_{l \in L} \mathcal{O}_X(U')
+\longrightarrow
+\mathcal{F}(U')
+\longrightarrow 0
+$$
+を得る。言い換えると、$\mathcal{F}$ の局所化圏
+$X_{affine, etale}/U$ への制限は次の表示をもつ。
+% P09-ERR-0340
+$$
+\bigoplus\nolimits_{k \in K} \mathcal{O}_X|_{X_{affine, \etale}/U}
+\longrightarrow
+\bigoplus\nolimits_{l \in L} \mathcal{O}_X|_{X_{affine, \etale}/U}
+\longrightarrow
+\mathcal{F}|_{X_{affine, \etale}/U}
+\longrightarrow 0
+$$
+これは $\mathcal{F}$ が準連接であることを示すために必要な表示である。
+ひどい記法で申し訳ないが、これで (1) が (2) を含意することの
+証明が完了した。
+
+\medskip\noindent
+準連接加群という概念は内在的なので
+（Modules on Sites, Lemma
+\ref{sites-modules-lemma-special-locally-free}）、
+同値 (\ref{spaces-descent-equation-alternative-small-ringed}) は準連接加群の圏の
+間の同値を誘導する。したがって (2) と (3) は同値である。
+
+\medskip\noindent
+(3) を仮定して (1) を証明しよう。すなわち、
+$\mathcal{G}$ を $X$ 上の準連接加群で、$\mathcal{F}$ に対応するものとする。
+$h : U \to U' \to X$ を $X_{affine, \etale}$ の射とする。
+$f : U \to X$ および $f' : U' \to X$ を構造射と記す。
+% P09-ERR-0341
+このとき $f = f' \circ h$ である。また
+$\mathcal{F}(U') = \Gamma(U', (f')^*\mathcal{G})$ および
+$\mathcal{F}(U) = \Gamma(U, f^*\mathcal{G}) = \Gamma(U, h^*(f')^*\mathcal{G})$
+である。したがって (1) は Schemes, Lemma
+\ref{schemes-lemma-widetilde-pullback} から従う。
+\end{proof}
+
+
+
+
+
+\section{加群の有限性に関する性質の降下}
+\label{spaces-descent-section-descent-finiteness}
+
+\noindent
+本節は Descent, Section \ref{descent-section-descent-finiteness} の
+代数空間の場合に対する類似である。
+目的は、準連接加群がある有限性条件をもつことを、
+被覆の各要素上で調べることにより確認できると示すことである。
+% P09-ERR-0342
+以下の証明方式を繰り返し用いる。
+$X$ を代数空間とし、$\{X_i \to X\}$ を fppf（それぞれ fpqc）
+被覆とする。$U \to X$ を全射な étale 射で、$U$ がスキームである
+ものとする。このとき fppf（それぞれ fpqc）被覆
+$\{Y_j \to X\}$ で、次を満たすものが存在する。
+\begin{enumerate}
+\item $\{Y_j \to X\}$ は $\{X_i \to X\}$ の細分である。
+\item 各 $Y_j$ はスキームである。
+\item 各射 $Y_j \to X$ は $U$ を経由して分解する。
+% P09-ERR-0343
+\item $\{Y_j \to U\}$ は $U$ の fppf（それぞれ fpqc）被覆である。
+\end{enumerate}
+実際、まず $\{X_i \to X\}$ を、各 $X_i$ がスキームとなる
+fppf（それぞれ fpqc）被覆で細分する
+（Topologies on Spaces,
+Lemma \ref{spaces-topologies-lemma-refine-fppf-schemes}、
+それぞれ Lemma \ref{spaces-topologies-lemma-refine-fpqc-schemes} を参照）。
+次に $Y_i = U \times_X X_i$ とおく。準連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ が有限型、有限表示などであることと、
+準連接 $\mathcal{O}_U$-加群 $\mathcal{F}|_U$ が有限型、有限表示などで
+あることは同値である。したがって細分 $\{Y_j \to X\}$ の存在を用い、
+以下の補題の証明をスキームの場合に帰着できる。
+これを「{\it 結果はスキームの場合から étale 局所化により従う}」
+と述べることにする。
+
+\begin{lemma}
+\label{spaces-descent-lemma-finite-type-descends}
+$X$ をスキーム $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\{f_i : X_i \to X\}_{i \in I}$ を fpqc 被覆とし、各
+$f_i^*\mathcal{F}$ が有限型 $\mathcal{O}_{X_i}$-加群であるとする。
+このとき $\mathcal{F}$ は有限型 $\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+これはスキームの場合から étale 局所化により従う
+（Descent, Lemma \ref{descent-lemma-finite-type-descends} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-finite-presentation-descends}
+$X$ をスキーム $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\{f_i : X_i \to X\}_{i \in I}$ を fpqc 被覆とし、各
+$f_i^*\mathcal{F}$ が有限表示 $\mathcal{O}_{X_i}$-加群であるとする。
+このとき $\mathcal{F}$ は有限表示 $\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+これはスキームの場合から étale 局所化により従う
+（Descent, Lemma \ref{descent-lemma-finite-presentation-descends} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-flat-descends}
+$X$ をスキーム $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\{f_i : X_i \to X\}_{i \in I}$ を fpqc 被覆とし、各
+$f_i^*\mathcal{F}$ が平坦な $\mathcal{O}_{X_i}$-加群であるとする。
+このとき $\mathcal{F}$ は平坦な $\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+これはスキームの場合から étale 局所化により従う
+（Descent, Lemma \ref{descent-lemma-flat-descends} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-finite-locally-free-descends}
+$X$ をスキーム $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\{f_i : X_i \to X\}_{i \in I}$ を fpqc 被覆とし、各
+$f_i^*\mathcal{F}$ が有限局所自由
+$\mathcal{O}_{X_i}$-加群であるとする。
+このとき $\mathcal{F}$ は有限局所自由 $\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+これはスキームの場合から étale 局所化により従う
+（Descent, Lemma
+\ref{descent-lemma-finite-locally-free-descends} を参照）。
+\end{proof}
+
+\noindent
+局所射影的な準連接層の定義は Properties of Spaces, Section
+\ref{spaces-properties-section-locally-projective} にある。
+この概念が引き戻しで保たれることも、同所で証明されている。
+
+\begin{lemma}
+\label{spaces-descent-lemma-locally-projective-descends}
+$X$ をスキーム $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\{f_i : X_i \to X\}_{i \in I}$ を fpqc 被覆とし、各
+$f_i^*\mathcal{F}$ が局所射影的な
+$\mathcal{O}_{X_i}$-加群であるとする。
+このとき $\mathcal{F}$ は局所射影的な $\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+これはスキームの場合から étale 局所化により従う
+（Descent, Lemma
+\ref{descent-lemma-locally-projective-descends} を参照）。
+\end{proof}
+
+\noindent
+ここでは、上の結果に関連するが多少性質の異なる二つの結果も加える。
+
+\begin{lemma}
+\label{spaces-descent-lemma-finite-over-finite-module}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$f$ が有限射であると仮定する。
+このとき $\mathcal{F}$ が有限型 $\mathcal{O}_X$-加群であることと、
+$f_*\mathcal{F}$ が有限型 $\mathcal{O}_Y$-加群であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$f$ は有限なので表現可能である。スキーム $V$ と全射な étale 射
+$V \to Y$ を選ぶ。すると $U = V \times_Y X$ はスキームであり、
+$X$ への全射な étale 射と、有限射
+$\psi : U \to V$（$f$ の基底変換）をもつ。
+等式 $\psi_*(\mathcal{F}|_U) = f_*\mathcal{F}|_V$ により、
+補題の結果はスキームに対する版、すなわち
+% P09-ERR-0344
+Descent, Lemma \ref{descent-lemma-finite-over-finite-module}
+から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-finite-finitely-presented-module}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$f$ が有限かつ有限表示であると仮定する。
+このとき $\mathcal{F}$ が有限表示 $\mathcal{O}_X$-加群であることと、
+$f_*\mathcal{F}$ が有限表示 $\mathcal{O}_Y$-加群であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$f$ は有限なので表現可能である。スキーム $V$ と全射な étale 射
+$V \to Y$ を選ぶ。すると $U = V \times_Y X$ はスキームであり、
+$X$ への全射な étale 射と、有限射
+$\psi : U \to V$（$f$ の基底変換）をもつ。
+等式 $\psi_*(\mathcal{F}|_U) = f_*\mathcal{F}|_V$ により、
+補題の結果はスキームに対する版、すなわち
+% P09-ERR-0345
+Descent, Lemma
+\ref{descent-lemma-finite-finitely-presented-module} から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{Fpqc 被覆}
+\label{spaces-descent-section-fpqc}
+
+\noindent
+本節は Descent, Section
+\ref{descent-section-fpqc-universal-effective-epimorphisms}
+の類似である。現在のところ、スキームの fpqc 被覆に関する
+すべての内容が代数空間についても成り立つかどうかは分かっていない。
+
+\begin{lemma}
+\label{spaces-descent-lemma-open-fpqc-covering}
+$S$ をスキームとする。
+$\{f_i : T_i \to T\}_{i \in I}$ を $S$ 上の代数空間の fpqc 被覆とする。
+各 $i$ に対して開部分空間 $W_i \subset T_i$ があり、すべての
+$i, j \in I$ に対して
+$\text{pr}_0^{-1}(W_i) = \text{pr}_1^{-1}(W_j)$ が
+$T_i \times_T T_j$ の開部分空間として成り立つと仮定する。
+このとき一意な開部分空間 $W \subset T$ が存在し、
+$W_i = f_i^{-1}(W)$ が各 $i$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes} により、
+各 $T_i$ はスキームであると仮定してよい。
+スキーム $U$ と全射な étale 射 $U \to T$ を選ぶ。
+すると $\{T_i \times_T U \to U\}$ は $U$ の fpqc 被覆であり、
+$T_i \times_T U$ は各 $i$ に対してスキームである。
+したがって、開集合の族 $W_i \times_T U$ は一意な開部分スキーム
+$W' \subset U$ から得られることが Descent, Lemma
+\ref{descent-lemma-open-fpqc-covering} により分かる。
+% P09-ERR-0346
+$U \to X$ は開なので、Zariski 開集合
+$W \subset X$ を $W'$ の像として定義できる
+（Properties of Spaces, Section
+\ref{spaces-properties-section-points} を参照）。
+これが機能すること、すなわち $W_i$ が $W$ の逆像であることが
+各 $i$ に対して成り立つことの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}
+$S$ をスキームとする。$\{T_i \to T\}$ を $S$ 上の代数空間の
+fpqc 被覆とする（Topologies on Spaces, Definition
+\ref{spaces-topologies-definition-fpqc-covering} を参照）。
+このとき代数空間 $B$（$S$ 上）が与えられると、列
+$$
+\xymatrix{
+\Mor_S(T, B) \ar[r] &
+\prod\nolimits_i \Mor_S(T_i, B) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod\nolimits_{i, j} \Mor_S(T_i \times_T T_j, B)
+}
+$$
+は等化子図式である。
+言い換えると、$S$ 上の代数空間の圏上の任意の表現可能関手は、
+fpqc 被覆に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$\{T_i \to T\}$ がスキームの fpqc 被覆であれば、これは正しいと
+分かっている（Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc} を参照）。
+これが鍵となる事実であり、読者には形式的な残りの証明を
+飛ばすことを勧める。スキーム $U$ と全射な étale 射
+$U \to T$ を選ぶ。$U_i$ をスキームとし、$U_i \to T_i \times_T U$
+を全射な étale 射とする。すると $\{U_i \to U\}$ は fpqc 被覆である。
+これは Topologies on Spaces, Lemmas
+\ref{spaces-topologies-lemma-fpqc} および
+\ref{spaces-topologies-lemma-recognize-fpqc-covering} から従う。
+上で述べたことにより、$\{U_i \to U\}$ に対して結果が成り立つ。
+
+\medskip\noindent
+このことの意味は次のとおりである。$b_i : T_i \to B$ を射の族とし、
+$b_i \circ \text{pr}_0 = b_j \circ \text{pr}_1$ が射
+$T_i \times_T T_j \to B$ として成り立つと仮定する。
+そこで $a_i : U_i \to B$ を $U_i \to T_i$ と $b_i$ の合成とする。
+上で述べたことにより、一意な射 $a : U \to B$ であって、
+$a_i$ が $a$ と $U_i \to U$ の合成となるものが見つかる。
+一意性により
+$a \circ \text{pr}_0 = a \circ \text{pr}_1$ が射
+$U \times_T U \to B$ として成り立つ。
+そして $T = U/(U \times_T U)$ が層として成り立つので、
+$a$ は一意な射 $b : T \to B$ から来ることが分かる。
+図式を追えば、$b$ が求める射であると分かる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{射の有限性および滑らかさに関する性質の降下}
+\label{spaces-descent-section-descent-finiteness-morphisms}
+
+\noindent
+次の型の補題は、ときどき有用である。
+
+\begin{lemma}
+\label{spaces-descent-lemma-curiosity}
+$S$ をスキームとする。$X \to Y \to Z$ を代数空間の射とする。
+% P09-ERR-0347
+$P$ を、$S$ 上の代数空間の射の次の性質のいずれかとする：
+平坦、局所有限型、局所有限表示。
+$X \to Z$ が $P$ をもち、$X \to Y$ が
+$(\Sch/S)_{fppf}$ 上の層の全射であると仮定する。
+このとき $Y \to Z$ は $P$ をもつ。
+\end{lemma}
+
+\begin{proof}
+スキーム $W$ と全射な étale 射 $W \to Z$ を選ぶ。
+スキーム $V$ と全射な étale 射 $V \to W \times_Z Y$ を選ぶ。
+スキーム $U$ と全射な étale 射 $U \to V \times_Y X$ を選ぶ。
+仮定により、fppf 被覆 $\{V_i \to V\}$ と、持ち上げ
+$V_i \to X$（射 $V_i \to Y$ の持ち上げ）を見つけられる。
+$U \to X$ は全射 étale なので、fppf 被覆
+$\{V_i \times_X U \to V\}$ の各要素上で $U$ への持ち上げがある。
+したがって $U \to V$ は $(\Sch/S)_{fppf}$ 上の層の全射を誘導する。
+代数空間の射が性質 $P$ をもつことの定義
+（Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-flat}、
+Definition \ref{spaces-morphisms-definition-locally-finite-type} および
+Definition \ref{spaces-morphisms-definition-locally-finite-presentation}
+を参照）により、$U \to W$ が $P$ をもつこと、そして
+$V \to W$ が $P$ をもつことを示せばよいことが分かる。
+したがって問題はスキームの射の場合に帰着され、これは
+Descent, Lemma \ref{descent-lemma-curiosity} で扱われている。
+\end{proof}
+
+\noindent
+上の補題の、より標準的な場合は次のものである。
+（「flat」の版は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence} から従う。）
+
+\begin{lemma}
+\label{spaces-descent-lemma-flat-finitely-presented-permanence}
+$S$ をスキームとする。可換図式
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+を $S$ 上の代数空間の射の図式とする。
+$f$ は全射、平坦かつ局所有限表示であり、
+$p$ は局所有限表示（それぞれ局所有限型）であると仮定する。
+このとき $q$ は局所有限表示（それぞれ局所有限型）である。
+\end{lemma}
+
+\begin{proof}
+$\{X \to Y\}$ は fppf 被覆なので、fppf 層の全射を誘導する
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf-covering-surjective}）。
+したがって本補題は Lemma \ref{spaces-descent-lemma-curiosity} の特別な場合である。
+一方、スキームに対する類似から従うという、より容易な議論もある。
+実際、問題は $B$ と $Y$ 上で étale 局所的である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-finite-type-local} および
+\ref{spaces-morphisms-lemma-finite-presentation-local}）。
+したがって $B$ と $Y$ はアフィンスキームであると仮定してよい。
+$|X| \to |Y|$ は開であるから
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}）、アフィンスキーム $U$ と
+étale 射 $U \to X$ で、その合成 $U \to Y$ が全射となるものを選べる。
+この場合、結果は Descent, Lemma
+\ref{descent-lemma-flat-finitely-presented-permanence} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-syntomic-smooth-etale-permanence}
+$S$ をスキームとする。可換図式
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+を $S$ 上の代数空間の射の図式とする。次を仮定する。
+\begin{enumerate}
+\item $f$ は全射かつ syntomic（それぞれ smooth、それぞれ étale）である。
+\item $p$ は syntomic（それぞれ smooth、それぞれ étale）である。
+\end{enumerate}
+このとき $q$ は syntomic（それぞれ smooth、それぞれ étale）である。
+\end{lemma}
+
+\begin{proof}
+これはスキームに対する類似から導く。
+実際、問題は $B$ と $Y$ 上で étale 局所的である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-syntomic-local}、
+\ref{spaces-morphisms-lemma-smooth-local} および
+\ref{spaces-morphisms-lemma-etale-local}）。
+したがって $B$ と $Y$ はアフィンスキームであると仮定してよい。
+$|X| \to |Y|$ は開であるから
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}）、アフィンスキーム $U$ と
+étale 射 $U \to X$ で、その合成 $U \to Y$ が全射となるものを選べる。
+この場合、結果は Descent, Lemma
+\ref{descent-lemma-syntomic-smooth-etale-permanence} から従う。
+\end{proof}
+
+\noindent
+実際、この結果は次のように強められる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-smooth-permanence}
+$S$ をスキームとする。可換図式
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+を $S$ 上の代数空間の射の図式とする。次を仮定する。
+\begin{enumerate}
+\item $f$ は全射、平坦かつ局所有限表示である。
+\item $p$ は smooth（それぞれ étale）である。
+\end{enumerate}
+このとき $q$ は smooth（それぞれ étale）である。
+\end{lemma}
+
+\begin{proof}
+これはスキームに対する類似から導く。
+実際、問題は $B$ と $Y$ 上で étale 局所的である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-smooth-local} および
+\ref{spaces-morphisms-lemma-etale-local}）。
+したがって $B$ と $Y$ はアフィンスキームであると仮定してよい。
+$|X| \to |Y|$ は開であるから
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}）、アフィンスキーム $U$ と
+étale 射 $U \to X$ で、その合成 $U \to Y$ が全射となるものを選べる。
+この場合、結果は Descent, Lemma
+\ref{descent-lemma-smooth-permanence} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-syntomic-permanence}
+$S$ をスキームとする。可換図式
+$$
+\xymatrix{
+X \ar[rr]_f \ar[rd]_p & &
+Y \ar[dl]^q \\
+& B
+}
+$$
+を $S$ 上の代数空間の射の図式とする。次を仮定する。
+\begin{enumerate}
+\item $f$ は全射、平坦かつ局所有限表示である。
+\item $p$ は syntomic である。
+\end{enumerate}
+このとき $q$ と $f$ はともに syntomic である。
+\end{lemma}
+
+\begin{proof}
+これはスキームに対する類似から導く。
+実際、問題は $B$ と $Y$ 上で étale 局所的である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-syntomic-local}）。
+したがって $B$ と $Y$ はアフィンスキームであると仮定してよい。
+$|X| \to |Y|$ は開であるから
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open}）、アフィンスキーム $U$ と
+étale 射 $U \to X$ で、その合成 $U \to Y$ が全射となるものを選べる。
+この場合、結果は Descent, Lemma
+\ref{descent-lemma-syntomic-permanence} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{空間の性質の降下}
+\label{spaces-descent-section-descending-properties-spaces}
+
+\noindent
+本節には次の種類の結果を集める。
+
+\begin{lemma}
+\label{spaces-descent-lemma-descend-unibranch}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$x \in |X|$ とする。
+$f$ が $x$ において平坦で、$X$ が $x$ において幾何学的単枝ならば、
+$Y$ は $f(x)$ において幾何学的単枝である。
+\end{lemma}
+
+\begin{proof}
+étale 局所環の写像
+$\mathcal{O}_{Y, f(\overline{x})} \to \mathcal{O}_{X, \overline{x}}$
+を考える。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-at-point-etale-local-rings}
+により、これは平坦である。したがって
+$\mathcal{O}_{X, \overline{x}}$ が唯一の極小素イデアルをもてば、
+$\mathcal{O}_{Y, f(\overline{x})}$ もそうである
+（下降定理による。Algebra, Lemma
+\ref{algebra-lemma-flat-going-down} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descend-reduced}
+\begin{slogan}
+被約な始域をもつ平坦かつ全射な代数空間の射の終域は被約である。
+\end{slogan}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ が平坦かつ全射で、$X$ が被約ならば、$Y$ は被約である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射な étale 射 $V \to Y$ を選ぶ。
+スキーム $U$ と全射な étale 射
+$U \to X \times_Y V$ を選ぶ。$f$ は全射かつ平坦なので、
+スキームの射 $U \to V$ は全射かつ平坦である。
+このようにして問題をスキームの場合に帰着する
+（$X$ と $Y$ の被約性は、$U$ と $V$ の被約性によって定義される。
+Properties of Spaces, Section
+\ref{spaces-properties-section-types-properties} を参照）。
+スキームの場合は Descent, Lemma
+\ref{descent-lemma-descend-reduced} である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descend-locally-Noetherian}
+$f : X \to Y$ を代数空間の射とする。
+$f$ が局所有限表示、平坦かつ全射で、$X$ が局所 Noether ならば、
+$Y$ は局所 Noether である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射な étale 射 $V \to Y$ を選ぶ。
+スキーム $U$ と全射な étale 射
+$U \to X \times_Y V$ を選ぶ。$f$ は全射、平坦かつ局所有限表示なので、
+スキームの射 $U \to V$ は全射、平坦かつ局所有限表示である。
+このようにして問題をスキームの場合に帰着する
+（$X$ と $Y$ が局所 Noether であることは、$U$ と $V$ が局所
+Noether であることによって定義される。Properties of Spaces,
+Section \ref{spaces-properties-section-types-properties} を参照）。
+スキームの場合、結果は Descent, Lemma
+\ref{descent-lemma-Noetherian-local-fppf} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descend-regular}
+$f : X \to Y$ を代数空間の射とする。
+$f$ が局所有限表示、平坦かつ全射で、$X$ が正則ならば、
+$Y$ は正則である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-descend-locally-Noetherian} により、
+$Y$ が局所 Noether であることが分かる。
+スキーム $V$ と全射な étale 射 $V \to Y$ を選ぶ。
+$V$ の局所環がすべて正則局所環であることを証明すれば十分である
+（Properties, Lemma \ref{properties-lemma-characterize-regular} を参照）。
+スキーム $U$ と全射な étale 射
+$U \to X \times_Y V$ を選ぶ。$f$ は全射かつ平坦なので、
+スキームの射 $U \to V$ は全射かつ平坦である。
+仮定により $U$ は正則スキームであり、特にその局所環はすべて正則である
+（上の補題による）。したがって本補題は Algebra, Lemma
+\ref{algebra-lemma-flat-under-regular} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-reduced-local-smooth}
+$f : X \to Y$ を代数空間の smooth 射とする。
+$Y$ が被約ならば $X$ は被約である。$f$ が全射で
+$X$ が被約ならば、$Y$ は被約である。
+\end{lemma}
+
+\begin{proof}
+可換図式
+$$
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+$$
+を選ぶ。ここで $U$ と $V$ はスキーム、垂直射は全射かつ étale であり、
+$U \to X \times_Y V$ は全射 étale である。
+代数空間 $X$ が被約であることと、スキーム $U$ が被約であることは
+同値であることに注意しよう。これは Properties of Spaces,
+Section \ref{spaces-properties-section-types-properties} における
+被約代数空間の定義による。$Y$ と $V$ についても同様である。
+射 $U \to V$ はスキームの smooth 射である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-local} を参照）。
+被約であることはスキームの smooth 位相について局所的なので
+（Descent, Lemma \ref{descent-lemma-reduced-local-smooth}）、
+$U$ が被約であることが、$V$ が被約ならば分かる。
+一方、$X \to Y$ が全射ならば $U \to V$ は全射であり、
+この場合 $U$ が被約ならば $V$ も被約である。
+\end{proof}
+
+
+
+
+
+
+
+\section{射の性質の降下}
+\label{spaces-descent-section-descending-properties-morphisms}
+
+\noindent
+本節では、代数空間の射の性質が、ある位相において終域上で
+局所的であるとはどういうことかを導入する。
+Descent, Section
+\ref{descent-section-descending-properties-morphisms} と比較されたい。
+
+\begin{definition}
+\label{spaces-descent-definition-property-morphisms-local}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質とする。\\
+$\tau \in \{fpqc, fppf, syntomic, smooth, \etale\}$ とする。
+$\mathcal{P}$ が{\it 基底に関して $\tau$-局所的}、
+{\it 終域に関して $\tau$-局所的}、または
+{\it $\tau$-位相について基底上局所的}であるというのは、
+任意の代数空間の $\tau$-被覆
+$\{Y_i \to Y\}_{i \in I}$ と任意の代数空間の射
+$f : X \to Y$ に対して
+$$
+f \text{ は }\mathcal{P}
+\Leftrightarrow
+\text{各 }Y_i \times_Y X \to Y_i\text{ は }\mathcal{P}.
+$$
+が成り立つことをいう。
+\end{definition}
+
+\noindent
+念のため、同型は常に被覆なので、性質 $\mathcal{P}$ が
+$X \to Y$ に対して成り立つことと、任意の射 $X' \to Y'$ で
+$X \to Y$ に同型なものに対して成り立つことは同値であると分かる
+（または、そう要求する）。
+性質が終域に関して $\tau$-局所的ならば、
+$\tau$-被覆に現れる射による基底変換で保たれる。
+形式的な主張を次に示す。
+
+\begin{lemma}
+\label{spaces-descent-lemma-pullback-property-local-target}
+$S$ をスキームとする。
+$\tau \in \{fpqc, fppf, syntomic, smooth, \etale\}$ とする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、
+終域に関して $\tau$-局所的なものとする。
+$f : X \to Y$ が性質 $\mathcal{P}$ をもつとする。
+任意の射 $Y' \to Y$ が平坦、それぞれ平坦かつ局所有限表示、
+それぞれ syntomic、それぞれ étale であるとき、基底変換
+% P09-ERR-0348
+$f' : Y' \times_Y X \to Y'$（$f$ の基底変換）は性質
+$\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+これは $Y' \to Y$ を、$\tau$-被覆をなす射の族に
+組み込めることによる。
+\end{proof}
+
+\noindent
+上の結果から得られる単純でよく用いられる帰結は次である。
+% P09-ERR-0349
+$f : X \to Y$ が性質 $\mathcal{P}$ をもち、それが終域に関して
+$\tau$-局所的であり、$f(X) \subset V$ がある開部分空間
+$V \subset Y$ に対して成り立つならば、誘導される射 $X \to V$ も
+$\mathcal{P}$ をもつ。証明：$f$ を $V \to Y$ によって
+基底変換すると $X \to V$ が得られる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-largest-open-of-the-base}
+$S$ をスキームとする。
+$\tau \in \{fppf, syntomic, smooth, \etale\}$ とする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、
+終域に関して $\tau$-局所的なものとする。
+任意の射 $f : X \to Y$（$S$ 上の代数空間の射）に対して、
+最大の開部分空間 $W(f) \subset Y$ が存在し、制限
+$X_{W(f)} \to W(f)$ が $\mathcal{P}$ をもつ。さらに、
+\begin{enumerate}
+\item $g : Y' \to Y$ が平坦かつ局所有限表示、syntomic、
+smooth、または étale な代数空間の射で、基底変換
+$f' : X_{Y'} \to Y'$ が $\mathcal{P}$ をもつならば、
+$g$ は $W(f)$ を経由して分解する。
+\item $g : Y' \to Y$ が平坦かつ局所有限表示、syntomic、
+smooth、または étale ならば、$W(f') = g^{-1}(W(f))$ である。
+\item $\{g_i : Y_i \to Y\}$ が $\tau$-被覆ならば、
+$g_i^{-1}(W(f)) = W(f_i)$ である。ここで $f_i$ は
+$f$ の $Y_i \to Y$ による基底変換である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+和集合 $W_{set} \subset |Y|$ を考える。これは像
+$g(|Y'|) \subset |Y|$ の和集合であり、射
+$g : Y' \to Y$ は次の性質をもつものすべてを動く。
+\begin{enumerate}
+\item $g$ は平坦かつ局所有限表示、syntomic、smooth、または étale である。
+\item 基底変換 $Y' \times_{g, Y} X \to Y'$ が性質
+$\mathcal{P}$ をもつ。
+\end{enumerate}
+このような射 $g$ は開であるから
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open} を参照）、
+$W_{set}$ は $|Y|$ の開部分集合である。開部分空間
+$W \subset Y$ を、その点集合が $W_{set}$ となるものとする
+% P09-ERR-0350
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-open-subspaces} を参照）。
+$\mathcal{P}$ は $\tau$ 位相において局所的なので、
+制限 $X_W \to W$ は性質 $\mathcal{P}$ をもつ。
+実際、被覆 $\{Y' \to W\}$ が $W$ に対して与えられ、
+その引き戻しが $\mathcal{P}$ をもつ。
+これで存在が証明され、$W(f)$ が性質 (1) をもつことも分かる。
+性質 (2) を見るには、まず
+$W(f') \supset g^{-1}(W(f))$ であることに注意する。
+これは $\mathcal{P}$ が、平坦かつ局所有限表示、syntomic、
+smooth、または étale な射による基底変換で安定だからである
+（Lemma \ref{spaces-descent-lemma-pullback-property-local-target} を参照）。
+逆に、$Y'' \subset Y'$ が開で、$X_{Y''} \to Y''$ が性質
+$\mathcal{P}$ をもつならば、構成により $Y'' \to Y$ は
+$W$ を経由して分解する。すなわち
+$Y'' \subset g^{-1}(W(f))$ である。これで (2) が証明された。
+主張 (3) は (2) から従う。実際、各射 $Y_i \to Y$ は平坦かつ
+局所有限表示、syntomic、smooth、または étale である。
+これは $\tau$-被覆の定義による。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-properties-morphisms}
+$S$ をスキームとする。$\mathcal{P}$ を $S$ 上の代数空間の射の
+性質とする。次を仮定する。
+\begin{enumerate}
+\item $X_i \to Y_i$（$i = 1, 2$）が性質 $\mathcal{P}$ をもつならば、
+% P09-ERR-0351
+$X_1 \amalg X_2 \to Y_1 \amalg Y_2$ もそれをもつ。
+\item 代数空間の射 $f : X \to Y$ が性質 $\mathcal{P}$ をもつことと、
+任意のアフィンスキーム $Z$ および射 $Z \to Y$ に対して、
+基底変換 $Z \times_Y X \to Z$（$f$ の基底変換）が性質
+$\mathcal{P}$ をもつことは同値である。
+\item 任意の全射平坦射 $Z' \to Z$（$S$ 上のアフィンスキームの射）と、
+射 $f : X \to Z$（代数空間から $Z$ への射）に対して、
+$$
+f' : Z' \times_Z X \to Z'\text{ は }\mathcal{P}
+\Rightarrow
+f\text{ は }\mathcal{P}.
+$$
+\end{enumerate}
+このとき $\mathcal{P}$ は基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$ が性質 (2) をもてば、任意の基底変換で自動的に
+安定である。したがって Definition
+\ref{spaces-descent-definition-property-morphisms-local} の順方向の含意が成り立つ。
+
+\medskip\noindent
+$\{Y_i \to Y\}_{i \in I}$ を $S$ 上の代数空間の fpqc 被覆とする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+各基底変換 $f_i : Y_i \times_Y X \to Y_i$ が性質
+$\mathcal{P}$ をもつと仮定する。目標は $f$ が $\mathcal{P}$ を
+もつことを示すことである。$Z$ をアフィンスキームとし、
+$Z \to Y$ を射とする。(2) により、代数空間の射
+$Z \times_Y X \to Z$ が $\mathcal{P}$ をもつことを示せば十分である。
+$\{Y_i \to Y\}_{i \in I}$ は fpqc 被覆なので、標準 fpqc 被覆
+$\{Z_j \to Z\}_{j = 1, \ldots , n}$ と、射
+$Z_j \to Y_{i_j}$（$Y$ 上の射）が、適当な添字
+$i_j \in I$ に対して存在する。
+$f_{i_j}$ が $\mathcal{P}$ をもつので、
+$$
+Z_j \times_Y X
+=
+Z_j \times_{Y_{i_j}} (Y_{i_j} \times_Y X)
+\longrightarrow
+Z_j
+$$
+は $\mathcal{P}$ をもつ。これは $f_{i_j}$ の基底変換である
+（証明冒頭の注意を参照）。
+$Z' = \coprod_{j = 1, \ldots, n} Z_j$ とおくと、
+$Z' \to Z$ は $S$ 上のアフィンスキームの平坦全射である。
+(1) により $Z' \times_Y X \to Z'$ は性質 $\mathcal{P}$ をもつ。
+これは射 $Z \times_Y X \to Z$ の射 $Z' \to Z$ による基底変換なので、
+望みどおり $Z \times_Y X \to Z$ は性質 $\mathcal{P}$ をもつ。
+\end{proof}
+
+
+\section{Fpqc 位相における射の性質の降下}
+\label{spaces-descent-section-descending-properties-morphisms-fpqc}
+
+
+\noindent
+本節では、fpqc 位相において基底上局所的である代数空間の射の性質を
+数多く見いだす。スキームの射の場合については Descent, Section
+\ref{descent-section-descending-properties-morphisms-fpqc} と比較されたい。
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-quasi-compact}
+$S$ をスキームとする。
+性質 $\mathcal{P}(f) =$「$f$ は準コンパクトである」は、
+$S$ 上の代数空間について基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が準コンパクトであると仮定する。
+$f$ が準コンパクトであることを示さなければならない。
+そのためには、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local} を再び用いると、
+任意のアフィンスキーム $Y$ と射 $Y \to Z$ に対し
+ファイバー積 $Y \times_Z X$ が準コンパクトであることを示せば十分である。
+図式は次のとおりである。
+\begin{equation}
+\label{spaces-descent-equation-cube}
+\vcenter{
+\xymatrix{
+Y \times_Z Z' \times_Z X \ar[dd] \ar[rr] \ar[rd] & &
+Z' \times_Z X \ar'[d][dd]^{f'} \ar[rd] \\
+& Y \times_Z X \ar[dd] \ar[rr] & & X \ar[dd]^f \\
+Y \times_Z Z' \ar'[r][rr] \ar[rd] & & Z' \ar[rd] \\
+& Y \ar[rr] & & Z
+}
+}
+\end{equation}
+すべての正方形は Cartesian であり、最下部の正方形は
+アフィンスキームからなることに注意する。
+$f'$ が準コンパクトであるという仮定と
+$Y \times_Z Z'$ がアフィンであるという事実から、
+$Y \times_Z Z' \times_Z X$ は準コンパクトである。
+$$
+Y \times_Z Z' \times_Z X \longrightarrow Y \times_Z X
+$$
+は $Z' \to Z$ の基底変換として全射なので、
+$Y \times_Z X$ は準コンパクトである
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-surjection-from-quasi-compact} を参照）。
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-quasi-separated}
+$S$ をスキームとする。
+性質 $\mathcal{P}(f) =$「$f$ は準分離である」は、
+$S$ 上の代数空間について基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+準分離射の基底変換は準分離である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated} を参照）。
+したがって Definition \ref{spaces-descent-definition-property-morphisms-local} の
+順方向の含意が成り立つ。
+
+\medskip\noindent
+$\{Y_i \to Y\}_{i \in I}$ を $S$ 上の代数空間の fpqc 被覆とする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+各基底変換 $X_i := Y_i \times_Y X \to Y_i$ が準分離であると仮定する。
+これは各射
+$$
+\Delta_i :
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+が準コンパクトであることを意味する。
+fpqc 被覆の基底変換は fpqc 被覆である
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc} を参照）。
+% P09-ERR-0352
+したがって
+$\{Y_i \times_Y (X \times_Y X) \to X \times_Y X\}$ は
+代数空間の fpqc 被覆である。さらに、各 $\Delta_i$ は射
+$\Delta : X \to X \times_Y X$ の基底変換である。
+ゆえに Lemma \ref{spaces-descent-lemma-descending-property-quasi-compact} から
+$\Delta$ は準コンパクト、すなわち $f$ は準分離である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-universally-closed}
+$S$ をスキームとする。
+性質 $\mathcal{P}(f) =$「$f$ は普遍閉である」は、
+$S$ 上の代数空間について基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が普遍閉であると仮定する。
+$f$ が普遍閉であることを示さなければならない。
+そのためには、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} を再び用いると、
+任意のアフィンスキーム $Y$ と射 $Y \to Z$ に対して写像
+$|Y \times_Z X| \to |Y|$ が閉であることを示せば十分である。
+立方体 (\ref{spaces-descent-equation-cube}) を考える。
+$f'$ が普遍閉であるという仮定から、写像
+$|Y \times_Z Z' \times_Z X| \to |Y \times_Z Z'|$ は閉である。
+$Y \times_Z Z' \to Y$ は $Z' \to Z$ の基底変換として
+準コンパクト、全射かつ平坦なので、写像
+$|Y \times_Z Z'| \to |Y|$ は商写像である
+（Morphisms, Lemma
+\ref{morphisms-lemma-fpqc-quotient-topology} を参照）。
+さらに写像
+$$
+|Y \times_Z Z' \times_Z X|
+\longrightarrow
+|Y \times_Z Z'| \times_{|Y|} |Y \times_Z X|
+$$
+は全射である
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を参照）。
+初等的な位相から $|Y \times_Z X| \to |Y|$ は閉であることが従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-universally-open}
+$S$ をスキームとする。
+性質 $\mathcal{P}(f) =$「$f$ は普遍開である」は、
+$S$ 上の代数空間について基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+証明は Lemma
+\ref{spaces-descent-lemma-descending-property-universally-closed} の証明と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-universally-submersive}
+性質 $\mathcal{P}(f) =$「$f$ は普遍的商写像である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+証明は Lemma
+\ref{spaces-descent-lemma-descending-property-universally-closed} の証明と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-surjective}
+性質 $\mathcal{P}(f) =$「$f$ は全射である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+省略する。（ヒント：Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を用いる。）
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-universally-injective}
+性質 $\mathcal{P}(f) =$「$f$ は普遍単射である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} から従う。
+% P09-ERR-0353
+$Z' \to Z$ を $S$ 上のアフィンスキームの平坦全射とし、
+$f : X \to Z$ を代数空間から $Z$ への射とする。
+基底変換 $f' : X' \to Z'$ が普遍単射であると仮定する。
+$K$ を体とし、$a, b : \Spec(K) \to X$ を
+$f \circ a = f \circ b$ を満たす二つの射とする。
+$Z' \to Z$ は全射なので、体拡大 $K'/K$ と射
+$\Spec(K') \to Z'$ で、次の実線部分の図式を可換にするものが存在する。
+$$
+\xymatrix{
+\Spec(K') \ar[rrd] \ar@{-->}[rd]_{a', b'} \ar[dd] \\
+ &
+X' \ar[r] \ar[d] &
+Z' \ar[d] \\
+\Spec(K) \ar[r]^{a, b} &
+X \ar[r] &
+Z
+}
+$$
+正方形は Cartesian なので、図式を可換にする二本の破線射
+$a'$、$b'$ が得られる。$X' \to Z'$ は普遍単射なので
+$a' = b'$ を得る。これは $a = b$ を強制する。実際、
+$\{\Spec(K') \to \Spec(K)\}$ は fpqc 被覆である
+（Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc} を参照）。
+したがって望みどおり $f$ は普遍単射である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-universal-homeomorphism}
+性質 $\mathcal{P}(f) =$「$f$ は普遍同相である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これは Lemma
+\ref{spaces-descent-lemma-descending-property-universally-closed} とまったく同じ方法で
+証明できる。あるいは、位相空間の写像が同相写像であることと、
+単射、全射かつ開であることが同値であることを用いてもよい。
+したがって普遍同相であることは、射が全射、普遍単射かつ
+普遍開であることと同じである。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-surjective} および
+Morphisms of Spaces, Definitions
+\ref{spaces-morphisms-definition-universally-injective}、
+\ref{spaces-morphisms-definition-surjective}、
+\ref{spaces-morphisms-definition-open}、
+\ref{spaces-morphisms-definition-universal-homeomorphism} を参照。
+したがって本補題は Lemmas
+\ref{spaces-descent-lemma-descending-property-surjective}、
+\ref{spaces-descent-lemma-descending-property-universally-injective} および
+\ref{spaces-descent-lemma-descending-property-universally-open} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-locally-finite-type}
+性質 $\mathcal{P}(f) =$「$f$ は局所有限型である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が局所有限型であると仮定する。
+$f$ が局所有限型であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-local} を再び用いると、
+$U \to Z$ が局所有限型であることを示せば十分である。
+$f'$ は局所有限型であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が局所有限型であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-locally-finite-type} により、
+望みどおり $U \to Z$ は局所有限型である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-locally-finite-presentation}
+性質 $\mathcal{P}(f) =$「$f$ は局所有限表示である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が局所有限表示であると仮定する。
+$f$ が局所有限表示であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-local} を再び用いると、
+$U \to Z$ が局所有限表示であることを示せば十分である。
+$f'$ は局所有限表示であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が局所有限表示であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-locally-finite-presentation}
+により、望みどおり $U \to Z$ は局所有限表示である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-finite-type}
+性質 $\mathcal{P}(f) =$「$f$ は有限型である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-descent-lemma-descending-property-quasi-compact} および
+\ref{spaces-descent-lemma-descending-property-locally-finite-type} を組み合わせる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-finite-presentation}
+性質 $\mathcal{P}(f) =$「$f$ は有限表示である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-descent-lemma-descending-property-quasi-compact}、
+\ref{spaces-descent-lemma-descending-property-quasi-separated} および
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation} を組み合わせる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-flat}
+性質 $\mathcal{P}(f) =$「$f$ は平坦である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が平坦であると仮定する。
+$f$ が平坦であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-local} を再び用いると、
+$U \to Z$ が平坦であることを示せば十分である。
+$f'$ は平坦であり、$Z' \times_Z U$ は $Z' \times_Z X$ 上
+étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が平坦であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-flat} により、
+望みどおり $U \to Z$ は平坦である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-open-immersion}
+性質 $\mathcal{P}(f) =$「$f$ は開埋め込みである」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local} から従う。
+Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+を考える。これは $S$ 上の代数空間の図式である。ここで
+$Z' \to Z$ はアフィンスキームの全射平坦射であり、
+$X' \to Z'$ は開埋め込みである。$X \to Z$ が開埋め込みであることを
+示さなければならない。$|X'| \subset |Z'|$ は開部分スキーム
+$U' \subset Z'$（$X'$ と同型）に対応し、
+$\text{pr}_0^{-1}(U') = \text{pr}_1^{-1}(U')$ が
+$Z' \times_Z Z'$ の開部分スキームとして成り立つことに注意する。
+したがって開部分スキーム $U \subset Z$ で
+$X' = (Z' \to Z)^{-1}(U)$ となるものが存在する
+（Descent, Lemma \ref{descent-lemma-open-fpqc-covering} を参照）。
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc} により、
+$X$ は fpqc 位相に関する層条件を満たす。
+ここで fpqc 被覆 $\mathcal{U} = \{U' \to U\}$ と元
+$U' \to X' \to X \in \check{H}^0(\mathcal{U}, X)$ がある。
+層条件により射 $U \to X$ を得て、図式
+$$
+\xymatrix{
+U' \ar[r] \ar[d]^{\cong} \ar@/_3ex/[dd] & U \ar[d] \ar@/^3ex/[dd] \\
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+は可換である。一方、任意のスキーム $T$（$S$ 上）と
+$T$-値点 $T \to X$ に対して、その合成 $T \to X \to Z$ は、
+$Z' \times_Z T \to Z'$ が $U'$ を経由して分解するような射である。
+これは明らかに $T \to Z$ が $U$ を経由して分解することを意味する。
+言い換えると、層の写像 $U \to X$ は全単射であり、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-isomorphism}
+性質 $\mathcal{P}(f) =$「$f$ は同型である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-descent-lemma-descending-property-surjective} および
+\ref{spaces-descent-lemma-descending-property-open-immersion} を組み合わせる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-affine}
+性質 $\mathcal{P}(f) =$「$f$ はアフィンである」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ がアフィンであると仮定する。
+$X'$ を $Z' \times_Z X$ を表現するスキームとする。
+標準同型
+$$
+\varphi : X' \times_Z Z' \longrightarrow Z' \times_Z X'
+$$
+を得る。実際、両スキームは代数空間
+$Z' \times_Z Z' \times_Z X$ を表現する。
+これは $X'/Z'/Z$ の降下データである
+（Descent, Definition \ref{descent-definition-descent-datum} を参照。
+確認は省略する。Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves} と比較されたい）。
+$X' \to Z'$ はアフィンなので、この降下データは有効である
+（Descent, Lemma \ref{descent-lemma-affine} を参照）。
+したがってスキーム $Y \to Z$（$Z$ 上）と、降下データと両立する同型
+$\psi : Z' \times_Z Y \to X'$ が存在する。
+もちろん $Y \to Z$ はアフィンである
+（構成によるか、Descent, Lemma
+\ref{descent-lemma-descending-property-affine} による）。
+$\mathcal{Y} = \{Z' \times_Z Y \to Y\}$ は fpqc 被覆であることに
+注意する。また $\psi$ を $X(Z' \times_Z Y)$ の元と解釈すると、
+$\psi \in \check{H}^0(\mathcal{Y}, X)$ である。
+この被覆に関する $X$ の層条件により
+（Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc} を参照）、
+射 $Y \to X$ を得る。構成により、その $Z'$ への基底変換は同型であり、
+従って Lemma \ref{spaces-descent-lemma-descending-property-isomorphism} により同型である。
+これで $X$ がアフィンスキームで表現されることが証明され、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-closed-immersion}
+性質 $\mathcal{P}(f) =$「$f$ は閉埋め込みである」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local} から従う。
+Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+を考える。これは $S$ 上の代数空間の図式である。ここで
+$Z' \to Z$ はアフィンスキームの全射平坦射であり、
+$X' \to Z'$ は閉埋め込みである。$X \to Z$ が閉埋め込みであることを
+示さなければならない。射 $X' \to Z'$ はアフィンである。
+したがって Lemma \ref{spaces-descent-lemma-descending-property-affine} により、
+$X$ はスキームであり、$X \to Z$ はアフィンである。
+Descent, Lemma
+\ref{descent-lemma-descending-property-closed-immersion} から、
+望みどおり $X \to Z$ が閉埋め込みであることが従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-separated}
+性質 $\mathcal{P}(f) =$「$f$ は分離的である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+分離射の基底変換は分離的である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated} を参照）。
+したがって Definition \ref{spaces-descent-definition-property-morphisms-local} の
+順方向の含意が成り立つ。
+
+\medskip\noindent
+$\{Y_i \to Y\}_{i \in I}$ を $S$ 上の代数空間の fpqc 被覆とする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+各基底変換 $X_i := Y_i \times_Y X \to Y_i$ が分離的であると仮定する。
+これは各射
+$$
+\Delta_i :
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+が閉埋め込みであることを意味する。
+fpqc 被覆の基底変換は fpqc 被覆である
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc} を参照）。したがって
+$\{Y_i \times_Y (X \times_Y X) \to X \times_Y X\}$ は
+代数空間の fpqc 被覆である。さらに、各 $\Delta_i$ は射
+$\Delta : X \to X \times_Y X$ の基底変換である。
+ゆえに Lemma \ref{spaces-descent-lemma-descending-property-closed-immersion} から
+$\Delta$ は閉埋め込み、すなわち $f$ は分離的である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-proper}
+性質 $\mathcal{P}(f) =$「$f$ は固有である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+本補題は Lemmas
+\ref{spaces-descent-lemma-descending-property-universally-closed}、
+\ref{spaces-descent-lemma-descending-property-separated} および
+\ref{spaces-descent-lemma-descending-property-finite-type} を組み合わせて従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-quasi-affine}
+性質 $\mathcal{P}(f) =$「$f$ は準アフィンである」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-affine-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が準アフィンであると仮定する。
+$X'$ を $Z' \times_Z X$ を表現するスキームとする。
+標準同型
+$$
+\varphi : X' \times_Z Z' \longrightarrow Z' \times_Z X'
+$$
+を得る。実際、両スキームは代数空間
+$Z' \times_Z Z' \times_Z X$ を表現する。
+これは $X'/Z'/Z$ の降下データである
+（Descent, Definition \ref{descent-definition-descent-datum} を参照。
+確認は省略する。Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves} と比較されたい）。
+$X' \to Z'$ は準アフィンなので、この降下データは有効である
+（Descent, Lemma \ref{descent-lemma-quasi-affine} を参照）。
+したがってスキーム $Y \to Z$（$Z$ 上）と、降下データと両立する同型
+$\psi : Z' \times_Z Y \to X'$ が存在する。
+もちろん $Y \to Z$ は準アフィンである
+（構成によるか、Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-affine} による）。
+$\mathcal{Y} = \{Z' \times_Z Y \to Y\}$ は fpqc 被覆であることに
+注意する。また $\psi$ を $X(Z' \times_Z Y)$ の元と解釈すると、
+$\psi \in \check{H}^0(\mathcal{Y}, X)$ である。
+$X$ の層条件により（Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-sheaf-fpqc} を参照）、
+射 $Y \to X$ を得る。構成により、その $Z'$ への基底変換は同型であり、
+従って Lemma \ref{spaces-descent-lemma-descending-property-isomorphism} により同型である。
+これで $X$ が準アフィンスキームで表現されることが証明され、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-quasi-compact-immersion}
+性質 $\mathcal{P}(f) =$「$f$ は準コンパクトな埋め込みである」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-closed-immersion-local} および
+\ref{spaces-morphisms-lemma-quasi-compact-local} から従う。
+Cartesian 図式
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Z' \ar[r] & Z
+}
+$$
+を考える。これは $S$ 上の代数空間の図式である。ここで
+$Z' \to Z$ はアフィンスキームの全射平坦射であり、
+$X' \to Z'$ は準コンパクトな埋め込みである。
+$X \to Z$ が閉埋め込みであることを示さなければならない。
+% P09-ERR-0354
+射 $X' \to Z'$ は準アフィンである。したがって Lemma
+\ref{spaces-descent-lemma-descending-property-quasi-affine} により、
+$X$ はスキームであり、$X \to Z$ は準アフィンである。
+Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-compact-immersion} から、
+望みどおり $X \to Z$ が準コンパクトな埋め込みであることが従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-integral}
+性質 $\mathcal{P}(f) =$「$f$ は整である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+整射であることは、アフィンかつ普遍閉な射であることと同じである。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed} を参照。
+したがって本補題は Lemmas
+\ref{spaces-descent-lemma-descending-property-universally-closed} および
+\ref{spaces-descent-lemma-descending-property-affine} を組み合わせて従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-finite}
+性質 $\mathcal{P}(f) =$「$f$ は有限である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+有限射であることは、整で局所有限型な射であることと同じである。
+% P09-ERR-0355
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-integral} を参照。
+したがって本補題は Lemmas
+\ref{spaces-descent-lemma-descending-property-locally-finite-type} および
+\ref{spaces-descent-lemma-descending-property-integral} を組み合わせて従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-quasi-finite}
+性質 $\mathcal{P}(f) =$「$f$ は局所準有限である」および
+性質 $\mathcal{P}(f) =$「$f$ は準有限である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+「準コンパクト」であることが基底上 fpqc 局所的であることは
+既に見た（Lemma \ref{spaces-descent-lemma-descending-property-quasi-compact} を参照）。
+したがって「局所準有限」について本補題を証明すれば十分である。
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が局所準有限であると仮定する。
+$f$ が局所準有限であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-local} を再び用いると、
+$U \to Z$ が局所準有限であることを示せば十分である。
+$f'$ は局所準有限であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が局所準有限であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-finite} により、
+望みどおり $U \to Z$ は局所準有限である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-syntomic}
+性質 $\mathcal{P}(f) =$「$f$ は syntomic である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-syntomic-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が syntomic であると仮定する。
+$f$ が syntomic であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-syntomic-local} を再び用いると、
+$U \to Z$ が syntomic であることを示せば十分である。
+$f'$ は syntomic であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が syntomic であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-syntomic} により、
+望みどおり $U \to Z$ は syntomic である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-smooth}
+性質 $\mathcal{P}(f) =$「$f$ は smooth である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が smooth であると仮定する。
+$f$ が smooth であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-smooth-local} を再び用いると、
+$U \to Z$ が smooth であることを示せば十分である。
+$f'$ は smooth であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が smooth であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-smooth} により、
+望みどおり $U \to Z$ は smooth である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-unramified}
+性質 $\mathcal{P}(f) =$「$f$ は不分岐である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-unramified-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が不分岐であると仮定する。
+$f$ が不分岐であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-unramified-local} を再び用いると、
+$U \to Z$ が不分岐であることを示せば十分である。
+$f'$ は不分岐であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が不分岐であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-unramified} により、
+望みどおり $U \to Z$ は不分岐である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-etale}
+性質 $\mathcal{P}(f) =$「$f$ は étale である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため Lemma
+\ref{spaces-descent-lemma-descending-properties-morphisms} を用いる。
+同補題の仮定 (1) と (2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-local} から従う。
+$Z' \to Z$ を $S$ 上のアフィンスキームの全射平坦射とする。
+$f : X \to Z$ を代数空間の射とし、基底変換
+$f' : Z' \times_Z X \to Z'$ が étale であると仮定する。
+$f$ が étale であることを示さなければならない。
+$U$ をスキームとし、$U \to X$ を全射かつ étale とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-local} を再び用いると、
+$U \to Z$ が étale であることを示せば十分である。
+$f'$ は étale であり、$Z' \times_Z U$ は
+$Z' \times_Z X$ 上 étale なスキームなので、同じ補題を再び用いて
+$Z' \times_Z U \to Z'$ が étale であると分かる。
+$\{Z' \to Z\}$ は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-descending-property-etale} により、
+望みどおり $U \to Z$ は étale である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-finite-locally-free}
+性質 $\mathcal{P}(f) =$「$f$ は有限局所自由である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+有限局所自由であることは、有限、平坦かつ局所有限表示であることと同値である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-flat}）。
+従って、これは Lemmas
+\ref{spaces-descent-lemma-descending-property-finite}、
+\ref{spaces-descent-lemma-descending-property-flat} および
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-monomorphism}
+性質 $\mathcal{P}(f) =$「$f$ はモノ射である」は、
+基底上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$ を代数空間の射とする。
+$\{Y_i \to Y\}$ を fpqc 被覆とし、各基底変換
+$f_i : X_i \to Y_i$（$f$ の基底変換）がモノ射であると仮定する。
+$f$ がモノ射であることを示さなければならない。
+
+\medskip\noindent
+第一の証明。$f$ がモノ射であることと
+$\Delta : X \to X \times_Y X$ が同型であることは同値である。
+これを $f_i$ に適用すると、各射
+$$
+\Delta_i :
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+が同型であると分かる。fpqc 被覆の基底変換は fpqc 被覆である
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc} を参照）。したがって
+$\{Y_i \times_Y (X \times_Y X) \to X \times_Y X\}$ は
+代数空間の fpqc 被覆である。さらに、各 $\Delta_i$ は射
+$\Delta : X \to X \times_Y X$ の基底変換である。
+ゆえに Lemma \ref{spaces-descent-lemma-descending-property-isomorphism} から
+$\Delta$ は同型、すなわち $f$ はモノ射である。
+
+\medskip\noindent
+第二の証明。
+$V$ をスキームとし、$V \to Y$ を全射な étale 射とする。
+$V \times_Y X \to V$ がモノ射であることを示せれば、
+$X \to Y$ がモノ射であることが従う。実際、層の任意の
+Cartesian 図式
+$$
+\vcenter{
+\xymatrix{
+\mathcal{F} \ar[r]_a \ar[d]_b & \mathcal{G} \ar[d]^c \\
+\mathcal{H} \ar[r]^d & \mathcal{I}
+}
+}
+\quad
+\quad
+\mathcal{F} = \mathcal{H} \times_\mathcal{I} \mathcal{G}
+$$
+において、$c$ が層の全射で $a$ が単射ならば、$d$ も単射である。
+これにより問題は $Y$ がスキームである場合に帰着される。
+さらにこの場合、代数空間 $Y_i$ もスキームであると仮定してよい。
+実際、常に被覆を細分してこの状況にできる
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes} を参照）。
+
+\medskip\noindent
+$\{Y_i \to Y\}$ をスキームの fpqc 被覆と仮定する。
+$a, b : T \to X$ を $f \circ a = f \circ b$ を満たす二つの射とする。
+$a = b$ を示さなければならない。$f_i$ はモノ射なので
+$a_i = b_i$ である。ここで
+$a_i, b_i : Y_i \times_Y T \to X_i$ は基底変換である。
+特に合成 $Y_i \times_Y T \to T \to X$ は等しい。
+$\{Y_i \times_Y T \to T\}$ は fpqc 被覆なので、Properties of Spaces,
+Proposition \ref{spaces-properties-proposition-sheaf-fpqc} から
+$a = b$ を導く。
+\end{proof}
+
+
+
+
+\section{Fppf 位相における射の性質の降下}
+\label{spaces-descent-section-descending-properties-morphisms-fppf}
+
+\noindent
+本節では、fpqc 位相において基底上局所的であることを（まだ）
+示せなかったが、fppf 位相では基底上局所的であるような
+代数空間の射の性質をいくつか見いだす。
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-fppf-property-immersion}
+性質 $\mathcal{P}(f) =$「$f$ は埋め込みである」は、
+基底上 fppf 局所的である。
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$ を代数空間の射とする。
+$\{Y_i \to Y\}_{i \in I}$ を $Y$ の fppf 被覆とする。
+$f_i : X_i \to Y_i$ を $f$ の基底変換とする。
+
+\medskip\noindent
+$f$ が埋め込みならば、Spaces, Lemma
+\ref{spaces-lemma-base-change-immersions} により各 $f_i$ は埋め込みである。
+これで Definition \ref{spaces-descent-definition-property-morphisms-local} の
+順方向の含意が証明された。
+
+\medskip\noindent
+逆に、各 $f_i$ が埋め込みであると仮定する。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-immersions-monomorphisms} により、
+これは各 $f_i$ が分離的であることを含意する。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-immersion-quasi-finite} により、
+これは各 $f_i$ が局所準有限であることを含意する。
+従って Lemmas \ref{spaces-descent-lemma-descending-property-separated} および
+\ref{spaces-descent-lemma-descending-property-quasi-finite} を適用すると、
+$f$ は局所準有限かつ分離的であることが分かる。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}
+により、これは $f$ が表現可能であることを含意する！
+
+\medskip\noindent
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local} により、
+任意のスキーム $Z$ と射 $Z \to Y$ に対し、基底変換
+$Z \times_Y X \to Z$ が埋め込みであることを示せば十分である。
+Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fppf-schemes} により、
+スキームによる fppf 被覆 $\{Z_i \to Z\}$ で、
+被覆 $\{Y_i \to Y\}$ の $Z$ への引き戻しを細分するものを見つけられる。
+従って $Z \times_Y X \to Z$（前段落の結果によればスキームの射）は、
+$Z$ のスキームによる fppf 被覆の各要素に引き戻すと埋め込みになる。
+% P09-ERR-0356
+従ってスキームに対する結果、すなわち Descent, Lemma
+\ref{descent-lemma-descending-fppf-property-immersion} により、
+$Z \times_Y X \to Z$ は埋め込みである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-fppf-property-locally-separated}
+性質 $\mathcal{P}(f) =$「$f$ は局所分離的である」は、
+基底上 fppf 局所的である。
+\end{lemma}
+
+\begin{proof}
+局所分離射の基底変換は局所分離的である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-separated} を参照）。
+したがって Definition \ref{spaces-descent-definition-property-morphisms-local} の
+順方向の含意が成り立つ。
+
+\medskip\noindent
+$\{Y_i \to Y\}_{i \in I}$ を $S$ 上の代数空間の fppf 被覆とする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+各基底変換 $X_i := Y_i \times_Y X \to Y_i$ が局所分離的であると仮定する。
+これは各射
+$$
+\Delta_i :
+X_i
+\longrightarrow
+X_i \times_{Y_i} X_i = Y_i \times_Y (X \times_Y X)
+$$
+が埋め込みであることを意味する。
+fppf 被覆の基底変換は fppf 被覆である
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf} を参照）。
+% P09-ERR-0357
+したがって
+$\{Y_i \times_Y (X \times_Y X) \to X \times_Y X\}$ は
+代数空間の fppf 被覆である。さらに、各 $\Delta_i$ は射
+$\Delta : X \to X \times_Y X$ の基底変換である。
+ゆえに Lemma \ref{spaces-descent-lemma-descending-fppf-property-immersion} から
+$\Delta$ は埋め込み、すなわち $f$ は局所分離的である。
+\end{proof}
+
+
+
+
+
+\section{射の性質の降下の応用}
+\label{spaces-descent-section-application-descending-properties-morphisms}
+
+\noindent
+本節は Descent, Section
+\ref{descent-section-application-descending-properties-morphisms}
+の類似である。
+
+\begin{lemma}
+\label{spaces-descent-lemma-descending-property-ample}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$\{g_i : Y_i \to Y\}_{i \in I}$ を fpqc 被覆とする。
+$f_i : X_i \to Y_i$ を $f$ の基底変換とし、$\mathcal{L}_i$ を
+$\mathcal{L}$ の $X_i$ への引き戻しとする。
+次は同値である。
+\begin{enumerate}
+\item $\mathcal{L}$ は $X/Y$ 上 ample である。
+\item $\mathcal{L}_i$ は $X_i/Y_i$ 上 ample である。
+これはすべての $i \in I$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+含意 (1) $\Rightarrow$ (2) は Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-ample-base-change} から従う。
+(2) を仮定する。$\mathcal{L}$ が $X/Y$ 上 ample であることは
+$Y$ 上 étale 局所的に調べてよい
+（Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relatively-ample-local} を参照）。
+従って $Y$ はスキームであると仮定してよく、さらに各 $Y_i$ も
+スキームであると仮定してよい
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-refine-fpqc-schemes} を参照）。
+言い換えると、$\{Y_i \to Y\}$ はスキームの fpqc 被覆であると
+仮定してよい。
+
+\medskip\noindent
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relatively-ample-properties} により、
+$X_i \to Y_i$ は表現可能（すなわち $X_i$ はスキーム）、
+準コンパクトかつ分離的である。
+従って Lemmas \ref{spaces-descent-lemma-descending-property-quasi-compact} および
+\ref{spaces-descent-lemma-descending-property-separated} により、
+$f$ は準コンパクトかつ分離的である。これは
+$$
+\mathcal{A} = \bigoplus_{d \geq 0} f_*\mathcal{L}^{\otimes d}
+$$
+が準連接次数付き $\mathcal{O}_Y$-代数であることを意味する
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}）。
+さらに $\mathcal{A}$ の形成は平坦基底変換と可換である。
+これは Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} による。
+特に
+$$
+\mathcal{A}_i = \bigoplus_{d \geq 0} f_{i, *}\mathcal{L}_i^{\otimes d}
+$$
+とおけば、$\mathcal{A}_i = g_i^*\mathcal{A}$ である。
+従って自然な写像
+$\psi_d : f^*\mathcal{A}_d \to \mathcal{L}^{\otimes d}$
+（$\mathcal{O}_X$ の写像）は、引き戻すと自然な写像
+$\psi_{i, d} : f_i^*(\mathcal{A}_i)_d \to \mathcal{L}_i^{\otimes d}$
+（$\mathcal{O}_{X_i}$-加群の写像）
+を与える。$\mathcal{L}_i$ は $X_i/Y_i$ 上 ample なので、
+任意の点 $x_i \in X_i$ に対し $d \geq 1$ が存在して、
+$f_i^*(\mathcal{A}_i)_d \to \mathcal{L}_i^{\otimes d}$ は
+$x_i$ における茎上全射である。
+これは相対 ample 加群の定義から直接従うか、Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample} から従う。
+$x \in |X|$ ならば、$i$ と $x_i \in X_i$ で $x$ に写るものを選べる。
+写像
+$\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{X_i, \overline{x}_i}$
+は平坦、従って忠実平坦なので、
+% P09-ERR-0358
+任意の $x \in |X|$ に対して $d \geq 1$ が存在し、
+$f^*\mathcal{A}_d \to \mathcal{L}^{\otimes d}$ は
+$x$ における茎上全射であると結論する。
+これは Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-invertible-map-into-relative-proj} の開部分集合
+$U(\psi) \subset X$、すなわち写像
+$$
+\psi : f^*\mathcal{A} \to \bigoplus_{d \geq 0} \mathcal{L}^{\otimes d}
+$$
+（次数付き $\mathcal{O}_X$-代数の写像）に対応するものが
+$X$ に等しいことを含意する。
+対応する射
+$$
+r_{\mathcal{L}, \psi} : X \longrightarrow \underline{\text{Proj}}_Y(\mathcal{A})
+$$
+を考える。上の議論から明らかなように、
+$r_{\mathcal{L}, \psi}$ の $Y_i$ への基底変換は射
+$r_{\mathcal{L}_i, \psi_i}$ であり、これは Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample} により開埋め込みである。
+従って Lemma \ref{spaces-descent-lemma-descending-property-open-immersion} により、
+$r_{\mathcal{L}, \psi}$ は開埋め込みである。
+従って $X$ はスキームであり、Morphisms, Lemma
+\ref{morphisms-lemma-characterize-relatively-ample} により
+$\mathcal{L}$ は $X/Y$ 上 ample であると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-ample-in-neighbourhood}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の固有射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+次の性質によって特徴付けられる開部分空間 $V \subset Y$ が存在する。
+代数空間の射 $Y' \to Y$ が $V$ を経由して分解することと、
+引き戻し $\mathcal{L}'$（$\mathcal{L}$ の
+$X' = Y' \times_Y X$ への引き戻し）が $X'/Y'$ 上 ample
+であることは同値である
+（Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-relatively-ample} の意味で）。
+\end{lemma}
+
+\begin{proof}
+$Y$ がスキームである場合には本補題が成り立つと仮定する。
+$U$ をスキームとし、$U \to Y$ を全射な étale 射とする。
+$R = U \times_Y U$ とし、射影を $t, s : R \to U$ とする。
+$X_U = U \times_Y X$ と書き、引き戻しを $\mathcal{L}_U$ と書く。
+すると補題のような開部分スキーム $V' \subset U$ を
+$(X_U \to U, \mathcal{L}_U)$ に対して得る。
+関手的な特徴付けにより $s^{-1}(V') = t^{-1}(V')$ である。
+従って開部分空間 $V \subset Y$ で、$V'$ が $V$ の $U$ における
+逆像となるものが存在する。特に $V' \to V$ は全射 étale であり、
+$\mathcal{L}_V$ が $X_V/V$ 上 ample であると結論する
+（Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relatively-ample-local}）。
+さて、$Y' \to Y$ が $\mathcal{L}'$ を $X'/Y'$ 上 ample にする射ならば、
+$U \times_Y Y' \to Y'$ は $V'$ を経由して分解しなければならず、
+$Y' \to Y$ は $V$ を経由して分解すると結論する。
+従って $V \subset Y$ は補題の主張どおりである。
+こうして次段落で扱う場合に帰着する。
+
+\medskip\noindent
+$Y$ がスキームであると仮定する。問題は $Y$ 上局所的なので、
+$Y$ はアフィンスキームであると仮定してよい。次を示す。
+\begin{enumerate}
+\item[(A)] $\Spec(k) \to Y$ が射で、$\mathcal{L}_k$ が
+$X_k/k$ 上 ample ならば、開近傍 $V \subset Y$
+（$\Spec(k) \to Y$ の像の近傍）で、$\mathcal{L}_V$ が
+$X_V/V$ 上 ample となるものがある。
+\end{enumerate}
+(A) が補題の正しさを含意することは明らかである。
+
+\medskip\noindent
+$X \to Y$、$\mathcal{L}$、$\Spec(k) \to Y$ を (A) のようなものとする。
+Lemma \ref{spaces-descent-lemma-descending-property-ample} により、
+$k = \kappa(y)$ はある点 $y$（$Y$ の点）の剰余体であると仮定してよい。
+
+\medskip\noindent
+$Y$ はアフィンなので、有向集合 $I$ と代数空間の射の逆系
+$X_i \to Y_i$ で、$Y_i$ が $\mathbf{Z}$ 上有限表示、
+遷移射 $X_i \to X_{i'}$ および $Y_i \to Y_{i'}$ がアフィン、
+$X_i \to Y_i$ が固有かつ有限表示であり、
+$X \to Y = \lim (X_i \to Y_i)$ となるものを見つけられる。
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-proper-limit-of-proper-finite-presentation-noetherian}
+を参照。$I$ を縮小した後、$Y_i$ が（アフィン）スキームであると
+すべての $i$ に対して仮定してよい
+（Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-is-affine} を参照）。
+$I$ を縮小した後、可逆 $\mathcal{O}_{X_i}$-加群
+$\mathcal{L}_i$ の両立する系で、$\mathcal{L}$ に引き戻されるものがあると
+仮定してよい（Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-invertible-modules} を参照）。
+$y_i \in Y_i$ を $y$ の像とする。
+このとき $\kappa(y) = \colim \kappa(y_i)$ である。
+従って $X_y = \lim X_{i, y_i}$ であり、$I$ を縮小した後、
+$X_{i, y_i}$ がスキームであるとすべての $i$ に対して仮定してよい
+（Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-is-scheme} を参照）。
+従って、ある $i$ に対して $\mathcal{L}_{i, y_i}$ は
+$X_{i, y_i}$ 上 ample である
+（Limits, Lemma \ref{limits-lemma-limit-ample} による）。
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-ample-in-neighbourhood} により、
+開近傍 $V_i \subset Y_i$（$y_i$ の近傍）で、$\mathcal{L}_i$ の
+$f_i^{-1}(V_i)$ への制限が $V_i$ に関して ample となるものを得る。
+$V \subset Y$ を $V_i$ の逆像とすれば証明が完了する
+（ヒント：Morphisms, Lemma
+\ref{morphisms-lemma-ample-base-change} と、
+$X \to Y \times_{Y_i} X_i$ がアフィンであること、および
+アフィン射による ample 可逆層の引き戻しが ample であることを用いる。
+後者については Morphisms, Lemma
+\ref{morphisms-lemma-pullback-ample-tensor-relatively-ample} を参照）。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{始域上局所的な射の性質}
+\label{spaces-descent-section-properties-morphisms-local-source}
+
+\noindent
+本節では、代数空間の射の性質が始域上局所的であるとは
+どういうことかを定義する。Descent, Section
+\ref{descent-section-properties-morphisms-local-source} と比較されたい。
+
+\begin{definition}
+\label{spaces-descent-definition-property-morphisms-local-source}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質とする。
+$\tau \in \{fpqc, \linebreak[0] fppf, \linebreak[0] syntomic, \linebreak[0]
+smooth, \linebreak[0] \etale\}$ とする。
+$\mathcal{P}$ が{\it 始域上 $\tau$-局所的}、または
+{\it $\tau$-位相について始域上局所的}であるというのは、
+代数空間の任意の射 $f : X \to Y$（$S$ 上の射）と、
+代数空間の任意の $\tau$-被覆
+$\{X_i \to X\}_{i \in I}$ に対して
+$$
+f \text{ は }\mathcal{P}
+\Leftrightarrow
+\text{各 }X_i \to Y\text{ は }\mathcal{P}.
+$$
+が成り立つことをいう。
+\end{definition}
+
+\noindent
+念のため、同型は常に被覆なので、性質 $\mathcal{P}$ が
+$X \to Y$ に対して成り立つことと、任意の射 $X' \to Y'$ で
+$X \to Y$ に同型なものに対して成り立つことは同値であると分かる
+（または、そう要求する）。
+性質が始域上 $\tau$-局所的ならば、
+$\tau$-被覆に現れる射を前合成することで保たれる。
+形式的な主張を次に示す。
+
+\begin{lemma}
+\label{spaces-descent-lemma-precompose-property-local-source}
+$S$ をスキームとする。
+$\tau \in \{fpqc, \linebreak[0] fppf, \linebreak[0] syntomic, \linebreak[0]
+smooth, \linebreak[0] \etale\}$ とする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、
+始域上 $\tau$-局所的なものとする。
+$f : X \to Y$ が性質 $\mathcal{P}$ をもつとする。
+任意の射 $a : X' \to X$ が平坦、それぞれ平坦かつ局所有限表示、
+それぞれ syntomic、それぞれ smooth、それぞれ étale ならば、
+合成 $f \circ a : X' \to Y$ は性質 $\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+これは $X' \to X$ を、$\tau$-被覆をなす射の族に
+組み込めることによる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-transfer-from-schemes}
+$S$ をスキームとする。
+$\tau \in \{fpqc, \linebreak[0] fppf, \linebreak[0] syntomic, \linebreak[0]
+smooth, \linebreak[0] \etale\}$ とする。
+$\mathcal{P}$ を $S$ 上のスキームの射の性質で、
+始域と終域に関して étale 局所的なものと仮定する。
+対応する代数空間の射の性質を $\mathcal{P}_{spaces}$ と記す。
+これは $S$ 上の射の性質である
+% P09-ERR-0361
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-P} を参照）。
+$\mathcal{P}$ が $\tau$-位相について始域上局所的ならば、
+$\mathcal{P}_{spaces}$ も $\tau$-位相について始域上局所的である。
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\{X_i \to X\}_{i \in I}$ を代数空間の $\tau$-被覆とする。
+スキーム $V$ と全射な étale 射 $V \to Y$ を選ぶ。
+スキーム $U$ と全射な étale 射 $U \to X \times_Y V$ を選ぶ。
+各 $i$ に対してスキーム $U_i$ と全射な étale 射
+$U_i \to X_i \times_X U$ を選ぶ。
+
+\medskip\noindent
+$\{X_i \times_X U \to U\}_{i \in I}$ は $\tau$-被覆である。
+各 $\{U_i \to X_i \times_X U\}$ は étale 被覆、従って
+$\tau$-被覆である。ゆえに $\{U_i \to U\}_{i \in I}$ は
+代数空間の $\tau$-被覆であり、$S$ 上のものである。
+しかし $U$ と各 $U_i$ はスキームなので、
+$\{U_i \to U\}_{i \in I}$ はスキームの $\tau$-被覆であり、
+% P09-ERR-0360
+$S$ 上のものであると分かる。
+
+\medskip\noindent
+ここで
+\begin{align*}
+f \text{ は }\mathcal{P}_{spaces}
+& \Leftrightarrow
+U \to V \text{ は }\mathcal{P} \\
+& \Leftrightarrow
+\text{各 }U_i \to V \text{ は }\mathcal{P} \\
+& \Leftrightarrow
+\text{各 }X_i \to Y\text{ は }\mathcal{P}_{spaces}.
+\end{align*}
+第一と最後の同値は $\mathcal{P}_{spaces}$ の定義による。
+% P09-ERR-0359
+中間の同値は、$\mathcal{P}$ が $\tau$-位相において
+始域上局所的であると仮定したことによる。
+\end{proof}
+
+
+
+
+
+
+\section{始域上の fpqc 位相で局所的な射の性質}
+\label{spaces-descent-section-fpqc-local-source}
+
+\noindent
+始域上 fpqc 局所的な射の性質をいくつか挙げる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-flat-fpqc-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は平坦である」は、
+始域上 fpqc 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-flat} および Descent, Lemma
+\ref{descent-lemma-flat-fpqc-local-source} を用いる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{始域上の fppf 位相で局所的な射の性質}
+\label{spaces-descent-section-fppf-local-source}
+
+\noindent
+始域上 fppf 局所的な射の性質をいくつか挙げる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-locally-finite-presentation-fppf-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は局所有限表示である」は、
+始域上 fppf 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-finite-presentation} および
+Descent, Lemma
+\ref{descent-lemma-locally-finite-presentation-fppf-local-source} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-locally-finite-type-fppf-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は局所有限型である」は、
+始域上 fppf 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-finite-type} および
+Descent, Lemma
+\ref{descent-lemma-locally-finite-type-fppf-local-source} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-open-fppf-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は開である」は、
+始域上 fppf 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-open} および Descent, Lemma
+\ref{descent-lemma-open-fppf-local-source} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-universally-open-fppf-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は普遍開である」は、
+始域上 fppf 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-open} および Descent, Lemma
+\ref{descent-lemma-universally-open-fppf-local-source} を用いる。
+\end{proof}
+
+
+
+\section{始域上の syntomic 位相で局所的な射の性質}
+\label{spaces-descent-section-syntomic-local-source}
+
+\noindent
+始域上 syntomic 局所的な射の性質をいくつか挙げる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-syntomic-syntomic-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は syntomic である」は、
+始域上 syntomic 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-syntomic} および Descent, Lemma
+\ref{descent-lemma-syntomic-syntomic-local-source} を用いる。
+\end{proof}
+
+
+
+
+\section{始域上の smooth 位相で局所的な射の性質}
+\label{spaces-descent-section-smooth-local-source}
+
+\noindent
+始域上 smooth 局所的な射の性質をいくつか挙げる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-smooth-smooth-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は smooth である」は、
+始域上 smooth 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-smooth} および Descent, Lemma
+\ref{descent-lemma-smooth-smooth-local-source} を用いる。
+\end{proof}
+
+
+
+
+\section{始域上の étale 位相で局所的な射の性質}
+\label{spaces-descent-section-etale-local-source}
+
+\noindent
+始域上 étale 局所的な射の性質をいくつか挙げる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-etale-etale-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は étale である」は、
+始域上 étale 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-etale} および Descent, Lemma
+\ref{descent-lemma-etale-etale-local-source} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-locally-quasi-finite-etale-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は局所準有限である」は、
+始域上 étale 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-locally-quasi-finite} および
+Descent, Lemma
+\ref{descent-lemma-locally-quasi-finite-etale-local-source} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-unramified-etale-local-source}
+性質 $\mathcal{P}(f)=$「$f$ は不分岐である」は、
+始域上 étale 局所的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-descent-lemma-transfer-from-schemes} から従う。
+ここでは Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-unramified} および Descent, Lemma
+\ref{descent-lemma-unramified-etale-local-source} を用いる。
+\end{proof}
+
+
+
+
+\section{始域と終域に関して smooth 局所的な射の性質}
+\label{spaces-descent-section-properties-local-source-target}
+
+\noindent
+$\mathcal{P}$ を代数空間の射の性質とする。
+「$\mathcal{P}$ は始域と終域に関して smooth 局所的である」
+という句には直観的な意味がある。しかし、この概念は
+$\mathcal{P}$ が始域上 smooth 局所的かつ終域上 smooth 局所的であると
+要求することとは同じでないことが分かる。
+類似の現象（étale 位相とスキームの圏に対するもの）は
+Descent, Section
+\ref{descent-section-properties-etale-local-source-target} で詳しく論じた
+（概観には Descent, Remark
+\ref{descent-remark-compare-definitions} を参照）。
+ただし smooth 位相の場合と étale 位相の場合には重要な違いがある。
+この違いを見るため、Descent, Lemma
+\ref{descent-lemma-local-source-target-implies} と
+Lemma \ref{spaces-descent-lemma-local-source-target-implies} の違い、および
+Descent, Lemma
+\ref{descent-lemma-local-source-target-characterize} と
+Lemma \ref{spaces-descent-lemma-local-source-target-characterize} の違いを
+考えてみることを勧める。
+すなわち étale の状況では、終域の étale「被覆」の選択は
+本質的でないが、smooth の状況ではそうではない。
+
+\begin{definition}
+\label{spaces-descent-definition-local-source-target}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質とする。
+$\mathcal{P}$ が{\it 始域と終域に関して smooth 局所的}であるとは、
+次が成り立つことをいう。
+\begin{enumerate}
+\item （smooth 写像との前合成で安定）
+$f : X \to Y$ が smooth で $g : Y \to Z$ が
+$\mathcal{P}$ をもつならば、$g \circ f$ は $\mathcal{P}$ をもつ。
+\item （smooth 基底変換で安定）
+$f : X \to Y$ が $\mathcal{P}$ をもち、$Y' \to Y$ が smooth ならば、
+基底変換 $f' : Y' \times_Y X \to Y'$ は $\mathcal{P}$ をもつ。
+\item （局所性）射 $f : X \to Y$ が与えられたとき、次は同値である。
+\begin{enumerate}
+\item $f$ は $\mathcal{P}$ をもつ。
+\item すべての $x \in |X|$ に対して可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+で、垂直射が smooth であり、$u \in |U|$ が
+$a(u) = x$ を満たし、$h$ が $\mathcal{P}$ をもつものが存在する。
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\noindent
+以上を定義とする。以下の補題では、これが
+$\mathcal{P}$ が終域上 smooth 局所的、始域上 smooth 局所的であり、
+さらに smooth 射との後合成で安定であることと同値だと示す。
+
+\begin{lemma}
+\label{spaces-descent-lemma-local-source-target-implies}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、
+始域と終域に関して smooth 局所的なものとする。このとき
+\begin{enumerate}
+\item $\mathcal{P}$ は始域上 smooth 局所的である。
+\item $\mathcal{P}$ は終域上 smooth 局所的である。
+\item $\mathcal{P}$ は smooth 射との後合成で安定である。
+すなわち $f : X \to Y$ が $\mathcal{P}$ をもち、
+$g : Y \to Z$ が smooth ならば、$g \circ f$ は $\mathcal{P}$ をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+すべてを完全に書き下す。
+
+\medskip\noindent
+(1) の証明。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\{X_i \to X\}_{i \in I}$ を $X$ の smooth 被覆とする。
+各合成 $h_i : X_i \to Y$ が $\mathcal{P}$ をもつならば、
+各 $|x| \in X$ に対して
+% P09-ERR-0362
+$i \in I$ と点 $x_i \in |X_i|$ であって $x$ に写るものを見つけられる。
+すると $(X_i, x_i) \to (X, x)$ は対の smooth 射、
+$\text{id}_Y : Y \to Y$ は smooth 射であり、$h_i$ は
+Definition \ref{spaces-descent-definition-local-source-target} の第 (3) 項のとおりである。
+従って $f$ は $\mathcal{P}$ をもつことが分かる。
+逆に、$f$ が $\mathcal{P}$ をもてば、
+Definition \ref{spaces-descent-definition-local-source-target} の第 (1) 項により、
+各 $X_i \to Y$ は $\mathcal{P}$ をもつ。
+
+\medskip\noindent
+(2) の証明。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\{Y_i \to Y\}_{i \in I}$ を $Y$ の smooth 被覆とする。
+$X_i = Y_i \times_Y X$ とおき、$h_i : X_i \to Y_i$ を
+$f$ の基底変換とする。各 $h_i : X_i \to Y_i$ が
+$\mathcal{P}$ をもつならば、各 $x \in |X|$ に対して
+$i \in I$ と点 $x_i \in |X_i|$ であって $x$ に写るものを選ぶ。
+このとき $(X_i, x_i) \to (X, x)$ は対の smooth 射、
+$Y_i \to Y$ は smooth であり、$h_i$ は Definition
+\ref{spaces-descent-definition-local-source-target} の第 (3) 項のとおりである。
+従って $f$ は $\mathcal{P}$ をもつことが分かる。
+逆に、$f$ が $\mathcal{P}$ をもつならば、Definition
+\ref{spaces-descent-definition-local-source-target} の第 (2) 項により、
+各 $X_i \to Y_i$ は $\mathcal{P}$ をもつ。
+
+\medskip\noindent
+(3) の証明。$f : X \to Y$ が $\mathcal{P}$ をもち、
+$g : Y \to Z$ が smooth であると仮定する。
+すべての $x \in |X|$ に対して、$(X, x) \to (X, x)$ を
+対の smooth 射とみなすことができ、$Y \to Z$ は smooth 射であり、
+$h = f$ は Definition \ref{spaces-descent-definition-local-source-target} の
+第 (3) 項のとおりである。従って $g \circ f$ は
+$\mathcal{P}$ をもつことが分かる。
+\end{proof}
+
+\noindent
+次の補題は Morphisms, Lemma
+\ref{morphisms-lemma-locally-P-characterize} の類似である。
+
+\begin{lemma}
+\label{spaces-descent-lemma-local-source-target-characterize}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、
+始域と終域に関して smooth 局所的なものとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。次は同値である。
+\begin{enumerate}
+\item[(a)] $f$ は性質 $\mathcal{P}$ をもつ。
+\item[(b)] すべての $x \in |X|$ に対して、対の smooth 射
+$a : (U, u) \to (X, x)$、smooth 射 $b : V \to Y$、および
+射 $h : U \to V$ で、$f \circ a = b \circ h$ かつ
+$h$ が $\mathcal{P}$ をもつものが存在する。
+\item[(c)] ある可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+で $a$, $b$ が smooth、$a$ が全射であり、射 $h$ が
+$\mathcal{P}$ をもつものが存在する。
+\item[(d)] 任意の可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+で $b$ が smooth、$U \to X \times_Y V$ が smooth であるものに対し、
+射 $h$ は $\mathcal{P}$ をもつ。
+\item[(e)] smooth 被覆 $\{Y_i \to Y\}_{i \in I}$ で、
+各基底変換 $Y_i \times_Y X \to Y_i$ が $\mathcal{P}$ をもつものが存在する。
+\item[(f)] smooth 被覆 $\{X_i \to X\}_{i \in I}$ で、
+各合成 $X_i \to Y$ が $\mathcal{P}$ をもつものが存在する。
+\item[(g)] smooth 被覆 $\{Y_i \to Y\}_{i \in I}$ と、
+各 $i \in I$ に対する smooth 被覆
+$\{X_{ij} \to Y_i \times_Y X\}_{j \in J_i}$ で、各射
+$X_{ij} \to Y_i$ が $\mathcal{P}$ をもつものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) と (b) の同値性は Definition
+\ref{spaces-descent-definition-local-source-target} の一部である。
+(a) と (e) の同値性は Lemma
+\ref{spaces-descent-lemma-local-source-target-implies} の第 (2) 項である。
+(a) と (f) の同値性は Lemma
+\ref{spaces-descent-lemma-local-source-target-implies} の第 (1) 項である。
+(a) はいま (e) および (f) と同値なので、
+% P09-ERR-0363
+(a) は (g) と同値であることが従う。
+
+\medskip\noindent
+(c) が (b) を含意することは明らかである。(b) が成り立つなら、任意の
+$x \in |X|$ に対して、対の smooth 射
+$a_x : (U_x, u_x) \to (X, x)$、smooth 射 $b_x : V_x \to Y$、および
+射 $h_x : U_x \to V_x$ で、$f \circ a_x = b_x \circ h_x$ かつ
+$h_x$ が $\mathcal{P}$ をもつものを選べる。このとき
+$h = \coprod h_x : \coprod U_x \to \coprod V_x$ は
+$a = \coprod a_x$ および $b = \coprod b_x$ とともに (c) の図式をなす。
+（$h$ は性質 $\mathcal{P}$ をもつことに注意する。実際、
+$\{V_x \to \coprod V_x\}$ は smooth 被覆であり、
+$\mathcal{P}$ は終域上 smooth 局所的である。）従って (b) と (c) は同値である。
+
+\medskip\noindent
+これで (a), (b), (c), (e), (f), (g) が同値であることが分かった。
+(a) が成り立つと仮定する。$U, V, a, b, h$ を (d) のとおりとする。
+このとき $X \times_Y V \to V$ は $\mathcal{P}$ をもつ。実際、
+$\mathcal{P}$ は smooth 基底変換で安定である。従って
+$U \to V$ は $\mathcal{P}$ をもつ。実際、$\mathcal{P}$ は
+smooth 射との前合成で安定である。逆に (d) が成り立つなら、
+$U = X$ および $V = Y$ とおけば $f$ が $\mathcal{P}$ をもつことが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-smooth-local-source-target}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{P}$ は始域上 smooth 局所的である。
+\item $\mathcal{P}$ は終域上 smooth 局所的である。
+\item $\mathcal{P}$ は smooth 射との後合成で安定である。すなわち
+$f : X \to Y$ が $\mathcal{P}$ をもち、$Y \to Z$ が smooth 射ならば、
+$X \to Z$ は $\mathcal{P}$ をもつ。
+\end{enumerate}
+このとき $\mathcal{P}$ は始域と終域に関して smooth 局所的である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$ を補題の条件 (1), (2), (3) を満たす
+代数空間の射の性質とする。Lemma
+\ref{spaces-descent-lemma-precompose-property-local-source} により、
+$\mathcal{P}$ は smooth 射との前合成で安定である。
+Lemma \ref{spaces-descent-lemma-pullback-property-local-target} により、
+$\mathcal{P}$ は smooth 基底変換で安定である。
+従って Definition \ref{spaces-descent-definition-local-source-target} の
+第 (3) 項が成り立つことを示せば十分である。
+
+\medskip\noindent
+より具体的に、$f : X \to Y$ を $S$ 上の代数空間の射で、
+Definition \ref{spaces-descent-definition-local-source-target} の第 (3)(b) 項を
+満たすものとする。言い換えれば、すべての
+% P09-ERR-0364
+$x \in X$ に対して smooth 射 $a_x : U_x \to X$、
+点 $u_x \in |U_x|$ であって $x$ に写るもの、smooth 射 $b_x : V_x \to Y$、および
+射 $h_x : U_x \to V_x$ で、$f \circ a_x = b_x \circ h_x$ かつ
+$h_x$ が $\mathcal{P}$ をもつものが存在する。
+$f$ が $\mathcal{P}$ をもつことを示せば補題の証明は完了する。
+$U = \coprod U_x$, $a = \coprod a_x$, $V = \coprod V_x$,
+$b = \coprod b_x$, $h = \coprod h_x$ とおく。可換図式
+% P09-ERR-0365
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+を得る。ここで $a$, $b$ は smooth、$a$ は全射である。
+$h$ は $\mathcal{P}$ をもつことに注意する。実際、各 $h_x$ がそうであり、
+$\mathcal{P}$ は終域上 smooth 局所的である。
+$a$ は全射で $\mathcal{P}$ は始域上 smooth 局所的なので、
+$b \circ h$ が $\mathcal{P}$ をもつことを示せば十分である。
+これは $\mathcal{P}$ が smooth 射との後合成で安定であると仮定し、
+$b$ が smooth であることから従う。
+\end{proof}
+
+\begin{remark}
+\label{spaces-descent-remark-list-local-source-target}
+Lemma \ref{spaces-descent-lemma-smooth-local-source-target} と本章の先の節の結果を用いると、
+始域と終域に関して smooth 局所的な射の型の一覧を容易に作れる。
+各場合に、その性質が始域上 smooth 局所的であることを含意する補題と、
+終域上 smooth 局所的であることを含意する補題を挙げる。
+各場合、Lemma \ref{spaces-descent-lemma-smooth-local-source-target} の第 3 の仮定は
+自明に確認できるので省略する。一覧は次のとおりである。
+\begin{enumerate}
+\item 平坦。Lemmas \ref{spaces-descent-lemma-flat-fpqc-local-source} および
+\ref{spaces-descent-lemma-descending-property-flat} を参照。
+\item 局所有限表示。Lemmas
+\ref{spaces-descent-lemma-locally-finite-presentation-fppf-local-source} および
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation} を参照。
+\item 局所有限型。Lemmas
+% P09-ERR-0366
+\ref{spaces-descent-lemma-locally-finite-type-fppf-local-source} および
+\ref{spaces-descent-lemma-descending-property-locally-finite-type} を参照。
+\item 普遍的開。Lemmas \ref{spaces-descent-lemma-universally-open-fppf-local-source} および
+\ref{spaces-descent-lemma-descending-property-universally-open} を参照。
+\item syntomic。Lemmas \ref{spaces-descent-lemma-syntomic-syntomic-local-source} および
+\ref{spaces-descent-lemma-descending-property-syntomic} を参照。
+\item smooth。Lemmas \ref{spaces-descent-lemma-smooth-smooth-local-source} および
+\ref{spaces-descent-lemma-descending-property-smooth} を参照。
+% P09-ERR-0367
+\item 必要に応じて、さらにここへ追加する。
+\end{enumerate}
+\end{remark}
+
+
+
+
+
+
+
+\section{始域で \'etale、終域で smooth に局所的な射の性質}
+\label{spaces-descent-section-properties-etale-smooth-local-source-target}
+
+\noindent
+本節は、始域上 étale 局所的かつ終域上 smooth 局所的な
+射の性質についての Section
+\ref{spaces-descent-section-properties-local-source-target} の類似である。
+この性質を使いすぎないよう、あえて途方もなく長い名称を与える。
+
+\begin{definition}
+\label{spaces-descent-definition-etale-smooth-local-source-target}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質とする。
+$\mathcal{P}$ が{\it 始域で étale、終域で smooth に局所的}であるとは、
+次が成り立つことをいう。
+\begin{enumerate}
+\item （étale 写像との前合成で安定）
+$f : X \to Y$ が étale で $g : Y \to Z$ が $\mathcal{P}$ をもつならば、
+$g \circ f$ は $\mathcal{P}$ をもつ。
+\item （smooth 基底変換で安定）
+$f : X \to Y$ が $\mathcal{P}$ をもち、$Y' \to Y$ が smooth ならば、
+基底変換 $f' : Y' \times_Y X \to Y'$ は $\mathcal{P}$ をもつ。
+\item （局所性）射 $f : X \to Y$ が与えられたとき、次は同値である。
+\begin{enumerate}
+\item $f$ は $\mathcal{P}$ をもつ。
+\item すべての $x \in |X|$ に対して可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+で、$b$ が smooth、$U \to X \times_Y V$ が étale であり、
+$u \in |U|$ が $a(u) = x$ を満たし、$h$ が
+$\mathcal{P}$ をもつものが存在する。
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\noindent
+以上を定義とする。以下の補題では、これが
+% P09-ERR-0368
+$\mathcal{P}$ が終域上 étale 局所的、始域上 smooth 局所的であり、
+さらに étale 射との後合成で安定であることと同値だと示す。
+
+\begin{lemma}
+\label{spaces-descent-lemma-etale-smooth-local-source-target-implies}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、始域で étale、
+終域で smooth に局所的なものとする。このとき
+\begin{enumerate}
+\item $\mathcal{P}$ は始域上 étale 局所的である。
+\item $\mathcal{P}$ は終域上 smooth 局所的である。
+\item $\mathcal{P}$ は étale 射との後合成で安定である。すなわち
+$f : X \to Y$ が $\mathcal{P}$ をもち、$g : Y \to Z$ が étale ならば、
+$g \circ f$ は $\mathcal{P}$ をもつ。
+\item $\mathcal{P}$ は次の恒久性をもつ。$f : X \to Y$ と
+étale 射 $g : Y \to Z$ が与えられ、$g \circ f$ が
+$\mathcal{P}$ をもつならば、$f$ は $\mathcal{P}$ をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+すべてを完全に書き下す。
+
+\medskip\noindent
+(1) の証明。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\{X_i \to X\}_{i \in I}$ を $X$ の étale 被覆とする。
+各合成 $h_i : X_i \to Y$ が $\mathcal{P}$ をもつならば、各
+% P09-ERR-0369
+$|x| \in X$ に対して $i \in I$ と点 $x_i \in |X_i|$ であって
+$x$ に写るものを見つけられる。このとき
+$(X_i, x_i) \to (X, x)$ は対の étale 射、
+$\text{id}_Y : Y \to Y$ は smooth 射であり、$h_i$ は Definition
+\ref{spaces-descent-definition-etale-smooth-local-source-target} の第 (3) 項のとおりである。
+従って $f$ は $\mathcal{P}$ をもつことが分かる。
+逆に、$f$ が $\mathcal{P}$ をもつならば、Definition
+\ref{spaces-descent-definition-etale-smooth-local-source-target} の第 (1) 項により、
+各 $X_i \to Y$ は $\mathcal{P}$ をもつ。
+
+\medskip\noindent
+(2) の証明。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\{Y_i \to Y\}_{i \in I}$ を $Y$ の smooth 被覆とする。
+$X_i = Y_i \times_Y X$ とおき、$h_i : X_i \to Y_i$ を
+$f$ の基底変換とする。各 $h_i : X_i \to Y_i$ が
+$\mathcal{P}$ をもつならば、各 $x \in |X|$ に対して
+$i \in I$ と点 $x_i \in |X_i|$ であって $x$ に写るものを選ぶ。
+このとき $X_i \to X \times_Y Y_i$ は étale 射
+（実際、同型）であり、$Y_i \to Y$ は smooth、$h_i$ は
+% P09-ERR-0370
+Definition \ref{spaces-descent-definition-local-source-target} の第 (3) 項のとおりである。
+従って $f$ は $\mathcal{P}$ をもつことが分かる。
+逆に、$f$ が $\mathcal{P}$ をもつならば、各 $X_i \to Y_i$ は
+$\mathcal{P}$ をもつ。これは Definition
+\ref{spaces-descent-definition-local-source-target} の第 (2) 項による。
+
+\medskip\noindent
+(3) の証明。$f : X \to Y$ が $\mathcal{P}$ をもち、
+$g : Y \to Z$ が étale であると仮定する。
+$X \to Y \times_Z X$ は、$X$ 上 étale な代数空間の間の射として
+étale である（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-permanence}）。
+また $Y \to Z$ は étale であり、従って smooth 射である。
+% P09-ERR-0371
+ゆえに図式
+$$
+\xymatrix{
+X \ar[d] \ar[r]_f & Y \ar[d] \\
+X \ar[r]^{g \circ f} & Z
+}
+$$
+は、すべての $x \in |X|$ に対して Definition
+% P09-ERR-0372
+\ref{spaces-descent-definition-local-source-target} の第 (3) 項で機能し、
+$g \circ f$ が $\mathcal{P}$ をもつと結論できる。
+
+\medskip\noindent
+(4) の証明。$f : X \to Y$ を射、$g : Y \to Z$ を étale 射とし、
+$g \circ f$ が $\mathcal{P}$ をもつとする。Definition
+\ref{spaces-descent-definition-etale-smooth-local-source-target} の第 (2) 項により、
+$\text{pr}_Y : Y \times_Z X \to Y$ は $\mathcal{P}$ をもつ。
+一方、射 $(f, 1) : X \to Y \times_Z X$ は étale 射である。
+実際、これは étale 射影 $\text{pr}_X : Y \times_Z X \to X$ の切断である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-permanence} を参照。
+従って Definition \ref{spaces-descent-definition-etale-smooth-local-source-target} の
+第 (1) 項により、$f = \text{pr}_Y \circ (f, 1)$ は
+$\mathcal{P}$ をもつ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-etale-smooth-local-source-target-characterize}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質で、始域で étale、
+終域で smooth に局所的なものとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。次は同値である。
+\begin{enumerate}
+\item[(a)] $f$ は性質 $\mathcal{P}$ をもつ。
+\item[(b)] すべての $x \in |X|$ に対して、smooth 射
+$b : V \to Y$、étale 射 $a : U \to V \times_Y X$、および点
+$u \in |U|$ であって $x$ に写るものが存在し、$U \to V$ は
+$\mathcal{P}$ をもつ。
+\item[(c)] ある可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+で $b$ が smooth、$U \to V \times_Y X$ が étale、$a$ が全射であり、
+射 $h$ が $\mathcal{P}$ をもつものが存在する。
+\item[(d)] 任意の可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+で $b$ が smooth、$U \to X \times_Y V$ が étale であるものに対し、
+射 $h$ は $\mathcal{P}$ をもつ。
+\item[(e)] smooth 被覆 $\{Y_i \to Y\}_{i \in I}$ で、
+各基底変換 $Y_i \times_Y X \to Y_i$ が $\mathcal{P}$ をもつものが存在する。
+\item[(f)] étale 被覆 $\{X_i \to X\}_{i \in I}$ で、
+各合成 $X_i \to Y$ が $\mathcal{P}$ をもつものが存在する。
+\item[(g)] smooth 被覆 $\{Y_i \to Y\}_{i \in I}$ と、
+各 $i \in I$ に対する étale 被覆
+$\{X_{ij} \to Y_i \times_Y X\}_{j \in J_i}$ で、各射
+$X_{ij} \to Y_i$ が $\mathcal{P}$ をもつものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) と (b) の同値性は Definition
+\ref{spaces-descent-definition-etale-smooth-local-source-target} の一部である。
+(a) と (e) の同値性は Lemma
+\ref{spaces-descent-lemma-etale-smooth-local-source-target-implies} の第 (2) 項である。
+(a) と (f) の同値性は Lemma
+\ref{spaces-descent-lemma-etale-smooth-local-source-target-implies} の第 (1) 項である。
+(a) はいま (e) および (f) と同値なので、
+% P09-ERR-0373
+(a) は (g) と同値であることが従う。
+
+\medskip\noindent
+(c) が (b) を含意することは明らかである。(b) が成り立つなら、任意の
+$x \in |X|$ に対して、smooth 射
+% P09-ERR-0374
+$b_x : V_x \to Y$、étale 射 $U_x \to V_x \times_Y X$、および
+点 $u_x \in |U_x|$ であって $x$ に写り、$U_x \to V_x$ が
+$\mathcal{P}$ をもつものを選べる。このとき
+% P09-ERR-0375
+$h = \coprod h_x : \coprod U_x \to \coprod V_x$ は
+$a = \coprod a_x$ および $b = \coprod b_x$ とともに (c) の図式をなす。
+（$h$ は性質 $\mathcal{P}$ をもつことに注意する。実際、
+$\{V_x \to \coprod V_x\}$ は smooth 被覆であり、
+$\mathcal{P}$ は終域上 smooth 局所的である。）従って (b) と (c) は同値である。
+
+\medskip\noindent
+これで (a), (b), (c), (e), (f), (g) が同値であることが分かった。
+(a) が成り立つと仮定する。$U, V, a, b, h$ を (d) のとおりとする。
+このとき $X \times_Y V \to V$ は $\mathcal{P}$ をもつ。実際、
+$\mathcal{P}$ は smooth 基底変換で安定である。従って
+$U \to V$ は $\mathcal{P}$ をもつ。実際、$\mathcal{P}$ は
+étale 射との前合成で安定である。逆に (d) が成り立つなら、
+$U = X$ および $V = Y$ とおけば $f$ が $\mathcal{P}$ をもつことが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-etale-smooth-local-source-target}
+$S$ をスキームとする。
+$\mathcal{P}$ を $S$ 上の代数空間の射の性質とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{P}$ は始域上 étale 局所的である。
+\item $\mathcal{P}$ は終域上 smooth 局所的である。
+\item $\mathcal{P}$ は開埋め込みとの後合成で安定である。すなわち
+$f : X \to Y$ が $\mathcal{P}$ をもち、$Y \subset Z$ が開埋め込みならば、
+$X \to Z$ は $\mathcal{P}$ をもつ。
+\end{enumerate}
+このとき $\mathcal{P}$ は始域で étale、終域で smooth に局所的である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$ を補題の条件 (1), (2), (3) を満たす
+代数空間の射の性質とする。Lemma
+\ref{spaces-descent-lemma-precompose-property-local-source} により、
+$\mathcal{P}$ は étale 射との前合成で安定である。
+Lemma \ref{spaces-descent-lemma-pullback-property-local-target} により、
+$\mathcal{P}$ は smooth 基底変換で安定である。
+従って Definition
+% P09-ERR-0376
+\ref{spaces-descent-definition-local-source-target} の第 (3) 項が成り立つことを示せば十分である。
+
+\medskip\noindent
+より具体的に、$f : X \to Y$ を $S$ 上の代数空間の射で、Definition
+\ref{spaces-descent-definition-local-source-target} の第 (3)(b) 項を満たすものとする。
+言い換えれば、すべての
+% P09-ERR-0377
+$x \in X$ に対して smooth 射 $b_x : V_x \to Y$、
+étale 射 $U_x \to V_x \times_Y X$、および点 $u_x \in |U_x|$ であって
+$x$ に写るものが存在し、$h_x : U_x \to V_x$ は
+$\mathcal{P}$ をもつ。$f$ が $\mathcal{P}$ をもつことを示せば
+補題の証明は完了する。
+
+\medskip\noindent
+$a_x : U_x \to X$ を合成 $U_x \to V_x \times_Y X \to X$ とする。
+$U = \coprod U_x$, $a = \coprod a_x$, $V = \coprod V_x$,
+$b = \coprod b_x$, $h = \coprod h_x$ とおく。可換図式
+$$
+\xymatrix{
+U \ar[d]_a \ar[r]_h & V \ar[d]^b \\
+X \ar[r]^f & Y
+}
+$$
+を得る。ここで $b$ は smooth、$U \to V \times_Y X$ は étale、
+% P09-ERR-0378
+$a$ は全射である。$h$ は $\mathcal{P}$ をもつことに注意する。
+実際、各 $h_x$ がそうであり、$\mathcal{P}$ は終域上 smooth 局所的である。
+次の段落で、$U, V, X, Y$ をスキームと仮定してよいことを証明する。
+読者にはこの段落を飛ばすことを勧める。
+
+\medskip\noindent
+$X, Y, U, V, a, b, f, h$ を前段落のとおりとする。
+$f$ が $\mathcal{P}$ をもつことを示さなければならない。
+全射 étale 射 $X' \to X$ で
+% P09-ERR-0379
+$X_i$ がスキームであるものをとる。$U' = X' \times_X U$ とおく。
+このとき $U' \to X'$ は全射で、$U' \to X' \times_Y V$ は étale である。
+$\mathcal{P}$ は始域上 étale 局所的なので、$U' \to V$ は
+$\mathcal{P}$ をもち、$X' \to Y$ が $\mathcal{P}$ をもつことを
+示せば十分である。言い換えれば、$X$ はスキームと仮定してよい。
+次に、全射 étale 射 $Y' \to Y$ で $Y'$ がスキームであるものを選ぶ。
+$V' = V \times_Y Y'$, $X' = X \times_Y Y'$, $U' = U \times_Y Y'$ とおく。
+このとき $U' \to X'$ は全射で、$U' \to X' \times_{Y'} V'$ は étale である。
+$\mathcal{P}$ は終域上 smooth 局所的なので、$U' \to V'$ は
+$\mathcal{P}$ をもち、$X' \to Y'$ が $\mathcal{P}$ をもつことを
+示せば十分である。従って $X$ と $Y$ の両方をスキームと仮定してよい。
+全射 étale 射 $V' \to V$ で $V'$ がスキームであるものを選ぶ。
+$U' = U \times_V V'$ とおく。このとき $U' \to X$ は全射で、
+$U' \to X \times_Y V'$ は étale である。
+% P09-ERR-0380
+$\mathcal{P}$ は始域上 smooth 局所的なので、$U' \to V'$ は
+$\mathcal{P}$ をもつ。従って $U, V$ を $U', V'$ で置き換え、
+$X, Y, V$ はスキームであると仮定してよい。
+最後に $U$ を、$U$ 上全射 étale なスキームで置き換えると、
+$U, V, X, Y$ はすべてスキームであると仮定してよいことが分かる。
+
+\medskip\noindent
+$U, V, X, Y$ がスキームならば、Descent, Lemma
+\ref{descent-lemma-etale-tau-local-source-target} により、
+$f$ は $\mathcal{P}$ をもつ。
+\end{proof}
+
+\begin{remark}
+\label{spaces-descent-remark-list-etale-smooth-local-source-target}
+Lemma \ref{spaces-descent-lemma-etale-smooth-local-source-target} と本章の先の節の結果を用いると、
+% P09-ERR-0381
+始域と終域に関して smooth 局所的な射の型の一覧を容易に作れる。
+各場合に、その性質が始域上 étale 局所的であることを含意する補題と、
+終域上 smooth 局所的であることを含意する補題を挙げる。
+各場合、Lemma \ref{spaces-descent-lemma-etale-smooth-local-source-target} の第 3 の仮定は
+自明に確認できるので省略する。一覧は次のとおりである。
+\begin{enumerate}
+\item étale。Lemmas \ref{spaces-descent-lemma-etale-etale-local-source} および
+\ref{spaces-descent-lemma-descending-property-etale} を参照。
+\item 局所準有限。Lemmas \ref{spaces-descent-lemma-locally-quasi-finite-etale-local-source} および
+\ref{spaces-descent-lemma-descending-property-quasi-finite} を参照。
+\item 非分岐。Lemmas \ref{spaces-descent-lemma-unramified-etale-local-source} および
+\ref{spaces-descent-lemma-descending-property-unramified} を参照。
+% P09-ERR-0382
+\item 必要に応じて、さらにここへ追加する。
+\end{enumerate}
+もちろん Remark \ref{spaces-descent-remark-list-local-source-target} に挙げた任意の性質も、
+なおさらここに挙げられる例である。
+\end{remark}
+
+\section{空間上の空間に対する降下データ}
+\label{spaces-descent-section-descent-datum}
+
+\noindent
+本節は代数空間に対する Descent, Section
+\ref{descent-section-descent-datum} の類似である。
+本節の議論の大部分は、降下データの定義だけに依存する形式的なものである。
+
+\begin{definition}
+\label{spaces-descent-definition-descent-datum}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+\begin{enumerate}
+\item $V \to Y$ を代数空間の射とする。
+{\it $V/Y/X$ に対する降下データ}とは、代数空間の同型
+$\varphi : V \times_X Y \to Y \times_X V$ であって
+$Y \times_X Y$ 上のものであり、
+図式
+$$
+\xymatrix{
+V \times_X Y \times_X Y \ar[rd]^{\varphi_{01}} \ar[rr]_{\varphi_{02}} &
+&
+Y \times_X Y \times_X V\\
+&
+Y \times_X V \times_X Y \ar[ru]^{\varphi_{12}}
+}
+$$
+が可換になるという{\it コサイクル条件}を満たすものをいう
+（記法は明らかなものとする）。
+\item 対 $(V/Y, \varphi)$ を $Y \to X$ に関する
+{\it 降下データ}ともいう。
+\item {\it 降下データの射
+$f : (V/Y, \varphi) \to (V'/Y, \varphi')$}で $Y \to X$ に関するものとは、
+代数空間の射 $f : V \to V'$ であって $Y$ 上のものであり、図式
+$$
+\xymatrix{
+V \times_X Y \ar[r]_{\varphi} \ar[d]_{f \times \text{id}_Y} &
+Y \times_X V \ar[d]^{\text{id}_Y \times f} \\
+V' \times_X Y \ar[r]^{\varphi'} & Y \times_X V'
+}
+$$
+が可換になるものをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\label{spaces-descent-remark-easier}
+$S$ をスキームとする。$Y \to X$ を $S$ 上の代数空間の射とする。
+$(V/Y, \varphi)$ を $Y \to X$ に関する降下データとする。
+同型 $\varphi$ は、代数空間の同型
+$$
+(Y \times_X Y) \times_{\text{pr}_0, Y} V
+\longrightarrow
+(Y \times_X Y) \times_{\text{pr}_1, Y} V
+$$
+とみなせる。これは $Y \times_X Y$ 上のものである。
+従って大まかには、$\varphi$ を写像
+$\varphi : \text{pr}_0^*V \to \text{pr}_1^*V$ とみなせる\footnote{残念ながら、
+ここでは矢印に「逆の」向きを選んでしまっている。一般原理として
+「関数」と「空間」は双対であるため、Definitions
+\ref{spaces-descent-definition-descent-datum} および
+\ref{spaces-descent-definition-descent-datum-for-family-of-morphisms} では、
+Definition \ref{spaces-descent-definition-descent-datum-quasi-coherent} で採用した向きと
+反対にすべきであった。}。このときコサイクル条件は
+$\text{pr}_{02}^*\varphi =
+\text{pr}_{12}^*\varphi \circ \text{pr}_{01}^*\varphi$ と述べる。
+この意味で、準連接層上の降下データの場合と非常によく似ている。
+\end{remark}
+
+\noindent
+終域を固定した射の族に対する定義を次に与える。
+
+\begin{definition}
+\label{spaces-descent-definition-descent-datum-for-family-of-morphisms}
+$S$ をスキームとする。$\{X_i \to X\}_{i \in I}$ を、
+$S$ 上の代数空間の射の族で、終域を $X$ に固定したものとする。
+\begin{enumerate}
+\item {\it 降下データ $(V_i, \varphi_{ij})$}で族
+$\{X_i \to X\}$ に関するものとは、代数空間 $V_i$ で
+$X_i$ 上のものを各 $i \in I$ に対してとり、さらに同型
+$\varphi_{ij} : V_i \times_X X_j \to X_i \times_X V_j$ で、
+$X_i \times_X X_j$ 上の代数空間のものを各対 $(i, j) \in I^2$
+に対してとり、
+すべての添字の三つ組 $(i, j, k) \in I^3$ に対し、図式
+$$
+\xymatrix{
+V_i \times_X X_j \times_X X_k
+\ar[rd]^{\text{pr}_{01}^*\varphi_{ij}}
+\ar[rr]_{\text{pr}_{02}^*\varphi_{ik}} &
+&
+X_i \times_X X_j \times_X V_k\\
+&
+X_i \times_X V_j \times_X X_k
+\ar[ru]^{\text{pr}_{12}^*\varphi_{jk}}
+}
+$$
+が $X_i \times_X X_j \times_X X_k$ 上の代数空間の図式として
+可換になるものをいう（記法は明らかなものとする）。
+\item {\it 降下データの射
+$\psi : (V_i, \varphi_{ij}) \to (V'_i, \varphi'_{ij})$}とは、
+代数空間の射の族 $\psi = (\psi_i)_{i \in I}$ で、各射
+$\psi_i : V_i \to V'_i$ が $X_i$ 上のものであり、
+すべての図式
+$$
+\xymatrix{
+V_i \times_X X_j \ar[r]_{\varphi_{ij}} \ar[d]_{\psi_i \times \text{id}} &
+X_i \times_X V_j \ar[d]^{\text{id} \times \psi_j} \\
+V'_i \times_X X_j \ar[r]^{\varphi'_{ij}} & X_i \times_X V'_j
+}
+$$
+が可換になるものをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\label{spaces-descent-remark-easier-family}
+$S$ をスキームとする。$\{X_i \to X\}_{i \in I}$ を、
+$S$ 上の代数空間の射の族で、終域を $X$ に固定したものとする。
+$(V_i, \varphi_{ij})$ を $\{X_i \to X\}$ に関する降下データとする。
+同型 $\varphi_{ij}$ は、代数空間の同型
+$$
+(X_i \times_X X_j) \times_{\text{pr}_0, X_i} V_i
+\longrightarrow
+(X_i \times_X X_j) \times_{\text{pr}_1, X_j} V_j
+$$
+とみなせる。これは $X_i \times_X X_j$ 上のものである。
+従って大まかには、$\varphi_{ij}$ を同型
+$\text{pr}_0^*V_i \to \text{pr}_1^*V_j$ とみなせる。
+この同型は $X_i \times_X X_j$ 上のものである。
+このときコサイクル条件は
+$\text{pr}_{02}^*\varphi_{ik} =
+\text{pr}_{12}^*\varphi_{jk} \circ \text{pr}_{01}^*\varphi_{ij}$ と述べる。
+この意味で、準連接層上の降下データの場合と非常によく似ている。
+\end{remark}
+
+\noindent
+通常、一つの射からなる族の版を用いる理由は次の補題である。
+
+\begin{lemma}
+\label{spaces-descent-lemma-family-is-one}
+$S$ をスキームとする。$\{X_i \to X\}_{i \in I}$ を、
+$S$ 上の代数空間の射の族で、終域を $X$ に固定したものとする。
+$Y = \coprod_{i \in I} X_i$ とおく。圏の標準的同値
+$$
+\begin{matrix}
+\text{降下データの圏} \\
+\text{族 } \{X_i \to X\}_{i \in I}
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{降下データの圏} \\
+\text{ } Y/X
+\end{matrix}
+$$
+が存在し、$(V_i, \varphi_{ij})$ を $(V, \varphi)$ に写す。ここで
+$V = \coprod_{i\in I} V_i$ および $\varphi = \coprod \varphi_{ij}$ である。
+\end{lemma}
+
+\begin{proof}
+$Y \times_X Y = \coprod_{ij} X_i \times_X X_j$ であり、
+高次の繊維積についても同様であることに注意する。
+射 $V \to Y$ を与えることは、族 $V_i \to X_i$ を与えることと
+まったく同じである。また、降下データ $\varphi$ を与えることは、
+族 $\varphi_{ij}$ を与えることとまったく同じである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-descent-lemma-pullback}
+降下データの引き戻し。$S$ をスキームとする。
+\begin{enumerate}
+\item 可換図式
+$$
+\xymatrix{
+Y' \ar[r]_f \ar[d]_{a'} & Y \ar[d]^a \\
+X' \ar[r]^h & X
+}
+$$
+を $S$ 上の代数空間の図式としてとる。構成
+$$
+(V \to Y, \varphi) \longmapsto f^*(V \to Y, \varphi) = (V' \to Y', \varphi')
+$$
+を考える。ここで $V' = Y' \times_Y V$ であり、$\varphi'$ は合成
+$$
+\xymatrix{
+V' \times_{X'} Y' \ar@{=}[r] &
+(Y' \times_Y V) \times_{X'} Y' \ar@{=}[r] &
+(Y' \times_{X'} Y') \times_{Y \times_X Y} (V \times_X Y)
+\ar[d]^{\text{id} \times \varphi} \\
+Y' \times_{X'} V' \ar@{=}[r] &
+Y' \times_{X'} (Y' \times_Y V) &
+% P09-ERR-0383
+(Y' \times_X Y') \times_{Y \times_X Y} (Y \times_X V) \ar@{=}[l]
+}
+$$
+として定める。この構成は、$Y \to X$ に関する降下データの圏から
+$Y' \to X'$ に関する降下データの圏への関手を定める。
+\item 図式を可換にする二つの射 $f_i : Y' \to Y$, $i = 0, 1$ が
+与えられたとき、関手 $f_0^*$ と $f_1^*$ は標準的に同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明は省略するが、射 $\varphi'$ は射 $(f \times f)^*\varphi$ で
+あることを述べておく。これは Remark \ref{spaces-descent-remark-easier} で導入した
+記法による。
+(2) について、関手同型を与える射 $f_0^*V \to f_1^*V$ を示す。
+実際、$f_0$ と $f_1$ はどちらも可換図式に入るので、一意的な射
+$r : Y' \to Y \times_X Y$ で $f_i = \text{pr}_i \circ r$ を満たすものが
+存在する。このとき次をとる。
+\begin{eqnarray*}
+f_0^*V & = &
+Y' \times_{f_0, Y} V \\
+& = &
+Y' \times_{\text{pr}_0 \circ r, Y} V \\
+& = &
+Y' \times_{r, Y \times_X Y} (Y \times_X Y) \times_{\text{pr}_0, Y} V \\
+& \xrightarrow{\varphi} &
+Y' \times_{r, Y \times_X Y} (Y \times_X Y) \times_{\text{pr}_1, Y} V \\
+& = &
+Y' \times_{\text{pr}_1 \circ r, Y} V \\
+& = &
+Y' \times_{f_1, Y} V \\
+& = & f_1^*V
+\end{eqnarray*}
+これが機能することの確認は省略する。
+\end{proof}
+
+\begin{definition}
+\label{spaces-descent-definition-pullback-functor}
+Lemma \ref{spaces-descent-lemma-pullback} のとおりの
+$S, X, X', Y, Y', f, a, a', h$ に対し、関手
+$$
+(V, \varphi) \longmapsto f^*(V, \varphi)
+$$
+で同補題において構成したものを、降下データ上の
+{\it 引き戻し関手}という。
+\end{definition}
+
+\begin{lemma}
+\label{spaces-descent-lemma-pullback-family}
+$S$ をスキームとする。$\mathcal{U}' = \{X'_i \to X'\}_{i \in I'}$ と
+% P09-ERR-0384
+$\mathcal{U} = \{X_j \to X\}_{i \in I}$ を、終域を固定した射の族とする。
+$\alpha : I' \to I$, $g : X' \to X$, $g_i : X'_i \to X_{\alpha(i)}$ を、
+終域を固定した写像の族の射とする。Sites, Definition
+\ref{sites-definition-morphism-coverings} を参照。
+\begin{enumerate}
+\item $(V_i, \varphi_{ij})$ を族 $\mathcal{U}$ に関する降下データとする。系
+$$
+\left(
+g_i^*V_{\alpha(i)}, (g_i \times g_j)^*\varphi_{\alpha(i) \alpha(j)}
+\right)
+$$
+（Remark \ref{spaces-descent-remark-easier-family} の記法を用いた）は、
+$\mathcal{U}'$ に関する降下データである。
+\item この構成は、$\mathcal{U}$ に関する降下データの圏から
+$\mathcal{U}'$ に関する降下データの圏への関手を定める。
+\item 第二の $\beta : I' \to I$, $h : X' \to X$, および
+$h'_i : X'_i \to X_{\beta(i)}$ が、終域を固定した写像の族の射として
+与えられたとする。このとき $g = h$ ならば、得られる二つの
+降下データ間の関手は標準的に同型である。
+\item これらの関手は、Lemma \ref{spaces-descent-lemma-family-is-one} を介して、
+Lemma \ref{spaces-descent-lemma-pullback} で構成した引き戻し関手と一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{spaces-descent-lemma-pullback} から、Lemma
+\ref{spaces-descent-lemma-family-is-one} の対応を介して従う。
+\end{proof}
+
+\begin{definition}
+\label{spaces-descent-definition-pullback-functor-family}
+Lemma \ref{spaces-descent-lemma-pullback-family} のとおりの
+$\mathcal{U}' = \{X'_i \to X'\}_{i \in I'}$,
+$\mathcal{U} = \{X_i \to X\}_{i \in I}$, $\alpha : I' \to I$,
+$g : X' \to X$, $g_i : X'_i \to X_{\alpha(i)}$ に対し、関手
+$$
+(V_i, \varphi_{ij}) \longmapsto
+(g_i^*V_{\alpha(i)}, (g_i \times g_j)^*\varphi_{\alpha(i) \alpha(j)})
+$$
+で同補題において構成したものを、降下データ上の
+{\it 引き戻し関手}という。
+\end{definition}
+
+\noindent
+$\mathcal{U}$ と $\mathcal{U}'$ の終域が同じ $X$ であり、
+$\mathcal{U}'$ が $\mathcal{U}$ の細分であるとする（Sites, Definition
+\ref{sites-definition-morphism-coverings} を参照）。明示的な対
+$(\alpha, g_i)$ が与えられていなくても、引き戻し関手について
+述べることができる。実際、Lemma \ref{spaces-descent-lemma-pullback-family} で、
+対の選択は（標準的同型を除いて）問題にならないことを見た。
+
+\begin{definition}
+\label{spaces-descent-definition-effective}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+\begin{enumerate}
+\item 代数空間 $U$ で $X$ 上のものが与えられたとき、
+{\it 自明な降下データ}で $U$ のもの、すなわち
+$\text{id} : X \to X$ に関するものとして、$U$ 上の恒等射がある。
+\item Lemma \ref{spaces-descent-lemma-pullback} により、自明な降下データを
+引き戻すことで、$Y \times_X U$ 上に{\it 標準降下データ}を得る。
+これは $Y \to X$ に関し、$f$ に沿って得られる。
+% P09-ERR-0385
+この降下データをしばしば $(Y \times_X U, can)$ と書く。
+\item 降下データ $(V, \varphi)$ で $Y/X$ に関するものが
+{\it 有効}であるとは、$(V, \varphi)$ が標準降下データ
+$(Y \times_X U, can)$ と同型であり、ここで $U$ はある代数空間で
+$X$ 上のものであることをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+従って有効であるとは、代数空間 $U$ で $X$ 上のものと、同型
+$\psi : V \to Y \times_X U$ で $Y$ 上のものが存在し、$\varphi$ が合成
+% P09-ERR-0386
+$$
+V \times_X Y \xrightarrow{\psi \times \text{id}_Y}
+Y \times_X U \times_S Y =
+Y \times_X Y \times_X U
+\xrightarrow{\text{id}_Y \times \psi^{-1}}
+Y \times_X V
+$$
+に等しいことを意味する。ここには小さな問題がある。すなわち、この定義は
+（その精神において）$Y$ と $X$ がスキームである場合に Descent,
+Definition \ref{descent-definition-effective} で与えた定義と衝突する。
+しかし、どちらの版を意味するかは常に文脈から明らかである。
+
+\begin{definition}
+\label{spaces-descent-definition-effective-family}
+$S$ をスキームとする。$\{X_i \to X\}$ を $S$ 上の代数空間の射の族で、
+終域を $X$ に固定したものとする。
+\begin{enumerate}
+\item 代数空間 $U$ で $X$ 上のものが与えられたとき、
+代数空間の族 $X_i \times_X U$ 上に{\it 標準降下データ}を得る。
+これは自明な降下データである $U$ のものを、
+% P09-ERR-0387
+$\{\text{id} : S \to S\}$ に関するものとして引き戻して得られる。
+この降下データを $(X_i \times_X U, can)$ と書く。
+\item 降下データ $(V_i, \varphi_{ij})$ で
+% P09-ERR-0388
+$\{X_i \to S\}$ に関するものが{\it 有効}であるとは、
+代数空間 $U$ で $X$ 上のものが存在し、$(V_i, \varphi_{ij})$ が
+$(X_i \times_X U, can)$ と同型であることをいう。
+\end{enumerate}
+\end{definition}
+
+
+
+
+
+
+\section{層による降下データ}
+\label{spaces-descent-section-descent-data-sheaves}
+
+\noindent
+本節は Descent, Section
+\ref{descent-section-descent-data-sheaves} の類似である。
+代数空間はすでに層なので、少し異なる。
+
+\begin{lemma}
+\label{spaces-descent-lemma-descent-data-sheaves}
+$S$ をスキームとする。$\{X_i \to X\}_{i \in I}$ を
+$S$ 上の代数空間の fppf 被覆とする（Topologies on Spaces,
+Definition \ref{spaces-topologies-definition-fppf-covering}）。
+圏の同値
+$$
+\left\{
+\begin{matrix}
+\text{降下データ }(V_i, \varphi_{ij})\\
+\text{次の族に関する：}\{X_i \to X\}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{層 }F\text{、サイト }(\Sch/S)_{fppf}\text{ 上のもので}\\
+\text{写像 }F \to X\text{ を備え、各}\\
+X_i \times_X F\text{ が代数空間であるもの}
+\end{matrix}
+\right\}.
+$$
+が存在する。さらに、
+\begin{enumerate}
+\item 右辺の代数空間 $X_i \times_X F$ は左辺の $V_i$ に対応する。
+\item 層 $F$ が代数空間である\footnote{$I$ が大きすぎなければ
+常にそうなることを後で見る。Bootstrap, Lemma
+\ref{bootstrap-lemma-descend-algebraic-space} を参照。}ための必要十分条件は、
+対応する降下データ
+% P09-ERR-0389
+$(X_i, \varphi_{ij})$ が有効であることである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+右から左への関手を構成しよう。
+層の写像 $F \to X$ で $(\Sch/S)_{fppf}$ 上のものをとり、各
+$V_i = X_i \times_X F$ が代数空間であるものをとる。
+射影 $V_i \to X_i$ がある。
+このとき $V_i \times_X X_j$ と $X_i \times_X V_j$ はどちらも層
+$X_i \times_X F \times_X X_j$ を表現するので、同型
+$$
+% P09-ERR-0390
+\varphi_{ii'} : V_i \times_X X_j \to X_i \times_X V_j
+$$
+を得る。写像 $\varphi_{ij}$ が $X_i \times_X X_j$ 上の射であり、
+コサイクル条件を満たすことは直ちに分かる。
+右から左への関手は、この構成 $F \mapsto (V_i, \varphi_{ij})$ で与えられる。
+
+\medskip\noindent
+左から右への関手を構成しよう。同型 $\varphi_{ij}$ は
+$$
+\varphi_{ij} : V_i \times_X X_j \longrightarrow X_i \times_X V_j
+$$
+という同型を与える。これは
+% P09-ERR-0391
+$X_i \times X_j$ 上のものである。$F$ を次の図式の余等化子とする。
+$$
+\xymatrix{
+% P09-ERR-0392
+\coprod_{i, i'} V_i \times_X X_j
+\ar@<1ex>[rr]^-{\text{pr}_0}
+\ar@<-1ex>[rr]_-{\text{pr}_1 \circ \varphi_{ij}}
+& &
+\coprod_i V_i \ar[r]
+&
+F
+}
+$$
+コサイクル条件により、$F$ には写像 $F \to X$ が備わり、
+$X_i \times_X F$ は $V_i$ と同型になる。
+左から右への関手は、この構成 $(V_i, \varphi_{ij}) \mapsto F$ で与えられる。
+
+\medskip\noindent
+これらの構成が互いに準逆の関手であることの確認は省略する。
+最後の主張 (1), (2) は構成から従う。
+\end{proof}

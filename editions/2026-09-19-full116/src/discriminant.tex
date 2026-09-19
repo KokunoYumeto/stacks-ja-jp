@@ -1,0 +1,3163 @@
+% Generated mechanically from frozen input inputs/p06/ja/discriminant.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{48}
+\chapter{判別式と差イデアル}
+
+
+
+\phantomsection
+\label{discriminant-section-phantom}
+
+
+\section{序論}
+\label{discriminant-section-introduction}
+
+\noindent
+本章では、スキームの局所準有限射に対する差イデアルと判別式を研究する。
+この内容の一部については \cite{Kunz} がよい参考文献である。
+
+\medskip\noindent
+Noether スキームの準有限射 $f : Y \to X$ が与えられると、
+相対双対化加群 $\omega_{Y/X}$ が存在する。
+第 \ref{discriminant-section-quasi-finite-dualizing} 節では、Zariski の主定理と
+\'etale 局所化の方法を用いて、この加群を一から構成する。
+その重要な性質は次である。図式
+$$
+\xymatrix{
+Y' \ar[d]_{f'} \ar[r]_{g'} & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+が与えられ、$g : X' \to X$ が平坦、$Y' \subset X' \times_X Y$ が開、
+$f' : Y' \to X'$ が有限であるとき、$f'_*\mathcal{O}_{Y'}$-加群の層として
+標準同型
+$$
+f'_*(g')^*\omega_{Y/X} =
+\SheafHom_{\mathcal{O}_{X'}}(f'_*\mathcal{O}_{Y'}, \mathcal{O}_{X'})
+$$
+が存在する。第 \ref{discriminant-section-quasi-finite-traces} 節では、$f$ が平坦ならば
+標準大域切断 $\tau_{Y/X} \in H^0(Y, \omega_{Y/X})$ が存在し、上のような
+任意の可換図式に対して $(g')^*\tau_{Y/X}$ が、有限局所自由射 $f'$ に対する
+第 \ref{discriminant-section-discriminant} 節のトレース写像へ移ることを証明する。
+第 \ref{discriminant-section-different} 節では、Noether スキームの平坦準有限射に対する
+差イデアルを、$\tau_{Y/X} : \mathcal{O}_X \to \omega_{Y/X}$ の余核の
+零化イデアルとして定義する。
+
+\medskip\noindent
+本章の主目的は、準有限シントミック\footnote{すなわち平坦かつ lci。} 射 $f$ に対して、
+差イデアルが K\"ahler の差イデアルと一致することを証明することである。
+K\"ahler の差イデアルとは $\Omega_{Y/X}$ の 0 次 Fitting イデアルである。
+第 \ref{discriminant-section-kahler-different} 節を参照せよ。
+この一致は自明ではない。第 \ref{discriminant-section-formula-different} 節で見るように、
+Tate による巧妙な議論を用いる。その過程で Noether の差イデアルと
+Dedekind の差イデアルについても論じる。
+
+\medskip\noindent
+本章の終わりに至って初めて、第 \ref{discriminant-section-comparison} 節および
+\ref{discriminant-section-gorenstein-lci} において、スキームの双対性に関する
+より進んだ内容との関係を与える。
+
+
+
+
+
+
+
+
+\section{準有限環写像に対する双対化加群}
+\label{discriminant-section-quasi-finite-dualizing}
+
+\noindent
+Noether 環の準有限準同型 $A \to B$ を考える。Zariski の主定理
+(『可換代数』の補題 \ref{algebra-lemma-quasi-finite-open-integral-closure})
+により、$A \to B'$ が有限で、$B' \to B$ がスペクトルの開埋め込みを
+誘導するような分解 $A \to B' \to B$ が存在する。この状況で
+\begin{equation}
+\label{discriminant-equation-dualizing}
+\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B
+\end{equation}
+と置く。これは一種の相対双対化加群と考えられる。
+補題 \ref{discriminant-lemma-compare-dualizing} および
+\ref{discriminant-lemma-compare-dualizing-algebraic} を参照せよ。
+本節では、初等的な可換環論の方法により、$\omega_{B/A}$ が分解の選択に依存せず、
+また $\omega_{B/A}$ の形成が平坦基底変換と可換であることを示す。
+分解からの独立性を証明するため、まず二つの分解を比較する。
+
+\begin{lemma}
+\label{discriminant-lemma-dominate-factorizations}
+$A \to B$ を準有限環写像とする。二つの分解
+$A \to B' \to B$ および $A \to B'' \to B$ が与えられ、
+$A \to B'$ と $A \to B''$ は有限であり、$\Spec(B) \to \Spec(B')$
+と $\Spec(B) \to \Spec(B'')$ は開埋め込みであるとする。このとき、
+$A$ 上有限な $A$-部分代数 $B''' \subset B$ であって、
+$\Spec(B) \to \Spec(B''')$ が開埋め込みとなり、$B' \to B$ と
+$B'' \to B$ がともに $B'''$ を経由するものが存在する。
+\end{lemma}
+
+\begin{proof}
+$B''' \subset B$ を、$B' \to B$ と $B'' \to B$ の像によって生成される
+$A$-部分代数とする。$B'$ と $B''$ はそれぞれ $A$ 上整な有限個の元で
+生成されるので、$B'''$ も $A$ 上整な有限個の元で生成される。
+従って $B'''$ は $A$ 上有限である
+(『可換代数』の補題 \ref{algebra-lemma-characterize-finite-in-terms-of-integral})。
+写像
+$$
+B = B' \otimes_{B'} B \to B''' \otimes_{B'} B \to B \otimes_{B'} B = B
+$$
+を考える。最後の等号は、$\Spec(B) \to \Spec(B')$ が開埋め込み、従って
+モノ射であることから従う。$B' \to B$ は平坦なので第二の矢印は単射である。
+従って両方の矢印は同型である。これは図式
+$$
+\xymatrix{
+\Spec(B''') \ar[d] & \Spec(B) \ar[d] \ar[l] \\
+\Spec(B') & \Spec(B) \ar[l]
+}
+$$
+が Cartesian であることを意味する。開埋め込みの基底変換は開埋め込みであるから、
+結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-well-defined}
+加群 (\ref{discriminant-equation-dualizing}) は良定義である。すなわち分解の選択に依存しない。
+\end{lemma}
+
+\begin{proof}
+$B', B'', B'''$ を補題 \ref{discriminant-lemma-dominate-factorizations} のように取る。
+標準写像
+$$
+\omega''' = \Hom_A(B''', A) \otimes_{B'''} B \longrightarrow
+\Hom_A(B', A) \otimes_{B'} B = \omega'
+$$
+と、$B''$ を用いた同様の写像を得る。これらが同型であることを示せばよい。
+$B'_g \to B_g$ が同型となる元 $g \in B'$ を取る。このとき
+$B'_g \to (B''')_g \to B_g$ も同型である。
+従って $(\omega''')_g \to \omega'_g$ が同型であることを示せば十分である。
+環写像 $B' \to B'''$ の核と余核は有限 $A$-加群であり、$g$-冪ねじれである。
+ゆえにこれらはある $g$ の冪で零化され、このことから直ちに結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-localize-dualizing}
+$A \to B$ を Noether 環の準有限写像とする。
+\begin{enumerate}
+\item ある $f \in A$ に対して $A \to B$ が $A \to A_f \to B$ と分解するならば、
+$\omega_{B/A} = \omega_{B/A_f}$ である。
+\item $g \in B$ ならば $(\omega_{B/A})_g = \omega_{B_g/A}$ である。
+\item $f \in A$ ならば $\omega_{B_f/A_f} = (\omega_{B/A})_f$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A \to B'$ が有限で $\Spec(B) \to \Spec(B')$ が開埋め込みとなる分解
+$A \to B' \to B$ を取る。(1) では、$\omega_{B/A_f}$ の計算に
+$A_f \to B'_f \to B$ を用い、『可換代数』の補題 \ref{algebra-lemma-hom-from-finitely-presented} を適用できる。
+(2) では分解 $A \to B' \to B_g$ を用いればよい。
+(3) は (1) と (2) の組合せから従う。
+\end{proof}
+
+\noindent
+$A \to B$ を Noether 環の準有限環写像、$A \to A_1$ を Noether 環の
+任意の環写像とし、$B_1 = B \otimes_A A_1$ と置く。余 Cartesian 図式
+$$
+\xymatrix{
+B \ar[r] & B_1 \\
+A \ar[u] \ar[r] & A_1 \ar[u]
+}
+$$
+を得る。$A_1 \to B_1$ も準有限である
+(『可換代数』の補題 \ref{algebra-lemma-quasi-finite-base-change})。
+この状況で標準的な $B$-線形基底変換写像
+\begin{equation}
+\label{discriminant-equation-bc-dualizing}
+\omega_{B/A} \longrightarrow \omega_{B_1/A_1}
+\end{equation}
+を定義する。$\omega_{B/A}$ の構成に用いた分解 $A \to B' \to B$ を選ぶ。
+すると $B'_1 = B' \otimes_A A_1$ は $A_1$ 上有限であり、
+$\omega_{B_1/A_1}$ の構成には分解 $A_1 \to B'_1 \to B_1$ を用いることができる。
+従って写像
+$$
+\Hom_A(B', A) \otimes_{B'} B
+\longrightarrow
+\Hom_{A_1}(B' \otimes_A A_1, A_1) \otimes_{B'_1} B_1
+$$
+を構成すればよい。そのためには、$\varphi \mapsto \varphi_1$ と書く
+$B'$-線形写像
+$\Hom_A(B', A) \to \Hom_{A_1}(B' \otimes_A A_1, A_1)$
+を構成すれば十分である。実際、$A$-線形写像 $\varphi : B' \to A$ に対し、
+$\varphi_1(b' \otimes a_1) = \varphi(b')a_1$ を満たす写像を $\varphi_1$
+と定める。これは明らかに $A_1$-線形であり、構成は完了する。
+
+\begin{lemma}
+\label{discriminant-lemma-bc-map-dualizing}
+基底変換写像 (\ref{discriminant-equation-bc-dualizing}) は、分解
+$A \to B' \to B$ の選択に依存しない。環準同型 $A \to A_1 \to A_2$
+が与えられたとき、$A \to A_1$ と $A_1 \to A_2$ に対する
+基底変換写像の合成は、$A \to A_2$ に対する基底変換写像である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：補題 \ref{discriminant-lemma-dualizing-well-defined} とまったく同じように、
+補題 \ref{discriminant-lemma-dominate-factorizations} を用いて論じよ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-flat-base-change}
+$A \to A_1$ が平坦ならば、基底変換写像 (\ref{discriminant-equation-bc-dualizing}) は
+同型 $\omega_{B/A} \otimes_B B_1 \to \omega_{B_1/A_1}$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+$A \to A_1$ が平坦であると仮定する。$\omega_{B/A}$ の構成により、
+$A \to B$ が有限であると仮定してよい。このとき
+$\omega_{B/A} = \Hom_A(B, A)$ かつ
+$\omega_{B_1/A_1} = \Hom_{A_1}(B_1, A_1)$ である。
+$B_1 = B \otimes_A A_1$ なので、主張は『代数の続論』の補題 \ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-composition}
+$A \to B \to C$ を Noether 環の準有限準同型とする。標準写像
+$\omega_{B/A} \otimes_B \omega_{C/B} \to \omega_{C/A}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A \to B'$ が有限で $\Spec(B) \to \Spec(B')$ が開埋め込みとなるように
+$A \to B' \to B$ を選ぶ。このとき $B' \to C$ も準有限である。
+$B' \to C'$ が有限で $\Spec(C) \to \Spec(C')$ が開埋め込みとなるように
+$B' \to C' \to C$ を選ぶ。このとき写像の始域は
+$$
+\Hom_A(B', A) \otimes_{B'} B \otimes_B
+\Hom_B(B \otimes_{B'} C', B) \otimes_{B \otimes_{B'} C'} C
+$$
+であり、これは
+$$
+\Hom_A(B', A) \otimes_{B'}
+\Hom_{B'}(C', B) \otimes_{C'} C
+$$
+に等しい。これには、合成
+$\Hom_A(B', A) \times \Hom_{B'}(C', B) \to \Hom_A(C', A)$
+から得られる
+$\Hom_A(C', A) \otimes_{C'} C = \omega_{C/A}$
+への標準写像が実際に備わっている。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-product}
+$A \to B$ および $A \to C$ を Noether 環の準有限準同型とする。このとき
+$B \times C$ 上の加群として
+$\omega_{B \times C/A} = \omega_{B/A} \times \omega_{C/A}$ である。
+\end{lemma}
+
+\begin{proof}
+$A \to B'$ と $A \to C'$ が有限であり、かつ
+$\Spec(B) \to \Spec(B')$ と $\Spec(C) \to \Spec(C')$
+が開埋め込みとなるような分解 $A \to B' \to B$ と
+$A \to C' \to C$ を選ぶ。このとき
+$A \to B' \times C' \to B \times C$ も同様の分解である。
+この分解を用いて $\omega_{B \times C/A}$ を計算すれば補題を得る。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-associated-primes}
+$A \to B$ を Noether 環の準有限準同型とする。このとき
+$\text{Ass}_B(\omega_{B/A})$ は、$A$ の随伴素イデアルの上にある
+$B$ の素イデアル全体である。
+\end{lemma}
+
+\begin{proof}
+$A \to B'$ が有限で $B' \to B$ がスペクトル上の開埋め込みを誘導するような
+分解 $A \to B' \to B$ を選ぶ。
+$\omega_{B/A} = \omega_{B'/A} \otimes_{B'} B$ なので、
+$\omega_{B'/A}$ について主張を証明すれば十分である。
+従って $A \to B$ が有限であると仮定してよい。
+
+\medskip\noindent
+$\mathfrak p \in \text{Ass}(A)$ と仮定し、$\mathfrak q$ を
+$\mathfrak p$ の上にある $B$ の素イデアルとする。
+零化イデアルが $\mathfrak p$ である元 $x \in A$ を取る。
+非零な $\kappa(\mathfrak p)$-線形写像
+$\lambda : \kappa(\mathfrak q) \to \kappa(\mathfrak p)$ を選ぶ。
+$A/\mathfrak p \subset B/\mathfrak q$ は環の有限拡大なので、
+ある $f \in A$, $f \not \in \mathfrak p$ が存在し、
+$f\lambda$ は $B/\mathfrak q$ を $A/\mathfrak p$ に写す。
+従って非零な $A$-線形写像
+$$
+B \to B/\mathfrak q \to A/\mathfrak p \to A,\quad
+b \mapsto f\lambda(b)x
+$$
+を得る。容易な計算により、$\omega_{B/A}$ のこの元の
+零化イデアルは $\mathfrak q$ であることが分かる。従って
+$\mathfrak q \in \text{Ass}(\omega_{B/A})$ である。
+
+\medskip\noindent
+逆に、$\mathfrak q \subset B$ を、$A$ の随伴素イデアルではない
+素イデアル $\mathfrak p \subset A$ の上にある素イデアルとする。
+$\mathfrak q \not \in \text{Ass}_B(\omega_{B/A})$ を示さなければならない。
+$A$ を $A_\mathfrak p$ で、$B$ を $B_\mathfrak p$ で置き換えることにより、
+$\mathfrak p$ が $A$ の極大イデアルであると仮定してよい。
+これは補題 \ref{discriminant-lemma-dualizing-flat-base-change} および
+『可換代数』の補題 \ref{algebra-lemma-localize-ass} によって許される。
+このとき $A$ 上の非零因子である $f \in \mathfrak m$ が存在する。
+すると $f$ は $\omega_{B/A}$ 上でも非零因子なので、
+$\mathfrak q$ はこの加群の随伴素イデアルではない。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-base-flat-flat}
+$A \to B$ を Noether 環の平坦な準有限準同型とする。
+このとき $\omega_{B/A}$ は平坦な $A$-加群である。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p \subset A$ の上にある素イデアル
+$\mathfrak q \subset B$ を取る。局所化
+$\omega_{B/A, \mathfrak q}$ が $A_\mathfrak p$ 上平坦であることを示す。
+『可換代数』の補題 \ref{algebra-lemma-flat-localization} により、これで十分である。
+『可換代数』の補題 \ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}
+により、\'etale 環準同型 $A \to A'$ と
+$\mathfrak p$ の上にある素イデアル $\mathfrak p' \subset A'$ で、
+$\kappa(\mathfrak p') = \kappa(\mathfrak p)$ を満たし、かつ
+$$
+B' = B \otimes_A A' = C \times D
+$$
+で $A' \to C$ が有限となるものを見つけられる。さらに、
+$\mathfrak q$ と $\mathfrak p'$ の上にある
+$B \otimes_A A'$ の一意な素イデアル $\mathfrak q'$ は、
+$C$ の素イデアルに対応する。補題 \ref{discriminant-lemma-dualizing-flat-base-change}
+および『可換代数』の補題 \ref{algebra-lemma-base-change-flat-up-down}
+により、$\omega_{B'/A', \mathfrak q'}$ が
+$A'_{\mathfrak p'}$ 上平坦であることを示せば十分である。
+補題 \ref{discriminant-lemma-dualizing-product} によって
+$\omega_{B'/A'} = \omega_{C/A'} \times \omega_{D/A'}$ なので、
+$B$ が $A$ 上有限平坦である場合に帰着する。この場合 $B$ は
+$A$-加群として有限局所自由であり、$\omega_{B/A} = \Hom_A(B, A)$ は
+その双対有限局所自由 $A$-加群である。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-base-change-of-flat}
+$A \to B$ が平坦ならば、基底変換写像 (\ref{discriminant-equation-bc-dualizing}) は
+同型 $\omega_{B/A} \otimes_B B_1 \to \omega_{B_1/A_1}$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ が有限平坦ならば、$B$ は $A$-加群として有限局所自由である。
+この場合 $\omega_{B/A} = \Hom_A(B, A)$ はその双対有限局所自由 $A$-加群であり、
+この加群の形成は任意の基底変換と可換である。従ってこの場合に補題は成り立つ。
+次の段落では、一般の（準有限平坦な）場合を、いま論じた有限平坦な場合に帰着する。
+
+\medskip\noindent
+$\mathfrak q_1 \subset B_1$ を素イデアルとする。写像を
+$\mathfrak q_1$ で局所化したものが同型であることを示す。
+『可換代数』の補題 \ref{algebra-lemma-characterize-zero-local} により、これで十分である。
+$\mathfrak q_1$ の下にある素イデアルを
+$\mathfrak q \subset B$ および $\mathfrak p \subset A$ とする。
+『可換代数』の補題 \ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}
+により、\'etale 環準同型 $A \to A'$ と
+$\mathfrak p$ の上にある素イデアル $\mathfrak p' \subset A'$ で、
+$\kappa(\mathfrak p') = \kappa(\mathfrak p)$ を満たし、かつ
+$$
+B' = B \otimes_A A' = C \times D
+$$
+で $A' \to C$ が有限となるものを見つけられる。さらに、
+$\mathfrak q$ と $\mathfrak p'$ の上にある
+$B \otimes_A A'$ の一意な素イデアル $\mathfrak q'$ は、
+$C$ の素イデアルに対応する。$A'_1 = A' \otimes_A A_1$ とおき、
+図式
+$$
+\xymatrix{
+\omega_{B'/A'} \otimes_{B'} B'_1 \ar[r] & \omega_{B'_1/A'_1} \\
+\omega_{B/A} \otimes_B B'_1 \ar[r] \ar[u] &
+\omega_{B_1/A_1} \otimes_{B_1} B'_1 \ar[u]
+}
+$$
+に現れる環準同型 $A \to A' \to A'_1$ および
+$A \to A_1 \to A'_1$ に対する基底変換写像
+(\ref{discriminant-equation-bc-dualizing}) を考える。ここで
+$B' = B \otimes_A A'$, $B_1 = B \otimes_A A_1$,
+$B_1' = B \otimes_A (A' \otimes_A A_1)$ である。
+補題 \ref{discriminant-lemma-bc-map-dualizing} により図式は可換である。
+補題 \ref{discriminant-lemma-dualizing-flat-base-change} により縦の矢印は同型である。
+$B_1 \to B'_1$ は \'etale、従って平坦なので、
+$\mathfrak q$ の上にある $B'_1$ の素イデアル $\mathfrak q'_1$
+で局所化した後に上の横矢印が同型であることを示せば十分である
+（そのような素イデアルは存在し、『可換代数』の補題 \ref{algebra-lemma-local-flat-ff} を用いる）。
+従って $B = C \times D$ で、$A \to C$ が有限、かつ
+$\mathfrak q$ が $C$ の素イデアルに対応すると仮定してよい。
+この場合、双対化加群 $\omega_{B/A}$ も同様に分解する
+（補題 \ref{discriminant-lemma-dualizing-product}）。従って問題は、
+上で扱った有限平坦な場合 $A \to C$ に帰着する。
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-relative-dualizing-for-quasi-finite}
+$f : Y \to X$ を局所 Noether スキームの局所準有限射とする。
+補題 \ref{discriminant-lemma-localize-dualizing} から、$Y$ 上の一意な連接
+$\mathcal{O}_Y$-加群 $\omega_{Y/X}$ で、次を満たすものが存在することは明らかである。
+$f(V) \subset U$ を満たす任意のアフィン開集合の対
+$\Spec(B) = V \subset Y$, $\Spec(A) = U \subset X$ に対して標準同型
+$$
+H^0(V, \omega_{Y/X}) = \omega_{B/A}
+$$
+が存在し、これらの同型は制限写像と両立する。
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-compare-dualizing-algebraic}
+$A \to B$ を Noether 環の準有限準同型とする。
+『双対化複体』の第 \ref{dualizing-section-relative-dualizing-complexes-Noetherian} 節
+で論じた代数的相対双対化複体を
+$\omega_{B/A}^\bullet \in D(B)$ とする。このとき（非一意な）同型
+$\omega_{B/A} = H^0(\omega_{B/A}^\bullet)$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A \to B'$ が有限で $\Spec(B') \to \Spec(B)$ が開埋め込みとなる分解
+$A \to B' \to B$ を選ぶ。『双対化複体』の補題 \ref{dualizing-lemma-composition-shriek-algebraic} および
+\ref{dualizing-lemma-upper-shriek-localize} と
+$\omega_{B/A}^\bullet$ の定義により
+$\omega_{B/A}^\bullet = \omega_{B'/A}^\bullet \otimes_B^\mathbf{L} B'$
+である。従って $A \to B$ が有限な場合に同型を示せば十分である。
+この場合、『双対化複体』の補題 \ref{dualizing-lemma-upper-shriek-finite} を用いると
+$\omega_{B/A}^\bullet = R\Hom(B, A)$ であり、従って望みどおり
+$H^0(\omega^\bullet_{B/A}) = \Hom_A(B, A)$ である。
+\end{proof}
+
+
+
+
+
+
+\section{有限局所自由射の判別式}
+\label{discriminant-section-discriminant}
+
+\noindent
+$X$ をスキーム、$\mathcal{F}$ を有限局所自由な
+$\mathcal{O}_X$-加群とする。このとき標準的な {\it トレース} 写像
+$$
+\text{Trace} :
+\SheafHom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{F})
+\longrightarrow
+\mathcal{O}_X
+$$
+が存在する。『演習』の演習 \ref{exercises-exercise-trace-det} を参照せよ。
+この写像は、$\text{Trace}(\text{id})$ が $\mathcal{F}$ の階数に対応する
+$\mathcal{O}_X$ 上の局所定数関数となるという性質をもつ。
+
+\medskip\noindent
+$\pi : X \to Y$ を有限局所自由なスキームの射とする。このとき
+$\pi$ に対する標準的な {\it トレース}、すなわち
+$\mathcal{O}_Y$-線形写像
+$$
+\text{Trace}_\pi : \pi_*\mathcal{O}_X \longrightarrow \mathcal{O}_Y
+$$
+が存在する。これは $\pi_*\mathcal{O}_X$ の局所切断 $f$ を、
+$\pi_*\mathcal{O}_X$ 上の $f$ 倍写像のトレースへ写す。
+アフィン開集合上では『演習』の演習 \ref{exercises-exercise-trace-det-rings} の構成を復元する。合成
+$$
+\mathcal{O}_Y \xrightarrow{\pi^\sharp} \pi_*\mathcal{O}_X
+\xrightarrow{\text{Trace}_\pi} \mathcal{O}_Y
+$$
+は $\pi$ の次数による乗法に等しい（次数は $Y$ 上の局所定数関数である）。
+『体』の第 \ref{fields-section-trace-pairing} 節との類比により、規則
+$(f, g) \mapsto \text{Trace}_\pi(fg)$ でトレース対
+$$
+Q_\pi :
+\pi_*\mathcal{O}_X \times \pi_*\mathcal{O}_X
+\longrightarrow
+\mathcal{O}_Y
+$$
+を定義できる。$Q_\pi$ を、同じ階数の局所自由加群の間の線形写像
+$\pi_*\mathcal{O}_X \to
+\SheafHom_{\mathcal{O}_Y}(\pi_*\mathcal{O}_X, \mathcal{O}_Y)$
+とみなすことができ、従って行列式
+$$
+\det(Q_\pi) :
+\wedge^{top}(\pi_*\mathcal{O}_X)
+\longrightarrow
+\wedge^{top}(\pi_*\mathcal{O}_X)^{\otimes -1}
+$$
+を、言い換えれば大域切断
+$$
+\det(Q_\pi) \in \Gamma(Y, \wedge^{top}(\pi_*\mathcal{O}_X)^{\otimes -2})
+$$
+を得る。{\it $\pi$ の判別式} とは、定義によりこの大域切断が切り出す
+閉部分スキーム $D_\pi \subset Y$ のことである。
+明らかに $D_\pi$ は $Y$ の局所主閉部分スキームである。
+
+\begin{lemma}
+\label{discriminant-lemma-discriminant}
+$\pi : X \to Y$ を有限局所自由なスキームの射とする。このとき
+$\pi$ が \'etale であることと、その判別式が空であることは同値である。
+\end{lemma}
+
+\begin{proof}
+『スキームの射』の補題 \ref{morphisms-lemma-etale-flat-etale-fibres} により、
+$\pi$ のファイバーが \'etale であることを確認すれば十分である。
+トレース対の構成は基底変換と可換なので、次の問題に帰着する。
+$k$ を体、$A$ を有限次元 $k$-代数とする。
+$A$ が $k$ 上 \'etale であることと、トレース対
+$Q_{A/k} : A \times A \to k$, $(a, b) \mapsto \text{Trace}_{A/k}(ab)$
+が非退化であることが同値であると示せ。
+
+\medskip\noindent
+$Q_{A/k}$ が非退化であると仮定する。$a \in A$ が冪零元ならば、
+すべての $b \in A$ に対して $ab$ は冪零であり、
+$Q_{A/k}(a, -)$ は恒等的に零であると結論できる。従って $A$ は被約である。
+このとき
+$A = K_1 \times \ldots \times K_n$ と書ける。ここで各 $K_i$ は体である
+（『可換代数』の補題 \ref{algebra-lemma-finite-dimensional-algebra} および \ref{algebra-lemma-artinian-finite-length}, および
+\ref{algebra-lemma-minimal-prime-reduced-ring} を参照せよ）。
+この場合、二次空間 $(A, Q_{A/k})$ は空間
+$(K_i, Q_{K_i/k})$ の直交直和である。
+『体』の補題 \ref{fields-lemma-separable-trace-pairing} により、
+各 $K_i$ は $k$ 上分離的である。従って『可換代数』の補題 \ref{algebra-lemma-etale-over-field} により $A$ は $k$ 上 \'etale である。
+逆はこの議論を逆向きに読めば証明される。
+\end{proof}
+
+
+
+
+
+\section{平坦準有限環準同型のトレース}
+\label{discriminant-section-quasi-finite-traces}
+
+\noindent
+本節の標題にいうトレースは、『スキームの双対性』の第 \ref{duality-section-trace} 節で論じたトレースとはまったく異なる性質のものである。
+すなわち、『体』の第 \ref{fields-section-trace-pairing} 節で論じられ、
+『演習』の演習 \ref{exercises-exercise-trace-det} および
+\ref{exercises-exercise-trace-det-rings} で一般化されたトレースである。
+
+\medskip\noindent
+$A \to B$ を Noether 環の有限平坦準同型とする。このとき $B$ は
+$A$-加群として有限平坦、従って有限局所自由である
+（『可換代数』の補題 \ref{algebra-lemma-finite-projective}）。
+$b \in B$ に対し、$B$ 上の $b$ 倍写像で与えられる
+$A$-線形写像 $B \to B$ の {\it トレース}
+$\text{Trace}_{B/A}(b)$ を考えられる。上の参照先により、これは
+$A$-線形写像 $\text{Trace}_{B/A} : B \to A$ を定める。
+$A \to B$ は有限なので $\omega_{B/A} = \Hom_A(B, A)$ であり、
+従って $\text{Trace}_{B/A} \in \omega_{B/A}$ である。
+
+\medskip\noindent
+一般の平坦準有限環準同型について、トレースの概念を次のように定義する。
+
+\begin{definition}
+\label{discriminant-definition-trace-element}
+$A \to B$ を Noether 環の平坦準有限準同型とする。
+{\it トレース元} とは、次の性質をもつ一意な\footnote{一意性と存在は
+補題 \ref{discriminant-lemma-trace-unique} および \ref{discriminant-lemma-dualizing-tau}
+で正当化する。} 元
+$\tau_{B/A} \in \omega_{B/A}$ のことである。
+任意の Noether $A$-代数 $A_1$ で、
+$B_1 = B \otimes_A A_1$ が積分解 $B_1 = C \times D$ をもち、
+$A_1 \to C$ が有限であるものに対して、
+$\omega_{C/A_1}$ における $\tau_{B/A}$ の像は
+$\text{Trace}_{C/A_1}$ である。ここでは基底変換写像
+(\ref{discriminant-equation-bc-dualizing}) と補題 \ref{discriminant-lemma-dualizing-product}
+を用いて
+$\omega_{B/A} \to \omega_{B_1/A_1} \to \omega_{C/A_1}$
+を得ている。
+\end{definition}
+
+\noindent
+まずトレース元の一意性を証明し、次にその存在を証明する。
+
+\begin{lemma}
+\label{discriminant-lemma-trace-unique}
+$A \to B$ を Noether 環の平坦準有限準同型とする。
+このとき $\omega_{B/A}$ には高々一つのトレース元しか存在しない。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak q \subset B$ を、素イデアル $\mathfrak p \subset A$
+の上にある素イデアルとする。『可換代数』の補題 \ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}
+により、\'etale 環準同型 $A \to A_1$ と
+$\mathfrak p$ の上にある素イデアル $\mathfrak p_1 \subset A_1$ で、
+$\kappa(\mathfrak p_1) = \kappa(\mathfrak p)$ を満たし、かつ
+$$
+B_1 = B \otimes_A A_1 = C \times D
+$$
+で $A_1 \to C$ が有限となるものを見つけられる。さらに、
+$\mathfrak q$ と $\mathfrak p_1$ の上にある
+$B \otimes_A A_1$ の一意な素イデアル $\mathfrak q_1$ は、
+$C$ の素イデアルに対応する。
+$\omega_{C/A_1} = \omega_{B/A} \otimes_B C$
+である（補題 \ref{discriminant-lemma-dualizing-flat-base-change} および
+\ref{discriminant-lemma-dualizing-product} を組み合わせよ）。
+このようにして得られる環準同型 $B \to C$ の族は、
+平坦写像からなる共同単射的な族である。また、
+$\omega_{C/A_1}$ における $\tau_{B/A}$ の像は指定されているので、
+一意性が従う。
+\end{proof}
+
+\noindent
+ここで整合性確認を一つ行う。
+
+\begin{lemma}
+\label{discriminant-lemma-finite-flat-trace}
+$A \to B$ を Noether 環の有限平坦準同型とする。
+このとき $\text{Trace}_{B/A} \in \omega_{B/A}$ はトレース元である。
+\end{lemma}
+
+\begin{proof}
+$A_1$ が Noether であるような $A \to A_1$ と、
+$A_1 \to C$ が有限であるような積分解
+$B \otimes_A A_1 = C \times D$ が与えられたとする。
+もちろんこの場合 $A_1 \to D$ も有限である。
+$B_1 = B \otimes_A A_1$ とおく。トレースの構成は基底変換と可換なので、
+$\text{Trace}_{B/A}$ は $\text{Trace}_{B_1/A_1}$ に写る。
+従って、補題 \ref{discriminant-lemma-dualizing-product} の同型
+$\omega_{B_1/A_1} = \omega_{C/A_1} \times \omega_{D/A_1}$
+のもとで
+$\text{Trace}_{B_1/A_1} = (\text{Trace}_{C/A_1}, \text{Trace}_{D/A_1})$
+であることに注意すれば証明は終わる。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-trace-base-change}
+$A \to B$ を Noether 環の平坦準有限準同型とし、
+$\tau \in \omega_{B/A}$ をトレース元とする。
+\begin{enumerate}
+\item $A_1$ が Noether であるような写像 $A \to A_1$ に対し、
+$B_1 = A_1 \otimes_A B$ とおくと、$\omega_{B_1/A_1}$ における
+$\tau$ の像はトレース元である。
+\item ある環 $R$ と $f \in R$ に対して $A = R_f$ ならば、
+$\tau$ は $\omega_{B/R}$ のトレース元である。
+\item $g \in B$ ならば、$\omega_{B_g/A}$ における
+$\tau$ の像はトレース元である。
+\item $B = B_1 \times B_2$ ならば、$\tau$ は
+$\omega_{B_1/A}$ と $\omega_{B_2/A}$ の双方でトレース元に写る。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は定義の形式的帰結である。
+
+\medskip\noindent
+補題 \ref{discriminant-lemma-localize-dualizing} により
+$\omega_{B/R} = \omega_{B/A}$ なので、(2) は意味をもつ。
+$\tau$ を $\omega_{B/R}$ の元とみなしたものを $\tau'$ と書く。
+(2) を示すため、$R_1$ が Noether であるような $R \to R_1$ と、
+$R_1 \to C$ が有限であるような積分解
+$B \otimes_R R_1 = C \times D$ が与えられたとする。
+このとき $A_1 = (R_1)_f$ とおけば
+$B \otimes_A A_1 = C \times D$ である。
+$R_1 \to C$ は有限なので、まして $A_1 \to C$ も有限である。
+従って $\tau$ の定義性質を用いれば、$\tau'$ に対する
+対応する性質が得られる。
+
+\medskip\noindent
+補題 \ref{discriminant-lemma-localize-dualizing} により
+$\omega_{B_g/A} = (\omega_{B/A})_g$ なので、(3) は意味をもつ。
+証明は (2) の証明と同様である。$A_1$ が Noether であるような
+$A \to A_1$ と、$A_1 \to C$ が有限であるような積分解
+$B_g \otimes_A A_1 = C \times D$ が与えられたとする。
+$B_1 = B \otimes_A A_1$ とおく。このとき
+$B_g \otimes_A A_1 = (B_1)_g$ なので
+$\Spec(C) \to \Spec(B_1)$ は開埋め込みであり、
+$B_1 \to C$ は有限なので（$A_1 \to C$ が有限であるため）
+その像は閉である。従って $B_1 = C \times D_1$ かつ
+$D = (D_1)_g$ である。このとき $\tau$ の定義性質を用いれば、
+$\omega_{B_g/A}$ における $\tau$ の像について対応する性質が得られる。
+
+\medskip\noindent
+補題 \ref{discriminant-lemma-dualizing-product} により
+$\omega_{B/A} = \omega_{B_1/A} \times \omega_{B_2/A}$ なので、(4) は意味をもつ。
+$A'$ が Noether であるような $A \to A'$ と、
+$A' \to C$ が有限であるような積分解
+$B \otimes_A A' = C \times D$ が与えられたとする。
+この積分解を
+$B \otimes_A A' = C_1 \times C_2 \times D_1 \times D_2$
+へ細分でき、$A' \to C_i$ は有限、かつ
+$B_i \otimes_A A' = C_i \times D_i$ となることは明らかである。
+このとき $\tau$ の定義性質から、$\omega_{B_i/A}$ における
+$\tau$ の像について対応する性質が得られる。ここでは、分解
+$\omega_{C/A'} = \omega_{C_1/A'} \times \omega_{C_2/A'}$
+のもとで
+$\text{Trace}_{C/A'} = (\text{Trace}_{C_1/A'}, \text{Trace}_{C_2/A'})$
+となるという明らかな事実を用いた。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-glue-trace}
+$A \to B$ を Noether 環の平坦準有限準同型とする。
+$g_1, \ldots, g_m \in B$ を単位イデアルを生成する元とする。
+$\tau \in \omega_{B/A}$ を、各 $\omega_{B_{g_i}/A}$ における像が
+$A \to B_{g_i}$ に対するトレース元となる元とする。
+このとき $\tau$ はトレース元である。
+\end{lemma}
+
+\begin{proof}
+$A_1$ が Noether であるような $A \to A_1$ と、
+$A_1 \to C$ が有限であるような積分解
+$B \otimes_A A_1 = C \times D$ が与えられたとする。
+$\omega_{C/A_1}$ における $\tau$ の像が
+$\text{Trace}_{C/A_1}$ であることを示さなければならない。
+$g_1, \ldots, g_m$ は $B_1 = B \otimes_A A_1$ の単位イデアルを生成し、
+補題 \ref{discriminant-lemma-trace-base-change} により $\tau$ は
+$\omega_{(B_1)_{g_i}/A_1}$ のトレース元に写る。
+従って $A$ を $A_1$ で、$B$ を $B_1$ で置き換え、
+次の段落で述べる状況に移ってよい。
+
+\medskip\noindent
+ここでは $B = C \times D$ で $A \to C$ は有限であると仮定する。
+$\tau_C$ を $\omega_{C/A}$ における $\tau$ の像とする。
+$\omega_{C/A}$ において
+$\tau_C = \text{Trace}_{C/A}$ であることを証明しなければならない。
+トレース元と積との両立性（補題 \ref{discriminant-lemma-trace-base-change}）により、
+$\tau_C$ は $\omega_{C_{g_i}/A}$ のトレース元に写る。
+従って $B$ を $C$ で置き換え、$A \to B$ が有限平坦であると
+仮定してよい。
+
+\medskip\noindent
+$A \to B$ が有限平坦であると仮定する。この場合
+補題 \ref{discriminant-lemma-finite-flat-trace} により
+$\text{Trace}_{B/A}$ はトレース元である。
+従って補題 \ref{discriminant-lemma-trace-base-change} により
+$\text{Trace}_{B/A}$ は $\omega_{B_{g_i}/A}$ のトレース元に写る。
+トレース元は一意なので（補題 \ref{discriminant-lemma-trace-unique}）、
+$\text{Trace}_{B/A}$ と $\tau$ は
+$\omega_{B_{g_i}/A} = (\omega_{B/A})_{g_i}$ の同じ元に写る。
+$g_1, \ldots, g_m$ は $B$ の単位イデアルを生成するから、写像
+$\omega_{B/A} \to \prod \omega_{B_{g_i}/A}$ は単射である。
+従って望みどおり $\tau_C = \text{Trace}_{B/A}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-tau}
+$A \to B$ を Noether 環の平坦準有限準同型とする。
+トレース元 $\tau \in \omega_{B/A}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A \to B'$ が有限で $\Spec(B) \to \Spec(B')$ が開埋め込みとなる分解
+$A \to B' \to B$ を選ぶ。$\Spec(B')$ の開集合として
+$\Spec(B) = \bigcup D(g_i)$ となる元
+$g_1, \ldots, g_n \in B'$ を取る。準有限平坦環準同型
+$A \to B_{g_i}$ に対するトレース元 $\tau_i$ の存在を証明できたとする。
+このときすべての $i, j$ に対し、補題 \ref{discriminant-lemma-trace-base-change} により $\tau_i$ と $\tau_j$ は
+$\omega_{B_{g_ig_j}/A}$ のトレース元に写る。
+トレース元の一意性（補題 \ref{discriminant-lemma-trace-unique}）により、
+両者は同じ元に写る。従って $\omega_{B/A}$ に付随する準連接加群の
+層条件（『可換代数』の補題 \ref{algebra-lemma-cover-module} を参照）から
+元 $\tau \in \omega_{B/A}$ が得られる。このとき補題 \ref{discriminant-lemma-glue-trace} により $\tau$ はトレース元である。
+このようにして、次の段落で扱う場合に帰着する。
+
+\medskip\noindent
+$A \to B'$ が有限で、$g \in B'$、かつ $B = B'_g$ が $A$ 上平坦であると仮定する。
+$\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B$ のトレース元を構成することが課題である。
+有限自由 $A$-加群 $F_0$ と $F_1$ による $B'$ の分解
+$F_1 \to F_0 \to B' \to 0$ を選ぶ。このとき完全列
+$$
+0 \to \Hom_A(B', A) \to F_0^\vee \to F_1^\vee
+$$
+を得る。ここで $F_i^\vee = \Hom_A(F_i, A)$ は双対有限自由加群である。
+同様に完全列
+$$
+0 \to \Hom_A(B', B') \to F_0^\vee \otimes_A B' \to F_1^\vee \otimes_A B'
+$$
+を得る。$\tau$ の構成の着想は、図式
+$$
+B' \xrightarrow{\mu} \Hom_A(B', B')
+\leftarrow \Hom_A(B', A) \otimes_A B'
+\xrightarrow{ev} A
+$$
+を用いることである。第一の矢印は $b' \in B'$ を $b'$ 倍写像で与えられる
+$A$-線形作用素へ写し、最後の矢印は評価写像である。
+問題は、$\lambda' \otimes b'$ を写像
+$b'' \mapsto \lambda'(b'')b'$ へ写す中央の矢印が同型ではないことにある。
+$B'$ が $A$ 上平坦ならば、上の完全列からこれは同型であり、
+左から右への合成は通常のトレース $\text{Trace}_{B'/A}$ である。
+一般の場合には、図式
+$$
+\xymatrix{
+& \Hom_A(B', A) \otimes_A B' \ar[r] \ar[d] &
+\Hom_A(B', A) \otimes_A B'_g \ar[d] \\
+B' \ar[r]_-\mu \ar@{..>}[rru] \ar@{..>}[ru]^\psi &
+\Hom_A(B', B') \ar[r] &
+\Ker(F_0^\vee \otimes_A B'_g \to F_1^\vee \otimes_A B'_g)
+}
+$$
+を考える。$A \to B'_g$ の平坦性により、右の縦矢印は同型である。
+従って装飾のない点線矢印を得る。
+$B'_g = \colim \frac{1}{g^n}B'$ であり、余極限はテンソル積と可換であり、
+さらに $B'$ は有限表示 $A$-加群なので、ある $n \geq 0$ と
+（右 $B'$-加群構造に関して）$B'$-線形な写像
+$\psi : B' \to \Hom_A(B', A) \otimes_A B'$ で、
+左の縦矢印との合成が $g^n\mu$ となるものを見つけられる。
+$ev$ と合成して元 $ev \circ \psi \in \Hom_A(B', A)$ を得る。
+そこで
+$$
+\tau = (ev \circ \psi) \otimes g^{-n} \in
+\Hom_A(B', A) \otimes_{B'} B'_g = \omega_{B'_g/A} = \omega_{B/A}
+$$
+とおく。この元が上の $n$ と $\psi$ の選択に依存しないことの
+容易な確認は省略する。
+
+\medskip\noindent
+前段落で構成した $\tau$ が、ある特別な場合に所望の性質をもつことを証明する。
+すなわち、$B' = C' \times D'$ および $g = (f, h)$ で、
+$A \to C'$ は平坦、$D'_h$ は平坦、かつ $f$ は $C'$ の単元であるとする。
+示すべきことは、$\tau$ が $\omega_{C'/A}$ において
+$\text{Trace}_{C'/A}$ に写ることである。この場合、まず上と同様に
+組 $(D', h)$ に対して $n_D$ と
+$\psi_D : D' \to \Hom_A(D', A) \otimes_A D'$ を選ぶ。また、
+$\psi_C : C' \to \Hom_A(C', A) \otimes_A C' = \Hom_A(C', C')$
+を、$c' \in C'$ を $c'$ 倍写像へ写す写像とする。
+次に $n = n_D$ および $\psi = (f^{n_D} \psi_C, \psi_D)$ と取る。
+上で述べたように $\text{Trace}_{C'/A} = ev \circ \psi_C$ なので、
+所望の両立性は明らかである。
+
+\medskip\noindent
+一般に所望の性質を証明するため、$A_1$ が Noether であるような
+$A \to A_1$ と、$A_1 \to C$ が有限であるような積分解
+$B'_g \otimes_A A_1 = C \times D$ が与えられたとする。
+$B'_1 = B' \otimes_A A_1$ とおく。このとき
+$B'_g \otimes_A A_1 = (B'_1)_g$ なので
+$\Spec(C) \to \Spec(B'_1)$ は開埋め込みであり、
+$B'_1 \to C$ は有限なので（$A_1 \to C$ が有限であるため）
+その像は閉である。従って $B'_1 = C \times D'$ かつ $D'_g = D$ である。
+従って $B'_1 = C \times D'$ と $A_1$ 上の $g$ は前段落の状況にある。
+上に表示した図式の形成は基底変換と可換なので、
+$\tau$ の形成は基底変換 $A \to A_1$ と可換である
+（詳細は省略する。これを見るには分解
+$F_1 \otimes_A A_1 \to F_0 \otimes_A A_1 \to B'_1 \to 0$
+を用いよ）。従って所望の両立性は前段落の結果から従う。
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-relative-dualizing-for-flat-quasi-finite}
+$f : Y \to X$ を局所 Noether スキームの平坦局所準有限射とする。
+$\omega_{Y/X}$ を注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} のものとする。
+トレース元の一意性、存在、および局所化との両立性
+（補題 \ref{discriminant-lemma-trace-unique} および \ref{discriminant-lemma-dualizing-tau}, および
+\ref{discriminant-lemma-trace-base-change}）から、大域切断
+$$
+\tau_{Y/X} \in \Gamma(Y, \omega_{Y/X})
+$$
+で次を満たすものが存在することは明らかである。
+$f(V) \subset U$ を満たす任意のアフィン開集合の対
+$\Spec(B) = V \subset Y$, $\Spec(A) = U \subset X$ に対し、
+標準同型 $H^0(V, \omega_{Y/X}) = \omega_{B/A}$ のもとで
+元 $\tau_{Y/X}$ は $\tau_{B/A}$ に写る。
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-tau-nonzero}
+$k$ を体、$A$ を有限 $k$-代数とする。$A$ は局所環で、
+剰余体は $k'$ であると仮定する。次は同値である。
+\begin{enumerate}
+\item $\text{Trace}_{A/k}$ は非零である。
+\item $\tau_{A/k} \in \omega_{A/k}$ は非零である。
+\item $k'/k$ は分離的であり、$\text{length}_A(A)$ は
+$k$ の標数と互いに素である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{discriminant-lemma-finite-flat-trace} により (1) と (2) は同値である。
+$\mathfrak m \subset A$ とする。$\dim_k(A) < \infty$ なので、
+$A$ が $A$ 上有限長をもつことは明らかである。
+$A$-加群として $I_i/I_{i + 1} \cong k'$ となるイデアルによるフィルトレーション
+$$
+A = I_0 \supset \mathfrak m = I_1 \supset I_2 \supset \ldots I_n = 0
+$$
+を選ぶ。『可換代数』の補題 \ref{algebra-lemma-simple-pieces} を参照せよ。
+同補題は $n = \text{length}_A(A)$ も示している。
+$a \in \mathfrak m$ ならば $aI_i \subset I_{i + 1}$ であり、
+$\text{Trace}_{A/k}(a) = 0$ であることは直ちに分かる。
+$a \not \in \mathfrak m$ で、その剰余体における像を
+$\lambda \in k'$ とすれば、
+$$
+\text{Trace}_{A/k}(a) =
+\sum\nolimits_{i = 0, \ldots, n - 1}
+\text{Trace}_k(a : I_i/I_{i - 1} \to I_i/I_{i - 1}) =
+n \text{Trace}_{k'/k}(\lambda)
+$$
+と結論する。『体』の補題 \ref{fields-lemma-separable-trace-pairing} を適用すれば補題の証明は終わる。
+\end{proof}
+
+
+
+
+
+
+\section{有限射}
+\label{discriminant-section-finite-morphisms}
+
+\noindent
+本節では、有限射に対する前節までの構成についていくつかの所見をまとめる。
+$f : Y \to X$ を局所 Noether スキームの有限射とし、
+$\omega_{Y/X}$ を注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} のものとする。
+
+\medskip\noindent
+第一の所見は、$f_*\mathcal{O}_Y$-加群の層として
+$$
+f_*\omega_{Y/X} = \SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)
+$$
+となることである。$f$ はアフィンなので、この公式は
+$\omega_{Y/X}$ を一意に特徴づける。『スキームの射』の補題 \ref{morphisms-lemma-affine-equivalence-modules} を参照せよ。
+実際、$\Spec(A) = U \subset X$ をアフィン開集合とすると、
+逆像 $V = f^{-1}(U)$ は有限 $A$-代数 $B$ のスペクトルであり、
+構成により
+$$
+H^0(U, f_*\omega_{Y/X}) =
+H^0(V, \omega_{Y/X}) =
+\omega_{B/A} =
+\Hom_A(B, A) =
+H^0(U, \SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X))
+$$
+だからである。特に、標準的な評価写像
+$$
+f_*\omega_{Y/X} \longrightarrow \mathcal{O}_X
+$$
+を得る。$f_*\omega_{Y/X}$ を層
+$\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)$
+とみなせば、これは $1$ における評価で与えられる。
+
+\medskip\noindent
+第二の所見は、評価写像を用いると、$Y$ 上の準連接加群
+$\mathcal{F}$ と $X$ 上の有限局所自由加群 $\mathcal{G}$ に関手的な
+標準同一視
+$$
+\Hom_Y(\mathcal{F}, f^*\mathcal{G} \otimes_{\mathcal{O}_Y} \omega_{Y/X})
+=
+\Hom_X(f_*\mathcal{F}, \mathcal{G})
+$$
+を得ることである。$\mathcal{G} = \mathcal{O}_X$ の場合、これは上記と
+『可換代数』の補題 \ref{algebra-lemma-adjoint-hom-restrict} から直ちに従う。
+一般の $\mathcal{G}$ に対しては、同じ補題と
+$f_*\mathcal{O}_Y$-加群の同型
+$$
+f_*(f^*\mathcal{G} \otimes_{\mathcal{O}_Y} \omega_{Y/X}) =
+\mathcal{G} \otimes_{\mathcal{O}_X}
+\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X) =
+\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{G})
+$$
+を用いられる。ここで第一の等式は射影公式
+（『層のコホモロジー』の補題 \ref{cohomology-lemma-projection-formula}）である。
+別の方法として、アフィン局所的に直接計算して公式を証明してもよい。
+
+\medskip\noindent
+第三の所見は、さらに $f$ が平坦ならば、合成
+$$
+f_*\mathcal{O}_Y \xrightarrow{f_*\tau_{Y/X}} f_*\omega_{Y/X}
+\longrightarrow \mathcal{O}_X
+$$
+は第 \ref{discriminant-section-discriminant} 節で論じたトレース写像
+$\text{Trace}_f$ に等しいことである。これはアフィン開集合上で
+見れば直ちに従う。
+
+\medskip\noindent
+第四の所見は、$f$ が平坦で $X$ が Noether ならば、
+$D_\QCoh(\mathcal{O}_Y)$ の任意の $K$ と
+$D_\QCoh(\mathcal{O}_X)$ の任意の $M$ に対して
+$$
+\Hom_Y(K, Lf^*M \otimes_{\mathcal{O}_Y} \omega_{Y/X})
+=
+\Hom_X(Rf_*K, M)
+$$
+を得ることである。これは『スキームの双対性』の第 \ref{duality-section-proper-flat} 節の内容から従うが、
+この場合には次のように直接証明できる。
+まず $X$ がアフィンならば、『双対化複体』の補題 \ref{dualizing-lemma-right-adjoint} および
+\ref{dualizing-lemma-RHom-is-tensor-special}\footnote{この場合、この補題には
+より簡単な証明がある。} と『スキームの導来圏』の補題 \ref{perfect-lemma-affine-compare-bounded} により成り立つ。
+次に帰納法原理
+（『スキームのコホモロジー』の補題 \ref{coherent-lemma-induction-principle}）
+と Mayer--Vietoris
+（『層のコホモロジー』の補題 \ref{cohomology-lemma-mayer-vietoris-hom} の形）を
+用いれば証明が完了する。
+
+
+
+
+
+
+
+\section{Noether の差イデアル}
+\label{discriminant-section-noether-different}
+
+\noindent
+文献には多くの異なる差イデアルが存在する。本節と次節以降で
+そのいくつかを列挙する。詳しくは \cite{Kunz} を参照されたい。
+
+\medskip\noindent
+$A \to B$ を環準同型とする。乗法写像を
+$$
+\mu : B \otimes_A B \longrightarrow B,\quad
+b \otimes b' \longmapsto bb'
+$$
+と書き、$I = \Ker(\mu)$ とおく。$I$ が
+$b \otimes 1 - 1 \otimes b$, $b \in B$ によって生成されることは明らかである。
+従って $I$ の零化イデアル $J \subset B \otimes_A B$ には、
+標準的に $B$-加群構造が入る。$A$ 上の $B$ の
+{\it Noether の差イデアル} とは、写像
+$\mu : B \otimes_A B \to B$ による $J$ の像である。
+同値に、Noether の差イデアルは写像
+$$
+J = \Hom_{B \otimes_A B}(B, B \otimes_A B) \longrightarrow B,\quad
+\varphi \longmapsto \mu(\varphi(1))
+$$
+の像である。まず必要な補題をいくつか述べる。
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-product}
+$A \to B_i$, $i = 1, 2$ を環準同型とし、$B = B_1 \times B_2$ とおく。
+\begin{enumerate}
+\item $\Ker(B \otimes_A B \to B)$ の零化イデアル $J$ は
+$J_1 \times J_2$ である。ここで $J_i$ は
+$\Ker(B_i \otimes_A B_i \to B_i)$ の零化イデアルである。
+\item $A$ 上の $B$ の Noether の差イデアル $\mathfrak{D}$ は
+$\mathfrak{D}_1 \times \mathfrak{D}_2$ である。ここで
+$\mathfrak{D}_i$ は $A$ 上の $B_i$ の Noether の差イデアルである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-base-change}
+$A \to B$ を有限型環準同型、$A \to A'$ を平坦環準同型とし、
+$B' = B \otimes_A A'$ とおく。
+\begin{enumerate}
+\item $\Ker(B' \otimes_{A'} B' \to B')$ の零化イデアル $J'$ は
+$J \otimes_A A'$ である。ここで $J$ は
+$\Ker(B \otimes_A B \to B)$ の零化イデアルである。
+\item $A'$ 上の $B'$ の Noether の差イデアル $\mathfrak{D}'$ は
+$\mathfrak{D}B'$ である。ここで $\mathfrak{D}$ は
+$A$ 上の $B$ の Noether の差イデアルである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A$-代数としての $B$ の生成元 $b_1, \ldots, b_n$ を選ぶ。このとき
+$$
+J = \Ker(B \otimes_A B \xrightarrow{b_i \otimes 1 - 1 \otimes b_i}
+(B \otimes_A B)^{\oplus n})
+$$
+である。従って $J$ の形成は平坦基底変換と可換である。
+Noether の差イデアルに関する主張はここから直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-localization}
+$A \to B' \to B$ を環準同型とし、$A \to B'$ は有限型、
+$B' \to B$ はスペクトルの開埋め込みを誘導するとする。
+\begin{enumerate}
+\item $\Ker(B \otimes_A B \to B)$ の零化イデアル $J$ は
+$J' \otimes_{B'} B$ である。ここで $J'$ は
+$\Ker(B' \otimes_A B' \to B')$ の零化イデアルである。
+\item $A$ 上の $B$ の Noether の差イデアル $\mathfrak{D}$ は
+$\mathfrak{D}'B$ である。ここで $\mathfrak{D}'$ は
+$A$ 上の $B'$ の Noether の差イデアルである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$I = \Ker(B \otimes_A B \to B)$ および
+$I' = \Ker(B' \otimes_A B' \to B')$ と書く。
+$\Spec(B) \to \Spec(B')$ は開埋め込みなので
+$B = (B \otimes_A B) \otimes_{B' \otimes_A B'} B'$ である。
+従って $I = I'(B \otimes_A B)$ である。
+$I'$ は有限生成で、$B' \otimes_A B' \to B \otimes_A B$ は平坦なので、
+『可換代数』の補題 \ref{algebra-lemma-annihilator-flat-base-change} により
+$J = J'(B \otimes_A B)$ と結論できる。
+$J'$ の $B' \otimes_A B'$-加群構造は
+$B' \otimes_A B' \to B'$ を経由するので、(1) が成り立つ。
+(2) は (1) の帰結である。
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-construction-pairing}
+$A \to B$ を Noether 環の準有限準同型とし、
+$J$ を $\Ker(B \otimes_A B \to B)$ の零化イデアルとする。
+標準的な $B$-双線形対
+\begin{equation}
+\label{discriminant-equation-pairing-noether}
+\omega_{B/A} \times J \longrightarrow B
+\end{equation}
+が次のように定義される。$A \to B'$ が有限で
+$B' \to B$ がスペクトルの開埋め込みを誘導する分解
+$A \to B' \to B$ を選ぶ。
+$J'$ を $\Ker(B' \otimes_A B' \to B')$ の零化イデアルとする。
+まず
+$$
+\Hom_A(B', A) \times J' \longrightarrow B',\quad
+(\lambda, \sum b_i \otimes c_i) \longmapsto \sum \lambda(b_i)c_i
+$$
+を定義する。$\xi \in J'$ と $b \in B'$ に対して
+$(b \otimes 1)\xi = (1 \otimes b)\xi$ であるからこそ、
+これは $B'$-双線形である。補題 \ref{discriminant-lemma-noether-different-localization} と
+$\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B$ であることにより、
+これを上に表示した $B$-双線形対へ拡張できる。
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-pairing-compatibilities}
+$A \to B$ を Noether 環の準有限準同型とする。
+\begin{enumerate}
+\item $A \to A'$ を Noether 環の平坦準同型とすると、図式
+$$
+\xymatrix{
+\omega_{B/A} \times J \ar[r] \ar[d] & B \ar[d]  \\
+\omega_{B'/A'} \times J' \ar[r] & B'
+}
+$$
+は可換である。ここで記号は補題 \ref{discriminant-lemma-noether-different-base-change} のとおりであり、
+横の矢印は (\ref{discriminant-equation-pairing-noether}) で与えられる。
+\item $B = B_1 \times B_2$ ならば、$i = 1, 2$ に対して図式
+$$
+\xymatrix{
+\omega_{B/A} \times J \ar[r] \ar[d] & B \ar[d]  \\
+\omega_{B_i/A} \times J_i \ar[r] & B_i
+}
+$$
+は可換である。ここで記号は補題 \ref{discriminant-lemma-noether-different-product} のとおりであり、
+横の矢印は (\ref{discriminant-equation-pairing-noether}) で与えられる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+対の構成（注意 \ref{discriminant-remark-construction-pairing}）により、
+(1) と (2) はいずれも $A \to B$ が有限な場合に帰着する。
+このとき (1) は、縮約写像
+$\Hom_A(M, A) \otimes_A M \otimes_A M \to M$,
+$\lambda \otimes m \otimes m' \mapsto \lambda(m)m'$
+が基底変換と可換であることから従う。(2) を見るには、
+$J = J_1 \times J_2$ が $B \otimes_A B$ の直和因子
+$B_1 \otimes_A B_1$ および $B_2 \otimes_A B_2$ に含まれることを用いよ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-pairing-flat-quasi-finite}
+$A \to B$ を Noether 環の平坦準有限準同型とする。
+注意 \ref{discriminant-remark-construction-pairing} の対は同型
+$J \to \Hom_B(\omega_{B/A}, B)$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+まず $A \to B$ が有限平坦である場合を証明する。
+$A$ 上局所化し、$B$ が $A$-加群として有限自由であると仮定してよい。
+$A$-加群としての $B$ の基底を $b_1, \ldots, b_n$ とし、
+$\omega_{B/A}$ の双対基底を $b_1^\vee, \ldots, b_n^\vee$ と書く。
+$\sum b_i \otimes c_i \in J$ は、$b_i^\vee$ を $c_i$ へ写す
+$\Hom_B(\omega_{B/A}, B)$ の元に写ることに注意せよ。
+$\varphi : \omega_{B/A} \to B$ が $B$-線形であるとする。このとき
+$\xi = \sum b_i \otimes \varphi(b_i^\vee)$ は $J$ の元であると主張する。
+実際、$\varphi$ の $B$-線形性は、すべての $b \in B$ に対して
+$(b \otimes 1)\xi = (1 \otimes b)\xi$ であることをちょうど意味する。
+従って写像には逆写像があり、同型である。
+
+\medskip\noindent
+$\mathfrak q \subset B$ を $\mathfrak p \subset A$ の上にある素イデアルとする。
+局所化
+$$
+J_\mathfrak q
+\longrightarrow
+\Hom_B(\omega_B/A, B)_\mathfrak q
+$$
+が同型であることを示す。『可換代数』の補題 \ref{algebra-lemma-characterize-zero-local} により、これで十分である。
+『可換代数』の補題 \ref{algebra-lemma-etale-makes-quasi-finite-finite-one-prime}
+により、\'etale 環準同型 $A \to A'$ と、
+$\mathfrak p$ の上にある素イデアル $\mathfrak p' \subset A'$ で
+$\kappa(\mathfrak p') = \kappa(\mathfrak p)$ を満たし、かつ
+$$
+B' = B \otimes_A A' = C \times D
+$$
+で $A' \to C$ が有限となるものを見つけられる。さらに
+$\mathfrak q$ と $\mathfrak p'$ の上にある
+$B \otimes_A A'$ の一意な素イデアル $\mathfrak q'$ は
+$C$ の素イデアルに対応する。$J'$ を
+$\Ker(B' \otimes_{A'} B' \to B')$ の零化イデアルとする。
+補題 \ref{discriminant-lemma-dualizing-flat-base-change} および \ref{discriminant-lemma-noether-different-base-change}, および
+\ref{discriminant-lemma-noether-pairing-compatibilities} により、写像
+$J' \to \Hom_{B'}(\omega_{B'/A'}, B')$ は
+$J \to \Hom_B(\omega_{B/A}, B)$ に関手 $- \otimes_B B'$ を適用して得られる。
+$B_\mathfrak q \to B'_{\mathfrak q'}$ は忠実平坦なので、
+$(A' \to B', \mathfrak q')$ について結果を証明すれば十分である。
+補題 \ref{discriminant-lemma-dualizing-product} および \ref{discriminant-lemma-noether-different-product}, および
+\ref{discriminant-lemma-noether-pairing-compatibilities} により、
+証明の第一段落で示した場合に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different-flat-quasi-finite}
+$A \to B$ を Noether 環の平坦準有限準同型とする。図式
+$$
+\xymatrix{
+J \ar[rr] \ar[rd]_\mu & &
+\Hom_B(\omega_{B/A}, B) \ar[ld]^{\varphi \mapsto \varphi(\tau_{B/A})} \\
+& B
+}
+$$
+は可換である。ここで横矢印は補題 \ref{discriminant-lemma-noether-pairing-flat-quasi-finite} の同型である。
+従って $A$ 上の $B$ の Noether の差イデアルは、写像
+$\Hom_B(\omega_{B/A}, B) \to B$ の像である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{discriminant-lemma-noether-pairing-flat-quasi-finite} の証明とまったく同様に、
+有限自由準同型 $A \to B$ の場合に帰着する。
+この場合 $\tau_{B/A} = \text{Trace}_{B/A}$ である。
+$A$-加群としての $B$ の基底 $b_1, \ldots, b_n$ を選ぶ。
+$\xi = \sum b_i \otimes c_i \in J$ とする。このとき
+$\mu(\xi) = \sum b_i c_i$ である。一方、
+$\Hom_B(\omega_{B/A}, B)$ における $\xi$ の像は
+$\text{Trace}_{B/A}$ を
+$\sum \text{Trace}_{B/A}(b_i)c_i$ へ写す。従って
+$\xi = \sum b_i \otimes c_i \in J$ のとき
+$$
+\sum b_ic_i = \sum \text{Trace}_{B/A}(b_i)c_i
+$$
+であることを示さなければならない。ある $a_{ij}^k \in A$ により
+$b_i b_j = \sum_k a_{ij}^k b_k$ と書く。このとき右辺は
+$\sum_{i, j} a_{ij}^j c_i$ である。一方、$\xi \in J$ から
+$$
+(b_j \otimes 1)(\sum\nolimits_i b_i \otimes c_i) =
+(1 \otimes b_j)(\sum\nolimits_i b_i \otimes c_i)
+$$
+が従い、従って $b_j c_i = \sum_k a_{jk}^i c_k$ である。
+ゆえに左辺は $\sum_{i, j} a_{ij}^i c_j$ である。
+$a_{ij}^k = a_{ji}^k$ なので等式が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-noether-different}
+$A \to B$ を有限型環準同型とし、$\mathfrak{D} \subset B$ を
+Noether の差イデアルとする。このとき $V(\mathfrak{D})$ は、
+$A \to B$ が $\mathfrak q$ において不分岐でないような
+素イデアル $\mathfrak q \subset B$ 全体である。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ が $\mathfrak q$ において不分岐であると仮定する。
+ある $g \in B$, $g \not \in \mathfrak q$ に対して $B$ を $B_g$ で
+置き換えることにより、$A \to B$ が不分岐であると仮定してよい
+（『可換代数』の定義 \ref{algebra-definition-unramified} および
+補題 \ref{discriminant-lemma-noether-different-localization}）。
+この場合 $\Omega_{B/A} = 0$ である。従って
+$I = \Ker(B \otimes_A B \to B)$ とおけば、『可換代数』の補題 \ref{algebra-lemma-differentials-diagonal} により $I/I^2 = 0$ である。
+$A \to B$ は有限型なので $I$ は有限生成である。従って Nakayama の補題
+（『可換代数』の補題 \ref{algebra-lemma-NAK}）により、
+$I$ を零化する $1 + i$ の形の元が存在する。
+従って $\mathfrak{D} = B$ である。
+
+\medskip\noindent
+逆に $\mathfrak{D} \not \subset \mathfrak q$ と仮定する。
+上と同様に $B$ を主局所化で置き換え、
+$\mathfrak{D} = B$ と仮定してよい。これは $I$ の零化イデアルに
+$1 + i$ の形の元が存在することを意味する。
+これは逆に $I/I^2 = \Omega_{B/A}$ が零であることを含意し、結論を得る。
+\end{proof}
+
+
+
+
+
+
+
+\section{K\"ahler の差イデアル}
+\label{discriminant-section-kahler-different}
+
+\noindent
+$A \to B$ を有限型環準同型とする。{\it K\"ahler の差イデアル} とは、
+$B$-加群 $\Omega_{B/A}$ の 0 次 Fitting イデアルである。
+この定義を次のように大域化する。
+
+\begin{definition}
+\label{discriminant-definition-kahler-different}
+$f : Y \to X$ を局所有限型なスキームの射とする。
+{\it K\"ahler の差イデアル} とは、$\Omega_{Y/X}$ の
+$0$ 次 Fitting イデアルである。
+\end{definition}
+
+\noindent
+K\"ahler の差イデアルは $Y$ 上の準連接イデアル層である。
+
+\begin{lemma}
+\label{discriminant-lemma-base-change-kahler-different}
+スキームの Cartesian 図式
+$$
+\xymatrix{
+Y' \ar[d]_{f'} \ar[r] & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+を考え、$f$ は局所有限型であるとする。$f$, resp.\ $f'$ の
+K\"ahler の差イデアルが切り出す閉部分スキームをそれぞれ
+$R \subset Y$, resp.\ $R' \subset Y'$ とする。このとき
+$Y' \to Y$ は同型 $R' \to R \times_Y Y'$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+$\Omega_{Y'/X'}$ は $\Omega_{Y/X}$ の引き戻しであり
+（『スキームの射』の補題 \ref{morphisms-lemma-base-change-differentials}）、
+『代数の続論』の補題 \ref{more-algebra-lemma-fitting-ideal-basics} を適用できるので成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-kahler-different}
+$f : Y \to X$ を局所有限型なスキームの射とし、
+$R \subset Y$ を K\"ahler の差イデアルで定義される閉部分スキームとする。
+このとき $R \subset Y$ は、$f$ が不分岐でない点全体にちょうど等しい。
+\end{lemma}
+
+\begin{proof}
+これは『因子』の補題 \ref{divisors-lemma-zero-fitting-ideal-omega-unramified} の写しである。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-kahler-different-complete-intersection}
+$A$ を環とする。$n \geq 1$ かつ
+$f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$ とし、
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ とおく。
+$A$ 上の $B$ の K\"ahler の差イデアルは、
+$\det(\partial f_i/\partial x_j)$ が生成する $B$ のイデアルである。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-differential-seq} により
+$\Omega_{B/A}$ は表示
+$$
+\bigoplus\nolimits_{i = 1, \ldots, n} B f_i
+\xrightarrow{\text{d}}
+\bigoplus\nolimits_{j = 1, \ldots, n} B \text{d}x_j
+\rightarrow \Omega_{B/A} \rightarrow 0
+$$
+をもつので成り立つ。
+\end{proof}
+
+
+
+\section{Dedekind の差イデアル}
+\label{discriminant-section-dedekind-different}
+
+\noindent
+$A \to B$ を環準同型とする。次の条件を満たすとき、
+{\it Dedekind の差イデアルが定義される} という。
+$A$ は Noether 環、$A \to B$ は有限であり、
+$A$ 上の任意の非零因子は $B$ 上でも非零因子であり、
+$K = Q(A)$ および $L = B \otimes_A K$ とおくと
+$K \to L$ は \'etale である。このとき $K \subset L$ は有限 \'etale であり、
+$$
+\mathcal{L}_{B/A} = \{x \in L \mid
+\text{任意の }b \in B\text{ に対して }\text{Trace}_{L/K}(bx) \in A\}
+$$
+を Dedekind 補加群という。この状況で {\it Dedekind の差イデアル} とは
+$$
+\mathfrak{D}_{B/A} = \{x \in L \mid x\mathcal{L}_{B/A} \subset B\}
+$$
+であり、$L$ の $B$-部分加群とみなす。補題 \ref{discriminant-lemma-dedekind-different-ideal} により、$A$ が正規であるか、
+または $B$ が $A$ 上平坦ならば、Dedekind の差イデアルは $B$ のイデアルである。
+
+\begin{lemma}
+\label{discriminant-lemma-dedekind-different-ideal}
+$A \to B$ の Dedekind の差イデアルが定義されると仮定し、次を考える。
+\begin{enumerate}
+\item $A \to B$ は平坦である。
+\item $A$ は正規環である。
+\item $\text{Trace}_{L/K}(B) \subset A$ である。
+\item $1 \in \mathcal{L}_{B/A}$ である。
+\item Dedekind の差イデアル $\mathfrak{D}_{B/A}$ は $B$ のイデアルである。
+\end{enumerate}
+このとき (1) $\Rightarrow$ (3), (2) $\Rightarrow$ (3),
+(3) $\Leftrightarrow$ (4), および (4) $\Rightarrow$ (5) が成り立つ。
+\end{lemma}
+
+\begin{proof}
+(3) と (4) の同値性、および含意 (4) $\Rightarrow$ (5) は直ちに分かる。
+
+\medskip\noindent
+$A \to B$ が平坦ならば、$\text{Trace}_{B/A} : B \to A$ が定義され、
+$\text{Trace}_{L/K}$ がその基底変換であることが分かる。従って (3) が成り立つ。
+
+\medskip\noindent
+$A$ が正規ならば、$A$ は正規整域の有限積であるから、
+正規整域の場合に帰着する。このとき $K$ は $A$ の分数体であり、
+$L = \prod L_i$ は $K$ の有限分離体拡大の有限積である。
+$b_i \in L_i$ を $b$ の像とすると
+$\text{Trace}_{L/K}(b) = \sum \text{Trace}_{L_i/K}(b_i)$ である。
+$B$ は $A$ 上有限なので $b$ は $A$ 上整であり、これらのトレースは $A$ に属する。
+実際、$K$ 上の $b_i$ の最小多項式の係数は $A$ に属し
+（『可換代数』の補題 \ref{algebra-lemma-minimal-polynomial-normal-domain}）、
+$\text{Trace}_{L_i/K}(b_i)$ はその係数の一つの整数倍である
+（『体』の補題 \ref{fields-lemma-trace-and-norm-from-minimal-polynomial}）。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dedekind-complementary-module}
+$A \to B$ の Dedekind の差イデアルが定義されるならば、
+標準同型 $\mathcal{L}_{B/A} \to \omega_{B/A}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ は有限なので
+$\omega_{B/A} = \Hom_A(B, A)$ であることを思い出そう。
+$x \in \mathcal{L}_{B/A}$ を写像
+$b \mapsto \text{Trace}_{L/K}(bx)$ へ写す。
+逆に $A$-線形写像 $\varphi : B \to A$ が与えられると、
+$K$-線形写像 $\varphi_K : L \to K$ を得る。
+$K \to L$ は有限 \'etale なので、トレース対は非退化である
+（補題 \ref{discriminant-lemma-discriminant}）。従って、すべての $y \in L$ に対して
+$\varphi_K(y) = \text{Trace}_{L/K}(xy)$ となる $x \in L$ が存在する。
+このとき $x \in \mathcal{L}_{B/A}$ は
+$\omega_{B/A}$ において $\varphi$ に写る。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-flat-dedekind-complementary-module-trace}
+$A \to B$ の Dedekind の差イデアルが定義され、
+$A \to B$ は平坦であるとする。このとき
+\begin{enumerate}
+\item 標準同型 $\mathcal{L}_{B/A} \to \omega_{B/A}$ は
+$1 \in \mathcal{L}_{B/A}$ をトレース元
+$\tau_{B/A} \in \omega_{B/A}$ へ写す。
+\item Dedekind の差イデアルは
+$\mathfrak{D}_{B/A} = \{b \in B \mid b\omega_{B/A} \subset B\tau_{B/A}\}$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+第一の主張は補題 \ref{discriminant-lemma-dedekind-different-ideal} の証明と
+補題 \ref{discriminant-lemma-finite-flat-trace} から従う。
+第二の主張は第一の主張と定義から直ちに従う。
+\end{proof}
+
+
+
+\section{差イデアル}
+\label{discriminant-section-different}
+
+\noindent
+次の定義の動機は、後で見るように有限平坦な場合に
+Dedekind の差イデアルを復元することにある。
+
+\begin{definition}
+\label{discriminant-definition-different}
+$f : Y \to X$ を局所 Noether スキームの平坦局所準有限射とする。
+$\omega_{Y/X}$ を相対双対化加群、
+$\tau_{Y/X} \in \Gamma(Y, \omega_{Y/X})$ をトレース元とする
+（注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} および
+\ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite}）。
+$$
+\Coker(\mathcal{O}_Y \xrightarrow{\tau_{Y/X}} \omega_{Y/X})
+$$
+の零化イデアルを $Y/X$ の {\it 差イデアル} という。
+これは連接イデアル $\mathfrak{D}_f \subset \mathcal{O}_Y$ である。
+\end{definition}
+
+\noindent
+下の注意 \ref{discriminant-remark-different-generalization} でこれを一般化する。
+$\omega_{Y/X}$ が可逆 $\mathcal{O}_Y$-加群ならば、
+$\mathfrak{D}_f$ は局所的に一元で生成されることに注意せよ。
+まず Dedekind の差イデアルとの一致を述べる。
+
+\begin{lemma}
+\label{discriminant-lemma-flat-agree-dedekind}
+$f : Y \to X$ を Noether スキームの平坦準有限射とする。
+$V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$ を
+$f(V) \subset U$ を満たすアフィン開部分スキームとする。
+$A \to B$ の Dedekind の差イデアルが定義されるならば、
+$V$ 上の連接イデアル層として
+$$
+\mathfrak{D}_f|_V = \widetilde{\mathfrak{D}_{B/A}}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{discriminant-lemma-dedekind-different-ideal} および
+\ref{discriminant-lemma-flat-dedekind-complementary-module-trace} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-flat-gorenstein-agree-noether}
+$f : Y \to X$ を Noether スキームの平坦準有限射とする。
+$V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$ を
+$f(V) \subset U$ を満たすアフィン開部分スキームとする。
+$\omega_{Y/X}|_V$ が可逆、すなわち $\omega_{B/A}$ が可逆
+$B$-加群ならば、$V$ 上の連接イデアル層として
+$$
+\mathfrak{D}_f|_V = \widetilde{\mathfrak{D}}
+$$
+である。ここで $\mathfrak{D} \subset B$ は $A$ 上の $B$ の
+Noether の差イデアルである。
+\end{lemma}
+
+\begin{proof}
+写像
+$$
+\SheafHom_{\mathcal{O}_Y}(\omega_{Y/X}, \mathcal{O}_Y)
+\longrightarrow
+\mathcal{O}_Y,\quad
+\varphi \longmapsto \varphi(\tau_{Y/X})
+$$
+を考える。この写像の像はアフィン開集合上で Noether の差イデアルに対応する。
+補題 \ref{discriminant-lemma-noether-different-flat-quasi-finite} を参照せよ。
+従って結果は次の初等的事実から従う。可逆加群 $\omega$ と大域切断
+$\tau$ が与えられたとき、
+$\tau : \SheafHom(\omega, \mathcal{O}) = \omega^{\otimes -1} \to \mathcal{O}$
+の像は $\Coker(\tau : \mathcal{O} \to \omega)$ の零化イデアルと等しい。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-base-change-different}
+Noether スキームの Cartesian 図式
+$$
+\xymatrix{
+Y' \ar[d]_{f'} \ar[r] & Y \ar[d]^f \\
+X' \ar[r]^g & X
+}
+$$
+を考え、$f$ は平坦かつ準有限であるとする。
+$\mathfrak{D}_f$, resp.\ $\mathfrak{D}_{f'}$ が切り出す閉部分スキームを
+$R \subset Y$, resp.\ $R' \subset Y'$ とする。
+このとき $Y' \to Y$ は全単射な閉埋め込み
+$R' \to R \times_Y Y'$ を誘導する。$g$ が平坦であるか、
+または $\omega_{Y/X}$ が可逆ならば
+$R' = R \times_Y Y'$ である。
+\end{lemma}
+
+\begin{proof}
+$X$, $X'$, $Y$, $Y'$ がアフィンである場合へ直ちに帰着する。
+言い換えれば、$A \to B$ が平坦かつ準有限であるような
+Noether 環の余 Cartesian 図式
+$$
+\xymatrix{
+B' & B \ar[l] \\
+A' \ar[u] & A \ar[l] \ar[u]
+}
+$$
+がある。基底変換写像
+$\omega_{B/A} \otimes_B B' \to \omega_{B'/A'}$ は同型であり
+（補題 \ref{discriminant-lemma-dualizing-base-change-of-flat}）、
+トレース元 $\tau_{B/A}$ をトレース元 $\tau_{B'/A'}$ へ写す
+（補題 \ref{discriminant-lemma-trace-base-change}）。
+従って有限 $B$-加群
+$Q = \Coker(\tau_{B/A} : B \to \omega_{B/A})$ は
+$Q \otimes_B B' = \Coker(\tau_{B'/A'} : B' \to \omega_{B'/A'})$
+を満たす。ゆえに
+$\mathfrak{D}_{B/A}B' \subset \mathfrak{D}_{B'/A'}$ であり、
+閉埋め込み $R' \to R \times_Y Y'$ を得る。
+$R = \text{Supp}(Q)$ および
+$R' = \text{Supp}(Q \otimes_B B')$ なので
+（『可換代数』の補題 \ref{algebra-lemma-support-closed}）、
+『可換代数』の補題 \ref{algebra-lemma-support-base-change} により
+$R' \to R \times_Y Y'$ は全単射である。
+$B \to B'$ が平坦ならば、例えば $A \to A'$ が平坦ならば、
+$\mathfrak{D}_{B/A}B' = \mathfrak{D}_{B'/A'}$ である。
+『可換代数』の補題 \ref{algebra-lemma-annihilator-flat-base-change} を参照せよ。
+最後に $\omega_{B/A}$ が可逆ならば、局所化して
+$\omega_{B/A} = B \lambda$ と仮定してよい。
+$\tau_{B/A} = b\lambda$ と書けば
+$Q = B/bB$ および $\mathfrak{D}_{B/A} = bB$ である。
+$B'$ 上で同じ議論を行うと
+$\mathfrak{D}_{B'/A'} = bB'$ を得て、補題が証明される。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-norm-different-in-discriminant}
+$f : Y \to X$ を Noether スキームの有限平坦射とする。
+このとき $\text{Norm}_f : f_*\mathcal{O}_Y \to \mathcal{O}_X$ は
+$f_*\mathfrak{D}_f$ を判別式 $D_f$ のイデアル層へ写す。
+\end{lemma}
+
+\begin{proof}
+ノルム写像は『因子』の補題 \ref{divisors-lemma-finite-locally-free-has-norm} で構成され、
+$f$ の判別式は第 \ref{discriminant-section-discriminant} 節で構成された。
+問題はアフィン局所的なので、$X = \Spec(A)$, $Y = \Spec(B)$ で、
+$f$ は有限局所自由環準同型 $A \to B$ から与えられると仮定してよい。
+さらに局所化し、$B$ が $A$-加群として有限自由であると仮定してよい。
+$A$-加群としての $B$ の基底 $b_1, \ldots, b_n \in B$ を選び、
+$\omega_{B/A} = \Hom_A(B, A)$ の $A$-加群としての双対基底を
+$b_1^\vee, \ldots, b_n^\vee$ と書く。
+$b$ のノルムは $A$-線形写像 $b : B \to B$ の行列式なので
+$\text{Norm}_{B/A}(b) = \det(b_i^\vee(bb_j))$ である。
+判別式は $\det(\text{Trace}_{B/A}(b_ib_j))$ が定義する
+$\Spec(A)$ の主閉部分スキームである。
+$b \in \mathfrak{D}_{B/A}$ ならば、$\omega_{B/A}$ の
+$B$-加群構造を点で表すとき
+$b \cdot b_i^\vee = c_i \cdot \text{Trace}_{B/A}$
+となる $c_i \in B$ が存在する。$c_i = \sum a_{il} b_l$ と書く。このとき
+\begin{align*}
+\text{Norm}_{B/A}(b)
+& =
+\det(b_i^\vee(bb_j)) \\
+& =
+\det( (b \cdot b_i^\vee)(b_j)) \\
+& =
+\det((c_i \cdot \text{Trace}_{B/A})(b_j)) \\
+& =
+\det(\text{Trace}_{B/A}(c_ib_j)) \\
+& =
+\det(a_{il}) \det(\text{Trace}_{B/A}(b_l b_j))
+\end{align*}
+となり、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-different-ramification}
+$f : Y \to X$ を Noether スキームの平坦準有限射とする。
+差イデアル $\mathfrak{D}_f$ が定義する閉部分スキーム
+$R \subset Y$ は、$f$ が \'etale でない点（同値に不分岐でない点）
+全体にちょうど等しい。
+\end{lemma}
+
+\begin{proof}
+$f$ は有限表示かつ平坦なので、ある点で \'etale であることと
+その点で不分岐であることは同値である。さらに分岐点集合の形成は
+基底変換と可換である。『スキームの射』の第 \ref{morphisms-section-etale} 節、特に『スキームの射』の補題 \ref{morphisms-lemma-set-points-where-fibres-etale} を参照せよ。
+補題 \ref{discriminant-lemma-base-change-different} により、$R$ の形成は
+集合論的に基底変換と可換である。従って $X$ が体のスペクトルである場合を
+証明すれば十分である。一方、$(\omega_{Y/X}, \tau_{Y/X})$ の構成は
+$Y$ 上局所的である。$Y$ は体上準有限なので有限離散空間であり、
+$Y$ がただ一つの点をもつと仮定してよい。
+
+\medskip\noindent
+$X = \Spec(k)$ および $Y = \Spec(B)$ とする。ここで $k$ は体、
+$B$ は有限局所 $k$-代数である。$Y \to X$ が \'etale ならば、
+$B$ は $k$ の有限分離拡大であり、『体』の補題 \ref{fields-lemma-separable-trace-pairing} によりトレース元
+$\text{Trace}_{B/k}$ は $\omega_{B/k}$ の基底元である。
+従ってこの場合 $\mathfrak{D}_{B/k} = B$ である。
+逆に $\mathfrak{D}_{B/k} = B$ ならば、補題 \ref{discriminant-lemma-norm-different-in-discriminant} と $1$ のノルムが $1$ であることから、
+判別式が空であると分かる。従って補題 \ref{discriminant-lemma-discriminant} により $Y \to X$ は \'etale である。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-norm-different-is-discriminant}
+$f : Y \to X$ を Noether スキームの平坦準有限射とし、
+$R \subset Y$ を $\mathfrak{D}_f$ が定義する閉部分スキームとする。
+\begin{enumerate}
+\item $\omega_{Y/X}$ が可逆ならば、$R$ は $Y$ の局所主閉部分スキームである。
+\item $\omega_{Y/X}$ が可逆で $f$ が有限ならば、
+$R$ のノルムは $f$ の判別式 $D_f$ である。
+\item $\omega_{Y/X}$ が可逆で、$f$ が $Y$ の随伴点で \'etale ならば、
+$R$ は有効 Cartier 因子であり、同型
+$\mathcal{O}_Y(R) = \omega_{Y/X}$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$Y$ 上局所的に作業してよいので、
+$\omega_{Y/X}$ が階数 $1$ の自由加群であると仮定してよい。
+$\omega_{Y/X} = \mathcal{O}_Y\lambda$ と書く。
+すると $\tau_{Y/X} = h \lambda$ と書け、$R$ は $h$ で定義される。
+すなわち $R$ は局所主である。
+
+\medskip\noindent
+(2) の証明。$Y \to X$ は有限自由環準同型 $A \to B$ で与えられ、
+$\omega_{B/A}$ は $B$-加群として階数 $1$ の自由加群であると仮定してよい。
+$\omega_{B/A}$ の $B$-基底元 $\lambda$ を選び、
+ある $b \in B$ により
+$\text{Trace}_{B/A} = b \cdot \lambda$ と書く。
+このとき $\mathfrak{D}_{B/A} = (b)$ であり、
+$D_f$ は $A$-加群としての $B$ の基底 $b_1, \ldots, b_n$ に対する
+$\det(\text{Trace}_{B/A}(b_ib_j))$ で切り出される。
+$b_1^\vee, \ldots, b_n^\vee$ を双対基底とする。
+$b_i^\vee = c_i \cdot \lambda$ と書けば、
+$c_1, \ldots, c_n$ も $B$ の基底である。
+従って $c_i = \sum a_{il}b_l$ と書くと $\det(a_{il})$ は $A$ の単元である。
+明らかに $b \cdot b_i^\vee = c_i \cdot \text{Trace}_{B/A}$ なので、
+補題 \ref{discriminant-lemma-norm-different-in-discriminant} の証明中の計算から
+$\text{Norm}_{B/A}(b)$ は
+$\det(\text{Trace}_{B/A}(b_ib_j))$ の単元倍であると結論できる。
+
+\medskip\noindent
+(3) の証明。上の記号のもとで、補題 \ref{discriminant-lemma-different-ramification} と仮定により、
+$h$ は $Y$ の随伴点で消えず、従って $h$ は非零因子である。
+標準同型は $1$ を $\tau_{Y/X}$ へ写す。『因子』の補題 \ref{divisors-lemma-characterize-OD} を参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+\section{準有限シントミック射}
+\label{discriminant-section-quasi-finite-syntomic}
+
+\noindent
+本節では、準有限シントミック射の相対双対化加群が可逆であることを論じる。
+
+\begin{lemma}
+\label{discriminant-lemma-syntomic-quasi-finite}
+$f : Y \to X$ をスキームの射とする。次は同値である。
+\begin{enumerate}
+\item $f$ は局所準有限かつシントミックである。
+\item $f$ は局所準有限かつ平坦で、局所完全交叉射である。
+\item $f$ は局所準有限、平坦、局所有限表示であり、
+$f$ のファイバーは局所完全交叉である。
+\item $f$ は局所準有限であり、すべての $y \in Y$ に対して、
+$f(V) \subset U$ を満たすアフィン開集合
+$y \in V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$ と、
+整数 $n$ および $h, f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$ が存在して
+$B = A[x_1, \ldots, x_n, 1/h]/(f_1, \ldots, f_n)$ となる。
+\item すべての $y \in Y$ に対して、$f(V) \subset U$ を満たす
+アフィン開集合 $y \in V = \Spec(B) \subset Y$,
+$U = \Spec(A) \subset X$ が存在し、$A \to B$ は
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ の形の
+相対大域完全交叉である。
+\item $f$ は局所準有限、平坦、局所有限表示であり、
+$\NL_{Y/X}$ の tor 振幅は $[-1, 0]$ に含まれる。
+\item $f$ は平坦かつ局所有限表示であり、
+$\NL_{Y/X}$ は階数 $0$ で tor 振幅が $[-1, 0]$ に含まれる完全複体である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は『射の続論』の補題 \ref{more-morphisms-lemma-flat-lci} である。
+(1) と (3) の同値性は『スキームの射』の補題 \ref{morphisms-lemma-syntomic-flat-fibres} である。
+
+\medskip\noindent
+$A \to B$ が (4) のとおりならば、
+$B = A[x, x_1, \ldots, x_n]/(xh - 1, f_1, \ldots, f_n)$
+であり、『可換代数』の定義 \ref{algebra-definition-relative-global-complete-intersection} により
+相対大域完全交叉である。従って (4) は (5) を含意する。
+(5) が (4) を含意することは明らかである。
+
+\medskip\noindent
+条件 (5) は (1) を含意する。『可換代数』の補題 \ref{algebra-lemma-relative-global-complete-intersection} により
+相対大域完全交叉はシントミックであり、相対大域完全交叉の定義から、
+$n$ 変数 $n$ 方程式の相対大域完全交叉は準有限である。
+『可換代数』の定義 \ref{algebra-definition-relative-global-complete-intersection} および
+補題 \ref{algebra-lemma-isolated-point-fibre} を参照せよ。
+
+\medskip\noindent
+『可換代数』の補題 \ref{algebra-lemma-syntomic} または
+『スキームの射』の補題 \ref{morphisms-lemma-syntomic-locally-standard-syntomic} により、
+(1) は (5) を含意する。
+
+\medskip\noindent
+『射の続論』の補題 \ref{more-morphisms-lemma-flat-fp-NL-lci} により、(6) と (1) は同値である。
+同値な条件 (1) -- (6) が成り立つならば、アフィン局所的に
+$Y \to X$ は、変数と方程式の個数が等しい相対大域完全交叉
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ で与えられる。
+この表示を用いると
+$$
+\NL_{B/A} =\left(
+(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2
+\longrightarrow
+\bigoplus\nolimits_{i = 1, \ldots, n} B \text{d} x_i\right)
+$$
+である。『可換代数』の補題 \ref{algebra-lemma-relative-global-complete-intersection-conormal}
+により、加群 $(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2$ は
+$f_1, \ldots, f_n$ の合同類を生成元とする自由加群である。
+従って $\NL_{B/A}$ の階数は $0$ であり、$\NL_{Y/X}$ も同様である。
+これにより (1) -- (6) は (7) を含意する。
+
+\medskip\noindent
+最後に (7) を仮定する。『射の続論』の補題 \ref{more-morphisms-lemma-flat-fp-NL-lci} により $f$ はシントミックである。
+従って適切なアフィン開集合上で、$f$ は相対大域完全交叉
+$A \to B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ で与えられる。
+『スキームの射』の補題 \ref{morphisms-lemma-syntomic-locally-standard-syntomic} を参照せよ。
+上とまったく同様に $\NL_{B/A}$ は階数 $n - m$ の完全複体である。
+従って $n = m$ であり、(5) が成り立つ。これで証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-characterize-invertible}
+相対双対化加群の可逆性について次が成り立つ。
+\begin{enumerate}
+\item $A \to B$ を Noether 環の準有限平坦準同型とする。このとき
+$\omega_{B/A}$ が可逆 $B$-加群であることと、
+すべての素イデアル $\mathfrak p \subset A$ に対して
+$\omega_{B \otimes_A \kappa(\mathfrak p)/\kappa(\mathfrak p)}$
+が可逆 $B \otimes_A \kappa(\mathfrak p)$-加群であることは同値である。
+\item $Y \to X$ を Noether スキームの準有限平坦射とする。このとき
+$\omega_{Y/X}$ が可逆であることと、すべての $x \in X$ に対して
+$\omega_{Y_x/x}$ が可逆であることは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$A \to B$ は平坦なので、補題 \ref{discriminant-lemma-dualizing-base-flat-flat} により $\omega_{B/A}$ は $A$-平坦である。
+従って $\omega_{B/A}$ が可逆 $B$-加群であることと、
+すべての素イデアル $\mathfrak p \subset A$ に対して
+$\omega_{B/A} \otimes_A \kappa(\mathfrak p)$ が可逆
+$B \otimes_A \kappa(\mathfrak p)$-加群であることは同値である。
+『射の続論』の補題 \ref{more-morphisms-lemma-flat-and-free-at-point-fibre} を参照せよ。
+さらに $A \to B$ は平坦なので、$\omega_{B/A}$ の形成は基底変換と可換する。
+補題 \ref{discriminant-lemma-dualizing-base-change-of-flat} を参照せよ。
+従って平坦性のもとでは、相対双対化加群の可逆性は環準同型
+$\kappa(\mathfrak p) \to B \otimes_A \kappa(\mathfrak p)$
+に対する相対双対化加群の可逆性と同値である。
+
+\medskip\noindent
+(2) は (1) と、双対化加群がアフィン局所的に代数的なものから
+与えられることから従う。注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dim-zero-global-complete-intersection-over-field}
+$k$ を体とし、
+$B = k[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ を
+$k$ 上の次元 $0$ の大域完全交叉とする。このとき
+$\omega_{B/k}$ は可逆である。
+\end{lemma}
+
+\begin{proof}
+Noether の正規化定理、すなわち『可換代数』の補題 \ref{algebra-lemma-Noether-normalization} により、有限単射
+$k \to B$ が存在する。すなわち $\dim_k(B) < \infty$ である。
+従って $B$-加群として $\omega_{B/k} = \Hom_k(B, k)$ である。
+『双対化複体』の補題 \ref{dualizing-lemma-dualizing-finite} により
+$R\Hom(B, k)$ は $B$ の双対化複体であり、『双対化複体』の補題 \ref{dualizing-lemma-RHom-ext} により $R\Hom(B, k)$ は次数 $0$ に置いた
+$\omega_{B/k}$ に等しい。従って $B$ が Gorenstein であることを
+示せば十分である（『双対化複体』の補題 \ref{dualizing-lemma-gorenstein}）。これは『双対化複体』の補題 \ref{dualizing-lemma-gorenstein-lci} により成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-dualizing-syntomic-quasi-finite}
+$f : Y \to X$ を局所 Noether スキームの射とする。
+$f$ が補題 \ref{discriminant-lemma-syntomic-quasi-finite} の同値な条件を満たすならば、
+$\omega_{Y/X}$ は可逆 $\mathcal{O}_Y$-加群である。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ は
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ の形の
+相対大域完全交叉であると仮定してよい。
+$\omega_{B/A}$ が可逆であることを示さなければならない。
+これは補題 \ref{discriminant-lemma-characterize-invertible} および
+\ref{discriminant-lemma-dim-zero-global-complete-intersection-over-field}
+を組み合わせれば従う。
+\end{proof}
+
+\begin{example}
+\label{discriminant-example-universal-quasi-finite-syntomic}
+$n \geq 1$ および $d \geq 1$ を整数とする。
+$T$ を、$e_i \geq 0$ かつ $\sum e_i \leq d$ を満たす多重指数
+$E = (e_1, \ldots, e_n)$ 全体とする。環
+$$
+A = \mathbf{Z}[a_{i, E} ; 1 \leq i \leq n, E \in T]
+$$
+を考える。$A[x_1, \ldots, x_n]$ において、通常どおり
+$x^E = x_1^{e_1} \ldots x_n^{e_n}$ として
+$f_i = \sum_{E \in T} a_{i, E} x^E$ とおく。$A$-代数
+$$
+B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+を考える。$X_{n, d} = \Spec(A)$ と書き、
+射 $\Spec(B) \to \Spec(A) = X_{n, d}$ の制限が準有限となるような
+最大開部分スキームを $Y_{n, d} \subset \Spec(B)$ とする。
+『可換代数』の補題 \ref{algebra-lemma-quasi-finite-open} を参照せよ。
+\end{example}
+
+\begin{lemma}
+\label{discriminant-lemma-universal-quasi-finite-syntomic-etale}
+例 \ref{discriminant-example-universal-quasi-finite-syntomic} の記号のもとで、
+スキーム $X_{n, d}$ と $Y_{n, d}$ は正則かつ既約であり、
+射 $Y_{n, d} \to X_{n, d}$ は局所準有限かつシントミックである。
+さらに、$Y_{n, d} \to X_{n, d}$ が \'etale 射
+$V \to X_{n, d}$ に制限されるような稠密開部分スキーム
+$V \subset Y_{n, d}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+スキーム $X_{n, d}$ は多項式環 $A$ のスペクトルである。
+従って $X_{n, d}$ は正則かつ既約である。
+$$
+f_i = a_{i, (0, \ldots, 0)} +
+\sum\nolimits_{E \in T, E \not = (0, \ldots, 0)} a_{i, E} x^E
+$$
+と書けるので、環 $B$ は $x_1, \ldots, x_n$ および
+$E \not = (0, \ldots, 0)$ を満たす元 $a_{i, E}$ 上の多項式環と同型である。
+従って $\Spec(B)$ は既約かつ正則であり、その開部分
+$Y_{n, d}$ も同様である。補題 \ref{discriminant-lemma-syntomic-quasi-finite} により
+射 $Y_{n, d} \to X_{n, d}$ は局所準有限かつシントミックである。
+$V$ を見つけるには、$Y_{n, d} \to X_{n, d}$ が \'etale となる点を
+一つ見つければ十分である（射が \'etale となる点の軌跡は定義により開である）。
+従って、$Y_{n, d} \to X_{n, d}$ のファイバーが非空かつ \'etale となる
+$X_{n, d}$ の点を見つければ十分である。『スキームの射』の補題 \ref{morphisms-lemma-etale-at-point} を参照せよ。
+$f_i$ を $x_i^d - 1$ へ写す環準同型
+$\chi : A \to \mathbf{Q}$ に対応する点を選ぶ。このとき
+$$
+B \otimes_{A, \chi} \mathbf{Q} =
+\mathbf{Q}[x_1, \ldots, x_n]/(x_1^d - 1, \ldots, x_n^d - 1)
+$$
+であり、これは $\mathbf{Q}$ 上の非零な \'etale 代数である。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-locally-comes-from-universal}
+$f : Y \to X$ をスキームの射とする。$f$ が補題 \ref{discriminant-lemma-syntomic-quasi-finite} の同値な条件を満たすならば、
+すべての $y \in Y$ に対し、$n, d$ と可換図式
+$$
+\xymatrix{
+Y \ar[d] &
+V \ar[d] \ar[l] \ar[r] &
+Y_{n, d} \ar[d] \\
+X & U \ar[l] \ar[r] &
+X_{n, d}
+}
+$$
+が存在する。ここで $U \subset X$ と $V \subset Y$ は
+$y \in V$ を満たす開集合であり、$Y_{n, d} \to X_{n, d}$ は
+例 \ref{discriminant-example-universal-quasi-finite-syntomic} の射であり、
+右側の正方形は Cartesian である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{discriminant-lemma-syntomic-quasi-finite} により、
+$U = \Spec(R)$ および $V = \Spec(S)$ で
+$S = R[y_1, \ldots, y_n]/(g_1, \ldots, g_n)$ となるように
+$U$ と $V$ をアフィンに選べる。
+例 \ref{discriminant-example-universal-quasi-finite-syntomic} の記号のもとで、
+$d$ を十分大きく取れば、各 $g_i$ を
+$g_i = \sum_{E \in T} g_{i, E}y^E$, $g_{i, E} \in R$ と書ける。
+$a_{i, E}$ を $g_{i, E}$ へ写す写像 $A \to R$ と、
+$x_i \to y_i$ と写す写像 $B \to S$ は環の余 Cartesian 図式
+$$
+\xymatrix{
+S & B \ar[l] \\
+R \ar[u] & A \ar[l] \ar[u]
+}
+$$
+を与え、補題が従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{有限シントミック射}
+\label{discriminant-section-finite-syntomic}
+
+\noindent
+本節は、有限シントミック射についての
+第 \ref{discriminant-section-quasi-finite-syntomic} 節の類似である。
+
+\begin{lemma}
+\label{discriminant-lemma-syntomic-finite}
+$f : Y \to X$ をスキームの射とする。次は同値である。
+\begin{enumerate}
+\item $f$ は有限かつシントミックである。
+\item $f$ は有限、平坦で、局所完全交叉射である。
+\item $f$ は有限、平坦、局所有限表示であり、
+$f$ のファイバーは局所完全交叉である。
+\item $f$ は有限であり、すべての $x \in X$ に対して、
+アフィン開集合 $x \in U = \Spec(A) \subset X$ と整数 $n$ および
+$f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$ が存在し、
+$f^{-1}(U)$ は
+$A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ のスペクトルと同型である。
+\item $f$ は有限、平坦、局所有限表示であり、
+$\NL_{X/Y}$ の tor 振幅は $[-1, 0]$ に含まれる。
+\item $f$ は有限、平坦、局所有限表示であり、
+$\NL_{X/Y}$ は階数 $0$ で tor 振幅が $[-1, 0]$ に含まれる完全複体である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3), (5), (6) の同値性および含意
+(4) $\Rightarrow$ (1) は補題 \ref{discriminant-lemma-syntomic-quasi-finite} から直ちに従う。
+同値な条件 (1), (2), (3), (5), (6) が成り立つと仮定する。
+点 $x \in X$ と、$X$ における $x$ のアフィン開集合
+$U = \Spec(A)$ を選び、$x$ が素イデアル
+$\mathfrak p \subset A$ に対応するとする。
+$f^{-1}(U) = \Spec(B)$ と書き、
+$B = A[x_1, \ldots, x_n]/I$ と書く。
+(6) により $\NL_{B/A}$ は tor 振幅が $[-1, 0]$ に含まれる完全複体なので、
+$I/I^2$ は階数 $n$ の有限局所自由 $B$-加群である。
+$B_\mathfrak p$ は半局所環なので
+$(I/I^2)_\mathfrak p$ は階数 $n$ の自由加群である。
+『可換代数』の補題 \ref{algebra-lemma-locally-free-semi-local-free} を参照せよ。
+従って $A$ を $\mathfrak p$ に属さない元で主局所化した環に
+置き換えることにより、$I/I^2$ が階数 $n$ の自由 $B$-加群であると
+仮定してよい。『可換代数』の補題 \ref{algebra-lemma-huber} により、
+変数と方程式の個数が等しい $A$ 上の $B$ の表示を見つけられる。
+言い換えれば
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$
+と仮定してよい。これで (4) が証明された。
+\end{proof}
+
+\begin{example}
+\label{discriminant-example-universal-finite-syntomic}
+$d \geq 1$ を整数とする。$1 \leq i, j, l \leq d$ に対する変数
+$a_{ij}^l$ を考え、
+$$
+A_d = \mathbf{Z}[a_{ij}^k]/J
+$$
+と書く。ここで $J$ は元
+$$
+\left\{
+\begin{matrix}
+\sum_l a_{ij}^la_{lk}^m - \sum_l a_{il}^ma_{jk}^l & \forall i, j, k, m \\
+a_{ij}^k - a_{ji}^k & \forall i, j, k \\
+a_{i1}^j - \delta_{ij} & \forall i, j
+\end{matrix}
+\right.
+$$
+が生成するイデアルであり、$\delta_{ij}$ は Kronecker のデルタを表す。
+$A_d$-代数 $B_d$ を次のように定義する。
+$A_d$-加群として
+$$
+B_d = A_d e_1 \oplus \ldots \oplus A_d e_d
+$$
+とおく。$B_d$ 上の代数構造は $1$ を $e_1$ へ写す $A_d \to B_d$ と、
+$A_d$-双線形な乗法写像
+$$
+m : B_d \times B_d \longrightarrow B_d, \quad
+m(e_i, e_j) = \sum a_{ij}^k e_k
+$$
+で与えられる。上の関係式が、これを $A_d$-代数構造にすることと
+ちょうど同値であることは容易に確かめられる。射
+$$
+\pi_d : Y_d = \Spec(B_d) \longrightarrow \Spec(A_d) = X_d
+$$
+は階数 $d$ の「普遍」有限自由射である。
+\end{example}
+
+\begin{lemma}
+\label{discriminant-lemma-universal-finite-syntomic}
+例 \ref{discriminant-example-universal-finite-syntomic} の記号のもとで、
+次の性質をもつ開部分スキーム $U_d \subset X_d$ が存在する。
+スキームの射 $X \to X_d$ が $U_d$ を経由することと、
+$Y_d \times_{X_d} X \to X$ がシントミックであることは同値である。
+\end{lemma}
+
+\begin{proof}
+シントミックであることは、平坦かつ局所完全交叉射であることと同値である。
+『射の続論』の補題 \ref{more-morphisms-lemma-flat-lci} を参照せよ。
+$\pi_d$ が Koszul となる点全体 $W_d \subset Y_d$ は $Y_d$ で開であり、
+その形成は任意の基底変換と可換である。『射の続論』の補題 \ref{more-morphisms-lemma-base-change-lci-fibres} を参照せよ。
+$\pi_d$ は有限、従って閉なので
+$Z = \pi_d(Y_d \setminus W_d)$ は閉である。
+明らかに $U_d = X_d \setminus Z$ であり、その形成は基底変換と可換するので、
+補題が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-universal-finite-syntomic-smooth}
+例 \ref{discriminant-example-universal-finite-syntomic} の記号と、
+補題 \ref{discriminant-lemma-universal-finite-syntomic} の $U_d$ のもとで、
+$U_d$ は $\Spec(\mathbf{Z})$ 上滑らかである。
+\end{lemma}
+
+\begin{proof}
+『射の続論』の補題 \ref{more-morphisms-lemma-lifting-along-artinian-at-point} を用いて
+$U_d \to \Spec(\mathbf{Z})$ が滑らかであることを示そう。
+$\Spec(A) \to U_d$ を射、$A' \to A$ を小拡大とする。
+このとき $B = A \otimes_{A_d} B_d$ は有限自由 $A$-代数であり、
+$A$ 上シントミックである（$U_d$ の構成による）。
+『環準同型の平滑化』の命題 \ref{smoothing-proposition-lift-smooth} により、
+$B \cong B' \otimes_{A'} A$ を満たすシントミック環準同型
+$A' \to B'$ が存在する。$e'_1 = 1 \in B'$ とおく。
+$1 < i \leq d$ に対して
+$1 \otimes e_i \in A \otimes_{A_d} B_d = B$ の持ち上げ
+$e'_i \in B'$ を選ぶ。このとき $e'_1, \ldots, e'_d$ は
+$A'$ 上の $B'$ の基底である（例えば『可換代数』の補題 \ref{algebra-lemma-local-artinian-basis-when-flat} を参照）。
+従って一意な元 $\alpha_{ij}^l \in A'$ により
+$e'_i e'_j = \sum \alpha_{ij}^l e'_l$ と書ける。これらは $A'$ において
+関係式 $\sum_l \alpha_{ij}^l \alpha_{lk}^m = \sum_l \alpha_{il}^m \alpha _{jk}^l$,
+$\alpha_{ij}^k = \alpha_{ji}^k$, および
+$\alpha_{i1}^j = \delta_{ij}$ を満たす。
+$a_{ij}^l \in A_d$ を $\alpha_{ij}^l \in A'$ へ写すことにより、
+射 $\Spec(A') \to X_d$ が定まる。この射は所与の射
+$\Spec(A) \to U_d$ と一致する。$\Spec(A')$ と $\Spec(A)$ は
+同じ位相空間を基礎にもつので、所望の持ち上げ
+$\Spec(A') \to U_d$ を得る。従って $U_d$ は $\mathbf{Z}$ 上滑らかである。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-universal-finite-syntomic-etale}
+例 \ref{discriminant-example-universal-finite-syntomic} の記号のもとで、
+$\pi_d$ が \'etale となる開部分スキーム
+$U'_d \subset X_d$ を考える。このとき $U'_d$ は、補題 \ref{discriminant-lemma-universal-finite-syntomic} の開集合 $U_d$ の稠密部分集合である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{discriminant-lemma-universal-finite-syntomic} の証明とまったく同じ議論で、
+『スキームの射』の補題 \ref{morphisms-lemma-set-points-where-fibres-etale} を用いると、
+$\pi_d$ が \'etale となる最大開集合 $U'_d \subset X_d$ が存在する。
+さらに \'etale 射はシントミックなので $U'_d \subset U_d$ である。
+証明を終えるには $U'_d \subset U_d$ が稠密であることを示さなければならない。
+$k$ を体とし、$u : \Spec(k) \to U_d$ を射とする。
+補題 \ref{discriminant-lemma-universal-finite-syntomic-smooth} の証明と同様に
+$B = k \otimes_{A_d} B_d$ とおく。剰余体が $k$ である局所整域 $A'$ と、
+$B = k \otimes_{A'} B'$ を満たす有限シントミック $A'$-代数 $B'$ で、
+その一般ファイバーが \'etale であるものが存在することを示す。
+前段落とまったく同様に、これにより射 $\Spec(A') \to U_d$ が定まり、
+一般点は $U'_d$ に、閉点は $u$ に写るので、証明が完了する。
+
+\medskip\noindent
+補題 \ref{discriminant-lemma-syntomic-finite} の (4) により、表示
+$B = k[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ を選べる。
+多項式 $f_1, \ldots, f_n$ の全次数の最大値を $d'$ とする。
+例 \ref{discriminant-example-universal-quasi-finite-syntomic} の
+$Y_{n, d'} \to X_{n, d'}$ を取る。
+構成により射 $u' : \Spec(k) \to X_{n, d'}$ で
+$$
+\Spec(B) \cong Y_{n, d'} \times_{X_{n, d'}, u'} \Spec(k)
+$$
+を満たすものが存在する。$u'$ の像における $X_{n, d'}$ の局所環の
+Hensel 化を $A = \mathcal{O}_{X_{n, d'}, u'}^h$ と書く。このとき
+$$
+Y_{n, d'} \times_{X_{n, d'}} \Spec(A) = Z \amalg W
+$$
+と書け、$Z \to \Spec(A)$ は有限、$W \to \Spec(A)$ の閉ファイバーは空である。
+『可換代数』の補題 \ref{algebra-lemma-characterize-henselian} の (13) または
+『射の続論』の第 \ref{more-morphisms-section-etale-localization} 節の議論を参照せよ。
+補題 \ref{discriminant-lemma-universal-quasi-finite-syntomic-etale} により局所環 $A$ は正則である
+（ここでは『代数の続論』の補題 \ref{more-algebra-lemma-henselization-regular} も用いる）。
+また、$Z \to \Spec(A)$ は $\Spec(A)$ の一般点上で \'etale である
+（$X_{d, n'}$ の一般点へ写るため）。
+構成により
+$Z \times_{\Spec(A)} \Spec(k) \cong \Spec(B)$ である。
+これは、$A$ の剰余体から $k$ への写像が同型でない可能性を除けば、
+所望のものを与える。『可換代数』の補題 \ref{algebra-lemma-flat-local-given-residue-field} により、
+平坦局所環準同型 $A \to A'$ が存在し、$A'$ の剰余体は $k$ である。
+$A'$ が整域でなければ、極小素イデアル
+$\mathfrak p \subset A'$ を選び（平坦性により $A$ の一意な極小素イデアルの
+上にある）、$A'$ を $A'/\mathfrak p$ で置き換える。
+$Z \times_{\Spec(A)} \Spec(A') = \Spec(B')$ となる一意な
+$A'$-代数を $B'$ とおく。これで証明が終わる。
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-universal-finite-syntomic-smooth-top}
+$\pi_d : Y_d \to X_d$ を例 \ref{discriminant-example-universal-finite-syntomic} のものとする。
+$U_d \subset X_d$ を、補題 \ref{discriminant-lemma-universal-finite-syntomic} のとおり
+$V_d = \pi_d^{-1}(U_d)$ が有限シントミックとなる最大開集合とする。
+このとき $V_d$ も $\mathbf{Z}$ 上滑らかである。
+（もちろん $d \geq 2$ のとき射 $V_d \to U_d$ は滑らかではない。）
+補題 \ref{discriminant-lemma-universal-finite-syntomic-smooth} の証明と同様に論じると、
+これは次の変形問題に対応する。小拡大 $C' \to C$ と、
+切断 $B \to C$ をもつ有限シントミック $C$-代数 $B$ が与えられたとき、
+$C$ とのテンソル積が $B \to C$ を復元するような
+有限シントミック $C'$-代数 $B'$ と切断 $B' \to C'$ を見つけよ。
+補題 \ref{discriminant-lemma-syntomic-finite} により、相対大域完全交叉
+$B = C[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ と書ける。
+座標変換の後、$x_1, \ldots, x_n$ は $B \to C$ の核に属すると仮定してよい。
+このとき多項式 $f_i$ の定数項は零である。定数項が零であるような
+$f_i$ の任意の持ち上げ
+$f'_i \in C'[x_1, \ldots, x_n]$ を選ぶ。このとき
+$B' = C'[x_1, \ldots, x_n]/(f'_1, \ldots, f'_n)$ と、
+$x_i$ を零へ写す切断 $B' \to C'$ が所望のものである。
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-locally-comes-from-universal-finite}
+$f : Y \to X$ をスキームの射とする。$f$ が補題 \ref{discriminant-lemma-syntomic-finite} の同値な条件を満たすならば、
+すべての $x \in X$ に対して、$d$ と可換図式
+$$
+\xymatrix{
+Y \ar[d] &
+V \ar[d] \ar[l] \ar[r] &
+V_d \ar[d] \ar[r] &
+Y_d \ar[d]^{\pi_d}\\
+X &
+U \ar[l] \ar[r] &
+U_d \ar[r] &
+X_d
+}
+$$
+で次の性質を満たすものが存在する。
+\begin{enumerate}
+\item $U \subset X$ は $x \in U$ を満たす開集合であり、
+$V = f^{-1}(U)$ である。
+\item $\pi_d : Y_d \to X_d$ は例 \ref{discriminant-example-universal-finite-syntomic} のものである。
+\item $U_d \subset X_d$ は補題 \ref{discriminant-lemma-universal-finite-syntomic} のものであり、
+$V_d = \pi_d^{-1}(U_d) \subset Y_d$ である。
+\item 中央の正方形は Cartesian である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x$ のアフィン開近傍 $U = \Spec(A) \subset X$ を選ぶ。
+$V = f^{-1}(U) = \Spec(B)$ と書く。このとき $B$ は有限局所自由
+$A$-加群であり、包含 $A \subset B$ は局所的に直和因子である。
+従って $U$ を縮小した後、$A$-加群としての $B$ の基底
+$1 = e_1, e_2, \ldots, e_d$ を選べる。一意な元
+$\alpha_{ij}^l \in A$ により
+$e_i e_j = \sum \alpha_{ij}^l e_l$ と書く。これらは $A$ において関係式
+$\sum_l \alpha_{ij}^l \alpha_{lk}^m = \sum_l \alpha_{il}^m \alpha _{jk}^l$,
+$\alpha_{ij}^k = \alpha_{ji}^k$, および
+$\alpha_{i1}^j = \delta_{ij}$ を満たす。
+$a_{ij}^l \in A_d$ を $\alpha_{ij}^l \in A$ へ写すことにより
+射 $\Spec(A) \to X_d$ が定まる。構成により
+$V \cong \Spec(A) \times_{X_d} Y_d$ である。
+$U_d$ の定義により $\Spec(A) \to X_d$ は $U_d$ を経由する。
+これで証明が終わる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{差イデアルの公式}
+\label{discriminant-section-formula-different}
+
+\noindent
+この節では、Tate による \cite[Appendix A]{Mazur-Roberts} の内容を論じる。
+本章の言葉では、平坦な準有限局所完全交叉射の場合に、
+差イデアルが K\"ahler の差イデアルに等しいことが示される。
+まず、特別な場合に Noether の差イデアルを計算する。
+
+\begin{lemma}
+\label{discriminant-lemma-tate}
+\begin{reference}
+\cite[Appendix]{Mazur-Roberts}
+\end{reference}
+$A \to P$ を環準同型とする。$f_1, \ldots, f_n \in P$ を
+Koszul 正則列とする。$B = P/(f_1, \ldots, f_n)$ は $A$ 上平坦であると仮定する。
+$g_1, \ldots, g_n \in P \otimes_A B$ を、積写像
+$P \otimes_A B \to B$ の核を生成する Koszul 正則列とする。
+$f_i \otimes 1 = \sum g_{ij} g_j$ と書く。このとき
+$\Ker(B \otimes_A B \to B)$ の零化イデアルは、
+$\det(g_{ij})$ の像で生成される単項イデアルである。
+\end{lemma}
+
+\begin{proof}
+Koszul 複体 $K_\bullet = K(P, f_1, \ldots, f_n)$ は、
+有限自由 $P$-加群による $B$ の分解である。Koszul 複体
+$M_\bullet = K(P \otimes_A B, g_1, \ldots, g_n)$ は、
+有限自由 $P \otimes_A B$-加群による $B$ の分解である。複体の写像
+$$
+K_\bullet \longrightarrow M_\bullet
+$$
+があり、次数 $1$ では行列 $(g_{ij})$ により、次数 $n$ では
+$\det(g_{ij})$ により与えられる。『代数の続論』の補題 \ref{more-algebra-lemma-functorial} を参照せよ。
+$B$ は平坦 $A$-加群なので、$M_\bullet$ を
+$P \to P \otimes_A B$, $p \mapsto p \otimes 1$ を介して
+平坦 $P$-加群の複体とみなせる。従って両方の複体を用いて
+$\text{Tor}_*^P(B, B)$ を計算でき、表示した写像は $B$ とテンソル積を
+取った後に擬同型を定める。明らかに
+$H_n(K_\bullet \otimes_P B) = B$ である。一方、
+$H_n(M_\bullet \otimes_P B)$ は
+$$
+B \otimes_A B \xrightarrow{g_1, \ldots, g_n} (B \otimes_A B)^{\oplus n}
+$$
+の核である。$g_1, \ldots, g_n$ は $B \otimes_A B \to B$ の核を
+生成するので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-quasi-finite-complete-intersection}
+$A$ を環とする。$n \geq 1$ とし、
+$h, f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$ とする。
+$B = A[x_1, \ldots, x_n, 1/h]/(f_1, \ldots, f_n)$ とおく。
+$B$ は $A$ 上準有限であると仮定する。このとき
+\begin{enumerate}
+\item $B$ は $A$ 上平坦であり、$A \to B$ は相対局所完全交叉である。
+\item $I = \Ker(B \otimes_A B \to B)$ の零化イデアル $J$ は、
+階数 $1$ の自由 $B$-加群である。
+\item $A$ 上の $B$ の Noether の差イデアルは、
+$B$ における $\det(\partial f_i/\partial x_j)$ により生成される。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B = A[x, x_1, \ldots, x_n]/(xh - 1, f_1, \ldots, f_n)$
+は $A$ 上の相対大域完全交叉であることに注意する。『可換代数』の定義 \ref{algebra-definition-relative-global-complete-intersection} を参照せよ。
+『可換代数』の補題 \ref{algebra-lemma-relative-global-complete-intersection} により、
+$B$ は $A$ 上平坦である。
+
+\medskip\noindent
+$P' = A[x, x_1, \ldots, x_n]$ および
+$P = P'/(xh - 1) = A[x_1, \ldots, x_n, 1/h]$ と書く。
+このとき $P' \to P \to B$ がある。『代数の続論』の補題 \ref{more-algebra-lemma-relative-global-complete-intersection-koszul}
+により、$xh - 1, f_1, \ldots, f_n$ は $P'$ における
+Koszul 正則列である。$xh - 1$ は $P'$ における長さ一つの
+Koszul 正則列なので（例えば同じ補題による）、
+『代数の続論』の補題 \ref{more-algebra-lemma-truncate-koszul-regular} により
+$f_1, \ldots, f_n$ は $P$ における Koszul 正則列である。
+
+\medskip\noindent
+$g_i \in P \otimes_A B$ を $x_i \otimes 1 - 1 \otimes x_i$ の像とする。
+$A[x_1, \ldots, x_n] \otimes_A A[x_1, \ldots, x_n]$ において
+略記 $y_i = x_i \otimes 1$ および $z_i = 1 \otimes x_i$ を用いる。
+すると $g_i$ は $y_i - z_i$ の像である。
+多項式 $f \in A[x_1, \ldots, x_n]$ に対し、上のテンソル積において
+$f(y) = f \otimes 1$ および $f(z) = 1 \otimes f$ と書く。このとき
+$$
+P \otimes_A B/(g_1, \ldots, g_n) =
+\frac{A[y_1, \ldots, y_n, z_1, \ldots, z_n, \frac{1}{h(y)h(z)}]}
+{(f_1(z), \ldots, f_n(z), y_1 - z_1, \ldots, y_n - z_n)}
+$$
+であり、これは明らかに $B$ と同型である。従って上と同じ議論により
+$f_1(z), \ldots, f_n(z), y_1 - z_1, \ldots, y_n - z_n$ は
+$A[y_1, \ldots, y_n, z_1, \ldots, z_n, \frac{1}{h(y)h(z)}]$
+における Koszul 正則列である。一方、写像
+$$
+P \longrightarrow A[y_1, \ldots, y_n, z_1, \ldots, z_n,
+\textstyle{\frac{1}{h(y)h(z)}}],\quad x_i \longmapsto z_i
+$$
+の平坦性と『代数の続論』の補題 \ref{more-algebra-lemma-koszul-regular-flat-base-change} により、
+$f_1(z), \ldots, f_n(z)$ は\newline
+$A[y_1, \ldots, y_n, z_1, \ldots, z_n, \frac{1}{h(y)h(z)}]$
+における Koszul 正則列である。『代数の続論』の補題 \ref{more-algebra-lemma-truncate-koszul-regular} により、
+$g_1, \ldots, g_n$ は $P \otimes_A B$ における正則列である。
+
+\medskip\noindent
+これで、上の $P$, $f_1, \ldots, f_n$ および
+$g_i \in P \otimes_A B$ に対して、補題 \ref{discriminant-lemma-tate} のすべての
+仮定を確認した。特に $I$ の零化イデアル $J$ は、
+一つの元 $\delta$ により自由 $B$-加群として生成される。
+$f_{ij} = \partial f_i/\partial x_j \in A[x_1, \ldots, x_n]$ とおく。
+初等的な計算により、ある
+$F_{ijj'} \in A[y_1, \ldots, y_n, z_1, \ldots, z_n]$ に対して
+$$
+f_i(y) =
+f_i(z_1 + g_1, \ldots, z_n + g_n) =
+f_i(z) + \sum\nolimits_j f_{ij}(z) g_j +
+\sum\nolimits_{j, j'} F_{ijj'}g_jg_{j'}
+$$
+と書ける。$P \otimes_A B$ における像を取ると、
+項 $f_i(z)$ は零へ写り、
+$$
+f_i \otimes 1 = \sum\nolimits_j
+\left(1 \otimes f_{ij} + \sum\nolimits_{j'} F_{ijj'}g_{j'}\right)g_j
+$$
+を得る。従って補題 \ref{discriminant-lemma-tate} により
+$\delta = \det(g_{ij})$ であり、ここで
+$g_{ij} = 1 \otimes f_{ij} + \sum_{j'} F_{ijj'}g_{j'}$ である。
+$g_{j'}$ は $B$ において零へ写るので、
+$\det(\partial f_i/\partial x_j)$ の $B$ における像が
+$A$ 上の $B$ の Noether の差イデアルを生成する。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-different-syntomic-quasi-finite}
+$f : Y \to X$ を Noether スキームの射とする。$f$ が補題 \ref{discriminant-lemma-syntomic-quasi-finite} の同値な条件を満たすならば、
+$f$ の差イデアル $\mathfrak{D}_f$ は $f$ の K\"ahler の差イデアルである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{discriminant-lemma-flat-gorenstein-agree-noether} および
+\ref{discriminant-lemma-dualizing-syntomic-quasi-finite} により、
+$f$ の差イデアルはアフィン局所的に Noether の差イデアルと一致する。
+従って補題は、補題 \ref{discriminant-lemma-kahler-different-complete-intersection} および
+\ref{discriminant-lemma-quasi-finite-complete-intersection} で行った、
+標準アフィン部分上の Noether の差イデアルと K\"ahler の差イデアルの
+計算から従う。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-different-quasi-finite-complete-intersection}
+$A$ を環とする。$n \geq 1$ とし、
+$h, f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$ とする。
+$B = A[x_1, \ldots, x_n, 1/h]/(f_1, \ldots, f_n)$ とおく。
+$B$ は $A$ 上準有限であると仮定する。このとき
+$\det(\partial f_i/\partial x_j)$ を $\tau_{B/A}$ へ写す同型
+$B \to \omega_{B/A}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$J$ を $\Ker(B \otimes_A B \to B)$ の零化イデアルとする。
+補題 \ref{discriminant-lemma-quasi-finite-complete-intersection} により
+写像 $A \to B$ は平坦であり、$J$ は生成元 $\xi$ をもつ自由
+$B$-加群で、その生成元は $B$ において
+$\det(\partial f_i/\partial x_j)$ へ写る。従って補題は、
+補題 \ref{discriminant-lemma-noether-different-flat-quasi-finite} と、
+$\omega_{B/A}$ が可逆 $B$-加群であるという事実
+（補題 \ref{discriminant-lemma-dualizing-syntomic-quasi-finite}）から従う。
+（注意：有限 $B$-加群 $M$ が
+$\Hom_B(M, B) \cong B$ を満たしても自由とは限らないため、
+$\omega_{B/A}$ が可逆であることを証明する必要がある。）
+\end{proof}
+
+\begin{example}
+\label{discriminant-example-different-for-monogenic}
+$A$ を Noether 環とする。$f, h \in A[x]$ は
+$$
+B = (A[x]/(f))_h = A[x, 1/h]/(f)
+$$
+が $A$ 上準有限となるものとする。$f' \in A[x]$ を $x$ に関する
+$f$ の導関数とする。イデアル $\mathfrak{D} = (f') \subset B$ は
+$A$ 上の $B$ の Noether の差イデアルであり、$A$ 上の $B$ の
+K\"ahler の差イデアルでもあり、さらにその随伴準連接イデアル層が
+$\Spec(A)$ 上の $\Spec(B)$ の差イデアルとなるイデアルである。
+\end{example}
+
+\begin{lemma}
+\label{discriminant-lemma-discriminant-quasi-finite-morphism-smooth}
+$S$ を Noether スキームとする。$X$, $Y$ を $S$ 上相対次元 $n$ の
+滑らかなスキームとし、$f : Y \to X$ を $S$ 上の局所準有限射とする。
+このとき $f$ は平坦であり、$f$ の差イデアルで切り出される
+閉部分スキーム $R \subset Y$ は、
+$$
+\wedge^n(\text{d}f) \in
+\Gamma(Y,
+(f^*\Omega^n_{X/S})^{\otimes -1} \otimes_{\mathcal{O}_Y} \Omega^n_{Y/S})
+$$
+で切り出される局所単項閉部分スキームである。
+$f$ が $Y$ の随伴点で \'etale ならば、$R$ は有効 Cartier 因子であり、
+$Y$ 上の可逆層として
+$$
+f^*\Omega^n_{X/S} \otimes_{\mathcal{O}_Y} \mathcal{O}(R) =
+\Omega^n_{Y/S}
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$f$ が平坦であることを示すには、すべての $s \in S$ に対して
+$Y_s \to X_s$ が平坦であることを示せば十分である
+（『射の続論』の補題 \ref{more-morphisms-lemma-morphism-between-flat-Noetherian}）。
+$Y_s \to X_s$ の平坦性は『可換代数』の補題 \ref{algebra-lemma-CM-over-regular-flat} から従う。
+『射の続論』の補題 \ref{more-morphisms-lemma-lci-permanence} により、
+射 $f$ は局所完全交叉射である。従って差イデアルに関する主張は、
+補題 \ref{discriminant-lemma-different-syntomic-quasi-finite} により、
+K\"ahler の差イデアルに関する対応する主張から従う。
+最後に『スキームの射』の補題 \ref{morphisms-lemma-triangle-differentials} による完全列
+$$
+f^*\Omega_{X/S} \xrightarrow{\text{d}f} \Omega_{Y/S} \to \Omega_{Y/X} \to 0
+$$
+があり、$\Omega_{X/S}$ と $\Omega_{Y/S}$ は階数 $n$ の有限局所自由加群
+（『スキームの射』の補題 \ref{morphisms-lemma-smooth-omega-finite-locally-free}）なので、
+K\"ahler の差イデアルに関する主張は第零 Fitting イデアルの定義から明らかである。
+$f$ が $Y$ の随伴点で \'etale ならば、
+$\wedge^n\text{d}f$ は $Y$ の随伴点で消えず、従って $R$ の局所方程式は
+非零因子である。ゆえに $R$ は有効 Cartier 因子である。
+標準同型は $1$ を $\wedge^n\text{d}f$ へ写す。
+『因子』の補題 \ref{divisors-lemma-characterize-OD} を参照せよ。
+\end{proof}
+
+
+
+
+
+
+\section{Tate 写像}
+\label{discriminant-section-tate-map}
+
+\noindent
+この節では、局所 Noether スキームの局所準有限シントミック射に対し、
+相対余接複体の行列式と相対双対化加群との間の同型を構成する。
+\cite[1.4.4]{Garel} に従い、この同型を Tate 写像と呼ぶ。
+我々の方針は、可能な限り局所計算を避けることである。
+
+\medskip\noindent
+$Y \to X$ をスキームの局所準有限シントミック射とする。
+この節では、特に断らず補題 \ref{discriminant-lemma-syntomic-quasi-finite} に与えられた
+この概念の同値な条件をすべて用いる。特に $\NL_{Y/X}$ は
+$[-1, 0]$ に Tor 振幅をもつ $D(\mathcal{O}_Y)$ の完全対象である。
+従って $Y$ 上に標準的な可逆加群 $\det(\NL_{Y/X})$ と大域切断
+$$
+\delta(\NL_{Y/X}) \in \Gamma(Y, \det(\NL_{Y/X}))
+$$
+がある。『スキームの導来圏』の補題 \ref{perfect-lemma-determinant-two-term-complexes} を参照せよ。
+スキームの可換図式
+$$
+\xymatrix{
+Y' \ar[r]_b \ar[d] & Y \ar[d] \\
+X' \ar[r] & X
+}
+$$
+が与えられ、その縦射が局所準有限シントミックであり、
+$Y'$ と $X' \times_X Y$ のある開部分との同型を誘導すると仮定する。
+このとき標準写像
+$$
+Lb^*\NL_{Y/X} \longrightarrow \NL_{Y'/X'}
+$$
+は『射の続論』の補題 \ref{more-morphisms-lemma-base-change-NL-flat} により擬同型である。
+従って標準同型
+$b^*\det(\NL_{Y/X}) \to \det(\NL_{Y'/X'})$ を得る。これは標準切断
+$\delta(\NL_{Y/X})$ を $\delta(\NL_{Y'/ X'})$ へ写す。
+『スキームの導来圏』の注意 \ref{perfect-remark-functorial-det} を参照せよ。
+
+\begin{remark}
+\label{discriminant-remark-local-description-delta}
+$Y \to X$ をスキームの局所準有限シントミック射とする。
+組 $(\det(\NL_{Y/X}), \delta(\NL_{Y/X}))$ は局所的にどのようなものか。
+$f(V) \subset U$ を満たすアフィン開集合
+$V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$ と、整数 $n$ および
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)$ を満たす
+$f_1, \ldots, f_n \in A[x_1, \ldots, x_n]$ を選ぶ。このとき
+$$
+\NL_{B/A} = \left(
+(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2
+\longrightarrow
+\bigoplus\nolimits_{i = 1, \ldots, n} B \text{d} x_i\right)
+$$
+であり、$(f_1, \ldots, f_n)/(f_1, \ldots, f_n)^2$ は
+$\overline{f}_i$ の類を生成元とする自由加群である。
+補題 \ref{discriminant-lemma-syntomic-quasi-finite} の証明を参照せよ。
+従って $\det(L_{B/A})$ は生成元
+$$
+\text{d}x_1 \wedge \ldots \wedge \text{d}x_n
+\otimes
+(\overline{f}_1 \wedge \ldots \wedge \overline{f}_n)^{\otimes -1}
+$$
+上自由であり、切断 $\delta(\NL_{B/A})$ は定義により元
+$$
+\delta(\NL_{B/A}) =
+\det(\partial f_j/ \partial x_i) \cdot
+\text{d}x_1 \wedge \ldots \wedge \text{d}x_n
+\otimes
+(\overline{f}_1 \wedge \ldots \wedge \overline{f}_n)^{\otimes -1}
+$$
+である。
+\end{remark}
+
+\noindent
+$Y \to X$ を局所 Noether スキームの局所準有限シントミック射とする。
+注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} および
+\ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite} により、
+連接 $\mathcal{O}_Y$-加群 $\omega_{Y/X}$ と標準大域切断
+$$
+\tau_{Y/X} \in \Gamma(Y, \omega_{Y/X})
+$$
+があり、アフィン局所的には組 $\omega_{B/A}, \tau_{B/A}$ を復元する。
+補題 \ref{discriminant-lemma-dualizing-syntomic-quasi-finite} により
+加群 $\omega_{Y/X}$ は可逆である。局所 Noether スキームの可換図式
+$$
+\xymatrix{
+Y' \ar[r]_b \ar[d] & Y \ar[d] \\
+X' \ar[r] & X
+}
+$$
+が与えられ、その縦射が局所準有限シントミックであり、
+$Y'$ と $X' \times_X Y$ のある開部分との同型を誘導すると仮定する。
+このとき標準基底変換写像
+$$
+b^*\omega_{Y/X} \longrightarrow \omega_{Y'/X'}
+$$
+があり、これは $\tau_{Y/X}$ を $\tau_{Y'/X'}$ へ写す同型である。
+実際、アフィンの場合の基底変換写像は
+(\ref{discriminant-equation-bc-dualizing}) であり、補題 \ref{discriminant-lemma-dualizing-base-change-of-flat} により同型であり、
+補題 \ref{discriminant-lemma-trace-base-change} の (1) により
+$\tau_{Y/X}$ を $\tau_{Y'/X'}$ へ写す。
+
+\begin{proposition}
+\label{discriminant-proposition-tate-map}
+局所 Noether スキームの各局所準有限シントミック射 $Y \to X$ に
+同型
+$$
+c_{Y/X} : \det(\NL_{Y/X}) \longrightarrow \omega_{Y/X}
+$$
+を対応させ、次の二つの性質を満たす規則が一意に存在する。
+\begin{enumerate}
+\item 切断 $\delta(\NL_{Y/X})$ は $\tau_{Y/X}$ へ写る。
+\item この規則は開集合への制限および基底変換と両立する。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+命題の主張を言い換える。対象を $Y/X$ と表す圏 $\mathcal{C}$ を考える。
+その対象は局所 Noether スキームの局所準有限シントミック射
+$Y \to X$ であり、射
+$b/a : Y'/X' \to Y/X$ は可換図式
+$$
+\xymatrix{
+Y' \ar[d] \ar[r]_b & Y \ar[d] \\
+X' \ar[r]^a & X
+}
+$$
+であって、$Y'$ と $X' \times_X Y$ のある開部分スキームとの同型を
+誘導するものである。命題の意味は、$\mathcal{C}$ の各対象 $Y/X$ に対して
+$c_{Y/X}(\delta(\NL_{Y/X})) = \tau_{Y/X}$ を満たす同型
+$c_{Y/X} : \det(\NL_{Y/X}) \to \omega_{Y/X}$ があり、
+$\mathcal{C}$ の各射 $b/a : Y'/X' \to Y/X$ に対して、上で述べた同一視
+$b^*\det(\NL_{Y/X}) = \det(\NL_{Y'/X'})$ および
+$b^*\omega_{Y/X} = \omega_{Y'/X'}$ のもとで
+$b^*c_{Y/X} = c_{Y'/X'}$ が成り立つ、ということである。
+
+\medskip\noindent
+$\mathcal{C}$ の $Y/X$ と $y \in Y$ が与えられたとする。
+$y \in V$ および $f(V) \subset U$ を満たすアフィン開集合
+$V \subset Y$, $U \subset X$ で、ある同型
+$$
+\det(\NL_{Y/X})|_V \longrightarrow \omega_{Y/X}|_V
+$$
+が $\delta(\NL_{Y/X})|_V$ を $\tau_{Y/X}|_V$ へ写すものを見つけられる。
+これは補題 \ref{discriminant-lemma-syntomic-quasi-finite} の (5) のように
+アフィン開集合を選び、注意 \ref{discriminant-remark-local-description-delta} における
+$\delta(\NL_{Y/X})$ のアフィン局所記述と補題 \ref{discriminant-lemma-different-quasi-finite-complete-intersection} を用いれば従う。
+切断 $\tau_{Y/X}$ の零化イデアルが零ならば、これらの局所写像は一意であり、
+自動的に貼り合わさる。従って $\tau_{Y/X}$ の零化イデアルが零ならば、
+$c_{Y/X}(\delta(\NL_{Y/X})) = \tau_{Y/X}$ を満たす一意な同型
+$c_{Y/X} : \det(\NL_{Y/X}) \to \omega_{Y/X}$ が存在する。
+$b/a : Y'/X' \to Y/X$ が $\mathcal{C}$ の射であり、
+$\tau_{Y'/X'}$ の零化イデアルも零ならば、
+$b^*c_{Y/X}$ は
+$c_{Y'/X'}(\delta(\NL_{Y'/X'})) = \tau_{Y'/X'}$ を満たす一意な同型
+$c_{Y'/X'} : \det(\NL_{Y'/X'}) \to \omega_{Y'/X'}$ である。
+これは
+$b^*\delta(\NL_{Y/X}) = \delta(\NL_{Y'/X'})$ および
+$b^*\tau_{Y/X} = \tau_{Y'/X'}$ から形式的に従う。
+
+\medskip\noindent
+前段落の結果を次のようにまとめる。
+$\tau_{Y/X}$ の零化イデアルが零である $Y/X$ からなる充満部分圏を
+$\mathcal{C}_{nice} \subset \mathcal{C}$ と書く。
+このとき $\mathcal{C}_{nice}$ 上では問題を解いたことになる。
+$\mathcal{C}_{nice}$ の $Y/X$ に対し、今得た解を引き続き
+$c_{Y/X}$ と表す。
+
+\medskip\noindent
+$\mathcal{C}$ における射
+$$
+Y_1/X_1 \xleftarrow{b_1/a_1} Y/X \xrightarrow{b_2/a_2} Y_2/X_2
+$$
+で、$Y_1/X_1$ と $Y_2/X_2$ が $\mathcal{C}_{nice}$ の対象であるものを
+考える。{\bf 主張.} $b_1^*c_{Y_1/X_1} = b_2^*c_{Y_2/X_2}$。
+まずこの主張から命題が従うことを示し、その後で主張を証明する。
+
+\medskip\noindent
+$d, n \geq 1$ とし、例 \ref{discriminant-example-universal-quasi-finite-syntomic} で構成した局所準有限
+シントミック射 $Y_{n, d} \to X_{n, d}$ を考える。
+$Y_{n, d}$ は既約正則スキームであり、射
+$Y_{n, d} \to X_{n, d}$ は局所準有限シントミックで、稠密開集合上
+\'etale である。補題 \ref{discriminant-lemma-universal-quasi-finite-syntomic-etale} を参照せよ。
+従って例えば補題 \ref{discriminant-lemma-different-ramification} により
+$\tau_{Y_{n, d}/X_{n, d}}$ は零でない。
+既約正則スキーム上の可逆加群の非零切断は零の零化イデアルをもつので、
+$Y_{n, d}/X_{n, d}$ は $\mathcal{C}_{nice}$ の対象である。
+
+\medskip\noindent
+$Y/X$ を $\mathcal{C}$ の任意の対象とし、$y \in Y$ とする。
+補題 \ref{discriminant-lemma-locally-comes-from-universal} により、
+$n, d \geq 1$ と $\mathcal{C}$ における射
+$$
+Y/X \leftarrow V/U \xrightarrow{b/a} Y_{n, d}/X_{n, d}
+$$
+で、$V \subset Y$ および $U \subset X$ が開となるものを見つけられる。
+従って上で構成した標準射 $c_{Y_{n, d}/X_{n, d}}$ を $b$ により
+$V$ へ引き戻せる。主張により、これらの局所同型は貼り合わさる。
+こうして
+$c_{Y/X}(\delta(\NL_{Y/X})) = \tau_{Y/X}$ を満たす
+良定義な大域同型
+$c_{Y/X} : \det(\NL_{Y/X}) \to \omega_{Y/X}$ を得る。
+$b/a : Y'/X' \to Y/X$ が $\mathcal{C}$ の射ならば、主張は同様に構成した
+写像 $c_{Y'/X'}$ が、局所的に構成した写像 $c_{Y/X}$ の $b$ による
+引き戻しであることも示す。従って残るのは主張の証明である。
+
+\medskip\noindent
+証明の残りで主張を証明する。点 $y \in Y$ を選び、
+$y$ のある開近傍上で二つの写像が一致することを示せばよい。
+従って $Y_1$, $Y_2$ を、それぞれ $Y_1$ と $Y_2$ における
+$y$ の像の開近傍で置き換えてよい。
+ゆえに $Y, X, Y_1, X_1, Y_2, X_2$ はアフィンであると仮定でき、
+それぞれ環 $B, A, B_1, A_1, B_2, A_2$ のスペクトルであるとする。図式は
+$$
+\xymatrix{
+B_1 \ar[r] & B & B_2 \ar[l] \\
+A_1 \ar[u] \ar[r] & A \ar[u] & A_2 \ar[l] \ar[u]
+}
+$$
+である。仮定により $B$ のスペクトルは、
+$A \otimes_{A_1} B_1$ のスペクトルと $A \otimes_{A_2} B_2$ のスペクトルの
+いずれにおいてもアフィン開部分である。さらに縮小すれば、
+写像が同型 $(A \otimes_{A_i} B_i)_{g_i} = B$ を与えるような元
+$g_i \in A \otimes_{A_i} B_i$ が存在すると仮定できる。
+『スキームの性質』の補題 \ref{properties-lemma-standard-open-two-affines} を参照せよ。
+十分大きな変数族 $x_\alpha$, $y_\beta$ を取り、$A_1$-代数および
+$A_2$-代数の全射
+$$
+A'_1 = A_1[x_\alpha] \to A
+\quad\text{and}\quad
+A'_2 = A_2[y_\beta] \to A
+$$
+を選べるようにする。次に
+$g_i \in A \otimes_{A_i} B_i$ の持ち上げ
+$h_i \in A'_i \otimes_{A_i} B_i$ を選び、図式
+$$
+\xymatrix{
+(A'_1 \otimes_{A_1} B_1)_{h_1} \ar[r] & B &
+(A'_2 \otimes_{A_1} B_2)_{h_2} \ar[l] \\
+A'_1 \ar[u] \ar[r] & A \ar[u] & A'_2 \ar[l] \ar[u]
+}
+$$
+を考える。構成により二つの正方形は余 Cartesian である。
+次に環準同型
+$$
+A' = A'_1 \times_A A'_2 \longrightarrow
+B' =
+(A'_1 \otimes_{A_1} B_1)_{h_1} \times_B
+(A'_2 \otimes_{A_1} B_2)_{h_2}
+$$
+を考える。『代数の続論』の補題 \ref{more-algebra-lemma-module-over-fibre-product} により
+$A'_1 \otimes_{A'} B' = (A'_1 \otimes_{A_1} B_1)_{h_1}$ および
+$A'_2 \otimes_{A'} B' = (A'_2 \otimes_{A_2} B_2)_{h_2}$ である。
+特に射 $Y' = \Spec(B') \to \Spec(A') = X'$ の各ファイバーは、
+写像 $Y_i \to X_i$ のファイバーの基底変換の開部分スキームであり、
+従って有限かつ局所完全交叉である
+（補題 \ref{discriminant-lemma-syntomic-quasi-finite} を参照）。
+『代数の続論』の補題 \ref{more-algebra-lemma-properties-algebras-over-fibre-product} により
+環準同型 $A' \to B'$ は平坦かつ有限表示である。
+従って補題 \ref{discriminant-lemma-syntomic-quasi-finite} の (3) により
+$Y' \to X'$ は局所準有限かつシントミックである。こうして可換図式
+$$
+\xymatrix{
+& & Y/X \ar[ld] \ar@/_2pc/[lldd]_{b_1/a_1} \ar[rd] \ar@/^2pc/[rrdd]^{b_2/a_2} \\
+& Y'_1/X'_1 \ar[rd] \ar[ld] & & Y'_2/X'_2 \ar[ld] \ar[rd] \\
+Y_1/X_1 & & Y'/X' & & Y_2/X_2
+}
+$$
+を得る。ここで $Y'_i/X'_i$ は
+$A'_i \to (A'_i \otimes_{A_i} B_i)_{h_i}$ に対応する。
+
+\medskip\noindent
+この段落では、極限による議論で $A'$ と $A'_i$ が Noether でない可能性を
+解消する。この部分を読み飛ばしてもよい。
+有限生成 $\mathbf{Z}$-部分代数 $A'' \subset A'$ と準有限シントミックな
+環準同型 $A'' \to B''$ で
+$B' = A' \otimes_{A''} B''$ を満たすものを見つけられる。
+これは『スキームの極限』の補題 \ref{limits-lemma-descend-finite-presentation} および \ref{limits-lemma-descend-syntomic}, および
+\ref{limits-lemma-descend-quasi-finite} から従う。
+このとき環準同型 $A'' \to A'_1 = A_1[x_\alpha]$ は有限多項式部分代数
+$A_i[x_1, \ldots, x_n$ を経由し、環準同型
+$A'' \to A'_2 = A_2[y_\beta]$ は $A_2[y_1, \ldots, y_m]$ を経由する。
+変数集合を拡大すれば、
+$h_1 \in A_1[x_1, \ldots, x_n] \otimes_{A_1} B_1$ および
+$h_2 \in A_2[y_1, \ldots, y_m] \otimes_{A_2} B_2$ と仮定してよい。
+さらに一度変数集合を拡大すれば、写像
+$B'' \to (A'_i \otimes_{A_i} B_i)_{h_i}$ は
+$(A_1[x_1, \ldots, x_n] \otimes_{A_1} B_1)_{h_1}$ および
+$(A_2[y_1, \ldots, y_m] \otimes_{A_2} B_2)_{h_2}$ を経由すると仮定できる。
+$Y'$, $X'$, $Y'_1$, $X'_1$, $Y'_2$, $X'_2$ をそれぞれ
+$B''$, $A''$, $(A_1[x_1, \ldots, x_n] \otimes_{A_1} B_1)_{h_1}$,
+$A_1[x_1, \ldots, x_n]$, $(A_2[y_1, \ldots, y_m] \otimes_{A_2} B_2)_{h_2}$,
+$A_2[y_1, \ldots, y_m]$ のスペクトルで置き換えると、
+すべてのスキームが Noether である上のような図式を得る。
+
+\medskip\noindent
+$Y'_i/X'_i$ は、アフィン空間と $Y_i/X_i$ との積の開部分スキームを取って
+得られるので、$\mathcal{C}_{nice}$ の対象であることに注意する。
+特に $(b_i/a_i)$ による $c_{Y_i/X_i}$ の引き戻しは、
+$Y/X \to Y'_i/X'_i$ による $c_{Y'_i/X'_i}$ の引き戻しと同じである。
+もし $Y'/X'$ が $\mathcal{C}_{nice}$ の対象ならば、これで証明は終わる
+（しかしおそらくそうではない）。実際、その場合には
+$c_{Y'/X'}$ を正方形の二辺に沿って引き戻せば、所望の結論を得る。
+$Y'/X'$ が $\mathcal{C}_{nice}$ に属さないという問題を回避するため、
+上の議論により、すべてのスキーム
+$X, Y, X'_1, Y'_1, X'_2, Y'_2, X', Y'$ を必要なら縮小した後、
+ある $n, d \geq 1$ を見つけ、図式を次のように拡張できることに注意する。
+$$
+\xymatrix{
+& Y/X \ar[ld] \ar[rd] \\
+Y'_1/X'_1 \ar[rd] & & Y'_2/X'_2 \ar[ld] \\
+& Y'/X' \ar[d] \\
+& Y_{n, d}/X_{n, d}
+}
+$$
+このとき $c_{Y_{n, d}/X_{n, d}}$ から引き戻すという既述の議論を
+用いられる。これで証明が終わる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{差イデアルの一般化}
+\label{discriminant-section-different-generalization}
+
+\noindent
+この節では、Dedekind の差イデアルが定義され、
+$1 \in \mathcal{L}_{B/A}$ となる環準同型 $A \to B$ のすべての場合を
+扱えるよう定義 \ref{discriminant-definition-different} を一般化する。
+まず、条件「$A \to B$ は非零因子を非零因子へ写し、
+平坦な写像 $Q(A) \to Q(A) \otimes_A B$ を誘導する」を説明する。
+
+\begin{lemma}
+\label{discriminant-lemma-explain-condition}
+$A \to B$ を Noether 環の準同型とし、次の条件を考える。
+\begin{enumerate}
+\item $A$ の非零因子は $B$ の非零因子へ写る。
+\item (1) が成り立ち、$Q(A) \to Q(A) \otimes_A B$ は平坦である。
+\item すべての $\mathfrak q \in \text{Ass}(B)$ に対して
+$A \to B_\mathfrak q$ は平坦である。
+\item (3) が成り立ち、$\text{Ass}(A)$ の元の上にあるすべての
+$\mathfrak q$ に対して $A \to B_\mathfrak q$ は平坦である。
+\end{enumerate}
+このとき次の含意が成り立つ。
+$$
+\xymatrix{
+(1) & (2) \ar@{=>}[l] \ar@{=>}[d] \\
+(3) \ar@{=>}[u] & (4) \ar@{=>}[l]
+}
+$$
+$A \to B$ に対して上昇定理が成り立つならば、(2) と (4) は同値である。
+\end{lemma}
+
+\begin{proof}
+図式の横向きの含意は自明である。$S \subset A$ を非零因子全体の集合とすると
+$Q(A) = S^{-1}A$ および $Q(A) \otimes_A B = S^{-1}B$ である。
+『可換代数』の補題 \ref{algebra-lemma-ass-zero-divisors} により
+$S = A \setminus \bigcup_{\mathfrak p \in \text{Ass}(A)} \mathfrak p$
+であることを想起する。$\mathfrak q \subset B$ を
+$\mathfrak p \subset A$ の上にある素イデアルとする。
+
+\medskip\noindent
+(2) を仮定する。$\mathfrak q \in \text{Ass}(B)$ ならば
+$\mathfrak q$ は零因子のみからなるので、(1) により
+$\mathfrak p$ についても同じことが成り立つ。従って
+$\mathfrak p$ は $S^{-1}A$ の素イデアルに対応する。
+よって仮定 (2) により $A \to B_\mathfrak q$ は平坦である。
+$\mathfrak q$ が $A$ の随伴素イデアル $\mathfrak p$ の上にある場合も、
+もちろん $\mathfrak p \in \Spec(S^{-1}A)$ であり、同じ議論が使える。
+
+\medskip\noindent
+(3) を仮定する。$f \in A$ を非零因子とする。
+もし $f$ が $B$ 上の零因子ならば、$f$ は $B$ の随伴素イデアル
+$\mathfrak q$ に含まれる。仮定により $A \to B_\mathfrak q$ は平坦なので、
+『可換代数』の補題 \ref{algebra-lemma-bourbaki} により
+$\mathfrak p$ は $A$ の随伴素イデアルである。
+これは $f$ が $A$ 上の零因子であることを意味し、矛盾する。
+
+\medskip\noindent
+(4) と $A \to B$ に対する上昇定理を仮定する。
+(1) が成り立つことはすでに分かっている。
+$\mathfrak q$ が $S^{-1}B$ の素イデアルに対応するならば、
+$\mathfrak p$ は $A$ のある随伴素イデアル $\mathfrak p'$ に含まれる。
+上昇定理により、$\mathfrak q$ を含み $\mathfrak p$ の上にある
+素イデアル $\mathfrak q'$ が存在する。(4) により
+$A \to B_{\mathfrak q'}$ は平坦である。従ってその局所化
+$A \to B_{\mathfrak q}$ も平坦である。
+ゆえに $A \to S^{-1}B$ は平坦であり、
+$S^{-1}A \to S^{-1}B$ も平坦である。『可換代数』の補題 \ref{algebra-lemma-flat-localization} を参照せよ。
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-different-generalization}
+定義 \ref{discriminant-definition-different} を一般化できる。
+$f : Y \to X$ を次の性質をもつ Noether スキームの準有限射とする。
+\begin{enumerate}
+\item $f$ が平坦である開集合 $V \subset Y$ は
+$\text{Ass}(\mathcal{O}_Y)$ と $f^{-1}(\text{Ass}(\mathcal{O}_X))$ を含む。
+\item トレース元 $\tau_{V/X}$ は切断
+$\tau \in \Gamma(Y, \omega_{Y/X})$ から来る。
+\end{enumerate}
+条件 (1) と補題 \ref{discriminant-lemma-dualizing-associated-primes} により、
+$V$ は $\omega_{Y/X}$ の随伴点を含む。特に $\tau$ が存在すれば一意である
+（『因子』の補題 \ref{divisors-lemma-restriction-injective-open-contains-ass}）。
+$\tau$ が与えられたとき、
+$\Coker(\tau : \mathcal{O}_Y \to \omega_{Y/X})$ の零化イデアルとして
+差イデアル $\mathfrak{D}_f$ を定義できる。これは多くの場合に
+Dedekind の差イデアルと一致する
+（補題 \ref{discriminant-lemma-agree-dedekind}）。
+しかし、非正規環の間の非平坦写像については、この一般化はもはや
+射の分岐を測らない。例 \ref{discriminant-example-no-different} を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{discriminant-lemma-agree-dedekind}
+$A \to B$ に対して Dedekind の差イデアルが定義されると仮定する。
+$X = \Spec(A)$ および $Y = \Spec(B)$ とおく。
+注意 \ref{discriminant-remark-different-generalization} の一般化が射
+$f : Y \to X$ に適用できるための必要十分条件は
+$1 \in \mathcal{L}_{B/A}$ である
+（例えば $A$ が正規ならば適用できる。補題 \ref{discriminant-lemma-dedekind-different-ideal} を参照せよ）。
+この場合 $\mathfrak{D}_{B/A}$ は $B$ のイデアルであり、
+$Y$ 上の連接イデアル層として
+$$
+\mathfrak{D}_f = \widetilde{\mathfrak{D}_{B/A}}
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ に対して Dedekind の差イデアルが定義されるので、
+補題 \ref{discriminant-lemma-explain-condition} を適用すると
+$Y \to X$ が注意 \ref{discriminant-remark-different-generalization} の
+条件 (1) を満たすことが分かる。標準同型
+$c : \mathcal{L}_{B/A} \to \omega_{B/A}$ があることを想起する。
+補題 \ref{discriminant-lemma-dedekind-complementary-module} を参照せよ。
+上と同様に $K = Q(A)$ および $L = K \otimes_A B$ とおく。
+構成により写像 $c$ は可換図式
+$$
+\xymatrix{
+\mathcal{L}_{B/A} \ar[r] \ar[d]_c & L \ar[d] \\
+\omega_{B/A} \ar[r] & \Hom_K(L, K)
+}
+$$
+に入る。ここで右の縦射は $x \in L$ を写像
+$y \mapsto \text{Trace}_{L/K}(xy)$ へ写し、下の横射は
+$\omega_{B/A}$ に対する基底変換写像
+(\ref{discriminant-equation-bc-dualizing}) である。下の横射は
+$$
+\omega_{B/A} = \Gamma(Y, \omega_{Y/X})
+\to \Gamma(V, \omega_{V/X}) \to \Hom_K(L, K)
+$$
+と分解できる。$\omega_{V/X}$ のすべての随伴点は $A$ の随伴素イデアルへ
+写るので（補題 \ref{discriminant-lemma-dualizing-associated-primes}）、
+第二の写像は単射である。トレース元の定義
+（定義 \ref{discriminant-definition-trace-element}）により、
+元 $\tau_{V/X}$ は $\Hom_K(L, K)$ における
+$\text{Trace}_{L/K}$ へ写る。
+従って注意 \ref{discriminant-remark-different-generalization} の条件 (2) の
+$\tau$ が存在するための必要十分条件は
+$1 \in \mathcal{L}_{B/A}$ であり、そのとき $\tau = c(1)$ である。
+この場合補題 \ref{discriminant-lemma-dedekind-different-ideal} により
+$\mathfrak{D}_{B/A} \subset B$ である。
+最後に、$\mathfrak{D}_f$ と $\mathfrak{D}_{B/A}$ の一致は、
+定義と上で見た等式 $\tau = c(1)$ から直ちに従う。
+\end{proof}
+
+\begin{example}
+\label{discriminant-example-no-different}
+$k$ を体とする。$A = k[x, y]/(xy)$, $B = k[u, v]/(uv)$ とし、
+$A \to B$ を $x \mapsto u^n$, $y \mapsto v^m$ により与える。
+ここで $n, m \in \mathbf{N}$ は $k$ の標数と互いに素である。
+このとき $A_{x + y} \to B_{x + y}$ は（有限）\'etale であり、
+従って Dedekind の差イデアルが定義される状況にある。計算により
+$$
+\text{Trace}_{L/K}(1) = (nx + my)/(x + y),\quad
+\text{Trace}_{L/K}(u^i) = 0,\quad \text{Trace}_{L/K}(v^j) = 0
+$$
+を得る。ここで $1 \leq i < n$ および $1 \leq j < m$ である。
+従って $1 \in \mathcal{L}_{B/A}$ であるための必要十分条件は
+$n = m$ である。さらに計算により、$n = m$ ならば
+$\mathcal{L}_{B/A} = B$ であり、Dedekind の差イデアルも $B$ である。
+言い換えると、注意 \ref{discriminant-remark-different-generalization} の差イデアルが
+$\Spec(B) \to \Spec(A)$ に対して定義されるための必要十分条件は
+$n = m$ であり、この場合その差イデアルは単位イデアルである。
+従って非平坦な場合には、差イデアルが消えないことは射が
+\'etale または不分岐であることを保証しない。
+\end{example}
+
+
+
+
+
+
+
+\section{双対性理論との比較}
+\label{discriminant-section-comparison}
+
+\noindent
+この節では、上の初等的な代数的構成を、スキームの双対性理論に関する章の
+構成と比較する。
+
+\begin{lemma}
+\label{discriminant-lemma-compare-dualizing}
+$f : Y \to X$ を Noether スキームの準有限分離射とする。
+$f(V) \subset U$ を満たす任意のアフィン開集合の組
+$\Spec(B) = V \subset Y$, $\Spec(A) = U \subset X$ に対して同型
+$$
+H^0(V, f^!\mathcal{O}_X) = \omega_{B/A}
+$$
+が存在する。ここで $f^!$ は『スキームの双対性』の第 \ref{duality-section-upper-shriek} 節のものである。
+これらの同型は制限写像と両立し、注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} の $\omega_{Y/X}$ との
+標準同型 $H^0(f^!\mathcal{O}_X) = \omega_{Y/X}$ を定める。
+同様に、$f : Y \to X$ が、双対化複体 $\omega_S^\bullet$ を備えた
+Noether 基底 $S$ 上有限型なスキームの準有限射ならば、
+$H^0(f_{new}^!\mathcal{O}_X) = \omega_{Y/X}$ である。
+\end{lemma}
+
+\begin{proof}
+Zariski の主定理により、$j : Y \to Y'$ が開埋め込みで
+$f' : Y' \to X$ が有限射となる分解 $f = f' \circ j$ を選べる。
+『射の続論』の補題 \ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite} を参照せよ。
+『スキームの双対性』の補題 \ref{duality-lemma-shriek-well-defined} における構成により
+$f^! = j^* \circ a'$ である。ここで
+$a' : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_{Y'})$ は、
+『スキームの双対性』の補題 \ref{duality-lemma-twisted-inverse-image} の $Rf'_*$ の右随伴である。
+『スキームの双対性』の補題 \ref{duality-lemma-finite-twisted} により
+$D_\QCoh^+(f'_*\mathcal{O}_{Y'})$ において
+$\Phi(a'(\mathcal{O}_X)) = R\SheafHom(f'_*\mathcal{O}_{Y'}, \mathcal{O}_X)$
+である。特に $a'(\mathcal{O}_X)$ の次数 $< 0$ のコホモロジー層は消える。
+第零コホモロジー層は、
+『スキームの射』の補題 \ref{morphisms-lemma-affine-equivalence-modules} の同値を介して
+$f'_*\mathcal{O}_{Y'}$-加群としての同型
+$$
+f'_*H^0(a'(\mathcal{O}_X)) =
+\SheafHom_{\mathcal{O}_X}(f'_*\mathcal{O}_{Y'}, \mathcal{O}_X)
+$$
+により定まる。$(f')^{-1}U = V' = \Spec(B')$ と書けば
+$$
+H^0(V', a'(\mathcal{O}_X)) = \Hom_A(B', A).
+$$
+を得る。$a'(\mathcal{O}_X)$ の第零コホモロジー層は準連接加群なので、
+$V$ への制限は、所望のとおり
+$\omega_{B/A} = \Hom_A(B', A) \otimes_{B'} B$ により与えられる。
+
+\medskip\noindent
+制限写像に関する主張は、$Y'$ の開集合に対する準連接
+$\mathcal{O}_{Y'}$-加群 $H^0(a'(\mathcal{O}_X))$ の制限写像が、
+上で与えた同型を介して、加群 $\omega_{B/A}$ に対し
+補題 \ref{discriminant-lemma-localize-dualizing} で定義された写像と一致することを意味する。
+これは明らかである。
+
+\medskip\noindent
+$f : Y \to X$ を、双対化複体 $\omega_S^\bullet$ を備えた Noether 基底
+$S$ 上有限型なスキームの準有限射とする。
+$f(V) \subset U$ を満たし、$V$ と $U$ が $S$ 上分離的であるような
+開集合 $V \subset Y$, $U \subset X$ を考える。
+$f$ の制限を $f|_V : V \to U$ と表す。
+上の議論と『スキームの双対性』の補題 \ref{duality-lemma-duality-bootstrap} により標準同型
+$$
+H^0(f_{new}^!\mathcal{O}_X)|_V = H^0((f|_V)^!\mathcal{O}_U) = \omega_{V/U} =
+\omega_{Y/X}|_V
+$$
+がある。これらの同型が大域同型
+$H^0(f_{new}^!\mathcal{O}_X) \to \omega_{Y/X}$ に貼り合わさることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{discriminant-lemma-compare-trace}
+$f : Y \to X$ を Noether スキームの有限平坦射とする。
+第 \ref{discriminant-section-discriminant} 節の写像
+$$
+\text{Trace}_f : f_*\mathcal{O}_Y \longrightarrow \mathcal{O}_X
+$$
+は写像 $\mathcal{O}_Y \to f^!\mathcal{O}_X$ に対応する
+（証明を参照）。$1$ の像を
+$\tau_{Y/X} \in H^0(Y, f^!\mathcal{O}_X)$ と表す。
+補題 \ref{discriminant-lemma-compare-dualizing} の同型
+$H^0(f^!\mathcal{O}_X) = \omega_{X/Y}$ を介すると、
+これは注意 \ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite} の
+構成と一致する。
+\end{lemma}
+
+\begin{proof}
+関手 $f^!$ は『スキームの双対性』の第 \ref{duality-section-upper-shriek} 節で定義される。
+$f$ は有限（従って固有）なので、$f^!$ は $f$ に沿う順像の右随伴により
+与えられる。『スキームの双対性』の第 \ref{duality-section-duality-finite} 節ではこの随伴を明示的に構成した。
+特に対象 $f^!\mathcal{O}_X$ は次数 $0$ に置かれた単一のコホモロジー層からなり、
+この層について
+$$
+f_*f^!\mathcal{O}_X =
+\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)
+$$
+である。このためには、$f$ が Noether スキームの有限平坦射なので
+$f_*\mathcal{O}_Y$ が有限局所自由であり、従ってすべての高次 Ext 層が
+零であることも用いる。細部の一部は省略する。最終的に
+$$
+\text{Trace}_f \in
+\Hom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X) =
+\Gamma(X, f_*f^!\mathcal{O}_X) =
+\Gamma(Y, f^!\mathcal{O}_X)
+$$
+を得る。一方、補題 \ref{discriminant-lemma-compare-dualizing} の同一視により
+$f^!\mathcal{O}_X = \omega_{Y/X}$ である。
+従って今、
+注意 \ref{discriminant-remark-relative-dualizing-for-flat-quasi-finite} の
+$\text{Trace}_f$ と $\tau_{Y/X}$ という二つの元が
+$$
+\Gamma(Y, f^!\mathcal{O}_X) = \Gamma(Y, \omega_{Y/X})
+$$
+にあり、補題はこれらが同じ元であると主張している。
+
+\medskip\noindent
+$U = \Spec(A) \subset X$ を、その逆像が
+$V = \Spec(B) \subset Y$ であるようなアフィン開集合とする。
+$f$ は有限なので $A \to B$ は有限であり、構成により
+$\omega_{Y/X}(V) = \Hom_A(B,A)$ である。この同型は、
+上で論じた $f_*f^!\mathcal{O}_Y$ と
+$\SheafHom_{\mathcal{O}_X}(f_*\mathcal{O}_Y, \mathcal{O}_X)$ との
+同一視と一致する。従って $\text{Trace}_f$ と $\tau_{Y/X}$ の一致は、
+補題 \ref{discriminant-lemma-finite-flat-trace} による
+$\tau_{B/A} = \text{Trace}_{B/A}$ から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{準有限 Gorenstein 射}
+\label{discriminant-section-gorenstein-lci}
+
+\noindent
+この節では準有限 Gorenstein 射を論じる。
+
+\begin{lemma}
+\label{discriminant-lemma-gorenstein-quasi-finite}
+$f : Y \to X$ を Noether スキームの準有限射とする。次は同値である。
+\begin{enumerate}
+\item $f$ は Gorenstein である。
+\item $f$ は平坦であり、$f$ のファイバーは Gorenstein である。
+\item $f$ は平坦であり、$\omega_{Y/X}$ は可逆である
+（注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite}）。
+\item すべての $y \in Y$ に対して、$f(V) \subset U$ を満たすアフィン開集合
+$y \in V = \Spec(B) \subset Y$, $U = \Spec(A) \subset X$ で、
+$A \to B$ が平坦かつ $\omega_{B/A}$ が可逆 $B$-加群となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) は定義により同値である。
+(3) と (4) は、注意 \ref{discriminant-remark-relative-dualizing-for-quasi-finite} における
+$\omega_{Y/X}$ の構成により同値である。
+従って (1)--(2) と (3)--(4) の同値性を示せばよい。
+
+\medskip\noindent
+第一の証明。アフィン局所的に作業すれば $f$ は分離射と仮定でき、
+補題 \ref{discriminant-lemma-compare-dualizing} により $\omega_{Y/X}$ は
+$f^!\mathcal{O}_X$ の第零コホモロジー層である。
+どちらの仮定のもとでも $f$ は平坦かつ準有限なので、
+$f^!\mathcal{O}_X$ は $\omega_{Y/X}[0]$ と同型である。
+『スキームの双対性』の補題 \ref{duality-lemma-flat-quasi-finite-shriek} を参照せよ。
+従って同値性は『スキームの双対性』の補題 \ref{duality-lemma-affine-flat-Noetherian-gorenstein} から従う。
+
+\medskip\noindent
+第二の証明。補題 \ref{discriminant-lemma-characterize-invertible} により、
+$X$ が体 $k$ のスペクトルである場合に (2) と (3) の同値性を示せば十分である。
+このとき $Y = \Spec(B)$ であり、$B$ は有限 $k$-代数である。
+この場合、次数 $0$ に置いた
+$\omega_{B/A} = \omega_{B/k} = \Hom_k(B, k)$ は $B$ の双対化複体である。
+『双対化複体』の補題 \ref{dualizing-lemma-dualizing-finite} を参照せよ。
+従って同値性は『双対化複体』の補題 \ref{dualizing-lemma-gorenstein} から従う。
+\end{proof}
+
+\begin{remark}
+\label{discriminant-remark-collect-results-qf-gorenstein}
+$f : Y \to X$ を Noether スキームの準有限 Gorenstein 射とする。
+$\mathfrak D_f \subset \mathcal{O}_Y$ を差イデアルとし、
+$R \subset Y$ を $\mathfrak D_f$ で切り出される閉部分スキームとする。
+このとき
+\begin{enumerate}
+\item $\mathfrak D_f$ は局所単項イデアルである。
+\item $R$ は局所単項閉部分スキームである。
+\item $\mathfrak D_f$ はアフィン局所的に Noether の差イデアルと一致する。
+\item $R$ の形成は基底変換と可換である。
+\item $f$ が有限ならば、$R$ のノルムは $f$ の判別式である。
+\item $f$ が $Y$ の随伴点で \'etale ならば、
+$R$ は有効 Cartier 因子であり、
+$\omega_{Y/X} = \mathcal{O}_Y(R)$ である。
+\end{enumerate}
+これは補題 \ref{discriminant-lemma-flat-gorenstein-agree-noether} および \ref{discriminant-lemma-base-change-different}, および
+\ref{discriminant-lemma-norm-different-is-discriminant} から従う。
+\end{remark}
+
+\begin{remark}
+\label{discriminant-remark-collect-results-qf-gorenstein-two}
+$S$ を双対化複体 $\omega_S^\bullet$ を備えた Noether スキームとする。
+$f : Y \to X$ を、$S$ 上コンパクト化可能なスキームの準有限
+Gorenstein 射とする。さらに $Y$ と $X$ は Cohen--Macaulay であり、
+$f$ は $Y$ の生成点で \'etale であると仮定する。
+『スキームの双対性』の注意 \ref{duality-remark-CM-morphism-compare-dualizing} と
+注意 \ref{discriminant-remark-collect-results-qf-gorenstein} を組み合わせると、
+$\mathcal{O}_Y$-加群の標準同型
+$$
+\omega_Y = f^*\omega_X \otimes_{\mathcal{O}_Y} \omega_{Y/X} =
+f^*\omega_X \otimes_{\mathcal{O}_Y} \mathcal{O}_Y(R)
+$$
+が得られる。さらに $f$ が有限ならば、同型
+$\mathcal{O}_Y(R) = \omega_{Y/X}$ は、大域切断
+$\tau_{Y/X} \in H^0(Y, \omega_{Y/X})$ から来る。
+これは双対性を介して写像
+$\text{Trace}_f : f_*\mathcal{O}_Y \to \mathcal{O}_X$ に対応する。
+補題 \ref{discriminant-lemma-compare-trace} を参照せよ。
+\end{remark}

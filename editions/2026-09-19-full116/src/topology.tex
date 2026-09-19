@@ -1,0 +1,5589 @@
+% Generated mechanically from frozen input inputs/p01/ja/topology.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{4}
+\chapter{位相}
+
+
+
+\phantomsection
+\label{topology-section-phantom}
+
+
+\section{序論}
+\label{topology-section-introduction}
+
+\noindent
+本章では、位相空間論の基礎を説明する。
+参考文献として \cite{Engelking} がある。
+
+\section{基本概念}
+\label{topology-section-topology-basic}
+
+\noindent
+以下に位相空間論の基本概念を列挙する。これらの概念のうち、いくつかは
+後続の本文でより詳しく論じ、いくつかはこの一覧の中で定義するが、
+それ以外は基本的なものとして定義しない。斜体で示した概念の大半に
+馴染みがない場合には、先へ進む前に位相空間論の入門書を参照することを
+勧める。
+
+\begin{enumerate}
+\item
+\label{topology-item-space}
+$X$ は{\it 位相空間}である、
+\item
+\label{topology-item-point}
+$x\in X$ は{\it 点}である、
+\item
+\label{topology-item-locally-closed}
+$E \subset X$ は{\it 局所閉}部分集合である、
+\item
+\label{topology-item-closed-point}
+$x\in X$ は{\it 閉点}である、
+\item
+\label{topology-item-dense}
+$E \subset X$ は{\it 稠密}部分集合である、
+\item
+\label{topology-item-continuous}
+$f : X_1 \to X_2$ は{\it 連続}である、
+\item
+\label{topology-item-upper-semi-continuous}
+拡張実数値関数 $f : X \to \mathbf{R} \cup \{\infty, -\infty\}$ が
+{\it 上半連続}であるとは、すべての $a \in \mathbf{R}$ に対して
+$\{x \in X \mid f(x) < a\}$ が開であることをいう、
+\item
+\label{topology-item-lower-semi-continuous}
+拡張実数値関数 $f : X \to \mathbf{R} \cup \{\infty, -\infty\}$ が
+{\it 下半連続}であるとは、すべての $a \in \mathbf{R}$ に対して
+$\{x \in X \mid f(x) > a\}$ が開であることをいう、
+\item 位相空間の連続写像 $f : X \to Y$ が{\it 開写像}であるとは、
+開集合 $U \subset X$ に対して $f(U)$ が $Y$ で開であることをいう、
+\item 位相空間の連続写像 $f : X \to Y$ が{\it 閉写像}であるとは、
+閉集合 $Z \subset X$ に対して $f(Z)$ が $Y$ で閉であることをいう、
+\item
+\label{topology-item-neighbourhood}
+{\it $x \in X$ の近傍}とは、$x$ を含む開集合を含む任意の部分集合
+$E \subset X$ のことである、
+\item
+\label{topology-item-induced-topology}
+部分集合 $E \subset X$ 上の{\it 相対位相}、
+\item
+\label{topology-item-covering}
+$\mathcal{U} : U = \bigcup_{i \in I} U_i$ は $U$ の
+{\it 開被覆}である（注意：任意の $U_i$ が空であることを許し、
+$U$ が空の場合には $I$ が空集合であることさえ許す）、
+\item
+\label{topology-item-subcover}
+(\ref{topology-item-covering}) の被覆の{\it 部分被覆}とは、
+$I' \subset I$ であるような開被覆
+$\mathcal{U}' : U = \bigcup_{i \in I'} U_i$ のことである、
+\item
+\label{topology-item-refinement}
+開被覆 $\mathcal{V}$ が開被覆 $\mathcal{U}$ の{\it 細分}である
+（$\mathcal{V} : U = \bigcup_{j \in J} V_j$ および
+$\mathcal{U} : U = \bigcup_{i \in I} U_i$ のとき、これは各 $V_j$ が
+いずれか一つの $U_i$ に完全に含まれることを意味する）、
+\item
+\label{topology-item-fundamental-system}
+{\it $\{ E_i \}_{i \in I}$ は $X$ における $x$ の基本近傍系である}、
+\item
+\label{topology-item-Hausdorff}
+位相空間 $X$ が{\it Hausdorff} または{\it 分離的}であるとは、
+相異なる任意の二点 $x, y \in X$ に対して、互いに素な開集合
+$U, V \subset X$ が存在し、$x \in U$、$y \in V$ となることをいう、
+\item 二つの位相空間の{\it 積}、
+\label{topology-item-product}
+\item
+\label{topology-item-fibre-product}
+連続写像 $f : X \to Y$ と $g : Z \to Y$ の組の
+{\it ファイバー積 $X \times_Y Z$}、
+\item
+\label{topology-item-discrete-indiscrete}
+集合上の{\it 離散位相}および{\it 密着位相}、
+\item など。
+\end{enumerate}
+
+
+
+\section{Hausdorff 空間}
+\label{topology-section-Hausdorff}
+
+\noindent
+位相空間の圏は有限積をもつ。
+
+\begin{lemma}
+\label{topology-lemma-Hausdorff}
+$X$ を位相空間とする。次の条件は同値である。
+\begin{enumerate}
+\item $X$ は Hausdorff である。
+\item 対角線 $\Delta(X) \subset X \times X$ は閉である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$ が Hausdorff であると仮定する。
+$(x, y) \not \in \Delta(X)$、すなわち $x \neq y$ とする。
+$x \in U$ および $y \in V$ であるような、互いに素な $X$ の開集合
+$U$ と $V$ が存在する。このとき $U \times V \subset
+(X \times X) \setminus \Delta(X) $ である。したがって
+$(X \times X) \setminus \Delta(X)$ は $ X \times X$ の開集合であり、
+これは対角線 $\Delta(X) \subset X \times X$ が $X \times X$ で
+閉であることと同値である。逆も同様である。
+補集合 $(X \times X) \setminus \Delta(X)$ は、ちょうど
+$ x \neq y$ であるような $(x, y) \in X\times X$ からなる。
+したがって $\Delta(X) \subset X \times X$ が閉ならば、
+積位相の定義により、そのような各 $(x, y)$ に対して、
+$(x, y) \in U \times V$ かつ
+$(U \times V)\cap \Delta(X) = \emptyset$ であるような開集合
+$U, V \subset X$ が存在する。言い換えると、
+$x \in U$、$y \in V$、かつ $U \cap V = \emptyset$ である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-graph-closed}
+\begin{slogan}
+Hausdorff 空間への写像のグラフは閉である。
+\end{slogan}
+$f : X \to Y$ を位相空間の連続写像とする。
+$Y$ が Hausdorff ならば、$f$ のグラフは $X \times Y$ で閉である。
+\end{lemma}
+
+\begin{proof}
+このグラフは写像 $X \times Y \to Y \times Y$ による対角線の逆像である。
+したがって、補題 \ref{topology-lemma-Hausdorff} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-section-closed}
+$f : X \to Y$ を位相空間の連続写像とする。
+$s : Y \to X$ を $f \circ s = \text{id}_Y$ を満たす連続写像とする。
+$X$ が Hausdorff ならば、$s(Y)$ は閉である。
+\end{lemma}
+
+\begin{proof}
+$s(Y) = \{x \in X \mid x = s(f(x))\}$ であるから、
+補題 \ref{topology-lemma-Hausdorff} より従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-fibre-product-closed}
+$X \to Z$ および $Y \to Z$ を位相空間の連続写像とする。
+$Z$ が Hausdorff ならば、$X \times_Z Y$ は $X \times Y$ で閉である。
+\end{lemma}
+
+\begin{proof}
+$X \times_Z Y$ は $X \times Y \to Z \times Z$ による
+$\Delta(Z)$ の逆像であるから、補題 \ref{topology-lemma-Hausdorff} より従う。
+\end{proof}
+
+\section{分離写像}
+\label{topology-section-separated}
+
+\noindent
+定義といくつかの簡単な補題を述べる。
+
+\begin{definition}
+\label{topology-definition-separated}
+位相空間の連続写像 $f : X \to Y$ が{\it 分離的}であるとは、対角写像
+$\Delta : X \to X \times_Y X$ が閉写像であることをいう。
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-separated}
+$f : X \to Y$ を位相空間の連続写像とする。次の条件は同値である。
+\begin{enumerate}
+\item $f$ は分離的である。
+\item $\Delta(X) \subset X \times_Y X$ は閉部分集合である。
+\item $Y$ の同じ点に写る相異なる点 $x, x' \in X$ に対して、
+$x$ と $x'$ の互いに素な開近傍が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$ が分離的ならば、定義 \ref{topology-definition-separated} により $\Delta$ は
+閉写像である。$X$ は $X$ の閉集合なので、$\Delta(X)$ は
+$ X\times_Y X $ で閉である。したがって (1) から (2) が従う。
+
+\medskip\noindent
+$\Delta(X) \subset X \times_Y X$ が閉部分集合であると仮定し、その補開集合を
+$U$ と書く。このとき、$W \cap (X \times_Y X) = U$ を満たす開集合
+$W \subset X \times X$ が存在する。ところが積位相の定義により、
+$(x, x') \in W \cap (X \times_Y X)$ ならば、$x \in V$、
+$x' \in V'$、かつ $V \times V' \subset W$ であるような $X$ の開集合
+$V$ と $V'$ が存在する。もし $V \cap V' \neq \emptyset$ ならば、
+$z \in V \cap V'$ となる点が存在する。しかし
+$(z, z) \in X \times_Y X$ なので、
+$(z,z) \in (V \times V') \cap (X\times_Y X) \subset U$ となり、矛盾する。
+ゆえに $V \cap V' = \emptyset $ であり、$x$ と $x'$ の互いに素な
+二つの開近傍が得られる。これで (2) から (3) が従う。
+
+\medskip\noindent
+最後に、$Y$ の同じ点に写る相異なる点 $x, x' \in X$ に対して、
+$x$ と $x'$ の互いに素な開近傍が存在すると仮定する。
+$F$ を $X$ の閉集合とする。$\Delta(F)$ が $X \times_Y X$ の
+閉部分集合であることを示そう。
+$(x, x') \in X \times_Y X$ を $\Delta(F)$ に含まれない点とする。
+このとき $x \not = x'$ または $x \not \in F$ である。
+前者の場合、$x, x'$ の互いに素な開近傍 $V, V' \subset X$ を選ぶと、
+$(V \times V') \cap X \times_Y X$ は $(x, x')$ の開近傍であり、
+$\Delta(F)$ と交わらない。後者の場合、
+$((X \setminus F) \times X) \cap X \times_Y X$ は $(x, x')$ の
+開近傍であり、$\Delta(F)$ と交わらない。これで (3) から (1) が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-from-hausdorff}
+$f : X \to Y$ を位相空間の連続写像とする。
+$X$ が Hausdorff ならば、$f$ は分離的である。
+\end{lemma}
+
+\begin{proof}
+$\Delta(X)$ が $X \times X$ で閉ならば $\Delta(X)$ は
+$X \times_Y X$ でも閉であるから、補題 \ref{topology-lemma-separated} および
+\ref{topology-lemma-Hausdorff} より明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-base-change-separated}
+$f : X \to Y$ および $Y' \to Y$ を位相空間の連続写像とする。
+$f$ が分離的ならば、$f' : Y' \times_Y X \to Y'$ も分離的である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-separated} の特徴づけ (2) から従う。
+実際、$X' = Y' \times_Y X$ とおくと、ファイバー積
+$X' \times_{Y'} X'$ における対角線 $\Delta(X')$ は、
+$X \times_Y X$ における $\Delta(X)$ の逆像である。
+\end{proof}
+
+
+
+
+\section{開基}
+\label{topology-section-bases}
+
+\noindent
+位相空間の開基に関する基本事項を述べる。
+
+\begin{definition}
+\label{topology-definition-base}
+$X$ を位相空間とする。$X$ の部分集合族 $\mathcal{B}$ が
+{\it $X$ の位相の開基}、または{\it $X$ の位相の基底}であるとは、
+次の条件を満たすことをいう。
+\begin{enumerate}
+\item すべての $B \in \mathcal{B}$ は $X$ で開である。
+\item 任意の開集合 $U \subset X$ と任意の $x \in U$ に対して、
+$x \in B \subset U$ を満たす元 $B \in \mathcal{B}$ が存在する。
+\end{enumerate}
+\end{definition}
+
+\noindent
+次の補題を用いて位相を定義することがある。
+
+\begin{lemma}
+\label{topology-lemma-make-base}
+$X$ を集合とし、$\mathcal{B}$ を部分集合族とする。
+$X = \bigcup_{B \in \mathcal{B}} B$ であると仮定する。また、
+$B_1, B_2 \in \mathcal{B}$ かつ $x \in B_1 \cap B_2$ ならば、
+$x \in B_3 \subset B_1 \cap B_2$ を満たす
+$B_3 \in \mathcal{B}$ が存在すると仮定する。
+このとき、$\mathcal{B}$ を開基とする $X$ 上の位相が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+$\sigma(\mathcal B)$ を、$\mathcal B$ の元の和集合として書ける
+$X$ の部分集合全体とする。$\sigma(\mathcal{B})$ が位相であることを示す。
+実際、空集合は空な和集合として $\sigma(\mathcal{B})$ の元であり、
+$X$ は $\mathcal{B}$ のすべての元の和集合として
+$\sigma(\mathcal{B})$ の元である。$\sigma(\mathcal{B})$ が和集合をとる
+操作で閉じていることは明らかである。最後に
+$U, V \in \sigma(\mathcal{B})$ とし、すべての $i \in I$ と $j \in J$ に
+対して $U_i, V_j \in \mathcal{B}$ であるように
+$U = \bigcup_{i \in I} U_i$ および $V = \bigcup_{j \in J} V_j$ と書く。
+すると
+$$
+U \cap V = \bigcup\nolimits_{i \in I, j \in J}
+U_i \cap V_j
+$$
+である。補題の仮定により $U_i \cap V_j \in \sigma(\mathcal{B})$ なので、
+$U \cap V$ も同様である。ゆえに $\sigma(\mathcal{B})$ は位相である。
+定義 \ref{topology-definition-base} の性質 (1) と (2) は、この位相について
+直ちに成り立つ。この位相の一意性を示すため、$\mathcal B$ を開基とする
+$X$ 上の位相を $\mathcal T$ とする。もちろん、定義
+\ref{topology-definition-base} の (1) により $\mathcal{B}$ の各元は
+$\mathcal{T}$ に属するので、$\sigma(\mathcal{B}) \subset \mathcal{T}$ である。
+逆に、定義 \ref{topology-definition-base} の (2) により $\mathcal{T}$ の各元は
+$\mathcal{B}$ の元の和集合である。すなわち
+$\mathcal{T} \subset \sigma(\mathcal{B})$ である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-refine-covering-basis}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の開基とする。
+$\mathcal{U} : U = \bigcup_i U_i$ を $U \subset X$ の開被覆とする。
+各 $V_j$ が開基 $\mathcal{B}$ の元であり、かつ $\mathcal{U}$ の細分で
+あるような開被覆 $U = \bigcup V_j$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$ x \in U = \bigcup_{i\in I} U_i $ ならば、
+$ x \in U_{i_x} $ となる $ i_x \in I $ が存在する。
+したがって、$ x \in B_{i_x} \subset U_{i_x}$ を満たす
+$ B_{i_x} \in \mathcal{B}$ が存在する。
+$J = \{i_x | x \in U\}$ とおき、$j = i_x \in J$ に対して
+$V_j = B_{i_x}$ とおく。これにより、所望の
+$\{V_j\}_{j \in J}$ による $U$ の開被覆が得られる。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-subbase}
+$X$ を位相空間とする。$X$ の部分集合族 $\mathcal{B}$ が
+{\it $X$ の位相の準開基}、または{\it $X$ の位相の部分基底}であるとは、
+$\mathcal{B}$ の元の有限交叉が $X$ の位相の開基をなすことをいう。
+\end{definition}
+
+\noindent
+特に、$\mathcal{B}$ の各元は開である。
+
+\begin{lemma}
+\label{topology-lemma-subbase}
+$X$ を集合とする。$X$ の任意の部分集合族 $\mathcal{B}$ に対して、
+$\mathcal{B}$ を準開基とする $X$ 上の位相が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+規約により $\bigcap_\emptyset B = X $ とする。
+したがって、$\mathcal B$ の元の有限交叉全体に
+補題 \ref{topology-lemma-make-base} を適用できる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-create-map-from-subcollection}
+$X$ を位相空間とし、$\mathcal{B}$ を $X$ の開集合族とする。
+$X = \bigcup_{U \in \mathcal{B}} U$ であり、かつ
+$U, V \in \mathcal{B}$ に対して
+$U \cap V = \bigcup_{W \in \mathcal{B}, W \subset U \cap V} W$
+であると仮定する。このとき、次の性質を満たす位相空間の連続写像
+$f : X \to Y$ が存在する。
+\begin{enumerate}
+\item $U \in \mathcal{B}$ に対して像 $f(U)$ は開である。
+\item $U \in \mathcal{B}$ に対して $f^{-1}(f(U)) = U$ である。
+\item 開集合 $f(U)$、$U \in \mathcal{B}$ は $Y$ の位相の開基をなす。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$ の点上の同値関係 $\sim$ を次の規則で定義する。
+$$
+x \sim y \Leftrightarrow
+(\forall U \in \mathcal{B} : x \in U \Leftrightarrow y \in U)
+$$
+$Y$ を同値類全体の集合とし、$f : X \to Y$ を自然な写像とする。
+構成により (2) が成り立つ。$\mathcal{B}$ に関する仮定は、
+部分集合 $f(U)$、$U \in \mathcal{B}$ の集合について、
+補題 \ref{topology-lemma-make-base} の仮定と正確に対応する。
+したがって、(3) を満たす $Y$ 上の位相が一意に存在する。
+このとき (1) も明らかである。
+\end{proof}
+
+
+
+
+
+
+\section{商位相的写像}
+\label{topology-section-submersive}
+
+\noindent
+$X$ を位相空間、$E \subset X$ を部分集合とするとき、通常は $E$ に
+{\it 相対位相}を入れる。
+
+\begin{lemma}
+\label{topology-lemma-induced}
+$X$ を位相空間、$Y$ を集合とし、
+$f : Y \to X$ を集合の単射とする。$Y$ 上の相対位相は、
+次の各条件によって特徴づけられる位相である。
+\begin{enumerate}
+\item それは $f$ が連続となる $Y$ 上の最弱の位相である。
+\item $Y$ の開部分集合は、$U \subset X$ が開であるときの
+$f^{-1}(U)$ である。
+\item $Y$ の閉部分集合は、$Z \subset X$ が閉であるときの
+$f^{-1}(Z)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+集合 $\mathcal{T} = \{f^{-1}(U) | U \subset X \text{ open}\}$ は
+$Y$ 上の位相である。まず、$\emptyset = f^{-1}(\emptyset)$ および
+$f^{-1}(X) = Y$ である。したがって $\mathcal{T}$ は
+$\emptyset$ と $Y$ を含む。
+
+\medskip\noindent
+$V_i \in \mathcal{T}$ である開部分集合族 $\{V_i\}_{i \in I}$ をとり、
+$X$ の開部分集合 $U_i$ を用いて $V_i = f^{-1}(U_i)$ と書く。このとき
+$$
+\bigcup\nolimits_{i\in I} V_i =
+\bigcup\nolimits_{i\in I} f^{-1}(U_i) =
+f^{-1}\left(\bigcup\nolimits_{i\in I} U_i\right)
+$$
+である。$\bigcup_{i\in I} U_i$ は $X$ で開なので、
+$\bigcup_{i\in I} V_i \in \mathcal{T}$ である。
+次に $V_1, V_2 \in \mathcal{T}$ とする。$X$ で開であり、
+$V_1 = f^{-1}(U_1)$ および $V_2 = f^{-1}(U_2)$ を満たす
+$U_1, U_2$ が存在する。このとき
+$$
+V_1 \cap V_2 = f^{-1}(U_1) \cap f^{-1}(U_2) = f^{-1}(U_1 \cap U_2)
+$$
+である。$U_1 \cap U_2$ は $X$ で開なので、
+$V_1 \cap V_2 \in \mathcal{T}$ である。
+
+\medskip\noindent
+$f$ が連続となる $Y$ 上の任意の位相は、連続写像の定義により
+$\mathcal{T}$ を含む。したがって $\mathcal{T}$ は確かに、
+$f$ が連続となる $Y$ 上の最弱の位相である。
+これで (1) と (2) が同値であることが示された。
+
+\medskip\noindent
+(2) と (3) の同値性は、すべての部分集合 $E \subset X$ に対する等式
+$f^{-1}(X \setminus E) = Y \setminus f^{-1}(E)$ から従う。
+\end{proof}
+
+\noindent
+双対的に、$X$ が位相空間で $X \to Y$ が集合の全射ならば、
+$Y$ に{\it 商位相}を入れることができる。
+
+\begin{lemma}
+\label{topology-lemma-quotient}
+$X$ を位相空間、$Y$ を集合とし、$f : X \to Y$ を集合の全射とする。
+$Y$ 上の商位相は、次の各条件によって特徴づけられる位相である。
+\begin{enumerate}
+\item それは $f$ が連続となる $Y$ 上の最強の位相である。
+\item $Y$ の部分集合 $V$ が開であることと、$f^{-1}(V)$ が開である
+こととは同値である。
+\item $Y$ の部分集合 $Z$ が閉であることと、$f^{-1}(Z)$ が閉である
+こととは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+集合 $\mathcal{T} = \{V\subset Y | f^{-1}(V) \text{ is open}\}$ は
+$Y$ 上の位相である。まず $\emptyset = f^{-1}(\emptyset)$ および
+$f^{-1}(Y) = X$ である。したがって $\mathcal{T}$ は
+$\emptyset$ と $Y$ を含む。
+
+\medskip\noindent
+この位相の元の族 $(V_i)_{i \in I}$、$V_i \in \mathcal{T}$ をとる。
+このとき
+$$
+\bigcup\nolimits_{i\in I} f^{-1}(V_i) =
+f^{-1}\left(\bigcup\nolimits_{i\in I} V_i\right)
+$$
+である。$\bigcup_{i\in I}f^{-1}(V_i)$ は $X$ で開なので、
+$\bigcup_{i\in I} V_i \in \mathcal{T}$ である。
+さらに $V_1, V_2 \in \mathcal{T}$ ならば
+$$
+f^{-1}(V_1) \cap f^{-1}(V_2) = f^{-1}(V_1 \cap V_2)
+$$
+である。$f^{-1}(V_1) \cap f^{-1}(V_2)$ は $X$ で開なので、
+$V_1 \cap V_2 \in \mathcal{T}$ である。
+
+\medskip\noindent
+最後に、$f$ が連続となる $Y$ 上の位相は連続関数の定義により
+$\mathcal{T}$ に含まれる。ゆえに $\mathcal{T}$ は
+$f$ が連続となる $Y$ 上の最強の位相である。
+これで (1) と (2) が同値であることが示された。
+
+\medskip\noindent
+最後に、(2) と (3) の同値性は、すべての部分集合 $E \subset X$ に対する
+$f^{-1}(X\setminus E) = Y \setminus f^{-1}(E)$ から従う。
+\end{proof}
+
+\noindent
+$f : X \to Y$ を位相空間の連続写像とする。このとき集合の写像の分解
+$X \to f(X) \to Y$ が得られる。$f(X)$ には、全射 $X \to f(X)$ から来る
+商位相、または単射 $f(X) \to Y$ から来る相対位相を入れることができる。
+写像
+$$
+(f(X), \text{quotient topology})
+\longrightarrow
+(f(X), \text{induced topology})
+$$
+は連続である。
+
+\begin{definition}
+\label{topology-definition-submersive}
+$f : X \to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item $f(X)$ 上の相対位相と商位相が一致するとき（上の議論を参照）、
+$f$ を{\it 位相空間の厳密写像}と呼ぶ。
+\item $f$ が全射かつ厳密であるとき、$f$ を
+{\it 商位相的}\footnote{これは微分多様体の間の沈め込みという概念とは
+大きく異なる！ 「submersive」の代わりに「strict and surjective」を
+用いる方がよいと思われる。}と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+したがって、連続写像 $f : X \to Y$ が商位相的であるとは、$f$ が全射で、
+任意の $T \subset Y$ に対して、$T$ が開または閉であることと
+$f^{-1}(T)$ がそれぞれそうであることが同値であることをいう。
+言い換えると、$Y$ は全射 $X \to Y$ に関する商位相をもつ。
+
+\begin{lemma}
+\label{topology-lemma-open-morphism-quotient-topology}
+$f : X \to Y$ を位相空間の全射な開連続写像とする。
+$T \subset Y$ を部分集合とする。このとき
+\begin{enumerate}
+\item $f^{-1}(\overline{T}) = \overline{f^{-1}(T)}$、
+\item $T \subset Y$ が閉であることと $f^{-1}(T)$ が閉であることは同値である、
+\item $T \subset Y$ が開であることと $f^{-1}(T)$ が開であることは同値であり、
+\item $T \subset Y$ が局所閉であることと $f^{-1}(T)$ が局所閉であることは
+同値である。
+\end{enumerate}
+特に、$f$ は商位相的である。
+\end{lemma}
+
+\begin{proof}
+$\overline{f^{-1}(T)} \subset f^{-1}(\overline{T})$ は明らかである。
+$x \in X$ かつ $x \not \in \overline{f^{-1}(T)}$ とすると、
+$U \cap f^{-1}(T) = \emptyset$ であるような開近傍
+$x \in U \subset X$ が存在する。$f$ は開なので、$f(U)$ は
+$T$ と交わらない $f(x)$ の開近傍である。
+したがって $x \not \in f^{-1}(\overline{T})$ である。これで (1) が従う。
+(2) は (1) から容易に従う。(3) は $f$ が開かつ全射であることから明らかである。
+(4) について、$f^{-1}(T)$ が局所閉ならば
+$f^{-1}(T) \subset \overline{f^{-1}(T)} = f^{-1}(\overline{T})$ は開である。
+そこで写像 $f^{-1}(\overline{T}) \to \overline{T}$ に (3) を適用すると、
+$T$ は $\overline{T}$ で開、すなわち $T$ は局所閉である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-morphism-quotient-topology}
+$f : X \to Y$ を位相空間の全射な閉連続写像とする。
+$T \subset Y$ を部分集合とする。このとき
+\begin{enumerate}
+\item $\overline{T} = f(\overline{f^{-1}(T)})$、
+\item $T \subset Y$ が閉であることと $f^{-1}(T)$ が閉であることは同値である、
+\item $T \subset Y$ が開であることと $f^{-1}(T)$ が開であることは同値であり、
+\item $T \subset Y$ が局所閉であることと
+$f^{-1}(T)$ が局所閉であることは同値である。
+\end{enumerate}
+特に、$f$ は商位相的である。
+\end{lemma}
+
+\begin{proof}
+$\overline{f^{-1}(T)} \subset f^{-1}(\overline{T})$ は明らかである。
+$T \subset f(\overline{f^{-1}(T)}) \subset \overline{T}$ は閉部分集合なので、
+(1) が従う。(2) は $f$ が閉かつ全射であることから明らかである。
+(3) は $T$ の補集合に (2) を適用して従う。
+(4) について、$f^{-1}(T)$ が局所閉ならば
+$f^{-1}(T) \subset \overline{f^{-1}(T)}$ は開である。
+(1) により写像 $\overline{f^{-1}(T)} \to \overline{T}$ は全射なので、
+$f$ が誘導する写像 $\overline{f^{-1}(T)} \to \overline{T}$ に (3) を適用して、
+$T$ は $\overline{T}$ で開、すなわち $T$ は局所閉であると分かる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{連結成分}
+\label{topology-section-connected-components}
+
+\begin{definition}
+\label{topology-definition-connected-components}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $X$ が空でなく、$T_i \subset X$ が開かつ閉であるように
+$X = T_1 \amalg T_2$ と書くたびに $T_1 = \emptyset$ または
+$T_2 = \emptyset$ となるとき、$X$ は{\it 連結}であるという。
+\item $T \subset X$ が $X$ の極大な連結部分集合であるとき、
+$T$ を $X$ の{\it 連結成分}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+空な空間は連結ではない。
+
+\begin{lemma}
+\label{topology-lemma-image-connected-space}
+$f : X \to Y$ を位相空間の連続写像とする。
+$E \subset X$ が連結部分集合ならば、$f(E) \subset Y$ も連結である。
+\end{lemma}
+
+\begin{proof}
+$A \subset f(E)$ を $f(E)$ の開かつ閉な部分集合とする。
+$f$ は連続なので、$f^{-1}(A)$ は $E$ の開かつ閉な部分集合である。
+$E$ は連結だから、$f^{-1}(A) = \emptyset$ または
+$f^{-1}(A) = E$ である。一方、$A\subset f(E)$ なので
+$A = f(f^{-1}(A))$ である。実際、$x\in f(f^{-1}(A))$ ならば、
+$f(y) = x$ を満たす $y\in f^{-1}(A)$ が存在し、
+$y\in f^{-1}(A)$ だから $f(y) \in A$、すなわち $x\in A$ である。
+逆に、$x\in A$ ならば、$A\subset f(E)$ より $f(y) = x$ を満たす
+$y\in E$ が存在する。したがって $y\in f^{-1}(A)$ であり、
+$x\in f(f^{-1}(A))$ となる。ゆえに $A = \emptyset$ または
+$A = f(E)$ であり、$f(E)$ は連結である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-connected-components}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $T \subset X$ が連結ならば、その閉包も連結である。
+\item $X$ の任意の連結成分は閉である（ただし開とは限らない）。
+\item $X$ の任意の連結部分集合は、ただ一つの $X$ の連結成分に含まれる。
+\item $X$ の各点はただ一つの連結成分に含まれる。言い換えると、
+$X$ はその連結成分の非交和である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+連結部分集合 $T$ の閉包を $\overline{T}$ とする。
+$T_i \subset \overline{T}$ が開かつ閉であり、
+$\overline{T} = T_1 \amalg T_2$ であると仮定する。このとき
+$T = (T\cap T_1) \amalg (T \cap T_2)$ である。
+したがって $T$ はその一方に等しく、例えば $T = T_1 \cap T$ とする。
+すると $\overline{T} \subset T_1$ である。これで (1) と (2) が従う。
+
+\medskip\noindent
+$A$ を $X$ の連結部分集合からなる空でない集合とし、
+$\Omega = \bigcap_{T \in A} T$ は空でないと仮定する。
+$E = \bigcup_{T \in A} T$ が連結であると主張する。
+実際、$E$ は $\Omega$ を含むので空でない。
+$E_i$ が $E$ で閉であるように $E = E_1 \amalg E_2$ と書く。
+番号を付け替えれば、$E_1$ は $\Omega$ と交わると仮定できる。
+すると各 $T \in A$ は $E_1$ と交わり、$T$ は連結なので
+$E_1$ に含まれなければならない。したがって $E \subset E_1$ であり、
+主張が証明された。
+
+\medskip\noindent
+$W \subset X$ を空でない連結部分集合とする。$W$ を含む $X$ の
+連結部分集合全体の集合に前段落の結果を適用すると、$E$ は
+$X$ の連結成分であると分かる。これで (3) の存在と一意性が従う。
+
+\medskip\noindent
+$x \in X$ とする。前段落で $W = \{x\}$ とおけば、
+$x$ は $X$ のただ一つの連結成分に含まれると分かる。
+相異なる二つの連結成分は互いに素でなければならない
+（第二段落の結果による）。
+
+\medskip\noindent
+連結成分が開でない例として、積位相を入れた無限積
+$\prod_{n \in \mathbf{N}} \{0, 1\}$ をとればよい。
+その連結成分は一点集合であり、開ではない。
+\end{proof}
+
+\begin{remark}
+\label{topology-remark-quasi-components}
+\begin{reference}
+\cite[Example 6.1.24]{Engelking}
+\end{reference}
+$X$ を位相空間、$x \in X$ を点とする。$Z \subset X$ を $x$ を通る
+$X$ の連結成分とする。$x$ を含む $X$ の開かつ閉な部分集合すべての
+交叉を $E$ とする。明らかに $Z \subset E$ である。
+一般には $Z \not = E$ である。例えば
+$X = \{x, y, z_1, z_2, \ldots\}$ に、すべての $n$ に対する
+$\{z_n\}$、$\{x, z_n, z_{n + 1}, \ldots\}$、および
+$\{y, z_n, z_{n + 1}, \ldots\}$ を開基とする位相を入れる。
+このとき $Z = \{x\}$ かつ $E = \{x, y\}$ である。詳細は省略する。
+\end{remark}
+
+\begin{lemma}
+\label{topology-lemma-connected-fibres-quotient-topology-connected-components}
+$f : X \to Y$ を位相空間の連続写像とする。次を仮定する。
+\begin{enumerate}
+\item $f$ のすべてのファイバーは連結である。
+\item 集合 $T \subset Y$ が閉であることと $f^{-1}(T)$ が閉であることは
+同値である。
+\end{enumerate}
+このとき $f$ は、$X$ の連結成分の集合と $Y$ の連結成分の集合との間の
+全単射を誘導する。
+\end{lemma}
+
+\begin{proof}
+$T \subset Y$ を連結成分とする。補題 \ref{topology-lemma-connected-components} により、
+$T$ は閉である。$f^{-1}(T)$ が連結であることを示せば補題が従う。
+実際、補題 \ref{topology-lemma-image-connected-space} により、$X$ の任意の連結部分集合は
+$Y$ の一つの連結成分へ写るからである。
+$Z_1$、$Z_2$ が閉であり、
+$f^{-1}(T) = Z_1 \amalg Z_2$ であると仮定する。
+任意の $t \in T$ に対して
+$f^{-1}(\{t\}) = Z_1 \cap f^{-1}(\{t\}) \amalg Z_2 \cap f^{-1}(\{t\})$
+である。(1) により $f^{-1}(\{t\})$ は連結なので、
+$f^{-1}(\{t\}) \subset Z_1$ または $f^{-1}(\{t\}) \subset Z_2$ である。
+言い換えると、$f^{-1}(T_i) = Z_i$ であるように
+$T = T_1 \amalg T_2$ と書ける。(2) により $T_i$ は $Y$ で閉である。
+ゆえに、所望のとおり $T_1 = \emptyset$ または $T_2 = \emptyset$ である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-connected-fibres-connected-components}
+$f : X \to Y$ を位相空間の連続写像とする。次を仮定する。
+(a) $f$ は開である。
+(b) $f$ のすべてのファイバーは連結である。
+このとき $f$ は、$X$ の連結成分の集合と $Y$ の連結成分の集合との間の
+全単射を誘導する。
+\end{lemma}
+
+\begin{proof}
+これは補題
+\ref{topology-lemma-connected-fibres-quotient-topology-connected-components}
+の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-finite-fibre-connected-components}
+$f : X \to Y$ を空でない位相空間の連続写像とする。次を仮定する。
+(a) $Y$ は連結である。
+(b) $f$ は開かつ閉である。
+(c) ファイバー $f^{-1}(y)$ が有限集合であるような点 $y\in Y$ が存在する。
+このとき $X$ の連結成分の個数は $|f^{-1}(y)|$ 以下である。
+したがって、$X$ の任意の連結成分 $T$ は開かつ閉であり、
+$f(T)$ は $Y$ の空でない開かつ閉な部分集合なので、$Y$ に等しい。
+\end{lemma}
+
+\begin{proof}
+位相空間 $X$ がある $N \in \mathbf{N}$ に対して少なくとも $N$ 個の
+連結成分をもつならば、帰納法により、$X$ の空でない開かつ閉な部分集合
+$X_1, \ldots , X_N$ を用いた $N$ 個の非交和への分解
+$X = X_1 \amalg \ldots \amalg X_N$ が得られる。
+$f$ は開かつ閉なので、各 $f(X_i)$ は $Y$ の空でない開かつ閉な部分集合であり、
+したがって $Y$ に等しい。特に、各 $1 \leq i \leq N$ に対して
+交叉 $X_i \cap f^{-1}(y)$ は空でない。ゆえに $f^{-1}(y)$ は少なくとも
+$N$ 個の元をもつ。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-totally-disconnected}
+連結成分がすべて一点集合である位相空間を{\it 完全不連結}という。
+\end{definition}
+
+\noindent
+離散空間は完全不連結である。完全不連結空間は離散とは限らない。
+例えば $\mathbf{Q} \subset \mathbf{R}$ は完全不連結だが離散ではない。
+
+\begin{lemma}
+\label{topology-lemma-space-connected-components}
+$X$ を位相空間とする。$\pi_0(X)$ を $X$ の連結成分全体の集合とする。
+$X \to \pi_0(X)$ を、$x \in X$ を $x$ を通る $X$ の連結成分へ写す
+写像とする。$\pi_0(X)$ に商位相を入れる。このとき $\pi_0(X)$ は
+完全不連結空間であり、$X$ から完全不連結空間 $Y$ への任意の連続写像
+$X \to Y$ は $\pi_0(X)$ を経由する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-connected-fibres-quotient-topology-connected-components} により、
+$\pi_0(X)$ の連結成分は一点集合である。第二の主張の証明は省略する。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-locally-connected}
+位相空間 $X$ の各点 $x \in X$ が連結近傍の基本近傍系をもつとき、
+$X$ は{\it 局所連結}であるという。
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-locally-connected}
+$X$ を位相空間とする。$X$ が局所連結ならば、次が成り立つ。
+\begin{enumerate}
+\item $X$ の任意の開部分集合は局所連結である。
+\item $X$ の連結成分は開である。
+\end{enumerate}
+したがって、$X$ の開部分集合の連結成分も開である。
+特に、各点は開な連結近傍からなる基本近傍系をもつ。
+\end{lemma}
+
+\begin{proof}
+各 $x\in X$ に対して、$\mathcal{N}(x)$ を $x$ の連結近傍の基本近傍系と書き、
+$U\subset X$ を $X$ の開部分集合とする。各 $x\in U$ に対して、
+$U$ は $x$ の近傍なので、集合
+$\{V \in \mathcal{N}(x) | V\subset U\}$
+は空でなく、$U$ における $x$ の連結近傍の基本近傍系である。
+したがって $U$ は局所連結であり、(1) が示された。
+
+\medskip\noindent
+$x \in \mathcal{C} \subset X$ とし、$\mathcal{C}$ を $x$ の連結成分とする。
+$X$ は局所連結なので、$x$ の連結近傍 $\mathcal{N}$ が存在する。
+連結成分の定義により $\mathcal{N} \subset \mathcal{C}$ なので、
+$\mathcal{C}$ は $x$ の近傍である。これは $\mathcal{C}$ がその各点の
+近傍であることを意味する。言い換えると $\mathcal{C}$ は開であり、
+(2) が示された。
+\end{proof}
+
+\section{既約成分}
+\label{topology-section-irreducible-components}
+
+\begin{definition}
+\label{topology-definition-irreducible-components}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $X$ が空でなく、$X = Z_1 \cup Z_2$ かつ各 $Z_i$ が閉であるときには
+$X = Z_1$ または $X = Z_2$ となるならば、$X$ は{\it 既約}であるという。
+\item $Z \subset X$ が $X$ の既約部分集合のうち極大であるとき、
+$Z$ を $X$ の{\it 既約成分}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+既約空間が連結であることは明らかである。
+
+\begin{lemma}
+\label{topology-lemma-image-irreducible-space}
+$f : X \to Y$ を位相空間の連続写像とする。
+$E \subset X$ が既約部分集合ならば、$f(E) \subset Y$ も既約である。
+\end{lemma}
+
+\begin{proof}
+$E = X$（すなわち $X$ は既約）かつ $f(E) = Y$（すなわち $f$ は全射）と
+仮定してよい。まず、$X \not = \emptyset$ なので $Y \not = \emptyset$ である。
+次に、$Y = Y_1 \cup Y_2$ で $Y_1$, $Y_2$ が閉であると仮定する。
+このとき $X_i = f^{-1}(Y_i)$ とおけば $X = X_1 \cup X_2$ であり、これらは
+$X$ で閉である。$X$ に関する仮定により $X = X_1$ または $X = X_2$ で
+なければならず、$f$ は全射だから $Y = Y_1$ または $Y = Y_2$ となる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-irreducible}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $T \subset X$ が既約ならば、$X$ におけるその閉包も既約である。
+\item $X$ の任意の既約成分は閉である。
+\item $X$ の任意の既約部分集合は $X$ のある既約成分に含まれる。
+\item $X$ の各点はある既約成分に含まれる。言い換えると、$X$ はその既約成分の
+合併である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+既約部分集合 $T$ の閉包を $\overline{T}$ とする。
+$\overline{T} = Z_1 \cup Z_2$ で各 $Z_i \subset \overline{T}$ が閉ならば、
+$T = (T\cap Z_1) \cup (T \cap Z_2)$ であるから、$T$ はこの二つのうち一方に
+等しい。例えば $T = Z_1 \cap T$ としてよい。したがって明らかに
+$\overline{T} \subset Z_1$ である。これで (1) が示された。
+(2) は (1) と既約成分の定義から直ちに従う。
+
+\medskip\noindent
+$T \subset X$ を既約とする。$T \subset T' \subset X$ を満たす既約部分集合
+全体の集合を $A$ とする。$T \in A$ なので $A$ は空でない。
+$A$ には包含関係から定まる半順序
+$T' \leq T'' \Leftrightarrow T' \subset T''$ がある。
+極大全順序部分集合 $A' \subset A$ を選び、
+$E = \bigcup_{T' \in A'} T'$ とおく。$E$ が既約であることを示す。
+実際、$E =  Z_1 \cup Z_2$ が $E$ の二つの閉部分集合の合併であるとする。
+各 $T' \in A'$ について、$T'$ の既約性により
+$T' \subset Z_1$ または $T' \subset Z_2$ である。
+ある $T'_0 \in A'$ に対して $T'_0 \not\subset Z_1$ であると仮定する
+（そのようなものがなければ、すでに結論を得ている）。
+すると $A'$ は全順序集合なので、任意の $T' \in A'$ について直ちに
+$T' \subset Z_2$ と分かる。ゆえに $E = Z_2$ である。
+これで (3) が示された。一点空間は既約なので、(4) は (3) の直ちの帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-pick-irreducible-components}
+$X$ を位相空間とし、
+$X = \bigcup_{i = 1, \ldots, n} X_i$ と仮定する。ここで各 $X_i$ は $X$ の
+既約閉部分集合であり、どの $X_i$ も他の成員の合併には含まれないとする。
+このとき、各 $X_i$ は $X$ の既約成分であり、$X$ の各既約成分は
+$X_i$ のいずれかである。
+\end{lemma}
+
+\begin{proof}
+$Y$ を $X$ の既約成分とする。
+$Y = \bigcup_{i = 1, \ldots, n} (Y \cap X_i)$ と書く。
+$X_i$ は $X$ で閉なので、各 $Y \cap X_i$ は $Y$ で閉である。
+$Y$ の既約性により、$Y$ は $Y \cap X_i$ のいずれかに等しい。
+すなわち $Y \subset X_i$ である。既約成分の極大性により $Y = X_i$ を得る。
+
+\medskip\noindent
+逆に、一つの $X_i$ を取る。補題 \ref{topology-lemma-irreducible} により、これは
+$X$ のある既約成分 $Y$ に含まれる。前段落により、ある $j$ に対して
+$Y = X_j$ である。したがって $X_i \subset X_j$ であり、もとの合併には
+冗長な成員がないから $X_i = X_j$ となる。これは既約成分である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-surjective-continuous-irreducible-components}
+$f : X \to Y$ を位相空間の全射連続写像とする。
+$X$ の既約成分が有限個、例えば $n$ 個ならば、$Y$ の既約成分は
+$\leq n$ 個である。
+\end{lemma}
+
+\begin{proof}
+$X_1, \ldots, X_n$ を $X$ の既約成分とする。
+補題 \ref{topology-lemma-image-irreducible-space} および \ref{topology-lemma-irreducible} により、
+$f(X_i)$ の閉包 $Y_i \subset Y$ は既約である。
+$f$ は全射なので、$Y$ は $Y_i$ たちの合併である。
+$Y = \bigcup_{i \in I} Y_i$ となる最小の部分集合
+$I \subset \{1, \ldots, n\}$ を選ぶことができる。
+補題 \ref{topology-lemma-pick-irreducible-components} を適用すると、$i \in I$ に対する
+$Y_i$ が $Y$ の既約成分であることが分かる。
+\end{proof}
+
+\noindent
+一点集合は既約である。したがって $x \in X$ が点ならば、閉包
+$\overline{\{x\}}$ は $X$ の既約閉部分集合である。
+
+\begin{definition}
+\label{topology-definition-generic-point}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $Z \subset X$ を既約閉部分集合とする。
+$Z = \overline{\{\xi\}}$ を満たす点 $\xi \in Z$ を $Z$ の{\it 生成点}という。
+\item 任意の $x, x' \in X$ に対して、$x \not = x'$ ならば二点のちょうど一方を
+含む $X$ の閉部分集合が存在するとき、空間 $X$ を{\it コルモゴロフ}という。
+\item すべての既約閉部分集合が生成点をもつとき、空間 $X$ を
+{\it 準ソバー}という。
+\item すべての既約閉部分集合が一意な生成点をもつとき、空間 $X$ を
+{\it ソバー}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+位相空間 $X$ がコルモゴロフ、準ソバー、またはソバーであることは、それぞれ
+$X$ から $X$ の既約閉部分集合全体への写像
+$x\mapsto\overline{\{x\}}$ が単射、全射、または全単射であることと同値である。
+したがって、位相空間がソバーであることは、準ソバーかつコルモゴロフであることと
+同値である。
+
+\begin{lemma}
+\label{topology-lemma-sober-subspace}
+$X$ を位相空間とし、$Y\subset X$ とする。
+\begin{enumerate}
+\item $X$ がコルモゴロフならば $Y$ もコルモゴロフである。
+\item $Y$ が $X$ で局所閉であると仮定する。$X$ が準ソバーならば
+$Y$ も準ソバーである。
+\item $Y$ が $X$ で局所閉であると仮定する。$X$ がソバーならば
+$Y$ もソバーである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$X$ はコルモゴロフであると仮定する。
+$x,y\in Y$ かつ $x\neq y$ とする。このとき
+$\overline{\overline{\{x\}}\cap Y}=\overline{\{x\}}\neq\overline{\{y\}}=
+\overline{\overline{\{y\}}\cap Y}$ である。したがって
+$\overline{\{x\}}\cap Y\neq\overline{\{y\}}\cap Y$ である。
+ゆえに $Y$ はコルモゴロフである。
+
+\medskip\noindent
+(2) の証明。$X$ は準ソバーであると仮定する。
+$Y$ が閉の場合と $Y$ が開の場合を考えれば十分である。
+まず $Y$ が閉であるとする。$Z$ を $Y$ の既約閉部分集合とする。
+すると $Z$ は $X$ の既約閉部分集合である。したがって
+$\overline{\{x\}} = Z$ を満たす $x \in Z$ が存在する。
+このとき $\overline{\{x\}} \cap Y = Z$ である。ゆえに $Y$ は準ソバーである。
+次に $Y$ が開であるとする。$Z$ を $Y$ の既約閉部分集合とする。
+すると $\overline{Z}$ は $X$ の既約閉部分集合である。したがって
+$\overline{\{x\}}=\overline{Z}$ を満たす $x \in \overline{Z}$ が存在する。
+$x\notin Y$ ならば
+$Z=Z\cap Y\subset\overline{Z}\cap Y=\overline{\{x\}}\cap Y=\emptyset$
+となり矛盾する。ゆえに $x\in Y$ である。このとき
+$Z=\overline{Z}\cap Y=\overline{\{x\}}\cap Y$ である。
+したがって $Y$ は準ソバーである。
+
+\medskip\noindent
+(3) の証明。(1) と (2) から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-sober-local}
+$X$ を位相空間とし、$(X_i)_{i\in I}$ を $X$ の被覆とする。
+\begin{enumerate}
+\item すべての $i\in I$ について $X_i$ が $X$ で局所閉であると仮定する。
+このとき、$X$ がコルモゴロフであることと、すべての $i\in I$ について
+$X_i$ がコルモゴロフであることは同値である。
+\item すべての $i\in I$ について $X_i$ が $X$ で開であると仮定する。
+このとき、$X$ が準ソバーであることと、すべての $i\in I$ について
+$X_i$ が準ソバーであることは同値である。
+\item すべての $i\in I$ について $X_i$ が $X$ で開であると仮定する。
+このとき、$X$ がソバーであることと、すべての $i\in I$ について
+$X_i$ がソバーであることは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$X$ がコルモゴロフならば、補題 \ref{topology-lemma-sober-subspace} により
+すべての $i\in I$ について $X_i$ もコルモゴロフである。
+逆に、すべての $i\in I$ について $X_i$ がコルモゴロフであると仮定する。
+$x,y\in X$ かつ $\overline{\{x\}}=\overline{\{y\}}$ とする。
+$x\in X_i$ となる $i\in I$ が存在する。$X_i$ が $U$ の閉部分集合となるような
+開部分集合 $U\subset X$ が存在する。$y\notin U$ ならば
+$x\in\overline{\{x\}}\cap U=\overline{\{y\}}\cap U=\emptyset$ となり矛盾する。
+したがって $y\in U$ である。すると
+$y\in\overline{\{y\}}\cap U=\overline{\{x\}}\cap U\subset X_i$ である。
+よって $y\in X_i$ である。さらに
+$\overline{\{x\}}\cap X_i=\overline{\{y\}}\cap X_i$ である。
+$X_i$ はコルモゴロフなので $x=y$ を得る。ゆえに $X$ はコルモゴロフである。
+
+\medskip\noindent
+(2) の証明。$X$ が準ソバーならば、補題 \ref{topology-lemma-sober-subspace} により
+すべての $i\in I$ について $X_i$ も準ソバーである。
+逆に、すべての $i\in I$ について $X_i$ が準ソバーであると仮定する。
+$Y$ を $X$ の既約閉部分集合とする。$Y\neq\emptyset$ なので、
+$X_i\cap Y\neq\emptyset$ となる $i\in I$ が存在する。
+$X_i$ は $X$ で開だから、$X_i\cap Y$ は $Y$ の空でない開部分集合であり、
+したがって既約かつ $Y$ で稠密である。また $X_i\cap Y$ は $X_i$ の
+既約閉部分集合である。$X_i$ は準ソバーなので、
+$X_i\cap Y=\overline{\{x\}}\cap X_i\subset\overline{\{x\}}$ を満たす
+$x\in X_i\cap Y$ が存在する。$X_i\cap Y$ は $Y$ で稠密で、$Y$ は $X$ で
+閉だから、
+$Y=\overline{X_i\cap Y}\cap Y\subset\overline{X_i\cap Y}\subset
+\overline{\{x\}}\subset Y$ である。したがって
+$Y=\overline{\{x\}}$ であり、$X$ は準ソバーである。
+
+\medskip\noindent
+(3) の証明。(1) と (2) から直ちに従う。
+\end{proof}
+
+\begin{example}
+\label{topology-example-quasi-sober-not-kolmogorov}
+$X$ を濃度が少なくとも $2$ の密着空間とする。このとき $X$ は準ソバーだが
+コルモゴロフではない。さらに、その一点部分集合族は、離散空間、したがって
+コルモゴロフ空間による $X$ の被覆である。
+\end{example}
+
+\begin{example}
+\label{topology-example-kolmogorov-not-quasi-sober}
+$Y$ を無限集合とし、その閉集合が $Y$ および $Y$ の有限部分集合であるような
+位相を入れる。このとき $Y$ はコルモゴロフだが準ソバーではない。
+しかし、その一点部分集合族は、離散空間、したがってソバー空間による被覆である。
+\end{example}
+
+\begin{example}
+\label{topology-example-not-kolmogorov-not-quasi-sober}
+$X$ と $Y$ をそれぞれ例 \ref{topology-example-quasi-sober-not-kolmogorov} および
+例 \ref{topology-example-kolmogorov-not-quasi-sober} の空間とする。
+このとき $X\amalg Y$ はコルモゴロフでも準ソバーでもない。
+\end{example}
+
+\begin{example}
+\label{topology-example-sober-subspace}
+$Z$ を無限集合とし、$z\in Z$ とする。閉集合が $Z$ および
+$Z\setminus\{z\}$ の有限部分集合であるような位相を $Z$ に入れる。
+このとき $Z$ はソバーだが、その部分空間 $Z\setminus\{z\}$ は準ソバーではない。
+\end{example}
+
+\begin{example}
+\label{topology-example-Hausdorff}
+位相空間 $X$ がハウスドルフであるとは、相異なる任意の二点
+$x, y \in X$ に対して、$x \in U$, $y \in V$ を満たす互いに素な開集合
+$U, V \subset X$ が存在することであった。この場合、$X$ が既約であることと
+$X$ が一点集合であることは同値である。同様に、$X$ の部分集合が既約であることと
+それが一点集合であることは同値である。したがって、ハウスドルフ空間はソバーである。
+\end{example}
+
+\begin{lemma}
+\label{topology-lemma-irreducible-on-top}
+$f : X \to Y$ を位相空間の連続写像とする。次を仮定する。
+(a) $Y$ は既約である。
+(b) $f$ は開である。
+(c) $f^{-1}(y)$ が既約となる点 $y \in Y$ の稠密な族が存在する。
+このとき $X$ は既約である。
+\end{lemma}
+
+\begin{proof}
+$X = Z_1 \cup Z_2$ で各 $Z_i$ が閉であるとする。
+開集合 $U_1 = Z_1 \setminus Z_2 = X \setminus Z_2$ および
+$U_2 = Z_2 \setminus Z_1 = X \setminus Z_1$ を考える。
+矛盾を導くため、$U_1$ と $U_2$ がともに空でないと仮定する。
+(b) により $f(U_i)$ は開である。(a) により $Y$ は既約なので
+$f(U_1) \cap f(U_2) \not = \emptyset$ である。
+(c) により、この交叉の点となり、かつファイバー $X_y = f^{-1}(y)$ が
+既約であるような点 $y$ が存在する。このとき $X_y \cap U_1$ と
+$X_y \cap U_2$ は $X_y$ の互いに素な空でない開部分集合であり、矛盾する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-irreducible-fibres-irreducible-components}
+$f : X \to Y$ を位相空間の連続写像とする。
+(a) $f$ は開であり、(b) すべての $y \in Y$ についてファイバー
+$f^{-1}(y)$ は既約であると仮定する。このとき $f$ は既約成分の間の全単射を誘導する。
+\end{lemma}
+
+\begin{proof}
+仮定 (b) から $f$ が全射であることに注意する
+（定義 \ref{topology-definition-irreducible-components} を参照）。
+$T \subset Y$ を既約成分とする。補題 \ref{topology-lemma-irreducible} により、$T$ は閉である。
+$f^{-1}(T)$ が既約であることを示せば補題が従う。実際、補題
+\ref{topology-lemma-image-irreducible-space} により、$X$ の任意の既約部分集合は
+$Y$ のある既約成分へ写るからである。
+$f^{-1}(T) \to T$ は補題 \ref{topology-lemma-irreducible-on-top} の仮定を満たす。
+したがって結論を得る。
+\end{proof}
+
+\noindent
+次の補題の構成は「ソバー化」と呼ばれることがある。
+
+\begin{lemma}
+\label{topology-lemma-make-sober}
+\begin{reference}
+\cite[Page 68 ff]{EGA1-second}
+\end{reference}
+$X$ を位相空間とする。$X$ からソバー位相空間 $X'$ への標準連続写像
+$$
+c : X \longrightarrow X'
+$$
+であって、$X$ からソバー位相空間への連続写像の間で普遍的なものが存在する。
+さらに、対応 $U' \mapsto c^{-1}(U')$ は $X'$ の開集合と $X$ の開集合との間の
+全単射であり、有限交叉および任意合併と可換である。
+像 $c(X)$ はコルモゴロフ位相空間であり、写像 $c : X \to c(X)$ は
+$X$ からコルモゴロフ空間への写像に対して普遍的である。
+\end{lemma}
+
+\begin{proof}
+$X'$ を $X$ の既約閉部分集合全体の集合とし、
+$$
+c : X \to X', \quad x \mapsto \overline{\{x\}}.
+$$
+とおく。開集合 $U \subset X$ に対して、$U$ と交わる $X$ の既約閉部分集合全体を
+$U' \subset X'$ と書く。このとき $c^{-1}(U') = U$ である。
+特に、$X$ の開集合が $U_1 \not = U_2$ ならば $U'_1 \not = U_2'$ である。
+したがって、$c$ は $U'$ の形の $X'$ の部分集合と $X$ の開集合との間の
+全単射を誘導する。
+
+\medskip\noindent
+$U_1, U_2$ を $X$ の開集合とする。$Z \in U'_1$ かつ $Z \in U'_2$ と仮定する。
+このとき $Z \cap U_1$ と $Z \cap U_2$ は既約空間 $Z$ の空でない開部分集合なので、
+$Z \cap U_1 \cap U_2$ は空でない。ゆえに
+$(U_1 \cap U_2)' = U'_1 \cap U'_2$ である。
+規則 $U \mapsto U'$ は任意合併とも両立する（詳細は省略する）。
+したがって、$U'$ たちの集まりが $X'$ 上の位相をなし、補題で述べた全単射が
+得られることは明らかである。
+
+\medskip\noindent
+次に $X'$ がソバーであることを示す。$T \subset X'$ を既約閉部分集合とする。
+$X' \setminus T = U'$ となる開集合を $U \subset X$ とする。
+すると、補題の全単射の性質により $Z = X \setminus U$ は既約である。
+$Z \in T$ が一意な生成点であると主張する。実際、$Z$ を含まない
+$V' \subset X'$ の形の任意の開集合は、$Z$ と交わらない、すなわち $U$ に含まれる
+$X$ の開集合 $V \subset X$ から生じなければならない。
+
+\medskip\noindent
+最後に普遍性を確認する。$f : X \to Y$ をソバー位相空間への連続写像とする。
+$f' : X' \to Y$ を、既約閉部分集合 $Z \subset X$ を
+$\overline{f(Z)}$ の一意な生成点へ写す写像とする。
+集合の写像として $f' \circ c = f$ であることは直ちに従い、$c$ の性質から
+$f'$ が連続であることも従う。連続写像 $f'$ が一意であることの確認は省略する。
+コルモゴロフ空間に関する主張の証明も省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-remove-irreducible-connected}
+$X$ を、有限個の既約成分 $X_1, \ldots, X_n$ をもつ連結位相空間とする。
+$n > 1$ ならば、$X' = \bigcup_{i \not = j} X_i$ が連結となる
+$1 \leq j \leq n$ が存在する。
+\end{lemma}
+
+\begin{proof}
+これはグラフ理論の問題である。$V = \{1, \ldots, n\}$ を頂点集合とし、
+$X_i \cap X_j$ が空でないとき、かつそのときに限り $i$ と $j$ の間に辺をもつ
+グラフを $\Gamma$ とする。$X$ の連結性は $\Gamma$ が連結であることを意味する。
+問題は、$\Gamma \setminus \{j\}$ がなお連結であるような
+$1 \leq j \leq n$ を見つけることである。距離が最大となる
+$j, j' \in E$ を選べば $j$ が求めるものとなる（葉を選べばよい）。
+詳細は省略する。
+\end{proof}
+
+\section{ネーター位相空間}
+\label{topology-section-noetherian}
+
+\begin{definition}
+\label{topology-definition-noetherian}
+$X$ の閉部分集合に対して降鎖条件が成り立つとき、位相空間を
+{\it ネーター}という。各点がネーターな近傍をもつとき、位相空間を
+{\it 局所ネーター}という。
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-Noetherian}
+$X$ をネーター位相空間とする。
+\begin{enumerate}
+\item $X$ の任意の部分集合は、相対位相に関してネーターである。
+\item 空間 $X$ の既約成分は有限個である。
+\item $X$ の各既約成分は $X$ の空でない開集合を含む。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T \subset X$ を $X$ の部分集合とする。
+$T_1 \supset T_2 \supset \ldots$ を $T$ の閉部分集合の降鎖とする。
+$Z_i \subset X$ を閉として $T_i =  T \cap Z_i$ と書く。
+閉部分集合の降鎖
+$Z_1 \supset Z_1\cap Z_2 \supset Z_1 \cap Z_2 \cap Z_3 \ldots$
+を考える。仮定によりこれは安定するので、もとの $T_i$ の列も安定する。
+したがって $T$ はネーターである。
+
+\medskip\noindent
+既約成分が有限個でない $X$ の閉部分集合全体の集合を $A$ とする。
+矛盾を導くため、$A$ は空でないと仮定する。
+$A$ は包含関係によって半順序づけられる：
+$\alpha \leq \alpha' \Leftrightarrow Z_{\alpha} \subset Z_{\alpha'}$。
+降鎖条件により、$A$ の最小元、例えば $Z$ を見つけることができる。
+$Z$ は既約成分の有限合併でないので、既約ではない。
+したがって $Z = Z' \cup Z''$ と書け、両者は真に小さい閉部分集合である。
+構成により、$Z' = \bigcup Z'_i$ および $Z'' = \bigcup Z''_j$ は
+それぞれの既約成分の有限合併である（補題 \ref{topology-lemma-irreducible}）。
+ゆえに $Z = \bigcup Z'_i \cup \bigcup Z''_j$ は既約閉部分集合の有限合併である。
+この表示から冗長な成員を除けば、これは $Z$ の既約成分への分解となる
+（補題 \ref{topology-lemma-pick-irreducible-components}）。これは矛盾である。
+
+\medskip\noindent
+$Z \subset X$ を $X$ の既約成分とする。
+$Z_1, \ldots, Z_n$ を $X$ の他の既約成分とする。
+$U = Z \setminus (Z_1\cup\ldots\cup Z_n)$ を考える。
+さもなければ既約空間 $Z$ が他の $Z_i$ の一つに含まれるので、これは空でない。
+また $X = Z \cup Z_1 \cup \ldots Z_n$ であるから
+（補題 \ref{topology-lemma-irreducible} を参照）、
+$U = X \setminus (Z_1\cup\ldots\cup Z_n)$ でもあり、したがって $X$ で開である。
+ゆえに $Z$ は $X$ の空でない開集合を含む。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-image-Noetherian}
+$f : X \to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item $X$ がネーターならば $f(X)$ はネーターである。
+\item $X$ が局所ネーターで $f$ が開ならば、$f(X)$ は局所ネーターである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の場合、$Z_1 \supset Z_2 \supset Z_3 \supset \ldots$ を
+$f(X)$ の閉部分集合の降鎖とする（通常どおり、$Y$ の部分集合としての相対位相を
+入れる）。すると
+$f^{-1}(Z_1) \supset f^{-1}(Z_2) \supset f^{-1}(Z_3) \supset \ldots$ は
+$X$ の閉部分集合の降鎖である。したがって、この鎖は安定する。
+$f(f^{-1}(Z_i)) = Z_i$ なので、
+$Z_1 \supset Z_2 \supset Z_3 \supset \ldots$ も安定すると結論できる。
+(2) の場合、$y \in f(X)$ とする。$f(x) = y$ となる $x \in X$ を選ぶ。
+仮定により、$x$ のネーターな近傍 $E \subset X$ が存在する。
+このとき $f(E) \subset f(X)$ は近傍であり、(1) によりネーターである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-finite-union-Noetherian}
+$X$ を位相空間とする。
+$X_i \subset X$, $i = 1, \ldots, n$ を有限個の部分集合とする。
+各 $X_i$ が相対位相に関してネーターならば、
+$\bigcup_{i = 1, \ldots, n}  X_i$ も相対位相に関してネーターである。
+\end{lemma}
+
+\begin{proof}
+$\{F_m\}_{m \in \mathbf{N}}$ を、相対位相を入れた
+$X' = \bigcup_{i = 1, \ldots, n}  X_i$ の閉部分集合の減少列とする。
+このとき、すべての $m$ に対して $F_m = G_m \cap X'$ を満たす
+$X$ の閉部分集合の減少列 $\{G_m\}_{m \in \mathbf{N}}$ を見つけることができる
+（細部は省略する）。$X_i$ はネーターであり、
+$\{G_m \cap X_i\}_{m \in \mathbf{N}}$ は $X_i$ の閉部分集合の減少列だから、
+すべての $m \geq m_i$ に対して
+$G_m \cap X_i = G_{m_i} \cap X_i$ となる $m_i \in \mathbf{N}$ が存在する。
+$m_0 = \max_{i = 1, \ldots, n} m_i$ とおく。このとき明らかに
+$$
+F_m = G_m \cap X' = G_m \cap (X_1 \cup \ldots \cup X_n) =
+(G_m \cap X_1) \cup \ldots (G_m \cap X_n)
+$$
+は $m \geq m_0$ に対して安定する。これで証明は完了する。
+\end{proof}
+
+\begin{example}
+\label{topology-example-locally-Noetherian-no-closed-point}
+空でないコルモゴロフ・ネーター位相空間は閉点をもつ
+（補題 \ref{topology-lemma-quasi-compact-closed-point} と
+\ref{topology-lemma-Noetherian-quasi-compact} を組み合わせればよい）。
+$X = \{1, 2, 3, \ldots \}$ とする。開集合が $\emptyset$、
+$\{1, 2, \ldots, n\}$（$n \geq 1$）、および $X$ であるような位相を
+$X$ に定める。すると $X$ は閉点を一つももたない局所ネーター位相空間である。
+この空間は局所ネータースキームの台位相空間にはなりえない。
+Properties, Lemma \ref{properties-lemma-locally-Noetherian-closed-point} を参照せよ。
+\end{example}
+
+\begin{lemma}
+\label{topology-lemma-locally-Noetherian-locally-connected}
+$X$ を局所ネーター位相空間とする。このとき $X$ は局所連結である。
+\end{lemma}
+
+\begin{proof}
+$x \in X$ とする。$E$ を $x$ の近傍とする。
+$E$ に含まれる $x$ の連結近傍を見つけなければならない。
+仮定により、$x$ のネーターな近傍 $E'$ が存在する。
+補題 \ref{topology-lemma-Noetherian} により $E \cap E'$ はネーターである。
+補題 \ref{topology-lemma-Noetherian} により、
+$E \cap E' = Y_1 \cup \ldots \cup Y_n$ を既約成分への分解とする。
+$E'' = \bigcup_{x \in Y_i} Y_i$ とおく。これは $x$ を含む
+$E \cap E'$ の連結部分集合である。さらに、これは $E \cap E'$ の開集合
+$E \cap E' \setminus (\bigcup_{x \not \in Y_i} Y_i)$ を含むので、
+$X$ における $x$ の近傍である。これで補題が示された。
+\end{proof}
+
+
+
+\section{クルル次元}
+\label{topology-section-krull-dimension}
+
+\begin{definition}
+\label{topology-definition-Krull}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $X$ の{\it 既約閉部分集合の鎖}とは、各 $Z_i$ が閉かつ既約であり、
+$i = 0, \ldots, n - 1$ に対して $Z_i \not = Z_{i + 1}$ であるような列
+$Z_0 \subset Z_1 \subset \ldots \subset Z_n \subset X$ のことである。
+\item $X$ の既約閉部分集合の鎖
+$Z_0 \subset Z_1 \subset \ldots \subset Z_n \subset X$ の
+{\it 長さ}とは、整数 $n$ のことである。
+\item $X$ の{\it 次元}、より正確には{\it クルル次元} $\dim(X)$ とは、
+次の集合の元であり、
+$$
+\{-\infty, 0, 1, 2, 3, \ldots, \infty\}
+$$
+次の公式で定義される：
+$$
+\dim(X) =
+\sup \{\text{lengths of chains of irreducible closed subsets}\}
+$$
+したがって、$\dim(X) = -\infty$ であることと $X$ が空間として空であることは
+同値である。
+\item $x \in X$ とする。{\it $x$ における $X$ のクルル次元}を
+$$
+\dim_x(X) = \min \{\dim(U), x\in U\subset X\text{ open}\}
+$$
+で定義する。これは $x$ の開近傍 $U$ 全体にわたる $\dim(U)$ の最小値である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$U' \subset U \subset X$ が開ならば $\dim(U') \leq \dim(U)$ であることに
+注意する。したがって $\dim_x(X) = d$ ならば、$x$ は $X$ において
+$\dim(U) = \dim_x(X)$ を満たす開近傍 $U$ からなる基本近傍系をもつ。
+
+\begin{lemma}
+\label{topology-lemma-dimension-supremum-local-dimensions}
+$X$ を位相空間とする。このとき $\dim(X) = \sup \dim_x(X)$ である。
+ここで上限は $X$ の点 $x$ 全体にわたって取る。
+\end{lemma}
+
+\begin{proof}
+すべての $x \in X$ に対して $\dim(X) \geq \dim_x(X)$ であることは明らかである
+（定義 \ref{topology-definition-Krull} に続く議論を参照）。
+したがって一方の向きの不等式を得る。逆に $n \geq 0$ とし、
+$\dim(X) \geq n$ と仮定する。このとき、既約閉部分集合の鎖
+$Z_0 \subset Z_1 \subset \ldots \subset Z_n \subset X$ が存在する。
+$x \in Z_0$ を選ぶ。$x$ の任意の開近傍 $U$ に対して、$U$ における
+既約閉部分集合の鎖
+$$
+Z_0 \cap U \subset Z_1 \cap U \subset \ldots \subset Z_n \cap U
+$$
+が得られる。実際、各 $U \cap Z_i$ は $U$ で既約かつ閉であり、包含は真である
+（詳細は省略する。ヒント：$U \cap Z_i$ の閉包は $Z_i$ である）。
+こうして $\dim_x(X) \geq n$ が分かり、もう一方の不等式が示される。
+\end{proof}
+
+\begin{example}
+\label{topology-example-Krull-Rn}
+通常のユークリッド空間 $\mathbf{R}^n$ のクルル次元は $0$ である。
+\end{example}
+
+\begin{example}
+\label{topology-example-krull-2set}
+$X = \{s, \eta\}$ とし、開集合を
+$\{\emptyset, \{\eta\}, \{s, \eta\}\}$ とする。
+この場合、既約閉部分集合の極大鎖の一つは
+$\{s\} \subset \{s, \eta\}$ である。したがって $\dim(X) = 1$ である。
+この例を一般化して、クルル次元 $n$ の $(n + 1)$ 元位相空間を得ることは容易である。
+\end{example}
+
+\begin{definition}
+\label{topology-definition-equidimensional}
+$X$ を位相空間とする。$X$ のすべての既約成分が同じ次元をもつとき、
+$X$ は{\it 等次元}であるという。
+\end{definition}
+
+\section{余次元とカテナリー空間}
+\label{topology-section-catenary-spaces}
+
+\noindent
+ここでは既約閉部分集合の余次元だけを定義する。
+
+\begin{definition}
+\label{topology-definition-codimension}
+$X$ を位相空間とする。$Y \subset X$ を既約閉部分集合とする。
+$X$ における $Y$ の{\it 余次元}とは、$Y$ から始まる $X$ の既約閉部分集合の鎖
+$$
+Y = Y_0 \subset Y_1 \subset \ldots \subset Y_e \subset X
+$$
+の長さ $e$ の上限である。これを $\text{codim}(Y, X)$ と書く。
+\end{definition}
+
+\noindent
+余次元は $\{0, 1, 2, \ldots\} \cup \{\infty\}$ の元である。
+$\text{codim}(Y, X) < \infty$ ならば、各鎖は極大鎖に延長できる
+（ただし、それらがすべて同じ長さをもつとは限らない）。
+
+\begin{lemma}
+\label{topology-lemma-codimension-at-generic-point}
+$X$ を位相空間とする。$Y \subset X$ を既約閉部分集合とする。
+$Y \cap U$ が空でないような開部分集合 $U \subset X$ を取る。このとき
+$$
+\text{codim}(Y, X) = \text{codim}(Y \cap U, U)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+規則 $T \mapsto \overline{T}$ は、$U$ の既約閉部分集合と、$U$ と交わる
+$X$ の既約閉部分集合との間の包含関係を保つ全単射を定める。
+これを用いれば補題は容易に従う。詳細は省略する。
+\end{proof}
+
+\begin{example}
+\label{topology-example-Noetherian-infinite-codimension}
+$X = [0, 1]$ を単位区間とし、次の位相を入れる：
+$[0, 1]$、$n \in \mathbf{N}$ に対する $(1 - 1/n, 1]$、および
+$\emptyset$ を開集合とする。したがって閉集合は
+$\emptyset$、$\{0\}$、$n > 1$ に対する $[0, 1 - 1/n]$、および
+$[0, 1]$ である。これは明らかにネーター位相空間である。
+しかし、既約閉部分集合 $Y = \{0\}$ は無限の余次元
+$\text{codim}(Y, X) = \infty$ をもつ。
+実際、閉集合 $[0, 1 - 1/n]$ はすべて既約である。
+\end{example}
+
+\begin{definition}
+\label{topology-definition-catenary}
+$X$ を位相空間とする。既約閉部分集合の任意の対 $T \subset T'$ に対して
+$\text{codim}(T, T') < \infty$ であり、既約閉部分集合の各極大鎖
+$$
+T = T_0 \subset T_1 \subset \ldots \subset T_e = T'
+$$
+が同じ長さ（余次元に等しい）をもつとき、$X$ は{\it カテナリー}であるという。
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-catenary}
+$X$ を位相空間とする。次は同値である：
+\begin{enumerate}
+\item $X$ はカテナリーである。
+\item $X$ はカテナリー空間による開被覆をもつ。
+\end{enumerate}
+さらに、この場合 $X$ の任意の局所閉部分空間はカテナリーである。
+\end{lemma}
+
+\begin{proof}
+$X$ はカテナリーであり、$U \subset X$ は開部分集合であると仮定する。
+規則 $T \mapsto \overline{T}$ は、$U$ の既約閉部分集合と、$U$ と交わる
+$X$ の既約閉部分集合との間の包含関係を保つ全単射を定める。
+これを用いれば補題は容易に従う。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-catenary-in-codimension}
+$X$ を位相空間とする。次は同値である：
+\begin{enumerate}
+\item $X$ はカテナリーである。
+\item 既約閉部分集合の任意の対 $Y \subset Y'$ に対して
+$\text{codim}(Y, Y') < \infty$ であり、既約閉部分集合の任意の三つ組
+$Y \subset Y' \subset Y''$ に対して
+$$
+\text{codim}(Y, Y'') = \text{codim}(Y, Y') + \text{codim}(Y', Y'').
+$$
+が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$ はカテナリーであると仮定しよう。
+定義 \ref{topology-definition-catenary} により、既約閉部分集合の任意の対
+$Y \subset Y'$ に対して $\text{codim}(Y,Y') < \infty$ である。
+$Y \subset Y' \subset Y''$ を $X$ の既約閉部分集合の三つ組とする。
+$$
+Y = Y_0 \subset Y_1 \subset ... \subset Y_{e_1} = Y'
+$$
+を $Y$ と $Y'$ の間の既約閉部分集合の極大鎖とし、
+$e_1 = \text{codim}(Y,Y')$ とする。また、
+$$
+Y' = Y_{e_1} \subset Y_{e_1 + 1}\subset ... \subset Y_{e_1 + e_2} = Y''
+$$
+を $Y'$ と $Y''$ の間の既約閉部分集合の極大鎖とし、
+$e_2 = \text{codim}(Y',Y'')$ とする。二つの鎖は極大なので、その連結
+$$
+Y = Y_0\subset Y_1 \subset ... \subset Y_{e_1} = Y' =
+Y_{e_1} \subset Y_{e_1+1}\subset ... \subset Y_{e_1+e_2}=Y''
+$$
+も $Y$ と $Y''$ の間の極大鎖であり、その長さは $e_1 + e_2$ に等しい。
+$X$ はカテナリーなので、各極大鎖は余次元に等しい同じ長さをもつ。
+したがって、(2) の等式
+$\text{codim}(Y,Y'') = e_1 + e_2 = \text{codim}(Y,Y') + \text{codim}(Y',Y'')$
+が成り立つ。
+
+\medskip\noindent
+逆に、$Y = Y_1 \subset ... \subset Y_n = Y'$ ならば
+$ \text{codim}(Y,Y') = \text{codim}(Y_1,Y_2) + ... +
+\text{codim}(Y_{n-1},Y_n)$ であることを帰納法で示す。
+したがって、極大鎖は同じ長さをもたざるをえない。
+\end{proof}
+
+\section{準コンパクト空間と準コンパクト写像}
+\label{topology-section-quasi-compact}
+
+\noindent
+「コンパクト」という語はハウスドルフ位相空間に限って用いることにする。
+代数幾何学に現れる空間の多くはハウスドルフではないからである。
+
+\begin{definition}
+\label{topology-definition-quasi-compact}
+準コンパクト性。
+\begin{enumerate}
+\item 位相空間 $X$ の任意の開被覆が有限部分被覆をもつとき、$X$ は
+{\it 準コンパクト}であるという。
+\item 連続写像 $f : X \to Y$ が{\it 準コンパクト}であるとは、任意の
+準コンパクト開集合 $V \subset Y$ の逆像 $f^{-1}(V)$ が準コンパクトであることをいう。
+\item 包含写像 $Z \to X$ が準コンパクトであるとき、部分集合 $Z \subset X$ は
+{\it レトロコンパクト}であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+位相に関する多くの文献では、準コンパクトかつハウスドルフな空間を
+{\it コンパクト}と呼ぶが、別の文献ではハウスドルフ条件を課さない。
+代数幾何学での混乱を避けるため、ここでは準コンパクトという語を用いる。
+写像の準コンパクト性という概念は「固有写像」の概念とは大きく異なる。
+後者では（閉性と分離性に加えて）標的の任意の準コンパクト部分集合の逆像が
+準コンパクトであることを要求するのに対し、上の定義では準コンパクトな
+{\it 開}集合だけを考えるからである。
+
+\begin{lemma}
+\label{topology-lemma-composition-quasi-compact}
+準コンパクト写像の合成は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-in-quasi-compact}
+準コンパクト位相空間の閉部分集合は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+$E \subset X$ を準コンパクト空間 $X$ の閉部分集合とする。
+$E = \bigcup V_j$ を開被覆とする。$V_j = E \cap U_j$ を満たす開集合
+$U_j \subset X$ を選ぶ。このとき
+$X = (X \setminus E) \cup \bigcup U_j$ は $X$ の開被覆である。
+したがって、ある $n$ と添字 $j_i$ に対して
+$X = (X \setminus E) \cup U_{j_1} \cup \ldots \cup U_{j_n}$ である。
+ゆえに、望むとおり $E = V_{j_1} \cup \ldots \cup V_{j_n}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-quasi-compact-in-Hausdorff}
+$X$ をハウスドルフ位相空間とする。
+\begin{enumerate}
+\item $E \subset X$ が準コンパクトならば閉である。
+\item $E_1, E_2 \subset X$ が互いに素な準コンパクト部分集合ならば、
+$U_1 \cap U_2 = \emptyset$ を満たす開集合 $E_i \subset U_i$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$x \in X$, $x \not \in E$ とする。
+各 $e \in E$ に対し、$e \in V_e$ および $x \in U_e$ を満たす互いに素な
+開集合 $V_e$, $U_e$ を取れる。$E \subset \bigcup V_e$ なので、
+$E \subset V_{e_1} \cup \ldots \cup V_{e_n}$ を満たす有限個の
+$e_1, \ldots, e_n$ を取れる。このとき
+$U = U_{e_1} \cap \ldots \cap U_{e_n}$ は $x$ の開近傍であり、
+$V_{e_1} \cup \ldots \cup V_{e_n}$ と交わらない。特に $E$ と交わらない。
+したがって $E$ は閉である。
+
+\medskip\noindent
+(2) の証明。(1) の証明から、$x \in E_1$ が与えられると、
+$U_x \cap V_x = \emptyset$ を満たす開近傍 $x \in U_x$ と開集合
+$E_2 \subset V_x$ を取れる。$E_1$ は準コンパクトなので、
+$E_1 \subset U = U_{x_1} \cup \ldots \cup U_{x_n}$ を満たす有限個の
+$x_i \in E_1$ を取れる。$V = V_{x_1} \cap \ldots \cap V_{x_n}$ とすれば
+証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-in-compact}
+$X$ を準コンパクト・ハウスドルフ空間とし、$E \subset X$ とする。
+次は同値である：(a) $E$ は $X$ で閉である、(b) $E$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+(a) $\Rightarrow$ (b) は補題 \ref{topology-lemma-closed-in-quasi-compact} である。
+(b) $\Rightarrow$ (a) は補題 \ref{topology-lemma-quasi-compact-in-Hausdorff} である。
+\end{proof}
+
+\noindent
+次は準コンパクト性を言い換えたものにほかならない。
+
+\begin{lemma}
+\label{topology-lemma-intersection-closed-in-quasi-compact}
+$X$ を準コンパクト位相空間とする。$\{Z_\alpha\}_{\alpha \in A}$ を
+閉部分集合の族とし、その任意の有限部分族の交叉は空でないとする。
+このとき $\bigcap_{\alpha \in A} Z_\alpha$ は空でない。
+\end{lemma}
+
+\begin{proof}
+$\bigcap_{\alpha \in A} Z_{\alpha} = \emptyset$ と仮定する。
+補集合を取ると $\bigcup_{\alpha \in A} (X\setminus Z_{\alpha})=X$ である。
+各 $Z_\alpha$ は閉だから、$\bigcup_{\alpha \in A} (X \setminus Z_{\alpha})$ は
+準コンパクト空間 $X$ の開被覆である。したがって、
+$X = \bigcup_{\alpha \in J} (X\setminus Z_{\alpha})$ となる有限部分集合
+$J \subset A$ が存在する。この補集合は空なので、
+$\bigcap_{\alpha \in J} Z_{\alpha} = \emptyset$ である。
+つまり $\bigcap_{\alpha \in J} Z_{\alpha}=\emptyset$ を満たす有限部分族
+$\{Z_{\alpha}\}_{\alpha \in J}$ が存在する。対偶により結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-image-quasi-compact}
+$f : X \to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item $X$ が準コンパクトならば $f(X)$ は準コンパクトである。
+\item $f$ が準コンパクトならば $f(X)$ はレトロコンパクトである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f(X) = \bigcup V_i$ が開被覆ならば、$X = \bigcup f^{-1}(V_i)$ も開被覆である。
+したがって $X$ が準コンパクトならば、ある $i_1, \ldots, i_n \in I$ に対して
+$X = f^{-1}(V_{i_1}) \cup \ldots \cup f^{-1}(V_{i_n})$ であり、ゆえに
+$f(X) = V_{i_1} \cup \ldots \cup V_{i_n}$ である。これで (1) が示された。
+$f$ は準コンパクトであると仮定し、$V \subset Y$ を準コンパクト開集合とする。
+すると $f^{-1}(V)$ は準コンパクトなので、(1) により
+$f(f^{-1}(V)) = f(X) \cap V$ は準コンパクトである。したがって $f(X)$ は
+レトロコンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-quasi-compact-closed-point}
+$X$ を位相空間とし、次を仮定する。
+\begin{enumerate}
+\item $X$ は空でない。
+\item $X$ は準コンパクトである。
+\item $X$ はコルモゴロフである。
+\end{enumerate}
+このとき $X$ は閉点をもつ。
+\end{lemma}
+
+\begin{proof}
+$X$ の一点集合の閉包全体からなる集合
+$$
+\mathcal{T} =
+\{Z \subset X \mid Z = \overline{\{x\}} \text{ for some }x \in X\}
+$$
+を考える。$X$ は空でないので、これは空でない。包含関係によって
+$\mathcal{T}$ を半順序集合とする。$Z_\alpha$, $\alpha \in A$ を
+$\mathcal{T}$ の全順序部分集合とする。
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により
+$\bigcap_{\alpha \in A} Z_\alpha \not = \emptyset$ である。
+したがって、ある $x \in \bigcap_{\alpha \in A} Z_\alpha$ が存在し、
+$Z = \overline{\{x\}}\in \mathcal{T}$ はこの族の下界である。
+ツォルンの補題により極小元 $Z \in \mathcal{T}$ が存在する。
+$X$ はコルモゴロフなので、ある $x$ に対して $Z = \{x\}$ となり、
+$x \in X$ は閉点である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-points-quasi-compact}
+$X$ を準コンパクト・コルモゴロフ空間とする。このとき $X$ の閉点全体の集合
+$X_0$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+$X_0 = \bigcup U_{i, 0}$ を開被覆とする。
+ある開集合 $U_i \subset X$ により $U_{i, 0} = X_0 \cap U_i$ と書く。
+$\bigcup U_i$ の補集合を $Z$ とする。これは $X$ の閉部分集合なので
+準コンパクトであり（補題 \ref{topology-lemma-closed-in-quasi-compact}）、
+またコルモゴロフである。補題 \ref{topology-lemma-quasi-compact-closed-point} により、
+$Z$ が空でなければ閉点をもち、$X_0 \subset \bigcup U_i$ に反する。
+したがって $Z = \emptyset$ であり、$X = \bigcup U_i$ である。
+$X$ は準コンパクトなので、この被覆は有限部分被覆をもつ。これで結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-connected-component-intersection}
+$X$ を位相空間とし、次を仮定する。
+\begin{enumerate}
+\item $X$ は準コンパクトである。
+\item $X$ は準コンパクト開集合からなる開基をもつ。
+\item 二つの準コンパクト開集合の交叉は準コンパクトである。
+\end{enumerate}
+任意の $x \in X$ に対し、$x$ を含む $X$ の連結成分は、$x$ を含む
+$X$ のすべての開かつ閉な部分集合の交叉である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $x$ を含む連結成分とする。$S = \bigcap_{\alpha \in A} Z_\alpha$ を、
+$x$ を含む $X$ のすべての開かつ閉な部分集合 $Z_\alpha$ の交叉とする。
+$S$ は $X$ で閉であることに注意する。また $Z_\alpha$ たちの任意の有限交叉も
+ある $Z_\alpha$ である。$T$ は連結で $x \in T$ なので $T \subset S$ である。
+$S$ が連結であることを示せば十分である。そうでないとすると、
+$S$ の開かつ閉な部分集合 $B$, $C$ による非交和分解
+$S = B \amalg C$ が存在する。特に $B$ と $C$ は $X$ で閉であるから、
+補題 \ref{topology-lemma-closed-in-quasi-compact} と仮定 (1) により準コンパクトである。
+仮定 (2) により、$B = S \cap U$ および $C = S \cap V$ を満たす
+準コンパクト開集合 $U, V \subset X$ が存在する（詳細は省略する）。
+すると $U \cap V \cap S = \emptyset$ である。
+したがって $\bigcap_\alpha U \cap V \cap Z_\alpha = \emptyset$ である。
+仮定 (3) により交叉 $U \cap V$ は準コンパクトである。
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により、ある
+$\alpha' \in A$ に対して $U \cap V \cap Z_{\alpha'} = \emptyset$ である。
+$X \setminus (U \cup V)$ は $S$ と交わらず、$X$ で閉だから準コンパクトである。
+同じ補題を用いると、ある $\alpha'' \in A$ に対して
+$Z_{\alpha''} \subset U \cup V$ であることが分かる。
+このとき $Z_\alpha = Z_{\alpha'} \cap Z_{\alpha''}$ は $U \cup V$ に含まれ、
+$U \cap V$ と交わらない。したがって
+$Z_\alpha = U \cap Z_\alpha \amalg V \cap Z_\alpha$ は二つの開集合への分解であり、
+$U \cap Z_\alpha$ と $V \cap Z_\alpha$ は $X$ で開かつ閉である。
+ゆえに、例えば $x \in B$ ならば $S \subset U \cap Z_\alpha$ となり、
+$C = \emptyset$ と結論する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-connected-component-intersection-compact-Hausdorff}
+$X$ を位相空間とし、$X$ は準コンパクトかつハウスドルフであると仮定する。
+任意の $x \in X$ に対し、$x$ を含む $X$ の連結成分は、$x$ を含む
+$X$ のすべての開かつ閉な部分集合の交叉である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $x$ を含む連結成分とする。$S = \bigcap_{\alpha \in A} Z_\alpha$ を、
+$x$ を含む $X$ のすべての開かつ閉な部分集合 $Z_\alpha$ の交叉とする。
+$S$ は $X$ で閉であることに注意する。また $Z_\alpha$ たちの任意の有限交叉も
+ある $Z_\alpha$ である。$T$ は連結で $x \in T$ なので $T \subset S$ である。
+$S$ が連結であることを示せば十分である。そうでないとすると、
+$S$ の開かつ閉な部分集合 $B$, $C$ による非交和分解
+$S = B \amalg C$ が存在する。特に $B$ と $C$ は $X$ で閉であるから、
+補題 \ref{topology-lemma-closed-in-quasi-compact} により準コンパクトである。
+補題 \ref{topology-lemma-quasi-compact-in-Hausdorff} により、$B \subset U$ および
+$C \subset V$ を満たす互いに素な開集合 $U, V \subset X$ が存在する。
+このとき $X \setminus U \cup V$ は $X$ で閉であり、したがって準コンパクトである
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）。
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により、ある $\alpha$ に対して
+$(X \setminus U \cup V) \cap Z_\alpha = \emptyset$ となる。
+言い換えると $Z_\alpha \subset U \cup V$ である。したがって
+$Z_\alpha = Z_\alpha \cap V \amalg Z_\alpha \cap U$ は二つの開集合への分解であり、
+$U \cap Z_\alpha$ と $V \cap Z_\alpha$ は $X$ で開かつ閉である。
+ゆえに、例えば $x \in B$ ならば $S \subset U \cap Z_\alpha$ となり、
+$C = \emptyset$ と結論する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-union-connected-components}
+$X$ を位相空間とし、次を仮定する。
+\begin{enumerate}
+\item $X$ は準コンパクトである。
+\item $X$ は準コンパクト開集合からなる開基をもつ。
+\item 二つの準コンパクト開集合の交叉は準コンパクトである。
+\end{enumerate}
+部分集合 $T \subset X$ に対して次は同値である：
+\begin{enumerate}
+\item[(a)] $T$ は $X$ の開かつ閉な部分集合の交叉である。
+\item[(b)] $T$ は $X$ で閉であり、$X$ の連結成分の合併である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) が (b) を含意することは明らかである。
+(b) を仮定する。$x \in X$, $x \not \in T$ とする。
+$x \in C \subset X$ を $x$ を含む $X$ の連結成分とする。
+補題 \ref{topology-lemma-connected-component-intersection} により、この連結成分は $C$ を含む
+$X$ のすべての開かつ閉な部分集合 $V_\alpha$ の交叉
+$C = \bigcap V_\alpha$ である。特に、任意の二つの交叉
+$V_\alpha \cap V_\beta$ も $V_\alpha$ の一つとして現れる。
+$T$ は $X$ の連結成分の合併なので $C \cap T = \emptyset$ である。
+したがって $T \cap \bigcap V_\alpha = \emptyset$ である。
+$T$ は準コンパクト空間の閉部分集合として準コンパクトだから
+（補題 \ref{topology-lemma-closed-in-quasi-compact} を参照）、補題
+\ref{topology-lemma-intersection-closed-in-quasi-compact} により、ある $\alpha$ に対して
+$T \cap V_\alpha = \emptyset$ である。この $\alpha$ に対し、
+$U_\alpha = X \setminus V_\alpha$ は $T$ を含み $x$ を含まない $X$ の
+開かつ閉な部分集合である。これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-Noetherian-quasi-compact}
+$X$ をネーター位相空間とする。
+\begin{enumerate}
+\item 空間 $X$ は準コンパクトである。
+\item $X$ の任意の部分集合はレトロコンパクトである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X = \bigcup U_i$ を、集合 $I$ で添字づけられ、有限開被覆による細分をもたない
+$X$ の開被覆と仮定する。$I$ の元 $i_1, i_2, \ldots $ を次のように帰納的に選ぶ：
+$U_{i_{n + 1}}$ が $U_{i_1} \cup \ldots \cup U_{i_n}$ に含まれないように
+$i_{n + 1}$ を選ぶ。すると
+$X \supset (X \setminus U_{i_1}) \supset
+(X \setminus U_{i_1} \cup U_{i_2}) \supset \ldots$ は閉部分集合の真に減少する
+無限列である。これは $X$ がネーターであることに反する。
+これで第一の主張が示された。補題 \ref{topology-lemma-Noetherian} により $X$ の任意の
+部分集合はネーターなので、第二の主張は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-quasi-compact-locally-Noetherian-Noetherian}
+準コンパクトかつ局所ネーターな空間はネーターである。
+\end{lemma}
+
+\begin{proof}
+これらの条件から、$X$ がネーター部分集合による有限被覆をもつことが直ちに従う。
+したがって補題 \ref{topology-lemma-finite-union-Noetherian} によりネーターである。
+\end{proof}
+
+\begin{lemma}[アレクサンダー準開基定理]
+\label{topology-lemma-subbase-theorem}
+$X$ を位相空間とし、$\mathcal{B}$ を $X$ の準開基とする。
+$\mathcal{B}$ の元による $X$ の任意の被覆が有限細分をもつならば、
+$X$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+$X$ の有限細分をもたない開被覆が存在すると仮定する。
+ツォルンの補題を用いると、有限細分をもたない極大開被覆
+$X = \bigcup_{i \in I} U_i$ を選べる（詳細は省略する）。
+言い換えると、$U \subset X$ が $U_i$ のどれとしても現れない任意の開集合ならば、
+被覆 $X = U \cup \bigcup_{i \in I} U_i$ は有限細分をもつ。
+$U_i \in \mathcal{B}$ となる添字全体を $I' \subset I$ とする。
+このとき $\bigcup_{i \in I'} U_i \not = X$ である。そうでなければ、
+$\mathcal{B}$ に関する仮定により $X$ を覆う有限細分が得られるからである。
+$x \in X$, $x \not \in \bigcup_{i \in I'} U_i$ を選び、
+$x \in U_i$ を満たす $i \in I$ を選ぶ。さらに
+$x \in V_1 \cap \ldots \cap V_n \subset U_i$ を満たす
+$V_1, \ldots, V_n \in \mathcal{B}$ を選ぶ。
+$\mathcal{B}$ は $X$ の準開基なので、これは可能である。
+$V_j$ はどの $U_i$ としても現れないことに注意する。
+選んだ被覆の極大性により、各 $j$ に対し
+$X = V_j \cup U_{i_{j, 1}} \cup \ldots \cup U_{i_{j, n_j}}$ となる
+$i_{j, 1}, \ldots, i_{j, n_j} \in I$ が存在する。
+$V_1 \cap \ldots \cap V_n \subset U_i$ なので、
+$X = U_i \cup \bigcup U_{i_{j, l}}$ となり、矛盾する。
+\end{proof}
+
+\section{局所準コンパクト空間}
+\label{topology-section-locally-quasi-compact}
+
+\noindent
+点の近傍は開であるとは限らないことを想起しよう。
+
+\begin{definition}
+\label{topology-definition-locally-quasi-compact}
+位相空間 $X$ が
+{\it 局所準コンパクト}\footnote{これは標準的な用語ではないかもしれない。
+文献では別の概念として、(1) 各点がある準コンパクト近傍をもつ、
+および (2) 各点が閉かつ準コンパクトな近傍をもつ、というものも用いられる。
+スキームは、各点が開かつ準コンパクトな近傍の基本系をもつという性質を備える。}
+であるとは、各点が準コンパクト近傍の基本系をもつことをいう。
+\end{definition}
+
+\noindent
+文献における {\it 局所コンパクト空間} という語は、しばしば
+次の補題に現れるような空間を指す。
+
+\begin{lemma}
+\label{topology-lemma-locally-quasi-compact-Hausdorff}
+ハウスドルフ空間が局所準コンパクトであるための必要十分条件は、
+各点が準コンパクト近傍をもつことである。
+\end{lemma}
+
+\begin{proof}
+$X$ をハウスドルフ空間とする。$x \in X$ とし、
+$x \in E \subset X$ を準コンパクト近傍とする。このとき補題
+\ref{topology-lemma-quasi-compact-in-Hausdorff} により $E$ は閉である。
+$x \in U \subset X$ が $x$ の開近傍であると仮定する。
+すると $Z = E \setminus U$ は $E$ の閉部分集合であり、$x$ を含まない。
+したがって補題 \ref{topology-lemma-quasi-compact-in-Hausdorff} により、
+$x \in V$ および $Z \subset W$ を満たす、互いに素な $E$ の開部分集合
+$W, V \subset E$ を見つけられる。
+このとき $\overline{V} \subset E$ は $x$ の閉近傍であり、$E \cap U$ に含まれる。
+さらに $\overline{V}$ は $E$ の閉部分集合なので準コンパクトである
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）。
+このようにして $x$ の準コンパクト近傍の基本系が得られる。
+\end{proof}
+
+\begin{lemma}[ベールのカテゴリー定理]
+\label{topology-lemma-baire-category-locally-compact}
+$X$ を局所準コンパクトなハウスドルフ空間とする。
+$U_n \subset X$, $n \geq 1$ を稠密開部分集合とする。このとき
+$\bigcap_{n \geq 1} U_n$ は $X$ で稠密である。
+\end{lemma}
+
+\begin{proof}
+$U_n$ を $\bigcap_{i = 1, \ldots, n} U_i$ で置き換えることにより、
+$U_1 \supset U_2 \supset \ldots$ と仮定してよい。
+$x \in X$ とする。$x$ が $\bigcap_{n \geq 1} U_n$ の閉包に属することを示す。
+そこで $E$ を $x$ の近傍とする。
+$E \cap \bigcap_{n \geq 1} U_n$ が空でないことを示す際には、
+$E$ をより小さな近傍で置き換えてよい。このように $E$ を置き換えることで、
+$E$ は準コンパクトであると仮定してよい。
+
+\medskip\noindent
+$x_0 = x$ および $E_0 = E$ とおく。以下、点
+$x_i \in E_{i - 1} \cap U_i$ と、$E_i \subset E_{i - 1} \cap U_i$ を満たす
+$x_i$ の準コンパクト近傍 $E_i$ を帰納的に選ぶ。
+$X$ はハウスドルフなので、部分集合 $E_i \subset X$ は閉である
+（補題 \ref{topology-lemma-quasi-compact-in-Hausdorff}）。
+$E_i$ は空でもないから、
+$\bigcap_{i \geq 1} E_i$ は空でない
+（補題 \ref{topology-lemma-intersection-closed-in-quasi-compact}）。
+$\bigcap_{i \geq 1} E_i \subset E \cap \bigcap_{n \geq 1} U_n$ なので、
+これで補題が示された。
+
+\medskip\noindent
+基底の場合 $i = 0$ は上で済んでいる。帰納段階を考える。
+$E_{i - 1}$ は $x_{i - 1}$ の近傍なので、開部分集合
+$x_{i - 1} \in W \subset E_{i - 1}$ を見つけられる。
+$U_i$ は $X$ で稠密だから、$W \cap U_i$ は空でない。
+$x_i \in W \cap U_i$ を任意に選ぶ。
+局所準コンパクト空間の定義により、$W \cap U_i$ に含まれる
+$x_i$ の準コンパクト近傍 $E_i$ を見つけられる。
+すると望みどおり $E_i \subset E_{i - 1} \cap U_i$ である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-relatively-compact-refinement}
+$X$ をハウスドルフかつ準コンパクトな空間とする。
+$X = \bigcup_{i \in I} U_i$ を開被覆とする。
+このとき、すべての $i$ に対して $\overline{V_i} \subset U_i$ を満たす
+開被覆 $X = \bigcup_{i \in I} V_i$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$x \in X$ とする。$x \in U_{i(x)}$ を満たす $i(x) \in I$ を選ぶ。
+$X \setminus U_{i(x)}$ と $\{x\}$ は $X$ の互いに素な閉部分集合なので、補題
+\ref{topology-lemma-closed-in-quasi-compact} および
+\ref{topology-lemma-quasi-compact-in-Hausdorff} により、閉包が
+$X \setminus U_{i(x)}$ と交わらない $x$ の開近傍 $U_x$ が存在する。
+したがって $\overline{U_x} \subset U_{i(x)}$ である。$X$ は準コンパクトなので、
+$X = U_{x_1} \cup \ldots \cup U_{x_m}$ を満たす点の有限列
+$x_1, \ldots, x_m$ が存在する。
+$V_i = \bigcup_{i = i(x_j)} U_{x_j}$ とおけば証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-refine-covering}
+$X$ をハウスドルフかつ準コンパクトな空間とする。
+$X = \bigcup_{i \in I} U_i$ を開被覆とする。
+整数 $p \geq 0$ が与えられ、$I$ の各 $(p + 1)$-組
+$i_0, \ldots, i_p$ に対して開被覆
+$U_{i_0} \cap \ldots \cap U_{i_p} = \bigcup W_{i_0 \ldots i_p, k}$
+が与えられているとする。このとき、$\overline{V_j} \subset U_{\alpha(j)}$ を満たし、
+さらに各 $V_{j_0} \cap \ldots \cap V_{j_p}$ がある $k$ に対して
+$W_{\alpha(j_0) \ldots \alpha(j_p), k}$ に含まれるような、
+開被覆 $X = \bigcup_{j \in J} V_j$ と写像 $\alpha : J \to I$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$X$ は準コンパクトなので、$I$ が有限である場合へ帰着できる
+（詳細は省略する）。
+$I$ が有限の場合について、$p$ に関する帰納法で結果を示す。
+基底の場合 $p = 0$ は、開被覆 $X = \bigcup W_{i_0, k}$ を細分する
+補題 \ref{topology-lemma-relatively-compact-refinement} のような被覆を取れば直ちに従う。
+
+\medskip\noindent
+帰納段階。$p - 1$ について補題が示されていると仮定する。
+$I$ のすべての $p$-組 $i'_0, \ldots, i'_{p - 1}$ に対し、
+$\{i'_0, \ldots, i'_{p - 1}\} = \{i_0, \ldots, i_p\}$（集合としての等式）
+を満たす $(p + 1)$-組に対する被覆
+$U_{i_0} \cap \ldots \cap U_{i_p} = \bigcup W_{i_0 \ldots i_p, k}$
+の共通細分を
+$U_{i'_0} \cap \ldots \cap U_{i'_{p - 1}} =
+\bigcup W_{i'_0 \ldots i'_{p - 1}, k}$
+とする。（$I$ は有限なので、そのような被覆は有限個しかない。）
+帰納法により、これらの開集合に対する解、たとえば
+$X = \bigcup V_j$ と $\alpha : J \to I$ が存在する。
+この時点で被覆 $X = \bigcup_{j \in J} V_j$ と $\alpha$ は
+$\overline{V_j} \subset U_{\alpha(j)}$ を満たし、また
+$\alpha(j_0), \ldots, \alpha(j_p)$ に重複があれば、
+各 $V_{j_0} \cap \ldots \cap V_{j_p}$ はある $k$ に対して
+$W_{\alpha(j_0) \ldots \alpha(j_p), k}$ に含まれる。
+もちろん、$J$ は有限であると仮定してよく、そう仮定する。
+
+\medskip\noindent
+互いに異なる $i_0, \ldots, i_p \in I$ を固定する。
+$i_0 = \alpha(j_0), \ldots, i_p = \alpha(j_p)$ を満たし、かつ
+$V_{j_0} \cap \ldots \cap V_{j_p}$ がどの $k$ に対しても
+$W_{\alpha(j_0) \ldots \alpha(j_p), k}$ に含まれないような
+$j_0, \ldots, j_p \in J$ という $(p + 1)$-組を考える。
+そのような $(p + 1)$-組の個数を $N$ とする。$N$ を減らす方法を示そう。
+実際、
+$$
+\overline{V_{j_0}} \cap \ldots \cap \overline{V_{j_p}} \subset
+U_{i_0} \cap \ldots \cap U_{i_p} = \bigcup W_{i_0 \ldots i_p, k}
+$$
+なので、左辺が $\bigcup_{k \in K} W_{i_0 \ldots i_p, k}$ に含まれるような
+有限集合 $K = \{k_1, \ldots, k_t\}$ を見つけられる。
+そこで開被覆
+$$
+V_{j_0} =
+(V_{j_0} \setminus (\overline{V_{j_1}} \cap \ldots \cap \overline{V_{j_p}}))
+\cup (\bigcup\nolimits_{k \in K} V_{j_0} \cap W_{i_0 \ldots i_p, k})
+$$
+を考える。右辺の最初の開集合は $V_{j_1} \cap \ldots \cap V_{j_p}$ と交わらず、
+右辺のその他の開集合 $V_{j_0, k}$ は
+$V_{j_0, k} \cap V_{j_1} \ldots \cap V_{j_p} \subset
+W_{\alpha(j_0) \ldots \alpha(j_p), k}$ を満たす。
+$J' = J \amalg K$ とおく。$j \in J$ に対して、$j \not = j_0$ ならば
+$V'_j = V_j$ とおき、
+$V'_{j_0} =
+V_{j_0} \setminus (\overline{V_{j_1}} \cap \ldots \cap \overline{V_{j_p}})$
+とおく。$k \in K$ に対しては $V'_k = V_{j_0, k}$ とおく。最後に、
+写像 $\alpha' : J' \to I$ は $J$ 上で $\alpha$ と一致し、$K$ の各元を
+$i_0$ に写すものとする。簡単な確認により、この置換で $N$ は一つ減る。
+この手続きを $N$ 回繰り返せば $N = 0$ の状況に達する。
+
+\medskip\noindent
+証明を完了するため、次のような互いに異なる成分をもつ
+$(p + 1)$-組 $i_0, \ldots, i_p \in I$ の個数 $M$ に関する帰納法を用いる。
+すなわち、$i_0 = \alpha(j_0), \ldots, i_p = \alpha(j_p)$ を満たし、
+$V_{j_0} \cap \ldots \cap V_{j_p}$ がどの $k$ に対しても
+$W_{\alpha(j_0) \ldots \alpha(j_p), k}$ に含まれないような
+$(p + 1)$-組 $j_0, \ldots, j_p \in J$ が存在するものを数える。
+前段落で行った操作が $M$ を増加させないことを主張する。
+これは、写像 $\alpha' : J' \to I$ が、
+$V'_{j'} \subset V_{\beta(j')}$ を満たす写像 $\beta : J' \to J$ を経由して
+分解することから形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-lift-covering-of-a-closed}
+$X$ をハウスドルフかつ局所準コンパクトな空間とする。
+$Z \subset X$ を準コンパクト（したがって閉）な部分集合とする。
+整数 $p \geq 0$、集合 $I$、各 $i \in I$ に対する開集合
+$U_i \subset X$、および $I$ の各 $(p + 1)$-組
+$i_0, \ldots, i_p$ に対する開集合
+$W_{i_0 \ldots i_p} \subset U_{i_0} \cap \ldots \cap U_{i_p}$
+が与えられ、次を満たすとする。
+\begin{enumerate}
+\item $Z \subset \bigcup U_i$ である。
+\item すべての $i_0, \ldots, i_p$ に対して
+$W_{i_0 \ldots i_p} \cap Z = U_{i_0} \cap \ldots \cap U_{i_p} \cap Z$ である。
+\end{enumerate}
+このとき、$Z \subset \bigcup V_i$、すべての $i$ に対して
+$\overline{V_i} \subset U_i$、およびすべての $(p + 1)$-組
+$i_0, \ldots, i_p$ に対して
+$V_{i_0} \cap \ldots \cap V_{i_p} \subset W_{i_0 \ldots i_p}$
+を満たす $X$ の開集合 $V_i$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$Z$ は準コンパクトなので、$I$ が有限である場合へ帰着できる
+（詳細は省略する）。
+$X$ は局所準コンパクトで $Z$ は準コンパクトだから、
+準コンパクトな近傍 $Z \subset E$ を見つけられる。
+すなわち、$E$ は準コンパクトであり、$X$ における $Z$ の開近傍を含む。
+$X$ を $E$ で置き換えた後に結果を示せば、元の結果が従う。
+したがって $X$ は準コンパクトと仮定してよい。
+
+\medskip\noindent
+$I$ が有限で $X$ が準コンパクトな場合について、$p$ に関する帰納法で示す。
+基底の場合は $p = 0$ である。この場合、
+$X = (X \setminus Z) \cup \bigcup W_i$ である。補題
+\ref{topology-lemma-relatively-compact-refinement} により、
+$\overline{V_i} \subset W_i$ がすべての $i$ について成り立つ、
+開集合 $V_i \subset W_i$ および $V \subset X \setminus Z$ による被覆
+$X = V \cup \bigcup V_i$ を見つけられる。
+すると補題が提示する問題の解が得られる。
+
+\medskip\noindent
+帰納段階。$p - 1$ について補題が示されていると仮定する。
+$\{j_0, \ldots, j_{p - 1}\} = \{i_0, \ldots, i_p\}$
+（集合としての等式）を満たすすべての $W_{i_0 \ldots i_p}$ の共通部分を
+$W_{j_0 \ldots j_{p - 1}}$ とおく。
+帰納法により、これらの開集合に対する解、たとえば
+$V_i \subset U_i$ が存在する。
+$W_{j_0 \ldots j_{p - 1}}$ の選び方から、ある
+$0 \leq a < b \leq p$ に対して $i_a = i_b$ となるすべての
+$(p + 1)$-組 $i_0, \ldots, i_p$ について、
+$V_{i_0} \cap \ldots \cap V_{i_p} \subset W_{i_0 \ldots i_p}$ が成り立つ。
+したがって、互いに異なる元からなるある $(p + 1)$-組
+$i_0, \ldots, i_p$ に対し
+$V_{i_0} \cap \ldots \cap V_{i_p} \not \subset W_{i_0 \ldots i_p}$
+となる場合にのみ、$V_i$ の選び方を修正すればよい。
+この場合、
+$$
+T =
+\overline{V_{i_0} \cap \ldots \cap V_{i_p} \setminus W_{i_0 \ldots i_p}}
+\subset 
+\overline{V_{i_0}} \cap \ldots \cap \overline{V_{i_p}} \setminus
+W_{i_0 \ldots i_p}
+$$
+は $U_{i_0} \cap \ldots \cap U_{i_p}$ に含まれ、$Z$ と交わらない
+$X$ の閉部分集合である。そこで $V_{i_0}$ を $V_{i_0} \setminus T$ で
+置き換えれば問題を「修正」できる。問題のある各組についてこの操作を
+有限回繰り返せば、補題が示される。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-lift-covering-of-quasi-compact-hausdorff-subset}
+$X$ を位相空間とする。$Z \subset X$ を、$Z$ の任意の二点が $X$ において
+互いに素な開近傍をもつ準コンパクト部分集合とする。
+整数 $p \geq 0$、集合 $I$、各 $i \in I$ に対する開集合
+$U_i \subset X$、および $I$ の各 $(p + 1)$-組
+$i_0, \ldots, i_p$ に対する開集合
+$W_{i_0 \ldots i_p} \subset U_{i_0} \cap \ldots \cap U_{i_p}$
+が与えられ、次を満たすとする。
+\begin{enumerate}
+\item $Z \subset \bigcup U_i$ である。
+\item すべての $i_0, \ldots, i_p$ に対して
+$W_{i_0 \ldots i_p} \cap Z = U_{i_0} \cap \ldots \cap U_{i_p} \cap Z$ である。
+\end{enumerate}
+このとき、次を満たす $X$ の開集合 $V_i$ が存在する。
+\begin{enumerate}
+\item $Z \subset \bigcup V_i$ である。
+\item すべての $i$ に対して $V_i \subset U_i$ である。
+\item すべての $i$ に対して $\overline{V_i} \cap Z \subset U_i$ である。
+\item すべての $(p + 1)$-組 $i_0, \ldots, i_p$ に対して
+$V_{i_0} \cap \ldots \cap V_{i_p} \subset W_{i_0 \ldots i_p}$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$Z$ は準コンパクトなので、$I$ が有限である場合へ帰着できる
+（詳細は省略する）。
+$I$ が有限の場合について、$p$ に関する帰納法で結果を示す。
+
+\medskip\noindent
+基底の場合は $p = 0$ である。
+$z \in Z \cap U_i$ および $z' \in Z \setminus U_i$ に対し、
+$z \in V_{z, z'}$ および $z' \in W_{z, z'}$ を満たす、
+$X$ の互いに素な開集合が存在する。
+$Z \setminus U_i$ は準コンパクトなので
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）、
+$Z \setminus U_i \subset W_{z, z'_1} \cup \ldots \cup W_{z, z'_r}$
+を満たす有限個の $z'_1, \ldots, z'_r$ を選べる。
+このとき
+$V_z = V_{z, z'_1} \cap \ldots \cap V_{z, z'_r} \cap U_i$
+は $U_i$ に含まれる $z$ の開近傍であり、
+$\overline{V_z} \cap Z \subset U_i$ を満たす。
+$z$ と $i$ は任意であり、$Z$ は準コンパクトなので、
+有限列 $z_1, i_1, \ldots, z_t, i_t$ と開集合
+$V_{z_j} \subset U_{i_j}$ を、
+$\overline{V_{z_j}} \cap Z \subset U_{i_j}$ および
+$Z \subset \bigcup V_{z_j}$ が成り立つように見つけられる。
+そこで $V_i = W_i \cap (\bigcup_{j : i = i_j} V_{z_j})$ とおけば、
+$p = 0$ に対する問題が解ける。
+
+\medskip\noindent
+帰納段階。$p - 1$ について補題が示されていると仮定する。
+$\{j_0, \ldots, j_{p - 1}\} = \{i_0, \ldots, i_p\}$
+（集合としての等式）を満たすすべての $W_{i_0 \ldots i_p}$ の共通部分を
+$W_{j_0 \ldots j_{p - 1}}$ とおく。
+帰納法により、これらの開集合に対する解、たとえば
+$V_i \subset U_i$ が存在する。
+$W_{j_0 \ldots j_{p - 1}}$ の選び方から、ある
+$0 \leq a < b \leq p$ に対して $i_a = i_b$ となるすべての
+$(p + 1)$-組 $i_0, \ldots, i_p$ について、
+$V_{i_0} \cap \ldots \cap V_{i_p} \subset W_{i_0 \ldots i_p}$ が成り立つ。
+したがって、互いに異なる元からなるある $(p + 1)$-組
+$i_0, \ldots, i_p$ に対し
+$V_{i_0} \cap \ldots \cap V_{i_p} \not \subset W_{i_0 \ldots i_p}$
+となる場合にのみ、$V_i$ の選び方を修正すればよい。
+この場合、
+$$
+T =
+\overline{V_{i_0} \cap \ldots \cap V_{i_p} \setminus W_{i_0 \ldots i_p}}
+\subset
+\overline{V_{i_0}} \cap \ldots \cap \overline{V_{i_p}} \setminus
+W_{i_0 \ldots i_p}
+$$
+は開集合 $V_i$ の性質 (3) により、$Z$ と交わらない $X$ の閉部分集合である。
+そこで $V_{i_0}$ を $V_{i_0} \setminus T$ で置き換えれば問題を「修正」できる。
+問題のある各組についてこの操作を有限回繰り返せば、補題が示される。
+\end{proof}
+
+\section{空間の極限}
+\label{topology-section-limits}
+
+\noindent
+位相空間の圏は積をもつ。実際、$I$ を集合とし、各 $i \in I$ に対して
+位相空間 $X_i$ が与えられているとき、$\prod_{i \in I} X_i$ に
+{\it 積位相}を入れる。この位相の開基として、$U_i \subset X_i$ が開であり、
+ほとんどすべての $i$ に対して $U_i = X_i$ となる形の集合 $\prod U_i$ を用いる。
+
+\medskip\noindent
+位相空間の圏は等化子をもつ。実際、$a, b : X \to Y$ が位相空間の射ならば、
+$a$ と $b$ の等化子は、相対位相を入れた部分集合
+$\{x \in X \mid a(x) = b(x)\} \subset X$ である。
+
+\begin{lemma}
+\label{topology-lemma-limits}
+位相空間の圏は極限をもち、集合への忘却関手は極限と可換する。
+\end{lemma}
+
+\begin{proof}
+これは上の議論と Categories, Lemma
+\ref{categories-lemma-limits-products-equalizers} から従う。
+上の記述から、忘却関手が極限と可換することも従う。
+別の見方として Categories, Lemma \ref{categories-lemma-adjoint-exact} を用い、
+忘却関手が左随伴、すなわち集合に対応する離散位相空間を割り当てる関手を
+もつことを使ってもよい。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-describe-limits}
+$\mathcal{I}$ を余フィルター圏とする。$i \mapsto X_i$ を
+$\mathcal{I}$ 上の位相空間の図式とする。$X = \lim X_i$ をその極限とし、
+射影写像を $f_i : X \to X_i$ とする。
+\begin{enumerate}
+\item $X$ の任意の開集合は、ある部分集合 $J \subset I$ と開集合
+$U_j \subset X_j$ によって $\bigcup_{j \in J} f_j^{-1}(U_j)$ の形に書ける。
+\item $X$ の任意の準コンパクト開集合は、ある $i$ とある開集合
+$U_i \subset X_i$ によって $f_i^{-1}(U_i)$ の形に書ける。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上で与えた極限の構成により、$X \subset \prod X_i$ であり、相対位相をもつ。
+$\prod X_i$ の位相の開基は、$U_i \subset X_i$ が開で、ほとんどすべての $i$ に
+対して $U_i = X_i$ となる開集合 $\prod U_i$ である。
+$U_{i_j} \not = X_{i_j}$ となる対象を
+$i_1, \ldots, i_n \in \Ob(\mathcal{I})$ とする。このとき
+$$
+X \cap \prod U_i = f_{i_1}^{-1}(U_{i_1}) \cap \ldots \cap f_{i_n}^{-1}(U_{i_n})
+$$
+位相空間の一般の極限では、これらが $X$ の位相の開基をなす。
+しかし補題の仮定どおり $\mathcal{I}$ が余フィルター圏なら、
+$j \in \Ob(\mathcal{I})$ と射 $j \to i_l$, $l = 1, \ldots, n$ を選べる。
+次のようにおく。
+$$
+U_j =
+(X_j \to X_{i_1})^{-1}(U_{i_1}) \cap \ldots \cap
+(X_j \to X_{i_n})^{-1}(U_{i_n})
+$$
+すると $X \cap \prod U_i = f_j^{-1}(U_j)$ であることは明らかである。
+したがって $X$ の任意の開集合 $W$ に対し、集合 $A$、写像
+$\alpha : A \to \Ob(\mathcal{I})$、および開集合
+$U_a \subset X_{\alpha(a)}$ が存在して
+$W = \bigcup f_{\alpha(a)}^{-1}(U_a)$ となる。$J = \Im(\alpha)$ とおき、
+$j \in J$ に対して $U_j = \bigcup_{\alpha(a) = j} U_a$ とおけば、
+$W = \bigcup_{j \in J} f_j^{-1}(U_j)$ となる。
+これで (1) が示された。
+
+\medskip\noindent
+(2) を示すため、$\bigcup_{j \in J} f_j^{-1}(U_j)$ が準コンパクトであると仮定する。
+すると、ある $j_1, \ldots, j_m \in J$ に対してこれは
+$f_{j_1}^{-1}(U_{j_1}) \cup \ldots \cup f_{j_m}^{-1}(U_{j_m})$
+に等しい。$\mathcal{I}$ は余フィルター圏なので、
+$i \in \Ob(\mathcal{I})$ と射 $i \to j_l$, $l = 1, \ldots, m$ を選べる。
+次のようにおく。
+$$
+U_i =
+(X_i \to X_{j_1})^{-1}(U_{j_1}) \cup \ldots \cup
+(X_i \to X_{j_m})^{-1}(U_{j_m})
+$$
+するとこの開集合は望みどおり $f_i^{-1}(U_i)$ に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-characterize-limit}
+$\mathcal{I}$ を余フィルター圏とする。$i \mapsto X_i$ を
+$\mathcal{I}$ 上の位相空間の図式とする。$X$ を次を満たす位相空間とする。
+\begin{enumerate}
+\item 集合として $X = \lim X_i$ である（射影写像を $f_i$ と書く）。
+\item $i \in \Ob(\mathcal{I})$ と開集合 $U_i \subset X_i$ に対する集合
+$f_i^{-1}(U_i)$ は $X$ の位相の開基をなす。
+\end{enumerate}
+このとき $X$ は位相空間として $X_i$ の極限である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-describe-limits} における極限位相の記述から従う。
+\end{proof}
+
+\begin{theorem}[チホノフ]
+\label{topology-theorem-tychonov}
+準コンパクト空間の積は準コンパクトである。
+\end{theorem}
+
+\begin{proof}
+$I$ を集合とし、各 $i \in I$ に対して $X_i$ を準コンパクト位相空間とする。
+$X = \prod X_i$ とおく。$\mathcal{B}$ を、$U_i \subset X_i$ が開であるような形
+$U_i \times \prod_{i' \in I, i' \not = i} X_{i'}$ の $X$ の部分集合全体とする。
+構成により、この族は $X$ の位相の準開基である。
+補題 \ref{topology-lemma-subbase-theorem} により、$\mathcal{B}$ の元 $B_j$ による任意の被覆
+$X = \bigcup_{j \in J} B_j$ が有限細分をもつことを示せば十分である。
+$j \in J_i$ ならば、ある開集合 $U_j \subset X_i$ によって
+$B_j = U_j \times \prod_{i' \not = i} X_{i'}$ と書けるように、
+$J = \coprod J_i$ と分解できる。
+$X_i = \bigcup_{j \in J_i} U_j$ なら有限細分が存在し、
+$X = \bigcup_{j \in J} B_j$ が有限細分をもつと結論できる。
+そうでなければ、各 $i$ に対し、$\bigcup_{j \in J_i} U_j$ に属さない点
+$x_i \in X_i$ を選べる。しかしこのとき点 $x = (x_i)_{i \in I}$ は
+$X$ の元であり、$\bigcup_{j \in J} B_j$ に含まれないので矛盾する。
+\end{proof}
+
+\noindent
+次の補題は、空間 $X_i$ がハウスドルフであるという仮定を除くと成り立たない。
+Examples, Section \ref{examples-section-lim-not-quasi-compact} を参照せよ。
+
+\begin{lemma}
+\label{topology-lemma-inverse-limit-quasi-compact}
+$\mathcal{I}$ を圏とし、$i \mapsto X_i$ を位相空間の圏における
+$\mathcal{I}$ 上の図式とする。各 $X_i$ が準コンパクトかつハウスドルフならば、
+$\lim X_i$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+$\lim X_i$ が $\prod X_i$ の部分空間であることを想起しよう。
+定理 \ref{topology-theorem-tychonov} によりこの積は準コンパクトである。
+したがって $\lim X_i$ が $\prod X_i$ の閉部分空間であることを示せば十分である
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）。
+$\varphi : j \to k$ が $\mathcal{I}$ の射なら、対応する連続写像
+$X_j \to X_k$ のグラフを $\Gamma_\varphi \subset X_j \times X_k$ と書く。
+補題 \ref{topology-lemma-graph-closed} によりこのグラフは閉である。
+$\lim X_i$ が閉部分集合
+$$
+\Gamma_\varphi \times \prod\nolimits_{l \not = j, k} X_l
+\subset \prod X_i
+$$
+の共通部分であることは明らかである。
+したがって結果が従う。
+\end{proof}
+
+\noindent
+次の補題は Categories, Lemma \ref{categories-lemma-nonempty-limit} を一般化し、
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} を部分的に一般化する。
+
+\begin{lemma}
+\label{topology-lemma-nonempty-limit}
+$\mathcal{I}$ を余フィルター圏とし、$i \mapsto X_i$ を位相空間の圏における
+$\mathcal{I}$ 上の図式とする。各 $X_i$ が準コンパクト、ハウスドルフ、かつ
+空でないならば、$\lim X_i$ は空でない。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-inverse-limit-quasi-compact} の証明で、
+$X = \lim X_i$ が準コンパクト空間 $\prod X_i$ の閉部分集合
+$$
+Z_\varphi = \Gamma_\varphi \times \prod\nolimits_{l \not = j, k} X_l
+$$
+の共通部分であることを見た。ここで $\varphi : j \to k$ は $\mathcal{I}$ の射で、
+$\Gamma_\varphi \subset X_j \times X_k$ は対応する射 $X_j \to X_k$ のグラフである。
+したがって補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により、
+これらの部分集合の任意の有限共通部分が空でないことを示せば十分である。
+$\varphi_t : j_t \to k_t$, $t = 1, \ldots, n$ が $\mathcal{I}$ の射の有限族であるとする。
+$\mathcal{I}$ は余フィルター圏なので、対象 $j$ と各 $t$ に対する射
+$\psi_t : j \to j_t$ を選べる。
+(a) $j_t = j_{t'}$、(b) $j_t = k_{t'}$、または (c) $k_t = k_{t'}$ のいずれかを
+満たす各組 $t, t'$ に対し、二つの射 $j \to l$ が得られる。
+ここで (a), (b) の場合は $l = j_t$、(c) の場合は $l = k_t$ である。
+$\mathcal{I}$ は余フィルター圏であり、組 $(t, t')$ は有限個しかないので、
+これらすべての組 $(t, t')$ について二つの射を等化する写像 $j' \to j$ を選べる。
+元 $x \in X_{j'}$ を選び、各 $t$ に対して $x_{j_t}$ および $x_{k_t}$ を、
+それぞれ射 $X_{j'} \to X_j \to X_{j_t}$ および
+$X_{j'} \to X_j \to X_{j_t} \to X_{k_t}$ による $x$ の像とする。
+ある $t$ に対する $j_t$ または $k_t$ のいずれとも等しくない各添字
+$l \in \Ob(\mathcal{I})$ に対しては、任意の元 $x_l \in X_l$ を選ぶ
+（選択公理を用いる）。すると構成により
+$(x_i)_{i \in \Ob(\mathcal{I})}$ は共通部分
+$$
+Z_{\varphi_1} \cap \ldots \cap Z_{\varphi_n}
+$$
+に属し、証明が完了する。
+\end{proof}
+
+\section{構成可能集合}
+\label{topology-section-constructible}
+
+\begin{definition}
+\label{topology-definition-constructible}
+$X$ を位相空間とする。$E \subset X$ を $X$ の部分集合とする。
+\begin{enumerate}
+\item $E$ が $X$ において {\it 構成可能}\footnote{EGA I の第2版
+\cite{EGA1-second} では、これは「大域的構成可能」集合と呼ばれ、
+本書で局所構成可能集合と呼ぶものに「構成可能」という用語が使われた。}
+であるとは、$E$ が、$U, V \subset X$ が $X$ において開かつ
+レトロコンパクトであるような形 $U \cap V^c$ の部分集合の有限合併であることをいう。
+\item $E$ が $X$ において {\it 局所構成可能} であるとは、
+各 $E \cap V_i$ が $V_i$ において構成可能となる開被覆
+$X = \bigcup V_i$ が存在することをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-constructible}
+構成可能集合全体は、有限共通部分、有限合併、および補集合について閉じている。
+\end{lemma}
+
+\begin{proof}
+$U_1$, $U_2$ が $X$ において開かつレトロコンパクトなら、
+$X$ の二つの準コンパクト部分集合の合併は準コンパクトなので、
+$U_1 \cup U_2$ もそうであることに注意する。
+$U_1 \cap U_2$ もレトロコンパクトである。実際、
+$U \subset X$ が準コンパクト開集合なら、$U_2$ は $X$ において
+レトロコンパクトなので $U_2 \cap U$ は準コンパクトであり、さらに
+$U_1$ は $X$ においてレトロコンパクトなので
+$U_1 \cap (U_2 \cap U)$ も準コンパクトである。
+ここから、構成可能集合の補集合が構成可能であること、
+構成可能集合の有限合併が構成可能であること、および
+構成可能集合の有限共通部分が構成可能であることが形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-inverse-images-constructibles}
+$f : X \to Y$ を位相空間の連続写像とする。
+$Y$ の各レトロコンパクト開部分集合の逆像が $X$ において
+レトロコンパクトならば、構成可能集合の逆像は構成可能である。
+\end{lemma}
+
+\begin{proof}
+これは $f^{-1}(U \cap V^c) = f^{-1}(U) \cap f^{-1}(V)^c$ と
+構成可能集合の定義から従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-open-immersion-constructible-inverse-image}
+$U \subset X$ を開とする。構成可能集合 $E \subset X$ に対し、
+$E \cap U$ は $U$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$V \subset X$ が $X$ においてレトロコンパクト開集合であると仮定する。
+補題 \ref{topology-lemma-inverse-images-constructibles} により、
+$V \cap U$ が $U$ においてレトロコンパクトであることを示せば十分である。
+これを示すため、$W \subset U$ を開かつ準コンパクトとする。
+すると $W$ は $X$ において開かつ準コンパクトである。
+したがって $V$ が $X$ においてレトロコンパクトであることから、
+$V \cap W = V \cap U \cap W$ は準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-quasi-compact-open-immersion-constructible-image}
+$U \subset X$ をレトロコンパクト開集合とし、$E \subset U$ とする。
+$E$ が $U$ において構成可能ならば、$E$ は $X$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$V, W \subset U$ が $U$ においてレトロコンパクト開集合であると仮定する。
+すると $V, W$ は $X$ においてレトロコンパクト開集合である
+（補題 \ref{topology-lemma-composition-quasi-compact}）。
+したがって $V \cap (U \setminus W) = V \cap (X \setminus W)$ は
+$X$ において構成可能である。$U$ の任意の構成可能部分集合は
+$V \cap (U \setminus W)$ の形の部分集合の有限合併なので、結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-collate-constructible}
+$X$ を位相空間とし、$E \subset X$ を部分集合とする。
+$X = V_1 \cup \ldots \cup V_m$ をレトロコンパクト開集合による有限被覆とする。
+このとき、$E$ が $X$ において構成可能であるための必要十分条件は、
+各 $j = 1, \ldots, m$ に対して $E \cap V_j$ が $V_j$ において
+構成可能であることである。
+\end{lemma}
+
+\begin{proof}
+$E$ が $X$ において構成可能なら、補題
+\ref{topology-lemma-open-immersion-constructible-inverse-image} により、すべての $j$ に対し
+$E \cap V_j$ は $V_j$ において構成可能である。
+逆に、各 $j = 1, \ldots, m$ に対して $E \cap V_j$ が $V_j$ において
+構成可能であると仮定する。このとき補題
+\ref{topology-lemma-quasi-compact-open-immersion-constructible-image} により
+$E = \bigcup E \cap V_j$ は構成可能集合の有限合併であり、したがって構成可能である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-intersect-constructible-with-closed}
+$X$ を位相空間とする。$Z \subset X$ を、$X \setminus Z$ が準コンパクトとなる
+閉部分集合とする。このとき構成可能集合 $E \subset X$ に対して、
+$E \cap Z$ は $Z$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$V \subset X$ が $X$ においてレトロコンパクト開集合であると仮定する。
+補題 \ref{topology-lemma-inverse-images-constructibles} により、
+$V \cap Z$ が $Z$ においてレトロコンパクトであることを示せば十分である。
+これを示すため、$W \subset Z$ を開かつ準コンパクトとする。部分集合
+$W' = W \cup (X \setminus Z)$ は準コンパクトかつ開であり、$W = Z \cap W'$ である。
+したがって $V$ が $X$ においてレトロコンパクトであることから、
+$V \cap Z \cap W = V \cap Z \cap W'$ は準コンパクト開集合
+$V \cap W'$ の閉部分集合である。ゆえに補題
+\ref{topology-lemma-closed-in-quasi-compact} により $V \cap Z \cap W$ は準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-intersect-constructible-with-retrocompact}
+$X$ を位相空間とし、$T \subset X$ を部分集合とする。次を仮定する。
+\begin{enumerate}
+\item $T$ は $X$ においてレトロコンパクトである。
+\item 準コンパクト開集合は $X$ の位相の開基をなす。
+\end{enumerate}
+このとき構成可能集合 $E \subset X$ に対して、$E \cap T$ は
+$T$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$V \subset X$ が $X$ においてレトロコンパクト開集合であると仮定する。
+補題 \ref{topology-lemma-inverse-images-constructibles} により、
+$V \cap T$ が $T$ においてレトロコンパクトであることを示せば十分である。
+これを示すため、$W \subset T$ を開かつ準コンパクトとする。仮定 (2) により、
+$W = T \cap W'$ を満たす準コンパクト開集合 $W' \subset X$ を見つけられる
+（詳細は省略する）。したがって $V$ が $X$ においてレトロコンパクトであることから、
+$V \cap T \cap W = V \cap T \cap W'$ は $T$ と準コンパクト開集合
+$V \cap W'$ との共通部分である。ゆえに $V \cap T \cap W$ は準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-constructible-image}
+$Z \subset X$ を、補集合がレトロコンパクト開集合である閉部分集合とする。
+$E \subset Z$ とする。$E$ が $Z$ において構成可能ならば、$E$ は
+$X$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$V \subset Z$ が $Z$ においてレトロコンパクト開集合であると仮定する。
+$X$ の開部分集合 $\tilde V = V \cup (X \setminus Z)$ を考える。
+$W \subset X$ を準コンパクト開集合とする。このとき
+$$
+W \cap \tilde V =
+\left(V \cap W\right) \cup \left((X \setminus Z) \cap W\right).
+$$
+第一の部分は、$V \cap W = V \cap (Z \cap W)$ であり、
+$(Z \cap W)$ が $Z$ において準コンパクト開集合で
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）、$V$ が $Z$ において
+レトロコンパクトなので、準コンパクトである。
+第二の部分は、$(X \setminus Z)$ が $X$ においてレトロコンパクトなので、
+準コンパクトである。このようにして $\tilde V$ が $X$ において
+レトロコンパクトであることが分かる。
+したがって $V_1, V_2 \subset Z$ がレトロコンパクト開集合なら、
+$$
+V_1 \cap (Z \setminus V_2) = \tilde V_1 \cap (X \setminus \tilde V_2)
+$$
+は $X$ において構成可能である。$Z$ の任意の構成可能部分集合は
+$V_1 \cap (Z \setminus V_2)$ の形の部分集合の有限合併なので、結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-constructible-is-retrocompact}
+$X$ を位相空間とする。$X$ の任意の構成可能部分集合はレトロコンパクトである。
+\end{lemma}
+
+\begin{proof}
+$U_i, V_i$ が $X$ においてレトロコンパクト開集合であるように
+$E = \bigcup_{i = 1, \ldots, n} U_i \cap V_i^c$ と書く。
+$W \subset X$ を準コンパクト開集合とする。このとき
+$E \cap W = \bigcup_{i = 1, \ldots, n} U_i \cap V_i^c \cap W$ である。
+したがって、$U, V$ がレトロコンパクト開集合で $W$ が準コンパクト開集合なら、
+$U \cap V^c \cap W$ が準コンパクトであることを示せば十分である。
+これは $U \cap V^c \cap W$ が準コンパクト集合 $U \cap W$ の閉部分集合なので、
+補題 \ref{topology-lemma-closed-in-quasi-compact} から従う。
+\end{proof}
+
+\noindent
+問：次の補題は、$X$ が準コンパクト位相空間であると仮定した場合にも
+成り立つだろうか。補題 \ref{topology-lemma-intersect-constructible-with-closed} と比較せよ。
+
+\begin{lemma}
+\label{topology-lemma-intersect-constructible-with-constructible}
+$X$ を位相空間とする。$X$ が準コンパクト開集合からなる開基をもつと仮定する。
+$E, E'$ が $X$ において構成可能なら、$E \cap E'$ は $E$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-intersect-constructible-with-retrocompact} と
+\ref{topology-lemma-constructible-is-retrocompact} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-constructible-in-constructible}
+$X$ を位相空間とする。$X$ が準コンパクト開集合からなる開基をもつと仮定する。
+$E$ が $X$ において構成可能で、$F \subset E$ が $E$ において構成可能ならば、
+$F$ は $X$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$X$ の任意のレトロコンパクト部分集合 $T$ は、準コンパクト開集合からなる
+相対位相の開基をもつことに注意する。特に任意の構成可能部分集合について
+これが成り立つ（補題 \ref{topology-lemma-constructible-is-retrocompact}）。
+$U_i, V_i \subset X$ がレトロコンパクト開集合であり、
+$E_i = U_i \cap V_i^c$ となるように $E = E_1 \cup \ldots \cup E_n$ と書く。
+補題 \ref{topology-lemma-intersect-constructible-with-constructible} により、
+$E_i = E \cap E_i$ は $E$ において構成可能である。
+したがって補題 \ref{topology-lemma-intersect-constructible-with-constructible} により、
+$F \cap E_i$ は $E_i$ において構成可能である。
+ゆえに、$U, V \subset X$ がレトロコンパクト開集合であり、
+$E = U \cap V^c$ である場合について補題を示せば十分である。
+この場合、包含 $E \subset X$ は次の合成である。
+$$
+E = U \cap V^c \to U \to X
+$$
+そこで最初の包含に補題 \ref{topology-lemma-closed-constructible-image} を、
+二番目の包含に補題
+\ref{topology-lemma-quasi-compact-open-immersion-constructible-image} を適用できる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-locally-closed-constructible-image}
+$X$ を、準コンパクト開集合からなる開基をもち、任意の二つの
+準コンパクト開集合の共通部分が準コンパクトとなる準コンパクト位相空間とする。
+$T \subset X$ を、$T$ が準コンパクトで $T^c$ が $X$ において
+レトロコンパクトとなる局所閉部分集合とする。
+このとき $T$ は $X$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+$T$ は準コンパクトであり、$\overline{T}$ において開であることに注意する。
+準コンパクト開集合からなる開基を用いると、$U$ が $X$ の準コンパクト開集合となるように
+$T = U \cap \overline{T}$ と書ける。
+このとき $V = U \setminus T = U \cap T^c$ は、$T^c$ が $X$ において
+レトロコンパクトなので、$U$ においてレトロコンパクトである。
+したがって $V$ は準コンパクトである。任意の二つの準コンパクト開集合の
+共通部分は準コンパクトなので、$X$ の任意の準コンパクト開集合は
+レトロコンパクトである。ゆえに $U$ および $V = U \setminus T$ が
+$X$ のレトロコンパクト開集合となるように $T = U \cap V^c$ と書ける。
+まして $T$ は $X$ において構成可能である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-collate-constructible-from-constructible}
+$X$ を、準コンパクト開集合からなる位相の開基をもつ位相空間とする。
+$E \subset X$ を部分集合とする。
+$X = E_1 \cup \ldots \cup E_m$ を構成可能部分集合による有限被覆とする。
+このとき、$E$ が $X$ において構成可能であるための必要十分条件は、
+各 $j = 1, \ldots, m$ に対して $E \cap E_j$ が $E_j$ において
+構成可能であることである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-intersect-constructible-with-constructible} と
+\ref{topology-lemma-constructible-in-constructible} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-generic-point-in-constructible}
+$X$ を位相空間とする。$Z \subset X$ が既約であると仮定する。
+$E \subset X$ を局所閉部分集合の有限合併とする（たとえば $E$ は構成可能である）。
+次は同値である。
+\begin{enumerate}
+\item 共通部分 $E \cap Z$ は $Z$ の開かつ稠密な部分集合を含む。
+\item 共通部分 $E \cap Z$ は $Z$ で稠密である。
+\end{enumerate}
+$Z$ が生成点 $\xi$ をもつなら、これらはさらに次と同値である。
+\begin{enumerate}
+\item[(3)] $\xi \in E$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) は明らかである。(2) を仮定する。
+$E \cap Z$ は $Z$ の局所閉部分集合 $Z_i$ の有限合併であることに注意する。
+$Z$ は既約なので、$Z_i$ の一つは $Z$ で稠密でなければならない。
+するとこの $Z_i$ はその閉包で開なので、$Z$ で開かつ稠密である。
+したがって (1) が成り立つ。
+
+\medskip\noindent
+$\xi \in Z$ が生成点であると仮定する。同値な条件 (1), (2) が成り立つなら、
+$\xi \in E$ である。逆に $\xi \in E$ なら、$\xi \in E \cap Z$ であり、
+したがって $E \cap Z$ は $Z$ で稠密である。
+\end{proof}
+
+\section{構成可能集合とネーター空間}
+\label{topology-section-constructible-Noetherian}
+
+\begin{lemma}
+\label{topology-lemma-constructible-Noetherian-space}
+$X$ をネーター位相空間とする。$X$ の構成可能集合は、ちょうど
+$X$ の局所閉部分集合の有限合併である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-Noetherian-quasi-compact} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-constructible-map-Noetherian}
+$f : X \to Y$ をネーター位相空間の連続写像とする。
+$E \subset Y$ が $Y$ において構成可能ならば、$f^{-1}(E)$ は
+$X$ において構成可能である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-constructible-Noetherian-space} と連続写像の定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-characterize-constructible-Noetherian}
+$X$ をネーター位相空間とし、$E \subset X$ を部分集合とする。
+次は同値である。
+\begin{enumerate}
+\item $E$ は $X$ において構成可能である。
+\item すべての既約閉部分集合 $Z \subset X$ に対し、共通部分
+$E \cap Z$ は $Z$ の空でない開集合を含むか、または $Z$ で稠密でない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$E$ が構成可能で、$Z \subset X$ が既約閉であると仮定する。
+補題 \ref{topology-lemma-constructible-map-Noetherian} により、$E \cap Z$ は
+$Z$ において構成可能である。したがって $E \cap Z$ は、$Z$ の
+空でない局所閉部分集合 $T_i$ の有限合併である。
+$T_i$ のどれも $Z$ で開でなければ、$E \cap Z$ が $Z$ で稠密でないことは明らかである。
+このようにして (1) が (2) を含意することが分かる。
+
+\medskip\noindent
+逆に、(2) が成り立つと仮定する。$X$ の閉部分集合 $Y$ で、
+$E \cap Y$ が $Y$ において構成可能でないもの全体の集合を $\mathcal{S}$ とする。
+$\mathcal{S} \not = \emptyset$ なら、$X$ はネーターなので最小元 $Y$ をもつ。
+$Y = Y_1 \cup \ldots \cup Y_r$ を $Y$ の既約成分への分解とする。
+補題 \ref{topology-lemma-Noetherian} を参照せよ。
+$r > 1$ なら、各 $Y_i \cap E$ は $Y_i$ において構成可能であり、したがって
+$Y_i$ の局所閉部分集合の有限合併である。ゆえに $E \cap Y$ も
+$Y$ の局所閉部分集合の有限合併であり、補題
+\ref{topology-lemma-constructible-Noetherian-space} により $E \cap Y$ は
+$Y$ において構成可能である。これは矛盾するので $r = 1$ である。
+$r = 1$ なら $Y$ は既約であり、仮定 (2) により $E \cap Y$ は
+(a) $Y$ の開集合 $V$ を含むか、または (b) $Y$ で稠密でない。
+場合 (a) では、$Y$ の極小性により $E \cap (Y \setminus V)$ は
+$Y \setminus V$ の局所閉部分集合の有限合併である。
+したがって $E \cap Y$ は $Y$ の局所閉部分集合の有限合併であり、補題
+\ref{topology-lemma-constructible-Noetherian-space} により構成可能である。
+これは矛盾するので、場合 (b) でなければならない。
+場合 (b) では、ある真の閉部分集合 $Y' \subset Y$ に対して
+$E \cap Y = E \cap Y'$ となる。$Y$ の極小性により $E \cap Y'$ は
+$Y'$ の局所閉部分集合の有限合併であり、したがって
+$E \cap Y' = E \cap Y$ は $Y$ の局所閉部分集合の有限合併で、補題
+\ref{topology-lemma-constructible-Noetherian-space} により構成可能である。
+この矛盾で補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-constructible-neighbourhood-Noetherian}
+$X$ をネーター位相空間とし、$x \in X$ とする。
+$E \subset X$ は $X$ において構成可能であるとする。次は同値である。
+\begin{enumerate}
+\item $E$ は $x$ の近傍である。
+\item $x$ を含む $X$ のすべての既約閉部分集合 $Y$ に対し、
+共通部分 $E \cap Y$ は $Y$ で稠密である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が (2) を含意することは明らかである。(2) を仮定する。
+$x$ を含む $X$ の閉部分集合 $Y$ で、$E \cap Y$ が $Y$ において
+$x$ の近傍でないもの全体の集合を $\mathcal{S}$ とする。
+$\mathcal{S} \not = \emptyset$ なら、$X$ はネーターなので極小元 $Y$ をもつ。
+$Y = Y_1 \cup Y_2$ と書け、$Y_1$, $Y_2$ がより小さな二つの
+空でない閉部分集合であると仮定する。
+$i = 1, 2$ に対して $x \in Y_i$ なら、$Y_i \cap E$ は $Y_i$ における
+$x$ の近傍であり、$Y \cap E$ は $Y$ における $x$ の近傍となるので矛盾する。
+$x \in Y_1$ だが $x \not\in Y_2$ とすると、$Y_1 \cap E$ は
+$Y_1$ における $x$ の近傍であり、したがって $Y$ における近傍でもある。
+これも矛盾である。ゆえに $Y$ は既約閉である。
+仮定 (2) により $E \cap Y$ は $Y$ で稠密である。
+したがって補題 \ref{topology-lemma-characterize-constructible-Noetherian} により、
+$E \cap Y$ は $Y$ の開集合 $V$ を含む。
+$x \in V$ なら $E \cap Y$ は $Y$ における $x$ の近傍となり、矛盾する。
+$x \not \in V$ なら、$Y' = Y \setminus V$ は $x$ を含む $Y$ の真の閉部分集合である。
+$Y$ の極小性により、$E \cap Y'$ は $Y'$ における $x$ の開近傍
+$V' \subset Y'$ を含む。しかしこのとき $V' \cup V$ は $E$ に含まれる
+$Y$ における $x$ の開近傍となり、矛盾する。
+この矛盾で補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-characterize-open-Noetherian}
+$X$ をネーター位相空間とし、$E \subset X$ を部分集合とする。
+次は同値である。
+\begin{enumerate}
+\item $E$ は $X$ で開である。
+\item $X$ のすべての既約閉部分集合 $Y$ に対し、共通部分 $E \cap Y$ は
+空であるか、または $Y$ の空でない開集合を含む。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-characterize-constructible-Noetherian} と
+\ref{topology-lemma-constructible-neighbourhood-Noetherian} から形式的に従う。
+\end{proof}
+
+\section{固有写像の特徴づけ}
+\label{topology-section-proper}
+
+\noindent
+通常の位相における固有写像の概念を論じる節を設ける。
+位相空間の連続写像が普遍的閉かつ分離的であるとき、それを
+{\it 固有}と定義する。これは代数幾何における固有射の定義とはよく整合するが、
+Bourbaki における定義とは異なる。本書の位相空間の固有写像の定義を用いれば、
+固有基底変換定理（Cohomology, Theorem
+\ref{cohomology-theorem-proper-base-change}）は追加の仮定なしに成り立つ。
+さらに、$\mathbf{C}$ 上の有限型スキームの射 $f : X \to Y$ に対して次が成り立つ。
+$f$ がスキームの射として固有であるための必要十分条件は、古典位相を入れた
+$\mathbf{C}$-点上の連続写像 $f : X(\mathbf{C}) \to Y(\mathbf{C})$ が固有であることである。
+これは \cite[Exp. XII, Prop.\ 3.2(v)]{SGA1} で説明されている。
+同文献には、位相における固有性を、分離性を加えた Bourbaki の概念として
+採用することを指摘した脚注もある。
+
+\medskip\noindent
+分離的、普遍的閉、およびその両方（すなわち固有性）という三つの異なる概念に
+名前をもたせることは有用である。局所コンパクトハウスドルフ空間の連続写像
+$f : X \to Y$ に対して、「固有」という語は古くから
+「$f^{-1}($コンパクト$) =$ コンパクト」という概念に使われてきたが、
+このような良い空間では、これは普遍的閉性と同値である。
+実際、明確さのため「準コンパクト」という語を使って定式化した逆像条件は、
+写像が閉であるという仮定を含めれば、一般にも普遍的閉性と同値であることを後で見る。
+\cite[Exercises 22-26 in Chapter II]{LangReal} も参照せよ。ただし Lang は
+Bourbaki と同じく「固有」を「普遍的閉」の同義語として使っているので注意を要する。
+
+\begin{lemma}[チューブ補題]
+\label{topology-lemma-tube}
+$X$ と $Y$ を位相空間とする。$A \subset X$ と $B \subset Y$ を
+準コンパクト部分集合とする。$W$ が $X \times Y$ で開であり、
+$A \times B \subset W \subset X \times Y$ であるとする。
+このとき $U \times V \subset W$ を満たす開集合 $A \subset U \subset X$ と
+$B \subset V \subset Y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+各 $a \in A$ と $b \in B$ に対して、
+$(a, b) \in U_{(a, b)} \times V_{(a, b)} \subset W$ を満たす
+$X$ の開集合 $U_{(a, b)}$ と $Y$ の開集合 $V_{(a, b)}$ が存在する。
+$b$ を固定すると、
+$A \subset U_{(a_1, b)} \cup \ldots \cup U_{(a_n, b)}$ を満たす
+有限個の $a_1, \ldots, a_n$ が存在する。したがって
+$$
+A \times \{b\} \subset
+(U_{(a_1, b)} \cup \ldots \cup U_{(a_n, b)}) \times
+(V_{(a_1, b)} \cap \ldots \cap V_{(a_n, b)}) \subset W.
+$$
+ゆえに各 $b \in B$ に対して、
+$A \times \{b\} \subset U_b \times V_b \subset W$ を満たす
+開集合 $U_b \subset X$ と $V_b \subset Y$ が存在する。
+上と同様に、$B \subset V_{b_1} \cup \ldots \cup V_{b_m}$ を満たす
+有限個の $b_1, \ldots, b_m$ が存在する。実際、
+$A \times B \subset
+(U_{b_1} \cap \ldots \cap U_{b_m}) \times
+(V_{b_1} \cup \ldots \cup V_{b_m})$
+なので、これで結論が得られる。
+\end{proof}
+
+\noindent
+次の定義の記法は、読者が慣れているものと若干異なるかもしれない。
+
+\begin{definition}
+\label{topology-definition-proper-map}
+$f : X\to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item すべての閉部分集合の像が閉であるとき、写像 $f$ は {\it 閉} であるという。
+\item 任意の位相空間 $Z$ に対して写像 $Z \times X\to Z \times Y$ が閉であるとき、
+写像 $f$ は {\it Bourbaki 固有}\footnote{これは \cite{Bourbaki} で
+使われる用語である。文献によっては、この性質を「普遍的閉」と呼ぶこともある。}
+であるという。
+\item すべての準コンパクト部分集合 $V \subset Y$ の逆像 $f^{-1}(V)$ が
+準コンパクトであるとき、写像 $f$ は {\it 準固有} であるという。
+\item 任意の連続写像 $g: Z \to Y$ に対して写像
+$f': Z \times_Y X \to Z$ が閉であるとき、$f$ は {\it 普遍的閉} であるという。
+\item $f$ が分離的かつ普遍的閉であるとき、$f$ は {\it 固有} であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+次の補題は後で有用になる。
+
+\begin{lemma}
+\label{topology-lemma-characterize-quasi-compact}
+\begin{reference}
+\cite[I, p. 75, Lemme 1]{Bourbaki} と
+\cite[I, p. 76, Corrolaire 1]{Bourbaki} の組合せ。
+\end{reference}
+位相空間 $X$ が準コンパクトであるための必要十分条件は、
+任意の位相空間 $Z$ に対して射影写像 $Z \times X \to Z$ が閉であることである。
+\end{lemma}
+
+\begin{proof}
+（下の注記も参照せよ。）
+$X$ が準コンパクトでなければ、有限個の $U_i$ では $X$ を覆えないような
+開被覆 $X = \bigcup_{i \in I} U_i$ が存在する。
+$I$ の冪集合 $\mathcal{P}(I)$ の部分集合で、$I$ および $I$ の空でない
+有限部分集合全体からなるものを $Z$ とする。
+次の集合を位相の開基として $Z$ に位相を定める。
+\begin{enumerate}
+\item $Z\setminus\{I\}$ のすべての部分集合。
+\item $I$ の各有限部分集合 $K$ に対する集合
+$U_K := \{J\subset I \mid J \in Z, \ K\subset J \})$。
+\end{enumerate}
+これが位相の開基であることの確認は読者に委ねる。
+式
+$$
+M = \{(J, x) \mid J \in Z, \ x \in \bigcap\nolimits_{i \in J} U_i^c)\}
+$$
+で定まる $Z \times X$ の部分集合を考える。
+$(J, x) \not \in M$ なら、ある $i \in J$ に対して $x \in U_i$ である。
+したがって $U_{\{i\}} \times U_i \subset Z \times X$ は $(J, x)$ を含み、
+$M$ と交わらない開部分集合である。ゆえに $M$ は閉である。
+$M$ の $Z$ への射影は $Z-\{I\}$ であり、これは閉でない。
+したがって $Z \times X \to Z$ は閉でない。
+
+\medskip\noindent
+$X$ が準コンパクトであると仮定する。$Z$ を位相空間とする。
+$M \subset  Z \times X$ を閉とする。$z \in Z$ を
+$\text{pr}_1(M)$ に属さない点とする。チューブ補題 \ref{topology-lemma-tube} により、
+$U \times X$ が $M$ の補集合に含まれるような開集合 $U \subset Z$ が存在する。
+したがって $\text{pr}_1(M)$ は閉である。
+\end{proof}
+
+\begin{remark}
+\label{topology-remark-lemma-literature}
+補題 \ref{topology-lemma-characterize-quasi-compact} は
+\cite[I, p. 75, Lemme 1]{Bourbaki} と
+\cite[I, p. 76, Corollaire 1]{Bourbaki} の組合せである。
+\end{remark}
+
+\begin{theorem}
+\label{topology-theorem-characterize-proper}
+\begin{reference}
+\cite[I, p. 75, Theorem 1]{Bourbaki} には (2) $\Leftrightarrow$ (4) がある。
+\cite[I, p. 77, Proposition 6]{Bourbaki} には (2) $\Rightarrow$ (1) がある。
+\end{reference}
+$f: X\to Y$ を位相空間の連続写像とする。次の条件は同値である。
+\begin{enumerate}
+\item 写像 $f$ は準固有かつ閉である。
+\item 写像 $f$ は Bourbaki 固有である。
+\item 写像 $f$ は普遍的閉である。
+\item 写像 $f$ は閉であり、任意の $y\in Y$ に対して $f^{-1}(y)$ は準コンパクトである。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+（下の注記も参照せよ。）
+写像 $f$ が (1) を満たせば、任意の一点集合は準コンパクトなので、
+自動的に (4) を満たす。
+
+\medskip\noindent
+写像 $f$ が (4) を満たすと仮定する。これが普遍的閉、すなわち (3) を
+満たすことを示す。$g : Z \to Y$ を位相空間の連続写像とし、図式
+$$
+\xymatrix{
+Z \times_Y X \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Z \ar[r]^g & Y
+}
+$$
+を考える。証明中、$Z \times_Y X \to Z \times X$ がその像への同相写像であること、
+すなわち $Z \times_Y X$ を相対位相を入れた $Z \times X$ の対応する部分集合と
+同一視できることを用いる。
+$f' : Z \times_Y X \to Z$ の像は
+$\Im(f') = \{z : g(z) \in f(X)\}$ である。
+$f(X)$ は閉なので、$\Im(f')$ は $Z$ の閉部分空間である。
+閉部分集合 $P \subset Z \times_Y X$ を考える。
+$z \in Z$, $z \not \in f'(P)$ とする。
+$z \not \in \Im(f')$ なら、$Z \setminus \Im(f')$ は $f'(P)$ と交わらない開近傍である。
+$z$ が $\Im(f')$ に属するなら、
+$(f')^{-1}\{z\} = \{z\} \times f^{-1}\{g(z)\}$ であり、
+$f^{-1}\{g(z)\}$ は仮定により準コンパクトである。
+$P$ は $Z \times_Y X$ の閉部分集合なので、
+$P = P' \cap Z \times_Y X$ を満たす $Z \times X$ の閉集合 $P'$ が存在する。
+$(f')^{-1}\{z\}$ は $P^c = P'^c \cup (Z \times_Y X)^c$ の部分集合であり、
+$(f')^{-1}\{z\}$ は $(Z \times_Y X)^c$ と交わらないので、
+$(f')^{-1}\{z\}$ は $P'^c$ に含まれる。
+チューブ補題 \ref{topology-lemma-tube} を
+$(f')^{-1}\{z\} = \{z\} \times f^{-1}\{g(z)\}
+\subset (P')^c \subset Z \times X$
+に適用できる。これにより $(f')^{-1}\{z\}$ を含む $V \times U$ が得られる。
+ここで $U$ と $V$ はそれぞれ $X$ と $Z$ の開集合であり、
+$V \times U$ は $P'$ と交わらない。
+すると集合 $V \cap g^{-1}(Y-f(U^c))$ は、$f$ が閉なので $Z$ で開であり、
+$z$ を含み、$P$ の像と交わらない。
+したがって $f'(P)$ は閉である。言い換えると、写像 $f$ は普遍的閉である。
+
+\medskip\noindent
+(3) $\Rightarrow$ (2) は自明である。実際、任意の位相空間 $Z$ に対して
+射影射 $g : Z \times Y \to Y$ を考える。このとき $f'$ は写像
+$Z \times X \to Z \times Y$ であること、すなわち
+$(Z \times Y) \times_Y X = Z \times X$ であることが容易に分かる。
+（この同一視は純粋に圏論的な性質であり、位相空間そのものとは関係しない。）
+
+\medskip\noindent
+$f$ が (2) を満たすと仮定する。(1) を満たすことを示す。
+$f$ は閉であることに注意する。実際、$f$ は閉であると仮定した写像
+$\{pt\} \times X \to \{pt\} \times Y$ と同一視できる。
+任意の準コンパクト部分集合 $K \subset Y$ を選ぶ。
+$Z$ を任意の位相空間とする。
+$Z \times X \to Z \times Y$ は閉なので、写像
+$Z \times f^{-1}(K) \to Z \times K$ は閉である
+（$T$ が $Z \times f^{-1}(K)$ で閉なら、ある閉集合
+$T' \subset Z \times X$ によって
+$T = Z \times f^{-1}(K) \cap T'$ と書ける）。
+$K$ は準コンパクトなので、補題 \ref{topology-lemma-characterize-quasi-compact} により
+$K \times Z\to Z$ は閉である。したがって合成
+$Z \times f^{-1}(K)\to Z \times K \to Z$ は閉であり、再び補題
+\ref{topology-lemma-characterize-quasi-compact} により $f^{-1}(K)$ は準コンパクトでなければならない。
+\end{proof}
+
+\begin{remark}
+\label{topology-remark-proof-literature}
+文献上の参照をいくつか挙げる。
+\cite[I, p. 75, Theorem 1]{Bourbaki} には (2) $\Leftrightarrow$ (4) がある。
+\cite[I, p. 77, Proposition 6]{Bourbaki} には (2) $\Rightarrow$ (1) がある。
+もちろん自明に (1) $\Rightarrow$ (4) である。
+したがって (1), (2), (4) は同値である。
+(3) と (4) の同値性は \cite[Chapter II, Exercise 25]{LangReal} である。
+\end{remark}
+
+\begin{lemma}
+\label{topology-lemma-closed-map}
+\begin{slogan}
+コンパクト空間からハウスドルフ空間への写像は普遍的閉である。
+\end{slogan}
+$f : X \to Y$ を位相空間の連続写像とする。
+$X$ が準コンパクトで $Y$ がハウスドルフならば、$f$ は普遍的閉である。
+\end{lemma}
+
+\begin{proof}
+$Y$ の各点は閉なので、補題 \ref{topology-lemma-closed-in-quasi-compact} により、
+すべての $y \in Y$ に対して $X$ の閉部分集合 $f^{-1}(y)$ は準コンパクトである。
+したがって定理 \ref{topology-theorem-characterize-proper} により、$f$ が閉であることを
+示せば十分である。$E \subset X$ が閉なら、これは準コンパクトであり
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）、したがって
+$f(E) \subset Y$ は準コンパクトであり
+（補題 \ref{topology-lemma-image-quasi-compact}）、したがって $f(E)$ は $Y$ で閉である
+（補題 \ref{topology-lemma-quasi-compact-in-Hausdorff}）。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-bijective-map}
+$f : X \to Y$ を位相空間の連続写像とする。
+$f$ が全単射で、$X$ が準コンパクト、$Y$ がハウスドルフならば、
+$f$ は同相写像である。
+\end{lemma}
+
+\begin{proof}
+$f$ が閉であることを示せば十分である。なぜなら、これは $f^{-1}$ が
+連続であることを含意するからである。$T \subset X$ が閉なら、$T$ は
+補題 \ref{topology-lemma-closed-in-quasi-compact} により準コンパクトであり、
+したがって $f(T)$ は補題 \ref{topology-lemma-image-quasi-compact} により準コンパクトであり、
+したがって $f(T)$ は補題 \ref{topology-lemma-quasi-compact-in-Hausdorff} により閉である。
+\end{proof}
+
+\section{ジャコブソン空間}
+\label{topology-section-space-jacobson}
+
+\begin{definition}
+\label{topology-definition-space-jacobson}
+$X$ を位相空間とする。$X_0$ を $X$ の閉点全体の集合とする。
+すべての閉部分集合 $Z \subset X$ が $Z \cap X_0$ の閉包であるとき、
+$X$ は {\it ジャコブソン} であるという。
+\end{definition}
+
+\noindent
+位相空間 $X$ がジャコブソンであるための必要十分条件は、$X$ の
+任意の空でない局所閉部分集合が $X$ で閉な点をもつことであることに注意する。
+
+\medskip\noindent
+$X$ をジャコブソン空間とし、$X_0$ を、相対位相を入れた $X$ の
+閉点全体の集合とする。定義から、射 $X_0 \to X$ が $X_0$ の閉部分集合と
+$X$ の閉部分集合との間の全単射を誘導することは明らかである。
+したがって $X$ の多くの性質が $X_0$ に継承される。
+たとえば $X$ と $X_0$ のクルル次元は等しい。
+
+\begin{lemma}
+\label{topology-lemma-jacobson-check-irreducible-closed}
+$X$ を位相空間とし、$X_0$ を $X$ の閉点全体の集合とする。
+すべての点 $x\in X$ に対し、共通部分
+$X_0 \cap \overline{\{x\}}$ が $\overline{\{x\}}$ で稠密であると仮定する。
+このとき $X$ はジャコブソンである。
+\end{lemma}
+
+\begin{proof}
+$Z$ を $X$ の閉部分集合、$U$ を $X$ の開部分集合とし、
+$U\cap Z$ は空でないとする。$x\in U\cap Z$ に対し、
+$\overline{\{x\}}\cap U$ は $Z\cap U$ の空でない部分集合であり、
+仮定により、求めるとおり $X$ で閉な点を含む。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-non-jacobson-Noetherian-characterize}
+$X$ を、準コンパクト開集合からなる開基をもつコルモゴロフ位相空間とする。
+$X$ がジャコブソンでないなら、$\{x\}$ が局所閉であるような閉でない点
+$x \in X$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$X$ はジャコブソンでないので、$X$ の閉集合 $Z$ と開集合 $U$ で、
+$Z \cap U$ が空でなく、$X$ で閉な点を含まないものが存在する。
+$X$ は準コンパクト開集合からなる開基をもつので、$U$ を $Z\cap U$ の点の
+開かつ準コンパクトな近傍で置き換えられ、$U$ が準コンパクト開集合であると
+仮定してよい。補題 \ref{topology-lemma-quasi-compact-closed-point} により、
+$Z \cap U$ で閉な点 $x \in Z \cap U$ が存在する。
+したがって $\{x\}$ は局所閉だが、$X$ では閉でない。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-jacobson-local}
+$X$ を位相空間とし、$X = \bigcup U_i$ を開被覆とする。
+$X$ がジャコブソンであるための必要十分条件は、各 $U_i$ が
+ジャコブソンであることである。さらに、この場合 $X_0 = \bigcup U_{i, 0}$ である。
+\end{lemma}
+
+\begin{proof}
+$X$ を位相空間とする。$X_0$ を $X$ の閉点全体の集合とし、
+$U_{i, 0}$ を $U_i$ の閉点全体の集合とする。このとき
+$X_0 \cap U_i \subset U_{i, 0}$ だが、一般には等号が成り立つとは限らない。
+
+\medskip\noindent
+まず、各 $U_i$ がジャコブソンであると仮定する。この場合
+$X_0 \cap U_i = U_{i, 0}$ であると主張する。
+実際、$x \in U_{i, 0}$、すなわち $x$ が $U_i$ で閉であると仮定する。
+$\overline{\{x\}}$ を $X$ における閉包とする。
+$\overline{\{x\}} \cap U_j$ を考える。
+$x \not \in U_j$ なら $\overline{\{x\}} \cap U_j = \emptyset$ である。
+$x \in U_j$ なら、$U_i \cap U_j \subset U_j$ は $x$ を含む $U_j$ の開部分集合である。
+$T' = U_j \setminus U_i \cap U_j$ および $T = \{x\} \amalg T'$ とおく。
+$x$ は $U_i$ で閉であり、したがって $x$ は $U_i \cap U_j$ でも閉なので、
+$T$, $T'$ は $U_j$ の閉部分集合で、$T$ は $x$ を含む。
+$U_j$ はジャコブソンなので、$U_j$ の閉点は $T$ で稠密である。
+$T = \{x\} \amalg T'$ なので、これは $x$ が $U_j$ で閉である場合にしか起こらない。
+したがって $\overline{\{x\}} \cap U_j = \{x\}$ である。
+ゆえに望みどおり $\overline{\{x\}} = \{ x \}$ である。
+
+\medskip\noindent
+各 $U_i$ がジャコブソンであるという仮定を続け、$Z \subset X$ を閉部分集合とする。
+いま $X_0 \cap Z  \cap U_i = U_{i, 0} \cap Z$ が $Z \cap U_i$ で
+稠密であることが分かったので、$X_0 \cap Z$ が $Z$ で稠密であることが直ちに従う。
+
+\medskip\noindent
+逆に、$X$ がジャコブソンであると仮定する。$Z \subset U_i$ を閉とする。
+$X_0 \cap \overline{Z}$ は $\overline{Z}$ で稠密である。
+$\overline{Z} \setminus Z$ は閉なので、$X_0 \cap Z$ も $Z$ で稠密である。
+$X_0 \cap U_i \subset U_{i, 0}$ だから、$U_{i, 0} \cap Z$ は $Z$ で稠密である。
+したがって望みどおり $U_i$ はジャコブソンである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-jacobson-inherited}
+$X$ をジャコブソンとする。次の種類の部分集合 $T \subset X$ はジャコブソンである。
+\begin{enumerate}
+\item 開部分空間。
+\item 閉部分空間。
+\item 局所閉部分空間。
+\item 局所閉部分空間の合併。
+\item 構成可能集合。
+\item $X$ 上局所的に局所閉部分集合の合併である任意の部分集合 $T \subset X$。
+\end{enumerate}
+これらの各場合に、$T$ の閉点は $X$ で閉である。
+\end{lemma}
+
+\begin{proof}
+$X_0$ を $X$ の閉点全体の集合とする。任意の部分集合 $T \subset X$ に対して、
+$(*)$ を次の性質とする。
+\begin{itemize}
+\item[(*)] $T$ の任意の空でない局所閉部分集合は、$X$ で閉な点をもつ。
+\end{itemize}
+常に $X_0 \cap T \subset T_0$ であることに注意する。
+したがって性質 $(*)$ は $T$ がジャコブソンであることを含意する。
+さらに、これは $T$ の各閉点が $X$ で閉であることも明らかに含意する。
+
+\medskip\noindent
+$T=\bigcup_i T_i$ で、$T_i$ が $X$ で局所閉であると仮定する。
+$A\subset T$ を $T$ の空でない局所閉部分集合とする。
+このとき $A\cap T_i$ が空でないような $T_i$ が存在し、これは $T_i$ で、
+したがって $X$ で局所閉である。$X$ はジャコブソンなので、
+$A$ は $X$ で閉な点をもつ。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-finite-jacobson}
+有限ジャコブソン空間は離散的である。
+閉点を有限個しかもたないジャコブソン空間は離散的である。
+\end{lemma}
+
+\begin{proof}
+$X$ が有限なら、閉点全体の集合 $X_0 \subset X$ は有限である。
+$X_0$ は有限であり、$X$ はジャコブソンであると仮定する。
+するとジャコブソン性により $\overline{X_0} = X$ である。
+いま $X_0 =\{x_1, \ldots, x_n\} = \bigcup_{i = 1, \ldots, n} \{x_i\}$ は
+閉集合の有限合併なので閉であり、したがって $X = \overline{X_0} = X_0$ である。
+各点は閉であり、有限性により各点は開でもある。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-jacobson-equivalent-locally-closed}
+\begin{slogan}
+ジャコブソン空間では、閉点が位相のすべてを捉える。
+\end{slogan}
+$X$ をジャコブソン位相空間とし、$X_0$ を $X$ の閉点全体の集合とする。
+包含関係を保つ全単射な対応
+$$
+\{\text{finite unions loc. closed subsets of } X\}
+\leftrightarrow
+\{\text{finite unions loc. closed subsets of } X_0\}
+$$
+が $E \mapsto E \cap X_0$ によって与えられる。
+この対応は、局所閉部分集合、開部分集合、および閉部分集合からなる
+部分族を保つ。
+\end{lemma}
+
+\begin{proof}
+対応 $E \mapsto E \cap X_0$ が単射であることだけを示す。
+実際、$E\neq E'$ なら一般性を失わず $E\setminus E'$ は空でなく、
+局所閉集合の有限合併である（詳細は省略する）。
+$X$ はジャコブソンなので、
+$(E \setminus E') \cap X_0 = E \cap X_0 \setminus E' \cap X_0$ は空でない。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-jacobson-equivalent-constructible}
+$X$ をジャコブソン位相空間とし、$X_0$ を $X$ の閉点全体の集合とする。
+包含関係を保つ全単射な対応
+$$
+\{\text{constructible subsets of } X\}
+\leftrightarrow
+\{\text{constructible subsets of } X_0\}
+$$
+が $E \mapsto E \cap X_0$ によって与えられる。
+この対応はレトロコンパクト開部分集合からなる部分族と、その補集合からなる
+部分族を保つ。
+\end{lemma}
+
+\begin{proof}
+上の補題 \ref{topology-lemma-jacobson-equivalent-locally-closed} により、
+$U$ が $X$ で開なら、$U\cap X_0$ が $X_0$ においてレトロコンパクトであることと、
+$U$ が $X$ においてレトロコンパクトであることが同値であると示せばよい。
+これは、$U$ が $X$ で開なら、$U\cap X_0$ が準コンパクトであることと
+$U$ が準コンパクトであることが同値だと示せば従う。
+補題 \ref{topology-lemma-jacobson-inherited} により、$X$ を $U$ で置き換えて
+$U = X$ と仮定してよい。
+最後に、$X$ の開集合族 $\mathcal{U}$ が $X$ を覆うことと $X_0$ を覆うことは同値である。
+実際、$X\setminus \bigcup \mathcal{U}$ が空でなければ、この閉集合における
+$X$ のジャコブソン性を使って $X_0$ の点を見つけられる。
+\end{proof}
+
+\section{特殊化}
+\label{topology-section-specialization}
+
+\begin{definition}
+\label{topology-definition-specialization}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $x, x' \in X$ とする。$x \in \overline{\{x'\}}$ であるとき、
+$x$ を $x'$ の{\it 特殊化}といい、また $x'$ を $x$ の{\it 一般化}という。
+記法：$x' \leadsto x$。
+\item 部分集合 $T \subset X$ が{\it 特殊化の下で安定}であるとは、
+すべての $x' \in T$ と各特殊化 $x' \leadsto x$ に対して $x \in T$
+となることをいう。
+\item 部分集合 $T \subset X$ が{\it 一般化の下で安定}であるとは、
+すべての $x \in T$ と各一般化 $x' \leadsto x$ に対して $x' \in T$
+となることをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-open-closed-specialization}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $X$ の任意の閉部分集合は特殊化の下で安定である。
+\item $X$ の任意の開部分集合は一般化の下で安定である。
+\item 部分集合 $T \subset X$ が特殊化の下で安定であることと、
+その補集合 $T^c$ が一般化の下で安定であることは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$F$ を $X$ の閉部分集合とする。$y\in F$ なら $\{y\} \subset F$ なので、
+$F$ が閉であることから
+$\overline{\{y\}} \subset \overline{F} = F$ となる。したがって、
+$y$ の任意の特殊化 $x$ に対して $x\in F$ である。
+
+\medskip\noindent
+$x, y\in X$ が $x\in \overline{\{y\}}$ を満たすとし、$T$ を
+$X$ の部分集合とする。$T$ が特殊化の下で安定であるということは、
+$y\in T$ ならば $x\in T$ ということである。逆に、$T$ が一般化の下で
+安定であるということは、$x\in T$ ならば $y\in T$ ということである。
+したがって、対偶をとれば (3) が従う。
+
+\medskip\noindent
+第2の性質は、補集合を考えることにより (1) と (3) から従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-stable-specialization}
+$T \subset X$ を位相空間 $X$ の部分集合とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $T$ は特殊化の下で安定である。
+\item $T$ は $X$ の閉部分集合の（有向）合併である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T$ が特殊化の下で安定であると仮定する。このとき、すべての $y\in T$ に対して
+$\overline{\{y\}} \subset T$ である。したがって
+$T = \bigcup_{y\in T} \overline{\{y\}}$ であり、これは $X$ の閉部分集合の
+合併である。逆に、$T = \bigcup_{i\in I}F_i$ であり、各 $F_i$ が $X$ の
+閉部分集合であると仮定する。$y\in T$ なら、$y\in F_i$ となる $i\in I$
+が存在する。$F_i$ は閉なので
+$\overline{\{y\}} \subset F_i \subset T$ である。よって $T$ は特殊化の下で
+安定である。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-lift-specializations}
+$f : X \to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item $Y$ における $y' \leadsto y$ と、$f(x') = y'$ を満たす任意の
+$x'\in X$ が与えられたとき、$f(x) = y$ を満たす $X$ における
+$x'$ の特殊化 $x' \leadsto x$ が存在するならば、{\it 特殊化は $f$ に沿って
+持ち上がる}といい、また $f$ は{\it 特殊化的}であるという。
+\item $Y$ における $y' \leadsto y$ と、$f(x) = y$ を満たす任意の
+$x\in X$ が与えられたとき、$f(x') = y'$ を満たす $X$ における
+$x$ の一般化 $x' \leadsto x$ が存在するならば、{\it 一般化は $f$ に沿って
+持ち上がる}といい、また $f$ は{\it 一般化的}であるという。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-lift-specialization-composition}
+$f : X \to Y$ および $g : Y \to Z$ を位相空間の連続写像とする。
+特殊化が $f$ と $g$ の双方に沿って持ち上がるなら、特殊化は
+$g \circ f$ に沿っても持ち上がる。「一般化が沿って持ち上がる」場合も同様である。
+\end{lemma}
+
+\begin{proof}
+$z'\leadsto z$ を $Z$ における特殊化とし、
+$g\circ f (x') = z'$ を満たす $x' \in X$ をとる。特殊化は $g$ に沿って
+持ち上がるので、$g(y) = z$ を満たす $Y$ における $f(x')$ の特殊化
+$f(x') \leadsto y$ が存在する。同様に、特殊化は $f$ に沿って持ち上がるので、
+$f(x) = y$ を満たす $X$ における $x'$ の特殊化 $x' \leadsto x$ が存在する。
+これにより、$g\circ f(x) = z$ を満たす $X$ における $x'$ の特殊化
+$x' \leadsto x$ が得られる。すなわち、特殊化は $g\circ f$ に沿って持ち上がる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-lift-specializations-images}
+$f : X \to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item 特殊化が $f$ に沿って持ち上がり、$T \subset X$ が特殊化の下で
+安定であるなら、$f(T) \subset Y$ は特殊化の下で安定である。
+\item 一般化が $f$ に沿って持ち上がり、$T \subset X$ が一般化の下で
+安定であるなら、$f(T) \subset Y$ は一般化の下で安定である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$y'\in f(T)$ であるような $Y$ における特殊化 $y' \leadsto y$ をとり、
+$f(x') = y'$ を満たす $x'\in T$ をとる。特殊化は $f$ に沿って
+持ち上がるので、$f(x) = y$ を満たす $X$ における $x'$ の特殊化
+$x'\leadsto x$ が存在する。しかし $T$ は特殊化の下で安定なので
+$x\in T$ であり、したがって $y \in f(T)$ である。ゆえに $f(T)$ は
+特殊化の下で安定である。
+
+\medskip\noindent
+(2) の証明も同じであり、一般化が $f$ に沿って持ち上がることを用いる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-open-map-specialization}
+$f : X \to Y$ を位相空間の連続写像とする。
+\begin{enumerate}
+\item $f$ が閉写像なら、特殊化は $f$ に沿って持ち上がる。
+\item $f$ が開写像で、$X$ がネーター位相空間であり、
+$X$ の各既約閉部分集合が生成点をもち、$Y$ がコルモゴロフなら、
+一般化は $f$ に沿って持ち上がる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$ を閉写像とする。$Y$ における $y' \leadsto y$ と、
+$f(x') = y'$ を満たす任意の $x'\in X$ が与えられたとする。
+$X$ の閉部分集合 $T = \overline{\{x'\}}$ を考える。このとき
+$f(T) \subset Y$ は閉部分集合であり、$y' \in f(T)$ である。
+したがって $y \in f(T)$ でもある。ゆえに $x \in T$ となる点により
+$y = f(x)$ と書ける。すなわち $x' \leadsto x$ である。
+
+\medskip\noindent
+$f$ が開写像で、$X$ がネーター、$X$ の各既約閉部分集合が生成点をもち、
+$Y$ がコルモゴロフであると仮定する。$Y$ における $y' \leadsto y$ と、
+$f(x) = y$ を満たす任意の $x \in X$ が与えられたとする。
+$T = f^{-1}(\{y'\}) \subset X$ を考える。
+$x \in U \subset X$ を $x$ の開近傍とする。
+すると $f(U) \subset Y$ は開であり、$y \in f(U)$ である。
+したがって $y' \in f(U)$ でもある。言い換えれば
+$T \cap U \not = \emptyset$ である。これにより
+$x \in \overline{T}$ が示された。$X$ はネーターなので、$T$ もネーターである
+（補題 \ref{topology-lemma-Noetherian}）。
+したがって既約成分への分解
+$T = T_1 \cup \ldots \cup T_n$ をもつ。これに対応して
+$\overline{T} = \overline{T_1} \cup \ldots \cup \overline{T_n}$ である。
+上で示したことから、ある $i$ に対して $x \in \overline{T_i}$ である。
+仮定により生成点 $x' \in \overline{T_i}$ が存在し、
+$x' \leadsto x$ となる。$x' \in \overline{T}$ なので
+$f(x') \in \overline{\{y'\}}$ である。また
+$f(\overline{T_i}) = f(\overline{\{x'\}}) \subset \overline{\{f(x')\}}$ である。
+$f(x') \not = y'$ なら、$Y$ はコルモゴロフなので $f(x')$ は既約閉部分集合
+$\overline{\{y'\}}$ の生成点ではなく、包含
+$\overline{\{f(x')\}} \subset \overline{\{y'\}}$ は真である。すなわち
+$y' \not \in f(\overline{T_i})$ となる。これは
+$f(T_i) = \{y'\}$ に矛盾する。したがって $f(x') = y'$ であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-quotient-kolmogorov}
+$s, t : R \to U$ および $\pi : U \to X$ を位相空間の連続写像とし、
+次を仮定する。
+\begin{enumerate}
+\item $\pi$ は開写像である。
+\item $U$ はソバーである。
+\item $s, t$ のファイバーは有限である。
+\item 一般化は $s, t$ に沿って持ち上がる。
+\item $(t, s)(R) \subset U \times U$ は $U$ 上の同値関係であり、
+$X$ は（集合として）この同値関係による $U$ の商である。
+\end{enumerate}
+このとき $X$ はコルモゴロフである。
+\end{lemma}
+
+\begin{proof}
+性質 (3) と (5) により、点 $x$ は同値関係の有限同値類
+$\{u_1, \ldots, u_n\} \subset U$ に対応する。$x' \in X$ を、
+同値類 $\{u'_1, \ldots, u'_m\} \subset U$ に対応するもう一つの点とする。
+ある $i, j$ に対して $u_i \leadsto u'_j$ であると仮定する。
+$s(r') = u'_j$ を満たす任意の $r' \in R$ に対し、(4) によって
+$s(r) = u_i$ を満たす $r \leadsto r'$ を見つけられる。
+したがって $t(r) \leadsto t(r')$ である。
+$\{u'_1, \ldots, u'_m\} = t(s^{-1}(\{u'_j\}))$ なので、
+$\{u'_1, \ldots, u'_m\}$ の各元は
+$\{u_1, \ldots, u_n\}$ のある元の特殊化であると分かる。
+ゆえに $\overline{\{u_1\}} \cup \ldots \cup \overline{\{u_n\}}$ は
+同値類の合併であり、したがって、ある部分集合 $Z \subset X$ に対して
+$\pi^{-1}(Z)$ の形である。(1) により $Z$ は $X$ で閉であり、実際、
+各 $i$ に対して $\pi(\overline{\{u_i\}}) \subset \overline{\{x\}}$
+なので $Z = \overline{\{x\}}$ である。言い換えると、
+$x \leadsto x'$ であることと、$U$ における $x$ のある持ち上げが
+$U$ における $x'$ のある持ち上げへ特殊化することは同値であり、さらに、
+$U$ における $x'$ の各持ち上げが $U$ における $x$ のある持ち上げの
+特殊化であることとも同値である。
+
+\medskip\noindent
+$x \leadsto x'$ と $x' \leadsto x$ の双方が成り立つと仮定する。
+上と同様に、$x$ は $\{u_1, \ldots, u_n\}$ に対応し、
+$x'$ は $\{u'_1, \ldots, u'_m\}$ に対応するとする。
+前段落の結果により、列
+$$
+\ldots \leadsto u'_{j_3} \leadsto u_{i_3} \leadsto u'_{j_2} \leadsto
+u_{i_2} \leadsto u'_{j_1} \leadsto u_{i_1}
+$$
+を見つけることができる。この列は必ず反復するので、(2) により
+$\{u_1, \ldots, u_n\} = \{u'_1, \ldots, u'_m\}$、すなわち $x = x'$
+を得る。したがって $X$ はコルモゴロフである。
+\end{proof}
+
+
+\begin{lemma}
+\label{topology-lemma-dimension-specializations-lift}
+$f : X \to Y$ を位相空間の射とする。
+$Y$ がソバー位相空間で、$f$ が全射であると仮定する。
+特殊化または一般化のいずれかが $f$ に沿って持ち上がるなら、
+$\dim(X) \geq \dim(Y)$ である。
+\end{lemma}
+
+\begin{proof}
+特殊化が $f$ に沿って持ち上がると仮定する。
+$Z_0 \subset Z_1 \subset \ldots Z_e \subset Y$ を $X$ の既約閉部分集合の鎖とする。
+$\xi_e \in X$ を $Z_e$ の生成点へ写る点とする。仮定により、
+$\xi_{e - 1}$ が $Z_{e - 1}$ の生成点へ写るような、$X$ における特殊化
+$\xi_e \leadsto \xi_{e - 1}$ が存在する。同様に続けると、特殊化の列
+$$
+\xi_e \leadsto \xi_{e - 1} \leadsto \ldots \leadsto \xi_0
+$$
+であって、各 $\xi_i$ が $Z_i$ の生成点へ写るものが得られる。
+これにより、既約閉部分集合の列
+$$
+\overline{\{\xi_0\}} \subset
+\overline{\{\xi_1\}} \subset \ldots
+\overline{\{\xi_e\}}
+$$
+が $X$ における長さ $e$ の鎖であることは明らかである。
+一般化が $f$ に沿って持ち上がる場合も同様である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-characterize-closed-Noetherian}
+$X$ をネーターかつソバーな位相空間とする。
+$E \subset X$ を $X$ の部分集合とする。
+\begin{enumerate}
+\item $E$ が構成可能で、特殊化の下で安定なら、$E$ は閉である。
+\item $E$ が構成可能で、一般化の下で安定なら、$E$ は開である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$E$ が構成可能で、一般化の下で安定であるとする。
+$Y \subset X$ を生成点 $\xi \in Y$ をもつ既約閉部分集合とする。
+$E \cap Y$ が空でなければ、一般化の下での安定性により
+この集合は $\xi$ を含み、したがって $Y$ で稠密である。
+ゆえに、補題 \ref{topology-lemma-characterize-constructible-Noetherian} により
+この集合は $Y$ の空でない開部分集合を含む。
+したがって、補題 \ref{topology-lemma-characterize-open-Noetherian} により
+$E$ は開である。これで (2) が示された。(1) を示すには、
+$X$ における $E$ の補集合に (2) を適用すればよい。
+\end{proof}
+
+\section{次元関数}
+\label{topology-section-dimension-function}
+
+\noindent
+考える空間がソバーでない限り、次元関数を考えることにはほとんど意味がない
+（定義 \ref{topology-definition-generic-point}）。したがって、以下の定義は
+$X$ に付随するソバー位相空間を考えることによって改良できる。
+スキームの台位相空間はソバーなので、この改良は行わない。
+
+\begin{definition}
+\label{topology-definition-dimension-function}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $x, y \in X$ かつ $x \not = y$ とし、$x \leadsto y$、すなわち
+$y$ が $x$ の特殊化であると仮定する。
+$x \leadsto z$ かつ $z \leadsto y$ を満たす
+$z \in X \setminus \{x, y\}$ が存在しないとき、$y$ を $x$ の
+{\it 直近特殊化}という。
+\item 写像 $\delta : X \to \mathbf{Z}$ が
+{\it 次元関数}\footnote{これはおそらく標準的でない記法である。
+この概念は通常、（局所）ネータースキームについてのみ導入され、
+その場合には条件 (a) は (b) から従う。}であるとは、次を満たすことをいう。
+\begin{enumerate}
+\item $x \leadsto y$ かつ $x \not = y$ ならば
+$\delta(x) > \delta(y)$ である。
+\item $X$ における任意の直近特殊化 $x \leadsto y$ に対して
+$\delta(x) = \delta(y) + 1$ である。
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\delta$ が次元関数ならば、任意の $t \in \mathbf{Z}$ に対して
+$\delta + t$ も次元関数であることは明らかである。次は面白い補題である。
+
+\begin{lemma}
+\label{topology-lemma-dimension-function-catenary}
+$X$ を位相空間とする。$X$ がソバーで次元関数をもつなら、$X$ は
+カテナリーである。さらに、任意の $x \leadsto y$ に対して
+$$
+\delta(x) - \delta(y) =
+\text{codim}\left(\overline{\{y\}}, \ \overline{\{x\}}\right).
+$$
+\end{lemma}
+
+\begin{proof}
+$Y \subset Y' \subset X$ を既約閉部分集合とする。
+$\xi \in Y$, $\xi' \in Y'$ をそれぞれの生成点とする。
+定義から直ちに
+$\text{codim}(Y, Y') \leq \delta(\xi) - \delta(\xi') < \infty$
+であることが分かる。実際、第1の不等式は等号である。すなわち、
+$$
+Y = Y_0 \subset Y_1 \subset \ldots \subset Y_e = Y'
+$$
+を既約閉部分集合の任意の極大鎖とする。
+$\xi_i \in Y_i$ を生成点とする。このとき
+$\xi_i \leadsto \xi_{i + 1}$ は直近特殊化である。
+したがって、望みどおり
+$e = \delta(\xi) - \delta(\xi')$ となる。
+これは補題の最後の主張も示している。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-dimension-function-unique}
+$X$ を位相空間とする。$\delta$, $\delta'$ を $X$ 上の二つの次元関数とする。
+$X$ が局所ネーターかつソバーならば、$\delta - \delta'$ は
+$X$ 上で局所定数である。
+\end{lemma}
+
+\begin{proof}
+$x \in X$ を点とする。$\delta - \delta'$ が $x$ の近傍で定数であることを示す。
+$X$ を、$X$ における $x$ のネーターな開近傍で置き換えてよい。
+したがって $X$ はネーターかつソバーであると仮定してよい。
+$Z_1, \ldots, Z_r$ を、$x$ を通る $X$ の既約成分とする
+（$X$ はネーターなので有限個しかない。補題 \ref{topology-lemma-Noetherian} を参照）。
+$\xi_i \in Z_i$ を生成点とする。
+$Z_1 \cup \ldots \cup Z_r$ は $X$ における $x$ の近傍である
+（閉とは限らない）。$\delta - \delta'$ は
+$Z_1 \cup \ldots \cup Z_r$ 上で定数であると主張する。実際、
+$y \in Z_i$ ならば
+$$
+\delta(x) - \delta(y) = \delta(x) - \delta(\xi_i) + \delta(\xi_i) - \delta(y)
+= - \text{codim}(\overline{\{x\}}, Z_i)
++ \text{codim}(\overline{\{y\}}, Z_i)
+$$
+である。これは補題 \ref{topology-lemma-dimension-function-catenary} による。
+$\delta'$ についても同様であり、結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-locally-dimension-function}
+$X$ が局所ネーター、ソバー、かつカテナリーであるとする。
+このとき、任意の点は、次元関数をもつ開近傍 $U \subset X$ をもつ。
+\end{lemma}
+
+\begin{proof}
+開部分空間がカテナリー空間であることを繰り返し用いる
+（補題 \ref{topology-lemma-catenary}）。また、ネーター位相空間が有限個の既約成分を
+もつことも用いる（補題 \ref{topology-lemma-Noetherian}）。
+補題 \ref{topology-lemma-dimension-function-unique} の証明では、このような関数の
+構成法を見た。すなわち、まず $X$ を $x$ のネーターな開近傍で置き換える。
+次に $Z_1, \ldots, Z_r \subset X$ を $X$ の既約成分とする。
+$$
+Z_i \cap Z_j = \bigcup Z_{ijk}
+$$
+を既約成分への分解とする。$X$ を
+$$
+X \setminus \left(
+\bigcup\nolimits_{x \not \in Z_i} Z_i
+\cup
+\bigcup\nolimits_{x \not \in Z_{ijk}} Z_{ijk}
+\right)
+$$
+で置き換える。これにより、すべての $i$ について $x \in Z_i$、
+すべての $i, j, k$ について $x \in Z_{ijk}$ と仮定してよい。
+$y \in X$ に対し、$y \in Z_i$ を満たす $i$ を一つ選び、
+$$
+\delta(y) = - \text{codim}(\overline{\{y\}}, Z_i)
++ \text{codim}(\overline{\{x\}}, Z_i).
+$$
+とおく。これが次元関数であると主張する。まず、これが良定義、すなわち
+$i$ の選び方によらないことを示す。
+ある $i, j, k$ に対して $y \in Z_{ijk}$ であると仮定する。
+このとき、補題 \ref{topology-lemma-catenary-in-codimension} を用いて
+\begin{align*}
+\delta(y) & =
+- \text{codim}(\overline{\{y\}}, Z_i)
++ \text{codim}(\overline{\{x\}}, Z_i) \\
+& =
+- \text{codim}(\overline{\{y\}}, Z_{ijk})
+- \text{codim}(Z_{ijk}, Z_i)
++ \text{codim}(\overline{\{x\}}, Z_{ijk})
++ \text{codim}(Z_{ijk}, Z_i) \\
+& =
+- \text{codim}(\overline{\{y\}}, Z_{ijk})
++ \text{codim}(\overline{\{x\}}, Z_{ijk})
+\end{align*}
+を得る。これは $i$ と $j$ に関して対称である。
+これが次元関数であることの証明は省略する。
+\end{proof}
+
+\begin{remark}
+\label{topology-remark-obstruction-to-dimension-function}
+補題 \ref{topology-lemma-dimension-function-unique} と
+\ref{topology-lemma-locally-dimension-function} を合わせると、
+カテナリー、局所ネーター、かつソバーな位相空間が次元関数をもつことへの
+障害は $H^1(X, \mathbf{Z})$ の元であると分かる。
+\end{remark}
+
+
+
+\section{至る所疎な集合}
+\label{topology-section-nowhere-dense}
+
+\begin{definition}
+\label{topology-definition-nowhere-dense}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item 部分集合 $T \subset X$ が与えられたとき、$T$ の{\it 内部}とは、
+$T$ に含まれる $X$ の最大の開部分集合である。
+\item 部分集合 $T \subset X$ が{\it 至る所疎}であるとは、
+$T$ の閉包の内部が空であることをいう。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{topology-lemma-nowhere-dense}
+$X$ を位相空間とする。有限個の至る所疎な集合の合併は至る所疎である。
+\end{lemma}
+
+\begin{proof}
+一般の場合は帰納法で従うので、二つの至る所疎な集合について示せば十分である。
+$A,B \subset X$ を至る所疎な部分集合とする。
+$\overline{A \cup B} = \overline{A} \cup \overline{B}$ である。
+したがって、$U \subset \overline{A \cup B}$ が $X$ の開部分集合なら、
+$U \setminus U \cap \overline{B}$ は $U$ と $X$ の開部分集合で、
+$\overline{A}$ に含まれるから空である。同様に
+$U \setminus U \cap \overline{A}$ も空である。したがって、望みどおり
+$U = \emptyset$ である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-image-nowhere-dense-open}
+$X$ を位相空間とする。$U \subset X$ を開とし、$T \subset U$ を部分集合とする。
+$T$ が $U$ において至る所疎なら、$T$ は $X$ においても至る所疎である。
+\end{lemma}
+
+\begin{proof}
+$T$ が $U$ において至る所疎であると仮定する。
+$x \in X$ が、$X$ における $T$ の閉包 $\overline{T}$ の内部点であると仮定する。
+$V \subset X$ は $X$ で開であり、$x \in V \subset \overline{T}$ と書けるとする。
+$\overline{T} \cap U$ は $U$ における $T$ の閉包である。
+したがって、$\overline{T} \cap U$ の内部が空であることから
+$V \cap U = \emptyset$ が従う。ゆえに $x$ は $U$ の閉包には属しえず、
+まして $T$ の閉包に属することはできない。これは矛盾である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-nowhere-dense-local}
+$X$ を位相空間とする。$X = \bigcup U_i$ を開被覆とし、
+$T \subset X$ を部分集合とする。すべての $i$ について
+$T \cap U_i$ が $U_i$ で至る所疎なら、$T$ は $X$ で至る所疎である。
+\end{lemma}
+
+\begin{proof}
+$\overline{T}_i$ を $U_i$ における $T \cap U_i$ の閉包と書く。
+$\overline{T} \cap U_i = \overline{T}_i$ である。
+内部をとる操作は開集合との交わりと可換なので、
+$$
+(\text{interior of }\overline{T}) \cap U_i =
+\text{interior of }(\overline{T} \cap U_i) =
+\text{interior in }U_i\text{ of }\overline{T}_i
+$$
+を得る。仮定により、この最後の集合は空である。したがって、
+$T$ は $X$ で至る所疎である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-closed-image-nowhere-dense}
+$f : X \to Y$ を位相空間の連続写像とし、$T \subset X$ を部分集合とする。
+$f$ が $X$ から $Y$ の閉部分集合への同相写像で、$T$ が $X$ で
+至る所疎なら、$f(T)$ も $Y$ で至る所疎である。
+\end{lemma}
+
+\begin{proof}
+$f(X)$ は $Y$ で閉であり、$f$ は $X$ から $f(X)$ への同相写像なので、
+$Y$ における $f(T)$ の閉包は $f(\overline{T})$ に等しい。
+したがって、$V \subset Y$ が開で $f(T)$ の閉包に含まれるなら、
+$U = f^{-1}(V)$ は開で $\overline{T}$ に含まれる。
+ゆえに $U = \emptyset$ であり、これから望みどおり $V = \emptyset$ が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-open-inverse-image-closed-nowhere-dense}
+$f : X \to Y$ を位相空間の連続写像とし、$T \subset Y$ を部分集合とする。
+$f$ が開写像で、$T$ が $Y$ の閉かつ至る所疎な部分集合なら、
+$f^{-1}(T)$ も $X$ の閉かつ至る所疎な部分集合である。
+$f$ が全射かつ開写像なら、$T$ が閉かつ至る所疎であることと、
+$f^{-1}(T)$ が閉かつ至る所疎であることは同値である。
+\end{lemma}
+
+\begin{proof}
+省略する。（ヒント：第1の場合、$f^{-1}(T)$ の内部は $T$ の内部へ写り、
+第2の場合、$f^{-1}(T)$ の内部は $T$ の内部の上へ写る。）
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-dense-in-constructible}
+$X$ を位相空間とする。$E \subset X$ を局所閉部分集合の有限合併とする
+（例えば $E$ は構成可能である）。このとき $E$ は、その閉包の稠密な
+開部分集合を含む。
+\end{lemma}
+
+\begin{proof}
+$X$ を $E$ の閉包で置き換えることにより、$E$ は $X$ で稠密であり、
+$E$ が稠密な開部分集合を含むことを示せばよいと仮定できる。
+$E$ の補集合 $T$ は局所閉部分集合の有限合併であり、
+$T = T_1 \cup \ldots \cup T_n$ と書ける。また、$T$ は $X$ で至る所疎である。
+$T_i$ はその閉包 $Z_i$ で開かつ稠密なので、$Z_i$ も $X$ で
+至る所疎である。すると、$T$ の閉包 $Z = Z_1 \cup \ldots \cup Z_n$ は、
+補題 \ref{topology-lemma-nowhere-dense} により $X$ で至る所疎である。
+したがって、$E$ は稠密な開部分集合 $X \setminus Z$ を含む。
+\end{proof}
+
+\section{副有限空間}
+\label{topology-section-profinite}
+
+\noindent
+定義は次のとおりである。
+
+\begin{definition}
+\label{topology-definition-profinite}
+位相空間が{\it 副有限}であるとは、有限離散空間からなる図式の極限と
+同相であることをいう。
+\end{definition}
+
+\noindent
+これは副有限空間の最も扱いやすい特徴づけではない。
+
+\begin{lemma}
+\label{topology-lemma-profinite}
+$X$ を位相空間とする。次の条件は同値である。
+\begin{enumerate}
+\item $X$ は副有限空間である。
+\item $X$ は Hausdorff、準コンパクト、かつ完全不連結である。
+\end{enumerate}
+これらが成り立つなら、$X$ は有限離散空間の余フィルター極限である。
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。有限離散空間の図式 $i \mapsto X_i$ で
+$X = \lim X_i$ となるものを選ぶ。各 $X_i$ は Hausdorff かつ
+準コンパクトなので、補題 \ref{topology-lemma-inverse-limit-quasi-compact} により
+$X$ は準コンパクトである。$x, x' \in X$ を異なる点とすると、
+$x$ と $x'$ は、ある $X_i$ の異なる点へ写る。
+したがって $x$ と $x'$ は互いに素な開近傍をもち、$X$ は Hausdorff である。
+まったく同様に、$X$ は完全不連結である。
+
+\medskip\noindent
+(2) を仮定する。$\mathcal{I}$ を、すべての $i \in I$ について
+$U_i$ が空でない開（したがって閉）部分集合であるような有限非交和分解
+$X = \coprod_{i \in I} U_i$ 全体の集合とする。
+各 $I \in \mathcal{I}$ に対し、$U_i$ の点を $i$ へ送る連続写像
+$X \to I$ がある。半順序を次のように定める。$I, I' \in \mathcal{I}$ に対し、
+$I'$ に対応する被覆が $I$ に対応する被覆の細分であるとき、かつそのときに限り
+$I \leq I'$ とする。この場合、標準写像 $I' \to I$ が得られる。
+言い換えると、$\mathcal{I}$ 上の有限離散空間の逆系が得られる。
+写像 $X \to I$ は両立し、連続写像
+$$
+X \longrightarrow \lim_{I \in \mathcal{I}} I
+$$
+が得られる。この写像は同相写像であると主張する。これで証明は完了する。
+（最後の主張も従う。実際、半順序集合 $\mathcal{I}$ は有向である。
+$X$ の二つの非交和分解が与えられれば、その双方を細分する第3の分解を
+見つけられる。）
+実際、$X$ は完全不連結なので、この写像は単射である。すなわち、
+$\{x\}$ は $X$ において $x$ を含むすべての開かつ閉な部分集合の交わりである
+（補題 \ref{topology-lemma-connected-component-intersection-compact-Hausdorff}）。
+また、補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により
+この写像は全射である。
+補題 \ref{topology-lemma-bijective-map} により、この写像は同相写像である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-directed-inverse-limit-profinite}
+副有限空間の極限は副有限である。
+\end{lemma}
+
+\begin{proof}
+$i \mapsto X_i$ を添字圏 $\mathcal{I}$ 上の副有限空間の図式とする。
+補題 \ref{topology-lemma-profinite} の副有限空間の特徴づけを用いる。
+特に各 $X_i$ は Hausdorff、準コンパクト、かつ完全不連結である。
+補題 \ref{topology-lemma-limits} により極限 $X = \lim X_i$ は存在する。
+補題 \ref{topology-lemma-inverse-limit-quasi-compact} により極限 $X$ は準コンパクトである。
+$x, x' \in X$ を異なる点とする。すると、ある $i$ が存在して、
+$x$ と $x'$ の射影 $X \to X_i$ による像 $x_i$ と $x'_i$ は $X_i$ において異なる。
+$x_i$ と $x'_i$ は $X_i$ において互いに素な開近傍をもつ。
+これらの開集合の逆像をとると、$X$ が Hausdorff であることが分かる。
+同様に、$x_i$ と $x'_i$ は $X_i$ の異なる連結成分に属するので、
+$x$ と $x'$ も $X$ の異なる連結成分に属さなければならない。
+したがって $X$ は完全不連結である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-profinite-refine-open-covering}
+$X$ を副有限空間とする。$X$ の任意の開被覆は、各 $U_i$ が開かつ閉である
+有限被覆 $X = \coprod U_i$ による細分をもつ。
+\end{lemma}
+
+\begin{proof}
+$X = \lim X_i$ を、有向集合 $I$ 上の有限離散空間の逆系の極限として書く
+（補題 \ref{topology-lemma-profinite}）。射影を $f_i : X \to X_i$ と書く。
+各点 $x = (x_i) \in X$ における開近傍の基本系は
+$f_i^{-1}(\{x_i\})$ 全体である。したがって $X$ は準コンパクトなので、
+開被覆が
+$$
+X = f_{i_1}^{-1}(\{x_{i_1}\}) \cup \ldots \cup f_{i_n}^{-1}(\{x_{i_n}\})
+$$
+であると仮定してよい。すべての $j = 1, \ldots, n$ について
+$i \geq i_j$ を満たす $i \in I$ を選ぶ
+（$I$ は有向集合なので可能である）。このとき被覆
+$$
+X = \coprod\nolimits_{t \in X_i} f_i^{-1}(\{t\})
+$$
+は与えられた被覆を細分し、望む形をしている。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-pi0-profinite}
+$X$ を位相空間とする。$X$ が準コンパクトで、$X$ の各連結成分が、
+それを含む開かつ閉な部分集合の交わりであるなら、$\pi_0(X)$ は
+副有限空間である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-profinite} を用いて示す。
+$\pi_0(X)$ は準コンパクト空間の像なので準コンパクトである
+（補題 \ref{topology-lemma-image-quasi-compact}）。
+また、構成により完全不連結である
+（補題 \ref{topology-lemma-space-connected-components}）。
+$C, D \subset X$ を $X$ の異なる連結成分とする。
+$C$ を含む $X$ の開かつ閉な部分集合の交わりとして
+$C = \bigcap U_\alpha$ と書く。$U_\alpha$ たちの任意の有限交叉も
+同じ性質をもつ。$\bigcap U_\alpha \cap D = \emptyset$ なので、
+ある $\alpha$ に対して $U_\alpha \cap D = \emptyset$ である
+（補題 \ref{topology-lemma-connected-components},
+\ref{topology-lemma-closed-in-quasi-compact}, および
+\ref{topology-lemma-intersection-closed-in-quasi-compact} を用いる）。
+$U_\alpha$ は開かつ閉なので、それが含む連結成分の合併である。
+すなわち、$U_\alpha$ はある開かつ閉な部分集合 $V_\alpha \subset \pi_0(X)$ の逆像である。
+これにより、$C$ と $D$ に対応する点が互いに素な開部分集合に
+含まれること、すなわち $\pi_0(X)$ が Hausdorff であることが示された。
+\end{proof}
+
+\section{スペクトル空間}
+\label{topology-section-spectral}
+
+\noindent
+この節の内容は \cite{Hochster} および \cite{Hochster-thesis} による。
+Hochster は学位論文で、とりわけ、スペクトル空間が、環のスペクトルとして
+現れる位相空間とちょうど一致することを証明している。
+
+\begin{definition}
+\label{topology-definition-spectral-space}
+位相空間 $X$ が{\it スペクトル}であるとは、ソバーかつ準コンパクトで、
+二つの準コンパクト開集合の交わりが準コンパクトであり、
+準コンパクト開集合全体が位相の開基をなすことをいう。
+スペクトル空間の連続写像 $f : X \to Y$ が{\it スペクトル}であるとは、
+準コンパクト開集合の逆像が準コンパクトであることをいう。
+\end{definition}
+
+\noindent
+言い換えると、スペクトル空間の連続写像がスペクトルであることと、
+準コンパクトであることは同値である
+（定義 \ref{topology-definition-quasi-compact}）。
+
+\medskip\noindent
+$X$ をスペクトル空間とする。$X$ 上の{\it 構成可能位相}とは、
+$U$ が $X$ の準コンパクト開集合を動くとき、集合 $U$ および $U^c$ を
+開集合の準開基とする位相である。$X$ はスペクトルなので、
+開集合 $U \subset X$ がレトロコンパクトであることと、$U$ が
+準コンパクトであることは同値である。したがって構成可能位相は、
+$X$ のすべての構成可能部分集合が開かつ閉となるような最も粗い位相としても
+特徴づけられる（構成可能集合の定義と性質については
+節 \ref{topology-section-constructible} を参照）。
+このことから、$X$ の部分集合が構成可能位相で開、あるいは閉であることと、
+それぞれ構成可能部分集合の合併、あるいは交わりであることは同値である。
+準コンパクト開集合全体は $X$ の位相の開基なので、構成可能位相は
+$X$ に与えられた位相より強い。
+
+\begin{lemma}
+\label{topology-lemma-constructible-hausdorff-quasi-compact}
+$X$ をスペクトル空間とする。構成可能位相は Hausdorff、完全不連結、
+かつ準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+$x, y \in X$ かつ $x \not = y$ とする。$X$ はソバーなので、二点 $x, y$ の
+ちょうど一方を含む開部分集合 $U$ が存在する。$x \in U$ としよう。
+$U$ を、$U$ に含まれる $x$ の準コンパクト開近傍で置き換えてよい。
+すると $U$ と $U^c$ は構成可能位相で開かつ閉である。
+したがって、$x \in U$ と $y \in U^c$ は構成可能位相における
+互いに素な開集合なので、$X$ は構成可能位相で Hausdorff である。
+$U$ の存在は、$x$ と $y$ が構成可能位相における異なる連結成分に
+属することも示す。したがって $X$ は構成可能位相で完全不連結である。
+
+\medskip\noindent
+$\mathcal{B}$ を、$B \subset X$ が準コンパクト開であるか、または
+準コンパクトな補集合をもつ閉集合であるような $B$ 全体の族とする。
+$B \in \mathcal{B}$ なら $B^c \in \mathcal{B}$ である。
+補題 \ref{topology-lemma-subbase-theorem} により、$B_i \in \mathcal{B}$ である
+任意の被覆 $X = \bigcup_{i \in I} B_i$ が有限細分をもつことを示せば十分である。
+補集合をとると、$\mathcal{B}$ の元からなる任意の族
+$\{B_i\}_{i \in I}$ で、すべての $n$ とすべての
+$i_1, \ldots, i_n \in I$ に対して
+$B_{i_1} \cap \ldots \cap B_{i_n} \not = \emptyset$ であるものが、
+共通の交点をもつことを示せばよい。$i \not = i'$ なら
+$B_i \not = B_{i'}$ であると仮定してよい。
+
+\medskip\noindent
+矛盾を導くため、$\{B_i\}_{i \in I}$ が有限交叉性をもつ
+$\mathcal{B}$ の元の族だが、全交叉は空であると仮定する。
+Zorn の補題を適用すると、この族は極大であると仮定できる
+（詳細は省略する）。$I' \subset I$ を $B_i$ が閉である添字全体とし、
+$Z = \bigcap_{i \in I'} B_i$ とおく。これは $X$ の閉部分集合であり、
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により空でない。
+$Z$ が可約なら、$Z$ のどちらとも等しくない二つの閉部分集合の合併として
+$Z = Z' \cup Z''$ と書ける。特に、$Z'$ と交わるが $Z''$ とは交わらない
+準コンパクト開集合 $U' \subset X$ が存在する。同様に、$Z''$ と交わるが
+$Z'$ とは交わらない準コンパクト開集合 $U'' \subset X$ が存在する。
+$B' = X \setminus U'$ および $B'' = X \setminus U''$ とおく。
+$Z'' \subset B'$ かつ $Z' \subset B''$ であることに注意する。
+有限個の添字 $i_1, \ldots, i_n \in I$ が存在して
+$B' \cap B_{i_1} \cap \ldots \cap B_{i_n} = \emptyset$ となり、
+かつ有限個の添字 $j_1, \ldots, j_m \in I$ が存在して
+$B'' \cap B_{j_1} \cap \ldots \cap B_{j_m} = \emptyset$ となるなら、
+$Z \cap B_{i_1} \cap \ldots \cap B_{i_n} \cap B_{j_1} \cap \ldots \cap B_{j_m}
+= \emptyset$.
+を得る。しかし、集合
+$B_{i_1} \cap \ldots \cap B_{i_n} \cap B_{j_1} \cap \ldots \cap B_{j_m}$
+は準コンパクトなので、有限個の添字 $i'_1, \ldots, i'_l \in I'$ で
+$B_{i_1} \cap \ldots \cap B_{i_n} \cap B_{j_1} \cap \ldots \cap
+B_{j_m} \cap B_{i'_1} \cap \ldots \cap B_{i'_l} = \emptyset$ となるものが見つかり、
+矛盾する。したがって、与えられた族に
+$B'$ または $B''$ のいずれかを加えることができ、極大性に矛盾する。
+よって $Z$ は既約である。しかしこれも矛盾を導く。実際、上と同じ議論により
+空でない開集合 $Z \cap B_i$ は、すべての $i \in I \setminus I'$ に対して
+$Z$ の一意な生成点を含む。この矛盾により補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-fibres-spectral-map-quasi-compact}
+$f : X \to Y$ をスペクトル空間のスペクトル写像とする。このとき、
+\begin{enumerate}
+\item $f$ は構成可能位相について連続である。
+\item $f$ のファイバーは準コンパクトである。
+\item 像は構成可能位相で閉である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X'$ と $Y'$ を、それぞれ構成可能位相を入れた $X$ と $Y$ とする。
+補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact} により、
+これらは準コンパクト Hausdorff 空間である。
+(1) は $X' \to Y'$ が連続であるという主張で、定義から直ちに従う。
+(3) は、$f(X')$ が Hausdorff 空間 $Y'$ の準コンパクト部分集合であることから
+従う。補題 \ref{topology-lemma-quasi-compact-in-Hausdorff} を参照。
+位相空間の連続写像からなる可換図式
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+Y' \ar[r] & Y
+}
+$$
+がある。$Y'$ は Hausdorff なので、ファイバー $X'_y$ は $X'$ で閉である。
+$X'$ は準コンパクトなので、$X'_y$ は準コンパクトである
+（補題 \ref{topology-lemma-closed-in-quasi-compact}）。
+$X'_y \to X_y$ は全射な連続写像なので、$X_y$ は準コンパクトである
+（補題 \ref{topology-lemma-image-quasi-compact}）。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-spectral-if-continuous-wrt-constructible-top}
+$X$ と $Y$ をスペクトル空間とし、$f : X \to Y$ を連続写像とする。
+$f$ がスペクトルであることと、$f$ が構成可能位相について連続であることは同値である。
+\end{lemma}
+
+\begin{proof}
+必要性は補題 \ref{topology-lemma-fibres-spectral-map-quasi-compact} である。
+$f$ が構成可能位相について連続であると仮定する。
+$V \subset Y$ を準コンパクト開集合とする。
+$V$ は構成可能位相で開かつ閉である。
+したがって $f^{-1}(V)$ は構成可能位相で開かつ閉である。
+補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact} により $X$ は
+構成可能位相で準コンパクトなので、$f^{-1}(V)$ も構成可能位相で
+準コンパクトである。同一写像 $f^{-1}(V) \to f^{-1}(V)$ は、
+構成可能位相から通常の位相への全射な連続写像なので、
+補題 \ref{topology-lemma-image-quasi-compact} により、$f^{-1}(V)$ は $X$ の位相で
+準コンパクトである。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-spectral-sub}
+$X$ をスペクトル空間とする。$E \subset X$ が構成可能位相で閉であるとする
+（例えば、構成可能または閉であるとする）。このとき、誘導位相を入れた $E$ は
+スペクトル空間である。
+\end{lemma}
+
+\begin{proof}
+$Z \subset E$ を閉既約部分集合とする。$\eta$ を、$X$ における $Z$ の閉包
+$\overline{Z}$ の生成点とする。$E$ がソバーであることを示すため、
+$\eta \in E$ を示す。そうでないとすると、$E$ は構成可能位相で閉なので、
+$\eta \in F$ かつ $F \cap E = \emptyset$ となる構成可能部分集合
+$F \subset X$ が存在する。補題 \ref{topology-lemma-generic-point-in-constructible} により、
+$F \cap \overline{Z}$ は $\overline{Z}$ の空でない開部分集合を含む。
+しかし、$\overline{Z}$ は $Z$ の閉包であり、$Z \cap F = \emptyset$
+なので、これは不可能である。
+
+\medskip\noindent
+$E$ は構成可能位相で閉なので、構成可能位相で準コンパクトである
+（補題 \ref{topology-lemma-closed-in-quasi-compact} および
+\ref{topology-lemma-constructible-hausdorff-quasi-compact}）。
+したがって、$X$ から来る位相についてはなおさら準コンパクトである。
+$U \subset X$ が準コンパクト開なら、$E \cap U$ は構成可能位相で閉であり、
+したがって上で見たように準コンパクトである。よって、$E$ の
+準コンパクト開部分集合は、$U$ が $X$ の準コンパクト開集合を動くときの
+交叉 $E \cap U$ である。これらは位相の開基をなす。
+最後に、二つの準コンパクト開集合 $U, U' \subset X$ が与えられたとき、
+交わりは $(E \cap U) \cap (E \cap U') = E \cap (U \cap U')$ であり、
+$X$ はスペクトルなので $U \cap U'$ は準コンパクトである。
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-constructible-stable-specialization-closed}
+$X$ をスペクトル空間とし、$E \subset X$ を構成可能位相で閉な部分集合とする
+（例えば構成可能とする）。
+\begin{enumerate}
+\item $x \in \overline{E}$ なら、$x$ は $E$ のある点の特殊化である。
+\item $E$ が特殊化の下で安定なら、$E$ は閉である。
+\item $E' \subset X$ が構成可能位相で開であり
+（例えば構成可能であり）、一般化の下で安定なら、$E'$ は開である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$x \in \overline{E}$ とする。$\{U_i\}$ を $x$ の
+準コンパクト開近傍全体とする。$U_i$ たちの有限交叉もその一つである。
+すべての $i$ について交叉 $U_i \cap E$ は空でない。
+部分集合 $U_i \cap E$ は構成可能位相で閉なので、
+補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact} および
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により
+$\bigcap (U_i \cap E)$ は空でない。$\{U_i\}$ は $x$ の開近傍の
+基本系なので、$\bigcap U_i$ は $x$ の一般化全体である。
+したがって $x$ は $E$ のある点の特殊化である。
+
+\medskip\noindent
+(2) は (1) から直ちに従う。
+
+\medskip\noindent
+(3) の証明。$E'$ が (3) のとおりであると仮定する。$E'$ の補集合は、
+構成可能位相で閉であり（補題 \ref{topology-lemma-constructible}）、
+特殊化の下で安定である
+（補題 \ref{topology-lemma-open-closed-specialization}）。
+したがって (2) により補集合は閉、すなわち $E'$ は開である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-two-points}
+$X$ をスペクトル空間とし、$x, y \in X$ とする。このとき、
+$x$ と $y$ の双方へ特殊化する第3の点が存在するか、または
+$x$ と $y$ をそれぞれ含む互いに素な開近傍が存在する。
+\end{lemma}
+
+\begin{proof}
+$\{U_i\}$ を $x$ の準コンパクト開近傍全体とする。
+$U_i$ たちの有限交叉もその一つである。
+$\{V_j\}$ を $y$ の準コンパクト開近傍全体とする。
+$V_j$ たちの有限交叉もその一つである。
+ある $i, j$ について $U_i \cap V_j$ が空なら、証明は終わる。
+そうでなければ、すべての $i$ と $j$ について交叉
+$U_i \cap V_j$ は空でない。集合 $U_i \cap V_j$ は $X$ の
+構成可能位相で閉である。補題
+\ref{topology-lemma-constructible-hausdorff-quasi-compact} により
+$\bigcap (U_i \cap V_j)$ は空でない
+（補題 \ref{topology-lemma-intersection-closed-in-quasi-compact}）。
+$X$ はソバーで、$\{U_i\}$ は $x$ の開近傍の基本系なので、
+$\bigcap U_i$ は $x$ の一般化全体である。同様に、
+$\bigcap V_j$ は $y$ の一般化全体である。
+したがって、$\bigcap (U_i \cap V_j)$ の任意の元は
+$x$ と $y$ の双方へ特殊化する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-characterize-profinite-spectral}
+$X$ をスペクトル空間とする。次の条件は同値である。
+\begin{enumerate}
+\item $X$ は副有限である。
+\item $X$ は Hausdorff である。
+\item $X$ は完全不連結である。
+\item すべての準コンパクト開集合は閉である。
+\item 点の間に自明でない特殊化は存在しない。
+\item $X$ のすべての点は閉である。
+\item $X$ のすべての点は $X$ のある既約成分の生成点である。
+\item 構成可能位相は $X$ に与えられた位相と等しい。
+\item ここにさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-profinite} により (1) $\Rightarrow$ (3) が示される。
+既約成分は閉なので、$X$ が完全不連結なら、すべての点は閉である。
+したがって (3) は (6) を含意する。(6) と (5) の同値性は直ちに分かり、
+$X$ はソバーなので (6) $\Leftrightarrow$ (7) である。
+(5) を仮定する。このとき $X$ のすべての構成可能部分集合は閉である
+（補題 \ref{topology-lemma-constructible-stable-specialization-closed}）。
+特に、すべての準コンパクト開集合は閉である。したがって (5) は (4) を
+含意する。$X$ はソバーなので、任意の二点に対して、そのちょうど一方を含む
+準コンパクト開集合が存在する。よって (4) は (2) を含意する。
+(4) と (8) は構成可能位相の定義により同値である。
+残るのは (2) が (1) を含意することの証明である。$X$ が Hausdorff であると
+仮定する。すべての準コンパクト開集合は閉でもある
+（補題 \ref{topology-lemma-quasi-compact-in-Hausdorff}）。これにより $X$ は
+完全不連結である。したがって、補題 \ref{topology-lemma-profinite} により副有限である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-spectral-pi0}
+$X$ がスペクトル空間なら、$\pi_0(X)$ は副有限空間である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-connected-component-intersection} と
+\ref{topology-lemma-pi0-profinite} を合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-product-spectral-spaces}
+二つのスペクトル空間の積はスペクトルである。
+\end{lemma}
+
+\begin{proof}
+$X$, $Y$ をスペクトル空間とする。射影を
+$p : X \times Y \to X$ および $q : X \times Y \to Y$ と書く。
+$Z \subset X \times Y$ を閉既約部分集合とする。このとき
+$p(Z) \subset X$ は既約であり、$q(Z) \subset Y$ も既約である。
+$x \in X$ を $p(X)$ の閉包の生成点、$y \in Y$ を $q(Y)$ の閉包の
+生成点とする。$(x, y) \not \in Z$ ならば、
+$Z \cap U \times V = \emptyset$ となる開集合
+$x \in U \subset X$, $y \in V \subset Y$ が存在する。
+したがって $Z$ は
+$(X \setminus U) \times Y \cup X \times (Y \setminus V)$ に含まれる。
+$Z$ は既約なので、
+$Z \subset (X \setminus U) \times Y$ または
+$Z \subset X \times (Y \setminus V)$ のいずれかである。
+第1の場合 $p(Z) \subset (X \setminus U)$ であり、第2の場合
+$q(Z) \subset (Y \setminus V)$ である。$x$ は $p(Z)$ の閉包に属し、
+$y$ は $q(Z)$ の閉包に属するので、いずれの場合も不合理である。
+したがって $(x, y) \in Z$ である。これは $(x, y)$ が $Z$ の生成点で
+あることを意味する。
+
+\medskip\noindent
+$X \times Y$ の位相の開基は、$U \subset X$ と $V \subset Y$ が
+準コンパクト開集合であるような $U \times V$ の形の開集合からなる
+（ここで $X$ と $Y$ がスペクトルであることを用いる）。
+$U \times V$ は準コンパクト空間の積なので準コンパクトである。
+さらに、$X \times Y$ の任意の準コンパクト開集合は、このような
+準コンパクト長方形 $U \times V$ の有限合併である。
+したがって、二つのそのような集合の交わりも準コンパクトである
+（$X$ と $Y$ がスペクトルであることによる）。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-spectral-bijective}
+$f : X \to Y$ を位相空間の連続写像とする。次を仮定する。
+\begin{enumerate}
+\item $X$ と $Y$ はスペクトルである。
+\item $f$ はスペクトルかつ全単射である。
+\item 一般化（それぞれ特殊化）が $f$ に沿って持ち上がる。
+\end{enumerate}
+このとき $f$ は同相写像である。
+\end{lemma}
+
+\begin{proof}
+$f$ はスペクトルなので、構成可能位相を入れた $X$ と $Y$ の間の
+連続写像を定める。補題
+\ref{topology-lemma-constructible-hausdorff-quasi-compact} および
+\ref{topology-lemma-bijective-map} により、$X \to Y$ は構成可能位相について
+同相写像である。$U \subset X$ を準コンパクト開集合とする。
+このとき $f(U)$ は $Y$ で構成可能である。$y \in Y$ が $f(U)$ の点へ
+特殊化するとする。最後の仮定により、$f^{-1}(y)$ は $U$ の点へ特殊化する。
+したがって $f^{-1}(y) \in U$ であり、$y \in f(U)$ である。
+よって、補題 \ref{topology-lemma-constructible-stable-specialization-closed} により
+$f(U)$ は開である。したがって $f$ は同相写像である。
+特殊化が $f$ に沿って持ち上がる場合に補題を示すには、代わりに、
+$X \setminus Z$ が $X$ の準コンパクト開集合であるとき
+$f(Z)$ が閉であることを示す。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-directed-inverse-limit-finite-sober-spectral-spaces}
+有限ソバー位相空間の有向逆系の逆極限はスペクトル位相空間である。
+\end{lemma}
+
+\begin{proof}
+$I$ を有向集合とし、$X_i$ を $I$ 上の有限ソバー空間の逆系とする。
+補題 \ref{topology-lemma-limits} により存在する $X = \lim X_i$ をとる。
+集合として $X = \lim X_i$ である。射影を $p_i : X \to X_i$ と書く。
+$I$ は有向なので、補題 \ref{topology-lemma-describe-limits} を適用できる。
+位相の開基は、$U_i \subset X_i$ が開であるときの
+$p_i^{-1}(U_i)$ で与えられる。$p_i^{-1}(U_i)$ の開被覆は、特に
+副有限位相における開被覆なので、$p_i^{-1}(U_i)$ は準コンパクトである。
+$U_i \subset X_i$ および $U_j \subset X_j$ が与えられたとき、
+ある $k \geq i, j$ と開集合 $U_k \subset X_k$ に対して
+$p_i^{-1}(U_i) \cap p_j^{-1}(U_j) = p_k^{-1}(U_k)$ である。
+最後に、$Z \subset X$ が既約かつ閉なら、$p_i(Z) \subset X_i$ は既約であり、
+したがって一意な生成点 $\xi_i$ をもつ
+（$X_i$ は有限ソバー位相空間だからである）。
+すると $\xi = \lim \xi_i$ は $Z$ の生成点である
+（$Z$ は閉なので、これは $Z$ の点である）。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-spectral-closed-in-product-two-point-space}
+$W$ を、二点のうち一方が閉で他方が閉でない位相空間とする。
+位相空間がスペクトルであることと、$W$ のコピーの積の、構成可能位相で
+閉な部分空間と同相であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$W = \{0, 1\}$ と書き、$0$ は $1$ の特殊化だが、その逆ではないとする。
+$I$ を集合とする。補題
+\ref{topology-lemma-directed-inverse-limit-finite-sober-spectral-spaces} により、
+空間 $\prod_{i \in I} W$ はスペクトルである。
+したがって、$\prod_{i \in I} W$ の構成可能位相で閉な部分空間は、
+補題 \ref{topology-lemma-spectral-sub} によりスペクトル空間である。
+
+\medskip\noindent
+逆を示すため、$X$ をスペクトル空間とする。$U \subset X$ を
+準コンパクト開集合とし、連続写像
+$$
+f_U : X \longrightarrow W
+$$
+で、$U$ の各点を $1$ へ、$X \setminus U$ の各点を $0$ へ送るものを考える。
+これらの写像の積をとると、連続写像
+$$
+f = \prod f_U : X \longrightarrow \prod\nolimits_U W
+$$
+を得る。構成により写像 $f : X \to Y$ はスペクトルである。
+補題 \ref{topology-lemma-fibres-spectral-map-quasi-compact} により、
+$f$ の像は構成可能位相で閉である。
+$x', x \in X$ が異なるなら、$X$ はソバーなので、
+$x'$ が $x$ の特殊化でないか、またはその逆である。いずれの場合にも
+（準コンパクト開集合が $X$ の位相の開基をなすので）、
+$f_U(x') \not = f_U(x)$ となる準コンパクト開集合 $U \subset X$ が存在する。
+したがって $f$ は単射である。$Y = f(X)$ に誘導位相を入れる。
+$y' \leadsto y$ を $Y$ における特殊化とし、
+$f(x') = y'$ および $f(x) = y$ とする。
+上と同様に論じると $x' \leadsto x$ である。実際、そうでなければ
+$x \in U$ かつ $x' \not \in U$ となる $U$ が存在し、
+$f_U(x') \not \leadsto f_U(x)$ となってしまう。
+補題 \ref{topology-lemma-spectral-bijective} により、$f : X \to Y$ は同相写像である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-spectral-inverse-limit-finite-sober-spaces}
+位相空間がスペクトルであることと、有限ソバー位相空間の有向逆極限で
+あることは同値である。
+\end{lemma}
+
+\begin{proof}
+一方向は補題
+\ref{topology-lemma-directed-inverse-limit-finite-sober-spectral-spaces} による。
+逆に、$X$ がスペクトルであると仮定する。このとき、補題
+\ref{topology-lemma-spectral-closed-in-product-two-point-space} のように
+$W = \{0, 1\}$ とおけば、$X \subset \prod_{i \in I} W$ が
+構成可能位相で閉な部分集合であると仮定してよい。
+余フィルター極限として
+$$
+\prod\nolimits_{i \in I} W =
+\lim_{J \subset I\text{ finite }} \prod\nolimits_{j \in J} W
+$$
+と書ける。各 $J$ に対し、$X_J \subset \prod_{j \in J} W$ を $X$ の像とする。
+$X$ は構成可能位相を入れた積で閉なので、集合として
+$X = \lim X_J$ である（詳細は省略する）。
+極限に関する形式的議論（省略）により、位相空間としても
+$X = \lim X_J$ である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-Noetherian-goes-to-spectral}
+$X$ を位相空間とし、$c : X \to X'$ を $X$ からソバー位相空間への
+普遍写像とする。補題 \ref{topology-lemma-make-sober} を参照。
+\begin{enumerate}
+\item $X$ が準コンパクトなら $X'$ も準コンパクトである。
+\item $X$ が準コンパクトで、準コンパクト開集合からなる開基をもち、
+二つの準コンパクト開集合の交わりが準コンパクトなら、$X'$ はスペクトルである。
+\item $X$ がネーターなら、$X'$ はネーターなスペクトル空間である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U \subset X$ を開集合とし、$U' \subset X'$ をそれに対応する開集合、
+すなわち $c^{-1}(U') = U$ となる開集合とする。
+$c$ による引き戻しは $X$ と $X'$ の開集合の間の、合併と可換する全単射なので、
+$U$ が準コンパクトであることと $U'$ が準コンパクトであることは同値である。
+これは特に (1) を証明する。
+
+\medskip\noindent
+(2) の証明。上で示したことから、$X'$ は準コンパクト開集合からなる
+開基をもつ。$c^{-1}$ は二つの開集合の交わりとも可換するので、
+$X'$ の二つの準コンパクト開集合の交わりは準コンパクトである。
+最後に、$X'$ は (1) により準コンパクトであり、構成によりソバーである。
+したがって $X'$ はスペクトルである。
+
+\medskip\noindent
+(3) の証明。ネーター性は、$X$ について成り立つ開部分集合の昇鎖条件によって
+定義されるので、$X'$ がネーターであることは直ちに分かる。
+(2) で $X'$ がスペクトルであることはすでに見た。
+\end{proof}
+
+
+
+\section{スペクトル空間の極限}
+\label{topology-section-limits-spectral}
+
+\noindent
+補題 \ref{topology-lemma-spectral-inverse-limit-finite-sober-spaces} によれば、
+任意のスペクトル空間は有限ソバー空間の余フィルター極限である。
+任意の有限ソバー空間はスペクトル空間であり、有限ソバー空間の間の
+任意の連続写像はスペクトル空間のスペクトル写像である。
+この節では、スペクトル写像に沿うスペクトル位相空間の系の極限に関する
+いくつかの補題を証明する。
+
+\begin{lemma}
+\label{topology-lemma-inverse-limit-spectral-spaces-quasi-compact}
+$\mathcal{I}$ を圏とする。$i \mapsto X_i$ をスペクトル空間の図式とし、
+$\mathcal{I}$ の $a : j \to i$ に対応する写像
+$f_a : X_j \to X_i$ はスペクトルであるとする。
+\begin{enumerate}
+\item $\mathcal{I}$ の各 $a : j \to i$ に対して
+$f_a(Z_j) \subset Z_i$ を満たし、
+構成可能位相で閉じた部分集合 $Z_i \subset X_i$ が与えられれば、
+$\lim Z_i$ は準コンパクトである。
+\item 空間 $X = \lim X_i$ は準コンパクトである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+極限 $Z = \lim Z_i$ は補題 \ref{topology-lemma-limits} により存在する。
+$X_i$ に構成可能位相を入れた空間を $X'_i$ と書き、
+$X'_i$ の対応する部分空間を $Z'_i$ と書く。
+$\mathcal{I}$ の射 $a : j \to i$ をとる。$f_a$ はスペクトルなので、
+連続写像 $f_a : X'_j \to X'_i$ を定める。したがって
+$f_a|_{Z_j} : Z'_j \to Z'_i$ は準コンパクト・ハウスドルフ空間の
+連続写像である（補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact}
+および \ref{topology-lemma-closed-in-quasi-compact} による）。
+ゆえに補題 \ref{topology-lemma-inverse-limit-quasi-compact} により
+$Z' = \lim Z_i$ は準コンパクトである。
+写像 $Z'_i \to Z_i$ は連続なので、$Z' \to Z$ は連続であり、
+台集合上の全単射である。したがって $Z$ は全射連続写像
+$Z' \to Z$ の像として準コンパクトである
+（補題 \ref{topology-lemma-image-quasi-compact}）。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-inverse-limit-spectral-spaces-nonempty}
+$\mathcal{I}$ を余フィルター圏とする。$i \mapsto X_i$ を
+スペクトル空間の図式とし、$\mathcal{I}$ の $a : j \to i$ に対応する
+写像 $f_a : X_j \to X_i$ はスペクトルであるとする。
+\begin{enumerate}
+\item $\mathcal{I}$ の各 $a : j \to i$ に対して
+$f_a(Z_j) \subset Z_i$ を満たし、
+構成可能位相で閉じた空でない部分集合 $Z_i \subset X_i$ が与えられれば、
+$\lim Z_i$ は空でない。
+\item 各 $X_i$ が空でなければ、$X = \lim X_i$ は空でない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X_i$ に構成可能位相を入れた空間を $X'_i$ と書き、
+$X'_i$ の対応する部分空間を $Z'_i$ と書く。
+$\mathcal{I}$ の射 $a : j \to i$ をとる。$f_a$ はスペクトルなので、
+連続写像 $f_a : X'_j \to X'_i$ を定める。したがって
+$f_a|_{Z_j} : Z'_j \to Z'_i$ は準コンパクト・ハウスドルフ空間の
+連続写像である（補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact}
+および \ref{topology-lemma-closed-in-quasi-compact} による）。
+補題 \ref{topology-lemma-nonempty-limit} により、空間 $\lim Z'_i$ は空でない。
+集合として $\lim Z'_i = \lim Z_i$ なので、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-inverse-limit-spectral-spaces-equal}
+$\mathcal{I}$ を余フィルター圏とする。$i \mapsto X_i$ を
+スペクトル空間の図式とし、$\mathcal{I}$ の $a : j \to i$ に対応する
+写像 $f_a : X_j \to X_i$ はスペクトルであるとする。
+$X = \lim X_i$ とし、射影を $p_i : X \to X_i$ とする。
+$i \in \Ob(\mathcal{I})$ とし、$E, F \subset X_i$ を、
+$E$ は構成可能位相で閉じ、$F$ は構成可能位相で開く部分集合とする。
+このとき $p_i^{-1}(E) \subset p_i^{-1}(F)$ であるための必要十分条件は、
+$f_a^{-1}(E) \subset f_a^{-1}(F)$ を満たす $\mathcal{I}$ の射
+$a : j \to i$ が存在することである。
+\end{lemma}
+
+\begin{proof}
+次に注意する。
+$$
+p_i^{-1}(E) \setminus p_i^{-1}(F) =
+\lim_{a : j \to i} f_a^{-1}(E) \setminus f_a^{-1}(F)
+$$
+$f_a$ はスペクトル写像なので構成可能位相について連続であり、
+したがって集合 $f_a^{-1}(E) \setminus f_a^{-1}(F)$ は
+構成可能位相で閉じている。ゆえに
+補題 \ref{topology-lemma-inverse-limit-spectral-spaces-nonempty} を適用すると、
+左辺が空でないことと右辺の各空間が空でないことは同値である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-inverse-limit-spectral-spaces-constructible}
+$\mathcal{I}$ を余フィルター圏とする。$i \mapsto X_i$ を
+スペクトル空間の図式とし、$\mathcal{I}$ の $a : j \to i$ に対応する
+写像 $f_a : X_j \to X_i$ はスペクトルであるとする。
+$X = \lim X_i$ とし、射影を $p_i : X \to X_i$ とする。
+$E \subset X$ を構成可能な部分集合とする。このとき、
+$p_i^{-1}(E_i) = E$ を満たす $i \in \Ob(\mathcal{I})$ と
+構成可能な部分集合 $E_i \subset X_i$ が存在する。
+$E$ が開、または閉なら、$E_i$ もそれぞれ開、または閉に選べる。
+\end{lemma}
+
+\begin{proof}
+$E$ が $X$ の準コンパクト開集合であると仮定する。
+補題 \ref{topology-lemma-describe-limits} により、ある $i$ と
+ある開集合 $U_i \subset X_i$ を用いて $E = p_i^{-1}(U_i)$ と書ける。
+$U_i = \bigcup U_{i, \alpha}$ を準コンパクト開集合の合併として書く。
+$E$ は準コンパクトなので、
+$E = p_i^{-1}(U_{i, \alpha_1} \cup \ldots \cup U_{i, \alpha_n})$
+となる $\alpha_1, \ldots, \alpha_n$ を見いだせる。
+したがって $E_i = U_{i, \alpha_1} \cup \ldots \cup U_{i, \alpha_n}$
+とすればよい。
+
+\medskip\noindent
+$E$ が構成可能閉集合であると仮定する。このとき $E^c$ は
+準コンパクト開集合である。したがって前段落の結果により、
+ある $i$ と準コンパクト開集合 $F_i \subset X_i$ に対して
+$E^c = p_i^{-1}(F_i)$ となる。このとき望みどおり
+$E = p_i^{-1}(F_i^c)$ である。
+
+\medskip\noindent
+$E$ が一般の場合、$U_l$ を構成可能開集合、$Z_l$ を構成可能閉集合として
+$E = \bigcup_{l = 1, \ldots, n} U_l \cap Z_l$
+と書ける。前段落までの結果により、
+$U_l = p_{i_l}^{-1}(U_{l, i_l})$ および
+$Z_l = p_{j_l}^{-1}(Z_{l, j_l})$ と書ける。ここで
+$U_{l, i_l} \subset X_{i_l}$ は構成可能開集合であり、
+$Z_{l, j_l} \subset X_{j_l}$ は構成可能閉集合である。
+$\mathcal{I}$ は余フィルターなので、$\mathcal{I}$ の対象 $k$ と射
+$a_l : k \to i_l$ および $b_l : k \to j_l$ を選べる。このとき
+$E_k = \bigcup_{l = 1, \ldots, n}
+f_{a_l}^{-1}(U_{l, i_l}) \cap f_{b_l}^{-1}(Z_{l, j_l})$
+とおけば、その $X$ への逆像が $E$ となる
+$X_k$ の構成可能部分集合を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-directed-inverse-limit-spectral-spaces}
+$\mathcal{I}$ を余フィルター添字圏とする。
+$i \mapsto X_i$ をスペクトル空間の図式とし、
+$\mathcal{I}$ の $a : j \to i$ に対応する写像
+$f_a : X_j \to X_i$ はスペクトルであるとする。
+このとき逆極限 $X = \lim X_i$ はスペクトル位相空間であり、
+射影 $p_i : X \to X_i$ はスペクトルである。
+\end{lemma}
+
+\begin{proof}
+極限 $X = \lim X_i$ は存在し（補題 \ref{topology-lemma-limits}）、
+補題 \ref{topology-lemma-inverse-limit-spectral-spaces-quasi-compact} により
+準コンパクトである。
+
+\medskip\noindent
+射影を $p_i : X \to X_i$ と書く。
+$\mathcal{I}$ は余フィルターなので、補題 \ref{topology-lemma-describe-limits}
+を適用できる。したがって $X$ の位相の開基は、
+開集合 $U_i \subset X_i$ に対する $p_i^{-1}(U_i)$ で与えられる。
+$X_i$ の位相には準コンパクト開集合からなる開基があるので、
+$X$ の位相には、準コンパクト開集合 $U_i \subset X_i$ に対する
+$p_i^{-1}(U_i)$ からなる開基があると分かる。形式的な議論により、
+位相空間として
+$$
+p_i^{-1}(U_i) = \lim_{a : j \to i} f_a^{-1}(U_i)
+$$
+である。各 $f_a$ はスペクトルなので、集合
+$f_a^{-1}(U_i)$ は $X_j$ の構成可能位相で閉じており、したがって
+補題 \ref{topology-lemma-inverse-limit-spectral-spaces-quasi-compact} により
+$p_i^{-1}(U_i)$ は準コンパクトである。
+ゆえに $X$ は準コンパクト開集合からなる位相の開基をもつ。
+
+\medskip\noindent
+$X$ の任意の準コンパクト開集合 $U$ は、ある $i$ と
+ある準コンパクト開集合 $U_i \subset X_i$ に対して
+$U = p_i^{-1}(U_i)$ という形である
+（補題 \ref{topology-lemma-inverse-limit-spectral-spaces-constructible} を参照）。
+準コンパクト開集合 $U_i \subset X_i$ および $U_j \subset X_j$
+が与えられると、ある $k$ と準コンパクト開集合 $U_k \subset X_k$ に対し
+$p_i^{-1}(U_i) \cap p_j^{-1}(U_j) = p_k^{-1}(U_k)$ となる。
+実際、$k$ と射 $k \to i$ および $k \to j$ を選び、
+$U_k$ を $U_i$ と $U_j$ の $X_k$ への引き戻しの交わりとすればよい。
+これにより、$X$ の二つの準コンパクト開集合の交わりは
+準コンパクト開集合であると分かる。
+
+\medskip\noindent
+最後に、$Z \subset X$ を既約閉集合とする。
+$p_i(Z) \subset X_i$ は既約であり、したがって
+$Z_i = \overline{p_i(Z)}$ は一意な生成点 $\xi_i$ をもつ
+（$X_i$ はスペクトル空間だからである）。
+$\overline{f_a(Z_j)} = Z_i$ なので、$\mathcal{I}$ の
+$a : j \to i$ に対して $f_a(\xi_j) = \xi_i$ である。
+ゆえに $\xi = \lim \xi_i$ は $X$ の点である。
+$\xi \in Z$ であると主張する。実際、そうでなければ
+$\xi$ を含み $Z$ と交わらない準コンパクト開集合を見いだせる。
+これは、ある $i$ と準コンパクト開集合 $U_i \subset X_i$ に対して
+$p_i^{-1}(U_i)$ という形である。このとき $\xi_i \in U_i$ である一方、
+$p_i(Z) \cap U_i = \emptyset$ であり、
+$\xi_i \in \overline{p_i(Z)}$ に矛盾する。
+したがって $\xi \in Z$ であり、ゆえに
+$\overline{\{\xi\}} \subset Z$ である。逆に、任意の $z \in Z$ は
+$\xi$ の閉包に属する。実際、$z$ の準コンパクト開近傍 $U$ が与えられたら、
+ある $i$ と準コンパクト開集合 $U_i \subset X_i$ に対して
+$U = p_i^{-1}(U_i)$ と書く。すると $p_i(z) \in U_i$、
+したがって $\xi_i \in U_i$、したがって $\xi \in U$ である。
+ゆえに $\xi$ は $Z$ の生成点である。
+$\xi$ が $Z$ の一意な生成点であることの証明は省略する
+（ヒント：二つ目の生成点は $\xi$ に等しいことを示せばよい。
+そのためには、$X_i$ のスペクトル性により既約集合 $Z_i$ は一意な
+生成点をもつので、その点が $X_i$ の $\xi_i$ に写ることを示す）。
+これで証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-descend-opens}
+$\mathcal{I}$ を余フィルター添字圏とする。
+$i \mapsto X_i$ をスペクトル空間の図式とし、
+$\mathcal{I}$ の $a : j \to i$ に対応する写像
+$f_a : X_j \to X_i$ はスペクトルであるとする。
+$X = \lim X_i$ とおき、射影を $p_i : X \to X_i$ と書く。
+\begin{enumerate}
+\item 任意の準コンパクト開集合 $U \subset X$ に対して、
+$p_i^{-1}(U_i) = U$ を満たす $i \in \Ob(\mathcal{I})$ と
+準コンパクト開集合 $U_i \subset X_i$ が存在する。
+\item $p_i^{-1}(U_i) \subset p_j^{-1}(U_j)$ を満たす準コンパクト開集合
+$U_i \subset X_i$ および $U_j \subset X_j$ が与えられれば、
+$f_a^{-1}(U_i) \subset f_b^{-1}(U_j)$ を満たす
+$k \in \Ob(\mathcal{I})$ と射 $a : k \to i$ および $b : k \to j$
+が存在する。
+\item $U_i, U_{1, i}, \ldots, U_{n, i} \subset X_i$ が
+準コンパクト開集合であり、
+$p_i^{-1}(U_i) = p_i^{-1}(U_{1, i}) \cup \ldots \cup p_i^{-1}(U_{n, i})$
+なら、$\mathcal{I}$ のある射 $a : j \to i$ に対して
+$f_a^{-1}(U_i) = f_a^{-1}(U_{1, i}) \cup \ldots \cup f_a^{-1}(U_{n, i})$
+となる。
+\item (3) で合併を交わりに置き換えた同じ主張が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{topology-lemma-inverse-limit-spectral-spaces-constructible}
+の特別な場合である。(2) は、準コンパクト開集合が構成可能位相では
+開かつ閉であることから、
+補題 \ref{topology-lemma-inverse-limit-spectral-spaces-equal} の特別な場合である。
+(3) と (4) は、(1)、(2)、および部分集合の逆像をとる操作が
+合併および交わりをとる操作と可換することから形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-make-spectral-space}
+$W$ をスペクトル空間 $X$ の部分集合とする。次は同値である。
+\begin{enumerate}
+\item $W$ は構成可能集合の交わりであり、一般化について閉じている。
+\item $W$ は準コンパクトであり、一般化について閉じている。
+\item 準コンパクトな部分集合 $E \subset X$ が存在して、
+$W$ は $E$ に特殊化する点全体の集合である。
+\item $W$ は準コンパクト開部分集合の交わりである。
+\item
+\label{topology-item-intersection-quasi-compact-open}
+空でない集合 $I$ と準コンパクト開集合
+$U_i \subset X$, $i \in I$ が存在し、$W = \bigcap U_i$ であって、
+任意の $i, j \in I$ に対して $U_k \subset U_i \cap U_j$
+を満たす $k \in I$ が存在する。
+\end{enumerate}
+この場合、(a) $W$ はスペクトル空間であり、(b) 位相空間として
+$W = \lim U_i$ であり、(c) $W$ を含む任意の開集合 $U$ に対して、
+$U_i \subset U$ を満たす $i$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$W \subset X$ が (1) を満たすとする。このとき $W$ は
+構成可能位相で閉じており、したがって構成可能位相で準コンパクトであり
+（補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact} および
+\ref{topology-lemma-closed-in-quasi-compact} による）、ゆえに $X$ の位相で
+準コンパクトである（$X$ の開集合は構成可能位相でも開だからである）。
+したがって (2) が成り立つ。
+
+\medskip\noindent
+$E = W$ ととれば (2) が (3) を含意することは明らかである。
+
+\medskip\noindent
+$X$ をスペクトル空間とし、$E \subset W$ は (3) のとおりとする。
+$W$ の各点は $E$ のある点へ特殊化するので、$E$ を含む $W$ の開集合は
+$W$ に等しい。したがって $E$ は準コンパクトなので $W$ も準コンパクトである。
+$x \in X$, $x \not \in W$ なら、$Z = \overline{\{x\}}$ は
+$W$ と交わらない。$W$ は準コンパクトなので、$W \subset U$ かつ
+$U \cap Z = \emptyset$ を満たす準コンパクト開集合 $U$ を見いだせる。
+以上より (4) が成り立つ。
+
+\medskip\noindent
+$W = \bigcap_{j \in J} U_j$ なら、$I$ を $J$ の有限部分集合全体とし、
+$i = \{j_1, \ldots, j_r\}$ に対して
+$U_i = U_{j_1} \cap \ldots \cap U_{j_r}$ とおけば、
+(4) が (5) を含意することが分かる。(5) が (1) を含意することは直ちに従う。
+
+\medskip\noindent
+$I$ と $U_i$ は (5) のとおりとする。
+$W = \bigcap U_i$ なので、極限の普遍性により $W = \lim U_i$ である。
+このとき補題 \ref{topology-lemma-directed-inverse-limit-spectral-spaces} により
+$W$ はスペクトル空間である。$U \subset X$ を $W$ の開近傍とする。
+このとき
+$E_i = U_i \cap (X \setminus U)$ はスペクトル空間
+$Z = X \setminus U$ の、交わりが空である構成可能部分集合の族である。
+$Z$ 上のスペクトル位相が準コンパクトであること
+（補題 \ref{topology-lemma-constructible-hausdorff-quasi-compact}）を用いると、
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} から、
+ある $i$ に対して $E_i = \emptyset$ であると分かる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-make-spectral-space-minus}
+$X$ をスペクトル空間とする。$E \subset X$ を構成可能部分集合とする。
+$W \subset X$ を、$E$ のある点へ特殊化する $X$ の点全体の集合とする。
+このとき $W \setminus E$ はスペクトル空間である。
+補題 \ref{topology-lemma-make-spectral-space}
+(\ref{topology-item-intersection-quasi-compact-open}) のとおりの $U_i$ によって
+$W = \bigcap U_i$ なら、
+$W \setminus E = \lim (U_i \setminus E)$ である。
+\end{lemma}
+
+\begin{proof}
+$E$ は構成可能なので準コンパクトであり、したがって
+補題 \ref{topology-lemma-make-spectral-space} を $W$ に適用できる。
+$E$ が構成可能なら、すべての $i \in I$ に対して
+$E$ は $U_i$ の中でも構成可能である。したがって
+補題 \ref{topology-lemma-spectral-sub} により $U_i \setminus E$ はスペクトルである。
+$W \setminus E = \bigcap (U_i \setminus E)$ なので、
+極限の普遍性により $W \setminus E = \lim U_i \setminus E$ である。
+このとき補題 \ref{topology-lemma-directed-inverse-limit-spectral-spaces} により
+$W \setminus E$ はスペクトル空間である。
+\end{proof}
+
+
+
+\section{ストーン--チェフコンパクト化}
+\label{topology-section-stone-cech}
+
+\noindent
+位相空間 $X$ のストーン--チェフコンパクト化とは、
+$X$ からハウスドルフ準コンパクト空間 $\beta(X)$ への写像
+$X \to \beta(X)$ であって、この種の写像に関して普遍的なものである。
+次の簡単な補題を用いる標準的な議論により、その存在を証明する。
+
+\begin{lemma}
+\label{topology-lemma-dense-image}
+$f : X \to Y$ を位相空間の連続写像とする。
+$f(X)$ は $Y$ で稠密であり、$Y$ はハウスドルフであると仮定する。
+このとき $Y$ の濃度は、$P$ を冪集合をとる操作として、
+$P(P(X))$ の濃度以下である。
+\end{lemma}
+
+\begin{proof}
+$S = f(X) \subset Y$ とおく。$\mathcal{D}$ を $Y$ の閉領域全体、
+すなわちその内部の閉包に等しい部分集合 $D \subset Y$ 全体とする。
+$Y$ の開部分集合の閉包は閉領域であることに注意する。
+$y \in Y$ に対して、次の集合を考える。
+$$
+I_y = \{T \subset S \mid \text{ there exists }
+D \in \mathcal{D}\text{ with }T = S \cap D\text{ and }y \in D\}.
+$$
+$S$ は $Y$ で稠密なので、任意の閉領域 $D$ に対し
+$S \cap D$ は $D$ で稠密である。したがって
+$D, D' \in \mathcal{D}$ に対して $D \cap S = D' \cap S$ なら
+$D = D'$ である。ゆえに $I_y = I_{y'}$ なら $y = y'$ である。
+実際、ハウスドルフ条件により、$y$ を含み $y'$ を含まない
+閉領域を見いだせる。以上から結論が従う。
+\end{proof}
+
+\noindent
+$X$ を位相空間とする。補題 \ref{topology-lemma-dense-image} により、
+像が稠密で、$Y$ がハウスドルフかつ準コンパクトである連続写像
+$f : X \to Y$ の同型類全体からなる集合 $I$ が存在する。
+各 $i \in I$ に対し代表元 $f_i : X \to Y_i$ を選ぶ。写像
+$$
+\prod f_i : X \longrightarrow \prod\nolimits_{i \in I} Y_i
+$$
+を考え、その像の閉包を $\beta(X)$ と書く。
+各 $Y_i$ はハウスドルフなので $\beta(X)$ もハウスドルフである。
+各 $Y_i$ は準コンパクトなので $\beta(X)$ も準コンパクトである
+（定理 \ref{topology-theorem-tychonov} および
+補題 \ref{topology-lemma-closed-in-quasi-compact} を用いる）。
+
+\medskip\noindent
+標準写像 $X \to \beta(X)$ がハウスドルフ準コンパクト空間への
+写像に関する普遍性を満たすことを示そう。
+実際、$f : X \to Y$ をそのような射とする。
+$Z \subset Y$ を $f(X)$ の閉包とする。このとき $X \to Z$ は、
+写像 $f_i : X \to Y_i$ の一つ、例えば
+$f_{i_0} : X \to Y_{i_0}$ と同型である。したがって望みどおり、
+$f$ は
+$X \to \beta(X) \to \prod Y_i \to Y_{i_0} \cong Z \to Y$
+と分解する。
+
+\begin{lemma}
+\label{topology-lemma-one-point-compactification}
+$X$ をハウスドルフ局所準コンパクト空間とする。
+$X$ を準コンパクト・ハウスドルフ空間 $X^*$ の開部分空間と同一視し、
+$X^* \setminus X$ が一点集合となる写像 $X \to X^*$ が存在する
+（一点コンパクト化）。
+特に、写像 $X \to \beta(X)$ は $X$ を $\beta(X)$ の
+開部分空間と同一視する。
+\end{lemma}
+
+\begin{proof}
+$X^* = X \amalg \{\infty\}$ とおく。$X^*$ の部分集合 $V$ が
+開であることを、次のいずれかが成り立つこととして定める。
+$V \subset X$ が $X$ で開であるか、または $\infty \in V$ であり、
+$U = V \cap X$ が $X$ の開集合で、$X \setminus U$ が準コンパクトである。
+これが位相を定めることの確認は省略する。
+$X \to X^*$ が $X$ を $X$ の開部分空間と同一視することは明らかである。
+
+\medskip\noindent
+$X$ は局所準コンパクトなので、各点 $x \in X$ は
+準コンパクトな近傍 $x \in E \subset X$ をもつ。
+このとき $E$ は閉であり
+（補題 \ref{topology-lemma-quasi-compact-in-Hausdorff} の (1)）、
+$V = (X \setminus E) \amalg \{\infty\}$ は $\infty$ の開近傍で、
+$E$ の内部と交わらない。したがって $X^*$ はハウスドルフである。
+
+\medskip\noindent
+$X^* = \bigcup V_i$ を開被覆とする。このとき、ある $i$、
+例えば $i_0$ に対して $\infty \in V_{i_0}$ である。
+構成により $Z = X^* \setminus V_{i_0}$ は準コンパクトである。
+したがって被覆
+$Z \subset \bigcup_{i \not = i_0} Z \cap V_i$ は有限な細分をもち、
+これにより与えられた $X^*$ の被覆は有限な細分をもつ。
+ゆえに $X^*$ は準コンパクトである。
+
+\medskip\noindent
+ストーン--チェフコンパクト化の普遍性により、写像 $X \to X^*$ は
+$X \to \beta(X) \to X^*$ と分解する。
+$\varphi : \beta(X) \to X^*$ をこの分解写像とする。
+このとき $X \to \varphi^{-1}(X)$ は
+$\varphi^{-1}(X) \to X$ の切断なので、その像は閉である
+（補題 \ref{topology-lemma-section-closed}）。
+$X \to \beta(X)$ の像は稠密なので、$X = \varphi^{-1}(X)$ と結論する。
+\end{proof}
+
+
+
+\section{極値非連結空間}
+\label{topology-section-extremally-disconnected}
+
+\noindent
+この節の内容は \cite{Gleason} から採った
+（\cite{Rainwater} にあるとおり若干修正している）。
+Gleason の論文では、準コンパクト・ハウスドルフ空間の圏における
+「射影的対象」が、ちょうど極値非連結空間であることが示されている。
+
+\begin{definition}
+\label{topology-definition-extremally-disconnected}
+位相空間 $X$ は、$X$ の任意の開部分集合の閉包が開であるとき、
+{\it 極値非連結}であるという。
+\end{definition}
+
+\noindent
+$X$ がハウスドルフかつ極値非連結なら、$X$ は完全不連結である
+（一般にはこれは正しくない）。$X$ が準コンパクト、ハウスドルフ、
+かつ極値非連結なら、補題 \ref{topology-lemma-profinite} により $X$ は副有限であるが、
+逆は一般には成り立たない。例えば $p$ 進整数
+$\mathbf{Z}_p = \lim \mathbf{Z}/p^n\mathbf{Z}$ は副有限空間であるが、
+極値非連結ではない。実際、$U \subset \mathbf{Z}_p$ を付値が偶数である
+非零元全体とすると、$U$ は開であるが、その閉包
+$U \cup \{0\}$ は開でない。
+
+\begin{lemma}
+\label{topology-lemma-image-open-technical}
+$f : X \to Y$ を位相空間の連続写像とする。$f$ は全射であり、
+任意の真の閉部分集合 $E \subset X$ に対して $f(E) \not = Y$
+であると仮定する。このとき、開集合 $U \subset X$ に対して
+部分集合 $f(U)$ は $Y \setminus f(X \setminus U)$ の閉包に含まれる。
+\end{lemma}
+
+\begin{proof}
+$y \in f(U)$ をとり、$V \subset Y$ を $y$ の任意の開近傍とする。
+$V$ が $Y \setminus f(X \setminus U)$ と交わることを示す。
+$W = U \cap f^{-1}(V)$ は $X$ の空でない開部分集合なので、
+$f(X \setminus W) \not = Y$ であることに注意する。
+$y' \in Y$, $y' \not \in f(X \setminus W)$ をとる。
+$y' \in V$ かつ $y' \in Y \setminus f(X \setminus U)$ であることは
+初等的に確かめられる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-intersection-empty}
+$X$ を極値非連結空間とする。
+$U, V \subset X$ が互いに交わらない開部分集合なら、
+$\overline{U}$ と $\overline{V}$ も互いに交わらない。
+\end{lemma}
+
+\begin{proof}
+仮定により $\overline{U}$ は開なので、
+$V \cap \overline{U}$ は開であり $U$ と交わらない。
+$\overline{U}$ は $U$ を含む $X$ の閉部分集合全体の交わりなので、
+これは空である。このことから、開集合
+$\overline{V} \cap \overline{U}$ は $V$ を避けるので、
+同じ議論により空である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-isomorphism}
+$f : X \to Y$ をハウスドルフ準コンパクト位相空間の連続写像とする。
+$Y$ は極値非連結であり、$f$ は全射であり、$X$ の任意の真の閉部分集合
+$Z$ に対して $f(Z) \not = Y$ であるなら、$f$ は同相写像である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-bijective-map} により、$f$ が単射であることを示せば十分である。
+$x, x' \in X$ は相異なる点で $y = f(x) = f(x')$ であると仮定する。
+$x, x'$ の互いに交わらない開近傍 $U, U' \subset X$ を選ぶ。
+$f$ は閉写像なので（補題 \ref{topology-lemma-closed-map}）、
+$T = f(X \setminus U)$ および $T' = f(X \setminus U')$ は $Y$ で閉じている。
+$X$ は $X \setminus U$ と $X \setminus U'$ の合併なので、
+$Y = T \cup T'$ である。補題 \ref{topology-lemma-image-open-technical} により、
+$y$ は $Y \setminus T$ の閉包と $Y \setminus T'$ の閉包の双方に含まれる。
+一方、補題 \ref{topology-lemma-intersection-empty} により、この交わりは空である。
+こうして所望の矛盾を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-find-compact-subset}
+$f : X \to Y$ をハウスドルフ準コンパクト位相空間の
+連続全射とする。$f(E) = Y$ を満たす準コンパクト部分集合
+$E \subset X$ であって、任意の真の閉部分集合 $E' \subset E$ に対して
+$f(E') \not = Y$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$X$ の準コンパクト部分集合はちょうど閉部分集合であることを、
+以下では断りなく用いる（補題 \ref{topology-lemma-closed-in-compact}）。
+$f(E) = Y$ を満たす準コンパクト部分集合 $E \subset X$ 全体を
+包含関係で順序づけた集合を $\mathcal{E}$ とする。
+Zorn の補題を用いて、$\mathcal{E}$ が極小元をもつことを示す。
+そのためには、$\mathcal{E}$ の元からなる全順序族 $E_\lambda$ が
+与えられたとき、交わり $\bigcap E_\lambda$ が
+$\mathcal{E}$ の元であることを示せば十分である。
+これは閉なので準コンパクトである。各 $y \in Y$ に対して、
+集合 $E_\lambda \cap f^{-1}(\{y\})$ は空でない閉集合なので、
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により
+交わり
+$\bigcap E_\lambda \cap f^{-1}(\{y\}) =
+\bigcap (E_\lambda \cap f^{-1}(\{y\}))$
+は空でない。これで証明は完了する。
+\end{proof}
+
+\begin{proposition}
+\label{topology-proposition-projective-in-category-hausdorff-qc}
+$X$ をハウスドルフ準コンパクト位相空間とする。次は同値である。
+\begin{enumerate}
+\item $X$ は極値非連結である。
+\item $Y$ がハウスドルフ準コンパクトである任意の全射連続写像
+$f : Y \to X$ に対して、連続な切断が存在する。
+\item 準コンパクト・ハウスドルフ空間の連続写像からなる任意の
+実線可換図式
+$$
+\xymatrix{
+& Y \ar[d] \\
+X \ar@{..>}[ru] \ar[r] & Z
+}
+$$
+で $Y \to Z$ が全射であるものに対して、図式を可換にする点線矢印が
+位相空間の圏において存在する。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(3) が (2) を含意することは明らかである。一方、(2) が成り立ち、
+$X \to Z$ と $Y \to Z$ が (3) のとおりなら、(2) により
+射影 $X \times_Z Y \to X$ の切断が存在し、これは適切な点線矢印の
+存在を含意する（詳細は省略する）。したがって (3) と (2) は同値である。
+
+\medskip\noindent
+$X$ は極値非連結であると仮定し、$f : Y \to X$ を (2) のとおりとする。
+補題 \ref{topology-lemma-find-compact-subset} により、$f(E) = X$ を満たす
+準コンパクト部分集合 $E \subset Y$ であって、任意の真の閉部分集合
+$E' \subset E$ に対して $f(E') \not = X$ となるものが存在する。
+補題 \ref{topology-lemma-isomorphism} により、$f|_E : E \to X$ は同相写像であり、
+その逆写像が所望の切断を与える。
+
+\medskip\noindent
+(2) を仮定する。$U \subset X$ を開集合とし、その補集合を $Z$ とする。
+連続全射 $f : \overline{U} \amalg Z \to X$ を考える。
+$\sigma$ を切断とする。このとき
+$\overline{U} = \sigma^{-1}(\overline{U})$ は開である。
+したがって $X$ は極値非連結である。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-rainwater}
+$f : X \to X$ をハウスドルフ位相空間の全射連続自己写像とする。
+$f$ が $\text{id}_X$ でなければ、
+$X = E \cup f(E)$ を満たす真の閉部分集合 $E \subset X$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$f(p) \not = p$ となる $p \in X$ をとる。
+互いに交わらない開近傍 $p \in U$, $f(p) \in V$ を選び、
+$E = X \setminus U \cap f^{-1}(V)$ とおく。
+$p \not \in E$ なので $E$ は真の閉部分集合である。
+$x \in X$ なら、$x \in E$ であるか、そうでなければ
+$x \in U \cap f^{-1}(V)$ である。$x = f(y)$ と書く
+（$f$ は全射なので可能である）。もし $y \in U \cap f^{-1}(V)$ なら、
+$x = f(y) \in V$ となるが、これは $x \in U$ に矛盾する。
+したがって $y \in E$ であり、$x \in f(E)$ である。
+\end{proof}
+
+\begin{example}
+\label{topology-example-stone-Cech-discrete}
+命題 \ref{topology-proposition-projective-in-category-hausdorff-qc} を用いると、
+離散空間 $X$ のストーン--チェフコンパクト化 $\beta(X)$ が
+極値非連結であると分かる。実際、$Y$ を準コンパクト・ハウスドルフとし、
+$f : Y \to \beta(X)$ を連続全射とする。このとき $X$ は離散なので、
+写像 $X \to \beta(X)$ を連続な（！）写像 $X \to Y$ に持ち上げられる。
+ストーン--チェフコンパクト化の普遍性により、分解
+$X \to \beta(X) \to Y$ を得る。$\beta(X) \to Y \to \beta(X)$ は
+稠密部分集合 $X$ 上で恒等写像に等しいので、切断が得られたと結論する。
+特に、離散空間のストーン--チェフコンパクト化は完全不連結であり、
+したがって副有限である
+（定義 \ref{topology-definition-extremally-disconnected} の後の議論および
+補題 \ref{topology-lemma-profinite} を参照）。
+\end{example}
+
+\noindent
+例 \ref{topology-example-stone-Cech-discrete} が与える豊富な極値非連結空間を用いると、
+任意の準コンパクト・ハウスドルフ空間が、準コンパクト・ハウスドルフ空間の
+圏において「射影的被覆」をもつことを証明できる。
+
+\begin{lemma}
+\label{topology-lemma-existence-projective-cover}
+\begin{slogan}
+任意の準コンパクト・ハウスドルフ空間は標準的な極値非連結被覆をもつ
+\end{slogan}
+$X$ を準コンパクト・ハウスドルフ空間とする。
+$X'$ が準コンパクト、ハウスドルフ、かつ極値非連結であるような
+連続全射 $X' \to X$ が存在する。
+$X'$ の任意の真の閉部分集合が $X$ の上へ写らないことを要求すれば、
+$X'$ は同型を除いて一意である。
+\end{lemma}
+
+\begin{proof}
+$Y = X$ とおくが、これには離散位相を入れる。$X' = \beta(Y)$ とおく。
+連続写像 $Y \to X$ は $Y \to X' \to X$ と分解する。
+例 \ref{topology-example-stone-Cech-discrete} により、これは補題の最初の主張を証明する。
+
+\medskip\noindent
+補題 \ref{topology-lemma-find-compact-subset} により、$X$ の上へ全射となる
+準コンパクト部分集合 $E \subset X'$ であって、$E$ の真の閉部分集合は
+どれも $X$ の上へ全射とならないものを見いだせる。
+$X'$ は極値非連結なので、$X$ 上の連続写像
+$f : X' \to E$ が存在する
+（命題 \ref{topology-proposition-projective-in-category-hausdorff-qc}）。
+$f$ と写像 $E \to X'$ を合成すると、連続自己写像
+$f|_E : E \to E$ が得られる。$f|_E$ が全射でなければ、その像は
+$X$ の上へ全射となる真の閉部分集合になるので、全射でなければならない。
+さらに $f|_E$ が $\text{id}_E$ でなければ、
+補題 \ref{topology-lemma-rainwater} により $E$ の極小性に反するので、
+恒等写像でなければならない。
+したがって $\text{id}_E$ は極値非連結空間 $X'$ を経由して分解する。
+形式的な圏論的議論
+（命題 \ref{topology-proposition-projective-in-category-hausdorff-qc} の特徴づけを用いる）
+により、$E$ は極値非連結であると分かる。
+
+\medskip\noindent
+一意性を証明するため、二つ目の極小被覆 $X'' \to X$ があるとする。
+命題 \ref{topology-proposition-projective-in-category-hausdorff-qc} で証明した
+持ち上げ性により、$X$ 上の連続写像 $g : X' \to X''$ を見いだせる。
+$g$ は閉写像であることに注意する（補題 \ref{topology-lemma-closed-map}）。
+したがって $g(X') \subset X''$ は $X$ の上へ全射となる閉部分集合であり、
+$X''$ の極小性から $g(X') = X''$ と結論する。
+一方、$E \subset X'$ が真の閉部分集合なら、
+$X'$ の極小性により $E$ は $X$ の上へ写らないので、
+$g(E) \not = X''$ である。補題 \ref{topology-lemma-isomorphism} により、
+$g$ は同型写像である。
+\end{proof}
+
+\begin{remark}
+\label{topology-remark-size-projective-cover}
+$X$ を準コンパクト・ハウスドルフ空間とする。$\kappa$ を
+$X$ の濃度以上の無限基数とする。このとき、極小な準コンパクト・
+ハウスドルフ極値非連結被覆
+$X' \to X$（補題 \ref{topology-lemma-existence-projective-cover}）の濃度は、
+$2^{2^\kappa}$ 以下である。実際、$X$ へ全単射に写る
+部分集合 $S \subset X'$ を選ぶ。$X'$ の極小性により $S$ は $X'$ で稠密である。
+したがって補題 \ref{topology-lemma-dense-image} により
+$|X'| \leq 2^{2^\kappa}$ である。
+\end{remark}
+
+
+
+\section{雑録}
+\label{topology-section-miscellany}
+
+
+\noindent
+次の補題は、準分離スキームに付随する台位相空間に適用される。
+
+\begin{lemma}
+\label{topology-lemma-topology-quasi-separated-scheme}
+$X$ を次の性質をもつ位相空間とする。
+\begin{enumerate}
+\item 準コンパクト開集合からなる位相の開基をもつ。
+\item 任意の二つの準コンパクト開集合の交わりが準コンパクトである。
+\end{enumerate}
+このとき次が成り立つ。
+\begin{enumerate}
+\item $X$ は局所準コンパクトである。
+\item 準コンパクト開集合 $U \subset X$ はレトロコンパクトである。
+\item 任意の準コンパクト開集合 $U \subset X$ は、
+$J$ が有限で、すべての $U_j$ および $U_j \cap U_{j'}$ が
+準コンパクトであるような開被覆
+$\mathcal{U} : U = \bigcup_{j\in J} U_j$ の余終系をもつ。
+\item ここにさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-isolated-point}
+$X$ を位相空間とする。$\{x\}$ が $X$ で開であるとき、
+$x \in X$ を $X$ の{\it 孤立点}という。
+\end{definition}
+
+
+
+\section{分割と層化}
+\label{topology-section-stratifications}
+
+\noindent
+層化は多くの異なる仕方で定義できる。
+この節での定義の選択について意見を歓迎する。
+
+\begin{definition}
+\label{topology-definition-paritition}
+$X$ を位相空間とする。$X$ の{\it 分割}とは、
+局所閉部分集合 $X_i$ への分解 $X = \coprod X_i$ のことである。
+$X_i$ を分割の{\it 部分}という。
+$X$ の二つの分割が与えられたとき、一方の部分が他方の部分の合併であれば、
+一方が他方を{\it 細分する}という。
+\end{definition}
+
+\noindent
+任意の位相空間 $X$ は連結成分への分割をもつ。
+$X$ が有限個の既約成分 $Z_1, \ldots, Z_r$ をもつなら、
+部分集合 $I \subset \{1, \ldots, r\}$ を添字とする部分
+$X_I = \bigcap_{i \in I} Z_i \setminus (\bigcup_{i \not \in I} Z_i)$
+からなる分割があり、これは連結成分への分割を細分する。
+
+\begin{definition}
+\label{topology-definition-good-stratification}
+$X$ を位相空間とする。$X$ の{\it 良い層化}とは、
+すべての $i, j \in I$ に対して
+$$
+X_i \cap \overline{X_j} \not = \emptyset
+\Rightarrow
+X_i \subset \overline{X_j}.
+$$
+を満たす分割 $X = \coprod X_i$ のことである。
+\end{definition}
+
+\noindent
+良い層化 $X = \coprod_{i \in I} X_i$ が与えられると、
+$X_i \subset \overline{X_j}$ であることとして $i \leq j$ を定めることにより、
+$I$ 上の半順序を得る。このとき
+$$
+\overline{X_j} = \bigcup\nolimits_{i \leq j} X_i
+$$
+である。一方、代数幾何でしばしば起きるのは、最後の表示式において
+左辺が右辺の部分集合であることしか分からない場合である。
+これは次の定義を導く。
+
+\begin{definition}
+\label{topology-definition-stratification}
+$X$ を位相空間とする。$X$ の{\it 層化}は、
+分割 $X = \coprod_{i \in I} X_i$ と $I$ 上の半順序であって、
+各 $j \in I$ に対して
+$$
+\overline{X_j} \subset \bigcup\nolimits_{i \leq j} X_i
+$$
+を満たすものによって与えられる。
+部分 $X_i$ を層化の{\it 層}という。
+\end{definition}
+
+\noindent
+層化にはしばしば追加の条件を課す。
+例えば、層化が{\it 局所有限}なら特に扱いやすい。
+これは、各点が有限個の層とのみ交わる近傍をもつことを意味する。
+より一般に、次の定義を導入する。
+
+\begin{definition}
+\label{topology-definition-locally-finite}
+$X$ を位相空間とする。$I$ を集合とし、各 $i \in I$ に対して
+$E_i \subset X$ を部分集合とする。任意の $x \in X$ に対して、
+$\{i \in I | E_i \cap U \not = \emptyset\}$
+が有限となる $x$ の開近傍 $U$ が存在するとき、
+族 $\{E_i\}_{i \in I}$ は{\it 局所有限}であるという。
+\end{definition}
+
+
+\begin{remark}
+\label{topology-remark-locally-finite-stratification}
+位相空間 $X$ の局所有限層化 $X = \coprod X_i$ が与えられると、
+$I$ で添字づけられた $X$ の閉部分集合の族
+$Z_i = \bigcup_{j \leq i} X_j$ であって、
+$$
+Z_i \cap Z_j = \bigcup\nolimits_{k \leq i, j} Z_k
+$$
+を満たすものが得られる。逆に、半順序集合 $I$ で添字づけられた
+閉部分集合 $Z_i \subset X$ が与えられ、$X = \bigcup Z_i$ であり、
+各点が有限個の $Z_i$ とのみ交わる近傍をもち、かつ上の表示式が
+成り立つなら、
+$X_i = Z_i \setminus \bigcup_{j < i} Z_j$
+とおくことにより $X$ の局所有限層化を得る。
+\end{remark}
+
+\begin{lemma}
+\label{topology-lemma-partition-refined-by-stratification}
+$X$ を位相空間とする。$X = \coprod X_i$ を $X$ の有限分割とする。
+このとき、これを細分する $X$ の有限層化が存在する。
+\end{lemma}
+
+\begin{proof}
+$T_i = \overline{X_i}$ および $\Delta_i = T_i \setminus X_i$ とおく。
+$S$ を $T_i$ と $\Delta_i$ のあらゆる交わり全体とする
+（例えば $T_1 \cap T_2 \cap \Delta_4$ は $S$ の元である）。
+このとき $S = \{Z_s\}$ は $X$ の閉部分集合からなる有限族で、
+すべての $s, s' \in S$ に対して $Z_s \cap Z_{s'} \in S$ である。
+$S$ 上の半順序を包含関係によって定める。このとき
+$Y_s = Z_s \setminus \bigcup_{s' < s} Z_{s'}$
+とおけば、所望の層化が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-constructible-partition-refined-by-stratification}
+$X$ を位相空間とする。
+$X = T_1 \cup \ldots \cup T_n$ が構成可能部分集合の合併として
+書かれていると仮定する。このとき、各 $X_i$ が構成可能で、
+各 $T_k$ が層の合併となる有限層化
+$X = \coprod X_i$ が存在する。
+\end{lemma}
+
+\begin{proof}
+構成可能部分集合の定義により、各 $T_i$ は
+レトロコンパクト開集合 $U, V \subset X$ を用いた
+$U \cap V^c$ の有限合併として書ける。
+したがって、レトロコンパクト開集合 $U_i, V_i \subset X$ に対して
+$T_i = U_i \cap V_i^c$ であると仮定してよい。
+$S$ を、$\emptyset, X, U_i^c, V_i^c$ およびこれらの有限交叉からなる、
+$X$ の閉部分集合の有限集合とする。
+$Z \in S$ なら、$Z$ は $X$ で構成可能である
+（補題 \ref{topology-lemma-constructible}）。
+さらに、すべての $Z, Z' \in S$ に対して $Z \cap Z' \in S$ である。
+$S$ 上の半順序を包含関係によって定める。$Z \in S$ に対して
+$X_Z = Z \setminus \bigcup_{Z' < Z,\ Z' \in S} Z'$
+とおけば、補題で述べた性質を満たす層化
+$X = \coprod_{Z \in S} X_Z$ が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-noetherian-partition-refined-by-stratification}
+$X$ をネーター位相空間とする。$X$ の任意の有限分割は、
+有限な良い層化によって細分できる。
+\end{lemma}
+
+\begin{proof}
+$X = \coprod X_i$ を $X$ の有限分割とする。
+$Z$ を $X$ の既約成分とする。有限添字集合について
+$X = \bigcup \overline{X_i}$ なので、
+$Z \subset \overline{X_i}$ を満たす $i$ が存在する。
+$X_i$ は局所閉なので、これは $Z \cap X_i$ が $Z$ の開集合を含むことを
+含意する。したがって $Z \cap X_i$ は $X$ の開集合 $U$ を含む
+（補題 \ref{topology-lemma-Noetherian}）。
+$X_i = U \amalg X_i^1 \amalg X_i^2$
+と書く。ここで
+$X_i^1 = (X_i \setminus U) \cap \overline{U}$ および
+$X_i^2 = (X_i \setminus U) \cap \overline{U}^c$ とする。
+$i' \not = i$ に対して
+$X_{i'}^1 = X_{i'} \cap \overline{U}$ および
+$X_{i'}^2 = X_{i'} \cap \overline{U}^c$ とおく。このとき
+$$
+X \setminus U = \coprod X^k_l
+$$
+は $\overline{U} \setminus U = \bigcup X_l^1$ を満たす分割である。
+$X \setminus U$ は閉であり、$X$ より真に小さいことに注意する。
+ネーター帰納法により、この分割を有限な良い層化
+$X \setminus U = \coprod_{\alpha \in A} T_\alpha$
+で細分できる。このとき
+$X = U \amalg \coprod_{\alpha \in A} T_\alpha$ は、
+最初の分割を細分する $X$ の有限な良い層化である。
+\end{proof}
+
+
+
+\section{空間の余極限}
+\label{topology-section-colimits}
+
+\noindent
+位相空間の圏は余積をもつ。実際、$I$ を集合とし、
+各 $i \in I$ に対して位相空間 $X_i$ が与えられたとき、
+集合 $\coprod_{i \in I} X_i$ に{\it 余積位相}を入れる。
+この位相の開基には、開集合 $U_i \subset X_i$ による形 $U_i$ の集合を用いる。
+
+\medskip\noindent
+位相空間の圏は余等化子をもつ。実際、
+$a, b : X \to Y$ が位相空間の射なら、$a$ と $b$ の余等化子は、
+集合の圏における余等化子 $Y/\sim$ に商位相を入れたものである
+（節 \ref{topology-section-submersive}）。
+
+\begin{lemma}
+\label{topology-lemma-colimits}
+位相空間の圏は余極限をもち、集合への忘却関手は余極限と可換する。
+\end{lemma}
+
+\begin{proof}
+これは上の議論および
+Categories, Lemma \ref{categories-lemma-colimits-coproducts-coequalizers}
+から従う。余極限の存在の別証明は
+Categories, Remark \ref{categories-remark-how-to-use-it}
+に略述されている。上の議論から、忘却関手が余極限と可換することも従う。
+別の見方として、Categories, Lemma \ref{categories-lemma-adjoint-exact}
+と、忘却関手が右随伴、すなわち集合に対応するカオス
+（または密着）位相空間を割り当てる関手をもつことを用いてもよい。
+\end{proof}
+
+
+
+\section{位相群、位相環、位相加群}
+\label{topology-section-topological-groups}
+
+\noindent
+ここでは定義と初等的性質だけを簡潔に述べる。
+
+\begin{definition}
+\label{topology-definition-topological-group}
+{\it 位相群}とは、乗法 $G \times G \to G$, $(x, y) \mapsto xy$ と
+逆元写像 $G \to G$, $x \mapsto x^{-1}$ が連続となる位相を入れた群
+$G$ のことである。{\it 位相群の準同型}とは、連続な群準同型である。
+\end{definition}
+
+\noindent
+$G$ が位相群で $H \subset G$ が部分群なら、誘導位相を入れた
+$H$ は位相群である。$G$ が位相群で $G \to H$ が群の全射なら、
+商位相を入れた $H$ は位相群である。
+
+\begin{example}
+\label{topology-example-automorphisms-of-a-set}
+$E$ を集合とする。自己写像全体の集合 $\text{Map}(E, E)$ に
+コンパクト開位相、すなわち、$f : E \to E$ が与えられたとき
+$f$ の近傍の基本系が、有限部分集合 $S \subset E$ に対する
+$U_S(f) = \{f' : E \to E \mid f'|_S = f|_S\}$ で与えられる位相を入れる。
+この位相に関して、$E$ に離散位相を入れれば作用
+$$
+\text{Map}(E, E) \times E \longrightarrow E,\quad
+(f, e) \longmapsto f(e)
+$$
+は連続である。$X$ が位相空間で $X \times E \to E$ が連続写像なら、
+写像 $X \to \text{Map}(E, E)$ は連続である。
+言い換えると、コンパクト開位相は、上に表示した「作用」写像が
+連続となる最も粗い位相である。合成写像
+$$
+\text{Map}(E, E) \times \text{Map}(E, E) \to \text{Map}(E, E)
+$$
+も連続である（上の近傍の記述から容易に確かめられる）。
+最後に、$\text{Aut}(E) \subset \text{Map}(E, E)$ を可逆写像全体とすると、
+逆元写像 $i : \text{Aut}(E) \to \text{Aut}(E)$,
+$f \mapsto f^{-1}$ も連続である。実際、$S \subset E$ が有限なら
+$i^{-1}(U_S(f^{-1})) = U_{f^{-1}(S)}(f)$ である。
+したがって $\text{Aut}(E)$ は
+定義 \ref{topology-definition-topological-group} の意味で位相群である。
+\end{example}
+
+\begin{lemma}
+\label{topology-lemma-topological-group-limits}
+位相群の圏は極限をもち、極限は (a) 位相空間の圏および
+(b) 群の圏への忘却関手と可換する。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-limits-products-equalizers}
+を参照すれば、積と等化子について存在と可換性を証明すれば十分である。
+$G_i$, $i \in I$ を位相群の族とする。通常の積
+$G = \prod G_i$ に積位相を入れる。位相空間として
+$G \times G = \prod (G_i \times G_i)$ なので
+（任意の圏で積は積と可換するから）、$G$ 上の乗法は連続である。
+逆元写像についても同様である。
+$a, b : G \to H$ を位相群の二つの準同型とする。このとき等化子には、
+位相空間の写像としての $a$ と $b$ の等化子をそのままとればよい。
+これは誘導位相を入れた群の写像としての等化子と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-profinite-group}
+$G$ を位相群とする。次は同値である。
+\begin{enumerate}
+\item 位相空間として $G$ は副有限である。
+\item $G$ は有限離散位相群の図式の極限である。
+\item $G$ は有限離散位相群の余フィルター極限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+位相空間についての対応する結果は補題 \ref{topology-lemma-profinite} で得た。
+これを補題 \ref{topology-lemma-topological-group-limits} と組み合わせると、
+(1) が (3) を含意することを証明すれば十分である。
+
+\medskip\noindent
+まず、単位元 $e$ の任意の近傍 $E$ が開部分群を含むことを示す。
+$G$ は有限離散位相空間の余フィルター極限なので
+（補題 \ref{topology-lemma-profinite}）、有限離散空間 $T$ への連続写像
+$f : G \to T$ で
+$f^{-1}(f(\{e\})) \subset E$ を満たすものを選べる。次を考える。
+$$
+H = \{g \in G \mid f(gg') = f(g')\text{ for all }g' \in G\}
+$$
+これは $G$ の部分群であり $E$ に含まれる。したがって $H$ が
+開であることを示せば十分である。$t \in T$ をとり
+$W = f^{-1}(\{t\})$ とおく。
+$W \subset G$ は開かつ閉であり、特に準コンパクトである。
+各 $w \in W$ に対し、$U_wU'_w \subset W$ を満たす開近傍
+$e \in U_w \subset G$ と $w \in U'_w \subset W$ が存在する。
+準コンパクト性により $W = \bigcup U'_{w_i}$ となる
+$w_1, \ldots, w_n$ を見いだせる。このとき
+$U_t = U_{w_1} \cap \ldots \cap U_{w_n}$ は $e$ の開近傍で、
+すべての $w \in W$ に対して $f(gw) = t$ となる。
+$T$ は有限なので、$\bigcap_{t \in T} U_t \subset H$ は
+$e$ の開近傍である。$H \subset G$ は部分群なので、$H$ は開である。
+
+\medskip\noindent
+$H \subset G$ を開部分群とする。$G$ は準コンパクトなので、
+$G$ における $H$ の指数は有限である。
+$G = Hg_1 \cup \ldots \cup Hg_n$ と書く。このとき
+$N = \bigcap_{i = 1, \ldots, n} g_iHg_i^{-1}$ は
+$H$ に含まれる開正規部分群である。$N$ の指数も有限なので、
+$G \to G/N$ は有限離散位相群への全射である。
+
+\medskip\noindent
+写像
+$$
+G \longrightarrow \lim_{N \subset G\text{ open and normal}} G/N
+$$
+を考える。この写像は位相群の同型であると主張する。
+右辺の極限は余フィルターである
+（二つの開正規部分群の交わりも開かつ正規である）から、
+これで補題の証明は完了する。各 $G \to G/N$ は連続なので、この写像は連続である。
+$G$ はハウスドルフであり、上の議論により $e$ の任意の近傍が
+ある $N$ を含むので、この写像は単射である。
+補題 \ref{topology-lemma-intersection-closed-in-quasi-compact} により全射である。
+補題 \ref{topology-lemma-bijective-map} により、この写像は同相写像である。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-profinite-group}
+補題 \ref{topology-lemma-profinite-group} の同値な条件を満たす位相群を
+{\it 副有限群}という。
+\end{definition}
+
+\noindent
+$G_1 \to G_2 \to G_3 \to \ldots$ が位相群の系なら、
+位相群としての余極限 $G = \colim G_n$
+（補題 \ref{topology-lemma-topological-group-colimits}）は、
+同じ台集合をもつにもかかわらず、一般には位相空間としての余極限
+（補題 \ref{topology-lemma-colimits}）と異なる。
+Examples, Section \ref{examples-section-colimit-topology} を参照。
+
+\begin{lemma}
+\label{topology-lemma-topological-group-colimits}
+位相群の圏は余極限をもち、余極限は群の圏への忘却関手と可換する。
+\end{lemma}
+
+\begin{proof}
+余極限の存在を証明するため、
+Categories, Remark \ref{categories-remark-how-to-use-it} の議論を用いる。
+すなわち、
+$\mathcal{I} \to \textit{Top}$, $i \mapsto G_i$ が位相群の圏
+$\textit{TopGroup}$ への関手であると仮定する。このとき
+$$
+F : \textit{TopGroup} \longrightarrow \textit{Sets},\quad
+H \longmapsto \lim_\mathcal{I} \Mor_{\textit{TopGroup}}(G_i, H)
+$$
+を考えられる。この関手は極限と可換する。さらに、任意の位相群 $H$ と
+$F(H)$ の元 $(\varphi_i : G_i \to H)$ が与えられると、
+濃度が $|\coprod G_i|$ 以下の部分群 $H' \subset H$ が存在して、
+準同型 $\varphi_i$ は $H'$ の中へ写る
+（ここで余積は群の圏におけるもの、すなわち $G_i$ たちの自由積である）。
+実際、$\varphi_i$ たちの像が生成する部分群に誘導位相を入れればよい。
+したがって Categories, Lemma \ref{categories-lemma-a-version-of-brown}
+の仮定が満たされることは明らかであり、関手 $F$ を表現する位相群
+$G$ が得られる。これはまさに $G$ が図式 $i \mapsto G_i$ の
+余極限であることを意味する。
+
+\medskip\noindent
+群への忘却関手との可換性については、
+Categories, Lemma \ref{categories-lemma-adjoint-exact} を用いる。
+実際、忘却関手は右随伴、すなわち群に対応するカオス
+（または密着）位相群を割り当てる関手をもつ。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-topological-ring}
+{\it 位相環}とは、加法 $R \times R \to R$, $(x, y) \mapsto x + y$ と
+乗法 $R \times R \to R$, $(x, y) \mapsto xy$ が連続となる位相を入れた
+環 $R$ のことである。{\it 位相環の準同型}とは、連続な環準同型である。
+\end{definition}
+
+\noindent
+Stacks project では、環は $1$ をもつ可換環である。
+$R$ が位相環なら、$x \mapsto -x$ は連続なので
+$(R, +)$ は位相群である。$R$ が位相環で $R' \subset R$ が部分環なら、
+誘導位相を入れた $R'$ は位相環である。
+$R$ が位相環で $R \to R'$ が環の全射なら、
+商位相を入れた $R'$ は位相環である。
+
+\begin{lemma}
+\label{topology-lemma-topological-ring-limits}
+位相環の圏は極限をもち、極限は (a) 位相空間の圏および
+(b) 環の圏への忘却関手と可換する。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-limits-products-equalizers}
+を参照すれば、積と等化子について存在と可換性を証明すれば十分である。
+$R_i$, $i \in I$ を位相環の族とする。
+通常の積 $R = \prod R_i$ に積位相を入れる。
+位相空間として $R \times R = \prod (R_i \times R_i)$ なので
+（任意の圏で積は積と可換するから）、$R$ 上の加法と乗法は連続である。
+$a, b : R \to R'$ を位相環の二つの準同型とする。
+このとき等化子には、位相空間の写像としての $a$ と $b$ の
+等化子をそのままとればよい。これは誘導位相を入れた環の写像としての
+等化子と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-topological-ring-colimits}
+位相環の圏は余極限をもち、余極限は環の圏への忘却関手と可換する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-topological-group-colimits} の証明で用いたものと
+まったく同じ議論により、余極限の存在が示される。
+環への忘却関手との可換性については、
+Categories, Lemma \ref{categories-lemma-adjoint-exact} を用いる。
+実際、忘却関手は右随伴、すなわち環に対応するカオス
+（または密着）位相環を割り当てる関手をもつ。
+\end{proof}
+
+\begin{definition}
+\label{topology-definition-topological-module}
+$R$ を位相環とする。{\it 位相加群}とは、
+加法 $M \times M \to M$ とスカラー乗法 $R \times M \to M$ が
+連続となる位相を入れた $R$-加群 $M$ のことである。
+{\it 位相加群の準同型}とは、連続な加群準同型である。
+\end{definition}
+
+\noindent
+$R$ が位相環で $M$ が位相加群なら、
+$x \mapsto -x$ は連続なので $(M, +)$ は位相群である。
+$R$ が位相環、$M$ が位相加群、$M' \subset M$ が部分加群なら、
+誘導位相を入れた $M'$ は位相加群である。
+$R$ が位相環、$M$ が位相加群で、$M \to M'$ が加群の全射なら、
+商位相を入れた $M'$ は位相加群である。
+
+\begin{lemma}
+\label{topology-lemma-topological-module-limits}
+$R$ を位相環とする。$R$ 上の位相加群の圏は極限をもち、
+極限は (a) 位相空間の圏および (b) $R$-加群の圏への忘却関手と可換する。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-limits-products-equalizers}
+を参照すれば、積と等化子について存在と可換性を証明すれば十分である。
+$M_i$, $i \in I$ を $R$ 上の位相加群の族とする。
+通常の積 $M = \prod M_i$ に積位相を入れる。
+位相空間として $M \times M = \prod (M_i \times M_i)$ なので
+（任意の圏で積は積と可換するから）、$M$ 上の加法は連続である。
+乗法 $R \times M \to M$ についても同様である。
+$a, b : M \to M'$ を $R$ 上の位相加群の二つの準同型とする。
+このとき等化子には、位相空間の写像としての $a$ と $b$ の等化子を
+そのままとればよい。これは誘導位相を入れた加群の写像としての
+等化子と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{topology-lemma-topological-module-colimits}
+$R$ を位相環とする。$R$ 上の位相加群の圏は余極限をもち、
+余極限は $R$ 上の加群の圏への忘却関手と可換する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{topology-lemma-topological-group-colimits} の証明で用いたものと
+まったく同じ議論により、余極限の存在が示される。
+$R$-加群への忘却関手との可換性については、
+Categories, Lemma \ref{categories-lemma-adjoint-exact} を用いる。
+実際、忘却関手は右随伴、すなわち加群に対応するカオス
+（または密着）位相加群を割り当てる関手をもつ。
+\end{proof}

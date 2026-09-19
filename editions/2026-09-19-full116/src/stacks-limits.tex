@@ -1,0 +1,1133 @@
+% Generated mechanically from frozen input inputs/p12/ja/stacks-limits.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{101}
+\chapter{代数スタックの極限}
+
+
+
+\phantomsection
+\label{stacks-limits-section-phantom}
+
+
+\section{はじめに}
+\label{stacks-limits-section-introduction}
+
+\noindent
+本章では，代数スタックの極限に関する事項をまとめる．
+代数スタックおよび代数空間の極限に関する多くの結果は，
+David Rydh により \cite{rydh_approx} で得られている．
+
+
+\section{規約}
+\label{stacks-limits-section-conventions}
+
+\noindent
+引き続き，Properties of Stacks, Section
+\ref{stacks-properties-section-conventions} で導入した規約および
+言葉の濫用を用いる．
+
+
+
+
+
+
+
+\section{有限表示の射}
+\label{stacks-limits-section-finite-presentation}
+
+\noindent
+本節は Limits of Spaces, Section
+\ref{spaces-limits-section-finite-presentation} の類似である．
+そこでは，$\Sch$ 上の関手の変換が極限を保つとは何かを定義した
+（Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-characterize-relative-limit-preserving}
+における特徴づけを参照されたい）．
+Criteria for Representability, Section
+\ref{criteria-section-limit-preserving} では，
+「対象について極限を保つ」という概念を定義した．
+また Artin's Axioms, Section \ref{artin-section-limits} では，
+$\Sch$ 上の亜群にファイバー化された圏が極限を保つとは何かを定義した．
+これらを組み合わせると，次の概念を得る．
+
+\begin{definition}
+\label{stacks-limits-definition-limit-preserving}
+$S$ をスキームとする．
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+亜群にファイバー化された圏の $1$-射とする．
+$S$ 上のアフィンスキームの任意の有向極限
+$U = \lim U_i$ に対し，ファイバー圏の図式
+$$
+\xymatrix{
+\colim \mathcal{X}_{U_i} \ar[r] \ar[d]_f & \mathcal{X}_U \ar[d]^f \\
+\colim \mathcal{Y}_{U_i} \ar[r] & \mathcal{Y}_U
+}
+$$
+が $2$-カルテジアンであるとき，$f$ は {\it 極限を保つ} という．
+\end{definition}
+
+\begin{lemma}
+\label{stacks-limits-lemma-limit-preserving-objects}
+$S$ をスキームとする．
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+亜群にファイバー化された圏の $1$-射とする．
+$f$ が極限を保つならば
+（Definition \ref{stacks-limits-definition-limit-preserving}），
+$f$ は対象について極限を保つ
+（Criteria for Representability, Section
+\ref{criteria-section-limit-preserving}）．
+\end{lemma}
+
+\begin{proof}
+$U$ 上のアフィンスキームの任意の有向極限 $U = \lim U_i$ に対して，
+関手
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+(\colim \mathcal{Y}_{U_i}) \times_{\mathcal{Y}_U} \mathcal{X}_U
+$$
+が本質的全射ならば，$f$ は対象について極限を保つ．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-base-change-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ および
+$q : \mathcal{Z} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+亜群にファイバー化された圏の $1$-射とする．
+$p : \mathcal{X} \to \mathcal{Y}$ が極限を保つならば，
+$q$ による $p$ の基底変換
+$p' : \mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Z}$
+も極限を保つ．
+\end{lemma}
+
+\begin{proof}
+これは形式的である．
+$U = \lim_{i \in I} U_i$ を $S$ 上のアフィンスキーム $U_i$ の
+有向極限とする．各 $i$ に対して
+$$
+(\mathcal{X} \times_\mathcal{Y} \mathcal{Z})_{U_i} =
+\mathcal{X}_{U_i} \times_{\mathcal{Y}_{U_i}} \mathcal{Z}_{U_i}
+$$
+である．フィルター余極限は圏の $2$-ファイバー積と可換である
+（詳細は省略する）．したがって，$p$ が極限を保つならば
+\begin{align*}
+\colim (\mathcal{X} \times_\mathcal{Y} \mathcal{Z})_{U_i}
+& =
+\colim \mathcal{X}_{U_i} \times_{\colim \mathcal{Y}_{U_i}}
+\colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+\times_{\colim \mathcal{Y}_{U_i}}
+\colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \mathcal{Z}_U \times_{\mathcal{Z}_U}
+\colim \mathcal{Z}_{U_i} \\
+& =
+(\mathcal{X} \times_\mathcal{Y} \mathcal{Z})_U \times_{\mathcal{Z}_U}
+\colim \mathcal{Z}_{U_i}
+\end{align*}
+となり，所望の結論を得る．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-composition-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ および
+$q : \mathcal{Y} \to \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+亜群にファイバー化された圏の $1$-射とする．
+$p$ と $q$ が極限を保つならば，合成 $q \circ p$ も極限を保つ．
+\end{lemma}
+
+\begin{proof}
+これは形式的である．
+$U = \lim_{i \in I} U_i$ を $S$ 上のアフィンスキーム $U_i$ の
+有向極限とする．$p$ と $q$ が極限を保つならば
+\begin{align*}
+\colim \mathcal{X}_{U_i}
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \mathcal{Y}_U
+\times_{\mathcal{Z}_U} \colim \mathcal{Z}_{U_i} \\
+& =
+\mathcal{X}_U \times_{\mathcal{Z}_U} \colim \mathcal{Z}_{U_i}
+\end{align*}
+となり，所望の結論を得る．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-representable-by-spaces-limit-preserving}
+$p : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+亜群にファイバー化された圏の $1$-射とする．
+$p$ が代数空間によって表現可能ならば，次の条件は同値である：
+\begin{enumerate}
+\item $p$ は極限を保つ，
+\item $p$ は対象について極限を保つ，
+\item $p$ は局所有限表示である
+（Algebraic Stacks,
+Definition \ref{algebraic-definition-relative-representable-property} を参照）．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Criteria for Representability, Lemma
+\ref{criteria-lemma-representable-by-spaces-limit-preserving} において，
+(2) と (3) が同値であることを見た．
+したがって，(1) と (2) が同値であることを示せば十分である．
+一方の向きは Lemma \ref{stacks-limits-lemma-limit-preserving-objects} で見た．
+逆向きについて，$U = \lim_{i \in I} U_i$ を
+$S$ 上のアフィンスキーム $U_i$ の有向極限とする．
+示すべきことは
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+$$
+が同値であることである．(2) を仮定しているので，
+これが本質的全射であることは分かっている．
+したがって，充満忠実であることを証明すればよい．
+$p$ はファイバー圏上で忠実である
+（Algebraic Stacks, Lemma
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}）
+から，上の関手は忠実である．
+$x_i$ および $x'_i$ を $U_i$ 上の $\mathcal{X}$ の
+ファイバー圏の対象とする．
+上の関手は $x_i$ を $(x_i|_U, p(x_i), can)$ に送る．
+ここで $can$ は標準同型 $p(x_i|_U) \to p(x_i)|_U$ である．
+そこで，この証明で最初に表示した矢印の右辺の圏における射
+$$
+(\alpha, \beta_i) : (x_i|_U, p(x_i), can) \longrightarrow
+(x'_i|_U, p(x'_i), can)
+$$
+が与えられていると仮定する．
+われわれの課題は，$i' \geq i$ と，$(\alpha, \beta_i|_{U_{i'}})$ に
+写る射 $x_i|_{U_{i'}} \to x'_i|_{U_{i'}}$ を構成することである．
+
+\medskip\noindent
+$y_i = p(x_i)$ および $y'_i = p(x'_i)$ とおく．
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+により，関手
+$$
+X_{y_i} : (\Sch/U_i)^{opp} \to \textit{Sets},\quad
+V/U_i \mapsto
+\{(x, \phi) \mid x \in \Ob(\mathcal{X}_V), \phi : f(x) \to y_i|V\}/\cong
+$$
+は $U_i$ 上の代数空間であり，同様に定義した関手
+$X_{y'_i}$ についても同じことが成り立つ．
+(2) と (3) は同値なので，$X_{y'_i}$ は $U_i$ 上局所有限表示である．
+さらに，$(x_i, \text{id})$ および $(x'_i, \text{id})$ はそれぞれ
+$X_{y_i}$ および $X_{y'_i}$ の $U_i$-値点を定める．
+関手の変換
+$$
+\beta_i : X_{y_i} \to X_{y'_i},\quad
+(x/V, \phi) \mapsto (x/V, \beta_i|_V \circ \phi)
+$$
+が存在する．言い換えれば，これは $U_i$ 上の代数空間の射である．
+次の図式は可換であると主張する：
+$$
+\xymatrix{
+U \ar[d] \ar[rr] & & U_i \ar[d]^{(x'_i, \text{id})} \\
+U_i \ar[r]^{(x_i, \text{id})} & X_{y_i} \ar[r]^{\beta_i} & X_{y'_i}
+}
+$$
+実際，これは，関手 $X_{y'_i}$ の定義に現れる対
+$(x_i|_U, \beta_i|_U)$ と $(x'_i|_U, \text{id})$ が
+同型であるという条件に同値である．
+そして射 $\alpha : x_i|_U \to x'_i|_U$ が，まさにそのような同型を与える．
+逆にたどれば，次の図式が可換となるような $i' \geq i$ を見つけられれば，
+$$
+\xymatrix{
+U_{i'} \ar[d] \ar[rr] & & U_i \ar[d]^{(x'_i, \text{id})} \\
+U_i \ar[r]^{(x_i, \text{id})} & X_{y_i} \ar[r]^{\beta_i} & X_{y'_i}
+}
+$$
+前段落で提示した問題の解となる同型
+$x_i|_{U_{i'}} \to x'_i|_{U_{i'}}$ が得られることが分かる．
+ところが，対角射
+$$
+\Delta : X_{y'_i} \to X_{y'_i} \times_{U_i} X_{y'_i}
+$$
+は局所有限表示である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}）．
+したがって，$U \to U_i$ が $X_{y'_i}$ への二つの射を等化するという事実から，
+ある $i' \geq i$ に対して $U_{i'} \to U_i$ がそれらを等化する．
+Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}
+を参照されたい．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-limit-preserving-diagonal}
+$p : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+亜群にファイバー化された圏の $1$-射とする．
+次の条件は同値である：
+\begin{enumerate}
+\item 対角射
+$\Delta : \mathcal{X} \to \mathcal{X} \times_\mathcal{Y} \mathcal{X}$
+は極限を保つ，
+\item $S$ 上のアフィンスキームの任意の有向極限
+$U = \lim U_i$ に対して，関手
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+$$
+は充満忠実である．
+\end{enumerate}
+特に，$p$ が極限を保つならば，$\Delta$ も極限を保つ．
+\end{lemma}
+
+\begin{proof}
+$U = \lim U_i$ を $S$ 上のアフィンスキームの有向極限とする．
+関手
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{\mathcal{Y}_U} \colim \mathcal{Y}_{U_i}
+$$
+が充満忠実であることと，関手
+$$
+\colim \mathcal{X}_{U_i} \longrightarrow
+\mathcal{X}_U \times_{(\mathcal{X} \times_\mathcal{Y} \mathcal{X})_U}
+\colim (\mathcal{X} \times_\mathcal{Y} \mathcal{X})_{U_i}
+$$
+が同値であることは同値であると主張する．
+これを示せば補題が従う．
+実際，
+$(\mathcal{X} \times_\mathcal{Y} \mathcal{X})_U =
+\mathcal{X}_U \times_{\mathcal{Y}_U} \mathcal{X}_U$
+かつ
+$(\mathcal{X} \times_\mathcal{Y} \mathcal{X})_{U_i} =
+\mathcal{X}_{U_i} \times_{\mathcal{Y}_{U_i}} \mathcal{X}_{U_i}$
+であるから，これは純粋に圏論的な主張である．
+次の段落でこれを論じる．
+
+\medskip\noindent
+$\mathcal{I}$ をフィルター付き添字圏とする．
+$(\mathcal{C}_i)$ および $(\mathcal{D}_i)$ を
+$\mathcal{I}$ 上の亜群の系とし，
+$p : (\mathcal{C}_i) \to (\mathcal{D}_i)$ を
+$\mathcal{I}$ 上の亜群の系の射とする．
+さらに亜群の関手 $p : \mathcal{C} \to \mathcal{D}$ と，
+可換図式
+$$
+\xymatrix{
+\colim \mathcal{C}_i \ar[d]_p \ar[r]_f & \mathcal{C} \ar[d]^p \\
+\colim \mathcal{D}_i \ar[r]^g & \mathcal{D}
+}
+$$
+をなす関手
+$f : \colim \mathcal{C}_i \to \mathcal{C}$ および
+$g : \colim \mathcal{D}_i \to \mathcal{D}$ が与えられているとする．
+このとき
+$$
+A : \colim \mathcal{C}_i \longrightarrow
+\mathcal{C} \times_\mathcal{D} \colim \mathcal{D}_i
+$$
+が充満忠実であることと，関手
+$$
+B : \colim \mathcal{C}_i \longrightarrow
+\mathcal{C}
+\times_{\Delta, \mathcal{C} \times_\mathcal{D} \mathcal{C}, f \times_g f}
+\colim (\mathcal{C}_i \times_{\mathcal{D}_i} \mathcal{C}_i)
+$$
+が同値であることは同値であると主張する．
+$\mathcal{C}' = \colim \mathcal{C}_i$ および
+$\mathcal{D}' = \colim \mathcal{D}_i$ とおく．
+$2$-ファイバー積はフィルター余極限と可換するので，
+$A$ と $B$ はそれぞれ関手
+$$
+A' : \mathcal{C}' \to \mathcal{C} \times_\mathcal{D} \mathcal{D}'
+\quad\text{and}\quad
+B' : \mathcal{C}' \longrightarrow
+\mathcal{C}
+\times_{\Delta, \mathcal{C} \times_\mathcal{D} \mathcal{C}, f \times_g f}
+(\mathcal{C}' \times_{\mathcal{D}'} \mathcal{C}')
+$$
+となる．したがって，
+$$
+\xymatrix{
+\mathcal{C}' \ar[d]_p \ar[r]_f & \mathcal{C} \ar[d]^p \\
+\mathcal{D}' \ar[r]^g & \mathcal{D}
+}
+$$
+が亜群の可換図式ならば，$A'$ が充満忠実であることと
+$B'$ が同値であることが同値であると示せば十分である．
+これは Categories, Lemma
+\ref{categories-lemma-fully-faithful-diagonal-equivalence}
+（基底圏を自明，すなわち一点からなる圏とする）から従う．実際，
+$$
+\mathcal{C}
+\times_{\Delta, \mathcal{C} \times_\mathcal{D} \mathcal{C}, f \times_g f}
+(\mathcal{C}' \times_{\mathcal{D}'} \mathcal{C}') =
+\mathcal{C}'
+\times_{A', \mathcal{C} \times_\mathcal{D} \mathcal{D}', A'}
+\mathcal{C}'
+$$
+である．これで証明が完了する．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-locally-finite-presentation-limit-preserving}
+$S$ をスキームとし，$\mathcal{X}$ を $S$ 上の代数スタックとする．
+$\mathcal{X} \to S$ が局所有限表示ならば，$\mathcal{X}$ は
+Artin's Axioms, Definition \ref{artin-definition-limit-preserving}
+の意味で極限を保つ
+（同値な言い方をすれば，射 $\mathcal{X} \to S$ は極限を保つ）．
+\end{lemma}
+
+\begin{proof}
+あるスキーム $U$ からの全射な滑らかな射
+$U \to \mathcal{X}$ を選ぶ．このとき $U \to S$ は局所有限表示である．
+Morphisms of Stacks, Section
+\ref{stacks-morphisms-section-finite-presentation} を参照されたい．
+代数空間のある滑らかな亜群 $(U, R, s, t, c)$ により
+$\mathcal{X} = [U/R]$ と書ける．
+Algebraic Stacks, Lemma \ref{algebraic-lemma-stack-presentation}
+を参照されたい．$U$ は $S$ 上局所有限表示なので，
+代数空間 $R$ も $S$ 上局所有限表示である．
+$[U/R]$ は，$T$ 上のファイバー圏が亜群
+$(U(T), R(T), s, t, c)$ であるような亜群にファイバー化された圏を
+スタック化して得られる，$(\Sch/S)_{fppf}$ 上の亜群のスタックであることを
+思い出そう．$U$ と $R$ は関手として極限を保つので
+（Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation}），
+この亜群にファイバー化された圏は極限を保つ．
+したがって，fppf スタック化が極限を保つという性質を保存することを
+示せば十分である．これは正しい
+（ヒント：Topologies, Lemma
+\ref{topologies-lemma-limit-fppf-topology} を用いよ）．
+しかし以下では，この場合にスタック化が何を意味するかが分かっていることを
+用いて，直接の証明を与える．
+
+\medskip\noindent
+$T = \lim T_\lambda$ を $S$ 上のアフィンスキームの有向極限とする．
+関手
+$$
+\colim [U/R]_{T_\lambda} \longrightarrow [U/R]_T
+$$
+が圏の同値であることを示さなければならない．
+まずこの関手が本質的全射であることを示す．
+$x \in \Ob([U/R]_T)$ とする．
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-objects} に，
+圏 $[U/R]_T$ の記述がある．
+特に，$x$ は fppf 被覆 $\{T_i \to T\}_{i \in I}$ と，
+この被覆に関する $[U/R]$-降下データ $(u_i, r_{ij})$ に対応する．
+この被覆を細分することにより，アフィンスキーム $T$ の
+標準 fppf 被覆であると仮定してよい．
+Topologies, Lemma
+\ref{topologies-lemma-limit-fppf-topology} により，
+ある $\lambda$ と標準 fppf 被覆
+$\{T_{\lambda, i} \to T_\lambda\}_{i \in I}$ を選んで，
+$T$ への基底変換が $\{T_i \to T\}_{i \in I}$ に等しくなるようにできる．
+各 $i$ に対し，$\lambda$ を増大させれば，
+$T_i \to T_{\lambda, i}$ との合成が与えられた射 $u_i$ となる
+$u_{\lambda, i} : T_{\lambda, i} \to U$ を見つけられる
+（ここで $U$ が極限を保つことを用いる）．
+同様に，各 $i, j$ に対し，$\lambda$ を増大させれば，
+$T_{ij} \to T_{\lambda, ij}$ との合成が与えられた射 $r_{ij}$ となる
+$r_{\lambda, ij} : T_{\lambda, i} \times_{T_\lambda} T_{\lambda, j} \to R$
+を見つけられる（ここで $R$ が極限を保つことを用いる）．
+さらに $\lambda$ を増大させて，
+$$
+s \circ r_{\lambda, ij} = u_{\lambda, i} \circ \text{pr}_0
+\quad\text{and}\quad
+t \circ r_{\lambda, ij} = u_{\lambda, j} \circ \text{pr}_1,
+$$
+および
+$$
+c \circ (r_{\lambda, jk} \circ \text{pr}_{12}, r_{\lambda, ij}
+\circ \text{pr}_{01}) = r_{\lambda, ik} \circ \text{pr}_{02}.
+$$
+を仮定してよい．言い換えれば，$(u_{\lambda, i}, r_{\lambda, ij})$ が
+被覆 $\{T_{\lambda, i} \to T_\lambda\}_{i \in I}$ に関する
+$[U/R]$-降下データであると仮定してよい．
+すると $T_\lambda$ 上の $[U/R]$ の対応する対象が得られ，
+その $T$ への引き戻しは所望どおり $x$ と同型になる．
+充満忠実性の証明も，Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-objects} に与えられた
+$[U/T]$ のファイバー圏における射の記述を用いて，まったく同様に進む．
+\end{proof}
+
+\begin{proposition}
+\label{stacks-limits-proposition-characterize-locally-finite-presentation}
+\begin{reference}
+これは \cite[Lemma 2.3.15]{Emerton-Gee} の特別な場合である．
+\end{reference}
+代数スタックの射 $f : \mathcal{X} \to \mathcal{Y}$ に対し，
+次の条件は同値である：
+\begin{enumerate}
+\item $f$ は極限を保つ，
+\item $f$ は対象について極限を保つ，
+\item $f$ は局所有限表示である．
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(3) を仮定する．
+$T = \lim T_i$ をアフィンスキームの有向極限とし，関手
+$$
+\colim \mathcal{X}_{T_i} \longrightarrow
+\mathcal{X}_T \times_{\mathcal{Y}_T} \colim \mathcal{Y}_{T_i}
+$$
+を考える．右辺の対象 $(x, y_i, \beta)$，すなわち
+$x \in \Ob(\mathcal{X}_T)$，$y_i \in \Ob(\mathcal{Y}_{T_i})$，および
+$\mathcal{Y}_T$ における $\beta : f(x) \to y_i|_T$ を考える．
+$(x, y_i, \beta)$ は，$T$ 上の代数スタック
+$\mathcal{X}_{y_i} = \mathcal{X} \times_{\mathcal{Y}, y_i} T_i$
+の対象とみなせる．
+$\mathcal{X}_{y_i} \to T_i$ は $f$ の基底変換として局所有限表示なので，
+Lemma \ref{stacks-limits-lemma-locally-finite-presentation-limit-preserving} により
+極限を保つ．これは，ある $i' \geq i$ に対して
+$(x, y_i, \beta)$ が $T_{i'}$ 上の対象から来ることを意味する．
+定義を展開すれば，$(x, y_i, \beta)$ は表示された関手の
+本質像に属することが分かる．
+言い換えれば，その関手は本質的全射であり，
+これは $f$ が対象について極限を保つということでもある．
+次に，これを $f$ の対角射 $\Delta$ に適用する．
+Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-diagonal-morphism-finite-type} により，
+射 $\Delta$ は局所有限表示である．
+したがって，上の議論から $\Delta$ は対象について極限を保つ．
+Lemma \ref{stacks-limits-lemma-representable-by-spaces-limit-preserving} により，
+$\Delta$ は極限を保つ．さらに
+Lemma \ref{stacks-limits-lemma-limit-preserving-diagonal} により，
+上で表示した関手は充満忠実である．
+すでに本質的全射であることを示したので，これは同値であり，
+(1) が成り立つ．
+
+\medskip\noindent
+(1) $\Rightarrow$ (2) は自明である．(2) を仮定する．
+スキーム $V$ と全射な滑らかな射 $V \to \mathcal{Y}$ を選ぶ．
+Criteria for Representability, Lemma
+\ref{criteria-lemma-base-change-limit-preserving} により，
+基底変換 $\mathcal{X} \times_\mathcal{Y} V \to V$ は
+対象について極限を保つ．
+スキーム $U$ と全射な滑らかな射
+$U \to \mathcal{X} \times_\mathcal{Y} V$ を選ぶ．
+滑らかな射は局所有限表示なので，
+$U \to \mathcal{X} \times_\mathcal{Y} V$ は極限を保つ
+（証明の前半）．
+Criteria for Representability, Lemma
+\ref{criteria-lemma-composition-limit-preserving} により，
+合成 $U \to V$ は対象について極限を保つ．
+Criteria for Representability, Lemma
+\ref{criteria-lemma-representable-by-spaces-limit-preserving} により，
+$U \to V$ は局所有限表示である．
+これは，まさに $f$ が局所有限表示であるための条件である．
+Morphisms of Stacks, Definition
+\ref{stacks-morphisms-definition-locally-finite-presentation}
+を参照されたい．
+\end{proof}
+
+
+
+
+\section{性質の降下}
+\label{stacks-limits-section-descent}
+
+\noindent
+本節は Limits, Section \ref{limits-section-descent} の類似である．
+
+\begin{situation}
+\label{stacks-limits-situation-descent}
+$Y = \lim_{i \in I} Y_i$ を，遷移射がアフィンである
+代数空間の有向系の極限とする．
+すべての $i \in I$ に対して $X_i$ は準コンパクトかつ準分離であると仮定する．
+さらに元 $0 \in I$ を一つ選ぶ．
+\end{situation}
+
+\begin{lemma}
+\label{stacks-limits-lemma-eventually-separated}
+Situation \ref{stacks-limits-situation-descent} において，
+$\mathcal{X}_0 \to Y_0$ を代数スタックから $Y_0$ への射とする．
+$\mathcal{X}_0$ は準コンパクトかつ準分離であると仮定する．
+$Y \times_{Y_0} \mathcal{X}_0 \to Y$ が分離的ならば，
+十分大きいすべての $i \in I$ に対して
+$Y_i \times_{Y_0} \mathcal{X}_0 \to Y_i$ は分離的である．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} = Y \times_{Y_0} \mathcal{X}_0$ および
+$\mathcal{X}_i = Y_i \times_{Y_0} \mathcal{X}_0$ とおく．
+アフィンスキーム $U_0$ と全射な滑らかな射
+$U_0 \to \mathcal{X}_0$ を選ぶ．
+$U = Y \times_{Y_0} U_0$ および
+$U_i = Y_i \times_{Y_0} U_0$ とおく．
+すると $U$ と $U_i$ はアフィンであり，
+$U \to \mathcal{X}$ と $U_i \to \mathcal{X}_i$ は滑らかかつ全射である．
+$R_0 = U_0 \times_{\mathcal{X}_0} U_0$ とおき，
+$R = Y \times_{Y_0} R_0$ および $R_i = Y_i \times_{Y_0} R_0$ とおく．
+このとき $R = U \times_\mathcal{X} U$ かつ
+$R_i = U_i \times_{\mathcal{X}_i} U_i$ である．
+
+\medskip\noindent
+この記法のもとで，$\mathcal{X} \to Y$ が分離的ならば，
+$R \to U \times_Y U$ は
+$U \times_Y U \to \mathcal{X} \times_Y \mathcal{X}$ による
+$\mathcal{X} \to \mathcal{X} \times_Y \mathcal{X}$ の基底変換として
+固有である．逆に，
+$U_i \times_{Y_i} U_i \to \mathcal{X}_i \times_{Y_i} \mathcal{X}_i$
+は全射かつ滑らかなので，
+$R_i \to U_i \times_{Y_i} U_i$ が固有ならば
+$\mathcal{X}_i \to Y_i$ は分離的である．
+Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-check-property-covering} を参照されたい．
+$R_0 \to U_0 \times_{Y_0} U_0$ は局所有限型であり，
+$R_0$ は準コンパクトかつ準分離であることに注意する．
+Limits of Spaces, Lemma \ref{spaces-limits-lemma-eventually-proper}
+により，十分大きい $i$ に対して
+$R_i \to U_i \times_{Y_i} U_i$ は固有である．
+これで証明が完了する．
+\end{proof}
+
+
+
+
+
+
+
+\section{相対的対象の降下}
+\label{stacks-limits-section-descending-relative}
+
+\noindent
+本節は Limits of Spaces, Section
+\ref{spaces-limits-section-descending-relative} の類似である．
+
+\begin{lemma}
+\label{stacks-limits-lemma-descend-a-stack-down}
+$I$ を有向集合とし，$(X_i, f_{ii'})$ を $I$ 上の代数空間の逆系とする．
+次を仮定する：
+\begin{enumerate}
+\item 射 $f_{ii'} : X_i \to X_{i'}$ はアフィンである，
+\item 空間 $X_i$ は準コンパクトかつ準分離である．
+\end{enumerate}
+$X = \lim X_i$ とする．
+$\mathcal{X}$ が $X$ 上有限表示の代数スタックならば，
+ある $i \in I$ と $X_i$ 上有限表示の代数スタック $\mathcal{X}_i$ が存在し，
+$X$ 上の代数スタックとして
+$\mathcal{X} \cong \mathcal{X}_i \times_{X_i} X$ となる．
+\end{lemma}
+
+\begin{proof}
+Morphisms of Stacks, Definition
+\ref{stacks-morphisms-definition-locally-finite-presentation} により，
+射 $\mathcal{X} \to X$ は準コンパクト，局所有限表示，かつ準分離である．
+$X$ は準コンパクトで $\mathcal{X} \to X$ は準コンパクトなので，
+$\mathcal{X}$ は準コンパクトである
+（Morphisms of Stacks, Definition
+\ref{stacks-morphisms-definition-quasi-compact}）．
+したがって，アフィンスキーム $U$ と全射な滑らかな射
+$U \to \mathcal{X}$ が存在する
+（Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-quasi-compact-stack}）．
+$R = U \times_\mathcal{X} U$ とおく．
+すると $X$ 上の代数空間の滑らかな亜群 $(U, R, s, t, c)$ で
+$\mathcal{X} = [U/R]$ となるものを得る．
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-stack-presentation} を参照されたい．
+$\mathcal{X} \to X$ は準分離で $X$ も準分離なので，
+$\mathcal{X}$ は準分離である
+（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-composition-separated}）．
+したがって $R \to U \times U$ は準コンパクトかつ準分離であり
+（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-fibre-product-after-map}），
+$R$ は準分離かつ準コンパクトな代数空間である．
+一方，$U \to X$ は局所有限表示であり，
+$s : R \to U$ は滑らか，したがって局所有限表示なので，
+$R \to X$ も局所有限表示である．
+よって $(U, R, s, t, c)$ は，
+$X$ 上有限表示である代数空間の圏における亜群対象である．
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-finite-presentation} により，
+ある $i$ と，$X_i$ 上の代数空間の亜群
+$(U_i, R_i, s_i, t_i, c_i)$ が存在し，
+その $X$ への引き戻しは $(U, R, s, t, c)$ と同型になる．
+$i$ を増大させれば，$s_i$ と $t_i$ は滑らかであると仮定できる．
+Limits of Spaces, Lemma \ref{spaces-limits-lemma-descend-smooth}
+を参照されたい．商スタック
+$\mathcal{X}_i = [U_i/R_i]$ は代数スタックである
+（Algebraic Stacks, Theorem
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack}）．
+
+\medskip\noindent
+射 $[U/R] \to [U_i/R_i]$ が存在する．
+Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-functorial} を参照されたい．
+この射と射 $[U/R] \to X$ および $[U_i/R_i] \to X_i$
+（Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-arrows}）を合わせると，
+同型（すなわち同値）
+$$
+[U/R] \longrightarrow [U_i/R_i] \times_{X_i} X
+$$
+が得られると主張する．
+Groupoids in Spaces, Equation
+(\ref{spaces-groupoids-equation-quotient-stack}) における
+「亜群の前層」のレベルで，対応する射
+$$
+[U/_{\!p}R] \longrightarrow [U_i/_{\!p}R_i] \times_{X_i} X
+$$
+は同型である．したがって，スタック化がファイバー積と可換することから
+主張が従う．Stacks, Lemma
+\ref{stacks-lemma-stackification-fibre-product-fibred-categories}
+を参照されたい．
+\end{proof}
+
+
+
+
+\section{有限表示の中への有限型の閉埋め込み}
+\label{stacks-limits-section-finite-type-closed-in-finite-presentation}
+
+\noindent
+本節は Limits of Spaces, Section
+\ref{spaces-limits-section-finite-type-closed-in-finite-presentation}
+の類似である．
+
+\begin{lemma}
+\label{stacks-limits-lemma-finite-type-closed-in-finite-presentation}
+$f : \mathcal{X} \to Y$ を代数スタックから代数空間への射とする．
+次を仮定する：
+\begin{enumerate}
+\item $f$ は有限型かつ準分離である，
+\item $Y$ は準コンパクトかつ準分離である．
+\end{enumerate}
+このとき，有限表示の射 $f' : \mathcal{X}' \to Y$ と，
+$Y$ 上の代数スタックの閉埋め込み
+$\mathcal{X} \to \mathcal{X}'$ が存在する．
+\end{lemma}
+
+\begin{proof}
+この代数空間を，アフィンな遷移射をもつ有向集合 $I$ 上の代数空間の
+極限 $Y = \lim_{i \in I} Y_i$ と書く．ここで $Y_i$ はネーターとする．
+Limits of Spaces, Proposition
+\ref{spaces-limits-proposition-approximate} を参照されたい．
+Limits of Spaces, Section
+\ref{spaces-limits-section-finite-type-quasi-separated}
+の内容を用いる．
+
+\medskip\noindent
+表示 $\mathcal{X} = [U/R]$ を選ぶ．
+対応する $Y$ 上の代数空間の亜群を
+$(U, R, s, t, c, e, i)$ と表す．
+$U$ はアフィンであると仮定してよく，実際そう仮定する．
+このとき $U$，$R$，$R \times_{s, U, t} R$ は，
+$Y$ 上有限型の準分離な代数空間である．
+二つの射 $s, t : R \to U$，三つの射
+$c : R \times_{s, U, t} R \to R$，
+$\text{pr}_1 : R \times_{s, U, t} R \to R$，
+$\text{pr}_2 : R \times_{s, U, t} R \to R$，
+一つの射 $e : U \to R$，そして最後に一つの射 $i : R \to R$
+がある．これらの射は Groupoids, Section
+\ref{groupoids-section-groupoids} に詳述されている一連の公理を満たす．
+
+\medskip\noindent
+Limits of Spaces, Remark
+\ref{spaces-limits-remark-finite-type-gives-well-defined-system} により，
+ある $i_0 \in I$ と，$(Y_i)_{i \geq i_0}$ 上の逆系
+\begin{enumerate}
+\item $(U_i)_{i \geq i_0}$，
+\item $(R_i)_{i \geq i_0}$，
+\item $(T_i)_{i \geq i_0}$
+\end{enumerate}
+で，
+$U = \lim_{i \geq i_0} U_i$，
+$R = \lim_{i \geq i_0} R_i$，および
+$R \times_{s, U, t} R = \lim_{i \geq i_0} T_i$
+を満たすものを見つけられる．さらに系の射
+\begin{enumerate}
+\item $(s_i)_{i \geq i_0} : (R_i)_{i \geq i_0} \to (U_i)_{i \geq i_0}$，
+\item $(t_i)_{i \geq i_0} : (R_i)_{i \geq i_0} \to (U_i)_{i \geq i_0}$，
+\item $(c_i)_{i \geq i_0} : (T_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$，
+\item $(p_i)_{i \geq i_0} : (T_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$，
+\item $(q_i)_{i \geq i_0} : (T_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$，
+\item $(e_i)_{i \geq i_0} : (U_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$，
+\item $(i_i)_{i \geq i_0} : (R_i)_{i \geq i_0} \to (R_i)_{i \geq i_0}$
+\end{enumerate}
+が存在し，
+$s = \lim_{i \geq i_0} s_i$，
+$t = \lim_{i \geq i_0} t_i$，
+$c = \lim_{i \geq i_0} c_i$，
+$\text{pr}_1 = \lim_{i \geq i_0} p_i$，
+$\text{pr}_2 = \lim_{i \geq i_0} q_i$，
+$e = \lim_{i \geq i_0} e_i$，および
+$i = \lim_{i \geq i_0} i_i$
+となる．
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram-smooth} により，
+$s_i$ と $t_i$ は滑らかであると仮定してよい
+（そのために $i_0$ を増大させる必要があるかもしれない）．
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram-flat} により，
+$s$ と $R \to R_i$ が定める射
+$R \to U \times_{U_i, s_i} R_i$，および
+$t$ と $R \to R_i$ が定める射
+$R \to U \times_{U_i, t_i} R_i$ は，
+すべての $i \geq i_0$ に対して同型であると仮定してよい．
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-good-diagram-fibre-product} により，
+図式
+$$
+\xymatrix{
+T_i \ar[r]_{q_i} \ar[d]_{p_i} & R_i \ar[d]^{t_i} \\
+R_i \ar[r]^{s_i} & U_i
+}
+$$
+はカルテジアンであると仮定してよい．
+すると Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram} の一意性により，
+十分大きい $i$ に対して，上で述べた射 $s, t, c, e, i$ の間の関係を
+$s_i, t_i, c_i, e_i, i_i$ も満たすことが保証される．
+そのような $i$ を一つ固定する．
+
+\medskip\noindent
+したがって，$(U_i, R_i, s_i, t_i, c_i, e_i, i_i)$ は
+$Y_i$ 上の代数空間の滑らかな亜群である．
+よって $\mathcal{X}_i = [U_i/R_i]$ は代数スタックである
+（Algebraic Stacks, Theorem
+\ref{algebraic-theorem-smooth-groupoid-gives-algebraic-stack}）．
+$Y \to Y_i$ 上の亜群の射
+$$
+(U, R, s, t, c, e, i) \to (U_i, R_i, s_i, t_i, c_i, e_i, i_i)
+$$
+は可換図式
+$$
+\xymatrix{
+\mathcal{X} \ar[d] \ar[r] & \mathcal{X}_i \ar[d] \\
+Y \ar[r] & Y_i
+}
+$$
+を定める
+（Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-functorial}）．
+射 $\mathcal{X} \to Y \times_{Y_i} \mathcal{X}_i$ は
+閉埋め込みであると主張する．
+構成により代数スタック $\mathcal{X}_i \to Y_i$ は有限表示なので，
+この主張から証明が完了する．
+主張を示すため，左の図式
+$$
+\xymatrix{
+U \ar[d] \ar[r] & U_i \ar[d] \\
+\mathcal{X} \ar[r] & \mathcal{X}_i
+}
+\quad\quad
+\xymatrix{
+U \ar[d] \ar[r] & Y \times_{Y_i} U_i \ar[d] \\
+\mathcal{X} \ar[r] & Y \times_{Y_i} \mathcal{X}_i
+}
+$$
+は Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-criterion-fibre-product} と上の結果により
+カルテジアンであることに注意する．
+したがって右の可換図式もカルテジアンである．
+ここで $U \to Y \times_{Y_i} U_i$ は
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-from-good-diagram} における逆系
+$(U_i)$ の構成により閉埋め込みであり，
+$Y \times_{Y_i} U_i \to Y \times_{Y_i} \mathcal{X}_i$ は
+滑らかかつ全射である．
+よって Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-check-immersion-covering} から
+所望の結果が従う．
+\end{proof}
+
+\noindent
+分離的な代数スタックに対する版もある．
+
+\begin{lemma}
+\label{stacks-limits-lemma-separated-closed-in-finite-presentation}
+$f : \mathcal{X} \to Y$ を代数スタックから代数空間への射とする．
+次を仮定する：
+\begin{enumerate}
+\item $f$ は有限型かつ分離的である，
+\item $Y$ は準コンパクトかつ準分離である．
+\end{enumerate}
+このとき，有限表示の分離射 $f' : \mathcal{X}' \to Y$ と，
+$Y$ 上の代数スタックの閉埋め込み
+$\mathcal{X} \to \mathcal{X}'$ が存在する．
+\end{lemma}
+
+\begin{proof}
+まず Lemma \ref{stacks-limits-lemma-finite-type-closed-in-finite-presentation} の
+証明とまったく同じ手順を用い（その記法も借用し），
+$\mathcal{X}_i = [U_i/R_i]$ として，
+埋め込み $\mathcal{X} \to \mathcal{X}'$ を
+射 $\mathcal{X} \to \mathcal{X}' = Y \times_{Y_i} \mathcal{X}_i$
+として構成する．
+したがって，十分大きい $i$ に対して
+$\mathcal{X}_i \to Y_i$ が分離的であることを示せば十分である．
+言い換えれば，十分大きい $i$ に対して
+$\mathcal{X}_i \to \mathcal{X}_i \times_{Y_i} \mathcal{X}_i$
+が固有であることを示せばよい．
+射 $U_i \times_{Y_i} U_i \to
+\mathcal{X}_i \times_{Y_i} \mathcal{X}_i$ は全射かつ滑らかであり，また
+$
+R_i = \mathcal{X}_i
+\times_{\mathcal{X}_i \times_{Y_i} \mathcal{X}_i} U_i \times_{Y_i} U_i
+$
+であるから，十分大きい $i$ に対して射
+$(s_i, t_i) : R_i \to U_i \times_{Y_i} U_i$
+が固有であることを示せば十分である．
+Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-check-property-covering} を参照されたい．
+これを次の段落で証明する．
+
+\medskip\noindent
+$U \times_Y U \to Y$ は準分離かつ有限型であることに注意する．
+したがって Limits of Spaces, Remark
+\ref{spaces-limits-remark-finite-type-gives-well-defined-system}
+の構成を用い，ある $i_1 \in I$ と逆系
+$(V_i)_{i \geq i_1}$ で
+$U \times_Y U = \lim_{i \geq i_1} V_i$ となるものを見つけられる．
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-good-diagram-fibre-product} により，
+十分大きい $i$ に対し，射影 $U \times_Y U \to U$ に適用した
+構成の関手性から閉埋め込み
+$$
+V_i \to U_i \times_{Y_i} U_i
+$$
+が得られる
+（厳密には $Y_i$ を $Y \to Y_i$ のスキーム論的像で置き換えるべきなので，
+ここには小さな不一致があるが，これは明らかにファイバー積を変えない）．
+一方，Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram-proper} により，
+固有射 $(s, t) : R \to U \times_Y U$
+（ここで $\mathcal{X}$ が分離的であることを用いる）に適用した関手性から，
+十分大きい $i$ に対して固有な射 $R_i \to V_i$ が得られる．
+これらを合成して，すべての十分大きい $i$ に対する固有射
+$R_i \to U_i \times_{Y_i} U_i$ を得る．
+Limits of Spaces, Remark
+\ref{spaces-limits-remark-finite-type-gives-well-defined-system}
+の構成の関手性から，十分大きい $i$ に対してこの射は
+$(s_i, t_i)$ と同じであることが分かる．これで証明が完了する．
+\end{proof}
+
+
+
+
+
+
+
+\section{普遍閉射}
+\label{stacks-limits-section-universally-closed}
+
+\noindent
+本節は Limits of Spaces, Section
+\ref{spaces-limits-section-universally-closed} の類似である．
+
+\begin{lemma}
+\label{stacks-limits-lemma-separate}
+$g : Z \to Y$ をアフィンスキームの射とする．
+$f : \mathcal{X} \to Y$ を代数スタックの準コンパクトな射とする．
+$z \in Z$ とし，$T \subset |\mathcal{X} \times_Y Z|$ を
+$z \not \in \Im(T \to |Z|)$ を満たす閉部分集合とする．
+$\mathcal{X}$ が準コンパクトならば，
+$z$ の開近傍 $V \subset Z$，可換図式
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+および閉部分集合 $T' \subset |X \times_Y Z'|$ で，
+次を満たすものが存在する：
+\begin{enumerate}
+\item $Z'$ は $Y$ 上有限表示のアフィンスキームである，
+\item $z' = a(z)$ とおくと $z' \not \in \Im(T' \to |Z'|)$ である，
+\item $|\mathcal{X} \times_Y V|$ における $T$ の逆像は，
+$|\mathcal{X} \times_Y V| \to |\mathcal{X} \times_Y Z'|$
+によって $T'$ の中に写る．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これをスキームの射に対する対応する結果から導く．
+$\mathcal{X}$ は準コンパクトなので，アフィンスキーム $W$ と
+全射な滑らかな射 $W \to \mathcal{X}$ を選べる．
+$T_W \subset |W \times_Y Z|$ を $T$ の逆像とする．
+このとき $z$ は $T_W$ の像に属さない．
+スキームの場合
+（Limits, Lemma \ref{limits-lemma-separate}）により，
+$z$ の開近傍 $V \subset Z$，スキームの可換図式
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+および閉部分集合 $T' \subset |W \times_Y Z'|$ で，
+次を満たすものを見つけられる：
+\begin{enumerate}
+\item $Z'$ は $Y$ 上有限表示のアフィンスキームである，
+\item $z' = a(z)$ とおくと $z' \not \in \Im(T' \to |Z'|)$ である，
+\item $T_1 = T_W \cap |W \times_Y V|$ は
+$|W \times_Y V| \to |W \times_Y Z'|$ によって $T'$ の中に写る．
+\end{enumerate}
+可換図式
+$$
+\xymatrix{
+W \times_Y Z \ar[d] &
+W \times_Y V \ar[l] \ar[rr]_{a_1} \ar[d]_c & &
+W \times_Y Z' \ar[d]^q \\
+\mathcal{X} \times_Y Z &
+\mathcal{X} \times_Y V \ar[l] \ar[rr]^{a_2} & &
+\mathcal{X} \times_Y Z'
+}
+$$
+の各正方形はカルテジアンであり，縦の射は全射かつ滑らか，
+したがって特に開である．左の正方形を見ると，
+$T_1 = T_W \cap |W \times_Y V|$ は，
+$T_2 = T \cap |\mathcal{X} \times_Y V|$ の $c$ による逆像である．
+Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-points-cartesian} により
+$a_1(T_1) = q^{-1}(a_2(T_2))$ を得る．
+Topology, Lemma
+\ref{topology-lemma-open-morphism-quotient-topology} により
+$$
+q^{-1}\left(\overline{a_2(T_2)}\right) =
+\overline{q^{-1}(a_2(T_2))} =
+\overline{a_1(T_1)} \subset T'
+$$
+を得る．$q$ は全射なので，$\overline{a_2(T_2)} \to |Z'|$ の像は
+$z'$ を含まない．なぜなら，$T'$ について同じことが成り立つからである．
+したがって，上の $Z', V, a, b$ をもつ図式と閉部分集合
+$\overline{a_2(T_2)} \subset |\mathcal{X} \times_Y Z'|$ を，
+補題が提示する問題の解として取れる．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-limits-lemma-test-universally-closed}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの準コンパクトな射とする．
+次の条件は同値である：
+\begin{enumerate}
+\item $f$ は普遍閉である，
+\item $Z$ がアフィンスキームである局所有限表示の任意の射
+$Z \to \mathcal{Y}$ に対し，
+写像 $|\mathcal{X} \times_Y Z| \to |Z|$ は閉である，
+\item スキーム $V$ と全射な滑らかな射
+$V \to \mathcal{Y}$ が存在して，すべての $n \geq 0$ に対し
+$|\mathbf{A}^n \times (\mathcal{X} \times_\mathcal{Y} V)|
+\to |\mathbf{A}^n \times V|$ は閉である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が (2) を含意することは明らかである．
+
+\medskip\noindent
+(2) を仮定する．
+アフィンスキームの非交和であるスキーム $V$ と，
+全射な滑らかな射 $V \to \mathcal{Y}$ を選ぶ．
+$f$ が普遍閉であることを示すには，$f$ の基底変換
+$\mathcal{X} \times_\mathcal{Y} V \to V$ が普遍閉であることを
+示せば十分である．Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-universally-closed-local} を参照されたい．
+この基底変換に対しても性質 (2) が成り立つことに注意する．
+したがって，(2) が (1) を含意することを証明するためには，
+$Y = \mathcal{Y}$ がアフィンスキームであると仮定してよい．
+
+\medskip\noindent
+(2) を仮定し，$\mathcal{Y} = Y$ がアフィンスキームであるとする．
+$f$ が普遍閉でないならば，
+$|\mathcal{X} \times_Y Z| \to |Z|$ が閉でないような
+$Y$ 上のアフィンスキーム $Z$ が存在する．
+Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-universally-closed-local} を参照されたい．
+これは，ある閉部分集合 $T \subset |\mathcal{X} \times_Y Z|$ が存在して，
+$\Im(T \to |Z|)$ が閉でないことを意味する．
+$T$ の像の閉包に属するが像には属さない $z \in |Z|$ を選ぶ．
+Lemma \ref{stacks-limits-lemma-separate} を適用する．
+開近傍 $V \subset Z$，可換図式
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+および閉部分集合 $T' \subset |\mathcal{X} \times_Y Z'|$ で，
+次を満たすものを得る：
+\begin{enumerate}
+\item $Z'$ は $Y$ 上有限表示のアフィンスキームである，
+\item $z' = a(z)$ とおくと $z' \not \in \Im(T' \to |Z'|)$ である，
+\item $|\mathcal{X} \times_Y V|$ における $T$ の逆像は，
+$|\mathcal{X} \times_Y V| \to |\mathcal{X} \times_Y Z'|$
+によって $T'$ の中に写る．
+\end{enumerate}
+$z'$ は $\Im(T' \to |Z'|)$ の閉包に属すると主張する．
+これにより $|\mathcal{X} \times_Y Z'| \to |Z'|$ が閉でないことになり，
+(2) の仮定に反する．言い換えれば，この主張から (2) が (1) を含意する．
+主張を見るため，次の可換図式を考える：
+$$
+\xymatrix{
+\mathcal{X} \times_Y Z \ar[d] &
+\mathcal{X} \times_Y V \ar[l] \ar[d] \ar[r] &
+\mathcal{X} \times_Y Z' \ar[d] \\
+Z & V \ar[l] \ar[r]^a & Z'
+}
+$$
+$T_V \subset |\mathcal{X} \times_Y V|$ を $T$ の逆像とする．
+Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-points-cartesian} により，
+$|V|$ における $T_V$ の像は，$|Z|$ における $T$ の像の逆像である．
+$z$ は $T \to |Z|$ の像の閉包に属し，$|V| \to |Z|$ は開なので，
+$z$ は $T_V \to |V|$ の像の閉包に属する．
+$|\mathcal{X} \times_Y Z'|$ における $T_V$ の像は $|T'|$ に含まれるから，
+$z' = a(z)$ は直ちに $T'$ の像の閉包に属する．
+
+\medskip\noindent
+(1) が (3) を含意することは明らかである．
+$V \to \mathcal{Y}$ を (3) のとおりとする．
+$\mathcal{X} \times_Y V \to V$ が普遍閉であることを示せれば，
+Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-universally-closed-local} により
+$f$ は普遍閉である．
+したがって，$f$ が代数スタックの準コンパクトな射で，
+$\mathcal{Y} = Y$ がスキームであり，
+すべての $n$ に対して
+$|\mathbf{A}^n \times \mathcal{X}| \to |\mathbf{A}^n \times Y|$
+が閉であるとき，$f : \mathcal{X} \to \mathcal{Y}$ が
+(2) を満たすことを示せば十分である．
+$Z$ がアフィンスキームである局所有限表示の射
+$Z \to Y$ を取る．
+写像 $|\mathcal{X} \times_Y Z| \to |Z|$ が閉であることを示す必要がある．
+$Y$ はスキーム，$Z$ はアフィンで，$Z \to Y$ は局所有限表示なので，
+埋め込み $Z \to \mathbf{A}^n \times Y$ を見つけられる．
+Morphisms, Lemma
+\ref{morphisms-lemma-quasi-affine-finite-type-over-S} を参照されたい．
+カルテジアン図式
+$$
+\vcenter{
+\xymatrix{
+\mathcal{X} \times_Y Z \ar[d] \ar[r] &
+\mathbf{A}^n \times \mathcal{X} \ar[d] \\
+Z \ar[r] & \mathbf{A}^n \times Y
+}
+}
+\quad
+\begin{matrix}
+\text{これが誘導する} \\
+\text{カルテジアン図式}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+|\mathcal{X} \times_Y Z| \ar[d] \ar[r] &
+|\mathbf{A}^n \times \mathcal{X}| \ar[d] \\
+|Z| \ar[r] & |\mathbf{A}^n \times Y|
+}
+}
+$$
+を考える．これは位相空間の図式であり，その横の矢印は局所閉部分集合への
+同相写像である
+（Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-subspace-induced-topology}）．
+したがって，$|X \times_Y Z|$ の任意の閉部分集合 $T$ は，
+$|\mathbf{A}^n \times Y|$ のある閉部分集合 $T'$ の引き戻しである．
+仮定により $|\mathbf{A}^n \times X|$ における $T'$ の像は閉なので，
+所望どおり $|Z|$ における $T$ の像は閉である．
+\end{proof}

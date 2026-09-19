@@ -1,0 +1,4692 @@
+% Generated mechanically from frozen input inputs/p09/ja/src/spaces-limits.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{69}
+\chapter{代数空間の極限}
+
+
+
+\phantomsection
+\label{spaces-limits-section-phantom}
+
+
+\section{はじめに}
+\label{spaces-limits-section-introduction}
+
+\noindent
+本章では、代数空間の極限に関する事項を扱う。
+最初の主題は、代数空間 $F$ が基底 $S$ 上局所有限表示であることを、
+極限保存関手として特徴づけることである。
+続いて、アフィンな遷移射をもつ、有向集合
+（Categories, Definition \ref{categories-definition-directed-set}）上の
+逆系の極限を調べる。\cite{CLO} に従い、準コンパクトかつ準分離な
+代数空間に対する絶対 Noether 近似を論じる。別の方法は David Rydh
+によるものであり（\cite{rydh_approx} を参照）、その結果はある種の
+代数スタックに対する絶対 Noether 近似も含む。
+
+
+\section{規約}
+\label{spaces-limits-section-conventions}
+
+\noindent
+すべてのスキームは大 fppf サイト $\Sch_{fppf}$ に含まれるものとする。
+また、考えるすべての環 $A$ は、$\Spec(A)$ がこの大サイトの対象と
+（同型を除いて）みなせるという性質をもつものとする。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+本章および次章では、$X \times_S X$ を $X$ とそれ自身との積
+（$S$ 上の代数空間の圏における積）に用い、$X \times X$ とは書かない。
+
+
+
+
+
+
+
+
+
+
+
+\section{有限表示の射}
+\label{spaces-limits-section-finite-presentation}
+
+\noindent
+本節では、Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation}
+を代数空間の射へ一般化する。
+次の定義は、いま引用した命題に動機づけられている。
+
+\begin{definition}
+\label{spaces-limits-definition-locally-finite-presentation}
+$S$ をスキームとする。
+\begin{enumerate}
+\item 関手 $F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ が
+\emph{極限保存的}、または\emph{局所有限表示}であるとは、
+任意のアフィンスキーム $T$ が $S$ 上にあり、$T = \lim T_i$ として
+アフィンスキーム $T_i$ の $S$ 上の有向逆系の極限であるとき
+$$
+F(T) = \colim F(T_i).
+$$
+となることをいう。$F$ が \emph{$S$ 上局所有限表示}であるともいう。
+\item $F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+関手の変換 $a : F \to G$ が\emph{極限保存的}、または
+\emph{局所有限表示}であるとは、任意のスキーム $T$ が $S$ 上にあるとき、
+任意の $y \in G(T)$ に対して、関手
+$$
+F_y : (\Sch/T)_{fppf}^{opp} \longrightarrow \textit{Sets}, \quad
+T'/T \longmapsto \{x \in F(T') \mid a(x) = y|_{T'}\}
+$$
+が $T$ 上局所有限表示であることをいう\footnote{補題
+\ref{spaces-limits-lemma-characterize-relative-limit-preserving} の特徴づけ (2) の方が
+読み取りやすいかもしれない。}。$F$ が $G$ 上\emph{相対的に極限保存的}
+であるともいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+関手 $F_y$ は、ある意味では $a : F \to G$ の $y$ 上のファイバーであるが、
+$T$ の大 fppf サイト上の前層である。この関手は次式で与えられる。
+\begin{equation}
+\label{spaces-limits-equation-fibre-map-functors}
+F_y =
+F|_{(\Sch/T)_{fppf}}
+{\times}_{G|_{(\Sch/T)_{fppf}}}
+*
+\end{equation}
+ここで $*$ は $(\Sch/T)_{fppf}$ 上の（前）層の圏の終対象であり
+（Sites, Example \ref{sites-example-singleton-sheaf} を参照）、
+射 $* \to G|_{(\Sch/T)_{fppf}}$ は $y$ によって与えられる。
+$j : (\Sch/T)_{fppf} \to (\Sch/S)_{fppf}$ が局所化関手ならば、上式は
+$F_y = j^{-1}F \times_{j^{-1}G} *$ となり、$j_!F_y$ はちょうど
+ファイバー積 $F \times_{G, y} T$ であることに注意する。
+（局所化については Sites, Section \ref{sites-section-localize}、
+特に前層の $j_!$ については
+Sites, Remark \ref{sites-remark-localize-presheaves} を参照せよ。）
+
+\medskip\noindent
+この時点では、代数空間の射 $X \to Y$ が $S$ 上局所有限表示であることに
+二つの定義が一時的に存在する。一つは Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-locally-finite-presentation}
+によるものであり、もう一つは $X \to Y$ を関手の変換とみて
+Definition \ref{spaces-limits-definition-locally-finite-presentation} を適用するものである
+（後者にはできる限り「極限保存的」という用語を用いる）。
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation} で、
+この二つの定義が一致することを示す。
+
+\begin{lemma}
+\label{spaces-limits-lemma-characterize-relative-limit-preserving}
+$S$ をスキームとする。$a : F \to G$ を関手
+$(\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ の変換とする。
+次は同値である。
+\begin{enumerate}
+\item $a : F \to G$ は極限保存的である。
+\item 任意のアフィンスキーム $T$ が $S$ 上にあり、$T = \lim T_i$ として
+アフィンスキーム $T_i$ の $S$ 上の有向逆系の極限であるとき、集合の図式
+$$
+\xymatrix{
+\colim_i F(T_i) \ar[r] \ar[d]_a & F(T) \ar[d]^a \\
+\colim_i G(T_i) \ar[r] & G(T)
+}
+$$
+はファイバー積図式である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。(2) のように $T = \lim_{i \in I} T_i$ とする。
+$(y, x_T)$ をファイバー積
+$\colim_i G(T_i) \times_{G(T)} F(T)$ の元とする。
+このとき、$y$ は $y_i \in G(T_i)$ から来る（ある $i$ に対して）。
+Definition \ref{spaces-limits-definition-locally-finite-presentation} のように、関手
+$F_{y_i}$ を $(\Sch/T_i)_{fppf}$ 上で考える。
+$x_T \in F_{y_i}(T)$ である。また、
+$T = \lim_{i' \geq i} T_{i'}$ は $T_i$ 上のアフィンスキームの有向系である。
+従って (1) により、$x_T$ は一意な元 $x$ の
+$\colim_{i' \geq i} F_{y_i}(T_{i'})$ からの像である。
+よって $x$ は $\colim F(T_i)$ の一意な元であり、組 $(y, x_T)$ に写る。
+これで (2) が従う。
+
+\medskip\noindent
+(2) を仮定する。$T$ をスキームとし、$y_T \in G(T)$ とする。
+$F_{y_T}$ が極限保存的であることを示さなければならない。
+$T' = \lim_{i \in I} T'_i$ を、$T$ 上のアフィンスキーム $T'_i$ の
+有向極限である $T$ 上のアフィンスキームとする。
+% P09-ERR-0050: frozen source omits the argument (T') on F_{y_T}.
+$x_{T'} \in F_{y_T}$ とする。$i \in I$ を一つ取れる。これは $I$ が
+有向集合だからである。
+% P09-ERR-0051: frozen source types y_i in F(T'_i), not G(T'_i).
+$y_i \in F(T'_i)$ を $y_{T'}$ の像と書く。このとき $(y_i, x_{T'})$ は
+ファイバー積 $\colim_i G(T'_i) \times_{G(T')} F(T')$ の元である。
+従って (2) により、一意な元 $x$ を $\colim_i F(T'_i)$ の中に得て、
+これは $(y_i, x_{T'})$ に写る。
+$x$ が $\colim_i F_y(T'_i)$ の元を定め、それが $x_{T'}$ に写ることは明らかであり、
+これでよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-composition-locally-finite-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$, $b : G \to H$ を関手の変換とする。
+$a$ と $b$ が極限保存的ならば、
+$$
+b \circ a : F \longrightarrow H
+$$
+も極限保存的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving} の特徴づけ (2) のように
+$T = \lim_{i \in I} T_i$ とする。集合の図式
+$$
+\xymatrix{
+\colim_i F(T_i) \ar[r] \ar[d]_a & F(T) \ar[d]^a \\
+\colim_i G(T_i) \ar[r] \ar[d]_b & G(T) \ar[d]^b \\
+\colim_i H(T_i) \ar[r] & H(T)
+}
+$$
+を考える。仮定により二つの正方形はファイバー積である。
+従って外側の長方形もファイバー積図式であり、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-locally-finite-presentation-permanence}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$, $b : G \to H$ を関手の変換とする。
+$b \circ a$ と $b$ が極限保存的ならば、$a$ も極限保存的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving} の特徴づけ (2) のように
+$T = \lim_{i \in I} T_i$ とする。集合の図式
+$$
+\xymatrix{
+\colim_i F(T_i) \ar[r] \ar[d]_a & F(T) \ar[d]^a \\
+\colim_i G(T_i) \ar[r] \ar[d]_b & G(T) \ar[d]^b \\
+\colim_i H(T_i) \ar[r] & H(T)
+}
+$$
+を考える。仮定により、下の正方形と外側の長方形は集合のファイバー積である。
+従って上の正方形もファイバー積であり、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-base-change-locally-finite-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$, $b : H \to G$ を関手の変換とする。
+ファイバー積図式
+$$
+\xymatrix{
+H \times_{b, G, a} F \ar[r]_-{b'} \ar[d]_{a'} & F \ar[d]^a \\
+H \ar[r]^b & G
+}
+$$
+を考える。$a$ が極限保存的ならば、基底変換 $a'$ も極限保存的である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：これは形式的である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-fibre-product-locally-finite-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$E, F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$, $b : H \to G$, $c : G \to E$ を関手の変換とする。
+$c$, $c \circ a$, $c \circ b$ が極限保存的ならば、
+$F \times_G H \to E$ も極限保存的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-characterize-relative-limit-preserving} の特徴づけ (2) のように
+$T = \lim_{i \in I} T_i$ とする。このとき
+$$
+\colim (F \times_G H)(T_i) =
+\colim F(T_i) \times_{\colim G(T_i)} \colim H(T_i)
+$$
+である。実際、フィルター付き余極限は有限積と可換する。
+従って、示すべきことは
+$$
+\xymatrix{
+\colim F(T_i) \times_{\colim G(T_i)} \colim H(T_i) \ar[r] \ar[d] &
+F(T) \times_{G(T)} H(T) \ar[d] \\
+\colim_i E(T_i) \ar[r] & E(T)
+}
+$$
+がファイバー積図式であることである。これは、集合の射
+$E' \to E$, $F \to G$, $H \to G$, $G \to E$ に対して
+$$
+E' \times_E (F \times_G H) =
+(E' \times_E F) \times_{(E' \times_E G)} (E' \times_E H)
+$$
+となることから従う。細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sheafify-finite-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ を関手とする。
+$F$ が極限保存的ならば、その層化 $F^\#$ も極限保存的である。
+\end{lemma}
+
+\begin{proof}
+$F$ が極限保存的であると仮定する。
+$F^+$ が極限保存的であることを示せば十分である。実際、
+$F^\# = (F^+)^+$ である。Sites, Theorem \ref{sites-theorem-plus} を参照せよ。
+$T$ を $S$ 上のアフィンスキームとし、$T = \lim T_i$ を
+アフィン $S$ スキームの逆系の有向極限として書く。
+% P09-ERR-0052: frozen source says "the limit", not "the colimit".
+$F^+(T)$ は $\check H^0(\mathcal{V}, F)$ の余極限であり、ここで極限は
+$T$ の $(\Sch/S)_{fppf}$ におけるすべての被覆上を走ることを思い出す。
+アフィンスキームの任意の fppf 被覆は標準 fppf 被覆で細分できる。
+Topologies, Lemma \ref{topologies-lemma-fppf-affine} を参照せよ。
+従って
+$$
+F^+(T)
+=
+\colim_{\mathcal{V}\text{ 標準被覆 }T}
+\check H^0(\mathcal{V}, F).
+$$
+と書ける。この余極限に現れる任意の
+$\mathcal{V} = \{T_k \to T\}_{k = 1, \ldots, n}$ は
+$\mathcal{V}_i \times_{T_i} T$ と書ける。ここで、ある $i$ と標準 fppf 被覆
+$\mathcal{V}_i = \{T_{i, k} \to T_i\}_{k = 1, \ldots, n}$（$T_i$ の被覆）を取る。
+$\mathcal{V}_{i'} = \{T_{i', k} \to T_{i'}\}_{k = 1, \ldots, n}$ を
+$i' \geq i$ に対する基底変換と書く。このとき次を得る。
+% P09-ERR-0053: frozen source retains V_i rather than V_{i'} below.
+% P09-ERR-0054: frozen source retains the k' >= k colimit index below.
+\begin{align*}
+\colim_{i' \geq i} \check H^0(\mathcal{V}_i, F)
+& =
+\colim_{i' \geq i}
+\text{等化子}
+\left(
+\xymatrix{
+\prod F(T_{i', k})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F(T_{i', k} \times_{T_{i'}} T_{i', l})
+}
+\right)
+\\
+& =
+\text{等化子}
+\left(
+\xymatrix{
+\colim_{i' \geq i}
+\prod F(T_{i', k})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\colim_{k' \geq k}
+\prod F(T_{i', k} \times_{T_{i'}} T_{i', l})
+}
+\right)
+\\
+& =
+\text{等化子}
+\left(
+\xymatrix{
+\prod F(T_k)
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F(T_k \times_T T_l)
+}
+\right)
+\\
+& =
+\check H^0(\mathcal{V}, F)
+\end{align*}
+ここで二つ目の等号は、フィルター付き余極限が完全であることによる。
+三つ目の等号は、$F$ が極限保存的であり、かつ Limits, Lemma
+\ref{limits-lemma-scheme-over-limit} により
+$\lim_{i' \geq i} T_{i', k} = T_k$ および
+$\lim_{i' \geq i} T_{i', k} \times_{T_{i'}} T_{i', l} = T_k \times_T T_l$
+となることによる。これをすべての被覆について同時に用いると
+\begin{align*}
+F^+(T)
+& =
+\colim_{\mathcal{V}\text{ 標準被覆 }T} \check H^0(\mathcal{V}, F) \\
+& =
+\colim_{i \in I}
+\colim_{\mathcal{V}_i\text{ 標準被覆 }T_i}
+\check H^0(T \times_{T_i}\mathcal{V}_i, F) \\
+& =
+\colim_{i \in I} F^+(T_i)
+\end{align*}
+を得る。余極限の順序を交換できることは Categories, Lemma
+\ref{categories-lemma-colimits-commute} による。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sheaf-finite-presentation}
+$S$ をスキームとする。
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ を関手とする。
+次を仮定する。
+\begin{enumerate}
+\item $F$ は層である。
+\item fppf 被覆 $\{U_j \to S\}_{j \in J}$ が存在して、
+$F|_{(\Sch/U_j)_{fppf}}$ は極限保存的である。
+\end{enumerate}
+このとき $F$ は極限保存的である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $S$ 上のアフィンスキームとする。
+$I$ を有向集合とし、$T_i$ を $S$ 上のアフィンスキームの逆系で
+$T = \lim T_i$ となるものとする。標準射
+$\colim F(T_i) \to F(T)$ が全単射であることを示さなければならない。
+
+\medskip\noindent
+ある $0 \in I$ を取り、標準 fppf 被覆
+$\{V_{0, k} \to T_{0}\}_{k = 1, \ldots, m}$ を取る。これは引き戻し
+$\{U_j \times_S T_0 \to T_0\}$（与えられた $S$ の fppf 被覆の引き戻し）を
+細分するものとする。
+各 $i \geq 0$ に対して $V_{i, k} = T_i \times_{T_0} V_{0, k}$ と置き、
+$V_k = T \times_{T_0} V_{0, k}$ と置く。
+Limits, Lemma \ref{limits-lemma-scheme-over-limit} により
+$V_k = \lim_{i \geq 0} V_{i, k}$ であることに注意する。
+
+\medskip\noindent
+$x, x' \in \colim F(T_i)$ が $F(T)$ の同じ元に写ると仮定する。
+$x, x'$ は元 $x_i, x'_i \in F(T_i)$ で与えられるとする（ある $i \in I$ に
+対して。両者に同じ $i$ を取れるのは $I$ が有向だからである）。
+仮定 (2) と、$x_i, x'_i$ が $F(T)$ の同じ元に写ることから
+$$
+x_i|_{V_{i', k}} = x'_i|_{V_{i', k}}
+$$
+となる。これは十分大きいある $i' \in I$ に対してである。
+同じ $i'$ を各 $k$ に選べる。これは
+$k \in \{1, \ldots, m\}$ が有限集合を走るからである。
+$\{V_{i', k} \to T_{i'}\}$ は fppf 被覆であり、
+$F$ は層なので、望む通り $x_i|_{T_{i'}} = x'_i|_{T_{i'}}$ となる。
+これにより、射 $\colim F(T_i) \to F(T)$ は単射である。
+
+\medskip\noindent
+全射性も同様に示す。$x \in F(T)$ とする。仮定 (2) により、各 $k$ に
+対して $i$ を選び、$x|_{V_k}$ が元 $x_{i, k} \in F(V_{i, k})$ から
+来るようにできる。前と同様、一つの $i$ を選び、これをすべての $k$ に
+用いられる。上で示した単射性により
+$$
+x_{i, k}|_{V_{i', k} \times_{T_{i'}} V_{i', l}}
+=
+x_{i, l}|_{V_{i', k} \times_{T_{i'}} V_{i', l}}
+$$
+となる。これは十分大きいある $i'$ に対してである。
+従って $F$ の層条件により、元 $x_{i, k}|_{V_{i', k}}$ は
+望む元 $x_{i'} \in F(T_{i'})$ に貼り合わさる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sheafify-finite-presentation-map}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ を関手とする。
+$a : F \to G$ が極限保存的な変換ならば、誘導される層の変換
+$F^\# \to G^\#$ も極限保存的である。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$y \in G^\#(T)$ とする。関手
+$F^\#_y : (\Sch/T)_{fppf}^{opp} \to \textit{Sets}$ が
+極限保存的であることを示さなければならない。この関手は
+$F^\# \to G^\#$ と $y$ から Definition
+\ref{spaces-limits-definition-locally-finite-presentation} のように構成される。
+Equation (\ref{spaces-limits-equation-fibre-map-functors}) により $F^\#_y$ は層である。
+% P09-ERR-0055: frozen source types y_j in F(V_j), not G(V_j).
+fppf 被覆 $\{V_j \to T\}_{j \in J}$ を、$y|_{V_j}$ が元
+$y_j \in F(V_j)$ から来るように選ぶ。
+% P09-ERR-0056: frozen source restricts F^# itself and identifies it with F^#_{y_j}.
+$F^\#$ の $(\Sch/V_j)_{fppf}$ への制限はちょうど $F^\#_{y_j}$ である。
+$F^\#_{y_j}$ が極限保存的であることを示せれば、Lemma
+\ref{spaces-limits-lemma-sheaf-finite-presentation} により $F^\#_y$ は極限保存的となり、
+証明が終わる。従って $y \in G(T)$ の場合に帰着される。
+
+\medskip\noindent
+$y \in G(T)$ とする。この場合 $F^\#_y = (F_y)^\#$ と主張する。
+これは Equation (\ref{spaces-limits-equation-fibre-map-functors}) から従う。
+従ってこの場合は Lemma \ref{spaces-limits-lemma-sheafify-finite-presentation} から従う。
+\end{proof}
+
+\begin{proposition}
+\label{spaces-limits-proposition-characterize-locally-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次は同値である。
+\begin{enumerate}
+\item 射 $f$ は局所有限表示な代数空間の射である。
+Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-locally-finite-presentation} を参照せよ。
+\item 射 $f : X \to Y$ は関手の変換として極限保存的である。
+Definition \ref{spaces-limits-definition-locally-finite-presentation} を参照せよ。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) を仮定する。$T$ をスキームとし、$y \in Y(T)$ とする。
+$T \times_Y X$ が Definition \ref{spaces-limits-definition-locally-finite-presentation} の
+意味で $T$ 上極限保存的であることを示さなければならない。
+従って、代数空間 $X$ が代数空間として $S$ 上局所有限表示であるとき、関手
+$X : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ として極限保存的であることを
+示す場合に帰着される。これを見るため、表示 $X = U/R$ を選ぶ。
+Spaces, Definition \ref{spaces-definition-presentation} を参照せよ。
+Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-locally-finite-presentation} により、
+$U$ と $R$ はともに $S$ 上局所有限表示なスキームである。
+従って Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation} により、次を得る。
+$$
+U(T) = \colim U(T_i), \quad
+R(T) = \colim R(T_i)
+$$
+ここで $T = \lim_i T_i$ は $(\Sch/S)_{fppf}$ において成り立つ。
+従って前層
+$$
+(\Sch/S)_{fppf}^{opp} \longrightarrow \textit{Sets}, \quad
+W \longmapsto U(W)/R(W)
+$$
+は極限保存的である。ゆえに Lemma
+\ref{spaces-limits-lemma-sheafify-finite-presentation} により、その層化 $X = U/R$ も
+極限保存的である。
+
+\medskip\noindent
+(2) を仮定する。スキーム $V$ と全射エタール射 $V \to Y$ を選ぶ。
+次に、スキーム $U$ と全射エタール射 $U \to V \times_Y X$ を選ぶ。
+Lemma \ref{spaces-limits-lemma-base-change-locally-finite-presentation} により、関手の変換
+$V \times_Y X \to V$ は極限保存的である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation} により、代数空間の射
+$U \to V \times_Y X$ は局所有限表示であり、従って証明の前半により
+関手の変換として極限保存的である。Lemma
+\ref{spaces-limits-lemma-composition-locally-finite-presentation} により、合成
+$U \to V \times_Y X \to V$ は関手の変換として極限保存的である。
+従ってスキームの射 $U \to V$ は Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation} により
+局所有限表示である（集合論的な注意については証明の最終段落を参照）。
+これは定義により (1) が成り立つことを意味する。
+
+\medskip\noindent
+集合論的注意。$U \to V$ を $(\Sch/S)_{fppf}$ の射とする。
+Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation} の主張では、
+$U \to V$ が局所有限表示であることを、アフィンスキームの
+\emph{すべての}有向逆系 $(T_i, f_{ii'})$ が $V$ 上にあり、
+% P09-ERR-0057: frozen source has colim V(T_i), not colim U(T_i).
+$U(T) = \colim V(T_i)$ となることによって特徴づける。
+しかし現在の設定では、アフィンスキーム $T_i$ で $V$ 上にあり、
+$(\Sch/S)_{fppf}$ の対象と（同型を除いて）みなせるものだけを考えられる。
+従って、証明に十分なアフィンが $(\Sch/S)_{fppf}$ に存在することを
+確かめる必要がある。Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation} の
+(2) $\Rightarrow$ (1) の証明を調べると、問題は $U$ と $V$ が
+アフィンの場合に帰着する。$U = \Spec(A)$ および $V = \Spec(B)$ とする。
+$(\Sch/S)_{fppf}$ の構成により、濃度が $\leq |B|$ である任意の環のスペクトルは
+$(\Sch/S)_{fppf}$ の対象と同型である。従って Algebra, Lemma
+\ref{algebra-lemma-characterize-finite-presentation} の証明の「必要性」の部分では、
+$A$-代数で濃度が $\leq |B|$ であるものしか使わないことを確認すれば十分である。
+\end{proof}
+
+\begin{remark}
+\label{spaces-limits-remark-limit-preserving}
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation} の
+重要な特別な場合を述べる。$S$ をスキームとする。
+$X$ を $S$ 上の代数空間とする。このとき $X$ が $S$ 上局所有限表示であることと、
+$X$ が関手 $(\Sch/S)^{opp} \to \textit{Sets}$ として極限保存的であることは
+同値である。Limits, Remark \ref{limits-remark-limit-preserving} と比較せよ。
+実際、下の Lemma \ref{spaces-limits-lemma-surjection-is-enough} で、射
+$$
+\colim X(T_i) \longrightarrow X(T)
+$$
+が、$T = \lim T_i$ が $S$ 上のアフィンスキームの有向極限であるときに
+全射であれば十分であることを見る。
+\end{remark}
+
+\begin{lemma}
+\label{spaces-limits-lemma-surjection-is-enough}
+$S$ をスキームとする。
+$f : X \to Y$ を $S$ 上の代数空間の射とする。
+アフィンスキームの任意の有向極限 $T = \lim_{i \in I} T_i$ が $S$ 上にあるとき、射
+$$
+\colim X(T_i) \longrightarrow X(T) \times_{Y(T)} \colim Y(T_i)
+$$
+が全射ならば、$f$ は局所有限表示である。言い換えると、Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation} の (2) では、Lemma
+\ref{spaces-limits-lemma-characterize-relative-limit-preserving} の判定条件の全射性だけを
+確認すれば十分である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射エタール射 $g : V \to Y$ を選ぶ。
+次に、スキーム $U$ と全射エタール射 $h : U \to V \times_Y X$ を選ぶ。
+補題のように $T = \lim T_i$ とするとき、射
+$$
+\colim U(T_i) \longrightarrow U(T) \times_{V(T)} \colim V(T_i)
+$$
+が全射であることを示せば十分である。実際、そのとき
+$U \to V$ は Limits, Lemma \ref{limits-lemma-surjection-is-enough} により
+局所有限表示となる（Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation} の証明とまったく同じ
+集合論的注意を除く）。従って、$a : T \to U$ と $b_i : T_i \to V$ を、
+同じ射 $T \to V$ を定めるものとして取る。図式は
+$$
+\xymatrix{
+T \ar[d]_a \ar[rr]_{p_i} & & T_i \ar[d]^{b_i} \ar@{..>}[ld] \\
+U \ar[r]^-h & X \times_Y V \ar[d] \ar[r] & V \ar[d]^g \\
+& X \ar[r]^f & Y
+}
+$$
+である。補題の仮定により、$i$ を大きくすれば射
+$c_i : T_i \to X$ を、
+% P09-ERR-0058: frozen source annotates the following equality as T_i -> ..., not T -> ....
+$h \circ a = (b_i, c_i) \circ p_i : T_i \to V \times_Y X$ かつ
+$f \circ c_i = g \circ b_i$ となるように取れる。
+$h$ は代数空間のエタール射（従って局所有限表示）なので、Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation} により
+$$
+\colim U(T_i) \longrightarrow U(T) \times_{(X \times_Y V)(T)}
+\colim (X \times_Y V)(T_i)
+$$
+は全射である。従って再び $i$ を大きくすれば、望む射
+$a_i : T_i \to U$ を $a = a_i \circ p_i$ かつ
+$b_i = (U \to V) \circ a_i$ となるように取れる。
+\end{proof}
+
+\section{代数空間の極限}
+\label{spaces-limits-section-limits}
+
+\noindent
+次の補題は、本章で代数空間の極限をどのように考えるかを説明する。
+代数空間のアフィン射の基底変換はアフィンであることを、以後断りなく用いる。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-affine} を参照せよ。
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-inverse-system-has-limit}
+$S$ をスキームとする。$I$ を有向集合とする。
+$(X_i, f_{ii'})$ を、$I$ 上の、$S$ 上の代数空間の圏における逆系とする。
+射 $f_{ii'} : X_i \to X_{i'}$ がアフィンならば、極限
+$X = \lim_i X_i$（fppf 層としての極限）は代数空間である。さらに、
+\begin{enumerate}
+\item 各射 $f_i : X \to X_i$ はアフィンである。
+\item 任意の $i \in I$ と代数空間の任意の射 $T \to X_i$ に対して
+$$
+X \times_{X_i} T = \lim_{i' \geq i} X_{i'} \times_{X_i} T.
+$$
+が $S$ 上の代数空間として成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) は、極限 $X = \lim X_i$ が $S$ 上の代数空間として存在することの
+形式的帰結である。元 $0 \in I$ を選ぶ（有向集合は空でないので可能である）。
+スキーム $U_0$ と全射エタール射 $U_0 \to X_0$ を選ぶ。
+$R_0 = U_0 \times_{X_0} U_0$ と置く。このとき $X_0 = U_0/R_0$ である。
+$i \geq 0$ に対して
+$U_i = X_i \times_{X_0} U_0$ および
+$R_i = X_i \times_{X_0} R_0 = U_i \times_{X_i} U_i$ と置く。
+Limits, Lemma \ref{limits-lemma-directed-inverse-system-has-limit} により、
+$U = \lim_{i \geq 0} U_i$ と $R = \lim_{i \geq 0} R_i$ はスキームである。
+さらに、二つの射 $s, t : R \to U$ は、二つの射影 $R_0 \to U_0$ の
+射 $U \to U_0$ による基底変換であり、特にエタールである。
+% P09-ERR-0059: frozen source has the malformed phrase "as directed a limit".
+射 $R \to U \times_S U$ は同値関係を定める。実際、同値関係の有向な極限は
+同値関係である。従って射 $R \to U \times_S U$ はエタール同値関係である。
+自然な射
+\begin{equation}
+\label{spaces-limits-equation-isomorphism-sheaves}
+U/R \longrightarrow \lim X_i
+\end{equation}
+は、$S$ 上のスキームの圏における fppf 層の同型であると主張する。
+この主張により、Spaces, Theorem \ref{spaces-theorem-presentation} から
+$X = \lim X_i$ は代数空間となる。
+
+\medskip\noindent
+$Z$ をスキームとし、$a : Z \to \lim X_i$ を射とする。
+このとき $a = (a_i)$ であり、$a_i : Z \to X_i$ である。
+$W_0 = Z \times_{a_0, X_0} U_0$ と置く。
+$W_0 = Z \times_{a_i, X_i} U_i$ であることに注意する。これはすべての
+$i \geq 0$ に対して成り立ち、上の $U_i \to X_i$ の選び方による。
+従って射 $W_0 \to \lim_{i \geq 0} U_i = U$ を得る。
+$W_0 \to Z$ は全射かつエタールなので、
+(\ref{spaces-limits-equation-isomorphism-sheaves}) は層の全射である。
+最後に、$Z$ をスキームとし、$a, b : Z \to U/R$ を
+(\ref{spaces-limits-equation-isomorphism-sheaves}) により等しくされる二つの射とする。
+$a = b$ を示さなければならない。$Z$ を fppf 被覆の各成分で置き換えることで、
+射 $a', b' : Z \to U$ が存在し、これらが $a$ と $b$ を誘導すると仮定してよい。
+$a, b$ が (\ref{spaces-limits-equation-isomorphism-sheaves}) により等しくされるという条件は、
+各 $i \geq 0$ に対して合成 $a_i', b_i' : Z \to U \to U_i$ が
+$U_i/R_i = X_i$ への射として等しいことを意味する。
+従って $(a_i', b_i') : Z \to U_i \times_S U_i$ は $R_i$ を経由する。
+その射を $c_i : Z \to R_i$ とする。
+$R = \lim_{i \geq 0} R_i$ なので、$c = \lim c_i : Z \to R$ は射であり、
+$a, b$ が $Z$ から $U/R$ への射として等しいことを示す。
+
+\medskip\noindent
+(1) は、上で $U_i \times_{X_i} X = U$ を見たこと、および構成により
+$U \to U_i$ がアフィンであることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-space-over-limit}
+$S$ をスキームとする。$I$ を有向集合とする。
+$(X_i, f_{ii'})$ を、$I$ 上の、アフィンな遷移射をもつ
+$S$ 上の代数空間の逆系とする。$X = \lim_i X_i$ とし、$0 \in I$ とする。
+$T \to X_0$ が代数空間の射であると仮定する。このとき
+$$
+T \times_{X_0} X = \lim_{i \geq 0} T \times_{X_0} X_i
+$$
+が $S$ 上の代数空間として成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} により、極限 $X$ は
+代数空間である。等式は形式的である。Categories, Lemma
+\ref{categories-lemma-colimits-commute} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-inverse-system-closed-immersions}
+$S$ をスキームとする。$I$ を有向集合とする。
+$(X_i, f_{i'i}) \to (Y_i, g_{i'i})$ を、$I$ 上の、
+$S$ 上の代数空間の逆系の射とする。次を仮定する。
+\begin{enumerate}
+\item 射 $f_{i'i} : X_{i'} \to X_i$ はアフィンである。
+\item 射 $g_{i'i} : Y_{i'} \to Y_i$ はアフィンである。
+\item 射 $X_i \to Y_i$ は閉埋め込みである。
+\end{enumerate}
+このとき $\lim X_i \to \lim Y_i$ は閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} により、
+$\lim X_i$ と $\lim Y_i$ が存在することに注意する。
+$0 \in I$ を選び、アフィンスキーム $V_0$ とエタール射
+$V_0 \to Y_0$ を選ぶ。
+% P09-ERR-0060: frozen source reverses both base-changed closed-immersion arrows.
+このとき射
+$V_i = Y_i \times_{Y_0} V_0 \to U_i = X_i \times_{Y_0} V_0$
+はアフィンスキームの閉埋め込みである。
+従って射 $V = Y \times_{Y_0} V_0 \to U = X \times_{Y_0} V_0$ は
+閉埋め込みである。実際、$V = \lim V_i$、$U = \lim U_i$ であり、
+アフィンスキームの閉埋め込みの極限は閉埋め込みである。
+これは全射環準同型のフィルター付き余極限が全射であることによる。
+エタール射 $V \to Y$ は $Y$ のエタール被覆をなす。
+これは $V_0 \to Y_0$ の選択を変えると得られるので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-inverse-system-reduced}
+$S$ をスキームとする。$I$ を有向集合とする。
+% P09-ERR-0061: frozen source neither defines X nor states affine transitions.
+$(X_i, f_{i'i})$ を $I$ 上の、$S$ 上の代数空間の逆系とする。
+$X_i$ がすべての $i$ に対して被約ならば、$X$ は被約である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} により $\lim X_i$ が
+存在することに注意する。$0 \in I$ を選び、
+% P09-ERR-0062: frozen source names V_0 but immediately maps and uses U_0.
+アフィンスキーム $V_0$ とエタール射 $U_0 \to X_0$ を選ぶ。
+アフィンスキーム $U_i = X_i \times_{X_0} U_0$ は被約である。
+従って $U = X \times_{X_0} U_0$ は被約アフィンスキームの極限として
+被約アフィンスキームである。実際、被約環のフィルター付き余極限は被約である。
+エタール射 $U \to X$ は $X$ のエタール被覆をなす。
+これは $U_0 \to X_0$ の選択を変えると得られるので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-better-characterize-relative-limit-preserving}
+$S$ をスキームとする。$X \to Y$ を $S$ 上の代数空間の射とする。
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation} の
+同値な条件 (1)、(2) は、さらに次とも同値である。
+\begin{enumerate}
+\item[(3)] 任意の有向極限 $T = \lim T_i$ で、$T_i$ が $S$ 上の
+準コンパクトかつ準分離な代数空間であり、遷移射がアフィンであるものに対して、集合の図式
+$$
+\xymatrix{
+\colim_i \Mor(T_i, X) \ar[r] \ar[d] & \Mor(T, X) \ar[d] \\
+\colim_i \Mor(T_i, Y) \ar[r] & \Mor(T, Y)
+}
+$$
+はファイバー積図式である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) が (2) を含意することは明らかである。(2) を仮定して (3) を示す。
+証明はかなり形式的であり、読者には自分で証明を見つけることを勧める。
+
+\medskip\noindent
+まず、$T_i$ がすべての $i$ に対してさらに分離であると仮定した場合に
+(3) が成り立つことを示す。$i \in I$ を選び、全射エタール射
+$U_i \to T_i$ を選ぶ。ここで $U_i$ はアフィンである。
+Lemma \ref{spaces-limits-lemma-space-over-limit} により、
+$U = U_i \times_{T_i} T$ および
+$U_{i'} = U_i \times_{T_i} T_{i'}$ と置けば
+$U = \lim_{i' \geq i} U_{i'}$ である。
+もちろん $U$ と $U_{i'}$ はアフィンである
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} を参照）。
+$T_i$ は分離なので、ファイバー積 $V_i = U_i \times_{T_i} U_i$ も
+アフィンスキームであり、アフィンスキーム
+$V = V_i \times_{T_i} T$ および
+$V_{i'} = V_i \times_{T_i} T_{i'}$ を得て
+$V = \lim_{i' \geq i} V_{i'}$ となる。
+$U \to T$ と $U_i \to T_i$ は全射エタールであり、かつ
+$V = U \times_T U$、$V_{i'} = U_{i'} \times_{T_{i'}} U_{i'}$ である。
+$\Mor(T, X)$ は二つの射 $\Mor(U, X) \to \Mor(V, X)$ の等化子である。
+例えばこれは、$X$ が $(\Sch/S)_{fppf}$ 上の層として二つの射
+% P09-ERR-0063: frozen source has lowercase h_u.
+$h_V \to h_u$ の余等化子であることから従う。同様に
+$\Mor(T_{i'}, X)$ は二つの射
+$\Mor(U_{i'}, X) \to \Mor(V_{i'}, X)$ の等化子である。
+もちろん、$X$ を $Y$ で置き換えても同じことが成り立つ。
+% P09-ERR-0064: frozen source says "the diagrams of in (3)".
+条件 (2) によれば、$U = \lim U_i$ および $V = \lim V_i$ の場合、
+(3) の図式のはファイバー積である。従って形式的に、
+$T = \lim T_i$ に対しても同じことが成り立つ。
+
+\medskip\noindent
+一般の場合、アフィンスキーム $U$、$i \in I$、および全射エタール射
+$U \to T_i$ を選ぶ。前段落の議論を繰り返せば、なお証明が得られる。
+スキーム $V_{i'}$, $V$ はもはやアフィンではないが、依然として
+準コンパクトかつ分離であり、前段落の結果を適用できる。
+\end{proof}
+
+\section{性質の降下}
+\label{spaces-limits-section-descent}
+
+\noindent
+本節は Limits, Section \ref{limits-section-descent} の類似である。
+
+\begin{lemma}
+\label{spaces-limits-lemma-inverse-limit-sets}
+$S$ をスキームとする。$X = \lim_{i \in I} X_i$ を、アフィンな遷移射をもつ
+$S$ 上の代数空間の有向逆系の極限とする
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}）。
+各 $X_i$ が decent である（例えば準分離または局所分離である）ならば、
+$|X| = \lim_i |X_i|$ が集合として成り立つ。
+\end{lemma}
+
+\begin{proof}
+標準射 $|X| \to \lim |X_i|$ がある。$0 \in I$ を選ぶ。
+$W_0 \subset X_0$ が開部分空間ならば、Lemma
+\ref{spaces-limits-lemma-directed-inverse-system-has-limit} により
+$f_0^{-1}W_0 = \lim_{i \geq 0} f_{i0}^{-1}W_0$ である。
+従って $X_0$ が準コンパクトである逆系について補題を証明できれば、
+一般の場合も従う。よって $X_0$ は準コンパクトであると仮定してよいし、そうする。
+
+\medskip\noindent
+アフィンスキーム $U_0$ と全射エタール射 $U_0 \to X_0$ を選ぶ。
+$U_i = X_i \times_{X_0} U_0$ および $U = X \times_{X_0} U_0$ と置く。
+$R_i = U_i \times_{X_i} U_i$ および $R = U \times_X U$ と置く。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} の証明を参照すれば、
+$U = \lim U_i$ および $R = \lim R_i$ である。
+$|X| = |U|/|R|$ および $|X_i| = |U_i|/|R_i|$ を思い出す。
+Limits, Lemma \ref{limits-lemma-topology-limit} により
+$|U| = \lim |U_i|$ および $|R| = \lim |R_i|$ である。
+
+\medskip\noindent
+$|X| \to \lim |X_i|$ の全射性を示す。$(x_i) \in \lim |X_i|$ とする。
+$S_i \subset |U_i|$ を $x_i$ の逆像とする。これは decent 空間の定義により
+有限非空集合である
+（Decent Spaces, Definition \ref{decent-spaces-definition-very-reasonable}）。
+従って Categories, Lemma \ref{categories-lemma-nonempty-limit} により
+$\lim S_i$ は非空である。$(u_i) \in \lim S_i \subset \lim |U_i|$ とする。
+上の議論により、これは点 $u \in |U|$ を定め、これは点 $x \in |X|$ に写り、
+さらに与えられた元 $(x_i)$ に写る。この元は $\lim |X_i|$ に属する。
+
+\medskip\noindent
+$|X| \to \lim |X_i|$ の単射性を示す。
+$x, x' \in |X|$ が $\lim |X_i|$ の同じ点に写ると仮定する。
+持ち上げ $u, u' \in |U|$ を選び、その像を $u_i, u'_i \in |U_i|$ と書く。
+各 $i$ に対して、$T_i \subset |R_i|$ を
+$(u_i, u'_i) \in |U_i| \times |U_i|$ に写る点の集合とする。
+これは decent 空間の定義により有限集合である
+（Decent Spaces, Definition \ref{decent-spaces-definition-very-reasonable}）。
+さらに、$T_i$ は、$x$ と $x'$ が $X_i$ の同じ点に写ると仮定したので非空である。
+従って Categories, Lemma \ref{categories-lemma-nonempty-limit} により
+$\lim T_i$ は非空である。前と同様に、$r \in |R| = \lim |R_i|$ を
+$\lim T_i$ のある元に対応する点とする。構成により $r$ は
+$(u, u')$ に $|U| \times |U|$ の中で写るので、望む通り
+$x = x'$ が $|X|$ で成り立つ。
+
+\medskip\noindent
+括弧内の主張を示す。準分離な代数空間は decent である。
+Decent Spaces, Section \ref{decent-spaces-section-reasonable-decent} を参照せよ
+（ここで鍵となる観察は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-finite-fibres-presentation} である）。
+局所分離な代数空間は Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-separated-decent} により decent である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-topology-limit}
+Lemma \ref{spaces-limits-lemma-inverse-limit-sets} と同じ記法および仮定のもとで、
+$|X| = \lim_i |X_i|$ が位相空間として成り立つ。
+\end{lemma}
+
+\begin{proof}
+Topology, Lemma \ref{topology-lemma-characterize-limit} の判定条件を用いる。
+Lemma \ref{spaces-limits-lemma-inverse-limit-sets} で、$|X| = \lim_i |X_i|$ が集合として
+成り立つことを見た。射 $f_i : X \to X_i$ は代数空間の射であるから、
+連続写像 $|X| \to |X_i|$ を定める。従って $f_i^{-1}(U_i)$ は
+各開集合 $U_i \subset |X_i|$ に対して開である。
+最後に、$x \in |X|$ とし、$x \in V \subset |X|$ を開近傍とする。
+ある $i$ と開集合 $W_i \subset |X_i|$ で、
+% P09-ERR-0065: frozen source omits "of" before x in this phrase.
+$x$ の像の近傍であり、$f_i^{-1}(W_i) \subset V$ となるものを
+見つけなければならない。$0 \in I$ を選ぶ。
+スキーム $U_0$ と全射エタール射 $U_0 \to X_0$ を選ぶ。
+$U = X \times_{X_0} U_0$ および
+$U_i = X_i \times_{X_0} U_0$（$i \geq 0$）と置く。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} により、スキームの圏で
+$U = \lim_{i \geq 0} U_i$ である。$u \in U$ を、その像が $x$ となるように選ぶ。
+スキームについての結果（Limits, Lemma
+\ref{limits-lemma-inverse-limit-top}）により、ある $i \geq 0$ と、
+開近傍 $E_i \subset U_i$ で $u$ の像を含み、その $U$ における逆像が
+$V$ の $U$ における逆像に含まれるものを見つけられる。
+このとき $W_i \subset |X_i|$ を $E_i$ の像として取ればよい。
+実際、$|U_i| \to |X_i|$ は開写像である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-nonempty}
+$S$ をスキームとする。$X = \lim_{i \in I} X_i$ を、アフィンな遷移射をもつ
+$S$ 上の代数空間の有向逆系の極限とする
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}）。
+各 $X_i$ が準コンパクトかつ非空ならば、$|X|$ は非空である。
+\end{lemma}
+
+\begin{proof}
+$0 \in I$ を選ぶ。アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to X_0$ を選ぶ。
+$U_i = X_i \times_{X_0} U_0$ および $U = X \times_{X_0} U_0$ と置く。
+このとき各 $U_i$ は非空アフィンスキームである。従って
+$U = \lim U_i$ は非空であり
+（Limits, Lemma \ref{limits-lemma-limit-nonempty}）、ゆえに $X$ は非空である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-inverse-limit-irreducibles}
+$S$ をスキームとする。$X = \lim_{i \in I} X_i$ を、アフィンな遷移射をもつ
+$S$ 上の代数空間の有向逆系の極限とする
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}）。
+$x \in |X|$ とし、その像を $x_i \in |X_i|$ とする。各 $X_i$ が decent ならば、
+% P09-ERR-0066: frozen source calls these reduced induced scheme structures.
+$\overline{\{x\}} = \lim_i \overline{\{x_i\}}$ が集合として成り立ち、
+被約誘導スキーム構造を入れれば代数空間としても成り立つ。
+\end{lemma}
+
+\begin{proof}
+$Z = \overline{\{x\}} \subset |X|$ および
+$Z_i = \overline{\{x_i\}} \subset |X_i|$ と置く。
+$|X| \to |X_i|$ は連続なので、$Z$ が $Z_i$ に写ることが各 $i$ について分かる。
+従って単射 $Z \to \lim Z_i$ を得る。実際、Lemma
+\ref{spaces-limits-lemma-inverse-limit-sets} により $|X| = \lim |X_i|$ が集合として成り立つ。
+$x' \in |X|$ が $Z$ に含まれないと仮定する。
+このとき、開集合 $U \subset |X|$ で $x' \in U$ かつ $x \not \in U$ となるものがある。
+Lemma \ref{spaces-limits-lemma-topology-limit} により
+$|X| = \lim |X_i|$ が位相空間として成り立つので、
+$U = \bigcup_{j \in J} f_j^{-1}(U_j)$ と書けるような部分集合
+$J \subset I$ と開集合 $U_j \subset |X_j|$ がある。
+Topology, Lemma \ref{topology-lemma-describe-limits} を参照せよ。
+すると、ある $j \in J$ に対して $f_j(x') \in U_j$ かつ
+$f_j(x) \not \in U_j$ となる。言い換えると $f_j(x') \not \in Z_j$ である。
+従って $Z = \lim Z_i$ が集合として成り立つ。
+
+\medskip\noindent
+次に $Z$ と $Z_i$ に被約誘導スキーム構造を入れる。
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space} を参照せよ。
+遷移射 $X_{i'} \to X_i$ はアフィン射 $Z_{i'} \to Z_i$ を誘導し、
+射影 $X \to X_i$ は両立する射 $Z \to Z_i$ を誘導する。
+従って代数空間の射 $Z \to \lim Z_i \to X$ を得る。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-closed-immersions} により
+$\lim Z_i \to X$ は閉埋め込みである。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-reduced} により代数空間
+$\lim Z_i$ は被約である。上で見たように、$Z \to \lim Z_i$ は点上全単射である。
+% P09-ERR-0067: frozen source says reduced induced closed subscheme structure.
+被約誘導閉部分スキーム構造の一意性により、この射は代数空間の同型である。
+\end{proof}
+
+\begin{situation}
+\label{spaces-limits-situation-descent}
+$S$ をスキームとする。$X = \lim_{i \in I} X_i$ を、アフィンな遷移射をもつ
+$S$ 上の代数空間の有向逆系の極限とする
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}）。
+$X_i$ はすべての $i \in I$ に対して準コンパクトかつ準分離であると仮定する。
+さらに元 $0 \in I$ を選ぶ。
+\end{situation}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-section}
+記法と仮定は Situation \ref{spaces-limits-situation-descent} の通りとする。
+$\mathcal{F}_0$ を $X_0$ 上の準連接層とする。
+$\mathcal{F}_i = f_{0i}^*\mathcal{F}_0$ と $i \geq 0$ に対して置き、
+$\mathcal{F} = f_0^*\mathcal{F}_0$ と置く。このとき
+$$
+\Gamma(X, \mathcal{F}) = \colim_{i \geq 0} \Gamma(X_i, \mathcal{F}_i)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$U_0 \to X_0$ を全射エタール射で、$U_0$ がアフィンスキームであるものとして選ぶ
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}）。
+$U_i = X_i \times_{X_0} U_0$ と置く。
+$R_0 = U_0 \times_{X_0} U_0$ および $R_i = R_0 \times_{X_0} X_i$ と置く。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} の証明において、
+$X = U/R$ という表示で
+$U = \lim U_i$ および $R = \lim R_i$ を満たすものが存在することを見た。
+$U_i$ と $U$ はアフィンであり、$R_i$ と $R$ は準コンパクトかつ分離である
+（$X_i$ が準分離であるため）ことに注意する。従って
+Limits, Lemma \ref{limits-lemma-descend-section} より
+$$
+\mathcal{F}(U) = \colim \mathcal{F}_i(U_i)
+\quad\text{and}\quad
+\mathcal{F}(R) = \colim \mathcal{F}_i(R_i).
+$$
+を得る。ここで
+$\Gamma(X, \mathcal{F}) = \Ker(\mathcal{F}(U) \to \mathcal{F}(R))$
+であり、同様に
+$\Gamma(X_i, \mathcal{F}_i) =
+\Ker(\mathcal{F}_i(U_i) \to \mathcal{F}_i(R_i))$
+であるから補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-opens}
+記法と仮定は Situation \ref{spaces-limits-situation-descent} の通りとする。
+任意の準コンパクトな開部分空間 $U \subset X$ に対し、ある $i$ と
+準コンパクトな開部分空間 $U_i \subset X_i$ が存在し、その $X$ における逆像は $U$ である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} における極限の構成と、
+スキームに対する対応する結果
+Limits, Lemma \ref{limits-lemma-descend-opens} から形式的に従う。
+\end{proof}
+
+\noindent
+次の補題は、より強い Lemma \ref{spaces-limits-lemma-descend-isomorphism} によって後で置き換えられる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-equality}
+記法と仮定は Situation \ref{spaces-limits-situation-descent} の通りとする。
+$f_0 : Y_0 \to Z_0$ を $X_0$ 上の代数空間の射とする。
+(a) $Y_0 \to X_0$ と $Z_0 \to X_0$ が表現可能であり、(b)
+$Y_0$, $Z_0$ が準コンパクトかつ準分離であり、(c)
+$f_0$ が局所有限表示であり、かつ
+(d) $Y_0 \times_{X_0} X \to Z_0 \times_{X_0} X$ が同型であると仮定する。
+このとき、ある $i \geq 0$ に対して
+$Y_0 \times_{X_0} X_i \to Z_0 \times_{X_0} X_i$ は同型である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $U_0$ と全射エタール射 $U_0 \to X_0$ を選ぶ。
+$U_i = U_0 \times_{X_0} X_i$ および $U = U_0 \times_{X_0} X$ と置く。
+Limits, Lemma \ref{limits-lemma-descend-isomorphism} を適用すると、
+$Y_0 \times_{X_0} U_i \to Z_0 \times_{X_0} U_i$ が、ある
+$i \geq 0$ に対してスキームの同型であることが分かる（詳細は省略する）。
+$U_i \to X_i$ は全射エタールなので、
+$Y_0 \times_{X_0} X_i \to Z_0 \times_{X_0} X_i$ は同型である
+（詳細は省略する）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-separated}
+記法と仮定は Situation \ref{spaces-limits-situation-descent} の通りとする。
+$X$ が分離ならば、$X_i$ が分離となるような $i \in I$ が存在する。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $U_0$ と全射エタール射 $U_0 \to X_0$ を選ぶ。
+$i \geq 0$ に対して $U_i = U_0 \times_{X_0} X_i$ と置き、
+$U = U_0 \times_{X_0} X$ と置く。$U_i$ と $U$ はアフィンスキームであり、
+それぞれ全射エタール射 $U_i \to X_i$ および $U \to X$ を備えることに注意する。
+$R_i = U_i \times_{X_i} U_i$ および $R = U \times_X U$ と置き、射影を
+$s_i, t_i : R_i \to U_i$ および $s, t : R \to U$ と書く。
+$R_i$ と $R$ は準コンパクトな分離スキームであることに注意する
+（代数空間 $X_i$ と $X$ が準分離であるため）。射
+$s_i : R_i \to U_i$ と $s : R \to U$ は有限型である。
+定義により、$X_i$ が分離であることと
+$(t_i, s_i) : R_i \to U_i \times U_i$
+が閉埋め込みであることは同値である。また仮定により $X$ は分離なので、
+射 $(t, s) : R \to U \times U$ は閉埋め込みである。
+$R \to U$ は有限型であるから、ある $i$ が存在して、射
+$R \to U_i \times U$ は閉埋め込みとなる
+（Limits, Lemma \ref{limits-lemma-finite-type-eventually-closed}）。
+そのような $i \in I$ を固定する。Limits, Lemma
+\ref{limits-lemma-descend-closed-immersion-finite-presentation} を、射の系
+$R_{i'} \to U_i \times U_{i'}$（$i' \geq i$）に適用する
+（実際
+$R_{i'} = R_i \times_{U_i \times U_i} U_i \times U_{i'}$
+なので適用できる）。すると、$R_{i'} \to U_i \times U_{i'}$ が
+十分大きな $i'$ に対して閉埋め込みであることが分かる。
+これは直ちに $R_{i'} \to U_{i'} \times U_{i'}$ が閉埋め込みであることを含意し、
+補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-is-affine}
+記法と仮定は Situation \ref{spaces-limits-situation-descent} の通りとする。
+$X$ がアフィンならば、ある $i$ が存在して $X_i$ はアフィンとなる。
+\end{lemma}
+
+\begin{proof}
+$0 \in I$ を選ぶ。アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to X_0$ を選ぶ。$U = U_0 \times_{X_0} X$ および
+$U_i = U_0 \times_{X_0} X_i$（$i \geq 0$）と置く。
+遷移射はアフィンなので、代数空間 $U_i$ と $U$ はアフィンである。
+従って $U \to X$ はアフィンスキームのエタール射である。それゆえ
+$X = \Spec(A)$、$U = \Spec(B)$ と書け、
+$$
+B = A[x_1, \ldots, x_n]/(g_1, \ldots, g_n)
+$$
+で、$\Delta = \det(\partial g_\lambda/\partial x_\mu)$ が $B$ で可逆となるようにできる。
+Algebra, Lemma \ref{algebra-lemma-etale-standard-smooth} を参照せよ。
+$A_i = \mathcal{O}_{X_i}(X_i)$ と置く。Lemma \ref{spaces-limits-lemma-descend-section} により
+$A = \colim A_i$ である。$0$ を大きくすれば、
+$g_{1, i}, \ldots, g_{n, i} \in A_i[x_1, \ldots, x_n]$ で
+$g_1, \ldots, g_n$ に写るものがあると仮定してよい。そこで
+$$
+B_i = A_i[x_1, \ldots, x_n]/(g_{1, i}, \ldots, g_{n, i})
+$$
+とすべての $i \geq 0$ に対して置く。必要なら $0$ を大きくして、
+$\Delta_i = \det(\partial g_{\lambda, i}/\partial x_\mu)$ が
+$B_i$ で可逆であることを、すべての $i \geq 0$ に対して仮定してよい。
+従って $A_i \to B_i$ はエタールな環準同型である。
+さらに $0$ を大きくして、
+$\Spec(B_i) \to \Spec(A_i)$ が全射であると仮定してよい。
+Limits, Lemma \ref{limits-lemma-descend-surjective} を参照せよ。
+もう一度 $0$ を大きくすれば、元
+$h_{1, i}, \ldots, h_{n, i} \in \mathcal{O}_{U_i}(U_i)$ で、
+$x_1, \ldots, x_n$ の $B = \mathcal{O}_U(U)$ における類に写り、かつ
+$g_{\lambda, i}(h_{\nu, i}) = 0$ が $\mathcal{O}_{U_i}(U_i)$ で成り立つものを選べる。
+% P09-ERR-0068: frozen source supplies only h_{nu,i}, not the full coordinate tuple.
+従って可換図式
+\begin{equation}
+\label{spaces-limits-equation-to-show-cartesian}
+\vcenter{
+\xymatrix{
+X_i \ar[d] & U_i \ar[l] \ar[d] \\
+\Spec(A_i) & \Spec(B_i) \ar[l]
+}
+}
+\end{equation}
+を得る。構成により $B_i = B_0 \otimes_{A_0} A_i$ および
+$B = B_0 \otimes_{A_0} A$ である。射
+$$
+f_0 : U_0 \longrightarrow X_0 \times_{\Spec(A_0)} \Spec(B_0)
+$$
+を考える。これは準コンパクトかつ準分離な代数空間の射であり、
+$X_0$ 上表現可能、分離、かつエタールである。選択により、$f_0$ の
+$X$ への基底変換は同型である。従って Lemma \ref{spaces-limits-lemma-descend-equality} により、
+ある $i$ が存在して、$f_0$ の $X_i$ への基底変換は同型となる。言い換えれば、
+図式 (\ref{spaces-limits-equation-to-show-cartesian}) はカルテジアンである。
+従って Descent, Lemma \ref{descent-lemma-descent-data-sheaves} を
+fppf 被覆 $\{\Spec(B_i) \to \Spec(A_i)\}$ に適用し、Descent, Lemma
+\ref{descent-lemma-affine} と組み合わせると、
+$X_i \to \Spec(A_i)$ はスキームで表現可能であり、望む通り
+$\Spec(A_i)$ 上アフィンである。（もちろん、このとき
+$X_i = \Spec(A_i)$ も従うが、これは必要ない。）
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-is-scheme}
+記法と仮定は Situation \ref{spaces-limits-situation-descent} の通りとする。
+$X$ がスキームならば、ある $i$ が存在して $X_i$ はスキームとなる。
+\end{lemma}
+
+\begin{proof}
+有限アフィン開被覆 $X = \bigcup W_j$ を選ぶ。
+Lemma \ref{spaces-limits-lemma-descend-opens} により、ある $i \in I$ と開部分空間
+$W_{j, i} \subset X_i$ で、$X$ への基底変換が $W_j \to X$ となるものを選べる。
+Lemma \ref{spaces-limits-lemma-limit-is-affine} により、各 $W_{j, i}$ がアフィンスキームであると
+仮定してよい。これは $X_i$ がスキームであることを意味する
+（例えば Properties of Spaces, Section
+\ref{spaces-properties-section-schematic} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-type-eventually-closed}
+$S$ をスキームとする。$B$ を $S$ 上の代数空間とする。
+$X = \lim X_i$ を、アフィンな遷移射をもつ $B$ 上の代数空間の有向極限とする。
+$Y \to X$ を $B$ 上の代数空間の射とする。
+\begin{enumerate}
+\item $Y \to X$ が閉埋め込み、$X_i$ が準コンパクト、かつ
+$Y \to B$ が局所有限型ならば、$Y \to X_i$ は十分大きな $i$ に対して
+閉埋め込みである。
+\item $Y \to X$ が埋め込み、$X_i$ が準分離、$Y \to B$ が
+局所有限型、かつ $Y$ が準コンパクトならば、$Y \to X_i$ は
+十分大きな $i$ に対して埋め込みである。
+\item $Y \to X$ が同型、$X_i$ が準コンパクト、
+$X_i \to B$ が局所有限型、遷移射
+$X_{i'} \to X_i$ が閉埋め込み、かつ $Y \to B$ が局所有限表示ならば、
+$Y \to X_i$ は十分大きな $i$ に対して同型である。
+\item $Y \to X$ が単射態射、$X_i$ が準分離、
+$Y \to B$ が局所有限型、かつ $Y$ が準コンパクトならば、
+$Y \to X_i$ は十分大きな $i$ に対して単射態射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$0 \in I$ を選ぶ。$X_0$ は準コンパクトなので、アフィンスキーム
+$W$ とエタール射 $W \to B$ で、$|X_0| \to |B|$ の像が
+$|W| \to |B|$ の像に含まれるものを選べる。
+アフィンスキーム $U_0$ とエタール射
+$U_0 \to X_0 \times_B W$ で、$U_0 \to X_0$ が全射となるものを選ぶ。
+（$W$ の選び方と $X_0$ が準コンパクトであることにより可能である。詳細は省略する。）
+$V \to Y$、$U \to X$、$U_i \to X_i$ を、それぞれ
+$U_0 \to X_0$ の基底変換とする（$i \geq 0$）。
+$V \to U_i$ が十分大きな $i$ に対して閉埋め込みであることを示せば十分である。
+従って $V \to U = \lim U_i$ に対する $W$ 上の結果に帰着する。
+これはスキームの場合、すなわち
+Limits, Lemma \ref{limits-lemma-finite-type-eventually-closed} から従う。
+
+\medskip\noindent
+(2) の証明。$0 \in I$ を選ぶ。準コンパクトな開部分空間
+$X'_0 \subset X_0$ で、$Y \to X_0$ が $X'_0$ を経由するものを選ぶ。
+$X_i$ を $X'_0$ の逆像で置き換えた後（$i \geq 0$）、
+すべての $X_i'$ が準コンパクトかつ準分離であると仮定してよい。
+% P09-ERR-0069: frozen source refers to undefined X_i' after replacing X_i.
+$U \subset X$ を準コンパクトな開集合で、$Y \to X$ が閉埋め込み
+$Y \to U$ を経由するものとする（そのような $U$ は $Y$ が準コンパクトなので存在する）。
+Lemma \ref{spaces-limits-lemma-descend-opens} により、$U = \lim U_i$ で、
+$U_i \subset X_i$ が準コンパクトな開集合であると仮定してよい。
+(1) により、$Y \to U_i$ はある $i$ に対して閉埋め込みである。
+従って (2) が成り立つ。
+
+\medskip\noindent
+(3) の証明。$0 \in I$ を選ぶ。アフィンスキーム $U_0$ と
+全射エタール射 $U_0 \to X_0$ を選ぶ。
+$U_i = X_i \times_{X_0} U_0$、
+$U = X \times_{X_0} U_0 = Y \times_{X_0} U_0$ と置く。
+このとき $U = \lim U_i$ はアフィンスキームの極限であり、系の遷移射は閉埋め込みで、
+$U \to U_0$ は有限表示である（これは $U \to B$ が局所有限表示であり、
+$U_0 \to B$ が局所有限型であることと、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-permanence} による）。
+従って次の代数的事実に帰着した。$A = \lim A_i$ が、全射な遷移写像をもつ
+% P09-ERR-0070: frozen source calls this a colimit but prints lim rather than colim.
+$R$-代数の有向余極限であり、$A$ が $A_0$ 上有限表示ならば、
+$A = A_i$ がある $i$ に対して成り立つ。実際、$A = A_0/(f_1, \ldots, f_n)$ と書く。
+ある $i$ を、$f_1, \ldots, f_n$ が全射写像 $A_0 \to A_i$ のもとで零に写るように選ぶ。
+
+\medskip\noindent
+(4) の証明。$Z_i = Y \times_{X_i} Y$ と置く。
+遷移射 $X_{i'} \to X_i$ はアフィン、従って分離なので、遷移射
+$Z_{i'} \to Z_i$ は閉埋め込みである。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map} を参照せよ。
+$\lim Z_i = Y \times_X Y = Y$ である。これは $Y \to X$ が単射態射だからである。
+$0 \in I$ を選ぶ。$Y \to X_0$ は局所有限型なので
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-permanence-finite-type}）、射 $Y \to Z_0$ は
+局所有限表示である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}）。
+射 $Z_i \to Z_0$ は局所有限型である（閉埋め込みだからである）。
+最後に、$Z_i = Y \times_{X_i} Y$ は、$X_i$ が準分離で $Y$ が準コンパクトなので
+準コンパクトである。従って $Y = \lim_{i \geq 0} Z_i$ に (3) を
+$Z_0$ 上で適用すると、$Y = Z_i$ がある $i$ に対して成り立つ。
+これで (4) と補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-separated}
+$S$ をスキームとする。$Y$ を $S$ 上の代数空間とする。
+$X = \lim X_i$ を、アフィンな遷移射をもつ $Y$ 上の代数空間の有向極限とする。
+次を仮定する。
+\begin{enumerate}
+\item $Y$ は準分離である。
+\item $X_i$ は準コンパクトかつ準分離である。
+\item 射 $X \to Y$ は分離である。
+\end{enumerate}
+このとき、$X_i \to Y$ は十分大きなすべての $i$ に対して分離である。
+\end{lemma}
+
+\begin{proof}
+$0 \in I$ とする。アフィンスキーム $W$ とエタール射
+$W \to Y$ で、$|W| \to |Y|$ の像が $|X_0| \to |Y|$ の像を含むものを選ぶ。
+$X_0$ が準コンパクトなので、これは可能である。
+$W \times_Y X_i \to W$ がある $i \geq 0$ に対して分離であることを
+確認すれば十分である。なぜなら、$W \times_Y X_i$ の $W$ 上の対角射は、
+$X_i \to X_i \times_Y X_i$ を全射エタール射
+$(X_i \times_Y X_i) \times_Y W \to X_i \times_Y X_i$ によって
+基底変換したものだからである。
+$Y$ は準分離なので、代数空間 $W \times_Y X_i$ は準コンパクトである
+（また準分離でもある）。従って $W$ へ基底変換して、$Y$ がアフィンスキームであると
+仮定してよい。$Y$ がアフィンスキームならば、$X_i$ が十分大きな $i$ に対して
+分離代数空間であることを示せばよく、$X$ が分離代数空間であることが与えられている。
+従ってこの場合は Lemma \ref{spaces-limits-lemma-descend-separated} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-affine}
+$S$ をスキームとする。$Y$ を $S$ 上の代数空間とする。
+$X = \lim X_i$ を、アフィンな遷移射をもつ $Y$ 上の代数空間の有向極限とする。
+次を仮定する。
+\begin{enumerate}
+\item $Y$ は準コンパクトかつ準分離である。
+\item $X_i$ は準コンパクトかつ準分離である。
+\item $X \to Y$ はアフィンである。
+\end{enumerate}
+このとき、$X_i \to Y$ は十分大きな $i$ に対してアフィンである。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $W$ と全射エタール射 $W \to Y$ を選ぶ。
+このとき $X \times_Y W$ はアフィンであり、$X_i \times_Y W$ が
+ある $i$ に対してアフィンであることを確認すれば十分である
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-affine-local}）。
+これは Lemma \ref{spaces-limits-lemma-limit-is-affine} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-finite}
+$S$ をスキームとする。$Y$ を $S$ 上の代数空間とする。
+$X = \lim X_i$ を、アフィンな遷移射をもつ $Y$ 上の代数空間の有向極限とする。
+次を仮定する。
+\begin{enumerate}
+\item $Y$ は準コンパクトかつ準分離である。
+\item $X_i$ は準コンパクトかつ準分離である。
+\item 遷移射 $X_{i'} \to X_i$ は有限である。
+\item $X_i \to Y$ は局所有限型である。
+\item $X \to Y$ は整である。
+\end{enumerate}
+このとき、$X_i \to Y$ は十分大きな $i$ に対して有限である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $W$ と全射エタール射 $W \to Y$ を選ぶ。
+このとき $X \times_Y W$ は $W$ 上有限であり、$X_i \times_Y W$ が
+$W$ 上有限となるような $i$ が存在することを確認すれば十分である
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local}）。
+Lemma \ref{spaces-limits-lemma-limit-is-scheme} により、これはスキームの場合に帰着する。
+スキームの場合は Limits, Lemma \ref{limits-lemma-eventually-finite} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-closed-immersion}
+$S$ をスキームとする。$Y$ を $S$ 上の代数空間とする。
+$X = \lim X_i$ を、アフィンな遷移射をもつ $Y$ 上の代数空間の有向極限とする。
+次を仮定する。
+\begin{enumerate}
+\item $Y$ は準コンパクトかつ準分離である。
+\item $X_i$ は準コンパクトかつ準分離である。
+\item 遷移射 $X_{i'} \to X_i$ は閉埋め込みである。
+\item $X_i \to Y$ は局所有限型である。
+\item $X \to Y$ は閉埋め込みである。
+\end{enumerate}
+このとき、$X_i \to Y$ は十分大きな $i$ に対して閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $W$ と全射エタール射 $W \to Y$ を選ぶ。
+このとき $X \times_Y W$ は $W$ の閉部分空間であり、
+$X_i \times_Y W$ が閉部分空間 $W$ となるような $i$ が存在することを
+確認すれば十分である。
+% P09-ERR-0071: frozen source omits "of" before W in "a closed subspace W".
+（Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-closed-immersion-local}）。
+Lemma \ref{spaces-limits-lemma-limit-is-scheme} により、これはスキームの場合に帰着する。
+スキームの場合は Limits, Lemma \ref{limits-lemma-eventually-closed-immersion} から従う。
+\end{proof}
+
+\section{射の性質の降下}
+\label{spaces-limits-section-descent-of-properties}
+
+\noindent
+本節は、射の性質についての Section \ref{spaces-limits-section-descent} の類似である。
+次の状況のもとで議論する。
+
+\begin{situation}
+\label{spaces-limits-situation-descent-property}
+$S$ をスキームとする。$B = \lim B_i$ を、アフィンな遷移射をもつ
+$S$ 上の代数空間の有向逆系の極限とする
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}）。
+$0 \in I$ とし、$f_0 : X_0 \to Y_0$ を $B_0$ 上の代数空間の射とする。
+$B_0$, $X_0$, $Y_0$ は準コンパクトかつ準分離であると仮定する。
+$f_i : X_i \to Y_i$ を $f_0$ の $B_i$ への基底変換とし、
+$f : X \to Y$ を $f_0$ の $B$ への基底変換とする。
+\end{situation}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-etale}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ はエタールである。
+\item $f_0$ は局所有限表示である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対してエタールである。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to V_0 \times_{Y_0} X_0$ を選ぶ。図式
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+構成により縦の矢印は全射かつエタールである。
+この図式を $B_i$ または $B$ へ基底変換すると
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+を得る。$U_i, V_i, U, V$ はアフィンスキームであり、縦の射は全射エタールで、
+射 $U_i \to V_i$ の極限は $U \to V$ であることに注意する。
+$X_i \to Y_i$ がエタールであることと $U_i \to V_i$ がエタールであることは同値であり、
+同様に $X \to Y$ がエタールであることと $U \to V$ がエタールであることは同値である
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-etale-local}）。
+$f_0$ は局所有限表示なので、射 $U_0 \to V_0$ もそうである。
+従って補題は Limits, Lemma \ref{limits-lemma-descend-etale} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-smooth}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は滑らかである。
+\item $f_0$ は局所有限表示である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して滑らかである。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to V_0 \times_{Y_0} X_0$ を選ぶ。図式
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+構成により縦の矢印は全射かつエタールである。
+この図式を $B_i$ または $B$ へ基底変換すると
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+を得る。$U_i, V_i, U, V$ はアフィンスキームであり、縦の射は全射エタールで、
+射 $U_i \to V_i$ の極限は $U \to V$ であることに注意する。
+$X_i \to Y_i$ が滑らかであることと $U_i \to V_i$ が滑らかであることは同値であり、
+同様に $X \to Y$ が滑らかであることと $U \to V$ が滑らかであることは同値である
+（Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-smooth}）。
+$f_0$ は局所有限表示なので、射 $U_0 \to V_0$ もそうである。
+従って補題は Limits, Lemma \ref{limits-lemma-descend-smooth} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-surjective}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は全射である。
+\item $f_0$ は局所有限表示である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して全射である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to V_0 \times_{Y_0} X_0$ を選ぶ。図式
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+構成により縦の矢印は全射かつエタールである。
+この図式を $B_i$ または $B$ へ基底変換すると
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+を得る。$U_i, V_i, U, V$ はアフィンスキームであり、縦の射は全射エタールで、
+射 $U_i \to V_i$ の極限は $U \to V$ であり、さらに射
+$U_i \to X_i \times_{Y_i} V_i$ および
+$U \to X \times_Y V$ は全射である（これらは
+$U_0 \to X_0 \times_{Y_0} V_0$ の基底変換だからである）。特に、
+$X_i \to Y_i$ が全射であることと $U_i \to V_i$ が全射であることは同値であり、
+同様に $X \to Y$ が全射であることと $U \to V$ が全射であることは同値である。
+$f_0$ は局所有限表示なので、射 $U_0 \to V_0$ もそうである。
+従って補題はスキームの場合
+（Limits, Lemma \ref{limits-lemma-descend-surjective}）から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-universally-injective}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は普遍的単射である。
+\item $f_0$ は局所有限型である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して普遍的単射である。
+\end{lemma}
+
+\begin{proof}
+射 $X \to Y$ が普遍的単射であることと、対角射
+$X \to X \times_Y X$ が全射であることは同値であることを思い出す
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-universally-injective} および
+Lemma \ref{spaces-morphisms-lemma-universally-injective}）。
+% P09-ERR-0072: frozen source says "is of locally of finite presentation".
+$X_0 \to X_0 \times_{Y_0} X_0$ は局所有限表示のであることに注意する
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type}）。
+従って、射 $X_0 \to X_0 \times_{Y_0} X_0$ を考えれば、
+Lemma \ref{spaces-limits-lemma-descend-surjective} から補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-affine}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+$f$ がアフィンならば、$f_i$ はある $i \geq 0$ に対してアフィンである。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+$V_i = V_0 \times_{Y_0} Y_i$ および $V = V_0 \times_{Y_0} Y$ と置く。
+$f$ はアフィンなので、$V \times_Y X = \lim V_i \times_{Y_i} X_i$ はアフィンである。
+Lemma \ref{spaces-limits-lemma-limit-is-affine} により、$V_i \times_{Y_i} X_i$ は
+ある $i \geq 0$ に対してアフィンである。この $i$ に対して射 $f_i$ はアフィンである
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-affine-local}）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-finite}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は有限である。
+\item $f_0$ は局所有限型である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して有限である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+$V_i = V_0 \times_{Y_0} Y_i$ および $V = V_0 \times_{Y_0} Y$ と置く。
+$f$ は有限なので、$V \times_Y X = \lim V_i \times_{Y_i} X_i$ は
+$V$ 上有限なスキームである。Lemma \ref{spaces-limits-lemma-limit-is-affine} により、
+$V_i \times_{Y_i} X_i$ はある $i \geq 0$ に対してアフィンである。
+必要なら $i$ を大きくすれば、Limits, Lemma
+\ref{limits-lemma-descend-finite-finite-presentation} により
+$V_i \times_{Y_i} X_i \to V_i$ は有限である。
+この $i$ に対して射 $f_i$ は有限である
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local}）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-closed-immersion}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は閉埋め込みである。
+\item $f_0$ は局所有限型である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+$V_i = V_0 \times_{Y_0} Y_i$ および $V = V_0 \times_{Y_0} Y$ と置く。
+$f$ は閉埋め込みなので、
+$V \times_Y X = \lim V_i \times_{Y_i} X_i$ はアフィンスキーム $V$ の閉部分スキームである。
+Lemma \ref{spaces-limits-lemma-limit-is-affine} により、$V_i \times_{Y_i} X_i$ は
+ある $i \geq 0$ に対してアフィンである。必要なら $i$ を大きくすれば、
+Limits, Lemma \ref{limits-lemma-descend-closed-immersion-finite-presentation} により
+$V_i \times_{Y_i} X_i \to V_i$ は閉埋め込みである。
+この $i$ に対して射 $f_i$ は閉埋め込みである
+% P09-ERR-0073: frozen source cites the locality lemma for integral morphisms here.
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local}）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-separated-morphism}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+$f$ が分離ならば、$f_i$ はある $i \geq 0$ に対して分離である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-descend-closed-immersion} を対角射
+$\Delta_{X_0/Y_0} : X_0 \to X_0 \times_{Y_0} X_0$ に適用する。
+（対角射は局所有限型であり、ファイバー積
+$X_0 \times_{Y_0} X_0$ は準コンパクトかつ準分離である。詳細の一部は省略する。）
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-isomorphism}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は同型である。
+\item $f_0$ は局所有限表示である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して同型である。
+\end{lemma}
+
+\begin{proof}
+同型であることは、エタール、普遍的単射、かつ全射であることと同値である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-universally-injective-open} を参照せよ。
+従って補題は Lemmas \ref{spaces-limits-lemma-descend-etale},
+\ref{spaces-limits-lemma-descend-surjective}, and
+\ref{spaces-limits-lemma-descend-universally-injective} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-monomorphism}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は単射態射である。
+\item $f_0$ は局所有限型である。
+\end{enumerate}
+ならば、$f_i$ はある $i \geq 0$ に対して単射態射である。
+\end{lemma}
+
+\begin{proof}
+射が単射態射であることと、その対角射が同型であることは同値であることを思い出す。
+射 $X_0 \to X_0 \times_{Y_0} X_0$ は、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type} により局所有限表示である。
+$X_0 \times_{Y_0} X_0$ は準コンパクトかつ準分離なので、
+Lemma \ref{spaces-limits-lemma-descend-isomorphism} から、
+$\Delta_i : X_i \to X_i \times_{Y_i} X_i$ がある $i \geq 0$ に対して同型であると分かる。
+この $i$ に対して射 $f_i$ は単射態射である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-flat}
+記法と仮定は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+$\mathcal{F}_0$ を準連接 $\mathcal{O}_{X_0}$-加群とし、
+$\mathcal{F}_i$ で $X_i$ への引き戻しを、$\mathcal{F}$ で
+$X$ への引き戻しを表す。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は $Y$ 上平坦である。
+\item $\mathcal{F}_0$ は有限表示である。
+\item $f_0$ は局所有限表示である。
+\end{enumerate}
+このとき、$\mathcal{F}_i$ は $Y_i$ 上で、ある $i \geq 0$ に対して平坦である。
+特に、$f_0$ が局所有限表示で $f$ が平坦ならば、
+$f_i$ はある $i \geq 0$ に対して平坦である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to V_0 \times_{Y_0} X_0$ を選ぶ。図式
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+構成により縦の矢印は全射かつエタールである。
+この図式を $B_i$ または $B$ へ基底変換すると
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+を得る。$U_i, V_i, U, V$ はアフィンスキームであり、縦の射は全射エタールで、
+射 $U_i \to V_i$ の極限は $U \to V$ であることに注意する。
+$\mathcal{F}_i$ が $Y_i$ 上平坦であることと
+$\mathcal{F}_i|_{U_i}$ が $V_i$ 上平坦であることは同値であり、同様に
+$\mathcal{F}$ が $Y$ 上平坦であることと $\mathcal{F}|_U$ が $V$ 上平坦であることは同値である
+（Morphisms of Spaces, Definition \ref{spaces-morphisms-definition-flat}）。
+$f_0$ は局所有限表示なので、射 $U_0 \to V_0$ もそうである。
+従って補題は Limits, Lemma
+\ref{limits-lemma-descend-module-flat-finite-presentation} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-proper}
+仮定と記法は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+\begin{enumerate}
+\item $f$ は固有である。
+\item $f_0$ は局所有限型である。
+\end{enumerate}
+このとき、ある $i$ が存在して $f_i$ は固有である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+$V_i = Y_i \times_{Y_0} V_0$ および $V = Y \times_{Y_0} V_0$ と置く。
+$f_i$ の $V_i$ への基底変換が固有であることを証明すれば十分である。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-proper-local} を参照せよ。
+従って $Y_0$ はアフィンであると仮定してよい。
+
+\medskip\noindent
+Lemma \ref{spaces-limits-lemma-descend-separated-morphism} により、$f_i$ はある
+$i \geq 0$ に対して分離である。$0$ を $i$ で置き換えて、
+$f_0$ が分離であると仮定してよい。$f_0$ は準コンパクトであることに注意する。
+従って $f_0$ は分離かつ有限型である。Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow} により、図式
+$$
+\xymatrix{
+X_0 \ar[rd] & X_0' \ar[d] \ar[l]^\pi \ar[r] & \mathbf{P}^n_{Y_0} \ar[dl] \\
+& Y_0 &
+}
+$$
+を選べる。ここで $X_0' \to \mathbf{P}^n_{Y_0}$ は埋め込みであり、
+$\pi : X_0' \to X_0$ は固有かつ全射である。
+$X' = X_0' \times_{Y_0} Y$ および $X_i' = X_0' \times_{Y_0} Y_i$ を導入する。
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-proper} および
+\ref{spaces-morphisms-lemma-base-change-proper} により、$X' \to Y$ は固有である。
+従って $X' \to \mathbf{P}^n_Y$ は閉埋め込みである
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence}）。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-image-proper-is-proper} により、
+$X'_i \to Y_i$ がある $i$ に対して固有であることを証明すれば十分である。
+Lemma \ref{spaces-limits-lemma-descend-closed-immersion} により、
+$X'_i \to \mathbf{P}^n_{Y_i}$ は十分大きな $i$ に対して閉埋め込みである。
+従って $X'_i \to Y_i$ は固有であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-relative-dimension}
+仮定と記法は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+$d \geq 0$ とする。
+\begin{enumerate}
+\item $f$ の相対次元は $\leq d$ である
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension}）。
+\item $f_0$ は局所有限型である。
+\end{enumerate}
+ならば、ある $i$ が存在して $f_i$ の相対次元は $\leq d$ である。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V_0$ と全射エタール射 $V_0 \to Y_0$ を選ぶ。
+アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to V_0 \times_{Y_0} X_0$ を選ぶ。図式
+$$
+\xymatrix{
+U_0 \ar[d] \ar[r] & V_0 \ar[d] \\
+X_0 \ar[r] & Y_0
+}
+$$
+構成により縦の矢印は全射かつエタールである。
+この図式を $B_i$ または $B$ へ基底変換すると
+$$
+\vcenter{
+\xymatrix{
+U_i \ar[d] \ar[r] & V_i \ar[d] \\
+X_i \ar[r] & Y_i
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+}
+$$
+を得る。$U_i, V_i, U, V$ はアフィンスキームであり、縦の射は全射エタールで、
+射 $U_i \to V_i$ の極限は $U \to V$ であることに注意する。
+この状況では、$X_i \to Y_i$ の相対次元が $\leq d$ であることと、
+$U_i \to V_i$ の相対次元が $\leq d$ であることは同値である
+（Morphisms, Definition \ref{morphisms-definition-relative-dimension-d} の意味で）。
+この同値性を見るには、代数空間の射に対する定義が Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre} を含み、そこではエタール局所化を
+用いていることを使う。同じことが $X \to Y$ と $U \to V$ に対しても成り立つ。
+$f_0$ は局所有限型なので、射 $U_0 \to V_0$ もそうである。
+従って補題は、より一般的な Limits, Lemma
+\ref{limits-lemma-limit-dimension} から従う。
+\end{proof}
+
+\section{相対対象の降下}
+\label{spaces-limits-section-descending-relative}
+
+\noindent
+次の補題は、本節に現れる種類の結果の典型である。
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-finite-presentation}
+$S$ をスキームとする。$I$ を有向集合とする。
+$(X_i, f_{ii'})$ を、$I$ 上の、$S$ 上の代数空間からなる逆系とする。
+次を仮定する。
+\begin{enumerate}
+\item 射 $f_{ii'} : X_i \to X_{i'}$ はアフィンである。
+\item 空間 $X_i$ は準コンパクトかつ準分離である。
+\end{enumerate}
+$X = \lim_i X_i$ と置く。このとき、$X$ 上有限表示な代数空間の圏は、
+$I$ 上で取った $X_i$ 上有限表示な代数空間の圏の余極限である。
+\end{lemma}
+
+\begin{proof}
+$0 \in I$ を選ぶ。全射エタール射 $U_0 \to X_0$ で、$U_0$ が
+アフィンスキームであるものを選ぶ（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}）。
+$U_i = X_i \times_{X_0} U_0$ と置く。$R_0 = U_0 \times_{X_0} U_0$ および
+$R_i = R_0 \times_{X_0} X_i$ と置く。二つの射影を
+$s_i, t_i : R_i \to U_i$ および $s, t : R \to U$ と書く。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} の証明で、
+$X = U/R$ という表示で $U = \lim U_i$ および $R = \lim R_i$ を満たすものが
+存在することを見た。$U_i$ と $U$ はアフィンであり、$R_i$ と $R$ は
+準コンパクトかつ分離である（$X_i$ が準分離であるため）ことに注意する。
+$Y$ を $S$ 上の代数空間とし、$Y \to X$ を有限表示の射とする。
+$V = U \times_X Y$ と置く。これは $U$ 上有限表示な代数空間である。
+アフィンスキーム $W$ と全射エタール射 $W \to V$ を選ぶ。
+このとき $W \to Y$ も全射エタールである。$R' = W \times_Y W$ と置けば
+$Y = W/R'$ である（Spaces, Section \ref{spaces-section-presentations} を参照）。
+$W$ は $U$ 上有限表示なスキームで、$R'$ は $R$ 上有限表示なスキームである
+（詳細は省略する）ことに注意する。
+Limits, Lemma \ref{limits-lemma-descend-finite-presentation} により、ある添字 $i$ と、
+有限表示なスキームの射 $W_i \to U_i$ で、その $U$ への基底変換が
+$W \to U$ となるものを見つけられる。同様に、必要なら $i$ を大きくして、
+スキーム $R'_i$ で $R_i$ 上有限表示であり、その $R$ への基底変換が $R'$ となるものを
+見つけられる。射影 $s', t' : R' \to W$ は、射影
+$s, t : R \to U$ 上の射である。従って $s'$ および $t'$ を、それぞれ
+$U$ 上有限表示なスキームの間の射とみなせる
+（$R' \to U$ の構造射は $R' \to R$ に $s$ または $t$ を続けたものとする）。
+従って Limits, Lemma \ref{limits-lemma-descend-finite-presentation} を再び適用すると、
+必要なら $i$ を大きくして、射 $s'_i, t'_i : R'_i \to W_i$ で、その
+$U$ への基底変換が $S', t'$ となるものが存在することが分かる。
+% P09-ERR-0074: frozen source uses undefined uppercase S' instead of s'.
+Limits, Lemmas \ref{limits-lemma-descend-etale} および
+\ref{limits-lemma-descend-monomorphism} により、$s'_i, t'_i$ はエタールであり、
+$j'_i : R'_i \to W_i \times_{X_i} W_i$ は単射態射であると仮定してよい
+（ここで $j'_i$ は、いずれか一方の射影を通じて $U_i$ 上有限表示なスキームの射と
+みなす。どちらを選ぶかは問題ではない）。
+$Y_i = W_i/R'_i$ と置くと（Spaces, Theorem
+\ref{spaces-theorem-presentation} を参照）、$X_i$ 上有限表示な代数空間で、
+$X$ への基底変換が $Y$ と同型なものを得る。
+
+\medskip\noindent
+以上により、$X$ 上有限表示な任意の代数空間は、ある $X_i$ 上有限表示な
+代数空間から来る。すなわち、補題の関手が本質的全射であることが分かった。
+これが忠実充満であることを示すため、添字 $0 \in I$ と、二つの代数空間
+$Y_0, Z_0$ で $X_0$ 上有限表示なものを考える。
+$Y_i = X_i \times_{X_0} Y_0$、$Y = X \times_{X_0} Y_0$、
+$Z_i = X_i \times_{X_0} Z_0$、および $Z = X \times_{X_0} Z_0$ と置く。
+$\alpha : Y \to Z$ を $X$ 上の代数空間の射とする。
+全射エタール射 $V_0 \to Y_0$ で $V_0$ がアフィンスキームであるものを選ぶ。
+$V_i = V_0 \times_{Y_0} Y_i$ および $V = V_0 \times_{Y_0} Y$ と置く。
+これらは $Y_i$ および $Y$ への全射エタール射を備えたアフィンスキームである。
+合成 $V \to Y \to Z \to Z_0$ は、
+% P09-ERR-0075: frozen source twice uses "a (essentially unique)" before a vowel sound.
+（本質的に一意な）射 $V_i \to Z_0$ から、ある $i \geq 0$ に対して来る。これは Proposition
+\ref{spaces-limits-proposition-characterize-locally-finite-presentation} を、仮定により有限表示な
+$Z_0 \to X_0$ に適用したものである。
+$i$ を大きくすれば、二つの合成
+$$
+V_i \times_{Y_i} V_i \to V_i \to Z_0
+$$
+は、極限でそうであるから等しい。従って（本質的に一意な）射
+$Y_i \to Z_0$ を得る。これは $X_0$ 上の射なので、望む通り
+$Z_i = Z_0 \times_{X_0} X_i$ への射を誘導する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-modules-finite-presentation}
+記法と仮定は Lemma \ref{spaces-limits-lemma-descend-finite-presentation} の通りとする。
+有限表示な $\mathcal{O}_X$-加群の圏は、$I$ 上で取った有限表示な
+$\mathcal{O}_{X_i}$-加群の圏の余極限である。
+\end{lemma}
+
+\begin{proof}
+$0 \in I$ を選ぶ。アフィンスキーム $U_0$ と全射エタール射
+$U_0 \to X_0$ を選ぶ。$U_i = X_i \times_{X_0} U_0$ と置く。
+$R_0 = U_0 \times_{X_0} U_0$ および $R_i = R_0 \times_{X_0} X_i$ と置く。
+二つの射影を $s_i, t_i : R_i \to U_i$ および $s, t : R \to U$ と書く。
+Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} の証明で、
+$X = U/R$ という表示で $U = \lim U_i$ および $R = \lim R_i$ を満たすものが
+存在することを見た。$U_i$ と $U$ はアフィンであり、$R_i$ と $R$ は
+準コンパクトかつ分離である（$X_i$ が準分離であるため）ことに注意する。
+さらに
+% P09-ERR-0076: frozen source writes colim for an object-level inverse limit.
+$R \times_{s, U, t} R = \colim R_i \times_{s_i, U_i, t_i} R_i$
+も成り立つ。従って、Limits, Lemma
+\ref{limits-lemma-descend-modules-finite-presentation} により
+$\QCoh(\mathcal{O}_U) = \colim \QCoh(\mathcal{O}_{U_i})$、
+$\QCoh(\mathcal{O}_R) = \colim \QCoh(\mathcal{O}_{R_i})$、および
+$\QCoh(\mathcal{O}_{R \times_{s, U, t} R}) =
+\colim \QCoh(\mathcal{O}_{R_i \times_{s_i, U_i, t_i} R_i})$
+が成り立つことが分かる。
+$\QCoh(\mathcal{O}_X) = \QCoh(U, R, s, t, c)$ および
+$\QCoh(\mathcal{O}_{X_i}) = \QCoh(U_i, R_i, s_i, t_i, c_i)$ である。
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent} を参照せよ。
+従って結果は形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-descend-invertible-modules}
+記法と仮定は Lemma \ref{spaces-limits-lemma-descend-finite-presentation} の通りとする。
+このとき
+\begin{enumerate}
+\item 任意の有限局所自由 $\mathcal{O}_X$-加群は、有限局所自由
+$\mathcal{O}_{X_i}$-加群の、ある $i$ に対する引き戻しである。
+\item 任意の可逆 $\mathcal{O}_X$-加群は、可逆
+$\mathcal{O}_{X_i}$-加群の、ある $i$ に対する引き戻しである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) の証明。$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+可逆加群は有限表示なので、ある $i$ と加群
+$\mathcal{L}_i$ および $\mathcal{N}_i$ で、$X_i$ 上有限表示であり、
+% P09-ERR-0077: frozen source uses f_i^* without defining the projection f_i: X -> X_i.
+$f_i^*\mathcal{L}_i \cong \mathcal{L}$ および
+$f_i^*\mathcal{N}_i \cong \mathcal{L}^{\otimes -1}$ を満たすものを見つけられる。
+Lemma \ref{spaces-limits-lemma-descend-modules-finite-presentation} を参照せよ。
+引き戻しはテンソル積と可換なので、
+$f_i^*(\mathcal{L}_i \otimes_{\mathcal{O}_{X_i}} \mathcal{N}_i)$ は
+$\mathcal{O}_X$ と同型である。有限表示加群のテンソル積は有限表示なので、同じ補題より
+$f_{i'i}^*\mathcal{L}_i
+\otimes_{\mathcal{O}_{X_{i'}}} f_{i'i}^*\mathcal{N}_i$
+は $\mathcal{O}_{X_{i'}}$ と、ある $i' \geq i$ に対して同型である。
+従って $f_{i'i}^*\mathcal{L}_i$ は可逆であり
+（Modules on Sites, Lemma \ref{sites-modules-lemma-invertible}）、証明が完了する。
+
+\medskip\noindent
+(1) の証明。省略する。ヒント：局所環付きサイト上の加群が有限局所自由であることと
+双対をもつことが同値であることを用い、(2) の証明と同様に論ぜよ。
+Modules on Sites, Section \ref{sites-modules-section-duals} を参照せよ。
+あるいは、スキームに対する証明と同様に論ぜよ。Limits, Lemma
+\ref{limits-lemma-descend-invertible-modules} を参照せよ。
+\end{proof}
+
+\section{絶対ネーター近似}
+\label{spaces-limits-section-approximation}
+
+\noindent
+次の結果は \cite[Theorem 1.2.2]{CLO} である。
+証明の鍵となる要素は Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated} である。
+
+\begin{proposition}
+\label{spaces-limits-proposition-approximate}
+\begin{reference}
+我々の証明は \cite[Theorem 1.2.2]{CLO} の証明に忠実に従う。
+\end{reference}
+$X$ を $\Spec(\mathbf{Z})$ 上の準コンパクトかつ準分離な代数空間とする。
+有向集合 $I$ と、代数空間の逆系 $(X_i, f_{ii'})$ で $I$ 上のものが存在し、
+次を満たす。
+\begin{enumerate}
+\item 遷移射 $f_{ii'}$ はアフィンである
+% P09-ERR-0078: frozen source omits punctuation at the end of item (1).
+\item 各 $X_i$ は準分離であり、$\mathbf{Z}$ 上有限型である。
+\item $X = \lim X_i$ である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated} を適用して、
+開部分空間 $U_p \subset X$、スキーム $V_p$、および述べられた性質をもつ射
+$f_p : V_p \to U_p$ を得る。$f_n : V_n \to U_n$ は代数空間のエタール射で、
+$T_n = (V_n)_{red}$ の逆像への制限が同型であることに注意する。
+従って $f_n$ は同型である。例えば Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-universally-injective-open} を参照せよ。
+特に $U_n$ は準コンパクトな分離スキームである。
+従って、$U_n = \lim U_{n, i}$ を、$\mathbf{Z}$ 上有限型なスキームで
+アフィンな遷移射をもつものの有向極限として書ける。Limits, Proposition
+\ref{limits-proposition-approximate} を参照せよ。
+従って $p$ に関する降下帰納法を適用すると、次の段落の問題に帰着したことが分かる。
+
+\medskip\noindent
+ここでは $U \subset X$、$U = \lim U_i$、$Z \subset X$、および
+$f : V \to X$ があり、次の性質を満たす。
+\begin{enumerate}
+\item $X$ は準コンパクトかつ準分離な代数空間である。
+\item $V$ は準コンパクトな分離スキームである。
+\item $U \subset X$ は準コンパクトな開部分空間である。
+\item $(U_i, g_{ii'})$ は、$\mathbf{Z}$ 上有限型な準分離代数空間からなる
+有向逆系で、アフィンな遷移射をもち、その極限は $U$ である。
+\item $Z \subset X$ は閉部分空間で、$|X| = |U| \amalg |Z|$ を満たす。
+\item $f : V \to X$ は全射エタール射で、$f^{-1}(Z) \to Z$ は同型である。
+\end{enumerate}
+問題：命題の結論が $X$ に対して成り立つことを示せ。
+
+\medskip\noindent
+$W = f^{-1}(U) \subset V$ は、$U$ 上エタールな準コンパクト開部分スキームであることに
+注意する。従って Lemmas \ref{spaces-limits-lemma-descend-finite-presentation} および
+\ref{spaces-limits-lemma-descend-etale} を適用して、添字 $0 \in I$ と有限表示なエタール射
+$W_0 \to U_0$ で、その $U$ への基底変換が $W$ となるものを見つけられる。
+$W_i = W_0 \times_{U_0} U_i$ と置けば $W = \lim_{i \geq 0} W_i$ である。
+$0$ を大きくすれば $W_i$ はスキームであると仮定してよい。
+Lemma \ref{spaces-limits-lemma-limit-is-scheme} を参照せよ。
+さらに $W_i$ は $\mathbf{Z}$ 上有限型である。
+
+\medskip\noindent
+Limits, Lemma \ref{limits-lemma-approximate} を
+$W = \lim_{i \geq 0} W_i$ と包含 $W \subset V$ に適用する。
+$I$ を、その補題で得られる有向集合 $J$ で置き換える。これにより、
+$V$ を有向極限 $V = \lim V_i$ として、$\mathbf{Z}$ 上有限型なスキームからなり、
+アフィンな遷移射をもち、各 $V_i$ が $W_i$ を開部分スキームとして含むように書ける
+（遷移射と両立する）。各 $i$ に対して、スキームの圏における押し出し
+$$
+\xymatrix{
+W_i \ar[r] \ar[d]_\Delta & V_i \ar[d] \\
+W_i \times_{U_i} W_i \ar[r] & R_i
+}
+$$
+を形成できる。実際、左の縦矢印と上の横矢印はスキームの開埋め込みである。
+言い換えれば、$R_i$ を $V_i$ と $W_i \times_{U_i} W_i$ を共通の開部分
+$W_i$ に沿って貼り合わせたものとして構成できる
+（Schemes, Section \ref{schemes-section-glueing-schemes} を参照）。
+エタール射影 $W_i \times_{U_i} W_i \to W_i$ は、エタール射
+$s_i, t_i : R_i \to V_i$ に延長されることに注意する。
+射 $j_i = (t_i, s_i) : R_i \to V_i \times V_i$ が $V_i$ 上の
+エタール同値関係であることは明らかである。
+$W_i \times_{U_i} W_i$ は準コンパクトであり
+（$U_i$ が準分離で $W_i$ が準コンパクトであるため）、$V_i$ も準コンパクトなので、
+$R_i$ は準コンパクトであることに注意する。$i \geq i'$ に対して図式
+\begin{equation}
+\label{spaces-limits-equation-cartesian}
+\vcenter{
+\xymatrix{
+R_i \ar[r] \ar[d]_{s_i} & R_{i'} \ar[d]^{s_{i'}} \\
+V_i \ar[r] & V_{i'}
+}
+}
+\end{equation}
+はカルテジアンである。なぜなら
+$$
+(W_{i'} \times_{U_{i'}} W_{i'}) \times_{U_{i'}} U_i =
+W_{i'} \times_{U_{i'}} U_i \times_{U_i} U_i \times_{U_{i'}} W_{i'} =
+W_i \times_{U_i} W_i.
+$$
+だからである。代数空間 $X_i = V_i/R_i$ を考える
+（Spaces, Theorem \ref{spaces-theorem-presentation} を参照）。
+$V_i$ は $\mathbf{Z}$ 上有限型で $R_i$ は準コンパクトなので、
+$X_i$ は準分離で $\mathbf{Z}$ 上有限型であることが分かる
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated} および Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-surjection-from-quasi-compact},
+\ref{spaces-morphisms-lemma-finite-type-local} を参照）。
+上の $R_i$ の構成は遷移射と両立するので、代数空間の射
+$X_i \to X_{i'}$（$i \geq i'$）を得る。可換図式
+$$
+\xymatrix{
+V_i \ar[r] \ar[d] & V_{i'} \ar[d] \\
+X_i \ar[r] & X_{i'}
+}
+$$
+は、(\ref{spaces-limits-equation-cartesian}) がカルテジアンなのでカルテジアンである。
+Groupoids, Lemma \ref{groupoids-lemma-criterion-fibre-product} を参照せよ。
+$V_i \to V_{i'}$ はアフィンなので、これは $X_i \to X_{i'}$ がアフィンであることを含意する。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-affine-local} を参照せよ。
+従って Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} により極限
+$X' = \lim X_i$ を形成できる。$X \cong X'$ と主張する。これで命題の証明が完了する。
+
+\medskip\noindent
+主張の証明。$R = \lim R_i$ と置く。構成により、代数空間 $X'$ は全射エタール射
+$V \to X'$ を備え、
+$$
+V \times_{X'} V \cong R
+$$
+を満たす（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit} を用いる）。
+構成により $\lim W_i \times_{U_i} W_i = W \times_U W$ および $V = \lim V_i$ なので、
+$R$ は $W \times_U W$ と $V$ を $W$ に沿って貼り合わせた和である。
+性質 (6) により、射影 $V \times_X V \to V$ は
+$f^{-1}(Z) \subset V$ 上で同型である。従ってスキーム $V \times_X V$ は
+開集合 $\Delta_{V/X}(V)$ と $W \times_U W$ の和であり、これらは
+$\Delta_{W/X}(W)$ に沿って交わる。従って、一意な同型
+$R \cong V \times_X V$ で $V$ への射影と両立するものが存在する。$V \to X$ および $V \to X'$ は
+全射エタールなので、
+% P09-ERR-0079: frozen source omits parentheses around both quotient relation objects.
+$$
+X = V/ V \times_X V = V/R = V/V \times_{X'} V = X'
+$$
+である。Spaces, Lemma \ref{spaces-lemma-space-presentation} を参照せよ。これで証明が完了する。
+\end{proof}
+
+\section{応用}
+\label{spaces-limits-section-applications}
+
+\noindent
+次の補題は、絶対ネーター近似を経由せず、Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated} から直接導くこともできる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-colimit-finitely-presented}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+任意の準連接 $\mathcal{O}_X$-加群は、有限表示な $\mathcal{O}_X$-加群の
+フィルター余極限である。
+\end{lemma}
+
+\begin{proof}
+$X$ を $\Spec(\mathbf{Z})$ 上の代数空間とみなしてよい。Spaces, Definition
+\ref{spaces-definition-base-change} および Properties of Spaces, Definition
+\ref{spaces-properties-definition-separated} を参照せよ。
+従って Proposition \ref{spaces-limits-proposition-approximate} を適用し、
+$X = \lim X_i$ と書ける。ここで $X_i$ は $\mathbf{Z}$ 上有限表示である。
+従って $X_i$ はネーター代数空間である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian} を参照せよ。
+射 $X \to X_i$ はアフィンである。Lemma
+\ref{spaces-limits-lemma-directed-inverse-system-has-limit} を参照せよ。
+結論は Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-direct-colimit-finite-presentation} から従う。
+\end{proof}
+
+\noindent
+本節の残りは Lemma \ref{spaces-limits-lemma-colimit-finitely-presented} の直接的な応用からなる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-directed-colimit-finite-type}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+このとき $\mathcal{F}$ は、その有限型準連接部分加群の有向余極限である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}, \mathcal{H} \subset \mathcal{F}$ が有限型準連接
+$\mathcal{O}_X$-部分加群ならば、$\mathcal{G} \oplus \mathcal{H} \to \mathcal{F}$ の像は、
+両者を含む別の有限型準連接 $\mathcal{O}_X$-部分加群である。
+このようにして系が有向であることが分かる。
+$\mathcal{F}$ がこの系の余極限であることを示すため、Lemma
+\ref{spaces-limits-lemma-colimit-finitely-presented} のように、
+$\mathcal{F} = \colim_i \mathcal{F}_i$ を有限表示な準連接層の有向余極限として書く。
+このとき像 $\mathcal{G}_i = \Im(\mathcal{F}_i \to \mathcal{F})$ は
+$\mathcal{F}$ の有限型準連接部分層である。$\mathcal{F}$ はこれらの余極限なので、
+結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-directed-colimit-surjective-maps}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$\mathcal{F}$ を有限型準連接 $\mathcal{O}_X$-加群とする。このとき
+% P09-ERR-0080: frozen source prints lim although the construction and proof use colim.
+$\mathcal{F} = \lim \mathcal{F}_i$ と書ける。ここで各 $\mathcal{F}_i$ は
+有限表示な $\mathcal{O}_X$-加群であり、すべての遷移写像
+$\mathcal{F}_i \to \mathcal{F}_{i'}$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F} = \colim \mathcal{G}_i$ を、有限表示な $\mathcal{O}_X$-加群の
+フィルター余極限として書く
+（Lemma \ref{spaces-limits-lemma-colimit-finitely-presented}）。
+$\mathcal{G}_i \to \mathcal{F}$ が全射となるような $i$ が存在すると主張する。
+実際、エタール全射 $U \to X$ で $U$ がアフィンスキームであるものを選ぶ。
+有限個の切断 $s_k \in \mathcal{F}(U)$ で $\mathcal{F}|_U$ を生成するものを選ぶ。
+$U$ はアフィンなので、$s_k$ は $\mathcal{G}_i \to \mathcal{F}$ の像に
+十分大きな $i$ に対して含まれる。従って $\mathcal{G}_i \to \mathcal{F}$ は
+十分大きな $i$ に対して全射である。そのような $i$ を選び、
+$\mathcal{K} \subset \mathcal{G}_i$ を写像 $\mathcal{G}_i \to \mathcal{F}$ の核とする。
+$\mathcal{K} = \colim \mathcal{K}_a$ を、その有限型準連接部分加群の
+フィルター余極限として書く
+（Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}）。このとき
+$\mathcal{F} = \colim \mathcal{G}_i/\mathcal{K}_a$ が補題の問題の解である。
+\end{proof}
+
+\noindent
+$X$ を代数空間とする。次の補題では、\textit{有限表示な準連接
+$\mathcal{O}_X$-代数 $\mathcal{A}$} という概念を用いる。これは、任意のアフィンスキーム
+$U = \Spec(R)$ で $X$ 上エタールなものに対し、
+$\mathcal{A}|_U = \widetilde{A}$ であり、$A$ が（可換）$R$-代数で、
+$R$-代数として有限表示であることを意味する。
+
+\begin{lemma}
+\label{spaces-limits-lemma-algebra-directed-colimit-finite-presentation}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$\mathcal{A}$ を準連接 $\mathcal{O}_X$-代数とする。
+このとき $\mathcal{A}$ は、有限表示な準連接 $\mathcal{O}_X$-代数の有向余極限である。
+\end{lemma}
+
+\begin{proof}
+まず、Lemma \ref{spaces-limits-lemma-colimit-finitely-presented} のように、
+$\mathcal{A} = \colim_i \mathcal{F}_i$ を有限表示な準連接層の有向余極限として書く。
+各 $i$ に対して、$\mathcal{B}_i = \text{Sym}(\mathcal{F}_i)$ を
+$\mathcal{F}_i$ の $\mathcal{O}_X$ 上の対称代数とする。
+$\mathcal{I}_i = \Ker(\mathcal{B}_i \to \mathcal{A})$ と置く。
+$\mathcal{I}_i = \colim_j \mathcal{F}_{i, j}$ と書く。ここで
+$\mathcal{F}_{i, j}$ は $\mathcal{I}_i$ の有限型準連接部分加群である。
+Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type} を参照せよ。
+$\mathcal{I}_{i, j} \subset \mathcal{I}_i$ を、$\mathcal{B}_i$-イデアルで
+$\mathcal{F}_{i, j}$ が生成するものとする。$\mathcal{A}_{i, j} = \mathcal{B}_i/\mathcal{I}_{i, j}$ と置く。
+このとき $\mathcal{A}_{i, j}$ は有限表示な準連接 $\mathcal{O}_X$-代数である。
+$(i, j) \leq (i', j')$ を、$i \leq i'$ であり、写像
+$\mathcal{B}_i \to \mathcal{B}_{i'}$ がイデアル $\mathcal{I}_{i, j}$ を
+イデアル $\mathcal{I}_{i', j'}$ に写すことによって定義する。
+このとき $\mathcal{A} = \colim_{i, j} \mathcal{A}_{i, j}$ は明らかである。
+\end{proof}
+
+\noindent
+$X$ を代数空間とする。次の補題では、\textit{有限型準連接
+$\mathcal{O}_X$-代数 $\mathcal{A}$} という概念を用いる。これは、任意のアフィンスキーム
+$U = \Spec(R)$ で $X$ 上エタールなものに対し、
+$\mathcal{A}|_U = \widetilde{A}$ であり、$A$ が（可換）$R$-代数で、
+$R$-代数として有限型であることを意味する。
+
+\begin{lemma}
+\label{spaces-limits-lemma-algebra-directed-colimit-finite-type}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$\mathcal{A}$ を準連接 $\mathcal{O}_X$-代数とする。
+このとき $\mathcal{A}$ は、その有限型準連接 $\mathcal{O}_X$-部分代数の有向余極限である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type} の証明と比較せよ。
+\end{proof}
+
+\noindent
+$X$ を代数空間とする。次の補題では、\textit{有限（それぞれ整）準連接
+$\mathcal{O}_X$-代数 $\mathcal{A}$} という概念を用いる。これは、任意のアフィンスキーム
+$U = \Spec(R)$ で $X$ 上エタールなものに対し、
+$\mathcal{A}|_U = \widetilde{A}$ であり、$A$ が（可換）$R$-代数で、
+$R$-代数として有限（それぞれ整）であることを意味する。
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$\mathcal{A}$ を有限準連接 $\mathcal{O}_X$-代数とする。このとき
+$\mathcal{A} = \colim \mathcal{A}_i$ は、有限かつ有限表示な準連接
+$\mathcal{O}_X$-代数で全射な遷移写像をもつものの有向余極限である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-finite-directed-colimit-surjective-maps} により、有限表示な
+$\mathcal{O}_X$-加群 $\mathcal{F}$ と全射 $\mathcal{F} \to \mathcal{A}$ が存在する。
+代数構造を用いて全射
+$$
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}) \longrightarrow \mathcal{A}
+$$
+を得る。その核を $\mathcal{J}$ と書く。
+$\mathcal{J} = \colim \mathcal{E}_i$ を、有限型 $\mathcal{O}_X$-部分加群
+$\mathcal{E}_i$ のフィルター余極限として書く
+（Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type}）。
+$$
+\mathcal{A}_i = \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F})/(\mathcal{E}_i)
+$$
+と置く。ここで $(\mathcal{E}_i)$ は、
+$\mathcal{E}_i \to \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F})$ の像が生成する
+イデアル層を表す。すると各 $\mathcal{A}_i$ は有限表示な
+$\mathcal{O}_X$-代数であり、遷移写像は全射で、
+$\mathcal{A} = \colim \mathcal{A}_i$ である。
+証明を完了するには、$\mathcal{A}_i$ が有限 $\mathcal{O}_X$-代数であることを
+十分大きな $i$ に対して示す必要がある。このため、エタール全射
+$U \to X$ で $U$ がアフィンスキームであるものを選ぶ。
+生成元 $f_1, \ldots, f_m \in \Gamma(U, \mathcal{F})$ を取る。
+$\mathcal{A}(U)$ は有限 $\mathcal{O}_X(U)$-代数なので、各 $j$ に対して
+モニック多項式 $P_j \in \mathcal{O}(U)[T]$ が存在し、$P_j(f_j)$ は
+$\mathcal{A}(U)$ で零である。構成により $\mathcal{A} = \colim \mathcal{A}_i$ なので、
+$P_j(f_j) = 0$ が $\mathcal{A}_i(U)$ で、十分大きなすべての $i$ に対して成り立つ。
+そのような $i$ に対して代数 $\mathcal{A}_i$ は有限である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-algebra-directed-colimit-finite}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$\mathcal{A}$ を整準連接 $\mathcal{O}_X$-代数とする。このとき
+\begin{enumerate}
+\item $\mathcal{A}$ は、その有限準連接 $\mathcal{O}_X$-部分代数の有向余極限である。
+\item $\mathcal{A}$ は、有限かつ有限表示な $\mathcal{O}_X$-代数の有向余極限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-algebra-directed-colimit-finite-type} により
+$\mathcal{A} = \colim \mathcal{A}_i$ である。ここで
+$\mathcal{A}_i \subset \mathcal{A}$ は、有限型準連接
+$\mathcal{O}_X$-部分代数を走る。
+% P09-ERR-0081: frozen source splits the compound noun "subalgebras".
+任意の有限型準連接 $\mathcal{O}_X$-部分代数で $\mathcal{A}$ の部分代数であるものは有限である
+（$X$ 上エタールなアフィンスキーム上で Algebra, Lemma
+\ref{algebra-lemma-characterize-finite-in-terms-of-integral} を用いる）。
+これで (1) が証明された。
+
+\medskip\noindent
+(2) を証明するため、Lemma \ref{spaces-limits-lemma-colimit-finitely-presented} を用いて
+$\mathcal{A} = \colim \mathcal{F}_i$ を有限表示な $\mathcal{O}_X$-加群の余極限として書く。
+各 $i$ に対して、$\mathcal{J}_i$ を写像
+$$
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i) \longrightarrow \mathcal{A}
+$$
+の核とする。$i' \geq i$ に対して誘導写像
+$\mathcal{J}_i \to \mathcal{J}_{i'}$ があり、
+$\mathcal{A} = \colim \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$
+である。さらに、準連接 $\mathcal{O}_X$-代数
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$ は有限である
+（上を参照）。$\mathcal{J}_i = \colim \mathcal{E}_{ik}$ を、有限表示な
+$\mathcal{O}_X$-加群の余極限として書く。$i' \geq i$ と $k$ が与えられれば、
+$k'$ が存在して写像 $\mathcal{E}_{ik} \to \mathcal{E}_{i'k'}$ があり、図式
+$$
+\xymatrix{
+\mathcal{J}_i \ar[r] & \mathcal{J}_{i'} \\
+\mathcal{E}_{ik} \ar[u] \ar[r] & \mathcal{E}_{i'k'} \ar[u]
+}
+$$
+を可換にする。これは Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-finite-presentation-quasi-compact-colimit} から従う。
+これにより写像
+$$
+\mathcal{A}_{ik} =
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/(\mathcal{E}_{ik})
+\longrightarrow
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_{i'})/(\mathcal{E}_{i'k'}) =
+\mathcal{A}_{i'k'}
+$$
+が誘導される。ここで $(\mathcal{E}_{ik})$ は $\mathcal{E}_{ik}$ が生成するイデアルを表す。
+準連接 $\mathcal{O}_X$-代数 $\mathcal{A}_{ki}$ は有限表示であり、十分大きな $k$ に対して
+有限である（Lemma
+% P09-ERR-0082: frozen source changes the defined index order A_{ik} to A_{ki} here.
+\ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented} の証明を参照）。
+最後に
+$$
+\colim \mathcal{A}_{ik} = \colim \mathcal{A}_i = \mathcal{A}
+$$
+である。実際、最初の等式は Lemma
+\ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented} の証明で示され、
+第二の等式は $\mathcal{A}$ が加群 $\mathcal{F}_i$ の余極限だからである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-extend}
+$S$ をスキームとする。
+$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$U \subset X$ を準コンパクトな開集合とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{G} \subset \mathcal{F}|_U$ を有限型準連接
+$\mathcal{O}_U$-部分加群とする。このとき、有限型準連接部分加群
+$\mathcal{G}' \subset \mathcal{F}$ で $\mathcal{G}'|_U = \mathcal{G}$ を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+$j : U \to X$ で包含射を表す。$X$ は準分離で $U$ は準コンパクトなので、
+射 $j$ は準コンパクトである。従って
+% P09-ERR-0083: frozen source uses the inclusion relation itself as a plural subject.
+$j_*\mathcal{G} \subset j_*\mathcal{F}|_U$ は $X$ 上の準連接加群である
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-pushforward}）。
+$\mathcal{H} =
+\Ker(j_*\mathcal{G} \oplus \mathcal{F} \to j_*\mathcal{F}|_U)$ と置く。
+このとき $\mathcal{H}|_U = \mathcal{G}$ である。Lemma
+\ref{spaces-limits-lemma-directed-colimit-finite-type} により、有限型準連接部分加群
+$\mathcal{H}' \subset \mathcal{H}$ で
+$\mathcal{H}'|_U = \mathcal{H}|_U = \mathcal{G}$ を満たすものを見つけられる。
+$\mathcal{G}' = \Im(\mathcal{H}' \to \mathcal{F})$ と置けば結論を得る。
+\end{proof}
+
+\section{相対近似}
+\label{spaces-limits-section-relative-approximation}
+
+\noindent
+基底上で Proposition \ref{spaces-limits-proposition-approximate} の変形を論じる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-approximate-morphism}
+$f : X \to Y$ を $\mathbf{Z}$ 上の準コンパクトかつ準分離な代数空間の射とする。
+このとき有向集合 $I$ と、代数空間の射からなる逆系
+$(f_i : X_i \to Y_i)$ で $I$ 上のものが存在して、遷移射
+$X_i \to X_{i'}$ および $Y_i \to Y_{i'}$ はアフィンであり、
+$X_i$ と $Y_i$ は準分離で $\mathbf{Z}$ 上有限型であり、
+$(X \to Y) = \lim (X_i \to Y_i)$ である。
+% P09-ERR-0084: frozen source says "direct set" rather than "directed set".
+% P09-ERR-0085: frozen source omits "of" in "morphisms [of] algebraic spaces".
+\end{lemma}
+
+\begin{proof}
+$X = \lim_{a \in A} X_a$ および $Y = \lim_{b \in B} Y_b$ を
+Proposition \ref{spaces-limits-proposition-approximate} のように書く。すなわち、
+$X_a$ と $Y_b$ は準分離で $\mathbf{Z}$ 上有限型であり、遷移射はアフィンである。
+
+\medskip\noindent
+$b \in B$ を固定する。Lemma
+\ref{spaces-limits-lemma-better-characterize-relative-limit-preserving} を $Y_b$ と
+$X = \lim X_a$ に $\mathbf{Z}$ 上で適用すると、$a \in A$ と射
+$f_{a, b} : X_a \to Y_b$ が存在して、図式
+$$
+\xymatrix{
+X \ar[d] \ar[r] & Y \ar[d] \\
+X_a \ar[r] & Y_b
+}
+$$
+を可換にすることが分かる。$I$ を、このように得られる三つ組
+$(a, b, f_{a, b})$ の集合とする。
+
+\medskip\noindent
+$(a, b, f_{a, b})$ と $(a', b', f_{a', b'})$ を $I$ の元とする。
+$b'' \leq \min(b, b')$ とする。
+% P09-ERR-0086: frozen source chooses a lower bound although the declared preorder needs an upper bound.
+Lemma \ref{spaces-limits-lemma-better-characterize-relative-limit-preserving} を再び用いると、
+$a'' \geq \max(a, a')$ が存在して、合成
+$X_{a''} \to X_a \to Y_b \to Y_{b''}$ と
+$X_{a''} \to X_{a'} \to Y_{b'} \to Y_{b''}$ は等しい。
+$I$ に前順序
+$$
+(a, b, f_{a, b}) \geq (a', b', f_{a', b'})
+\Leftrightarrow
+a \geq a',\ b \geq b',\text{ and }
+g_{b, b'} \circ f_{a, b} = f_{a', b'} \circ h_{a, a'}
+$$
+を入れる。ここで $h_{a, a'} : X_a \to X_{a'}$ および
+$g_{b, b'} : Y_b \to Y_{b'}$ は遷移射である。
+上の考察から $I$ は有向であり、写像
+$I \to A$、$(a, b, f_{a, b}) \mapsto a$ と
+$I \to B$、$(a, b, f_{a, b})$ は共終である。
+% P09-ERR-0087: frozen source leaves the second projection without mapsto b.
+$i = (a, b, f_{a, b})$ に対して $X_i = X_a$、$Y_i = Y_b$、
+$f_i = f_{a, b}$ と置けば、$I$ 上の射の逆系を得て、
+$$
+\lim_{i \in I} X_i = \lim_{a \in A} X_a = X
+\quad\text{and}\quad
+\lim_{i \in I} S_i = \lim_{b \in B} Y_b = Y
+$$
+となる。
+% P09-ERR-0088: frozen source uses undefined S_i instead of Y_i in the second limit.
+これは Categories, Lemma \ref{categories-lemma-initial} による
+（$I$ 上の極限は実際には $I$ に付随する反対圏上の極限なので、共終は始対象的に変わる）。
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-relative-approximation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $X$ は準コンパクトかつ準分離である。
+\item $Y$ は準分離である。
+\end{enumerate}
+このとき $X = \lim X_i$ は、代数空間 $X_i$ で $Y$ 上有限表示なものからなる
+有向逆系で、$Y$ 上アフィンな遷移射をもつものの極限である。
+\end{lemma}
+
+\begin{proof}
+$|f|(|X|)$ は準コンパクトなので、$Y$ を、その点集合が $|f|(|X|)$ を含む
+準コンパクト開部分空間で置き換えてよい。従って $Y$ も準コンパクトであると
+仮定してよい。Lemma \ref{spaces-limits-lemma-approximate-morphism} により、
+$(X \to Y) = \lim (X_i \to Y_i)$ を、$\mathbf{Z}$ 上有限型なスキームの射からなる
+ある有向逆系で、アフィンな遷移射をもつものとして書ける。
+% P09-ERR-0089: frozen source says schemes although the preceding lemma constructs algebraic spaces.
+極限は極限と可換するので
+（Categories, Lemma \ref{categories-lemma-colimits-commute}）、
+$X = \lim X_i \times_{Y_i} Y$ である。$i \geq i'$ に対して遷移射
+$X_i \times_{Y_i} Y \to X_{i'} \times_{Y_{i'}} Y$ はアフィンである。
+実際、これは合成
+$$
+X_i \times_{Y_i} Y \to X_i \times_{Y_{i'}} Y \to X_{i'} \times_{Y_{i'}} Y
+$$
+だからである。最初の射は閉埋め込みであり
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map}）、第二の射はアフィン射の基底変換であり
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-base-change-affine}）、
+アフィン射の合成はアフィンだからである
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-composition-affine}）。
+射 $f_i$ は有限表示である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation} および
+\ref{spaces-morphisms-lemma-finite-presentation-permanence}）。従って基底変換
+$X_i \times_{f_i, Y_i} Y \to Y$ は有限表示である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}）。
+\end{proof}
+
+\section{有限表示内で閉じた有限型}
+\label{spaces-limits-section-finite-type-closed-in-finite-presentation}
+
+\noindent
+本節は Limits, Section
+\ref{limits-section-finite-type-closed-in-finite-presentation} の類似である。
+
+\begin{lemma}
+\label{spaces-limits-lemma-affine-morphism-is-limit}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間のアフィン射とする。
+$Y$ が準コンパクトかつ準分離ならば、$X$ は有向極限
+$X = \lim X_i$ であり、各 $X_i$ は $Y$ 上アフィンかつ有限表示である。
+% P09-ERR-0090: frozen source omits "is" after Y in the hypothesis.
+\end{lemma}
+
+\begin{proof}
+準連接 $\mathcal{O}_Y$-加群 $\mathcal{A} = f_*\mathcal{O}_X$ を考える。
+Lemma \ref{spaces-limits-lemma-algebra-directed-colimit-finite-presentation} により、
+$\mathcal{A} = \colim \mathcal{A}_i$ を有限表示な $\mathcal{O}_Y$-代数
+$\mathcal{A}_i$ の有向余極限として書ける。
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$ と置く。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec} を参照せよ。
+構成により $X_i \to Y$ はアフィンかつ有限表示であり、$X = \lim X_i$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-limit-finite-and-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の整射とする。
+$Y$ は準コンパクトかつ準分離であると仮定する。
+このとき $X$ は有向極限 $X = \lim X_i$ として書ける。ここで $X_i$ は
+$Y$ 上有限かつ有限表示である。
+\end{lemma}
+
+\begin{proof}
+準連接 $\mathcal{O}_Y$-加群 $\mathcal{A} = f_*\mathcal{O}_X$ を考える。
+Lemma \ref{spaces-limits-lemma-integral-algebra-directed-colimit-finite} により、
+$\mathcal{A} = \colim \mathcal{A}_i$ を、有限かつ有限表示な
+$\mathcal{O}_Y$-代数 $\mathcal{A}_i$ の有向余極限として書ける。
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$ と置く。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec} を参照せよ。
+構成により $X_i \to Y$ は有限かつ有限表示であり、$X = \lim X_i$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-in-finite-and-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の有限射とする。
+$Y$ は準コンパクトかつ準分離であると仮定する。
+このとき $X$ は有向極限 $X = \lim X_i$ として書ける。ここで遷移写像は閉埋め込みで、
+対象 $X_i$ は $Y$ 上有限かつ有限表示である。
+\end{lemma}
+
+\begin{proof}
+有限準連接 $\mathcal{O}_Y$-加群 $\mathcal{A} = f_*\mathcal{O}_X$ を考える。
+Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented} により、
+$\mathcal{A} = \colim \mathcal{A}_i$ を、全射な遷移写像をもつ有限かつ有限表示な
+$\mathcal{O}_Y$-代数 $\mathcal{A}_i$ の有向余極限として書ける。
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$ と置く。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec} を参照せよ。
+構成により $X_i \to Y$ は有限かつ有限表示であり、遷移写像は閉埋め込みで、
+$X = \lim X_i$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-closed-is-limit-closed-and-finite-presentation}
+\begin{slogan}
+qcqs 代数空間の閉埋め込みは、有限表示な閉埋め込みによって近似できる。
+\end{slogan}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の閉埋め込みとする。
+$Y$ は準コンパクトかつ準分離であると仮定する。
+このとき $X$ は有向極限 $X = \lim X_i$ として書ける。ここで遷移写像は閉埋め込みで、
+射 $X_i \to Y$ は有限表示な閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_Y$ を、$X$ を $Y$ の閉部分空間として定義する
+準連接イデアル層とする。Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type} により、
+$\mathcal{I} = \colim \mathcal{I}_i$ を、その有限型準連接部分加群のフィルター余極限として書ける。
+$X_i$ を $X$ の閉部分空間で $\mathcal{I}_i$ によって切り出されるものとする。
+% P09-ERR-0091: frozen source says X although I_i is an ideal on Y and cuts out a subspace of Y.
+このとき $X_i \to Y$ は有限表示な閉埋め込みであり、$X = \lim X_i$ である。
+詳細の一部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-quasi-affine-closed-in-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $f$ は局所有限型かつ準アフィンである。
+\item $Y$ は準コンパクトかつ準分離である。
+\end{enumerate}
+このとき有限表示な射 $f' : X' \to Y$ と閉埋め込み $X \to X'$ で $Y$ 上のものが存在する。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-quasi-affine} により、分解
+$X \to Z \to Y$ で、$X \to Z$ が準コンパクト開埋め込み、
+$Z \to Y$ がアフィンであるものを見つけられる。
+$Z = \lim Z_i$ と書く。ここで $Z_i$ は $Y$ 上アフィンかつ有限表示である
+（Lemma \ref{spaces-limits-lemma-affine-morphism-is-limit}）。ある $0 \in I$ に対して、
+準コンパクト開集合 $U_0 \subset Z_0$ で、$X$ が $U_0$ の $Z$ における逆像と
+同型になるものを見つけられる（Lemma \ref{spaces-limits-lemma-descend-opens}）。
+$U_i$ を $U_0$ の $Z_i$ における逆像とすれば、$U = \lim U_i$ である。
+% P09-ERR-0092: frozen source uses undefined U although the preceding inverse image is X.
+Lemma \ref{spaces-limits-lemma-finite-type-eventually-closed} により、$X \to U_i$ は
+十分大きなある $i$ に対して閉埋め込みである。$X' = U_i$ と置けば証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-finite-type-closed-in-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $f$ は局所有限型である。
+% P09-ERR-0093: frozen source says "is of locally of finite type".
+\item $X$ は準コンパクトかつ準分離である。
+\item $Y$ は準コンパクトかつ準分離である。
+\end{enumerate}
+このとき有限表示な射 $f' : X' \to Y$ と、代数空間の閉埋め込み
+$X \to X'$ で $Y$ 上のものが存在する。
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{spaces-limits-proposition-approximate} により、$X = \lim_i X_i$ と書ける。
+ここで $X_i$ は準分離で $\mathbf{Z}$ 上有限型であり、遷移射
+$f_{ii'} : X_i \to X_{i'}$ はアフィンである。可換図式
+$$
+\xymatrix{
+X \ar[r] \ar[rd] & X_{i, Y} \ar[r] \ar[d] & X_i \ar[d] \\
+& Y \ar[r] & \Spec(\mathbf{Z})
+}
+$$
+を考える。$X_i$ は $\Spec(\mathbf{Z})$ 上有限表示であることに注意する。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation} を参照せよ。
+従って基底変換 $X_{i, Y} \to Y$ は有限表示である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-presentation} を参照せよ。
+$\lim X_{i, Y} = X \times Y$ であり、$X \to X \times Y$ が単射態射であることに注意する。
+% P09-ERR-0094: frozen source omits the base Spec(Z) in both products.
+Lemma \ref{spaces-limits-lemma-finite-type-eventually-closed} により、$X \to X_{i, Y}$ は
+十分大きな $i$ に対して単射態射である。そのような $i$ を固定する。
+$X \to X_{i, Y}$ は局所有限型であり
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-permanence-finite-type}）、かつ単射態射であるから、
+分離かつ局所準有限である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-loc-finite-type-loc-quasi-finite}）。
+従って $X \to X_{i, Y}$ は表現可能である。さらに
+$X \to X_{i, Y}$ は準アフィンである。実際、Spaces, Lemma
+\ref{spaces-lemma-representable-transformations-property-implication} の原理と、
+スキームの射に対する結果 More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-quasi-affine} を使えるからである。
+従って Lemma \ref{spaces-limits-lemma-quasi-affine-closed-in-finite-presentation} により分解
+$X \to X' \to X_{i, Y}$ を得る。ここで $X \to X'$ は閉埋め込みで、
+$X' \to X_{i, Y}$ は有限表示である。最後に、$X' \to Y$ は有限表示射の合成として
+有限表示である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-finite-presentation}）。
+\end{proof}
+
+\begin{proposition}
+\label{spaces-limits-proposition-separated-closed-in-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+% P09-ERR-0095: frozen source omits "Let" before introducing f.
+次を仮定する。
+\begin{enumerate}
+\item $f$ は有限型かつ分離である。
+\item $Y$ は準コンパクトかつ準分離である。
+\end{enumerate}
+このとき有限表示な分離射 $f' : X' \to Y$ と閉埋め込み
+$X \to X'$ で $Y$ 上のものが存在する。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-finite-type-closed-in-finite-presentation} により、閉埋め込み
+$X \to Z$ で $Z/Y$ が有限表示であるものが存在する。
+$\mathcal{I} \subset \mathcal{O}_Z$ を、$X$ を $Y$ の閉部分スキームとして定義する
+準連接イデアル層とする。
+% P09-ERR-0096: frozen source says closed subscheme of Y although I is an ideal on Z and X is a space.
+Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type} により、$\mathcal{I}$ をその有限型準連接
+イデアル層の有向余極限 $\mathcal{I} = \colim_{a \in A} \mathcal{I}_a$ として書ける。
+$X_a \subset Z$ を $\mathcal{I}_a$ が定義する閉部分空間とする。
+これらは $A$ で添字付けられた逆系をなす。遷移射
+$X_a \to X_{a'}$ は閉埋め込みなのでアフィンである。各 $X_a$ は $Z$ の閉部分空間で、
+仮定により $Z$ は準コンパクトかつ準分離なので、前者も準コンパクトかつ準分離である。
+$X = \lim_a X_a$ であることは、$\mathcal{I} = \colim_{a \in A} \mathcal{I}_a$ から直ちに従う。
+各射 $X_a \to Z$ は有限表示である。Morphisms, Lemma
+\ref{morphisms-lemma-closed-immersion-finite-presentation} を参照せよ。
+従って射 $X_a \to Y$ は有限表示である。それゆえ、$X_a \to Y$ が
+ある $a \in A$ に対して分離であることを示せば十分である。これは $X \to Y$ が分離であると
+仮定したので Lemma \ref{spaces-limits-lemma-eventually-separated} から従う。
+\end{proof}
+
+\section{固有射の近似}
+\label{spaces-limits-section-approximate-proper}
+
+\begin{lemma}
+\label{spaces-limits-lemma-proper-limit-of-proper-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の固有射で、
+$Y$ が準コンパクトかつ準分離であるものとする。このとき
+$X = \lim X_i$ は代数空間 $X_i$ の有向極限であり、各項は
+$Y$ 上固有かつ有限表示で、遷移射および射 $X \to X_i$ は閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{spaces-limits-proposition-separated-closed-in-finite-presentation} により、閉埋め込み
+$X \to X'$ で $X'$ が $Y$ 上分離かつ有限表示であるものを見つけられる。
+Lemma \ref{spaces-limits-lemma-closed-is-limit-closed-and-finite-presentation} により、
+$X = \lim X_i$ と書ける。ここで $X_i \to X'$ は有限表示な閉埋め込みである。
+十分大きなすべての $i$ に対して射 $X_i \to Y$ が固有であると主張する。
+これで証明が完了する。
+
+\medskip\noindent
+これを証明するため、$Y$ はアフィンスキームであると仮定してよい。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-proper-local} を参照せよ。
+次に Chow の補題の弱い形 Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-weak-chow} を用いて図式
+$$
+\xymatrix{
+X' \ar[rd] & X'' \ar[d] \ar[l]^\pi \ar[r] & \mathbf{P}^n_Y \ar[dl] \\
+& Y &
+}
+$$
+を見つける。ここで $X'' \to \mathbf{P}^n_Y$ は埋め込みで、
+$\pi : X'' \to X'$ は固有かつ全射である。
+$X'_i \subset X''$、それぞれ $\pi^{-1}(X)$ で、
+$X_i \subset X'$、それぞれ $X \subset X'$ のスキーム論的逆像を表す。
+このとき $\lim X'_i = \pi^{-1}(X)$ である。
+$\pi^{-1}(X) \to Y$ は固有なので
+（Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-composition-proper}）、
+$\pi^{-1}(X) \to \mathbf{P}^n_Y$ は閉埋め込みである
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-universally-closed-permanence} および
+\ref{spaces-morphisms-lemma-immersion-when-closed}）。
+従って十分大きな $i$ に対して、Lemma
+\ref{spaces-limits-lemma-eventually-closed-immersion} により
+$X'_i \to \mathbf{P}^n_Y$ は閉埋め込みである。
+よって $X'_i$ は $Y$ 上固有である。そのような $i$ に対して、
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-image-proper-is-proper} により
+射 $X_i \to Y$ は固有である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-proper-limit-of-proper-finite-presentation-noetherian}
+$f : X \to Y$ を $\mathbf{Z}$ 上の代数空間の固有射で、
+$Y$ が準コンパクトかつ準分離であるものとする。このとき有向集合 $I$ と、
+代数空間の射からなる逆系 $(f_i : X_i \to Y_i)$ で $I$ 上のものが存在し、
+遷移射 $X_i \to X_{i'}$ および $Y_i \to Y_{i'}$ はアフィンで、
+$f_i$ は固有かつ有限表示で、$Y_i$ は $\mathbf{Z}$ 上有限表示であり、
+$(X \to Y) = \lim (X_i \to Y_i)$ である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-proper-limit-of-proper-finite-presentation} により、
+$X = \lim_{k \in K} X_k$ と書ける。ここで $X_k \to Y$ は固有かつ有限表示である。
+次に絶対ネーター近似（Proposition \ref{spaces-limits-proposition-approximate}）により、
+$Y = \lim_{j \in J} Y_j$ と書ける。ここで $Y_j$ は $\mathbf{Z}$ 上有限表示である。
+各 $k$ に対して $j$ と有限表示な射 $X_{k, j} \to Y_j$ が存在し、
+$X_k \cong Y \times_{Y_j} X_{k, j}$ であり、これは $Y$ 上の代数空間としての同型である。
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation} を参照せよ。
+$j$ を大きくすれば、Lemma \ref{spaces-limits-lemma-eventually-proper} により
+$X_{k, j} \to Y_j$ は固有であると仮定してよい。
+集合 $I$ はこれらの対 $(k, j)$ からなり、対応する射は $X_{k, j} \to Y_j$ である。
+% P09-ERR-0097: frozen source says "will be consist".
+すべての $k' \geq k$ に対し、$j' \geq j$ と射
+$X_{j', k'} \to X_{j, k}$ で $Y_{j'} \to Y_j$ 上のものを見つけられ、その
+$Y$ への基底変換は射 $X_{k'} \to X_k$ となる
+（再び Lemma \ref{spaces-limits-lemma-descend-finite-presentation} から従う）。
+% P09-ERR-0098: frozen source reverses the defined X_{k,j} index order in this transition map.
+これらの射は系の遷移射をなす。詳細の一部は省略する。
+\end{proof}
+
+\noindent
+有限型準連接加群のスキーム論的台を思い出す。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support} を参照せよ。
+
+\begin{lemma}
+\label{spaces-limits-lemma-eventually-proper-support}
+仮定と記法は Situation \ref{spaces-limits-situation-descent-property} の通りとする。
+$\mathcal{F}_0$ を準連接 $\mathcal{O}_{X_0}$-加群とする。
+$\mathcal{F}$ および $\mathcal{F}_i$ で、$\mathcal{F}_0$ の $X$ および $X_i$ への
+引き戻しを表す。次を仮定する。
+\begin{enumerate}
+\item $f_0$ は局所有限型である。
+\item $\mathcal{F}_0$ は有限型である。
+\item $\mathcal{F}$ のスキーム論的台は $Y$ 上固有である。
+\end{enumerate}
+このとき、$\mathcal{F}_i$ のスキーム論的台が $Y_i$ 上固有となる $i$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$X_0$ を $\mathcal{F}_0$ のスキーム論的台で置き換えてよい。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-support-finite-type} により、
+これにより $X_i$ は $\mathcal{F}_i$ の台、$X$ は $\mathcal{F}$ の台となる。
+$Z \subset X$ で $\mathcal{F}$ のスキーム論的台を表すとき、
+$Z \to X$ は普遍同相であることが分かる。$X \to Y$ は固有であると結論する。
+これは仮定により $Z \to Y$ が固有だからである。Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-is-proper} を参照せよ。
+Lemma \ref{spaces-limits-lemma-eventually-proper} により、$X_i \to Y$ が固有となる $i$ が存在する。
+このときスキーム論的台 $Z_i$（$\mathcal{F}_i$ のもの）は
+$Y$ 上固有である。これは Morphisms of Spaces, Lemmas
+% P09-ERR-0099: frozen source uses Y instead of Y_i in both properness assertions.
+\ref{spaces-morphisms-lemma-closed-immersion-proper} および
+\ref{spaces-morphisms-lemma-composition-proper} から従う。
+\end{proof}
+
+\section{アフィン空間への埋め込み}
+\label{spaces-limits-section-embedding}
+
+\noindent
+後で Chow の補題を証明する際に用いる、いくつかの技術的補題を与える。
+
+\begin{lemma}
+\label{spaces-limits-lemma-embedding-into-affine-over-ls-qs}
+$S$ をスキームとする。$f : U \to X$ を $S$ 上の代数空間の射とする。
+$U$ はアフィンスキーム、$f$ は局所有限型、$X$ は準分離かつ局所分離であると仮定する。
+このとき埋め込み $U \to \mathbf{A}^n_X$ で $X$ 上のものが存在する。
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$ とする。$A = \colim A_i$ を有限型な $\mathbf{Z}$-部分代数の
+フィルター余極限として書く。各 $i$ に対して、射 $U \to U_i = \Spec(A_i)$ は
+射
+$$
+U \longrightarrow X \times U_i
+$$
+を誘導し、これは $X$ 上の射である。極限では射 $U \to X \times U$ は
+埋め込みである。これは $X$ が局所分離だからである。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal} を参照せよ。
+Lemma \ref{spaces-limits-lemma-finite-type-eventually-closed} により、
+$U \to X \times U_i$ が埋め込みとなる $i$ が存在する。$U_i$ は
+$\mathbf{A}^n_{\mathbf{Z}}$ の閉部分スキームと同型なので、補題が従う。
+\end{proof}
+
+\begin{remark}
+\label{spaces-limits-remark-cannot-embed-in-general}
+Examples, Section \ref{examples-section-embedding-affines} で見たように、
+$X$ が局所分離であるという仮定を外すと
+Lemma \ref{spaces-limits-lemma-embedding-into-affine-over-ls-qs} は成り立たない。
+そこで次の問題が生じる。$X$ が準分離であるという仮定を外しても
+Lemma \ref{spaces-limits-lemma-embedding-into-affine-over-ls-qs} は成り立つだろうか。
+答えを御存じなら、
+\href{mailto:stacks.project@gmail.com}{stacks.project@gmail.com} まで電子メールで知らせてほしい。
+\end{remark}
+
+\begin{lemma}
+\label{spaces-limits-lemma-embedding-into-affine-over-qs}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+$X$ はネーター、$f$ は有限表示であると仮定する。
+% P09-ERR-0975: frozen source omits "is" in "Assume X Noetherian".
+このとき稠密開集合 $V \subset Y$ と埋め込み $V \to \mathbf{A}^n_X$ が存在する。
+\end{lemma}
+
+\begin{proof}
+仮定から $Y$ はネーターである
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}）。
+従って $Y$ は準分離であり、それゆえ稠密開部分スキームをもつ
+（Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}）。
+よって $Y$ はネータースキームであると仮定してよい。
+$Y$ の既約成分どうしの交わりを取り除くことにより
+（Topology, Lemma \ref{topology-lemma-Noetherian} および
+Properties, Lemma \ref{properties-lemma-Noetherian-topology} を用いる）、
+$Y$ は既約ネータースキームの非交和であると仮定してよい。埋め込み
+$$
+\mathbf{A}^n_X \amalg \mathbf{A}^m_X
+\longrightarrow
+\mathbf{A}^{\max(n, m) + 1}_X
+$$
+が存在するので（詳細は省略する）、$Y$ が既約の場合に結果を証明すれば十分である。
+
+\medskip\noindent
+$Y$ は既約スキームであると仮定する。$T \subset |X|$ を
+$f : Y \to X$ の像の閉包とする。$|Y|$ と $|X|$ は sober な位相空間なので
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-sober}）、
+$T$ は既約で唯一の生成点 $\xi$ をもち、これは生成点 $\eta$（$Y$ のもの）の像である。
+$\mathcal{I} \subset X$ を、$T$ 上の被約誘導空間構造を切り出す準連接イデアル層とする
+（Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}）。
+$\mathcal{O}_{Y, \eta}$ はアルティン局所環なので、ある $n > 0$ に対して
+$f^{-1}\mathcal{I}^n \mathcal{O}_{Y, \eta} = 0$ である。
+$f^{-1}\mathcal{I}\mathcal{O}_Y$ は有限型準連接イデアルなので、
+$f^{-1}\mathcal{I}^n\mathcal{O}_V = 0$ となる空でない開集合 $V \subset Y$ が存在すると結論する。
+$Z \subset X$ を $\mathcal{I}^n$ が切り出す閉部分空間とする。構成により
+$V \to Y \to X$ は $Z$ を経由する。$\mathbf{A}^n_Z \to \mathbf{A}^n_X$ は
+埋め込みなので、$X$ を $Z$ で、$Y$ を $V$ で置き換えてよい。
+従って $Y$ と $X$ が既約であり、$Y \to X$ が $Y$ の生成点を
+$X$ の生成点へ写す状況に到達する。
+
+\medskip\noindent
+$Y$ と $X$ は既約で、$Y$ はスキームであり、$Y \to X$ は $Y$ の生成点を
+$X$ の生成点へ写すと仮定する。Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme} により、
+$X$ は稠密開部分スキーム $U \subset X$ をもつ。空でないアフィン開集合
+$V \subset Y$ を選び、その $X$ における像が $U$ に含まれるようにする。Morphisms, Lemma
+\ref{morphisms-lemma-quasi-affine-finite-type-over-S} により、$V \to U$ を
+$V \to \mathbf{A}^n_U \to U$ と分解できる。これを
+$\mathbf{A}^n_U \to \mathbf{A}^n_X$ と合成して、所望の埋め込みを得る。
+\end{proof}
+
+\section{閉部分集合に台をもつ切断}
+\label{spaces-limits-section-sections-with-support-in-closed}
+
+\noindent
+この節は Properties, Section
+\ref{properties-section-sections-with-support-in-closed} の類似である。
+
+\begin{lemma}
+\label{spaces-limits-lemma-quasi-coherent-finite-type-ideals}
+$S$ をスキームとする。$X$ を準コンパクトかつ準分離な代数空間とする。
+$U \subset X$ を開部分空間とする。次は同値である。
+\begin{enumerate}
+\item $U \to X$ は準コンパクトである。
+\item $U$ は準コンパクトである。
+\item 有限型準連接イデアル層 $\mathcal{I} \subset \mathcal{O}_X$ で
+$|X| \setminus |U| = |V(\mathcal{I})|$ を満たすものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$W$ をアフィンスキームとし、$\varphi : W \to X$ を全射なエタール射とする。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照せよ。
+(1) が成り立つなら $\varphi^{-1}(U) \to W$ は準コンパクトであり、従って
+$\varphi^{-1}(U)$ は準コンパクトであり、従って $U$ は準コンパクトである
+（$|\varphi^{-1}(U)| \to |U|$ は全射だからである）。(2) が成り立つなら、
+$\varphi^{-1}(U)$ は準コンパクトである。実際、$\varphi$ は準コンパクトである。
+これは $X$ が準分離だからである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}）。
+従って $\varphi^{-1}(U) \to W$ は、Properties, Lemma
+\ref{properties-lemma-quasi-coherent-finite-type-ideals} により
+スキームの準コンパクト射である。よって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local} により $U \to X$ は準コンパクトである。
+従って (1) と (2) は同値である。
+
+\medskip\noindent
+(1) と (2) を仮定する。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} により、一意な準連接イデアル層
+$\mathcal{J}$ が存在し、これは $|X| \setminus |U|$ 上の被約誘導閉部分空間構造を切り出す。
+$\mathcal{J}|_U = \mathcal{O}_U$ であり、これは有限型な
+$\mathcal{O}_U$-加群であることに注意する。
+% P09-ERR-0101: frozen source says "an O_U-modules".
+$U$ は準コンパクトなので、Lemma \ref{spaces-limits-lemma-directed-colimit-finite-type} により、
+準連接部分層 $\mathcal{I} \subset \mathcal{J}$ で有限型かつ
+$\mathcal{I}|_U = \mathcal{J}|_U$ を満たすものが存在する。このとき
+$|X| \setminus |U| = |V(\mathcal{I})|$ であり、(3) を得る。逆に、
+$\mathcal{I}$ が (3) の通りなら、$\varphi^{-1}(U) \subset W$ はスキームに対する補題
+（Properties, Lemma \ref{properties-lemma-quasi-coherent-finite-type-ideals}）を
+$\varphi^{-1}\mathcal{I}$ に $W$ 上で適用することにより準コンパクト開集合である。
+従って (2) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-sections-annihilated-by-ideal}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。$\mathcal{O}_X$-加群の層
+$\mathcal{F}'$ で、各対象 $U$（$X_\etale$ のもの）に加群
+$$
+\mathcal{F}'(U)
+=
+\{s \in \mathcal{F}(U) \mid
+\mathcal{I}s = 0\}
+$$
+を対応させるものを考える。$\mathcal{I}$ は有限型であると仮定する。このとき
+\begin{enumerate}
+\item $\mathcal{F}'$ は準連接 $\mathcal{O}_X$-加群層である。
+\item アフィンな $U$（$X_\etale$ のもの）に対して
+$\mathcal{F}'(U) = \{s \in \mathcal{F}(U) \mid \mathcal{I}(U)s = 0\}$ である。
+\item $\mathcal{F}'_x = \{s \in \mathcal{F}_x \mid \mathcal{I}_x s = 0\}$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}'$ を定義する規則が $\mathcal{F}$ の部分層を与えることは明らかである。
+従って残りの主張を検証するには $X$ 上エタール局所的に作業してよい。
+よって補題はスキームの場合、すなわち Properties, Lemma
+\ref{properties-lemma-sections-annihilated-by-ideal} に帰着する。
+\end{proof}
+
+\begin{definition}
+\label{spaces-limits-definition-subsheaf-sections-annihilated-by-ideal}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を有限型準連接イデアル層とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。上の
+Lemma \ref{spaces-limits-lemma-sections-annihilated-by-ideal} で定義した部分層
+$\mathcal{F}' \subset \mathcal{F}$ を、{it $\mathcal{I}$ で零化される切断の部分層}と呼ぶ。
+\end{definition}
+
+\begin{lemma}
+\label{spaces-limits-lemma-push-sections-annihilated-by-ideal}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の準コンパクトかつ
+準分離な射とする。$\mathcal{I} \subset \mathcal{O}_Y$ を有限型準連接イデアル層とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。$\mathcal{F}' \subset \mathcal{F}$ を
+$f^{-1}\mathcal{I}\mathcal{O}_X$ で零化される切断の部分層とする。このとき
+$f_*\mathcal{F}' \subset f_*\mathcal{F}$ は $\mathcal{I}$ で零化される切断の部分層である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：$f$ が準コンパクトかつ準分離であるという仮定から
+$f_*\mathcal{F}$ は準連接である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}）。従って Lemma
+\ref{spaces-limits-lemma-sections-annihilated-by-ideal} を $\mathcal{I}$ と $f_*\mathcal{F}$ に適用できる。
+\end{proof}
+
+\noindent
+次に、閉部分集合に台をもつ切断の層を扱う。これも常に準連接層であるとは限らないが、
+閉集合の補集合が与えられた代数空間内で「retrocompact」であれば準連接になる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-sections-supported-on-closed-subset}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$T \subset |X|$ を閉部分集合とし、$U \subset X$ を
+$T \amalg |U| = |X|$ を満たす開部分空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。$\mathcal{O}_X$-加群の層
+$\mathcal{F}'$ で、各対象 $\varphi : W \to X$（$X_\etale$ のもの）に加群
+$$
+\mathcal{F}'(W)
+=
+\{s \in \mathcal{F}(W) \mid
+\text{切断 }s\text{ の台が含まれる先は }|\varphi|^{-1}(T)\}
+$$
+を対応させるものを考える。$U \to X$ が準コンパクトなら、次が成り立つ。
+\begin{enumerate}
+\item アフィンな $W$ に対して、有限生成イデアル $I \subset \mathcal{O}_X(W)$ で
+$|\varphi|^{-1}(T) = V(I)$ を満たすものが存在する。
+% P09-ERR-0102: frozen source says "there exist a finitely generated ideal".
+\item (1) の通りの $W$ と $I$ に対して
+$\mathcal{F}'(W) = \{x \in \mathcal{F}(W) \mid
+I^nx = 0 \text{ となる } n\}$ である。
+\item $\mathcal{F}'$ は準連接 $\mathcal{O}_X$-加群層である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}'$ を定義する規則が $\mathcal{F}$ の部分層を与えることは明らかである。
+従って残りの主張を検証するには $X$ 上エタール局所的に作業してよい。
+よって補題はスキームの場合、すなわち Properties, Lemma
+\ref{properties-lemma-sections-supported-on-closed-subset} に帰着する。
+\end{proof}
+
+\begin{definition}
+\label{spaces-limits-definition-subsheaf-sections-supported-on-closed}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$T \subset |X|$ を閉部分集合とし、その補集合は開部分空間 $U \subset X$ に対応し、
+包含射 $U \to X$ は準コンパクトであるとする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。上の
+Lemma \ref{spaces-limits-lemma-sections-supported-on-closed-subset} で定義した準連接部分層
+$\mathcal{F}' \subset \mathcal{F}$ を、{it $T$ に台をもつ切断の部分層}と呼ぶ。
+\end{definition}
+
+\begin{lemma}
+\label{spaces-limits-lemma-push-sections-supported-on-closed-subset}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の準コンパクトかつ
+準分離な射とする。$T \subset |Y|$ を閉部分集合とする。
+$|Y| \setminus T$ が開部分空間 $V \subset Y$ に対応し、$V \to Y$ が
+準コンパクトであると仮定する。$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{F}' \subset \mathcal{F}$ を $|f|^{-1}T$ に台をもつ切断の部分層とする。
+このとき $f_*\mathcal{F}' \subset f_*\mathcal{F}$ は $T$ に台をもつ切断の部分層である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：$|X| \setminus |f|^{-1}T$ は開部分空間
+$U = f^{-1}V \subset X$ の台である。
+% P09-ERR-0103: frozen source calls this complement the "support" of the open subspace.
+$V \to Y$ は準コンパクトなので、基底変換により $U \to X$ も準コンパクトである。
+$f$ が準コンパクトかつ準分離であるという仮定から $f_*\mathcal{F}$ は準連接である。
+従って Lemma \ref{spaces-limits-lemma-sections-supported-on-closed-subset} は $T$ と
+$f_*\mathcal{F}$ にも、$|f|^{-1}T$ と $\mathcal{F}$ にも適用できる。
+与えられた準連接加群の等式は定義から直ちに従う。
+\end{proof}
+
+\section{アフィン空間の特徴づけ}
+\label{spaces-limits-section-affine}
+
+\noindent
+この節は Limits, Section \ref{limits-section-affine} の類似である。
+
+\begin{lemma}
+\label{spaces-limits-lemma-affine}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は全射かつ有限であり、$X$ はアフィンであると仮定する。このとき $Y$ はアフィンである。
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$ を $\Spec(\mathbf{Z})$ 上の代数空間の射とみなしてよく、実際そうする
+（Spaces, Definition \ref{spaces-definition-base-change} を参照せよ）。
+有限射はアフィンかつ普遍閉であることに注意する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed} を参照せよ。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-universally-closed-separated} により、
+$Y$ は分離代数空間である。$f$ は全射で $X$ は準コンパクトなので、
+$Y$ は準コンパクトである。
+
+\medskip\noindent
+Lemma \ref{spaces-limits-lemma-finite-in-finite-and-finite-presentation} により
+$X = \lim X_a$ と書ける。ここで各 $X_a \to Y$ は有限かつ有限表示である。
+Lemma \ref{spaces-limits-lemma-limit-is-affine} により、$X_a$ は十分大きな $a$ に対してアフィンである。
+従って $f : X \to Y$ は有限、全射かつ有限表示であると仮定してよく、実際そうする。
+
+\medskip\noindent
+Proposition \ref{spaces-limits-proposition-approximate} により、$Y = \lim Y_i$ を
+$\mathbf{Z}$ 上有限表示な代数空間の有向極限として書ける。
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation} により、$0 \in I$ と有限表示な射
+$X_0 \to Y_0$ で、$X_i = X_0 \times_{Y_0} Y_i$ が $i \geq 0$ に対して成り立ち、かつ
+$X = \lim_i X_i$ となるものを見つけられる。
+% P09-ERR-0976: frozen source uses index set I here without introducing I in this proof.
+Lemma \ref{spaces-limits-lemma-descend-finite} により、$X_i \to Y_i$ は十分大きな $i$ に対して有限である。
+Lemma \ref{spaces-limits-lemma-descend-surjective} により、$X_i \to Y_i$ は十分大きな $i$ に対して全射である。
+Lemma \ref{spaces-limits-lemma-limit-is-affine} により、$X_i$ は十分大きな $i$ に対してアフィンである。
+従って十分大きな $i$ に対して Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-image-affine-finite-morphism-affine-Noetherian}
+を適用し、$Y_i$ はアフィンであると結論できる。これは $Y$ がアフィンであることを含意し、
+証明が終わる。
+\end{proof}
+
+\begin{proposition}
+\label{spaces-limits-proposition-affine}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$X$ はアフィンで、$f$ は全射かつ普遍閉であると仮定する\footnote{整射は普遍閉である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed} を参照せよ。}。このとき $Y$ はアフィンである。
+\end{proposition}
+
+\begin{proof}
+$f : X \to Y$ を $\Spec(\mathbf{Z})$ 上の代数空間の射とみなしてよく、実際そうする
+（Spaces, Definition \ref{spaces-definition-base-change} を参照せよ）。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-universally-closed-separated} により、
+$Y$ は分離代数空間である。次に Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-permanence} により $f$ はアフィンである。
+従って Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed} により $f$ は整である。
+
+\medskip\noindent
+前段落により、$f : X \to Y$ は全射かつ整、$X$ はアフィン、$Y$ は分離であると
+仮定してよい。$f$ は全射で $X$ は準コンパクトなので、$Y$ も準コンパクトであると分かる。
+
+\medskip\noindent
+層 $\mathcal{A} = f_*\mathcal{O}_X$ を考える。これは準連接
+$\mathcal{O}_Y$-代数層である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward} を参照せよ。
+Lemma \ref{spaces-limits-lemma-colimit-finitely-presented} により、$\mathcal{A} = \colim_i \mathcal{F}_i$ を
+有限型 $\mathcal{O}_Y$-加群のフィルター余極限として書ける。
+$\mathcal{A}_i \subset \mathcal{A}$ を $\mathcal{O}_Y$-部分代数のうち
+$\mathcal{F}_i$ が生成するものとする。代数の写像 $\mathcal{O}_Y \to \mathcal{A}$ は整なので、
+各 $\mathcal{A}_i$ は有限準連接 $\mathcal{O}_Y$-代数である。従って
+$$
+X_i = \underline{\Spec}_Y(\mathcal{A}_i) \longrightarrow Y
+$$
+は代数空間の有限射である。ここで $\underline{\Spec}$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-algebras} の構成である。
+$X = \lim_i X_i$ であることは明らかである。従って Lemma
+\ref{spaces-limits-lemma-limit-is-affine} により、十分大きな $i$ に対してスキーム $X_i$ はアフィンである。
+さらに $X \to Y$ は各 $X_i$ を経由するので、$X_i \to Y$ は全射である。
+従って Lemma \ref{spaces-limits-lemma-affine} により $Y$ はアフィンであると結論する。
+\end{proof}
+
+\noindent
+上の結果の次の系は \cite{CLO} に見いだせる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-reduction-scheme}
+\begin{reference}
+\cite[3.1.12]{CLO}
+\end{reference}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$X_{red}$ がスキームなら $X$ はスキームである。
+\end{lemma}
+
+\begin{proof}
+$U' \subset X_{red}$ をアフィン開部分スキームとする。
+$U \subset X$ を開集合 $|U'| \subset |X_{red}| = |X|$ に対応する開部分空間とする。
+このとき $U' \to U$ は全射かつ整である。従って Proposition
+\ref{spaces-limits-proposition-affine} により $U$ はアフィンである。
+よって各点は $X$ の開部分スキームに含まれ、すなわち $X$ はスキームである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-universally-bijective-scheme}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は整で、全単射 $|X| \to |Y|$ を誘導すると仮定する。
+このとき $X$ がスキームであることと $Y$ がスキームであることは同値である。
+\end{lemma}
+
+\begin{proof}
+整射は定義により表現可能なので、$Y$ がスキームなら $X$ もスキームである。
+逆に $X$ はスキームであると仮定する。$U \subset X$ をアフィン開集合とする。
+整射は閉で $|f|$ は全単射なので、$|f|(|U|) \subset |Y|$ は
+$|f|(|X| \setminus |U|)$ の補集合として開である。$V \subset Y$ を
+$|V| = |f|(|U|)$ を満たす開部分空間とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-open-subspaces} を参照せよ。
+このとき $U \to V$ は整かつ全射なので、Proposition \ref{spaces-limits-proposition-affine} により
+$V$ はアフィンスキームである。これで証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-check-closed-infinitesimally}
+$S$ をスキームとする。$f : X \to B$ および $B' \to B$ を
+$S$ 上の代数空間の射とする。次を仮定する。
+\begin{enumerate}
+\item $B' \to B$ は閉埋め込みである。
+\item $|B'| \to |B|$ は全単射である。
+\item $X \times_B B' \to B'$ は閉埋め込みである。
+\item $X \to B$ は有限型であるか、または $B' \to B$ は有限表示である。
+\end{enumerate}
+このとき $f : X \to B$ は閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+仮定 (1) と (2) から $B_{red} = B'_{red}$ が従う。
+$X' = X \times_B B'$ とおく。このとき $X' \to X$ は閉埋め込みであり、
+$X'_{red} = X_{red}$ である。$U \to B$ を $U$ がアフィンであるエタール射とする。
+このとき $X' \times_B U \to X \times_B U$ は、台となる被約空間上で同型を誘導する
+代数空間の閉埋め込みである。$X' \times_B U$ はスキームなので
+（$B' \to B$ と $X' \to B'$ は表現可能である）、Lemma
+\ref{spaces-limits-lemma-reduction-scheme} により $X \times_B U$ もスキームである。
+従って $X \to B$ も表現可能である。よってスキームの場合に帰着し、これは
+Morphisms, Lemma \ref{morphisms-lemma-check-closed-infinitesimally} である。
+\end{proof}
+
+\section{スキームによる有限被覆}
+\label{spaces-limits-section-finite-cover}
+
+\noindent
+本章の極限に関する結果の応用として、任意の準コンパクトかつ準分離な代数空間
+$X$ に対し、スキーム $Y$ と全射な有限射 $Y \to X$ が存在することを証明する。
+Decent Spaces, Section \ref{decent-spaces-section-integral-cover} で既に証明した、
+スキームによる有限整被覆を見つけられるという結果に依拠する。
+
+\begin{proposition}
+\label{spaces-limits-proposition-there-is-a-scheme-finite-over}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+\begin{enumerate}
+\item 有限表示な全射有限射 $Y \to X$ で、$Y$ がスキームであるものが存在する。
+\item 全射エタール射 $U \to X$ が与えられたとき、$Y \to X$ を次のように選べる：
+各 $y \in Y$ に対し開近傍 $V \subset Y$ が存在し、$V \to X$ は $U$ を経由する。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) は $U = X$ とした (2) の特別な場合である。$Y \to X$ を
+Decent Spaces, Lemma \ref{decent-spaces-lemma-there-is-a-scheme-integral-over}
+の通りとする。有限アフィン開被覆 $Y = \bigcup V_j$ で、$V_j \to X$ が $U$ を
+経由するものを選ぶ。$Y = \lim Y_i$ と書ける。ここで $Y_i \to X$ は有限かつ
+有限表示である。Lemma \ref{spaces-limits-lemma-integral-limit-finite-and-finite-presentation} を参照せよ。
+十分大きな $i$ に対して代数空間 $Y_i$ はスキームである。Lemma
+\ref{spaces-limits-lemma-limit-is-scheme} を参照せよ。十分大きな $i$ に対して、アフィン開集合
+$V_{i, j} \subset Y_i$ で、その $Y$ における逆像が $V_j$ となるものを見つけられる。
+Lemma \ref{spaces-limits-lemma-descend-opens} を参照せよ。さらに大きな $i$ に対して、
+射 $V_j \to U$ で $X$ 上のものは、射 $V_{i, j} \to U$ で $X$ 上のものから生じる。
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation} を参照せよ。
+これで証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-integral-limit-finite-and-finite-presentation-refined}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の整射とする。
+$Y$ は準コンパクトかつ準分離であると仮定する。$V \subset Y$ を準コンパクト開部分空間で、
+$f^{-1}(V) \to V$ が有限かつ有限表示であるものとする。このとき $X$ は有向極限
+$X = \lim X_i$ と書ける。ここで $f_i : X_i \to Y$ は有限かつ有限表示で、
+$f^{-1}(V) \to f_i^{-1}(V)$ はすべての $i$ に対して同型である。
+\end{lemma}
+
+\begin{proof}
+この補題は Proposition \ref{spaces-limits-proposition-there-is-a-scheme-finite-over} の僅かな精密化である。
+% P09-ERR-0977: frozen source calls this a refinement of the finite scheme-cover proposition,
+% although its construction refines the preceding integral-limit approximation result.
+整な準連接 $\mathcal{O}_Y$-代数 $\mathcal{A} = f_*\mathcal{O}_X$ を考える。
+次の段落で、$\mathcal{A} = \colim \mathcal{A}_i$ を有限かつ有限表示な
+$\mathcal{O}_Y$-代数 $\mathcal{A}_i$ の有向余極限で、
+$\mathcal{A}_i|_V = \mathcal{A}|_V$ を満たすものとして書く。これができたら
+$X_i = \underline{\Spec}_Y(\mathcal{A}_i)$ とおく。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-spec} を参照せよ。構成により
+$X_i \to Y$ は有限かつ有限表示で、$X = \lim X_i$ であり、
+$f_i^{-1}(V) = f^{-1}(V)$ である。
+
+\medskip\noindent
+代数に関する主張の証明は Lemma
+\ref{spaces-limits-lemma-integral-algebra-directed-colimit-finite} の (2) の証明と同様である。
+まず Lemma \ref{spaces-limits-lemma-colimit-finitely-presented} を用いて、
+$\mathcal{A} = \colim \mathcal{F}_i$ を有限表示 $\mathcal{O}_Y$-加群の余極限として書く。
+$\mathcal{A}|_V$ は有限型 $\mathcal{O}_V$-加群なので、
+$\mathcal{F}_i|_V \to \mathcal{A}|_V$ はすべての $i$ に対して全射であると
+仮定してよく、実際そうする。各 $i$ に対し、$\mathcal{J}_i$ を写像
+$$
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i) \longrightarrow \mathcal{A}
+$$
+の核とする。$i' \geq i$ に対して誘導写像 $\mathcal{J}_i \to \mathcal{J}_{i'}$ が存在する。
+$\mathcal{A} =
+\colim \text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$ である。
+さらに準連接 $\mathcal{O}_X$-代数
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$ は有限である
+（整な準連接 $\mathcal{O}_Y$-代数 $\mathcal{A}$ の $\mathcal{O}_X$ 上有限型な
+準連接部分代数だからである）。
+% P09-ERR-0106: frozen source repeatedly uses O_X as the symmetric-algebra base and module
+% base here, although F_i and A were defined as O_Y-modules/algebras; the loci require O_Y.
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/\mathcal{J}_i$ の $V$ への制限は、
+上の全射性により $\mathcal{A}|_V$ である。従って $\mathcal{J}_i|_V$ は
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)|_V$ のイデアル層として有限生成である。
+これは $\mathcal{A}|_V$ が有限表示 $\mathcal{O}_Y$-代数であることによる。
+$\mathcal{J}_i = \colim \mathcal{E}_{ik}$ を有限表示 $\mathcal{O}_X$-加群の余極限として書く。
+上の有限生成性により、$\mathcal{E}_{ik}|_V$ は $\mathcal{J}_i|_V$ を
+$\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)|_V$ のイデアル層として生成すると
+仮定してよく、実際そうする。$i' \geq i$ と $k$ が与えられたとき、ある $k'$ が存在し、
+写像 $\mathcal{E}_{ik} \to \mathcal{E}_{i'k'}$ で図式
+$$
+\xymatrix{
+\mathcal{J}_i \ar[r] & \mathcal{J}_{i'} \\
+\mathcal{E}_{ik} \ar[u] \ar[r] & \mathcal{E}_{i'k'} \ar[u]
+}
+$$
+を可換にするものが存在する。これは Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-finite-presentation-quasi-compact-colimit} から従う。
+これにより写像
+$$
+\mathcal{A}_{ik} =
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_i)/(\mathcal{E}_{ik})
+\longrightarrow
+\text{Sym}^*_{\mathcal{O}_X}(\mathcal{F}_{i'})/(\mathcal{E}_{i'k'}) =
+\mathcal{A}_{i'k'}
+$$
+が誘導される。ここで $(\mathcal{E}_{ik})$ は $\mathcal{E}_{ik}$ が生成するイデアルを表す。
+準連接 $\mathcal{O}_X$-代数 $\mathcal{A}_{ki}$ は有限表示であり、十分大きな $k$ に対して有限である
+（Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented} の証明を参照せよ）。
+% P09-ERR-0108: frozen source reverses A_{ik} to A_{ki} at this locus.
+さらに構成により $\mathcal{A}_{ik}|_V = \mathcal{A}|_V$ である。最後に
+$$
+\colim \mathcal{A}_{ik} = \colim \mathcal{A}_i = \mathcal{A}
+$$
+である。すなわち、最初の等式は
+Lemma \ref{spaces-limits-lemma-finite-algebra-directed-colimit-finite-finitely-presented} の証明で示され、
+二つ目の等式は $\mathcal{A}$ が加群 $\mathcal{F}_i$ の余極限だからである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-there-is-a-scheme-finite-over-refined}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間で、
+$|X|$ が有限個の既約成分をもつものとする。
+\begin{enumerate}
+\item 有限表示な全射有限射 $f : Y \to X$ で、$Y$ がスキームであり、$f$ が
+準コンパクトな稠密開集合 $U \subset X$ 上有限エタールであるものが存在する。
+\item 全射エタール射 $V \to X$ が与えられたとき、$Y \to X$ を次のように選べる：
+各 $y \in Y$ に対し開近傍 $W \subset Y$ が存在し、$W \to X$ は $V$ を経由する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は $V = X$ とした (2) の特別な場合である。
+
+\medskip\noindent
+(2) を証明する。$\pi : Y \to X$ を Decent Spaces, Lemma
+\ref{decent-spaces-lemma-there-is-a-scheme-integral-over-refined} の通りとし、
+$U \subset X$ を準コンパクトな稠密開集合で、$\pi^{-1}(U) \to U$ が
+有限エタールであるものとする。有限アフィン開被覆 $Y = \bigcup W_j$ で、
+$W_j \to X$ が $V$ を経由するものを選ぶ。$Y = \lim Y_i$ と書ける。
+ここで $\pi_i : Y_i \to X$ は有限かつ有限表示で、
+$\pi^{-1}(U) \to \pi_i^{-1}(U)$ は同型である。Lemma
+\ref{spaces-limits-lemma-integral-limit-finite-and-finite-presentation-refined} を参照せよ。
+十分大きな $i$ に対して代数空間 $Y_i$ はスキームである。Lemma
+\ref{spaces-limits-lemma-limit-is-scheme} を参照せよ。十分大きな $i$ に対してアフィン開集合
+$W_{i, j} \subset Y_i$ で、その $Y$ における逆像が $W_j$ となるものを見つけられる。
+Lemma \ref{spaces-limits-lemma-descend-opens} を参照せよ。さらに大きな $i$ に対して、
+射 $W_j \to V$ で $X$ 上のものは、射 $W_{i, j} \to U$ で $X$ 上のものから生じる。
+% P09-ERR-0109: frozen source has W_{i,j} -> U here although the preceding data and
+% source morphisms are over V; the target should be V.
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation} を参照せよ。
+これで証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-there-is-a-scheme-finite-over-filtered}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$t \geq 0$ と閉部分空間
+$$
+X \supset Z_0 \supset Z_1 \supset \ldots \supset Z_t = \emptyset
+$$
+で、$Z_i \to X$ は有限表示、$Z_0 \subset X$ は肥厚であり、各
+$i = 0, \ldots t - 1$ に対してスキーム $Y_i$ と、全射、有限かつ有限表示な射
+$Y_i \to Z_i$ で $Z_i \setminus Z_{i + 1}$ 上有限エタールであるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$X$ を $\Spec(\mathbf{Z})$ 上の代数空間とみなしてよい。Spaces, Definition
+\ref{spaces-definition-base-change} および Properties of Spaces, Definition
+\ref{spaces-properties-definition-separated} を参照せよ。従って Proposition
+\ref{spaces-limits-proposition-approximate} を適用できる。これによりアフィン射 $X \to X_0$ で、
+$X_0$ が $\mathbf{Z}$ 上有限表示であるものを見つけられる。$X_0$ に対して補題を
+証明できれば、層化と射を $X$ へ引き戻して $X$ に対する結果を得ることができる。
+詳細の一部は省略する。これで次の段落で論じる場合に帰着する。
+
+\medskip\noindent
+$X$ は $\mathbf{Z}$ 上有限表示であると仮定する。このとき $X$ はネーターで、
+$|X|$ は有限次元のネーター位相空間（有限個の既約成分をもつ）である。
+従って $\dim(|X|)$ に関する帰納法を用いてよい。$X$ への任意の有限射は有限表示なので、
+証明の残りではこの要件を無視できる。
+Lemma \ref{spaces-limits-lemma-there-is-a-scheme-finite-over-refined} により、全射有限射
+$Y \to X$ で、稠密開集合 $U \subset X$ 上有限エタールであるものが存在する。
+$Z_0 = X$ とおき、$Z_1 \subset X$ を $|Z_1| = |X| \setminus |U|$ を満たす
+被約閉部分空間とする。帰納法により整数 $t \geq 0$ と、閉部分空間によるフィルトレーション
+$$
+Z_1 \supset Z_{1, 0} \supset Z_{1, 1} \supset \ldots
+\supset Z_{1, t} = \emptyset
+$$
+を得る。ここで $Z_{1, 0} \to Z_1$ は肥厚であり、有限全射
+$Y_{1, i} \to Z_{1, i}$ で $Z_{1, i} \setminus Z_{1, i + 1}$ 上有限エタールなものが存在する。
+$Z_1$ は被約なので $Z_1 = Z_{1, 0}$ である。従って $Z_i = Z_{1, i - 1}$ および
+$Y_i = Y_{1, i - 1}$ と $i \geq 1$ に対しておけばよく、補題が証明された。
+\end{proof}
+
+\section{スキームを得ること}
+\label{spaces-limits-section-representable}
+
+\noindent
+代数空間がスキームであることを示すための技法をもう少し述べる。
+第一の技法は、スキームでない最小の閉部分空間が存在することを示せるというものである。
+
+\begin{lemma}
+\label{spaces-limits-lemma-minimal-closed-subspace}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+$X$ がスキームでないなら、閉部分空間 $Z \subset X$ で、$Z$ はスキームでないが、
+任意の真閉部分空間 $Z' \subset Z$ はスキームであるものが存在する。
+\end{lemma}
+
+\begin{proof}
+Zorn の補題により証明する。$\mathcal{Z}$ を、スキームでない閉部分空間 $Z$ の集合とし、
+包含関係で順序を入れる。仮定により $\mathcal{Z}$ は $X$ を含むので空でない。
+$Z_\alpha$ が $\mathcal{Z}$ の全順序部分集合なら、
+$Z = \bigcap Z_\alpha$ は $\mathcal{Z}$ に属する。実際、
+$$
+Z = \lim Z_\alpha
+$$
+で、遷移射はアフィンである。従って Lemma \ref{spaces-limits-lemma-limit-is-scheme} を適用すると、
+$Z$ がスキームなら $Z_\alpha$ の一つもスキームとなることが分かる。
+（これは $Z = \emptyset$ の場合にも成り立つが、Lemma \ref{spaces-limits-lemma-limit-nonempty} により
+その場合は起こりえないことに注意する。）従って Zorn の補題により
+$\mathcal{Z}$ は極小元をもつ。
+\end{proof}
+
+\noindent
+ここで、このような極小非スキームについて少し証明できる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-minimal-nonscheme}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な代数空間とする。
+任意の真閉部分空間 $Z \subset X$ はスキームだが、$X$ はスキームでないと仮定する。
+このとき $X$ は被約かつ既約である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-reduction-scheme} により $X$ は被約である。
+閉部分集合 $T_1 \subset |X|$ と $T_2 \subset |X|$ で
+$|X| = T_1 \cup T_2$ を満たすものを選ぶ。$T_1$ と $T_2$ が真閉部分集合なら、
+対応する被約誘導閉部分空間 $Z_1, Z_2 \subset X$
+（Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}）はスキームであり、
+$Z = Z_1 \times_X Z_2 = Z_1 \cap Z_2$ も $Z_1$ または $Z_2$ の閉部分スキームとして
+スキームである。余積 $Z_1 \amalg_Z Z_2$ はスキームの圏に存在することに注意する。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-closed-immersions} を参照せよ。
+一つの進め方は $Z_1 \amalg_Z Z_2$ が $X$ と同型であることを示すことだが、
+代数空間の押し出しに関する内容は理論の後の方に現れるので、ここでは使えない。
+代わりに Lemma \ref{spaces-limits-lemma-affine} を用いて各点のアフィン近傍を見つける。
+すなわち $x \in |X|$ とする。$x \not \in Z_1$ なら $x$ はスキームである近傍、
+すなわち $X \setminus Z_1$ をもつ。$x \not \in Z_2$ の場合も同様である。
+% P09-ERR-0978: frozen source compares topological point x directly with spaces Z_1 and Z_2
+% rather than their underlying subsets.
+$x \in Z = Z_1 \cap Z_2$ なら、アフィン開集合
+$U \subset Z_1 \amalg_Z Z_2$ を選び、これは $z$ を含むものとする。
+% P09-ERR-0111: frozen source introduces z here without defining it; the intended point is x
+% (viewed in the pushout).
+このとき $U_1 = Z_1 \cap U$ と $U_2 = Z_2 \cap U$ はアフィン開集合であり、
+$Z$ との交わりは一致する。$|Z_1| = T_1$ と $|Z_2| = T_2$ は $|X|$ の閉部分集合で、
+$|Z|$ で交わるので、開集合 $W \subset |X|$ で
+$W \cap T_1 = |U_1|$ および $W \cap T_2 = |U_2|$ を満たすものを見つけられる。
+$W$ で対応する $X$ の開部分空間を表す。このとき $x \in |W|$ で、射
+$U_1 \amalg U_2 \to W$ は全射有限射、その始域はアフィンスキームである。
+従って Lemma \ref{spaces-limits-lemma-affine} により $W$ はアフィンスキームである。
+\end{proof}
+
+\noindent
+次の補題で重要なのは、$X$ の点の像においてのみ条件を確認すればよいということである。
+
+\begin{lemma}
+\label{spaces-limits-lemma-enough-local}
+$f: X \to S$ を代数空間からスキーム $S$ への準コンパクトかつ準分離な射とする。
+各 $x \in |X|$ について、その像を $s = f(x) \in S$ としたとき
+$X \times_S \Spec(\mathcal{O}_{S,s})$ がスキームなら、$X$ はスキームである。
+\end{lemma}
+
+\begin{proof}
+$x \in |X|$ とする。開近傍 $U$ で $s = f(x)$ の近傍であり、
+$X \times_S U$ がスキームとなるものを見つければ十分である。
+$X \times_S \Spec(\mathcal{O}_{S, s})$ はスキームであり、さらに
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_S(U)$ である。ここで余極限は
+$s$ の、$S$ におけるアフィン開近傍を走る。従って
+$$
+X \times_S \Spec(\mathcal{O}_{S, s}) = \lim X \times_S U
+$$
+である。Lemma \ref{spaces-limits-lemma-limit-is-scheme} により、$X \times_S U$ が
+スキームとなる $U$ が存在する。
+\end{proof}
+
+\noindent
+Lemma \ref{spaces-limits-lemma-enough-local} のように局所環に制限する代わりに、
+基底の閉部分スキームに制限することもできる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-maximal-ideal}
+$\varphi : X \to \Spec(A)$ を代数空間からアフィンスキームへの準コンパクトかつ
+準分離な射とする。$X$ がスキームでないなら、イデアル $I \subset A$ で
+基底変換 $X_{A/I}$ はスキームでないが、すべての $I \subset I'$、$I \not = I'$ に対して
+基底変換 $X_{A/I'}$ はスキームであるものが存在する。
+\end{lemma}
+
+\begin{proof}
+Zorn の補題により証明する。$\mathcal{I}$ をイデアル $I$ で、
+$X_{A/I}$ がスキームでないものの集合とする。仮定により $\mathcal{I}$ は $(0)$ を含む。
+$I_\alpha$ が $\mathcal{I}$ におけるイデアルの鎖なら、
+$I = \bigcup I_\alpha$ は $\mathcal{I}$ に属する。実際、
+$A/I = \colim A/I_\alpha$ であり、従って
+$$
+X_{A/I} = \lim X_{A/I_\alpha}
+$$
+である。従って Lemma \ref{spaces-limits-lemma-limit-is-scheme} を適用すると、
+$X_{A/I}$ がスキームなら $X_{A/I_\alpha}$ の一つもスキームとなることが分かる。
+よって Zorn の補題により $\mathcal{I}$ は極大元をもつ。
+\end{proof}
+
+\section{閉ファイバーにおける貼り合わせ}
+\label{spaces-limits-section-change-over-closed-points}
+
+\noindent
+上の理論を局所環のスペクトルに適用すると、相対代数空間に関する好ましい貼り合わせ結果を
+いくつか得る。まず補助補題を証明する（これは Bootstrap, Section
+\ref{bootstrap-section-applications} で大幅に一般化される）。
+
+\begin{lemma}
+\label{spaces-limits-lemma-relative-glueing}
+$S = U \cup W$ をスキームの開被覆とする。このとき基底変換が与える関手
+$$
+FP_S \longrightarrow FP_U \times_{FP_{U \cap W}} FP_W
+$$
+は同値である。ここで $FP_T$ はスキーム $T$ 上有限表示な代数空間の圏である。
+\end{lemma}
+
+\begin{proof}
+まず $S = U \cup W$ は Zariski 被覆なので、$(\Sch/S)_{fppf}$ 上の層の圏は、
+三つ組 $(\mathcal{F}_U, \mathcal{F}_W, \varphi)$ の圏と同値である。ここで
+$\mathcal{F}_U$ は $(\Sch/U)_{fppf}$ 上の層、$\mathcal{F}_W$ は
+$(\Sch/W)_{fppf}$ 上の層で、
+$$
+\varphi :
+\mathcal{F}_U|_{(\Sch/U \cap W)_{fppf}}
+\longrightarrow
+\mathcal{F}_W|_{(\Sch/U \cap W)_{fppf}}
+$$
+は同型である。Sites, Lemma \ref{sites-lemma-mapping-property-glue} を参照せよ
+（$U \times_S U = U$、$W \times_S W = W$ であり、同じ理由でコサイクル条件が
+自動的に成り立つため、他の貼り合わせデータは不要であることに注意する）。
+ここで、層 $\mathcal{F}$（$(\Sch/S)_{fppf}$ 上のもの）がこの同値により
+$(\mathcal{F}_U, \mathcal{F}_W, \varphi)$ に写るとする。このとき
+$\mathcal{F}$ が代数空間であることと、$\mathcal{F}_U$ および $\mathcal{F}_W$ が
+代数空間であることは同値である。これは Algebraic Spaces, Lemma
+\ref{spaces-lemma-glueing-algebraic-spaces} から直ちに従う。実際、
+$\mathcal{F}_U \to \mathcal{F}$ と $\mathcal{F}_W \to \mathcal{F}$ は開埋め込みで
+表現可能であり、$\mathcal{F}$ を被覆する。最後に、この場合、代数空間 $\mathcal{F}$ が
+$S$ 上有限表示であることと、$\mathcal{F}_U$ が $U$ 上有限表示であり、
+$\mathcal{F}_W$ が $W$ 上有限表示であることは同値である。これは
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-quasi-compact-local},
+\ref{spaces-morphisms-lemma-separated-local}, および
+\ref{spaces-morphisms-lemma-finite-presentation-local} による。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-glueing-near-closed-point}
+$S$ をスキームとする。$s \in S$ を閉点で、
+$U = S \setminus \{s\} \to S$ が準コンパクトであるものとする。
+$V = \Spec(\mathcal{O}_{S, s}) \setminus \{s\}$ とおくと、圏の同値
+$$
+FP_S \longrightarrow FP_U \times_{FP_V} FP_{\Spec(\mathcal{O}_{S, s})}
+$$
+が存在する。ここで $FP_T$ は $T$ 上有限表示な代数空間の圏である。
+\end{lemma}
+
+\begin{proof}
+$W \subset S$ を $s$ の開近傍とする。関手
+$$
+FP_S \to FP_U \times_{FP_{W \setminus \{s\}}} FP_W
+$$
+は Lemma \ref{spaces-limits-lemma-relative-glueing} により圏の同値である。
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_W(W)$ であり、ここで $W$ は $s$ の
+アフィン開近傍を走る。従って $\Spec(\mathcal{O}_{S, s}) = \lim W$ であり、
+ここで $W$ は $s$ のアフィン開近傍を走る。よって
+$\Spec(\mathcal{O}_{S, s})$ 上有限表示な代数空間の圏は、$W$ 上有限表示な
+代数空間の圏の極限であり、ここで $W$ は $s$ のアフィン開近傍を走る。
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation} を参照せよ。
+% P09-ERR-0979: frozen source repeatedly calls these categories "limits"; finite-presentation
+% descent over an inverse limit identifies the target category with the filtered 2-colimit.
+各アフィン開集合 $s \in W$ に対して、$U \cap W$ は準コンパクトである。
+実際、$U \to S$ は準コンパクトだからである。従って
+$V = \lim W \cap U = \lim W \setminus \{s\}$ は準コンパクトかつ準分離な
+スキームの極限である（Limits, Lemma
+\ref{limits-lemma-directed-inverse-system-has-limit} を参照せよ）。
+従って $V$ 上有限表示な代数空間の圏も、$W \cap U$ 上有限表示な代数空間の圏の
+極限であり、ここで $W$ は $s$ のアフィン開近傍を走る。
+これらの結果を組み合わせれば補題は形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-glueing-near-point}
+$S$ をスキームとする。$U \subset S$ を retrocompact な開集合とする。
+$s \in S$ を $U$ の補集合に属する点とする。
+$V = \Spec(\mathcal{O}_{S, s}) \cap U$ とおくと、圏の同値
+$$
+\colim_{s \in U' \supset U\text{ open}} FP_{U'}
+\longrightarrow
+FP_U \times_{FP_V} FP_{\Spec(\mathcal{O}_{S, s})}
+$$
+が存在する。ここで $FP_T$ は $T$ 上有限表示な代数空間の圏である。
+\end{lemma}
+
+\begin{proof}
+$W \subset S$ を $s$ の開近傍とする。Lemma \ref{spaces-limits-lemma-relative-glueing} により関手
+$$
+FP_{U \cup W}
+\longrightarrow
+FP_U \times_{FP_{U \cap W}} FP_W
+$$
+は圏の同値である。$\mathcal{O}_{S, s} = \colim \mathcal{O}_W(W)$ であり、
+ここで $W$ は $s$ のアフィン開近傍を走る。従って
+$\Spec(\mathcal{O}_{S, s}) = \lim W$ であり、ここで $W$ は $s$ の
+アフィン開近傍を走る。よって $\Spec(\mathcal{O}_{S, s})$ 上有限表示な代数空間の圏は、
+$W$ 上有限表示な代数空間の圏の極限であり、ここで $W$ は $s$ のアフィン開近傍を走る。
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation} を参照せよ。
+各アフィン開集合 $s \in W$ に対して、$U \cap W$ は準コンパクトである。
+実際、$U \to S$ は準コンパクトだからである。従って $V = \lim W \cap U$ は
+準コンパクトかつ準分離なスキームの極限である（Limits, Lemma
+\ref{limits-lemma-directed-inverse-system-has-limit} を参照せよ）。
+従って $V$ 上有限表示な代数空間の圏も、$W \cap U$ 上有限表示な代数空間の圏の
+極限であり、ここで $W$ は $s$ のアフィン開近傍を走る。
+これらの結果を組み合わせれば補題は形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-glueing-near-multiple-closed-points}
+$S$ をスキームとする。$s_1, \ldots, s_n \in S$ を互いに異なる閉点で、
+$U = S \setminus \{s_1, \ldots, s_n\} \to S$ が準コンパクトであるものとする。
+$S_i = \Spec(\mathcal{O}_{S, s_i})$ および $U_i = S_i \setminus \{s_i\}$ とおくと、
+圏の同値
+$$
+FP_S \longrightarrow
+FP_U \times_{(FP_{U_1} \times \ldots \times FP_{U_n})}
+(FP_{S_1} \times \ldots \times FP_{S_n})
+$$
+が存在する。ここで $FP_T$ は $T$ 上有限表示な代数空間の圏である。
+\end{lemma}
+
+\begin{proof}
+$n = 1$ の場合、これは Lemma \ref{spaces-limits-lemma-glueing-near-closed-point} である。
+$n > 1$ の場合も全く同じ方法で証明でき、またはそこから演繹できる。
+例えば、$f_i : X_i \to S_i$ が $FP_{S_i}$ の対象、$f : X \to U$ が
+$FP_U$ の対象で、同型 $X_i \times_{S_i} U_i = X \times_U U_i$ が与えられたとする。
+Lemma \ref{spaces-limits-lemma-glueing-near-closed-point} により、有限表示な射
+$f' : X' \to U' = S \setminus \{s_1, \ldots, s_{n - 1}\}$ で、
+$X_i$ と同型（$S_i$ 上）、$X$ と同型（$U$ 上）であり、これらの同型が与えられた同型
+$X_i \times_{S_n} U_n = X \times_U U_n$ と両立するものを見つけられる。
+% P09-ERR-0116: frozen source uses generic i/S_i in the first gluing step and then
+% X_i x_{S_n} U_n; both occurrences must be n/S_n for the displayed fibre product to type-check.
+次に $f_i : X_i \to S_i$、$i \leq n - 1$、$f' : X' \to U'$、および誘導された同型
+$X_i \times_{S_i} U_i = X' \times_{U'} U_i$、$i \leq n - 1$ に帰納法を適用できる。
+これで本質的全射性が示される。完全忠実性の証明は省略する。
+% P09-ERR-0117: frozen source says "fully faithfulness" instead of "full faithfulness".
+\end{proof}
+
+\section{修正への応用}
+\label{spaces-limits-section-modifications-at-a-point}
+
+\noindent
+極限を用いると、閉点上の decent な代数空間の修正の圏を Hensel 局所環によって記述できる。
+
+\begin{lemma}
+\label{spaces-limits-lemma-excision-modifications}
+$S$ をスキームとする。$f : V \to W$ を代数空間の分離エタール射で
+$S$ 上のものとする。閉部分空間 $T \subset W$ で
+$f^{-1}T \to T$ が同型となるものが存在すると仮定する。
+$W^0 = W \setminus T$ および $V^0 = f^{-1}W^0$ とおくと、基底変換関手
+$$
+\left\{
+\begin{matrix}
+g : X \to W\text{ は代数空間の射} \\
+g^{-1}(W^0) \to W^0\text{ は同型}
+\end{matrix}
+\right\}
+\longrightarrow
+\left\{
+\begin{matrix}
+h : Y \to V\text{ は代数空間の射} \\
+h^{-1}(V^0) \to V^0\text{ は同型}
+\end{matrix}
+\right\}
+$$
+は圏の同値である。
+\end{lemma}
+
+\begin{proof}
+$V \to W$ は分離なので、等式 $V \times_W V = \Delta(V) \amalg U$ が、ある開かつ閉な
+部分空間 $U$（$V \times_W V$ のもの）について成り立つ。$f^{-1}T \to T$ が同型であるという仮定から
+$U \times_W T = \emptyset$、すなわち二つの射影 $U \to V$ は $V^0$ の中へ写る。
+% P09-ERR-0118: frozen source has subject-agreement error "the two projections ... maps".
+
+\medskip\noindent
+右辺の圏に属する $h : Y \to V$ が与えられたとき、反変関手
+$X$（$(\Sch/S)_{fppf}$ 上のもの）を規則
+$$
+X(T) = \{(w, y) \mid
+w :  T \to W,\ y : T \times_{w, W} V \to Y\text{ への射、基底 }V\}
+$$
+で定義する。$g : X \to W$ で、$(w, y) \in X(T)$ を $w \in W(T)$ に送る写像を表す。
+$h^{-1}V^0 \to V^0$ は同型なので、$w : T \to W$ が $W^0$ の中へ写るなら、
+$h$ の選び方は一意である。
+% P09-ERR-0120: frozen source says the unique choice is h, although h is fixed; the variable
+% determined over W^0 is the descent datum/section y.
+言い換えると $X \times_{g, W} W^0 = W^0$ である。一方、
+$T$-値点 $(w, y, v)$ で $X \times_{g, W, f} V$ のものを考える。このとき
+$w = f \circ v$ であり、
+$$
+y : T \times_{f \circ v, W} V \longrightarrow V
+$$
+は $V$ 上の射である。
+% P09-ERR-0121: frozen display has codomain V, but y was defined with codomain Y and the
+% subsequent composite y':T->Y requires Y here.
+射
+$$
+T \times_{f \circ v, W} V \xrightarrow{(v, \text{id}_V)}
+V \times_W V = V \amalg U
+$$
+を考える。$V$ の逆像は $T$ であり、これは
+$(\text{id}_T, v) : T \to T \times_{f \circ v, W} V$ により埋め込まれる。
+合成 $y' = y \circ (\text{id}_T, v) : T \to Y$ は
+$v = h \circ y'$ を満たす射であり、これが $y$ を決定する。実際、$y$ の他方の部分への
+制限は、第二射影により $U$ が $V^0$ の中へ写るため一意に決まる。従って
+$X \times_{g, W, f} V \to Y$、$(w, y, v) \mapsto y'$ は同型である。
+
+\medskip\noindent
+従って $X$ が代数空間であることを示せれば証明は完了する。
+$V \to W$ は分離かつエタールなので、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}
+（および Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-locally-quasi-finite}）により表現可能である。
+$W^0 \to W$ は開埋め込みなので、もちろん表現可能かつエタールである。従って
+$$
+W^0 \amalg Y = X \times_{g, W} W^0 \amalg X \times_{g, W, f} V
+= X \times_{g, W} (W^0 \amalg V) \longrightarrow X
+$$
+は Spaces, Lemmas
+\ref{spaces-lemma-base-change-representable-transformations} および
+\ref{spaces-lemma-base-change-representable-transformations-property} により
+表現可能、全射かつエタールである。従って Spaces, Lemma
+\ref{spaces-lemma-etale-locally-representable-by-space-gives-space} により
+$X$ は代数空間である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-excision-modifications-properties}
+記法と仮定は Lemma \ref{spaces-limits-lemma-excision-modifications} の通りとする。
+$g : X \to W$ がこの同値により $h : Y \to V$ に対応するとする。
+$g$ が準コンパクト、準分離、分離、局所有限表示、有限表示、局所有限型、有限型、
+固有、整、有限、およびここにさらに追加すべき性質をもつことと、$h$ がそうであることは同値である。
+% P09-ERR-0122: frozen source contains the editorial placeholder "and add more here".
+\end{lemma}
+
+\begin{proof}
+$g$ が準コンパクト、準分離、分離、局所有限表示、有限表示、局所有限型、有限型、
+固有、有限なら、$h$ もそうである。これは $g$ の基底変換だからである。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-quasi-compact},
+\ref{spaces-morphisms-lemma-base-change-separated},
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-finite-type},
+\ref{spaces-morphisms-lemma-base-change-proper},
+\ref{spaces-morphisms-lemma-base-change-integral} を参照せよ。
+% P09-ERR-0123: frozen proof omits integral from its forward property list, includes finite,
+% but cites integral base change and no finite-base-change lemma.
+逆に、$P$ を代数空間の射の性質で、基底上エタール局所的であり、任意の代数空間の
+恒等射に対して成り立つものとする。$\{W^0 \to W, V \to W\}$ はエタール被覆なので、
+$g$ が $P$ をもつことを示すには $h$ が $P$ をもつことを示せば十分である。
+従って Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-quasi-compact-local},
+\ref{spaces-morphisms-lemma-separated-local},
+\ref{spaces-morphisms-lemma-finite-presentation-local},
+\ref{spaces-morphisms-lemma-finite-type-local},
+\ref{spaces-morphisms-lemma-proper-local},
+\ref{spaces-morphisms-lemma-integral-local} により結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-modifications}
+$S$ をスキームとする。$X$ を $S$ 上の decent な代数空間とする。
+$x \in |X|$ を閉点で、$U = X \setminus \{x\} \to X$ が準コンパクトであるものとする。
+$V = \Spec(\mathcal{O}_{X, x}^h) \setminus \{\mathfrak m_x^h\}$ とおくと、基底変換関手
+$$
+\left\{
+\begin{matrix}
+f : Y \to X\text{ は有限表示} \\
+f^{-1}(U) \to U\text{ は同型}
+\end{matrix}
+\right\}
+\longrightarrow
+\left\{
+\begin{matrix}
+g : Y \to \Spec(\mathcal{O}_{X, x}^h)\text{ は有限表示} \\
+g^{-1}(V) \to V\text{ は同型}
+\end{matrix}
+\right\}
+$$
+は圏の同値である。
+\end{lemma}
+
+\begin{proof}
+$a : (W, w) \to (X, x)$ を $x$ の基本エタール近傍で、$W$ がアフィンであるものとする。
+これは Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood} の通りである。
+$x$ は $X$ の閉点で、$w$ は $W$ の唯一の点であって $x$ の上にあるので、
+$w$ は $W$ の閉点である。$a$ はエタールで $x$ と $w$ における剰余体を同一視するので、
+$a$ は同型 $a^{-1}x \to x$ を誘導する（$X$ と $W$ の閉部分空間として）。
+従って Lemma \ref{spaces-limits-lemma-excision-modifications} および
+\ref{spaces-limits-lemma-excision-modifications-properties} を適用して、問題を $X$ がアフィンスキームである
+場合に帰着できる。
+
+\medskip\noindent
+$X$ はアフィンスキームであると仮定する。$\mathcal{O}_{X, x}^h$ は
+$\Gamma(U, \mathcal{O}_U)$ の余極限であり、添字はアフィンな基本エタール近傍
+$(U, u) \to (X, x)$ を走ることを思い出す。
+これらの近傍の圏は余フィルター圏である。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-elementary-etale-neighbourhoods} または More on Morphisms, Lemma
+\ref{more-morphisms-lemma-elementary-etale-neighbourhoods} を参照せよ。このとき
+$\Spec(\mathcal{O}_{X, x}^h) = \lim U$ および $V = \lim U \setminus \{u\}$
+（Lemma \ref{spaces-limits-lemma-directed-inverse-system-has-limit}）であり、極限は同じ圏を走る。
+従って Lemma \ref{spaces-limits-lemma-descend-finite-presentation} により、右辺の圏は
+組 $(U, u)$ に対する圏の余極限である。第一段落の内容により、これら各圏は
+組 $(X, x)$ に対する圏と同値である。これで証明が終わる。
+% P09-ERR-0124: frozen source begins a new sentence with capitalized "The category" directly
+% after "Thus by Lemma ..." without punctuation completing the first clause.
+\end{proof}
+
+\section{普遍閉射}
+\label{spaces-limits-section-universally-closed}
+
+\noindent
+この節では、準コンパクトな（必ずしも分離とは限らない）射がいつ普遍閉であるかを論じる。
+まず、局所有限表示な基底変換の後に普遍閉性を確認できるようにする補題を証明する。
+
+\begin{lemma}
+\label{spaces-limits-lemma-separate}
+$S$ をスキームとする。$f : X \to Y$ および $g : Z \to Y$ を
+$S$ 上の代数空間の射とする。$z \in |Z|$ とし、$T \subset |X \times_Y Z|$ を
+$z \not \in \Im(T \to |Z|)$ を満たす閉部分集合とする。$f$ が準コンパクトなら、
+エタール近傍 $(V, v) \to (Z, z)$、可換図式
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+および閉部分集合 $T' \subset |X \times_Y Z'|$ で、次を満たすものが存在する。
+\begin{enumerate}
+\item 射 $b : Z' \to Y$ は局所有限表示である。
+\item $z' = a(v)$ とおくと $z' \not \in \Im(T' \to |Z'|)$ である。
+\item $T$ の、$|X \times_Y V|$ における逆像は $T'$ の中へ写り、
+その写像は $|X \times_Y V| \to |X \times_Y Z'|$ が与える。
+\end{enumerate}
+さらに $V$ と $Z'$ はアフィンスキームであると仮定してよく、$Z$ がスキームなら
+$V$ は $z$ のアフィン開近傍であると仮定してよい。
+\end{lemma}
+
+\begin{proof}
+スキームの射に対する対応する結果から演繹する。$y \in |Y|$ を $z$ の像とする。
+まずアフィンエタール近傍 $(U, u) \to (Y, y)$ を選び、次にアフィンエタール近傍
+$(V, v) \to (Z, z)$ で、射 $V \to Y$ が $U$ を経由するものを選ぶ。
+このとき次の置き換えを行ってよい。
+\begin{enumerate}
+\item $X \to Y$ を $X \times_Y U \to U$ で置き換える。
+\item $Z \to Y$ を $V \to U$ で置き換える。
+\item $z$ を $v$ で置き換える。
+\item $T$ を $|(X \times_Y U) \times_U V| = |X \times_Y V|$ におけるその逆像で置き換える。
+\end{enumerate}
+実際、以下では $V$ を $v$ のアフィン開近傍で置き換えた後、射 $a : V \to Z'$、
+有限表示な射 $Z' \to U$、および閉部分集合 $T'$（
+$|(X \times_Y U) \times_U Z'| = |X \times_Y Z'|$ のもの）が存在し、
+$T$ は $T'$ の中へ写り、$a(v) \not \in \Im(T' \to |Z'|)$ となることを示す。
+従って $Z$ と $Y$ はアフィンスキームであると仮定してよく、実際そうする。ただし
+$V$ が $z$ の開近傍となる解を見つけなければならない。
+
+\medskip\noindent
+$f$ は準コンパクトで $Y$ はアフィンなので、代数空間 $X$ は準コンパクトである。
+アフィンスキーム $W$ と全射エタール射 $W \to X$ を選ぶ。
+$T_W \subset |W \times_Y Z|$ を $T$ の逆像とする。このとき $z$ は $T_W$ の像にない。
+スキームの場合（Limits, Lemma \ref{limits-lemma-separate}）により、
+$V \subset Z$ で $z$ の開近傍であるもの、可換なスキームの図式
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+および閉部分集合 $T' \subset |W \times_Y Z'|$ で、次を満たすものを見つけられる。
+\begin{enumerate}
+\item 射 $b : Z' \to Y$ は局所有限表示である。
+\item $z' = a(z)$ とおくと $z' \not \in \Im(T' \to Z')$ である。
+% P09-ERR-0126: frozen source omits underlying-space bars around Z' in this image.
+\item $T_1 = T_W \cap |W \times_Y V|$ は $T'$ の中へ写り、
+その写像は $|W \times_Y V| \to |W \times_Y Z'|$ が与える。
+\end{enumerate}
+可換図式
+$$
+\xymatrix{
+W \times_Y Z \ar[d] &
+W \times_Y V \ar[l] \ar[rr]_{a_1} \ar[d]_c & &
+W \times_Y Z' \ar[d]^q \\
+X \times_Y Z &
+X \times_Y V \ar[l] \ar[rr]^{a_2} & &
+X \times_Y Z'
+}
+$$
+の正方形は Cartesian で、鉛直写像は全射、エタール、従って特に開である。
+左側の正方形を見ると、$T_1 = T_W \cap |W \times_Y V|$ は
+$T_2 = T \cap |X \times_Y V|$ の $c$ による逆像である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により
+$a_1(T_1) = q^{-1}(a_2(T_2))$ を得る。Topology, Lemma
+\ref{topology-lemma-open-morphism-quotient-topology} により
+$$
+q^{-1}\left(\overline{a_2(T_2)}\right) =
+\overline{q^{-1}(a_2(T_2))} =
+\overline{a_1(T_1)} \subset T'
+$$
+を得る。$q$ は全射なので、$\overline{a_2(T_2)} \to |Z'|$ の像は $z'$ を含まない。
+実際、$T'$ について同じことが成り立つからである。従って上の
+$Z', V, a, b$ をもつ図式と閉部分集合
+$\overline{a_2(T_2)} \subset |X \times_Y Z'|$ を、補題が課した問題の解として取れる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-test-universally-closed}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の準コンパクト射とする。
+次は同値である。
+\begin{enumerate}
+\item $f$ は普遍閉である。
+\item 局所有限表示な任意の射 $Z \to Y$ に対して、写像
+$|X \times_Y Z| \to |Z|$ は閉である。
+\item スキーム $V$ と全射エタール射 $V \to Y$ で、
+$|\mathbf{A}^n \times (X \times_Y V)| \to |\mathbf{A}^n \times V|$ が
+すべての $n \geq 0$ に対して閉となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が (2) を含意することは明らかである。写像 $|X \times_Y Z| \to |Z|$ が閉でないと仮定し、
+これは代数空間のある射 $Z \to Y$ で $S$ 上のものに対するとする。これは、閉部分集合
+$T \subset |X \times_Y Z|$ で $\Im(T \to |Z|)$ が閉でないものが存在することを意味する。
+$z \in |Z|$ を $T$ の像の閉包に属するが像には属さない点として選ぶ。
+Lemma \ref{spaces-limits-lemma-separate} を適用する。エタール近傍 $(V, v) \to (Z, z)$、可換図式
+$$
+\xymatrix{
+V \ar[d] \ar[r]_a & Z' \ar[d]^b \\
+Z \ar[r]^g & Y,
+}
+$$
+および閉部分集合 $T' \subset |X \times_Y Z'|$ で、次を満たすものを得る。
+\begin{enumerate}
+\item 射 $b : Z' \to Y$ は局所有限表示である。
+\item $z' = a(v)$ とおくと $z' \not \in \Im(T' \to |Z'|)$ である。
+\item $T$ の、$|X \times_Y V|$ における逆像は $T'$ の中へ写り、
+その写像は $|X \times_Y V| \to |X \times_Y Z'|$ が与える。
+\end{enumerate}
+$z'$ は $\Im(T' \to |Z'|)$ の閉包に属すると主張する。これは
+$|X \times_Y Z'| \to |Z'|$ が閉でないことを含意する。この主張により (2) は (1) を含意する。
+主張を見るため、次の可換図式を考える。
+$$
+\xymatrix{
+X \times_Y Z \ar[d] &
+X \times_Y V \ar[l] \ar[d] \ar[r] &
+X \times_Y Z' \ar[d] \\
+Z & V \ar[l] \ar[r]^a & Z'
+}
+$$
+$T_V \subset |X \times_Y V|$ を $T$ の逆像とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により、$T_V$ の $|V|$ における像は
+$T$ の $|Z|$ における像の逆像である。ここで $z$ は $T \to |Z|$ の像の閉包に属し、
+$|V| \to |Z|$ は開なので、$v$ は $T_V \to |V|$ の像の閉包に属する。
+$T_V$ の $|X \times_Y Z'|$ における像は $|T'|$ に含まれるので、直ちに
+$z' = a(v)$ は $T'$ の像の閉包に属することが従う。
+
+\medskip\noindent
+(1) が (3) を含意することは明らかである。$V \to Y$ を (3) の通りとする。
+$X \times_Y V \to V$ が普遍閉であることを示せれば、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} により $f$ は普遍閉である。
+従って次を示せば十分である：$f : X \to Y$ が準コンパクトな代数空間の射、
+$f$ がその射、$Y$ がスキームであり、$|\mathbf{A}^n \times X| \to |\mathbf{A}^n \times Y|$ が
+すべての $n$ に対して閉なら、(2) が成り立つ。$Z \to Y$ を局所有限表示とする。
+写像 $|X \times_Y Z| \to |Z|$ が閉であることを示さなければならない。
+この問題は $Z$ 上エタール局所的なので、$Z$ はアフィンであると仮定してよい
+（詳細の一部は省略する）。$Y$ はスキーム、$Z$ はアフィン、$Z \to Y$ は
+局所有限表示なので、埋め込み $Z \to \mathbf{A}^n \times Y$ を見つけられる。
+Morphisms, Lemma \ref{morphisms-lemma-quasi-affine-finite-type-over-S} を参照せよ。
+Cartesian 図式
+$$
+\vcenter{
+\xymatrix{
+X \times_Y Z \ar[d] \ar[r] & \mathbf{A}^n \times X \ar[d] \\
+Z \ar[r] & \mathbf{A}^n \times Y
+}
+}
+\quad
+\begin{matrix}
+\text{次の Cartesian} \\
+\text{正方形を誘導する}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+|X \times_Y Z| \ar[d] \ar[r] & |\mathbf{A}^n \times X| \ar[d] \\
+|Z| \ar[r] & |\mathbf{A}^n \times Y|
+}
+}
+$$
+を考える。これは位相空間の図式で、その水平矢印は局所閉部分集合への同相である
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subspace-induced-topology}）。従って任意の閉部分集合
+$T$（$|X \times_Y Z|$ のもの）は閉部分集合 $T'$（
+$|\mathbf{A}^n \times Y|$ のもの）の引き戻しである。仮定により
+$T'$ の $|\mathbf{A}^n \times X|$ における像は閉なので、$T$ の $|Z|$ における像は
+所望通り閉であると結論する。
+% P09-ERR-0130: frozen source reverses the two ambient spaces in this closing argument:
+% T' must lie in |A^n x X|, whose image in |A^n x Y| is closed, not conversely.
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limited-base-change}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は分離かつ有限型であると仮定する。次は同値である。
+\begin{enumerate}
+\item 射 $f$ は固有である。
+\item 局所有限表示な任意の射 $Y \to Z$ に対して、写像
+$|X \times_Y Z| \to |Z|$ は閉である。
+% P09-ERR-0132: frozen source reverses this morphism; X x_Y Z requires Z -> Y.
+\item スキーム $V$ と全射エタール射 $V \to Y$ で、
+$|\mathbf{A}^n \times (X \times_Y V)| \to |\mathbf{A}^n \times V|$ が
+すべての $n \geq 0$ に対して閉となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+固有射であることは分離、有限型かつ普遍閉な射であることと同じなので、この補題は
+Lemma \ref{spaces-limits-lemma-test-universally-closed} の特別な場合である。
+\end{proof}
+
+\section{ネーター的付値判定法}
+\label{spaces-limits-section-Noetherian-valuative-criterion}
+
+\noindent
+Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-Noetherian-valuative-criterion} で既にいくつかの結果を証明した。
+スキームに対する対応する節は Limits, Section
+\ref{limits-section-Noetherian-valuative-criterion} である。
+
+\medskip\noindent
+この節の結果の多くは次の補題に訴えて証明できる（そして恐らくそうすべきである）が、
+常にそうしたわけではない。
+
+\begin{lemma}
+\label{spaces-limits-lemma-reach-point-closure-Noetherian}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は有限型、$Y$ は局所ネーターであると仮定する。
+% P09-ERR-0133: frozen source omits "is" in "Assume f finite type".
+$y \in |Y|$ を $|f|$ の像の閉包に属する点とする。このとき可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d]^f \\
+\Spec(A) \ar[r] & Y
+}
+$$
+が存在する。ここで $A$ は離散付値環、$K$ はその分数体であり、$\Spec(A)$ の閉点を
+$y$ に写す。さらに、点 $x \in |X|$ で $\Spec(K) \to X$ に対応するものは余次元 $0$ の点
+\footnote{Properties of Spaces, Section
+\ref{spaces-properties-section-generic-points} の議論を参照せよ。}であり、
+$K$ は $X$ 上エタールなスキームのある点の剰余体であると仮定できる。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $V$、点 $v \in V$、およびエタール射 $V \to Y$ で
+$v$ を $y$ に写すものを選ぶ。写像 $|V| \to |Y|$ は開であり、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により、$|X \times_Y V| \to |V|$ の像は
+$|f|$ の像の逆像である。従って点 $v$ は $|X \times_Y V| \to |V|$ の像の閉包に属する。
+$X \times_Y V \to V$ と点 $v$ に対して補題を証明すれば、$f$ と $y$ に対して補題が従う。
+このようにして次の段落で述べる状況に帰着する。
+
+\medskip\noindent
+補題の通りの $f : X \to Y$ と $y \in |Y|$ が与えられ、$Y$ はアフィンスキームであると
+仮定する。$f$ は準コンパクトなので $X$ は準コンパクトである。従ってアフィンスキーム
+$W$ と全射エタール射 $W \to X$ を選べる。このとき $|f|$ の像は $W \to Y$ の像と同じである。
+このようにしてスキームの場合、すなわち Limits, Lemma
+\ref{limits-lemma-reach-point-closure-Noetherian} に帰着する。
+\end{proof}
+
+\noindent
+まず分離性に関する結果を述べる。基底スキーム $S$ 上の代数空間の射からなる、次の形の
+実線可換図式をしばしば用いる。
+\begin{equation}
+\label{spaces-limits-equation-valuative}
+\vcenter{
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+}
+\end{equation}
+ここで $A$ は付値環、$K$ はその分数体である。
+
+\begin{lemma}
+\label{spaces-limits-lemma-Noetherian-dvr-valuative-separation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は準分離かつ局所有限型で、$Y$ は局所ネーターであると仮定する。次は同値である。
+\begin{enumerate}
+\item 射 $f$ は分離である。
+\item 任意の図式 (\ref{spaces-limits-equation-valuative}) に対して、点線矢印は高々一つ存在する。
+\item $A$ が離散付値環であるすべての図式 (\ref{spaces-limits-equation-valuative}) に対して、
+点線矢印は高々一つ存在する。
+\item $A$ が離散付値環で、$\Spec(K) \to X$ の像が余次元 $0$ の点（$X$ 上）である
+すべての図式 (\ref{spaces-limits-equation-valuative}) に対して、点線矢印は高々一つ存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-separated-implies-valuative} により
+(1) $\Rightarrow$ (2) である。(2) $\Rightarrow$ (3) および (3) $\Rightarrow$ (4) は直ちに従う。
+(4) が (1) を含意することを示せばよい。
+
+\medskip\noindent
+(4) を仮定する。対角射 $\Delta : X \to X \times_Y X$ が閉埋め込みであることを示さなければ
+ならない。$\Delta$ は表現可能、分離、単射態射かつ局所有限型であることが既に分かっている。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-properties-diagonal} を参照せよ。アフィンスキーム $U$ と
+エタール射 $U \to X \times_Y X$ を選ぶ。$V = X \times_{\Delta, X \times_Y X} U$ とおく。
+$V \to U$ が閉埋め込みであることを示せば十分である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}）。
+$X \times_Y X$ は $Y$ 上局所有限型なので $U$ はネーターである
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type},
+\ref{spaces-morphisms-lemma-base-change-finite-type}, および
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} を用いる）。
+$V$ はスキームであることに注意する。これは $\Delta$ が表現可能だからである。また、
+$V$ は準コンパクトである。これは $f$ が準分離だからである。従って
+$V \to U$ は分離かつ有限型である。スキームの射の可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & U
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環、$K$ がネータースキーム $V$ の生成点の剰余体である
+ものを考える。$V \to X$ はエタールなので（エタール射 $U \to X \times_Y X$ の基底変換として）、
+$\Spec(K) \to V \to X$ の像は余次元 $0$ の点である。Properties of Spaces, Section
+\ref{spaces-properties-section-dimension-local-ring} を参照せよ。
+合成 $\Spec(A) \to U \to X \times_Y X$ を二つの射
+$a, b : \Spec(A) \to X$ と解釈できる。これらは $Y$ への射として一致し、
+$\Spec(K)$ への制限が等しく、この制限は余次元 $0$ の点へ写る。
+従って仮定 (4) により $a = b$ であり、
+図式の点線矢印を得る。Limits, Lemma
+\ref{limits-lemma-Noetherian-dvr-valuative-proper} により $V \to U$ は固有であると結論する。
+言い換えると $\Delta$ は固有である。$\Delta$ は単射態射なので、'Etale Morphisms, Lemma
+\ref{etale-lemma-characterize-closed-immersion} により $\Delta$ は所望通り閉埋め込みである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-Noetherian-dvr-valuative-proper}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は準分離かつ有限型で、$Y$ は局所ネーターであると仮定する。次は同値である。
+\begin{enumerate}
+\item $f$ は固有である。
+\item $f$ は付値判定法を満たす。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-valuative-criterion} を参照せよ。
+\item 任意の図式 (\ref{spaces-limits-equation-valuative}) に対して、点線矢印がちょうど一つ存在する。
+\item $A$ が離散付値環であるすべての図式 (\ref{spaces-limits-equation-valuative}) に対して、
+点線矢印がちょうど一つ存在する。
+\item $A$ が離散付値環で、$\Spec(K) \to X$ の像が余次元 $0$ の点（$X$ 上）である
+すべての図式 (\ref{spaces-limits-equation-valuative}) に対して、点線矢印がちょうど一つ存在する
+\footnote{存在の部分では離散付値環の拡大後に点線矢印が存在することだけを要求する、
+より鋭い定式化がある。}。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-characterize-proper} により
+(1) $\Leftrightarrow$ (2) $\Leftrightarrow$ (3) である。
+(3) $\Rightarrow$ (4) $\Rightarrow$ (5) は明らかである。証明を終えるため、
+ここで (5) が (1) を含意することを示す。
+
+\medskip\noindent
+(5) を仮定する。Lemma \ref{spaces-limits-lemma-Noetherian-dvr-valuative-separation} により $f$ は分離である。
+証明を終えるには $f$ が普遍閉であることを示せば十分である。$V \to Y$ をエタール射で、
+$V$ がアフィンスキームであるものとする。基底変換 $V \times_Y X \to V$ が普遍閉であることを
+示せば十分である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} を参照せよ。
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \times_Y X \ar[d] \ar[r] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] \ar@{..>}[rru] & V \ar[r] & Y
+}
+$$
+という可換図式を考え、これは $S$ 上の代数空間の図式とする。ここで $A$ は分数体 $K$ をもつ離散付値環で、
+$\Spec(K) \to V \times_Y X$ は余次元 $0$ の点（代数空間 $V \times_Y X$ のもの）へ写る。
+$V \times_Y X \to X$ はエタールなので、$\Spec(K) \to X$ の像は余次元 $0$ の点（$X$ のもの）である。
+従って (5) により二つの点線矢印のうち長い方を得る。するともちろん短い方も得る。
+従ってこの仮定は射 $V \times_Y X \to V$ に対して成り立ち、次の段落で論じる場合に帰着する。
+
+\medskip\noindent
+$Y$ はネーターアフィンスキームであると仮定する。この場合 $X$ は分離ネーター代数空間であり
+（$f$ は分離であることが既に分かっている）、$Y$ 上有限型である。
+% P09-ERR-0135: frozen source misspells "Assume" as "Aassume" here.
+（特に代数空間 $X$ は、Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme} により
+スキームである稠密開部分空間をもつが、厳密にはこれを必要としない。）
+準射影なスキーム $X'$（$Y$ 上のもの）と固有全射 $X' \to X$ を、Chow の補題の弱い形
+（Cohomology of Spaces, Lemma \ref{spaces-cohomology-lemma-weak-chow}）の通り選ぶ。
+$X'$ を、$X$ の既約成分を支配する既約成分の非交和で置き換えてよい。詳細は省略する。
+特に、スキーム $X'$ の生成点は余次元 $0$ の点（$X$ のもの）へ写ると仮定してよい
+（この場合、これらはちょうど $X$ の生成点である）。$X' \to Y$ は固有であると主張する。
+この主張により Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-proper-is-proper} から $X$ は $Y$ 上固有であることが従う。
+これを証明するには Limits, Lemma \ref{limits-lemma-Noetherian-dvr-valuative-proper} により、
+すべての実線可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X' \ar[r] & X \ar[d] \\
+\Spec(A) \ar[rr] \ar@{-->}[ru]^a \ar@{-->}[rru]_b & & Y
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環、$K$ が $X'$ の生成点の剰余体であるものにおいて、
+点線矢印 $a$ を見つけられることを示せば十分である（$X'$ は分離なので一意性は既に分かっている）。
+仮定 (5) により点線矢印 $b$ を見つけられる。すると射
+$X' \times_{X, b} \Spec(A) \to \Spec(A)$ はスキームの固有射であり、
+スキームの射に対する付値判定法により $b$ を所望の射 $a$ へ持ち上げられる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-check-universally-closed-Noetherian}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$Y$ は局所ネーターで、$f$ は有限型であると仮定する。このとき次は同値である。
+\begin{enumerate}
+\item $f$ は普遍閉である。
+\item $f$ は付値判定法の存在の部分を満たす。
+\item スキーム $V$ と全射エタール射 $V \to Y$ で、
+$|\mathbf{A}^n \times X \times_Y V| \to |\mathbf{A}^n \times V|$ が
+すべての $n \geq 0$ に対して閉となるものが存在する。
+\item $A$ が離散付値環であるすべての図式 (\ref{spaces-limits-equation-valuative}) に対して、
+体の有限分離拡大 $K'/K$、離散付値環 $A' \subset K'$ で $A$ を支配するもの、および射
+$\Spec(A') \to X$ が存在し、次の図式が可換である。
+% P09-ERR-0136 and P09-ERR-0137: frozen source says "there there exists"
+% separately in items (4) and (5).
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(A') \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+\item $A$ が離散付値環であるすべての図式 (\ref{spaces-limits-equation-valuative}) に対して、
+体拡大 $K'/K$、付値環 $A' \subset K'$ で $A$ を支配するもの、および射
+$\Spec(A') \to X$ が存在し、次の図式が可換である。
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(A') \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-test-universally-closed} および Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed} により、
+(1)、(2)、(3) は同値である。これらの同値な条件は (4) を含意する。実際、
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-separable-enough} により、
+付値判定法の存在の部分で $K'/K$ は常に有限分離に選べ、Krull--Akizuki により
+$A'$ は自動的に離散付値環となる（Algebra, Lemma
+\ref{algebra-lemma-krull-akizuki}）。(4) $\Rightarrow$ (5) は直ちに従う。
+証明の残りでは (5) が (1) を含意することを示す。
+
+\medskip\noindent
+(5) を仮定する。アフィンスキーム $V$ とエタール射 $V \to Y$ を選ぶ。
+% P09-ERR-0138: frozen source uses past-tense "Chose" instead of "Choose".
+$f$ の $V$ への基底変換が普遍閉であることを示せば十分である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} を参照せよ。Lemma
+\ref{spaces-limits-lemma-Noetherian-dvr-valuative-proper} の証明と全く同様に、仮定 (5) はこの基底変換に
+受け継がれることが分かる。詳細は省略する。これで次の段落の場合に帰着する。
+
+\medskip\noindent
+$Y$ はネーターアフィンスキームで、(5) が成り立つと仮定する。$f$ が普遍閉であることを
+証明するには、$|X \times \mathbf{A}^n| \to |Y \times \mathbf{A}^n|$ がすべての $n$ に対して
+閉であることを示せば十分である（上の議論による）。仮定 (5) は積射
+$X \times \mathbf{A}^n \to Y \times \mathbf{A}^n$ に受け継がれるので（詳細は省略する）、
+$|X| \to |Y|$ が閉であることの証明に帰着する。
+
+\medskip\noindent
+$Y$ はネーターアフィンスキームで、(5) が成り立つと仮定する。
+$T \subset |X|$ を閉部分集合とする。$T$ の $|Y|$ における像が閉であることを
+示さなければならない。$X$ を $T$ 上の被約誘導閉部分空間構造で置き換えてよい。
+この置き換えで性質 (5) が保たれることの検証は省略する。従って
+$|X| \to |Y|$ の像が閉であることの証明に帰着する。
+
+\medskip\noindent
+$y \in |Y|$ を $|X| \to |Y|$ の像の閉包に属する点とする。
+Lemma \ref{spaces-limits-lemma-reach-point-closure-Noetherian} により可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d]^f \\
+\Spec(A) \ar[r] & Y
+}
+$$
+を選べる。ここで $A$ は離散付値環、$K$ はその分数体であり、$\Spec(A)$ の閉点を
+$y$ に写す。性質 (5) から直ちに、$y$ は $|X| \to |Y|$ の像に属することが従い、
+証明が完了する。
+\end{proof}
+
+\section{精密化されたネーター的付値判定法}
+\label{spaces-limits-section-refined-valuative-criteria}
+
+\noindent
+この節は Limits, Section \ref{limits-section-refined-valuative-criteria} の類似である。
+付値判定法を確認するとき、通常は付値環をもつ可能な図式をすべて考える必要はない。
+
+\begin{lemma}
+\label{spaces-limits-lemma-refined-valuative-criterion-proper}
+$S$ をスキームとする。$f : X \to Y$ および $h : U \to X$ を
+$S$ 上の代数空間の射とする。$Y$ は局所ネーター、$f$ と $h$ は有限型、$f$ は分離であり、
+$|h| : |U| \to |X|$ の像は $|X|$ で稠密であると仮定する。
+任意の実線可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^f \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環であるものが与えられるたび、図式を可換にする
+点線矢印が存在するなら、$f$ は固有である。
+\end{lemma}
+
+\begin{proof}
+$f$ が普遍閉であることを証明すれば十分である。$V \to Y$ をエタール射で、
+$V$ がアフィンスキームであるものとする。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local} により、基底変換
+$X \times_Y V \to V$ が普遍閉であることを証明すれば十分である。
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian} により、
+像 $I$（$|U \times_Y V| \to |X \times_Y V|$ のもの）は $|h|$ の像の逆像である。
+$|X \times_Y V| \to |X|$ は開なので（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-open}）、$I$ は $|X \times_Y V|$ で稠密であると結論する。
+従って補題の仮定は射 $U \times_Y V \to X \times_Y V \to V$ に対して満たされる。
+よって $Y$ はアフィンスキームであると仮定してよい。
+
+\medskip\noindent
+$Y$ はアフィンスキームであると仮定する。このとき $U$ は準コンパクトである。
+アフィンスキームと全射エタール射 $W \to U$ を選ぶ。このとき $U$ を $W$ で置き換え、
+$U$ はアフィンであると仮定してよく、実際そうする。Chow の補題の弱い形
+（Cohomology of Spaces, Lemma \ref{spaces-cohomology-lemma-weak-chow}）により、
+全射固有射 $X' \to X$ で $X'$ がスキームであるものを選べる。
+このとき $U' = X' \times_X U$ はスキームで、$U' \to X'$ は有限型である。
+$X'$ を $h' : U' \to X'$ のスキーム論的像で置き換えてよく、その結果
+$h'(U')$ は $X'$ で稠密である。すべての図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U' \ar[r]^h & X' \ar[d]^{f'} \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環であるものに対して、図式を可換にする点線矢印が
+存在すると主張する。実際、まず補題の仮定により射 $\Spec(A) \to X$ を得て、次に
+固有性の付値判定法（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-proper}）を用いて、これを射 $\Spec(A) \to X'$ に持ち上げる。
+% P09-ERR-0140: frozen source labels U' -> X' by h in this diagram although it was defined as h'.
+射 $X' \to Y$ は固有射と分離射の合成として分離である。従ってスキームの場合
+（Limits, Lemma \ref{limits-lemma-refined-valuative-criterion-proper}）により
+射 $X' \to Y$ は固有である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-proper-is-proper} により $X \to Y$ は固有であると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-refined-valuative-criterion-separated}
+$S$ をスキームとする。$f : X \to Y$ および $h : U \to X$ を
+$S$ 上の代数空間の射とする。$Y$ は局所ネーター、$f$ は局所有限型かつ準分離、
+$h$ は有限型であり、$|h| : |U| \to |X|$ の像は $|X|$ で稠密であると仮定する。
+任意の実線可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^f \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環であるものが与えられるたび、図式を可換にする
+点線矢印が高々一つ存在するなら、$f$ は分離である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-refined-valuative-criterion-proper} を射 $U \to X$ および
+$\Delta : X \to X \times_Y X$ に適用する。条件を確認する。$\Delta$ は準コンパクトである。
+これは $f$ が準分離だからであることに注意する。もちろん $\Delta$ は局所有限型かつ分離である
+（これは任意の対角射に対して成り立つ）。最後に、実線可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^\Delta \\
+\Spec(A) \ar[rr]^{(a, b)} \ar@{-->}[rru] & & X \times_Y X
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環であるものが与えられたとする。
+このとき $a$ と $b$ は補題の図式に二つの点線矢印を与えるので、等しくなければならない。
+従って点線矢印として $a = b$ を用いることができ、存在が得られる。これで証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-refined-valuative-criterion-universally-closed}
+$S$ をスキームとする。$f : X \to Y$ および $h : U \to X$ を
+$S$ 上の代数空間の射とする。$Y$ は局所ネーター、$f$ と $h$ は有限型、$f$ は準分離であり、
+$h(U)$ は $X$ で稠密であると仮定する。任意の実線可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & U \ar[r]^h & X \ar[d]^f \\
+\Spec(A) \ar[rr] \ar@{-->}[rru] & & Y
+}
+$$
+で、$A$ が分数体 $K$ をもつ離散付値環であるものが与えられるたび、図式を可換にする
+点線矢印が一意に存在するなら、$f$ は固有である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-limits-lemma-refined-valuative-criterion-separated} および
+\ref{spaces-limits-lemma-refined-valuative-criterion-proper} を組み合わせる。
+\end{proof}
+
+\section{有限型空間の降下}
+\label{spaces-limits-section-finite-type-quasi-separated}
+
+\noindent
+この節は Section \ref{spaces-limits-section-finite-type-closed-in-finite-presentation} の主題を、
+Section \ref{spaces-limits-section-descending-relative} で論じた結果の精神に従って続ける。
+また、代数空間に対する Limits, Section
+\ref{limits-section-finite-type-quasi-separated} の類似でもある。
+
+\begin{situation}
+\label{spaces-limits-situation-limit-noetherian}
+$S$ をスキーム、例えば $\Spec(\mathbf{Z})$ とする。
+$B = \lim_{i \in I} B_i$ を、$S$ 上のネーター空間の有向逆系の極限で、
+遷移射 $B_{i'} \to B_i$ が $i' \geq i$ に対してアフィンであるものとする。
+\end{situation}
+
+\begin{lemma}
+\label{spaces-limits-lemma-good-diagram}
+Situation \ref{spaces-limits-situation-limit-noetherian} の状況とする。
+$X \to B$ を代数空間の準分離かつ有限型な射とする。このとき $i \in I$ と図式
+\begin{equation}
+\label{spaces-limits-equation-good-diagram}
+\vcenter{
+\xymatrix{
+X \ar[r] \ar[d] & W \ar[d] \\
+B \ar[r] & B_i
+}
+}
+\end{equation}
+が存在し、$W \to B_i$ は有限型で、誘導射 $X \to B \times_{B_i} W$ は閉埋め込みである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-finite-type-closed-in-finite-presentation} により、閉埋め込み
+$X \to X'$ で $B$ 上のものを見つけられ、$X'$ は $B$ 上有限表示な代数空間である。
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation} により $i$ と有限表示射
+$X'_i \to B_i$ で、その引き戻しが $X'$ であるものを見つけられる。$W = X'_i$ とおく。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-limit-from-good-diagram}
+Situation \ref{spaces-limits-situation-limit-noetherian} の状況とする。
+$X \to B$ を代数空間の準分離かつ有限型な射とする。$i \in I$ と、
+(\ref{spaces-limits-equation-good-diagram}) の通りの図式
+$$
+\vcenter{
+\xymatrix{
+X \ar[r] \ar[d] & W \ar[d] \\
+B \ar[r] & B_i
+}
+}
+$$
+が与えられたとする。$i' \geq i$ に対して $X_{i'}$ を
+$X \to B_{i'} \times_{B_i} W$ のスキーム論的像とする。このとき
+$X = \lim_{i' \geq i} X_{i'}$ である。
+\end{lemma}
+
+\begin{proof}
+$X$ は準コンパクトかつ準分離なので、$X \to B_{i'} \times_{B_i} W$ の
+スキーム論的像を作る操作はエタール局所化と可換である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}）。
+従って $W$ はアフィンで、アフィン $U_i$ の中へ写り、後者は $B_i$ 上エタールであると仮定してよく、
+実際そうする。このとき
+$$
+B_{i'} \times_{B_i} W =
+B_{i'} \times_{B_i} U_i \times_{U_i} W =
+U_{i'} \times_{U_i} W
+$$
+であり、ここで $U_{i'} = B_{i'} \times_{B_i} U_i$ は遷移射がアフィンなのでアフィンである。
+従って補題はスキームの場合、すなわち Limits, Lemma
+\ref{limits-lemma-limit-from-good-diagram} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram}
+Situation \ref{spaces-limits-situation-limit-noetherian} の状況とする。
+$f : X \to Y$ を、$B$ 上準分離かつ有限型な代数空間の射とする。
+図式
+$$
+\vcenter{
+\xymatrix{
+X \ar[r] \ar[d] & W \ar[d] \\
+B \ar[r] & B_{i_1}
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+Y \ar[r] \ar[d] & V \ar[d] \\
+B \ar[r] & B_{i_2}
+}
+}
+$$
+が (\ref{spaces-limits-equation-good-diagram}) の通りであるとする。Lemma
+\ref{spaces-limits-lemma-limit-from-good-diagram} の通りの対応する極限表示を
+$X = \lim_{i \geq i_1} X_i$ および $Y = \lim_{i \geq i_2} Y_i$ とする。
+このとき $i_0 \geq \max(i_1, i_2)$ と逆系の射
+$$
+(f_i)_{i \geq i_0} : (X_i)_{i \geq i_0} \to (Y_i)_{i \geq i_0}
+$$
+で、$(B_i)_{i \geq i_0}$ 上のものが存在し、$f = \lim_{i \geq i_0} f_i$ である。
+% P09-ERR-0141 and P09-ERR-0142: frozen source duplicates "such that"
+% separately in the existence and uniqueness clauses.
+第二の逆系の射
+$(g_i)_{i \geq i_0} : (X_i)_{i \geq i_0} \to (Y_i)_{i \geq i_0}$ が
+$(B_i)_{i \geq i_0}$ 上のもので、$f = \lim_{i \geq i_0} g_i$ を満たすなら、
+$f_i = g_i$ がすべての $i \gg i_0$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$V \to B_{i_2}$ は有限表示で $X = \lim_{i \geq i_1} X_i$ なので、
+Proposition \ref{spaces-limits-proposition-characterize-locally-finite-presentation}
+（Lemma \ref{spaces-limits-lemma-better-characterize-relative-limit-preserving} により改良されたもの）に訴えて、
+$i_0 \geq \max(i_1, i_2)$ と射 $h : X_{i_0} \to V$ で $B_{i_2}$ 上のものを見つけられる。
+この射は、$X \to X_{i_0} \to V$ が $X \to Y \to V$ に等しいものとする。
+$i \geq i_0$ に対して実線可換図式
+$$
+\xymatrix{
+X \ar[d] \ar[r] &
+X_i \ar[r] \ar@{..>}[d] \ar@/_2pc/[dd] |!{[d];[ld]}\hole &
+X_{i_0} \ar[d]^h \\
+Y \ar[r] \ar[d] & Y_i \ar[r] \ar[d] & V \ar[d] \\
+B \ar[r] & B_i \ar[r] & B_{i_0}
+}
+$$
+を得る。$X \to X_i$ の像はスキーム論的に稠密であり、$Y_i$ は
+$Y \to B_i \times_{B_{i_2}} V$ のスキーム論的像なので、図式が誘導する射
+$X_i \to B_i \times_{B_{i_2}} V$ は $Y_i$ を経由する
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-factor-factor}）。
+これで存在が証明される。
+
+\medskip\noindent
+一意性を示す。$E_i \to X_i$ を $f_i$ と $g_i$ の等化子（$i \geq i_0$ に対するもの）とする。
+$E_i = Y_i \times_{\Delta, Y_i \times_{B_i} Y_i, (f_i, g_i)} X_i$ である。
+従って $E_i \to X_i$ は、$Y_i$ の $B_i$ 上の対角射の基底変換として、
+有限表示な単射態射である。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-properties-diagonal} および
+\ref{spaces-morphisms-lemma-diagonal-morphism-finite-type} を参照せよ。
+$X_i$ は $B_i \times_{B_{i_0}} X_{i_0}$ の閉部分空間であり、$Y_i$ についても同様なので、
+$$
+E_i =
+X_i \times_{(B_i \times_{B_{i_0}} X_{i_0})} (B_i \times_{B_{i_0}} E_{i_0}) =
+X_i \times_{X_{i_0}} E_{i_0}
+$$
+である。同様に $X = X \times_{X_{i_0}} E_{i_0}$ である。従って Lemma
+\ref{spaces-limits-lemma-descend-isomorphism} により、$E_i = X_i$ が十分大きな $i$ に対して成り立つと結論する。
+\end{proof}
+
+\begin{remark}
+\label{spaces-limits-remark-finite-type-gives-well-defined-system}
+Situation \ref{spaces-limits-situation-limit-noetherian} において、Lemmas
+\ref{spaces-limits-lemma-good-diagram}、\ref{spaces-limits-lemma-limit-from-good-diagram}、および
+\ref{spaces-limits-lemma-morphism-good-diagram} は、$B$ 上準分離かつ有限型な代数空間の圏が
+$(B_i)_{i \in I}$ 上の特定の種類の代数空間の逆系、すなわち
+Lemma \ref{spaces-limits-lemma-limit-from-good-diagram} を
+(\ref{spaces-limits-equation-good-diagram}) の形の図式に適用して得られるものと同値であることを教える。
+例えば有限型かつ準分離な $X \to B$ が与えられ、
+(\ref{spaces-limits-equation-good-diagram}) の通りの二つの異なる図式
+$X \to V_1 \to B_{i_1}$ と $X \to V_2 \to B_{i_2}$ を選んだとする。
+Lemma \ref{spaces-limits-lemma-morphism-good-diagram} を $\text{id}_X$ に（二方向に）適用すると、
+$X$ の対応する極限表示は標準的に同型であることが分かる（有向集合 $I$ を縮小することを除く）。
+以下同様である。
+\end{remark}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram-flat}
+記法と仮定は Lemma \ref{spaces-limits-lemma-morphism-good-diagram} の通りとする。
+$f$ が平坦かつ有限表示なら、$i_3 > i_0$ が存在し、$i \geq i_3$ に対して
+$f_i$ は平坦、$X_i = Y_i \times_{Y_{i_3}} X_{i_3}$、かつ
+$X = Y \times_{Y_{i_3}} X_{i_3}$ である。
+% P09-ERR-0980: frozen source requires strict i_3 > i_0 here (and in the smooth lemma),
+% although a directed index set need not provide a strictly larger index; >= is the stable condition.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-limits-lemma-descend-finite-presentation} により、$i \geq i_2$ と有限表示射
+$U \to Y_i$ で $X = Y \times_{Y_i} U$ を満たすものを選べる
+（ここで $f$ が有限表示であることを用いる）。$i$ を大きくした後、
+$U \to Y_i$ は平坦であると仮定してよい。Lemma \ref{spaces-limits-lemma-descend-flat} を参照せよ。
+Remark \ref{spaces-limits-remark-finite-type-gives-well-defined-system} で論じたように、系
+$(X_i)_{i \geq i_1}$ を定義するために使った最初の図式を、
+$X \to U \to B_i$ に対応する系で置き換えてよく、実際そうする。従って
+$X_{i'}$（$i' \geq i$ に対するもの）は $X \to B_{i'} \times_{B_i} U$ の
+スキーム論的像として定義される。
+
+\medskip\noindent
+$U \to Y_i$ は平坦なので（ここで $f$ が平坦であることを用いる）、
+$X = Y \times_{Y_i} U$ であり、$Y \to Y_i$ のスキーム論的像は $Y_i$ なので、
+$X \to U$ のスキーム論的像は $U$ であることが分かる（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-base-change-scheme-theoretic-image}）。
+$Y_{i'} \to B_{i'} \times_{B_i} Y_i$ は $i' \geq i$ に対して、
+系 $Y_j$ の構成により閉埋め込みであることに注意する。すると上と同じ議論により、
+$X \to B_{i'} \times_{B_i} U$ のスキーム論的像は閉部分空間
+$Y_{i'} \times_{Y_i} U$ に等しい。従って
+$X_{i'} = Y_{i'} \times_{Y_i} U$ がすべての $i' \geq i$ に対して成り立ち、
+補題は $i_3 = i$ として成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram-smooth}
+記法と仮定は Lemma \ref{spaces-limits-lemma-morphism-good-diagram} の通りとする。
+$f$ が滑らかなら $i_3 > i_0$ が存在し、$i \geq i_3$ に対して $f_i$ は滑らかである。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{spaces-limits-lemma-morphism-good-diagram-flat} および
+\ref{spaces-limits-lemma-descend-smooth} を組み合わせる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-morphism-good-diagram-proper}
+記法と仮定は Lemma \ref{spaces-limits-lemma-morphism-good-diagram} の通りとする。
+$f$ が固有なら $i_3 \geq i_0$ が存在し、$i \geq i_3$ に対して $f_i$ は固有である。
+\end{lemma}
+
+\begin{proof}
+Remark \ref{spaces-limits-remark-finite-type-gives-well-defined-system} の議論により、
+(\ref{spaces-limits-equation-good-diagram}) の通りの図式に入る $i_1$ と $W$ の選択は補題の真偽に
+影響しない。従って $W$ を次のように選ぶ。まず閉埋め込み $X \to X'$ で
+$X' \to Y$ が固有かつ有限表示であるものを選ぶ。Lemma
+\ref{spaces-limits-lemma-proper-limit-of-proper-finite-presentation} を参照せよ。次に
+$i_3 \geq i_2$ と固有射 $W \to Y_{i_3}$ で
+$X' = Y \times_{Y_{i_3}} W$ を満たすものを選ぶ。これは
+$Y = \lim_{i \geq i_2} Y_i$ と Lemmas \ref{spaces-limits-lemma-relative-approximation} および
+\ref{spaces-limits-lemma-eventually-proper} により可能である。
+% P09-ERR-0143: frozen source has the incomplete construction "This is possible because Y=... and Lemmas...".
+この $W$ の選択により、$i \geq i_3$ に対して代数空間 $X_i$ は
+$Y_i \times_{Y_{i_3}} W \subset B_i \times_{B_{i_3}} W$ の閉部分空間であり、
+従って $Y_i$ 上固有であることが構成から直ちに分かる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-limits-lemma-good-diagram-fibre-product}
+Situation \ref{spaces-limits-situation-limit-noetherian} において、Cartesian diagram
+$$
+\xymatrix{
+X^1 \ar[r]_p \ar[d]_q & X^3 \ar[d]^a \\
+X^2 \ar[r]^b & X^4
+}
+$$
+が与えられていると仮定する。ここで、これらは $B$ 上準分離かつ有限型な
+代数空間である。各 $j = 1, 2, 3, 4$ に対して $i_j \in I$ と図式
+$$
+\xymatrix{
+X^j \ar[r] \ar[d] & W^j \ar[d] \\
+B \ar[r] & B_{i_j}
+}
+$$
+を (\ref{spaces-limits-equation-good-diagram}) の通りに選ぶ。Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram} の通りの対応する極限表示を
+$X^j = \lim_{i \geq i_j} X^j_i$ とする。Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram} で構成される対応する逆系の射を
+$(a_i)_{i \geq i_5}$、$(b_i)_{i \geq i_6}$、$(p_i)_{i \geq i_7}$、および
+$(q_i)_{i \geq i_8}$ とする。このとき
+$i_9 \geq \max(i_5, i_6, i_7, i_8)$ が存在し、$i \geq i_9$ に対して
+$a_i \circ p_i = b_i \circ q_i$ が成り立ち、かつ
+$$
+(q_i, p_i) : X^1_i \longrightarrow X^2_i \times_{b_i, X^4_i, a_i} X^3_i
+$$
+は閉埋め込みである。$a$ と $b$ が平坦かつ有限表示なら、
+$i_{10} \geq \max(i_5, i_6, i_7, i_8, i_9)$ が存在し、$i \geq i_{10}$ に対して
+最後に表示した射は同型である。
+\end{lemma}
+
+\begin{proof}
+Remark \ref{spaces-limits-remark-finite-type-gives-well-defined-system} の議論によれば、
+(\ref{spaces-limits-equation-good-diagram}) の通りの図式に入る $W^1$ の選択は、補題の真偽に
+影響しない。従って $W^1 = W^2 \times_{W^4} W^3$ と選んでよい。
+すると $X^1_i$ の構成から直ちに $a_i \circ p_i = b_i \circ q_i$ が成り立ち、かつ
+$$
+(q_i, p_i) : X^1_i \longrightarrow X^2_i \times_{b_i, X^4_i, a_i} X^3_i
+$$
+が閉埋め込みであることが分かる。
+
+\medskip\noindent
+$a$ と $b$ が平坦かつ有限表示なら、それらの基底変換である $p$ と $q$ も
+（$a$ と $b$ の基底変換として）平坦かつ有限表示である。従って Lemma
+\ref{spaces-limits-lemma-morphism-good-diagram-flat} を $a$、$b$、$p$、$q$、および
+$a \circ p = b \circ q$ のそれぞれに適用できる。
+% P09-ERR-0145: frozen source reuses i_9 here although the statement introduces i_{10}
+% for this second eventual stage.
+その結果、$i_9 \in I$ が存在し、
+$$
+(q_i, p_i) : X^1_i \to X^2_i \times_{X^4_i} X^3_i
+$$
+は $(q_{i_9}, p_{i_9})$ を射 $X^4_i \to X^4_{i_9}$ により基底変換したものとなり、
+これはすべての $i \geq i_9$ に対して成り立つ。
+% P09-ERR-0146: frozen source duplicates the phrase "by the morphism" at this locus.
+$(q_i, p_i)$ は十分大きなすべての $i$ に対して同型であると、Lemma
+\ref{spaces-limits-lemma-descend-isomorphism} により結論する。
+\end{proof}

@@ -1,0 +1,1912 @@
+% Generated mechanically from frozen input p07/ja/functors.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{55}
+\chapter{関手と射}
+
+
+
+\phantomsection
+\label{functors-section-phantom}
+
+
+\section{序論}
+\label{functors-section-introduction}
+
+\noindent
+$X$ と $Y$ をスキームとする．本章では，関手
+$\QCoh(\mathcal{O}_Y) \to \QCoh(\mathcal{O}_X)$ とスキームの射
+$X \to Y$ の関係を巡って議論する．さらに広く，$\QCoh(\mathcal{O}_X)$ と $X$ の関係，
+または $X$ が Noether スキームである場合には
+$\textit{Coh}(\mathcal{O}_X)$ と $X$ の関係を研究する．
+この関係は \cite{Gabriel} で研究された．
+
+
+
+
+
+
+\section{加群圏上の関手}
+\label{functors-section-preliminary}
+
+\noindent
+環 $A$ に対し，$\text{Mod}^{fp}_A$ を有限表示 $A$-加群の圏と書く．
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules}
+$A$ を環とし，$\mathcal{B}$ をフィルター余極限をもつ圏とする．
+$F : \text{Mod}^{fp}_A \to \mathcal{B}$ を関手とする．このとき $F$ は，
+フィルター余極限と交換する関手 $F' : \text{Mod}_A \to \mathcal{B}$ へ一意的に延長される．
+\end{lemma}
+
+\begin{proof}
+これは「圏」章の補題 \ref{categories-lemma-extend-functor-by-colim} から従う．
+この補題が適用できることを見るには，「可換代数」章の補題
+\ref{algebra-lemma-characterize-finitely-presented-module-hom} により，有限表示
+$A$-加群が $\text{Mod}_A$ の圏論的コンパクト対象であることに注意すればよい．
+また「可換代数」章の補題 \ref{algebra-lemma-module-colimit-fp} により，任意の $A$-加群は
+有限表示 $A$-加群のフィルター余極限である．
+\end{proof}
+
+\noindent
+$\mathcal{B}$ が加法圏でフィルター余極限をもつならば，$\mathcal{B}$ は任意の直和をもつ．
+実際，任意の直和は有限直和のフィルター余極限として書ける．
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules-additive}
+$A$, $\mathcal{B}$, $F$ を補題 \ref{functors-lemma-functor-on-fp-modules} のものとする．
+$\mathcal{B}$ が加法圏で，$F$ が加法的であると仮定する．このとき $F'$ は加法的であり，任意の直和と交換する．
+\end{lemma}
+
+\begin{proof}
+$F'$ が加法的であることを示すには，$F'(M) \oplus F'(M') \to F'(M \oplus M')$ が
+任意の $A$-加群 $M$, $M'$ に対して同型であることを示せば十分である．
+「ホモロジー代数」章の補題 \ref{homology-lemma-additive-functor} を参照せよ．
+$M = \colim_i M_i$ と $M' = \colim_j M'_j$ を，有限表示 $A$-加群 $M_i$ の
+フィルター余極限として書く．このとき
+$F'(M) = \colim_i F(M_i)$, $F'(M') = \colim_j F(M'_j)$ であり，
+\begin{align*}
+F'(M \oplus M')
+& =
+F'(\colim_{i, j} M_i \oplus M'_j) \\
+& =
+\colim_{i, j} F(M_i \oplus M'_j) \\
+& =
+\colim_{i, j} F(M_i) \oplus F(M'_j) \\
+& =
+F'(M) \oplus F'(M')
+\end{align*}
+を得る．次に $F'$ が直和と交換することを示すため，
+$M = \bigoplus_{i \in I} M_i$ と仮定する．このとき
+$M = \colim_{I' \subset I\text{ 有限}} \bigoplus_{i \in I'} M_i$ は
+フィルター余極限である．したがって
+\begin{align*}
+F'(M)
+& =
+\colim_{I' \subset I\text{ 有限}}
+F'(\bigoplus\nolimits_{i \in I'} M_i) \\
+& =
+\colim_{I' \subset I\text{ 有限}}
+\bigoplus\nolimits_{i \in I'} F'(M_i) \\
+& =
+\bigoplus\nolimits_{i \in I} F'(M_i)
+\end{align*}
+を得る．第二の等号は，すでに示した $F'$ の加法性による．
+\end{proof}
+
+\noindent
+$\mathcal{B}$ が加法圏で，フィルター余極限と余核をもつならば，
+$\mathcal{B}$ は任意の余極限をもつ．上の議論および「圏」章の補題
+\ref{categories-lemma-colimits-coproducts-coequalizers} を参照せよ．
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules-right-exact}
+$A$, $\mathcal{B}$, $F$ を補題 \ref{functors-lemma-functor-on-fp-modules} のものとする．
+$\mathcal{B}$ が加法圏で余核をもち，$F$ が右完全であると仮定する．このとき
+$F'$ は加法的かつ右完全であり，任意の直和と交換する．
+\end{lemma}
+
+\begin{proof}
+$F$ は右完全なので，$F$ は直和で表される二対象の余積と交換する．
+したがって「ホモロジー代数」章の補題 \ref{homology-lemma-additive-functor} により $F$ は加法的である．
+ゆえに補題 \ref{functors-lemma-functor-on-fp-modules-additive} により，$F'$ は加法的で直和と交換する．
+以下の証明を読む代わりに，$F'$ が右完全であることを読者自身で証明してほしい．
+
+\medskip\noindent
+$F'$ が右完全であることを示すには，$F'$ が余等化子と交換することを示せば十分である．
+「圏」章の補題 \ref{categories-lemma-characterize-right-exact} を参照せよ．
+$a, b : K \to L$ が $A$-加群の射ならば，$a$ と $b$ の余等化子は
+$a - b : K \to L$ の余核である．そこで $K \to L \to M \to 0$ を
+$A$-加群の完全列とする．次の列において
+$$
+F'(K) \to F'(L) \to F'(M) \to 0
+$$
+第二の矢印が第一の矢印の $\mathcal{B}$ における余核であることを示さなければならない
+（$\mathcal{B}$ がアーベル圏ならば，表示された列が完全であると言うところである）．
+$M = \colim_{i \in I} M_i$ を有限表示 $A$-加群のフィルター余極限として書く．
+「可換代数」章の補題 \ref{algebra-lemma-module-colimit-fp} を参照せよ．
+$L_i = L \times_M M_i$ とおく．完全列の系 $K \to L_i \to M_i \to 0$ を
+$I$ 上に得る．「圏」章の補題
+\ref{categories-lemma-colimits-commute} により余極限どうしは交換し，
+また余核は余等化子の一種なので，$F'(L_i) \to F(M_i)$ が
+$F'(K) \to F'(L_i)$ の $\mathcal{B}$ における余核であることを，すべての
+$i \in I$ に対して示せば十分である．換言すれば，$M$ は有限表示であると仮定してよい．
+$L = \colim_{i \in I} L_i$ を有限表示 $A$-加群のフィルター余極限として書き，
+各 $L_i$ が $M$ へ全射するようにする．$K_i = K \times_L L_i$ とおく．
+% P07-ERR-0537: frozen source calls this and the later right-exact system short exact. Wording preserved.
+短完全列の系 $K_i \to L_i \to M \to 0$ を $I$ 上に得る．
+% P07-ERR-0536: frozen source retains F(M_i) after reducing to fixed M. Formula preserved.
+すでに与えた論証を繰り返すと，$F(L_i) \to F(M_i)$ が
+$F'(K) \to F(L_i)$ の $\mathcal{B}$ における余核であることを，すべての
+$i \in I$ に対して示す問題に帰着する．換言すれば，$L$ と $M$ はともに有限表示 $A$-加群であると
+仮定してよい．この場合，$\Ker(L \to M)$ は有限生成加群である
+（「可換代数」章の補題 \ref{algebra-lemma-extension}）．したがって
+$K = \colim_{i \in I} K_i$ を有限表示 $A$-加群のフィルター余極限として書き，
+% P07-ERR-0537: second frozen short-exact misclassification. Wording preserved.
+各項が $\Ker(L \to M)$ へ全射するようにできる．短完全列の系
+$K_i \to L \to M \to 0$ を $I$ 上に得る．すでに与えた論証を繰り返すと，
+$F(L) \to F(M)$ が $F(K_i) \to F(L)$ の $\mathcal{B}$ における余核であることを，
+すべての $i \in I$ に対して示す問題に帰着する．
+換言すれば，$K$, $L$, $M$ は有限表示 $A$-加群であると仮定してよい．
+この最後の場合は，$F$ が右完全であるという仮定から従う．
+\end{proof}
+
+\noindent
+$\mathcal{B}$ が核をもつ加法圏ならば，$\mathcal{B}$ は有限極限をもつ．
+実際，有限積は存在する直和であり，$a, b : L \to M$ の等化子は，
+% P07-ERR-0538: frozen source gives the mismatched map a-b:K->L. Formula preserved.
+存在する $a - b : K \to L$ の核である．したがって「圏」章の補題
+\ref{categories-lemma-finite-limits-exist} により，すべての有限極限が存在する．
+
+\begin{lemma}
+\label{functors-lemma-functor-on-fp-modules-left-exact}
+$A$, $\mathcal{B}$, $F$ を補題 \ref{functors-lemma-functor-on-fp-modules} のものとする．
+$A$ は連接環（「可換代数」章の定義 \ref{algebra-definition-coherent}）であり，
+$\mathcal{B}$ は核をもつ加法圏であり，フィルター余極限は核を取る操作と交換し，
+$F$ は左完全であると仮定する．このとき $F'$ は加法的かつ左完全であり，任意の直和と交換する．
+\end{lemma}
+
+\begin{proof}
+$A$ は連接環なので，圏 $\text{Mod}^{fp}_A$ はアーベル圏であり，
+$\text{Mod}_A$ におけるものと同じ核および余核をもつ．「可換代数」章の補題
+\ref{algebra-lemma-coherent-ring} および \ref{algebra-lemma-coherent} を参照せよ．
+したがって $\text{Mod}^{fp}_A$ ではすべての有限極限が存在し，「圏」章の定義
+\ref{categories-definition-exact} が適用できる．$F$ は左完全なので，$F$ は直和で表される
+二対象の積と交換する．ゆえに「ホモロジー代数」章の補題 \ref{homology-lemma-additive-functor} により
+$F$ は加法的である．したがって補題 \ref{functors-lemma-functor-on-fp-modules-additive} により，
+$F'$ は加法的で直和と交換する．以下の証明を読む代わりに，$F'$ が左完全であることを
+読者自身で証明してほしい．
+
+\medskip\noindent
+$F'$ が左完全であることを示すには，$F'$ が等化子と交換することを示せば十分である．
+「圏」章の補題 \ref{categories-lemma-characterize-left-exact} を参照せよ．
+$a, b : L \to M$ が $A$-加群の射ならば，$a$ と $b$ の等化子は
+$a - b : L \to M$ の核である．そこで $0 \to K \to L \to M$ を
+$A$-加群の完全列とする．次の列において
+$$
+0 \to F'(K) \to F'(L) \to F'(M)
+$$
+$F'(K) \to F'(L)$ が $F'(L) \to F'(M)$ の $\mathcal{B}$ における核であることを
+示さなければならない（$\mathcal{B}$ がアーベル圏ならば，表示された列が完全であると
+言うところである）．$M = \colim_{i \in I} M_i$ を有限表示 $A$-加群の
+フィルター余極限として書く．「可換代数」章の補題
+\ref{algebra-lemma-module-colimit-fp} を参照せよ．$L_i = L \times_M M_i$ とおく．
+完全列の系 $0 \to K \to L_i \to M_i$ を $I$ 上に得る．仮定によりフィルター余極限は
+$\mathcal{B}$ において核を取る操作と交換するので，$F'(K) \to F'(L_i)$ が
+$F'(L_i) \to F(M_i)$ の $\mathcal{B}$ における核であることを，すべての
+$i \in I$ に対して示せば十分である．換言すれば，$M$ は有限表示であると仮定してよい．
+$L = \colim_{i \in I} L_i$ を有限表示 $A$-加群のフィルター余極限として書く．
+$K_i = K \times_L L_i$ とおく．
+% P07-ERR-0539: frozen source calls the following non-right-terminated sequence short exact. Wording preserved canonically.
+短完全列の系 $0 \to K_i \to L_i \to M$ を $I$ 上に得る．
+すでに与えた論証を繰り返すと，$F'(K_i) \to F(L_i)$ が
+$F(L_i) \to F(M)$ の $\mathcal{B}$ における核であることを，すべての
+$i \in I$ に対して示す問題に帰着する．換言すれば，$L$ と $M$ はともに有限表示
+$A$-加群であると仮定してよい．$A$ は連接環なので，$A$-加群
+$K = \Ker(L \to M)$ は有限表示である．これは，有限表示 $A$-加群の圏が
+アーベル圏であることによる（上掲の参考文献を参照せよ）．換言すれば，三つの加群
+$K$, $L$, $M$ はすべて有限表示 $A$-加群である．この最後の場合は，
+$F$ が左完全であるという仮定から従う．
+\end{proof}
+
+\noindent
+$\mathcal{B}$ が余核をもつ加法圏ならば，$\mathcal{B}$ は有限余極限をもつ．
+実際，有限余積は存在する直和であり，$a, b : K \to L$ の余等化子は，
+存在する $a - b : K \to L$ の余核である．したがって「圏」章の補題
+\ref{categories-lemma-colimits-exist} により，すべての有限余極限が存在する．
+
+\begin{lemma}
+\label{functors-lemma-functor-on-modules-fp}
+$A$ を環とし，$\mathcal{B}$ を余核をもつ加法圏とする．次の二つの圏の間には圏同値がある．
+\begin{enumerate}
+\item 右完全な関手 $F : \text{Mod}^{fp}_A \to \mathcal{B}$ の圏．
+\item 対 $(K, \kappa)$ の圏．ただし $K \in \Ob(\mathcal{B})$ であり，
+$\kappa : A \to \text{End}_\mathcal{B}(K)$ は環準同型である．
+\end{enumerate}
+この圏同値は，$F$ を $F(A)$ へ送り，後者に自然な $A$-作用を入れる規則で与えられる．
+\end{lemma}
+
+\begin{proof}
+$(K, \kappa)$ を (2) のものとする．$F : \text{Mod}^{fp}_A \to \mathcal{B}$ で，
+$F(A) = K$ が与えられた $A$-作用 $\kappa$ を備えるような関手を構成する．
+実際，整数 $n \geq 0$ に対して
+$$
+F(A^{\oplus n}) = K^{\oplus n}
+$$
+とおく．$A$-線形写像 $\varphi : A^{\oplus m} \to A^{\oplus n}$ で，行列が
+$(a_{ij}) \in \text{Mat}(n \times m, A)$ であるものに対し，
+$$
+F(\varphi) :
+F(A^{\oplus m}) = K^{\oplus m}
+\longrightarrow
+K^{\oplus n} = F(A^{\oplus n})
+$$
+を，行列 $(\kappa(a_{ij}))$ をもつ写像として定義する．これにより加法的関手 $F$ が，
+$\text{Mod}^{fp}_A$ の対象 $0$, $A$, $A^{\oplus 2}$, $\ldots$ からなる充満部分圏から
+$\mathcal{B}$ への関手として定まる．確認は省略する．
+
+\medskip\noindent
+各対象 $M$（$\text{Mod}^{fp}_A$ の対象）に対し，
+$$
+A^{\oplus m_M} \xrightarrow{\varphi_M} A^{\oplus n_M} \to M \to 0
+$$
+という $M$ の $A$-加群としての表示を選ぶ．自明な表示
+$0 \to A^{\oplus n} \xrightarrow{1} A^{\oplus n} \to 0$ を $M = A^{\oplus n}$ の場合に用いることにする
+（これは必須ではないが，叙述を簡単にする）．
+各射 $f : M \to N$（$\text{Mod}^{fp}_A$ の射）に対して，次の可換図式を選べる．
+\begin{equation}
+\label{functors-equation-map}
+\vcenter{
+\xymatrix{
+A^{\oplus m_M} \ar[r]_{\varphi_M} \ar[d]_{\psi_f} &
+A^{\oplus n_M} \ar[r] \ar[d]_{\chi_f} &
+M \ar[r] \ar[d]_f & 0 \\
+A^{\oplus m_N} \ar[r]^{\varphi_N} &
+A^{\oplus n_N} \ar[r] &
+N \ar[r] & 0
+}
+}
+\end{equation}
+これらの選択をした上で，対象 $M$（$\text{Mod}^{fp}_A$ の対象）に対して
+$$
+F(M) = \Coker(F(\varphi_M) : F(A^{\oplus m_M}) \to F(A^{\oplus n_M}))
+$$
+とおき，射 $f : M \to N$（$\text{Mod}^{fp}_A$ の射）に対して
+$$
+F(f) = \text{写像 }F(M) \to F(N)\text{ で，余核上で }
+F(\psi_f)\text{ と }F(\chi_f)\text{ により誘導されるもの}
+$$
+とおく．この規則は，与えられた関手 $F$ を，自由加群 $A^{\oplus n}$ からなる
+充満部分圏から延長することに注意せよ．なお，$F$ が関手であること，$F$ が加法的であること，
+および $F$ が右完全であることを示す必要がある．
+
+\medskip\noindent
+$f : M \to N$ を $\text{Mod}^{fp}_A$ の射とする．上で定義した写像 $F(f)$ は，
+(\ref{functors-equation-map}) における $\psi_f$ と $\chi_f$ の選択によらないと主張する．
+実際，
+$$
+\xymatrix{
+A^{\oplus m_M} \ar[r]_{\varphi_M} \ar[d]_\psi &
+A^{\oplus n_M} \ar[r] \ar[d]_\chi &
+M \ar[r] \ar[d]_f & 0 \\
+A^{\oplus m_N} \ar[r]^{\varphi_N} &
+A^{\oplus n_N} \ar[r] &
+N \ar[r] & 0
+}
+$$
+も可換であるとする．写像 $F(f)' : F(M) \to F(N)$ を，$F(\psi)$ と $F(\chi)$ により
+誘導されるものとする．可換図式を見れば，初等的な可換代数により写像
+$\omega : A^{\oplus n_M} \to A^{\oplus m_N}$ で
+$\chi = \chi_f + \varphi_N \circ \omega$ を満たすものが存在する．$F$ を適用すると
+$F(\chi) = F(\chi_f) + F(\varphi_N) \circ F(\omega)$ を得る．$F(N)$ は
+$F(\varphi_N)$ の余核なので，写像 $F(A^{\oplus n_M}) \to F(M)$ は $F(f)$ と
+$F(f)'$ を等化する．余核はエピ射であるから，$F(f) = F(f)'$ と結論する．
+
+\medskip\noindent
+$F$ が関手であることを証明する．まず，$F(\text{id}_M) = \text{id}_{F(M)}$ である．
+実際，上の図式で $\psi_f$ と $\chi_f$ に恒等写像を選べる．ここでは
+$f = \text{id}_M$ である．次に $f : M \to N$ と
+$g : L \to M$ が与えられたとする．このとき
+$\psi = \psi_f \circ \psi_g$ と $\chi = \chi_f \circ \chi_g$ は，$f \circ g$ に対する
+(\ref{functors-equation-map}) に入る．したがって，これらは正しい写像を誘導し，これはまさに
+$F(f) \circ F(g) = F(f \circ g)$ を意味する．
+
+\medskip\noindent
+$F$ が加法的であることを証明する．$f, g : M \to N$ が与えられたとする．このとき
+$\psi = \psi_f + \psi_g$ と $\chi = \chi_f + \chi_g$ は，$f + g$ に対する
+(\ref{functors-equation-map}) に入る．したがって，これらは正しい写像を誘導し，これはまさに
+$F(f) + F(g) = F(f + g)$ を意味する．
+
+\medskip\noindent
+最後に，$F$ が右完全であることを証明する．$F$ が余等化子と交換することを示せば十分である．
+「圏」章の補題 \ref{categories-lemma-characterize-right-exact} を参照せよ．
+このためには，$F$ が余核と交換することを証明すれば十分である．
+$K \to L \to M \to 0$ を $A$-加群の完全列とし，$K$, $L$, $M$ は有限表示であるとする．
+$F$ は加法的関手なので，これは確かに複体
+$$
+F(K) \to F(L) \to F(M) \to 0
+$$
+を与える．第二の矢印が第一の矢印の $\mathcal{B}$ における余核であることを
+示さなければならない．いずれにせよ，写像 $\Coker(F(K) \to F(L)) \to F(M)$ を得る．
+初等的な可換代数により，可換図式
+$$
+\xymatrix{
+A^{\oplus m_M} \ar[r]_{\varphi_M} \ar[d]_\psi &
+A^{\oplus n_M} \ar[r] \ar[d]_\chi &
+M \ar[r] \ar[d]_1 & 0 \\
+K \ar[r] &
+L \ar[r] &
+M \ar[r] & 0
+}
+$$
+が存在する．この図式に $F$ を適用し，$F(M)$ が $F(\varphi_M)$ の余核として
+構成されたことを用いると，写像 $F(M) \to \Coker(F(K) \to F(L))$ で，
+$\Coker(F(K) \to F(L)) \to F(M)$ の右逆となるものが存在する．これはまず，
+$F(L) \to F(M)$ が常にエピ射であることを意味する．次に，上の議論から
+$$
+\Coker(F(K) \to F(L)) = F(M) \oplus E
+$$
+を得る．ここで直和分解は $F(M) \to \Coker(F(K) \to F(L))$ と
+$\Coker(F(K) \to F(L)) \to F(M)$ の双方と両立する．しかしこのときエピ射
+$p : F(L) \to E$ は，$F(K) \to F(L)$ と合成しても，
+% P07-ERR-0540: three finite-power A^{n_M} occurrences; conventional notation retained. See bounded audit reclassification.
+$F(A^{n_M}) \to F(L)$ と合成しても零になる．一方 $K \oplus A^{n_M} \to L$ は
+全射なので（代数的な議論は省略する），上の結果から
+$F(K \oplus A^{n_M}) \to F(L)$ はエピ射である．したがって $E = 0$ である．
+これで証明が完了する．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-on-modules}
+$A$ を環とし，$\mathcal{B}$ を任意の直和と余核をもつ加法圏とする．
+次の二つの圏の間には圏同値がある．
+\begin{enumerate}
+\item 右完全で任意の直和と交換する関手 $F : \text{Mod}_A \to \mathcal{B}$ の圏．
+\item 対 $(K, \kappa)$ の圏．ただし $K \in \Ob(\mathcal{B})$ であり，
+$\kappa : A \to \text{End}_\mathcal{B}(K)$ は環準同型である．
+\end{enumerate}
+この圏同値は，$F$ を $F(A)$ へ送り，後者に自然な $A$-作用を入れる規則で与えられる．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-on-modules-fp} と
+\ref{functors-lemma-functor-on-fp-modules-right-exact} を組み合わせればよい．
+\end{proof}
+
+
+
+
+
+
+\section{加群圏の間の関手}
+\label{functors-section-functors}
+
+\noindent
+次の補題は，本章の結果の典型例である．
+
+\begin{lemma}
+\label{functors-lemma-functor}
+$A$ と $B$ を環とし，$F : \text{Mod}_A \to \text{Mod}_B$ を関手とする．
+次は同値である．
+\begin{enumerate}
+\item $F$ は関手 $M \mapsto M \otimes_A K$ と同型であり，その際ある
+$A \otimes_\mathbf{Z} B$-加群 $K$ が用いられる．
+\item $F$ は右完全であり，すべての直和と交換する．
+\item $F$ はすべての余極限と交換する．
+\item $F$ は右随伴 $G$ をもつ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) ならば (4) である．実際，$M \mapsto M \otimes_A K$ の右随伴は
+$N \mapsto \Hom_B(K, N)$ である．「微分次数付き代数」の補題
+\ref{dga-lemma-tensor-hom-adjunction} を参照せよ．
+(4) ならば「圏論」の補題 \ref{categories-lemma-adjoint-exact} により (3) である．
+(3) $\Rightarrow$ (2) は定義から直ちに従う．
+
+\medskip\noindent
+(2) を仮定し，(1) を証明する．「ホモロジー代数」の節
+\ref{homology-section-functors} の議論により，関手 $F$ は加法的である．
+したがって，$F$ は環準同型
+$A \to \text{End}_B(F(M))$, $a \mapsto F(a \cdot \text{id}_M)$ を，各
+$A$-加群 $M$ に対して誘導する．ゆえに $F(M)$ は
+$A \otimes_\mathbf{Z} B$-加群となり，この構成は $M$ に関して関手的である．
+$K = F(A)$ とおき，次を定める．
+$$
+M \otimes_A K = M \otimes_A F(A) \longrightarrow F(M),
+\quad m \otimes k \longmapsto F(\varphi_m)(k)
+$$
+ここで $\varphi_m : A \to M$ は $a \to am$ で定まる写像である．規則
+$(m, k) \mapsto F(\varphi_m)(k)$ は $A$-双線形であり（第2変数については $B$-線形でもある），
+所要の $A \otimes_\mathbf{Z} B$-線形写像を与える．
+この構成は $M$ に関して関手的であるから，自然変換
+$- \otimes_A K \to F(-)$ を定め，これは $A$ で評価すると同型である．
+各 $A$-加群 $M$ に対して完全列
+$$
+\bigoplus\nolimits_{j \in J} A \to
+\bigoplus\nolimits_{i \in I} A \to
+M \to 0
+$$
+を選べる．上で構成した写像により，可換図式
+$$
+\xymatrix{
+(\bigoplus\nolimits_{j \in J} A) \otimes_A K \ar[r] \ar[d] &
+(\bigoplus\nolimits_{i \in I} A) \otimes_A K \ar[r] \ar[d] &
+M \otimes_A K \ar[r] \ar[d] &
+0 \\
+F(\bigoplus\nolimits_{j \in J} A) \ar[r] &
+F(\bigoplus\nolimits_{i \in I} A) \ar[r] &
+F(M) \ar[r] &  0
+}
+$$
+を得る．$F$ は右完全なので下段は完全である．
+$K$ とのテンソル積は右完全なので上段も完全である．
+$F$ は直和と交換するから，左側二つの垂直矢印は全単射である．
+したがって結論を得る．
+\end{proof}
+
+\begin{example}
+\label{functors-example-functor-modules}
+$R$ を環，$A$ と $B$ を $R$-代数とし，$K$ を $A \otimes_R B$-加群とする．
+このとき関手
+\begin{equation}
+\label{functors-equation-FM-modules}
+F : \text{Mod}_A \longrightarrow \text{Mod}_B,\quad
+M \longmapsto M \otimes_A K
+\end{equation}
+を考えられる．この関手は $R$-線形かつ右完全であり，任意の直和と交換し，
+すべての余極限と交換し，右随伴をもつ（補題 \ref{functors-lemma-functor}）．
+\end{example}
+
+\begin{lemma}
+\label{functors-lemma-functor-modules}
+$R$ を環，$A$ と $B$ を $R$-代数とする．次の二つの圏の間に圏同値がある．
+\begin{enumerate}
+\item 右完全で任意の直和と交換する $R$-線形関手
+$F : \text{Mod}_A \to \text{Mod}_B$ の圏．
+\item 圏 $\text{Mod}_{A \otimes_R B}$．
+\end{enumerate}
+この圏同値は $K$ を (\ref{functors-equation-FM-modules}) の関手 $F$ へ送ることにより与えられる．
+\end{lemma}
+
+\begin{proof}
+第一の圏の対象 $F$ をとる．補題 \ref{functors-lemma-functor} により，
+$F(M) = M \otimes_A K$ が $M$ に関して関手的に成り立つような
+$A \otimes_\mathbf{Z} B$-加群 $K$ が存在すると仮定してよい．
+$R$-線形性により，$F$ から得られる $A \otimes_\mathbf{Z} B$-加群 $K$ の構造は，
+（一意な）$A \otimes_R B$-加群 $K$ の構造から来る．したがって，(\ref{functors-equation-FM-modules})
+のように $K$ を $F$ へ送る関手は本質的全射である．
+
+\medskip\noindent
+この関手が充満忠実であることを示すには，$A \otimes_R B$-加群 $K$, $K'$ と，
+対応する関手の間の任意の自然変換 $t : F \to F'$ が，一意な
+$\varphi : K \to K'$ から来ることを示さなければならない．
+$K = F(A)$ かつ $K' = F'(A)$ なので，$\varphi$ として値
+$t_A : F(A) \to F'(A)$ をとれる．これは $t$ の $A$ における値である．
+% P07-ERR-0542: unbased A \otimes B is contextual shorthand for the earlier construction; no certain mathematical defect established. Formula preserved.
+この写像は $A \otimes_R B$-線形である．これは，補題 \ref{functors-lemma-functor} の
+証明で与えた $A \otimes B$-加群構造，すなわち $F(A)$ と $F'(A)$ 上の構造の
+定義から従う．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-composition}
+$R$ を環，$A$, $B$, $C$ を $R$-代数とする．
+$F : \text{Mod}_A \to \text{Mod}_B$ と $F' : \text{Mod}_B \to \text{Mod}_C$ を，
+任意の直和と交換する $R$-線形な右完全関手とする．
+補題 \ref{functors-lemma-functor-modules} の圏同値のもとで，対象 $K$ が
+$\text{Mod}_{A \otimes_R B}$ において $F$ に対応し，対象 $K'$ が
+$\text{Mod}_{B \otimes_R C}$ において $F'$ に対応するならば，
+$K \otimes_B K'$ は，$\text{Mod}_{A \otimes_R C}$ の対象とみなすと
+$F' \circ F$ に対応する．
+\end{remark}
+
+\begin{remark}
+\label{functors-remark-exact-flat}
+補題 \ref{functors-lemma-functor-modules} の状況で，$F$ が $K$ に対応するとする．このとき
+$F$ が完全である $\Leftrightarrow$ $K$ は $A$ 上平坦である．
+\end{remark}
+
+\begin{remark}
+\label{functors-remark-finite}
+補題 \ref{functors-lemma-functor-modules} の状況で，$F$ が $K$ に対応するとする．このとき
+$F$ が有限生成 $A$-加群を有限生成 $B$-加群へ送る
+$\Leftrightarrow$ $K$ は $B$-加群として有限生成である．
+\end{remark}
+
+\begin{remark}
+\label{functors-remark-finite-presentation}
+補題 \ref{functors-lemma-functor-modules} の状況で，$F$ が $K$ に対応するとする．このとき
+$F$ が有限表示 $A$-加群を有限表示 $B$-加群へ送る
+$\Leftrightarrow$ $K$ は $B$-加群として有限表示である．
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-equivalence}
+$A$ と $B$ を環とする．
+$$
+F : \text{Mod}_A \longrightarrow \text{Mod}_B
+$$
+が圏同値ならば，環の同型 $A \to B$ と可逆 $B$-加群 $L$ が存在し，
+$F$ は関手 $M \mapsto (M \otimes_A B) \otimes_B L$ と同型である．
+\end{lemma}
+
+\begin{proof}
+圏同値はすべての余極限と交換するので，補題
+% P07-ERR-0543: frozen source uses a plural citation noun for one lemma.
+\ref{functors-lemma-functor} を適用できる．$K$ を，$A \otimes_\mathbf{Z} B$-加群であって
+$F$ が関手 $M \mapsto M \otimes_A K$ と同型になるものとする．また $K'$ を，
+$B \otimes_\mathbf{Z} A$-加群であって $F$ の擬逆が関手
+$N \mapsto N \otimes_B K'$ と同型になるものとする．
+注意 \ref{functors-remark-composition} と補題 \ref{functors-lemma-functor-modules} により，同型
+$$
+\psi : K \otimes_B K' \longrightarrow A
+$$
+を得る．これは $A \otimes_\mathbf{Z} A$-加群の同型である．同様に，
+$$
+\psi' : K' \otimes_A K \longrightarrow B
+$$
+という $B \otimes_\mathbf{Z} B$-加群の同型を得る．元
+% P07-ERR-0544: the finite index list i=1,...,n is conventional summation notation, not a demonstrated mathematical defect. Formula preserved.
+$\xi = \sum_{i = 1, \ldots, n} x_i \otimes y_i \in K \otimes_B K'$
+で $\psi(\xi) = 1$ を満たすものを選ぶ．同型
+$$
+K \xrightarrow{\psi^{-1} \otimes \text{id}_K}
+K \otimes_B K' \otimes_A K \xrightarrow{\text{id}_K \otimes \psi'} K
+$$
+を考える．その合成は同型であり，次で与えられる．
+$$
+k \longmapsto \sum x_i \psi'(y_i \otimes k)
+$$
+したがって，この自己同型は
+$$
+K \to B^{\oplus n} \to K
+$$
+と分解する．これは $B$-加群の写像としての分解である．ゆえに $K$ は
+$B$-加群として有限生成射影である．
+
+\medskip\noindent
+$K$ は $B$-加群として可逆であると主張する．これは，$K$ の $B$-加群としての階数が
+定数値 $1$ をとることと同値である．「代数学のさらなる話題」の補題
+\ref{more-algebra-lemma-invertible} および「可換代数」の補題
+\ref{algebra-lemma-finite-projective} を参照せよ．そうでなければ，極大イデアル
+$\mathfrak m \subset B$ が存在し，(a) $K \otimes_B B/\mathfrak m = 0$ であるか，
+(b) 全射 $K \to (B/\mathfrak m)^{\oplus 2}$ が $B$-加群の写像として存在する．
+(a) は，$K' \otimes_A K \otimes_B N = N$ がすべての $B$-加群 $N$ に対して
+成り立つので矛盾する．(b) ならば全射
+$$
+A = K \otimes_B K' \longrightarrow (B/\mathfrak m \otimes_B K')^{\oplus 2}
+$$
+を（右）$A$-加群の全射として得る．しかし右辺は少なくとも二つの生成元を必要とする
+$A$-加群なので，これは不可能である．実際，$B/\mathfrak m \otimes_B K'$ は
+零でない．これは零でない加群 $B/\mathfrak m$ の $F$ の擬逆による像だからである．
+
+\medskip\noindent
+$K$ は $B$-加群として可逆なので，$\Hom_B(K, K) = B$ である．
+$K = F(A)$ であるから，$A$ の $K$ 上の作用は環の同型 $A \to B$ を定める．
+これで補題が従う．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-equivalence-linear}
+$R$ を環，$A$ と $B$ を $R$-代数とする．
+$$
+F : \text{Mod}_A \longrightarrow \text{Mod}_B
+$$
+が $R$-線形な圏同値ならば，$A \to B$ という $R$-代数の同型と，
+可逆 $B$-加群 $L$ が存在し，
+$F$ は関手 $M \mapsto (M \otimes_A B) \otimes_B L$ と同型である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-equivalence} から $A \to B$ と $L$ を得る．
+証明を終えるには，$R$-線形性をもつ $F$ により $A \to B$ が $R$-代数準同型になることを
+示せばよい．詳細は省略する．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-monoidal}
+$A$ と $B$ を環とする．$\text{Mod}_A$ と $\text{Mod}_B$ に，加群のテンソル積で
+与えられる通常のモノイダル構造を入れる．$F : \text{Mod}_A \to \text{Mod}_B$ を
+モノイダル関手とする．「圏論」の定義
+\ref{categories-definition-functor-monoidal-categories} を参照せよ．いくつか注意する．
+\begin{enumerate}
+\item $F(A)$ は（本書の定義により）単位対象なので，$F(A) = B$ である．
+\item 乗法的写像 $\varphi : A \to B$ を得る．これは $a \in A$ を
+$F(A) = B$ 上のその作用へ送る写像である．
+\item $A = B$ かつ $F(M) = M \otimes_A M$ とする．この場合 $\varphi(a) = a^2$ である．
+\item $F$ が加法的ならば，$\varphi$ は環準同型である．
+\item $A = B = \mathbf{Z}$ かつ $F(M) = M/\text{ねじれ部分群}$ とする．このとき
+$\varphi = \text{id}_\mathbf{Z}$ であるが，$F$ は恒等関手ではない．
+\item $F$ が右完全で直和と交換するならば，補題 \ref{functors-lemma-functor} により
+$F(M) = M \otimes_{A, \varphi} B$ である．
+\end{enumerate}
+換言すれば，環準同型 $A \to B$ は，すべての余極限と交換するモノイダル関手
+$\text{Mod}_A \to \text{Mod}_B$ の同型類と全単射に対応する．
+\end{remark}
+
+
+
+
+\section{加群圏上の関手の拡張}
+\label{functors-section-functors-extend}
+
+\noindent
+環 $A$ に対し，$\text{Mod}^{fp}_A$ で有限表示 $A$-加群の圏を表す．
+
+\begin{lemma}
+\label{functors-lemma-functor-fp-modules}
+$A$ と $B$ を環とし，$F : \text{Mod}^{fp}_A \to \text{Mod}^{fp}_B$ を関手とする．
+このとき $F$ は，フィルター余極限と交換する関手
+$F' : \text{Mod}_A \to \text{Mod}_B$ へ一意に拡張される．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-on-fp-modules} の特別な場合である．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-monoidal-extension}
+$A$, $B$, $F$, $F'$ を補題 \ref{functors-lemma-functor-fp-modules} のものとする．
+二つの有限表示加群のテンソル積は有限表示であることに注意する．可換代数，補題
+\ref{algebra-lemma-tensor-finiteness} を参照せよ．したがって
+$\text{Mod}^{fp}_A$, $\text{Mod}^{fp}_B$, $\text{Mod}_A$, $\text{Mod}_B$ に，
+加群のテンソル積で与えられる通常のモノイダル構造を入れられる．この場合，$F$ が
+モノイダル関手ならば $F'$ もそうである．これは，加群のテンソル積が
+% P07-ERR-1105: frozen source has plural subject "tensor products" with singular "commutes".
+フィルター余極限と交換することから直ちに従う．
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-fp-modules-exact}
+$A$, $B$, $F$, $F'$ を補題 \ref{functors-lemma-functor-fp-modules} のものとする．
+\begin{enumerate}
+\item $F$ が加法的ならば，$F'$ は加法的で任意の直和と交換する．
+\item $F$ が右完全ならば，$F'$ は右完全である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-on-fp-modules-additive} および
+\ref{functors-lemma-functor-on-fp-modules-right-exact} から従う．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-monoidal-extension-exact}
+注意 \ref{functors-remark-monoidal}，\ref{functors-remark-monoidal-extension} と補題
+\ref{functors-lemma-functor-fp-modules-exact} を組み合わせると，次を得る．環 $A$ と $B$ が
+与えられたとき，環準同型 $A \to B$ の集合は，右完全なモノイダル関手
+$\text{Mod}^{fp}_A \to \text{Mod}^{fp}_B$ の同型類の集合と全単射に対応する．
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-fp-modules-left-exact}
+$A$, $B$, $F$, $F'$ を補題 \ref{functors-lemma-functor-fp-modules} のものとする．
+$A$ は連接環であると仮定する
+（可換代数，定義 \ref{algebra-definition-coherent}）．
+$F$ が左完全ならば，$F'$ は左完全である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-on-fp-modules-left-exact} の特別な場合である．
+\end{proof}
+
+\noindent
+環 $A$ に対し，$\text{Mod}^{fg}_A$ で有限生成 $A$-加群
+（本書では有限 $A$-加群とも呼ぶ）の圏を表す．
+
+\begin{lemma}
+\label{functors-lemma-functor-finite-modules}
+$A$ と $B$ をネーター環とし，$F : \text{Mod}^{fg}_A \to \text{Mod}^{fg}_B$ を
+関手とする．このとき $F$ は，フィルター余極限と交換する関手
+$F' : \text{Mod}_A \to \text{Mod}_B$ へ一意に拡張される．$F$ が加法的ならば，
+$F'$ は加法的で任意の直和と交換する．$F$ が完全，左完全，または右完全ならば，
+$F'$ も同じ性質をもつ．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-fp-modules-exact} および
+\ref{functors-lemma-functor-fp-modules-left-exact} を参照せよ．さらに，有限生成 $A$-加群は
+% P07-ERR-0545: frozen source omits the complementizer in this clause.
+有限表示 $A$-加群であることを用いる．可換代数，補題
+\ref{algebra-lemma-Noetherian-finite-type-is-finite-presentation},
+およびネーター環は連接環であることを述べる可換代数，補題
+\ref{algebra-lemma-Noetherian-coherent} を参照せよ．
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{準連接加群の圏の間の関手}
+\label{functors-section-functor-quasi-coherent}
+
+\noindent
+本節では，準連接加群の圏の間の関手を簡単に調べる．
+
+\begin{example}
+\label{functors-example-functor-quasi-coherent}
+$R$ を環とする．$X$ と $Y$ を $R$ 上のスキームとし，$X$ は準コンパクトかつ
+準分離的であるとする．$\mathcal{K}$ を準連接 $\mathcal{O}_{X \times_R Y}$-加群とする．
+このとき関手
+\begin{equation}
+\label{functors-equation-FM-QCoh}
+F : \QCoh(\mathcal{O}_X) \longrightarrow \QCoh(\mathcal{O}_Y),\quad
+\mathcal{F} \longmapsto
+\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})
+\end{equation}
+を考えることができる．射 $\text{pr}_2$ は準コンパクトかつ準分離的である
+（スキーム，補題 \ref{schemes-lemma-quasi-compact-preserved-base-change}
+および \ref{schemes-lemma-separated-permanence}）．したがって，この射による順像は
+準連接加群を保つ．スキーム，補題
+\ref{schemes-lemma-push-forward-quasi-coherent} を参照せよ．さらに，この関手は
+$R$-線形で任意の直和と交換する．スキームのコホモロジー，補題
+\ref{coherent-lemma-colimit-cohomology} を参照せよ．
+\end{example}
+
+\noindent
+次の補題は補題 \ref{functors-lemma-functor-modules} の自然な一般化である．
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine}
+$R$ を環とする．$X$ と $Y$ を $R$ 上のスキームとし，$X$ はアフィンであるとする．
+次の二つの圏の間に圏同値がある．
+\begin{enumerate}
+\item 右完全で任意の直和と交換する $R$-線形関手
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$ の圏．
+\item 圏 $\QCoh(\mathcal{O}_{X \times_R Y})$．
+\end{enumerate}
+この圏同値は $\mathcal{K}$ を (\ref{functors-equation-FM-QCoh}) の関手 $F$ へ送ることで与えられる．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}$ を $\QCoh(\mathcal{O}_{X \times_R Y})$ の対象とし，$F_\mathcal{K}$ を
+(\ref{functors-equation-FM-QCoh}) の関手とする．例
+\ref{functors-example-functor-quasi-coherent} の議論により，
+% P07-ERR-0546: source alternates F_K and its established notation F; treated as a contextual abbreviation. Tokens preserved.
+$F$ は $R$-線形で任意の直和と交換することが既に分かっている．
+$\text{pr}_2 : X \times_R Y \to Y$ はアフィンなので（スキームの射，補題
+\ref{morphisms-lemma-base-change-affine}），関手 $\text{pr}_{2, *}$ は完全である．
+スキームのコホモロジー，補題 \ref{coherent-lemma-relative-affine-vanishing} を参照せよ．
+したがって $F$ は右完全でもあり，すなわち $F$ は (1) の条件を満たす．
+
+\medskip\noindent
+(1) の条件を満たす $F$ をとる．$X = \Spec(A)$ と書く．準連接
+$\mathcal{O}_Y$-加群 $\mathcal{G} = F(\mathcal{O}_X)$ を考える．関手 $F$ は
+$R$-線形写像 $A \to \text{End}_{\mathcal{O}_Y}(\mathcal{G})$，
+$a \mapsto F(a \cdot \text{id})$ を誘導する．したがって $\mathcal{G}$ は
+$$
+A \otimes_R \mathcal{O}_Y = \text{pr}_{2, *}\mathcal{O}_{X \times_R Y}
+$$
+上の加群の層である．スキームの射，補題
+\ref{morphisms-lemma-affine-equivalence-modules} により，準連接加群 $\mathcal{K}$ が
+$X \times_R Y$ 上に一意に存在し，$F(\mathcal{O}_X) = \mathcal{G} =
+\text{pr}_{2, *}\mathcal{K}$ が成り立ち，この同一視は $A$ と $\mathcal{O}_Y$ の作用と
+両立する．$F_\mathcal{K}$ を (\ref{functors-equation-FM-QCoh}) で与えられる関手とする．
+$\text{Mod}_A \to \QCoh(\mathcal{O}_X)$ という圏同値で $A$ を $\mathcal{O}_X$ へ
+送るものが存在する．スキーム，補題
+\ref{schemes-lemma-equivalence-quasi-coherent} を参照せよ．したがって同型
+$F \cong F_\mathcal{K}$ が補題 \ref{functors-lemma-functor-on-modules} により得られる．
+実際，構成により同型 $F(\mathcal{O}_X) \cong F_\mathcal{K}(\mathcal{O}_X)$ が
+$A$-作用と両立する．
+
+\medskip\noindent
+以上から，$\mathcal{K}$ を $F_\mathcal{K}$ へ送る関手は本質的全射である．
+% P07-ERR-0547: frozen source uses "fully faithfulness" instead of the noun phrase.
+充満忠実性の検証は省略する．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-affine-morphism}
+以下では，アフィン射 $h : T \to S$ に対して
+$h_*\mathcal{G} \otimes_{\mathcal{O}_S} \mathcal{H} =
+h_*(\mathcal{G} \otimes_{\mathcal{O}_T} h^*\mathcal{H})$ が，
+$\mathcal{G} \in \QCoh(\mathcal{O}_T)$ および
+$\mathcal{H} \in \QCoh(\mathcal{O}_S)$ に対して成り立つことを用いる．
+これは代数の言葉で書き直せば直ちに従う．
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine-compose}
+補題 \ref{functors-lemma-functor-quasi-coherent-from-affine} において，$F$ が
+$\mathcal{K}$ に対応するとし，後者は $\QCoh(\mathcal{O}_{X \times_R Y})$ の対象とする．
+このとき次が成り立つ．
+\begin{enumerate}
+\item $f : X' \to X$ がアフィン射ならば，$F \circ f_*$ は
+$(f \times \text{id}_Y)^*\mathcal{K}$ に対応する．
+\item $g : Y' \to Y$ が平坦射ならば，$g^* \circ F$ は
+$(\text{id}_X \times g)^*\mathcal{K}$ に対応する．
+\item $j : V \to Y$ が開埋め込みならば，$j^* \circ F$ は
+$\mathcal{K}|_{X \times_R V}$ に対応する．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明する．可換図式
+$$
+\xymatrix{
+X' \times_R Y \ar[rrd]^{\text{pr}'_2} \ar[rd]_{f \times \text{id}_Y}
+\ar[dd]_{\text{pr}'_1} \\
+& X \times_R Y \ar[r]_{\text{pr}_2} \ar[d]_{\text{pr}_1} & Y \\
+X' \ar[r]^f & X
+}
+$$
+を考える．
+$\mathcal{F}'$ を $X'$ 上の準連接加群とする．次を得る．
+\begin{align*}
+\text{pr}_{2, *}(\text{pr}_1^*f_*\mathcal{F}'
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})
+& =
+\text{pr}_{2, *}((f \times \text{id}_Y)_*
+(\text{pr}'_1)^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K}) \\
+& =
+\text{pr}_{2, *}(f \times \text{id}_Y)_*
+\left((\text{pr}'_1)^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X' \times_R Y}}
+(f \times \text{id}_Y)^*\mathcal{K})\right)  \\
+& =
+\text{pr}'_{2, *}((\text{pr}'_1)^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X' \times_R Y}} (f \times \text{id}_Y)^*\mathcal{K})
+\end{align*}
+ここで第一の等号は，アフィン射に対する底変換を図式の左側の正方形に適用して得られる．
+スキームのコホモロジー，補題 \ref{coherent-lemma-affine-base-change} を参照せよ．
+% P07-ERR-0548: frozen source has subject-verb disagreement in the second-equality sentence.
+第二の等号は注意 \ref{functors-remark-affine-morphism} により成り立つ．第三の等号は，加群の
+順像の関手性である．これで (1) が証明された．
+
+\medskip\noindent
+(2) を証明する．可換図式
+$$
+\xymatrix{
+X \times_R Y' \ar[rr]_-{\text{pr}'_2} \ar[rd]^{\text{id}_X \times g}
+\ar[rdd]_{\text{pr}'_1} & & Y' \ar[d]^g \\
+& X \times_R Y \ar[r]_-{\text{pr}_2} \ar[d]^{\text{pr}_1} & Y \\
+& X
+}
+$$
+を考える．次を得る．
+\begin{align*}
+g^*\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})
+& =
+\text{pr}'_{2, *}(
+(\text{id}_X \times g)^*(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K})) \\
+& =
+\text{pr}'_{2, *}((\text{pr}'_1)^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y'}}
+(\text{id}_X \times g)^*\mathcal{K})
+\end{align*}
+% P07-ERR-0549: frozen source omits predicates in both equality justifications and has "it" for "is".
+第一の等号は，図式の正方形に対する平坦底変換により成り立つ．
+スキームのコホモロジー，補題 \ref{coherent-lemma-flat-base-change-cohomology} を参照せよ．
+第二の等号は，引き戻しの関手性と，テンソル積の引き戻しが各因子の引き戻しの
+テンソル積であることにより成り立つ．
+
+\medskip\noindent
+(3) は (2) の特別な場合である．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre}
+$R$ を環とする．$X$ と $Y$ を $R$ 上のスキームとする．$X$ は準コンパクトで，
+対角射がアフィンであると仮定する．$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$ を，
+$R$-線形かつ右完全で任意の直和と交換する関手とする．このとき次を構成できる．
+\begin{enumerate}
+\item 準連接加群 $\mathcal{K}$ で $X \times_R Y$ 上のもの．
+\item 自然変換 $t : F \to F_\mathcal{K}$．ここで $F_\mathcal{K}$ は
+(\ref{functors-equation-FM-QCoh}) の関手を表す．
+\end{enumerate}
+これらは，$t : F \circ f_* \to F_\mathcal{K} \circ f_*$ が，始域を
+アフィンスキームとする任意の射 $f : X' \to X$ に対して同型になるように構成できる．
+\end{lemma}
+
+\begin{proof}
+射 $f' : X' \to X$ で $X'$ がアフィンであるものを考える．$X$ の対角射は
+アフィンなので，$f'$ はアフィン射である（スキームの射，補題
+\ref{morphisms-lemma-affine-permanence}）．したがって
+$f'_* : \QCoh(\mathcal{O}_{X'}) \to \QCoh(\mathcal{O}_X)$ は $R$-線形な完全関手であり
+（スキームのコホモロジー，補題 \ref{coherent-lemma-relative-affine-vanishing}），
+直和と交換する（スキームのコホモロジー，補題
+\ref{coherent-lemma-colimit-cohomology}）．ゆえに $F \circ f'_*$ は
+$R$-線形かつ右完全で任意の直和と交換する関手である．したがって，補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine} により
+$F \circ f'_* = F_{\mathcal{K}'}$ となる $\mathcal{K}'$ が
+$X' \times_R Y$ 上に存在する．さらに，射 $f'' : X'' \to X'$ で $X''$ が
+アフィンであるものが与えられると，既に挙げた参照結果と補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-compose} を組み合わせて，標準的同一視
+$(f'' \times \text{id}_Y)^*\mathcal{K}' = \mathcal{K}''$ を得る．これらの同一視は，
+% P07-ERR-0550: frozen source contains the redundant object pronoun in this omission clause.
+もう一つの射 $f''' : X''' \to X''$ が与えられたときのコサイクル条件を満たす．
+その記述は読者に委ねる．
+
+\medskip\noindent
+アフィン開被覆 $X = \bigcup_{i = 1, \ldots, n} U_i$ を選ぶ．$X$ の対角射は
+アフィンなので，共通部分 $U_{i_0 \ldots i_p} = U_{i_0} \cap \ldots \cap U_{i_p}$ は
+アフィンである．上と同様に，包含射
+$j_{i_0 \ldots i_p} : U_{i_0 \ldots i_p} \to X$ はアフィンである．
+$\mathcal{K}_{i_0 \ldots i_p}$ を，$U_{i_0 \ldots i_p} \times_R Y$ 上の準連接加群で，
+上のように $F \circ j_{i_0 \ldots i_p *}$ に対応するものとする．以上から同一視
+$$
+\mathcal{K}_{i_0 \ldots i_p} =
+\mathcal{K}_{i_0 \ldots \hat i_j \ldots i_p}|_{U_{i_0 \ldots i_p} \times_R Y}
+$$
+を得る．
+% P07-ERR-0551: frozen source misspells "compatibilities" in the gluing clause.
+これらは貼り合わせに必要な通常の両立条件を満たす．換言すれば，指定された同一視と両立する同型を除いて一意な準連接加群
+$\mathcal{K}$ を $X \times_R Y$ 上に得る．その $U_{i_0 \ldots i_p} \times_R Y$ への制限は
+$\mathcal{K}_{i_0 \ldots i_p}$ であり，これらの制限の同一視は表示された同一視と両立する．
+
+\medskip\noindent
+次に自然変換 $t$ を構成する．準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ が与えられたとき，
+$\mathcal{F}_{i_0 \ldots i_p}$ を $\mathcal{F}$ の $U_{i_0 \ldots i_p}$ への制限とし，
+$(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0 \ldots i_p}$ を
+$\text{pr}_1^*\mathcal{F} \otimes \mathcal{K}$ の
+$U_{i_0 \ldots i_p} \times_R Y$ への制限とする．次の等式に注意する．
+\begin{align*}
+F(j_{i_0 \ldots i_p *}\mathcal{F}_{i_0 \ldots i_p})
+& =
+\text{pr}_{i_0 \ldots i_p, 2, *}(
+\text{pr}_{i_0 \ldots i_p, 1}^*\mathcal{F}_{i_0 \ldots i_p}
+\otimes \mathcal{K}_{i_0 \ldots i_p}) \\
+& =
+\text{pr}_{i_0 \ldots i_p, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0 \ldots i_p}
+\end{align*}
+ここで $\text{pr}_{i_0 \ldots i_p, 2} : U_{i_0 \ldots i_p} \times_R Y \to Y$ は射影であり，
+もう一方の射影も同様である．さらに，これらの同一視は前段落の表示された同一視と
+両立する．スキームのコホモロジー，補題
+\ref{coherent-lemma-separated-case-relative-cech} から，相対 {\v C}ech 複体
+$$
+\bigoplus 
+\text{pr}_{i_0, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1i_2, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1i_2}
+\to \ldots
+$$
+が $R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})$ を計算することを
+思い出す．したがって次数 $0$ のコホモロジー層は $F_\mathcal{K}(\mathcal{F})$ である．
+ゆえに，次の可換図式を見ることで，望む写像
+$t : F(\mathcal{F}) \to F_\mathcal{K}(\mathcal{F})$ を得る．
+$$
+\xymatrix{
+&
+F(\mathcal{F}) \ar[r] \ar@{..>}[d] &
+\bigoplus F(j_{i_0*}\mathcal{F}_{i_0}) \ar[r] \ar[d] &
+\bigoplus F(j_{i_0i_1*}\mathcal{F}_{i_0i_1}) \ar[d] \\
+0 \ar[r] &
+F_\mathcal{K}(\mathcal{F}) \ar[r] &
+\bigoplus 
+\text{pr}_{i_0, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0}
+\ar[r] &
+\bigoplus 
+\text{pr}_{i_0i_1, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1}
+}
+$$
+$F$ を（完全な）複体
+$0 \to \mathcal{F} \to \bigoplus j_{i_0*}\mathcal{F}_{i_0} \to
+\bigoplus j_{i_0i_1*}\mathcal{F}_{i_0i_1}$ に適用して上段を得る
+（ただし $F$ は完全とは限らないので，上段は単なる複体であり，完全とは限らない）．
+実線の垂直矢印は上の同一視である．これは確かに望む点線の矢印を定める．
+この矢印は $\mathcal{F}$ に関して関手的である．詳細は省略する．
+
+\medskip\noindent
+最後の主張を証明しなければならない．$f : X' \to X$ を補題の主張にあるものとし，
+$\mathcal{K}'$ を証明の第一段落で構成した $X' \times_R Y$ 上の準連接加群とする．
+射 $f : X' \to X$ の像が開集合の一つ $U_i$ に入るならば，結果は補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-compose} から従う．実際この場合，
+$\mathcal{K}_i = \mathcal{K}|_{U_i \times_R Y}$ が
+% P07-ERR-0552: frozen source says this pulls back to K, but the constructed target is K'. Token preserved.
+$\mathcal{K}$ へ引き戻されることが分かっている．一般には，アフィン開被覆
+$X' = \bigcup U'_i$ で $U'_i = f^{-1}(U_i)$ を満たすものを得て，同型
+$\mathcal{K}'|_{U'_i} = f_i^*\mathcal{K}_i$ を得る．ここで
+$f_i : U'_i \to U_i$ は誘導された射である．これらの射は，同型
+$\mathcal{K}' = f^*\mathcal{K}$ へ貼り合わせるために必要な両立条件を満たす．
+これで結論を得る．いくつかの詳細は省略する．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-coh-noetherian-from-affine-flat}
+補題 \ref{functors-lemma-functor-quasi-coherent-from-affine} または補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre} において，$F$ が完全関手ならば，
+対応する $\mathcal{K}$ は $\QCoh(\mathcal{O}_{X \times_R Y})$ の対象であり，
+$X$ 上平坦である．
+\end{lemma}
+
+\begin{proof}
+$X$ はアフィンであると仮定してよく，したがって補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine} の場合にある．補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-compose} により，$Y$ もアフィンであると
+仮定してよい．アフィンの場合，主張は注意 \ref{functors-remark-exact-flat} の主張に帰着する．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-affine-diagonal}
+$R$ を環とする．$X$ と $Y$ を $R$ 上のスキームとする．$X$ は準コンパクトで，
+対角射がアフィンであると仮定する．次の二つの圏の間に圏同値がある．
+\begin{enumerate}
+\item 任意の直和と交換する $R$-線形な完全関手
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$ の圏．
+\item $\QCoh(\mathcal{O}_{X \times_R Y})$ の充満部分圏で，次を満たす
+$\mathcal{K}$ からなるもの．
+\begin{enumerate}
+\item $\mathcal{K}$ は $X$ 上平坦である．
+\item $\mathcal{F} \in \QCoh(\mathcal{O}_X)$ に対して
+$R^q\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K}) = 0$ が $q > 0$ について成り立つ．
+\end{enumerate}
+\end{enumerate}
+この圏同値は $\mathcal{K}$ を (\ref{functors-equation-FM-QCoh}) の関手 $F$ へ送ることで与えられる．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}$ を (2) のとおりとする．(\ref{functors-equation-FM-QCoh}) の関手 $F$ は
+直和と交換する．
+% P07-ERR-0553: frozen source cites (1)(a), not (2)(a), and has number/agreement errors.
+(1)(a) により加群 $\mathcal{K}$ は $X$ 上平坦なので，短完全列
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$ が与えられると，
+次の短完全列を得る．
+$$
+0 \to
+\text{pr}_1^*\mathcal{F}_1 \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K} \to
+\text{pr}_1^*\mathcal{F}_2 \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K} \to
+\text{pr}_1^*\mathcal{F}_3 \otimes_{\mathcal{O}_{X \times_R Y}} \mathcal{K} \to
+0
+$$
+(2)(b) により第一項に対する高次順像 $R^1\text{pr}_{2, *}$ は零なので，
+$0 \to F(\mathcal{F}_1) \to F(\mathcal{F}_2) \to F(\mathcal{F}_3) \to 0$ は
+完全である．したがって $F$ は (1) のとおりである．
+
+\medskip\noindent
+$F$ を (1) のとおりとする．$\mathcal{K}$ と $t : F \to F_\mathcal{K}$ を補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre} のものとする．補題
+\ref{functors-lemma-coh-noetherian-from-affine-flat} により，$\mathcal{K}$ は $X$ 上平坦である．
+証明を終えるには，$t$ が同型であることと高次順像についての主張を示せばよい．
+これらはいずれも，相対 {\v C}ech 複体
+$$
+\bigoplus 
+\text{pr}_{i_0, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1}
+\to
+\bigoplus 
+\text{pr}_{i_0i_1i_2, 2, *}
+(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})_{i_0i_1i_2}
+\to \ldots
+$$
+が $R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})$ を計算することから
+従う．記法およびその理由については，補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre} の証明を参照せよ．
+補題 \ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre} の証明では，この複体が，次の
+複体に $F$ を適用して得られるものと等しいことも示した．
+$$
+\bigoplus j_{i_0*}\mathcal{F}_{i_0} \to
+\bigoplus j_{i_0i_1*}\mathcal{F}_{i_0i_1} \to
+\bigoplus j_{i_0i_1i_2*}\mathcal{F}_{i_0i_1i_2} \to \ldots
+$$
+この複体は次数零を除いて完全であり，次数零のコホモロジー層は
+$\mathcal{F}$ に等しい．したがって $F$ は完全関手なので，
+$F = F_\mathcal{K}$ であり (2)(b) が成り立つと結論する．
+
+\medskip\noindent
+$F$ を $\mathcal{K}$ へ送る構成が関手的であり，$\mathcal{K}$ を
+(\ref{functors-equation-FM-QCoh}) で定まる関手 $F_\mathcal{K}$ へ送る関手の擬逆であることの
+証明は省略する．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-characterize-FM-QCoh}
+$R$ を環とする．$X$ と $Y$ を $R$ 上のスキームとする．$X$ は準コンパクトで，
+対角射がアフィンであると仮定する．補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} は次のように一般化できる．
+(\ref{functors-equation-FM-QCoh}) により $X \times_R Y$ 上の準連接加群に付随する関手は，
+ちょうど次の性質をもつ
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$ である．
+\begin{enumerate}
+\item $F$ は $R$-線形で任意の直和と交換する．
+\item $F \circ j_*$ は，$j : U \to X$ がアフィン開集合の包含ならば右完全である．
+\item $0 \to F(\mathcal{F}) \to F(\mathcal{G}) \to F(\mathcal{H})$ は，
+$0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0$ が完全列であり，
+すべての $x \in X$ に対する茎の列
+$0 \to \mathcal{F}_x \to \mathcal{G}_x \to \mathcal{H}_x \to 0$ が分裂短完全列ならば，
+完全である．
+\end{enumerate}
+% P07-ERR-0554: frozen source has the doubled verb phrase "enough to get construct".
+すなわち，これらの仮定は自然変換 $t : F \to F_\mathcal{K}$ を補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal-pre} のように構成し，
+それが同型であることを示すのに十分である．
+さらに，(\ref{functors-equation-FM-QCoh}) の関手は実際に性質 (1), (2), (3) を満たす．
+これが必要になれば，ここで正確に主張して証明することにする．
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-compose-FM-QCoh}
+$R$ を環とする．$X$, $Y$, $Z$ を $R$ 上のスキームとする．$X$ と $Y$ は
+準コンパクトで，対角射がアフィンであると仮定する．
+$$
+F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)
+\quad\text{かつ}\quad
+G : \QCoh(\mathcal{O}_Y) \to \QCoh(\mathcal{O}_Z)
+$$
+を，任意の直和と交換する $R$-線形な完全関手とする．$\mathcal{K}$ を
+$\QCoh(\mathcal{O}_{X \times_R Y})$ の対象，$\mathcal{L}$ を
+$\QCoh(\mathcal{O}_{Y \times_R Z})$ の対象とし，それぞれ対応する「核」とする．
+補題 \ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} を参照せよ．このとき
+$G \circ F$ は
+$\text{pr}_{13, *}(\text{pr}_{12}^*\mathcal{K}
+\otimes_{\mathcal{O}_{X \times_R Y \times_R Z}}
+\text{pr}_{23}^*\mathcal{L})$ に対応し，これは $\QCoh(\mathcal{O}_{X \times_R Z})$ の対象である．
+\end{lemma}
+
+\begin{proof}
+$G \circ F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Z)$ は $R$-線形かつ完全で，
+任意の直和と交換する．したがって補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} により，
+$\mathcal{M}$ という $\QCoh(\mathcal{O}_{X \times_R Z})$ の対象で $G \circ F$ に
+対応するものが存在する．一方，
+$\mathcal{E} = \text{pr}_{13, *}(\text{pr}_{12}^*\mathcal{K}
+\otimes \text{pr}_{23}^*\mathcal{L})$ と書く．ここおよび以下の証明では，
+テンソル積の添字を省略する．$U \subset X$ と $W \subset Z$ をアフィン開部分スキームとする．
+補題を証明するため，同型
+$$
+\Gamma(U \times_R W, \mathcal{E})
+\cong
+\Gamma(U \times_R W, \mathcal{M})
+$$
+で，$U$ と $W$ を変えたときの制限写像と両立するものを構成する．
+
+\medskip\noindent
+まず次に注意する．
+$$
+\Gamma(U \times_R W, \mathcal{E}) =
+\Gamma(U \times_R Y \times_R W,
+\text{pr}_{12}^*\mathcal{K} \otimes \text{pr}_{23}^*\mathcal{L})
+$$
+これは構成から従う．したがって，$\mathcal{M}$ についても同じことが成り立つことを
+示せばよい．
+
+\medskip\noindent
+$U = \Spec(A)$ と書き，包含射を $j : U \to X$ とする．$\mathcal{M}$ については，補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine} の証明における構成から次の等式が得られる．
+$$
+\Gamma(U \times_R W, \mathcal{M}) =
+\Gamma(W, G(F(j_*\mathcal{O}_U)))
+$$
+右辺の $A$-加群構造は，$A$ の $\mathcal{O}_U$ 上の作用から定まる．
+$F$ と $\mathcal{K}$ の対応から，
+$F(j_*\mathcal{O}_U) = b_*(a^*j_*\mathcal{O}_U \otimes \mathcal{K})$
+である．ここで $a : X \times_R Y \to X$ と $b : X \times_R Y \to Y$ は射影である．
+$j$ はアフィン射なので，
+$a^*j_*\mathcal{O}_U = (j \times \text{id}_Y)_*\mathcal{O}_{U \times_R Y}$
+である．「スキームのコホモロジー」の補題
+\ref{coherent-lemma-affine-base-change} を参照せよ．次に
+$(j \times \text{id}_Y)_*\mathcal{O}_{U \times_R Y} \otimes \mathcal{K} =
+(j \times \text{id}_Y)_*\mathcal{K}|_{U \times_R Y}$
+である．例えば注意 \ref{functors-remark-affine-morphism} を参照せよ．得られた事実を合わせると
+$$
+F(j_*\mathcal{O}_U) =
+(U \times_R Y \to Y)_*\mathcal{K}|_{U \times_R Y}
+$$
+となり，明らかな $A$-作用をもつ（この公式は補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine} の証明に暗に含まれている）．
+関手 $G$ を適用すると
+$$
+G(F(j_*\mathcal{O}_U)) =
+t_*(s^*((U \times_R Y \to Y)_*\mathcal{K}|_{U \times_R Y})
+\otimes \mathcal{L})
+$$
+を得る．ここで $s : Y \times_R Z \to Y$ と $t : Y \times_R Z \to Z$ は射影である．
+再びアフィン基底変換（「スキームのコホモロジー」の補題
+\ref{coherent-lemma-affine-base-change}）を用いるが，今回は次の図式
+$$
+\xymatrix{
+U \times_R Y \times_R Z \ar[r] \ar[d] & U \times_R Y \ar[d] \\
+Y \times_R Z \ar[r] & Y
+}
+$$
+に適用して，
+$$
+s^*((U \times_R Y \to Y)_*\mathcal{K}|_{U \times_R Y}) =
+(U \times_R Y \times_R Z \to Y \times_R Z)_*
+\text{pr}_{12}^*\mathcal{K}|_{U \times_R Y \times_R Z}
+$$
+を得る．注意 \ref{functors-remark-affine-morphism} を再び用いると，
+\begin{align*}
+(U \times_R Y \times_R Z \to Y \times_R Z)_*
+\text{pr}_{12}^*\mathcal{K}|_{U \times_R Y \times_R Z}
+\otimes \mathcal{L} \\
+=
+(U \times_R Y \times_R Z \to Y \times_R Z)_*
+\left(\text{pr}_{12}^*\mathcal{K} \otimes
+\text{pr}_{23}^*\mathcal{L}\right)|_{U \times_R Y \times_R Z}
+\end{align*}
+これに関手 $\Gamma(W, t_*(-)) = \Gamma(Y \times_R W, -)$ を適用すると，
+\begin{align*}
+\Gamma(U \times_R W, \mathcal{M})
+& =
+\Gamma(W, G(F(j_*\mathcal{O}_U))) \\
+& =
+\Gamma(Y \times_R W, (U \times_R Y \times_R Z \to Y \times_R Z)_*
+(\text{pr}_{12}^*\mathcal{K} \otimes
+\text{pr}_{23}^*\mathcal{L})|_{U \times_R Y \times_R Z}) \\
+& =
+\Gamma(U \times_R Y \times_R W,
+\text{pr}_{12}^*\mathcal{K} \otimes \text{pr}_{23}^*\mathcal{L})
+\end{align*}
+を得る．これは望んだ等式である．これらの同型が制限写像と両立することの検証は省略する．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-persistence-exactness}
+$R$, $X$, $Y$, $\mathcal{K}$ を補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} (2) のものとする．
+このとき $T$ を $R$ 上の任意のスキームとすると，等式
+$$
+R^q\text{pr}_{13, *}(\text{pr}_{12}^*\mathcal{F}
+\otimes_{\mathcal{O}_{T \times_R X \times_R Y}}
+\text{pr}_{23}^*\mathcal{K}) = 0
+$$
+は，$\mathcal{F}$ が $T \times_R X$ 上の準連接加群で $q > 0$ のとき成り立つ．
+\end{lemma}
+
+\begin{proof}
+問題は $T$ 上局所的なので，$T$ はアフィンであると仮定してよい．
+この場合，次の図式を考えることができる．
+$$
+\xymatrix{
+T \times_R X \ar[d] &
+T \times_R X \times_R Y \ar[d] \ar[l] \ar[r] &
+T \times_R Y \ar[d] \\
+X &
+X \times_R Y \ar[l] \ar[r] &
+Y
+}
+$$
+この図式の縦の射はすべてアフィンである．とくに $T \times_R Y \to Y$ に沿う順像関手は忠実かつ完全である
+（「スキームのコホモロジー」の補題 \ref{coherent-lemma-relative-affine-vanishing} および
+「スキームの射」の補題 \ref{morphisms-lemma-affine-equivalence-modules}）．
+アフィン射に沿う高次順像が消えること（上掲の参考文献を参照せよ）を用いて図式を追うと，
+次の等式の両辺が零になることを示せば十分であることが分かる．
+$$
+R^q\text{pr}_{2, *}(
+\text{pr}_{23, *}(\text{pr}_{12}^*\mathcal{F}
+\otimes_{\mathcal{O}_{T \times_R X \times_R Y}}
+\text{pr}_{23}^*\mathcal{K})) =
+R^q\text{pr}_{2, *}(
+\text{pr}_{23, *}(\text{pr}_{12}^*\mathcal{F})
+\otimes_{\mathcal{O}_{X \times_R Y}}
+\mathcal{K}))
+$$
+この消滅は，$\mathcal{K}$ に関する仮定から従う．
+等式は注意 \ref{functors-remark-affine-morphism} により成り立つ．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-functor-quasi-coherent-from-separated}
+補題 \ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} において
+$F$ と $\mathcal{K}$ が対応しているとする．$X$ が分離的かつ $R$ 上平坦ならば，
+全射 $\mathcal{O}_X \boxtimes F(\mathcal{O}_X) \to \mathcal{K}$ が存在する．
+\end{lemma}
+
+\begin{proof}
+$\Delta : X \to X \times_R X$ を対角射とし，
+$\mathcal{O}_\Delta = \Delta_*\mathcal{O}_X$ とおく．
+% P07-ERR-0555: frozen source omits the subject in "Since Delta is a closed immersion have ...".
+$\Delta$ は閉埋め込みなので，短完全列
+$$
+0 \to \mathcal{I} \to 
+\mathcal{O}_{X \times_R X} \to \mathcal{O}_\Delta \to 0
+$$
+を得る．$\mathcal{K}$ は $X$ 上平坦なので，その引き戻し $\text{pr}_{23}^*\mathcal{K}$ は
+$X \times_R X \times_R Y$ 上の層であり，$X \times_R X$ 上平坦である．したがって
+$$
+0 \to 
+\text{pr}_{12}^*\mathcal{I}
+\otimes
+\text{pr}_{23}^*\mathcal{K} \to
+\text{pr}_{23}^*\mathcal{K} \to
+\text{pr}_{12}^*\mathcal{O}_\Delta
+\otimes
+\text{pr}_{23}^*\mathcal{K} \to 0
+$$
+という $X \times_R X \times_R Y$ 上の短完全列を得る．「加群の層」の補題
+\ref{modules-lemma-pullback-tensor-flat-module} を参照せよ．
+よって補題 \ref{functors-lemma-persistence-exactness} により，全射
+$$
+\text{pr}_{13, *}(\text{pr}_{23}^*\mathcal{K})
+\to
+\text{pr}_{13, *}(
+\text{pr}_{12}^*\mathcal{O}_\Delta
+\otimes
+\text{pr}_{23}^*\mathcal{K})
+$$
+を得る．平坦基底変換（「スキームのコホモロジー」の補題
+\ref{coherent-lemma-flat-base-change-cohomology}）により，この射の始域は
+$\text{pr}_2^*\text{pr}_{2, *}\mathcal{K}
+= \mathcal{O}_X \boxtimes F(\mathcal{O}_X)$ に等しい．一方，終域は
+$$
+\text{pr}_{13, *}(
+\text{pr}_{12}^*\mathcal{O}_\Delta
+\otimes
+\text{pr}_{23}^*\mathcal{K}) =
+\text{pr}_{13, *} (\Delta \times \text{id}_Y)_* \mathcal{K} =
+\mathcal{K}
+$$
+に等しく，証明が完了する．第一の等式は，たとえば「層コホモロジー」の補題
+\ref{cohomology-lemma-projection-formula-closed-immersion} と，
+$\text{pr}_{12}^*\mathcal{O}_\Delta =
+(\Delta \times \text{id}_Y)_*\mathcal{O}_{X \times_R Y}$ であることから従う．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{ガブリエル--ローゼンベルグ再構成}
+\label{functors-section-gabriel}
+
+\noindent
+この節の表題は，命題 \ref{functors-proposition-gabriel-rosenberg} のような結果を指している．
+ガブリエルの原論文 \cite{Gabriel} に加えて，準分離スキームに対する結果の証明と
+文献の議論を含む \cite{Brandenburg} も参照されたい．この節では，準コンパクトかつ
+準分離なスキームについてのみガブリエル--ローゼンベルグ再構成を証明する．
+
+\begin{lemma}
+\label{functors-lemma-categorically-compact-QCoh}
+$X$ を準コンパクトかつ準分離なスキームとする．$\mathcal{F}$ を準連接
+$\mathcal{O}_X$-加群とする．このとき $\mathcal{F}$ が $\QCoh(\mathcal{O}_X)$ の
+圏論的コンパクト対象であることと，$\mathcal{F}$ が有限表示であることは同値である．
+\end{lemma}
+
+\begin{proof}
+本章で用いる圏論的コンパクト対象の定義については，『圏論』の定義
+\ref{categories-definition-compact-object} を参照せよ．$\mathcal{F}$ が有限表示ならば，
+『加群の層』の補題 \ref{modules-lemma-finite-presentation-quasi-compact-colimit} により
+圏論的コンパクトである．逆に，任意の準連接加群 $\mathcal{F}$ は，フィルター余極限
+$\mathcal{F} = \colim \mathcal{F}_i$ として書け，ここで各項は有限表示な
+（したがって準連接な）$\mathcal{O}_X$-加群である．『スキームの性質』の補題
+\ref{properties-lemma-directed-colimit-finite-presentation} を参照せよ．
+$\mathcal{F}$ が圏論的コンパクトならば，ある $i$ と射
+$\mathcal{F} \to \mathcal{F}_i$ が得られ，これは所与の射 $\mathcal{F}_i \to \mathcal{F}$ の右逆である．
+したがって $\mathcal{F}$ は有限表示加群の直和因子であり，それ自身も有限表示である．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-supported-on-support-pre}
+$X$ をアフィンスキームとする．$\mathcal{F}$ を有限表示 $\mathcal{O}_X$-加群とする．
+$\mathcal{E}$ を非零の準連接 $\mathcal{O}_X$-加群とする．
+$\text{Supp}(\mathcal{E}) \subset \text{Supp}(\mathcal{F})$ ならば，
+非零射 $\mathcal{F} \to \mathcal{E}$ が存在する．
+\end{lemma}
+
+\begin{proof}
+主張を代数的な形に言い換えよう．$A$ を環とし，$M$ を有限表示 $A$-加群，$N$ を非零
+$A$-加群とする．$\text{Supp}(N) \subset \text{Supp}(M)$ と仮定する．示すべきことは，
+$\Hom_A(M, N)$ が非零であることである．$N = A/I$ が巡回加群であると仮定してよい
+（$N$ を任意の非零巡回部分加群で置き換える）．表示
+$$
+A^{\oplus m} \xrightarrow{T} A^{\oplus n} \to M \to 0
+$$
+を選ぶ．$\text{Supp}(M)$ は $\text{Fit}_0(M)$ により切り出される．このイデアルは $n \times n$
+小行列式（行列 $T$ から得られるもの）で生成されることを思い出そう．『代数学のさらなる話題』の補題
+\ref{more-algebra-lemma-fitting-ideal-basics} を参照せよ．仮定
+$\text{Supp}(N) \subset \text{Supp}(M)$ は，いまや $\text{Fit}_0(M)$ の元が $A/I$ で
+冪零であることを意味する．完全列
+$$
+0 \to \Hom_A(M, A/I) \to (A/I)^{\oplus n} \xrightarrow{T^t} (A/I)^{\oplus m}
+$$
+を考える．$T^t$ が単射ではありえないことを示さなければならない．読者には，
+$\text{Fit}_0(M)$ の元が $A/I$ で冪零であることを用いて独自の証明を見いだしてほしい．
+以下が本章での証明である．$\text{Fit}_0(M)$ は有限生成なので，この冪零性は，零化イデアル
+$J \subset A/I$，すなわち $\text{Fit}_0(M)$ を $A/I$ の中で零化するイデアルが非零であることを意味する．
+$T^t$ が単射でないことを示すには，素イデアルで局所化してよい．適当な素イデアルを選べば，
+$A$ は局所環で $J$ はなお非零であると仮定してよい．このとき 『代数学のさらなる話題』の補題
+\ref{more-algebra-lemma-exact-length-1} により $T^t$ は非零核をもつ．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-supported-on-support}
+$X$ を準コンパクトかつ準分離なスキームとする．$\mathcal{F}$ を有限表示
+$\mathcal{O}_X$-加群とする．$\QCoh(\mathcal{O}_X)$ の次の二つの部分圏は等しい．
+\begin{enumerate}
+\item 充満部分圏 $\mathcal{A} \subset \QCoh(\mathcal{O}_X)$ であって，台が
+（集合論的に）$\text{Supp}(\mathcal{F})$ に含まれる準連接加群を対象とするもの．
+\item 最小の Serre 部分圏 $\mathcal{B} \subset \QCoh(\mathcal{O}_X)$ であって，
+$\mathcal{F}$ を含み，拡大および任意直和で閉じているもの．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+有限表示 $\mathcal{O}_X$-加群は準連接なので，この主張には意味がある．
+$\mathcal{A}$ は拡大と直和で閉じた Serre 部分圏であり，$\mathcal{F}$ は
+$\mathcal{A}$ の対象なので，$\mathcal{B} \subset \mathcal{A}$ である．したがって
+$\mathcal{A}$ が $\mathcal{B}$ に含まれることを示せばよい．
+
+\medskip\noindent
+$\mathcal{E}$ を $\mathcal{A}$ の対象とする．極大な部分加群
+$\mathcal{E}' \subset \mathcal{E}$ であって $\mathcal{B}$ に属するものが存在する．実際，
+$\mathcal{E}_i \subset \mathcal{E}$，
+$i \in I$ を $\mathcal{B}$ の対象である部分対象全体とする．このとき
+$\bigoplus \mathcal{E}_i$ は $\mathcal{B}$ に属し，したがって
+$$
+\mathcal{E}' = \Im(\bigoplus \mathcal{E}_i \longrightarrow \mathcal{E})
+$$
+もこの部分圏に属する．これは明らかに求める極大部分加群である．
+
+\medskip\noindent
+いま，$\mathcal{G} \to \mathcal{E}/\mathcal{E}'$ が非零射で，$\mathcal{G}$ が
+$\mathcal{B}$ に属すると仮定する．このとき
+$\mathcal{G}' = \mathcal{E} \times_{\mathcal{E}/\mathcal{E}'} \mathcal{G}$ は
+$\mathcal{B}$ に属する．実際，これは $\mathcal{E}'$ と $\mathcal{G}$ の拡大である．すると射
+$\mathcal{G}' \to \mathcal{E}$ の像は $\mathcal{E}'$ より真に大きくなり，
+$\mathcal{E}'$ の極大性に反する．ゆえに次の段落の主張を示せば十分である．
+
+\medskip\noindent
+% P07-ERR-0556: frozen source has the wrong article in "an nonzero object".
+$\mathcal{E}$ を $\mathcal{A}$ の非零対象とする．$\mathcal{G} \to \mathcal{E}$ という
+非零射で，$\mathcal{G}$ が $\mathcal{B}$ に属するものが存在すると主張する．
+これを，次の条件を満たすアフィン開集合の最小個数 $n$ に関する帰納法で証明する．ここで $U_i$ は $X$ のアフィン開集合で，
+$\text{Supp}(\mathcal{E}) \subset U_1 \cup \ldots \cup U_n$ を満たすものとする．
+$U = U_n$ とおき，包含射を $j : U \to X$ と書く．
+$\mathcal{E}' = \Im(\mathcal{E} \to j_*\mathcal{E}|_U)$ と書く．このとき核
+$\mathcal{E}''$，すなわち全射 $\mathcal{E} \to \mathcal{E}'$ の核の台は
+$U_1 \cup \ldots \cup U_{n - 1}$ に含まれる．したがって $\mathcal{E}''$ が非零ならば
+帰納法の仮定から主張が従う．換言すれば，$\mathcal{E} \subset j_*\mathcal{E}|_U$ と仮定してよい．
+とくに $\mathcal{E}|_U$ は非零である．補題 \ref{functors-lemma-supported-on-support-pre} により，
+非零射 $\mathcal{F}|_U \to \mathcal{E}|_U$ が存在する．これは射
+$$
+\varphi : \mathcal{F} \longrightarrow j_*(\mathcal{E}|_U)
+$$
+であって，$U$ への制限が非零であるものに対応する．
+$\mathcal{G} = \varphi^{-1}(\mathcal{E})$ とおけば結論を得る．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-quotient-supported-on-closed}
+$X$ を準コンパクトかつ準分離なスキームとする．$Z \subset X$ を，補集合
+$U = X \setminus Z$ が準コンパクトである閉部分集合とする．
+$\mathcal{A} \subset \QCoh(\mathcal{O}_X)$ を，台が $Z$ に含まれる準連接加群を対象とする
+充満部分圏とする．このとき制限関手
+$\QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_U)$ は同値
+$\QCoh(\mathcal{O}_X)/\mathcal{A} \cong \QCoh(\mathcal{O}_U)$ を誘導する．
+\end{lemma}
+
+\begin{proof}
+商構成の普遍性（『ホモロジー代数』の補題 \ref{homology-lemma-serre-subcategory-is-kernel}）により，
+次の誘導関手を得る：
+% P07-ERR-0557: frozen source prematurely displays an isomorphism before the quasi-inverse is constructed.
+$\QCoh(\mathcal{O}_X)/\mathcal{A} \cong \QCoh(\mathcal{O}_U)$．
+$j : U \to X$ を包含射と書く．$j$ は準コンパクトかつ準分離なので，関手
+$j_* : \QCoh(\mathcal{O}_U) \to \QCoh(\mathcal{O}_X)$
+を得る．% P07-ERR-0562: frozen source says "The reader shows" instead of asking the reader to verify.
+これが擬逆を定めることを読者は確認できる．詳細は省略する．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-characterize-affine}
+$X$ を準コンパクトかつ準分離なスキームとする．
+$\QCoh(\mathcal{O}_X)$ がある環上の加群の圏と同値ならば，$X$ はアフィンである．
+\end{lemma}
+
+\begin{proof}
+同値を $F : \text{Mod}_R \to \QCoh(\mathcal{O}_X)$ とする．
+このとき $\mathcal{F} = F(R)$ は次の性質をもつ．
+\begin{enumerate}
+\item これは有限表示 $\mathcal{O}_X$-加群である
+（補題 \ref{functors-lemma-categorically-compact-QCoh}）．
+\item $\Hom_X(\mathcal{F}, -)$ は完全である．
+\item $\Hom_X(\mathcal{F}, \mathcal{F})$ は可換環である．
+\item $\QCoh(\mathcal{O}_X)$ の各対象は $\mathcal{F}$ のコピーの直和の商である．
+\end{enumerate}
+$x \in X$ を閉点とする．全射
+$$
+\mathcal{O}_X \to i_*\kappa(x)
+$$
+を考える．ここで終域は $\kappa(x)$ の順像であり，包含射 $i : x \to X$ に沿って取ったものである．次の等式を得る．
+$$
+\Hom_X(\mathcal{F}, i_*\kappa(x)) =
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, \kappa(x))
+$$
+% P07-ERR-0558: frozen source has misplaced word order in "This first by (4) implies".
+この等式と (4) から，まず $\mathcal{F}_x$ が非零であることが分かる．
+(2) から，任意の射 $\mathcal{F}_x \to \kappa(x)$ は射
+$\mathcal{F}_x \to \mathcal{O}_{X, x}$ に持ち上がることが従う（実際，大域射
+$\mathcal{F} \to \mathcal{O}_X$ にまで持ち上がる）．$\mathcal{F}_x$ は有限生成
+$\mathcal{O}_{X, x}$-加群なので，これは $\mathcal{F}_x$ が非零の有限自由
+$\mathcal{O}_{X, x}$-加群であることを意味する．さらに $\mathcal{F}$ は有限表示なので，
+$\mathcal{F}$ は $x$ のある開近傍上で正の階数をもつ有限自由加群である
+（『加群の層』の補題 \ref{modules-lemma-finite-presentation-stalk-free}）．
+$X$ の任意の閉部分集合は閉点を含むので
+（『位相』の補題 \ref{topology-lemma-quasi-compact-closed-point}），
+$\mathcal{F}$ は正の階数をもつ有限局所自由加群である．同様に，射
+$$
+\Hom_X(\mathcal{F}, \mathcal{F}) \to
+\Hom_X(\mathcal{F}, i_*i^*\mathcal{F}) =
+\Hom_{\kappa(x)}(\mathcal{F}_x/\mathfrak m_x \mathcal{F}_x,
+\mathcal{F}_x/\mathfrak m_x \mathcal{F}_x)
+$$
+は全射である．% P07-ERR-0559: frozen source omits "of" in "the rank F_x".
+性質 (3) により，$\mathcal{F}_x$ の階数は $1$ でなければならない．したがって
+$\mathcal{F}$ は可逆 $\mathcal{O}_X$-加群である．すると関手
+$$
+\mathcal{H}
+\longmapsto
+\Gamma(X, \mathcal{H}) = \Hom_X(\mathcal{O}_X, \mathcal{H}) =
+\Hom_X(\mathcal{F}, \mathcal{H} \otimes_{\mathcal{O}_X} \mathcal{F})
+$$
+は $\QCoh(\mathcal{O}_X)$ 上でも完全である．これは1 次の $\Ext$ 群
+$$
+\Ext^1_{\QCoh(\mathcal{O}_X)}(\mathcal{O}_X, \mathcal{H}) = 0
+$$
+が，アーベル圏 $\QCoh(\mathcal{O}_X)$ で計算したとき，任意の
+$\mathcal{H}$（$\QCoh(\mathcal{O}_X)$ の対象）に対して消えることを意味する．しかし，
+$\QCoh(\mathcal{O}_X) \subset \textit{Mod}(\mathcal{O}_X)$ は拡大で閉じているので
+（『スキーム』の節 \ref{schemes-section-quasi-coherent}），準連接加群間の $\Ext^1$ を
+$\QCoh(\mathcal{O}_X)$ で計算しても $\textit{Mod}(\mathcal{O}_X)$ で計算しても同じである．
+したがって
+$$
+H^1(X, \mathcal{H}) =
+\Ext^1_{\textit{Mod}(\mathcal{O}_X)}(\mathcal{O}_X, \mathcal{H}) = 0
+$$
+が任意の $\mathcal{H}$，すなわち $\QCoh(\mathcal{O}_X)$ の対象に対して成り立つ．
+たとえば 『スキームのコホモロジー』の補題
+\ref{coherent-lemma-quasi-compact-h1-zero-covering}
+により，これは $X$ がアフィンであることを意味する．
+\end{proof}
+
+\begin{proposition}
+\label{functors-proposition-gabriel-rosenberg}
+\begin{reference}
+\cite[定理 1.2]{Brandenburg} の特別な場合
+\end{reference}
+$X$ と $Y$ を準コンパクトかつ準分離なスキームとする．
+$F : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$ が同値ならば，スキームの同型
+$f : Y \to X$ と可逆 $\mathcal{O}_Y$-加群 $\mathcal{L}$ であって
+$F(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$ を満たすものが存在する．
+\end{proposition}
+
+\begin{proof}
+もちろん $F$ は可加かつ完全で，すべての極限，すべての余極限，直和などと交換する．
+$U \subset X$ をアフィン開部分スキームとする．$\mathcal{I} \subset \mathcal{O}_X$ を
+有限型の準連接イデアル層であって，$Z = V(\mathcal{I})$ が $U$ の $X$ における補集合と
+なるものとする．『スキームの性質』の補題 \ref{properties-lemma-quasi-coherent-finite-type-ideals} を参照せよ．
+このとき $\mathcal{O}_X/\mathcal{I}$ は有限表示 $\mathcal{O}_X$-加群である．したがって
+$\mathcal{G} = F(\mathcal{O}_X/\mathcal{I})$ は，補題
+\ref{functors-lemma-categorically-compact-QCoh} により有限表示 $\mathcal{O}_Y$-加群である．
+$T \subset Y$ を $\mathcal{G}$ の台と書き，$V = Y \setminus T$ とおく．
+$\mathcal{G}$ は有限表示なので，$V$ は $Y$ の準コンパクト開部分スキームである．
+補題 \ref{functors-lemma-supported-on-support} により，$F$ は次の二つの部分圏の間の同値を誘導する．
+\begin{enumerate}
+\item $\QCoh(\mathcal{O}_X)$ の充満部分圏で，台が $Z$ に含まれる加群からなるもの．
+\item $\QCoh(\mathcal{O}_Y)$ の充満部分圏で，台が $T$ に含まれる加群からなるもの．
+\end{enumerate}
+補題 \ref{functors-lemma-quotient-supported-on-closed} により，可換図式
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_X) \ar[r]_F \ar[d] &
+\QCoh(\mathcal{O}_Y) \ar[d] \\
+\QCoh(\mathcal{O}_U) \ar[r]^{F_U} &
+\QCoh(\mathcal{O}_V)
+}
+$$
+を得る．% P07-ERR-0560: frozen source misspells "restriction" as "restruction".
+垂直射は制限関手であり，水平射は同値である．補題
+\ref{functors-lemma-characterize-affine} により $V$ はアフィンである．アフィンの場合には補題
+\ref{functors-lemma-functor-equivalence} がある．したがって，同型 $f_U : V \to U$ と可逆
+$\mathcal{O}_V$-加群 $\mathcal{L}_U$ が存在し，$F_U$ は関手
+$\mathcal{F} \mapsto f_U^*\mathcal{F} \otimes \mathcal{L}_U$ である．
+
+\medskip\noindent
+% P07-ERR-0561: frozen source uses the nonstandard plural phrase "with regards to".
+上の図式が $X$ のアフィン開部分スキームの包含に関して明らかな両立性を満たすことに
+注意すれば，証明を完了できる．したがって射 $f_U$ と可逆加群 $\mathcal{L}_U$ は貼り合わさる．
+詳細は省略する．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{連接加群の圏の間の関手}
+\label{functors-section-functor-coherent}
+
+\noindent
+次の補題により，連接加群の圏の間の関手が与えられたとき，準連接加群の圏の間の
+関手についての結果を利用できる．
+
+\begin{lemma}
+\label{functors-lemma-functor-coherent}
+$X$ と $Y$ を Noether スキームとする．
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$
+を関手とする．このとき $F$ は，フィルター余極限と交換する関手
+$\QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$
+へ一意に拡張される．$F$ が可加ならば，その拡張は任意直和と交換する．
+$F$ が完全，左完全，または右完全ならば，その拡張も同じ性質をもつ．
+\end{lemma}
+
+\begin{proof}
+拡張の存在と一意性は一般的な事実である．「圏論」の補題
+\ref{categories-lemma-extend-functor-by-colim} を参照せよ．この補題が適用できることを確認するには，
+連接加群が有限表示であり（「加群の層」の補題
+\ref{modules-lemma-coherent-finite-presentation}），したがって 「加群の層」の補題
+\ref{modules-lemma-finite-presentation-quasi-compact-colimit} により
+$\textit{Mod}(\mathcal{O}_X)$ の圏論的コンパクト対象であることに注意すればよい．
+最後に，たとえば 「スキームの性質」の補題
+\ref{properties-lemma-quasi-coherent-colimit-finite-type} により，任意の準連接加群は
+連接加群のフィルター余極限である．
+
+\medskip\noindent
+まず $F$ が可加であると仮定する．$\mathcal{F} = \bigoplus_{j \in J} \mathcal{H}_j$ で，
+$\mathcal{H}_j$ が準連接ならば，
+$\mathcal{F} = \colim_{J' \subset J\text{有限}}
+\bigoplus_{j \in J'} \mathcal{H}_j$．
+$F$ の拡張も $F$ と書けば，次を得る．
+\begin{align*}
+F(\mathcal{F})
+& =
+\colim_{J' \subset J\text{有限}}
+F(\bigoplus\nolimits_{j \in J'} \mathcal{H}_j) \\
+& =
+\colim_{J' \subset J\text{有限}}
+\bigoplus\nolimits_{j \in J'} F(\mathcal{H}_j) \\
+& =
+\bigoplus\nolimits_{j \in J} F(\mathcal{H}_j)
+\end{align*}
+したがって $F$ は任意直和と交換する．
+
+\medskip\noindent
+$0 \to \mathcal{F} \to \mathcal{F}' \to \mathcal{F}'' \to 0$ を準連接
+$\mathcal{O}_X$-加群の短完全列とする．このとき $\mathcal{F}' = \bigcup \mathcal{F}'_i$ と，
+その連接部分加群の合併として書く．「スキームの性質」の補題
+\ref{properties-lemma-quasi-coherent-colimit-finite-type} を参照せよ．
+$\mathcal{F}''_i \subset \mathcal{F}''$ を $\mathcal{F}'_i$ の像と書き，
+$\mathcal{F}_i = \mathcal{F} \cap \mathcal{F}'_i =
+\Ker(\mathcal{F}'_i \to \mathcal{F}''_i)$ と書く．すると明らかに
+$\mathcal{F} = \bigcup \mathcal{F}_i$ および $\mathcal{F}'' = \bigcup \mathcal{F}''_i$ であり，
+短完全列
+$$
+0 \to \mathcal{F}_i \to \mathcal{F}_i' \to \mathcal{F}_i'' \to 0
+$$
+を得る．拡張はフィルター余極限と交換するので，
+$F(\mathcal{F}) = \colim_{i \in I} F(\mathcal{F}_i)$，
+$F(\mathcal{F}') = \colim_{i \in I} F(\mathcal{F}'_i)$，および
+$F(\mathcal{F}'') = \colim_{i \in I} F(\mathcal{F}''_i)$．
+フィルター余極限は完全なので（「加群の層」の補題
+\ref{modules-lemma-limits-colimits}），$F$ の完全性に関する性質はその拡張に継承される．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-equivalence-coherent}
+$X$ と $Y$ を Noether スキームとする．
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$
+を圏同値とする．このとき同型 $f : Y \to X$ と可逆 $\mathcal{O}_Y$-加群
+$\mathcal{L}$ であって $F(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$ を満たすものが存在する．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-functor-coherent} により，一意な関手
+$F' : \QCoh(\mathcal{O}_X) \to \QCoh(\mathcal{O}_Y)$ であって $F$ を拡張するものを得る．$F$ の擬逆についても同様であり，
+一意性により $F'$ は同値である．命題 \ref{functors-proposition-gabriel-rosenberg} により，
+同型 $f : Y \to X$ と可逆 $\mathcal{O}_Y$-加群 $\mathcal{L}$ であって
+$F'(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$ を満たすものが得られる．
+このとき $f$ と $\mathcal{L}$ は $F$ に対しても同じ表示を与える．
+\end{proof}
+
+\begin{remark}
+\label{functors-remark-equivalence-coherent-linear}
+補題 \ref{functors-lemma-equivalence-coherent} において，$X$ と $Y$ が共通の基礎環 $R$ 上で定義され，
+$F$ が $R$-線形ならば，同型 $f$ は $R$ 上のスキームの射になる．
+\end{remark}
+
+\begin{lemma}
+\label{functors-lemma-characterize-finite}
+$f : V \to X$ を Noether スキームの間の準有限分離射とする．連接
+$\mathcal{O}_V$-加群 $\mathcal{K}$ であって，その台が $V$ であり，$f_*\mathcal{K}$ が連接で
+% P07-ERR-0563: frozen source leaves q unquantified in the vanishing hypothesis.
+$R^qf_*\mathcal{K} = 0$ を満たすものが存在するならば，$f$ は有限である．
+\end{lemma}
+
+\begin{proof}
+Zariski の主定理により，開埋め込み $j : V \to Y$ であって，$X$ 上で定義され，
+$\pi : Y \to X$ が有限となるものをとれる．「射についてさらに」の補題
+\ref{more-morphisms-lemma-quasi-finite-separated-pass-through-finite}
+を参照せよ．$\pi$ はアフィンなので，関手 $\pi_*$ は
+% P07-ERR-0564: frozen source names coherent O_X-modules although pi_* has domain on Y.
+連接 $\mathcal{O}_X$-加群の圏上で完全かつ忠実である．したがって $j_*\mathcal{K}$ は連接で，
+$R^qj_*\mathcal{K}$ は $q > 0$ に対して零である．換言すれば，次の段落で扱う場合に帰着する．
+
+\medskip\noindent
+$f$ が開埋め込みであると仮定する．$X$ を $V$ のスキーム論的閉包で置き換えてよい．
+矛盾を導くため $X \setminus V$ が空でないと仮定する．$\xi \in X \setminus V$ を
+$X \setminus V$ の既約成分の生成点とする．平坦基底変換と 「局所コホモロジー」の補題
+\ref{local-cohomology-lemma-finiteness-pushforwards-and-H1-local}
+を用い，$\Spec(\mathcal{O}_{X, \xi}) \to X$ による基底変換後の状況を見ると，
+次の段落で扱う代数の問題に帰着する．
+
+\medskip\noindent
+$(A, \mathfrak m)$ を Noether 局所環とする．$M$ を有限生成 $A$-加群であって，台が
+$\Spec(A)$ であるものとする．このとき $H^i_\mathfrak m(M) \not = 0$ となる
+ある $i$ が存在する．これは 「双対化複体」の補題
+\ref{dualizing-lemma-depth} と，$M$ が非零であり，したがって有限の深さをもつことから従う．
+\end{proof}
+
+\noindent
+次の補題は，$k$ が Noether 環で $X$ が $k$ 上平坦である場合にも一般化できる
+（他の仮定はすべて同じままである）．
+
+\begin{lemma}
+\label{functors-lemma-functor-coherent-over-field}
+$k$ を体とする．$X$, $Y$ を $k$ 上有限型のスキームとし，$X$ は分離的であるとする．
+次の圏の間に同値がある．
+\begin{enumerate}
+\item $k$-線形な完全関手
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$ の圏．
+\item 連接 $\mathcal{O}_{X \times Y}$-加群 $\mathcal{K}$ であって，$X$ 上平坦で，
+台が $Y$ 上有限であるものの圏．
+\end{enumerate}
+この同値は，$\mathcal{K}$ を関手 (\ref{functors-equation-FM-QCoh}) の
+$\textit{Coh}(\mathcal{O}_X)$ への制限に送ることで与えられる．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{K}$ を (2) のものとする．補題
+\ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} により，
+(\ref{functors-equation-FM-QCoh}) で与えられる関手 $F$ は完全かつ $k$-線形である．さらに，
+たとえば 「スキームのコホモロジー」の補題
+\ref{coherent-lemma-support-proper-over-base-pushforward}
+により，$F$ は $\textit{Coh}(\mathcal{O}_X)$ を
+$\textit{Coh}(\mathcal{O}_Y)$ に送る．
+
+\medskip\noindent
+この構成に対する擬逆を与えよう．$F$ を (1) のものとする．補題
+\ref{functors-lemma-functor-coherent} により，$F$ を，任意直和と交換する $k$-線形完全関手へ
+準連接加群の圏上で拡張できる．% P07-ERR-0565: frozen source has a number mismatch in "on the categories".
+補題 \ref{functors-lemma-functor-quasi-coherent-from-affine-diagonal} により，この拡張は一意な
+準連接加群 $\mathcal{K}$ に対応する．これは $X$ 上平坦で，
+$R^q\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times Y}} \mathcal{K}) = 0$ が $q > 0$ のとき，
+すべての準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して成り立つ．
+$F(\mathcal{O}_X)$ は連接 $\mathcal{O}_Y$-加群なので，補題
+\ref{functors-lemma-functor-quasi-coherent-from-separated} により $\mathcal{K}$ は連接である．
+
+\medskip\noindent
+閉点 $x \in X$ に対し，$\mathcal{O}_x$ を，$x$ において $x$ の剰余体を値にもつ
+摩天楼層と書く．次を得る．
+$$
+F(\mathcal{O}_x) =
+\text{pr}_{2, *}(\text{pr}_1^*\mathcal{O}_x \otimes \mathcal{K}) =
+(x \times Y \to Y)_*(\mathcal{K}|_{x \times Y})
+$$
+$x \times Y \to Y$ は有限なので，この射に沿う順像は忠実である．したがって
+$y \in Y$ が $\mathcal{K}|_{x \times Y}$ の台の像に属するならば，$y$ は
+$F(\mathcal{O}_x)$ の台に属する．
+
+\medskip\noindent
+% P07-ERR-0566: frozen source repeats the symbol Z in "scheme theoretic support Z".
+$Z \subset X \times Y$ を考える．この $Z$ を，$\mathcal{K}$ のスキーム論的台とする．
+「スキームの射」の定義 \ref{morphisms-definition-scheme-theoretic-support} を参照せよ．
+まず $Z \to Y$ が準有限であることを，閉点上のファイバーが有限であることから証明する．
+実際，$Z \to Y$ の閉点 $y \in Y$ 上のファイバーが次元 $> 0$ をもつならば，
+相異なる閉点 $x_1, x_2, \ldots$ を $Z_y \to X$ の像の中に無限個見いだせる．全射
+$\mathcal{O}_X \to \bigoplus_{i = 1, \ldots, n} \mathcal{O}_{x_i}$ があるので，全射
+$$
+F(\mathcal{O}_X) \to \bigoplus\nolimits_{i = 1, \ldots, n} F(\mathcal{O}_{x_i})
+$$
+を得る．上で述べたことにより，点 $y$ は各連接加群 $F(\mathcal{O}_{x_i})$ の台に属する．
+$F(\mathcal{O}_X)$ は連接加群なので，これは矛盾を導く．実際，$F(\mathcal{O}_X)$ の
+$y$ における茎は $< n$ 個の元で生成される（$n$ を十分大きくする）．したがって
+$Z \to Y$ は準有限である．$\text{pr}_{2, *}\mathcal{K}$ は連接で，
+$R^q\text{pr}_{2, *}\mathcal{K} = 0$ が $q > 0$ に対して成り立つので，補題
+\ref{functors-lemma-characterize-finite} により $Z \to Y$ は有限である．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-pushforward-invertible-pre}
+$f : X \to Y$ をスキームの有限型分離射とする．$\mathcal{F}$ を $X$ 上の有限型準連接加群で，
+台が $Y$ 上有限であり，$\mathcal{L} = f_*\mathcal{F}$ が可逆
+% P07-ERR-0567: frozen source calls f_*F an O_X-module although it is naturally on Y.
+$\mathcal{O}_X$-加群であるものとする．このとき切断 $s : Y \to X$ であって
+$\mathcal{F} \cong s_*\mathcal{L}$ を満たすものが存在する．
+\end{lemma}
+
+\begin{proof}
+アフィン局所で考えると，これは次の代数的な主張に言い換えられる．$A \to B$ を環準同型とし，
+$N$ を $B$-加群であって，$A$-加群として可逆なものとする．このとき零化イデアル
+$J$，すなわち $N$ の $B$ における零化イデアルは，$A \to B/J$ が同型になるという性質をもつ．詳細は省略する．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-pushforward-invertible}
+$f : X \to Y$ を，切断 $s : Y \to X$ をもつスキームの有限型分離射とする．
+$\mathcal{F}$ を $X$ 上の有限型準連接加群で，その台が集合論的に $s(Y)$ に含まれ，
+$\mathcal{L} = f_*\mathcal{F}$ が可逆
+% P07-ERR-0568: frozen source again calls f_*F an O_X-module rather than an O_Y-module.
+$\mathcal{O}_X$-加群であるものとする．$Y$ が被約ならば，
+$\mathcal{F} \cong s_*\mathcal{L}$ である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{functors-lemma-pushforward-invertible-pre} により，切断 $s' : Y  \to X$ であって
+% P07-ERR-0569: frozen source writes literal equality where only an isomorphism is supplied.
+$\mathcal{F} = s'_*\mathcal{L}$ を満たすものが存在する．$s'(Y)$ と $s(Y)$ は同じ
+閉部分集合を底空間とし，いずれも $X$ の被約閉部分スキームなので，等しくなければならない．
+したがって $s = s'$ であり，補題が成り立つ．
+\end{proof}
+
+\begin{lemma}
+\label{functors-lemma-equivalence-coherent-over-field}
+\begin{reference}
+準連接加群の圏がスキームの同型類を決定するという
+\cite{Gabriel} の結果の弱い形．
+\end{reference}
+$k$ を体とする．$X$, $Y$ を $k$ 上有限型のスキームとし，$X$ は分離的，$Y$ は被約とする．
+$k$-線形な圏同値
+$F : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$ が存在するならば，
+同型 $f : Y \to X$ （$k$ 上）と，可逆 $\mathcal{O}_Y$-加群 $\mathcal{L}$ であって
+$F(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$ を満たすものが存在する．
+\end{lemma}
+
+\begin{proof}[ガブリエル--ローゼンベルグ再構成を用いる証明]
+この補題は，補題 \ref{functors-lemma-equivalence-coherent} および注意
+\ref{functors-remark-equivalence-coherent-linear} で論じた結果の弱い形である．
+\end{proof}
+
+\begin{proof}[ガブリエル--ローゼンベルグ再構成に依存しない証明]
+補題 \ref{functors-lemma-functor-coherent-over-field} により，連接
+$\mathcal{O}_{X \times Y}$-加群 $\mathcal{K}$ であって，$X$ 上平坦，台が $Y$ 上有限で，
+$F$ が関手 (\ref{functors-equation-FM-QCoh}) の $\textit{Coh}(\mathcal{O}_X)$ への制限により
+与えられるものを得る．$F(\mathcal{O}_X)$ が可逆 $\mathcal{O}_Y$-加群であることを
+示せれば，補題 \ref{functors-lemma-pushforward-invertible-pre} により
+$\mathcal{K} = s_*\mathcal{L}$ である．ここで $s : Y \to X \times Y$ は
+$\text{pr}_2$ のある切断，$\mathcal{O}_Y$-加群 $\mathcal{L}$ はある可逆加群である．
+これにより $F$ は所望の形をもち，$f = \text{pr}_1 \circ s$ であることが分かる．詳細の一部は省略する．
+
+\medskip\noindent
+$F(\mathcal{O}_X)$ が可逆であることを示せばよい．証明の概略だけを示し，詳細の一部を省略する．
+閉点 $x \in X$ に対し，$\mathcal{O}_x$ を $\textit{Coh}(\mathcal{O}_X)$ の中で，
+$x$ において $\kappa(x)$ を値にもつ摩天楼層と書く．まず，圏
+$\textit{Coh}(\mathcal{O}_X)$ の単純対象はこれらの摩天楼層 $\mathcal{O}_x$ だけであることに
+注意する．$Y$ についても同様である．したがって各閉点 $y \in Y$ に対し，閉点
+$x \in X$ であって $\mathcal{O}_y \cong F(\mathcal{O}_x)$ を満たすものが存在する．
+さらに自己準同型を見ると，$\kappa(x) \cong \kappa(y)$ が $k$ の有限拡大として成り立つ．よって
+$$
+\Hom_Y(F(\mathcal{O}_X), \mathcal{O}_y) \cong
+\Hom_Y(F(\mathcal{O}_X), F(\mathcal{O}_x)) \cong
+\Hom_X(\mathcal{O}_X, \mathcal{O}_x) \cong \kappa(x) \cong \kappa(y)
+$$
+このことから，連接 $\mathcal{O}_Y$-加群 $F(\mathcal{O}_X)$ の $y \in Y$ における茎は，
+ちょうど $1$ 個の生成元を必要とすることが，各閉点 $y \in Y$ に対して分かる．
+直ちに $F(\mathcal{O}_X)$ は局所的に $1$ 個の元で生成され（しかも零個では生成できず），
+$Y$ は被約なので，これは実際に可逆加群であることを意味する．
+\end{proof}

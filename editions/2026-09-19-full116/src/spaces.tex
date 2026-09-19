@@ -1,0 +1,2635 @@
+% Generated mechanically from frozen input inputs/p08/ja/spaces.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{64}
+\chapter{代数空間}
+
+
+
+\phantomsection
+\label{spaces-section-phantom}
+
+
+\section{はじめに}
+\label{spaces-section-introduction}
+
+\noindent
+代数空間は Michael Artin によって初めて導入された。
+\cite{ArtinI}、\cite{ArtinII}、
+\cite{Artin-Theorem-Representability}、
+\cite{Artin-Construction-Techniques}、
+\cite{Artin-Algebraic-Spaces}、
+\cite{Artin-Algebraic-Approximation}、
+\cite{Artin-Implicit-Function}、および
+\cite{ArtinVersal} を参照されたい。
+基礎的な内容の一部は Knutson と共同で発展させられ、
+Knutson は著書 \cite{Kn} を著した。
+Artin は（\cite[Definition 1.3]{Artin-Implicit-Function} を参照）
+代数空間を、エタール位相に関する層であって、
+エタール位相において局所的に表現可能なものとして定義した。
+Artin の研究の大部分では、考察されるスキームの圏は、
+固定された優秀 Noether 基底上局所有限型なスキームからなる。
+
+\medskip\noindent
+本章の定義は Artin の元来の定義とわずかに異なる。
+すなわち、本章でいう代数空間とは、対角射が表現可能であり、
+スキームによるエタールな「被覆」をもつ fppf 位相の層である。
+エタール位相の代わりに fppf 位相を用いることは技術的な点にすぎず、
+ほとんど違いを生じない。実際、Bootstrap, Section
+\ref{bootstrap-section-spaces-etale} において、エタール位相を用いても
+同じ代数空間の圏が得られたことを示す。同じ章では、対角射に関する条件を
+ある意味で除去できることも証明する。Bootstrap, Section
+\ref{bootstrap-section-bootstrap} を参照されたい。
+
+\medskip\noindent
+代数空間を定義した後、いくつかの基礎的な事実を述べる。
+本章の主結果は、本章の定義のもとで代数空間とエタール同値関係が
+同じものであるということである。Section \ref{spaces-section-presentations} の議論と
+定理 \ref{spaces-theorem-presentation} を参照されたい。Artin の設定における
+この定理の類似は \cite[Theorem 1.5]{Artin-Implicit-Function}、または
+\cite[Proposition II.1.7]{Kn} である。言い換えれば、エタール同値関係が
+定める層の対角射は表現可能である。したがって、本章の定義は広い意味で
+Artin の元来の定義と一致する。また、単にエタール同値関係を書き下すことに
+よって代数空間の例を与えられることも意味する。
+
+\medskip\noindent
+Section \ref{spaces-section-separation} では、文献に現れる代数空間のさまざまな
+分離公理を導入する。最後に Section \ref{spaces-section-examples} では、奇妙な例と
+それほど奇妙でない例をいくつか与える。
+
+
+
+
+
+
+\section{一般的注意}
+\label{spaces-section-general}
+
+\noindent
+Topologies, Definition \ref{topologies-definition-big-fppf-site} と同様に、
+適切な大 fppf サイト $\Sch_{fppf}$ で作業する。したがって、明記しない限り、
+すべてのスキームは $\Sch_{fppf}$ の対象とする。
+Section \ref{spaces-section-change-big-site} では、大 fppf サイトを変更したときに
+何が変わるかを論じる。
+
+\medskip\noindent
+常に $\Sch_{fppf}$ に含まれる基底 $S$ に相対的に作業する。
+そのうえで、大 fppf サイト $(\Sch/S)_{fppf}$ を用いる。
+Topologies, Definition \ref{topologies-definition-big-small-fppf} を参照されたい。
+絶対的な場合は $S = \Spec(\mathbf{Z})$ と取れば得られる。
+
+\medskip\noindent
+$U, T$ を $S$ 上のスキームとするとき、$S$ 上の $T$ 値点の集合を
+$U(T)$ と書く。式で書けば $U(T) = \Mor_S(T, U)$ である。
+
+\medskip\noindent
+任意の fpqc 被覆は普遍的有効全射であることに注意する。
+Descent, Lemma \ref{descent-lemma-fpqc-universal-effective-epimorphisms}
+を参照されたい。したがって、$\Sch_{fppf}$ 上の位相は標準位相より弱く、
+すべての表現可能前層は層である。
+
+
+
+
+
+
+\section{前層の表現可能射}
+\label{spaces-section-representable}
+
+\noindent
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$ を関手の表現可能変換とする。Categories,
+Definition \ref{categories-definition-representable-map-presheaves}
+を参照されたい。これは、任意の $U \in \Ob((\Sch/S)_{fppf})$ と
+任意の $\xi \in G(U)$ に対して、ファイバー積
+$h_U \times_{\xi, G} F$ が表現可能であることを意味する。
+その表現対象 $V_\xi$ と同型
+$h_{V_\xi} \to h_U \times_G F$ を一つ選ぶ。
+Yoneda の補題（Categories, Lemma \ref{categories-lemma-yoneda}）により、
+射影 $h_{V_\xi} \to h_U \times_G F \to h_U$ はスキームの一意な射
+$a_\xi : V_\xi \to U$ から来る。この状況は示唆的に図式
+$$
+\xymatrix{
+V_\xi \ar@{~>}[r] \ar[d]_{a_\xi} & h_{V_\xi} \ar[d] \ar[r] & F \ar[d]^a \\
+U \ar@{~>}[r] & h_U \ar[r]^\xi & G
+}
+$$
+で表せる。ここで波形の矢印は Yoneda 埋め込みを表す。
+この概念について、非常に一般的に成り立つ補題をいくつか述べる。
+
+\begin{lemma}
+\label{spaces-lemma-morphism-schemes-gives-representable-transformation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとし、$X$, $Y$ を
+$(\Sch/S)_{fppf}$ の対象とする。$f : X \to Y$ をスキームの射とする。
+このとき
+$$
+h_f : h_X \longrightarrow h_Y
+$$
+は関手の表現可能変換である。
+\end{lemma}
+
+\begin{proof}
+これは形式的であり、$(\Sch/S)_{fppf}$ がファイバー積をもつことだけに依存する。
+\end{proof}
+\begin{lemma}
+\label{spaces-lemma-composition-representable-transformations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$, $b : G \to H$ を関手の表現可能変換とする。このとき
+$$
+b \circ a : F \longrightarrow H
+$$
+は関手の表現可能変換である。
+\end{lemma}
+
+\begin{proof}
+これは完全に形式的であり、任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-base-change-representable-transformations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$ を関手の表現可能変換とし、
+$b : H \to G$ を任意の関手の変換とする。ファイバー積図式
+$$
+\xymatrix{
+H \times_{b, G, a} F \ar[r]_-{b'} \ar[d]_{a'} & F \ar[d]^a \\
+H \ar[r]^b & G
+}
+$$
+を考える。このとき基底変換 $a'$ は関手の表現可能変換である。
+\end{lemma}
+
+\begin{proof}
+これは完全に形式的であり、任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-product-representable-transformations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F_i, G_i : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$, $i = 1, 2$ とする。
+$a_i : F_i \to G_i$, $i = 1, 2$ を関手の表現可能変換とする。このとき
+$$
+a_1 \times a_2 : F_1 \times F_2 \longrightarrow G_1 \times G_2
+$$
+は関手の表現可能変換である。
+\end{lemma}
+
+\begin{proof}
+$a_1 \times a_2$ を合成
+$F_1 \times F_2 \to G_1 \times F_2 \to G_1 \times G_2$ として書く。
+第一の矢印は射 $G_1 \times F_2 \to G_1$ による $a_1$ の基底変換であり、
+第二の矢印は射 $G_1 \times G_2 \to G_2$ による $a_2$ の基底変換である。
+したがって、この補題は補題
+\ref{spaces-lemma-composition-representable-transformations} と
+\ref{spaces-lemma-base-change-representable-transformations} の形式的帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-representable-transformation-to-sheaf}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$ を関手の表現可能変換とする。$G$ が層ならば $F$ も層である。
+\end{lemma}
+
+\begin{proof}
+$\{\varphi_i : T_i \to T\}$ をサイト $(\Sch/S)_{fppf}$ の被覆とする。
+層条件を満たす $s_i \in F(T_i)$ を取る。このとき
+$\sigma_i = a(s_i) \in G(T_i)$ も層条件を満たす。したがって、
+$\sigma_i = \sigma|_{T_i}$ を満たす一意な $\sigma \in G(T)$ が存在する。
+仮定により $F' = h_T \times_{\sigma, G, a} F$ は表現可能前層であり、
+したがって（Section \ref{spaces-section-general} の注意を参照）層である。
+さらに $(\varphi_i, s_i) \in F'(T_i)$ も層条件を満たすので、これらは
+一意な $(\text{id}_T, s) \in F'(T)$ から来る。明らかに $s$ は求める
+$F$ の切断である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-representable-transformation-diagonal}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$ を関手の表現可能変換とする。このとき
+$\Delta_{F/G} : F \to F \times_G F$ は表現可能である。
+\end{lemma}
+
+\begin{proof}
+$U \in \Ob((\Sch/S)_{fppf})$ とし、
+$\xi = (\xi_1, \xi_2) \in (F \times_G F)(U)$ とする。
+$\xi' = a(\xi_1) = a(\xi_2) \in G(U)$ と置く。仮定により、
+ファイバー積 $h_U \times_{\xi', G} F$ を表現するスキーム $V$ と射
+$V \to U$ が存在する。特に、元 $\xi_1, \xi_2$ は $U$ 上の射
+$f_1, f_2 : U \to V$ を与える。$V$ がファイバー積
+$h_U \times_{\xi', G} F$ を表現し、かつ
+$\xi' = a \circ \xi_1 = a \circ \xi_2$ なので、射 $g : U' \to U$ に対して
+$$
+g^*\xi_1 = g^*\xi_2
+\Leftrightarrow
+f_1 \circ g = f_2 \circ g.
+$$
+したがって $h_U \times_{\xi, F \times_G F} F$ はスキーム
+$V \times_{\Delta, V \times V, (f_1, f_2)} U$ によって表現される。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{スキームの射の有用な性質の一覧}
+\label{spaces-section-lists}
+
+\noindent
+後の結果で必要となる条件の一部を満たす射の性質を、参照の便宜のため
+以下の注意に列挙する。
+
+\begin{remark}
+\label{spaces-remark-list-properties-stable-base-change}
+任意の基底変換で安定な射の性質・型は次のとおりである。
+\begin{enumerate}
+\item 閉、開、および局所閉埋め込み。Schemes, Lemma
+\ref{schemes-lemma-base-change-immersion} を参照、
+\item 準コンパクト。Schemes, Lemma
+\ref{schemes-lemma-quasi-compact-preserved-base-change} を参照、
+\item 普遍的閉。Schemes, Definition
+\ref{schemes-definition-universally-closed} を参照、
+\item （準）分離。Schemes, Lemma
+\ref{schemes-lemma-separated-permanence} を参照、
+\item 単射。Schemes, Lemma
+\ref{schemes-lemma-base-change-monomorphism} を参照、
+\item 全射。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-surjective} を参照、
+\item 普遍的単射。Morphisms, Lemma
+\ref{morphisms-lemma-universally-injective} を参照、
+\item アフィン。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-affine} を参照、
+\item 準アフィン。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-quasi-affine} を参照、
+\item （局所）有限型。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-type} を参照、
+\item （局所）準有限。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-quasi-finite} を参照、
+\item （局所）有限表示。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-presentation} を参照、
+\item 相対次元 $d$ の局所有限型。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-relative-dimension-d} を参照、
+\item 普遍的開。Morphisms, Definition
+\ref{morphisms-definition-open} を参照、
+\item 平坦。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-flat} を参照、
+\item シントミック。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-syntomic} を参照、
+\item 滑らか。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-smooth} を参照、
+\item 不分岐（それぞれ G-不分岐）。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-unramified} を参照、
+\item エタール。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-etale} を参照、
+\item 固有。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-proper} を参照、
+\item H-射影的。Morphisms, Lemma
+\ref{morphisms-lemma-H-projective-base-change} を参照、
+\item （局所）射影的。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-projective} を参照、
+\item 有限または整。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite} を参照、
+\item 有限局所自由。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-locally-free} を参照、
+\item 普遍的商。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-universally-submersive} を参照、
+\item 普遍同相。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-universal-homeomorphism} を参照。
+\end{enumerate}
+必要に応じて追加する。
+\end{remark}
+
+\begin{remark}
+\label{spaces-remark-list-properties-stable-composition}
+基底変換で安定な射の性質（注意
+\ref{spaces-remark-list-properties-stable-base-change} の一覧）のうち、
+合成でも安定なものは次のとおりである。
+\begin{enumerate}
+\item 閉、開、および局所閉埋め込み。Schemes, Lemma
+\ref{schemes-lemma-composition-immersion} を参照、
+\item 準コンパクト。Schemes, Lemma
+\ref{schemes-lemma-composition-quasi-compact} を参照、
+\item 普遍的閉。Morphisms, Lemma
+\ref{morphisms-lemma-composition-proper} を参照、
+\item （準）分離。Schemes, Lemma
+\ref{schemes-lemma-separated-permanence} を参照、
+\item 単射。Schemes, Lemma
+\ref{schemes-lemma-composition-monomorphism} を参照、
+\item 全射。Morphisms, Lemma
+\ref{morphisms-lemma-composition-surjective} を参照、
+\item 普遍的単射。Morphisms, Lemma
+\ref{morphisms-lemma-composition-universally-injective} を参照、
+\item アフィン。Morphisms, Lemma
+\ref{morphisms-lemma-composition-affine} を参照、
+\item 準アフィン。Morphisms, Lemma
+\ref{morphisms-lemma-composition-quasi-affine} を参照、
+\item （局所）有限型。Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite-type} を参照、
+\item （局所）準有限。Morphisms, Lemma
+\ref{morphisms-lemma-composition-quasi-finite} を参照、
+\item （局所）有限表示。Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite-presentation} を参照、
+\item 普遍的開。Morphisms, Lemma
+\ref{morphisms-lemma-composition-open} を参照、
+\item 平坦。Morphisms, Lemma
+\ref{morphisms-lemma-composition-flat} を参照、
+\item シントミック。Morphisms, Lemma
+\ref{morphisms-lemma-composition-syntomic} を参照、
+\item 滑らか。Morphisms, Lemma
+\ref{morphisms-lemma-composition-smooth} を参照、
+\item 不分岐（それぞれ G-不分岐）。Morphisms, Lemma
+\ref{morphisms-lemma-composition-unramified} を参照、
+\item エタール。Morphisms, Lemma
+\ref{morphisms-lemma-composition-etale} を参照、
+\item 固有。Morphisms, Lemma
+\ref{morphisms-lemma-composition-proper} を参照、
+\item H-射影的。Morphisms, Lemma
+\ref{morphisms-lemma-H-projective-composition} を参照、
+\item 有限または整。Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite} を参照、
+\item 有限局所自由。Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite-locally-free} を参照、
+\item 普遍的商。Morphisms, Lemma
+\ref{morphisms-lemma-composition-universally-submersive} を参照、
+\item 普遍同相。Morphisms, Lemma
+\ref{morphisms-lemma-composition-universal-homeomorphism} を参照。
+\end{enumerate}
+必要に応じて追加する。
+\end{remark}
+
+\begin{remark}
+\label{spaces-remark-list-properties-fpqc-local-base}
+基底変換で安定な上述の性質（注意
+\ref{spaces-remark-list-properties-stable-base-change} の一覧）のうち、
+基底上 fpqc 局所的（したがって特に基底上 fppf 局所的）でもあるものは
+次のとおりである。
+\begin{enumerate}
+\item 埋め込みについては、次の場合に成り立つ。
+\begin{enumerate}
+\item 閉埋め込み。Descent, Lemma
+\ref{descent-lemma-descending-property-closed-immersion} を参照、
+\item 開埋め込み。Descent, Lemma
+\ref{descent-lemma-descending-property-open-immersion} を参照、および
+\item 準コンパクト埋め込み。Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-compact-immersion} を参照、
+\end{enumerate}
+\item 準コンパクト。Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-compact} を参照、
+\item 普遍的閉。Descent, Lemma
+\ref{descent-lemma-descending-property-universally-closed} を参照、
+\item （準）分離。Descent, Lemmas
+\ref{descent-lemma-descending-property-quasi-separated} および
+\ref{descent-lemma-descending-property-separated} を参照、
+\item 単射。Descent, Lemma
+\ref{descent-lemma-descending-property-monomorphism} を参照、
+\item 全射。Descent, Lemma
+\ref{descent-lemma-descending-property-surjective} を参照、
+\item 普遍的単射。Descent, Lemma
+\ref{descent-lemma-descending-property-universally-injective} を参照、
+\item アフィン。Descent, Lemma
+\ref{descent-lemma-descending-property-affine} を参照、
+\item 準アフィン。Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-affine} を参照、
+\item （局所）有限型。Descent, Lemmas
+\ref{descent-lemma-descending-property-locally-finite-type} および
+\ref{descent-lemma-descending-property-finite-type} を参照、
+\item （局所）準有限。Descent, Lemma
+\ref{descent-lemma-descending-property-quasi-finite} を参照、
+\item （局所）有限表示。Descent, Lemmas
+\ref{descent-lemma-descending-property-locally-finite-presentation} および
+\ref{descent-lemma-descending-property-finite-presentation} を参照、
+\item 相対次元 $d$ の局所有限型。Descent, Lemma
+\ref{descent-lemma-descending-property-relative-dimension-d} を参照、
+\item 普遍的開。Descent, Lemma
+\ref{descent-lemma-descending-property-universally-open} を参照、
+\item 平坦。Descent, Lemma
+\ref{descent-lemma-descending-property-flat} を参照、
+\item シントミック。Descent, Lemma
+\ref{descent-lemma-descending-property-syntomic} を参照、
+\item 滑らか。Descent, Lemma
+\ref{descent-lemma-descending-property-smooth} を参照、
+\item 不分岐（それぞれ G-不分岐）。Descent, Lemma
+\ref{descent-lemma-descending-property-unramified} を参照、
+\item エタール。Descent, Lemma
+\ref{descent-lemma-descending-property-etale} を参照、
+\item 固有。Descent, Lemma
+\ref{descent-lemma-descending-property-proper} を参照、
+\item 有限または整。Descent, Lemma
+\ref{descent-lemma-descending-property-finite} を参照、
+\item 有限局所自由。Descent, Lemma
+\ref{descent-lemma-descending-property-finite-locally-free} を参照、
+\item 普遍的商。Descent, Lemma
+\ref{descent-lemma-descending-property-universally-submersive} を参照、
+\item 普遍同相。Descent, Lemma
+\ref{descent-lemma-descending-property-universal-homeomorphism} を参照。
+\end{enumerate}
+「埋め込み」であるという性質は基底上 fpqc 局所的でない可能性がある。
+しかし Descent, Lemma
+\ref{descent-lemma-descending-fppf-property-immersion} において、
+それが基底上 fppf 局所的であることを証明した。
+\end{remark}
+
+
+
+
+
+
+
+
+\section{前層の表現可能射の性質}
+\label{spaces-section-representable-properties}
+
+\noindent
+以下の定義によって議論が機能する。
+
+\begin{definition}
+\label{spaces-definition-relative-representable-property}
+上と同様に $S$ と表現可能射 $a : F \to G$ が与えられているとする。
+$\mathcal{P}$ をスキームの射の性質であって、次を満たすものとする。
+\begin{enumerate}
+\item 任意の基底変換で保たれる。Schemes, Definition
+\ref{schemes-definition-preserved-by-base-change} を参照、および
+\item 基底上 fppf 局所的である。Descent, Definition
+\ref{descent-definition-property-morphisms-local} を参照。
+\end{enumerate}
+このとき、任意の $U \in \Ob((\Sch/S)_{fppf})$ と任意の
+$\xi \in G(U)$ に対し、得られるスキームの射 $V_\xi \to U$ が性質
+$\mathcal{P}$ をもつならば、$a$ は {\it 性質 $\mathcal{P}$ をもつ}という。
+\end{definition}
+
+\noindent
+この定義を、基底変換で安定かつ基底上 fppf 位相で局所的な射の性質にしか
+用いないことは重要である。これは、それ以外では定義が意味をなさないから
+ではない。念頭に置く性質にいっそう適した別の定義を与えたい場合があるからである。
+
+\begin{remark}
+\label{spaces-remark-warning}
+性質 $\mathcal{P}=$「全射」を考える。この場合、
+「$F \to G$ を全射とする」と言うと曖昧さが生じ得る。すなわち、上の定義
+\ref{spaces-definition-relative-representable-property} で定めた概念を意味する場合も、
+前層の全射（Sites, Definition
+\ref{sites-definition-presheaves-injective-surjective}）を意味する場合もある。
+さらに $F$ と $G$ がともに層ならば、層の全射（Sites, Definition
+\ref{sites-definition-sheaves-injective-surjective}）を意味する場合もある。
+代数空間の射を論じる際、特に断らなければ常に第一の意味を用いる。
+全射性から層の射としての全射性が従う場合については、補題
+\ref{spaces-lemma-surjective-flat-locally-finite-presentation} を参照されたい。
+\end{remark}
+
+\noindent
+以下は整合性の確認である。
+
+\begin{lemma}
+\label{spaces-lemma-morphism-schemes-gives-representable-transformation-property}
+$S$, $X$, $Y$ を $\Sch_{fppf}$ の対象とし、$f : X \to Y$ をスキームの射とする。
+$\mathcal{P}$ を定義 \ref{spaces-definition-relative-representable-property} の性質とする。
+このとき $h_X \longrightarrow h_Y$ が性質 $\mathcal{P}$ をもつことと、
+$f$ が性質 $\mathcal{P}$ をもつことは同値である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-morphism-schemes-gives-representable-transformation} により、
+この補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-composition-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$\mathcal{P}$ を、定義 \ref{spaces-definition-relative-representable-property} の性質で、
+合成で安定なものとする。$a : F \to G$, $b : G \to H$ を関手の
+表現可能変換とする。$a$ と $b$ が性質 $\mathcal{P}$ をもつならば、
+$b \circ a : F \longrightarrow H$ もその性質をもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-composition-representable-transformations} により、
+この補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-base-change-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$\mathcal{P}$ を定義 \ref{spaces-definition-relative-representable-property} の性質とする。
+$a : F \to G$ を関手の表現可能変換とし、$b : H \to G$ を任意の
+関手の変換とする。ファイバー積図式
+$$
+\xymatrix{
+H \times_{b, G, a} F \ar[r]_-{b'} \ar[d]_{a'} & F \ar[d]^a \\
+H \ar[r]^b & G
+}
+$$
+を考える。$a$ が性質 $\mathcal{P}$ をもつならば、その基底変換 $a'$ も
+性質 $\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-base-change-representable-transformations} により、
+この補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-descent-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G, H : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$\mathcal{P}$ を定義 \ref{spaces-definition-relative-representable-property} の
+性質とする。$a : F \to G$ を関手の表現可能変換とし、
+$b : H \to G$ を任意の関手の変換とする。ファイバー積図式
+$$
+\xymatrix{
+H \times_{b, G, a} F \ar[r]_-{b'} \ar[d]_{a'} & F \ar[d]^a \\
+H \ar[r]^b & G
+}
+$$
+を考える。$b$ が fppf 層の全射 $H^\# \to G^\#$ を誘導すると仮定する。
+このとき $a'$ が性質 $\mathcal{P}$ をもつならば、$a$ も
+性質 $\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+まず、補題 \ref{spaces-lemma-base-change-representable-transformations} により
+変換 $a'$ は表現可能である。$U \in \Ob((\Sch/S)_{fppf})$ とし、
+$\xi \in G(U)$ とする。仮定により、fppf 被覆
+$\{U_i \to U\}_{i \in I}$ と、$b$ により $\xi|_U$ に写る元
+$\xi_i \in H(U_i)$ が存在する。一般の圏論から、各 $i$ に対して
+ファイバー積図式
+$$
+\xymatrix{
+U_i \times_{\xi_i, H, a'} (H \times_{b, G, a} F) \ar[r] \ar[d] &
+U \times_{\xi, G, a} F \ar[d] \\
+U_i \ar[r] & U
+}
+$$
+を得る。仮定により左の垂直射は性質 $\mathcal{P}$ をもつスキームの射である。
+$\mathcal{P}$ は fppf 位相で局所的なので、右の垂直射も性質
+$\mathcal{P}$ をもつ。これが示すべきことである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-product-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F_i, G_i : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$,
+$i = 1, 2$ とする。$a_i : F_i \to G_i$, $i = 1, 2$ を関手の
+表現可能変換とする。$\mathcal{P}$ を、定義
+\ref{spaces-definition-relative-representable-property} の性質で合成に関して
+安定なものとする。$a_1$ と $a_2$ が性質 $\mathcal{P}$ をもつならば、
+$a_1 \times a_2 : F_1 \times F_2 \longrightarrow G_1 \times G_2$
+もその性質をもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-product-representable-transformations} により、
+この補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-representable-transformations-property-implication}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ とする。
+$a : F \to G$ を関手の表現可能変換とする。
+$\mathcal{P}$, $\mathcal{P}'$ を定義
+\ref{spaces-definition-relative-representable-property} の性質とする。
+任意のスキームの射 $f : X \to Y$ に対して
+$\mathcal{P}(f) \Rightarrow \mathcal{P}'(f)$ が成り立つと仮定する。
+$a$ が性質 $\mathcal{P}$ をもつならば、$a$ は性質
+$\mathcal{P}'$ をもつ。
+\end{lemma}
+
+\begin{proof}
+形式的である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-surjective-flat-locally-finite-presentation}
+$S$ をスキームとする。
+$F, G : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ を層とする。
+$a : F \to G$ が表現可能、平坦、局所有限表示かつ全射であるとする。
+このとき $a : F \to G$ は層の射として全射である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $S$ 上のスキームとし、$g : T \to G$ を $G$ の $T$ 値点とする。
+仮定により $T' = F \times_G T$ はスキームで（表現され）、射
+$T' \to T$ は平坦、局所有限表示かつ全射である。したがって
+$\{T' \to T\}$ は fppf 被覆であり、$g|_{T'} \in G(T')$ は
+$F(T')$ の元、すなわち射 $T' \to F$ から来る。これにより層の射として
+全射であることが証明された。Sites, Definition
+\ref{sites-definition-sheaves-injective-surjective} を参照されたい。
+\end{proof}
+
+\noindent
+対角射が表現可能である関手の特徴づけを述べる。
+
+\begin{lemma}
+\label{spaces-lemma-representable-diagonal}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F$ を $(\Sch/S)_{fppf}$ 上の集合の前層とする。次は同値である。
+\begin{enumerate}
+\item 対角射 $F \to F \times F$ は表現可能である。
+\item $U \in \Ob((\Sch/S)_{fppf})$ と任意の $a \in F(U)$ に対して、
+射 $a : h_U \to F$ は表現可能である。
+\item 任意の $U, V \in \Ob((\Sch/S)_{fppf})$ と任意の
+$a \in F(U)$, $b \in F(V)$ に対して、ファイバー積
+$h_U \times_{a, F, b} h_V$ は表現可能である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは完全に形式的である。Categories, Lemma
+\ref{categories-lemma-representable-diagonal} を参照されたい。
+このことは、圏 $(\Sch/S)_{fppf}$ が二対象の積とファイバー積をもつことだけに
+依存する。Topologies, Lemma
+\ref{topologies-lemma-fibre-products-fppf} を参照されたい。
+\end{proof}
+
+\noindent
+補題の状況において、その補題に現れる任意の射 $\xi : h_U \to F$ に対して、
+定義 \ref{spaces-definition-relative-representable-property} に現れる任意の性質について、
+$\xi$ が性質 $\mathcal{P}$ をもつと言うことができる。
+特に、上の注意 \ref{spaces-remark-list-properties-fpqc-local-base} により、
+$\mathcal{P} = $「全射」および $\mathcal{P} = $「エタール」に対して成り立つ。
+以下の代数空間の定義でこの注意を用いる。
+
+\begin{lemma}
+\label{spaces-lemma-transformation-diagonal-properties}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F$ を $(\Sch/S)_{fppf}$ 上の集合の前層とする。
+$\mathcal{P}$ を定義 \ref{spaces-definition-relative-representable-property} の
+性質とする。任意の $U, V \in \Ob((\Sch/S)_{fppf})$ と
+$a \in F(U)$, $b \in F(V)$ に対して次を仮定する。
+\begin{enumerate}
+\item $h_U \times_{a, F, b} h_V$ は、あるスキーム $W$ により表現される。
+\item $h_U \times_{a, F, b} h_V \to h_U \times h_V$ に対応する射
+$W \to U \times_S V$ は性質 $\mathcal{P}$ をもつ。
+\end{enumerate}
+このとき $\Delta : F \to F \times F$ は表現可能で、性質
+$\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-representable-diagonal} により $\Delta$ は表現可能である。
+条件 (2) は、変換
+$h_U \times_{a, F, b} h_V \to h_{U \times_S V}$ が性質
+$\mathcal{P}$ をもつという形に書ける。補題
+\ref{spaces-lemma-morphism-schemes-gives-representable-transformation-property}
+を参照されたい。$T \in \Ob((\Sch/S)_{fppf})$ と
+$(a, b) \in (F \times F)(T)$ を考える。可換図式
+$$
+\xymatrix{
+F \times_{\Delta, F \times F, (a, b)} h_T \ar[d] \ar[r] &
+h_T \ar[d]^{\Delta_{T/S}} \\
+h_T \times_{a, F, b} h_T \ar[r] \ar[d] &
+h_{T \times_S T} \ar[d]^{(a, b)} \\
+F \ar[r]^\Delta & F \times F
+}
+$$
+があり、その二つの正方形はいずれも Cartesian である。したがって、
+射 $F \times_{F \times F} h_T \to h_T$ は、性質 $\mathcal{P}$ をもつ射を
+$\Delta_{T/S}$ によって基底変換したものである。$\mathcal{P}$ は基底変換で
+保たれるので、証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{代数空間}
+\label{spaces-section-algebraic-spaces}
+
+\noindent
+定義を述べる。
+
+\begin{definition}
+\label{spaces-definition-algebraic-space}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+{\it $S$ 上の代数空間}とは、次の性質をもつ前層
+$$
+F : (\Sch/S)^{opp}_{fppf} \longrightarrow \textit{Sets}
+$$
+のことである。
+\begin{enumerate}
+\item 前層 $F$ は層である。
+\item 対角射 $F  \to F \times F$ は表現可能である。
+\item スキーム $U \in \Ob((\Sch/S)_{fppf})$ と、全射かつ
+エタールな射 $h_U \to F$ が存在する\footnote{補題
+\ref{spaces-lemma-representable-diagonal}、定義
+\ref{spaces-definition-relative-representable-property}、および注意
+\ref{spaces-remark-warning} を参照されたい。}。
+\end{enumerate}
+\end{definition}
+
+\noindent
+「通常の」定義、たとえば Knutson の著書 \cite{Kn} の定義とは二つの違いがある。
+
+\medskip\noindent
+第一に、$F$ が fppf 位相に関する層であることを要求する。
+このようにする理由の一つは、代数空間の自然な例の多くが fppf 被覆
+（さらには fpqc 被覆）について層条件を満たすことである。
+また、代数空間が非常に有用である理由の一つは、Michael Artin による
+代数空間についての結果にある。彼の方法には、結果が $S$ 上局所有限表示に
+なることを保証する条件が組み込まれている。これらを合わせると、fppf 位相が
+作業に自然な位相であるように思われる。最終的には代数空間の圏は同じものに
+なる。Bootstrap, Section \ref{bootstrap-section-spaces-etale} を参照されたい。
+
+\medskip\noindent
+第二に、本章では $F$ の対角射が表現可能であることだけを要求するが、
+\cite{Kn} ではさらに準コンパクトであることを要求する。
+$F = h_U$ が $S$ 上のあるスキーム $U$ によって与えられるとき、
+これは $U$ が準分離的であるという条件に対応する。本章では、以下の結果の
+いくつかを $F$ の対角射が表現可能であるという仮定だけから証明し、
+必要な箇所で追加の仮定を単に加えることにする。いずれにせよ、この観点から
+次の快い補題が得られる。
+
+\begin{lemma}
+\label{spaces-lemma-scheme-is-space}
+スキームは代数空間である。より正確には、スキーム
+$T \in \Ob((\Sch/S)_{fppf})$ が与えられたとき、表現可能関手 $h_T$ は
+代数空間である。
+\end{lemma}
+
+\begin{proof}
+Section \ref{spaces-section-general} の注意により、関手 $h_T$ は層である。
+対角射 $h_T \to h_T \times h_T = h_{T \times T}$ は、
+$(\Sch/S)_{fppf}$ がファイバー積をもつので表現可能である。
+恒等射 $h_T \to h_T$ は全射かつエタールである。
+\end{proof}
+
+\begin{definition}
+\label{spaces-definition-morphism-algebraic-spaces}
+$F$, $F'$ を $S$ 上の代数空間とする。
+{\it $S$ 上の代数空間の射 $f : F \to F'$} とは、$F$ から $F'$ への
+関手の変換である。
+\end{definition}
+
+\noindent
+$S$ 上の代数空間の圏は、Yoneda 埋め込み $T/S \mapsto h_T$ によって
+圏 $(\Sch/S)_{fppf}$ を充満部分圏として含む。以後、スキーム $T/S$ と、
+それが表現する代数空間を区別しない。したがって、
+「$f : T \to F$ をスキーム $T$ から代数空間 $F$ への射とする」と言うとき、
+$T \in \Ob((\Sch/S)_{fppf})$ であり、$F$ は $S$ 上の代数空間であり、
+$f : h_T \to F$ は $S$ 上の代数空間の射であることを意味する。
+
+
+
+
+
+
+\section{代数空間のファイバー積}
+\label{spaces-section-fibre-products}
+
+\noindent
+$S$ 上の代数空間の圏は積とファイバー積の両方をもつ。
+
+\begin{lemma}
+\label{spaces-lemma-product-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G$ を $S$ 上の代数空間とする。このとき $F \times G$ は代数空間であり、
+$S$ 上の代数空間の圏における積である。
+\end{lemma}
+
+\begin{proof}
+$H = F \times G$ が層であることは明らかである。$H$ の対角射は単に
+$F$ と $G$ の対角射の積である。したがって補題
+\ref{spaces-lemma-product-representable-transformations} により表現可能である。
+最後に、$U, V \in \Ob((\Sch/S)_{fppf})$ からの射
+$U \to F$, $V \to G$ が全射かつエタールならば、補題
+\ref{spaces-lemma-product-representable-transformations-property} により
+$U \times V \to F \times G$ も全射かつエタールである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$H$ を $(\Sch/S)_{fppf}$ 上の、対角射が表現可能な層とする。
+$F, G$ を $S$ 上の代数空間とし、$F \to H$, $G \to H$ を層の射とする。
+このとき $F \times_H G$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{spaces-definition-algebraic-space} の三条件を確認する。
+層のファイバー積は層なので、$F \times_H G$ は層である。
+$F \times_H G$ の対角射は、Cartesian 図式
+$$
+\xymatrix{
+F \times_H G \ar[r] \ar[d]_\Delta &
+F \times G \ar[d]^{\Delta_F \times \Delta_G} \\
+(F \times F) \times_{(H \times H)} (G \times G) \ar[r] &
+(F \times F) \times (G \times G)
+}
+$$
+の左の垂直射である。したがって $\Delta$ は、表現可能な右の射の基底変換として
+表現可能である。補題 \ref{spaces-lemma-product-representable-transformations} および
+\ref{spaces-lemma-base-change-representable-transformations} を参照されたい。
+最後に $U, V \in \Ob((\Sch/S)_{fppf})$ とし、
+$a : U \to F$, $b : V \to G$ を全射かつエタールとする。
+$\Delta_H$ は表現可能なので、$U \times_H V$ はスキームである。射
+$$
+U \times_H V \longrightarrow F \times_H G
+$$
+は、エタール全射 $U \to F$ と $V \to G$ の基底変換
+$U \times_H V \to U \times_H G$ および
+$U \times_H G \to F \times_H G$ の合成として全射かつエタールである。
+補題 \ref{spaces-lemma-composition-representable-transformations} および
+\ref{spaces-lemma-base-change-representable-transformations} を参照されたい。
+これで定義 \ref{spaces-definition-algebraic-space} の最後の条件も成り立ち、
+$F \times_H G$ は代数空間である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-fibre-product-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F \to H$, $G \to H$ を $S$ 上の代数空間の射とする。
+このとき $F \times_H G$ は代数空間であり、$S$ 上の代数空間の圏における
+ファイバー積である。
+\end{lemma}
+
+\begin{proof}
+より強い補題
+\ref{spaces-lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal}
+により、$F \times_H G$ は代数空間である。$S$ 上の代数空間の圏は
+$(\Sch/S)_{fppf}$ 上の集合の（前）層の圏の充満部分圏なので、
+$F \times_H G$ がその圏でファイバー積であることは明らかである。
+\end{proof}
+
+
+
+
+
+
+\section{代数空間の貼り合わせ}
+\label{spaces-section-glueing-algebraic-spaces}
+
+\noindent
+この節から記法を本格的に濫用し、スキームとそれが表現する空間を区別しない。
+
+\begin{lemma}
+\label{spaces-lemma-coproduct-sheaves-open-and-closed}
+$S \in \Ob(\Sch_{fppf})$ とする。$F$ と $G$ を
+$(\Sch/S)_{fppf}^{opp}$ 上の層とし、層の圏における余積を
+$F \amalg G$ と書く。射 $F \to F \amalg G$ は開かつ閉な埋め込みによって
+表現される。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとし、$\xi \in (F \amalg G)(U)$ とする。
+層の圏における余積は前層の余積の層化であることを思い出す
+（Sites, Lemma \ref{sites-lemma-colimit-sheaves}）。
+したがって fppf 被覆 $\{g_i : U_i \to U\}_{i \in I}$ と非交和分解
+$I = I' \amalg I''$ が存在し、$i \in I'$（それぞれ $i \in I''$）であることと、
+$U_i \to U \to F \amalg G$ が $F$（それぞれ $G$）を経由することは同値である。
+$F$ と $G$ は $F \amalg G$ の中で交わらないので、$i \in I'$ かつ
+$j \in I''$ ならば $U_i \times_U U_j$ は空である。したがって
+$U' = \bigcup_{i \in I'} g_i(U_i)$ と
+$U'' = \bigcup_{i \in I''} g_i(U_i)$ は $U$ の互いに交わらない開部分スキーム
+（Morphisms, Lemma \ref{morphisms-lemma-fppf-open}）であり、
+$U = U' \amalg U''$ である。$U' = U \times_{F \amalg G} F$ の確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-representable-sheaf-coproduct-sheaves}
+$S \in \Ob(\Sch_{fppf})$ とし、$U \in \Ob((\Sch/S)_{fppf})$ とする。
+集合 $I$ と $\Ob((\Sch/S)_{fppf})$ 上の層 $F_i$ が与えられ、
+層として $U \cong \coprod_{i\in I} F_i$ ならば、各 $F_i$ は
+開かつ閉な部分スキーム $U_i$ によって表現され、スキームとして
+$U \cong \coprod U_i$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-coproduct-sheaves-open-and-closed} により、射
+$F_i \to U$ は開かつ閉な埋め込みによって表現される。したがって $F_i$ は
+$U$ の開かつ閉な部分スキーム $U_i$ によって表現される。
+層として $U \cong \coprod F_i$ であり、点上で等式を検査できるので、
+$U = \coprod U_i$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-algebraic-space-coproduct-sheaves}
+$S \in \Ob(\Sch_{fppf})$ とし、$F$ を $S$ 上の代数空間とする。
+集合 $I$ と $\Ob((\Sch/S)_{fppf})$ 上の層 $F_i$ が与えられ、
+層として $F \cong \coprod_{i\in I} F_i$ ならば、各 $F_i$ は
+$S$ 上の代数空間である。
+\end{lemma}
+
+\begin{proof}
+$F \to F \times F$ の表現可能性から、各対角射
+$F_i \to F_i \times F_i$ は表現可能である（定義と等式
+$F \times_{(F \times F)} (F_i \times F_i) = F_i$ から直ちに従う）。
+$(\Sch/S)_{fppf}$ のスキーム $U$ と全射エタール射 $U \to F$ を選ぶ
+（これは仮定により存在する）。補題
+\ref{spaces-lemma-base-change-representable-transformations-property} により、
+基底変換 $U \times_F F_i \to F_i$ は全射かつエタールである。
+一方、補題 \ref{spaces-lemma-coproduct-sheaves-open-and-closed} により
+$U \times_F F_i$ はスキームである。これで定義
+\ref{spaces-definition-algebraic-space} の条件をすべて確認したので、
+$F_i$ は代数空間である。
+\end{proof}
+
+\noindent
+集合論的な問題を気にしない読者は、次の補題における $I$ と $F_i$ の
+大きさに関する条件を無視してよい。
+
+\begin{lemma}
+\label{spaces-lemma-coproduct-algebraic-spaces}
+$S \in \Ob(\Sch_{fppf})$ とする。集合 $I$ と代数空間 $F_i$, $i \in I$ が
+与えられたとする。$I$ と $F_i$ が大きすぎなければ、
+$F = \coprod_{i \in I} F_i$ は代数空間である。たとえば、全射エタール射
+$U_i \to F_i$ を、$\coprod_{i \in I} U_i$ が
+$(\Sch/S)_{fppf}$ のある対象と同型になるように選べるならば、
+$F$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+構成により $F$ は層である。$F$ の対角射が表現可能であることの確認は
+省略する。最後に、$U$ が $\coprod_{i \in I} U_i$ と同型な
+$(\Sch/S)_{fppf}$ の対象ならば、得られる射
+$U \to \coprod F_i$ が全射かつエタールであることは直ちに確かめられる。
+\end{proof}
+
+\noindent
+Schemes, Lemma \ref{schemes-lemma-glue-functors} の類似を述べる。
+
+\begin{lemma}
+\label{spaces-lemma-glueing-algebraic-spaces}
+$S \in \Ob(\Sch_{fppf})$ とし、$F$ を $(\Sch/S)_{fppf}$ 上の
+集合の前層とする。次を仮定する。
+\begin{enumerate}
+\item $F$ は層である。
+\item 添字集合 $I$ と部分関手 $F_i \subset F$ が存在し、次を満たす。
+\begin{enumerate}
+\item 各 $F_i$ は代数空間である。
+\item 各 $F_i \to F$ は表現可能である。
+\item 各 $F_i \to F$ は開埋め込みである（定義
+\ref{spaces-definition-relative-representable-property} を参照）。
+\item 射 $\coprod F_i \to F$ は層の射として全射である。
+\item $\coprod F_i$ は代数空間である（集合論的条件。補題
+\ref{spaces-lemma-coproduct-algebraic-spaces} を参照）。
+\end{enumerate}
+\end{enumerate}
+このとき $F$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $(\Sch/S)_{fppf}$ の対象とし、$T \to F$ を射とする。
+仮定 (2)(b) と (2)(c) により、ファイバー積 $F_i \times_F T$ は
+開部分スキーム $V_i \subset T$ によって表現される。したがって
+$(\coprod F_i) \times_F T$ は $T$ 上のスキーム $\coprod V_i$ によって
+表現される。仮定 (2)(d) により fppf 被覆
+$\{T_j \to T\}_{j \in J}$ が存在し、$T_j \to T \to F$ は
+$F_i$, $i = i(j)$ を経由する。よって $T_j \to T$ は開部分スキーム
+$V_{i(j)} \subset T$ を経由する。$\{T_j \to T\}$ は共同で全射なので、
+$T = \bigcup V_i$ は開被覆である。特に、関手の変換
+$\coprod F_i \to F$ は、定義
+\ref{spaces-definition-relative-representable-property} の意味で表現可能かつ
+全射である（議論については注意 \ref{spaces-remark-warning} を参照）。
+
+\medskip\noindent
+次に、$(\Sch/S)_{fppf}$ の対象からの第二の射 $T' \to F$ を取る。
+上と同様に $V'_i = T' \times_F F_i$ として
+$T' = \bigcup V'_i$ と書く。対角射 $F \to F \times F$ が表現可能である
+ことを示すには、補題 \ref{spaces-lemma-representable-diagonal} により
+$G = T \times_F T'$ が表現可能であることを示せばよい。
+部分関手 $G_i = G \times_F F_i$ を考える。
+$G_i = V_i \times_{F_i} V'_i$ であり、$F_i$ は代数空間なので
+これは表現可能である。上の議論により $G_i$ は $G$ の Zariski 被覆をなす。
+したがって Schemes, Lemma \ref{schemes-lemma-glue-functors} により
+$G$ は表現可能である。
+
+\medskip\noindent
+スキーム $U \in \Ob((\Sch/S)_{fppf})$ と全射エタール射
+$U \to \coprod F_i$ を選ぶ（これは仮定により存在する）。
+$U_i$ を $F_i$ の逆像として $U = \coprod U_i$ と書ける。補題
+\ref{spaces-lemma-representable-sheaf-coproduct-sheaves} を参照されたい。
+$U \to F$ が全射かつエタールであることを示す。全射性は、
+$\coprod F_i \to F$ が全射（証明の第一段落を参照）なので、補題
+\ref{spaces-lemma-composition-representable-transformations-property} から従う。
+上のような $T \to F$ に対してファイバー積 $U \times_F T$ を考える。
+$U \times_F T \to T$ がエタールであることを示せばよい。
+$U \times_F T = \coprod U_i \times_F T$ なので、各
+$U_i \times_F T \to T$ がエタールであることを示せば十分である。
+$U_i \times_F T = U_i \times_{F_i} V_i$ であるから、これは
+$U_i \to F_i$ がエタールで $V_i \to T$ が開埋め込みであることから従う
+（Morphisms, Lemmas \ref{morphisms-lemma-open-immersion-etale} および
+\ref{morphisms-lemma-composition-etale}）。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{代数空間の表示}
+\label{spaces-section-presentations}
+
+\noindent
+代数空間が与えられれば、その「表示」を見つけることができる。
+
+
+\begin{lemma}
+\label{spaces-lemma-space-presentation}
+$F$ を $S$ 上の代数空間とする。$f : U \to F$ をスキームから $F$ への
+全射エタール射とする。$R = U \times_F U$ と置く。このとき次が成り立つ。
+\begin{enumerate}
+\item $j : R \to U \times_S U$ は $S$ 上の $U$ の同値関係を定める
+（Groupoids, Definition
+\ref{groupoids-definition-equivalence-relation} を参照）。
+\item 射 $s, t : R \to U$ はエタールである。
+\item 図式
+$$
+\xymatrix{
+R \ar@<1ex>[r] \ar@<-1ex>[r] &
+U \ar[r] &
+F
+}
+$$
+は $\Sh((\Sch/S)_{fppf})$ における余等化子図式である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T/S$ を $(\Sch/S)_{fppf}$ の対象とする。このとき
+$R(T) = \{(a, b) \in U(T) \times U(T) \mid f \circ a = f \circ b\}$
+であり、これは $U(T)$ 上の同値関係を定める。射 $s, t : R \to U$ は
+射 $U \to F$ がエタールなのでエタールである。
+
+\medskip\noindent
+(3) を証明するため、まず次を示す。
+$U \to F$ は層の全射である。Sites, Definition
+\ref{sites-definition-sheaves-injective-surjective} を参照されたい。
+上のような $T$ に対して $\xi \in F(T)$ とし、
+$V = T \times_{\xi, F, f}U$ と置く。仮定により $V$ はスキームであり、
+$V \to T$ は全射かつエタールである。したがって $\{V \to T\}$ は
+fppf 位相の被覆である。構成により $\xi|_V$ は $U$ を経由するので、
+$U \to F$ は全射である。全射性と Sites, Lemma
+\ref{sites-lemma-coequalizer-surjection} により、$F$ はこの図式の余等化子である。
+\end{proof}
+
+\noindent
+この補題は次の定義を示唆する。
+
+\begin{definition}
+\label{spaces-definition-etale-equivalence-relation}
+$S$ をスキームとし、$U$ を $S$ 上のスキームとする。
+$S$ 上の $U$ の {\it エタール同値関係}とは、$s, t : R \to U$ が
+スキームのエタール射であるような同値関係
+$j : R \to U \times_S U$ のことである。
+\end{definition}
+
+\begin{definition}
+\label{spaces-definition-presentation}
+$F$ を $S$ 上の代数空間とする。$F$ の {\it 表示}とは、$S$ 上のスキーム
+$U$、$S$ 上の $U$ のエタール同値関係 $R$、および
+$R = U \times_F U$ を満たす全射エタール射 $U \to F$ によって
+与えられるものである。
+\end{definition}
+
+\noindent
+同値な定義として、同型
+$$
+U/R \cong F
+$$
+の存在を要求してもよい。ここで商 $U/R$ は Groupoids, Section
+\ref{groupoids-section-quotient-sheaves} で定義されたものである。
+代数空間を構成するため、逆の問題、すなわちどの同値関係に対して商層
+$U/R$ が代数空間になるかを調べる。最終的には、$R$ が $S$ 上の $U$ の
+エタール同値関係ならば常にそうなることが分かる。定理
+\ref{spaces-theorem-presentation} を参照されたい。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{代数空間と同値関係}
+\label{spaces-section-spaces-from-equivalence-relations}
+
+\noindent
+$S$ 上のスキーム $U$ と、$S$ 上の $U$ のエタール同値関係 $R$ が
+与えられたとする。これが代数空間を定めることを示したい。
+商層 $U/R$（Groupoids, Definition
+\ref{groupoids-definition-quotient-sheaf} を参照）が定義
+\ref{spaces-definition-algebraic-space} で要求されるすべての性質をもつことを示す
+一連の補題を与える。
+
+\begin{lemma}
+\label{spaces-lemma-pullback-etale-equivalence-relation}
+$S$ をスキーム、$U$ を $S$ 上のスキームとする。
+$j = (s, t) : R \to U \times_S U$ を $S$ 上の $U$ のエタール同値関係とする。
+$U' \to U$ をエタール射とし、$R'$ を $R$ の $U'$ への制限とする。
+Groupoids, Definition \ref{groupoids-definition-restrict-relation} を
+参照されたい。このとき $j' : R' \to U' \times_S U'$ もエタール同値関係である。
+\end{lemma}
+
+\begin{proof}
+Groupoids, Lemma \ref{groupoids-lemma-restrict-groupoid} における
+$s', t'$ の記述から、$s' , t' : R' \to U'$ はエタール射の基底変換の
+合成なのでエタールであることが分かる
+（Morphisms, Lemma \ref{morphisms-lemma-base-change-etale} および
+\ref{morphisms-lemma-composition-etale} を参照）。
+\end{proof}
+
+\noindent
+次の補題は、代数空間の開部分空間を見つけるためにしばしば用いる。
+この補題をより一般的な仮定のもとで少し強めたものが Bootstrap, Lemma
+\ref{bootstrap-lemma-better-finding-opens} である。
+
+\begin{lemma}
+\label{spaces-lemma-finding-opens}
+$S$ をスキーム、$U$ を $S$ 上のスキームとする。
+$j = (s, t) : R \to U \times_S U$ を前関係とし、$g : U' \to U$ を射とする。
+次を仮定する。
+\begin{enumerate}
+\item $j$ は同値関係である。
+\item $s, t : R \to U$ は全射、平坦かつ局所有限表示である。
+\item $g$ は平坦かつ局所有限表示である。
+\end{enumerate}
+$R' = R|_{U'}$ を $R$ の $U'$ への制限とする。このとき
+$U'/R' \to U/R$ は表現可能で、開埋め込みである。
+\end{lemma}
+
+\begin{proof}
+Groupoids, Lemma \ref{groupoids-lemma-restrict-relation} により、射
+$j' = (s', t') : R' \to U' \times_S U'$ は同値関係を定める。
+$g$ は平坦かつ局所有限表示である。したがって $g$ は普遍的開でもある
+（Morphisms, Lemma \ref{morphisms-lemma-fppf-open}）。
+同じ理由で $s, t$ も普遍的開である。
+$W^1 = g(U') \subset U$ および $W = t(s^{-1}(W^1))$ と置く。
+$W^1$ と $W$ は $U$ の開集合である。さらに $j$ は同値関係なので
+$t(s^{-1}(W)) = W$ である（たとえば Groupoids, Lemma
+\ref{groupoids-lemma-constructing-invariant-opens} を参照）。
+
+\medskip\noindent
+Groupoids, Lemma
+\ref{groupoids-lemma-quotient-pre-equivalence-relation-restrict} により、
+層の射 $F' = U'/R' \to F = U/R$ は単射である。
+$a : T \to F$ をスキームから $U/R$ への射とする。
+$T \times_F F'$ が $T$ の開部分スキームによって表現されることを示せばよい。
+
+\medskip\noindent
+射 $a$ は次のデータによって与えられる。$T$ の fppf 被覆
+$\{\varphi_j : T_j \to T\}_{j \in J}$ と射 $a_j : T_j \to U$ であって、
+射
+$$
+a_j \times a_{j'} :
+T_j \times_T T_{j'}
+\longrightarrow
+U \times_S U
+$$
+が、ある（一意な）射 $r_{jj'} : T_j \times_T T_{j'} \to R$ を通じて
+$j : R \to U \times_S U$ を経由するものを取る。系 $(a_j)$ は、図式
+$$
+\xymatrix{
+T_j \ar[r]_{a_j} \ar[d] & U \ar[d] \\
+T \ar[r]^a & F
+}
+$$
+が可換であるという意味で $a$ に対応する。
+
+\medskip\noindent
+開部分集合 $W_j = a_j^{-1}(W) \subset T_j$ を考える。
+$t(s^{-1}(W)) = W$ なので
+$$
+W_j \times_T T_{j'} =
+r_{jj'}^{-1}(t^{-1}(W)) = r_{jj'}^{-1}(s^{-1}(W)) =
+T_j \times_T W_{j'}.
+$$
+Descent, Lemma \ref{descent-lemma-open-fpqc-covering} により、
+すべての $j \in J$ に対して $\varphi_j^{-1}(W_T) = W_j$ を満たす開集合
+$W_T \subset T$ が存在する。$W_T \to T$ が
+$T \times_F F' \to T$ を表現することを示す。
+
+\medskip\noindent
+まず、$W_T \to T \to F$ が $F'(W_T)$ の元であることを示す。
+$\{W_j \to W_T\}_{j \in J}$ は $W_T$ の fppf 被覆なので、各
+$W_j \to U \to F$ が $F'(W_j)$ の元であることを示せば十分である
+（$F'$ は fppf 位相の層である）。可換図式
+$$
+\xymatrix{
+W'_j \ar[rr] \ar[dd] \ar[rd] & & U' \ar[d]^g \\
+& s^{-1}(W^1) \ar[r]_s \ar[d]^t & W^1 \ar[d] \\
+W_j \ar[r]^{a_j|_{W_j}} & W \ar[r] & F
+}
+$$
+を考える。ここで
+$W'_j = W_j \times_W s^{-1}(W^1) \times_{W^1} U'$ である。
+$t$ と $g$ は全射、平坦かつ局所有限表示なので、
+$W'_j \to W_j$ もそうである。したがって、元 $W_j \to U \to F$ の
+$W'_j$ への制限は望んだとおり $F'$ の元である。
+
+\medskip\noindent
+$f : T' \to T$ を、$a|_{T'} \in F'(T')$ を満たすスキームの射とする。
+$f$ が開集合 $W_T$ を経由することを示せばよい。
+$\{T' \times_T T_j \to T'\}$ は $T'$ の fppf 被覆なので、各
+$T' \times_T T_j \to T$ が $W_T$ を経由することを示せば十分である。
+よって、ある $j$ に対し $f$ が
+$\varphi_j \circ f_j : T' \to T_j \to T$ と分解すると仮定してよい。
+この場合、条件 $a|_{T'} \in F'(T')$ は、fppf 被覆
+$\{\psi_i : T'_i \to T'\}_{i \in I}$ と射 $b_i : T'_i \to U'$ が存在して
+$$
+\xymatrix{
+T'_i \ar[r]_{b_i} \ar[d]_{f_j \circ \psi_i} & U' \ar[r]_g & U \ar[d] \\
+T_j \ar[r]^{a_j} & U \ar[r] & F
+}
+$$
+が可換であることを意味する。この可換性は、
+$t \circ r'_i = a_j \circ f_j \circ \psi_i$ かつ
+$s \circ r'_i = g \circ b_i$ を満たす射 $r'_i : T'_i \to R$ が
+存在することを意味する。したがって
+$\Im(f_j \circ \psi_i) \subset W_j$ であり、結論を得る。
+\end{proof}
+
+\noindent
+次の補題は自明であるように見えるが、完全には自明でない。
+
+\begin{lemma}
+\label{spaces-lemma-when-it-works-it-works}
+$S$ をスキーム、$U$ を $S$ 上のスキームとする。
+$j = (s, t) : R \to U \times_S U$ を $S$ 上の $U$ のエタール同値関係とする。
+商 $U/R$ が代数空間ならば、$U \to U/R$ はエタールかつ全射である。
+したがって $(U, R, U \to U/R)$ は代数空間 $U/R$ の表示である。
+\end{lemma}
+
+\begin{proof}
+問題の射を $c : U \to U/R$ と書く。$T$ をスキームとし、
+$a : T \to U/R$ を射とする。スキームの射
+$\pi : T \times_{a, U/R, c} U \to T$ がエタールかつ全射であることを
+示せばよい。射 $a$ は fppf 被覆 $\{\varphi_i : T_i \to T\}$ と射
+$a_i : T_i \to U$ に対応し、$a_i \times a_{i'} :
+T_i \times_T T_{i'} \to U \times_S U$ は $R$ を経由し、
+$c \circ a_i = a \circ \varphi_i$ を満たす。したがって
+$$
+T_i \times_{\varphi_i, T} T \times_{a, U/R, c} U =
+T_i \times_{c \circ a_i, U/R, c} U =
+T_i \times_{a_i, U} U \times_{c, U/R, c} U = T_i \times_{a_i, U, t} R.
+$$
+$t$ はエタールかつ全射なので、$\pi$ の $T_i$ への基底変換も
+全射かつエタールである。全射かつエタールであるという性質は
+基底上 fpqc 位相で局所的なので（注意
+\ref{spaces-remark-list-properties-fpqc-local-base} を参照）、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-presentation-quasi-compact}
+$S$ をスキーム、$U$ を $S$ 上のスキームとする。
+$j = (s, t) : R \to U \times_S U$ を $S$ 上の $U$ のエタール同値関係とする。
+$U$ がアフィンであると仮定する。このとき商 $F = U/R$ は代数空間であり、
+$U \to F$ はエタールかつ全射である。
+\end{lemma}
+
+\begin{proof}
+$j : R \to U \times_S U$ は単射なので、$j$ は分離的である
+（Schemes, Lemma \ref{schemes-lemma-monomorphism-separated} を参照）。
+$U$ はアフィンなので、$U \times_S U$ は分離的である
+（これはアフィンスキーム $U \times U$ への単射を備える）。
+したがって $R$ は分離的である。特に射 $s, t$ はエタールであるとともに
+分離的である。
+
+\medskip\noindent
+合成 $R \to U \times_S U \to U$ は局所有限型なので、
+$j$ は局所有限型である（Morphisms, Lemma
+\ref{morphisms-lemma-permanence-finite-type} を参照）。
+さらに $j$ は単射なので有限ファイバーをもつ。Morphisms, Lemma
+\ref{morphisms-lemma-finite-fibre} により $j$ は局所準有限である。
+以上より $j$ は分離的かつ局所準有限である。
+
+\medskip\noindent
+第一段階として、商写像 $c : U \to F$ が表現可能であることを示す。
+スキーム $T$ と射 $a : T \to F$ を考える。層
+$G = T \times_{a, F, c} U$ が表現可能であることを示せばよい。
+補題 \ref{spaces-lemma-finding-opens} および
+\ref{spaces-lemma-when-it-works-it-works} の証明で見たように、fppf 被覆
+$\{\varphi_i : T_i \to T\}_{i \in I}$ と射 $a_i : T_i \to U$ が存在し、
+$a_i \times a_{i'} : T_i \times_T T_{i'} \to U \times_S U$ は $R$ を経由し、
+$c \circ a_i = a \circ \varphi_i$ を満たす。補題
+\ref{spaces-lemma-when-it-works-it-works} の証明と同様に
+\begin{eqnarray*}
+T_i \times_{\varphi_i, T} G & = &
+T_i \times_{\varphi_i, T} T \times_{a, U/R, c} U \\
+& = & T_i \times_{c \circ a_i, U/R, c} U \\
+& = & T_i \times_{a_i, U} U \times_{c, U/R, c} U \\
+& = & T_i \times_{a_i, U, t} R
+\end{eqnarray*}
+である。$t$ は分離的かつエタール、特に分離的かつ局所準有限なので
+（Morphisms, Lemmas
+\ref{morphisms-lemma-unramified-quasi-finite} および
+\ref{morphisms-lemma-flat-unramified-etale}）、各 $T_i$ への $G$ の制限は、
+分離的かつ局所準有限なスキームの射 $X_i \to T_i$ によって表現される。
+Descent, Lemma \ref{descent-lemma-descent-data-sheaves} により、fppf 被覆
+$\{T_i \to T\}$ に関する降下データ $(X_i, \varphi_{ii'})$ を得る。
+各 $X_i \to T_i$ は分離的かつ局所準有限なので、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}
+によりこの降下データは有効である。したがって Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves} (2) により、望んだとおり
+$G$ は表現可能である。
+
+\medskip\noindent
+証明の第二段階では $U \to F$ が全射かつエタールであることを示す。
+上の第一段階で、$G = T \times_{a, F, c} U$ は $T$ 上のスキームであり、
+全射エタールなスキームの射 $X_i \to T_i$ に基底変換されることを見たので、
+これは明らかである。したがって $G \to T$ は全射かつエタールである
+（注意 \ref{spaces-remark-list-properties-fpqc-local-base} を参照）。
+別の方法として、現在の状況で補題
+\ref{spaces-lemma-when-it-works-it-works} の証明を読み直してもよい。
+
+\medskip\noindent
+第三かつ最後の段階では、対角射 $F \to F \times F$ が表現可能であることを
+示す。まず、図式
+$$
+\xymatrix{
+R \ar[r] \ar[d]_j & F \ar[d]^\Delta \\
+U \times_S U \ar[r] & F \times F
+}
+$$
+がファイバー積正方形であることに注意する。
+補題 \ref{spaces-lemma-product-representable-transformations} により、射
+$U \times_S U \to F \times F$ は表現可能である
+（$h_U \times h_U = h_{U \times_S U}$ に注意）。
+さらに補題 \ref{spaces-lemma-product-representable-transformations-property} により、
+射 $U \times_S U \to F \times F$ は全射かつエタールである
+（エタールと全射が注意
+\ref{spaces-remark-list-properties-fpqc-local-base} および
+\ref{spaces-remark-list-properties-stable-composition} の一覧に現れることにも注意）。
+補題 \ref{spaces-lemma-base-change-representable-transformations} と上の図式から、
+または $R \to F$ を $R \to U \to F$ と書き、補題
+\ref{spaces-lemma-morphism-schemes-gives-representable-transformation} および
+\ref{spaces-lemma-composition-representable-transformations} を用いることにより、
+$R \to F$ も表現可能である。$T$ をスキームとし、
+$a : T \to F \times F$ を射とする。
+$G = T \times_{a, F \times F, \Delta} F$ が表現可能であることを示せばよい。
+上で述べたことにより、スキームの射
+$$
+T' = (U \times_S U) \times_{F \times F, a} T \longrightarrow T
+$$
+は全射かつエタールである。したがって $\{T' \to T\}$ は $T$ の
+エタール被覆である。さらに
+$$
+T' \times_T G = T' \times_{U \times_S U, j} R
+$$
+であることは、次の立方体を眺めれば分かる。
+$$
+\xymatrix{
+& R \ar[rr] \ar[dd] & & F \ar[dd] \\
+T' \times_T G \ar[rr] \ar[dd] \ar[ru] & & G \ar[dd] \ar[ru] & \\
+& U \times_S U \ar'[r][rr] & & F \times F \\
+T' \ar[rr] \ar[ru] & & T \ar[ru]
+}
+$$
+したがって $G$ の $T'$ への制限はスキーム $X$ によって表現され、
+射 $X \to T'$ は射 $j$ の基底変換である。よって $X \to T'$ は
+分離的かつ局所準有限である（証明の第二段落を参照）。
+Descent, Lemma \ref{descent-lemma-descent-data-sheaves} により、fppf 被覆
+$\{T' \to T\}$ に関する降下データ $(X, \varphi)$ を得る。
+$X \to T'$ は分離的かつ局所準有限なので、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}
+によりこの降下データは有効である。したがって Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves} (2) により、望んだとおり
+$G$ は表現可能である。
+\end{proof}
+
+\begin{theorem}
+\label{spaces-theorem-presentation}
+$S$ をスキーム、$U$ を $S$ 上のスキームとする。
+$j = (s, t) : R \to U \times_S U$ を $S$ 上の $U$ のエタール同値関係とする。
+このとき商 $U/R$ は代数空間であり、$U \to U/R$ はエタールかつ全射である。
+言い換えれば、$(U, R, U \to U/R)$ は $U/R$ の表示である。
+\end{theorem}
+
+\begin{proof}
+補題 \ref{spaces-lemma-when-it-works-it-works} により、$U/R$ が代数空間であることを
+証明すれば十分である。$U' \to U$ を全射エタール射とする。
+このとき $\{U' \to U\}$ は特に fppf 被覆である。$R'$ を $R$ の
+$U'$ への制限とする。Groupoids, Definition
+\ref{groupoids-definition-restrict-relation} を参照されたい。
+Groupoids, Lemma \ref{groupoids-lemma-quotient-groupoid-restrict} により
+$U/R \cong U'/R'$ である。補題
+\ref{spaces-lemma-pullback-etale-equivalence-relation} により $R'$ は
+$U'$ 上のエタール同値関係である。したがって $U$ を $U'$ で置き換えてよい。
+
+\medskip\noindent
+前の注意を $U' = \coprod U_i$ に適用する。ここで
+$U = \bigcup U_i$ は $U$ のアフィン開被覆である。よって
+$U = \coprod U_i$ で、各 $U_i$ がアフィンスキームであると仮定してよい。
+
+\medskip\noindent
+$R_i$ を $R$ の $U_i$ への制限とする。補題
+\ref{spaces-lemma-pullback-etale-equivalence-relation} により、これは
+エタール同値関係である。$F_i = U_i/R_i$ および $F = U/R$ と置く。
+$\coprod F_i \to F$ が全射であることは明らかである。
+補題 \ref{spaces-lemma-finding-opens} により各 $F_i \to F$ は表現可能な開埋め込みである。
+補題 \ref{spaces-lemma-presentation-quasi-compact} を $(U_i, R_i)$ に適用すると、
+$F_i$ は代数空間である。さらに補題
+\ref{spaces-lemma-when-it-works-it-works} により $U_i \to F_i$ はエタールかつ全射である。
+補題 \ref{spaces-lemma-coproduct-algebraic-spaces} から
+$\coprod F_i$ は代数空間である。最後に、補題
+\ref{spaces-lemma-glueing-algebraic-spaces} のすべての仮定を確認したので、
+$F = U/R$ は代数空間である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{再構成された代数空間論}
+\label{spaces-section-algebraic-spaces-retrofitted}
+
+\noindent
+代数空間を扱う補題群を整備し始める。最初の結果は、定義
+\ref{spaces-definition-algebraic-space} における対角射の条件を次のように
+弱められることを述べる。
+
+\begin{lemma}
+\label{spaces-lemma-etale-locally-representable-gives-space}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F$ を $(\Sch/S)_{fppf}$ 上の層とし、ある
+$U \in \Ob((\Sch/S)_{fppf})$ と、表現可能、全射かつエタールな射
+$U \to F$ が存在するとする。このとき $F$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+$R = U \times_F U$ と置く。$U \to F$ は表現可能と仮定したので、これは
+スキームである。射 $U \to F$ はエタールと仮定したので、射影
+$s, t : R \to U$ はエタールである。$R = U \times_F U$ なので、射
+$j = (t, s) : R \to U \times_S U$ は単射であり同値関係である。
+定理 \ref{spaces-theorem-presentation} により、商層 $F' = U/R$ は代数空間で、
+$U \to F'$ は全射かつエタールである。再び $R = U \times_F U$ なので、
+標準的な分解 $U \to F' \to F$ を得て、$F' \to F$ は層の単射である。
+一方、補題 \ref{spaces-lemma-surjective-flat-locally-finite-presentation} により
+$U \to F$ は層の射として全射である。したがって $F' \to F$ も全射であり、
+$F' = F$ は代数空間である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-etale-locally-representable-by-space-gives-space}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。$G$ を $S$ 上の代数空間、
+$F$ を $(\Sch/S)_{fppf}$ 上の層とし、$G \to F$ を全射かつエタールな
+関手の表現可能変換とする。このとき $F$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射エタール射 $U \to G$ を選ぶ。$G$ は代数空間なので
+$U \to G$ は表現可能である。したがって合成 $U \to G \to F$ は
+表現可能、全射かつエタールである。補題
+\ref{spaces-lemma-composition-representable-transformations} および
+\ref{spaces-lemma-composition-representable-transformations-property} を
+参照されたい。よって補題
+\ref{spaces-lemma-etale-locally-representable-gives-space} により $F$ は代数空間である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-representable-over-space}
+\begin{slogan}
+代数空間への表現可能射をもつ関手は代数空間である。
+\end{slogan}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F$ を $S$ 上の代数空間とし、$G \to F$ を関手の表現可能変換とする。
+このとき $G$ は代数空間である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-representable-transformation-to-sheaf} により $G$ は層である。
+図式
+$$
+\xymatrix{
+G \times_F G \ar[r] \ar[d] & F \ar[d]^{\Delta_F} \\
+G \times G \ar[r] & F \times F
+}
+$$
+は Cartesian である。したがって補題
+\ref{spaces-lemma-base-change-representable-transformations} により
+$G \times_F G \to G \times G$ は表現可能である。補題
+\ref{spaces-lemma-representable-transformation-diagonal} により
+$G \to G \times_F G$ は表現可能である。よって $\Delta_G : G \to G \times G$
+は表現可能変換の合成として表現可能である。補題
+\ref{spaces-lemma-composition-representable-transformations} を参照されたい。
+最後に $U$ を $(\Sch/S)_{fppf}$ の対象とし、
+$U \to F$ を全射かつエタールとする。仮定により $U \times_F G$ は
+スキーム $U'$ によって表現される。補題
+\ref{spaces-lemma-base-change-representable-transformations-property} により
+射 $U' \to G$ は全射かつエタールである。これで定義
+\ref{spaces-definition-algebraic-space} の最後の条件を確認でき、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-representable-morphisms-spaces-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F$, $G$ を $S$ 上の代数空間とし、$G \to F$ を表現可能射とする。
+$U \in \Ob((\Sch/S)_{fppf})$ とし、
+$q : U \to F$ を全射かつエタールとする。$V = G \times_F U$ と置く。
+最後に $\mathcal{P}$ を、定義
+\ref{spaces-definition-relative-representable-property} に現れるスキームの射の性質とする。
+このとき $G \to F$ が性質 $\mathcal{P}$ をもつことと、
+$V \to U$ が性質 $\mathcal{P}$ をもつことは同値である。
+\end{lemma}
+
+\begin{proof}
+（この補題は補題
+\ref{spaces-lemma-base-change-representable-transformations-property} および
+\ref{spaces-lemma-descent-representable-transformations-property} から従うが、
+ここでは直接の証明も与える。）
+定義から、$G \to F$ が性質 $\mathcal{P}$ をもつならば、
+$V \to U$ が性質 $\mathcal{P}$ をもつことは明らかである。
+逆に、$V \to U$ が性質 $\mathcal{P}$ をもつと仮定する。
+$T \to F$ をスキームから $F$ への射とする。
+$T' = T \times_F G$ と置く。$G \to F$ は表現可能なので、これはスキームである。
+$T' \to T$ が性質 $\mathcal{P}$ をもつことを示せばよい。
+スキームの可換図式
+$$
+\xymatrix{
+V \ar[d] & T \times_F V \ar[d] \ar[l] \ar[r] &
+T \times_F G \ar[d] \ar@{=}[r] & T' \\
+U & T \times_F U \ar[l] \ar[r] & T
+}
+$$
+を考える。二つの正方形はいずれもファイバー積正方形である。
+したがって中央の矢印は $V \to U$ の基底変換として性質
+$\mathcal{P}$ をもつ。最後に $\{T \times_F U \to T\}$ は
+全射エタールなので fppf 被覆である。よって、性質が基底上 fppf 位相で
+局所的であることから $T' \to T$ は性質 $\mathcal{P}$ をもつ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-morphism-sheaves-with-P-effective-descent-etale}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$G \to F$ を $(\Sch/S)_{fppf}$ 上の前層の変換とする。
+$\mathcal{P}$ をスキームの射の性質とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{P}$ は任意の基底変換で保たれ、基底上 fppf 局所的であり、
+型 $\mathcal{P}$ の射は fppf 被覆に関する降下を満たす。Descent, Definition
+\ref{descent-definition-descending-types-morphisms} を参照。
+\item $G$ は層である。
+\item $F$ は代数空間である。
+\item $U \in \Ob((\Sch/S)_{fppf})$ と全射エタール射 $U \to F$ が存在し、
+$V = G \times_F U$ は表現可能である。
+\item $V \to U$ は $\mathcal{P}$ をもつ。
+\end{enumerate}
+このとき $G$ は代数空間であり、$G \to F$ は表現可能で性質
+$\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$T \to F$ を射とする。このとき
+$U \times_F T \to T$ は全射かつエタールなので、
+$\{U \times_F T \to T\}$ はエタール位相の被覆である。次を考える。
+$$
+W = G \times_F (U \times_F T) = V \times_F T = V \times_U (U \times_F T).
+$$
+$F$ は代数空間なので、これはスキームである。射
+$W \to U \times_F T$ は $V \to U$ の基底変換なので性質
+$\mathcal{P}$ をもつ。$(U \times_F T) \times_T (U \times_F T)$ 上の同型
+\begin{align*}
+W \times_T (U \times_F T) & =
+(G \times_F (U \times_F T)) \times_T (U \times_F T) \\
+& = (U \times_F T) \times_T (G \times_F (U \times_F T)) \\
+& = (U \times_F T) \times_T W
+\end{align*}
+がある。中央の等号は
+$((g, (u_1, t)), (u_2, t))$ を $((u_1, t), (g, (u_2, t)))$ に写す。
+これは $W/U \times_F T/T$ の降下データを定める。Descent, Definition
+\ref{descent-definition-descent-datum} を参照されたい。
+このことは Descent, Lemma \ref{descent-lemma-descent-data-sheaves} から従う。
+実際、層 $G \times_F T$ があり、その $U \times_F T$ への基底変換は
+$W$ によって表現され、上の同型は Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves} の証明に現れるものである。
+$\mathcal{P}$ に関する仮定により、上の降下データは表現可能である。
+したがって Descent, Lemma
+\ref{descent-lemma-descent-data-sheaves} の最後の主張により、
+$G \times_F T$ は表現可能である。これで $G \to F$ が関手の表現可能変換で
+あることが証明された。
+
+\medskip\noindent
+$G \to F$ は表現可能なので、補題 \ref{spaces-lemma-representable-over-space} により
+$G$ は代数空間である。$G \to F$ が性質 $\mathcal{P}$ をもつことは、
+補題 \ref{spaces-lemma-representable-morphisms-spaces-property} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-lift-morphism-presentations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$F, G$ を $S$ 上の代数空間とし、$a : F \to G$ を射とする。
+任意の $V \in \Ob((\Sch/S)_{fppf})$ と全射エタール射
+$q : V \to G$ に対して、ある $U \in \Ob((\Sch/S)_{fppf})$ と可換図式
+$$
+\xymatrix{
+U \ar[d]_p \ar[r]_\alpha &
+V \ar[d]^q \\
+F \ar[r]^a & G
+}
+$$
+が存在し、$p$ は全射かつエタールである。
+\end{lemma}
+
+\begin{proof}
+まず $W \in \Ob((\Sch/S)_{fppf})$ と全射エタール射 $W \to F$ を選ぶ。
+次に $U = W \times_G V$ と置く。$G$ は代数空間なので、$U$ は
+$(\Sch/S)_{fppf}$ の対象と同型である。$q$ は全射かつエタールなので、
+$U \to W$ も全射かつエタールである（補題
+\ref{spaces-lemma-base-change-representable-transformations-property} を参照）。
+したがって $U \to F$ は全射エタール射の合成として全射かつエタールである
+（補題 \ref{spaces-lemma-composition-representable-transformations-property} を参照）。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{代数空間の埋め込みと Zariski 被覆}
+\label{spaces-section-Zariski}
+
+\noindent
+ここで興味深い現象が生じる。代数空間の開埋め込みという概念は
+（定義 \ref{spaces-definition-relative-representable-property} を通じて）
+すでに定義したが、{\it 点}という概念はまだ定義していない\footnote{
+Properties of Spaces, Section \ref{spaces-properties-section-points} では
+代数空間に位相空間を対応させ、その開集合が以下に定義する開部分空間と
+ちょうど対応する。}。したがって代数空間の {\it Zariski 位相}はすでに
+定義されているのに、まだ空間がない。
+
+\medskip\noindent
+やや余分かもしれないが、埋め込みを次のように形式的に導入する。
+
+\begin{definition}
+\label{spaces-definition-immersion}
+$S \in \Ob(\Sch_{fppf})$ をスキームとし、$F$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+\item $S$ 上の代数空間の射が {\it 開埋め込み}であるとは、それが表現可能で、
+定義 \ref{spaces-definition-relative-representable-property} の意味で
+開埋め込みであることをいう。
+\item $F$ の {\it 開部分空間}とは、部分関手 $F' \subset F$ であって、
+$F'$ が代数空間であり、$F' \to F$ が開埋め込みであるものをいう。
+\item $S$ 上の代数空間の射が {\it 閉埋め込み}であるとは、それが表現可能で、
+定義 \ref{spaces-definition-relative-representable-property} の意味で
+閉埋め込みであることをいう。
+\item $F$ の {\it 閉部分空間}とは、部分関手 $F' \subset F$ であって、
+$F'$ が代数空間であり、$F' \to F$ が閉埋め込みであるものをいう。
+\item $S$ 上の代数空間の射が {\it 埋め込み}であるとは、それが表現可能で、
+定義 \ref{spaces-definition-relative-representable-property} の意味で
+埋め込みであることをいう。
+\item $F$ の {\it 局所閉部分空間}とは、部分関手 $F' \subset F$ であって、
+$F'$ が代数空間であり、$F' \to F$ が埋め込みであるものをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これらの定義が意味をもつことに注意する。実際、埋め込みは特に単射である
+（Schemes, Lemma \ref{schemes-lemma-immersions-monomorphisms} および
+補題 \ref{spaces-lemma-representable-transformations-property-implication} を参照）。
+したがって代数空間の埋め込み $G \to F$ の像は部分関手
+$F' \subset F$ であり、これは（標準的に）$G$ と同型である。
+よって Schemes, Section \ref{schemes-section-immersions} の議論の一部は
+代数空間の設定にも移る。
+
+\begin{lemma}
+\label{spaces-lemma-composition-immersions}
+$S \in \Ob(\Sch_{fppf})$ をスキームとする。$S$ 上の代数空間の
+（閉、それぞれ開）埋め込みの合成は、$S$ 上の代数空間の
+（閉、それぞれ開）埋め込みである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-composition-representable-transformations-property} と、
+注意 \ref{spaces-remark-list-properties-fpqc-local-base}（特にその最後の行）および
+\ref{spaces-remark-list-properties-stable-composition} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-base-change-immersions}
+$S \in \Ob(\Sch_{fppf})$ をスキームとする。$S$ 上の代数空間の
+（閉、それぞれ開）埋め込みの基底変換は、$S$ 上の代数空間の
+（閉、それぞれ開）埋め込みである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-base-change-representable-transformations-property} と
+注意 \ref{spaces-remark-list-properties-fpqc-local-base}（特にその最後の行）
+を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-sub-subspaces}
+$S \in \Ob(\Sch_{fppf})$ をスキームとする。
+$F$ を $S$ 上の代数空間とし、$F_1$, $F_2$ を $F$ の局所閉部分空間とする。
+$F$ の部分関手として $F_1 \subset F_2$ ならば、$F_1$ は $F_2$ の
+局所閉部分空間である。閉部分空間および開部分空間についても同様である。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$T \to F_2$ を射とする。$F_2 \to F$ は単射なので
+$T \times_{F_2} F_1 = T \times_F F_1$ である。補題はこれから形式的に従う。
+\end{proof}
+
+\noindent
+代数空間の Zariski 開被覆という概念を形式的に定義する。
+補題 \ref{spaces-lemma-glueing-algebraic-spaces} では、代数空間を構成する方法として、
+このような開被覆にすでに出会っていることに注意する。
+
+\begin{definition}
+\label{spaces-definition-Zariski-open-covering}
+$S \in \Ob(\Sch_{fppf})$ をスキームとし、$F$ を $S$ 上の代数空間とする。
+$F$ の {\it Zariski 被覆} $\{F_i \subset F\}_{i \in I}$ とは、
+集合 $I$ と開部分空間の族 $F_i \subset F$ であって、射
+$\coprod F_i \to F$ が層の全射であるものをいう。
+\end{definition}
+
+\noindent
+$T$ がスキームで $a : T \to F$ が射ならば、各ファイバー積
+$T \times_F F_i$ は開部分スキーム $T_i \subset T$ と同一視される。
+定義の最後の条件は、ちょうど $T = \bigcup_{i \in I} T_i$ を意味する。
+
+\medskip\noindent
+$F$ の開部分空間全体 $F_{Zar}$ は集合であることは明らかである
+（$(\Sch/S)_{fppf}$ はサイト、したがって集合である）。
+さらに、射を部分関手の包含とすることで $F_{Zar}$ を圏にできる
+（補題 \ref{spaces-lemma-sub-subspaces} により、このような包含は自動的に
+開埋め込みである）。最後に、定義 \ref{spaces-definition-Zariski-open-covering}
+は圏 $F_{Zar}$ における Zariski 被覆
+$\{F_i \to F'\}_{i \in I}$ の概念を与える。
+したがって位相空間の場合と同様に（Sites, Example
+\ref{sites-example-site-topological} を参照）、被覆の集合を適切に選ぶことで
+代数空間 $F$ の Zariski サイトを得られる。
+
+\begin{definition}
+\label{spaces-definition-small-Zariski-site}
+$S \in \Ob(\Sch_{fppf})$ をスキームとし、$F$ を $S$ 上の代数空間とする。
+代数空間 $F$ の {\it 小 Zariski サイト $F_{Zar}$} とは、
+上で記述したサイトの一つである。
+\end{definition}
+
+\noindent
+これにより、代数空間上 Zariski 局所的に何かが成り立つという概念が得られ、
+本章ではその意味でこの概念を用いる。一般に Zariski 位相は目的に対して
+十分細かくない。たとえば代数空間上の Zariski 層の圏を考えられるが、
+準連接層に対してさえ、これは考えるべき正しい対象でないことが後で分かる。
+準連接層を定義するために $F$ のエタールサイトまたは fppf サイトを用いた
+ときに限って、望ましい結果が得られる。
+
+
+
+
+
+
+
+
+
+
+\section{代数空間の分離条件}
+\label{spaces-section-separation}
+
+\noindent
+代数空間 $F$ の分離条件とは、対角射 $F \to F \times F$ に関する条件である。
+まず、対角射が自動的にもつ性質を列挙する。対角射は定義により表現可能なので、
+次の補題は意味をもつ（定義
+\ref{spaces-definition-relative-representable-property} を通じて）。
+
+\begin{lemma}
+\label{spaces-lemma-properties-diagonal}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとし、$F$ を $S$ 上の代数空間とする。
+$\Delta : F \to F \times F$ を対角射とする。このとき次が成り立つ。
+\begin{enumerate}
+\item $\Delta$ は局所有限型である。
+\item $\Delta$ は単射である。
+\item $\Delta$ は分離的である。
+\item $\Delta$ は局所準有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$F = U/R$ を $F$ の表示とする。補題
+\ref{spaces-lemma-presentation-quasi-compact} の証明と同様に、図式
+$$
+\xymatrix{
+R \ar[r] \ar[d]_j & F \ar[d]^\Delta \\
+U \times_S U \ar[r] & F \times F
+}
+$$
+は Cartesian である。したがって補題
+\ref{spaces-lemma-representable-morphisms-spaces-property} により、
+$j$ が補題に列挙した性質をもつことを示せば十分である
+（性質 (1)--(4) はいずれも注意
+\ref{spaces-remark-list-properties-stable-base-change} および
+\ref{spaces-remark-list-properties-fpqc-local-base} の一覧に現れる）。
+$j$ は同値関係なので単射である。よって Schemes, Lemma
+\ref{schemes-lemma-monomorphism-separated} により分離的である。
+$R$ はエタール同値関係なので $s, t : R \to U$ はエタールである。
+したがって $s, t$ は局所有限型である。Morphisms, Lemma
+\ref{morphisms-lemma-permanence-finite-type} により $j$ は局所有限型である。
+最後に、これは単射なのでファイバーは有限である。よって Morphisms, Lemma
+\ref{morphisms-lemma-finite-fibre} により局所準有限である。
+\end{proof}
+
+\noindent
+基底スキーム $S$ に相対的な、よく用いられる分離条件をいくつか述べる。
+これらの条件には絶対的な概念もあり、Properties of Spaces, Section
+\ref{spaces-properties-section-separation} で論じる。
+さらに代数空間の射に対する分離条件は Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-separation-axioms} で論じる。
+
+\begin{definition}
+\label{spaces-definition-separated}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとし、$F$ を $S$ 上の代数空間とする。
+$\Delta : F \to F \times F$ を対角射とする。
+\begin{enumerate}
+\item $\Delta$ が閉埋め込みならば、$F$ は {\it $S$ 上分離的}であるという。
+\item $\Delta$ が埋め込みならば、$F$ は {\it $S$ 上局所分離的}
+であるという\footnote{文献では、これは準分離的かつ局所分離的な代数空間を
+指すことが多い。}。
+\item $\Delta$ が準コンパクトならば、$F$ は {\it $S$ 上準分離的}であるという。
+\item 各 $F_i$ が準分離的であるような Zariski 被覆
+$F = \bigcup_{i \in I} F_i$ が存在するならば、$F$ は
+{\it $S$ 上 Zariski 局所準分離的}であるという\footnote{
+この定義は B.\ Conrad によって提案された。}。
+\end{enumerate}
+\end{definition}
+
+\noindent
+対角射が準コンパクトならば（$F$ が分離的または準分離的な場合）、
+対角射は実際に準有限かつ分離的であり、したがって準アフィンである
+（More on Morphisms, Lemma
+\ref{more-morphisms-lemma-quasi-finite-separated-quasi-affine} による）。
+
+
+
+
+
+
+
+
+\section{代数空間の例}
+\label{spaces-section-examples}
+
+\noindent
+この節では代数空間の例をいくつか構成する。一部は B.\ Conrad によって
+提案された。まだ多くの理論を使えないため、議論がやや不格好な箇所もある。
+
+\begin{example}
+\label{spaces-example-affine-line-involution}
+$k$ を標数 $\not = 2$ の体とし、$U = \mathbf{A}^1_k$ とする。
+$$
+j : R = \Delta \amalg \Gamma \longrightarrow U \times_k U
+$$
+と置く。ここで
+$\Delta = \{(x, x) \mid x \in \mathbf{A}^1_k\}$ および
+$\Gamma = \{(x, -x) \mid x \in \mathbf{A}^1_k, x \not = 0\}$ である。
+$s, t : R \to U$ がエタールであることは明らかなので、$j$ は
+エタール同値関係である。定理 \ref{spaces-theorem-presentation} により
+商 $X = U/R$ は代数空間である。$R$ は準コンパクトなので $X$ は
+準分離的である。一方、射 $j$ は埋め込みでないので $X$ は局所分離的でない。
+\end{example}
+
+\begin{example}
+\label{spaces-example-non-representable-descent}
+$k$ を体とする。$k'/k$ を次数 $2$ の Galois 拡大で
+$\text{Gal}(k'/k) = \{1, \sigma\}$ とする。
+$S = \Spec(k[x])$ および $U = \Spec(k'[x])$ と置く。次に注意する。
+$$
+U \times_S U =
+\Spec((k' \otimes_k k')[x]) =
+\Delta(U) \amalg \Delta'(U)
+$$
+ここで $\Delta' = (1, \sigma) : U \to U \times_S U$ である。
+$$
+R = \Delta(U) \amalg \Delta'(U \setminus \{0_U\})
+$$
+と取る。ここで $0_U \in U$ は $x$ 座標が零である $k'$ 有理点を表す。
+$R$ が $S$ 上の $U$ のエタール同値関係であることは容易に分かる。
+したがって定理 \ref{spaces-theorem-presentation} により $X = U/R$ は代数空間である。
+$X$ は次の性質をもつ（後になるまで意味をなさないものもある）。
+\begin{enumerate}
+\item $X \to S$ は $S \setminus \{0_S\}$ 上で同型である。
+\item 射 $X \to S$ はエタールである（Properties of Spaces, Definition
+\ref{spaces-properties-definition-etale} を参照）。
+\item $0_S$ 上の $X \to S$ のファイバー $0_X$ は
+$\Spec(k') = 0_U$ と同型である。
+\item $X$ はスキームでない。実際、スキームならば
+$\mathcal{O}_{X, 0_X}$ は、分数体 $k(x)$、$x \in \mathfrak m$、
+剰余体 $\kappa = k'$ をもつ局所整域
+$(\mathcal{O}, \mathfrak m, \kappa)$ となるが、これは不可能である。
+\item $X$ は分離的でないが、局所分離的かつ準分離的である。
+\item 全射有限エタール射 $S' \to S$ で、基底変換
+$X' = S' \times_S X$ がスキームとなるものが存在する
+（実際 $S' = \Spec(k'[x])$ に基底変換すると $U$ は $S'$ の二つのコピーに
+分裂し、$X'$ は $0$ を二重化したアフィン直線と同型になる。Schemes, Example
+\ref{schemes-example-affine-space-zero-doubled} を参照）。
+\item $X$ を $\Spec(k)$ 上有限型な代数空間と考えると、同様に基底変換
+$X_{k'}$ はスキームであるが $X$ はスキームでない。
+\end{enumerate}
+特に、これは被覆 $\{\Spec(k') \to \Spec(k)\}$ に関するスキームの
+有効でない降下データの例を与える。
+\end{example}
+
+\noindent
+Examples, Lemma \ref{examples-lemma-non-effective-descent-projective} も
+参照されたい。これはスキームの射が射影的であっても降下データが
+有効とは限らないことを示す。その例は $ {\mathbf C}$ 上の次元 3 の
+滑らかで分離的な代数空間で、スキームではないものを与える。
+
+\medskip\noindent
+次の補題を、自由群作用によるスキームの商として代数空間を構成する
+便利な方法として用いる。
+
+\begin{lemma}
+\label{spaces-lemma-quotient}
+$U \to S$ を $\Sch_{fppf}$ の射とする。$G$ を抽象群とし、
+$G \to \text{Aut}_S(U)$ を群準同型とする。次を仮定する。
+\begin{itemize}
+\item[(*)] $u \in U$ を点とし、ある非単位元 $g \in G$ に対して
+$g(u) = u$ ならば、$g$ は $\kappa(u)$ の非自明な自己同型を誘導する。
+\end{itemize}
+このとき
+$$
+j :
+R = \coprod\nolimits_{g \in G} U
+\longrightarrow
+U \times_S U,
+\quad
+(g, x) \longmapsto (g(x), x)
+$$
+はエタール同値関係である。したがって定理 \ref{spaces-theorem-presentation} により
+$$
+F = U/R
+$$
+は代数空間である。
+\end{lemma}
+
+\begin{proof}
+補題の主張で記号 $\text{Aut}_S(U)$ は $S$ 上の $U$ の自己同型群を表す。
+$(*)$ が成り立つと仮定する。
+$$
+j :
+R = \coprod\nolimits_{g \in G} U
+\longrightarrow
+U \times_S U,
+\quad
+(g, x) \longmapsto (g(x), x)
+$$
+が単射であることを示す。これは、$T$ が空でないスキームで
+$h : T \to U$ が $T$ 値点であり、$g \circ h = g' \circ h$ ならば
+$g = g'$ であることを意味する。
+$T \not = \emptyset$, $h : T \to U$, $g \circ h = g' \circ h$ と仮定する。
+$t \in T$ を取り、合成
+$\Spec(\kappa(t)) \to \Spec(\kappa(h(t))) \to U$ を考える。
+すると $g^{-1} \circ g'$ は $u = h(t)$ を固定し、その剰余体上恒等的に
+作用する。したがって $(*)$ により $g = g'$ である。
+
+\medskip\noindent
+よって $(*)$ が成り立つならば、$j$ は関係である
+（Groupoids, Definition \ref{groupoids-definition-equivalence-relation}）。
+さらに、連結スキーム $T$ の $T$ 値点上で
+$R(T) = G \times U(T) \to U(T) \times U(T)$ となるので、これは同値関係である
+（常に $S$ 上で作業していることを思い出されたい）。
+また $R$ は $U$ のコピーの非交和なので、射 $s, t : R \to U$ はエタールである。
+これにより $j : R \to U \times_S U$ がエタール同値関係であることが証明された。
+\end{proof}
+
+\noindent
+スキーム $U$ と $U$ 上の群 $G$ の作用が与えられたとき、補題
+\ref{spaces-lemma-quotient} の条件 $(*)$ を満たすならば、$U$ 上の $G$ の作用は
+{\it 自由}であるという。これは Groupoids, Definition
+\ref{groupoids-definition-free-action} で定義された、定数群スキーム
+$G_S$ の $U$ 上の自由作用という概念と同値である。この補題は、群の自由作用に
+よるスキームの商が代数空間の圏に存在すると解釈できる。
+
+\begin{definition}
+\label{spaces-definition-quotient}
+補題 \ref{spaces-lemma-quotient} と同じ記法 $U \to S$, $G$, $R$ を用いる。
+$U$ 上の $G$ の作用が $(*)$ を満たすとき、$G$ はスキーム $U$ に
+{\it 自由に作用する}という。この場合、代数空間 $U/R$ を $U/G$ と書き、
+{\it $G$ による $U$ の商}と呼ぶ。
+\end{definition}
+
+\noindent
+この記法は Groupoids, Definition \ref{groupoids-definition-quotient-sheaf}
+で導入した記法 $U/G$ と整合する。後で、作用について何の仮定も置かずに商を
+代数スタックとして意味づける。その場合には記法 $[U/G]$ を用いる。
+例を論じる前に、議論を容易にするためさらに補題を証明する。
+まず、$G$ が有限の場合にこの商のさまざまな分離条件を扱う補題を述べる。
+
+\begin{lemma}
+\label{spaces-lemma-quotient-finite-separated}
+補題 \ref{spaces-lemma-quotient} と同じ記法と仮定を用い、$G$ が有限であるとする。
+このとき次が成り立つ。
+\begin{enumerate}
+\item $U \to S$ が準分離的ならば、$U/G$ は $S$ 上準分離的である。
+\item $U \to S$ が分離的ならば、$U/G$ は $S$ 上分離的である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{spaces-lemma-properties-diagonal} の証明で、射
+$j : R \to U \times_S U$ に対する対応する性質を証明すれば十分であることを
+見た。$U \to S$ が準分離的ならば、$S$ のアフィン部分に写る任意の
+アフィン開集合 $V \subset U$ に対し、開集合 $g(V) \cap V$ は
+準コンパクトである。したがって $j$ は準コンパクトである。
+$U \to S$ が分離的ならば、対角射 $\Delta_{U/S}$ は閉埋め込みである。
+よって $j : R \to U \times_S U$ は像が互いに交わらない閉埋め込みの
+有限余積であり、したがって $j$ は閉埋め込みである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-lemma-quotient-field-map}
+補題 \ref{spaces-lemma-quotient} と同じ記法と仮定を用いる。
+$\Spec(k) \to U/G$ が射ならば、次が存在する。
+\begin{enumerate}
+\item 有限 Galois 拡大 $k'/k$。
+\item 有限部分群 $H \subset G$。
+\item 同型 $H \to \text{Gal}(k'/k)$。
+\item $H$-同変射 $\Spec(k') \to U$。
+\end{enumerate}
+逆に、このようなデータは射 $\Spec(k) \to U/G$ を定める。
+\end{lemma}
+
+\begin{proof}
+ファイバー積 $V = \Spec(k) \times_{U/G} U$ を考える。図式
+$$
+\xymatrix{
+V \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r] & U/G
+}
+$$
+がある。$V$ は $\Spec(k)$ 上非空なエタールスキームなので、
+$k$ 上有限分離的な体 $k_i$ のスペクトルの非交和
+$V = \coprod_{i \in I} \Spec(k_i)$ である
+（Morphisms, Lemma \ref{morphisms-lemma-etale-over-field}）。
+次を得る。
+\begin{align*}
+V \times_{\Spec(k)} V
+& =
+(\Spec(k) \times_{U/G} U) \times_{\Spec(k)}(\Spec(k) \times_{U/G} U) \\
+& = 
+\Spec(k) \times_{U/G} U \times_{U/G} U \\
+& =
+\Spec(k) \times_{U/G} U \times G \\
+& =
+V \times G
+\end{align*}
+$U$ 上の $G$ の作用は $a : G \times V \to V$ という作用を誘導する。
+上の等式は
+$G \times V \to V \times_{\Spec(k)} V$, $(g, v) \mapsto (a(g, v), v)$
+が同型であることを意味する。特に各 $i$ に対して同型
+$H_i \times \Spec(k_i) \to \Spec(k_i \otimes_k k_i)$ がある。
+ここで $H_i \subset G$ は $i \in I$ を固定する元の部分群である。
+したがって $H_i$ は有限であり、$k_i/k$ の Galois 群である。
+逆向きの構成は省略する。
+\end{proof}
+
+\noindent
+たとえばこの補題から、$k'/k$ が有限 Galois 拡大ならば
+$\Spec(k')/\text{Gal}(k'/k) \cong \Spec(k)$ であることが従う。
+拡大が無限の場合には何が起こるだろうか。次が一つの例である。
+
+\begin{example}
+\label{spaces-example-Qbar}
+$S = \Spec(\mathbf{Q})$ とする。$U = \Spec(\overline{\mathbf{Q}})$ とし、
+$G = \text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$ に $U$ 上の明らかな作用を
+入れる。このとき構成により補題 \ref{spaces-lemma-quotient} の性質 $(*)$ が成り立ち、
+代数空間
+$$
+X = \Spec(\overline{\mathbf{Q}})/G
+\longrightarrow
+S = \Spec(\mathbf{Q}).
+$$
+を得る。もちろん、これは $S$ の近似としてはまったく不合理である。
+実際、Artin--Schreier の定理
+\cite[Theorem 17, page 316]{JacobsonIII} により、
+$\text{Gal}(\overline{\mathbf{Q}}/\mathbf{Q})$ の有限部分群は
+$\{1\}$ と、位数二の群
+$\text{Gal}(\overline{\mathbf{Q}}/\overline{\mathbf{Q}} \cap \mathbf{R})$
+の共役しかない。したがって、$k$ が $\mathbf{Q}$ 上代数的で、
+$\Spec(k) \to X$ が射ならば、補題 \ref{spaces-lemma-quotient-field-map} と
+今述べた定理から、$k$ は $\overline{\mathbf{Q}}$ であるか、
+$\overline{\mathbf{Q}} \cap \mathbf{R}$ と同型である。
+\end{example}
+
+\noindent
+上の例で問題なのは、Galois 群には位相が備わっており、
+$\Spec(\overline{\mathbf{Q}})$ の商を構成する際には、何らかの形で
+これも組み込むべきだという点である。次の例は筆者の考えでははるかに
+自然であり、実際に「自然界」で現れるかもしれない。
+
+\begin{example}
+\label{spaces-example-affine-line-translation}
+$k$ を標数零の体とする。$U = \mathbf{A}^1_k$ および
+$G = \mathbf{Z}$ とする。作用として $n(x) = x + n$、すなわち平行移動による
+$\mathbf{Z}$ のアフィン直線上の作用をとる。唯一の固定点は一般点であり、
+$\mathbf{Z}$ が体 $k(x)$ の自己同型群に単射することは明らかである
+（ここで標数零の仮定を用いる）。アフィン直線の一般点から商への射
+$$
+\gamma : \Spec(k(x)) \longrightarrow X = \mathbf{A}^1_k/\mathbf{Z}
+$$
+を考える。この射は、体のスペクトルから $X$ への任意の単射
+$\Spec(L) \to X$ を経由しないと主張する
+（スキームの場合とは異なる。Schemes, Section
+\ref{schemes-section-points} を参照）。実際、$\mathbf{Z}$ は非自明な
+有限部分群をもたないので、補題 \ref{spaces-lemma-quotient-field-map} から、
+そのような分解については必ず $k(x) = L$ となる。最後に、$\gamma$ は
+単射ではない。なぜなら
+$$
+\Spec(k(x)) \times_{\gamma, X, \gamma} \Spec(k(x))
+\cong
+\Spec(k(x)) \times \mathbf{Z}.
+$$
+だからである。
+\end{example}
+
+\noindent
+この例は、代数空間 $X$ の点を定義するには、体のスペクトルから $X$ への
+射の同値類を考えるべきであり、体のスペクトルからの単射の集合を
+考えるべきではないことを示唆する。
+
+\medskip\noindent
+最後に、実にひどい例を挙げる。
+
+\begin{example}
+\label{spaces-example-infinite-product}
+$k$ を体とし、$A = \prod_{n \in \mathbf{N}} k$ を無限直積とする。
+$U = \Spec(A)$ と置き、$S = \Spec(k)$ 上のスキームとみなす。
+射影 $\text{pr}_n : A \to k$ は開かつ閉な埋め込み
+$f_n : S \to U$ を定めることに注意する。
+$$
+R = U \amalg \coprod\nolimits_{(n, m) \in \mathbf{N}^2, \ n \not = m} S
+$$
+と置き、成分 $U$ 上では $j$ を $\Delta_{U/S}$ とし、
+$(n, m)$ に対応する成分 $S$ 上では $j = (f_n, f_m)$ とする。
+上の注意から $s, t$ がエタールであることは明らかである。
+$j$ が同値関係であることも明らかである。したがって代数空間
+$$
+X = U/R.
+$$
+を得る。これが何を意味するかを見るため、体 $k$ が $q$ 元からなる有限体の
+場合に特殊化する。まずスキーム $U$ に付随する位相空間 $|U|$ について
+少し論じる。$A$ のすべての元は $x^q = x$ を満たす。したがって $A$ の
+すべての剰余体は $k$ と同型であり、$U$ のすべての点は閉点である。
+しかし $U$ の位相は離散位相ではない。$u_n \in |U|$ を $f_n$ に対応する
+点とする。上で述べたように、点 $u_n$ は開点であり、したがって孤立点である。
+一方、Algebra, Lemma \ref{algebra-lemma-quasi-compact} により $U$ は
+準コンパクトであることが分かっているので、これ以外の点も存在しなければ
+ならない（したがって無限離散集合とは等しくない）。
+別の見方として、真のイデアル
+$$
+I =
+\{x = (x_n) \in A \mid \text{有限個を除くすべての }x_n\text{ が零である}\}
+$$
+はある極大イデアルに含まれる。また、$A$ の任意の元 $x$ は
+$x = ue$ と書ける。ここで $u$ は単元、$e$ は冪等元である。
+したがって $A$ の位相の基底は開かつ閉な部分集合からなる
+（Algebra, Lemma \ref{algebra-lemma-idempotent-spec} を参照）。
+よって $|U|$ の位相は完全不連結だが、自明ではない。最後に、
+$\{u_n\}$ は $|U|$ で稠密であることに注意する。
+
+\medskip\noindent
+後で $X$ に付随する位相空間 $|X|$ を定義する。Properties of Spaces,
+Section \ref{spaces-properties-section-points} を参照。$|X|$ について
+何が言えるだろうか。写像 $|U| \to |X|$ は全射かつ連続であることが分かる。
+すべての点 $u_n$ は $|X|$ の同じ点 $x_0$ に写り、それ以外の点どうしは
+同一視されない。$\{u_n\}$ は $|U|$ で稠密なので、$|X|$ における $x_0$ の
+閉包は $|X|$ である。言い換えれば、$|X|$ は既約であり、$x_0$ は
+$|X|$ の一般点である。ところが $x_0$ は構造射 $X \to S$ の切断
+$S \to X$ の像でもあるので、これは奇妙に見える
+（スキームの場合には閉点であることが従う。Morphisms, Lemma
+\ref{morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre}
+を参照）。
+\end{example}
+
+\noindent
+この例で実際に何が起こっていると考えるにせよ、代数空間の既約成分や
+連結性などを定義するときには注意が必要であることを確かに示している。
+
+
+
+
+
+
+\section{大サイトの変更}
+\label{spaces-section-change-big-site}
+
+\noindent
+この節では、大サイトを変更したときに何が起こるかを簡単に論じる。
+要点は、大サイトはいつでも自由に拡大できるため、考えたい任意のスキームの
+集合が、代数空間を考える大 fppf サイトに含まれると仮定できるということである。
+結果を正確に述べる。
+
+\begin{lemma}
+\label{spaces-lemma-change-big-site}
+大サイト $\Sch_{fppf}$ と $\Sch'_{fppf}$ が与えられたとする。
+Topologies, Section \ref{topologies-section-change-alpha} の意味で
+$\Sch_{fppf}$ が $\Sch'_{fppf}$ に含まれると仮定する。
+$S$ を $\Sch_{fppf}$ の対象とする。Topologies, Lemma
+\ref{topologies-lemma-change-alpha} のトポスの射を
+\begin{align*}
+g : \Sh((\Sch/S)_{fppf})
+\longrightarrow
+\Sh((\Sch'/S)_{fppf}), \\
+f : \Sh((\Sch'/S)_{fppf})
+\longrightarrow
+\Sh((\Sch/S)_{fppf})
+\end{align*}
+とする。$F$ を $(\Sch/S)_{fppf}$ 上の集合の層とする。このとき
+\begin{enumerate}
+\item $F$ が $S$ 上のスキーム $X \in \Ob((\Sch/S)_{fppf})$ により
+表現されるならば、$f^{-1}F$ も表現可能である。実際、
+$(\Sch'/S)_{fppf}$ の対象とみなした同じスキーム $X$ により表現される。
+\item $F$ が $S$ 上の代数空間ならば、$f^{-1}F$ も $S$ 上の代数空間である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X \in \Ob((\Sch/S)_{fppf})$ とする。$X$ に付随する
+$(\Sch/S)_{fppf}$ 上の表現可能層を $h_X$、
+$(\Sch'/S)_{fppf}$ 上の表現可能層を $h'_X$ と書く。
+$X$ について、Topologies, Section
+\ref{topologies-section-change-alpha} にある
+$f^{-1}$ の記述から $f^{-1}h_X = h'_X$ である。これで (1) が従う。
+
+\medskip\noindent
+次に、$F$ が $S$ 上の代数空間であるとする。補題
+\ref{spaces-lemma-space-presentation} により、これは
+$(\Sch/S)_{fppf}$ におけるあるエタール同値関係
+$R \to U \times_S U$ に対して $F = h_U/h_R$ であることを意味する。
+$f^{-1}$ は完全関手なので $f^{-1}F = h'_U/h'_R$ である。
+したがって定理 \ref{spaces-theorem-presentation} により $f^{-1}F$ は
+$S$ 上の代数空間である。
+\end{proof}
+
+\noindent
+この補題は純粋に集合論的であり、実質的な内容をほとんどもたないことに
+注意する。また一般には、大きいサイト上の代数空間を小さいサイトに
+制限したものが小さいサイト上の代数空間になるとは限らない
+（単に濃度上の理由による）。したがって、この種の単純な補題は基礎圏を
+拡大するためにしか使えず、縮小するためには使えない。
+
+\begin{lemma}
+\label{spaces-lemma-fully-faithful}
+$\Sch_{fppf}$ が $\Sch'_{fppf}$ に含まれるとする。
+$S$ を $\Sch_{fppf}$ の対象とする。$\Sch_{fppf}$ を用いて定義した
+$S$ 上の代数空間の圏を $\textit{Spaces}/S$ と書く。同様に、
+$\Sch'_{fppf}$ を用いて定義した $S$ 上の代数空間の圏を
+$\textit{Spaces}'/S$ と書く。補題 \ref{spaces-lemma-change-big-site} の構成は
+充満忠実関手
+$$
+\textit{Spaces}/S \longrightarrow \textit{Spaces}'/S
+$$
+を定める。その本質像は、$U, R \in \Ob((\Sch/S)_{fppf})$\footnote{
+$R$ の存在を要求する必要があるのは、Sets, Equation
+(\ref{sets-equation-bound}) における関数 $Bound$ の選び方による。
+ファイバー積 $U \times_{X'} U$ の大きさは、$U$ の大きさに対する
+$Bound$ より速く増大しうる。これは $S = \Spec(A)$、
+$U = \Spec(A[x_i, i \in I])$、
+$R = \coprod_{(\lambda_i) \in A^I} \Spec(A[x_i, y_i]/(x_i - \lambda_i y_i))$
+と置けば分かる。この場合、$U$ の大きさを $\kappa$ とすると、
+$R$ の大きさは $\kappa^\kappa$ のように増大する。} および、
+$\Sh((\Sch'/S)_{fppf})$ における層の写像として全射な射
+$$
+U \longrightarrow X'
+\quad\text{および}\quad
+R \longrightarrow U \times_{X'} U
+$$
+が存在するような $X' \in \Ob(\textit{Spaces}'/S)$ からなる
+（たとえば、表示された射が全射かつエタールならばよい）。
+\end{lemma}
+
+\begin{proof}
+Sites, Lemma \ref{sites-lemma-bigger-site} で、関手
+$f^{-1} : \Sh((\Sch/S)_{fppf}) \to \Sh((\Sch'/S)_{fppf})$
+が充満忠実であることを見た
+（Topologies, Section \ref{topologies-section-change-alpha} の議論を参照）。
+したがって補題に表示された関手は充満忠実である。
+
+\medskip\noindent
+$X' \in \Ob(\textit{Spaces}'/S)$ とし、
+$U \in \Ob((\Sch/S)_{fppf})$ と
+$\Sh((\Sch'/S)_{fppf})$ における層の全射 $U \to X'$ が存在するとする。
+$U' \in \Ob((\Sch'/S)_{fppf})$ をもつ全射エタール射
+$U' \to X'$ をとる。Sets, Section
+\ref{sets-section-categories-schemes} の意味で
+$\kappa = \text{size}(U)$ と置く。このとき $U$ は
+$|I| \leq \kappa$ を満たすアフィン開被覆 $U = \bigcup_{i \in I} U_i$
+をもつ。$U' \times_{X'} U \to U$ はエタールかつ全射である。
+各 $i$ に対し、$U'_i \times_{X'} U_i \to U_i$ が全射となる
+準コンパクト開集合 $U'_i \subset U'$ を選べる
+（実際、スキーム $U' \times_{X'} U_i$ は、アフィン開
+$W \subset U'$ に対する Zariski 開集合 $W \times_{X'} U_i$ の合併であり、
+$U' \times_{X'} U_i \to U_i$ はエタール、したがって開である）。
+すると、$U \to X$、したがって $\coprod U_i \to X$ が層の全射であるという
+仮定により、$\coprod_{i \in I} U'_i \to X$ は全射かつエタールである
+（詳細は省略する）。
+$U'_i \times_{X'} U \to U'_i$ は層の全射であり、$U'_i$ は準コンパクトなので、
+$W_i \to U'_i$ が層の写像として全射となる準コンパクト開集合
+$W_i \subset U'_i \times_{X'} U$ を見つけられる（詳細は省略する）。
+このとき $W_i \to U$ はエタールであり、Sets, Lemma
+\ref{sets-lemma-bound-finite-type} から
+$\text{size}(W_i) \leq \text{size}(U)$ である。Sets, Lemma
+\ref{sets-lemma-bound-by-covering} により
+$\text{size}(U'_i) \leq \text{size}(U)$ が従う。
+したがって Sets, Lemma \ref{sets-lemma-bound-size} により
+$\coprod_{i \in I} U'_i$ は $(\Sch/S)_{fppf}$ の対象と同型である。
+
+\medskip\noindent
+今度は $X'$、$U \to X'$ および $R \to U \times_{X'} U$ を
+補題の主張のとおりとする。前段落で、
+$U' \in \Ob((\Sch/S)_{fppf})$ と
+$\Sh((\Sch'/S)_{fppf})$ における全射エタール射 $U' \to X'$ を
+見つけられることを示した。このとき
+$U' \times_{X'} U \to U'$ は層の全射である。すなわち、
+$U'_i \to U'$ が $U' \times_{X'} U \to U'$ を経由するような
+fppf 被覆 $\{U'_i \to U'\}$ を見つけられる。
+Sets, Lemma \ref{sets-lemma-bound-fppf-covering} により、
+$\text{size}(\tilde U) \leq \text{size}(U')$ を満たす全射、平坦かつ
+局所有限表示な射 $\tilde U \to U'$ を見つけられる。この射
+$\tilde U \to U'$ は $U' \times_{X'} U \to U'$ を経由する。
+そこで
+$$
+\xymatrix{
+U' \times_{X'} U' \ar[d] &
+\tilde U \times_{X'} \tilde U  \ar[l] \ar[d] \ar[r] &
+U \times_{X'} U \ar[d] \\
+U' \times_S U' & \tilde U \times_S \tilde U \ar[l] \ar[r] & U \times_S U
+}
+$$
+を考える。正方形は Cartesian である。下段の対象は
+$(\Sch/S)_{fppf}$ の対象によって表現される。前段落の議論の結果と、
+仮定による層の全射 $R \to U \times_{X'} U$ から、
+$U \times_{X'} U$ についても同じことが成り立つ。
+$(\Sch/S)_{fppf}$ は構成によりファイバー積について閉じているので、
+$\tilde U \times_{X'} \tilde U$ は $(\Sch/S)_{fppf}$ の対象によって
+表現される。最後に、$\tilde U \to U'$ が fppf 層の全射であるため、
+$\tilde U \times_{X'} \tilde U \to U' \times_{X'} U'$ もそうである。
+したがって前段落の結果をもう一度適用すると、
+$R' = U' \times_{X'} U'$ は $(\Sch/S)_{fppf}$ の対象によって表現される。
+ここで補題 \ref{spaces-lemma-space-presentation} と定理
+\ref{spaces-theorem-presentation} により、$X = h_{U'}/h_{R'}$ は
+$f^{-1}X \cong X'$ を満たす $\textit{Spaces}/S$ の対象である。これが望む結論である。
+\end{proof}
+
+
+
+\section{基底スキームの変更}
+\label{spaces-section-change-base-scheme}
+
+\noindent
+この節では、基底スキームを変更したときに何が起こるかを簡単に論じる。
+要点は、基底スキームの射 $S \to S'$ が与えられると、
+$S$ 上の任意の代数空間を $S'$ 上の代数空間とみなせるということである。
+また、$S'$ 上の代数空間 $F'$ が与えられると、その基底変換 $F'_S$ は
+$S$ 上の代数空間となる。ここでは $S \to S'$ が考えている大 fppf サイトの
+射である場合だけを説明する。$S$ または $S'$ だけが大サイトに含まれる場合は、
+まず Section \ref{spaces-section-change-big-site} のとおり大サイトを拡大する。
+
+\begin{lemma}
+\label{spaces-lemma-change-base-scheme}
+大サイト $\Sch_{fppf}$ が与えられたとする。
+$g : S \to S'$ を $\Sch_{fppf}$ の射とする。
+$j : (\Sch/S)_{fppf} \to (\Sch/S')_{fppf}$ を対応する局所化関手とする。
+$F$ を $(\Sch/S)_{fppf}$ 上の集合の層とする。このとき
+\begin{enumerate}
+\item $S'$ 上のスキーム $T'$ に対して
+$j_!F(T'/S') =
+\coprod\nolimits_{\varphi : T' \to S} F(T' \xrightarrow{\varphi} S),$
+\item $F$ がスキーム $X \in \Ob((\Sch/S)_{fppf})$ により表現されるならば、
+$j_!F$ は、$X$ を $S'$ 上のスキームとみなした $j(X)$ により表現される。
+\item $F$ が $S$ 上の代数空間ならば、$j_!F$ は $S'$ 上の代数空間であり、
+$F = U/R$ が表示ならば $j_!F = j(U)/j(R)$ も表示である。
+\end{enumerate}
+$F'$ を $(\Sch/S')_{fppf}$ 上の集合の層とする。このとき
+\begin{enumerate}
+\item[(4)] $S$ 上のスキーム $T$ に対して
+$j^{-1}F'(T/S) = F'(T/S')$ である。
+\item[(5)] $F'$ がスキーム $X' \in \Ob((\Sch/S')_{fppf})$ により
+表現されるならば、$j^{-1}F'$ は表現可能であり、
+$X'_S = S \times_{S'} X'$ により表現される。
+\item[(6)] $F'$ が代数空間ならば $j^{-1}F'$ も代数空間であり、
+$F' = U'/R'$ が表示ならば $j^{-1}F' = U'_S/R'_S$ も表示である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+関手 $j_!$, $j_*$ および $j^{-1}$ は Sites, Lemma
+\ref{sites-lemma-relocalize} で定義され、そこで
+$j = j_{S/S'}$ は対象 $S/S'$ における $(\Sch/S')_{fppf}$ の局所化であることも
+示されている。したがって局所化関手に関するすべての結果を $j$ に使える。
+(1) の公式は Sites, Lemma
+\ref{sites-lemma-describe-j-shriek-good-site} である。
+定義により $j_!$ は制限 $j^{-1}$ の左随伴である。
+したがって $j_!$ は右完全である。
+Sites, Lemma
+\ref{sites-lemma-j-shriek-commutes-equalizers-fibre-products} により、
+ファイバー積および等化子とも可換である。Sites, Lemma
+\ref{sites-lemma-describe-j-shriek-representable} により
+$j_!h_X = h_{j(X)}$ だから (2) が成り立つ。
+$F$ が $S$ 上の代数空間ならば、補題 \ref{spaces-lemma-space-presentation} により
+$F = U/R$ と書け、
+$$
+j_!F = j(U)/j(R)
+$$
+を得る。実際、$j_!$ は右完全なので余等化子と可換し、さらにファイバー積と
+可換する。また $j_!$ はファイバー積と可換するので
+$j(R) = j(U) \times_{j_!F} j(U)$ である。
+射 $j(s), j(t) : j(R) \to j(U)$ は単に射 $s, t : R \to U$ を
+$S'$ 上のスキームの射とみなしたものなので、依然としてエタールである。
+したがって $(j(U), j(R), s, t)$ はエタール同値関係である。
+よって定理 \ref{spaces-theorem-presentation} により $j_!F$ は代数空間である。
+
+\medskip\noindent
+(4), (5), (6) を証明する。$j^{-1}$ の記述は Sites, Section
+\ref{sites-section-localize} にある。$X'/S'$ に付随する表現可能層の制限は、
+Sites, Lemma \ref{sites-lemma-localize-given-products} により
+$X'_S = S \times_{S'} Y'$ に付随する表現可能層である。
+制限関手 $j^{-1}$ は完全なので $j^{-1}F' = U'_S/R'_S$ である。
+再び完全性により、層 $R'_S$ は依然として $U'_S$ 上の同値関係である。
+最後に、二つの写像 $R'_S \to U'_S$ はエタール射 $R' \to U'$ の
+基底変換なのでエタールである。したがって定理
+\ref{spaces-theorem-presentation} により $j^{-1}F' = U'_S/R'_S$ は
+代数空間であり、証明が完了する。
+\end{proof}
+
+\noindent
+表示 $j_!F = j(U)/j(R)$ は、$F$ の表示を単に $S'$ 上のスキームによる
+表示とみなしたものにすぎないことに注意する。したがって次の定義は妥当である。
+
+\begin{definition}
+\label{spaces-definition-base-change}
+$\Sch_{fppf}$ を大 fppf サイトとし、$S \to S'$ をこのサイトの射とする。
+\begin{enumerate}
+\item $F'$ が $S'$ 上の代数空間ならば、{\it $F'$ の $S$ への基底変換}とは、
+補題 \ref{spaces-lemma-change-base-scheme} で述べた代数空間 $j^{-1}F'$ をいう。
+これを $F'_S$ と書く。
+\item $F$ が $S$ 上の代数空間ならば、{\it $S'$ 上の代数空間とみなした $F$}
+とは、補題 \ref{spaces-lemma-change-base-scheme} で述べた $S'$ 上の代数空間
+$j_!F$ をいう。通常は単に $F$ と書き、必要な場合には $j_!F$ と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+代数空間 $j_!F$ には、$S'$ 上の代数空間の標準射
+$j_!F \to S$ が備わる。これは層 $j_!F$ が $h_S$ に写ることから直ちに分かる
+（たとえば補題 \ref{spaces-lemma-change-base-scheme} の明示的記述を参照）。
+実際、Sites, Lemma \ref{sites-lemma-essential-image-j-shriek} で、
+$(\Sch/S)_{fppf}$ 上の層の圏は、$(\Sch/S')_{fppf}$ 上の層と層の写像からなる
+対 $(\mathcal{F}', \mathcal{F}' \to h_S)$ の圏と同値であることを見た。
+ここで層の写像は $\mathcal{F}' \to h_S$ である。
+この同値は層 $\mathcal{F}$ に対し、対
+$(j_!\mathcal{F}, j_!\mathcal{F} \to h_S)$ を対応させる。
+これと上の議論を合わせると、代数空間の圏について次の結果を得る。
+
+\begin{lemma}
+\label{spaces-lemma-category-of-spaces-over-smaller-base-scheme}
+$\Sch_{fppf}$ を大 fppf サイトとし、$S \to S'$ をこのサイトの射とする。
+上の構成は圏の同値
+$$
+\left\{
+\begin{matrix}
+\text{代数空間の}\\
+\text{圏、基底は }S
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{次の対の圏 }(F', F' \to S)\text{：}\\
+\text{代数空間 }F'\text{ は }S'\text{ 上であり、}\\
+\text{代数空間の射 }F' \to S\text{ の基底スキームは }S'
+\end{matrix}
+\right\}
+$$
+を与える。
+\end{lemma}
+
+\begin{proof}
+$F$ を $S$ 上の代数空間とする。左辺から右辺への関手は $F$ に
+対 $(j_!F, j_!F \to S)$ を対応させる。これは補題
+\ref{spaces-lemma-change-base-scheme} により右辺の対象である。
+Sites, Lemma \ref{sites-lemma-essential-image-j-shriek} により、
+これは層の圏の同値を定める。したがって証明を終えるには、
+$F$ が層で $j_!F$ が代数空間ならば $F$ が代数空間であることを
+示せば十分である。補題 \ref{spaces-lemma-space-presentation} のとおり
+$j_!F = U'/R'$ と書く。ここで
+$U', R' \in \Ob((\Sch/S')_{fppf})$ である。合成
+$U' \to j_!F \to S$ と $R' \to j_!F \to S$ は $S'$ 上の
+スキームの射である。対応する $(\Sch/S)_{fppf}$ の対象を $U, R$ と書く。
+二つの射 $R' \to U'$ は $S$ 上の射なので、射 $R \to U$ に対応する。
+これらは単に同じ射を $S$ 上で見たものだから、$S$ 上のエタール同値関係を得る。
+$j_!$ は層の圏の同値を定めるので（上の参照を見よ）、$F = U/R$ である。
+したがって定理 \ref{spaces-theorem-presentation} により $F$ は代数空間である。
+\end{proof}
+
+\noindent
+次の補題は上の結果を少し言い換えたものである。
+
+\begin{lemma}
+\label{spaces-lemma-rephrase}
+$\Sch_{fppf}$ を大 fppf サイトとし、$S \to S'$ をこのサイトの射とする。
+$F'$ を $(\Sch/S')_{fppf}$ 上の層とする。次は同値である。
+\begin{enumerate}
+\item 制限 $F'|_{(\Sch/S)_{fppf}}$ は $S$ 上の代数空間である。
+\item 層 $h_S \times F'$ は $S'$ 上の代数空間である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この制限と直積は Sites, Lemma
+\ref{sites-lemma-essential-image-j-shriek} の圏同値の下で対応するので、
+補題 \ref{spaces-lemma-category-of-spaces-over-smaller-base-scheme} から結論が従う。
+\end{proof}
+
+\noindent
+この節を、両立性に関する補題で終える。
+
+\begin{lemma}
+\label{spaces-lemma-viewed-as-properties}
+$\Sch_{fppf}$ を大 fppf サイトとし、$S \to S'$ をこのサイトの射とする。
+$F$ を $S$ 上の代数空間とする。$T$ を $S$ 上のスキームとし、
+$f : T \to F$ を $S$ 上の射とする。補題
+\ref{spaces-lemma-category-of-spaces-over-smaller-base-scheme} で述べた圏同値を
+$f$ に適用して得られる $S'$ 上の射を $f' : T' \to F'$ とする。
+定義 \ref{spaces-definition-relative-representable-property} のような任意の性質
+$\mathcal{P}$ に対し、$\mathcal{P}(f') \Leftrightarrow \mathcal{P}(f)$ である。
+\end{lemma}
+
+\begin{proof}
+$U$ を $S$ 上のスキームとし、$U \to F$ を全射エタール射とする。
+$U$ を $S'$ 上のスキームとみなしたものを $U'$ と書く。
+補題 \ref{spaces-lemma-change-base-scheme} で $U' \to F'$ は
+全射エタールであることを見た。
+$$
+j(T \times_{f, F} U) = T' \times_{f', F'} U'
+$$
+なので、スキームの射 $T \times_{f, F} U \to U$ は、
+スキームの射 $T' \times_{f', F'} U' \to U'$ と同一視される。
+これは同じ射を異なる基底スキーム上で見たものにすぎない。
+したがって補題 \ref{spaces-lemma-representable-morphisms-spaces-property} から結論が従う。
+\end{proof}

@@ -1,0 +1,6256 @@
+% Generated mechanically from frozen input inputs/p02/ja/tex/simplicial.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{13}
+\chapter{単体的手法}
+
+
+
+\phantomsection
+\label{simplicial-section-phantom}
+
+
+\section{序論}
+\label{simplicial-section-introduction}
+
+\noindent
+本章は単体的手法への最小限の入門である。後で必要になる内容を、その都度ここに
+追加していく。この話題全般の参考文献としては \cite{SimpHom} が挙げられる。
+これらの手法で何ができるかを示す例として、Quillen によるホモトピー代数の論文
+\cite{Quillen}、および Artin と Mazur によるエタール・ホモトピーの論文
+\cite{ArtinMazur} がある。
+
+\section{有限順序集合の圏}
+\label{simplicial-section-Delta}
+
+\noindent
+圏 $\Delta$ は次のように定義される。
+\begin{enumerate}
+\item 対象は $[0], [1], [2], \ldots$ であり、
+$[n] = \{0, 1, 2, \ldots, n\}$ とする。
+\item 射 $[n] \to [m]$ は、対応する集合の間の非減少写像
+$\{0, 1, 2, \ldots, n\} \to \{0, 1, 2, \ldots, m\}$ である。
+\end{enumerate}
+ここで写像 $\varphi : [n] \to [m]$ が{\it 非減少}であるとは、定義により
+$i \geq j$ ならば $\varphi(i) \geq \varphi(j)$ となることをいう。言い換えると、
+$\Delta$ は、非空な有限全順序集合と非減少写像からなる「大きな」圏と同値である。
+射 $[0] \to [n]$ はちょうど $n + 1$ 個、射 $[n] \to [0]$ はちょうど $1$ 個ある。
+射 $[1] \to [n]$ はちょうど $(n + 1)(n + 2)/2$ 個、射 $[n] \to [1]$ は
+ちょうど $n + 2$ 個ある。以下も同様である。
+
+\begin{definition}
+\label{simplicial-definition-face-degeneracy}
+任意の整数 $n\geq 1$ と任意の $0\leq j \leq n$ に対し、$j$ を飛ばす
+順序保存単射を
+{\it $\delta^n_j : [n-1] \to [n]$}
+と書く。任意の整数 $n\geq 0$ と任意の $0\leq j \leq n$ に対し、
+$(\sigma^n_j)^{-1}(\{j\}) = \{j, j + 1\}$ を満たす順序保存全射を
+{\it $\sigma^n_j : [n + 1]  \to [n]$}
+と書く。
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-face-degeneracy}
+$\Delta$ の任意の射は、射 $\delta^n_j$ と $\sigma^n_j$ の合成として書ける。
+\end{lemma}
+
+\begin{proof}
+$\varphi : [n] \to [m]$ を $\Delta$ の射とする。
+$j \not \in \Im(\varphi)$ ならば、ある射 $\psi : [n] \to [m - 1]$ により
+$\varphi$ を $\delta^m_j \circ \psi$ と書ける。
+$\varphi(j) = \varphi(j + 1)$ ならば、ある射 $\psi : [n - 1] \to [m]$ により
+$\varphi$ を $\psi \circ \sigma^{n - 1}_j$ と書ける。上の置換を一回行うたびに
+$n + m$ は小さくなるので、いずれ $\varphi$ は単射かつ全射となり、したがって
+恒等射となる。これで結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-relations-face-degeneracy}
+射 $\delta^n_j$ と $\sigma^n_j$ は次の関係を満たす。
+\begin{enumerate}
+\item $0 \leq i < j \leq n + 1$ ならば
+$\delta^{n + 1}_j \circ \delta^n_i =
+\delta^{n + 1}_i \circ \delta^n_{j - 1}$ である。
+言い換えると、図式
+$$
+\xymatrix{
+& [n] \ar[rd]^{\delta^{n + 1}_j} & \\
+[n - 1] \ar[ru]^{\delta^n_i} \ar[rd]_{\delta^n_{j - 1}} & &
+[n + 1] \\
+& [n] \ar[ru]_{\delta^{n + 1}_i} &
+}
+$$
+は可換である。
+\item $0 \leq i < j \leq n - 1$ ならば
+$\sigma^{n - 1}_j \circ \delta^n_i =
+\delta^{n - 1}_i \circ \sigma^{n - 2}_{j - 1}$ である。
+言い換えると、図式
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n - 1] \ar[ru]^{\delta^n_i} \ar[rd]_{\sigma^{n - 2}_{j - 1}} & &
+[n - 1] \\
+& [n - 2] \ar[ru]_{\delta^{n - 1}_i} &
+}
+$$
+は可換である。
+\item $0 \leq j \leq n - 1$ ならば
+$\sigma^{n - 1}_j \circ \delta^n_j = \text{id}_{[n - 1]}$
+かつ
+$\sigma^{n - 1}_j \circ \delta^n_{j + 1} = \text{id}_{[n - 1]}$ である。
+言い換えると、図式
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n - 1]
+\ar[ru]^{\delta^n_j}
+\ar[rd]_{\delta^n_{j + 1}}
+\ar[rr]^{\text{id}_{[n - 1]}} & & [n - 1] \\
+& [n] \ar[ru]_{\sigma^{n - 1}_j} &
+}
+$$
+は可換である。
+\item $0 < j + 1 < i \leq n$ ならば
+$\sigma^{n - 1}_j \circ \delta^n_i =
+\delta^{n - 1}_{i - 1} \circ \sigma^{n - 2}_j$ である。
+言い換えると、図式
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n - 1] \ar[ru]^{\delta^n_i} \ar[rd]_{\sigma^{n - 2}_j} & &
+[n - 1] \\
+& [n - 2] \ar[ru]_{\delta^{n - 1}_{i - 1}} &
+}
+$$
+は可換である。
+\item $0 \leq i \leq j \leq n - 1$ ならば
+$\sigma^{n - 1}_j \circ \sigma^n_i =
+\sigma^{n - 1}_i \circ \sigma^n_{j + 1}$ である。
+言い換えると、図式
+$$
+\xymatrix{
+& [n] \ar[rd]^{\sigma^{n - 1}_j} & \\
+[n + 1] \ar[ru]^{\sigma^n_i} \ar[rd]_{\sigma^n_{j + 1}} & &
+[n - 1] \\
+& [n] \ar[ru]_{\sigma^{n - 1}_i} &
+}
+$$
+は可換である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+\begin{lemma}
+\label{simplicial-lemma-face-degeneracy-category}
+圏 $\Delta$ は、対象 $[n]$（$n \geq 0$）と射
+$\delta^n_j$、$\sigma^n_j$ をもち、次の性質を満たす普遍的な圏である：
+(a) 任意の射はこれらの射の合成であり、(b) 引理
+\ref{simplicial-lemma-relations-face-degeneracy} に挙げた関係が成り立ち、
+(c) これらの射の間の任意の関係は、その関係式から従う。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+\section{単体的対象}
+\label{simplicial-section-simplicial-object}
+
+\begin{definition}
+\label{simplicial-definition-simplicial-object}
+$\mathcal{C}$ を圏とする。
+\begin{enumerate}
+\item $\mathcal{C}$ の {\it 単体的対象 $U$} とは、$\Delta$ から
+$\mathcal{C}$ への反変関手 $U$、すなわち
+$$
+U : \Delta^{opp} \longrightarrow \mathcal{C}
+$$
+のことである。
+\item $\mathcal{C}$ が集合の圏ならば、$U$ を {\it 単体集合} と呼ぶ。
+\item $\mathcal{C}$ がアーベル群の圏ならば、$U$ を
+{\it 単体アーベル群} と呼ぶ。
+\item 単体的対象の {\it 射 $U \to U'$} とは、関手の自然変換である。
+\item $\mathcal{C}$ の {\it 単体的対象の圏} を
+$\text{Simp}(\mathcal{C})$ と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これは、対象 $U([0]), U([1]), U([2]), \ldots$ があり、任意の非減少写像
+$\varphi$、$\varphi : [m] \to [n]$ に対して射
+$U(\varphi) : U([n]) \to U([m])$ があり、
+$U(\varphi \circ \psi) = U(\psi) \circ U(\varphi)$ を満たすということである。
+
+\medskip\noindent
+特に、唯一の射 $U([0]) \to U([n])$ があり、また $n + 1$ 個の写像
+$[0] \to [n]$ に対応して、ちょうど $n + 1$ 個の射
+$U([n]) \to U([0])$ がある。これらの単体的対象を適切に論じるには、さらに
+記法が必要である。そのために、上の節 \ref{simplicial-section-Delta} で取り出した射を用いる。
+
+\begin{lemma}
+\label{simplicial-lemma-characterize-simplicial-object}
+$\mathcal{C}$ を圏とする。
+\begin{enumerate}
+\item $\mathcal{C}$ の単体的対象 $U$ から、対象の列
+$U_n = U([n])$ と射
+$d^n_j = U(\delta^n_j) : U_n \to U_{n-1}$ および
+$s^n_j = U(\sigma^n_j) : U_n \to U_{n + 1}$ を得る。これらの射は、引理
+\ref{simplicial-lemma-relations-face-degeneracy} に掲げた関係の反対向きの関係、
+すなわち次を満たす。
+\begin{enumerate}
+\item $0 \leq i < j \leq n + 1$ ならば
+$d^n_i \circ d^{n + 1}_j = d^n_{j - 1} \circ d^{n + 1}_i$ である。
+\item $0 \leq i < j \leq n - 1$ ならば
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_{j - 1} \circ d^{n - 1}_i$ である。
+\item $0 \leq j \leq n - 1$ ならば
+$\text{id} = d^n_j \circ s^{n - 1}_j = d^n_{j + 1} \circ s^{n - 1}_j$ である。
+\item $0 < j + 1 < i \leq n$ ならば
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_j \circ d^{n - 1}_{i - 1}$ である。
+\item $0 \leq i \leq j \leq n - 1$ ならば
+$s^n_i \circ s^{n - 1}_j = s^n_{j + 1} \circ s^{n - 1}_i$ である。
+\end{enumerate}
+\item 逆に、(1)(a)--(e) を満たす対象の列 $U_n$ と射
+$d^n_j$、$s^n_j$ が与えられると、$U_n = U([n])$、
+$d^n_j = U(\delta^n_j)$、$s^n_j = U(\sigma^n_j)$ を満たす
+$\mathcal{C}$ の単体的対象 $U$ が一意に存在する。
+\item 単体的対象 $U$ と $U'$ の間の射は、射
+$d^n_j$ および $s^n_j$ と可換する射の族 $U_n \to U'_n$ によって与えられる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+引理 \ref{simplicial-lemma-face-degeneracy-category} から従う。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-relations}
+記法の濫用により、$d^n_i$ の代わりに
+$d_i : U_n \to U_{n - 1}$ と書くことがある。同様に、
+$s_i : U_n \to U_{n + 1}$ とも書く。射 $d^n_i$ と $s^n_i$ の間の関係は
+次のように表せる。
+\begin{enumerate}
+\item $i < j$ ならば $d_i \circ d_j = d_{j - 1} \circ d_i$ である。
+\item $i < j$ ならば $d_i \circ s_j = s_{j - 1} \circ d_i$ である。
+\item $\text{id} = d_j \circ s_j = d_{j + 1} \circ s_j$ である。
+\item $i > j + 1$ ならば $d_i \circ s_j = s_j \circ d_{i - 1}$ である。
+\item $i \leq j$ ならば $s_i \circ s_j = s_{j + 1} \circ s_i$ である。
+\end{enumerate}
+これは、左辺と右辺の合成がともに定義されるときには、対応する等式が成り立つ
+という意味である。
+\end{remark}
+
+\noindent
+唯一の射 $s^0_0 = U(\sigma^0_0) : U_0 \to U_1$ と、二つの射
+$d^1_0 = U(\delta^1_0)$ および
+$d^1_1 = U(\delta^1_1)$ が得られ、後二者は射 $U_1 \to U_0$ である。
+さらに、射 $U_1 \to U_2$ である二つの射
+$s^1_0 = U(\sigma^1_0)$、$s^1_1 = U(\sigma^1_1)$ がある。また、射
+$U_3 \to U_2$ である三つの射
+$d^2_0 = U(\delta^2_0)$、$d^2_1 = U(\delta^2_1)$、$d^2_2 = U(\delta^2_2)$
+がある。以下同様である。
+% SOURCE-ERRATUM-CANDIDATE P02-E0102: frozen source says d^2_i: U_3 -> U_2, but its own definition gives d^2_i: U_2 -> U_1.
+
+\medskip\noindent
+図式的には $U$ を次のように考える。
+$$
+\xymatrix{
+U_2
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+U_1
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+U_0
+\ar@<0ex>[l]
+}
+$$
+ここで $d$-射は右向きの矢印、$s$-射は左向きの矢印である。
+
+\begin{example}
+\label{simplicial-example-constant-simplicial-object}
+最も簡単な例は、値 $X \in \Ob(\mathcal{C})$ をもつ {\it 定値} 単体的対象である。
+すなわち $U_n = X$ であり、すべての写像は $\text{id}_X$ である。
+\end{example}
+
+\begin{example}
+\label{simplicial-example-fibre-products-simplicial-object}
+$Y\to X$ を $\mathcal{C}$ の射とし、すべてのファイバー積
+$Y \times_X Y \times_X \ldots \times_X Y$ が存在すると仮定する。
+このとき $U_n$ を $(n + 1)$ 重ファイバー積とし、写像
+$\varphi : [n] \to [m]$ に「座標」上の写像
+$(y_0, \ldots, y_m) \mapsto (y_{\varphi(0)}, \ldots, y_{\varphi(n)})$
+を対応させる。言い換えると、写像 $U_0 = Y \to U_1 = Y \times_X Y$ は
+対角写像であり、二つの写像 $U_1 = Y \times_X Y \to U_0 = Y$ は射影写像である。
+\end{example}
+
+\noindent
+幾何学的には、上の例 \ref{simplicial-example-fibre-products-simplicial-object} は重要な例である。
+この例から、写像 $d^n_j : U_n \to U_{n - 1}$ を射影写像
+（$j$ 番目の成分を忘れる写像）と考え、写像
+$s^n_j : U_n \to U_{n + 1}$ を対角写像（$j$ 番目の座標を繰り返す写像）と
+考えるのが適切だと分かる。後の諸節でこの見方に戻る。
+
+\begin{lemma}
+\label{simplicial-lemma-si-injective}
+$\mathcal{C}$ を圏とする。$U$ を $\mathcal{C}$ の単体的対象とする。
+各射 $s^n_i : U_n \to U_{n + 1}$ は左逆をもつ。特に $s^n_i$ はモノ射である。
+\end{lemma}
+
+\begin{proof}
+$d_i^{n + 1} \circ s^n_i = \text{id}_{U_n}$ だからである。
+\end{proof}
+
+\section{前層としての単体的対象}
+\label{simplicial-section-simplicial-presheaves}
+
+\noindent
+別の見方として、$\mathcal{C}$ の単体的対象は、$\Delta$ 上の
+$\mathcal{C}$ に値をとる前層と考えることができる。Sites, Definition
+\ref{sites-definition-presheaf} を参照せよ。実際、$U$、$U'$ が
+$\mathcal{C}$ の単体的対象ならば、
+\begin{equation}
+\label{simplicial-equation-simplicial-set-presheaf}
+\Mor(U, U') = \Mor_{\textit{PSh}(\Delta)}(U, U').
+\end{equation}
+以下の内容の一部は、サイトの章にあるより一般的な構成で置き換えることもできる。
+しかし、単体的対象に固有の議論を用いる方が、状況はより明瞭になるように思われる。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{余単体的対象}
+\label{simplicial-section-cosimplicial-object}
+
+\noindent
+圏 $\mathcal{C}$ の余単体的対象は、反対圏 $\mathcal{C}^{opp}$ の
+単体的対象として単純に定義することもできる。しかし、人間の思考は必ずしも
+そのようには働かないので、ここでは余単体的対象を別に導入し、いくつかの
+簡単な性質を述べる。
+
+\begin{definition}
+\label{simplicial-definition-cosimplicial-object}
+$\mathcal{C}$ を圏とする。
+\begin{enumerate}
+\item $\mathcal{C}$ の {\it 余単体的対象 $U$} とは、$\Delta$ から
+$\mathcal{C}$ への共変関手 $U$、すなわち
+$$
+U : \Delta \longrightarrow \mathcal{C}
+$$
+のことである。
+\item $\mathcal{C}$ が集合の圏ならば、$U$ を {\it 余単体集合} と呼ぶ。
+\item $\mathcal{C}$ がアーベル群の圏ならば、$U$ を
+{\it 余単体アーベル群} と呼ぶ。
+\item 余単体的対象の {\it 射 $U \to U'$} とは、関手の自然変換である。
+\item $\mathcal{C}$ の {\it 余単体的対象の圏} を
+$\text{CoSimp}(\mathcal{C})$ と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これは、対象 $U([0]), U([1]), U([2]), \ldots$ があり、任意の非減少写像
+$\varphi$、$\varphi : [m] \to [n]$ に対して射
+$U(\varphi) : U([m]) \to U([n])$ があり、
+$U(\varphi \circ \psi) = U(\varphi) \circ U(\psi)$ を満たすということである。
+
+\medskip\noindent
+特に、唯一の射 $U([n]) \to U([0])$ があり、また $n + 1$ 個の写像
+$[0] \to [n]$ に対応して、ちょうど $n + 1$ 個の射
+$U([0]) \to U([n])$ がある。これらの単体的対象を適切に論じるには、さらに
+記法が必要である。そのために、上の節 \ref{simplicial-section-Delta} で取り出した射を用いる。
+% SOURCE-ERRATUM-CANDIDATE P02-E0103: frozen source says “these simplicial objects” in the cosimplicial section.
+
+\begin{lemma}
+\label{simplicial-lemma-characterize-cosimplicial-object}
+$\mathcal{C}$ を圏とする。
+\begin{enumerate}
+\item $\mathcal{C}$ の余単体的対象 $U$ から、対象の列
+$U_n = U([n])$ と射
+$\delta^n_j = U(\delta^n_j) : U_{n - 1} \to U_n$ および
+$\sigma^n_j = U(\sigma^n_j) : U_{n + 1} \to U_n$ を得る。
+これらの射は、引理 \ref{simplicial-lemma-relations-face-degeneracy} に掲げた関係を満たす。
+\item 逆に、これらの関係を満たす対象の列 $U_n$ と射
+$\delta^n_j$、$\sigma^n_j$ が与えられると、$U_n = U([n])$、
+$\delta^n_j = U(\delta^n_j)$、$\sigma^n_j = U(\sigma^n_j)$ を満たす
+$\mathcal{C}$ の余単体的対象 $U$ が一意に存在する。
+\item 余単体的対象 $U$ と $U'$ の間の射は、射
+$\delta^n_j$ および $\sigma^n_j$ と可換する射の族
+$U_n \to U'_n$ によって与えられる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+引理 \ref{simplicial-lemma-face-degeneracy-category} から従う。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-relations-cosimplicial}
+記法の濫用により、$\delta^n_i$ の代わりに
+$\delta_i : U_{n - 1} \to U_n$ と書くことがある。同様に、
+$\sigma_i : U_{n + 1} \to U_n$ とも書く。射 $\delta^n_i$ と
+$\sigma^n_i$ の間の関係は次のように表せる。
+\begin{enumerate}
+\item $i < j$ ならば
+$\delta_j \circ \delta_i = \delta_i \circ \delta_{j - 1}$ である。
+\item $i < j$ ならば
+$\sigma_j \circ \delta_i = \delta_i \circ \sigma_{j - 1}$ である。
+\item $\text{id} = \sigma_j \circ \delta_j = \sigma_j \circ \delta_{j + 1}$
+である。
+\item $i > j + 1$ ならば
+$\sigma_j \circ \delta_i = \delta_{i - 1} \circ \sigma_j$ である。
+\item $i \leq j$ ならば
+$\sigma_j \circ \sigma_i = \sigma_i \circ \sigma_{j + 1}$ である。
+\end{enumerate}
+これは、左辺と右辺の合成がともに定義されるときには、対応する等式が成り立つ
+という意味である。
+\end{remark}
+
+\noindent
+唯一の射 $\sigma^0_0 = U(\sigma^0_0) : U_1 \to U_0$ と、二つの射
+$\delta^1_0 = U(\delta^1_0)$ および
+$\delta^1_1 = U(\delta^1_1)$ が得られ、後二者は射 $U_0 \to U_1$ である。
+さらに、射 $U_2 \to U_1$ である二つの射
+$\sigma^1_0 = U(\sigma^1_0)$、$\sigma^1_1 = U(\sigma^1_1)$ がある。
+また、射 $U_2 \to U_3$ である三つの射
+$\delta^2_0 = U(\delta^2_0)$、$\delta^2_1 = U(\delta^2_1)$、
+$\delta^2_2 = U(\delta^2_2)$ がある。以下同様である。
+
+\medskip\noindent
+図式的には $U$ を次のように考える。
+$$
+\xymatrix{
+U_0
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+&
+U_1
+\ar@<0ex>[l]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+U_2
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+}
+$$
+ここで $\delta$-射は右向きの矢印、$\sigma$-射は左向きの矢印である。
+
+\begin{example}
+\label{simplicial-example-constant-cosimplicial-object}
+最も簡単な例は、値 $X \in \Ob(\mathcal{C})$ をもつ
+{\it 定値} 余単体的対象である。すなわち $U_n = X$ であり、
+すべての写像は $\text{id}_X$ である。
+\end{example}
+
+\begin{example}
+\label{simplicial-example-push-outs-simplicial-object}
+$X\to Y$ を $C$ の射とし、すべての押し出し
+$Y\amalg_X Y \amalg_X \ldots \amalg_X Y$ が存在すると仮定する。
+このとき $U_n$ を $(n + 1)$ 重押し出しとし、写像
+$\varphi : [n] \to [m]$ に「座標」上の写像
+$$
+(y \text{ in }i\text{th component})
+\mapsto
+(y \text{ in }\varphi(i)\text{th component})
+$$
+を対応させる。言い換えると、写像 $U_1 = Y \amalg_X Y \to U_0 = Y$ は
+各成分上で恒等写像である。二つの写像
+$U_0 = Y \to U_1 = Y \amalg_X Y$ は二つの余射入である。
+% SOURCE-ERRATUM-CANDIDATE P02-E0104: frozen source uses plain C although the ambient category is \mathcal C.
+\end{example}
+
+\begin{example}
+\label{simplicial-example-simplex-cosimplicial-set}
+任意の $n \geq 0$ に対し、余単体集合
+$$
+\Delta \longrightarrow \textit{Sets},\quad
+[k] \longmapsto \Mor_{\Delta}([n], [k])
+$$
+を $C[n]$ と書く。この例は例 \ref{simplicial-example-simplex-simplicial-set} の双対である。
+\end{example}
+
+\begin{lemma}
+\label{simplicial-lemma-di-injective}
+$\mathcal{C}$ を圏とし、$U$ を $\mathcal{C}$ の余単体的対象とする。
+各射 $\delta^n_i : U_{n - 1} \to U_n$ は左逆をもつ。
+特に $\delta^n_i$ はモノ射である。
+\end{lemma}
+
+\begin{proof}
+$j < n$ に対して
+$\sigma_i^{n - 1} \circ \delta^n_i = \text{id}_{U_n}$
+だからである。
+% SOURCE-ERRATUM-CANDIDATE P02-E0105: frozen source has identity object U_n and index j; its own maps require U_{n-1} and i.
+\end{proof}
+
+\section{単体的対象の積}
+\label{simplicial-section-products}
+
+\noindent
+単体的対象の積は、当然、単体的対象の圏における積として定義すべきである。
+しかし、その積は存在するのに以下の記述では与えられない、という混乱を招き得る
+状況が生じる。この混乱を避けるため、積を次のように直接定義する。
+
+\begin{definition}
+\label{simplicial-definition-product}
+$\mathcal{C}$ を圏とする。$U$ と $V$ を $\mathcal{C}$ の単体的対象とする。
+積 $U_n \times V_n$ が $\mathcal{C}$ に存在すると仮定する。
+$U$ と $V$ の {\it 積} とは、次のように定義される単体的対象
+$U \times V$ のことである。
+\begin{enumerate}
+\item $(U \times V)_n = U_n \times V_n$、
+\item $d^n_i = (d^n_i, d^n_i)$、
+\item $s^n_i = (s^n_i, s^n_i)$。
+\end{enumerate}
+言い換えると、$U \times V$ は $\Delta$ 上の前層 $U$ と $V$ の積である。
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-product}
+$U$ と $V$ を圏 $\mathcal{C}$ の単体的対象とする。
+$U \times V$ が存在するならば、$\mathcal{C}$ の任意の第三の単体的対象 $W$ に対して
+$$
+\Mor(W, U \times V) =
+\Mor(W, U) \times
+\Mor(W, V)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+\section{単体的対象のファイバー積}
+\label{simplicial-section-fibre-products}
+
+\noindent
+単体的対象のファイバー積は、当然、単体的対象の圏におけるファイバー積として
+定義すべきである。しかし、そのファイバー積は存在するのに以下の記述では
+与えられない、という混乱を招き得る状況が生じる。この混乱を避けるため、
+ファイバー積を次のように直接定義する。
+
+\begin{definition}
+\label{simplicial-definition-fibre-product}
+$\mathcal{C}$ を圏とし、$U, V, W$ を $\mathcal{C}$ の単体的対象とする。
+$a : V \to U$、$b : W \to U$ を射とする。ファイバー積
+$V_n \times_{U_n} W_n$ が $\mathcal{C}$ に存在すると仮定する。
+$U$ 上の $V$ と $W$ の {\it ファイバー積} とは、次のように定義される
+単体的対象 $V \times_U W$ のことである。
+\begin{enumerate}
+\item $(V \times_U W)_n = V_n \times_{U_n} W_n$、
+\item $d^n_i = (d^n_i, d^n_i)$、
+\item $s^n_i = (s^n_i, s^n_i)$。
+\end{enumerate}
+言い換えると、$V \times_U W$ は $\Delta$ 上の前層 $U$ 上での前層
+$V$ と $W$ のファイバー積である。
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-fibre-product}
+$U, V, W$ を圏 $\mathcal{C}$ の単体的対象とし、
+$a : V \to U$、$b : W \to U$ を射とする。
+$V \times_U W$ が存在するならば、$\mathcal{C}$ の任意の第四の単体的対象 $T$ に対して
+$$
+\Mor(T, V \times_U W) =
+\Mor(T, V) \times_{\Mor(T, U)}
+\Mor(T, W)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+\section{単体的対象の押し出し}
+\label{simplicial-section-push-outs}
+
+\noindent
+単体的対象の押し出しは、当然、単体的対象の圏における押し出しとして定義すべき
+である。しかし、押し出しは存在するのに以下の記述では与えられない、という
+混乱を招き得る状況が生じる。この混乱を避けるため、押し出しを次のように
+直接定義する。
+
+\begin{definition}
+\label{simplicial-definition-push-out}
+$\mathcal{C}$ を圏とし、$U, V, W$ を $\mathcal{C}$ の単体的対象とする。
+$a : U \to V$、$b : U \to W$ を射とする。押し出し
+$V_n \amalg_{U_n} W_n$ が $\mathcal{C}$ に存在すると仮定する。
+$U$ 上の $V$ と $W$ の {\it 押し出し} とは、次のように定義される
+単体的対象 $V\amalg_U W$ のことである。
+\begin{enumerate}
+\item $(V \amalg_U W)_n = V_n \amalg_{U_n} W_n$、
+\item $d^n_i = (d^n_i, d^n_i)$、
+\item $s^n_i = (s^n_i, s^n_i)$。
+\end{enumerate}
+言い換えると、$V\amalg_U W$ は $\Delta$ 上の前層 $U$ 上での前層
+$V$ と $W$ の押し出しである。
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-push-out}
+$U, V, W$ を圏 $\mathcal{C}$ の単体的対象とし、
+$a : U \to V$、$b : U \to W$ を射とする。
+$V\amalg_U W$ が存在するならば、$\mathcal{C}$ の任意の第四の単体的対象 $T$ に対して
+$$
+\Mor(V\amalg_U W, T) =
+\Mor(V, T) \times_{\Mor(U, T)}
+\Mor(W, T)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{余単体的対象の積}
+\label{simplicial-section-products-cosimplicial}
+
+\noindent
+余単体的対象の積は、当然、余単体的対象の圏における積として定義すべきである。
+しかし、その積は存在するのに以下の記述では与えられない、という混乱を招き得る
+状況が生じる。この混乱を避けるため、積を次のように直接定義する。
+
+\begin{definition}
+\label{simplicial-definition-product-cosimplicial-objects}
+$\mathcal{C}$ を圏とする。$U$ と $V$ を $\mathcal{C}$ の余単体的対象とする。
+積 $U_n \times V_n$ が $\mathcal{C}$ に存在すると仮定する。
+$U$ と $V$ の {\it 積} とは、次のように定義される余単体的対象
+$U \times V$ のことである。
+\begin{enumerate}
+\item $(U \times V)_n = U_n \times V_n$、
+\item 任意の $\varphi : [n] \to [m]$ に対する写像
+$(U \times V)(\varphi) : U_n \times V_n \to U_m \times V_m$ は
+積 $U(\varphi) \times V(\varphi)$ である。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-product-cosimplicial-objects}
+$U$ と $V$ を圏 $\mathcal{C}$ の余単体的対象とする。
+$U \times V$ が存在するならば、$\mathcal{C}$ の任意の第三の余単体的対象 $W$ に対して
+$$
+\Mor(W, U \times V) =
+\Mor(W, U) \times
+\Mor(W, V)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\section{余単体的対象のファイバー積}
+\label{simplicial-section-fibre-products-cosimplicial}
+
+\noindent
+余単体的対象のファイバー積は、当然、余単体的対象の圏におけるファイバー積として
+定義すべきである。しかし、その積は存在するのに以下の記述では与えられない、
+という混乱を招き得る状況が生じる。この混乱を避けるため、ファイバー積を
+次のように直接定義する。
+
+\begin{definition}
+\label{simplicial-definition-fibre-product-cosimplicial-objects}
+$\mathcal{C}$ を圏とし、$U, V, W$ を $\mathcal{C}$ の余単体的対象とする。
+$a : V \to U$ と $b : W \to U$ を射とする。ファイバー積
+$V_n \times_{U_n} W_n$ が $\mathcal{C}$ に存在すると仮定する。
+$U$ 上の $V$ と $W$ の {\it ファイバー積} とは、次のように定義される
+余単体的対象 $V \times_U W$ のことである。
+\begin{enumerate}
+\item $(V \times_U W)_n = V_n \times_{U_n} W_n$、
+\item 任意の $\varphi : [n] \to [m]$ に対する写像
+$(V \times_U W)(\varphi) : V_n \times_{U_n} W_n \to V_m \times_{U_m} W_m$
+は積 $V(\varphi) \times_{U(\varphi)} W(\varphi)$ である。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-fibre-product-cosimplicial-objects}
+$U, V, W$ を圏 $\mathcal{C}$ の余単体的対象とし、
+$a : V \to U$、$b : W \to U$ を射とする。
+$V \times_U W$ が存在するならば、$\mathcal{C}$ の任意の第四の余単体的対象 $T$ に対して
+$$
+\Mor(T, V \times_U W) =
+\Mor(T, V) \times_{\Mor(T, U)}
+\Mor(T, W)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\section{単体集合}
+\label{simplicial-section-simplicial-set}
+
+\noindent
+$U$ を単体集合とする。$U_0$ を {\it $0$-単体}、集合 $U_1$ を
+{\it $1$-単体}、集合 $U_2$ を {\it $2$-単体}、以下同様に考えるとよい。
+
+\medskip\noindent
+写像 $s^n_j : U_n \to U_{n + 1}$ は、$n$-単体 $A$ に、
+その $(j, j + 1)$-辺が $A$ の頂点 $j$ へつぶされた退化
+$(n + 1)$-単体 $B$ を対応させる写像と考える。
+写像 $d^n_j : U_n \to U_{n - 1}$ は、$n$-単体 $A$ にその面の一つ、
+すなわち頂点 $j$ を除いた面を対応させる写像と考える。
+このようにして、写像 $s^n_j$ と $d^n_j$ の間の関係を幾何学的に
+視覚化できるようになる。
+
+\begin{definition}
+\label{simplicial-definition-terminology-simplicial-sets}
+$U$ を単体集合とする。$x$ が $U$ の {\it $n$-単体} であるとは、
+$x$ が $U_n$ の元であることをいう。$y$ が $x$ の {\it 第 $j$ 面}
+であるとは、$d^n_jx = y$ であることをいう。$z$ が $x$ の
+{\it 第 $j$ 退化} であるとは、$z = s^n_jx$ であることをいう。
+ある単体が別の単体の退化であるとき、その単体を {\it 退化している}
+という。
+\end{definition}
+
+\noindent
+基本的な例をいくつか挙げる。
+
+\begin{example}
+\label{simplicial-example-simplex-simplicial-set}
+各 $n \geq 0$ に対し、次の単体集合を $\Delta[n]$ で表す。
+$$
+\Delta^{opp} \longrightarrow \textit{Sets},\quad
+[k] \longmapsto \Mor_{\Delta}([k], [n])
+$$
+以下の主張の確認は読者に委ねる。$m > n$ ならば、
+$\Delta[n]$ のすべての $m$-単体は退化している。
+$\Delta[n]$ には非退化な $n$-単体がただ一つあり、それは
+$\text{id}_{[n]}$ である。
+\end{example}
+
+\begin{lemma}
+\label{simplicial-lemma-simplex-map}
+$U$ を単体集合とし、$n \geq 0$ を整数とする。標準的な全単射
+$$
+\Mor(\Delta[n], U)
+\longrightarrow
+U_n
+$$
+が存在し、射 $\varphi$ を $\Delta[n]$ の唯一の非退化 $n$-単体に
+おける $\varphi$ の値へ写す。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{example}
+\label{simplicial-example-simplex-category}
+$\Delta$ における $[n]$ 上の対象の圏 $\Delta/[n]$ を考える。
+Categories, Example \ref{categories-example-category-over-X} を参照せよ。
+関手 $p : \Delta/[n] \to \Delta$ が存在する。
+$[k]$ 上の $p$ のファイバー圏（Categories, Section
+\ref{categories-section-fibred-groupoids} を参照）は、対象として
+$\Delta[n]$ の $k$-単体の集合 $\Delta[n]_k$ をもち、射として恒等射のみをもつ。
+$\Delta$ の各射 $\varphi : [k] \to [l]$ と、$[l]$ 上のファイバー圏の
+各対象 $\psi : [l] \to [n]$ に対し、$\varphi$ を覆う射をもつ
+$[k]$ 上の対象がただ一つ存在し、それは
+$\psi \circ \varphi : [k] \to [n]$ である。したがって
+$\Delta/[n]$ は $\Delta$ 上で集合にファイバー化されている。
+言い換えれば、$\Delta/[n]$ は $\Delta$ 上の集合の前層とみなせる。
+Categories, Example
+\ref{categories-example-fibred-category-from-functor-of-points} も参照せよ。
+そして、この集合の前層は単体集合 $\Delta[n]$ と一致する。
+特に、式 (\ref{simplicial-equation-simplicial-set-presheaf}) と上の補題
+\ref{simplicial-lemma-simplex-map} から、任意の単体集合 $U$ に対して公式
+$$
+\Mor_{\textit{PSh}(\Delta)}(\Delta/[n], U) = U_n
+$$
+を得る。
+\end{example}
+
+\begin{lemma}
+\label{simplicial-lemma-product-degenerate}
+$U$, $V$ を単体集合とし、$a, b \geq 0$ を整数とする。
+$n > a$ ならば $U$ のすべての $n$-単体が退化していると仮定する。
+$n > b$ ならば $V$ のすべての $n$-単体が退化していると仮定する。
+このとき、$n > a + b$ ならば $U \times V$ のすべての $n$-単体は
+退化している。
+\end{lemma}
+
+\begin{proof}
+$n > a + b$ と仮定する。$(u, v) \in (U \times V)_n = U_n \times V_n$
+とする。仮定により、$u = U(\alpha)(u')$ かつ $v = V(\beta)(v')$
+となる $\alpha : [n] \to [a]$、$u' \in U_a$、
+$\beta : [n] \to [b]$、$v' \in V_b$ が存在する。
+$n > a + b$ なので、$\alpha(i) = \alpha(i + 1)$ かつ
+$\beta(i) = \beta(i + 1)$ となる $0 \leq i \leq a + b$ が存在する。
+したがって、$(u, v)$ は $s^{n - 1}_i$ の像に属する。
+\end{proof}
+
+
+
+\section{切断単体的対象と骨格関手}
+\label{simplicial-section-skeleton}
+
+\noindent
+$\Delta_{\leq n}$ を、対象 $[0], [1], [2], \ldots, [n]$ をもつ
+$\Delta$ の充満部分圏とする。$\mathcal{C}$ を圏とする。
+
+\begin{definition}
+\label{simplicial-definition-truncated-simplicial-object}
+$\mathcal{C}$ の {\it $n$-切断単体的対象} とは、
+$\Delta_{\leq n}$ から $\mathcal{C}$ への反変関手である。
+{\it $n$-切断単体的対象の射} とは関手の変換である。
+$\mathcal{C}$ の $n$-切断単体的対象の圏を記号
+$\text{Simp}_n(\mathcal{C})$ で表す。
+\end{definition}
+
+\noindent
+$\mathcal{C}$ の単体的対象 $U$ が与えられたとき、切断
+$\text{sk}_n U$ とは $U$ の部分圏 $\Delta_{\leq n}$ への制限である。
+これにより、$\mathcal{C}$ の単体的対象の圏から
+$\mathcal{C}$ の $n$-切断単体的対象の圏への {\it 骨格関手}
+$$
+\text{sk}_n :
+\text{Simp}(\mathcal{C}) \longrightarrow \text{Simp}_n(\mathcal{C})
+$$
+が定まる。文献中の別の関手との混同を避けるため、Remark
+\ref{simplicial-remark-sk-literature} を参照せよ。
+
+
+
+
+\section{単体集合との積}
+\label{simplicial-section-product-with-simplicial-sets}
+
+\noindent
+$\mathcal{C}$ を圏とし、$U$ を単体集合、$V$ を $\mathcal{C}$ の
+単体的対象とする。$\mathcal{C}$ の単体的対象 $W$ に集合
+\begin{equation}
+\label{simplicial-equation-functor-product-with-simplicial-set}
+\left\{
+(f_{n, u} : V_n \to W_n)_{n \geq 0, u \in U_n}
+\text{ such that }
+\begin{matrix}
+\forall \varphi : [m] \to [n] \\
+f_{m, U(\varphi)(u)} \circ V(\varphi) = W(\varphi) \circ f_{n, u}
+\end{matrix}
+\right\}
+\end{equation}
+を対応させる共変関手を考えることができる。この関手が
+$\Mor_{\text{Simp}(\mathcal{C})}(Q, -)$ の形であるならば、$Q$ を
+$U$ と $V$ の積と考えることができる。このように形式化する代わりに、
+積を次のように直接定義する。
+
+\begin{definition}
+\label{simplicial-definition-product-with-simplicial-set}
+$\mathcal{C}$ を圏とし、$\mathcal{C}$ の任意の二対象の余積が存在するとする。
+$U$ を単体集合、$V$ を $\mathcal{C}$ の単体的対象とする。
+各 $U_n$ が有限かつ空でないと仮定する。このとき、$U$ と $V$ の
+{\it 積 $U \times V$} を、その第 $n$ 項が
+$$
+(U \times V)_n = \coprod\nolimits_{u\in U_n} V_n
+$$
+であり、$\varphi : [m] \to [n]$ に対する写像が次の射で与えられる
+$\mathcal{C}$ の単体的対象として定義する。
+$$
+\coprod\nolimits_{u\in U_n} V_n
+\longrightarrow
+\coprod\nolimits_{u'\in U_m} V_m
+$$
+この射は、$u$ に対応する成分 $V_n$ を、射 $V(\varphi)$ によって
+$u' = U(\varphi)(u)$ に対応する成分 $V_m$ へ写す。
+より緩くは、$\mathcal{C}$ について何も仮定せず、上に表示した余積が
+すべて存在するとき、{\it 積 $U \times V$ が存在する} という。
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-check-product-with-simplicial-set}
+$\mathcal{C}$ を圏とし、$\mathcal{C}$ の任意の二対象の余積が存在するとする。
+$U$ を単体集合、$V$ を $\mathcal{C}$ の単体的対象とし、
+各 $U_n$ が有限かつ空でないと仮定する。関手
+$W \mapsto \Mor_{\text{Simp}(\mathcal{C})}(U \times V, W)$ は、
+$W$ を式 (\ref{simplicial-equation-functor-product-with-simplicial-set}) の集合へ
+写す関手と標準的に同型である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-back-to-U}
+$\mathcal{C}$ を圏とし、$\mathcal{C}$ の任意の二対象の余積が存在するとする。
+すべての成分が有限かつ空でない単体集合の圏を、一時的に
+$\textit{FSSets}$ と表す。
+\begin{enumerate}
+\item 規則 $(U, V) \mapsto U \times V$ は関手
+$\textit{FSSets} \times \text{Simp}(\mathcal{C})
+\to \text{Simp}(\mathcal{C})$ を定める。
+\item 上の各 $U$, $V$ に対し、単体的対象の標準的な写像
+$$
+U \times V \longrightarrow V
+$$
+があり、$(U \times V)_n = \coprod_u V_n$ の各成分上で恒等写像を
+とることにより定義される。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+上の構成の特別な場合を簡単に調べる。$\mathcal{C}$ を圏とし、
+$X$ を $\mathcal{C}$ の対象、$k \geq 0$ を整数とする。
+すべての余積 $X \amalg \ldots \amalg X$ が存在するならば、上の定義により積
+$$
+X \times \Delta[k]
+$$
+が存在する。ここで $X$ は、それに対応する定値単体的対象とみなしている。
+
+\begin{lemma}
+\label{simplicial-lemma-morphism-from-coproduct}
+$X$ と $k$ を上のとおりとする。$\mathcal{C}$ の任意の単体的対象 $V$ に対し、
+標準的な全単射
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(X \times \Delta[k], V)
+\longrightarrow
+\Mor_\mathcal{C}(X, V_k).
+$$
+が存在し、$\gamma$ を、$\text{id}_{[k]}$ に対応する成分への射
+$\gamma_k$ の制限へ写す。同様に、$n \geq k$ であり、$W$ が
+$\mathcal{C}$ の $n$-切断単体的対象であるならば、
+$$
+\Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_n(X \times \Delta[k]), W)
+=
+\Mor_\mathcal{C}(X, W_k).
+$$
+を得る。
+\end{lemma}
+
+\begin{proof}
+射 $\gamma : X \times \Delta[k] \to V$ は、
+$\alpha : [n] \to [k]$ で添字付けられた射族
+$\gamma_\alpha : X \to V_n$ により与えられる。これらの射は、
+すべての $\varphi : [m] \to [n]$ に対して図式
+$$
+\xymatrix{
+X \ar[r]^{\gamma_\alpha} \ar[d]^{\text{id}_X} & V_n \ar[d]^{V(\varphi)} \\
+X \ar[r]^{\gamma_{\alpha \circ \varphi}} & V_m
+}
+$$
+が可換であるという規則を満たさなければならない。
+$\alpha = \text{id}_{[k]}$ ととると、任意の
+$\varphi : [m] \to [k]$ に対して
+$\gamma_\varphi = V(\varphi) \circ \gamma_{\text{id}_{[k]}}$ を得る。
+したがって、射 $\gamma$ は $\text{id}_{[k]}$ に対応する成分上での
+$\gamma$ の値によって決まる。逆に、そのような射
+$f : X \to V_k$ が与えられれば、
+$\gamma_\alpha = V(\alpha) \circ f$ とおいて射 $\gamma$ を容易に構成できる。
+
+\medskip\noindent
+切断された場合も同様であり、読者に委ねる。
+\end{proof}
+
+\noindent
+この特別な例として $k = 0$ の場合がある。この場合、補題の公式は単に
+$$
+\Mor_\mathcal{C}(X, V_0)
+=
+\Mor_{\text{Simp}(\mathcal{C})}(X, V)
+$$
+を述べている。ここで右辺の $X$ は値 $X$ の定値単体的対象を表す。
+以下では、この公式を断りなく用いる。
+
+
+
+
+\section{単体集合から余単体的対象への Hom}
+\label{simplicial-section-hom-from-simplicial-sets-into-cosimplicial}
+
+\noindent
+$\mathcal{C}$ を圏とする。$U$ を $\mathcal{C}$ の単体的対象、
+$V$ を $\mathcal{C}$ の余単体的対象とする。このとき、次のように
+余単体集合 $\Hom_\mathcal{C}(U, V)$ を得る。
+\begin{enumerate}
+\item $\Hom_\mathcal{C}(U, V)_n = \Mor_\mathcal{C}(U_n, V_n)$ とおく。
+\item $\varphi : [m] \to [n]$ に対し、
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$ で与えられる写像
+$\Hom_\mathcal{C}(U, V)_m \to \Hom_\mathcal{C}(U, V)_n$ をとる。
+\end{enumerate}
+これが次の定義の動機である。
+
+\begin{definition}
+\label{simplicial-definition-hom-deltak-cosimplicial}
+$\mathcal{C}$ を有限積をもつ圏とする。$V$ を $\mathcal{C}$ の
+余単体的対象とする。$U$ を、各 $U_n$ が有限かつ空でない単体集合とする。
+{\it $\Hom(U, V)$} を、次のように定義される $\mathcal{C}$ の
+余単体的対象と定める。
+\begin{enumerate}
+\item $\Hom(U, V)_n = \prod_{u \in U_n} V_n$ とおく。言い換えれば、
+これは、その $X$-値点が
+$$
+\Mor_\mathcal{C}(X, \Hom(U, V)_n)
+=
+\text{Map}(U_n, \Mor_\mathcal{C}(X, V_n))
+$$
+を満たす $\mathcal{C}$ の一意な対象である。
+\item $\varphi : [m] \to [n]$ に対し、上の $X$-値点上で
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$ により与えられる写像
+$\Hom(U, V)_m \to \Hom(U, V)_n$ をとる。
+\end{enumerate}
+\end{definition}
+
+\noindent
+積の間の写像を用いて定義を書き下すことは読者に委ねる。
+また、この構成は $U$ に関して反変的に、$V$ に関して共変的に関手的であり、
+単体集合と単体的対象との積の場合の補題 \ref{simplicial-lemma-back-to-U} とまったく同様である。
+
+
+
+
+\section{余単体集合から単体的対象への Hom}
+\label{simplicial-section-hom-from-cosimplicial-sets-into-simplicial}
+
+\noindent
+$\mathcal{C}$ を圏とする。$U$ を $\mathcal{C}$ の余単体的対象、
+$V$ を $\mathcal{C}$ の単体的対象とする。このとき、次のように
+単体集合 $\Hom_\mathcal{C}(U, V)$ を得る。
+\begin{enumerate}
+\item $\Hom_\mathcal{C}(U, V)_n = \Mor_\mathcal{C}(U_n, V_n)$ とおく。
+\item $\varphi : [m] \to [n]$ に対し、
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$ で与えられる写像
+$\Hom_\mathcal{C}(U, V)_n \to \Hom_\mathcal{C}(U, V)_m$ をとる。
+\end{enumerate}
+これが次の定義の動機である。
+
+\begin{definition}
+\label{simplicial-definition-hom-deltak-simplicial}
+$\mathcal{C}$ を有限積をもつ圏とする。$V$ を $\mathcal{C}$ の
+単体的対象とする。$U$ を、各 $U_n$ が有限かつ空でない余単体集合とする。
+{\it $\Hom(U, V)$} を、次のように定義される $\mathcal{C}$ の
+単体的対象と定める。
+\begin{enumerate}
+\item $\Hom(U, V)_n = \prod_{u \in U_n} V_n$ とおく。言い換えれば、
+これは、その $X$-値点が
+$$
+\Mor_\mathcal{C}(X, \Hom(U, V)_n)
+=
+\text{Map}(U_n, \Mor_\mathcal{C}(X, V_n))
+$$
+を満たす $\mathcal{C}$ の一意な対象である。
+\item $\varphi : [m] \to [n]$ に対し、上の $X$-値点上で
+$f \mapsto V(\varphi) \circ f \circ U(\varphi)$ により与えられる写像
+$\Hom(U, V)_n \to \Hom(U, V)_m$ をとる。
+\end{enumerate}
+\end{definition}
+
+\noindent
+積の間の写像を用いて定義を書き下すことは読者に委ねる。
+また、この構成は $U$ に関して反変的に、$V$ に関して共変的に関手的であり、
+単体集合と単体的対象との積の場合の補題 \ref{simplicial-lemma-back-to-U} とまったく同様である。
+
+\medskip\noindent
+上の構成を特別な場合に書き下す。$X$ を圏 $\mathcal{C}$ の対象とする。
+自己積 $X \times \ldots \times X$ が存在すると仮定する。
+$k$ を整数とする。項
+$$
+U_n = \prod\nolimits_{\alpha \in \Mor([k], [n])} X
+$$
+をもち、$\varphi : [m] \to [n]$ に対する写像が
+$$
+U(\varphi) :
+\prod\nolimits_{\alpha \in \Mor([k], [n])} X
+\longrightarrow
+\prod\nolimits_{\alpha' \in \Mor([k], [m])} X, \quad
+(f_{\alpha})_{\alpha} \longmapsto
+(f_{\varphi \circ \alpha'})_{\alpha'}
+$$
+で与えられる単体的対象 $U$ を考える。「座標」でいえば、元
+$(x_\alpha)_\alpha$ は元 $(x_{\varphi \circ \alpha'})_{\alpha'}$ へ写る。
+$X$ を定値単体的対象 $X$ とみなし、$C[k]$ を Example
+\ref{simplicial-example-simplex-cosimplicial-set} の余単体集合とするとき、
+この対象は $\Hom(C[k], X)$ に等しいと主張する。
+
+\begin{lemma}
+\label{simplicial-lemma-morphism-into-product}
+$X$, $k$, $U$ を上のとおりとする。
+\begin{enumerate}
+\item $\mathcal{C}$ の任意の単体的対象 $V$ に対し、標準的な全単射
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(V, U)
+\longrightarrow
+\Mor_\mathcal{C}(V_k, X).
+$$
+が存在し、$\gamma$ を、$\text{id}_{[k]}$ に対応する因子への射影と
+$\gamma_k$ との合成へ写す。
+\item 同様に、$W$ が $\mathcal{C}$ の $k$-切断単体的対象ならば、
+$$
+\Mor_{\text{Simp}_k(\mathcal{C})}(W, \text{sk}_k U)
+=
+\Mor_\mathcal{C}(W_k, X).
+$$
+を得る。
+\item 上で構成した対象 $U$ は、$C[k]$ を Example
+\ref{simplicial-example-simplex-cosimplicial-set} の余単体集合としたときの
+$\Hom(C[k], X)$ の一つの実現である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず (1) を証明する。$\gamma : V \to U$ が射であると仮定する。
+これは、$\alpha : [k] \to [n]$ に対する射族
+$\gamma_{\alpha} : V_n \to X$ により与えられる。
+これらの射は、すべての $\varphi : [m] \to [n]$ に対して図式
+$$
+\xymatrix{
+X \ar[d]^{\text{id}_X} &
+V_n \ar[d]^{V(\varphi)}
+\ar[l]^{\gamma_{\varphi \circ \alpha'}} \\
+X &
+V_m \ar[l]_{\gamma_{\alpha'}}
+}
+$$
+がすべての $\alpha' : [k] \to [m]$ について可換であるという規則を
+満たさなければならない。$\alpha' = \text{id}_{[k]}$ ととると、
+任意の $\varphi : [k] \to [n]$ に対して
+$\gamma_\varphi = \gamma_{\text{id}_{[k]}} \circ V(\varphi)$ を得る。
+したがって、射 $\gamma$ は $\text{id}_{[k]}$ に対応する
+$\gamma_k$ の成分によって決まる。逆に、そのような射
+$f : V_k \to X$ が与えられれば、$\gamma_\alpha = f \circ V(\alpha)$
+とおいて射 $\gamma$ を容易に構成できる。
+
+\medskip\noindent
+切断された場合も同様であり、読者に委ねる。
+
+\medskip\noindent
+(3) は、$U$ の構成と、$C[k]_n = \Mor([k], [n])$ が $U_n$ の構成で
+用いた添字集合であるという事実から直ちに従う。
+\end{proof}
+
+\section{内部 Hom}
+\label{simplicial-section-internal-hom}
+
+\noindent
+% Frozen-source candidate P02-E0106; no source correction applied.
+$\mathcal{C}$ を有限個の空でない積をもつ圏とする。$U$, $V$ を
+$\mathcal{C}$ の単体的対象とする。場合によっては関手
+$$
+\text{Simp}(\mathcal{C})^{opp} \longrightarrow \textit{Sets}, \quad
+W \longmapsto \Mor_{\text{Simp}(\mathcal{C})}(W \times V, U)
+$$
+は表現可能である。この場合、得られる $\mathcal{C}$ の単体的対象を
+$\SheafHom(V, U)$ で表し、{\it $V$ から $U$ への内部 Hom が存在する}
+という。さらに、この場合、$\mathcal{C}$ の $X$ が与えられると、
+\begin{align*}
+\Mor_\mathcal{C}(X, \SheafHom(V, U)_n)
+& =
+\Mor_{\text{Simp}(\mathcal{C})}(X \times \Delta[n], \SheafHom(V, U)) \\
+& =
+\Mor_{\text{Simp}(\mathcal{C})}(X \times \Delta[n]\times V, U) \\
+& =
+\Mor_{\text{Simp}(\mathcal{C})}(X, \SheafHom(\Delta[n] \times V, U)) \\
+& =
+\Mor_\mathcal{C}(X, \SheafHom(\Delta[n] \times V, U)_0)
+\end{align*}
+が成り立つ。ただし、$\SheafHom(\Delta[n] \times V, U)$ も存在するとする。
+最初と最後の等式は補題 \ref{simplicial-lemma-morphism-from-coproduct} から従う。
+
+\medskip\noindent
+ここから得られる教訓は次のとおりである。$U$ と $V$ が与えられ、
+内部 Hom を構成したいならば、対象
+$$
+\SheafHom(\Delta[n] \times V, U)_0
+$$
+の構成を試みるべきである。これらが $\SheafHom(V, U)$ の第 $n$ 項と
+なるはずだからである。次節では、単体的対象
+「$\Hom(\Delta[n], U)$」の構成を調べる。
+
+
+\section{単体集合から単体的対象への Hom}
+\label{simplicial-section-hom-from-simplicial-sets}
+
+\noindent
+内部 Hom の議論を動機として、単体集合から圏 $\mathcal{C}$ の
+与えられた単体的対象への射を分類すべき単体的対象を定義する。
+
+\begin{definition}
+\label{simplicial-definition-hom-from-simplicial-set}
+$\mathcal{C}$ を、任意の二対象の余積が存在する圏とする。
+$U$ を単体集合とし、すべての $n \geq 0$ に対して $U_n$ は有限かつ
+空でないとする。$V$ を $\mathcal{C}$ の単体的対象とする。
+$\mathcal{C}$ の単体的対象であって
+{\it $\Hom(U, V)$} と表されるものを、$\mathcal{C}$ の単体的対象
+$W$ に関して関手的に
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(W, \Hom(U, V))
+=
+\Mor_{\text{Simp}(\mathcal{C})}(W \times U, V)
+$$
+を満たす任意の対象とする。
+\end{definition}
+
+\noindent
+もちろん $\Hom(U, V)$ は存在するとは限らない。また、Section
+\ref{simplicial-section-internal-hom} の議論から、それが存在するならば
+$\Hom(U, V)_n = \Hom(U \times \Delta[n], V)_0$ であると予想される。
+$\Hom(U, V)$ は内部 Hom ではないので、これらの Hom 対象には
+イタリック体の記法を用いない。
+
+\begin{lemma}
+\label{simplicial-lemma-exists-hom-0-from-simplicial-set}
+圏 $\mathcal{C}$ は任意の二対象の余積と可算極限をもつと仮定する。
+$U$ を単体集合とし、すべての $n \geq 0$ に対して $U_n$ は有限かつ
+空でないとする。$V$ を $\mathcal{C}$ の単体的対象とする。このとき関手
+\begin{eqnarray*}
+\mathcal{C}^{opp} & \longrightarrow & \textit{Sets} \\
+X
+& \longmapsto &
+\Mor_{\text{Simp}(\mathcal{C})}(X \times U, V)
+\end{eqnarray*}
+は表現可能である。
+\end{lemma}
+
+\begin{proof}
+$X \times U$ から $V$ への射は、$n \geq 0$ および $u \in U_n$ に
+対する射 $f_u : X \to V_n$ の集まりにより与えられる。そして、その
+集まりが実際に射を定めるための必要十分条件は、すべての
+$\varphi : [m] \to [n]$ に対して、図式
+$$
+\xymatrix{
+X \ar[r]^{f_u} \ar[d]_{\text{id}_X} & V_n \ar[d]^{V(\varphi)} \\
+X \ar[r]^{f_{U(\varphi)(u)}} & V_m
+}
+$$
+がすべて可換であることである。したがって、圏 $\mathcal{U}$ と関手
+$\mathcal{V} : \mathcal{U}^{opp} \to \mathcal{C}$ を次のように導入するのが自然である。
+\begin{enumerate}
+\item $\mathcal{U}$ の対象集合は $\coprod_{n \geq 0} U_n$ である。
+\item $u' \in U_m$ から $u \in U_n$ への射とは、
+$U(\varphi)(u) = u'$ を満たす $\varphi : [m] \to [n]$ である。
+\item $u \in U_n$ に対して $\mathcal{V}(u) = V_n$ とおく。
+\item $U(\varphi)(u) = u'$ を満たす $\varphi : [m] \to [n]$ に対して
+$\mathcal{V}(\varphi) = V(\varphi) : V_n \to V_m$ とおく。
+\end{enumerate}
+この時点で、考えている関手は
+$$
+\lim_{\mathcal{U}^{opp}} \mathcal{V}
+$$
+を定義する関手にほかならないことが明らかである。したがって、
+$\mathcal{C}$ が可算極限をもつならば、この極限、従って補題の関手を
+表現する対象が存在する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-exists-hom-0-from-simplicial-set-finite}
+圏 $\mathcal{C}$ は任意の二対象の余積と有限極限をもつと仮定する。
+$U$ を単体集合とし、すべての $n \geq 0$ に対して $U_n$ は有限かつ
+空でないとする。すべての $n \gg 0$ に対して、$U$ のすべての
+$n$-単体は退化していると仮定する。$V$ を $\mathcal{C}$ の単体的対象とする。
+このとき関手
+\begin{eqnarray*}
+\mathcal{C}^{opp} & \longrightarrow & \textit{Sets} \\
+X
+& \longmapsto &
+\Mor_{\text{Simp}(\mathcal{C})}(X \times U, V)
+\end{eqnarray*}
+は表現可能である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-exists-hom-0-from-simplicial-set} の証明で記述した圏
+$\mathcal{U}$ が、$\mathcal{U}'$ 上の $\mathcal{V}$ の極限と
+$\mathcal{U}$ 上の $\mathcal{V}$ の極限とが同じになるような有限部分圏
+$\mathcal{U}'$ をもつことを示さなければならない。Categories, Lemma
+\ref{categories-lemma-initial} を用いる。
+% Frozen-source candidate P02-E0107; no source correction applied.
+$m > 0$ に対し、$\mathcal{U}_{\leq m}$ を、対象
+$\coprod_{0 \leq n \leq m} U_m$ をもつ充満部分圏とする。
+単体集合 $U$ のすべての $n$-単体が $n > m_0$ ならば退化しているような
+整数 $m_0$ をとる。十分大きい任意の $m \geq m_0$ に対して、部分圏
+$\mathcal{U}_{\leq m}$ は Categories, Definition
+\ref{categories-definition-initial} の性質 (1) を満たす。
+
+\medskip\noindent
+$u \in U_n$ および $u' \in U_{n'}$ であり、$n, n' \leq m_0$ とする。
+さらに、$U(\varphi)(u) = U(\varphi')(u')$ を満たす射
+$\varphi : [k] \to [n]$、$\varphi' : [k] \to [n']$ があると仮定する。
+簡単な組合せ論的議論により、$k > 2m_0$ ならば、
+$\varphi(i) =\varphi(i + 1)$ かつ $\varphi'(i) = \varphi'(i + 1)$ となる
+添字 $0 \leq i \leq 2m_0$ が存在する。（鳩の巣原理からは、
+$k > m_0^2$ ならばこれが成り立つことが分かり、以下の議論にはそれで十分である。）
+従って、$k > 2m_0$ ならば、ある $\psi : [k - 1] \to [n]$ と
+ある $\psi' : [k - 1] \to [n']$ によって
+$\varphi = \psi \circ \sigma^{k - 1}_i$ および
+$\varphi' = \psi' \circ \sigma^{k - 1}_i$ と書ける。
+$s^{k - 1}_i : U_{k - 1} \to U_k$ は単射なので、補題
+\ref{simplicial-lemma-si-injective} を参照すると、
+$U(\psi)(u) = U(\psi')(u')$ も成り立つ。この操作を続けることにより、
+$\mathcal{U}$ の射 $u \to z$ および $u' \to z$ が与えられ、
+$u, u' \in \mathcal{U}_{\leq m_0}$ であるならば、可換図式
+$$
+\xymatrix{
+u \ar[rd] \ar[rrd] & & \\
+& a \ar[r] & z \\
+u' \ar[ru] \ar[rru]
+}
+$$
+で $a \in \mathcal{U}_{\leq 2m_0}$ となるものが存在すると結論できる。
+
+\medskip\noindent
+ここから、有限部分圏 $\mathcal{U}_{\leq 2m_0}$ が使えることは容易に分かる。
+実際、$n, n' \leq 2m_0$ を満たす $x' \in U_n$ および
+$x'' \in U_{n'}$ と、同じ終域をもつ $\mathcal{U}$ の射
+$x' \to x$ および $x'' \to x$ が与えられたとする。$m_0$ の選び方により、
+$\mathcal{U}_{\leq m_0}$ の対象 $u, u'$ と射 $u \to x'$、$u' \to x''$
+を見つけることができる。上の議論により、$a \in \mathcal{U}_{\leq 2m_0}$
+と射 $u \to a$、$u' \to a$ で、図式
+$$
+\xymatrix{
+u \ar[rd] \ar[rrd] \ar[r] & x' \ar[rd] & \\
+& a \ar[r] & x \\
+u' \ar[ru] \ar[rru] \ar[r] & x'' \ar[ru] &
+}
+$$
+を可換にするものが存在する。この図式を時計回りに 90 度回転すると、
+Categories, Definition \ref{categories-definition-initial} の (2) にある
+所望の図式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-exists-hom-from-simplicial-set-finite}
+圏 $\mathcal{C}$ は任意の二対象の余積と有限極限をもつと仮定する。
+$U$ を単体集合とし、すべての $n \geq 0$ に対して $U_n$ は有限かつ
+空でないとする。すべての $n \gg 0$ に対して、$U$ のすべての
+$n$-単体は退化していると仮定する。$V$ を $\mathcal{C}$ の単体的対象とする。
+このとき $\Hom(U, V)$ は存在し、さらに予想どおりの等式
+$$
+\Hom(U, V)_n = \Hom(U \times \Delta[n], V)_0.
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+この単体的対象を次のように構成する。$n \geq 0$ に対し、
+$\Hom(U, V)_n$ を、関手
+$$
+X
+\longmapsto
+\Mor_{\text{Simp}(\mathcal{C})}(X \times U \times \Delta[n], V)
+$$
+を表現する $\mathcal{C}$ の対象とする。これは補題
+\ref{simplicial-lemma-exists-hom-0-from-simplicial-set-finite} により存在する。
+実際、$U \times \Delta[n]$ は、単体の集合が有限であり、十分高い次数には
+非退化単体をもたない単体集合である。補題 \ref{simplicial-lemma-product-degenerate} を参照せよ。
+$\varphi : [m] \to [n]$ に対し、単体集合の誘導写像
+$\varphi : \Delta[m] \to \Delta[n]$ を得る。従って、$X$ に関して関手的な射
+$X \times U \times \Delta[m] \to X \times U \times \Delta[n]$ を得るので、
+関手の変換を得て、さらに
+$$
+\Hom(U, V)(\varphi) :
+\Hom(U, V)_n
+\longrightarrow
+\Hom(U, V)_m.
+$$
+を得る。これが $\Delta$ から圏 $\mathcal{C}$ への反変関手
+$\Hom(U, V)$ を定めることは明らかである。言い換えれば、
+$\mathcal{C}$ の単体的対象を得た。
+
+\medskip\noindent
+$\Hom(U, V)$ が所望の普遍性
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(W, \Hom(U, V))
+=
+\Mor_{\text{Simp}(\mathcal{C})}(W \times U, V)
+$$
+を満たすことを示さなければならない。そのため、
+$f : W \to \Hom(U, V)$ が与えられたとする。右辺の元
+$f' : W \times U \to V$ を構成したい。構成により、各
+$f_n : W_n \to \Hom(U, V)_n$ は射
+$f_n : W_n \times U \times \Delta[n] \to V$ に対応する。さらに、
+各射 $\varphi : [m] \to [n]$ に対して図式
+$$
+\xymatrix{
+W_n \times U \times \Delta[m]
+\ar[rr]_{W(\varphi)\times \text{id} \times \text{id}}
+\ar[d]_{\text{id} \times \text{id} \times \varphi} & &
+W_m \times U \times \Delta[m] \ar[d]^{f_m} \\
+W_n \times U \times \Delta[n] \ar[rr]^{f_n} & & V
+}
+$$
+は可換である。$(\Delta[n])_k$ の $\psi : [n] \to [k]$ に対し、
+$(f_n)_k$ の元 $\psi$ に対応する成分を
+$(f_n)_{k, \psi} : W_n \times U_k \to V_k$ で表す。
+$f'_n : W_n \times U_n \to V_n$ を
+$f'_n = (f_n)_{n, \text{id}}$、言い換えれば、
+$(f_n)_n : W_n \times U_n \times (\Delta[n])_n \to V_n$ の
+$W_n \times U_n \times \text{id}_{[n]}$ への制限として定義する。
+集まり $(f'_n)$ が単体的対象の射を定めることを見るには、任意の
+$\varphi : [m] \to [n]$ に対して
+$V(\varphi) \circ f'_n =
+f'_m \circ W(\varphi) \times U(\varphi)$ を示さなければならない。
+上の可換図式は、$(f_n)_{m, \varphi} : W_n \times U_m \to V_m$ が
+$(f_m)_{m, \text{id}} \circ W(\varphi) :
+W_n \times U_m \to V_m$ に等しいことを述べている。一方、$f_n$ が
+単体的対象の射であることから図式
+$$
+\xymatrix{
+W_n \times U_n \times (\Delta[n])_n
+\ar[r]_-{(f_n)_n}
+\ar[d]_{\text{id} \times U(\varphi) \times \varphi}
+& V_n \ar[d]^{V(\varphi)} \\
+W_n \times U_m \times (\Delta[n])_m \ar[r]^-{(f_n)_m} & V_m
+}
+$$
+は可換である。従って、
+$(f_n)_{m, \varphi} \circ U(\varphi)$ は
+$V(\varphi) \circ (f_n)_{n, \text{id}}$ に等しい。まとめると、所望のとおり
+$
+V(\varphi) \circ (f_n)_{n, \text{id}}
+=
+(f_n)_{m, \varphi} \circ U(\varphi)
+=
+(f_m)_{m, \text{id}} \circ W(\varphi)\circ U(\varphi)
+=
+(f_m)_{m, \text{id}} \circ W(\varphi)\times U(\varphi)
+$
+を得る。
+
+\medskip\noindent
+逆に、射 $f' : W \times U \to V$ が与えられたとき、射
+$f : W \to \Hom(U, V)$ を次のように定義する。
+% Frozen-source candidate P02-E0108; no source correction applied.
+補題 \ref{simplicial-lemma-morphism-from-coproduct} により、射
+$\text{id} : W_n \to W_n$ は一意な射
+$c_n : W_n \times \Delta[n] \to W$ に対応する。従って合成
+$$
+W_n \times \Delta[n] \times U
+\xrightarrow{c_n}
+W \times U
+\xrightarrow{f'}
+V.
+$$
+を考えることができる。構成により、これは一意な射
+$f_n : W_n \to \Hom(U, V)_n$ に対応する。
+% Frozen-source candidate P02-E0109; no source correction applied.
+これらが所望の単体集合の射を定めることの確認は読者に委ねる。
+
+\medskip\noindent
+$f \mapsto f'$ と $f' \mapsto f$ が互いに逆の操作であることの確認も
+読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-hom-from-coprod}
+圏 $\mathcal{C}$ は任意の二対象の余積と有限極限をもつと仮定する。
+$a : U \to V$、$b : U \to W$ を単体集合の射とする。
+すべての $n \geq 0$ に対して $U_n, V_n, W_n$ は有限かつ空でないと仮定する。
+すべての $n \gg 0$ に対して、$U, V, W$ のすべての $n$-単体は
+退化していると仮定する。$T$ を $\mathcal{C}$ の単体的対象とする。このとき
+$$
+\Hom(V, T) \times_{\Hom(U, T)} \Hom(W, T)
+=
+\Hom(V \amalg_U W, T)
+$$
+が成り立つ。言い換えれば、左辺のファイバー積は右辺の Hom 対象により
+表現される。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-exists-hom-from-simplicial-set-finite} により、必要な
+$\Hom$ 対象はすべて存在し、正しい関手性を満たす。いま左辺の第 $n$ 項を、
+$X$ に次の関手的な等式列の最初の集合を対応させる関手を表現する対象と
+同一視できる。
+% Frozen-source candidate P02-E0110; no source correction applied.
+\begin{align*}
+&
+\Mor(X \times \Delta[n],
+\Hom(V, T) \times_{\Hom(U, T)} \Hom(W, T)) \\
+& =
+\Mor(X \times \Delta[n], \Hom(V, T))
+\times_{\Mor(X \times \Delta[n], \Hom(U, T))}
+\Mor(X \times \Delta[n], \Hom(W, T)) \\
+& =
+\Mor(X \times \Delta[n] \times V, T)
+\times_{\Mor(X \times \Delta[n] \times U, T)}
+\Mor(X \times \Delta[n] \times W, T) \\
+& =
+\Mor(X \times \Delta[n] \times (V \amalg_U W), T))
+\end{align*}
+ここでは、項ごとに容易に確かめられる事実
+% Frozen-source candidate P02-E0111; no source correction applied.
+$$
+(X \times \Delta[n] \times V)
+\times_{X \times \Delta[n] \times U}
+(X \times \Delta[n] \times W)
+=
+X \times \Delta[n] \times (V \amalg_U W)
+$$
+を用いた。表示した等式列の最後の項は $\Hom(V \amalg_U W, T)_n$ に
+対応するので、補題の結論が従う。
+\end{proof}
+
+
+
+
+\section{単体的対象の分裂}
+\label{simplicial-section-splitting}
+
+\noindent
+圏 $\mathcal{C}$ の対象 $X$ の部分対象 $N$ とは、$\mathcal{C}$ の対象
+$N$ とモノ射 $N \to X$ の組である。もちろん、記法を濫用して、
+$X$ への射と両立する同型 $N \to N'$ が存在するとき、部分対象
+$N$, $N'$ は等しいという。部分対象の集まりは半順序集合をなす。
+（これは圏に関する我々の規約による。例えばホモトピーを除いて考えた
+空間の圏では正しくない。）
+
+\begin{definition}
+\label{simplicial-definition-split}
+$\mathcal{C}$ を空でない有限余積をもつ圏とする。$\mathcal{C}$ の
+単体的対象 $U$ が {\it 分裂する} とは、$U_m$ の部分対象 $N(U_m)$、
+$m \geq 0$ が存在し、すべての $n \geq 0$ に対して
+\begin{equation}
+\label{simplicial-equation-splitting}
+\coprod\nolimits_{\varphi : [n] \to [m]\text{ surjective}}
+N(U_m)
+\longrightarrow
+U_n
+\end{equation}
+が同型になることをいう。$U$ が $\mathcal{C}$ の $r$-切断単体的対象で
+あるとき、$U_m$ の部分対象 $N(U_m)$、$r \geq m \geq 0$ が存在し、
+(\ref{simplicial-equation-splitting}) が $r \geq n \geq 0$ に対して同型であるならば、
+$U$ は {\it 分裂する} という。
+\end{definition}
+
+\noindent
+この場合、$N(U_0) = U_0$ である。次に、$U_1 = U_0 \amalg N(U_1)$ である。
+さらに
+$$
+U_2 = U_0 \amalg N(U_1) \amalg N(U_1) \amalg N(U_2).
+$$
+である。多くの圏 $\mathcal{C}$ では、すべての単体的対象が分裂することが分かる。
+
+\begin{lemma}
+\label{simplicial-lemma-splitting-simplicial-sets}
+$U$ を単体集合とする。このとき $U$ は一意な分裂をもち、$N(U_m)$ は
+非退化な $m$-単体の集合に等しい。
+\end{lemma}
+
+\begin{proof}
+定義から、分裂が存在するならば $N(U_m)$ は非退化単体の集合でなければ
+ならないことが直ちに従う。$x \in U_n$ とする。全射
+$\varphi : [n] \to [k]$ と $\psi : [n] \to [l]$、および非退化単体
+$y \in U_k$, $z \in U_l$ が存在し、$x = U(\varphi)(y)$ および
+$x = U(\psi)(z)$ であると仮定する。$\psi$ の右逆射
+$\xi : [l] \to [n]$、すなわち $\psi \circ \xi = \text{id}_{[l]}$ を選ぶ。
+このとき $z = U(\xi)(x)$ である。従って
+$z = U(\xi)(x) = U(\varphi \circ \xi)(y)$ である。$z$ は非退化なので、
+$\varphi \circ \xi : [l] \to [k]$ は全射であり、従って $l \geq k$ である。
+同様に $k \geq l$ である。従って、$\varphi \circ \xi : [l] \to [k]$ は、
+$\psi$ の右逆射 $\xi$ の任意の選択に対して恒等写像でなければならない。
+これから $\psi = \varphi$ が容易に従う。
+\end{proof}
+
+\noindent
+もちろん、単体集合の写像が非退化な $n$-単体を退化した $n$-単体へ
+写すことはあり得る。従って、補題 \ref{simplicial-lemma-splitting-simplicial-sets}
+の分裂は関手的ではない。次は関手的となる場合である。
+
+\begin{lemma}
+\label{simplicial-lemma-injective-map-simplicial-sets}
+$f : U \to V$ を単体集合の射とする。(a) $U$ の各非退化単体の像が
+$V$ の非退化単体であり、かつ (b) $f$ の、$U$ の非退化単体の集合から
+$V$ の非退化単体の集合への写像としての制限が単射であると仮定する。
+このとき、すべての $n$ に対して $f_n$ は単射である。
+「単射」を「全射」または「全単射」に置き換えたものも成り立つ。
+\end{lemma}
+
+\begin{proof}
+仮定 (a) のもとで、写像 $f$ は補題 \ref{simplicial-lemma-splitting-simplicial-sets}
+の分裂による非交和分解を保つ。言い換えれば、可換図式
+$$
+\xymatrix{
+\coprod\nolimits_{\varphi : [n] \to [m]\text{ surjective}}
+N(U_m)
+\ar[r] \ar[d] &
+U_n \ar[d] \\
+\coprod\nolimits_{\varphi : [n] \to [m]\text{ surjective}}
+N(V_m)
+\ar[r] &
+V_n.
+}
+$$
+を得る。すると (b) から、左の垂直矢印が単射（それぞれ全射、全単射）
+であることが明らかに従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-simplicial-set-n-skel-sub}
+$U$ を単体集合とし、$n \geq 0$ を整数とする。規則
+$$
+U'_m = \bigcup\nolimits_{\varphi : [m] \to [i], \ i\leq n} \Im(U(\varphi))
+$$
+は、$i \leq n$ に対して $U'_i = U_i$ である部分単体集合
+$U' \subset U$ を定める。さらに、すべての $m > n$ に対して、
+$U'$ のすべての $m$-単体は退化している。
+\end{lemma}
+
+\begin{proof}
+$x \in U_m$ であり、ある $y \in U_i$、$i \leq n$ および
+ある $\varphi : [m] \to [i]$ に対して $x = U(\varphi)(y)$ であるとする。
+このとき、任意の $\psi : [m'] \to [m]$ に対する像 $U(\psi)(x)$ は
+$U(\varphi \circ \psi)(y)$ に等しく、$\varphi \circ \psi : [m'] \to [i]$
+である。従って $U'$ は単体集合である。構成により、次元 $n + 1$ 以上の
+すべての単体は退化している。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-splitting-simplicial-groups}
+$U$ を単体アーベル群とする。このとき、$N(U_0) = U_0$ とおき、
+$m \geq 1$ に対して
+$$
+N(U_m) = \bigcap\nolimits_{i = 0}^{m - 1} \Ker(d^m_i).
+$$
+とおくことにより、$U$ の分裂が得られる。さらに、この分裂は
+単体アーベル群の圏上で関手的である。
+\end{lemma}
+
+\begin{proof}
+$n$ に関する帰納法により、補題における $N(U_m)$ の選択によって
+(\ref{simplicial-equation-splitting}) が $m \leq n$ に対して同型になることを示す。
+$n = 0$ では明らかである。以下の証明では、読みやすくするため写像
+$d_i$ と $s_i$ の上付き添字を省略する。また、Remark
+\ref{simplicial-remark-relations} の関係式を繰り返し用いる。
+
+\medskip\noindent
+まず一般的な注意を述べる。$0 \leq i \leq m$ および $z \in U_m$ に対し、
+$d_i(s_i(z)) = z$ である。従って、任意の $x \in U_{m + 1}$ は、
+$d_i(x') = 0$ および $x'' \in \Im(s_i)$ を満たす形
+$x = x' + x''$ に一意に書ける。実際、
+$x' = (x - s_i(d_i(x)))$ および $x'' = s_i(d_i(x))$ ととればよい。
+さらに、$x'' = s_i(z)$ を満たす元 $z \in U_m$ は、$s_i$ が単射なので一意である。
+
+\medskip\noindent
+任意の $x \in U_{n + 1}$ を分解する手順を述べる。まず、
+$d_0(x_0) = 0$ を満たす形 $x = x_0 + s_0(z_0)$ に書く。
+次に、$d_1(x_1) = 0$ を満たす形 $x_0 = x_1 + s_1(z_1)$ に書く。
+これを続けて
+\begin{eqnarray*}
+x & = & x_0 + s_0(z_0), \\
+x_0 & = & x_1 + s_1(z_1), \\
+x_1 & = & x_2 + s_2(z_2), \\
+\ldots & \ldots & \ldots \\
+x_{n - 1} & = & x_n + s_n(z_n)
+\end{eqnarray*}
+を得る。ここで、すべての $i = n, \ldots, 0$ に対して
+$d_i(x_i) = 0$ である。上の一般的な注意により、すべての $x_i$ と
+$z_i$ は $x$ によって一意に決まる。次を主張する。
+$x_i \in
+\Ker(d_0) \cap
+\Ker(d_1) \cap
+\ldots \cap
+\Ker(d_i)$
+かつ
+$z_i \in
+\Ker(d_0) \cap
+\ldots \cap
+\Ker(d_{i - 1})$
+が $i = n, \ldots, 0$ に対して成り立つ。ここおよび以下では、核の空な
+共通部分は全空間を表す。すなわち、$i = 0$ のとき、記法
+$z_0 \in \Ker(d_0) \cap
+\ldots \cap
+\Ker(d_{i - 1})$
+は、制約なしに $z_0 \in U_n$ であることを意味する。
+
+\medskip\noindent
+$i$ に関する昇順帰納法でこれを証明する。$i = 0$ では、$x_0$ と $z_0$
+の構成から明らかである。$i - 1$ に対して結果を仮定し、
+$0 < i \leq n$ に対して証明する。まず、構成により $d_i(x_i) = 0$ である。
+そこで $0 \leq j < i$ を満たす $j$ をとる。帰納法により
+$d_j(x_{i - 1}) = 0$ である。従って
+$$
+0 = d_j(x_{i - 1})
+= d_j(x_i) + d_j(s_i(z_i))
+= d_j(x_i) + s_{i - 1}(d_j(z_i)).
+$$
+最後の等式は Remark \ref{simplicial-remark-relations} の関係式による。
+これらの関係式はまた、構成により $d_i(x_i)= 0$ であることから
+$d_{i - 1}(d_j(x_i)) = d_j(d_i(x_i)) = 0$ を与える。すると、上の一般的な
+注意における一意性から、等式
+$0 = x' + x'' = d_j(x_i) + s_{i - 1}(d_j(z_i))$ が成り立つのは、
+両方の項が零の場合に限られる。従って $d_j(x_i) = 0$ であり、
+$s_{i - 1}$ の単射性から $d_j(z_i) = 0$ も従う。これで主張が証明された。
+
+\medskip\noindent
+この主張により、
+$$
+x = s_0(z_0) + s_1(z_1) + \ldots + s_n(z_n) + x_n
+$$
+と一意に書ける。ここで $x_n \in N(U_{n + 1})$ かつ
+$z_i \in \Ker(d_0) \cap \ldots \cap \Ker(d_{i - 1})$ である。
+これは、直和分解
+$$
+U_{n + 1}
+=
+N(U_{n + 1})
+\oplus
+\bigoplus\nolimits_{i = 0}^{i = n}
+s_i\Big(\Ker(d_0) \cap \ldots \cap \Ker(d_{i - 1})\Big)
+$$
+であって、$j = 0, \ldots, n$ に対し
+$$
+\Ker(d_0) \cap \ldots \cap \Ker(d_j)
+=
+N(U_{n + 1}) \oplus
+\bigoplus\nolimits_{i = j + 1}^{i = n}
+s_i\Big(\Ker(d_0) \cap \ldots \cap \Ker(d_{i - 1})\Big)
+$$
+という性質をもつものを得たと言い換えられる。この主張から次のように
+結果が従う。$x$ の表示に現れる各 $z_i$ は、
+$$
+z_i = s_i(z'_{i, i}) + \ldots + s_{n - 1}(z'_{i, n - 1}) + z_{i, 0}
+$$
+と一意に書ける。ここで $z_{i, 0} \in N(U_n)$ かつ
+$z'_{i, j} \in \Ker(d_0) \cap \ldots \cap \Ker(d_{j - 1})$ である。
+$z_i$ はすでに $d_0, \ldots, d_i$ の核に属するので、$z_i$ の分解の
+最初のいくつかの段階は零である。これによりさらに、一意的に
+$$
+x = x_n + s_0(z_{0, 0}) + s_1(z_{1, 0}) + \ldots + s_n(z_{n, 0}) +
+\sum\nolimits_{0 \leq i \leq j \leq n - 1} s_i(s_j(z'_{i, j})).
+$$
+を得る。この操作を続けると、最終的に $x$ を
+$$
+s_{i_1} s_{i_2} \ldots s_{i_k} (z)
+$$
+という形の項の和として分解できることが分かる。ここで
+$0 \leq i_1 \leq i_2 \leq \ldots \leq i_k \leq n - k + 1$ かつ
+$z \in N(U_{n + 1 - k})$ である。これはまさに求める分解である。
+実際、任意の全射 $[n + 1] \to [n + 1 - k]$ は
+$$
+\sigma^{n - k}_{i_k} \ldots \sigma^{n - 1}_{i_2} \sigma^n_{i_1}
+$$
+という形に一意に表示でき、ここで
+$0 \leq i_1 \leq i_2 \leq \ldots \leq i_k \leq n - k + 1$ である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-splitting-abelian-category}
+$\mathcal{A}$ をアーベル圏とする。$U$ を $\mathcal{A}$ の単体的対象とする。
+このとき、$N(U_0) = U_0$ とおき、$m \geq 1$ に対して
+$$
+N(U_m) = \bigcap\nolimits_{i = 0}^{m - 1} \Ker(d^m_i).
+$$
+とおくことにより、$U$ の分裂が得られる。さらに、この分裂は
+$\mathcal{A}$ の単体的対象の圏上で関手的である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$ の任意の対象 $A$ に対し、単体アーベル群
+$\Mor_\mathcal{A}(A, U)$ を得る。
+% Frozen-source candidate P02-E0112; no source correction applied.
+これらの各々は補題 \ref{simplicial-lemma-splitting-simplicial-groups} により標準的に分裂する。
+さらに
+$$
+N(\Mor_\mathcal{A}(A, U_m)) =
+\bigcap\nolimits_{i = 0}^{m - 1} \Ker(d^m_i) =
+\Mor_\mathcal{A}(A, N(U_m)).
+$$
+である。従って、射 (\ref{simplicial-equation-splitting}) は、$\mathcal{A}$ の任意の対象に
+対する関手 $\Mor_\mathcal{A}(A, -)$ を適用した後に同型になる。
+従って米田の補題により同型である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-injective-map-simplicial-abelian}
+\begin{slogan}
+Dold--Kan 正規化関手は単射性、全射性、および同型性を反映する。
+\end{slogan}
+$\mathcal{A}$ をアーベル圏とする。$f : U \to V$ を $\mathcal{A}$ の
+単体的対象の射とする。すべての $i$ に対して誘導射
+$N(f)_i : N(U)_i \to N(V)_i$ が単射ならば、すべての $i$ に対して
+$f_i$ は単射である。「単射」を「全射」または「同型」に置き換えたものも
+成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{simplicial-lemma-splitting-abelian-category} と分裂の定義から明らかである。
+\end{proof}
+
+
+\begin{lemma}
+\label{simplicial-lemma-N-d-in-N}
+$\mathcal{A}$ をアーベル圏とする。$U$ を $\mathcal{A}$ の単体的対象とする。
+% Frozen-source candidate P02-E0113; no source correction applied.
+$N(U_m)$ を上の補題 \ref{simplicial-lemma-splitting-abelian-category} におけるものとする。
+このとき $d^m_m(N(U_m)) \subset N(U_{m - 1})$ である。
+\end{lemma}
+
+\begin{proof}
+$j = 0, \ldots, m - 2$ に対し、Remark \ref{simplicial-remark-relations} の関係式により
+$d^{m - 1}_j d^m_m = d^{m - 1}_{m - 1} d^m_j$ である。結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-simplicial-abelian-n-skel-sub}
+$\mathcal{A}$ をアーベル圏とし、$U$ を $\mathcal{A}$ の単体的対象とする。
+$n \geq 0$ を整数とする。規則
+$$
+U'_m = \sum\nolimits_{\varphi : [m] \to [i], \ i\leq n} \Im(U(\varphi))
+$$
+は、$i \leq n$ に対して $U'_i = U_i$ である部分単体的対象
+$U' \subset U$ を定める。さらに、すべての $m > n$ に対して
+$N(U'_m) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+$m$、$i \leq n$ およびある $\varphi : [m] \to [i]$ をとる。
+任意の $\psi : [m'] \to [m]$ に対する $U(\psi)$ による
+$\Im(U(\varphi))$ の像は $U(\varphi \circ \psi)$ の像に等しく、
+$\varphi \circ \psi : [m'] \to [i]$ である。従って $U'$ は単体的対象である。
+$m > n$ をとる。$N(U'_m) = 0$ を示さなければならない。
+$N(U_m)$ と $N(U'_m)$ の定義により、
+$N(U'_m) = U'_m \cap N(U_m)$（部分対象の共通部分）である。
+$U$ は補題 \ref{simplicial-lemma-splitting-abelian-category} により分裂するので、
+$U'_m$ が和
+$$
+\sum\nolimits_{\varphi : [m] \to [m']\text{ surjective}, \ m' < m}
+\Im(U(\varphi)|_{N(U_{m'})}).
+$$
+に含まれることを示せば十分である。分裂により、各 $U_{m'}$ は、全射
+$\psi : [m'] \to [m'']$ に対する $U(\psi)$ による $N(U_{m''})$ の像の
+和である。従って、上に表示した和は
+$$
+\sum\nolimits_{\varphi : [m] \to [m']\text{ surjective}, \ m' < m}
+\Im(U(\varphi)).
+$$
+と同じである。$U'_m$ の定義に現れる任意の
+$\varphi : [m] \to [i]$、$i \leq n$ は、最後に表示した和におけるように
+$[m] \to [m']$ が全射かつ $m' < m$ となる形
+$[m] \to [m'] \to [i]$ に分解できるので、$U'_m$ がこの和に含まれることは
+明らかである。
+\end{proof}
+
+
+
+
+\section{余骨格関手}
+\label{simplicial-section-coskeleton}
+
+\noindent
+$\mathcal{C}$ を圏とする。{\it 余骨格関手}（存在する場合）とは、骨格関手の
+右随伴となる関手
+$$
+\text{cosk}_n :
+\text{Simp}_n(\mathcal{C}) \longrightarrow \text{Simp}(\mathcal{C})
+$$
+である。式で書けば
+\begin{equation}
+\label{simplicial-equation-cosk}
+\Mor_{\text{Simp}(\mathcal{C})}(U, \text{cosk}_n V)
+=
+\Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_n U, V)
+\end{equation}
+である。$n$-切断単体的対象 $V$ が与えられたとき、
+$\text{cosk}_nV \in \Ob(\text{Simp}(\mathcal{C}))$ と射
+$\text{sk}_n \text{cosk}_n V \to V$ が存在して表示した公式を満たす、
+言い換えれば関手
+$U \mapsto \Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_n U, V)$ が
+表現可能であるとき、{\it $\text{cosk}_nV$ が存在する} という。
+存在すれば、米田の補題により一意な同型を除いて一意である。
+Categories, Section \ref{categories-section-opposite} を参照せよ。
+
+\begin{example}
+\label{simplicial-example-cosk0}
+圏 $\mathcal{C}$ は空でない有限自己積をもつと仮定する。
+$\mathcal{C}$ の $0$-切断単体的対象は、$\mathcal{C}$ の対象 $X$ と同じものである。
+この場合、$\text{cosk}_0(X)$ は、$U_n = X^{n + 1}$、すなわち $X$ の
+$(n + 1)$-重自己積をもつ単体的対象 $U$ であり、その単体的対象の構造は
+Example \ref{simplicial-example-fibre-products-simplicial-object} におけるものだと主張する。
+実際、$V$ が単体的対象であるとき、射 $V \to U$ は射
+$V_n \to X^{n + 1}$ であって、図式
+$$
+\xymatrix{
+V_n \ar[r] \ar[d]_{V([0] \to [n], 0 \mapsto i)} &
+X^{n + 1} \ar[d]^{\text{pr}_i} \\
+V_0 \ar[r] &
+X
+}
+$$
+がすべて可換となるものにより与えられる。これは明らかに、その写像が
+一意な射 $V_0 \to X$ を決定し、かつそれによって決定されることを意味する。
+従って公式 (\ref{simplicial-equation-cosk}) が成り立つ。
+\end{example}
+
+\noindent
+圏 $\Delta/[n]$ を思い出そう。Example \ref{simplicial-example-simplex-category} を参照せよ。
+$(\Delta/[n])_{\leq m}$ を、$\Delta/[n]$ の対象 $[k] \to [n]$ からなる
+充満部分圏で、$\Delta/[n]$ の中で $k \leq m$ を満たすものに制限したものとする。
+言い換えれば、圏と関手の
+可換図式
+$$
+\xymatrix{
+(\Delta/[n])_{\leq m} \ar[r] \ar[d] &
+\Delta/[n] \ar[d] \\
+\Delta_{\leq m} \ar[r] &
+\Delta
+}
+$$
+がある。$\mathcal{C}$ の $m$-切断単体的対象 $U$ が与えられたとき、規則
+\begin{eqnarray*}
+([k] \to [n]) & \longmapsto & U_k \\
+\psi : ([k'] \to [n]) \to ([k] \to [n]) &
+\longmapsto &
+U(\psi) : U_k \to U_{k'}
+\end{eqnarray*}
+により関手
+$$
+U(n) : (\Delta/[n])_{\leq m}^{opp} \longrightarrow \mathcal{C}
+$$
+を定義する。$\Delta$ の与えられた射 $\varphi : [n] \to [n']$ に対し、
+$\alpha : [k] \to [n]$ を $\varphi \circ \alpha : [k] \to [n']$ へ写す
+関手
+$$
+\overline{\varphi} :
+(\Delta/[n])_{\leq m}
+\longrightarrow
+(\Delta/[n'])_{\leq m}
+$$
+が付随する。合成 $U(n') \circ \overline{\varphi}$ は関手 $U(n)$ に等しい。
+
+\begin{lemma}
+\label{simplicial-lemma-existence-cosk}
+圏 $\mathcal{C}$ が有限極限をもつならば、すべての $m$ に対して
+$\text{cosk}_m$ 関手が存在する。さらに、任意の $m$-切断単体的対象 $U$ に対し、
+単体的対象 $\text{cosk}_mU$ は公式
+$$
+(\text{cosk}_mU)_n = \lim_{(\Delta/[n])_{\leq m}^{opp}} U(n)
+$$
+で記述される。また、$\varphi : [n] \to [n']$ に対する写像
+$\text{cosk}_mU(\varphi)$ は、上の同一視
+$U(n') \circ \overline{\varphi} = U(n)$ から Categories, Lemma
+\ref{categories-lemma-functorial-limit} を介して得られる。
+\end{lemma}
+
+\begin{proof}
+この補題の証明中、$(\text{cosk}_mU)_n$ が
+$\lim_{(\Delta/[n])_{\leq m}^{opp}} U(n)$ に等しい単体的対象を
+$\text{cosk}_mU$ と表す。証明の最後に、これが必要な写像性を満たすことを示す。
+
+\medskip\noindent
+$V$ を単体的対象と仮定する。射 $\gamma : V \to \text{cosk}_mU$ は射列
+$\gamma_n : V_n \to (\text{cosk}_mU)_n$ により与えられる。極限の定義により、
+これは、$\alpha$ が $k \leq m$ を満たすすべての $\alpha : [k] \to [n]$ を走る
+射の集まり $\gamma(\alpha) : V_n \to U_k$ により与えられる。さらに、これらの
+射は、任意の $0 \leq k, k' \leq m$、$0 \leq n, n'$ および $\Delta$ の射
+$\psi : [k] \to [k']$、$\varphi : [n] \to [n']$、
+$\alpha : [k] \to [n]$、$\alpha' : [k'] \to [n']$ で
+$\varphi \circ \alpha = \alpha' \circ \psi$ を満たすものに対して、図式
+$$
+\xymatrix{
+V_n \ar[r]_{\gamma(\alpha)} &  U_k \\
+V_{n'} \ar[r]^{\gamma(\alpha')} \ar[u]^{V(\varphi)} & U_{k'} \ar[u]_{U(\psi)}
+}
+$$
+が可換となるという規則を満たす。$n = k = k'$、$\varphi = \alpha'$、
+$\alpha = \psi = \text{id}_{[k]}$ ととると、
+$\gamma(\alpha') = \gamma(\text{id}_{[k]}) \circ V(\alpha')$ を得る。
+言い換えれば、射 $\gamma(\text{id}_{[k]})$、$k \leq m$ が射 $\gamma$ を決定する。
+そして、これらの射が射 $\text{sk}_m V \to U$ をなすことは容易に分かる。
+
+\medskip\noindent
+逆に、射 $\gamma : \text{sk}_m V \to U$ が与えられたとする。
+$\alpha$ が $k \leq m$ を満たすすべての $\alpha : [k] \to [n]$ を走る射族
+$\gamma(\alpha)$ を、$\gamma(\alpha) =
+\gamma(\text{id}_{[k]}) \circ V(\alpha)$ とおくことにより得る。
+これらの射は上に表示したすべての可換性条件を満たし、従って射
+$V \to \text{cosk}_m U$ を与える。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-trivial-cosk}
+$\mathcal{C}$ を圏とし、$U$ を $\mathcal{C}$ の $m$-切断単体的対象とする。
+$n \leq m$ に対し、極限 $\lim_{(\Delta/[n])_{\leq m}^{opp}} U(n)$ は存在し、
+$U_n$ と標準的に同型である。
+\end{lemma}
+
+\begin{proof}
+% Frozen-source candidate P02-E0114; no source correction applied.
+この場合、圏 $(\Delta/[n])_{\leq m}$ は終対象、すなわち恒等写像
+$[n] \to [n]$ をもつので、これは正しい。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-recover-cosk}
+$\mathcal{C}$ を有限極限をもつ圏とする。$U$ を $\mathcal{C}$ の
+$n$-切断単体的対象とする。射 $\text{sk}_n \text{cosk}_n U \to U$ は同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-existence-cosk} と \ref{simplicial-lemma-trivial-cosk} を組み合わせればよい。
+\end{proof}
+
+\noindent
+余骨格関手の特別な場合をより詳しく記述する。記法を濫用して、任意の
+$n' \geq n$ に対する制限関手
+$\text{Simp}_{n'}(\mathcal{C}) \to \text{Simp}_n(\mathcal{C})$ も
+$\text{sk}_n$ で表す。関手
+$\text{sk}_n : \text{Simp}_{n + 1}(\mathcal{C})
+\to \text{Simp}_n(\mathcal{C})$ の右随伴を記述する。
+$n \geq 1$、$0 \leq i < j \leq n + 1$ に対し、
+$\delta^{n + 1}_{i, j} : [n - 1] \to [n + 1]$ を $i$ と $j$ を除く
+増加写像と定義する。
+$\delta^{n + 1}_{i, j} =
+\delta^{n + 1}_j \circ \delta^n_i =
+\delta^{n + 1}_i \circ \delta^n_{j - 1}$ であることに注意せよ。
+補題 \ref{simplicial-lemma-relations-face-degeneracy} を参照せよ。これが次の補題の動機である。
+
+\begin{lemma}
+\label{simplicial-lemma-formula-limit}
+$n$ を $\geq 1$ の整数とする。$U$ を $\mathcal{C}$ の
+$n$-切断単体的対象とする。$\mathcal{C}$ から $\textit{Sets}$ への反変関手で、
+対象 $T$ に集合
+$$
+\{ (f_0, \ldots, f_{n + 1}) \in \Mor_\mathcal{C}(T, U_n)
+\mid
+d^n_{j - 1} \circ f_i = d^n_i \circ f_j
+\ \forall\ 0\leq i < j\leq n + 1\}
+$$
+を対応させるものを考える。この関手が $\mathcal{C}$ のある対象
+$U_{n + 1}$ により表現されるならば、
+$$
+U_{n + 1} = \lim_{(\Delta/[n + 1])_{\leq n}^{opp}} U(n)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+極限は、存在すれば、対象 $T$ に集合
+$$
+\{
+(f_\alpha)_{\alpha : [k] \to [n + 1], k \leq n}
+\mid
+f_{\alpha \circ \psi} = U(\psi) \circ f_\alpha\ \forall
+\ \psi : [k'] \to [k], \alpha : [k] \to [n + 1]
+\}.
+$$
+を対応させる関手を表現する。実際、この関手が補題に表示した関手と同型で
+あることを示す。一方向の写像は規則
+$$
+(f_\alpha)_{\alpha}
+\longmapsto
+(f_{\delta^{n + 1}_0}, \ldots, f_{\delta^{n + 1}_{n + 1}}).
+$$
+により与えられる。補題の前で思い出した関係式により
+$$
+d^n_{j - 1} \circ f_{\delta^{n + 1}_i} =
+f_{\delta^{n + 1}_i \circ \delta^n_{j - 1}} =
+f_{\delta^{n + 1}_j \circ \delta^n_i} =
+d^n_i \circ f_{\delta^{n + 1}_j}
+$$
+なので、これは補題の条件を満たす。逆方向の写像を構成するには、補題の
+表示式における系 $(f_0, \ldots, f_{n + 1})$ に写像の系 $f_\alpha$ を
+対応させなければならない。$\alpha : [k] \to [n + 1]$ が与えられたとする。
+$k \leq n$ なので写像 $\alpha$ は全射ではない。従って、ある
+$0 \leq i \leq n + 1$ とある $\psi : [k] \to [n]$ によって
+$\alpha = \delta^{n + 1}_i \circ \psi$ と書ける。定義は必然的に
+$$
+f_\alpha = U(\psi) \circ f_i.
+$$
+となる。もちろん、これが組 $(i, \psi)$ の選択に依存しないことを
+確かめなければならない。まず、$i$ が与えられれば、使える $\psi$ は一意である。
+次に、$(j, \phi)$ を別の組とする。このとき $i \not = j$ であり、
+$i < j$ と仮定してよい。$i, j$ はともに $\alpha$ の像に含まれないので、実際
+$\alpha = \delta^{n + 1}_{i, j} \circ \xi$ と書ける。すると
+$\psi = \delta^n_{j - 1} \circ \xi$ および
+$\phi = \delta^n_i \circ \xi$ であることが分かる。従って
+\begin{eqnarray*}
+U(\psi) \circ f_i & = & U(\delta^n_{j - 1} \circ \xi) \circ f_i \\
+& = & U(\xi) \circ d^n_{j - 1} \circ f_i \\
+& = & U(\xi) \circ d^n_i \circ f_j \\
+& = & U(\delta^n_i \circ \xi) \circ f_j \\
+& = & U(\phi) \circ f_j
+\end{eqnarray*}
+となり、所望の結果を得る。さらに、このように定義した写像 $f_\alpha$ が
+写像の系 $(f_\alpha)_\alpha$ の規則を満たすことを確認しなければならない。
+そのため、$k, k' \leq n$ を満たす
+$\psi : [k'] \to [k]$、$\alpha : [k] \to [n + 1]$ をとり、
+$\alpha' = \alpha \circ \psi$ とおく。$\alpha$ の像にない $i$ を選ぶ。
+すると $i$ は $\alpha'$ の像にもない。$\alpha = \delta^{n + 1}_i \circ \phi$
+と書く（ここでは文字 $\psi$ はすでに使ったため利用できない）。すると明らかに
+$\alpha' = \delta^{n + 1}_i \circ \phi \circ \psi$ である。上の構成により
+$$
+U(\psi) \circ f_\alpha = U(\psi) \circ U(\phi) \circ f_i
+= U(\phi \circ \psi) \circ f_i = f_{\alpha \circ \psi} = f_{\alpha'}
+$$
+となり、所望の結果を得る。二つの構成が互いに逆な全単射であり、$T$ に関して
+関手的であることを確かめる楽しい作業は読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-work-out}
+$n$ を $\geq 1$ の整数とする。$U$ を $\mathcal{C}$ の
+$n$-切断単体的対象とする。$\mathcal{C}$ から $\textit{Sets}$ への反変関手で、
+対象 $T$ に集合
+$$
+\{ (f_0, \ldots, f_{n + 1}) \in \Mor_\mathcal{C}(T, U_n)
+\mid
+d^n_{j - 1} \circ f_i = d^n_i \circ f_j
+\ \forall\ 0\leq i < j\leq n + 1\}
+$$
+を対応させるものを考える。この関手が $\mathcal{C}$ のある対象
+$U_{n + 1}$ により表現されるならば、$\text{sk}_n \tilde U = U$ および
+$\tilde U_{n + 1} = U_{n + 1}$ を満たす $(n + 1)$-切断単体的対象
+$\tilde U$ で、随伴性
+$$
+\Mor_{\text{Simp}_{n + 1}(\mathcal{C})}(V, \tilde U)
+=
+\Mor_{\text{Simp}_n(\mathcal{C})}(\text{sk}_nV, U)
+$$
+を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-trivial-cosk} により、$0 \leq i \leq n$ に対して同一視
+$$
+U_i = \lim_{(\Delta/[i])_{\leq n}^{opp}} U(i)
+$$
+がある。補題 \ref{simplicial-lemma-formula-limit} により
+$$
+U_{n + 1} = \lim_{(\Delta/[n + 1])_{\leq n}^{opp}} U(n).
+$$
+である。従って、$i, j \leq n + 1$ を満たす任意の
+$\varphi : [i] \to [j]$ に対し、対応する写像
+$\tilde U(\varphi) : \tilde U_j \to \tilde U_i$ を補題
+\ref{simplicial-lemma-existence-cosk} とまったく同様に定義できる。これは
+$\text{sk}_n \tilde U = U$ を満たす $(n + 1)$-切断単体的対象
+$\tilde U$ を定める。
+
+\medskip\noindent
+随伴性を見るため、次のように論じる。公式の右辺の任意の元
+$\gamma : \text{sk}_n V \to U$ が与えられたとき、射
+$f_i = \gamma_n \circ d^{n + 1}_i : V_{n + 1} \to V_n \to U_n$ を考える。
+これらは明らかに関係式 $d^n_{j - 1} \circ f_i = d^n_i \circ f_j$ を満たし、
+従って $U_{n + 1}$ の選び方により、一意な射 $V_{n + 1} \to U_{n + 1}$
+を定める。逆に、左辺の射 $\gamma' : V \to \tilde U$ が与えられたとき、
+$\Delta_{\leq n}$ に制限するだけで右辺の元を得る。これら二つの構成が互いに
+逆であることの証明は読者に委ねる。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-explicit-face-degeneracy}
+$U$ と $U_{n + 1}$ を補題 \ref{simplicial-lemma-work-out} におけるものとする。
+$T$-値点上で、$\tilde U$ の面写像と退化写像を容易に記述できる。
+具体的に、写像 $d^{n + 1}_i : U_{n + 1} \to U_n$ は
+$$
+(f_0, \ldots, f_{n + 1}) \longmapsto f_i.
+$$
+により与えられる。また、写像 $s^n_j : U_n \to U_{n + 1}$ は
+\begin{eqnarray*}
+f & \longmapsto & (
+s^{n - 1}_{j - 1} \circ d^{n - 1}_0 \circ f, \\
+& &
+s^{n - 1}_{j - 1} \circ d^{n - 1}_1 \circ f, \\
+& &
+\ldots\\
+& &
+s^{n - 1}_{j - 1} \circ d^{n - 1}_{j - 1} \circ f, \\
+& &
+f, \\
+& &
+f, \\
+& &
+s^{n - 1}_j \circ d^{n - 1}_{j + 1} \circ f, \\
+& &
+s^{n - 1}_j \circ d^{n - 1}_{j + 2} \circ f, \\
+& &
+\ldots\\
+& &
+s^{n - 1}_j \circ d^{n - 1}_n \circ f
+)
+\end{eqnarray*}
+により与えられる。右辺が補題 \ref{simplicial-lemma-work-out} の表示集合の元であることの
+確認は読者に委ねる。$n = 0$ では写像は一つ、すなわち
+$f \mapsto (f, f)$ である。$n = 1$ では写像は二つ、すなわち
+$f \mapsto (f, f, s_0d_1f)$ および $f \mapsto (s_0d_0f, f, f)$ である。
+$n = 2$ では写像は三つ、すなわち
+$f \mapsto (f, f, s_0d_1f, s_0d_2f)$、
+$f \mapsto (s_0d_0f, f, f, s_1d_2f)$、および
+$f \mapsto (s_1d_0f, s_1d_1f, f, f)$ である。以下同様である。
+\end{remark}
+
+\begin{remark}
+\label{simplicial-remark-cosk-simplicial-sets}
+単体集合の場合の上の補題 \ref{simplicial-lemma-work-out} の構成は次のとおりである。
+$n$-切断単体集合 $U$ が与えられたとき、標準的な $(n + 1)$-切断単体集合
+$\tilde U$ を次のように作る。補題の公式により $(n + 1)$-単体の集合
+$U_{n + 1}$ を付け加える。すなわち、$U_{n + 1}$ の元とは、$n$-単体の
+番号付きの集まり $(f_0, \ldots, f_{n + 1})$ であって、それらが
+$(n + 1)$-単体におけるのと同様に貼り合わさるという性質をもつものである。
+言い換えれば、$i < j$ に対して、$f_j$ の第 $i$ 面は $f_i$ の第 $(j-1)$ 面
+である。$\tilde U$ の面写像と退化写像を幾何学的にどう定義するかは明らかである。
+$V$ が $(n + 1)$-切断単体集合ならば、その $(n + 1)$-単体は、
+$f_i \in V_n$ を満たす $n$-単体の両立する集まり
+$(f_0, \ldots, f_{n + 1})$ を与える。従って自然な写像
+$\Mor(\text{sk}_nV, U) \to \Mor(V, \tilde U)$ が存在し、逆方向の標準的な
+制限写像の逆になる。
+
+\medskip\noindent
+また、構成の組合せ論は切断単体集合の場合に行えば十分である。実際、圏
+$\mathcal{C}$ の任意の対象 $T$ と、$\mathcal{C}$ の任意の $n$-切断単体的対象
+$U$ に対し、$n$-切断単体集合 $\Mor(T, U)$ を考えることができる。
+これに構成を適用して、その $(n + 1)$-単体の集合をとり、それが表現可能であると
+要求できる。これは補題 \ref{simplicial-lemma-work-out} の結果を考えるよい方法である。
+\end{remark}
+
+\begin{remark}
+\label{simplicial-remark-inductive-coskeleton}
+{\it 余骨格の帰納的構成。}
+$\mathcal{C}$ を有限極限をもつ圏とする。$U$ を $\mathcal{C}$ の
+$m$-切断単体的対象とする。このとき、$n$-切断対象 $U^n$ を次のように
+帰納的に構成できる。
+\begin{enumerate}
+\item 初めに $U^m = U$ とおく。
+\item $n \geq m$ に対して $U^n$ が与えられたとき、
+$U^{n + 1} = \tilde U^n$ とおく。ここで $\tilde U^n$ は補題
+\ref{simplicial-lemma-work-out} における $U^n$ から構成される。
+\end{enumerate}
+補題 \ref{simplicial-lemma-work-out} の構成は $U^n$ の $n$-骨格を変えないという
+性質をもつので、$\text{cosk}_m U$ を
+$(\text{cosk}_m U)_n = U^n_n = U^{n + 1}_n = \ldots$ をもつ単体的対象と
+定義できる。さらに、補題 \ref{simplicial-lemma-work-out} から形式的に、$U^n$ は
+すべての $n \geq m$ に対して公式
+$$
+\Mor_{\text{Simp}_n(\mathcal{C})}(V, U^n)
+=
+\Mor_{\text{Simp}_m(\mathcal{C})}(\text{sk}_mV, U)
+$$
+を満たす。このことからさらに形式的に、上で選んだ $\text{cosk}_mU$ に対し
+$$
+\Mor_{\text{Simp}(\mathcal{C})}(V, \text{cosk}_mU)
+=
+\Mor_{\text{Simp}_m(\mathcal{C})}(\text{sk}_mV, U)
+$$
+が従う。
+\end{remark}
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-up}
+$\mathcal{C}$ を有限極限をもつ圏とする。
+\begin{enumerate}
+\item すべての $n$ に対し、関手 $\text{sk}_n : \text{Simp}(\mathcal{C})
+\to \text{Simp}_n(\mathcal{C})$ は右随伴 $\text{cosk}_n$ をもつ。
+\item すべての $n' \geq n$ に対し、関手
+$\text{sk}_n : \text{Simp}_{n'}(\mathcal{C}) \to \text{Simp}_n(\mathcal{C})$ は
+右随伴、すなわち $\text{sk}_{n'}\text{cosk}_n$ をもつ。
+\item すべての $m \geq n \geq 0$ と、$\mathcal{C}$ のすべての
+$n$-切断単体的対象 $U$ に対して
+$\text{cosk}_m \text{sk}_m \text{cosk}_n U = \text{cosk}_n U$ である。
+\item $U$ を $\mathcal{C}$ の単体的対象とし、ある $n \geq 0$ に対して
+標準写像 $U \to \text{cosk}_n \text{sk}_nU$ が同型であるとする。このとき、
+すべての $m \geq n$ に対して標準写像
+$U \to \text{cosk}_m \text{sk}_mU$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の存在は上の補題 \ref{simplicial-lemma-existence-cosk} から従う。(2) と (3) は
+Remark \ref{simplicial-remark-inductive-coskeleton} の議論から従う。その後では (4) は明らかである。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-existence-cosk}
+余骨格関手を定義するために、すべての有限極限を必要とするわけではない。
+いくつか注意を述べる。
+\begin{enumerate}
+\item Example \ref{simplicial-example-cosk0} で見たように、$\mathcal{C}$ が二対象の積を
+もつならば $\text{cosk}_0$ は存在する。
+\item $k > 0$ に対し、$\mathcal{C}$ が有限連結極限をもつならば関手
+$\text{cosk}_k$ は存在する。
+\end{enumerate}
+これは余骨格を構成する帰納的手順（Remarks
+\ref{simplicial-remark-cosk-simplicial-sets} および
+\ref{simplicial-remark-inductive-coskeleton}）から明らかだが、補題
+\ref{simplicial-lemma-existence-cosk} で用いた圏 $(\Delta/[n])_{\leq k}$ が、
+$k \geq 1$ および $n \geq k + 1$ に対して連結であることからも従う。
+補題 \ref{simplicial-lemma-trivial-cosk} または補題 \ref{simplicial-lemma-recover-cosk} により、
+$n \leq k$ に対する圏は必要ないことに注意せよ。（$k$ が大きくなるにつれて、
+$k \geq 1$ および $n \geq k + 1$ に対する圏
+$(\Delta/[n])_{\leq k}$ は、位相的な意味でますます連結になる。）
+\end{remark}
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-product}
+$U$, $V$ を圏 $\mathcal{C}$ の $n$-切断単体的対象とする。このとき、
+左辺と右辺が存在するならば
+$$
+\text{cosk}_n (U \times V) = \text{cosk}_nU \times \text{cosk}_nV
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$W$ を単体的対象とする。次を得る。
+\begin{eqnarray*}
+\Mor(W, \text{cosk}_n (U \times V))
+& = &
+\Mor(\text{sk}_n W, U \times V) \\
+& = &
+\Mor(\text{sk}_n W, U)
+\times
+\Mor(\text{sk}_nW, V) \\
+& = &
+\Mor(W, \text{cosk}_n U)
+\times
+\Mor(W, \text{cosk}_n V) \\
+& = &
+\Mor(W, \text{cosk}_n U \times \text{cosk}_n V)
+\end{eqnarray*}
+補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-fibre-product}
+$\mathcal{C}$ はファイバー積をもつと仮定する。$U \to V$ および
+$W \to V$ を圏 $\mathcal{C}$ の $n$-切断単体的対象の射とする。このとき、
+左辺と右辺が存在するならば
+$$
+\text{cosk}_n (U \times_V W)
+=
+\text{cosk}_nU \times_{\text{cosk}_n V} \text{cosk}_nW
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+省略するが、上の補題 \ref{simplicial-lemma-cosk-product} の証明と非常によく似ている。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-above-object}
+$\mathcal{C}$ を有限極限をもつ圏とし、$X \in \Ob(\mathcal{C})$ とする。
+関手 $\mathcal{C}/X \to \mathcal{C}$ は $k \geq 1$ に対する余骨格関手
+$\text{cosk}_k$ と可換である。
+\end{lemma}
+
+\begin{proof}
+この主張の意味は次のとおりである。$U$ が $\mathcal{C}/X$ の単体的対象であり、
+これを定値単体的対象 $X$ への射をもつ $\mathcal{C}$ の単体的対象とみなすとき、
+$\mathcal{C}/X$ で計算した $\text{cosk}_k U$ は $\mathcal{C}$ で計算したものと
+同じである。これは、例えば Categories, Lemma
+\ref{categories-lemma-connected-limit-over-X} から従う。なぜなら、補題
+\ref{simplicial-lemma-existence-cosk} で用いた圏 $(\Delta/[n])_{\leq k}$ は、
+$k \geq 1$ および $n \geq k + 1$ に対して連結だからである。
+補題 \ref{simplicial-lemma-trivial-cosk} または補題 \ref{simplicial-lemma-recover-cosk} により、
+$n \leq k$ に対する圏は必要ないことに注意せよ。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-simplex-cosk}
+標準写像 $\Delta[n] \to \text{cosk}_1 \text{sk}_1 \Delta[n]$ は同型である。
+\end{lemma}
+
+\begin{proof}
+単体集合 $U$ と射 $f : U \to \Delta[n]$ を考える。これは、各
+$u \in U_i$ に $\Delta$ の写像 $f_u : [i] \to [n]$ を対応させる規則である。
+さらに、これらの写像は、任意の $\varphi : [j] \to [i]$ に対して
+$f_u \circ \varphi = f_{U(\varphi)(u)}$ という性質をもつべきである。
+$0$ を $j$ へ写す写像を $\epsilon^i_j : [0] \to [i]$ と表す。
+写像 $F : U_0 \to [n]$ を $u \mapsto f_u(0)$ により定める。このとき、
+すべての $0 \leq j \leq i$ および $u \in U_i$ に対して
+$$
+f_u(j) = F(\epsilon^i_j(u))
+$$
+である。特に、関数 $F$ が分かれば、すべての $i$ とすべての
+$u\in U_i$ に対する写像 $f_u$ が分かる。逆に、写像
+$F : U_0 \to [n]$ が与えられたとき、任意の $i$、任意の $u \in U_i$、
+任意の $0 \leq j \leq i$ に対して
+$$
+f_u(j) = F(\epsilon^i_j(u))
+$$
+とおくことができる。これは一般には上のような単体集合の射 $f$ を定めない。
+条件は、すべての写像 $f_u$ が非減少であることである。これは明らかに、
+$0 \leq j \leq j' \leq i$ および $u \in U_i$ のとき
+$F(\epsilon^i_j(u)) \leq F(\epsilon^i_{j'}(u))$ であることと同値である。
+しかしこの場合、射
+$$
+\epsilon^i_j, \epsilon^i_{j'} : [0] \to [i]
+$$
+はいずれも、$0 \mapsto j$、$1 \mapsto j'$ により定義される写像
+$\epsilon^i_{j, j'} : [1] \to [i]$ を経由する。言い換えれば、
+% Frozen-source candidate P02-E0115; no source correction applied.
+$i = 1$ および $u \in X_1$ に対して不等式を確認すれば十分である。
+言い換えれば、所望のとおり
+$$
+\Mor(U, \Delta[n])
+=
+\Mor(\text{sk}_1 U, \text{sk}_1 \Delta[n])
+$$
+である。
+\end{proof}
+
+
+
+\section{増大}
+\label{simplicial-section-augmentation}
+
+\begin{definition}
+\label{simplicial-definition-augmentation}
+$\mathcal{C}$ を圏とし、$U$ を $\mathcal{C}$ の単体的対象とする。
+$U$ の $\mathcal{C}$ の対象 $X$ への {\it 増大 $\epsilon : U \to X$} とは、
+$U$ から定値単体的対象 $X$ への射である。
+\end{definition}
+
+\begin{lemma}
+\label{simplicial-lemma-augmentation-howto}
+$\mathcal{C}$ を圏とし、$X \in \Ob(\mathcal{C})$ とする。
+$U$ を $\mathcal{C}$ の単体的対象とする。$U$ の $X$ への増大を与えることは、
+$\epsilon_0 \circ d^1_0 = \epsilon_0 \circ d^1_1$ を満たす射
+$\epsilon_0 : U_0 \to X$ を与えることと同じである。
+\end{lemma}
+
+\begin{proof}
+射 $\epsilon : U \to X$ が与えられれば、補題にある $\epsilon_0$ が確かに得られる。
+逆に、補題にある $\epsilon_0$ が与えられたとき、任意の射
+$\alpha : [0] \to [n]$ を選び、$\epsilon_n = \epsilon_0 \circ U(\alpha)$ と
+おくことにより $\epsilon_n : U_n \to X$ を定義する。実際、
+$\beta : [0] \to [n]$ が別の選択ならば、$\alpha$ と $\beta$ がともに
+$[0] \to [1] \to [n]$ と分解するような射 $\gamma : [1] \to [n]$ が存在する。
+従って、$\epsilon_0$ に関する条件から $\epsilon_n$ が良定義であることが分かる。
+すると $(\epsilon_n) : U \to X$ が単体的対象の射であることを容易に示せる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-minus-one}
+$\mathcal{C}$ をファイバー積をもつ圏とする。$f : Y\to X$ を
+$\mathcal{C}$ の射とする。$U$ を $\mathcal{C}$ の単体的対象で、その第 $n$ 項が
+% Frozen-source candidate P02-E0116; no source correction applied.
+$Y \times_X Y \times_X \ldots \times_X Y$、すなわち $(n + 1)$ 重ファイバー積
+であるものとする。Example \ref{simplicial-example-fibre-products-simplicial-object} を参照せよ。
+$\mathcal{C}$ の任意の単体的対象 $V$ に対して
+\begin{align*}
+\Mor_{\text{Simp}(\mathcal{C})}(V, U)
+& =
+\Mor_{\text{Simp}_1(\mathcal{C})}(\text{sk}_1 V, \text{sk}_1 U) \\
+& =
+\{g_0 : V_0 \to Y \mid f \circ g_0 \circ d^1_0 = f \circ g_0 \circ d^1_1\}
+\end{align*}
+である。特に $U = \text{cosk}_1 \text{sk}_1 U$ である。
+\end{lemma}
+
+\begin{proof}
+$g : \text{sk}_1V \to \text{sk}_1U$ を $1$-切断単体的対象の射とする。このとき図式
+$$
+\xymatrix{
+V_1 \ar@<1ex>[r]^{d^1_0} \ar@<-1ex>[r]_{d^1_1} \ar[d]_{g_1} &
+V_0 \ar[d]^{g_0} \\
+Y \times_X Y \ar@<1ex>[r]^{pr_1} \ar@<-1ex>[r]_{pr_0} &
+Y \ar[r] & X
+}
+$$
+は可換であり、補題に示した関係式が成り立つ。逆に、その関係式
+$f \circ g_0 \circ d^1_0 = f \circ g_0 \circ d^1_1$ を満たす射 $g_0$ が
+与えられたとき、一意な単体的対象の射 $g : V \to U$ が得られることを
+示さなければならない。これは次のように行う。任意の $n \geq 1$ に対し
+$g_{n, i} = g_0 \circ V([0] \to [n], 0 \mapsto i) :
+V_n \to Y$ とおく。上の等式は、可換図式
+$$
+\xymatrix{
+[0] \ar[rd]_{0 \mapsto 0} \ar[rrrrrd]^{0 \mapsto i} \\
+& [1] \ar[rrrr]^{0 \mapsto i, 1\mapsto i + 1} & & & & [n] \\
+[0] \ar[ru]^{0 \mapsto 1} \ar[rrrrru]_{0 \mapsto i + 1}
+}
+$$
+により $f \circ g_{n, i} = f \circ g_{n, i + 1}$ を含意する。従って
+$(g_{n, 0}, \ldots, g_{n, n}) : V_n \to Y \times_X\ldots \times_X Y = U_n$
+を得る。これが単体的対象の射であることの確認は読者に委ねる。
+補題の最後の主張は、補題に表示した公式の最初の等式と同値である。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-augmentation}
+$\mathcal{C}$ をファイバー積をもつ圏とする。$V$ を単体的対象とし、
+$\epsilon : V \to X$ を増大とする。$U$ を、その第 $n$ 項が $X$ 上の
+% Frozen-source candidate P02-E0117; no source correction applied.
+$V_0$ の $(n + 1)$ 番目のファイバー積である単体的対象とする。
+補題 \ref{simplicial-lemma-augmentation-howto} と \ref{simplicial-lemma-cosk-minus-one} を簡単に
+組み合わせることにより、標準的な射 $V \to U$ を得る。
+\end{remark}
+
+
+
+
+\section{骨格関手の左随伴}
+\label{simplicial-section-adjoint-left}
+
+\noindent
+この節では、ある場合に骨格関手 $\text{sk}_m$ の左随伴 $i_{m!}$ を構成する。
+随伴公式は
+$$
+\Mor_{\text{Simp}_m(\mathcal{C})}(U, \text{sk}_mV)
+=
+\Mor_{\text{Simp}(\mathcal{C})}(i_{m!}U, V).
+$$
+である。圏 $\mathcal{C}$ が有限余極限をもつとき、この左随伴は存在することが分かる。
+
+\medskip\noindent
+Section \ref{simplicial-section-skeleton} と同様の構成を用いる。$[n]$ の下の対象の圏
+$[n]/\Delta$ を思い出そう。Categories, Example
+\ref{categories-example-category-under-X} を参照せよ。その対象は射
+$\alpha : [n] \to [k]$ であり、射は可換三角形である。
+$([n]/\Delta)_{\leq m}$ を、$[n]/\Delta$ の対象 $[n] \to [k]$ で
+$k \leq m$ を満たすものからなる充満部分圏とする。$\mathcal{C}$ の
+$m$-切断単体的対象 $U$ が与えられたとき、規則
+\begin{eqnarray*}
+([n] \to [k]) & \longmapsto & U_k \\
+\psi : ([n] \to [k']) \to ([n] \to [k])
+& \longmapsto &
+U(\psi) : U_k \to U_{k'}
+\end{eqnarray*}
+により関手
+$$
+U(n) : ([n]/\Delta)_{\leq m}^{opp} \longrightarrow \mathcal{C}
+$$
+を定義する。$\Delta$ の与えられた射 $\varphi : [n] \to [n']$ に対し、
+$\alpha : [n'] \to [k]$ を $\varphi \circ \alpha : [n] \to [k]$ へ写す
+付随する関手
+$$
+\underline{\varphi} :
+([n']/\Delta)_{\leq m}
+\longrightarrow
+([n]/\Delta)_{\leq m}
+$$
+がある。合成 $U(n) \circ \underline{\varphi}$ は関手 $U(n')$ に等しい。
+
+\begin{lemma}
+\label{simplicial-lemma-left-adjoint-exists}
+$\mathcal{C}$ を有限余極限をもつ圏とする。関手 $i_{m!}$ はすべての $m$ に
+対して存在する。$U$ を $\mathcal{C}$ の $m$-切断単体的対象とする。
+単体的対象 $i_{m!}U$ は公式
+$$
+(i_{m!}U)_n = \colim_{([n]/\Delta)_{\leq m}^{opp}} U(n)
+$$
+により記述され、$\varphi : [n] \to [n']$ に対する写像 $i_{m!}U(\varphi)$ は、
+上の同一視 $U(n) \circ \underline{\varphi} = U(n')$ から Categories, Lemma
+\ref{categories-lemma-functorial-colimit} を介して得られる。
+\end{lemma}
+
+\begin{proof}
+この証明では、補題に表示した公式で第 $n$ 項が与えられる単体的対象を
+$i_{m!}U$ と表す。これが随伴性を満たすことを示す。
+
+\medskip\noindent
+$V$ を $\mathcal{C}$ の単体的対象とし、$\gamma : U \to \text{sk}_mV$ が
+与えられたとする。射
+$$
+\colim_{([n]/\Delta)_{\leq m}^{opp}} U(n) \to T
+$$
+は、$k \leq m$ を満たす $\alpha : [n] \to [k]$ に対する射
+$f_\alpha : U_k \to T$ の両立する系により与えられる。確かに、合成
+$$
+U_k \xrightarrow{\gamma_k} V_k \xrightarrow{V(\alpha)} V_n.
+$$
+をとれば、そのような射の系が得られる。従って誘導射
+$(i_{m!}U)_n \to V_n$ を得る。これらが単体的対象の射
+$\gamma' : i_{m!}U \to V$ をなすことの確認は読者に委ねる。
+
+\medskip\noindent
+逆に、射 $\gamma' : i_{m!}U \to V$ が与えられたとき、
+$\gamma_i : U_i \to V_i$ を合成
+$$
+U_i
+\xrightarrow{\text{id}_{[i]}}
+\colim_{([i]/\Delta)_{\leq m}^{opp}} U(i)
+\xrightarrow{\gamma'_i}
+V_i
+$$
+に等しいとおくことにより、射 $\gamma : U \to \text{sk}_m V$ を得る。
+% Frozen-source candidate P02-E0118; no source correction applied.
+これは $0 \leq i \leq n$ に対して行う。これが上の構成の逆であることの確認は
+読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-recovering-U}
+$\mathcal{C}$ を圏とし、$U$ を $\mathcal{C}$ の $m$-切断単体的対象とする。
+任意の $n \leq m$ に対し、余極限
+$$
+\colim_{([n]/\Delta)_{\leq m}^{opp}} U(n)
+$$
+は存在し、$U_n$ に等しい。
+\end{lemma}
+
+\begin{proof}
+これは、圏 $([n]/\Delta)_{\leq m}$ が始対象、すなわち
+$\text{id} : [n] \to [n]$ をもつからである。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-recovering-U-for-real}
+$\mathcal{C}$ を有限余極限をもつ圏とし、$U$ を $\mathcal{C}$ の
+$m$-切断単体的対象とする。写像 $U \to \text{sk}_m i_{m!}U$ は同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-left-adjoint-exists} と \ref{simplicial-lemma-recovering-U} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-imshriek-sets}
+$U$ が $m$-切断単体集合で $n > m$ ならば、$i_{m!}U$ のすべての
+$n$-単体は退化している。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{simplicial-lemma-left-adjoint-exists} における $i_{m!}U$ の構成から
+分かるが、次のように直接論じることもできる。$V = i_{m!}U$ とおく。
+$V'_i = V_i$ が $i \leq m$ に対して成り立ち、$i > m$ に対してすべての
+$i$-単体が退化しているような部分単体集合 $V' \subset V$ をとる。
+補題 \ref{simplicial-lemma-simplicial-set-n-skel-sub} を参照せよ。随伴公式により、
+$\text{sk}_m V' = U$ なので、包含 $V' \to V$ は逆射をもつ。
+従って $V' = V$ である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-n-skeleton-sets}
+$U$ を単体集合とし、$n \geq 0$ を整数とする。射
+$i_{n!} \text{sk}_n U \to U$ は $i_{n!} \text{sk}_n U$ を、補題
+\ref{simplicial-lemma-simplicial-set-n-skel-sub} で定義した単体集合 $U' \subset U$ と
+同一視する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-imshriek-sets} により、$i_{n!} \text{sk}_n U$ の非退化単体は
+次数 $\leq n$ にのみ存在する。写像 $i_{n!} \text{sk}_n U \to U$ は次数
+$\leq n$ で同型である。従って、写像 $i_{n!} \text{sk}_n U \to U$ は
+非退化単体を非退化単体へ写し、異なる二つの非退化単体が同じ像をもつことはない。
+よって補題 \ref{simplicial-lemma-injective-map-simplicial-sets} が適用できる。従って
+$i_{n!} \text{sk}_n U \to U$ は単射である。ここから結果は容易に従う。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-sk-literature}
+文献によっては、合成関手
+$$
+\text{Simp}(\mathcal{C})
+\xrightarrow{\text{sk}_m}
+\text{Simp}_m(\mathcal{C})
+\xrightarrow{i_{m!}}
+\text{Simp}(\mathcal{C})
+$$
+を $\text{sk}_m$ で表す。これは単体集合に対しては妥当である。実際、補題
+\ref{simplicial-lemma-n-skeleton-sets} によれば、$i_{m!} \text{sk}_m V$ は、$V$ の
+部分単体集合で、$V$ のすべての $i$-単体で $i \leq m$ のものと、それらの退化からなるものに
+ほかならないからである。それらの文献では、合成
+$$
+\text{Simp}(\mathcal{C})
+\xrightarrow{\text{sk}_m}
+\text{Simp}_m(\mathcal{C})
+\xrightarrow{\text{cosk}_m}
+\text{Simp}(\mathcal{C})
+$$
+を $\text{cosk}_m$ で表すことも慣例である。
+\end{remark}
+
+\begin{lemma}
+\label{simplicial-lemma-glue-simplex}
+$U \subset V$ を単体集合とする。$n \geq 0$ とし、
+$x \in V_n$、$x \not \in U_n$ が次を満たすと仮定する。
+\begin{enumerate}
+\item $i < n$ に対して $V_i = U_i$ である。
+\item $V_n = U_n \cup \{x\}$ である。
+\item $j > n$ に対し、任意の $z \in V_j$、$z \not \in U_j$ は退化している。
+\end{enumerate}
+$\Delta[n]$ の非退化 $n$-単体を $x$ へ写す一意な射 $\Delta[n] \to V$ を
+とる。このとき図式
+$$
+\xymatrix{
+\Delta[n] \ar[r] & V \\
+i_{(n - 1)!} \text{sk}_{n - 1} \Delta[n] \ar[r] \ar[u] & U \ar[u]
+}
+$$
+は押し出し図式である。
+\end{lemma}
+
+\begin{proof}
+簡単のため、$\partial \Delta[n] = i_{(n - 1)!} \text{sk}_{n - 1} \Delta[n]$
+と表す。自然な写像 $U \amalg_{\partial \Delta[n]} \Delta[n] \to V$ が存在する。
+これがすべての $j$ に対して次数 $j$ で全単射であることを示さなければならない。
+$j \leq n$ では明らかである。$j > n$ とする。第三の条件は、任意の
+$z \in V_j$、$z \not \in U_j$ が退化単体、例えば
+$z = s^{j - 1}_i(z')$ であることを意味する。もちろん
+$z' \not \in U_{j - 1}$ である。帰納法により、$z'$ は $x$ の退化であることが
+従う。従って、$V$ のすべての $j$-単体は $U$ に属するか、$x$ の退化である。
+これは写像 $U \amalg_{\partial \Delta[n]} \Delta[n] \to V$ が全射であることを
+含意する。$U \amalg_{\partial \Delta[n]} \Delta[n]$ の非退化単体は、$U$ の
+非退化単体の像か、$\Delta[n]$ の（一意な）非退化 $n$-単体の像であることに
+注意せよ。明らかに $x$ は非退化なので、
+$U \amalg_{\partial \Delta[n]} \Delta[n] \to V$ は非退化単体を非退化単体へ
+写し、非退化単体上で単射である。従って補題
+\ref{simplicial-lemma-injective-map-simplicial-sets} により単射である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-add-simplices}
+$U \subset V$ を単体集合とし、すべての $n$ に対して $U_n, V_n$ は有限かつ
+空でないとする。$U$ と $V$ は有限個の非退化単体をもつと仮定する。このとき、
+部分単体集合の列
+% Frozen-source candidate P02-E0119; no source correction applied.
+$$
+U = W^0 \subset W^1 \subset W^2 \subset \ldots W^r = V
+$$
+で、各包含 $W^i \subset W^{i + 1}$ に補題 \ref{simplicial-lemma-glue-simplex} が適用される
+ものが存在する。
+\end{lemma}
+
+\begin{proof}
+$V$ がもつ非退化単体で $U$ に属さないものが存在する最小の整数を $n$ とする。
+$x \in V_n$、$x\not \in U_n$ をそのような非退化単体とする。
+$W \subset V$ を、$U$ に属するか、$x$ の（反復）退化である元からなる集合とする。
+（言い換えれば、全射 $\varphi : [m] \to [n]$ に対して
+$V(\varphi)(x)$ の形である。）$W$ が単体集合であることは容易に分かる。
+包含 $U \subset W$ は補題 \ref{simplicial-lemma-glue-simplex} の条件を満たす。
+さらに、$V$ の非退化単体で $W$ に含まれないものの個数は、$V$ の
+非退化単体で $U$ に含まれないものの個数よりちょうど一つ少ない。
+従って、この個数に関する帰納法で結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-imshriek-abelian}
+% Frozen-source candidate P02-E0120; no source correction applied.
+$\mathcal{A}$ をアーベル圏とする
+$U$ を $\mathcal{A}$ の $m$-切断単体的対象とする。$n > m$ に対して
+$N(i_{m!}U)_n = 0$ である。
+\end{lemma}
+
+\begin{proof}
+$V = i_{m!}U$ とおく。$i \leq m$ に対して $V'_i = V_i$ であり、
+$i > m$ に対して $N(V'_i) = 0$ であるような $V$ の部分単体的対象
+$V' \subset V$ をとる。補題 \ref{simplicial-lemma-simplicial-abelian-n-skel-sub} を参照せよ。
+随伴公式により、$\text{sk}_m V' = U$ なので、包含 $V' \to V$ は逆射をもつ。
+従って $V' = V$ である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-n-skeleton-abelian}
+$\mathcal{A}$ をアーベル圏とし、$U$ を $\mathcal{A}$ の単体的対象とする。
+$n \geq 0$ を整数とする。射 $i_{n!} \text{sk}_n U \to U$ は
+$i_{n!} \text{sk}_n U$ を、補題 \ref{simplicial-lemma-simplicial-abelian-n-skel-sub} で
+定義した部分単体的対象 $U' \subset U$ と同一視する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-imshriek-abelian} により、$i > n$ に対して
+$N(i_{n!} \text{sk}_n U)_i = 0$ である。写像
+$i_{n!} \text{sk}_n U \to U$ は次数 $\leq n$ で同型である。補題
+\ref{simplicial-lemma-recovering-U-for-real} を参照せよ。従って、写像
+$i_{n!} \text{sk}_n U \to U$ はすべての $i$ に対して単射
+$N(i_{n!} \text{sk}_n U)_i \to N(U)_i$ を誘導する。よって補題
+\ref{simplicial-lemma-injective-map-simplicial-abelian} が適用できる。従って
+$i_{n!} \text{sk}_n U \to U$ は単射である。ここから結果は容易に従う。
+\end{proof}
+
+\noindent
+上の内容を用いて余骨格関手を考える別の方法を述べる。
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-shriek}
+$\mathcal{C}$ を有限余積と有限極限をもつ圏とする。$V$ を $\mathcal{C}$ の
+単体的対象とする。このとき
+$$
+(\text{cosk}_n \text{sk}_n V)_{n + 1}
+=
+\Hom(i_{n !}\text{sk}_n \Delta[n + 1], V)_0.
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-morphism-from-coproduct} により、左辺の対象は $X$ に
+次の等式列の最初の集合を対応させる関手を表現する。
+\begin{eqnarray*}
+\Mor(X \times \Delta[n + 1], \text{cosk}_n \text{sk}_n V)
+& = &
+\Mor(X \times \text{sk}_n \Delta[n + 1], \text{sk}_n V) \\
+& = &
+\Mor(X \times i_{n !} \text{sk}_n \Delta[n + 1], V).
+\end{eqnarray*}
+補題の公式の右辺の対象は、$X$ に等式列の最後の集合を対応させる関手により
+表現される。これで結果が証明された。
+
+\medskip\noindent
+等式列では
+$\text{sk}_n (X \times \Delta[n + 1]) = X \times \text{sk}_n \Delta[n + 1]$
+および
+$i_{n!}(X \times \text{sk}_n \Delta[n + 1]) =
+X \times i_{n !} \text{sk}_n \Delta[n + 1]$
+を用いた。最初の等式は明らかである。$\mathcal{C}$ の任意の（切断されていてもよい）
+単体的対象 $W$ と $\mathcal{C}$ の任意の対象 $X$ に対し、一時的に
+$\Mor_\mathcal{C}(X, W)$ を、$[n] \mapsto \Mor_\mathcal{C}(X, W_n)$ で
+与えられる（切断されていてもよい）単体集合と表す。定義から、任意の
+（切断されていてもよい）単体集合 $U$ に対し
+$\Mor(U \times X, W) =
+\Mor(U, \Mor_\mathcal{C}(X, W))$ である。従って
+\begin{eqnarray*}
+\Mor(X \times i_{n !} \text{sk}_n \Delta[n + 1], W)
+& = &
+\Mor(i_{n !} \text{sk}_n \Delta[n + 1], \Mor_\mathcal{C}(X, W)) \\
+& = &
+\Mor(\text{sk}_n \Delta[n + 1],
+\text{sk}_n\Mor_\mathcal{C}(X, W)) \\
+& = &
+\Mor(X \times \text{sk}_n \Delta[n + 1], \text{sk}_nW) \\
+& = &
+\Mor(i_{n!}(X \times \text{sk}_n \Delta[n + 1]), W).
+\end{eqnarray*}
+これで用いた第二の等式が証明され、補題の証明が終わる。
+\end{proof}
+
+
+
+
+\section{アーベル圏の単体的対象}
+\label{simplicial-section-abelian}
+
+\noindent
+アーベル圏は Homology, Section \ref{homology-section-abelian-categories} で
+定義されていることを思い出そう。
+
+\begin{lemma}
+\label{simplicial-lemma-abelian}
+$\mathcal{A}$ をアーベル圏とする。
+\begin{enumerate}
+\item 圏 $\text{Simp}(\mathcal{A})$ と $\text{CoSimp}(\mathcal{A})$ はアーベル圏である。
+\item （余）単体的対象の射 $f : A \to B$ が単射であるための必要十分条件は、
+各 $f_n : A_n \to B_n$ が単射であることである。
+\item （余）単体的対象の射 $f : A \to B$ が全射であるための必要十分条件は、
+各 $f_n : A_n \to B_n$ が全射であることである。
+\item （余）単体的対象の列
+$$
+A \xrightarrow{f} B \xrightarrow{g} C
+$$
+が $B$ で完全であるための必要十分条件は、各列
+$$
+A_i \xrightarrow{f_i} B_i \xrightarrow{g_i} C_i
+$$
+が $B_i$ で完全であることである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+前加法性は容易である。すべての次数で $U_n = 0$ とおくことにより終対象が
+与えられる。直積の存在は補題 \ref{simplicial-lemma-product} と
+\ref{simplicial-lemma-product-cosimplicial-objects} で見た。核と余核は項ごとに核と余核を
+とることにより得られる。
+\end{proof}
+
+\noindent
+$A$ を $\mathcal{A}$ の対象、$k$ を整数とし、次を満たす $k$-切断単体的対象
+$U$ を考える。
+\begin{enumerate}
+\item $i < k$ に対して $U_i = 0$ である。
+\item $U_k = A$ である。
+\item $U(\text{id}_{[k]}) = \text{id}_A$ を除き、すべての射 $U(\varphi)$ は零である。
+\end{enumerate}
+$\mathcal{A}$ は有限極限と有限余極限の両方をもつので、$\text{cosk}_k U$ と
+$i_{k!}U$ はともに存在する。これら二つと標準写像
+$i_{k!}U \to \text{cosk}_kU$ を記述する。
+
+\begin{lemma}
+\label{simplicial-lemma-eilenberg-maclane-object}
+$A$, $k$, $U$ を上のとおりとし、従って $i < k$ に対して $U_i = 0$ かつ
+$U_k = A$ とする。
+\begin{enumerate}
+\item $k$-切断単体的対象 $V$ が与えられたとき
+$$
+\Mor(U, V)
+=
+\{ f : A \to V_k \mid d^k_i \circ f = 0, \ i = 0, \ldots, k \}
+$$
+および
+$$
+\Mor(V, U)
+=
+\{ f : V_k \to A \mid f \circ s^{k - 1}_i = 0, \ i = 0, \ldots, k - 1 \}.
+$$
+である。
+\item 対象 $i_{k!} U$ の第 $n$ 項は $\bigoplus_\alpha A$ に等しい。ここで
+$\alpha$ はすべての全射 $\alpha : [n] \to [k]$ を走る。
+\item 任意の $\varphi : [m] \to [n]$ に対し、写像 $i_{k!} U(\varphi)$ は
+$\bigoplus_\alpha A \to \bigoplus_{\alpha'} A$ という写像で記述される。
+これは $\alpha : [n] \to [k]$ に対応する成分を、
+$\alpha \circ \varphi$ が全射でなければ零へ写し、全射ならば恒等写像により
+$\alpha \circ \varphi$ に対応する成分へ写す。
+\item 対象 $\text{cosk}_k U$ の第 $n$ 項は $\bigoplus_\beta A$ に等しい。
+ここで $\beta$ はすべての単射 $\beta : [k] \to [n]$ を走る。
+\item 任意の $\varphi : [m] \to [n]$ に対し、写像 $\text{cosk}_k U(\varphi)$ は
+$\bigoplus_\beta A \to \bigoplus_{\beta'} A$ という写像で記述される。
+これは $\beta : [k] \to [n]$ に対応する成分を、$\beta$ が $\varphi$ を
+経由しなければ零へ写し、経由するならば
+$\beta = \varphi \circ \beta'$ を満たす各 $\beta'$ に対応する成分へ
+恒等写像により写す。
+\item 標準写像
+$
+c : i_{k !} U \to \text{cosk}_k U
+$
+は、次数 $n$ における $(\alpha, \beta)$ 係数 $A \to A$ が、
+$\alpha \circ \beta$ が恒等写像でなければ零であり、恒等写像ならば
+$\text{id}_A$ である。
+\item 標準写像
+$
+c : i_{k !} U \to \text{cosk}_k U
+$
+は単射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明は読者に委ねる。
+
+\medskip\noindent
+(2) と (3) の規則を単体的対象の定義とみなし、それを $\tilde U$ と記す。
+これが $i_{k!}U$ の一つの実現であることを示す。
+これにより (2) と (3) が同時に証明される。射 $f : U \to \text{sk}_kV$ が
+与えられたとき、$k$-骨格をとると $f$ に戻る一意な射
+$\tilde f : \tilde U \to V$ が存在することを示せばよい。
+(1) より、$f$ は、すべての $i$ に対して像が $d^k_i$ の核に含まれる射
+$f_k : A \to V_k$ に対応する。任意の全射 $\alpha : [n] \to [k]$ に対し、
+$\tilde f_\alpha : A \to V_n$ を合成
+$\tilde f_\alpha = V(\alpha) \circ f_k : A \to V_n$ と等しくおく。
+$\tilde f_n : \tilde U_n \to V_n$ を、全射 $\alpha : [n] \to [k]$ 全体に
+わたる $\tilde f_\alpha$ の和として定義する。このような
+$\tilde f_\alpha$ の族が単体的対象の射を定めるための必要十分条件は、
+任意の $\varphi : [m] \to [n]$ に対して図式
+$$
+\xymatrix{
+\bigoplus_{\alpha : [n] \to [k]\text{ surjective}} A
+\ar[r]_-{\tilde f_n}
+\ar[d]_{(3)} &
+V_n \ar[d]^{V(\varphi)} \\
+\bigoplus_{\alpha' : [m] \to [k]\text{ surjective}} A
+\ar[r]^-{\tilde f_m} &
+V_m
+}
+$$
+が可換であることである。$\varphi = \alpha$ を選べば、
+$\tilde f_\alpha$ の選択が $f_k$ によって一意に定まることが分かる。
+一般の場合の可換性は、左上隅の各直和成分について個別に確かめられる。
+$\alpha \circ \varphi$ が全射となる $\alpha$ に対応する成分については
+明らかである。実際、それらは $\text{id}_A$ によって
+$\alpha' = \alpha \circ \varphi$ に対応する成分へ写され、
+$\tilde f_{\alpha'} = V(\alpha') \circ f_k =
+V(\alpha \circ \varphi) \circ f_k = V(\varphi) \circ \tilde f_\alpha$
+が成り立つ。$\alpha \circ \varphi$ が全射でない成分については、
+$V(\varphi) \circ \tilde f_\alpha = 0$ を示さなければならない。
+定義により、これは
+$V(\varphi) \circ V(\alpha) \circ f_k = V(\alpha \circ \varphi) \circ f_k$
+に等しい。$\alpha \circ \varphi$ は全射でないから、これを
+$\delta^k_i \circ \psi$ と書くことができ、上で見たことから
+$V(\varphi) \circ V(\alpha) \circ f_k =
+V(\psi) \circ d^k_i \circ f_k = 0$ を得る。
+
+\medskip\noindent
+(4) と (5) の規則を単体的対象の定義とみなし、それを $\tilde U$ と記す。
+これが $\text{cosk}_k U$ の一つの実現であることを示す。
+これにより (4) と (5) が同時に証明される。論法は上の (2), (3) の証明と
+完全に双対であるが、それでも記しておく。射
+$f : \text{sk}_kV \to U$ が与えられたとき、$k$-骨格をとると $f$ に戻る
+一意な射 $\tilde f : V \to \tilde U$ が存在することを示せばよい。
+(1) より、$f$ は、すべての $i$ に対して $s^{k - 1}_i$ の像上で零となる射
+$f_k : V_k \to A$ に対応する。任意の単射 $\beta : [k] \to [n]$ に対し、
+$\tilde f_\beta : V_n \to A$ を合成
+$\tilde f_\beta = f_k \circ V(\beta) : V_n \to A$ と等しくおく。
+$\tilde f_n : V_n \to \tilde U_n$ を、単射 $\beta : [k] \to [n]$ 全体に
+わたる $\tilde f_\beta$ の和として定義する。このような
+$\tilde f_\beta$ の族が単体的対象の射を定めるための必要十分条件は、
+任意の $\varphi : [m] \to [n]$ に対して図式
+$$
+\xymatrix{
+V_n
+\ar[d]_{V(\varphi)}
+\ar[r]_-{\tilde f_n}
+&
+\bigoplus_{\beta : [k] \to [n]\text{ injective}} A
+\ar[d]^{(5)}
+\\
+V_m
+\ar[r]^-{\tilde f_m}
+&
+\bigoplus_{\beta' : [k] \to [m]\text{ injective}} A
+}
+$$
+が可換であることである。$\varphi = \beta$ を選べば、
+$\tilde f_\beta$ の選択が $f_k$ によって一意に定まることが分かる。
+一般の場合の可換性は、右下隅の各直和成分について個別に確かめられる。
+$\varphi \circ \beta'$ が単射となる $\beta'$ に対応する成分については
+明らかである。実際、これらの成分には
+$\beta = \varphi \circ \beta'$ を満たす成分だけが写り込み、この場合
+$\tilde f_{\beta'} \circ V(\varphi) =
+f_k \circ V(\beta') \circ V(\varphi) =
+f_k \circ V(\beta) = \tilde f_\beta$ が成り立つ。
+$\varphi \circ \beta'$ が単射でない成分については、
+$\tilde f_{\beta'} \circ V(\varphi) = 0$ を示さなければならない。
+定義により、これは
+$f_k \circ V(\beta') \circ V(\varphi) =
+f_k \circ V(\varphi \circ \beta')$ に等しい。
+$\varphi \circ \beta'$ は単射でないから、これを
+$\psi \circ \sigma^{k - 1}_i$ と書くことができ、上で見たことから
+$f_k \circ V(\beta') \circ V(\varphi) =
+f_k \circ s^{k - 1}_i \circ V(\psi) = 0$ を得る。
+
+\medskip\noindent
+合成 $i_{k!}U \to \text{cosk}_kU$ は、
+$A = U_k = (i_{k!}U)_k = (\text{cosk}_kU)_k$ 上で恒等写像となる
+単体的対象の一意な写像である。従って、提示した規則が単体的対象の射を
+定めることを確かめれば十分である。そのためには、任意の
+$\varphi : [m] \to [n]$ に対して図式
+$$
+\xymatrix{
+\bigoplus_{\alpha : [n] \to [k]\text{ surjective}} A
+\ar[d]_{(3)}
+\ar[r]_{(6)}
+&
+\bigoplus_{\beta : [k] \to [n]\text{ injective}} A
+\ar[d]^{(5)}
+\\
+\bigoplus_{\alpha' : [m] \to [k]\text{ surjective}} A
+\ar[r]^{(6)}
+&
+\bigoplus_{\beta' : [k] \to [m]\text{ injective}} A
+}
+$$
+が可換であることを示す必要がある。これは、成分が $0$ と $1$ だけからなる
+行列を用いて次のように考えられる。(3) の行列の
+$(\alpha', \alpha)$ 成分が非零であるための必要十分条件は
+$\alpha' = \alpha \circ \varphi$ である。同様に、(5) の行列の
+$(\beta', \beta)$ 成分が非零であるための必要十分条件は
+$\beta = \varphi \circ \beta'$ である。(6) の上側の行列の
+$(\alpha, \beta)$ 成分が非零であるための必要十分条件は
+$\alpha \circ \beta = \text{id}_{[k]}$ である。(6) の下側の行列についても
+同様である。従って図式の可換性は、二つの合成の
+$(\alpha, \beta')$ 成分を計算し、それらが等しいことを確かめることに帰着する。
+これは等式
+$$
+\# \left\{
+\beta
+\mid
+\beta = \varphi \circ \beta'
+\text{ and }
+\alpha \circ \beta = \text{id}_{[k]}
+\right\}
+=
+\# \left\{
+\alpha'
+\mid
+\alpha' = \alpha \circ \varphi
+\text{ and }
+\alpha' \circ \beta' = \text{id}_{[k]}
+\right\}
+$$
+に帰着し、その証明は安心して読者に委ねられる。
+
+\medskip\noindent
+最後に (7) を証明する。これは補題
+\ref{simplicial-lemma-injective-map-simplicial-abelian},
+\ref{simplicial-lemma-recover-cosk}, \ref{simplicial-lemma-recovering-U-for-real}
+および \ref{simplicial-lemma-imshriek-abelian} から直ちに従う。
+\end{proof}
+
+\begin{definition}
+\label{simplicial-definition-eilenberg-maclane}
+$\mathcal{A}$ をアーベル圏とする。$A$ を $\mathcal{A}$ の対象とし、
+$k$ を $\geq 0$ である整数とする。上の補題
+\ref{simplicial-lemma-eilenberg-maclane-object} で記述した対象
+$K(A, k) = i_{k!}U$ を {\it Eilenberg--Mac Lane 対象 $K(A, k)$} と呼ぶ。
+\end{definition}
+
+
+\begin{lemma}
+\label{simplicial-lemma-extension}
+$\mathcal{A}$ をアーベル圏とする。$A$ を $\mathcal{A}$ の対象とし、
+$k$ を $\geq 0$ である整数とする。次の規則で定義される単体的対象 $E$ を考える。
+\begin{enumerate}
+\item $E_n = \bigoplus_\alpha A$ とする。ただし和は、像が $[k]$ または
+$[k + 1]$ である $\alpha : [n] \to [k + 1]$ 全体を走る。
+\item $\varphi : [m] \to [n]$ が与えられたとき、写像 $E_n \to E_m$ は、
+$\Im(\alpha \circ \varphi)$ が $[k]$ または $[k + 1]$ に等しい場合、
+$\alpha$ に対応する成分を $\text{id}_A$ によって
+$\alpha \circ \varphi$ に対応する成分へ写す。
+\end{enumerate}
+このとき、各項で分裂する短完全列
+$$
+0 \to K(A, k) \to E \to K(A, k + 1) \to 0
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+写像 $K(A, k)_n \to E_n$ および $E_n \to K(A, k + 1)_n$ はそれぞれ、
+添字集合の包含から明らかな直和の包含および直和の射影によって与えられる。
+これらが単体的対象の射であることは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-abelian-limit-skeleta}
+$\mathcal{A}$ をアーベル圏とする。$\mathcal{A}$ の任意の単体的対象 $V$ に対し
+$$
+V = \colim_n i_{n!}\text{sk}_n V
+$$
+が成り立ち、すべての遷移写像は単射である。
+\end{lemma}
+
+\begin{proof}
+これは、$n \geq m$ となれば各 $V_m$ が
+$(i_{n!}\text{sk}_n V)_m$ に等しくなることから直ちに従う。
+遷移写像については補題 \ref{simplicial-lemma-n-skeleton-abelian} も参照せよ。
+\end{proof}
+
+\section{単体的対象と鎖複体}
+\label{simplicial-section-complexes}
+
+\noindent
+$\mathcal{A}$ をアーベル圏とする。鎖複体に関する規約と記法については
+Homology, Section \ref{homology-section-complexes} を参照せよ。
+$U$ を $\mathcal{A}$ の単体的対象とする。{\it $U$ に付随する鎖複体 $s(U)$}、
+ときに {\it Moore 複体} とも呼ばれるものを、境界写像
+$d_n : U_n \to U_{n - 1}$ が式
+$$
+d_n = \sum\nolimits_{i = 0}^n (-1)^i d^n_i.
+$$
+で与えられる鎖複体
+$$
+\ldots \to U_2 \to U_1 \to U_0 \to 0 \to 0 \to \ldots
+$$
+として定める。実際、注意 \ref{simplicial-remark-relations} に列挙した関係式により
+\begin{eqnarray*}
+d_n \circ d_{n + 1}
+& = &
+(\sum\nolimits_{i = 0}^n (-1)^i d^n_i) \circ
+(\sum\nolimits_{j = 0}^{n + 1} (-1)^j d^{n + 1}_j) \\
+& = &
+\sum\nolimits_{0 \leq i < j \leq n + 1}
+(-1)^{i + j} d^n_{j - 1} \circ d^{n + 1}_i
++
+\sum\nolimits_{n \geq i \geq j \geq 0}
+(-1)^{i + j} d^n_i \circ d^{n + 1}_j \\
+& = & 0.
+\end{eqnarray*}
+となるので、これは複体である。符号が相殺するのである！
+付随する鎖複体を $s(U)$ と記す。この構成が関手的であることは明らかであり、
+従って関手
+$$
+s : \text{Simp}(\mathcal{A}) \longrightarrow \text{Ch}_{\geq 0}(\mathcal{A}).
+$$
+を定める。こうして、紛らわしいが正しい公式 $s(U)_n = U_n$ を得る。
+
+\begin{lemma}
+\label{simplicial-lemma-s-exact}
+関手 $s$ は完全である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-abelian} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-homology-extension}
+$\mathcal{A}$ をアーベル圏とする。$A$ を $\mathcal{A}$ の対象、
+$k$ を整数とする。補題 \ref{simplicial-lemma-extension} で記述した対象を $E$ とする。
+このとき複体 $s(E)$ は非輪状である。
+\end{lemma}
+
+\begin{proof}
+射 $\alpha : [n] \to [k + 1]$ に対し、写像
+$\alpha' : [n + 1] \to [k + 1]$ を
+$\alpha'|_{[n]} = \alpha$ かつ $\alpha'(n + 1) = k + 1$ となるものとして
+定義する。$\alpha$ の像が $[k]$ または $[k + 1]$ ならば、
+$\alpha'$ の像は $[k + 1]$ であることに注意する。
+$\alpha$ に対応する成分を $A$ 上の恒等写像によって
+$\alpha'$ に対応する成分へ写す写像の族 $h_n : E_n \to E_{n + 1}$ を考える。
+$d_{n + 1} \circ h_n - h_{n - 1} \circ d_n$ を計算しよう。
+まず圏 $\mathcal{A}$ がアーベル群の圏である場合にこれを行う。
+添字集合に現れる写像 $\alpha$ に対応する $E_n$ の成分に属する元
+$x \in A$ を $x_\alpha$ と記すことにする。さらに、
+$\Im(\alpha)$ が $[k]$ または $[k + 1]$ でないときには、
+$x_\alpha$ は $E_n$ の零元を表すという規約を採用する。
+これらの規約のもとで
+$$
+d_{n + 1}(h_n(x_\alpha)) =
+\sum\nolimits_{i = 0}^{n + 1} (-1)^i x_{\alpha' \circ \delta^{n + 1}_i}
+$$
+および
+$$
+h_{n - 1}(d_n(x_\alpha)) =
+\sum\nolimits_{i = 0}^n (-1)^i x_{(\alpha \circ \delta_i^n)'}
+$$
+を得る。$i = 0, \ldots, n$ に対して
+$\alpha' \circ \delta^{n + 1}_i = (\alpha \circ \delta_i^n)'$ であることは
+容易に分かる。また
+$\alpha' \circ \delta^{n + 1}_{n + 1} = \alpha$ であることも容易に分かる。
+従って
+$$
+(d_{n + 1} \circ h_n - h_{n - 1} \circ d_n)(x_\alpha)
+=
+(-1)^{n + 1} x_\alpha
+$$
+を得る。これらの恒等式は、任意のアーベル圏 $\mathcal{A}$ に対しても成立する。
+なぜなら、単体的アーベル群 $[n] \mapsto \Hom(A, E_n)$ において成立するからで
+ある。詳細は読者に委ねる。従って $E$ 上の恒等写像は零写像とホモトピックであり、
+そのホモトピーは写像の系 $h'_n = (-1)^{n + 1}h_n : E_n \to E_{n + 1}$ によって
+与えられる。よって $E$ は非輪状である。例えば Homology, Lemma
+\ref{homology-lemma-map-homology-homotopy} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-homology-eilenberg-maclane}
+$\mathcal{A}$ をアーベル圏とする。$A$ を $\mathcal{A}$ の対象、
+$k$ を整数とする。このとき $i = k$ ならば $H_i(s(K(A, k))) = A$ であり、
+それ以外ならば $0$ である。
+\end{lemma}
+
+\begin{proof}
+まず $k = 0$ の場合を証明する。この場合、すべての $n$ に対して
+$K(A, 0)_n = A$ である。さらに、この単体的アーベル群におけるすべての写像は
+$\text{id}_A$、すなわち $K(A, 0)$ は値 $A$ の定値単体的対象である。
+境界写像 $d_n = \sum_{i = 0}^n (-1)^i \text{id}_A
+= 0$ は $n$ が奇数のときに成立し、$n$ が偶数のときには
+$ = \text{id}_A$ である。従って $s(K(A, 0))$ は
+$$
+\ldots \to A \xrightarrow{0} A \xrightarrow{1} A \xrightarrow{0} A \to 0
+$$
+という形をしており、結論は明らかである。
+
+\medskip\noindent
+次に、すべての $k$ に対して帰納法で結論を証明する。
+$k$ に対する結論が与えられたとし、補題 \ref{simplicial-lemma-extension} の短完全列
+$$
+0 \to K(A, k) \to E \to K(A, k + 1) \to 0
+$$
+を考える。補題 \ref{simplicial-lemma-abelian} により、付随する鎖複体の列は完全である。
+補題 \ref{simplicial-lemma-homology-extension} により $s(E)$ は非輪状である。
+従って $k + 1$ に対する結論はホモロジーの長完全列から従う。
+Homology, Lemma \ref{homology-lemma-long-exact-sequence-chain} を参照せよ。
+\end{proof}
+
+\noindent
+$\mathcal{A}$ の単体的対象には、もう一つの鎖複体を対応させることができる。
+補題 \ref{simplicial-lemma-splitting-abelian-category} により、
+$\mathcal{A}$ の任意の単体的対象 $U$ は標準的に分裂し、
+$N(U_m) = \bigcap_{i = 0}^{m - 1} \Ker(d^m_i)$ となることを思い出そう。
+{\it 正規化鎖複体 $N(U)$} を、境界写像
+$d_n : N(U_n) \to N(U_{n - 1})$ が、$U_n$ の直和成分 $N(U_n)$ への
+$(-1)^nd^n_n$ の制限によって与えられる鎖複体
+$$
+\ldots \to N(U_2) \to N(U_1) \to N(U_0) \to 0 \to 0 \to \ldots
+$$
+として定義する。補題 \ref{simplicial-lemma-N-d-in-N} から
+$d^n_n(N(U_n)) \subset N(U_{n - 1})$ が従うことに注意する。
+また、$d^n_n \circ d^{n + 1}_{n + 1} = d^n_n \circ d^{n + 1}_n$ であり、
+定義により $d^{n + 1}_n$ は $N(U_{n + 1})$ 上で零となるから、これは複体である。
+こうして第二の関手
+$$
+N : \text{Simp}(\mathcal{A}) \longrightarrow \text{Ch}_{\geq 0}(\mathcal{A}).
+$$
+を得る。微分に符号が現れる理由は次のとおりである。
+
+\begin{lemma}
+\label{simplicial-lemma-map-associated-complexes}
+$\mathcal{A}$ をアーベル圏とし、$U$ を $\mathcal{A}$ の単体的対象とする。
+標準写像 $N(U_n) \to U_n$ は複体の射 $N(U) \to s(U)$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+$s(U)_n = U_n$ 上の微分は $\sum (-1)^i d^n_i$ であり、
+$i < n$ に対する写像 $d^n_i$ は $N(U_n)$ 上で零となる一方、
+$(-1)^nd^n_n$ の制限は定義により $N(U)$ の境界写像であるから明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-N-K}
+$\mathcal{A}$ をアーベル圏とする。$A$ を $\mathcal{A}$ の対象、
+$k$ を整数とする。このとき $i = k$ ならば $N(K(A, k))_i = A$ であり、
+それ以外ならば $0$ である。
+\end{lemma}
+
+\begin{proof}
+$i < k$ のとき $K(A, k)_i = 0$ であるから、
+$N(K(A, k))_i = 0$ であることは明らかである。
+$K(A, k)_{k - 1} = 0$ かつ $K(A, k)_k = A$ であるから、
+$N(K(A, k))_k = A$ であることも明らかである。
+$i > k$ に対しては、補題 \ref{simplicial-lemma-imshriek-abelian} と
+$K(A, k)$ の定義、すなわち定義 \ref{simplicial-definition-eilenberg-maclane} により、
+$N(K(A, k))_i = 0$ である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-decompose-associated-complexes}
+$\mathcal{A}$ をアーベル圏とし、$U$ を $\mathcal{A}$ の単体的対象とする。
+鎖複体の標準射 $N(U) \to s(U)$ は分裂する。実際、ある複体 $D(U)$ に対して
+$$
+s(U) = N(U) \oplus D(U)
+$$
+である。構成 $U \mapsto D(U)$ は関手的である。
+\end{lemma}
+
+\begin{proof}
+$D(U)_n$ を、写像
+$$
+\bigoplus\nolimits_{\varphi : [n] \to [m]\text{ surjective}, \ m < n} N(U_m)
+\xrightarrow{\bigoplus U(\varphi)}
+U_n
+$$
+の像と定義する。補題 \ref{simplicial-lemma-splitting-abelian-category} と
+定義 \ref{simplicial-definition-split} によれば、これは $U_n$ の部分対象であり
+$N(U_n)$ の補部分対象である。$D(U)$ が部分複体であることを示そう。
+$m < n$ を満たす全射 $\varphi : [n] \to [m]$ を選び、合成
+$$
+N(U_m) \xrightarrow{U(\varphi)} U_n \xrightarrow{d_n} U_{n - 1}.
+$$
+を考える。この合成は、符号 $(-1)^i$, $i = 0, \ldots, n$ を付けた写像
+$$
+N(U_m) \xrightarrow{U(\varphi \circ \delta^n_i)} U_{n - 1}
+$$
+の和である。
+
+\medskip\noindent
+まず $m$ に関する昇帰納法により、$0 \leq m < n - 1$ のとき、すべての写像
+$U(\varphi \circ \delta^n_i)$ が $N(U_m)$ を $D(U)_{n - 1}$ の中へ写すことを
+証明する（$m = n - 1$ の場合は下で扱う）。写像
+$\varphi \circ \delta^n_i : [n - 1] \to [m]$ が全射であるときは常に、
+定義により $U(\varphi \circ \delta^n_i)$ のもとでの $N(U_m)$ の像は
+$D(U)_{n - 1}$ に含まれる。$\varphi \circ \delta^n_i : [n - 1] \to [m]$
+が全射でないとき、$j = \varphi(i)$ とおく。このとき $i$ は
+$\varphi$ のもとでの像が $j$ となる一意な添字であることに注意する。
+% P02-E0121: frozen ill-typed factorization and induced U-map preserved; see ERRATA_CANDIDATES.jsonl.
+ある $\psi : [n - 1] \to [m - 1]$ に対して
+$\varphi \circ \delta^n_i = \delta^m_j \circ \psi \circ \delta^n_i$ と書ける。
+従って $U(\varphi \circ \delta^n_i) = U(\psi \circ \delta^n_i) \circ d^m_j$ であり、
+これは $j = m$ でない限り $N(U_m)$ 上で零である。$j = m$ のときは
+$d^m_m(N(U_m)) \subset N(U_{m - 1})$ であり、従って
+$U(\varphi \circ \delta^n_i)(N(U_m)) \subset
+U(\psi \circ \delta^n_i)(N(U_{m - 1}))$ となるので、帰納法の仮定により
+結論を得る。
+
+\medskip\noindent
+$D(U)$ が部分複体であることの証明を完了するには、合成
+% P02-E0122: frozen display punctuation preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+N(U_m) \xrightarrow{U(\varphi)} U_n \xrightarrow{d_n} U_{n - 1}.
+$$
+を $m =  n - 1$ の場合についてなお扱う必要がある。この場合、ある
+$0 \leq j \leq n - 1$ に対して $\varphi = \sigma^{n - 1}_j$ であり、
+$U(\varphi) = s^{n - 1}_j$ である。従って合成は和
+$$
+\sum (-1)^i d^n_i \circ s^{n - 1}_j
+$$
+で与えられる。注意 \ref{simplicial-remark-relations} から
+$d^n_j \circ s^{n - 1}_j = d^n_{j + 1} \circ s^{n - 1}_j = \text{id}$
+であることを思い出そう。対応する項は符号が反対なので相殺する。
+$j < n - 1$ のとき、写像 $d^n_n \circ s^{n - 1}_j$ は
+$s^{n - 2}_j \circ d^{n - 1}_{n - 1}$ に等しい。
+$d^{n - 1}_{n - 1}$ は $N(U_{n - 1})$ を $N(U_{n - 2})$ の中へ写すから、
+% P02-E0123: frozen unclosed outer parenthesis preserved; see ERRATA_CANDIDATES.jsonl.
+像 $d^n_n ( s^{n - 1}_j (N(U_{n - 1}))$ は
+$s^{n - 2}_j(N(U_{n - 2}))$ に含まれ、さらにこれは定義により
+% P02-E0124: frozen D(U_{n-1}) notation preserved; see ERRATA_CANDIDATES.jsonl.
+$D(U_{n - 1})$ に含まれる。それ以外のすべての $(i, j)$ の組については、
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_{j - 1} \circ d^{n - 1}_i$
+（$i < j$ の場合）、または
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_j \circ d^{n - 1}_{i - 1}$
+（$n > i > j + 1$ の場合）のいずれかであり、これらの場合には
+$N(U_{n - 1})$ の定義により写像は零である。
+\end{proof}
+
+\begin{remark}
+\label{simplicial-remark-degenerate-subcomplex}
+補題 \ref{simplicial-lemma-decompose-associated-complexes} の状況では、部分複体
+$D(U) \subset s(U)$ を、項が
+$$
+D(U)_n = \Im\left(
+\bigoplus\nolimits_{\varphi : [n] \to [m]\text{ surjective}, \ m < n} U_m
+\xrightarrow{\bigoplus U(\varphi)}
+U_n\right)
+$$
+である部分複体として定義することもできる。実際、$U_m$ は部分対象
+$N(U_m)$ と、$k < m$ を満たす全射 $[m] \to [k]$ に対する $N(U_k)$ の像との
+直和であるから、これは補題 \ref{simplicial-lemma-decompose-associated-complexes} の証明で
+与えた $D(U)_n$ の定義と明らかに同じである。従って $U$ が単体的アーベル群
+ならば、$D(U)_n$ の元は退化した $n$-単体の和にちょうど一致する。
+\end{remark}
+
+\begin{lemma}
+\label{simplicial-lemma-N-exact}
+関手 $N$ は完全である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-s-exact} と、補題 \ref{simplicial-lemma-decompose-associated-complexes} の
+関手的分解から従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-quasi-isomorphism}
+$\mathcal{A}$ をアーベル圏とし、$V$ を $\mathcal{A}$ の単体的対象とする。
+鎖複体の標準射 $N(V) \to s(V)$ は擬同型である。言い換えれば、補題
+\ref{simplicial-lemma-decompose-associated-complexes} の複体 $D(V)$ は非輪状である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-homology-eilenberg-maclane} と \ref{simplicial-lemma-N-K} により、
+任意の対象 $A$ と任意の $k \geq 0$ に対して $K(A, k)$ について結論が
+成り立つことに注意する。仮定 $IH_{n, m}$ を次のように定める：
+$j \leq m$ に対して $V_j = 0$ であるすべての $V$ と、すべての $i \leq n$
+に対して、写像 $N(V) \to s(V)$ が同型
+$H_i(N(V)) \to H_i(s(V))$ を誘導する。
+
+\medskip\noindent
+% P02-E0125: frozen English grammar is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+帰納法を始めるにあたり、$IH_{n, n}$ は自明に真であることに注意する。
+実際、この場合には $N(V)_n = 0$ かつ $s(V)_n = 0$ である。
+
+\medskip\noindent
+$m \leq n$ として $IH_{n, m}$ を仮定する。$j < m$ に対して
+$V_j = 0$ である単体的対象 $V$ を選ぶ。補題
+\ref{simplicial-lemma-eilenberg-maclane-object} と定義
+\ref{simplicial-definition-eilenberg-maclane} により
+$K(V_m, m) = i_{m!} \text{sk}_mV$ である。
+補題 \ref{simplicial-lemma-n-skeleton-abelian} により自然な射
+$$
+K(V_m, m) = i_{m!} \text{sk}_mV \to V
+$$
+は単射である。従って、$i = 0, \ldots, m$ に対して $W_i = 0$ となる
+ある $W$ について短完全列
+$$
+0 \to K(V_m, m) \to V \to W \to 0
+$$
+を得る。この短完全列は、付随する複体の短完全列の射
+$$
+\xymatrix{
+0 \ar[r] &
+N(K(V_m, m)) \ar[r] \ar[d] &
+N(V) \ar[r] \ar[d] &
+N(W) \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+s(K(V_m, m)) \ar[r] &
+s(V) \ar[r] &
+s(W) \ar[r] &
+0
+}
+$$
+を誘導する。補題 \ref{simplicial-lemma-s-exact} と \ref{simplicial-lemma-N-exact} を参照せよ。
+従って両端に対する結論から $V$ に対する結論を得る。
+\end{proof}
+
+\section{Dold--Kan}
+\label{simplicial-section-dold-kan}
+
+\noindent
+この節では、アーベル圏の単体的対象と鎖複体を関係づける Dold--Kan の定理を
+証明する。
+
+\begin{lemma}
+\label{simplicial-lemma-N-faithful}
+$\mathcal{A}$ をアーベル圏とする。関手 $N$ は忠実であり、同型、単射、および
+全射を反映する。
+\end{lemma}
+
+\begin{proof}
+忠実性は補題 \ref{simplicial-lemma-splitting-abelian-category} の標準的分裂から直ちに従う。
+単射、全射、および同型を反映するという主張は補題
+\ref{simplicial-lemma-injective-map-simplicial-abelian} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-S-N}
+$\mathcal{A}$ と $\mathcal{B}$ をアーベル圏とする。関手
+$N : \mathcal{A} \to \mathcal{B}$ および $S : \mathcal{B} \to \mathcal{A}$ が
+与えられ、次を仮定する。
+\begin{enumerate}
+\item 関手 $S$ と $N$ は完全である。
+\item $\mathcal{B}$ の恒等関手への同型
+$g : N \circ S \to \text{id}_\mathcal{B}$ が存在する。
+\item $N$ は忠実である。
+\item $S$ は本質的全射である。
+\end{enumerate}
+このとき $S$ と $N$ は互いに擬逆な圏同値である。
+\end{lemma}
+
+\begin{proof}
+関手的同型 $S(N(A)) \cong A$ を構成すれば十分である。
+そのために $B$ と同型 $f : A  \to S(B)$ を選び、写像
+$$
+f^{-1} \circ g_{S(B)} \circ S(N(f)) :
+S(N(A)) \to S(N(S(B))) \to S(B) \to A.
+$$
+を考える。これが $f, B$ の選択に依存せず、所望の同型
+$S \circ N \to \text{id}_\mathcal{A}$ を与えることは容易に示せる。
+\end{proof}
+
+\begin{theorem}
+\label{simplicial-theorem-dold-kan}
+$\mathcal{A}$ をアーベル圏とする。関手 $N$ は圏同値
+$$
+N :
+\text{Simp}(\mathcal{A})
+\longrightarrow
+\text{Ch}_{\geq 0}(\mathcal{A})
+$$
+を誘導する。
+\end{theorem}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-extension} の構成に着想を得た逆向きの関手を記述する
+（ただし境界写像を正しくするため符号を一つ加える）。
+$A_\bullet$ を境界写像 $d_{A, n} : A_n \to A_{n - 1}$ をもつ鎖複体とする。
+各 $n \geq 0$ に対して
+$$
+I_n =
+\Big\{
+\alpha : [n] \to \{0, 1, 2, \ldots\}
+\mid
+\Im(\alpha) = [k]\text{ for some }k
+\Big\}.
+$$
+と記す。$\alpha \in I_n$ に対し、$\Im(\alpha) = [k]$ を満たす一意な整数を
+$k(\alpha)$ と記す。単体的対象 $S(A_\bullet)$ を次のように定義する。
+\begin{enumerate}
+\item $S(A_\bullet)_n = \bigoplus_{\alpha \in I_n} A_{k(\alpha)}$ とおく。
+$\alpha$ をそれに対応する成分の「基底ベクトル」と考えることを示唆するため、
+これを $\bigoplus_{\alpha \in I_n} A_{k(\alpha)} \cdot \alpha$ とも書く。
+\item $\varphi : [m] \to [n]$ が与えられたとき、$S(A_\bullet)(\varphi)$ を
+$S(A_\bullet)_n$ の直和成分 $A_{k(\alpha)} \cdot \alpha$ への制限により
+次のように定義する。
+\begin{enumerate}
+% P02-E0127: frozen missing conditional markers are supplied by Japanese grammar; see ERRATA_CANDIDATES.jsonl.
+\item $\alpha \circ \varphi \not \in I_m$ ならば、その制限を零とおく。
+\item $\alpha \circ \varphi \in I_m$ であるが $k(\alpha \circ \varphi)$ が
+$k(\alpha)$ と $k(\alpha) - 1$ のいずれにも等しくなければ、やはり零とおく。
+\item $\alpha \circ \varphi \in I_m$ かつ
+$k(\alpha \circ \varphi) = k(\alpha)$ ならば、恒等写像を用いて
+$S(A_\bullet)_m$ の成分
+$A_{k(\alpha \circ \varphi)} \cdot (\alpha \circ \varphi)$ へ写す。
+\item $\alpha \circ \varphi \in I_m$ かつ
+$k(\alpha \circ \varphi) = k(\alpha) - 1$ ならば、
+$(-1)^{k(\alpha)} d_{A, k(\alpha)}$ を用いて $S(A_\bullet)_m$ の成分
+$A_{k(\alpha \circ \varphi)}\cdot (\alpha \circ \varphi)$ へ写す。
+\end{enumerate}
+\end{enumerate}
+$S(A_\bullet)$ が $\mathcal{A}$ の単体的対象であることを示そう。
+そのため、写像 $\varphi : [m] \to [n]$ と $\psi : [n] \to [p]$ が
+与えられたと仮定する。等式
+$S(A_\bullet)(\varphi) \circ S(A_\bullet)(\psi) =
+S(A_\bullet)(\psi \circ \varphi)$ を示す。
+$\beta \in I_p$ を選び、$\alpha = \beta \circ \psi$ および
+$\gamma = \alpha \circ \varphi$ とおく。ここでこれらを写像
+$\alpha : [n] \to \{0, 1, 2, \ldots\}$ および
+$\gamma : [m] \to \{0, 1, 2, \ldots\}$ とみなす。図式は
+$$
+\xymatrix{
+[m] \ar[r]_\varphi \ar[d]_\gamma &
+[n] \ar[r]_\psi \ar[d]_\alpha &
+[p] \ar[d]^\beta \\
+\Im(\gamma) \ar[r] &
+\Im(\alpha) \ar[r] &
+[k(\beta)]
+}
+$$
+である。写像
+$S(A_\bullet)(\varphi) \circ S(A_\bullet)(\psi)$ と
+% P02-E0128: frozen interrupted sentence is bound here; see ERRATA_CANDIDATES.jsonl.
+$S(A_\bullet)(\psi \circ \varphi)$ の成分 $A_{k(\beta)} \cdot \beta$ への
+制限が一致することを示す。いくつかの場合に分ける。
+\begin{enumerate}
+\item $\alpha \not \in I_n$ とする。このとき $S(A_\bullet)(\psi)$ の
+$A_{k(\beta)} \cdot \beta$ への制限は零である。一方、
+$\gamma \not \in I_m$ であるか、または
+$[k(\gamma)] = \Im(\gamma) \subset \Im(\alpha) \subset [k(\beta)]$ であり、
+$[k(\beta)]$ の部分集合 $\Im(\alpha)$ に抜けがあるので
+$k(\gamma) < k(\beta) - 1$ である。いずれの場合にも
+$S(A_\bullet)(\psi \circ \varphi)$ の $A_{k(\beta)} \cdot \beta$ への制限も
+零であることが分かる。
+\item $\alpha \in I_n$ かつ $k(\alpha) < k(\beta) - 1$ とする。
+このとき $S(A_\bullet)(\psi)$ の $A_{k(\beta)} \cdot \beta$ への制限は
+零である。一方、$\gamma \not \in I_m$ であるか、または
+$[k(\gamma)] \subset [k(\alpha)] \subset [k(\beta)]$ であり、
+$k(\gamma) < k(\beta) - 1$ が従う。いずれの場合にも
+$S(A_\bullet)(\psi \circ \varphi)$ の $A_{k(\beta)} \cdot \beta$ への制限も
+零である。
+\item $\alpha \in I_n$ かつ $k(\alpha) = k(\beta)$ とする。
+このとき $S(A_\bullet)(\psi)$ の $A_{k(\beta)} \cdot \beta$ への制限は、
+$A_{k(\beta)} \cdot \beta$ から $A_{k(\alpha)} \cdot \alpha$ への恒等写像である。
+この場合、$\Im(\alpha) =[k(\beta)]$ なので、
+$S(A_\bullet)(\psi \circ \varphi)$ の成分 $A_{k(\beta)} \cdot \beta$ への制限を
+記述する規則は、$S(A_\bullet)(\varphi)$ の成分
+$A_{k(\alpha)} \cdot \alpha$ への制限を記述する規則とまったく同じであり、
+従って一致する。
+\item $\alpha \in I_n$ かつ $k(\alpha) = k(\beta) - 1$ とする。
+このとき $S(A_\bullet)(\psi)$ の $A_{k(\beta)} \cdot \beta$ への制限は、
+$A_{k(\alpha)} \cdot \alpha$ への $(-1)^{k(\beta)}d_{A, k(\beta)}$ によって
+与えられる。さらに場合分けする。
+\begin{enumerate}
+\item $\gamma \not \in I_m$ ならば、$S(A_\bullet)(\psi \circ \varphi)$ の成分
+$A_{k(\beta)} \cdot \beta$ への制限と、$S(A_\bullet)(\varphi)$ の成分
+$A_{k(\alpha)} \cdot \alpha$ への制限はともに零であり、一致する。
+\item $\gamma \in I_m$ であるが $k(\gamma) < k(\alpha) - 1$ ならば、
+やはり両方の制限は零であり、一致する。
+\item $\gamma \in I_m$ かつ $k(\gamma) = k(\alpha)$ ならば、
+$\Im(\gamma) = \Im(\alpha)$ である。この場合、
+$S(A_\bullet)(\psi \circ \varphi)$ の成分 $A_{k(\beta)} \cdot \beta$ への制限は、
+$A_{k(\gamma)} \cdot \gamma$ への $(-1)^{k(\beta)}d_{A, k(\beta)}$ によって
+与えられる。一方、$S(A_\bullet)(\varphi)$ の成分
+$A_{k(\alpha)} \cdot \alpha$ への制限は恒等写像
+$A_{k(\alpha)} \cdot \alpha \to A_{k(\gamma)} \cdot \gamma$ である。
+従って一致する。
+\item 最後に $\gamma \in I_m$ かつ $k(\gamma) = k(\alpha) - 1$ とする。
+$S(A_\bullet)(\varphi)$ の成分 $A_{k(\alpha)} \cdot \alpha$ への制限は、
+写像
+% P02-E0129: frozen wrong codomain is preserved; see ERRATA_CANDIDATES.jsonl.
+$A_{k(\alpha)} \cdot \alpha \to A_{k(\beta)} \cdot \beta$
+として $(-1)^{k(\alpha)} d_{A, k(\alpha)}$ により与えられる。
+$A_\bullet$ は複体なので、合成
+$A_{k(\beta)} \cdot \beta \to
+A_{k(\alpha)} \cdot \alpha \to A_{k(\gamma)} \cdot \gamma$ は零である。
+これは $S(A_\bullet)(\psi \circ \varphi)$ の成分
+$A_{k(\beta)} \cdot \beta$ への制限として得られるものと一致する。
+なぜなら $k(\gamma) = k(\beta) - 2 < k(\beta) - 1$ だからである。
+\end{enumerate}
+\end{enumerate}
+従って $S(A_\bullet)$ は $\mathcal{A}$ の単体的対象である。
+
+\medskip\noindent
+$A_\bullet$ に関して関手的な同型 $A_\bullet \to N(S(A_\bullet))$ を構成しよう。
+補題 \ref{simplicial-lemma-decompose-associated-complexes} により、鎖複体として
+$$
+S(A_\bullet) =  N(S(A_\bullet)) \oplus D(S(A_\bullet))
+$$
+であることを思い出す。一方、注意 \ref{simplicial-remark-degenerate-subcomplex} と
+$S(A_\bullet)$ の構成から
+$$
+D(S(A_\bullet))_n =
+\bigoplus\nolimits_{\alpha \in I_n,\ k(\alpha) < n} A_{k(\alpha)} \cdot \alpha
+\subset
+\bigoplus\nolimits_{\alpha \in I_n} A_{k(\alpha)} \cdot \alpha
+$$
+が従う。しかし $\alpha \in I_n$ ならば
+$k(\alpha) \geq n \Leftrightarrow \alpha = \text{id}_{[n]} : [n] \to [n]$ である。
+従って $S(A_\bullet)_n$ の成分 $A_n \cdot \text{id}_{[n]}$ は
+$D(S(A_\bullet))_n$ の補成分である。
+% P02-E0130: frozen face-map codomain degree is preserved; see ERRATA_CANDIDATES.jsonl.
+すべての写像 $d^n_i : S(A_\bullet)_n \to S(A_\bullet)_n$ は、
+$A_n \cdot \text{id}_{[n]}$ から $A_{n - 1} \cdot \text{id}_{[n - 1]}$ への
+$(-1)^n d_{A, n}$ を与える $d^n_n$ を除き、成分
+$A_n \cdot \text{id}_{[n]}$ 上で零に制限される。
+従って $A_n \cdot \text{id}_{[n]}$ は成分 $N(S(A_\bullet))_n$ に
+等しくなければならず、さらに微分
+$d_n = \sum (-1)^id^n_i : S(A_\bullet)_n \to S(A_\bullet)_{n - 1}$ の
+成分 $A_n \cdot \text{id}_{[n]}$ への制限はまさに所望のものを与える。
+
+\medskip\noindent
+最後に $S \circ N$ が恒等関手と同型であることを示さなければならない。
+$U$ を $\mathcal{A}$ の単体的対象とする。このとき、$\alpha$ に対応する成分上で
+$U(\alpha) : N(U)_{k(\alpha)} \to U_n$ を用いることにより、明らかな写像
+$$
+S(N(U))_n = \bigoplus\nolimits_{\alpha \in I_n} N(U)_{k(\alpha)} \cdot \alpha
+\longrightarrow
+U_n
+$$
+を定義できる。定義 \ref{simplicial-definition-split} により、これは同型である。
+証明を完了するには、これが単体的対象の写像と両立することを示さなければ
+ならない。そこで $\varphi : [m] \to [n]$ と $\alpha \in I_n$ をとり、
+$\beta = \alpha \circ \varphi$ とおく。図式は
+$$
+\xymatrix{
+[m] \ar[r]_\varphi \ar[d]_\beta &
+[n] \ar[d]_\alpha \\
+\Im(\beta) \ar[r] &
+[k(\alpha)]
+}
+$$
+である。いくつかの場合に分ける。
+\begin{enumerate}
+\item $\beta \not \in I_m$ とする。このとき
+$j \not \in \Im(\alpha \circ \varphi)$ を満たす添字
+$0 \leq j < k(\alpha)$ が存在するので、ある
+$\psi : [m] \to [k(\alpha) - 1]$ に対して分解
+$\alpha \circ \varphi = \delta^{k(\alpha)}_j \circ \psi$ を選べる。
+従って $U(\varphi)$ は成分 $N(U)_{k(\alpha)} \cdot \alpha$ の像上で零である。
+実際、$U(\varphi) \circ U(\alpha) =
+U(\alpha \circ \varphi) = U(\psi) \circ d^{k(\alpha)}_j$ は $N$ の構成により
+$N(U)_{k(\alpha)}$ 上で零となる。これは上で与えた $S(N(U))$ の規則と一致する。
+\item $\beta \in I_m$ かつ $k(\beta) < k(\alpha) - 1$ とする。
+この場合には $j = k(\alpha) - 1$ とおき、(1) とまったく同様に論じる。
+\item $\beta \in I_m$ かつ $k(\beta) = k(\alpha)$ とする。このとき成分
+$N(U)_{k(\alpha)} \cdot \alpha$ は恒等写像によって成分
+$N(U)_{k(\beta)} \cdot \beta$ へ写される。この場合
+$U(\varphi) \circ U(\alpha) = U(\beta)$ なので、これは $U(\varphi)$ の作用と同じである。
+\item $\beta \in I_m$ かつ $k(\beta) = k(\alpha) - 1$ とする。
+このとき微分 $(-1)^{k(\alpha)} d_{N(U), k(\alpha)}$ を用いて成分
+$N(U)_{k(\alpha)} \cdot \alpha$ を成分 $N(U)_{k(\beta)} \cdot \beta$ へ写す。
+一方、この場合には $\Im(\beta) = [k(\beta)]$ であるから
+$\alpha \circ \varphi = \delta^{k(\alpha)}_{k(\alpha)} \circ \beta$ を得る。
+従って $U(\varphi)$ と $U(\alpha)$ の $N(U)_{k(\alpha)}$ への制限との合成は、
+$U(\beta)$ の前に $d^{k(\alpha)}_{k(\alpha)}$ の
+$N(U)_{k(\alpha)}$ への制限を合成したものに等しい。
+$d_{N(U), k(\alpha)} = \sum (-1)^i d^{k(\alpha)}_i$ であり、
+$i < k(\alpha)$ に対して $d^{k(\alpha)}_i$ は $N(U)_{k(\alpha)}$ 上で零に
+制限されるので、等式が成り立つことが分かる。
+\end{enumerate}
+これで定理の証明が完了する。
+\end{proof}
+
+\section{余単体的対象に対する Dold--Kan}
+\label{simplicial-section-dold-kan-cosimplicial}
+
+\noindent
+$\mathcal{A}$ をアーベル圏とする。Homology, Lemma
+\ref{homology-lemma-abelian-opposite} によれば $\mathcal{A}^{opp}$ も
+アーベル圏である。定義から形式的に
+$$
+\text{CoSimp}(\mathcal{A}) = \text{Simp}(\mathcal{A}^{opp})^{opp}.
+$$
+が従う。従って Dold--Kan（定理 \ref{simplicial-theorem-dold-kan}）から
+$\text{CoSimp}(\mathcal{A})$ は圏
+$\text{Ch}_{\geq 0}(\mathcal{A}^{opp})^{opp}$ と同値である。
+また定義から形式的に
+$$
+\text{CoCh}_{\geq 0}(\mathcal{A}) =
+\text{Ch}_{\geq 0}(\mathcal{A}^{opp})^{opp}.
+$$
+が従う。これらの矢印を合わせて同値
+$$
+Q :
+\text{CoSimp}(\mathcal{A})
+\longrightarrow
+\text{CoCh}_{\geq 0}(\mathcal{A}).
+$$
+を得る。この節では $Q$ を記述する。
+
+\medskip\noindent
+まず、{\it 余単体的対象 $U$ に付随する余鎖複体 $s(U)$} を定義する。
+これは負の次数の項が零で、$n \geq 0$ に対して $s(U)^n = U_n$ である
+余鎖複体である。微分には、
+$d^n = \sum_{i = 0}^{n + 1} (-1)^i \delta^{n + 1}_i$ で定義される写像
+$d^n : s(U)^n \to s(U)^{n + 1}$ を用いる。言い換えれば、複体 $s(U)$ は
+$$
+\xymatrix{
+0 \ar[r] &
+U_0 \ar[rr]^{\delta^1_0 - \delta^1_1} & &
+U_1 \ar[rr]^{\delta^2_0 - \delta^2_1 + \delta^2_2} & &
+U_2 \ar[r] &
+\ldots
+}
+$$
+という形をしている。これは $U$ に付随する {\it Moore 複体} とも呼ばれる。
+
+\medskip\noindent
+一方、$\mathcal{A}$ の余単体的対象 $U$ が与えられたとき、
+$Q(U)^0 = U_0$ および
+$$
+Q(U)^n = \Coker(
+\xymatrix{
+\bigoplus_{i = 0}^{n - 1} U_{n - 1} \ar[r]^-{\delta^n_i} &
+U_n
+}).
+$$
+とおく。微分 $d^n : Q(U)^n \to Q(U)^{n + 1}$ は
+$(-1)^{n + 1}\delta^{n + 1}_{n + 1}$ によって誘導される。すなわち、射
+$(-1)^{n + 1}\delta^{n + 1}_{n + 1}$ を可換図式
+% P02-E0131: frozen cochain differential subscript in the diagram is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\xymatrix{
+U_n \ar[rr]_{(-1)^{n + 1}\delta^{n + 1}_{n + 1}} \ar[d] & &
+U_{n + 1} \ar[d] \\
+Q(U)^n \ar[rr]^{d_n} & &
+Q(U)^{n + 1}.
+}
+$$
+に組み込むことによって定める。この図式が意味をなすこと、すなわち
+$i = 0, \ldots, n - 1$ に対して $\delta^n_i$ の像が右の垂直射の核の中へ
+写されることの証明は読者に委ねる（これは補題 \ref{simplicial-lemma-N-d-in-N} の
+双対である）。従って余鎖複体 $Q(U)$ は
+$$
+0 \to Q(U)^0 \to Q(U)^1 \to Q(U)^2 \to \ldots
+$$
+という形をしている。これを {\it $U$ に付随する正規化余鎖複体} と呼ぶ。
+Dold--Kan 定理 \ref{simplicial-theorem-dold-kan} の双対は次のとおりである。
+
+\begin{lemma}
+\label{simplicial-lemma-dual-dold-kan}
+$\mathcal{A}$ をアーベル圏とする。
+\begin{enumerate}
+\item 関手 $s : \text{CoSimp}(\mathcal{A}) \to \text{CoCh}_{\geq 0}(\mathcal{A})$
+は完全である。
+\item 写像 $s(U)^n \to Q(U)^n$ は余鎖複体の射を定める。
+\item $\text{CoCh}_{\geq 0}(\mathcal{A})$ において関手的直和分解
+$s(U) = D(U) \oplus Q(U)$ が存在する。
+\item 関手 $Q$ は完全である。
+\item 複体の射 $s(U) \to Q(U)$ は擬同型である。
+\item 関手 $U \mapsto Q(U)^\bullet$ は圏同値
+$\text{CoSimp}(\mathcal{A}) \to \text{CoCh}_{\geq 0}(\mathcal{A})$ を定める。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ただし、これらは補題 \ref{simplicial-lemma-s-exact},
+\ref{simplicial-lemma-map-associated-complexes},
+\ref{simplicial-lemma-decompose-associated-complexes},
+\ref{simplicial-lemma-N-exact}, \ref{simplicial-lemma-quasi-isomorphism} および定理
+\ref{simplicial-theorem-dold-kan} の主張を厳密に双対化したものである。
+\end{proof}
+
+\section{ホモトピー}
+\label{simplicial-section-homotopy}
+
+\noindent
+単体集合 $\Delta[0]$ と $\Delta[1]$ を考える。$0$ を
+$[1] = \{0, 1\}$ の元へ写す射 $[0] \to [1]$ から生じる二つの射
+$$
+e_0, e_1 : \Delta[0] \longrightarrow \Delta[1],
+$$
+があることを思い出そう。また各集合 $\Delta[1]_k$ は有限である。
+従って圏 $\mathcal{C}$ が有限余積をもつならば、$\mathcal{C}$ の任意の
+単体的対象 $U$ に対して積
+$$
+U \times \Delta[1]
+$$
+を作ることができる。定義 \ref{simplicial-definition-product-with-simplicial-set} を参照せよ。
+$\Delta[0]$ は、すべての $k \geq 0$ に対して $\Delta[0]_k = \{*\}$ が
+一元集合であるという性質をもつことに注意する。従って
+$U \times \Delta[0] = U$ である。こうして上の $e_0, e_1$ から射
+% P02-E0132: frozen English subject agreement is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+$$
+e_0, e_1 : U \to U \times \Delta[1].
+$$
+が生じる。
+
+\begin{definition}
+\label{simplicial-definition-homotopy}
+$\mathcal{C}$ を有限余積をもつ圏とする。$U$ と $V$ を $\mathcal{C}$ の二つの
+単体的対象とし、$a, b : U \to V$ を二つの射とする。
+\begin{enumerate}
+\item 射
+$$
+h : U \times \Delta[1] \longrightarrow V
+$$
+が $a = h \circ e_0$ かつ $b = h \circ e_1$ を満たすとき、これを
+{\it $a$ から $b$ へのホモトピー}と呼ぶ。
+\item $U$ から $V$ への射の列 $a = a_0, a_1, \ldots, a_n = b$ が存在し、
+各 $i = 1, \ldots, n$ に対して $a_{i - 1}$ から $a_i$ へのホモトピー、
+または $a_i$ から $a_{i - 1}$ へのホモトピーのいずれかが存在するとき、
+射 $a$ と $b$ は {\it ホモトピック}である、または
+{\it 同じホモトピー類に属する}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+「$a$ から $b$ へのホモトピーが存在する」という関係は一般には推移的でも
+対称的でもない。例 \ref{simplicial-example-trivial-homotopy} で反射的であることを見る。
+もちろん「ホモトピックである」という関係は集合 $\Mor(U, V)$ 上の同値関係で
+あり、「$a$ から $b$ へのホモトピーが存在する」という関係によって生成される
+同値関係である。実は、任意の圏における単体的対象の写像の対の間にも
+ホモトピーを定義できる。射 $h : U \times \Delta[1] \to V$ をもつことの意味を
+ある程度詳しく調べた後、注意 \ref{simplicial-remark-homotopy-better} でこれを行う。
+
+\medskip\noindent
+$\mathcal{C}$ を有限余積をもつ圏とする。$U$, $V$ を $\mathcal{C}$ の単体的対象、
+$a, b : U \to V$ を射とする。さらに、$h : U \times \Delta[1] \to V$ が
+$a$ から $b$ へのホモトピーであると仮定する。各 $n \geq 0$ に対して
+$$
+\Delta[1]_n = \{\alpha^n_0, \ldots, \alpha^n_{n + 1}\}
+$$
+と書く。ただし $\alpha^n_i : [n] \to [1]$ は
+$$
+\alpha^n_i(j)
+=
+\left\{
+\begin{matrix}
+0 & \text{if} & j < i\\
+1 & \text{if} & j \geq i
+\end{matrix}
+\right.
+$$
+で定められる写像である。従って
+$$
+h_n : (U \times \Delta[1])_n = \coprod U_n \cdot \alpha^n_i
+\longrightarrow
+V_n
+$$
+は、各 $i = 0, \ldots, n + 1$ に対して $\alpha^n_i$ に対応する成分への制限
+$h_{n, i} : U_n \to V_n$ をもつ。
+
+\begin{lemma}
+\label{simplicial-lemma-relations-homotopy}
+上の状況では次の関係式が成り立つ。
+\begin{enumerate}
+\item $h_{n, 0} = b_n$ および $h_{n, n + 1} = a_n$ である。
+\item $i > j$ に対して
+$d^n_j \circ h_{n, i} = h_{n - 1, i - 1} \circ d^n_j$ である。
+\item $i \leq j$ に対して
+$d^n_j \circ h_{n, i} = h_{n - 1, i} \circ d^n_j$ である。
+\item $i > j$ に対して
+$s^n_j \circ h_{n, i} = h_{n + 1, i + 1} \circ s^n_j$ である。
+\item $i \leq j$ に対して
+$s^n_j \circ h_{n, i} = h_{n + 1, i} \circ s^n_j$ である。
+\end{enumerate}
+逆に、上に列挙した性質を満たす写像の系 $h_{n, i}$ が与えられれば、
+これらは $a$ から $b$ へのホモトピーである射 $h$ を定める。
+\end{lemma}
+
+\begin{proof}
+省略する。最後の主張は、補題 \ref{simplicial-lemma-face-degeneracy-category} にあるように、
+単体的対象の射を与えることが、すべての $d^n_j$ および $s^n_j$ と可換する
+射の列 $h_n$ を与えることと同じであるという事実を用いて証明できる。
+\end{proof}
+
+\begin{example}
+\label{simplicial-example-trivial-homotopy}
+上の状況で $a = b$ と仮定する。このとき $a$ から $b$ への
+{\it 自明な}ホモトピー、すなわち $h_{n, i} = a_n = b_n$ であるものが存在する。
+\end{example}
+
+\begin{remark}
+\label{simplicial-remark-homotopy-better}
+$\mathcal{C}$ を任意の圏とする（仮定は一切課さない）。$U$ と $V$ を
+$\mathcal{C}$ の単体的対象、$a, b : U \to V$ を $\mathcal{C}$ の単体的対象の
+射とする。{\it $a$ から $b$ へのホモトピー}とは、補題
+\ref{simplicial-lemma-relations-homotopy} の関係式を満たす射\footnote{文献では、写像
+$h_{n, i}$ の代わりに写像 $h_{n + 1, i} \circ s_i : U_n \to V_{n + 1}$ が
+しばしば用いられる。もちろん、これらの写像が満たす関係式は補題
+\ref{simplicial-lemma-relations-homotopy} のものとは異なる。}
+$h_{n, i} : U_n \to V_n$, $n \geq 0$, $i = 0, \ldots, n + 1$ の族である。
+定義 \ref{simplicial-definition-homotopy} と同様に、$U$ から $V$ への射の列
+$a = a_0, a_1, \ldots, a_n = b$ が存在し、各 $i = 1, \ldots, n$ に対して
+$a_{i - 1}$ から $a_i$ へのホモトピー、または $a_i$ から $a_{i - 1}$ への
+ホモトピーのいずれかが存在するとき、射 $a$ と $b$ は
+{\it ホモトピック}であるという。任意の関手 $F : \mathcal{C} \to \mathcal{C}'$
+と $a$ から $b$ へのホモトピー $\{h_{n, i}\}$ が与えられれば、
+$\{F(h_{n, i})\}$ が $F(a)$ から $F(b)$ へのホモトピーであることは明らかである。
+同様に、$a$ と $b$ がホモトピックならば $F(a)$ と $F(b)$ もホモトピックである。
+補題は、有限余積が存在する場合にはこの新しい概念が古い概念と同じであると
+述べているので、特に両方の圏が有限余積をもつときには関手が元の概念を保つ
+ことが従う。
+% P02-E0133: frozen English number/agreement defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+\end{remark}
+
+\begin{remark}
+\label{simplicial-remark-homotopy-pre-post-compose}
+$\mathcal{C}$ を任意の圏とする。単体的対象の二つの射
+$a, a' : U \to V$ がホモトピックであると仮定する。このとき任意の射
+$b : V \to W$ に対して二つの写像 $b \circ a, b \circ a' : U \to W$ は
+ホモトピックである。同様に、任意の射 $c : X \to U$ に対して二つの写像
+$a \circ c, a' \circ c : X \to V$ はホモトピックである。実際、写像
+$b \circ a \circ c, b \circ a' \circ c : X \to W$ はホモトピックである。
+射 $h_{n, i} : U_n \to V_n$ が $a$ から $a'$ へのホモトピーを定めるならば、
+写像 $b \circ h_{n, i} \circ c$ は $b \circ a \circ c$ から
+$b \circ a' \circ c$ へのホモトピーを定めるからである。
+このようにして、$\text{Simp}(\mathcal{C})$ と同じ対象をもち、射が
+$\text{Simp}(\mathcal{C})$ の射のホモトピー類である新しい圏
+$\text{hSimp}(\mathcal{C})$ を得る。従って、対象について本質的全射かつ
+射集合について全射である標準関手
+$$
+\text{Simp}(\mathcal{C})
+\longrightarrow
+\text{hSimp}(\mathcal{C})
+$$
+が存在する。
+\end{remark}
+
+\begin{definition}
+\label{simplicial-definition-homotopy-equivalent}
+$U$ と $V$ を圏 $\mathcal{C}$ の二つの単体的対象とする。射
+$a : U \to V$ に対し、$a \circ b$ が $\text{id}_V$ とホモトピックであり、
+$b \circ a$ が $\text{id}_U$ とホモトピックであるような射
+$b : V \to U$ が存在するとき、この射を {\it ホモトピー同値}と呼ぶ。
+ホモトピー同値 $a : U \to V$ が存在するとき、$U$ と $V$ は
+{\it ホモトピー同値である}という。
+\end{definition}
+
+\begin{example}
+\label{simplicial-example-simplex-contractible}
+単体集合 $\Delta[m]$ は $\Delta[0]$ とホモトピー同値である。
+実際、一意な射 $f : \Delta[m] \to \Delta[0]$ と、$\Delta[m]$ の最後の
+$0$-単体の包含によって与えられる射 $g : \Delta[0] \to \Delta[m]$ を考える。
+$f \circ g = \text{id}$ である。$\text{id}_{\Delta[m]}$ から $g \circ f$ への
+ホモトピー $h : \Delta[m] \times \Delta[1] \to \Delta[m]$ を与えよう。
+すなわち $h$ は、$(\varphi, \alpha)$ を
+$$
+k \mapsto
+\left\{
+\begin{matrix}
+\varphi(k) & \text{if} & \alpha(k) = 0 \\
+m & \text{if} & \alpha(k) = 1
+\end{matrix}
+\right.
+$$
+へ写す写像
+$$
+\Mor_\Delta([n], [m]) \times \Mor_\Delta([n], [1]) \to \Mor_\Delta([n], [m])
+$$
+によって与えられる。これは $g$ を最後の $0$-単体の包含としたからこそ
+成り立つことに注意する。$g$ を最初の $0$-単体の包含としたならば、
+$g \circ f$ から $\text{id}_{\Delta[m]}$ へのホモトピーを見つけられる。
+これは単体集合の圏におけるホモトピーに内在する非対称性の一例である。
+\end{example}
+
+\noindent
+次の補題は、$U \times \Delta[1]$ が $U$ とホモトピー同値であると述べる。
+
+\begin{lemma}
+\label{simplicial-lemma-contractible}
+$\mathcal{C}$ を有限余積をもつ圏、$U$ を $\mathcal{C}$ の単体的対象とする。
+写像 $e_1, e_0 : U \to U \times \Delta[1]$ および
+$\pi : U \times \Delta[1] \to U$ を考える。補題 \ref{simplicial-lemma-back-to-U} を参照せよ。
+\begin{enumerate}
+\item $\pi \circ e_1 = \pi \circ e_0 = \text{id}_U$ である。
+\item 射 $\text{id}_{U \times \Delta[1]}$ と $e_0 \circ \pi$ は
+ホモトピックである。
+\item 射 $\text{id}_{U \times \Delta[1]}$ と $e_1 \circ \pi$ は
+ホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+最初の主張は自明である。次数 $n$ において、対 $(\beta_1, \beta_2)$ と
+$\beta_i : [n] \to [1]$ に写像 $\beta : [n] \to [1]$ を対応させる単体集合の写像
+$\Delta[1] \times \Delta[1] \longrightarrow \Delta[1]$ を考える。ただし
+この写像は規則
+$$
+\beta(i) = \max\{\beta_1(i), \beta_2(i)\}.
+$$
+で定める。$\varphi : [m] \to [n]$ の作用
+$\Delta[1](\varphi) : \Delta[1]_n \to \Delta[1]_m$ は前合成によるので、
+これは単体集合の射である。上で導入した記法
+$\Delta[1]_n = \{\alpha^n_0, \ldots, \alpha^n_{n + 1}\}$ を用いると、
+$\beta_2 = \alpha^n_0$ ならば $\beta = \alpha^n_0$ であり、
+$\beta_2 = \alpha^n_{n + 1}$ ならば $\beta = \beta_1$ である。
+$\alpha^n_0$ と $\alpha^n_{n + 1}$ はそれぞれ値 $1$ と $0$ の定値写像なので、
+補題 \ref{simplicial-lemma-back-to-U} の誘導される射
+$$
+U \times \Delta[1] \times \Delta[1]
+\longrightarrow
+U \times \Delta[1]
+$$
+は $\text{id}_{U \times \Delta[1]}$ から $e_1 \circ \pi$ へのホモトピーである。
+$e_0 \circ \pi$ についても同様である（最大値の代わりに最小値を用いる）。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-fibre-products-simplicial-object-w-section}
+$f : Y \to X$ をファイバー積をもつ圏 $\mathcal{C}$ の射とし、$f$ が切断 $s$ を
+もつと仮定する。例 \ref{simplicial-example-fibre-products-simplicial-object} で $f$ から
+構成した単体的対象を $U$ とする。各次数において、各因子上の $s \circ f$ に
+よって与えられる $Y \times_X \ldots \times_X Y$ の自己写像
+$(s \circ f)^{n + 1}$ である射 $U \to U$ は、$U$ 上の恒等写像と
+ホモトピックである。特に $U$ は定値単体的対象 $X$ とホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+$g^0 = \text{id}_Y$ および $g^1 = s \circ f$ とおく。射
+\begin{eqnarray*}
+Y \times_X \ldots \times_X Y \times \Mor([n], [1])
+& \to &
+Y \times_X \ldots \times_X Y \\
+(y_0, \ldots, y_n) \times \alpha
+& \mapsto &
+(g^{\alpha(0)}(y_0), \ldots, g^{\alpha(n)}(y_n))
+\end{eqnarray*}
+を用いる。
+% P02-E0134: frozen repetitive English phrase is rendered by the standard Japanese technical term; see ERRATA_CANDIDATES.jsonl.
+ここでは写像を定義するために点の関手の観点を用いている。
+別の言い方をすれば、$h_{n, 0} = \text{id}$,
+$h_{n, n + 1} = (s \circ f)^{n + 1}$ および
+$h_{n, i} = \text{id}_Y^{i + 1} \times (s \circ f)^{n + 1 - i}$ とする。
+これらが補題 \ref{simplicial-lemma-relations-homotopy} の関係式を満たすことの証明は
+読者に委ねる。従って所望のホモトピーを定める。また、圏 $\mathcal{C}$ に
+これ以外の仮定を課す必要がないことを示す注意
+\ref{simplicial-remark-homotopy-better} も参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-products-homotopy}
+$\mathcal{C}$ を圏、$T$ を集合とする。$t \in T$ に対して $X_t$, $Y_t$ を
+$\mathcal{C}$ の単体的対象とする。$X = \prod_{t \in T} X_t$ と
+$Y = \prod_{t \in T} Y_t$ が存在すると仮定する。
+\begin{enumerate}
+\item すべての $t \in T$ に対して $X_t$ と $Y_t$ がホモトピー同値で、
+$T$ が有限ならば、$X$ と $Y$ はホモトピー同値である。
+\end{enumerate}
+$t \in T$ に対して $a_t, b_t : X_t \to Y_t$ を射とし、
+$a = \prod a_t : X \to Y$ および $b = \prod b_t : X \to Y$ とおく。
+\begin{enumerate}
+\item[(2)] すべての $t \in T$ に対して $a_t$ から $b_t$ へのホモトピーが
+存在するならば、$a$ から $b$ へのホモトピーが存在する。
+\item[(3)] $T$ が有限で、$t \in T$ に対する $a_t, b_t : X_t \to Y_t$ が
+ホモトピックならば、$a$ と $b$ はホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$h_t = (h_{t, n , i})$ が $a_t$ から $b_t$ へのホモトピーならば
+（注意 \ref{simplicial-remark-homotopy-better} を参照）、
+$h = (\prod_t h_{t, n, i})$ は $\prod a_t$ から $\prod b_t$ への
+ホモトピーである。これで (2) が証明された。
+
+\medskip\noindent
+(3) を証明する。$t \in T$ を選ぶ。ある整数 $n \geq 0$ と鎖
+$a_t = a_{t, 0}, a_{t, 1}, \ldots, a_{t, n} = b_t$ が存在し、
+各 $1 \leq i \leq n$ に対して $a_{t, i - 1}$ から $a_{t, i}$ への
+ホモトピー、または $a_{t, i}$ から $a_{t, i - 1}$ へのホモトピーの
+いずれかが存在する。$n = 0$ ならば別の $t$ を選ぶ（すべての
+$t \in T$ に対して $a_t = b_t$ ならば証明は終わっている）。従って
+$n > 0$ と仮定する。例 \ref{simplicial-example-trivial-homotopy} により、すべての
+% P02-E0135: frozen English existential grammar is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+$t' \in T \setminus \{t\}$ に対して $b_{t'}$ から $b_{t'}$ へのホモトピーが
+存在する。従って (2) により、
+$a_{t, n - 1} \times \prod_{t'} b_{t'}$ から $b$ へのホモトピー、または
+$b$ から $a_{t, n - 1} \times \prod_{t'} b_{t'}$ へのホモトピーの
+いずれかが存在する。このようにして $n$ を $1$ だけ減らせる。これで (3) が
+証明された。
+
+\medskip\noindent
+(1) は (3) と定義から従う。
+\end{proof}
+
+\section{アーベル圏におけるホモトピー}
+\label{simplicial-section-homotopy-abelian}
+
+\noindent
+$\mathcal{A}$ を加法圏とする。$U$, $V$ を $\mathcal{A}$ の単体的対象、
+$a, b : U \to V$ を射とする。さらに $h : U \times \Delta[1] \to V$ が
+$a$ から $b$ へのホモトピーであると仮定する。鎖複体の二つの射
+$s(a), s(b) : s(U) \longrightarrow s(V)$ が Homology, Section
+\ref{homology-section-complexes} の意味でホモトピックであることを証明しよう。
+Section \ref{simplicial-section-homotopy} で導入した記法を用い、
+$$
+s(h)_n : U_n \longrightarrow V_{n + 1}
+$$
+を公式
+\begin{equation}
+\label{simplicial-equation-homotopy-to-homotopy}
+s(h)_n = \sum\nolimits_{i = 0}^n (-1)^{i + 1} h_{n + 1, i + 1} \circ s^n_i.
+\end{equation}
+で定義する。$d_{n + 1} \circ s(h)_n + s(h)_{n - 1} \circ d_n$ を計算しよう。
+まず
+\begin{eqnarray*}
+d_{n + 1} \circ s(h)_n & = &
+\sum\nolimits_{j = 0}^{n + 1}
+\sum\nolimits_{i = 0}^n
+(-1)^{j + i + 1}
+d^{n + 1}_j \circ h_{n + 1, i + 1} \circ s^n_i \\
+& = &
+\sum\nolimits_{1 \leq i + 1 \leq j \leq n + 1}
+(-1)^{j + i + 1}
+h_{n, i + 1} \circ d^{n + 1}_j \circ s^n_i \\
+& &
++
+\sum\nolimits_{n \geq i \geq j \geq 0}
+(-1)^{i + j + 1}
+h_{n, i} \circ d^{n + 1}_j \circ s^n_i \\
+& = &
+\sum\nolimits_{1 \leq i + 1 < j \leq n + 1}
+(-1)^{j + i + 1}
+h_{n, i + 1} \circ s^{n - 1}_i \circ d^n_{j - 1} \\
+& &
++
+\sum\nolimits_{1 \leq i + 1 = j \leq n + 1}
+(-1)^{j + i + 1}
+h_{n, i + 1} \\
+& &
++
+\sum\nolimits_{n \geq i = j \geq 0}
+(-1)^{i + j + 1}
+h_{n, i} \\
+& &
++
+\sum\nolimits_{n \geq i > j \geq 0}
+(-1)^{i + j + 1}
+h_{n, i} \circ s^{n - 1}_{i - 1} \circ d^n_j
+\end{eqnarray*}
+を計算する。四つの和のうち最初と最後のものが
+$$
+s(h)_{n - 1} \circ d_n
+=
+\sum_{i = 0}^{n - 1} \sum_{j = 0}^n
+(-1)^{i + 1 + j} h_{n, i + 1} \circ s^{n - 1}_i \circ d^n_j.
+$$
+のすべての項とちょうど相殺することの確認は読者に委ねる。従って
+\begin{eqnarray*}
+d_{n + 1} \circ s(h)_n + s(h)_{n - 1} \circ d_n
+& = &
+\sum_{j = 1}^{n + 1} (-1)^{2j} h_{n, j}
++
+\sum_{i = 0}^n (-1)^{2i + 1} h_{n, i} \\
+& = &
+h_{n, n + 1} - h_{n , 0} \\
+& = &
+a_n - b_n
+\end{eqnarray*}
+を得る。これは所望の等式である。
+
+\begin{lemma}
+\label{simplicial-lemma-homotopy-s-N}
+$\mathcal{A}$ を加法圏とし、$a, b : U \to V$ を $\mathcal{A}$ の単体的対象の
+射とする。$a$, $b$ がホモトピックならば、
+$s(a), s(b) : s(U) \to s(V)$ は鎖複体の写像としてホモトピックである。
+$\mathcal{A}$ がアーベル圏ならば、
+$N(a), N(b) : N(U) \to N(V)$ も鎖複体の写像としてホモトピックである。
+\end{lemma}
+
+\begin{proof}
+$U$ から $V$ への射の列 $a = a_0, a_1, \ldots, a_n = b$ で、各
+$i = 1, \ldots, n$ に対して $a_i$ から $a_{i - 1}$ へのホモトピー、
+または $a_{i - 1}$ から $a_i$ へのホモトピーのいずれかが存在するものを
+選べる。上の計算は、この場合、鎖複体の写像として $s(a_i)$ が
+$s(a_{i - 1})$ とホモトピックであるか、または鎖複体の写像として
+$s(a_{i - 1})$ が $s(a_i)$ とホモトピックであることを示す。
+もちろんこれらは同値であり、さらに鎖複体の写像の集合上で
+ホモトピックであることは同値関係である。Homology, Section
+\ref{homology-section-complexes} を参照せよ。従って $s(a)$ と $s(b)$ は
+鎖複体の写像としてホモトピックである。
+
+\medskip\noindent
+次に $N(a)$ と $N(b)$ を考える。補題
+\ref{simplicial-lemma-decompose-associated-complexes} により、$N(a)$, $N(b)$ は合成
+$$
+N(U) \to s(U) \to s(V) \to N(V)
+$$
+であり、中央でそれぞれ $s(a)$, $s(b)$ を用いる。従って主張は Homology,
+Lemma \ref{homology-lemma-compose-homotopy} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-homotopy-equivalence-s-N}
+$\mathcal{A}$ を加法圏とし、$a : U \to V$ を $\mathcal{A}$ の単体的対象の射とする。
+$a$ がホモトピー同値ならば、$s(a) : s(U) \to s(V)$ は鎖複体の
+ホモトピー同値である。さらに $\mathcal{A}$ がアーベル圏ならば、
+$N(a) : N(U) \to N(V)$ も鎖複体のホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+省略する。上の補題 \ref{simplicial-lemma-homotopy-s-N} を参照せよ。
+\end{proof}
+
+\section{ホモトピーと余単体的対象}
+\label{simplicial-section-homotopy-cosimplicial}
+
+\noindent
+$\mathcal{C}$ を有限積をもつ圏とする。$V$ を余単体的対象とし、
+$\Hom(\Delta[1], V)$ を考える。Section
+\ref{simplicial-section-hom-from-simplicial-sets-into-cosimplicial} を参照せよ。
+射 $e_0, e_1 : \Delta[0] \to \Delta[1]$ は二つの射
+$e_0, e_1 : \Hom(\Delta[1], V) \to V$ を生じさせる。
+
+\begin{definition}
+\label{simplicial-definition-homotopy-cosimplicial}
+$\mathcal{C}$ を有限積をもつ圏とし、$U$ と $V$ を $\mathcal{C}$ の二つの
+余単体的対象とする。$a, b : U \to V$ を $\mathcal{C}$ の余単体的対象の
+二つの射とする。
+\begin{enumerate}
+\item $a = e_0 \circ h$ かつ $b = e_1 \circ h$ を満たす射
+$$
+h : U \longrightarrow \Hom(\Delta[1], V)
+$$
+を {\it $a$ から $b$ へのホモトピー}と呼ぶ。
+\item $U$ から $V$ への射の列 $a = a_0, a_1, \ldots, a_n = b$ が存在し、
+各 $i = 1, \ldots, n$ に対して $a_i$ から $a_{i - 1}$ へのホモトピー、
+または $a_{i - 1}$ から $a_i$ へのホモトピーのいずれかが存在するとき、
+$a$ と $b$ は {\it ホモトピック}である、または
+{\it 同じホモトピー類に属する}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これは Section \ref{simplicial-section-homotopy} で単体的対象に対して導入した概念の
+双対である。これを説明するため、定義にある $a$ から $b$ へのホモトピー
+$h : U \to \Hom(\Delta[1], V)$ を考える。$\Delta[1]_n$ は有限集合であることを
+思い出そう。$h$ の次数 $n$ の成分は射
+% P02-E0136: frozen degree-n source U rather than U_n is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+h_n = (h_{n, \alpha}) :
+U
+\longrightarrow
+\Hom(\Delta[1], V)_n =
+\prod\nolimits_{\alpha \in \Delta[1]_n} V_n
+$$
+である。$\mathcal{C}$ の射 $h_{n, \alpha} : U_n \to V_n$ は、$\Delta$ の任意の射
+$f : [n] \to [m]$ に対して
+\begin{equation}
+\label{simplicial-equation-property-homotopy-cosimplicial}
+h_{m, \alpha} \circ U(f) = V(f) \circ h_{n, \alpha \circ f}
+\end{equation}
+を満たす。さらに $a = e_0 \circ h$ という条件は
+$a_n = h_{n, 0 : [n] \to [1]}$ を意味する。ただし
+$0 : [n] \to [1]$ は値 $0$ の定値写像である。同様に
+$b = e_1 \circ h$ という条件は $b_n = h_{n, 1 : [n] \to [1]}$ を意味する。
+ただし $1 : [n] \to [1]$ は値 $1$ の定値写像である。
+逆に、$\Delta$ のすべての射 $f$ に対して
+(\ref{simplicial-equation-property-homotopy-cosimplicial}) が成り立ち、すべての
+$n \geq 0$ に対して $a_n = h_{n, 0 : [n] \to [1]}$ および
+$b_n = h_{n, 1 : [n] \to [1]}$ となる射の族 $\{h_{n, \alpha}\}$ が
+与えられれば、$h = \prod_{\alpha \in \Delta[1]_n} h_{n, \alpha}$ とおくことにより
+$a$ から $b$ へのホモトピー $h$ を得る。
+
+\begin{remark}
+\label{simplicial-remark-homotopy-cosimplicial-better}
+$\mathcal{C}$ を任意の圏とする（仮定は一切課さない）。$U$ と $V$ を
+$\mathcal{C}$ の余単体的対象、$a, b : U \to V$ を $\mathcal{C}$ の
+余単体的対象の射とする。{\it $a$ から $b$ へのホモトピー}とは、$\Delta$ の
+すべての射 $f$ に対して (\ref{simplicial-equation-property-homotopy-cosimplicial}) を満たし、
+すべての $n \geq 0$ に対して $a_n = h_{n, 0 : [n] \to [1]}$ および
+$b_n = h_{n, 1 : [n] \to [1]}$ となる射
+$h_{n, \alpha} : U_n \to V_n$, $n \geq 0$, $\alpha \in \Delta[1]_n$ の族である。
+定義 \ref{simplicial-definition-homotopy-cosimplicial} と同様に、$U$ から $V$ への
+射の列 $a = a_0, a_1, \ldots, a_n = b$ が存在し、各
+$i = 1, \ldots, n$ に対して $a_{i - 1}$ から $a_i$ へのホモトピー、
+または $a_i$ から $a_{i - 1}$ へのホモトピーのいずれかが存在するとき、
+射 $a$ と $b$ は {\it ホモトピック}であるという。任意の関手
+$F : \mathcal{C} \to \mathcal{C}'$ と $a$ から $b$ へのホモトピー
+% P02-E0137: frozen integer-indexed family is preserved; see ERRATA_CANDIDATES.jsonl.
+$\{h_{n, i}\}$ が与えられれば、$\{F(h_{n, i})\}$ は $F(a)$ から $F(b)$ への
+ホモトピーであることは明らかである。同様に、$a$ と $b$ がホモトピックならば
+$F(a)$ と $F(b)$ もホモトピックである。この新しい概念は、有限積が存在する
+場合には古い概念と同じである。特に、両方の圏が有限積をもつときには関手が
+元の概念を保つことが従う。
+\end{remark}
+
+\begin{lemma}
+\label{simplicial-lemma-compare-homotopies}
+$\mathcal{C}$ を圏とする。$U$ と $V$ を $\mathcal{C}$ の二つの余単体的対象、
+$a, b : U \to V$ を余単体的対象の射とする。$U$, $V$ は
+$\mathcal{C}^{opp}$ の単体的対象 $U'$, $V'$ に対応することを思い出そう。
+さらに $a, b$ は射 $a', b' : V' \to U'$ に対応する。次は同値である。
+\begin{enumerate}
+\item 注意 \ref{simplicial-remark-homotopy-cosimplicial-better} の意味で $a$ から $b$ への
+ホモトピー $h = \{h_{n, \alpha}\}$ が存在する。
+\item 注意 \ref{simplicial-remark-homotopy-better} の意味で $a'$ から $b'$ への
+ホモトピー $h = \{h_{n, i}\}$ が存在する。
+\end{enumerate}
+従って注意 \ref{simplicial-remark-homotopy-cosimplicial-better} の意味で $a$ が $b$ と
+ホモトピックであるための必要十分条件は、注意 \ref{simplicial-remark-homotopy-better} の
+意味で $a'$ が $b'$ とホモトピックであることである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$ が有限積をもつ場合、$\mathcal{C}^{opp}$ は有限余積をもつので、
+定義 \ref{simplicial-definition-homotopy-cosimplicial} と \ref{simplicial-definition-homotopy} を、
+注意 \ref{simplicial-remark-homotopy-cosimplicial-better} と
+\ref{simplicial-remark-homotopy-better} の代わりに使える。
+この場合、$h : U \to \Hom(\Delta[1], V)$ は射
+$h' : \Hom(\Delta[1], V)' \to U'$ と同じである。積と余積も交換されるので、
+$(\Hom(\Delta[1], V))' = V' \times \Delta[1]$ は直ちに分かる。
+さらに、射 $e_0, e_1 : \Hom(\Delta[1], V) \to V$ の「プライム付き」版は
+射 $e_0, e_1 : V' \to \Delta[1] \times V$ である。
+従って $e_0 \circ h = a$ は $h' \circ e_0 = a'$ に移り、同様に
+$e_1 \circ h = b$ は $h' \circ e_1 = b'$ に移る。これでこの場合の補題が
+証明された。
+
+\medskip\noindent
+一般の場合には、(\ref{simplicial-equation-property-homotopy-cosimplicial}) で与えた関係式を
+補題 \ref{simplicial-lemma-relations-homotopy} の関係式へ移す必要がある。詳細は省略する。
+
+\medskip\noindent
+最後の主張は (1) と (2) の同値から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-functorial-homotopy}
+\begin{slogan}
+関手は（余）単体的対象のホモトピックな射を保つ。
+\end{slogan}
+$\mathcal{C}, \mathcal{C}', \mathcal{D}, \mathcal{D}'$ を圏とする。
+% P02-E0138: frozen standalone introductory fragment is bound here; see ERRATA_CANDIDATES.jsonl.
+用語は注意 \ref{simplicial-remark-homotopy-cosimplicial-better} および
+\ref{simplicial-remark-homotopy-better} のとおりとする。
+\begin{enumerate}
+\item $a, b : U \to V$ を $\mathcal{D}$ の単体的対象の射とし、
+$F : \mathcal{D} \to \mathcal{D}'$ を共変関手とする。$a$ と $b$ が
+ホモトピックならば、$F(a)$, $F(b)$ は単体的対象のホモトピックな射
+$F(U) \to F(V)$ である。
+\item $a, b : U \to V$ を $\mathcal{C}$ の余単体的対象の射とし、
+$F : \mathcal{C} \to \mathcal{C}'$ を共変関手とする。$a$ と $b$ が
+ホモトピックならば、$F(a)$, $F(b)$ は余単体的対象のホモトピックな射
+$F(U) \to F(V)$ である。
+\item $a, b : U \to V$ を $\mathcal{D}$ の単体的対象の射とし、
+$F : \mathcal{D} \to \mathcal{C}$ を反変関手とする。$a$ と $b$ が
+ホモトピックならば、$F(a)$, $F(b)$ は余単体的対象のホモトピックな射
+$F(V) \to F(U)$ である。
+\item $a, b : U \to V$ を $\mathcal{C}$ の余単体的対象の射とし、
+$F : \mathcal{C} \to \mathcal{D}$ を反変関手とする。$a$ と $b$ が
+ホモトピックならば、$F(a)$, $F(b)$ は単体的対象のホモトピックな射
+$F(V) \to F(U)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上の補題 \ref{simplicial-lemma-compare-homotopies} により $F$ を一対の圏の間の共変関手に
+変えられるので、その関手がホモトピックな写像の対を保つことを示せばよい。
+これは注意 \ref{simplicial-remark-homotopy-better} で説明されている。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-push-outs-simplicial-object-w-section}
+$f : X \to Y$ を押し出しをもつ圏 $\mathcal{C}$ の射とする。
+$s \circ f = \text{id}_X$ を満たす射 $s : Y \to X$ が存在すると仮定する。
+例 \ref{simplicial-example-push-outs-simplicial-object} で $f$ から構成した余単体的対象を
+$U$ とする。各次数において、各因子上の $f \circ s$ によって与えられる
+$Y \amalg_X \ldots \amalg_X Y$ の自己写像である射 $U \to U$ は、$U$ 上の
+恒等写像とホモトピックである。特に $U$ は定値余単体的対象 $X$ と
+ホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+この補題は補題 \ref{simplicial-lemma-fibre-products-simplicial-object-w-section} の双対である。
+従って補題 \ref{simplicial-lemma-compare-homotopies} を適用すれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-homotopy-s-Q}
+\begin{slogan}
+（余単体的）Dold--Kan 関手はホモトピックな写像をホモトピックな写像へ写す。
+\end{slogan}
+$\mathcal{A}$ を加法圏とし、$a, b : U \to V$ を $\mathcal{A}$ の余単体的対象の
+射とする。$a$, $b$ がホモトピックならば、
+$s(a), s(b) : s(U) \to s(V)$ は余鎖複体の写像としてホモトピックである。
+さらに $\mathcal{A}$ がアーベル圏ならば、
+$Q(a), Q(b) : Q(U) \to Q(V)$ も余鎖複体の写像としてホモトピックである。
+\end{lemma}
+
+\begin{proof}
+$(-)' : \mathcal{A} \to \mathcal{A}^{opp}$ を $A \mapsto A$ で定まる反変関手とする。
+% P02-E0139: frozen inapplicable citation is preserved; see ERRATA_CANDIDATES.jsonl.
+補題 \ref{simplicial-lemma-push-outs-simplicial-object-w-section} により、写像 $a'$ と $b'$ は
+ホモトピックである。補題 \ref{simplicial-lemma-homotopy-s-N} により、$s(a')$ と $s(b')$ は
+鎖複体の写像としてホモトピックである。$s(a') = (s(a))'$ かつ
+$s(b') = (s(b))'$ なので、加法的反変関手
+$(-)'' : \mathcal{A}^{opp} \to \mathcal{A}$ を適用すれば $s(a)$ と $s(b)$ も
+ホモトピックであると結論できる。$Q$-複体に対する結論も
+$Q(U)' = N(U')$ を用いて同様に従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-homotopy-equivalence-s-Q}
+$\mathcal{A}$ を加法圏とし、$a : U \to V$ を $\mathcal{A}$ の余単体的対象の射とする。
+$a$ がホモトピー同値ならば、
+% P02-E0140: frozen chain-complex terminology is preserved; see ERRATA_CANDIDATES.jsonl.
+$s(a) : s(U) \to s(V)$ は鎖複体のホモトピー同値である。
+さらに $\mathcal{A}$ がアーベル圏ならば、$Q(a) : Q(U) \to Q(V)$ も
+鎖複体のホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+省略する。上の補題 \ref{simplicial-lemma-homotopy-s-Q} を参照せよ。
+\end{proof}
+
+\section{アーベル圏におけるさらなるホモトピー}
+\label{simplicial-section-backwards-homotopy}
+
+\noindent
+$\mathcal{A}$ をアーベル圏とする。この節では、
+$\text{Ch}_{\geq 0}(\mathcal{A})$ の射の間のホモトピーが常に単体的対象の圏の射
+$U \times \Delta[1] \to V$ から生じることを示す。これはある意味で補題
+\ref{simplicial-lemma-homotopy-s-N} の逆を与える。まず鎖複体の射の間のホモトピーに
+関する準備を行う。
+
+\begin{lemma}
+\label{simplicial-lemma-represent-homotopy}
+$\mathcal{A}$ をアーベル圏、$A$ を鎖複体とする。共変関手
+$$
+B \longmapsto
+\{
+(a, b, h)
+\mid
+a, b : A \to B\text{ and }h\text{ a homotopy between }a, b
+\}
+$$
+を考える。$\Mor_{\text{Ch}(\mathcal{A})}(\diamond A, -)$ が表示した関手と
+同型になるような鎖複体 $\diamond A$ が存在する。構成
+$A \mapsto \diamond A$ は関手的である。
+\end{lemma}
+
+\begin{proof}
+$\diamond A_n = A_n \oplus A_n \oplus A_{n - 1}$ とおき、
+$d_{\diamond A, n}$ を行列
+$$
+d_{\diamond A, n}
+=
+\left(
+\begin{matrix}
+d_{A, n} & 0 & \text{id}_{A_{n - 1}} \\
+0 & d_{A, n} & -\text{id}_{A_{n - 1}} \\
+0 & 0 & -d_{A, n - 1}
+\end{matrix}
+\right) :
+A_n \oplus A_n \oplus A_{n - 1} \to
+A_{n - 1} \oplus A_{n - 1} \oplus A_{n - 2}
+$$
+で定義する。$\mathcal{A}$ がアーベル群の圏で、
+$(x, y, z) \in A_n \oplus A_n \oplus A_{n - 1}$ ならば
+$d_{\diamond A, n}(x, y, z) = (d_n(x) + z, d_n(y) - z, -d_{n - 1}(z))$ である。
+$d^2 = 0$ は容易に確かめられる。明らかに二つの写像
+$\diamond a, \diamond b : A \to \diamond A$（第一成分と第二成分）と写像
+$\diamond A \to A[-1]$ があり、これらは各項で分裂する短完全列
+$$
+0 \to
+A \oplus A \to
+\diamond A \to
+A[-1] \to
+0
+$$
+を与える。さらに写像の列 $\diamond h_n : A_n \to \diamond A_{n + 1}$、
+すなわち $A_n$ から $\diamond A_{n + 1}$ の成分 $A_n$ への恒等写像があり、
+$\diamond h$ は $\diamond a$ と $\diamond b$ の間のホモトピーである。
+
+\medskip\noindent
+従って任意の射 $f : \diamond A \to B$ は、
+$a = f \circ \diamond a$, $b = f \circ \diamond b$ および
+$h_n = f_{n + 1} \circ \diamond h_n$ とおくことにより三つ組 $(a, b, h)$ を
+生じさせる。逆に、三つ組 $(a, b, h)$ が与えられれば
+$$
+f_n = (a_n, b_n, h_{n - 1}).
+$$
+とおくことにより射 $f : \diamond A \to B$ を得る。
+これが鎖複体の射であることを見るには計算が必要である。
+$\mathcal{A}$ がアーベル群の圏である場合だけ計算する。
+$(x, y, z) \in \diamond A_n = A_n \oplus A_n \oplus A_{n - 1}$ とすると
+% P02-E0141: frozen degree-n chain-map components are preserved; see ERRATA_CANDIDATES.jsonl.
+\begin{eqnarray*}
+f_{n - 1}(d_n(x, y, z)) & = &
+f_{n - 1}(d_n(x) + z, d_n(y) - z, -d_{n - 1}(z)) \\
+& = &
+a_n(d_n(x)) + a_n(z) + b_n(d_n(y)) - b_n(z) - h_{n - 2}(d_{n - 1}(z))
+\end{eqnarray*}
+であり、また
+% P02-E0142: frozen missing outer parenthesis is preserved; see ERRATA_CANDIDATES.jsonl.
+\begin{eqnarray*}
+d_n(f_n(x, y, z) & = &
+d_n(a_n(x) + b_n(y) + h_{n - 1}(z)) \\
+& = &
+d_n(a_n(x)) + d_n(b_n(y)) + d_n(h_{n - 1}(z))
+\end{eqnarray*}
+である。これらはホモトピーの定義により等しい。
+\end{proof}
+
+\noindent
+拡大
+$$
+0 \to
+A \oplus A \to
+\diamond A \to
+A[-1] \to
+0
+$$
+には射 $\diamond A_n \to A[-1]_n$ の切断が付随し、それに対応する射
+$\delta : A[-1] \to (A \oplus A)[-1]$（Homology, Lemma
+\ref{homology-lemma-ses-termwise-split} を参照）が射
+$(1, -1) : A[-1] \to A[-1] \oplus A[-1]$ に等しいという性質をもつことに
+注意する。
+
+\begin{lemma}
+\label{simplicial-lemma-map-into-diamond}
+$\mathcal{A}$ をアーベル圏とする。$\mathcal{A}$ の鎖複体の短完全列
+$$
+0 \to A \oplus A \to B \to C \to 0
+$$
+が与えられたとする。さらに、次数 $n$ における付随する短完全列を分裂させる
+射 $s_n : C_n \to B_n$ が与えられたと仮定する。付随する複体の射を
+$\delta(s) : C \to (A \oplus A)[-1] = A[-1] \oplus A[-1]$ とする。
+Homology, Lemma \ref{homology-lemma-ses-termwise-split} を参照せよ。
+$\delta(s)$ が射 $(1, -1) : A[-1] \to A[-1] \oplus A[-1]$ を経由して
+分解するならば、可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+A \oplus A \ar[d] \ar[r] &
+B \ar[r] \ar[d] &
+C \ar[d] \ar[r] &
+0 \\
+0 \ar[r] &
+A \oplus A \ar[r] &
+\diamond A \ar[r] &
+A[-1] \ar[r] &
+0
+}
+$$
+に組み込まれる一意な射 $B \to \diamond A$ が存在し、垂直射は切断
+$s_n$ および $\diamond A_n \to A[-1]_n$ の切断とも両立する。
+\end{lemma}
+
+\begin{proof}
+Homology, Lemma \ref{homology-lemma-ses-termwise-split} の射 $\pi_n$ を
+$(p_n, q_n) : B_n \to A_n \oplus A_n$ と記す。また短完全列の写像を
+$(a, b) : A \oplus A \to B$ および $r : B \to C$ と書く。
+$\delta(s)$ の分解を $\delta(s) = (1, -1) \circ f$ と書く。
+これは $p_{n - 1} \circ d_{B, n} \circ s_n = f_n$ かつ
+$q_{n - 1} \circ d_{B, n} \circ s_n = - f_n$ を意味し、
+% P02-E0143: frozen dangling connective is bound here; see ERRATA_CANDIDATES.jsonl.
+$B_n \to \diamond A_n = A_n \oplus A_n \oplus A_{n - 1}$ を
+$(p_n, q_n, f_n \circ r_n)$ とおく。
+
+\medskip\noindent
+これが実際に複体の射を定めることを確かめなければならない。
+アーベル群の場合だけ確認する。$x \in B_n$ を選ぶ。このとき
+$x = a_n(x_1) + b_n(x_2) + s_n(x_3)$ であり、各項について定義が微分と
+可換することを示せば十分である。項 $a_n(x_1)$ に対しては
+$(p_n, q_n, f_n \circ r_n)(a_n(x_1)) = (x_1, 0, 0)$ であり、結論は明らかである。
+項 $b_n(x_2)$ についても同様である。項 $s_n(x_3)$ については
+% P02-E0144: frozen degree-n projection/splitting indices are preserved; see ERRATA_CANDIDATES.jsonl.
+\begin{eqnarray*}
+(p_n, q_n, f_n \circ r_n)(d_n(s_n(x_3))) & = &
+(p_n, q_n, f_n \circ r_n)( \\
+& & \ \ \ \ \ a_n(f_n(x_3)) - b_n(f_n(x_3)) + s_n(d_n(x_3))) \\
+& = &
+(f_n(x_3), -f_n(x_3), f_n(d_n(x_3)))
+\end{eqnarray*}
+である。これは $f_n$ の定義による。一方、
+\begin{eqnarray*}
+d_n(p_n, q_n, f_n \circ r_n)(s_n(x_3)) & = & d_n(0, 0, f_n(x_3)) \\
+& = &
+(f_n(x_3), - f_n(x_3), d_{A[-1], n}(f_n(x_3)))
+\end{eqnarray*}
+である。$f$ は複体の射なので結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-backwards-homotopy}
+$\mathcal{A}$ をアーベル圏とする。$U$, $V$ を $\mathcal{A}$ の単体的対象、
+$a, b : U \to V$ を一対の射とする。対応する鎖複体の写像
+$N(a), N(b) : N(U) \to N(V)$ がホモトピー
+$\{N_n : N(U)_n \to N(V)_{n + 1}\}$ によってホモトピックであると仮定する。
+このとき定義 \ref{simplicial-definition-homotopy} の意味で $a$ から $b$ へのホモトピーが
+存在する。さらに、$h$ から Section \ref{simplicial-section-homotopy-abelian} のように
+生じるホモトピーを $N(h)$ とするとき、$N_n = N(h)_n$ となるように
+ホモトピー $h : U \times \Delta[1] \to V$ を選べる。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-represent-homotopy} とその証明にある
+$(\diamond N(U), \diamond a, \diamond b, \diamond h)$ をとる。
+同補題により、三つ組 $(N(a), N(b), \{N_n\})$ を表現する射
+$\diamond N(U) \to N(V)$ が存在する。射
+$\psi : N(U \times \Delta[1]) \to \diamond{N(U)}$ で
+$\diamond a = \psi \circ N(e_0)$ かつ
+$\diamond b = \psi \circ N(e_1)$ を満たすものが存在することを示す。
+さらに、(\ref{simplicial-equation-homotopy-to-homotopy}) と補題
+\ref{simplicial-lemma-homotopy-s-N} から $h = \text{id}_{U \times \Delta[1]}$ として生じる
+$N(e_0), N(e_1) : N(U) \to N(U \times \Delta[1])$ の間のホモトピーが、
+$\psi$ により、二つの写像
+$\diamond a, \diamond b : N(U) \to \diamond{N(U)}$ の間の標準ホモトピー
+$\diamond h$ へ写されることを示す。これで補題が従うことは明らかである。
+
+\medskip\noindent
+関手 $N : \text{Simp}(\mathcal{A}) \to \text{Ch}_{\geq 0}(\mathcal{A})$ は
+関手 $s : \text{Simp}(\mathcal{A}) \to \text{Ch}_{\geq 0}(\mathcal{A})$ の
+直和因子であることに注意する。また関手 $\diamond$ は直和と両立する。
+従って、対応する性質をもつ射
+$\Psi : s(U \times \Delta[1]) \to \diamond{s(U)}$ を代わりに構成すれば十分である。
+以下でこれを行う。
+
+\medskip\noindent
+定義 \ref{simplicial-definition-homotopy} により、射
+$e_0 : U \to U \times \Delta[1]$ と $e_1 : U \to U \times \Delta[1]$ は、
+ホモトピー $\text{id}_{U \times \Delta[1]}$ によってホモトピックである。
+補題 \ref{simplicial-lemma-homotopy-s-N} により、鎖複体の射
+$s(e_0) : s(U) \to s(U \times \Delta[1])$ と
+$s(e_1) : s(U) \to s(U \times \Delta[1])$ の間の明示的ホモトピー
+$\{h_n : s(U)_n \to s(U \times \Delta[1])_{n + 1}\}$ を得る。
+上の補題 \ref{simplicial-lemma-map-into-diamond} により、対応する射
+$$
+\Phi : \diamond{s(U)} \to s(U \times \Delta[1])
+$$
+を得る。構成によれば、$\Phi_n$ の $\diamond{s(U)}_n$ の成分
+$s(U)[-1]_n = s(U)_{n - 1}$ への制限は $h_{n - 1}$ に等しい。そして
+% P02-E0145: frozen degeneracy exponent is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+h_{n - 1} = \sum\nolimits_{i = 0}^{n - 1}
+(-1)^{i + 1} s^n_i \cdot \alpha^n_{i + 1} :
+U_{n - 1} \to \bigoplus\nolimits_j U_n \cdot \alpha^n_j.
+$$
+である。記法の意味は明らかであろう。
+
+\medskip\noindent
+一方、射 $e_i : U \to U \times \Delta[1]$ は射
+$(e_0, e_1) : U \oplus U \to U \times \Delta[1]$ を誘導する。その余核を $W$ と
+記す。$(U \times \Delta[1])_n =
+\bigoplus_{\alpha : [n] \to [1]} U_n \cdot \alpha$ と書けば、
+Section \ref{simplicial-section-homotopy} の $\alpha^n_i$ を用いて
+$W_n = \bigoplus_{i = 1}^n U_n \cdot \alpha^n_i$ と同一視できることに注意する。
+可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+U \oplus U \ar[rd]_{(1, 1)} \ar[r] &
+U \times \Delta[1] \ar[d]^\pi \ar[r] &
+W \ar[r] &
+0 \\
+& & U & &
+}
+$$
+がある。従って関手 $s$ を適用した後にも同様の可換図式がある。
+次に、成分 $U_n \cdot \alpha^n_i \subset W_n$ を $(-1, 1)$ によって成分
+$U_n \cdot \alpha^n_0 \oplus U_n \cdot \alpha^n_i
+\subset (U \times \Delta[1])_n$ へ写すことにより、切断
+$\sigma_n : s(W)_n \to s(U \times \Delta[1])_n$ を選ぶ。
+$s(\pi)_n \circ \sigma_n = 0$ であることに注意する。
+従って $(1, 1) \circ \delta(\sigma)_n = 0$ である。
+ゆえに $\delta(\sigma)$ は補題 \ref{simplicial-lemma-map-into-diamond} のように分解する。
+同補題により標準射
+$\Psi : s(U \times \Delta[1]) \to \diamond{s(U)}$ を得る。
+
+\medskip\noindent
+$\Psi$ を計算するため、まず射
+$\delta(\sigma) : s(W) \to s(U)[-1] \oplus s(U)[-1]$ を計算する。
+Homology, Lemma \ref{homology-lemma-ses-termwise-split} とその証明によれば、
+% P02-E0146: frozen missing infinitive is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+これには
+% P02-E0147: frozen lowercase delta[1] interval symbols are preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+d_{s(U \times \delta[1]), n} \circ \sigma_n
+-
+\sigma_{n - 1} \circ d_{s(W), n}
+$$
+を計算し、それを
+$U_{n - 1} \cdot \alpha^{n - 1}_0 \oplus U_{n - 1} \cdot \alpha^{n - 1}_n$ への
+射として書く必要がある。$\mathcal{A}$ がアーベル群の圏である場合だけ
+計算する。$(U \times \Delta[1])_n$ の成分 $U_n \cdot \alpha$ に属する
+元 $x \in U_n$ を表すため、略記 $x_{\alpha}$ を用いる。この元を $x$ と記す。
+$$
+d_{s(U \times \delta[1]), n}
+=
+\sum\nolimits_{i = 0}^n (-1)^i d^n_i
+$$
+であり、$d^n_i$ は単体的対象 $U$ の射 $d^n_i$ によって成分
+$U_n \cdot \alpha$ を成分
+$U_{n - 1} \cdot (\alpha \circ \delta^n_i)$ へ写すことを思い出そう。
+上の記法では、これは
+$$
+d_{s(U \times \delta[1]), n}(x_\alpha) =
+\sum\nolimits_{i = 0}^n (-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+$$
+を意味する。$x_\alpha \in W_n$、すなわちある
+$j \in \{1, \ldots, n\}$ に対して $\alpha = \alpha^n_j$ であるものから
+出発すると、$\sigma_n(x_\alpha) = x_\alpha - x_{\alpha^n_0}$ であり、従って
+$$
+(d_{s(U \times \delta[1]), n} \circ \sigma_n)(x_\alpha)
+=
+\sum\nolimits_{i = 0}^n (-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+-
+\sum\nolimits_{i = 0}^n (-1)^i (d^n_i(x))_{\alpha^n_0 \circ \delta^n_i}
+$$
+である。$d_{s(W), n}(x_\alpha)$ を計算するには、
+$\alpha \circ \delta^n_i = \alpha^{n - 1}_0, \alpha^{n - 1}_n$ となるすべての
+項を除かなければならない。従って
+% P02-E0148: frozen malformed exclusion predicate is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\begin{matrix}
+(\sigma_{n - 1} \circ d_{s(W), n})(x_\alpha) = \\
+\sum\nolimits_{i = 0, \ldots, n\text{ and }
+\alpha \circ \delta^n_i \not = \alpha^{n - 1}_0\text{ or }\alpha^{n - 1}_n}
+\Big((-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+-
+(-1)^i (d^n_i(x))_{\alpha^{n - 1}_0}
+\Big)
+\end{matrix}
+$$
+を得る。二つの項の差が和
+$$
+\sum\nolimits_{i = 0, \ldots, n\text{ and }
+\alpha \circ \delta^n_i = \alpha^{n - 1}_0\text{ or }\alpha^{n - 1}_n}
+\Big((-1)^i (d^n_i(x))_{\alpha \circ \delta^n_i}
+-
+(-1)^i (d^n_i(x))_{\alpha^{n - 1}_0}
+\Big)
+$$
+であることは明らかである。もちろん
+$\alpha \circ \delta^n_i = \alpha^{n - 1}_0$ ならばその項は相殺する。
+ある $j \in \{1, \ldots, n\}$ に対して $\alpha = \alpha^n_j$ であったことを
+思い出そう。$\alpha^n_j \circ \delta^n_i = \alpha^{n - 1}_n$ となるのは
+$j = n$ かつ $i = n$ の場合だけである。従って実際には、この場合でなければ
+$0$ を得て、$j = n$ ならば
+$(-1)^n(d^n_n(x))_{\alpha^{n - 1}_n} - (-1)^n(d^n_n(x))_{\alpha^{n - 1}_0}$
+を得る。言い換えれば、射
+$$
+\delta(\sigma)_n :
+W_n
+\to
+(s(U)[-1] \oplus s(U)[-1])_n = U_{n - 1} \oplus U_{n - 1}
+$$
+は $U_n \cdot \alpha^n_n$ を除くすべての成分上で零であり、その成分上では
+$((-1)^nd^n_n, -(-1)^nd^n_n)$ に等しい（実際、二つのうち第一成分は
+$\alpha^{n - 1}_n$ の因子に対応する。これは全員を $0$ へ写す写像
+$[n - 1] \to [1]$ であり、従って $e_0$ に対応するからである）。
+
+\medskip\noindent
+標準図式
+$$
+\xymatrix{
+0 \ar[r] &
+s(U) \oplus s(U) \ar[r] \ar[d] &
+\diamond{s(U)} \ar[r] \ar[d]^{\Phi}&
+s(U)[-1] \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+s(U) \oplus s(U) \ar[r] \ar[d] &
+s(U \times \Delta[1]) \ar[r] \ar[d]^\Psi &
+s(W) \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+s(U) \oplus s(U) \ar[r] &
+\diamond{s(U)} \ar[r] &
+s(U)[-1] \ar[r] &
+0
+}
+$$
+を得る。$\Phi \circ \Psi$ は恒等写像であると主張する。
+これを見るには、$s(U)[-1] \to s(W) \to s(U)[-1] \oplus s(U)[-1]$ という
+写像としての $\Phi$ と $\delta(\sigma)$ の合成が、第一因子では恒等写像、
+第二因子では恒等写像の負であることを証明すれば十分である。
+上の計算により、それは
+% P02-E0149: frozen final face/degeneracy indices are preserved; see ERRATA_CANDIDATES.jsonl.
+$((-1)^nd^n_0, -(-1)^nd^n_0) \circ (-1)^n s^n_n = (1, -1)$
+であり、所望の結論を得る。
+\end{proof}
+
+\section{自明 Kan ファイブレーション}
+\label{simplicial-section-trivial-kan}
+
+\noindent
+$n \geq 0$ に対して単体集合 $\Delta[n]$ は規則
+$[k] \mapsto \Mor_\Delta([k], [n])$ によって与えられることを思い出そう。
+例 \ref{simplicial-example-simplex-simplicial-set} を参照せよ。$\Delta[n]$ は一意な
+非退化 $n$-単体をもち、すべての非退化単体はこの $n$-単体の面であることも
+思い出そう。実際、$\Delta[n]$ の非退化単体は単射 $[k] \to [n]$ にちょうど
+対応し、これらを $[n]$ の部分集合と同一視できる。さらに任意の単体集合 $X$ に
+対して $\Mor(\Delta[n], X) = X_n$ であることを思い出そう
+（補題 \ref{simplicial-lemma-simplex-map}）。
+$$
+\partial \Delta[n] = i_{(n - 1)!}\text{sk}_{n - 1}\Delta[n]
+$$
+とおき、これを $\Delta[n]$ の {\it 境界}と呼ぶ。補題
+\ref{simplicial-lemma-n-skeleton-sets} により、$\partial \Delta[n] \subset \Delta[n]$ は
+次数 $\leq n - 1$ において同じ非退化単体をもつが、非退化 $n$-単体を含まない
+単体的部分集合である。
+
+\begin{definition}
+\label{simplicial-definition-trivial-kan}
+単体集合の写像 $X \to Y$ に対し、$X_0 \to Y_0$ が全射であり、すべての
+$n \geq 1$ と任意の可換な実線図式
+$$
+\xymatrix{
+\partial \Delta[n] \ar[r] \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+に対して図式を可換にする点線矢印が存在するとき、これを
+{\it 自明 Kan ファイブレーション}と呼ぶ。
+\end{definition}
+
+\noindent
+自明 Kan ファイブレーションは非常に一般的な持ち上げ性質を満たす。
+
+\begin{lemma}
+\label{simplicial-lemma-trivial-kan}
+$f : X \to Y$ を単体集合の自明 Kan ファイブレーションとする。
+$Z \to W$ が（各次数で）単射である単体集合の任意の可換な実線図式
+$$
+\xymatrix{
+Z \ar[r]_b \ar[d] & X \ar[d] \\
+W \ar[r]^a \ar@{-->}[ru] & Y
+}
+$$
+に対し、図式を可換にする点線矢印が存在する。
+\end{lemma}
+
+\begin{proof}
+$Z \not = W$ と仮定する。$Z_n \not = W_n$ となる最小の整数を $n$ とする。
+$x \in W_n$, $x \not \in Z_n$ をとる。$Z$, $x$, および $x$ のすべての退化を
+含む単体的部分集合を $Z' \subset W$ と記す。$x$ に対応する射を
+$\varphi : \Delta[n] \to Z'$ とする（補題 \ref{simplicial-lemma-simplex-map}）。
+$\partial \Delta[n]$ のすべての非退化単体は $Z$ に入るので、
+$\varphi|_{\partial \Delta[n]}$ は $Z$ の中へ写る。仮定により
+$b \circ \varphi|_{\partial \Delta[n]}$ を $\beta : \Delta[n] \to X$ へ拡張できる。
+補題 \ref{simplicial-lemma-glue-simplex} により、単体集合 $Z'$ は
+$\partial \Delta[n]$ に沿った $\Delta[n]$ と $Z$ の押し出しである。
+従って $b$ と $\beta$ は射 $b' : Z' \to X$ を定める。言い換えれば、射 $b$ を
+% P02-E0150: frozen wrong ambient simplicial subset is preserved; see ERRATA_CANDIDATES.jsonl.
+$Z$ のより大きな単体的部分集合へ拡張した。
+
+\medskip\noindent
+Zorn の補題を適用すれば証明が完了する（省略）。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-trivial-kan-base-change}
+$f : X \to Y$ を単体集合の自明 Kan ファイブレーションとし、
+$Y' \to Y$ を単体集合の射とする。このとき
+$X \times_Y Y' \to Y'$ は自明 Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+ファイバー積の関手的性質（補題 \ref{simplicial-lemma-fibre-product}）と定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-trivial-kan-composition}
+二つの自明 Kan ファイブレーションの合成は自明 Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-limit-trivial-kan}
+$\ldots \to U^2 \to U^1 \to U^0$ を自明 Kan ファイブレーションの列とする。
+$U_n = \lim U_n^t$ ととることにより $U = \lim U^t$ を定義する。
+このとき $U \to U^0$ は自明 Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：集合の全射の可算列に対して逆極限が空でないことを用いる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-product-trivial-kan}
+\begin{slogan}
+自明 Kan ファイブレーションの積は自明 Kan ファイブレーションである。
+\end{slogan}
+$X_i \to Y_i$ を自明 Kan ファイブレーションの族とする。このとき
+$\prod X_i \to \prod Y_i$ は自明 Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-filtered-colimit-trivial-kan}
+自明 Kan ファイブレーションのフィルター余極限は自明 Kan
+ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：Categories, Section
+\ref{categories-section-directed-colimits} にある集合のフィルター余極限の記述を
+参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-trivial-kan-homotopy}
+$f : X \to Y$ を単体集合の自明 Kan ファイブレーションとする。このとき
+$f$ はホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-trivial-kan} により、$f$ の右逆 $g : Y \to X$ を選べる。
+% P02-E0151: frozen English article defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+図式
+$$
+\xymatrix{
+\partial \Delta[1] \times X \ar[d] \ar[r] & X \ar[d] \\
+\Delta[1] \times X \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+を考える。すべての $n \geq 0$ に対して
+$(\partial \Delta[1] \times X)_n = X_n \amalg X_n$ であることを用い、上の水平射は
+$\text{id}_X$ と $g \circ f$ によって与えられる。下の水平射は写像
+$\Delta[1] \to \Delta[0]$ と $f : X \to Y$ によって与えられる。
+$f \circ g \circ f = f$ なので図式は可換である。補題
+\ref{simplicial-lemma-trivial-kan} により点線矢印を埋めることができ、結論を得る。
+\end{proof}
+
+\section{Kan ファイブレーション}
+\label{simplicial-section-kan}
+
+\noindent
+$n$、$k$ を $0 \leq k \leq n$ かつ $1 \leq n$ を満たす整数とする。
+$\sigma_0, \ldots, \sigma_n$ を $\Delta[n]$ の一意な非退化
+$n$-単体 $\sigma$ の $n + 1$ 個の面、すなわち
+$\sigma_i = d_i\sigma$ とする。
+$$
+\Lambda_k[n] \subset \Delta[n]
+$$
+を $n$-単体 $\Delta[n]$ の {\it 第 $k$ ホーン}とする。これは
+$\sigma_0, \ldots, \hat \sigma_k, \ldots, \sigma_n$ によって生成される
+$\Delta[n]$ の単体的部分集合である。言い換えれば、表示した包含の像は
+$\sigma$ と $\sigma_k$ を除く $\Delta[n]$ のすべての非退化単体を含む。
+
+\begin{definition}
+\label{simplicial-definition-kan}
+単体集合の写像 $X \to Y$ に対し、$1 \leq n$、$0 \leq k \leq n$
+を満たすすべての $k, n$ と任意の可換な実線図式
+$$
+\xymatrix{
+\Lambda_k[n] \ar[r] \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+について、図式を可換にする点線矢印が存在するとき、これを
+{\it Kan ファイブレーション}と呼ぶ。{\it Kan 複体}とは、単体集合 $X$ で
+$X \to *$ が Kan ファイブレーションとなるものをいう。ここで
+$*$ は一元集合上の定値単体集合である。
+\end{definition}
+
+\noindent
+$\Lambda_k[n]$ は常に空でないことに注意する。従って、空単体集合から任意の
+単体集合への射は常に Kan ファイブレーションである。補題
+\ref{simplicial-lemma-trivial-kan} により、自明 Kan ファイブレーションは
+Kan ファイブレーションである。
+
+\begin{lemma}
+\label{simplicial-lemma-kan-base-change}
+$f : X \to Y$ を単体集合の Kan ファイブレーションとし、
+$Y' \to Y$ を単体集合の射とする。このとき
+$X \times_Y Y' \to Y'$ は Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+ファイバー積の関手的性質（補題 \ref{simplicial-lemma-fibre-product}）と定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-kan-composition}
+二つの Kan ファイブレーションの合成は Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-limit-kan}
+$\ldots \to U^2 \to U^1 \to U^0$ を Kan ファイブレーションの列とする。
+$U_n = \lim U_n^t$ ととることにより $U = \lim U^t$ を定義する。
+このとき $U \to U^0$ は Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：集合の全射の可算列に対して逆極限が空でないことを用いる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-product-kan}
+$X_i \to Y_i$ を Kan ファイブレーションの族とする。このとき
+$\prod X_i \to \prod Y_i$ は Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+次の補題は J.C.\ Moore によるものである。\cite{Moore-Cartan} を参照せよ。
+
+\begin{lemma}
+\label{simplicial-lemma-simplicial-group-kan}
+$X$ を単体群とする。このとき $X$ は Kan 複体である。
+\end{lemma}
+
+\begin{proof}
+以下の証明は、本質的には上で挙げた文献の証明を英語に翻訳しただけである。
+本節の導入で説明した用語を用いる。ホーンからの射
+$f : \Lambda_k[n] \to X$ が与えられたとする。
+$i = 0, \ldots, \hat k, \ldots, n$ に対して
+$x_i = f(\sigma_i) \in X_{n - 1}$ とおく。これは、$i, j \not = k$ である
+$i < j$ に対して $d_i x_j = d_{j - 1} x_i$ が成り立つことを意味する。
+$i = 0, \ldots, \hat k, \ldots, n$ に対して $x_i = d_ix$ を満たす
+$x \in X_n$ を見つけなければならない。
+
+\medskip\noindent
+まず、$i < k$ に対して $d_i u = x_i$ を満たす $u \in X_n$ が存在することを
+示す。$k = 0$ ならば自明である。$k > 0$ のときは、$0 \leq i \leq r$ に
+対して $d_i u^r = x_i$ を満たす元 $u^r \in X_n$ を帰納的に定義する。
+$u^0 = s_0x_0$ から始める。$r < k - 1$ ならば
+$$
+y^r = s_{r + 1}((d_{r + 1}u^r)^{-1}x_{r + 1}),\quad
+u^{r + 1} = u^r y^r.
+$$
+とおく。容易な計算により、$i \leq r$ に対して
+$d_iy^r = 1$（群 $X_{n - 1}$ の単位元）であり、かつ
+$d_{r + 1}y^r = (d_{r + 1}u^r)^{-1}x_{r + 1}$ である。
+従って $i \leq r + 1$ に対して $d_iu^{r + 1} = x_i$ となる。
+最後に $u = u^{k - 1}$ ととれば、求める $u$ が得られる。
+
+\medskip\noindent
+% P02-E0152: frozen English article defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+次に、整数 $r$ に関する帰納法により、$0 \leq r \leq n - k$ に対して
+$$
+d_i x^r = x_i\quad\text{for }i < k\text{ and }i > n - r.
+$$
+を満たす $x^r \in X_n$ が存在することを示す。$r = 0$ では
+$x^0 = u$ から始める。$r \leq n - k - 1$ に対して $x^r$ が定義されたとし、
+$$
+z^r = s_{n - r - 1}((d_{n - r}x^r)^{-1}x_{n - r}),\quad x^{r + 1} = x^rz^r
+$$
+とおく。与えられた関係を用いた簡単な計算により、$i < k$ および
+$i > n - r$ に対して $d_iz^r = 1$ であり、また
+$d_{n - r}(z^r) = (d_{n - r}x^r)^{-1}x_{n - r}$ である。
+従って $i < k$ および $i > n - r - 1$ に対して
+$d_ix^{r + 1} = x_i$ となる。最後に $x = x^{n - k}$ ととれば証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-surjection-simplicial-abelian-groups-kan}
+$f : X \to Y$ を、各項で全射な単体アーベル群の準同型とする。このとき
+$f$ は単体集合の Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{simplicial-definition-kan} にある可換な実線図式
+$$
+\xymatrix{
+\Lambda_k[n] \ar[r]_a \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r]^b \ar@{-->}[ru] & Y
+}
+$$
+を考える。写像 $a$ は、$i < j$、$i, j \not = k$ に対して
+$d_i x_j = d_{j - 1} x_i$ を満たす
+$x_0, \ldots, \hat x_k, \ldots, x_n \in X_{n - 1}$ に対応する。
+写像 $b$ は、$i \not = k$ に対して $d_iy = f(x_i)$ を満たす元
+$y \in Y_n$ に対応する。$i \not = k$ に対して $d_ix = x_i$ であり、
+かつ $f(x) = y$ となる $x \in X_n$ を構成することが課題である。
+
+\medskip\noindent
+$f$ は各項で全射なので、$f(x) = y$ を満たす $x \in X_n$ をとれる。
+$y$ を $0 = y - f(x)$ で、$i \not = k$ に対して $x_i$ を
+$x_i - d_ix$ で置き換える。すると $y = 0$ と仮定してよいことが分かる。
+特に $f(x_i) = 0$ である。言い換えれば、$X$ を
+$\Ker(f) \subset X$ で、$Y$ を $0$ で置き換えられる。
+% P02-E0153: frozen English agreement defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+この場合、主張は補題 \ref{simplicial-lemma-simplicial-group-kan} となる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-qis-simplicial-abelian-groups}
+$f : X \to Y$ を、各項で全射であり、付随する鎖複体上で擬同型を誘導する
+単体アーベル群の準同型とする。このとき $f$ は単体集合の
+自明 Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{simplicial-definition-trivial-kan} にある可換な実線図式
+$$
+\xymatrix{
+\partial \Delta[n] \ar[r]_a \ar[d] & X \ar[d] \\
+\Delta[n] \ar[r]^b \ar@{-->}[ru] & Y
+}
+$$
+を考える。写像 $a$ は、$i < j$ に対して $d_i x_j = d_{j - 1} x_i$ を
+満たす $x_0, \ldots, x_n \in X_{n - 1}$ に対応する。写像 $b$ は
+$d_iy = f(x_i)$ を満たす元 $y \in Y_n$ に対応する。
+$d_ix = x_i$ かつ $f(x) = y$ となる $x \in X_n$ を構成することが課題である。
+
+\medskip\noindent
+$f$ は各項で全射なので、$f(x) = y$ を満たす $x \in X_n$ をとれる。
+$y$ を $0 = y - f(x)$ で、$x_i$ を $x_i - d_ix$ で置き換える。
+すると $y = 0$ と仮定してよいことが分かる。特に $f(x_i) = 0$ である。
+言い換えれば、$X$ を $\Ker(f) \subset X$ で、$Y$ を $0$ で置き換えられる。
+これが可能なのは、Homology, Lemma
+\ref{homology-lemma-long-exact-sequence-chain} により、$\Ker(f)$ に付随する
+鎖複体のホモロジーが零であり、従って $\Ker(f) \to 0$ が付随する鎖複体上で
+擬同型を誘導するからである。
+
+\medskip\noindent
+$X$ は Kan 複体なので（補題 \ref{simplicial-lemma-simplicial-group-kan}）、
+$i = 0, \ldots, n - 1$ に対して $d_i x = x_i$ を満たす $x \in X_n$ をとれる。
+$i = 0, \ldots, n$ に対して $x_i$ を $x_i - d_ix$ で置き換えれば、
+$x_0 = x_1 = \ldots = x_{n - 1} = 0$ と仮定してよい。この場合、
+$i = 0, \ldots, n - 1$ に対して $d_i x_n = 0$ である。従って
+$x_n \in N(X)_{n - 1}$ であり、微分 $N(X)_{n - 1} \to N(X)_{n - 2}$ の
+核に属する。ここで $N(X)$ は $X$ に付随する正規化鎖複体である。
+節 \ref{simplicial-section-complexes} を参照せよ。$N(X)$ は $s(X)$ と擬同型であり
+（補題 \ref{simplicial-lemma-quasi-isomorphism}）、従って非輪状なので、
+% P02-E0154: frozen N(X_n) notation is preserved; see ERRATA_CANDIDATES.jsonl.
+微分が $x_n$ である $x \in N(X_n)$ が見つかる。この $x$ が補題で求めた
+条件を満たし、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-homotopy-equivalence}
+$f : X \to Y$ を単体アーベル群の写像とする。$f$ が単体集合の
+ホモトピー同値ならば、$f$ は付随する鎖複体の擬同型を誘導する。
+\end{lemma}
+
+\begin{proof}
+この証明では、$Z$ が単体アーベル群であるとき、節
+\ref{simplicial-section-complexes} の $s$ と $N$ を用いて
+$H_n(Z) = H_n(s(Z)) = H_n(N(Z))$ と書く。
+$\mathbf{Z}[X]$ を単体集合とみなした $X$ 上の自由アーベル群とし、
+$\mathbf{Z}[Y]$ についても同様とする。単体アーベル群の可換図式
+$$
+\xymatrix{
+\mathbf{Z}[X] \ar[r]_g \ar[d] &
+\mathbf{Z}[Y] \ar[d] \\
+X \ar[r]^f & Y
+}
+$$
+を考える。集合上の自由アーベル群をとる操作は関手なので、水平矢印は単体
+アーベル群のホモトピー同値である。補題
+\ref{simplicial-lemma-functorial-homotopy} を参照せよ。補題
+\ref{simplicial-lemma-homotopy-equivalence-s-N} により、すべての $n \geq 0$ に対して
+$H_n(g) : H_n(\mathbf{Z}[X]) \to H_n(\mathbf{Z}[Y])$ は全単射である。
+
+\medskip\noindent
+$\xi \in H_n(Y)$ とする。$N(Y)$ の定義により、$\xi$ は境界が零である元
+$y \in N(Y_n)$ で表せる。これは $y \in Y_n$ であって
+$d^n_0(y) = \ldots = d^n_{n - 1}(y) = 0$ を満たすことを意味する。
+最初の等式群は $y \in N(Y_n)$ であることから従い、$y$ の境界が零なので
+$d^n_n(y) = 0$ である。零元を $0_n \in Y_n$ と記す。このとき
+$$
+\tilde y = [y] - [0_n] \in (\mathbf{Z}[Y])_n
+$$
+は $d^n_0(\tilde y) = \ldots = d^n_{n - 1}(\tilde y) = 0$ かつ
+$d^n_n(\tilde y) = 0$ を満たす元である。従って $\tilde y$ は
+% P02-E0155: frozen missing conjunction is supplied in Japanese; see ERRATA_CANDIDATES.jsonl.
+$N(\mathbf{Z}[Y])_n$ に属し、境界 $0$ をもち、すなわち $\tilde y$ は
+$\xi$ に写る類
+$\tilde \xi \in H_n(\mathbf{Z}[Y])$ を定める。
+$H_n(\mathbf{Z}[X]) \to H_n(\mathbf{Z}[Y])$ は全単射なので、
+$\tilde \xi$ を $H_n(\mathbf{Z}[X])$ の類へ持ち上げられる。上の可換図式を
+見れば、$\xi$ が $H_n(X) \to H_n(Y)$ の像に属することが分かる。
+
+\medskip\noindent
+$\xi \in H_n(X)$ を $H_n(Y)$ において零へ写る元とする。
+% P02-E0156: frozen English spelling defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+直前の段落とまったく同様に、$\xi$ は境界が零である元 $x \in N(X_n)$、
+すなわち $d^n_0(x) = \ldots = d^n_{n - 1}(x) = d^n_n(x) = 0$ を満たす元で
+表せる。特に $[x] - [0_n]$ は境界が零である $N(\mathbf{Z}[X])_n$ の元であり、
+従って $\xi$ の持ち上げ
+% P02-E0157: frozen lowercase free-group argument is preserved; see ERRATA_CANDIDATES.jsonl.
+$\tilde \xi \in H_n(\mathbf{Z}[x])$ を定める。$\xi$ が $H_n(Y)$ で零へ写る
+という事実は、境界が $f_n(x)$ である $y \in N(Y_{n + 1})$ が存在することを
+意味する。これは $d^{n + 1}_0(y) = \ldots = d^{n + 1}_n(y) = 0$ かつ
+$d^{n + 1}_{n + 1}(y) = f(x)$ を意味する。しかし、これはちょうど
+% P02-E0158: frozen lowercase ambient free group is preserved; see ERRATA_CANDIDATES.jsonl.
+$z = [y] - [0_{n + 1}]$ が $N(\mathbf{Z}[y])_{n + 1}$ に属し、
+$$
+g([x] - [0_n]) = [f(x)] - [0_n] = \text{boundary of }z
+$$
+であることを意味する。従って $\tilde \xi$ は
+% P02-E0159: frozen lowercase target homology group is preserved; see ERRATA_CANDIDATES.jsonl.
+$H_n(\mathbf{Z}[y])$ において零へ写る。
+$H_n(\mathbf{Z}[X]) \to H_n(\mathbf{Z}[Y])$ は全単射なので、
+$\tilde \xi = 0$、従って $\xi = 0$ と結論する。
+\end{proof}
+
+\section{あるホモトピー同値}
+\label{simplicial-section-homotopy-equivalence}
+
+\noindent
+$A$、$B$ を集合とし、$f : A \to B$ を写像とする。付随する単体集合の写像
+$$
+\xymatrix{
+\text{cosk}_0(A) \ar@{=}[r] &
+\Big(\ldots A \times A \times A
+\ar[d] \ar@<2ex>[r] \ar@<0ex>[r] \ar@<-2ex>[r] &
+A \times A \ar[d] \ar@<1ex>[r] \ar@<-1ex>[r] \ar@<1ex>[l] \ar@<-1ex>[l] &
+A \Big) \ar[d] \ar@<0ex>[l] \\
+\text{cosk}_0(B) \ar@{=}[r] &
+\Big( \ldots B \times B \times B \ar@<2ex>[r] \ar@<0ex>[r] \ar@<-2ex>[r] &
+B \times B \ar@<1ex>[r] \ar@<-1ex>[r] \ar@<1ex>[l] \ar@<-1ex>[l] &
+B \Big) \ar@<0ex>[l]
+}
+$$
+を考える。例 \ref{simplicial-example-cosk0} を参照せよ。次の補題の $n = 0$ の場合は、
+$f$ が全射ならば、この単体集合の写像が自明 Kan ファイブレーションである
+ことを述べている。
+
+\begin{lemma}
+\label{simplicial-lemma-section}
+$f : V \to U$ を単体集合の射とし、$n \geq 0$ を整数とする。次を仮定する。
+\begin{enumerate}
+\item $i < n$ に対して写像 $f_i : V_i \to U_i$ は全単射である。
+\item 写像 $f_n : V_n \to U_n$ は全射である。
+\item 標準射 $U \to \text{cosk}_n \text{sk}_n U$ は同型である。
+\item 標準射 $V \to \text{cosk}_n \text{sk}_n V$ は同型である。
+\end{enumerate}
+このとき $f$ は自明 Kan ファイブレーションである。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{simplicial-definition-trivial-kan} にある実線図式
+$$
+\xymatrix{
+\partial \Delta[k] \ar[r] \ar[d] & V \ar[d] \\
+\Delta[k] \ar[r] \ar@{-->}[ru] & U
+}
+$$
+を考える。$x \in U_k$ を下の水平矢印に対応する $k$-単体とする。
+$k \leq n$ ならば、点線矢印は $x$ の持ち上げ $y \in V_k$ に対応するもの
+である。$\Delta[k]$ のほかの非退化単体は次数 $< k$ にあり、そこで $f$ は
+同型なので、図式は可換になる。$k > n$ ならば、条件 (3)、(4) と骨格関手と
+余骨格関手の随伴性により
+$$
+\Mor(\Delta[k], U) =
+\Mor(\text{sk}_n\Delta[k], \text{sk}_nU) =
+\Mor(\text{sk}_n\partial\Delta[k], \text{sk}_nU) =
+\Mor(\partial \Delta[k], U)
+$$
+が成り立つ。$k > n$ に対して
+$\text{sk}_n\Delta[k] = \text{sk}_n\partial\Delta[k]$ なので、$V$ についても
+同様である。従ってこの場合にも、図式に入る一意な点線矢印が得られる。
+\end{proof}
+
+\noindent
+$A, B$ を集合とし、$f^0, f^1 : A \to B$ を集合の写像とする。同じ記号を
+濫用して、誘導される写像
+$f^0, f^1 : \text{cosk}_0(A) \to \text{cosk}_0(B)$ を考える。
+次の補題の $n = 0$ の場合は、$f^0$ が $f^1$ とホモトピックであることを
+述べている。実際、成分
+\begin{eqnarray*}
+h_m : A \times \ldots \times A \times \Mor_{\Delta}([m], [1])
+& \longrightarrow &
+B \times \ldots \times B, \\
+(a_0, \ldots, a_m, \alpha) & \longmapsto &
+(f^{\alpha(0)}(a_0), \ldots, f^{\alpha(m)}(a_m))
+\end{eqnarray*}
+をもつ $f^0$ から $f^1$ へのホモトピー
+% P02-E0160: frozen wrong homotopy codomain is preserved; see ERRATA_CANDIDATES.jsonl.
+$h : \text{cosk}_0(A) \times \Delta[1] \to \text{cosk}_0(A)$ が存在する。
+これが機能することを確かめるため、写像 $\varphi : [k] \to [m]$ に対して
+誘導される写像が
+$(a_0, \ldots, a_m) \mapsto (a_{\varphi(0)}, \ldots, a_{\varphi(k)})$
+および $\alpha \mapsto \alpha \circ \varphi$ であることに注意する。
+従って $h = (h_m)_{m \geq 0}$ は明らかに求める単体集合の写像である。
+
+\begin{lemma}
+\label{simplicial-lemma-homotopy}
+$f^0, f^1 : V \to U$ を単体集合の写像とし、$n \geq 0$ を整数とする。
+次を仮定する。
+\begin{enumerate}
+\item $i < n$ に対して写像 $f^j_i : V_i \to U_i$、$j = 0, 1$ は等しい。
+\item 標準射 $U \to \text{cosk}_n \text{sk}_n U$ は同型である。
+\item 標準射 $V \to \text{cosk}_n \text{sk}_n V$ は同型である。
+\end{enumerate}
+このとき $f^0$ は $f^1$ とホモトピックである。
+\end{lemma}
+
+\begin{proof}[第一の証明]
+$W$ を、$i < n$ に対して $W_i = U_i$ とし、
+$W_n = U_n / \sim$ とする $n$-切断単体集合とする。ここで $\sim$ は
+$y \in V_n$ に対する $f^0(y) \sim f^1(y)$ によって生成される同値関係である。
+これは意味をもつ。実際、$i < n$ に対する $\varphi : [i] \to [n]$ に対応する
+射 $U(\varphi) : U_n \to U_i$ は、$f^0$ と $f^1$ が単体集合の射であり、
+次数 $< n$ で等しいので、商写像 $U_n \to W_n$ を通じて分解する。
+次に $\text{cosk}_n W$ をとって $W$ を単体集合に拡張する。補題
+\ref{simplicial-lemma-section} により、射 $g : U \to W$ は自明 Kan
+ファイブレーションである。構成により $g \circ f^0 = g \circ f^1$ である。
+この射を $f : V \to W$ と記し、図式
+$$
+\xymatrix{
+\partial \Delta[1] \times V \ar[rr]_{f^0, f^1} \ar[d] & & U \ar[d] \\
+\Delta[1] \times V \ar[rr]^f \ar@{-->}[rru] & & W
+}
+$$
+を考える。補題 \ref{simplicial-lemma-trivial-kan} により点線矢印が存在し、証明は完了する。
+\end{proof}
+
+\begin{proof}[第二の証明]
+$e_i$ と合成すると $f^i$ を回復する単体集合の射
+$h : V \times \Delta[1] \to U$ を構成しなければならない。
+$n = 0$ の場合は補題の前で扱ったので、$n \geq 1$ と仮定してよい。
+写像 $\Delta[1] \to \text{cosk}_1 \text{sk}_1 \Delta[1]$ は同型である。
+補題 \ref{simplicial-lemma-simplex-cosk} を参照せよ。従って $n \geq 1$ なので、
+$\Delta[1] \to \text{cosk}_n \text{sk}_n \Delta[1]$ は同型である。
+補題 \ref{simplicial-lemma-cosk-up} を参照せよ。それゆえ、補題
+\ref{simplicial-lemma-cosk-product} により
+$V \times \Delta[1] \to
+\text{cosk}_n \text{sk}_n (V \times \Delta[1])$
+も同型である。言い換えれば、ホモトピーを構成するには、適当な
+$n$-切断単体集合の射
+$h : \text{sk}_n V \times \text{sk}_n \Delta[1] \to \text{sk}_n U$
+を構成すれば十分である。
+
+\medskip\noindent
+$k = 0, \ldots, n - 1$ に対して、公式
+$h_k(v, \alpha) = f^0(v) = f^1(v)$ により $h_k$ を定義する。
+写像 $h_n : V_n \times \Mor_{\Delta}([n], [1]) \to U_n$ を次のように
+定義する。$v \in V_n$ と $\alpha : [n] \to [1]$ をとる。
+\begin{enumerate}
+\item $\Im(\alpha) = \{0\}$ ならば、$h_n(v, \alpha) = f^0(v)$ とおく。
+\item $\Im(\alpha) = \{0, 1\}$ ならば、$h_n(v, \alpha) = f^0(v)$ とおく。
+\item $\Im(\alpha) = \{1\}$ ならば、$h_n(v, \alpha) = f^1(v)$ とおく。
+\end{enumerate}
+$\varphi : [k] \to [l]$ を $\Delta_{\leq n}$ の射とする。図式
+$$
+\xymatrix{
+V_{l} \times \Mor([l], [1]) \ar[r] \ar[d] & U_{l} \ar[d] \\
+V_{k} \times \Mor([k], [1]) \ar[r] & U_{k}
+}
+$$
+が可換であることを示す。$v \in V_{l}$ と $\alpha : [l] \to [1]$ をとる。
+可換性は
+$$
+h_k(V(\varphi)(v), \alpha \circ \varphi)
+=
+U(\varphi)(h_l(v, \alpha)).
+$$
+を意味する。ほとんどすべての場合、これは
+$h_k(V(\varphi)(v), \alpha \circ \varphi) = f^0(V(\varphi)(v))$
+および $U(\varphi)(h_l(v, \alpha)) = U(\varphi)(f^0(v))$ と、
+$f^0$ が単体集合の射であることから従う。これが成り立たない可能性があるのは、
+(A) $\Im(\alpha) = \{1\}$ かつ $l = n$ である場合、または
+(B) $\Im(\alpha \circ \varphi) = \{1\}$ かつ $k = n$ である場合だけである。
+さらに、$V$ の任意の退化 $n$-単体に対して
+$f^0(v) = f^1(v)$ が必ず成り立つことに注意する。従って上の場合をさらに、
+(A) $\Im(\alpha) = \{1\}$、$l = n$ かつ $v$ が非退化である場合と、
+(B) $\Im(\alpha \circ \varphi) = \{1\}$、$k = n$ かつ
+$V(\varphi)(v)$ が非退化である場合に絞れる。
+
+\medskip\noindent
+場合 (A) では、$\Im(\alpha \circ \varphi) = \{1\}$ でもある。従って
+$h_l(v, \alpha) = f^1(v)$ であるだけでなく、
+$h_k(V(\varphi)(v), \alpha \circ \varphi) = f^1(V(\varphi)(v))$ でもある。
+$f^1$ は単体集合の射なので、関係が成り立つ。
+
+\medskip\noindent
+場合 (B) では、$l = k = n$ であり $\varphi$ は全単射であると結論する。
+そうでなければ $V(\varphi)(v)$ は退化するからである。従って
+$\varphi = \text{id}_{[n]}$ であり、これは自明な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-cosk-minus-one-equivalence}
+% P02-E0161: frozen English coordination defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+$A$、$B$ を集合とし、$f : A \to B$ を写像とする。$n$-単体が
+$$
+A \times_B A \times_B \ldots \times_B A\ (n + 1 \text{ factors)}.
+$$
+である単体集合を $U$ とする。例
+\ref{simplicial-example-fibre-products-simplicial-object} を参照せよ。$f$ が全射ならば、
+$U \to B$ は自明 Kan ファイブレーションである。ここで $B$ は値が $B$ の
+定値単体集合を表す。
+\end{lemma}
+
+\begin{proof}
+$U$ がデカルト図式
+$$
+\xymatrix{
+U \ar[d] \ar[r] & \text{cosk}_0(A) \ar[d] \\
+B \ar[r] & \text{cosk}_0(B)
+}
+$$
+に入ることに注意する。右の垂直矢印は補題 \ref{simplicial-lemma-section} により自明 Kan
+ファイブレーションなので、補題 \ref{simplicial-lemma-trivial-kan-base-change} により
+左の垂直矢印も同様である。
+\end{proof}
+
+\section{標準分解の準備}
+\label{simplicial-section-standard-pre}
+
+\noindent
+% P02-E0162: frozen missing terminal punctuation is preserved; see ERRATA_CANDIDATES.jsonl.
+本節の内容は \cite[Appendix 1]{Godement} にある
+
+\begin{example}
+\label{simplicial-example-godement}
+$Y : \mathcal{C} \to \mathcal{C}$ を圏からそれ自身への関手とし、関手の変換
+$$
+d : Y \longrightarrow \text{id}_\mathcal{C}
+\quad\text{and}\quad
+s : Y \longrightarrow Y \circ Y
+$$
+が与えられているとする。これらの変換を用いて、単体的対象に似たものを
+構成できる。すなわち、$n \geq 0$ に対して
+$$
+X_n = Y \circ \ldots \circ Y \quad (n + 1\text{ compositions})
+$$
+と定義する。$n, m \geq 0$ に対して
+$X_{n + m + 1} = X_n \circ X_m$ であることに注意する。次に
+$n \geq 0$ および $0 \leq j \leq n$ に対し、Categories, Section
+\ref{categories-section-formal-cat-cat} の記法を用いて
+$$
+d^n_j = 1_{X_{j - 1}} \star d \star 1_{X_{n - j - 1}} :
+X_n
+\to
+X_{n - 1}
+\quad\text{and}\quad
+s^n_j = 1_{X_{j - 1}} \star s \star 1_{X_{n - j - 1}} :
+X_n
+\to
+X_{n + 1}
+$$
+と定義する。従って $d^n_j$、それぞれ $s^n_j$ は、$X_n$ を定義する合成の
+左から数えて第 $j$ 番目の $Y$ に $d$、それぞれ $s$ を用いる自然変換である。
+\end{example}
+
+\begin{lemma}
+\label{simplicial-lemma-godement}
+例 \ref{simplicial-example-godement} において
+$$
+1_Y = (d \star 1_Y) \circ s = (1_Y \star d) \circ s
+\quad\text{and}\quad
+(s \star 1) \circ s = (1 \star s) \circ s
+$$
+ならば、$X = (X_n, d^n_j, s^n_j)$ は $\mathcal{C}$ の自己関手の圏における
+単体的対象であり、$d : X_0 = Y \to \text{id}_\mathcal{C}$ は増大を定める。
+\end{lemma}
+
+\begin{proof}
+単体的対象が得られることを確かめるには、補題
+\ref{simplicial-lemma-characterize-simplicial-object} の関係 (1)(a)--(e) が
+満たされることを確認しなければならない。$a \geq 0$ に対して略記
+$$
+1_a = 1_{X_{a - 1}} = 1_Y \star \ldots \star 1_Y \quad (a\text{ factors})
+$$
+を用いる。この記法では
+$$
+d^n_j = 1_j \star d \star 1_{n - j}
+\quad\text{and}\quad
+s^n_j = 1_j \star s \star 1_{n - j}
+$$
+である。以下では、関手の変換
+% P02-E0163: frozen English spelling defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+$a, a', b, b'$ に対し、この公式の $\star$ と $\circ$ の合成が意味をもつならば
+$(a' \circ a) \star (b' \circ b) = (a' \star b') \circ (a \star b)$
+となる規則を繰り返し用いる。Categories, Lemma
+\ref{categories-lemma-properties-2-cat-cats} を参照せよ。
+
+\medskip\noindent
+条件 (1)(a) は常に成り立つ（$d$ と $s$ に条件は不要である）。
+実際、$0 \leq i < j \leq n + 1$ とする。示すべきことは
+$d^n_i \circ d^{n + 1}_j = d^n_{j - 1} \circ d^{n + 1}_i$、すなわち
+$$
+(1_i \star d \star 1_{n - i}) \circ
+(1_j \star d \star 1_{n + 1 - j}) =
+(1_{j - 1} \star d \star 1_{n + 1 - j}) \circ
+(1_i \star d \star 1_{n + 1 - i})
+$$
+である。左辺は
+\begin{align*}
+& (1_i \star d \star 1_{j - i - 1} \star 1_{n + 1 - j}) \circ
+(1_i \star 1_1 \star 1_{j - i - 1} \star d \star 1_{n + 1 - j}) \\
+& =
+1_i \star
+\left((d \star 1_{j - i - 1}) \circ
+(1_1 \star 1_{j - i - 1} \star d)\right) \star 1_{n + 1 - j} \\
+& =
+1_i \star d \star 1_{j - i - 1} \star d \star 1_{n + 1 - j} 
+\end{align*}
+と書き換えられる。第二の等号は $d \circ 1_1 = d$ および
+$1_{j - i} \circ (1_{j - i - 1} \star d) = 1_{j - i - 1} \star d$
+による。同様の計算により、右辺についても同じ結果が得られる。
+
+\medskip\noindent
+条件 (1)(b) を確認する。$0 \leq i < j \leq n - 1$ とする。示すべきことは
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_{j - 1} \circ d^{n - 1}_i$、
+すなわち
+$$
+(1_i \star d \star 1_{n - i}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_{j - 1} \star s \star 1_{n - 1 - j}) \circ
+(1_i \star d \star 1_{n - 1 - i})
+$$
+である。(1)(a) の場合と同種の計算により、両辺は
+$1_i \star d \star 1_{j - i - 1} \star s \star 1_{n - j - 1}$
+に簡約される。
+
+\medskip\noindent
+条件 (1)(c) を確認する。$0 \leq j \leq n - 1$ とする。示すべきことは
+$\text{id} = d^n_j \circ s^{n - 1}_j = d^n_{j + 1} \circ s^{n - 1}_j$、
+すなわち
+$$
+1_n =
+(1_j \star d \star 1_{n - j}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_{j + 1} \star d \star 1_{n - j - 1}) \circ
+(1_j \star s \star 1_{n - 1 - j})
+$$
+である。これは補題の第一の仮定から容易に従う。
+
+\medskip\noindent
+条件 (1)(d) を確認する。$0 < j + 1 < i \leq n$ とする。示すべきことは
+$d^n_i \circ s^{n - 1}_j = s^{n - 2}_j \circ d^{n - 1}_{i - 1}$、
+すなわち
+$$
+(1_i \star d \star 1_{n - i}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_j \star s \star 1_{n - 2 - j}) \circ
+(1_{i - 1} \star d \star 1_{n - i})
+$$
+である。(1)(a) の場合と同種の計算により、両辺は
+$1_j \star s \star 1_{i - j - 2} \star d \star 1_{n - i}$
+に簡約される。
+
+\medskip\noindent
+条件 (1)(e) を確認する。$0 \leq i \leq j \leq n - 1$ とする。
+示すべきことは
+$s^n_i \circ s^{n - 1}_j = s^n_{j + 1} \circ s^{n - 1}_i$、すなわち
+$$
+(1_i \star s \star 1_{n - i}) \circ
+(1_j \star s \star 1_{n - 1 - j}) =
+(1_{j + 1} \star s \star 1_{n - 1 - j}) \circ
+(1_i \star s \star 1_{n - 1 - i})
+$$
+である。(1)(a) の場合と同種の計算により、これは
+$$
+(s \star 1_{j - i + 1}) \circ (1_{j - i} \star s) =
+(1_{j - i + 1} \star s) \circ (s \star 1_{j - i})
+$$
+に帰着する。$j = i$ ならば、これは補題の二つの仮定の一方そのものである。
+$j > i$ ならば、(1)(a) の場合と同様の計算により、左辺と右辺はいずれも
+等式 $s \star 1_{j - i - 1} \star s$ に帰着する。
+
+\medskip\noindent
+最後に、$d$ が増大を定めることを示すには
+$d \circ (1_1 \star d) = d \circ (d \star 1_1)$ を示せばよいが、
+これは両辺が $d \star d$ に等しいことから従う。
+\end{proof}
+
+\begin{example}
+\label{simplicial-example-godement-functorial}
+$\mathcal{C}$、$Y$、$d$、$s$ を例 \ref{simplicial-example-godement} のようなものとし、
+補題 \ref{simplicial-lemma-godement} の等式を満たすとする。関手
+$F : \mathcal{A} \to \mathcal{C}$ および
+$G : \mathcal{C} \to \mathcal{B}$ が与えられると、
+$\mathcal{A}$ から $\mathcal{B}$ への関手の圏に単体的対象
+$G \circ X \circ F$ が得られ、これは $G \circ F$ への増大をもつ。
+\end{example}
+
+\begin{lemma}
+\label{simplicial-lemma-godement-section}
+$\mathcal{A}$、$\mathcal{B}$、$\mathcal{C}$、$Y$、$d$、$s$、$F$、$G$
+を例 \ref{simplicial-example-godement-functorial} のようなものとする。
+$$
+1_{G \circ F} = (1_G \star d \star 1_F) \circ h_0
+$$
+を満たす関手の変換 $h_0 : G \circ F \to G \circ Y \circ F$ が
+与えられたとする。このとき、$\epsilon \circ h = \text{id}$ を満たす
+単体的対象の射 $h : G \circ F \to G \circ X \circ F$ が存在する。
+ここで $\epsilon : G \circ X \circ F \to G \circ F$ は増大である。
+\end{lemma}
+
+\begin{proof}
+$u_n : Y = X_0 \to X_n$ を、$\Delta$ の一意な射 $[n] \to [0]$ に対応する
+単体的対象 $X$ の写像と記す。
+$h_n : G \circ F \to G \circ X_n \circ F$ を
+$(1_G \star u_n \star 1_F) \circ h_0$ に等しいものとおく。
+
+\medskip\noindent
+任意の圏の任意の単体的対象 $X = (X_n)$ に対し、
+$u =(u_n) : X_0 \to X$ は $X_0$ 上の定値単体的対象から $X$ への射である。
+従って $h$ は $1_G \star u \star 1_F$ と $h_0$ の合成なので、
+単体的対象の射である。
+
+\medskip\noindent
+$\epsilon \circ h = \text{id}$ を確かめよう。計算すると
+$$
+\epsilon_n \circ (1_G \star u_n \star 1_F) \circ h_0 =
+\epsilon_0 \circ h_0 = \text{id}
+$$
+となる。第一の等号は $\epsilon$ が単体的対象の射であることによる。
+第二の等号は $\epsilon_0 = (1_G \star d \star 1_F)$ であることと、
+補題の主張の仮定を適用できることによる。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-godement-two-maps}
+$\mathcal{A}$、$\mathcal{B}$、$\mathcal{C}$、$Y$、$d$、$s$、$F$、$G$
+を例 \ref{simplicial-example-godement-functorial} のようなものとする。
+$F' : \mathcal{A} \to \mathcal{C}$ および
+$G' : \mathcal{C} \to \mathcal{B}$ を二つの関手とする。
+$(a_n) : G \circ X \to G' \circ X$ を、増大を介して
+$a : G \to G'$ と両立する単体的対象の射とする。
+$(b_n) : X \circ F \to X \circ F'$ を、増大を介して
+$b : F \to F'$ と両立する単体的対象の射とする。このとき二つの写像
+$$
+a \star (b_n), (a_n) \star b : G \circ X \circ F \to G' \circ X \circ F'
+$$
+はホモトピックである。
+\end{lemma}
+
+\begin{proof}
+これらの射がホモトピックであることを示すため、
+$$
+h_{n, i} : G \circ X_n \circ F \to G' \circ X_n \circ F'
+$$
+という射を $n \geq 0$ および $0 \leq i \leq n + 1$ に対して構成し、
+補題 \ref{simplicial-lemma-relations-homotopy} で記述した関係を満たすようにする。
+備考 \ref{simplicial-remark-homotopy-better} も参照せよ。補題
+\ref{simplicial-lemma-relations-homotopy} の条件 (1) を満たすためには、
+$h_{n, 0} = a \star b_n$ および
+$h_{n , n + 1} = a_n \star b$ とおかざるを得ない。従って自然な選択は
+$$
+h_{n , i} = a_{i - 1} \star b_{n - i}
+$$
+である（$1 \leq i \leq n$）。$a = a_{-1}$ および $b = b_{-1}$ とおけば、
+% P02-E0164: frozen English spelling defect is not reproduced in Japanese; see ERRATA_CANDIDATES.jsonl.
+表示した公式は $0 \leq i \leq n + 1$ に対して成り立つ。
+
+\medskip\noindent
+$$
+d^n_j = 1_G \star 1_j \star d \star 1_{n - j} \star 1_F
+$$
+であることを思い出そう。これは $G \circ X \circ F$ 上の写像であり、
+補題 \ref{simplicial-lemma-godement} の証明で導入した記法
+$1_a = 1_{Y \circ \ldots \circ Y}$ を用いている。以下では、これを
+\begin{align*}
+d^n_j
+& =
+d^j_j \star 1_{n - j} =
+d^{j + 1}_j \star 1_{n - j} = \ldots = d^{n - 1}_j \star 1_1 \\
+& =
+1_j \star d^{n - j}_0 = 1_{j - 1} \star d^{n - j + 1}_1 = \ldots =
+1_1 \star d^{n - 1}_{j - 1}
+\end{align*}
+と書き換えられることを用いる。もちろん、$G' \circ X \circ F'$ 上の
+$d^n_j$ についても同様の公式が成り立つ。
+
+\medskip\noindent
+補題 \ref{simplicial-lemma-relations-homotopy} の条件 (2) を確認する。
+$i > j$ とする。示すべきことは
+$$
+d^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_{i - 2} \star b_{n - i}) \circ d^n_j
+$$
+である。$i - 1 \geq j$ なので、$d^n_j$ の表示の一つを用いて左辺を
+$$
+(d^{i - 1}_j \star 1_{n - i + 1}) \circ (a_{i - 1} \star b_{n - i}) =
+(d^{i - 1}_j \circ a_{i - 1}) \star b_{n - i} =
+(a_{i - 2} \circ d^{i - 1}_j) \star b_{n - i}
+$$
+と書き換えられる。同様に右辺は
+$$
+(a_{i - 2} \star b_{n - i}) \circ (d^{i - 1}_j \star 1_{n - i + 1}) =
+(a_{i - 2} \circ d^{i - 1}_j) \star b_{n - i}
+$$
+となる。従って同じ結果が得られ、(2) が確認できた。
+
+\medskip\noindent
+補題 \ref{simplicial-lemma-relations-homotopy} の条件 (3) を確認する。
+$i \leq j$ とする。示すべきことは
+$$
+d^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_{i - 1} \star b_{n - 1 - i}) \circ d^n_j
+$$
+である。$j \geq i$ なので、左辺を
+$$
+(1_i \star d^{n - i}_{j - i}) \circ (a_{i - 1} \star b_{n - i}) =
+a_{i - 1} \star (b_{n - 1 - i} \circ d^{n - i}_{j - i})
+$$
+と書き換えられる。同様の変形により、これは右辺と一致する。
+
+\medskip\noindent
+$$
+s^n_j = 1_G \star 1_j \star s \star 1_{n - j} \star 1_F
+$$
+であることを思い出そう。これは $G \circ X \circ F$ 上の写像である。
+以下では、これを
+\begin{align*}
+s^n_j
+& =
+s^j_j \star 1_{n - j} = s^{j + 1}_j \star 1_{n - j - 1} = \ldots =
+s^{n - 1}_j \star 1_1 \\
+& =
+1_j \star s^{n - j}_0 = 1_{j - 1} \star s^{n - j + 1}_1 = \ldots =
+1_1 \star s^{n - 1}_{j - 1}
+\end{align*}
+と書き換えられることを用いる。もちろん、$G' \circ X \circ F'$ 上の
+$s^n_j$ についても同様の公式が成り立つ。
+
+\medskip\noindent
+補題 \ref{simplicial-lemma-relations-homotopy} の条件 (4) を確認する。
+$i > j$ とする。示すべきことは
+$$
+s^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_i \star b_{n - i}) \circ s^n_j
+$$
+である。$i - 1 \geq j$ なので、左辺を
+$$
+(s^{i - 1}_j \star 1_{n - i + 1}) \circ (a_{i - 1} \star b_{n - i}) =
+(s^{i - 1}_j \circ a_{i - 1}) \star b_{n - i} =
+(a_i \circ s^{i - 1}_j) \star b_{n - i}
+$$
+と書き換えられる。同様に右辺は
+$$
+(a_i \star b_{n - i}) \circ (s^{i - 1}_j \star 1_{n - i + 1}) =
+(a_i \circ s^{i - 1}_j) \star b_{n - i}
+$$
+となり、求める結果を得る。
+
+\medskip\noindent
+補題 \ref{simplicial-lemma-relations-homotopy} の条件 (5) を確認する。
+$i \leq j$ とする。示すべきことは
+$$
+s^n_j \circ (a_{i - 1} \star b_{n - i}) =
+(a_{i - 1} \star b_{n + 1 - i}) \circ s^n_j
+$$
+である。上とまったく同じ議論により、両辺は
+$a_{i - 1} \star (s^{n - i}_{j - i} \circ b_{n - i}) =
+a_{i - 1} \star (b_{n + 1 - i} \circ s^{n - i}_{j - i})$
+と評価されるので、この等式は成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{simplicial-lemma-godement-before-after}
+$\mathcal{C}$、$Y$、$d$、$s$ を例 \ref{simplicial-example-godement} のようなものとし、
+補題 \ref{simplicial-lemma-godement} の等式を満たすとする。
+$f : \text{id}_\mathcal{C} \to \text{id}_\mathcal{C}$ を恒等関手の自己準同型と
+する。このとき $f \star 1_X, 1_X \star f : X \to X$ は、増大
+$\epsilon : X \to \text{id}_\mathcal{C}$ を介して $f$ と両立する
+単体的対象の写像である。さらに $f \star 1_X$ と $1_X \star f$ は
+ホモトピックである。
+\end{lemma}
+
+\begin{proof}
+写像 $f \star 1_X$ は、成分
+$$
+X_n = \text{id}_\mathcal{C} \circ X_n
+\xrightarrow{f \star 1_{X_n}}
+\text{id}_\mathcal{C} \circ X_n = X_n
+$$
+をもつ写像である。$\mathcal{C}$ の自己関手の変換 $a : F \to G$ に対して
+$a \circ (f \star 1_F) = f \star a = (f \star 1_G) \circ a$ が成り立つ。
+従って $f \star 1_X$ は実際に単体的対象の射である。
+$1_X \star f$ についても同様である。
+
+\medskip\noindent
+これらの射がホモトピックであることを示すため、$n \geq 0$ および
+$0 \leq i \leq n + 1$ に対して射 $h_{n, i} : X_n \to X_n$ を構成し、
+補題 \ref{simplicial-lemma-relations-homotopy} で記述した関係を満たすようにする。
+備考 \ref{simplicial-remark-homotopy-better} も参照せよ。実際、
+$$
+h_{n, i} = 1_i \star f \star 1_{n + 1 - i}
+$$
+ととれる。ここで $1_i$ は補題 \ref{simplicial-lemma-godement} の証明における
+$Y \circ \ldots \circ Y$ 上の恒等変換である。
+$h_{n, 0} = f \star 1_{X_n}$ および
+$h_{n, n + 1} = 1_{X_n} \star f$ なので、第一の条件が確認できる。
+ほかの条件の確認では、補題 \ref{simplicial-lemma-godement-two-maps} の証明における
+写像 $d^n_j$ と $s^n_j$ に関する注意を用いる。
+
+\medskip\noindent
+補題 \ref{simplicial-lemma-relations-homotopy} の条件 (2) を確認する。
+$i > j$ とする。示すべきことは
+$$
+d^n_j \circ (1_i \star f \star 1_{n + 1 - i}) =
+(1_{i - 1} \star f \star 1_{n + 1 - i}) \circ d^n_j
+$$
+である。$i - 1 \geq j$ なので、$d^n_j$ の表示の一つを用いて左辺を
+$$
+(d^{i - 1}_j \star 1_{n - i + 1}) \circ (1_i \star f \star 1_{n + 1 - i}) =
+d^{i - 1}_j \star f \star 1_{n + 1 - i}
+$$
+と書き換えられる。同様に右辺は
+$$
+(1_{i - 1} \star f \star 1_{n + 1 - i}) \circ
+(d^{i - 1}_j \star 1_{n - i + 1}) =
+d^{i - 1}_j \star f \star 1_{n + 1 - i}
+$$
+となる。従って同じ結果が得られ、(2) が確認できた。
+
+\medskip\noindent
+補題 \ref{simplicial-lemma-relations-homotopy} の条件 (3)、(4)、(5) も、補題
+\ref{simplicial-lemma-godement-two-maps} の証明の方針を用いてまったく同様に確認される。
+詳細は省略する\footnote{$f$ が可逆ならば、$(a_n) = 1_X$ と
+$(b_n) = f^{-1} \star 1_X \star f$ がホモトピックであることを示せば十分である。
+しかしこの場合 $a = b = 1_{\text{id}_\mathcal{C}}$ なので、これは補題
+\ref{simplicial-lemma-godement-two-maps} から従う。}。
+\end{proof}
+
+\section{標準分解}
+\label{simplicial-section-standard}
+
+\noindent
+本節の内容の一部は \cite[Appendix 1]{Godement} および
+\cite[I 1.5]{cotangent} にある。
+
+\begin{situation}
+\label{simplicial-situation-adjoint-functors}
+$\mathcal{A}$、$\mathcal{S}$ を圏とし、
+$V : \mathcal{A} \to \mathcal{S}$ を左随伴
+$U : \mathcal{S} \to \mathcal{A}$ をもつ関手とする。
+\end{situation}
+
+\noindent
+この非常に一般的な状況で、$\mathcal{A}$ から $\mathcal{A}$ への関手の圏に
+単体的対象 $X$ を構成する。本節の本文を読む前に、後で示す例を見ることを
+勧める。
+
+\medskip\noindent
+構成には Categories, Section \ref{categories-section-formal-cat-cat} で定義した
+水平合成を用いる。随伴射の定義\footnote{随伴の余単位に
+$\epsilon$ を用いることはできない。単体的対象の増大に
+$\epsilon$ を用いたいからである。}
+$$
+d : U \circ V \to \text{id}_\mathcal{A} \quad (\text{counit})
+\quad\text{and}\quad
+\eta : \text{id}_\mathcal{S} \to V \circ U \quad (\text{unit})
+$$
+から、Categories, Section \ref{categories-section-adjoint} により、合成
+\begin{equation}
+\label{simplicial-equation-composition}
+V \xrightarrow{\eta \star 1_V} V \circ U \circ V \xrightarrow{1_V \star d} V
+\quad\text{and}\quad
+U \xrightarrow{1_U \star \eta} U \circ V \circ U \xrightarrow{d \star 1_U} U
+\end{equation}
+は恒等射である。ここで射 $\eta \star 1_V$ を定義する際には、$V$ を
+$\text{id}_\mathcal{S} \circ V$ と暗黙に同一視し、$1_V$ は
+$\text{id}_V : V \to V$ を表す。以下、この記法とこれらの関係を繰り返し用いる。
+$n \geq 0$ に対して
+$$
+X_n = (U \circ V)^{\circ (n + 1)} =
+U \circ V \circ U \circ \ldots \circ U \circ V
+$$
+とおく。言い換えれば、$X_n$ は $U \circ V$ とそれ自身との
+$(n + 1)$ 重合成である。また $X_{-1} = \text{id}_\mathcal{A}$ とおく。
+すべての $n, m \geq -1$ に対して $X_{n + m + 1} = X_n \circ X_m$ である。
+関係を満たす関手の射
+$$
+d^n_j : X_n \to X_{n - 1},\quad s^n_j : X_n \to X_{n + 1}
+$$
+を構成することにより、この関手列に
+$\text{Fun}(\mathcal{A}, \mathcal{A})$ の単体的対象の構造を入れる。
+関係は補題 \ref{simplicial-lemma-relations-face-degeneracy} に表示されている。
+具体的には
+$$
+d^n_j = 1_{X_{j - 1}} \star d \star 1_{X_{n - j - 1}}
+\quad\text{and}\quad
+s^n_j = 1_{X_{j - 1} \circ U} \star \eta \star 1_{V \circ X_{n - j - 1}}
+$$
+とおく。最後に $\epsilon_0 = d : X_0 \to X_{-1}$ と書く。
+
+\begin{lemma}
+\label{simplicial-lemma-standard-simplicial}
+状況 \ref{simplicial-situation-adjoint-functors} において、系
+$X = (X_n, d^n_j, s^n_j)$ は $\text{Fun}(\mathcal{A}, \mathcal{A})$ の
+単体的対象であり、$\epsilon_0$ は $X$ から値
+$X_{-1} = \text{id}_\mathcal{A}$ の定値単体的対象への増大 $\epsilon$ を定める。
+\end{lemma}
+
+\begin{proof}
+$Y = U \circ V : \mathcal{A} \to \mathcal{A}$ とする。すでに変換
+$d : Y = U \circ V \to \text{id}_\mathcal{A}$ がある。
+$$
+s = 1_U \star \eta \star 1_V :
+Y = U \circ \text{id}_\mathcal{S} \circ V
+\longrightarrow
+U \circ V \circ U \circ V = Y \circ Y
+$$
+と記す。これにより例 \ref{simplicial-example-godement} の状況になる。公式から、
+上で構成した $X, d^n_i, s^n_i$ と、
+% P02-E0165: frozen repeated degeneracy family is preserved; see ERRATA_CANDIDATES.jsonl.
+例 \ref{simplicial-example-godement} で $Y, d, s$ から構成した $X, s^n_i, s^n_i$ が
+一致することは直ちに分かる。従って補題 \ref{simplicial-lemma-godement} により、
+$$
+1_Y = (d \star 1_Y) \circ s = (1_Y \star d) \circ s
+\quad\text{and}\quad
+(s \star 1) \circ s = (1 \star s) \circ s
+$$
+を示せば十分である。第一の等号は
+$$
+1_U \star 1_V = (d \star 1_U \star 1_V) \circ (1_U \star \eta \star 1_V)
+$$
+という等式になる。これは
+$1_U = (d \star 1_U) \circ (1_U \star \eta)$ が成り立てばよく、
+後者は (\ref{simplicial-equation-composition}) により成り立つ。第二の等号も同様である。
+最後の等式については
+$$
+(1_U \star \eta \star 1_V \star 1_U \star 1_V) \circ
+(1_U \star \eta \star 1_V) =
+(1_U \star 1_V \star 1_U \star \eta \star 1_V) \circ
+(1_U \star \eta \star 1_V)
+$$
+を示さなければならない。そのためには
+$(\eta \star 1_V \star 1_U) \circ \eta = (1_V \star 1_U \star \eta) \circ \eta$
+を示せば十分であり、これは両辺が $\eta \star \eta$ と同じなので成り立つ。
+\end{proof}
+
+\noindent
+次の補題の目的を理解するため、その証明を読む前に例
+\ref{simplicial-example-polynomial-algebra-homotopy} で論じる例を見ることを勧める。
+
+\begin{lemma}
+\label{simplicial-lemma-standard-simplicial-homotopy}
+状況 \ref{simplicial-situation-adjoint-functors} において、写像
+$$
+1_V \star \epsilon : V \circ X \to V,
+\quad\text{and}\quad
+\epsilon \star 1_U : X \circ U \to U
+$$
+はホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{simplicial-lemma-standard-simplicial} の証明と同様に
+$Y = U \circ V$ とおき、例 \ref{simplicial-example-godement} の状況にする。
+
+\medskip\noindent
+第一のホモトピー同値を証明する。補題 \ref{simplicial-lemma-godement-section} により、
+$1_V \star \epsilon$ の右逆となる写像 $h : V \to V \circ X$ を構成するには、
+$1_V = (1_V \star d) \circ h_0$ を満たす写像
+$h_0 : V \to V \circ Y = V \circ U \circ V$ を構成すれば十分である。
+もちろん $h_0 = \eta \star 1_V$ ととれば、等式は
+(\ref{simplicial-equation-composition}) により成り立つ。証明を終えるには、二つの写像
+$$
+(1_V \star \epsilon) \circ h, 1_V \star \text{id}_X :
+V \circ X \longrightarrow V \circ X
+$$
+がホモトピックであることを示す必要がある。これは補題
+\ref{simplicial-lemma-godement-two-maps} から直ちに従う（
+$G = G' = V$ および $F = F' = \text{id}_\mathcal{S}$ とする）。
+
+\medskip\noindent
+第二のホモトピー同値を証明する。補題
+\ref{simplicial-lemma-godement-section} により、$\epsilon \star 1_U$ の右逆となる写像
+$h : U \to X \circ U$ を構成するには、
+$1_U = (d \star 1_U) \circ h_0$ を満たす写像
+$h_0 : U \to Y \circ U = U \circ V \circ U$ を構成すれば十分である。
+もちろん $h_0 = 1_U \star \eta$ ととれば、等式は
+(\ref{simplicial-equation-composition}) により成り立つ。証明を終えるには、二つの写像
+$$
+(\epsilon \star 1_U) \circ h, \text{id}_X \star 1_U :
+X \circ U \longrightarrow X \circ U
+$$
+がホモトピックであることを示す必要がある。これは補題
+\ref{simplicial-lemma-godement-two-maps} から直ちに従う（
+$G = G' = \text{id}_\mathcal{A}$ および $F = F' = U$ とする）。
+\end{proof}
+
+\begin{example}
+\label{simplicial-example-module}
+$R$ を環とする。上の例として、忘却関手
+$i : \text{Mod}_R \to \textit{Sets}$ と、集合 $E$ に $E$ 上の自由
+$R$-加群 $R[E]$ を対応させる関手
+$F : \textit{Sets} \to \text{Mod}_R$ をとれる。$R$-加群 $M$ に対して、
+単体 $R$-加群 $X(M)$ は
+$$
+X(M) =
+\left( \ldots
+\xymatrix{
+R[R[R[M]]]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+R[R[M]]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+R[M]
+\ar@<0ex>[l]
+}
+\right)
+$$
+という形をもち、$M$ への増大を伴う。この増大が集合のホモトピー同値でもある
+ことを示す。補題 \ref{simplicial-lemma-trivial-kan-homotopy}、
+\ref{simplicial-lemma-homotopy-equivalence}、および
+\ref{simplicial-lemma-qis-simplicial-abelian-groups} により、これは
+% P02-E0166: frozen cohomology wording for a chain complex is preserved; see ERRATA_CANDIDATES.jsonl.
+$M$ が単体加群 $X(M)$ に付随する鎖複体の唯一の非零コホモロジー群であること
+を要求するのと同値である。
+\end{example}
+
+\begin{example}
+\label{simplicial-example-polynomial-algebra}
+$A$ を環とし、$\textit{Alg}_A$ を可換 $A$-代数の圏とする。上の例として、
+忘却関手 $i : \textit{Alg}_A \to \textit{Sets}$ と、集合 $E$ に
+$A$ 上の $E$ による多項式代数 $A[E]$ を対応させる関手
+$F : \textit{Sets} \to \textit{Alg}_A$ をとれる。
+（この例と例 \ref{simplicial-example-module} の記法が重複することをお詫びする。）
+$A$-代数 $B$ に対して、単体 $A$-代数 $X(B)$ は
+$$
+X(B) = \left( \ldots
+\xymatrix{
+A[A[A[B]]]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[B]]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[B]
+\ar@<0ex>[l]
+}
+\right)
+$$
+という形をもち、$B$ への増大を伴う。この増大が集合のホモトピー同値でもある
+ことを示す。補題 \ref{simplicial-lemma-trivial-kan-homotopy}、
+\ref{simplicial-lemma-homotopy-equivalence}、および
+\ref{simplicial-lemma-qis-simplicial-abelian-groups} により、これは
+% P02-E0166: second frozen cohomology wording is preserved; see ERRATA_CANDIDATES.jsonl.
+$B$ が、単体 $A$-加群とみなした $X(B)$ に付随する $A$-加群の鎖複体の
+唯一の非零コホモロジー群であることを要求するのと同値である。
+\end{example}
+
+\begin{example}
+\label{simplicial-example-module-maps}
+例 \ref{simplicial-example-module} では、$n + 1$ 個の括弧をもつ
+$X_n(M) = R[R[\ldots [M]\ldots]]$ が得られる。典型的な元
+$$
+\xi = \sum\nolimits_i r_i\left[\sum\nolimits_j r_{ij}[m_{ij}]\right]
+$$
+を用いて、上で構成した写像を記述する。これは $X_1(M)$ の元である。
+写像 $d_0, d_1 : R[R[M]] \to R[M]$ は
+$$
+d_0(\xi) = \sum\nolimits_{i, j} r_ir_{ij}[m_{ij}]
+\quad\text{and}\quad
+d_1(\xi) = \sum\nolimits_i r_i\left[\sum\nolimits_j r_{ij}m_{ij}\right].
+$$
+で与えられる。写像 $s_0, s_1 : R[R[M]] \to R[R[R[M]]]$ は
+$$
+s_0(\xi) =
+\sum\nolimits_i r_i\left[\left[\sum\nolimits_j r_{ij}[m_{ij}]\right]\right]
+\quad\text{and}\quad
+s_1(\xi) = \sum\nolimits_i r_i\left[\sum\nolimits_j r_{ij}[[m_{ij}]]\right].
+$$
+で与えられる。
+\end{example}
+
+\begin{example}
+\label{simplicial-example-polynomial-algebra-maps}
+例 \ref{simplicial-example-polynomial-algebra} では、$n + 1$ 個の括弧をもつ
+$X_n(B) = A[A[\ldots [B]\ldots]]$ が得られる。典型的な元
+$$
+\xi = \sum\nolimits_i a_i [x_{i, 1}] \ldots [x_{i, m_i}] \in A[A[B]] = X_1(B)
+$$
+を用いて、上で構成した写像を記述する。各 $i, j$ に対し
+$$
+x_{i, j} = \sum a_{i, j, k} [b_{i, j, k, 1}] \ldots [b_{i, j, k, n_{i, j, k}}]
+\in A[B]
+$$
+と書ける。これは明らかに恐ろしい記法である。記法を軽くし、
+$A$-代数の写像 $d_0, d_1 : A[A[B]] \to A[B]$ の作用を見るには、一般の元
+$$
+x = \sum a_k [b_{k, 1}] \ldots [b_{k, n_k}] \in A[B]
+$$
+に対する変数 $[x]$ の像を見れば十分である。これらについては
+$$
+d_0([x]) = x = \sum a_k [b_{k, 1}] \ldots [b_{k, n_k}]
+\quad\text{and}\quad
+d_1([x]) = \left[\sum a_k b_{k, 1} \ldots b_{k, n_k}\right]
+$$
+となる。写像 $s_0, s_1 : A[A[B]] \to A[A[A[B]]]$ は
+$$
+s_0([x]) = \left[\left[\sum a_k [b_{k, 1}] \ldots [b_{k, n_k}]\right]\right]
+\quad\text{and}\quad
+s_1([x]) = \left[\sum a_k [[b_{k, 1}]] \ldots [[b_{k, n_k}]]\right]
+$$
+で与えられる。
+\end{example}
+
+\begin{example}
+\label{simplicial-example-polynomial-algebra-homotopy}
+例 \ref{simplicial-example-polynomial-algebra} で論じた例に戻る。補題
+\ref{simplicial-lemma-standard-simplicial-homotopy} は、任意の環写像 $A \to B$ に対し、
+単体環の写像
+$$
+\xymatrix{
+A[A[A[B]]] \ar[d]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[B]] \ar[d]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[B] \ar[d]
+\ar@<0ex>[l] \\
+B
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+B
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+B
+\ar@<0ex>[l]
+}
+$$
+が基礎にある単体集合上のホモトピー同値であることを意味する。さらに、補題
+\ref{simplicial-lemma-standard-simplicial-homotopy} で構成した逆写像は次数 $n$ で
+$$
+b \longmapsto [\ldots[b]\ldots]
+$$
+により与えられる（記法の意味は明らかである）。他方、補題は任意の集合 $E$ に
+対して環のホモトピー同値
+$$
+\xymatrix{
+A[A[A[A[E]]]] \ar[d]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[A[E]]] \ar[d]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[A[E]] \ar[d]
+\ar@<0ex>[l] \\
+A[E]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[E]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[E]
+\ar@<0ex>[l]
+}
+$$
+が存在することを述べる。補題で構成した逆写像は次数 $n$ で環写像
+$$
+\sum a_{e_1,\ldots,e_p}[e_1][e_2] \ldots [e_p]
+\longmapsto
+\sum a_{e_1,\ldots,e_p}[\ldots[e_1]\ldots][\ldots[e_2]\ldots]
+\ldots [\ldots[e_p]\ldots]
+$$
+により与えられる（記法の意味は明らかである）。
+\end{example}

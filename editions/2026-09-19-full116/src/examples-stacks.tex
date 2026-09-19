@@ -1,0 +1,1646 @@
+% Generated mechanically from frozen input inputs/p11/ja/examples-stacks.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{94}
+\chapter{スタックの例}
+
+
+
+\phantomsection
+\label{examples-stacks-section-phantom}
+
+
+\section{序論}
+\label{examples-stacks-section-introduction}
+
+\noindent
+本章では、代数幾何に現れるスタックの例を論じる。
+その中には代数スタックであるものも、そうでないものもある。
+どれが代数スタックであるかは後の章で論じる。
+したがって、本章で主として検討するのは降下条件である。
+たとえば \cite{Vis2} を参照せよ。
+
+\medskip\noindent
+本章の記法、規約および用語の一部は扱いにくく、経験を積んだ読者には
+向きが逆に思えるかもしれない。これは意図的である。
+説明については、『Quot 空間と Hilbert 空間』の節
+\ref{quot-section-conventions} を参照されたい。
+
+
+
+
+\section{記法}
+\label{examples-stacks-section-notation}
+
+\noindent
+本章では、『位相』の定義
+\ref{topologies-definition-big-fppf-site} と同様に、適切な大 fppf サイト
+$\Sch_{fppf}$ を固定する。したがって、特に明記しない限り、
+すべてのスキームは $\Sch_{fppf}$ の対象とする。
+常に $\Sch_{fppf}$ に含まれる基底 $S$ に相対して議論する。
+その際には大 fppf サイト $(\Sch/S)_{fppf}$ を用いる。
+『位相』の定義 \ref{topologies-definition-big-small-fppf} を参照せよ。
+絶対的な場合は $S = \Spec(\mathbf{Z})$ とすることで得られる。
+
+
+
+
+\section{スタックの例}
+\label{examples-stacks-section-examples-stacks}
+
+\noindent
+まず、$(\Sch/S)_{fppf}$ 上のスタックの重要な例をいくつか挙げる。
+
+
+
+
+
+\section{準連接層}
+\label{examples-stacks-section-stack-of-quasi-coherent-sheaves}
+
+\noindent
+圏 $\QCohstack$ を次のように定める。
+\begin{enumerate}
+\item $\QCohstack$ の対象は組 $(X, \mathcal{F})$ である。
+ここで、$X/S$ は $(\Sch/S)_{fppf}$ の対象であり、$\mathcal{F}$ は
+準連接 $\mathcal{O}_X$-加群である。
+\item 射 $(f, \varphi) : (Y, \mathcal{G}) \to (X, \mathcal{F})$ は、
+$S$ 上のスキームの射 $f : Y \to X$ と $f$-写像
+（『層』の節 \ref{sheaves-section-ringed-spaces-functoriality-modules} を参照）
+$\varphi : \mathcal{F} \to \mathcal{G}$ からなる組である。
+\item 射の合成
+$$
+(Z, \mathcal{H}) \xrightarrow{(g, \psi)}
+(Y, \mathcal{G}) \xrightarrow{(f, \phi)} (X, \mathcal{F})
+$$
+は $(f \circ g, \psi \circ \phi)$ とする。ここで $\psi \circ \phi$ は
+$f$-写像の合成である。
+\end{enumerate}
+これにより $\QCohstack$ は圏となり、
+$$
+p : \QCohstack \to (\Sch/S)_{fppf},
+\quad
+(X, \mathcal{F}) \mapsto X
+$$
+は関手となる。スキーム $X$ 上の $\QCohstack$ のファイバー圏は、
+準連接 $\mathcal{O}_X$-加群の圏 $\QCoh(\mathcal{O}_X)$ の反対圏である。
+後で用いるため、
+$(X, \mathcal{F}), (Y, \mathcal{G}) \in \Ob(\QCohstack)$
+が与えられると
+\begin{equation}
+\label{examples-stacks-equation-morphisms-qcoh}
+\Mor_{\QCohstack}((Y, \mathcal{G}), (X, \mathcal{F}))
+=
+\coprod\nolimits_{f \in \Mor_S(Y, X)}
+\Mor_{\QCoh(\mathcal{O}_Y)}(f^*\mathcal{F}, \mathcal{G})
+\end{equation}
+が成り立つことに注意する。加群の $f$-写像に関する議論については、
+『層』の節 \ref{sheaves-section-ringed-spaces-functoriality-modules} を参照せよ。
+
+\medskip\noindent
+圏 $\QCohstack$ の対象全体は真の類なので、これは
+$(\Sch/S)_{fppf}$ 上のスタックではない。一方、スタックの公理は
+すべて満たすことを以下で見る。この集合論的な問題は、節
+\ref{examples-stacks-section-stack-of-finitely-generated-quasi-coherent-sheaves} で回避する。
+
+\begin{lemma}
+\label{examples-stacks-lemma-quasi-coherent-strongly-cartesian}
+$\QCohstack$ の射
+$(f, \varphi) : (Y, \mathcal{G}) \to (X, \mathcal{F})$ が
+強カルテジアンであるための必要十分条件は、写像 $\varphi$ が同型
+$f^*\mathcal{F} \to \mathcal{G}$ を誘導することである。
+\end{lemma}
+
+\begin{proof}
+$(X, \mathcal{F}) \in \Ob(\QCohstack)$ とし、
+$f : Y \to X$ を $(\Sch/S)_{fppf}$ の射とする。
+標準的な $f$-写像 $c : \mathcal{F} \to f^*\mathcal{F}$ があるので、射
+$(f, c) : (Y, f^*\mathcal{F}) \to (X, \mathcal{F})$
+を得る。$(f, c)$ は強カルテジアンであると主張する。
+実際、$\QCohstack$ の任意の対象 $(Z, \mathcal{H})$ に対して
+\begin{align*}
+\Mor_{\QCohstack}((Z, \mathcal{H}), (Y, f^*\mathcal{F}))
+& =
+\coprod\nolimits_{g \in \Mor_S(Z, Y)}
+\Mor_{\QCoh(\mathcal{O}_Z)}(g^*f^*\mathcal{F}, \mathcal{H}) \\
+& =
+\coprod\nolimits_{g \in \Mor_S(Z, Y)}
+\Mor_{\QCoh(\mathcal{O}_Z)}((f \circ g)^*\mathcal{F}, \mathcal{H}) \\
+& =
+\Mor_{\QCohstack}((Z, \mathcal{H}), (X, \mathcal{F}))
+\times_{\Mor_S(Z, X)} \Mor_S(Z, Y)
+\end{align*}
+となる。ここでは式 (\ref{examples-stacks-equation-morphisms-qcoh}) を2度用いた。
+したがって、$(f, c)$ は『圏』の定義
+\ref{categories-definition-cartesian-over-C} の条件を満たし、主張が従う。
+また、『圏』の補題 \ref{categories-lemma-composition-cartesian} により、
+同型射は強カルテジアンであり、強カルテジアンな射の合成も
+強カルテジアンである。これで補題の「十分性」が示された。
+逆に、$(X, \mathcal{F})$ と $f : Y \to X$ が与えられ、終域を
+$(X, \mathcal{F})$ として $f$ を持ち上げる強カルテジアンな射が
+存在すると、それは $(f, c)$ と同型でなければならない
+（『圏』の定義 \ref{categories-definition-cartesian-over-C} の後の議論を参照）。
+したがって、補題の「必要性」も成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-stack-of-quasi-coherent-sheaves}
+関手 $p : \QCohstack \to (\Sch/S)_{fppf}$ は、
+『スタック』の定義 \ref{stacks-definition-stack} の条件 (1)、(2)、(3) を満たす。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{examples-stacks-lemma-quasi-coherent-strongly-cartesian} により、
+$\QCohstack$ が $(\Sch/S)_{fppf}$ 上のファイバー圏であることは明らかである。
+$(\Sch/S)_{fppf}$ の被覆
+$\mathcal{U} = \{X_i \to X\}_{i \in I}$ が与えられると、関手
+$$
+\QCoh(\mathcal{O}_X) \longrightarrow DD(\mathcal{U})
+$$
+は充満忠実かつ本質的全射である。『降下』の命題
+\ref{descent-proposition-fpqc-descent-quasi-coherent} を参照せよ。
+したがって、『スタック』の補題 \ref{stacks-lemma-stack-equivalences}
+を適用すると、$\QCohstack$ はスタックのすべての公理を満たすことが分かる。
+\end{proof}
+
+
+
+
+
+\section{有限型準連接層のスタック}
+\label{examples-stacks-section-stack-of-finitely-generated-quasi-coherent-sheaves}
+
+\noindent
+有限型の準連接加群だけを考えれば、準連接層のスタックが得られる。
+記号
+$$
+p_{fg} : \QCohstack_{fg} \to (\Sch/S)_{fppf}
+$$
+で、$\mathcal{F}$ が有限型の準連接 $\mathcal{O}_T$-加群であるような
+組 $(T, \mathcal{F})$ からなる、$(\Sch/S)_{fppf}$ 上の $\QCohstack$ の
+充満部分圏を表す。
+
+\begin{lemma}
+\label{examples-stacks-lemma-stack-of-finite-type-quasi-coherent-sheaves}
+関手 $p_{fg} : \QCohstack_{fg} \to (\Sch/S)_{fppf}$ は、
+『スタック』の定義 \ref{stacks-definition-stack} の条件 (1)、(2)、(3) を満たす。
+\end{lemma}
+
+\begin{proof}
+これを示すため、『スタック』の補題 \ref{stacks-lemma-substack} の
+仮定 (1)、(2)、(3) を確認する。補題
+\ref{examples-stacks-lemma-quasi-coherent-strongly-cartesian} により、射
+$(Y, \mathcal{G}) \to (X, \mathcal{F})$ が強カルテジアンであるための
+必要十分条件は、同型 $f^*\mathcal{F} \to \mathcal{G}$ を誘導することである。
+『加群』の補題 \ref{modules-lemma-pullback-finite-type} によれば、
+有限型 $\mathcal{O}_X$-加群の引き戻しは有限型である。
+したがって、『スタック』の補題 \ref{stacks-lemma-substack} の仮定 (1) が
+成り立つ。仮定 (2) は自明である。
+最後に、仮定 (3) を示すには次を証明すればよい。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とし、
+$\{f_i : X_i \to X\}$ を fppf 被覆で、各 $f_i^*\mathcal{F}$ が有限型である
+ものとする。このとき $\mathcal{F}$ は有限型である。
+$X$ のアフィン開集合への $\mathcal{F}$ の制限を考えると、これは次の
+代数的主張に帰着する。$R \to S$ を有限表示かつ忠実平坦な環準同型とし、
+$M$ を $R$-加群とする。$M \otimes_R S$ が有限生成 $S$-加群ならば、
+$M$ は有限生成 $R$-加群である。この代数的事実のより強い形は、
+『代数』の補題 \ref{algebra-lemma-descend-properties-modules} にある。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-finite-type}
+$(X, \mathcal{O}_X)$ を環付き空間とする。
+\begin{enumerate}
+\item 有限型 $\mathcal{O}_X$-加群の圏の同型類全体は集合をなす。
+\item 有限型準連接 $\mathcal{O}_X$-加群の圏の同型類全体は集合をなす。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) の圏は (1) の圏の充満部分圏なので、(2) は (1) から従う。
+任意の開被覆 $\mathcal{U} : X = \bigcup_{i \in I} U_i$ を考え、
+包含写像を $j_i : U_i \to X$ と書く。また、任意の写像
+$r : I \to \mathbf{N}$ を考える。$\mathcal{F}$ を $\mathcal{O}_X$-加群で、
+$U_i$ への制限が $\mathcal{F}(U_i)$ の高々 $r(i)$ 個の切断で生成される
+ものとする。このとき $\mathcal{F}$ は層
+$$
+\mathcal{H}_{\mathcal{U}, r} =
+\bigoplus\nolimits_{i \in I} j_{i, !}\mathcal{O}_{U_i}^{\oplus r(i)}
+$$
+の商である。定義より、$\mathcal{F}$ が有限型ならば、この条件を満たし、
+添字集合が $I = X$ であるような開被覆 $\mathcal{U}$ が存在する。
+したがって、$\mathcal{U}$ の可能な選び方が集合をなすこと（自明）、
+$r : I \to \mathbf{N}$ の可能な選び方が集合をなすこと（自明）、および
+各 $\mathcal{U}$ と $r$ に対して $\mathcal{H}_{\mathcal{U}, r}$ の
+商加群の可能な選び方が集合をなすことを示せば十分である。
+言い換えると、$\mathcal{O}_X$-加群 $\mathcal{H}$ が与えられたとき、
+その商の同型類が高々集合をなすことを示せばよい。
+最後の主張は、商写像 $\mathcal{H} \to \mathcal{F}$ の核が
+$\prod_{U \subset X\text{ open}} \mathcal{H}(U)$ の冪集合の部分集合によって
+パラメータ付けられると考えれば明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-stack-fg-quasi-coherent}
+次の性質をもつ部分圏
+$\QCohstack_{fg, small} \subset \QCohstack_{fg}$
+が存在する。
+\begin{enumerate}
+\item 包含関手 $\QCohstack_{fg, small} \to \QCohstack_{fg}$ は
+充満忠実かつ本質的全射である。
+\item 関手
+$p_{fg, small} : \QCohstack_{fg, small} \to (\Sch/S)_{fppf}$
+により $\QCohstack_{fg, small}$ は $(\Sch/S)_{fppf}$ 上のスタックとなる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{examples-stacks-lemma-stack-of-finite-type-quasi-coherent-sheaves} および
+\ref{examples-stacks-lemma-finite-type} により、
+$p_{fg} : \QCohstack_{fg} \to (\Sch/S)_{fppf}$ は
+『スタック』の定義 \ref{stacks-definition-stack} の (1)、(2)、(3) に加え、
+『スタック』の注 \ref{stacks-remark-stack-make-small} の条件 (4) も
+満たすことを見た。したがって、その注の議論から
+$\QCohstack_{fg, small}$ が得られる。
+\end{proof}
+
+\noindent
+今後しばしば、特に断らずに置換
+$$
+\QCohstack_{fg} \leadsto \QCohstack_{fg, small}
+$$
+を行い、記法の濫用により、置換後の圏も単に $\QCohstack_{fg}$ と書く。
+
+\begin{remark}
+\label{examples-stacks-remark-higher-rank}
+この節の議論全体は、ある無限基数 $\kappa$、たとえば
+$\kappa = \aleph_0$ に対して、局所的に高々 $\kappa$ 個の切断で生成される
+準連接層を考える場合にも成り立つ。
+\end{remark}
+
+
+
+
+
+\section{有限エタール被覆}
+\label{examples-stacks-section-finite-etale}
+
+\noindent
+圏 $\textit{F\'Et}$ を次のように定める。
+\begin{enumerate}
+\item $\textit{F\'Et}$ の対象は、スキームの有限エタール射 $Y \to X$ である
+（本章の規約では、これは $(\Sch/S)_{fppf}$ における有限エタール射を意味する）。
+\item $\textit{F\'Et}$ の射
+$(b, a) : (Y \to X) \to (Y' \to X')$ は可換図式
+$$
+\xymatrix{
+Y \ar[d] \ar[r]_b & Y' \ar[d] \\
+X \ar[r]_a & X'
+}
+$$
+である。ここで図式はスキームの圏で考える。
+\end{enumerate}
+これにより $\textit{F\'Et}$ は圏となり、
+$$
+p : \textit{F\'Et} \to (\Sch/S)_{fppf},
+\quad
+(Y \to X) \mapsto X
+$$
+は関手となる。スキーム $X$ 上の $\textit{F\'Et}$ のファイバー圏は、
+『基本群』の節 \ref{pione-section-finite-etale} で調べた圏
+$\textit{F\'Et}_X$ にほかならない。
+
+\begin{lemma}
+\label{examples-stacks-lemma-finite-etale-stack}
+関手
+$$
+p : \textit{F\'Et} \longrightarrow (\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のスタックを定める。
+\end{lemma}
+
+\begin{proof}
+有限エタール射の fppf 降下は、『降下』の補題
+\ref{descent-lemma-affine}、
+\ref{descent-lemma-descending-property-finite}、および
+\ref{descent-lemma-descending-property-etale} から従う。
+詳細は省略する。
+\end{proof}
+
+
+
+
+
+
+\section{代数空間}
+\label{examples-stacks-section-stack-of-spaces}
+
+\noindent
+圏 $\Spacesstack$ を次のように定める。
+\begin{enumerate}
+\item $\Spacesstack$ の対象は $S$ 上の代数空間の射 $X \to U$ である。
+ここで $U$ は $(\Sch/S)_{fppf}$ の対象によって表現可能である。
+\item 射 $(f, g) : (X \to U) \to (Y \to V)$ は可換図式
+$$
+\xymatrix{
+X \ar[d] \ar[r]_f & Y \ar[d] \\
+U \ar[r]^g & V
+}
+$$
+である。ここで各射は $S$ 上の代数空間の射である。
+\end{enumerate}
+これにより $\Spacesstack$ は圏となり、
+$$
+p : \Spacesstack \to (\Sch/S)_{fppf},
+\quad
+(X \to U) \mapsto U
+$$
+は関手となる。スキーム $U$ 上の $\Spacesstack$ のファイバー圏は、
+$U$ 上の代数空間の圏 $\textit{Spaces}/U$ にほかならない
+（『代数空間上の位相』の節 \ref{spaces-topologies-section-procedure} を参照）。
+したがって、$\Spacesstack$ の対象を、スキーム $U$ と $U$ 上の代数空間
+$X$ からなる組 $X/U$ とみなすこともある。後で用いるため、
+$(X/U), (Y/V) \in \Ob(\Spacesstack)$
+が与えられると
+\begin{equation}
+\label{examples-stacks-equation-morphisms-spaces}
+\Mor_{\Spacesstack}(X/U, Y/V)
+=
+\coprod\nolimits_{g \in \Mor_S(U, V)}
+\Mor_{\textit{Spaces}/U}(X, U \times_{g, V} Y)
+\end{equation}
+が成り立つことに注意する。圏 $\Spacesstack$ はほとんど
+$(\Sch/S)_{fppf}$ 上のスタックであるが、完全にはそうではない。
+問題は集合論的なものであり、以下で説明する。
+
+\begin{lemma}
+\label{examples-stacks-lemma-spaces-strongly-cartesian}
+$\Spacesstack$ の射 $(f, g) : X/U \to Y/V$ が強カルテジアンであるための
+必要十分条件は、写像 $f$ が同型 $X \to U \times_{g, V} Y$ を誘導する
+ことである。
+\end{lemma}
+
+\begin{proof}
+$Y/V \in \Ob(\Spacesstack)$ とし、$g : U \to V$ を
+$(\Sch/S)_{fppf}$ の射とする。射影 $p : U \times_{g, V} Y \to Y$ から
+$\Spacesstack$ の射 $(p, g) : U \times_{g, V} Y/U \to Y/V$ が得られる。
+$(p, g)$ は強カルテジアンであると主張する。
+実際、$\Spacesstack$ の任意の対象 $Z/W$ に対して
+\begin{align*}
+\Mor_{\Spacesstack}(Z/W, U \times_{g, V} Y/U)
+& =
+\coprod\nolimits_{h \in \Mor_S(W, U)}
+\Mor_{\textit{Spaces}/W}(Z, W \times_{h, U} U \times_{g, V} Y) \\
+& =
+\coprod\nolimits_{h \in \Mor_S(W, U)}
+\Mor_{\textit{Spaces}/W}(Z, W \times_{g \circ h, V} Y) \\
+& =
+\Mor_{\Spacesstack}(Z/W, Y/V)
+\times_{\Mor_S(W, V)} \Mor_S(W, U)
+\end{align*}
+となる。ここでは式 (\ref{examples-stacks-equation-morphisms-spaces}) を2度用いた。
+したがって、$(p, g)$ は『圏』の定義
+\ref{categories-definition-cartesian-over-C} の条件を満たし、主張が従う。
+また、『圏』の補題 \ref{categories-lemma-composition-cartesian} により、
+同型射は強カルテジアンであり、強カルテジアンな射の合成も
+強カルテジアンである。これで補題の「十分性」が示された。
+逆に、$Y/V$ と $g : U \to V$ が与えられ、終域を $Y/V$ として
+$g$ を持ち上げる強カルテジアンな射が存在すると、それは $(p, g)$ と
+同型でなければならない（『圏』の定義
+\ref{categories-definition-cartesian-over-C} の後の議論を参照）。
+したがって、補題の「必要性」も成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-pre-stack-of-spaces}
+関手 $p : \Spacesstack \to (\Sch/S)_{fppf}$ は、
+『スタック』の定義 \ref{stacks-definition-stack} の条件 (1) と (2) を満たす。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{examples-stacks-lemma-spaces-strongly-cartesian} により、$\Spacesstack$ は
+$(\Sch/S)_{fppf}$ 上のファイバー圏である。これで (1) が示された。
+$\{U_i \to U\}_{i \in I}$ を $(\Sch/S)_{fppf}$ の被覆とし、$X, Y$ を
+$U$ 上の代数空間とする。さらに、
+$\varphi_i : X_{U_i} \to Y_{U_i}$ を $\textit{Spaces}/U_i$ の射で、
+$\varphi_i$ と $\varphi_j$ の両者の重なりへの制限が、
+$U_i \times_U U_j$ 上の代数空間の同じ射
+$X_{U_i \times_U U_j} \to Y_{U_i \times_U U_j}$ になるものとする。
+(2) を示すには、$U_i$ への基底変換が $\varphi_i$ に等しくなる $U$ 上の射
+$\varphi  : X \to Y$ が一意に存在することを示せばよい。
+$X$ から $Y$ への射は層の写像と同じものなので、これは『サイト』の補題
+\ref{sites-lemma-glue-maps} から直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{examples-stacks-remark-stack-spaces}
+集合論的な困難を無視すれば\footnote{困難は $\Spacesstack$ が真の類で
+あることではない。$S$ 上の代数空間の定義により、$S$ 上の代数空間の
+同型類全体は集合をなすからである。むしろ、代数空間の任意の非交和が
+大きくなりすぎて、選んだ集合の「部分宇宙」の外に出る可能性があることが
+問題である。}、$\Spacesstack$ は対象に対する降下も満たし、したがって
+スタックである。すなわち、次が与えられたとする。
+\begin{enumerate}
+\item fppf 被覆 $\{U_i \to U\}_{i \in I}$、
+\item 各 $i \in I$ に対して代数空間 $X_i/U_i$、
+\item 各 $i, j \in I$ に対して、$U_i \times_U U_j$ 上の代数空間の同型
+$\varphi_{ij} : X_i \times_U U_j \to U_i \times_U X_j$ で、
+$U_i \times_U U_j \times_U U_k$ 上のコサイクル条件を満たすもの。
+\end{enumerate}
+このとき、代数空間 $X/U$ と $U_i$ 上の同型 $X_{U_i} \cong X_i$ で、
+同型 $\varphi_{ij}$ を復元するものが存在することを示せばよい。
+まず、『サイト』の補題 \ref{sites-lemma-glue-sheaves} により、$X_i$ と
+$\varphi_{ij}$ を復元する $(\Sch/U)_{fppf}$ 上の層 $X$ が存在する。
+次に、『ブートストラップ』の補題
+\ref{bootstrap-lemma-locally-algebraic-space} により、その補題の集合論的条件を
+無視すれば $X$ は代数空間である。次節ではこの議論を用いて、有限型の
+代数空間だけを考えればスタックが得られることを示す。
+\end{remark}
+
+
+
+
+
+
+\section{有限型代数空間のスタック}
+\label{examples-stacks-section-stack-of-finite-type-spaces}
+
+
+\noindent
+有限型の代数空間だけを考えれば、代数空間のスタックが得られる。
+記号
+$$
+p_{ft} : \Spacesstack_{ft} \to (\Sch/S)_{fppf}
+$$
+で、$X \to U$ が有限型の射であるような組 $X/U$ からなる、
+$(\Sch/S)_{fppf}$ 上の $\Spacesstack$ の充満部分圏を表す。
+
+\begin{lemma}
+\label{examples-stacks-lemma-stack-of-finite-type-spaces}
+関手
+$p_{ft} : \Spacesstack_{ft} \to (\Sch/S)_{fppf}$
+は『スタック』の定義 \ref{stacks-definition-stack} の条件 (1)、(2)、(3) を満たす。
+\end{lemma}
+
+\begin{proof}
+以下、ばかばかしいほど詳細に書き下す（そのため、何が起きているか
+見えにくくなるかもしれない）。
+
+\medskip\noindent
+補題 \ref{examples-stacks-lemma-spaces-strongly-cartesian} により、$\Spacesstack$ の射
+$(f, g) : X/U \to Y/V$ が強カルテジアンであるための必要十分条件は、
+誘導される射 $f : X \to U \times_V Y$ が同型であることである。
+$Y \to V$ が有限型ならば $U \times_V Y \to U$ も有限型である。
+『代数空間の射』の補題
+\ref{spaces-morphisms-lemma-base-change-finite-type} を参照せよ。
+したがって、$\Spacesstack$ の射 $(f, g) : X/U \to Y/V$ が
+$\Spacesstack$ において強カルテジアンで、$Y/V$ が
+$\Spacesstack_{ft}$ の対象ならば、$X/U$ も自動的に
+$\Spacesstack_{ft}$ の対象となり、もちろん $(f, g)$ は
+$\Spacesstack_{ft}$ においても強カルテジアンである。
+これにより $\Spacesstack_{ft}$ は $(\Sch/S)_{fppf}$ 上の
+ファイバー圏である。これで (1) が示された。
+
+\medskip\noindent
+上の議論は、包含関手 $\Spacesstack_{ft} \to \Spacesstack$ が
+強カルテジアンな射を強カルテジアンな射へ移すことも示している。
+言い換えると、$\Spacesstack_{ft} \to \Spacesstack$ は
+$(\Sch/S)_{fppf}$ 上のファイバー圏の $1$-射である。
+
+\medskip\noindent
+$U \in \Ob((\Sch/S)_{fppf})$ とし、$X, Y$ を $U$ 上の有限型代数空間とする。
+『スタック』の補題
+\ref{stacks-lemma-presheaf-mor-map-fibred-categories} により、前層の写像
+$$
+\mathit{Mor}_{\Spacesstack_{ft}}(X, Y)
+\longrightarrow
+\mathit{Mor}_{\Spacesstack}(X, Y)
+$$
+を得る。$\Spacesstack_{ft}$ は $\Spacesstack$ の充満部分圏なので、
+これは同型である。補題 \ref{examples-stacks-lemma-pre-stack-of-spaces} で右辺が層であることを
+示したから、左辺も層である。これで (2) が示された。
+
+\medskip\noindent
+『スタック』の定義 \ref{stacks-definition-stack} の条件 (3) を示すには、
+次を証明すればよい。以下が与えられたとする。
+\begin{enumerate}
+\item $(\Sch/S)_{fppf}$ の被覆 $\{U_i \to U\}_{i \in I}$、
+\item 各 $i \in I$ に対して $U_i$ 上の有限型代数空間 $X_i$、
+\item 各 $i, j \in I$ に対して、$U_i \times_U U_j$ 上の代数空間の同型
+$\varphi_{ij} : X_i \times_U U_j \to U_i \times_U X_j$ で、
+$U_i \times_U U_j \times_U U_k$ 上のコサイクル条件を満たすもの。
+\end{enumerate}
+このとき、$U$ 上の有限型代数空間 $X$ と $U_i$ 上の同型
+$X_{U_i} \cong X_i$ で、同型 $\varphi_{ij}$ を復元するものが存在する。
+これは『ブートストラップ』の補題
+\ref{bootstrap-lemma-descend-algebraic-space} の (2) から従う。
+さらに、『代数空間上の降下』の補題
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation}
+により $X \to U$ は有限型である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-stack-ft-spaces}
+次の性質をもつ部分圏
+$\Spacesstack_{ft, small} \subset \Spacesstack_{ft}$
+が存在する。
+\begin{enumerate}
+\item 包含関手 $\Spacesstack_{ft, small} \to \Spacesstack_{ft}$ は
+充満忠実かつ本質的全射である。
+\item 関手
+$p_{ft, small} : \Spacesstack_{ft, small} \to (\Sch/S)_{fppf}$
+により $\Spacesstack_{ft, small}$ は $(\Sch/S)_{fppf}$ 上のスタックとなる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{examples-stacks-lemma-stack-of-finite-type-spaces} により、
+$p_{ft} : \Spacesstack_{ft} \to (\Sch/S)_{fppf}$ は
+『スタック』の定義 \ref{stacks-definition-stack} の (1)、(2)、(3) を
+満たすことを見た。さらに、『スタック』の注
+\ref{stacks-remark-stack-make-small} の条件 (4) も成り立つ。
+実際、$S$ 上の任意の代数空間 $X$ は、
+$U, R \in \Ob((\Sch/S)_{fppf})$ に対する形 $U/R$ をもつ。
+『代数空間』の補題 \ref{spaces-lemma-space-presentation} を参照せよ。
+したがって対象の同型類全体は集合をなす。ゆえに、その注の議論から
+$\Spacesstack_{ft, small}$ が得られる。
+\end{proof}
+
+\noindent
+今後しばしば、特に断らずに置換
+$$
+\Spacesstack_{ft} \leadsto \Spacesstack_{ft, small}
+$$
+を行い、記法の濫用により、置換後の圏も単に $\Spacesstack_{ft}$ と書く。
+
+\begin{remark}
+\label{examples-stacks-remark-higher-cardinality-spaces}
+この節の議論全体は、局所有限型の代数空間 $X/U$ で、$U$ のアフィン開集合の
+$X$ における逆像が可算個のアフィンで被覆できるものを考える場合にも成り立つ。
+必要ならば、基数 $\kappa$ に対して $\kappa$-型の射という概念も導入できる
+（これは環拡大の生成元の個数にある上界を課し、さらに基底の所与のアフィン上に
+あるアフィンの個数の基数にもある上界を課すという意味である）。するとスタック
+$$
+\Spacesstack_\kappa \longrightarrow (\Sch/S)_{fppf}
+$$
+を上とまったく同じ方法で構成できる（$\Sch$ が $\kappa$ に応じて十分大きい
+ことを確認するものとする）。
+\end{remark}
+
+
+
+
+
+\section{グルーポイドのスタックの例}
+\label{examples-stacks-section-examples-stacks-in-groupoids}
+
+\noindent
+上の例は、グルーポイドのスタックではないスタックの例である。
+本章の残りでは、代数幾何に現れるグルーポイドのスタックの例を挙げる。
+
+
+
+\section{層に随伴するスタック}
+\label{examples-stacks-section-stack-associated-to-sheaf}
+
+\noindent
+$F : (\Sch/S)_{fppf}^{opp} \to \textit{Sets}$ を前層とする。
+集合をファイバーとする圏
+$$
+p_F : \mathcal{S}_F \to (\Sch/S)_{fppf},
+$$
+を得る。『圏』の例 \ref{categories-example-presheaf} を参照せよ。
+これが集合のスタックであるための必要十分条件は、$F$ が層であることである。
+『スタック』の補題 \ref{stacks-lemma-stack-in-setoids-characterize} を参照せよ。
+
+
+
+\section{有限型準連接層のグルーポイドのスタック}
+\label{examples-stacks-section-stack-in-groupoids-of-quasi-coherent-sheaves}
+
+\noindent
+$p : \QCohstack_{fg} \to (\Sch/S)_{fppf}$ を、節
+\ref{examples-stacks-section-stack-of-finitely-generated-quasi-coherent-sheaves} で導入した
+スタックとする（そこで導入した記法の濫用を用いる）。
+『圏』の補題 \ref{categories-lemma-fibred-gives-fibred-groupoids} の手順により、
+これをグルーポイドのスタック
+$p' : \QCohstack_{fg}' \to (\Sch/S)_{fppf}$ にできる。
+『スタック』の補題 \ref{stacks-lemma-stack-gives-stack-groupoids} を参照せよ。
+この場合、これは単に $\QCohstack_{fg}'$ の対象が $\QCohstack_{fg}$ と
+同じである一方、射が組
+$(f, g) : (U, \mathcal{F}) \to (U', \mathcal{F}')$ で、$g$ が同型
+$g : f^*\mathcal{F}' \to \mathcal{F}$ であるものになるという意味である。
+
+
+\section{有限型代数空間のグルーポイドのスタック}
+\label{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}
+
+\noindent
+$p : \Spacesstack_{ft} \to (\Sch/S)_{fppf}$ を、節
+\ref{examples-stacks-section-stack-of-finite-type-spaces} で導入したスタックとする
+（そこで導入した記法の濫用を用いる）。『圏』の補題
+\ref{categories-lemma-fibred-gives-fibred-groupoids} の手順により、これを
+グルーポイドのスタック
+$p' : \Spacesstack_{ft}' \to (\Sch/S)_{fppf}$ にできる。
+『スタック』の補題 \ref{stacks-lemma-stack-gives-stack-groupoids} を参照せよ。
+この場合、これは単に $\Spacesstack_{ft}'$ の対象が $\Spacesstack_{ft}$ と
+同じ、すなわち $X$ が $S$ 上の代数空間、$U$ が $S$ 上のスキームである
+有限型の射 $X \to U$ である一方、射 $(f, g) : X/U \to Y/V$ は可換図式
+$$
+\xymatrix{
+X \ar[d] \ar[r]_f & Y \ar[d] \\
+U \ar[r]^g & V
+}
+$$
+で、しかもカルテジアンであるという意味である。
+
+
+
+\section{商スタック}
+\label{examples-stacks-section-quotient-stacks}
+
+\noindent
+$(U, R, s, t, c)$ を $S$ 上の代数空間のグルーポイドとする。
+このとき商スタック
+$$
+[U/R] \longrightarrow (\Sch/S)_{fppf}
+$$
+は構成によりグルーポイドのスタックである。『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-quotient-stack} を参照せよ。
+さらに $\mathit{Isom}$-層は代数空間によって表現可能である。
+『ブートストラップ』の補題 \ref{bootstrap-lemma-quotient-stack-isom} を参照せよ。
+これらの商スタックは、代数スタックの理論において基本的に重要である。
+
+\medskip\noindent
+上の構成の特別な場合として、データ $(B, G/B, m, X/B, a)$ に随伴する商スタック
+$$
+[X/G] \longrightarrow (\Sch/S)_{fppf}
+$$
+がある。ここで
+\begin{enumerate}
+\item $B$ は $S$ 上の代数空間である。
+\item $(G, m)$ は $B$ 上の群代数空間である。
+\item $X$ は $B$ 上の代数空間である。
+\item $a : G \times_B X \to X$ は $B$ 上の $X$ への $G$ の作用である。
+\end{enumerate}
+実際、『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-quotient-stack} により、
+グルーポイドのスタック $[X/G]$ は上で与えた商スタック
+$[X/G \times_B X]$ である。圏 $[X/G]$ の具体像を明記しておく必要がある。
+これは節 \ref{examples-stacks-section-group-quotient-stacks} で行う。
+
+
+
+\section{トーサーの分類}
+\label{examples-stacks-section-torsors}
+
+\noindent
+群代数空間 $G$ または群の層 $\mathcal{G}$ に対するトーサーのスタックを
+調べるとは何を意味しうるか、そのいくつかの変種を注意深く説明する。
+
+
+
+\subsection{群の層に対するトーサー}
+\label{examples-stacks-subsection-torsors-sheaf}
+
+\noindent
+$\mathcal{G}$ を $(\Sch/S)_{fppf}$ 上の群の層とする。
+$U \in \Ob((\Sch/S)_{fppf})$ に対し、$\mathcal{G}$ の
+$(\Sch/U)_{fppf}$ への制限を $\mathcal{G}|_U$ と書く。
+圏 $\mathcal{G}\textit{-Torsors}$ を次のように定める。
+\begin{enumerate}
+\item $\mathcal{G}\textit{-Torsors}$ の対象は組 $(U, \mathcal{F})$ である。
+ここで $U$ は $(\Sch/S)_{fppf}$ の対象であり、$\mathcal{F}$ は
+$\mathcal{G}|_U$-トーサーである。『サイト上のコホモロジー』の定義
+\ref{sites-cohomology-definition-torsor} を参照せよ。
+\item 射 $(U, \mathcal{F}) \to (V, \mathcal{H})$ は組 $(f, \alpha)$ で
+与えられる。ここで $f : U \to V$ は $S$ 上のスキームの射であり、
+$\alpha : f^{-1}\mathcal{H} \to \mathcal{F}$ は
+$\mathcal{G}|_U$-トーサーの同型である。
+\end{enumerate}
+これにより $\mathcal{G}\textit{-Torsors}$ は圏となり、
+$$
+p : \mathcal{G}\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, \mathcal{F}) \longmapsto U
+$$
+は関手となる。$U$ 上の $\mathcal{G}\textit{-Torsors}$ のファイバー圏は
+$\mathcal{G}|_U$-トーサーの圏であり、これはグルーポイドである。
+
+\begin{lemma}
+\label{examples-stacks-lemma-torsors-sheaf-stack-in-groupoids}
+『スタック』の注 \ref{stacks-remark-stack-make-small} と同様の置換を除けば、関手
+$$
+p : \mathcal{G}\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定める。
+\end{lemma}
+
+\begin{proof}
+証明で最も難しいのは、対象に対する降下を示すことである。
+$\{U_i \to U\}_{i \in I}$ を $(\Sch/S)_{fppf}$ の被覆とする。
+各 $i$ に対して $\mathcal{G}|_{U_i}$-トーサー $\mathcal{F}_i$ が与えられ、
+各 $i, j \in I$ に対して $\mathcal{G}|_{U_i \times_U U_j}$-トーサーの同型
+$\varphi_{ij} :
+\mathcal{F}_i|_{U_i \times_U U_j} \to \mathcal{F}_j|_{U_i \times_U U_j}$
+が与えられ、$U_i \times_U U_j \times_U U_k$ 上で適切なコサイクル条件を
+満たすとする。『サイト』の節 \ref{sites-section-glueing-sheaves} により、
+各 $U_i$ への制限が $\mathcal{F}_i$ と降下データを復元する
+$(\Sch/U)_{fppf}$ 上の層 $\mathcal{F}$ を得る。
+『サイト』の補題 \ref{sites-lemma-mapping-property-glue} の圏同値により、作用写像
+$\mathcal{G}|_{U_i} \times \mathcal{F}_i \to \mathcal{F}_i$ は貼り合わさって写像
+$a : \mathcal{G}|_U \times \mathcal{F} \to \mathcal{F}$ を与える。
+ここで $a$ が作用であり、$\mathcal{F}$ が $\mathcal{G}|_U$-トーサーになることを
+示さなければならない。どちらの性質も局所的に確認できるので、作用
+$\mathcal{G}|_{U_i} \times \mathcal{F}_i \to \mathcal{F}_i$ の対応する性質から
+従う。これで $\mathcal{G}\textit{-Torsors}$ における対象の降下が示された。
+いくつかの詳細は省略する。
+\end{proof}
+
+
+
+\subsection{層に対するトーサーの変種}
+\label{examples-stacks-subsection-variant-torsor-sheaf}
+
+\noindent
+小節 \ref{examples-stacks-subsection-torsors-sheaf} の構成は少し一般化できる。
+$\mathcal{G} \to \mathcal{B}$ を $(\Sch/S)_{fppf}$ 上の層の写像とし、
+$$
+m :
+\mathcal{G} \times_\mathcal{B} \mathcal{G}
+\longrightarrow
+\mathcal{G}
+$$
+を $\mathcal{G}/\mathcal{B}$ 上の群法則とする。言い換えると、組
+$(\mathcal{G}, m)$ はトポス $\Sh((\Sch/S)_{fppf})/\mathcal{B}$ の群対象である。
+トポスの局所化については、『サイト』の節
+\ref{sites-section-localize-topoi} を参照せよ。この状況で圏
+$\mathcal{G}/\mathcal{B}\textit{-Torsors}$ を次のように定める
+（米田埋め込みによりスキームを層とみなす）。
+\begin{enumerate}
+\item $\mathcal{G}/\mathcal{B}\textit{-Torsors}$ の対象は三つ組
+$(U, b, \mathcal{F})$ である。ここで
+\begin{enumerate}
+\item $U$ は $(\Sch/S)_{fppf}$ の対象である。
+\item $b : U \to \mathcal{B}$ は $U$ 上の $\mathcal{B}$ の切断である。
+\item $\mathcal{F}$ は $U$ 上の $U \times_{b, \mathcal{B}}\mathcal{G}$-トーサーである。
+\end{enumerate}
+\item 射 $(U, b, \mathcal{F}) \to (U', b', \mathcal{F}')$ は組 $(f, g)$ で
+与えられる。ここで $f : U \to U'$ は $b = b' \circ f$ を満たす
+$S$ 上のスキームの射であり、$g : f^{-1}\mathcal{F}' \to \mathcal{F}$ は
+$U \times_{b, \mathcal{B}} \mathcal{G}$-トーサーの同型である。
+\end{enumerate}
+これにより $\mathcal{G}/\mathcal{B}\textit{-Torsors}$ は圏となり、
+$$
+p :
+\mathcal{G}/\mathcal{B}\textit{-Torsors}
+\longrightarrow
+(\Sch/S)_{fppf},
+\quad
+(U, b, \mathcal{F}) \longmapsto U
+$$
+は関手となる。$U$ 上の $\mathcal{G}/\mathcal{B}\textit{-Torsors}$ の
+ファイバー圏は、$b : U \to \mathcal{B}$ 全体にわたる
+$U \times_{b, \mathcal{B}} \mathcal{G}$-トーサーの圏の非交和であり、
+したがってグルーポイドである。
+
+\medskip\noindent
+特別な場合 $\mathcal{B} = S$ には、小節
+\ref{examples-stacks-subsection-torsors-sheaf} で導入した圏
+$\mathcal{G}\textit{-Torsors}$ が再び得られる。
+
+\begin{lemma}
+\label{examples-stacks-lemma-variant-torsors-sheaf-stack-in-groupoids}
+『スタック』の注 \ref{stacks-remark-stack-make-small} と同様の置換を除けば、関手
+$$
+p :
+\mathcal{G}/\mathcal{B}\textit{-Torsors}
+\longrightarrow
+(\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定める。
+\end{lemma}
+
+\begin{proof}
+この証明は補題 \ref{examples-stacks-lemma-torsors-sheaf-stack-in-groupoids} の証明の
+繰り返しである。そちらの方が記法が簡潔なので、先に読むことを勧める。
+証明で最も難しいのは対象に対する降下を示すことである。
+$\{U_i \to U\}_{i \in I}$ を $(\Sch/S)_{fppf}$ の被覆とする。
+各 $i$ に対して、射 $b_i : U_i \to \mathcal{B}$ と
+$U_i \times_{b_i, \mathcal{B}} \mathcal{G}$-トーサー $\mathcal{F}_i$ からなる
+組 $(b_i, \mathcal{F}_i)$ が与えられるとする。また各 $i, j \in I$ に対して
+$b_i|_{U_i \times_U U_j} = b_j|_{U_i \times_U U_j}$ が成り立ち、
+$(U_i \times_U U_j) \times_\mathcal{B} \mathcal{G}$-トーサーの同型
+$\varphi_{ij} :
+\mathcal{F}_i|_{U_i \times_U U_j} \to \mathcal{F}_j|_{U_i \times_U U_j}$
+が与えられ、$U_i \times_U U_j \times_U U_k$ 上で適切なコサイクル条件を
+満たすとする。『サイト』の節 \ref{sites-section-glueing-sheaves} により、
+各 $U_i$ への制限が $\mathcal{F}_i$ と降下データを復元する
+$(\Sch/U)_{fppf}$ 上の層 $\mathcal{F}$ を得る。
+$\mathcal{B}$ の層の公理により、射 $b_i$ は一意な射
+$b : U \to \mathcal{B}$ から得られる。『サイト』の補題
+\ref{sites-lemma-mapping-property-glue} の圏同値により、作用写像
+$(U_i \times_{b_i, \mathcal{B}} \mathcal{G}) \times_{U_i} \mathcal{F}_i
+\to \mathcal{F}_i$
+は貼り合わさって写像
+$(U \times_{b, \mathcal{B}} \mathcal{G}) \times \mathcal{F} \to \mathcal{F}$.
+を与える。これが作用であり、$\mathcal{F}$ が
+$U \times_{b, \mathcal{B}} \mathcal{G}$-トーサーになることを示さなければ
+ならない。どちらの性質も局所的に確認できるので、$\mathcal{F}_i$ 上の作用の
+対応する性質から従う。これで
+$\mathcal{G}/\mathcal{B}\textit{-Torsors}$ における対象の降下が示された。
+いくつかの詳細は省略する。
+\end{proof}
+
+
+
+\subsection{主等質空間}
+\label{examples-stacks-subsection-principal-homogeneous-spaces}
+
+\noindent
+$B$ を $S$ 上の代数空間とし、$G$ を $B$ 上の群代数空間とする。
+圏 $G\textit{-Principal}$ を次のように定める。
+\begin{enumerate}
+\item $G\textit{-Principal}$ の対象は三つ組 $(U, b, X)$ である。ここで
+\begin{enumerate}
+\item $U$ は $(\Sch/S)_{fppf}$ の対象である。
+\item $b : U \to B$ は $S$ 上の射である。
+\item $X$ は $U$ 上の主等質 $G_U$-空間である。ここで
+$G_U = U \times_{b, B} G$ とする。
+\end{enumerate}
+『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-principal-homogeneous-space} を参照せよ。
+\item 射 $(U, b, X) \to (U', b', X')$ は組 $(f, g)$ で与えられる。
+ここで $f : U \to U'$ は $B$ 上のスキームの射であり、
+$g : X \to U \times_{f, U'} X'$ は主等質 $G_U$-空間の同型である。
+\end{enumerate}
+これにより $G\textit{-Principal}$ は圏となり、
+$$
+p : G\textit{-Principal} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, b, X) \longmapsto U
+$$
+は関手となる。$U$ 上の $G\textit{-Principal}$ のファイバー圏は、
+$b : U \to B$ 全体にわたる主等質 $U \times_{b, B} G$-空間の圏の
+非交和であり、したがってグルーポイドである。
+
+\medskip\noindent
+特別な場合 $S = B$ には、対象は単に、$U$ が $S$ 上のスキームで、$X$ が
+$U$ 上の主等質 $G_U$-空間であるような組 $(U, X)$ となる。
+さらに、射はカルテジアン図式
+$$
+\xymatrix{
+X \ar[d] \ar[r]_g & X' \ar[d] \\
+U \ar[r]^f & U'
+}
+$$
+で、$g$ が $G$-同変であるものにほかならない。
+
+\begin{remark}
+\label{examples-stacks-remark-principal-stack-in-groupoids}
+『スタック』の注 \ref{stacks-remark-stack-make-small} と同様の置換を除けば、関手
+$$
+p : G\textit{-Principal} \longrightarrow (\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定めると予想する。
+これには、次が与えられたときの主張を示せば十分である。
+\begin{enumerate}
+\item $(\Sch/S)_{fppf}$ の被覆 $\{U_i \to U\}_{i \in I}$、
+\item $U$ 上の群代数空間 $H$、
+\item 各 $i$ に対して $U_i$ 上の主等質 $H_{U_i}$-空間 $X_i$、
+\item コサイクル条件を満たす $H$-同変同型
+$\varphi_{ij} : X_{i, U_i \times_U U_j} \to X_{j, U_i \times_U U_j}$
+\end{enumerate}
+このとき、$(X_i, \varphi_{ij})$ を復元する $U$ 上の主等質 $H$-空間 $X$ が
+存在する。『ブートストラップ』の補題
+\ref{bootstrap-lemma-descent-torsor} の証明方法により、これは集合論的な問題に
+帰着する。したがって、集合論的な問題を無視する読者には結果が真であることが
+「分かる」であろう。
+\url{https://math.columbia.edu/~dejong/wordpress/?p=591}
+には、この問題への取り組み方についての提案がある。
+\end{remark}
+
+
+
+\subsection{主等質空間の変種}
+\label{examples-stacks-subsection-variant-principal-homogeneous-spaces}
+
+\noindent
+$S$ をスキームとし、$B = S$ とする。$G$ を $B = S$ 上の群スキームとする。
+この状況で充満部分圏
+$G\textit{-Principal-Schemes} \subset G\textit{-Principal}$
+を定める。その対象は、$U$ が $(\Sch/S)_{fppf}$ の対象で、$X \to U$ が
+表現可能、すなわちスキームであるような $U$ 上の主等質 $G$-空間である
+組 $(U, X)$ とする。
+
+\medskip\noindent
+一般には、$G\textit{-Principal-Schemes}$ は $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックではない。実際、スキームでない主等質空間が
+一般に存在するため、対象に対する降下は一般には満たされない。
+
+
+
+\subsection{fppf 位相におけるトーサー}
+\label{examples-stacks-subsection-fppf-torsors}
+
+\noindent
+$B$ を $S$ 上の代数空間とし、$G$ を $B$ 上の群代数空間とする。
+圏 $G\textit{-Torsors}$ を次のように定める。
+\begin{enumerate}
+\item $G\textit{-Torsors}$ の対象は三つ組 $(U, b, X)$ である。ここで
+\begin{enumerate}
+\item $U$ は $(\Sch/S)_{fppf}$ の対象である。
+\item $b : U \to B$ は射である。
+\item $X$ は $U$ 上の fppf $G_U$-トーサーである。ここで
+$G_U = U \times_{b, B} G$ とする。
+\end{enumerate}
+『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-principal-homogeneous-space} を参照せよ。
+\item 射 $(U, b, X) \to (U', b', X')$ は組 $(f, g)$ で与えられる。
+ここで $f : U \to U'$ は $B$ 上のスキームの射であり、
+$g : X \to U \times_{f, U'} X'$ は $G_U$-トーサーの同型である。
+\end{enumerate}
+これにより $G\textit{-Torsors}$ は圏となり、
+$$
+p : G\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, a, X) \longmapsto U
+$$
+は関手となる。$U$ 上の $G\textit{-Torsors}$ のファイバー圏は、
+$b : U \to B$ 全体にわたる fppf $U \times_{b, B} G$-トーサーの圏の
+非交和であり、したがってグルーポイドである。
+
+\medskip\noindent
+特別な場合 $S = B$ には、対象は単に、$U$ が $S$ 上のスキームで、$X$ が
+$U$ 上の fppf $G_U$-トーサーであるような組 $(U, X)$ となる。
+さらに、射はカルテジアン図式
+$$
+\xymatrix{
+X \ar[d] \ar[r]_g & X' \ar[d] \\
+U \ar[r]^f & U'
+}
+$$
+で、$g$ が $G$-同変であるものにほかならない。
+
+\begin{lemma}
+\label{examples-stacks-lemma-torsors-stack-in-groupoids}
+『スタック』の注 \ref{stacks-remark-stack-make-small} と同様の置換を除けば、関手
+$$
+p : G\textit{-Torsors} \longrightarrow (\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定める。
+\end{lemma}
+
+\begin{proof}
+証明で最も難しいのは対象に対する降下を示すことであり、これは
+『ブートストラップ』の補題 \ref{bootstrap-lemma-descent-torsor} である。
+『スタック』の定義 \ref{stacks-definition-stack-in-groupoids} の
+公理 (1) と (2) の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-compare-torsors}
+$B$ を $S$ 上の代数空間とし、$G$ を $B$ 上の群代数空間とする。
+$(\Sch/S)_{fppf}$ 上の層とみなした代数空間 $G$、それぞれ $B$ を
+$\mathcal{G}$、それぞれ $\mathcal{B}$ と書く。関手
+$$
+G\textit{-Torsors} \longrightarrow \mathcal{G}/\mathcal{B}\textit{-Torsors}
+$$
+は三つ組 $(U, b, X)$ に三つ組 $(U, b, \mathcal{X})$ を対応させる。
+ここで $\mathcal{X}$ は $X$ を層とみなしたものである。この関手は
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの圏同値である。
+\end{lemma}
+
+\begin{proof}
+これを示すため、『スタック』の補題
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff} を用いる。
+$S$ 上の代数空間の圏は $(\Sch/S)_{fppf}$ 上の層の圏の充満部分圏なので、
+この関手は充満忠実である。さらに、両辺のすべての対象は局所自明な
+トーサーだから、上で引用した補題の条件 (2) が成り立つ。
+したがって関手は圏同値である。
+\end{proof}
+
+
+
+\subsection{fppf 位相のトーサーの変種}
+\label{examples-stacks-subsection-variant-fppf-torsors}
+
+\noindent
+$S$ をスキームとし、$B = S$ とする。$G$ を $B = S$ 上の群スキームとする。
+この状況で充満部分圏
+$G\textit{-Torsors-Schemes} \subset G\textit{-Torsors}$
+を定める。その対象は、$U$ が $(\Sch/S)_{fppf}$ の対象で、$X \to U$ が
+表現可能、すなわちスキームであるような $U$ 上の fppf $G$-トーサーである
+組 $(U, X)$ とする。
+
+\medskip\noindent
+一般には、$G\textit{-Torsors-Schemes}$ は $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックではない。実際、スキームでない fppf $G$-トーサーが
+一般に存在するため、対象に対する降下は一般には満たされない。
+
+
+
+
+
+
+\section{群作用による商}
+\label{examples-stacks-section-group-quotient-stacks}
+
+\noindent
+ここまでで十分な記法を導入したので、節 \ref{examples-stacks-section-quotient-stacks} の
+スタック $[X/G]$ がどのようなものかを、より詳しく書き下せる。
+
+\begin{situation}
+\label{examples-stacks-situation-quotient-stack}
+以下を仮定する。
+\begin{enumerate}
+\item $S$ は $\Sch_{fppf}$ に含まれるスキームである。
+\item $B$ は $S$ 上の代数空間である。
+\item $(G, m)$ は $B$ 上の群代数空間である。
+\item $\pi : X \to B$ は $B$ 上の代数空間である。
+\item $a : G \times_B X \to X$ は $B$ 上の $X$ への $G$ の作用である。
+\end{enumerate}
+\end{situation}
+
+\noindent
+この状況で圏 $[[X/G]]$\footnote{二重括弧を用いる記法 $[[X/G]]$ は、
+この圏を先に導入したスタック $[X/G]$ と区別するためのものである。
+命題 \ref{examples-stacks-proposition-equal-quotient-stacks} で、両者が標準的に圏同値であることを
+示す。その後は、どちらを表す場合にも記法 $[X/G]$ を用いる。} を
+次のように構成する。
+\begin{enumerate}
+\item $[[X/G]]$ の対象は四つ組 $(U, b, P, \varphi : P \to X)$ である。
+ここで
+\begin{enumerate}
+\item $U$ は $(\Sch/S)_{fppf}$ の対象である。
+\item $b : U \to B$ は $S$ 上の射である。
+\item $P$ は $U$ 上の fppf $G_U$-トーサーである。ここで
+$G_U = U \times_{b, B} G$ とする。
+\item $\varphi : P \to X$ は可換図式
+$$
+\xymatrix{
+P \ar[d] \ar[r]_{\varphi} & X \ar[d] \\
+U \ar[r]^b & B
+}
+$$
+に入る $G$-同変射である。
+\end{enumerate}
+\item $[[X/G]]$ の射は組
+$(f, g) : (U, b, P, \varphi) \to (U', b', P', \varphi')$
+である。ここで $f : U \to U'$ は $B$ 上のスキームの射であり、
+$g : P \to P'$ は $f$ 上の $G$-同変射で、同型
+$P \cong U \times_{f, U'} P'$ を誘導し、かつ
+$\varphi = \varphi' \circ g$ を満たす。言い換えると、$(f, g)$ は可換図式
+$$
+\xymatrix{
+P \ar[d] \ar[rrrd]_\varphi \ar[r]^g & P' \ar[d] \ar[rrd]^{\varphi'} \\
+U \ar[rrrd]_b \ar[r]^f & U' \ar[rrd]^{b'} & & X \ar[d] \\
+& & & B
+}
+$$
+に入る。
+\end{enumerate}
+これにより $[[X/G]]$ は圏となり、
+$$
+p : [[X/G]] \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, b, P, \varphi) \longmapsto U
+$$
+は関手となる。$U$ 上の $[[X/G]]$ のファイバー圏は、
+$b \in \Mor_S(U, B)$ 全体にわたる、$X$ への $G$-同変射を備えた fppf
+$U \times_{b, B} G$-トーサー $P$ の圏の非交和である。
+したがって $[[X/G]]$ のファイバー圏はグルーポイドである。
+
+\medskip\noindent
+関手
+$$
+[[X/G]] \longrightarrow G\textit{-Torsors},
+\quad
+(U, b, P, \varphi) \longmapsto (U, b, P)
+$$
+は $(\Sch/S)_{fppf}$ 上の圏の $1$-射であることに注意する。
+
+\begin{lemma}
+\label{examples-stacks-lemma-group-quotient-stack-in-groupoids}
+『スタック』の注 \ref{stacks-remark-stack-make-small} と同様の置換を除けば、関手
+$$
+p : [[X/G]] \longrightarrow (\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定める。
+\end{lemma}
+
+\begin{proof}
+証明で最も難しいのは対象に対する降下を示すことである。
+$\{U_i \to U\}_{i \in I}$ を $(\Sch/S)_{fppf}$ の被覆とする。
+$\xi_i = (U_i, b_i, P_i, \varphi_i)$ を $U_i$ 上の $[[X/G]]$ の対象とし、
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$ を降下データとする。
+特に、上の関手 $[[X/G]] \to G\textit{-Torsors}$ を適用すると、
+グルーポイドのスタック $G\textit{-Torsors}$ における三つ組
+$(U_i, b_i, P_i)$ の降下データを得る。補題
+\ref{examples-stacks-lemma-torsors-stack-in-groupoids} で、$G\textit{-Torsors}$ が
+グルーポイドのスタックであることを見た。したがって、ある射
+$b : U \to B$ と $U$ 上の fppf $G_U = U \times_{b, B} G$-トーサー $P$ に
+対して、$b_i = b|_{U_i}$ および $P_i = U_i \times_U P$ と仮定してよい。
+射 $\varphi_i$ は制限 $U_i \times_U P$ 上の標準的な降下データと整合するので、
+射 $\varphi : P \to X$ を定める（たとえば『サイト』の補題
+\ref{sites-lemma-mapping-property-glue}、または『代数空間上の降下』の補題
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms} を用いて
+$\varphi$ を得られる）。これで対象に対する降下が示された。
+『スタック』の定義 \ref{stacks-definition-stack-in-groupoids} の
+公理 (1) と (2) の証明は省略する。
+\end{proof}
+
+\begin{proposition}
+\label{examples-stacks-proposition-equal-quotient-stacks}
+状況 \ref{examples-stacks-situation-quotient-stack} において、標準的な圏同値
+$$
+[X/G] \longrightarrow [[X/G]]
+$$
+が存在する。これは $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの圏同値である。
+\end{proposition}
+
+\begin{proof}
+すべての定義がまさに正しい仕方で整合することを確かめるため、詳しく記す。
+$[X/G]$ は、代数空間のグルーポイド
+$(X, G \times_B X, s, t, c)$ に随伴する商スタックであることを思い出そう（『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-quotient-stack} を参照）。
+すなわち $[X/G]$ は、関手
+$$
+(\Sch/S)_{fppf} \longrightarrow \textit{Groupoids},
+\quad
+U \longmapsto (X(U), G(U) \times_{B(U)} X(U), s, t, c)
+$$
+に随伴するグルーポイドをファイバーとする圏 $[X/_{\!p}G]$ のスタック化である。
+ここで $s(g, x) = x$、$t(g, x) = a(g, x)$、
+$c((g, x), (g', x')) = (m(g, g'), x')$ とする。
+『圏』の例 \ref{categories-example-functor-groupoids} の構成により、
+$[X/_{\!p}G]$ の対象は $x \in X(U)$ を伴う組 $(U, x)$ であり、
+$[X/_{\!p}G]$ の射 $(f, g) : (U, x) \to (U', x')$ は、
+スキームの射 $f : U \to U'$ と、$a(g, x) = x' \circ f$ を満たす元
+$g \in G(U)$ によって与えられる。
+したがって、グルーポイドのスタックの $1$-射
+$$
+F_p : [X/_{\!p}G] \longrightarrow [[X/G]]
+$$
+を次の規則で定義できる。対象に対しては
+$$
+F_p(U, x) =
+(U, \pi \circ x, G \times_{B, \pi \circ x} U, a \circ (\text{id}_G \times x))
+$$
+と置く。これは図式
+$$
+\xymatrix{
+G \times_{B, \pi \circ x} U \ar[d] \ar[r]_{\text{id}_G \times x} &
+G \times_{B, \pi} X \ar[r]_-a &
+X \ar[d]^\pi \\
+U \ar[rr]^{\pi \circ x} & & B
+}
+$$
+が可換であり、ファイバー積をそれぞれ $U$ 上、$X$ 上の自明な
+$G$-トーサーとみなすと、二つの水平射が $G$-同変だからである。
+射 $(f, g) : (U, x) \to (U', x')$ に対しては
+$F_p(f, g) = (f, R_{g^{-1}})$ と置く。ここで $R_{g^{-1}}$ は
+$g$ の逆元による右移動を表す。より正確には、射
+$F_p(f, g) : F_p(U, x) \to F_p(U', x')$ はカルテジアン図式
+$$
+\xymatrix{
+G \times_{B, \pi \circ x} U \ar[d] \ar[r]_{R_{g^{-1}}} &
+G \times_{B, \pi \circ x'} U' \ar[d] \\
+U \ar[r]^f & U'
+}
+$$
+で与えられ、$T$-値点上の $R_{g^{-1}}$ は
+$$
+R_{g^{-1}}(g', u) = (m(g', i(g(u))), f(u))
+$$
+で与えられる。この構成が正しいことを見るには
+$$
+a \circ (\text{id}_G \times x)
+=
+a \circ (\text{id}_G \times x') \circ R_{g^{-1}}
+$$
+を確かめればよい。実際、右辺を $T$-値点 $(g', u)$ に適用すると、
+求める等式
+\begin{align*}
+a((\text{id}_G \times x')(m(g', i(g(u))), f(u)))
+& =
+a(m(g', i(g(u))), x'(f(u))) \\
+& =
+a(g', a(i(g(u)), x'(f(u)))) \\
+& =
+a(g', x(u))
+\end{align*}
+を得る。ここで $a(g, x) = x' \circ f$、したがって
+$a(i(g), x' \circ f) = x$ を用いた。
+
+\medskip\noindent
+『スタック』の補題 \ref{stacks-lemma-stackify-groupoids-universal-property} における
+スタック化の普遍性により、上の $1$-射 $F_p$ の標準的な延長
+$F : [X/G] \to [[X/G]]$ を得る。まず $F$ が充満忠実であることを示す。
+始域と終域はいずれもグルーポイドのスタックなので、これには
+$\mathit{Isom}$-層が $F$ によって同一視されることを示せば十分である。
+スキーム $U$ と、$U$ 上の $[X/G]$ の対象 $\xi, \xi'$ を取る。
+$$
+F :
+\mathit{Isom}_{[X/G]}(\xi, \xi')
+\longrightarrow
+\mathit{Isom}_{[[X/G]]}(F(\xi), F(\xi'))
+$$
+が層の同型であることを示したい。これは $U$ 上局所的に確かめれば十分なので、
+$\xi, \xi'$ は $U$ 上の $[X/_{\!p}G]$ の対象
+$(U, x)$、$(U, x')$ から来ると仮定してよい。このことはスタック化の構成から
+直ちに従い、『空間のグルーポイド』の節
+\ref{spaces-groupoids-section-explicit-quotient-stacks} にも詳しく記されている。
+上で与えた $[X/_{\!p}G]$ の射の記述を直接用いるか、
+『空間のグルーポイド』の補題
+\ref{spaces-groupoids-lemma-quotient-stack-morphisms} を用いると、この場合
+$$
+\mathit{Isom}_{[X/G]}(\xi, \xi') =
+U \times_{(x, x'), X \times_S X, (s, t)} (G \times_B X)
+$$
+となる。このファイバー積の $T$-値点は、$u \in U(T)$、$g \in G(T)$ であって
+$a(g, x \circ u) = x' \circ u$ を満たす組 $(u, g)$ に対応する。
+（これは $\pi \circ x \circ u = \pi \circ x' \circ u$ を含意することに注意せよ。）
+一方、$\mathit{Isom}_{[[X/G]]}(F(\xi), F(\xi'))$ の $T$-値点は、定義により、
+$\pi \circ x \circ u = \pi \circ x' \circ u : T \to B$ を満たす射
+$u : T \to U$ と、自明な $G_T$-トーサーの同型
+$$
+R :
+G \times_{B, \pi \circ x \circ u} T
+\longrightarrow
+G \times_{B, \pi \circ x' \circ u} T
+$$
+であって、与えられた $X$ への射と両立するものに対応する。
+トーサーは自明なので、ある $g \in G(T)$ に対して
+$R = R_{g^{-1}}$（右乗法）である。
+射 $a \circ (1_G, x \circ u), a \circ (1_G, x' \circ u) : G \times_B T \to X$
+との両立性は、条件 $a(g, x \circ u) = x' \circ u$ と同値である。
+したがって、求める $\mathit{Isom}$-層の等式を得る。
+
+\medskip\noindent
+$F$ が充満忠実であることが分かったので、『スタック』の補題
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff} を適用できる。
+したがって $F$ が圏同値であることを示すには、$[[X/G]]$ の対象が fppf 局所的に
+$F$ の本質的像に入ることを示せば十分である。これは fppf トーサーが
+fppf 局所的に自明であることから明らかであり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{examples-stacks-lemma-classifying-stacks}
+\begin{slogan}
+群スキームまたは群代数空間の分類スタック。
+\end{slogan}
+$S$ をスキーム、$B$ を $S$ 上の代数空間、$G$ を $B$ 上の群代数空間とする。
+このとき、グルーポイドのスタック
+$$
+[B/G],\quad
+[[B/G]],\quad
+G\textit{-Torsors},\quad
+\mathcal{G}/\mathcal{B}\textit{-Torsors}
+$$
+はすべて標準的に圏同値である。
+$G \to B$ が平坦かつ有限表示で局所的ならば、これらはさらに
+$G\textit{-Principal}$ とも圏同値である。
+\end{lemma}
+
+\begin{proof}
+圏同値
+$G\textit{-Torsors} \to \mathcal{G}/\mathcal{B}\textit{-Torsors}$
+は補題 \ref{examples-stacks-lemma-compare-torsors} で与えられている。
+圏同値 $[B/G] \to [[B/G]]$ は命題
+\ref{examples-stacks-proposition-equal-quotient-stacks} で与えられている。
+節 \ref{examples-stacks-section-group-quotient-stacks} で与えた $[[B/G]]$ の定義を展開すると、
+$[[B//G]] = G\textit{-Torsors}$ であることが分かる。
+
+\medskip\noindent
+最後に、$G \to B$ が平坦かつ有限表示で局所的であると仮定する。
+自然な関手 $G\textit{-Torsors} \to G\textit{-Principal}$ が圏同値であることを示すには、
+$B$ 上のスキーム $U$ に対し、主等質 $G_U$-空間 $X \to U$ が
+fppf 局所的に自明であることを示せば十分である。
+主等質空間の定義（『空間のグルーポイド』の定義
+\ref{spaces-groupoids-definition-principal-homogeneous-space}）により、
+$U_i$ 上の代数空間として
+$U_i \times_U X \cong G \times_B U_i$ となる fpqc 被覆
+$\{U_i \to U\}$ が存在する。これは $X \to U$ が全射、平坦、かつ有限表示で局所的であることを含意する（『代数空間上の降下』の補題
+\ref{spaces-descent-lemma-descending-property-surjective},
+\ref{spaces-descent-lemma-descending-property-flat}, および
+\ref{spaces-descent-lemma-descending-property-locally-finite-presentation} を参照）。
+スキーム $W$ と全射エタール射 $W \to X$ を選ぶ。
+すると今述べたことから、$\{W \to U\}$ は fppf 被覆であり、
+$X_W \to W$ は切断を持つ。したがって $X$ は fppf $G_U$-トーサーである。
+\end{proof}
+
+\begin{remark}
+\label{examples-stacks-remark-X-mod-G-group}
+$S$ をスキーム、$G$ を抽象群、$X$ を $S$ 上の代数空間とする。
+$G \to \text{Aut}_S(X)$ を群準同型とする。
+この設定では、上と同様に $[[X/G]]$ を次のように定義できる。
+\begin{enumerate}
+\item $[[X/G]]$ の対象は三つ組 $(U, P, \varphi : P \to X)$ からなり、ここで
+\begin{enumerate}
+\item $U$ は $(\Sch/S)_{fppf}$ の対象である。
+\item $P$ は $(\Sch/U)_{fppf}$ 上の層であり、$G$ の作用を備え、
+その作用により値 $G$ の定数層の下のトーサーとなる。
+\item $\varphi : P \to X$ は層の $G$-同変写像である。
+\end{enumerate}
+\item 射
+$(f, g) : (U, P, \varphi) \to (U', P', \varphi')$
+は、スキームの射 $f : T \to T'$ と、$\varphi = \varphi' \circ g$ を満たす
+$G$-同変同型 $g : P \to f^{-1}P'$ によって与えられる。
+\end{enumerate}
+上とまったく同じ仕方で関手
+$$
+[[X/G]] \longrightarrow (\Sch/S)_{fppf}
+$$
+を得て、これは $[[X/G]]$ を $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックにする。
+定数層 $\underline{G}$ は（$G$ の濃度が大きすぎなければ）
+$(\Sch/S)_{fppf}$ 上で $G_S$ によって表現可能であり、
+この版の $[[X/G]]$ は上で導入したスタック $[[X/G_S]]$ と圏同値である。
+\end{remark}
+
+
+
+
+
+
+\section{Picard スタック}
+\label{examples-stacks-section-picard-stack}
+
+\noindent
+この節では Picard スタックを完全に一般的な形で導入する。
+Quot と Hilb の章では、適切な仮定の下でこれが代数スタックであることを示す（『Quot』の節
+\ref{quot-section-picard-stack} を参照）。
+
+\medskip\noindent
+$S$ をスキームとし、$\pi : X \to B$ を $S$ 上の代数空間の射とする。
+圏 $\Picardstack_{X/B}$ を次のように定義する。
+\begin{enumerate}
+\item 対象は三つ組 $(U, b, \mathcal{L})$ であり、ここで
+\begin{enumerate}
+\item $U$ は $(\Sch/S)_{fppf}$ の対象である。
+\item $b : U \to B$ は $S$ 上の射である。
+\item $\mathcal{L}$ は基底変換 $X_U = U \times_{b, B} X$ 上の可逆層である。
+\end{enumerate}
+\item 射 $(f, g) : (U, b, \mathcal{L}) \to (U', b', \mathcal{L}')$ は、
+$B$ 上のスキームの射 $f : U \to U'$ と同型
+$g : f^*\mathcal{L}' \to \mathcal{L}$ によって与えられる。
+\end{enumerate}
+射
+$(f, g) : (U, b, \mathcal{L}) \to (U', b', \mathcal{L}')$
+と射
+$(f', g') : (U', b', \mathcal{L}') \to (U'', b'', \mathcal{L}'')$
+の合成は $(f' \circ f, g \circ f^*(g'))$ で与えられる。
+こうして圏 $\Picardstack_{X/B}$ を得て、
+$$
+p : \Picardstack_{X/B} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(U, b, \mathcal{L}) \longmapsto U
+$$
+は関手である。$U$ 上の $\Picardstack_{X/B}$ のファイバー圏は、
+$b \in \Mor_S(U, B)$ 全体にわたる、$X_U = U \times_{b, B} X$ 上の
+可逆層の圏の非交和であることに注意せよ。したがってファイバー圏はグルーポイドである。
+
+\begin{lemma}
+\label{examples-stacks-lemma-picard-stack}
+『スタック』の注 \ref{stacks-remark-stack-make-small} と同様の置換を除けば、関手
+$$
+\Picardstack_{X/B} \longrightarrow (\Sch/S)_{fppf}
+$$
+は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定める。
+\end{lemma}
+
+\begin{proof}
+通常どおり、最も難しいのは対象に対する降下を示すことである。
+$\{U_i \to U\}$ を $(\Sch/S)_{fppf}$ の被覆とする。
+$\xi_i = (U_i, b_i, \mathcal{L}_i)$ を $U_i$ 上の
+$\Picardstack_{X/B}$ の対象とし、
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$
+を降下データとする。特に、射 $b_i$ はある射 $b : U \to B$ の制限である。
+$X_U = U \times_{b, B} X$ および
+$X_i = U_i \times_{b_i, B} X =
+U_i \times_U U \times_{b, B} X = U_i \times_U X_U$ と書く。
+$\mathcal{L}_i$ は可逆 $\mathcal{O}_{X_i}$-加群である。
+$\{X_i \to X_U\}$ も fppf 被覆をなすことに注意せよ。
+さらに、降下データ $\varphi_{ij}$ は、fppf 被覆
+$\{X_i \to X_U\}$ に関する可逆層 $\mathcal{L}_i$ 上の降下データに移る。
+したがって『代数空間上の降下』の命題
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent} により、
+$X_i$ 上で $\mathcal{L}_i$ と降下データを復元する、$X_U$ 上の一意な可逆層
+$\mathcal{L}$ を得る。ゆえに三つ組 $(U, b, \mathcal{L})$ は、求めていた
+$U$ 上の $\Picardstack_{X/B}$ の対象である。詳細は省略する。
+\end{proof}
+
+
+
+
+
+\section{慣性スタックの例}
+\label{examples-stacks-section-examples-inertia}
+
+\noindent
+慣性スタックの例をいくつか挙げる。
+
+\begin{example}
+\label{examples-stacks-example-inertia-stack-of-X-mod-G}
+$S$ をスキーム、$G$ を可換群、$X \to S$ を $S$ 上のスキームとする。
+$a : G \times X \to X$ を $X$ への $G$ の作用とする。
+$g \in G$ に対し、対応する自己同型を $g : X \to X$ と表す。
+この場合、$[X/G]$ の慣性スタック（注 \ref{examples-stacks-remark-X-mod-G-group} を参照）は
+$$
+I_{[X/G]} = \coprod\nolimits_{g\in G} [X^g/G],
+$$
+で与えられる。ここで $G$ の元 $g$ に対し、記号 $X^g$ はスキーム
+$X^g = \{x \in X \mid g(x) = x\}$ を表す。正確には、$X^g$ はファイバー積
+$$
+X^g =  X \times_{(1, 1), X \times_S X, (g, 1)} X.
+$$
+である。実際、任意の $S$-スキーム $T$ に対し、$[X/G]$ の慣性スタックの
+$T$-点は三つ組 $(P/T, \phi, \alpha)$ からなる。ここで $P \to T$ は
+fppf $G$-トーサー、$\phi : P \to X$ は $G$-同変射、$\alpha$ は
+$\phi \circ \alpha = \phi$ を満たす $T$ 上の $P$ の自己同型である。
+$G$ は\emph{可換}群の層なので、$T$ 上 fppf 局所的には、$\alpha$ は
+$G$ のある元 $g$ による乗法で与えられる。
+条件 $\phi \circ \alpha = \phi$ は、$\phi$ が $X^g$ の $X$ への包含を通じて
+分解すること、すなわち $\phi$ はある射 $P \to X^g$ とその包含との合成であることを意味する。
+上の議論により、$T$-点上でこのように与えられるファイバー圏の射
+$I_{[X/G]} \to \coprod_{g\in G} [X^g/G]$ を定義できる。
+これが圏同値であることの証明は省略する。
+\end{example}
+
+\begin{example}
+\label{examples-stacks-example-inertia-stack-of-picard}
+$f : X \to S$ をスキームの射とする。任意の $T \to S$ に対し、
+基底変換 $f_T : X_T \to T$ が、写像
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ は同型であるという性質を持つと仮定する。
+（これは $f$ が{\it 次元 $0$ でコホモロジー的に平坦}であること
+（将来の参照をここに挿入）を含意するが、それより強い。）
+Picard スタック $\Picardstack_{X/S}$ を考える（節
+\ref{examples-stacks-section-picard-stack} を参照）。その慣性スタックの $S$-スキーム $T$ 上の点は、
+$X_T$ 上の直線束 $\mathcal{L}$ と、その直線束の自己同型 $\alpha$ の組
+$(\mathcal{L}, \alpha)$ からなる。すなわち、仮定により $\alpha$ を元
+$H^0(X_T, \mathcal{O}_{X_T})^\times = H^0(T, \mathcal{O}_T^*)$
+とみなせる。$H^0(T, \mathcal{O}_T^*) = \mathbf{G}_{m, S}(T)$ であることに注意せよ
+（『グルーポイド』の例 \ref{groupoids-example-multiplicative-group} を参照）。
+したがって $\Picardstack_{X/S}$ の慣性スタックは
+$$
+I_{\Picardstack_{X/S}} = \mathbf{G}_{m, S} \times_S \Picardstack_{X/S}.
+$$
+すなわち $(\Sch/S)_{fppf}$ 上のスタックとしてこの形である。
+\end{example}
+
+
+
+
+
+
+\section{有限 Hilbert スタック}
+\label{examples-stacks-section-hilbert-d-stack}
+
+\noindent
+ここでは、厳密に必要と思われるよりもやや一般的に定式化する。
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $1$-射
+$$
+F : \mathcal{X} \longrightarrow \mathcal{Y}
+$$
+を固定する。各整数 $d \geq 1$ に対して、圏
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ を次のように定義する。
+\begin{enumerate}
+\item 対象は $(U, Z, y, x, \alpha)$ である。ここで $U, Z$ は
+$(\Sch/S)_{fppf}$ の対象、$Z$ は $U$ 上次数 $d$ の有限局所自由であり、
+$y \in \Ob(\mathcal{Y}_U)$、$x \in \Ob(\mathcal{X}_Z)$、
+$\alpha : y|_Z \to F(x)$ は同型である\footnote{
+これは、このデータから $2$-米田の補題（『圏』の補題
+\ref{categories-lemma-yoneda-2category}）を介して、
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの $2$-可換図式
+$$
+\xymatrix{
+(\Sch/Z)_{fppf} \ar[r]_-x \ar[d] & \mathcal{X} \ar[d]^F \\
+(\Sch/U)_{fppf} \ar[r]^-y & \mathcal{Y}
+}
+$$
+が生じることを意味する。あるいは $\alpha$ を $2$-射
+$$
+\xymatrix{
+(\Sch/Z)_{fppf}
+\rrtwocell^{y \circ (Z \to U)}_{F \circ x}{\alpha} & &
+\mathcal{Y}.
+}
+$$
+として描いてもよい
+}.
+\item 射 $(U, Z, y, x, \alpha) \to (U', Z', y', x', \alpha')$ は、
+スキームの射 $f : U \to U'$、同型 $Z \to Z' \times_U U'$ を誘導する
+スキームの射 $g : Z \to Z'$、および可換図式
+$$
+\xymatrix{
+y|_Z \ar[rr]_\alpha \ar[d]_{b|_Z} & &
+F(x) \ar[d]^{F(a)} \\
+f^*y'|_Z \ar[rr]^{\alpha'} & &
+F(g^*x') \\
+}
+$$
+を誘導する同型 $b : y \to f^*y'$、$a : x \to g^*x'$ によって与えられる。
+\end{enumerate}
+定義から、標準的な忘却関手
+$$
+p :
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y})
+\longrightarrow
+(\Sch/S)_{fppf}
+$$
+が存在することは明らかである。これは五つ組 $(U, Z, y, x, \alpha)$ に
+スキーム $U$ を、射
+$(f, g, b, a) : (U, Z, y, x, \alpha) \to (U', Z', y', x', \alpha')$
+に射 $f : U \to U'$ を対応させる。
+
+\begin{lemma}
+\label{examples-stacks-lemma-hilbert-d-stack}
+上の関手 $p$ を備えた圏 $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ は、
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックを定める。
+\end{lemma}
+
+\begin{proof}
+通常どおり、最も難しいのは対象に対する降下を示すことである。
+$\{U_i \to U\}$ を $(\Sch/S)_{fppf}$ の被覆とする。
+$\xi_i = (U_i, Z_i, y_i, x_i, \alpha_i)$ を $U_i$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の対象とし、
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$
+を降下データとする。まず $\varphi_{ij}$ は降下データ
+$(Z_i/U_i, \varphi_{ij})$ を誘導し、これは『降下』の補題
+\ref{descent-lemma-affine} により有効である。
+『降下』の補題
+\ref{descent-lemma-descending-property-finite-locally-free} により、
+これから次数 $d$ の有限局所自由なスキーム $Z/U$ を得る。
+以下では $Z_i$ を $Z \times_U U_i$ と同一視する。
+次に、$\mathcal{Y}$ はグルーポイドのスタックなので、ファイバー圏
+$\mathcal{Y}_{U_i}$ の対象 $y_i$ は $\mathcal{Y}_U$ の対象 $y$ に降下する。
+同様に、$\mathcal{X}$ はグルーポイドのスタックなので、ファイバー圏
+$\mathcal{X}_{Z_i}$ の対象 $x_i$ は $\mathcal{X}_Z$ の対象 $x$ に降下する。
+最後に、与えられた同型
+$$
+\alpha_i :
+(y|_Z)_{Z_i} = y_i|_{Z_i}
+\longrightarrow
+F(x_i) = F(x|_{Z_i})
+$$
+は射 $\alpha : y|_Z \to F(x)$ に貼り合わさる。実際、$\mathcal{Y}$ はスタックであり、
+したがって $\mathit{Isom}_\mathcal{Y}(y|_Z, F(x))$ は層である。
+詳細は省略する。
+\end{proof}
+
+\begin{definition}
+\label{examples-stacks-definition-hilbert-d-stack}
+上で構成した $\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ を、
+{\it $\mathcal{Y}$ 上の $\mathcal{X}$ の次数 $d$ の有限 Hilbert スタック}と呼ぶ。
+$\mathcal{Y} = S$ のときは
+$\mathcal{H}_d(\mathcal{X}) = \mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ と書く。
+$\mathcal{X} = \mathcal{Y} = S$ のときは $\mathcal{H}_d$ と表す。
+\end{definition}
+
+\noindent
+上のような $F : \mathcal{X} \to \mathcal{Y}$ が与えられると、
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの自然な $1$-射
+\begin{equation}
+\label{examples-stacks-equation-diagram-hilbert-d-stack}
+\vcenter{
+\xymatrix{
+\mathcal{H}_d(\mathcal{X}) \ar[rd] &
+\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \ar[d] \ar[l] \ar[r] &
+\mathcal{Y} \\
+& \mathcal{H}_d
+}
+}
+\end{equation}
+が得られることに注意せよ。各矢印は「忘却関手」によって与えられる。
+
+\begin{lemma}
+\label{examples-stacks-lemma-faithful-hilbert}
+$1$-射
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \to \mathcal{H}_d(\mathcal{X})$
+は忠実である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y}) \to \mathcal{H}_d(\mathcal{X})$
+が忠実であることを確かめるには、ファイバー圏上で忠実であることを示せば十分である。
+$\xi = (U, Z, y, x, \alpha)$ と
+$\xi' = (U, Z', y', x', \alpha')$ を、スキーム $U$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ の二つの対象とする。
+$(g, b, a), (g', b', a') : \xi \to \xi'$ を、$U$ 上の
+$\mathcal{H}_d(\mathcal{X}/\mathcal{Y})$ のファイバー圏における二つの射とする。
+これらの射の $\mathcal{H}_d(\mathcal{X})$ における像が一致することと、
+$g = g'$ かつ $a = a'$ であることは同値である。このとき可換図式
+$$
+\xymatrix{
+y|_Z \ar[rr]_\alpha \ar[d]_{b|_Z, \ b'|_Z} & &
+F(x) \ar[d]^{F(a) = F(a')} \\
+y'|_Z \ar[rr]^-{\alpha'} & &
+F(g^*x') = F((g')^*x') \\
+}
+$$
+は $b|_Z = b'|_Z$ を含意する。$Z \to U$ は次数 $d$ の有限局所自由なので、
+$\{Z \to U\}$ は fppf 被覆であり、したがって $b = b'$ である。
+\end{proof}

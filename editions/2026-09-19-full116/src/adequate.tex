@@ -1,0 +1,2493 @@
+% Generated mechanically from frozen input inputs/p06/ja/adequate.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{45}
+\chapter{適切加群}
+
+
+
+\phantomsection
+\label{adequate-section-phantom}
+
+
+\section{序論}
+\label{adequate-section-introduction}
+
+\noindent
+任意のスキーム $X$ に対し、準連接加群の圏 $\QCoh(\mathcal{O}_X)$
+はアーベル圏であり、全ての $\mathcal{O}_X$-加群のアーベル圏の
+弱い Serre 部分圏である。代数空間 $X$ 上の準連接加群についても、
+$X$ の小さい \'etale サイト上の全ての $\mathcal{O}_X$-加群の圏の
+部分圏とみなせば同じことが成り立つ。さらに、準コンパクトかつ
+準分離な射 $f : X \to Y$ に対して、押し出し $f_*$ および高次直接像は
+準連接性を保つ。
+
+\medskip\noindent
+次に、$X$ をスキームとし、$\mathcal{O}$ を $X$ の大きいサイトの一つ、
+例えば大きい fppf サイト上の構造層とする。準連接 $\mathcal{O}$-加群の圏は
+アーベル圏である（実際、上述のスキーム $X$ 上の通常の準連接
+$\mathcal{O}_X$-加群の圏と同値である）が、$\textit{Mod}(\mathcal{O})$
+への埋め込みは完全ではない。例として、準連接加群の射
+$$
+\mathcal{O}_{\mathbf{A}^1_k}
+\longrightarrow
+\mathcal{O}_{\mathbf{A}^1_k}
+$$
+を考える。これは $\mathbf{A}^1_k = \Spec(k[x])$ 上で $x$ による乗法
+として与えられる。この射は準連接層のアーベル圏では単射である。
+一方、$\mathbf{A}^1_k$ の大きいサイト上の全ての $\mathcal{O}$-加群の
+アーベル圏では、$\Spec(k[x]/(x)) = \Spec(k)$ 上の切断で評価すれば
+分かるように、非自明な核をもつ。さらに、準コンパクトかつ準分離な射
+$f : X \to Y$ に対し、函手 $f_{big, *}$ は準連接性を保たない。
+
+\medskip\noindent
+本章では、準連接加群と密接に関係し、上記二つの問題を「修正」する
+適切加群と呼ぶ圏を導入する。別の解決策として、代数的スタック上の
+準連接加群を扱う際には、局所的に準連接で平坦基底変換性を満たす
+$\mathcal{O}$-加群を考える方法を後で実装する。
+Cohomology of 『スタック』の第 \ref{stacks-cohomology-section-loc-qcoh-flat-base-change} 節、
+Cohomology of 『スタック』の注意 \ref{stacks-cohomology-remark-bousfield-colocalization}、および
+Derived Categories of 『スタック』の第 \ref{stacks-perfect-section-derived} 節を参照されたい。
+
+
+
+
+
+
+\section{規約}
+\label{adequate-section-conventions}
+
+\noindent
+本章では
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$
+を固定し、『スキーム上の位相』の第 \ref{topologies-section-procedure} 節に従って大きい $\tau$-サイト
+$\Sch_\tau$ を一つ固定する。全てのスキームは $\Sch_\tau$ の対象とする。
+特に、スキーム $S$ に対してサイト
+$(\textit{Aff}/S)_\tau \subset (\Sch/S)_\tau$
+を得る。これらのサイト上の構造層 $\mathcal{O}$ は
+$\mathcal{O}(T) = \Gamma(T, \mathcal{O}_T)$ という規則で定義される。
+
+\medskip\noindent
+全ての環 $A$ は $\Spec(A)$ が $\Sch_\tau$ の対象（と同型）となるものとする。
+環 $A$ に対し、$\textit{Alg}_A$ を、対象が
+$B = \Gamma(U, \mathcal{O}_U)$ の形の $A$-代数 $B$（ただし $U$ は
+$\Sch_\tau$ のアフィン対象）であるような $A$-代数の圏とする。従って、
+アフィンスキーム $S = \Spec(A)$ に対し、函手
+$$
+(\textit{Aff}/S)_\tau \longrightarrow \textit{Alg}_A,
+\quad
+U \longmapsto \mathcal{O}(U)
+$$
+は同値である。
+
+
+
+
+
+\section{適切函手}
+\label{adequate-section-quasi-coherent}
+
+\noindent
+本節では、準連接層の直接像に密接に関係する話題を扱う。この内容の大部分は
+論文 \cite{Jaffe} から取ったものである。
+
+\begin{definition}
+\label{adequate-definition-module-valued-functor}
+環 $A$ に対し、{\it 加群値函手}とは、次の条件を満たす函手
+$F : \textit{Alg}_A \to \textit{Ab}$ である：
+\begin{enumerate}
+\item $\textit{Alg}_A$ の各対象 $B$ に対して、群
+$F(B)$ に $B$-加群の構造が与えられており、
+\item $\textit{Alg}_A$ の任意の射 $B \to B'$ に対し、写像
+$F(B) \to F(B')$ は $B$-線形である。
+\end{enumerate}
+{\it 加群値函手の射}とは、函手の変換 $\varphi : F \to G$ であって、
+全ての $B \in \Ob(\textit{Alg}_A)$ に対し $F(B) \to G(B)$ が
+$B$-線形となるものである。
+\end{definition}
+
+\noindent
+$S = \Spec(A)$ をアフィンスキームとする。
+$\textit{Alg}_A$ 上の加群値函手の圏は
+$\textit{PMod}((\textit{Aff}/S)_\tau, \mathcal{O})$
+という $\mathcal{O}$-加群の前層の圏と同値である。この同値は、加群値函手
+$F$ に対し、規則
+$\mathcal{F}(U) = F(\mathcal{O}(U))$
+で定義される前層 $\mathcal{F}$ を対応させることで与えられる。
+これは第 \ref{adequate-section-conventions} 節で与えた同値
+$(\textit{Aff}/S)_\tau \to \textit{Alg}_A$, $U \mapsto \mathcal{O}(U)$
+から明らかである。準逆は $F(B) = \mathcal{F}(\Spec(B))$ と置く。
+
+\medskip\noindent
+加群値函手の重要な特殊例は次のように得られる。
+$M$ を $A$-加群とする。このとき $\underline{M}$ を
+$B \mapsto M \otimes_A B$（明らかな $B$-加群構造をもつ）
+という加群値函手とする。$M \to N$ が $A$-加群の射ならば、
+加群値函手の射 $\underline{M} \to \underline{N}$ が付随する。
+逆に、加群値函手の任意の射 $\underline{M} \to \underline{N}$ は
+$A$-加群の射 $M \to N$ から生じる。これは $B = A$ で評価すれば
+分かる。つまり、$\text{Mod}_A$ は $\textit{Alg}_A$ 上の加群値函手の
+圏の充満部分圏である。
+
+\medskip\noindent
+$A$-加群の射 $\varphi : M \to N$ が与えられているとする。このとき
+$\Coker(\underline{M} \to \underline{N}) =
+\underline{Q}$ であり、ここで $Q = \Coker(M \to N)$ である。これは
+$\otimes$ が右完全だからである。しかし、核については一般にはそうならない。
+例えば $A$-加群の単射が基底変換後も単射とは限らない。このため次の定義を行う。
+
+\begin{definition}
+\label{adequate-definition-adequate-functor}
+環 $A$ に対し、$\textit{Alg}_A$ 上の加群値函手 $F$ が
+\begin{enumerate}
+\item {\it adequate} であるとは、ある $A$-加群の射 $M \to N$ が存在して
+$F$ が $\Ker(\underline{M} \to \underline{N})$ と同型であることをいう。
+\item {\it linearly adequate} であるとは、$F$ が
+$\underline{A^{\oplus n}} \to \underline{A^{\oplus m}}$ の核と同型であることをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$F$ が適切であることと、完全列
+$0 \to F \to \underline{M} \to \underline{N}$ が存在することは同値である。
+また、$F$ が線形適切であることと、完全列
+$0 \to F \to \underline{A^{\oplus n}} \to \underline{A^{\oplus m}}$
+が存在することも同値である。
+
+\medskip\noindent
+環 $A$ に対し、本節では $\textit{Alg}_A$ 上の適切函手の圏がアーベル圏であること
+（補題 \ref{adequate-lemma-cokernel-adequate} および
+\ref{adequate-lemma-kernel-adequate}）、生成元の集合をもつこと
+（補題 \ref{adequate-lemma-adequate-surjection-from-linear}）を示す。
+さらに、この圏が $\textit{Alg}_A$ 上の全ての加群値函手の圏の弱い Serre 部分圏であり
+（補題 \ref{adequate-lemma-extension-adequate}）、任意の余極限をもつこと
+（補題 \ref{adequate-lemma-colimit-adequate}）も見る。
+
+\begin{lemma}
+\label{adequate-lemma-adequate-finite-presentation}
+環 $A$ をとる。
+$F$ を $\textit{Alg}_A$ 上の適切函手とする。
+$B = \colim B_i$ が $A$-代数のフィルター付き余極限であるならば、
+$F(B) = \colim F(B_i)$ である。
+\end{lemma}
+
+\begin{proof}
+任意の $A$-加群 $M$ に対して
+$M \otimes_A B = \colim M \otimes_A B_i$ が成り立つ（
+『可換代数』の補題 \ref{algebra-lemma-tensor-products-commute-with-limits} 参照）
+こと、およびフィルター付き余極限が完全列と可換すること（
+『可換代数』の補題 \ref{algebra-lemma-directed-colimit-exact} 参照）による。
+\end{proof}
+
+\begin{remark}
+\label{adequate-remark-settheoretic}
+$\textit{Alg}_{fp, A}$ を、対象 $B$ が
+$B = A[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ の形の $A$-代数であり、
+射が $A$-代数の写像である圏とする。任意の $A$-代数 $B$ は有限表示
+$A$-代数のフィルター付き余極限、すなわち $\textit{Alg}_{fp, A}$ の対象の
+フィルター付き余極限である。補題 \ref{adequate-lemma-adequate-finite-presentation} により、任意の適切函手 $F$ は
+$\textit{Alg}_{fp, A}$ への制限によって決まる。したがって、いくつかの問題では
+$\textit{Alg}_{fp, A}$ 上の函手に制限できる。例えば、適切函手の圏は
+選んだ大きい $\tau$-サイトの選択に依存せず、
+第 \ref{adequate-section-conventions} 節で選んだサイトにも依存しない。
+\end{remark}
+
+\begin{lemma}
+\label{adequate-lemma-adequate-flat}
+環 $A$ をとる。
+$F$ を $\textit{Alg}_A$ 上の適切函手とする。
+$B \to B'$ が平坦ならば、$F(B) \otimes_B B' \to F(B')$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+完全列 $0 \to F \to \underline{M} \to \underline{N}$ を選ぶ。
+これにより図式
+$$
+\xymatrix{
+0 \ar[r] & F(B) \otimes_B B' \ar[r] \ar[d] &
+(M \otimes_A B)\otimes_B B' \ar[r] \ar[d] &
+(N \otimes_A B)\otimes_B B' \ar[d] \\
+0 \ar[r] & F(B') \ar[r] &
+M \otimes_A B' \ar[r] &
+N \otimes_A B'
+}
+$$
+を得る。行は完全である（上の行は $B \to B'$ が平坦であることによる）。
+右側二つの垂直矢印が同型なので、左の矢印も同型である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-adequate-surjection-from-linear}
+環 $A$ をとる。
+$F$ を $\textit{Alg}_A$ 上の適切函手とする。このとき、全射
+$L \to F$ が存在し、$L$ は線形適切函手の直和である。
+\end{lemma}
+
+\begin{proof}
+完全列 $0 \to F \to \underline{M} \to \underline{N}$ を選ぶ。
+ここで $\underline{M} \to \underline{N}$ は $\varphi : M \to N$ で与えられる。
+補題 \ref{adequate-lemma-adequate-finite-presentation} により、任意の有限表示
+$A$-代数 $B$ に対して $L(B) \to F(B)$ が全射となるような
+$L \to F$ を構成すれば十分である。従って、有限表示 $A$-代数 $B$ と
+$\xi \in F(B)$ が与えられたとき、$L$ が線形適切であり、
+$\xi$ が $L(B) \to F(B)$ の像に入るような $L \to F$ を構成すればよい。
+（同型を除けば、このような組 $(B, \xi)$ は集合をなす。）
+
+\medskip\noindent
+$\xi$ の $\underline{M}(B) = M \otimes_A B$ における像を
+$\sum_{i = 1, \ldots, n} m_i \otimes b_i$ と書く。
+$N \otimes_A B$ において $\sum \varphi(m_i) \otimes b_i = 0$ である。
+$N$ は有限表示 $A$-加群のフィルター付き余極限なので、有限表示
+$A$-加群 $N'$ と $A$-加群の可換図式
+$$
+\xymatrix{
+A^{\oplus n} \ar[r] \ar[d]_{m_1, \ldots, m_n} & N' \ar[d] \\
+M \ar[r] & N
+}
+$$
+を、$(b_1, \ldots, b_n)$ が $N' \otimes_A B$ で零に写るように選べる。
+$A^{\oplus l} \to A^{\oplus k} \to N' \to 0$ という表示を選ぶ。
+図式の $A^{\oplus n} \to N'$ の持ち上げ
+$A^{\oplus n} \to A^{\oplus k}$ を選ぶ。このとき、
+$(c_1, \ldots, c_l) \in B^{\oplus l}$ が存在して
+$(b_1, \ldots, b_n, c_1, \ldots, c_l)$ が
+$B^{\oplus n} \oplus B^{\oplus l} \to B^{\oplus k}$ によって
+$B^{\oplus k}$ の零元に写る。
+可換図式
+$$
+\xymatrix{
+A^{\oplus n} \oplus A^{\oplus l} \ar[r] \ar[d] & A^{\oplus k} \ar[d] \\
+M \ar[r] & N
+}
+$$
+を考える。左の垂直矢印は $A^{\oplus l}$ の直和因子上で零とする。
+すると、$L$ を $\underline{A^{\oplus n + l}}
+\to \underline{A^{\oplus k}}$ の核とすればよい。
+実際、$(b_1, \ldots, b_n, c_1, \ldots, c_l) \in L(B)$ は $\xi$ に写る。
+\end{proof}
+
+\noindent
+次数付き $A$-代数 $B = \bigoplus_{d \geq 0} B_d$ を考える。このとき、
+二つの $A$-代数写像 $p, a : B \to B[t, t^{-1}]$、すなわち
+$p : b \mapsto b$ と $a : b \mapsto t^{\deg(b)} b$ がある。ここで $b$ は
+斉次元である。$F$ が $\textit{Alg}_A$ 上の加群値函手ならば、次を定義する：
+\begin{equation}
+\label{adequate-equation-weight-k}
+F(B)^{(k)} = \{\xi \in F(B) \mid t^k F(p)(\xi) = F(a)(\xi)\}.
+\end{equation}
+平坦環拡大に関してよく振る舞う函手については、これにより直和分解が得られる。
+これは $\mathbf{G}_m$ の表現が完全可約であるという事実に相当する。
+
+\begin{lemma}
+\label{adequate-lemma-flat-functor-split}
+環 $A$ をとる。
+$F$ を $\textit{Alg}_A$ 上の加群値函手とする。
+$B \to B'$ が平坦なとき、写像
+$F(B) \otimes_B B' \to F(B')$ が同型であると仮定する。
+$B$ を次数付き $A$-代数とする。このとき
+\begin{enumerate}
+\item $F(B) = \bigoplus_{k \in \mathbf{Z}} F(B)^{(k)}$ であり、
+\item 写像 $B \to B_0 \to B$ が誘導する写像 $F(B) \to F(B)$ の像は
+$F(B)^{(0)}$ に含まれる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$x \in F(B)$ をとる。写像 $p : B \to B[t, t^{-1}]$ は自由なので、
+$$
+F(B[t, t^{-1}]) =
+\bigoplus\nolimits_{k \in \mathbf{Z}} F(p)(F(B)) \cdot t^k =
+\bigoplus\nolimits_{k \in \mathbf{Z}} F(B) \cdot t^k
+$$
+である。以下の証明では、表示のとおり $F(p)$ を省略する。
+ある $x_k \in F(B)$ により $F(a)(x) = \sum t^k x_k$ と書く。
+$\epsilon : B[t, t^{-1}] \to B$ を $B$-代数写像
+$t \mapsto 1$ とする。合成
+$\epsilon \circ p, \epsilon \circ a : B \to B[t, t^{-1}] \to B$ は
+恒等写像である。従って
+$$
+x = F(\epsilon)(F(a)(x)) = F(\epsilon)(\sum t^k x_k) = \sum x_k.
+$$
+を得る。一方、$x_k \in F(B)^{(k)}$ であると主張する。実際、可換図式
+$$
+\xymatrix{
+B \ar[r]_a \ar[d]_{a'} &
+B[t, t^{-1}] \ar[d]^f \\
+B[s, s^{-1}] \ar[r]^-g &
+B[t, s, t^{-1}, s^{-1}]
+}
+$$
+を考える。ここで $a'(b) = s^{\deg(b)}b$, $f(b) = b$, $f(t) = st$ および
+$g(b) = t^{\deg(b)}b$, $g(s) = s$ である。このとき
+$$
+F(g)(F(a'))(x) = F(g)(\sum s^k x_k) =
+\sum s^k F(a)(x_k)
+$$
+であり、他方の経路では
+$$
+F(f)(F(a))(x) = F(f)(\sum t^k x_k) = \sum (st)^k x_k.
+$$
+を得る。$B \to B[s, t, s^{-1}, t^{-1}]$ は自由なので、
+$F(B[t, s, t^{-1}, s^{-1}]) =
+\bigoplus_{k, l \in \mathbf{Z}} F(B) \cdot t^ks^l$ である。
+上の式の係数を比較すれば、望むとおり
+$F(a)(x_k) = t^k x_k$ を得る。
+
+\medskip\noindent
+最後に、$F(B_0) \to F(B)$ の像は $F(B)^{(0)}$ に含まれる。
+これは $B_0 \to B \xrightarrow{a} B[t, t^{-1}]$ が
+$B_0 \to B \xrightarrow{p} B[t, t^{-1}]$ に等しいからである。
+\end{proof}
+
+\noindent
+補題 \ref{adequate-lemma-flat-functor-split} の特別な場合として、
+$$
+\underline{M}(B)^{(k)} = M \otimes_A B_k
+$$
+であることに注意する。ここで $B_k$ は次数付き $A$-代数 $B$ の
+次数 $k$ の成分である。
+
+\begin{lemma}
+\label{adequate-lemma-lift-map}
+環 $A$ をとる。$\textit{Alg}_A$ 上の加群値函手の実線図式
+$$
+\xymatrix{
+0 \ar[r] &
+L \ar[d]_\varphi \ar[r] &
+\underline{A^{\oplus n}} \ar[r] \ar@{..>}[ld] &
+\underline{A^{\oplus m}} \\
+& \underline{M}
+}
+$$
+が与えられ、その行が完全であるとする。このとき、図式を可換にする
+点線矢印が存在する。
+\end{lemma}
+
+\begin{proof}
+写像 $A^{\oplus n} \to A^{\oplus m}$ が
+$m \times n$-行列 $(a_{ij})$ で与えられるとする。
+
+環
+$B = A[x_1, \ldots, x_n]/(\sum a_{ij}x_j)$ を考える。元
+$(x_1, \ldots, x_n) \in \underline{A^{\oplus n}}(B)$ は
+$\underline{A^{\oplus m}}(B)$ の零元に写るので、唯一の元
+$\xi \in L(B)$ の像である。$\xi$ は次の普遍性をもつ：
+任意の $A$-代数 $C$ と任意の $\xi' \in L(C)$ に対し、
+$L(B) \to L(C)$ により $\xi$ が $\xi'$ に写るような $A$-代数写像
+$B \to C$ が存在する。
+
+\medskip\noindent
+$B$ は次数付き $A$-代数なので、補題 \ref{adequate-lemma-flat-functor-split} および \ref{adequate-lemma-adequate-flat} を用いて、
+$B$ 上の函手の値を次数付き成分に分解できる。
+$(x_1, \ldots, x_n)$ は $\underline{A^{\oplus n}}(B)$ の次数一の元なので、
+$\xi \in L(B)^{(1)}$ である。従って
+$\varphi(\xi) \in \underline{M}(B)^{(1)} = M \otimes_A B_1$ である。
+$B_1$ は $A$-加群として $x_1, \ldots, x_n$ で生成されるので、
+$\varphi(\xi) = \sum m_i \otimes x_i$ と書ける。第 $i$ 基底ベクトルを
+$m_i$ に写す写像 $A^{\oplus n} \to M$ を考える。構成により、付随する写像
+$\underline{A^{\oplus n}} \to \underline{M}$ は、元 $\xi$ を
+$\varphi(\xi)$ に写す。上記の普遍性から図式は可換である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-cokernel-into-module}
+環 $A$ をとる。
+$\varphi : F \to \underline{M}$ を $\textit{Alg}_A$ 上の加群値函手の写像とし、
+$F$ は適切であるとする。このとき $\Coker(\varphi)$ は適切である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{adequate-lemma-adequate-surjection-from-linear} により、
+$F = \bigoplus L_i$ は線形適切函手の直和であると仮定してよい。完全列
+$0 \to L_i \to \underline{A^{\oplus n_i}} \to \underline{A^{\oplus m_i}}$
+を選ぶ。各 $i$ に対し、補題 \ref{adequate-lemma-lift-map} のように写像
+$A^{\oplus n_i} \to M$ を選ぶ。図式
+$$
+\xymatrix{
+0 \ar[r] &
+\bigoplus L_i  \ar[r] \ar[d] &
+\bigoplus \underline{A^{\oplus n_i}} \ar[r] \ar[ld] &
+\bigoplus \underline{A^{\oplus m_i}} \\
+& \underline{M}
+}
+$$
+を考える。$A$-加群
+$$
+Q =
+\Coker(\bigoplus A^{\oplus n_i} \to M \oplus \bigoplus A^{\oplus m_i})
+\quad\text{and}\quad
+P = \Coker(\bigoplus A^{\oplus n_i} \to \bigoplus A^{\oplus m_i}).
+$$
+を考える。このとき $\Coker(\varphi)$ は
+$\underline{Q} \to \underline{P}$ の核と同型である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-cokernel-adequate}
+\begin{slogan}
+環上の代数の圏における適切函手間の写像の余核は適切である。
+\end{slogan}
+環 $A$ をとる。
+$\varphi : F \to G$ を $\textit{Alg}_A$ 上の適切函手の写像とする。
+このとき $\Coker(\varphi)$ は適切である。
+\end{lemma}
+
+\begin{proof}
+単射 $G \to \underline{M}$ を選ぶ。
+すると単射 $G/F \to \underline{M}/F$ がある。補題 \ref{adequate-lemma-cokernel-into-module} により $\underline{M}/F$ は適切なので、単射
+$\underline{M}/F \to \underline{N}$ を選べる。合成して単射
+$G/F \to \underline{N}$ を得る。補題 \ref{adequate-lemma-cokernel-into-module} により、誘導される写像
+$G \to \underline{N}$ の余核は適切であるから、単射
+$\underline{N}/G \to \underline{K}$ を選べる。従って
+$0 \to G/F \to \underline{N} \to \underline{K}$ は完全であり、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-kernel-adequate}
+環 $A$ をとる。
+$\varphi : F \to G$ を $\textit{Alg}_A$ 上の適切函手の写像とする。
+このとき $\Ker(\varphi)$ は適切である。
+\end{lemma}
+
+\begin{proof}
+単射 $F \to \underline{M}$ と単射 $G \to \underline{N}$ を選ぶ。
+図式
+$$
+\xymatrix{
+F \ar[d] \ar[r] & G \ar[d] \\
+\underline{M \oplus N} \ar[r] & \underline{N}
+}
+$$
+が可換になるように、対角写像を $F \to \underline{M \oplus N}$ と書く。
+補題 \ref{adequate-lemma-cokernel-adequate} により、$F$ が
+$\underline{M \oplus N} \to \underline{K}$ の核となるような加群写像
+$M \oplus N \to K$ を選べる。このとき $\Ker(\varphi)$ は
+$\underline{M \oplus N} \to \underline{K \oplus N}$ の核である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-colimit-adequate}
+環 $A$ をとる。
+$\textit{Alg}_A$ 上の適切函手の任意の直和は適切である。
+適切函手の余極限も適切である。
+\end{lemma}
+
+\begin{proof}
+直和についての主張は直ちに従う。一般の余極限は直和間の写像の核として書ける；
+『圏論』の補題 \ref{categories-lemma-colimits-coproducts-coequalizers}
+を参照されたい。従って、補題 \ref{adequate-lemma-kernel-adequate} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-flat-linear-functor}
+環 $A$ をとる。
+$F, G$ を $\textit{Alg}_A$ 上の加群値函手とし、
+$\varphi : F \to G$ を函手の変換とする。次を仮定する：
+\begin{enumerate}
+\item $\varphi$ は加法的である；
+\item 任意の $A$-代数 $B$、$\xi \in F(B)$、および単元
+$u \in B^*$ に対し、$G(B)$ において $\varphi(u\xi) = u\varphi(\xi)$ である；
+\item 任意の平坦環写像 $B \to B'$ に対し
+$G(B) \otimes_B B' = G(B')$ である。
+\end{enumerate}
+このとき $\varphi$ は加群値函手の射である。
+\end{lemma}
+
+\begin{proof}
+$B$ を $A$-代数、$\xi \in F(B)$、$b \in B$ とする。
+$\varphi(b \xi) = b \varphi(\xi)$ を示せばよい。環写像
+$$
+B \to B' = B[x, y, x^{-1}, y^{-1}]/(x + y - b).
+$$
+を考える。この環写像は忠実平坦なので $G(B) \subset G(B')$ である。一方、
+$$
+\varphi(b\xi) = \varphi((x + y)\xi) =
+\varphi(x\xi) + \varphi(y\xi) = x\varphi(\xi) + y\varphi(\xi)
+= (x + y)\varphi(\xi) = b\varphi(\xi)
+$$
+である。実際、$x, y$ は $B'$ の単元である。従って結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-extension-adequate-key}
+環 $A$ をとる。
+$0 \to \underline{M} \to G \to L \to 0$ を $\textit{Alg}_A$ 上の
+加群値函手の短完全列とし、$L$ は線形適切であるとする。
+このとき $G$ は適切である。
+\end{lemma}
+
+\begin{proof}
+まず、任意の平坦な $A$-代数写像 $B \to B'$ に対し、写像
+$G(B) \otimes_B B' \to G(B')$ が同型であることを指摘する。
+実際、補題 \ref{adequate-lemma-adequate-flat} により、これは $\underline{M}$ と
+$L$ について成り立つので、五項補題により $G$ についても成り立つ。
+特に、補題 \ref{adequate-lemma-flat-functor-split} により、任意の次数付き
+$A$-代数 $B$ に対して
+$G(B) = \bigoplus_{k \in \mathbf{Z}} G(B)^{(k)}$ である。
+
+\medskip\noindent
+完全列 $0 \to L \to \underline{A^{\oplus n}} \to \underline{A^{\oplus m}}$
+を選ぶ。写像 $A^{\oplus n} \to A^{\oplus m}$ が
+$m \times n$-行列 $(a_{ij})$ で与えられるとする。次数付き $A$-代数
+$B = A[x_1, \ldots, x_n]/(\sum a_{ij}x_j)$ を考える。元
+$(x_1, \ldots, x_n) \in \underline{A^{\oplus n}}(B)$ は
+$\underline{A^{\oplus m}}(B)$ の零元に写るので、唯一の元
+$\xi \in L(B)$ の像である。$\xi \in L(B)^{(1)}$ であることに注意する。写像
+$$
+\Hom_A(B, C) \longrightarrow L(C), \quad
+f \longmapsto L(f)(\xi)
+$$
+は函手の同型を定める。実際、$f$ は像 $c_i = f(x_i) \in C$ によって決まり、
+それらは関係式 $\sum a_{ij}c_j = 0$ を満たさなければならない。一方、
+$L(C)$ は関係式 $\sum a_{ij} c_j = 0$ を満たす $n$-組
+$(c_1, \ldots, c_n)$ の集合である。
+
+\medskip\noindent
+上記の補題により、$B$ 上の各函手 $\underline{M}$、$G$、$L$ の値は
+その重み空間の直和である。従って、
+$0 \to \underline{M} \to G \to L \to 0$ の完全性から、列
+$0 \to \underline{M}(B)^{(1)} \to G(B)^{(1)} \to L(B)^{(1)} \to 0$
+は完全である。よって $\xi$ に写る元 $\theta \in G(B)^{(1)}$ を選べる。
+
+\medskip\noindent
+次数付き $A$-代数
+$$
+C = A[x_1, \ldots, x_n, y_1, \ldots, y_n]/
+(\sum a_{ij}x_j, \sum a_{ij}y_j)
+$$
+を考える。規則
+$$
+p_1(x_i) = x_i, \quad
+p_1(x_i) = y_i, \quad
+m(x_i) = x_i + y_i.
+$$
+で定まる三つの次数付き $A$-代数準同型 $p_1, p_2, m : B \to C$ がある。
+元
+$$
+\tau = G(m)(\theta) - G(p_1)(\theta) - G(p_2)(\theta) \in G(C)
+$$
+が零であることを示す。まず、直接計算により $\tau$ は $L(C)$ の零元に写る。
+従って $\tau$ は $\underline{M}(C)$ の元である。さらに、$m$、$p_1$、$p_2$
+は次数付き代数写像なので $\tau \in G(C)^{(1)}$ であり、
+$\underline{M} \subset G$ だから
+$$
+\tau \in \underline{M}(C)^{(1)} = M \otimes_A C_1.
+$$
+を得る。$C_1 = p_1(B_1) \oplus p_2(B_1)$ なので、一意的に
+$\tau = \underline{M}(p_1)(\tau_1) + \underline{M}(p_2)(\tau_2)$ と書ける。ここで
+$\tau_i \in M \otimes_A B_1 = \underline{M}(B)^{(1)}$ である。
+$x_i \mapsto x_i$、$y_i \mapsto 0$ で定まる環写像
+$q_1 : C \to B$ を考える。このとき
+$\underline{M}(q_1)(\tau) =
+\underline{M}(q_1)(\underline{M}(p_1)(\tau_1) + \underline{M}(p_2)(\tau_2)) =
+\tau_1$ である。一方、$q_1 \circ m = q_1 \circ p_1$ なので
+$G(q_1)(\tau) = - G(q_1 \circ p_2)(\tau)$ である。$q_1 \circ p_2$ は
+$B \to A \to B$ と分解するので、補題 \ref{adequate-lemma-flat-functor-split} により $G(q_1 \circ p_2)(\tau)$ は
+$G(B)^{(0)}$ に属する。従って $\tau_1 = 0$ である。なぜなら
+$G(B)^{(0)} \cap \underline{M}(B)^{(1)} \subset
+G(B)^{(0)} \cap G(B)^{(1)} = 0$ だからである。同様に
+$\tau_2 = 0$ であり、従って $\tau = 0$ である。
+
+\medskip\noindent
+$\theta \in G(B)$ から、$f : B \to C$ を $G(f)(\theta)$ に写すことにより
+函手の変換
+$$
+\psi : L(-) = \Hom_A(B, - ) \longrightarrow G(-)
+$$
+を得る。$\theta$ は $\xi$ の持ち上げなので、写像 $\psi$ は
+$G \to L$ の右逆である。上で示した主張を $\psi$ で言い換えると、
+$\tau = 0$ は $\psi$ が加法的であることを意味し、
+$\theta \in G(B)^{(1)}$ は、任意の $A$-代数 $D$、$l \in L(D)$、および単元
+$u \in D^*$ に対して $G(D)$ において $\psi(ul) = u\psi(l)$ となることを含意する。
+従って、補題 \ref{adequate-lemma-flat-linear-functor} により $\psi$ は
+加群値函手の射である。明らかに $G \cong \underline{M} \oplus L$ となり、結論を得る。
+\end{proof}
+
+\begin{remark}
+\label{adequate-remark-linearly-adequate}
+環 $A$ をとる。補題 \ref{adequate-lemma-extension-adequate-key} の証明は、
+$L$ が線形適切であるとき、$\textit{Alg}_A$ 上の加群値函手の任意の拡大
+$0 \to \underline{M} \to E \to L \to 0$ が分裂することを示している。
+この証明では、加群値函手 $F = \underline{M}$ の次の性質だけを用いた：
+\begin{enumerate}
+\item 平坦環写像 $B \to B'$ に対し、
+$F(B) \otimes_B B' \to F(B')$ は同型である；
+\item $B = A[x_1, \ldots, x_n]/(\sum a_{ij}x_j)$ および
+$C = A[x_1, \ldots, x_n, y_1, \ldots, y_n]/
+(\sum a_{ij}x_j, \sum a_{ij}y_j)$ とすると、
+$F(C)^{(1)} = F(p_1)(F(B)^{(1)}) \oplus F(p_2)(F(B)^{(1)})$ である。
+\end{enumerate}
+この二つの性質は任意の適切函手 $F$ に対して成り立つ。詳細は省略する。
+従って、$L$ は適切函手のアーベル圏の射影対象である。
+\end{remark}
+
+\begin{lemma}
+\label{adequate-lemma-extension-adequate}
+環 $A$ をとる。
+$0 \to F \to G \to H \to 0$ を $\textit{Alg}_A$ 上の加群値函手の
+短完全列とする。$F$ と $H$ が適切ならば $G$ も適切である。
+\end{lemma}
+
+\begin{proof}
+完全列 $0 \to F \to \underline{M} \to \underline{N}$ を選ぶ。
+$(\underline{M} \oplus G)/F$ が適切であることを示せたとする。このとき
+$G$ は適切函手間の写像
+$(\underline{M} \oplus G)/F \to \underline{N}$ の核なので、補題 \ref{adequate-lemma-kernel-adequate} により適切である。従って
+$F = \underline{M}$ と仮定してよい。
+
+\medskip\noindent
+$L$ が線形適切函手の直和となる全射 $L \to H$ を選べる；補題 \ref{adequate-lemma-adequate-surjection-from-linear} を参照されたい。引き戻し
+$G \times_H L$ が適切であることを示せたとする。このとき $G$ は写像
+$\Ker(L \to H) \to G \times_H L$ の余核なので、補題 \ref{adequate-lemma-cokernel-adequate} により適切である。従って、$H = \bigoplus L_i$ が
+線形適切函手の直和であると仮定してよい。補題 \ref{adequate-lemma-extension-adequate-key} により、各引き戻し
+$G \times_H L_i$ は適切である。補題 \ref{adequate-lemma-colimit-adequate} により、
+$\bigoplus G \times_H L_i$ も適切である。このとき $G$ は
+$$
+\bigoplus\nolimits_{i \not = i'} F \longrightarrow
+\bigoplus G \times_H L_i
+$$
+の余核である。ここで、直和因子 $(i, i')$ の $\xi$ は、非零成分が直和因子
+$i$ と $i'$ にある
+$(0, \ldots, 0, \xi, 0, \ldots, 0, -\xi, 0, \ldots, 0)$
+に写る。従って、補題 \ref{adequate-lemma-cokernel-adequate} により $G$ は適切である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-base-change-adequate}
+$A \to A'$ を環写像とする。$F$ が $\textit{Alg}_A$ 上の適切函手ならば、
+$\textit{Alg}_{A'}$ への制限 $F'$ も適切である。
+\end{lemma}
+
+\begin{proof}
+完全列 $0 \to F \to \underline{M} \to \underline{N}$ を選ぶ。このとき
+$F'(B') = F(B') = \Ker(M \otimes_A B' \to N \otimes_A B')$ である。
+$M \otimes_A B' = M \otimes_A A' \otimes_{A'} B'$ であり、$N$ についても
+同様なので、$F'$ は
+$\underline{M \otimes_A A'} \to \underline{N \otimes_A A'}$ の核である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-pushforward-adequate}
+$A \to A'$ を環写像とする。$F'$ が $\textit{Alg}_{A'}$ 上の適切函手ならば、
+$\textit{Alg}_A$ 上の加群値函手
+$F : B \mapsto F'(A' \otimes_A B)$ も適切である。
+\end{lemma}
+
+\begin{proof}
+完全列 $0 \to F' \to \underline{M'} \to \underline{N'}$ を選ぶ。このとき
+\begin{align*}
+F(B) & = F'(A' \otimes_A B) \\
+& = \Ker(M' \otimes_{A'} (
+A' \otimes_A B) \to N' \otimes_{A'} (A' \otimes_A B)) \\
+& = \Ker(M' \otimes_A B \to N' \otimes_A B)
+\end{align*}
+である。従って $F$ は $\underline{M} \to \underline{N}$ の核である。ここで、
+$M = M'$ および $N = N'$ は $A$-加群とみなしている。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-adequate-product}
+$A = A_1 \times \ldots \times A_n$ を環の積とする。$A$ 上の適切函手を
+与えることと、$A_i$ 上の適切函手 $F_i$ の列 $F_1, \ldots, F_n$ を
+与えることは同じである。
+\end{lemma}
+
+\begin{proof}
+$A$-代数 $B$ は標準的に積 $B_1 \times \ldots \times B_n$ であり、
+$A$-加群についても同じことが成り立つからである。
+$F(B) = \coprod F_i(B_i)$ と置けば対応を得る。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-adequate-descent}
+$A \to A'$ を環写像とし、$F$ を $\textit{Alg}_A$ 上の加群値函手とする。
+次を仮定する：
+\begin{enumerate}
+\item $F$ の $A'$-代数の圏への制限 $F'$ は適切である；
+\item 任意の $A$-代数 $B$ に対し、列
+$$
+0 \to F(B) \to F(B \otimes_A A') \to F(B \otimes_A A' \otimes_A A')
+$$
+は完全である。
+\end{enumerate}
+このとき $F$ は適切である。
+\end{lemma}
+
+\begin{proof}
+函手 $B \to F(B \otimes_A A')$ および
+$B \mapsto F(B \otimes_A A' \otimes_A A')$ は適切である；補題 \ref{adequate-lemma-pushforward-adequate} および
+\ref{adequate-lemma-base-change-adequate} を参照されたい。従って $F$ は
+適切函手間の写像の核として適切である；補題 \ref{adequate-lemma-kernel-adequate} を参照されたい。
+\end{proof}
+
+
+
+
+
+
+\section{適切函手の高次 Ext}
+\label{adequate-section-higher-ext}
+
+\noindent
+環 $A$ をとる。補題 \ref{adequate-lemma-extension-adequate} で、
+$\textit{Alg}_A$ 上の加群値函手の圏における適切函手の任意の拡大が
+適切であることを見た。本節では、高次 Ext 群についても同じことが
+成り立つことを示す。
+
+\begin{lemma}
+\label{adequate-lemma-adjoint}
+環 $A$ をとる。$\textit{Alg}_A$ 上の任意の加群値函手 $F$ に対し、
+$\textit{Alg}_A$ 上の加群値函手の射 $Q(F) \to F$ であって、
+(1) $Q(F)$ は適切であり、(2) 任意の適切函手 $G$ に対して写像
+$\Hom(G, Q(F)) \to \Hom(G, F)$ が全単射となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+任意の線形適切函手がいずれかの $L_i$ と同型になるような線形適切函手の集合
+$\{L_i\}_{i \in I}$ を選ぶ。これは可能である。(1) と次の性質 (2)' を満たす
+$Q(F) \to F$ を選べると仮定する：任意の $i \in I$ に対し、写像
+$\Hom(L_i, Q(F)) \to \Hom(L_i, F)$ は全単射である。このとき (2) が成り立つ。
+実際、補題 \ref{adequate-lemma-adequate-surjection-from-linear} および
+\ref{adequate-lemma-kernel-adequate} を合わせると、任意の適切函手 $G$ は完全列
+$$
+K \to L \to G \to 0
+$$
+に入り、$K$ と $L$ は線形適切函手の直和である。従って (2)' から
+$\Hom(L, Q(F)) \to \Hom(L, F)$ および
+$\Hom(K, Q(F)) \to \Hom(K, F)$ は全単射であり、$G$ についても同様である。
+
+\medskip\noindent
+対象が組 $(i, \varphi)$ である圏 $\mathcal{I}$ を考える。ここで
+$i \in I$ であり、$\varphi : L_i \to F$ は射である。
+射 $(i, \varphi) \to (i', \varphi')$ とは、
+$\varphi' \circ \psi = \varphi$ を満たす写像 $\psi : L_i \to L_{i'}$ である。
+$$
+Q(F) = \colim_{(i, \varphi) \in \Ob(\mathcal{I})} L_i
+$$
+と置く。自然な写像 $Q(F) \to F$ がある。補題 \ref{adequate-lemma-colimit-adequate} によりこれは適切であり、構成から性質 (2)' をもつ。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-enough-injectives}
+環 $A$ をとる。$\mathcal{P}$ を $\textit{Alg}_A$ 上の加群値函手の圏、
+$\mathcal{A}$ を $\textit{Alg}_A$ 上の適切函手の圏とする。
+包含函手を $i : \mathcal{A} \to \mathcal{P}$ と書き、補題 \ref{adequate-lemma-adjoint} の構成を $Q : \mathcal{P} \to \mathcal{A}$ と書く。このとき
+\begin{enumerate}
+\item $i$ は充満忠実かつ完全であり、その像は弱 Serre 部分圏である；
+\item $\mathcal{P}$ は十分多くの入射対象をもつ；
+\item 函手 $Q$ は $i$ の右随伴であり、従って左完全である；
+\item $Q$ は入射対象を入射対象に写す；
+\item $\mathcal{A}$ は十分多くの入射対象をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この補題は、これまでに見た事実をまとめただけである。(1) は定義、弱 Serre
+部分圏の特徴づけ（『ホモロジー代数』の補題 \ref{homology-lemma-characterize-weak-serre-subcategory} 参照）、および補題 \ref{adequate-lemma-cokernel-adequate}、\ref{adequate-lemma-kernel-adequate} および \ref{adequate-lemma-extension-adequate} から明らかである。
+$\mathcal{P}$ は圏
+$\textit{PMod}((\textit{Aff}/\Spec(A))_\tau, \mathcal{O})$ と同値であることを
+思い出す。従って、『入射対象』の命題 \ref{injectives-proposition-presheaves-modules} により (2) が成り立つ。
+(3) は補題 \ref{adequate-lemma-adjoint} および『圏論』の補題 \ref{categories-lemma-adjoint-exact} から従う。(4) と (5) は『ホモロジー代数』の補題 \ref{homology-lemma-adjoint-preserve-injectives} および
+\ref{homology-lemma-adjoint-enough-injectives} から従う。
+\end{proof}
+
+\noindent
+環 $A$ をとる。『形式変形理論』の第 \ref{formal-defos-section-tangent-spaces-functors} 節と同様に、
+$A$-代数 $B$ と $B$-加群 $N$ が与えられたとき、$B[N]$ を、台となる
+$B$-加群が $B \oplus N$ であり、乗法が
+$(b, m)(b', m ') = (bb', bm' + b'm)$ で与えられる $R$-代数とする。
+この構成は組 $(B, N)$ について函手的である。ここで射
+$(B, N) \to (B', N')$ は、$A$-代数写像 $B \to B'$ と $B$-加群写像
+$N \to N'$ で与えられる。ある意味で、次の補題で定義する組の函手 $TF$ は
+$F$ の接空間である。以下では、$B[N]$ が $\textit{Alg}_A$ の対象となる組
+$(B, N)$ だけを考える。
+
+\begin{lemma}
+\label{adequate-lemma-tangent-functor}
+環 $A$ をとり、$F$ を加群値函手とする。任意の
+$B \in \Ob(\textit{Alg}_A)$ と $B$-加群 $N$ に対し、次の性質で特徴づけられる
+標準分解
+$$
+F(B[N]) = F(B) \oplus TF(B, N)
+$$
+がある：
+\begin{enumerate}
+\item $TF(B, N) = \Ker(F(B[N]) \to F(B))$ である；
+\item $TF(B, N)$ には $B$-加群構造があり、これは $F(B[N])$ 上の
+$B[N]$-加群構造と両立する；
+\item $TF$ は組 $(B, N)$ の圏からの函手である；
+\item
+\label{adequate-item-mult-map}
+標準写像 $N \otimes_B F(B) \to TF(B, N)$ があり、組 $(B, N)$ の圏上で
+定義された函手間の変換を誘導する；
+\item $TF(B, 0) = 0$ であり、$N \to N'$ が零写像ならば、写像
+$TF(B, N) \to TF(B, N')$ は零である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B \to B[N] \to B$ は恒等写像なので、$F(B) \to F(B[N])$ は直和因子であり、
+その補因子は (1) で定義された $TF(N, B)$ である。この構成は組 $(B, N)$
+について函手的である。実際、組の射 $(B, N) \to (B', N')$ が与えられると、
+$\textit{Alg}_A$ における可換図式
+$$
+\xymatrix{
+B' \ar[r] & B'[N'] \ar[r] & B' \\
+B \ar[r] \ar[u] & B[N] \ar[r] \ar[u] & B \ar[u]
+}
+$$
+を得る。$B$-加群構造は $B[N]$-加群構造と環写像 $B \to B[N]$ から得られる。
+(4) の写像は合成
+$$
+N \otimes_B F(B) \longrightarrow
+B[N] \otimes_{B[N]} F(B[N]) \longrightarrow F(B[N])
+$$
+であり、その像は $TF(B, N)$ に含まれる。（最初の矢印は包含
+$N \to B[N]$ と $F(B) \to F(B[N])$ を用い、二つ目の矢印は乗法写像である。）
+$N = 0$ ならば $B = B[N]$ なので $TF(B, 0) = 0$ である。
+$N \to N'$ が零写像ならば $N \to 0 \to N'$ と分解するので、
+$TF(B, 0) = 0$ より誘導写像は零である。
+\end{proof}
+
+\noindent
+環 $A$ をとり、$M$ を $A$-加群とする。このとき、加群値函手
+$\underline{M}$ の接空間 $T\underline{M}$ は規則
+$T\underline{M}(B, N) = N \otimes_A M$ で与えられる。特に、$B$ を固定すると、
+函手 $N \mapsto T\underline{M}(B, N)$ は加法的かつ右完全である。
+これは入射的な加群値函手についても成り立つ。
+
+\begin{lemma}
+\label{adequate-lemma-tangent-injective}
+環 $A$ をとり、$I$ を加群値函手の圏の入射対象とする。このとき、任意の
+$B \in \Ob(\textit{Alg}_A)$ と $B$-加群の短完全列
+$0 \to N_1 \to N \to N_2 \to 0$ に対し、列
+$$
+TI(B, N_1) \to TI(B, N) \to TI(B, N_2) \to 0
+$$
+は完全である。
+\end{lemma}
+
+\begin{proof}
+以下、補題 \ref{adequate-lemma-tangent-functor} の結果を断りなく用いる。
+$h : \textit{Alg}_A \to \textit{Sets}$ を
+$h(C) = \Mor_A(B[N], C)$ で与えられる函手とする。$h_1$ と $h_2$ も同様に
+定める。全射 $N \to N_2$ に対応する写像 $B[N] \to B[N_2]$ は全射である。
+これは写像 $h_2 \to h$ に対応し、任意の $A$-代数 $C$ に対して
+$h_2(C) \to h(C)$ は単射である。一方、零写像 $N_1 \to N$ と単射
+$N_1 \to N$ に対応する二つの写像 $p, q : h \to h_1$ がある。図式
+$$
+\xymatrix{
+h_2 \ar[r] & h \ar@<1ex>[r] \ar@<-1ex>[r] & h_1
+}
+$$
+は等化子図式である。$\mathcal{O}_h$ を加群値函手
+$C \mapsto \bigoplus_{h(C)} C$ とする。$\mathcal{O}_{h_1}$ と
+$\mathcal{O}_{h_2}$ も同様に定める。
+$$
+\Hom_\mathcal{P}(\mathcal{O}_h, F) = F(B[N])
+$$
+であることに注意する。ここで $\mathcal{P}$ は $\textit{Alg}_A$ 上の
+加群値函手の圏である。$\mathcal{P}$ において等化子図式
+$$
+\xymatrix{
+\mathcal{O}_{h_2} \ar[r] &
+\mathcal{O}_h \ar@<1ex>[r] \ar@<-1ex>[r] &
+\mathcal{O}_{h_1}
+}
+$$
+があることを主張する。実際、$C \in \Ob(\textit{Alg}_A)$ とし、
+$\xi = \sum_{i = 1, \ldots, n} c_i \cdot f_i$ と書く。ここで $c_i \in C$、
+$f_i : B[N] \to C$ は $\mathcal{O}_h(C)$ の元である。
+$p(\xi) = q(\xi)$ ならば
+$$
+\sum c_i \cdot f_i \circ z = \sum c_i \cdot f_i \circ y
+$$
+である。ここで $z, y : B[N_1] \to B[N]$ は
+$z : (b, m_1) \mapsto (b, 0)$ および
+$y : (b, m_1) \mapsto (b, m_1)$ である。これは、各 $i$ に対して
+$f_j \circ z = f_i \circ y$ となる $j$ が存在することを意味する。
+明らかに $f_i(N_1) = 0$ であり、従って $f_i$ は一意な写像
+$\overline{f}_i : B[N_2] \to C$ を経由する。よって $\xi$ は
+$\overline{\xi} = \sum c_i \cdot \overline{f}_i$ の像である。
+$I$ は入射的なので、この等化子図式を余等化子図式
+$$
+\xymatrix{
+I(B[N_1]) \ar@<1ex>[r] \ar@<-1ex>[r] &
+I(B[N]) \ar[r] &
+I(B[N_2])
+}
+$$
+に写す。この図式は直和分解
+$I(B[N]) = I(B) \oplus TI(B, N)$ および
+$I(B[N_i]) = I(B) \oplus TI(B, N_i)$ と両立する。零写像
+$N \to N_1$ は零写像 $TI(B, N) \to TI(B, N_1)$ を誘導する。
+従って、上の余等化子性は、望む完全列
+$TI(B, N_1) \to TI(B, N) \to TI(B, N_2) \to 0$ があることを意味する。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-exactness-implies}
+環 $A$ をとる。$F$ を加群値函手とし、任意の
+$B \in \Ob(\textit{Alg}_A)$ に対して、$B$-加群上の函手 $TF(B, -)$ が
+$B$-加群の短完全列を右完全列に写すと仮定する。このとき
+\begin{enumerate}
+\item $TF(B, N_1 \oplus N_2) = TF(B, N_1) \oplus TF(B, N_2)$ である；
+\item $TF(B, N)$ には第二の函手的な $B$-加群構造がある。これは
+$x \in TF(B, N)$ と $b \in B$ に対し
+$x \cdot b = TF(B, b\cdot 1_N)(x)$ と置くことで定義される；
+\item
+\label{adequate-item-mult-map-linear}
+補題 \ref{adequate-lemma-tangent-functor} の標準写像
+$N \otimes_B F(B) \to TF(B, N)$ は、第二の $B$-加群構造に関しても
+$B$-線形である；
+\item
+\label{adequate-item-tangent-right-exact}
+有限表示 $B$-加群 $N$ が与えられると、標準同型
+$TF(B, B) \otimes_B N \to TF(B, N)$ がある。ここでテンソル積には
+$TF(B, B)$ 上の第二の $B$-加群構造を用いる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+以下、補題 \ref{adequate-lemma-tangent-functor} の結果を断りなく用いる。写像
+$N_1 \to N_1 \oplus N_2$ と $N_2 \to N_1 \oplus N_2$ は写像
+$TF(B, N_1) \oplus TF(B, N_2) \to TF(B, N_1 \oplus N_2)$ を与える。
+これは単射である。なぜなら写像 $N_1 \oplus N_2 \to N_1$ と
+$N_1 \oplus N_2 \to N_2$ が逆写像を誘導するからである。
+$TF$ は右完全なので、列
+$TF(B, N_1) \to TF(B, N_1 \oplus N_2) \to TF(B, N_2) \to 0$ は完全である。
+従って $TF(B, N_1) \oplus TF(B, N_2) \to TF(B, N_1 \oplus N_2)$ は
+同型である。これで (1) が示された。
+
+\medskip\noindent
+(2) を示すには
+$x \cdot (b_1 + b_2) = x \cdot b_1 + x \cdot b_2$ を示せば十分である。
+（結合律と加法性は明らかである。）このために
+$$
+N \xrightarrow{(b_1, b_2)} N \oplus N \xrightarrow{+} N
+$$
+を考え、$TF(B, -)$ を適用する。
+
+\medskip\noindent
+(3) は、$N \otimes_B F(B) \to TF(B, N)$ が組 $(B, N)$ について
+函手的であることから直ちに従う。
+
+\medskip\noindent
+$N$ を有限表示 $B$-加群とする。表示
+$B^{\oplus m} \to B^{\oplus n} \to N \to 0$ を選ぶ。
+$TF(B, -)$ の右完全性により、完全列
+$$
+TF(B, B^{\oplus m}) \to TF(B, B^{\oplus n}) \to TF(B, N) \to 0
+$$
+を得る。(1) により
+$TF(B, B^{\oplus m}) = TF(B, B)^{\oplus m}$ および
+$TF(B, B^{\oplus n}) = TF(B, B)^{\oplus n}$ と書ける。次に、写像
+$B^{\oplus m} \to B^{\oplus n}$ が行列 $T = (b_{ij})$ で与えられるとする。
+このとき誘導写像 $TF(B, B)^{\oplus m} \to TF(B, B)^{\oplus n}$ は、成分が
+$TF(B, b_{ij} \cdot 1_B)$ である行列によって与えられる。これと
+$\otimes$ の右完全性から (4) が従う。
+\end{proof}
+
+\begin{example}
+\label{adequate-example-module-structure-different}
+$F$ を補題 \ref{adequate-lemma-exactness-implies} のような加群値函手とする。
+$TF(B, N)$ 上の二つの加群構造は、常に一致するとは限らない。例を挙げる。
+$A = \mathbf{F}_p$ とし、$p$ は素数とする。$F(B) = B$ と置くが、
+$B$-加群構造は $b \cdot x = b^px$ で与える。このとき
+$TF(B, N) = N$ であり、$x \in N$ に対する $B$-加群構造は
+$b \cdot x = b^px$ で与えられる。しかし、第二の $B$-加群構造は
+$x \cdot b = bx$ で与えられる。この場合、標準写像
+$N \otimes_B F(B) \to TF(B, N)$ は零であることに注意する。実際、元
+$n \in B[N]$ の $p$ 乗は零である。
+\end{example}
+
+\noindent
+次の補題では、以下の観察を繰り返し用いる。
+$0 \to F \to G \to H \to 0$ が $\textit{Alg}_A$ 上の加群値函手の
+完全列ならば、任意の組 $(B, N)$ に対し、列
+$0 \to TF(B, N) \to TG(B, N) \to TH(B, N) \to 0$ は完全である。
+これは $0 \to F(B[N]) \to G(B[N]) \to H(B[N]) \to 0$ が完全であることから
+従う。
+
+\begin{lemma}
+\label{adequate-lemma-exactness-permanence}
+環 $A$ をとる。$F$ を $\textit{Alg}_A$ 上の加群値函手とする。全ての
+$B \in \Ob(\textit{Alg}_A)$ に対し、$B$-加群上の函手 $TF(B, -)$ が
+$B$-加群の短完全列を右完全列に写すとき、この函手は $(*)$ を満たすという。
+$0 \to F \to G \to H \to 0$ を $\textit{Alg}_A$ 上の加群値函手の
+短完全列とする。
+\begin{enumerate}
+\item $F, G$ が $(*)$ を満たすならば、$H$ も $(*)$ を満たす。
+\item $F, H$ が $(*)$ を満たすならば、$G$ も $(*)$ を満たす。
+\item $H' \to H$ が $\textit{Alg}_A$ 上の加群値函手の射であり、
+$F$、$G$、$H$、$H'$ が $(*)$ を満たすならば、$G \times_H H'$ も $(*)$ を満たす。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B$ を固定し、$0 \to N_1 \to N_2 \to N_3 \to 0$ を $B$-加群の
+短完全列とする。(1) は図式
+$$
+\xymatrix{
+0 \ar[r] &
+TF(B, N_1) \ar[r] \ar[d] &
+TG(B, N_1) \ar[r] \ar[d] &
+TH(B, N_1) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_2) \ar[r] \ar[d] &
+TG(B, N_2) \ar[r] \ar[d] &
+TH(B, N_2) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_3) \ar[r] \ar[d] &
+TG(B, N_3) \ar[r] \ar[d] &
+TH(B, N_3) \ar[r] & 0 \\
+& 0 & 0
+}
+$$
+における図式追跡から従う。ここで横の行と、$TF$ および $TG$ を含む列は
+完全である。(2) を示すには、図式
+$$
+\xymatrix{
+0 \ar[r] &
+TF(B, N_1) \ar[r] \ar[d] &
+TG(B, N_1) \ar[r] \ar[d] &
+TH(B, N_1) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_2) \ar[r] \ar[d] &
+TG(B, N_2) \ar[r] \ar[d] &
+TH(B, N_2) \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+TF(B, N_3) \ar[r] \ar[d] &
+TG(B, N_3) \ar[r] &
+TH(B, N_3) \ar[r] \ar[d] & 0 \\
+& 0 & & 0
+}
+$$
+で図式追跡を行う。ここで横の行と、$TF$ および $TH$ を含む列は完全である。
+(3) は (2) から従う。実際、$G \times_H H'$ は完全列
+$0 \to F \to G \times_H H' \to H' \to 0$ に入る。
+\end{proof}
+
+\noindent
+本節の議論の大部分は、次の鍵となる消滅結果を証明するためのものであった。
+
+\begin{lemma}
+\label{adequate-lemma-ext-group-zero-key}
+環 $A$ をとる。$M$, $P$ を $A$-加群とし、$P$ は有限表示であるとする。
+このとき $i > 0$ に対して
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M}) = 0$ である。ここで
+$\mathcal{P}$ は $\textit{Alg}_A$ 上の加群値函手の圏である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}$ における入射分解 $\underline{M} \to I^\bullet$ を選ぶ；補題 \ref{adequate-lemma-enough-injectives} を参照されたい。『導来圏』の補題 \ref{derived-lemma-compute-ext-resolutions} により、
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M})$ の任意の元は、
+$d^i \circ \varphi = 0$ を満たす射 $\varphi : \underline{P} \to I^i$ から生じる。
+$\varphi$ に付随する $\underline{P}$ の $\underline{M}$ による Yoneda 拡大
+$$
+E : 0 \to \underline{M} \to I^0 \to \ldots \to
+I^{i - 1} \times_{\Ker(d^i)} \underline{P} \to \underline{P} \to 0
+$$
+が自明であることを示す。これにより、『導来圏』の補題 \ref{derived-lemma-yoneda-extension} から補題が従う。
+
+\medskip\noindent
+$F$ を $\textit{Alg}_A$ 上の加群値函手とする。全ての
+$B \in \Ob(\textit{Alg}_A)$ に対し、$B$-加群上の函手 $TF(B, -)$ が
+$B$-加群の短完全列を右完全列に写すとき、$(*)$ が成り立つという。
+加群値函手 $\underline{M}, I^n, \underline{P}$ はそれぞれ性質 $(*)$ をもつ；
+補題 \ref{adequate-lemma-tangent-injective} とその前の考察を参照されたい。
+$0 \to \underline{M} \to I^\bullet$ を短完全列に分解し、補題 \ref{adequate-lemma-exactness-permanence} を用いると、各函手
+$\Im(d^{n - 1}) = \Ker(d^n) \subset I^n$ が性質 $(*)$ をもち、さらに
+$I^{i - 1} \times_{\Ker(d^i)} \underline{P}$ も性質 $(*)$ をもつことが分かる。
+
+\medskip\noindent
+従って、Yoneda 拡大が
+$$
+E : 0 \to \underline{M} \to F_{i - 1} \to \ldots \to
+F_0 \to \underline{P} \to 0
+$$
+で与えられ、各加群値函手 $F_j$ が性質 $(*)$ をもつと仮定してよい。
+$G_j(B) = TF_j(B, B)$ と置き、補題 \ref{adequate-lemma-exactness-implies} で定義した
+{\it 第二の} $B$-加群構造により $B$-加群とみなす。$TF_j$ は組上の函手なので、
+$G_j$ は $\textit{Alg}_A$ 上の加群値函手である。さらに、$E$ は完全列なので、列
+$G_{j + 1} \to G_j \to G_{j - 1}$ は完全である（補題 \ref{adequate-lemma-exactness-permanence} の前の考察を参照）。
+$T\underline{M}(B, B) = M \otimes_A B = \underline{M}(B)$ であり、その上の
+二つの $B$-加群構造は一致する。従って Yoneda 拡大
+$$
+E' :  0 \to \underline{M} \to G_{i - 1} \to \ldots \to
+G_0 \to \underline{P} \to 0
+$$
+を得る。さらに、補題 \ref{adequate-lemma-tangent-functor} (\ref{adequate-item-mult-map}) の標準写像
+$$
+F_j(B) = B \otimes_B F_j(B) \longrightarrow TF_j(B, B) = G_j(B)
+$$
+は、補題 \ref{adequate-lemma-exactness-implies} (\ref{adequate-item-mult-map-linear}) により
+$B$-線形であり、$B$ について函手的である。従って Yoneda 拡大の写像
+$$
+\xymatrix{
+0 \ar[r] &
+\underline{M} \ar[r] \ar[d]^1 &
+F_{i - 1} \ar[r] \ar[d] &
+\ldots \ar[r] &
+F_0 \ar[r] \ar[d] &
+\underline{P} \ar[r] \ar[d]^1 & 0 \\
+0 \ar[r] &
+\underline{M} \ar[r] &
+G_{i - 1} \ar[r] &
+\ldots \ar[r] &
+G_0 \ar[r] &
+\underline{P} \ar[r] & 0
+}
+$$
+を得る。特に、上で述べた Yoneda Ext に関する補題により、$E$ と $E'$ は
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M})$ において同じ類をもつ。
+最後に、$N$ を有限表示 $A$-加群とする。このとき
+$$
+0 \to T\underline{M}(A, N) \to TF_{i - 1}(A, N) \to \ldots \to
+TF_0(A, N) \to T\underline{P}(A, N) \to 0
+$$
+は完全である。補題 \ref{adequate-lemma-exactness-implies}
+(\ref{adequate-item-tangent-right-exact}) を $B = A$ として用いると、これは $A$-加群の列
+$$
+0 \to M \otimes_A N \to G_{i - 1}(A) \otimes_A N \to \ldots \to
+G_0(A) \otimes_A N \to P \otimes_A N \to 0
+$$
+が完全であることを意味する。従って $A$-加群の列
+$0 \to M \to G_{i - 1}(A) \to \ldots \to G_0(A) \to P \to 0$ は普遍完全である。
+すなわち、任意の有限表示 $A$-加群 $N$ とテンソル積をとっても完全である。
+$K = \Ker(G_0(A) \to P)$ と置くと、完全列
+$$
+0 \to K \to G_0(A) \to P \to 0
+\quad\text{and}\quad
+G_2(A) \to G_1(A) \to K \to 0
+$$
+を得る。第二の列を $N$ とテンソル積すると
+$K \otimes_A N = \Coker(G_2(A) \otimes_A N \to G_1(A) \otimes_A N)$
+を得る。列
+$G_2(A) \otimes_A N \to G_1(A) \otimes_A N \to G_0(A) \otimes_A N$
+の完全性から、$K \otimes_A N \to G_0(A) \otimes_A N$ は単射である。
+『可換代数』の定理 \ref{algebra-theorem-universally-exact-criteria} により、これは
+$A$-加群の拡大 $0 \to K \to G_0(A) \to P \to 0$ が完全であることを意味する。
+$P$ は有限表示と仮定したので、この列は分裂する；『可換代数』の補題 \ref{algebra-lemma-universally-exact-split} を参照されたい。任意の分裂
+$P \to G_0(A)$ は、全射 $G_0 \to \underline{P}$ を分裂させる写像
+$\underline{P} \to G_0$ を定める。従って Yoneda 拡大 $E'$ は
+自明な Yoneda 拡大と同値であり、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-ext-group-zero}
+環 $A$ をとる。$M$ を $A$-加群とし、$L$ を $\textit{Alg}_A$ 上の
+線形適切函手とする。このとき $i > 0$ に対して
+$\Ext^i_\mathcal{P}(L, \underline{M}) = 0$ である。ここで $\mathcal{P}$ は
+$\textit{Alg}_A$ 上の加群値函手の圏である。
+\end{lemma}
+
+\begin{proof}
+$L$ は線形適切なので、完全列
+$$
+0 \to L \to \underline{A^{\oplus m}} \to \underline{A^{\oplus n}} \to
+\underline{P} \to 0
+$$
+が存在する。ここで $P = \Coker(A^{\oplus m} \to A^{\oplus n})$ は、
+線形適切函手の定義に現れる有限自由 $A$-加群間の写像の余核である。
+補題 \ref{adequate-lemma-ext-group-zero-key} により、$i > 0$ に対して
+$\Ext^i_\mathcal{P}(\underline{P}, \underline{M})$ および
+$\Ext^i_\mathcal{P}(\underline{A}, \underline{M})$ は消滅する。
+$K = \Ker(\underline{A^{\oplus n}} \to \underline{P})$ と置く。完全列
+$0 \to K \to \underline{A^{\oplus n}} \to \underline{P} \to 0$ に付随する
+Ext 群の長完全列により、$i > 0$ に対して
+$\Ext^i_\mathcal{P}(K, \underline{M}) = 0$ を得る。列
+$0 \to L \to \underline{A^{\oplus m}} \to K \to 0$ について同じ議論を
+繰り返せば結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-RQ-zero}
+補題 \ref{adequate-lemma-enough-injectives} の記法のもとで、任意の適切函手 $F$ と
+全ての $p > 0$ に対して $R^pQ(F) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+完全列 $0 \to F \to \underline{M^0} \to \underline{M^1}$ を選ぶ。
+$M^2 = \Coker(M^0 \to M^1)$ と置くと、
+$0 \to F \to \underline{M^0} \to \underline{M^1}
+\to \underline{M^2} \to 0$ は分解である。『導来圏』の補題 \ref{derived-lemma-two-ss-complex-functor} によりスペクトル系列
+$$
+R^pQ(\underline{M^q}) \Rightarrow R^{p + q}Q(F)
+$$
+を得る。$Q(\underline{M^q}) = \underline{M^q}$ なので、任意の $A$-加群 $M$ と
+$p > 0$ に対して $R^pQ(\underline{M}) = 0$ を示せば十分である。
+
+\medskip\noindent
+圏 $\mathcal{P}$ における入射分解 $\underline{M} \to I^\bullet$ を選ぶ。
+$R^iQ(\underline{M})$ が非零であると仮定する。このとき
+$\Ker(Q(I^i) \to Q(I^{i + 1}))$ は $Q(I^{i - 1}) \to Q(I^i)$ の像より
+真に大きい。従って、補題 \ref{adequate-lemma-adequate-surjection-from-linear} により、
+線形適切函手 $L$ と写像 $\varphi : L \to Q(I^i)$ であって、
+$Q(I^i) \to Q(I^{i + 1})$ の核に写り、かつ
+$Q(I^{i - 1}) \to Q(I^i)$ の像を経由しないものが存在する。
+$Q$ は包含函手の左随伴なので、写像 $\varphi$ は同じ性質をもつ写像
+$\varphi' : L \to I^i$ に対応する。従って $\varphi'$ は
+$\Ext^i_\mathcal{P}(L, \underline{M})$ の非零元を与え、補題 \ref{adequate-lemma-ext-group-zero} に矛盾する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{適切加群}
+\label{adequate-section-adequate}
+
+\noindent
+『降下』の第 \ref{descent-section-quasi-coherent-sheaves} 節で、スキーム $S$
+上の準連接加群は、$S$ に付随する任意の大サイト $(\Sch/S)_\tau$ 上の
+準連接加群と同じであることを見た。この同一視には二つの問題がある：
+\begin{enumerate}
+\item 函手 $\QCoh(\mathcal{O}_S) \to
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$,
+$\mathcal{F} \mapsto \mathcal{F}^a$ は一般には完全でない
+（『降下』の補題 \ref{descent-lemma-equivalence-quasi-coherent-limits}）；
+\item 準コンパクトかつ準分離な射 $f : X \to S$ が与えられても、函手
+$f_*$ は一般に大サイト上の準連接層を保たない（『降下』の命題 \ref{descent-proposition-equivalence-quasi-coherent-functorial}）。
+\end{enumerate}
+(1) は、コホモロジー層が準連接である複体からなる $D(\mathcal{O})$ の
+三角部分圏を定義できないことを意味する。(2) は、$\mathcal{F}$ が準連接で
+$f$ が準コンパクトかつ準分離であっても、$Rf_*\mathcal{F}$ が準連接な
+コホモロジー層をもつ複体とは限らないことを意味する。さらに、『降下』の補題 \ref{descent-lemma-equivalence-quasi-coherent-limits} および『降下』の命題 \ref{descent-proposition-equivalence-quasi-coherent-functorial} の証明で与えた例は
+病理的なものではない。
+
+\medskip\noindent
+本節では、$(\Sch/S)_\tau$ 上の $\mathcal{O}$-加群の少し大きな圏を扱う。
+この圏は準連接加群を含み、アーベル圏であり、$f$ が準コンパクトかつ
+準分離ならば $f_*$ で保たれる。このために、$S$ をスキームとし、
+$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の $\mathcal{O}$-加群の前層とする。
+$(\Sch/S)_\tau$ の任意のアフィン対象 $U = \Spec(A)$ に対し、
+$\mathcal{F}$ を $(\textit{Aff}/U)_\tau$ に制限して、このサイト上の
+$\mathcal{O}$-加群の前層を得る。第 \ref{adequate-section-quasi-coherent} 節の対応する
+加群値函手を
+$$
+F = F_{\mathcal{F}, A} :
+\textit{Alg}_A \longrightarrow \textit{Ab},
+\quad
+B \longmapsto \mathcal{F}(\Spec(B))
+$$
+と書く。対応 $\mathcal{F} \mapsto F_{\mathcal{F}, A}$ はアーベル圏間の
+完全函手である。
+
+\begin{definition}
+\label{adequate-definition-adequate}
+$(\Sch/S)_\tau$ 上の $\mathcal{O}$-加群の層 $\mathcal{F}$ が
+{\it 適切} であるとは、任意の $i \in I$ に対して $F_{\mathcal{F}, A_i}$ が
+適切となる $\tau$-被覆 $\{\Spec(A_i) \to S\}_{i \in I}$ が存在することをいう。
+\end{definition}
+
+\noindent
+適切 $\mathcal{O}$-加群の圏が、選んだ位相 $\tau$ に依存しないことを
+後で見る。
+
+\begin{lemma}
+\label{adequate-lemma-adequate-local}
+$S$ をスキームとし、$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の適切
+$\mathcal{O}$-加群とする。$S$ 上の任意のアフィンスキーム $\Spec(A)$ に対し、
+函手 $F_{\mathcal{F}, A}$ は適切である。
+\end{lemma}
+
+\begin{proof}
+$\{\Spec(A_i) \to S\}_{i \in I}$ を、全ての $i \in I$ に対して
+$F_{\mathcal{F}, A_i}$ が適切となる $\tau$-被覆とする。標準アフィン
+$\tau$-被覆 $\{\Spec(A'_j) \to \Spec(A)\}_{j = 1, \ldots, m}$ であって、
+各添字に対して $i(j) \in I$ が存在し、$\Spec(A'_j) \to \Spec(A) \to S$ が
+$\Spec(A_{i(j)})$ を経由するものを選べる。このとき
+$F_{\mathcal{F}, A'_j}$ は $F_{\mathcal{F}, A_{i(j)}}$ の $A'_j$-代数の圏への
+制限である。従って補題 \ref{adequate-lemma-base-change-adequate} により
+$F_{\mathcal{F}, A'_j}$ は適切である。補題 \ref{adequate-lemma-adequate-product} により、列 $F_{\mathcal{F}, A'_j}$ は
+$A' = A'_1 \times \ldots \times A'_m$ 上の適切な「積」函手 $F'$ に対応する。
+$\mathcal{F}$ は Zariski 位相について層なので、この積函手 $F'$ は
+$F_{\mathcal{F}, A'}$ に等しい。すなわち、$F$ の $A'$-代数への制限である。
+最後に $\{\Spec(A') \to \Spec(A)\}$ は $\tau$-被覆である。従って補題 \ref{adequate-lemma-adequate-descent} により $F_{\mathcal{F}, A}$ は適切である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-adequate-affine}
+$S = \Spec(A)$ をアフィンスキームとする。$(\Sch/S)_\tau$ 上の適切
+$\mathcal{O}$-加群の圏は、$\textit{Alg}_A$ 上の適切加群値函手の圏と同値である。
+\end{lemma}
+
+\begin{proof}
+適切加群 $\mathcal{F}$ が与えられると、補題 \ref{adequate-lemma-adequate-local} により
+函手 $F_{\mathcal{F}, A}$ は適切である。適切函手 $F$ が与えられたときは、
+完全列 $0 \to F \to \underline{M} \to \underline{N}$ を選び、
+$\mathcal{O}$-加群 $\mathcal{F} = \Ker(M^a \to N^a)$ を考える。ここで $M^a$ は、
+$S$ 上の準連接層 $\widetilde{M}$ に付随する $(\Sch/S)_\tau$ 上の準連接
+$\mathcal{O}$-加群を表す。$F = F_{\mathcal{F}, A}$ であることに注意する。
+特に、加群 $\mathcal{F}$ は定義により適切である。これらの構成が互いに
+逆な圏同値を定めることの証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-pullback-adequate}
+$f : T \to S$ をスキームの射とする。$(\Sch/S)_\tau$ 上の適切
+$\mathcal{O}$-加群 $\mathcal{F}$ の引き戻し $f^*\mathcal{F}$ は、
+$(\Sch/T)_\tau$ 上の適切 $\mathcal{O}$-加群である。
+\end{lemma}
+
+\begin{proof}
+引き戻し写像
+$f^* : \textit{Mod}((\Sch/S)_\tau, \mathcal{O}) \to
+\textit{Mod}((\Sch/T)_\tau, \mathcal{O})$
+は制限で与えられる。すなわち、$T$ 上の任意のスキーム $V$ に対し
+$f^*\mathcal{F}(V) = \mathcal{F}(V)$ である。従って、この補題は補題 \ref{adequate-lemma-adequate-local} と定義から直ちに従う。
+\end{proof}
+
+\noindent
+適切 $\mathcal{O}$-加群の圏を次のように特徴づける。その意味を理解するため、
+スキーム $S$ 上の準連接 $\mathcal{O}_S$-加群間の写像
+$\mathcal{G} \to \mathcal{H}$ を考える。付随する $\mathcal{O}$-加群の写像
+$\mathcal{G}^a \to \mathcal{H}^a$ の余核は
+$(\mathcal{H}/\mathcal{G})^a$ に等しいので準連接である。一方、
+$\mathcal{G}^a \to \mathcal{H}^a$ の核は一般には準連接でないが、適切である。
+
+\begin{lemma}
+\label{adequate-lemma-adequate-characterize}
+$S$ をスキームとし、$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の
+$\mathcal{O}$-加群とする。次は同値である：
+\begin{enumerate}
+\item $\mathcal{F}$ は適切である；
+\item アフィン開被覆 $S = \bigcup S_i$ と準連接 $\mathcal{O}_{S_i}$-加群の写像
+$\mathcal{G}_i \to \mathcal{H}_i$ が存在し、
+$\mathcal{F}|_{(\Sch/S_i)_\tau}$ は $\mathcal{G}_i^a \to \mathcal{H}_i^a$ の核である；
+\item $\tau$-被覆 $\{S_i \to S\}_{i \in I}$ と準連接
+$\mathcal{O}_{S_i}$-加群の写像 $\mathcal{G}_i \to \mathcal{H}_i$ が存在し、
+$\mathcal{F}|_{(\Sch/S_i)_\tau}$ は $\mathcal{G}_i^a \to \mathcal{H}_i^a$ の核である；
+\item $\tau$-被覆 $\{f_i : S_i \to S\}_{i \in I}$ が存在し、各
+$f_i^*\mathcal{F}$ は適切である；
+\item $S$ 上の任意のアフィンスキーム $U$ に対し、制限
+$\mathcal{F}|_{(\Sch/U)_\tau}$ は準連接 $\mathcal{O}_U$-加群間の写像
+$\mathcal{G}^a \to \mathcal{H}^a$ の核である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$ を $S$ 上のアフィンスキームとし、
+$F = F_{\mathcal{F}, A}$ と置く。定義により、函手 $F$ が適切であることと、
+$F = \Ker(\underline{M} \to \underline{N})$ となる $A$-加群の写像
+$M \to N$ が存在することは同値である。補題 \ref{adequate-lemma-adequate-local} および \ref{adequate-lemma-adequate-affine} と合わせると、
+(1) と (5) が同値であることが分かる。
+
+\medskip\noindent
+(5) が (2) を含意し、(2) が (3) を含意することは明らかである。
+(3) が成り立つとする。被覆 $\{S_i \to S\}$ を細分して、各
+$S_i = \Spec(A_i)$ がアフィンであるようにできる。このとき、証明冒頭の考察から
+$F_{\mathcal{F}, A_i}$ は適切である。従って $\mathcal{F}$ は定義により
+適切であり、(3) は (1) を含意する。
+
+\medskip\noindent
+最後に、一方の含意には補題 \ref{adequate-lemma-pullback-adequate} を用い、他方には
+$\tau$-被覆の合成が $\tau$-被覆であることを用いれば、(4) と (1) は同値である。
+\end{proof}
+
+\noindent
+準連接層の場合と同様に、適切加群の圏は位相に依存しない。
+
+\begin{lemma}
+\label{adequate-lemma-adequate-fpqc}
+$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の適切 $\mathcal{O}$-加群とする。
+$S$ 上のアフィンスキーム間の任意の全射平坦射
+$\Spec(B) \to \Spec(A)$ に対し、増大 {\v C}ech 複体
+$$
+0 \to \mathcal{F}(\Spec(A)) \to
+\mathcal{F}(\Spec(B)) \to
+\mathcal{F}(\Spec(B \otimes_A B)) \to \ldots
+$$
+は完全である。特に、$\mathcal{F}$ は fpqc 被覆に対する層条件を満たし、
+$(\Sch/S)_{fppf}$ 上の $\mathcal{O}$-加群の層である。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ を補題のとおりとし、$F = F_{\mathcal{F}, A}$ と置く。この函手は
+補題 \ref{adequate-lemma-adequate-local} により適切である。$A \to B$、
+$A \to B \otimes_A B$ などは平坦なので、補題 \ref{adequate-lemma-adequate-flat} により
+$F(B) = F(A) \otimes_A B$、
+$F(B \otimes_A B) = F(A) \otimes_A B \otimes_A B$ などを得る。
+完全性は『降下』の補題 \ref{descent-lemma-ff-exact} から従う。
+
+\medskip\noindent
+従って $\mathcal{F}$ は $\tau$-被覆（特に Zariski 被覆）およびアフィンを
+アフィンで被覆する任意の忠実平坦被覆に対する層条件を満たす。『降下』の補題 \ref{descent-lemma-standard-fpqc-covering} および『降下』の命題 \ref{descent-proposition-fpqc-descent-quasi-coherent} の証明と同様に論じると、
+$\mathcal{F}$ は $(\Sch/S)_\tau$ の対象からなる全ての fpqc 被覆に対する
+層条件を満たす。詳細は省略する。
+\end{proof}
+
+\noindent
+特に補題 \ref{adequate-lemma-adequate-fpqc} は、任意の二つの位相
+$\tau, \tau'$ に対し、$\tau$-位相に関する適切加群の集まりと
+$\tau'$-位相に関する適切加群の集まりが、台となる圏 $\Sch/S$ 上の
+加群の前層として同一であることを示す。
+
+\begin{definition}
+\label{adequate-definition-category-adequate-modules}
+$S$ をスキームとする。$(\Sch/S)_\tau$ 上の適切 $\mathcal{O}$-加群の圏を
+{\it $\textit{Adeq}(\mathcal{O})$} または
+{\it $\textit{Adeq}((\Sch/S)_\tau, \mathcal{O})$} と書く。位相を選ばずに
+適切加群のアーベル圏だけを考えるときは、単に {\it $\textit{Adeq}(S)$} と書く。
+\end{definition}
+
+\begin{lemma}
+\label{adequate-lemma-same-cohomology-adequate}
+$S$ をスキームとし、$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の適切
+$\mathcal{O}$-加群とする。
+\begin{enumerate}
+\item 制限 $\mathcal{F}|_{S_{Zar}}$ はスキーム $S$ 上の準連接
+$\mathcal{O}_S$-加群である。
+\item 制限 $\mathcal{F}|_{S_\etale}$ は $\mathcal{F}|_{S_{Zar}}$ に付随する
+準連接加群である。
+\item $S$ 上の任意のアフィンスキーム $U$ と全ての $q > 0$ に対し、
+$H^q(U, \mathcal{F}) = 0$ である。
+\item 標準同型
+$$
+H^q(S, \mathcal{F}|_{S_{Zar}}) =
+H^q((\Sch/S)_\tau, \mathcal{F}).
+$$
+がある。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{adequate-lemma-adequate-flat} および
+\ref{adequate-lemma-adequate-local} により、$S$ 上のアフィンスキーム間の任意の
+平坦射 $U \to V$ に対して
+$\mathcal{F}(U) = \mathcal{F}(V) \otimes_{\mathcal{O}(V)} \mathcal{O}(U)$
+である。特に、$U \subset V \subset S$ が $S$ のアフィン開部分ならば
+これが成り立つので、$\mathcal{F}|_{S_{Zar}}$ は準連接である。
+従って (1) が成り立つ。
+
+\medskip\noindent
+$S' \to S$ をスキームの \'etale 射とする。アフィン開部分 $U \subset S'$ が
+アフィン開部分 $V \subset S$ に写るとする。$U \to V$ は \'etale、従って
+平坦なので
+$\mathcal{F}(U) = \mathcal{F}(V) \otimes_{\mathcal{O}(V)} \mathcal{O}(U)$
+である。従って $\mathcal{F}|_{S'_{Zar}}$ は
+$\mathcal{F}|_{S_{Zar}}$ の引き戻しである。これで (2) が示された。
+
+\medskip\noindent
+『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-cech-vanish-collection} をサイト
+$(\Sch/S)_\tau$ に適用する。ここで $\mathcal{B}$ は $S$ 上のアフィンスキームの
+集合、$\text{Cov}$ は標準アフィン $\tau$-被覆の集合とする。補題の仮定 (3) は、
+『降下』の補題 \ref{descent-lemma-standard-covering-Cech} および、単一の
+アフィンによる被覆の場合の補題 \ref{adequate-lemma-adequate-fpqc} により満たされる。
+従って、$S$ 上の任意のアフィンスキーム $U$ に対して
+$H^p(U, \mathcal{F}) = 0$ を得る。これで (3) が示された。『降下』の命題 \ref{descent-proposition-same-cohomology-quasi-coherent} の証明と全く同様に、
+これは (4) のコホモロジーの等式を含意する。
+\end{proof}
+
+\begin{remark}
+\label{adequate-remark-compare}
+$S$ をスキームとする。函手
+$u : \QCoh(\mathcal{O}_S) \to \textit{Adeq}(\mathcal{O})$
+および
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$
+がある。すなわち、函手 $u : \mathcal{F} \mapsto \mathcal{F}^a$ は、付随する
+$\mathcal{O}$-加群をとることで得られ、補題 \ref{adequate-lemma-adequate-characterize} によりこれは適切である。逆に、函手 $v$ は制限
+$v : \mathcal{G} \mapsto \mathcal{G}|_{S_{Zar}}$ で得られる；補題 \ref{adequate-lemma-same-cohomology-adequate} を参照されたい。
+$\mathcal{F}^a$ は環付きトポスの射
+$((\Sch/S)_\tau, \mathcal{O}) \to (S_{Zar}, \mathcal{O}_S)$ による
+$\mathcal{F}$ の引き戻しとして記述できる（『降下』の注意 \ref{descent-remark-change-topologies-ringed-sites} 参照）。また、制限は押し出しなので、
+$u$ と $v$ は次のように随伴する：
+$$
+\SheafHom_{\mathcal{O}_S}(\mathcal{F}, v\mathcal{G})
+=
+\SheafHom_\mathcal{O}(u\mathcal{F}, \mathcal{G})
+$$
+ここで $\mathcal{O}$ は大サイト上の構造層を表す。この記述から、任意の
+準連接層について随伴写像 $\mathcal{F} \to vu\mathcal{F}$ が同型であることは
+直ちに分かる。
+\end{remark}
+
+\begin{lemma}
+\label{adequate-lemma-sheafification-adequate}
+$S$ をスキームとし、$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の
+$\mathcal{O}$-加群の前層とする。$S$ 上の全てのアフィンスキーム
+$\Spec(A)$ に対して函手 $F_{\mathcal{F}, A}$ が適切ならば、
+$\mathcal{F}$ の層化は適切 $\mathcal{O}$-加群である。
+\end{lemma}
+
+\begin{proof}
+$U = \Spec(A)$ を $S$ 上のアフィンスキームとし、
+$F = F_{\mathcal{F}, A}$ と置く。層化は
+$\mathcal{F}^\# = (\mathcal{F}^+)^+$ である；『サイトと層』の第 \ref{sites-section-sheafification} 節を参照されたい。構成により
+$$
+(\mathcal{F})^+(U) =
+\colim_\mathcal{U} \check{H}^0(\mathcal{U}, \mathcal{F})
+$$
+であり、余極限はサイト $(\Sch/S)_\tau$ の被覆全体にわたる。$U$ は
+アフィンなので、$U$ の標準アフィン $\tau$-被覆
+$\mathcal{U} = \{U_i \to U\}_{i \in I} =
+\{\Spec(A_i) \to \Spec(A)\}_{i \in I}$ にわたる極限だけをとれば十分である。
+各 $A \to A_i$ および $A \to A_i \otimes_A A_j$ は平坦なので、補題 \ref{adequate-lemma-adequate-flat} により
+$$
+\check{H}^0(\mathcal{U}, \mathcal{F}) =
+\Ker(\prod F(A) \otimes_A A_i \to \prod F(A) \otimes_A A_i \otimes_A A_j)
+$$
+である。$A \to \prod A_i$ は忠実平坦なので、『降下』の補題 \ref{descent-lemma-ff-exact} により、これは常に標準的に $F(A)$ と同型である。
+従って前層 $(\mathcal{F})^+$ は、$S$ 上の全てのアフィンスキームで
+$\mathcal{F}$ と同じ値をもつ。議論をもう一度繰り返すと、
+$\mathcal{F}^\# = ((\mathcal{F})^+)^+$ についても同じことが分かる。
+従って $F_{\mathcal{F}, A} = F_{\mathcal{F}^\#, A}$ であり、
+$\mathcal{F}^\#$ は適切である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-abelian-adequate}
+$S$ をスキームとする。
+\begin{enumerate}
+\item 圏 $\textit{Adeq}(\mathcal{O})$ はアーベル圏である。
+\item 函手
+$\textit{Adeq}(\mathcal{O}) \to
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$
+は完全である。
+\item $0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$ が
+$\mathcal{O}$-加群の短完全列であり、$\mathcal{F}_1$ と $\mathcal{F}_3$ が
+適切ならば、$\mathcal{F}_2$ も適切である。
+\item 圏 $\textit{Adeq}(\mathcal{O})$ は余極限をもち、函手
+$\textit{Adeq}(\mathcal{O}) \to
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$
+は余極限と可換する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\varphi : \mathcal{F} \to \mathcal{G}$ を適切 $\mathcal{O}$-加群の写像とする。
+(1) と (2) を示すには、
+$\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$ で計算した
+$\mathcal{K} = \Ker(\varphi)$ と $\mathcal{Q} = \Coker(\varphi)$ が
+適切であることを示せば十分である。$U = \Spec(A)$ を $S$ 上の
+アフィンスキームとし、$F = F_{\mathcal{F}, A}$ および
+$G = F_{\mathcal{G}, A}$ と置く。補題 \ref{adequate-lemma-kernel-adequate} および
+\ref{adequate-lemma-cokernel-adequate} により、誘導写像 $F \to G$ の核 $K$ と余核 $Q$ は
+適切函手である。核は前層の段階で計算されるので、
+$K = F_{\mathcal{K}, A}$ であり、$\mathcal{K}$ は適切である。余核については、
+$\mathcal{Q}'$ を $\varphi$ の前層としての余核と書く。このとき
+$Q = F_{\mathcal{Q}', A}$ および $\mathcal{Q} = (\mathcal{Q}')^\#$ である。
+従って補題 \ref{adequate-lemma-sheafification-adequate} により $\mathcal{Q}$ は適切である。
+
+\medskip\noindent
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$ を
+$\mathcal{O}$-加群の短完全列とし、$\mathcal{F}_1$ と $\mathcal{F}_3$ は適切とする。
+$U = \Spec(A)$ を $S$ 上のアフィンスキームとし、
+$F_i = F_{\mathcal{F}_i, A}$ と置く。函手の列
+$$
+0 \to F_1 \to F_2 \to F_3 \to 0
+$$
+は完全である。実際、$V = \Spec(B)$ が $U$ 上アフィンならば、補題 \ref{adequate-lemma-same-cohomology-adequate} により $H^1(V, \mathcal{F}_1) = 0$ である。
+補題 \ref{adequate-lemma-adequate-local} により $F_1$ と $F_3$ は適切函手なので、
+補題 \ref{adequate-lemma-extension-adequate} により $F_2$ は適切である。
+従って $\mathcal{F}_2$ は適切である。
+
+\medskip\noindent
+$\mathcal{I} \to \textit{Adeq}(\mathcal{O})$, $i \mapsto \mathcal{F}_i$ を
+図式とする。$\mathcal{F} = \colim_i \mathcal{F}_i$ を
+$\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$ で計算した余極限とする。
+(4) を示すには、$\mathcal{F}$ が適切であることを示せば十分である。
+$\mathcal{F}' = \colim_i \mathcal{F}_i$ を $\mathcal{O}$-加群の前層の圏で
+計算した余極限とする。このとき $\mathcal{F} = (\mathcal{F}')^\#$ である。
+$U = \Spec(A)$ を $S$ 上のアフィンスキームとし、
+$F_i = F_{\mathcal{F}_i, A}$ と置く。補題 \ref{adequate-lemma-colimit-adequate} により
+函手 $\colim_i F_i = F_{\mathcal{F}', A}$ は適切である。補題 \ref{adequate-lemma-sheafification-adequate} により $\mathcal{F}$ は適切である。
+\end{proof}
+
+\noindent
+次の補題は、準コンパクトかつ準分離な射による適切加群の全導来直接像
+$Rf_*\mathcal{F}$ が、コホモロジー層の適切な複体であることを述べる。
+
+\begin{lemma}
+\label{adequate-lemma-direct-image-adequate}
+$f : T \to S$ をスキームの準コンパクトかつ準分離な射とする。
+$(\Sch/T)_\tau$ 上の任意の適切 $\mathcal{O}_T$-加群について、押し出し
+$f_*\mathcal{F}$ と高次直接像 $R^if_*\mathcal{F}$ は
+$(\Sch/S)_\tau$ 上の適切 $\mathcal{O}_S$-加群である。
+\end{lemma}
+
+\begin{proof}
+まず高次直接像の計算法を説明する。入射分解
+$\mathcal{F} \to \mathcal{I}^\bullet$ を選ぶ。このとき
+$R^if_*\mathcal{F}$ は複体 $f_*\mathcal{I}^\bullet$ の第 $i$ コホモロジー層である。
+従って $R^if_*\mathcal{F}$ は、$(\Sch/S)_\tau$ の対象 $U/S$ に加群
+\begin{align*}
+\frac{\Ker(f_*\mathcal{I}^i(U) \to f_*\mathcal{I}^{i + 1}(U))}
+{\Im(f_*\mathcal{I}^{i - 1}(U) \to f_*\mathcal{I}^i(U))}
+& =
+\frac{\Ker(\mathcal{I}^i(U \times_S T) \to
+\mathcal{I}^{i + 1}(U \times_S T))}
+{\Im(\mathcal{I}^{i - 1}(U \times_S T) \to \mathcal{I}^i(U \times_S T))}
+\\
+& =
+H^i(U \times_S T, \mathcal{F}) \\
+& = H^i((\Sch/U \times_S T)_\tau,
+\mathcal{F}|_{(\Sch/U \times_S T)_\tau}) \\
+& = H^i(U \times_S T, \mathcal{F}|_{(U \times_S T)_{Zar}})
+\end{align*}
+を対応させる前層に付随する層である。最初の等号は『スキーム上の位相』の補題 \ref{topologies-lemma-morphism-big-fppf}（および他の位相に対する類似結果）、
+第二の等号は $(\Sch/T)_\tau$ の対象上の $\mathcal{F}$ のコホモロジーの定義、
+第三の等号は『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-cohomology-of-open}、最後の等号は補題 \ref{adequate-lemma-same-cohomology-adequate} による。従って補題 \ref{adequate-lemma-sheafification-adequate} により、次の段落の主張を示せば十分である。
+
+\medskip\noindent
+環 $A$ をとる。$T$ を $A$ 上準コンパクトかつ準分離なスキームとし、
+$\mathcal{F}$ を $(\Sch/T)_\tau$ 上の適切 $\mathcal{O}_T$-加群とする。
+$A$-代数 $B$ に対し $T_B = T \times_{\Spec(A)} \Spec(B)$ と置き、
+$\mathcal{F}_B = \mathcal{F}|_{(T_B)_{Zar}}$ を $\mathcal{F}$ の $T_B$ の
+小 Zariski サイトへの制限とする。（これはスキーム $T_B$ 上の通常の準連接層である；
+補題 \ref{adequate-lemma-same-cohomology-adequate} を参照されたい。）主張：函手
+$$
+B \longmapsto H^q(T_B, \mathcal{F}_B)
+$$
+は適切である。$T$ を部分に切り分ける通常の手順で補題を証明する。
+
+\medskip\noindent
+場合 I：$T$ はアフィンである。この場合、スキーム $T_B$ は全てアフィンであり、
+全ての $q \geq 1$ に対して $H^q(T_B, \mathcal{F}_B) = 0$ である。
+函手 $B \mapsto H^0(T_B, \mathcal{F}_B)$ は補題 \ref{adequate-lemma-pushforward-adequate} により適切である。
+
+\medskip\noindent
+場合 II：$T$ は分離的である。$T$ を被覆するのに必要なアフィンの最小個数を
+$n$ とする。$n$ に関する帰納法を用いる。基底の場合は場合 I である。
+アフィン開被覆 $T = V_1 \cup \ldots \cup V_n$ を選び、
+$V = V_1 \cup \ldots \cup V_{n - 1}$ および $U = V_n$ と置く。
+$$
+U \cap V = (V_1 \cap V_n) \cup \ldots \cup (V_{n - 1} \cap V_n)
+$$
+も $n - 1$ 個のアフィン開部分の合併である。実際、$T$ は分離的である；
+『スキーム』の補題 \ref{schemes-lemma-characterize-separated} を参照されたい。
+各 $B$ に対して、基底変換 $U_B$、$V_B$、および
+$(U \cap V)_B = U_B \cap V_B$ も同様に振る舞う。従って各 $B$ に対し、
+$B$ について函手的な長完全列
+$$
+0 \to
+H^0(T_B, \mathcal{F}_B) \to
+H^0(U_B, \mathcal{F}_B) \oplus H^0(V_B, \mathcal{F}_B) \to
+H^0((U \cap V)_B, \mathcal{F}_B) \to
+H^1(T_B, \mathcal{F}_B) \to \ldots
+$$
+がある；『層のコホモロジー』の補題 \ref{cohomology-lemma-mayer-vietoris} を
+参照されたい。帰納法の仮定により、函手
+$B \mapsto H^q(U_B, \mathcal{F}_B)$、
+$B \mapsto H^q(V_B, \mathcal{F}_B)$、および
+$B \mapsto H^q((U \cap V)_B, \mathcal{F}_B)$ は適切である。補題 \ref{adequate-lemma-kernel-adequate} および \ref{adequate-lemma-cokernel-adequate} を用いると、函手
+$B \mapsto H^q(T_B, \mathcal{F}_B)$ は、両端が適切である短完全列の中央に入る。
+従って補題 \ref{adequate-lemma-extension-adequate} から主張が従う。
+
+\medskip\noindent
+場合 III：一般の準コンパクトかつ準分離な場合。証明は再び、$T$ を被覆するのに
+必要なアフィンの個数 $n$ に関する帰納法で行う。基底の場合 $n = 1$ は場合 I である。
+アフィン開被覆 $T = V_1 \cup \ldots \cup V_n$ を選び、
+$V = V_1 \cup \ldots \cup V_{n - 1}$ および $U = V_n$ と置く。
+$T$ は準分離なので $U \cap V$ はアフィンスキームの準コンパクトな開部分であり、
+場合 II を適用できる。残りの議論は前段落と全く同じであるため省略する。
+\end{proof}
+
+
+
+
+
+
+
+\section{寄生的適切加群}
+\label{adequate-section-parasitic}
+
+\noindent
+本節では、スキーム $S$ 上の適切加群と準連接加群の比較を始める。函手
+$u : \QCoh(\mathcal{O}_S) \to \textit{Adeq}(\mathcal{O})$
+および
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$
+があり、随伴
+$$
+\SheafHom_{\QCoh(\mathcal{O}_S)}(\mathcal{F}, v\mathcal{G})
+=
+\SheafHom_{\textit{Adeq}(\mathcal{O})}(u\mathcal{F}, \mathcal{G})
+$$
+を満たすことを思い出す。また、任意の準連接層 $\mathcal{F}$ に対して
+$\mathcal{F} \to vu\mathcal{F}$ は同型である；注意 \ref{adequate-remark-compare} を参照されたい。従って $u$ は充満忠実な埋め込みであり、
+$\QCoh(\mathcal{O}_S)$ を $\textit{Adeq}(\mathcal{O})$ の充満部分圏と
+同一視できる。函手 $v$ は完全だが、$u$ は一般には左完全でない。
+$v$ の核は寄生的適切加群の部分圏である。
+
+\medskip\noindent
+『降下』の定義 \ref{descent-definition-parasitic} で寄生加群を定義した。
+適切加群については、この概念は選んだ位相に依存しない。
+
+\begin{lemma}
+\label{adequate-lemma-parasitic-adequate}
+$S$ をスキームとし、$\mathcal{F}$ を $(\Sch/S)_\tau$ 上の適切
+$\mathcal{O}$-加群とする。次は同値である：
+\begin{enumerate}
+\item $v\mathcal{F} = 0$ である；
+\item $\mathcal{F}$ は寄生的である；
+\item $\mathcal{F}$ は $\tau$-位相に関して寄生的である；
+\item 全ての開部分 $U \subset S$ に対して $\mathcal{F}(U) = 0$ である；
+\item アフィン開被覆 $S = \bigcup U_i$ であって、全ての $i$ に対して
+$\mathcal{F}(U_i) = 0$ となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+含意 (2) $\Rightarrow$ (3) $\Rightarrow$ (4) $\Rightarrow$ (5) は定義から
+直ちに従う。(5) を仮定する。$S = \bigcup U_i$ を、全ての $i$ に対し
+$\mathcal{F}(U_i) = 0$ となるアフィン開被覆とする。$V \to S$ を平坦射とする。
+各 $V_j$ がいずれかの $U_i$ に写るようなアフィン開被覆
+$V = \bigcup V_j$ が存在する。射 $V_j \to S$ は平坦なので、
+$V_j \to U_i$ も平坦である。従って、対応する環写像
+$A_i = \mathcal{O}(U_i) \to \mathcal{O}(V_j) = B_j$ は平坦である。補題 \ref{adequate-lemma-adequate-local} および \ref{adequate-lemma-adequate-flat} により、写像
+$\mathcal{F}(U_i) \otimes_{A_i} B_j \to \mathcal{F}(V_j)$ は同型である。
+従って $\mathcal{F}(V_j) = 0$ である。$\mathcal{F}$ は Zariski 位相の層なので
+$\mathcal{F}(V) = 0$ を得る。よって (5) は (2) を含意する。
+
+\medskip\noindent
+これで (2)、(3)、(4)、(5) の同値が示された。(1) は (3) と同値なので
+（注意 \ref{adequate-remark-compare} 参照）、五条件は全て同値である。
+\end{proof}
+
+\noindent
+$S$ をスキームとする。寄生的適切加群の部分圏は
+$\textit{Adeq}(\mathcal{O})$ の Serre 部分圏であり、その商は準連接加群の圏である。
+
+\begin{lemma}
+\label{adequate-lemma-adequate-by-parasitic}
+$S$ をスキームとする。寄生的適切加群の部分圏
+$\mathcal{C} \subset \textit{Adeq}(\mathcal{O})$ は Serre 部分圏である。
+さらに、函手 $v$ は圏同値
+$$
+\textit{Adeq}(\mathcal{O}) / \mathcal{C} = \QCoh(\mathcal{O}_S).
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+圏 $\mathcal{C}$ は完全函手
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$ の核である；補題 \ref{adequate-lemma-parasitic-adequate} を参照されたい。従って『ホモロジー代数』の補題 \ref{homology-lemma-kernel-exact-functor} により Serre 部分圏である。
+『ホモロジー代数』の補題 \ref{homology-lemma-serre-subcategory-is-kernel} により、誘導される
+完全函手
+$\overline{v} :
+\textit{Adeq}(\mathcal{O}) / \mathcal{C}
+\to
+\QCoh(\mathcal{O}_S)$
+を得る。$u$ は $v$ の右逆なので、$\overline{v}$ は直ちに本質的全射である。
+『ホモロジー代数』の補題 \ref{homology-lemma-quotient-by-kernel-exact-functor} により
+$\overline{v}$ は忠実である。最後に、再び $u$ が $v$ の右逆であることから、
+$\overline{v}$ は充満忠実である。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-direct-image-parasitic-adequate}
+$f : T \to S$ をスキームの準コンパクトかつ準分離な射とする。
+$(\Sch/T)_\tau$ 上の任意の寄生的適切 $\mathcal{O}_T$-加群について、押し出し
+$f_*\mathcal{F}$ と高次直接像 $R^if_*\mathcal{F}$ は
+$(\Sch/S)_\tau$ 上の寄生的適切 $\mathcal{O}_S$-加群である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{adequate-lemma-direct-image-adequate} で、これらの高次直接像が適切であることは
+既に見た。従って、任意の開 $\tau$-被覆 $\{U_i \to S\}$ に対して
+$(R^if_*\mathcal{F})(U_i) = 0$ を示せば十分である。そして
+『降下』の補題 \ref{descent-lemma-direct-image-parasitic} により
+$R^if_*\mathcal{F}$ は寄生的である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{適切加群の導来圏 I}
+\label{adequate-section-comparison}
+
+
+\noindent
+$S$ をスキームとする。第 \ref{adequate-section-parasitic} 節で始めた議論を続ける。
+完全函手 $v$ は函手
+$$
+D(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D(\QCoh(\mathcal{O}_S))
+$$
+を誘導し、有界版についても同様である。
+
+\begin{lemma}
+\label{adequate-lemma-quotient-easy}
+$S$ をスキームとし、$\mathcal{C} \subset \textit{Adeq}(\mathcal{O})$ を
+寄生的適切加群からなる充満部分圏とする。このとき
+$$
+D(\textit{Adeq}(\mathcal{O}))/D_\mathcal{C}(\textit{Adeq}(\mathcal{O}))
+= D(\QCoh(\mathcal{O}_S))
+$$
+であり、有界版についても同様である。
+\end{lemma}
+
+\begin{proof}
+『導来圏』の補題 \ref{derived-lemma-quotient-by-serre-easy} から
+直ちに従う。
+\end{proof}
+
+\noindent
+次に、函手
+$$
+K^+(\QCoh(\mathcal{O}_S))
+\longrightarrow
+K^+(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D^+(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D^+(\QCoh(\mathcal{O}_S)).
+$$
+を調べて逆向きの記述を求める。場合によっては、適切加群の導来圏は、
+準連接加群の複体のホモトピー圏を普遍擬同型で局所化したものである。
+$S$ をスキームとする。準連接 $\mathcal{O}_S$-加群の複体間の写像
+$\varphi : \mathcal{F}^\bullet \to \mathcal{G}^\bullet$ が
+{\it 普遍擬同型} であるとは、任意のスキームの射 $f : T \to S$ に対して
+引き戻し $f^*\varphi$ が擬同型であることをいう。
+
+\begin{lemma}
+\label{adequate-lemma-describe-Dplus-adequate}
+$U = \Spec(A)$ をアフィンスキームとする。下に有界な導来圏
+$D^+(\textit{Adeq}(\mathcal{O}))$ は、$K^+(\QCoh(\mathcal{O}_U))$ を
+普遍擬同型の乗法的部分集合で局所化したものである。
+\end{lemma}
+
+\begin{proof}
+$\varphi : \mathcal{F}^\bullet \to \mathcal{G}^\bullet$ を準連接
+$\mathcal{O}_U$-加群の複体の射とする。このとき
+$u\varphi : u\mathcal{F}^\bullet \to
+u\mathcal{G}^\bullet$ が擬同型であることと、
+$\varphi$ が普遍擬同型であることは同値である。従って、普遍擬同型の集まり
+$S$ は、『導来圏』の補題 \ref{derived-lemma-triangle-functor-localize} により三角構造と両立する飽和乗法系である。
+従って $S^{-1}K^+(\QCoh(\mathcal{O}_U))$ は存在し、三角圏である；
+『導来圏』の命題 \ref{derived-proposition-construct-localization} を参照されたい。『導来圏』の補題 \ref{derived-lemma-universal-property-localization} により標準函手
+$can : S^{-1}K^+(\QCoh(\mathcal{O}_U)) \to
+D^{+}(\textit{Adeq}(\mathcal{O}))$ を得る。
+
+\medskip\noindent
+ほとんど定義から、$U$ 上の任意の適切加群は準連接層への埋め込みをもつ；補題 \ref{adequate-lemma-adequate-characterize} を参照されたい。従って『導来圏』の補題 \ref{derived-lemma-subcategory-right-resolution} により、
+$\mathcal{F}^\bullet \in \Ob(K^+(\textit{Adeq}(\mathcal{O})))$ が与えられると、
+$\mathcal{G}^\bullet \in \Ob(K^+(\QCoh(\mathcal{O}_U)))$ となる擬同型
+$\mathcal{F}^\bullet \to u\mathcal{G}^\bullet$ が存在する。
+これで $can$ が本質的全射であることが示された。
+
+\medskip\noindent
+同様に、$\mathcal{F}^\bullet$ と $\mathcal{G}^\bullet$ を下に有界な準連接
+$\mathcal{O}_U$-加群の複体とする。これらの間の
+$D^+(\textit{Adeq}(\mathcal{O}))$ における射は、組
+$f : u\mathcal{F}^\bullet \to \mathcal{H}^\bullet$ と
+$s : u\mathcal{G}^\bullet \to \mathcal{H}^\bullet$ からなり、$s$ は擬同型である。
+擬同型 $s' : \mathcal{H}^\bullet \to u\mathcal{E}^\bullet$ を選ぶ。このとき
+$s' \circ f : \mathcal{F} \to \mathcal{E}^\bullet$ と普遍擬同型
+$s' \circ s : \mathcal{G}^\bullet \to \mathcal{E}^\bullet$ は、与えられた射に
+写る $S^{-1}K^{+}(\QCoh(\mathcal{O}_U))$ の射を与える。これで充満忠実性の
+「充満」部分が示された。忠実性も同様に示される。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-right-adjoint-adequate}
+$U = \Spec(A)$ をアフィンスキームとする。包含函手
+$$
+\textit{Adeq}(\mathcal{O}) \to
+\textit{Mod}((\Sch/U)_\tau, \mathcal{O})
+$$
+は右随伴 $A$\footnote{これは「adequator」である。} をもつ。さらに、任意の
+適切加群 $\mathcal{F}$ に対し、随伴写像
+$A(\mathcal{F}) \to \mathcal{F}$ は同型である。
+\end{lemma}
+
+\begin{proof}
+『スキーム上の位相』の補題 \ref{topologies-lemma-affine-big-site-fppf}
+（および他の位相に対する同様の結果）により、$(\textit{Aff}/U)_\tau$ 上の
+$\mathcal{O}$-加群を扱ってよい。$\mathcal{P}$ を $\textit{Alg}_A$ 上の
+加群値函手の圏、$\mathcal{A}$ を $\textit{Alg}_A$ 上の適切函手の圏とする。
+包含函手を $i : \mathcal{A} \to \mathcal{P}$ と書き、補題 \ref{adequate-lemma-adjoint} の構成を $Q : \mathcal{P} \to \mathcal{A}$ と書く。
+可換図式
+\begin{equation}
+\label{adequate-equation-categories}
+\vcenter{
+\xymatrix{
+\textit{Adeq}(\mathcal{O}) \ar[r]_-k \ar@{=}[d] &
+\textit{Mod}((\textit{Aff}/U)_\tau, \mathcal{O}) \ar[r]_-j &
+\textit{PMod}((\textit{Aff}/U)_\tau, \mathcal{O}) \ar@{=}[d] \\
+\mathcal{A} \ar[rr]^-i & & \mathcal{P}
+}
+}
+\end{equation}
+がある。左の縦の等号は補題 \ref{adequate-lemma-adequate-affine} であり、右の縦の等号は
+第 \ref{adequate-section-quasi-coherent} 節で説明した。
+$A(\mathcal{F}) = Q(j(\mathcal{F}))$ と定義する。$j$ は充満忠実なので、$A$ は
+包含函手 $k$ の右随伴であることが直ちに従う。さらに $k$ も充満忠実なので、
+最後の主張は形式的に従う。
+\end{proof}
+
+\noindent
+函手 $A$ は右随伴なので左完全である。包含函手は完全なので（補題 \ref{adequate-lemma-abelian-adequate} 参照）、$A$ は入射対象を入射対象に写し、圏
+$\textit{Adeq}(\mathcal{O})$ は十分多くの入射対象をもつ；『ホモロジー代数』の補題 \ref{homology-lemma-adjoint-enough-injectives} および『入射対象』の定理 \ref{injectives-theorem-sheaves-modules-injectives} を参照されたい。これは
+(\ref{adequate-equation-categories}) の同値と補題 \ref{adequate-lemma-enough-injectives} からも従う。
+
+\begin{lemma}
+\label{adequate-lemma-RA-zero}
+$U = \Spec(A)$ をアフィンスキームとする。
+$\textit{Adeq}(\mathcal{O})$ の任意の対象 $\mathcal{F}$ と全ての $p > 0$ に対し、
+$R^pA(\mathcal{F}) = 0$ である。ここで $A$ は補題 \ref{adequate-lemma-right-adjoint-adequate} のものとする。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{adequate-lemma-right-adjoint-adequate} の証明の記法を用いる。
+$(\textit{Aff}/U)_\tau$ 上の $\mathcal{O}$-加群の圏で入射分解
+$k(\mathcal{F}) \to \mathcal{I}^\bullet$ を選ぶ。『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-include-modules} および補題 \ref{adequate-lemma-same-cohomology-adequate} により、複体 $j(\mathcal{I}^\bullet)$ は完全である。
+一方、『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-injective-module-injective-presheaf} により、各
+$j(\mathcal{I}^n)$ は加群の前層の圏の入射対象である。従って
+$R^pA(\mathcal{F}) = R^pQ(j(k(\mathcal{F})))$ である。ここで補題 \ref{adequate-lemma-RQ-zero} を用いれば結果が従う。
+\end{proof}
+
+\noindent
+$S$ をスキームとする。第 \ref{adequate-section-adequate} 節の議論により、埋め込み
+$\textit{Adeq}(\mathcal{O}) \subset
+\textit{Mod}((\Sch/S)_\tau, \mathcal{O})$ は
+$\textit{Adeq}(\mathcal{O})$ を全ての $\mathcal{O}$-加群の圏の弱 Serre 部分圏として
+表す。コホモロジー層が適切である複体の三角部分圏を
+$$
+D_{\textit{Adeq}}(\mathcal{O}) \subset
+D(\mathcal{O}) = D(\textit{Mod}((\Sch/S)_\tau, \mathcal{O}))
+$$
+と書く；『導来圏』の第 \ref{derived-section-triangulated-sub} 節を
+参照されたい。標準函手
+$$
+D(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D_{\textit{Adeq}}(\mathcal{O})
+$$
+を得る；Derived Categories, Equation (\ref{derived-equation-compare}) を
+参照されたい。
+
+\begin{lemma}
+\label{adequate-lemma-bounded-below}
+$U = \Spec(A)$ がアフィンスキームならば、上の函手の下に有界な版
+\begin{equation}
+\label{adequate-equation-compare-bounded-adequate}
+D^+(\textit{Adeq}(\mathcal{O}))
+\longrightarrow
+D^+_{\textit{Adeq}}(\mathcal{O})
+\end{equation}
+は同値である。
+\end{lemma}
+
+\begin{proof}
+$A : \textit{Mod}(\mathcal{O}) \to \textit{Adeq}(\mathcal{O})$ を、補題 \ref{adequate-lemma-right-adjoint-adequate} で構成した包含函手の右随伴とする。
+$A$ は左完全であり、$\textit{Mod}(\mathcal{O})$ は十分多くの入射対象をもつので、
+$A$ は右導来函手
+$RA : D^+_{\textit{Adeq}}(\mathcal{O}) \to D^+(\textit{Adeq}(\mathcal{O}))$
+をもつ。$RA$ が (\ref{adequate-equation-compare-bounded-adequate}) の擬逆であることを
+主張する。鍵となる事実は、$\mathcal{F}$ が適切加群ならば、補題 \ref{adequate-lemma-RA-zero} により随伴写像 $\mathcal{F} \to RA(\mathcal{F})$ が
+擬同型であることである。
+
+\medskip\noindent
+すなわち、補題を完全に証明するには次を示せば十分である：
+\begin{enumerate}
+\item $\mathcal{F}^\bullet \in K^+(\textit{Adeq}(\mathcal{O}))$ が与えられると、
+標準写像 $\mathcal{F}^\bullet \to RA(\mathcal{F}^\bullet)$ は擬同型である；
+\item $\mathcal{G}^\bullet \in K^+(\textit{Mod}(\mathcal{O}))$ が与えられると、
+標準写像 $RA(\mathcal{G}^\bullet) \to \mathcal{G}^\bullet$ は擬同型である。
+\end{enumerate}
+(1) と (2) はいずれも、『導来圏』の補題 \ref{derived-lemma-two-ss-complex-functor} のスペクトル系列の一つを用いる
+スペクトル系列の議論により、鍵となる事実から従う。いくつかの詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-ext-adequate}
+$U = \Spec(A)$ をアフィンスキームとし、$\mathcal{F}$ と $\mathcal{G}$ を適切
+$\mathcal{O}$-加群とする。任意の $i \geq 0$ に対し、自然な写像
+$$
+\Ext^i_{\textit{Adeq}(\mathcal{O})}(\mathcal{F}, \mathcal{G})
+\longrightarrow
+\Ext^i_{\textit{Mod}(\mathcal{O})}(\mathcal{F}, \mathcal{G})
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+定義により、これらの Ext 群は導来圏の Hom 集合として計算される。
+従って補題 \ref{adequate-lemma-bounded-below} から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{純拡大}
+\label{adequate-section-pure}
+
+\noindent
+アフィンスキームの大サイト上の準連接層の拡大を、代数によって特徴づけたい。
+このために次の概念を導入する。
+
+\begin{definition}
+\label{adequate-definition-pure}
+$A$ を環とする。
+\begin{enumerate}
+\item $A$-加群 $P$ が {\it 純射影} であるとは、任意の $A$-加群の普遍完全列
+$0 \to K \to M \to N \to 0$ に対して列
+$0 \to \Hom_A(P, K) \to \Hom_A(P, M) \to \Hom_A(P, N) \to 0$
+が完全であることをいう。
+\item $A$-加群 $I$ が {\it 純入射} であるとは、任意の $A$-加群の普遍完全列
+$0 \to K \to M \to N \to 0$ に対して列
+$0 \to \Hom_A(N, I) \to \Hom_A(M, I) \to \Hom_A(K, I) \to 0$
+が完全であることをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+純射影加群を特徴づけよう。
+
+\begin{lemma}
+\label{adequate-lemma-pure-projective}
+$A$ を環とする。
+\begin{enumerate}
+\item 加群が純射影であることと、有限表示 $A$-加群の直和の直和因子であることは
+同値である。
+\item 任意の加群 $M$ に対し、$P$ が純射影である普遍完全列
+$0 \to N \to P \to M \to 0$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず『可換代数』の定理 \ref{algebra-theorem-universally-exact-criteria} により、
+有限表示 $A$-加群は純射影である。従って有限表示 $A$-加群の直和の直和因子は
+実際に純射影である。$M$ を任意の $A$-加群とする。これを有限表示 $A$-加群の
+フィルター余極限 $M = \colim_{i \in I} P_i$ として書く。列
+$$
+0 \to N \to \bigoplus P_i \to M \to 0.
+$$
+を考える。任意の有限表示 $A$-加群 $P$ に対して写像
+$\Hom_A(P, \bigoplus P_i) \to \Hom_A(P, M)$
+は全射である。実際、任意の写像 $P \to M$ はある $P_i$ を経由する。
+従って『可換代数』の定理 \ref{algebra-theorem-universally-exact-criteria} により、
+この列は普遍完全である。これで (2) が示された。ここで $M$ が純射影ならば、
+この列は分裂し、$M$ は $\bigoplus P_i$ の直和因子であることが分かる。
+\end{proof}
+
+\noindent
+次に純入射加群を特徴づけよう。
+
+\begin{lemma}
+\label{adequate-lemma-pure-injective}
+$A$ を環とする。任意の $A$-加群 $M$ に対し
+$M^\vee = \Hom_\mathbf{Z}(M, \mathbf{Q}/\mathbf{Z})$ とおく。
+\begin{enumerate}
+\item 任意の $A$-加群 $M$ に対し、$A$-加群 $M^\vee$ は純入射である。
+\item $A$-加群 $I$ が純入射であることと、写像
+$I \to (I^\vee)^\vee$ が分裂することは同値である。
+\item 任意の加群 $M$ に対し、$I$ が純入射である普遍完全列
+$0 \to M \to I \to N \to 0$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『代数の続論』の第 \ref{more-algebra-section-injectives-modules} 節にある函手
+$M \mapsto M^\vee$ の性質を、以後断りなく用いる。(1) は
+$\Hom_A(N, M^\vee) =
+\Hom_\mathbf{Z}(N \otimes_A M, \mathbf{Q}/\mathbf{Z})$
+であり、かつ $\mathbf{Q}/\mathbf{Z}$ がアーベル群の圏で入射的であることから従う。
+従って $I \to (I^\vee)^\vee$ が分裂すれば $I$ は純入射である。任意の
+$A$-加群 $M$ に対し、評価写像 $ev : M \to (M^\vee)^\vee$ は普遍単射であると
+主張する。実際、$ev^\vee : ((M^\vee)^\vee)^\vee \to M^\vee$ は右逆
+$ev' : M^\vee \to ((M^\vee)^\vee)^\vee$ をもつ。そこで任意の $A$-加群 $N$ に対し、
+写像 $N \otimes_A M \to N \otimes_A (M^\vee)^\vee$ に完全忠実函手
+${}^\vee$ を適用すると
+$$
+\Hom_A(N, ((M^\vee)^\vee)^\vee) =
+\Big(N \otimes_A (M^\vee)^\vee\Big)^\vee
+\to
+\Big(N \otimes_A M\Big)^\vee =
+\Hom_A(N, M^\vee)
+$$
+を得る。これは右逆の存在により全射であるから、主張が従う。この主張から (3) と、
+(2) の条件の必要性が従う。
+\end{proof}
+
+\noindent
+先へ進む前に、この節の残りで頻繁に用いる次の観察を述べる。
+
+\begin{lemma}
+\label{adequate-lemma-split-universally-exact-sequence}
+$A$ を環とする。
+\begin{enumerate}
+\item $L \to M \to N$ を $A$-加群の普遍完全列とし、
+$K = \Im(M \to N)$ とおく。このとき $K \to N$ は普遍単射である。
+\item 任意の普遍完全複体は、普遍完全な短完全列へ分解できる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明する。任意の $A$-加群 $T$ に対し、$\otimes$ の右完全性により列
+$L \otimes_A T \to M \otimes_A T \to K \otimes_A T \to 0$ は完全である。
+仮定により列
+$L \otimes_A T \to M \otimes_A T \to N \otimes_A T$ も完全である。
+これらを合わせると、$K \otimes_A T \to N \otimes_A T$ は単射である。
+
+\medskip\noindent
+(2) の意味は次の通りである。$M^\bullet$ を $A$-加群の普遍完全複体とし、
+$K^i = \Ker(d^i) \subset M^i$ とおく。このとき短完全列
+$0 \to K^i \to M^i \to K^{i + 1} \to 0$ は普遍完全である。
+これは (1) から直ちに従う。
+\end{proof}
+
+\begin{definition}
+\label{adequate-definition-pure-resolution}
+$A$ を環とし、$M$ を $A$-加群とする。
+\begin{enumerate}
+\item {\it 純射影分解} $P_\bullet \to M$ とは、各 $P_i$ が純射影である普遍完全列
+$$
+\ldots \to P_1 \to P_0 \to M \to 0
+$$
+のことである。
+\item {\it 純入射分解} $M \to I^\bullet$ とは、各 $I^i$ が純入射である普遍完全列
+$$
+0 \to M \to I^0 \to I^1 \to \ldots
+$$
+のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これらの分解は、あらゆる普遍完全な左分解または右分解の類の中で、通常の
+一意性を満たす。
+
+\begin{lemma}
+\label{adequate-lemma-pure-projective-resolutions}
+$A$ を環とする。
+\begin{enumerate}
+\item 任意の $A$-加群は純射影分解をもつ。
+\end{enumerate}
+$M \to N$ を $A$-加群の写像とする。$P_\bullet \to M$ を純射影分解、
+$N_\bullet \to N$ を普遍完全分解とする。
+\begin{enumerate}
+\item[(2)] 与えられた写像
+$$
+M = \Coker(P_1 \to P_0) \to \Coker(N_1 \to N_0) = N
+$$
+を誘導する複体の写像 $P_\bullet \to N_\bullet$ が存在する。
+\item[(3)] 同じ写像 $M \to N$ を誘導する二つの写像
+$\alpha, \beta : P_\bullet \to N_\bullet$ はホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{adequate-lemma-pure-projective} から直ちに従う。(2) と (3) を証明する前に、
+補題 \ref{adequate-lemma-split-universally-exact-sequence} により普遍完全複体
+$N_\bullet \to N \to 0$ を普遍完全な短完全列
+$0 \to K_0 \to N_0 \to N \to 0$ および
+$0 \to K_i \to N_i \to K_{i - 1} \to 0$ に分解できることに注意する。
+
+\medskip\noindent
+(2) を証明する。$P_0$ は純射影なので、写像 $P_0 \to M \to N$ の持ち上げとなる
+写像 $P_0 \to N_0$ をとれる。ここから $K_0$ に値をとる誘導写像
+$P_1 \to F_0 \to N_0$ を得る。$P_1$ は純射影なので、これを写像
+$P_1 \to N_1$ に持ち上げられる。するとさらに写像 $P_2 \to P_1 \to N_1$ が
+誘導され、これは $N_0$ への写像、すなわち $K_1$ への写像として零になる。
+従って持ち上げて写像 $P_2 \to N_2$ を得られる。この操作を繰り返す。
+
+\medskip\noindent
+(3) を証明する。$\alpha, \beta$ がホモトピックであることを示すには、差
+$\gamma = \alpha - \beta$ が零にホモトピックであることを示せばよい。
+$\gamma_0 : P_0 \to N_0$ の像は $K_0$ に含まれることに注意する。従って
+$\gamma_0$ を写像 $h_0 : P_0 \to N_1$ に持ち上げられる。写像
+$\gamma_1' = \gamma_1 - h_0 \circ d_{P, 1} : P_1 \to N_1$ を考える。
+$h_0$ の選び方により、$\gamma_1'$ の像は $K_1$ に含まれる。$P_1$ は純射影なので、
+$\gamma_1'$ を写像 $h_1 : P_1 \to N_2$ に持ち上げられる。この時点で
+$\gamma_1 = h_0 \circ d_{F, 1} + d_{N, 2} \circ h_1$ を得る。この操作を繰り返す。
+\end{proof}
+
+\begin{lemma}
+\label{adequate-lemma-pure-injective-resolutions}
+$A$ を環とする。
+\begin{enumerate}
+\item 任意の $A$-加群は純入射分解をもつ。
+\end{enumerate}
+$M \to N$ を $A$-加群の写像とする。$M \to M^\bullet$ を普遍完全分解、
+$N \to I^\bullet$ を純入射分解とする。
+\begin{enumerate}
+\item[(2)] 与えられた写像
+$$
+M = \Ker(M^0 \to M^1) \to \Ker(I^0 \to I^1) = N
+$$
+を誘導する複体の写像 $M^\bullet \to I^\bullet$ が存在する。
+\item[(3)] 同じ写像 $M \to N$ を誘導する二つの写像
+$\alpha, \beta : M^\bullet \to I^\bullet$ はホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この補題は補題 \ref{adequate-lemma-pure-projective-resolutions} の双対である。
+全ての矢印を逆向きにする点を除けば、証明は同一である。
+\end{proof}
+
+\noindent
+以上の結果を用いて、純拡大群を次のように定義できる。$A$ を環とし、$M$, $N$ を
+$A$-加群とする。純入射分解 $N \to I^\bullet$ を選ぶ。補題 \ref{adequate-lemma-pure-injective-resolutions} により、複体
+$$
+\Hom_A(M, I^\bullet)
+$$
+はホモトピーを除いて矛盾なく定まる。従ってその $i$ 次コホモロジー加群は、
+$M$ と $N$ の矛盾なく定まる不変量である。
+
+\begin{definition}
+\label{adequate-definition-pure-ext}
+$A$ を環とし、$M$, $N$ を $A$-加群とする。$i$ 次 {\it 純拡大加群}
+$\text{Pext}^i_A(M, N)$ とは、$N$ の純入射分解を $I^\bullet$ としたときの複体
+$\Hom_A(M, I^\bullet)$ の $i$ 次コホモロジー加群である。
+\end{definition}
+
+\noindent
+注意：$A$-加群の完全列が純拡大群の長完全列を誘導するとは限らない。
+（このためには普遍完全列が必要である。）以上の結果から明らかな事実をまとめる。
+
+\begin{lemma}
+\label{adequate-lemma-facts-pext}
+$A$ を環とする。
+\begin{enumerate}
+\item $N$ が純入射ならば、$i > 0$ に対し $\text{Pext}^i_A(M, N) = 0$ である。
+\item $M$ が純射影ならば、$i > 0$ に対し $\text{Pext}^i_A(M, N) = 0$ である。
+特に $M$ が有限表示 $A$-加群ならばそうである。
+\item $P_\bullet$ を $M$ の純射影分解とすると、$\text{Pext}^i_A(M, N)$ は複体
+$\Hom_A(P_\bullet, N)$ の $i$ 次コホモロジー加群でもある。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) を示すため、二重複体
+$$
+A^{\bullet, \bullet} = \Hom_A(P_\bullet, I^\bullet)
+$$
+を考える。その各行は次数 $0$ を除いて完全であり、その唯一のコホモロジーは
+$\Hom_A(M, I^q)$ である。各列も次数 $0$ を除いて完全であり、その唯一の
+コホモロジーは $\Hom_A(P_p, N)$ である。従って『ホモロジー代数』の第 \ref{homology-section-double-complex} 節においてこの複体に付随する二つの
+スペクトル系列は退化し、等式を与える。
+\end{proof}
+
+
+
+
+
+\section{大サイト上の準連接層の高次 Ext}
+\label{adequate-section-big}
+
+\noindent
+純入射加群 $I$ に付随する加群値函手 $\underline{I}$ は、$\textit{Alg}_A$ 上の
+適切函手の圏における入射対象を与える。注意すべきことに、純射影加群が適切函手の
+圏における射影対象を与えるとは限らない。ただし、線形適切函手という十分豊富な
+射影対象は存在する。
+
+\begin{lemma}
+\label{adequate-lemma-pure-injective-injective-adequate}
+$A$ を環とし、$\mathcal{A}$ を $\textit{Alg}_A$ 上の適切函手の圏とする。
+$\mathcal{A}$ の入射対象は、$I$ が純入射 $A$-加群であるような函手
+$\underline{I}$ にちょうど一致する。
+\end{lemma}
+
+\begin{proof}
+$I$ を $\mathcal{A}$ の入射対象とする。ある $A$-加群 $M$ に対する埋め込み
+$I \to \underline{M}$ を選ぶ。$I$ は入射的なので、ある加群値函手 $F$ によって
+$\underline{M} = I \oplus F$ と書ける。すると $M = I(A) \oplus F(A)$ であり、
+$I = \underline{I(A)}$ が従う。従って任意の入射対象は、ある $A$-加群 $I$ に対する
+$\underline{I}$ の形である。任意の普遍完全列 $0 \to M \to N \to L \to 0$ が
+$\mathcal{A}$ の完全列
+$0 \to \underline{M} \to \underline{N} \to \underline{L} \to 0$
+を誘導するので、加群 $I$ が純入射でなければならないことは明らかである。
+
+\medskip\noindent
+最後に、$I$ を純入射 $A$-加群とする。$\mathcal{A}$ の入射対象への埋め込み
+$\underline{I} \to J$ を選ぶ（補題 \ref{adequate-lemma-enough-injectives} 参照）。
+上で見たように、$J = \underline{I'}$ であり、ここで $I'$ は純入射 $A$-加群である。
+$\underline{I} \to \underline{I'}$ は単射なので、写像 $I \to I'$ は普遍単射である。
+$I$ に関する仮定により、この写像は分裂する。従って $\underline{I}$ は
+$J = \underline{I'}$ の直和因子であり、それゆえ $\mathcal{A}$ の入射対象である。
+\end{proof}
+
+\noindent
+$U = \Spec(A)$ をアフィンスキームとし、$M$ を $A$-加群とする。$U$ 上の
+準連接層 $\widetilde{M}$ に付随する $(\Sch/U)_\tau$ 上の準連接
+$\mathcal{O}$-加群を $M^a$ と書く。これで次の補題を述べるための記法が全て
+整った。
+
+\begin{lemma}
+\label{adequate-lemma-big-ext}
+$U = \Spec(A)$ をアフィンスキームとし、$M$, $N$ を $A$-加群とする。
+全ての $i$ に対し、$M$ と $N$ に関して函手的な標準同型
+$$
+\Ext^i_{\textit{Mod}(\mathcal{O})}(M^a, N^a) = \text{Pext}^i_A(M, N)
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+右辺から左辺への標準射を構成しよう。すなわち、$N \to I^\bullet$ が純入射分解ならば、
+$M^a \to (I^\bullet)^a$ は（適切な）$\mathcal{O}$-加群の完全複体である。
+従って $\text{Pext}^i_A(M, N)$ の任意の元は $D(\mathcal{O})$ における写像
+$N^a \to M^a[i]$、すなわち左辺の群の元を与える。
+
+\medskip\noindent
+この写像が同型であることを示す。補題 \ref{adequate-lemma-ext-adequate} により、
+
+$\Ext^i_{\textit{Mod}(\mathcal{O})}(M^a, N^a)$ を
+$\Ext^i_{\textit{Adeq}(\mathcal{O})}(M^a, N^a)$ で置き換えられる。
+$\mathcal{A}$ を $\textit{Alg}_A$ 上の適切函手の圏とする。補題 \ref{adequate-lemma-adequate-affine} により、$\mathcal{A}$ は
+$\textit{Adeq}(\mathcal{O})$ と同値であることを既に見た；補題 \ref{adequate-lemma-right-adjoint-adequate} の証明も参照されたい。従って示すべきことは
+$$
+\Ext^i_\mathcal{A}(\underline{M}, \underline{N}) =
+\text{Pext}^i_A(M, N)
+$$
+だけである。しかし、純入射分解 $N \to I^\bullet$ は $\mathcal{A}$ における
+$\underline{N}$ の入射分解に正確に対応するので、これは補題 \ref{adequate-lemma-pure-injective-injective-adequate} から明らかである。
+\end{proof}
+
+
+
+
+
+
+
+\section{適切加群の導来圏 II}
+\label{adequate-section-derived-categories}
+
+\noindent
+$S$ をスキームとする。$\mathcal{O}_S$ を $S$ の構造層、$\mathcal{O}$ を大サイト
+$(\Sch/S)_\tau$ の構造層とする。『降下』の注意 \ref{descent-remark-change-topologies-ringed} では、環付きサイトの射
+\begin{equation}
+\label{adequate-equation-compare-big-small}
+f :
+((\Sch/S)_\tau, \mathcal{O})
+\longrightarrow
+(S_{Zar}, \mathcal{O}_S).
+\end{equation}
+を構成した。前節までに、函手
+$f_* : \textit{Mod}(\mathcal{O}) \to \textit{Mod}(\mathcal{O}_S)$
+が適切層を準連接層へ移し、完全函手
+$v : \textit{Adeq}(\mathcal{O}) \to \QCoh(\mathcal{O}_S)$ を誘導すること、さらに
+$f_* = v$ が同値
+$\textit{Adeq}(\mathcal{O})/\mathcal{C} \to \QCoh(\mathcal{O}_S)$
+を誘導することを見た。ここで $\mathcal{C}$ は寄生的適切加群の部分圏である。
+また、函手 $f^*$ は準連接加群を適切加群へ移し、$v$ の左随伴である函手
+$u : \QCoh(\mathcal{O}_S) \to \textit{Adeq}(\mathcal{O})$
+を誘導する。
+
+\medskip\noindent
+$D_{\textit{Adeq}}(\mathcal{O})$ と $D_\QCoh(S)$ の間にも、非常によく似た関係がある。
+まず、圏 $D_{\textit{Adeq}}(\mathcal{O})$ が選んだ位相によらない理由を説明する。
+
+\begin{remark}
+\label{adequate-remark-D-adeq-independence-topology}
+$S$ をスキームとし、$\tau, \tau' \in \{Zar, \etale, smooth, syntomic, fppf\}$
+とする。構造層 $\mathcal{O}$ を $(\Sch/S)_\tau$ 上、または
+$(\Sch/S)_{\tau'}$ 上の層とみなしたものを、それぞれ\ $\mathcal{O}_\tau$、
+\ $\mathcal{O}_{\tau'}$ と書く。このとき $D_{\textit{Adeq}}(\mathcal{O}_\tau)$ と
+$D_{\textit{Adeq}}(\mathcal{O}_{\tau'})$ は標準同型である。これは『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-compare-topologies-derived-adequate-modules} から従う。
+実際、$\tau$ が位相 $\tau'$ より強いと仮定し、
+$\mathcal{C} = (\Sch/S)_{fppf}$、$\mathcal{B}$ を $S$ 上のアフィンスキーム全体とする。
+仮定 (1) と (2) は上で確認した。仮定 (3) は明らかであり、仮定 (4) は
+補題 \ref{adequate-lemma-same-cohomology-adequate} から従う。
+\end{remark}
+
+\begin{remark}
+\label{adequate-remark-D-adeq-and-D-QCoh}
+$S$ をスキームとする。射 $f$（(\ref{adequate-equation-compare-big-small}) 参照）は随伴函手
+$Rf_* : D_{\textit{Adeq}}(\mathcal{O}) \to D_\QCoh(S)$
+および
+$Lf^* : D_\QCoh(S) \to D_{\textit{Adeq}}(\mathcal{O})$
+を誘導する。さらに $Rf_* Lf^* \cong \text{id}_{D_\QCoh(S)}$ である。
+
+\medskip\noindent
+証明の概略を述べる。注意 \ref{adequate-remark-D-adeq-independence-topology} により、位相
+$\tau$ は Zariski 位相であると仮定してよい。$\mathcal{O}$-加群上の無界全導来函手
+$Lf^*$ と $Rf_*$ の存在およびその随伴性を用いる；『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-adjoint} を参照されたい。この場合 $f_*$ は単に
+$(\Sch/S)_{Zar}$ の部分圏 $S_{Zar}$ への制限である。従って
+$Rf_* = f_*$ が
+$Rf_* : D_{\textit{Adeq}}(\mathcal{O}) \to D_\QCoh(S)$
+を誘導することは明らかである。$\mathcal{G}^\bullet$ を $D_\QCoh(S)$ の対象とする。
+遷移写像が各項で分裂単射である平坦 $\mathcal{O}_S$-加群の上に有界な複体の系
+$\mathcal{K}_1^\bullet \to \mathcal{K}_2^\bullet \to \ldots$ と図式
+$$
+\xymatrix{
+\mathcal{K}_1^\bullet \ar[d] \ar[r] &
+\mathcal{K}_2^\bullet \ar[d] \ar[r] & \ldots \\
+\tau_{\leq 1}\mathcal{G}^\bullet \ar[r] &
+\tau_{\leq 2}\mathcal{G}^\bullet \ar[r] & \ldots
+}
+$$
+を、『導来圏』の補題 \ref{derived-lemma-special-direct-system} に列挙された
+性質 (1), (2), (3) を満たすように選べる。ここで $\mathcal{P}$ は平坦
+$\mathcal{O}_S$-加群全体である。このとき $Lf^*\mathcal{G}^\bullet$ は
+$\colim f^*\mathcal{K}_n^\bullet$ により計算される；『サイト上のコホモロジー』の補題 \ref{sites-cohomology-lemma-pullback-K-flat} および
+\ref{sites-cohomology-lemma-derived-base-change} を参照されたい（我々のサイトが
+十分多くの点をもつことは『エタール・コホモロジー（\'Etale Cohomology）』の補題 \ref{etale-cohomology-lemma-points-fppf} による）。各 $i$ に対し
+$H^i(Lf^*\mathcal{G}^\bullet) =
+\colim H^i(f^*\mathcal{K}_n^\bullet)$ が適切であることを示す必要がある。
+補題 \ref{adequate-lemma-abelian-adequate} により、各
+$H^i(f^*\mathcal{K}_n^\bullet)$ が適切であることを示せば十分である。
+
+\medskip\noindent
+$H^i(f^*\mathcal{K}_n^\bullet)$ の適切性は $S$ 上局所的なので、
+$S = \Spec(A)$ はアフィンであると仮定してよい。$S$ はアフィンなので
+$D_\QCoh(S) = D(\QCoh(\mathcal{O}_S))$ である；『スキームの導来圏』の第 \ref{perfect-section-derived-quasi-coherent} 節の議論を参照されたい。
+従って擬同型 $\mathcal{F}^\bullet \to \mathcal{K}_n^\bullet$ が存在し、ここで
+$\mathcal{F}^\bullet$ は平坦な準連接加群からなる上に有界な複体である。
+すると $f^*\mathcal{F}^\bullet \to f^*\mathcal{K}_n^\bullet$ は擬同型であり、
+$f^*\mathcal{F}^\bullet$ のコホモロジー層は適切である。
+
+\medskip\noindent
+最後の主張
+$Rf_* Lf^* \cong \text{id}_{D_\QCoh(S)}$
+は、上の函手の明示的記述から従う。（平たく言えば、$\mathcal{F}$ が準連接で
+$p > 0$ ならば、$L_pf^*\mathcal{F}$ は寄生的適切加群である。）
+\end{remark}
+
+
+\begin{remark}
+\label{adequate-remark-conclusion}
+上の注意 \ref{adequate-remark-D-adeq-and-D-QCoh} から、導来圏の同値
+$$
+D_{\textit{Adeq}}(\mathcal{O})/D_\mathcal{C}(\mathcal{O})
+\longrightarrow
+D_\QCoh(S)
+$$
+を得る。ここで $\mathcal{C}$ は寄生的適切加群の圏である。実際、
+$D_\mathcal{C}(\mathcal{O})$ が $Rf_*$ の核であることは明らかなので、表示された
+函手を得る。$D_{\textit{Adeq}}(\mathcal{O})$ の任意の対象 $X$ に対し、写像
+$Lf^*Rf_*X \to X$ は $D_\QCoh(S)$ において擬同型へ写る。従って
+$Lf^*Rf_*X \to X$ は
+$D_{\textit{Adeq}}(\mathcal{O})/D_\mathcal{C}(\mathcal{O})$ における同型である。
+最後に、$X, Y$ を $D_{\textit{Adeq}}(\mathcal{O})$ の対象とすると、写像
+$$
+Rf_* :
+\Hom_{D_{\textit{Adeq}}(\mathcal{O})/D_\mathcal{C}(\mathcal{O})}(X, Y)
+\to
+\Hom_{D_\QCoh(S)}(Rf_*X, Rf_*Y)
+$$
+は全単射である。実際、上の注意により $Lf^*$ がその逆を与える。
+\end{remark}

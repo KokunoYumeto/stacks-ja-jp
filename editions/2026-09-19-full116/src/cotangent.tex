@@ -1,0 +1,4341 @@
+% Generated mechanically from frozen input inputs/p11/ja/cotangent.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{91}
+\chapter{余接複体}
+
+
+
+\phantomsection
+\label{cotangent-section-phantom}
+
+
+\section{序論}
+\label{cotangent-section-introduction}
+
+\noindent
+本章の目的は、環準同型、スキームの射、および代数空間の射の
+余接複体を構成することである。参考文献として、講義録
+\cite{quillenhomology}、論文 \cite{quillencohomology}、および書籍
+\cite{Andre} と \cite{cotangent} がある。
+
+
+
+
+\section{読者への助言}
+\label{cotangent-section-advice-reader}
+
+\noindent
+本章では、単体的手法の使用を最小限に抑えるよう努めた。環 $A$ 上の環
+$B$ の{\it 分解} $P_\bullet$ を選ぶことは、圏
+$\mathcal{C}_{B/A}$ 上のアーベル群層の{\it ホモロジー}を計算するための
+道具であると考える。注 \ref{cotangent-remark-resolution} を参照せよ。これは、
+{\v C}ech 複体を用いてコホモロジーを計算する際に「良い被覆」が果たす
+役割に似ている。圏上のホモロジーについては、『サイト上のコホモロジー』
+第\ref{sites-cohomology-section-homology}節を参照されたい。
+導来下方 ! 関手 $L\pi_!$ がホモロジーに対して果たす役割は、
+$R\Gamma(\mathcal{C}_{B/A}, -)$ がコホモロジーに対して果たす役割と
+同じである。第\ref{cotangent-section-compute-L-pi-shriek}節で調べる圏
+$\mathcal{C}_{B/A}$ は、$P$ が $A$ 上の多項式代数であるような因子分解
+$A \to P \to B$ の圏の反対圏である。この圏には環の層の準同型
+$$
+\underline{A} \longrightarrow \mathcal{O} \longrightarrow \underline{B}
+$$
+があり、対象 $U = (P \to B)$ 上では $\mathcal{O}(U) = P$ である。
+$A$ 上の $B$ の余接複体は
+$$
+L_{B/A} =
+L\pi_!(\Omega_{\mathcal{O}/\underline{A}} \otimes_\mathcal{O} \underline{B})
+$$
+として得られることが分かる。補題
+\ref{cotangent-lemma-compute-cotangent-complex} を参照せよ。環準同型の余接複体の
+基本性質を証明する際には、一貫してこの観点を用いるよう努めた。
+特に、標準分解の存在に依存せずにすべての結果を証明できるが、ここでは
+そのようにはしていない。この理論は十分満足できるものである。ただし、
+基本三角形（命題 \ref{cotangent-proposition-triangle}）の証明だけは、導来下方
+! 関手についてわずかに多くの理論を用いているかもしれない。
+別の方法も示すため、注 \ref{cotangent-remark-triangle} と
+\ref{cotangent-remark-explicit-map} では、標準分解の単純な性質に基づくこの結果への
+アプローチをかなり詳しく概説する。
+
+\medskip\noindent
+環付きトポスの射、スキームの射、代数空間の射などの余接複体については、
+上で論じた「通常の環準同型」の場合から、可能な限り多くを導く方針をとる。
+
+
+
+
+
+\section{環準同型の余接複体}
+\label{cotangent-section-cotangent-ring-map}
+
+\noindent
+$A$ を環とする。$\textit{Alg}_A$ を $A$-代数の圏とする。
+随伴関手の対 $(U,V)$ を考える。ここで
+$V : \textit{Alg}_A \to \textit{Sets}$ は忘却関手であり、
+$U : \textit{Sets} \to \textit{Alg}_A$ は集合 $E$ に $E$ を変数とする
+$A$ 上の多項式代数 $A[E]$ を対応させる。
+$X_\bullet$ を『単体的方法』第\ref{simplicial-section-standard}節で
+構成された $\text{Fun}(\textit{Alg}_A, \textit{Alg}_A)$ の単体対象とする。
+
+\medskip\noindent
+$A$-代数 $B$ を考える。得られる単体 $A$-代数を
+$P_\bullet = X_\bullet(B)$ と記す。$P_0=A[B]$、$P_1=A[A[B]]$ などで
+あったことを想起せよ。特に、各項 $P_n$ は多項式 $A$-代数である。
+また、増大
+$$
+\epsilon : P_\bullet \longrightarrow B
+$$
+がある。ここで $B$ は定値単体 $A$-代数とみなす。
+
+\begin{definition}
+\label{cotangent-definition-standard-resolution}
+環準同型 $A\to B$ に対し、{\it $A$ 上の $B$ の標準分解}とは、各項が
+$$
+P_0 = A[B],\quad P_1 = A[A[B]],\quad \ldots
+$$
+であり、写像が『単体的方法』の例
+\ref{simplicial-example-polynomial-algebra-maps} で構成されたものである
+増大 $\epsilon:P_\bullet\to B$ をいう。
+\end{definition}
+
+\noindent
+ある種の状況では、この標準分解を用いて左導来関手を計算できることが
+分かる。
+
+\begin{definition}
+\label{cotangent-definition-cotangent-complex-ring-map}
+環準同型 $A\to B$ の{\it 余接複体} $L_{B/A}$ とは、単体 $B$-加群
+$$
+\Omega_{P_\bullet/A} \otimes_{P_\bullet, \epsilon} B
+$$
+に対応する $B$-加群の複体をいう。ここで
+$\epsilon:P_\bullet\to B$ は $A$ 上の $B$ の標準分解である。
+\end{definition}
+
+\noindent
+『単体的方法』第\ref{simplicial-section-complexes}節では単体加群に
+鎖複体を対応させたが、ここでは余鎖複体を用いる。したがって、次数
+$-n$ の項 $L_{B/A}^{-n}$ は $B$-加群
+$\Omega_{P_n/A}\otimes_{P_n,\epsilon_n}B$ であり、$m>0$ に対して
+$L_{B/A}^m=0$ である。
+
+\begin{remark}
+\label{cotangent-remark-variant-cotangent-complex}
+環準同型 $A\to B$ をとる。$\mathcal{A}$ を $A$-代数の矢
+$\psi:C\to B$ の圏とし、$\mathcal{S}$ を、$E$ が集合であるような写像
+$E\to B$ の圏とする。随伴関手
+$V:\mathcal{A}\to\mathcal{S}$（忘却関手）と
+$U:\mathcal{S}\to\mathcal{A}$ があり、後者は $E\to B$ を
+$A[E]\to B$ に送る。$X_\bullet$ を『単体的方法』
+第\ref{simplicial-section-standard}節で構成された
+$\text{Fun}(\mathcal{A},\mathcal{A})$ の単体対象とする。
+図式
+$$
+\xymatrix{
+\mathcal{A} \ar[d] \ar[r] & \mathcal{S} \ar@<1ex>[l] \ar[d] \\
+\textit{Alg}_A \ar[r] & \textit{Sets} \ar@<1ex>[l]
+}
+$$
+は可換である。したがって
+$X_\bullet(\text{id}_B:B\to B)$ は $A$ 上の $B$ の標準分解に等しい。
+\end{remark}
+
+\begin{lemma}
+\label{cotangent-lemma-colimit-cotangent-complex}
+有向添字集合 $I$ 上の環準同型の系 $A_i\to B_i$ に対し、
+$\colim L_{B_i/A_i}=L_{\colim B_i/\colim A_i}$ である。
+\end{lemma}
+
+\begin{proof}
+忘却関手 $V:A\textit{-Alg}\to\textit{Sets}$ とその随伴
+$U:\textit{Sets}\to A\textit{-Alg}$ はフィルター余極限と可換する。
+さらに、関手 $B/A\mapsto\Omega_{B/A}$ も同様である
+（『可換代数』、補題 \ref{algebra-lemma-colimit-differentials}）。
+\end{proof}
+
+
+
+
+
+\section{単体分解と導来下方 !}
+\label{cotangent-section-compute-L-pi-shriek}
+
+\noindent
+環準同型 $A \to B$ をとる。対象が $A$-代数準同型
+$\alpha : P \to B$ であり、$P$ が $A$ 上の多項式代数
+（ある変数集合\footnote{濃度が $B$ の濃度以下の集合だけを考えれば十分である。}
+による）であるような圏を考える。その射
+$s : (\alpha : P \to B) \to (\alpha' : P' \to B)$ は、
+$\alpha' \circ s = \alpha$ を満たす $A$-代数準同型
+$s : P \to P'$ とする。この圏の {\bf 反対圏}を
+$\mathcal{C} = \mathcal{C}_{B/A}$ と記す。反対圏をとる理由は、対象
+$(P, \alpha)$ がアフィンスキームの図式
+$$
+\xymatrix{
+\Spec(B) \ar[d] \ar[r] & \Spec(P) \ar[ld] \\
+\Spec(A)
+}
+$$
+に対応すると考えたいからである。$\mathcal{C}$ に密着位相
+（『サイト』、例 \ref{sites-example-indiscrete}）を入れる。すなわち、
+恒等射が被覆を与えるサイトの構造を $\mathcal{C}$ に入れ、すべての
+前層が層となるようにする。さらに、$\mathcal{C}$ に二つの環の層を
+入れる。第一は対象 $(P,\alpha)$ を $P$ に送る層 $\mathcal{O}$ である。
+第二は定値層 $B$ であり、これを $\underline{B}$ と記す。環付きトポスの
+射の図式
+\begin{equation}
+\label{cotangent-equation-pi}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}), \underline{B}) \ar[r]_i \ar[d]_\pi &
+(\Sh(\mathcal{C}), \mathcal{O}) \\
+(\Sh(*), B)
+}
+}
+\end{equation}
+を得る。射 $i$ は台となるトポス上では恒等射であり、
+$i^\sharp : \mathcal{O} \to \underline{B}$ は明らかな写像である。
+写像 $\pi$ は『サイト上のコホモロジー』、例
+\ref{sites-cohomology-example-category-to-point} のものである。
+以下では導来関手
+$
+Li^* : D(\mathcal{O}) \longrightarrow D(\underline{B})
+$
+（$Ri_* = i_* : D(\underline{B}) \to D(\mathcal{O})$ の左随伴）と
+$
+L\pi_! : D(\underline{B}) \longrightarrow D(B)
+$
+（$\pi^* = \pi^{-1} : D(B) \to D(\underline{B})$ の左随伴）が
+重要な役割を果たす。
+
+\begin{lemma}
+\label{cotangent-lemma-identify-pi-shriek}
+上の記法のもとで、$P_\bullet$ を増大
+$\epsilon : P_\bullet \to B$ を備えた単体 $A$-代数とする。
+各 $P_n$ は $A$ 上の多項式代数であり、$\epsilon$ は台となる単体集合上で
+自明 Kan ファイブレーションであると仮定する。このとき
+$$
+L\pi_!(\mathcal{F}) = \mathcal{F}(P_\bullet, \epsilon)
+$$
+が $D(\textit{Ab})$、それぞれ $D(B)$ において成り立つ。これは
+$\textit{Ab}(\mathcal{C})$、それぞれ
+$\textit{Mod}(\underline{B})$ の $\mathcal{F}$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+『サイト上のコホモロジー』、補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution} の判定法を
+用いる。$\mathcal{C}$ の対象 $U=(Q,\beta)$ が与えられたとき、
+$$
+S_\bullet = \Mor_\mathcal{C}((P_\bullet, \epsilon), (Q, \beta))
+$$
+が一点集合とホモトピー同値であることを示せばよい。
+ある集合 $E$ に対して $Q=A[E]$ と書く（圏 $\mathcal{C}$ の選び方により
+これは可能である）。すると
+$$
+S_\bullet = \Mor_{\textit{Sets}}((E, \beta|_E), (P_\bullet, \epsilon))
+$$
+$*$ を一点集合上の定値単体集合とする。$b\in B$ に対し、
+デカルト図式
+$$
+\xymatrix{
+F_{b, \bullet} \ar[r] \ar[d] & P_\bullet \ar[d]_\epsilon \\
+{*} \ar[r]^b & B
+}
+$$
+で定義される単体集合を $F_{b,\bullet}$ とする。この記法では
+$S_\bullet=\prod_{e\in E}F_{\beta(e),\bullet}$ である。
+$\epsilon$ は自明 Kan ファイブレーションであると仮定したから、
+$F_{b,\bullet}\to *$ は自明 Kan ファイブレーションである
+（『単体的方法』、補題
+\ref{simplicial-lemma-trivial-kan-base-change}）。
+したがって $S_\bullet\to *$ も自明 Kan ファイブレーションであり
+（『単体的方法』、補題
+\ref{simplicial-lemma-product-trivial-kan}）、ゆえに
+$S_\bullet$ は $*$ とホモトピー同値である
+（『単体的方法』、補題
+\ref{simplicial-lemma-trivial-kan-homotopy}）。
+\end{proof}
+
+\noindent
+特に、$A$ 上の $B$ の標準分解を用いて導来下方 ! を計算できる。
+
+\begin{lemma}
+\label{cotangent-lemma-pi-shriek-standard}
+環準同型 $A\to B$ をとり、$\epsilon:P_\bullet\to B$ を
+$A$ 上の $B$ の標準分解とする。$\pi$ を
+(\ref{cotangent-equation-pi}) のものとする。このとき
+$$
+L\pi_!(\mathcal{F}) = \mathcal{F}(P_\bullet, \epsilon)
+$$
+が $D(\textit{Ab})$、それぞれ $D(B)$ において成り立つ。これは
+$\textit{Ab}(\mathcal{C})$、それぞれ
+$\textit{Mod}(\underline{B})$ の $\mathcal{F}$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}[第一の証明]
+補題 \ref{cotangent-lemma-identify-pi-shriek} を適用する。各項 $P_n$ は
+多項式代数だから、この補題の第一の仮定は満たされる。第二の仮定は
+次のように示す。『単体的方法』、補題
+\ref{simplicial-lemma-standard-simplicial-homotopy} により、
+写像 $\epsilon$ は台となる単体集合のホモトピー同値である。
+『単体的方法』、補題
+\ref{simplicial-lemma-homotopy-equivalence} により、これは
+$\epsilon$ が対応するアーベル群の複体の擬同型を誘導することを意味する。
+さらに『単体的方法』、補題
+\ref{simplicial-lemma-qis-simplicial-abelian-groups} により、
+$\epsilon$ は台となる単体集合の自明 Kan ファイブレーションである。
+\end{proof}
+
+\begin{proof}[第二の証明]
+『サイト上のコホモロジー』、補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution} の判定法を
+用いる。$U=(Q,\beta)$ を $\mathcal{C}$ の対象とする。
+$$
+S_\bullet = \Mor_\mathcal{C}((P_\bullet, \epsilon), (Q, \beta))
+$$
+が一点集合とホモトピー同値であることを示せばよい。ある集合 $E$ に対して
+$Q=A[E]$ と書く（圏 $\mathcal{C}$ の選び方によりこれは可能である）。
+注 \ref{cotangent-remark-variant-cotangent-complex} の記法を用いると
+$$
+S_\bullet = \Mor_\mathcal{S}((E \to B), i(P_\bullet \to B))
+$$
+『単体的方法』、補題
+\ref{simplicial-lemma-standard-simplicial-homotopy} により、写像
+$i(P_\bullet\to B)\to i(B\to B)$ は $\mathcal{S}$ における
+ホモトピー同値である。したがって $S_\bullet$ は
+$$
+\Mor_\mathcal{S}((E \to B), (B \to B)) = \{*\}
+$$
+とホモトピー同値であり、所望の結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-compute-cotangent-complex}
+環準同型 $A\to B$ をとり、$\pi$ と $i$ を
+(\ref{cotangent-equation-pi}) のものとする。標準的同型
+$$
+L_{B/A} = L\pi_!(Li^*\Omega_{\mathcal{O}/A}) =
+L\pi_!(i^*\Omega_{\mathcal{O}/A}) =
+L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B})
+$$
+が $D(B)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+圏 $\mathcal{C}$ の対象 $\alpha:P\to B$ に対して
+$\Omega_{P/A}$ は自由 $P$-加群である。したがって
+$\Omega_{\mathcal{O}/A}$ は平坦 $\mathcal{O}$-加群である。ゆえに
+$Li^*\Omega_{\mathcal{O}/A}=i^*\Omega_{\mathcal{O}/A}$ は、
+$\alpha:P\to A$ に $B$-加群
+$\Omega_{P/A}\otimes_{P,\alpha}B$ を対応させる
+$\underline{B}$-加群の層である。補題
+\ref{cotangent-lemma-pi-shriek-standard} により、右辺はこの層を標準分解上で
+評価することで計算される。これは左辺の定義そのものである
+（定義 \ref{cotangent-definition-cotangent-complex-ring-map}）。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-pi-lower-shriek-constant-sheaf}
+環準同型 $A\to B$ に対し、$\pi$ を (\ref{cotangent-equation-pi}) のものと
+すると $L\pi_!(\pi^{-1}M)=M$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-identify-pi-shriek} によれば、
+$L\pi_!(\pi^{-1}M)$ は $(\pi^{-1}M)(P_\bullet,\epsilon)$ で計算される。
+これは $M$ 上の定値単体対象である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-identify-H0}
+環準同型 $A\to B$ に対し、$H^0(L_{B/A})=\Omega_{B/A}$ である。
+\end{lemma}
+
+\begin{proof}
+直接計算により証明する。補題
+\ref{cotangent-lemma-compute-cotangent-complex} の同一視を用いる。
+$\Omega_{\mathcal{O}/A}\otimes\underline{B}$ から値
+$\Omega_{B/A}$ をもつ定値層への明らかな写像がある。したがって、これは
+写像
+$$
+H^0(L_{B/A}) = H^0(L\pi_!(\Omega_{\mathcal{O}/A} \otimes \underline{B}))
+= \pi_!(\Omega_{\mathcal{O}/A} \otimes \underline{B}) \to \Omega_{B/A}
+$$
+を誘導する。$P\to B$ が全射であるような $\mathcal{C}_{B/A}$ の対象
+$P\to B$ を選べば、この写像が全射であることが分かる
+（『可換代数』、補題
+\ref{algebra-lemma-differential-surjective}）。
+単射性を示すため、$P\to B$ を $\mathcal{C}_{B/A}$ の対象とし、
+$\xi\in\Omega_{P/A}\otimes_P B$ が $\Omega_{B/A}$ で零に写る元で
+あるとする。まず、$P'\to B$ が全射で $P'$ が $A$ 上の多項式代数となる
+因子分解 $P\to P'\to B$ を選ぶ。$P$ を $P'$ で置き換えてよい。
+$B=P/I$ ならば、$\Omega_{P/A}\otimes_P B\to\Omega_{B/A}$ の核は
+$I/I^2$ の像である（『可換代数』、補題
+\ref{algebra-lemma-differential-seq}）。$\xi$ を $f\in I$ の像とする。
+二つの写像 $a,b:P'=P[x]\to P$ を考える。第一は $x$ を $0$ に送り、
+第二は $x$ を $f$ に送る（どちらの場合も $P[x]\to B$ は $x$ を零に
+送る）。すると $\xi$ と $0$ は
+$\Omega_{P'/A}\otimes_{P'}B$ における $\text{d}x\otimes1$ の像である。
+したがって $\xi$ と $0$ は余極限
+$\pi_!(\Omega_{\mathcal{O}/A}\otimes\underline{B})$ で同じ像をもつ
+（『サイト上のコホモロジー』、例
+\ref{sites-cohomology-example-category-to-point}）。これでよい。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-pi-lower-shriek-polynomial-algebra}
+$B$ が環 $A$ 上の多項式代数であるとする。$\pi$ を
+(\ref{cotangent-equation-pi}) のものとすれば、$\pi_!$ は完全であり、
+$\pi_!\mathcal{F}=\mathcal{F}(B\to B)$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-identify-pi-shriek} により、$B$ 上の定値単体代数を用いて
+$L\pi_!$ を計算できることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-cotangent-complex-polynomial-algebra}
+$B$ が環 $A$ 上の多項式代数ならば、
+$L_{B/A}$ は $\Omega_{B/A}[0]$ と擬同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-compute-cotangent-complex} と
+\ref{cotangent-lemma-pi-lower-shriek-polynomial-algebra} から直ちに従う。
+\end{proof}
+
+
+
+
+
+\section{分解の構成}
+\label{cotangent-section-polynomial}
+
+\noindent
+ネーター有限型の場合には、有限型環準同型に対して「小さい」単体分解を
+構成できる。
+
+\begin{lemma}
+\label{cotangent-lemma-polynomial}
+$A$ をネーター環とし、$A\to B$ を有限型環準同型とする。
+$\mathcal{A}$ を $A$-代数準同型 $C\to B$ の圏とする。
+$n\geq0$ とし、$P_\bullet$ を $\mathcal{A}$ の単体対象で、次を満たす
+ものとする。
+\begin{enumerate}
+\item $P_\bullet\to B$ は単体集合の自明 Kan ファイブレーションである。
+\item $k\leq n$ に対して $P_k$ は $A$ 上有限型である。
+\item $\mathcal{A}$ の単体対象として
+$P_\bullet=\text{cosk}_n\text{sk}_nP_\bullet$ である。
+\end{enumerate}
+このとき $P_{n+1}$ は有限型 $A$-代数である。
+\end{lemma}
+
+\begin{proof}
+この補題の証明は直接的ではあるが、やや煩雑である。考え方を明確にする
+ため、一般の証明の前に小さい $n$ で何が起こるかを説明する。例えば
+$n=0$ ならば、(3) は $P_1=P_0\times_B P_0$ を意味する。
+環準同型 $P_0\to B$ は全射だから、『代数詳論』、補題
+\ref{more-algebra-lemma-fibre-product-finite-type} により、これは
+$A$ 上有限型である。
+
+\medskip\noindent
+$n=1$ ならば、(3) は
+$$
+P_2 = \{(f_0, f_1, f_2) \in P_1^3 \mid
+d_0f_0 = d_0f_1,\ d_1f_0 = d_0f_2,\ d_1f_1 = d_1f_2 \}
+$$
+を意味する。ここで等式は $P_0$ におけるものである。三つ組
+$$
+(d_0f_0, d_1f_0, d_1f_1) = (d_0f_1, d_0f_2, d_1f_2)
+$$
+は $B$ 上のファイバー積 $P_0\times_B P_0\times_B P_0$ の元である。
+実際、写像 $d_i:P_1\to P_0$ は $B$ 上の射である。したがって写像
+$$
+\psi : P_2 \longrightarrow P_0 \times_B P_0 \times_B P_0
+$$
+を得る。元
+$(g_0,g_1,g_2)\in P_0\times_B P_0\times_B P_0$ 上の $\psi$ の
+ファイバーは、$(d_0,d_1)(f_0)=(g_0,g_1)$、
+$(d_0,d_1)(f_1)=(g_0,g_2)$、および
+$(d_0,d_1)(f_2)=(g_1,g_2)$ を満たす $1$-単体の三つ組
+$(f_0,f_1,f_2)$ の集合である。$P_\bullet\to B$ は自明 Kan
+ファイブレーションだから、写像
+$(d_0,d_1):P_1\to P_0\times_B P_0$ は全射である。したがって
+$P_2$ はデカルト図式
+$$
+\xymatrix{
+P_2 \ar[d] \ar[r] & P_1^3 \ar[d] \\
+P_0 \times_B P_0 \times_B P_0 \ar[r] & (P_0 \times_B P_0)^3
+}
+$$
+に入る。『代数詳論』、補題
+\ref{more-algebra-lemma-formal-consequence} により結論を得る。
+一般の場合も同様だが、もう少し記法が必要である。
+
+\medskip\noindent
+$n>1$ の場合を考える。『単体的方法』、補題
+\ref{simplicial-lemma-cosk-above-object} により、条件
+$P_\bullet=\text{cosk}_n\text{sk}_nP_\bullet$ は、単体
+$A$-代数の圏でも、したがって集合の圏でも同じ等式が成り立つことを
+意味する（$A$-代数から集合への忘却関手は極限と可換する）。ゆえに
+$$
+P_{n + 1} =
+\Mor(\Delta[n + 1], P_\bullet) =
+\Mor(\text{sk}_n \Delta[n + 1], \text{sk}_n P_\bullet)
+$$
+である。これは『単体的方法』、補題
+\ref{simplicial-lemma-simplex-map} と式
+(\ref{simplicial-equation-cosk}) による。環
+$$
+Q_{k, m} = \Mor(\text{sk}_k \Delta[m], \text{sk}_k P_\bullet)
+$$
+が $A$ 上有限型であることを $1\leq k<m\leq n+1$ について帰納法で
+示す。$k=1$、$1<m\leq n+1$ の場合は、上で論じた $n=1$ の場合と
+まったく同様である。すなわち、デカルト図式
+$$
+\xymatrix{
+Q_{1, m} \ar[d] \ar[r] & P_1^N \ar[d] \\
+P_0 \times_B \ldots \times_B P_0 \ar[r] & (P_0 \times_B P_0)^N
+}
+$$
+がある。ここで $N={m+1\choose2}$ である。前と同様に結論を得る。
+
+\medskip\noindent
+$1\leq k_0\leq n$ とし、$1\leq k\leq k_0$ かつ
+$k<m\leq n+1$ を満たすすべての添字の組に対して $Q_{k,m}$ が
+$A$ 上有限型であると仮定する。$k_0+1<m\leq n+1$ に対して、
+デカルト正方形
+$$
+\xymatrix{
+Q_{k_0 + 1, m} \ar[d] \ar[r] & P_{k_0 + 1}^N \ar[d] \\
+Q_{k_0, m} \ar[r] & Q_{k_0, k_0 + 1}^N
+}
+$$
+があると主張する。ここで $N$ は $\Delta[m]$ の非退化
+$(k_0+1)$-単体の個数である。実際、$Q_{k_0+1,m}$ の元を
+$\Delta[m]$ の $(k_0+1)$-骨格から $P_\bullet$ への関数 $f$ と考える。
+$f$ を $k_0$-骨格に制限すると、図式の左の垂直写像が得られる。
+また、各非退化 $(k_0+1)$-単体に制限すると、上の水平写像が得られる。
+さらに、このような $f$ を与えることは、その $k_0$-骨格への制限と各
+非退化 $(k_0+1)$-面への制限を、重なりで一致するように与えることと
+同じであり、これがまさに図式の内容である。また、
+$P_\bullet\to B$ が自明 Kan ファイブレーションであることから、写像
+$$
+P_{k_0} \to Q_{k_0, k_0 + 1} = \Mor(\partial \Delta[k_0 + 1], P_\bullet)
+$$
+は全射である。実際、$k_0\geq1$ に対してすべての写像
+$\partial\Delta[k_0+1]\to B$ は $\Delta[k_0+1]\to B$ に延長できる
+（定値単体集合に関する短い議論は省略する）。帰納法の仮定により環
+$Q_{k_0,m}$ と $Q_{k_0,k_0+1}$ は有限型 $A$-代数だから、再び
+『代数詳論』、補題 \ref{more-algebra-lemma-formal-consequence} により
+$Q_{k_0+1,m}$ も同じ性質をもつ。
+\end{proof}
+
+\begin{proposition}
+\label{cotangent-proposition-polynomial}
+$A$ をネーター環とし、$A\to B$ を有限型環準同型とする。増大
+$\epsilon:P_\bullet\to B$ を備えた単体 $A$-代数 $P_\bullet$ で、
+各 $P_n$ が $A$ 上有限型の多項式代数であり、$\epsilon$ が単体集合の
+自明 Kan ファイブレーションとなるものが存在する。
+\end{proposition}
+
+\begin{proof}
+$\mathcal{A}$ を $A$-代数準同型 $C\to B$ の圏とする。この証明では、
+単体対象ならびに骨格関手と余骨格関手をこの圏でとる。
+
+\medskip\noindent
+$A$ 上有限型の多項式代数 $P_0$ と全射 $P_0\to B$ を選ぶ。
+第一近似として $P_\bullet=\text{cosk}_0(P_0)$ とおく。言い換えると、
+$P_\bullet$ は各項が $P_n=P_0\times_A\ldots\times_A P_0$ である
+単体 $A$-代数である（証明の最後の段落では、この単体対象を
+$P^0_\bullet$ と記す）。『単体的方法』、補題
+\ref{simplicial-lemma-cosk-minus-one-equivalence} により、写像
+$P_\bullet\to B$ は単体集合の自明 Kan ファイブレーションである。
+また、$P_\bullet=\text{cosk}_0\text{sk}_0P_\bullet$ である。
+
+\medskip\noindent
+ある $n\geq0$ に対して、次を満たす $P_\bullet$ が構成されたとする
+（証明の最後の段落では、これは $P^n_\bullet$ となる）。
+\begin{enumerate}
+\item[(a)] $P_\bullet\to B$ は単体集合の自明 Kan ファイブレーションである。
+\item[(b)] $0\leq k\leq n$ に対して $P_k$ は有限生成多項式代数である。
+\item[(c)] $P_\bullet = \text{cosk}_n \text{sk}_n P_\bullet$
+\end{enumerate}
+補題 \ref{cotangent-lemma-polynomial} により、$A$ 上の有限生成多項式代数 $Q$ と
+全射 $Q\to P_{n+1}$ を選べる。$P_n$ は多項式代数だから、
+$A$-代数準同型 $s_i:P_n\to P_{n+1}$ は写像 $s'_i:P_n\to Q$ に
+持ち上がる。$d'_j:Q\to P_n$ を $Q\to P_{n+1}$ と
+$d_j:P_{n+1}\to P_n$ の合成とする。$k\leq n$ に対して
+$P'_k=P_k$、$P'_{n+1}=Q$ とおき、次数 $k\leq n-1$ では射
+$d'_i=d_i$ と $s'_i=s_i$ を、次数 $n$ では射 $d'_j$ と $s'_i$ を用いて、
+$\mathcal{A}$ の切断単体対象 $P'_\bullet$ を得る。
+$\text{cosk}_{n+1}$ を用いて、これを $\mathcal{A}$ の完全な単体対象
+$P'_\bullet$ に延長する。余骨格関手の関手性により、与えられた
+$(n+1)$-切断単体対象の射を延長する単体対象の射
+$P'_\bullet\to P_\bullet$ がある（証明の最後の段落では、この射を
+$P^{n+1}_\bullet\to P^n_\bullet$ と記す）。
+
+\medskip\noindent
+$P'_\bullet$ は $n$ を $n+1$ に置き換えた条件 (b)、(c) を満たす。
+写像 $P'_\bullet\to P_\bullet$ は、『単体的方法』、補題
+\ref{simplicial-lemma-section} の仮定 (1)、(2)、(3)、(4) を
+$n$ の代わりに $n+1$ として満たすと主張する。条件 (1)、(2) は構成から
+成り立つ。『単体的方法』、補題
+\ref{simplicial-lemma-cosk-above-object} により、
+$P_\bullet = \text{cosk}_{n + 1}\text{sk}_{n + 1}P_\bullet$
+および
+$P'_\bullet = \text{cosk}_{n + 1}\text{sk}_{n + 1}P'_\bullet$
+が $\mathcal{A}$ だけでなく $A$-代数の圏でも、したがって集合の圏でも
+成り立つ（$A$-代数から集合への忘却関手はすべての極限と可換する）。
+これで (3)、(4) が示された。ゆえに補題を適用でき、
+$P'_\bullet\to P_\bullet$ は自明 Kan ファイブレーションである。
+『単体的方法』、補題
+\ref{simplicial-lemma-trivial-kan-composition} により、
+$P'_\bullet\to B$ も自明 Kan ファイブレーションであり、(a) も成り立つ。
+
+\medskip\noindent
+証明を終えるため、上で構成した単体代数の列
+$$
+\ldots \to P^2_\bullet \to P^1_\bullet \to P^0_\bullet
+$$
+の逆極限 $P_\bullet=\lim P^n_\bullet$ をとる。『単体的方法』、補題
+\ref{simplicial-lemma-limit-trivial-kan} により、写像
+$P_\bullet\to B$ は自明 Kan ファイブレーションである。一方、上の構成は
+各次数である固定された有限生成多項式代数に安定する。これが所望のもので
+ある。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-pi-shriek-finite}
+$A$ をネーター環とし、$A \to B$ を有限型環準同型とする。
+$\pi$ と $\underline{B}$ を (\ref{cotangent-equation-pi}) のものとする。
+$\mathcal{F}$ を $\underline{B}$-加群とし、すべての
+$\alpha : P = A[x_1, \ldots, x_n] \to B$ に対して
+$\mathcal{F}(P, \alpha)$ が有限 $B$-加群であるとする。このとき
+$L\pi_!(\mathcal{F})$ のコホモロジー加群は有限 $B$-加群である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-identify-pi-shriek} と命題 \ref{cotangent-proposition-polynomial}
+により、有限型多項式代数上での $\mathcal{F}$ の値から構成される
+複体によって $L\pi_!(\mathcal{F})$ を計算できる。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-cotangent-finite}
+$A$ をネーター環とし、$A \to B$ を有限型環準同型とする。
+このとき、すべての $n \in \mathbf{Z}$ に対して $H^n(L_{B/A})$ は
+有限 $B$-加群である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-compute-cotangent-complex} と
+\ref{cotangent-lemma-pi-shriek-finite} を適用する。
+\end{proof}
+
+\begin{remark}[分解]
+\label{cotangent-remark-resolution}
+$A \to B$ を任意の環準同型とする。増大単体 $A$-代数
+$\epsilon : P_\bullet \to B$ について、各 $P_n$ が多項式代数であり、
+$\epsilon$ が単体集合の自明 Kan ファイブレーションであるとき、これを
+{\it $A$ 上の $B$ の分解}と呼ぶことにする。$P_\bullet \to B$ が、
+各 $P_n$ が $B$ へ全射する多項式代数であるような単体 $A$-代数の
+増大であるとき、次は同値である。
+\begin{enumerate}
+\item $\epsilon : P_\bullet \to B$ は $A$ 上の $B$ の分解である。
+\item $\epsilon : P_\bullet \to B$ は付随する複体の擬同型である。
+\item $\epsilon : P_\bullet \to B$ は単体集合のホモトピー同値を誘導する。
+\end{enumerate}
+これを見るには、『単体的方法』の補題
+\ref{simplicial-lemma-trivial-kan-homotopy},
+\ref{simplicial-lemma-homotopy-equivalence}、および
+\ref{simplicial-lemma-qis-simplicial-abelian-groups} を用いればよい。
+$A$ 上の $B$ の分解 $P_\bullet$ は、『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}
+のように $\mathcal{C}_{B/A}$ の余単体対象 $U_\bullet$ を与え、したがって
+$$
+L\pi_!\mathcal{F} = \mathcal{F}(P_\bullet)
+$$
+が $\mathcal{F}$ に関して関手的に成り立つ。補題
+\ref{cotangent-lemma-identify-pi-shriek} を参照されたい。命題
+\ref{cotangent-proposition-polynomial} の証明の形式的な部分から分解の存在が従う。
+また、補題 \ref{cotangent-lemma-pi-shriek-standard} の最初の証明で、$A$ 上の $B$ の
+標準分解が分解であることも見た（したがって、この用語法は衝突を生じない）。
+一方、命題 \ref{cotangent-proposition-polynomial} の証明の議論は、『単体的方法』の
+節 \ref{simplicial-section-standard} における単体的計算に訴えずに分解の
+存在を示す。さらに、分解を{\it 任意に}選んでも、補題
+\ref{cotangent-lemma-compute-cotangent-complex} により $D(B)$ における標準同型
+$$
+L_{B/A} = \Omega_{P_\bullet/A} \otimes_{P_\bullet, \epsilon} B
+$$
+が得られる。分解を任意に選べることは非常に有用である。
+\end{remark}
+
+\begin{lemma}
+\label{cotangent-lemma-O-homology-B-homology}
+$A \to B$ を環準同型とする。$\pi$, $\mathcal{O}$, $\underline{B}$ を
+(\ref{cotangent-equation-pi}) のものとする。任意の $\mathcal{O}$-加群 $\mathcal{F}$
+に対して
+$$
+L\pi_!(\mathcal{F}) = L\pi_!(Li^*\mathcal{F}) =
+L\pi_!(\mathcal{F} \otimes_\mathcal{O}^\mathbf{L} \underline{B})
+$$
+が $D(\textit{Ab})$ で成り立つ。
+\end{lemma}
+
+\begin{proof}
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-O-homology-qis}
+の仮定が $\mathcal{C}_{B/A}$ 上の $\mathcal{O} \to \underline{B}$ に
+ついて成り立つことを確かめれば十分である。以下、注意
+\ref{cotangent-remark-resolution} の結果を断りなく用いる。$A$ 上の $B$ の分解
+$P_\bullet$ を選び、$\mathcal{C}_{B/A}$ の適切な余単体対象
+$U_\bullet$ を得る。$P_\bullet \to B$ は付随するアーベル群の複体の
+擬同型を誘導するので、$L\pi_!\mathcal{O} = B$ である。一方、
+$L\pi_!\underline{B}$ は $\underline{B}(U_\bullet) = B$ によって計算される。
+これにより、『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-O-homology-qis}
+の第二の仮定が確かめられ、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-apply-O-B-comparison}
+$A \to B$ を環準同型とする。$\pi$, $\mathcal{O}$, $\underline{B}$ を
+(\ref{cotangent-equation-pi}) のものとする。このとき
+$$
+L\pi_!(\mathcal{O}) = L\pi_!(\underline{B}) = B
+\quad\text{and}\quad
+L_{B/A} = L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}) =
+L\pi_!(\Omega_{\mathcal{O}/A})
+$$
+が $D(\textit{Ab})$ で成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{cotangent-lemma-O-homology-B-homology} を適用すればよい
+（右辺の最初の等式は補題 \ref{cotangent-lemma-compute-cotangent-complex} である）。
+\end{proof}
+
+\noindent
+基本三角形の、容易に証明できる特別な場合を挙げる。
+
+\begin{lemma}
+\label{cotangent-lemma-special-case-triangle}
+$A \to B \to C$ を環準同型とする。$B$ が $A$ 上の多項式代数ならば、
+$L_{B/A} \otimes_B^\mathbf{L} C \to L_{C/A} \to L_{C/B} \to
+L_{B/A} \otimes_B^\mathbf{L} C[1]$ という $D(C)$ の識別三角形がある。
+\end{lemma}
+
+\begin{proof}
+以下、注意 \ref{cotangent-remark-resolution} の考察を断りなく用いる。$B$ 上の
+$C$ の分解 $\epsilon : P_\bullet \to C$（たとえば標準分解）を選ぶ。
+$B$ は $A$ 上の多項式代数なので、$P_\bullet$ は $A$ 上の $C$ の分解でも
+ある。したがって $L_{C/A}$ は
+$\Omega_{P_\bullet/A} \otimes_{P_\bullet, \epsilon} C$
+によって、$L_{C/B}$ は
+$\Omega_{P_\bullet/B} \otimes_{P_\bullet, \epsilon} C$ によって計算される。
+各 $n$ に対して短完全列
+$0 \to \Omega_{B/A} \otimes_B P_n \to \Omega_{P_n/A} \to \Omega_{P_n/B} \to 0$
+があり（『可換代数』、補題 \ref{algebra-lemma-ses-formally-smooth}）、また
+$L_{B/A} = \Omega_{B/A}[0]$ であるから（補題
+\ref{cotangent-lemma-cotangent-complex-polynomial-algebra}）、結論を得る。
+\end{proof}
+
+\begin{example}
+\label{cotangent-example-resolution-length-two}
+$A \to B$ を環準同型とする。この例では、$A$ 上の $B$ の長さ $2$ の
+「明示的」分解 $P_\bullet$ を構成する。そのために命題
+\ref{cotangent-proposition-polynomial} の証明の手順に従う。注意
+\ref{cotangent-remark-resolution} の議論も参照されたい。
+
+\medskip\noindent
+変数の集合 $u_i$ を用いて全射 $P_0 = A[u_i] \to B$ を選ぶ。イデアル
+$\Ker(P_0 \to B)$ の生成元 $f_t \in P_0$, $t \in T$ を選ぶ。
+$P_1 = A[u_i, x_t]$ とし、面写像 $d_0$ と $d_1$ を、
+$d_j(u_i) = u_i$, $d_0(x_t) = 0$, $d_1(x_t) = f_t$ を満たす一意な
+$A$-代数準同型とする。写像 $s_0 : P_0 \to P_1$ は
+$s_0(u_i) = u_i$ を満たす一意な $A$-代数準同型とする。明らかに
+$$
+P_1 \xrightarrow{d_0 - d_1} P_0 \to B \to 0
+$$
+は完全であり、とくに写像 $(d_0, d_1) : P_1 \to P_0 \times_B P_0$ は
+全射である。したがって、$P_\bullet$ を $P_0$, $P_1$, $d_0$, $d_1$, $s_0$
+で与えられる $1$-切断単体 $A$-代数とすると、増大
+$\text{cosk}_1(P_\bullet) \to B$ は自明 Kan ファイブレーションである。
+命題 \ref{cotangent-proposition-polynomial} の証明の手順の次の段階は、多項式代数
+$P_2$ と全射
+$$
+P_2 \longrightarrow \text{cosk}_1(P_\bullet)_2
+$$
+を選ぶことである。ここで
+$$
+\text{cosk}_1(P_\bullet)_2 =
+\{(g_0, g_1, g_2) \in P_1^3 \mid d_0(g_0) = d_0(g_1),
+d_1(g_0) = d_0(g_2), d_1(g_1) = d_1(g_2)\}
+$$
+$g_i \in P_1$ を $x_t$ の多項式と考えると、条件は
+$$
+g_0(0) = g_1(0),\quad
+g_0(f_t) = g_2(0),\quad
+g_1(f_t) = g_2(f_t)
+$$
+となる。したがって $\text{cosk}_1(P_\bullet)_2$ は元
+$y_t = (x_t, x_t, f_t)$ と $z_t = (0, x_t, x_t)$ を含む。
+$\text{cosk}_1(P_\bullet)_2$ の任意の元 $G$ は
+$G = H + (0, 0, g)$ と書ける。ここで $H$ は
+$A[u_i, y_t, z_t] \to \text{cosk}_1(P_\bullet)_2$ の像に属し、
+$g \in P_1$ は定数項が消え、$P_0$ において $g(f_t) = 0$ を満たす
+多項式である。次に注意する。
+\begin{enumerate}
+\item $g = x_t x_{t'} - f_t x_{t'}$、および
+\item $P_0$ において $\sum r_t f_t = 0$ ならば、$r_t \in P_0$ を用いた
+$g = \sum r_t x_t$
+\end{enumerate}
+は所望の形の $P_1$ の元である。
+$$
+Rel = \Ker(\bigoplus\nolimits_{t \in T} P_0 \longrightarrow P_0),\quad
+(r_t) \longmapsto \sum r_tf_t
+$$
+とおく。$r = (r_t) \in Rel$ として
+$P_2 = A[u_i, y_t, z_t, v_r, w_{t, t'}]$ とおき、写像
+$$
+P_2 \longrightarrow \text{cosk}_1(P_\bullet)_2
+$$
+を $y_t  \mapsto (x_t, x_t, f_t)$、
+$z_t \mapsto (0, x_t, x_t)$、
+$v_r \mapsto (0, 0, \sum r_t x_t)$、および
+$w_{t, t'} \mapsto (0, 0, x_t x_{t'} - f_t x_{t'})$ によって定める。
+計算（省略する）により、この写像は全射である。上で表示した写像の
+選択によって写像 $d_0, d_1, d_2 : P_2 \to P_1$ が定まる。最後に、
+命題 \ref{cotangent-proposition-polynomial} の証明の手順に従い、二つの写像
+$P_1 \to \text{cosk}_1(P_\bullet)_2$ の持ち上げとなる写像
+$s_0, s_1 : P_1 \to P_2$ を選ぶ。$s_0(x_t) = y_t$ と
+$s_1(x_t) = z_t$ によって定まる一意な $A$-代数準同型を $s_i$ と
+すればよいことは明らかである。
+\end{example}
+
+
+
+
+
+
+
+
+\section{関手性}
+\label{cotangent-section-functoriality}
+
+\noindent
+この節では、環準同型の可換正方形
+\begin{equation}
+\label{cotangent-equation-commutative-square}
+\vcenter{
+\xymatrix{
+B \ar[r] & B' \\
+A \ar[u] \ar[r] & A' \ar[u]
+}
+}
+\end{equation}
+を考える。この図式に付随する複体の標準的な $B$-線形写像
+$$
+L_{B/A} \longrightarrow L_{B'/A'}
+$$
+があると主張する。実際、$P_\bullet \to B$ を $A$ 上の $B$ の標準分解、
+$P'_\bullet \to B'$ を $A'$ 上の $B'$ の標準分解とすると、増大
+$P_\bullet \to B$ および $P'_\bullet \to B'$ と両立する単体 $A$-代数の
+標準的な写像
+$P_\bullet \to P'_\bullet$
+がある。これは『単体的方法』の節 \ref{simplicial-section-standard} に
+おける標準分解の構成から分かるが、ここでの特別な場合には、写像
+$$
+P_0 = A[B] \longrightarrow A'[B'] = P'_0,\quad
+P_1 = A[A[B]] \longrightarrow A'[A'[B']] = P'_1,
+$$
+などが、与えられた写像 $A \to A'$ と $B \to B'$ によって定まると
+述べれば十分であろう。すると所望の写像 $L_{B/A} \to L_{B'/A'}$ は、
+付随する写像 $\Omega_{P_n/A} \to \Omega_{P'_n/A'}$ から得られる。
+
+\medskip\noindent
+関手性写像は次のようにも記述できる。$\mathcal{C} = \mathcal{C}_{B/A}$ と
+$\mathcal{C}' = \mathcal{C}_{B'/A}'$ を、節
+\ref{cotangent-section-compute-L-pi-shriek} で考えた圏とする。関手
+$$
+u : \mathcal{C} \longrightarrow \mathcal{C}',\quad
+(P, \alpha) \longmapsto (P \otimes_A A', c \circ (\alpha \otimes 1))
+$$
+がある。ここで $c : B \otimes_A A' \to B'$ は明らかな写像である。
+『サイト上のコホモロジー』の例
+\ref{sites-cohomology-example-morphism-categories}
+で論じたように、トポスの射 $g : \Sh(\mathcal{C}) \to \Sh(\mathcal{C}')$
+と、環付きトポスの射の可換図式
+\begin{equation}
+\label{cotangent-equation-double-square}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}'), \underline{B}) \ar[d]_{\pi'} &
+(\Sh(\mathcal{C}'), \underline{B'}) \ar[d]_{\pi'} \ar[l]^h &
+(\Sh(\mathcal{C}), \underline{B'}) \ar[d]_\pi \ar[l]^g \\
+(\Sh(*), B) &
+(\Sh(*), B') \ar[l]_f &
+(\Sh(*), B') \ar[l]
+}
+}
+\end{equation}
+を得る。ここで $h$ は台となるトポス上では恒等射であり、環の層上では
+環準同型 $B \to B'$ によって与えられる。『サイト上のコホモロジー』の注意
+\ref{sites-cohomology-remark-morphism-fibred-categories}
+により、$\mathcal{C}$ 上の $\mathcal{F}$、$\mathcal{C}'$ 上の
+$\mathcal{F}'$、および変換 $t : \mathcal{F} \to g^{-1}\mathcal{F}'$ が
+与えられると、標準的な写像
+$L\pi_!(\mathcal{F}) \to L\pi'_!(\mathcal{F}')$ を得る。これを層
+$$
+\mathcal{F} : (P, \alpha) \mapsto \Omega_{P/A} \otimes_P B,\quad
+\mathcal{F}' : (P', \alpha') \mapsto \Omega_{P'/A'} \otimes_{P'} B',
+$$
+と、標準的な写像
+$$
+\Omega_{P/A} \otimes_P B \longrightarrow
+\Omega_{P \otimes_A A'/A'} \otimes_{P \otimes_A A'} B'
+$$
+で与えられる変換 $t$ に適用すると、標準的な写像
+$$
+L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B})
+\longrightarrow
+L\pi'_!(\Omega_{\mathcal{O}'/A'} \otimes_{\mathcal{O}'} \underline{B'})
+$$
+を得る。補題 \ref{cotangent-lemma-compute-cotangent-complex} により、これは
+$L_{B/A} \to L_{B'/A'}$ を与える。この写像が、上で単体分解を用いて
+定義した写像と一致することの確認は省略する。
+
+\begin{lemma}
+\label{cotangent-lemma-flat-base-change}
+(\ref{cotangent-equation-commutative-square}) が擬同型
+$B \otimes_A^\mathbf{L} A' = B'$ を誘導すると仮定する。このとき、
+(\ref{cotangent-equation-double-square}) の記法を用い、
+$\mathcal{F}' \in \textit{Ab}(\mathcal{C}')$ とすれば、
+$L\pi_!(g^{-1}\mathcal{F}') = L\pi'_!(\mathcal{F}')$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+以下、注意 \ref{cotangent-remark-resolution} の結果を断りなく用いる。
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-get-it-now} を適用する。$P_\bullet \to B$ を
+分解とする。$u(P_\bullet) = P_\bullet \otimes_A A' \to B'$ が擬同型で
+あることを示せば十分である。$P_\bullet$ を単体 $A$-加群とみたとき、
+それに付随する $A$-加群の複体 $s(P_\bullet)$ は $B$ の自由 $A$-加群分解で
+ある。実際、$P_n$ は自由 $A$-加群であり、$s(P_\bullet) \to B$ は擬同型で
+ある。したがって $B \otimes_A^\mathbf{L} A'$ は
+$s(P_\bullet) \otimes_A A' = s(P_\bullet \otimes_A A')$ によって計算される。
+ゆえに、補題の仮定は $\epsilon' : P_\bullet \otimes_A A' \to B'$ が
+擬同型であることを意味する。
+\end{proof}
+
+\noindent
+次の補題は、とくに $A \to A'$ が平坦で
+$B' = B \otimes_A A'$ である場合（平坦底変換）に適用できる。
+
+\begin{lemma}
+\label{cotangent-lemma-flat-base-change-cotangent-complex}
+(\ref{cotangent-equation-commutative-square}) が擬同型
+$B \otimes_A^\mathbf{L} A' = B'$ を誘導するならば、関手性写像は同型
+$$
+L_{B/A} \otimes_B^\mathbf{L} B' \longrightarrow L_{B'/A'}
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+式 (\ref{cotangent-equation-double-square}) で導入した記法を用いる。
+$$
+L_{B/A} \otimes_B^\mathbf{L} B' =
+L\pi_!(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B})
+\otimes_B^\mathbf{L} B' =
+L\pi_!(Lh^*(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}))
+$$
+が成り立つ。最初の等式は補題 \ref{cotangent-lemma-compute-cotangent-complex} により、
+二つ目は『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-change-of-rings} による。
+$\Omega_{\mathcal{O}/A}$ は平坦 $\mathcal{O}$-加群なので、
+$\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}$ は平坦
+$\underline{B}$-加群である。したがって
+$Lh^*(\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}) =
+\Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B'}$
+であり、これは直接確かめると
+$g^{-1}(\Omega_{\mathcal{O}'/A'} \otimes_{\mathcal{O}'} \underline{B'})$
+に等しい。補題 \ref{cotangent-lemma-flat-base-change} と、$L_{B'/A'}$ が
+$L\pi'_!(\Omega_{\mathcal{O}'/A'} \otimes_{\mathcal{O}'} \underline{B'})$
+によって計算されることから結論を得る。
+\end{proof}
+
+\begin{remark}
+\label{cotangent-remark-homotopy-triangle}
+正方形 (\ref{cotangent-equation-commutative-square}) が与えられ、図式を可換にする
+射 $\kappa : B \to A'$ が存在すると仮定する。
+$$
+\xymatrix{
+B \ar[r]_\beta \ar[rd]_\kappa & B' \\
+A \ar[u] \ar[r]^\alpha & A' \ar[u]
+}
+$$
+この場合、関手性写像 $P_\bullet \to P'_\bullet$ は合成
+$P_\bullet \to B \to A' \to P'_\bullet$ とホモトピックであると主張する。
+実際、$\kappa$ を用いると関手性写像は
+$$
+P_\bullet \to P_{A'/A', \bullet} \to P'_\bullet
+$$
+と分解する。ここで $P_{A'/A', \bullet}$ は $A'$ 上の $A'$ の標準分解である。
+$A'$ は $A'$ 上の空集合上の多項式代数であるから、『単体的方法』の補題
+\ref{simplicial-lemma-standard-simplicial-homotopy} により、増大
+$\epsilon_{A'/A'} : P_{A'/A', \bullet} \to A'$ は単体環のホモトピー同値で
+ある。この補題の証明で構成されるホモトピー逆写像
+$c : A' \to P_{A'/A', \bullet}$ は単なる構造射であることに注意する。
+したがって、二つの合成
+$$
+\xymatrix{
+P_\bullet \ar[r] &
+P_{A'/A', \bullet} \ar@<1ex>[rr]^{\text{id}}
+\ar@<-1ex>[rr]_{c \circ \epsilon_{A'/A'}} & &
+P_{A'/A', \bullet} \ar[r] &
+P'_\bullet
+}
+$$
+は上で論じた二つの写像であり、互いにホモトピックである
+（『単体的方法』、注意 \ref{simplicial-remark-homotopy-pre-post-compose}）。
+二つ目の写像 $P_\bullet \to P'_\bullet$ は零写像
+$\Omega_{P_\bullet/A} \to \Omega_{P'_\bullet/A'}$ を誘導するので、この場合、
+関手性写像 $L_{B/A} \to L_{B'/A'}$ は零写像とホモトピックである。
+\end{remark}
+
+\begin{lemma}
+\label{cotangent-lemma-cotangent-complex-product}
+$A \to B$ と $A \to C$ を環準同型とする。このとき写像
+$L_{B \times C/A} \to L_{B/A} \oplus L_{C/A}$ は
+$D(B \times C)$ における同型である。
+\end{lemma}
+
+\begin{proof}
+この補題は基本三角形から導けるが、ここでは直接的で初等的な証明を与える。
+環準同型 $A \to B \times C$ を $A \to A[x] \to B \times C$ と分解する。
+ここで $x \mapsto (1, 0)$ とする。補題 \ref{cotangent-lemma-special-case-triangle}
+により識別三角形
+$$
+L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} (B \times C) \to L_{B \times C/A} \to
+L_{B \times C/A[x]} \to L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} (B \times C)[1]
+$$
+が $D(B \times C)$ にある。同様に、識別三角形
+$$
+\begin{matrix}
+L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} B \to L_{B/A} \to L_{B/A[x]}
+\to L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} B[1] \\
+L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} C \to L_{C/A} \to L_{C/A[x]}
+\to L_{A[x]/A} \otimes_{A[x]}^\mathbf{L} C[1]
+\end{matrix}
+$$
+がある。したがって、$A[x]$ 上の $B \times C$ について結論を示せば
+十分である。$A[x] \to A[x, x^{-1}]$ は平坦であり、
+$(B \times C) \otimes_{A[x]} A[x, x^{-1}] = B \otimes_{A[x]} A[x, x^{-1}]$
+かつ $C \otimes_{A[x]} A[x, x^{-1}] = 0$ であることに注意する。
+したがって、底変換（補題 \ref{cotangent-lemma-flat-base-change-cotangent-complex}）により、
+写像 $L_{B \times C/A[x]} \to L_{B/A[x]} \oplus L_{C/A[x]}$ は
+$x$ を可逆化すると同型になる。同様に、この写像は $x - 1$ を可逆化しても
+同型になる。これで補題が証明された。
+\end{proof}
+
+
+
+
+\section{基本三角形}
+\label{cotangent-section-triangle}
+
+\noindent
+この節では環準同型の列 $A \to B \to C$ を考える。この三角形から識別三角形
+\begin{equation}
+\label{cotangent-equation-triangle}
+L_{B/A} \otimes_B^\mathbf{L} C \to L_{C/A} \to L_{C/B} \to
+L_{B/A} \otimes_B^\mathbf{L} C[1]
+\end{equation}
+が $D(C)$ に生じることを示すのが目標である。これは命題
+\ref{cotangent-proposition-triangle} で証明する。別の方法については注意
+\ref{cotangent-remark-triangle} を参照されたい。
+
+\medskip\noindent
+圏 $\mathcal{C}_{C/B/A}$ を考える。これは、対象が
+$(P \to B, Q \to C)$ であり、次を満たす圏の {\bf 反対圏}である。
+\begin{enumerate}
+\item $P$ は $A$ 上の多項式代数である。
+\item $P \to B$ は $A$-代数準同型である。
+\item $Q$ は $P$ 上の多項式代数である。
+\item $Q \to C$ は $P$-代数準同型である。
+\end{enumerate}
+$(P \to B, Q \to C)$ を可換図式
+$$
+\xymatrix{
+\Spec(C) \ar[d] \ar[r] & \Spec(Q) \ar[d] \\
+\Spec(B) \ar[d] \ar[r] & \Spec(P) \ar[dl] \\
+\Spec(A)
+}
+$$
+に対応すると考えたいので、反対圏を取った。$\mathcal{C}_{B/A}$,
+$\mathcal{C}_{C/A}$, $\mathcal{C}_{C/B}$ を節
+\ref{cotangent-section-compute-L-pi-shriek} で考えた圏とする。関手
+$$
+\begin{matrix}
+u_1 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{B/A}, &
+(P \to B, Q \to C) \mapsto (P \to B) \\
+u_2 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{C/A}, &
+(P \to B, Q \to C) \mapsto (Q \to C) \\
+u_3 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{C/B}, &
+(P \to B, Q \to C) \mapsto (Q \otimes_P B \to C)
+\end{matrix}
+$$
+がある。これらの関手は対応するトポスの射 $g_i$ を誘導する。
+$\mathcal{O}_i = g_i^{-1}\mathcal{O}$ と書けば、環付きトポスの射
+\begin{equation}
+\label{cotangent-equation-three-maps}
+\begin{matrix}
+g_1 : (\Sh(\mathcal{C}_{C/B/A}), \mathcal{O}_1)
+\longrightarrow (\Sh(\mathcal{C}_{B/A}), \mathcal{O}) \\
+g_2 : (\Sh(\mathcal{C}_{C/B/A}), \mathcal{O}_2)
+\longrightarrow (\Sh(\mathcal{C}_{C/A}), \mathcal{O}) \\
+g_3 : (\Sh(\mathcal{C}_{C/B/A}), \mathcal{O}_3)
+\longrightarrow (\Sh(\mathcal{C}_{C/B}), \mathcal{O})
+\end{matrix}
+\end{equation}
+を得る。また、
+$\pi : \Sh(\mathcal{C}_{C/B/A}) \to \Sh(*)$,
+$\pi_1 : \Sh(\mathcal{C}_{B/A}) \to \Sh(*)$,
+$\pi_2 : \Sh(\mathcal{C}_{C/A}) \to \Sh(*)$、および
+$\pi_3 : \Sh(\mathcal{C}_{C/B}) \to \Sh(*)$ と書く。すると
+$\pi = \pi_i \circ g_i$ である。補題
+\ref{cotangent-lemma-compute-cotangent-complex} における余接複体の同定と、以下の
+補題から所望の識別三角形を得る。
+
+\begin{lemma}
+\label{cotangent-lemma-triangle-ses}
+(\ref{cotangent-equation-three-maps}) の記法のもとで
+$$
+\begin{matrix}
+\Omega_1 = \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}
+\text{ on }\mathcal{C}_{B/A} \\
+\Omega_2 = \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{C}
+\text{ on }\mathcal{C}_{C/A} \\
+\Omega_3 = \Omega_{\mathcal{O}/B} \otimes_\mathcal{O} \underline{C}
+\text{ on }\mathcal{C}_{C/B}
+\end{matrix}
+$$
+とおく。このとき $\mathcal{C}_{C/B/A}$ 上に、$\underline{C}$-加群の層の
+標準的な短完全列
+$$
+0 \to g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C} \to
+g_2^{-1}\Omega_2 \to
+g_3^{-1}\Omega_3 \to 0
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$g_i^{-1}$ は単に $u_i$ との前合成によって得られることを思い出そう。
+対象 $U = (P \to B, Q \to C)$ に対して分裂短完全列
+$$
+0 \to \Omega_{P/A} \otimes Q \to \Omega_{Q/A} \to \Omega_{Q/P} \to 0
+$$
+がある。たとえば『可換代数』の補題
+\ref{algebra-lemma-ses-formally-smooth} による。これを $Q$ 上で $C$ と
+テンソル積すると、短完全列
+$$
+0 \to \Omega_{P/A} \otimes C \to \Omega_{Q/A} \otimes C \to
+\Omega_{Q/P} \otimes C \to 0
+$$
+を得る。$\Omega_{P/A} \otimes C = \Omega_{P/A} \otimes B \otimes C$ なので、
+これは $U$ における
+$g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C}$
+の値である。加群 $\Omega_{Q/A} \otimes C$ は $U$ における
+$g_2^{-1}\Omega_2$ の値である。『可換代数』の補題
+\ref{algebra-lemma-differentials-base-change} により
+$\Omega_{Q/P} \otimes C = \Omega_{Q \otimes_P B/B} \otimes C$ なので、
+これは $U$ における $g_3^{-1}\Omega_3$ の値である。したがって補題の
+短完全列は、各 $U$ に最後に表示した短完全列を対応させて得られる。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-polynomial-on-top}
+(\ref{cotangent-equation-three-maps}) の記法のもとで、$C$ が $B$ 上の多項式代数で
+あると仮定する。このとき
+$L\pi_!(g_3^{-1}\mathcal{F}) = L\pi_{3, !}\mathcal{F} = \pi_{3, !}\mathcal{F}$
+が、$\mathcal{C}_{C/B}$ 上の任意のアーベル層 $\mathcal{F}$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+ある集合 $E$ を用いて $C = B[E]$ と書く。$A$ 上の $B$ の分解
+$P_\bullet \to B$ を選ぶ。各 $n$ に対して、$\mathcal{C}_{C/B/A}$ の対象
+$U_n = (P_n \to B, P_n[E] \to C)$ を考える。すると $U_\bullet$ は
+$\mathcal{C}_{C/B/A}$ の余単体対象である。$u_3(U_\bullet)$ は値
+$(C \to C)$ をもつ $\mathcal{C}_{C/B}$ の定値余単体対象であることに
+注意する。$\mathcal{C}_{C/B/A}$ の対象 $U_\bullet$ が
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}.
+の仮定を満たすことを示そう。これにより、$L\pi_!(g_3^{-1}\mathcal{F})$ は
+定値単体アーベル群 $\mathcal{F}(C \to C)$ によって計算される。一方、
+補題 \ref{cotangent-lemma-pi-lower-shriek-polynomial-algebra} により、これは
+$L\pi_{3, !}\mathcal{F} = \pi_{3, !}\mathcal{F}$ の値であるから、補題が従う。
+
+\medskip\noindent
+$U = (\beta : P \to B, \gamma : Q \to C)$ を $\mathcal{C}_{C/B/A}$ の
+対象とする。圏 $\mathcal{C}_{C/B/A}$ の定義により、$P = A[S]$ および
+$Q = A[S \amalg T]$ と書ける。単体集合
+$$
+\Mor_{\mathcal{C}_{C/B/A}}(U_\bullet, U)
+$$
+が一点単体集合 $*$ とホモトピー同値であることを示さなければならない。
+この単体集合は積
+$$
+\prod\nolimits_{s \in S} F_s \times \prod\nolimits_{t \in T} F'_t
+$$
+である。ここで $F_s$ は $U_s = (A[\{s\}] \to B, A[\{s\}] \to C)$ に
+対応する単体集合、$F'_t$ は $U_t = (A \to B, A[\{t\}] \to C)$ に対応する
+単体集合である。実際、対象 $U$ は $\mathcal{C}_{C/B/A}$ における積
+$\prod U_s \times \prod U_t$ である。各 $F_s$ と $F'_t$ が $*$ と
+ホモトピー同値であることを示せば十分である。『単体的方法』の補題
+\ref{simplicial-lemma-products-homotopy} を参照されたい。$F_s$ の場合は、
+$P_\bullet \to B$ が（分解として）自明 Kan ファイブレーションであり、
+$F_s$ が $\beta(s)$ 上のそのファイバーであることから従う
+（『単体的方法』の補題
+\ref{simplicial-lemma-trivial-kan-base-change} および
+\ref{simplicial-lemma-trivial-kan-homotopy} を用いる）。$F'_t$ の場合は
+さらに興味深い。ここでは、写像
+$$
+P_\bullet[E] \longrightarrow C = B[E]
+$$
+の $\gamma(t) \in C$ 上のファイバーが一点とホモトピー同値であると
+述べている。実際、この写像が自明 Kan ファイブレーションであることを
+示す。$P_\bullet \to B$ は自明 Kan ファイブレーションである。任意の環
+$R$ に対して
+$$
+R[E] =
+\colim_{\Sigma \subset \text{Map}(E, \mathbf{Z}_{\geq 0})\text{ finite}}
+\prod\nolimits_{I \in \Sigma} R
+$$
+である（フィルター余極限）。したがって、表示した単体集合の写像は自明
+Kan ファイブレーションのフィルター余極限であり、『単体的方法』の補題
+\ref{simplicial-lemma-filtered-colimit-trivial-kan} により自明 Kan
+ファイブレーションである。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-triangle-compute-lower-shriek}
+(\ref{cotangent-equation-three-maps}) の記法のもとで、
+$Lg_{i, !} \circ g_i^{-1} = \text{id}$ が $i = 1, 2, 3$ に対して成り立ち、
+であり、したがって $i = 1, 2, 3$ に対して
+$L\pi_! \circ g_i^{-1} = L\pi_{i, !}$ でもある。
+\end{lemma}
+
+\begin{proof}
+$i = 1$ の場合を証明する。関手 $\mathcal{C}_{C/B/A}$ は
+$\mathcal{C}_{B/A}$ 上のファイバー圏であると主張する。実際、
+$(P \to B, Q \to C)$ と、$\mathcal{C}_{B/A}$ の射
+$(P' \to B) \to (P \to B)$ が与えられたとする。これは $B$ への写像と
+両立する $A$-代数準同型 $P \to P'$ があることを意味する。このとき
+$Q' = Q \otimes_P P'$ とおき、$C$ への誘導された写像を入れる。すると射
+$$
+(P' \to B, Q' \to C) \longrightarrow (P \to B, Q \to C)
+$$
+は $\mathcal{C}_{C/B/A}$ における射であり（再び矢印の向きの反転に注意）、
+$\mathcal{C}_{C/B/A}$ において $\mathcal{C}_{B/A}$ 上強デカルト的である。
+さらに、$P \to B$ 上の $u_1$ の
+ファイバー圏は圏 $\mathcal{C}_{C/P}$ である。$\mathcal{F}$ を
+$\mathcal{C}_{B/A}$ 上のアーベル層とする。ファイバー圏があるので、
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek}.
+を適用できる。したがって $L_ng_{1, !}g_1^{-1}\mathcal{F}$ は、
+$U \in \Ob(\mathcal{C}_{B/A})$ に対して、$U$ 上のファイバー圏へ制限した
+$g_1^{-1}\mathcal{F}$ の第 $n$ ホモロジーを対応させる（前）層である。
+これらの制限は定値なので、上のファイバー圏の同定と補題
+\ref{cotangent-lemma-pi-lower-shriek-constant-sheaf} から所望の結果が従う。
+
+\medskip\noindent
+$i = 2$ の場合。$\mathcal{C}_{C/B/A}$ は $\mathcal{C}_{C/A}$ 上の
+ファイバー圏であると主張する。実際、$(P \to B, Q \to C)$ と、
+$\mathcal{C}_{C/A}$ の射 $(Q' \to C) \to (Q \to C)$ が与えられたとする。
+これは $C$ への写像と両立する $B$-代数準同型 $Q \to Q'$ があることを
+意味する。このとき
+$$
+(P \to B, Q' \to C) \longrightarrow (P \to B, Q \to C)
+$$
+は $\mathcal{C}_{C/B/A}$ において $\mathcal{C}_{C/A}$ 上強デカルト的で
+ある。$Q \to C$ 上の $u_2$ のファイバー圏は終対象（矢印の向きの反転に
+注意）$(A \to B, Q \to C)$ をもつ。$\mathcal{F}$ を
+$\mathcal{C}_{C/A}$ 上のアーベル層とする。ファイバー圏があるので、
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek}.
+を適用できる。したがって $L_ng_{2, !}g_2^{-1}\mathcal{F}$ は、
+$U \in \Ob(\mathcal{C}_{C/A})$ に対して、$U$ 上のファイバー圏へ制限した
+$g_1^{-1}\mathcal{F}$ の第 $n$ ホモロジーを対応させる（前）層である。
+これらの制限は定値であり、すべてのファイバー圏が終対象をもつので、
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-initial-final} から所望の結果が従う。
+
+\medskip\noindent
+$i = 3$ の場合。この場合は『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-left-derived-g-shriek}
+を、$u = u_3 : \mathcal{C}_{C/B/A} \to \mathcal{C}_{C/B}$ と、
+$\mathcal{C}_{C/B}$ 上のあるアーベル層 $\mathcal{F}$ に対する
+$\mathcal{F}' = g_3^{-1}\mathcal{F}$ に適用する。
+$U = (\overline{Q} \to C)$ を $\mathcal{C}_{C/B}$ の対象とする。このとき
+$\mathcal{I}_U = \mathcal{C}_{\overline{Q}/B/A}$ である（再び矢印の向きの
+反転に注意）。層 $\mathcal{F}'_U$ は規則
+$(P \to B, Q \to \overline{Q}) \mapsto \mathcal{F}(Q \otimes_P B \to C)$
+によって与えられる。言い換えると、この層は射
+$\Sh(\mathcal{C}_{\overline{Q}/B/A}) \to \Sh(\mathcal{C}_{\overline{Q}/B})$
+による $\mathcal{C}_{\overline{Q}/C}$ 上の層の引き戻しである。したがって
+補題 \ref{cotangent-lemma-polynomial-on-top} により、$n > 0$ に対して
+$H_n(\mathcal{I}_U, \mathcal{F}'_U) = 0$ であり、$n = 0$ に対しては
+$\mathcal{F}(\overline{Q} \to C)$ に等しい。先に挙げた
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-left-derived-g-shriek}
+から $Lg_{3, !}(g_3^{-1}\mathcal{F}) = \mathcal{F}$ が従い、証明が完了する。
+\end{proof}
+
+\begin{proposition}
+\label{cotangent-proposition-triangle}
+$A \to B \to C$ を環準同型とする。標準的な識別三角形
+$$
+L_{B/A} \otimes_B^\mathbf{L} C \to L_{C/A} \to L_{C/B} \to
+L_{B/A} \otimes_B^\mathbf{L} C[1]
+$$
+が $D(C)$ にある。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-triangle-ses} の層の短完全列に導来関手 $L\pi_!$ を適用し、
+識別三角形
+$$
+L\pi_!(g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C}) \to
+L\pi_!(g_2^{-1}\Omega_2) \to
+L\pi_!(g_3^{-1}\Omega_3) \to
+L\pi_!(g_1^{-1}\Omega_1 \otimes_{\underline{B}} \underline{C})[1]
+$$
+を $D(C)$ に得る。補題 \ref{cotangent-lemma-triangle-compute-lower-shriek} と
+\ref{cotangent-lemma-compute-cotangent-complex}
+により、第二項と第三項は $L_{C/A}$ および $L_{C/B}$ に一致し、第一項は
+$$
+L\pi_{1, !}(\Omega_1 \otimes_{\underline{B}} \underline{C}) =
+L\pi_{1, !}(\Omega_1) \otimes_B^\mathbf{L} C =
+L_{B/A} \otimes_B^\mathbf{L} C
+$$
+に等しい。最初の等式は『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-change-of-rings}
+（および $\Omega_1$ が $\underline{B}$ 上の加群の層として平坦であること）
+による。二つ目は補題 \ref{cotangent-lemma-compute-cotangent-complex} による。
+\end{proof}
+
+\begin{remark}
+\label{cotangent-remark-triangle}
+基本三角形の存在について、別の、おそらくより簡単な証明を概説する。
+$A \to B \to C$ を環準同型とし、$B \to C$ は単射であると仮定する。
+$P_\bullet \to B$ を $A$ 上の $B$ の標準分解、$Q_\bullet \to C$ を
+$B$ 上の $C$ の標準分解とする。図式は次のようになる。
+$$
+\xymatrix{
+P_\bullet : &
+A[A[A[B]]] \ar[d]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[B]] \ar[d]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[B] \ar[d] \ar@<0ex>[l] \ar[r] &
+B \\
+Q_\bullet : &
+A[A[A[C]]]
+\ar@<2ex>[r]
+\ar@<0ex>[r]
+\ar@<-2ex>[r]
+&
+A[A[C]]
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+\ar@<1ex>[l]
+\ar@<-1ex>[l]
+&
+A[C] \ar@<0ex>[l] \ar[r] &
+C
+}
+$$
+$B \to C$ は単射なので、すべての $n$ に対して環 $Q_n$ は $P_n$ 上の
+多項式代数であることに注意する。したがって $\mathcal{C}_{C/B/A}$ の
+余単体対象を得る（矢印の向きの反転に注意）。ここで
+$\overline{Q}_\bullet = Q_\bullet \otimes_{P_\bullet} B$ とおく。命題
+\ref{cotangent-proposition-triangle} の証明の鍵は、$\overline{Q}_\bullet$ が $B$ 上の
+$C$ の分解であることを示す点にある。これは『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-O-homology-qis}
+を $\mathcal{C} = \Delta$, $\mathcal{O} = P_\bullet$,
+$\mathcal{O}' = B$, $\mathcal{F} = Q_\bullet$ に適用すれば従う
+（ここでは $Q_n$ が $P_n$ 上平坦であることを用いる。単体加群と層を
+関係づけるには『サイト上のコホモロジー』の注意
+\ref{sites-cohomology-remark-simplicial-modules} を参照されたい）。この鍵と
+なる事実から、命題 \ref{cotangent-proposition-triangle} の識別三角形は、単体
+$C$-加群の短完全列
+$$
+0 \to
+\Omega_{P_\bullet/A} \otimes_{P_\bullet} C \to
+\Omega_{Q_\bullet/A} \otimes_{Q_\bullet} C \to
+\Omega_{\overline{Q}_\bullet/B} \otimes_{\overline{Q}_\bullet} C \to 0
+$$
+に付随する識別三角形であることが分かる。この短完全列は、
+$0 \to \Omega_{P_n/A} \otimes_{P_n} Q_n \to \Omega_{Q_n/A} \to
+\Omega_{Q_n/P_n} \to 0$ という『可換代数』の補題
+\ref{algebra-lemma-ses-formally-smooth} の短完全列から従う。実際、注意
+\ref{cotangent-remark-resolution} と鍵となる事実により、右辺の複体は $D(C)$ において
+$L_{C/B}$ を表す。
+
+\medskip\noindent
+$B \to C$ が単射でない場合は、上の議論から $A \to B \to B \times C$ の
+基本三角形を得ることができる。写像
+$L_{B \times C/B} \to L_{B/B} \oplus L_{C/B}$ および
+$L_{B \times C/A} \to L_{B/A} \oplus L_{C/A}$
+は $D(B \times C)$ における擬同型なので（補題
+\ref{cotangent-lemma-cotangent-complex-product}）、平坦環準同型 $B \times C \to C$ と
+テンソル積することにより、所望の識別三角形を $D(C)$ に得る。
+\end{remark}
+
+\begin{remark}
+\label{cotangent-remark-explicit-map}
+$A \to B \to C$ を環準同型とし、$B \to C$ は単射とする。注意
+\ref{cotangent-remark-triangle} の記法 $P_\bullet$, $Q_\bullet$,
+$\overline{Q}_\bullet$ を思い出そう。$R_\bullet$ を $B$ 上の $C$ の標準分解と
+する。この注意では、$\Omega_{\overline{Q}_\bullet/B}
+\otimes_{\overline{Q}_\bullet} C$ と
+$L_{C/B} = \Omega_{R_\bullet/B} \otimes_{R_\bullet} C$ の標準的同定を得る
+方法を説明する。$S_\bullet \to B$ を $B$ 上の $B$ の標準分解とする。
+$B \to C$ は単射なので、関手性写像 $S_\bullet \to R_\bullet$ により
+$R_n$ は $S_n$ 上の多項式代数と同定される。たとえば次数 $0$ では写像
+$B[B] \to B[C]$、次数 $1$ では写像 $B[B[B]] \to B[B[C]]$ があり、以下も
+同様である。したがって
+$\overline{R}_\bullet = R_\bullet \otimes_{S_\bullet} B$ も $B$ 上の単体
+多項式代数であり、注意 \ref{cotangent-remark-triangle} と同様に
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-O-homology-qis}
+から $\overline{R}_\bullet \to C$ は分解であることが従う。可換図式
+$$
+\xymatrix{
+Q_\bullet \ar[r] & R_\bullet \\
+P_\bullet \ar[u] \ar[r] & S_\bullet \ar[u] \ar[r] & B
+}
+$$
+があるので、標準的な写像
+$\overline{Q}_\bullet = Q_\bullet \otimes_{P_\bullet} B \to
+\overline{R}_\bullet$ を得る。したがって写像
+$$
+L_{C/B} = \Omega_{R_\bullet/B} \otimes_{R_\bullet} C
+\longrightarrow
+\Omega_{\overline{R}_\bullet/B} \otimes_{\overline{R}_\bullet} C
+\longleftarrow
+\Omega_{\overline{Q}_\bullet/B} \otimes_{\overline{Q}_\bullet} C
+$$
+は擬同型であり（注意 \ref{cotangent-remark-resolution}）、一方と他方の逆写像を
+合成することで所望の同定を得る。
+\end{remark}
+
+
+
+
+
+\section{局所化とエタール環準同型}
+\label{cotangent-section-localization}
+
+\noindent
+この節では環を局所化したときに何が起こるかを調べる。
+$A \to A' \to B$ を、$B = B \otimes_A^\mathbf{L} A'$ を満たす環準同型とする。
+これは、たとえば $A' = S^{-1}A$ が乗法的部分集合 $S \subset A$ における
+$A$ の局所化であるときに成り立つ。この場合、$\mathcal{C}_{B/A'}$ 上の
+アーベル層 $\mathcal{F}'$ に対して、$\mathcal{C}_{B/A}$ 上の
+$g^{-1}\mathcal{F}'$ のホモロジーは $\mathcal{C}_{B/A'}$ 上の
+$\mathcal{F}'$ のホモロジーと一致する。正確な主張は補題
+\ref{cotangent-lemma-flat-base-change} を参照されたい。
+
+\begin{lemma}
+\label{cotangent-lemma-localize-at-bottom}
+$A \to A' \to B$ を、$B = B \otimes_A^\mathbf{L} A'$ を満たす環準同型と
+する。このとき $D(B)$ において $L_{B/A} = L_{B/A'}$ である。
+\end{lemma}
+
+\begin{proof}
+上の議論（すなわち補題 \ref{cotangent-lemma-flat-base-change}）と補題
+\ref{cotangent-lemma-compute-cotangent-complex} によれば、$\mathcal{C}_{B/A}$ 上で規則
+$(P \to B) \mapsto \Omega_{P/A} \otimes_P B$ により与えられる層が、規則
+$(P \to B) \mapsto \Omega_{P/A'} \otimes_P B$ により与えられる層の
+引き戻しであることを示せばよい。引き戻し関手 $g^{-1}$ は、関手
+$u : \mathcal{C}_{B/A} \to \mathcal{C}_{B/A'}$、
+$(P \to B) \mapsto (P \otimes_A A' \to B)$ との前合成で与えられる。
+したがって
+$$
+\Omega_{P/A} \otimes_P B =
+\Omega_{P \otimes_A A'/A'} \otimes_{(P \otimes_A A')} B
+$$
+を示せばよい。『可換代数』の補題
+\ref{algebra-lemma-differentials-base-change} により、右辺は
+$$
+(\Omega_{P/A} \otimes_A A') \otimes_{(P \otimes_A A')} B
+$$
+に等しい。$P$ は $A$ 上の多項式代数なので、加群 $\Omega_{P/A}$ は自由で
+あり、等式は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-derived-diagonal}
+$A \to B$ を、$B = B \otimes_A^\mathbf{L} B$ を満たす環準同型とする。
+このとき $D(B)$ において $L_{B/A} = 0$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-localize-at-bottom} と
+\ref{cotangent-lemma-cotangent-complex-polynomial-algebra} により
+$L_{B/A} = L_{B/B} = 0$ だからである。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-bootstrap}
+$A \to B$ を、$i > 0$ に対して $\text{Tor}^A_i(B, B) = 0$ であり、かつ
+$L_{B/B \otimes_A B} = 0$ を満たす環準同型とする。このとき $D(B)$ において
+$L_{B/A} = 0$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-flat-base-change-cotangent-complex} により
+$L_{B/A} \otimes_B^\mathbf{L} (B \otimes_A B) = L_{B \otimes_A B/B}$.
+である。ここで、環準同型 $B \to B \otimes_A B \to B$ に付随する
+識別三角形 (\ref{cotangent-equation-triangle})
+$$
+L_{B \otimes_A B/B} \otimes^\mathbf{L}_{(B \otimes_A B)} B \to
+L_{B/B} \to L_{B/B \otimes_A B} \to
+L_{B \otimes_A B/B} \otimes^\mathbf{L}_{(B \otimes_A B)} B[1]
+$$
+と、$L_{B/B}$ の消滅（補題
+\ref{cotangent-lemma-cotangent-complex-polynomial-algebra}）および仮定した
+$L_{B/B \otimes_A B}$ の消滅を用いると、
+$$
+0 =
+L_{B \otimes_A B/B} \otimes^\mathbf{L}_{(B \otimes_A B)} B =
+L_{B/A} \otimes_B^\mathbf{L} (B \otimes_A B)
+\otimes^\mathbf{L}_{(B \otimes_A B)} B = L_{B/A}
+$$
+となり、所望の結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-when-zero}
+余接複体 $L_{B/A}$ は次の各場合に零である。
+\begin{enumerate}
+\item $A \to B$ と $B \otimes_A B \to B$ が平坦である。すなわち
+$A \to B$ が弱エタールである（『代数詳論』、定義
+\ref{more-algebra-definition-weakly-etale}）。
+\item $A \to B$ が環の平坦エピ射である。
+\item ある乗法的部分集合 $S \subset A$ に対して $B = S^{-1}A$ である。
+\item $A \to B$ が不分岐かつ平坦である。
+\item $A \to B$ がエタールである。
+\item $A \to B$ が、余接複体の消滅する環準同型のフィルター余極限である。
+\item $B$ が $A$ の局所環のヘンゼル化である。
+\item $B$ が $A$ の局所環の強ヘンゼル化である。
+\item ここにさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の場合、全射平坦環準同型 $B \otimes_A B \to B$ に補題
+\ref{cotangent-lemma-derived-diagonal} を適用して $L_{B/B \otimes_A B} = 0$ を得て、
+次に補題 \ref{cotangent-lemma-bootstrap} を用いればよい。(2)--(5) はそれぞれ (1) の
+特別な場合である。(6) は補題 \ref{cotangent-lemma-colimit-cotangent-complex} から従う。
+(7) と (8) は、（強）ヘンゼル化が $A$ のエタール環拡大のフィルター余極限で
+あることから従う。『可換代数』の補題
+\ref{algebra-lemma-henselization-different} および
+\ref{algebra-lemma-strict-henselization-different} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-localize-on-top}
+$A \to B \to C$ を、$L_{C/B} = 0$ を満たす環準同型とする。このとき
+$L_{C/A} = L_{B/A} \otimes_B^\mathbf{L} C$ である。
+\end{lemma}
+
+\begin{proof}
+これは識別三角形 (\ref{cotangent-equation-triangle}) の直ちに分かる帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-localize}
+$A \to B$ を環準同型とし、$S \subset A$, $T \subset B$ を、$S$ が $T$ に
+写る乗法的部分集合とする。このとき $D(T^{-1}B)$ において
+$L_{T^{-1}B/S^{-1}A} = L_{B/A} \otimes_B T^{-1}B$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-localize-on-top} により
+$L_{T^{-1}B/A} = L_{B/A} \otimes_B T^{-1}B$
+であり、補題 \ref{cotangent-lemma-localize-at-bottom} により
+$L_{T^{-1}B/A} = L_{T^{-1}B/S^{-1}A}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-cotangent-complex-henselization}
+$A \to B$ を局所環の局所環準同型とする。$A^h \to B^h$ および
+$A^{sh} \to B^{sh}$ を、それぞれ誘導されたヘンゼル化および強ヘンゼル化の
+写像とする。このとき
+$$
+L_{B^h/A^h} = L_{B^h/A} = L_{B/A} \otimes_B^\mathbf{L} B^h
+\quad\text{resp.}\quad
+L_{B^{sh}/A^{sh}} = L_{B^{sh}/A} = L_{B/A} \otimes_B^\mathbf{L} B^{sh}
+$$
+が、それぞれ $D(B^h)$ および $D(B^{sh})$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-when-zero} により、複体 $L_{A^h/A}$, $L_{A^{sh}/A}$,
+$L_{B^h/B}$, $L_{B^{sh}/B}$ はすべて零である。
+$A \to B \to B^h$ に対する基本識別三角形 (\ref{cotangent-equation-triangle}) を用いて
+$L_{B^h/A} = L_{B/A} \otimes_B^\mathbf{L} B^h$ を得る。
+$A \to A^h \to B^h$ に対する基本三角形を用いて
+$L_{B^h/A^h} = L_{B^h/A}$ を得る。強ヘンゼル化についても同様である。
+\end{proof}
+
+
+
+
+\section{平滑環準同型}
+\label{cotangent-section-smooth}
+
+\noindent
+$C \to B$ を、核 $I$ をもつ環の全射とする。$I/I^2$ が平坦 $B$-加群であり、
+$\text{Tor}_*^C(B, B)$ が $I/I^2$ 上の外積代数であるとき、このような
+環準同型を「弱準正則」と呼ぶことにする。補題 \ref{cotangent-lemma-when-zero} で
+「エタール環準同型」について行ったことを「平滑環準同型」へ一般化するには、
+乗法写像 $B \otimes_A B \to B$ が弱準正則であるような平坦環準同型
+$A \to B$ を調べればよい。ここでは当面、平滑環準同型だけを扱う。
+
+\begin{lemma}
+\label{cotangent-lemma-when-projective}
+$A \to B$ が平滑環準同型ならば、$L_{B/A} = \Omega_{B/A}[0]$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-identify-H0} により、コホモロジー次数 $0$ では一致する。
+したがって、他のコホモロジー群が零であることを示せば十分である。補題
+\ref{cotangent-lemma-localize-on-top} により $g \in B$ に対して
+$L_{B_g/A} = (L_{B/A})_g$ なので、これを $\Spec(B)$ 上局所的に示せばよい。
+したがって、$A \to B$ は標準平滑であると仮定してよい（『可換代数』、補題
+\ref{algebra-lemma-smooth-syntomic}）。すなわち、$A \to B$ を
+$A \to A[x_1, \ldots, x_n] \to B$ と分解でき、
+$A[x_1, \ldots, x_n] \to B$ はエタールである。この場合、補題
+\ref{cotangent-lemma-when-zero} と補題 \ref{cotangent-lemma-localize-on-top} により
+$L_{B/A} = L_{A[x_1, \ldots, x_n]/A} \otimes B$
+であり、補題 \ref{cotangent-lemma-cotangent-complex-polynomial-algebra} から結論を得る。
+\end{proof}
+
+
+
+
+
+\section{正標数}
+\label{cotangent-section-positive-characteristic}
+
+\noindent
+この節では素数 $p$ を固定する。$A$ が $A$ において $p = 0$ である環ならば、
+$F_A : A \to A$ はフロベニウス自己準同型 $a \mapsto a^p$ を表す。
+
+\begin{lemma}
+\label{cotangent-lemma-frobenius-homotopy}
+$A \to B$ を、$A$ において $p = 0$ である環準同型とする。$P_\bullet$ を
+$A$ 上の $B$ の標準分解とする。図式
+$$
+\xymatrix{
+B \ar[r]_{F_B} & B \\
+A \ar[u] \ar[r]^{F_A} & A \ar[u]
+}
+$$
+から誘導される、節 \ref{cotangent-section-functoriality} で論じた写像
+$P_\bullet \to P_\bullet$ は、各 $P_n$ 上のフロベニウスによって与えられる
+フロベニウス自己準同型 $P_\bullet \to P_\bullet$ とホモトピックである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{A}$ を $\mathbf{F}_p$-代数準同型 $A \to B$ の圏とする。
+$\mathcal{S}$ を、$A$ が $\mathbf{F}_p$-代数で $E$ が集合であるような組
+$(A, E)$ の圏とする。随伴関手
+$$
+V : \mathcal{A} \to \mathcal{S}, \quad (A \to B) \mapsto (A, B)
+$$
+および
+$$
+U : \mathcal{S} \to \mathcal{A}, \quad (A, E) \mapsto (A \to A[E])
+$$
+を考える。$X$ を、『単体的方法』の節 \ref{simplicial-section-standard} で
+構成した、$\mathcal{A}$ から $\mathcal{A}$ への関手の圏の単体対象とする。
+$A$ を固定すれば $P_\bullet = X(A \to B)$ であることは明らかである。
+
+\medskip\noindent
+$Y = U \circ V$ とおく。$X$ は $Y$ といくつかの写像から構成され、各項は
+$n + 1$ 個の因子をもつ $X_n = Y \circ \ldots \circ Y$ であることを
+思い出そう。この構成は『単体的方法』の例
+\ref{simplicial-example-godement} で与えられる。詳細は同書の補題
+\ref{simplicial-lemma-standard-simplicial} の証明を参照されたい。
+
+\medskip\noindent
+恒等関手のフロベニウス自己準同型を
+$f : \text{id}_\mathcal{A} \to \text{id}_\mathcal{A}$ とする。言い換えると、
+$f_{A \to B} = (F_A, F_B) : (A \to B) \to (A \to B)$ とおく。このとき
+$X(A \to B)$ 上の二つの写像は自然変換 $f \star 1_X$ と
+$1_X \star f$ によって与えられる。詳細は省略する。したがって
+『単体的方法』の補題
+\ref{simplicial-lemma-godement-before-after}.
+から結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-frobenius-acts-as-zero}
+$p$ を素数とする。$A \to B$ を環準同型とし、$A$ において $p = 0$ と
+仮定する。フロベニウス写像 $F_A$ と $F_B$ から誘導される、節
+\ref{cotangent-section-functoriality} の写像 $L_{B/A} \to L_{B/A}$ は零写像と
+ホモトピックである。
+\end{lemma}
+
+\begin{proof}
+$P_\bullet$ を $A$ 上の $B$ の標準分解とする。補題
+\ref{cotangent-lemma-frobenius-homotopy} により、$F_A$ と $F_B$ から誘導される写像
+$P_\bullet \to P_\bullet$ は、各項上のフロベニウスで与えられる写像
+$F_{P_\bullet} : P_\bullet \to P_\bullet$ とホモトピックである。
+$p$ 乗の微分は零なので、$F_{P_\bullet}$ は明らかに零写像
+$\Omega_{P_n/A} \to \Omega_{P_n/A}$ を誘導し、所望の結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-perfect-zero}
+$p$ を素数とする。$A \to B$ を環準同型とし、$A$ において $p = 0$ と
+仮定する。$A$ と $B$ が完全環ならば、$L_{B/A}$ は $D(B)$ において零である。
+\end{lemma}
+
+\begin{proof}
+写像 $(F_A, F_B) : (A \to B) \to (A \to B)$ は同型であり、したがって
+$L_{B/A}$ 上の同型を誘導する。一方、補題
+\ref{cotangent-lemma-frobenius-acts-as-zero} により $L_{B/A}$ 上の零写像も誘導する。
+\end{proof}
+
+
+
+
+
+\section{素朴な余接複体との比較}
+\label{cotangent-section-surjections}
+
+\noindent
+素朴な余接複体は『可換代数』の節 \ref{algebra-section-netherlander} で
+導入した。
+
+\begin{remark}
+\label{cotangent-remark-make-map}
+$A \to B$ を環準同型とする。節 \ref{cotangent-section-compute-L-pi-shriek} と同様に
+$\mathcal{C}_{B/A}$ 上で考え、$\mathcal{J} \subset \mathcal{O}$ を
+$\mathcal{O} \to \underline{B}$ の核とする。補題
+\ref{cotangent-lemma-apply-O-B-comparison} により $L\pi_!(\mathcal{J}) = 0$ であることに
+注意する。
+$\Omega =  \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}$
+とおくと、補題 \ref{cotangent-lemma-compute-cotangent-complex} により
+$L_{B/A} = L\pi_!(\Omega)$ である。したがって
+$L\pi_!(\mathcal{J} \to \Omega) = L\pi_!(\Omega) = L_{B/A}$ である。
+ゆえに、$\mathcal{C}_{B/A}$ の任意の対象 $U = (P \to B)$ に対して写像
+\begin{equation}
+\label{cotangent-equation-comparison-map-A}
+(J \to \Omega_{P/A} \otimes_P B) \longrightarrow L_{B/A}
+\end{equation}
+を得る。ここで $D(A)$ において $J = \Ker(P \to B)$ である。
+『サイト上のコホモロジー』の注意
+\ref{sites-cohomology-remark-map-evaluation-to-derived} を参照されたい。
+同様に進めると、補題 \ref{cotangent-lemma-O-homology-B-homology} により
+$L\pi_!(\mathcal{J} \otimes_\mathcal{O}^\mathbf{L} \underline{B}) =
+L\pi_!(\mathcal{J}) = 0$ であることに注意する。また
+$\text{Tor}_0^\mathcal{O}(\mathcal{J}, \underline{B}) =
+\mathcal{J}/\mathcal{J}^2$ なので、スペクトル系列
+$$
+H_p(\mathcal{C}_{B/A}, \text{Tor}_q^\mathcal{O}(\mathcal{J}, \underline{B}))
+\Rightarrow 
+H_{p + q}(\mathcal{C}_{B/A},
+\mathcal{J} \otimes_\mathcal{O}^\mathbf{L} \underline{B}) = 0
+$$
+（『導来圏』の補題 \ref{derived-lemma-two-ss-complex-functor} の双対）から
+\par\noindent
+$H_0(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2) = 0$
+が従い、さらに
+\par\noindent
+$H_1(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2) = 0$ が従う。
+したがって、$\underline{B}$-加群の複体
+$\mathcal{J}/\mathcal{J}^2 \to \Omega$ は
+\par\noindent
+$\tau_{\geq -1}L\pi_!(\mathcal{J}/\mathcal{J}^2 \to \Omega) =
+\tau_{\geq -1}L_{B/A}$ を満たす。ゆえに、$\mathcal{C}_{B/A}$ の任意の対象
+$U = (P \to B)$ に対して写像
+\begin{equation}
+\label{cotangent-equation-comparison-map}
+(J/J^2 \to \Omega_{P/A} \otimes_P B) \longrightarrow \tau_{\geq -1}L_{B/A}
+\end{equation}
+を $D(B)$ に得る。『サイト上のコホモロジー』の注意
+\ref{sites-cohomology-remark-map-evaluation-to-derived} を参照されたい。
+\end{remark}
+
+\noindent
+最初に、環の全射がある場合を扱う。
+
+\begin{lemma}
+\label{cotangent-lemma-surjection}
+\begin{slogan}
+全射環準同型の余接複体のコホモロジーは次数零で自明であり、次数 $-1$ では
+核をその平方で割ったものである。
+\end{slogan}
+$A \to B$ を核 $I$ をもつ全射環準同型とする。このとき
+$H^0(L_{B/A}) = 0$ かつ $H^{-1}(L_{B/A}) = I/I^2$ である。この同型は、
+$\mathcal{C}_{B/A}$ の対象 $(A \to B)$ に対する写像
+(\ref{cotangent-equation-comparison-map}) から得られる。
+\end{lemma}
+
+\begin{proof}
+後で、$A \to B$ の全射性を用いて、$\mathcal{C}_{B/A}$ 上の層の短完全列
+$$
+0 \to \pi^{-1}(I/I^2) \to \mathcal{J}/\mathcal{J}^2 \to \Omega \to 0
+$$
+が存在することを示す。$L\pi_!$ と、それに付随するホモロジーの長完全列を
+取り、注意 \ref{cotangent-remark-make-map} で示した
+$H_1(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2)$ と
+$H_0(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2)$ の消滅を用いると、補題
+\ref{cotangent-lemma-pi-lower-shriek-constant-sheaf} により所望の結論を得る。
+
+\medskip\noindent
+残るのは上で述べた局所的な主張の確認である。$\mathcal{C}_{B/A}$ の各対象
+$U = (P \to B)$ に対して、写像 $P \to B$ が各 $e \in E$ を零へ写すような
+同型 $P = A[E]$ を選べる。このとき
+$J = \mathcal{J}(U) \subset P = \mathcal{O}(U)$
+は $J = IP + (e; e \in E)$ に等しい。上の層の短完全列の $U$ における値は
+$$
+0 \to I/I^2 \to J/J^2 \to \Omega_{P/A} \otimes_P B \to 0
+$$
+である。確認は省略する（ヒント：唯一注意を要する点は
+$IP \cap J^2 = IJ$ である。これは、たとえば『代数詳論』の補題
+\ref{more-algebra-lemma-conormal-sequence-H1-regular} から従う）。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-relation-with-naive-cotangent-complex}
+$A \to B$ を環準同型とする。このとき $\tau_{\geq -1}L_{B/A}$ は
+素朴な余接複体と標準的に擬同型である。
+\end{lemma}
+
+\begin{proof}
+核 $I$ をもつ $P = A[B] \to B$ を考える。$A$ 上の $B$ の素朴な余接複体
+$\NL_{B/A}$ は複体 $I/I^2 \to \Omega_{P/A} \otimes_P B$ である。
+『可換代数』の定義 \ref{algebra-definition-naive-cotangent-complex} を
+参照されたい。(\ref{cotangent-equation-comparison-map}) ですでに標準的な写像
+$$
+c : \NL_{B/A} \longrightarrow \tau_{\geq -1}L_{B/A}
+$$
+を構成したことに注意する。環準同型 $A \to A[B] \to B$ に付随する
+識別三角形 (\ref{cotangent-equation-triangle})
+$$
+L_{P/A} \otimes_P^\mathbf{L} B \to L_{B/A} \to L_{B/P} \to 
+(L_{P/A} \otimes_P^\mathbf{L} B)[1]
+$$
+を考える。
+$L_{P/A} = \Omega_{P/A}[0] = \NL_{P/A}$ が $D(P)$ において成り立ち
+であり（補題 \ref{cotangent-lemma-cotangent-complex-polynomial-algebra} および
+『可換代数』の補題 \ref{algebra-lemma-NL-polynomial-algebra}）、また
+$\tau_{\geq -1}L_{B/P} = I/I^2[1] = \NL_{B/P}$ が $D(B)$ において成り立つ
+である（補題 \ref{cotangent-lemma-surjection} および『可換代数』の補題
+\ref{algebra-lemma-NL-surjection}）。$c$ が擬同型であることを示すには、
+『可換代数』の補題 \ref{algebra-lemma-exact-sequence-NL} と、識別三角形に
+付随するコホモロジーの長完全列により、写像
+$L_{P/A} \to L_{B/A} \to L_{B/P}$ がコホモロジー群上で、素朴な余接複体の
+対応する写像
+$\NL_{P/A} \to \NL_{B/A} \to \NL_{B/P}$
+と両立することを示せば十分である。確認は省略する。
+\end{proof}
+
+\begin{remark}
+\label{cotangent-remark-explicit-comparison-map}
+補題 \ref{cotangent-lemma-relation-with-naive-cotangent-complex} の比較写像は、次の
+ように明示できる。$P_\bullet$ を $A$ 上の $B$ の標準分解とし、
+$I = \Ker(A[B] \to B)$ とおく。$P_0 = A[B]$ であることを思い出そう。
+補題の写像は可換図式
+$$
+\xymatrix{
+L_{B/A} \ar[d] & \ldots \ar[r] &
+\Omega_{P_2/A} \otimes_{P_2} B
+\ar[r] \ar[d] &
+\Omega_{P_1/A} \otimes_{P_1} B
+\ar[r] \ar[d] &
+\Omega_{P_0/A} \otimes_{P_0} B
+\ar[d] \\
+\NL_{B/A} & \ldots \ar[r] &
+0 \ar[r] & 
+I/I^2 \ar[r] &
+\Omega_{P_0/A} \otimes_{P_0} B
+}
+$$
+で与えられる。終域が $I/I^2$ である下向きの矢印は、
+$\text{d}f \otimes b$ を $I/I^2$ における $(d_0(f) - d_1(f))b$ の類へ
+写すことで構成する。ここで $d_i : P_1 \to P_0$, $i = 0, 1$ は単体構造の
+二つの面写像である。$d_0 - d_1$ は $P_1$ を $I = \Ker(P_0 \to B)$ へ
+写すので、これは意味をもつ。この規則が良定義であることの確認は省略する。
+この写像は微分
+$\Omega_{P_1/A} \otimes_{P_1} B \to \Omega_{P_0/A} \otimes_{P_0} B$
+と両立する。実際、この微分は $\text{d}f \otimes b$ を
+$\text{d}(d_0(f) - d_1(f)) \otimes b$ へ写す。さらに、微分
+$\Omega_{P_2/A} \otimes_{P_2} B \to \Omega_{P_1/A} \otimes_{P_1} B$
+は $\text{d}f \otimes b$ を
+$\text{d}(d_0(f) - d_1(f) + d_2(f)) \otimes b$ へ写し、これは下向きの
+矢印によって零に写る。ゆえに複体の写像を得る。これが補題
+\ref{cotangent-lemma-relation-with-naive-cotangent-complex} の写像と同じであることの
+確認は省略する。
+\end{remark}
+
+\begin{remark}
+\label{cotangent-remark-surjection}
+注意 \ref{cotangent-remark-make-map} の記法を用いる。そこでの議論から、スペクトル
+系列の微分
+$$
+H_2(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2)
+\longrightarrow
+H_0(\mathcal{C}_{B/A}, \text{Tor}_1^\mathcal{O}(\mathcal{J}, \underline{B}))
+$$
+は同型であることが分かる。$\mathcal{C}'_{B/A}$ を、全射 $P \to B$ からなる
+$\mathcal{C}_{B/A}$ の充満部分圏とする。余接複体と素朴な余接複体の一致
+（補題 \ref{cotangent-lemma-relation-with-naive-cotangent-complex}）により、層の完全列
+$$
+0 \to \underline{H_1(L_{B/A})} \to
+\mathcal{J}/\mathcal{J}^2 \xrightarrow{\text{d}} \Omega \to
+\underline{H_2(L_{B/A})} \to 0
+$$
+が $\mathcal{C}'_{B/A}$ 上にある。したがって、圏 $\mathcal{C}_{B/A}$ 全体上の
+$\Ker(d)$ と $\Coker(d)$ の高次ホモロジー群は消滅する。実際、補題
+\ref{cotangent-lemma-identify-pi-shriek} により、これらは定値単体アーベル群の
+ホモロジー群によって計算される。ゆえに
+$$
+H_n(\mathcal{C}_{B/A}, \mathcal{J}/\mathcal{J}^2) \to H_n(L_{B/A})
+$$
+はすべての $n \geq 2$ に対して同型である。上の注意と合わせて、公式
+$H_2(L_{B/A}) =
+H_0(\mathcal{C}_{B/A}, \text{Tor}_1^\mathcal{O}(\mathcal{J}, \underline{B}))$
+を得る。
+\end{remark}
+
+
+
+
+
+\section{Quillen のスペクトル系列}
+\label{cotangent-section-spectral-sequence}
+
+\noindent
+この節では、導来テンソル積と余接複体を関係づけるスペクトル系列を論じる。
+
+\begin{lemma}
+\label{cotangent-lemma-vanishing-symmetric-powers}
+（記法と仮定は『サイト上のコホモロジー』の例
+\ref{sites-cohomology-example-category-to-point} と同じとする。）
+$\mathcal{C}$ は『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution}
+のような余単体対象をもつと仮定する。$\mathcal{F}$ を、
+$H_0(\mathcal{C}, \mathcal{F}) = 0$ を満たす平坦 $\underline{B}$-加群とする。
+このとき $l < k$ に対して
+$H_l(\mathcal{C}, \text{Sym}_{\underline{B}}^k(\mathcal{F})) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+テンソル積、外冪、対称冪の添字 ${}_{\underline{B}}$ を省略する。$k$ に
+関する帰納法で証明する。$k = 0, 1$ の場合は仮定から従う。$k > 1$ ならば、
+Koszul 複体と同じ微分をもつ完全複体
+$$
+\ldots \to
+\wedge^2\mathcal{F} \otimes \text{Sym}^{k - 2}\mathcal{F} \to
+\mathcal{F} \otimes \text{Sym}^{k - 1}\mathcal{F} \to
+\text{Sym}^k\mathcal{F} \to 0
+$$
+を考える。これを $\text{Sym}^k\mathcal{F}$ の分解とみなすと、第一象限
+スペクトル系列
+$$
+E_1^{p, q} =
+H_p(\mathcal{C},
+\wedge^{q + 1}\mathcal{F} \otimes \text{Sym}^{k - q - 1}\mathcal{F})
+\Rightarrow
+H_{p + q}(\mathcal{C}, \text{Sym}^k(\mathcal{F}))
+$$
+を得る。『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-eilenberg-zilber} により
+$$
+L\pi_!(\wedge^{q + 1}\mathcal{F} \otimes \text{Sym}^{k - q - 1}\mathcal{F}) =
+L\pi_!(\wedge^{q + 1}\mathcal{F}) \otimes_B^\mathbf{L}
+L\pi_!(\text{Sym}^{k - q - 1}\mathcal{F}))
+$$
+である。導来テンソル積の構成から、帰納法の仮定と
+$H_0(\mathcal{C}, \wedge^{q + 1}(\mathcal{F})) = 0$ の消滅を合わせれば
+所望の結論が従う。この消滅は、$\wedge^{q + 1}(\mathcal{F})$ が
+$\mathcal{F}^{\otimes q + 1}$ の商であり、
+$H_0(\mathcal{C}, \mathcal{F}^{\otimes q + 1})$
+が零である $H_0(\mathcal{C}, \mathcal{F})^{\otimes q + 1}$ の商だからである。
+\end{proof}
+
+\begin{remark}
+\label{cotangent-remark-first-homology-symmetric-power}
+補題 \ref{cotangent-lemma-vanishing-symmetric-powers} の状況では
+$H_k(\mathcal{C}, \text{Sym}^k(\mathcal{F})) =
+\wedge^k_B(H_1(\mathcal{C}, \mathcal{F}))$ を示せる。実際、証明から
+$H_k(\mathcal{C}, \text{Sym}^k(\mathcal{F}))$ は、
+$$
+H^{-k}(L\pi_!(\mathcal{F}) \otimes_B^\mathbf{L}
+L\pi_!(\mathcal{F}) \otimes_B^\mathbf{L}
+\ldots \otimes_B^\mathbf{L} L\pi_!(\mathcal{F})) =
+H_1(\mathcal{C}, \mathcal{F})^{\otimes k}
+$$
+の $S_k$-余不変部分であることが分かる。したがって主張は、この作用が
+テンソル積上の $S_k$ の通常の作用に符号指標を掛けたものだということで
+ある。これを証明するには、多重複体に付随する全複体の定義における符号規約を
+追う必要がある。確認は省略する。
+\end{remark}
+
+\begin{lemma}
+\label{cotangent-lemma-map-tors-zero}
+$A$ を環とし、$P = A[E]$ を多項式環とする。
+$I = (e; e \in E) \subset P$ とおく。写像
+$\text{Tor}_i^P(A, I^{n + 1}) \to \text{Tor}_i^P(A, I^n)$
+はすべての $i$ と $n$ に対して零である。
+\end{lemma}
+
+\begin{proof}
+$e \in E$ に対応する変数 $x_e \in P$ と書く。$P$ 上の $A$ の自由分解は、
+$x_e$ 上の Koszul 複体 $K_\bullet$ によって与えられる。ここで $K_i$ は
+$e_1, \ldots, e_i \in E$ に対する外積 $e_1 \wedge \ldots \wedge e_i$ を
+基底とし、$d(e) = x_e$ である。したがって
+$K_\bullet \otimes_P I^n = I^nK_\bullet$ は $\text{Tor}_i^P(A, I^n)$ を
+計算する。すべてが $\deg(x_e) = 1$, $\deg(e) = 1$、および $a \in A$ に
+対する $\deg(a) = 0$ によって次数付けされていることに注意する。
+$\xi \in I^{n + 1}K_i$ を次数 $m$ の斉次コサイクルとする。このとき
+$m \geq i + 1 + n$ である。$K_\bullet$ は次数 $ > 0$ で完全なので、ある
+$\eta \in K_{i + 1}$ に対して $\xi = \text{d}\eta$ である
+（$i = 0$ の場合は読者に委ねる）。ここで
+$\deg(\eta) = m \geq i + 1 + n$ である。したがって $\eta$ を基底で表示すると、
+その係数は $I^n$ に属することが分かる。ゆえに $\xi$ は
+$I^nK_\bullet$ のホモロジーで零に写り、所望の結論を得る。
+\end{proof}
+
+\begin{theorem}[Quillen スペクトル系列]
+\label{cotangent-theorem-quillen-spectral-sequence}
+$A \to B$ を全射環準同型とする。$\mathcal{C}_{B/A}$ 上の
+$\underline{B}$-加群の層
+$\Omega = \Omega_{\mathcal{O}/A} \otimes_\mathcal{O} \underline{B}$
+を考える。節 \ref{cotangent-section-compute-L-pi-shriek} を参照されたい。このとき、
+$E_1$-項が
+$$
+E_1^{p, q} =
+H_{- p - q}(\mathcal{C}_{B/A}, \text{Sym}^p_{\underline{B}}(\Omega))
+\Rightarrow \text{Tor}^A_{- p - q}(B, B)
+$$
+で、$d_r$ の双次数が $(r, -r + 1)$ であるスペクトル系列が存在する。
+さらに、$i < k$ に対して
+$H_i(\mathcal{C}_{B/A}, \text{Sym}^k_{\underline{B}}(\Omega)) = 0$ である。
+\end{theorem}
+
+\begin{proof}
+$I \subset A$ を $A \to B$ の核とし、$\mathcal{J} \subset \mathcal{O}$ を
+$\mathcal{O} \to \underline{B}$ の核とする。このとき
+$I\mathcal{O} \subset \mathcal{J}$ である。
+$\mathcal{K} = \mathcal{J}/I\mathcal{O}$ および
+$\overline{\mathcal{O}} = \mathcal{O}/I\mathcal{O}$ とおく。
+
+\medskip\noindent
+$\mathcal{C}_{B/A}$ の各対象 $U = (P \to B)$ に対して、写像 $P \to B$ が
+各 $e \in E$ を零へ写すような同型 $P = A[E]$ を選べる。このとき
+$J = \mathcal{J}(U) \subset P = \mathcal{O}(U)$
+は $J = IP + (e; e \in E)$ に等しい。さらに
+$\overline{\mathcal{O}}(U) = B[E]$ であり、
+$K = \mathcal{K}(U) = (e; e \in E)$ は多項式環 $B[E]$ の変数で生成される
+イデアルである。とくに
+$$
+K/K^2 \xrightarrow{\text{d}} \Omega_{P/A} \otimes_P B
+$$
+は全単射である。言い換えると、$\Omega = \mathcal{K}/\mathcal{K}^2$ かつ
+$\text{Sym}_B^k(\Omega) = \mathcal{K}^k/\mathcal{K}^{k + 1}$ である。
+補題 \ref{cotangent-lemma-identify-H0} により
+$\pi_!(\Omega) = \Omega_{B/A} = 0$ であることに注意する。ここで最後の等号は、
+$A \to B$ が全射であることと『可換代数』補題
+\ref{algebra-lemma-trivial-differential-surjective} による。補題
+\ref{cotangent-lemma-vanishing-symmetric-powers} により
+$$
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^k/\mathcal{K}^{k + 1}) =
+H_i(\mathcal{C}_{B/A}, \text{Sym}^k_{\underline{B}}(\Omega)) = 0
+$$
+が $i < k$ に対して成り立つ。これで定理の最後の主張が証明された。
+
+\medskip\noindent
+定理への方法は、
+$$
+B \otimes_A^\mathbf{L} B = L\pi_!(\mathcal{O}) \otimes_A^\mathbf{L} B =
+L\pi_!(\mathcal{O} \otimes_{\underline{A}}^\mathbf{L} \underline{B}) =
+L\pi_!(\overline{\mathcal{O}})
+$$
+に注意することである。最初の等式は補題
+\ref{cotangent-lemma-apply-O-B-comparison} により、二つ目は
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-change-of-rings} により、三つ目は
+$\mathcal{O}$ が $\underline{A}$ 上平坦であることによる。層
+$\overline{\mathcal{O}}$ はフィルトレーション
+$$
+\ldots \subset
+\mathcal{K}^3 \subset
+\mathcal{K}^2 \subset
+\mathcal{K} \subset
+\overline{\mathcal{O}}
+$$
+をもつ。これは $L\pi_!(\overline{\mathcal{O}})$ を表す複体 $C$ 上に
+フィルトレーション $F$ を誘導し、$F^pC$ は $L\pi_!(\mathcal{K}^p)$ を表す
+（$C$ と $F$ の構成は省略する）。$(C, F)$ に付随する『ホモロジー』の節
+\ref{homology-section-filtered-complex} のスペクトル系列を考える。その
+$E_1$-項は
+$$
+E_1^{p, q} = H_{- p - q}(\mathcal{C}_{B/A}, \mathcal{K}^p/\mathcal{K}^{p + 1})
+\quad\Rightarrow\quad
+H_{- p - q}(\mathcal{C}_{B/A}, \overline{\mathcal{O}}) = 
+\text{Tor}_{- p - q}^A(B, B)
+$$
+で、微分は $E_r^{p, q} \to E_r^{p + r, q - r + 1}$ である。収束を示すため、
+各 $k$ に対して、
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^n) = 0$
+が $i < k$ かつ $n > c$ に対して成り立つような $c$ が存在することを
+示す\footnote{事後的には、$i < n$ に対する「正しい」消滅
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^n) = 0$ を導ける。}。
+
+\medskip\noindent
+$k \geq 0$ を与え、$c = k^2$ とおく。写像
+$$
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^{n + c}) \to
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^n)
+$$
+は $i < k$ とすべての $n \geq 0$ に対して零であると主張する。
+$\mathcal{K}^n/\mathcal{K}^{n + c}$ は有限フィルトレーションをもち、その
+逐次商 $\mathcal{K}^m/\mathcal{K}^{m + 1}$, $n \leq m < n + c$ は、$i < n$ に
+対して $H_i(\mathcal{C}_{B/A}, \mathcal{K}^m/\mathcal{K}^{m + 1}) = 0$ を
+満たすことに注意する（上を参照）。したがってこの主張から、$i < k$ と
+すべての $n \geq k$ に対して
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^{n + c}) = 0$ が従う。これが示すべき
+ことである。
+
+\medskip\noindent
+主張の証明。任意の $\mathcal{O}$-加群 $\mathcal{F}$ に対して、写像
+$\mathcal{F} \to \mathcal{F} \otimes_\mathcal{O}^\mathbf{L} B$ は、$L\pi_!$ を
+適用すると同型を誘導することを思い出そう。補題
+\ref{cotangent-lemma-O-homology-B-homology} を参照されたい。写像
+$$
+\mathcal{K}^{n + k} \otimes_\mathcal{O}^\mathbf{L} B
+\longrightarrow
+\mathcal{K}^n \otimes_\mathcal{O}^\mathbf{L} B
+$$
+は次数 $0, -1, \ldots, - k + 1$ のコホモロジー層上で零写像を誘導すると
+主張する。この第二の主張が成り立つならば、$k$ 重合成
+$$
+\mathcal{K}^{n + c} \otimes_\mathcal{O}^\mathbf{L} B
+\longrightarrow
+\mathcal{K}^n \otimes_\mathcal{O}^\mathbf{L} B
+$$
+は $\tau_{\leq -k}\mathcal{K}^n \otimes_\mathcal{O}^\mathbf{L} B$ を経由して
+分解し、したがって $i < k$ に対して
+$H_i(\mathcal{C}_{B/A}, -) = L_i\pi_!( - )$ 上で零を誘導する。
+『導来圏』の補題 \ref{derived-lemma-trick-vanishing-composition} を参照されたい。
+上の注意により、同じことが写像
+$H_i(\mathcal{C}_{B/A}, \mathcal{K}^{n + c}) \to
+H_i(\mathcal{C}_{B/A}, \mathcal{K}^n)$
+についても成り立ち、最初の主張が証明される。
+
+\medskip\noindent
+第二の主張の証明。この主張は局所的なので、上の対象 $U = (P \to B)$ 上で
+考えてよい。写像
+$$
+\text{Tor}_i^P(B, K^{n + k}) \to \text{Tor}_i^P(B, K^n)
+$$
+が $i < k$ に対して零であることを示せばよい。スペクトル系列
+$$
+\text{Tor}_a^P(P/IP, \text{Tor}_b^{P/IP}(B, K^n))
+\Rightarrow
+\text{Tor}_{a + b}^P(B, K^n),
+$$
+がある。『代数詳論』の例 \ref{more-algebra-example-tor-change-rings} を
+参照されたい。したがって写像
+$$
+\text{Tor}_i^{P/IP}(B, K^{n + 1}) \to \text{Tor}_i^{P/IP}(B, K^n)
+$$
+がすべての $i$ に対して零であることを示せば十分である。これは補題
+\ref{cotangent-lemma-map-tors-zero} である。
+\end{proof}
+
+\begin{remark}
+\label{cotangent-remark-elucidate-ss}
+定理 \ref{cotangent-theorem-quillen-spectral-sequence} の状況で
+$I = \Ker(A \to B)$ とおく。このとき、補題 \ref{cotangent-lemma-surjection} により
+$H^{-1}(L_{B/A}) = H_1(\mathcal{C}_{B/A}, \Omega) = I/I^2$
+である。したがって注意 \ref{cotangent-remark-first-homology-symmetric-power} により
+$H_k(\mathcal{C}_{B/A}, \text{Sym}^k(\Omega)) = \wedge^k_B(I/I^2)$ である。
+ゆえに $E_1$-項は
+$$
+\begin{matrix}
+B \\
+0 \\
+0 & I/I^2 \\
+0 & H^{-2}(L_{B/A}) \\
+0 & H^{-3}(L_{B/A}) & \wedge^2(I/I^2) \\
+0 & H^{-4}(L_{B/A}) & H_3(\mathcal{C}_{B/A}, \text{Sym}^2(\Omega)) \\
+0 & H^{-5}(L_{B/A}) & H_4(\mathcal{C}_{B/A}, \text{Sym}^2(\Omega)) &
+\wedge^3(I/I^2)
+\end{matrix}
+$$
+のようになり、微分は水平方向である。したがって端射
+$\text{Tor}_i^A(B, B) \to H^{-i}(L_{B/A})$, $i > 0$ および
+$\wedge^i_B(I/I^2) \to \text{Tor}_i^A(B, B)$ を得る。最後に
+$\text{Tor}_1^A(B, B) = I/I^2$ であり、五項完全列
+$$
+\text{Tor}_3^A(B, B) \to H^{-3}(L_{B/A}) \to \wedge^2_B(I/I^2) \to
+\text{Tor}_2^A(B, B) \to H^{-2}(L_{B/A}) \to 0
+$$
+が低次数項にある。
+\end{remark}
+
+\begin{remark}
+\label{cotangent-remark-elucidate-degree-two}
+$A \to B$ を環準同型とし、$P_\bullet$ を $A$ 上の $B$ の分解とする
+（注意 \ref{cotangent-remark-resolution}）。$J_n = \Ker(P_n \to B)$ とおく。このとき
+$$
+\text{Tor}_2^{P_n}(B, B) = 
+\text{Tor}_1^{P_n}(J_n, B) =
+\Ker(J_n \otimes_{P_n} J_n \to J_n^2).
+$$
+したがって $H_2(L_{B/A})$ は標準的に
+$$
+\Coker(\text{Tor}_2^{P_1}(B, B) \to \text{Tor}_2^{P_0}(B, B))
+$$
+に等しい（注意 \ref{cotangent-remark-surjection}）。これをさらに明示するため、例
+\ref{cotangent-example-resolution-length-two} のように $P_2$, $P_1$, $P_0$ を選ぶ。
+このとき
+$$
+\text{Tor}_2^{P_1}(B, B) =
+\wedge^2(\bigoplus\nolimits_{t \in T} B)\ \oplus
+\ \bigoplus\nolimits_{t \in T} J_0\ \oplus
+\ \text{Tor}_2^{P_0}(B, B)
+$$
+と主張する。実際、第一直和因子の基底元 $x_t \wedge x_{t'}$ は
+$J_1 \otimes_{P_1} J_1$ の元 $x_t \otimes x_{t'} - x_{t'} \otimes x_t$ に
+対応する。$f \in J_0$ に対して、第二直和因子の元 $x_t \otimes f$ は
+$J_1 \otimes_{P_1} J_1$ の元
+$x_t \otimes s_0(f) - s_0(f) \otimes x_t$ に対応する。最後に、写像
+$\text{Tor}_2^{P_0}(B, B) \to \text{Tor}_2^{P_1}(B, B)$ は $s_0$ によって
+与えられる。写像
+$d_0 - d_1 : \text{Tor}_2^{P_1}(B, B) \to \text{Tor}_2^{P_0}(B, B)$
+は最後の直和因子上で零であり、$x_t \otimes f$ を
+$f \otimes f_t - f_t \otimes f$ へ、$x_t \wedge x_{t'}$ を
+$f_t \otimes f_{t'} - f_{t'} \otimes f_t$ へ写す。以上より完全列
+$$
+\wedge^2_B(J_0/J_0^2) \to \text{Tor}_2^{P_0}(B, B) \to H^{-2}(L_{B/A}) \to 0
+$$
+を得る。このようにして、注意 \ref{cotangent-remark-elucidate-ss} で論じた Quillen の
+スペクトル系列の帰結を直接証明できる。
+\end{remark}
+
+
+
+
+
+
+\section{Lichtenbaum--Schlessinger との比較}
+\label{cotangent-section-compare-higher}
+
+\noindent
+$A \to B$ を環準同型とする。\cite{Lichtenbaum-Schlessinger} には
+$\tau_{\geq -2}L_{B/A}$ のかなり明示的な決定法があり、特異点の半普遍変形
+空間の計算でしばしば用いられる。構成は次のとおりである。$A$ 上の多項式
+代数 $P$ と、核 $I$ をもつ全射 $P \to B$ を選ぶ。$I$ の生成元 $f_t$,
+$t \in T$ を選び、自由 $P$-加群 $F$ を用いた全射
+$F = \bigoplus_{t \in T} P \to I$ を得る。$Rel \subset F$ を $F \to I$ の
+核とする。言い換えると、$Rel$ は $f_t$ の間の関係全体である。
+$TrivRel \subset Rel$ を自明な関係の部分加群、すなわち元
+$(\ldots, f_{t'}, 0, \ldots, 0, -f_t, 0, \ldots)$ で生成される $Rel$ の
+部分加群とする。$B$-加群の複体
+\begin{equation}
+\label{cotangent-equation-lichtenbaum-schlessinger}
+Rel/TrivRel \longrightarrow
+F \otimes_P B \longrightarrow
+\Omega_{P/A} \otimes_P B
+\end{equation}
+を考える。最後の項は次数 $0$ に置く。最初の写像は明らかなものであり、
+二つ目の写像は $t \in T$ に対応する基底元を $\text{d}f_t \otimes 1$ へ
+写す。
+
+\begin{definition}
+\label{cotangent-definition-biderivation}
+$A \to B$ を環準同型とし、$M$ を $A$ 上の $(B, B)$-両側加群とする。
+{\it $A$-双導分}とは、$\lambda(xy) = x\lambda(y) + \lambda(x)y$ を満たす
+$A$-線形写像 $\lambda : B \to M$ である。
+\end{definition}
+
+\noindent
+多項式代数の双導分は容易に記述できる。
+
+\begin{lemma}
+\label{cotangent-lemma-polynomial-ring-unique}
+$P = A[S]$ を $A$ 上の多項式環とし、$M$ を $A$ 上の $(P, P)$-両側加群と
+する。$s \in S$ に対して $m_s \in M$ が与えられると、各 $s$（$s \in S$）を
+$m_s$ へ写す一意な $A$-双導分 $\lambda : P \to M$ が存在する。
+\end{lemma}
+
+\begin{proof}
+次のようにおく。
+$$
+\lambda(s_1 \ldots s_t) =
+\sum s_1 \ldots s_{i - 1} m_{s_i} s_{i + 1} \ldots s_t
+$$
+これは $M$ の元である。$A$-線形に拡張すると双導分を得る。
+\end{proof}
+
+\noindent
+比較定理は次のとおりである。\cite[page 206, Proposition 12]{Andre-Homologie}
+または論文 \cite{Doncel} も参照されたい。後者は複体
+(\ref{cotangent-equation-lichtenbaum-schlessinger}) を一項延長し、比較を
+$\tau_{\geq -3}$ まで拡張する。
+
+\begin{lemma}
+\label{cotangent-lemma-compare-higher}
+上の状況で、複体 (\ref{cotangent-equation-lichtenbaum-schlessinger}) を $L$ と書く。
+$D(B)$ に標準的な写像 $L_{B/A} \to L$ があり、これは $D(B)$ における同型
+$\tau_{\geq -2}L_{B/A} \to L$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+$P_\bullet \to B$ を $A$ 上の $B$ の分解とする（注意
+\ref{cotangent-remark-resolution}）。$L_{B/A}$ を $\Omega_{P_\bullet/A} \otimes B$ と
+同定する。写像を構成するために、いくつか選択を行う。
+
+\medskip\noindent
+与えられた写像 $P_0 \to B$ および $P \to B$ と両立する $A$-代数準同型
+$\psi : P_0 \to P$ を選ぶ。
+
+\medskip\noindent
+ある集合 $S$ を用いて $P_1 = A[S]$ と書く。$s \in S$ に対して
+$$
+\psi(d_0(s) - d_1(s)) = \sum p_{s, t} f_t
+$$
+と書ける。ここで $p_{s, t} \in P$ である。写像
+$(\psi \circ d_0, \psi \circ d_1)$ によって $F = \bigoplus_{t \in T} P$ を
+$(P_1, P_1)$-両側加群とみなす。補題 \ref{cotangent-lemma-polynomial-ring-unique} により、
+$s$ を成分 $p_{s, t}$ のベクトルへ写す一意な $A$-双導分
+$\lambda : P_1 \to F$ を得る。構成により、合成
+$$
+P_1 \longrightarrow F \longrightarrow P
+$$
+は $f \in P_1$ を $\psi(d_0(f) - d_1(f))$ へ写す。実際、写像
+$f \mapsto \psi(d_0(f) - d_1(f))$ は、生成元上でこの合成と一致する
+$A$-双導分である。
+
+\medskip\noindent
+$g \in P_2$ に対して $\lambda(d_0(g) - d_1(g) + d_2(g))$ は $Rel$ の元で
+あると主張する。実際、前段落の最後の考察により、
+$\lambda(d_0(g) - d_1(g) + d_2(g))$ の $P$ における像は
+$$
+\psi((d_0 - d_1)(d_0(g) - d_1(g) + d_2(g)))
+$$
+であり、『単体的方法』の節 \ref{simplicial-section-complexes} により零である。
+
+\medskip\noindent
+$\psi$ の選択によって写像
+$$
+\text{d}\psi \otimes 1 :
+\Omega_{P_0/A} \otimes B
+\longrightarrow
+\Omega_{P/A} \otimes B
+$$
+が定まる。$F \otimes B$ 上の二つの $P_1$-加群構造は一致するので、
+$\lambda$ と写像 $F \to F \otimes B$ の合成は通常の $A$-導分である。
+したがって $\lambda$ は写像
+$$
+\overline{\lambda} :
+\Omega_{P_1/A} \otimes B
+\longrightarrow
+F \otimes B
+$$
+を定める。最後に、$\text{d}g$ を商における
+$\lambda(d_0(g) - d_1(g) + d_2(g))$ の類へ写すことで、$B$-線形写像
+$$
+q :
+\Omega_{P_2/A} \otimes B
+\longrightarrow
+Rel/TrivRel
+$$
+を得る。
+
+\medskip\noindent
+図式
+$$
+\xymatrix{
+\Omega_{P_3/A} \otimes B \ar[r] \ar[d] &
+\Omega_{P_2/A} \otimes B \ar[r] \ar[d]_q &
+\Omega_{P_1/A} \otimes B \ar[r] \ar[d]_{\overline{\lambda}} &
+\Omega_{P_0/A} \otimes B \ar[d]_{\text{d}\psi \otimes 1} \\
+0 \ar[r] &
+Rel/TrivRel \ar[r] &
+F \otimes B \ar[r] &
+\Omega_{P/A} \otimes B
+}
+$$
+は可換であり（計算は省略する）、補題の写像を得る。注意
+\ref{cotangent-remark-explicit-comparison-map} と補題
+\ref{cotangent-lemma-relation-with-naive-cotangent-complex} により、この写像は同型
+$H_1(L_{B/A}) \to H_1(L)$ および $H_0(L_{B/A}) \to H_0(L)$ を誘導する。
+
+\medskip\noindent
+残るのは、写像 $L_{B/A} \to L$ が同型 $H_2(L_{B/A}) \to H_2(L)$ を誘導する
+ことを示す点である。$P_0 = P = A[u_i]$ とし、次いで例
+\ref{cotangent-example-resolution-length-two} のように $P_1$ と $P_2$ を取った
+$A$ 上の $B$ の分解を選ぶ。注意 \ref{cotangent-remark-elucidate-degree-two} で完全列
+$$
+\wedge^2_B(J_0/J_0^2) \to \text{Tor}_2^{P_0}(B, B) \to H^{-2}(L_{B/A}) \to 0
+$$
+を構成した。ここで $P_0 = P$ かつ $J_0 = \Ker(P \to B) = I$ である。
+短完全列 $0 \to I \to P \to B \to 0$ および
+$0 \to Rel \to F \to I \to 0$ を用いて Tor 群を計算すると、
+$\text{Tor}_2^P(B, B) = \Ker(Rel \otimes B \to F \otimes B)$ である。
+この同定のもとで、写像 $\wedge^2_B(I/I^2) \to \text{Tor}_2^P(B, B)$ の像は
+ちょうど $TrivRel \otimes B$ の像である。したがって
+$H_2(L_{B/A}) \cong H_2(L)$ である。
+
+\medskip\noindent
+最後に、写像 $L_{B/A} \to L$ が実際にこの同型を誘導することを確認しなければ
+ならない。以下、例 \ref{cotangent-example-resolution-length-two} と注意
+\ref{cotangent-remark-elucidate-degree-two} および \ref{cotangent-remark-surjection} で論じた記法と
+結果を断りなく用いる。
+$\text{Tor}_2^{P_0}(B, B) = \Ker(I \otimes_P I \to I^2)$
+の元 $\xi$ を選ぶ。ある $h_{t', t} \in P$ を用いて
+$\xi = \sum h_{t', t}f_{t'} \otimes f_t$ と書く。上の完全列を追うと、
+$\xi$ は、$t$ 番目の成分が
+$r_t = \sum_{t' \in T} h_{t', t}f_{t'}$ である元
+$r \in Rel \subset F = \bigoplus_{t \in T} P$ の $Rel \otimes B$ における像に
+対応する。一方、$\xi$ は、次の $2$-拡大に関する $\xi$ の境界を写像
+$\text{d} : H_2(\mathcal{J}/\mathcal{J}^2) \to H_2(\Omega)$ で写した
+$H_2(L_{B/A}) = H_2(\Omega)$ の元に対応する。
+$$
+0 \to
+\text{Tor}_2^\mathcal{O}(\underline{B}, \underline{B})
+\to 
+\mathcal{J} \otimes_\mathcal{O} \mathcal{J} \to \mathcal{J}
+\to
+\mathcal{J}/\mathcal{J}^2 \to 0
+$$
+この元の逐次移送を計算する。まず
+$$
+\xi = (d_0 - d_1)(- \sum s_0(h_{t', t} f_{t'}) \otimes x_t)
+$$
+であり、次に
+$$
+\sum s_0(h_{t', t} f_{t'}) x_t = d_0(v_r) - d_1(v_r) + d_2(v_r)
+$$
+である。これは例 \ref{cotangent-example-resolution-length-two} における変数 $v$ の
+選択による。上の写像 $\lambda$ は、$\lambda(u_i) = 0$ かつ
+$\lambda(x_t) = - e_t$ を満たすように選べる。ここで $e_t \in F$ は
+$t \in T$ に対応する基底ベクトルである。したがって上の写像 $q$ の構成は
+$\text{d}v_r$ を
+$$
+\lambda(\sum s_0(h_{t', t} f_{t'}) x_t) =
+\sum\nolimits_t \left(\sum\nolimits_{t'} h_{t', t}f_{t'}\right) e_t
+$$
+へ写し、これは $Rel \otimes B$ における $\xi$ の像と一致する（上で現れた
+二つの負号は相殺する）。この一致により証明が完了する。
+\end{proof}
+
+\begin{remark}[Lichtenbaum--Schlessinger 複体の関手性]
+\label{cotangent-remark-functoriality-lichtenbaum-schlessinger}
+環準同型の可換正方形
+$$
+\xymatrix{
+A' \ar[r] & B' \\
+A \ar[u] \ar[r] & B \ar[u]
+}
+$$
+を考える。分解
+$$
+\xymatrix{
+A' \ar[r] & P' \ar[r] & B' \\
+A \ar[u] \ar[r] & P \ar[u] \ar[r] & B \ar[u]
+}
+$$
+を選ぶ。ここで $P$ は $A$ 上の多項式代数、$P'$ は $A'$ 上の多項式代数と
+する。$\Ker(P \to B)$ の生成元 $f_t$, $t \in T$ を選ぶ。$t \in T$ に
+対して、$P'$ における $f_t$ の像を $f'_t$ と書く。$t \in T' = T \amalg S$
+に対する元 $f'_t$ が $P' \to B'$ の核を生成するように $f'_s \in P'$ を
+選ぶ。$F = \bigoplus_{t \in T} P$ および
+$F' = \bigoplus_{t' \in T'} P'$ とおく。
+$Rel = \Ker(F \to P)$ および $Rel' = \Ker(F' \to P')$ とおく。ここで写像は
+各成分でそれぞれ $f_t$ および $f'_t$ を掛けることで与えられる。最後に、
+$TrivRel$ および $TrivRel'$ を、それぞれ $Rel$ および $TrivRel$ の部分加群で、
+元
+$(\ldots, f_{t'}, 0, \ldots, 0, -f_t, 0, \ldots)$
+（それぞれ $t, t' \in T$ および $T'$）で生成されるものとする。これらの
+選択を行うと、標準的な可換図式
+$$
+\xymatrix{
+L' : &
+Rel'/TrivRel' \ar[r] &
+F' \otimes_{P'} B' \ar[r] &
+\Omega_{P'/A'} \otimes_{P'} B' \\
+L : \ar[u] &
+Rel/TrivRel \ar[r] \ar[u] &
+F \otimes_P B \ar[r] \ar[u] &
+\Omega_{P/A} \otimes_P B \ar[u]
+}
+$$
+を得る。さらに、補題 \ref{cotangent-lemma-compare-higher} の証明で行った選択を
+追えば、可換図式
+$$
+\xymatrix{
+L_{B'/A'} \ar[r] & L' \\
+L_{B/A} \ar[r] \ar[u] & L \ar[u]
+}
+$$
+を得ることが分かる。
+\end{remark}
+
+
+
+
+
+\section{局所完全交差の余接複体}
+\label{cotangent-section-lci}
+
+\noindent
+$A \to B$ が局所完全交差準同型ならば、$L_{B/A}$ は完全複体である。この
+証明の鍵は次の補題である。
+
+\begin{lemma}
+\label{cotangent-lemma-special-case}
+$A = \mathbf{Z}[x_1, \ldots, x_n] \to B = \mathbf{Z}$ を、
+$i = 1, \ldots, n$ に対して $x_i$ を $0$ へ写す環準同型とする。
+$I = (x_1, \ldots, x_n) \subset A$ とおく。このとき $L_{B/A}$ は
+$I/I^2[1]$ と擬同型である。
+\end{lemma}
+
+\begin{proof}
+これにはいくつかの証明法がある。たとえば、$A$ 上の $B$ の分解を明示的に
+構成して計算できる。ここでは (\ref{cotangent-equation-triangle}) を用いる。すなわち、
+識別三角形
+$$
+L_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}
+\otimes_{\mathbf{Z}[x_1, \ldots, x_n]} \mathbf{Z} \to
+L_{\mathbf{Z}/\mathbf{Z}} \to
+L_{\mathbf{Z}/\mathbf{Z}[x_1, \ldots, x_n]}\to
+L_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}
+\otimes_{\mathbf{Z}[x_1, \ldots, x_n]} \mathbf{Z}[1]
+$$
+を考える。補題 \ref{cotangent-lemma-cotangent-complex-polynomial-algebra} により、複体
+$L_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}$ は
+$\Omega_{\mathbf{Z}[x_1, \ldots, x_n]/\mathbf{Z}}$ と擬同型である。補題
+\ref{cotangent-lemma-when-zero} により、複体 $L_{\mathbf{Z}/\mathbf{Z}}$ は
+$D(\mathbf{Z})$ において零である。したがって $L_{B/A}$ はただ一つの
+非零コホモロジー群をもち、補題 \ref{cotangent-lemma-surjection} により、それは補題で
+記述したものである。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-mod-regular-sequence}
+$A \to B$ を、核 $I$ が Koszul 正則列（たとえば正則列）で生成される全射
+環準同型とする。このとき $L_{B/A}$ は $I/I^2[1]$ と擬同型である。
+\end{lemma}
+
+\begin{proof}
+$f_1, \ldots, f_r \in I$ を $I$ を生成する Koszul 正則列とする。$x_i$ を
+$f_i$ へ写す環準同型 $\mathbf{Z}[x_1, \ldots, x_r] \to A$ を考える。
+$x_1, \ldots, x_r$ は $\mathbf{Z}[x_1, \ldots, x_r]$ の正則列なので、
+$x_1, \ldots, x_r$ 上の Koszul 複体は
+$\mathbf{Z} = \mathbf{Z}[x_1, \ldots, x_r]/(x_1, \ldots, x_r)$
+の $\mathbf{Z}[x_1, \ldots, x_r]$ 上の自由分解である（『代数詳論』の補題
+\ref{more-algebra-lemma-regular-koszul-regular} を参照されたい）。したがって
+$f_1, \ldots, f_r$ が Koszul 正則であるという仮定は、ちょうど
+$B = A \otimes_{\mathbf{Z}[x_1, \ldots, x_r]}^\mathbf{L} \mathbf{Z}$
+を意味する。ゆえに補題 \ref{cotangent-lemma-flat-base-change-cotangent-complex} と
+\ref{cotangent-lemma-special-case} により
+$L_{B/A} = L_{\mathbf{Z}/\mathbf{Z}[x_1, \ldots, x_r]}
+\otimes_\mathbf{Z}^\mathbf{L} B$ である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-mod-Koszul-regular-ideal}
+$A \to B$ を、核 $I$ が Koszul イデアルである全射環準同型とする。
+このとき $L_{B/A}$ は $I/I^2[1]$ と擬同型である。
+\end{lemma}
+
+\begin{proof}
+$\Spec(A)$ 上局所的にはイデアル $I$ は Koszul 正則列で生成される。
+『代数詳論』の定義 \ref{more-algebra-definition-regular-ideal} を参照されたい。
+したがって、補題 \ref{cotangent-lemma-flat-base-change-cotangent-complex} から従う。
+\end{proof}
+
+\begin{proposition}
+\label{cotangent-proposition-cotangent-complex-local-complete-intersection}
+$A \to B$ を局所完全交差準同型とする。このとき $L_{B/A}$ は Tor 振幅が
+$[-1, 0]$ に含まれる完全複体である。
+\end{proposition}
+
+\begin{proof}
+核 $J$ をもつ全射 $P = A[x_1, \ldots, x_n] \to B$ を選ぶ。補題
+\ref{cotangent-lemma-relation-with-naive-cotangent-complex} により
+$J/J^2 \to \bigoplus B\text{d}x_i$ は $\tau_{\geq -1}L_{B/A}$ と擬同型である。
+$J/J^2$ は有限射影的であることに注意する（『代数詳論』の補題
+\ref{more-algebra-lemma-quasi-regular-ideal-finite-projective}）。したがって
+$\tau_{\geq -1}L_{B/A}$ は Tor 振幅が $[-1, 0]$ に含まれる完全複体である。
+ゆえに $i \not \in [-1, 0]$ に対して $H^i(L_{B/A}) = 0$ を示せば十分である。
+これは (\ref{cotangent-equation-triangle}) の三角形
+$$
+L_{P/A} \otimes_P^\mathbf{L} B \to L_{B/A} \to L_{B/P} \to
+L_{P/A} \otimes_P^\mathbf{L} B[1]
+$$
+と補題 \ref{cotangent-lemma-mod-Koszul-regular-ideal} から従う。実際、
+$i \in \{-1, 0\}$ でない限り $H^i(L_{B/P})$ は零である
+（左側の項には補題 \ref{cotangent-lemma-cotangent-complex-polynomial-algebra} も用いる）。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{テンソル積と余接複体}
+\label{cotangent-section-tensor-product}
+
+\noindent
+$R$ を環とし、$A$, $B$ を $R$-代数とする。この節では
+$L_{A \otimes_R B/R}$ を論じる。必要な情報の大部分は次の図式に含まれる。
+\begin{equation}
+\label{cotangent-equation-tensor-product}
+\vcenter{
+\xymatrix{
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \ar[r] &
+L_{A \otimes_R B/B} \ar[r] &
+E \\
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \ar[r] \ar@{=}[u] &
+L_{A \otimes_R B/R} \ar[r] \ar[u] &
+L_{A \otimes_R B/A} \ar[u] \\
+ &
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B) \ar[u] \ar@{=}[r] &
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B) \ar[u]
+}
+}
+\end{equation}
+説明する。中央の行は環準同型 $R \to A \to A \otimes_R B$ に対する基本
+三角形 (\ref{cotangent-equation-triangle}) である。中央の列は環準同型
+$R \to B \to A \otimes_R B$ に対する基本三角形
+(\ref{cotangent-equation-triangle}) である。次に、$E$ は右上隅に「収まり」、上の行と
+右の列の双方を識別三角形にする $D(A \otimes_R B)$ の対象である。このような
+$E$ は、左下の正方形に『導来圏』の命題 \ref{derived-proposition-9} を適用
+すれば存在する（欠けている箇所には $0$ を置く）。さらに明示するならば、
+たとえば $E$ を複体の写像
+$$
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \oplus
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B)
+\longrightarrow
+L_{A \otimes_R B/R}
+$$
+の錐（『導来圏』の定義 \ref{derived-definition-cone}）と定義し、TR3 を適用して
+$E$ を終域とする二つの写像を得てもよい。Tor 独立な場合、対象 $E$ は零である。
+
+\begin{lemma}
+\label{cotangent-lemma-tensor-product-tor-independent}
+$A$ と $B$ が Tor 独立な $R$-代数ならば、
+(\ref{cotangent-equation-tensor-product}) の対象 $E$ は零である。この場合
+$$
+L_{A \otimes_R B/R} =
+L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B) \oplus
+L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B)
+$$
+であり、これは $A \otimes_R B$-加群の複体
+$L_{A/R} \otimes_R B \oplus L_{B/R} \otimes_R A $ によって表される。
+\end{lemma}
+
+\begin{proof}
+最初の二つの主張は補題 \ref{cotangent-lemma-flat-base-change-cotangent-complex} から
+直ちに従う。最後の主張は、$L_{A/R}$ が自由 $A$-加群の複体であり、したがって
+$L_{A/R} \otimes_A^\mathbf{L} (A \otimes_R B)$ が
+$L_{A/R} \otimes_A (A \otimes_R B) = L_{A/R} \otimes_R B$
+によって表されることから従う。
+\end{proof}
+
+\noindent
+一般には、対象 $E$ について次が成り立つ。
+
+\begin{lemma}
+\label{cotangent-lemma-tensor-product}
+$R$ を環とし、$A$, $B$ を $R$-代数とする。
+(\ref{cotangent-equation-tensor-product}) の対象 $E$ は
+$$
+H^i(E) =
+\left\{
+\begin{matrix}
+0 & \text{if} & i \geq -1 \\
+\text{Tor}_1^R(A, B) & \text{if} & i = -2
+\end{matrix}
+\right.
+$$
+を満たす。
+\end{lemma}
+
+\begin{proof}
+$E$ を写像
+$L_{B/R} \otimes_B^\mathbf{L} (A \otimes_R B) \to L_{A \otimes_R B/A}$ の
+錐として記述する。補題 \ref{cotangent-lemma-compare-higher} により、標準切断
+$\tau_{\geq -2}L_{B/R}$ と $\tau_{\geq -2}L_{A \otimes_R B/A}$ は
+Lichtenbaum--Schlessinger 複体 (\ref{cotangent-equation-lichtenbaum-schlessinger}) で
+計算される。これらの同型は関手性と両立する（注意
+\ref{cotangent-remark-functoriality-lichtenbaum-schlessinger}）。したがって、この証明では
+Lichtenbaum--Schlessinger 複体を用いる。
+
+\medskip\noindent
+$R$ 上の多項式代数 $P$ と全射 $P \to B$ を選ぶ。この全射の核の生成元
+$f_t \in P$, $t \in T$ を選ぶ。$t$ に対応する基底ベクトルを $f_t$ へ写す
+写像 $F \to P$ の核を $Rel \subset F = \bigoplus_{t \in T} P$ とする。
+$P_A = A \otimes_R P$ および $F_A = A \otimes_R F = P_A \otimes_P F$ と
+おく。$Rel_A$ を写像 $F_A \to P_A$ の核とする。完全列
+$$
+0 \to Rel \to F \to P \to B \to 0
+$$
+と Tor に関する標準的な短完全列を用いると、完全列
+$$
+A \otimes_R Rel \to Rel_A \to \text{Tor}_1^R(A, B) \to 0
+$$
+を得る。$P_A \to A \otimes_R B$ は全射であり、その核は $P_A$ の元
+$1 \otimes f_t$ で生成されることに注意する。$TrivRel_A \subset Rel_A$ を、
+元
+$(\ldots, 1 \otimes f_{t'}, 0, \ldots,
+0, - 1 \otimes f_t \otimes 1, 0, \ldots)$.
+で生成される $P_A$-部分加群とする。$TrivRel \otimes_R A \to TrivRel_A$ は
+全射なので、標準的な完全列
+$$
+A \otimes_R (Rel/TrivRel) \to Rel_A/TrivRel_A \to \text{Tor}_1^R(A, B) \to 0
+$$
+を得る。Lichtenbaum--Schlessinger 複体の写像は図式
+$$
+\xymatrix{
+Rel_A/TrivRel_A \ar[r] &
+F_A \otimes_{P_A} (A \otimes_R B) \ar[r] &
+\Omega_{P_A/A \otimes_R B} \otimes_{P_A} (A \otimes_R B) \\
+Rel/TrivRel \ar[r] \ar[u]_{-2} &
+F \otimes_P B \ar[r] \ar[u]_{-1} &
+\Omega_{P/A} \otimes_P B \ar[u]_0
+}
+$$
+によって与えられる。垂直写像 $-1$ と $-0$ は、始域に関手
+$A \otimes_R - = P_A \otimes_P -$ を適用すると同型を誘導し、垂直写像
+$-2$ は、上で見たように、その余核が所望の Tor 加群となる写像そのもので
+ある。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{環準同型の変形と余接複体}
+\label{cotangent-section-deformations}
+
+\noindent
+この節は『変形理論』の節 \ref{defos-section-deformations} の続きであり、
+まずそちらを読むことを強く勧める。核が平方零イデアル $I$ である全射環準同型
+$A' \to A$ から始める。さらに、環準同型 $A \to B$、$B$-加群 $N$、および
+$A$-加群準同型 $c : I \to N$ が与えられていると仮定する。この節では、
+次の図式の疑問符に入るものを見つけられるかを問う。
+\begin{equation}
+\label{cotangent-equation-to-solve}
+\vcenter{
+\xymatrix{
+0 \ar[r] & N \ar[r] & {?} \ar[r] & B \ar[r] & 0 \\
+0 \ar[r] & I \ar[u]^c \ar[r] & A' \ar[u] \ar[r] & A \ar[u] \ar[r] & 0
+}
+}
+\end{equation}
+さらに、解が存在する場合に、それがどの程度一意であるかも問う。より正確には、
+核が平方零イデアルで $N$ と同定され、$A' \to B'$ が与えられた写像 $c$ を
+誘導するような $A'$-代数の全射 $B' \to B$ を求める。$B'$ を
+(\ref{cotangent-equation-to-solve}) の{\it 解}と呼ぶ。
+
+\begin{lemma}
+\label{cotangent-lemma-find-obstruction}
+上の状況で、次が成り立つ。
+\begin{enumerate}
+\item 標準的な元 $\xi \in \Ext^2_B(L_{B/A}, N)$ があり、その消滅は
+(\ref{cotangent-equation-to-solve}) の解が存在するための必要十分条件である。
+\item 解が存在するならば、解の同型類の集合は
+$\Ext^1_B(L_{B/A}, N)$ のもとで主同次集合である。
+\item 解 $B'$ が与えられたとき、(\ref{cotangent-equation-to-solve}) に収まる $B'$ の
+自己同型の集合は $\Ext^0_B(L_{B/A}, N)$ と標準的に同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+同定 $\NL_{B/A} = \tau_{\geq -1}L_{B/A}$（補題
+\ref{cotangent-lemma-relation-with-naive-cotangent-complex}）および
+$H^0(L_{B/A}) = \Omega_{B/A}$（補題 \ref{cotangent-lemma-identify-H0}）を通じて、
+(2) と (3) は『変形理論』の補題 \ref{defos-lemma-huge-diagram} および
+\ref{defos-lemma-choices} ですでに見た。
+
+\medskip\noindent
+(1) の証明。大まかには、『変形理論』の注意
+\ref{defos-remark-parametrize-solutions} の議論で、素朴な余接複体を完全な
+余接複体に置き換えれば従う。さらに詳しく説明する。『変形理論』の補題
+\ref{defos-lemma-parametrize-solutions} と注意
+\ref{defos-remark-parametrize-solutions} により、元
+$$
+\xi' \in
+\Ext^1_A(\NL_{A/A'}, N) =
+\Ext^1_B(\NL_{A/A'} \otimes_A^\mathbf{L} B, N) =
+\Ext^1_B(L_{A/A'} \otimes_A^\mathbf{L} B, N)
+$$
+が存在する。これらの等式については『変形理論』の注意
+\ref{defos-remark-parametrize-solutions} を参照し、
+$\NL_{A'/A} = \tau_{\geq -1} L_{A'/A}$ を用いる。この元が写像
+$$
+\Ext^1_B(\NL_{B/A'}, N) = \Ext^1_B(L_{B/A'}, N)
+\longrightarrow
+\Ext^1_B(L_{A/A'} \otimes_A^\mathbf{L} B, N)
+$$
+の像に属することと、解が存在することは同値である。
+$A' \to A \to B$ に対する識別三角形 (\ref{cotangent-equation-triangle}) から長完全列
+$$
+\ldots \to
+\Ext^1_B(L_{B/A'}, N) \to
+\Ext^1_B(L_{A/A'} \otimes_A^\mathbf{L} B, N) \to
+\Ext^2_B(L_{B/A}, N) \to \ldots
+$$
+が生じる。したがって、$\xi$ を $\xi'$ の像とすればよい。
+\end{proof}
+
+
+
+
+
+\section{加群の Atiyah 類}
+\label{cotangent-section-atiyah}
+
+\noindent
+$A \to B$ を環準同型とし、$M$ を $B$-加群とする。$P \to B$ を
+$\mathcal{C}_{B/A}$ の対象とする（節 \ref{cotangent-section-compute-L-pi-shriek}）。
+主部の拡大
+$$
+0 \to \Omega_{P/A} \otimes_P M \to P^1_{P/A}(M) \to M \to 0
+$$
+を考える。『可換代数』の補題
+\ref{algebra-lemma-sequence-of-principal-parts} を参照されたい。『可換代数』の
+注意 \ref{algebra-remark-functoriality-principal-parts} により、この列は $P$ に
+関して関手的である。したがって $\mathcal{C}_{B/A}$ 上に
+$\mathcal{O}$-加群の層の短完全列
+$$
+0 \to \Omega_{\mathcal{O}/\underline{A}} \otimes_\mathcal{O} \underline{M} \to
+P^1_{\mathcal{O}/\underline{A}}(M) \to \underline{M} \to 0
+$$
+を得る。補題 \ref{cotangent-lemma-pi-shriek-standard} と $L_{B/A}$ の各項の平坦性により
+$L\pi_!(\Omega_{\mathcal{O}/\underline{A}} \otimes_\mathcal{O} \underline{M})
+= L_{B/A} \otimes_B M = L_{B/A} \otimes_B^\mathbf{L} M$
+である。補題 \ref{cotangent-lemma-pi-lower-shriek-constant-sheaf} により
+$L\pi_!(\underline{M}) = M$ である。したがって識別三角形
+\begin{equation}
+\label{cotangent-equation-atiyah}
+L_{B/A} \otimes_B^\mathbf{L} M \to
+L\pi_!\left(P^1_{\mathcal{O}/\underline{A}}(M)\right) \to M
+\to L_{B/A} \otimes_B^\mathbf{L} M [1]
+\end{equation}
+が $D(B)$ にある。ここでは、単に $D(A)$ ではなく $D(B)$ に識別三角形を
+得るため、『サイト上のコホモロジー』の注意
+\ref{sites-cohomology-remark-O-homology-B-homology-general} を用いる。
+
+\begin{definition}
+\label{cotangent-definition-atiyah-class}
+$A \to B$ を環準同型とし、$M$ を $B$-加群とする。
+(\ref{cotangent-equation-atiyah}) の写像 $M \to L_{B/A} \otimes_B^\mathbf{L} M[1]$ を
+$M$ の {\it Atiyah 類}と呼ぶ。
+\end{definition}
+
+
+
+
+\section{余接複体}
+\label{cotangent-section-cotangent-complex}
+
+\noindent
+この節では、サイト上の環の層の準同型の余接複体を論じる。後の節では、これを
+特殊化して、環付きトポスの射、環付き空間の射、スキームの射、代数空間の射
+などの余接複体を得る。
+
+\medskip\noindent
+$\mathcal{C}$ をサイトとし、付随するトポスを $\Sh(\mathcal{C})$ と書く。
+$\mathcal{A}$ を $\mathcal{C}$ 上の環の層とし、
+$\mathcal{A}\textit{-Alg}$ を $\mathcal{A}$-代数の圏とする。随伴関手の組
+$(U, V)$ を考える。ここで $V : \mathcal{A}\textit{-Alg} \to \Sh(\mathcal{C})$
+は忘却関手であり、$U : \Sh(\mathcal{C}) \to \mathcal{A}\textit{-Alg}$ は
+集合の層 $\mathcal{E}$ に、$\mathcal{A}$ 上の $\mathcal{E}$ による多項式代数
+$\mathcal{A}[\mathcal{E}]$ を対応させる。$X_\bullet$ を、『単体的方法』の節
+\ref{simplicial-section-standard} で構成した
+$\text{Fun}(\mathcal{A}\textit{-Alg}, \mathcal{A}\textit{-Alg})$
+の単体対象とする。
+
+\medskip\noindent
+ここで $\mathcal{A} \to \mathcal{B}$ を環の層の準同型と仮定する。このとき
+$\mathcal{B}$ は圏 $\mathcal{A}\textit{-Alg}$ の対象である。得られる単体
+$\mathcal{A}$-代数を $\mathcal{P}_\bullet = X_\bullet(\mathcal{B})$ と書く。
+$\mathcal{P}_0 = \mathcal{A}[\mathcal{B}]$,
+$\mathcal{P}_1 = \mathcal{A}[\mathcal{A}[\mathcal{B}]]$ などであることを
+思い出そう。また、増大
+$$
+\epsilon : \mathcal{P}_\bullet \longrightarrow \mathcal{B}
+$$
+がある。ここで $\mathcal{B}$ は定値単体 $\mathcal{A}$-代数とみなす。
+
+\begin{definition}
+\label{cotangent-definition-standard-resolution-sheaves-rings}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を
+$\mathcal{C}$ 上の環の層の準同型とする。{\it $\mathcal{A}$ 上の
+$\mathcal{B}$ の標準分解}とは、増大
+$\epsilon : \mathcal{P}_\bullet \to \mathcal{B}$
+であり、その各項は
+$$
+\mathcal{P}_0 = \mathcal{A}[\mathcal{B}],\quad
+\mathcal{P}_1 = \mathcal{A}[\mathcal{A}[\mathcal{B}]],\quad \ldots
+$$
+で、写像が上で構成したものである増大である。
+\end{definition}
+
+\noindent
+この定義を用いて、環の層の準同型の余接複体を次のように定義する。微分加群は
+『サイト上の加群』の節 \ref{sites-modules-section-differentials} で定義した
+ものを用いる。
+
+\begin{definition}
+\label{cotangent-definition-cotangent-complex-morphism-sheaves-rings}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を
+$\mathcal{C}$ 上の環の層の準同型とする。{\it 余接複体}
+$L_{\mathcal{B}/\mathcal{A}}$ とは、単体加群
+$$
+\Omega_{\mathcal{P}_\bullet/\mathcal{A}}
+\otimes_{\mathcal{P}_\bullet, \epsilon} \mathcal{B}
+$$
+に付随する $\mathcal{B}$-加群の複体である。ここで
+$\epsilon : \mathcal{P}_\bullet \to \mathcal{B}$ は $\mathcal{A}$ 上の
+$\mathcal{B}$ の標準分解である。通常、$L_{\mathcal{B}/\mathcal{A}}$ を
+$D(\mathcal{B})$ の対象とみなす。
+\end{definition}
+
+\noindent
+これらの構成は、節 \ref{cotangent-section-functoriality} で論じたものと同様の関手性を
+満たす。すなわち、$\mathcal{C}$ 上の環の層の可換図式
+\begin{equation}
+\label{cotangent-equation-commutative-square-sheaves}
+\vcenter{
+\xymatrix{
+\mathcal{B} \ar[r] & \mathcal{B}' \\
+\mathcal{A} \ar[u] \ar[r] & \mathcal{A}' \ar[u]
+}
+}
+\end{equation}
+が与えられると、複体の標準的な $\mathcal{B}$-線形写像
+$$
+L_{\mathcal{B}/\mathcal{A}} \longrightarrow L_{\mathcal{B}'/\mathcal{A}'}
+$$
+があり、次のように構成される。$\mathcal{P}_\bullet \to \mathcal{B}$ を
+$\mathcal{A}$ 上の $\mathcal{B}$ の標準分解、
+$\mathcal{P}'_\bullet \to \mathcal{B}'$ を $\mathcal{A}'$ 上の
+$\mathcal{B}'$ の標準分解とすると、増大 $\mathcal{P}_\bullet \to \mathcal{B}$
+および $\mathcal{P}'_\bullet \to \mathcal{B}'$ と両立する単体
+$\mathcal{A}$-代数の標準的な写像
+$\mathcal{P}_\bullet \to \mathcal{P}'_\bullet$ がある。写像
+$$
+\mathcal{P}_0 = \mathcal{A}[\mathcal{B}]
+\longrightarrow
+\mathcal{A}'[\mathcal{B}'] = \mathcal{P}'_0,
+\quad
+\mathcal{P}_1 = \mathcal{A}[\mathcal{A}[\mathcal{B}]]
+\longrightarrow
+\mathcal{A}'[\mathcal{A}'[\mathcal{B}']] = \mathcal{P}'_1
+$$
+などは、与えられた写像 $\mathcal{A} \to \mathcal{A}'$ および
+$\mathcal{B} \to \mathcal{B}'$ によって定まる。所望の写像
+$L_{\mathcal{B}/\mathcal{A}} \to L_{\mathcal{B}'/\mathcal{A}'}$ は、付随する
+微分の層の写像から得られる。
+
+\begin{lemma}
+\label{cotangent-lemma-pullback-cotangent-morphism-topoi}
+$f : \Sh(\mathcal{D}) \to \Sh(\mathcal{C})$ をトポスの射とし、
+$\mathcal{A} \to \mathcal{B}$ を $\mathcal{C}$ 上の環の層の準同型とする。
+このとき
+$f^{-1}L_{\mathcal{B}/\mathcal{A}} = L_{f^{-1}\mathcal{B}/f^{-1}\mathcal{A}}$.
+\end{lemma}
+
+\begin{proof}
+図式
+$$
+\xymatrix{
+\mathcal{A}\textit{-Alg} \ar[d]_{f^{-1}} \ar[r] &
+\Sh(\mathcal{C}) \ar@<1ex>[l] \ar[d]^{f^{-1}} \\
+f^{-1}\mathcal{A}\textit{-Alg} \ar[r] & \Sh(\mathcal{D}) \ar@<1ex>[l]
+}
+$$
+は可換である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-compute-L-morphism-sheaves-rings}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を
+$\mathcal{C}$ 上の環の層の準同型とする。このとき
+$H^i(L_{\mathcal{B}/\mathcal{A}})$ は前層
+$U \mapsto H^i(L_{\mathcal{B}(U)/\mathcal{A}(U)})$ に付随する層である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$ にカオス位相を入れて得られるサイトを $\mathcal{C}'$ とする
+（このとき前層は層である）。トポスの射
+$f : \Sh(\mathcal{C}) \to \Sh(\mathcal{C}')$ があり、$f_*$ は層から前層への
+包含、$f^{-1}$ は層化である。補題
+\ref{cotangent-lemma-pullback-cotangent-morphism-topoi} により、$\mathcal{C}'$ について、
+すなわち $\mathcal{C}$ がカオス位相をもつ場合に結果を示せば十分である。
+
+\medskip\noindent
+$\mathcal{C}$ がカオス位相をもつならば、図式
+$$
+\xymatrix{
+\mathcal{A}\textit{-Alg} \ar[d]_{\text{sections over }U} \ar[r] &
+\Sh(\mathcal{C}) \ar@<1ex>[l] \ar[d]^{\text{sections over }U} \\
+\mathcal{A}(U)\textit{-Alg} \ar[r] & \textit{Sets} \ar@<1ex>[l]
+}
+$$
+が可換なので、$L_{\mathcal{B}/\mathcal{A}}(U)$ は
+$L_{\mathcal{B}(U)/\mathcal{A}(U)}$ に等しい。
+\end{proof}
+
+\begin{remark}
+\label{cotangent-remark-map-sections-over-U}
+補題 \ref{cotangent-lemma-compute-L-morphism-sheaves-rings} の証明から、任意の
+$U \in \Ob(\mathcal{C})$ に対して複体の標準的な写像
+$L_{\mathcal{B}(U)/\mathcal{A}(U)} \to L_{\mathcal{B}/\mathcal{A}}(U)$
+があることは明らかである。これは $\mathcal{B}(U)$-加群の複体の写像である。
+さらに、これらの写像は制限写像と両立し、複体
+$L_{\mathcal{B}/\mathcal{A}}$ は規則
+$U \mapsto L_{\mathcal{B}(U)/\mathcal{A}(U)}$ の層化である。
+\end{remark}
+
+\begin{lemma}
+\label{cotangent-lemma-H0-L-morphism-sheaves-rings}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を
+$\mathcal{C}$ 上の環の層の準同型とする。このとき
+$H^0(L_{\mathcal{B}/\mathcal{A}}) = \Omega_{\mathcal{B}/\mathcal{A}}$.
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-compute-L-morphism-sheaves-rings}、
+\ref{cotangent-lemma-identify-H0}、および『サイト上の加群』の補題
+\ref{sites-modules-lemma-differentials-sheafify} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-compute-L-product-sheaves-rings}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ および
+$\mathcal{A} \to \mathcal{B}'$ を $\mathcal{C}$ 上の環の層の準同型とする。
+このとき
+$$
+L_{\mathcal{B} \times \mathcal{B}'/\mathcal{A}}
+\longrightarrow
+L_{\mathcal{B}/\mathcal{A}} \oplus L_{\mathcal{B}'/\mathcal{A}}
+$$
+は $D(\mathcal{B} \times \mathcal{B}')$ における同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-compute-L-morphism-sheaves-rings} により、環準同型について
+示せば十分である。環の場合、これは補題
+\ref{cotangent-lemma-cotangent-complex-product} である。
+\end{proof}
+
+\noindent
+環の層の余接複体に対する基本三角形は、環準同型に対する結果の容易な帰結である。
+
+\begin{lemma}
+\label{cotangent-lemma-triangle-sheaves-rings}
+$\mathcal{D}$ をサイトとし、$\mathcal{A} \to \mathcal{B} \to \mathcal{C}$ を
+$\mathcal{D}$ 上の環の層の準同型とする。標準的な識別三角形
+$$
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{C}
+\to L_{\mathcal{C}/\mathcal{A}} \to L_{\mathcal{C}/\mathcal{B}} \to
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{C}[1]
+$$
+が $D(\mathcal{C})$ にある。
+\end{lemma}
+
+\begin{proof}
+注意 \ref{cotangent-remark-triangle} と \ref{cotangent-remark-explicit-map} で述べた方法を用いて
+三角形を構成し、そこでの結果を自由に用いる。これらの注意と同様に、まず
+$\mathcal{B} \to \mathcal{C}$ が環の層の単射である場合に三角形を構成する。
+この場合、次のようにおく。
+\begin{enumerate}
+\item $\mathcal{P}_\bullet$ は $\mathcal{A}$ 上の $\mathcal{B}$ の標準分解である。
+\item $\mathcal{Q}_\bullet$ は $\mathcal{A}$ 上の $\mathcal{C}$ の標準分解である。
+\item $\mathcal{R}_\bullet$ は $\mathcal{B}$ 上の $\mathcal{C}$ の標準分解である。
+\item $\mathcal{S}_\bullet$ は $\mathcal{B}$ 上の $\mathcal{B}$ の標準分解である。
+\item $\overline{\mathcal{Q}}_\bullet =
+\mathcal{Q}_\bullet \otimes_{\mathcal{P}_\bullet} \mathcal{B}$ である。
+\item $\overline{\mathcal{R}}_\bullet =
+\mathcal{R}_\bullet \otimes_{\mathcal{S}_\bullet} \mathcal{B}$ である。
+\end{enumerate}
+この識別三角形は、単体 $\mathcal{C}$-加群の短完全列
+$$
+0 \to
+\Omega_{\mathcal{P}_\bullet/\mathcal{A}}
+\otimes_{\mathcal{P}_\bullet} \mathcal{C} \to
+\Omega_{\mathcal{Q}_\bullet/\mathcal{A}}
+\otimes_{\mathcal{Q}_\bullet} \mathcal{C} \to
+\Omega_{\overline{\mathcal{Q}}_\bullet/\mathcal{B}}
+\otimes_{\overline{\mathcal{Q}}_\bullet} \mathcal{C} \to 0
+$$
+に付随する識別三角形である。最初の二項は補題の主張の三角形の最初の
+二項に等しい。最後の項と $L_{\mathcal{C}/\mathcal{B}}$ の同定には、複体の
+擬同型
+$$
+L_{\mathcal{C}/\mathcal{B}} =
+\Omega_{\mathcal{R}_\bullet/\mathcal{B}}
+\otimes_{\mathcal{R}_\bullet} \mathcal{C}
+\longrightarrow
+\Omega_{\overline{\mathcal{R}}_\bullet/\mathcal{B}}
+\otimes_{\overline{\mathcal{R}}_\bullet} \mathcal{C}
+\longleftarrow
+\Omega_{\overline{\mathcal{Q}}_\bullet/\mathcal{B}}
+\otimes_{\overline{\mathcal{Q}}_\bullet} \mathcal{C}
+$$
+を用いる。上で用いた構成はすべて、まず前層の水準で行い、その後に層化できる。
+したがって、列の完全性または写像が擬同型であることを示すには、環準同型
+$\mathcal{A}(U) \to \mathcal{B}(U) \to \mathcal{C}(U)$
+に対する対応する既知の主張を示せば十分である。これで
+$\mathcal{B} \to \mathcal{C}$ が単射である場合の証明が完了する。
+
+\medskip\noindent
+一般の場合は、必要ならば $\mathcal{C}$ を
+$\mathcal{B} \times \mathcal{C}$ で置き換え、
+$\mathcal{B} \to \mathcal{C}$ が単射である場合へ帰着する。これは注意
+\ref{cotangent-remark-triangle} の議論と補題
+\ref{cotangent-lemma-compute-L-product-sheaves-rings} により可能である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-stalk-cotangent-complex}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を
+$\mathcal{C}$ 上の環の層の準同型とする。$p$ が $\mathcal{C}$ の点ならば、
+$(L_{\mathcal{B}/\mathcal{A}})_p = L_{\mathcal{B}_p/\mathcal{A}_p}$.
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{cotangent-lemma-pullback-cotangent-morphism-topoi} の特別な場合である。
+\end{proof}
+
+\noindent
+素朴な余接複体の構成と性質については、『サイト上の加群』の節
+\ref{sites-modules-section-netherlander} を参照されたい。
+
+\begin{lemma}
+\label{cotangent-lemma-compare-cotangent-complex-with-naive}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を
+$\mathcal{C}$ 上の環の層の準同型とする。標準的な写像
+$L_{\mathcal{B}/\mathcal{A}} \to \NL_{\mathcal{B}/\mathcal{A}}$
+があり、素朴な余接複体を切断
+$\tau_{\geq -1}L_{\mathcal{B}/\mathcal{A}}$ と同定する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{P}_\bullet$ を $\mathcal{A}$ 上の $\mathcal{B}$ の標準分解とし、
+$\mathcal{I} = \Ker(\mathcal{A}[\mathcal{B}] \to \mathcal{B})$ とおく。
+$\mathcal{P}_0 = \mathcal{A}[\mathcal{B}]$ であることを思い出そう。補題の写像は
+可換図式
+$$
+\xymatrix{
+L_{\mathcal{B}/\mathcal{A}} \ar[d] & \ldots \ar[r] &
+\Omega_{\mathcal{P}_2/\mathcal{A}} \otimes_{\mathcal{P}_2} \mathcal{B}
+\ar[r] \ar[d] &
+\Omega_{\mathcal{P}_1/\mathcal{A}} \otimes_{\mathcal{P}_1} \mathcal{B}
+\ar[r] \ar[d] &
+\Omega_{\mathcal{P}_0/\mathcal{A}} \otimes_{\mathcal{P}_0} \mathcal{B}
+\ar[d] \\
+\NL_{\mathcal{B}/\mathcal{A}} & \ldots \ar[r] &
+0 \ar[r] & 
+\mathcal{I}/\mathcal{I}^2 \ar[r] &
+\Omega_{\mathcal{P}_0/\mathcal{A}} \otimes_{\mathcal{P}_0} \mathcal{B}
+}
+$$
+によって与えられる。終域が $\mathcal{I}/\mathcal{I}^2$ である下向きの矢印は、
+局所切断 $\text{d}f \otimes b$ を $\mathcal{I}/\mathcal{I}^2$ における
+$(d_0(f) - d_1(f))b$ の類へ写すことで構成する。ここで
+$d_i : \mathcal{P}_1 \to \mathcal{P}_0$, $i = 0, 1$ は単体構造の二つの
+面写像である。$d_0 - d_1$ は $\mathcal{P}_1$ を
+$\mathcal{I} = \Ker(\mathcal{P}_0 \to \mathcal{B})$ へ写すので、これは意味を
+もつ。この規則が良定義であることの確認は省略する。この写像は微分
+$\Omega_{\mathcal{P}_1/\mathcal{A}} \otimes_{\mathcal{P}_1} \mathcal{B}
+\to \Omega_{\mathcal{P}_0/\mathcal{A}} \otimes_{\mathcal{P}_0} \mathcal{B}$
+と両立する。実際、この微分は局所切断 $\text{d}f \otimes b$ を
+$\text{d}(d_0(f) - d_1(f)) \otimes b$ へ写す。さらに、微分
+$\Omega_{\mathcal{P}_2/\mathcal{A}} \otimes_{\mathcal{P}_2} \mathcal{B}
+\to \Omega_{\mathcal{P}_1/\mathcal{A}} \otimes_{\mathcal{P}_1} \mathcal{B}$
+は局所切断 $\text{d}f \otimes b$ を
+$\text{d}(d_0(f) - d_1(f) + d_2(f)) \otimes b$
+へ写し、これは下向きの矢印によって零に写る。ゆえに複体の写像を得る。
+
+\medskip\noindent
+この写像がコホモロジー層 $H^0$ と $H^{-1}$ 上で同型を誘導することを
+次のように示す。$\mathcal{C}'$ を $\mathcal{C}$ と同じ台圏にカオス位相を
+入れたサイトとする。$f : \Sh(\mathcal{C}) \to \Sh(\mathcal{C}')$ を、引き戻し
+関手が層化であるトポスの射とする。与えられた準同型を $\mathcal{C}'$ 上の
+環の層の準同型とみなし、$\mathcal{A}' \to \mathcal{B}'$ と書く。上の構成は
+$\mathcal{C}'$ 上の写像
+$L_{\mathcal{B}'/\mathcal{A}'} \to \NL_{\mathcal{B}'/\mathcal{A}'}$ を与え、その
+$\mathcal{C}'$ の任意の対象 $U$ 上での値は写像
+$$
+L_{\mathcal{B}(U)/\mathcal{A}(U)} \to \NL_{\mathcal{B}(U)/\mathcal{A}(U)}
+$$
+そのものである。注意 \ref{cotangent-remark-explicit-comparison-map} により、これは
+$H^0$ と $H^{-1}$ 上で同型を誘導する。また
+$f^{-1}L_{\mathcal{B}'/\mathcal{A}'} = L_{\mathcal{B}/\mathcal{A}}$
+であり（補題 \ref{cotangent-lemma-pullback-cotangent-morphism-topoi}）、さらに
+$f^{-1}\NL_{\mathcal{B}'/\mathcal{A}'} = \NL_{\mathcal{B}/\mathcal{A}}$
+である（『サイト上の加群』の補題 \ref{sites-modules-lemma-pullback-NL}）。
+これで補題が証明された。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{加群の層の Atiyah 類}
+\label{cotangent-section-atiyah-general}
+
+\noindent
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を環の層の準同型と
+する。$\mathcal{F}$ を $\mathcal{B}$-加群の層とする。
+$\mathcal{P}_\bullet \to \mathcal{B}$ を $\mathcal{A}$ 上の $\mathcal{B}$ の
+標準分解とする（節 \ref{cotangent-section-cotangent-complex}）。各 $n \geq 0$ に対して
+主部の拡大
+\begin{equation}
+\label{cotangent-equation-atiyah-extension}
+0 \to
+\Omega_{\mathcal{P}_n/\mathcal{A}} \otimes_{\mathcal{P}_n} \mathcal{F} \to
+\mathcal{P}^1_{\mathcal{P}_n/\mathcal{A}}(\mathcal{F}) \to
+\mathcal{F} \to 0
+\end{equation}
+を考える。『サイト上の加群』の補題
+\ref{sites-modules-lemma-sequence-of-principal-parts} を参照されたい。この構成の
+関手性（『サイト上の加群』の注意
+\ref{sites-modules-remark-functoriality-principal-parts}）により、
+(\ref{cotangent-equation-atiyah-extension}) は単体 $\mathcal{P}_\bullet$-加群の短完全列の
+次数 $n$ の部分である（『サイト上のコホモロジー』の節
+\ref{sites-cohomology-section-simplicial-modules}）。
+『サイト上のコホモロジー』の注意
+\ref{sites-cohomology-remark-homology-augmentation}
+の関手 $L\pi_! : D(\mathcal{P}_\bullet) \to D(\mathcal{B})$ を用いると
+（ここでは $\mathcal{P}_\bullet \to \mathcal{A}$ が分解であることを用いる）、
+識別三角形
+\begin{equation}
+\label{cotangent-equation-atiyah-general}
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{F} \to
+L\pi_!\left(\mathcal{P}^1_{\mathcal{P}_\bullet/\mathcal{A}}(\mathcal{F})\right)
+\to \mathcal{F} \to
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{F} [1]
+\end{equation}
+を $D(\mathcal{B})$ に得る。
+
+\begin{definition}
+\label{cotangent-definition-atiyah-class-general}
+$\mathcal{C}$ をサイトとし、$\mathcal{A} \to \mathcal{B}$ を環の層の準同型、
+$\mathcal{F}$ を $\mathcal{B}$-加群の層とする。
+(\ref{cotangent-equation-atiyah-general}) の写像 $\mathcal{F} \to
+L_{\mathcal{B}/\mathcal{A}} \otimes_\mathcal{B}^\mathbf{L} \mathcal{F}[1]$
+を $\mathcal{F}$ の {\it Atiyah 類}と呼ぶ。
+\end{definition}
+
+
+
+
+
+
+
+
+
+\section{環付き空間の射の余接複体}
+\label{cotangent-section-cotangent-morphism-ringed-spaces}
+
+\noindent
+環付き空間の射の余接複体は、上で定義した余接複体を用いて定義される。
+
+\begin{definition}
+\label{cotangent-definition-cotangent-complex-morphism-ringed-spaces}
+$f : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$ を環付き空間の射とする。
+$f$ の{\it 余接複体} $L_f$ は $L_f = L_{\mathcal{O}_X/f^{-1}\mathcal{O}_S}$
+である。記法 $L_f = L_{X/S} = L_{\mathcal{O}_X/\mathcal{O}_S}$ も用いる。
+\end{definition}
+
+\noindent
+より正確には、位相空間 $X$ に付随するサイト上の環の層の準同型
+$f^\sharp : f^{-1}\mathcal{O}_S \to \mathcal{O}_X$ の余接複体（定義
+\ref{cotangent-definition-cotangent-complex-morphism-sheaves-rings}）を考えるという意味で
+ある（『サイト』、例 \ref{sites-example-site-topological}）。
+
+\begin{lemma}
+\label{cotangent-lemma-H0-L-morphism-ringed-spaces}
+$f : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$ を環付き空間の射とする。
+このとき $H^0(L_{X/S}) = \Omega_{X/S}$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-H0-L-morphism-sheaves-rings} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-triangle-ringed-spaces}
+$f : X \to Y$ と $g : Y \to Z$ を環付き空間の射とする。このとき標準的な
+識別三角形
+$$
+Lf^* L_{Y/Z} \to L_{X/Z} \to L_{X/Y} \to Lf^*L_{Y/Z}[1]
+$$
+が $D(\mathcal{O}_X)$ にある。
+\end{lemma}
+
+\begin{proof}
+$h = g \circ f$ とおく。すると
+$h^{-1}\mathcal{O}_Z = f^{-1}g^{-1}\mathcal{O}_Z$ である。補題
+\ref{cotangent-lemma-pullback-cotangent-morphism-topoi} により
+$f^{-1}L_{Y/Z} = L_{f^{-1}\mathcal{O}_Y/h^{-1}\mathcal{O}_Z}$
+であり、これは平坦 $f^{-1}\mathcal{O}_Y$-加群の複体である。したがって上の
+識別三角形は、$\mathcal{A} = h^{-1}\mathcal{O}_Z$,
+$\mathcal{B} = f^{-1}\mathcal{O}_Y$, $\mathcal{C} = \mathcal{O}_X$ とした補題
+\ref{cotangent-lemma-triangle-sheaves-rings} の識別三角形の一例である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-compare-cotangent-complex-with-naive-ringed-spaces}
+$f : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を環付き空間の射とする。
+標準的な写像 $L_{X/Y} \to \NL_{X/Y}$ があり、素朴な余接複体を切断
+$\tau_{\geq -1}L_{X/Y}$ と同定する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-compare-cotangent-complex-with-naive} の特別な場合である。
+\end{proof}
+
+
+
+
+
+
+\section{環付き空間の変形と余接複体}
+\label{cotangent-section-deformations-ringed-spaces}
+
+\noindent
+本節は『変形理論』節
+\ref{defos-section-deformations-ringed-spaces} の続きであり、読者には
+まずそちらを読むことを強く勧める。設定を簡単に振り返る。環付き空間の
+一次厚化
+$t : (S, \mathcal{O}_S) \to (S', \mathcal{O}_{S'})$ で
+$\mathcal{J} = \Ker(t^\sharp)$ とおいたもの、環付き空間の射
+$f : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$、$\mathcal{O}_X$-加群
+$\mathcal{G}$、および加群層の $f$-写像
+$c : \mathcal{J} \to \mathcal{G}$ が与えられている。次の図式の
+疑問符に入るものを見いだせるかを問う。
+\begin{equation}
+\label{cotangent-equation-to-solve-ringed-spaces}
+\vcenter{
+\xymatrix{
+0 \ar[r] & \mathcal{G} \ar[r] & {?} \ar[r] & \mathcal{O}_X \ar[r] & 0 \\
+0 \ar[r] & \mathcal{J} \ar[u]^c \ar[r] & \mathcal{O}_{S'} \ar[u] \ar[r] &
+\mathcal{O}_S \ar[u] \ar[r] & 0
+}
+}
+\end{equation}
+さらに、解が存在する場合にそれがどの程度一意であるかも問う。
+より正確には、一次厚化
+$i : (X, \mathcal{O}_X) \to (X', \mathcal{O}_{X'})$
+と、『変形理論』式 (\ref{defos-equation-morphism-thickenings}) のような
+厚化の射 $(f, f')$ であって、$\Ker(i^\sharp)$ が $\mathcal{G}$ と
+同一視され、$(f')^\sharp$ が与えられた写像 $c$ を誘導するものを求める。
+$X'$ を (\ref{cotangent-equation-to-solve-ringed-spaces}) の {\it 解} と呼ぶ。
+
+\begin{lemma}
+\label{cotangent-lemma-find-obstruction-ringed-spaces}
+上の状況において、次が成り立つ。
+\begin{enumerate}
+\item 正準元
+$\xi \in \Ext^2_{\mathcal{O}_X}(L_{X/S}, \mathcal{G})$
+が存在し、その消滅は (\ref{cotangent-equation-to-solve-ringed-spaces}) の解が
+存在するための必要十分条件である。
+\item 解が存在するならば、解の同型類の集合は
+$\Ext^1_{\mathcal{O}_X}(L_{X/S}, \mathcal{G})$
+の下で主等質である。
+\item 解 $X'$ が与えられたとき、
+(\ref{cotangent-equation-to-solve-ringed-spaces}) に収まる $X'$ の自動同型全体の集合は
+$\Ext^0_{\mathcal{O}_X}(L_{X/S}, \mathcal{G})$ と正準同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+同一視 $\NL_{X/S} = \tau_{\geq -1}L_{X/S}$
+（補題 \ref{cotangent-lemma-compare-cotangent-complex-with-naive-ringed-spaces}）および
+$H^0(L_{X/S}) = \Omega_{X/S}$
+（補題 \ref{cotangent-lemma-H0-L-morphism-ringed-spaces}）を通じて、(2) と (3) は
+『変形理論』補題 \ref{defos-lemma-huge-diagram-ringed-spaces} および
+\ref{defos-lemma-choices-ringed-spaces} で既に示した。
+
+\medskip\noindent
+{\it (1) の証明。} 大まかにいえば、これは『変形理論』注意
+\ref{defos-remark-parametrize-solutions-ringed-spaces}
+の議論で素朴な余接複体を完全な余接複体に置き換えることから従う。
+より詳しく説明する。『変形理論』補題
+\ref{defos-lemma-parametrize-solutions-ringed-spaces} により、元
+$$
+\xi' \in
+\Ext^1_{\mathcal{O}_X}(Lf^*\NL_{S/S'}, \mathcal{G}) =
+\Ext^1_{\mathcal{O}_X}(Lf^*L_{S/S'}, \mathcal{G})
+$$
+が存在し、解が存在するための必要十分条件は、この元が写像
+$$
+\Ext^1_{\mathcal{O}_X}(NL_{X/S'}, \mathcal{G}) =
+\Ext^1_{\mathcal{O}_X}(L_{X/S'}, \mathcal{G})
+\longrightarrow
+\Ext^1_{\mathcal{O}_X}(Lf^*L_{S/S'}, \mathcal{G})
+$$
+の像に入ることである。$X \to S \to S'$ に対する補題
+\ref{cotangent-lemma-triangle-ringed-spaces} の識別三角形から、長完全列
+$$
+\ldots \to
+\Ext^1_{\mathcal{O}_X}(L_{X/S'}, \mathcal{G}) \to
+\Ext^1_{\mathcal{O}_X}(Lf^*L_{S/S'}, \mathcal{G}) \to
+\Ext^2_{\mathcal{O}_X}(L_{X/S}, \mathcal{G}) \to \ldots
+$$
+が生じる。したがって、$\xi$ を $\xi'$ の像とすればよい。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{環付きトポスの射の余接複体}
+\label{cotangent-section-cotangent-morphism-ringed-topoi}
+
+\noindent
+環付きトポスの射の余接複体を、上で定義した余接複体を用いて定義する。
+
+\begin{definition}
+\label{cotangent-definition-cotangent-complex-morphism-ringed-topoi}
+$(f, f^\sharp) : (\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C}) \to
+(\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D})$ を環付きトポスの射とする。
+$f$ の {\it 余接複体} $L_f$ を
+$L_f = L_{\mathcal{O}_\mathcal{C}/f^{-1}\mathcal{O}_\mathcal{D}}$
+と定義する。$L_f = L_{\mathcal{O}_\mathcal{C}/\mathcal{O}_\mathcal{D}}$
+と書くこともある。
+\end{definition}
+
+\noindent
+この定義は多くの状況に適用できるが、必ずしも期待するものを与えるとは
+限らない。例えば、$f : X \to Y$ がスキームの射ならば、$f$ は大エタール
+サイトの射
+$f_{big} : (\Sch/X)_\etale \to (\Sch/Y)_\etale$
+を誘導し、これは環付きトポスの射である（『降下』注意
+\ref{descent-remark-change-topologies-ringed}）。
+しかし、$(f_{big})^\sharp$ は同型なので $L_{f_{big}} = 0$ である。
+一方、$f$ を基礎となるザリスキー環付きトポスの間の射とみなして
+$L_f$ をとれば、$L_f$ は、0 次コホモロジー層が $\Omega_{X/Y}$ である
+余接複体 $L_{X/Y}$（下で定義する）と確かに一致する。
+
+\begin{lemma}
+\label{cotangent-lemma-H0-L-morphism-ringed-topoi}
+環付きトポスの射
+$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B})$
+とする。このとき $H^0(L_f) = \Omega_f$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-H0-L-morphism-sheaves-rings} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-triangle-ringed-topoi}
+環付きトポスの射
+$f : (\Sh(\mathcal{C}_1), \mathcal{O}_1) \to
+(\Sh(\mathcal{C}_2), \mathcal{O}_2)$ および
+$g : (\Sh(\mathcal{C}_2), \mathcal{O}_2) \to
+(\Sh(\mathcal{C}_3), \mathcal{O}_3)$ とする。このとき、$D(\mathcal{O}_1)$
+に標準的な識別三角形
+$$
+Lf^* L_g \to L_{g \circ f} \to L_f \to Lf^*L_g[1]
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$h = g \circ f$ とおくと、
+$h^{-1}\mathcal{O}_3 = f^{-1}g^{-1}\mathcal{O}_3$ である。
+補題 \ref{cotangent-lemma-pullback-cotangent-morphism-topoi} により
+$f^{-1}L_g = L_{f^{-1}\mathcal{O}_2/h^{-1}\mathcal{O}_3}$
+であり、これは平坦な $f^{-1}\mathcal{O}_2$-加群の複体である。
+したがって上の識別三角形は、$\mathcal{A} = h^{-1}\mathcal{O}_3$、
+$\mathcal{B} = f^{-1}\mathcal{O}_2$、$\mathcal{C} = \mathcal{O}_1$
+とした補題 \ref{cotangent-lemma-triangle-sheaves-rings} の識別三角形の一例である。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-compare-cotangent-complex-with-naive-ringed-topoi}
+環付きトポスの射
+$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B})$
+とする。標準的な写像 $L_f \to \NL_f$ があり、素朴な余接複体を切断
+$\tau_{\geq -1}L_f$ と同定する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{cotangent-lemma-compare-cotangent-complex-with-naive} の特別な場合である。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{環付きトポスの変形と余接複体}
+\label{cotangent-section-deformations-ringed-topoi}
+
+\noindent
+本節は『変形理論』節 \ref{defos-section-deformations-ringed-topoi}
+の続きであり、読者にはまずそちらを読むことを強く勧める。
+設定を簡単に振り返る。環付きトポスの一次厚化
+$t : (\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B}) \to
+(\Sh(\mathcal{B}'), \mathcal{O}_{\mathcal{B}'})$ で
+$\mathcal{J} = \Ker(t^\sharp)$ とおいたもの、環付きトポスの射
+$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
+(\Sh(\mathcal{B}), \mathcal{O}_\mathcal{B})$、$\mathcal{O}$-加群
+$\mathcal{G}$、および $f^{-1}\mathcal{O}_\mathcal{B}$-加群層の写像
+$f^{-1}\mathcal{J} \to \mathcal{G}$ が与えられている。次の図式の
+疑問符に入るものを見いだせるかを問う。
+\begin{equation}
+\label{cotangent-equation-to-solve-ringed-topoi}
+\vcenter{
+\xymatrix{
+0 \ar[r] & \mathcal{G} \ar[r] & {?} \ar[r] & \mathcal{O} \ar[r] & 0 \\
+0 \ar[r] & f^{-1}\mathcal{J} \ar[u]^c \ar[r] &
+f^{-1}\mathcal{O}_{\mathcal{B}'} \ar[u] \ar[r] &
+f^{-1}\mathcal{O}_\mathcal{B} \ar[u] \ar[r] & 0
+}
+}
+\end{equation}
+さらに、解が存在する場合にそれがどの程度一意であるかも問う。
+より正確には、一次厚化
+$i : (\Sh(\mathcal{C}), \mathcal{O}) \to (\Sh(\mathcal{C}'), \mathcal{O}')$
+と、『変形理論』式
+(\ref{defos-equation-morphism-thickenings-ringed-topoi})
+のような厚化の射 $(f, f')$ であって、$\Ker(i^\sharp)$ が
+$\mathcal{G}$ と同一視され、$(f')^\sharp$ が与えられた写像 $c$ を
+誘導するものを求める。$(\Sh(\mathcal{C}'), \mathcal{O}')$ を
+(\ref{cotangent-equation-to-solve-ringed-topoi}) の {\it 解} と呼ぶ。
+
+\begin{lemma}
+\label{cotangent-lemma-find-obstruction-ringed-topoi}
+上の状況において、次が成り立つ。
+\begin{enumerate}
+\item 正準元
+$\xi \in \Ext^2_\mathcal{O}(L_f, \mathcal{G})$
+が存在し、その消滅は (\ref{cotangent-equation-to-solve-ringed-topoi}) の解が
+存在するための必要十分条件である。
+\item 解が存在するならば、解の同型類の集合は
+$\Ext^1_\mathcal{O}(L_f, \mathcal{G})$ の下で主等質である。
+\item 解 $X'$ が与えられたとき、
+(\ref{cotangent-equation-to-solve-ringed-topoi}) に収まる $X'$ の自動同型全体の集合は
+$\Ext^0_\mathcal{O}(L_f, \mathcal{G})$ と正準同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+同一視 $\NL_f = \tau_{\geq -1}L_f$
+（補題 \ref{cotangent-lemma-compare-cotangent-complex-with-naive-ringed-topoi}）および
+$H^0(L_f) = \Omega_f$
+（補題 \ref{cotangent-lemma-H0-L-morphism-ringed-topoi}）を通じて、(2) と (3) は
+『変形理論』補題 \ref{defos-lemma-huge-diagram-ringed-topoi} および
+\ref{defos-lemma-choices-ringed-topoi} で既に示した。
+
+\medskip\noindent
+{\it (1) の証明。} 『変形理論』節
+\ref{defos-section-deformations-ringed-topoi} の記法に合わせるため、
+$\NL_f = \NL_{\mathcal{O}/\mathcal{O}_\mathcal{B}}$ および
+$L_f = L_{\mathcal{O}/\mathcal{O}_\mathcal{B}}$ と書き、射 $t$ と
+$t \circ f$ についても同様に書く。『変形理論』補題
+\ref{defos-lemma-parametrize-solutions-ringed-topoi} により、元
+$$
+\xi' \in
+\Ext^1_\mathcal{O}(
+Lf^*\NL_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G}) =
+\Ext^1_\mathcal{O}(
+Lf^*L_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+$$
+が存在し、解が存在するための必要十分条件は、この元が写像
+$$
+\Ext^1_\mathcal{O}(
+\NL_{\mathcal{O}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G}) =
+\Ext^1_\mathcal{O}(
+L_{\mathcal{O}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+\longrightarrow
+\Ext^1_\mathcal{O}(
+Lf^*L_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+$$
+の像に入ることである。$f$ と $t$ に対する補題
+\ref{cotangent-lemma-triangle-ringed-topoi} の識別三角形から、長完全列
+$$
+\ldots \to
+\Ext^1_\mathcal{O}(
+L_{\mathcal{O}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G}) \to
+\Ext^1_\mathcal{O}(
+Lf^*L_{\mathcal{O}_\mathcal{B}/\mathcal{O}_{\mathcal{B}'}}, \mathcal{G})
+\to
+\Ext^1_\mathcal{O}(
+L_{\mathcal{O}/\mathcal{O}_\mathcal{B}}, \mathcal{G})
+$$
+が生じる。したがって、$\xi$ を $\xi'$ の像とすればよい。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{スキームの射の余接複体}
+\label{cotangent-section-cotangent-morphism-schemes}
+
+\noindent
+上で予告したとおり、スキームの射の余接複体を次のように定義する。
+
+\begin{definition}
+\label{cotangent-definition-cotangent-morphism-schemes}
+$f : X \to Y$ をスキームの射とする。{\it $Y$ 上の $X$ の余接複体
+$L_{X/Y}$} とは、$f$ を環付き空間の射とみなしたときの余接複体をいう
+（定義 \ref{cotangent-definition-cotangent-complex-morphism-ringed-spaces}）。
+\end{definition}
+
+\noindent
+特に、節 \ref{cotangent-section-cotangent-morphism-ringed-spaces} の結果は
+スキームの射の余接複体に適用できる。次の補題は、この定義が
+環準同型に対する定義と両立することを示し、さらに $L_{X/Y}$ が
+$D_\QCoh(\mathcal{O}_X)$ の対象であることを意味する。
+
+\begin{lemma}
+\label{cotangent-lemma-morphism-affine-schemes}
+$f : X \to Y$ をスキームの射とする。$U = \Spec(B) \subset X$ および
+$V = \Spec(A) \subset Y$ を、$f(U) \subset V$ を満たすアフィン開集合とする。
+複体の標準的な写像
+$$
+\widetilde{L_{B/A}} \longrightarrow L_{X/Y}|_U
+$$
+があり、これは $D(\mathcal{O}_U)$ における同型である。この写像は、
+$X$ と $Y$ のより小さいアフィン開集合への制限と両立する。
+\end{lemma}
+
+\begin{proof}
+注意 \ref{cotangent-remark-map-sections-over-U} により、$B = \mathcal{O}_X(U)$-加群の
+複体の標準的な写像
+\par\noindent
+$L_{\mathcal{O}_X(U)/f^{-1}\mathcal{O}_Y(U)} \to L_{X/Y}(U)$
+があり、これはさらなる制限と両立する。標準的な写像
+$A \to f^{-1}\mathcal{O}_Y(U)$ を用いて、$B$-加群の複体の標準的な写像
+\par\noindent
+$L_{B/A} \to L_{\mathcal{O}_X(U)/f^{-1}\mathcal{O}_Y(U)}$
+を得る。$\widetilde{\ }$ 関手の普遍性を用いると
+（『スキーム』補題 \ref{schemes-lemma-compare-constructions} を参照）、
+補題の主張にある写像を得る。この写像がコホモロジー層上の同型であることは、
+茎上に同型を誘導することを確かめればよい。これは補題
+\ref{cotangent-lemma-stalk-cotangent-complex} および \ref{cotangent-lemma-localize} から直ちに従う
+（点 $\mathfrak p \in \Spec(B)$ における $\mathcal{O}_X$ と
+$f^{-1}\mathcal{O}_Y$ の茎は、それぞれ $B_\mathfrak p$ と
+$A_\mathfrak q$ である。ここで $\mathfrak q = A \cap \mathfrak p$ であり、
+用いた参照は『スキーム』補題 \ref{schemes-lemma-spec-sheaves} および
+『層』補題 \ref{sheaves-lemma-stalk-pullback} である）。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-scheme-over-ring}
+$\Lambda$ を環とし、$X$ を $\Lambda$ 上のスキームとする。このとき
+$$
+L_{X/\Spec(\Lambda)} = L_{\mathcal{O}_X/\underline{\Lambda}}
+$$
+である。ここで $\underline{\Lambda}$ は $X$ 上の値 $\Lambda$ の定値層である。
+\end{lemma}
+
+\begin{proof}
+$p : X \to \Spec(\Lambda)$ を構造射とし、
+$q : \Spec(\Lambda) \to (*, \Lambda)$ を明らかな射とする。
+補題 \ref{cotangent-lemma-triangle-ringed-spaces} の識別三角形により、
+$L_q = 0$ を示せば十分である。これを示すには、
+$\mathfrak p \in \Spec(\Lambda)$ に対して
+$$
+(L_q)_\mathfrak p =
+L_{\mathcal{O}_{\Spec(\Lambda), \mathfrak p}/\Lambda} =
+L_{\Lambda_\mathfrak p/\Lambda}
+$$
+が零であることを示せばよい（補題
+\ref{cotangent-lemma-stalk-cotangent-complex}）。これは補題
+\ref{cotangent-lemma-when-zero} から従う。
+\end{proof}
+
+
+
+
+
+
+\section{環上のスキームの余接複体}
+\label{cotangent-section-cotangent-schemes-variant}
+
+\noindent
+$\Lambda$ を環とし、$X$ を $\Lambda$ 上のスキームとする。補題
+\ref{cotangent-lemma-scheme-over-ring} により正当化される記法
+$L_{X/\Spec(\Lambda)} = L_{X/\Lambda}$ を用いる。本節では、補題
+\ref{cotangent-lemma-compute-cotangent-complex} と同様に $L_{X/\Lambda}$ を
+記述する。具体的には、$X_{Zar}$ 上のファイバー圏
+$\mathcal{C}_{X/\Lambda}$ を構成し、その上に（多項式）
+$\Lambda$-代数の層 $\mathcal{O}$ を入れて、
+$$
+L_{X/\Lambda} =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}} \otimes_\mathcal{O}
+\underline{\mathcal{O}}_X).
+$$
+が成り立つようにする。後で圏 $\mathcal{C}_{X/\Lambda}$ を用いて、
+連接層のスタックに対する素朴な障害理論を構成する。
+
+\medskip\noindent
+$\Lambda$ を環とし、$X$ を $\Lambda$ 上のスキームとする。
+$\mathcal{C}_{X/\Lambda}$ を、対象がスキームの可換図式
+\begin{equation}
+\label{cotangent-equation-object}
+\vcenter{
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \\
+\Spec(\Lambda) & \mathbf{A} \ar[l]
+}
+}
+\end{equation}
+であって、次を満たすものからなる圏とする。
+\begin{enumerate}
+\item $U$ は $X$ の開部分スキームである。
+\item 同型 $\mathbf{A} = \Spec(P)$ が存在し、$P$ は $\Lambda$ 上の
+多項式代数（ある変数集合による）である。
+\end{enumerate}
+言い換えれば、$\mathbf{A}$ は $\Spec(\Lambda)$ 上の（無限次元）
+アフィン空間である。射は可換図式によって与えられる。
+$X_{Zar}$ は $X$ の小ザリスキーサイトを表すことを思い出そう。
+忘却関手
+$$
+u : \mathcal{C}_{X/\Lambda} \to X_{Zar},\ (U \to \mathbf{A}) \mapsto U
+$$
+がある。$U$ 上のファイバー圏は、節 \ref{cotangent-section-compute-L-pi-shriek}
+で導入した圏 $\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$ と
+標準的に同値であることに注意する。
+
+\begin{lemma}
+\label{cotangent-lemma-category-fibred}
+上の状況において、圏 $\mathcal{C}_{X/\Lambda}$ は
+$X_{Zar}$ 上のファイバー圏である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}_{X/\Lambda}$ の対象 $U \to \mathbf{A}$ と $X_{Zar}$ の射
+$U' \to U$ が与えられたとき、$\mathcal{C}_{X/\Lambda}$ の対象
+$U' \to \mathbf{A}$ を考える。ここで $U' \to \mathbf{A}$ は
+$U' \to U$ と $U \to \mathbf{A}$ の合成である。射
+$(U' \to \mathbf{A}) \to (U \to \mathbf{A})$ は
+$\mathcal{C}_{X/\Lambda}$ において $X_{Zar}$ 上強デカルト的である。
+\end{proof}
+
+\noindent
+$\mathcal{C}_{X/\Lambda}$ に $X_{Zar}$ から誘導される位相を入れる
+（『スタック』節 \ref{stacks-section-topology} を参照）。
+関手 $u$ はトポスの射
+$\pi : \Sh(\mathcal{C}_{X/\Lambda}) \to \Sh(X_{Zar})$ を定める。
+サイト $\mathcal{C}_{X/\Lambda}$ には、いくつかの環の層が付随する。
+\begin{enumerate}
+\item 規則
+$(U \to \mathbf{A}) \mapsto \Gamma(\mathbf{A}, \mathcal{O}_\mathbf{A})$
+によって与えられる層 $\mathcal{O}$。
+\item 規則 $(U \to \mathbf{A}) \mapsto \mathcal{O}_X(U)$ によって与えられる
+層 $\underline{\mathcal{O}}_X = \pi^{-1}\mathcal{O}_X$。
+\item 定値層 $\underline{\Lambda}$。
+\end{enumerate}
+環付きトポスの射
+\begin{equation}
+\label{cotangent-equation-pi-schemes}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}_{X/\Lambda}), \underline{\mathcal{O}}_X) \ar[r]_i \ar[d]_\pi &
+(\Sh(\mathcal{C}_{X/\Lambda}), \mathcal{O}) \\
+(\Sh(X_{Zar}), \mathcal{O}_X)
+}
+}
+\end{equation}
+を得る。射 $i$ は台となるトポス上で恒等射であり、
+$i^\sharp : \mathcal{O} \to \underline{\mathcal{O}}_X$ は明らかな写像である。
+写像 $\pi$ は『サイト上のコホモロジー』状況
+\ref{sites-cohomology-situation-fibred-category} の特別な場合である。
+以下では導来関手
+$
+Li^* : D(\mathcal{O}) \longrightarrow D(\underline{\mathcal{O}}_X)
+$
+（$Ri_* = i_* : D(\underline{\mathcal{O}}_X) \to D(\mathcal{O})$ の左随伴）と
+$
+L\pi_! : D(\underline{\mathcal{O}}_X) \longrightarrow D(\mathcal{O}_X)
+$
+（$\pi^* = \pi^{-1} : D(\mathcal{O}_X) \to
+D(\underline{\mathcal{O}}_X)$ の左随伴）が重要な役割を果たす。
+これまでの結果により $L\pi_!$ を計算できる。
+
+\begin{remark}
+\label{cotangent-remark-compute-L-pi-shriek}
+上の状況において、各開集合 $U \subset X$ に対し、
+$P_{\bullet, U}$ を $\Lambda$ 上の $\mathcal{O}_X(U)$ の標準分解とする。
+$\mathbf{A}_{n, U} = \Spec(P_{n, U})$ とおく。このとき
+$\mathbf{A}_{\bullet, U}$ は、$U$ 上の $\mathcal{C}_{X/\Lambda}$ の
+ファイバー圏 $\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$ の余単体対象である。
+さらに、注意 \ref{cotangent-remark-resolution} で論じたように、
+$\mathbf{A}_{\bullet, U}$ は『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution} に現れる
+$\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$ の余単体対象である。
+構成 $U \mapsto \mathbf{A}_{\bullet, U}$ は $U$ に関して関手的なので、
+$\mathcal{C}_{X/\Lambda}$ 上の任意の（アーベル）層 $\mathcal{F}$ から
+前層の複体
+$$
+U \longmapsto \mathcal{F}(\mathbf{A}_{\bullet, U})
+$$
+を得る。そのコホモロジー群は、ファイバー圏上の $\mathcal{F}$ の
+ホモロジーを計算する。したがって『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek} により、
+その層化が $L_n\pi_!(\mathcal{F})$ を計算する。言い換えれば、
+次数 $-n$ の項が $U \mapsto \mathcal{F}(\mathbf{A}_{n, U})$ の
+層化である層の複体が $L\pi_!(\mathcal{F})$ を計算する。
+\end{remark}
+
+\noindent
+以上の準備のもとで、本節の主結果を述べることができる。
+
+\begin{lemma}
+\label{cotangent-lemma-cotangent-morphism-schemes}
+上の状況において、$D(\mathcal{O}_X)$ に標準的な同型
+$$
+L_{X/\Lambda} = 
+L\pi_!(Li^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(i^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+まず、$\mathcal{C}_{X/\Lambda}$ の任意の対象
+$(U \to \mathbf{A})$ において、層 $\mathcal{O}$ の値は
+$\Lambda$ 上の多項式代数であることに注意する。したがって
+$\Omega_{\mathcal{O}/\underline{\Lambda}}$ は平坦な
+$\mathcal{O}$-加群であり、補題の主張の第二および第三の等号が
+成り立つことが分かる。
+
+\medskip\noindent
+注意 \ref{cotangent-remark-compute-L-pi-shriek} により、対象
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+は前層の複体
+$$
+U \mapsto
+\left(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X\right)(\mathbf{A}_{\bullet, U})
+=
+\Omega_{P_{\bullet, U}/\Lambda} \otimes_{P_{\bullet, U}} \mathcal{O}_X(U) =
+L_{\mathcal{O}_X(U)/\Lambda}
+$$
+の層化として計算される。ここでは注意
+\ref{cotangent-remark-compute-L-pi-shriek} の記法を用いた。注意
+\ref{cotangent-remark-map-sections-over-U} により、
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+は $X$ 上の環の準同型 $\underline{\Lambda} \to \mathcal{O}_X$ の
+余接複体を計算する。補題 \ref{cotangent-lemma-scheme-over-ring} により、
+これが求めるものである。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{代数空間の射の余接複体}
+\label{cotangent-section-cotangent-morphism-spaces}
+
+\noindent
+付随する小エタールサイト間の射を用いて、代数空間の射の余接複体を定義する。
+
+\begin{definition}
+\label{cotangent-definition-cotangent-morphism-spaces}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の代数空間の射とする。
+{\it $Y$ 上の $X$ の余接複体 $L_{X/Y}$} とは、$X$ と $Y$ の
+小エタールサイト間の環付きトポスの射 $f_{small}$ の余接複体をいう
+（『空間の性質』補題
+\ref{spaces-properties-lemma-morphism-ringed-topoi} および定義
+\ref{cotangent-definition-cotangent-complex-morphism-ringed-topoi} を参照）。
+\end{definition}
+
+\noindent
+特に、節 \ref{cotangent-section-cotangent-morphism-ringed-topoi} の結果は
+代数空間の射の余接複体に適用できる。次の補題群は、この定義が
+環準同型およびスキームに対する定義と両立すること、ならびに
+$L_{X/Y}$ が $D_\QCoh(\mathcal{O}_X)$ の対象であることを示す。
+
+\begin{lemma}
+\label{cotangent-lemma-etale-localization}
+$S$ をスキームとする。$S$ 上の代数空間の可換図式
+$$
+\xymatrix{
+U \ar[d]_p \ar[r]_g & V \ar[d]^q \\
+X \ar[r]^f & Y
+}
+$$
+で、$p$ と $q$ がエタールであるものを考える。このとき
+$D(\mathcal{O}_U)$ に標準的な同一視
+$L_{X/Y}|_{U_\etale} = L_{U/V}$ がある。
+\end{lemma}
+
+\begin{proof}
+余接複体の形成は引き戻しと可換であり
+（補題 \ref{cotangent-lemma-pullback-cotangent-morphism-topoi}）、
+$p_{small}^{-1}\mathcal{O}_X = \mathcal{O}_U$ および
+$g_{small}^{-1}\mathcal{O}_{V_\etale} =
+p_{small}^{-1}f_{small}^{-1}\mathcal{O}_{Y_\etale}$
+が成り立つ。後者は
+$q_{small}^{-1}\mathcal{O}_{Y_\etale} = \mathcal{O}_{V_\etale}$
+だからである（『空間の性質』補題
+\ref{spaces-properties-lemma-etale-exact-pullback}）。
+定義をたどると $L_{X/Y}|_{U_\etale} = L_{U/V}$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-compare-spaces-schemes}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$X$ と $Y$ がそれぞれスキーム $X_0$ と $Y_0$ によって表現されると
+仮定する。このとき $D(\mathcal{O}_X)$ に標準的な同一視
+$L_{X/Y} = \epsilon^*L_{X_0/Y_0}$
+がある。ここで $\epsilon$ は『空間の導来圏』節
+\ref{spaces-perfect-section-derived-quasi-coherent-etale} のものであり、
+$L_{X_0/Y_0}$ は定義 \ref{cotangent-definition-cotangent-morphism-schemes}
+のものである。
+\end{lemma}
+
+\begin{proof}
+$f_0 : X_0 \to Y_0$ を $f$ に対応するスキームの射とする。標準的な写像
+$\epsilon^{-1}f_0^{-1}\mathcal{O}_{Y_0} \to f_{small}^{-1}\mathcal{O}_Y$
+があり、これは
+$\epsilon^\sharp : \epsilon^{-1}\mathcal{O}_{X_0} \to \mathcal{O}_X$
+と両立する。実際、可換図式
+$$
+\xymatrix{
+X_{0, Zar} \ar[d]_{f_0} & X_\etale \ar[l]^\epsilon \ar[d]^f \\
+Y_{0, Zar} & Y_\etale \ar[l]_\epsilon
+}
+$$
+がある（『空間の導来圏』注意
+\ref{spaces-perfect-remark-match-total-direct-images} を参照）。
+したがって、節 \ref{cotangent-section-cotangent-complex} で論じた関手性と補題
+\ref{cotangent-lemma-pullback-cotangent-morphism-topoi} により、標準的な写像
+$$
+\epsilon^{-1}L_{X_0/Y_0} =
+\epsilon^{-1}L_{\mathcal{O}_{X_0}/f_0^{-1}\mathcal{O}_{Y_0}} =
+L_{\epsilon^{-1}\mathcal{O}_{X_0}/\epsilon^{-1}f_0^{-1}\mathcal{O}_{Y_0}}
+\longrightarrow
+L_{\mathcal{O}_X/f^{-1}_{small}\mathcal{O}_Y} = L_{X/Y}
+$$
+を得る。誘導された写像 $\epsilon^*L_{X_0/Y_0} \to L_{X/Y}$ が同型で
+あることは、幾何点における茎で確かめればよい（『空間の性質』定理
+\ref{spaces-properties-theorem-exactness-stalks}）。
+茎の計算には補題 \ref{cotangent-lemma-stalk-cotangent-complex} を用いる。
+$\overline{x} : \Spec(k) \to X_0$ を $x \in X_0$ 上の幾何点とし、
+$\overline{y} = f \circ \overline{x}$ が $y \in Y_0$ 上にあるとする。
+このとき
+$$
+L_{X/Y, \overline{x}} =
+L_{\mathcal{O}_{X, \overline{x}}/\mathcal{O}_{Y, \overline{y}}}
+$$
+および
+$$
+(\epsilon^*L_{X_0/Y_0})_{\overline{x}} =
+L_{X_0/Y_0, x} \otimes_{\mathcal{O}_{X_0, x}}
+\mathcal{O}_{X, \overline{x}} =
+L_{\mathcal{O}_{X_0, x}/\mathcal{O}_{Y_0, y}}
+\otimes_{\mathcal{O}_{X_0, x}} \mathcal{O}_{X, \overline{x}}
+$$
+である。詳細の一部は省略する（ヒント：引き戻しの茎は像点における茎で
+あることについて『サイト』補題 \ref{sites-lemma-point-morphism-sites} を、
+加群に対する対応する結果について『サイト上の加群』補題
+\ref{sites-modules-lemma-pullback-stalk} を用いる）。
+$\mathcal{O}_{X, \overline{x}}$ は $\mathcal{O}_{X_0, x}$ の
+強ヘンゼル化であり、$\mathcal{O}_{Y, \overline{y}}$ についても同様である
+（『空間の性質』補題
+\ref{spaces-properties-lemma-describe-etale-local-ring}）。
+したがって、結果は補題 \ref{cotangent-lemma-cotangent-complex-henselization} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{cotangent-lemma-space-over-ring}
+$\Lambda$ を環とし、$X$ を $\Lambda$ 上の代数空間とする。このとき
+$$
+L_{X/\Spec(\Lambda)} = L_{\mathcal{O}_X/\underline{\Lambda}}
+$$
+である。ここで $\underline{\Lambda}$ は $X_\etale$ 上の値 $\Lambda$
+の定値層である。
+\end{lemma}
+
+\begin{proof}
+$p : X \to \Spec(\Lambda)$ を構造射とし、
+$q : \Spec(\Lambda)_\etale \to (*, \Lambda)$ を明らかな射とする。
+補題 \ref{cotangent-lemma-triangle-ringed-topoi} の識別三角形により、
+$L_q = 0$ を示せば十分である。これを示すには
+（『空間の性質』定理
+\ref{spaces-properties-theorem-exactness-stalks}）、
+幾何点 $\overline{t} : \Spec(k) \to \Spec(\Lambda)$ に対して
+$$
+(L_q)_{\overline{t}} =
+L_{\mathcal{O}_{\Spec(\Lambda)_\etale, \overline{t}}/\Lambda}
+$$
+が零であることを示せばよい（補題
+\ref{cotangent-lemma-stalk-cotangent-complex}）。
+$\mathcal{O}_{\Spec(\Lambda)_\etale, \overline{t}}$ は $\Lambda$ の
+ある局所環の強ヘンゼル化なので（『空間の性質』補題
+\ref{spaces-properties-lemma-describe-etale-local-ring}）、これは補題
+\ref{cotangent-lemma-when-zero} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{環上の代数空間の余接複体}
+\label{cotangent-section-cotangent-spaces-variant}
+
+\noindent
+$\Lambda$ を環とし、$X$ を $\Lambda$ 上の代数空間とする。補題
+\ref{cotangent-lemma-space-over-ring} により正当化される記法
+$L_{X/\Spec(\Lambda)} = L_{X/\Lambda}$ を用いる。本節では、補題
+\ref{cotangent-lemma-compute-cotangent-complex} と同様に $L_{X/\Lambda}$ を
+記述する。具体的には、$X_\etale$ 上のファイバー圏
+$\mathcal{C}_{X/\Lambda}$ を構成し、その上に（多項式）
+$\Lambda$-代数の層 $\mathcal{O}$ を入れて、
+$$
+L_{X/\Lambda} =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}} \otimes_\mathcal{O}
+\underline{\mathcal{O}}_X).
+$$
+が成り立つようにする。後で圏 $\mathcal{C}_{X/\Lambda}$ を用いて、
+連接層のスタックに対する素朴な障害理論を構成する。
+
+\medskip\noindent
+$\Lambda$ を環とし、$X$ を $\Lambda$ 上の代数空間とする。
+$\mathcal{C}_{X/\Lambda}$ を、対象がスキームからなる可換図式
+\begin{equation}
+\label{cotangent-equation-object-space}
+\vcenter{
+\xymatrix{
+X \ar[d] & U \ar[l] \ar[d] \\
+\Spec(\Lambda) & \mathbf{A} \ar[l]
+}
+}
+\end{equation}
+であって、次を満たすものからなる圏とする。
+\begin{enumerate}
+\item $U$ はスキームである。
+\item $U \to X$ はエタールである。
+\item 同型 $\mathbf{A} = \Spec(P)$ が存在し、$P$ は $\Lambda$ 上の
+多項式代数（ある変数集合による）である。
+\end{enumerate}
+言い換えれば、$\mathbf{A}$ は $\Spec(\Lambda)$ 上の（無限次元）
+アフィン空間である。射は可換図式によって与えられる。
+$X_\etale$ は、対象が $X$ 上エタールなスキームである $X$ の
+小エタールサイトを表すことを思い出そう。忘却関手
+$$
+u : \mathcal{C}_{X/\Lambda} \to X_\etale,
+\quad
+(U \to \mathbf{A}) \mapsto U
+$$
+がある。$U$ 上のファイバー圏は、節 \ref{cotangent-section-compute-L-pi-shriek}
+で導入した圏 $\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$ と
+標準的に同値であることに注意する。
+
+\begin{lemma}
+\label{cotangent-lemma-category-fibred-space}
+上の状況において、圏 $\mathcal{C}_{X/\Lambda}$ は
+$X_\etale$ 上のファイバー圏である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}_{X/\Lambda}$ の対象 $U \to \mathbf{A}$ と $X_\etale$ の射
+$U' \to U$ が与えられたとき、$\mathcal{C}_{X/\Lambda}$ の対象
+$U' \to \mathbf{A}$ を考える。ここで $U' \to \mathbf{A}$ は
+$U' \to U$ と $U \to \mathbf{A}$ の合成である。射
+$(U' \to \mathbf{A}) \to (U \to \mathbf{A})$ は
+$\mathcal{C}_{X/\Lambda}$ において $X_\etale$ 上強デカルト的である。
+\end{proof}
+
+\noindent
+$\mathcal{C}_{X/\Lambda}$ に $X_\etale$ から誘導される位相を入れる
+（『スタック』節 \ref{stacks-section-topology} を参照）。
+関手 $u$ はトポスの射
+$\pi : \Sh(\mathcal{C}_{X/\Lambda}) \to \Sh(X_\etale)$ を定める。
+サイト $\mathcal{C}_{X/\Lambda}$ には、いくつかの環の層が付随する。
+\begin{enumerate}
+\item 規則
+$(U \to \mathbf{A}) \mapsto \Gamma(\mathbf{A}, \mathcal{O}_\mathbf{A})$
+によって与えられる層 $\mathcal{O}$。
+\item 規則 $(U \to \mathbf{A}) \mapsto \mathcal{O}_X(U)$ によって与えられる
+層 $\underline{\mathcal{O}}_X = \pi^{-1}\mathcal{O}_X$。
+\item 定値層 $\underline{\Lambda}$。
+\end{enumerate}
+環付きトポスの射
+\begin{equation}
+\label{cotangent-equation-pi-spaces}
+\vcenter{
+\xymatrix{
+(\Sh(\mathcal{C}_{X/\Lambda}), \underline{\mathcal{O}}_X) \ar[r]_i \ar[d]_\pi &
+(\Sh(\mathcal{C}_{X/\Lambda}), \mathcal{O}) \\
+(\Sh(X_\etale), \mathcal{O}_X)
+}
+}
+\end{equation}
+を得る。射 $i$ は台となるトポス上で恒等射であり、
+$i^\sharp : \mathcal{O} \to \underline{\mathcal{O}}_X$ は明らかな写像である。
+写像 $\pi$ は『サイト上のコホモロジー』状況
+\ref{sites-cohomology-situation-fibred-category} の特別な場合である。
+以下では導来関手
+$
+Li^* : D(\mathcal{O}) \longrightarrow D(\underline{\mathcal{O}}_X)
+$
+（$Ri_* = i_* : D(\underline{\mathcal{O}}_X) \to D(\mathcal{O})$ の左随伴）と
+$
+L\pi_! : D(\underline{\mathcal{O}}_X) \longrightarrow D(\mathcal{O}_X)
+$
+（$\pi^* = \pi^{-1} : D(\mathcal{O}_X) \to
+D(\underline{\mathcal{O}}_X)$ の左随伴）が重要な役割を果たす。
+これまでの結果により $L\pi_!$ を計算できる。
+
+\begin{remark}
+\label{cotangent-remark-compute-L-pi-shriek-spaces}
+上の状況において、$X_\etale$ の各対象 $U \to X$ に対し、
+$P_{\bullet, U}$ を $\Lambda$ 上の $\mathcal{O}_X(U)$ の標準分解とする。
+$\mathbf{A}_{n, U} = \Spec(P_{n, U})$ とおく。このとき
+$\mathbf{A}_{\bullet, U}$ は、$U$ 上の $\mathcal{C}_{X/\Lambda}$ の
+ファイバー圏 $\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$ の余単体対象である。
+さらに、注意 \ref{cotangent-remark-resolution} で論じたように、
+$\mathbf{A}_{\bullet, U}$ は『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-compute-by-cosimplicial-resolution} に現れる
+$\mathcal{C}_{\mathcal{O}_X(U)/\Lambda}$ の余単体対象である。
+構成 $U \mapsto \mathbf{A}_{\bullet, U}$ は $U$ に関して関手的なので、
+$\mathcal{C}_{X/\Lambda}$ 上の任意の（アーベル）層 $\mathcal{F}$ から
+前層の複体
+$$
+U \longmapsto \mathcal{F}(\mathbf{A}_{\bullet, U})
+$$
+を得る。そのコホモロジー群は、ファイバー圏上の $\mathcal{F}$ の
+ホモロジーを計算する。したがって『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-compute-left-derived-pi-shriek} により、
+その層化が $L_n\pi_!(\mathcal{F})$ を計算する。言い換えれば、
+次数 $-n$ の項が $U \mapsto \mathcal{F}(\mathbf{A}_{n, U})$ の
+層化である層の複体が $L\pi_!(\mathcal{F})$ を計算する。
+\end{remark}
+
+\noindent
+以上の準備のもとで、本節の主結果を述べることができる。
+
+\begin{lemma}
+\label{cotangent-lemma-cotangent-morphism-spaces}
+上の状況において、$D(\mathcal{O}_X)$ に標準的な同型
+$$
+L_{X/\Lambda} = 
+L\pi_!(Li^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(i^*\Omega_{\mathcal{O}/\underline{\Lambda}}) =
+L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+まず、$\mathcal{C}_{X/\Lambda}$ の任意の対象
+$(U \to \mathbf{A})$ において、層 $\mathcal{O}$ の値は
+$\Lambda$ 上の多項式代数であることに注意する。したがって
+$\Omega_{\mathcal{O}/\underline{\Lambda}}$ は平坦な
+$\mathcal{O}$-加群であり、補題の主張の第二および第三の等号が
+成り立つことが分かる。
+
+\medskip\noindent
+注意 \ref{cotangent-remark-compute-L-pi-shriek-spaces} により、対象
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+は前層の複体
+$$
+U \mapsto
+\left(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X\right)(\mathbf{A}_{\bullet, U})
+=
+\Omega_{P_{\bullet, U}/\Lambda} \otimes_{P_{\bullet, U}} \mathcal{O}_X(U) =
+L_{\mathcal{O}_X(U)/\Lambda}
+$$
+の層化として計算される。ここでは注意
+\ref{cotangent-remark-compute-L-pi-shriek-spaces} の記法を用いた。注意
+\ref{cotangent-remark-map-sections-over-U} により、
+$L\pi_!(\Omega_{\mathcal{O}/\underline{\Lambda}}
+\otimes_\mathcal{O} \underline{\mathcal{O}}_X)$
+は $X_\etale$ 上の環の準同型
+$\underline{\Lambda} \to \mathcal{O}_X$ の余接複体を計算する。
+補題 \ref{cotangent-lemma-space-over-ring} により、これが求めるものである。
+\end{proof}
+
+
+
+
+
+
+\section{代数空間のファイバー積と余接複体}
+\label{cotangent-section-fibre-product}
+
+\noindent
+$S$ をスキームとし、$X \to B$ および $Y \to B$ を $S$ 上の
+代数空間の射とする。射影
+$p : X \times_B Y \to X$ および $q : X \times_B Y \to Y$ を備えた
+ファイバー積 $X \times_B Y$ を考える。本節では
+$L_{X \times_B Y/B}$ を論じる。必要な情報の大部分は次の図式に含まれる。
+\begin{equation}
+\label{cotangent-equation-fibre-product}
+\vcenter{
+\xymatrix{
+Lp^*L_{X/B} \ar[r] &
+L_{X \times_B Y/Y} \ar[r] &
+E \\
+Lp^*L_{X/B} \ar[r] \ar@{=}[u] &
+L_{X \times_B Y/B} \ar[r] \ar[u] &
+L_{X \times_B Y/X} \ar[u] \\
+ &
+Lq^*L_{Y/B} \ar[u] \ar@{=}[r] &
+Lq^*L_{Y/B} \ar[u]
+}
+}
+\end{equation}
+説明する。中央の行は射 $X \times_B Y \to X \to B$ に対する補題
+\ref{cotangent-lemma-triangle-ringed-topoi} の基本三角形である。中央の列は射
+$X \times_B Y \to Y \to B$ に対する基本三角形である。
+次に $E$ は、右上隅に「収まる」$D(\mathcal{O}_{X \times_B Y})$ の対象、
+すなわち上の行と右の列の両方を識別三角形にする対象である。このような
+$E$ は、左下の正方形（空いている箇所には $0$ を置く）に『導来圏』命題
+\ref{derived-proposition-9} を適用することで存在する。より明示的には、
+例えば複体の写像
+$$
+Lp^*L_{X/B} \oplus Lq^*L_{Y/B} \longrightarrow L_{X \times_B Y/B}
+$$
+の錐（『導来圏』定義 \ref{derived-definition-cone}）として $E$ を定義し、
+TR3 を適用して終域が $E$ である二つの写像を得ることができる。
+Tor 独立の場合、対象 $E$ は零である。
+
+\begin{lemma}
+\label{cotangent-lemma-fibre-product-tor-independent}
+上の状況において、$X$ と $Y$ が $B$ 上 Tor 独立ならば、
+(\ref{cotangent-equation-fibre-product}) の対象 $E$ は零である。この場合
+$$
+L_{X \times_B Y/B} = Lp^*L_{X/B} \oplus Lq^*L_{Y/B}
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+スキーム $W$ と全射エタール射 $W \to B$ を選ぶ。スキーム $U$ と
+全射エタール射 $U \to X \times_B W$ を選び、スキーム $V$ と
+全射エタール射 $V \to Y \times_B W$ を選ぶ。このとき
+$U \times_W V \to X \times_B Y$ も全射エタールである。したがって、
+$E$ の $U \times_W V$ への制限が零であることを示せば十分である。
+補題 \ref{cotangent-lemma-compare-spaces-schemes} および『空間の導来圏』補題
+\ref{spaces-perfect-lemma-tor-independent} により、スキームの場合に
+帰着される。適切なアフィン開集合をとることで、アフィンスキームの場合に
+帰着される。補題 \ref{cotangent-lemma-morphism-affine-schemes} を用いると、
+環のテンソル積の場合、すなわち補題
+\ref{cotangent-lemma-tensor-product-tor-independent} に帰着される。
+\end{proof}
+
+\noindent
+一般には、対象 $E$ について次のことがいえる。
+
+\begin{lemma}
+\label{cotangent-lemma-fibre-product}
+$S$ をスキームとし、$X \to B$ および $Y \to B$ を $S$ 上の
+代数空間の射とする。(\ref{cotangent-equation-fibre-product}) の対象 $E$ は
+$i = 0, -1$ に対して $H^i(E) = 0$ を満たし、幾何点
+$(\overline{x}, \overline{y}) : \Spec(k) \to X \times_B Y$ に対して
+$$
+H^{-2}(E)_{(\overline{x}, \overline{y})} =
+\text{Tor}_1^R(A, B) \otimes_{A \otimes_R B} C
+$$
+が成り立つ。ここで $R = \mathcal{O}_{B, \overline{b}}$、
+$A = \mathcal{O}_{X, \overline{x}}$、
+$B = \mathcal{O}_{Y, \overline{y}}$、および
+$C = \mathcal{O}_{X \times_B Y, (\overline{x}, \overline{y})}$ である。
+\end{lemma}
+
+\begin{proof}
+余接複体の形成は茎をとることおよび引き戻しと可換である。補題
+\ref{cotangent-lemma-stalk-cotangent-complex} および
+\ref{cotangent-lemma-pullback-cotangent-morphism-topoi} を参照せよ。
+$C$ は $A \otimes_R B$ のヘンゼル化であることに注意する。
+$L_{C/R} = L_{A \otimes_R B/R} \otimes_{A \otimes_R B} C$
+が節 \ref{cotangent-section-localization} の結果により成り立つ。したがって、
+この幾何点における $E$ の茎は写像
+$L_{A/R} \otimes C \to L_{A \otimes_R B/R} \otimes C$ の錐である。
+ゆえに補題の結果は環の場合、すなわち補題
+\ref{cotangent-lemma-tensor-product} から従う。
+\end{proof}

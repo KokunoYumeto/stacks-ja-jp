@@ -1,0 +1,163 @@
+\documentclass[11pt,a4paper,oneside,openany]{stacks-project-book}
+
+% Non-rendering source-note environments retained from the Stacks sources.
+\usepackage{verbatim}
+\newenvironment{reference}{\comment}{\endcomment}
+\newenvironment{slogan}{\comment}{\endcomment}
+\newenvironment{history}{\comment}{\endcomment}
+
+% Diagrams and chapter-support packages.
+\usepackage[all]{xy}
+\xyoption{2cell}
+\UseAllTwocells
+\usepackage{multicol}
+\usepackage{graphicx}
+
+% Japanese mathematical-book typography, inherited from the frozen P12 witness.
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{texgyretermes-regular.otf}[
+  BoldFont=texgyretermes-bold.otf,
+  ItalicFont=texgyretermes-italic.otf
+]
+\setsansfont{texgyreheros-regular.otf}
+\setmonofont{lmmono10-regular.otf}[ItalicFont=lmmono10-italic.otf]
+\setCJKmainfont{HaranoAjiMincho-Regular.otf}[
+  BoldFont=HaranoAjiMincho-Bold.otf,
+  ItalicFont=HaranoAjiMincho-Regular.otf
+]
+\setCJKsansfont{HaranoAjiGothic-Regular.otf}[
+  BoldFont=HaranoAjiGothic-Medium.otf
+]
+\setCJKmonofont{HaranoAjiGothic-Regular.otf}
+\xeCJKsetup{PunctStyle=plain,CheckSingle=true}
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 1pt
+\usepackage[
+  a4paper,
+  inner=26mm,
+  outer=24mm,
+  top=24mm,
+  bottom=24mm,
+  headheight=14pt,
+  headsep=8mm,
+  footskip=12mm
+]{geometry}
+\AtBeginDocument{\fontsize{10.95pt}{16.5pt}\selectfont}
+\setlength{\emergencystretch}{1em}
+
+% Preserve the two frozen legacy tokens using \'etale in math mode while
+% rendering their acute accent.  This is a build-only compatibility shim,
+% inherited from the bounded P05 precedent; no chapter source is rewritten.
+% The LaTeX format rebinds text accents at document start, so install this
+% narrow compatibility override after those format hooks have run.
+\AtBeginDocument{%
+  \let\stacksJaTextAcute\'
+  % The final log proves that exactly these two math-mode uses have argument e.
+  \renewcommand{\'}[1]{\ifmmode\text{é}\else\stacksJaTextAcute{#1}\fi}%
+}
+
+% Japanese structural names.
+\renewcommand{\contentsname}{目次}
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\proofname}{証明}
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+\renewcommand{\appendixname}{付録}
+
+% Japanese numbered chapter heads while retaining the canonical chapter numbers.
+\makeatletter
+\def\@makechapterhead#1{\global\topskip 7.5pc\relax
+  \begingroup
+  \fontsize{17}{22}\bfseries\centering
+    \ifnum\c@secnumdepth>\m@ne
+      \leavevmode \hskip-\leftskip
+      \rlap{\vbox to\z@{\vss
+          \ifx\chaptername\appendixname
+            \centerline{\normalsize\mdseries 付録\enspace\thechapter}
+          \else
+            \centerline{\normalsize\mdseries 第\thechapter 章}
+          \fi
+          \vskip 3pc}}\hskip\leftskip\fi
+     #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+\makeatother
+
+% Current-volume labels resolve locally; absent chapters use permanent tags.
+\usepackage{hyperref}
+\hypersetup{
+  unicode=true,
+  pdflang={ja-JP},
+  hidelinks,
+  pdfborder={0 0 0},
+  pdftitle={Stacks Project 日本語版 - 全116章累積版},
+  pdfauthor={The Stacks Project contributors; Japanese translation production},
+  pdfsubject={Japanese cumulative translation of all 116 chapters of the pinned Stacks Project snapshot}
+}
+\urlstyle{same}
+\input{tagrefs}
+
+% Theorem environments.
+\theoremstyle{plain}
+\newtheorem{theorem}[subsection]{定理}
+\newtheorem{proposition}[subsection]{命題}
+\newtheorem{lemma}[subsection]{補題}
+
+\theoremstyle{definition}
+\newtheorem{definition}[subsection]{定義}
+\newtheorem{example}[subsection]{例}
+\newtheorem{exercise}[subsection]{演習}
+\newtheorem{situation}[subsection]{状況}
+
+\theoremstyle{remark}
+\newtheorem{remark}[subsection]{注}
+\newtheorem{remarks}[subsection]{注}
+
+\renewcommand{\contentsname}{目次}
+\renewcommand{\proofname}{証明}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+
+\numberwithin{equation}{subsection}
+
+% Macros
+\def\lim{\mathop{\mathrm{lim}}\nolimits}
+\def\colim{\mathop{\mathrm{colim}}\nolimits}
+\def\Spec{\mathop{\mathrm{Spec}}}
+\def\Hom{\mathop{\mathrm{Hom}}\nolimits}
+\def\Ext{\mathop{\mathrm{Ext}}\nolimits}
+\def\SheafHom{\mathop{\mathcal{H}\!\mathit{om}}\nolimits}
+\def\SheafExt{\mathop{\mathcal{E}\!\mathit{xt}}\nolimits}
+\def\Sch{\mathit{Sch}}
+\def\Mor{\mathop{\mathrm{Mor}}\nolimits}
+\def\Ob{\mathop{\mathrm{Ob}}\nolimits}
+\def\Sh{\mathop{\mathit{Sh}}\nolimits}
+\def\NL{\mathop{N\!L}\nolimits}
+\def\CH{\mathop{\mathrm{CH}}\nolimits}
+\def\proetale{{pro\text{-}\acute{e}tale}}
+\def\etale{{\acute{e}tale}}
+\def\QCoh{\mathit{QCoh}}
+\def\Ker{\mathop{\mathrm{Ker}}}
+\def\Im{\mathop{\mathrm{Im}}}
+\def\Coker{\mathop{\mathrm{Coker}}}
+\def\Coim{\mathop{\mathrm{Coim}}}
+
+% Boxtimes
+\DeclareMathSymbol{\boxtimes}{\mathbin}{AMSa}{"02}
+
+% Macros for moduli stacks/spaces
+\def\QCohstack{\mathcal{QC}\!\mathit{oh}}
+\def\Cohstack{\mathcal{C}\!\mathit{oh}}
+\def\Spacesstack{\mathcal{S}\!\mathit{paces}}
+\def\Quotfunctor{\mathrm{Quot}}
+\def\Hilbfunctor{\mathrm{Hilb}}
+\def\Curvesstack{\mathcal{C}\!\mathit{urves}}
+\def\Polarizedstack{\mathcal{P}\!\mathit{olarized}}
+\def\Complexesstack{\mathcal{C}\!\mathit{omplexes}}
+\def\Pic{\mathop{\mathrm{Pic}}\nolimits}
+\def\Picardstack{\mathcal{P}\!\mathit{ic}}
+\def\Picardfunctor{\mathrm{Pic}}
+\def\Deformationcategory{\mathcal{D}\!\mathit{ef}}

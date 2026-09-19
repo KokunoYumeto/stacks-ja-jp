@@ -1,0 +1,3990 @@
+% Generated mechanically from frozen input inputs/p05/ja/topologies.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{33}
+\chapter{スキーム上の位相}
+
+
+\phantomsection
+\label{topologies-section-phantom}
+
+
+
+
+\section{はじめに}
+\label{topologies-section-introduction}
+
+\noindent
+本章では、スキームの圏に入るさまざまな位相を説明する。参考文献として
+\cite{SGA1} および \cite{Ner} がある。まず注意しておきたいのは、
+Sites, Definition \ref{sites-definition-site} で定義されるサイトの選び方は
+多数あるものの、基礎圏上で同じ層の概念を与える場合があるということである。
+したがって、ここでの選択は参考文献のものと多少異なることがあるが、
+最終的には同じコホモロジー群などに到達する。
+
+\section{一般的な手順}
+\label{topologies-section-procedure}
+
+\noindent
+本節では、以下で用いるサイトを構成するための一般的な手順を説明する。
+ある位相 $\tau$ に関してスキーム上の層を調べたいとする。この位相を備えた
+スキームから Sites, Definition \ref{sites-definition-site} の意味でのサイトを
+得るには、いくらか準備が必要である。単に「Zariski 位相を備えたすべての
+スキームを考える」と言うだけでは「大きな」圏になってしまうからである。
+そこで本章の各節では、次のように進める。
+\begin{enumerate}
+\item Sites, Definition \ref{sites-definition-site} の公理を満たす、
+スキームの被覆のクラス $\text{Cov}_\tau$ を定義する。スキームの
+Zariski 開被覆は常に $\tau$-被覆となる。
+\item アフィンスキームの圏において、標準 $\tau$-被覆という概念を指定する。
+\item 「絶対的な」大 $\tau$-サイト $\Sch_\tau$ を定義する。これは、
+スキームの集合と被覆の集合を適切に選ぶことによって得られるサイトである。
+\item $\Sch_\tau$ の任意の対象 $S$ に対して大 $\tau$-サイト
+$(\Sch/S)_\tau$ を定義し、適切な $\tau$ に対しては小
+\footnote{ここで「大」と「小」は、対応する圏の大小とは関係しない。}
+$\tau$-サイト $S_\tau$ も定義する。
+\item さらに、アフィンスキームの標準 $\tau$-被覆を用いたサイト
+$(\textit{Aff}/S)_\tau$ がある\footnote{ph 位相の場合には、この手順から
+ごくわずかに外れる。Definition \ref{topologies-definition-big-small-ph} とその周辺の
+議論を参照せよ。}。その層の圏は $(\Sch/S)_\tau$ 上の層の圏と同値である。
+\end{enumerate}
+以上の手順はやや不格好であり、スキームの大 $\tau$-サイトについて
+標準的な選択を与えず、小 $\tau$-サイトについてさえ標準的な選択を
+与えない。集合論的な困難を無視するなら、クラスを用いて議論し、
+標準的な大サイトと小サイトを得ることができる……。
+
+
+
+
+
+
+
+\section{Zariski 位相}
+\label{topologies-section-zariski}
+
+\begin{definition}
+\label{topologies-definition-zariski-covering}
+$T$ をスキームとする。$T$ の {\it Zariski 被覆}とは、
+各 $f_i$ が開埋め込みであり、かつ $T = \bigcup f_i(T_i)$ を満たす
+スキームの射の族 $\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\noindent
+これは被覆の（真の）クラスを定める。次に、この概念が
+Sites, Definition \ref{sites-definition-site} の条件を満たすことを示す。
+
+\begin{lemma}
+\label{topologies-lemma-zariski}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の
+Zariski 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が Zariski 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が Zariski 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は Zariski 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が Zariski 被覆であり、
+$T' \to T$ がスキームの射ならば、
+$\{T' \times_T T_i \to T'\}_{i\in I}$ は Zariski 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の
+Zariski 被覆とする。このとき、$\{T_i \to T\}_{i \in I}$ の細分であり、
+各 $U_j$ が $T$ の標準開集合となる Zariski 被覆
+$\{U_j \to T\}_{j = 1, \ldots, m}$ が存在する。Schemes, Definition
+\ref{schemes-definition-standard-covering} を参照せよ。さらに、各 $U_j$ は
+いずれかの $T_i$ の開集合として選ぶことができる。
+\end{lemma}
+
+\begin{proof}
+$T$ は準コンパクトであり、標準開集合がその位相の基底をなすので従う。
+これは Schemes, Lemma \ref{schemes-lemma-standard-open} でも証明されている。
+\end{proof}
+
+\noindent
+そこで、対応するアフィンスキームの標準被覆を次のように定義する。
+
+\begin{definition}
+\label{topologies-definition-standard-Zariski}
+Schemes, Definition \ref{schemes-definition-standard-covering} と比較せよ。
+$T$ をアフィンスキームとする。$T$ の {\it 標準 Zariski 被覆}とは、
+各 $U_j \to T$ が $T$ の標準アフィン開集合との同型を誘導する
+Zariski 被覆 $\{U_j \to T\}_{j = 1, \ldots, m}$ のことである。
+\end{definition}
+
+\begin{definition}
+\label{topologies-definition-big-zariski-site}
+{\it 大 Zariski サイト}とは、Sites, Definition
+\ref{sites-definition-site} の意味で次のように構成される任意のサイト
+$\Sch_{Zar}$ のことである。
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、それらのスキームの間の Zariski 被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item $\Sch_{Zar}$ の基礎圏として、集合 $S_0$ から始めて
+Sets, Lemma \ref{sets-lemma-construct-category} のように構成される
+任意の圏 $\Sch_\alpha$ を取る。
+\item $\Sch_{Zar}$ の被覆として、圏 $\Sch_\alpha$、Zariski 被覆のクラス、
+および上で選んだ集合 $\text{Cov}_0$ から始めて、Sets, Lemma
+\ref{sets-lemma-coverings-site} のように得られる任意の被覆の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+Sites, Lemma \ref{sites-lemma-choice-set-coverings-immaterial} によれば、
+圏 $\Sch_\alpha$ を選んだ後では、$\Sch_\alpha$ 上の層の圏は上の (3) で
+選んだ被覆に依存しない。言い換えれば、トポス $\Sh(\Sch_{Zar})$ は
+圏 $\Sch_\alpha$ の選択だけに依存する。Sets, Lemma
+\ref{sets-lemma-what-is-in-it} によれば、これらの圏はファイバー積や
+開部分スキーム・閉部分スキームを取る操作など、代数幾何学の多くの構成に
+関して閉じている。また、$\Sch_\alpha$ の厳密な選択はそれほど重要でない
+ことも示せる。Section \ref{topologies-section-change-alpha} を参照せよ。
+
+\medskip\noindent
+別の方法として、強到達不能基数の存在を仮定し、選んだ宇宙に含まれる
+スキームの圏を $\Sch_{Zar}$ とし、同じ宇宙に含まれる Zariski 被覆を
+その被覆の集合と定めることもできる。
+
+\medskip\noindent
+スキーム $S$ の大 Zariski サイトを導入する前に、大 Zariski サイト
+$\Sch_{Zar}$ 上の位相は、ある意味ですべてのスキームの圏上の
+Zariski 位相から誘導されることを指摘しておく。
+
+\begin{lemma}
+\label{topologies-lemma-zariski-induced}
+$\Sch_{Zar}$ を Definition \ref{topologies-definition-big-zariski-site} の意味での
+大 Zariski サイトとし、$T \in \Ob(\Sch_{Zar})$ とする。
+$\{T_i \to T\}_{i \in I}$ を $T$ の任意の Zariski 被覆とする。このとき、
+サイト $\Sch_{Zar}$ における $T$ の被覆 $\{U_j \to T\}_{j \in J}$ で、
+$\{T_i \to T\}_{i \in I}$ と自明に同値なものが存在する
+（Sites, Definition \ref{sites-definition-combinatorial-tautological} を参照）。
+\end{lemma}
+
+\begin{proof}
+各 $T_i \to T$ は開埋め込みなので、Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により、各 $T_i$ は $\Sch_{Zar}$ のある対象
+$V_i$ と同型である。被覆 $\{V_i \to T\}_{i \in I}$ は
+$\{T_i \to T\}_{i \in I}$ と自明に同値である（両方向に $I$ 上の恒等写像を
+用いる）。さらに Sets, Lemma \ref{sets-lemma-coverings-site} により、
+$\{V_i \to T\}_{i \in I}$ はサイト $\Sch_{Zar}$ における $T$ のある被覆
+$\{U_j \to T\}_{j \in J}$ と組合せ論的に同値である。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-small-Zariski}
+$S$ をスキームとし、$\Sch_{Zar}$ を $S$ を含む大 Zariski サイトとする。
+\begin{enumerate}
+\item $S$ の {\it 大 Zariski サイト} $(\Sch/S)_{Zar}$ とは、
+Sites, Section \ref{sites-section-localize} で導入したサイト
+$\Sch_{Zar}/S$ のことである。
+\item $S$ の {\it 小 Zariski サイト} $S_{Zar}$ とは、
+$(\Sch/S)_{Zar}$ の充満部分圏であって、対象が $U \to S$ を開埋め込みとする
+$U/S$ からなるものである。$S_{Zar}$ の被覆とは、
+$U \in \Ob(S_{Zar})$ を満たす $(\Sch/S)_{Zar}$ の任意の被覆
+$\{U_i \to U\}$ のことである。
+\item $S$ の {\it 大アフィン Zariski サイト} $(\textit{Aff}/S)_{Zar}$ とは、
+$(\Sch/S)_{Zar}$ の充満部分圏であって、$U$ がアフィンスキームであるような
+対象 $U/S$ からなるものである。$(\textit{Aff}/S)_{Zar}$ の被覆とは、
+$U \in \Ob((\textit{Aff}/S)_{Zar})$ を満たす $(\Sch/S)_{Zar}$ の被覆
+$\{U_i \to U\}$ で、標準 Zariski 被覆であるものをいう。
+\item $S$ の {\it 小アフィン Zariski サイト} $S_{affine, Zar}$ とは、
+$S_{Zar}$ の充満部分圏であって、$U$ がアフィンスキームであるような
+対象 $U/S$ からなるものである。$S_{affine, Zar}$ の被覆とは、
+$U \in \Ob(S_{affine, Zar})$ を満たす $S_{Zar}$ の被覆
+$\{U_i \to U\}$ で、標準 Zariski 被覆であるものをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+小 Zariski サイト、大アフィン Zariski サイト、小アフィン Zariski サイトが
+実際にサイトであることは直ちには明らかでない。これを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-verify-site-Zariski}
+$S$ をスキームとし、$\Sch_{Zar}$ を $S$ を含む大 Zariski サイトとする。
+上で定義した $S_{Zar}$、$(\textit{Aff}/S)_{Zar}$、$S_{affine, Zar}$ は
+サイトである。
+\end{lemma}
+
+\begin{proof}
+$S_{Zar}$ がサイトであることを示す。これは、終域を固定した射の族の集合を
+備えた圏である。したがって Sites, Definition \ref{sites-definition-site} の
+性質 (1)、(2)、(3) を示せばよい。$(\Sch/S)_{Zar}$ はサイトなので、
+$U \in \Ob(S_{Zar})$ を満たす $(\Sch/S)_{Zar}$ の任意の被覆
+$\{U_i \to U\}$ に対して $U_i \in \Ob(S_{Zar})$ であることを示せば十分である。
+これは、開埋め込みの合成が開埋め込みであることから定義により従う。
+
+\medskip\noindent
+$(\textit{Aff}/S)_{Zar}$ がサイトであることを示す。上と同様に、
+アフィンスキームの標準 Zariski 被覆の集まりが Sites, Definition
+\ref{sites-definition-site} の性質 (1)、(2)、(3) を満たすことを示せばよい。
+$R$ を環とし、$f_1, \ldots, f_n \in R$ が単位イデアルを生成するとする。
+各 $i \in \{1, \ldots, n\}$ に対し、
+$g_{i1}, \ldots, g_{in_i} \in R_{f_i}$ が $R_{f_i}$ の単位イデアルを生成するとする。
+可能なので $g_{ij} = f_{ij}/f_i^{e_{ij}}$ と書く。必要なら $f_{ij}$ を
+$f_i f_{ij}$ で置き換えることにより、
+$D(f_{ij}) \subset D(f_i) \cong \Spec(R_{f_i})$ は
+$D(g_{ij}) \subset \Spec(R_{f_i})$ と等しくなる。したがって、射の族
+$\{D(g_{ij}) \to \Spec(R)\}$ は標準 Zariski 被覆である。この考察から、
+標準 Zariski 被覆について (2) が成り立つ。(1) と (3) の確認は省略する。
+
+\medskip\noindent
+$S_{affine, Zar}$ がサイトであることの証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fibre-products-Zariski}
+$S$ をスキームとし、$\Sch_{Zar}$ を $S$ を含む大 Zariski サイトとする。
+サイト $\Sch_{Zar}$、$(\Sch/S)_{Zar}$、$S_{Zar}$、
+$(\textit{Aff}/S)_{Zar}$、$S_{affine, Zar}$ の基礎圏はファイバー積をもつ。
+いずれの場合も、すべてのスキームの圏 $\Sch$ への明らかな函手は
+ファイバー積を取る操作と可換である。圏 $(\Sch/S)_{Zar}$ と $S_{Zar}$ は
+ともに終対象をもち、それは $S/S$ である。
+\end{lemma}
+
+\begin{proof}
+$\Sch_{Zar}$ については構成から明らかである。Sets, Lemma
+\ref{sets-lemma-what-is-in-it} を参照せよ。
+$U, V, W \in \Ob(\Sch_{Zar})$ を満たすスキームの射
+$U \to S$、$V \to U$、$W \to U$ があるとする。
+$\Sch_{Zar}$ におけるファイバー積 $V \times_U W$ は $\Sch$ における
+ファイバー積であり、$S$ 上のすべてのスキームの圏において
+$U/S$ 上の $V/S$ と $W/S$ のファイバー積でもある。したがって
+$(\Sch/S)_{Zar}$ におけるファイバー積でもあり、$(\Sch/S)_{Zar}$ の場合が従う。
+$U \to S$、$V \to U$、$W \to U$ が開埋め込みならば
+$V \times_U W \to S$ も開埋め込みなので、$S_{Zar}$ の場合が従う。
+$U,V,W$ がアフィンならば $V \times_U W$ もアフィンなので、
+$(\textit{Aff}/S)_{Zar}$ と $S_{affine, Zar}$ の場合が従う。
+\end{proof}
+
+\noindent
+次に、大アフィンサイト（それぞれ小アフィンサイト）が大サイト
+（それぞれ小サイト）と同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-affine-big-site-Zariski}
+$S$ をスキームとし、$\Sch_{Zar}$ を $S$ を含む大 Zariski サイトとする。
+函手 $(\textit{Aff}/S)_{Zar} \to (\Sch/S)_{Zar}$ は特殊余連続函手である。
+したがって、$\Sh((\textit{Aff}/S)_{Zar})$ から
+$\Sh((\Sch/S)_{Zar})$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+特殊余連続函手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入されている。
+したがって Sites, Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を
+確認すればよい。包含函手を
+$u : (\textit{Aff}/S)_{Zar} \to (\Sch/S)_{Zar}$ と書く。
+余連続であるとは、$T$ がアフィンであるような $T/S$ の任意の Zariski 被覆が、
+$T$ の標準 Zariski 被覆によって細分されることにほかならない。これは
+Lemma \ref{topologies-lemma-zariski-affine} の内容であり、(1) が成り立つ。
+標準 Zariski 被覆は Zariski 被覆なので、$u$ は連続であり、(2) が成り立つ。
+(3) と (4) は $u$ が充満忠実であることから直ちに従う。最後に、すべての
+スキームがアフィン開被覆をもつことから条件 (5) が従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-alternative-zariski}
+$S$ をスキームとし、$\Sch_{Zar}$ を $S$ を含む大 Zariski サイトとする。
+函手 $S_{affine, Zar} \to S_{Zar}$ は特殊余連続函手である。したがって、
+$\Sh(S_{affine, Zar})$ から $\Sh(S_{Zar})$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：Lemma \ref{topologies-lemma-affine-big-site-Zariski} の証明と比較せよ。
+\end{proof}
+
+\noindent
+小 Zariski サイト上の層という概念が、$S$ 上の層という通常の概念に
+対応することを確認しよう。
+
+\begin{lemma}
+\label{topologies-lemma-Zariski-usual}
+$S_{Zar}$ 上の層の圏は、$S$ の基礎位相空間上の層の圏と同値である。
+\end{lemma}
+
+\begin{proof}
+$S_{Zar}$ の任意の対象 $U/S$ に対し、射 $U \to S$ はある開部分スキーム
+への同型であることを繰り返し用いる。$\mathcal{F}$ を $S$ 上の層とする。
+このとき
+$\mathcal{F}'(U/S) = \mathcal{F}(\Im(U \to S))$
+という規則により $S_{Zar}$ 上の層を定義する。
+逆に、各開部分スキーム $U \subset S$ に対して
+$\Im(U' \to S) = U$ を満たす対象 $U'/S \in \Ob(S_{Zar})$ を選ぶ
+（ここで Sets, Lemma \ref{sets-lemma-what-is-in-it} を用いる）。
+$S_{Zar}$ 上の層 $\mathcal{G}$ が与えられたとき、
+$\mathcal{G}'(U) = \mathcal{G}(U'/S)$ と置いて $S$ 上の層を定義する。
+$\mathcal{G}'$ が層であることを示すには、任意の開被覆
+$U = \bigcup_{i \in I} U_i$ に対して、Sets, Lemma
+\ref{sets-lemma-coverings-site} により被覆 $\{U_i \to U\}_{i \in I}$ が
+$S_{Zar}$ におけるある被覆 $\{U_j' \to U'\}_{j \in J}$ と
+組合せ論的に同値であること、および Sites, Lemma
+\ref{sites-lemma-tautological-same-sheaf} を用いる。詳細は省略する。
+\end{proof}
+
+\noindent
+以後、$S_{Zar}$ 上の層と $S$ 上の層とを区別しない。この二つの概念を
+行き来する際には、常に上の補題の証明で与えた手順を用いる。
+次に、これらのサイトに付随するトポスの間の関係をいくつか確立する。
+
+\begin{lemma}
+\label{topologies-lemma-put-in-T}
+$\Sch_{Zar}$ を大 Zariski サイトとし、
+$f : T \to S$ を $\Sch_{Zar}$ における射とする。
+函手 $T_{Zar} \to (\Sch/S)_{Zar}$ は余連続であり、トポスの射
+$$
+i_f :
+\Sh(T_{Zar})
+\longrightarrow
+\Sh((\Sch/S)_{Zar})
+$$
+を誘導する。$(\Sch/S)_{Zar}$ 上の層 $\mathcal{G}$ に対して
+$(i_f^{-1}\mathcal{G})(U/T) = \mathcal{G}(U/S)$ という公式が成り立つ。
+さらに、函手 $i_f^{-1}$ は左随伴 $i_{f, !}$ をもち、これは
+ファイバー積および等化子と可換である。
+\end{lemma}
+
+\begin{proof}
+この函手を $u : T_{Zar} \to (\Sch/S)_{Zar}$ と書く。すなわち、
+$T_{Zar}$ の対象に対応する開埋め込み $j : U \to T$ に対して
+$u(U \to T) = (f \circ j : U \to S)$ と置く。この函手はファイバー積と
+可換である（Lemma \ref{topologies-lemma-fibre-products-Zariski} 参照）。さらに、
+$T_{Zar}$ は等化子をもち（始域と終域が同じ任意の二射は一致するため）、
+$u$ はそれらとも可換である。この函手が余連続であることは明らかである。
+また $u$ は被覆を被覆に移し、ファイバー積と可換なので連続でもある。
+したがって補題は Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-at-the-bottom}
+$S$ をスキームとし、$\Sch_{Zar}$ を $S$ を含む大 Zariski サイトとする。
+包含函手 $S_{Zar} \to (\Sch/S)_{Zar}$ は Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。したがってサイトの射
+$$
+\pi_S : (\Sch/S)_{Zar} \longrightarrow S_{Zar}
+$$
+およびトポスの射
+$$
+i_S : \Sh(S_{Zar}) \longrightarrow \Sh((\Sch/S)_{Zar})
+$$
+を誘導し、$\pi_S \circ i_S = \text{id}$ である。さらに
+$i_S = i_{\text{id}_S}$ であり、ここで $i_{\text{id}_S}$ は Lemma
+\ref{topologies-lemma-put-in-T} のものである。特に、
+函手 $i_S^{-1} = \pi_{S, *}$ は
+$i_S^{-1}(\mathcal{G})(U/S) = \mathcal{G}(U/S)$ という規則で記述される。
+\end{lemma}
+
+\begin{proof}
+この場合、函手 $u : S_{Zar} \to (\Sch/S)_{Zar}$ は、上の Lemma
+\ref{topologies-lemma-put-in-T} の証明で見た性質に加えて充満忠実であり、終対象を
+終対象に移す。これで補題が従う。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-restriction-small-zariski}
+Lemma \ref{topologies-lemma-at-the-bottom} の状況で、函手
+$i_S^{-1} = \pi_{S, *}$ をしばしば{\it 小 Zariski サイトへの制限}と呼ぶ。
+大 Zariski サイト上の層 $\mathcal{F}$ に対し、この制限を
+$\mathcal{F}|_{S_{Zar}}$ と書く。
+\end{definition}
+
+\noindent
+この記法のもとで、大サイト上の層 $\mathcal{F}$ と小サイト上の層
+$\mathcal{G}$ に対し
+\begin{align*}
+\Mor_{\Sh(S_{Zar})}(\mathcal{F}|_{S_{Zar}}, \mathcal{G})
+& =
+\Mor_{\Sh((\Sch/S)_{Zar})}(\mathcal{F},
+i_{S, *}\mathcal{G}) \\
+\Mor_{\Sh(S_{Zar})}(\mathcal{G}, \mathcal{F}|_{S_{Zar}})
+& =
+\Mor_{\Sh((\Sch/S)_{Zar})}(\pi_S^{-1}\mathcal{G},
+\mathcal{F})
+\end{align*}
+が成り立つ。さらに
+$(i_{S, *}\mathcal{G})|_{S_{Zar}} = \mathcal{G}$ および
+$(\pi_S^{-1}\mathcal{G})|_{S_{Zar}} = \mathcal{G}$ である。
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big}
+$\Sch_{Zar}$ を大 Zariski サイトとし、
+$f : T \to S$ を $\Sch_{Zar}$ における射とする。函手
+$$
+u : (\Sch/T)_{Zar} \longrightarrow (\Sch/S)_{Zar},
+\quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v : (\Sch/S)_{Zar} \longrightarrow (\Sch/T)_{Zar},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_{Zar})
+\longrightarrow
+\Sh((\Sch/S)_{Zar})
+$$
+を誘導する。また
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ が成り立つ。
+さらに $f_{big}^{-1}$ は左随伴 $f_{big!}$ をもち、これはファイバー積と
+等化子に可換である。
+\end{lemma}
+
+\begin{proof}
+函手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である
+（詳細は省略する。Lemma \ref{topologies-lemma-put-in-T} の証明と比較せよ）。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在が得られる。また、$U/T$ と $V/S$ に対して期待どおり
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ であるから、函手 $v$ は
+右随伴である。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用すれば、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-small}
+$\Sch_{Zar}$ を大 Zariski サイトとし、
+$f : T \to S$ を $\Sch_{Zar}$ における射とする。
+\begin{enumerate}
+\item Lemma \ref{topologies-lemma-put-in-T} の $i_f$ と Lemma
+\ref{topologies-lemma-at-the-bottom} の $i_T$ に対して
+$i_f = f_{big} \circ i_T$ である。
+\item 函手 $S_{Zar} \to T_{Zar}$,
+$(U \to S) \mapsto (U \times_S T \to T)$ は連続であり、サイトの射
+$$
+f_{small} :
+T_{Zar}
+\longrightarrow
+S_{Zar}
+$$
+を誘導する。Lemma \ref{topologies-lemma-Zariski-usual} によって $T_{Zar}$ 上、
+それぞれ $S_{Zar}$ 上の層を $T$ 上、それぞれ $S$ 上の層と同一視すると、
+函手 $f_{small}^{-1}$ および $f_{small, *}$ は通常の $f^{-1}$ および
+$f_*$ と一致する。
+\item サイトの射の可換図式
+$$
+\xymatrix{
+T_{Zar} \ar[d]_{f_{small}} &
+(\Sch/T)_{Zar} \ar[d]^{f_{big}} \ar[l]^{\pi_T} \\
+S_{Zar} &
+(\Sch/S)_{Zar} \ar[l]_{\pi_S}
+}
+$$
+があり、トポスの射として
+$f_{small} \circ \pi_T = \pi_S \circ f_{big}$ である。
+\item $f_{small} = \pi_S \circ f_{big} \circ i_T = \pi_S \circ i_f$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+等式 $i_f = f_{big} \circ i_T$ は
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$ から従うが、後者は上での
+これらの函手の記述から明らかである。これで (1) を得る。
+
+\medskip\noindent
+(2) については Sites, Example \ref{sites-example-continuous-map} を見よ。
+
+\medskip\noindent
+(3) は、$\pi_S$ と $\pi_T$ が包含函手で与えられ、$f_{small}$ と
+$f_{big}$ が基底変換函手 $U \mapsto U \times_S T$ で与えられることから従う。
+
+\medskip\noindent
+(4) は (3) の両辺に右から $i_T$ を合成すれば従う。
+\end{proof}
+
+\noindent
+この補題の状況で、Definition
+\ref{topologies-definition-restriction-small-zariski} の用語を用いると、$T$ の
+大 Zariski サイト上の層 $\mathcal{F}$ に対して
+$$
+(f_{big, *}\mathcal{F})|_{S_{Zar}} =
+f_{small, *}(\mathcal{F}|_{T_{Zar}}),
+$$
+が成り立つ。この等式は補題のサイトの図式の可換性から明らかである。
+実際、$T$、それぞれ $S$ の小 Zariski サイトへの制限は
+$\pi_{T, *}$、それぞれ $\pi_{S, *}$ で与えられる。引き戻しと制限を
+含む同様の公式は成り立たない。
+
+\begin{lemma}
+\label{topologies-lemma-composition}
+$X$, $Y$, $Z$ を $(\Sch/S)_{Zar}$ におけるスキームとし、
+$f : X \to Y$, $g : Y \to Z$ を射とすると、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$ および
+$g_{small} \circ f_{small} = (g \circ f)_{small}$.
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{topologies-lemma-morphism-big} にある大サイト上の函手の
+順像と逆像の簡明な記述から従う。小サイト上の函手については、Lemma
+\ref{topologies-lemma-Zariski-usual} の同一視のもとで Sheaves, Lemma
+\ref{sheaves-lemma-pushforward-composition} がこれを与える。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-small-cartesian-diagram}
+$\Sch_{Zar}$ を大 Zariski サイトとする。$\Sch_{Zar}$ における
+Cartesian 図式
+$$
+\xymatrix{
+T' \ar[r]_{g'} \ar[d]_{f'} & T \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+を考える。このとき
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$
+かつ $g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$
+である。
+\end{lemma}
+
+\begin{proof}
+図式は Cartesian なので、$U'/S'$ に対して
+$U' \times_{S'} T' = U' \times_S T$ である。したがって
+$i_g^{-1} \circ f_{big, *}$ と $f'_{small, *} \circ (i_{g'})^{-1}$ はともに、
+$(\Sch/T)_{Zar}$ 上の層 $\mathcal{F}$ を $S'_{Zar}$ 上の層
+$U' \mapsto \mathcal{F}(U' \times_{S'} T')$ に移す（Lemmas
+\ref{topologies-lemma-put-in-T} および \ref{topologies-lemma-morphism-big-small} を用いる）。
+第二の等式も同様に証明できるし、より一般的な Sites, Lemma
+\ref{sites-lemma-localize-morphism} から導くこともできる。
+\end{proof}
+
+\noindent
+$S$ の大 Zariski サイト上の層は、$S$ 上のすべてのスキームに置かれた
+「通常の」層の集まりと考えることができる。
+
+\begin{lemma}
+\label{topologies-lemma-characterize-sheaf-big}
+$S$ を大 Zariski サイト $\Sch_{Zar}$ に含まれるスキームとする。
+大 Zariski サイト $(\Sch/S)_{Zar}$ 上の層 $\mathcal{F}$ は、次のデータで
+与えられる：
+\begin{enumerate}
+\item 各 $T/S \in \Ob((\Sch/S)_{Zar})$ に対する $T$ 上の層
+$\mathcal{F}_T$、
+\item $(\Sch/S)_{Zar}$ における各 $f : T' \to T$ に対する写像
+$c_f : f^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$.
+\end{enumerate}
+これらのデータには次の条件を課す：
+\begin{enumerate}
+\item[(a)] $(\Sch/S)_{Zar}$ における任意の $f : T' \to T$ と
+$g : T'' \to T'$ に対し、合成 $c_g \circ g^{-1}c_f$ は
+$c_{f \circ g}$ に等しい；
+\item[(b)] $(\Sch/S)_{Zar}$ における $f : T' \to T$ が開埋め込みならば、
+$c_f$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この補題は Sites, Remark
+\ref{sites-remark-variant-glue-sheaves-absolute} で論じた純粋に層論的な
+主張から従う。ここでは直接の証明も与える。
+
+\medskip\noindent
+$\Sh((\Sch/S)_{Zar})$ 上の層 $\mathcal{F}$ が与えられたとき、構造射を
+$p : T \to S$ として $\mathcal{F}_T = i_p^{-1}\mathcal{F}$ と置く。
+任意の開集合 $U \subset T$ と、像が $U$ である $(\Sch/T)_{Zar}$ 内の
+開埋め込み $U' \to T$ に対して
+$\mathcal{F}_T(U) = \mathcal{F}(U'/S)$ であることに注意する（Lemmas
+\ref{topologies-lemma-Zariski-usual} および \ref{topologies-lemma-put-in-T} 参照）。したがって、
+$S$ 上の射 $f : T' \to T$ と $U, U' \to T$ が与えられると、標準写像
+$\mathcal{F}_T(U) = \mathcal{F}(U'/S) \to \mathcal{F}(U'\times_T T'/S)
+= \mathcal{F}_{T'}(f^{-1}(U))$ を得る。ここで中央の写像は、$S$ 上の射
+$U' \times_T T' \to U'$ に関する $\mathcal{F}$ の制限写像である。
+これらの写像の集まりは制限と両立するので、$\mathcal{F}_T$ から
+$\mathcal{F}_{T'}$ への $f$-写像 $c_f$ を定める。Sheaves, Definition
+\ref{sheaves-definition-f-map} とその周辺の議論を見よ。$\mathcal{F}$ の
+制限写像の合成も制限写像なので、$c_{f \circ g}$ が $c_f$ と $c_g$ の
+合成であることは明らかである。
+
+\medskip\noindent
+逆に、補題のような系 $(\mathcal{F}_T, c_f)$ が与えられたとき、単に
+$\mathcal{F}(T/S) = \mathcal{F}_T(T)$ と置くことで
+$\Sh((\Sch/S)_{Zar})$ 上の前層 $\mathcal{F}$ を定義できる。制限写像は、
+$f : T' \to T$ と $s \in \mathcal{F}(T)$ に対して引き戻し $f^*(s)$ を
+$c_f(s)$ と置く（ここでも $c_f$ を $f$-写像とみなす）。$c_f$ に関する
+条件により、引き戻しは必要な函手性を満たす。これが層であることの確認は
+省略する。こうして定義した二つの構成が互いに逆であることは明らかである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{エタール位相}
+\label{topologies-section-etale}
+
+\noindent
+$S$ をスキームとする。$S$ 上のスキームの圏にエタール位相を定義したい。
+一般的な方針に従い、まずエタール被覆の概念を導入する。
+
+\begin{definition}
+\label{topologies-definition-etale-covering}
+$T$ をスキームとする。$T$ の{\it エタール被覆}とは、各 $f_i$ が
+エタールであり、かつ $T = \bigcup f_i(T_i)$ を満たすスキームの射の族
+$\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-etale}
+任意の Zariski 被覆はエタール被覆である。
+\end{lemma}
+
+\begin{proof}
+これは定義と、開埋め込みがエタール射であるという事実から明らかである。
+Morphisms, Lemma \ref{morphisms-lemma-open-immersion-etale} を見よ。
+\end{proof}
+
+\noindent
+次に、この概念が Sites, Definition \ref{sites-definition-site} の条件を
+満たすことを示す。
+
+\begin{lemma}
+\label{topologies-lemma-etale}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ のエタール被覆である。
+\item $\{T_i \to T\}_{i\in I}$ がエタール被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ がエタール被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ はエタール被覆である。
+\item $\{T_i \to T\}_{i\in I}$ がエタール被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は
+エタール被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-etale-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の
+エタール被覆とする。このとき、$\{T_i \to T\}_{i \in I}$ の細分であり、
+各 $U_j$ がアフィンスキームであるようなエタール被覆
+$\{U_j \to T\}_{j = 1, \ldots, m}$ が存在する。さらに、各 $U_j$ は
+いずれかの $T_i$ のアフィン開集合として選べる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+そこで、対応するアフィンの標準被覆を次のように定義する。
+
+\begin{definition}
+\label{topologies-definition-standard-etale}
+$T$ をアフィンスキームとする。$T$ の{\it 標準エタール被覆}とは、各
+$U_j$ がアフィンで $T$ 上エタールであり、かつ
+$T = \bigcup f_j(U_j)$ を満たす族
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$ のことである。
+\end{definition}
+
+\noindent
+上の定義では、射 $f_j$ が標準エタールであるとは{\bf 仮定しない}。
+仮定してしまうと、たとえば Algebra, Lemma
+\ref{algebra-lemma-standard-etale} (4) のために、標準エタール被覆は
+$\textit{Aff}/S$ 上のサイトを定めないからである。一方、アフィンの間の
+エタール射は自動的に標準平滑である。Algebra, Lemma
+\ref{algebra-lemma-etale-standard-smooth} を見よ。したがって標準エタール被覆は
+標準平滑被覆であり、かつ標準 syntomic 被覆でもある。
+
+\begin{definition}
+\label{topologies-definition-big-etale-site}
+{\it 大エタールサイト}とは、次のように構成される Sites, Definition
+\ref{sites-definition-site} の意味での任意のサイト $\Sch_\etale$ である：
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、それらのスキームのエタール被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item 台となる圏として、集合 $S_0$ から出発して Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成した任意の圏
+$\Sch_\alpha$ を取る。
+\item 圏 $\Sch_\alpha$、エタール被覆の類、および上で選んだ集合
+$\text{Cov}_0$ から出発して、Sets, Lemma
+\ref{sets-lemma-coverings-site} のような被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大サイトの定義の動機と説明については、Definition
+\ref{topologies-definition-big-zariski-site} に続く注意を見よ。
+
+\medskip\noindent
+スキーム $S$ の大エタールサイトの導入を続ける前に、大エタールサイト
+$\Sch_\etale$ 上の位相は、ある意味で全スキームの圏上のエタール位相から
+誘導されることを指摘しておく。
+
+\begin{lemma}
+\label{topologies-lemma-etale-induced}
+Definition \ref{topologies-definition-big-etale-site} のような大エタールサイト
+$\Sch_\etale$ と $T \in \Ob(\Sch_\etale)$ を取り、
+$\{T_i \to T\}_{i \in I}$ を $T$ の任意のエタール被覆とする。
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ を細分する、サイト $\Sch_\etale$ における
+$T$ の被覆 $\{U_j \to T\}_{j \in J}$ が存在する。
+\item $\{T_i \to T\}_{i \in I}$ が標準エタール被覆ならば、これは
+$\Sch_\etale$ におけるある被覆と自明同値である。
+\item $\{T_i \to T\}_{i \in I}$ が Zariski 被覆ならば、これは
+$\Sch_\etale$ におけるある被覆と自明同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+各 $i$ に対し、各 $T_{ij}$ が $T$ のあるアフィン開部分スキームに写るような
+アフィン開被覆 $T_i = \bigcup_{j \in J_i} T_{ij}$ を選ぶ。Lemma
+\ref{topologies-lemma-etale} により、細分
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$ も $T$ のエタール被覆である。
+したがって、各 $T_i$ はアフィンで、$T$ のあるアフィン開集合 $W_i$ に
+写ると仮定してよい。Sets, Lemma \ref{sets-lemma-what-is-in-it} を適用すると、
+$W_i$ は $\Sch_\etale$ のある対象と同型である。すると $W_i$ 上有限型の
+スキーム $T_i$ は、Sets, Lemma \ref{sets-lemma-what-is-in-it} を
+もう一度適用することにより
+$\Sch_\etale$ のある対象 $V_i$ と同型である。被覆
+$\{V_i \to T\}_{i \in I}$ は $\{T_i \to T\}_{i \in I}$ を細分する
+（両者は同型だからである）。さらに Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により、$\{V_i \to T\}_{i \in I}$ はサイト
+$\Sch_\etale$ における $T$ のある被覆 $\{U_j \to T\}_{j \in J}$ と
+組合せ論的に同値である。被覆 $\{U_j \to T\}_{j \in J}$ は (1) の
+細分である。(2), (3) の状況では、Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により各スキーム $T_i$ は
+$\Sch_\etale$ の対象と同型であり、Sets, Lemma
+\ref{sets-lemma-coverings-site} をもう一度適用すれば求める結論を得る。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-small-etale}
+$S$ をスキームとし、$\Sch_\etale$ を $S$ を含む大エタールサイトとする。
+\begin{enumerate}
+\item $S$ の{\it 大エタールサイト} $(\Sch/S)_\etale$ とは、Sites,
+Section \ref{sites-section-localize} で導入したサイト
+$\Sch_\etale/S$ のことである。
+\item $S$ の{\it 小エタールサイト} $S_\etale$ とは、射 $U \to S$ が
+エタールであるような $U/S$ を対象とする $(\Sch/S)_\etale$ の充満部分圏で
+ある。$S_\etale$ の被覆とは、$U \in \Ob(S_\etale)$ をもつ
+$(\Sch/S)_\etale$ の任意の被覆 $\{U_i \to U\}$ のことである。
+\item $S$ の{\it 大アフィンエタールサイト} $(\textit{Aff}/S)_\etale$ とは、
+$U$ がアフィンスキームであるような $U/S$ を対象とする
+$(\Sch/S)_\etale$ の充満部分圏である。$(\textit{Aff}/S)_\etale$ の被覆とは、
+$U \in \Ob((\textit{Aff}/S)_\etale)$ をもち、標準エタール被覆である
+$(\Sch/S)_\etale$ の任意の被覆 $\{U_i \to U\}$ のことである。
+\item $S$ の{\it 小アフィンエタールサイト} $S_{affine, \etale}$ とは、
+$U$ がアフィンスキームであるような $U/S$ を対象とする $S_\etale$ の
+充満部分圏である。$S_{affine, \etale}$ の被覆とは、
+$U \in \Ob(S_{affine, \etale})$ をもち、標準エタール被覆である
+$S_\etale$ の任意の被覆 $\{U_i \to U\}$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大アフィンエタールサイト、小エタールサイト、および小アフィンエタールサイトが
+実際にサイトであることは直ちには明らかでない。これを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-verify-site-etale}
+$S$ をスキームとし、$\Sch_\etale$ を $S$ を含む大エタールサイトとする。
+$S_\etale$, $(\textit{Aff}/S)_\etale$, $S_{affine, \etale}$ はサイトである。
+\end{lemma}
+
+\begin{proof}
+$S_\etale$ がサイトであることを示す。これは、終域を固定した射の族の
+集合が指定された圏である。したがって Sites, Definition
+\ref{sites-definition-site} の性質 (1), (2), (3) を示せばよい。
+$(\Sch/S)_\etale$ はサイトなので、$U \in \Ob(S_\etale)$ をもつ
+$(\Sch/S)_\etale$ の任意の被覆 $\{U_i \to U\}$ に対して
+$U_i \in \Ob(S_\etale)$ であることを示せば十分である。これは、エタール射の
+合成がエタール射であることと定義から従う。
+
+\medskip\noindent
+次に $(\textit{Aff}/S)_\etale$ がサイトであることを示す。上と同じ議論により、
+アフィンの標準エタール被覆の集まりが Sites, Definition
+\ref{sites-definition-site} の性質 (1), (2), (3) を満たすことを示せばよい。
+これは明らかである。たとえば、標準エタール被覆
+$\{T_i \to T\}_{i\in I}$ と、各 $i$ に対する標準エタール被覆
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が与えられると、
+$\bigcup_{i\in I} J_i$ は有限で各 $T_{ij}$ はアフィンなので、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は標準エタール被覆である。
+
+\medskip\noindent
+$S_{affine, \'etale}$ がサイトであることの証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fibre-products-etale}
+$S$ をスキームとし、$\Sch_\etale$ を $S$ を含む大エタールサイトとする。
+サイト $\Sch_\etale$, $(\Sch/S)_\etale$, $S_\etale$,
+$(\textit{Aff}/S)_\etale$, $S_{affine, \etale}$ の台となる圏は
+ファイバー積をもつ。いずれの場合も、全スキームの圏 $\Sch$ への明らかな
+函手はファイバー積を取る操作と可換である。圏 $(\Sch/S)_\etale$ と
+$S_\etale$ はともに終対象、すなわち $S/S$ をもつ。
+\end{lemma}
+
+\begin{proof}
+$\Sch_\etale$ については構成から成り立つ。Sets, Lemma
+\ref{sets-lemma-what-is-in-it} を見よ。$U, V, W \in \Ob(\Sch_\etale)$ で、
+スキームの射 $U \to S$, $V \to U$, $W \to U$ があるとする。
+$\Sch_\etale$ におけるファイバー積 $V \times_U W$ は $\Sch$ における
+ファイバー積であり、$S$ 上の全スキームの圏では $U/S$ 上での $V/S$ と
+$W/S$ のファイバー積である。したがって $(\Sch/S)_\etale$ における
+ファイバー積でもある。これで $(\Sch/S)_\etale$ の場合が示された。
+$U \to S$, $V \to U$, $W \to U$ がエタールならば
+$V \times_U W \to S$ もエタールなので、$S_\etale$ の場合を得る。
+$U, V, W$ がアフィンならば $V \times_U W$ もアフィンなので、
+$(\textit{Aff}/S)_\etale$ と $S_{affine, \etale}$ の場合も得る。
+\end{proof}
+
+\noindent
+次に、大アフィンサイト、ならびに小アフィンサイトが、それぞれ大サイト、
+ならびに小サイトと同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-affine-big-site-etale}
+$S$ をスキームとし、$\Sch_\etale$ を $S$ を含む大エタールサイトとする。函手
+$(\textit{Aff}/S)_\etale \to (\Sch/S)_\etale$
+は特殊余連続であり、トポスの同値
+$\Sh((\textit{Aff}/S)_\etale)$ から
+$\Sh((\Sch/S)_\etale)$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+特殊余連続函手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入した。したがって
+Sites, Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を確認する必要がある。
+包含函手を $u : (\textit{Aff}/S)_\etale \to (\Sch/S)_\etale$ と書く。
+余連続性は、$T$ がアフィンである任意の $T/S$ のエタール被覆が、$T$ の
+標準エタール被覆で細分できることにほかならない。これは Lemma
+\ref{topologies-lemma-etale-affine} の内容なので (1) が成り立つ。標準エタール被覆は
+エタール被覆なので $u$ は連続であり、(2) も成り立つ。(3), (4) は
+$u$ が充満忠実であることから直ちに従う。最後に (5) は、任意のスキームが
+アフィン開被覆をもつことから従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-alternative}
+$S$ をスキームとし、$\Sch_\etale$ を $S$ を含む大エタールサイトとする。
+函手 $S_{affine, \etale} \to S_\etale$ は特殊余連続であり、
+$\Sh(S_{affine, \etale})$ から $\Sh(S_\etale)$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：Lemma \ref{topologies-lemma-affine-big-site-etale} の証明と比較せよ。
+\end{proof}
+
+\noindent
+次に、これらのサイトに付随するトポスの間の関係をいくつか確立する。
+
+\begin{lemma}
+\label{topologies-lemma-put-in-T-etale}
+$\Sch_\etale$ を大エタールサイトとし、
+$f : T \to S$ を $\Sch_\etale$ における射とする。
+函手 $T_\etale \to (\Sch/S)_\etale$ は余連続であり、トポスの射
+$$
+i_f :
+\Sh(T_\etale)
+\longrightarrow
+\Sh((\Sch/S)_\etale)
+$$
+を誘導する。$(\Sch/S)_\etale$ 上の層 $\mathcal{G}$ に対して
+$(i_f^{-1}\mathcal{G})(U/T) = \mathcal{G}(U/S)$ という公式が成り立つ。
+さらに、函手 $i_f^{-1}$ は左随伴 $i_{f, !}$ をもち、これは
+ファイバー積および等化子と可換である。
+\end{lemma}
+
+\begin{proof}
+この函手を $u : T_\etale \to (\Sch/S)_\etale$ と書く。すなわち、
+$T_\etale$ の対象に対応するエタール射 $j : U \to T$ に対して
+$u(U \to T) = (f \circ j : U \to S)$ と置く。この函手はファイバー積と
+可換である（Lemma \ref{topologies-lemma-fibre-products-etale} 参照）。
+$a, b : U \to V$ を $T_\etale$ における二つの射とする。このとき、
+（スキームの圏における）$a$ と $b$ の等化子は
+$$
+V \times_{\Delta_{V/T}, V \times_T V, (a, b)} U
+$$
+である。これは $T$ 上エタールなスキームのファイバー積なので、$T$ 上
+エタールである。したがって $T_\etale$ は等化子をもち、$u$ はそれらと
+可換である。この函手が余連続であることは明らかである。また $u$ は被覆を
+被覆に移し、ファイバー積と可換なので連続でもある。よって補題は Sites,
+Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-at-the-bottom-etale}
+$S$ をスキームとし、$\Sch_\etale$ を $S$ を含む大エタールサイトとする。
+包含函手 $S_\etale \to (\Sch/S)_\etale$ は Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。したがってサイトの射
+$$
+\pi_S : (\Sch/S)_\etale \longrightarrow S_\etale
+$$
+およびトポスの射
+$$
+i_S : \Sh(S_\etale) \longrightarrow \Sh((\Sch/S)_\etale)
+$$
+を誘導し、$\pi_S \circ i_S = \text{id}$ である。さらに
+$i_S = i_{\text{id}_S}$ であり、ここで $i_{\text{id}_S}$ は Lemma
+\ref{topologies-lemma-put-in-T-etale} のものである。
+特に、函手 $i_S^{-1} = \pi_{S, *}$ は
+$i_S^{-1}(\mathcal{G})(U/S) = \mathcal{G}(U/S)$ という規則で記述される。
+\end{lemma}
+
+\begin{proof}
+この場合、函手 $u : S_\etale \to (\Sch/S)_\etale$ は、上の Lemma
+\ref{topologies-lemma-put-in-T-etale} の証明で見た性質に加えて充満忠実であり、終対象を
+終対象に移す。補題は Sites, Lemma \ref{sites-lemma-bigger-site} から従う。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-restriction-small-etale}
+Lemma \ref{topologies-lemma-at-the-bottom-etale} の状況で、函手
+$i_S^{-1} = \pi_{S, *}$ をしばしば{\it 小エタールサイトへの制限}と呼ぶ。
+大エタールサイト上の層 $\mathcal{F}$ に対し、この制限を
+$\mathcal{F}|_{S_\etale}$ と書く。
+\end{definition}
+
+\noindent
+この記法のもとで、大サイト上の層 $\mathcal{F}$ と小サイト上の層
+$\mathcal{G}$ に対し
+\begin{align*}
+\Mor_{\Sh(S_\etale)}(
+\mathcal{F}|_{S_\etale},
+\mathcal{G})
+& =
+\Mor_{\Sh((\Sch/S)_\etale)}(
+\mathcal{F},
+i_{S, *}\mathcal{G}) \\
+\Mor_{\Sh(S_\etale)}(
+\mathcal{G},
+\mathcal{F}|_{S_\etale})
+& =
+\Mor_{\Sh((\Sch/S)_\etale)}(
+\pi_S^{-1}\mathcal{G},
+\mathcal{F})
+\end{align*}
+が成り立つ。さらに $(i_{S, *}\mathcal{G})|_{S_\etale} = \mathcal{G}$ および
+$(\pi_S^{-1}\mathcal{G})|_{S_\etale} = \mathcal{G}$ である。
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-etale}
+$\Sch_\etale$ を大エタールサイトとし、
+$f : T \to S$ を $\Sch_\etale$ における射とする。函手
+$$
+u :
+(\Sch/T)_\etale
+\longrightarrow
+(\Sch/S)_\etale,
+\quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v :
+(\Sch/S)_\etale
+\longrightarrow
+(\Sch/T)_\etale,
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_\etale)
+\longrightarrow
+\Sh((\Sch/S)_\etale)
+$$
+を誘導する。また
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ が成り立つ。
+さらに $f_{big}^{-1}$ は左随伴 $f_{big!}$ をもち、これはファイバー積と
+等化子に可換である。
+\end{lemma}
+
+\begin{proof}
+函手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である
+（詳細は省略する。Lemma \ref{topologies-lemma-put-in-T-etale} の証明と比較せよ）。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在が得られる。また、$U/T$ と $V/S$ に対して
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ であるから、函手 $v$ は
+右随伴である。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用すれば、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-small-etale}
+$\Sch_\etale$ を大エタールサイトとし、
+$f : T \to S$ を $\Sch_\etale$ における射とする。
+\begin{enumerate}
+\item Lemma \ref{topologies-lemma-put-in-T-etale} の $i_f$ と Lemma
+\ref{topologies-lemma-at-the-bottom-etale} の $i_T$ に対して
+$i_f = f_{big} \circ i_T$ である。
+\item 函手 $S_\etale \to T_\etale$,
+$(U \to S) \mapsto (U \times_S T \to T)$ は連続であり、サイトの射
+$$
+f_{small} : T_\etale \longrightarrow S_\etale
+$$
+を誘導する。また
+$f_{small, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ である。
+\item サイトの射の可換図式
+$$
+\xymatrix{
+T_\etale \ar[d]_{f_{small}} &
+(\Sch/T)_\etale \ar[d]^{f_{big}} \ar[l]^{\pi_T}\\
+S_\etale &
+(\Sch/S)_\etale \ar[l]_{\pi_S}
+}
+$$
+があり、トポスの射として
+$f_{small} \circ \pi_T = \pi_S \circ f_{big}$ である。
+\item $f_{small} = \pi_S \circ f_{big} \circ i_T = \pi_S \circ i_f$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+等式 $i_f = f_{big} \circ i_T$ は
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$ から従うが、後者は上での
+これらの函手の記述から明らかである。これで (1) を得る。
+
+\medskip\noindent
+函手
+$u :
+S_\etale
+\to
+T_\etale$, $u(U \to S) = (U \times_S T \to T)$
+は被覆を被覆に移し、ファイバー積と可換である。Lemma
+\ref{topologies-lemma-etale} (3) および \ref{topologies-lemma-fibre-products-etale} を見よ。
+さらに $S_\etale$, $T_\etale$ はともに終対象、すなわち $S/S$, $T/T$ を
+もち、$u(S/S) = T/T$ である。したがって Sites, Proposition
+\ref{sites-proposition-get-morphism} により、函手 $u$ はサイトの射
+$T_\etale \to S_\etale$ に対応する。これはさらにトポスの射を与える。
+Sites, Lemma \ref{sites-lemma-morphism-sites-topoi} を見よ。順像の記述は
+これらの参照から明らかである。
+
+\medskip\noindent
+(3) は、$\pi_S$ と $\pi_T$ が包含函手で与えられ、$f_{small}$ と
+$f_{big}$ が基底変換函手 $U \mapsto U \times_S T$ で与えられることから従う。
+
+\medskip\noindent
+(4) は (3) の両辺に右から $i_T$ を合成すれば従う。
+\end{proof}
+
+\noindent
+この補題の状況で、Definition \ref{topologies-definition-restriction-small-etale} の
+用語を用いると、$T$ の大エタールサイト上の層 $\mathcal{F}$ に対して
+$$
+(f_{big, *}\mathcal{F})|_{S_\etale} =
+f_{small, *}(\mathcal{F}|_{T_\etale}),
+$$
+が成り立つ。この等式は補題のサイトの図式の可換性から明らかである。
+実際、$T$、それぞれ $S$ の小エタールサイトへの制限は
+$\pi_{T, *}$、それぞれ $\pi_{S, *}$ で与えられる。引き戻しと制限を
+含む同様の公式は成り立たない。
+
+\begin{lemma}
+% P05-EN-CH34-0001
+\label{topologies-lemma-composition-etale}
+$X$, $Y$, $Y$ を $\Sch_\etale$ におけるスキームとし、
+$f : X \to Y$, $g : Y \to Z$ を射とすると、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$ および
+$g_{small} \circ f_{small} = (g \circ f)_{small}$.
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{topologies-lemma-morphism-big-etale} にある大サイト上の函手の
+順像と逆像の簡明な記述から従う。小サイト上の函手については、Lemma
+\ref{topologies-lemma-morphism-big-small-etale} にある順像函手の記述から従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-small-cartesian-diagram-etale}
+$\Sch_\etale$ を大エタールサイトとする。$\Sch_\etale$ における
+Cartesian 図式
+$$
+\xymatrix{
+T' \ar[r]_{g'} \ar[d]_{f'} & T \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+を考える。このとき
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$
+かつ $g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$
+である。
+\end{lemma}
+
+\begin{proof}
+図式は Cartesian なので、$U'/S'$ に対して
+$U' \times_{S'} T' = U' \times_S T$ である。したがって
+$i_g^{-1} \circ f_{big, *}$ と $f'_{small, *} \circ (i_{g'})^{-1}$ はともに、
+$(\Sch/T)_\etale$ 上の層 $\mathcal{F}$ を $S'_\etale$ 上の層
+$U' \mapsto \mathcal{F}(U' \times_{S'} T')$ に移す（Lemmas
+\ref{topologies-lemma-put-in-T-etale} および \ref{topologies-lemma-morphism-big-etale} を用いる）。
+第二の等式も同様に証明できるし、より一般的な Sites, Lemma
+\ref{sites-lemma-localize-morphism} から導くこともできる。
+\end{proof}
+
+\noindent
+$S$ の大エタールサイト上の層は、$S$ 上のすべてのスキームに置かれた
+「通常の」層の集まりと考えることができる。
+
+\begin{lemma}
+\label{topologies-lemma-characterize-sheaf-big-etale}
+$S$ を大エタールサイト $\Sch_\etale$ に含まれるスキームとする。
+大エタールサイト $(\Sch/S)_\etale$ 上の層 $\mathcal{F}$ は、次のデータで
+与えられる：
+\begin{enumerate}
+\item 各 $T/S \in \Ob((\Sch/S)_\etale)$ に対する $T_\etale$ 上の層
+$\mathcal{F}_T$、
+\item $(\Sch/S)_\etale$ における各 $f : T' \to T$ に対する写像
+$c_f : f_{small}^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$.
+\end{enumerate}
+これらのデータには次の条件を課す：
+\begin{enumerate}
+\item[(a)] $(\Sch/S)_\etale$ における任意の $f : T' \to T$ と
+$g : T'' \to T'$ に対し、合成 $c_g \circ g_{small}^{-1}c_f$ は
+$c_{f \circ g}$ に等しい；
+\item[(b)] $(\Sch/S)_\etale$ における $f : T' \to T$ がエタールならば、
+$c_f$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この補題は Sites, Remark
+\ref{sites-remark-variant-glue-sheaves-absolute} で論じた純粋に層論的な
+主張から従う。ここでは直接の証明も与える。
+
+\medskip\noindent
+$\Sh((\Sch/S)_\etale)$ 上の層 $\mathcal{F}$ が与えられたとき、構造射を
+$p : T \to S$ として $\mathcal{F}_T = i_p^{-1}\mathcal{F}$ と置く。
+$T_\etale$ における任意の $U \to T$ に対して
+$\mathcal{F}_T(U) = \mathcal{F}(U/S)$ であることに注意する（Lemma
+\ref{topologies-lemma-put-in-T-etale} 参照）。したがって $S$ 上の射
+$f : T' \to T$ と $U \to T$ が与えられると、標準写像
+$\mathcal{F}_T(U) = \mathcal{F}(U/S) \to \mathcal{F}(U \times_T T'/S)
+= \mathcal{F}_{T'}(U \times_T T')$ を得る。ここで中央の写像は、$S$ 上の射
+$U \times_T T' \to U$ に関する $\mathcal{F}$ の制限写像である。
+これらの写像の集まりは制限と両立するので、写像
+$c'_f : \mathcal{F}_T \to f_{small, *}\mathcal{F}_{T'}$ を定める。ここで
+$u : T_\etale \to T'_\etale$ は $f$ に付随する基底変換函手である。
+$f_{small, *}$ と $f_{small}^{-1}$ の随伴（Sites, Section
+\ref{sites-section-continuous-functors} 参照）により、これは写像
+$c_f : f_{small}^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$ と同じである。
+$\mathcal{F}$ の制限写像の合成も制限写像なので、$c'_{f \circ g}$ は
+$c'_f$ と $f_{small, *}c'_g$ の合成であることが明らかであり、これが
+$c_f$, $c_g$, $c_{f \circ g}$ の間の所望の関係を与える。
+
+\medskip\noindent
+逆に、補題のような系 $(\mathcal{F}_T, c_f)$ が与えられたとき、単に
+$\mathcal{F}(T/S) = \mathcal{F}_T(T)$ と置くことで
+$\Sh((\Sch/S)_\etale)$ 上の前層 $\mathcal{F}$ を定義できる。制限写像は、
+$f : T' \to T$ と $s \in \mathcal{F}(T)$ に対して引き戻し $f^*(s)$ を
+$c_f(s)$ と置く。ここでは再び $c_f$ を写像
+$\mathcal{F}_T \to f_{small, *}\mathcal{F}_{T'}$ とみなす。$c_f$ に関する
+条件により、引き戻しは必要な函手性を満たす。これが層であることの確認は
+省略する。こうして定義した二つの構成が互いに逆であることは明らかである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{平滑位相}
+\label{topologies-section-smooth}
+
+\noindent
+この節では平滑位相を定義する。後で（More on Morphisms, Section
+\ref{more-morphisms-section-etale-over-smooth} 参照）この位相がエタール位相と
+同じトポスを定めることが分かるので、これはやや無駄な作業である。それでも
+定義する意味はあり、ときどき用いられる。
+
+\begin{definition}
+\label{topologies-definition-smooth-covering}
+$T$ をスキームとする。$T$ の{\it 平滑被覆}とは、各 $f_i$ が平滑であり、
+かつ $T = \bigcup f_i(T_i)$ を満たすスキームの射の族
+$\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-etale-smooth}
+任意のエタール被覆は平滑被覆であり、したがって任意の Zariski 被覆も
+平滑被覆である。
+\end{lemma}
+
+\begin{proof}
+これは定義、エタール射が平滑であるという事実（Morphisms, Definition
+\ref{morphisms-definition-etale} 参照）、および Lemma
+\ref{topologies-lemma-zariski-etale} から明らかである。
+\end{proof}
+
+\noindent
+次に、この概念が Sites, Definition \ref{sites-definition-site} の条件を
+満たすことを示す。
+
+\begin{lemma}
+\label{topologies-lemma-smooth}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の平滑被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が平滑被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が平滑被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は平滑被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が平滑被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は平滑被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-smooth-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の平滑被覆と
+する。このとき、$\{T_i \to T\}_{i \in I}$ の細分であり、各 $U_j$ が
+アフィンスキームで、各射 $U_j \to T$ が標準平滑であるような平滑被覆
+$\{U_j \to T\}_{j = 1, \ldots, m}$ が存在する。Morphisms, Definition
+\ref{morphisms-definition-smooth} を見よ。さらに、各 $U_j$ はいずれかの
+$T_i$ のアフィン開集合として選べる。
+\end{lemma}
+
+\begin{proof}
+省略する。ただし Algebra, Lemma \ref{algebra-lemma-smooth-syntomic} を見よ。
+\end{proof}
+
+\noindent
+そこで、対応するアフィンの標準被覆を次のように定義する。
+
+\begin{definition}
+\label{topologies-definition-standard-smooth}
+$T$ をアフィンスキームとする。$T$ の{\it 標準平滑被覆}とは、各 $U_j$ が
+アフィンで、$U_j \to T$ が標準平滑であり、かつ
+$T = \bigcup f_j(U_j)$ を満たす族
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$ のことである。
+\end{definition}
+
+\begin{definition}
+\label{topologies-definition-big-smooth-site}
+{\it 大平滑サイト}とは、次のように構成される Sites, Definition
+\ref{sites-definition-site} の意味での任意のサイト $\Sch_{smooth}$ である：
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、それらのスキームの平滑被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item 台となる圏として、集合 $S_0$ から出発して Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成した任意の圏
+$\Sch_\alpha$ を取る。
+\item 圏 $\Sch_\alpha$、平滑被覆の類、および上で選んだ集合
+$\text{Cov}_0$ から出発して、Sets, Lemma
+\ref{sets-lemma-coverings-site} のような被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大サイトの定義の動機と説明については、Definition
+\ref{topologies-definition-big-zariski-site} に続く注意を見よ。
+
+\medskip\noindent
+スキーム $S$ の大平滑サイトの導入を続ける前に、大平滑サイト
+$\Sch_{smooth}$ 上の位相は、ある意味で全スキームの圏上の平滑位相から
+誘導されることを指摘しておく。
+
+\begin{lemma}
+\label{topologies-lemma-smooth-induced}
+Definition \ref{topologies-definition-big-smooth-site} のような大平滑サイト
+$\Sch_{smooth}$ と $T \in \Ob(\Sch_{smooth})$ を取り、
+$\{T_i \to T\}_{i \in I}$ を $T$ の任意の平滑被覆とする。
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ を細分する、サイト $\Sch_{smooth}$ における
+$T$ の被覆 $\{U_j \to T\}_{j \in J}$ が存在する。
+\item $\{T_i \to T\}_{i \in I}$ が標準平滑被覆ならば、これは
+$\Sch_{smooth}$ におけるある被覆と自明同値である。
+\item $\{T_i \to T\}_{i \in I}$ が Zariski 被覆ならば、これは
+$\Sch_{smooth}$ におけるある被覆と自明同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+各 $i$ に対し、各 $T_{ij}$ が $T$ のあるアフィン開部分スキームに写るような
+アフィン開被覆 $T_i = \bigcup_{j \in J_i} T_{ij}$ を選ぶ。Lemma
+\ref{topologies-lemma-smooth} により、細分
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$ も $T$ の平滑被覆である。
+したがって各 $T_i$ はアフィンで、$T$ のあるアフィン開集合 $W_i$ に写ると
+仮定してよい。Sets, Lemma \ref{sets-lemma-what-is-in-it} を適用すると、
+$W_i$ は $\Sch_{smooth}$ のある対象と同型である。すると $W_i$ 上有限型の
+スキーム $T_i$ は、Sets, Lemma \ref{sets-lemma-what-is-in-it} をもう一度
+適用することにより $\Sch_{smooth}$ のある対象 $V_i$ と同型である。被覆
+$\{V_i \to T\}_{i \in I}$ は $\{T_i \to T\}_{i \in I}$ を細分する
+（両者は同型だからである）。さらに Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により、$\{V_i \to T\}_{i \in I}$ はサイト
+$\Sch_{smooth}$ における $T$ のある被覆 $\{U_j \to T\}_{j \in J}$ と
+組合せ論的に同値である。被覆 $\{U_j \to T\}_{j \in J}$ は (1) の
+細分である。(2), (3) の状況では、Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により各スキーム $T_i$ は
+$\Sch_{smooth}$ の対象と同型であり、Sets, Lemma
+\ref{sets-lemma-coverings-site} をもう一度適用すれば求める結論を得る。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-small-smooth}
+$S$ をスキームとし、$\Sch_{smooth}$ を $S$ を含む大平滑サイトとする。
+\begin{enumerate}
+\item $S$ の{\it 大平滑サイト} $(\Sch/S)_{smooth}$ とは、Sites,
+Section \ref{sites-section-localize} で導入したサイト
+$\Sch_{smooth}/S$ のことである。
+\item $S$ の{\it 大アフィン平滑サイト} $(\textit{Aff}/S)_{smooth}$ とは、
+アフィンな $U/S$ を対象とする $(\Sch/S)_{smooth}$ の充満部分圏である。
+$(\textit{Aff}/S)_{smooth}$ の被覆とは、標準平滑被覆である
+$(\Sch/S)_{smooth}$ の任意の被覆 $\{U_i \to U\}$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+次に、大アフィンサイトが大サイトと同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-affine-big-site-smooth}
+$S$ をスキームとし、$\Sch_{smooth}$ を $S$ を含む大平滑サイトとする。函手
+$(\textit{Aff}/S)_{smooth} \to (\Sch/S)_{smooth}$
+は特殊余連続であり、$\Sh((\textit{Aff}/S)_{smooth})$ から
+$\Sh((\Sch/S)_{smooth})$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+特殊余連続函手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入した。したがって
+Sites, Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を確認する必要がある。
+包含函手を $u : (\textit{Aff}/S)_{smooth} \to (\Sch/S)_{smooth}$ と書く。
+余連続性は、$T$ がアフィンである任意の $T/S$ の平滑被覆が、$T$ の
+標準平滑被覆で細分できることにほかならない。これは Lemma
+\ref{topologies-lemma-smooth-affine} の内容なので (1) が成り立つ。標準平滑被覆は
+平滑被覆なので $u$ は連続であり、(2) も成り立つ。(3), (4) は
+$u$ が充満忠実であることから直ちに従う。最後に (5) は、任意のスキームが
+アフィン開被覆をもつことから従う。
+\end{proof}
+
+\noindent
+続く……
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-smooth}
+$\Sch_{smooth}$ を大平滑サイトとし、
+$f : T \to S$ を $\Sch_{smooth}$ における射とする。函手
+$$
+u : (\Sch/T)_{smooth} \longrightarrow (\Sch/S)_{smooth},
+\quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v : (\Sch/S)_{smooth} \longrightarrow (\Sch/T)_{smooth},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_{smooth})
+\longrightarrow
+\Sh((\Sch/S)_{smooth})
+$$
+を誘導する。また
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ が成り立つ。
+さらに $f_{big}^{-1}$ は左随伴 $f_{big!}$ をもち、これはファイバー積と
+等化子に可換である。
+\end{lemma}
+
+\begin{proof}
+函手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在が得られる。また、$U/T$ と $V/S$ に対して
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ であるから、函手 $v$ は
+右随伴である。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用すれば、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{syntomic 位相}
+\label{topologies-section-syntomic}
+
+\noindent
+この節では syntomic 位相を定義する。この位相はしばしば fppf 位相と
+同じコホモロジー群をもちながら、技術的にはより扱いやすいという点で
+興味深い。
+
+\begin{definition}
+\label{topologies-definition-syntomic-covering}
+$T$ をスキームとする。$T$ の{\it syntomic 被覆}とは、各 $f_i$ が
+syntomic であり、かつ $T = \bigcup f_i(T_i)$ を満たすスキームの射の族
+$\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-etale-smooth-syntomic}
+任意の平滑被覆は syntomic 被覆であり、したがって任意のエタール被覆または
+Zariski 被覆も syntomic 被覆である。
+\end{lemma}
+
+\begin{proof}
+これは定義と、平滑射が syntomic であるという事実から明らかである。
+Morphisms, Lemma \ref{morphisms-lemma-smooth-syntomic} および
+Lemma \ref{topologies-lemma-zariski-etale-smooth} を見よ。
+\end{proof}
+
+\noindent
+次に、この概念が Sites, Definition \ref{sites-definition-site} の条件を
+満たすことを示す。
+
+\begin{lemma}
+\label{topologies-lemma-syntomic}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の syntomic 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が syntomic 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が syntomic 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は syntomic 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が syntomic 被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は
+syntomic 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-syntomic-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の
+syntomic 被覆とする。このとき、$\{T_i \to T\}_{i \in I}$ の細分であり、
+各 $U_j$ がアフィンスキームで、各射 $U_j \to T$ が標準 syntomic である
+ような syntomic 被覆 $\{U_j \to T\}_{j = 1, \ldots, m}$ が存在する。
+Morphisms, Definition \ref{morphisms-definition-syntomic} を見よ。さらに、
+各 $U_j$ はいずれかの $T_i$ のアフィン開集合として選べる。
+\end{lemma}
+
+\begin{proof}
+省略する。ただし Algebra, Lemma \ref{algebra-lemma-syntomic} を見よ。
+\end{proof}
+
+\noindent
+そこで、対応するアフィンの標準被覆を次のように定義する。
+
+\begin{definition}
+\label{topologies-definition-standard-syntomic}
+$T$ をアフィンスキームとする。$T$ の{\it 標準 syntomic 被覆}とは、
+各 $U_j$ がアフィンで、$U_j \to T$ が標準 syntomic であり、かつ
+$T = \bigcup f_j(U_j)$ を満たす族
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$ のことである。
+\end{definition}
+
+\begin{definition}
+\label{topologies-definition-big-syntomic-site}
+{\it 大 syntomic サイト}とは、次のように構成される Sites, Definition
+\ref{sites-definition-site} の意味での任意のサイト $\Sch_{syntomic}$ である：
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、それらのスキームの syntomic 被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item 台となる圏として、集合 $S_0$ から出発して Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成した任意の圏
+$\Sch_\alpha$ を取る。
+\item 圏 $\Sch_\alpha$、syntomic 被覆の類、および上で選んだ集合
+$\text{Cov}_0$ から出発して、Sets, Lemma
+\ref{sets-lemma-coverings-site} のような被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大サイトの定義の動機と説明については、Definition
+\ref{topologies-definition-big-zariski-site} に続く注意を見よ。
+
+\medskip\noindent
+スキーム $S$ の大 syntomic サイトの導入を続ける前に、大 syntomic サイト
+$\Sch_{syntomic}$ 上の位相は、ある意味で全スキームの圏上の syntomic 位相
+から誘導されることを指摘しておく。
+
+\begin{lemma}
+\label{topologies-lemma-syntomic-induced}
+Definition \ref{topologies-definition-big-syntomic-site} のような大 syntomic サイト
+$\Sch_{syntomic}$ と $T \in \Ob(\Sch_{syntomic})$ を取り、
+$\{T_i \to T\}_{i \in I}$ を $T$ の任意の syntomic 被覆とする。
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ を細分する、サイト $\Sch_{syntomic}$ における
+$T$ の被覆 $\{U_j \to T\}_{j \in J}$ が存在する。
+\item $\{T_i \to T\}_{i \in I}$ が標準 syntomic 被覆ならば、これは
+$\Sch_{syntomic}$ におけるある被覆と自明同値である。
+\item $\{T_i \to T\}_{i \in I}$ が Zariski 被覆ならば、これは
+$\Sch_{syntomic}$ におけるある被覆と自明同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+各 $i$ に対し、各 $T_{ij}$ が $T$ のあるアフィン開部分スキームに写るような
+アフィン開被覆 $T_i = \bigcup_{j \in J_i} T_{ij}$ を選ぶ。Lemma
+\ref{topologies-lemma-syntomic} により、細分
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$ も $T$ の syntomic 被覆である。
+したがって各 $T_i$ はアフィンで、$T$ のあるアフィン開集合 $W_i$ に写ると
+仮定してよい。Sets, Lemma \ref{sets-lemma-what-is-in-it} を適用すると、
+$W_i$ は $\Sch_{syntomic}$ のある対象と同型である。すると $W_i$ 上有限型の
+スキーム $T_i$ は、Sets, Lemma \ref{sets-lemma-what-is-in-it} をもう一度
+適用することにより $\Sch_{syntomic}$ のある対象 $V_i$ と同型である。被覆
+$\{V_i \to T\}_{i \in I}$ は $\{T_i \to T\}_{i \in I}$ を細分する
+（両者は同型だからである）。さらに Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により、$\{V_i \to T\}_{i \in I}$ はサイト
+$\Sch_{syntomic}$ における $T$ のある被覆 $\{U_j \to T\}_{j \in J}$ と
+組合せ論的に同値である。被覆 $\{U_j \to T\}_{j \in J}$ は (1) の
+被覆である。(2), (3) の状況では、Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により各スキーム $T_i$ は
+$\Sch_{syntomic}$ の対象と同型であり、Sets, Lemma
+\ref{sets-lemma-coverings-site} をもう一度適用すれば求める結論を得る。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-small-syntomic}
+$S$ をスキームとし、$\Sch_{syntomic}$ を $S$ を含む大 syntomic サイトとする。
+\begin{enumerate}
+\item $S$ の{\it 大 syntomic サイト} $(\Sch/S)_{syntomic}$ とは、Sites,
+Section \ref{sites-section-localize} で導入したサイト
+$\Sch_{syntomic}/S$ のことである。
+\item $S$ の{\it 大アフィン syntomic サイト}
+$(\textit{Aff}/S)_{syntomic}$ とは、アフィンな $U/S$ を対象とする
+$(\Sch/S)_{syntomic}$ の充満部分圏である。
+$(\textit{Aff}/S)_{syntomic}$ の被覆とは、標準 syntomic 被覆である
+$(\Sch/S)_{syntomic}$ の任意の被覆 $\{U_i \to U\}$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+次に、大アフィンサイトが大サイトと同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-affine-big-site-syntomic}
+$S$ をスキームとし、$\Sch_{syntomic}$ を $S$ を含む大 syntomic サイトとする。函手
+$(\textit{Aff}/S)_{syntomic} \to (\Sch/S)_{syntomic}$
+は特殊余連続であり、$\Sh((\textit{Aff}/S)_{syntomic})$ から
+$\Sh((\Sch/S)_{syntomic})$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+特殊余連続函手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入した。したがって
+Sites, Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を確認する必要がある。
+包含函手を
+$u : (\textit{Aff}/S)_{syntomic} \to (\Sch/S)_{syntomic}$ と書く。
+余連続性は、$T$ がアフィンである任意の $T/S$ の syntomic 被覆が、$T$ の
+標準 syntomic 被覆で細分できることにほかならない。これは Lemma
+\ref{topologies-lemma-syntomic-affine} の内容なので (1) が成り立つ。標準 syntomic 被覆は
+syntomic 被覆なので $u$ は連続であり、(2) も成り立つ。(3), (4) は
+$u$ が充満忠実であることから直ちに従う。最後に (5) は、任意のスキームが
+アフィン開被覆をもつことから従う。
+\end{proof}
+
+\noindent
+続く……
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-syntomic}
+$\Sch_{syntomic}$ を大 syntomic サイトとし、
+$f : T \to S$ を $\Sch_{syntomic}$ における射とする。函手
+$$
+u : (\Sch/T)_{syntomic} \longrightarrow (\Sch/S)_{syntomic},
+\quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v : (\Sch/S)_{syntomic} \longrightarrow (\Sch/T)_{syntomic},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_{syntomic})
+\longrightarrow
+\Sh((\Sch/S)_{syntomic})
+$$
+を誘導する。また
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ が成り立つ。
+さらに $f_{big}^{-1}$ は左随伴 $f_{big!}$ をもち、これはファイバー積と
+等化子に可換である。
+\end{lemma}
+
+\begin{proof}
+函手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在が得られる。また、$U/T$ と $V/S$ に対して
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ であるから、函手 $v$ は
+右随伴である。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用すれば、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{fppf 位相}
+\label{topologies-section-fppf}
+
+\noindent
+$S$ をスキームとする。$S$ 上のスキームの圏に fppf 位相\footnote{
+fppf は ``fid\`element plat de pr\'esentation finie'' の略である。}を
+定義したい。一般的な方針に従い、まず fppf 被覆の概念を導入する。
+
+\begin{definition}
+\label{topologies-definition-fppf-covering}
+$T$ をスキームとする。$T$ の{\it fppf 被覆}とは、各 $f_i$ が平坦かつ
+局所有限表示であり、かつ $T = \bigcup f_i(T_i)$ を満たすスキームの射の族
+$\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-etale-smooth-syntomic-fppf}
+任意の syntomic 被覆は fppf 被覆であり、したがって任意の平滑被覆、
+エタール被覆、または Zariski 被覆も fppf 被覆である。
+\end{lemma}
+
+\begin{proof}
+これは定義、syntomic 射が平坦かつ局所有限表示であるという事実
+（Morphisms, Lemmas
+\ref{morphisms-lemma-syntomic-locally-finite-presentation} および
+\ref{morphisms-lemma-syntomic-flat} 参照）、ならびに Lemma
+\ref{topologies-lemma-zariski-etale-smooth-syntomic} から明らかである。
+\end{proof}
+
+\noindent
+次に、この概念が Sites, Definition \ref{sites-definition-site} の条件を
+満たすことを示す。
+
+\begin{lemma}
+\label{topologies-lemma-fppf}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の fppf 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が fppf 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が fppf 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は fppf 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が fppf 被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は fppf 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+第一の主張は明らかである。第二は、平坦射の合成が平坦であり
+（Morphisms, Lemma \ref{morphisms-lemma-composition-flat} 参照）、
+有限表示射の合成が有限表示であること
+（Morphisms, Lemma \ref{morphisms-lemma-composition-finite-presentation} 参照）
+から従う。第三は、平坦射の基底変換が平坦であり
+（Morphisms, Lemma \ref{morphisms-lemma-base-change-flat} 参照）、
+有限表示射の基底変換が有限表示であること
+（Morphisms, Lemma \ref{morphisms-lemma-base-change-finite-presentation} 参照）
+から従う。さらに、全射な射の族の基底変換は全射である（証明は省略する）。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fppf-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の fppf 被覆と
+する。このとき、$\{T_i \to T\}_{i \in I}$ の細分であり、各 $U_j$ が
+アフィンスキームであるような fppf 被覆
+$\{U_j \to T\}_{j = 1, \ldots, m}$ が存在する。さらに、各 $U_j$ は
+いずれかの $T_i$ のアフィン開集合として選べる。
+\end{lemma}
+
+\begin{proof}
+平坦かつ局所有限表示な射が開射であることを用いれば、これは定義から
+直ちに従う。Morphisms, Lemma \ref{morphisms-lemma-fppf-open} を見よ。
+\end{proof}
+
+\noindent
+そこで、対応するアフィンの標準被覆を次のように定義する。
+
+\begin{definition}
+\label{topologies-definition-standard-fppf}
+$T$ をアフィンスキームとする。$T$ の{\it 標準 fppf 被覆}とは、各 $U_j$ が
+アフィンで、$T$ 上平坦かつ有限表示であり、かつ
+$T = \bigcup f_j(U_j)$ を満たす族
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$ のことである。
+\end{definition}
+
+\begin{definition}
+\label{topologies-definition-big-fppf-site}
+{\it 大 fppf サイト}とは、次のように構成される Sites, Definition
+\ref{sites-definition-site} の意味での任意のサイト $\Sch_{fppf}$ である：
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、それらのスキームの fppf 被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item 台となる圏として、集合 $S_0$ から出発して Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成した任意の圏
+$\Sch_\alpha$ を取る。
+\item 圏 $\Sch_\alpha$、fppf 被覆の類、および上で選んだ集合
+$\text{Cov}_0$ から出発して、Sets, Lemma
+\ref{sets-lemma-coverings-site} のような被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大サイトの定義の動機と説明については、Definition
+\ref{topologies-definition-big-zariski-site} に続く注意を見よ。
+
+\medskip\noindent
+スキーム $S$ の大 fppf サイトの導入を続ける前に、大 fppf サイト
+$\Sch_{fppf}$ 上の位相は、ある意味で全スキームの圏上の fppf 位相から
+誘導されることを指摘しておく。
+
+\begin{lemma}
+\label{topologies-lemma-fppf-induced}
+Definition \ref{topologies-definition-big-fppf-site} のような大 fppf サイト
+$\Sch_{fppf}$ と $T \in \Ob(\Sch_{fppf})$ を取り、
+$\{T_i \to T\}_{i \in I}$ を $T$ の任意の fppf 被覆とする。
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ を細分する、サイト $\Sch_{fppf}$ における
+$T$ の被覆 $\{U_j \to T\}_{j \in J}$ が存在する。
+\item $\{T_i \to T\}_{i \in I}$ が標準 fppf 被覆ならば、これは
+$\Sch_{fppf}$ におけるある被覆と自明同値である。
+\item $\{T_i \to T\}_{i \in I}$ が Zariski 被覆ならば、これは
+$\Sch_{fppf}$ におけるある被覆と自明同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+各 $i$ に対し、各 $T_{ij}$ が $T$ のあるアフィン開部分スキームに写るような
+アフィン開被覆 $T_i = \bigcup_{j \in J_i} T_{ij}$ を選ぶ。Lemma
+\ref{topologies-lemma-fppf} により、細分 $\{T_{ij} \to T\}_{i \in I, j \in J_i}$ も
+$T$ の fppf 被覆である。したがって各 $T_i$ はアフィンで、$T$ のある
+アフィン開集合 $W_i$ に写ると仮定してよい。Sets, Lemma
+\ref{sets-lemma-what-is-in-it} を適用すると、$W_i$ は $\Sch_{fppf}$ の
+ある対象と同型である。すると $W_i$ 上有限型のスキーム $T_i$ は、Sets,
+Lemma \ref{sets-lemma-what-is-in-it} をもう一度適用することにより
+$\Sch_{fppf}$ のある対象 $V_i$ と同型である。被覆
+$\{V_i \to T\}_{i \in I}$ は $\{T_i \to T\}_{i \in I}$ を細分する
+（両者は同型だからである）。さらに Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により、$\{V_i \to T\}_{i \in I}$ はサイト
+$\Sch_{fppf}$ における $T$ のある被覆 $\{U_j \to T\}_{j \in J}$ と
+組合せ論的に同値である。被覆 $\{U_j \to T\}_{j \in J}$ は (1) の
+細分である。(2), (3) の状況では、Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により各スキーム $T_i$ は $\Sch_{fppf}$ の
+対象と同型であり、Sets, Lemma \ref{sets-lemma-coverings-site} をもう一度
+適用すれば求める結論を得る。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-small-fppf}
+$S$ をスキームとし、$\Sch_{fppf}$ を $S$ を含む大 fppf サイトとする。
+\begin{enumerate}
+\item $S$ の{\it 大 fppf サイト} $(\Sch/S)_{fppf}$ とは、Sites,
+Section \ref{sites-section-localize} で導入したサイト $\Sch_{fppf}/S$ の
+ことである。
+\item $S$ の{\it 大アフィン fppf サイト} $(\textit{Aff}/S)_{fppf}$ とは、
+アフィンな $U/S$ を対象とする $(\Sch/S)_{fppf}$ の充満部分圏である。
+$(\textit{Aff}/S)_{fppf}$ の被覆とは、標準 fppf 被覆である
+$(\Sch/S)_{fppf}$ の任意の被覆 $\{U_i \to U\}$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大アフィン fppf サイトが実際にサイトであることは直ちには明らかでない。
+これを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-verify-site-fppf}
+$S$ をスキームとし、$\Sch_{fppf}$ を $S$ を含む大 fppf サイトとする。
+このとき $(\textit{Aff}/S)_{fppf}$ はサイトである。
+\end{lemma}
+
+\begin{proof}
+$(\textit{Aff}/S)_{fppf}$ がサイトであることを示す。Lemma
+\ref{topologies-lemma-verify-site-etale} の証明と同様に、アフィンの標準 fppf 被覆の
+集まりが Sites, Definition \ref{sites-definition-site} の性質 (1), (2), (3)
+を満たすことを示せば十分である。これは明らかである。たとえば、標準 fppf
+被覆 $\{T_i \to T\}_{i\in I}$ と、各 $i$ に対する標準 fppf 被覆
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が与えられると、
+$\bigcup_{i\in I} J_i$ は有限で各 $T_{ij}$ はアフィンなので、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は標準 fppf 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fibre-products-fppf}
+$S$ をスキームとし、$\Sch_{fppf}$ を $S$ を含む大 fppf サイトとする。
+サイト $\Sch_{fppf}$, $(\Sch/S)_{fppf}$, $(\textit{Aff}/S)_{fppf}$ の
+台となる圏はファイバー積をもつ。いずれの場合も、全スキームの圏 $\Sch$ への
+明らかな函手はファイバー積を取る操作と可換である。圏
+$(\Sch/S)_{fppf}$ は終対象、すなわち $S/S$ をもつ。
+\end{lemma}
+
+\begin{proof}
+$\Sch_{fppf}$ については構成から成り立つ。Sets, Lemma
+\ref{sets-lemma-what-is-in-it} を見よ。$U, V, W \in \Ob(\Sch_{fppf})$ で、
+スキームの射 $U \to S$, $V \to U$, $W \to U$ があるとする。
+$\Sch_{fppf}$ におけるファイバー積 $V \times_U W$ は $\Sch$ における
+ファイバー積であり、$S$ 上の全スキームの圏では $U/S$ 上での $V/S$ と
+$W/S$ のファイバー積である。したがって $(\Sch/S)_{fppf}$ における
+ファイバー積でもある。これで $(\Sch/S)_{fppf}$ の場合が示された。
+$U, V, W$ がアフィンならば $V \times_U W$ もアフィンなので、
+$(\textit{Aff}/S)_{fppf}$ の場合も得る。
+\end{proof}
+
+\noindent
+次に、大アフィンサイトが大サイトと同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-affine-big-site-fppf}
+$S$ をスキームとし、$\Sch_{fppf}$ を $S$ を含む大 fppf サイトとする。
+函手 $(\textit{Aff}/S)_{fppf} \to (\Sch/S)_{fppf}$ は余連続であり、
+$\Sh((\textit{Aff}/S)_{fppf})$ から $\Sh((\Sch/S)_{fppf})$ への
+トポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+特殊余連続函手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入した。したがって
+Sites, Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を確認する必要がある。
+包含函手を $u : (\textit{Aff}/S)_{fppf} \to (\Sch/S)_{fppf}$ と書く。
+余連続性は、$T$ がアフィンである任意の $T/S$ の fppf 被覆が、$T$ の
+標準 fppf 被覆で細分できることにほかならない。これは Lemma
+\ref{topologies-lemma-fppf-affine} の内容なので (1) が成り立つ。標準 fppf 被覆は
+fppf 被覆なので $u$ は連続であり、(2) も成り立つ。(3), (4) は
+$u$ が充満忠実であることから直ちに従う。最後に (5) は、任意のスキームが
+アフィン開被覆をもつことから従う。
+\end{proof}
+
+\noindent
+次に、これらのサイトに付随するトポスの間の関係をいくつか確立する。
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-fppf}
+$\Sch_{fppf}$ を大 fppf サイトとし、
+$f : T \to S$ を $\Sch_{fppf}$ における射とする。函手
+$$
+u : (\Sch/T)_{fppf} \longrightarrow (\Sch/S)_{fppf},
+\quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v : (\Sch/S)_{fppf} \longrightarrow (\Sch/T)_{fppf},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_{fppf})
+\longrightarrow
+\Sh((\Sch/S)_{fppf})
+$$
+を誘導する。また
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ が成り立つ。
+さらに $f_{big}^{-1}$ は左随伴 $f_{big!}$ をもち、これはファイバー積と
+等化子に可換である。
+\end{lemma}
+
+\begin{proof}
+函手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在が得られる。また、$U/T$ と $V/S$ に対して
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ であるから、函手 $v$ は
+右随伴である。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用すれば、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-composition-fppf}
+$X$, $Y$, $Z$ を $(\Sch/S)_{fppf}$ におけるスキームとし、
+$f : X \to Y$, $g : Y \to Z$ を射とすると、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$.
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{topologies-lemma-morphism-big-fppf} にある大サイト上の函手の
+順像と逆像の簡明な記述から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{ph 位相}
+\label{topologies-section-ph}
+
+\noindent
+この節では ph 位相を定義する。これは Zariski 被覆と固有全射によって
+生成される位相である。Lemma \ref{topologies-lemma-characterize-sheaf} を見よ。
+
+\medskip\noindent
+記法と用語は Goodwillie と Lichtenbaum の論文 \cite{ph} から借用する。
+両著者は、Noether スキームの部分圏に制限すると ph 位相が Voevodsky によって
+最初に定義された「h 位相」と一致することを示している。これは Zariski 開被覆と、
+普遍的に submersive な有限型射によって生成される位相である。また両位相は
+非 Noether スキーム上では一致しないことも示している。
+\cite[Example 4.5]{ph} を見よ。h 位相（の我々の版）には More on Flatness,
+Section \ref{flat-section-h} で戻る。
+
+\medskip\noindent
+この位相の被覆を定義する前に、少し準備が必要である。
+
+\begin{definition}
+\label{topologies-definition-standard-ph-covering}
+$T$ をアフィンスキームとする。{\it 標準 ph 被覆}とは、固有全射
+$f : U \to T$ とアフィン開被覆
+$U = \bigcup_{j = 1, \ldots, m} U_j$ から、$f_j = f|_{U_j}$ と置くことで
+構成される族 $\{f_j : U_j \to T\}_{j = 1, \ldots, m}$ のことである。
+\end{definition}
+
+\noindent
+Chow の補題から、標準 ph 被覆は全射な射影射に対応する標準 ph 被覆で
+細分できることが直ちに従う。
+
+\begin{lemma}
+\label{topologies-lemma-base-change-standard-ph}
+$\{f_j : U_j \to T\}_{j = 1, \ldots, m}$ を標準 ph 被覆とし、
+$T' \to T$ をアフィンスキームの射とする。このとき
+$\{U_j \times_T T' \to T'\}_{j = 1, \ldots, m}$ は標準 ph 被覆である。
+\end{lemma}
+
+\begin{proof}
+Definition \ref{topologies-definition-standard-ph-covering} のように、$f : U \to T$ を
+固有全射とし、アフィン開被覆 $U = \bigcup_{j = 1, \ldots, m} U_j$ を取る。
+このとき $U \times_T T' \to T'$ は固有全射である（Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-surjective} および
+\ref{morphisms-lemma-base-change-proper}）。また
+$U \times_T T' = \bigcup_{j = 1, \ldots, m} U_j \times_T T'$ は
+アフィン開被覆である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-refine-by-standard-ph}
+$T$ をアフィンスキームとする。終域が $T$ である次の各種類の写像の族は、
+標準 ph 被覆による細分をもつ：
+\begin{enumerate}
+\item $T$ の任意の Zariski 開被覆；
+\item $\{W_{ji} \to T\}_{j = 1, \ldots, m, i = 1, \ldots n_j}$
+ここで $\{W_{ji} \to U_j\}_{i = 1, \ldots, n_j}$ と
+$\{U_j \to T\}_{j = 1, \ldots, m}$ は標準 ph 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は、$T$ の任意の Zariski 開被覆が有限アフィン開被覆で細分できることから
+従う。
+
+\medskip\noindent
+(3) の証明。Definition \ref{topologies-definition-standard-ph-covering} のように
+固有全射 $U \to T$ と $U = \bigcup_{j = 1, \ldots, m} U_j$ を選ぶ。
+同じ Definition \ref{topologies-definition-standard-ph-covering} のように、固有全射
+$W_j \to U_j$ と $W_j = \bigcup W_{ji}$ を選ぶ。
+Chow の補題（Limits, Lemma \ref{limits-lemma-chow-finite-type}）により、
+固有全射 $W'_j \to W_j$ と閉埋め込み
+$W'_j \to \mathbf{P}^{e_j}_{U_j}$ を見つけられる。したがって $W_j$ を
+$W'_j$ で、$W_j = \bigcup W_{ji}$ を $W'_j$ の適切なアフィン開被覆で
+置き換えれば、すべての $j = 1, \ldots, m$ に対して閉埋め込み
+$W_j \subset \mathbf{P}^{e_j}_{U_j}$ があると仮定してよい。
+
+\medskip\noindent
+$\overline{W}_j \subset \mathbf{P}^{e_j}_U$ を $W_j$ のスキーム論的閉包とする。
+このとき $W_j \subset \overline{W}_j$ は開部分スキームである。実際、$W_j$ は
+射 $\overline{W}_j \to U$ による $U_j \subset U$ の逆像である。
+（これを見るには、$W_j \to \mathbf{P}^{e_j}_U$ が準コンパクトであり、
+したがってスキーム論的像を取る操作が開集合への制限と可換であることを用いる。
+Morphisms, Section \ref{morphisms-section-scheme-theoretic-image} を見よ。）
+$Z_j = U \setminus U_j$ に誘導される被約閉部分スキーム構造を入れる。このとき
+$$
+V_j = \overline{W}_j \amalg Z_j \to U
+$$
+は固有全射であり、開部分スキーム $W_j \subset V_j$ は $U_j$ の逆像である。
+したがって $v \in V_j$, $v \not \in W_j$ に対し、ある
+$1 \leq j' \leq m$ について $U_{j'}$ に写るアフィン開近傍
+$v \in V_{j, v} \subset V_j$ を選べる。
+
+\medskip\noindent
+証明を完了するため、固有全射
+$$
+V = V_1 \times_U V_2 \times_U \ldots \times_U V_m
+\longrightarrow U \longrightarrow T
+$$
+と、次のアフィン開集合による $V$ の被覆を考える：
+$$
+V_{1, v_1} \times_U \ldots \times_U V_{j - 1, v_{j - 1}}
+\times_U W_{j i} \times_U
+V_{j + 1, v_{j + 1}} \times_U \ldots \times_U V_{m, v_m}
+$$
+これらは実際に被覆をなす。なぜなら $U$ の各点はある $U_j$ に属し、
+$V$ における $U_j$ の逆像は
+$V_1 \times \ldots \times V_{j - 1} \times W_j \times V_{j + 1} \times
+\ldots \times V_m$ に等しいからである。上に表示したアフィン開集合から
+$T$ への射は $W_{ji}$ を経由するので、細分が得られる。最後に、$V$ は
+アフィンスキーム $T$ 上固有なスキームとして準コンパクトなので、これらの
+アフィン開集合は有限個だけ取ればよい。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-ph-covering}
+$T$ をスキームとする。$T$ の{\it ph 被覆}とは、各 $f_i$ が局所有限型で、
+かつ任意のアフィン開集合 $U \subset T$ に対して族
+$\{T_i \times_T U \to U\}_{i \in I}$ を細分する標準 ph 被覆
+$\{U_j \to U\}_{j = 1, \ldots, m}$ が存在するようなスキームの射の族
+$\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\noindent
+Lemma \ref{topologies-lemma-base-change-standard-ph} により、標準 ph 被覆は ph 被覆である。
+
+\begin{lemma}
+\label{topologies-lemma-zariski-ph}
+Zariski 被覆は ph 被覆である\footnote{More on Morphisms, Lemma
+\ref{more-morphisms-lemma-fppf-ph} で、fppf 被覆（したがって syntomic 被覆、
+平滑被覆、またはエタール被覆）も ph 被覆であることを見る。}。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{topologies-lemma-refine-by-standard-ph} により、アフィンスキームの
+Zariski 被覆が標準 ph 被覆で細分できることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-surjective-proper-ph}
+$f : Y \to X$ をスキームの固有全射とする。このとき
+$\{Y \to X\}$ は ph 被覆である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-refine-by-ph}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を、すべての $i$ で
+$f_i$ が局所有限型である射の族とする。次は同値である：
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ は ph 被覆である；
+\item $\{T_i \to T\}_{i \in I}$ を細分する ph 被覆が存在する；
+\item $\{\coprod_{i \in I} T_i \to T\}$ は ph 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値は Definition \ref{topologies-definition-ph-covering} と、細分の細分が
+細分であることから直ちに従う。(1) と (2) は同値であり、さらに
+$\{T_i \to T\}_{i \in I}$ は $\{\coprod_{i \in I} T_i \to T\}$ を細分するので、
+(1) は (3) を含意する。最後に (3) を仮定する。$U \subset T$ をアフィン開集合、
+$\{U_j \to U\}_{j = 1, \ldots, m}$ を
+$\{U \times_T \coprod_{i \in I} T_i \to U\}$ を細分する標準 ph 被覆とする。
+これは各 $j$ に対して射
+$$
+h_j :
+U_j
+\longrightarrow
+U \times_T \coprod\nolimits_{i \in I} T_i =
+\coprod\nolimits_{i \in I} U \times_T T_i
+$$
+が $U$ 上に存在することを意味する。$U_j$ は準コンパクトなので、ほとんど
+すべてが空である開かつ閉な部分スキームによる直和分解
+$U_j = \coprod_{i \in I} U_{j, i}$ で、$h_j|_{U_{j, i}}$ が $U_{j, i}$ を
+$U \times_T T_i$ に写すものを得る。したがって
+$$
+\{U_{j, i} \to U\}_{j = 1, \ldots, m,\ i \in I,\ U_{j, i} \not = \emptyset}
+$$
+は $\{U \times_T T_i \to U\}_{i \in I}$ を細分する標準 ph 被覆である
+（細部を一つ省略した）。よって (1) が成り立つ。
+\end{proof}
+
+\noindent
+次に、この概念が Sites, Definition \ref{sites-definition-site} の条件を
+満たすことを示す。
+
+\begin{lemma}
+\label{topologies-lemma-ph}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の ph 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が ph 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が ph 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は ph 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が ph 被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は ph 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+主張 (1) は明らかである。
+
+\medskip\noindent
+(3) の証明。Morphisms, Lemma
+\ref{morphisms-lemma-base-change-finite-type} により、基底変換
+$T_i \times_T T' \to T'$ は局所有限型である。したがってアフィン開集合に
+関する条件だけを確認すればよい。$U' \subset T'$ をアフィン開部分スキームと
+する。$U'$ は準コンパクトなので、$U'_j \to T$ があるアフィン開集合
+$U_j \subset T$ に写るような有限アフィン開被覆
+$U' = U'_1 \cup \ldots \cup U'$ を見つけられる。
+$\{T_i \times_T U_j \to U_j\}$ を細分する標準 ph 被覆
+$\{U_{jl} \to U_j\}_{l = 1, \ldots, n_j}$ を選ぶ。Lemma
+\ref{topologies-lemma-base-change-standard-ph} により、基底変換
+$\{U_{jl} \times_{U_j} U'_j \to U'_j\}$ は標準 ph 被覆である。また
+$\{U'_j \to U'\}$ も標準 ph 被覆であることに注意する。Lemma
+\ref{topologies-lemma-refine-by-standard-ph} により、族
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$ は標準 ph 被覆で細分できる。
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$ は
+$\{T_i \times_T U' \to U'\}$ を細分するので結論を得る。
+
+\medskip\noindent
+(2) の証明。射の合成は局所有限型という性質を保つ。Morphisms, Lemma
+\ref{morphisms-lemma-composition-finite-type} を見よ。したがってアフィン開集合に
+関する条件だけを確認すればよい。$U \subset T$ をアフィン開集合とする。まず
+$\{T_i \times_T U \to U\}$ を細分する標準 ph 被覆
+$\{U_k \to U\}_{k = 1, \ldots, m}$ を選ぶ。この細分が $T$ 上の射
+$U_k \to T_{i_k}$ で与えられるとする。このとき
+$$
+\{T_{i_kj} \times_{T_{i_k}} U_k \to U_k\}_{j \in J_{i_k}}
+$$
+は (3) により ph 被覆である。$U_k$ はアフィンなので、この族を細分する
+標準 ph 被覆 $\{U_{ka} \to U_k\}_{a = 1, \ldots, b_k}$ を見つけられる。
+次に Lemma \ref{topologies-lemma-refine-by-standard-ph} を適用すると、
+$\{U_{ka} \to U\}$ は標準 ph 被覆で細分できる。
+$\{U_{ka} \to U\}$ は $\{T_{ij} \times_T U \to U\}$ を細分するので、
+これで証明が完了する。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-ph-site}
+{\it 大 ph サイト}とは、次のように構成される Sites, Definition
+\ref{sites-definition-site} の意味での任意のサイト $\Sch_{ph}$ である：
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、それらのスキームの ph 被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item 台となる圏として、集合 $S_0$ から出発して Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成した任意の圏
+$\Sch_\alpha$ を取る。
+\item 圏 $\Sch_\alpha$、ph 被覆の類、および上で選んだ集合 $\text{Cov}_0$ から
+出発して、Sets, Lemma \ref{sets-lemma-coverings-site} のような被覆の
+任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大サイトの定義の動機と説明については、Definition
+\ref{topologies-definition-big-zariski-site} に続く注意を見よ。
+
+\medskip\noindent
+スキーム $S$ の大 ph サイトの導入を続ける前に、大 ph サイト $\Sch_{ph}$
+上の位相は、ある意味で全スキームの圏上の ph 位相から誘導されることを
+指摘しておく。
+
+\begin{lemma}
+\label{topologies-lemma-ph-induced}
+Definition \ref{topologies-definition-big-ph-site} のような大 ph サイト $\Sch_{ph}$ と
+$T \in \Ob(\Sch_{ph})$ を取り、$\{T_i \to T\}_{i \in I}$ を $T$ の
+任意の ph 被覆とする。
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ を細分する、サイト $\Sch_{ph}$ における
+$T$ の被覆 $\{U_j \to T\}_{j \in J}$ が存在する。
+\item $\{T_i \to T\}_{i \in I}$ が標準 ph 被覆ならば、これは
+$\Sch_{ph}$ におけるある被覆と自明同値である。
+\item $\{T_i \to T\}_{i \in I}$ が Zariski 被覆ならば、これは
+$\Sch_{ph}$ におけるある被覆と自明同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+各 $i$ に対し、各 $T_{ij}$ が $T$ のあるアフィン開部分スキームに写るような
+アフィン開被覆 $T_i = \bigcup_{j \in J_i} T_{ij}$ を選ぶ。Lemmas
+\ref{topologies-lemma-zariski-ph} および \ref{topologies-lemma-ph} により、細分
+$\{T_{ij} \to T\}_{i \in I, j \in J_i}$ も $T$ の ph 被覆である。
+したがって各 $T_i$ はアフィンで、$T$ のあるアフィン開集合 $W_i$ に写ると
+仮定してよい。Sets, Lemma \ref{sets-lemma-what-is-in-it} を適用すると、
+$W_i$ は $\Sch_{ph}$ のある対象と同型である。すると $W_i$ 上有限型の
+スキーム $T_i$ は、Sets, Lemma \ref{sets-lemma-what-is-in-it} をもう一度
+適用することにより $\Sch_{ph}$ のある対象 $V_i$ と同型である。被覆
+$\{V_i \to T\}_{i \in I}$ は $\{T_i \to T\}_{i \in I}$ を細分する
+（両者は同型だからである）。さらに Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により、$\{V_i \to T\}_{i \in I}$ はサイト
+$\Sch_{ph}$ における $T$ のある被覆 $\{U_j \to T\}_{j \in J}$ と
+組合せ論的に同値である。被覆 $\{U_j \to T\}_{j \in J}$ は (1) の
+細分である。(2), (3) の状況では、Sets, Lemma
+\ref{sets-lemma-what-is-in-it} により各スキーム $T_i$ は $\Sch_{ph}$ の
+対象と同型であり、Sets, Lemma \ref{sets-lemma-coverings-site} をもう一度
+適用すれば求める結論を得る。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-big-small-ph}
+$S$ をスキームとし、$\Sch_{ph}$ を $S$ を含む大 ph サイトとする。
+\begin{enumerate}
+\item $S$ の{\it 大 ph サイト} $(\Sch/S)_{ph}$ とは、Sites, Section
+\ref{sites-section-localize} で導入したサイト $\Sch_{ph}/S$ のことである。
+\item $S$ の{\it 大アフィン ph サイト} $(\textit{Aff}/S)_{ph}$ とは、
+アフィンな $U/S$ を対象とする $(\Sch/S)_{ph}$ の充満部分圏である。
+$(\textit{Aff}/S)_{ph}$ の被覆とは、$U_i$ と $U$ がアフィンである
+$(\Sch/S)_{ph}$ の任意の有限被覆 $\{U_i \to U\}$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(\textit{Aff}/S)_{ph}$ の被覆は標準 ph 被覆で与えられるのでは{\it ない}ことに
+注意する。そのようにすると Sites, Definition \ref{sites-definition-site} の
+第二公理を満たさないからである。むしろ $(\textit{Aff}/S)_{ph}$ の被覆とは、
+$(\Sch/S)_{ph}$ のアフィン対象の間の有限型射の有限族
+$\{U_i \to U\}$ で、標準 ph 被覆によって細分できるものである。
+大アフィン ph サイトがサイトであることを明示的に述べ、証明する。
+
+\begin{lemma}
+\label{topologies-lemma-verify-site-ph}
+$S$ をスキームとし、$\Sch_{ph}$ を $S$ を含む大 ph サイトとする。
+このとき $(\textit{Aff}/S)_{ph}$ はサイトである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{topologies-lemma-verify-site-etale} の証明と同様に、$U$, $U_i$ がアフィンで
+ある有限 ph 被覆 $\{U_i \to U\}$ の集まりが Sites, Definition
+\ref{sites-definition-site} の性質 (1), (2), (3) を満たすことを示せば十分で
+ある。これは明らかである。たとえば $T_i, T$ がアフィンである有限 ph 被覆
+$\{T_i \to T\}_{i\in I}$ と、各 $i$ に対して $T_{ij}$ がアフィンである
+有限 ph 被覆 $\{T_{ij} \to T_i\}_{j\in J_i}$ が与えられると、Lemma
+\ref{topologies-lemma-ph} により $\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は ph 被覆であり、
+$\bigcup_{i\in I} J_i$ は有限で、各 $T_{ij}$ はアフィンである。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fibre-products-ph}
+$S$ をスキームとし、$\Sch_{ph}$ を $S$ を含む大 ph サイトとする。
+サイト $\Sch_{ph}$, $(\Sch/S)_{ph}$, $(\textit{Aff}/S)_{ph}$ の台となる圏は
+ファイバー積をもつ。いずれの場合も、全スキームの圏 $\Sch$ への明らかな
+函手はファイバー積を取る操作と可換である。圏 $(\Sch/S)_{ph}$ は
+終対象、すなわち $S/S$ をもつ。
+\end{lemma}
+
+\begin{proof}
+$\Sch_{ph}$ については構成から成り立つ。Sets, Lemma
+\ref{sets-lemma-what-is-in-it} を見よ。$U, V, W \in \Ob(\Sch_{ph})$ で、
+スキームの射 $U \to S$, $V \to U$, $W \to U$ があるとする。
+$\Sch_{ph}$ におけるファイバー積 $V \times_U W$ は $\Sch$ における
+ファイバー積であり、$S$ 上の全スキームの圏では $U/S$ 上での $V/S$ と
+$W/S$ のファイバー積である。したがって $(\Sch/S)_{ph}$ における
+ファイバー積でもある。これで $(\Sch/S)_{ph}$ の場合が示された。
+$U, V, W$ がアフィンならば $V \times_U W$ もアフィンなので、
+$(\textit{Aff}/S)_{ph}$ の場合も得る。
+\end{proof}
+
+\noindent
+次に、大アフィンサイトが大サイトと同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{topologies-lemma-affine-big-site-ph}
+$S$ をスキームとし、$\Sch_{ph}$ を $S$ を含む大 ph サイトとする。
+函手 $(\textit{Aff}/S)_{ph} \to (\Sch/S)_{ph}$ は余連続であり、
+$\Sh((\textit{Aff}/S)_{ph})$ から $\Sh((\Sch/S)_{ph})$ への
+トポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+特殊余連続函手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入した。したがって
+Sites, Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を確認する必要がある。
+包含函手を $u : (\textit{Aff}/S)_{ph} \to (\Sch/S)_{ph}$ と書く。
+余連続性は、$T$ がアフィンである任意の $T/S$ の ph 被覆が定義により
+$T$ の標準 ph 被覆で細分できることから従う。よって (1) が成り立つ。
+アフィンをアフィンで被覆する有限 ph 被覆は ph 被覆なので $u$ は連続であり、
+(2) も成り立つ。(3), (4) は $u$ が充満忠実であることから直ちに従う。
+最後に (5) は、任意のスキームがアフィン開被覆（これは ph 被覆である）を
+もつことから従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-characterize-sheaf}
+$\mathcal{F}$ を $(\Sch/S)_{ph}$ 上の前層とする。このとき $\mathcal{F}$ が
+層であるための必要十分条件は、
+\begin{enumerate}
+\item $\mathcal{F}$ が Zariski 被覆に対する層条件を満たし、
+\item $f : V \to U$ が固有全射ならば、$\mathcal{F}(U)$ が二つの写像
+$\mathcal{F}(V) \to \mathcal{F}(V \times_U V)$ の等化子へ全単射に写る
+\end{enumerate}
+ことである。さらに (1) のもとで、性質 (2) は次の性質と同値である：
+\begin{enumerate}
+\item[(2')] $U$ がアフィンである (2) のような $\{V \to U\}$ に対する層条件。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) が成り立つならば $\mathcal{F}$ が層であることを示す。
+$\{T_i \to T\}$ を ph 被覆、すなわち $(\Sch/S)_{ph}$ における被覆とする。
+この被覆に対する層条件を確認する。$s_i \in \mathcal{F}(T_i)$ を、
+$T_i \times_T T_{i'}$ 上で同じ切断に制限される切断とする。各 $T_i$ 上で
+$s_i$ に制限される一意な切断 $s \in \mathcal{F}(T)$ が存在することを示す。
+$T = \bigcup U_j$ をアフィン開被覆とする。性質 (1) により、$s$ を構成するには
+$U_j \cap U_{j'}$ 上で一致する切断 $s_j \in \mathcal{F}(U_j)$ を構成すれば
+十分である。ph 被覆 $\{T_i \times_T U_j \to U_j\}$ を考える。このとき
+$s_{ji} = s_i|_{T_i \times_T U_j}$ は
+$(T_i \times_T U_j) \times_{U_j} (T_{i'} \times_T U_j)$ 上で一致する切断である。
+標準 ph 被覆 $\{V_{jk} \to U_j\}$ が $\{T_i \times_T U_j \to U_j\}$ を
+細分するように、固有全射 $V_j \to U_j$ と有限アフィン開被覆
+$V_j = \bigcup V_{jk}$ を選ぶ。$s_{jk} \in \mathcal{F}(V_{jk})$ が、暗黙の射に
+よる $s_{ji}$ の $V_{jk}$ への引き戻しを表すなら、$s_{jk}$ は貼り合わさって
+切断 $s'_j \in \mathcal{F}(V_j)$ になる。重なりでの一致をもう一度用いると、
+$s'_j$ は二つの写像
+$\mathcal{F}(V_j) \to \mathcal{F}(V_j \times_{U_j} V_j)$ の等化子に属する。
+したがって (2) により、$s'_j$ は一意な切断 $s_j \in \mathcal{F}(U_j)$ から
+来る。これらの切断 $s_j$ が所望の性質をすべてもつことの確認は省略する。
+
+\medskip\noindent
+(1) のもとでの (2) と (2') の同値を証明する。$V \to U$ を固有かつ全射な
+$(\Sch/S)_{ph}$ の射とする。アフィン開被覆 $U = \bigcup U_i$ を選び、
+$V_i = V \times_U U_i$ と置く。(2') により
+$\mathcal{F}(U_i) \to \mathcal{F}(V_i)$ は単射であり、(1) により
+$\mathcal{F}(U) \to \prod \mathcal{F}(U_i)$ は単射なので、
+$\mathcal{F}(U) \to \mathcal{F}(V)$ も単射である。最後に、二つの写像
+$\mathcal{F}(V) \to \mathcal{F}(V \times_U V)$ の等化子に属する
+$t \in \mathcal{F}(V)$ が与えられたとする。このとき、すべての $i$ に対して
+$t|_{V_i}$ は二つの写像
+$\mathcal{F}(V_i) \to \mathcal{F}(V_i \times_{U_i} V_i)$ の等化子に属する。
+したがって (2') により、$t|_{V_i}$ に写る一意な切断
+$s_i \in \mathcal{F}(U_i)$ を各 $i$ に対して得る。すべての $i, j$ に対して
+$s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$ であることの確認は省略する。
+これには今示した一意性を用いる。被覆 $U = \bigcup U_i$ に対する層条件により
+切断 $s \in \mathcal{F}(U)$ を得る。$s$ が $\mathcal{F}(V)$ において $t$ に
+写ることの証明は省略する。
+\end{proof}
+
+\noindent
+次に、これらのサイトに付随するトポスの間の関係をいくつか確立する。
+
+\begin{lemma}
+\label{topologies-lemma-morphism-big-ph}
+$\Sch_{ph}$ を大 ph サイトとし、$f : T \to S$ を $\Sch_{ph}$ における
+射とする。函手
+$$
+u : (\Sch/T)_{ph} \longrightarrow (\Sch/S)_{ph},
+\quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v : (\Sch/S)_{ph} \longrightarrow (\Sch/T)_{ph},
+\quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_{ph})
+\longrightarrow
+\Sh((\Sch/S)_{ph})
+$$
+を誘導する。また
+$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ が成り立つ。
+さらに $f_{big}^{-1}$ は左随伴 $f_{big!}$ をもち、これはファイバー積と
+等化子に可換である。
+\end{lemma}
+
+\begin{proof}
+函手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である。
+したがって Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在が得られる。また、$U/T$ と $V/S$ に対して
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ であるから、函手 $v$ は
+右随伴である。よって Sites, Lemmas
+\ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用すれば、
+$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-composition-ph}
+$X$, $Y$, $Y$ を $(\Sch/S)_{ph}$ におけるスキームとし、
+$f : X \to Y$, $g : Y \to Z$ を射とすると、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$.
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{topologies-lemma-morphism-big-ph} にある大サイト上の函手の
+順像と逆像の簡明な記述から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{fpqc 位相}
+\label{topologies-section-fpqc}
+
+\begin{definition}
+\label{topologies-definition-fpqc-covering}
+$T$ をスキームとする。$T$ の{\it fpqc 被覆}とは、各 $f_i$ が平坦であり、
+かつ任意のアフィン開集合 $U \subset T$ に対して $n \geq 0$、写像
+$a : \{1, \ldots, n\} \to I$、およびアフィン開集合
+$V_j \subset T_{a(j)}$, $j = 1, \ldots, n$ で
+$\bigcup_{j = 1}^n f_{a(j)}(V_j) = U$ を満たすものが存在するような
+スキームの射の族 $\{f_i : T_i \to T\}_{i \in I}$ のことである。
+\end{definition}
+
+\noindent
+もちろん、この条件は $T = \bigcup f_i(T_i)$ を含意する。fpqc 被覆を判定する
+のは少し難しいので、そのための補題をいくつか与える。
+
+\begin{lemma}
+\label{topologies-lemma-recognize-fpqc-covering}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を終域が $T$ である
+スキームの射の族とする。次は同値である：
+\begin{enumerate}
+\item $\{f_i : T_i \to T\}_{i \in I}$ は fpqc 被覆である；
+\item 各 $f_i$ は平坦であり、任意のアフィン開集合 $U \subset T$ に対して、
+ほとんどすべてが空である準コンパクト開集合 $U_i \subset T_i$ で
+$U = \bigcup f_i(U_i)$ を満たすものが存在する；
+\item 各 $f_i$ は平坦であり、アフィン開被覆
+$T = \bigcup_{\alpha \in A} U_\alpha$ が存在し、各 $\alpha \in A$ に対して
+$i_{\alpha, 1}, \ldots, i_{\alpha, n(\alpha)} \in I$ と準コンパクト開集合
+$U_{\alpha, j} \subset T_{i_{\alpha, j}}$ が存在して
+$U_\alpha =
+\bigcup_{j = 1, \ldots, n(\alpha)} f_{i_{\alpha, j}}(U_{\alpha, j})$.
+\end{enumerate}
+$T$ が準分離ならば、これらは次とも同値である：
+\begin{enumerate}
+\item[(4)] 各 $f_i$ は平坦であり、任意の $t \in T$ に対して
+$i_1, \ldots, i_n \in I$ と準コンパクト開集合 $U_j \subset T_{i_j}$ が
+存在し、$\bigcup_{j = 1, \ldots, n} f_{i_j}(U_j)$ は $T$ における $t$ の
+（開とは限らない）近傍である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2), (3) の同値の証明は省略する。以後 $T$ は準分離であると仮定する。
+(4) が (2) を含意することを示す。$U \subset T$ をアフィン開集合とする。
+(2) を示すには、任意の $t \in U$ に対して、$f_{i_j}(U_j) \subset U$ であり、
+$\bigcup f_{i_j}(U_j)$ が $U$ における $t$ の近傍となるような有限個の
+準コンパクト開集合 $U_j \subset T_{i_j}$ が存在することを示せば十分である。
+仮定により、$\bigcup f_{i_j}(U'_j)$ が $T$ における $t$ の近傍となるような
+有限個の準コンパクト開集合 $U'_j \subset T_{i_j}$ が実際に存在する。
+$T$ は準分離なので
+$U_j = U'_j \cap f_{i_j}^{-1}(U) = (f_{i_j}|_{U'_j})^{-1}(U)$
+は Schemes, Lemma \ref{schemes-lemma-quasi-compact-permanence} により
+準コンパクトである。よって (2) が成り立つ。(2) が (4) を含意することは
+明らかなので、証明は完了する。
+\end{proof}
+
+\begin{example}
+\label{topologies-example-not-fpqc}
+$X = X_1 \cup X_2$ を Schemes, Example
+\ref{schemes-example-not-quasi-separated} の非準分離スキームで
+$X_1 = X_2 = \Spec(k[t_1,t_2,\dots])$ とし、
+$Y = X_1 \amalg \Spec(\mathcal{O}_{X_2, 0})$ とする。このとき明らかな射
+$f : Y \to X$ は平坦かつ全射であり、$Y$ は準コンパクトなので Lemma
+\ref{topologies-lemma-recognize-fpqc-covering} の (4) を自明に満たす。しかし
+$\{f : Y \to X\}$ は fpqc 被覆ではない。実際、$f$ による像が $X_2$ である
+$Y$ の準コンパクト開集合 $W$ は存在しないと主張する。というのも
+$f^{-1}(X_2) = X_1 \setminus \{0\} \amalg \Spec(\mathcal{O}_{X_2, 0})$ だから、
+$W$ が存在すれば、$X_1 \setminus \{0\} = X_2 \setminus \{0\}$ のある
+準コンパクト開集合 $U$ に対して
+$W = U \amalg \Spec(\mathcal{O}_{X_2, 0})$ となる。すると、$0$ で消える
+ある $f_i \in k[t_1, t_2, \ldots]$ によって
+$U = D(f_1) \cup \ldots \cup D(f_n)$ と書ける。$f_1, \ldots, f_n$ は変数
+$x_1, \ldots, x_m$ だけを用いるとする。このとき $(m + 1)$ 番目に $1$ をもつ
+$p = (0, \ldots, 0, 1, 0, \ldots)$ は $W$ の像に属さない $X_2$ の閉点である。
+\end{example}
+
+\begin{lemma}
+\label{topologies-lemma-disjoint-union-is-fpqc-covering}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を終域が $T$ である
+スキームの射の族とする。次は同値である：
+\begin{enumerate}
+\item $\{f_i : T_i \to T\}_{i \in I}$ は fpqc 被覆である；
+\item $T' = \coprod_{i \in I} T_i$, $f = \coprod_{i \in I} f_i$ と置くと、
+族 $\{f : T' \to T\}$ は fpqc 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U \subset T$ をアフィン開集合とする。(1) が成り立つならば、
+$i_1, \ldots, i_n \in I$ とアフィン開集合 $U_j \subset T_{i_j}$ で
+$U = \bigcup_{j = 1, \ldots, n} f_{i_j}(U_j)$ を満たすものが見つかる。このとき
+$U_1 \amalg \ldots \amalg U_n \subset T'$ は $U$ 上に全射する準コンパクト
+開集合である。したがって Lemma \ref{topologies-lemma-recognize-fpqc-covering} により
+$\{f : T' \to T\}$ は fpqc 被覆である。逆に (2) が成り立つならば、
+$U = f(U')$ を満たす準コンパクト開集合 $U' \subset T'$ が存在する。このとき
+$U_j = U' \cap T_j$ は $T_j$ の準コンパクト開集合であり、ほとんどすべての
+$j$ について空である。Lemma \ref{topologies-lemma-recognize-fpqc-covering} により
+(1) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-family-flat-dominated-covering}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を終域が $T$ である
+スキームの射の族とする。次を仮定する：
+\begin{enumerate}
+\item 各 $f_i$ は平坦である；
+\item 族 $\{f_i : T_i \to T\}_{i \in I}$ は $T$ の fpqc 被覆で細分できる。
+\end{enumerate}
+このとき $\{f_i : T_i \to T\}_{i \in I}$ は $T$ の fpqc 被覆である。
+\end{lemma}
+
+\begin{proof}
+$\{g_j : X_j \to T\}_{j \in J}$ を $\{f_i : T_i \to T\}$ を細分する
+fpqc 被覆とする。$U \subset T$ をアフィン開集合とする。
+$U = \bigcup g_{j_k}(V_k)$ となるように $j_1, \ldots, j_m \in J$ と
+アフィン開集合 $V_k \subset X_{j_k}$ を選ぶ。各 $j$ に対し、
+$g_j = f_{i_j} \circ h_j$ となる $i_j \in I$ と射
+$h_j : X_j \to T_{i_j}$ を選ぶ。$h_{j_k}(V_k)$ は準コンパクトなので、
+準コンパクト開集合
+$h_{j_k}(V_k) \subset U_k \subset f_{i_{j_k}}^{-1}(U)$ を見つけられる。
+このとき $U = \bigcup f_{i_{j_k}}(U_k)$ である。Lemma
+\ref{topologies-lemma-recognize-fpqc-covering} により
+$\{f_i : T_i \to T\}_{i \in I}$ は fpqc 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-family-flat-fpqc-local-covering}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を終域が $T$ である
+スキームの射の族とする。次を仮定する：
+\begin{enumerate}
+\item 各 $f_i$ は平坦である；
+\item fpqc 被覆 $\{g_j : S_j \to T\}_{j \in J}$ で、各
+$\{S_j \times_T T_i \to S_j\}_{i \in I}$ が fpqc 被覆となるものが存在する。
+\end{enumerate}
+このとき $\{f_i : T_i \to T\}_{i \in I}$ は $T$ の fpqc 被覆である。
+\end{lemma}
+
+\begin{proof}
+以後断らず Lemma \ref{topologies-lemma-recognize-fpqc-covering} を用いる。
+$U \subset T$ をアフィン開集合とする。(2) により、$j \in J$ に対する
+準コンパクト開集合 $V_j \subset S_j$ で、ほとんどすべてが空であり、
+$U = \bigcup g_j(V_j)$ を満たすものが見つかる。次に各 $j$ について、
+$i \in I$ に対する準コンパクト開集合 $W_{ij} \subset S_j \times_T T_i$ で、
+ほとんどすべてが空であり、$V_j = \bigcup_i \text{pr}_1(W_{ij})$ を満たすものを
+選べる。したがって $\{S_j \times_T T_i \to T\}$ は fpqc 被覆である。
+この被覆は $\{f_i : T_i \to T\}$ を細分するので、Lemma
+\ref{topologies-lemma-family-flat-dominated-covering} により結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc}
+任意の fppf 被覆は fpqc 被覆であり、したがって任意の syntomic 被覆、
+平滑被覆、エタール被覆、または Zariski 被覆も fpqc 被覆である。
+\end{lemma}
+
+\begin{proof}
+fppf 被覆が fpqc 被覆であることを示せば、残りは Lemma
+\ref{topologies-lemma-zariski-etale-smooth-syntomic-fppf} から従う。
+$\{f_i : U_i \to U\}_{i \in I}$ を fppf 被覆とする。定義により各 $f_i$ は
+平坦であり、Definition \ref{topologies-definition-fpqc-covering} の第一条件を満たす。
+第二条件を確認するため、$V \subset U$ をアフィン開部分集合とする。ある
+アフィン開集合 $V_{ij} \subset U_i$ を用いて
+$f_i^{-1}(V) = \bigcup_{j \in J_i} V_{ij}$ と書く。各 $f_i$ は開射なので
+（Morphisms, Lemma \ref{morphisms-lemma-fppf-open}）、
+$V = \bigcup_{i\in I} \bigcup_{j \in J_i} f_i(V_{ij})$ は $V$ の開被覆である。
+$V$ は準コンパクトなので、この被覆は有限細分をもつ。これで証明が完了する。
+\end{proof}
+
+\noindent
+fpqc\footnote{fpqc は ``fid\`element plat quasi-compacte'' の略である。}位相は、
+fppf 位相と同じようには扱えない\footnote{より正確には、fpqc 位相に対する
+Lemma \ref{topologies-lemma-fppf-induced} の類似が成り立たない。}。実際、$R$ を
+零でない環とする。Lemma \ref{topologies-lemma-no-set-of-fpqc-covers-is-initial} で、
+$\Spec(R)$ の fpqc 被覆の集合 $A$ で、すべての fpqc 被覆が $A$ の元で
+細分されるものは存在しないことを見る。$R = k$ が体ならば、この非有界性の
+理由は、$k$ のすべての体拡大を含むような $k$ の体拡大が存在しないことにある。
+
+\medskip\noindent
+集合論的な困難を無視すると、層化をもたない前層に出会う。
+\cite[Theorem 5.5]{Waterhouse-fpqc-sheafification} を見よ。やや興味深い選択肢は、
+$R'$ の濃度が適切に有界である忠実平坦環拡大 $R \to R'$ だけを考えることで
+ある。（SGA4 のように固定した宇宙内のすべてのスキームを考えるなら、濃度を
+強到達不能基数で有界にしていることになる。）しかし、その基数をより大きい
+ものへ変えたとき何が起こるかは、それほど明らかでない。
+
+\medskip\noindent
+以上の理由から、fpqc サイトは導入せず、fpqc 位相に関するコホモロジーも
+考えない。
+
+\medskip\noindent
+一方、反変函手 $F : \Sch^{opp} \to \textit{Sets}$ が与えられたとき、$F$ が
+fpqc 位相に対する層条件を満たすかを問うことには意味がある。以下を見よ。
+さらに、fpqc 位相における対象の降下などを考えることもできる。要するに、
+ある種の結果にとって適切な一般性は fpqc 被覆を用いることで得られる。
+
+\begin{lemma}
+\label{topologies-lemma-fpqc}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の fpqc 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が fpqc 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が fpqc 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は fpqc 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が fpqc 被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は fpqc 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は直ちに従う。平坦射の合成は平坦であり、平坦射の基底変換は平坦である
+ことを思い出そう（Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-flat} および
+\ref{morphisms-lemma-composition-flat}）。したがって各場合に Lemma
+\ref{topologies-lemma-recognize-fpqc-covering} を適用して、射の族が fpqc 被覆であることを
+確認できる。
+
+\medskip\noindent
+(2) の証明。$\{T_i \to T\}_{i\in I}$ を fpqc 被覆とし、各 $i$ に対して
+$\{f_{ij} : T_{ij} \to T_i\}_{j\in J_i}$ を fpqc 被覆とする。
+$U \subset T$ をアフィン開集合とする。$i \in I$ に対する準コンパクト開集合
+$U_i \subset T_i$ で、ほとんどすべてが空であり、
+$U = \bigcup f_i(U_i)$ を満たすものが見つかる。次に各 $i$ について、
+$j \in J_i$ に対する準コンパクト開集合 $U_{ij} \subset T_{ij}$ で、
+ほとんどすべてが空であり、$U_i = \bigcup_j f_{ij}(U_{ij})$ を満たすものを
+選べる。したがって $\{T_{ij} \to T\}$ は fpqc 被覆である。
+
+\medskip\noindent
+(3) の証明。$\{T_i \to T\}_{i\in I}$ を fpqc 被覆、$T' \to T$ を
+スキームの射とする。$U' \subset T'$ を、アフィン開集合 $U \subset T$ に写る
+アフィン開集合とする。ほとんどすべてが空である準コンパクト開集合
+$U_i \subset T_i$ で $U = \bigcup f_i(U_i)$ を満たすものを選ぶ。このとき
+$U' \times_U U_i$ は $T' \times_T T_i$ の準コンパクト開集合であり、
+$U' = \bigcup \text{pr}_1(U' \times_U U_i)$ である。$T'$ はこのような
+アフィン開集合 $U' \subset T'$ で被覆できるので、Lemma
+\ref{topologies-lemma-recognize-fpqc-covering} により
+$\{T' \times_T T_i \to T'\}_{i\in I}$ は fpqc 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fpqc-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の fpqc 被覆と
+する。このとき、$\{T_i \to T\}_{i \in I}$ の細分であり、各 $U_j$ が
+アフィンスキームであるような fpqc 被覆
+$\{U_j \to T\}_{j = 1, \ldots, n}$ が存在する。さらに、各 $U_j$ は
+いずれかの $T_i$ のアフィン開集合として選べる。
+\end{lemma}
+
+\begin{proof}
+これは定義から直ちに従う。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-standard-fpqc}
+$T$ をアフィンスキームとする。$T$ の{\it 標準 fpqc 被覆}とは、各 $U_j$ が
+アフィンで $T$ 上平坦であり、かつ $T = \bigcup f_j(U_j)$ を満たす族
+$\{f_j : U_j \to T\}_{j = 1, \ldots, n}$ のことである。
+\end{definition}
+
+\noindent
+アフィンサイトを導入しないので、すべての標準 fpqc 被覆の集まりが公理を
+満たすことを直接示す必要がある。
+
+\begin{lemma}
+\label{topologies-lemma-fpqc-affine-axioms}
+$T$ をアフィンスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の標準 fpqc 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が標準 fpqc 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が標準 fpqc 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は標準 fpqc 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が標準 fpqc 被覆で、$T' \to T$ が
+アフィンスキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は
+標準 fpqc 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは、平坦射の合成と基底変換が平坦であること（Morphisms, Lemmas
+\ref{morphisms-lemma-base-change-flat} および
+\ref{morphisms-lemma-composition-flat}）と、アフィンスキームのファイバー積が
+アフィンであること（Schemes, Lemma
+\ref{schemes-lemma-fibre-product-affines}）から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-fpqc-covering-affines-mapping-in}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を終域が $T$ である
+スキームの射の族とする。次を仮定する：
+\begin{enumerate}
+\item 各 $f_i$ は平坦である；
+\item 任意のアフィンスキーム $Z$ と射 $h : Z \to T$ に対して、族
+$\{T_i \times_T Z \to Z\}_{i \in I}$ を細分する標準 fpqc 被覆
+$\{Z_j \to Z\}_{j = 1, \ldots, n}$ が存在する。
+\end{enumerate}
+このとき $\{f_i : T_i \to T\}_{i \in I}$ は $T$ の fpqc 被覆である。
+\end{lemma}
+
+\begin{proof}
+$T = \bigcup U_\alpha$ をアフィン開被覆とする。各 $\alpha$ について引き戻し族
+$\{T_i \times_T U_\alpha \to U_\alpha\}$ は標準 fpqc 被覆で細分できるので、
+Lemma \ref{topologies-lemma-family-flat-dominated-covering} により fpqc 被覆である。
+$\{U_\alpha \to T\}$ は fpqc 被覆なので、Lemma
+\ref{topologies-lemma-family-flat-fpqc-local-covering} により
+$\{T_i \to T\}$ は fpqc 被覆である。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-sheaf-property-fpqc}
+$F$ をスキームの圏上の集合値反変函手とする。
+\begin{enumerate}
+\item $\{U_i \to T\}_{i \in I}$ を終域を固定したスキームの射の族とする。
+$\xi_i|_{U_i \times_T U_j} = \xi_j|_{U_i \times_T U_j}$ を満たす任意の元の族
+$\xi_i \in F(U_i)$ に対して、$F(U_i)$ において
+$\xi_i = \xi|_{U_i}$ となる一意な元 $\xi \in F(T)$ が存在するとき、
+$F$ は{\it 与えられた族に対する層条件を満たす}という。
+\item $F$ が任意の fpqc 被覆に対する層条件を満たすとき、この函手は
+{\it fpqc 位相に対する層条件を満たす}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+上で説明したように fpqc 層の圏を定義しているわけではないので、この状況では
+「$F$ は層である」という用語をできるだけ避ける。
+
+\begin{lemma}
+\label{topologies-lemma-sheaf-property-fpqc}
+$F$ をスキームの圏上の集合値反変函手とする。このとき $F$ が fpqc 位相に
+対する層条件を満たすための必要十分条件は、次を満たすことである：
+\begin{enumerate}
+\item すべての Zariski 被覆に対する層条件；
+\item 任意の標準 fpqc 被覆に対する層条件。
+\end{enumerate}
+さらに (1) のもとで、性質 (2) は次の性質と同値である：
+\begin{enumerate}
+\item[(2')] $V$, $U$ がアフィンで $V \to U$ が忠実平坦である
+$\{V \to U\}$ に対する層条件。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2) を仮定する。$\{f_i : T_i \to T\}_{i \in I}$ を fpqc 被覆とし、
+$s_i \in F(T_i)$ を、$s_i$ と $s_j$ が $F(T_i \times_T T_j)$ の同じ元に写る
+ような元の族とする。すべての $i$ に対して
+$s|_{f_i^{-1}(W)} = s_i|_{f_i^{-1}(W)}$ を満たす一意な $s \in F(W)$ が
+存在するような最大の開部分集合を $W \subset T$ とする。$F$ は Zariski 被覆に
+対する層条件を満たすので、このような最大開集合は存在する。実際 $W$ はこの
+性質をもつすべての開集合の合併である。$t \in T$ とする。$t \in W$ を示す。
+そのため、アフィン開集合 $t \in U \subset T$ を選び、すべての $i$ に対して
+$s|_{f_i^{-1}(U)} = s_i|_{f_i^{-1}(U)}$ を満たす一意な $s \in F(U)$ が
+存在することを示す。
+
+\medskip\noindent
+Lemma \ref{topologies-lemma-fpqc-affine} により、$\{U \times_T T_i \to U\}$ を、たとえば
+射 $h_j : U_j \to T_{i_j}$ によって細分する標準 fpqc 被覆
+$\{U_j \to U\}_{j = 1, \ldots, n}$ を見つけられる。(2) により、
+$s|_{U_j} = F(h_j)(s_{i_j})$ を満たす一意な元 $s \in F(U)$ を得る。
+$U$ 上の任意のスキーム $V \to U$ に対して、$j = 1, \ldots, n$ の各々について
+$V \times_U U_j$ 上で
+$F(h_j \circ \text{pr}_2)(s_{i_j})$ に制限される一意な切断
+$s_V \in F(V)$ が存在することに注意する。実際、$V$ がアフィンならば
+$\{V \times_U U_j \to V\}$ は標準 fpqc 被覆なので (2) から従い、一般には
+$V$ のアフィン開被覆を選べば (1) とアフィンの場合から従う。特に
+$s_V = s|_V$ である。ここで $V = U \times_T T_i$ と取り、
+$s_{i_j}|_{T_{i_j} \times_T T_i} = s_i|_{T_{i_j} \times_T T_i}$ を用いると、
+$s|_{U \times_T T_i} = s_V = s_i|_{U \times_T T_i}$ を得る。これが示すべき
+ことであった。
+
+\medskip\noindent
+(1) のもとでの (2) と (2') の同値を証明する。
+$\{T_i \to T\}$ を標準 fpqc 被覆とすると、$\coprod T_i \to T$ は
+アフィンスキームの忠実平坦射である。(1) のもとでは
+$F(\coprod T_i) = \prod F(T_i)$ であり、同様に
+$F((\coprod T_i) \times_T (\coprod T_i)) = \prod F(T_i \times_T T_{i'})$ である。
+したがって $\{T_i \to T\}$ と $\{\coprod T_i \to T\}$ に対する層条件は
+同じである。
+\end{proof}
+
+\noindent
+次の補題は、集合論的な困難が実際に生じることを指摘するためだけに置かれて
+おり、ほとんどの読者は無視してよい。
+
+\begin{lemma}
+\label{topologies-lemma-no-set-of-fpqc-covers-is-initial}
+$R$ を零でない環とする。$\Spec(R)$ の fpqc 被覆の集合 $A$ で、すべての
+fpqc 被覆が $A$ の元で細分できるものは存在しない。
+\end{lemma}
+
+\begin{proof}
+まず $R = k$ が体である場合を説明する。任意の集合 $I$ に対し、純超越体拡大
+$k_I = k(\{t_i\}_{i \in I})/k$ を考える。$k \to k_I$ は忠実平坦なので
+$\{\Spec(k_I) \to \Spec(k)\}$ は fpqc 被覆である。$A$ を集合とし、各
+$\alpha \in A$ に対して
+$\mathcal{U}_\alpha = \{S_{\alpha, j} \to \Spec(k)\}_{j \in J_\alpha}$ を
+fpqc 被覆とする。$\mathcal{U}_\alpha$ が
+$\{\Spec(k_I) \to \Spec(k)\}$ を細分するならば、射
+$S_{\alpha, j} \to \Spec(k)$ は $\Spec(k_I)$ を経由する。
+$\mathcal{U}_\alpha$ は被覆なので、少なくとも一つの $S_{\alpha, j}$ は
+空でない。点 $s \in S_{\alpha, j}$ を選ぶ。分解
+$S_{\alpha, j} \to \Spec(k_I) \to \Spec(k)$ があるので、体の準同型
+$k_I \to \kappa(s)$ を得る。特に $\kappa(s)$ の濃度は $I$ の濃度以上である。
+したがって $I$ を、すべてのスキーム $S_{\alpha, j}$ の剰余体の濃度より
+大きい濃度をもつ集合とすれば、このような分解は存在せず、$R = k$ の場合の
+補題が成り立つ。
+
+\medskip\noindent
+一般の場合。$R$ は零でないので、剰余体 $\kappa$ をもつ極大素イデアル
+$\mathfrak m$ が存在する。$I$ を集合とし、
+$R_I = S_I^{-1} R[\{t_i\}_{i \in I}]$ を考える。ここで
+$S_I \subset R[\{t_i\}_{i \in I}]$ は、$f \in R[\{t_i\}_{i \in I}]$ で、
+$R$ のすべての素イデアル $\mathfrak p$ に対して $f$ が
+$R/\mathfrak p[\{t_i\}_{i \in I}]$ の零でない元へ写るものからなる
+乗法的部分集合である。このとき
+$R_I$ は忠実平坦 $R$-代数であり、$\{\Spec(R_I) \to \Spec(R)\}$ は
+fpqc 被覆である。上の記法で
+$R_I \otimes_R \kappa \cong \kappa(\{t_i\}_{i \in I}) = \kappa_I$ であることは
+読者への演習とする（ヒント：$R \to \kappa$ が全射であることと、係数 $1$ で
+現れる単項式を一つもつ任意の $f \in R[\{t_i\}_{i \in I}]$ が $S_I$ の元で
+あることを用いる）。$A$ を集合とし、各 $\alpha \in A$ に対して
+$\mathcal{U}_\alpha = \{S_{\alpha, j} \to \Spec(R)\}_{j \in J_\alpha}$ を
+fpqc 被覆とする。$\mathcal{U}_\alpha$ が
+$\{\Spec(R_I) \to \Spec(R)\}$ を細分するならば、基底変換により
+$\{S_{\alpha, j} \times_{\Spec(R)} \Spec(\kappa) \to \Spec(\kappa)\}$ は
+$\{\Spec(\kappa_I) \to \Spec(\kappa)\}$ を細分する。したがって前段落の
+結果により、これが成り立たないような $I$ が存在し、補題が証明される。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{V 位相}
+\label{topologies-section-V}
+
+\noindent
+V 位相は、この章に現れる他のすべての位相よりも強い。
+大まかに言えば、これは Zariski 被覆と、特殊化に対する持ち上げ性質を
+満たす準コンパクト射とによって生成される
+(Lemma \ref{topologies-lemma-refine-qcqs-V})。
+しかし、ここで V 被覆を定義するために用いる手順は少し異なる。
+まずアフィンスキームの標準 V 被覆を定義し、それを用いて
+一般の V 被覆を定義する。表記上の注意として、文献では
+``V covering'' の代わりに ``$v$-covering'' と書かれることもある。
+
+\begin{definition}
+\label{topologies-definition-standard-V-covering}
+$T$ をアフィンスキームとする。{\it 標準 V 被覆}とは、各 $T_j$ が
+アフィンである有限族 $\{T_j \to T\}_{j = 1, \ldots, m}$ であって、
+$V$ を付値環とする任意の射 $g : \Spec(V) \to T$ に対し、
+付値環の拡大 $V \subset W$ (More on Algebra, Definition
+\ref{more-algebra-definition-extension-valuation-rings})、
+添字 $1 \leq j \leq m$、および可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & T_j \ar[d] \\
+\Spec(V) \ar[r]^g & T
+}
+$$
+が存在するものをいう。
+\end{definition}
+
+\noindent
+まず、この概念に関するいくつかの基本的な補題を証明する。
+
+\begin{lemma}
+\label{topologies-lemma-standard-fpqc-standard-V}
+標準 fpqc 被覆は標準 V 被覆である。
+\end{lemma}
+
+\begin{proof}
+$\{X_i \to X\}_{i = 1, \ldots, n}$ を標準 fpqc 被覆とする
+(Definition \ref{topologies-definition-standard-fpqc})。$V$ を付値環とする射
+$g : \Spec(V) \to X$ を取る。$\Spec(V)$ の閉点の像を $x \in X$
+とする。$x$ に写る添字 $i$ と点 $x_i \in X_i$ を選ぶ。このとき
+$\Spec(V) \times_X X_i$ には、$\Spec(V)$ の閉点に写る点 $x'_i$
+が存在する。$\Spec(V) \times_X X_i \to \Spec(V)$ は平坦なので、
+$\Spec(V) \times_X X_i$ の点の特殊化 $x''_i \leadsto x'_i$ で、
+$x''_i$ が $\Spec(V)$ の生成点に写るものを取れる。Morphisms,
+Lemma \ref{morphisms-lemma-generalizations-lift-flat} を参照せよ。
+Schemes, Lemma \ref{schemes-lemma-points-specialize} により、付値環
+$W$ と射 $h : \Spec(W) \to \Spec(V) \times_X X_i$ を、$h$ が
+$\Spec(W)$ の生成点を $x''_i$ に、$\Spec(W)$ の閉点を $x'_i$ に写すように
+選べる。したがって可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & X_i \ar[d] \\
+\Spec(V) \ar[r] & X
+}
+$$
+を得る。ここで $V \to W$ は付値環の拡大である。これで補題が示された。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-standard-ph-standard-V}
+標準 ph 被覆は標準 V 被覆である。
+\end{lemma}
+
+\begin{proof}
+$T$ をアフィンスキームとする。$f : U \to T$ を固有全射とし、
+$U = \bigcup_{j = 1, \ldots, m} U_j$ を有限アフィン開被覆とする。
+$\{U_j \to T\}$ が標準 V 被覆であることを示せばよい。
+Definition \ref{topologies-definition-standard-ph-covering} を参照せよ。
+$V$ を分数体 $K$ をもつ付値環とし、$g : \Spec(V) \to T$ を射とする。
+$U \to T$ は全射なので、体の拡大 $L/K$ と可換図式
+$$
+\xymatrix{
+\Spec(L) \ar[rr] \ar[d] & & U \ar[d] \\
+\Spec(K) \ar[r] & \Spec(V) \ar[r]^g & T
+}
+$$
+を選べる。Algebra, Lemma \ref{algebra-lemma-dominate} により、$V$ を
+支配する付値環 $W \subset L$ を選べる。固有性の付値判定法
+(Morphisms, Lemma \ref{morphisms-lemma-characterize-proper}) により、
+次の可換図式における射 $h$ を取れる。
+$$
+\xymatrix{
+\Spec(L) \ar[r] \ar[d] & \Spec(W) \ar[r]_h \ar[d] & U \ar[d] \\
+\Spec(K) \ar[r] & \Spec(V) \ar[r]^g & X
+}
+$$
+$\Spec(W)$ はただ一つの閉点をもつので、ある $j$ に対して
+$\Im(h)$ は $U_j$ に含まれる。したがって $h : \Spec(W) \to U_j$
+は所望の持ち上げであり、$\{U_j \to T\}$ は標準 V 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-base-change-standard-V}
+$\{T_j \to T\}_{j = 1, \ldots, m}$ を標準 V 被覆とし、
+$T' \to T$ をアフィンスキームの射とする。このとき
+$\{T_j \times_T T' \to T'\}_{j = 1, \ldots, m}$ は標準 V 被覆である。
+\end{lemma}
+
+\begin{proof}
+$V$ を付値環とする射 $\Spec(V) \to T'$ を取る。仮定により、
+付値環の拡大 $V \subset W$、添字 $i$、および可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & T_i \ar[d] \\
+\Spec(V) \ar[r] & T
+}
+$$
+を取れる。ファイバー積の普遍性により、所望の射
+$\Spec(W) \to T' \times_T T_i$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-composition-standard-V}
+$T$ をアフィンスキームとする。$\{T_j \to T\}_{j = 1, \ldots, m}$
+を標準 V 被覆とし、$\{T_{ji} \to T_j\}_{i = 1, \ldots n_j}$ を
+標準 V 被覆とする。このとき $\{T_{ji} \to T\}_{i, j}$ は標準 V 被覆である。
+\end{lemma}
+
+\begin{proof}
+これは、$V \subset W$ と $W \subset \Omega$ が付値環の拡大ならば、
+$V \subset \Omega$ も付値環の拡大であるという観察から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-refine-standard-V}
+$T$ をアフィンスキームとする。$\{T_j \to T\}_{j = 1, \ldots, m}$
+を、すべての $j$ について $T_j$ がアフィンである射の族とする。
+次は同値である。
+\begin{enumerate}
+\item $\{T_j \to T\}_{j = 1, \ldots, m}$ は標準 V 被覆である。
+\item $\{T_j \to T\}_{j = 1, \ldots, m}$ を細分する標準 V 被覆が存在する。
+\item $\{\coprod_{j = 1, \ldots, m} T_j \to T\}$ は標準 V 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+証明は省略する。ヒント：これは定義からほとんど直ちに従う。
+わずかに注意を要する唯一の点は、局所環のスペクトルから
+$\coprod_{j = 1, \ldots, m} T_j$ への射が、ある $T_j$ を経由しなければ
+ならないことである。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-V-covering}
+$T$ をスキームとする。$T$ の {\it V 被覆}とは、スキームの射の族
+$\{T_i \to T\}_{i \in I}$ であって、任意のアフィン開集合 $U \subset T$
+に対し、族 $\{T_i \times_T U \to U\}_{i \in I}$ を細分する標準 V 被覆
+$\{U_j \to U\}_{j = 1, \ldots, m}$ が存在するものをいう。
+\end{definition}
+
+\noindent
+V 位相には fpqc 位相と同じ集合論的問題がある。したがって V サイトは
+定義せず、V 位相に関するコホモロジーも考えない。一方、
+$F : \Sch^{opp} \to \textit{Sets}$ が与えられたとき、$F$ が V 位相に
+対する層性質を満たすかを問うことには意味がある。以下を参照せよ。
+さらに、V 位相における対象の降下などを考えることもできる。
+
+\begin{lemma}
+\label{topologies-lemma-refine-by-V}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を射の族とする。
+次は同値である。
+\begin{enumerate}
+\item $\{T_i \to T\}_{i \in I}$ は V 被覆である。
+\item $\{T_i \to T\}_{i \in I}$ を細分する V 被覆が存在する。
+\item $\{\coprod_{i \in I} T_i \to T\}$ は V 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+証明は省略する。ヒント：Lemma \ref{topologies-lemma-refine-by-ph} の証明と比較せよ。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-V}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型ならば、$\{T' \to T\}$ は $T$ の V 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が V 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が V 被覆ならば、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は V 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が V 被覆で、$T' \to T$ が
+スキームの射ならば、$\{T' \times_T T_i \to T'\}_{i\in I}$ は V 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+主張 (1) は明らかである。
+
+\medskip\noindent
+(3) の証明。$U' \subset T'$ をアフィン開部分スキームとする。
+$U'$ は準コンパクトなので、有限アフィン開被覆
+$U' = U'_1 \cup \ldots \cup U'$ で、$U'_j \to T$ の像が
+あるアフィン開集合 $U_j \subset T$ に含まれるものを取れる。
+$\{T_i \times_T U_j \to U_j\}$ を細分する標準 V 被覆
+$\{U_{jl} \to U_j\}_{l = 1, \ldots, n_j}$ を選ぶ。
+Lemma \ref{topologies-lemma-base-change-standard-V} により、その基底変換
+$\{U_{jl} \times_{U_j} U'_j \to U'_j\}$ は標準 V 被覆である。
+また、$\{U'_j \to U'\}$ は標準 V 被覆である
+(例えば Lemma \ref{topologies-lemma-standard-fpqc-standard-V} による)。
+Lemma \ref{topologies-lemma-composition-standard-V} により、族
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$ は標準 V 被覆である。
+$\{U_{jl} \times_{U_j} U'_j \to U'\}$ は
+$\{T_i \times_T U' \to U'\}$ を細分するので、結論を得る。
+
+\medskip\noindent
+(2) の証明。$U \subset T$ をアフィン開集合とする。まず、
+$\{T_i \times_T U \to U\}$ を細分する標準 V 被覆
+$\{U_k \to U\}_{k = 1, \ldots, m}$ を選ぶ。その細分を与える
+$T$ 上の射を $U_k \to T_{i_k}$ と書く。このとき
+$$
+\{T_{i_kj} \times_{T_{i_k}} U_k \to U_k\}_{j \in J_{i_k}}
+$$
+は (3) により V 被覆である。$U_k$ はアフィンなので、この族を
+細分する標準 V 被覆
+$\{U_{ka} \to U_k\}_{a = 1, \ldots, b_k}$ を取れる。
+Lemma \ref{topologies-lemma-composition-standard-V} を適用すると、
+$\{U_{ka} \to U\}$ は $\{T_{ij} \times_T U \to U\}$ を細分する
+標準 V 被覆である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc-ph-V}
+任意の fpqc 被覆は V 被覆である。したがって特に、任意の fppf、
+syntomic、平滑、\'etale、または Zariski 被覆は V 被覆である。
+また、ph 被覆も V 被覆である。
+\end{lemma}
+
+\begin{proof}
+fpqc 被覆は、アフィン局所的に標準 fpqc 被覆で細分できる。
+Lemmas \ref{topologies-lemma-fpqc-affine} を参照せよ。標準 fpqc 被覆は標準 V 被覆
+である (Lemma \ref{topologies-lemma-standard-fpqc-standard-V})。したがって最初の
+主張は、標準 V 被覆を用いた V 被覆の定義から従う。fppf、syntomic、
+平滑、\'etale、または Zariski 被覆についての結論は、これらが fpqc 被覆
+であることから従う。Lemma
+\ref{topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc} を参照せよ。
+
+\medskip\noindent
+ph 被覆についての主張も、Lemma \ref{topologies-lemma-standard-ph-standard-V} から
+同様に従う。
+\end{proof}
+
+\begin{definition}
+\label{topologies-definition-sheaf-property-V}
+$F$ を、スキームの圏から集合への反変関手とする。$F$ が任意の V 被覆に
+対して層性質を満たすとき、{\it V 位相に対する層性質を満たす}
+という (Definition \ref{topologies-definition-sheaf-property-fpqc} を参照せよ)。
+\end{definition}
+
+\noindent
+上で説明したように V 層の圏は定義しないので、この状況では
+``$F$ は層である'' という言い方を避ける。
+
+\begin{lemma}
+\label{topologies-lemma-sheaf-property-V}
+$F$ を、スキームの圏から集合への反変関手とする。このとき、$F$ が
+V 位相に対する層性質を満たすための必要十分条件は、次を満たすことである。
+\begin{enumerate}
+\item 任意の Zariski 被覆に対する層性質。
+\item 任意の標準 V 被覆に対する層性質。
+\end{enumerate}
+さらに、(1) のもとで性質 (2) は次の性質と同値である。
+\begin{enumerate}
+\item[(2')] 一本の射だけからなる形 $\{V \to U\}$ の標準 V 被覆に
+対する層性質。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) を仮定する。$\{f_i : T_i \to T\}_{i \in I}$ を V 被覆とし、
+$s_i \in F(T_i)$ を、$s_i$ と $s_j$ が $F(T_i \times_T T_j)$ の同じ元に
+写るような元の族とする。すべての $i$ について
+$s|_{f_i^{-1}(W)} = s_i|_{f_i^{-1}(W)}$ を満たす一意な $s \in F(W)$ が
+存在するような最大の開部分集合を $W \subset T$ とする。$F$ は
+Zariski 被覆に対する層性質を満たすので、このような最大の開集合は存在する。
+実際、$W$ はこの性質をもつすべての開集合の合併である。$t \in T$ を取る。
+$t \in W$ を示そう。そのためにアフィン開集合 $t \in U \subset T$ を選び、
+すべての $i$ について
+$s|_{f_i^{-1}(U)} = s_i|_{f_i^{-1}(U)}$ を満たす一意な $s \in F(U)$ が
+存在することを示す。
+
+\medskip\noindent
+$\{U \times_T T_i \to U\}$ を細分する標準 V 被覆
+$\{U_j \to U\}_{j = 1, \ldots, n}$ を取れる。その細分を与える射を
+$h_j : U_j \to T_{i_j}$ と書く。(2) により、
+$s|_{U_j} = F(h_j)(s_{i_j})$ を満たす一意な元 $s \in F(U)$ を得る。
+任意の $U$ 上のスキーム $V \to U$ に対し、各 $j = 1, \ldots, n$ について
+$V \times_U U_j$ 上で $F(h_j \circ \text{pr}_2)(s_{i_j})$ に制限される
+一意な切断 $s_V \in F(V)$ が存在することに注意する。実際、$V$ が
+アフィンなら、$\{V \times_U U_j \to V\}$ は標準 V 被覆なので
+(Lemma \ref{topologies-lemma-base-change-standard-V})、これは (2) から従う。
+一般の場合は $V$ のアフィン開被覆を選び、(1) とアフィンの場合から従う。
+特に $s_V = s|_V$ である。ここで $V = U \times_T T_i$ と取り、
+$s_{i_j}|_{T_{i_j} \times_T T_i} = s_i|_{T_{i_j} \times_T T_i}$ を用いると、
+$s|_{U \times_T T_i} = s_V = s_i|_{U \times_T T_i}$ を得る。これはまさに
+示すべきことであった。
+
+\medskip\noindent
+(1) のもとでの (2) と (2') の同値性を証明する。
+$\{T_i \to T\}_{i = 1, \ldots, n}$ を標準 V 被覆とする。このとき
+$\coprod_{i = 1, \ldots, n} T_i \to T$ はアフィンスキームの射であり、
+明らかにこれも標準 V 被覆である。(1) のもとでは
+$F(\coprod T_i) = \prod F(T_i)$ であり、同様に
+$F((\coprod T_i) \times_T (\coprod T_i)) = \prod F(T_i \times_T T_{i'})$
+である。したがって $\{T_i \to T\}$ と $\{\coprod T_i \to T\}$ に対する
+層条件は同じである。
+\end{proof}
+
+\noindent
+次の補題は、V 被覆であることが特殊化を持ち上げられることと
+関係していることを示す。
+
+\begin{lemma}
+\label{topologies-lemma-refine-qcqs-V}
+$X \to Y$ をスキームの準コンパクト射とする。次は同値である。
+\begin{enumerate}
+\item $\{X \to Y\}$ は V 被覆である。
+\item 任意の付値環 $V$ と射 $g : \Spec(V) \to Y$ に対し、
+付値環の拡大 $V \subset W$ と可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(V) \ar[r] & Y
+}
+$$
+が存在する。
+\item 任意の射 $Z \to Y$ と $Z$ の点の特殊化 $z' \leadsto z$ に対し、
+$z' \leadsto z$ に写る $Z \times_Y X$ の点の特殊化
+$w' \leadsto w$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定し、$g : \Spec(V) \to Y$ を (2) のような射とする。
+$V$ は局所環なので、アフィン開集合 $U \subset Y$ で、$g$ が $U$ を
+経由するものが存在する。
+Definition \ref{topologies-definition-V-covering} により、$\{X \times_Y U \to U\}$ を
+細分する標準 V 被覆 $\{U_j \to U\}$ を取れる。
+Definition \ref{topologies-definition-standard-V-covering} により、ある $j$、
+付値環の拡大 $V \subset W$、および可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & U_j \ar[d] \ar@{..>}[r] & X \ar[ld] \\
+\Spec(V) \ar[r] & Y
+}
+$$
+を取れる。被覆の細分性質により、図式を可換にする点線の矢印が存在する。
+したがって (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定し、$Z \to Y$ と $z' \leadsto z$ を (3) のように取る。
+Schemes, Lemma \ref{schemes-lemma-points-specialize} により、付値環 $V$ と
+射 $\Spec(V) \to Z$ を、$\Spec(V)$ の閉点が $z$ に、$\Spec(V)$ の生成点が $z'$ に
+写るように取れる。(2) により、付値環の拡大 $V \subset W$ と可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[rr] \ar[d] & & X \ar[d] \\
+\Spec(V) \ar[r] & Z \ar[r] & Y
+}
+$$
+を取れる。$\Spec(W)$ の生成点と閉点は、誘導される射
+$\Spec(W) \to Z \times_Y X$ によって、$Z \times_Y X$ の点の特殊化
+$w' \leadsto w$ に写る。これで (3) が成り立つ。
+
+\medskip\noindent
+(3) を仮定し、$U \subset Y$ をアフィン開集合とする。有限アフィン開被覆
+$U \times_Y X = \bigcup_{j = 1, \ldots, m} U_j$ を選ぶ。
+$X \to Y$ は準コンパクトなので、これは可能である。
+$\{U_j \to U\}$ が標準 V 被覆であると主張する。この主張から (1) が従い、
+補題の証明が完了する。主張を証明するため、$V$ を付値環とし、
+$g : \Spec(V) \to U$ を射とする。(3) により、次のスキームの点の特殊化
+$w' \leadsto w$ を取れる。
+$$
+T = \Spec(V) \times_X Y = \Spec(V) \times_U (U \times_X Y)
+$$
+ここで $w'$ は $\Spec(V)$ の生成点に、$w$ は $\Spec(V)$ の閉点に写る。
+Schemes, Lemma \ref{schemes-lemma-points-specialize} により、付値環 $W$ と
+射 $\Spec(W) \to T$ を、$\Spec(W)$ の生成点が $w'$ に、$\Spec(W)$ の閉点が $w$ に
+写るように取れる。合成 $\Spec(W) \to T \to \Spec(V)$ は包含
+$V \subset W$ に対応し、これは $W$ を付値環 $V$ の拡大として表す。
+$T = \bigcup \Spec(V) \times_U U_j$ は開被覆なので、ある $j$ に対して
+$\Spec(W) \to T$ は $\Spec(V) \times_U U_j$ を経由する。したがって
+可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[d] \ar[r] & U_j \ar[d] \\
+\Spec(V) \ar[r] & U
+}
+$$
+を得て、主張の証明が完了する。
+\end{proof}
+
+\noindent
+V 被覆は、普遍的に submersive な射の族を与える。この補題の逆は
+成り立たない。Examples, Section
+\ref{examples-section-universally-submersive-not-V} を参照せよ。
+
+\begin{lemma}
+\label{topologies-lemma-V-covering-universally-submersive}
+$\{f_i : X_i \to X\}_{i \in I}$ を V 被覆とする。このとき
+$$
+\coprod\nolimits_{i \in I} f_i :
+\coprod\nolimits_{i \in I} X_i
+\longrightarrow
+X
+$$
+はスキームの普遍的に submersive な射である (Morphisms, Definition
+\ref{morphisms-definition-submersive})。
+\end{lemma}
+
+\begin{proof}
+V 被覆の基底変換が V 被覆であること (Lemma \ref{topologies-lemma-V}) を、以下では
+断りなく用いる。特に、この射が submersive であることを示せば十分である。
+submersive であることは、明らかに基底上 Zariski 局所的である。
+したがって $X$ はアフィンであると仮定してよい。このとき
+$\{X_i \to X\}$ は標準 V 被覆 $\{Y_j \to X\}$ で細分できる。
+$\coprod Y_j \to X$ が submersive であることを示せれば、分解
+$\coprod Y_j \to \coprod X_i \to X$ があるので、
+$\coprod X_i \to X$ も submersive であると分かる。
+$Y = \coprod Y_j$ とおき、アフィンスキームの射 $f : Y \to X$ を考える。
+Lemma \ref{topologies-lemma-refine-qcqs-V} により、$X$ の任意の特殊化
+$x' \leadsto x$ を $Y$ のある特殊化 $y' \leadsto y$ に持ち上げられる。
+したがって $T \subset X$ が $f^{-1}(T)$ が $Y$ で閉となる部分集合なら、
+$T \subset X$ は特殊化に関して閉じている。$f^{-1}(T) \subset Y$ に
+誘導される簡約閉部分スキーム構造を入れたものはアフィンスキームなので、
+Algebra, Lemma \ref{algebra-lemma-image-stable-specialization-closed} により
+$T \subset X$ は閉である。ゆえに $f$ は submersive である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{位相の変更}
+\label{topologies-section-change-topologies}
+
+\noindent
+$f : X \to Y$ を基底スキーム $S$ 上のスキームの射とする。このとき、
+次のサイトの射がある\footnote{ph 位相と他の位相との比較は含めていない。
+これについては More on Morphisms, Remark
+\ref{more-morphisms-remark-change-topologies} を参照せよ。}
+(以下の Remark \ref{topologies-remark-choice-sites} のようにサイトを適切に選ぶ)。
+\begin{enumerate}
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{fppf}$,
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{syntomic}$,
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{smooth}$,
+\item $(\Sch/X)_{fppf} \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow (\Sch/Y)_{syntomic}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow (\Sch/Y)_{smooth}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_{syntomic} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{smooth} \longrightarrow (\Sch/Y)_{smooth}$,
+\item $(\Sch/X)_{smooth} \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_{smooth} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_\etale \longrightarrow
+(\Sch/Y)_\etale$,
+\item $(\Sch/X)_\etale \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{Zar} \longrightarrow (\Sch/Y)_{Zar}$,
+\item $(\Sch/X)_{fppf} \longrightarrow Y_\etale$,
+\item $(\Sch/X)_{syntomic} \longrightarrow Y_\etale$,
+\item $(\Sch/X)_{smooth} \longrightarrow Y_\etale$,
+\item $(\Sch/X)_\etale \longrightarrow Y_\etale$,
+\item $(\Sch/X)_{fppf} \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_{syntomic} \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_{smooth} \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_\etale \longrightarrow Y_{Zar}$,
+\item $(\Sch/X)_{Zar} \longrightarrow Y_{Zar}$,
+\item $X_\etale \longrightarrow Y_\etale$,
+\item $X_\etale \longrightarrow Y_{Zar}$,
+\item $X_{Zar} \longrightarrow Y_{Zar}$,
+\end{enumerate}
+いずれの場合も、基礎にある連続関手 $\Sch/Y \to \Sch/X$ または
+$Y_\tau \to \Sch/X$ は、関手
+$Y'/Y \mapsto X \times_Y Y'/X$ である。実際、上の各節では、上記の
+$\tau$ に対する射
+$f_{big} : (\Sch/X)_\tau \to (\Sch/Y)_\tau$ および
+$f_{small} : X_\tau \to Y_\tau$ を見た。また、
+$\tau \in \{\etale, Zariski\}$ に対するサイトの射
+$\pi_Y : (\Sch/Y)_\tau \to Y_\tau$ も見た。一方、$\tau$ が $\tau'$ より
+強い位相であるとき、恒等関手
+$(\Sch/X)_\tau \to (\Sch/X)_{\tau'}$ がサイトの射を定めることは明らかである。
+したがって、これらを合成すると上に列挙した射が得られる。
+
+\medskip\noindent
+基礎関手の記述が単純なので、スキームの射 $X \to Y \to Z$ が与えられたとき、
+上の二つのサイトの射の合成、例えば
+$$
+(\Sch/X)_{\tau_0} \longrightarrow
+(\Sch/Y)_{\tau_1} \longrightarrow
+(\Sch/Z)_{\tau_2}
+$$
+は、スキームの射 $X \to Z$ に付随する対応するサイトの射であることが明らかである。
+
+\begin{remark}
+\label{topologies-remark-choice-sites}
+スキームの集合 $\{X, Y, S\}$ から出発して Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成される任意の圏
+$\Sch_\alpha$ を取る。圏 $\Sch_\alpha$ と fppf 被覆の類から出発し、
+Sets, Lemma \ref{sets-lemma-coverings-site} のように $\Sch_\alpha$ 上の
+被覆の任意の集合 $\text{Cov}_{fppf}$ を選ぶ。こうして得られる大 fppf
+サイトを $\Sch_{fppf}$ と書く。次に
+$\tau \in \{Zariski, \etale, smooth, syntomic\}$ に対し、$\Sch_\tau$ の
+基礎圏を $\Sch_{fppf}$ と同じものとし、被覆
+$\text{Cov}_\tau \subset \text{Cov}_{fppf}$ を単に $\tau$-被覆からなる
+部分集合とする。これが大サイト $\Sch_\tau$ を与えることは直ちに確認できる。
+\end{remark}
+
+
+
+
+
+
+
+
+
+\section{大サイトの変更}
+\label{topologies-section-change-alpha}
+
+\noindent
+この節では、大 Zariski/fppf/\'etale サイトを変更したときに何が起こるかを
+説明する。
+
+\medskip\noindent
+$\tau, \tau' \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。
+二つの大サイト $\Sch_\tau$ と $\Sch'_{\tau'}$ が与えられたとき、
+$\Ob(\Sch_\tau) \subset \Ob(\Sch'_{\tau'})$ かつ
+$\text{Cov}(\Sch_\tau) \subset \text{Cov}(\Sch'_{\tau'})$ ならば、
+{\it $\Sch_\tau$ は $\Sch'_{\tau'}$ に含まれる}という。この場合
+$\tau$ は $\tau'$ より強い。例えば、fppf サイトが \'etale サイトに
+含まれることはない。
+
+\begin{lemma}
+\label{topologies-lemma-contained-in}
+大 Zariski サイトの任意の集合は、共通の大 Zariski サイトに含まれる。
+必要な変更を加えれば、大 fppf サイトおよび大 \'etale サイトについても
+同じことが成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは、集合からなる集合の合併が集合であり、Sets, Lemmas
+\ref{sets-lemma-construct-category} および
+\ref{sets-lemma-coverings-site} の構成では、初めに与えるスキームと被覆の
+集合を任意に選べることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-change-alpha}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。
+大サイト $\Sch_\tau$ と $\Sch'_\tau$ が与えられ、$\Sch_\tau$ は
+$\Sch'_\tau$ に含まれると仮定する。包含関手
+$\Sch_\tau \to \Sch'_\tau$ は Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。トポスの射
+\begin{eqnarray*}
+g : \Sh(\Sch_\tau) &
+\longrightarrow &
+\Sh(\Sch'_\tau) \\
+f : \Sh(\Sch'_\tau) &
+\longrightarrow &
+\Sh(\Sch_\tau)
+\end{eqnarray*}
+で $f \circ g \cong \text{id}$ を満たすものが存在する。また、
+$\Sch_\tau$ の任意の対象 $S$ に対し、包含関手
+$(\Sch/S)_\tau \to (\Sch'/S)_\tau$ も Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。したがって同様に射
+\begin{eqnarray*}
+g : \Sh((\Sch/S)_\tau) &
+\longrightarrow &
+\Sh((\Sch'/S)_\tau) \\
+f : \Sh((\Sch'/S)_\tau) &
+\longrightarrow &
+\Sh((\Sch/S)_\tau)
+\end{eqnarray*}
+で $f \circ g \cong \text{id}$ を満たすものを得る。
+\end{lemma}
+
+\begin{proof}
+関手 $\Sch_\tau \to \Sch'_\tau$ および
+$(\Sch/S)_\tau \to (\Sch'/S)_\tau$ に対し、Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定 (b)、(c)、(e) は直ちに成り立つ。
+性質 (a) は Lemma \ref{topologies-lemma-zariski-induced}、
+\ref{topologies-lemma-etale-induced}、\ref{topologies-lemma-smooth-induced}、
+\ref{topologies-lemma-syntomic-induced}、または \ref{topologies-lemma-fppf-induced} により成り立つ。
+性質 (d) は、圏 $\Sch_\tau$、$\Sch'_\tau$ にファイバー積が存在し、
+それがスキームの圏におけるファイバー積と両立することから成り立つ。
+\end{proof}
+
+\noindent
+考察：関手 $g^{-1} = f_*$ は単なる制限関手であり、$\Sch'_\tau$ 上の層
+$\mathcal{G}$ にその制限 $\mathcal{G}|_{\Sch_\tau}$ を対応させる。
+したがってこの補題は、$\Sch_\tau$ 上の任意の集合の層 $\mathcal{F}$ に対し、
+$\mathcal{F}|_{\Sch'_\tau} = \mathcal{F}'$ を満たす $\Sch'_\tau$ 上の
+標準的な層 $\mathcal{F}'$ が存在することを述べている。実際、層
+$\mathcal{F}'$ は次のように記述できる。これは前層
+$$
+\Sch'_\tau \longrightarrow \textit{Sets}, \quad
+V \longmapsto \colim_{V \to U} \mathcal{F}(U)
+$$
+の層化である。ここで $U$ は $\Sch_\tau$ の対象を走る。これは Sites,
+Lemmas \ref{sites-lemma-when-shriek} および \ref{sites-lemma-bigger-site}
+によれば
+$\mathcal{F}' = f^{-1}\mathcal{F} = (u_p\mathcal{F})^\#$ だからである。
+
+
+
+
+
+
+\section{関手の拡張}
+\label{topologies-section-extending-functors}
+
+\noindent
+ここで行うことを説明する簡単な例から始めよう。$R$ を環とする。
+$F$ を、次の形の $R$-代数からなる圏 $\mathcal{C}$ 上で定義された関手とする。
+$$
+A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)
+$$
+ここで $n, m \geq 0$ は整数であり、
+$f_1, \ldots, f_m \in R[x_1, \ldots, x_n]$ である。このとき任意の
+$R$-代数 $B$ に対し、次のように定義できる。
+$$
+F'(B) = \colim_{A \to B,\ A \in \mathcal{C}} F(A)
+$$
+$F'$ は、$F$ を拡張しフィルター付き余極限と可換する、すべての
+$R$-代数の圏上の一意な関手であることが分かる。関手が Zariski 層で
+あることを課せば、同じ手順がスキームの圏でも機能する。
+
+\begin{lemma}
+\label{topologies-lemma-extend}
+$S$ をスキームとし、$\mathcal{C}$ を $S$ 上のすべてのスキームの圏
+$\Sch/S$ の充満部分圏とする。次を仮定する。
+\begin{enumerate}
+\item $X \to S$ が $\mathcal{C}$ の対象で、$U \subset X$ がアフィン開集合
+ならば、$U \to S$ は $\mathcal{C}$ のある対象と同型である。
+\item $V$ がアフィン開集合 $U \subset S$ 上のアフィンスキームで、
+$V \to U$ が有限表示ならば、$V \to S$ は $\mathcal{C}$ のある対象と同型である。
+\end{enumerate}
+$F : \mathcal{C}^{opp} \to \textit{Sets}$ を関手とする。次を仮定する。
+\begin{enumerate}
+\item[(a)] $X, X_i$ が $\mathcal{C}$ の対象である任意の Zariski 被覆
+$\{f_i : X_i \to X\}_{i \in I}$ に対し、$F$ はこの族に対する層条件を
+満たす\footnote{$X_i \times_X X_j$ が $\mathcal{C}$ に属するとは限らないので、
+これは次の意味に解釈する必要がある。性質 (1) により、各 $U_{ijk}$ が
+$\mathcal{C}$ の対象である Zariski 被覆
+$\{U_{ijk} \to X_i \times_X X_j\}_{k \in K_{ij}}$ が存在する。このとき
+層条件とは、$F(X)$ が $\prod F(X_i)$ から $\prod F(U_{ijk})$ への
+二つの写像の等化子であることをいう。}。
+\item[(b)] $X = \lim X_i$ が $S$ 上のアフィンスキームの有向逆系の極限で、
+$X, X_i$ が $\mathcal{C}$ の対象ならば、$F(X) = \colim F(X_i)$ である。
+\end{enumerate}
+このとき、(a) と (b) の類似を満たす関手
+$F' : (\Sch/S)^{opp} \to \textit{Sets}$ へ $F$ を拡張する方法は一意である。
+すなわち、$F'$ は任意の Zariski 被覆に対する層条件を満たし、
+$X = \lim X_i$ が $S$ 上のアフィンスキームの有向逆系の極限ならば
+$F'(X) = \colim F'(X_i)$ である。
+\end{lemma}
+
+\begin{proof}
+まず $F$ を $S$ 上の十分大きなアフィンスキームの集まりへ拡張し、次に
+Zariski 層性質を用いてすべてのスキームへ拡張する、というのが方針である。
+
+\medskip\noindent
+$V$ を $S$ 上のアフィンスキームとし、その構造射 $V \to S$ はある
+アフィン開集合 $U \subset S$ を経由するとする。この場合、
+$$
+V = \lim V_i
+$$
+と書ける。ここでこれは余フィルター付き極限であり、$V_i$ はアフィン、
+$V_i \to U$ は有限表示である。Algebra, Lemma
+\ref{algebra-lemma-ring-colimit-fp} を参照せよ。条件 (1) と (2) により、
+$V_i$ を $\mathcal{C}$ の対象で置き換えてよい。$V_i \to S$ は局所有限表示
+であることに注意する ($S$ が準分離なら、これらの射は実際に有限表示である)。
+そこで
+$$
+F'(V) = \colim F(V_i)
+$$
+実際、より標準的な表示として
+$$
+F'(V) = \colim_{V \to V'} F(V')
+$$
+も与えられる。ここで余極限は、$S$ 上の射 $V \to V'$ で、$V'$ が
+$\mathcal{C}$ の対象かつその構造射 $V' \to S$ が局所有限表示であるものの
+圏を走る。これが最初の式と同じである理由は、Limits, Proposition
+\ref{limits-proposition-characterize-locally-finite-presentation} により、
+逆系 $V_i$ がこの圏で余終だからである。最後に、$V$ が $\mathcal{C}$ の
+対象ならば、仮定 (b) により $F'(V) = F(V)$ であることに注意する。
+
+\medskip\noindent
+二つ目の式により、$F'$ は、構造射が $S$ のアフィン開集合を経由する
+$S$ 上のアフィンスキーム $V$ からなる圏上の反変関手になる。
+$V$ をそのような $S$ 上のアフィンスキームとし、
+$V = \bigcup_{k = 1, \ldots, n} V_k$ をアフィンによる有限開被覆とする。
+このとき $F'$ がこの開被覆に対する層条件を満たすかを問うことができる。
+実際これは成り立ち、容易に示せる。前段落のように $V = \lim V_i$ と書く。
+Limits, Lemma \ref{limits-lemma-descend-opens} により、十分大きいすべての
+$i$ に対して、遷移写像と両立し $V$ 上で $V_k$ に引き戻されるアフィン開集合
+$V_{i, k} \subset V_i$ を取れる。したがって
+$$
+F'(V_k) = \colim F(V_{i, k})
+\quad\text{and}\quad
+F'(V_k \cap V_l) = \colim F(V_{i, k} \cap V_{i, l})
+$$
+である。厳密には、これらの式で関手 $F$ を適用する前に、$V_{i, k}$ と
+$V_{i, k} \cap V_{i, l}$ を、それぞれと同型な $\mathcal{C}$ のアフィン対象で
+置き換える必要がある。$I$ は有向なので、余極限は等化子と可換する。
+したがって $F$ と Zariski 被覆 $\{V_{i, k} \to V_i\}$ に対する層条件 (b)
+から、$F'$ とこの被覆に対する層条件が従う。
+
+\medskip\noindent
+$X$ を一般の $S$ 上のスキームとする。$S$ への構造射によって $S$ のアフィン開集合に
+写る $X$ のアフィン開集合の集まりを $\mathcal{B}_X$ と書く。
+$\mathcal{B}_X$ が $X$ の位相の基底であることは明らかである。前段落の
+結果と Sheaves, Lemma
+\ref{sheaves-lemma-cofinal-systems-coverings-standard-case} により、$F'$ は
+$\mathcal{B}_X$ 上の層である。したがって $\mathcal{B}_X$ への $F'$ の制限は、
+$X$ 上の層 $F'_X$ へ一意に拡張される。Sheaves, Lemma
+\ref{sheaves-lemma-extend-off-basis} を参照せよ。$X$ が $\mathcal{C}$ の
+対象ならば、$F'$ と $F$ がともに定義される対象上で一致すること、および
+$F$ が Zariski 被覆に対する層条件を満たすことから、標準的な同一視
+$F'_X(X) = F(X)$ を得る。
+
+\medskip\noindent
+$f : X \to Y$ を $S$ 上のスキームの射とする。$f(U) \subset V$ を満たす
+すべての $U \in \mathcal{B}_X$ と $V \in \mathcal{B}_Y$ に対する写像
+$F'(V) \to F'(U)$ と両立する、$F'_Y$ から $F'_X$ への一意な
+$f$-写像を得る。Sheaves, Lemma
+\ref{sheaves-lemma-f-map-basis-above-and-below-structures} を参照せよ。
+$S$ 上のスキームの射 $X \to Y \to Z$ が与えられたとき、これらの写像が
+正しく合成されることの確認は省略する。また、$f$ が $\mathcal{C}$ の射ならば、
+誘導される写像 $F'_Y(Y) \to F'_X(X)$ が、上の同一視
+$F'_X(X) = F(X)$ と $F'_Y(Y) = F(Y)$ のもとで写像 $F(Y) \to F(X)$ と
+一致することの確認も省略する。このようにして、$F$ の所望の拡張は
+$X/S$ を $F'_X(X)$ に写す関手であることが分かる。
+
+\medskip\noindent
+関手 $X \mapsto F'_X(X)$ に対する性質 (a) は構成からほとんど直ちに従う。
+詳細は省略する。$X = \lim_{i \in I} X_i$ を $S$ 上のアフィンスキームの
+有向逆系の極限とする。示すべきことは
+$$
+F'_X(X) = \colim_{i \in I} F'_{X_i}(X_i)
+$$
+である。まず、ある $i \in I$ に対して $X_i \to S$ がアフィン開集合
+$U \subset S$ を経由すると仮定する。このとき $F'$ は $X$ および
+$i' \geq i$ に対する $X_{i'}$ 上で定義され、$i' \geq i$ について
+$F'_{X_{i'}}(X_{i'}) = F'(X_{i'})$、また $F'_X(X) = F'(X)$ である。
+この場合、$V$ が $S$ 上局所有限表示である任意の矢印 $X \to V$ は、
+ある $i' \geq i$ に対して $X \to X_{i'} \to V$ と分解する。Limits,
+Proposition \ref{limits-proposition-characterize-locally-finite-presentation}
+を参照せよ。したがって
+\begin{align*}
+F'_X(X)
+& =
+F'(X)  \\
+& = \colim_{X \to V} F(V) \\
+& =
+\colim_{i' \geq i} \colim_{X_{i'} \to V} F(V) \\
+& =
+\colim_{i' \geq i} F'(X_{i'}) \\
+& =
+\colim_{i' \geq i} F'_{X_{i'}}(X_{i'}) \\
+& =
+\colim_{i' \in I} F'_{X_{i'}}(X_{i'})
+\end{align*}
+を得る。これは所望の等式である。最後に一般の場合、任意の $i \in I$ を選び、
+$V_{i, k} \to S$ が $S$ のアフィン開集合を経由するような有限アフィン開被覆
+$V_i = V_{i, 1} \cup \ldots \cup V_{i, n}$ を選ぶ。$V_k \subset V$ および
+$i' \geq i$ に対する $V_{i', k}$ を $V_{i, k}$ の逆像とする。前の場合により
+$$
+F'_{V_k}(V_k) = \colim_{i' \geq i} F'_{V_{i', k}}(V_{i', k})
+$$
+and
+$$
+F'_{V_k \cap V_l}(V_k \cap V_l) =
+\colim_{i' \geq i}
+F'_{V_{i', k} \cap V_{i', l}}(V_{i', k} \cap V_{i', l})
+$$
+である。層性質とフィルター付き余極限の完全性により、この場合にも
+$F'_X(X) = \colim_{i \in I} F'_{X_i}(X_i)$ を得る。これで性質 (b) の
+証明が完了し、したがって補題の証明も完了する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-limit-fppf-topology}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。
+$T$ を、アフィンスキームの有向逆系の極限
+$T = \lim_{i \in I} T_i$ と書かれるアフィンスキームとする。
+\begin{enumerate}
+\item $\mathcal{V} = \{V_j \to T\}_{j = 1, \ldots, m}$ を $T$ の標準
+$\tau$-被覆とする。Definitions
+\ref{topologies-definition-standard-Zariski},
+\ref{topologies-definition-standard-etale},
+\ref{topologies-definition-standard-smooth},
+\ref{topologies-definition-standard-syntomic}, and
+\ref{topologies-definition-standard-fppf} を参照せよ。このとき、ある添字 $i$ と標準
+$\tau$-被覆
+$\mathcal{V}_i = \{V_{i, j} \to T_i\}_{j = 1, \ldots, m}$
+が存在し、その $T$ への基底変換 $T \times_{T_i} \mathcal{V}_i$ は
+$\mathcal{V}$ と同型である。
+\item $\mathcal{V}_i$, $\mathcal{V}'_i$ を $T_i$ の二つの標準
+$\tau$-被覆とする。
+$f : T \times_{T_i} \mathcal{V}_i \to T \times_{T_i} \mathcal{V}'_i$ が
+$T$ の被覆の射ならば、ある添字 $i' \geq i$ と射
+$f_{i'} : T_{i'} \times_{T_i} \mathcal{V} \to
+T_{i'} \times_{T_i} \mathcal{V}'_i$
+が存在し、その $T$ への基底変換は $f$ である。
+\item
+$f, g : \mathcal{V} \to \mathcal{V}'_i$
+が $T_i$ の標準 $\tau$-被覆の射で、その $T$ への基底変換
+$f_T, g_T$ が等しいならば、$f_{T_{i'}} = g_{T_{i'}}$ となる添字
+$i' \geq i$ が存在する。
+\end{enumerate}
+言い換えると、$T$ の標準 $\tau$-被覆の圏は、$T_i$ の標準
+$\tau$-被覆の圏の $I$ 上の余極限である。
+\end{lemma}
+
+\begin{proof}
+$\tau = fppf$ の場合を証明する。Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation} により、$T$ 上有限表示な
+スキームの圏は、$T_i$ 上有限表示なスキームの圏の $I$ 上の余極限である。
+Limits, Lemmas \ref{limits-lemma-descend-affine-finite-presentation} および
+\ref{limits-lemma-descend-flat-finite-presentation} により、$T$ 上アフィン、
+平坦、有限表示なスキームの圏についても同じことが成り立つ。
+補題の証明を終えるには、$\{V_{j, i} \to T_i\}_{j = 1, \ldots, m}$ が
+$V_{j, i}$ をアフィンとする平坦有限表示射の有限族で、その基底変換
+$\coprod_j T \times_{T_i} V_{j, i} \to T$ が全射ならば、ある
+$i' \geq i$ に対して射
+$\coprod T_{i'} \times_{T_i} V_{j, i} \to T_{i'}$ が全射であることを示せば
+十分である。その像をそれぞれ $W_{i'} \subset T_{i'}$、$W \subset T$ と書く。
+仮定によりもちろん $W = T$ である。射は平坦かつ有限表示なので、$W_i$ は
+$T_i$ の準コンパクト開集合である。Morphisms, Lemma
+\ref{morphisms-lemma-fppf-open} を参照せよ。さらに
+$W = T \times_{T_i} W_i$ である (像の形成は基底変換と可換する)。したがって
+Limits, Lemma \ref{limits-lemma-descend-opens} により、十分大きいある $i'$ に
+対して $W_{i'} = T_{i'}$ となり、結論を得る。
+
+\medskip\noindent
+$\tau \in \{Zariski, \etale, smooth, syntomic\}$ の場合、標準
+$\tau$-被覆は標準 fppf 被覆である。したがって関手の充満忠実性は成り立つ。
+残るのは、ある $i$ に対する標準 fppf 被覆 $\mathcal{V}_i$ が与えられ、
+$\mathcal{V}_i \times_{T_i} T$ が標準 $\tau$-被覆であるならば、すべての
+$i' \gg i$ に対して $\mathcal{V}_i \times_{T_i} T_{i'}$ が標準
+$\tau$-被覆であることを示すことだけである。これは Limits, Lemmas
+\ref{limits-lemma-descend-open-immersion},
+\ref{limits-lemma-descend-etale},
+\ref{limits-lemma-descend-smooth}, and
+\ref{limits-lemma-descend-syntomic} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-extend-sheaf-general}
+$S$, $\mathcal{C}$, $F$ は Lemma \ref{topologies-lemma-extend} の条件 (1)、(2)、(a)、(b)
+を満たすとし、同補題で構成された一意な拡張を
+$F' : (\Sch/S)^{opp} \to \textit{Sets}$ と書く。
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。次を仮定する。
+\begin{enumerate}
+\item[(c)] $V \to S$ がアフィン開集合 $U \subset S$ を経由し、
+$V \to U$ が有限表示であるような、$\Sch/S$ におけるアフィンの任意の
+標準 $\tau$-被覆 $\{V_i \to V\}_{i = 1, \ldots, n}$ に対し、$F$ は
+$\{V_i \to V\}_{i = 1, \ldots, n}$ に対する層条件を満たす\footnote{(2) により
+$V$、$V_i$、$V_i \times_V V_j$ は $\mathcal{C}$ の対象と同型なので、
+これは意味をもつ。}。
+\end{enumerate}
+このとき $F'$ はすべての $\tau$-被覆に対する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$X$ を $S$ 上のスキームとし、$\{X_i \to X\}_{i \in I}$ を
+$\tau$-被覆とする。$s_i \in F'(X_i)$ を、すべての $i, j \in I$ について
+$s_i$ と $s_j$ が $F'(X_i \times_X X_j)$ の同じ元に写るような元とする。
+すべての $i \in I$ について $s_i \in F'(X_i)$ に制限される一意な元
+$s \in F'(X)$ が存在することを示さなければならない。
+
+\medskip\noindent
+特殊な場合：$X$ はアフィンで、その構造射の像が $S$ のアフィン開集合
+$U$ に含まれ、被覆 $\{X_i \to X\}_{i \in I}$ は標準 $\tau$-被覆であるとする。
+この場合、
+$$
+X = \lim V_k
+$$
+と書ける。ここでこれは余フィルター付き極限であり、$V_k$ はアフィン、
+$V_k \to U$ は有限表示である。Algebra, Lemma
+\ref{algebra-lemma-ring-colimit-fp} を参照せよ。Lemma
+\ref{topologies-lemma-limit-fppf-topology} により、ある $k$ と標準 $\tau$-被覆
+$\{V_{k, i} \to V_k\}_{i \in I}$ で、その $X$ への基底変換が与えられた
+被覆となるものが存在する。$k' \geq k$ に対し、この被覆の $V_{k'}$ への
+基底変換を $\{V_{k', i} \to V_{k'}\}_{i \in I}$ と書く。このとき
+\begin{align*}
+F'(X)
+& =
+\colim_{k' \geq k} F(V_k) \\
+& =
+\colim_{k' \geq k}
+\text{Equalizer}(
+\xymatrix{
+\prod F(V_{k', i})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F(V_{k', i} \times_{V_{k'}} V_{k', j})
+}
+\\
+& =
+\text{Equalizer}(
+\xymatrix{
+\colim_{k' \geq k}
+\prod F(V_{k', i})
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\colim_{k' \geq k}
+\prod F(V_{k', i} \times_{V_{k'}} V_{k', j})
+}
+\\
+& =
+\text{Equalizer}(
+\xymatrix{
+\prod F'(X_i)
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+\prod F'(X_i \times_X X_j)
+}
+\end{align*}
+となる。最初の等式は $F'$ の構成により成り立つ。二つ目は仮定 (c) により
+成り立つ。三つ目はフィルター付き余極限が完全であることによる。
+四つ目も再び $F'$ の構成による。このようにして、$F'$ が
+$\{X_i \to X\}_{i \in I}$ に対する層性質を満たすことが分かる。
+
+\medskip\noindent
+一般の場合。各 $U_k$ が $S$ のアフィン開集合に写るようなアフィン開被覆
+$X = \bigcup U_k$ を選ぶ。各 $k$ に対し、
+$\{X_i \times_X U_k \to U_k\}_{i \in I}$ を細分する標準 $\tau$-被覆
+$\{V_{k, j} \to U_k\}_{j = 1, \ldots, m_k}$ を選べる。各
+$j \in \{1, \ldots, m_k\}$ に対し、添字 $i_{k, j} \in I$ と $X$ 上の射
+$g_{k, j} : V_{k, j} \to X_{i_{k, j}}$ を選ぶ。$s_{i_{k, j}}$ を
+$g_{k, j}$ に沿って制限して得られる $F'(V_{k, j})$ の元を $s_{k, j}$ とする。
+任意の $k$ と $k'$、$j \in \{1, \ldots, m_k\}$、および
+$j' \in \{1, \ldots, m_{k'}\}$ について、$s_{k, j}$ と $s_{k', j'}$ は
+$F'(V_{k, j} \times_X V_{k', j'})$ の同じ元に制限されることに注意する。
+確認は省略する。特に前段落の結果により、すべての $j$ について
+$s_{k, j}$ に制限される一意な元 $s_k \in F'(U_k)$ が存在する。
+この記法のもとで証明を終える準備ができた。
+
+\medskip\noindent
+$s$ の一意性の証明：$F'$ は Zariski 被覆に対する層性質を満たし、
+$s|_{U_k}$ と $s_k$ はともにすべての $j$ について $s_{k, j}$ に制限される
+ので、両者は等しくなければならない。この一意性から、
+$s_k$ と $s_{k'}$ は、(アフィンとは限らないスキーム)
+$U_k \cap U_{k'}$ 上で $F'$ の同じ切断に制限されることが分かる。実際、
+これらの切断は $\tau$-被覆
+$\{V_{k, j} \times_X V_{k', j'} \to U_k \cap U_{k'}\}$ 上で同じ切断に
+制限される。したがって Zariski 被覆に対する層性質により、各 $U_k$ への
+制限が $s_k$ となる $X$ 上の $F'$ の一意な切断 $s$ が存在する。
+$s$ が $X_i$ 上で $s_i$ に制限されることの確認は、上と同様なので省略する。
+\end{proof}
+
+\begin{lemma}
+\label{topologies-lemma-extend-sheaf}
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。
+$S$ を大サイト $\Sch_\tau$ に含まれるスキームとする。
+$F : (\Sch/S)_\tau^{opp} \to \textit{Sets}$ を、
+$\mathcal{C} = (\Sch/S)_\tau$ として Lemma \ref{topologies-lemma-extend} の性質 (b) を
+満たす $\tau$-層とする。このとき、$F$ の $S$ 上のすべてのスキームの圏への
+拡張 $F'$ は、すべての $\tau$-被覆に対する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+これは $\mathcal{C} = (\Sch/S)_\tau$ として Lemma
+\ref{topologies-lemma-extend-sheaf-general} を適用すれば従う。Lemma
+\ref{topologies-lemma-extend} の条件 (1)、(2)、(a)、(b) は成り立つ。詳細は省略する。
+したがって $S$ 上のすべてのスキームの圏への一意な拡張 $F'$ を得る。
+最後に、任意の標準 $\tau$-被覆は $(\Sch/S)_\tau$ における被覆と
+自明同値であることに注意する。Sets, Lemma \ref{sets-lemma-what-is-in-it}
+ならびに Lemmas \ref{topologies-lemma-zariski-induced}、
+\ref{topologies-lemma-etale-induced},
+\ref{topologies-lemma-smooth-induced},
+\ref{topologies-lemma-syntomic-induced}, and
+\ref{topologies-lemma-fppf-induced} を参照せよ。Sites, Lemma
+\ref{sites-lemma-tautological-same-sheaf} により、層性質は被覆の自明同値を
+通じて移る。したがって $F$ が $\tau$-層であることから Lemma
+\ref{topologies-lemma-extend-sheaf-general} の性質 (c) が成り立ち、結論を得る。
+\end{proof}

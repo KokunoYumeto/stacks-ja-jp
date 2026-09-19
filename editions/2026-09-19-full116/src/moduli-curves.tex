@@ -1,0 +1,3087 @@
+% Generated mechanically from frozen input inputs/p12/ja/moduli-curves.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{108}
+\chapter{曲線のモジュライ}
+
+
+\phantomsection
+\label{moduli-curves-section-phantom}
+
+
+% BEGIN EXPANDED MODULE ch109_01.tex
+\section{序論}
+\label{moduli-curves-section-introduction}
+
+\noindent
+本章では，よく知られた曲線のモジュライスタックのいくつかを論じる．
+参考文献としては Deligne と Mumford の著名な論文がある；\cite{DM} を参照せよ．
+
+
+
+
+\section{規約と言葉の濫用}
+\label{moduli-curves-section-conventions}
+
+\noindent
+Properties of Stacks, Section
+\ref{stacks-properties-section-conventions} で導入した規約と言葉の濫用を，
+引き続き用いる．特に断らない限り，基底スキームは $\Spec(\mathbf{Z})$ とする．
+
+
+
+
+
+
+\section{曲線のスタック}
+\label{moduli-curves-section-stack-curves}
+
+\noindent
+本節は Quot, Section \ref{quot-section-curves} の続きである．
+$\Curvesstack$ を，スキーム $S$ 上の切断の圏が
+$S$ 上の曲線族の圏であるようなスタックとする．
+ここで，{\it 曲線族}とは，$X$ が代数空間（！）であり，
+$f$ が平坦，proper，有限表示かつ相対次元 $\leq 1$ であるような
+射 $f : X \to S$ を意味することに，十分留意する必要がある．
+$\Curvesstack$ が $\mathbf{Z}$ 上の代数スタックであることは既に分かっている；
+Quot, Theorem \ref{quot-theorem-curves-algebraic} を参照せよ．
+スタックの定義に代数空間を許さなければ，この定理は偽となる．
+
+\medskip\noindent
+基底変換はしばしば下付き添字で表されるが，$\Curvesstack$ については
+この記法を用いることができない．$\Curvesstack_S$ は既に
+$S$ 上のファイバー圏を表す記法だからである．
+このため Quot, Remark \ref{quot-remark-curves-base-change} では，
+代数空間 $B$ への基底変換
+$$
+B\text{-}\Curvesstack = \Curvesstack \times B
+$$
+を $B\text{-}\Curvesstack$ と書いた．右辺の積は終対象上，すなわち
+$\Spec(\mathbf{Z})$ 上で取られる．左辺の対象は，$B$ 上のスキームの圏における
+曲線族を分類するスタックである．特に $k$ が体ならば，
+$$
+k\text{-}\Curvesstack = \Curvesstack \times \Spec(k)
+$$
+は，$k$ 上のスキームの圏における曲線族を分類するモジュライスタックである．
+先へ進む前に，整合性を確認しておこう．
+
+\begin{lemma}
+\label{moduli-curves-lemma-extend-curves-to-spaces}
+$T \to B$ を代数空間の射とする．圏
+$$
+\Mor_B(T, B\text{-}\Curvesstack) = \Mor(T, \Curvesstack)
+$$
+は $T$ 上の曲線族の圏である．
+\end{lemma}
+
+\begin{proof}
+$T$ 上の曲線族とは，平坦，proper，有限表示かつ相対次元 $\leq 1$ である
+代数空間の射 $f : X \to T$ のことである（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension}）．
+これは Quot, Situation \ref{quot-situation-curves} の定義とまったく同じであり，
+% P12-ERR-0542: see ../control/ERRATA_CANDIDATES.jsonl
+ただし基底 $T$ を代数空間としてよい点だけが異なる．
+代数スタック／代数空間に対する既定の基底圏はスキームの圏なので，
+補題は定義から直ちには従わない．とはいえ，読者には証明を読み飛ばすことを勧める．
+
+\medskip\noindent
+上で与えた $B\text{-}\Curvesstack$ の積による記述から，
+絶対的な場合を証明すれば十分である．スキーム $U$ と
+全射エタール射 $p : U \to T$ を選ぶ．
+$R = U \times_T U$ と置き，射影を $s, t : R \to U$ とする．
+
+\medskip\noindent
+$v : T \to \Curvesstack$ を射とする．すると $v \circ p$ は
+曲線族 $X_U \to U$ に対応する．標準的な $2$-射
+$v \circ p \circ t \to v \circ p \circ s$ は同型
+$\varphi : X_U \times_{U, s} R \to X_U \times_{U, t} R$ である．
+この同型は $R \times_{s, t} R$ 上でコサイクル条件を満たす．
+Bootstrap, Lemma \ref{bootstrap-lemma-descend-algebraic-space} により，
+$U$ への引き戻しが $\varphi$ と両立する仕方で $X_U$ に等しいような，
+代数空間の射 $X \to T$ を得る．$\{U \to T\}$ はエタール被覆なので，
+Descent on Spaces, Lemmas
+\ref{spaces-descent-lemma-descending-property-flat},
+\ref{spaces-descent-lemma-descending-property-proper}, and
+\ref{spaces-descent-lemma-descending-property-finite-presentation}
+により，$X \to T$ は平坦，proper，かつ有限表示である．
+また，この相対次元の条件はエタール局所的な性質なので，
+$X \to T$ の相対次元は $\leq 1$ である．したがって $X \to T$ は
+$T$ 上の曲線族である．
+
+\medskip\noindent
+逆に，$X \to T$ を曲線族とする．このとき基底変換 $X_U$ は射
+$w : U \to \Curvesstack$ を定め，標準的な同型
+$X_U \times_{U, s} R \to X_U \times_{U, t} R$ は，
+コサイクル条件を満たす $2$-矢印 $w \circ s \to w \circ t$ を定める．
+% P12-ERR-0229: see ../control/ERRATA_CANDIDATES.jsonl
+したがって，商 $[U/R]$ の普遍性により射
+$v : T = [U/R] \to \Curvesstack$ を得る；Groupoids in Spaces, Lemma
+\ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer} を参照せよ．
+% P12-ERR-0230: see ../control/ERRATA_CANDIDATES.jsonl
+（実際，この場合には，言葉の濫用を導入する前に戻り，
+射 $T \to \Curvesstack$ ``である'' 関手
+$\Sch/T \to \Curvesstack$ を直接構成する方がはるかに容易である．）
+
+\medskip\noindent
+上で与えた構成が対象間の射にも拡張し，互いに擬逆となることの確認は省略する．
+\end{proof}
+% END EXPANDED MODULE ch109_01.tex
+% BEGIN EXPANDED MODULE ch109_02.tex
+\section{偏極曲線のスタック}
+\label{moduli-curves-section-polarized-curves}
+
+\noindent
+本節では Quot, Remark \ref{quot-remark-alternative-approach-curves} で
+論じた内容の一部を詳しく展開する．$2$-ファイバー積
+$$
+\xymatrix{
+\Curvesstack \times_{\Spacesstack'_{fp, flat, proper}}
+\Polarizedstack \ar[r] \ar[d] &
+\Polarizedstack \ar[d] \\
+\Curvesstack \ar[r] &
+\Spacesstack'_{fp, flat, proper}
+}
+$$
+を考える．この $2$-ファイバー積を
+$$
+\textit{PolarizedCurves} =
+\Curvesstack
+\times_{\Spacesstack'_{fp, flat, proper}}
+\Polarizedstack
+$$
+と書く．このファイバー積は偏極曲線，すなわち相対的に豊富な可逆層を備えた
+曲線族をパラメータ付ける．より正確には，
+$\textit{PolarizedCurves}$ の対象は対 $(X \to S, \mathcal{L})$ であって，
+\begin{enumerate}
+\item $X \to S$ は proper，平坦，有限表示かつ相対次元 $\leq 1$ である
+スキームの射であり，
+\item $\mathcal{L}$ は $X/S$ 上相対的に豊富な可逆 $\mathcal{O}_X$-加群である．
+\end{enumerate}
+$\textit{PolarizedCurves}$ の対象間の射
+$(X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$ は，
+三つ組 $(f, g, \varphi)$ によって与えられる．ここで
+$f : X' \to X$ と $g : S' \to S$ は，交換図式
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+をなすスキームの射であり，この図式は同型
+$X' \to S' \times_S X$ を誘導する．言い換えれば図式はカルテジアンであり，
+$\varphi : f^*\mathcal{L} \to \mathcal{L}'$ は同型である．
+合成は明らかな仕方で定義する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-polarized-curves-in-polarized}
+射
+$\textit{PolarizedCurves} \to
+\Polarizedstack$ は開かつ閉な埋め込みである．
+\end{lemma}
+
+\begin{proof}
+$1$-射
+$\Curvesstack \to \Spacesstack'_{fp, flat, proper}$ が
+開かつ閉な埋め込みによって表現可能だからである；Quot, Lemma
+\ref{quot-lemma-curves-open-and-closed-in-spaces} を参照せよ．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-polarized-curves-over-curves}
+射
+$\textit{PolarizedCurves} \to \Curvesstack$
+は滑らかかつ全射である．
+\end{lemma}
+
+\begin{proof}
+全射性を示す．体 $k$ と，$k$ 上の次元 $\leq 1$ の proper 代数空間
+$X$，すなわち $k$ 上の $\Curvesstack$ の対象を取る．
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus} により，
+代数空間 $X$ はスキームである．したがって $X$ は
+$k$ 上の次元 $\leq 1$ の proper スキームである．
+Varieties, Lemma \ref{varieties-lemma-dim-1-proper-projective} により，
+% P12-ERR-0231: see ../control/ERRATA_CANDIDATES.jsonl
+$X$ は $\kappa$ 上 H-射影的である．特に，$X$ 上には豊富な可逆
+$\mathcal{O}_X$-加群 $\mathcal{L}$ が存在する．すると
+$(X, \mathcal{L})$ は $k$ 上の $\textit{PolarizedCurves}$ の対象であり，
+$X$ に写る．
+
+\medskip\noindent
+滑らかさを示す．$X \to S$ を $\Curvesstack$ の対象，すなわち射
+$S \to \Curvesstack$ とする．明らかに
+$$
+\textit{PolarizedCurves}
+\times_{\Curvesstack} S
+\subset \Picardstack_{X/S}
+$$
+は，$\mathcal{L}$ が $X_T/T$ 上豊富であるような対象
+$(T/S, \mathcal{L}/X_T)$ からなる部分スタックである．
+Descent on Spaces, Lemma \ref{spaces-descent-lemma-ample-in-neighbourhood}
+により，これは開部分スタックである．また Moduli Stacks, Lemma
+\ref{moduli-lemma-pic-curves-smooth} により
+$\Picardstack_{X/S} \to S$ は滑らかであるから，結論を得る．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-etale-locally-scheme}
+$X \to S$ を曲線族とする．このとき，$X_i = X \times_S S_i$ が
+スキームとなるようなエタール被覆 $\{S_i \to S\}$ が存在する．
+さらに，$X_i$ は $S_i$ 上 H-射影的であると仮定してよい．
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{moduli-curves-lemma-polarized-curves-over-curves} の直ちに得られる系である．
+% P12-ERR-0232: see ../control/ERRATA_CANDIDATES.jsonl
+実際，定義を展開すると，この補題は，全射かつ滑らかな射
+$S' \to S$ であって，$X' = X \times_S S'$ が $X'/S'$ 上豊富な
+可逆 $\mathcal{O}_{X'}$-加群 $\mathcal{L}'$ を備えるようなものが
+存在することを与える．次に，滑らかな被覆 $\{S' \to S\}$ を
+エタール被覆 $\{S_i \to S\}$ によって細分できる；
+More on Morphisms, Lemma \ref{more-morphisms-lemma-etale-dominates-smooth}
+を参照せよ．$S_i$ を適当な開被覆で置き換えれば，
+$X_i \to S_i$ が H-射影的であると仮定できる；Morphisms, Lemmas
+\ref{morphisms-lemma-proper-ample-locally-projective} and
+\ref{morphisms-lemma-characterize-locally-projective}
+を参照せよ（このことは More on Morphisms, Section
+\ref{more-morphisms-section-projective} でも詳しく論じられている）．
+\end{proof}
+% END EXPANDED MODULE ch109_02.tex
+% BEGIN EXPANDED MODULE ch109_03.tex
+\section{曲線のスタックの性質}
+\label{moduli-curves-section-properties}
+
+\noindent
+次の補題は曲面のモジュライについては成り立たない；
+Remark \ref{moduli-curves-remark-boundedness-aut-does-not-work-surfaces} を参照せよ．
+
+\begin{lemma}
+\label{moduli-curves-lemma-curves-diagonal-separated-fp}
+$\Curvesstack$ の対角射は分離的かつ有限表示である．
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack$ が極限を保つ代数スタックであったことを思い出そう；
+Quot, Lemma \ref{quot-lemma-curves-limits} を参照せよ．
+Limits of Stacks, Lemma \ref{stacks-limits-lemma-limit-preserving-diagonal}
+により，これは
+% P12-ERR-0233: see ../control/ERRATA_CANDIDATES.jsonl
+$\Delta : \Polarizedstack \to \Polarizedstack \times \Polarizedstack$
+が極限を保つことを意味する．したがって Limits of Stacks, Proposition
+\ref{stacks-limits-proposition-characterize-locally-finite-presentation}
+により，$\Delta$ は局所有限表示である．
+
+\medskip\noindent
+$\Delta$ が分離的であることを示そう．そのためには，スキーム $U$ と，
+$U$ 上の $\Curvesstack$ の二つの対象 $Y \to U$ および $X \to U$ が
+与えられたとき，代数空間
+$$
+\mathit{Isom}_U(Y, X)
+$$
+が分離的であることを示せば十分である．
+% P12-ERR-0234: see ../control/ERRATA_CANDIDATES.jsonl
+Moduli Stacks, Lemmas \ref{moduli-lemma-Mor-s-lfp} and
+\ref{moduli-lemma-Isom-in-Mor} において，この対象が
+分離的な代数空間であることを既に見た．
+
+\medskip\noindent
+証明を完了するため，$\Delta$ が準コンパクトであることを示す．
+$\Delta$ は代数空間によって表現可能なので，全射かつ滑らかな射
+$U \to \Curvesstack \times \Curvesstack$ による $\Delta$ の基底変換が
+準コンパクトであることを確かめれば十分である
+（例えば Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-check-property-covering} を参照せよ）．
+$U = \coprod U_i$ を，全射かつ滑らかな射
+$$
+U \longrightarrow
+\textit{PolarizedCurves} \times \textit{PolarizedCurves}
+$$
+をもつアフィン開部分の非交和として選ぶ．Lemma
+\ref{moduli-curves-lemma-polarized-curves-over-curves} により
+$\textit{PolarizedCurves} \to \Curvesstack$ は全射かつ滑らかなので，
+$U \to \Curvesstack \times \Curvesstack$ も全射かつ滑らかである．
+$\textit{PolarizedCurves}$ は極限を保つので
+（Artin's Axioms, Lemma \ref{artin-lemma-fibre-product-limit-preserving}
+および Quot, Lemmas \ref{quot-lemma-curves-limits},
+\ref{quot-lemma-polarized-limits}, and
+\ref{quot-lemma-spaces-limits} による），
+$\textit{PolarizedCurves} \to \Spec(\mathbf{Z})$ は局所有限表示であり，
+したがって $U_i \to \Spec(\mathbf{Z})$ も局所有限表示である
+（Limits of Stacks, Proposition
+\ref{stacks-limits-proposition-characterize-locally-finite-presentation}
+および Morphisms of Stacks, Lemmas
+\ref{stacks-morphisms-lemma-composition-finite-presentation} and
+\ref{stacks-morphisms-lemma-smooth-locally-finite-presentation}）．
+特に，$U_i$ は Noether アフィンスキームである．これにより，
+次の段落で扱う場合へ帰着される．
+
+\medskip\noindent
+この段落では，Noether アフィンスキーム $U$ と，$U$ 上の
+$\textit{PolarizedCurves}$ の二つの対象
+$(Y, \mathcal{N})$ および $(X, \mathcal{L})$ が与えられたとき，
+代数空間
+$$
+\mathit{Isom}_U(Y, X)
+$$
+が準コンパクトであることを示す．$U$ の連結成分は開かつ閉なので，
+$U$ をそれらで置き換えてよい．そこで $U$ は連結であると仮定する．
+点 $u \in U$ を取る．$Q$, $P$ をこれらの族の Hilbert 多項式，すなわち
+$$
+Q(n) = \chi(Y_u, \mathcal{N}_u^{\otimes n})
+\quad\text{and}\quad
+P(n) = \chi(X_u, \mathcal{L}_u^{\otimes n})
+$$
+とする；Varieties, Lemma
+\ref{varieties-lemma-numerical-polynomial-from-euler} を参照せよ．
+$U$ は連結であり，関数
+$u \mapsto \chi(Y_u, \mathcal{N}_u^{\otimes n})$ および
+$u \mapsto \chi(X_u, \mathcal{L}_u^{\otimes n})$
+は局所定数なので（Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-chi-locally-constant-geometric} を参照），
+$U$ のすべての点で同じ Hilbert 多項式が得られる．
+$Y \times_U X$ 上で
+$$
+\mathcal{M} = \text{pr}_1^*\mathcal{N}
+\otimes_{\mathcal{O}_{Y \times_U X}} \text{pr}_2^*\mathcal{L}
+$$
+と置く．$U$ 上のあるスキーム $T$ に対し
+% P12-ERR-0235: see ../control/ERRATA_CANDIDATES.jsonl
+$(f, \varphi) \in \mathit{Isom}_U(Y, X)(T)$ が与えられると，
+すべての $t \in T$ に対して
+\begin{align*}
+\chi(Y_t, (\text{id} \times f)^*\mathcal{M}^{\otimes n})
+& =
+\chi(Y_t,
+\mathcal{N}_t^{\otimes n} \otimes_{\mathcal{O}_{Y_t}}
+f_t^*\mathcal{L}_t^{\otimes n}) \\
+& =
+n\deg(\mathcal{N}_t) + n\deg(f_t^*\mathcal{L}_t) +
+\chi(Y_t, \mathcal{O}_{Y_t}) \\
+& =
+Q(n) + n\deg(\mathcal{L}_t) \\
+& =
+Q(n) + P(n) - P(0)
+\end{align*}
+が成り立つ．これは proper 曲線に対する Riemann--Roch，より正確には
+Varieties, Definition \ref{varieties-definition-degree-invertible-sheaf}，
+Lemma \ref{varieties-lemma-degree-tensor-product}，および
+$f_t$ が同型であることによる．$P'(t) = Q(t) + P(t) - P(0)$ と置けば，
+$$
+\mathit{Isom}_U(Y, X) =
+\mathit{Isom}_U(Y, X) \cap \mathit{Mor}^{P', \mathcal{M}}_U(Y, X)
+$$
+を得る．右辺の交わりは $\mathit{Mor}_U(Y, X)$ の開部分空間どうしの
+交わりである；Moduli Stacks, Lemma
+\ref{moduli-lemma-Isom-in-Mor} および Remark
+\ref{moduli-remark-Mor-numerical} を参照せよ．
+いま $\mathit{Mor}^{P', \mathcal{M}}_U(Y, X)$ は，Moduli Stacks, Lemma
+\ref{moduli-lemma-Mor-qc-over-base} により $U$ 上有限表示なので，
+Noether 代数空間である．したがってこの交わりも Noether 代数空間であり，
+証明は完了する．
+\end{proof}
+% END EXPANDED MODULE ch109_03.tex
+% BEGIN EXPANDED MODULE ch109_04.tex
+\begin{remark}
+\label{moduli-curves-remark-boundedness-aut-does-not-work-surfaces}
+Lemma \ref{moduli-curves-lemma-curves-diagonal-separated-fp} の証明における有界性の議論は，
+曲面のモジュライには適用できない．実際，結論そのものが誤りである．
+例えば，体上の K3 曲面は無限離散自己同型群をもつことがある．
+この議論が成り立たない ``理由'' は次のとおりである．
+体上の射影曲面 $S$ において，Hilbert 多項式が $Q$ と $P$ である
+豊富な可逆層 $\mathcal{N}$ と $\mathcal{L}$ が与えられても，
+$\mathcal{N} \otimes_{\mathcal{O}_S} \mathcal{L}$ の Hilbert 多項式には
+先験的な上界が存在しない．交叉理論の言葉でいえば，$H_1$, $H_2$ を
+$S$ 上の豊富で有効な Cartier 因子とすると，交叉数 $H_1 \cdot H_2$ には
+$H_1 \cdot H_1$ と $H_2 \cdot H_2$ だけによる（上からの）界が存在しない．
+\end{remark}
+
+\begin{lemma}
+\label{moduli-curves-lemma-curves-qs-lfp}
+射 $\Curvesstack \to \Spec(\mathbf{Z})$ は準分離的かつ局所有限表示である．
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack \to \Spec(\mathbf{Z})$ が準分離的であることを確かめるには，
+その対角射が準コンパクトかつ準分離的であることを示さなければならない．
+これは Lemma \ref{moduli-curves-lemma-curves-diagonal-separated-fp} から直ちに従う．
+$\Curvesstack \to \Spec(\mathbf{Z})$ が局所有限表示であることを示すには，
+$\Curvesstack$ が極限を保つことを示せば十分である；Limits of Stacks,
+Proposition \ref{stacks-limits-proposition-characterize-locally-finite-presentation}
+を参照せよ．これは Quot, Lemma \ref{quot-lemma-curves-limits} である．
+\end{proof}
+
+
+
+
+
+
+\section{曲線のスタックの開部分スタック}
+\label{moduli-curves-section-open}
+
+\noindent
+以下では，代数空間の射の性質 $P$ によって $\Curvesstack$ の
+開部分スタックを特徴付けることがしばしばある．$P$ が開部分スタックを
+定めることを見るには，次を確かめれば十分である．
+\begin{enumerate}
+\item[(o)] 曲線族 $f : X \to S$ が与えられたとき，
+$f|_{f^{-1}(S')} : f^{-1}(S') \to S'$ が $P$ をもち，かつ
+$S'$ の形成が任意の基底変換と可換するような，最大の開部分スキーム
+$S' \subset S$ が存在する．
+\end{enumerate}
+実際，(o) が成り立つと仮定する．スキーム $U$ と全射かつ滑らかな射
+$m : U \to \Curvesstack$ を選ぶ．$R = U \times_{\Curvesstack} U$ と置き，
+射影を $t, s : R \to U$ と書く．$\Curvesstack = [U/R]$ が表示であったことを
+思い出そう；Algebraic Stacks, Lemma
+\ref{algebraic-lemma-stack-presentation} および Definition
+\ref{algebraic-definition-presentation} を参照せよ．
+$\Curvesstack$ を曲線のスタックとして構成した仕方により，射 $m$ は
+曲線族 $C \to U$ の分類射である．図式
+$$
+\xymatrix{
+R \ar[r]_s \ar[d]_t & U \ar[d] \\
+U \ar[r] & \Curvesstack
+}
+$$
+の $2$-可換性は，
+$C \times_{U, s} R  \cong C \times_{U, t} R$
+（$R$ 上の曲線族の同型）を意味する．$W \subset U$ を，
+(o) の意味で
+% P12-ERR-0236: see ../control/ERRATA_CANDIDATES.jsonl
+$f|_{f^{-1}(W)} : f^{-1}(W) \to W$ が $P$ をもつような最大の
+開部分スキームとする．(o) により $W$ の形成は基底変換と可換し，
+上の同型もあるので，$s^{-1}(W) = t^{-1}(W)$ を得る．
+したがって Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-immersion-presentation} により，
+$W \subset U$ は開部分スタック
+$$
+\Curvesstack^P \subset \Curvesstack
+$$
+に対応する．
+
+\medskip\noindent
+% P12-ERR-0237: see ../control/ERRATA_CANDIDATES.jsonl
+前段落の設定を続ける．開部分スタック $\Curvesstack^P$ は，
+次の二つの普遍性をもつと主張する：
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^P$ を経由する．
+\item 射 $X \to S$ は $P$ をもつ．
+\end{enumerate}
+% P12-ERR-0238: see ../control/ERRATA_CANDIDATES.jsonl
+\item 体 $k$ 上の次元 $\leq 1$ の proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^P$ を経由する．
+\item 射 $X \to \Spec(k)$ は $P$ をもつ．
+\end{enumerate}
+\end{enumerate}
+これは $2$-ファイバー積
+$$
+\xymatrix{
+T \ar[r]_p \ar[d]_q & U \ar[d] \\
+S \ar[r] & \Curvesstack
+}
+$$
+を考えることで従う．$T \to S$ は $U \to \Curvesstack$ の基底変換として
+全射かつ滑らかであることに注意する．したがって，(o) で与えられる
+開部分 $S' \subset S$ は，$T$ におけるその逆像によって決定される．
+一方，(o) のこれらの開部分が基底変換で不変であること，および
+$2$-可換性による $X \times_S T \cong C \times_U T$ から，
+$T$ の開部分として $q^{-1}(S') = p^{-1}(W)$ を得る．
+これは直ちに (1) を含意する．(2) は (1) の特別な場合である．
+
+\medskip\noindent
+代数空間の射の二つの性質 $P$ と $Q$ が与えられ，
+$\Curvesstack^Q$ が $\Curvesstack$ の開部分スタックであることを
+既に示していると仮定する．このとき，まったく同じ方法を用いて
+$\Curvesstack^{Q, P} \subset \Curvesstack^Q$ が開であることを証明できる．
+厳密な説明は省略する．
+% END EXPANDED MODULE ch109_04.tex
+% BEGIN EXPANDED MODULE ch109_05.tex
+\section{有限かつ被約な自己同型群をもつ曲線}
+\label{moduli-curves-section-finite-aut}
+
+\noindent
+$X$ を体 $k$ 上の次元 $\leq 1$ の proper スキーム，すなわち
+$k$ 上の $\Curvesstack$ の対象とする．Lemma
+\ref{moduli-curves-lemma-curves-diagonal-separated-fp} により，自己同型群代数空間
+$\mathit{Aut}(X)$ は $k$ 上有限型かつ分離的である．
+特に，$\mathit{Aut}(X)$ は群スキームである；
+More on Groupoids in Spaces, Lemma
+\ref{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}
+を参照せよ．$k$ の標数が零ならば，$\mathit{Aut}(X)$ は被約であり，
+さらには $k$ 上滑らかである（Groupoids, Lemma
+\ref{groupoids-lemma-group-scheme-characteristic-zero-smooth}）．
+しかし一般には，たとえ $X$ が幾何学的に被約であっても，
+$\mathit{Aut}(X)$ は被約とは限らない．
+
+\begin{example}[非被約な自己同型群]
+\label{moduli-curves-example-non-reduced}
+$k$ を標数 $2$ の代数閉体とする．$Y = Z = \mathbf{P}^1_k$ と置く．
+$\mathbf{A}^1_k$ の相異なる三つの $k$-値点 $a, b, c$ を選ぶ．
+% P12-ERR-0239: see ../control/ERRATA_CANDIDATES.jsonl
+$\mathbf{A}^1_k \subset \mathbf{P}^1_k = Y = Z$ を開部分スキームとみなすと，
+閉埋め込み
+$$
+T =  \Spec(k[t]/(t - a)^2) \amalg \Spec(k[t]/(t - b)^2)
+\amalg \Spec(k[t]/(t - c)^2)
+\longrightarrow
+\mathbf{P}^1_k
+$$
+を得る．次の図式における押し出しを $X$ とする：
+$$
+\xymatrix{
+T \ar[r] \ar[d] & Y \ar[d] \\
+Z \ar[r] & X
+}
+$$
+$U \subset X$ を，$\mathbf{A}^1_k \amalg \mathbf{A}^1_k$ の像である
+アフィン開部分とする．すると等化子図式
+$$
+\xymatrix{
+\mathcal{O}_X(U) \ar[r] &
+k[t] \times k[t] \ar@<1ex>[r] \ar@<-1ex>[r] &
+k[t]/(t - a)^2 \times k[t]/(t - b)^2 \times k[t]/(t - c)^2
+}
+$$
+を得る．双対数 $A = k[\epsilon]$ 上で，この等化子図式は
+$t$ を $t + \epsilon$ に送る非自明な自己同型をもつ．
+この自己同型が $A$ 上の $X$ の自己同型へ拡張することの確認は
+読者に任せる．一方，$k$ 上の $X$ の自己同型群が有限であることは
+容易に示せる．したがって $\mathit{Aut}(X)$ は非被約でなければならない．
+\end{example}
+
+\noindent
+$X$ を体 $k$ 上の次元 $\leq 1$ の proper スキーム，すなわち
+$k$ 上の $\Curvesstack$ の対象とする．$\mathit{Aut}(X)$ が
+幾何学的に被約であっても，たとえ $X$ が滑らかかつ幾何学的に連結であっても，
+その次元が $0$ であるとは限らない．
+
+\begin{example}[滑らかな正次元の自己同型群]
+\label{moduli-curves-example-pos-dim}
+$k$ を代数閉体とする．$X$ が種数 $0$，それぞれ $1$ の滑らかな曲線ならば，
+自己同型群の次元は $3$，それぞれ $1$ である．実際，種数 $0$ の場合には
+Algebraic Curves, Proposition \ref{curves-proposition-projective-line} により
+$X \cong \mathbf{P}^1_k$ である．関手として
+$$
+\mathit{Aut}(\mathbf{P}^1_k) = \text{PGL}_{2, k}
+$$
+なので，次元は $3$ である．一方，$X$ の種数が $1$ ならば，写像
+$X = \underline{\Hilbfunctor}^1_{X/k} \to
+\underline{\Picardfunctor}^1_{X/k}$ は同型である；
+Picard Schemes of Curves, Lemma \ref{pic-lemma-picard-pieces}
+および Algebraic Curves, Theorem
+\ref{curves-theorem-curves-rational-maps} を参照せよ．
+したがって $X$ は Abel 多様体の構造をもつ
+（$\underline{\Picardfunctor}^1_{X/k} \cong
+\underline{\Picardfunctor}^0_{X/k}$ だからである）．
+% P12-ERR-0240: see ../control/ERRATA_CANDIDATES.jsonl
+特に，$X$ の（余）接束は自明である
+（Groupoids, Lemma \ref{groupoids-lemma-group-scheme-module-differentials}）．
+よって $\dim_k H^0(X, T_X) = 1$，したがって
+$\dim \mathit{Aut}(X) \leq 1$ である．一方，平行移動
+（$X$ を群スキームとみなす）は $\text{Aut}(X)$ の $1$-次元の部分を与えるので，
+% P12-ERR-0241: see ../control/ERRATA_CANDIDATES.jsonl
+その次元は実際に $1$ であると結論する．
+\end{example}
+
+\noindent
+自己同型群が幾何学的に被約かつ有限である曲線をパラメータ付ける
+$\Curvesstack$ の開部分スタックが存在することが分かる．
+正確な主張は次のとおりである．
+
+\begin{lemma}
+\label{moduli-curves-lemma-DM-curves}
+% P12-ERR-0242: see ../control/ERRATA_CANDIDATES.jsonl
+次の性質をもつ開部分スタック $\Curvesstack^{DM} \subset \Curvesstack$ が存在する．
+\begin{enumerate}
+\item $\Curvesstack^{DM} \subset \Curvesstack$ は，DM である最大の
+開部分スタックである．
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{DM}$ を経由する．
+\item 群代数空間 $\mathit{Aut}_S(X)$ は $S$ 上非分岐である．
+\end{enumerate}
+% P12-ERR-0243: see ../control/ERRATA_CANDIDATES.jsonl
+\item 体 $k$ 上の次元 $\leq 1$ の proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{DM}$ を経由する．
+\item $\mathit{Aut}(X)$ は $k$ 上幾何学的に被約で，次元 $0$ をもつ．
+\item $\mathit{Aut}(X) \to \Spec(k)$ は非分岐である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の性質をもつ開部分スタックの存在は Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-open-DM-locus} である．この開部分スタックの点は，
+Morphisms of Stacks, Lemma \ref{stacks-morphisms-lemma-points-DM-locus}
+により (3)(c) で特徴付けられる．(3)(b) と (3)(c) の同値性は，
+体 $k$ 上局所有限型，幾何学的に被約，かつ次元 $0$ である代数空間 $G$ が
+$k$ 上非分岐であるという主張である．まず Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-locally-finite-type-dim-zero} により，
+$G$ はスキームである．次に $G$ のアフィン開部分を取り，それが
+$k$ 上 proper であることに注意して，Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}
+を適用すればよい．細部は省略する．
+
+\medskip\noindent
+(2) は (3) から成り立つ．実際，射 $\mathit{Aut}_S(X) \to S$ は
+局所有限型である．したがって，$\mathit{Aut}_S(X) \to S$ が
+$\mathit{Aut}_S(X)$ のすべての点で非分岐かどうかは，スキーム $S$ の点上の
+ファイバーで確かめることができる；Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-where-unramified} を参照せよ．
+しかし $S$ の点へ基底変換すれば，(3)(a) と (3)(c) の同値性に帰着する．
+\end{proof}
+% END EXPANDED MODULE ch109_05.tex
+% BEGIN EXPANDED MODULE ch109_06.tex
+\begin{lemma}
+\label{moduli-curves-lemma-in-DM-locus-vector-fields}
+$X$ を体 $k$ 上の次元 $\leq 1$ の proper スキームとする．このとき性質
+(3)(a)，(b)，(c) は，次の条件とも同値である：
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$．
+\end{lemma}
+
+\begin{proof}
+上の議論により，$G = \mathit{Aut}(X)$ は $\Spec(k)$ 上の群スキームであり，
+有限型かつ分離的であることを見た．これは Lemma
+\ref{moduli-curves-lemma-curves-diagonal-separated-fp} と More on Groupoids in Spaces, Lemma
+\ref{spaces-more-groupoids-lemma-group-space-scheme-locally-finite-type-over-k}
+を用いている．$G$ が $k$ 上非分岐であることと
+$\Omega_{G/k} = 0$ であることは同値である（Morphisms, Lemma
+\ref{morphisms-lemma-unramified-omega-zero}）．Groupoids, Lemma
+\ref{groupoids-lemma-group-scheme-module-differentials} により，これは
+$T_{G/k, e} = 0$ のときに成り立つ．ここで $T_{G/k, e}$ は恒等元
+$e \in G(k)$ における $G$ の接空間である（Varieties, Definition
+\ref{varieties-definition-tangent-space} および Varieties, Lemma
+\ref{varieties-lemma-tangent-space-cotangent-space} の公式を参照せよ）．
+$\kappa(e) = k$ なので，この接空間は，射
+$\alpha : \Spec(k[\epsilon]) \to G = \mathit{Aut}(X)$ によって定義される．
+その射の $\Spec(k)$ への制限が $e$ となる．
+% P12-ERR-0244: see ../control/ERRATA_CANDIDATES.jsonl
+したがって，次のような自己同型を調べれば十分である：
+$$
+\alpha :
+X \times_{\Spec(k)} \Spec(k[\epsilon])
+\longrightarrow
+X \times_{\Spec(k)} \Spec(k[\epsilon])
+$$
+$\Spec(k[\epsilon])$ 上の自己同型で，$\Spec(k)$ への制限が
+$\text{id}_X$ となるもの．このような自己同型を無限小自己同型と呼ぶ．
+
+\medskip\noindent
+$X$ の無限小自己同型は，$k$ 上の $\mathcal{O}_X$ の導分と $1$ 対 $1$ に対応する．
+これは More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-difference-derivation} および
+\ref{more-morphisms-lemma-action-by-derivations} から従う
+（逆向きは必要ないので，実際には前者だけを用いればよい；説明については
+More on Morphisms, Remark \ref{more-morphisms-remark-another-special-case}
+も参照せよ）．この同値性を示す別の議論は Deformation Problems, Lemma
+\ref{examples-defos-lemma-schemes-TI} を参照せよ．
+\end{proof}
+
+
+
+
+
+\section{Cohen--Macaulay 曲線}
+\label{moduli-curves-section-CM}
+
+\noindent
+Cohen--Macaulay ``曲線''をパラメータ付ける $\Curvesstack$ の開部分スタックが
+存在する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-CM-curves}
+% P12-ERR-0245: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{CM} \subset \Curvesstack$ となる開部分スタックが存在し，
+次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{CM}$ を経由する．
+\item 射 $X \to S$ は Cohen--Macaulay である．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{CM}$ を経由する．
+\item $X$ は Cohen--Macaulay である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$ を曲線族とする．More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-flat-finite-presentation-CM-open} により，
+$$
+W = \{x \in |X| : f \text{ is Cohen-Macaulay at }x\}
+$$
+は $|X|$ の開部分であり，この開部分の形成は任意の基底変換と可換する．
+$f$ は proper なので，$S$ の部分集合
+$$
+S' = S \setminus f(|X| \setminus W)
+$$
+は開であり，$X \times_S S' \to S'$ は Cohen--Macaulay である．
+さらに，$W$ について成り立つことから，$S'$ の形成も任意の基底変換と
+可換する．
+% P12-ERR-0246: see ../control/ERRATA_CANDIDATES.jsonl
+したがって Section \ref{moduli-curves-section-open} で述べた方法により，望ましい性質を
+もつ開部分スタックを得る．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-CM-1-curves}
+% P12-ERR-0247: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{CM, 1} \subset \Curvesstack$ となる開部分スタックが存在し，
+次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{CM, 1}$ を経由する．
+\item 射 $X \to S$ は Cohen--Macaulay で相対次元 $1$ をもつ
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension}）．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{CM, 1}$ を経由する．
+\item $X$ は Cohen--Macaulay で，$X$ は次元 $1$ の等次元的スキームである．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{moduli-curves-lemma-CM-curves} により，それが存在すれば，
+$\Curvesstack^{CM, 1} \subset \Curvesstack^{CM}$ であることは明らかである．
+$f : X \to S$ を曲線族とし，$f$ が Cohen--Macaulay 射であるとする．More on Morphisms of
+Spaces, Lemma \ref{spaces-more-morphisms-lemma-lfp-CM-relative-dimension}
+により，開かつ閉な部分空間による分解
+$$
+X = X_0 \amalg X_1
+$$
+が存在し，$X_0 \to S$ は相対次元 $0$，$X_1 \to S$ は相対次元 $1$ をもつ．
+$f$ は proper なので
+$$
+S' = S \setminus f(|X_0|)
+$$
+は $S$ の開部分であり，$X \times_S S' \to S'$ は Cohen--Macaulay かつ
+相対次元 $1$ をもつ．さらに，上の分解について成り立つことから，$S'$ の形成は
+任意の基底変換と可換する（相対次元の基底変換に関する振る舞いについては
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change} を参照せよ）．
+したがって Section \ref{moduli-curves-section-open} の方法により，望ましい性質をもつ
+開部分スタックを得る．
+\end{proof}
+
+
+
+
+
+
+\section{所与の種数の曲線}
+\label{moduli-curves-section-genus}
+
+\noindent
+Stacks project における約束では，体 $k$ 上の proper $1$ 次元スキーム $X$ の
+種数 $g$ は $H^0(X, \mathcal{O}_X) = k$ の場合にのみ定義される．このとき
+$g = \dim_k H^1(X, \mathcal{O}_X)$ とする．Algebraic Curves, Section
+\ref{curves-section-genus} を参照せよ．種数を定義するために必要な条件は，
+開部分スタックを定め，これは各種数ごとの開部分スタックの非交和となる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-pre-genus-curves}
+% P12-ERR-0248: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{h0, 1} \subset \Curvesstack$ となる開部分スタックが存在し，
+次を満たす．
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{h0, 1}$ を経由する．
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$ であり，これは任意の基底変換後にも成り立ち，
+さらに $f$ のファイバーは次元 $1$ をもつ．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{h0, 1}$ を経由する．
+\item $H^0(X, \mathcal{O}_X) = k$ かつ $\dim(X) = 1$ である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+曲線族 $X \to S$ に対して，$\kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$ となる
+$s \in S$ の集合は Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-jump-loci-geometric} により $S$ の開部分である．
+また，$S$ においてファイバーが次元 $1$ をもつ点の集合は More on Morphisms of Spaces,
+Lemma \ref{spaces-more-morphisms-lemma-dimension-fibres-proper-flat} により
+開である．さらに，$f : X \to S$ がその射 $f$ のすべてのファイバーが次元 $1$ をもつ曲線族
+（したがって特に全射）ならば，条件 (1)(b) はすべての $s \in S$ について
+$\kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$ と同値である；Derived Categories of
+Spaces, Lemma \ref{spaces-perfect-lemma-proper-flat-h0} を参照せよ．
+したがって，この補題は Section \ref{moduli-curves-section-open} の一般論から従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-pre-genus-in-CM-1}
+$\Curvesstack^{h0, 1} \subset \Curvesstack^{CM, 1}$ は $\Curvesstack$ の
+開部分スタックの包含である．
+\end{lemma}
+
+\begin{proof}
+Algebraic Curves, Lemma \ref{curves-lemma-automatic}，および Lemmas
+\ref{moduli-curves-lemma-pre-genus-curves} と \ref{moduli-curves-lemma-CM-1-curves} を参照せよ．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-genus}
+$f : X \to S$ を，すべての $s \in S$ に対して
+$\kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$ を満たす曲線族，すなわち
+（Lemma \ref{moduli-curves-lemma-pre-genus-curves} により）分類射 $S \to \Curvesstack$ が
+$\Curvesstack^{h0, 1}$ を経由するものとする．このとき
+\begin{enumerate}
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$ であり，これは普遍的に成り立つ，
+\item $R^1f_*\mathcal{O}_X$ は有限局所自由 $\mathcal{O}_S$-加群である，
+\item 任意の射 $h : S' \to S$ に対し，$f' : X' \to S'$ を基底変換とすると，
+$h^*(R^1f_*\mathcal{O}_X) = R^1f'_*\mathcal{O}_{X'}$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-proper-flat-h0} を適用する．これにより (1) が示される．
+また，$S$ 上局所的には $Rf_*\mathcal{O}_X = \mathcal{O}_S \oplus P$ と書ける．
+ここで $P$ は振幅が $[1, \infty)$ の perfect 複体である．
+$Rf_*\mathcal{O}_X$ の形成は任意の基底変換と可換することを思い出そう
+（Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}）．
+したがって $s \in S$ に対して
+$$
+H^i(P \otimes_{\mathcal{O}_S}^\mathbf{L} \kappa(s)) =
+H^i(X_s, \mathcal{O}_{X_s})
+\text{ for }i \geq 1
+$$
+である．これは $X_s$ が $1$ 次元 Noether スキームなので，$i = 1$ 以外では零である
+（Cohomology, Proposition \ref{cohomology-proposition-vanishing-Noetherian}）．
+したがって $P = H^1(P)[-1]$ であり，$H^1(P)$ は有限局所自由である
+（例えば More on Algebra, Lemma
+\ref{more-algebra-lemma-lift-perfect-from-residue-field} による）．
+すべてが基底変換と両立するので，(3) も従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-pre-genus-one-piece-per-genus}
+開かつ閉な部分スタックへの分解
+$$
+\Curvesstack^{h0, 1} = \coprod\nolimits_{g \geq 0} \Curvesstack_g
+$$
+が存在し，各 $\Curvesstack_g$ は次で特徴付けられる：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack_g$ を経由する．
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$ であり，これは任意の基底変換後にも成り立ち，
+$f$ のファイバーは次元 $1$ をもち，さらに $R^1f_*\mathcal{O}_X$ は階数 $g$ の
+局所自由 $\mathcal{O}_S$-加群である．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack_g$ を経由する．
+\item $\dim(X) = 1$，$k = H^0(X, \mathcal{O}_X)$ であり，$X$ の種数は $g$ である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$R^1f_*$ や $H^1$ を含まない補題の条件により特徴付けられる，$\Curvesstack$ の
+開部分スタック $\Curvesstack^{h0, 1}$ の存在は，Lemma \ref{moduli-curves-lemma-pre-genus-curves} によって
+既に得られている．開かつ閉な部分スタックへの分解の存在は，Section
+\ref{moduli-curves-section-open} の議論と Lemma \ref{moduli-curves-lemma-genus} から直ちに従う．これで
+(1) の特徴付けが得られる．(2) は Algebraic Curves, Definition
+\ref{curves-definition-genus} における種数の定義から従う．
+\end{proof}
+% END EXPANDED MODULE ch109_06.tex
+% BEGIN EXPANDED MODULE ch109_07.tex
+\section{幾何学的に被約な曲線}
+\label{moduli-curves-section-geometrically-reduced}
+
+\noindent
+幾何学的に被約な ``曲線'' をパラメータ付ける $\Curvesstack$ の開部分スタックが
+存在する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-geometrically-reduced-curves}
+% P12-ERR-0249: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{geomred} \subset \Curvesstack$ となる開部分スタックが存在し，
+次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{geomred}$ を経由する．
+\item 射 $X \to S$ のファイバーは幾何学的に被約である
+（More on Morphisms of Spaces, Definition
+\ref{spaces-more-morphisms-definition-geometrically-reduced-fibre}）．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{geomred}$ を経由する．
+\item $X$ は $k$ 上幾何学的に被約である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$ を曲線族とする．More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-geometrically-reduced-open} により，集合
+$$
+E = \{s \in S : \text{the fibre of }X \to S\text{ at }s
+\text{ is geometrically reduced}\}
+$$
+は $S$ の開部分である．この開部分の形成は More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-base-change-fibres-geometrically-reduced} により
+任意の基底変換と可換する．したがって Section \ref{moduli-curves-section-open} で述べた方法により，
+望ましい性質をもつ開部分スタックを得る．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-geomred-in-CM}
+$\Curvesstack^{geomred} \subset \Curvesstack^{CM}$ は $\Curvesstack$ の
+開部分スタックの包含である．
+\end{lemma}
+
+\begin{proof}
+次元 $\leq 1$ の被約 Noether スキームは Cohen--Macaulay であるため，これは成り立つ．
+Algebra, Lemma \ref{algebra-lemma-criterion-reduced} を参照せよ．
+\end{proof}
+
+
+
+
+
+\section{幾何学的に被約かつ連結な曲線}
+\label{moduli-curves-section-geometrically-reduced-connected}
+
+\noindent
+幾何学的に被約かつ連結な ``曲線'' をパラメータ付ける $\Curvesstack$ の開部分スタックが
+存在する．$0$ 次元の対象は直ちに取り除く．
+
+\begin{lemma}
+\label{moduli-curves-lemma-geometrically-reduced-connected-1-curves}
+% P12-ERR-0250: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{grc, 1} \subset \Curvesstack$ となる開部分スタックが存在し，
+次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{grc, 1}$ を経由する．
+\item 射 $X \to S$ の幾何ファイバーは被約，連結で，次元 $1$ をもつ．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{grc, 1}$ を経由する．
+\item $X$ は幾何学的に被約かつ幾何学的に連結で，次元 $1$ をもつ．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{moduli-curves-lemma-geometrically-reduced-curves},
+\ref{moduli-curves-lemma-geomred-in-CM}, \ref{moduli-curves-lemma-CM-curves}, および
+\ref{moduli-curves-lemma-CM-1-curves} により，次を得ることは明らかである：
+$$
+\Curvesstack^{grc, 1}
+\subset
+\Curvesstack^{geomred} \cap \Curvesstack^{CM, 1}
+$$
+それが存在すると仮定する．$f : X \to S$ を，$f$ が
+Cohen--Macaulay で，幾何学的に被約なファイバーをもち，相対次元 $1$ をもつ曲線族とする．
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-stein-factorization-etale} により，Stein 分解
+$$
+X \to T \to S
+$$
+において射 $T \to S$ は \'etale である．したがって，ある開かつ閉な部分スキーム
+$S' \subset S$ が存在し，$X \times_S S' \to S'$ は幾何学的に連結なファイバーをもつ
+（有限局所自由射 $T \to S$ に対する Morphisms, Lemma
+\ref{morphisms-lemma-finite-locally-free} の分解では，これは $S_1$ に対応する）．
+この開部分の形成は任意の基底変換と可換する．なぜなら，幾何ファイバーの連結成分数は
+基底変換で不変だからである（この場合には Stein 分解自体も基底変換と可換であるが，
+結論にはそれを必要としない）．したがって Section \ref{moduli-curves-section-open} で述べた方法により，
+望ましい性質をもつ開部分スタックを得る．
+\end{proof}
+% END EXPANDED MODULE ch109_07.tex
+% BEGIN EXPANDED MODULE ch109_08.tex
+\begin{lemma}
+\label{moduli-curves-lemma-geomredcon-in-h0-1}
+% P12-ERR-0251: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{grc, 1} \subset \Curvesstack^{h0, 1}$ は $\Curvesstack$ の
+開部分スタックの包含である．特に，幾何ファイバーが被約，連結で次元 $1$ をもつ曲線族
+$f : X \to S$ が与えられたとき，$R^1f_*\mathcal{O}_X$ は有限局所自由
+$\mathcal{O}_S$-加群であり，その形成は任意の基底変換と可換する．
+\end{lemma}
+
+\begin{proof}
+これは Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections} と Lemmas
+\ref{moduli-curves-lemma-pre-genus-curves} および
+\ref{moduli-curves-lemma-geometrically-reduced-connected-1-curves} から従う．最後の主張は Lemma
+\ref{moduli-curves-lemma-genus} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-one-piece-per-genus}
+開かつ閉な部分スタックへの分解
+$$
+\Curvesstack^{grc, 1} = \coprod\nolimits_{g \geq 0} \Curvesstack^{grc, 1}_g
+$$
+が存在し，各 $\Curvesstack^{grc, 1}_g$ は次で特徴付けられる：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{grc, 1}_g$ を経由する．
+\item 射 $f : X \to S$ の幾何ファイバーは被約，連結，次元 $1$ をもち，
+$R^1f_*\mathcal{O}_X$ は階数 $g$ の局所自由 $\mathcal{O}_S$-加群である．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{grc, 1}_g$ を経由する．
+\item $X$ は幾何学的に被約かつ幾何学的に連結で，次元 $1$ をもち，種数は $g$ である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+第一の証明：
+$\Curvesstack^{grc, 1}_g = \Curvesstack^{grc, 1} \cap \Curvesstack_g$
+と置き，Lemmas \ref{moduli-curves-lemma-geomredcon-in-h0-1} および
+\ref{moduli-curves-lemma-pre-genus-one-piece-per-genus} を組み合わせる．
+
+第二の証明：開かつ閉な部分スタックへの分解の存在は，Section
+\ref{moduli-curves-section-open} の議論と Lemma \ref{moduli-curves-lemma-geomredcon-in-h0-1} から直ちに従う．
+これで (1) の特徴付けが得られる．(2) は，幾何学的に被約かつ連結な proper
+$1$ 次元スキーム $X/k$ の種数が定義され（Algebraic Curves, Definition
+\ref{curves-definition-genus} および Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}），
+$\dim_k H^1(X, \mathcal{O}_X)$ に等しいことからも従う．
+\end{proof}
+% END EXPANDED MODULE ch109_08.tex
+% BEGIN EXPANDED MODULE ch109_09.tex
+\section{Gorenstein 曲線}
+\label{moduli-curves-section-gorenstein}
+
+\noindent
+Gorenstein ``曲線'' をパラメータ付ける $\Curvesstack$ の開部分スタックが存在する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-gorenstein-curves}
+% P12-ERR-0252: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{Gorenstein} \subset \Curvesstack$ となる開部分スタックが存在し，
+次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{Gorenstein}$ を経由する．
+\item 射 $X \to S$ は Gorenstein である．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{Gorenstein}$ を経由する．
+\item $X$ は Gorenstein である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : X \to S$ を曲線族とする．More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-flat-finite-presentation-gorenstein-open} により，集合
+$$
+W = \{x \in |X| : f \text{ is Gorenstein at }x\}
+$$
+は $|X|$ の開部分であり，この開部分の形成は任意の基底変換と可換する．$f$ は proper
+なので，$S$ の部分集合
+$$
+S' = S \setminus f(|X| \setminus W)
+$$
+は開であり，$X \times_S S' \to S'$ は Gorenstein である．さらに，$W$ について成り立つ
+ことから，$S'$ の形成も任意の基底変換と可換する．
+% P12-ERR-0253: see ../control/ERRATA_CANDIDATES.jsonl
+したがって Section \ref{moduli-curves-section-open} で述べた方法により，望ましい性質をもつ開部分スタックを得る．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-gorenstein-1-curves}
+% P12-ERR-0254: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック
+$\Curvesstack^{Gorenstein, 1} \subset \Curvesstack$ が存在し，次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{Gorenstein, 1}$ を経由する．
+\item 射 $X \to S$ は Gorenstein で相対次元 $1$ をもつ
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension}）．
+\end{enumerate}
+\item 体 $k$ 上の $\dim(X) \leq 1$ を満たす proper スキーム $X$ が与えられたとき，
+次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{Gorenstein, 1}$ を経由する．
+\item $X$ は Gorenstein で，$X$ は次元 $1$ の等次元的スキームである．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Gorenstein スキームは Cohen--Macaulay であること（Duality for Schemes, Lemma
+\ref{duality-lemma-gorenstein-CM}），および Gorenstein 射は Cohen--Macaulay 射であること
+（Duality for Schemes, Lemma \ref{duality-lemma-gorenstein-CM-morphism}．% P12-ERR-0255: see ../control/ERRATA_CANDIDATES.jsonl
+したがって
+$\Curvesstack^{Gorenstein, 1}$ を $\Curvesstack^{Gorenstein}$ と
+$\Curvesstack^{CM, 1}$ の $\Curvesstack$ 内での共通部分に等しいと置き，Lemmas
+\ref{moduli-curves-lemma-gorenstein-curves} および \ref{moduli-curves-lemma-CM-1-curves} を用いればよい．
+\end{proof}
+% END EXPANDED MODULE ch109_09.tex
+% BEGIN EXPANDED MODULE ch109_10.tex
+\section{局所完全交差曲線}
+\label{moduli-curves-section-lci}
+
+\noindent
+局所完全交差 ``曲線'' をパラメータ付ける $\Curvesstack$ の開部分スタックが存在する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-lci-curves}
+% P12-ERR-0256: see ../control/ERRATA_CANDIDATES.jsonl
+$\Curvesstack^{lci} \subset \Curvesstack$ となる開部分スタックが存在し，次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{lci}$ を経由する．
+\item $X \to S$ は局所完全交差射である．
+\item $X \to S$ は syntomic 射である．
+\end{enumerate}
+\item % P12-ERR-0257: see ../control/ERRATA_CANDIDATES.jsonl
+$X$ が体 $k$ 上の次元 $\leq 1$ の proper スキームであるとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{lci}$ を経由する．
+\item $X$ は $k$ 上局所完全交差である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+syntomic 射であることは平坦かつ局所完全交差射であることと同値である；More on Morphisms of Spaces,
+Lemma \ref{spaces-more-morphisms-lemma-flat-lci} を参照せよ．したがって (1)(b) と (1)(c) は同値である．
+Section \ref{moduli-curves-section-open} で見たように，曲線族
+$f : X \to S$ が与えられたとき，$S' \subset S$ なる開部分スキームで，
+$S' \times_S X \to S'$ が局所完全交差射となり，かつ $S'$ の形成が任意の基底変換と可換するものの
+存在を示せば十分である．これはより一般的な More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-where-lci} から従う．
+\end{proof}
+
+
+
+
+\section{特異点が孤立した曲線}
+\label{moduli-curves-section-curves-isolated}
+
+\noindent
+$\Curvesstack$ の開部分スタックで，特異点が有限個しかない ``曲線''
+（この設定では $0$ 次元成分に対応することもある）をパラメータ付けるものを考えることができる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-isolated-sings-curves}
+% P12-ERR-0258: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック
+$\Curvesstack^{+} \subset \Curvesstack$ が存在し，次を満たす．
+\begin{enumerate}
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{+}$ を経由する．
+\item $X \to S$ の特異点軌跡に任意の／ある閉部分空間構造を与えたものは $S$ 上有限である．
+\end{enumerate}
+\item % P12-ERR-0259: see ../control/ERRATA_CANDIDATES.jsonl
+$X$ が体 $k$ 上の次元 $\leq 1$ の proper スキームであるとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{+}$ を経由する．
+\item $X \to \Spec(k)$ は有限個の点を除いて smooth である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P12-ERR-0260: see ../control/ERRATA_CANDIDATES.jsonl
+この補題を示すには，曲線族 $f : X \to S$ が与えられたとき，$S' \subset S$ なる開部分スキームが存在し，
+$S' \times_S X \to S'$ のファイバーが性質 (2) をもつことを示せば十分である．
+（この開部分の形成は自動的に基底変換と可換する．）
+定義により，$X \to S$ が滑らかでない点の軌跡 $T \subset |X|$ は閉である．$Z \subset X$ を，$T$ に
+被約誘導代数空間構造を与えて得られる閉部分空間とする
+（Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}）．
+ここで，$s \in S$ が $Z_s$ が有限となる点ならば，$s$ の開近傍 $U_s \subset S$ で
+$Z \cap f^{-1}(U_s) \to U_s$ が有限となるものが存在する；More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-proper-finite-fibre-finite-in-neighbourhood} を参照せよ．
+これで補題が示された．
+\end{proof}
+% END EXPANDED MODULE ch109_10.tex
+% BEGIN EXPANDED MODULE ch109_11.tex
+\section{曲線スタックの滑らかな軌跡}
+\label{moduli-curves-section-smooth}
+
+\noindent
+射
+$$
+\Curvesstack \longrightarrow \Spec(\mathbf{Z})
+$$
+は最大開部分スタック上で滑らかである；
+Morphisms of Stacks, Lemma \ref{stacks-morphisms-lemma-where-smooth} を参照せよ．
+曲線がこの軌跡に入るための判定条件を与えたい．
+これには変形理論を少し用いる．
+
+\medskip\noindent
+$k$ を体とし，$X$ を $k$ 上の次元 $\leq 1$ の proper スキームとする．
+$k$ の Cohen 環 $\Lambda$ を選ぶ；Algebra, Lemma
+\ref{algebra-lemma-cohen-rings-exist} を参照せよ．
+すると Deformation Problems, Example
+\ref{examples-defos-example-schemes} および Lemma
+\ref{examples-defos-lemma-schemes-RS} で記述された状況にある．
+したがって，残差体 $k$ をもつ Artinian 局所 $\Lambda$-代数の圏
+$\mathcal{C}_\Lambda$ 上の変形圏 $\Deformationcategory_X$ を得る．
+
+\begin{lemma}
+\label{moduli-curves-lemma-in-smooth-locus}
+上の状況で次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は
+曲線スタックから $\Curvesstack \to \Spec(\mathbf{Z})$ への射が滑らかな開部分を経由する．
+\item 変形圏 $\Deformationcategory_X$ は障害をもたない．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack \longrightarrow \Spec(\mathbf{Z})$ は局所的に有限表示である
+(Lemma \ref{moduli-curves-lemma-curves-qs-lfp}) から，
+$\Curvesstack \longrightarrow \Spec(\mathbf{Z})$ が滑らかである最大開部分スタックの形成は
+平坦基底変換と可換する
+(Morphisms of Stacks, Lemma \ref{stacks-morphisms-lemma-where-smooth})．
+Cohen 環 $\Lambda$ は $\mathbf{Z}$ 上平坦なので，$\Lambda$ 上で考えてよい．
+つまり，
+$$
+\Lambda\text{-}\Curvesstack \longrightarrow \Spec(\Lambda)
+$$
+が，$X/k$ により定まる点
+$x_0 : \Spec(k) \to \Lambda\text{-}\Curvesstack$
+の開近傍で滑らかであることと，$\Deformationcategory_X$ が障害をもたないことが同値であることを示そうとしている．
+
+\medskip\noindent
+この補題は Geometry of Stacks, Lemma
+\ref{stacks-geometry-lemma-characterize-smoothness} と等式
+$$
+\Deformationcategory_X =
+\mathcal{F}_{\Lambda\text{-}\Curvesstack, k, x_0}
+$$
+から従う．
+この等式の確立は完全には自明でない．すなわち，左辺には
+$A \in \Ob(\mathcal{C}_\Lambda)$ 上のスキームとしての $X$ の全ての平坦変形
+$Y \to \Spec(A)$ を分類する変形圏がある．
+右辺には，特殊ファイバーが $X$ である全ての平坦射
+$Y \to \Spec(A)$ を分類する変形圏があり，ここで $Y$ は代数空間で，
+$Y \to \Spec(A)$ は proper，有限表示，相対次元 $\leq 1$ である．
+$A$ は Artinian なので，例えば Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus} により $Y$ はスキームである．
+したがって残るのは，残差体 $k$ をもつ Artinian 局所環 $A$ 上のスキームとしての
+$X$ の平坦変形 $Y \to \Spec(A)$ が proper，有限表示，かつ相対次元 $\leq 1$ であることを示すことである．
+相対次元はファイバーで定義されるので，$X/k$ で成り立つことから $Y/A$ でも自動的に成り立つ．
+$Y \to \Spec(A)$ は proper かつ局所的に有限表示である；
+$X \to \Spec(k)$ についてそうであることと More on Morphisms, Lemma
+\ref{more-morphisms-lemma-deform-property} を参照せよ．
+\end{proof}
+
+\noindent
+ここで，曲線スタックの滑らかな軌跡に含まれる「大きな」開部分を記述する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-big-smooth-part-curves}
+開部分スタック
+$$
+\Curvesstack^{lci+} =
+\Curvesstack^{lci} \cap \Curvesstack^{+}
+\subset \Curvesstack
+$$
+は次の性質をもつ．
+\begin{enumerate}
+\item $\Curvesstack^{lci+} \to \Spec(\mathbf{Z})$ は滑らかである．
+\item 曲線族 $X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{lci+}$ を経由する．
+\item $X \to S$ は局所完全交差射であり，$X \to S$ の特異点軌跡に任意の／ある閉部分空間構造を与えたものは $S$ 上有限である．
+\end{enumerate}
+\item % P12-ERR-0261: see ../control/ERRATA_CANDIDATES.jsonl
+$X$ が体 $k$ 上の次元 $\leq 1$ の proper スキームであるとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{lci+}$ を経由する．
+\item $X$ は $k$ 上局所完全交差であり，$X \to \Spec(k)$ は有限個の点を除いて滑らかである．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+性質 (2) によって点が特徴付けられる開部分スタック $\Curvesstack^{lci+}$ が存在することを示せば，
+Lemma \ref{moduli-curves-lemma-in-smooth-locus} と Deformation Problems, Lemma
+\ref{examples-defos-lemma-curve-isolated-lci} を組み合わせることで (1) が成り立つ．
+$$
+\Curvesstack^{lci+} = \Curvesstack^{lci} \cap \Curvesstack^{+}
+$$
+は $\Curvesstack$ 内で成り立つので，Lemmas
+\ref{moduli-curves-lemma-lci-curves} および \ref{moduli-curves-lemma-isolated-sings-curves} により結論する．
+\end{proof}
+
+
+
+
+\section{滑らかな曲線}
+\label{moduli-curves-section-smooth-curves}
+
+\noindent
+この節では，滑らかな「曲線」をパラメータ付ける
+$\Curvesstack$ の開部分スタックを調べる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves}
+% P12-ERR-0262: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック
+$$
+\Curvesstack^{smooth, 1} \subset \Curvesstack^{smooth} \subset \Curvesstack
+$$
+が存在し，次を満たす．
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{smooth}$，それぞれ $\Curvesstack^{smooth, 1}$ を経由する．
+\item $f$ は滑らか，それぞれ相対次元 $1$ で滑らかである．
+\end{enumerate}
+\item % P12-ERR-0263: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は
+$\Curvesstack^{smooth}$，それぞれ $\Curvesstack^{smooth, 1}$ を経由する．
+\item $X$ は $k$ 上滑らか，それぞれ $X$ は $k$ 上滑らかでかつ $X$ は次元 $1$ の等次元である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{smooth}$ に関する主張を示すには，曲線族
+$f : X \to S$ が与えられたとき，$S' \subset S$ なる開部分スキームで
+$S' \times_S X \to S'$ が滑らかとなり，かつこの開部分の形成が基底変換と可換するものが存在することを示せば十分である．
+$U \to S$ が滑らかであり $U$ の形成が任意の基底変換と可換となるような最大開部分スキーム
+$U \subset X$ が存在することを知っている；Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-where-smooth} を参照せよ．
+$T = |X| \setminus |U|$ と置くと，$f$ は proper なので $f(T)$ は $S$ で閉じている．
+$S' = S \setminus f(T)$ と置けば求める開部分を得る．
+
+\medskip\noindent
+$f : X \to S$ を曲線族とし，$f$ は滑らかであるとする．
+するとファイバー $X_s$ は $\kappa(s)$ 上滑らかであり，したがって Cohen--Macaulay である
+(例えば Algebra, Lemmas \ref{algebra-lemma-smooth-over-field} および
+\ref{algebra-lemma-lci-CM} を用いればよい)．よって
+$$
+\Curvesstack^{smooth, 1} = \Curvesstack^{smooth} \cap
+\Curvesstack^{CM, 1}
+$$
+と置ける．求める同値性は，$\Curvesstack^{smooth}$ について既に示したことと
+Lemma \ref{moduli-curves-lemma-CM-1-curves} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves-smooth}
+$\Curvesstack^{smooth} \to \Spec(\mathbf{Z})$ は滑らかである．
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{smooth} \subset \Curvesstack^{lci+}$ であることと Lemma
+\ref{moduli-curves-lemma-big-smooth-part-curves} から直ちに従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves-h0}
+% P12-ERR-0264: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック
+$\Curvesstack^{smooth, h0} \subset \Curvesstack$
+が存在し，次を満たす．
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item % P12-ERR-0265: see ../control/ERRATA_CANDIDATES.jsonl
+分類射 $S \to \Curvesstack$ は $\Curvesstack^{smooth}$ を経由する．
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$ であり，これは任意の基底変換後にも成り立ち，さらに $f$ は相対次元 $1$ で滑らかである．
+\end{enumerate}
+\item % P12-ERR-0266: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{smooth, h0}$ を経由する．
+\item $X$ は滑らかで，$\dim(X) = 1$ かつ $k = H^0(X, \mathcal{O}_X)$ である．
+\item $X$ は滑らかで，$\dim(X) = 1$ かつ $X$ は幾何学的に連結である．
+\item $X$ は滑らかで，$\dim(X) = 1$ かつ $X$ は幾何学的に整である．さらに
+\item $X_{\overline{k}}$ は滑らかな曲線である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$$
+\Curvesstack^{smooth, h0} = \Curvesstack^{smooth} \cap
+\Curvesstack^{h0, 1}
+$$
+と置けば，Lemmas \ref{moduli-curves-lemma-pre-genus-curves} および
+\ref{moduli-curves-lemma-smooth-curves} により (1) が成り立つ．
+実際，これにより (2)(a) と (2)(b) の同値性も得られる．
+証明を終えるには，(2)(b) が (2)(c)，(2)(d)，(2)(e) のそれぞれと同値であることを示せばよい．
+
+\medskip\noindent
+体上滑らかなスキームは幾何学的に正規である
+(Varieties, Lemma \ref{varieties-lemma-smooth-geometrically-normal})；
+滑らかさは基底変換で保たれ
+(Morphisms, Lemma \ref{morphisms-lemma-base-change-smooth})，
+滑らかであることは標的上 fpqc 局所的である
+(Descent, Lemma \ref{descent-lemma-descending-property-smooth})．
+これを踏まえると，(2)(b)，(2)(c)，2(d)，(2)(e) の同値性
+% P12-ERR-0267: see ../control/ERRATA_CANDIDATES.jsonl
+は Varieties, Lemma \ref{varieties-lemma-geometrically-normal-stein} から従う．
+\end{proof}
+
+\begin{definition}
+\label{moduli-curves-definition-deligne-mumford-smooth}
+\begin{reference}
+\cite{DM}
+\end{reference}
+% P12-ERR-0269: see ../control/ERRATA_CANDIDATES.jsonl
+$\mathcal{M}$ を記号とし，これを
+{\it 滑らかな proper 曲線のモジュライ・スタック}
+と呼ぶ；これは Lemma \ref{moduli-curves-lemma-smooth-curves-h0} で導入された
+曲線族をパラメータ付ける代数スタック $\Curvesstack^{smooth, h0}$ である．
+$g \geq 0$ に対して $\mathcal{M}_g$ を記号とし，これを
+{\it 種数 $g$ の滑らかな proper 曲線のモジュライ・スタック}
+と呼ぶ；これは Lemma \ref{moduli-curves-lemma-smooth-one-piece-per-genus} で導入された代数スタックである．
+\end{definition}
+
+\noindent
+ここで必須の補題を述べる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-one-piece-per-genus}
+開かつ閉な部分スタックへの分解
+$$
+\mathcal{M} = \coprod\nolimits_{g \geq 0} \mathcal{M}_g
+$$
+が存在し，各 $\mathcal{M}_g$ は次で特徴付けられる：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\mathcal{M}_g$ を経由する．
+\item $X \to S$ は滑らかで，$f_*\mathcal{O}_X = \mathcal{O}_S$ であり，これは任意の基底変換後にも成り立ち，$R^1f_*\mathcal{O}_X$ は階数 $g$ の局所自由 $\mathcal{O}_S$-加群である．
+\end{enumerate}
+\item % P12-ERR-0268: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，次は同値である．
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\mathcal{M}_g$ を経由する．
+\item $X$ は滑らかで，$\dim(X) = 1$，$k = H^0(X, \mathcal{O}_X)$ であり，$X$ は種数 $g$ をもつ．
+\item $X$ は滑らかで，$\dim(X) = 1$，$X$ は幾何学的に連結であり，$X$ は種数 $g$ をもつ．
+\item $X$ は滑らかで，$\dim(X) = 1$，$X$ は幾何学的に整であり，$X$ は種数 $g$ をもつ．
+\item $X_{\overline{k}}$ は種数 $g$ の滑らかな曲線である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{moduli-curves-lemma-smooth-curves-h0} および
+\ref{moduli-curves-lemma-pre-genus-one-piece-per-genus} を組み合わせる．
+代わりに Lemma \ref{moduli-curves-lemma-one-piece-per-genus} を用いてもよい．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-curves-h0-smooth}
+射 $\mathcal{M} \to \Spec(\mathbf{Z})$ および
+$\mathcal{M}_g \to \Spec(\mathbf{Z})$ は滑らかである．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{M}$ は $\Curvesstack^{lci+}$ の開部分スタックなので，これは
+Lemma \ref{moduli-curves-lemma-big-smooth-part-curves} から従う．
+\end{proof}
+% END EXPANDED MODULE ch109_11.tex
+% BEGIN EXPANDED MODULE ch109_12.tex
+\section{滑らかな曲線の稠密性}
+\label{moduli-curves-section-smooth-is-dense}
+
+\noindent
+この節の題名は誤解を招く：$\Curvesstack^{smooth}$ が
+$\Curvesstack$ で稠密であるとは主張していない．実際，これは誤りであり，
+Mumford が \cite{PathologiesIV} で示した．しかし，滑らかな「曲線」は
+大きな開部分では稠密であることが分かる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-dense}
+包含
+$$
+|\Curvesstack^{smooth}| \subset |\Curvesstack^{lci+}|
+$$
+は開稠密部分集合の包含である．
+\end{lemma}
+
+\begin{proof}
+《叠の性質》の第 \ref{stacks-properties-section-points} 節で
+$|\Curvesstack^{lci+}|$ 上に構成された位相から，
+$|\Curvesstack^{smooth}|$ は開部分集合であることが分かる．点
+$\xi \in |\Curvesstack^{lci+}|$ をとる．すると，体 $k$ と $k$ 上の概形 $X$ で，
+$X$ が $k$ 上 proper，$\dim(X) \leq 1$，$X$ が $k$ 上局所完全交差であり，
+% P12-ERR-0270: see ../control/ERRATA_CANDIDATES.jsonl
+$X$ が有限個の点を除いて $k$ 上滑らかであるものが存在し，
+$\xi$ は $X$ が定める分類射
+$\Spec(k) \to \Curvesstack^{lci+}$ の同値類である．
+引理 \ref{moduli-curves-lemma-big-smooth-part-curves} を参照せよ．
+《変形問題》の引理
+\ref{examples-defos-lemma-smoothing-proper-curve-isolated-lci} により，
+一般ファイバーが滑らかで特殊ファイバーが $X$ と同型である平坦射影射
+$Y \to \Spec(k[[t]])$ が存在する．$Y$ が定める分類射
+$$
+\Spec(k[[t]]) \longrightarrow \Curvesstack^{lci+}
+$$
+を考える．閉点の像は $\xi$ であり，一般点の像は
+$|\Curvesstack^{smooth}|$ に属する．$|\Spec(k[[t]])|$ では一般点が閉点に
+特殊化するので，$\xi$ は $|\Curvesstack^{smooth}|$ の閉包に属する．
+\end{proof}
+
+
+
+
+
+\section{節点曲線}
+\label{moduli-curves-section-nodal-curves}
+
+\noindent
+節点曲線は代数幾何学で特別な役割を果たす．読者には，\ref{curves-section-nodal} 節と
+\ref{curves-section-families-nodal} 節の《代数曲線》における議論，および
+\ref{spaces-more-morphisms-section-families-nodal} 節の《空間の射の進展》における議論の一部を
+簡単に参照することを勧める．
+
+\begin{lemma}
+\label{moduli-curves-lemma-nodal-curves}
+% P12-ERR-0271: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック $\Curvesstack^{nodal} \subset \Curvesstack$ が存在し，次を満たす：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次の条件は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{nodal}$ を経由する，
+\item $f$ は相対次元 $1$ の高々節点特異点をもつ射である，
+\end{enumerate}
+\item % P12-ERR-0272: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次の条件は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{nodal}$ を経由する，
+\item $X$ の特異点は高々節点特異点であり，$X$ は次元 $1$ の等次元である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+実際，曲線族 $f : X \to S$ が与えられたとき，開部分スキーム $S' \subset S$ であって，
+$S' \times_S X \to S'$ が相対次元 $1$ の高々節点特異点をもつ射となり，かつ $S'$ の形成が
+任意の基底変換と可換するものが存在することを示せば十分である．
+《空間の射の進展》の引理
+\ref{spaces-more-morphisms-lemma-locus-where-nodal} により，$X' \subset X$ なる最大の開部分空間で，
+$f|_{X'} : X' \to S$ が相対次元 $1$ の高々節点特異点をもつ射となるものが存在する．
+さらに，$X'$ の形成は基底変換と可換する．したがって，
+$$
+S' = S \setminus |f|(|X| \setminus |X'|)
+$$
+ととることができる．proper 射は定義により普遍閉であるから，これは開である．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-nodal-curves-smooth}
+射 $\Curvesstack^{nodal} \to \Spec(\mathbf{Z})$ は滑らかである．
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{nodal} \subset \Curvesstack^{lci+}$ であることと，
+引理 \ref{moduli-curves-lemma-big-smooth-part-curves} から直ちに従う．
+\end{proof}
+% END EXPANDED MODULE ch109_12.tex
+% BEGIN EXPANDED MODULE ch109_13.tex
+\section{相対双対化層}
+\label{moduli-curves-section-relative-dualizing}
+
+\noindent
+この節は主として，曲線族の場合に記法を導入するためのものである．
+仕事の大部分はすでに双対性の章でなされている．
+
+\medskip\noindent
+$f : X \to S$ を曲線族とする．$D_\QCoh(\mathcal{O}_X)$ には
+{\it 相対双対化複体}と呼ばれる対象 $\omega_{X/S}^\bullet$ が存在し，
+次の性質をもつ：任意の基底変換図式
+$$
+\xymatrix{
+X_U \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+U \ar[r]^g & S
+}
+$$
+に対し，$U = \Spec(A)$ がアフィンならば，複体
+$\omega_{X_U/U}^\bullet = L(g')^*\omega_{X/S}^\bullet$ は関手
+$$
+D_\QCoh(\mathcal{O}_{X_U}) \longrightarrow \text{Mod}_A,\quad
+K \longmapsto \Hom_U(Rf_*K, \mathcal{O}_U)
+$$
+を表現する．より正確には，$(\omega_{X/S}^\bullet, \tau)$ を
+《空間の双対性》の定義
+\ref{spaces-duality-definition-relative-dualizing-proper-flat}
+で定義された曲線族の相対双対化複体とする．存在は《空間の双対性》の補題
+\ref{spaces-duality-lemma-existence-relative-dualizing} で示されている．
+さらに，$(\omega_{X/S}^\bullet, \tau)$ の形成は任意の基底変換と可換する
+（本質的には定義による；精確な参照は《空間の双対性》の補題
+\ref{spaces-duality-lemma-base-change-relative-dualizing} である）．
+以下では，$\omega_{X/S}^\bullet$ の基底変換を，基底変換された族の
+相対双対化複体と断りなく同一視する．
+
+\medskip\noindent
+$\{S_i \to S\}$ を，各 $S_i$ がアフィンで，
+$X_i = X \times_S S_i$ がスキームとなるエタール被覆とする；
+引理 \ref{moduli-curves-lemma-etale-locally-scheme} を参照せよ．《空間の双対性》の補題
+\ref{spaces-duality-lemma-compare} により，$\omega_{X_i/S_i}^\bullet$ は，
+《スキームの双対性》の注意
+\ref{duality-remark-relative-dualizing-complex} で論じられた，スキームの proper，平坦，
+有限表示な射 $f_i : X_i \to S_i$ の相対双対化複体と一致する．
+したがって，エタール局所的な $\omega_{X/S}^\bullet$ の性質を証明するには，
+$X \to S$ がスキームの射であると仮定し，スキームの双対性の章で展開された理論を用いてよい．
+より一般に，スキームである $X$ の任意の基底変換に対し，相対双対化複体は
+《スキームの双対性》の注意
+\ref{duality-remark-relative-dualizing-complex} の相対双対化複体と一致する．
+以下ではこの同一視を断りなく用いる．
+
+\medskip\noindent
+特に，$k$ を体とする射 $\Spec(k) \to S$ をとる．
+% P12-ERR-0273: see ../control/ERRATA_CANDIDATES.jsonl
+その基底変換を $X_k$ と記す（これは《体上の空間》の補題
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus} によりスキームである）．
+すると，$\omega_{X_k/k}^\bullet$ は《代数曲線》の補題
+\ref{curves-lemma-duality-dim-1} の複体 $\omega_{X_k}^\bullet$ と同型である
+（両者は同じ関手を表現するので米田の補題を使えるが，実際には上の注意から従う）．
+したがって，コホモロジー層 $H^i(\omega_{X_k/k}^\bullet)$ は
+$i = 0, -1$ の場合にしか非零でない．$X_k$ が Cohen--Macaulay かつ次元 $1$ の等次元ならば，
+$H^{-1}$ だけが残り，さらに $X_k$ が Gorenstein ならば，
+% P12-ERR-0274: see ../control/ERRATA_CANDIDATES.jsonl
+$H^{-1}(\omega_{X_k/k})$ は可逆である；《代数曲線》の補題
+\ref{curves-lemma-duality-dim-1-CM} および \ref{curves-lemma-rr} を参照せよ．
+
+\begin{lemma}
+\label{moduli-curves-lemma-CM-dualizing}
+$X \to S$ を，ファイバーが Cohen--Macaulay かつ次元 $1$ の等次元である曲線族とする
+（引理 \ref{moduli-curves-lemma-CM-1-curves}）．このとき
+$\omega_{X/S}^\bullet = \omega_{X/S}[1]$ であり，ここで $\omega_{X/S}$ は
+$S$ 上平坦な擬連接 $\mathcal{O}_X$-加群で，その形成は任意の基底変換と可換する．
+\end{lemma}
+
+\begin{proof}
+体への基底変換後に何が起こるかについての上の議論から，このことを直接導くよう読者に勧める．
+ここでの証明では，Noether スキームの場合へのいくぶん煩雑な還元を用いる．
+
+\medskip\noindent
+$\omega_{X/S}^\bullet = \omega_{X/S}[1]$ であり，$\omega_{X/S}$ が $S$ 上平坦であることを示せば，
+$\omega_{X/S}^\bullet$ の形成が任意の基底変換と可換することはすでに分かっているので，
+基底変換についての主張が従う．また，$\omega_{X/S}^\bullet$ は定義により擬連接なので，
+擬連接性は自動的である．他のコホモロジー層の消滅と平坦性はエタール局所的に確認できる．
+したがって，$S$ がアフィンで，$f : X \to S$ がスキームの射であると仮定してよい
+（上の議論を参照せよ）．$S = \lim S_i$ と書く．ここで右辺は，
+$\mathbf{Z}$ 上有限型なアフィン・スキーム $S_i$ の余フィルター極限である．
+$\Curvesstack^{CM, 1}$ は $\mathbf{Z}$ 上局所有限表示である
+（これは $\Curvesstack$ の開部分スタックである；引理
+\ref{moduli-curves-lemma-CM-1-curves} と \ref{moduli-curves-lemma-curves-qs-lfp} を参照せよ）から，
+ある $i$ と曲線族 $X_i \to S_i$ で，その引き戻しが $X \to S$ となるものを見いだせる
+（《スタックの極限》の補題
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}）．
+必要なら $i$ を大きくすることで，$X_i$ がスキームであると仮定してよい；
+《空間の極限》の補題 \ref{spaces-limits-lemma-limit-is-scheme} を参照せよ．
+$\omega_{X/S}^\bullet$ の形成は任意の基底変換と可換するので，$S$ を $S_i$ で置き換えてよい．
+このようにして，$S_i$ は Noether であると仮定でき，またそう仮定する．
+すると，ファイバーについての仮定から，$f$ は明らかに Cohen--Macaulay 射である
+（《射の進展》の定義 \ref{more-morphisms-definition-CM}）．
+さらに，$f^!$ の構成そのものにより
+$\omega_{X/S}^\bullet = f^!\mathcal{O}_S$ である
+（《スキームの双対性》の第 \ref{duality-section-upper-shriek} 節）．
+% P12-ERR-0275: see ../control/ERRATA_CANDIDATES.jsonl
+したがって補題は《スキームの双対性》の補題
+\ref{duality-lemma-affine-flat-Noetherian-CM} から従う．
+\end{proof}
+
+\begin{definition}
+\label{moduli-curves-definition-relative-dualizing-sheaf}
+$f : X \to S$ を，ファイバーが Cohen--Macaulay かつ次元 $1$ の等次元である曲線族とする
+（引理 \ref{moduli-curves-lemma-CM-1-curves}）．このとき，引理 \ref{moduli-curves-lemma-CM-dualizing} で調べた
+$\mathcal{O}_X$-加群
+$$
+\omega_{X/S} = H^{-1}(\omega_{X/S}^\bullet)
+$$
+を $f$ の{\it 相対双対化層}と呼ぶ．
+\end{definition}
+
+\noindent
+定義 \ref{moduli-curves-definition-relative-dualizing-sheaf} の状況で，相対双対化層 $\omega_{X/S}$ は
+次の性質をもつ（しかも，この性質は $S$ 上局所的にそれを特徴付ける）：
+任意の基底変換図式
+$$
+\xymatrix{
+X_U \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+U \ar[r]^g & S
+}
+$$
+に対し，$U = \Spec(A)$ がアフィンならば，加群
+$\omega_{X_U/U} = (g')^*\omega_{X/S}$ は関手
+$$
+\QCoh(\mathcal{O}_{X_U}) \longrightarrow \text{Mod}_A,\quad
+% P12-ERR-0276: see ../control/ERRATA_CANDIDATES.jsonl
+\mathcal{F} \longmapsto \Hom_A(H^1(X, \mathcal{F}), A)
+$$
+を表現する．これは，上で与えた相対双対化複体の対応する性質から直ちに従う．
+特に，$A = k$ が体ならば，《代数曲線》の補題
+\ref{curves-lemma-duality-dim-1}，
+\ref{curves-lemma-duality-dim-1-CM}，および \ref{curves-lemma-rr} で導入され研究された
+$X_k$ の双対化加群が再び得られる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-gorenstein-dualizing}
+$X \to S$ を，ファイバーが Gorenstein かつ次元 $1$ の等次元である曲線族とする
+（引理 \ref{moduli-curves-lemma-gorenstein-1-curves}）．このとき，相対双対化層 $\omega_{X/S}$ は可逆な
+$\mathcal{O}_X$-加群であり，その形成は任意の基底変換と可換する．
+\end{lemma}
+
+\begin{proof}
+上の議論により，相対双対化加群の各ファイバーへの引き戻しが可逆であるため，これは成り立つ．
+あるいは，引理 \ref{moduli-curves-lemma-CM-dualizing} の証明と全く同様に論じ，
+《スキームの双対性》の補題
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein} から結論を導いてもよい．
+\end{proof}
+% END EXPANDED MODULE ch109_13.tex
+% BEGIN EXPANDED MODULE ch109_14.tex
+\section{前安定曲線}
+\label{moduli-curves-section-prestable-curves}
+
+\noindent
+次の定義は，一般に受け入れられていると思われる前安定曲線族の概念と同値である．
+
+\begin{definition}
+\label{moduli-curves-definition-prestable}
+$f : X \to S$ を曲線族とする．次を満たすとき，$f$ を
+{\it 前安定曲線族}という：
+\begin{enumerate}
+\item $f$ は相対次元 $1$ の高々節点特異点をもつ射であり，
+\item $f_*\mathcal{O}_X = \mathcal{O}_S$ で，このことは任意の基底変換後にも成り立つ
+\footnote{実際，$f$ の Stein 分解はこの場合エタールなので，
+$f_*\mathcal{O}_X = \mathcal{O}_S$ だけを要求すれば十分である；
+《空間の射の進展》の補題
+\ref{spaces-more-morphisms-lemma-stein-factorization-etale} を参照せよ．
+この条件は，幾何ファイバーが連結であることを要求する条件で置き換えることもできる；
+引理 \ref{moduli-curves-lemma-geomredcon-in-h0-1} を参照せよ．}．
+\end{enumerate}
+\end{definition}
+
+\noindent
+$X$ を体 $k$ 上の proper スキームで $\dim(X) \leq 1$ を満たすものとする．
+このとき $X \to \Spec(k)$ は曲線族であるから，定義の意味で前安定であるか否かを問うことができる
+\footnote{ここでは「前安定曲線」という語を用いることはできない．曲線は既約性を含意するからである．
+《代数曲線》の第 \ref{curves-section-families-nodal} 節の議論を参照せよ．}．
+定義を展開すると，次が同値であることが分かる：
+\begin{enumerate}
+\item $X$ は前安定である，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，かつ
+$k = H^0(X, \mathcal{O}_X)$ である，
+\item $X_{\overline{k}}$ は連結であり，有限個の節点を除いて $\overline{k}$ 上滑らかである
+（《代数曲線》の定義 \ref{curves-definition-multicross}）．
+\end{enumerate}
+これは，我々の定義が文献に見られる定義の大部分と一致することを示している．
+
+\begin{lemma}
+\label{moduli-curves-lemma-prestable-curves}
+% P12-ERR-0277: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック $\Curvesstack^{prestable} \subset \Curvesstack$ が存在し，次を満たす：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{prestable}$ を経由する，
+\item $X \to S$ は前安定曲線族である，
+\end{enumerate}
+\item % P12-ERR-0278: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{prestable}$ を経由する，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，かつ
+$k = H^0(X, \mathcal{O}_X)$ である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+曲線族 $X \to S$ が与えられたとき，それが前安定であるための必要十分条件は，
+分類射が $\Curvesstack^{nodal}$ と $\Curvesstack^{h0, 1}$ の両方を経由することである．
+代わりに $\Curvesstack^{grc, 1}$ を用いてもよい
+（節点曲線は幾何学的に被約なので，その $H^0$ が基礎体に等しいことと連結であることは同値である）．
+式で書けば，
+$$
+\Curvesstack^{prestable} =
+\Curvesstack^{nodal} \cap \Curvesstack^{h0, 1} =
+\Curvesstack^{nodal} \cap \Curvesstack^{grc, 1}
+$$
+である．したがって，補題は引理 \ref{moduli-curves-lemma-pre-genus-curves} と
+\ref{moduli-curves-lemma-nodal-curves} から従う．
+\end{proof}
+
+\noindent
+各種数 $g \geq 0$ に対して，種数 $g$ の前安定曲線を分類する代数スタックがある．
+実際，以下では，分類射 $S \to \Curvesstack$ が引理
+\ref{moduli-curves-lemma-prestable-one-piece-per-genus} の開部分スタック
+$\Curvesstack^{prestable}_g$ を経由することと，$X \to S$ が
+{\it 種数 $g$ の前安定曲線族}であることは同値である，ということにする．
+
+\begin{lemma}
+\label{moduli-curves-lemma-prestable-one-piece-per-genus}
+開かつ閉な部分スタックへの分解
+$$
+\Curvesstack^{prestable} = \coprod\nolimits_{g \geq 0}
+\Curvesstack^{prestable}_g
+$$
+が存在し，各 $\Curvesstack^{prestable}_g$ は次で特徴付けられる：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{prestable}_g$ を経由する，
+\item $X \to S$ は前安定曲線族で，$R^1f_*\mathcal{O}_X$ は階数 $g$ の
+局所自由 $\mathcal{O}_S$-加群である，
+\end{enumerate}
+\item 体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{prestable}_g$ を経由する，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$ であり，$X$ の種数は $g$ である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{prestable}$ が $\Curvesstack^{h0, 1}$ に含まれることはすでに見たので，
+これは引理 \ref{moduli-curves-lemma-prestable-curves} と
+\ref{moduli-curves-lemma-pre-genus-one-piece-per-genus} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-prestable-curves-smooth}
+射 $\Curvesstack^{prestable} \to \Spec(\mathbf{Z})$ および
+$\Curvesstack^{prestable}_g \to \Spec(\mathbf{Z})$ は滑らかである．
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{prestable}$ は $\Curvesstack^{nodal}$ の開部分スタックなので，
+これは引理 \ref{moduli-curves-lemma-nodal-curves-smooth} から従う．
+\end{proof}
+% END EXPANDED MODULE ch109_14.tex
+% BEGIN EXPANDED MODULE ch109_15.tex
+\section{半安定曲線}
+\label{moduli-curves-section-semistable-curves}
+
+\noindent
+次の補題は，半安定曲線族を理解する助けとなる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable}
+$f : X \to S$ を種数 $g \geq 1$ の前安定曲線族とする．
+$s \in S$ を基底スキームの点とし，$m \geq 2$ とする．
+次は同値である：
+\begin{enumerate}
+\item $X_s$ は有理尾部をもたない
+（《代数曲線》の例 \ref{curves-example-rational-tail}），
+\item % P12-ERR-0279: see ../control/ERRATA_CANDIDATES.jsonl
+$f^*f_*\omega_{X/S}^{\otimes m} \to \omega_{X/S}^{\otimes m}$ は，
+ある開集合 $s \in U \subset S$ に対して $f^{-1}(U)$ 上全射である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) を仮定する．第 \ref{moduli-curves-section-relative-dualizing} 節の内容を用いると，
+$\omega_{X_s}^{\otimes m}$ は大域生成されることが分かる．しかし，
+$C \subset X_s$ が有理尾部ならば，《代数曲線》の補題
+\ref{curves-lemma-rational-tail-negative} により
+$\deg(\omega_{X_s}|_C) < 0$ であり，したがって《代数多様体》の補題
+\ref{varieties-lemma-check-invertible-sheaf-trivial} により
+$H^0(C, \omega_{X_s}|_C) = 0$ となる．これは大域生成されることに矛盾する．
+これで (1) が示された．
+
+\medskip\noindent
+(1) を仮定する．まず $g \geq 2$ とする．仮定 (1) から
+$\omega_{X_s}^{\otimes m}$ は大域生成される；《代数曲線》の補題
+\ref{curves-lemma-contracting-rational-tails} を参照せよ．さらに，
+$$
+\Hom_{\kappa(s)}(H^1(X_s, \omega_{X_s}^{\otimes m}), \kappa(s)) =
+H^0(X_s, \omega_{X_s}^{\otimes 1 - m})
+$$
+が成り立つ．これは双対性による；《代数曲線》の補題
+\ref{curves-lemma-duality-dim-1-CM} を参照せよ．
+$\omega_{X_s}^{\otimes m}$ は大域生成されるので，
+% P12-ERR-0280: see ../control/ERRATA_CANDIDATES.jsonl
+各既約成分への制限の次数は非負である．したがって，
+$\omega_{X_s}^{\otimes 1 - m}$ の各既約成分への制限の次数は非正である．また，
+Riemann--Roch により
+$\deg(\omega_{X_s}^{\otimes 1 - m}) = (1 - m)(2g - 2) < 0$
+（《代数曲線》の補題 \ref{curves-lemma-rr}）なので，《代数多様体》の補題
+\ref{varieties-lemma-no-sections-dual-nef} により，上の $H^0$ は零である．
+コホモロジーと基底変換から，
+$$
+E = Rf_*\omega_{X/S}^{\otimes m}
+$$
+は，その形成が任意の基底変換と可換する完全複体であることが分かる
+（《空間の導来圏》の補題
+\ref{spaces-perfect-lemma-flat-proper-perfect-direct-image-general}）．
+上で示した消滅により，$E \otimes^\mathbf{L} \kappa(s)$ は次数 $0$ に置かれた
+$H^0(X_s, \omega_{X_s}^{\otimes m})$ に等しい．$S$ を縮小すると，
+$E = f_*\omega_{X/S}^{\otimes m}$ は次数 $0$ に置かれた局所自由
+$\mathcal{O}_S$-加群となる（すでに述べたように，その形成は任意の基底変換と可換する）．
+《空間の導来圏》の補題
+\ref{spaces-perfect-lemma-open-where-cohomology-in-degree-i-rank-r-geometric}
+を参照せよ．射
+$f^*f_*\omega_{X/S}^{\otimes m} \to \omega_{X/S}^{\otimes m}$ は，
+$X_s$ に制限すると全射である．したがって，$X_s$ のある開近傍で全射である．
+$f$ は proper なので，この開近傍は，$S$ における $s$ のある開近傍 $U$ に対する
+$f^{-1}(U)$ を含む．
+
+\medskip\noindent
+(1) と $g = 1$ を仮定する．《代数曲線》の補題
+\ref{curves-lemma-contracting-rational-tails} により，仮定 (1) は
+$\omega_{X_s}$ が $\mathcal{O}_{X_s}$ と同型であることを意味する．
+$S$ を縮小した後に可逆層 $\omega_{X/S}$ が自明になることを示せれば，
+% P12-ERR-0281: see ../control/ERRATA_CANDIDATES.jsonl
+証明は完了する．$S$ はアフィンであると仮定してよい．さらに $S$ を縮小すると，
+$$
+Rf_*\mathcal{O}_X = (\mathcal{O}_S \xrightarrow{0} \mathcal{O}_S)
+$$
+と書ける．これは次数 $0$ と $1$ に置かれ，さらなる基底変換とも整合する；
+引理 \ref{moduli-curves-lemma-genus} を参照せよ．双対性により，これは
+$$
+Rf_*\omega_{X/S} = (\mathcal{O}_S \xrightarrow{0} \mathcal{O}_S)
+$$
+が次数 $0$ と $1$ に置かれることを意味する\footnote{まず，
+% P12-ERR-0282: see ../control/ERRATA_CANDIDATES.jsonl
+$Rf_*\omega_{X/S}^\bullet =
+Rf_*R\SheafHom_{\mathcal{O}_X}(\mathcal{O}_X. \omega_{X/S}^\bullet) =
+R\SheafHom_{\mathcal{O}_S}(Rf_*\mathcal{O}_X, \mathcal{O}_S)$
+であることを用いる．これは《空間の双対性》の補題
+\ref{spaces-duality-lemma-iso-on-RSheafHom} と注意
+\ref{spaces-duality-remark-iso-on-RSheafHom} による．次に，第
+\ref{moduli-curves-section-relative-dualizing} 節の定義により
+$\omega_{X/S}^\bullet = \omega_{X/S}[1]$ であることを用いる．}．
+特に，基底変換と可換な同型 $\mathcal{O}_S \to f_*\omega_{X/S}$ を得る．なぜなら，
+$Rf_*\omega_{X/S}$ の形成は基底変換と可換するからである（上掲の参照を見よ）．
+随伴性により，大域切断 $\sigma \in \Gamma(X, \omega_{X/S})$ を得る．
+この切断のファイバー $X_s$ への制限は非零（実際，基底元）であり，
+$\omega_{X_s}$ はファイバー上自明なので，
+% P12-ERR-0283: see ../control/ERRATA_CANDIDATES.jsonl
+この切断は $X_s$ 上のどの点でも零にならない．したがって，
+% P12-ERR-0284: see ../control/ERRATA_CANDIDATES.jsonl
+$X_s$ のある開近傍でもどの点でも零にならない．$f$ は proper なので，
+この開近傍は，$S$ における $s$ のある開近傍 $U$ に対する $f^{-1}(U)$ を含む．
+\end{proof}
+
+\noindent
+引理 \ref{moduli-curves-lemma-semistable} に動機づけられて，次の定義を置く．
+
+\begin{definition}
+\label{moduli-curves-definition-semistable}
+$f : X \to S$ を曲線族とする．次を満たすとき，$f$ を
+{\it 半安定曲線族}という：
+\begin{enumerate}
+\item $X \to S$ は前安定曲線族であり，
+\item すべての $s \in S$ に対し，$X_s$ の種数は $\geq 1$ で，
+有理尾部をもたない．
+\end{enumerate}
+\end{definition}
+
+\noindent
+特に，種数 $0$ の前安定曲線族は決して半安定ではない．
+$X$ を体 $k$ 上の proper スキームで $\dim(X) \leq 1$ を満たすものとする．
+このとき $X \to \Spec(k)$ は曲線族であるから，それが半安定であるか否かを問うことができる．
+定義を展開すると，次が同値であることが分かる：
+\begin{enumerate}
+\item $X$ は半安定である，
+\item $X$ は前安定で，種数は $\geq 1$ であり，有理尾部をもたない，
+\item $X_{\overline{k}}$ は連結で，有限個の節点を除いて $\overline{k}$ 上滑らかであり，
+種数は $\geq 1$ で，残りの $X_{\overline{k}}$ との交点がただ一つであるような
+$\mathbf{P}^1_{\overline{k}}$ と同型な既約成分をもたない．
+\end{enumerate}
+(2) と (3) の同値性を見るには，《代数曲線》の補題
+\ref{curves-lemma-contracting-rational-tails} により，$X$ が有理尾部をもたないことと
+$X_{\overline{k}}$ が有理尾部をもたないことが同値であることを用いよ．
+これは，我々の定義が文献に見られる定義の大部分と一致することを示している．
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable-curves}
+% P12-ERR-0285: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック $\Curvesstack^{semistable} \subset \Curvesstack$ が存在し，次を満たす：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{semistable}$ を経由する，
+\item $X \to S$ は半安定曲線族である，
+\end{enumerate}
+\item % P12-ERR-0286: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{semistable}$ を経由する，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $\geq 1$ であり，かつ
+$X$ は有理尾部をもたない，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$ であり，
+% P12-ERR-0287: see ../control/ERRATA_CANDIDATES.jsonl
+$\omega_{X_s}^{\otimes m}$ は $m \geq 2$ に対して大域生成される．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2)(b) と (2)(c) の同値性は《代数曲線》の補題
+\ref{curves-lemma-contracting-rational-tails} である．証明の残りでは，
+定義 \ref{moduli-curves-definition-semistable} に従って (2)(b) を用いる．
+
+\medskip\noindent
+第 \ref{moduli-curves-section-open} 節の議論により，前安定曲線族 $f : X \to S$ だけを考えれば十分である．
+引理 \ref{moduli-curves-lemma-semistable} から，当該軌跡に望まれる開性が得られる．
+この開部分の形成は任意の基底変換と可換する．なぜなら，有理尾部の存在または非存在は，
+《代数曲線》の補題 \ref{curves-lemma-contracting-rational-tails} により
+基礎体の拡大によって変わらないからである．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable-one-piece-per-genus}
+開かつ閉な部分スタックへの分解
+$$
+\Curvesstack^{semistable} = \coprod\nolimits_{g \geq 1}
+\Curvesstack^{semistable}_g
+$$
+が存在し，各 $\Curvesstack^{semistable}_g$ は次で特徴付けられる：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{semistable}_g$ を経由する，
+\item $X \to S$ は半安定曲線族で，$R^1f_*\mathcal{O}_X$ は階数 $g$ の
+局所自由 $\mathcal{O}_S$-加群である，
+\end{enumerate}
+\item % P12-ERR-0288: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{semistable}_g$ を経由する，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $g$ であり，$X$ は有理尾部をもたない，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $g$ であり，
+% P12-ERR-0289: see ../control/ERRATA_CANDIDATES.jsonl
+$\omega_{X_s}^{\otimes m}$ は $m \geq 2$ に対して大域生成される．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+引理 \ref{moduli-curves-lemma-semistable-curves} と
+\ref{moduli-curves-lemma-prestable-one-piece-per-genus} を組み合わせればよい．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-semistable-curves-smooth}
+射 $\Curvesstack^{semistable} \to \Spec(\mathbf{Z})$ および
+$\Curvesstack^{semistable}_g \to \Spec(\mathbf{Z})$ は滑らかである．
+\end{lemma}
+
+\begin{proof}
+$\Curvesstack^{semistable}$ は $\Curvesstack^{nodal}$ の開部分スタックなので，
+これは引理 \ref{moduli-curves-lemma-nodal-curves-smooth} から従う．
+\end{proof}
+% END EXPANDED MODULE ch109_15.tex
+% BEGIN EXPANDED MODULE ch109_16.tex
+\section{安定曲線}
+\label{moduli-curves-section-stable-curves}
+
+\noindent
+次の補題は，安定曲線族を理解する助けとなる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable}
+$f : X \to S$ を種数 $g \geq 2$ の前安定曲線族とする．
+$s \in S$ を基底スキームの点とする．次は同値である：
+\begin{enumerate}
+\item $X_s$ は有理尾部も有理橋部ももたない
+（《代数曲線》の例
+\ref{curves-example-rational-tail} および
+\ref{curves-example-rational-bridge}），
+\item $\omega_{X/S}$ は，ある開集合 $s \in U \subset S$ に対して
+$f^{-1}(U)$ 上豊富である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) を仮定する．すると $\omega_{X_s}$ は $X_s$ 上豊富である．
+《代数曲線》の補題 \ref{curves-lemma-rational-tail-negative} および
+\ref{curves-lemma-rational-bridge-zero} により，(1) が成り立つ
+（《代数多様体》の補題
+\ref{varieties-lemma-ampleness-in-terms-of-degrees-components} による
+豊富な可逆層の特徴付けも用いる）．
+
+\medskip\noindent
+(1) を仮定する．すると《代数曲線》の補題
+% P12-ERR-0290: see ../control/ERRATA_CANDIDATES.jsonl
+\ref{curves-lemma-contracting-rational-bridges} により，
+$\omega_{X_s}$ は $X_s$ 上豊富である．《空間上の降下》の補題
+\ref{spaces-descent-lemma-ample-in-neighbourhood} から結論が従う．
+\end{proof}
+
+\noindent
+引理 \ref{moduli-curves-lemma-stable} に動機づけられて，次の定義を置く．
+
+\begin{definition}
+\label{moduli-curves-definition-stable}
+$f : X \to S$ を曲線族とする．次を満たすとき，$f$ を
+{\it 安定曲線族}という：
+\begin{enumerate}
+\item $X \to S$ は前安定曲線族であり，
+\item % P12-ERR-0291: see ../control/ERRATA_CANDIDATES.jsonl
+すべての $s \in S$ に対し，$X_s$ の種数は $\geq 2$ で，
+有理尾部も有理橋部ももたない．
+\end{enumerate}
+\end{definition}
+
+\noindent
+特に，種数 $0$ または $1$ の前安定曲線族は決して安定ではない．
+$X$ を体 $k$ 上の proper スキームで $\dim(X) \leq 1$ を満たすものとする．
+このとき $X \to \Spec(k)$ は曲線族であるから，それが安定であるか否かを問うことができる．
+定義を展開すると，次が同値であることが分かる：
+\begin{enumerate}
+\item $X$ は安定である，
+\item $X$ は前安定で，種数は $\geq 2$ であり，有理尾部も有理橋部ももたない，
+\item $X$ は幾何学的に連結で，有限個の節点を除いて $k$ 上滑らかであり，
+$\omega_X$ は豊富である．
+\end{enumerate}
+(2) と (3) の同値性を見るには，上の引理 \ref{moduli-curves-lemma-stable} を用いよ．
+これは，我々の定義が文献に見られる定義の大部分と一致することを示している．
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-curves}
+% P12-ERR-0292: see ../control/ERRATA_CANDIDATES.jsonl
+開部分スタック $\Curvesstack^{stable} \subset \Curvesstack$ が存在し，次を満たす：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\Curvesstack^{stable}$ を経由する，
+\item $X \to S$ は安定曲線族である，
+\end{enumerate}
+\item % P12-ERR-0293: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\Curvesstack^{stable}$ を経由する，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $\geq 2$ であり，
+$X$ は有理尾部も有理橋部ももたない，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$ であり，
+% P12-ERR-0294: see ../control/ERRATA_CANDIDATES.jsonl
+$\omega_{X_s}$ は豊富である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+第 \ref{moduli-curves-section-open} 節の議論により，前安定曲線族
+$f : X \to S$ だけを考えれば十分である．引理 \ref{moduli-curves-lemma-stable} から，
+当該軌跡に望まれる開性が得られる．この開部分の形成は任意の基底変換と可換する．
+これは，一方では《代数曲線》の補題
+\ref{curves-lemma-contracting-rational-tails} および
+\ref{curves-lemma-contracting-rational-bridges} により，有理尾部または有理橋部の
+存在ないし非存在が基礎体の拡大によって変わらないからであり，もう一方では《降下》の補題
+\ref{descent-lemma-descending-property-ample} により，豊富性が基礎体の拡大によって
+変わらないからである．
+\end{proof}
+
+\begin{definition}
+\label{moduli-curves-definition-deligne-mumford}
+\begin{reference}
+\cite{DM}
+\end{reference}
+% P12-ERR-0295: see ../control/ERRATA_CANDIDATES.jsonl
+引理 \ref{moduli-curves-lemma-stable-curves} で導入された，安定曲線族を径数付ける代数スタック
+$\Curvesstack^{stable}$ を $\overline{\mathcal{M}}$ と記し，
+{\it 安定曲線のモジュライスタック}と呼ぶ．
+$g \geq 2$ に対し，引理 \ref{moduli-curves-lemma-stable-one-piece-per-genus} で導入された代数スタックを
+$\overline{\mathcal{M}}_g$ と記し，
+{\it 種数 $g$ の安定曲線のモジュライスタック}と呼ぶ．
+\end{definition}
+
+\noindent
+ここで，お決まりの補題を述べる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-one-piece-per-genus}
+開かつ閉な部分スタックへの分解
+$$
+\overline{\mathcal{M}} = \coprod\nolimits_{g \geq 2} \overline{\mathcal{M}}_g
+$$
+が存在し，各 $\overline{\mathcal{M}}_g$ は次で特徴付けられる：
+\begin{enumerate}
+\item 曲線族 $f : X \to S$ が与えられたとき，次は同値である：
+\begin{enumerate}
+\item 分類射 $S \to \Curvesstack$ は $\overline{\mathcal{M}}_g$ を経由する，
+\item $X \to S$ は安定曲線族で，$R^1f_*\mathcal{O}_X$ は階数 $g$ の
+局所自由 $\mathcal{O}_S$-加群である，
+\end{enumerate}
+\item % P12-ERR-0296: see ../control/ERRATA_CANDIDATES.jsonl
+体 $k$ 上 proper なスキーム $X$ で $\dim(X) \leq 1$ を満たすものが与えられたとき，
+次は同値である：
+\begin{enumerate}
+\item 分類射 $\Spec(k) \to \Curvesstack$ は $\overline{\mathcal{M}}_g$ を経由する，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $g$ であり，
+$X$ は有理尾部も有理橋部ももたない，
+\item $X$ の特異点は高々節点特異点で，$\dim(X) = 1$，
+$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $g$ であり，
+% P12-ERR-0297: see ../control/ERRATA_CANDIDATES.jsonl
+$\omega_{X_s}$ は豊富である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+引理 \ref{moduli-curves-lemma-stable-curves} と
+\ref{moduli-curves-lemma-prestable-one-piece-per-genus} を組み合わせればよい．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-curves-smooth}
+射 $\overline{\mathcal{M}} \to \Spec(\mathbf{Z})$ および
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$ は滑らかである．
+\end{lemma}
+
+\begin{proof}
+$\overline{\mathcal{M}}$ は $\Curvesstack^{nodal}$ の開部分スタックなので，
+これは引理 \ref{moduli-curves-lemma-nodal-curves-smooth} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-curves-deligne-mumford}
+スタック $\overline{\mathcal{M}}$ および $\overline{\mathcal{M}}_g$ は
+$\Curvesstack^{DM}$ の開部分スタックである．特に，
+$\overline{\mathcal{M}}$ と $\overline{\mathcal{M}}_g$ は DM
+（《スタックの射》の定義
+\ref{stacks-morphisms-definition-absolute-separated}）であると同時に，
+Deligne--Mumford スタック
+（《代数スタック》の定義 \ref{algebraic-definition-deligne-mumford}）でもある．
+\end{lemma}
+
+\begin{proof}
+まず第一の主張を証明する．
+$X$ を体 $k$ 上の proper スキームとし，その特異点は高々節点特異点，
+$\dim(X) = 1$，$k = H^0(X, \mathcal{O}_X)$，$X$ の種数は $\geq 2$ であり，
+$X$ は有理尾部も有理橋部ももたないとする．分類射
+$\Spec(k) \to \overline{\mathcal{M}} \to \Curvesstack$ が
+$\Curvesstack^{DM}$ を経由することを示さなければならない．
+まず $k$ を代数閉包で置き換えてよい
+（関係するスタックが代数スタック $\Curvesstack$ の開部分スタックであることは
+すでに分かっているからである）．引理 \ref{moduli-curves-lemma-stable-curves}，
+\ref{moduli-curves-lemma-DM-curves}，および \ref{moduli-curves-lemma-in-DM-locus-vector-fields} により，
+$\text{Der}_k(\mathcal{O}_X, \mathcal{O}_X) = 0$
+を示せば十分である．これは《代数曲線》の補題
+\ref{curves-lemma-stable-vector-fields} で証明されている．
+
+\medskip\noindent
+$\Curvesstack^{DM}$ は $\Curvesstack$ の DM である最大の開部分スタックなので，
+これは $\Curvesstack^{DM}$ の開部分スタック
+$\overline{\mathcal{M}}$ についても成り立つことが分かる．最後に，DM 代数スタックは
+《スタックの射》の定理 \ref{stacks-morphisms-theorem-DM} により
+Deligne--Mumford である．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-smooth-dense-in-stable}
+$g \geq 2$ とする．包含
+$$
+|\mathcal{M}_g| \subset |\overline{\mathcal{M}}_g|
+$$
+は開稠密部分集合の包含である．
+\end{lemma}
+
+\begin{proof}
+$\overline{\mathcal{M}}_g \subset \Curvesstack^{lci+}$ は開であり，かつ
+$\Curvesstack^{smooth} \cap \overline{\mathcal{M}}_g = \mathcal{M}_g$
+なので，引理 \ref{moduli-curves-lemma-smooth-dense} から直ちに従う．
+\end{proof}
+% END EXPANDED MODULE ch109_16.tex
+% BEGIN EXPANDED MODULE ch109_17.tex
+\section{縮約射}
+\label{moduli-curves-section-contracting}
+
+\noindent
+ここから先へ進む前に，《代数曲線》の
+\ref{curves-section-contracting-rational-tails} 節，
+\ref{curves-section-contracting-rational-bridges} 節，および
+\ref{curves-section-contracting-to-stable} 節に習熟しておくことを読者に勧める．
+本節の主結果は，「安定化」射
+$$
+\Curvesstack^{prestable}_g
+\longrightarrow
+\overline{\mathcal{M}}_g
+$$
+の存在である．補題 \ref{moduli-curves-lemma-stabilization-morphism} を見よ．
+大まかにいえば，この射は，種数 $g$ の節点曲線のモジュライ点を，
+《代数曲線》の補題
+\ref{curves-lemma-characterize-contraction-to-stable}
+で構成された，対応する安定曲線のモジュライ点へ送る．
+
+\begin{lemma}
+\label{moduli-curves-lemma-contract}
+$S$ をスキーム，$s \in S$ を点とする．
+$f : X \to S$ および $g : Y \to S$ を曲線族とする．
+$c : X \to Y$ を $S$ 上の射とする．
+$c_{s, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_s}$ かつ
+$R^1c_{s, *}\mathcal{O}_{X_s} = 0$ ならば，
+$S$ を $s$ のある開近傍で置き換えた後，
+$\mathcal{O}_Y = c_*\mathcal{O}_X$ および $R^1c_*\mathcal{O}_X = 0$
+が成り立ち，しかもこれは任意の射 $S' \to S$ による基底変換後にも成り立つ．
+\end{lemma}
+
+\begin{proof}
+$(U, u) \to (S, s)$ を，
+$\mathcal{O}_{Y_U} = (X_U \to Y_U)_*\mathcal{O}_{X_U}$ および
+$R^1(X_U \to Y_U)_*\mathcal{O}_{X_U} = 0$ が成り立ち，かつ
+任意の $U' \to U$ による基底変換後にも同じことが成り立つような
+エタール近傍とする．このとき $S$ を $U \to S$ の開な像で置き換える．
+$S' \to S$ が与えられたとき $U' = U \times_S S'$ とおけば，
+エタール被覆 $\{U' \to S'\}$ および
+$\{Y_{U'} \to Y_{S'}\}$ が得られる．したがって，
+$S' \to S$ による $c$ の基底変換について主張が成り立つことは，
+$U' \to U$ による $X_U \to Y_U$ の基底変換について主張が成り立つことから従う．
+言い換えれば，この問題は $S$ 上のエタール位相に関して局所的である．
+よって補題 \ref{moduli-curves-lemma-etale-locally-scheme} により，
+$X$ と $Y$ はスキームであると仮定してよい．
+《射の続論》の補題 \ref{more-morphisms-lemma-h1-fibre-zero-isom}
+により，$Y_s$ を含む開部分スキーム $V \subset Y$ で，
+$c_*\mathcal{O}_X|_V = \mathcal{O}_V$ および
+$R^1c_*\mathcal{O}_X|_V = 0$ が成り立ち，かつ任意の
+$S' \to S$ による基底変換後にも同じことが成り立つものが存在する．
+$g : Y \to S$ は proper なので，$s$ の開近傍 $U \subset S$ で
+$g^{-1}(U) \subset V$ を満たすものをとれる．この $U$ が求めるものである．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-contract-basic-uniqueness}
+$S$ をスキーム，$s \in S$ を点とする．
+$f : X \to S$ および $g_i : Y_i \to S$，$i = 1, 2$ を曲線族とする．
+$c_i : X \to Y_i$ を $S$ 上の射とする．
+$c_{1, s}$ および $c_{2, s}$ と両立するファイバーの同型
+$Y_{1, s} \cong Y_{2, s}$ が存在すると仮定する．
+$c_{1, s, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_{1, s}}$ かつ
+$R^1c_{1, s, *}\mathcal{O}_{X_s} = 0$ ならば，
+$s$ の開近傍 $U$ と，$U$ 上の曲線族の同型
+$Y_{1, U} \cong Y_{2, U}$ が存在し，この同型は与えられたファイバーの同型，
+$c_1$，および $c_2$ と両立する．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_{S, s} = \colim \mathcal{O}_S(U)$ であることを思い出そう．
+ここで余極限は $s$ のアフィン近傍 $U$ の系にわたる．
+したがって，この局所環上有限表示な代数空間の圏は，
+$s$ のアフィン近傍上有限表示な代数空間の圏の余極限である．
+《空間の極限》の補題
+\ref{spaces-limits-lemma-descend-finite-presentation} を見よ．
+このようにして，$S$ が局所環のスペクトルで $s$ が閉点である場合に帰着する．
+
+\medskip\noindent
+$S = \Spec(A)$ とし，$A$ は局所環，$s$ は閉点と仮定する．
+$A = \colim A_j$ と書く．ここで $A_j$ は局所 Noether 環
+（例えば $\mathbf{Z}$ 上本質的有限型）で，遷移準同型は局所準同型である．
+$S_j = \Spec(A_j)$ とおき，その閉点を $s_j$ とする．
+補題 \ref{moduli-curves-lemma-curves-qs-lfp} および《スタックの極限》の補題
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}
+により，ある $j$ と曲線族
+$X_j \to S_j$，$Y_{j, i} \to S_j$ を見いだせる．
+必要なら $j$ を大きくすることで，$s$ への基底変換が $c_i$ となる射
+$c_{j, i} : X_j \to Y_{j, i}$ を見いだせる．
+《空間の極限》の補題
+\ref{spaces-limits-lemma-descend-finite-presentation} を見よ．
+$\kappa(s) = \colim \kappa(s_j)$ なので，同様に，
+$c_{j, 1, s_j}$ および $c_{j, 2, s_j}$ と両立する同型
+$Y_{j, 1, s_j} \cong Y_{j, 2, s_j}$ が存在すると仮定してよい．
+最後に，仮定
+$c_{1, s, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_{1, s}}$ および
+$R^1c_{1, s, *}\mathcal{O}_{X_s} = 0$
+は $c_{j, 1, s_j}$ に継承される．なぜなら，
+% P12-ERR-0298: see ../control/ERRATA_CANDIDATES.jsonl
+$\{s_j \to s\}$ は fpqc 被覆であり，この被覆によって
+$c_{1, s}$ は $c_{j, 1, s_j}$ の基底だからである（詳細は省略する）．
+このようにして，補題を次段落で扱う場合へ帰着する．
+
+\medskip\noindent
+$S$ は Noether 局所環 $\Lambda$ のスペクトルで，$s$ は閉点であると仮定する．
+次の射のスキーム論的像 $Z$ を考える：
+$$
+(c_1, c_2) : X \longrightarrow Y_1 \times_S Y_2
+$$
+補題の主張は，$Z$ が射影射を介して $Y_1$ および $Y_2$ へ同型に写るという
+主張と同値である．この射のスキーム論的像をとる操作は平坦基底変換と可換するので
+% P12-ERR-0299: see ../control/ERRATA_CANDIDATES.jsonl
+（《空間の射》の補題
+\ref{spaces-morphisms-lemma-flat-base-change-scheme-theoretic-image}，
+$\Lambda$ をその完備化で置き換えてよい
+（《代数の続論》の \ref{more-algebra-section-permanence-completion} 節）．
+
+\medskip\noindent
+$S$ は完備 Noether 局所環 $\Lambda$ のスペクトルであると仮定する．
+この場合，$X$，$Y_1$，$Y_2$ はスキームであることに注意せよ
+（《空間の射の続論》の補題
+\ref{spaces-more-morphisms-lemma-projective-over-complete}）．
+% P12-ERR-0300: see ../control/ERRATA_CANDIDATES.jsonl
+$X$，$Y_1$，$Y_2$ の
+$\Spec(\Lambda/\mathfrak m^{n + 1})$ への基底変換をそれぞれ
+$X_n$，$Y_{1, n}$，$Y_{2, n}$ と記す．
+射
+$$
+\Deformationcategory_{X_s \to Y_{2, s}} \cong
+\Deformationcategory_{X_s \to Y_{1, s}} \longrightarrow
+\Deformationcategory_{X_s}
+$$
+は同値であることを思い出そう．《変形問題》の補題
+\ref{examples-defos-lemma-schemes-morphisms-smooth-to-base} を見よ．
+したがって，$\Deformationcategory_{X_s \to Y_{1, s}}$ の形式的対象の同型
+$(X_n \to Y_{1, n}) \cong (X_n \to Y_{2, n})$ が存在する．
+最後に，Grothendieck の代数化定理
+（《スキームのコホモロジー》の補題
+\ref{coherent-lemma-algebraize-morphism}）により，
+$c_1$ および $c_2$ と両立する同型 $Y_1 \to Y_2$ が得られる．
+\end{proof}
+% END EXPANDED MODULE ch109_17.tex
+% BEGIN EXPANDED MODULE ch109_18.tex
+\begin{lemma}
+\label{moduli-curves-lemma-contract-basic}
+$f : X \to S$ を曲線族とし，$s \in S$ を点とする．
+$h_0 : X_s \to Y_0$ を $\kappa(s)$ 上の proper スキーム $Y_0$ への射で，
+$h_{0, *}\mathcal{O}_{X_s} = \mathcal{O}_{Y_0}$ および
+$R^1h_{0, *}\mathcal{O}_{X_s} = 0$ を満たすものとする．
+このとき，初等エタール近傍 $(U, u) \to (S, s)$，曲線族 $Y \to U$，
+および $U$ 上の射 $h : X_U \to Y$ で，$u$ におけるファイバーが
+$h_0$ と同型であるものが存在する．
+\end{lemma}
+
+\begin{proof}
+まずいくつかの帰着を行うが，読者は先へ読み飛ばしてもよい．
+問題は $S$ 上局所的なので，$S$ はアフィンであると仮定してよい．
+S を $\mathbf{Z}$ 上有限型なアフィンスキーム $S_i$ の余フィルター付き極限
+$S = \lim S_i$ と書く．ある $i$ に対して，その基底変換が
+$X \to S$ となる曲線族 $X_i \to S_i$ を見いだせる．
+これは補題 \ref{moduli-curves-lemma-curves-qs-lfp} および《スタックの極限》の補題
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}
+から従う．$s$ の像を $s_i \in S_i$ とする．
+$\kappa(s) = \colim \kappa(s_i)$ であり，$X_s$ はスキームであることに注意せよ
+（《体上の空間》の補題
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}）．
+$i$ を大きくした後，$\kappa(s_i)$ 上有限型なスキームの射
+$h_{i, 0} : X_{i, s_i} \to Y_i$ で，$\kappa(s)$ への基底変換が
+$h_0$ となるものが存在すると仮定してよい．
+《極限》の補題 \ref{limits-lemma-descend-finite-presentation} を見よ．
+さらに $i$ を大きくした後，$Y_i$ は $\kappa(s_i)$ 上 proper であると
+仮定してよい．《極限》の補題
+\ref{limits-lemma-eventually-proper} を見よ．
+% P12-ERR-0301: see ../control/ERRATA_CANDIDATES.jsonl
+射影を $g_{i, 0} : Y_0 \to Y_{i, 0}$ とする．
+これは $\Spec(\kappa(s)) \to \Spec(\kappa(s_i))$ の基底変換なので，
+忠実平坦射であることに注意せよ．平坦基底変換により
+$$
+h_{0, *}\mathcal{O}_{X_s} = g_{i, 0}^*h_{i, 0, *}\mathcal{O}_{X_{i, s_i}}
+\quad\text{and}\quad
+% P12-ERR-0302: see ../control/ERRATA_CANDIDATES.jsonl
+R^1h_{0, *}\mathcal{O}_{X_s} = g_{i, 0}^*Rh_{i, 0, *}\mathcal{O}_{X_{i, s_i}}
+$$
+である．《スキームのコホモロジー》の補題
+\ref{coherent-lemma-flat-base-change-cohomology} を見よ．
+忠実平坦性により，データ
+% P12-ERR-0303: see ../control/ERRATA_CANDIDATES.jsonl
+$X_i \to S_i$，$s_i \in S_i$，および
+$X_{i, s_i} \to Y_i$ は補題の仮定をすべて満たすことが分かる．
+これで，次段落で扱う場合に帰着した．
+
+\medskip\noindent
+$S$ は $\mathbf{Z}$ 上有限型なアフィンスキームであると仮定する．
+$\mathcal{O}_{S, s}^h$ を $s$ における $S$ の局所環の Hensel 化とする．
+《代数の続論》の補題 \ref{more-algebra-lemma-henselization-G-ring}
+および命題 \ref{more-algebra-proposition-ubiquity-G-ring} により，
+$\mathcal{O}_{S, s}^h$ は G 環であることに注意せよ．
+曲線族 $Y' \to \Spec(\mathcal{O}_{S, s}^h)$ と，
+$\Spec(\mathcal{O}_{S, s}^h)$ 上の射
+$$
+h' : X \times_S \Spec(\mathcal{O}_{S, s}^h) \longrightarrow Y'
+$$
+で，閉点への基底変換が $h_0$ となるものを構成できたと仮定する．
+これで十分である．実際，まず
+$$
+\mathcal{O}_{S, s}^h = \colim_{(U, u)} \mathcal{O}_U(U)
+$$
+を用いる．ここで余極限は初等エタール近傍のフィルター付き圏にわたる
+（《射の続論》の補題
+\ref{more-morphisms-lemma-describe-henselization}）．
+次に，$Y'$ が与えられたとき，ある $U$ に対する $Y \to U$ へこれを
+降下できることを再び用いる（上で挙げた参照先を見よ）．
+続いて，《極限》の補題
+\ref{limits-lemma-descend-finite-presentation} を用いて，
+$h'$ をある $h$ へ降下する．これで次段落で扱う場合へ帰着する．
+
+\medskip\noindent
+$S = \Spec(\Lambda)$ とし，
+$(\Lambda, \mathfrak m, \kappa)$ は Hensel Noether 局所 G 環，
+$s$ は $S$ の閉点であると仮定する．射
+$$
+\Deformationcategory_{X_s \to Y_0} \to \Deformationcategory_{X_s}
+$$
+は同値であることを思い出そう．《変形問題》の補題
+\ref{examples-defos-lemma-schemes-morphisms-smooth-to-base} を見よ．
+（これが証明で唯一重要な段階であり，ほかはすべて技巧である．）
+% P12-ERR-0304: see ../control/ERRATA_CANDIDATES.jsonl
+$\mathfrak m$ 進完備化を $\Lambda^\wedge$ と記す．
+$X$ の $\Lambda/\mathfrak m^{n + 1}$ への引戻し $X_n$ は，
+$\Lambda^\wedge$ 上の $\Deformationcategory_{X_s}$ の形式的対象
+$\xi$ を定める．上の同値から，
+$\Lambda^\wedge$ 上の $\Deformationcategory_{X_s \to Y_0}$ の
+形式的対象 $\xi'$ が得られる．したがって，巨大な可換図式
+$$
+\xymatrix{
+\ldots \ar[r] &
+X_n \ar[r] \ar[d] &
+X_{n - 1} \ar[r] \ar[d] &
+\ldots \ar[r] &
+X_s \ar[d] \\
+\ldots \ar[r] &
+Y_n \ar[r] \ar[d] &
+Y_{n - 1} \ar[r] \ar[d] &
+\ldots \ar[r] &
+Y_0 \ar[d] \\
+\ldots \ar[r] &
+\Spec(\Lambda/\mathfrak m^{n + 1}) \ar[r] &
+\Spec(\Lambda/\mathfrak m^n) \ar[r] &
+\ldots \ar[r] &
+\Spec(\kappa)
+}
+$$
+が得られる．形式的対象 $(Y_n)$ は，《Quot》の補題
+\ref{quot-lemma-curves-existence} により，
+曲線族 $Y' \to \Spec(\Lambda^\wedge)$ から来る．
+《空間の射の続論》の補題
+\ref{spaces-more-morphisms-lemma-algebraize-morphism} により，
+すべての $n$ について与えられた射 $X_n \to Y_n$ を誘導し，
+特に与えられた射 $X_s \to Y_0$ を誘導する射
+$h' : X_{\Lambda^\wedge} \to Y'$ が得られる．
+
+\medskip\noindent
+最後に，標準的な代数化・近似の議論を行う．
+まず，有限生成な $\Lambda$-部分代数
+$\Lambda \subset A \subset \Lambda^\wedge$，曲線族
+$Y'' \to \Spec(A)$，および $A$ 上の射 $h'' : X_A \to Y''$ で，
+$\Lambda^\wedge$ への基底変換が $h'$ となるものを見いだせることに注意する．
+これは，$\Lambda^\wedge$ がこれらの環 $A$ のフィルター付き余極限であり，
+先と同様に，$\Curvesstack$ が局所有限表示であること
+（《スタックの極限》の補題
+\ref{stacks-limits-lemma-representable-by-spaces-limit-preserving}
+により $A$ 上の $Y''$ が得られる）と，《空間の極限》の補題
+\ref{spaces-limits-lemma-descend-finite-presentation}
+を用いて $h'$ をある $h''$ へ降下できることから従う．
+次に，G 環に対する近似性
+（《環写像の平滑化》の定理
+\ref{smoothing-theorem-approximation-property} の形）を適用して，
+$A \to \Lambda^\wedge$ から得られる $A \to \kappa$ と同じ射を誘導する
+射 $A \to \Lambda$ を見いだせる．
+$h''$ を $\Lambda$ へ基底変換すれば，証明は完了する．
+\end{proof}
+% END EXPANDED MODULE ch109_18.tex
+% BEGIN EXPANDED MODULE ch109_19.tex
+\begin{lemma}
+\label{moduli-curves-lemma-contract-prestable-to-stable}
+% P12-ERR-0305: see ../control/ERRATA_CANDIDATES.jsonl
+$f : X \to S$ を種数 $g \geq 2$ の前安定曲線族とする．
+$f$ の分解 $X \to Y \to S$ で，$g : Y \to S$ が安定曲線族であり，
+$c : X \to Y$ が次の性質をもつものが存在する：
+\begin{enumerate}
+\item $\mathcal{O}_Y = c_*\mathcal{O}_X$ かつ $R^1c_*\mathcal{O}_X = 0$ であり，
+これは任意の射 $S' \to S$ による基底変換後にも成り立つ，
+\item 任意の $s \in S$ に対し，射 $c_s : X_s \to Y_s$ は，
+《代数曲線》の \ref{curves-section-contracting-to-stable} 節で論じた
+有理尾部および有理橋部の縮約である．
+\end{enumerate}
+さらに，$c : X \to Y$ は一意な同型を除いて一意である．
+\end{lemma}
+
+\begin{proof}
+$s \in S$ とする．$c_0 : X_s \to Y_0$ を，
+《代数曲線》の \ref{curves-section-contracting-to-stable} 節の縮約とする
+（より正確には，《代数曲線》の補題
+\ref{curves-lemma-characterize-contraction-to-stable}）．
+補題 \ref{moduli-curves-lemma-contract-basic} により，初等エタール近傍
+$(U, u)$ と，$U$ 上の曲線族の射 $c : X_U \to Y$ で，
+$u$ におけるファイバーとして $c_0$ を復元するものが存在する．
+$\omega_{Y_0}$ は豊富なので，必要なら $U$ を縮小することで，
+引理 \ref{moduli-curves-lemma-stable-curves} および
+\ref{moduli-curves-lemma-stable-one-piece-per-genus} に内在する開性により，
+$Y \to U$ が種数 $g$ の安定曲線族であることが分かる．
+必要ならもう一度 $U$ を縮小することで，
+$c : X_U \to Y$ に対する補題の主張 (1) は補題
+\ref{moduli-curves-lemma-contract} から従う．さらに，(2) は《代数曲線》の補題
+\ref{curves-lemma-characterize-contraction-to-stable} の一意性から従う．
+以上から，補題に述べた射 $c$ は $S$ 上エタール局所的に存在する．
+より正確には，エタール被覆 $\{U_i \to S\}$ と，
+$U_i$ 上の射 $c_i : X_{U_i} \to Y_i$ で，
+$Y_i \to U_i$ が補題の性質 (1) および (2) をもつ安定曲線族であるものが存在する．
+
+\medskip\noindent
+証明を終えるには，$c : X \to Y$ の一意性
+（一意な同型を除く）を証明すれば十分である．
+実際，これが示されれば，同型
+$$
+\varphi_{ij} :
+Y_i \times_{U_i} (U_i \times_S U_j)
+\longrightarrow
+% P12-ERR-0306: see ../control/ERRATA_CANDIDATES.jsonl
+Y_i \times_{U_j} (U_i \times_S U_j)
+$$
+が得られ，これは
+% P12-ERR-0307: see ../control/ERRATA_CANDIDATES.jsonl
+$U_i \times U_j \times U_k$ 上で（一意性により）コサイクル条件を満たす．
+% P12-ERR-0308: see ../control/ERRATA_CANDIDATES.jsonl
+$\overline{\mathcal{M}_g}$ は代数スタックなので，降下データは有効であり，
+$Y \to S$ が得られる．射 $c_i$ は $S$ 上の射 $c : X \to Y$ へ降下する．
+最後に，$c$ に対する性質 (1) および (2) は，
+$c_i$ に対する性質 (1) および (2) から直ちに従う．
+
+\medskip\noindent
+最後に，
+% P12-ERR-0309: see ../control/ERRATA_CANDIDATES.jsonl
+$c_1 : X \to Y_i$，$i = 1, 2$ が，$S$ 上の
+% P12-ERR-0310: see ../control/ERRATA_CANDIDATES.jsonl
+安定曲線族への二つの射で，(1) および (2) を満たすならば，
+補題 \ref{moduli-curves-lemma-contract-basic-uniqueness} により，少なくとも $S$ 上局所的には，
+$c_1$ および $c_2$ と両立する射 $Y_1 \to Y_2$ が得られる．
+これらの射が一意であることの検証は省略する
+（ヒント：これは $c_1$ のスキーム論的像が $Y_1$ であることから従う）．
+よって，局所的に与えられたこれらの射は貼り合わさり，証明が完了する．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stabilization-morphism}
+$g \geq 2$ とする．$\mathbf{Z}$ 上の代数スタックの射
+$$
+% P12-ERR-0311: see ../control/ERRATA_CANDIDATES.jsonl
+stabilization :
+\Curvesstack^{prestable}_g
+\longrightarrow
+\overline{\mathcal{M}}_g
+$$
+で，種数 $g$ の前安定曲線族 $X \to S$ を，
+補題 \ref{moduli-curves-lemma-contract-prestable-to-stable} で対応付けられた
+安定曲線族 $Y \to S$ へ送るものが存在する．
+\end{lemma}
+
+\begin{proof}
+これを示すには，補題 \ref{moduli-curves-lemma-contract-prestable-to-stable}
+の構成が基底変換と両立すること
+（同型との両立性も必要だが，これは直ちに明らかである）を確かめれば十分である．
+《スタックの性質》の \ref{stacks-properties-section-conventions} 節で導入した，
+代数スタックに対する言葉遣い（の濫用）を見よ．
+これを見るには，補題 \ref{moduli-curves-lemma-contract-prestable-to-stable}
+の性質 (1) および (2) が基底変換で安定であることを確かめれば十分である．
+(1) については直ちに明らかである．
+(2) については，《代数曲線》の補題
+\ref{curves-lemma-contracting-rational-tails} および
+\ref{curves-lemma-contracting-rational-bridges} の縮約が
+基礎体の拡大で安定であることから従う．あるいは，
+《代数曲線》の補題
+\ref{curves-lemma-characterize-contraction-to-stable}
+でファイバー上の射を特徴付ける条件が基礎体の拡大で保存されることからも従う．
+\end{proof}
+% END EXPANDED MODULE ch109_19.tex
+% BEGIN EXPANDED MODULE ch109_20.tex
+\section{安定還元定理}
+\label{moduli-curves-section-stable-reduction}
+
+\noindent
+半安定還元の章では，曲線の半安定還元に関する著名な定理を証明した．
+$K$ を離散付値環 $R$ の分数体とする．
+$C$ を $K$ 上の射影的滑らかな曲線で，
+$K = H^0(C, \mathcal{O}_C)$ を満たすものとする．
+《半安定還元》の定義 \ref{models-definition-semistable} に従い，
+次のいずれかが成り立つとき，$C$ は{\it 半安定還元}をもつという：
+$R$ 上の前安定曲線族で一般ファイバーが $C$ であるものが存在する，
+または $R$ 上の $C$ のある（同値なことに任意の）極小正則モデルが前安定である．
+本節では，種数 $g \geq 2$ の曲線に対して，これが安定還元とも同値であることを示す．
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-reduction}
+$R$ を分数体 $K$ をもつ離散付値環とする．
+$C$ を $K$ 上の滑らかな射影曲線で，
+$K = H^0(C, \mathcal{O}_C)$ を満たし，種数 $g \geq 2$ をもつものとする．
+次は同値である：
+\begin{enumerate}
+\item $C$ は半安定還元をもつ
+（《半安定還元》の定義 \ref{models-definition-semistable}），
+\item 一般ファイバーが $C$ である $R$ 上の安定曲線族が存在する．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+安定曲線族は前安定でもあるから，(2) が (1) を含意することは直ちに明らかである．
+逆に，一般ファイバーが $C$ である $R$ 上の前安定曲線族が与えられたとき，
+補題 \ref{moduli-curves-lemma-contract-prestable-to-stable} により，これを安定曲線族へ縮約できる．
+一般ファイバーはすでに安定なので，この手続きでは変化せず，証明は完了する．
+\end{proof}
+
+\noindent
+次の補題は，補題 \ref{moduli-curves-lemma-stable-reduction} で存在が保証された
+$R$ 上の安定曲線族が，一意な同型を除いて一意であることを述べる．
+
+\begin{lemma}
+\label{moduli-curves-lemma-unique-stable-model}
+$R$ を分数体 $K$ をもつ離散付値環とする．
+$C$ を $K$ 上の滑らかな proper 曲線で，
+$K = H^0(C, \mathcal{O}_C)$ を満たし，種数 $g$ をもつものとする．
+$X$ と $X'$ が $C$ のモデル
+（《半安定還元》の \ref{models-section-models} 節）であり，
+$X$ と $X'$ がいずれも $R$ 上の種数 $g$ の安定曲線族ならば，
+モデルの同型 $X \to X'$ が一意に存在する．
+\end{lemma}
+
+\begin{proof}
+$Y$ を $C$ の極小モデルとする．
+$Y$ は存在して一意であり，$R$ 上相対次元 $1$ で高々節点特異点をもつことを
+思い出そう．《半安定還元》の命題
+\ref{models-proposition-exists-minimal-model}，補題
+\ref{models-lemma-minimal-model-unique}，および補題
+\ref{models-lemma-semistable} を見よ
+（最後の補題は $X$ があるため適用できる）．
+縮約射
+$$
+Y \longrightarrow Z
+$$
+で，$Z$ が $R$ 上の種数 $g$ の安定曲線族であるものが存在する
+（補題 \ref{moduli-curves-lemma-contract-prestable-to-stable}）．
+モデルの同型 $X \to Z$ が一意に存在すると主張する．
+対称性により $X'$ についても同じことが成り立ち，これで証明が完了する．
+
+\medskip\noindent
+《半安定還元》の補題 \ref{models-lemma-blowup-at-worst-nodal}
+により，列
+$$
+X_m \to \ldots \to X_1 \to X_0 = X
+$$
+で，$X_{i + 1} \to X_i$ は $X_i$ が特異となる閉点 $x_i$ でのブローアップ，
+$X_i \to \Spec(R)$ は相対次元 $1$ で高々節点特異点をもち，
+$X_m$ は正則であるものが存在する．
+《半安定還元》の補題 \ref{models-lemma-pre-exists-minimal-model}
+により，$C$ の proper 正則モデルの列
+$$
+X_m = Y_n \to Y_{n - 1} \to \ldots \to Y_1 \to Y_0 = Y
+$$
+で，各射が第一種例外曲線の縮約であるものが存在する\footnote{実際には
+$X_m = Y$ である．すなわち，$X_m$ は第一種例外曲線を一つも含まない．
+このことを考えてみるよう読者に勧める．そうすれば証明はいくらか簡単になる．}．
+《半安定還元》の補題 \ref{models-lemma-blowdown-at-worst-nodal}
+により，各 $Y_i$ は $R$ 上相対次元 $1$ で高々節点特異点をもつ．
+主張を証明するには，射 $X_m \to X$ および
+$X_m = Y_n \to Y \to Z$ と両立する同型 $X \to Z$ が存在することを
+示せば十分である．$s \in \Spec(R)$ を閉点とする．
+補題 \ref{moduli-curves-lemma-contract-basic-uniqueness} または
+補題 \ref{moduli-curves-lemma-contract-prestable-to-stable} のいずれかにより，
+射 $X_{m, s} \to X_s$ と $X_{m, s} \to Z_s$ がともに
+《代数曲線》の補題
+\ref{curves-lemma-characterize-contraction-to-stable}
+の標準射に等しいことを証明する問題に帰着する．
+
+\medskip\noindent
+$\kappa(s)$ 上のスキームの射 $c : U \to V$ に対し，$c$ が性質 (*) をもつとは，
+すべての $v \in V$ に対して $\dim(U_v) \leq 1$ であり，
+$\mathcal{O}_V = c_*\mathcal{O}_U$ および
+$R^1c_*\mathcal{O}_U = 0$ が成り立つこととする．
+この性質は合成で保たれる．
+$X_s$ と $Z_s$ はともに $\kappa(s)$ 上の種数 $g$ の安定曲線なので，
+% P12-ERR-0312: see ../control/ERRATA_CANDIDATES.jsonl
+射 $Y_s \to Z_s$，$X_{i + 1, s} \to X_{i, s}$，および
+$Y_{i + 1, s} \to Y_{i, s}$ のそれぞれが性質 (*) を満たすことを
+示せば十分である．《代数曲線》の補題
+\ref{curves-lemma-characterize-contraction-to-stable} を見よ．
+
+\medskip\noindent
+$Y_s \to Z_s$ は構成により性質 (*) をもつ．
+
+\medskip\noindent
+射 $c : X_{i + 1, s} \to X_{i, s}$ は，《半安定還元》の補題
+\ref{models-lemma-blowup-at-worst-nodal} の証明で構成され調べられている．
+(*) は $X_{i, s}$ 上エタール局所的に確かめれば十分である．
+したがって，《半安定還元》の例 \ref{models-example-blowup} における射
+「$X_1 \to X_0$」を $R/\pi R$ へ基底変換したものについて
+(*) を確かめれば十分である．明示的な計算は読者に委ねる．
+
+\medskip\noindent
+射 $c : Y_{i + 1, s} \to Y_{i, s}$ は，
+第一種例外曲線 $E \subset Y_{i + 1}$ のブローダウンの制限である．
+すなわち，$b : Y_{i + 1} \to Y_i$ は $E$ の縮約であり，
+言い換えれば，$b$ は曲面 $Y_i$ の正則点におけるブローアップである
+（《曲面の特異点解消》の \ref{resolve-section-minus-one} 節）．
+すると $\mathcal{O}_{Y_i} = b_*\mathcal{O}_{Y_{i + 1}}$ および
+$R^1b_*\mathcal{O}_{Y_{i + 1}} = 0$ である．例えば
+《曲面の特異点解消》の補題
+\ref{resolve-lemma-cohomology-of-blowup} を見よ．
+《射の続論》の補題
+\ref{more-morphisms-lemma-check-h1-fibre-zero}，
+\ref{more-morphisms-lemma-h1-fibre-zero}，および
+\ref{more-morphisms-lemma-h1-fibre-zero-check-h0-kappa}
+により，$\mathcal{O}_{Y_{i, s}} = c_*\mathcal{O}_{Y_{i + 1, s}}$ および
+$R^1c_*\mathcal{O}_{Y_{i + 1, s}} = 0$ と結論できる
+（最後の補題から得られるのは
+$\mathcal{O}_{Y_{i, s}} \to c_*\mathcal{O}_{Y_{i + 1, s}}$ の全射性だけだが，
+$Y_{i, s}$ が被約であり，$c$ が一つの閉点上でしか物事を変えないことから
+単射性も容易に従う）．これで証明が完了する．
+\end{proof}
+
+\noindent
+補題 \ref{moduli-curves-lemma-stable-reduction} と《半安定還元》の定理
+\ref{models-theorem-semistable-reduction} から，安定還元定理が直ちに従う．
+
+\begin{theorem}
+\label{moduli-curves-theorem-stable-reduction}
+\begin{reference}
+\cite[Corollary 2.7]{DM}
+\end{reference}
+$R$ を分数体 $K$ をもつ離散付値環とする．
+$C$ を $K$ 上の滑らかな射影曲線で，
+$H^0(C, \mathcal{O}_C) = K$ および種数 $g \geq 2$ を満たすものとする．
+このとき：
+\begin{enumerate}
+\item 分数体の有限分離拡大 $K'/K$ を誘導する離散付値環の拡大
+$R \subset R'$ と，種数 $g$ の安定曲線族
+$Y \to \Spec(R')$ で，$K'$ 上 $Y_{K'} \cong C_{K'}$ を満たすものが存在する，
+\item 有限分離拡大 $L/K$ と種数 $g$ の安定曲線族
+$Y \to \Spec(A)$ が存在する．ここで $A \subset L$ は
+$L$ における $R$ の整閉包であり，$L$ 上 $Y_L \cong C_L$ が成り立つ．
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) は補題 \ref{moduli-curves-lemma-stable-reduction} と《半安定還元》の定理
+\ref{models-theorem-semistable-reduction} から直ちに従う．
+
+\medskip\noindent
+(2) を証明する．$L/K$ を，《半安定還元》の定理
+\ref{models-theorem-semistable-reduction} の部分 (3) で得られた
+有限分離拡大とする．$A \subset L$ を $R$ の整閉包とする．
+$A$ は $R$ 上有限な Dedekind 整域で，極大イデアル
+$\mathfrak m_1, \ldots, \mathfrak m_n$ を有限個しかもたないことを思い出そう．
+《代数の続論》の注意
+\ref{more-algebra-remark-finite-separable-extension} を見よ．
+$S = \Spec(A)$，$S_i = \Spec(A_{\mathfrak m_i})$，
+$U = \Spec(L)$，および $U_i = S_i \setminus \{\mathfrak m_i\}$ とおく．
+$i = 1, \ldots, n$ に対して $U \cong U_i$ であることに注意せよ．
+$X = C_L$ とおき，$S$ の開部分スキーム $U$ 上のスキームとみなす．
+$L$ と $A$ の選び方および補題 \ref{moduli-curves-lemma-stable-reduction} により，
+安定曲線族 $X_i \to S_i$ と同型
+$X \times_U U_i \cong X_i \times_{S_i} U_i$ が存在する．
+《空間の極限》の補題
+\ref{spaces-limits-lemma-glueing-near-multiple-closed-points}
+により，有限表示射 $Y \to S$ で，$S_i$ への基底変換が
+$i = 1, \ldots, n$ に対して $X_i$ と同型となるものを見いだせる．
+別法として，$S = \bigcup_{i = 1, \ldots, n} S_i$ が $S$ の開被覆であり，
+$i \not = j$ に対して $S_i \cap S_j = U$ であることを用い，
+《空間の極限》の補題 \ref{spaces-limits-lemma-relative-glueing} を
+$n - 1$ 回適用して，$Y \to S$ で，$S_i$ への基底変換が
+$i = 1, \ldots, n$ に対して $X_i$ と同型となるものを得てもよい．
+$Y \to S$ が求めていた安定曲線族であることは明らかである．
+\end{proof}
+% END EXPANDED MODULE ch109_20.tex
+% BEGIN EXPANDED MODULE ch109_21.tex
+\section{安定曲線のスタックの性質}
+\label{moduli-curves-section-properties-stable}
+
+\noindent
+本節では，$g \geq 2$ に対する $\overline{\mathcal{M}}_g$ の
+基本構造定理を証明する．
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-separated}
+$g \geq 2$ とする．スタック $\overline{\mathcal{M}}_g$ は分離的である．
+\end{lemma}
+
+\begin{proof}
+この主張は，射 $\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$
+が分離的であることを意味する．これを，《スタックの射の続論》の補題
+\ref{stacks-more-morphisms-lemma-refined-valuative-criterion-separated}
+に述べられた精密化された Noether 付値判定法を用いて証明する．
+
+\medskip\noindent
+$\overline{\mathcal{M}}_g$ は $\Curvesstack$ の開部分スタックなので，
+補題 \ref{moduli-curves-lemma-curves-qs-lfp} により，
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$ は準分離的かつ局所有限表示である．
+特に，スタック $\overline{\mathcal{M}}_g$ は局所 Noether である
+（《スタックの射》の補題
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian}）．
+補題 \ref{moduli-curves-lemma-smooth-dense-in-stable} により，開埋入
+$\mathcal{M}_g \to \overline{\mathcal{M}}_g$ の像は稠密である．
+また，$\mathcal{M}_g \to \overline{\mathcal{M}}_g$ は準コンパクト
+（《スタックの射》の補題
+\ref{stacks-morphisms-lemma-locally-closed-in-noetherian}）であり，
+したがって有限型である．よって，《スタックの射の続論》の補題
+\ref{stacks-more-morphisms-lemma-refined-valuative-criterion-separated}
+の予備仮定は，射
+$$
+\mathcal{M}_g \to \overline{\mathcal{M}}_g
+\quad\text{and}\quad
+\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})
+$$
+に対してすべて満たされる．したがって，次を確かめれば十分である：
+任意の $2$-可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] &
+\mathcal{M}_g \ar[r] &
+\overline{\mathcal{M}}_g \ar[d] \\
+\Spec(R) \ar[rr] \ar@{..>}[rru] & & \Spec(\mathbf{Z})
+}
+$$
+が与えられ，$R$ が分数体 $K$ をもつ離散付値環であるとき，
+点線矢印の圏は空であるか，または同型類をちょうど一つもつセトイドである．
+（$2$-射についてあまり心配する必要はないことに注意せよ．
+《スタックの射》の補題
+\ref{stacks-morphisms-lemma-cat-dotted-arrows-independent} を見よ．）
+$\mathcal{M}_g$ と $\overline{\mathcal{M}}_g$ がそれぞれ，
+種数 $g$ の滑らかな曲線族と安定曲線族を径数付ける代数スタックであることを用いて
+この意味を展開すると，証明すべきことは補題
+\ref{moduli-curves-lemma-unique-stable-model} で述べて証明した一意性の結果にほかならない．
+\end{proof}
+
+\begin{lemma}
+\label{moduli-curves-lemma-stable-quasi-compact}
+$g \geq 2$ とする．スタック $\overline{\mathcal{M}}_g$ は準コンパクトである．
+\end{lemma}
+
+\begin{proof}
+\ref{moduli-curves-section-polarized-curves} 節の記法を用いる．
+点 $\xi$ のうち，体 $k$ と，$\xi$ を表す $k$ 上の対
+$(X, \mathcal{L})$ で次の二性質をもつものが存在する点の部分集合
+$$
+T \subset |\textit{PolarizedCurves}|
+$$
+を考える：
+\begin{enumerate}
+\item $X$ は種数 $g$ の安定曲線である，
+\item $\mathcal{L} = \omega_X^{\otimes 3}$ である．
+\end{enumerate}
+連続写像
+$$
+|\textit{PolarizedCurves}|
+\longrightarrow
+|\Curvesstack|
+$$
+による集合 $T$ の像が，開部分集合
+$$
+|\overline{\mathcal{M}}_g| \subset |\Curvesstack|
+$$
+にちょうど等しいことは明らかである．したがって，$T$ が準コンパクトであることを
+示せば十分である．補題 \ref{moduli-curves-lemma-polarized-curves-in-polarized} により，
+$$
+|\textit{PolarizedCurves}| \subset |\Polarizedstack|
+$$
+は開かつ閉な埋入である．よって，$|\Polarizedstack|$ の部分集合として
+$T$ が準コンパクトであることを証明すれば十分である．
+このために，《モジュライスタック》の補題
+\ref{moduli-lemma-bounded-polarized} の判定法を用いる．
+まず，上のような $(X, \mathcal{L})$ に対して，
+Hilbert 多項式 $P$ は Riemann--Roch により
+$P(t) = (6g - 6)t + (1 - g)$ という関数であることに注意する．
+《代数曲線》の補題 \ref{curves-lemma-rr} を見よ．
+次に，《代数曲線》の補題 \ref{curves-lemma-tricanonical}
+により，$H^1(X, \mathcal{L}) = 0$ であり，
+$\mathcal{L}$ は非常に豊富であることに注意する．
+これはまさに，
+% P12-ERR-0313: see ../control/ERRATA_CANDIDATES.jsonl
+$n = P(3) - 1$ とおけば，閉埋入
+$$
+i : X \longrightarrow \mathbf{P}^n_k
+$$
+で，
+% P12-ERR-0314: see ../control/ERRATA_CANDIDATES.jsonl
+$\mathcal{L} = i^*\mathcal{O}_{\mathbf{P}^1_k}(1)$
+を満たすものが存在することを意味し，これが望むことである．
+\end{proof}
+
+\noindent
+本節の主定理を述べる．
+
+\begin{theorem}
+\label{moduli-curves-theorem-stable-smooth-proper}
+$g \geq 2$ とする．代数スタック $\overline{\mathcal{M}}_g$ は
+Deligne--Mumford スタックで，$\Spec(\mathbf{Z})$ 上 proper かつ滑らかである．
+さらに，滑らかな曲線を径数付ける軌跡 $\mathcal{M}_g$ は稠密な開部分スタックである．
+\end{theorem}
+
+\begin{proof}
+主張で挙げた性質の大部分はすでに示されている．
+滑らかさは補題 \ref{moduli-curves-lemma-stable-curves-smooth} である．
+Deligne--Mumford 性は補題
+\ref{moduli-curves-lemma-stable-curves-deligne-mumford} である．
+$\mathcal{M}_g$ の開性は補題 \ref{moduli-curves-lemma-smooth-dense-in-stable} である．
+補題 \ref{moduli-curves-lemma-stable-separated} により
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$ は分離的であり，
+補題 \ref{moduli-curves-lemma-stable-quasi-compact} により
+$\overline{\mathcal{M}}_g$ は準コンパクトであることが分かっている．
+したがって，$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$ が
+proper であることを示して証明を終えるために，《スタックの射の続論》の補題
+\ref{stacks-more-morphisms-lemma-refined-valuative-criterion-proper}
+を射 $\mathcal{M}_g \to \overline{\mathcal{M}}_g$ および
+$\overline{\mathcal{M}}_g \to \Spec(\mathbf{Z})$ に適用してよい．
+よって，次を確かめれば十分である：任意の $2$-可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d]_j &
+\mathcal{M}_g \ar[r] &
+\overline{\mathcal{M}}_g \ar[d] \\
+\Spec(A) \ar[rr] & & \Spec(\mathbf{Z})
+}
+$$
+が与えられ，$A$ が分数体 $K$ をもつ離散付値環であるとき，
+体の拡大 $K'/K$ と，$A$ を支配する付値環 $A' \subset K'$ が存在して，
+誘導された図式
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d]_{j'} & \overline{\mathcal{M}}_g \ar[d] \\
+\Spec(A') \ar[r] \ar@{..>}[ru] & \Spec(\mathbf{Z})
+}
+$$
+に対する点線矢印の圏が空でない
+（《スタックの射》の定義
+\ref{stacks-morphisms-definition-fill-in-diagram}）．
+（$2$-射についてあまり心配する必要はないことに注意せよ．
+《スタックの射》の補題
+\ref{stacks-morphisms-lemma-cat-dotted-arrows-independent} を見よ．）
+$\mathcal{M}_g$ と $\overline{\mathcal{M}}_g$ がそれぞれ，
+種数 $g$ の滑らかな曲線族と安定曲線族を径数付ける代数スタックであることを用いて
+この意味を展開すると，証明すべきことはまさに安定還元定理，
+すなわち定理 \ref{moduli-curves-theorem-stable-reduction} に含まれる結果である．
+\end{proof}
+% END EXPANDED MODULE ch109_21.tex

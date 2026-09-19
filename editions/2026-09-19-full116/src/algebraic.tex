@@ -1,0 +1,2472 @@
+% Generated mechanically from frozen input inputs/p11/ja/algebraic.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{93}
+\chapter{代数スタック}
+
+
+
+\phantomsection
+\label{algebraic-section-phantom}
+
+
+\section{序論}
+\label{algebraic-section-introduction}
+
+\noindent
+ここでは代数スタックを定義し、いくつかの非常に初等的な観察を行う。
+基本方針は、分離条件を一切課さず、補題、命題、定理を真にする、
+あるいは証明可能にするために必要な条件をその都度付け加えることである。
+したがって、ここで論じる概念は、たとえば \cite{LM-B} など、
+文献の他の箇所に現れるものとはわずかに異なる。
+
+\medskip\noindent
+本章は代数スタックへの入門ではない。
+代数スタックについての非形式的な解説は、
+『代数スタック入門』の節
+\ref{stacks-introduction-section-introduction} を参照されたい。
+
+
+\section{規約}
+\label{algebraic-section-conventions}
+
+\noindent
+本章で用いる規約は、代数空間についての章で用いるものと同じである。
+便宜のため、ここで繰り返しておく。
+
+\medskip\noindent
+『位相』の定義 \ref{topologies-definition-big-fppf-site} と同様に、
+適切な大 fppf サイト $\Sch_{fppf}$ の中で議論する。
+したがって、特に明記しない限り、すべてのスキームは
+$\Sch_{fppf}$ の対象とする。大 fppf サイトを変更したときに
+何が変わるかは、節 \ref{algebraic-section-change-big-site} で論じる。
+
+\medskip\noindent
+常に $\Sch_{fppf}$ に含まれる基底 $S$ に相対して議論する。
+その際には大 fppf サイト $(\Sch/S)_{fppf}$ を用いる。
+『位相』の定義 \ref{topologies-definition-big-small-fppf} を参照せよ。
+絶対的な場合は $S = \Spec(\mathbf{Z})$ とすることで得られる。
+
+\medskip\noindent
+$U, T$ が $S$ 上のスキームならば、$S$ {\it 上の}
+$T$ 値点の集合を $U(T)$ と書く。式で表せば
+$U(T) = \Mor_S(T, U)$ である。
+
+\medskip\noindent
+任意の fpqc 被覆は普遍的有効エピ射であることに注意する。
+『降下』の補題
+\ref{descent-lemma-fpqc-universal-effective-epimorphisms} を参照せよ。
+したがって、$\Sch_{fppf}$ 上の位相は標準位相より弱く、
+表現可能な任意の前層は層である。
+
+
+
+
+
+
+
+
+\section{記法}
+\label{algebraic-section-notation}
+
+\noindent
+スキームを表すには文字 $S, T, U, V, X, Y$ を用いる。
+$(\Sch/S)_{fppf}$ 上の圏（ファイバー圏、グルーポイドをファイバーとする圏、
+スタックなど）を表すには文字 $\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を用いる。
+$(\Sch/S)_{fppf}$ 上の
+$f : \mathcal{X} \to \mathcal{Y}$ のような関手には小文字 $f$, $g$ を用いる。
+$S$ 上の代数空間、より一般には $(\Sch/S)_{fppf}$ 上の集合の前層には
+大文字 $F$, $G$, $H$ を用いる。
+（後の章では、代数空間にも再び $X$, $Y$ などを用いる。）
+
+\medskip\noindent
+このように記号を選ぶのは、基礎を構築する本章において、
+異なる種類の対象を明確に区別したいからである。
+
+
+
+
+
+
+
+
+
+\section{グルーポイドをファイバーとする表現可能な圏}
+\label{algebraic-section-representable}
+
+\noindent
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+本章における基本的な研究対象は、グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ である。
+『圏』の定義 \ref{categories-definition-fibred-groupoids} を参照せよ。
+この状況を表すため、しばしば単に「$\mathcal{X}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とする」
+と言う。$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$1$-射 $\mathcal{X} \to \mathcal{Y}$ とは、
+$(\Sch/S)_{fppf}$ 上のそのような圏からなる $2$-圏における
+$1$-射のことである。『圏』の定義
+\ref{categories-definition-categories-fibred-in-groupoids-over-C} を参照せよ。
+これは単に $(\Sch/S)_{fppf}$ 上の関手
+$\mathcal{X} \to \mathcal{Y}$ である。
+この圏は実際には $(2, 1)$-圏であり、すべての $2$-ファイバー積が
+存在することを思い出しておく。
+
+\medskip\noindent
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする
+圏とする。スキーム $U \in \Ob((\Sch/S)_{fppf})$ と、
+$(\Sch/S)_{fppf}$ 上の圏同値
+$$
+j : \mathcal{X} \longrightarrow (\Sch/U)_{fppf}
+$$
+が存在するとき、$\mathcal{X}$ は {\it 表現可能} であるという。
+『圏』の定義
+\ref{categories-definition-representable-fibred-category} を参照せよ。
+以下で扱う、$\mathcal{X}$ が代数空間によって表現される場合と区別するため、
+$\mathcal{X}$ は {\it スキームによって表現可能} であると言うこともある。
+
+\medskip\noindent
+$\mathcal{X}, \mathcal{Y}$ がグルーポイドをファイバーとし、
+それぞれ $U, V$ によって表現されるならば
+\begin{equation}
+\label{algebraic-equation-morphisms-schemes}
+\Mor_{\textit{Cat}/(\Sch/S)_{fppf}}(\mathcal{X}, \mathcal{Y})
+\Big/
+2\text{-同型}
+=
+\Mor_{\Sch/S}(U, V)
+\end{equation}
+が成り立つ。『圏』の補題
+\ref{categories-lemma-morphisms-representable-fibred-categories} を参照せよ。
+より正確には、任意の $1$-射 $\mathcal{X} \to \mathcal{Y}$ から
+射 $U \to V$ が得られる。逆に、$S$ 上のスキームの射 $U \to V$ が
+与えられると、射 $U \to V$ を誘導する $1$-射
+$\phi : \mathcal{X} \to \mathcal{Y}$ が存在し、
+それは一意な $2$-同型を除いて一意である。
+
+
+
+
+
+
+\section{2-米田の補題}
+\label{algebraic-section-2-yoneda}
+
+\noindent
+$U \in \Ob((\Sch/S)_{fppf})$ とし、$\mathcal{X}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とする。
+以下では $2$-米田の補題を頻繁に用いる。
+『圏』の補題 \ref{categories-lemma-yoneda-2category} を参照せよ。
+厳密には、この補題は圏同値
+$$
+\Mor_{\textit{Cat}/(\Sch/S)_{fppf}}(
+(\Sch/U)_{fppf}, \mathcal{X})
+\longrightarrow
+\mathcal{X}_U, \quad
+f \longmapsto f(U/U).
+$$
+が存在することを述べる。すなわち、$1$-射
+$(\Sch/U)_{fppf} \to \mathcal{X}$ はファイバー圏
+$\mathcal{X}_U$ の対象 $x$ と対応する。
+実際、$1$-射 $f : (\Sch/U)_{fppf} \to \mathcal{X}$ が与えられると、
+対象 $x = f(U/U) \in \Ob(\mathcal{X}_U)$ を得る。
+逆に、『圏』の定義
+\ref{categories-definition-pullback-functor-fibred-category} のように
+$\mathcal{X}$ の引き戻しを選び、$\mathcal{X}_U$ の対象 $x$ を
+与えると、対象上で
+$$
+(\varphi : V \to U) \longmapsto \varphi^*x
+$$
+という規則で定まる関手 $(\Sch/U)_{fppf} \to \mathcal{X}$ を得る。
+記法を濫用して、この関手も
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$ と書く。
+実際に $x(U/U) = x$ であり、さらに $f(U/U) = x$ を満たす
+任意の別の関手 $f$ に対して一意な $2$-同型 $x \to f$ が存在する。
+言い換えれば、関手 $x$ は対象 $x$ によって一意な $2$-同型を除いて
+一意に定まる。
+
+\medskip\noindent
+以下では、この事実を断りなく用いる。
+
+
+
+
+
+\section{グルーポイドをファイバーとする圏の表現可能な射}
+\label{algebraic-section-representable-morphism}
+
+
+\noindent
+$\mathcal{X}$, $\mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を {\it 表現可能な $1$-射} とする。
+『圏』の定義
+\ref{categories-definition-representable-map-categories-fibred-in-groupoids}
+を参照せよ。これは、任意の $U \in \Ob((\Sch/S)_{fppf})$ と
+$y \in \Ob(\mathcal{Y}_U)$ に対し、$2$-ファイバー積
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$ が
+$(\Sch/U)_{fppf}$ 上のグルーポイドをファイバーとする圏として
+表現可能であることを意味する。表現対象 $f_y : V_y \to U$ と圏同値
+$$
+(\Sch/V_y)_{fppf}
+\longrightarrow
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}.
+$$
+を選ぶ。射 $f_y$ は射影
+$(\Sch/V_y)_{fppf} \to
+(\Sch/U)_{fppf} \times_\mathcal{Y} \mathcal{Y}
+\to (\Sch/U)_{fppf}$
+に対応する。節 \ref{algebraic-section-representable} の式
+(\ref{algebraic-equation-morphisms-schemes}) を参照せよ。
+この状況を次の図式で表す。
+\begin{equation}
+\label{algebraic-equation-representable}
+\vcenter{
+\xymatrix{
+V_y \ar@{~>}[r] \ar[d]_{f_y} &
+(\Sch/V_y)_{fppf} \ar[d] \ar[r] &
+\mathcal{X} \ar[d]^f \\
+U \ar@{~>}[r] &
+(\Sch/U)_{fppf} \ar[r]^-y &
+\mathcal{Y}
+}
+}
+\end{equation}
+ここで波線の矢印は $2$-米田埋め込みを表す。
+この概念について、非常に一般的に成り立つ補題をいくつか挙げる
+（すなわち、ファイバー積をもつ任意の基底圏上でグルーポイドを
+ファイバーとする圏について成り立つ）。
+
+\begin{lemma}
+\label{algebraic-lemma-morphism-schemes-gives-representable-transformation}
+$f : X \to Y$ を $(\Sch/S)_{fppf}$ の射とする。
+このとき $f$ が誘導する $1$-射
+$$
+(\Sch/X)_{fppf} \longrightarrow (\Sch/Y)_{fppf}
+$$
+は表現可能な $1$-射である。
+\end{lemma}
+
+\begin{proof}
+これは形式的であり、圏 $(\Sch/S)_{fppf}$ がファイバー積を
+もつという事実だけに依存する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-representable-morphism-equivalent}
+$S$ を $\Sch_{fppf}$ の対象とする。
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$1$-射からなる $2$-可換図式
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r] & \mathcal{Y}
+}
+$$
+を考える。横の矢印が圏同値であると仮定する。
+このとき、$f$ が表現可能であるための必要十分条件は、
+$f'$ が表現可能であることである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-composition-representable-transformations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Y} \to \mathcal{Z}$ を表現可能な $1$-射とする。
+このとき
+$$
+g \circ f : \mathcal{X} \longrightarrow \mathcal{Z}
+$$
+は表現可能な $1$-射である。
+\end{lemma}
+
+\begin{proof}
+これは完全に形式的であり、任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-base-change-representable-transformations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を表現可能な $1$-射、
+$g : \mathcal{Z} \to \mathcal{Y}$ を任意の $1$-射とする。
+ファイバー積図式
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+を考える。このとき基底変換 $f'$ は表現可能な $1$-射である。
+\end{lemma}
+
+\begin{proof}
+これは完全に形式的であり、任意の圏で成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-product-representable-transformations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$i = 1, 2$ に対し、$\mathcal{X}_i, \mathcal{Y}_i$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とし、
+$i = 1, 2$ に対して $f_i : \mathcal{X}_i \to \mathcal{Y}_i$ を
+表現可能な $1$-射とする。
+このとき
+$$
+f_1 \times f_2 :
+\mathcal{X}_1 \times \mathcal{X}_2
+\longrightarrow
+\mathcal{Y}_1 \times \mathcal{Y}_2
+$$
+は表現可能な $1$-射である。
+\end{lemma}
+
+\begin{proof}
+$f_1 \times f_2$ を合成
+$\mathcal{X}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{Y}_2$ として書く。
+第1の矢印は写像
+$\mathcal{Y}_1 \times \mathcal{X}_2 \to \mathcal{Y}_1$ による
+$f_1$ の基底変換であり、第2の矢印は写像
+$\mathcal{Y}_1 \times \mathcal{Y}_2 \to \mathcal{Y}_2$ による
+$f_2$ の基底変換である。したがって本補題は、補題
+\ref{algebraic-lemma-composition-representable-transformations} と
+\ref{algebraic-lemma-base-change-representable-transformations} の形式的な帰結である。
+\end{proof}
+
+
+
+\section{分裂したグルーポイドをファイバーとする圏}
+\label{algebraic-section-split}
+
+\noindent
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+「グルーポイドの前層」
+$$
+F : (\Sch/S)_{fppf}^{opp} \longrightarrow \textit{Groupoids}
+$$
+が与えられると、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏
+$\mathcal{S}_F$ が得られることを思い出そう。
+『圏』の例 \ref{categories-example-functor-groupoids} を参照せよ。
+これらのいずれかに同型（圏同値だけではない）な、グルーポイドを
+ファイバーとする圏を、{\it 分裂したグルーポイドをファイバーとする圏}
+という。グルーポイドをファイバーとする任意の圏は、分裂したものと圏同値である。
+
+\medskip\noindent
+$F$ が集合の前層ならば、$\mathcal{S}_F$ は集合をファイバーとする。
+『圏』の定義 \ref{categories-definition-category-fibred-sets} および
+例 \ref{categories-example-presheaf} を参照せよ。
+規則 $F \mapsto \mathcal{S}_F$ は、ある意味で前層上充満忠実である。
+『圏』の補題 \ref{categories-lemma-2-category-fibred-sets} を参照せよ。
+$F, G$ が前層ならば
+$$
+\mathcal{S}_{F \times G}
+=
+\mathcal{S}_F \times_{(\Sch/S)_{fppf}} \mathcal{S}_G
+$$
+であり、$F \to H$ と $G \to H$ が集合の前層の射ならば
+$$
+\mathcal{S}_{F \times_H G} =
+\mathcal{S}_F \times_{\mathcal{S}_H} \mathcal{S}_G
+$$
+である。右辺はいずれも $2$-ファイバー積である。
+$\mathcal{S}_F, \mathcal{S}_G, \mathcal{S}_H$ のファイバー圏は
+恒等射しかもたないので、これは定義から直ちに従う。
+
+\medskip\noindent
+さらに特殊なのは、$F = h_X$ が表現可能な前層である場合である。
+このとき $\mathcal{S}_{h_X} = (\Sch/X)_{fppf}$ である。
+『圏』の例
+\ref{categories-example-fibred-category-from-functor-of-points} を参照せよ。
+
+\medskip\noindent
+以下では、記法 $\mathcal{S}_F$ を断りなく用いる。
+
+
+
+
+\section{代数空間によって表現可能なグルーポイドをファイバーとする圏}
+\label{algebraic-section-representable-by-algebraic-spaces}
+
+\noindent
+表現可能性よりわずかに弱い概念として、代数空間による表現可能性があり、
+本節ではこれを論じる。圏 $\Sch_{fppf}$ の代わりに代数空間からなる
+何らかの圏 $\textit{Spaces}_{fppf}$ を用いれば、この議論は避けられたかもしれない。
+しかし、代数スタックのファイバー圏を定義する「試験対象」の自然な集まりとして、
+スキームの圏を考えるのが自然であると思われる。
+
+\medskip\noindent
+『圏』の定義
+\ref{categories-definition-representable-fibred-category}
+にならって、次のように定義する。
+
+\begin{definition}
+\label{algebraic-definition-representable-by-algebraic-space}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ について、$S$ 上の代数空間 $F$ と
+$(\Sch/S)_{fppf}$ 上の圏同値
+$j : \mathcal{X} \to \mathcal{S}_F$ が存在するとき、
+この圏は {\it $S$ 上の代数空間によって表現可能} であるという。
+\end{definition}
+
+\noindent
+このような状況では圏同値 $j$ を省略するという記法の濫用を引き続き行う。
+上の議論から形式的に、$\mathcal{X}$ が（スキームによって）表現可能ならば、
+代数空間によっても表現可能であることが従う。次は『圏』の補題
+\ref{categories-lemma-characterize-representable-fibred-category}
+に対応する結果である。
+
+\begin{lemma}
+\label{algebraic-lemma-characterize-representable-by-space}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとし、
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を
+グルーポイドをファイバーとする圏とする。
+$\mathcal{X}$ が $S$ 上の代数空間によって表現可能であるための
+必要十分条件は、次の条件が成り立つことである。
+\begin{enumerate}
+\item $\mathcal{X}$ はセトイドをファイバーとする\footnote{これは、
+この圏がグルーポイドをファイバーとし、ファイバー圏の対象が
+自明でない自己同型をもたないことを意味する。『圏』の定義
+\ref{categories-definition-category-fibred-setoids} を参照せよ。}。
+\item 前層 $U \mapsto \Ob(\mathcal{X}_U)/\!\!\cong$ は代数空間である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ただし『圏』の補題
+\ref{categories-lemma-characterize-representable-fibred-category} を参照せよ。
+\end{proof}
+
+\noindent
+$\mathcal{X}, \mathcal{Y}$ がグルーポイドをファイバーとし、
+それぞれ $S$ 上の代数空間 $F, G$ によって表現されるならば
+\begin{equation}
+\label{algebraic-equation-morphisms-spaces}
+\Mor_{\textit{Cat}/(\Sch/S)_{fppf}}(\mathcal{X}, \mathcal{Y})
+\Big/
+2\text{-同型}
+=
+\Mor_{\Sch/S}(F, G)
+\end{equation}
+が成り立つ。『圏』の補題
+\ref{categories-lemma-2-category-fibred-setoids} を参照せよ。
+より正確には、任意の $1$-射 $\mathcal{X} \to \mathcal{Y}$ から
+射 $F \to G$ が得られる。逆に、$S$ 上の層の射 $F \to G$ が
+与えられると、射 $F \to G$ を誘導する $1$-射
+$\phi : \mathcal{X} \to \mathcal{Y}$ が存在し、
+それは一意な $2$-同型を除いて一意である。
+
+
+
+\section{代数空間によって表現可能な射}
+\label{algebraic-section-morphisms-representable-by-algebraic-spaces}
+
+\noindent
+『圏』の定義
+\ref{categories-definition-representable-map-categories-fibred-in-groupoids}
+にならって、次のように定義する。
+
+\begin{definition}
+\label{algebraic-definition-representable-by-algebraic-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ について、任意の
+$U \in \Ob((\Sch/S)_{fppf})$ と任意の
+$y : (\Sch/U)_{fppf} \to \mathcal{Y}$ に対して、
+$(\Sch/U)_{fppf}$ 上のグルーポイドをファイバーとする圏
+$$
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+$$
+が $U$ 上の代数空間によって表現可能であるとき、この射は
+{\it 代数空間によって表現可能} であるという。
+\end{definition}
+
+\noindent
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$ を表現する
+$U$ 上の代数空間 $F_y$ を選ぶ。$F_y$ は、$S$ 上の標準射
+$f_y : F_y \to U$ を備えた $S$ 上の代数空間とみなすことができる。
+『空間』の節 \ref{spaces-section-change-base-scheme} を参照せよ。
+図式は次のとおりである。
+\begin{equation}
+\label{algebraic-equation-representable-by-algebraic-spaces}
+\vcenter{
+\xymatrix{
+F_y \ar[d]_{f_y} &
+(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+\ar@{~>}[l] \ar[d]_{\text{pr}_0} \ar[r]_-{\text{pr}_1} &
+\mathcal{X} \ar[d]^f \\
+U &
+(\Sch/U)_{fppf} \ar@{~>}[l] \ar[r]^-y &
+\mathcal{Y}
+}
+}
+\end{equation}
+ここで波線の矢印は、セトイドをファイバーとするスタックに、
+その対象の同型類からなる付随層を対応させる構成を表す。
+右の正方形は $2$-可換であり、$2$-ファイバー積図式である。
+
+\medskip\noindent
+次は『圏』の補題
+\ref{categories-lemma-criterion-representable-map-stack-in-groupoids}
+に対応する結果である。
+
+\begin{lemma}
+\label{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$f$ が代数空間によって表現可能であるための必要十分条件は、
+次の条件が成り立つことである。
+\begin{enumerate}
+\item 任意のスキーム $U/S$ に対し、ファイバー圏の間の関手
+$f_U : \mathcal{X}_U \longrightarrow \mathcal{Y}_U$ は忠実である。
+\item 任意の $U$ と任意の $y \in \Ob(\mathcal{Y}_U)$ に対し、前層
+$$
+(h : V \to U)
+\longmapsto
+\{(x, \phi) \mid x \in \Ob(\mathcal{X}_V), \phi : h^*y \to f(x)\}/\cong
+$$
+は $U$ 上の代数空間である。
+\end{enumerate}
+ここでは $\mathcal{Y}$ の引き戻しを一つ選んでいる。
+\end{lemma}
+
+\begin{proof}
+『圏』の補題 \ref{categories-lemma-identify-fibre-product} における
+$2$-ファイバー積
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$ の
+ファイバー圏の記述と、補題
+\ref{algebraic-lemma-characterize-representable-by-space} を組み合わせればよい。
+\end{proof}
+
+\noindent
+この概念について、非常に一般的に成り立つ補題をいくつか挙げる。
+
+\begin{lemma}
+\label{algebraic-lemma-representable-by-spaces-morphism-equivalent}
+$S$ を $\Sch_{fppf}$ の対象とする。
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$1$-射からなる $2$-可換図式
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r] & \mathcal{Y}
+}
+$$
+を考える。横の矢印が圏同値であると仮定する。
+このとき、$f$ が代数空間によって表現可能であるための必要十分条件は、
+$f'$ が代数空間によって表現可能であることである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-morphism-spaces-gives-representable-by-spaces}
+$S$ を $\Sch_{fppf}$ の対象とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を $S$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$\mathcal{X}$ と $\mathcal{Y}$ が $S$ 上の代数空間によって
+表現可能ならば、$1$-射 $f$ は代数空間によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+省略する。これは、$S$ 上の代数空間の圏がファイバー積をもつという
+事実だけに依存する。『空間』の補題
+\ref{spaces-lemma-fibre-product-spaces} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-map-presheaves-representable-by-algebraic-spaces}
+$S$ を $\Sch_{fppf}$ の対象とする。
+$a : F \to G$ を $(\Sch/S)_{fppf}$ 上の集合の前層の射とし、
+$a' : \mathcal{S}_F  \to \mathcal{S}_G$ を対応する、
+集合をファイバーとする圏の射とする。
+$a$ が代数空間によって表現可能であるための必要十分条件は
+（『ブートストラップ』の定義
+\ref{bootstrap-definition-morphism-representable-by-spaces} を参照）、
+$a'$ が代数空間によって表現可能であることである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-map-fibred-setoids-representable-algebraic-spaces}
+$S$ を $\Sch_{fppf}$ の対象とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+セトイドをファイバーとする圏の $1$-射とする。
+$T$ に $\mathcal{X}_T$ の対象の同型類の集合を対応させる前層を $F$、
+$\mathcal{Y}_T$ について同様に定まる前層を $G$ とする。
+$a : F \to G$ を $f$ に対応する前層の射とする。
+$a$ が代数空間によって表現可能であるための必要十分条件は
+（『ブートストラップ』の定義
+\ref{bootstrap-definition-morphism-representable-by-spaces} を参照）、
+$f$ が代数空間によって表現可能であることである。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：補題
+\ref{algebraic-lemma-representable-by-spaces-morphism-equivalent} と
+\ref{algebraic-lemma-map-presheaves-representable-by-algebraic-spaces} を組み合わせよ。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-base-change-representable-by-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を代数空間によって表現可能な $1$-射、
+$g : \mathcal{Z} \to \mathcal{Y}$ を任意の $1$-射とする。
+ファイバー積図式
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+を考える。このとき基底変換 $f'$ は代数空間によって表現可能な
+$1$-射である。
+\end{lemma}
+
+\begin{proof}
+これは形式的である。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-base-change-by-space-representable-by-space}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Z} \to \mathcal{Y}$ を $1$-射とし、次を仮定する。
+\begin{enumerate}
+\item $f$ は代数空間によって表現可能である。
+\item $\mathcal{Z}$ は $S$ 上の代数空間によって表現可能である。
+\end{enumerate}
+このとき $2$-ファイバー積
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}$
+は代数空間によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+これは『ブートストラップ』の補題
+\ref{bootstrap-lemma-representable-by-spaces-over-space} の言い換えである。
+まず、
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}$
+は $(\Sch/S)_{fppf}$ 上のセトイドをファイバーとすることに注意する。
+したがって、$(\Sch/S)_{fppf}$ 上のある前層 $F$ に対する
+$\mathcal{S}_F$ と圏同値である。『圏』の補題
+\ref{categories-lemma-setoid-fibres} を参照せよ。
+さらに、$G$ を $\mathcal{Z}$ を表現する代数空間とする。$1$-射
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \to \mathcal{Z}$
+は補題 \ref{algebraic-lemma-base-change-representable-by-spaces} により
+代数空間によって表現可能である。また、
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \to \mathcal{Z}$ は
+『圏』の補題 \ref{categories-lemma-2-category-fibred-setoids} により
+射 $F \to G$ に対応する。すると補題
+\ref{algebraic-lemma-map-fibred-setoids-representable-algebraic-spaces} により
+$F \to G$ は代数空間によって表現可能である。したがって、
+『ブートストラップ』の補題
+\ref{bootstrap-lemma-representable-by-spaces-over-space} により、
+望みどおり $F$ は代数空間である。
+\end{proof}
+
+\noindent
+補題 \ref{algebraic-lemma-base-change-by-space-representable-by-space} と同様に、
+$S$, $\mathcal{X}$, $\mathcal{Y}$, $\mathcal{Z}$, $f$, $g$ をとる。
+$F$ と $G$ を $S$ 上の代数空間で、$F$ は
+$\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}$ を表現し、
+$G$ は $\mathcal{Z}$ を表現するものとする。$1$-射
+$f' : \mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \to \mathcal{Z}$
+は (\ref{algebraic-equation-morphisms-spaces}) により、代数空間の射
+$f' : F \to G$ に対応する。したがって次の図式を得る。
+\begin{equation}
+\label{algebraic-equation-representable-by-algebraic-spaces-on-space}
+\vcenter{
+\xymatrix{
+F \ar[d]_{f'} &
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X}
+\ar@{~>}[l] \ar[d] \ar[r] &
+\mathcal{X} \ar[d]^f \\
+G &
+\mathcal{Z} \ar@{~>}[l] \ar[r]^-g &
+\mathcal{Y}
+}
+}
+\end{equation}
+ここで波線の矢印は、セトイドをファイバーとするスタックに、
+その対象の同型類からなる付随層を対応させる構成を表す。
+
+\begin{lemma}
+\label{algebraic-lemma-composition-representable-by-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Y} \to \mathcal{Z}$ が代数空間によって表現可能な
+$1$-射ならば
+$$
+g \circ f : \mathcal{X} \longrightarrow \mathcal{Z}
+$$
+は代数空間によって表現可能な $1$-射である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-base-change-by-space-representable-by-space} から従う。
+詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-product-representable-by-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$i = 1, 2$ に対し、$\mathcal{X}_i, \mathcal{Y}_i$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とし、
+$i = 1, 2$ に対して $f_i : \mathcal{X}_i \to \mathcal{Y}_i$ を
+代数空間によって表現可能な $1$-射とする。このとき
+$$
+f_1 \times f_2 :
+\mathcal{X}_1 \times \mathcal{X}_2
+\longrightarrow
+\mathcal{Y}_1 \times \mathcal{Y}_2
+$$
+は代数空間によって表現可能な $1$-射である。
+\end{lemma}
+
+\begin{proof}
+$f_1 \times f_2$ を合成
+$\mathcal{X}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{X}_2 \to
+\mathcal{Y}_1 \times \mathcal{Y}_2$ として書く。
+第1の矢印は写像
+$\mathcal{Y}_1 \times \mathcal{X}_2 \to \mathcal{Y}_1$ による
+$f_1$ の基底変換であり、第2の矢印は写像
+$\mathcal{Y}_1 \times \mathcal{Y}_2 \to \mathcal{Y}_2$ による
+$f_2$ の基底変換である。したがって本補題は、補題
+\ref{algebraic-lemma-composition-representable-by-spaces} と
+\ref{algebraic-lemma-base-change-representable-by-spaces} の形式的な帰結である。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-get-a-stack}
+\begin{reference}
+2016年6月15日付の Matthew Emerton の電子メールにある補題
+\end{reference}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X} \to \mathcal{Z}$ と $\mathcal{Y} \to \mathcal{Z}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+$\mathcal{X} \to \mathcal{Z}$ が代数空間によって表現可能で、
+$\mathcal{Y}$ がグルーポイドのスタックならば、
+$\mathcal{X} \times_\mathcal{Z} \mathcal{Y}$ もグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+射が代数空間によって表現可能であるという性質は基底変換で保たれる
+（補題 \ref{algebraic-lemma-base-change-by-space-representable-by-space}）。
+したがって、$\mathcal{Y}$ 上の基底変換
+$\mathcal{X} \times_\mathcal{Z} \mathcal{Y}$ に移ることで、
+代数空間によって表現可能な、グルーポイドをファイバーとする圏の射
+$\mathcal{X} \to \mathcal{Y}$ で、終域がグルーポイドのスタックである
+場合に帰着できる。このとき目標は、$\mathcal{X}$ もグルーポイドの
+スタックであることを示すことである。これは『スタック』の補題
+\ref{stacks-lemma-relative-sheaf-over-stack-is-stack} から従う。
+その仮定は補題
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+によって満たされる。
+\end{proof}
+
+
+
+
+
+
+
+\section{代数空間によって表現可能な射の性質}
+\label{algebraic-section-representable-properties}
+
+\noindent
+以下の議論を可能にする定義を与える。
+
+\begin{definition}
+\label{algebraic-definition-relative-representable-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とし、$f$ は
+代数空間によって表現可能であると仮定する。
+$\mathcal{P}$ を代数空間の射の性質で、次を満たすものとする。
+\begin{enumerate}
+\item 任意の基底変換で保たれる。
+\item 基底上 fppf 局所的である。『空間上の降下』の定義
+\ref{spaces-descent-definition-property-morphisms-local} を参照せよ。
+\end{enumerate}
+このとき、任意の $U \in \Ob((\Sch/S)_{fppf})$ と任意の
+$y \in \mathcal{Y}_U$ に対して、図式
+(\ref{algebraic-equation-representable-by-algebraic-spaces}) のように得られる
+代数空間の射 $f_y : F_y \to U$ が性質 $\mathcal{P}$ をもつならば、
+$f$ は {\it 性質 $\mathcal{P}$ をもつ} という。
+\end{definition}
+
+\noindent
+この定義は、基底変換で安定で、終域上の fppf 位相に関して局所的な
+射の性質にだけ用いることが重要である。それ以外の場合に定義が
+意味をなさないからではなく、考えている性質により適した別の定義を
+与えたいことがあるからである。
+
+\begin{lemma}
+\label{algebraic-lemma-property-morphism-equivalent}
+$S$ を $\Sch_{fppf}$ の対象とし、$\mathcal{P}$ を定義
+\ref{algebraic-definition-relative-representable-property} のような性質とする。
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$1$-射からなる $2$-可換図式
+$$
+\xymatrix{
+\mathcal{X}' \ar[r] \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r] & \mathcal{Y}
+}
+$$
+を考える。横の矢印が圏同値であり、$f$（同値なことに $f'$）が
+代数空間によって表現可能であると仮定する。
+このとき、$f$ が $\mathcal{P}$ をもつための必要十分条件は、
+$f'$ が $\mathcal{P}$ をもつことである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-representable-by-spaces-morphism-equivalent} により、
+この主張は意味をもつ。証明は省略する。
+\end{proof}
+
+\noindent
+定義の整合性を確認しておく。
+
+\begin{lemma}
+\label{algebraic-lemma-map-presheaves-representable-by-spaces-transformation-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$a : F \to G$ を $(\Sch/S)_{fppf}$ 上の前層の射とする。
+$\mathcal{P}$ を定義 \ref{algebraic-definition-relative-representable-property}
+のような性質とし、$a$ は代数空間によって表現可能であると仮定する。
+$a : F \to G$ が性質 $\mathcal{P}$ をもつための必要十分条件は
+（『ブートストラップ』の定義
+\ref{bootstrap-definition-property-transformation} を参照）、
+対応する、グルーポイドをファイバーとする圏の射
+$\mathcal{S}_F \to \mathcal{S}_G$ が性質 $\mathcal{P}$ をもつことである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-map-presheaves-representable-by-algebraic-spaces} により、
+本補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-map-fibred-setoids-property}
+$S$ を $\Sch_{fppf}$ の対象とし、$\mathcal{P}$ を定義
+\ref{algebraic-definition-relative-representable-property} のような性質とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+セトイドをファイバーとする圏の $1$-射とする。
+$T$ に $\mathcal{X}_T$ の対象の同型類の集合を対応させる前層を $F$、
+$\mathcal{Y}_T$ について同様に定まる前層を $G$ とする。
+$a : F \to G$ を $f$ に対応する前層の射とする。
+$a$ が $\mathcal{P}$ をもつための必要十分条件は、
+$f$ が $\mathcal{P}$ をもつことである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-map-fibred-setoids-representable-algebraic-spaces} により、
+本補題は意味をもつ。補題 \ref{algebraic-lemma-property-morphism-equivalent} と
+\ref{algebraic-lemma-map-presheaves-representable-by-spaces-transformation-property}
+を組み合わせれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-composition-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$, $\mathcal{Y}$, $\mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$\mathcal{P}$ を定義 \ref{algebraic-definition-relative-representable-property}
+のような、合成で安定な性質とする。
+$f : \mathcal{X} \to \mathcal{Y}$,
+$g : \mathcal{Y} \to \mathcal{Z}$ を代数空間によって表現可能な
+$1$-射とする。$f$ と $g$ が性質 $\mathcal{P}$ をもつならば、
+$g \circ f : \mathcal{X} \to \mathcal{Z}$ もこれをもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-composition-representable-by-spaces} により、
+本補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-base-change-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$\mathcal{P}$ を定義 \ref{algebraic-definition-relative-representable-property}
+のような性質とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を代数空間によって表現可能な $1$-射、
+$g : \mathcal{Z} \to \mathcal{Y}$ を任意の $1$-射とする。
+$2$-ファイバー積図式
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+を考える。$f$ が $\mathcal{P}$ をもつならば、基底変換 $f'$ も
+$\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-base-change-representable-by-spaces} により、
+本補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-descent-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$\mathcal{P}$ を定義 \ref{algebraic-definition-relative-representable-property}
+のような性質とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を代数空間によって表現可能な $1$-射、
+$g : \mathcal{Z} \to \mathcal{Y}$ を任意の $1$-射とする。
+ファイバー積図式
+$$
+\xymatrix{
+\mathcal{Z} \times_{g, \mathcal{Y}, f} \mathcal{X} \ar[r]_-{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Z} \ar[r]^g & \mathcal{Y}
+}
+$$
+を考える。任意のスキーム $U$ と $\mathcal{Y}_U$ の対象 $x$ に対し、
+$x|_{U_i}$ が関手
+$g : \mathcal{Z}_{U_i} \to \mathcal{Y}_{U_i}$ の本質像に入るような
+fppf 被覆 $\{U_i \to U\}$ が存在すると仮定する。
+このとき、$f'$ が $\mathcal{P}$ をもつならば、$f$ も
+$\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+証明は省略する。ヒント：『空間』の補題
+\ref{spaces-lemma-descent-representable-transformations-property}
+の証明と比較せよ。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-product-representable-transformations-property}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{P}$ を定義 \ref{algebraic-definition-relative-representable-property}
+のような、合成で安定な性質とする。
+$i = 1, 2$ に対し、$\mathcal{X}_i, \mathcal{Y}_i$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とし、
+$i = 1, 2$ に対して $f_i : \mathcal{X}_i \to \mathcal{Y}_i$ を
+代数空間によって表現可能な $1$-射とする。
+$f_1$ と $f_2$ が性質 $\mathcal{P}$ をもつならば、
+$
+f_1 \times f_2 :
+\mathcal{X}_1 \times \mathcal{X}_2
+\to
+\mathcal{Y}_1 \times \mathcal{Y}_2
+$
+もこれをもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-product-representable-by-spaces} により、
+本補題は意味をもつ。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-representable-transformations-property-implication}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$, $\mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏とする。
+$f : \mathcal{X} \to \mathcal{Y}$ を代数空間によって表現可能な
+$1$-射とする。$\mathcal{P}$, $\mathcal{P}'$ を定義
+\ref{algebraic-definition-relative-representable-property} のような性質とする。
+代数空間の任意の射 $a : F \to G$ に対して
+$\mathcal{P}(a) \Rightarrow \mathcal{P}'(a)$ が成り立つと仮定する。
+$f$ が性質 $\mathcal{P}$ をもつならば、$f$ は性質
+$\mathcal{P}'$ をもつ。
+\end{lemma}
+
+\begin{proof}
+形式的である。
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-open-fibred-category-is-full}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$j : \mathcal X \to \mathcal Y$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$j$ は代数空間によって表現可能な単射であると仮定する
+（定義 \ref{algebraic-definition-relative-representable-property} および
+『空間上の降下』の補題
+\ref{spaces-descent-lemma-descending-property-monomorphism} を参照）。
+このとき $j$ はファイバー圏上充満忠実である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+で、$j$ がファイバー圏上忠実であることを見た。
+スキーム $U$、$\mathcal{X}_U$ の2対象 $u, v$、および
+$\mathcal{Y}_U$ における同型 $t : j(u) \to j(v)$ を考える。
+$u$ と $v$ の間に $\mathcal{X}_U$ における同型を構成すればよい。
+$2$-米田の補題（節 \ref{algebraic-section-2-yoneda} を参照）により、
+$u$, $v$ を $1$-射
+$u, v : (\Sch/U)_{fppf} \to \mathcal{X}$
+とみなし、$2$-ファイバー積
+$$
+(\Sch/U)_{fppf} \times_{j \circ v, \mathcal{Y}} \mathcal{X}.
+$$
+を考える。仮定により、これは $U$ 上の代数空間
+$F_{j \circ v}$ によって表現され、射 $F_{j \circ v} \to U$ は単射である。
+一方、$(1_U, v, 1_{j(v)})$ は $(\Sch/U)_{fppf}$ から表示した
+$2$-ファイバー積への $1$-射を与えるので、$F_{j \circ v} = U$ である
+（ここでは、切断をもつ代数空間の単射 $V \to U$ に対して
+$V = U$ となることを用いた）。したがって、第1座標への射影である $1$-射
+$$
+(\Sch/U)_{fppf} \times_{j \circ v, \mathcal{Y}} \mathcal{X}
+\to (\Sch/U)_{fppf}
+$$
+はファイバー圏の圏同値である。
+$(1_U, u, t)$ と $(1_U, v, 1_{j(v)})$ は
+$((\Sch/U)_{fppf} \times_{j \circ v, \mathcal{Y}} \mathcal{X})_U$
+の同じ第1座標をもつ2対象を与えるので、$2$-ファイバー積の中で
+両者の間に $2$-射が存在しなければならない。
+定義により、これは $j(\tilde t) = t$ を満たす射
+$\tilde t : u \to v$ である。
+\end{proof}
+
+\noindent
+対角射が代数空間によって表現可能となる、グルーポイドをファイバーとする
+圏を特徴づける。
+
+\begin{lemma}
+\label{algebraic-lemma-representable-diagonal}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする
+圏とする。次の条件は同値である。
+\begin{enumerate}
+\item 対角射 $\mathcal{X} \to \mathcal{X} \times \mathcal{X}$ は
+代数空間によって表現可能である。
+\item $S$ 上の任意のスキーム $U$ と任意の
+$x, y \in \Ob(\mathcal{X}_U)$ に対し、層
+$\mathit{Isom}(x, y)$ は $U$ 上の代数空間である。
+\item $S$ 上の任意のスキーム $U$ と任意の
+$x \in \Ob(\mathcal{X}_U)$ に対し、付随する $1$-射
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$ は代数空間によって表現可能である。
+\item $S$ 上の任意のスキームの対 $T_1, T_2$ と、任意の
+$x_i \in \Ob(\mathcal{X}_{T_i})$, $i = 1, 2$ に対し、$2$-ファイバー積
+$(\Sch/T_1)_{fppf} \times_{x_1, \mathcal{X}, x_2}
+(\Sch/T_2)_{fppf}$
+は代数空間によって表現可能である。
+\item $(\Sch/S)_{fppf}$ 上の表現可能な、グルーポイドをファイバーとする
+任意の圏 $\mathcal{U}$ に対し、任意の $1$-射
+$\mathcal{U} \to \mathcal{X}$ は代数空間によって表現可能である。
+\item $(\Sch/S)_{fppf}$ 上の表現可能な、グルーポイドをファイバーとする
+任意の圏の対 $\mathcal{T}_1, \mathcal{T}_2$ と、任意の $1$-射
+$x_i : \mathcal{T}_i \to \mathcal{X}$, $i = 1, 2$ に対し、
+$2$-ファイバー積
+$\mathcal{T}_1 \times_{x_1, \mathcal{X}, x_2} \mathcal{T}_2$ は
+代数空間によって表現可能である。
+\item $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとし、
+代数空間によって表現可能な任意の圏 $\mathcal{U}$ に対し、任意の $1$-射
+$\mathcal{U} \to \mathcal{X}$ は代数空間によって表現可能である。
+\item $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとし、
+代数空間によって表現可能な任意の圏の対
+$\mathcal{T}_1, \mathcal{T}_2$ と任意の $1$-射
+$x_i : \mathcal{T}_i \to \mathcal{X}$ に対し、$2$-ファイバー積
+$\mathcal{T}_1 \times_{x_1, \mathcal{X}, x_2} \mathcal{T}_2$ は
+代数空間によって表現可能である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は、『スタック』の補題
+\ref{stacks-lemma-isom-as-2-fibre-product} と定義から従う。
+(1) と (3) の同値性を示そう。基底圏を
+$\mathcal{C} = (\Sch/S)_{fppf}$ と書く。類似する『圏』の補題
+\ref{categories-lemma-representable-diagonal-groupoids} の証明における
+いくつかの観察を用いる。記号 $\cong$ は「$\mathcal{C} = (\Sch/S)_{fppf}$
+上のグルーポイドをファイバーとする圏の圏同値」を意味するものとする。
+(1) を仮定し、(3) のような $U$ と $x$ を与える。任意のスキーム $V$ と
+$y \in \Ob(\mathcal{X}_V)$ に対して（上の参照箇所と比較して）
+$$
+\mathcal{C}/U
+\times_{x, \mathcal{X}, y}
+\mathcal{C}/V
+\cong
+(\mathcal{C}/U \times_S V)
+\times_{(x, y), \mathcal{X} \times \mathcal{X}, \Delta}
+\mathcal{X}
+$$
+となる。これは仮定により代数空間によって表現可能である。逆に (3) を
+仮定する。$S$ 上の任意のスキーム $U$ と、$U$ 上の $\mathcal{X}$ の
+対象の対 $(x, x')$ を考える。次が代数空間によって表現可能であることを
+示せばよい。
+$\mathcal{X} \times_{\Delta, \mathcal{X} \times \mathcal{X}, (x, x')} U$
+これは、（上の参照箇所と比較して）
+$$
+\mathcal{X}
+\times_{\Delta, \mathcal{X} \times \mathcal{X}, (x, x')}
+\mathcal{C}/U
+\cong
+(\mathcal{C}/U \times_{x, \mathcal{X}, x'} \mathcal{C}/U)
+\times_{\mathcal{C}/U \times_S U, \Delta}
+\mathcal{C}/U
+$$
+であり、右辺が仮定と、$S$ 上の代数空間の圏がファイバー積をもち
+$U$ と $S$ を含むという事実により、代数空間によって表現可能だからである。
+
+\medskip\noindent
+(3) $\Leftrightarrow$ (4)、(5) $\Leftrightarrow$ (6)、および
+(7) $\Leftrightarrow$ (8) は形式的である。
+(3) $\Leftrightarrow$ (5) と (4) $\Leftrightarrow$ (6) は補題
+\ref{algebraic-lemma-representable-by-spaces-morphism-equivalent} から従う。
+(3) を仮定し、$\mathcal{U} \to \mathcal{X}$ を (7) のようにとる。
+(7) を示すには、任意のスキーム $V$ と任意の $1$-射
+$y : (\Sch/V)_{fppf} \to \mathcal{X}$ に対し、$2$-ファイバー積
+$(\Sch/V)_{fppf} \times_{y, \mathcal{X}} \mathcal{U}$
+が代数空間によって表現可能であることを示せばよい。(3) により
+$y$ は代数空間によって表現可能なので、補題
+\ref{algebraic-lemma-base-change-by-space-representable-by-space} から結論が従う。
+最後に、(7) は (3) を直ちに含意する。
+\end{proof}
+
+\noindent
+補題の状況では、そこに現れる任意の $1$-射
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$ と、定義
+\ref{algebraic-definition-relative-representable-property} のような任意の性質に対して、
+$x$ が性質 $\mathcal{P}$ をもつということが
+意味をもつ。特に、$\mathcal{P} = $「全射」、
+$\mathcal{P} = $「滑らか」、および $\mathcal{P} = $「エタール」
+の場合がそうである。『空間上の降下』の補題
+\ref{spaces-descent-lemma-descending-property-surjective}、
+\ref{spaces-descent-lemma-descending-property-smooth}、および
+\ref{spaces-descent-lemma-descending-property-etale} を参照せよ。
+以下の代数スタックの定義では、これら3つの場合を用いる。
+
+
+
+
+
+
+
+
+\section{グルーポイドのスタック}
+\label{algebraic-section-stacks}
+
+\noindent
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$(\Sch/S)_{fppf}$ 上の圏 $p : \mathcal{X} \to (\Sch/S)_{fppf}$ が
+{\it グルーポイドのスタック} であるとは（『スタック』の定義
+\ref{stacks-definition-stack-in-groupoids} を参照）、次の条件が
+成り立つことと同値であることを思い出そう。
+\begin{enumerate}
+\item $p : \mathcal{X} \to (\Sch/S)_{fppf}$ は
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする。
+\item 任意の $U \in \Ob((\Sch/S)_{fppf})$ と任意の
+$x, y\in \Ob(\mathcal{X}_U)$ に対し、前層
+$\mathit{Isom}(x, y)$ はサイト $(\Sch/U)_{fppf}$ 上の層である。
+\item $(\Sch/S)_{fppf}$ の任意の被覆
+$\mathcal{U} = \{U_i \to U\}$ に対し、$\mathcal{U}$ に関する
+任意の降下データ $(x_i, \phi_{ij})$ は有効である。
+\end{enumerate}
+例については、『スタックの例』の節
+\ref{examples-stacks-section-examples-stacks-in-groupoids} 以下を参照せよ。
+
+
+
+
+
+
+
+
+
+
+\section{代数スタック}
+\label{algebraic-section-algebraic-stacks}
+
+\noindent
+代数スタックを定義する。条件 (2) により、(3) における
+$(\Sch/U)_{fppf} \to \mathcal{X}$ が滑らかかつ全射であるという条件が
+意味をもつことに注意する。補題 \ref{algebraic-lemma-representable-diagonal}
+の後の議論を参照せよ。
+
+\begin{definition}
+\label{algebraic-definition-algebraic-stack}
+$S$ を $\Sch_{fppf}$ に含まれる基底スキームとする。
+{\it $S$ 上の代数スタック} とは、$(\Sch/S)_{fppf}$ 上の圏
+$$
+p : \mathcal{X} \to (\Sch/S)_{fppf}
+$$
+で、次の性質をもつものである。
+\begin{enumerate}
+\item 圏 $\mathcal{X}$ は $(\Sch/S)_{fppf}$ 上のグルーポイドの
+スタックである。
+\item 対角射
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$
+は代数空間によって表現可能である。
+\item スキーム $U \in \Ob((\Sch/S)_{fppf})$ と、\newline
+全射かつ滑らかな
+$1$-射 $(\Sch/U)_{fppf} \to \mathcal{X}$ が存在する\footnote{後の章では、
+文献の慣例にならってこれを単に $U \to \mathcal{X}$ と書く。
+別の適切な定式化は、表現可能な、グルーポイドをファイバーとする圏
+$\mathcal{U}$ と、全射かつ滑らかな $1$-射
+$\mathcal{U} \to \mathcal{X}$ が存在するとすることである。}。
+\end{enumerate}
+\end{definition}
+
+\noindent
+文献に見られる他の定義とは、いくつか相違がある。
+
+\medskip\noindent
+第1に、ここでは $\mathcal{X}$ が fppf 位相に関するグルーポイドの
+スタックであることを要求するが、多くの文献ではエタール位相が用いられる。
+fppf 位相こそ自然に用いるべき位相と思われる。最終的に得られる
+代数スタックの $2$-圏は同じになる。これは『表現可能性の判定条件』の節
+\ref{criteria-section-stacks-etale} で説明する。
+
+\medskip\noindent
+第2に、多くの文献では別の条件も課されるのに対し、ここでは
+$\mathcal{X}$ の対角射が代数空間によって表現可能であることだけを要求する。
+本書の立場は、$\mathcal{X}$ の対角射が代数空間によって表現可能であるという
+仮定だけで、後続の結果をできるだけ多く証明し、必要な箇所でだけ追加の仮定を
+加えることである。これには、『空間』の定義
+\ref{spaces-definition-algebraic-space} で定義される任意の代数空間が
+代数スタックを与えるという利点もある。
+
+\medskip\noindent
+第3に、スキーム $U$ と全射エタール射 $U \to \mathcal{X}$ の存在を
+要求する論文もある。代数スタックを初めて導入した画期的な論文
+\cite{DM} で、Deligne と Mumford はこの定義を用い、種数 $g > 1$ の
+安定曲線のモジュライスタックが、スキームによるエタール被覆をもつ
+代数スタックであることを示した。Michael Artin は \cite{ArtinVersal} で、
+代数スタックに関する多くの自然な結果が、スキームによる滑らかな被覆だけを
+仮定する場合にも一般化できることを見抜いた。これが上の定義を選んだ理由である。
+この2つの場合を区別するため、文献では「Deligne--Mumford スタック」と
+「Artin スタック」という用語が使われる。「Artin スタック」という用語は
+後で用いるために取っておき（将来の参照をここに挿入）、引き続き
+「代数スタック」を用いる。ただし、スキームによるエタール被覆をもつ
+代数スタックを「Deligne--Mumford スタック」と呼ぶ。
+
+\begin{definition}
+\label{algebraic-definition-deligne-mumford}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$ を $S$ 上の代数スタックとする。スキーム $U$ と
+全射エタール射 $(\Sch/U)_{fppf} \to \mathcal{X}$ が存在するとき、
+$\mathcal{X}$ は {\it Deligne--Mumford スタック} であるという。
+\end{definition}
+
+\noindent
+後で、ここでの Deligne--Mumford スタックの概念と、Deligne と Mumford の
+論文で定義された概念を比較する（将来の参照をここに挿入）。
+
+\medskip\noindent
+$S$ 上の代数スタックの圏は $2$-圏をなす。正確に定義しよう。
+
+\begin{definition}
+\label{algebraic-definition-morphism-algebraic-stacks}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+{\it $S$ 上の代数スタックの $2$-圏} とは、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $2$-圏
+（『圏』の定義
+\ref{categories-definition-categories-fibred-in-groupoids-over-C} を参照）
+の、次のように定まる部分 $2$-圏である。
+\begin{enumerate}
+\item 対象は、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏で、
+$S$ 上の代数スタックであるものとする。
+\item $1$-射 $f : \mathcal{X} \to \mathcal{Y}$ は、『圏』の定義
+\ref{categories-definition-categories-over-C} のような、
+$(\Sch/S)_{fppf}$ 上の圏の任意の関手とする。
+\item $2$-射は、『圏』の定義
+\ref{categories-definition-categories-over-C} のような、
+$(\Sch/S)_{fppf}$ 上の関手の間の自然変換とする。
+\end{enumerate}
+\end{definition}
+
+\noindent
+言い換えれば、この $2$-圏は $\textit{Cat}/(\Sch/S)_{fppf}$ の、
+対象を代数スタックとする充満部分 $2$-圏である。
+任意の $2$-射は自動的に同型であることに注意する。
+したがって、これは単なる $2$-圏ではなく、実際には $(2, 1)$-圏である。
+
+\medskip\noindent
+後で（将来の参照をここに挿入）、この $2$-圏が $2$-ファイバー積を
+もつことを見る。
+
+\medskip\noindent
+上の注意と同様に、$S$ 上の代数スタックの $2$-圏は、
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $2$-圏の
+充満部分 $2$-圏である。これは圏同値に関して閉じている。
+正確には次が成り立つ。
+
+\begin{lemma}
+\label{algebraic-lemma-equivalent}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$, $\mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の圏とし、
+$\mathcal{X}$, $\mathcal{Y}$ は $(\Sch/S)_{fppf}$ 上の圏として
+圏同値であると仮定する。
+$\mathcal{X}$ が代数スタックであるための必要十分条件は、
+$\mathcal{Y}$ が代数スタックであることである。同様に、
+$\mathcal{X}$ が Deligne--Mumford スタックであるための必要十分条件は、
+$\mathcal{Y}$ が Deligne--Mumford スタックであることである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X}$ が代数スタック（それぞれ Deligne--Mumford スタック）であると
+仮定する。『スタック』の補題
+\ref{stacks-lemma-stack-in-groupoids-equivalent} により、$\mathcal{Y}$ は
+$\Sch_{fppf}$ 上のグルーポイドのスタックである。
+$\Sch_{fppf}$ 上の圏同値 $f : \mathcal{X} \to \mathcal{Y}$ を選ぶ。
+これにより $2$-可換図式
+$$
+\xymatrix{
+\mathcal{X} \ar[r]_f \ar[d]_{\Delta_\mathcal{X}} &
+\mathcal{Y} \ar[d]^{\Delta_\mathcal{Y}} \\
+\mathcal{X} \times \mathcal{X} \ar[r]^{f \times f} &
+\mathcal{Y} \times \mathcal{Y}
+}
+$$
+を得る。横の矢印は圏同値である。したがって補題
+\ref{algebraic-lemma-representable-by-spaces-morphism-equivalent} により、
+$\Delta_\mathcal{Y}$ は代数空間によって表現可能である。
+最後に、$U$ を $S$ 上のスキームとし、
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$ を全射かつ滑らかな
+（それぞれエタールな）$1$-射とする。図式
+$$
+\xymatrix{
+(\Sch/U)_{fppf} \ar[r]_{\text{id}} \ar[d]_x &
+(\Sch/U)_{fppf} \ar[d]^{f \circ x} \\
+\mathcal{X} \ar[r]^f &
+\mathcal{Y}
+}
+$$
+を考え、補題 \ref{algebraic-lemma-property-morphism-equivalent} を適用すると、
+$f \circ x$ は望みどおり全射かつ滑らか（それぞれエタール）である。
+\end{proof}
+
+
+
+
+\section{代数スタックと代数空間}
+\label{algebraic-section-stacks-spaces}
+
+\noindent
+本節では、代数スタックが代数空間となることを導く簡単な判定条件を論じる。
+主結果は、これがちょうどファイバー圏の対象が自明でない自己同型を
+もたないときに起こるというものである。これは自明ではない。
+その前に、まず定義の整合性を確認する。
+
+\begin{lemma}
+\label{algebraic-lemma-representable-algebraic}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+\begin{enumerate}
+\item グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$
+が代数空間によって表現可能ならば、Deligne--Mumford スタックである。
+\item $F$ が $S$ 上の代数空間ならば、付随するグルーポイドを
+ファイバーとする圏
+$p : \mathcal{S}_F \to (\Sch/S)_{fppf}$
+は Deligne--Mumford スタックである。
+\item $X \in \Ob((\Sch/S)_{fppf})$ ならば、
+$(\Sch/X)_{fppf} \to (\Sch/S)_{fppf}$
+は Deligne--Mumford スタックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) が (3) を含意することは明らかである。(1) と (2) は補題
+\ref{algebraic-lemma-equivalent} により同値である。したがって (2) を示せば十分である。
+まず、$F$ は層なので $\mathcal{S}_F$ は集合のスタックであることに注意する
+（『スタック』の補題 \ref{stacks-lemma-stack-in-setoids-characterize}）。
+したがって、特にグルーポイドのスタックである。次に、対角射
+$\mathcal{S}_F \to \mathcal{S}_F  \times \mathcal{S}_F$ は、$F$ の対角射から
+得られる射 $\mathcal{S}_F \to \mathcal{S}_{F \times F}$ と同じである。
+よって補題 \ref{algebraic-lemma-morphism-spaces-gives-representable-by-spaces} により、
+これは代数空間によって表現可能である。実際、代数空間の対角射は
+表現可能なので、これはさらに（スキームによって）表現可能であるが、
+そこまでは必要ない。$U$ をスキームとし、$h_U \to F$ を全射エタール射とする。
+これは代数空間の全射エタール射とみなせる。したがって補題
+\ref{algebraic-lemma-map-presheaves-representable-by-spaces-transformation-property}
+により、対応する $1$-射 $(\Sch/U)_{fppf} \to \mathcal{S}_F$ は
+全射かつエタールである。
+\end{proof}
+
+\noindent
+次の結果は、慣性が自明な Deligne--Mumford スタックが代数空間「である」
+ことを述べる。この補題は、これが代数スタックについてより一般に成り立つ
+ことを述べる、後のより強い命題
+\ref{algebraic-proposition-algebraic-stack-no-automorphisms} によって不要となる。
+
+\begin{lemma}
+\label{algebraic-lemma-algebraic-stack-no-automorphisms}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$ を $S$ 上の代数スタックとする。次の条件は同値である。
+\begin{enumerate}
+\item $\mathcal{X}$ は Deligne--Mumford スタックかつセトイドの
+スタックである。
+\item $\mathcal{X}$ は Deligne--Mumford スタックであり、標準 $1$-射
+$\mathcal{I}_\mathcal{X} \to \mathcal{X}$ は圏同値である。
+\item $\mathcal{X}$ は代数空間によって表現可能である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は、『スタック』の補題
+\ref{stacks-lemma-characterize-stack-in-setoids} から従う。
+(3) $\Rightarrow$ (1) は補題 \ref{algebraic-lemma-representable-algebraic} から従う。
+最後に (1) を仮定する。『スタック』の補題
+\ref{stacks-lemma-stack-in-setoids-characterize} により、
+$(\Sch/S)_{fppf}$ 上の層 $F$ と圏同値
+$j : \mathcal{X} \to \mathcal{S}_F$ が存在する。補題
+\ref{algebraic-lemma-map-presheaves-representable-by-algebraic-spaces} により、
+$\Delta_\mathcal{X}$ が代数空間によって表現可能であることは、
+$\Delta_F : F \to F \times F$ が代数空間によって表現可能であることを
+意味する。$U$ をスキームとし、$x : (\Sch/U)_{fppf} \to \mathcal{X}$ を
+全射エタール射とする。合成
+$j \circ x : (\Sch/U)_{fppf} \to \mathcal{S}_F$
+は層の射 $h_U \to F$ に対応する。『ブートストラップ』の補題
+\ref{bootstrap-lemma-representable-diagonal} により、この射は
+代数空間によって表現可能である。したがって補題
+\ref{algebraic-lemma-map-fibred-setoids-property} により、$h_U \to F$ は
+全射かつエタールである。最後に『ブートストラップ』の定理
+\ref{bootstrap-theorem-bootstrap} を適用すると、$F$ は代数空間である。
+\end{proof}
+
+\begin{proposition}
+\label{algebraic-proposition-algebraic-stack-no-automorphisms}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする。
+$\mathcal{X}$ を $S$ 上の代数スタックとする。次の条件は同値である。
+\begin{enumerate}
+\item $\mathcal{X}$ はセトイドのスタックである。
+\item 標準 $1$-射 $\mathcal{I}_\mathcal{X} \to \mathcal{X}$ は圏同値である。
+\item $\mathcal{X}$ は代数空間によって表現可能である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) と (2) の同値性は、『スタック』の補題
+\ref{stacks-lemma-characterize-stack-in-setoids} から従う。
+(3) $\Rightarrow$ (1) は補題
+\ref{algebraic-lemma-algebraic-stack-no-automorphisms} から従う。
+最後に (1) を仮定する。『スタック』の補題
+\ref{stacks-lemma-stack-in-setoids-characterize} により、圏同値
+$j : \mathcal{X} \to \mathcal{S}_F$ が存在し、ここで $F$ は
+$(\Sch/S)_{fppf}$ 上の層である。補題
+\ref{algebraic-lemma-map-presheaves-representable-by-algebraic-spaces} により、
+$\Delta_\mathcal{X}$ が代数空間によって表現可能であることは、
+$\Delta_F : F \to F \times F$ が代数空間によって表現可能であることを
+意味する。$U$ をスキームとし、$x : (\Sch/U)_{fppf} \to \mathcal{X}$ を
+全射かつ滑らかな射とする。合成
+$j \circ x : (\Sch/U)_{fppf} \to \mathcal{S}_F$
+は層の射 $h_U \to F$ に対応する。『ブートストラップ』の補題
+\ref{bootstrap-lemma-representable-diagonal} により、この射は
+代数空間によって表現可能である。したがって補題
+\ref{algebraic-lemma-map-fibred-setoids-property} により、$h_U \to F$ は
+全射かつ滑らかである。特に、これは全射かつ平坦で、有限表示局所的である
+（補題 \ref{algebraic-lemma-representable-transformations-property-implication} と、
+代数空間の滑らかな射が平坦かつ有限表示局所的であるという事実を用いる。
+『空間の射』の補題
+\ref{spaces-morphisms-lemma-smooth-locally-finite-presentation} および
+\ref{spaces-morphisms-lemma-smooth-flat} を参照せよ）。
+最後に『ブートストラップ』の定理
+\ref{bootstrap-theorem-final-bootstrap} を適用すると、$F$ は代数空間である。
+\end{proof}
+
+
+
+
+
+
+\section{代数スタックの2-ファイバー積}
+\label{algebraic-section-2-fibre-products}
+
+\noindent
+代数スタックの $2$-圏には積と $2$-ファイバー積が存在する．
+最初の補題は実際には
+補題 \ref{algebraic-lemma-2-fibre-product}
+の特別な場合であるが，その証明はいくらか容易である．
+
+\begin{lemma}
+\label{algebraic-lemma-product-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$\mathcal{X}$，$\mathcal{Y}$ を $S$ 上の代数スタックとする．
+このとき $\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$
+は代数スタックであり，$S$ 上の代数スタックの $2$-圏における積である．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$ の $T$ 上の対象は，
+$x$ が $\mathcal{X}_T$ の対象，$y$ が $\mathcal{Y}_T$ の対象であるような
+組 $(x, y)$ にほかならない．したがって，定義から直ちに
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$ は
+グルーポイドのスタックである．$(x, y)$ と $(x', y')$ が
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$ の
+$T$ 上の二つの対象ならば，
+$$
+\mathit{Isom}((x, y), (x', y')) =
+\mathit{Isom}(x, x') \times \mathit{Isom}(y, y').
+$$
+したがって，
+補題 \ref{algebraic-lemma-representable-diagonal}
+の同値と，代数空間の圏に積が存在することから，
+$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$ の対角射は
+代数空間によって表現可能であることが従う．
+最後に，$U, V \in \Ob((\Sch/S)_{fppf})$ とし，
+$x, y$ を全射かつ滑らかな射
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$,
+$y : (\Sch/V)_{fppf} \to \mathcal{Y}$ とする．
+次に注意する．
+$$
+(\Sch/U \times_S V)_{fppf} =
+(\Sch/U)_{fppf}
+\times_{(\Sch/S)_{fppf}} (\Sch/V)_{fppf}.
+$$
+したがって，$\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$ の
+$(\Sch/U \times_S V)_{fppf}$ 上の対象
+$(\text{pr}_U^*x, \text{pr}_V^*y)$ は $1$-射
+$$
+(\Sch/U \times_S V)_{fppf}
+\longrightarrow
+\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}
+$$
+を定める．これは $x$ と $y$ の底変換の合成であるから，
+全射かつ滑らかである．
+補題 \ref{algebraic-lemma-base-change-representable-transformations-property} および
+\ref{algebraic-lemma-composition-representable-transformations-property} を参照せよ．
+以上により $\mathcal{X} \times_{(\Sch/S)_{fppf}} \mathcal{Y}$ は
+確かに代数スタックである．これが実際に積であることの検証は省略する．
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-2-fibre-product-general}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$\mathcal{Z}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックで，
+その対角射が代数空間によって表現可能なものとする．
+$\mathcal{X}$，$\mathcal{Y}$ を $S$ 上の代数スタックとする．
+$f : \mathcal{X} \to \mathcal{Z}$，$g : \mathcal{Y} \to \mathcal{Z}$ を
+グルーポイドのスタックの $1$-射とする．このとき $2$-ファイバー積
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$ は代数スタックである．
+\end{lemma}
+
+\begin{proof}
+定義 \ref{algebraic-definition-algebraic-stack} の条件 (1)，(2)，(3) を
+確かめればよい．第一の条件は
+『スタック』の補題 \ref{stacks-lemma-2-product-stacks-in-groupoids} から従う．
+
+\medskip\noindent
+確かめるべき第二の条件は，$\mathit{Isom}$-層が代数空間によって
+表現可能であることである．このため，$T$ を $S$ 上のスキームとし，
+$u, v$ を $(\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y})_T$ の
+対象とする．$2$-ファイバー積の構成
+（その源は『圏』の補題 \ref{categories-lemma-2-product-categories-over-C}
+まで遡る）により，$u = (x, y, \alpha)$ および
+$v = (x', y', \alpha')$ と書ける．ここで
+$\alpha : f(x) \to g(y)$ であり，$\alpha'$ についても同様である．
+このとき，明らかに
+$$
+\xymatrix{
+\mathit{Isom}(u, v) \ar[d] \ar[rr] & &
+\mathit{Isom}(y, y') \ar[d]^{\phi \mapsto g(\phi) \circ \alpha} \\
+\mathit{Isom}(x, x') \ar[rr]^-{\psi \mapsto \alpha' \circ f(\psi)} & &
+\mathit{Isom}(f(x), g(y'))
+}
+$$
+は $(\Sch/T)_{fppf}$ 上の層のカルテジアン図式である．
+仮定により層
+$\mathit{Isom}(y, y')$，$\mathit{Isom}(x, x')$，$\mathit{Isom}(f(x), g(y'))$
+は代数空間であるから
+（補題 \ref{algebraic-lemma-representable-diagonal} を参照），
+$\mathit{Isom}(u, v)$ も代数空間である．
+
+\medskip\noindent
+$U, V \in \Ob((\Sch/S)_{fppf})$ とし，
+$x, y$ を全射かつ滑らかな射
+$x : (\Sch/U)_{fppf} \to \mathcal{X}$,
+$y : (\Sch/V)_{fppf} \to \mathcal{Y}$ とする．射
+$$
+(\Sch/U)_{fppf}
+\times_{f \circ x, \mathcal{Z}, g \circ y}
+(\Sch/V)_{fppf}
+\longrightarrow
+\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}.
+$$
+を考える．$\mathcal{Z}$ の対角射は代数空間によって表現可能なので，
+この矢印の始域はある代数空間 $F$ によって表現される．
+補題 \ref{algebraic-lemma-representable-diagonal} を参照せよ．
+さらに，この射は $x$ と $y$ の底変換の合成であるから，
+全射かつ滑らかである．
+補題 \ref{algebraic-lemma-base-change-representable-transformations-property} および
+\ref{algebraic-lemma-composition-representable-transformations-property} を参照せよ．
+スキーム $W$ と全射エタール射 $W \to F$ を選ぶと，
+上に表示した $1$-射と，対応する $1$-射
+$$
+(\Sch/W)_{fppf}
+\longrightarrow
+(\Sch/U)_{fppf}
+\times_{f \circ x, \mathcal{Z}, g \circ y}
+(\Sch/V)_{fppf}
+$$
+との合成が全射かつ滑らかであることが分かり，最後の条件が証明される．
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-2-fibre-product}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ を $S$ 上の代数スタックとする．
+$f : \mathcal{X} \to \mathcal{Z}$，$g : \mathcal{Y} \to \mathcal{Z}$ を
+代数スタックの $1$-射とする．このとき $2$-ファイバー積
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$ は代数スタックである．
+これはまた，$(\Sch/S)_{fppf}$ 上の代数スタックの $2$-圏における
+$2$-ファイバー積でもある．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$ が代数スタックであることは，
+より強い補題 \ref{algebraic-lemma-2-fibre-product-general} から従う．
+$\mathcal{X} \times_{f, \mathcal{Z}, g} \mathcal{Y}$ が $S$ 上の
+代数スタックの $2$-圏における $2$-ファイバー積であることは，
+$S$ 上の代数スタックの $2$-圏が $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $2$-圏の充満 $2$-部分圏であることから形式的に従う．
+\end{proof}
+
+
+
+
+
+
+
+\section{代数スタック再論}
+\label{algebraic-section-overhaul}
+
+\noindent
+代数スタックに関するいくつかの基本的結果を与える．
+
+\begin{lemma}
+\label{algebraic-lemma-lift-morphism-presentations}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$f : \mathcal{X} \to \mathcal{Y}$ を $S$ 上の代数スタックの
+$1$-射とする．
+$V \in \Ob((\Sch/S)_{fppf})$ とする．
+$y : (\Sch/V)_{fppf} \to \mathcal{Y}$ は全射かつ滑らかであるとする．
+このとき，対象 $U \in \Ob((\Sch/S)_{fppf})$ と $2$-可換図式
+$$
+\xymatrix{
+(\Sch/U)_{fppf} \ar[r]_a \ar[d]_x &
+(\Sch/V)_{fppf} \ar[d]^y \\
+\mathcal{X} \ar[r]^f & \mathcal{Y}
+}
+$$
+で，$x$ が全射かつ滑らかなものが存在する．
+\end{lemma}
+
+\begin{proof}
+まず $W \in \Ob((\Sch/S)_{fppf})$ と，全射かつ滑らかな $1$-射
+$z : (\Sch/W)_{fppf} \to \mathcal{X}$ を選ぶ．
+$\mathcal{Y}$ は代数スタックなので，同値
+$$
+j :
+\mathcal{S}_F
+\longrightarrow
+(\Sch/W)_{fppf}
+\times_{f \circ z, \mathcal{Y}, y}
+(\Sch/V)_{fppf}
+$$
+を選べる．ここで $F$ は代数空間である．
+補題 \ref{algebraic-lemma-base-change-representable-transformations-property}
+により，射 $\mathcal{S}_F \to (\Sch/W)_{fppf}$ は $y$ の底変換として
+全射かつ滑らかである．したがって
+補題 \ref{algebraic-lemma-composition-representable-transformations-property}
+により，$\mathcal{S}_F \to \mathcal{X}$ は全射かつ滑らかである．
+対象 $U \in \Ob((\Sch/S)_{fppf})$ と全射エタール射 $U \to F$ を選ぶ．
+ここでもう一度
+補題 \ref{algebraic-lemma-composition-representable-transformations-property}
+を適用すれば，所望の性質が得られる．
+\end{proof}
+
+\noindent
+この補題は命題 \ref{algebraic-proposition-algebraic-stack-no-automorphisms}
+の一般化である．
+
+\begin{lemma}
+\label{algebraic-lemma-characterize-representable-by-algebraic-spaces}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$f : \mathcal{X} \to \mathcal{Y}$ を $S$ 上の代数スタックの
+$1$-射とする．次は同値である：
+\begin{enumerate}
+\item $U \in \Ob((\Sch/S)_{fppf})$ に対し，関手
+$f : \mathcal{X}_U \to \mathcal{Y}_U$ は忠実である，
+\item 関手 $f$ は忠実である，
+\item $f$ は代数空間によって表現可能である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+グルーポイドをファイバーとする圏の $1$-射の一般的性質により，
+(1) と (2) は同値である．
+『圏』の補題 \ref{categories-lemma-equivalence-fibred-categories} を参照せよ．
+補題 \ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+により (3) は (2) を含意する．最後に (2) を仮定する．
+$U$ をスキームとし，$y \in \Ob(\mathcal{Y}_U)$ とする．
+次が $U$ 上の代数空間によって表現可能であることを示せばよい：
+$$
+\mathcal{W} = (\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+$$
+$(\Sch/U)_{fppf}$ は代数スタックなので，
+補題 \ref{algebraic-lemma-2-fibre-product}
+から $\mathcal{W}$ は代数スタックである．一方，$\mathcal{W}$ の対象が
+三つ組 $(V, x, \alpha : y(V) \to f(x))$ として明示的に記述されること，
+および $f$ が忠実であることから，$\mathcal{W}$ のファイバー圏は
+セトイドである．したがって
+命題 \ref{algebraic-proposition-algebraic-stack-no-automorphisms} により，
+$\mathcal{W}$ は代数空間によって表現可能である．
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$u : \mathcal{U} \to \mathcal{X}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの $1$-射とする．もし
+\begin{enumerate}
+\item $\mathcal{U}$ は代数空間によって表現可能であり，
+\item $u$ は代数空間によって表現可能で，全射かつ滑らかである，
+\end{enumerate}
+ならば $\mathcal X$ は $S$ 上の代数スタックである．
+\end{lemma}
+
+\begin{proof}
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$ が
+代数空間によって表現可能であることを示せばよい．
+定義 \ref{algebraic-definition-algebraic-stack} を参照せよ．
+$S$ 上の二つのスキーム $T_1$，$T_2$ に対し，対応する表現可能な
+ファイバー圏を $\mathcal{T}_i = (\Sch/T_i)_{fppf}$ と書く．
+$1$-射 $f_i : \mathcal{T}_i \to \mathcal{X}$ が与えられたとする．
+補題 \ref{algebraic-lemma-representable-diagonal}
+によれば，$2$-ファイバー積 $\mathcal{T}_1 \times_\mathcal{X} \mathcal{T}_2$
+が代数空間によって表現可能であることを示せば十分である．
+『スタック』の補題
+\ref{stacks-lemma-2-fibre-product-stacks-in-setoids-over-stack-in-groupoids}
+により，これはいずれにせよセトイドのスタックである．したがって
+$\mathcal{T}_1 \times_\mathcal{X} \mathcal{T}_2$ は $(\Sch/S)_{fppf}$ 上の
+ある層 $F$ に対応する．
+『スタック』の補題 \ref{stacks-lemma-stack-in-setoids-characterize} を参照せよ．
+$U$ を $\mathcal{U}$ を表現する代数空間とする．仮定により
+$$
+\mathcal{T}_i' = \mathcal{U} \times_{u, \mathcal{X}, f_i} \mathcal{T}_i
+$$
+は $S$ 上の代数空間 $T'_i$ によって表現可能である．したがって
+$\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2'$ は代数空間
+$T'_1 \times_U T'_2$ によって表現可能である．次の可換図式を考える．
+$$
+\xymatrix{
+&
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2 \ar[rr]\ar'[d][dd] & &
+\mathcal{T}_1 \ar[dd] \\
+\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \ar[ur]\ar[rr]\ar[dd] & &
+\mathcal{T}_1' \ar[ur]\ar[dd] \\
+&
+\mathcal{T}_2 \ar'[r][rr] & &
+\mathcal X \\
+\mathcal{T}_2' \ar[rr]\ar[ur] & &
+\mathcal{U} \ar[ur] }
+$$
+この図式では，底面，右面，背面，前面の正方形は $2$-ファイバー積である．
+すると形式的議論により
+$\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \to
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2$ は
+$\mathcal{U} \to \mathcal{X}$ の「底変換」であることが分かる．
+より正確には，図式
+$$
+\xymatrix{
+\mathcal{T}_1' \times_\mathcal{U} \mathcal{T}_2' \ar[d] \ar[r] &
+\mathcal{U} \ar[d] \\
+\mathcal{T}_1 \times_{\mathcal X} \mathcal{T}_2 \ar[r] &
+\mathcal{X}
+}
+$$
+は $2$-ファイバー積の正方形である．
+したがって $T'_1 \times_U T'_2 \to F$ は代数空間によって
+表現可能で，全射かつ滑らかである．
+補題 \ref{algebraic-lemma-map-fibred-setoids-representable-algebraic-spaces},
+\ref{algebraic-lemma-base-change-representable-by-spaces},
+\ref{algebraic-lemma-map-fibred-setoids-property}, および
+\ref{algebraic-lemma-base-change-representable-transformations-property} を参照せよ．
+ゆえに『ブートストラップ』の定理 \ref{bootstrap-theorem-final-bootstrap} により
+$F$ は代数空間であり，所望の結論を得る．
+\end{proof}
+
+\noindent
+補題 \ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+の一つの応用は，代数スタック上の代数空間が代数スタックになることである．
+これは『ブートストラップ』の補題 \ref{bootstrap-lemma-representable-by-spaces-over-space}
+の類似である．実際には，後に『表現可能性の判定条件』の
+補題 \ref{criteria-lemma-algebraic-morphism-to-algebraic}
+で見るように，射 $\mathcal{X} \to \mathcal{Y}$ が「代数的」であると仮定すれば十分である．
+
+\begin{lemma}
+\label{algebraic-lemma-representable-morphism-to-algebraic}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$\mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドのスタックの射とする．次を仮定する：
+\begin{enumerate}
+\item $\mathcal{X} \to \mathcal{Y}$ は代数空間によって表現可能であり，
+\item $\mathcal{Y}$ は $S$ 上の代数スタックである．
+\end{enumerate}
+このとき $\mathcal{X}$ は $S$ 上の代数スタックである．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{V} \to \mathcal{Y}$ を，表現可能なグルーポイドのスタックから
+$\mathcal{Y}$ への全射かつ滑らかな $1$-射とする．これは
+定義 \ref{algebraic-definition-algebraic-stack} により存在する．
+このとき $2$-ファイバー積
+$\mathcal{U} = \mathcal{V} \times_{\mathcal Y} \mathcal X$
+は補題 \ref{algebraic-lemma-base-change-by-space-representable-by-space} により
+代数空間によって表現可能である．$1$-射 $\mathcal{U} \to \mathcal X$ は
+代数空間によって表現可能で，全射かつ滑らかである．
+補題 \ref{algebraic-lemma-base-change-representable-by-spaces} および
+\ref{algebraic-lemma-base-change-representable-transformations-property} を参照せよ．
+補題 \ref{algebraic-lemma-smooth-surjective-morphism-implies-algebraic}
+により，$\mathcal{X}$ は代数スタックである．
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-open-fibred-category-is-algebraic}
+\begin{reference}
+$j$ が単射であるという仮定を除けることは，Matthew Emerton からの
+2016年6月15日付の電子メールで指摘された
+\end{reference}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$j : \mathcal X \to \mathcal Y$ を $(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする．
+$j$ は代数空間によって表現可能であると仮定する．
+このとき，$\mathcal{Y}$ がグルーポイドのスタック
+（それぞれ代数スタック）ならば，$\mathcal{X}$ もそうである．
+\end{lemma}
+
+\begin{proof}
+代数スタックに関する主張は，グルーポイドのスタックに関する主張と
+補題 \ref{algebraic-lemma-representable-morphism-to-algebraic} から従う．
+$j$ が代数空間によって表現可能ならば，$j$ はファイバー圏上で忠実であり，
+各 $U$ および各 $y \in \Ob(\mathcal{Y}_U)$ に対して前層
+$$
+(h : V \to U)
+\longmapsto
+\{(x, \phi) \mid x \in \Ob(\mathcal{X}_V), \phi : h^*y \to f(x)\}/\cong
+$$
+は $U$ 上の代数空間である．
+補題 \ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids} を参照せよ．
+特にこの前層は層であり，結論は
+『スタック』の補題 \ref{stacks-lemma-relative-sheaf-over-stack-is-stack} から従う．
+\end{proof}
+
+
+
+\section{代数スタックから表示へ}
+\label{algebraic-section-stack-to-presentation}
+
+\noindent
+$S$ 上の代数スタックが与えられると，それを随伴する商スタックとしてもつ
+$S$ 上の代数空間のグルーポイドが得られる．
+
+\medskip\noindent
+$(U, R, s, t, c)$ が $S$ 上の代数空間のグルーポイドならば，
+$[U/R]$ はこのデータに随伴する商スタックを表すことを思い出そう．
+『空間のグルーポイド』の
+定義 \ref{spaces-groupoids-definition-quotient-stack} を参照せよ．
+一般に $[U/R]$ は代数スタックで{\bf はない}．特に，次の補題に現れる
+スタック $[U/R]$ は一般には代数的でない．
+
+\begin{lemma}
+\label{algebraic-lemma-map-space-into-stack}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$\mathcal{X}$ を $S$ 上の代数スタックとする．
+$\mathcal{U}$ を，代数空間によって表現可能な $S$ 上の代数スタックとする．
+$f : \mathcal{U} \to \mathcal{X}$ を1-射とする．このとき：
+\begin{enumerate}
+\item $2$-ファイバー積
+$\mathcal{R} = \mathcal{U} \times_{f, \mathcal{X}, f} \mathcal{U}$
+は代数空間によって表現可能である，
+\item 標準的同値
+$$
+\mathcal{U} \times_{f, \mathcal{X}, f} \mathcal{U}
+\times_{f, \mathcal{X}, f} \mathcal{U} =
+\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R},
+$$
+が存在する，
+\item 射影 $\text{pr}_{02}$ は (2) を介して $1$-射
+$$
+\text{pr}_{02} :
+\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}
+\longrightarrow
+\mathcal{R}
+$$
+を誘導する，
+\item $U$，$R$ を $\mathcal{U}, \mathcal{R}$ を表現する代数空間とし，
+$t, s : R \to U$ および $c : R \times_{s, U, t} R \to R$ を，
+上の $1$-射
+$\text{pr}_0, \text{pr}_1 : \mathcal{R} \to \mathcal{U}$
+および
+$\text{pr}_{02} :
+\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R} \to
+\mathcal{R}$ に対応する射とする．このとき5つ組 $(U, R, s, t, c)$ は
+$S$ 上の代数空間のグルーポイドである，
+\item 射 $f$ は $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックの
+標準的な $1$-射
+$f_{can} : [U/R] \to \mathcal{X}$
+を誘導する，
+\item $1$-射 $f_{can} : [U/R] \to \mathcal{X}$ は充満忠実である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明．定義により $\Delta_\mathcal{X}$ は代数空間によって
+表現可能であるから，
+補題 \ref{algebraic-lemma-representable-diagonal}
+を適用すると $\mathcal{U} \to \mathcal{X}$ は代数空間によって
+表現可能である．したがって結果は
+補題 \ref{algebraic-lemma-base-change-by-space-representable-by-space} から従う．
+から従う．
+
+\medskip\noindent
+$T$ を $S$ 上のスキームとする．$2$-ファイバー積の構成
+（『圏』の補題 \ref{categories-lemma-2-product-categories-over-C} を参照）
+により，ファイバー圏 $\mathcal{R}_T$ の対象は三つ組 $(a, b, \alpha)$ である．
+ここで $a, b \in \Ob(\mathcal{U}_T)$ であり，
+$\alpha : f(a) \to f(b)$ はファイバー圏 $\mathcal{X}_T$ における射である．
+
+\medskip\noindent
+(2) の証明．この同値は
+『圏』の補題 \ref{categories-lemma-associativity-2-fibre-product} および
+\ref{categories-lemma-2-fibre-product-erase-factor} を繰り返し適用して得られる．
+$\mathcal{U} \times_\mathcal{X} \mathcal{U} \times_\mathcal{X} \mathcal{U}$
+を
+$(\mathcal{U} \times_\mathcal{X} \mathcal{U})
+\times_\mathcal{X} \mathcal{U}$ と同一視しよう．
+$T$ が $S$ 上のスキームならば，$T$ 上のファイバー圏において，
+この同値は左辺の対象 $((a, b, \alpha), c, \beta)$ を
+右辺の対象 $((a, b, \alpha), (b, c, \beta))$ に写す．
+
+\medskip\noindent
+(3) の証明．$1$-射 $\text{pr}_{02}$ は
+『圏』の補題 \ref{categories-lemma-triple-2-fibre-product-pr02} の証明で構成されている．
+上のファイバー圏の対象の記述によれば，
+$((a, b, \alpha), (b, c, \beta))$ は
+$(a, c, \beta \circ \alpha)$ に写る．
+
+\medskip\noindent
+残念ながら，これはグルーポイドに関するわれわれの規約と
+{\it 整合しない}．その規約では常に $j = (t, s) : R \to U$ とし，
+$R$ の $T$-値点 $r$ を射 $r : s(r) \to t(r)$ と「みなす」からである．
+しかしグルーポイドの反対もグルーポイドなので，これは (4) の証明には
+影響しない．ただし (5) の証明では，下に表示する式に逆射が現れる原因となる．
+
+\medskip\noindent
+(4) の証明．層 $U$ は層 $T \mapsto \Ob(\mathcal{U}_T)/\!\cong$ と同型であり，
+$R$ についても同様であることを思い出そう．
+補題 \ref{algebraic-lemma-characterize-representable-by-space} を参照せよ．
+を参照せよ．
+『圏』の
+補題 \ref{categories-lemma-category-fibred-setoids-presheaves-products}
+から，この記述は $2$-ファイバー積と両立する．したがって
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}$
+と $R \times_{s, U, t} R$ の間にも同様の対応が得られる．
+射 $t, s : R \to U$ と $c : R \times_{s, U, t} R \to R$ は
+一般的な等式 (\ref{algebraic-equation-morphisms-spaces}) から得られる．
+明示的には，これらの写像は $\text{pr}_0$，$\text{pr}_0$，$\text{pr}_{02}$ を
+ファイバー圏の対象の同型類に作用させて得られる関手の変換である．
+したがって，代数空間のグルーポイドが得られることを示すには，
+$S$ 上の任意のスキーム $T$ に対して構造
+$$
+(\Ob(\mathcal{U}_T)/\!\cong,
+\Ob(\mathcal{R}_T)/\!\cong,
+\text{pr}_1, \text{pr}_0, \text{pr}_{02})
+$$
+がグルーポイドであることを示せば十分である．これは上の
+$\mathcal{R}_T$ の対象の記述から明らかである．
+
+\medskip\noindent
+(5) の証明．最終的に
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}
+を適用して関手 $[U/R] \to \mathcal{X}$ を得る．
+$1$-射 $f : \mathcal{U} \to \mathcal{X}$ を考える．
+$\mathcal{R}$ の $2$-ファイバー積としての定義により，$2$-射
+$\tau : f \circ \text{pr}_1 \to f \circ \text{pr}_0$ が存在する．
+すなわち，$\mathcal{R}$ の $T$ 上の対象 $(a, b, \alpha)$ において，
+これは写像 $\alpha^{-1} : b \to a$ である．次を主張する：
+$$
+\tau \circ \text{id}_{\text{pr}_{02}} =
+(\tau \star \text{id}_{\text{pr}_0})
+\circ
+(\tau \star \text{id}_{\text{pr}_1}).
+$$
+この恒等式は，
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}$ の
+$T$ 上の対象 $((a, b, \alpha), (b, c, \beta))$ が与えられたとき，
+$$
+\xymatrix{
+c \ar[r]^{\beta^{-1}} & b \ar[r]^{\alpha^{-1}} & a
+}
+$$
+の合成が射 $(\beta \circ \alpha)^{-1} : a \to c$ と等しいことをいう．
+これは明らかに真なので，主張が成り立つ．このようにして，
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}
+のすべての仮定が，構造
+$(\mathcal{U}, \mathcal{R}, \text{pr}_0, \text{pr}_1, \text{pr}_{02})$
+と $1$-射 $f$ および $2$-射 $\tau$ について満たされることが分かる．
+ただし補題を適用するには，適切な射を備えた構造
+$(\mathcal{S}_U, \mathcal{S}_R, s, t, c)$ についてもこれが成り立つことを
+示す必要がある．
+
+\medskip\noindent
+ここでは，これら二つの間でデータを移す一般的な抽象論による議論が
+あるはずだが，かなり長くなりそうである．そこで次の技巧を用いる．
+$U(T) = \Ob(\mathcal{U}_T)/\!\!\cong$ から得られる標準的同値
+$j : \mathcal{U} \to \mathcal{S}_U$ の擬逆
+$j^{-1} : \mathcal{S}_U \to \mathcal{U}$ を選ぶ．
+これは，任意のスキーム $T/S$ と任意の対象 $a \in \mathcal{U}_T$ に対し，
+その同型類の特定の元，すなわち $j^{-1}(j(a))$ を選んだということである．
+したがって $j^{-1}$ を用いて $\mathcal{S}_U$ を $\mathcal{U}$ の部分圏と
+みなせる．この部分圏を選んだ後，$\mathcal{R}_T$ の対象 $(a, b, \alpha)$ で，
+$a, b$ が $(\mathcal{S}_U)_T$ の対象であるもの，すなわち
+$j^{-1}(j(a)) = a$ および $j^{-1}(j(b)) = b$ を満たすものを考える．
+これらが $\mathcal{R}$ の部分圏をなし，標準的同値
+$\mathcal{R} \to \mathcal{S}_R$ により $\mathcal{S}_R$ へ同型に写ることは
+明らかである．さらにこれは $2$-ファイバー積
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}$
+をとることと明らかに両立する．したがって，$f$ を $\mathcal{S}_U$ に
+制限し，$\tau$ を関手 $\mathcal{S}_R \to \mathcal{X}$ の間の変換に
+制限すればよい．ゆえに
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}
+の表示された等式は成り立つ．実際，部分圏
+$\mathcal{S}_{R \times_{s, U, t} R}$ に制限する前から，これは関手
+$\mathcal{R} \times_{\text{pr}_1, \mathcal{U}, \text{pr}_0} \mathcal{R}
+\to \mathcal{X}$ の変換の等式として成り立っているからである．
+
+\medskip\noindent
+以上により
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}
+が適用でき，所望のスタックの射 $f_{can} : [U/R] \to \mathcal{X}$ を得る．
+この特別な場合に $f_{can}$ がどのように定義されるかを簡単に述べる．
+$\mathcal{S}_U$ の $T$ 上の対象 $a$ に対しては
+$f_{can}(a) = f(a)$ とする．ここで，上で選んだ埋め込みにより
+$\mathcal{S}_U \subset \mathcal{U}$ とみなしている．
+$a, b$ が $\mathcal{S}_U$ の $T$ 上の対象ならば，$[U/R]$ における射
+$\varphi : a \to b$ は定義により，$\mathcal{R}$ の $T$ 上の対象で
+$\varphi = (b, a, \alpha)$ の形のものである（順序が逆であることに注意）．
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-2-coequalizer}
+の証明における規則は
+\begin{equation}
+\label{algebraic-equation-on-morphisms}
+f_{can}(\varphi) = \Big(f(a) \xrightarrow{\alpha^{-1}} f(b)\Big).
+\end{equation}
+である．(6) の証明．$[U/R]$ と $\mathcal{X}$ はいずれもスタックである．
+したがって，スキーム $T/S$ と $[U/R]$ の $T$ 上の対象 $a, b$ が
+与えられると，$(\Sch/T)_{fppf}$ 上の fppf 層の変換
+$$
+\mathit{Isom}(a, b) \longrightarrow \mathit{Isom}(f_{can}(a), f_{can}(b))
+$$
+が得られる．これが同型であることを示せばよい．$T$ 上 fppf 局所的に
+考えてよいので，$a, b$ は射 $a, b : T \to U$ から来ると仮定できる．
+上の埋め込み $\mathcal{S}_U \subset \mathcal{U}$ により，$a, b$ を
+$\mathcal{U}$ の $T$ 上の対象とみなすこともできる．
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-morphisms}
+で見たように，左辺の層は $T$ 上の代数空間
+$$
+R \times_{(t, s), U \times_S U, (b, a)} T
+$$
+によって表現される．一方，『スタック』の補題
+\ref{stacks-lemma-isom-as-2-fibre-product} により，右辺は次の
+セトイドのスタックに随伴する層に等しい：
+$$
+\mathcal{X}
+\times_{\mathcal{X} \times \mathcal{X}, (f \circ b, f \circ a)} T =
+\mathcal{X}
+\times_{\mathcal{X} \times \mathcal{X}, (f, f)}
+(\mathcal{U} \times \mathcal{U})
+\times_{\mathcal{U} \times \mathcal{U}, (b, a)} T =
+\mathcal{R}
+\times_{(\text{pr}_0, \text{pr}_1), \mathcal{U} \times \mathcal{U}, (b, a)} T
+$$
+これは上に表示したファイバー積によって表現可能である．
+これで二つの $\mathit{Isom}$-層が同型であることを示した．われわれの
+$1$-射 $f_{can} : [U/R] \to \mathcal{X}$ は
+式 (\ref{algebraic-equation-on-morphisms}) により，$\mathit{Isom}$-層上で
+この同型を誘導する．
+\end{proof}
+
+\noindent
+上の非常に抽象的な補題を用いて表示を構成できる．
+
+\begin{lemma}
+\label{algebraic-lemma-stack-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$\mathcal{X}$ を $S$ 上の代数スタックとする．
+$U$ を $S$ 上の代数空間とする．
+$f : \mathcal{S}_U \to \mathcal{X}$ を全射かつ滑らかな射とする．
+$(U, R, s, t, c)$ と $f_{can} : [U/R] \to \mathcal{X}$ を，
+$U$ と $f$ に
+補題 \ref{algebraic-lemma-map-space-into-stack}
+を適用して得られる代数空間のグルーポイドおよび射とする．このとき：
+\begin{enumerate}
+\item 射 $s$，$t$ は滑らかであり，
+\item $1$-射 $f_{can} : [U/R] \to \mathcal{X}$ は同値である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+射 $s, t$ は
+補題 \ref{algebraic-lemma-property-morphism-equivalent} および
+\ref{algebraic-lemma-map-presheaves-representable-by-spaces-transformation-property}
+により滑らかである．$1$-射 $f$ は全射かつ滑らかなので，任意のスキーム
+$T$ と任意の対象 $a \in \Ob(\mathcal{X}_T)$ に対し，滑らかかつ全射な射
+$T' \to T$ で，$a|_T'$ が $[U/R]_{T'}$ の対象から来るものが存在することは
+明らかである．$f_{can} : [U/R] \to \mathcal{X}$ は充満忠実であり，
+両辺で対象の降下データが有効なので，$[U/R] \to \mathcal{X}$ は
+本質的全射であると分かる．
+『スタック』の補題 \ref{stacks-lemma-characterize-essentially-surjective-when-ff} を参照せよ．
+\end{proof}
+
+\begin{remark}
+\label{algebraic-remark-flat-fp-presentation}
+もし
+補題 \ref{algebraic-lemma-stack-presentation}
+の射 $f : \mathcal{S}_U \to \mathcal{X}$ に，全射，平坦，有限表示局所的
+であることだけを仮定しても，$f_{can} : [U/R] \to \mathcal{X}$ は
+依然として同値である．この場合，射 $s$，$t$ は平坦かつ有限表示局所的
+であるが，もちろん一般には滑らかではない．
+\end{remark}
+
+\noindent
+補題 \ref{algebraic-lemma-stack-presentation}
+から次の定義が示唆される．
+
+\begin{definition}
+\label{algebraic-definition-smooth-groupoid}
+$S$ をスキームとし，$B$ を $S$ 上の代数空間とする．
+$(U, R, s, t, c)$ を $B$ 上の代数空間のグルーポイドとする．
+$s, t : R \to U$ が代数空間の滑らかな射であるとき，
+$(U, R, s, t, c)$ を {\it 滑らかなグルーポイド}\footnote{この用語は
+やや紛らわしいかもしれない．これは $[U/R]$ が何かの上で滑らかであることを
+含意しない．}という．
+\end{definition}
+
+\begin{definition}
+\label{algebraic-definition-presentation}
+$\mathcal{X}$ を $S$ 上の代数スタックとする．
+$\mathcal{X}$ の {\it 表示}とは，$S$ 上の代数空間の滑らかな
+グルーポイド $(U, R, s, t, c)$ と，同値 $f : [U/R] \to \mathcal{X}$
+からなるデータである．
+\end{definition}
+
+\noindent
+上で，すべての代数スタックが表示をもつことを見た．次の課題は，
+$S$ 上の代数空間の滑らかなグルーポイドがすべて代数スタックを
+生じることを示すことである．
+
+
+\section{滑らかなグルーポイドに随伴する代数スタック}
+\label{algebraic-section-smooth-groupoid-gives-algebraic-stack}
+
+\noindent
+この節では，代数空間の滑らかなグルーポイドから出発し，それに随伴する
+商スタックが代数スタックであることを示す．
+
+\begin{lemma}
+\label{algebraic-lemma-diagonal-quotient-stack}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$(U, R, s, t, c)$ を $S$ 上の代数空間のグルーポイドとする．
+このとき $[U/R]$ の対角射は代数空間によって表現可能である．
+\end{lemma}
+
+\begin{proof}
+$\mathit{Isom}$-層が代数空間であることを示せば十分である．
+補題 \ref{algebraic-lemma-representable-diagonal} を参照せよ．
+これは『ブートストラップ』の補題 \ref{bootstrap-lemma-quotient-stack-isom} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{algebraic-lemma-smooth-quotient-smooth-presentation}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$(U, R, s, t, c)$ を $S$ 上の代数空間の滑らかなグルーポイドとする．
+このとき射 $\mathcal{S}_U \to [U/R]$ は全射かつ滑らかである．
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし，$x : (\Sch/T)_{fppf} \to [U/R]$ を $1$-射とする．
+射影
+$$
+\mathcal{S}_U \times_{[U/R]} (\Sch/T)_{fppf}
+\longrightarrow
+(\Sch/T)_{fppf}
+$$
+が全射かつ滑らかであることを示せばよい．左辺は代数空間 $F$ によって
+表現可能であることがすでに分かっている．
+補題 \ref{algebraic-lemma-diagonal-quotient-stack} および
+\ref{algebraic-lemma-representable-diagonal} を参照せよ．したがって，対応する
+代数空間の射 $F \to T$ が全射かつ滑らかであることを示せばよい．
+代数空間の射の，fppf 位相について終域上局所的な性質を扱っているので，
+$T$ 上 fppf 局所的に確かめてよい．構成により，$T$ の fppf 被覆
+$\{T_i \to T\}$ で，$x|_{(\Sch/T_i)_{fppf}}$ が射 $x_i : T_i \to U$
+から来るものが存在する（$F \times_T T_i$ は $2$-ファイバー積
+$\mathcal{S}_U \times_{[U/R]} (\Sch/T_i)_{fppf}$ を表現するので，
+すべては $T_i \to T$ による底変換と両立することに注意せよ）．
+したがって $x$ は $x : T \to U$ から来ると仮定してよい．この場合，
+$$
+\mathcal{S}_U \times_{[U/R]} (\Sch/T)_{fppf}
+=
+(\mathcal{S}_U \times_{[U/R]} \mathcal{S}_U)
+\times_{\mathcal{S}_U} (\Sch/T)_{fppf}
+=
+\mathcal{S}_R \times_{\mathcal{S}_U} (\Sch/T)_{fppf}
+$$
+を得る．第一の等式は
+『圏』の補題 \ref{categories-lemma-2-fibre-product-erase-factor} により，
+第二の等式は『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-2-cartesian} による．
+最後の $2$-ファイバー積が代数空間 $F = R \times_{s, U, x} T$ によって
+表現されることは明らかであり，射影 $R \times_{s, U, x} T \to T$ は
+代数空間の滑らかな射 $s : R \to U$ の底変換として滑らかである．
+また $s$ は切断（すなわちグルーポイドの恒等射 $e : U \to R$）をもつので
+全射でもある．これで補題が証明された．
+\end{proof}
+
+\noindent
+次がこの節の主結果である．
+
+\begin{theorem}
+\label{algebraic-theorem-smooth-groupoid-gives-algebraic-stack}
+$S$ を $\Sch_{fppf}$ に含まれるスキームとする．
+$(U, R, s, t, c)$ を $S$ 上の代数空間の滑らかなグルーポイドとする．
+このとき商スタック $[U/R]$ は $S$ 上の代数スタックである．
+\end{theorem}
+
+\begin{proof}
+定義 \ref{algebraic-definition-algebraic-stack} の三条件を確かめる．
+構成により $[U/R]$ はグルーポイドのスタックであり，これが第一の条件である．
+
+\medskip\noindent
+第二の条件は，より強い補題 \ref{algebraic-lemma-diagonal-quotient-stack} から従う．
+
+\medskip\noindent
+最後に，$S$ 上のスキーム $W$ と全射かつ滑らかな $1$-射
+$(\Sch/W)_{fppf} \longrightarrow \mathcal{X}$.
+が存在することを示せばよい．まず $W \in \Ob((\Sch/S)_{fppf})$ と
+全射エタール射 $W \to U$ を選ぶ．これは集合をファイバーとする圏の
+全射エタール射 $\mathcal{S}_W \to \mathcal{S}_U$ を与えることに注意せよ．
+補題
+\ref{algebraic-lemma-map-presheaves-representable-by-spaces-transformation-property} を参照せよ．
+もちろんこのとき $\mathcal{S}_W \to \mathcal{S}_U$ は全射かつ滑らかでもある．
+補題 \ref{algebraic-lemma-representable-transformations-property-implication} を参照せよ．
+したがって，
+補題 \ref{algebraic-lemma-smooth-quotient-smooth-presentation} および
+\ref{algebraic-lemma-composition-representable-transformations-property} を組み合わせると，
+$\mathcal{S}_W \to \mathcal{S}_U \to [U/R]$ は全射かつ滑らかである．
+\end{proof}
+
+
+
+
+
+\section{大サイトの変更}
+\label{algebraic-section-change-big-site}
+
+\noindent
+この節では，大サイトを変更したときに何が起こるかを簡単に論じる．
+要点は，大サイトをいつでも自由に拡大できるということである．したがって，
+考えたい任意のスキームの集合が，代数空間を考える大 fppf サイトに
+含まれると仮定してよい．読者にはこの節を読み飛ばすことを勧める．
+
+\medskip\noindent
+スタックの引き戻しは『スタック』の節 \ref{stacks-section-inverse-image}
+で定義されている．
+
+\begin{lemma}
+\label{algebraic-lemma-change-big-site}
+大サイト $\Sch_{fppf}$ と $\Sch'_{fppf}$ が与えられたとする．
+$\Sch_{fppf}$ は $\Sch'_{fppf}$ に含まれると仮定する．
+『位相』の節 \ref{topologies-section-change-alpha} を参照せよ．
+$S$ を $\Sch_{fppf}$ の対象とする．
+$f : (\Sch'/S)_{fppf} \to (\Sch/S)_{fppf}$ を，包含関手
+$u : (\Sch/S)_{fppf} \to (\Sch'/S)_{fppf}$ に対応するサイトの射とする．
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドのスタックとする．
+\begin{enumerate}
+\item $\mathcal{X}$ がある $X \in \Ob((\Sch/S)_{fppf})$ によって
+表現可能ならば，$f^{-1}\mathcal{X}$ も表現可能である．実際，これは同じ
+スキーム $X$ を今度は $(\Sch'/S)_{fppf}$ の対象とみなしたものによって
+表現可能である，
+\item $\mathcal{X}$ が，代数空間である $F \in \Sh((\Sch/S)_{fppf})$
+によって表現可能ならば，$f^{-1}\mathcal{X}$ は代数空間 $f^{-1}F$
+によって表現可能である，
+\item $\mathcal{X}$ が代数スタックならば，$f^{-1}\mathcal{X}$ も
+代数スタックである，
+\item $\mathcal{X}$ が Deligne--Mumford スタックならば，
+$f^{-1}\mathcal{X}$ も Deligne--Mumford スタックである．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) を証明しよう．
+補題 \ref{algebraic-lemma-stack-presentation}
+により，ある代数空間の滑らかなグルーポイド $(U, R, s, t, c)$ を用いて
+$\mathcal{X} = [U/R]$ と書ける．
+『空間のグルーポイド』の
+補題 \ref{spaces-groupoids-lemma-quotient-stack-change-big-site}
+により $f^{-1}[U/R] = [f^{-1}U/f^{-1}R]$ である．もちろん
+$(f^{-1}U, f^{-1}R, f^{-1}s, f^{-1}t, f^{-1}c)$ も
+代数空間の滑らかなグルーポイドである．これで (3) が証明された．
+
+\medskip\noindent
+他の各場合 (1)，(2)，(4) は，$\mathcal{X}$ が特定の種類の表示 $[U/R]$
+をもつことを意味する．したがってこれは
+$f^{-1}\mathcal{X} = [f^{-1}U/f^{-1}R]$ に対する同じ種類の表示に移る．
+これで補題が証明された．
+\end{proof}
+
+\noindent
+大きい方のサイト上の代数空間を制限したものが，小さい方のサイト上の
+代数空間になるとは（一般には）限らない（単に濃度の理由による）．
+したがって，この種の簡単な補題は基礎圏を拡大するためにしか使えず，
+縮小するためには使えない．
+
+\begin{lemma}
+\label{algebraic-lemma-fully-faithful}
+$\Sch_{fppf}$ は $\Sch'_{fppf}$ に含まれるとする．
+$S$ を $\Sch_{fppf}$ の対象とする．$\Sch_{fppf}$ を用いて定義した
+$S$ 上の代数スタックの $2$-圏を $\textit{Algebraic-Stacks}/S$ と書く．
+同様に，$\Sch'_{fppf}$ を用いて定義した $S$ 上の代数スタックの $2$-圏を
+$\textit{Algebraic-Stacks}'/S$ と書く．
+補題 \ref{algebraic-lemma-change-big-site} の規則
+$\mathcal{X} \mapsto f^{-1}\mathcal{X}$ は $2$-圏の関手
+$$
+\textit{Algebraic-Stacks}/S \longrightarrow \textit{Algebraic-Stacks}'/S
+$$
+を定め，任意の $\textit{Algebraic-Stacks}/S$ の対象
+$\mathcal{X}, \mathcal{Y}$ に対し，射の圏の同値
+$$
+\Mor_{\textit{Algebraic-Stacks}/S}(\mathcal{X}, \mathcal{Y})
+\longrightarrow
+\Mor_{\textit{Algebraic-Stacks}'/S}(f^{-1}\mathcal{X}, f^{-1}\mathcal{Y})
+$$
+を定める．$\textit{Algebraic-Stacks}'/S$ の対象 $\mathcal{X}'$ が，
+$\textit{Algebraic-Stacks}/S$ のある $\mathcal{X}$ に対する
+$f^{-1}\mathcal{X}$ と同値であるための必要十分条件は，
+$\mathcal{X} = [U'/R']$ という表示をもち，$U', R'$ が，ある
+$U, R \in \textit{Spaces}/S$ に対する $f^{-1}U$，$f^{-1}R$
+とそれぞれ同型であることである．
+\end{lemma}
+
+\begin{proof}
+射の圏に関する主張は，より一般的な
+『スタック』の補題 \ref{stacks-lemma-bigger-site} の帰結である．
+「本質的像」の特徴づけは，補題 \ref{algebraic-lemma-change-big-site} の証明における
+$f^{-1}$ の記述から従う．
+\end{proof}
+
+
+\section{基礎スキームの変更}
+\label{algebraic-section-change-base-scheme}
+
+\noindent
+この節では，基礎スキームを変更したときに何が起こるかを簡単に論じる．
+要点は，基礎スキームの射 $S \to S'$ が与えられると，$S$ 上の任意の
+代数スタックを $S'$ 上の代数スタックとみなせるということである．
+
+\begin{lemma}
+\label{algebraic-lemma-category-of-spaces-over-smaller-base-scheme}
+大 fppf サイトを $\Sch_{fppf}$ とする．
+$S \to S'$ をこのサイトの射とする．
+『スタック』の節 \ref{stacks-section-localize}
+の構成 A と B は，$2$-圏の同型
+$$
+\left\{
+\begin{matrix}
+S\text{ 上の代数スタック }\mathcal{X}\text{ の}\\
+2\text{-圏}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+S'\text{ 上の代数スタック }\mathcal{X}'\text{ と，}\\
+S'\text{ 上の代数スタックの射}\\
+f : \mathcal{X}' \to (\Sch/S)_{fppf}\\
+\text{からなる組 }(\mathcal{X}', f)\text{ の }2\text{-圏}
+\end{matrix}
+\right\}
+$$
+を与える．
+\end{lemma}
+
+\begin{proof}
+関手
+$j : (\Sch/S)_{fppf} \to (\Sch/S')_{fppf}$
+は $(\Sch/S')_{fppf}$ の対象 $S/S'$ に随伴する局所化関手なので，
+この主張には意味がある．
+『スタック』の補題 \ref{stacks-lemma-localize-stacks}
+により，示すべきことは構成 A と B が代数スタックの部分圏を保つことだけである．
+例えば，$\mathcal{X} = [U/R]$ ならば，$\mathcal{X}$ に構成 A を適用して
+得られるのは単に $\mathcal{X}' = \mathcal{X}$ である．逆に，
+$\mathcal{X}' = [U'/R']$ ならば，射 $p$ は代数空間の射
+$U' \to S$ と $R' \to S$ を誘導し，$\mathcal{X} = [U'/R']$ となる．
+ただし今度はこれを $S$ 上のスタックとみなす．したがって補題は明らかである．
+\end{proof}
+
+\begin{definition}
+\label{algebraic-definition-viewed-as}
+大 fppf サイトを $\Sch_{fppf}$ とする．
+$S \to S'$ をこのサイトの射とする．
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ が $S$ 上の代数スタックならば，
+$\mathcal{X}$ を{\it $S'$ 上の代数スタックとみなしたもの}とは，代数スタック
+$$
+\mathcal{X} \longrightarrow (\Sch/S')_{fppf}
+$$
+であって，$\mathcal{X}$ に
+補題 \ref{algebraic-lemma-category-of-spaces-over-smaller-base-scheme}
+の構成 A を適用して得られるものをいう．
+\end{definition}
+
+\noindent
+逆に，$S'$ 上の代数スタック $\mathcal{X}'$ から出発して，$S$ 上の
+代数スタックを得たいとする．このとき $2$-ファイバー積
+$$
+\mathcal{X}'_S
+=
+(\Sch/S)_{fppf} \times_{(\Sch/S')_{fppf}} \mathcal{X}'
+$$
+を考える．これは補題 \ref{algebraic-lemma-2-fibre-product} により $S'$ 上の
+代数スタックである．さらに，これは自然な $1$-射
+$p : \mathcal{X}'_S \to (\Sch/S)_{fppf}$ を備えるので，
+補題 \ref{algebraic-lemma-category-of-spaces-over-smaller-base-scheme}
+により，標準的に $S$ 上の代数スタックに対応する．
+
+\begin{definition}
+\label{algebraic-definition-change-of-base}
+大 fppf サイトを $\Sch_{fppf}$ とする．
+$S \to S'$ をこのサイトの射とする．
+$\mathcal{X}'$ を $S'$ 上の代数スタックとする．
+$\mathcal{X}'$ の{\it 底変換}とは，上で述べた $S$ 上の代数スタック
+$\mathcal{X}'_S$ をいう．
+\end{definition}

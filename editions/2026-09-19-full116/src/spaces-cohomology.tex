@@ -1,0 +1,4290 @@
+% Generated mechanically from frozen input inputs/p09/ja/src/spaces-cohomology.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{68}
+\chapter{代数空間のコホモロジー}
+
+
+\phantomsection
+\label{spaces-cohomology-section-phantom}
+
+
+
+
+
+\section{はじめに}
+\label{spaces-cohomology-section-introduction}
+
+\noindent
+本章では代数空間のコホモロジーを扱う。
+可換層のコホモロジーについてもいくつかの結果を証明するが、
+主眼は準連接層のコホモロジーにある。すなわち、
+「スキームのコホモロジー」の章にある諸結果の類似を証明する。
+本章の結果の一部は \cite{Kn} に見いだすことができる。
+
+\medskip\noindent
+本章に欠けている重要な道具は
+{\it 帰納原理}、すなわち準コンパクトかつ準分離な代数空間に対する
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-induction-principle} の類似である。
+これは Derived Categories of Spaces, Section
+\ref{spaces-perfect-section-induction} において正確に定式化され、
+詳しく証明されている。本章では帰納原理の代わりに、
+Section \ref{spaces-cohomology-section-alternating-cech} の交代 {\v C}ech 複体を用いる。
+これは Proposition \ref{spaces-cohomology-proposition-vanishing} のような
+消滅命題を証明するために設計されたものだが、場合によっては
+帰納原理の方が強力で、またおそらくより「標準的」な道具である。
+本節の内容をいくらか読んだ後で、帰納原理にも目を通すことを勧める。
+
+
+
+\section{規約}
+\label{spaces-cohomology-section-conventions}
+
+\noindent
+すべてのスキームは大 fppf サイト $\Sch_{fppf}$ に含まれるものと
+常に仮定する。また、考えるすべての環 $A$ は、
+$\Spec(A)$ がこの大サイトの対象と（同型を除いて）一致するという
+性質をもつものとする。
+
+\medskip\noindent
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+本章および後続の章では、$X \times_S X$ と書いて
+$X$ と自身との積（$S$ 上の代数空間の圏における積）を表し、
+$X \times X$ とは書かない。
+
+
+
+
+
+
+\section{高次順像}
+\label{spaces-cohomology-section-higher-direct-image}
+
+\noindent
+$S$ をスキームとする。$X$ を $S$ 上の表現可能な代数空間とする。
+$\mathcal{F}$ を $X$ 上の準連接加群とする（
+Properties of Spaces, Section
+\ref{spaces-properties-section-quasi-coherent} を参照）。
+Descent, Proposition
+\ref{descent-proposition-same-cohomology-quasi-coherent} により、
+コホモロジー群 $H^i(X, \mathcal{F})$ は、
+$X$ を表現するスキーム上の対応する準連接加群について
+Zariski 位相で計算した通常のコホモロジー群と一致する。
+
+\medskip\noindent
+より一般に、$f : X \to Y$ を、表現可能な代数空間 $X$ と $Y$ の間の
+準コンパクトかつ準分離な射とする。
+$\mathcal{F}$ を $X$ 上の準連接加群とする。
+Descent, Lemma
+\ref{descent-lemma-higher-direct-images-small-etale} により、
+層 $R^if_*\mathcal{F}$ は、$X$ を表現するスキーム上の準連接加群から、
+$Y$ を表現するスキームへの射について Zariski 位相で計算した
+通常の高次順像と一致する。
+
+\medskip\noindent
+さらに一般に、$f : X \to Y$ を $S$ 上の代数空間の
+表現可能、準コンパクトかつ準分離な射とする。
+$V$ をスキームとし、$V \to Y$ をエタール全射とする。
+$U = V \times_Y X$ とおき、$f' : U \to V$ を $f$ の基底変換とする。
+このとき任意の準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して
+\begin{equation}
+\label{spaces-cohomology-equation-representable-higher-direct-image}
+R^if'_*(\mathcal{F}|_U) = (R^if_*\mathcal{F})|_V
+\end{equation}
+が成り立つ。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}
+を参照せよ。また $f' : U \to V$ はスキームの準コンパクトかつ
+準分離な射なので、前段落の注意により、
+$R^if'_*(\mathcal{F}|_U)$ は、$\mathcal{F}|_U$ を
+スキーム $U$ 上の準連接層、$f'$ をスキームの射とみなして
+計算できる。
+以下では、この事実を断りなくしばしば用いる。
+
+\medskip\noindent
+次に、代数空間の任意の準コンパクトかつ準分離な射について、
+準連接層の高次順像が準連接であることを証明する。
+証明では一つの技巧を用いる。「よりよい」証明では、
+Sheaves on Stacks, Sections
+\ref{stacks-sheaves-section-cech} および
+\ref{stacks-sheaves-section-sheaf-cech-complex} 以下で論じられる
+相対 {\v C}ech 複体を用いるであろう。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-higher-direct-image}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ が準コンパクトかつ準分離ならば、$R^if_*$ は
+準連接 $\mathcal{O}_X$-加群を
+準連接 $\mathcal{O}_Y$-加群に移す。
+\end{lemma}
+
+\begin{proof}
+エタール射 $V \to Y$ で、$V$ がアフィンスキームであるものをとる。
+$U = V \times_Y X$ とおき、誘導される射を $f' : U \to V$ と書く。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}
+により
+$R^if'_*(\mathcal{F}|_U) = (R^if_*\mathcal{F})|_V$
+である。準連接加群であるという性質は $Y$ のエタール位相に関して
+局所的なので（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent} を参照）、
+$Y$ を $V$ で置き換えてよい。すなわち、
+$Y$ はアフィンスキームであると仮定してよい。
+
+\medskip\noindent
+$Y$ がアフィンであると仮定する。$f$ は準コンパクトなので
+$X$ は準コンパクトである。したがって、アフィンスキーム $U$ と
+エタール全射 $g : U \to X$ を選ぶことができる。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照せよ。
+図式は
+$$
+\xymatrix{
+U \ar[r]_g \ar[rd]_{f \circ g} & X \ar[d]^f \\
+& Y
+}
+$$
+である。射 $g : U \to X$ は、$X$ が準分離であるため表現可能、
+分離かつ準コンパクトである。したがって補題は $g$ に対して成り立つ
+（補題の前の議論による）。また $f \circ g : U \to Y$ に対しても
+成り立つ（これはアフィンスキームの射だからである）。
+
+\medskip\noindent
+前段落の状況で、$n$ に関する帰納法により次の $IH_n$ を示す：
+$\mathcal{F}$ を $X$ 上の任意の準連接層とすると、層
+$R^if\mathcal{F}$ は $i \leq n$ に対して準連接である。
+$n = 0$ の場合は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward} から従う。
+$IH_n$ を仮定する。以下では $IH_{n + 1}$ が成り立つことを示す。
+
+\medskip\noindent
+$\mathcal{H}$ を準連接 $\mathcal{O}_U$-加群とする。
+Leray スペクトル系列
+$$
+E_2^{p, q} = R^pf_* R^qg_* \mathcal{H}
+\Rightarrow
+R^{p + q}(f \circ g)_*\mathcal{H}
+$$
+を考える（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray}）。
+$R^qg_*\mathcal{H}$ は $IH_n$ により準連接なので、
+すべての層 $R^pf_*R^qg_*\mathcal{H}$ は、
+$p \leq n$ ならば準連接である。
+層 $R^{p + q}(f \circ g)_*\mathcal{H}$ はすべて準連接である
+（実際には $p + q > 0$ なら零だが、これは必要ない）。
+次数 $\leq n + 1$ を見ると、準連接であることがまだ分からない
+唯一の加群は
+$E_2^{n + 1, 0} = R^{n + 1}f_*g_*\mathcal{H}$ である。
+さらに、微分
+$d_r^{n + 1, 0} : E_r^{n + 1, 0} \to E_r^{n + 1 + r, 1 - r}$
+の標的は零なので、これらは零である。
+$\QCoh(\mathcal{O}_X)$ が
+$\textit{Mod}(\mathcal{O}_X)$ の弱 Serre 部分圏であること
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent}）を用いると、
+$R^{n + 1}f_*g_*\mathcal{H}$ が準連接であると分かる
+（詳細は省略する）。
+
+\medskip\noindent
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{H} = g^*\mathcal{F}$ とおく。
+随伴写像 $\mathcal{F} \to g_*g^*\mathcal{F} = g_*\mathcal{H}$ は、
+$U \to X$ がエタール全射なので単射である。
+完全列
+$$
+0 \to \mathcal{F} \to g_*\mathcal{H} \to \mathcal{G} \to 0
+$$
+を考える。ここで $\mathcal{G}$ は最初の写像の余核であり、
+特に準連接である。長完全コホモロジー列を適用すると
+$$
+R^nf_*g_*\mathcal{H} \to
+R^nf_*\mathcal{G} \to
+R^{n + 1}f_*\mathcal{F} \to
+R^{n + 1}f_*g_*\mathcal{H} \to
+R^{n + 1}f_*\mathcal{G}
+$$
+を得る。最初の矢印の余核は準連接であり、上で
+$R^{n + 1}f_*g_*\mathcal{H}$ が準連接であることを見た。
+したがって $R^{n + 1}f_*\mathcal{F}$ は $2$ 段のフィルトレーションを
+もち、その第一段階は準連接で、第二段階は準連接層の部分加群である。
+$\mathcal{F}$ は任意の準連接 $\mathcal{O}_X$-加群なので、
+この結果は $\mathcal{G}$ に対しても成り立つ。
+ゆえに
+$0 \to \mathcal{A} \to R^{n + 1}f_*\mathcal{G} \to \mathcal{B}$
+という完全列で、$\mathcal{A}$ と $\mathcal{B}$ が準連接
+$\mathcal{O}_Y$-加群となるものを選べる。
+このとき、核 $\mathcal{K}$、すなわち
+$R^{n + 1}f_*g_*\mathcal{H} \to R^{n + 1}f_*\mathcal{G}
+\to \mathcal{B}$ の核は準連接である。そこで写像
+$\mathcal{K} \to \mathcal{A}$ が得られ、その核
+$\mathcal{K}'$ も準連接である。従って
+$R^{n + 1}f_*\mathcal{F}$ は完全列
+$$
+R^nf_*g_*\mathcal{H} \to
+R^nf_*\mathcal{G} \to
+R^{n + 1}f_*\mathcal{F} \to \mathcal{K}' \to 0
+$$
+に入り、ここに現れる加群は
+$R^{n + 1}f_*\mathcal{F}$ を除いてすべて準連接である。
+以上から $R^{n + 1}f_*\mathcal{F}$ も準連接、すなわち
+$IH_{n + 1}$ が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-quasi-coherence-higher-direct-images-application}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+準分離かつ準コンパクトな射とする。任意の準連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ と、$V$ を
+$Y_\etale$ の任意のアフィン対象としたものに対し、
+$$
+H^q(V \times_Y X, \mathcal{F}) = H^0(V, R^qf_*\mathcal{F})
+$$
+がすべての $q \in \mathbf{Z}$ について成り立つ。
+\end{lemma}
+
+\begin{proof}
+$Rf_*$ の形成はエタール局所化と可換なので
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}）、
+$Y$ を $V$ で置き換え、$Y = V$ がアフィンであると仮定してよい。
+$E_2^{p, q} = H^p(Y, R^qf_*\mathcal{F})$ から
+$H^{p + q}(X, \mathcal{F})$ に収束する Leray スペクトル系列を
+考える。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-Leray} を参照せよ。
+Lemma \ref{spaces-cohomology-lemma-higher-direct-image} により、層
+$R^qf_*\mathcal{F}$ は準連接である。Cohomology of Schemes,
+Lemma \ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}
+により、$E_2^{p, q} = 0$ が $p > 0$ のとき成り立つ。
+したがってスペクトル系列は $E_2$ で退化し、主張が従う。
+\end{proof}
+
+
+
+
+\section{有限射}
+\label{spaces-cohomology-section-finite-morphisms}
+
+\noindent
+以下に、すべての可換層に対して成り立つ結果をいくつか挙げる
+（従って、特に準連接加群に対しても成り立つ）。
+これらの補題はスキームの有限射と Zariski 位相に対しては
+成り立たないことを、読者に{\bf 注意}しておく。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-finite-higher-direct-image-zero}
+$S$ をスキームとする。$f : X \to Y$ を代数空間の整射
+（例えば有限射）とする。このとき
+$f_* : \textit{Ab}(X_\etale) \to \textit{Ab}(Y_\etale)$
+は完全関手であり、$R^pf_* = 0$ が $p > 0$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change}
+により、高次順像は $Y$ のエタール被覆上で計算してよい。
+従って $Y$ はスキームであると仮定してよい。すると
+$X$ もスキームである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-local}）。
+この場合、\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-what-integral} を適用できる。
+有限の場合には、より技術的でない
+\'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-finite-higher-direct-image-zero}
+を参照するのもよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-stalk-push-finite}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+有限射とする。$\overline{y}$ を $Y$ の幾何学的点とし、その持ち上げ
+$\overline{x}_1, \ldots, \overline{x}_n$ が $X$ にあるとする。このとき
+$$
+(f_*\mathcal{F})_{\overline{y}} =
+\prod\nolimits_{i = 1, \ldots, n}
+\mathcal{F}_{\overline{x}_i}
+$$
+が、$\mathcal{F}$ を $X_\etale$ 上の任意の層とすると成り立つ。
+\end{lemma}
+
+\begin{proof}
+エタール近傍 $(V, \overline{v})$ を $\overline{y}$ に対して選ぶ。
+このとき茎 $(f_*\mathcal{F})_{\overline{y}}$ は、
+$f_*\mathcal{F}|_V$ の $\overline{v}$ における茎である。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change}
+により、$Y$ を $V$ で、$X$ を $X \times_Y V$ で置き換えてよい。
+すると $Z \to X$ はスキームの有限射であり、主張は
+\'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-finite-higher-direct-image-zero}
+である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-finite-rings}
+$S$ をスキームとする。$\pi : X \to Y$ を $S$ 上の代数空間の
+有限射とする。$\mathcal{A}$ を $X_\etale$ 上の環の層とする。
+$\mathcal{B}$ を $Y_\etale$ 上の環の層とする。
+$\varphi : \mathcal{B} \to \pi_*\mathcal{A}$ を環の層の準同型とし、
+これによって環付きトポスの射
+$$
+f = (\pi, \varphi) :
+(\Sh(X_\etale), \mathcal{A})
+\longrightarrow
+(\Sh(Y_\etale), \mathcal{B}).
+$$
+が得られるものとする。$\mathcal{A}$-加群の層 $\mathcal{F}$ と
+$\mathcal{B}$-加群の層 $\mathcal{G}$ に対して、標準写像
+$$
+\mathcal{G} \otimes_\mathcal{B} f_*\mathcal{F}
+\longrightarrow
+f_*(f^*\mathcal{G} \otimes_\mathcal{A} \mathcal{F}).
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+この写像は、写像
+$$
+f^*\mathcal{G} \otimes_\mathcal{A}
+f^* f_*\mathcal{F} =
+f^*(\mathcal{G} \otimes_\mathcal{B} f_*\mathcal{F})
+\longrightarrow
+f^*\mathcal{G} \otimes_\mathcal{A} \mathcal{F}
+$$
+に随伴する写像である。ここで後者は
+$\text{id} : f^*\mathcal{G} \to f^*\mathcal{G}$ と
+随伴写像 $f^* f_*\mathcal{F} \to \mathcal{F}$ から得られる。
+この写像が同型であることは、茎で確認すればよい
+（Properties of Spaces, Theorem
+\ref{spaces-properties-theorem-exactness-stalks}）。
+$\overline{y}$ を $Y$ の幾何学的点とし、
+$\overline{x}_1, \ldots, \overline{x}_n$ を $X$ の幾何学的点で
+$\overline{y}$ の上にあるものとする。
+写像が茎にどのように作用するかを書き下すと、示すべきことは
+$$
+\mathcal{G}_{\overline{y}}
+\otimes_{\mathcal{B}_{\overline{y}}}
+\left(
+\bigoplus\nolimits_{i = 1, \ldots, n} \mathcal{F}_{\overline{x}_i}
+\right) =
+\bigoplus\nolimits_{i = 1, \ldots, n}
+(\mathcal{G}_{\overline{y}}
+\otimes_{\mathcal{B}_{\overline{x}}}
+\mathcal{A}_{\overline{x}_i}) \otimes_{\mathcal{A}_{\overline{x}_i}}
+\mathcal{F}_{\overline{x}_i}
+$$
+であり、これは成り立つ。ここでは、テンソル積をとることが
+茎をとることと可換であること、引き戻しにおける茎の振る舞い
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-pullback}）、および閉埋め込みに沿う
+順像における茎の振る舞い（Lemma \ref{spaces-cohomology-lemma-stalk-push-finite}）
+を用いた。
+\end{proof}
+
+\noindent
+本節の最後に、有限射に対する途方もなく一般的な射影公式を述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-projection-formula-finite}
+Lemma \ref{spaces-cohomology-lemma-finite-rings} と同じ
+$S$, $X$, $Y$, $\pi$, $\mathcal{A}$, $\mathcal{B}$, $\varphi$, $f$
+に対して
+$$
+K \otimes_\mathcal{B}^\mathbf{L} Rf_*M =
+Rf_*(Lf^*K \otimes_\mathcal{A}^\mathbf{L} M)
+$$
+が $D(\mathcal{B})$ において、任意の $K \in D(\mathcal{B})$ と
+$M \in D(\mathcal{A})$ に対し成り立つ。
+\end{lemma}
+
+\begin{proof}
+$f_*$ は完全なので（Lemma
+\ref{spaces-cohomology-lemma-finite-higher-direct-image-zero}）、関手 $Rf_*$ は
+任意の代表複体に $f_*$ を適用することで計算される。
+$\mathcal{K}^\bullet$ を $\mathcal{B}$-加群の複体で $K$ を表現し、
+各項が平坦かつ K-flat なものとして選ぶ。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-K-flat-resolution} を参照せよ。
+このとき $f^*\mathcal{K}^\bullet$ も各項が平坦かつ K-flat である。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pullback-K-flat} を参照せよ。
+$\mathcal{M}^\bullet$ を $\mathcal{A}$-加群の任意の複体で
+$M$ を表現するものとして選ぶ。このとき示すべきことは
+$$
+\text{Tot}(\mathcal{K}^\bullet \otimes_\mathcal{B} f_*\mathcal{M}^\bullet)
+=
+f_*\text{Tot}(f^*\mathcal{K}^\bullet \otimes_\mathcal{A} \mathcal{M}^\bullet)
+$$
+である。実際、選び方により、これらの複体は補題の公式の
+右辺と左辺を表現する。
+$f_*$ は直和と可換するので（例えば Lemma
+\ref{spaces-cohomology-lemma-stalk-push-finite} の茎の記述による）、
+これは等式
+$$
+\mathcal{K}^n \otimes_\mathcal{B} f_*\mathcal{M}^m
+=
+f_*(f^*\mathcal{K}^n \otimes_\mathcal{A} \mathcal{M}^m)
+$$
+に帰着するが、これは Lemma \ref{spaces-cohomology-lemma-finite-rings} により成り立つ。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{余極限とコホモロジー}
+\label{spaces-cohomology-section-colimits}
+
+\noindent
+次の補題は、特に準連接層の図式に適用できる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-colimits}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$X$ が準コンパクトかつ準分離ならば、
+$$
+\colim_i H^p(X, \mathcal{F}_i)
+\longrightarrow
+H^p(X, \colim_i \mathcal{F}_i)
+$$
+は、$X_\etale$ 上の可換層の任意のフィルター付き図式に対して
+同型である。
+\end{lemma}
+
+\begin{proof}
+これは Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-colim-works-over-collection} から従う。
+実際、$\mathcal{B} \subset \Ob(X_{spaces, \etale})$ を、
+$X$ 上エタールな準コンパクトかつ準分離な空間の集合とする。
+$U \in \mathcal{B}$ ならば、$U$ は準コンパクトなので、
+有限被覆 $\{U_i \to U\}$ で $U_i \in \mathcal{B}$ となるもの全体は、
+$U$ の $X_{spaces, \etale}$ における被覆全体の集合の中で
+共終であることに注意する。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}
+により、集合 $\mathcal{B}$ は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-colim-works-over-collection}
+の仮定をすべて満たす。$X \in \mathcal{B}$ なので主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-colimit-cohomology}
+\begin{slogan}
+qcqs 射の高次順像は、層のフィルター付き余極限と可換する。
+\end{slogan}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+準コンパクトかつ準分離な射とする。
+$\mathcal{F} = \colim \mathcal{F}_i$ を $X_\etale$ 上の
+可換層のフィルター付き余極限とする。このとき任意の
+$p \geq 0$ に対して
+$$
+R^pf_*\mathcal{F} = \colim R^pf_*\mathcal{F}_i.
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+トポスの射 $f_{small} : X_{small} \to Y_{small}$ は、サイトの射
+$f_{spaces, \etale} : X_{spaces, \etale} \to Y_{spaces, \etale}$
+から生じ、この射は連続関手 $V \longmapsto X \times_Y V$ に
+対応することを用いる。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-functoriality-etale-site} を参照せよ。
+このサイトの射に Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-image-colimit}
+を適用する。$Y_{spaces, \etale}$ の各対象はアフィン対象による
+被覆をもつので、$V$ がアフィンで $Y$ 上エタールならば
+$H^p(X \times_Y V, \mathcal{F}) =
+\colim H^p(X \times_Y V, \mathcal{F}_i)$
+であることを示せば十分である。
+$V$ はアフィンなので、代数空間 $X \times_Y V$ は
+準コンパクトかつ準分離である。従って Lemma
+\ref{spaces-cohomology-lemma-colimits} を適用して結論を得る。
+\end{proof}
+
+\noindent
+次の補題は、有限表示加群が準コンパクトかつ準分離な代数空間で
+期待どおりに振る舞うことを述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-finite-presentation-quasi-compact-colimit}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ
+準分離な代数空間とする。$I$ を有向集合とし、
+$(\mathcal{F}_i, \varphi_{ii'})$ を $I$ 上の
+$\mathcal{O}_X$-加群の系とする。$\mathcal{G}$ を
+有限表示 $\mathcal{O}_X$-加群とする。このとき
+$$
+\colim_i \Hom_X(\mathcal{G}, \mathcal{F}_i)
+=
+\Hom_X(\mathcal{G}, \colim_i \mathcal{F}_i).
+$$
+である。特に、$\Hom_X(\mathcal{G}, -)$ は
+$\QCoh(\mathcal{O}_X)$ におけるフィルター付き余極限と可換する。
+\end{lemma}
+
+\begin{proof}
+表示された等式は Modules on Sites, Lemma
+\ref{sites-modules-lemma-finite-presentation-quasi-compact-colimit}
+の特別な場合である。これを適用するには、サイト $X_\etale$ に対する
+Sites, Lemma \ref{sites-lemma-directed-colimits-global-sections}
+の part (4) の仮定を確認する必要がある。
+そのために Sites, Remark
+\ref{sites-remark-stronger-conditions} の
+(2)(a), (2)(b), (2)(c) を確認する。
+すなわち、$\mathcal{B} \subset \Ob(X_\etale)$ を
+アフィン対象の集合とする。このとき
+\begin{enumerate}
+\item $X$ は準コンパクトなので、$U \in \mathcal{B}$ で
+$U \to X$ が全射となるものが存在する
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}）。
+従って $h_U^\# \to *$ は全射である。
+\item $U \in \mathcal{B}$ に対し、任意のエタール被覆
+$\{U_i \to U\}_{i \in I}$（$U$ の被覆）は、有限エタール被覆
+$\{U_j \to U\}_{j = 1, \ldots, m}$ で $U_j \in \mathcal{B}$ となるものにより細分される
+（Topologies, Lemma \ref{topologies-lemma-etale-affine}）。
+\item $U, U' \in \Ob(X_\etale)$ に対して
+$h_U^\# \times h_{U'}^\# = h_{U \times_X U'}^\#$ である。
+$U, U' \in \mathcal{B}$ ならば、$U \times_X U'$ は
+$X$ が準分離なので準コンパクトである。例えば
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}
+を参照せよ。従って、エタール全射 $U'' \to U \times_X U'$ で
+$U'' \in \mathcal{B}$ となるものを見つけることができる
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}）。
+言い換えると、写像 $U'' \to U$ と $U'' \to U'$ で、
+写像 $h_{U''}^\# \to h_U^\# \times h_{u'}^\#$ が
+全射となるものが存在する。
+\end{enumerate}
+最後の主張については、包含関手
+$\QCoh(\mathcal{O}_X) \to \textit{Mod}(\mathcal{O}_X)$
+が余極限と可換し、有限表示加群が準連接であることに注意すればよい。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent} を参照せよ。
+\end{proof}
+
+
+
+
+\section{交代 {\v C}ech 複体}
+\label{spaces-cohomology-section-alternating-cech}
+
+\noindent
+$S$ をスキームとする。$f : U \to X$ を $S$ 上の代数空間の
+エタール射とする。関手
+$$
+j : U_{spaces, \etale} \longrightarrow X_{spaces, \etale},\quad
+V/U \longmapsto V/X
+$$
+は、$U_{spaces, \etale}$ と局所化
+$X_{spaces, \etale}/U$ との圏同値を誘導する。
+Properties of Spaces, Section
+\ref{spaces-properties-section-localize} を参照せよ。
+従って、関手
+$$
+f_! : \textit{Ab}(U_\etale) \longrightarrow
+\textit{Ab}(X_\etale),\quad
+f_! : \textit{Mod}(\mathcal{O}_U) \longrightarrow \textit{Mod}(\mathcal{O}_X),
+$$
+で、
+$$
+f^{-1} : \textit{Ab}(X_\etale) \longrightarrow
+\textit{Ab}(U_\etale),\quad
+f^* : \textit{Mod}(\mathcal{O}_X) \longrightarrow \textit{Mod}(\mathcal{O}_U)
+$$
+の左随伴となるものが存在する。Modules on Sites, Section
+\ref{sites-modules-section-localize} を参照せよ。
+注意：この関手は、先験的にはコンパクト台コホモロジーとは
+何の関係もない！ 上記の文献では、この関手を「零延長」と呼んだ。
+$f_!$ の二つの版は、$f^* = f^{-1}$ が
+$\mathcal{O}_X$-加群の層について成り立つので一致することに注意する。
+
+\medskip\noindent
+以下でこの構成を用いるので、その性質をいくつか思い出しておく。
+$\mathcal{G}$ を $U_\etale$ 上の可換層として与えると、層 $f_!$ は
+前層
+$$
+V/X \longmapsto
+f_!\mathcal{G}(V) =
+\bigoplus\nolimits_{\varphi \in \Mor_X(V, U)}
+\mathcal{G}(V \xrightarrow{\varphi} U),
+$$
+の層化である。Modules on Sites, Lemma
+\ref{sites-modules-lemma-extension-by-zero} を参照せよ。
+さらに、$\mathcal{G}$ が $\mathcal{O}_U$-加群ならば
+$f_!\mathcal{G}$ は、全く同じ可換群の前層に自明な仕方で
+$\mathcal{O}_X$-加群構造を入れたものの層化である
+（同所を参照）。$\overline{x} : \Spec(k) \to X$ を
+幾何学的点とする。このとき標準的な同一視
+$$
+(f_!\mathcal{G})_{\overline{x}} =
+\bigoplus\nolimits_{\overline{u}} \mathcal{G}_{\overline{u}}
+$$
+がある。ここで和は、すべての
+$\overline{u} : \Spec(k) \to U$ で
+$f \circ \overline{u} = \overline{x}$ を満たすものにわたる。
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-stalk-j-shriek} および
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-small-etale-site} を参照せよ。
+以下では層 $f_!\underline{\mathbf{Z}}$ を調べる。
+ここで $\underline{\mathbf{Z}}$ は $X_\etale$ または
+$U_\etale$ 上の定数層を表す。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-product-is-tensor-product}
+$S$ をスキームとする。$f_i : U_i \to X$ を $S$ 上の代数空間の
+エタール射とする。このとき同型
+$$
+f_{1, !}\underline{\mathbf{Z}} \otimes_{\mathbf{Z}}
+f_{2, !}\underline{\mathbf{Z}}
+\longrightarrow
+f_{12, !}\underline{\mathbf{Z}}
+$$
+がある。ここで $f_{12} : U_1 \times_X U_2 \to X$ は構造射である。
+また
+$$
+(f_1 \amalg f_2)_! \underline{\mathbf{Z}}
+\longrightarrow
+f_{1, !}\underline{\mathbf{Z}} \oplus
+f_{2, !}\underline{\mathbf{Z}}
+$$
+も同型である。
+\end{lemma}
+
+\begin{proof}
+写像を定義すれば、上の茎の記述によりそれは同型となる。
+写像を定義するには前層のレベルで作業すれば十分である。
+従って写像
+$$
+\left(\bigoplus\nolimits_{\varphi_1 \in \Mor_X(V, U_1)} \mathbf{Z}\right)
+\otimes_{\mathbf{Z}}
+\left(\bigoplus\nolimits_{\varphi_2 \in \Mor_X(V, U_2)} \mathbf{Z}\right)
+\longrightarrow
+\bigoplus\nolimits_{\varphi \in \Mor_X(V, U_1 \times_X U_2)}
+\mathbf{Z}
+$$
+を定義すればよい。元 $1_{\varphi_1} \otimes 1_{\varphi_2}$ を、
+明らかな記法による元 $1_{\varphi_1 \times \varphi_2}$ に写す。
+第二の等式の証明は省略する。
+\end{proof}
+
+\noindent
+もう一つの重要な性質はトレース写像
+$$
+\text{Tr}_f : f_!\underline{\mathbf{Z}} \longrightarrow \underline{\mathbf{Z}}.
+$$
+である。トレース写像は、写像
+$\mathbf{Z} \to f^{-1}\underline{\mathbf{Z}}$
+（これは同型である）に随伴する。
+$\overline{x}$ を上と同じものとすると、$\text{Tr}_f$ の
+$\overline{x}$ における茎上の写像は
+$$
+(\text{Tr}_f)_{\overline{x}} :
+(f_!\underline{\mathbf{Z}})_{\overline{x}} =
+\bigoplus\nolimits_{\overline{u}} \mathbf{Z}
+\longrightarrow
+\mathbf{Z} = \underline{\mathbf{Z}}_{\overline{x}}
+$$
+であり、与えられた整数を足し合わせる。
+これは $1 : \mathbf{Z} \to f^{-1}\underline{\mathbf{Z}}$
+に随伴するためである。特に、$f$ がエタールであるだけでなく
+全射でもあれば、$\text{Tr}_f$ は全射である。
+
+\medskip\noindent
+$f : U \to X$ を代数空間のエタール全射と仮定する。
+上で論じたトレース写像に付随する{\it Koszul 複体}
+$$
+\ldots \to \wedge^3f_!\underline{\mathbf{Z}} \to
+\wedge^2f_!\underline{\mathbf{Z}} \to f_!\underline{\mathbf{Z}} \to
+\underline{\mathbf{Z}} \to 0
+$$
+を考える。ここで外冪は環の層 $\underline{\mathbf{Z}}$ 上でとる。
+写像は規則
+$$
+e_1 \wedge \ldots \wedge e_n \longmapsto
+\sum\nolimits_{i = 1, \ldots, n} (-1)^{i + 1}
+\text{Tr}_f(e_i)
+e_1 \wedge \ldots \wedge \widehat{e_i} \wedge \ldots \wedge e_n
+$$
+で定義される。ここで $e_1, \ldots, e_n$ は
+$f_!\underline{\mathbf{Z}}$ の局所切断である。
+$\overline{x}$ を $X$ の幾何学的点とし、
+$M_{\overline{x}} = (f_!\underline{\mathbf{Z}})_{\overline{x}} =
+\bigoplus_{\overline{u}} \mathbf{Z}$ とおく。
+すると上の複体の $\overline{x}$ における茎は複体
+$$
+\ldots \to \wedge^3 M_{\overline{x}} \to \wedge^2 M_{\overline{x}}
+\to M_{\overline{x}} \to \mathbf{Z} \to 0
+$$
+である。これは $M_{\overline{x}} \to \mathbf{Z}$ が全射なので
+完全である。More on Algebra, Lemma
+\ref{more-algebra-lemma-homotopy-koszul-abstract} を参照せよ。
+従って、$K^\bullet = K^\bullet(f)$ を
+$K^i = \wedge^{i + 1}f_!\underline{\mathbf{Z}}$ とする複体とすれば、
+擬同型
+\begin{equation}
+\label{spaces-cohomology-equation-quasi-isomorphism}
+K^\bullet \longrightarrow \underline{\mathbf{Z}}[0]
+\end{equation}
+を得る。複体 $K^\bullet$ を用いて、$f : U \to X$ に付随する
+交代 {\v C}ech 複体と呼ぶものを定義する。
+
+\begin{definition}
+\label{spaces-cohomology-definition-alternating-cech-complex}
+$S$ をスキームとする。$f : U \to X$ を $S$ 上の代数空間の
+エタール全射とする。$\mathcal{F}$ を
+$\textit{Ab}(X_\etale)$ の対象とする。
+{\it 交代 {\v C}ech 複体}\footnote{これは標準的でない記法かもしれない}
+$\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F})$ で
+$\mathcal{F}$ と $f$ に付随するものとは、複体
+$$
+\Hom(K^0, \mathcal{F}) \to \Hom(K^1, \mathcal{F}) \to
+\Hom(K^2, \mathcal{F}) \to \ldots
+$$
+のことである。ここで Hom 群は $\textit{Ab}(X_\etale)$ で計算する。
+\end{definition}
+
+\noindent
+$U = \coprod U_i$ であり、$f|_{U_i} : U_i \to X$ が部分空間の
+開埋め込みであるならば、
+$\check{\mathcal{C}}_{alt}^\bullet(f, \mathcal{F})$ は
+Zariski 被覆 $X = \bigcup U_i$ と、$\mathcal{F}$ の $X$ の
+Zariski サイトへの制限に対して Cohomology, Section
+\ref{cohomology-section-alternating-cech} で導入した複体と
+一致することを、読者は確認できる。
+しかし、より重要なのは、交代 {\v C}ech 複体のコホモロジーを
+コホモロジーと関係づけることである。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-alternating-cech-to-cohomology}
+$S$ をスキームとする。$f : U \to X$ を $S$ 上の代数空間の
+エタール全射とする。$\mathcal{F}$ を
+$\textit{Ab}(X_\etale)$ の対象とする。標準写像
+$$
+\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F})
+\longrightarrow
+R\Gamma(X, \mathcal{F})
+$$
+が $D(\textit{Ab})$ において存在する。さらに、$E_1$-ページ
+$$
+E_1^{p, q} =
+\Ext_{\textit{Ab}(X_\etale)}^q(K^p, \mathcal{F})
+$$
+をもち、$H^{p + q}(X, \mathcal{F})$ に収束するスペクトル系列がある。
+ここで $K^p = \wedge^{p + 1}f_!\underline{\mathbf{Z}}$ である。
+\end{lemma}
+
+\begin{proof}
+擬同型 $K^\bullet \to \underline{\mathbf{Z}}[0]$ があったことを
+思い出そう（\ref{spaces-cohomology-equation-quasi-isomorphism}）。
+単射分解 $\mathcal{F} \to \mathcal{I}^\bullet$ を
+$\textit{Ab}(X_\etale)$ において選ぶ。
+二重複体 $\Hom(K^\bullet, \mathcal{I}^\bullet)$ を考える。
+その項は $\Hom(K^p, \mathcal{I}^q)$ である。
+微分 $d_1^{p, q} : A^{p, q} \to A^{p + 1, q}$ は
+微分 $K^{p + 1} \to K^p$ から来るものであり、
+微分 $d_2^{p, q} : A^{p, q} \to A^{p, q + 1}$ は
+微分 $\mathcal{I}^q \to \mathcal{I}^{q + 1}$ から来るものである。
+付随する全複体を
+$\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))$ と書く。
+Homology, Section \ref{homology-section-double-complexes} を参照せよ。
+この二重複体に付随する二つのスペクトル系列
+$({}'E_r, {}'d_r)$ と $({}''E_r, {}''d_r)$ を用いる。
+Homology, Section \ref{homology-section-double-complex} を参照せよ。
+
+\medskip\noindent
+$K^\bullet$ は $\underline{\mathbf{Z}}$ の分解なので、複体
+$$
+\Hom(K^\bullet, \mathcal{I}^q) :
+\Hom(K^0, \mathcal{I}^q) \to
+\Hom(K^1, \mathcal{I}^q) \to
+\Hom(K^2, \mathcal{I}^q) \to \ldots
+$$
+は正次数で非輪体であり、$H^0$ は
+$\Gamma(X, \mathcal{I}^q)$ に等しい。従って Homology, Lemma
+\ref{homology-lemma-double-complex-gives-resolution} により、自然写像
+$$
+\mathcal{I}^\bullet(X) \longrightarrow
+\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))
+$$
+は可換群の複体の擬同型である。特に
+$H^n(\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))) =
+H^n(X, \mathcal{F})$ と結論できる。
+
+\medskip\noindent
+補題の写像
+$\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F}) \to
+R\Gamma(X, \mathcal{F})$ は、
+$\check{\mathcal{C}}^\bullet_{alt}(f, \mathcal{F}) \to
+\text{Tot}(\Hom(K^\bullet, \mathcal{I}^\bullet))$ と、
+表示した擬同型の逆との合成である。
+
+\medskip\noindent
+最後に、スペクトル系列 $({}'E_r, {}'d_r)$ を考える。
+このとき
+$$
+E_1^{p, q} = q\text{ 次コホモロジー of }
+\Hom(K^p, \mathcal{I}^0) \to
+\Hom(K^p, \mathcal{I}^1) \to
+\Hom(K^p, \mathcal{I}^2) \to \ldots
+$$
+である。これで補題が証明された。
+\end{proof}
+
+\noindent
+補題から、ext 群
+$\Ext_{\textit{Ab}(X_\etale)}(K^p, \mathcal{F})$、
+すなわち関手 $\mathcal{F} \mapsto \Hom(K^p, \mathcal{F})$
+の右導来関手を理解することが重要であると分かる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-compute}
+$S$ をスキームとする。$f : U \to X$ を $S$ 上の代数空間の
+全射、エタールかつ分離な射とする。$p \geq 0$ に対して
+$$
+W_p = U \times_X \ldots \times_X U \setminus \text{すべての対角部分}
+$$
+とおく。ここでファイバー積は $p + 1$ 個の因子をもつ。
+$S_{p + 1}$ は $W_p$ に $X$ 上で自由に作用し、
+$$
+\Hom(K^p, \mathcal{F}) = S_{p + 1}\text{-反不変元である }
+\mathcal{F}(W_p)
+$$
+が $\mathcal{F}$ に関して関手的に成り立つ。ここで
+$K^p = \wedge^{p + 1}f_!\underline{\mathbf{Z}}$ である。
+\end{lemma}
+
+\begin{proof}
+$U \to X$ は分離なので、対角射 $U \to U \times_X U$ は閉埋め込みである。
+$U \to X$ はエタールなので、対角射 $U \to U \times_X U$ は
+開埋め込みでもある。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-unramified} および
+\ref{spaces-morphisms-lemma-diagonal-unramified-morphism}
+を参照せよ。従って $W_p$ は
+$U^{p + 1} = U \times_X \ldots \times_X U$ の開閉部分空間である。
+$S_{p + 1}$ の $W_p$ 上の作用は、作用の固定点を除いたので自由である。
+Lemma \ref{spaces-cohomology-lemma-product-is-tensor-product} により
+$$
+(f_!\underline{\mathbf{Z}})^{\otimes p + 1} =
+f^{p + 1}_!\underline{\mathbf{Z}} = (W_p \to X)_!\underline{\mathbf{Z}}
+\oplus Rest
+$$
+である。ここで $f^{p + 1} : U^{p + 1} \to X$ は構造射である。
+$\overline{x}$ という $X$ の幾何学的点の上の茎を見ると、
+$$
+\left(
+\bigoplus\nolimits_{\overline{u} \mapsto \overline{x}} \mathbf{Z}
+\right)^{\otimes p + 1}
+\longrightarrow
+(W_p \to X)_!\underline{\mathbf{Z}}_{\overline{x}}
+$$
+は、核がすべてのテンソル
+$1_{\overline{u}_0} \otimes \ldots \otimes 1_{\overline{u}_p}$ で、
+$\overline{u}_i = \overline{u}_j$ となる、ある $i \not = j$ に対するものに
+よって生成される商写像である。従って商写像
+$$
+(f_!\underline{\mathbf{Z}})^{\otimes p + 1}
+\longrightarrow
+\wedge^{p + 1}f_!\underline{\mathbf{Z}}
+$$
+は $(W_p \to X)_!\underline{\mathbf{Z}}$ を経由する。すなわち
+$$
+(f_!\underline{\mathbf{Z}})^{\otimes p + 1}
+\longrightarrow
+(W_p \to X)_!\underline{\mathbf{Z}}
+\longrightarrow
+\wedge^{p + 1}f_!\underline{\mathbf{Z}}
+$$
+を得る。これだけで $\Hom(K^p, \mathcal{F})$ が関手的に
+$$
+\Hom((W_p \to X)_!\underline{\mathbf{Z}}, \mathcal{F}) = \mathcal{F}(W_p)
+$$
+の部分群であることが分かる。これを $S_{p + 1}$-反不変元と
+同一視するには、全射
+$(W_p \to X)_!\underline{\mathbf{Z}}
+\to \wedge^{p + 1}f_!\underline{\mathbf{Z}}$ が
+最大の $S_{p + 1}$-反不変商であることを証明しなければならない。
+言い換えると、$\wedge^{p + 1}f_!\underline{\mathbf{Z}}$ が
+$(W_p \to X)_!\underline{\mathbf{Z}}$ を、局所切断
+$s - \text{sign}(\sigma)\sigma(s)$ で生成される部分層によって
+割った商であることを示さなければならない。ここで $s$ は
+$(W_p \to X)_!\underline{\mathbf{Z}}$ の局所切断である。
+これは茎で確認でき、そこでは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-twist}
+$S$ をスキームとする。$W$ を $S$ 上の代数空間とする。
+$G$ を $W$ に自由に作用する有限群とする。
+$U = W/G$ とおく。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quotient} を参照せよ。
+$\chi : G \to \{+1, -1\}$ を指標とする。
+このとき、階数 1 の局所自由な $\mathbf{Z}$-加群の層
+$\underline{\mathbf{Z}}(\chi)$ で $U_\etale$ 上のものが存在し、
+任意の可換層 $\mathcal{F}$ で $U_\etale$ 上のものに対して
+$$
+H^0(W, \mathcal{F}|_W)^\chi =
+H^0(U, \mathcal{F} \otimes_{\mathbf{Z}} \underline{\mathbf{Z}}(\chi))
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+商射 $q : W \to U$ は $G$-トーサーである。すなわち、エタール全射
+$U' \to U$ で、
+$W \times_U U' = \coprod_{g \in G} U'$ が
+$G$-作用付き空間として $U'$ 上で成り立つものが存在する。
+（実際、$U' = W$ とすればよい。）
+従って $q_*\underline{\mathbf{Z}}$ は有限局所自由な
+$\mathbf{Z}$-加群であり、$G$ の作用をもつ。任意の幾何学的点
+$\overline{u}$ で $U$ の点であるものに対して、$G$-同変同型
+$$
+(q_*\underline{\mathbf{Z}})_{\overline{u}}
+= \bigoplus\nolimits_{\overline{w} \mapsto \overline{u}} \mathbf{Z}
+= \bigoplus\nolimits_{g \in G} \mathbf{Z} = \mathbf{Z}[G]
+$$
+を得る。ここで第二の $=$ は、幾何学的点 $\overline{w}_0$ で
+$\overline{u}$ の上にあるものを用い、$g \in G$ に対応する直和因子を
+$g(\overline{w}_0)$ に対応する直和因子へ写す。
+さらに
+$$
+H^0(W, \mathcal{F}|_W) =
+H^0(U, \mathcal{F} \otimes_\mathbf{Z} q_*\underline{\mathbf{Z}})
+$$
+である。なぜなら、
+$q_*\mathcal{F}|_W =
+\mathcal{F} \otimes_\mathbf{Z} q_*\underline{\mathbf{Z}}$
+であり、これは $U'$ へ制限すれば確認できるからである。
+$$
+\underline{\mathbf{Z}}(\chi) =
+(q_*\underline{\mathbf{Z}})^\chi \subset
+q_*\underline{\mathbf{Z}}
+$$
+を、$\chi$ に従って変換する切断の部分層とする。
+任意の幾何学的点 $\overline{u}$ で $U$ の点であるものに対して
+$$
+\underline{\mathbf{Z}}(\chi)_{\overline{u}} =
+\mathbf{Z} \cdot \sum\nolimits_g \chi(g) g
+\subset
+\mathbf{Z}[G] = (q_*\underline{\mathbf{Z}})_{\overline{u}}
+$$
+である。従って $\underline{\mathbf{Z}}(\chi)$ は階数 1 の
+局所自由層である（より正確には、これは $U'$ への制限後に
+確認すべきである）。
+任意の $\mathbf{Z}$-加群 $M$ に対し、$\chi$-半不変元で
+$M[G]$ に属するものは
+$m \cdot \sum\nolimits_g \chi(g) g$ という形の元であることに
+注意する。従って、任意の可換層 $\mathcal{F}$ で $U$ 上のものに対して
+$$
+\left(\mathcal{F} \otimes_\mathbf{Z} q_*\underline{\mathbf{Z}}\right)^\chi
+=
+\mathcal{F} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi)
+$$
+であることが分かる。実際、すべての茎で等しい。
+大域切断をとれば補題の結論を得る。
+\end{proof}
+
+\noindent
+以上をすべて組み合わせると、次の快い結果を得る。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-alternating-spectral-sequence}
+$S$ をスキームとする。$f : U \to X$ を $S$ 上の代数空間の
+全射、エタールかつ分離な射とする。$p \geq 0$ に対して
+$$
+W_p = U \times_X \ldots \times_X U \setminus \text{すべての対角部分}
+$$
+とおく（因子は $p + 1$ 個）。これは Lemma \ref{spaces-cohomology-lemma-compute}
+と同じ定義である。
+$\chi_p : S_{p + 1} \to \{+1, -1\}$ を符号指標とする。
+$U_p = W_p/S_{p + 1}$ とおき、
+$\underline{\mathbf{Z}}(\chi_p)$ を Lemma \ref{spaces-cohomology-lemma-twist}
+と同じものとする。このとき Lemma
+\ref{spaces-cohomology-lemma-alternating-cech-to-cohomology} のスペクトル系列は
+$E_1$-ページ
+$$
+E_1^{p, q} =
+H^q(U_p, \mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+$$
+をもち、$H^{p + q}(X, \mathcal{F})$ に収束する。
+\end{lemma}
+
+\begin{proof}
+$S_{p + 1}$ の $W_p$ 上の作用は $X$ 上の作用なので、
+射 $U_p \to X$ が確かに得られることに注意する。
+$W_p \to X$ はエタールで、$W_p \to U_p$ はエタール全射なので、
+$U_p \to X$ もエタールである。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-local} を参照せよ。
+従って $\textit{Ab}(X_\etale)$ の単射対象を制限すると、
+$\textit{Ab}(U_{p, \etale})$ の単射対象になる。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-of-open} を参照せよ。
+さらに、関手
+$\mathcal{G} \mapsto
+\mathcal{G} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$
+は $\textit{Ab}(U_p)$ の自己圏同値である。従って単射対象を
+単射対象に移し、かつ完全である
+（$\underline{\mathbf{Z}}(\chi_p)$ は可逆
+$\underline{\mathbf{Z}}$-加群だからである）。
+そこで単射分解 $\mathcal{F} \to \mathcal{I}^\bullet$ が
+$\textit{Ab}(X_\etale)$ において与えられると、複体
+$$
+\Gamma(U_p,
+\mathcal{I}^0|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\to
+\Gamma(U_p,
+\mathcal{I}^1|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\to
+\Gamma(U_p,
+\mathcal{I}^2|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\to \ldots
+$$
+は
+$H^*(U_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$
+を計算する。一方、Lemma \ref{spaces-cohomology-lemma-twist} により、これは
+$S_{p + 1}$-反不変元からなる次の複体に等しい。
+$$
+\Gamma(W_p, \mathcal{I}^0) \to
+\Gamma(W_p, \mathcal{I}^1) \to
+\Gamma(W_p, \mathcal{I}^2) \to \ldots
+$$
+さらに Lemma \ref{spaces-cohomology-lemma-compute} により、これは複体
+$$
+\Hom(K^p, \mathcal{I}^0) \to
+\Hom(K^p, \mathcal{I}^1) \to
+\Hom(K^p, \mathcal{I}^2) \to \ldots
+$$
+に等しく、この複体は
+$\Ext^*_{\textit{Ab}(X_\etale)}(K^p, \mathcal{F})$
+を計算する。以上を合わせれば主張が従う。
+\end{proof}
+
+
+
+
+\section{準連接層の高次消滅}
+\label{spaces-cohomology-section-higher-vanishing}
+
+\noindent
+この節では、準コンパクトかつ準分離な代数空間 $X$ が与えられたとき、
+整数 $n = n(X)$ が存在して、$X$ 上の任意の準連接層のコホモロジーが
+次数 $n$ を超えると消滅することを示す。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-quasi-coherent-twist}
+Lemma \ref{spaces-cohomology-lemma-twist} と同じ $S$, $W$, $G$, $U$, $\chi$ をとる。
+$\mathcal{F}$ が準連接 $\mathcal{O}_U$-加群ならば、
+$\mathcal{F} \otimes_{\mathbf{Z}} \underline{\mathbf{Z}}(\chi)$ も
+準連接である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{O}_U$-加群構造は明らかである。
+$\mathcal{F} \otimes_{\mathbf{Z}} \underline{\mathbf{Z}}(\chi)$ が
+準連接であることは、エタール局所的に確認すれば十分である。
+従って、$\underline{\mathbf{Z}}(\chi)$ が $\underline{\mathbf{Z}}$-加群として
+有限局所自由であることから補題が従う。
+\end{proof}
+
+\noindent
+次の命題は、$X$ がスキームである場合にも興味深い。これは
+Cohomology of Schemes, Lemma \ref{coherent-lemma-vanishing-nr-affines}
+の自然な一般化である。命題を述べる前に、エタール射
+$f : U \to X$ で、アフィンスキームから準分離代数空間 $X$ へ
+向かうものが与えられると、
+$f$ のファイバーは普遍的に有界であることに注意する。特に、整数
+$d$ が存在して、$|U| \to |X|$ のすべてのファイバーの濃度が
+高々 $d$ となる。これは Decent Spaces, Lemma
+\ref{decent-spaces-lemma-bounded-fibres} の
+$(\eta) \Rightarrow (\delta)$ である。
+
+\begin{proposition}
+\label{spaces-cohomology-proposition-vanishing}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$X$ は準コンパクトかつ分離であると仮定する。
+$U$ をアフィンスキームとし、$f : U \to X$ を全射エタール射とする。
+$d$ を $|U| \to |X|$ のファイバーの濃度の上界とする。このとき、
+任意の準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して
+$H^q(X, \mathcal{F}) = 0$ が $q \geq d$ のとき成り立つ。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{spaces-cohomology-lemma-alternating-spectral-sequence} のスペクトル系列を用いる。
+$f$ は分離である。これは $U$ が分離であることによるので、
+この補題を適用できる。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-compose-after-separated} を参照せよ。
+$X$ は分離なので、スキーム $U \times_X \ldots \times_X U$ は
+$U \times_{\Spec(\mathbf{Z})} \ldots \times_{\Spec(\mathbf{Z})} U$
+の閉部分スキームであり、従ってアフィンである。よって $W_p$ は
+アフィンである。従って $U_p = W_p/S_{p + 1}$ は
+Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence} により
+アフィンスキームである。Section \ref{spaces-cohomology-section-higher-direct-image} の議論から、
+$W_p$ 上の準連接層のコホモロジーは、代数空間として計算しても、
+基礎にあるアフィンスキーム上の対応する準連接層について計算しても
+一致する。従って正次数では Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero} により消滅する。
+Lemma \ref{spaces-cohomology-lemma-quasi-coherent-twist} により、層
+$\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p)$
+は準連接である。従って
+$H^q(W_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$
+は $q > 0$ のとき零である。整数 $d$ の定義により、
+$W_p = \emptyset$ が $p \geq d$ のとき成り立つ。従って
+$H^0(W_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$
+も $p \geq d$ のとき零である。これで命題が証明された。
+\end{proof}
+
+\noindent
+次の補題では、準コンパクトかつ準分離な代数空間が、準連接加群に
+関して有限のコホモロジー次元をもつことを示す。上界を明示するのは、
+後で高次順像について同様の結果を証明するために用いるからにすぎない。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-quasi-separated}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$X$ は準コンパクトかつ準分離であると仮定する。このとき、次を選べる。
+\begin{enumerate}
+\item アフィンスキーム $U$、
+\item 全射エタール射 $f : U \to X$、
+\item 整数 $d$ で、$U \to X$ のファイバーの次数を抑えるもの、
+\item 各 $p = 0, 1, \ldots, d$ に対して、全射エタール射
+$V_p \to U_p$ で、アフィンスキーム $V_p$ から出るもの。ここで
+$U_p$ は Lemma
+\ref{spaces-cohomology-lemma-alternating-spectral-sequence} と同じものとする。
+\item 整数 $d_p$ で、$V_p \to U_p$ のファイバーの次数を抑えるもの。
+\end{enumerate}
+さらに、(1) -- (5) が与えられているときはいつでも、任意の準連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ に対して、
+$H^q(X, \mathcal{F}) = 0$ が $q \geq \max(d_p + p)$ のとき成り立つ。
+\end{lemma}
+
+\begin{proof}
+$X$ は準コンパクトなので、全射エタール射 $U \to X$ で
+$U$ がアフィンであるものを見つけられる。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照せよ。
+Decent Spaces, Lemma \ref{decent-spaces-lemma-bounded-fibres} により
+$f$ のファイバーは普遍的に有界なので、$d$ を見つけられる。
+$U_p = W_p/S_{p + 1}$ であり、
+$W_p \subset U \times_X \ldots \times_X U$ は開かつ閉である。
+$X$ は準分離なので、スキーム $W_p$ は準コンパクトであり、従って
+$U_p$ は準コンパクトである。$U$ は分離なので、スキーム $W_p$ は
+分離であり、従って $U_p$ は Spaces, Lemma
+\ref{spaces-lemma-quotient-finite-separated} の絶対版により分離である。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} により、射
+$V_p \to W_p$ を見つけられる。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-bounded-fibres} により、整数 $d_p$ を見つけられる。
+
+\medskip\noindent
+ここからはスペクトル系列
+$$
+E_1^{p, q} =
+H^q(U_p, \mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))
+\Rightarrow
+H^{p + q}(X, \mathcal{F})
+$$
+を用いる。Lemma \ref{spaces-cohomology-lemma-alternating-spectral-sequence} を参照せよ。
+整数 $d$ の定義により、$U_p = 0$ が $p \geq d$ のとき成り立つ。
+Proposition \ref{spaces-cohomology-proposition-vanishing} と Lemma
+\ref{spaces-cohomology-lemma-quasi-coherent-twist} により、
+$H^q(U_p,
+\mathcal{F}|_{U_p} \otimes_\mathbf{Z} \underline{\mathbf{Z}}(\chi_p))$
+は、$q \geq d_p$ かつ $p = 0, \ldots, d$ のとき零である。
+これで補題が証明された。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{高次順像の消滅}
+\label{spaces-cohomology-section-vanishing-higher-direct-images}
+
+\noindent
+Section \ref{spaces-cohomology-section-higher-vanishing} の結果を適用して、準コンパクトかつ
+準分離な射に対する準連接層の高次順像の消滅を得る。これは、ある種の
+状況でコホモロジー次数に関する降下帰納法を行えるため有用である。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-higher-direct-images}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $f$ は準コンパクトかつ準分離である。
+\item $Y$ は準コンパクトである。
+\end{enumerate}
+このとき整数 $n(X \to Y)$ が存在して、任意の代数空間 $Y'$、任意の射
+$Y' \to Y$、および任意の準連接層 $\mathcal{F}'$ で
+$X' = Y' \times_Y X$ 上のものに対し、高次順像 $R^if'_ *\mathcal{F}'$ は
+$i \geq n(X \to Y)$ のとき零である。
+\end{lemma}
+
+\begin{proof}
+$V \to Y$ を全射エタール射で、$V$ がアフィンスキームであるものとする。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照せよ。
+基底変換 $f_V : V \times_Y X \to V$ に対して結果を証明したと仮定する。
+すると結果は $f$ に対して、$n(X \to Y) = n(X_V \to V)$ とおけば
+成り立つ。実際、$Y' \to Y$ と $\mathcal{F}'$ が補題のとおりならば、
+$R^if'_ *\mathcal{F}'|_{V \times_Y Y'}$ は
+$R^if'_{V, *}\mathcal{F}'|_{X'_V}$ に等しい。ここで
+$$
+f'_V : X'_V = V \times_Y Y' \times_Y X \to V \times_Y Y' = Y'_V
+$$
+である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}
+を参照せよ。従って $Y$ はアフィンスキームであると仮定してよい。
+
+\medskip\noindent
+さらに、すべての $Y' \to Y$ と $\mathcal{F}'$ に対して消滅を証明するには、
+$Y'$ がアフィンスキームである場合に証明すれば十分である。この場合、
+$R^if'_ *\mathcal{F}'$ は Lemma \ref{spaces-cohomology-lemma-higher-direct-image} により
+準連接である。従って $H^i(X', \mathcal{F}') = 0$ を証明すれば十分である。
+なぜなら、Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray} と、アフィン代数空間上の準連接層の
+高次コホモロジーの消滅（Proposition \ref{spaces-cohomology-proposition-vanishing}）により、
+$H^i(X', \mathcal{F}') = H^0(Y', R^if'_ *\mathcal{F}')$ だからである。
+
+\medskip\noindent
+Lemma \ref{spaces-cohomology-lemma-vanishing-quasi-separated} と同じ
+$U \to X$, $d$, $V_p \to U_p$, $d_p$ を選ぶ。任意のアフィンスキーム
+$Y'$ と射 $Y' \to Y$ に対して、
+$X' = Y' \times_Y X$, $U' = Y' \times_Y U$,
+$V'_p = Y' \times_Y V_p$ と書く。このとき
+$U' \to X'$, $d' = d$, $V'_p \to U'_p$, $d'_p = d$ は、
+代数空間 $X'$ に対する Lemma
+\ref{spaces-cohomology-lemma-vanishing-quasi-separated} のとおりの選択の集まりである
+（詳細は省略する）。従って
+$H^i(X', \mathcal{F}') = 0$ が $i \geq \max(p + d_p)$ のとき
+成り立つことが分かり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-affine-vanishing-higher-direct-images}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+アフィン射とする。このとき $R^if_*\mathcal{F} = 0$ が $i > 0$ のとき、
+任意の準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+代数空間のアフィン射は表現可能であることを思い出そう。従って、これは
+(\ref{spaces-cohomology-equation-representable-higher-direct-image}) と
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-relative-affine-vanishing} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-relative-affine-cohomology}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+アフィン射とする。$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+このとき $H^i(X, \mathcal{F}) = H^i(Y, f_*\mathcal{F})$ が
+すべての $i \geq 0$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images} と Leray
+スペクトル系列から従う。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray} を参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+\section{閉部分空間に台をもつコホモロジー}
+\label{spaces-cohomology-section-cohomology-support}
+
+\noindent
+この節は、代数空間上の可換層に対する Cohomology, Sections
+\ref{cohomology-section-cohomology-support} および
+\ref{cohomology-section-cohomology-support-bis}、ならびに
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-cohomology-support} の類似である。
+
+\medskip\noindent
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とし、
+$Z \subset X$ を閉部分空間とする。$\mathcal{F}$ を $X_\etale$ 上の
+可換層とする。
+$$
+\Gamma_Z(X, \mathcal{F}) =
+\{s \in \mathcal{F}(X) \mid \text{Supp}(s) \subset Z\}
+$$
+を $Z$ に台をもつ切断とする（Properties of Spaces, Definition
+\ref{spaces-properties-definition-support}）。これは左完全関手だが、
+一般には完全ではない。従って導来関手
+$$
+R\Gamma_Z(X, -) : D(X_\etale) \longrightarrow D(\textit{Ab})
+$$
+と、$Z$ に台をもつコホモロジー群
+$H^q_Z(X, \mathcal{F}) = R^q\Gamma_Z(X, \mathcal{F})$ を得る。
+
+\medskip\noindent
+$\mathcal{I}$ を $X_\etale$ 上の単射可換層とする。
+$U \subset X$ を $Z$ の補空間である開部分空間とする。このとき制限写像
+$\mathcal{I}(X) \to \mathcal{I}(U)$ は全射であり（Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-restriction-along-monomorphism-surjective}）、
+その核は $\Gamma_Z(X, \mathcal{I})$ である。直ちに、
+$K \in D(X_\etale)$ に対して識別三角
+$$
+R\Gamma_Z(X, K) \to R\Gamma(X, K) \to R\Gamma(U, K) \to R\Gamma_Z(X, K)[1]
+$$
+が $D(\textit{Ab})$ において存在する。従って長完全コホモロジー列
+$$
+\ldots \to H^i_Z(X, K) \to H^i(X, K) \to H^i(U, K) \to
+H^{i + 1}_Z(X, K) \to \ldots
+$$
+を、任意の $K$ で $D(X_\etale)$ に属するものに対して得る。
+
+\medskip\noindent
+可換層 $\mathcal{F}$ で $X_\etale$ 上のものに対して、
+{\it $Z$ に台をもつ切断の部分層}を考えられる。これを
+$\mathcal{H}_Z(\mathcal{F})$ と書き、次の規則で定義する。
+$$
+\mathcal{H}_Z(\mathcal{F})(U) =
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset U \times_X Z\}
+$$
+ここでは Properties of Spaces, Definition
+\ref{spaces-properties-definition-support} の切断の台を用いている。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-push-pull} の圏同値により、
+$\mathcal{H}_Z(\mathcal{F})$ を $Z_\etale$ 上の可換層とみなせる。
+従って関手
+$$
+\textit{Ab}(X_\etale) \longrightarrow \textit{Ab}(Z_\etale),\quad
+\mathcal{F} \longmapsto \mathcal{H}_Z(\mathcal{F})
+$$
+を得る。これは左完全だが、一般には完全ではない。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-sections-with-support-acyclic}
+$S$ をスキームとする。$i : Z \to X$ を $S$ 上の代数空間の
+閉埋め込みとする。$\mathcal{I}$ を $X_\etale$ 上の単射可換層とする。
+このとき $\mathcal{H}_Z(\mathcal{I})$ は $Z_\etale$ 上の単射可換層である。
+\end{lemma}
+
+\begin{proof}
+任意の可換層 $\mathcal{G}$ で $Z_\etale$ 上のものに対して
+$$
+\Hom_Z(\mathcal{G}, \mathcal{H}_Z(\mathcal{F})) =
+\Hom_X(i_*\mathcal{G}, \mathcal{F})
+$$
+であることに注意する。実際、$i_*\mathcal{G}$ の任意の切断は $Z$ に
+台をもつ。$i_*$ は完全であり（Lemma
+\ref{spaces-cohomology-lemma-finite-higher-direct-image-zero}）、$\mathcal{I}$ は
+$X_\etale$ 上で単射なので、$\mathcal{H}_Z(\mathcal{I})$ は
+$Z_\etale$ 上で単射であると結論できる。
+\end{proof}
+
+\noindent
+導来関手を
+$$
+R\mathcal{H}_Z : D(X_\etale) \longrightarrow D(Z_\etale)
+$$
+と書く。$\mathcal{H}^q_Z(\mathcal{F}) = R^q\mathcal{H}_Z(\mathcal{F})$
+とおくと、$\mathcal{H}^0_Z(\mathcal{F}) = \mathcal{H}_Z(\mathcal{F})$
+である。上の補題により Grothendieck スペクトル系列
+$$
+E_2^{p, q} = H^p(Z, \mathcal{H}^q_Z(\mathcal{F}))
+\Rightarrow H^{p + q}_Z(X, \mathcal{F})
+$$
+がある。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-cohomology-with-support-sheaf-on-support}
+$S$ をスキームとする。$i : Z \to X$ を $S$ 上の代数空間の
+閉埋め込みとする。$\mathcal{G}$ を $Z_\etale$ 上の単射可換層とする。
+このとき $\mathcal{H}^p_Z(i_*\mathcal{G}) = 0$ が $p > 0$ のとき成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは、関手 $i_*$ が完全であり（Lemma
+\ref{spaces-cohomology-lemma-finite-higher-direct-image-zero}）、単射可換層を単射可換層へ
+移すことによる（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pushforward-injective-flat}）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-etale-localization-sheaf-with-support}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+エタール射とする。$Z \subset Y$ を、$f^{-1}(Z) \to Z$ が代数空間の
+同型となる閉部分空間とする。$\mathcal{F}$ を $X$ 上の可換層とする。
+このとき
+$$
+\mathcal{H}^q_Z(\mathcal{F}) = \mathcal{H}^q_{f^{-1}(Z)}(f^{-1}\mathcal{F})
+$$
+が $Z = f^{-1}(Z)$ 上の可換層として成り立ち、さらに
+$H^q_Z(Y, \mathcal{F}) = H^q_{f^{-1}(Z)}(X, f^{-1}\mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+$f$ はエタールなので、$\mathcal{F}$ の単射分解を引き戻すと
+$f^{-1}\mathcal{F}$ の単射分解になる。従って
+$\mathcal{H}_Z(-)$ に対して等式を確認すれば十分であり、これは定義から
+従う。台をもつコホモロジーについての証明も同じである。
+細部の一部は省略する。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$T \subset |X|$ を閉部分集合とする。$D_T(X_\etale)$ を、
+$D(X_\etale)$ の真に充満な飽和三角部分圏で、コホモロジー層が $T$ に
+台をもつ対象からなるものと書く。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-complexes-with-support-on-closed}
+$S$ をスキームとする。$i : Z \to X$ を $S$ 上の代数空間の
+閉埋め込みとする。写像
+$Ri_* = i_* : D(Z_\etale) \to D(X_\etale)$ は圏同値
+$D(Z_\etale) \to D_{|Z|}(X_\etale)$ を誘導し、その擬逆は
+$$
+i^{-1}|_{D_Z(X_\etale)} = R\mathcal{H}_Z|_{D_{|Z|}(X_\etale)}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$i^{-1}$ と $i_*$ は完全関手の随伴対であり、$i^{-1}i_*$ は可換層上の
+恒等関手と同型であることを思い出そう。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-pullback} および Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-closed-immersion-push-pull} を参照せよ。
+従って $i_* : D(Z_\etale) \to D_Z(X_\etale)$ は充満忠実であり、
+$i^{-1}$ は左逆を定める。他方、$K$ を $D_Z(X_\etale)$ の対象とし、
+随伴写像 $K \to i_*i^{-1}K$ を考える。$i_*$ と $i^{-1}$ の完全性を
+用いると、これはコホモロジー層上の随伴写像
+$H^n(K) \to i_*i^{-1}H^n(K)$ を誘導する。これらのコホモロジー層は
+$Z$ に台をもつので、この随伴写像は同型である。従って
+$D(Z_\etale) \to D_Z(X_\etale)$ は圏同値である。
+
+\medskip\noindent
+証明を終えるには、$R\mathcal{H}_Z(K) = i^{-1}K$ であることを、
+$K$ が $D_Z(X_\etale)$ の対象である場合に示さなければならない。
+これには、今証明した $K = i_*i^{-1}K$ を用いられる。次に
+K-単射代表 $\mathcal{I}^\bullet$ を $i^{-1}K$ に対して選べる。
+$i_*$ は完全関手 $i^{-1}$ の右随伴なので、複体
+$i_*\mathcal{I}^\bullet$ は K-単射である（Derived Categories, Lemma
+\ref{derived-lemma-adjoint-preserve-K-injectives}）。従って
+$R\mathcal{H}_Z(K)$ は
+$\mathcal{H}_Z(i_*\mathcal{I}^\bullet) = \mathcal{I}^\bullet$ により
+計算され、望む結論を得る。
+\end{proof}
+
+
+
+
+
+
+\section{次元を超える次数での消滅}
+\label{spaces-cohomology-section-vanishing-above-dimension}
+
+\noindent
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な
+代数空間とする。この場合 $|X|$ はスペクトル空間である。Properties of
+Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-quasi-separated-spectral}
+を参照せよ。さらに、$X$ の次元（Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension} で定義したもの）は、$|X|$ の
+Krull 次元に等しい。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-dimension-decent-space} を参照せよ。
+$X$ 上の準連接層について、次元を超える次数でコホモロジーが消滅する
+ことを示す。この結果は、体上有限型の準分離代数空間についてだけでも
+すでに興味深い。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-above-dimension}
+$S$ をスキームとする。$X$ を $S$ 上の準コンパクトかつ準分離な
+代数空間とする。$\dim(X) \leq d$ と仮定し、ここで $d$ はある整数とする。
+$\mathcal{F}$ を準連接層 $\mathcal{F}$ で $X$ 上のものとする。
+\begin{enumerate}
+\item $H^q(X, \mathcal{F}) = 0$ が $q > d$ のとき成り立つ。
+\item $H^d(X, \mathcal{F}) \to H^d(U, \mathcal{F})$ は、任意の
+準コンパクト開部分空間 $U \subset X$ に対して全射である。
+\item $H^q_Z(X, \mathcal{F}) = 0$ が $q > d$ のとき、補空間が
+準コンパクトである任意の閉部分空間 $Z \subset X$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-dimension-decent-invariant-under-etale} により、
+任意の代数空間 $Y$ で $X$ 上エタールなものは次元 $\leq d$ をもつ。
+$Y$ が準分離ならば、$Y$ の次元は $|Y|$ の Krull 次元に等しい。
+Decent Spaces, Lemma \ref{decent-spaces-lemma-dimension-decent-space}
+を参照せよ。また、$Y$ がスキームならば、$\mathcal{F}$ の
+エタール・コホモロジーで $Y$ 上のもの、および閉部分スキームに台をもつ
+$\mathcal{F}$ のエタール・コホモロジーは、それぞれ通常の
+$\mathcal{F}$ のコホモロジー、およびその閉部分スキームに台をもつ
+通常のコホモロジーと一致する。Descent, Proposition
+\ref{descent-proposition-same-cohomology-quasi-coherent} および
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cohomology-with-support-quasi-coherent}
+を参照せよ。以下、これらの事実を断りなく用いる。
+
+\medskip\noindent
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated} により、整数
+$n$ と開部分空間
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+で次の性質をもつものが存在する。$T_p = U_p \setminus U_{p + 1}$ とおく
+（被約誘導部分空間構造を入れる）と、準コンパクト分離スキーム $V_p$ と
+全射エタール射 $f_p : V_p \to U_p$ が存在し、
+$f_p^{-1}(T_p) \to T_p$ は同型である。
+
+\medskip\noindent
+$U_n = V_n$ はスキームなので、冒頭の注意と Cohomology, Proposition
+\ref{cohomology-proposition-cohomological-dimension-spectral} により、
+$\mathcal{F}$ の $U_n$ 上のコホモロジーは次数 $> d$ で消滅する。
+帰納法により
+$H^q(U_{p + 1}, \mathcal{F}|_{U_{p + 1}}) = 0$ が $q > d$ のとき
+成り立つことを示したと仮定する。$H_{T_p}^q(U_p, \mathcal{F})$ が
+$q > d$ のとき零であることを示せば、$\mathcal{F}$ の $U_p$ 上の
+コホモロジーが次数 $> d$ で消滅すると結論するのに十分である。
+しかし
+$$
+H^q_{T_p}(U_p, \mathcal{F}) = H^q_{f_p^{-1}(T_p)}(V_p, \mathcal{F})
+$$
+が Lemma \ref{spaces-cohomology-lemma-etale-localization-sheaf-with-support} により成り立ち、
+$V_p$ はスキームなので、Cohomology, Proposition
+\ref{cohomology-proposition-cohomological-dimension-spectral} から望む消滅を
+得る。このようにして (1) が成り立つと結論する。
+
+\medskip\noindent
+(2) を証明するため、$U \subset X$ を準コンパクト開部分空間とする。
+開部分空間 $U' = U \cup U_n$ を考える。$Z = U' \setminus U$ とおく。
+すると $g : U_n \to U'$ はエタール射で、
+$g^{-1}(Z) \to Z$ は同型である。従って Lemma
+\ref{spaces-cohomology-lemma-etale-localization-sheaf-with-support} により
+$H^q_Z(U', \mathcal{F}) = H^q_Z(U_n, \mathcal{F})$ であり、これは
+次数 $> d$ で消滅する。なぜなら $U_n$ はスキームであり、Cohomology,
+Proposition \ref{cohomology-proposition-cohomological-dimension-spectral}
+を適用できるからである。従って
+$H^d(U', \mathcal{F}) \to H^d(U, \mathcal{F})$ は全射である。
+帰納法により、問題を $U$ が $U_{p + 1}$ を含む場合まで帰着したと
+仮定する。このとき $U' = U \cup U_p$、$Z = U' \setminus U$ とおき、
+エタール射 $f_p : V_p \to U'$ で
+$f_p^{-1}(Z) \to Z$ が同型であるものを用いて論じる。言い換えると、
+再び
+$$
+H^q_Z(U', \mathcal{F}) = H^q_{f_p^{-1}(Z)}(V_p, \mathcal{F})
+$$
+であり、これも次数 $> d$ で消滅する。従って
+$H^d(U', \mathcal{F}) \to H^d(U, \mathcal{F})$ は全射である。
+最終的に $U_1 = X \subset U$ となる段階に達し、証明が完了する。
+
+\medskip\noindent
+形式的議論により、(2) から (3) が従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{コホモロジーと基底変換 I}
+\label{spaces-cohomology-section-cohomology-and-base-change}
+
+\noindent
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を $X$ 上の準連接層とする。さらに
+$g : Y' \to Y$ を $S$ 上の代数空間の射と仮定する。
+$X' = X_{Y'} = Y' \times_Y X$ を $X$ の基底変換と書き、
+$f' : X' \to Y'$ を $f$ の基底変換と書く。また射影を
+$g' : X' \to X$ と書き、$\mathcal{F}' = (g')^*\mathcal{F}$ とおく。
+この状況を表す図は次である。
+\begin{equation}
+\label{spaces-cohomology-equation-base-change-diagram}
+\vcenter{
+\xymatrix{
+\mathcal{F}' = (g')^*\mathcal{F} &
+X' \ar[r]_{g'} \ar[d]_{f'} &
+X \ar[d]^f &
+\mathcal{F} \\
+Rf'_*\mathcal{F}' &
+Y' \ar[r]^g &
+Y &
+Rf_*\mathcal{F}
+}
+}
+\end{equation}
+念頭にある基底変換性の最も簡単な場合を次に述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-affine-base-change}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の
+アフィン射とする。$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+この場合 $f_*\mathcal{F} \cong Rf_*\mathcal{F}$ は準連接層であり、
+任意の図 (\ref{spaces-cohomology-equation-base-change-diagram}) に対して
+$$
+g^*f_*\mathcal{F} = f'_*(g')^*\mathcal{F}.
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+(\ref{spaces-cohomology-equation-representable-higher-direct-image}) 周辺の議論により、
+これはスキームのアフィン射の場合に帰着する。この場合は
+Cohomology of Schemes, Lemma \ref{coherent-lemma-affine-base-change}
+で扱われている。
+\end{proof}
+
+\begin{lemma}[平坦基底変換]
+\label{spaces-cohomology-lemma-flat-base-change-cohomology}
+$S$ をスキームとする。代数空間の Cartesian 図
+$$
+\xymatrix{
+X' \ar[d]_{f'} \ar[r]_{g'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を $S$ 上で考える。$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とし、
+その引き戻しを $\mathcal{F}' = (g')^*\mathcal{F}$ とする。
+$g$ は平坦であり、$f$ は準コンパクトかつ準分離であると仮定する。
+任意の $i \geq 0$ に対して次が成り立つ。
+\begin{enumerate}
+\item Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-base-change-map-flat-case} の基底変換写像
+$$
+g^*R^if_*\mathcal{F} \longrightarrow R^if'_*\mathcal{F}',
+$$
+は同型である。
+\item $Y = \Spec(A)$ かつ $Y' = \Spec(B)$ ならば、
+$H^i(X, \mathcal{F}) \otimes_A B = H^i(X', \mathcal{F}')$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+射 $g'$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-flat} により平坦である。
+$g$ と $g'$ の平坦性は、小エタール環付きサイトの射の平坦性と同値である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-morphism-sites} を参照せよ。従って
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-base-change-map-flat-case} を適用して、基底変換写像
+$$
+g^*R^pf_*\mathcal{F} \longrightarrow R^pf'_*\mathcal{F}'
+$$
+を得る。この写像が同型であることを証明するには、$Y'$ のエタール位相で
+局所的に作業してよい。従って $Y$ と $Y'$ はアフィンスキームであると
+仮定してよい。$Y = \Spec(A)$ および $Y' = \Spec(B)$ と書く。この場合、
+実際に示そうとしているのは、写像
+$$
+H^p(X, \mathcal{F}) \otimes_A B \longrightarrow H^p(X_B, \mathcal{F}_B)
+$$
+が同型であることである。ここで
+$X_B = \Spec(B) \times_{\Spec(A)} X$ であり、$\mathcal{F}_B$ は
+$\mathcal{F}$ の $X_B$ への引き戻しである。言い換えれば、(2) を
+証明すれば十分である。
+
+\medskip\noindent
+$A \to B$ を平坦環準同型とし、$X$ を $A$ 上の準コンパクトかつ
+準分離な代数空間とする。$g' : X_B \to X$ は
+$\Spec(B) \to \Spec(A)$ の基底変換なのでアフィンであることに注意する。
+従って高次順像 $R^i(g')_*\mathcal{F}_B$ は Lemma
+\ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images} により零である。よって
+$H^p(X_B, \mathcal{F}_B) = H^p(X, g'_*\mathcal{F}_B)$ である。
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-apply-Leray}
+を参照せよ。さらに
+$$
+g'_*\mathcal{F}_B = \mathcal{F} \otimes_{\underline{A}} \underline{B}
+$$
+である。ここで $\underline{A}$、$\underline{B}$ は、それぞれ値
+$A$、$B$ をもつ環の定数層を表す。実際、右辺から左辺への写像があることは
+明らかである。任意のアフィンスキーム $U$ で $X$ 上エタールなものに対して
+\begin{align*}
+g'_*\mathcal{F}_B(U) & = \mathcal{F}_B(\Spec(B) \times_{\Spec(A)} U) \\
+& =
+\Gamma(\Spec(B) \times_{\Spec(A)} U,
+(\Spec(B) \times_{\Spec(A)} U \to U)^*\mathcal{F}|_U) \\
+& =
+B \otimes_A \mathcal{F}(U)
+\end{align*}
+であるから、この写像は同型である。Lazard の定理を用いて、$B = \colim M_i$
+を有限自由 $A$-加群 $M_i$ のフィルター付き余極限として書く。Algebra,
+Theorem \ref{algebra-theorem-lazard} を参照せよ。すると
+\begin{align*}
+H^p(X, g'_*\mathcal{F}_B) &
+= H^p(X, \mathcal{F} \otimes_{\underline{A}} \underline{B}) \\
+& = H^p(X, \colim_i \mathcal{F} \otimes_{\underline{A}} \underline{M_i}) \\
+& = \colim_i H^p(X, \mathcal{F} \otimes_{\underline{A}} \underline{M_i}) \\
+& = \colim_i H^p(X, \mathcal{F}) \otimes_A M_i \\
+& = H^p(X, \mathcal{F}) \otimes_A \colim_i M_i \\
+& = H^p(X, \mathcal{F}) \otimes_A B
+\end{align*}
+を得る。第一の等号は、上で見た
+$g'_*\mathcal{F}_B = \mathcal{F} \otimes_{\underline{A}} \underline{B}$
+による。第二の等号は $\otimes$ が余極限と可換であることによる。
+第三の等号は $X$ 上のコホモロジーが余極限と可換であることによる
+（Lemma \ref{spaces-cohomology-lemma-colimits} を参照）。第四の等号は $M_i$ が有限自由で
+あること、すなわちコホモロジーが有限直和と可換であることによる。
+第五の等号は $\otimes$ が余極限と可換であることによる。第六の等号は
+この系の選び方による。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-etale-pull-push-split}
+$f : X \to Y$ を代数空間の準コンパクト、分離かつエタールな射とする。
+このとき任意の準連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して写像
+$f^*f_*\mathcal{F} \to \mathcal{F}$ は分裂する。
+\end{lemma}
+
+\begin{proof}
+Cartesian 図
+$$
+\xymatrix{
+X \times_Y X \ar[r]_-p \ar[d]_q & X \ar[d]^f \\
+X \ar[r]^f & Y
+}
+$$
+を考える。Lemma \ref{spaces-cohomology-lemma-affine-base-change} により
+$f^*f_*\mathcal{F} = q_*p^*\mathcal{F}$ である。射
+$\Delta : X \to X \times_Y X$ は開であり（$Y$ 上エタールな代数空間の
+間の射だからである）、$f$ が分離なので閉でもある。従って
+$p^*\mathcal{F}$ は、$\Delta_*\mathcal{F}$ と、$\Delta(X)$ の
+（開かつ閉な）補集合に台をもつ準連接加群との直和である。写像を追えば
+$$
+\mathcal{F} = q_*\Delta_*\mathcal{F} \to
+q_*p^*\mathcal{F} = f^*f_*\mathcal{F} \to
+\mathcal{F}
+$$
+が恒等写像であることを確認できる。細部は省略する。
+\end{proof}
+
+
+
+\section{局所 Noether 代数空間上の連接加群}
+\label{spaces-cohomology-section-coherent}
+
+\noindent
+この節は Cohomology of Schemes, Section
+\ref{coherent-section-coherent-sheaves} の類似である。Modules on Sites,
+Definition \ref{sites-modules-definition-site-local} では、任意の環付きトポス上の
+連接加群を定義した。この概念を用いて、局所 Noether 代数空間上の
+連接加群を定義する。連接加群をもっと一般に扱うことも可能だが、ここでは
+そうしたい誘惑を退ける。
+
+\begin{definition}
+\label{spaces-cohomology-definition-coherent}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+準連接加群 $\mathcal{F}$ で $X$ 上のものが {\it 連接}であるとは、
+$\mathcal{F}$ が連接 $\mathcal{O}_X$-加群であり、サイト $X_\etale$ 上で
+Modules on Sites, Definition \ref{sites-modules-definition-site-local}
+の意味においてそうであることをいう。
+\end{definition}
+
+\noindent
+この定義は、局所 Noether スキーム上の既存の連接加群の概念と両立する。
+Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules} の主張 (5) を参照せよ
+（または、より直接には Descent, Lemma
+\ref{descent-lemma-equivalence-quasi-coherent-properties} を参照せよ）。
+従って今後、$X$ が $S$ 上の局所 Noether スキームであるとき、$X$ を
+スキームとみなした連接加群と、$X$ を代数空間とみなした連接加群とを
+区別しない。これは Properties of Spaces, Section
+\ref{spaces-properties-section-quasi-coherent} で論じた準連接加群の圏の
+対応する同一視と両立する。
+
+\medskip\noindent
+以上を踏まえると、次の補題は局所 Noether 代数空間上の連接加群に
+理解しやすい特徴づけを与える。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-coherent-Noetherian}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$ を $\mathcal{O}_X$-加群とする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{F}$ は連接である。
+\item $\mathcal{F}$ は有限型の準連接 $\mathcal{O}_X$-加群である。
+\item $\mathcal{F}$ は有限表示 $\mathcal{O}_X$-加群である。
+\item 任意のエタール射 $\varphi : U \to X$ で $U$ がスキームであるものに
+対し、引き戻し $\varphi^*\mathcal{F}$ は $U$ 上の連接加群である。
+\item 全射エタール射 $\varphi : U \to X$ で $U$ がスキームであり、
+引き戻し $\varphi^*\mathcal{F}$ が $U$ 上の連接加群であるものが存在する。
+\end{enumerate}
+特に $\mathcal{O}_X$ は連接であり、任意の可逆 $\mathcal{O}_X$-加群は
+連接であり、さらに一般に任意の有限局所自由 $\mathcal{O}_X$-加群は
+連接である。
+\end{lemma}
+
+\begin{proof}
+念のため述べると、$X$ が局所 Noether 代数空間で、$U \to X$ が
+エタール射ならば、$U$ は局所 Noether である。Properties of Spaces,
+Section \ref{spaces-properties-section-types-properties} を参照せよ。
+従って補題は、Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules} の (1) -- (5) と、
+局所 Noether スキーム上の連接加群に対する対応する結果から従う。
+Cohomology of Schemes, Lemma \ref{coherent-lemma-coherent-Noetherian}
+を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-coherent-abelian-Noetherian}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+連接 $\mathcal{O}_X$-加群の圏は Abel 圏である。より正確には、連接
+$\mathcal{O}_X$-加群の射の核と余核は連接である。連接層の任意の拡大も
+連接である。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射エタール射 $f : U \to X$ を選ぶ。引き戻し $f^*$ は
+制限関手に等しいので完全関手である。Properties of Spaces, Equation
+(\ref{spaces-properties-equation-restrict-modules}) を参照せよ。Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} により、$\mathcal{O}_X$-加群
+$\mathcal{F}$ が連接かどうかは、$f^*\mathcal{F}$ が連接かどうかを
+確認すれば判定できる。従って補題はスキームの場合、すなわち
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-abelian-Noetherian} から従う。
+\end{proof}
+
+\noindent
+連接加群は、準連接 $\mathcal{O}_X$-加群の圏の Serre 部分圏をなす。
+これは一般の環付きトポス上の加群については成り立たない。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{F}$ の任意の準連接部分加群は連接である。
+$\mathcal{F}$ の任意の準連接商加群は連接である。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射エタール射 $f : U \to X$ を選ぶ。引き戻し $f^*$ は
+制限関手に等しいので完全関手である。Properties of Spaces, Equation
+(\ref{spaces-properties-equation-restrict-modules}) を参照せよ。Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} により、$\mathcal{O}_X$-加群
+$\mathcal{G}$ が連接かどうかは、$f^*\mathcal{H}$ が連接かどうかを
+確認すれば判定できる。従って補題はスキームの場合、すなわち
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian-quasi-coherent-sub-quotient} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-tensor-hom-coherent}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$、$\mathcal{G}$ を連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{O}_X$-加群
+$\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{G}$ および
+$\SheafHom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$ は連接である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-cohomology-lemma-coherent-Noetherian} により、これはスキームに対する結果から
+従う。Cohomology of Schemes, Lemma
+\ref{coherent-lemma-tensor-hom-coherent} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-local-isomorphism}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$、$\mathcal{G}$ を連接 $\mathcal{O}_X$-加群とする。
+$\varphi : \mathcal{G} \to \mathcal{F}$ を $\mathcal{O}_X$-加群の準同型とする。
+$\overline{x}$ を $X$ の幾何学的点で、$x \in |X|$ の上にあるものとする。
+\begin{enumerate}
+\item $\mathcal{F}_{\overline{x}} = 0$ ならば、開近傍
+$X' \subset X$ で $x$ を含み、$\mathcal{F}|_{X'} = 0$ となるものが存在する。
+\item $\varphi_{\overline{x}} : \mathcal{G}_{\overline{x}} \to
+\mathcal{F}_{\overline{x}}$ が単射ならば、開近傍
+$X' \subset X$ で $x$ を含み、$\varphi|_{X'}$ が単射となるものが存在する。
+\item $\varphi_{\overline{x}} : \mathcal{G}_{\overline{x}} \to
+\mathcal{F}_{\overline{x}}$ が全射ならば、開近傍
+$X' \subset X$ で $x$ を含み、$\varphi|_{X'}$ が全射となるものが存在する。
+\item $\varphi_{\overline{x}} : \mathcal{G}_{\overline{x}} \to
+\mathcal{F}_{\overline{x}}$ が全単射ならば、開近傍
+$X' \subset X$ で $x$ を含み、$\varphi|_{X'}$ が同型となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\varphi : U \to X$ をエタール射で $U$ がスキームであるものとし、
+$u \in U$ を $x$ へ写る点とする。Properties of Spaces, Lemmas
+\ref{spaces-properties-lemma-stalk-quasi-coherent} および
+\ref{spaces-properties-lemma-describe-etale-local-ring}、ならびに
+More on Algebra, Lemma
+\ref{more-algebra-lemma-dumb-properties-henselization} により、
+$\varphi_{\overline{x}}$ が単射、全射、または全単射であることと、
+$\varphi_u : \varphi^*\mathcal{F}_u \to \varphi^*\mathcal{G}_u$ が
+対応する性質をもつこととは同値である。従ってこの補題のスキーム版を
+適用すると、必要なら $U$ を縮小した後、写像
+$\varphi^*\mathcal{F} \to \varphi^*\mathcal{G}$ は単射、全射、または
+同型になる。$X' \subset X$ を $|\varphi|(|U|) \subset |X|$ に対応する
+開部分空間とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-open-subspaces} を参照せよ。
+$\{U \to X'\}$ はエタール位相の被覆なので、$\varphi|_{X'}$ は望みどおり
+単射、全射、または同型であると結論できる。最後に、写像
+$\mathcal{F} \to 0$ を考えれば (2) から (1) が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-coherent-support-closed}
+$S$ をスキームとする。$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。$i : Z \to X$ を
+$\mathcal{F}$ のスキーム論的台とし、$\mathcal{G}$ を準連接
+$\mathcal{O}_Z$-加群で $i_*\mathcal{G} = \mathcal{F}$ を満たすものとする。
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support} を参照せよ。
+このとき $\mathcal{G}$ は連接 $\mathcal{O}_Z$-加群である。
+\end{lemma}
+
+\begin{proof}
+連接加群は特に有限型なので、補題の主張は意味をもつ。さらに
+$Z \to X$ は閉埋め込みなので局所有限型であり、従って $Z$ は局所
+Noether である。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-immersion-locally-finite-type} および
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}
+を参照せよ。最後に、$\mathcal{G}$ は有限型なので、Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} により連接 $\mathcal{O}_Z$-加群である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-i-star-equivalence}
+$S$ をスキームとする。$i : Z \to X$ を $S$ 上の局所 Noether
+代数空間の閉埋め込みとする。$\mathcal{I} \subset \mathcal{O}_X$ を
+$Z$ を切り出す準連接イデアル層とする。関手 $i_*$ は、
+連接 $\mathcal{O}_X$-加群で $\mathcal{I}$ により零化されるものの圏と、
+連接 $\mathcal{O}_Z$-加群の圏との間の圏同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+関手は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence} により充満忠実である。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群で $\mathcal{I}$ により
+零化されるものとする。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence} により、
+$\mathcal{F} = i_*\mathcal{G}$ と、ある準連接層 $\mathcal{G}$ で
+$Z$ 上のものについて書ける。$\mathcal{G}$ が連接であることはエタール局所的に確認できる
+（Lemma \ref{spaces-cohomology-lemma-coherent-Noetherian}）。スキームによるエタール被覆を
+選べば、スキームの場合（Cohomology of Schemes, Lemma
+\ref{coherent-lemma-i-star-equivalence}）により $\mathcal{G}$ は連接である。
+従って関手は充満忠実であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-finite-pushforward-coherent}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の有限射で、
+$Y$ が局所 Noether であるものとする。$\mathcal{F}$ を連接
+$\mathcal{O}_X$-加群とする。$f$ は有限で $Y$ は局所 Noether であると
+仮定する。このとき $R^pf_*\mathcal{F} = 0$ が $p > 0$ のとき成り立ち、
+$f_*\mathcal{F}$ は連接である。
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射エタール射 $V \to Y$ を選ぶ。このとき
+$V \times_Y X \to V$ は局所 Noether スキームの有限射である。
+(\ref{spaces-cohomology-equation-representable-higher-direct-image}) によりスキームの場合、
+すなわち Cohomology of Schemes, Lemma
+\ref{coherent-lemma-finite-pushforward-coherent} に帰着する。
+\end{proof}
+
+
+
+
+
+
+\section{Noether 空間上の連接層}
+\label{spaces-cohomology-section-coherent-quasi-compact}
+
+\noindent
+この節では、Noether 代数空間上の連接層のいくつかの性質を述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-acc-coherent}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。$\mathcal{F}$ の
+準連接部分加群について昇鎖条件が成り立つ。言い換えると、準連接部分加群の
+任意の列
+$$
+\mathcal{F}_1 \subset \mathcal{F}_2 \subset \ldots \subset \mathcal{F}
+$$
+が与えられると、$\mathcal{F}_n = \mathcal{F}_{n + 1} = \ldots $ となる
+ある $n \geq 0$ が存在する。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $U$ と全射エタール射 $U \to X$ を選ぶ
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照）。すると
+$U$ は Noether スキームである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} による）。
+$\mathcal{F}_n|_U = \mathcal{F}_{n + 1}|_U = \ldots$ ならば
+$\mathcal{F}_n = \mathcal{F}_{n + 1} = \ldots$ である。従って結果は
+スキームの場合から従う。Cohomology of Schemes, Lemma
+\ref{coherent-lemma-acc-coherent} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-power-ideal-kills-sheaf}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を $X$ 上の連接層とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を、閉部分空間 $Z \subset X$ に
+対応する準連接イデアル層とする。このとき、ある $n \geq 0$ に対して
+$\mathcal{I}^n\mathcal{F} = 0$ となることと
+$\text{Supp}(\mathcal{F}) \subset Z$ となることは同値である
+（集合論的な意味で）。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $U$ と全射エタール射 $U \to X$ を選ぶ
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照）。すると
+$U$ は Noether スキームである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} による）。
+$\mathcal{I}^n\mathcal{F}|_U = 0$ となることと
+$\mathcal{I}^n\mathcal{F} = 0$ となることは同値であり、台についての条件も
+同様である。従って結果はスキームの場合から従う。Cohomology of Schemes,
+Lemma \ref{coherent-lemma-power-ideal-kills-sheaf} を参照せよ。
+\end{proof}
+
+\begin{lemma}[Artin--Rees]
+\label{spaces-cohomology-lemma-Artin-Rees}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を $X$ 上の連接層とする。
+$\mathcal{G} \subset \mathcal{F}$ を準連接部分層とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とする。
+このとき $c \geq 0$ が存在して、すべての $n \geq c$ に対し
+$$
+\mathcal{I}^{n - c}(\mathcal{I}^c\mathcal{F} \cap \mathcal{G})
+=
+\mathcal{I}^n\mathcal{F} \cap \mathcal{G}
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+アフィンスキーム $U$ と全射エタール射 $U \to X$ を選ぶ
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照）。すると
+$U$ は Noether スキームである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} による）。
+補題の等式が成り立つことと、$U$ へ制限した後に成り立つこととは同値である。
+従って結果はスキームの場合から従う。Cohomology of Schemes, Lemma
+\ref{coherent-lemma-Artin-Rees} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-homs-over-open}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{G}$ を連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{I} \subset \mathcal{O}_X$ を準連接イデアル層とする。
+$Z \subset X$ を対応する閉部分空間と書き、$U = X \setminus Z$ とおく。
+標準同型
+$$
+\colim_n \Hom_{\mathcal{O}_X}(\mathcal{I}^n\mathcal{G}, \mathcal{F})
+\longrightarrow
+\Hom_{\mathcal{O}_U}(\mathcal{G}|_U, \mathcal{F}|_U).
+$$
+がある。特に同型
+$$
+\colim_n \Hom_{\mathcal{O}_X}(\mathcal{I}^n, \mathcal{F})
+\longrightarrow
+\Gamma(U, \mathcal{F}).
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$W$ をアフィンスキームとし、$W \to X$ を全射エタール射とする
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照）。
+$R = W \times_X W$ とおく。このとき $W$ と $R$ は Noether スキームである。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} を参照せよ。
+従って、$\mathcal{F}$、$\mathcal{G}$、$\mathcal{I}$、$U$、$Z$ を $W$ と
+$R$ へ制限したものについては、Cohomology of Schemes, Lemma
+\ref{coherent-lemma-homs-over-open} により結果が成り立つ。形式的に、結果は
+$X$ 上でも成り立つ。
+\end{proof}
+
+
+
+
+
+
+\section{連接層のデヴィサージュ}
+\label{spaces-cohomology-section-devissage}
+
+\noindent
+この節は Cohomology of Schemes, Section
+\ref{coherent-section-devissage} の類似である。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-prepare-filter-support}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を $X$ 上の連接層とする。
+$\text{Supp}(\mathcal{F}) = Z \cup Z'$ で、$Z$、$Z'$ が閉であると仮定する。
+このとき連接層の短完全列
+$$
+0 \to \mathcal{G}' \to \mathcal{F} \to \mathcal{G} \to 0
+$$
+で、$\text{Supp}(\mathcal{G}') \subset Z'$ かつ
+$\text{Supp}(\mathcal{G}) \subset Z$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I} \subset \mathcal{O}_X$ を、$Z$ 上の被約誘導閉部分空間構造を
+定めるイデアル層とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} を参照せよ。部分層
+$\mathcal{G}'_n = \mathcal{I}^n\mathcal{F}$ と商
+$\mathcal{G}_n = \mathcal{F}/\mathcal{I}^n\mathcal{F}$ を考える。各 $n$ に
+対して短完全列
+$$
+0 \to \mathcal{G}'_n \to \mathcal{F} \to \mathcal{G}_n \to 0
+$$
+がある。任意の幾何学的点 $\overline{x}$ で $Z' \setminus Z$ の点であるものに対して
+$\mathcal{I}_{\overline{x}} = \mathcal{O}_{X, \overline{x}}$ であり、従って
+$\mathcal{G}_{n, \overline{x}} = 0$ である。よって
+$\text{Supp}(\mathcal{G}_n) \subset Z$ である。
+$X \setminus Z'$ は Noether 代数空間であることに注意する。従って Lemma
+\ref{spaces-cohomology-lemma-power-ideal-kills-sheaf} により、ある $n$ に対して
+$\mathcal{G}'_n|_{X \setminus Z'} =
+\mathcal{I}^n\mathcal{F}|_{X \setminus Z'} = 0$ となる。このような $n$ に
+対して $\text{Supp}(\mathcal{G}'_n) \subset Z'$ である。従って
+$\mathcal{G}' = \mathcal{G}'_n$ および $\mathcal{G} = \mathcal{G}_n$ と
+おけばよい。
+\end{proof}
+
+\noindent
+以下では、Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-support} で定義した
+有限型加群のスキーム論的台を自由に用いる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-prepare-filter-irreducible}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を $X$ 上の連接層とする。$\mathcal{F}$ のスキーム論的台が
+被約な $Z \subset X$ であり、$|Z|$ が既約であると仮定する。このとき、
+整数 $r > 0$、零でないイデアル層 $\mathcal{I} \subset \mathcal{O}_Z$、
+および連接層の単射
+$$
+i_*\left(\mathcal{I}^{\oplus r}\right) \to \mathcal{F}
+$$
+で、その余核の台が $Z$ の真の閉部分空間であるものが存在する。
+\end{lemma}
+
+\begin{proof}
+仮定により、連接 $\mathcal{O}_Z$-加群 $\mathcal{G}$ で台が $Z$ であり、
+$\mathcal{F} \cong i_*\mathcal{G}$ を満たすものが存在する。Lemma
+\ref{spaces-cohomology-lemma-coherent-support-closed} を参照せよ。従って
+$Z = X$ かつ $i = \text{id}$ の場合に補題を証明すれば十分である。
+
+\medskip\noindent
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}
+により、スキームである稠密開部分空間 $U \subset X$ が存在する。
+$U$ は Noether 整スキームであることに注意する。$U$ を縮小した後、
+$\mathcal{F}|_U \cong \mathcal{O}_U^{\oplus r}$ と仮定してよい
+（例えば Cohomology of Schemes, Lemma
+\ref{coherent-lemma-prepare-filter-irreducible}、または直接的な代数の議論による）。
+$\mathcal{I} \subset \mathcal{O}_X$ を、その付随する閉部分空間が
+$U$ の補空間で $X$ におけるものである準連接イデアル層とする
+（例えば Properties of Spaces, Section
+\ref{spaces-properties-section-reduced} を参照）。Lemma
+\ref{spaces-cohomology-lemma-homs-over-open} により、$n \geq 0$ と射
+$\mathcal{I}^n(\mathcal{O}_X^{\oplus r}) \to \mathcal{F}$ で、$U$ 上で
+もとの同型を復元するものが存在する。
+$\mathcal{I}^n(\mathcal{O}_X^{\oplus r}) = (\mathcal{I}^n)^{\oplus r}$
+なので、補題にある形の写像を得る。これは単射である。実際、
+零でない切断 $\sigma$ を、$\mathcal{I}^{\oplus r}$ の切断で、
+スキーム $W$ 上のものとしてとる。ただしこれは $X$ 上エタールとする。
+$X$、従って $W$ は被約なので、$\sigma$ の台は
+$W$ の空でない開部分を含む。しかし
+$(\mathcal{I}^n)^{\oplus r} \to \mathcal{F}$ の核は稠密開部分上で零なので、
+$\sigma$ はその核の切断にはなりえない。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-coherent-filter}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{F}$ を $X$ 上の連接層とする。連接部分層によるフィルトレーション
+$$
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset
+\ldots \subset \mathcal{F}_m = \mathcal{F}
+$$
+で、各 $j = 1, \ldots, m$ に対して、被約閉部分空間 $Z_j \subset X$ で
+$|Z_j|$ が既約であるものと、イデアル層
+$\mathcal{I}_j \subset \mathcal{O}_{Z_j}$ が
+存在し、
+$$
+\mathcal{F}_j/\mathcal{F}_{j - 1}
+\cong (Z_j \to X)_* \mathcal{I}_j
+$$
+となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+集合
+$$
+\mathcal{T} =
+\left\{
+\begin{matrix}
+T \subset |X|
+\text{ は閉であり、連接層 }
+\mathcal{F} \\
+\text{ で }
+\text{Supp}(\mathcal{F}) = T
+\text{ を満たし、補題が成り立たないものが存在する}
+\end{matrix}
+\right\}
+$$
+を考える。$\mathcal{T}$ が空であることを示したい。そうでなければ、
+$|X|$ は Noether なので（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-topology}）、極小元
+$T \in \mathcal{T}$ を選べる。これは、補題が成り立たない連接層
+$\mathcal{F}$ が $X$ 上に存在し、その台が $T$ であるということである。明らかに
+$T \not = \emptyset$ である。台が空である層は零層だけであり、それについては
+$m = 0$ として補題が成り立つからである。
+
+\medskip\noindent
+$T$ が既約でなければ、$T = Z_1 \cup Z_2$ と書ける。ここで
+$Z_1, Z_2$ は閉で、$T$ より真に小さい。Lemma
+\ref{spaces-cohomology-lemma-prepare-filter-support} を適用すると、連接層の短完全列
+$$
+0 \to
+\mathcal{G}_1 \to
+\mathcal{F} \to
+\mathcal{G}_2 \to 0
+$$
+で $\text{Supp}(\mathcal{G}_i) \subset Z_i$ となるものを得る。
+$T$ の極小性により、各 $\mathcal{G}_i$ は補題の主張にある
+フィルトレーションをもつ。$\mathcal{F}$ 上に誘導される
+フィルトレーションを考えると矛盾を得る。従って $T$ は既約である。
+
+\medskip\noindent
+$T$ は既約と仮定する。$\mathcal{J}$ を、$T$ 上の被約誘導閉部分空間構造を
+定めるイデアル層とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} を参照せよ。Lemma
+\ref{spaces-cohomology-lemma-power-ideal-kills-sheaf} により、ある $n \geq 0$ に対して
+$\mathcal{J}^n\mathcal{F} = 0$ となる。従ってフィルトレーション
+$$
+0 = \mathcal{I}^n\mathcal{F} \subset \mathcal{I}^{n - 1}\mathcal{F}
+\subset \ldots \subset \mathcal{I}\mathcal{F} \subset \mathcal{F}
+$$
+を得る。その各逐次部分商は $\mathcal{J}$ により零化される。従って、
+これらの部分商がそれぞれ補題の主張にあるフィルトレーションをもつならば、
+$\mathcal{F}$ もそうである。言い換えると、$\mathcal{J}$ が
+$\mathcal{F}$ を零化すると仮定してよい。
+
+\medskip\noindent
+$T$ は既約であり、$\mathcal{J}\mathcal{F} = 0$ で、$\mathcal{J}$ は
+上のとおりであると仮定する。このとき $\mathcal{F}$ のスキーム論的台は
+$T$ である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence} を参照せよ。従って Lemma
+\ref{spaces-cohomology-lemma-prepare-filter-irreducible} を適用できる。これにより短完全列
+$$
+0 \to
+i_*(\mathcal{I}^{\oplus r}) \to
+\mathcal{F} \to
+\mathcal{Q} \to 0
+$$
+を得る。ここで $\mathcal{Q}$ の台は $T$ の真の閉部分集合である。
+$\mathcal{Q}$ は望む型のフィルトレーションを $T$ の極小性によりもつ。
+すると明らかに $\mathcal{F}$ もそうであり、最後の矛盾を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-property-initial}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{P}$ を $X$ 上の連接層の性質とする。次を仮定する。
+\begin{enumerate}
+\item 連接層の任意の短完全列
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F} \to \mathcal{F}_2 \to 0
+$$
+について、$\mathcal{F}_i$ が $i = 1, 2$ に対して性質 $\mathcal{P}$ を
+もつならば、$\mathcal{F}$ もそうである。
+\item 任意の被約閉部分空間 $Z \subset X$ で $|Z|$ が既約であるものと、任意の
+準連接イデアル層 $\mathcal{I} \subset \mathcal{O}_Z$ に対して、
+$\mathcal{P}$ が $i_*\mathcal{I}$ に対して成り立つ。
+\end{enumerate}
+このとき性質 $\mathcal{P}$ は $X$ 上のすべての連接層について成り立つ。
+\end{lemma}
+
+\begin{proof}
+まず、$\mathcal{F}$ が連接層で、連接部分層によるフィルトレーション
+$$
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset
+\ldots \subset \mathcal{F}_m = \mathcal{F}
+$$
+をもち、各 $\mathcal{F}_i/\mathcal{F}_{i - 1}$ が性質 $\mathcal{P}$ を
+もつならば、$\mathcal{F}$ もそうであることに注意する。これは
+$\mathcal{P}$ の性質 (1) から従う。他方、Lemma
+\ref{spaces-cohomology-lemma-coherent-filter} により、任意の $\mathcal{F}$ を (2) にある形の
+逐次部分商をもつようにフィルター付けできる。従って補題が従う。
+\end{proof}
+
+\noindent
+上の補題の、より有用な変種を述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-property-higher-rank-cohomological}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{P}$ を $X$ 上の連接層の性質とする。次を仮定する。
+\begin{enumerate}
+\item 連接層の任意の短完全列
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F} \to \mathcal{F}_2 \to 0
+$$
+について、$\mathcal{F}_i$ が $i = 1, 2$ に対して性質 $\mathcal{P}$ を
+もつならば、$\mathcal{F}$ もそうである。
+\item $\mathcal{P}$ が $\mathcal{F}^{\oplus r}$ に対して、ある
+$r \geq 1$ について成り立つならば、$\mathcal{F}$ に対しても成り立つ。
+\item 任意の被約閉部分空間 $i : Z \to X$ で $|Z|$ が既約であるものに
+対して、連接層 $\mathcal{G}$ で $Z$ 上にあり、次を満たすものが存在する。
+\begin{enumerate}
+\item $\text{Supp}(\mathcal{G}) = Z$。
+\item 零でない任意の準連接イデアル層
+$\mathcal{I} \subset \mathcal{O}_Z$ に対して、準連接部分層
+$\mathcal{G}' \subset \mathcal{I}\mathcal{G}$ で、
+$\text{Supp}(\mathcal{G}/\mathcal{G}')$ が $|Z|$ の真の閉部分集合であり、
+$\mathcal{P}$ が $i_*\mathcal{G}'$ に対して成り立つものが存在する。
+\end{enumerate}
+\end{enumerate}
+このとき性質 $\mathcal{P}$ は $X$ 上のすべての連接層について成り立つ。
+\end{lemma}
+
+\begin{proof}
+集合
+$$
+\mathcal{T} =
+\left\{
+\begin{matrix}
+T \subset |X|
+\text{ は空でない閉集合であり、連接層 } \\
+\mathcal{F}
+\text{ で }
+\text{Supp}(\mathcal{F}) = T
+\text{ を満たし、補題が成り立たないものが存在する}
+\end{matrix}
+\right\}
+$$
+を考える。$\mathcal{T}$ が空であることを示したい。そうでなければ、
+$|X|$ は Noether なので（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-topology}）、極小元
+$T \in \mathcal{T}$ を選べる。これは、連接層 $\mathcal{F}$ が $X$ 上に
+存在し、その台が $T$ であり、補題が成り立たないということである。
+
+\medskip\noindent
+$T$ が既約でなければ、$T = Z_1 \cup Z_2$ と書ける。ここで
+$Z_1, Z_2$ は閉で、$T$ より真に小さい。Lemma
+\ref{spaces-cohomology-lemma-prepare-filter-support} を適用すると、連接層の短完全列
+$$
+0 \to
+\mathcal{G}_1 \to
+\mathcal{F} \to
+\mathcal{G}_2 \to 0
+$$
+で $\text{Supp}(\mathcal{G}_i) \subset Z_i$ となるものを得る。
+$T$ の極小性により、各 $\mathcal{G}_i$ は $\mathcal{P}$ をもつ。
+従って (1) により $\mathcal{F}$ は性質 $\mathcal{P}$ をもち、矛盾する。
+
+\medskip\noindent
+$T$ は既約と仮定する。$\mathcal{J}$ を、$T$ 上の被約誘導閉部分空間構造を
+定めるイデアル層とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} を参照せよ。Lemma
+\ref{spaces-cohomology-lemma-power-ideal-kills-sheaf} により、ある $n \geq 0$ に対して
+$\mathcal{J}^n\mathcal{F} = 0$ となる。従ってフィルトレーション
+$$
+0 = \mathcal{J}^n\mathcal{F} \subset \mathcal{J}^{n - 1}\mathcal{F}
+\subset \ldots \subset \mathcal{J}\mathcal{F} \subset \mathcal{F}
+$$
+を得る。その各逐次部分商は $\mathcal{J}$ により零化される。従って、
+これらの部分商がそれぞれ補題の主張にあるフィルトレーションをもつならば、
+(1) により $\mathcal{F}$ もそうである。言い換えると、$\mathcal{J}$ が
+$\mathcal{F}$ を零化すると仮定してよい。
+
+\medskip\noindent
+$T$ は既約であり、$\mathcal{J}\mathcal{F} = 0$ で、$\mathcal{J}$ は
+上のとおりであると仮定する。$i : Z \to X$ を $\mathcal{J}$ に対応する
+閉部分空間と書く。このとき $\mathcal{F} = i_*\mathcal{H}$ であり、ここで
+$\mathcal{O}_Z$-加群 $\mathcal{H}$ は連接である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-i-star-equivalence} および Lemma
+\ref{spaces-cohomology-lemma-coherent-support-closed} を参照せよ。$\mathcal{G}$ を (3)(a) と
+(3)(b) を満たす $Z$ 上の連接層とする。Lemma
+\ref{spaces-cohomology-lemma-prepare-filter-irreducible} を適用して単射
+$$
+\mathcal{I}_1^{\oplus r_1} \to \mathcal{H}
+\quad\text{および}\quad
+\mathcal{I}_2^{\oplus r_2} \to \mathcal{G}
+$$
+を得る。ここで余核の台は $Z$ の真の閉部分集合である。従って空でない
+開部分 $V \subset Z$ で
+$$
+\mathcal{H}^{\oplus r_2}_V \cong \mathcal{G}^{\oplus r_1}_V
+$$
+となるものが存在する。$\mathcal{I} \subset \mathcal{O}_Z$ を
+$Z \setminus V$ を切り出す準連接イデアル層とすると、Lemma
+\ref{spaces-cohomology-lemma-homs-over-open} により写像
+$$
+\mathcal{I}^n\mathcal{G}^{\oplus r_1} \longrightarrow \mathcal{H}^{\oplus r_2}
+$$
+で $V$ 上同型となるものを得る。核は $Z \setminus V$ に台をもち、従って
+$\mathcal{I}$ のある冪により零化される。Lemma
+\ref{spaces-cohomology-lemma-power-ideal-kills-sheaf} を参照せよ。従って $n$ を増加させれば、
+表示した写像が単射であると仮定してよい。Lemma
+\ref{spaces-cohomology-lemma-Artin-Rees} を参照せよ。(3)(b) を適用すると
+$\mathcal{G}' \subset \mathcal{I}^n\mathcal{G}$ で、
+$$
+(i_*\mathcal{G}')^{\oplus r_1} \longrightarrow
+i_*\mathcal{H}^{\oplus r_2} = \mathcal{F}^{\oplus r_2}
+$$
+が単射となり、その余核が $Z$ の真の閉部分集合に台をもち、かつ性質
+$\mathcal{P}$ が $i_*\mathcal{G}'$ に対して成り立つものを得る。
+(1) により、性質 $\mathcal{P}$ は $(i_*\mathcal{G}')^{\oplus r_1}$ に
+対して成り立つ。(1) と $T = |Z|$ の極小性により、性質 $\mathcal{P}$ は
+$\mathcal{F}^{\oplus r_2}$ に対して成り立つ。最後に (2) により、性質
+$\mathcal{P}$ は $\mathcal{F}$ に対して成り立ち、望む矛盾を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-property-higher-rank-cohomological-variant}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{P}$ を $X$ 上の連接層の性質とする。次を仮定する。
+\begin{enumerate}
+\item $X$ 上の連接層の任意の短完全列について、三つのうち二つが
+性質 $\mathcal{P}$ をもつならば、残る一つもそうである。
+\item $\mathcal{P}$ が $\mathcal{F}^{\oplus r}$ に対して、ある
+$r \geq 1$ について成り立つならば、$\mathcal{F}$ に対しても成り立つ。
+\item 任意の被約閉部分空間 $i : Z \to X$ で $|Z|$ が既約であるものに
+対して、連接層 $\mathcal{G}$ で $X$ 上にあり、そのスキーム論的台が $Z$ で
+あり、$\mathcal{P}$ が $\mathcal{G}$ に対して成り立つものが存在する。
+\end{enumerate}
+このとき性質 $\mathcal{P}$ は $X$ 上のすべての連接層について成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-cohomology-lemma-property-initial} の条件 (1) と (2) が成り立つことを示す。
+条件 (1) については明らかである。(2) を示すため、
+$$
+\mathcal{T} =
+\left\{
+\begin{matrix}
+i : Z \to X \text{ は被約閉部分空間で }|Z|\text{ が既約であり}\\
+\text{ しかも }i_*\mathcal{I}\text{ が }\mathcal{P}
+\text{ をもたないような準連接 }\mathcal{I} \subset \mathcal{O}_Z
+\end{matrix}
+\right\}
+$$
+とおく。$\mathcal{T}$ が空でなければ、$X$ は Noether なので、
+極小な $i : Z \to X$ を $\mathcal{T}$ の中に見つけられる。これが矛盾を
+導くことを示す。
+
+\medskip\noindent
+$\mathcal{G}$ を、スキーム論的台が $Z$ であり、仮定 (3) で存在を
+仮定した層とする。$\varphi : i_*\mathcal{I}^{\oplus r} \to \mathcal{G}$ を
+Lemma \ref{spaces-cohomology-lemma-prepare-filter-irreducible} と同じものとする。
+$$
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset
+\ldots \subset \mathcal{F}_m = \Coker(\varphi)
+$$
+を Lemma \ref{spaces-cohomology-lemma-coherent-filter} と同じフィルトレーションとする。
+$Z$ の極小性と仮定 (1) により、$\Coker(\varphi)$ は性質 $\mathcal{P}$ を
+もつ。$\varphi$ は単射なので、仮定 (1) をもう一度用いると
+$i_*\mathcal{I}^{\oplus r}$ は性質 $\mathcal{P}$ をもつ。仮定 (2) を
+用いると、$i_*\mathcal{I}$ は性質 $\mathcal{P}$ をもつと結論できる。
+
+\medskip\noindent
+最後に、$\mathcal{J} \subset \mathcal{O}_Z$ を第二の準連接イデアル層とし、
+$\mathcal{K} = \mathcal{I} \cap \mathcal{J}$ とおいて短完全列
+$$
+0 \to \mathcal{K} \to \mathcal{I} \to \mathcal{I}/\mathcal{K} \to 0
+\quad
+\text{および}
+\quad
+0 \to \mathcal{K} \to \mathcal{J} \to \mathcal{J}/\mathcal{K} \to 0
+$$
+を考える。上と同様に $Z$ の極小性を用いると、
+$i_*\mathcal{I}/\mathcal{K}$ と $i_*\mathcal{J}/\mathcal{K}$ は
+$\mathcal{P}$ を満たす。従って仮定 (1) により、$i_*\mathcal{K}$、次いで
+$i_*\mathcal{J}$ は $\mathcal{P}$ を満たす。言い換えれば、$Z$ は
+$\mathcal{T}$ の元ではなく、望む矛盾を得る。
+\end{proof}
+
+
+
+
+
+
+\section{連接加群の極限}
+\label{spaces-cohomology-section-limits}
+
+\noindent
+（局所 Noether 代数空間上の）連接加群の余極限は、通常は連接ではない。
+しかし、代数空間上の準連接加群の任意の余極限が準連接であるため、それは
+準連接である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-properties-quasi-coherent} を参照せよ。逆に、
+代数空間が Noether ならば、すべての準連接加群は連接加群の
+フィルター付き余極限である。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-directed-colimit-coherent}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+すべての準連接 $\mathcal{O}_X$-加群は、その連接部分加群の
+フィルター付き余極限である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$\mathcal{G}, \mathcal{H} \subset \mathcal{F}$ が連接
+$\mathcal{O}_X$-部分加群ならば、$\mathcal{G} \oplus \mathcal{H} \to
+\mathcal{F}$ の像は、それらをともに含む別の連接
+$\mathcal{O}_X$-部分加群である（Lemmas
+\ref{spaces-cohomology-lemma-coherent-abelian-Noetherian} および
+\ref{spaces-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient} を参照）。
+このようにして、この系が有向であることが分かる。従って、
+$\mathcal{F}$ を連接加群のフィルター付き余極限として書けることを
+示せば十分である。そのとき、それらの加群の $\mathcal{F}$ における像を
+とれば、十分多く存在することが分かるからである。
+
+\medskip\noindent
+$U$ をアフィンスキームとし、$U \to X$ を全射エタール射とする。
+$R = U \times_X U$ とおくと、通常どおり $X = U/R$ である。
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-quasi-coherent} により
+$\QCoh(\mathcal{O}_X) = \QCoh(U, R, s, t, c)$ であることが分かる。
+従って、$\QCoh(U, R, s, t, c)$ について対応する事実を示すことに帰着する。
+よって結果は、より一般的な Groupoids, Lemma
+\ref{groupoids-lemma-colimit-coherent} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-direct-colimit-finite-presentation}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間のアフィン射で、
+$Y$ が Noether であるものとする。このとき、すべての準連接
+$\mathcal{O}_X$-加群は、有限表示 $\mathcal{O}_X$-加群の
+フィルター付き余極限である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$f_*\mathcal{F} = \colim \mathcal{H}_i$ と書く。ここで
+$\mathcal{H}_i$ は連接 $\mathcal{O}_Y$-加群である。Lemma
+\ref{spaces-cohomology-lemma-directed-colimit-coherent} を参照せよ。Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} により、加群 $\mathcal{H}_i$ は有限表示
+$\mathcal{O}_Y$-加群である。従って $f^*\mathcal{H}_i$ は有限表示
+$\mathcal{O}_X$-加群である。Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules} を参照せよ。写像
+$$
+\colim f^*\mathcal{H}_i = f^*f_*\mathcal{F} \to \mathcal{F}
+$$
+は、$f$ がアフィンであると仮定したので全射であると主張する。実際、
+スキーム $V$ と全射エタール射 $V \to Y$ を選ぶ。
+$U = X \times_Y V$ とおく。このとき $U$ はスキームで、
+$f' : U \to V$ はアフィンであり、$U \to X$ は全射エタールである。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules} により、
+$f'_*(\mathcal{F}|_U) = f_*\mathcal{F}|_V$ であり、引き戻しについても
+同様である。従って $f^*f_*\mathcal{F} \to \mathcal{F}$ の $U$ への制限は
+写像
+$$
+f^*f_*\mathcal{F}|_U = (f')^*(f_*\mathcal{F})|_V) =
+(f')^*f'_*(\mathcal{F}|_U) \to \mathcal{F}|_U
+$$
+であり、$f'$ はスキームのアフィン射なので全射である。従って主張が成り立つ。
+
+\medskip\noindent
+$X$ 上のすべての準連接加群は、有限表示加群のフィルター付き余極限の商で
+あると結論する。特に、$\mathcal{F}$ は写像
+$$
+\colim_{j \in J} \mathcal{G}_j \longrightarrow \colim_{i \in I} \mathcal{H}_i
+$$
+の余核である。ここで $\mathcal{G}_j$ と $\mathcal{H}_i$ は有限表示である。
+各 $j \in I$ に対して、ある $i \in I$ と射
+$\alpha : \mathcal{G}_j \to \mathcal{H}_i$ が存在し、図
+$$
+\xymatrix{
+\mathcal{G}_j \ar[r]_\alpha \ar[d] & \mathcal{H}_i \ar[d] \\
+\colim_{j \in J} \mathcal{G}_j \ar[r] &
+\colim_{i \in I} \mathcal{H}_i
+}
+$$
+が可換であることに注意する。Lemma
+\ref{spaces-cohomology-lemma-finite-presentation-quasi-compact-colimit} を参照せよ。この状況で
+$\Coker(\alpha)$ は有限表示 $\mathcal{O}_X$-加群で、写像
+$\Coker(\alpha) \to \mathcal{F}$ を備える。集合 $K$ を、上のような三つ組
+$(i, j, \alpha)$ からなるものとする。
+$(i, j, \alpha) \leq (i', j', \alpha')$ とは、
+$i \leq i'$、$j \leq j'$ であり、図
+$$
+\xymatrix{
+\mathcal{G}_j \ar[r]_\alpha \ar[d] & \mathcal{H}_i \ar[d] \\
+\mathcal{G}_{j'} \ar[r]^{\alpha'} &
+\mathcal{H}_{i'}
+}
+$$
+が可換であることと定める。以上から $K$ は有向半順序集合であり、
+$$
+\mathcal{F} = \colim_{(i, j, \alpha) \in K} \Coker(\alpha),
+$$
+となる。これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+\section{コホモロジーの消滅}
+\label{spaces-cohomology-section-vanishing}
+
+\noindent
+この節では、準コンパクトかつ準分離な代数空間について、すべての準連接層の
+高次コホモロジーが消滅するならばアフィンであることを示す。一連の補題に
+よってこれを行うが、それらは Proposition
+\ref{spaces-cohomology-proposition-vanishing-affine} を証明すればすべて不要になる。
+
+\begin{situation}
+\label{spaces-cohomology-situation-vanishing}
+ここで $S$ はスキームであり、$X$ は $S$ 上の準コンパクトかつ準分離な
+代数空間で、次の性質をもつ。すべての準連接 $\mathcal{O}_X$-加群
+$\mathcal{F}$ に対して $H^1(X, \mathcal{F}) = 0$ である。
+$A = \Gamma(X, \mathcal{O}_X)$ とおく。
+\end{situation}
+
+\noindent
+標準射
+$$
+p : X \longrightarrow \Spec(A)
+$$
+が同型であることを示したい（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-morphism-to-affine-scheme} を参照）。
+$M$ が $A$-加群ならば、準連接加群 $M \otimes_A \mathcal{O}_X$ を
+$p^*\tilde M$ と書く。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-compute}
+Situation \ref{spaces-cohomology-situation-vanishing} において、$A$-加群 $M$ に対し
+$p_*(M \otimes_A \mathcal{O}_X) = \widetilde{M}$ かつ
+$\Gamma(X, M \otimes_A \mathcal{O}_X) = M$ である。
+\end{lemma}
+
+\begin{proof}
+等式 $p_*(M \otimes_A \mathcal{O}_X) = \widetilde{M}$ は、等式
+$\Gamma(X, M \otimes_A \mathcal{O}_X) = M$ から従う。実際、
+$p_*(M \otimes_A \mathcal{O}_X)$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward} により $\Spec(A)$ 上の準連接加群である。
+Lemma \ref{spaces-cohomology-lemma-colimits} により
+$\Gamma(X, \bigoplus_{i \in I} \mathcal{O}_X) =
+\bigoplus_{i \in I} A$ であることに注意する。従って補題は自由加群に対して
+成り立つ。短完全列 $F_1 \to F_0 \to M$ を選び、ここで
+$F_0, F_1$ は自由 $A$-加群とする。
+$H^1(X, -)$ は零なので、大域切断関手は
+右完全である。さらに、引き戻し $p^*$ も右完全である。従って
+$$
+\Gamma(X, F_1 \otimes_A \mathcal{O}_X) \to
+\Gamma(X, F_0 \otimes_A \mathcal{O}_X) \to
+\Gamma(X, M \otimes_A \mathcal{O}_X) \to 0
+$$
+は完全である。結果が従う。
+\end{proof}
+
+\noindent
+次の補題は、Situation \ref{spaces-cohomology-situation-vanishing} が
+$X \to \Spec(A)$ を $\Spec(A') \to \Spec(A)$ により基底変換しても
+保たれることを示す。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-base-change}
+Situation \ref{spaces-cohomology-situation-vanishing} において、次が成り立つ。
+\begin{enumerate}
+\item 代数空間のアフィン射 $X' \to X$ が与えられると、
+$H^1(X', \mathcal{F}') = 0$ が、すべての準連接
+$\mathcal{O}_{X'}$-加群 $\mathcal{F}'$ に対して成り立つ。
+\item $A$-代数 $A'$ が与えられ、
+$X' = X \times_{\Spec(A)} \Spec(A')$ とおくと、射 $X' \to X$ は
+アフィンであり、$\Gamma(X', \mathcal{O}_{X'}) = A'$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は Lemma \ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images} と Leray
+スペクトル系列（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-Leray}）から従う。$A \to A'$ を (2) のとおりと
+する。このとき $X' \to X$ はアフィンである。アフィン射は基底変換で
+保たれ（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-affine}）、アフィンスキームの射は
+アフィンだからである。等式
+$\Gamma(X', \mathcal{O}_{X'}) = A'$ は、Lemma
+\ref{spaces-cohomology-lemma-affine-base-change} による等式
+$(X' \to X)_*\mathcal{O}_{X'} = A' \otimes_A \mathcal{O}_X$ と、従って
+成り立つ等式
+$$
+\Gamma(X', \mathcal{O}_{X'}) =
+\Gamma(X, (X' \to X)_*\mathcal{O}_{X'}) =
+\Gamma(X, A' \otimes_A \mathcal{O}_X) = A'
+$$
+から従う。Lemma \ref{spaces-cohomology-lemma-vanishing-compute} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-separate-closed}
+Situation \ref{spaces-cohomology-situation-vanishing} において、$Z_0, Z_1 \subset |X|$ を
+交わらない閉部分集合とする。このとき $a \in A$ で
+$Z_0 \subset V(a)$ かつ $Z_1 \subset V(a - 1)$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$Z_0$、$Z_1$ に被約誘導部分空間構造を入れることができ、実際そうする
+（Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}）。対応する閉埋め込みを
+$i_0 : Z_0 \to X$ および $i_1 : Z_1 \to X$ と書く。
+$Z_0 \cap Z_1 = \emptyset$ なので、準連接 $\mathcal{O}_X$-加群の標準写像
+$$
+\mathcal{O}_X
+\longrightarrow
+i_{0, *}\mathcal{O}_{Z_0} \oplus i_{1, *}\mathcal{O}_{Z_1}
+$$
+は全射である（幾何学的点における茎を見ればよい）。この写像の核上で
+$H^1(X, -)$ は零なので、大域切断の誘導写像は全射である。従って、右辺の
+$a \in A$ で、右辺の大域切断 $(0, 1)$ へ写るものを見つけられる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-injective}
+Situation \ref{spaces-cohomology-situation-vanishing} において、射
+$p : X \to \Spec(A)$ は普遍単射である。
+\end{lemma}
+
+\begin{proof}
+$A \to k$ を環準同型で、$k$ が体であるものとする。
+$\Spec(k) \times_{\Spec(A)} X$ が高々一点をもつことを示せば十分である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-injective-local} を参照）。Lemma
+\ref{spaces-cohomology-lemma-vanishing-base-change} を用いると、$A$ は体であると仮定でき、
+$|X|$ が高々一点をもつことを示せばよい。
+
+\medskip\noindent
+$X$ を $\Spec(k)$ 上の代数空間と考え、記法 $X(K)$ を、$K$-値点で
+$X$ のものを表すため、任意の拡大 $K/k$ に対して用いる。Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-points-fields} を参照せよ。
+$K/k$ が超越次数の大きい代数閉体拡大ならば、$X(K) \to |X|$ は全射である。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-large-enough}
+を参照せよ。従って、$k$ を $K$ に置き換えると、$X(k)$ が一点集合である
+ことを証明すれば十分である（$A = k)$ の場合）。
+
+\medskip\noindent
+$x, x' \in X(k)$ とする。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-algebraic-residue-field-extension-closed-point} により、
+$x$ と $x'$ は $|X|$ の閉点である。従って $x$ と $x'$ は $\Spec(k)$ の
+異なる点へ写るが、これは $x \not = x'$ の場合に Lemma
+\ref{spaces-cohomology-lemma-vanishing-separate-closed} による。
+ゆえに望みどおり $x = x'$ である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanishing-separated}
+Situation \ref{spaces-cohomology-situation-vanishing} において、射
+$p : X \to \Spec(A)$ は分離である。
+\end{lemma}
+
+\begin{proof}
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-there-is-a-scheme-integral-over} により、スキーム
+$Y$ と全射整射 $Y \to X$ を見つけられる。整射はアフィンなので、Lemma
+\ref{spaces-cohomology-lemma-vanishing-base-change} を適用すると、
+$H^1(Y, \mathcal{G}) = 0$ が、すべての準連接 $\mathcal{O}_Y$-加群
+$\mathcal{G}$ に対して成り立つことが分かる。$Y \to X$ は
+準コンパクトで、$X$ も準コンパクトなので、$Y$ は準コンパクトである。
+$Y$ はスキームなので、Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-compact-h1-zero-covering} を適用して、$Y$ が
+アフィンであることが分かる。従って $Y$ は分離である。整射はアフィンかつ
+普遍閉であることに注意する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed} を参照せよ。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-image-universally-closed-separated} により、
+$X$ は分離代数空間である。
+\end{proof}
+
+\begin{proposition}
+\label{spaces-cohomology-proposition-vanishing-affine}
+\begin{slogan}
+代数空間における Serre のアフィン性判定条件。
+\end{slogan}
+準コンパクトかつ準分離な代数空間がアフィンであることと、準連接層の
+すべての高次コホモロジー群が消滅することとは同値である。より正確には、
+Situation \ref{spaces-cohomology-situation-vanishing} の代数空間はアフィンスキームである。
+\end{proposition}
+
+\begin{proof}
+アフィンスキーム $U = \Spec(B)$ と全射エタール射
+$\varphi : U \to X$ を選ぶ。$R = U \times_X U$ とおく。
+$p$ は分離なので（Lemma \ref{spaces-cohomology-lemma-vanishing-separated}）、$R$ は
+$U \times_{\Spec(A)} U = \Spec(B \otimes_A B)$ の閉部分スキームである。
+従って $R = \Spec(C)$ もアフィンで、環準同型
+$$
+B \otimes_A B \longrightarrow C
+$$
+は全射である。通常どおり二つの写像を $s, t : B \to C$ と書く。
+$g_1, \ldots, g_m \in B$ を、$s(g_1), \ldots, s(g_m)$ が
+$C$ を $t : B \to C$ 上生成するように選ぶ（$t : B \to C$ は有限表示で、
+表示した写像が全射なので可能である）。すると
+$g_1, \ldots, g_m$ は $\varphi_*\mathcal{O}_U$ の大域切断を与え、写像
+$$
+\mathcal{O}_X[z_1, \ldots, z_n] \longrightarrow \varphi_*\mathcal{O}_U,
+\quad
+z_j \longmapsto g_j
+$$
+は全射である。これは $U$ へ制限して確認できる。実際、Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} により
+$\varphi^*\varphi_*\mathcal{O}_U = t_*\mathcal{O}_R$ なので、ちょうど
+$s(g_i)$ が $C$ を $t : B \to C$ 上生成するという条件を得る。核の
+$H^1$ の消滅により、
+$$
+\Gamma(X, \mathcal{O}_X[x_1, \ldots, x_n]) =
+A[x_1, \ldots, x_n] \longrightarrow
+\Gamma(X, \varphi_*\mathcal{O}_U) = \Gamma(U, \mathcal{O}_U) = B
+$$
+は全射である。従って $B$ は有限型 $A$-代数である。ゆえに
+$X \to \Spec(A)$ は有限型かつ分離である。Lemma
+\ref{spaces-cohomology-lemma-vanishing-injective} と Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite} により、局所準有限でもある。
+従って $X \to \Spec(A)$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite-separated-representable}
+により表現可能であり、$X$ はスキームである。最後に、Cohomology of
+Schemes, Lemma \ref{coherent-lemma-quasi-compact-h1-zero-covering} を
+適用すると、$X$ はアフィンであり、従って $\Spec(A)$ に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-Noetherian-h1-zero}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+すべての連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して
+$H^1(X, \mathcal{F}) = 0$ であると仮定する。このとき $X$ は
+アフィンスキームである。
+\end{lemma}
+
+\begin{proof}
+仮定から、$H^1(X, \mathcal{F}) = 0$ が、すべての準連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ に対して成り立つことが、Lemmas
+\ref{spaces-cohomology-lemma-directed-colimit-coherent} および \ref{spaces-cohomology-lemma-colimits} により
+従う。すると Proposition \ref{spaces-cohomology-proposition-vanishing-affine} により
+$X$ はアフィンである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-Noetherian-h1-zero-invertible}
+$S$ をスキームとする。$X$ を $S$ 上の Noether 代数空間とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。すべての連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ に対して、ある $n \geq 1$ が存在し、
+$H^1(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes n}) = 0$
+となると仮定する。このとき $X$ はスキームであり、$\mathcal{L}$ は $X$ 上
+豊富である。
+\end{lemma}
+
+\begin{proof}
+$s \in H^0(X, \mathcal{L}^{\otimes d})$ を大域切断とする。
+$U \subset X$ を、$s$ が $\mathcal{L}^{\otimes d}$ の生成元である開部分空間と
+する。特に $\mathcal{L}^{\otimes d}|_U \cong \mathcal{O}_U$ である。
+$U$ はアフィンであると主張する。
+
+\medskip\noindent
+主張の証明。$H^1(U, \mathcal{F}) = 0$ が、すべての準連接
+$\mathcal{O}_U$-加群 $\mathcal{F}$ に対して成り立つことを示す。これにより Proposition
+\ref{spaces-cohomology-proposition-vanishing-affine} から主張が従う。包含射を
+$j : U \to X$ と書く。エタール局所的に射 $j$ はアフィンなので
+（Morphisms, Lemma \ref{morphisms-lemma-affine-s-open} による）、
+$j$ はアフィンである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-local}）。従って
+$$
+H^1(U, \mathcal{F}) = H^1(X, j_*\mathcal{F})
+$$
+が Lemma \ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images} により成り立つ
+（Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-apply-Leray}
+も参照）。$j_*\mathcal{F} = \colim \mathcal{F}_i$ を連接
+$\mathcal{O}_X$-加群のフィルター付き余極限として書く。Lemma
+\ref{spaces-cohomology-lemma-directed-colimit-coherent} を参照せよ。このとき
+$$
+H^1(X, j_*\mathcal{F}) = \colim H^1(X, \mathcal{F}_i)
+$$
+が Lemma \ref{spaces-cohomology-lemma-colimits} により成り立つ。従って
+$H^1(X, \mathcal{F}_i)$ が $H^1(U, j^*\mathcal{F}_i)$ において零へ
+写ることを示せば十分である。仮定により、ある $n \geq 1$ に対して
+$$
+H^1(X,
+\mathcal{F}_i \otimes_{\mathcal{O}_X}
+(\mathcal{O}_X \oplus \mathcal{L} \oplus \ldots
+\oplus \mathcal{L}^{\otimes d - 1})
+\otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes n}) = 0
+$$
+である。従って、ある $a \geq 0$ に対して
+$H^1(X, \mathcal{F}_i \otimes_{\mathcal{O}_X}
+\mathcal{L}^{\otimes ad}) = 0$ である。他方、写像
+$$
+s^a : \mathcal{F}_i \longrightarrow
+\mathcal{F}_i \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes ad}
+$$
+は $U$ へ制限した後に同型となる。可換図
+$$
+\xymatrix{
+H^1(X, \mathcal{F}_i) \ar[r] \ar[d]_{s^a} & H^1(U, j^*\mathcal{F}_i)
+\ar[d]^{\cong} \\
+H^1(X, \mathcal{F}_i \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes ad}) \ar[r] &
+H^1(U,
+j^*(\mathcal{F}_i \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes ad}))
+}
+$$
+を考えると、写像 $H^1(X, \mathcal{F}_i) \to H^1(U, j^*\mathcal{F}_i)$ は
+零であると結論でき、主張が成り立つ。
+
+\medskip\noindent
+$x \in |X|$ を閉点とする。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-space-closed-point} により、$x$ は閉埋め込み
+$i : \Spec(k) \to X$ で表せる（これには準分離代数空間が decent であることも
+用いる。Decent Spaces, Section
+\ref{decent-spaces-section-reasonable-decent} を参照）。従って
+$\mathcal{O}_X \to i_*\mathcal{O}_{\Spec(k)}$ は全射である。
+$\mathcal{I} \subset \mathcal{O}_X$ をその核とし、$d \geq 1$ を
+$H^1(X, \mathcal{I} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0$
+となるように選ぶ。このとき
+$$
+H^0(X, \mathcal{L}^{\otimes d}) \to
+H^0(X,
+i_*\mathcal{O}_{\Spec(k)} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) =
+H^0(\Spec(k), i^*\mathcal{L}^{\otimes d}) \cong k
+$$
+は長完全コホモロジー列により全射である。従って
+$s \in H^0(X, \mathcal{L}^{\otimes d})$ で $x \in U$ となるものが存在する。
+ここで $U$ は上と同じく $s$ に対応する開部分空間である。従って主張により
+$x$ は $X$ のスキーム的軌跡に属する（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme} を参照）。
+
+\medskip\noindent
+$X$ がスキームであると結論するには、$|X|$ のすべての閉点を含む任意の
+開部分集合が $|X|$ に等しいことを示せば十分である。これは $|X|$ が
+Noether 位相空間であることから従う。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-sober} を参照せよ。最後に、$X$ が
+スキームならば、Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-compact-h1-zero-invertible} を適用して、
+$\mathcal{L}$ が豊富であると結論できる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{有限射とアフィン性}
+\label{spaces-cohomology-section-finite-affine}
+
+\noindent
+この節は Cohomology of Schemes, Section
+\ref{coherent-section-finite-affine} の類似である。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-finite-morphism-Noetherian}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+$f$ は有限かつ全射で、$X$ は局所 Noether であると仮定する。
+$i : Z \to X$ を閉埋め込みとする。$i' : Z' \to Y$ を $Z$ の逆像
+（Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-closed-immersions}）とし、$f' : Z' \to Z$ を
+誘導される射とする。このとき
+$\mathcal{G} = f'_*\mathcal{O}_{Z'}$ は連接 $\mathcal{O}_Z$ 加群であり、
+その台は $Z$ である。
+\end{lemma}
+
+\begin{proof}
+$f'$ は $f$ の基底変換であるから、Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-surjective} および
+\ref{spaces-morphisms-lemma-base-change-integral} により有限かつ全射である。
+$Y$、$Z$、$Z'$ は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian}
+（および閉埋め込みと有限射が有限型であるという事実）により局所 Noether
+であることに注意する。Lemma \ref{spaces-cohomology-lemma-finite-pushforward-coherent} より、
+$\mathcal{G}$ は連接 $\mathcal{O}_Z$ 加群である。$\mathcal{G}$ の台は
+$|Z|$ の中で閉である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type} を参照せよ。従って、
+$\mathcal{G}$ の台が $|Z|$ に等しくなければ、$X$ を開部分空間で置き換え、
+$\mathcal{G} = 0$ だが $Z \not = \emptyset$ であると仮定できる。
+これは $f'_*\mathcal{O}_{Z'} = 0$ を意味する。特に切断
+$1 \in \Gamma(Z', \mathcal{O}_{Z'}) = \Gamma(Z, f'_*\mathcal{O}_{Z'})$
+が零となり、従って $Z' = \emptyset$ は空の代数空間となる。しかし
+$Z' \to Z$ は全射なので、これは不可能である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-affine-morphism-projection-ideal}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を $Y$ 上の準連接層とし、$\mathcal{I}$ を $X$ 上の
+準連接イデアル層とする。$f$ がアフィンならば
+$\mathcal{I}f_*\mathcal{F} = f_*(f^{-1}\mathcal{I}\mathcal{F})$
+である（記法は証明で説明する）。
+\end{lemma}
+
+\begin{proof}
+記法の意味は次の通りである。$f^{-1}$ は完全関手なので、
+$f^{-1}\mathcal{I}$ は $f^{-1}\mathcal{O}_X$ のイデアル層である。
+$f^\sharp : f^{-1}\mathcal{O}_X \to \mathcal{O}_Y$ を介して、これは
+$Y_\etale$ 上で
+$\mathcal{F}$ に作用する。そこで $f^{-1}\mathcal{I}\mathcal{F}$ を、
+$as$ という形の局所切断（ここで $a$ は $f^{-1}\mathcal{I}$ の局所切断、
+$s$ は $\mathcal{F}$ の局所切断）の和によって生成される部分層とする。これは
+準連接 $\mathcal{O}_Y$ 部分加群として $\mathcal{F}$ に含まれる。実際、これは
+自然な写像
+$f^*\mathcal{I} \otimes_{\mathcal{O}_Y} \mathcal{F} \to \mathcal{F}$
+の像でもある。
+
+\medskip\noindent
+以上を踏まえれば証明は直ちに従う。実際、問題は $X$ 上エタール局所的で
+あるから、$X$ はアフィンスキームであると仮定してよい。この場合、主張は
+スキームについての対応する結果、Cohomology of Schemes, Lemma
+\ref{coherent-lemma-affine-morphism-projection-ideal} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-image-affine-finite-morphism-affine-Noetherian}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $f$ は有限である、
+\item $f$ は全射である、
+\item $Y$ はアフィンである、かつ
+\item $X$ は Noether である。
+\end{enumerate}
+このとき $X$ はアフィンである。
+\end{lemma}
+
+\begin{proof}
+補題の仮定の下で、任意の連接 $\mathcal{O}_X$ 加群 $\mathcal{F}$ に対し
+$H^1(X, \mathcal{F}) = 0$ であることを示す。これは
+$H^1(X, \mathcal{F}) = 0$ が任意の準連接 $\mathcal{O}_X$ 加群
+$\mathcal{F}$ に対して成り立つことを含意する。Lemmas
+\ref{spaces-cohomology-lemma-directed-colimit-coherent} および \ref{spaces-cohomology-lemma-colimits} を参照せよ。
+従って Proposition
+\ref{spaces-cohomology-proposition-vanishing-affine} より $X$ はアフィンである。
+
+\medskip\noindent
+$\mathcal{P}$ を、連接層 $\mathcal{F}$ が $X$ 上にあるときの性質として、規則
+$$
+\mathcal{P}(\mathcal{F}) \Leftrightarrow H^1(X, \mathcal{F}) = 0.
+$$
+によって定める。Lemma \ref{spaces-cohomology-lemma-property-higher-rank-cohomological} を
+適用する。そのためには $\mathcal{P}$ が同補題の (1)、(2)、(3) を満たす
+ことを確認しなければならない。性質 (1) は層の短完全列に付随する
+コホモロジー長完全列から従う。性質 (2) は $H^1(X, -)$ が加法的関手で
+あることから従う。(3) を見るため、$i : Z \to X$ を $|Z|$ が既約である
+被約閉部分空間とする。$i' : Z' \to Y$ および $f' : Z' \to Z$ を Lemma
+\ref{spaces-cohomology-lemma-finite-morphism-Noetherian} と同様に取り、
+$\mathcal{G} = f'_*\mathcal{O}_{Z'}$ と置く。$\mathcal{G}$ が Lemma
+\ref{spaces-cohomology-lemma-property-higher-rank-cohomological} の性質 (3)(a) と (3)(b) を
+満たすことを主張する。これで証明が完了する。性質 (3)(a) は Lemma
+\ref{spaces-cohomology-lemma-finite-morphism-Noetherian} ですでに示した。(3)(b) を見るため、
+$\mathcal{I}$ を $Z$ 上の零でない準連接イデアル層とする。
+$\mathcal{I}' \subset \mathcal{O}_{Z'}$ を準連接イデアル
+$(f')^{-1}\mathcal{I} \mathcal{O}_{Z'}$、すなわち写像
+$(f')^*\mathcal{I} \to \mathcal{O}_{Z'}$ の像とする。Lemma
+\ref{spaces-cohomology-lemma-affine-morphism-projection-ideal} により
+$f_*\mathcal{I}' = \mathcal{I} \mathcal{G}$ である。その共通値
+$\mathcal{G}' = \mathcal{I} \mathcal{G} = f'_*\mathcal{I}'$ が (3)(b) に
+記された条件を満たすことを主張する。まず、
+$\mathcal{G}/\mathcal{G}'$ の台は $\mathcal{O}_Z/\mathcal{I}$ の台に
+含まれることが明らかである。後者は $|Z|$ の真部分空間である。実際、
+$\mathcal{I}$ は被約既約代数空間 $Z$ 上の零でないイデアル層である。射 $f'$ は
+アフィンであるから、Lemma \ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images}
+により $R^1f'_*\mathcal{I}' = 0$ である。$Z'$ はアフィンスキームの
+閉部分スキームとしてアフィンなので $H^1(Z', \mathcal{I}') = 0$ である。
+従って Leray スペクトル系列（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray} の形）から
+$H^1(Z, f'_*\mathcal{I}') = 0$ が従う。$i : Z \to X$ はアフィンなので
+$R^1i_*f'_*\mathcal{I}' = 0$ であり、再び Leray により
+$H^1(X, i_*f'_*\mathcal{I}') = 0$ である。言い換えれば、所望の通り
+$H^1(X, i_*\mathcal{G}') = 0$ を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{Chow の補題の弱い形}
+\label{spaces-cohomology-section-weak-chow}
+
+\noindent
+この節では、固有代数空間上の連接加群のコホモロジーに関する基本結果を
+証明するため、次の補題を手早く証明する。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-weak-chow}
+$A$ を環とする。$X$ を $\Spec(A)$ 上の代数空間とし、その構造射
+$X \to \Spec(A)$ は分離かつ有限型であるとする。このとき固有全射
+$X' \to X$ が存在し、$X'$ は $\Spec(A)$ 上 H-準射影的なスキームである。
+\end{lemma}
+
+\begin{proof}
+$W$ をアフィンスキームとし、$f : W \to X$ を全射エタール射とする。
+整数 $d$ が存在して、f のすべての幾何学的ファイバーは $\leq d$ 個の点を
+もつ（$X$ は分離代数空間なので reasonable であるため。Decent Spaces,
+Lemma \ref{decent-spaces-lemma-bounded-fibres} を参照）。$d$ を最小に取ると、
+空でない開部分空間 $U \subset X$ であって $f^{-1}(U) \to U$ が次数 $d$ の
+有限エタール射となるものが得られる。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-quasi-compact-reasonable-stratification} を参照せよ。
+次を取る。
+$$
+V \subset W \times_X W \times_X \ldots \times_X W
+$$
+これはファイバー積の $d$ 個の因子における、すべての対角部分の補集合で
+ある。$W \to X$ は分離なので、対角射 $W \to W \times_X W$ は閉埋め込み
+である。$W \to X$ はエタールなので、対角射 $W \to W \times_X W$ は
+開埋め込みでもある。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-etale-unramified} および
+\ref{spaces-morphisms-lemma-diagonal-unramified-morphism} を参照せよ。従って
+これらの対角部分は、準コンパクトスキーム
+$W \times_X \ldots \times_X W$ の開かつ閉な部分スキームである。特に
+$V$ は準コンパクトスキームであると結論できる。$W \subset Y$ を開埋め込み
+で、$Y$ が $A$ 上 H-射影的となるものに選ぶ（$W$ はアフィンかつ $A$ 上
+有限型なので、これは可能である。例えば Morphisms, Lemmas
+\ref{morphisms-lemma-quasi-affine-finite-type-over-S} および
+\ref{morphisms-lemma-H-quasi-projective-open-H-projective} を使える）。次を
+合成のスキーム論的像とする。
+$$
+Z \subset Y \times_A Y \times_A \ldots \times_A Y
+$$
+ここで合成は
+$V \to W \times_X \ldots \times_X W \to Y \times_A \ldots \times_A Y$
+である。この射は $V$ が準コンパクトであり、
+$Y \times_A \ldots \times_A Y$ が分離であるため準コンパクトであることに
+注意する。$V \to Z$ は開埋め込みである。実際、
+$V \to Y \times_A \ldots \times_A Y$ は埋め込みである。Morphisms, Lemma
+\ref{morphisms-lemma-quasi-compact-immersion} を参照せよ。射影射により、
+$d$ 個の射 $g_i : Z \to Y$ が得られる。これらの射 $g_i$ は射影的である。
+実際、$Y$ は $A$ 上射影的である。Morphisms, Section
+\ref{morphisms-section-projective} の内容を参照せよ。次と置く。
+$$
+X' = \bigcup g_i^{-1}(W) \subset Z
+$$
+射 $X' \to X$ が存在し、その $g_i^{-1}(W)$ への制限は合成
+$g_i^{-1}(W) \to W \to X$ である。実際、これらの射は $V$ 上で一致し、
+従って Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-equality-of-morphisms} により
+$g_i^{-1}(W) \cap g_j^{-1}(W)$ 上で一致する。主張：射 $X' \to X$ は
+固有である。
+
+\medskip\noindent
+この主張が成り立てば、補題は $d$ に関する帰納法から従う。実際、構成に
+より $X'$ は $\Spec(A)$ 上 H-準射影的である。$X' \to X$ の像は開部分
+$U$ を含む。実際、$V$ は $U$ 上に全射である。$T$ を $X \setminus U$ 上の
+被約代数空間構造とする。このとき $T \times_X W$ は $W$ の閉部分スキーム
+であり、従ってアフィンである。さらに、射 $T \times_X W \to T$ は
+エタールで、すべての幾何学的ファイバーは $< d$ 個の点をもつ。帰納法の
+仮定により、固有全射 $T' \to T$ が存在し、$T'$ は $\Spec(A)$ 上
+H-準射影的なスキームである。$T$ は $X$ の閉部分空間なので、
+$T' \to X$ は固有射である。従って固有全射 $X' \amalg T' \to X$ を取れば
+補題が従う。
+
+\medskip\noindent
+主張の証明。構成により射 $X' \to X$ は分離かつ有限型である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-refined-valuative-criterion-universally-closed} の
+条件 (1)--(4) を、射 $V \to X'$ および $X' \to X$ について確認する。
+条件 (1) と (2) は上ですでに見た。条件 (3) は、$X' \to X$ が分離で
+あることから成り立つ（その始域が分離代数空間である射として）。従って、
+次の図式について $X'$ への持ち上げ可能性を確認すれば十分である。
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \ar[d] \\
+\Spec(R) \ar[r] & X
+}
+$$
+ここで $R$ は分数体 $K$ をもつ付値環である。上の水平射は、互いに異なる
+$d$ 個の $K$ 値点 $w_1, \ldots, w_d$、すなわち $W$ の点によって与えられる。
+実際、これは図式から得られる点 $x \in X(K)$ の逆像の完全な集合である。
+$W \to X$ は全射なので、必要なら $R$ を付値環の拡大で置き換えた後、射
+$\Spec(R) \to X$ を射 $w : \Spec(R) \to W$ に持ち上げることができる。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-lift-valuation-ring-through-flat-morphism} を参照せよ。
+$w_1, \ldots, w_d$ は $x$ の逆像の完全な集合なので、
+$w|_{\Spec(K)}$ はそのうちの一つ、例えば $w_i$ に等しい。従って次の可換
+図式を得る。
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] &  Z \ar[d]_{g_i}\\
+\Spec(R) \ar[r]^w & Y
+}
+$$
+射影射 $g_i$ に対する固有性の付値判定法により、$w$ を
+$z : \Spec(R) \to Z$ に持ち上げることができる。Morphisms, Lemma
+\ref{morphisms-lemma-locally-projective-proper} および Schemes, Proposition
+\ref{schemes-proposition-characterize-universally-closed} を参照せよ。$z$ の像は
+$g_i^{-1}(W) \subset X'$ に含まれ、証明は完了する。
+\end{proof}
+
+
+
+
+
+
+
+\section{Noether 的付値判定法}
+\label{spaces-cohomology-section-Noetherian-valuative-criterion}
+
+\noindent
+離散付値環を用いる固有性の付値判定法の一形態を証明する。より精密な
+（従ってより技術的な）形は Limits of Spaces, Section
+\ref{spaces-limits-section-Noetherian-valuative-criterion} にある。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-check-separated-dvr}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $Y$ は局所 Noether である、
+\item $f$ は局所有限型かつ準分離である、
+\item 任意の可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+に対し、ここで $A$ は離散付値環、$K$ はその分数体とすると、図式を
+可換にする点線矢印は高々一つである。
+\end{enumerate}
+このとき $f$ は分離である。
+\end{lemma}
+
+\begin{proof}
+対角射 $\Delta : X \to X \times_Y X$ が閉埋め込みであることを示さなければ
+ならない。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-properties-diagonal} により、$\Delta$ は表現可能で
+分離な、局所有限型のモノ射であることはすでに分かっている。アフィンスキーム
+$U$ とエタール射 $U \to X \times_Y X$ を選ぶ。
+$V = X \times_{\Delta, X \times_Y X} U$ と置く。$V \to U$ が閉埋め込みで
+あることを示せば十分である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-local}）。$X \times_Y X$ は $Y$ 上
+局所有限型なので、$U$ は Noether である（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type}、
+\ref{spaces-morphisms-lemma-base-change-finite-type}、および
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} を使う）。
+$V$ はスキームであることに注意する。これは $\Delta$ が表現可能だからである。また、
+$V$ は準コンパクトである。これは $f$ が準分離だからである。従って $V \to U$ は
+有限型である。次のスキームの射からなる可換図式を考える。
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & V \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & U
+}
+$$
+ここで $A$ は分数体 $K$ をもつ離散付値環である。合成
+$\Spec(A) \to U \to X \times_Y X$ は、二つの射
+$a, b : \Spec(A) \to X$ と解釈できる。これらは $Y$ への射として一致し、
+$\Spec(K)$ への制限が等しい。
+従って仮定 (3) により $a = b$ であり、図式の点線矢印が得られる。
+Limits, Lemma \ref{limits-lemma-Noetherian-dvr-valuative-proper} により
+$V \to U$ は固有であると結論できる。言い換えれば $\Delta$ は固有である。
+$\Delta$ はモノ射なので、所望の通り $\Delta$ は閉埋め込みである
+（\'Etale Morphisms, Lemma
+\ref{etale-lemma-characterize-closed-immersion}）。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-check-proper-dvr}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+次を仮定する。
+\begin{enumerate}
+\item $Y$ は局所 Noether である、
+\item $f$ は有限型かつ準分離である、
+\item 任意の可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+に対し、ここで $A$ は離散付値環、$K$ はその分数体とすると、図式を
+可換にする点線矢印が一意に存在する。
+\end{enumerate}
+このとき $f$ は固有である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-cohomology-lemma-check-separated-dvr} により $f$ は分離なので、$f$ が普遍閉
+であることを証明すれば十分である。このためには $Y$ 上エタール局所的に
+作業してよい（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-local}）。従って
+$Y = \Spec(A)$ は Noether アフィンスキームであると仮定してよい。Chow の
+補題の弱い形（Lemma \ref{spaces-cohomology-lemma-weak-chow}）にある $X' \to X$ を選ぶ。
+$X' \to \Spec(A)$ は普遍閉であると主張する。この主張から Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-image-proper-is-proper} によって
+補題が従う。これを証明するには、Limits, Lemma
+\ref{limits-lemma-check-universally-closed-Noetherian} により、任意の実線部分が
+可換な図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X' \ar[r] & X \ar[d] \\
+\Spec(A) \ar[rr] \ar@{-->}[ru]^a \ar@{-->}[rru]_b & & Y
+}
+$$
+において、ここで $A$ は分数体 $K$ をもつ dvr として、点線矢印 $a$ を
+見つければ十分である。仮定により点線矢印 $b$ が得られる。このとき射
+$X' \times_{X, b} \Spec(A) \to \Spec(A)$ はスキームの固有射であり、
+スキームの射に対する付値判定法により $b$ を所望の射 $a$ に持ち上げられる。
+\end{proof}
+
+\begin{remark}[完備離散付値環に対する変形]
+\label{spaces-cohomology-remark-variant}
+Lemmas \ref{spaces-cohomology-lemma-check-separated-dvr} および \ref{spaces-cohomology-lemma-check-proper-dvr} では、
+完備離散付値環だけを考えれば十分である。正確には、Lemma
+\ref{spaces-cohomology-lemma-check-separated-dvr} において条件 (3) を次の条件で置き換えられる。
+任意の可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] \ar@{-->}[ru] & Y
+}
+$$
+が与えられ、$A$ が分数体 $K$ をもつ完備離散付値環であるとき、図式を
+可換にする点線矢印は高々一つである。実際、Lemma
+\ref{spaces-cohomology-lemma-check-separated-dvr} (3) にある任意の図式が与えられると、完備化
+$A^\wedge$ は離散付値環である（More on Algebra, Lemma
+\ref{more-algebra-lemma-completion-dvr}）。そして射
+$\Spec(A^\wedge) \to X$ の一意性は、例えば Properties of Spaces,
+Proposition \ref{spaces-properties-proposition-sheaf-fpqc} により、射
+$\Spec(A) \to X$ の一意性を含意する。同様に Lemma
+\ref{spaces-cohomology-lemma-check-proper-dvr} において条件 (3) を次の条件で置き換えられる。
+任意の可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] & Y
+}
+$$
+が与えられ、$A$ が分数体 $K$ をもつ完備離散付値環であるとき、完備
+離散付値環の拡大 $A \subset A'$ で、分数体の拡大 $K \subset K'$ を誘導し、
+次の図式を可換にする一意な射 $\Spec(A') \to X$ が存在するものがある。
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(A') \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+実際、Lemma \ref{spaces-cohomology-lemma-check-proper-dvr} の (3) にある任意の図式が
+与えられたとき、可換図式
+$$
+\xymatrix{
+\Spec(L) \ar[r] \ar[d] & \Spec(K) \ar[r] & X \ar[d] \\
+\Spec(B) \ar[r] \ar[rru] & \Spec(A) \ar[r] & Y
+}
+$$
+が離散付値環の {\it 任意の} 拡大 $A \subset B$ に対して存在すれば、図式に
+適合する射 $\Spec(A) \to X$ が存在することが従う。
+これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-push-down-solution} で示されている。実際、これらの
+考察から、任意の離散付値環に対して、その類に属する拡大が存在するような
+任意の離散付値環の類について図式中の点線矢印を探せば十分であることが
+従う。例えば、剰余体が代数閉である完備離散付値環を取ることができる。
+\end{remark}
+
+
+
+
+
+
+
+\section{連接層の高次順像}
+\label{spaces-cohomology-section-proper-pushforward}
+
+\noindent
+この節では、固有射による連接層の高次順像が連接であるという基本的事実を
+証明する。まず補助補題を証明する。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-kill-by-twisting}
+$S$ をスキームとする。次の可換図式を考える。
+$$
+\xymatrix{
+X \ar[r]_i \ar[rd]_f & \mathbf{P}^n_Y \ar[d] \\
+& Y
+}
+$$
+これは $S$ 上の代数空間の図式である。$i$ は閉埋め込みで、$Y$ は
+Noether であると仮定する。
+$\mathcal{L} = i^*\mathcal{O}_{\mathbf{P}^n_Y}(1)$ と置く。
+$\mathcal{F}$ を $X$ 上の連接加群とする。このとき整数 $d_0$ が存在し、
+すべての $d \geq d_0$ に対して
+$R^pf_*(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes d}) = 0$
+がすべての $p > 0$ について成り立つ。
+\end{lemma}
+
+\begin{proof}
+$R^pf_*(\mathcal{F} \otimes \mathcal{L}^{\otimes d})$ が零であるかどうかは
+$Y$ 上エタール局所的に確認できる。Equation
+(\ref{spaces-cohomology-equation-representable-higher-direct-image}) を参照せよ。従って $Y$ は
+Noether 環のスペクトルであると仮定してよい。この場合 $X$ はスキームで、
+結果は Cohomology of Schemes, Lemma
+\ref{coherent-lemma-kill-by-twisting} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-proper-pushforward-coherent}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の固有射とし、
+$Y$ は局所 Noether であるとする。$\mathcal{F}$ を連接
+$\mathcal{O}_X$ 加群とする。このとき $R^if_*\mathcal{F}$ は連接
+$\mathcal{O}_Y$ 加群であり、これはすべての $i \geq 0$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+まず、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} により
+$X$ は局所 Noether 代数空間であることに注意する。従って補題の主張は
+意味をもつ。さらに、$R^if_*\mathcal{F}$ の計算は $Y$ 上のエタール局所化と
+可換であり（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pushforward-etale-base-change-modules}）、
+$R^if_*\mathcal{F}$ が連接であるかどうかは $Y$ 上エタール局所的に
+確認できる（Lemma \ref{spaces-cohomology-lemma-coherent-Noetherian}）。従って
+$Y = \Spec(A)$ は Noether アフィンスキームであると仮定してよい。
+
+\medskip\noindent
+$Y = \Spec(A)$ がアフィンスキームであると仮定する。$f$ は局所有限表示で
+あることに注意する（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-noetherian-finite-type-finite-presentation}）。従って
+有限表示であり、それゆえ $X$ は Noether である（Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-finite-presentation-noetherian}）。そこで Lemma
+\ref{spaces-cohomology-lemma-property-higher-rank-cohomological-variant} を $X$ の連接加群の圏に
+適用できる。$\mathcal{F}$ を $X$ 上の連接層とする。$\mathcal{P}$ が成り立つ
+とは、$R^if_*\mathcal{F}$ が $\Spec(A)$ 上の連接加群であることと定める。
+この性質について Lemma
+\ref{spaces-cohomology-lemma-property-higher-rank-cohomological-variant} の条件 (1)、(2)、(3) が
+成り立つことを示す。これで補題の証明が完了する。
+
+\medskip\noindent
+条件 (1) の確認。次を取る。
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+これは $X$ 上の連接層の短完全列である。
+高次順像の長完全列
+$$
+R^{p - 1}f_*\mathcal{F}_3 \to
+R^pf_*\mathcal{F}_1 \to
+R^pf_*\mathcal{F}_2 \to
+R^pf_*\mathcal{F}_3 \to
+R^{p + 1}f_*\mathcal{F}_1
+$$
+を考える。このとき層 $\mathcal{F}_i$ のうち三つ中二つが性質
+$\mathcal{P}$ をもてば、第三の層の高次順像はこの完全複体の中で二つの
+連接層に挟まれることが明らかである。従って Lemmas
+\ref{spaces-cohomology-lemma-coherent-abelian-Noetherian} および
+\ref{spaces-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient} により、これらの
+高次順像も連接である。従って第三の層についても性質 $\mathcal{P}$ が
+成り立つ。
+
+\medskip\noindent
+条件 (2) の確認。これは
+$R^if_*(\mathcal{F}_1 \oplus \mathcal{F}_2) =
+R^if_*\mathcal{F}_1 \oplus R^if_*\mathcal{F}_2$ であること、および連接加群の
+直和因子が連接であることから直ちに従う（上で引用した補題を参照）。
+
+\medskip\noindent
+条件 (3) の確認。$i : Z \to X$ を閉埋め込みとし、$Z$ は被約、$|Z|$ は
+既約であるとする。$g = f \circ i : Z \to \Spec(A)$ と置く。
+$\mathcal{G}$ を $Z$ 上の連接加群で、そのスキーム論的台が $Z$ に等しく、
+$R^pg_*\mathcal{G}$ がすべての $p$ に対し連接であるものとする。このとき
+$\mathcal{F} = i_*\mathcal{G}$ は $X$ 上の連接加群で、そのスキーム論的台は
+$Z$ であり、$R^pf_*\mathcal{F} = R^pg_*\mathcal{G}$ を満たす。これを見るには
+Leray スペクトル系列（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray}）と、Lemma
+\ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images} によって
+$R^qi_*\mathcal{G} = 0$ が $q > 0$ に対し成り立つこと、ならびに閉埋め込みが
+アフィンであること
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-affine}）を用いる。従って、
+$\mathcal{G}$ を $Z$ 上の連接層で、台が $Z$ に等しく、$R^pg_*\mathcal{G}$ が
+すべての $p$ に対して連接であるものを見つけることに帰着する。
+
+\medskip\noindent
+射 $Z \to \Spec(A)$ に Lemma \ref{spaces-cohomology-lemma-weak-chow} を適用する。すると図式
+$$
+\xymatrix{
+Z \ar[rd]_g & Z' \ar[d]^-{g'} \ar[l]^\pi \ar[r]_i & \mathbf{P}^n_A \ar[dl] \\
+& \Spec(A) &
+}
+$$
+が得られる。ここで $\pi : Z' \to Z$ は固有全射で、$i$ は埋め込みである。
+$Z \to \Spec(A)$ は固有なので、$g'$ は固有であると結論できる
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-proper}）。従って $i$ は閉埋め込みで
+ある（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-universally-closed-permanence} および
+\ref{spaces-morphisms-lemma-immersion-when-closed}）。このことから射
+$i' = (i, \pi) : \mathbf{P}^n_A \times_{\Spec(A)} Z' = \mathbf{P}^n_Z$ は
+閉埋め込みである（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal}）。次と置く。
+$$
+\mathcal{L} =
+i^*\mathcal{O}_{\mathbf{P}^n_A}(1) =
+(i')^*\mathcal{O}_{\mathbf{P}^n_Z}(1)
+$$
+Lemma \ref{spaces-cohomology-lemma-kill-by-twisting} を $\mathcal{L}$ と $\pi$、さらに
+$\mathcal{L}$ と $g'$ に適用できる。従ってすべての $d \gg 0$ に対して
+$R^p\pi_*\mathcal{L}^{\otimes d} = 0$ がすべての $p > 0$ について成り立ち、
+$R^p(g')_*\mathcal{L}^{\otimes d} = 0$ がすべての $p > 0$ について成り立つ。
+$\mathcal{G} = \pi_*\mathcal{L}^{\otimes d}$ と置く。Leray スペクトル系列
+（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray}）により
+$$
+E_2^{p, q} = R^pg_* R^q\pi_*\mathcal{L}^{\otimes d}
+\Rightarrow
+R^{p + q}(g')_*\mathcal{L}^{\otimes d}
+$$
+を得る。$d$ の選び方により、$E_2^{p, q}$ の非零項は $q = 0$ のものだけで、
+$R^{p + q}(g')_*\mathcal{L}^{\otimes d}$ の非零項は $p = q = 0$ のものだけで
+ある。これは $R^pg_*\mathcal{G} = 0$ が $p > 0$ に対して成り立つこと、および
+$g_*\mathcal{G} = (g')_*\mathcal{L}^{\otimes d}$ を含意する。Cohomology of
+Schemes, Lemma \ref{coherent-lemma-locally-projective-pushforward} を適用すると、
+$g_*\mathcal{G} = (g')_*\mathcal{L}^{\otimes d}$ は連接であることが分かる。
+
+\medskip\noindent
+なお $\mathcal{G}$ の台が $Z$ であることを確認しなければならない。これは
+$\mathcal{L}^{\otimes d}$ が多数の大域切断をもつことから従う。詳述しよう。
+$\mathcal{L}^{\otimes d}$ はすべての $d \geq 0$ に対して大域生成されることに
+注意する。これは $\mathcal{O}_{\mathbf{P}^n}(d)$ について同じことが
+成り立つからである。点 $z \in Z'$ で、生成点 $\xi$、すなわち $Z$ の
+生成点に写るものを選ぶ。
+$\pi$ は全射なので、これは可能である。（実際 $Z$ は生成点をもつ。なぜなら
+$|Z|$ は既約で、$Z$ は Noether、従って準分離であり、Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-quasi-separated-sober} により $|Z|$ は
+sober 位相空間だからである。）$s \in \Gamma(Z', \mathcal{L}^{\otimes d})$
+を選び、これは $z$ で消えないものとする。
+$\Gamma(Z, \mathcal{G}) = \Gamma(Z', \mathcal{L}^{\otimes d})$ なので、$s$ を
+$\mathcal{G}$ の大域切断と考えてよい。幾何学的点 $\overline{z}$ を $Z'$ の
+点として選び、これは $z$ の上にあるものとする。
+$\overline{\xi} = g' \circ \overline{z}$ を対応する
+$Z$ の幾何学的点とする。随伴写像
+$$
+(g')^*\mathcal{G} =
+(g')^*g'_*\mathcal{L}^{\otimes d} \longrightarrow \mathcal{L}^{\otimes d}
+$$
+は茎の写像 $\mathcal{G}_{\overline{\xi}} \to \mathcal{L}_{\overline{z}}$ を
+誘導する。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-stalk-pullback-quasi-coherent} を参照せよ。さらに
+随伴写像は、$s$ の引き戻し（$\mathcal{G}$ の切断とみなす）を $s$
+（$\mathcal{L}^{\otimes d}$ の切断とみなす）に写す。従って、次の矢印の
+始域であるベクトル空間における $s$ の像
+$$
+\mathcal{G}_{\overline{\xi}} \otimes \kappa(\overline{\xi})
+\longrightarrow
+\mathcal{L}^{\otimes d}_{\overline{z}} \otimes \kappa(\overline{z})
+$$
+は零でない。実際、$s$ の選び方により、矢印の終域における像は零でない。
+従って $\xi$ は $\mathcal{G}$ の台に属する（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type}）。$|Z|$ は既約で $Z$ は被約
+なので、所望の通り $\mathcal{G}$ のスキーム論的台は $Z$ 全体である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-proper-over-affine-cohomology-finite}
+$A$ を Noether 環とする。$f : X \to \Spec(A)$ を代数空間の固有射とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$ 加群とする。このとき
+$H^i(X, \mathcal{F})$ は有限 $A$ 加群であり、これはすべての $i \geq 0$ に
+対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{spaces-cohomology-lemma-proper-pushforward-coherent} のアフィンの場合に
+すぎない。実際、Lemma \ref{spaces-cohomology-lemma-higher-direct-image} により
+$R^if_*\mathcal{F}$ は準連接層である。従ってこれは $A$ 加群
+$$
+\Gamma(\Spec(A), R^if_*\mathcal{F}) = H^i(X, \mathcal{F})
+$$
+に付随する準連接層である。この等式は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-apply-Leray} と、アフィンスキーム上の準連接加群の
+高次コホモロジー群の消滅（Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}）から従う。Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} により、$R^if_*\mathcal{F}$ が連接層である
+ことと $H^i(X, \mathcal{F})$ が有限型 $A$ 加群であることは同値である。
+従って Lemma \ref{spaces-cohomology-lemma-proper-pushforward-coherent} から結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-graded-finiteness}
+$A$ を Noether 環とする。$B$ を有限生成次数付き $A$ 代数とする。
+$f : X \to \Spec(A)$ を代数空間の固有射とする。
+$\mathcal{B} = f^*\widetilde B$ と置く。$\mathcal{F}$ を有限型の次数付き
+準連接 $\mathcal{B}$ 加群とする。すべての $p \geq 0$ に対し、次数付き
+$B$ 加群 $H^p(X, \mathcal{F})$ は有限 $B$ 加群である。
+\end{lemma}
+
+\begin{proof}
+これを証明するため、ファイバー積の図式
+$$
+\xymatrix{
+X' = \Spec(B) \times_{\Spec(A)} X
+\ar[r]_-\pi \ar[d]_{f'} &
+X \ar[d]^f \\
+\Spec(B) \ar[r] &
+\Spec(A)
+}
+$$
+を考える。$f'$ は固有射であることに注意する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-proper} を参照せよ。また、$B$ は
+有限生成 $A$ 代数なので Noether である（Algebra, Lemma
+\ref{algebra-lemma-Noetherian-permanence}）。これは $X'$ が Noether
+代数空間であることを含意する（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}）。$X'$ は
+準連接 $\mathcal{O}_X$ 代数 $\mathcal{B}$ の相対スペクトルであることに
+注意する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-algebras} を参照せよ。
+$\mathcal{F}$ は準連接 $\mathcal{B}$ 加群なので、一意な準連接
+$\mathcal{O}_{X'}$ 加群 $\mathcal{F}'$ で
+$\pi_*\mathcal{F}' = \mathcal{F}$ を満たすものが存在する。Morphisms of
+Spaces, Lemma \ref{spaces-morphisms-lemma-affine-equivalence-modules} を
+参照せよ。$\mathcal{F}$ は $\mathcal{B}$ 加群として有限型なので、
+$\mathcal{F}'$ は有限型 $\mathcal{O}_{X'}$ 加群であると結論できる
+（詳細は省略する）。言い換えれば $\mathcal{F}'$ は連接
+$\mathcal{O}_{X'}$ 加群である（Lemma \ref{spaces-cohomology-lemma-coherent-Noetherian}）。射
+$\pi : X' \to X$ はアフィンなので、
+$$
+H^p(X, \mathcal{F}) = H^p(X', \mathcal{F}')
+$$
+が Lemma \ref{spaces-cohomology-lemma-affine-vanishing-higher-direct-images} および Cohomology
+on Sites, Lemma \ref{sites-cohomology-lemma-apply-Leray} により成り立つ。
+従って補題は Lemma \ref{spaces-cohomology-lemma-proper-over-affine-cohomology-finite} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{豊富な可逆層とコホモロジー}
+\label{spaces-cohomology-section-ample-cohomology}
+
+\noindent
+アフィンな基底上の固有代数空間について、捻った後のコホモロジーの消滅で
+表される豊富性の判定法を述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-vanshing-gives-ample}
+$R$ を Noether 環とする。$X$ を $R$ 上の固有代数空間とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$ 加群とする。次は同値である。
+\begin{enumerate}
+\item $X$ はスキームで、$\mathcal{L}$ は $X$ 上豊富である、
+\item 任意の連接 $\mathcal{O}_X$ 加群 $\mathcal{F}$ に対し $n_0 \geq 0$ が
+存在して、$H^p(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$ が
+すべての $n \geq n_0$ および $p > 0$ に対して成り立つ、かつ
+\item 任意の連接 $\mathcal{O}_X$ 加群 $\mathcal{F}$ に対し $n \geq 1$ が
+存在して $H^1(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+含意 (1) $\Rightarrow$ (2) は Cohomology of Schemes, Lemma
+\ref{coherent-lemma-vanshing-gives-ample} から従う。含意 (2) $\Rightarrow$ (3)
+は自明である。含意 (3) $\Rightarrow$ (1) は Lemma
+\ref{spaces-cohomology-lemma-Noetherian-h1-zero-invertible} である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-surjective-finite-morphism-ample}
+$R$ を Noether 環とする。$f : Y \to X$ を $R$ 上固有な代数空間の射とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$ 加群とする。$f$ は有限かつ全射であると
+仮定する。次は同値である。
+\begin{enumerate}
+\item $X$ はスキームで、$\mathcal{L}$ は豊富である、かつ
+\item $Y$ はスキームで、$f^*\mathcal{L}$ は豊富である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。このとき有限射は（スキームによって）表現可能なので、
+$Y$ はスキームである。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-local} を参照せよ。従って (2) は
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-surjective-finite-morphism-ample} から従う。
+
+\medskip\noindent
+(2) を仮定する。$P$ を、連接 $\mathcal{O}_X$ 加群 $\mathcal{F}$ に関する
+次の性質とする。$n_0$ が存在して、
+$H^p(X, \mathcal{F} \otimes \mathcal{L}^{\otimes n}) = 0$ がすべての
+$n \geq n_0$ および $p > 0$ に対して成り立つ。$P$ が任意の連接
+$\mathcal{O}_X$ 加群 $\mathcal{F}$ に対して成り立つことを
+証明する。すると Lemma \ref{spaces-cohomology-lemma-vanshing-gives-ample} により
+$\mathcal{L}$ は豊富である。Lemma
+\ref{spaces-cohomology-lemma-property-higher-rank-cohomological} を適用する。そのため同補題の
+(1)、(2)、(3) を $P$ について確認しなければならない。性質 (1) は層の
+短完全列に付随するコホモロジー長完全列と、可逆層とのテンソル積を取る
+関手が完全であることから従う。性質 (2) は $H^p(X, -)$ が加法的関手で
+あることから従う。
+
+\medskip\noindent
+(3) を見るため、$i : Z \to X$ を $|Z|$ が既約である被約閉部分空間とする。
+$i' : Z' \to Y$ および $f' : Z' \to Z$ を Lemma
+\ref{spaces-cohomology-lemma-finite-morphism-Noetherian} と同様に取り、
+$\mathcal{G} = f'_*\mathcal{O}_{Z'}$ と置く。$\mathcal{G}$ が Lemma
+\ref{spaces-cohomology-lemma-property-higher-rank-cohomological} の性質 (3)(a) と (3)(b) を
+満たすことを主張する。これで証明が完了する。性質 (3)(a) は Lemma
+\ref{spaces-cohomology-lemma-finite-morphism-Noetherian} ですでに見た。(3)(b) を見るため、
+$\mathcal{I}$ を $Z$ 上の零でない準連接イデアル層とする。
+$\mathcal{I}' \subset \mathcal{O}_{Z'}$ を準連接イデアル
+$(f')^{-1}\mathcal{I} \mathcal{O}_{Z'}$、すなわち
+$(f')^*\mathcal{I} \to \mathcal{O}_{Z'}$ の像とする。Lemma
+\ref{spaces-cohomology-lemma-affine-morphism-projection-ideal} により
+$f_*\mathcal{I}' = \mathcal{I} \mathcal{G}$ である。その共通値
+$\mathcal{G}' = \mathcal{I} \mathcal{G} = f'_*\mathcal{I}'$ が (3)(b) に
+記された条件を満たすことを主張する。まず、
+$\mathcal{G}/\mathcal{G}'$ の台は $\mathcal{O}_Z/\mathcal{I}$ の台に
+含まれることが明らかである。後者は $|Z|$ の真部分空間である。実際、
+$\mathcal{I}$ は被約既約代数空間 $Z$ 上の零でないイデアル層である。
+$f'_*$、$i_*$、および $i'_*$ が連接加群を連接加群に移すことを思い出す。
+Lemmas \ref{spaces-cohomology-lemma-finite-pushforward-coherent} および
+\ref{spaces-cohomology-lemma-i-star-equivalence} を参照せよ。$Y$ はスキームで
+$\mathcal{L}$ は豊富なので、Lemma \ref{spaces-cohomology-lemma-vanshing-gives-ample} により
+$n_0$ が存在して
+$$
+H^p(Y, i'_*\mathcal{I}' \otimes_{\mathcal{O}_Y} f^*\mathcal{L}^{\otimes n}) = 0
+$$
+が $n \geq n_0$ および $p > 0$ に対して成り立つ。ここで次を得る。
+\begin{align*}
+H^p(X, i_*\mathcal{G}' \otimes_{\mathcal{O}_X} \mathcal{L}^{\otimes n})
+& =
+H^p(Z, \mathcal{G'} \otimes_{\mathcal{O}_Z} i^*\mathcal{L}^{\otimes n}) \\
+& =
+H^p(Z,
+f'_*\mathcal{I}' \otimes_{\mathcal{O}_Z} i^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Z, f'_*(\mathcal{I}' \otimes_{\mathcal{O}_{Z'}}
+(f')^*i^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Z, f'_*(\mathcal{I}' \otimes_{\mathcal{O}_{Z'}}
+(i')^*f^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Z',
+\mathcal{I}' \otimes_{\mathcal{O}_{Z'}} (i')^*f^*\mathcal{L}^{\otimes n})) \\
+& =
+H^p(Y, i'_*\mathcal{I}' \otimes_{\mathcal{O}_Y} f^*\mathcal{L}^{\otimes n}) = 0
+\end{align*}
+ここでは射影公式と Leray スペクトル系列（Cohomology on Sites, Sections
+\ref{sites-cohomology-section-projection-formula} および
+\ref{sites-cohomology-section-leray} を参照）、ならびに Lemma
+\ref{spaces-cohomology-lemma-finite-higher-direct-image-zero} を用いた。これは所望の通り Lemma
+\ref{spaces-cohomology-lemma-property-higher-rank-cohomological} の性質 (3)(b) を確認する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{形式関数定理}
+\label{spaces-cohomology-section-theorem-formal-functions}
+
+\noindent
+この節は Cohomology of Schemes, Section
+\ref{coherent-section-theorem-formal-functions} の類似である。読者にはまず
+同節を読むことを勧める。
+
+\begin{situation}
+\label{spaces-cohomology-situation-formal-functions}
+ここで $A$ は Noether 環で、$I \subset A$ はイデアルである。また、
+$f : X \to \Spec(A)$ は代数空間の固有射で、$\mathcal{F}$ は $X$ 上の
+連接層である。
+\end{situation}
+
+\noindent
+この状況で $I^n\mathcal{F}$ により、$\mathcal{F}$ の準連接部分加群で、
+$\mathcal{O}_X$ 加群として $\mathcal{F}$ の局所切断と $I^n$ の元との積から
+生成されるものを表す。言い換えれば、これは写像
+$f^*\widetilde{I} \otimes_{\mathcal{O}_X} \mathcal{F} \to \mathcal{F}$ の像である。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-cohomology-powers-ideal-times-F}
+Situation \ref{spaces-cohomology-situation-formal-functions} において、
+$B = \bigoplus_{n \geq 0} I^n$ と置く。このときすべての $p \geq 0$ に対し、
+次数付き $B$ 加群 $\bigoplus_{n \geq 0} H^p(X, I^n\mathcal{F})$ は有限
+$B$ 加群である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{B} = \bigoplus I^n\mathcal{O}_X = f^*\widetilde{B}$ と置く。このとき
+$\bigoplus I^n\mathcal{F}$ は有限型の次数付き $\mathcal{B}$ 加群である。
+従って結果は Lemma \ref{spaces-cohomology-lemma-graded-finiteness} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-cohomology-powers-ideal-application}
+Situation \ref{spaces-cohomology-situation-formal-functions} において、すべての $p \geq 0$ に
+対し整数 $c \geq 0$ が存在して、次を満たす。
+\begin{enumerate}
+\item 乗法写像
+$I^{n - c} \otimes H^p(X, I^c\mathcal{F}) \to H^p(X, I^n\mathcal{F})$
+はすべての $n \geq c$ に対して全射である、かつ
+\item $H^p(X, I^{n + m}\mathcal{F}) \to H^p(X, I^n\mathcal{F})$ の像は
+部分加群 $I^{m - c} H^p(X, I^n\mathcal{F})$ に含まれ、これはすべての
+$n \geq 0$、$m \geq c$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-cohomology-lemma-cohomology-powers-ideal-times-F} により
+$d_1, \ldots, d_t \geq 0$ と $x_i \in H^p(X, I^{d_i}\mathcal{F})$ で、
+$\bigoplus_{n \geq 0} H^p(X, I^n\mathcal{F})$ が
+$x_1, \ldots, x_t$ によって $B = \bigoplus_{n \geq 0} I^n$ 上生成される
+ものを取れる。$c = \max\{d_i\}$ と取る。(1) が成り立つことは明らかで
+ある。(2) について $b = \max(0, n - c)$ と置く。次の $A$ 加群の可換図式を
+考える。
+$$
+\xymatrix{
+I^{n + m - c - b} \otimes I^b \otimes
+H^p(X, I^c\mathcal{F}) \ar[r] \ar[d] &
+I^{n + m - c} \otimes H^p(X, I^c\mathcal{F}) \ar[r] &
+H^p(X, I^{n + m}\mathcal{F}) \ar[d] \\
+I^{n + m - c - b} \otimes H^p(X, I^n\mathcal{F}) \ar[rr] & &
+H^p(X, I^n\mathcal{F})
+}
+$$
+補題の (1) により、$n + m \geq c$ ならば水平矢印の合成は全射である。
+一方 $n + m - c - b \geq m - c$ であることは明らかである。従って (2) が
+従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-ML-cohomology-powers-ideal}
+Situation \ref{spaces-cohomology-situation-formal-functions} において $p \geq 0$ を固定する。
+\begin{enumerate}
+\item $c_1 \geq 0$ が存在して、すべての $n \geq c_1$ に対し
+$$
+\Ker(
+H^p(X, \mathcal{F}) \to H^p(X, \mathcal{F}/I^n\mathcal{F})
+)
+\subset
+I^{n - c_1}H^p(X, \mathcal{F}).
+$$
+\item 逆系
+$$
+\left(H^p(X, \mathcal{F}/I^n\mathcal{F})\right)_{n \in \mathbf{N}}
+$$
+は Mittag-Leffler 条件を満たす（Homology, Definition
+\ref{homology-definition-Mittag-Leffler} を参照）。
+\item 実際、任意の $p$ と $n$ に対し $c_2(n) \geq n$ が存在して
+$$
+\Im(H^p(X, \mathcal{F}/I^k\mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+=
+\Im(H^p(X, \mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+$$
+がすべての $k \geq c_2(n)$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$c_1 = \max\{c_p, c_{p + 1}\}$ と置く。ここで $c_p, c_{p +1}$ は Lemma
+\ref{spaces-cohomology-lemma-cohomology-powers-ideal-application} により $H^p$ および
+$H^{p + 1}$ に対して得られる整数である。この定数を (1)、(2)、(3) の
+証明で用いる。
+
+\medskip\noindent
+(1) を証明しよう。短完全列
+$$
+0 \to I^n\mathcal{F} \to \mathcal{F} \to \mathcal{F}/I^n\mathcal{F} \to 0
+$$
+を考える。コホモロジー長完全列から
+$$
+\Ker(
+H^p(X, \mathcal{F}) \to H^p(X, \mathcal{F}/I^n\mathcal{F})
+)
+=
+\Im(
+H^p(X, I^n\mathcal{F}) \to H^p(X, \mathcal{F})
+)
+$$
+が分かる。従って $c_1$ の選び方により、これは
+$I^{n - c_1}H^p(X, \mathcal{F})$ に含まれ、$n \geq c_1$ に対して成り立つ。
+
+\medskip\noindent
+(3) は Mittag-Leffler 条件の定義により (2) を含意することに注意する。
+
+\medskip\noindent
+(3) を証明しよう。証明の残りを通して $n$ を固定する。可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+I^n\mathcal{F} \ar[r] &
+\mathcal{F} \ar[r] &
+\mathcal{F}/I^n\mathcal{F} \ar[r] &
+0 \\
+0 \ar[r] &
+I^{n + m}\mathcal{F} \ar[r] \ar[u] &
+\mathcal{F} \ar[r] \ar[u] &
+\mathcal{F}/I^{n + m}\mathcal{F} \ar[r] \ar[u] &
+0
+}
+$$
+を考える。これから次の可換図式が生じる。
+$$
+\xymatrix{
+H^p(X, I^n\mathcal{F}) \ar[r] &
+H^p(X, \mathcal{F}) \ar[r] &
+H^p(X, \mathcal{F}/I^n\mathcal{F}) \ar[r]_\delta &
+H^{p + 1}(X, I^n\mathcal{F}) \\
+H^p(X, I^{n + m}\mathcal{F}) \ar[r] \ar[u] &
+H^p(X, \mathcal{F}) \ar[r] \ar[u]^1 &
+H^p(X, \mathcal{F}/I^{n + m}\mathcal{F}) \ar[r] \ar[u] &
+H^{p + 1}(X, I^{n + m}\mathcal{F}) \ar[u]^a
+}
+$$
+$m \geq c_1$ ならば、$a$ の像は
+$I^{m - c_1} H^{p + 1}(X, I^n\mathcal{F})$ に含まれる。Artin--Rees の
+補題（Algebra, Lemma \ref{algebra-lemma-map-AR} を参照）により、整数
+$c_3(n)$ が存在して
+$$
+I^N H^{p + 1}(X, I^n\mathcal{F}) \cap \Im(\delta)
+\subset
+\delta\left(I^{N - c_3(n)}H^p(X, \mathcal{F}/I^n\mathcal{F})\right)
+$$
+がすべての $N \geq c_3(n)$ に対して成り立つ。
+$H^p(X, \mathcal{F}/I^n\mathcal{F})$ は $I^n$ によって零化されるので、
+$m \geq c_3(n) + c_1 + n$ ならば
+$$
+\Im(H^p(X, \mathcal{F}/I^{n + m}\mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+=
+\Im(H^p(X, \mathcal{F})
+\to H^p(X, \mathcal{F}/I^n\mathcal{F}))
+$$
+である。言い換えれば、$c_2(n) = c_3(n) + c_1 + n$ とすれば (3) が
+成り立つ。
+\end{proof}
+
+\begin{theorem}[形式関数定理]
+\label{spaces-cohomology-theorem-formal-functions}
+Situation \ref{spaces-cohomology-situation-formal-functions} において $p \geq 0$ を固定する。
+写像の系
+$$
+H^p(X, \mathcal{F})/I^nH^p(X, \mathcal{F})
+\longrightarrow
+H^p(X, \mathcal{F}/I^n\mathcal{F})
+$$
+は極限の同型
+$$
+H^p(X, \mathcal{F})^\wedge
+\longrightarrow
+\lim_n H^p(X, \mathcal{F}/I^n\mathcal{F})
+$$
+を定める。ここで左辺は $A$ 加群 $H^p(X, \mathcal{F})$ のイデアル $I$ に
+関する完備化である。Algebra, Section
+\ref{algebra-section-completion} を参照せよ。さらに、これは実際に極限位相に
+関する同相写像である。
+\end{theorem}
+
+\begin{proof}
+実際、これは Lemma \ref{spaces-cohomology-lemma-ML-cohomology-powers-ideal} から直ちに従う。
+詳細を述べる。$M = H^p(X, \mathcal{F})$ および
+$M_n = H^p(X, \mathcal{F}/I^n\mathcal{F})$ と置く。
+$N_n = \Im(M \to M_n)$ と書く。Homology, Section
+\ref{homology-section-inverse-systems} における極限の記述により
+$$
+\lim_n M_n
+=
+\{(x_n) \in \prod M_n \mid \varphi_i(x_n) = x_{n - 1}, \ n = 2, 3, \ldots\}
+$$
+である。元 $x = (x_n) \in \lim_n M_n$ を選ぶ。Lemma
+\ref{spaces-cohomology-lemma-ML-cohomology-powers-ideal} (3) により、$x_n \in N_n$ がすべての
+$n$ に対して成り立つ。実際、定義により $x_n$ はある
+$x_{n + m} \in M_{n + m}$ の像であり、これはすべての $m$ に対して成り立つ。Lemma
+\ref{spaces-cohomology-lemma-ML-cohomology-powers-ideal} (1) により、剰余写像の分解
+$$
+M \to N_n \to M/I^{n - c_1}M
+$$
+が存在する。$y_n \in M/I^{n - c_1}M$ を $x_n$ の像とし、これは
+$n \geq c_1$ に対して定める。$n' \geq n$ のとき、合成
+$M \to M_{n'} \to M_n$ は与えられた写像 $M \to M_n$ である。従って
+$y_{n'}$ は $y_n$ に写る。その写像は標準写像
+$M/I^{n' - c_1}M \to M/I^{n - c_1}M$ である。従って
+$y = (y_{n + c_1})$ は $\lim_n M/I^nM$ の元を定める。
+$y$ が $x$ に写ることの確認は省略する。ここで補題の写像は
+$$
+M^\wedge = \lim_n M/I^nM \longrightarrow \lim_n M_n
+$$
+である。位相に関する確認も省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-spell-out-theorem-formal-functions}
+$A$ を環とし、$I \subset A$ をイデアルとする。$A$ は Noether で、$I$ に
+関して完備であると仮定する。$f : X \to \Spec(A)$ を代数空間の固有射と
+する。$\mathcal{F}$ を $X$ 上の連接層とする。このとき
+$$
+H^p(X, \mathcal{F}) = \lim_n H^p(X, \mathcal{F}/I^n\mathcal{F})
+$$
+がすべての $p \geq 0$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは基底環が完備 Noether 環である場合の形式関数定理
+（Theorem \ref{spaces-cohomology-theorem-formal-functions}）の言い換えである。実際、この場合
+$A$ 加群 $H^p(X, \mathcal{F})$ は有限であり（Lemma
+\ref{spaces-cohomology-lemma-proper-over-affine-cohomology-finite}）、従って $I$ 進完備である
+（Algebra, Lemma \ref{algebra-lemma-completion-tensor}）。ゆえに左辺の完備化は
+不要である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-formal-functions-stalk}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とし、
+$\mathcal{F}$ を $X$ 上の準連接層とする。次を仮定する。
+\begin{enumerate}
+\item $Y$ は局所 Noether である、
+\item $f$ は固有である、かつ
+\item $\mathcal{F}$ は連接である。
+\end{enumerate}
+$\overline{y}$ を $Y$ の幾何学的点とする。ファイバーの「無限小近傍」
+$$
+\xymatrix{
+X_n =
+\Spec(\mathcal{O}_{Y, \overline{y}}/\mathfrak m_{\overline{y}}^n) \times_Y X
+\ar[r]_-{i_n} \ar[d]_{f_n} &
+X \ar[d]^f \\
+\Spec(\mathcal{O}_{Y, \overline{y}}/\mathfrak m_{\overline{y}}^n)
+\ar[r]^-{c_n} & Y
+}
+$$
+を考える。ここでファイバーは $X_1 = X_{\overline{y}}$ であり、
+$\mathcal{F}_n = i_n^*\mathcal{F}$ と置く。このとき
+$$
+\left(R^pf_*\mathcal{F}\right)_{\overline{y}}^\wedge
+\cong
+\lim_n H^p(X_n, \mathcal{F}_n)
+$$
+は $\mathcal{O}_{Y, \overline{y}}^\wedge$ 加群としての同型である。
+\end{lemma}
+
+\begin{proof}
+これは形式関数定理 Theorem \ref{spaces-cohomology-theorem-formal-functions} の特別な場合の
+言い換えにすぎない。詳述しよう。$\mathcal{O}_{Y, \overline{y}}$ は Noether
+局所環であることに注意する。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-local-ring-Noetherian} を参照せよ。
+標準射 $c : \Spec(\mathcal{O}_{Y, \overline{y}}) \to Y$ を考える。これは
+局所環を同一視するので平坦射である。$f' : X' \to
+\Spec(\mathcal{O}_{Y, \overline{y}})$ を、この局所環への $f$ の基底変換と
+する。Lemma \ref{spaces-cohomology-lemma-flat-base-change-cohomology} により
+$c^*R^pf_*\mathcal{F} = R^pf'_*\mathcal{F}'$ である。さらに、標準的同一視
+$X_n = X'_n$ があり、これはすべての $n \geq 1$ に対して成り立つ。
+
+\medskip\noindent
+従って、$Y = \Spec(A)$ であり、ここで $A$ は強 Hensel Noether 局所環、
+$\mathfrak m$ はその極大イデアルであると仮定してよい。また
+$\overline{y} \to Y$ は
+$\Spec(A/\mathfrak m) \to Y$ に等しいと仮定してよい。このとき
+$$
+\left(R^pf_*\mathcal{F}\right)_{\overline{y}} =
+\Gamma(Y, R^pf_*\mathcal{F}) =
+H^p(X, \mathcal{F})
+$$
+である。なぜなら $(Y, \overline{y})$ は $\overline{y}$ のエタール近傍の圏の
+始対象だからである。射 $c_n$ はそれぞれ閉埋め込みである。従ってその
+基底変換 $i_n$ も閉埋め込みである。次に注意する。
+$i_{n, *}\mathcal{F}_n = i_{n, *}i_n^*\mathcal{F}
+= \mathcal{F}/\mathfrak m^n\mathcal{F}$。$i_n$ に対する Leray スペクトル系列と
+Lemma \ref{spaces-cohomology-lemma-finite-pushforward-coherent} により
+$$
+H^p(X_n, \mathcal{F}_n) =
+H^p(X, i_{n, *}\mathcal{F}) =
+H^p(X, \mathcal{F}/\mathfrak m^n\mathcal{F})
+$$
+である。従って補題の主張に現れる極限の計算に形式関数定理を実際に適用
+でき、結論を得る。
+\end{proof}
+
+\noindent
+後でファイバーの次元が $ > 0$ の場合へ一般化する補題を、次に述べる。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-higher-direct-images-zero-finite-fibre}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\overline{y}$ を $Y$ の幾何学的点とする。次を仮定する。
+\begin{enumerate}
+\item $Y$ は局所 Noether である、
+\item $f$ は固有である、かつ
+\item $X_{\overline{y}}$ の台位相空間は離散である。
+\end{enumerate}
+このとき任意の連接層 $\mathcal{F}$ で $X$ 上のものに対して
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$ がすべての $p > 0$ について成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\kappa(\overline{y})$ を局所環 $\mathcal{O}_{Y, \overline{y}}$ の剰余体とする。
+Lemma \ref{spaces-cohomology-lemma-formal-functions-stalk} と同様に
+$X_{\overline{y}} = X_1 = \Spec(\kappa(\overline{y})) \times_Y X$ と置く。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-point} により、射 $f : X \to Y$ は
+$X \to Y$ のファイバーの各点で準有限であり、ここでは $\overline{y}$ 上の
+ファイバーを考えている。従って
+$X_{\overline{y}} \to \overline{y}$ は分離かつ準有限である。ゆえに
+Morphisms of Spaces, Proposition
+\ref{spaces-morphisms-proposition-locally-quasi-finite-separated-over-scheme} により
+$X_{\overline{y}}$ はスキームである。これは準コンパクトなので、その
+台位相空間は有限離散空間である。そこで Schemes, Lemma
+\ref{schemes-lemma-scheme-finite-discrete-affine} によりアフィンスキームである。
+Lemma \ref{spaces-cohomology-lemma-image-affine-finite-morphism-affine-Noetherian} から、代数空間
+$X_n$ もアフィンスキームであることが従う。さらに、各 $X_n$ の台位相空間は
+$X_1$ のものと同じである。従って $H^p(X_n, \mathcal{F}_n) = 0$ がすべての
+$p > 0$ について成り立つ。ゆえに Lemma
+\ref{spaces-cohomology-lemma-formal-functions-stalk} により
+$(R^pf_*\mathcal{F})_{\overline{y}}^\wedge = 0$ である。Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent} により $R^pf_*\mathcal{F}$ は連接であり、
+従って $R^pf_*\mathcal{F}_{\overline{y}}$ は有限
+$\mathcal{O}_{Y, \overline{y}}$ 加群であることに注意する。Algebra, Lemma
+\ref{algebra-lemma-completion-tensor} により、これは
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$ を含意する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-higher-direct-images-zero-above-dimension-fibre}
+\begin{slogan}
+固有写像について、高次順像の茎はファイバーの次元より大きい次数で零である。
+\end{slogan}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$\overline{y}$ を $Y$ の幾何学的点とする。次を仮定する。
+\begin{enumerate}
+\item $Y$ は局所 Noether である、
+\item $f$ は固有である、かつ
+\item $\dim(X_{\overline{y}}) = d$ である。
+\end{enumerate}
+このとき任意の連接層 $\mathcal{F}$ で $X$ 上のものに対して
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$ がすべての $p > d$ について成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\kappa(\overline{y})$ を局所環 $\mathcal{O}_{Y, \overline{y}}$ の剰余体とする。
+Lemma \ref{spaces-cohomology-lemma-formal-functions-stalk} と同様に
+$X_{\overline{y}} = X_1 = \Spec(\kappa(\overline{y})) \times_Y X$ と置く。
+さらに、各無限小近傍 $X_n$ の台位相空間は $X_{\overline{y}}$ のものと同じで
+ある。従って Lemma \ref{spaces-cohomology-lemma-vanishing-above-dimension} により
+$H^p(X_n, \mathcal{F}_n) = 0$ がすべての $p > d$ について成り立つ。ゆえに
+Lemma \ref{spaces-cohomology-lemma-formal-functions-stalk} により
+$(R^pf_*\mathcal{F})_{\overline{y}}^\wedge = 0$ が $p > d$ について成り立つ。
+Lemma \ref{spaces-cohomology-lemma-proper-pushforward-coherent} により $R^pf_*\mathcal{F}$ は
+連接であり、従って $R^pf_*\mathcal{F}_{\overline{y}}$ は有限
+$\mathcal{O}_{Y, \overline{y}}$ 加群であることに注意する。Algebra, Lemma
+\ref{algebra-lemma-completion-tensor} により、これは
+$(R^pf_*\mathcal{F})_{\overline{y}} = 0$ を含意する。
+\end{proof}
+
+
+
+
+
+
+\section{形式関数定理の応用}
+\label{spaces-cohomology-section-applications-formal-functions}
+
+\noindent
+必要に応じてここにさらに追加する。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-characterize-finite}
+（より一般的な形については More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-characterize-finite} を参照。）
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$Y$ は局所 Noether であると仮定する。次は同値である。
+\begin{enumerate}
+\item $f$ は有限である、かつ
+\item $f$ は固有で、$|X_k|$ は任意の射 $\Spec(k) \to Y$ に対して
+離散空間である。ここで $k$ は体である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-proper} により
+有限射は固有である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-quasi-finite} により有限射は準有限である。
+準有限射のファイバー $X_k$ は離散である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-quasi-finite} を参照せよ。従って有限射は
+固有で、離散ファイバー $X_k$ をもつ。
+
+\medskip\noindent
+$f$ は固有で、離散ファイバー $X_k$ をもつと仮定する。$f$ が有限である
+ことを示したい。実際、$f$ がアフィンであることを証明すれば十分である。
+$f$ がアフィンならば、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-integral-universally-closed} により $f$ は整となり、
+そこで Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-integral} により $f$ は有限となる。
+
+\medskip\noindent
+$f$ がアフィンであることを示すため $Y$ はアフィンであると仮定してよく、
+目標は $X$ もアフィンであることを示すことである。$f$ は固有なので
+$X$ は分離かつ準コンパクトである。任意の連接 $\mathcal{O}_X$ 加群
+$\mathcal{F}$ に対して $H^1(X, \mathcal{F}) = 0$ であることを示す。
+Lemmas \ref{spaces-cohomology-lemma-directed-colimit-coherent} および \ref{spaces-cohomology-lemma-colimits} により、
+これは $H^1(X, \mathcal{F}) = 0$ がすべての準連接 $\mathcal{O}_X$ 加群
+$\mathcal{F}$ に対して成り立つことを含意する。そこで Proposition
+\ref{spaces-cohomology-proposition-vanishing-affine} により $X$ はアフィンである。Lemma
+\ref{spaces-cohomology-lemma-higher-direct-images-zero-finite-fibre} により、
+$R^1f_*\mathcal{F}$ の茎は $Y$ のすべての幾何学的点で零である。言い換えれば
+$R^1f_*\mathcal{F} = 0$ である。従って $f$ に対する Leray スペクトル系列から
+$H^1(X , \mathcal{F}) = H^1(Y, f_*\mathcal{F})$ を得る。$Y$ はアフィンで、
+$f_*\mathcal{F}$ は準連接なので（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-pushforward}）、Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero} から
+$H^1(Y, f_*\mathcal{F}) = 0$ と結論する。従って所望の通り
+$H^1(X, \mathcal{F}) = 0$ である。
+\end{proof}
+
+\noindent
+帰結として次の有用な結果を得る。
+
+\begin{lemma}
+\label{spaces-cohomology-lemma-proper-finite-fibre-finite-in-neighbourhood}
+（より一般的な形については More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-proper-finite-fibre-finite-in-neighbourhood}
+を参照。）$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射と
+する。$\overline{y}$ を $Y$ の幾何学的点とする。次を仮定する。
+\begin{enumerate}
+\item $Y$ は局所 Noether である、
+\item $f$ は固有である、かつ
+\item $|X_{\overline{y}}|$ は有限である。
+\end{enumerate}
+このとき開近傍 $V \subset Y$ で、$\overline{y}$ の近傍となり、
+$f|_{f^{-1}(V)} : f^{-1}(V) \to V$ が有限となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-point} により、射 $f$ は $X$ の
+すべての幾何学的点で準有限であり、ここでは $\overline{y}$ の上にある点を
+考えている。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part} により、$f$ が
+準有限である点の集合は開部分空間 $U \subset X$ である。
+$Z = X \setminus U$ と置く。このとき $\overline{y} \not \in f(Z)$ である。
+$f$ は固有なので集合 $f(Z) \subset Y$ は閉である。任意の開近傍
+$V \subset Y$ で、$\overline{y}$ の近傍かつ $Z \cap V = \emptyset$ となる
+ものを選ぶ。このとき
+$f^{-1}(V) \to V$ は局所準有限かつ固有である。従って
+$f^{-1}(V) \to V$ は離散ファイバー $X_k$ をもち（Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-locally-quasi-finite}）、それらは準コンパクト、
+従って有限である。ゆえに Lemma \ref{spaces-cohomology-lemma-characterize-finite} により
+$f^{-1}(V) \to V$ は有限である。
+\end{proof}

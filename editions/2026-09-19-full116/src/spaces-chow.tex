@@ -1,0 +1,4895 @@
+% Generated mechanically from frozen input inputs/p10/ja/spaces-chow.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{81}
+\chapter{代数空間の Chow 群}
+
+
+\phantomsection
+\label{spaces-chow-section-phantom}
+
+
+
+
+\section{はじめに}
+\label{spaces-chow-section-introduction}
+
+\noindent
+本章では、まず代数空間の Chow 群を論じる。
+これらを定義した後、ベクトル束の Chern 類をこれらの
+Chow 群上の作用素として定義する。その方針は、
+スキームの場合の方針と完全に同じである。したがって読者には、
+スキームについての対応する章の導入
+（Chow Homology, Section \ref{chow-section-introduction}）
+を参照することを勧める。
+
+\medskip\noindent
+関連する論文として \cite{edidin-graham} および \cite{kresch_cycle} がある。
+
+
+
+\section{設定}
+\label{spaces-chow-section-setup}
+
+\noindent
+まず、本章で扱う代数空間の圏を固定する。
+本章を通じて、Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}
+により、「decent $+$ 局所 Noether」と
+「準分離 $+$ 局所 Noether」は同じ条件であることに注意されたい。
+
+\begin{situation}
+\label{spaces-chow-situation-setup}
+ここで $S$ はスキーム、$B$ は $S$ 上の代数空間である。
+$B$ は準分離的、局所 Noether 的、かつ普遍カテナリーであると仮定する
+（Decent Spaces, Definition
+\ref{decent-spaces-definition-universally-catenary}）。
+さらに、次元関数
+$\delta : |B| \longrightarrow \mathbf{Z}$
+が与えられていると仮定する。$X$ が $B$ 上の代数空間であり、
+その構造射 $f : X \to B$ が準分離的かつ局所有限型であるとき、
+$X/B$ は {\it 良い} という。この場合、
+$$
+\delta = \delta_{X/B} : |X| \longrightarrow \mathbf{Z}
+$$
+を、$x$ を $\delta(f(x))$ と $x/f(x)$ の超越次数との和に送る写像として
+定義する（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}）。
+これは More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-universally-catenary-dimension-function}
+により次元関数である。
+\end{situation}
+
+\noindent
+特別な場合として、$S = B$ がスキームで、$(S, \delta)$ が
+Chow Homology, Situation \ref{chow-situation-setup} のとおりである場合がある。
+したがって $B$ は、体のスペクトル
+（Chow Homology, Example \ref{chow-example-field}）でも、
+$B = \Spec(\mathbf{Z})$
+（Chow Homology, Example \ref{chow-example-domain-dimension-1}）でもよい。
+
+\medskip\noindent
+% P10-E0036
+Situation \ref{spaces-chow-situation-setup} の設定では、扱う代数空間が準分離的
+（したがって特に decent）かつ局所 Noether 的であるため、
+代数空間に関する多くの補題、命題、定理、および定義は扱いやすくなる。
+この点を示すため、本章では次のような注意を随所に置く。
+
+\begin{remark}
+\label{spaces-chow-remark-sober}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ が良いならば、
+$|X|$ は sober 位相空間である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-sober}
+または Decent Spaces, Proposition
+\ref{decent-spaces-proposition-reasonable-sober} を参照されたい。
+以下では断りなくこのことを用いて、$|X|$ の既約閉部分集合の
+生成点を選ぶ。
+\end{remark}
+
+\begin{remark}
+\label{spaces-chow-remark-integral}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ が良いならば、
+$X$ が整であること
+（Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-integral-algebraic-space}）と、
+$X$ が被約で $|X|$ が既約であることとは同値である。
+さらに、任意の点 $\xi \in |X|$ に対し、$\xi$ が閉部分集合
+$|Z| \subset |X|$ の生成点となるような整閉部分空間
+$Z \subset X$ が一意に存在する。Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-decent-irreducible-closed} を参照されたい。
+\end{remark}
+
+\noindent
+$B$ が Jacobson であり、$\delta$ が閉点を零に送るならば、
+$\delta$ は各点をその閉包の次元に送る関数である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-delta-is-dimension}
+Situation \ref{spaces-chow-situation-setup} において、$B$ は Jacobson であり、
+$|B|$ のすべての閉点 $b$ に対して $\delta(b) = 0$ であると仮定する。
+$X/B$ を良いものとする。$Z \subset X$ が整閉部分空間で、
+その生成点が $\xi \in |Z|$ ならば、次の整数はすべて等しい。
+\begin{enumerate}
+\item $\delta(\xi) = \delta_{X/B}(\xi)$,
+\item $\dim(|Z|)$,
+\item 閉点 $z \in |Z|$ に対する $\text{codim}(\{z\}, |Z|)$,
+\item 閉点 $z \in |Z|$ に対する、$z$ における $Z$ の局所環の次元、および
+\item 閉点 $z \in |Z|$ に対する $\dim(\mathcal{O}_{Z, \overline{z}})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X$, $Z$, $\xi$ は補題のとおりとする。
+$X$ は $B$ 上局所有限型であるから、$X$ は Jacobson である。
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-Jacobson-universally-Jacobson} を参照されたい。
+したがって Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-Jacobson-ft-pts} により、
+$X_{\text{ft-pts}} \subset |X|$ は閉点全体の集合である。
+$|Z|$ の既約閉部分集合の鎖
+$T_0 \supset \ldots \supset T_e$
+が与えられると、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-enough-finite-type-points} により
+$T_e \cap X_{\text{ft-pts}}$ は空でない。
+したがって、このような鎖の終点を、ある閉点 $z \in |Z|$ に対する
+$T_e = \{z\}$ と常に仮定できる。ゆえに
+$\dim(Z) = \sup_z \text{codim}(\{z\}, |Z|)$ であり、
+ここで $z$ は $|Z|$ の閉点全体を走る。
+Topology, Lemma \ref{topology-lemma-dimension-function-catenary} により
+$\text{codim}(\{z\}, Z) = \delta(\xi) - \delta(z)$ である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-type-points-morphism} により、
+$z$ の像は $B$ の有限型点、すなわち $|B|$ の閉点である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-jacobson-finite-type-points} により、
+$z/b$ の超越次数は $0$ である。したがって仮定から
+$\delta(z) = \delta(b) = 0$ を得る。よって、すべての閉点
+$z \in |Z|$ に対して
+$$
+\dim(|Z|) = \text{codim}(\{z\}, Z) = \delta(\xi)
+$$
+が成り立つ。最後に Decent Spaces, Lemma
+\ref{decent-spaces-lemma-codimension-local-ring} により、
+$\text{codim}(\{z\}, Z)$ は $z$ における $Z$ の局所環の次元に等しく、
+さらに Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-dimension-local-ring} により、これは
+$\dim(\mathcal{O}_{Z, \overline{z}})$ に等しい。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\noindent
+上の補題の状況では、閉既約部分集合の生成点における
+$\delta$ の値は、その既約閉部分集合の次元である。
+このことから次の定義が自然に導かれる。
+
+\begin{definition}
+\label{spaces-chow-definition-delta-dimension}
+Situation \ref{spaces-chow-situation-setup} において、良い $X/B$ と任意の既約閉部分集合
+$T \subset |X|$ に対し、
+$$
+\dim_\delta(T) = \delta(\xi)
+$$
+と定義する。ここで $\xi \in T$ は $T$ の生成点である。
+これを {\it $T$ の $\delta$-次元} と呼ぶ。
+$T \subset |X|$ が任意の閉部分集合であるとき、
+$\dim_\delta(T)$ を $T$ の既約成分の $\delta$-次元の上限として定義する。
+$Z$ が $X$ の閉部分空間ならば、
+$\dim_\delta(Z) = \dim_\delta(|Z|)$ とおく。
+\end{definition}
+
+\noindent
+もちろん、これは単に
+$\dim_\delta(T) = \sup \{\delta(t) \mid t \in T\}$
+ということである。
+
+\section{サイクル}
+\label{spaces-chow-section-cycles}
+
+\noindent
+これは Chow Homology, Section \ref{chow-section-cycles} に対応する内容である。
+
+\medskip\noindent
+ここでは空間が準コンパクトであると仮定していないため、
+サイクルの定義には少し注意が必要である。例えば有理関数は
+無限個の極をもつことがあるので、無限和を許さなければならない。
+いずれにせよ、$X$ が準コンパクトならば、通常どおりサイクルは有限和である。
+
+\begin{definition}
+\label{spaces-chow-definition-cycles}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$k \in \mathbf{Z}$ とする。
+\begin{enumerate}
+\item $X$ 上の {\it サイクル} とは、形式和
+$$
+\alpha = \sum n_Z [Z]
+$$
+であって、和は整閉部分空間 $Z \subset X$ 全体を走り、
+各 $n_Z \in \mathbf{Z}$ について、$|X|$ の部分集合の族
+$\{|Z|; n_Z \not = 0\}$ が局所有限であるものをいう
+（Topology, Definition \ref{topology-definition-locally-finite}）。
+\item $X$ 上の {\it $k$-サイクル} とは、
+$$
+\alpha = \sum n_Z [Z]
+$$
+と表され、$n_Z \not = 0 \Rightarrow \dim_\delta(Z) = k$
+を満たすサイクルをいう。
+\item $X$ 上のすべての $k$-サイクルからなる Abel 群を $Z_k(X)$ と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+言い換えると、$X$ 上の $k$-サイクルは、$\delta$-次元が $k$ である
+整閉部分空間（Remark \ref{spaces-chow-remark-integral}）の局所有限な形式的
+$\mathbf{Z}$-線形結合である。$k$-サイクル
+$\alpha = \sum n_Z[Z]$ と $\beta = \sum m_Z[Z]$ の和は
+$$
+\alpha + \beta = \sum (n_Z + m_Z)[Z],
+$$
+すなわち係数を加えることによって与えられる。
+
+
+
+
+\section{重複度}
+\label{spaces-chow-section-multiplicities}
+
+\noindent
+長さと重複度に関するいくつかの簡単な結果を述べる節である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-length}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$x \in |X|$ とし、$d \in \{0, 1, 2, \ldots, \infty\}$ とする。
+次の条件は同値である。
+\begin{enumerate}
+\item
+$\text{length}_{\mathcal{O}_{X, \overline{x}}} \mathcal{F}_{\overline{x}} = d$
+\item $U$ がスキームであるようなある \'etale 射 $U \to X$ と、
+$x$ に写る $u \in U$ に対して
+$\text{length}_{\mathcal{O}_{U, u}} (\mathcal{F}|_U)_u = d$
+である。
+\item $U$ がスキームであるような任意の \'etale 射 $U \to X$ と、
+$x$ に写る $u \in U$ に対して
+$\text{length}_{\mathcal{O}_{U, u}} (\mathcal{F}|_U)_u = d$
+である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U \to X$ と $u \in U$ は (2) または (3) のとおりとする。このとき、
+$\mathcal{O}_{X, \overline{x}}$ は $\mathcal{O}_{U, u}$ の狭義 Hensel 化であり、
+$$
+\mathcal{F}_{\overline{x}} =
+(\mathcal{F}|_U)_u \otimes_{\mathcal{O}_{U, u}} \mathcal{O}_{X, \overline{x}}
+$$
+であることがわかっている。Properties of Spaces,
+Lemmas \ref{spaces-properties-lemma-describe-etale-local-ring} および
+\ref{spaces-properties-lemma-stalk-quasi-coherent} を参照されたい。
+したがって長さの等しさは、Algebra, Lemma
+\ref{algebra-lemma-pullback-module}、
+$\mathcal{O}_{U, u} \to \mathcal{O}_{X, \overline{x}}$ が平坦であること、
+および $\mathcal{O}_{X, \overline{x}}/\mathfrak m_u\mathcal{O}_{X, \overline{x}}$
+が $\mathcal{O}_{X, \overline{x}}$ の剰余体に等しいことから従う。
+狭義 Hensel 化に関するこれらの事実は More on Algebra, Lemma
+\ref{more-algebra-lemma-dumb-properties-henselization} にある。
+\end{proof}
+
+\begin{definition}
+\label{spaces-chow-definition-length-at-x}
+$S$ をスキーム、$X$ を $S$ 上の代数空間とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$-加群とする。
+$x \in |X|$ とし、$d \in \{0, 1, 2, \ldots, \infty\}$ とする。
+Lemma \ref{spaces-chow-lemma-length} の同値な条件が成り立つとき、
+{\it $x$ における $\mathcal{F}$ の長さは $d$ である} という。
+\end{definition}
+
+\begin{lemma}
+\label{spaces-chow-lemma-length-closed-immersion}
+$S$ をスキームとする。$i : Y \to X$ を $S$ 上の代数空間の閉埋め込みとし、
+$\mathcal{G}$ を準連接 $\mathcal{O}_Y$-加群とする。
+$y \in |Y|$ の像を $x \in |X|$ とする。
+$d \in \{0, 1, 2, \ldots, \infty\}$ とすると、次は同値である。
+\begin{enumerate}
+\item $y$ における $\mathcal{G}$ の長さは $d$ である。
+\item $x$ における $i_*\mathcal{G}$ の長さは $d$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$U$ がスキームであるような \'etale 射 $f : U \to X$ と、
+$x$ に写る $u \in U$ を選ぶ。$V = Y \times_X U$ とおく。
+射影を $g : V \to Y$ および $j : V \to U$ と書く。
+このとき $j : V \to U$ は閉埋め込みであり、$y \in |Y|$ と
+$u \in U$ に写る点 $v \in V$ が一意に存在する
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} および Spaces, Lemma
+\ref{spaces-lemma-base-change-immersions} を用いる）。
+% P10-E0037
+スキーム $V$ 上の加群として
+$j_*(\mathcal{G}|_V) = (i_*\mathcal{G})|_U$ であり、$j_*$ は
+スキームの射 $j$ に対する加群の「通常の」順像である。
+Cohomology of Spaces, Equation
+(\ref{spaces-cohomology-equation-representable-higher-direct-image})
+の周辺の議論を参照されたい。こうしてスキームの場合に帰着する。
+すなわち、$i : Y \to X$ がスキームの閉埋め込みならば、
+$$
+(i_*\mathcal{G})_x = \mathcal{G}_y
+$$
+は $\mathcal{O}_{X, x}$-加群として成り立つ。ここで右辺の加群構造は
+全射 $i_y^\sharp : \mathcal{O}_{X, x} \to \mathcal{O}_{Y, y}$
+によって与えられる。したがって Algebra, Lemma
+\ref{algebra-lemma-length-independent} により長さは等しい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-length-finite}
+$S$ をスキーム、$X$ を $S$ 上の局所 Noether 代数空間とする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とし、$x \in |X|$ とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $U$ がスキームであるようなある \'etale 射 $U \to X$ と、
+$x$ に写る $u \in U$ に対し、$u$ は
+$\text{Supp}(\mathcal{F}|_U)$ のある既約成分の生成点である。
+\item $U$ がスキームであるような任意の \'etale 射 $U \to X$ と、
+$x$ に写る $u \in U$ に対し、$u$ は
+$\text{Supp}(\mathcal{F}|_U)$ のある既約成分の生成点である。
+\item $x$ における $\mathcal{F}$ の長さは有限かつ零でない。
+\end{enumerate}
+$X$ が decent（同値なこととして準分離的）ならば、これらはさらに
+次の条件とも同値である。
+\begin{enumerate}
+\item[(4)] $x$ は $\text{Supp}(\mathcal{F})$ のある既約成分の生成点である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : U \to X$ は $U$ がスキームであるような \'etale 射であり、
+$u \in U$ は $x$ に写ると仮定する。このとき
+$\mathcal{F}|_U = f^*\mathcal{F}$ は局所 Noether スキーム $U$ 上の
+連接 $\mathcal{O}_U$-加群であり、特に $(\mathcal{F}|_U)_u$ は有限
+$\mathcal{O}_{U, u}$-加群である。Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian}
+および Cohomology of Schemes, Lemma
+\ref{coherent-lemma-coherent-Noetherian} を参照されたい。
+$\mathcal{F}|_U$ の台は $U$ の閉部分集合であること
+（Morphisms, Lemma \ref{morphisms-lemma-support-finite-type}）と、
+$(\mathcal{F}|_U)_u$ の台は射
+$\Spec(\mathcal{O}_{U, u}) \to U$ による $\mathcal{F}|_U$ の台の
+逆像であることを思い出そう。したがって $u$ が
+$\text{Supp}(\mathcal{F}|_U)$ のある既約成分の生成点であることと、
+$(\mathcal{F}|_U)_u$ の台が $\mathcal{O}_{U, u}$ の極大イデアルに
+等しいこととは同値である。
+% P10-E0038
+よって (1), (2), (3) の同値性は Algebra, Lemma
+\ref{algebra-lemma-support-point} から従う。
+
+\medskip\noindent
+$X$ が decent であるとする。\'etale 射 $f : U \to X$ と、
+$x$ に写る点 $u \in U$ を選ぶ。$\mathcal{F}$ の台の逆像は
+$\mathcal{F}|_U$ の台である。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-support-finite-type} を参照されたい。
+また、$|X|$ における特殊化 $x' \leadsto x$ は $U$ における特殊化
+$u' \leadsto u$ に持ち上がり、$U$ における任意の非自明な特殊化
+$u' \leadsto u$ は $|X|$ における非自明な特殊化
+$f(u') \leadsto f(u)$ に写る。Decent Spaces, Lemmas
+\ref{decent-spaces-lemma-decent-specialization} および
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point}
+を参照されたい。$|X|$ と $U$ が sober 位相空間であること
+（Decent Spaces, Proposition
+\ref{decent-spaces-proposition-reasonable-sober} および
+Schemes, Lemma \ref{schemes-lemma-scheme-sober}）を用いると、
+$x$ が $\mathcal{F}$ の台の生成点であることと、$u$ が
+$\mathcal{F}|_U$ の台の生成点であることとは同値である。
+したがって (4) は (1) と同値である。
+
+\medskip\noindent
+括弧内の主張は Decent Spaces, Lemma
+\ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-point-of-max-dimension}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$T \subset |X|$ を閉部分集合、$t \in T$ とする。
+$\dim_\delta(T) \leq k$ かつ $\delta(t) = k$ ならば、
+$t$ は $T$ のある既約成分の生成点である。
+\end{lemma}
+
+\begin{proof}
+$t$ はある既約成分 $T' \subset T$ に含まれる。
+$t' \in T'$ をその生成点とする。このとき
+$k \geq \delta(t') \geq \delta(t)$ である。
+$\delta$ は次元関数なので $t = t'$ である。
+\end{proof}
+
+
+
+\section{閉部分空間に付随するサイクル}
+\label{spaces-chow-section-cycle-of-closed-subscheme}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-cycle-of-closed-subscheme} に対応する。
+
+\begin{remark}
+\label{spaces-chow-remark-irreducible-component}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとし、
+$Y \subset X$ を閉部分空間とする。Remarks \ref{spaces-chow-remark-sober} および
+\ref{spaces-chow-remark-integral} により、次のものの間に $1$ 対 $1$ の対応がある。
+\begin{enumerate}
+\item $|Y|$ の既約成分 $T$,
+\item $|Y|$ の既約成分の生成点、および
+\item $|Z|$ が $|Y|$ の既約成分であるという性質をもつ整閉部分空間
+$Z \subset Y$.
+\end{enumerate}
+本章では、(3) のような $Z$ を {\it $Y$ の既約成分} と呼び、
+その {\it 生成点} を $\xi \in |Z|$ と書く。
+\end{remark}
+
+\begin{definition}
+\label{spaces-chow-definition-cycle-associated-to-closed-subscheme}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとし、
+$Y \subset X$ を閉部分空間とする。
+\begin{enumerate}
+\item 生成点を $\xi$ とする既約成分 $Z \subset Y$ に対し、
+$\xi$ における $\mathcal{O}_Y$ の長さ
+（Definition \ref{spaces-chow-definition-length-at-x}）を
+{\it $Y$ における $Z$ の重複度} と呼ぶ。
+$Y$ 上の $\mathcal{O}_Y$ に Lemma \ref{spaces-chow-lemma-length-finite} を
+適用すると、これは正の整数である。
+\item $\dim_\delta(Y) \leq k$ と仮定する。
+{\it $Y$ に付随する $k$-サイクル} を
+$$
+[Y]_k = \sum m_{Z, Y}[Z]
+$$
+と定義する。ここで和は、$\delta$-次元が $k$ である $Y$ の
+既約成分 $Z$ 全体を走り、$m_{Z, Y}$ は $Y$ における $Z$ の重複度である。
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-components-locally-finite} により、
+これは $k$-サイクルである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$Y$ の $\delta$-次元が $k$ を超えないときに限って
+$[Y]_k$ を定義することは重要である。言い換えると、規約により、
+$[Y]_k$ と書けば $\dim_\delta(Y) \leq k$ が含意される。
+
+
+
+
+
+
+
+\section{連接層に付随するサイクル}
+\label{spaces-chow-section-cycle-of-coherent-sheaf}
+
+\noindent
+これは Chow Homology, Section
+\ref{chow-section-cycle-of-coherent-sheaf} に対応する。
+
+\begin{definition}
+\label{spaces-chow-definition-cycle-associated-to-coherent-sheaf}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。
+\begin{enumerate}
+\item $Z \subset X$ を、生成点を $\xi$ とする整閉部分空間で、
+$|Z|$ が $\text{Supp}(\mathcal{F})$ の既約成分であるものとする。
+$\xi$ における $\mathcal{F}$ の長さ
+（Definition \ref{spaces-chow-definition-length-at-x}）を
+{\it $\mathcal{F}$ における $Z$ の重複度} と呼ぶ。
+Lemma \ref{spaces-chow-lemma-length-finite} により、これは正の整数である。
+\item $\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$ と仮定する。
+{\it $\mathcal{F}$ に付随する $k$-サイクル} を
+$$
+[\mathcal{F}]_k = \sum m_{Z, \mathcal{F}}[Z]
+$$
+と定義する。ここで和は、$\text{Supp}(\mathcal{F})$ の
+$\delta$-次元 $k$ の既約成分に対応する整閉部分空間
+$Z \subset X$ 全体を走り、$m_{Z, \mathcal{F}}$ は
+$\mathcal{F}$ における $Z$ の重複度である。
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-components-locally-finite} により、
+これは $k$-サイクルである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\mathcal{F}$ が連接で、$\text{Supp}(\mathcal{F})$ の
+$\delta$-次元が $k$ を超えないときに限って
+$[\mathcal{F}]_k$ を定義することは重要である。言い換えると、規約により、
+$[\mathcal{F}]_k$ と書けば、$\mathcal{F}$ は $X$ 上連接であり、
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$ であることが含意される。
+
+\begin{lemma}
+\label{spaces-chow-lemma-reformulate-coeff-coherent}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{F}$ を、$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$
+を満たす連接 $\mathcal{O}_X$-加群とする。
+$Z$ を $\dim_\delta(Z) = k$ を満たす $X$ の整閉部分空間とし、
+$\xi \in |Z|$ をその生成点とする。このとき
+$[\mathcal{F}]_k$ における $Z$ の係数は、$\xi$ における
+$\mathcal{F}$ の長さである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-chow-lemma-point-of-max-dimension} により、$|Z|$ が
+$\text{Supp}(\mathcal{F})$ の既約成分であることと
+$\xi \in \text{Supp}(\mathcal{F})$ であることとは同値である。
+さらに、$\xi \not \in \text{Supp}(\mathcal{F})$ ならば、
+$\xi$ における $\mathcal{F}$ の長さは零である。
+これを Definition \ref{spaces-chow-definition-cycle-associated-to-coherent-sheaf}
+と合わせれば結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-cycle-closed-coherent}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとし、
+$Y \subset X$ を閉部分空間とする。
+$\dim_\delta(Y) \leq k$ ならば $[Y]_k = [i_*\mathcal{O}_Y]_k$ である。
+ここで $i : Y \to X$ は包含射である。
+\end{lemma}
+
+\begin{proof}
+$Z$ を $\dim_\delta(Z) = k$ を満たす $X$ の整閉部分空間とする。
+% P10-E0039
+$Z \not \subset Y$ ならば、$[Y]_k$ と $[i_*\mathcal{O}_Y]_k$ のいずれでも
+$Z$ の係数は零である。$Z \subset Y$ ならば、$Z$ の生成点は
+点 $y \in |Y|$ とみなすことができ、その像を $x \in |X|$ とする。
+このとき、$[Y]_k$ における $Z$ の係数は $y$ における
+$\mathcal{O}_Y$ の長さであり、$[i_*\mathcal{O}_Y]_k$ における
+$Z$ の係数は $x$ における $i_*\mathcal{O}_Y$ の長さである。
+したがって係数の等しさは Lemma \ref{spaces-chow-lemma-length-closed-immersion}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-additivity-sheaf-cycle}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0$
+を連接 $\mathcal{O}_X$-加群の短完全列とする。
+$\mathcal{F}$, $\mathcal{G}$, $\mathcal{H}$ の台の $\delta$-次元が
+いずれも $\leq k$ であると仮定する。このとき
+$[\mathcal{G}]_k = [\mathcal{F}]_k + [\mathcal{H}]_k$ である。
+\end{lemma}
+
+\begin{proof}
+$Z$ を $\dim_\delta(Z) = k$ を満たす $X$ の整閉部分空間とする。
+$[\mathcal{G}]_k$, $[\mathcal{F}]_k$, $[\mathcal{H}]_k$ における
+$Z$ の係数が対応する加法性を満たすことを示せば十分である。
+Lemma \ref{spaces-chow-lemma-reformulate-coeff-coherent} により、任意の
+$x \in |X|$ に対して
+$$
+\mathcal{G}\text{ の }x\text{ における長さ} =
+\mathcal{F}\text{ の }x\text{ における長さ} +
+\mathcal{H}\text{ の }x\text{ における長さ}
+$$
+を示せば十分である。Definition \ref{spaces-chow-definition-length-at-x} を見ると、
+これは長さの加法性から直ちに従う。Algebra, Lemma
+\ref{algebra-lemma-length-additive} を参照されたい。
+\end{proof}
+
+
+
+
+
+\section{固有順像の準備}
+\label{spaces-chow-section-preparation-pushforward}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-preparation-pushforward} に対応する。
+
+\begin{lemma}
+\label{spaces-chow-lemma-proper-image}
+Situation \ref{spaces-chow-situation-setup} において $X,Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。$Z \subset X$ が整閉部分空間ならば、
+次の可換図式が存在し、かつ $Z \to Z'$ が支配的となるような
+整閉部分空間 $Z' \subset Y$ が一意に存在する。
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & X \ar[d]^f \\
+Z' \ar[r] & Y
+}
+$$
+$f$ が固有ならば、$Z \to Z'$ は固有かつ全射である。
+\end{lemma}
+
+\begin{proof}
+$\xi \in |Z|$ を生成点とする。$\xi' = f(\xi)$ を生成点とする
+整閉部分空間を $Z' \subset Y$ とする。Remark \ref{spaces-chow-remark-integral}
+を参照されたい。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により
+$\xi \in |f^{-1}(Z')| = |f|^{-1}(|Z'|)$ であり、また
+% P10-E0040
+$Z$ は被約で $|Z| = \overline{\{\xi\}}$ であるから、
+$X$ の閉部分空間として $Z \subset f^{-1}(Z')$ である
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-map-into-reduction} を参照）。
+こうして射 $Z \to Z'$ を得る。$Z$ の生成点が $Z'$ の生成点に
+写るので、この射は支配的である。$Z'$ の一意性は明らかである。
+$f$ が固有ならば、固有射の合成として $Z \to Y$ は固有である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-proper} および
+\ref{spaces-morphisms-lemma-closed-immersion-proper}）。
+したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-universally-closed-permanence} により
+$Z \to Z'$ は固有である。固有射の像は閉であるから、全射性が従う。
+\end{proof}
+
+\begin{remark}
+\label{spaces-chow-remark-residue-field}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+各 $x \in |X|$ は、$k$ を体とする（一意な）単射
+$\Spec(k) \to X$ によって表される。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-points-monomorphism} を参照されたい。
+このとき $k$ を $x$ の {\it 剰余体} といい、$\kappa(x)$ と書く。
+$X$ は稠密開部分スキーム $U \subset X$ をもつことを思い出そう
+（Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}）。
+$x \in U$ ならば、$\kappa(x)$ はスキームとしての $U$ 上の
+$x$ の剰余体と一致する。Decent Spaces, Section
+\ref{decent-spaces-section-residue-fields-henselian-local-rings}
+を参照されたい。
+\end{remark}
+
+\begin{remark}
+\label{spaces-chow-remark-function-field}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとし、
+$X$ は整であると仮定する。この場合、$X$ の {\it 関数体} $R(X)$
+が定義され、$X$ の生成点における剰余体に等しい。
+Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-function-field} を参照されたい。
+これと Remark \ref{spaces-chow-remark-integral} を合わせると、任意の $x \in X$ に対し、
+剰余体 $\kappa(x)$ は、$x$ を生成点とする一意な整閉部分空間
+$Z \subset X$ の関数体であることがわかる。
+\end{remark}
+
+\begin{lemma}
+\label{spaces-chow-lemma-equal-dimension}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。$X$, $Y$ は整であり、
+$\dim_\delta(X) = \dim_\delta(Y)$ であると仮定する。
+このとき、$f$ は $Y$ の真の閉部分空間を経由するか、または
+$f$ は支配的で関数体の拡大 $R(X) / R(Y)$ は有限である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-chow-lemma-proper-image} により、$f$ が支配的な射
+$X \to Z$ を経由するような整閉部分空間 $Z \subset Y$ が一意に存在する。
+このとき $Z = Y$ であることと
+$\dim_\delta(Z) = \dim_\delta(Y)$ であることとは同値である。
+一方、次元関数の構成（Situation \ref{spaces-chow-situation-setup} を参照）により、
+% P10-E0041
+$\dim_\delta(X) = \dim_\delta(Z) + r$ である。ここで $r$ は
+拡大 $R(X)/R(Z)$ の超越次数である。これと Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-degree} を合わせれば結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-quasi-compact-locally-finite}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。$f$ は準コンパクトであり、
+$\{T_i\}_{i \in I}$ は $|X|$ の閉部分集合の局所有限族であると仮定する。
+このとき $\{\overline{|f|(T_i)}\}_{i \in I}$ は
+$|Y|$ の閉部分集合の局所有限族である。
+\end{lemma}
+
+\begin{proof}
+$V \subset |Y|$ を準コンパクト開部分集合とする。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-is-quasi-compact} により
+$|f|^{-1}(V) \subset |X|$ は準コンパクトである。
+したがって、省略する簡単な位相的議論により集合
+$\{i \in I : T_i \cap |f|^{-1}(V) \not = \emptyset \}$
+は有限である。これは集合
+$$
+\{i \in I : |f|(T_i) \cap V \not = \emptyset \} =
+\{i \in I : \overline{|f|(T_i)} \cap V \not = \emptyset \}
+$$
+と同じなので、補題が従う。
+\end{proof}
+\section{固有順像}
+\label{spaces-chow-section-proper-pushforward}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-proper-pushforward} に対応する。
+
+\begin{definition}
+\label{spaces-chow-definition-proper-pushforward}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。$f$ は固有であると仮定する。
+\begin{enumerate}
+\item $Z \subset X$ を $\dim_\delta(Z) = k$ を満たす整閉部分空間とする。
+$Z' \subset Y$ を Lemma \ref{spaces-chow-lemma-proper-image} における $Z$ の像とする。
+次のように定義する。
+$$
+f_*[Z] =
+\left\{
+\begin{matrix}
+0 & \text{if} & \dim_\delta(Z')< k, \\
+\deg(Z/Z') [Z'] & \text{if} & \dim_\delta(Z') = k.
+\end{matrix}
+\right.
+$$
+$\dim_\delta(Z') = \dim_\delta(Z)$ ならば、Lemma
+\ref{spaces-chow-lemma-equal-dimension} および Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-degree} により、$Z$ の $Z'$ 上の次数は
+定義され、有限である。
+\item $\alpha = \sum n_Z [Z]$ を $X$ 上の $k$-サイクルとする。
+% P10-E0042
+$\alpha$ の {\it 順像} を、和
+$$
+f_* \alpha = \sum n_Z f_*[Z]
+$$
+として定義する。ここで各 $f_*[Z]$ は上のように定義される。
+この和は Lemma \ref{spaces-chow-lemma-quasi-compact-locally-finite} により局所有限である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+定義により、サイクルの固有順像
+$$
+f_* : Z_k(X) \longrightarrow Z_k(Y)
+$$
+は Abel 群の準同型である。これにより $X \mapsto Z_k(X)$ は、
+% P10-E0043
+$B$ 上の良い代数空間を対象とし、$B$ 上の固有射を射とする圏上の
+共変関手となる。
+
+\begin{lemma}
+\label{spaces-chow-lemma-compose-pushforward}
+Situation \ref{spaces-chow-situation-setup} において $X, Y, Z/B$ を良いものとする。
+$f : X \to Y$ および $g : Y \to Z$ を $B$ 上の固有射とする。
+このとき $Z_k(X) \to Z_k(Z)$ の写像として
+$g_* \circ f_* = (g \circ f)_*$ である。
+\end{lemma}
+
+\begin{proof}
+$W \subset X$ を次元 $k$ の整閉部分空間とする。
+まず $f$ と $W$ に、次に $g$ と $W'$ に
+Lemma \ref{spaces-chow-lemma-proper-image} を適用して得られる整閉部分空間を
+$W' \subset Y$ および $W'' \subset Z$ とする。
+このとき $W \to W'$ と $W' \to W''$ は全射かつ固有である。
+% P10-E0044
+$g_*(f_*[W]) = (f \circ g)_*[W]$ を示さなければならない。
+$\dim_\delta(W'') < k$ ならば両辺は零である。
+$\dim_\delta(W'') = k$ ならば、$W \to W'$ と $W' \to W''$ は
+ともに Lemma \ref{spaces-chow-lemma-equal-dimension} の仮定を満たす。したがって
+$$
+g_*(f_*[W]) = \deg(W/W')\deg(W'/W'')[W''],
+\quad
+(f \circ g)_*[W] = \deg(W/W'')[W''].
+$$
+そこで Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-degree-composition} を適用すればよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-cycle-push-sheaf}
+Situation \ref{spaces-chow-situation-setup} において $f : X \to Y$ を
+$B$ 上の良い代数空間の固有射とする。
+\begin{enumerate}
+\item $Z \subset X$ を $\dim_\delta(Z) \leq k$ を満たす閉部分空間とする。
+このとき
+$$
+f_*[Z]_k = [f_*{\mathcal O}_Z]_k.
+$$
+\item $\mathcal{F}$ を $X$ 上の連接層で
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$ を満たすものとする。
+このとき
+$$
+f_*[\mathcal{F}]_k = [f_*{\mathcal F}]_k.
+$$
+\end{enumerate}
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent} により、
+$f_*\mathcal{F}$ と $f_*\mathcal{O}_Z$ は連接 $\mathcal{O}_Y$-加群なので、
+この主張には意味があることに注意する。
+\end{lemma}
+
+\begin{proof}
+(1) は (2) と Lemma \ref{spaces-chow-lemma-cycle-closed-coherent} から従う。
+$\mathcal{F}$ を $X$ 上の連接層とし、
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$ と仮定する。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-support-closed} により、
+閉埋め込み $i : Z \to X$ と連接 $\mathcal{O}_Z$-加群 $\mathcal{G}$ が存在し、
+$i_*\mathcal{G} \cong \mathcal{F}$ であり、かつ $\mathcal{F}$ の台は $Z$ である。
+$Z' \subset Y$ を $f|_Z : Z \to Y$ のスキーム論的像とする。
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-scheme-theoretic-image} を参照されたい。
+$B$ 上の代数空間の可換図式
+$$
+\xymatrix{
+Z \ar[r]_i \ar[d]_{f|_Z} &
+X \ar[d]^f \\
+Z' \ar[r]^{i'} & Y
+}
+$$
+を考える。$f|_Z$ は全射である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-scheme-theoretic-image}
+と $|f|$ が閉写像であることから従う）うえ、固有である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-proper},
+\ref{spaces-morphisms-lemma-closed-immersion-proper}, および
+\ref{spaces-morphisms-lemma-universally-closed-permanence} から従う）。
+図式を二通りに回ることにより
+$f_*\mathcal{F} = f_*i_*\mathcal{G} = i'_*(f|_Z)_*\mathcal{G}$ である。
+閉埋め込みと $f|_Z$ に対して結果が成り立つと仮定すれば、
+$$
+f_*[\mathcal{F}]_k = f_*i_*[\mathcal{G}]_k
+= (i')_*(f|_Z)_*[\mathcal{G}]_k =
+(i')_*[(f|_Z)_*\mathcal{G}]_k =
+[(i')_*(f|_Z)_*\mathcal{G}]_k = [f_*\mathcal{F}]_k
+$$
+となり、望む結果を得る。閉埋め込みの場合は
+Lemma \ref{spaces-chow-lemma-length-closed-immersion} と定義から従う。
+したがって、$\dim_\delta(X) \leq k$ であり、
+$f : X \to Y$ が固有かつ全射である場合に帰着した。
+
+\medskip\noindent
+$\dim_\delta(X) \leq k$ で、$f : X \to Y$ は固有かつ全射であると仮定する。
+生成点を $\eta$ とする各既約成分 $Z \subset Y$ に対して、
+$f(\xi) = \eta$ を満たす点 $\xi \in X$ が存在する。
+したがって $\delta(\eta) \leq \delta(\xi) \leq k$ である。
+よって式
+$$
+f_*[\mathcal{F}]_k = \sum n_Z[Z],
+\quad
+\text{および}
+\quad
+[f_*\mathcal{F}]_k = \sum m_Z[Z].
+$$
+において、$n_Z \not = 0$ または $m_Z \not = 0$ ならば、整閉部分空間
+$Z$ は実際に $\delta$-次元 $k$ の $Y$ の既約成分である
+（Lemma \ref{spaces-chow-lemma-point-of-max-dimension} を参照）。
+このような整閉部分空間 $Z \subset Y$ を一つ選び、その生成点を $\eta$ と書く。
+$f(\xi) = \eta$ を満たす任意の $\xi \in X$ に対して
+$\delta(\xi) \geq k$ であり、したがって $\xi$ も $X$ の
+$\delta$-次元 $k$ のある既約成分の生成点である
+（Lemma \ref{spaces-chow-lemma-point-of-max-dimension} を参照）。
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-in-codim-1} により、
+$f^{-1}(V) \to V$ が有限となる開部分空間 $\eta \in V \subset Y$ が存在する。
+$\eta$ は $|Y|$ のある既約成分の生成点なので、$V$ はアフィンスキームであると
+仮定できる。Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}
+を参照されたい。$Y$ を $V$ で、$X$ を $f^{-1}(V)$ で置き換えると、
+$Y$ がアフィンで $f$ が有限である場合に帰着する。
+特に $X$ と $Y$ はスキームであり、スキームに対する対応する結果
+Chow Homology, Lemma \ref{chow-lemma-cycle-push-sheaf}
+（$S = Y$ として適用する）に帰着する。
+\end{proof}
+
+\section{平坦逆像の準備}
+\label{spaces-chow-section-preparation-flat-pullback}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-preparation-flat-pullback} に対応する。
+
+\medskip\noindent
+代数空間の射が相対次元 $r$ をもつとは、始域と終域上 \'etale 局所的に、
+相対次元 $r$ をもつスキームの射が得られることをいう、と説明できる。
+厳密な定義はこれと同値であるが、実際には少し異なる。
+Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension} を参照されたい。
+
+\begin{lemma}
+\label{spaces-chow-lemma-flat-inverse-image-dimension}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。
+$f$ は相対次元 $r$ の平坦射であると仮定する。
+任意の閉部分集合 $T \subset |Y|$ に対し、$|f|^{-1}(T)$ が空でなければ
+$$
+\dim_\delta(|f|^{-1}(T)) = \dim_\delta(T) + r.
+$$
+さらに、$Z \subset Y$ が整閉部分スキームで、
+% P10-E0045
+$Z' \subset f^{-1}(Z)$ が既約成分ならば、$Z'$ は $Z$ を支配し、
+$\dim_\delta(Z') = \dim_\delta(Z) + r$ である。
+\end{lemma}
+
+\begin{proof}
+閉部分集合の $\delta$-次元はその既約成分の $\delta$-次元の上限なので、
+最後の主張を証明すれば十分である。$Y$ を整閉部分スキーム $Z$ で、
+$X$ を $f^{-1}(Z) = Z \times_Y X$ で置き換えてよい。
+したがって $Z = Y$ は整であり、$f$ は相対次元 $r$ の平坦射であると
+仮定できる。$Y$ は局所 Noether 的なので、局所有限型の射 $f$ は
+実際には局所有限表示である。したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fppf-open} を適用でき、$f$ は開写像である。
+$\xi \in X$ を $X$ のある既約成分の生成点とする。
+$f$ が開であることから、$f(\xi)$ は $Z = Y$ の生成点 $\eta$ である。
+したがって $Z'$ は $Z = Y$ を支配する。最後に Properties of Spaces,
+Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme}
+により、$\xi$ と $\eta$ は $X$ と $Y$ のスキーム的部分に属する。
+$\xi$ は $X$ の生成点なので、$\mathcal{O}_{X, \xi} =
+\mathcal{O}_{X_\eta, \xi}$ は素イデアルを一つしかもたず、
+したがって次元 $0$ である（$\xi$ と $\eta$ は $X$ と $Y$ の
+スキーム的部分にあるため、通常の局所環を用いてよい）。
+そこで Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-at-a-point}
+（および所与の相対次元をもつ射の定義）により、
+$\kappa(\xi)$ の $\kappa(\eta)$ 上の超越次数は $r$ である。
+言い換えると $\delta(\xi) = \delta(\eta) + r$ であり、望む結果を得る。
+\end{proof}
+
+\noindent
+次の補題は、閉部分スキームの局所有限族の平坦逆像が局所有限であることを
+証明するために用いる。
+
+\begin{lemma}
+\label{spaces-chow-lemma-inverse-image-locally-finite}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。
+$\{T_i\}_{i \in I}$ は $|Y|$ の閉部分集合の局所有限族であると仮定する。
+このとき $\{|f|^{-1}(T_i)\}_{i \in I}$ は
+$X$ の閉部分集合の局所有限族である。
+\end{lemma}
+
+\begin{proof}
+$U \subset |X|$ を準コンパクト開部分集合とする。
+像 $|f|(U) \subset |Y|$ は準コンパクトな部分集合なので、
+$|f|(U) \subset V$ を満たす準コンパクト開部分集合 $V \subset |Y|$ が存在する。
+次に注意する。
+$$
+\{i \in I : |f|^{-1}(T_i) \cap U \not = \emptyset \}
+\subset
+\{i \in I : T_i \cap V \not = \emptyset \}.
+$$
+右辺は仮定により有限なので、結論を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{平坦逆像}
+\label{spaces-chow-section-flat-pullback}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-flat-pullback} に対応する。
+
+\medskip\noindent
+$S$ をスキーム、$f : X \to Y$ を $S$ 上の代数空間の射とし、
+$Z \subset Y$ を閉部分空間とする。本章では、Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-inverse-image-closed-subspace}
+で構成される $Z$ の逆像 $f^{-1}(Z)$ を、しばしば
+{\it スキーム論的逆像} と呼ぶ。スキーム論的逆像はファイバー積
+$$
+\xymatrix{
+f^{-1}(Z) \ar[r] \ar[d] & X \ar[d] \\
+Z \ar[r] & Y
+}
+$$
+である。$\mathcal{I} \subset \mathcal{O}_Y$ が $Y$ における $Z$ に
+対応する準連接イデアル層ならば、$f^{-1}(\mathcal{I})\mathcal{O}_X$ は
+$X$ における $f^{-1}(Z)$ に対応する準連接イデアル層である。
+
+\begin{definition}
+\label{spaces-chow-definition-flat-pullback}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を $B$ 上の射とする。
+$f$ は相対次元 $r$ の平坦射であると仮定する。
+\begin{enumerate}
+\item $Z \subset Y$ を $\delta$-次元 $k$ の整閉部分空間とする。
+$f^*[Z]$ を、スキーム論的逆像に付随する $X$ 上の
+$(k+r)$-サイクル
+$$
+f^*[Z] = [f^{-1}(Z)]_{k+r}.
+$$
+として定義する。Lemma \ref{spaces-chow-lemma-flat-inverse-image-dimension} により
+$\dim_\delta(f^{-1}(Z)) = k + r$ なので、これは意味をもつ。
+\item $\alpha = \sum n_i [Z_i]$ を $Y$ 上の $k$-サイクルとする。
+{\it $f$ による $\alpha$ の平坦逆像} を和
+$$
+f^* \alpha = \sum n_i f^*[Z_i]
+$$
+と定義する。ここで各 $f^*[Z_i]$ は上のように定義される。
+Lemma \ref{spaces-chow-lemma-inverse-image-locally-finite} により、この和は局所有限である。
+\item こうして得られる Abel 群の写像を
+$f^* : Z_k(Y) \to Z_{k + r}(X)$ と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+開埋め込みは平坦である。これは平坦射の重要ではあるが自明な特別の場合である。
+$U \subset X$ が開ならば、サイクルの $j : U \to X$ による逆像を、
+そのサイクルの $U$ への {\it 制限} と呼ぶことがある。
+この場合、写像
+$$
+j^* : Z_k(X) \longrightarrow Z_k(U)
+$$
+はすべて {\it 全射} であることに注意する。実際、任意の整閉部分空間
+$Z' \subset U$ が与えられたとき、
+% P10-E0046
+$X$ における $Z'$ の閉包 $Z$ をとり、これを $X$ の被約閉部分空間と
+みなせばよい（Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space} を参照）。
+明らかに $Z \cap U = Z'$、すなわち $j^*[Z] = [Z']$ であり、
+全射性が従う。実際には、もう少し強いことが成り立つ。
+
+\begin{lemma}
+\label{spaces-chow-lemma-exact-sequence-open}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$U \subset X$ を開部分空間とする。$Y$ を
+$|Y| = |X| \setminus |U|$ を満たす $X$ の被約閉部分空間とし、
+包含射を $i : Y \to X$ と書く。すべての $k \in \mathbf{Z}$ に対して、列
+$$
+\xymatrix{
+Z_k(Y) \ar[r]^{i_*} & Z_k(X) \ar[r]^{j^*} & Z_k(U) \ar[r] & 0
+}
+$$
+は Abel 群の完全複体である。
+\end{lemma}
+
+\begin{proof}
+$j^*$ の全射性は上で見た。まず $X$ は準コンパクトであると仮定する。
+このとき $Z_k(X)$ は、$\delta$-次元 $k$ の整閉部分空間
+$Z \subset X$ による元 $[Z]$ を基底とする自由 $\mathbf{Z}$-加群である。
+このような基底元は、$Z_k(U)$ の基底元 $[Z \cap U]$ に写るか、
+$Z \subset Y$ ならば零に写る。したがってこの場合、補題は明らかである。
+一般の場合も同様であり、証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-etale-pullback}
+Situation \ref{spaces-chow-situation-setup} において $f : X \to Y$ を
+$B$ 上の良い代数空間の \'etale 射とする。
+$Z \subset Y$ が整閉部分空間ならば $f^*[Z] = \sum [Z']$ である。
+ここで和は $f^{-1}(Z)$ の既約成分
+（Remark \ref{spaces-chow-remark-irreducible-component}）全体を走る。
+\end{lemma}
+
+\begin{proof}
+補題の意味は、$[Z']$ の係数が $1$ であるということである。
+これは $f^{-1}(Z)$ が整代数空間 $Z$ 上 \'etale であるため、
+被約代数空間であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-compose-flat-pullback}
+Situation \ref{spaces-chow-situation-setup} において $X, Y, Z/B$ を良いものとする。
+$f : X \to Y$ と $g : Y \to Z$ を、それぞれ相対次元 $r$ と $s$ の
+$B$ 上の平坦射とする。このとき $g \circ f$ は相対次元 $r + s$ の平坦射であり、
+$$
+f^* \circ g^* = (g \circ f)^*
+$$
+が写像 $Z_k(Z) \to Z_{k + r + s}(X)$ として成り立つ。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-dimension-fibre-at-a-point-additive} および
+\ref{spaces-morphisms-lemma-composition-flat} により、合成は
+相対次元 $r + s$ の平坦射である。次を仮定する。
+\begin{enumerate}
+\item $A \subset Z$ は $\delta$-次元 $k$ の整閉部分空間である。
+\item $A' \subset Y$ は $\delta$-次元 $k + s$ の整閉部分空間で、
+$A' \subset g^{-1}(A)$ を満たす。
+\item % P10-E0047 P10-E0048
+$A'' \subset Y$ は $\delta$-次元 $k + s + r$ の整閉部分空間で、
+$A'' \subset f^{-1}(W')$ を満たす。
+\end{enumerate}
+$(g \circ f)^*[A]$ における $[A'']$ の係数 $n$ が、
+$f^*(g^*[A])$ における $[A'']$ の係数 $m$ に等しいことを示さなければならない。
+可換図式
+$$
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \ar[r] & W \ar[d] \\
+X \ar[r] & Y \ar[r] & Z
+}
+$$
+を次のように選べる。$U, V, W$ はスキーム、縦の射は \'etale であり、
+$u \mapsto v \mapsto w$ を満たす点 $u \in U$, $v \in V$, $w \in W$ が存在し、
+$u, v, w$ はそれぞれ $A'', A', A$ の生成点に写る（詳細は省略する）。
+このとき平坦な局所環準同型
+$\mathcal{O}_{W, w} \to \mathcal{O}_{V, v}$,
+$\mathcal{O}_{V, v} \to \mathcal{O}_{U, u}$
+があり、Lemma \ref{spaces-chow-lemma-length} を繰り返し用いると
+% P10-E0049
+$$
+n = \text{length}_{\mathcal{O}_{U, u}}(
+\mathcal{O}_{U, u}/\mathfrak m_w\mathcal{O}_{U, u})
+$$
+および
+$$
+m =
+\text{length}_{\mathcal{O}_{V, v}}(
+\mathcal{O}_{V, v}/\mathfrak m_w\mathcal{O}_{V, v})
+\text{length}_{\mathcal{O}_{U, u}}(
+\mathcal{O}_{U, u}/\mathfrak m_v\mathcal{O}_{U, u})
+$$
+を得る。したがって等式は Algebra, Lemma
+\ref{algebra-lemma-pullback-transitive} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-pullback-coherent}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとし、
+$f : X \to Y$ を相対次元 $r$ の平坦射とする。
+\begin{enumerate}
+\item $Z \subset Y$ を $\dim_\delta(Z) \leq k$ を満たす閉部分空間とする。
+このとき $\dim_\delta(f^{-1}(Z)) \leq k + r$ であり、
+$Z_{k + r}(X)$ において
+$[f^{-1}(Z)]_{k + r} = f^*[Z]_k$ である。
+\item $\mathcal{F}$ を $Y$ 上の連接層で
+$\dim_\delta(\text{Supp}(\mathcal{F})) \leq k$ を満たすものとする。
+このとき $\dim_\delta(\text{Supp}(f^*\mathcal{F})) \leq k + r$ であり、
+$$
+f^*[{\mathcal F}]_k = [f^*{\mathcal F}]_{k+r}
+$$
+が $Z_{k + r}(X)$ において成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は (2)、Lemma \ref{spaces-chow-lemma-cycle-closed-coherent}、および
+$f^*\mathcal{O}_Z = \mathcal{O}_{f^{-1}(Z)}$ であることから従う。
+
+\medskip\noindent
+(2) を証明する。
+$X$, $Y$ は局所 Noether 的なので Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} を適用すると、
+$\mathcal{F}$ は有限型であり、したがって $f^*\mathcal{F}$ も有限型である
+（Modules on Sites, Lemma \ref{sites-modules-lemma-local-pullback}）。
+よって、再び Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} により
+$f^*\mathcal{F}$ は連接である。したがって補題の主張には意味がある。
+$W \subset Y$ を $\delta$-次元 $k$ の整閉部分空間とし、
+$W' \subset X$ を $f$ によって $W$ の中に写る次元 $k + r$ の
+整閉部分空間とする。$f^*[{\mathcal F}]_k$ における $[W']$ の係数 $n$ が、
+$[f^*{\mathcal F}]_{k+r}$ における $[W']$ の係数 $m$ に等しいことを
+示さなければならない。可換図式
+$$
+\xymatrix{
+U \ar[d] \ar[r] & V \ar[d] \\
+X \ar[r] & Y
+}
+$$
+を次のように選べる。$U, V$ はスキーム、縦の射は \'etale であり、
+$u \mapsto v$ を満たす点 $u \in U$, $v \in V$ が存在し、
+$u, v$ はそれぞれ $W', W$ の生成点に写る（詳細は省略する）。
+$\mathcal{O}_{V, v}$-加群として茎
+$M = (\mathcal{F}|_V)_v$ を考える
+（次元に関する仮定により $M$ の長さは有限であるが、実際には
+これを確認する必要はない。Lemma \ref{spaces-chow-lemma-length-finite} を参照）。
+次が成り立つ。
+$(f^*\mathcal{F}|_U)_u =
+\mathcal{O}_{U, u} \otimes_{\mathcal{O}_{V, v}} M$.
+したがって
+% P10-E0589
+$$
+n = \text{length}_{\mathcal{O}_{U, u}}
+(\mathcal{O}_{U, u} \otimes_{\mathcal{O}_{V, v}} M)
+\quad
+\text{および}
+\quad
+m = \text{length}_{\mathcal{O}_{V, v}}(M)
+\text{length}_{\mathcal{O}_{V, v}}(
+\mathcal{O}_{U, u}/\mathfrak m_v \mathcal{O}_{U, u})
+$$
+を得る。ゆえに等式は Algebra, Lemma
+\ref{algebra-lemma-pullback-module} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{順像と逆像}
+\label{spaces-chow-section-push-pull}
+
+\noindent
+本節は Chow Homology, Section \ref{chow-section-push-pull} に対応する。
+
+\medskip\noindent
+本節では、意味をもつ場合に固有順像と平坦逆像が両立することを確かめる。
+上で行ったことにより、これはコホモロジーと基底変換の帰結である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-flat-pullback-proper-pushforward}
+Situation \ref{spaces-chow-situation-setup} において
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を $B$ 上の良い代数空間のファイバー積図式とする。
+$f : X \to Y$ は固有であり、$g : Y' \to Y$ は相対次元 $r$ の平坦射であると
+仮定する。このとき $f'$ も固有で、$g'$ も相対次元 $r$ の平坦射である。
+$X$ 上の任意の $k$-サイクル $\alpha$ に対して
+$$
+g^*f_*\alpha = f'_*(g')^*\alpha
+$$
+が $Z_{k + r}(Y')$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$f'$ が固有であるという主張は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-proper} から従う。
+$g'$ が相対次元 $r$ の平坦射であるという主張は
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change} および
+\ref{spaces-morphisms-lemma-base-change-flat} から従う。
+$W \subset X$ を $\delta$-次元 $k$ の整閉部分空間とし、
+$\alpha = [W]$ である場合にサイクルの等式を証明すれば十分である。
+この場合、Lemma \ref{spaces-chow-lemma-cycle-closed-coherent} により
+$\alpha = [\mathcal{O}_W]_k$ であることに注意する。
+したがって Lemmas \ref{spaces-chow-lemma-cycle-push-sheaf} および
+\ref{spaces-chow-lemma-pullback-coherent} により、
+$f'_*(g')^*\mathcal{O}_W$ と $g^*f_*\mathcal{O}_W$ が同型であることを
+示せば十分である。これはコホモロジーと基底変換から従う。
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-finite-flat}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$f : X \to Y$ を次数 $d$ の有限局所自由射とする
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-finite-locally-free} を参照）。
+このとき $f$ は固有であると同時に相対次元 $0$ の平坦射であり、
+すべての $\alpha \in Z_k(Y)$ に対して
+$$
+f_*f^*\alpha = d\alpha
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-flat} により
+有限局所自由射は平坦かつ有限であり、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-proper} により有限射は固有である。
+有限射が相対次元 $0$ をもつことの証明は省略する。
+したがって式には意味がある。これを証明するため、
+% P10-E0590
+$Z \subset Y$ を $\delta$-次元 $k$ の整閉部分スキームとする。
+$\alpha = [Z]$ に対して式を証明すれば十分である。
+有限局所自由射の基底変換は有限局所自由である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-locally-free}）から、
+$f_*f^*\mathcal{O}_Z$ は $Z$ 上階数 $d$ の有限局所自由層である。
+したがって明らかに、$f_*f^*\mathcal{O}_Z$ は $Z$ の生成点において
+長さ $d$ をもつ。ゆえに
+$$
+f_*f^*[Z] = f_*f^*[\mathcal{O}_Z]_k =
+[f_*f^*\mathcal{O}_Z]_k = d[Z]
+$$
+である。ここで Lemmas \ref{spaces-chow-lemma-pullback-coherent} および
+\ref{spaces-chow-lemma-cycle-push-sheaf} を用いた。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{主因子の準備}
+\label{spaces-chow-section-preparation-principal-divisors}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-preparation-principal-divisors} に対応する。
+本節の内容の一部は Spaces over Fields, Section
+\ref{spaces-over-fields-section-Weil-divisors} の議論と部分的に重なる。
+
+\begin{lemma}
+\label{spaces-chow-lemma-divisor-delta-dimension}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとし、
+$X$ は整であると仮定する。
+\begin{enumerate}
+\item $Z \subset X$ が整閉部分空間ならば、次の条件は同値である。
+\begin{enumerate}
+\item $Z$ は素因子である。
+\item $|Z|$ は $|X|$ において余次元 $1$ をもつ。
+\item $\dim_\delta(Z) = \dim_\delta(X) - 1$.
+\end{enumerate}
+\item $Z$ が $X$ 上の有効 Cartier 因子の既約成分ならば、
+$\dim_\delta(Z) = \dim_\delta(X) - 1$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は、素因子の定義（Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-Weil-divisor}）、
+Decent Spaces, Lemma \ref{decent-spaces-lemma-codimension-local-ring}、
+および次元関数の定義（Topology, Definition
+\ref{topology-definition-dimension-function}）から従う。
+
+\medskip\noindent
+$D \subset X$ を有効 Cartier 因子とする。$Z \subset D$ を既約成分とし、
+$\xi \in |Z|$ をその生成点とする。$U = \Spec(A)$ で、
+$D \times_X U$ が非零因子 $f \in A$ で切り出されるような \'etale 近傍
+$(U, u) \to (X, \xi)$ を選ぶ。Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-characterize-effective-Cartier-divisor}
+を参照されたい。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-decent-generic-points} により、
+$u$ は $V(f)$ の生成点である。したがって Krull の主イデアル定理
+（Algebra, Lemma \ref{algebra-lemma-minimal-over-1}）により、
+$\mathcal{O}_{U, u}$ は次元 $1$ をもつ。
+ゆえに $\xi$ は $X$ 上の余次元 $1$ の点であり、望むように $Z$ は素因子である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{主因子}
+\label{spaces-chow-section-principal-divisors}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-principal-divisors} に対応する。
+次の定義は、現在の設定における Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-principal-divisor} の類似である。
+
+\begin{definition}
+\label{spaces-chow-definition-principal-divisor}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ は整で $\dim_\delta(X) = n$ であると仮定する。
+$f \in R(X)^*$ とする。$f$ に付随する {\it 主因子} とは、
+Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-principal-divisor} で定義される
+$(n - 1)$-サイクル
+$$
+\text{div}(f) = \text{div}_X(f) = \sum \text{ord}_Z(f) [Z]
+$$
+のことである。Lemma \ref{spaces-chow-lemma-divisor-delta-dimension} により
+素因子は $\delta$-次元 $n - 1$ をもつので、これは意味をもつ。
+\end{definition}
+
+\noindent
+この定義の状況で $f, g \in R(X)^*$ に対し
+$$
+\text{div}_X(fg) = \text{div}_X(f) + \text{div}_X(g)
+$$
+が $Z_{n - 1}(X)$ において成り立つ。Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-div-additive} を参照されたい。
+次の補題により、主因子に関する主張をスキームの場合に帰着できる。
+
+\begin{lemma}
+\label{spaces-chow-lemma-etale-pullback-principal-divisor}
+Situation \ref{spaces-chow-situation-setup} において $f : X \to Y$ を
+$B$ 上の良い代数空間の \'etale 射とし、$Y$ は整であると仮定する。
+$g \in R(Y)^*$ とする。このとき $X$ 上のサイクルとして
+$$
+f^*(\text{div}_Y(g)) =
+\sum\nolimits_{X'} (X' \to X)_*\text{div}_{X'}(g \circ f|_{X'})
+$$
+である。ここで和は $X$ の既約成分全体を走る
+（Remark \ref{spaces-chow-remark-irreducible-component}）。
+\end{lemma}
+
+\begin{proof}
+写像 $|X| \to |Y|$ は開であり、$|X|$ の既約成分の集合は
+$|X|$ において局所有限である。したがって各既約成分
+$X' \subset X$ に対して $f|_{X'} : X' \to Y$ は支配的である。
+ゆえに $g \circ f|_{X'}$ は定義され
+（Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-rational-maps}）、したがって
+$\text{div}_{X'}(g \circ f|_{X'})$ も定義される。
+さらに和は局所有限であり、右辺が実際に $X$ 上のサイクルであることがわかる。
+左辺は Definition \ref{spaces-chow-definition-flat-pullback} と、\'etale 射が
+相対次元 $0$ の平坦射であることによって定義される。
+
+\medskip\noindent
+% P10-E0591
+$f$ は \'etale なので、すべての $x \in |X|$ に対し
+$\delta_X(x) = \delta_y(f(x))$ である。
+したがって $\dim_\delta(Y) = n$ ならば、$X$ の各既約成分 $X'$ に対し
+$\dim_\delta(X') = n$ である（上で見たように、$X$ の生成点は
+$Y$ の生成点に写る）。ゆえに左辺と右辺はともに $(n - 1)$-サイクルである。
+
+\medskip\noindent
+$Z \subset X$ を $\dim_\delta(Z) = n - 1$ を満たす整閉部分空間とする。
+等式を証明するには、$Z$ の係数が等しいことを示す必要がある。
+$Z' \subset Y$ を Lemma \ref{spaces-chow-lemma-proper-image} で構成される整閉部分空間とする。
+このとき $\dim_\delta(Z') = n - 1$ でもある。
+$\xi \in |Z|$ を生成点とすると、$\xi' = f(\xi) \in |Z'|$ が生成点である。
+Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring} の可換図式
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \xi}^h) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(\mathcal{O}_{Y, \xi'}^h) \ar[r] & Y
+}
+$$
+を考える。被約 Noether 局所環 $\mathcal{O}_{X, \xi}^h$ と
+$\mathcal{O}_{Y, \xi'}^h$ は整域とは限らないため、少し注意が必要である。
+そこで分数体ではなく全商環 $Q(-)$ を用いる。
+定義により、$\text{div}_Y(g)$ における $Z'$ の係数を得るには、
+$Q(\mathcal{O}_{Y, \xi'}^h)$ における $g$ の像を、非零因子
+$a, b \in \mathcal{O}_{Y, \xi'}^h$ を用いて $a/b$ と書き、
+$$
+\text{ord}_{Z'}(g) =
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/a \mathcal{O}_{Y, \xi'}^h) -
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/b \mathcal{O}_{Y, \xi'}^h)
+$$
+をとる。
+% P10-E0050
+$f^*\text{div}_Y(G)$ における $Z$ の係数も同じ整数であることに注意する。
+Lemma \ref{spaces-chow-lemma-etale-pullback} を参照されたい。
+$\xi \in X'$ と仮定する。このとき写像
+$$
+\mathcal{O}_{Y, \xi'}^h \to
+\mathcal{O}_{X, \xi}^h \to
+\mathcal{O}_{X', \xi}^h
+$$
+を考えられる。最初の矢印は平坦であり、二つ目の矢印は
+次元 $1$ の被約 Noether 局所環の全射である。
+したがって、これらの写像はいずれも非零因子を非零因子に送り、
+% P10-E0051
+$\text{div}_{X'}(g \circ f|_{X'})$ における $Z'$ の係数は、
+上と同じ規定により
+% P10-E0052
+$$
+\text{ord}_Z(g \circ f|_{X'}) =
+\text{length}_{\mathcal{O}_{X', \xi}^h}
+(\mathcal{O}_{X', \xi}^h/a \mathcal{O}_{X', \xi}^h) -
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{X', \xi}^h/b \mathcal{O}_{X', \xi}^h)
+$$
+である。したがって、次を示せば十分である。
+% P10-E0053
+$$
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/a \mathcal{O}_{Y, \xi'}^h) =
+\sum\nolimits_{\xi \in |X'|}
+\text{length}_{\mathcal{O}_{X', \xi}^h}
+(\mathcal{O}_{X', \xi}^h/a \mathcal{O}_{X', \xi}^h)
+$$
+まず、環準同型 $\mathcal{O}_{Y, \xi'}^h \to
+\mathcal{O}_{X, \xi}^h$ は平坦かつ不分岐なので、
+Algebra, Lemma \ref{algebra-lemma-pullback-module} により
+$$
+\text{length}_{\mathcal{O}_{Y, \xi'}^h}
+(\mathcal{O}_{Y, \xi'}^h/a \mathcal{O}_{Y, \xi'}^h) =
+\text{length}_{\mathcal{O}_{X, \xi}^h}
+(\mathcal{O}_{X, \xi}^h/a \mathcal{O}_{X, \xi}^h)
+$$
+である。$\mathfrak q_1, \ldots, \mathfrak q_t$ を
+$\mathcal{O}_{X, \xi}^h$ の非極大素イデアルとし、
+$R_j = \mathcal{O}_{X, \xi}^h/\mathfrak q_j$ とおく。
+上のような $X'$ に対し、$J(X') \subset \{1, \ldots, t\}$ を、
+$\mathfrak q_j$ が $X'$ の点に対応するような添字の集合とする。
+すなわち、全射
+% P10-E0054
+$\mathcal{O}_{X, \xi}^h \to \mathcal{O}_{X', \xi}$ のもとで、
+素イデアル $\mathfrak q_j$ が $\mathcal{O}_{X', \xi}$ の素イデアルに
+対応するような添字の集合である。Chow Homology, Lemma
+\ref{chow-lemma-additivity-divisors-restricted} により
+$$
+\text{length}_{\mathcal{O}_{X, \xi}^h}
+(\mathcal{O}_{X, \xi}^h/a \mathcal{O}_{X, \xi}^h) =
+\sum\nolimits_j \text{length}_{R_j}(R_j/a R_j)
+$$
+および
+$$
+\text{length}_{\mathcal{O}_{X', \xi}^h}
+(\mathcal{O}_{X', \xi}^h/a \mathcal{O}_{X', \xi}^h) =
+\sum\nolimits_{j \in J(X')} \text{length}_{R_j}(R_j/a R_j)
+$$
+を得る。$\{1, \ldots, t\}$ は集合 $J(X')$ の非交和なので、補題が従う。
+実際、$X$ 上の各余次元 $0$ の点は一意な $X'$ 上にある。
+\end{proof}
+
+\section{主因子と順像}
+\label{spaces-chow-section-two-fun}
+
+\noindent
+本節は Chow Homology, Section \ref{chow-section-two-fun}
+の類似である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-proper-pushforward-alteration}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$X$, $Y$ は整であり、$n = \dim_\delta(X) = \dim_\delta(Y)$
+であると仮定する。$p : X \to Y$ を支配的な固有射とする。
+$f \in R(X)^*$ とし、
+$$
+g = \text{Nm}_{R(X)/R(Y)}(f).
+$$
+とおく。このとき
+$p_*\text{div}(f) = \text{div}(g)$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+\'Etale 局所化により、これをスキームの場合から導く。
+$Z \subset Y$ を $\delta$-次元 $n - 1$ の整閉部分空間とする。
+$p_*\text{div}(f)$ と $\text{div}(g)$ における $[Z]$ の係数が
+等しいことを示したい。射 $p : X \to Y$ と生成点
+$\xi \in |Z|$ に Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-finite-in-codim-1} を適用する。
+$Y$ を $\xi$ を含む開部分空間で置き換え、
+$p : X \to Y$ が有限であると仮定してよいことが分かる。
+$V$ がアフィンスキームであるような \'etale 近傍
+$(V, v) \to (Y, \xi)$ を取る。Lemma \ref{spaces-chow-lemma-etale-pullback}
+により、$V$ へ引き戻した後でサイクルの等式を証明すれば十分である。
+$U = V \times_Y X$ とおき、可換図式
+$$
+\xymatrix{
+U \ar[r]_a \ar[d]_{p'} & X \ar[d]^p \\
+V \ar[r]^b & Y
+}
+$$
+を考える。$V_j \subset V$, $j = 1, \ldots, m$ を
+$V$ の既約成分とする。
+% P10-E0055
+各 $i$ に対し、
+$U_{j, i}$, $i = 1, \ldots, n_j$ を $V_j$ を支配する
+$U$ の既約成分とする。
+$p'_{j, i} : U_{j, i} \to V_j$ で
+$p' : U \to V$ の制限を表す。スキームの場合
+（Chow Homology, Lemma
+\ref{chow-lemma-proper-pushforward-alteration}）により
+$$
+p'_{j, i, *}\text{div}_{U_{j, i}}(f_{j, i}) = \text{div}_{V_j}(g_{j, i})
+$$
+を得る。ここで $f_{j, i}$ は $f$ の $U_{j, i}$ への制限であり、
+$g_{j, i}$ は有限拡大 $R(U_{j, i})/R(V_j)$ に沿う
+$f_{j, i}$ のノルムである。また
+\begin{align*}
+b^* p_*\text{div}_X(f)
+& =
+p'_* a^* \text{div}_X(f) \\
+& =
+p'_*\left(\sum\nolimits_{j, i}
+(U_{j, i} \to U)_*\text{div}_{U_{j, i}}(f_{j, i})\right) \\
+& =
+\sum\nolimits_{j, i}
+(V_j \to V)_*p'_{j, i, *}\text{div}_{U_{j, i}}(f_{j, i}) \\
+& =
+\sum\nolimits_j
+(V_j \to V)_*\left(\sum\nolimits_i \text{div}_{V_j}(g_{j, i})\right) \\
+& =
+\sum\nolimits_j (V_j \to V)_*\text{div}_{V_j}(\prod\nolimits_i g_{j, i})
+\end{align*}
+が成り立つ。これは Lemmas
+\ref{spaces-chow-lemma-flat-pullback-proper-pushforward},
+\ref{spaces-chow-lemma-etale-pullback-principal-divisor}, および
+\ref{spaces-chow-lemma-compose-pushforward} による。
+証明を終えるには、再び Lemma
+\ref{spaces-chow-lemma-etale-pullback-principal-divisor} を用いると、
+$$
+g \circ b|_{V_j} = \prod\nolimits_i g_{j, i}
+$$
+が $V_j$ の関数体の元として成り立つことを示せば十分である。
+体の言葉では、これは次の主張である。$L/K$ を有限拡大、
+$M/K$ を有限分離拡大とする。
+$M \otimes_K L = \prod M_i$ と書く。$t \in L$ に対し、
+その像を $t_i \in M_i$ とすると、
+$\text{Norm}_{L/K}(t)$ の $M$ における像は
+$\prod \text{Norm}_{M_i/M}(t_i)$ である。証明は省略する。
+\end{proof}
+
+\section{有理同値}
+\label{spaces-chow-section-rational-equivalence}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-rational-equivalence} の類似である。
+本節では $k$-サイクル上の {\it 有理同値} を定義する。
+主因子の（閉埋め込みによる）像の局所有限和を許す。
+これはかなり奇妙な現象をもたらす
+（スキームに関する章の例を参照）。
+しかしこれらを許さなければ、線束の Chern 類とのキャップ積が
+有理同値を介して因子化することを証明する方法が分からない。
+
+\begin{definition}
+\label{spaces-chow-definition-rational-equivalence}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$k \in \mathbf{Z}$ とする。
+\begin{enumerate}
+\item $\dim_\delta(W_j) = k + 1$ を満たす整閉部分空間の任意の
+局所有限族 $\{W_j \subset X\}$ と、任意の
+$f_j \in R(W_j)^*$ が与えられたとき、
+$$
+\sum (i_j)_*\text{div}(f_j) \in Z_k(X)
+$$
+を考えられる。ここで $i_j : W_j \to X$ は包含射である。
+射 $\coprod i_j : \coprod W_j \to X$ は固有なので、これは意味をもつ。
+\item $\alpha \in Z_k(X)$ が上に表示した形のサイクルであるとき、
+$\alpha$ は {\it 零と有理同値} であるという。
+\item $\alpha - \beta$ が零と有理同値であるとき、
+$\alpha, \beta \in Z_k(X)$ は {\it 有理同値} であるといい、
+$\alpha \sim_{rat} \beta$ と書く。
+\item
+$$
+\CH_k(X) = Z_k(X) / \sim_{rat}
+$$
+を {\it $X$ 上の $k$-サイクルの Chow 群} と定義する。
+これは {\it $X$ 上の有理同値を法とする $k$-サイクルの Chow 群}
+と呼ばれることもある。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ほかにも興味深い同値関係は数多くある。
+有理同値はそれらすべての中で最も粗い。
+次の補題は非常に簡単だが重要である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-restrict-to-open}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$U \subset X$ を開部分空間とする。$Y$ を
+$|Y| = |X| \setminus |U|$ を満たす $X$ の被約閉部分空間とし、
+$i : Y \to X$ で包含射を表す。$k \in \mathbf{Z}$ とする。
+$\alpha, \beta \in Z_k(X)$ と仮定する。
+$\alpha|_U \sim_{rat} \beta|_U$ ならば、
+$$
+\alpha \sim_{rat} \beta + i_*\gamma.
+$$
+を満たすサイクル $\gamma \in Z_k(Y)$ が存在する。
+言い換えると、アーベル群の複体
+$$
+\xymatrix{
+\CH_k(Y) \ar[r]^{i_*} & \CH_k(X) \ar[r]^{j^*} & \CH_k(U) \ar[r] & 0
+}
+$$
+は完全である。
+\end{lemma}
+
+\begin{proof}
+$\{W_j\}_{j \in J}$ を $U$ の $\delta$-次元 $k + 1$ の
+整閉部分空間からなる局所有限族とし、
+$f_j \in R(W_j)^*$ を、定義にあるように
+$(\alpha - \beta)|_U = \sum (i_j)_*\text{div}(f_j)$
+を満たす元とする。$W_j' \subset X$ を、$W_j$ と同じ生成点をもつ、
+対応する $X$ の整閉部分空間とする。
+$V \subset X$ が準コンパクト開部分空間であると仮定する。
+$V$ は Noether なので、$V \cap U$ も $U$ の準コンパクト開部分空間である。
+したがって、$\{W_j\}$ は局所有限であるから、集合
+$\{j \in J \mid W_j \cap V \not = \emptyset\}
+= \{j \in J \mid W'_j \cap V \not = \emptyset\}$
+は有限である。言い換えると、$\{W'_j\}$ も局所有限である。
+$R(W_j) = R(W'_j)$ なので、
+$$
+\alpha - \beta - \sum (i'_j)_*\text{div}(f_j)
+$$
+は $X$ 上のサイクルであり、その $U$ への制限は零である。
+Lemma \ref{spaces-chow-lemma-exact-sequence-open} を適用すれば補題が従う。
+\end{proof}
+
+\begin{remark}
+\label{spaces-chow-remark-infinite-sums-rational-equivalences}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ 上の $k$-サイクルの無限族
+$\alpha_i, \beta_i \in Z_k(X)$, $i \in I$ があると仮定する。
+$\alpha_i$ と $\beta_i$ の台が $X$ の閉部分集合の局所有限族をなし、
+$\sum \alpha_i$ と $\sum \beta_i$ がサイクルとして定義されると仮定する。
+さらに各 $i$ に対して $\alpha_i \sim_{rat} \beta_i$ と仮定する。
+このとき $\sum \alpha_i \sim_{rat} \sum \beta_i$ であるかは明らかでない。
+実際、問題は、有理同値が局所有限族
+$\{W_{i, j}, f_{i, j} \in R(W_{i, j})^*\}_{j \in J_i}$
+によって与えられるとしても、その合併
+$\{W_{i, j}\}_{i \in I, j\in J_i}$ は局所有限とは限らないことである。
+
+\medskip\noindent
+実際には多くの場合、$|X|$ の閉部分集合の局所有限族
+$\{T_i\}_{i \in I}$ であって、$\alpha_i, \beta_i$ が
+$T_i$ 上に台をもち、$\alpha_i \sim_{rat} \beta_i$ が
+$T_i$ 「上で」成り立つようなものがある。
+より正確には、族
+$\{W_{i, j}, f_{i, j} \in R(W_{i, j})^*\}_{j \in J_i}$
+は、$|W_{i, j}| \subset T_i$ を満たす整閉部分空間
+$W_{i, j}$ からなる。この場合には
+$\sum \alpha_i \sim_{rat} \sum \beta_i$ が $X$ 上で成り立つ。
+実際、この場合、族 $\{W_{i, j}\}_{i \in I, j\in J_i}$ は
+自動的に局所有限だからである。
+\end{remark}
+
+\section{有理同値と順像・逆像}
+\label{spaces-chow-section-properties-rational-equivalence}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-properties-rational-equivalence} の類似である。
+本節では、平坦逆像と固有順像が有理同値と可換であることを示す。
+
+\begin{lemma}
+\label{spaces-chow-lemma-prepare-flat-pullback-rational-equivalence}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$Y$ は整で $\dim_\delta(Y) = k$ であると仮定する。
+$f : X \to Y$ を相対次元 $r$ の平坦射とする。
+このとき $g \in R(Y)^*$ に対して
+$$
+f^*\text{div}_Y(g) =
+\sum m_{X', X} (X' \to X)_*\text{div}_{X'}(g \circ f|_{X'})
+$$
+が $X$ 上の $(k + r - 1)$-サイクルとして成り立つ。
+ここで和は $X$ の既約成分 $X'$ 全体を走り、
+$m_{X', X}$ は $X$ における $X'$ の重複度である。
+\end{lemma}
+
+\begin{proof}
+$X$ の任意の既約成分は $Y$ を支配する
+（Lemma \ref{spaces-chow-lemma-flat-inverse-image-dimension}）。
+したがって、合成 $g \circ f|_{X'}$ は定義される
+（Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-rational-maps}）。
+これをスキームの場合に帰着させる。
+スキーム $V$ と全射 \'etale 射 $V \to Y$ を選ぶ。
+スキーム $U$ と全射 \'etale 射
+$U \to V \times_Y X$ を選ぶ。図式は
+$$
+\xymatrix{
+U \ar[r]_a \ar[d]_h & X \ar[d]^f \\
+V \ar[r]^b & Y
+}
+$$
+である。$a$ は全射かつ \'etale なので、
+Lemma \ref{spaces-chow-lemma-etale-pullback} により、
+$a$ で引き戻した後のサイクルの等式を証明すれば十分である。
+Lemma \ref{spaces-chow-lemma-etale-pullback-principal-divisor} を用いて
+$$
+b^*\text{div}_Y(g) = \sum (V' \to V)_*\text{div}_{V'}(g \circ b|_{V'})
+$$
+と書ける。ここで和は $V$ の既約成分 $V'$ 全体を走る。
+Lemma \ref{spaces-chow-lemma-flat-pullback-proper-pushforward} を用いると
+$$
+h^*b^*\text{div}_Y(g) =
+\sum (V' \times_V U \to U)_*(h')^*\text{div}_{V'}(g \circ b|_{V'})
+$$
+を得る。ここで $h' : V' \times_V U \to V'$ は射影である。
+射 $h' : V' \times_V U \to V'$ にスキームの場合の補題
+（Chow Homology, Lemma
+\ref{chow-lemma-prepare-flat-pullback-rational-equivalence}）
+を適用すると、
+$$
+(h')^*\text{div}_{V'}(g \circ b|_{V'}) =
+\sum
+m_{U', V' \times_V U}
+(U' \to V' \times_V U)_*\text{div}_{U'}(g \circ b|_{V'} \circ h'|_{U'})
+$$
+を得る。ここで和は $V' \times_V U$ の既約成分 $U'$ 全体を走る。
+この和に現れる各 $U'$ は $U$ の既約成分であり、
+逆に $U$ の各既約成分 $U'$ は、一意な既約成分
+$V' \subset V$ に対する $V' \times_V U$ の既約成分である。
+既約成分 $U' \subset U$ が与えられたとき、
+$\overline{a(U')} \subset X$ で $X$ における「像」を表す
+（Lemma \ref{spaces-chow-lemma-proper-image}）。これは、例えば
+Lemma \ref{spaces-chow-lemma-flat-inverse-image-dimension} により、
+$X$ の既約成分である。
+% P10-E0056
+重複度 $m_{U', V' \times_V U}$ は
+重複度 $m_{\overline{a(U')}, X}$ に等しい。
+これは等式 $h^*a^*[Y] = b^*f^*[Y]$
+（Lemma \ref{spaces-chow-lemma-compose-flat-pullback}）、定義、および
+Lemma \ref{spaces-chow-lemma-etale-pullback} から従う。
+以上をすべて合わせると
+$$
+a^*f^*\text{div}_Y(g) =
+h^*b^*\text{div}_Y(g) =
+\sum m_{\overline{a(U')}, X}
+(U' \to U)_*\text{div}_{U'}(g \circ (f \circ a)|_{U'})
+$$
+を得る。次に、補題の主張の式の右辺を $a$ で引き戻したときに
+何が起こるかを調べる。まず Lemma
+\ref{spaces-chow-lemma-flat-pullback-proper-pushforward} を用いて
+$$
+a^*\sum m_{X', X} (X' \to X)_*\text{div}_{X'}(g \circ f|_{X'}) =
+\sum m_{X', X} (X' \times_X U \to U)_*(a')^*\text{div}_{X'}(g \circ f|_{X'})
+$$
+を得る。ここで $a' : X' \times_X U \to X'$ は射影である。
+Lemma \ref{spaces-chow-lemma-etale-pullback-principal-divisor} により
+$$
+(a')^*\text{div}_{X'}(g \circ f|_{X'}) =
+\sum (U' \to X' \times_X U)_*\text{div}_{U'}(g \circ (f \circ a)|_{U'})
+$$
+を得る。ここで和は $X' \times_X U$ の既約成分 $U'$ 全体を走る。
+これらの $U'$ は $U$ の既約成分であり、実際、
+$\overline{a(U')} = X'$ を満たす $U$ の既約成分にちょうど一致する。
+先に得た式と比較すれば結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-flat-pullback-rational-equivalence}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$f : X \to Y$ を相対次元 $r$ の平坦射とする。
+$Y$ 上の有理同値な $k$-サイクルを
+$\alpha \sim_{rat} \beta$ とする。このとき
+$f^*\alpha \sim_{rat} f^*\beta$ が $X$ 上の
+$(k + r)$-サイクルとして成り立つ。
+\end{lemma}
+
+\begin{proof}
+何を示せばよいだろうか。閉埋め込みの族
+$$
+i_j : W_j \longrightarrow Y
+$$
+が与えられ、各 $W_j$ は $\delta$-次元 $k + 1$ の整空間であり、
+有理関数 $g_j \in R(W_j)^*$ が与えられているとする。
+さらに、族 $\{|i_j|(|W_j|)\}_{j \in J}$ は
+$|Y|$ において局所有限であると仮定する。このとき
+$$
+f^*(\sum i_{j, *}\text{div}(g_j)) = \sum f^*i_{j, *}\text{div}(g_j)
+$$
+が $X$ 上で零と有理同値であることを示せばよい。
+右辺の和は Lemma \ref{spaces-chow-lemma-inverse-image-locally-finite}
+により意味をもつ。
+
+\medskip\noindent
+ファイバー積
+$$
+i'_j : W'_j = W_j \times_Y X \longrightarrow X.
+$$
+を考え、$f_j : W'_j \to W_j$ で第一射影を表す。
+Lemma \ref{spaces-chow-lemma-flat-pullback-proper-pushforward} により、
+上の和は
+$$
+\sum i'_{j, *}(f_j^*\text{div}(g_j))
+$$
+と書ける。Lemma
+\ref{spaces-chow-lemma-prepare-flat-pullback-rational-equivalence} により、
+各 $f_j^*\text{div}(g_j)$ は $W'_j$ 上で零と有理同値である。
+したがって、各 $i'_{j, *}(f_j^*\text{div}(g_j))$ は
+零と有理同値である。すると Remark
+\ref{spaces-chow-remark-infinite-sums-rational-equivalences} の議論により、
+表示した和についても同じことが成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-proper-pushforward-rational-equivalence}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$p : X \to Y$ を固有射とする。
+$\alpha, \beta \in Z_k(X)$ は有理同値であると仮定する。
+このとき $p_*\alpha$ は $p_*\beta$ と有理同値である。
+\end{lemma}
+
+\begin{proof}
+何を示せばよいだろうか。閉埋め込みの族
+$$
+i_j : W_j \longrightarrow X
+$$
+が与えられ、各 $W_j$ は $\delta$-次元 $k + 1$ の整空間であり、
+有理関数 $f_j \in R(W_j)^*$ が与えられているとする。
+さらに、族 $\{i_j(W_j)\}_{j \in J}$ は $X$ 上で
+局所有限であると仮定する。このとき
+% P10-E0057
+$$
+p_*\left(\sum i_{j, *}\text{div}(f_j)\right)
+$$
+が $X$ 上で零と有理同値であることを示せばよい。
+
+\medskip\noindent
+この和は
+$$
+\sum p_*i_{j, *}\text{div}(f_j).
+$$
+に等しい。$W'_j \subset Y$ を、$p \circ i_j$ の像である
+整閉部分空間とする。Lemma \ref{spaces-chow-lemma-proper-image} を参照せよ。
+族 $\{W'_j\}$ は Lemma
+\ref{spaces-chow-lemma-quasi-compact-locally-finite} により
+$Y$ において局所有限である。したがって、与えられた $j$ に対し、
+$p_*i_{j, *}\text{div}(f_j) = 0$ であるか、またはある
+$g_j \in R(W'_j)^*$ に対して
+$i'_{j, *}\text{div}(g_j)$ に等しいことを示せば十分である。
+
+\medskip\noindent
+% P10-E0058
+以上の議論により、$\delta$-次元 $k + 1$ の一つの整閉部分空間
+$W \subset X$ の場合に帰着する。
+$f \in R(W)^*$ とし、上と同様に $W' = p(W)$ とおく。
+射の可換図式
+$$
+\xymatrix{
+W \ar[r]_i \ar[d]_{p'} & X \ar[d]^p \\
+W' \ar[r]^{i'} & Y
+}
+$$
+を得る。Lemma \ref{spaces-chow-lemma-compose-pushforward} により
+$p_*i_*\text{div}(f) = i'_*(p')_*\text{div}(f)$ であることに注意する。
+上で説明したように、$(p')_*\text{div}(f)$ が
+$W'$ 上の有理関数の因子または零であることを示せばよい。
+三つの場合に分ける。
+
+\medskip\noindent
+$\dim_\delta(W') < k$ の場合。この場合は自動的に
+$(p')_*\text{div}(f) = 0$ であり、示すことはない。
+
+\medskip\noindent
+$\dim_\delta(W') = k$ の場合。この場合
+$(p')_*\text{div}(f) = 0$ であることを示そう。
+$(p')_*\text{div}(f)$ は $k$-サイクルなので、
+ある $n \in \mathbf{Z}$ に対して
+$(p')_*\text{div}(f) = n[W']$ である。
+$n = 0$ を証明するため、$W'$ を空でない開部分空間で
+置き換えてよい。特に、$W'$ はスキームであると仮定してよく、
+そう仮定する。$\eta \in W'$ を生成点とする。
+$K = \kappa(\eta) = R(W')$ を関数体とする。
+基底変換図式
+$$
+\xymatrix{
+W_\eta \ar[r] \ar[d]_c & W \ar[d]^{p'} \\
+\Spec(K) \ar[r]^\eta & W'
+}
+$$
+を考える。$c$ は固有であることに注意する。
+また $|W_\eta|$ は次元 $1$ である。Decent Spaces, Lemma
+\ref{decent-spaces-lemma-topology-fibre} を用いて、
+$|W_\eta|$ を $\eta$ に写る $|W|$ の点からなる部分空間と同一視する。
+$\dim_\delta(W) = k + 1$ かつ $\delta(\eta) = k$ なので、
+$W_\eta$ の点の $\delta$-値は $k$ または $k + 1$ でなければならない。
+したがって、Decent Spaces, Lemma
+\ref{decent-spaces-lemma-codimension-local-ring} により、
+局所環の次元は $\leq 1$ である。Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}
+により、$W_\eta$ はスキームであることが分かる。
+$\Spec(K)$ は $W'$ の空でないアフィン開部分スキームの極限なので、
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-limit-is-scheme} により、
+$W$ はスキームであると仮定してよいと結論できる。
+最後にスキームの場合
+（Chow Homology, Lemma
+\ref{chow-lemma-proper-pushforward-rational-equivalence}）
+により $n = 0$ を得る。
+
+\medskip\noindent
+$\dim_\delta(W') = k + 1$ の場合。この場合、Lemma
+\ref{spaces-chow-lemma-proper-pushforward-alteration} が適用でき、
+望むように、ある $g \in R(W')^*$ に対して
+$p'_*\text{div}(f) = \text{div}(g)$ であることが分かる。
+\end{proof}
+
+\section{可逆層に付随する因子}
+\label{spaces-chow-section-divisor-invertible-sheaf}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-divisor-invertible-sheaf} の類似である。
+次の定義は、現在の設定における Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-divisor-invertible-sheaf}
+の類似である。
+
+\begin{definition}
+\label{spaces-chow-definition-divisor-invertible-sheaf}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ は整で $n = \dim_\delta(X)$ であると仮定する。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+\begin{enumerate}
+\item $\mathcal{L}$ の任意の非零有理型切断 $s$ に対して、
+% P10-E0059
+{\it $s$ に付随する Weil 因子} を、Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-divisor-invertible-sheaf}
+で定義された $(n - 1)$-サイクル
+$$
+\text{div}_\mathcal{L}(s) =
+\sum \text{ord}_{Z, \mathcal{L}}(s) [Z]
+$$
+と定義する。Weil 因子は Lemma
+\ref{spaces-chow-lemma-divisor-delta-dimension} により $\delta$-次元
+$n - 1$ をもつので、これは意味をもつ。
+\item {\it $\mathcal{L}$ に付随する Weil 因子} を
+$$
+c_1(\mathcal{L}) \cap [X] =
+\text{div}_\mathcal{L}(s)\text{ の類} \in \CH_{n - 1}(X)
+$$
+と定義する。ここで $s$ は $X$ 上の $\mathcal{L}$ の
+任意の非零有理型切断である。これは Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-divisor-meromorphic-well-defined}
+により良定義である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+非零切断の零点スキームは有効 Cartier 因子であり、
+その Weil 因子類は可逆加群に付随する Weil 因子を与える。
+
+\begin{lemma}
+\label{spaces-chow-lemma-compute-c1}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ は整で $n = \dim_\delta(X)$ であると仮定する。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$s \in \Gamma(X, \mathcal{L})$ を非零大域切断とする。このとき
+$$
+\text{div}_\mathcal{L}(s) = [Z(s)]_{n - 1}
+$$
+が $Z_{n - 1}(X)$ において成り立ち、
+$$
+c_1(\mathcal{L}) \cap [X] = [Z(s)]_{n - 1}
+$$
+が $\CH_{n - 1}(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$ を $\delta$-次元 $n - 1$ の整閉部分空間とする。
+$\xi \in |Z|$ をその生成点とする。第一の等式を証明するため、
+両辺における $Z$ の係数を比較する。基本 \'etale 近傍
+$(U, u) \to (X, \xi)$ を選ぶ。Decent Spaces, Section
+\ref{decent-spaces-section-residue-fields-henselian-local-rings}
+を参照せよ。この場合
+$\mathcal{O}_{X, \xi}^h = \mathcal{O}_{U, u}^h$
+であることを思い出す。$U$ を $u$ の開近傍で置き換えた後、
+$\mathcal{L}|_U$ の自明化切断 $s_U$ が存在すると仮定してよい。
+ある $f \in \Gamma(U, \mathcal{O}_U)$ に対して
+$s|_U = f s_U$ と書く。このとき $Z \times_X U$ は、
+$U$ の閉部分スキームとして $V(f)$ に等しい。Divisors on Spaces,
+Definition \ref{spaces-divisors-definition-zero-scheme-s} を参照せよ。
+Spaces over Fields, Section \ref{spaces-over-fields-section-c1}
+と同様に、$\mathcal{L}_\xi$ で、標準射
+$c_\xi : \Spec(\mathcal{O}_{X, \xi}^h) \to X$
+による $\mathcal{L}$ の逆像を表す。$s_\xi$ で $s_U$ の逆像を表す。
+これは $\mathcal{L}_\xi$ の自明化である。このとき
+$c_\xi^*(s) = fs_\xi$ である。
+$[Z(s)]_{n - 1}$ における $Z$ の係数は、定義により
+$$
+\text{length}_{\mathcal{O}_{U, u}}(\mathcal{O}_{U, u}/f\mathcal{O}_{U, u})
+$$
+である。$\mathcal{O}_{U, u} \to \mathcal{O}_{X, \xi}^h$
+は平坦で剰余体を同一視するので、Algebra, Lemma
+\ref{algebra-lemma-pullback-module} により、これは
+$$
+\text{length}_{\mathcal{O}_{X, \xi}^h}
+(\mathcal{O}_{X, \xi}^h/f\mathcal{O}_{X, \xi}^h)
+$$
+に等しい。Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-order-vanishing-meromorphic}
+により、この最後の量は $\text{ord}_{Z, \mathcal{L}}(s)$、
+すなわち望むとおり $\text{div}_\mathcal{L}(s)$ における
+$Z$ の係数に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-Gm-torsor}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。射
+$$
+q :
+T = \underline{\Spec}\left(
+\bigoplus\nolimits_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n}\right)
+\longrightarrow
+X
+$$
+は次の性質をもつ。
+\begin{enumerate}
+\item $q$ は全射、滑らか、アフィン、相対次元 $1$ である。
+\item 同型 $\alpha : q^*\mathcal{L} \cong \mathcal{O}_T$ が存在する。
+\item $(q : T \to X, \alpha)$ の構成は基底変換と可換である。
+\item $q^* : Z_k(X) \to Z_{k + 1}(T)$ は単射である。
+\item $Z \subset X$ が整閉部分空間ならば、
+$q^{-1}(Z) \subset T$ は整閉部分空間である。
+\item $Z \subset X$ が $\delta$-次元 $\leq k$ の
+$X$ の閉部分空間ならば、$q^{-1}(Z)$ は $T$ の
+$\delta$-次元 $\leq k + 1$ の閉部分空間であり、
+$q^*[Z]_k = [q^{-1}(Z)]_{k + 1}$ である。
+\item $\xi' \in |T|$ が、$\xi$ 上の
+$|T| \to |X|$ のファイバーの生成点ならば、環準同型
+$\mathcal{O}_{X, \xi}^h \to \mathcal{O}_{T, \xi'}^h$ は平坦であり、
+$\mathfrak m_{\xi'}^h = \mathfrak m_\xi^h \mathcal{O}_{T, \xi'}^h$
+が成り立ち、剰余体拡大は超越次数 $1$ の純超越拡大である。
+% P10-E0061
+\item 必要に応じてここにさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{L}|_U$ が自明になるような \'etale 射
+$U \to X$ を取る。このとき $T \times_X U \to U$ は射影
+$\mathbf{G}_m \times U \to U$ と同型である。ここで
+% P10-E0060
+$\mathbf{G}_m$ は乗法群スキームである。Groupoids, Example
+\ref{groupoids-example-multiplicative-group} を参照せよ。
+したがって (1) は明らかである。
+
+\medskip\noindent
+(2) を見るため、
+$q_*q^*\mathcal{L} =
+\bigoplus_{n \in \mathbf{Z}} \mathcal{L}^{\otimes n + 1}$
+であることに注意する。したがって、
+$q_*\mathcal{O}_T$-加群の明らかな同型
+$q_*q^*\mathcal{L} \to q_*\mathcal{O}_T$
+が存在する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-affine-equivalence-modules} により、
+これは同型 $q^*\mathcal{L} \to \mathcal{O}_T$ を定める。
+
+\medskip\noindent
+相対スペクトルの構成は任意の基底変換と可換であり、
+同型 $\alpha$ についても同じことが明らかなので、(3) が成り立つ。
+
+\medskip\noindent
+(4) は (1) と定義から直ちに従う。
+
+\medskip\noindent
+(5) は、$Z$ が整代数空間ならば
+$\mathbf{G}_m \times Z$ も整代数空間であることから従う。
+
+\medskip\noindent
+(6) は長さが保たれることから従う。すなわち、
+$(A, \mathfrak m)$ が局所環で
+$B = A[x]_{\mathfrak m A[x]}$ であり、
+$M$ が $A$-加群ならば、
+$\text{length}_A(M) = \text{length}_B(M \otimes_A B)$
+である。これは、$\mathcal{F}$ が連接
+$\mathcal{O}_X$-加群で、$\xi \in |X|$、かつ
+$\xi' \in |T|$ が $\xi$ 上のファイバーの生成点ならば、
+$\xi$ における $\mathcal{F}$ の長さは
+$\xi'$ における $q^*\mathcal{F}$ の長さと等しいことを意味する。
+定義をたどれば、これから (6) とさらに多くのことが得られる。
+
+\medskip\noindent
+(7) の写像は Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}
+から得られる。しかし、我々の場合には
+$$
+\Spec(\mathcal{O}_{X, \xi}^h) \times_X T =
+\mathbf{G}_m \times \Spec(\mathcal{O}_{X, \xi}^h) =
+\Spec(\mathcal{O}_{X, \xi}^h[t, t^{-1}])
+$$
+であり、$\xi'$ はこれの $\Spec(\mathcal{O}_{X, \xi}^h)$ 上の
+特殊ファイバーの生成点に対応する。したがって
+$\mathcal{O}_{T, \xi'}^h$ は、対応する素イデアルにおける
+$\mathcal{O}_{X, \xi}^h[t, t^{-1}]$ の局所化の Hensel 化である。
+(7) はこれと可換環論から従う。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-Gm-torsor-divisor-meromorphic-section}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$X$ は整であると仮定する。$s$ を $\mathcal{L}$ の
+非零有理型切断とする。$q : T \to X$ を Lemma
+\ref{spaces-chow-lemma-Gm-torsor} の射とする。このとき
+$$
+q^*\text{div}_\mathcal{L}(s) = \text{div}_T(q^*(s))
+$$
+が成り立つ。ここで、同型
+$q^*\mathcal{L} \to \mathcal{O}_T$ を用いて、
+逆像 $q^*(s)$ を $T$ 上の非零有理型関数とみなす。
+\end{lemma}
+
+\begin{proof}
+Spaces over Fields, Sections
+\ref{spaces-over-fields-section-Weil-divisors} および
+\ref{spaces-over-fields-section-c1} で与えられた構成の整合性により、
+$\text{div}_T(q^*(s)) = \text{div}_{\mathcal{O}_T}(q^*(s))$
+であることに注意する。本証明では
+$\text{div}_{\mathcal{O}_T}(q^*(s))$ との一致を示す。
+Lemma \ref{spaces-chow-lemma-Gm-torsor} に述べた
+$q : T \to X$ の性質を、以後断りなくすべて用いる。
+$Z \subset T$ を素因子とする。このとき $Z \to X$ は支配的であるか、
+またはある素因子 $Z' \subset X$ に対して $Z = q^{-1}(Z')$ である。
+$Z \to X$ が支配的ならば、補題の等式のいずれの辺においても
+$Z$ の係数は零である。したがって、$Z' \subset X$ が素因子で、
+$Z = q^{-1}(Z')$ であると仮定してよい。
+$\xi' \in |Z'|$ と $\xi \in |Z|$ を生成点とする。
+このとき可換図式
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{T, \xi}^h) \ar[r]_-{c_\xi} \ar[d]_h & T \ar[d]^q \\
+\Spec(\mathcal{O}_{X, \xi'}^h) \ar[r]^-{c_{\xi'}} & X
+}
+$$
+を得る。Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}
+を参照せよ。
+$\mathcal{L}_{\xi'} = c_{\xi'}^*\mathcal{L}$ の自明化
+$s_{\xi'}$ を選ぶ。$h$ による $s_{\xi'}$ の逆像 $s_\xi$ を、
+$\mathcal{L}_\xi = c_\xi^* q^*\mathcal{L}$ の自明化として用いる。
+$a, b \in \mathcal{O}_{X, \xi'}$ を非零因子として
+$s/s_{\xi'} = a/b$ と書く。定義により
+$\text{div}_\mathcal{L}(s)$ における $Z'$ の係数は
+$$
+\text{length}_{\mathcal{O}_{X, \xi'}^h}(
+\mathcal{O}_{X, \xi'}^h/a \mathcal{O}_{X, \xi'}^h)
+-
+\text{length}_{\mathcal{O}_{X, \xi'}^h}(
+\mathcal{O}_{X, \xi'}^h/b \mathcal{O}_{X, \xi'}^h)
+$$
+である。$Z = q^{-1}(Z')$ なので、これは
+$q^*\text{div}_\mathcal{L}(s)$ における $Z$ の係数でもある。
+$\mathcal{O}_{X, \xi'}^h \to \mathcal{O}_{T, \xi}^h$
+は平坦なので、元 $a, b$ は $\mathcal{O}_{T, \xi}^h$
+の非零因子に写る。したがって
+$\mathcal{O}_{T, \xi}^h$ の全商環において
+$q^*(s)/s_\xi = a/b$ である。定義により
+$\text{div}_T(q^*(s))$ における $Z$ の係数は
+$$
+\text{length}_{\mathcal{O}_{T, \xi}^h}(
+\mathcal{O}_{T, \xi}^h/a \mathcal{O}_{T, \xi}^h)
+-
+\text{length}_{\mathcal{O}_{T, \xi}^h}(
+\mathcal{O}_{T, \xi}^h/b \mathcal{O}_{T, \xi}^h)
+$$
+である。Algebra, Lemma \ref{algebra-lemma-pullback-module} と、
+Lemma \ref{spaces-chow-lemma-Gm-torsor} で示した
+$\mathfrak m_\xi^h = \mathfrak m_{\xi'}^h\mathcal{O}_{T, \xi}^h$
+により、これらの長さは前の長さと同じなので、証明が完了する。
+\end{proof}
+
+\section{可逆層との交叉}
+\label{spaces-chow-section-intersecting-with-divisors}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-intersecting-with-divisors} の類似である。
+本節では次の構成を調べる。
+
+\begin{definition}
+\label{spaces-chow-definition-cap-c1}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+各整数 $k$ に対して、{\it $\mathcal{L}$ の第一 Chern 類との交叉}
+と呼ばれる演算
+$$
+c_1(\mathcal{L}) \cap - :
+Z_{k + 1}(X) \to \CH_k(X)
+$$
+を定義する。
+\begin{enumerate}
+\item $\dim_\delta(W) = k + 1$ を満たす整閉部分空間
+$i : W \to X$ が与えられたとき、
+$$
+c_1(\mathcal{L}) \cap [W] = i_*(c_1({i^*\mathcal{L}}) \cap [W])
+$$
+と定義する。ここで右辺は Definition
+\ref{spaces-chow-definition-divisor-invertible-sheaf} で定義されている。
+\item 一般の $(k + 1)$-サイクル
+$\alpha = \sum n_i [W_i]$ に対して、
+$$
+c_1(\mathcal{L}) \cap \alpha = \sum n_i c_1(\mathcal{L}) \cap [W_i]
+$$
+とおく。
+\end{enumerate}
+\end{definition}
+
+\noindent
+% P10-E0062
+各 $c_1(\mathcal{L}) \cap W_i = \sum_j n_{i, j} [Z_{i, j}]$
+を、$\{Z_{i, j}\}_j$ が $W_i$ の整閉部分空間の局所有限和となるように
+書く。$\{W_i\}$ は $X$ 上の整閉部分空間の局所有限族なので、
+$\{Z_{i, j}\}_{i, j}$ は $X$ の閉部分空間の局所有限族であることが
+容易に従う。したがって
+% P10-E0063
+$c_1(\mathcal{L}) \cap \alpha = \sum n_in_{i, j}[Z_{i, j}]$
+はサイクルである。これを考える別の、しばしばより便利な方法は、
+射 $\coprod W_i \to X$ が固有であることに注意することである。
+したがって、$c_1(\mathcal{L}) \cap \alpha$ は
+$\CH_k(\coprod W_i) = \prod \CH_k(W_i)$ の類の順像とみなせる。
+これはまた、結果が $X$ 上の有理同値の意味で
+良定義である理由も説明する。
+
+\medskip\noindent
+次のいくつかの節での主な目標は、
+$c_1(\mathcal{L})$ との交叉が有理同値を介して因子化することを
+示すことである。これは自明ではない。
+
+\begin{lemma}
+\label{spaces-chow-lemma-c1-cap-additive}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+% P10-E0065
+$\mathcal{L}$, $\mathcal{N}$ を $X$ 上の可逆層とする。このとき
+$$
+c_1(\mathcal{L}) \cap \alpha  + c_1(\mathcal{N}) \cap \alpha =
+c_1(\mathcal{L} \otimes_{\mathcal{O}_X} \mathcal{N}) \cap \alpha
+$$
+が、すべての $\alpha \in Z_{k - 1}(X)$ に対して
+$\CH_k(X)$ において成り立つ。さらに、
+% P10-E0064
+すべての $\alpha$ に対して
+$c_1(\mathcal{O}_X) \cap \alpha = 0$ である。
+\end{lemma}
+
+\begin{proof}
+加法性は Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-c1-additive} と定義から直ちに従う。
+$c_1(\mathcal{O}_X) \cap \alpha = 0$ を見るため、
+切断 $1 \in \Gamma(X, \mathcal{O}_X)$ を考える。
+これは任意の整閉部分空間 $W \subset X$ 上で
+至る所非零の切断に制限される。したがって、望むとおり
+$c_1(\mathcal{O}_X) \cap [W] = 0$ である。
+\end{proof}
+
+\noindent
+$Z(s) \subset X$ は、代数空間 $X$ 上の可逆層の大域切断
+$s$ の零点スキームを表すことを思い出す。Divisors on Spaces,
+Definition \ref{spaces-divisors-definition-zero-scheme-s} を参照せよ。
+
+\begin{lemma}
+\label{spaces-chow-lemma-prepare-geometric-cap}
+Situation \ref{spaces-chow-situation-setup} において $Y/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_Y$-加群とする。
+$s \in \Gamma(Y, \mathcal{L})$ を正則切断とし、
+$\dim_\delta(Y) \leq k + 1$ と仮定する。
+$Y_i \subset Y$ を $Y$ の $\delta$-次元 $k + 1$ の既約成分として、
+$[Y]_{k + 1} = \sum n_i[Y_i]$ と書く。
+$s_i = s|_{Y_i} \in \Gamma(Y_i, \mathcal{L}|_{Y_i})$ とおく。
+このとき
+\begin{equation}
+\label{spaces-chow-equation-equal-as-cycles}
+[Z(s)]_k =  \sum n_i[Z(s_i)]_k
+\end{equation}
+が $Y$ 上の $k$-サイクルとして成り立つ。
+\end{lemma}
+
+\begin{proof}
+$V$ がスキームであるような全射 \'etale 射
+$\varphi : V \to Y$ を取る。Lemma \ref{spaces-chow-lemma-etale-pullback}
+により、$\varphi$ で引き戻した後に等式を証明すれば十分である。
+同じ補題により
+$\varphi^*[Y_i] = [\varphi^{-1}(Y_i)] = \sum [V_{i, j}]$
+である。ここで $V_{i, j}$ は $Y_i$ の上にある $V$ の既約成分である。
+したがって、まず $Y_i \times_Y V$ 上の $\varphi^*s_i$ に
+スキームの場合
+（Chow Homology, Lemma \ref{chow-lemma-prepare-geometric-cap}）
+を適用すると、
+$\varphi^*[Z(s_i)]_k = [Z(\varphi^*s_i)] =
+\sum [Z(s_{i, j})]_k$
+を得る。ここで $s_{i, j}$ は $s$ の $V_{i, j}$ への逆像である。
+$\varphi^*s$ にスキームの場合を適用すると、
+$$
+\varphi^*[Z(s)]_k =
+[Z(\varphi^*s)]_k =
+\sum n_i[Z(s_{i, j})]_k
+$$
+を得る。これは上の重複度に関する注意による。
+以上をすべて合わせれば証明が完了する。
+\end{proof}
+
+\noindent
+次の補題は、可逆層の $c_1$ と閉部分スキームに付随するサイクルとの
+交叉積を計算するうえで有用である。
+$Z(s) \subset X$ は、スキーム $X$ 上の可逆層の大域切断
+$s$ の零点スキームを表すことを思い出す。Divisors, Definition
+\ref{divisors-definition-zero-scheme-s} を参照せよ。
+
+\begin{lemma}
+\label{spaces-chow-lemma-geometric-cap}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$Y \subset X$ を $\dim_\delta(Y) \leq k + 1$ を満たす
+閉部分スキームとし、$s \in \Gamma(Y, \mathcal{L}|_Y)$ を
+正則切断とする。このとき
+$$
+c_1(\mathcal{L}) \cap [Y]_{k + 1} = [Z(s)]_k
+$$
+が $\CH_k(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$$
+[Y]_{k + 1} = \sum n_i[Y_i]
+$$
+と書く。ここで $Y_i \subset Y$ は $Y$ の
+$\delta$-次元 $k + 1$ の既約成分であり、$n_i > 0$ である。
+仮定により、制限
+$s_i = s|_{Y_i} \in \Gamma(Y_i, \mathcal{L}|_{Y_i})$
+は非零であり、したがって正則切断である。Lemma
+\ref{spaces-chow-lemma-compute-c1} により、$[Z(s_i)]_k$ は
+$c_1(\mathcal{L}|_{Y_i})$ を表す。したがって定義により
+$$
+c_1(\mathcal{L}) \cap [Y]_{k + 1} = \sum n_i[Z(s_i)]_k
+$$
+である。ゆえに Lemma \ref{spaces-chow-lemma-prepare-geometric-cap} から
+結果が従う。
+\end{proof}
+
+\section{可逆層との交叉と順像・逆像}
+\label{spaces-chow-section-intersecting-with-divisors-push-pull}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-intersecting-with-divisors-push-pull} の類似である。
+本節では、演算 $c_1(\mathcal{L}) \cap -$ が
+平坦逆像および固有順像と可換であることを証明する。
+
+\begin{lemma}
+\label{spaces-chow-lemma-prepare-flat-pullback-cap-c1}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$f : X \to Y$ を相対次元 $r$ の平坦射とする。
+$\mathcal{L}$ を $Y$ 上の可逆層とする。
+$Y$ は整で $n = \dim_\delta(Y)$ であると仮定する。
+$s$ を $\mathcal{L}$ の非零有理型切断とする。このとき
+$$
+f^*\text{div}_\mathcal{L}(s) = \sum n_i\text{div}_{f^*\mathcal{L}|_{X_i}}(s_i)
+$$
+が $Z_{n + r - 1}(X)$ において成り立つ。
+ここで和は既約成分 $X_i \subset X$ 全体を走り、
+それらの $\delta$-次元は $n + r$ である。切断
+$s_i = f|_{X_i}^*(s)$ は $s$ の逆像であり、
+$n_i = m_{X_i, X}$ は $X$ における $X_i$ の重複度である。
+\end{lemma}
+
+\begin{proof}
+少し技巧を用いて、これを Lemma
+\ref{spaces-chow-lemma-prepare-flat-pullback-rational-equivalence} から導く。
+（別の方法は、可逆加群の有理型切断の設定で
+同補題の証明をやり直すことである。）
+$q : T \to Y$ を、$Y$ 上の $\mathcal{L}$ を用いて構成される
+Lemma \ref{spaces-chow-lemma-Gm-torsor} の射とする。
+この補題に述べた $T$ の性質をすべて用いる。
+ファイバー積図式
+$$
+\xymatrix{
+T' \ar[r]_{q'} \ar[d]_h & X \ar[d]^f \\
+T \ar[r]^q & Y
+}
+$$
+を考える。このとき $q' : T' \to X$ は、$X$ 上の
+$f^*\mathcal{L}$ を用いて構成される射である。
+このとき
+$$
+(q')^*f^*\text{div}_\mathcal{L}(s) =
+\sum n_i (q')^*\text{div}_{f^*\mathcal{L}|_{X_i}}(s_i)
+$$
+を証明すれば十分である。
+% P10-E0066
+$T'_i = q^{-1}(X_i)$ は $T'$ の既約成分であり、
+$n_i$ は $T'$ における $T'_i$ の重複度であることに注意する。
+左辺は、Lemma
+\ref{spaces-chow-lemma-Gm-torsor-divisor-meromorphic-section}
+（および Lemma \ref{spaces-chow-lemma-compose-flat-pullback}）により
+$$
+h^*q^*\text{div}_\mathcal{L}(s) = h^*\text{div}_T(q^*(s))
+$$
+に等しい。一方、$q'$ の制限を
+$q'_i : T'_i \to X_i$ と表すと、Lemma
+\ref{spaces-chow-lemma-Gm-torsor-divisor-meromorphic-section} により
+右辺は
+% P10-E0067
+$$
+\sum n_i \text{div}_{T_i}((q'_i)^*(s_i))
+$$
+に等しい。これら二つの式において、式 $q^*(s)$ と
+$(q'_i)^*(s_i)$ は、同型
+$\alpha : q^*\mathcal{L} \to \mathcal{O}_T$ および
+その $T$ 上の空間への逆像を通じて、$q^*\mathcal{L}$ と
+$(q'_i)^*f^*\mathcal{L}|_{X_i}$ の引き戻された有理型切断に対応する
+有理関数を表す。この規約のもとで、$(q'_i)^*(s_i)$ は、
+$T$ 上の有理関数 $q^*(s)$ と射
+$h|_{T'_i} : T'_i \to T$ の合成であることが明らかである。
+したがって、Lemma
+\ref{spaces-chow-lemma-prepare-flat-pullback-rational-equivalence} はちょうど
+% P10-E0067
+$$
+h^*\text{div}_T(q^*(s)) = \sum n_i \text{div}_{T_i}((q'_i)^*(s_i))
+$$
+を主張しており、望む結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-flat-pullback-cap-c1}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$f : X \to Y$ を相対次元 $r$ の平坦射とする。
+$\mathcal{L}$ を $Y$ 上の可逆層とする。
+$\alpha$ を $Y$ 上の $k$-サイクルとする。このとき
+$$
+f^*(c_1(\mathcal{L}) \cap \alpha) = c_1(f^*\mathcal{L}) \cap f^*\alpha
+$$
+が $\CH_{k + r - 1}(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\alpha = \sum n_i[W_i]$ と書く。
+$X$ の閉部分空間 $f^{-1}(W_i)$ 上で有理同値を構成することにより、
+$$
+f^*(c_1(\mathcal{L}) \cap [W_i]) = c_1(f^*\mathcal{L}) \cap f^*[W_i]
+$$
+が $\CH_{k + r - 1}(X)$ において成り立つことを示す。
+Remark \ref{spaces-chow-remark-infinite-sums-rational-equivalences} の議論により、
+これで補題の等式が証明される。
+
+\medskip\noindent
+$W \subset Y$ を $\delta$-次元 $k$ の整閉部分空間とする。
+閉部分空間 $W' = f^{-1}(W) = W \times_Y X$ を考える。
+このときファイバー積図式
+$$
+\xymatrix{
+W' \ar[r] \ar[d]_h & X \ar[d]^f \\
+W \ar[r] & Y
+}
+$$
+を得る。
+$f^*(c_1(\mathcal{L}) \cap [W]) = c_1(f^*\mathcal{L}) \cap f^*[W]$
+を示さなければならない。
+$\mathcal{L}|_W$ の非零有理型切断 $s$ を選ぶ。
+$W'_i \subset W'$ を $\delta$-次元 $k + r$ の既約成分とする。
+定義どおり $n_i$ を $W'$ における $W'_i$ の重複度として、
+$[W']_{k + r} = \sum n_i[W'_i]$ と書く。
+したがって $Z_{k + r}(X)$ において
+$f^*[W] = \sum n_i[W'_i]$ である。
+各 $W'_i \to W$ は支配的なので、
+$s_i = s|_{W'_i}$ は各 $i$ に対して非零有理型切断である。
+Lemma \ref{spaces-chow-lemma-prepare-flat-pullback-cap-c1} により、
+サイクルの等式
+$$
+h^*\text{div}_{\mathcal{L}|_W}(s) =
+\sum n_i\text{div}_{f^*\mathcal{L}|_{W'_i}}(s_i)
+$$
+が $Z_{k + r - 1}(W')$ において成り立つ。
+左辺は $W'$ 上のサイクルで、その順像は
+$\CH_{k + r - 1}(X)$ における
+$f^*(c_1(\mathcal{L}) \cap [W])$ であり、
+右辺は $W'$ 上のサイクルで、その順像は
+$\CH_{k + r - 1}(X)$ における
+$c_1(f^*\mathcal{L}) \cap f^*[W]$ なので、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-equal-c1-as-cycles}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$f : X \to Y$ を固有射とする。
+$\mathcal{L}$ を $Y$ 上の可逆層とする。
+$X$, $Y$ は整、$f$ は支配的で、
+$\dim_\delta(X) = \dim_\delta(Y)$ であると仮定する。
+% P10-E0594
+$s$ を $Y$ 上の $\mathcal{L}$ の非零有理型切断 $s$ とする。このとき
+$$
+f_*\left(\text{div}_{f^*\mathcal{L}}(f^*s)\right) =
+[R(X) : R(Y)]\text{div}_\mathcal{L}(s).
+$$
+が $Y$ 上のサイクルとして成り立つ。特に
+% P10-E0068
+$$
+f_*(c_1(f^*\mathcal{L}) \cap [X]) = c_1(\mathcal{L}) \cap f_*[Y].
+$$
+\end{lemma}
+
+\begin{proof}
+定義により
+$f_*[X] = [R(X) : R(Y)][Y]$ なので、最後の等式は第一の等式から従う。
+% P10-E0069
+第一の等式を証明する。$q : T \to Y$ を、$Y$ 上の
+$\mathcal{L}$ を用いて構成される Lemma
+\ref{spaces-chow-lemma-Gm-torsor} の射とする。
+この補題に述べた $T$ の性質をすべて用いる。
+ファイバー積図式
+$$
+\xymatrix{
+T' \ar[r]_{q'} \ar[d]_h & X \ar[d]^f \\
+T \ar[r]^q & Y
+}
+$$
+を考える。このとき $q' : T' \to X$ は、$X$ 上の
+$f^*\mathcal{L}$ を用いて構成される射である。
+% P10-E0070
+$T'$ に引き戻した後に等式を証明すれば十分である。
+左辺の逆像は
+\begin{align*}
+q^*f_*\left(\text{div}_{f^*\mathcal{L}}(f^*s)\right)
+& =
+h_*(q')^*\text{div}_{f^*\mathcal{L}}(f^*s) \\
+& =
+h_*\text{div}_{(q')^*f^*\mathcal{L}}((q')^*f^*s) \\
+& =
+h_*\text{div}_{h^*q^*\mathcal{L}}(h^*q^*s)
+\end{align*}
+である。第一の等式は Lemma
+\ref{spaces-chow-lemma-flat-pullback-proper-pushforward} による。
+第二の等式は、$T'$ が整であることを用いた Lemma
+\ref{spaces-chow-lemma-prepare-flat-pullback-cap-c1} による。
+第三の等式は、表示した図式が可換であることによる。
+右辺の逆像は
+$$
+[R(X) : R(Y)]q^*\text{div}_\mathcal{L}(s) =
+[R(T') : R(T)]\text{div}_{q^*\mathcal{L}}(q^*s)
+$$
+である。これは Lemma \ref{spaces-chow-lemma-prepare-flat-pullback-cap-c1}、
+$T$ が整であること、および等式
+$[R(T') : R(T)] = [R(X) : R(Y)]$ から従う。
+この等式の証明は省略する
+（Lemma \ref{spaces-chow-lemma-flat-pullback-proper-pushforward} から従うが、
+それはこの等式を証明する愚かな方法だろう）。
+したがって、射 $h : T' \to T$、可逆加群
+% P10-E0071
+$q^\mathcal{L}$、および切断 $q^*s$ について
+補題を証明すれば十分である。
+$q^*\mathcal{L} = \mathcal{O}_T$ なので、次の段落で扱う
+$\mathcal{L} \cong \mathcal{O}$ の場合に帰着する。
+
+\medskip\noindent
+$\mathcal{L} = \mathcal{O}_Y$ と仮定する。この場合、$s$ は
+% P10-E0592
+有理関数 $g \in R(Y)$ に対応する。埋め込み
+$R(Y) \subset R(X)$ を用いると、
+% P10-E0593
+$g$ を $X$ 上の有理関数とみなすことができ、示そうとしているのは単に
+$$
+f_*\left(\text{div}_X(g)\right) = [R(X) : R(Y)]\text{div}_Y(g).
+$$
+である。Lemma \ref{spaces-chow-lemma-proper-pushforward-alteration} の結果と
+比較すると、$g \in R(Y)^*$ なので
+$\text{Nm}_{R(X)/R(Y)}(g) = g^{[R(X) : R(Y)]}$ であり、
+この等式が成り立つことが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-pushforward-cap-c1}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$p : X \to Y$ を固有射とする。
+$\alpha \in Z_{k + 1}(X)$ とする。
+$\mathcal{L}$ を $Y$ 上の可逆層とする。このとき
+$$
+p_*(c_1(p^*\mathcal{L}) \cap \alpha) = c_1(\mathcal{L}) \cap p_*\alpha
+$$
+が $\CH_k(Y)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$p$ は、任意の整閉部分空間 $W \subset X$ に対して
+写像 $p|_W : W \to Y$ が閉埋め込みとなるという性質をもつと仮定する。
+このとき、$c_1(\mathcal{L})$ とのキャップ積の定義により
+補題が成り立つ。
+
+\medskip\noindent
+この注意を用いて特殊な場合に帰着する。
+$n_i \not = 0$ かつ $W_i$ が相異なるものとして
+$\alpha = \sum n_i[W_i]$ と書く。
+$W'_i \subset Y$ を、Lemma \ref{spaces-chow-lemma-proper-image} における
+$W_i$ の「像」とする。図式
+$$
+\xymatrix{
+X' = \coprod W_i \ar[r]_-q \ar[d]_{p'} & X \ar[d]^p \\
+Y' = \coprod W'_i \ar[r]^-{q'} & Y.
+}
+$$
+を考える。$\{W_i\}$ は $X$ 上で局所有限であり、$p$ は固有なので、
+$\{W'_i\}$ は $Y$ 上で局所有限であり、
+$q, q', p'$ も固有射である。
+% P10-E0072
+$\sum n_i[W_i]$ をさらに $k$-サイクル
+$\alpha' \in Z_k(X')$ とみなすこともできる。
+明らかに $q_*\alpha' = \alpha$ である。また
+$q_*(c_1(q^*p^*\mathcal{L}) \cap \alpha')
+= c_1(p^*\mathcal{L}) \cap q_*\alpha'$
+および
+$(q')_*(c_1((q')^*\mathcal{L}) \cap p'_*\alpha') =
+c_1(\mathcal{L}) \cap q'_*p'_*\alpha'$
+が証明の最初の注意により成り立つ。
+したがって、射 $p'$ とサイクル $\sum n_i[W_i]$ に対して
+補題を証明すれば十分である。
+これは明らかに、$X$, $Y$ は整、
+% P10-E0073
+$f : X \to Y$ は支配的、かつ $\alpha = [X]$ であると
+仮定してよいことを意味する。この場合、結果は Lemma
+\ref{spaces-chow-lemma-equal-c1-as-cycles} から従う。
+\end{proof}
+
+\section{鍵となる公式}
+\label{spaces-chow-section-key}
+
+\noindent
+本節は Chow Homology, Section \ref{chow-section-key} の類似である。
+読者にはまずその場合の証明を読むことを強く勧める。
+
+\medskip\noindent
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ は整で $\dim_\delta(X) = n$ であると仮定する。
+$\mathcal{L}$ と $\mathcal{N}$ を可逆 $\mathcal{O}_X$-加群とする。
+$s$ を $\mathcal{L}$ の非零有理型切断とし、
+$t$ を $\mathcal{N}$ の非零有理型切断とする。
+$Z \subset X$ を素因子とし、その生成点を $\xi \in |Z|$ とする。
+Spaces over Fields, Section
+\ref{spaces-over-fields-section-c1} で用いた射
+$$
+c_\xi : \Spec(\mathcal{O}_{X, \xi}^h) \longrightarrow X
+$$
+を考える。$\mathcal{L}_\xi$ と $\mathcal{N}_\xi$ で、
+$c_\xi$ による $\mathcal{L}$ と $\mathcal{N}$ の逆像を表す。
+しばしば $\mathcal{L}_\xi$ と $\mathcal{N}_\xi$ を、
+それらが与える階数 $1$ の自由
+$\mathcal{O}_{X, \xi}^h$-加群とみなす。
+$s$、それぞれ $t$ の逆像は、
+$\mathcal{L}_\xi$、それぞれ $\mathcal{N}_\xi$ の
+正則有理型切断であることに注意する。
+
+\medskip\noindent
+$Z_i \subset X$, $i \in I$ を、次の性質をもつ素因子の
+局所有限集合とする。$Z \not \in \{Z_i\}$ ならば、
+$s$ は $\mathcal{L}_\xi$ の生成元であり、
+$t$ は $\mathcal{N}_\xi$ の生成元である。
+このような集合は Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-divisor-meromorphic-locally-finite}
+により存在する。このとき
+$$
+\text{div}_\mathcal{L}(s) = \sum \text{ord}_{Z_i, \mathcal{L}}(s) [Z_i]
+$$
+であり、同様に
+$$
+\text{div}_\mathcal{N}(t) = \sum \text{ord}_{Z_i, \mathcal{N}}(t) [Z_i]
+$$
+である。さらに定義を展開すると、各 $i$ に対して生成元
+$s_i \in \mathcal{L}_{\xi_i}$ と
+$t_i \in \mathcal{N}_{\xi_i}$ を選ぶ。
+ここで $\xi_i$ は $Z_i$ の生成点である。このとき
+$$
+s = f_i s_i
+\quad\text{および}\quad
+t = g_i t_i
+$$
+と書ける。ここで $f_i, g_i$ は全分数環
+$Q(\mathcal{O}_{X, \xi_i}^h)$ の可逆元である。
+$B_i = \mathcal{O}_{X, \xi_i}^h$ と略記する。写像
+$$
+\text{ord}_{B_i} : Q(B_i)^* \longrightarrow \mathbf{Z},\quad
+a/b \longmapsto
+\text{length}_{B_i}(B_i/aB_i) - \text{length}_{B_i}(B_i/bB_i)
+$$
+と表すことにする。言い換えると、一時的に Algebra, Definition
+\ref{algebra-definition-ord} を、これらの次元 $1$ の
+被約 Noether 局所環へ拡張している。
+定義により
+$$
+\text{ord}_{Z_i, \mathcal{L}}(s) = \text{ord}_{B_i}(f_i)
+\quad\text{および}\quad
+\text{ord}_{Z_i, \mathcal{N}}(t) = \text{ord}_{B_i}(g_i)
+$$
+である。$\xi_i$ は $Z_i$ の生成点なので、
+剰余体 $\kappa(\xi_i)$ は $Z_i$ の関数体である。
+さらに $\kappa(\xi_i)$ は $B_i$ の剰余体である。
+Decent Spaces, Lemma
+\ref{decent-spaces-lemma-residue-field-henselian-local-ring}
+を参照せよ。$t_i$ は $\mathcal{N}_{\xi_i}$ の生成元なので、
+ファイバー
+$\mathcal{N}_{\xi_i} \otimes_{B_i} \kappa(\xi_i)$ におけるその像は、
+$\mathcal{N}|_{Z_i}$ の非零有理型切断である。
+この像を $t_i|_{Z_i}$ と表す。定義から
+$$
+c_1(\mathcal{N}) \cap \text{div}_\mathcal{L}(s) =
+\sum \text{ord}_{B_i}(f_i)
+(Z_i \to X)_*\text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i})
+$$
+が従い、同様に
+$$
+c_1(\mathcal{L}) \cap \text{div}_\mathcal{N}(t) =
+\sum \text{ord}_{B_i}(g_i)
+(Z_i \to X)_*\text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i})
+$$
+が $\CH_{n - 2}(X)$ において成り立つ。
+これら二つのサイクルの間に有理同値を見つける。
+そのため、tame 記号
+$$
+\partial_{B_i}(f_i, g_i) \in \kappa(\xi_i)^* = R(Z_i)^*
+$$
+を考える。Chow Homology, Section
+\ref{chow-section-tame-symbol} を参照せよ。
+
+\begin{lemma}[鍵となる公式]
+\label{spaces-chow-lemma-key-formula}
+上の状況において、サイクル
+$$
+\sum
+(Z_i \to X)_*\left(
+\text{ord}_{B_i}(f_i) \text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i}) -
+\text{ord}_{B_i}(g_i) \text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) \right)
+$$
+はサイクル
+$$
+\sum (Z_i \to X)_*\text{div}(\partial_{B_i}(f_i, g_i))
+$$
+に等しい。
+\end{lemma}
+
+\begin{proof}
+証明の方針は次のとおりである。まず
+$\mathcal{L}$ と $\mathcal{N}$ が自明な可逆加群である場合に帰着し、
+次に局所自明化の選択を変更し、最後に \'etale 局所化を用いて
+スキームの場合に帰着する\footnote{直ちに \'etale 局所化を
+適用すれば、より短い証明が得られる可能性がある。}。
+
+\medskip\noindent
+第一段階。$q : T \to X$ を Lemma
+\ref{spaces-chow-lemma-Gm-torsor} で構成された射とする。
+同補題に述べた性質を以後断りなくすべて用いる。
+特に、$q$ で引き戻した後にサイクルが等しいことを示せば十分である。
+$s'$ と $t'$ で、$s$ と $t$ の $q^*\mathcal{L}$ と
+$q^*\mathcal{N}$ の有理型切断への逆像を表す。
+$Z'_i = q^{-1}(Z_i)$ と表し、
+$\xi'_i \in |Z'_i|$ でその生成点を表し、
+$B'_i = \mathcal{O}_{T, \xi'_i}^h$ と表す。
+$\mathcal{L}_{\xi'_i}$ と $\mathcal{N}_{\xi'_i}$ で、
+$\mathcal{L}$ と $\mathcal{N}$ の $\Spec(B'_i)$ への逆像を表す。
+可換図式
+$$
+\xymatrix{
+\Spec(B'_i) \ar[r]_-{c_{\xi'_i}} \ar[d] & T \ar[d]^q \\
+\Spec(B_i) \ar[r]^-{c_{\xi_i}} & X
+}
+$$
+があることを思い出す。Decent Spaces, Remark
+\ref{decent-spaces-remark-functoriality-henselian-local-ring}
+を参照せよ。
+$s'_i$ と $t'_i$ で、$\mathcal{L}_{\xi'_i}$ と
+$\mathcal{N}_{\xi'_i}$ の生成元である $s_i$ と $t_i$ の逆像を表す。
+このとき
+$$
+s' = f'_i s'_i
+\quad\text{および}\quad
+t' = g'_i t'_i
+$$
+である。ここで $f'_i$ と $g'_i$ は、
+$B_i \to B'_i$ が誘導する写像 $Q(B_i) \to Q(B'_i)$
+による $f_i, g_i$ の像である。Algebra, Lemma
+\ref{algebra-lemma-pullback-module} により
+$$
+\text{ord}_{B_i}(f_i) = \text{ord}_{B'_i}(f'_i)
+\quad\text{および}\quad
+\text{ord}_{B_i}(g_i) = \text{ord}_{B'_i}(g'_i)
+$$
+である。$q : Z'_i \to Z_i$ に Lemma
+\ref{spaces-chow-lemma-prepare-flat-pullback-cap-c1} を適用すると
+$$
+q^*\text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i}) =
+\text{div}_{q^*\mathcal{N}|_{Z'_i}}(t'_i|_{Z'_i})
+\quad\text{および}\quad
+q^*\text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) =
+\text{div}_{q^*\mathcal{L}|_{Z'_i}}(s'_i|_{Z'_i})
+$$
+を得る。これで、補題の主張の第一のサイクルが、
+$s', t', Z'_i, s'_i, t'_i$ に対応するサイクルへ引き戻されることが
+すでに分かる。第二のサイクルについても同じことが成り立つことを見るには、
+Chow Homology, Lemma
+\ref{chow-lemma-tame-symbol-formally-smooth} により
+$$
+\partial_{B_i}(f_i, g_i) \mapsto
+\partial_{B'_i}(f'_i, g'_i)
+\quad\text{を介して}\quad
+\kappa(\xi_i) \to \kappa(\xi'_i)
+$$
+であることに注意する。したがって、先と同じ補題により
+$$
+q^*\text{div}(\partial_{B_i}(f_i, g_i)) =
+\text{div}(\partial_{B'_i}(f'_i, g'_i))
+$$
+である。$q^*\mathcal{L} \cong \mathcal{O}_T$ なので、
+$\mathcal{L}$ が自明である場合に等式を証明すれば十分である。
+$\mathcal{L}$ と $\mathcal{N}$ の役割を交換すると、
+同様に $\mathcal{N}$ が自明であると仮定してよい。
+これで第一段階の証明が完了する。
+
+\medskip\noindent
+第二段階。$\mathcal{L} = \mathcal{O}_X$ かつ
+$\mathcal{N} = \mathcal{O}_X$ と仮定する。
+$1$ で $\mathcal{L}$ の自明化切断を表す。
+このとき、ある単元 $u \in B_i$ に対して
+$s_i = u \cdot 1$ である。$s_i$ を $1$ で置き換えたときに
+何が起こるかを調べる。このとき $f_i$ は $u f_i$ に置き換わる。
+したがって補題の第一の式の第一部分は変わらず、
+第二部分には
+$$
+\text{ord}_{B_i}(g_i)\text{div}(u|_{Z_i})
+$$
+を加える。ここで $u|_{Z_i}$ は Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-divisor-meromorphic-well-defined}
+による剰余体における $u$ の像である。
+第二の式には、tame 記号の双線形性により
+$$
+\text{div}(\partial_{B_i}(u, g_i))
+$$
+を加える。これらの項は、Chow Homology, Equation
+(\ref{chow-item-normalization}) で与えられた
+tame 記号の性質により一致する。
+
+\medskip\noindent
+$Y \subset X$ を $\dim_\delta(Y) = n - 2$ を満たす
+整閉部分空間とする。
+% P10-E0074
+補題の二つのサイクルにおける $Y$ の係数が同じであることを示すため、
+前段落と同様に $s_i$ を $1$ で置き換えてよい。
+まったく同じように、$t_i$ を $1$ で置き換えてよいことが分かる。
+$Y \subset Z_i$ を満たす $Z_i$ は有限個しかないので、
+これらすべての $Z_i$ に対して $s_i = 1$ かつ $t_i = 1$
+であると仮定してよい。
+
+\medskip\noindent
+第三段階。ここでは、$\dim_\delta(Y) = n - 2$ を満たす
+整閉部分空間 $Y$ に対して、補題のサイクルにおける $Y$ の係数が
+一致することを証明する。さらに
+$\mathcal{L} = \mathcal{O}_X$ かつ
+$\mathcal{N} = \mathcal{O}_X$ であり、
+$Y \subset Z_i$ を満たすすべての $Z_i$ に対して
+$s_i = 1$ かつ $t_i = 1$ であると仮定する。
+$X$ をより小さい開部分空間で置き換えると、実際にはすべての $i$ に対して
+$s_i$ と $t_i$ が $1$ に等しいと仮定してよい。
+この場合、第一のサイクルは零である。
+第二のサイクルにおける $Y$ の係数も零であることを示すのが課題である。
+
+\medskip\noindent
+まず、$\mathcal{L} = \mathcal{O}_X$ かつ
+$\mathcal{N} = \mathcal{O}_X$ なので、$s, t$ を
+$X$ 上の有理関数 $f, g$ とみなすことができ、実際そうみなす。
+$s_i$ と $t_i$ は $1$ に等しいので、すべての $i$ に対して、
+$f_i$、それぞれ $g_i$ は $Q(B_i)$ における
+$f$、それぞれ $g$ の像である。
+$\zeta \in |Y|$ を生成点とする。\'Etale 近傍
+$$
+(U, u) \longrightarrow (X, \zeta)
+$$
+を選び、$Y' = \overline{\{u\}} \subset U$ と表す。
+\'Etale 射は平坦なので、$f$ と $g$ を $U$ 上の
+正則有理型関数に引き戻せる。これらも $f$ と $g$ と表す。
+各素因子 $Y \subset Z \subset X$ に対して、
+スキーム $Z \times_X U$ は $U$ の素因子の合併である。
+逆に、素因子 $Y' \subset Z' \subset U$ が与えられると、
+$Z'$ が $Z \times_X U$ の成分となるような素因子
+$Y \subset Z \subset X$ が存在する。
+このような対 $(Z, Z')$ が与えられたとき、環準同型
+$$
+\mathcal{O}_{X, \xi}^h \to \mathcal{O}_{U, \xi'}^h
+$$
+は \'etale である（実際、有限 \'etale である）。
+したがって Chow Homology, Lemma
+\ref{chow-lemma-tame-symbol-formally-smooth} により
+$$
+\partial_{\mathcal{O}_{X, \xi}^h}(f, g) \mapsto
+\partial_{\mathcal{O}_{U, \xi'}^h}(f, g)
+\quad\text{を介して}\quad
+\kappa(\xi) \to \kappa(\xi')
+$$
+である。ゆえに Lemma \ref{spaces-chow-lemma-etale-pullback-principal-divisor}
+を適用すると
+$$
+(Z \times_X U \to Z)^*\text{div}_Z(\partial_{\mathcal{O}_{X, \xi}^h}(f, g))
+=
+\sum\nolimits_{Z' \subset Z \times_X U}
+\text{div}_{Z'}(\partial_{\mathcal{O}_{U, \xi'}^h}(f, g))
+$$
+を得る。平坦逆像は閉埋め込みに沿う順像と可換なので
+（Lemma \ref{spaces-chow-lemma-flat-pullback-proper-pushforward}）、
+$$
+\sum\nolimits_{Z' \subset U} 
+(Z' \to U)_*\text{div}_{Z'}(\partial_{\mathcal{O}_{U, \xi'}^h}(f, g))
+$$
+における $Y'$ の係数が零であることを証明すれば十分である。
+
+\medskip\noindent
+$A = \mathcal{O}_{U, u}$ とおく。このとき $f, g \in Q(A)^*$ である。
+したがって、$a, b, c, d \in A$ を非零因子として
+$f = a/b$ および $g = c/d$ と書ける。
+上の式における $Y'$ の係数は
+% P10-E0075
+$$
+\sum\nolimits_{\mathfrak q \subset A\text{ 高さ }1}
+\text{ord}_{A/\mathfrak q}(\partial_{A_\mathfrak q}(f, g))
+$$
+である。$\partial_A$ の双線形性により、
+% P10-E0075
+$$
+\sum\nolimits_{\mathfrak q \subset A\text{ 高さ }1}
+\text{ord}_{A/\mathfrak q}(\partial_{A_\mathfrak q}(a, c))
+$$
+が零であること、および他の組
+$(a, d)$, $(b, c)$, $(b, d)$ についても同様であることを
+証明すれば十分である。これは Chow Homology, Lemma
+\ref{chow-lemma-key-nonzerodivisors} により真である。
+\end{proof}
+
+\section{可逆層との交叉と有理同値}
+\label{spaces-chow-section-commutativity}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-commutativity} の類似である。
+鍵となる補題を適用して、可逆層との交叉の基本的性質を得る。
+特に、$c_1(\mathcal{L}) \cap -$ が有理同値を介して因子化し、
+異なる可逆層に対するこれらの演算が可換であることを見る。
+
+\begin{lemma}
+\label{spaces-chow-lemma-commutativity-on-integral}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ は整で $\dim_\delta(X) = n$ であると仮定する。
+$\mathcal{L}$, $\mathcal{N}$ を $X$ 上の可逆層とする。
+$\mathcal{L}$ の非零有理型切断 $s$ と
+$\mathcal{N}$ の非零有理型切断 $t$ を選ぶ。
+$\alpha = \text{div}_\mathcal{L}(s)$ および
+$\beta = \text{div}_\mathcal{N}(t)$ とおく。このとき
+$$
+c_1(\mathcal{N}) \cap \alpha
+=
+c_1(\mathcal{L}) \cap \beta
+$$
+が $\CH_{n - 2}(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+鍵となる Lemma \ref{spaces-chow-lemma-key-formula} と
+その前の議論から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-factors}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を $X$ 上の可逆層とする。
+演算 $\alpha \mapsto c_1(\mathcal{L}) \cap \alpha$ は
+有理同値を介して因子化し、演算
+$$
+c_1(\mathcal{L}) \cap - : \CH_{k + 1}(X) \to \CH_k(X)
+$$
+を与える。
+\end{lemma}
+
+\begin{proof}
+$\alpha \in Z_{k + 1}(X)$ かつ $\alpha \sim_{rat} 0$ とする。
+Definition \ref{spaces-chow-definition-cap-c1} で定義された
+$c_1(\mathcal{L}) \cap \alpha$ が零であることを示さなければならない。
+Definition \ref{spaces-chow-definition-rational-equivalence} により、
+$\dim_\delta(W_j) = k + 2$ を満たす整閉部分空間の局所有限族
+$\{W_j\}$ と、有理関数 $f_j \in R(W_j)^*$ であって
+$$
+\alpha = \sum (i_j)_*\text{div}_{W_j}(f_j)
+$$
+を満たすものが存在する。$p : \coprod W_j \to X$ は固有射であり、
+したがって $\alpha = p_*\alpha'$ であることに注意する。
+ここで $\alpha' \in Z_{k + 1}(\coprod W_j)$ は
+主因子 $\text{div}_{W_j}(f_j)$ の和である。
+Lemma \ref{spaces-chow-lemma-pushforward-cap-c1} により
+$c_1(\mathcal{L}) \cap \alpha =
+p_*(c_1(p^*\mathcal{L}) \cap \alpha')$ である。
+したがって、各
+$c_1(\mathcal{L}|_{W_j}) \cap \text{div}_{W_j}(f_j)$
+が零であることを示せば十分である。
+言い換えると、$X$ は整で、ある $f \in R(X)^*$ に対して
+$\alpha = \text{div}_X(f)$ であると仮定してよい。
+
+\medskip\noindent
+$X$ は整で、ある $f \in R(X)^*$ に対して
+$\alpha = \text{div}_X(f)$ であると仮定する。
+% P10-E0077
+$f$ を可逆層 $\mathcal{N} = \mathcal{O}_X$ の
+正則有理型切断とみなせる。
+$\mathcal{L}$ の有理型切断 $s$ を選び、
+$\beta = \text{div}_\mathcal{L}(s)$ と表す。
+Lemma \ref{spaces-chow-lemma-commutativity-on-integral} により
+$$
+c_1(\mathcal{L}) \cap \alpha = c_1(\mathcal{O}_X) \cap \beta.
+$$
+である。しかし Lemma \ref{spaces-chow-lemma-c1-cap-additive} により、
+右辺は望むとおり $\CH_k(X)$ において零である。
+\end{proof}
+
+\noindent
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を $X$ 上の可逆層とする。
+$$
+c_1(\mathcal{L})^s \cap - : \CH_{k + s}(X) \to \CH_k(X)
+$$
+で演算 $c_1(\mathcal{L}) \cap - $ を表すことにする。
+これは Lemma \ref{spaces-chow-lemma-factors} により意味をもつ。
+% P10-E0076
+すべての $s \geq 0$ に対して、$c_1(\mathcal{L}^s \cap -$
+でこの演算の $s$ 回反復を表すことにする。
+
+\begin{lemma}
+\label{spaces-chow-lemma-cap-commutative}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$, $\mathcal{N}$ を $X$ 上の可逆層とする。
+任意の $\alpha \in \CH_{k + 2}(X)$ に対して
+$$
+c_1(\mathcal{L}) \cap c_1(\mathcal{N}) \cap \alpha
+=
+c_1(\mathcal{N}) \cap c_1(\mathcal{L}) \cap \alpha
+$$
+が $\CH_k(X)$ の元として成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\dim_\delta(Z_j) = k + 2$ を満たす整閉部分空間の局所有限族
+$Z_j \subset X$ に対して
+$\alpha = \sum m_j[Z_j]$ と書く。
+固有射 $p : \coprod Z_j \to X$ を考える。
+$\alpha' = \sum m_j[Z_j]$ を
+$\coprod Z_j$ 上の $(k + 2)$-サイクルとおく。
+Lemma \ref{spaces-chow-lemma-pushforward-cap-c1} を数回適用すると、
+$c_1(\mathcal{L}) \cap c_1(\mathcal{N}) \cap \alpha
+= p_*(c_1(p^*\mathcal{L}) \cap c_1(p^*\mathcal{N}) \cap \alpha')$
+および
+$c_1(\mathcal{N}) \cap c_1(\mathcal{L}) \cap \alpha
+= p_*(c_1(p^*\mathcal{N}) \cap c_1(p^*\mathcal{L}) \cap \alpha')$
+を得る。したがって、$X$ は整かつ $\alpha = [X]$ である場合に
+公式を証明すれば十分である。この場合、結果は Lemma
+\ref{spaces-chow-lemma-commutativity-on-integral} と定義から従う。
+\end{proof}
+
+\section{有効 Cartier 因子との交叉}
+\label{spaces-chow-section-intersecting-effective-Cartier}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-intersecting-effective-Cartier} の類似である。
+% P10-E0078
+動機については、その節の導入を読んでほしい。
+
+\medskip\noindent
+有効 Cartier 因子は、$\mathcal{L}$ が可逆層で $s$ が大域切断であるような
+対 $(\mathcal{L}, s)$ の同型類と $1$ 対 $1$ に対応することを思い出す。
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-characterize-OD} を参照せよ。
+$D$ が $(\mathcal{L}, s)$ に対応するならば、
+$\mathcal{L} = \mathcal{O}_X(D)$ である。
+本節を読む間、このことを念頭に置いてほしい。
+
+\begin{definition}
+\label{spaces-chow-definition-gysin-homomorphism}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+可逆層と大域切断 $s \in \Gamma(X, \mathcal{L})$ からなる対
+$(\mathcal{L}, s)$ を取る。
+$D = Z(s)$ を $s$ の零点軌跡とし、
+$i : D \to X$ で閉埋め込みを表す。
+各整数 $k$ に対し、（精密）{\it Gysin 準同型}
+$$
+i^* : Z_{k + 1}(X) \to \CH_k(D).
+$$
+を次の規則で定義する。
+\begin{enumerate}
+\item $\dim_\delta(W) = k + 1$ を満たす整閉部分空間
+$W \subset X$ が与えられたとき、次のように定義する。
+\begin{enumerate}
+\item $W \not \subset D$ ならば、
+$D$ 上の $k$-サイクルとして $i^*[W] = [D \cap W]_k$ とする。
+\item $W \subset D$ ならば、
+$i^*[W] = i'_*(c_1(\mathcal{L}|_W) \cap [W])$ とする。
+ここで $i' : W \to D$ は誘導される閉埋め込みである。
+\end{enumerate}
+\item 一般の $(k + 1)$-サイクル
+$\alpha = \sum n_j[W_j]$ に対して
+$$
+i^*\alpha = \sum n_j i^*[W_j]
+$$
+とおく。
+\item $D$ が有効 Cartier 因子ならば、
+類の $X$ 上の類への順像を
+$D \cdot \alpha = i_*i^*\alpha$ と表す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+実際、後で見るように、この Gysin 準同型 $i^*$ は
+非平坦逆像の一例とみなせる。そこで、類 $i^*\alpha$ を
+類 $\alpha$ の {\it 逆像} と非形式的に呼ぶことがある。
+
+\begin{remark}
+\label{spaces-chow-remark-on-cycles}
+$S$, $B$, $X$, $\mathcal{L}$, $s$, $i : D \to X$ を
+Definition \ref{spaces-chow-definition-gysin-homomorphism} のとおりとし、
+$\mathcal{L}|_D \cong \mathcal{O}_D$ と仮定する。
+この場合、$W \subset D$ ならば常に $i^*[W] = 0$ と要求することにより、
+サイクル上の標準写像
+$i^* : Z_{k + 1}(X) \to Z_k(D)$ を定義できる。
+これが可能であることは後で有用となる。
+\end{remark}
+
+\begin{remark}
+\label{spaces-chow-remark-pullback-pairs}
+$f : X' \to X$ を、Situation \ref{spaces-chow-situation-setup} における
+$B$ 上の良い代数空間の射とする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のような三つ組とする。
+このとき $\mathcal{L}' = f^*\mathcal{L}$,
+$s' = f^*s$, および $D' = X' \times_X D = Z(s')$ とおける。
+これにより可換図式
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+が得られ、$i^*$ と $(i')^*$ のさまざまな整合性を問うことができる。
+\end{remark}
+
+\begin{lemma}
+\label{spaces-chow-lemma-support-cap-effective-Cartier}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりとする。
+$\alpha$ を $X$ 上の $(k + 1)$-サイクルとする。このとき
+$i_*i^*\alpha = c_1(\mathcal{L}) \cap \alpha$ が
+$\CH_k(X)$ において成り立つ。特に、$D$ が有効 Cartier 因子ならば、
+$D \cdot \alpha = c_1(\mathcal{O}_X(D)) \cap \alpha$ である。
+\end{lemma}
+
+\begin{proof}
+$i_j : W_j \to X$ が $\dim_\delta(W_j) = k$ を満たす
+整閉部分空間であるとして、$\alpha = \sum n_j[W_j]$ と書く。
+% P10-E0079
+$D$ は $s$ の零点軌跡なので、$D \cap W_j$ は
+制限 $s|_{W_j}$ の零点軌跡である。
+したがって $W_j \not \subset D$ を満たす各 $j$ に対して、
+Lemma \ref{spaces-chow-lemma-geometric-cap} により
+$c_1(\mathcal{L}) \cap [W_j] = [D \cap W_j]_k$ である。
+ゆえに Definition \ref{spaces-chow-definition-cap-c1} により
+% P10-E0080
+$$
+c_1(\mathcal{L}) \cap \alpha
+=
+\sum\nolimits_{W_j \not \subset D} n_j[D \cap W_j]_k
++
+\sum\nolimits_{W_j \subset D}
+n_j i_{j, *}(c_1(\mathcal{L})|_{W_j}) \cap [W_j])
+$$
+が $\CH_k(X)$ において成り立つ。
+右辺は Definition \ref{spaces-chow-definition-gysin-homomorphism} による
+$D$ 上の類 $i^*\alpha$ の順像と項ごとに一致する。したがって従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-closed-in-X-gysin}
+% P10-E0595
+Situation \ref{spaces-chow-situation-setup} において、
+$f : X' \to X$ を $B$ 上の良い代数空間の固有射とする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりとする。
+Remark \ref{spaces-chow-remark-pullback-pairs} のように図式
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+を作る。$X'$ 上の任意の $(k + 1)$-サイクル $\alpha'$ に対して
+$i^*f_*\alpha' = g_*(i')^*\alpha'$ が $\CH_k(D)$ において成り立つ
+（$f_*$ はサイクルのレベルで定義されるので、これは意味をもつ）。
+\end{lemma}
+
+\begin{proof}
+% P10-E0081
+ある整閉部分空間 $W' \subset X'$ に対して
+$\alpha = [W']$ と仮定する。$W \subset X$ を、Lemma
+\ref{spaces-chow-lemma-proper-image} における $W'$ の「像」とする。
+$W' \not \subset D'$ の場合、$W \not \subset D$ であり、
+$$
+[W' \cap D']_k = \text{div}_{\mathcal{L}'|_{W'}}({s'|_{W'}})
+\quad\text{および}\quad
+[W \cap D]_k = \text{div}_{\mathcal{L}|_W}(s|_W)
+$$
+である。したがって Lemma \ref{spaces-chow-lemma-equal-c1-as-cycles} により、
+第一のサイクルの $f_*$ は第二のサイクルに等しい。
+ゆえに等式はサイクルとして成り立つ。
+$W' \subset D'$ の場合、$W \subset D$ であり、
+% P10-E0596
+$f_*(c_1(\mathcal{L}|_{W'}) \cap [W'])$ は Lemma
+\ref{spaces-chow-lemma-equal-c1-as-cycles} の第二の主張により
+$\CH_k(W)$ において
+$c_1(\mathcal{L}|_W) \cap [W]$ に等しい。
+Remark \ref{spaces-chow-remark-infinite-sums-rational-equivalences} により、
+一般の $\alpha'$ に対する結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-gysin-flat-pullback}
+% P10-E0595
+Situation \ref{spaces-chow-situation-setup} において、
+$f : X' \to X$ を $B$ 上の良い代数空間の相対次元 $r$ の
+平坦射とする。$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりとする。
+Remark \ref{spaces-chow-remark-pullback-pairs} のように図式
+$$
+\xymatrix{
+D' \ar[d]_g \ar[r]_{i'} & X' \ar[d]^f \\
+D \ar[r]^i & X
+}
+$$
+を作る。$X$ 上の任意の $(k + 1)$-サイクル $\alpha$ に対して
+% P10-E0082
+% P10-E0083
+$(i')^*f^*\alpha = g^*i^*\alpha'$ が
+$\CH_{k + r}(D)$ において成り立つ
+（$f^*$ はサイクルのレベルで定義されるので、これは意味をもつ）。
+\end{lemma}
+
+\begin{proof}
+ある整閉部分空間 $W \subset X$ に対して
+$\alpha = [W]$ と仮定する。
+$W' = f^{-1}(W) \subset X'$ とおく。
+$W \not \subset D$ の場合、$W' \not \subset D'$ であり、
+$$
+W' \cap D' = g^{-1}(W \cap D)
+$$
+が $D'$ の閉部分空間として成り立つ。
+したがって Lemma \ref{spaces-chow-lemma-pullback-coherent} により、
+等式はサイクルとして成り立つ。
+$W \subset D$ の場合、$W' \subset D'$ かつ
+$W' = g^{-1}(W)$ であり、$[W']_{k + 1 + r} = g^*[W]$ である。
+Lemma \ref{spaces-chow-lemma-flat-pullback-cap-c1} により、
+等式は $\CH_{k + r}(D')$ において成り立つ。
+Remark \ref{spaces-chow-remark-infinite-sums-rational-equivalences} により、
+% P10-E0082
+一般の $\alpha'$ に対する結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-easy-gysin}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりとする。
+$Z \subset X$ を、$\dim_\delta(Z) \leq k + 1$ を満たし、
+$D \cap Z$ が $Z$ 上の有効 Cartier 因子となる
+閉部分スキームとする。このとき
+$i^*([Z]_{k + 1}) = [D \cap Z]_k$ である。
+\end{lemma}
+
+\begin{proof}
+仮定は、$s|_Z$ が $\mathcal{L}|_Z$ の正則切断であることを意味する。
+したがって $D \cap Z = Z(s)$ であり、
+$$
+[D \cap Z]_k = \sum n_i [Z(s_i)]_k
+$$
+をサイクルとして得る。ここで $s_i = s|_{Z_i}$、
+$Z_i$ は $\delta$-次元 $k + 1$ の既約成分であり、
+$[Z]_{k + 1} = \sum n_i[Z_i]$ である。
+Lemma \ref{spaces-chow-lemma-prepare-geometric-cap} を参照せよ。
+$D \cap Z_i = Z(s_i)$ である。
+Gysin 写像の定義と比較すれば結論が従う。
+\end{proof}
+
+\section{Gysin 準同型}
+\label{spaces-chow-section-gysin}
+
+\noindent
+本節は Chow Homology, Section \ref{chow-section-gysin} の類似である。
+本節では鍵となる公式を用いて、Gysin 準同型が
+有理同値を介して因子化することを示す。
+% P10-E0084
+
+\begin{lemma}
+\label{spaces-chow-lemma-gysin-factors-general}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ は整であり、$n = \dim_\delta(X)$ であると仮定する。
+$i : D \to X$ を有効 Cartier 因子とする。
+$\mathcal{N}$ を可逆 $\mathcal{O}_X$-加群とし、
+$t$ を $\mathcal{N}$ の非零有理型切断とする。このとき
+$i^*\text{div}_\mathcal{N}(t) = c_1(\mathcal{N}) \cap [D]_{n - 1}$
+が $\CH_{n - 2}(D)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+ある $\delta$-次元 $n - 1$ の整閉部分空間 $Z_i \subset X$ を用いて
+$\text{div}_\mathcal{N}(t) = \sum \text{ord}_{Z_i, \mathcal{N}}(t)[Z_i]$
+と書く。族 $\{Z_i\}$ は局所有限であり、
+$U = X \setminus \bigcup Z_i$ 上で
+$t \in \Gamma(U, \mathcal{N}|_U)$ は生成元であり、さらに
+$D$ の各既約成分は $Z_i$ のいずれかであると仮定してよい。
+Spaces over Fields, Lemmas
+\ref{spaces-over-fields-lemma-components-locally-finite},
+\ref{spaces-over-fields-lemma-divisor-locally-finite}, and
+\ref{spaces-over-fields-lemma-divisor-meromorphic-locally-finite}
+を参照せよ。
+
+\medskip\noindent
+$\mathcal{L} = \mathcal{O}_X(D)$ とおく。
+標準切断を
+$s \in \Gamma(X, \mathcal{O}_X(D)) = \Gamma(X, \mathcal{L})$
+と表す。Section \ref{spaces-chow-section-key} の議論を現在の状況に適用する。
+各 $i$ に対して、その生成点を $\xi_i \in |Z_i|$ とし、
+$B_i = \mathcal{O}_{X, \xi_i}^h$ とおく。各 $i$ に対し、
+$B_i$ 上で $\mathcal{L}_{\xi_i}$ の生成元 $s_i$ と
+$\mathcal{N}_{\xi_i}$ の生成元 $t_i$ を選ぶ。ただし、
+$Z_i \not \subset D$ のときには $s_i = s$ を選ぶものとする。
+$s = f_i s_i$ および $t = g_i t_i$ と書く。ただし
+$f_i, g_i \in B_i$ である。
+% P10-E0085
+このとき $\text{ord}_{Z_i, \mathcal{N}}(t) = \text{ord}_{B_i}(g_i)$
+である。一方、$f_i \in B_i$ であり、$s_i$ の選び方により
+$$
+[D]_{n - 1} = \sum \text{ord}_{B_i}(f_i)[Z_i]
+$$
+となる。サイクルとして
+$$
+i^*\text{div}_\mathcal{N}(t) =
+\sum \text{ord}_{B_i}(g_i) \text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i})
+$$
+であると主張する。より正確には、右辺は左辺を表すサイクルである。
+実際、これは $\text{div}_\mathcal{N}(t)$ の公式と、
+$Z_i \not \subset D$ のとき
+$\text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) = [Z(s_i|_{Z_i})]_{n - 2} =
+[Z_i \cap D]_{n - 2}$
+であることから明らかである。この場合には
+$s_i|_{Z_i} = s|_{Z_i}$ が正則切断だからである。
+Lemma \ref{spaces-chow-lemma-compute-c1} を参照せよ。同様に、
+$$
+c_1(\mathcal{N}) \cap [D]_{n - 1} =
+\sum \text{ord}_{B_i}(f_i) \text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i})
+$$
+である。鍵となる公式（Lemma \ref{spaces-chow-lemma-key-formula}）は、サイクルの等式
+$$
+\sum \left(
+\text{ord}_{B_i}(f_i) \text{div}_{\mathcal{N}|_{Z_i}}(t_i|_{Z_i}) -
+\text{ord}_{B_i}(g_i) \text{div}_{\mathcal{L}|_{Z_i}}(s_i|_{Z_i}) \right) =
+\sum \text{div}_{Z_i}(\partial_{B_i}(f_i, g_i))
+$$
+を与える。$Z_i \not \subset D$ ならば $f_i = 1$ であり、したがって
+$\text{div}_{Z_i}(\partial_{B_i}(f_i, g_i)) = 0$ である。
+ゆえに $D$ 上で、$i^*\text{div}_\mathcal{N}(t)$ と
+$c_1(\mathcal{N}) \cap [D]_{n - 1}$ を表す上記の具体的なサイクルの間に
+有理同値を得る。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-gysin-factors}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりとする。
+Gysin 準同型は有理同値を介して因子化し、写像
+$i^* : \CH_{k + 1}(X) \to \CH_k(D)$ を与える。
+\end{lemma}
+
+\begin{proof}
+$\alpha \in Z_{k + 1}(X)$ とし、$\alpha \sim_{rat} 0$ と仮定する。
+これは、$\delta$-次元 $k + 2$ の整閉部分空間
+$W_j \subset X$ の局所有限族と $f_j \in R(W_j)^*$ が存在して、
+$\alpha = \sum i_{j, *}\text{div}_{W_j}(f_j)$
+となることを意味する。$X' = \coprod W_i$ とおき、
+% P10-E0086
+Remark \ref{spaces-chow-remark-pullback-pairs} の図式
+$$
+\xymatrix{
+D' \ar[d]_q \ar[r]_{i'} & X' \ar[d]^p \\
+D \ar[r]^i & X
+}
+$$
+を考える。$X' \to X$ は固有なので、Lemma
+\ref{spaces-chow-lemma-closed-in-X-gysin} により $i^*p_* = q_*(i')^*$ である。
+$q_*$ は有理同値を介して因子化することが分かっているので
+（Lemma \ref{spaces-chow-lemma-proper-pushforward-rational-equivalence}）、
+$X'$ 上の $\alpha' = \sum \text{div}_{W_j}(f_j)$ に対して
+結果を証明すれば十分である。明らかに、これは $X$ が整であり、
+ある $f \in R(X)^*$ に対して $\alpha = \text{div}(f)$ である場合に帰着する。
+
+\medskip\noindent
+$X$ が整であり、ある $f \in R(X)^*$ に対して
+$\alpha = \text{div}(f)$ であると仮定する。
+$X = D$ ならば、$i^*\alpha$ は $c_1(\mathcal{L}) \cap \alpha$ に等しい。
+これは Lemma \ref{spaces-chow-lemma-factors} により零と有理同値である。
+$D \not = X$ ならば、Lemma \ref{spaces-chow-lemma-gysin-factors-general} により
+$i^*\text{div}_X(f)$ は $\CH_k(D)$ において
+$c_1(\mathcal{O}_D) \cap [D]_{n - 1}$ に等しい。
+% P10-E0087
+もちろん、$c_1(\mathcal{O}_D)$ との交叉は零写像である。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-gysin-commutes-cap-c1}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりの三つ組とする。
+$\mathcal{N}$ を可逆 $\mathcal{O}_X$-加群とする。このとき
+$i^*(c_1(\mathcal{N}) \cap \alpha) = c_1(i^*\mathcal{N}) \cap i^*\alpha$
+が $\CH_{k - 2}(D)$ において、すべての
+$\alpha \in \CH_k(Z)$ に対して成り立つ。
+% P10-E0088
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-chow-lemma-gysin-factors} とまったく同じ証明により、これは Lemmas
+\ref{spaces-chow-lemma-pushforward-cap-c1},
+\ref{spaces-chow-lemma-cap-commutative}, and
+\ref{spaces-chow-lemma-gysin-factors-general}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-gysin-commutes-gysin}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$(\mathcal{L}, s, i : D \to X)$ および
+$(\mathcal{L}', s', i' : D' \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりの二つの三つ組とする。
+このとき、図式
+$$
+\xymatrix{
+\CH_k(X) \ar[r]_{i^*} \ar[d]_{(i')^*} & \CH_{k - 1}(D) \ar[d] \\
+\CH_{k - 1}(D') \ar[r] & \CH_{k - 2}(D \cap D')
+}
+$$
+は可換である。ここで各写像は Gysin 写像である。
+\end{lemma}
+
+\begin{proof}
+$j : D \cap D' \to D$ および $j' : D \cap D' \to D'$ を、
+$(\mathcal{L}|_{D'}, s|_{D'}$ および
+$(\mathcal{L}'_D, s|_D)$ に対応する閉埋め込みとする。
+% P10-E0089
+すべての $\alpha \in \CH_k(X)$ に対して
+$(j')^*i^*\alpha = j^* (i')^*\alpha$ であることを示さなければならない。
+$W \subset X$ を次元 $k$ の整閉部分スキームとする。
+% P10-E0090
+$\alpha = [W]$ の場合に等式を証明する。
+すると一般の場合は、Remark
+\ref{spaces-chow-remark-infinite-sums-rational-equivalences} の観察
+（および以下で得られる有理同値の具体的な形）から従う。
+$\alpha = [W]$ に対する等式を鍵となる公式から導く。
+
+\medskip\noindent
+$\sigma$ を $\mathcal{L}|_W$ の非零有理型切断とし、
+$W \not \subset D$ ならば $s|_W$ に等しいものとする。
+$\sigma'$ を $\mathcal{L}'|_W$ の非零有理型切断とし、
+$W \not \subset D'$ ならば $s'|_W$ に等しいものとする。
+Section \ref{spaces-chow-section-key} の議論と同様に
+$$
+\text{div}_{\mathcal{L}|_W}(\sigma) =
+\sum \text{ord}_{Z_i, \mathcal{L}|_W}(\sigma)[Z_i] = \sum n_i[Z_i]
+$$
+と書き、同様に
+$$
+\text{div}_{\mathcal{L}'|_W}(\sigma') =
+\sum \text{ord}_{Z_i, \mathcal{L}'|_W}(\sigma')[Z_i] = \sum n'_i[Z_i]
+$$
+と書く。$n_i \not = 0$ ならば $Z_i \subset D$ であり、
+$n'_i \not = 0$ ならば $Z'_i \subset D'$ である。
+% P10-E0091
+各 $i$ に対し、$\xi_i \in |Z_i|$ を生成点とする。
+Section \ref{spaces-chow-section-key} と同様に、各 $i$ に対して
+$\sigma_i \in \mathcal{L}_{\xi_i}$、それぞれ
+$\sigma'_i \in \mathcal{L}'_{\xi_i}$ を選ぶ。これらは
+$B_i = \mathcal{O}_{W, \xi_i}^h$ 上で生成元であり、
+$Z_i \not \subset D$、それぞれ $Z_i \not \subset D'$ ならば、
+$s$、それぞれ $s'$ の像に等しいものとする。
+$\sigma = f_i \sigma_i$ および $\sigma' = f'_i\sigma'_i$ と書けば、
+$n_i = \text{ord}_{B_i}(f_i)$ および
+$n'_i = \text{ord}_{B_i}(f'_i)$ である。
+定義から、サイクルとして
+$$
+(j')^*i^*[W] =
+\sum \text{ord}_{B_i}(f_i) \text{div}_{\mathcal{L}'|_{Z_i}}(\sigma'_i|_{Z_i})
+$$
+であり、また
+$$
+j^*(i')^*[W] =
+\sum \text{ord}_{B_i}(f'_i) \text{div}_{\mathcal{L}|_{Z_i}}(\sigma_i|_{Z_i})
+$$
+である。鍵となる公式（Lemma \ref{spaces-chow-lemma-key-formula}）は、サイクルの等式
+$$
+\sum \left(
+\text{ord}_{B_i}(f_i) \text{div}_{\mathcal{L}'|_{Z_i}}(\sigma'_i|_{Z_i}) -
+\text{ord}_{B_i}(f'_i) \text{div}_{\mathcal{L}|_{Z_i}}(\sigma_i|_{Z_i})
+\right) =
+\sum \text{div}_{Z_i}(\partial_{B_i}(f_i, f'_i))
+$$
+を与える。$Z_i \not \subset D \cap D'$ ならば、この場合は
+$f_i = 1$ または $f'_i = 1$ なので、
+$\text{div}_{Z_i}(\partial_{B_i}(f_i, f'_i)) = 0$ である。
+したがって $D \cap D' \cap W$ 上で、
+$(j')^*i^*[W]$ と $j^*(i')^*[W]$ を表す上記の具体的なサイクルの間に
+有理同値を得る。
+\end{proof}
+
+\section{相対有効 Cartier 因子}
+\label{spaces-chow-section-relative-effective-cartier}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-relative-effective-cartier} の類似である。
+相対有効 Cartier 因子は Divisors on Spaces, Section
+\ref{spaces-divisors-section-effective-Cartier-morphisms}
+で定義されている。ベクトル束の Chern 類に関する基本的な結果を
+展開するために必要なのは、周囲のスキームと有効 Cartier 因子の双方が
+基底上平坦である場合だけである。
+% P10-E0092
+
+\begin{lemma}
+\label{spaces-chow-lemma-relative-effective-cartier}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+% P10-E0597
+$p : X \to Y$ を相対次元 $r$ の平坦射とする。
+$i : D \to X$ を相対有効 Cartier 因子とする
+（Divisors on Spaces, Definition
+\ref{spaces-divisors-definition-relative-effective-Cartier-divisor}）。
+$\mathcal{L} = \mathcal{O}_X(D)$ とおく。
+任意の $\alpha \in \CH_{k + 1}(Y)$ に対して
+$$
+i^*p^*\alpha = (p|_D)^*\alpha
+$$
+が $\CH_{k + r}(D)$ において成り立ち、また
+$$
+c_1(\mathcal{L}) \cap p^*\alpha = i_* ((p|_D)^*\alpha)
+$$
+が $\CH_{k + r}(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$W \subset Y$ を $\delta$-次元 $k + 1$ の整閉部分空間とする。
+Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-relative-Cartier}
+により、$D \cap p^{-1}W$ は $p^{-1}W$ 上の有効 Cartier 因子である。
+Lemma \ref{spaces-chow-lemma-easy-gysin} により、次の最初の等号を得る。
+$$
+i^*[p^{-1}W]_{k + r + 1} =
+[D \cap p^{-1}W]_{k + r} =
+[(p|_D)^{-1}(W)]_{k + r}.
+$$
+$D \cap p^{-1}(W) = (p|_D)^{-1}(W)$ が代数空間として成り立つので、
+二つ目の等号も成り立つ。
+% P10-E0598
+定義により $p^*[W] = [p^{-1}W]_{k + r + 1}$ なので、
+$i^*p^*[W] = (p|_D)^*[W]$ がサイクルとして成り立つ。
+$\alpha = \sum m_j[W_j]$ が一般の $k + 1$-サイクルならば、
+$i^*\alpha = \sum m_j i^*p^*[W_j] = \sum m_j(p|_D)^*[W_j]$
+がサイクルとして成り立つ。
+% P10-E0093
+これで最初の等式が証明された。
+% P10-E0094
+最初の等式から二つ目を導くには、Lemma
+\ref{spaces-chow-lemma-support-cap-effective-Cartier} を適用すればよい。
+\end{proof}
+
+\section{アフィン束}
+\label{spaces-chow-section-affine-vector}
+
+\noindent
+本節は Chow Homology, Section \ref{chow-section-affine-vector} の類似である。
+アフィン束に対して、逆像写像は Chow 群上で全射である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-pullback-affine-fibres-surjective}
+Situation \ref{spaces-chow-situation-setup} において $X, Y/B$ を良いものとする。
+$f : X \to Y$ を $B$ 上の相対次元 $r$ の準コンパクトな平坦射とする。
+すべての $y \in Y$ に対して
+$X_y \cong \mathbf{A}^r_{\kappa(y)}$ であると仮定する。
+このとき、すべての $k \in \mathbf{Z}$ に対して
+$f^* : \CH_k(Y) \to \CH_{k + r}(X)$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$\alpha \in \CH_{k + r}(X)$ とする。
+$m_j \not = 0$ であり、$W_j$ が互いに異なる $\delta$-次元
+$k + r$ の整閉部分空間であるように
+$\alpha = \sum m_j[W_j]$ と書く。このとき族 $\{W_j\}$ は
+$X$ において局所有限である。Lemma \ref{spaces-chow-lemma-proper-image} のように、
+支配的射 $W_j \to Z_j$ が得られるような整閉部分空間
+$Z_j \subset Y$ を取る。任意の準コンパクト開部分集合
+$V \subset Y$ に対して、$f^{-1}(V) \cap W_j$ が空でないのは
+有限個の $j$ に限られる。したがって像の閉包からなる族 $Z_j$ は、
+$Y$ の整閉部分空間の局所有限族である。
+
+\medskip\noindent
+ファイバー積図式
+$$
+\xymatrix{
+f^{-1}(Z_j) \ar[r] \ar[d]_{f_j} & X \ar[d]^f \\
+Z_j \ar[r] & Y
+}
+$$
+を考える。ある $k$-サイクル $\beta_j \in \CH_k(Z_j)$ に対して
+$[W_j] \in Z_{k + r}(f^{-1}(Z_j))$ が $f_j^*\beta_j$ と
+有理同値であると仮定する。このとき
+$\beta = \sum m_j \beta_j$ は $Y$ 上の $k$-サイクルとなり、
+$f^*\beta = \sum m_j f_j^*\beta_j$ は $\alpha$ と有理同値になる
+（Remark \ref{spaces-chow-remark-infinite-sums-rational-equivalences} を参照）。
+これにより、$Y$ が整であり、$\alpha = [W]$ であって、ここでこれは
+$X$ の整閉部分スキームで $Y$ を支配するものである場合に帰着する。
+% P10-E0095
+特に、$d = \dim_\delta(Y) < \infty$ と仮定してよい。
+
+\medskip\noindent
+したがって $d = \dim_\delta(Y)$ に関する帰納法を使える。
+$d < k$ ならば $\CH_{k + r}(X) = 0$ であり、補題が成り立つ。
+これが帰納法の初期段階である。空でない開部分集合
+$V \subset Y$ を考える。ある $\beta \in Z_k(V)$ に対して
+$\alpha|_{f^{-1}(V)} = f^*\beta$ であることを示せたと仮定する。
+Lemma \ref{spaces-chow-lemma-exact-sequence-open} により、ある
+$\beta' \in Z_k(Y)$ に対して $\beta = \beta'|_V$ である。
+Lemma \ref{spaces-chow-lemma-restrict-to-open} の完全列
+$\CH_k(f^{-1}(Y \setminus V)) \to \CH_k(X) \to \CH_k(f^{-1}(V))$
+により、$\alpha - f^*\beta'$ は
+$\alpha' \in \CH_{k + r}(f^{-1}(Y \setminus V))$ という
+サイクルから来ることが分かる。
+% P10-E0096
+$\dim_\delta(Y \setminus V) < d$ なので、$d$ に関する帰納法により
+結論を得る。
+
+\medskip\noindent
+特に、$Y$ を適切な開部分集合で置き換えることにより、
+$Y$ は生成点 $\eta$ をもつスキームであると仮定してよい。
+同型 $Y_\eta \cong \mathbf{A}^r_\eta$ は空でない開部分集合
+$V \subset Y$ 上の同型に延長される。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-finite-presentation} を参照せよ。
+% P10-E0097
+これで、Chow Homology, Lemma
+\ref{chow-lemma-pullback-affine-fibres-surjective}
+であるスキームの場合に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-linebundle}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+$X$ 上の対応するベクトル束を
+$$
+p :
+L = \underline{\Spec}(\text{Sym}^*(\mathcal{L}))
+\longrightarrow
+X
+$$
+とする。このとき、すべての $k$ に対して
+$p^* : \CH_k(X) \to \CH_{k + 1}(L)$ は同型である。
+\end{lemma}
+
+\begin{proof}
+全射性については Lemma \ref{spaces-chow-lemma-pullback-affine-fibres-surjective}
+を参照せよ。$o : X \to L$ を $L \to X$ の零切断、すなわち
+$\mathcal{L}^{\otimes n}$ をすべての $n > 0$ に対して零へ写す全射
+$\text{Sym}^*(\mathcal{L}) \to \mathcal{O}_X$ に対応する射とする。
+このとき $p \circ o = \text{id}_X$ であり、$o(X)$ は $L$ 上の
+有効 Cartier 因子である。したがって Lemma
+\ref{spaces-chow-lemma-relative-effective-cartier} により
+$o^* \circ p^* = \text{id}$ であり、$p^*$ は単射でもあると結論できる。
+\end{proof}
+
+\section{双変交叉理論}
+\label{spaces-chow-section-bivariant}
+
+\noindent
+本節は Chow Homology, Section \ref{chow-section-bivariant} の類似である。
+ベクトル束の高次 Chern 類について適切に論じるため、\cite{FM} に従って
+次の概念を導入する。\cite[Theorem 17.1]{F} から、扱っている設定が
+異なるという但し書きを除けば、我々の定義は \cite{F} の定義と一致する。
+
+\begin{definition}
+\label{spaces-chow-definition-bivariant-class}
+\begin{reference}
+\cite[Definition 17.1]{F} と同様である。
+\end{reference}
+Situation \ref{spaces-chow-situation-setup} において、$f : X \to Y$ を
+$B$ 上の良い代数空間の射とする。$p \in \mathbf{Z}$ とする。
+{\it $f$ に対する次数 $p$ の双変類 $c$} とは、$B$ 上の良い代数空間の
+任意の射 $Y' \to Y$ と任意の $k$ に写像
+$$
+c \cap - : \CH_k(Y') \longrightarrow \CH_{k - p}(X')
+$$
+を対応させる規則であって、ここで $X' = Y' \times_Y X$ であり、
+次の条件を満たすものをいう。
+\begin{enumerate}
+\item $Y'' \to Y'$ が固有射ならば、$Y''$ 上のすべての $\alpha''$ に対して
+$c \cap (Y'' \to Y')_*\alpha'' = (X'' \to X')_*(c \cap \alpha'')$
+である。
+\item $Y'' \to Y'$ が $B$ 上の良い代数空間の射で、相対次元 $r$ の
+平坦射ならば、$Y'$ 上のすべての $\alpha'$ に対して
+% P10-E0098
+$c \cap (Y'' \to Y')^*\alpha' = (X'' \to X')^*(c \cap \alpha')$
+である。
+\item $(\mathcal{L}', s', i' : D' \to Y')$ が Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりであり、その $X'$ への逆像が
+$(\mathcal{N}', t', j' : E' \to X')$ ならば、$Y'$ 上のすべての
+$\alpha'$ に対して
+$c \cap (i')^*\alpha' = (j')^*(c \cap \alpha')$ である。
+\end{enumerate}
+$f$ に対する次数 $p$ の双変類全体を $A^p(X \to Y)$ と表す。
+\end{definition}
+
+\noindent
+Situation \ref{spaces-chow-situation-setup} において、$X \to Y$ および $Y \to Z$ を
+$B$ 上の良い代数空間の射とする。$p \in \mathbf{Z}$ とする。
+$A^p(X \to Y)$ がアーベル群であることは明らかである。
+さらに、結合的な双線型合成
+$$
+A^p(X \to Y) \times A^q(Y \to Z) \to A^{p + q}(X \to Z)
+$$
+があることも明らかである。我々が最も関心をもつのは
+$A^p(X) = A^p(X \to X)$ であり、これは常に $\text{id}_X$ に対する
+双変コホモロジー類を意味する。すなわち、Chern 類が属するのはここである。
+
+\begin{definition}
+\label{spaces-chow-definition-chow-cohomology}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$X$ の {\it Chow コホモロジー} とは、次数 $p$ の成分が
+$A^p(X \to X)$ である次数付き $\mathbf{Z}$-代数 $A^*(X)$ をいう。
+\end{definition}
+
+\noindent
+注意：$A^*(X)$ 上の $\mathbf{Z}$-代数構造が可換であるかは明らかでないが、
+Chern 類がその中心に属することを後で示す。
+
+\begin{remark}
+\label{spaces-chow-remark-pullback-cohomology}
+Situation \ref{spaces-chow-situation-setup} において、$f : X \to Y$ を
+$B$ 上の良い代数空間の射とする。このとき標準的な $\mathbf{Z}$-代数写像
+$A^*(Y) \to A^*(X)$ がある。実際、$c \in A^p(Y)$ と $X' \to X$
+が与えられたとき、$X'$ を $Y$ 上の代数空間とみなして得られる写像
+$c \cap - : \CH_k(X') \to \CH_{k - p}(X')$ により $f^*c$ を定義できる。
+\end{remark}
+
+\begin{lemma}
+\label{spaces-chow-lemma-cap-c1-bivariant}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。このとき、
+$f : X' \to X$ に
+$c_1(f^*\mathcal{L}) \cap - : \CH_k(X') \to \CH_{k - 1}(X')$
+を対応させる規則は次数 $1$ の双変類である。
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{spaces-chow-lemma-factors},
+\ref{spaces-chow-lemma-pushforward-cap-c1},
+\ref{spaces-chow-lemma-flat-pullback-cap-c1}, and
+\ref{spaces-chow-lemma-gysin-commutes-cap-c1}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-flat-pullback-bivariant}
+Situation \ref{spaces-chow-situation-setup} において、$f : X \to Y$ を
+$B$ 上の良い代数空間の射で、相対次元 $r$ の平坦射とする。
+このとき、$Y' \to Y$ に
+$(f')^* : \CH_k(Y') \to \CH_{k + r}(X')$ を対応させる規則は、
+ここで $X' = X \times_Y Y'$ として、次数 $-r$ の双変類である。
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{spaces-chow-lemma-flat-pullback-rational-equivalence},
+\ref{spaces-chow-lemma-compose-flat-pullback},
+\ref{spaces-chow-lemma-flat-pullback-proper-pushforward}, and
+\ref{spaces-chow-lemma-gysin-flat-pullback}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-gysin-bivariant}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$(\mathcal{L}, s, i : D \to X)$ を Definition
+\ref{spaces-chow-definition-gysin-homomorphism} のとおりの三つ組とする。
+このとき、$f : X' \to X$ に
+$(i')^* : \CH_k(X') \to \CH_{k - 1}(D')$ を対応させる規則は、
+ここで $D' = D \times_X X'$ として、次数 $1$ の双変類である。
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{spaces-chow-lemma-gysin-factors},
+\ref{spaces-chow-lemma-closed-in-X-gysin},
+\ref{spaces-chow-lemma-gysin-flat-pullback}, and
+\ref{spaces-chow-lemma-gysin-commutes-gysin}
+から従う。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-push-proper-bivariant}
+Situation \ref{spaces-chow-situation-setup} において、$f : X \to Y$ および
+$g : Y \to Z$ を $B$ 上の良い代数空間の射とする。
+$c \in A^p(X \to Z)$ とし、$f$ は固有であると仮定する。
+このとき、$X' \to X$ に
+$\alpha \longmapsto f_*(c \cap \alpha)$
+を対応させる規則は次数 $p$ の双変類である。
+% P10-E0099
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{spaces-chow-lemma-compose-pushforward},
+\ref{spaces-chow-lemma-flat-pullback-proper-pushforward}, and
+\ref{spaces-chow-lemma-closed-in-X-gysin}
+から従う。
+\end{proof}
+
+\noindent
+ここで、$c_1(\mathcal{L})$ が $A^*(X)$ の中心に属することを示す。
+
+\begin{lemma}
+\label{spaces-chow-lemma-c1-center}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。このとき
+$c_1(\mathcal{L}) \in A^1(X)$ はすべての元 $c \in A^p(X)$ と可換である。
+\end{lemma}
+
+\begin{proof}
+$p : L \to X$ を Lemma \ref{spaces-chow-lemma-linebundle} のとおりとし、
+$o : X \to L$ を零切断とする。$p^*\mathcal{L}^{\otimes -1}$ には、
+その零点軌跡がちょうど有効 Cartier 因子 $o(X)$ である標準切断がある。
+$\alpha \in \CH_k(X)$ とする。このとき Lemmas
+\ref{spaces-chow-lemma-flat-pullback-cap-c1} and
+\ref{spaces-chow-lemma-relative-effective-cartier}
+により
+$$
+p^*(c_1(\mathcal{L}^{\otimes -1}) \cap \alpha) =
+c_1(p^*\mathcal{L}^{\otimes -1}) \cap p^*\alpha =
+o_* o^* p^*\alpha
+$$
+である。$c$ は双変類なので
+\begin{align*}
+p^*(c \cap c_1(\mathcal{L}^{\otimes -1}) \cap \alpha)
+& =
+c \cap p^*(c_1(\mathcal{L}^{\otimes -1}) \cap \alpha) \\
+& =
+c \cap o_* o^* p^*\alpha \\
+& =
+o_* o^* p^*(c \cap \alpha) \\
+& =
+p^*(c_1(\mathcal{L}^{\otimes -1}) \cap c \cap \alpha)
+\end{align*}
+である（最後の等式は、上の結果を $c \cap \alpha$ に適用したものである）。
+上で引用した補題により $p^*$ は単射なので、
+$c_1(\mathcal{L}^{\otimes -1})$ は $A^*(X)$ の中心に属する。
+これで補題が証明された。
+\end{proof}
+
+\noindent
+ここに、双変類が零となるための判定法がある。
+% P10-E0100
+
+\begin{lemma}
+\label{spaces-chow-lemma-bivariant-zero}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$c \in A^p(X)$ とする。このとき $c$ が零であるための必要十分条件は、
+$X$ 上局所有限型なすべての整代数空間 $Y$ に対して
+$c \cap [Y] = 0$ が $\CH_*(Y)$ において成り立つことである。
+\end{lemma}
+
+\begin{proof}
+一方の向きは明らかである。逆に、$X$ 上局所有限型なすべての整代数空間
+$Y$ に対して $c \cap [Y] = 0$ が $\CH_*(Y)$ において成り立つと仮定する。
+$X' \to X$ を局所有限型とし、$\alpha \in \CH_k(X')$ とする。
+$Y_i \subset X'$ が $\delta$-次元 $k$ の整閉部分スキームの局所有限族となるように
+$\alpha = \sum n_i [Y_i]$ と書く。
+% P10-E0101
+このとき、$\alpha$ は $X'' = \coprod Y_i$ 上のサイクル
+$\alpha' = \sum n_i[Y_i]$ の、固有射 $X'' \to X'$ による順像である。
+双変類の性質により、$c \cap \alpha' = 0$ が
+$\CH_{k - p}(X'')$ において成り立つことを示せば十分である。
+定義から直ちに
+$\CH_{k - p}(X'') = \prod \CH_{k - p}(Y_i)$ である。
+射影写像 $\CH_{k - p}(X'') \to \CH_{k - p}(Y_i)$ は
+平坦逆像によって与えられる。$c$ との交叉は平坦逆像と可換なので、
+$c \cap [Y_i]$ が $\CH_{k - p}(Y_i)$ において零であることを
+示せば十分であり、これは仮定により成り立つ。
+\end{proof}
+
+\section{射影空間束公式}
+\label{spaces-chow-section-projective-space-bundle-formula}
+
+\noindent
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+階数 $r$ の有限局所自由 $\mathcal{O}_X$-加群
+$\mathcal{E}$ を考える。我々の規約では、
+{\it $\mathcal{E}$ に随伴する射影束} は $X$ 上の射
+$$
+\xymatrix{
+\mathbf{P}(\mathcal{E}) =
+\underline{\text{Proj}}_X(\text{Sym}^*(\mathcal{E}))
+\ar[r]^-\pi
+& X
+}
+$$
+であり、$\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$ は
+$\pi_*(\mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)) = \mathcal{E}$
+となるように正規化する。特に全射
+$\pi^*\mathcal{E} \to \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$
+がある。「$(\pi : P \to X, \mathcal{O}_P(1))$ を
+$\mathcal{E}$ に随伴する射影束とする」と非形式的に述べるとき、それは
+$P = \mathbf{P}(\mathcal{E})$ かつ
+$\mathcal{O}_P(1) = \mathcal{O}_{\mathbf{P}(\mathcal{E})}(1)$
+である状況を意味する。
+
+\begin{lemma}
+\label{spaces-chow-lemma-cap-projective-bundle}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群
+$\mathcal{E}$ で階数 $r$ のものとする。
+% P10-E0102
+$(\pi : P \to X, \mathcal{O}_P(1))$ を
+$\mathcal{E}$ に随伴する射影束とする。任意の
+$\alpha \in \CH_k(X)$ に対して、元
+$$
+\pi_*\left(
+c_1(\mathcal{O}_P(1))^s \cap \pi^*\alpha
+\right)
+\in
+\CH_{k + r - 1 - s}(X)
+$$
+は $s < r - 1$ ならば $0$ であり、$s = r - 1$ ならば
+$\alpha$ に等しい。
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$ を $\delta$-次元 $k$ の整閉部分空間とする。
+$\alpha = [Z]$ に対して補題を証明する。この特殊な場合から一般の場合を
+導く議論は省略する。ヒント：Remark
+\ref{spaces-chow-remark-infinite-sums-rational-equivalences} と同様に論ぜよ。
+
+\medskip\noindent
+$P_Z = P \times_X Z$ を基底変換とする。もちろん
+$\pi_Z : P_Z \to Z$ は $\mathcal{E}|_Z$ に随伴する射影束であり、
+$\mathcal{O}_P(1)$ は $P_Z$ 上の対応する可逆加群に引き戻される。
+$c_1(\mathcal{O}_P(1) \cap -$ および $\pi^*$ は Lemmas
+% P10-E0103
+\ref{spaces-chow-lemma-cap-c1-bivariant} and \ref{spaces-chow-lemma-flat-pullback-bivariant}
+により双変類なので、
+$$
+\pi_*\left(
+c_1(\mathcal{O}_P(1))^s \cap \pi^*[Z]
+\right)
+=
+(Z \to X)_*\pi_{Z, *}\left(
+c_1(\mathcal{O}_{P_Z}(1))^s \cap \pi_Z^*[Z]
+\right)
+$$
+である。したがって、$X$ が整で $\alpha  = [X]$ である場合に
+補題を証明すれば十分である。
+
+\medskip\noindent
+$X$ は整、$\dim_\delta(X) = k$、$\alpha = [X]$ と仮定する。
+$P$ は整で $\delta$-次元 $r - 1$ なので、$\pi^*[X] = [P]$ である。
+% P10-E0104
+$s < r - 1$ ならば、構成により
+$c_1(\mathcal{O}_P(1))^s \cap [P]$ は
+$(k + r - 1 - s)$-サイクルである。
+% P10-E0105
+したがって、次元の理由によりこのサイクルの順像は零である。
+
+\medskip\noindent
+$s = r - 1$ とする。上の議論により、ある
+$n \in \mathbf{Z}$ に対して
+$\pi_*(c_1(\mathcal{O}_P(1))^s \cap [P]) = n [X]$ である。
+$n = 1$ を示したい。上と同じ次元の理由により、$X$ を稠密な開部分集合で
+置き換えた後にこの結果を証明すれば十分である。
+したがって $X$ をスキームと仮定してよく、結果は Chow Homology, Lemma
+\ref{chow-lemma-cap-projective-bundle} から従う。
+\end{proof}
+
+\begin{lemma}[射影空間束公式]
+\label{spaces-chow-lemma-chow-ring-projective-bundle}
+$(S, \delta)$ を Situation \ref{spaces-chow-situation-setup} のとおりとする。
+$X$ を $S$ 上局所有限型とする。
+$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群
+$\mathcal{E}$ で階数 $r$ のものとする。
+% P10-E0106
+$(\pi : P \to X, \mathcal{O}_P(1))$ を
+$\mathcal{E}$ に随伴する射影束とする。写像
+$$
+\bigoplus\nolimits_{i = 0}^{r - 1}
+\CH_{k + i}(X)
+\longrightarrow
+\CH_{k + r - 1}(P),
+$$
+$$
+(\alpha_0, \ldots, \alpha_{r-1})
+\longmapsto
+\pi^*\alpha_0 +
+c_1(\mathcal{O}_P(1)) \cap \pi^*\alpha_1
++ \ldots +
+c_1(\mathcal{O}_P(1))^{r - 1} \cap \pi^*\alpha_{r-1}
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+$k \in \mathbf{Z}$ を固定する。まず写像が単射であることを示す。
+左辺の元 $(\alpha_0, \ldots, \alpha_{r - 1})$ が零に写ると仮定する。
+Lemma \ref{spaces-chow-lemma-cap-projective-bundle} により
+$$
+0 = \pi_*(\pi^*\alpha_0 +
+c_1(\mathcal{O}_P(1)) \cap \pi^*\alpha_1
++ \ldots +
+c_1(\mathcal{O}_P(1))^{r - 1} \cap \pi^*\alpha_{r-1})
+= \alpha_{r - 1}
+$$
+である。次に
+$$
+0 = \pi_*(c_1(\mathcal{O}_P(1)) \cap (\pi^*\alpha_0 +
+c_1(\mathcal{O}_P(1)) \cap \pi^*\alpha_1
++ \ldots +
+c_1(\mathcal{O}_P(1))^{r - 2} \cap \pi^*\alpha_{r - 2}))
+= \alpha_{r - 2}
+$$
+であり、以下同様である。したがって写像は単射である。
+
+\medskip\noindent
+写像が全射であることを証明するため、Lemma
+\ref{spaces-chow-lemma-pullback-affine-fibres-surjective} の証明とまったく同様に論じ、
+スキームの場合に帰着する。読者にはこの証明を飛ばすことを強く勧める。
+
+\medskip\noindent
+$\beta \in \CH_{k + r - 1}(P)$ とする。
+$m_j \not = 0$ であり、$W_j$ が互いに異なる $\delta$-次元
+$k + r$ の整閉部分空間であるように
+$\beta = \sum m_j[W_j]$ と書く。
+% P10-E0107
+このとき族 $\{W_j\}$ は $P$ において局所有限である。
+Lemma \ref{spaces-chow-lemma-proper-image} のように、$Z_j \subset X$ を $W_j$ の
+「像」とする。任意の準コンパクト開部分集合 $U \subset X$ に対して、
+$\pi^{-1}(U) \cap W_j$ が空でないのは有限個の $j$ に限られる。
+したがって像からなる族 $Z_j$ は、$X$ の整閉部分空間の局所有限族である。
+
+\medskip\noindent
+ファイバー積図式
+$$
+\xymatrix{
+P_j \ar[r] \ar[d]_{\pi_j} & P \ar[d]^\pi \\
+Z_j \ar[r] & X
+}
+$$
+を考える。ある $(k + i)$-サイクル
+$\alpha_{j, i} \in \CH_{k + i}(Z_j)$ に対して
+$[W_j] \in Z_{k + r - 1}(P_j)$ が
+$$
+\pi_j^*\alpha_{j, 0} +
+c_1(\mathcal{O}(1)) \cap \pi_j^*\alpha_{j, 1} +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi_j^*\alpha_{j, r - 1}
+$$
+と有理同値であると仮定する。このとき
+$\alpha_i = \sum m_j \beta_{j, i}$ は $X$ 上の $(k + i)$-サイクルとなり、
+% P10-E0108
+$$
+\pi^*\alpha_0 +
+c_1(\mathcal{O}(1)) \cap \pi^*\alpha_1 +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi^*\alpha_{r - 1}
+$$
+は $\beta$ と有理同値となる（Remark
+\ref{spaces-chow-remark-infinite-sums-rational-equivalences} を参照）。
+これにより、$X$ が整であり、$P$ のある整閉部分スキームで $X$ を
+支配するものに対して $\alpha = [W]$ である場合に帰着する。
+% P10-E0109
+% P10-E0110
+特に、$d = \dim_\delta(X) < \infty$ と仮定してよい。
+
+\medskip\noindent
+したがって $d = \dim_\delta(X)$ に関する帰納法を使える。
+$d < k$ ならば $\CH_{k + r - 1}(X) = 0$ であり、補題が成り立つ。
+% P10-E0111
+これが帰納法の初期段階である。空でない開部分集合
+$U \subset X$ を考える。ある $\alpha_i \in Z_{k + i}(U)$ に対して
+$$
+\beta|_{\pi^{-1}(U)} =
+\pi^*\alpha_0 +
+c_1(\mathcal{O}(1)) \cap \pi^*\alpha_1 +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi^*\alpha_{r - 1}
+$$
+であることを示せたと仮定する。
+Lemma \ref{spaces-chow-lemma-exact-sequence-open} により、ある
+$\alpha'_i \in Z_{k + i}(X)$ に対して
+$\alpha_i = \alpha'_i|_U$ である。
+Lemma \ref{spaces-chow-lemma-restrict-to-open} の完全列
+$\CH_{k + i}(\pi^{-1}(X \setminus U)) \to \CH_{k + i}(P) \to
+\CH_{k + i}(\pi^{-1}(U))$
+により、
+% P10-E0112
+$$
+\beta -
+\left(\pi^*\alpha'_0 +
+c_1(\mathcal{O}(1)) \cap \pi^*\alpha'_1 +
+\ldots +
+c_1(\mathcal{O}(1))^{r - 1} \cap \pi^*\alpha'_{r - 1}\right)
+$$
+はサイクル $\beta' \in \CH_{k + r}(\pi^{-1}(X \setminus U))$
+から来る。
+% P10-E0113
+$\dim_\delta(X \setminus U) < d$ なので、$d$ に関する帰納法により
+結論を得る。
+
+\medskip\noindent
+特に、$X$ を適切な開部分集合で置き換えることにより、
+$X$ はスキームであると仮定してよく、問題は Chow Homology, Lemma
+\ref{chow-lemma-chow-ring-projective-bundle} に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-vectorbundle}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を $X$ 上の階数 $r$ の有限局所自由層とする。
+$X$ 上の随伴ベクトル束を
+$$
+p :
+E = \underline{\Spec}(\text{Sym}^*(\mathcal{E}))
+\longrightarrow
+X
+$$
+とする。このとき、すべての $k$ に対して
+$p^* : \CH_k(X) \to \CH_{k + r}(E)$ は同型である。
+\end{lemma}
+
+\begin{proof}
+（直線束の場合は Lemma \ref{spaces-chow-lemma-linebundle} を参照せよ。）
+% P10-E0599
+全射性については Lemma \ref{spaces-chow-lemma-pullback-affine-fibres-surjective}
+を参照せよ。$(\pi  : P \to X, \mathcal{O}_P(1))$ を
+有限局所自由層 $\mathcal{E} \oplus \mathcal{O}_X$ に随伴する
+射影空間束とする。$s \in \Gamma(P, \mathcal{O}_P(1))$ を
+大域切断 $(0, 1) \in \Gamma(X, \mathcal{E} \oplus \mathcal{O}_X)$
+に対応するものとする。$D = Z(s) \subset P$ とおく。
+$(\pi|_D : D \to X , \mathcal{O}_P(1)|_D)$ は
+$\mathcal{E}$ に随伴する射影空間束であることに注意する。
+$\pi_D = \pi|_D$ および
+$\mathcal{O}_D(1) = \mathcal{O}_P(1)|_D$ と表す。
+さらに、$D$ は $P$ 上の有効 Cartier 因子である。したがって
+$\mathcal{O}_P(D) = \mathcal{O}_P(1)$ である
+（Divisors on Spaces, Lemma
+\ref{spaces-divisors-lemma-characterize-OD} を参照）。
+また同型 $E \cong P \setminus D$ がある。対応する開埋め込みを
+$j : E \to P$ と表す。単射性には、
+$$
+j^* :
+\CH_{k + r}(P)
+\longrightarrow
+\CH_{k + r}(E)
+$$
+の核が有効 Cartier 因子 $D$ に台をもつサイクルの類からなることを使う。
+Lemma \ref{spaces-chow-lemma-restrict-to-open} を参照せよ。
+% P10-E0600
+したがって $p^*\alpha = 0$ ならば、ある
+$\beta \in \CH_{k + r}(D)$ に対して $\pi^*\alpha = i_*\beta$ である。
+% P10-E0114
+Lemma \ref{spaces-chow-lemma-chow-ring-projective-bundle} により
+$$
+\beta = \pi_D^*\beta_0 +
+\ldots + c_1(\mathcal{O}_D(1))^{r - 1} \cap \pi_D^* \beta_{r - 1}.
+$$
+ある $\beta_i \in \CH_{k + i}(X)$ に対してこのように書ける。
+% P10-E0115
+% P10-E0601
+Lemmas \ref{spaces-chow-lemma-relative-effective-cartier}
+and \ref{spaces-chow-lemma-pushforward-cap-c1}
+により、これは
+$$
+\pi^*\alpha = i_*\beta =
+c_1(\mathcal{O}_P(1)) \cap \pi^*\beta_0 +
+\ldots +
+c_1(\mathcal{O}_D(1))^r \cap \pi^*\beta_{r - 1}.
+$$
+を含意する。
+% P10-E0116
+$\mathcal{E} \oplus \mathcal{O}_X$ の階数は $r + 1$ なので、
+すべての $\alpha$ とすべての $\beta_i$ が零でない限り、これは Lemma
+\ref{spaces-chow-lemma-pushforward-cap-c1} に矛盾する。
+% P10-E0117
+% P10-E0602
+\end{proof}
+
+\section{ベクトル束の Chern 類}
+\label{spaces-chow-section-chern-classes-vector-bundles}
+
+\noindent
+本節は Chow Homology, Sections
+\ref{chow-section-chern-classes-vector-bundles} and
+\ref{chow-section-intersecting-chern-classes}
+の類似である。ただし、そこでするのとは異なり、ベクトル束の Chern 類を
+双変類として直接定義する。これにより相当量の作業を省ける。
+
+\begin{lemma}
+\label{spaces-chow-lemma-segre-classes}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を $X$ 上の階数 $r$ の有限局所自由層とする。
+$(\pi : P \to X, \mathcal{O}_P(1))$ を $\mathcal{E}$ に随伴する
+射影空間束とする。$B$ 上の良い代数空間の任意の射
+$X' \to X$ に対し、一意な写像
+$$
+c_i(\mathcal{E}) \cap - : \CH_k(X') \longrightarrow \CH_{k - i}(X'),\quad
+i = 0, \ldots, r
+$$
+が存在して、$\alpha \in \CH_k(X')$ に対して
+$c_0(\mathcal{E}) \cap \alpha = \alpha$ かつ
+$$
+\sum\nolimits_{i = 0, \ldots, r}
+(-1)^i c_1(\mathcal{O}_{P'}(1))^i \cap
+(\pi')^*\left(c_{r - i}(\mathcal{E}) \cap \alpha\right) = 0
+$$
+となる。
+% P10-E0118
+ここで $\pi' : P' \to X'$ は $\pi$ の基底変換である。
+さらに、これらの写像は $X$ 上の次数 $i$ の双変類
+$c_i(\mathcal{E})$ を定める。
+\end{lemma}
+
+\begin{proof}
+写像 $c_i(\mathcal{E}) \cap -$ の一意性と存在は Lemma
+\ref{spaces-chow-lemma-chow-ring-projective-bundle} および与えられた
+$c_0(\mathcal{E})$ の記述から直ちに従う。
+% P10-E0122
+各 $i \in \mathbf{Z}$ に対し、$B$ 上の良い代数空間の各射
+$X' \to X$ に写像
+$$
+t_i(\mathcal{E}) \cap - :
+\CH_k(X') \longrightarrow \CH_{k - i}(X'),\quad
+\alpha \longmapsto
+\pi'_*(c_1(\mathcal{O}_{P'}(1))^{r - 1 + i} \cap (\pi')^*\alpha)
+$$
+を対応させる規則は、Lemmas \ref{spaces-chow-lemma-cap-c1-bivariant},
+\ref{spaces-chow-lemma-flat-pullback-bivariant}, and
+\ref{spaces-chow-lemma-push-proper-bivariant}
+により双変類である\footnote{符号を除けば、これらは
+$\mathcal{E}$ の Segre 類である。}。
+% P10-E0119
+Lemma \ref{spaces-chow-lemma-cap-projective-bundle} により、$i < 0$ に対して
+$t_i(\mathcal{E}) = 0$ であり、$t_0(\mathcal{E}) = 1$ である。
+補題の主張にある等式に順像を適用すると、Lemma
+\ref{spaces-chow-lemma-cap-projective-bundle} から
+$$
+(-1)^r t_1(\mathcal{E}) + (-1)^{r - 1}c_1(\mathcal{E}) = 0
+$$
+を得る。特に $c_1(\mathcal{E})$ が双変類であることが分かる。
+補題の主張にある等式に $c_1(\mathcal{O}_{P'}(1))$ を掛け、
+結果を $X'$ へ順像すると
+$$
+(-1)^r t_2(\mathcal{E}) +
+(-1)^{r - 1} t_1(\mathcal{E}) \cap c_1(\mathcal{E}) +
+(-1)^{r - 2} c_2(\mathcal{E}) = 0
+$$
+を得る。前と同様に、$c_2(\mathcal{E})$ が双変類であると結論する。
+以下も同様である。
+\end{proof}
+
+\begin{definition}
+\label{spaces-chow-definition-chern-classes}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を $X$ 上の階数 $r$ の有限局所自由層とする。
+$i = 0, \ldots, r$ に対し、{\it $\mathcal{E}$ の第 $i$ Chern 類}とは、
+Lemma \ref{spaces-chow-lemma-segre-classes} で構成した次数 $i$ の双変類
+$c_i(\mathcal{E}) \in A^i(X)$ をいう。
+{\it $\mathcal{E}$ の全 Chern 類}とは、形式和
+$$
+c(\mathcal{E}) =
+c_0(\mathcal{E}) + c_1(\mathcal{E}) + \ldots + c_r(\mathcal{E})
+$$
+をいい、これは $X$ 上の非斉次双変類とみなす。
+\end{definition}
+
+\noindent
+便宜上、$i > r$ および $i < 0$ に対してしばしば
+$c_i(\mathcal{E}) = 0$ とおく。定義により
+$c_0(\mathcal{E}) = 1 \in A^0(X)$ である。
+ここで整合性を確認する。
+
+\begin{lemma}
+\label{spaces-chow-lemma-first-chern-class}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。Definition
+\ref{spaces-chow-definition-chern-classes} の $X$ 上の $\mathcal{L}$ の第一 Chern 類は、
+Lemma \ref{spaces-chow-lemma-cap-c1-bivariant} の双変類に等しい。
+\end{lemma}
+
+\begin{proof}
+実際、この場合には射影束の正規化により
+$P = \mathbf{P}(\mathcal{L}) = X$ かつ
+$\mathcal{O}_P(1) = \mathcal{L}$ である。Section
+\ref{spaces-chow-section-projective-space-bundle-formula} を参照せよ。
+したがって Lemma \ref{spaces-chow-lemma-segre-classes} の等式は
+$$
+(-1)^0 c_1(\mathcal{L})^0 \cap c^{new}_1(\mathcal{L}) \cap \alpha +
+(-1)^1 c_1(\mathcal{L})^1 \cap c^{new}_0(\mathcal{L}) \cap \alpha = 0
+$$
+となる。ここで $c_i^{new}(\mathcal{L})$ は Definition
+\ref{spaces-chow-definition-chern-classes} のとおりである。
+$c_0^{new}(\mathcal{L}) = 1$ かつ $c_1(\mathcal{L})^0 = 1$ なので、
+結論が従う。
+\end{proof}
+
+\noindent
+次に、Chern 類が双変 Chow コホモロジー環 $A^*(X)$ の中心に属することを示す。
+
+\begin{lemma}
+\label{spaces-chow-lemma-cap-commutative-chern}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を階数 $r$ の局所自由 $\mathcal{O}_X$-加群とする。
+このとき $c_j(\mathcal{L}) \in A^j(X)$ はすべての元
+$c \in A^p(X)$ と可換である。
+% P10-E0120
+特に、$\mathcal{F}$ が $X$ 上の第二の階数 $s$ の局所自由
+$\mathcal{O}_X$-加群ならば、すべての $\alpha \in \CH_k(X)$ に対し、
+$$
+c_i(\mathcal{E}) \cap c_j(\mathcal{F}) \cap \alpha
+=
+c_j(\mathcal{F}) \cap c_i(\mathcal{E}) \cap \alpha
+$$
+が $\CH_{k - i - j}(X)$ の元として成り立つ。
+\end{lemma}
+
+\begin{proof}
+$X' \to X$ を $B$ 上の良い代数空間の射とする。
+$\alpha \in \CH_k(X')$ とする。
+$\alpha_j = c_j(\mathcal{E}) \cap \alpha$ と書けば、
+$\alpha_0 = \alpha$ である。Lemma \ref{spaces-chow-lemma-segre-classes} により
+$$
+\sum\nolimits_{i = 0}^r
+(-1)^i c_1(\mathcal{O}_{P'}(1))^i \cap
+(\pi')^*(\alpha_{r - i}) = 0
+$$
+が、$(X' \to X)^*\mathcal{E}$ に随伴する射影束
+$(\pi' : P' \to X', \mathcal{O}_{P'}(1))$ の Chow 群において成り立つ。
+$c \cap -$ を適用し、Lemma \ref{spaces-chow-lemma-c1-center} および
+双変類の性質を使うと
+$$
+\sum\nolimits_{i = 0}^r
+(-1)^i c_1(\mathcal{O}_{P'}(1))^i \cap
+\pi^*(c \cap \alpha_{r - i}) = 0
+$$
+を $P'$ の Chow 群において得る。
+% P10-E0121
+したがって Lemma \ref{spaces-chow-lemma-segre-classes} の一意性により、
+$c \cap \alpha_j$ は $c_j(\mathcal{E}) \cap (c \cap \alpha)$ に等しい。
+これで補題が証明された。
+\end{proof}
+
+\begin{remark}
+\label{spaces-chow-remark-extend-to-finite-locally-free}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群とする。
+$\mathcal{E}$ の階数が一定でなくても、$\mathcal{E}$ の Chern 類を
+定義できる。実際、この場合には
+$$
+X = X_0 \amalg X_1 \amalg X_2 \amalg \ldots
+$$
+と書ける。ここで $X_r \subset X$ は $\mathcal{E}$ の階数が $r$ である
+開かつ閉な部分空間である。$X' \to X$ が $B$ 上の良い代数空間の射ならば、
+逆像によって $X'$ の対応する分解を得て、定義から
+$$
+\CH_*(X') = \prod\nolimits_{r \geq 0} \CH_*(X'_r)
+$$
+となる。そこで $c_i(\mathcal{E})$ を、これらの直積分解を保ち、
+各因子上で既に定義した作用
+$c_i(\mathcal{E}|_{X_r}) \cap -$ によって作用する双変類として定義する。
+この設定では、無限個の $i$ に対して $c_i(\mathcal{E})$ が
+非零となることがありうることに注意する。
+\end{remark}
+
+\section{Chern 類の間の多項式関係}
+\label{spaces-chow-section-relations-chern-classes}
+
+\noindent
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}_i$ を有限個の有限局所自由 $\mathcal{O}_X$-加群とする。
+Lemma \ref{spaces-chow-lemma-cap-commutative-chern} により、Chern 類
+$$
+c_j(\mathcal{E}_i) \in A^*(X)
+$$
+は Chow コホモロジー $A^*(X)$ の可換な（さらに中心的な）
+$\mathbf{Z}$-部分代数を生成する。したがって、これらの Chern 類の
+多項式が零であること、または二つの多項式が等しいことの意味を述べられる。
+例えば、$c_1(\mathcal{E}_1)^5 + c_2(\mathcal{E}_2)c_3(\mathcal{E}_3) = 0$
+ということは、$B$ 上の良い代数空間のすべての射
+$f : Y \to X$ に対して、作用
+$$
+\CH_k(Y) \longrightarrow \CH_{k - 5}(Y), \quad
+\alpha \longmapsto
+c_1(\mathcal{E}_1)^5 \cap \alpha +
+c_2(\mathcal{E}_2) \cap c_3(\mathcal{E}_3) \cap \alpha
+$$
+が零であることを意味する。Lemma \ref{spaces-chow-lemma-bivariant-zero} により、
+これは、$Y$ が $X$ 上局所有限型な整代数空間であるような任意の射
+$f : Y \to X$ が与えられたとき、サイクル
+$$
+c_1(\mathcal{E}_1)^5 \cap [Y] +
+c_2(\mathcal{E}_2) \cap c_3(\mathcal{E}_3) \cap [Y]
+$$
+が $\CH_{\dim(Y) - 5}(Y)$ において零であることと同値である。
+% P10-E0123
+
+\medskip\noindent
+具体例の一つは、Lemma \ref{spaces-chow-lemma-c1-cap-additive} で証明された関係
+$$
+c_1(\mathcal{L} \otimes_{\mathcal{O}_X} \mathcal{N})
+=
+c_1(\mathcal{L}) + c_1(\mathcal{N})
+$$
+である。より一般に、任意の局所自由層を可逆層でテンソルすると
+次のようになる。
+
+\begin{lemma}
+\label{spaces-chow-lemma-chern-classes-E-tensor-L}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を $X$ 上の階数 $r$ の有限局所自由層とし、
+$\mathcal{L}$ を $X$ 上の可逆層とする。このとき
+\begin{equation}
+\label{spaces-chow-equation-twist}
+c_i({\mathcal E} \otimes {\mathcal L})
+=
+\sum\nolimits_{j = 0}^i
+\binom{r - i + j}{j} c_{i - j}({\mathcal E}) c_1({\mathcal L})^j
+\end{equation}
+が $A^*(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+証明は Chow Homology, Lemma
+\ref{chow-lemma-chern-classes-E-tensor-L} の証明と同一であり、
+そこで使われた補題を Lemmas \ref{spaces-chow-lemma-bivariant-zero} and
+\ref{spaces-chow-lemma-segre-classes} に置き換えればよい。
+\end{proof}
+
+\section{Chern 類の加法性}
+\label{spaces-chow-section-additivity-chern-classes}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-additivity-chern-classes} の類似である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-get-rid-of-trivial-subbundle}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$、$\mathcal{F}$ を、それぞれ階数 $r$、$r - 1$ の
+$X$ 上の有限局所自由層で、短完全列
+$$
+0 \to \mathcal{O}_X \to \mathcal{E} \to \mathcal{F} \to 0
+$$
+に入るものとする。このとき
+$$
+c_r(\mathcal{E}) = 0, \quad
+c_j(\mathcal{E}) = c_j(\mathcal{F}), \quad j = 0, \ldots, r - 1
+$$
+が $A^*(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+証明は Chow Homology, Lemma
+\ref{chow-lemma-get-rid-of-trivial-subbundle} の証明と同一であり、
+そこで使われた補題を Lemmas
+\ref{spaces-chow-lemma-bivariant-zero},
+\ref{spaces-chow-lemma-relative-effective-cartier},
+\ref{spaces-chow-lemma-pushforward-cap-c1}, and
+\ref{spaces-chow-lemma-segre-classes}
+に置き換えればよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-additivity-invertible-subsheaf}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$、$\mathcal{F}$ を、それぞれ階数 $r$、$r - 1$ の
+$X$ 上の有限局所自由層で、短完全列
+$$
+0 \to \mathcal{L} \to \mathcal{E} \to \mathcal{F} \to 0
+$$
+に入るものとする。ここで $\mathcal{L}$ は可逆層である。このとき
+$$
+c(\mathcal{E}) = c(\mathcal{L}) c(\mathcal{F})
+$$
+が $A^*(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+証明は Chow Homology, Lemma
+\ref{chow-lemma-additivity-invertible-subsheaf} の証明と同一であり、
+そこで使われた補題を Lemmas
+\ref{spaces-chow-lemma-get-rid-of-trivial-subbundle} and
+\ref{spaces-chow-lemma-chern-classes-E-tensor-L}
+に置き換えればよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-additivity-chern-classes}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ が、階数 $r_i$ の有限局所自由層 $\mathcal{E}_i$ の完全列
+$$
+0
+\to
+\mathcal{E}_1
+\to
+\mathcal{E}
+\to
+\mathcal{E}_2
+\to
+0
+$$
+に入ると仮定する。全 Chern 類は
+$$
+c(\mathcal{E}) = c(\mathcal{E}_1) c(\mathcal{E}_2)
+$$
+を $A^*(X)$ において満たす。
+\end{lemma}
+
+\begin{proof}
+証明は Chow Homology, Lemma
+\ref{chow-lemma-additivity-chern-classes} の証明と同一であり、
+そこで使われた補題を Lemmas
+\ref{spaces-chow-lemma-bivariant-zero},
+\ref{spaces-chow-lemma-additivity-invertible-subsheaf}, and
+\ref{spaces-chow-lemma-segre-classes}
+に置き換えればよい。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-chern-filter-by-linebundles}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+${\mathcal L}_i$、$i = 1, \ldots, r$ を可逆
+$\mathcal{O}_X$-加群とする。
+$\mathcal{E}$ を、階数をもつ局所自由 $\mathcal{O}_X$-加群で、
+フィルトレーション
+% P10-E0124
+$$
+0 = \mathcal{E}_0 \subset \mathcal{E}_1 \subset \mathcal{E}_2
+\subset \ldots \subset \mathcal{E}_r = \mathcal{E}
+$$
+を備えるものとする。ただし
+$\mathcal{E}_i/\mathcal{E}_{i - 1} \cong \mathcal{L}_i$ とする。
+$c_1({\mathcal L}_i) = x_i$ とおく。このとき
+$$
+c(\mathcal{E})
+=
+\prod\nolimits_{i = 1}^r (1 + x_i)
+$$
+が $A^*(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-chow-lemma-additivity-invertible-subsheaf} と帰納法を適用する。
+\end{proof}
+
+\section{分裂原理}
+\label{spaces-chow-section-splitting-principle}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-additivity-chern-classes} の類似である。
+
+\begin{lemma}
+\label{spaces-chow-lemma-splitting-principle}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}_i$ を、階数 $r_i$ の局所自由 $\mathcal{O}_X$-加群の
+有限族とする。次を満たす相対次元 $d$ の射影的平坦射
+$\pi : P \to X$ が存在する。
+\begin{enumerate}
+\item $B$ 上の良い代数空間の任意の射 $f : Y \to X$ に対して、写像
+$\pi_Y^* : \CH_*(Y) \to \CH_{* + d}(Y \times_X P)$ は単射である。
+\item 各 $\pi^*\mathcal{E}_i$ は、逐次商
+$\mathcal{L}_{i, 1}, \ldots, \mathcal{L}_{i, r_i}$ が可逆
+${\mathcal O}_P$-加群となるフィルトレーションをもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+整数 $r = \sum r_i$ に関する帰納法で証明する。
+$r = 0$ ならば $\pi = \text{id}_X$ と取れる。
+すべての $i$ に対して $r_i = 1$ ならば、この場合も
+$\pi = \text{id}_X$ と取れる。ある $i_0$ に対して
+$r_{i_0} > 1$ であると仮定する。
+$(\pi : P \to X, \mathcal{O}_P(1))$ を
+$\mathcal{E}_{i_0}$ に随伴する射影束とする。標準写像
+$\pi^*\mathcal{E}_{i_0} \to \mathcal{O}_P(1)$ は全射であり、したがって
+その核 $\mathcal{E}'_{i_0}$ は階数 $r_{i_0} - 1$ の有限局所自由層である。
+$B$ 上の良い代数空間の任意の射 $f : Y \to X$ に対して
+$\pi_Y^*$ は単射である。Lemma
+\ref{spaces-chow-lemma-chow-ring-projective-bundle} を参照せよ。
+したがって、$P$ と局所自由層 $\pi^*\mathcal{E}_i$ に対して
+補題を証明すれば十分である。しかし、可逆な商をもつ部分束
+$\mathcal{E}_{i_0} \subset \pi^*\mathcal{E}_{i_0}$ があるので、
+族 $\{\mathcal{E}_i\}_{i \not = i_0} \cup \{\mathcal{E}'_{i_0}\}$
+に対して補題を証明すればよい。
+% P10-E0125
+これにより $r$ は $1$ 減少し、帰納法の仮定から結論を得る。
+\end{proof}
+
+\noindent
+分裂原理が何を述べるかを説明する代わりに、いくつかの補題の証明で
+それを使うことにする。
+
+\begin{lemma}
+\label{spaces-chow-lemma-chern-classes-dual}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ を双対 $\mathcal{E}^\vee$ をもつ有限局所自由
+$\mathcal{O}_X$-加群とする。このとき
+$$
+c_i(\mathcal{E}^\vee) = (-1)^i c_i(\mathcal{E})
+$$
+が $A^i(X)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-chow-lemma-splitting-principle} のとおりの射
+$\pi : P \to X$ を選ぶ。（任意の基底変換後の）$\pi^*$ の単射性により、
+$P$ へ引き戻した後に $\mathcal{E}$ と $\mathcal{E}^\vee$ の Chern 類の
+関係を証明すれば十分である。したがって、可逆 $\mathcal{O}_X$-加群
+${\mathcal L}_i$、$i = 1, \ldots, r$ とフィルトレーション
+$$
+0 = \mathcal{E}_0 \subset \mathcal{E}_1 \subset \mathcal{E}_2
+\subset \ldots \subset \mathcal{E}_r = \mathcal{E}
+$$
+が存在し、$\mathcal{E}_i/\mathcal{E}_{i - 1} \cong \mathcal{L}_i$
+であると仮定してよい。このとき、双対フィルトレーション
+$$
+0 = \mathcal{E}_r^\perp \subset \mathcal{E}_1^\perp \subset \mathcal{E}_2^\perp
+\subset \ldots \subset \mathcal{E}_0^\perp = \mathcal{E}^\vee
+$$
+を得て、
+% P10-E0126
+$\mathcal{E}_{i - 1}^\perp/\mathcal{E}_i^\perp \cong
+\mathcal{L}_i^{\otimes -1}$ である。
+$x_i = c_1(\mathcal{L}_i)$ とおく。Lemma
+\ref{spaces-chow-lemma-c1-cap-additive} により
+$c_1(\mathcal{L}_i^{\otimes -1}) = - x_i$ である。
+Lemma \ref{spaces-chow-lemma-chern-filter-by-linebundles} により
+$$
+c(\mathcal{E}) = \prod\nolimits_{i = 1}^r (1 + x_i)
+\quad\text{および}\quad
+c(\mathcal{E}^\vee) = \prod\nolimits_{i = 1}^r (1 - x_i)
+$$
+が $A^*(X)$ において成り立つ。結果は形式的計算から従うが、
+その計算は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-chern-classes-tensor-product}
+Situation \ref{spaces-chow-situation-setup} において $X/B$ を良いものとする。
+$\mathcal{E}$ と $\mathcal{F}$ を、階数 $r$ と $s$ の有限局所自由
+$\mathcal{O}_X$-加群とする。このとき
+% P10-E0127
+$$
+c_1(\mathcal{E} \otimes \mathcal{F})
+=
+r c_1(\mathcal{F}) + s c_1(\mathcal{E})
+$$
+および
+$$
+c_2(\mathcal{E} \otimes \mathcal{F})
+=
+r^2 c_2(\mathcal{F}) +
+rs c_1(\mathcal{F})c_1(\mathcal{E}) +
+s^2 c_2(\mathcal{E})
+$$
+が成り立ち、以下も同様である（証明を参照）。
+% P10-E0128
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{spaces-chow-lemma-chern-classes-dual} の証明とまったく同様に論じて、
+可逆 $\mathcal{O}_X$-加群
+${\mathcal L}_i$、$i = 1, \ldots, r$、
+${\mathcal N}_i$、$i = 1, \ldots, s$、
+% P10-E0604
+およびフィルトレーション
+% P10-E0603
+$$
+0 = \mathcal{E}_0 \subset \mathcal{E}_1 \subset \mathcal{E}_2
+\subset \ldots \subset \mathcal{E}_r = \mathcal{E}
+\quad\text{および}\quad
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset \mathcal{F}_2
+\subset \ldots \subset \mathcal{F}_s = \mathcal{F}
+$$
+があると仮定してよい。ただし
+$\mathcal{E}_i/\mathcal{E}_{i - 1} \cong \mathcal{L}_i$ かつ
+$\mathcal{F}_j/\mathcal{F}_{j - 1} \cong \mathcal{N}_j$ とする。
+組 $(i, j)$ を辞書式順序で並べると、フィルトレーション
+$$
+0 \subset \ldots \subset
+\mathcal{E}_i \otimes \mathcal{F}_j
++
+\mathcal{E}_{i - 1} \otimes \mathcal{F}
+\subset \ldots \subset \mathcal{E} \otimes \mathcal{F}
+$$
+を得る。その逐次商は
+$$
+\mathcal{L}_1 \otimes \mathcal{N}_1,
+\mathcal{L}_1 \otimes \mathcal{N}_2,
+\ldots,
+\mathcal{L}_1 \otimes \mathcal{N}_s,
+\mathcal{L}_2 \otimes \mathcal{N}_1,
+\ldots,
+\mathcal{L}_r \otimes \mathcal{N}_s
+$$
+である。Lemma \ref{spaces-chow-lemma-chern-filter-by-linebundles} により
+$$
+c(\mathcal{E}) = \prod (1 + x_i),
+\quad
+c(\mathcal{F}) = \prod (1 + y_j),
+\quad\text{および}\quad
+c(\mathcal{F}) = \prod (1 + x_i + y_j),
+$$
+が $A^*(X)$ において成り立つ。
+% P10-E0129
+結果は形式的計算から従うが、その計算は省略する。
+\end{proof}
+
+\section{零サイクルの次数}
+\label{spaces-chow-section-degree-zero-cycles}
+
+\noindent
+本節は Chow Homology, Section
+\ref{chow-section-degree-zero-cycles} の類似である。
+体上固有な代数空間上の零サイクルの次数を定義することから始める。
+
+\begin{definition}
+\label{spaces-chow-definition-degree-zero-cycle}
+$k$ を体とする。$p : X \to \Spec(k)$ を代数空間の固有射とする。
+$X$ 上の {\it 零サイクルの次数}は、固有順像
+$$
+p_* : \CH_0(X) \longrightarrow \CH_0(\Spec(k)) \longrightarrow \mathbf{Z}
+$$
+（Lemma \ref{spaces-chow-lemma-proper-pushforward-rational-equivalence}）と、
+$[\Spec(k)]$ を $1$ へ写す自然な同型
+$\CH_0(\Spec(k)) \to \mathbf{Z}$ との合成によって与えられる。
+記法：$\deg(\alpha)$。
+\end{definition}
+
+\noindent
+これをさらに明示する。
+
+\begin{lemma}
+\label{spaces-chow-lemma-spell-out-degree-zero-cycle}
+$k$ を体とする。$X$ を $k$ 上の固有代数空間とする。
+$\alpha = \sum n_i[Z_i]$ を $Z_0(X)$ の元とする。このとき
+$$
+\deg(\alpha) = \sum n_i\deg(Z_i)
+$$
+である。ここで $\deg(Z_i)$ は $Z_i \to \Spec(k)$ の次数、すなわち
+$\deg(Z_i) = \dim_k \Gamma(Z_i, \mathcal{O}_{Z_i})$ である。
+\end{lemma}
+
+\begin{proof}
+これは固有順像の定義（Definition
+\ref{spaces-chow-definition-proper-pushforward}）そのものである。
+\end{proof}
+
+\begin{lemma}
+\label{spaces-chow-lemma-degrees-and-numerical-intersections}
+$k$ を体とする。$X$ を $k$ 上の固有代数空間とする。
+$Z \subset X$ を次元 $d$ の閉部分空間とする。
+$\mathcal{L}_1, \ldots, \mathcal{L}_d$ を可逆
+$\mathcal{O}_X$-加群とする。このとき
+$$
+(\mathcal{L}_1 \cdots \mathcal{L}_d \cdot Z) =
+\deg(
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_1) \cap [Z]_d)
+$$
+である。
+% P10-E0130
+ここで左辺は Spaces over Fields, Definition
+\ref{spaces-over-fields-definition-intersection-number}
+で定義されている。
+\end{lemma}
+
+\begin{proof}
+$Z_i \subset Z$、$i = 1, \ldots, t$ を次元 $d$ の既約成分とし、
+$m_i$ を $Z$ における $Z_i$ の重複度とする。このとき
+$[Z]_d = \sum m_i[Z_i]$ であり、
+$c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_d) \cap [Z]_d$
+はサイクル
+$m_i c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_d) \cap [Z_i]$
+の和である。一方、Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-numerical-polynomial-leading-term}
+により $(\mathcal{L}_1 \cdots \mathcal{L}_d \cdot Z)$ にも同様の分解が
+あるので、$Z = X$ が $k$ 上の固有整代数空間である場合に
+補題を証明すれば十分である。
+
+\medskip\noindent
+Chow の補題により、稠密な開部分集合 $U \subset X$ 上で同型となり、
+$X'$ がスキームであるような固有射 $f : X' \to X$ が存在する。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-chow-noetherian-separated}
+を参照せよ。このとき $X'$ は $k$ 上の固有スキームである。
+$X'$ を $f^{-1}(U)$ のスキーム論的閉包で置き換えることにより、
+$X'$ が整であると仮定してよい。このとき Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-intersection-number-and-pullback}
+により
+$$
+(f^*\mathcal{L}_1 \cdots f^*\mathcal{L}_d \cdot X') =
+(\mathcal{L}_1 \cdots \mathcal{L}_d \cdot X)
+$$
+であり、Lemma \ref{spaces-chow-lemma-pushforward-cap-c1} により
+$$
+f_*(c_1(f^*\mathcal{L}_1) \cap \ldots \cap c_1(f^*\mathcal{L}_d) \cap [Y]) =
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_d) \cap [X]
+$$
+である。
+% P10-E0131
+したがって $X$ を $X'$ で置き換え、$X$ が $k$ 上の固有スキームであると
+仮定してよい。この場合は Chow Homology, Lemma
+\ref{chow-lemma-degrees-and-numerical-intersections}
+で証明されている。
+\end{proof}

@@ -1,0 +1,4583 @@
+% Generated mechanically from frozen input inputs/p06/ja/weil.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{44}
+\chapter{Weil コホモロジー理論}
+
+
+
+\phantomsection
+\label{weil-section-phantom}
+
+
+
+
+\section{序論}
+\label{weil-section-introduction}
+
+\noindent
+本章では、基礎体上の滑らかな射影スキームに対する Weil コホモロジー理論を
+論じる。簡潔にいえば、本章でいうコホモロジー理論 $H^*$ とは、K\"unneth 公式、
+Poincar\'e 双対、およびサイクル類を（適切な両立条件とともに）備えたものである。
+ただし、何を「Weil コホモロジー理論」と呼ぶかについて、文献上普遍的な合意が
+あるわけではないことに注意されたい。
+
+\medskip\noindent
+本章を読む前に、『圏論』の第 \ref{categories-section-monoidal} 節および
+『ホモロジー代数』の第 \ref{homology-section-monoidal} 節に目を通すとよい。そこでは
+（対称）モノイド圏を定義し、本章に必要な範囲でこれらの圏に関する基礎言語を
+整備している。この言語を用いて第 \ref{weil-section-correspondences} 節では、
+滑らかな射影スキームを対象とし、対応を射とする対称モノイド次数付き圏を構成する。
+第 \ref{weil-section-chow-motives} 節では射影子の像を付け加え、Lefschetz モチーフを
+可逆化して、Chow モチーフの対称モノイド Karoubian 圏 $M_k$ を得る。
+この圏には反変函手
+$$
+h : \{\text{smooth projective schemes over }k\} \longrightarrow M_k
+$$
+が備わっている。以下で見るように、Weil コホモロジー理論の重要な性質は、
+それが $h$ を経由して分解することである。
+
+\medskip\noindent
+まず基礎体が代数閉体の場合に、本章で「古典的 Weil コホモロジー理論」と呼ぶ
+ものを定義する。第 \ref{weil-section-axioms-classical} 節を参照せよ。この概念は
+\cite[Section 1.2]{Kleiman-cycles} で導入された概念と同じであり、
+\cite[page 65]{Kleiman-motives} の概念とも一致する。しかし本章の概念は、
+\cite[page 10]{Kleiman-standard} で導入された概念とは先験的には一致しない。
+後者では二つの Lefschetz 型公理が追加されており、本章で定義する任意の古典的
+Weil コホモロジー理論がそれらの公理を満たすかどうかは知られていないからである。
+第 \ref{weil-section-axioms-classical} 節の末尾では、古典的 Weil コホモロジー理論が
+$H^* = G \circ h$ の形をもつことを示す。ここで $G$ は $M_k$ から、$H^*$ の
+係数体上の次数付きベクトル空間の圏への対称モノイド函手である。
+
+\medskip\noindent
+第 \ref{weil-section-cycles-nonclosed} 節では非閉体上のサイクル群に関する補題を
+いくつか証明する。これらは任意の体上の滑らかな射影スキームに対する Weil
+コホモロジー理論を論じる際に用いられる。
+
+\medskip\noindent
+一般の基礎体 $k$ 上の Weil コホモロジー理論 $H^*$ の公理を選ぶ動機は次のとおりである。
+\begin{enumerate}
+\item $M_k$ から $H^*$ の係数体 $F$ 上の次数付きベクトル空間の圏への
+対称モノイド函手 $G$ に対して $H^* = G \circ h$ と書ける。
+\item $G$ は Tate モチーフ（Lefschetz モチーフの逆）を、次数 $-2$ に置かれた
+$1$ 次元ベクトル空間 $F(1)$ に送る。
+\item $k$ が代数閉体ならば、$F(1)$ の基底元の選択を除いて第 \ref{weil-section-axioms-classical} 節で論じた概念を回復する。
+\end{enumerate}
+まず第 \ref{weil-section-axioms} 節で最初の二条件を解析する。第 \ref{weil-section-further} 節でいくつかの結果をさらに整備した後、第 \ref{weil-section-old} 節で性質 (3) を得るために必要な公理を付け加える。
+
+\medskip\noindent
+最後の第 \ref{weil-section-c1} 節では、サイクル類の代わりに第一 Chern 類写像を
+用いる Weil コホモロジー理論への別のアプローチを詳述する。この方法は、後の章で
+特定のコホモロジー理論が Weil コホモロジー理論であることを証明するのに最も適している。
+『de Rham コホモロジー』の第 \ref{derham-section-weil} 節を参照せよ。
+
+
+
+
+
+\section{規約と記法}
+\label{weil-section-conventions}
+
+\noindent
+$F$ を体とする。本章では、$F$-次数付きベクトル空間の圏を、通常の結合制約と
+符号を伴う可換制約をもつ $F$-線形対称モノイド圏とみなす。
+『ホモロジー代数』の例 \ref{homology-example-graded-vector-spaces} を参照せよ。
+
+\medskip\noindent
+$R$ を環とする。本章でいう {\it 次数付き可換 $R$-代数} $A$ とは、微分が零である
+可換微分次数付き $R$-代数
+(『微分次数付き代数』の定義 \ref{dga-definition-dga} および
+\ref{dga-definition-cdga}) のことである。したがって $A$ は、$R$-部分加群による次数付け
+$A = \bigoplus_{n \in \mathbf{Z}} A^n$ を備えた $R$-加群である。本章では
+$R$-双線形な乗法
+$$
+A^n \times A^m \longrightarrow A^{n + m},\quad
+\alpha \times \beta \longmapsto \alpha \cup \beta
+$$
+を {\it カップ積} と呼ぶ。可換制約は、$\alpha \in A^n$ および
+$\beta \in A^m$ に対する $\alpha \cup \beta = (-1)^{nm} \beta \cup \alpha$
+である。最後に乗法単位元 $1 \in A^0$ が存在する。同値な言い方をすれば、
+$A$ の $R$-加群構造と両立する加法的かつ乗法的な写像 $R \to A^0$ が存在する。
+
+\medskip\noindent
+$k$ を体とし、$X$ を $k$ 上有限型のスキームとする。有理同値を法とした
+$X$ の $k$ 次元サイクルの Chow 群 $\CH_k(X)$ は Chow 『ホモロジー代数』の定義 \ref{chow-definition-rational-equivalence} で定義されている。
+$X$ が正規または Cohen--Macaulay ならば、余次元 $p$ のサイクルの Chow 群
+$\CH^p(X)$ も考えられる
+(Chow 『ホモロジー代数』の第 \ref{chow-section-cycles-codimension} 節)。
+このとき $[X] \in \CH^0(X)$ は $X$ の「基本類」を表す。
+Chow 『ホモロジー代数』の注意 \ref{chow-remark-fundamental-class} を参照せよ。
+$X$ が滑らかで $\alpha$ と $\beta$ が $X$ 上のサイクルならば、
+$\alpha \cdot \beta$ は $\alpha$ と $\beta$ の交叉積を表す。
+Chow 『ホモロジー代数』の第 \ref{chow-section-intersection-product} 節を参照せよ。
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{対応}
+\label{weil-section-correspondences}
+
+\noindent
+$k$ を体とする。$k$ 上のスキーム $X$ と $Y$ に対し、$k$ 上のスキームの圏における
+$X$ と $Y$ の積を $X \times Y$ と書く。本節では、対象を $k$ 上の滑らかな射影スキーム、
+射を対応とする $\mathbf{Q}$ 上の次数付き圏を構成する。
+
+\medskip\noindent
+$X$ と $Y$ を $k$ 上の滑らかな射影スキームとする。
+$X = \coprod X_d$ を、$\dim(X_d) = d$ を満たす等次元な開閉部分スキームへの
+$X$ の分解とする。$X$ から $Y$ への {\it 次数 $r$ の対応全体} の
+$\mathbf{Q}$-ベクトル空間を次の式で定義する：
+$$
+\text{Corr}^r(X, Y) =
+\bigoplus\nolimits_d \CH^{d + r}(X_d \times Y) \otimes \mathbf{Q}
+\subset
+\CH^*(X \times Y) \otimes \mathbf{Q}
+$$
+$c \in \text{Corr}^r(X, Y)$ および $\beta \in \CH_j(Y) \otimes \mathbf{Q}$
+に対し、$c$ による $\beta$ の {\it 引き戻し} を次の式で定義できる：
+$$
+c^*(\beta) = \text{pr}_{1, *}(c \cdot \text{pr}_2^*\beta)
+\quad\text{in}\quad
+\CH_{j - r}(X) \otimes \mathbf{Q}
+$$
+これは次の理由で意味をもつ。$X_d \times Y$ 上で $\text{pr}_2$ は相対次元
+$d$ の平坦射であるから、$\text{pr}_2^*\beta$ は $X_d \times Y$ 上の次元
+$d + j$ のサイクルである。したがって $c \cdot \text{pr}_2^*\beta$ は
+$X_d \times Y$ 上の次元 $j - r$ のサイクルであり、固有射 $\text{pr}_1$
+によるその押し出しも同じ次元のサイクルである。
+同様に、余次元による次数付けに移ると、
+$\alpha \in \CH^i(X) \otimes \mathbf{Q}$ に対して、$c$ による
+$\alpha$ の {\it 押し出し} を次の式で定義できる：
+$$
+c_*(\alpha) = \text{pr}_{2, *}(c \cdot \text{pr}_1^*\alpha)
+\quad\text{in}\quad
+\CH^{i + r}(Y) \otimes \mathbf{Q}
+$$
+これは次の理由で意味をもつ。$\text{pr}_1^*\alpha$ は $X \times Y$ 上の
+余次元 $i$ のサイクルであるから、$c \cdot \text{pr}_1^*\alpha$ は
+$X_d \times Y$ 上の余次元 $i + d + r$ のサイクルであり、その押し出しは
+$Y$ 上の余次元 $i + r$ のサイクルになる。
+
+\medskip\noindent
+$X, Y, Z$ を $k$ 上の三つの滑らかな射影スキームとする。{\it 対応の合成}
+$$
+\text{Corr}^s(Y, Z)
+\times
+\text{Corr}^r(X, Y)
+\longrightarrow
+\text{Corr}^{r + s}(X, Z)
+$$
+を規則
+$$
+(c', c)
+\longmapsto
+c' \circ c =
+\text{pr}_{13, *}(\text{pr}_{12}^*c \cdot \text{pr}_{23}^*c')
+$$
+によって定義する。ここで $\text{pr}_{12} : X \times Y \times Z \to X \times Y$
+は射影であり、$\text{pr}_{13}$ および $\text{pr}_{23}$ も同様である。
+
+\begin{lemma}
+\label{weil-lemma-composition-correspondences}
+対応について次が成り立つ：
+\begin{enumerate}
+\item 対応の合成は $\mathbf{Q}$-双線形かつ結合的である。
+\item 標準同型
+$$
+\CH_{-r}(X) \otimes \mathbf{Q} = \text{Corr}^r(X, \Spec(k))
+$$
+があり、この同型のもとで対応による引き戻しは合成に対応する。
+\item 標準同型
+$$
+\CH^r(X) \otimes \mathbf{Q} = \text{Corr}^r(\Spec(k), X)
+$$
+があり、この同型のもとで対応による押し出しは合成に対応する。
+\item 対応の合成はサイクルの押し出しおよび引き戻しと両立する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+双線形性は、押し出しと引き戻しの線形性、および交叉積の双線形性から直ちに従う。
+結合性を証明するため、$X, Y, Z, W$ と
+$c \in \text{Corr}(X, Y)$, $c' \in \text{Corr}(Y, Z)$, および
+$c'' \in \text{Corr}(Z, W)$ が与えられたとする。このとき
+\begin{align*}
+c'' \circ (c' \circ c)
+& =
+\text{pr}^{134}_{14, *}(
+\text{pr}^{134, *}_{13}
+\text{pr}^{123}_{13, *}(\text{pr}^{123, *}_{12}c \cdot
+\text{pr}^{123, *}_{23}c')
+\cdot \text{pr}^{134, *}_{34}c'') \\
+& =
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+\text{pr}^{1234, *}_{123}(\text{pr}^{123, *}_{12}c \cdot
+\text{pr}^{123, *}_{23}c')
+\cdot \text{pr}^{134, *}_{34}c'') \\
+& =
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+(\text{pr}^{1234, *}_{12}c \cdot
+\text{pr}^{1234, *}_{23}c')
+\cdot \text{pr}^{134, *}_{34}c'') \\
+& =
+\text{pr}^{134}_{14, *}
+\text{pr}^{1234}_{134, *}
+((\text{pr}^{1234, *}_{12}c \cdot
+\text{pr}^{1234, *}_{23}c')
+\cdot \text{pr}^{1234, *}_{34}c'') \\
+& =
+\text{pr}^{1234}_{14, *}(
+(\text{pr}^{1234, *}_{12}c \cdot
+\text{pr}^{1234, *}_{23}c') \cdot
+\text{pr}^{1234, *}_{34}c'')
+\end{align*}
+を得る。ここでは、射影
+$$
+p^{1234}_{134} : X \times Y \times Z \times W \to X \times Z \times W
+\quad\text{and}\quad
+p^{134}_{14} : X \times Z \times W \to X \times W
+$$
+にこの記法を用い、他の添字についても同様とする。
+第1の等式は合成の定義である。第2の等式は、Chow 『ホモロジー代数』の補題 \ref{chow-lemma-flat-pullback-proper-pushforward} により
+$\text{pr}^{134, *}_{13} \text{pr}^{123}_{13, *} =
+\text{pr}^{1234}_{134, *} \text{pr}^{1234, *}_{123}$
+であることから成り立つ。第3の等式は、交叉積が $p^{1234}_{123}$ の Gysin 写像
+（これは平坦引き戻しで与えられる）と可換であることから成り立つ。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-product} を参照せよ。
+第4の等式は $p^{1234}_{134}$ に対する射影公式から従う。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-projection-formula} を参照せよ。
+第4の等式は、固有押し出しが合成と両立することを述べている。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-compose-pushforward} を参照せよ。
+交叉積は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-associative} により結合的なので、
+これで対応の合成の結合性の証明が完了する。
+
+\medskip\noindent
+(2) と (3) の証明は省略する。これらは本質的には、各サイクルがどこにあり、
+どの（余）次元をもつかを注意深く整理することで証明される。
+
+\medskip\noindent
+サイクルの押し出しと引き戻しに関する主張は、
+$(c' \circ c)^*(\alpha) = c^*((c')^*(\alpha))$ および
+$(c' \circ c)_*(\alpha) = (c')_*(c_*(\alpha))$ を意味する。
+これは (1), (2), (3) を組み合わせれば従う。
+  \end{proof}
+
+\begin{example}
+\label{weil-example-graph-correspondence}
+$f : Y \to X$ を $k$ 上の滑らかな射影スキームの射とする。
+$f$ のグラフを $\Gamma_f \subset X \times Y$ と書く。より正確には、
+$\Gamma_f$ は閉埋め込み
+$$
+(f, \text{id}_Y) : Y \longrightarrow X \times Y
+$$
+の像である。$X = \coprod X_d$ を、次元 $d$ の等次元な開閉部分
+$X_d$ への $X$ の分解とする。このとき
+$\Gamma_f \cap (X_d \times Y)$ は純余次元 $d$ をもつ。したがって
+$[\Gamma_f] \in \CH^*(X \times Y) \otimes \mathbf{Q}$
+は $\text{Corr}^0(X \times Y)$ に含まれる。すなわち $[\Gamma_f]$ は
+$X$ から $Y$ への次数 $0$ の対応である。
+\end{example}
+
+\begin{lemma}
+\label{weil-lemma-category-correspondences}
+$k$ 上の滑らかな射影スキームを対象とし、上で定義した対応を射、対応の合成を
+合成とするものは、$\mathbf{Q}$ 上の次数付き圏をなす
+(『微分次数付き代数』の定義 \ref{dga-definition-graded-category})。
+\end{lemma}
+
+\begin{proof}
+恒等射の存在を除けば、構成と補題 \ref{weil-lemma-composition-correspondences}
+からすべて明らかである。滑らかな射影スキーム $X$ に対し、
+$\text{Corr}^0(X, X)$ における対角 $\Delta \subset X \times X$ の類
+$[\Delta]$ を考える。$\Delta$ は恒等射 $\text{id}_X : X \to X$ のグラフに
+等しいことに注意する。この事実を以下で用いる。
+
+\medskip\noindent
+$[\Delta]$ が恒等射として働くことを示すには、任意の対応
+$c \in \text{Corr}^r(Y, X)$ および $c' \in \text{Corr}^s(X, Y)$ に対し
+$[\Delta] \circ c = c$ と $c' \circ [\Delta] = c'$ を示さなければならない。
+後者については
+$$
+c' = \text{pr}_{13, *}(\text{pr}_{12}^*[\Delta] \cdot \text{pr}_{23}^*c')
+$$
+を示せばよい。ここで $\text{pr}_{12} : X \times X \times Y \to X \times X$
+は射影であり、$\text{pr}_{13}$ および $\text{pr}_{23}$ も同様である。
+ある整閉部分スキーム $Z_i \subset X \times Y$ と有理数 $a_i$ により
+$c' = \sum a_i [Z_i]$ と書ける。したがって、$X \times Y$ の Chow 群において、
+$X \times Y$ の任意の整閉部分スキーム $Z$ に対し
+$$
+[Z] = \text{pr}_{13, *}(\text{pr}_{12}^*[\Delta] \cdot \text{pr}_{23}^*[Z])
+$$
+を示せば十分である。二つの射影による $Z$ の像を含む既約成分で
+$X$ と $Y$ を置き換えることにより、$X$ と $Y$ も整であると仮定できる。
+すると示すべきことは
+$$
+[Z] = \text{pr}_{13, *}([\Delta \times Y] \cdot [X \times Z])
+$$
+である。射 $(\Delta, 1) : X \times Y \to X \times X \times Y$ による
+$Z$ の像を $Z' \subset X \times X \times Y$ と書く。このとき $Z'$ は
+$Z$ と同型な $X \times X \times Y$ の閉部分スキームであり、スキーム論的に
+$Z' = \Delta \times Y \cap X \times Z$ である。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-intersect-properly}\footnote{読者は、
+$\dim(Z') = \dim(\Delta \times Y) + \dim(X \times Z) -
+\dim(X \times X \times Y)$ であること、および $Z'$ が、$Z$ の一般点
+（そこで局所環は CM である）と $X$ のある点（そこで局所環は CM である）へ
+写る一意な一般点をもつことを確かめられたい。したがって補題の仮定はすべて
+実際に満たされている。}
+により
+$$
+[Z'] = [\Delta \times Y] \cdot [X \times Z]
+$$
+を得る。また $Z'$ は $\text{pr}_{13}$ により $Z$ へ同型に写るので、結論が従う。
+$[\Delta] \circ c = c$ の確認も同様であり、省略する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-contravariant-functor}
+$k$ 上の滑らかな射影スキームの圏から対応の圏への反変函手で、対象上では恒等であり、
+$f : Y \to X$ を元 $[\Gamma_f] \in \text{Corr}^0(X, Y)$ に送るものが存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-category-correspondences} の証明で、この構成が恒等射を恒等射へ
+送ることを見た。証明を完了するには、$g : Z \to Y$ が $k$ 上の滑らかな
+射影スキームの別の射ならば、$\text{Corr}^0(X, Z)$ において
+$[\Gamma_g] \circ [\Gamma_f] = [\Gamma_{f \circ g}]$ が成り立つことを示せばよい。
+補題 \ref{weil-lemma-category-correspondences} の証明と同様に論じると、$X$, $Y$, $Z$
+が整である場合に $\CH^*(X \times Z)$ で
+$$
+[\Gamma_{f \circ g}] =
+\text{pr}_{13, *}([\Gamma_f \times Z] \cdot [X \times \Gamma_g])
+$$
+を示せば十分であることが分かる。閉埋め込み
+$(f \circ g, g, 1) : Z \to X \times Y \times Z$ の像を
+$Z' \subset X \times Y \times Z$ と書く。このときスキーム論的に
+$Z' = \Gamma_f \times Z \cap X \times \Gamma_g$ であり、
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-intersect-properly} を用いると
+$$
+[Z'] = [\Gamma_f \times Z] \cdot [X \times \Gamma_g]
+$$
+を得る。$\text{pr}_{13, *}([Z']) = [\Gamma_{f \circ g}]$ は明らかなので、
+証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{weil-remark-transpose}
+$X$ と $Y$ を $k$ 上の滑らかな射影スキームとする。$X$ は次元 $d$ の等次元、
+$Y$ は次元 $e$ の等次元であると仮定する。因子を入れ替える同型
+$X \times Y \to Y \times X$ は同型
+$$
+\text{Corr}^r(X, Y) \longrightarrow \text{Corr}^{d - e + r}(Y, X),\quad
+c \longmapsto c^t
+$$
+を定める。これを {\it 転置} と呼ぶ。これはサイクルにもサイクル類にも作用する。
+ときに有用な例は、射 $f : Y \to X$ のグラフの転置
+$[\Gamma_f]^t = [\Gamma_f^t]$ である。
+\end{remark}
+
+\begin{lemma}
+\label{weil-lemma-functor-and-cycles}
+$f : Y \to X$ を $k$ 上の滑らかな射影スキームの射とし、
+$[\Gamma_f] \in \text{Corr}^0(X, Y)$ を例 \ref{weil-example-graph-correspondence} のものとする。このとき
+\begin{enumerate}
+\item 対応 $[\Gamma_f]$ によるサイクルの押し出しは Gysin 写像
+$f^! : \CH^*(X) \to \CH^*(Y)$ と一致する。
+\item 対応 $[\Gamma_f]$ によるサイクルの引き戻しは押し出し写像
+$f_* : \CH_*(Y) \to \CH_*(X)$ と一致する。
+\item $X$ と $Y$ がそれぞれ次元 $d$ と $e$ の等次元ならば、次が成り立つ：
+\begin{enumerate}
+\item 注意 \ref{weil-remark-transpose} の対応 $[\Gamma_f^t]$ による
+サイクルの押し出しは、$f$ によるサイクルの押し出しに対応する。
+\item 注意 \ref{weil-remark-transpose} の対応 $[\Gamma_f^t]$ による
+サイクルの引き戻しは Gysin 写像 $f^!$ に対応する。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。次を思い出そう：
+$[\Gamma_f]_*(\alpha) =
+\text{pr}_{2, *}([\Gamma_f] \cdot \text{pr}_1^*\alpha)$。
+次が成り立つ：
+$$
+[\Gamma_f] \cdot \text{pr}_1^*\alpha =
+(f, 1)_*((f, 1)^! \text{pr}_1^*\alpha) =
+(f, 1)_*((f, 1)^! \text{pr}_1^!\alpha) =
+(f, 1)_*(f^!\alpha)
+$$
+第1の等式は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-intersect-regularly-embedded} による。
+第2の等式は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-flat} による。
+第3の等式は $\text{pr}_1 \circ (f, 1) = f$ と Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-composition} による。そして
+$\text{pr}_{2, *} \circ (f, 1)_* = 1_*$ が Chow 『ホモロジー代数』の補題 \ref{chow-lemma-compose-pushforward} から従うので、結論を得る。
+
+\medskip\noindent
+(2) の証明。次を思い出そう：$[\Gamma_f]_*(\beta) =
+\text{pr}_{1, *}([\Gamma_f] \cdot \text{pr}_2^*\beta)$。
+上と全く同様に論じると
+$$
+[\Gamma_f] \cdot \text{pr}_2^*\beta = (f, 1)_*\beta
+$$
+を得る。したがって結果は先ほどと同様に従う。
+
+\medskip\noindent
+(3) の証明。上と全く同じ方法で証明される。
+\end{proof}
+
+\begin{example}
+\label{weil-example-decompose-P1}
+$X = \mathbf{P}^1_k$ とする。このとき
+$$
+\text{Corr}^0(X, X) = \CH^1(X \times X) \otimes \mathbf{Q} =
+\CH_1(X \times X) \otimes \mathbf{Q}
+$$
+である。$k$-有理点 $x \in X$ を選び、サイクル
+$c_0 = [x \times X]$ および $c_2 = [X \times x]$ を考える。
+計算により、$\text{Corr}^0(X, X)$ において
+$1 = [\Delta] = c_0 + c_2$ であり、合成について
+$c_0 \circ c_0 = c_0$,
+$c_0 \circ c_2 = 0$,
+$c_2 \circ c_0 = 0$, および
+$c_2 \circ c_2 = c_2$
+が成り立つことが分かる。言い換えると、$c_0$ と $c_2$ は代数
+$\text{Corr}^0(X, X)$ において直交する冪等元であり、実際
+$$
+\text{Corr}^0(X, X) = \mathbf{Q} \times \mathbf{Q}
+$$
+を $\mathbf{Q}$-代数として得る。
+\end{example}
+
+\noindent
+対応の圏は対称モノイド圏である。$X$ と $Y$ を $k$ 上の滑らかな射影スキームと
+するとき、$X \otimes Y = X \times Y$ と定める。$X, X', Y, Y'$ を $k$ 上の
+四つの滑らかな射影スキームとするとき、テンソル積
+$$
+\otimes :
+\text{Corr}^r(X, Y) \times \text{Corr}^{r'}(X', Y')
+\longrightarrow
+\text{Corr}^{r + r'}(X \times X', Y \times Y')
+$$
+を規則
+$$
+(c, c') \longmapsto
+c \otimes c' = \text{pr}_{13}^*c \cdot \text{pr}_{24}^*c'
+$$
+によって定める。ここで
+$\text{pr}_{13} : X \times X' \times Y \times Y' \to X \times Y$ および
+$\text{pr}_{24} : X \times X' \times Y \times Y' \to X' \times Y'$ は射影である。
+結合制約
+$$
+X \otimes (Y \otimes Z) = (X \otimes Y) \otimes Z
+$$
+として、スキームの積に対する通常の結合制約を用いる。可換制約は、因子を入れ替える
+同型 $X \times Y \to Y \times X$ により与えられる。
+
+\begin{lemma}
+\label{weil-lemma-tensor-product}
+上で定義した対応のテンソル積により、対応の圏は単位対象 $\Spec(k)$ をもつ
+対称モノイド圏になる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-prep-dual}
+$f : Y \to X$ を $k$ 上の滑らかな射影スキームの射とする。
+$X$ と $Y$ はそれぞれ次元 $d$ と $e$ の等次元であると仮定する。
+$a = [\Gamma_f] \in \text{Corr}^0(X, Y)$ および
+$a^t = [\Gamma_f^t] \in \text{Corr}^{d - e}(Y, X)$ と書く。また
+$\eta_X = [\Gamma_{X \to X \times X}] \in \text{Corr}^0(X \times X, X)$,
+$\eta_Y = [\Gamma_{Y \to Y \times Y}] \in \text{Corr}^0(Y \times Y, Y)$,
+$[X] \in \text{Corr}^{-d}(X, \Spec(k))$, および
+$[Y] \in \text{Corr}^{-e}(Y, \Spec(k))$ とおく。このとき図式
+$$
+\xymatrix{
+X \otimes Y \ar[r]_{a \otimes \text{id}} \ar[d]_{\text{id} \otimes a^t} &
+Y \otimes Y \ar[r]_{\eta_Y} &
+Y \ar[d]^{[Y]} \\
+X \otimes X \ar[r]^{\eta_X} &
+X \ar[r]^{[X]} &
+\Spec(k)
+}
+$$
+は対応の圏において可換である。
+\end{lemma}
+
+\begin{proof}
+$k$ 上の任意の滑らかな射影スキーム $W$ に対して
+$\text{Corr}^r(W, \Spec(k)) = \CH_{-r}(W)$ であることを思い出そう。
+また $c \in \text{Corr}^s(W', W)$ が与えられたとき、$c$ との合成は写像
+$\CH_{-r}(W) \to \CH_{-r - s}(W')$ として $c$ による引き戻しと一致する
+(補題 \ref{weil-lemma-composition-correspondences})。さらに補題 \ref{weil-lemma-functor-and-cycles} により、これを通常のサイクルの押し出しと
+引き戻しへ変換できる。次が成り立つ：
+$$
+(a \otimes \text{id})^* \eta_Y^* [Y] =
+(a \otimes \text{id})^* [\Delta_Y] =
+(f \times \text{id})_*\Delta_Y = [\Gamma_f]
+$$
+反対側を通ると
+$$
+(\text{id} \otimes a^t)^* \eta_X^* [X] =
+(\text{id} \otimes a^t)^* [\Delta_X] =
+(\text{id} \times f)^![\Delta_X] = [\Gamma_f]
+$$
+を得る。最後の等式は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-easy} から従う。言い換えると、図式のいずれの経路を
+通っても、サイクル $\Gamma_f \subset X \times Y$ に対応する
+$\text{Corr}^d(X \times Y, \Spec(k))$ の元を得る。
+\end{proof}
+
+
+
+
+
+
+
+\section{Chow モチーフ}
+\label{weil-section-chow-motives}
+
+\noindent
+基礎体 $k$ を固定する。本節では、対称モノイド構造と反変函手
+$$
+h : \{\text{smooth projective schemes over }k\} \longrightarrow M_k
+$$
+を備えた加法的 Karoubian $\mathbf{Q}$-線形圏 $M_k$ を構成する。この函手は
+積をテンソル積へ、非交和を直和へ送る。本構成は次の性質により特徴づけられる。
+$h$ は、対象を滑らかな射影多様体、射を次数 $0$ の対応とする対称モノイド圏を
+経由し、例 \ref{weil-example-decompose-P1} の $h(\mathbf{P}^1_k)$ 上の射影子
+$c_2$ の像が $M_k$ において可逆になる。補題 \ref{weil-lemma-characterize-motives} を参照せよ。節の終わりには、すべてのモチーフ、
+すなわち $M_k$ のすべての対象が（左）双対をもつことを示す。
+補題 \ref{weil-lemma-dual-general} を参照せよ。
+
+\medskip\noindent
+$k$ 上の {\it モチーフ} または {\it Chow モチーフ} とは、次を満たす三つ組
+$(X, p, m)$ のことである：
+\begin{enumerate}
+\item $X$ は $k$ 上の滑らかな射影スキームである。
+\item $p \in \text{Corr}^0(X, X)$ は $p \circ p = p$ を満たす。
+\item $m \in \mathbf{Z}$ である。
+\end{enumerate}
+別のモチーフ $(Y, q, n)$ が与えられたとき、{\it モチーフの射} または
+{\it Chow モチーフの射} を
+$$
+\Hom((X, p, m), (Y, q, n)) =
+q \circ \text{Corr}^{n - m}(X, Y) \circ p \subset \text{Corr}^{n - m}(X, Y)
+$$
+の元として定義する。モチーフの射の合成は、上で定義した対応の合成を用いて定める。
+
+\begin{lemma}
+\label{weil-lemma-motives}
+$k$ 上のモチーフを対象、$k$ 上のモチーフの射を射とする圏 $M_k$ は
+$\mathbf{Q}$-線形圏である。また、$h(X) = (X, 1, 0)$ および
+$h(f) = [\Gamma_f]$ により定義される反変函手
+$$
+h : \{\text{smooth projective schemes over }k\} \longrightarrow M_k
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-contravariant-functor} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-Karoubian}
+圏 $M_k$ は Karoubian である。
+\end{lemma}
+
+\begin{proof}
+$M = (X, p, m)$ をモチーフとし、$a \in \Mor(M, M)$ を射影子とする。
+このとき $\Mor(M, M)$ においても $\text{Corr}^0(X, X)$ においても
+$a = a \circ a$ である。$N = (X, a, m)$ とおく。
+$\text{Corr}^0(X, X)$ において $a = p \circ a \circ a$ であるから、
+$a : N \to M$ は $M_k$ の射である。次に、$b : (Y, q, n) \to M$ が
+$(1 - a) \circ b = 0$ を満たす射であるとする。このとき
+$b = a \circ b$ かつ $b = b \circ q$ である。したがって $b$ は
+$b : (Y, q, n) \to N$ という射である。よって射影子 $1 - a$ は核 $N$ をもち、
+$M_k$ は Karoubian である。『ホモロジー代数』の定義 \ref{homology-definition-karoubian} を参照せよ。
+\end{proof}
+
+\noindent
+函手
+$$
+\otimes : M_k \times M_k \longrightarrow M_k
+$$
+を定義する。対象上では式
+$$
+(X, p, m) \otimes (Y, q, n) = (X \times Y, p \otimes q, m + n)
+$$
+を用いる。射上では、規則 $(a, a') \longmapsto a \otimes a'$ によって与えられる
+$$
+\xymatrix{
+\Mor((X, p, m), (Y, q, n)) \times
+\Mor((X', p', m'), (Y', q', n')) \ar[d] \\
+\Mor(
+(X \times X', p \otimes p', m + m'),
+(Y \times Y', q \otimes q', n + n'))
+}
+$$
+を用いる。ここで対応上の $\otimes$ は第 \ref{weil-section-correspondences} 節のものである。これは意味をもつ。実際、モチーフの射の
+定義により、$c \in \text{Corr}^{n - m}(X, Y)$ および
+$c' \in \text{Corr}^{n' - m'}(X', Y')$ を用いて
+$a = q \circ c \circ p$ および $a' = q' \circ c' \circ p'$ と書ける。このとき
+$$
+a \otimes a' =
+(q \circ c \circ p) \otimes (q' \circ c' \circ p') =
+(q \otimes q') \circ (c \otimes c') \circ (p \otimes p')
+$$
+を得る。これは確かに $(X \times X', p \otimes p', m + m')$ から
+$(Y \times Y', q \otimes q', n + n')$ へのモチーフの射である。
+
+\begin{lemma}
+\label{weil-lemma-motives-monoidal}
+上で定義したテンソル積を備えた圏 $M_k$ は、明らかな結合制約と可換制約、および
+単位対象 $\mathbf{1} = (\Spec(k), 1, 0)$ をもつ対称モノイド圏である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-tensor-product} から容易に従う。詳細は省略する。
+\end{proof}
+
+\noindent
+モチーフ $\mathbf{1}(n) = (\Spec(k), 1, n)$ は有用である。次に注意する：
+$$
+\mathbf{1} = \mathbf{1}(0)
+\quad\text{and}\quad
+\mathbf{1}(n + m) = \mathbf{1}(n) \otimes \mathbf{1}(m)
+$$
+したがって $\mathbf{1}(1)$ とのテンソル積はモチーフの圏の自己同値である。
+モチーフ $M$ に対して $M(n) = M \otimes \mathbf{1}(n)$ と書くことがある。
+$M = (X, p, m)$ ならば $M(n) = (X, p, m + n)$ であることに注意する。
+
+\begin{lemma}
+\label{weil-lemma-inverse-h2}
+例 \ref{weil-example-decompose-P1} の記法のもとで次が成り立つ：
+\begin{enumerate}
+\item モチーフ $(X, c_0, 0)$ はモチーフ
+$\mathbf{1} = (\Spec(k), 1, 0)$ と同型である。
+\item モチーフ $(X, c_2, 0)$ はモチーフ
+$\mathbf{1}(-1) = (\Spec(k), 1, -1)$ と同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+以後、補題 \ref{weil-lemma-contravariant-functor} を断りなく用いる。
+構造射 $X \to \Spec(k)$ は対応 $a \in \text{Corr}^0(\Spec(k), X)$ を与える。
+一方、有理点 $x$ は射 $\Spec(k) \to X$ であり、対応
+$b \in \text{Corr}^0(X, \Spec(k))$ を与える。$\Spec(k)$ 上の対応として
+$b \circ a = 1$ である。合成 $a \circ b$ は合成 $X \to x \to X$ のグラフに
+対応し、これは $c_0 = [x \times X]$ である。したがって
+$a = a \circ b \circ a = c_0 \circ a$ および
+$b = b \circ a \circ b = b \circ c_0$ である。よって定義を展開すると、
+$a$ と $b$ は互いに逆な射
+$a : (\Spec(k), 1, 0) \to (X, c_0, 0)$ および
+$b : (X, c_0, 0) \to (\Spec(k), 1, 0)$ であることが分かる。
+
+\medskip\noindent
+第2の主張も上と全く同様に証明する。点 $x$ の類を
+$$
+a' \in \text{Corr}^1(\Spec(k), X) = \CH^1(X)
+$$
+と書き、$[X]$ の類を
+$$
+b' \in \text{Corr}^{-1}(X, \Spec(k)) = \CH_1(X)
+$$
+と書く。$X = \Spec(k) \times X \times \Spec(k)$ 上で
+$[x] \cdot [X] = [x]$ であるから、$\Spec(k)$ 上の対応として
+$b' \circ a' = 1$ である。$X \times \Spec(k) \times X$ 上の交叉積
+$\text{pr}_{12}^*b' \cdot \text{pr}_{23}^*a'$ を計算すると、サイクル
+$X \times \Spec(k) \times x$ を得る。したがって合成 $a' \circ b'$ は
+$X$ 上の対応として $c_2$ に等しい。よって
+$a' = a' \circ b \circ a' = c_2 \circ a'$ および
+$b' = b' \circ a' \circ b' = b' \circ c_2$ である。次を思い出そう：
+$$
+\Mor((\Spec(k), 1, -1), (X, c_2, 0)) =
+c_2 \circ \text{Corr}^1(\Spec(k), X)
+\subset
+\text{Corr}^1(\Spec(k), X)
+$$
+および
+$$
+\Mor((X, c_2, 0), (\Spec(k), 1, -1)) =
+\text{Corr}^{-1}(X, \Spec(k)) \circ c_2
+\subset
+\text{Corr}^{-1}(X, \Spec(k))
+$$
+したがって $a'$ と $b'$ は互いに逆な射
+$a' : (\Spec(k), 1, -1) \to (X, c_2, 0)$ および
+$b' : (X, c_2, 0) \to (\Spec(k), 1, -1)$ である。
+\end{proof}
+
+\begin{remark}[Lefschetz モチーフと Tate モチーフ]
+\label{weil-remark-lefschetz-tate}
+$X = \mathbf{P}^1_k$ とし、$c_2$ を 例 \ref{weil-example-decompose-P1} のものとする。
+文献ではモチーフ $(X, c_2, 0)$ を {\it Lefschetz モチーフ} と呼ぶことがあり、
+文献に応じて $L$, $\mathbf{L}$, $\mathbf{Q}(-1)$, または
+$h^2(\mathbf{P}^1_k)$ という記法が用いられる。補題 \ref{weil-lemma-inverse-h2} により Lefschetz モチーフは $\mathbf{1}(-1)$ と同型である。
+したがって Lefschetz モチーフは可逆であり
+(『圏論』の定義 \ref{categories-definition-invertible})、その逆は
+$\mathbf{1}(1)$ である。モチーフ $\mathbf{1}(1)$ を {\it Tate モチーフ} と呼ぶことがあり、
+文献に応じて $L^{-1}$, $\mathbf{L}^{-1}$, $\mathbf{T}$, または
+$\mathbf{Q}(1)$ という記法が用いられる。
+\end{remark}
+
+\begin{lemma}
+\label{weil-lemma-additive}
+圏 $M_k$ は加法的である。
+\end{lemma}
+
+\begin{proof}
+$(Y, p, m)$ と $(Z, q, n)$ をモチーフとする。$n = m$ ならば、明らかな記法のもとで
+$(Y \amalg Z, p + q, m)$ が直和を与える。詳細は省略する。
+
+\medskip\noindent
+$n < m$ と仮定する。$X$, $c_2$ を例 \ref{weil-example-decompose-P1}
+のものとする。このとき
+\begin{align*}
+(Z, q, n)
+& =
+(Z, q, m) \otimes (\Spec(k), 1, -1) \otimes \ldots \otimes
+(\Spec(k), 1, -1) \\
+& \cong
+(Z, q, m) \otimes (X, c_2, 0) \otimes \ldots \otimes (X, c_2, 0) \\
+& \cong
+(Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m)
+\end{align*}
+を考える。ここで補題 \ref{weil-lemma-inverse-h2} を用いた。これにより、最初の段落で
+論じた場合に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-decompose-P1}
+$M_k$ において $h(\mathbf{P}^1_k) \cong \mathbf{1} \oplus \mathbf{1}(-1)$ である。
+\end{lemma}
+
+\begin{proof}
+例 \ref{weil-example-decompose-P1} と補題 \ref{weil-lemma-inverse-h2} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-characterize-motives}
+$X$, $c_2$ を例 \ref{weil-example-decompose-P1} のものとし、$\mathcal{C}$ を
+$\mathbf{Q}$-線形 Karoubian 対称モノイド圏とする。対称モノイド圏の任意の
+$\mathbf{Q}$-線形函手
+$$
+F :
+\left\{
+\begin{matrix}
+\text{smooth projective schemes over }k\\
+\text{morphisms are correspondences of degree }0
+\end{matrix}
+\right\}
+\longrightarrow
+\mathcal{C}
+$$
+であって、$F(X)$ 上の $F(c_2)$ の像が可逆対象であるものは、対称モノイド圏の函手
+$F : M_k \to \mathcal{C}$ を一意的に経由する。
+\end{lemma}
+
+\begin{proof}
+補題の主張で存在を仮定した $\mathcal{C}$ の可逆対象を $U$ と書く。$F$ を
+$$
+F(X, p, m) = \left(\text{the image of
+the projector }F(p)\text{ in }F(X)\right) \otimes U^{\otimes -m}
+$$
+とおくことによりモチーフへ拡張する。$U$ は可逆であり、$\mathcal{C}$ は
+Karoubian なので、これは意味をもつ。この選択の重要な特徴は
+$F(X, c_2, 0) = U$ である。次に注意する：
+\begin{align*}
+F((X, p, m) \otimes (Y, q, n))
+& =
+F(X \times Y, p \otimes q, m + n) \\
+& =
+\left(\text{the image of }F(p \otimes q)\text{ in }F(X \times Y)\right)
+\otimes U^{\otimes -m - n} \\
+& =
+F(X, p, m) \otimes F(Y, q, n)
+\end{align*}
+したがって、対象の水準でこの規則がテンソル積と両立することが分かる
+（詳細は省略する）。
+
+\medskip\noindent
+次に $F$ をモチーフの射へ拡張する。射
+$$
+a \in
+\Hom((Y, p, m), (Z, q, n)) =
+q \circ \text{Corr}^{n - m}(Y, Z) \circ p \subset \text{Corr}^{n - m}(Y, Z)
+$$
+が与えられたとする。$n = m$ ならば $a$ は次数 $0$ の対応であり、
+$F(a) : F(Y) \to F(Z)$ を用いて所望の写像
+$F(Y, p, m) \to F(Z, q, n)$ を得る。$n < m$ ならば標準同一視
+\begin{align*}
+s : F((Z, q, n))
+& \to
+F(Z, q, m) \otimes U^{m - n} \\
+& \to
+F(Z, q, m) \otimes F(X, c_2, 0) \otimes \ldots \otimes F(X, c_2, 0) \\
+& \to
+F((Z, q, m) \otimes (X, c_2, 0) \otimes \ldots \otimes (X, c_2, 0)) \\
+& \to
+F((Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m))
+\end{align*}
+を得る。第1の同型には上のモチーフ上の $F$ の定義を、第2には $U$ の選択を、
+第3にはモチーフのテンソル積に関する $F$ の両立性を用いる。第4はモチーフ上の
+テンソル積の定義である。一方、同様に同型
+$$
+\sigma : (Z, q, n) \to
+(Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m)
+$$
+もある（補題 \ref{weil-lemma-additive} の証明を参照）。この同型と $a$ を合成すると
+$$
+\sigma \circ a \in
+\Hom((Y, p, m),
+(Z \times X^{m - n}, q \otimes c_2 \otimes \ldots \otimes c_2, m))
+$$
+を得る。以上を合わせて
+$$
+s^{-1} \circ F(\sigma \circ a) :
+F(Y, p, m) \to
+F(Z, q, n)
+$$
+を得る。$n > m$ の場合も同様に同型
+$$
+t : F((Y, p, m)) \to
+F((Y \times X^{n - m}, p \otimes c_2 \otimes \ldots \otimes c_2, n))
+$$
+および
+$$
+\tau : (Y, p, m)) \to
+(Y \times X^{n - m}, p \otimes c_2 \otimes \ldots \otimes c_2, n)
+$$
+を定義し、$F(a) = F(a \circ \tau^{-1}) \circ t$ とおく。この構成が対称モノイド圏の
+函手を定めることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-dual}
+$X$ を $k$ 上の次元 $d$ の等次元な滑らかな射影スキームとする。このとき
+$M_k$ において $h(X)(d)$ は $h(X)$ の左双対である。
+\end{lemma}
+
+\begin{proof}
+以後、補題 \ref{weil-lemma-composition-correspondences} を断りなく用いる。計算すると
+$$
+\Hom(\mathbf{1}, h(X) \otimes h(X)(d)) =
+\text{Corr}^d(\Spec(k), X \times X) = \CH^d(X \times X)
+$$
+であり、ここでは $\eta = [\Delta]$ とする。一方
+$$
+\Hom(h(X)(d) \otimes h(X), \mathbf{1}) =
+\text{Corr}^{-d}(X \times X, \Spec(k)) = \CH_d(X \times X)
+$$
+であり、ここでも対角の類 $\epsilon = [\Delta]$ をとる。対応
+$[\Delta] \otimes 1$ と $1 \otimes [\Delta]$ をいずれの順で合成しても、
+$\text{Corr}^0(X, X)$ における対応 $[\Delta] = 1$ となる。これにより
+『圏論』の定義 \ref{categories-definition-dual} で要求される図式が可換である。
+実際
+$$
+[\Delta] \otimes 1 \in \text{Corr}^d(X, X \times X \times X) =
+\CH^{2d}(X \times X \times X \times X)
+$$
+は、明らかな記法のもとでサイクル
+$\text{pr}^{1234, -1}_{23}(\Delta) \cap \text{pr}^{1234, -1}_{14}(\Delta)$
+の類により与えられる。同様に、類
+$$
+1 \otimes [\Delta] \in \text{Corr}^{-d}(X \times X \times X, X) =
+\CH^{2d}(X \times X \times X \times X)
+$$
+もサイクル
+$\text{pr}^{1234, -1}_{23}(\Delta) \cap \text{pr}^{1234, -1}_{14}(\Delta)$
+の類により与えられる。合成
+$(1 \otimes [\Delta]) \circ ([\Delta] \otimes 1)$ は定義により、交叉積
+$$
+[\text{pr}^{12345, -1}_{23}(\Delta) \cap \text{pr}^{12345, -1}_{14}(\Delta)]
+\cdot
+[\text{pr}^{12345, -1}_{34}(\Delta) \cap \text{pr}^{12345, -1}_{15}(\Delta)]
+=
+[\text{small diagonal in } X^5]
+$$
+の押し出し $\text{pr}^{12345}_{15, *}$ であり、これは所望どおり $\Delta$ に等しい。
+逆の順の合成に対する公式の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-dual-general}
+$M_k$ のすべての対象は左双対をもつ。
+\end{lemma}
+
+\begin{proof}
+$M = (X, p, m)$ を $M_k$ の対象とする。このとき $M$ は
+$(X, 1, m) = h(X)(m)$ の直和因子である。『ホモロジー代数』の補題 \ref{homology-lemma-Karoubian-dual} により、
+$h(X)(m) = h(X) \otimes \mathbf{1}(m)$ が双対をもつことを示せば十分である。
+構成により $\mathbf{1}(-m)$ は $\mathbf{1}(m)$ の左双対である。したがって
+$h(X)$ が左双対をもつことを示せば十分である。『圏論』の補題 \ref{categories-lemma-tensor-dual} を参照せよ。
+$X = \coprod X_i$ を $X$ の既約成分への分解とする。このとき
+$h(X) = \bigoplus h(X_i)$ であり、$h(X_i)$ が左双対をもつことを示せば十分である。
+『ホモロジー代数』の補題 \ref{homology-lemma-additive-dual} を参照せよ。
+これは補題 \ref{weil-lemma-dual} から従う。
+\end{proof}
+
+
+
+
+
+
+\section{モチーフの Chow 群}
+\label{weil-section-chow-groups-motives}
+
+\noindent
+モチーフの Chow 群を次のように定義する。
+
+\begin{definition}
+\label{weil-definition-chow-group-motives}
+$k$ を基礎体とし、$M = (X, p, m)$ を $k$ 上の Chow モチーフとする。
+$i \in \mathbf{Z}$ に対し、{\it $M$ の第 $i$ Chow 群} を式
+$$
+\CH^i(M) = p\left(\CH^{i + m}(X) \otimes \mathbf{Q}\right)
+$$
+で定義する。
+\end{definition}
+
+\noindent
+$X$ が $k$ 上の滑らかな射影スキームならば
+$\CH^i(h(X)) = \CH^i(X) \otimes \mathbf{Q}$ である。
+
+\medskip\noindent
+$\CH^i(-)$ は $M_k$ から $\mathbf{Q}$-ベクトル空間への函手であることに注意する。
+実際、$M = (X, p, m)$ と $N = (Y, q, n)$ に対し、$c : M \to N$ がモチーフの射ならば、
+$c$ は $X$ から $Y$ への次数 $n - m$ の対応である。したがって $c$ に沿う押し出し
+(第 \ref{weil-section-correspondences} 節) は写像の族
+$$
+c_* :
+\CH^{i + m}(X) \otimes \mathbf{Q}
+\longrightarrow
+\CH^{i + n}(Y) \otimes \mathbf{Q}
+$$
+を与える。モチーフの射の定義により $c = q \circ c \circ p$ なので、実際すべての
+$i \in \mathbf{Z}$ に対して
+$$
+c_* : \CH^i(M) \to \CH^i(N)
+$$
+を得る。これは補題 \ref{weil-lemma-composition-correspondences} によりモチーフの射の
+合成と両立する。Chow 群のこの函手性は次の補題からも導ける。
+
+\begin{lemma}
+\label{weil-lemma-chow-groups-representable}
+$k$ を基礎体とする。モチーフの圏 $M_k$ 上の函手 $\CH^i(-)$ は
+$\mathbf{1}(-i)$ により表現可能である。すなわち、$M_k$ の $M$ に関して函手的に
+$$
+\CH^i(M) = \Hom_{M_k}(\mathbf{1}(-i), M)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+定義と補題 \ref{weil-lemma-composition-correspondences} から直ちに従う。
+\end{proof}
+
+\noindent
+補題 \ref{weil-lemma-chow-groups-representable}、Yoneda の補題、および補題 \ref{weil-lemma-dual} の双対性を用いると、次を得られる。
+
+\begin{lemma}[Manin]
+\label{weil-lemma-manin}
+$k$ を基礎体とし、$c : M \to N$ をモチーフの射とする。$k$ 上の任意の滑らかな
+射影スキーム $X$ に対し、写像
+$c \otimes 1 : M \otimes h(X) \to N \otimes h(X)$ が Chow 群上の同型を
+誘導するならば、$c$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$M_k$ の任意の対象 $L$ は、ある $k$ 上の滑らかな射影スキーム $X$ と
+$m \in \mathbf{Z}$ に対する $h(X)(m)$ の直和因子である。
+$M \otimes h(X)(m)$ の Chow 群は、次数のずれを除いて $M \otimes h(X)$ の Chow 群と
+同じである。したがって仮定により、$M_k$ の任意の対象 $L$ に対して
+$c \otimes 1 : M \otimes L \to N \otimes L$ は Chow 群上の同型を誘導する。
+補題 \ref{weil-lemma-chow-groups-representable} により
+$$
+\Hom_{M_k}(\mathbf{1}, M \otimes L) \to
+\Hom_{M_k}(\mathbf{1}, N \otimes L)
+$$
+は任意の $L$ に対して同型である。$M_k$ のすべての対象は左双対をもつので
+(補題 \ref{weil-lemma-dual-general})、
+$$
+\Hom_{M_k}(K, M) \to \Hom_{M_k}(K, N)
+$$
+は $M_k$ の任意の対象 $K$ に対して同型である。『圏論』の補題 \ref{categories-lemma-left-dual} を参照せよ。Yoneda の補題
+(『圏論』の補題 \ref{categories-lemma-yoneda}) により結論を得る。
+\end{proof}
+
+
+
+
+\section{射影空間束公式}
+\label{weil-section-projective-space-bundle}
+
+\noindent
+$k$ を基礎体とし、$X$ を $k$ 上の滑らかな射影スキームとする。
+$\mathcal{E}$ を階数 $r$ の局所自由 $\mathcal{O}_X$-加群とする。本章の規約では、
+$\mathcal{E}$ に {\it 付随する射影束} とは射
+$$
+\xymatrix{
+P = \mathbf{P}(\mathcal{E}) =
+\underline{\text{Proj}}_X(\text{Sym}^*(\mathcal{E}))
+\ar[r]^-p
+& X
+}
+$$
+であって、$X$ 上で $p_*(\mathcal{O}_P(1)) = \mathcal{E}$ となるよう
+$\mathcal{O}_P(1)$ を正規化したものをいう。次を思い出そう：
+$$
+[\Gamma_p] \in \text{Corr}^0(X, P) \subset \CH^*(X \times P) \otimes \mathbf{Q}
+$$
+例 \ref{weil-example-graph-correspondence} を参照せよ。
+$i = 0, \ldots, r - 1$ に対し、対応
+$$
+c_i = c_1(\text{pr}_2^*\mathcal{O}_P(1))^i \cap [\Gamma_p]
+\in \text{Corr}^i(X, P)
+$$
+を考える。$c_i$ を射 $h(X)(-i) \to h(P)$ とみなすことができ、実際そうする。
+
+\begin{lemma}[射影空間束公式]
+\label{weil-lemma-projective-space-bundle-formula}
+上の状況で、写像
+$$
+\sum\nolimits_{i = 0, \ldots, r - 1} c_i :
+\bigoplus\nolimits_{i = 0, \ldots, r - 1} h(X)(-i)
+\longrightarrow
+h(P)
+$$
+はモチーフの圏における同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-manin} により、任意の滑らかな射影スキーム $Z$ との積をとった後、
+この写像がモチーフの Chow 群上の同型を定めることを示せば十分である。
+$P \times Z \to X \times Z$ は、$\mathcal{E}$ の $X \times Z$ への引き戻しに
+付随する射影束である。したがって Chow 群に関する主張は
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-chow-ring-projective-bundle} の射影空間束公式から
+従う。具体的には、補題 \ref{weil-lemma-functor-and-cycles} と Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-flat} により、$[\Gamma_p]$ に沿うサイクルの押し出しは
+$p$ によるサイクルの引き戻しで与えられる。したがって $c_i$ に沿う押し出しは
+$\alpha$ を $c_1(\mathcal{O}_P(1))^i \cap p^*\alpha$ へ送る。詳細の一部は省略する。
+\end{proof}
+
+\noindent
+上の状況で、$j = 0, \ldots, r - 1$ に対して対応
+$$
+c'_j = c_1(\text{pr}_1^*\mathcal{O}_P(1))^{r - 1 - j} \cap [\Gamma_p^t] \in
+\text{Corr}^{-j}(P, X)
+$$
+を考える。$i, j \in \{0, \ldots, r - 1\}$ に対して
+$$
+c'_j \circ c_i =
+\text{pr}_{13, *}\left(
+c_1(\text{pr}_2^*\mathcal{O}_P(1))^{i + r - 1 - j} \cap
+(\text{pr}_{12}^*[\Gamma_p] \cdot \text{pr}_{23}^*[\Gamma_p^t])
+\right)
+$$
+である。サイクル $\text{pr}_{12}^{-1}\Gamma_p$ と
+$\text{pr}_{23}^{-1}\Gamma_p^t$ は横断的に交わり、その交わりは
+$(p, 1, p) : P \to X \times P \times X$ の像に等しい。
+$(p, p) = \text{pr}_{13} \circ (p, 1, p) : P \to X \times X$ のファイバーは
+次元 $r - 1$ をもつ。したがって $i + r - 1 - j < r - 1$、すなわち $i < j$
+のとき直ちに $c'_j \circ c_i = 0$ を得る。一方、射影空間束公式
+(Chow 『ホモロジー代数』の補題 \ref{chow-lemma-chow-ring-projective-bundle}) により、サイクル
+$c_1(\mathcal{O}_P(1))^{r - 1} \cap [P]$ は $X$ において $[X]$ へ写る。
+したがって $i = j$ のとき上の押し出しは対角の類を与え、
+$$
+c'_i \circ c_i = 1 \in \text{Corr}^0(X, X)
+$$
+がすべての $i \in \{0, \ldots, r - 1\}$ に対して成り立つ。よって合成
+$$
+\bigoplus h(X)(-i)
+\xrightarrow{\bigoplus c_i}
+h(P)
+\xrightarrow{\bigoplus c'_j}
+\bigoplus h(X)(-j)
+$$
+の行列は可逆である（対角成分が $1$ の上三角行列）。射影空間束公式
+(補題 \ref{weil-lemma-projective-space-bundle-formula}) により、逆順の合成も可逆であると
+結論できるが、これを直接証明するのはやや難しいようである。
+
+\begin{lemma}
+\label{weil-lemma-diagonal-projective-bundle}
+$p : P \to X$ を補題 \ref{weil-lemma-projective-space-bundle-formula} のものとする。
+$\CH^*(P \times P)$ における $P$ の対角の類 $[\Delta_P]$ は
+$$
+[\Delta_P] =
+\left(\sum\nolimits_{i = 0, \ldots, r - 1}
+{r - 1 \choose i} c_{r - 1 - i}(\text{pr}_1^*\mathcal{S}^\vee) \cap
+c_1(\text{pr}_2^*\mathcal{O}_P(1))^i\right)
+\cap
+(p \times p)^*[\Delta_X]
+$$
+と書ける。ここで $\mathcal{S}$ は標準全射
+$p^*\mathcal{E} \to \mathcal{O}_P(1)$ の核である。
+\end{lemma}
+
+\begin{proof}
+$(p \times p)^*[\Delta_X] = [P \times_X P]$ に注意する。
+$\Delta_P \subset P \times_X P \subset P \times P$ であり、Chern 類とのキャップ積は
+固有押し出しと可換なので
+(Chow 『ホモロジー代数』の補題 \ref{chow-lemma-pushforward-cap-cj})、
+$\CH^*(P \times_X P)$ における $\Delta_P \subset P \times_X P$ の類が
+$$
+\left(\sum\nolimits_{i = 0, \ldots, r - 1}
+{r - 1 \choose i} c_{r - 1 - i}(q_1^*\mathcal{S}^\vee) \cap
+c_1(q_2^*\mathcal{O}_P(1))^i\right)
+\cap
+[P \times_X P]
+$$
+に等しいことを示せば十分である。ここで
+$q_i : P \times_X P \to P$, $i = 1, 2$ は射影である。
+$q = p \circ q_1 = p \circ q_2 : P \times_X P \to X$ とおく。写像
+$$
+q_1^*\mathcal{S} \otimes q_2^*\mathcal{O}_P(-1) \to
+q^*\mathcal{E} \otimes q^*\mathcal{E}^\vee \to
+\mathcal{O}_{P \times_X P}
+$$
+を考える。ここで最後の矢印は評価写像
+$\mathcal{E} \otimes_{\mathcal{O}_X} \mathcal{E}^\vee \to \mathcal{O}_X$
+の $q$ による引き戻しである。合成の始域は階数 $r - 1$ の局所自由加群であり、
+局所計算により、この写像はちょうど $\Delta_P$ に沿って消える。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-top-chern-class} により、類
+$[\Delta_P]$ は双対
+$$
+q_1^*\mathcal{S}^\vee \otimes q_2^*\mathcal{O}_P(1)
+$$
+の最高 Chern 類である。所望の結果は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-chern-classes-E-tensor-L} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{古典的 Weil コホモロジー理論}
+\label{weil-section-axioms-classical}
+
+\noindent
+本節では、古典的 Weil コホモロジー理論と呼ぶものを定義する。これは
+\cite[Section 1.2]{Kleiman-cycles} で Weil コホモロジー理論と呼ばれるものと
+ちょうど同じである。
+
+\medskip\noindent
+代数閉体 $k$（基礎体）を固定する。本節で {\it 多様体} とは $k$ 上の多様体をいう。
+『多様体』の第 \ref{varieties-section-varieties} 節を参照せよ。
+標数 $0$ の体 $F$（係数体）を固定する。Weil コホモロジー理論は、
+公理 (A), (B), (C) に従うデータ (D1), (D2), (D3) により与えられる。
+
+\medskip\noindent
+データは次のとおりである：
+\begin{enumerate}
+\item[(D1)] 滑らかな射影多様体の圏から次数付き可換 $F$-代数の圏への反変函手 $H^*$。
+\item[(D2)] 各滑らかな射影多様体 $X$ に対する群準同型
+$\gamma : \CH^i(X) \to H^{2i}(X)$。
+\item[(D3)] 各次元 $d$ の滑らかな射影多様体 $X$ に対する写像
+$\int_X : H^{2d}(X) \to F$。
+\end{enumerate}
+その意味を説明し、関連する用語を導入するため、いくつか注意を述べる。
+
+\medskip\noindent
+(D1) について。滑らかな射影多様体 $X$ に対し、$H^*(X)$ を $X$ の
+{\it コホモロジー} と呼ぶ。滑らかな射影多様体の射 $f : X \to Y$ に対し、写像
+$H^*(f)$ を $f^* : H^*(Y) \to H^*(X)$ と書き、{\it 引き戻し写像} と呼ぶ。
+
+\medskip\noindent
+(D2) について。写像 $\gamma$ を {\it サイクル類写像} と呼び、
+$\gamma(\alpha)$ を $\alpha$ の {\it コホモロジー類} と呼ぶ。
+$Z \subset Y \subset X$ が閉部分スキームで、$Y$ と $X$ が滑らかな射影多様体、
+$Z$ が整であるとする。このとき $[Z]$ は $\CH^*(Y)$ におけるサイクル $[Z]$ の類を
+表すことも、$\CH^*(X)$ におけるその類を表すこともある。この場合、記法
+$\gamma([Z])$ は曖昧であり、意図された意味を文脈から判断しなければならない。
+
+\medskip\noindent
+(D3) について。写像 $\int_X$ は {\it トレース写像} と呼ばれることがあり、
+$\text{Tr}_X$ と書かれることもある。
+
+\medskip\noindent
+第1の公理はしばしば {\it Poincar\'e 双対} と呼ばれる：
+\begin{enumerate}
+\item[(A)] $X$ を次元 $d$ の滑らかな射影多様体とする。このとき
+\begin{enumerate}
+\item すべての $i$ に対し $\dim_F H^i(X) < \infty$ である。
+\item すべての $i$ に対し
+$H^i(X) \times H^{2d - i}(X) \rightarrow H^{2d}(X) \rightarrow F$
+は完全対であり、最後の写像はトレース写像 $\int_X$ である。
+\item $i \in [0, 2d]$ でない限り $H^i(X) = 0$ である。
+\item $\int_X : H^{2d}(X) \to F$ は同型である。
+\end{enumerate}
+\end{enumerate}
+$f : X \to Y$ を、$\dim(X) = d$ および $\dim(Y) = e$ を満たす滑らかな射影多様体の射とする。
+Poincar\'e 双対を用いると、{\it 押し出し}
+$$
+f_* : H^{2d - i}(X) \longrightarrow H^{2e - i}(Y)
+$$
+を線形写像 $f^* : H^i(Y) \to H^i(X)$ の反傾写像として定義できる。式でいえば、
+$a \in H^{2d - i}(X)$ に対して元 $f_*a \in H^{2e - i}(Y)$ は、すべての
+$b \in H^i(Y)$ に対する
+$$
+\int_X f^*b \cup a = \int_Y b \cup f_*a
+$$
+により特徴づけられる。
+
+\begin{lemma}
+\label{weil-lemma-pushforward-classical}
+(A) を満たす (D1) と (D3) が与えられていると仮定する。滑らかな射影多様体の射
+$f : X \to Y$ に対し $f_*(f^*b \cup a) = b \cup f_*a$ である。
+$g : Y \to Z$ が滑らかな射影多様体の別の射ならば
+$g_* \circ f_* = (g \circ f)_*$ である。
+\end{lemma}
+
+\begin{proof}
+第1の等式は
+$$
+\int_Y c \cup b \cup f_*a =
+\int_X f^*c \cup f^*b \cup a =
+\int_Y c \cup f_*(f^*b \cup a).
+$$
+から成り立つ。第2の等式は
+$$
+\int_Z c \cup (g \circ f)_*a = \int_X (g \circ f)^*c \cup a =
+\int_X f^* g^* c \cup a = \int_Y g^*c \cup f_*a = \int_Z c \cup g_*f_*a
+$$
+から成り立つ。これで証明が完了する。
+\end{proof}
+
+\noindent
+第2の公理は、$H^*$ が積により与えられるモノイド構造を {\it K\"unneth 公式} を通じて
+保つことを述べる：
+\begin{enumerate}
+\item[(B)] $X$ と $Y$ を滑らかな射影多様体とする。写像
+$$
+H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y),\quad
+a \otimes b \mapsto \text{pr}_1^*a \cup \text{pr}_2^*b
+$$
+は同型である。
+\end{enumerate}
+第3の公理はサイクル類写像に関する：
+\begin{enumerate}
+\item[(C)] サイクル類写像は次の規則を満たす：
+\begin{enumerate}
+\item 滑らかな射影多様体の射 $f : X \to Y$ と $\beta \in \CH^*(Y)$ に対し
+$\gamma(f^!\beta) = f^*\gamma(\beta)$ である。
+\item 滑らかな射影多様体の射 $f : X \to Y$ と $\alpha \in \CH^*(X)$ に対し
+$\gamma(f_*\alpha) = f_*\gamma(\alpha)$ である。
+\item 任意の滑らかな射影多様体 $X$ と $\alpha, \beta \in \CH^*(X)$ に対し
+$\gamma(\alpha \cdot \beta) = \gamma(\alpha) \cup \gamma(\beta)$ である。
+\item $\int_{\Spec(k)} \gamma([\Spec(k)]) = 1$ である。
+\end{enumerate}
+\end{enumerate}
+
+\begin{remark}
+\label{weil-remark-replace-cup-product-classical}
+$X$ を滑らかな射影多様体とする。写像
+$$
+H^*(X) \otimes_F H^*(X) \longrightarrow H^*(X \times X)
+\xrightarrow{\Delta^*} H^*(X)
+$$
+を得る。ここで第1の矢印は公理 (B) のものであり、$\Delta^*$ は対角射
+$\Delta : X \to X \times X$ に沿う引き戻しである。引き戻しは代数準同型であり
+$\text{pr}_i \circ \Delta = \text{id}$ なので、この合成はカップ積である。
+一方、$X$ 上のサイクル $\alpha, \beta$ に対し、交叉積は式
+$$
+\alpha \cdot \beta =
+\Delta^!(\alpha \times \beta)
+$$
+で定義される。言い換えると、$\alpha \cdot \beta$ は $X \times X$ 上の外積
+$\alpha \times \beta$ の対角による引き戻しである。また
+$\CH^*(X \times X)$ において
+$\alpha \times \beta = \text{pr}_1^*\alpha \cdot \text{pr}_2^*\beta$
+であることにも注意する（証明は省略する）。したがって公理 (C)(a) のもとで、
+公理 (C)(c) は、$\gamma(\alpha \times \beta)$ が
+$\text{pr}_1^*\gamma(\alpha) \cup \text{pr}_2^*\gamma(\beta)$ に等しいという意味で
+$\gamma$ が外積と両立することと同値である。\cite{Kleiman-cycles} では
+公理 (C)(c) はこのように定式化されている。
+\end{remark}
+
+\begin{definition}
+\label{weil-definition-weil-cohomology-theory-classical}
+$k$ を代数閉体、$F$ を標数 $0$ の体とする。$F$ に係数をもつ $k$ 上の
+{\it 古典的 Weil コホモロジー理論} とは、Poincar\'e 双対、K\"unneth 公式、
+およびサイクル類との両立性を満たすデータ (D1), (D2), (D3)、より正確には
+(A), (B), (C) を満たすデータのことである。
+\end{definition}
+
+\noindent
+少しだけ準備をする。
+
+\begin{lemma}
+\label{weil-lemma-degrees-cycles-classical}
+$H^*$ を古典的 Weil コホモロジー理論
+(定義 \ref{weil-definition-weil-cohomology-theory-classical}) とし、
+$X$ を次元 $d$ の滑らかな射影多様体とする。図式
+$$
+\xymatrix{
+\CH^d(X) \ar[r]_-\gamma \ar@{=}[d] &
+H^{2d}(X) \ar[d]^{\int_X} \\
+\CH_0(X) \ar[r]^\deg & F
+}
+$$
+は可換である。ここで $\deg : \CH_0(X) \to \mathbf{Z}$ は
+Chow 『ホモロジー代数』の第 \ref{chow-section-degree-zero-cycles} 節で論じた
+零サイクルの次数である。
+\end{lemma}
+
+\begin{proof}
+公理 (C)(d) により結果は $\Spec(k)$ に対して成り立つ。
+$x : \Spec(k) \to X$ を $X$ の閉点とする。公理 (C)(b) により
+$H^{2d}(X)$ において $\gamma([x]) = x_*\gamma([\Spec(k)])$ である。
+したがって $x_*$ の定義により $\int_X \gamma([x]) = 1$ である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-trace-product-classical}
+$H^*$ を古典的 Weil コホモロジー理論
+(定義 \ref{weil-definition-weil-cohomology-theory-classical}) とし、
+$X$ と $Y$ を滑らかな射影多様体とする。このとき
+$\int_{X \times Y} = \int_X \otimes \int_Y$ である。
+\end{lemma}
+
+\begin{proof}
+$\dim(X) = d$ および $\dim(Y) = e$ とする。公理 (B) により
+$H^{2d + 2e}(X \times Y) = H^{2d}(X) \otimes H^{2e}(Y)$ であり、
+公理 (A)(d) によりこれは $1$-次元である。補題 \ref{weil-lemma-degrees-cycles-classical} により、この $1$-次元ベクトル空間は閉点
+$(x, y)$ の類 $\gamma([x \times y])$ により生成され、
+$\int_{X \times Y} \gamma([x \times y]) = 1$ である。公理 (C)(a), (C)(c) により
+$\gamma([x \times y]) = \gamma([x]) \otimes \gamma([y])$ であり、さらに
+$\int_X \gamma([x]) = 1$ および $\int_Y \gamma([y]) = 1$ なので結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-pr2star-classical}
+$H^*$ を古典的 Weil コホモロジー理論
+(定義 \ref{weil-definition-weil-cohomology-theory-classical}) とし、
+$X$ と $Y$ を滑らかな射影多様体とする。このとき
+$\text{pr}_{2, *} : H^*(X \times Y) \to H^*(Y)$ は
+$a \otimes b$ を $(\int_X a) b$ へ送る。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{weil-lemma-trace-product-classical} の結果と同値である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-class-diagonal-classical}
+$H^*$ を古典的 Weil コホモロジー理論
+(定義 \ref{weil-definition-weil-cohomology-theory-classical}) とし、
+$X$ を次元 $d$ の滑らかな射影多様体とする。$F$ 上の $H^i(X)$ の基底
+$e_{i, j}, j = 1, \ldots, \beta_i$ を選ぶ。K\"unneth 公式を用いて
+$$
+\gamma([\Delta]) =
+\sum\nolimits_{i = 0, \ldots, 2d}
+\sum\nolimits_j e_{i, j} \otimes e'_{2d - i , j}
+\quad\text{in}\quad
+\bigoplus\nolimits_i H^i(X) \otimes_F H^{2d - i}(X)
+$$
+と書く。ここで $e'_{2d - i, j} \in H^{2d - i}(X)$ である。このとき
+$\int_X e_{i, j} \cup e'_{2d - i, j'} = (-1)^i\delta_{jj'}$ である。
+\end{lemma}
+
+\begin{proof}
+$\Delta^* : H^*(X \times X) \to H^*(X)$ はカップ積写像
+$H^*(X) \otimes_F H^*(X) \to H^*(X)$ に等しいことを思い出そう。
+注意 \ref{weil-remark-replace-cup-product-classical} を参照せよ。一方、公理 (C)(b) と
+$\gamma([X]) = 1$ により $\gamma([\Delta]) = \Delta_*\gamma([X]) = \Delta_*1$ である。
+実際、$[X] \cdot [X] = [X]$ なので、公理 (C)(c) によりコホモロジー類
+$\gamma([X])$ は $1$-次元 $F$-代数 $H^0(X)$ における $0$ または $1$ である。
+ここでは公理 (A)(d) と (A)(b) も用いた。しかし $X$ の閉点 $x$ に対し
+$[X] \cdot [x] = [x]$ であり、補題 \ref{weil-lemma-degrees-cycles-classical} により
+$\gamma([x])$ は零でないから、$\gamma([X])$ は零ではありえない。したがって
+$$
+\int_{X \times X} \gamma([\Delta]) \cup a \otimes b =
+\int_{X \times X} \Delta_*1 \cup a \otimes b =
+\int_X a \cup b
+$$
+が $\Delta_*$ の定義から従う。一方、補題 \ref{weil-lemma-trace-product-classical} により
+$$
+\int_{X \times X} (\sum e_{i, j} \otimes e'_{2d -i , j}) \cup a \otimes b =
+\sum (\int_X a \cup e_{i, j})(\int_X e'_{2d - i, j} \cup b)
+$$
+である。符号が $1$ になるよう順序を二度入れ替えたことに注意する。
+$\int_X a \cup e_{i, j} = 1$ で他のすべての対が零となるよう $a$ を選ぶと、
+すべての $b$ に対し
+$\int_X e'_{2d - i, j} \cup b = \int_X a \cup b$、すなわち
+$e'_{2d - i, j} = a$ を得る。これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-square-diagonal-classical}
+$H^*$ を古典的 Weil コホモロジー理論
+(定義 \ref{weil-definition-weil-cohomology-theory-classical}) とし、
+$X$ を滑らかな射影多様体とする。このとき
+$$
+\sum\nolimits_{i = 0, \ldots, 2\dim(X)} (-1)^i\dim_F H^i(X) =
+\deg([\Delta] \cdot [\Delta]) = \deg(c_d(\mathcal{T}_X) \cap [X])
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+右側の等式。次が成り立つ：
+$[\Delta] \cdot [\Delta] = \Delta_*(\Delta^![\Delta])$
+(Chow 『ホモロジー代数』の補題 \ref{chow-lemma-intersect-regularly-embedded})。
+$\Delta_*$ は $0$-サイクルの次数を保つので、$\Delta^![\Delta]$ の次数を計算すれば十分である。
+類 $\Delta^![\Delta]$ は、$[\Delta]$ と $\Delta \subset X \times X$ の法束の最高
+Chern 類とのキャップ積により与えられる
+(Chow 『ホモロジー代数』の補題 \ref{chow-lemma-gysin-fundamental})。
+$\Delta$ の余法束は $\Omega_{X/k}$ なので
+(『スキームの射』の補題 \ref{morphisms-lemma-differentials-diagonal})、法束は所望どおり接束
+$\mathcal{T}_X = \SheafHom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X)$ に等しい。
+
+\medskip\noindent
+左側の等式。補題 \ref{weil-lemma-degrees-cycles-classical} により
+\begin{align*}
+\deg([\Delta] \cdot [\Delta])
+& =
+\int_{X \times X} \gamma([\Delta]) \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*1 \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*(\Delta^*\gamma([\Delta])) \\
+& =
+\int_X \Delta^*\gamma([\Delta])
+\end{align*}
+である。補題 \ref{weil-lemma-class-diagonal-classical} と同様に
+$\gamma([\Delta]) = \sum  e_{i, j} \otimes e'_{2d - i , j}$ と書く。
+$\Delta^*$ はカップ積で与えられることを思い出すと
+$$
+\int_X \sum\nolimits_{i, j} e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} \int_X e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} (-1)^i = \sum (-1)^i\beta_i
+$$
+を得る。これは所望の等式である。
+\end{proof}
+
+
+
+
+\noindent
+ここで古典的 Weil コホモロジー理論とモチーフを次のように結びつける。
+
+\begin{lemma}
+\label{weil-lemma-from-functor-to-weil-classical}
+$k$ を代数閉体、$F$ を標数 $0$ の体とする。対称モノイド圏の
+$\mathbf{Q}$-線形函手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+で、$G(\mathbf{1}(1))$ が次数 $-2$ でのみ非零となるものを考える。このとき、
+(A)(c) と (A)(d) を除く可能性を除いて (A), (B), (C) のすべてを満たすデータ
+(D1), (D2), (D3) が得られる。
+\end{lemma}
+
+\begin{proof}
+$H^*(X) = G(h(X))$ とおくことにより、滑らかな射影多様体の圏から次数付き
+$F$-ベクトル空間の圏への反変函手を得る。仮定により、引き戻しと両立する標準同型
+$$
+H^*(X \times Y) = G(h(X \times Y)) = G(h(X) \otimes h(Y)) =
+G(h(X)) \otimes G(h(Y)) = H^*(X) \otimes H^*(Y)
+$$
+がある。対角 $\Delta : X \to X \times X$ に沿う引き戻しを用いると、引き戻しと
+両立する次数付きベクトル空間の標準写像
+$$
+H^*(X) \otimes H^*(X) = H^*(X \times X) \to H^*(X)
+$$
+を得る。これは $H^*(X)$ 上に函手的な次数付き $F$-代数構造を定める。
+$\Delta$ は因子を入れ替える可換制約
+$h(X) \otimes h(X) \to h(X) \otimes h(X)$ と可換であり、$G$ は対称モノイド圏の
+函手なので可換制約と両立する。また『ホモロジー代数』の例 \ref{homology-example-graded-vector-spaces} の規約により、$H^*(X)$ は次数付き可換代数である。
+したがってデータ (D1) を得る。
+
+\medskip\noindent
+$\mathbf{1}(1)$ はモチーフの圏で可逆なので、$G(\mathbf{1}(1))$ は次数付き
+$F$-ベクトル空間の圏で可逆である。ゆえに
+$\sum_i \dim_F G^i(\mathbf{1}(1)) = 1$ である。仮定により次数 $-2$ でのみ非零なので、
+次数付き $F$-ベクトル空間の同型 $F[2] \to G(\mathbf{1}(1))$ を選べる。
+ここおよび以下で $F[n]$ は次数 $-n$ に $F$ をもち、他では零となる次数付き
+$F$-ベクトル空間を表す。テンソル積との両立性により、すべての
+$n \in \mathbf{Z}$ に対してテンソル積と両立する同型
+$F[2n] \to G(\mathbf{1}(n))$ を得る。
+
+\medskip\noindent
+$X$ を滑らかな射影多様体とする。補題 \ref{weil-lemma-composition-correspondences} により
+$$
+\CH^r(X) \otimes \mathbf{Q} = \text{Corr}^r(\Spec(k), X) =
+\Hom(\mathbf{1}(-r), h(X))
+$$
+である。函手 $G$ を適用すると
+$$
+\gamma :
+\CH^r(X) \otimes \mathbf{Q} \longrightarrow
+\Hom(G(\mathbf{1}(-r)), H^*(X)) = H^{2r}(X)
+$$
+を得る。これがデータ (D2) である。
+
+\medskip\noindent
+$X$ を次元 $d$ の滑らかな射影多様体とする。補題 \ref{weil-lemma-composition-correspondences} により
+$$
+\Mor(h(X)(d), \mathbf{1}) = \Mor((X, 1, d), (\Spec(k), 1, 0)) =
+\text{Corr}^{-d}(X, \Spec(k)) = \CH_d(X)
+$$
+である。したがって $\CH_d(X)$ におけるサイクル $[X]$ の類は射
+$h(X)(d) \to \mathbf{1}$ を定める。$G$ を適用すると
+$$
+H^*(X) \otimes F[-2d] = G(h(X)(d)) \longrightarrow G(\mathbf{1}) = F
+$$
+を得る。この写像は次数ゼロ以外では零であり、次数 $0$ では
+$\int_X : H^{2d}(X) \to F$ を得る。これがデータ (D3) である。
+
+\medskip\noindent
+$X$ を次元 $d$ の滑らかな射影多様体とする。補題 \ref{weil-lemma-dual} により
+$h(X)(d)$ は $h(X)$ の左双対である。したがって
+$G(h(X)(d)) = H^*(X) \otimes F[-2d]$ は次数付き $F$-ベクトル空間の圏における
+$H^*(X)$ の左双対である。『ホモロジー代数』の補題 \ref{homology-lemma-left-dual-graded-vector-spaces} により
+$\sum_i \dim_F H^i(X) < \infty$ であり、
+$\epsilon : h(X)(d) \otimes h(X) \to \mathbf{1}$ は非退化な対
+$H^{2d - i}(X) \otimes_F H^i(X) \to F$ を与える。補題 \ref{weil-lemma-dual} の証明で、
+同一視
+$$
+\Hom(h(X)(d) \otimes h(X), \mathbf{1}) =
+\text{Corr}^{-d}(X \times X, \Spec(k)) =
+\CH_d(X \times X)
+$$
+のもとで $\epsilon$ が $[\Delta]$ により与えられることを見た。したがって
+$\epsilon$ は $[X] : h(X)(d) \to \mathbf{1}$ と
+$h(\Delta)(d) : h(X)(d) \otimes h(X) \to h(X)(d)$ の合成である。
+よって上の対はカップ積に続けて $\int_X$ を適用することで与えられる。
+これで公理 (A) の (a), (b) が証明された。
+
+\medskip\noindent
+公理 (B) は、$G$ がテンソル構造と両立するという仮定と、上のカップ積の構成から従う。
+
+\medskip\noindent
+公理 (C)。$\gamma$ の構成では、$X$ 上のサイクル $\alpha$ をある次数の
+$\Spec(k)$ から $X$ への対応 $a$ と解釈し、次に $G$ を適用する。
+$f : Y \to X$ が滑らかな射影多様体の射ならば、$f^!\alpha$ は $X$ から $Y$ への
+対応 $[\Gamma_f]$ による $\alpha$ の押し出し（！）である。補題 \ref{weil-lemma-functor-and-cycles} を参照せよ。したがって $f^!\alpha$ を
+$\Spec(k)$ から $Y$ への対応とみなすと、これは $a \circ [\Gamma_f]$ に等しい。
+補題 \ref{weil-lemma-composition-correspondences} を参照せよ。$G$ は函手なので、
+$\gamma$ は引き戻しと両立する。すなわち公理 (C)(a) が成り立つ。
+
+\medskip\noindent
+$f : Y \to X$ を滑らかな射影多様体の射とし、$\beta \in \CH^r(Y)$ を $Y$ 上の
+サイクルとする。すべての $c \in H^*(X)$ に対し
+$$
+\int_Y \gamma(\beta) \cup f^*c = \int_X \gamma(f_*\beta) \cup c
+$$
+を示さなければならない。$a, a^t, \eta_X, \eta_Y, [X], [Y]$ を補題 \ref{weil-lemma-prep-dual} のものとする。$b$ を、$\beta$ を次数 $r$ の
+$\Spec(k)$ から $Y$ への対応とみなしたものとする。このとき $f_*\beta$ を
+$\Spec(k)$ から $X$ への対応とみなすと $a^t \circ b$ に等しい。
+補題 \ref{weil-lemma-functor-and-cycles} および
+\ref{weil-lemma-composition-correspondences} を参照せよ。上の表示等式は
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{b \otimes 1}
+h(Y)(r) \otimes h(X)
+\xrightarrow{1 \otimes a}
+h(Y)(r) \otimes h(Y)
+\xrightarrow{\eta_Y}
+h(Y)(r)
+\xrightarrow{[Y]}
+\mathbf{1}(r - e)
+$$
+が
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{a^t \circ b \otimes 1}
+h(X)(r + d - e) \otimes h(X)
+\xrightarrow{\eta_X}
+h(X)(r + d - e)
+\xrightarrow{[X]}
+\mathbf{1}(r - e)
+$$
+に等しいことを示せば成り立つ。これは補題 \ref{weil-lemma-prep-dual} から直ちに従う。
+したがって公理 (C)(b) を得る。
+
+\medskip\noindent
+公理 (C)(c) を証明するため注意 \ref{weil-remark-replace-cup-product-classical} の議論を用いる。
+したがって $\gamma$ が外積と両立することを証明すれば十分である。
+$X$, $Y$ を滑らかな射影多様体、$\alpha$, $\beta$ をそれぞれの上のサイクルとし、
+$a$, $b$ を対応する $\Spec(k)$ から $X$, $Y$ への対応とする。このとき
+$\alpha \times \beta$ は $\Spec(k)$ から $X \otimes Y = X \times Y$ への対応
+$a \otimes b$ に対応する。したがって必要な主張は、$G$ が両側のテンソル構造と
+両立することから従う。
+
+\medskip\noindent
+公理 (C)(d) は、サイクル $[\Spec(k)]$ が $h(\Spec(k))$ 上の恒等射に対応することから従う。
+これで補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-from-weil-to-functor-classical}
+$k$ を代数閉体、$F$ を標数 $0$ の体とする。$H^*$ を古典的 Weil
+コホモロジー理論とする。このとき、対称モノイド圏の $\mathbf{Q}$-線形函手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+であって $H^*(X) = G(h(X))$ を満たすものを構成できる。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-characterize-motives} により、$k$ 上の滑らかな射影スキームを
+対象とし、次数 $0$ の対応を射とする圏上で函手 $G$ を構成し、
+$G(\mathbf{P}^1)$ 上の $G(c_2)$ の像が可逆な次数付き $F$-ベクトル空間と
+なることを示せば十分である。
+すべての滑らかな射影スキームは標準的に滑らかな射影多様体の非交和であるから、
+対象を滑らかな射影多様体、射を次数 $0$ の対応とする圏上で $G$ を構成すれば
+十分である。（若干の詳細は省略する。）
+
+\medskip\noindent
+滑らかな射影多様体 $X$ に対して $G(X) = H^*(X)$ とおく。
+
+\medskip\noindent
+滑らかな射影多様体間の対応 $c \in \text{Corr}^0(X, Y)$ に対し、規則
+$$
+a \longmapsto
+G(c)(a) = \text{pr}_{2, *}(\gamma(c) \cup \text{pr}_1^*a)
+$$
+で与えられる写像 $G(c) : G(X) = H^*(X) \to G(Y) = H^*(Y)$ を考える。
+$G(c)$ が $c$ に関して加法的であり、したがって $\mathbf{Q}$-線形であることは明らかである。
+公理 (C)(a), (C)(b), (C)(c) が与える、$\gamma$ と引き戻し、押し出し、
+および交叉積との両立性から、$c' \in \text{Corr}^0(Y, Z)$ ならば
+$G(c' \circ c) = G(c') \circ G(c)$ であることが分かる。
+実際、$a \in H^*(X)$ に対して
+\begin{align*}
+(G(c') \circ G(c))(a)
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{23, *}_2(\text{pr}^{12}_{2, *}(\gamma(c) \cup
+\text{pr}^{12, *}_1a))) \\
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{123}_{23, *}(\text{pr}^{123, *}_{12}(\gamma(c) \cup
+\text{pr}^{12, *}_1 a))) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\text{pr}^{123, *}_{23}\gamma(c') \cup
+\text{pr}^{123, *}_{12}\gamma(c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\gamma(\text{pr}^{123, *}_{23}c') \cup
+\gamma(\text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}
+\text{pr}^{123}_{13, *}(
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}(
+\gamma(\text{pr}^{123}_{13, *}(
+\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c)) \cup
+\text{pr}^{13, *}_1 a) \\
+& =
+G(c' \circ c)(a)
+\end{align*}
+となる。記法の意味は明らかであろう。最初の等式は定義から従う。
+第2の等式は、補題 \ref{weil-lemma-pr2star-classical} における射影に沿う押し出しの
+記述から直ちに得られる
+$\text{pr}^{23, *}_2 \circ \text{pr}^{12}_{2, *} =
+\text{pr}^{123}_{23, *} \circ \text{pr}^{123, *}_{12}$
+による。第3の等式は補題 \ref{weil-lemma-pushforward-classical} と、$H^*$ が函手で
+あることから従う。第4の等式は公理 (C)(a)、および平坦射に対して Gysin 写像が
+平坦引き戻しと一致することによる
+(Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-flat})。
+第5の等式では公理 (C)(c) と補題 \ref{weil-lemma-pushforward-classical} を用いて
+$\text{pr}^{23}_{3, *} \circ \text{pr}^{123}_{23, *} =
+\text{pr}^{13}_{3, *} \circ \text{pr}^{123}_{13, *}$
+を得る。第6の等式では補題 \ref{weil-lemma-pushforward-classical} の射影公式と
+公理 (C)(b) を用いて、$
+\text{pr}^{123}_{13, *}
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) =
+\gamma(\text{pr}^{123}_{13, *}(
+\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c))$
+を得る。最後の等式は定義そのものである。
+
+\medskip\noindent
+$G$ が函手であることの証明を完了するには、恒等射が保たれることを示さなければ
+ならない。すなわち、$1 = [\Delta] \in \text{Corr}^0(X, X)$ が対応の圏における
+恒等射であるとき（補題 \ref{weil-lemma-category-correspondences} とその証明を参照）、
+$G([\Delta]) = \text{id}$ を示す必要がある。これは補題 \ref{weil-lemma-class-diagonal-classical} による $\gamma([\Delta])$ の決定と
+補題 \ref{weil-lemma-pr2star-classical} から従う。これで、滑らかな射影多様体と次数 $0$ の
+対応からなる圏上の函手 $G$ の構成が完了した。
+
+\medskip\noindent
+公理 (A)(c) と (A)(d) により、$G(\Spec(k)) = H^*(\Spec(k))$ は
+$F$-代数として $F$ と標準的に同型である。K\"unneth 公理 (B) により、この函手は
+テンソル積と両立する。したがって、これは対称モノイド圏の函手である。
+
+\medskip\noindent
+なお、$G(\mathbf{P}^1)$ 上の $G(c_2)$ の像が可逆な次数付き $F$-ベクトル空間で
+あることを確認しなければならない（特に、現時点では $G$ が $M_k$ へ拡張されることは
+まだ分かっていない）。公理 (A)(d) により写像
+$\int_{\mathbf{P}^1} : H^2(\mathbf{P}^1) \to F$ は同型である。
+公理 (A)(b) により $\dim_F H^0(\mathbf{P}^1) = 1$ である。
+補題 \ref{weil-lemma-square-diagonal-classical} と公理 (A)(c) から
+$2 - \dim_F H^1(\mathbf{P}^1) = c_1(T_{\mathbf{P}^1}) = 2$ を得る。
+ゆえに $H^1(\mathbf{P}^1) = 0$ である。したがって
+$$
+G(\mathbf{P}^1) = H^0(\mathbf{P}^1) \oplus H^2(\mathbf{P}^1)
+$$
+である。$1 = c_0 + c_2$ は、$\text{Corr}^0(\mathbf{P}^1, \mathbf{P}^1)$ における
+恒等射を互いに直交する冪等元の和に分解したものであった
+（例 \ref{weil-example-decompose-P1} を参照）。証明補題 \ref{weil-lemma-inverse-h2} で見たように、$c_0 = a \circ b$ であり、ここで
+$a \in \text{Corr}^0(\Spec(k), \mathbf{P}^1)$,
+$b \in \text{Corr}^0(\mathbf{P}^1, \Spec(k))$ かつ
+$b \circ a = 1$ が $\text{Corr}^0(\Spec(k), \Spec(k))$ において成り立つ。
+$F = G(\Spec(k))$ であるから、函手性により $G(c_0)$ は直和因子
+$H^0(\mathbf{P}^1) \subset G(\mathbf{P}^1)$ への射影子である。したがって
+$G(c_2)$ は必然的に $H^2(\mathbf{P}^1)$ への射影であり、証明は完了する。
+\end{proof}
+
+\begin{proposition}
+\label{weil-proposition-weil-cohomology-theory-classical}
+$k$ を代数閉体、$F$ を標数 $0$ の体とする。古典的 Weil コホモロジー理論を
+与えることは、対称モノイド圏の $\mathbf{Q}$-線形函手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+と次数付き $F$-ベクトル空間の同型 $F[2] \to G(\mathbf{1}(1))$ であって、さらに
+任意の滑らかな射影多様体 $X$ に対して
+\begin{enumerate}
+\item $G(h(X))$ は非負次数に集中し、
+\item $\dim_F G^0(h(X)) = 1$
+\end{enumerate}
+を満たすものを与えることと同値である。
+\end{proposition}
+
+\begin{proof}
+$G$ と $F[2] \to G(\mathbf{1}(1))$ が与えられたとき、$H^*(X) = G(h(X))$
+とおけば、(A)(c) と (A)(d) を除く可能性を別として、(A), (B), (C) のすべてを
+満たすデータ (D1), (D2), (D3) が得られる。補題 \ref{weil-lemma-from-functor-to-weil-classical} とその証明を参照せよ。
+既知の公理 (A)(a), (A)(b) のもとでは、仮定 (1), (2) から公理 (A)(c), (A)(d)
+が従うことに注意する。
+
+\medskip\noindent
+逆に、$H^*$ が与えられたとき、補題 \ref{weil-lemma-from-weil-to-functor-classical}
+の構成により函手 $G$ を得る。$X = \mathbf{P}^1, c_0, c_2$ を例 \ref{weil-example-decompose-P1} のものとする。補題 \ref{weil-lemma-inverse-h2} では
+モチーフの同型 $1(-1) \to (X, c_2, 0)$ を構成した。補題 \ref{weil-lemma-from-weil-to-functor-classical} の証明で
+$G(1(-1)) = G(X, c_2, 0) = H^2(\mathbf{P}^1)[-2]$ を見た。
+したがって、公理 (A)(d) の同型
+$\int_{\mathbf{P}^1} : H^2(\mathbf{P}^1) \to F$ は同型
+$G(1(-1)) \to F[-2]$ を与え、それによって同型
+$F[2] \to G(\mathbf{1}(1))$ が定まる。最後に、$G(h(X)) = H^*(X)$ であるから、
+仮定 (1), (2) は公理 (A) から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{非閉体上のサイクル}
+\label{weil-section-cycles-nonclosed}
+
+\noindent
+代数閉でない基礎体上のモチーフを調べる際に役立つ補題をいくつか示す。
+
+\begin{lemma}
+\label{weil-lemma-generated-by-separable}
+$k$ を体、$X$ を $k$ 上の滑らかな射影スキームとする。このとき $\CH_0(X)$ は、
+剰余体が $k$ 上分離的である閉点の類によって生成される。
+\end{lemma}
+
+\begin{proof}
+$k$ の標数が $0$ であるか、完全体ならば補題は直ちに従う。したがって、
+$k$ は標数 $p > 0$ の無限体であると仮定してよい。
+
+\medskip\noindent
+$X$ は次元 $d$ の既約スキームであると仮定してよい。このとき
+$k' = H^0(X, \mathcal{O}_X)$ は $k$ の有限分離体拡大であり、$X$ は $k'$ 上
+幾何学的整である。『多様体』の補題 \ref{varieties-lemma-smooth-geometrically-normal}、\ref{varieties-lemma-proper-geometrically-reduced-global-sections} および \ref{varieties-lemma-baby-stein} を参照せよ。$k$ を $k'$ で置き換え、以後 $X$ は
+幾何学的整であると仮定する。
+
+\medskip\noindent
+$x \in X$ を閉点とする。補題を証明するため、$[x] \in \CH_0(X)$ が、剰余体が
+$k$ 上分離的である閉点の類の整数係数線形結合と有理同値であることを示す。
+豊富な可逆 $\mathcal{O}_X$-加群 $\mathcal{L}$ を選び、
+$$
+V = \{s \in H^0(X, \mathcal{L}) \mid s(x) = 0 \}
+$$
+とおく。$\mathcal{L}$ をある冪で置き換えることにより、次を仮定してよい：
+(a) $\mathcal{L}$ は非常に豊富である、(b) $V$ は $X \setminus x$ 上で
+$\mathcal{L}$ を生成する、(c) 射 $X \setminus x \to \mathbf{P}(V)$ ははめ込みである、
+(d) 写像 $V \to \mathfrak m_x\mathcal{L}_x/\mathfrak m_x^2\mathcal{L}_x$ は全射である。
+『スキームの射』の補題 \ref{morphisms-lemma-finite-type-ample-very-ample},
+『多様体』の補題 \ref{varieties-lemma-generate-over-complement}, および
+『スキームの性質』の命題 \ref{properties-proposition-characterize-ample} を参照せよ。
+集合
+$$
+V^d \supset U =
+\{
+(s_1, \ldots, s_d) \in V^d \mid s_1, \ldots, s_d
+\text{ generate }
+\mathfrak m_x\mathcal{L}_x/\mathfrak m_x^2\mathcal{L}_x
+\text{ over }\kappa(x)
+\}
+$$
+を考える。$\mathcal{O}_{X, x}$ は次元 $d$ の正則局所環なので
+$\dim_{\kappa(x)}(\mathfrak m_x/\mathfrak m_x^2) = d$ である。したがって、$U$ は
+$V^d$ の空でない（Zariski）開集合である。$(s_1, \ldots, s_d) \in U$ に対して
+$H_i = Z(s_i)$ とおく。$s_1, \ldots, s_d$ は
+$\mathfrak m_x\mathcal{L}_x$ を生成するので、ある閉部分スキーム $Z \subset X$ に対し
+$$
+H_1 \cap \ldots \cap H_d = x \amalg Z
+$$
+がスキーム論的に成り立つ。Bertini の定理（『多様体』の補題 \ref{varieties-lemma-bertini} の形）により、一般の元 $s_1 \in V$ に対して
+$H_1 \cap (X \setminus x)$ は $k$ 上滑らかで次元 $d - 1$ である。$s_1$ を選んだ後、
+一般の元 $s_2 \in V$ に対して $H_1 \cap H_2 \cap (X \setminus x)$ は $k$ 上
+滑らかで次元 $d - 2$ である。以下同様である。したがって、十分一般の
+$(s_1, \ldots, s_d) \in U$ に対し $Z$ は $\Spec(k)$ 上 \'etale である。
+特に $H_1 \cap \ldots \cap H_d$ の次元は $0$ であり、Chow 『ホモロジー代数』の補題 \ref{chow-lemma-intersect-properly} を繰り返し適用することにより（詳細は省略）、
+$\CH_0(X)$ において
+$$
+[H_1] \cdot \ldots \cdot [H_d] = [x] + [Z]
+$$
+となる。これにより $[x] \sim_{rat} - [Z] + [Z']$ が示され、証明が完了する。
+ここで $Z' = H'_1 \cap \ldots \cap H'_d$ は $\mathcal{L}$ の十分一般の切断の
+零点集合の一般の完全交叉であり、先と同じ議論により $k$ 上 \'etale である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-chow-limit}
+$K/k$ を代数体拡大、$X$ を $k$ 上の有限型スキームとする。このとき
+$\CH_i(X_K) = \colim \CH_i(X_{k'})$ である。ここで余極限は、$k'/k$ が有限である
+中間拡大 $K/k'/k$ 全体にわたる。
+\end{lemma}
+
+\begin{proof}
+これは Chow 『ホモロジー代数』の補題 \ref{chow-lemma-chow-limit} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-divide-difference-points}
+$k$ を体、$X$ を $k$ 上の幾何学的既約な滑らかな射影スキームとする。
+$x, x' \in X$ を $k$-有理点とし、$n$ を $k$ で可逆な整数とする。このとき、
+有限分離拡大 $k'/k$ であって、$[x] - [x']$ の $X_{k'}$ への引き戻しが
+$\CH_0(X_{k'})$ において $n$ で割り切れるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$k'$ を $k$ の分離代数閉包とする。$[x] - [x']$ の $X_{k'}$ への引き戻しが
+$\CH_0(X_{k'})$ において $n$ で割り切れることを示せたと仮定する。このとき
+補題 \ref{weil-lemma-chow-limit} により結論が従う。したがって、$k$ は分離代数閉で
+あると仮定してよいし、以後そう仮定する。
+
+\medskip\noindent
+$\dim(X) > 1$ と仮定する。$\mathcal{L}$ を $X$ 上の豊富な可逆層とし、
+$$
+V = \{s \in H^0(X, \mathcal{L}) \mid s(x) = 0\text{ and }s(x') = 0 \}
+$$
+とおく。$\mathcal{L}$ をある冪で置き換えると、一般の $v \in V$ に対応する因子
+$H_v \subset X$ は $x$ と $x'$ の外で滑らかになる。『多様体』の補題 \ref{varieties-lemma-generate-over-complement} および \ref{varieties-lemma-bertini} を参照せよ。このような $v$ を見つけるため、$k$ が
+（分離代数閉であることから）無限であることを用いる。一般の $s$ を選べば、
+$\mathfrak m_x\mathcal{L}_x/\mathfrak m_x^2\mathcal{L}_x$ における $s$ の像は
+零でなく、したがって $H_v$ は $x$ で滑らかである（詳細は省略）。$x'$ についても
+同様であり、ゆえに $H_v$ は滑らかである。『多様体』の補題 \ref{varieties-lemma-connectedness-ample-divisor} を、すべてを $k$ の代数閉包へ
+基底変換したものに適用すると、$H_v$ は幾何学的連結であることが分かる。
+$[x] - [x']$ を $\CH_0(H_v)$ の元とみなした場合に結果を証明すれば十分である。
+このようにして曲線の場合へ帰着する。
+
+\medskip\noindent
+$X$ は曲線であると仮定する。このとき $\mathcal{O}_X(x - x')$ は
+$J = \underline{\Pic}^0_{X/k}$ の $k$-有理点 $g$ を定める。Picard Schemes of
+『代数曲線』の補題 \ref{pic-lemma-picard-pieces} を参照せよ。$J$ は $k$ 上の固有で
+滑らかな多様体であり、同時に $k$ 上の群スキームでもある（同じ参照先）。したがって
+$J$ は幾何学的整である（『多様体』の補題 \ref{varieties-lemma-geometrically-connected-criterion} および
+\ref{varieties-lemma-smooth-geometrically-normal} を参照）。言い換えれば、$J$ は
+Abel 多様体である。『亜群スキーム』の定義 \ref{groupoids-definition-abelian-variety} を参照せよ。したがって『亜群スキーム』の命題 \ref{groupoids-proposition-review-abelian-varieties} により
+$[n] : J \to J$ は有限 \'etale である（ここで $n$ が $k$ で可逆であることを用いる）。
+$k$ は分離閉なので、ある $g' \in J(k)$ に対して $g = [n](g')$ である。
+$\mathcal{L}$ を $g'$ に対応する $X$ 上の次数 $0$ の可逆加群とすれば、所望の同型
+$\mathcal{O}_X(x - x') \cong \mathcal{L}^{\otimes n}$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-kernel-to-closure}
+$K/k$ を体の代数拡大、$X$ を $k$ 上の有限型スキームとする。補題 \ref{weil-lemma-chow-limit} で構成した写像 $\CH_i(X) \to \CH_i(X_K)$ の核は
+ねじれ群である。
+\end{lemma}
+
+\begin{proof}
+任意の有限拡大 $k'/k$ に対し、$\pi : X_{k'} \to X$ による平坦引き戻し
+$\CH_i(X) \to \CH_i(X_{k'})$ の核がねじれ群であることを示せば明らかに十分である。
+これは Chow 『ホモロジー代数』の補題 \ref{chow-lemma-finite-flat} により
+$\pi_* \pi^* \alpha = [k' : k] \alpha$ であることから明らかである。
+\end{proof}
+
+\begin{lemma}[Voevodsky]
+\label{weil-lemma-smash-nilpotence}
+\begin{reference}
+\cite{nilpotence}
+\end{reference}
+$k$ を体、$X$ を $k$ 上の幾何学的既約な滑らかな射影スキームとし、
+$x, x' \in X$ を $k$-有理点とする。$n$ が十分大きいとき、零サイクルの類
+$$
+([x] - [x']) \times \ldots \times ([x] - [x']) \in
+\CH_0(X^n)
+$$
+はねじれ元である。
+\end{lemma}
+
+\begin{proof}
+$k$ の代数閉包へ基底変換した後でこの主張を示せれば、補題 \ref{weil-lemma-kernel-to-closure} により引き戻しの核はねじれ群なので、$k$ 上でも
+結果が従う。したがって、$k$ は代数閉であると仮定してよいし、以後そう仮定する。
+
+\medskip\noindent
+Bertini の定理を用いて、$x$ と $x'$ を通る滑らかな曲線 $C \subset X$ を選べる。
+補題 \ref{weil-lemma-divide-difference-points} の証明を参照せよ。したがって、$X$ は
+曲線であると仮定してよい。
+
+\medskip\noindent
+$X$ は曲線で $k$ は代数閉であると仮定する。Picard Schemes of 『代数曲線』の第 \ref{pic-section-hilbert-scheme-points} 節および第 \ref{pic-section-divisors} 節の記法により
+$S^n(X) = \underline{\Hilbfunctor}^n_{X/k}$ と書く。標準的な射
+$$
+\pi : X^n \longrightarrow S^n(X)
+$$
+があり、これは $k$-有理点 $(x_1, \ldots, x_n)$ を、$X$ 上の因子
+$[x_1] + \ldots + [x_n]$ に対応する $k$-有理点へ送る。対称群 $S_n$ は $X^n$ に
+忠実に作用する。射 $\pi$ は $S_n$-不変であり、$\pi$ のファイバーは集合論的に
+$S_n$-軌道である。最後に、$\pi$ は次数 $n!$ の有限平坦射である。
+Picard Schemes of 『代数曲線』の補題 \ref{pic-lemma-universal-object} を参照せよ。
+
+\medskip\noindent
+$\alpha_n$ を、補題の主張の式で与えられる $X^n$ 上の零サイクルとする。
+$\mathcal{L} = \mathcal{O}_X(x - x')$ とおく。このとき
+$c_1(\mathcal{L}) \cap [X] = [x] - [x']$ である。したがって
+$$
+\alpha_n = c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_n) \cap [X^n]
+$$
+である。ここで $\mathcal{L}_i = \text{pr}_i^*\mathcal{L}$ であり、
+$\text{pr}_i : X^n \to X$ は第 $i$ 射影である。『因子』の補題 \ref{divisors-lemma-finite-locally-free-has-norm} または『因子』の補題 \ref{divisors-lemma-norm-in-normal-case} により、$\pi$ に対するノルムが存在する。
+$\mathcal{N} = \text{Norm}_\pi(\mathcal{L}_1)$ とおく。『因子』の補題 \ref{divisors-lemma-norm-invertible} を参照せよ。
+計算により $\Pic(X^n)$ において
+$$
+\pi^*\mathcal{N} =
+(\mathcal{L}_1 \otimes \ldots \otimes \mathcal{L}_n)^{\otimes (n - 1)!}
+$$
+である。詳細は省略する。ヒント：これは、
+$\text{Norm}_\pi : \pi_*\mathcal{O}_{X^n} \to \mathcal{O}_{S^n(X)}$ と自然な写像
+$\pi_*\mathcal{O}_{S^n(X)} \to \mathcal{O}_{X^n}$ との合成が、すべての
+$\sigma \in S_n$ にわたる $\pi_*\mathcal{O}_{X^n}$ 上の $\sigma$ の作用の積に
+等しいことから従う。$\CH_0(S^n(X))$ の元
+$$
+\beta_n = c_1(\mathcal{N})^n \cap [S^n(X)]
+$$
+を考える。$\mathcal{L}_i$ は曲線から引き戻されたものなので
+$c_1(\mathcal{L}_i) \cap c_1(\mathcal{L}_i) = 0$ である。Chow 『ホモロジー代数』の補題 \ref{chow-lemma-vanish-above-dimension} を参照せよ。したがって
+\begin{align*}
+\pi^*\beta_n
+& =
+((n - 1)!)^n
+(\sum\nolimits_{i = 1, \ldots, n} c_1(\mathcal{L}_i))^n \cap [X^n] \\
+& =
+((n - 1)!)^n n^n 
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_n) \cap [X^n] \\
+& =
+(n!)^n \alpha_n
+\end{align*}
+を得る。ゆえに $\beta_n$ がねじれ元であることを示せば十分である。
+
+\medskip\noindent
+標準的な射
+$$
+f : S^n(X) \longrightarrow \underline{\Picardfunctor}^n_{X/k}
+$$
+がある。Picard Schemes of 『代数曲線』の補題 \ref{pic-lemma-picard-pieces}
+を参照せよ。$n \geq 2g - 1$ に対して、この射は射影空間束である
+（詳細は省略する。Picard Schemes of 『代数曲線』の補題 \ref{pic-lemma-picard-pieces} の証明と比較せよ）。可逆層 $\mathcal{N}$ は $f$ の
+ファイバー上自明であることを後で示す。したがって、射影空間束公式
+（Chow 『ホモロジー代数』の補題 \ref{chow-lemma-chow-ring-projective-bundle}）により、
+$\underline{\Picardfunctor}^n_{X/k}$ 上のある可逆加群 $\mathcal{M}$ に対して
+$\mathcal{N} = f^*\mathcal{M}$ である。当然、
+$$
+c_1(\mathcal{N})^n = f^*(c_1(\mathcal{M})^n)
+$$
+を得る。これは $n > g = \dim(\underline{\Picardfunctor}^n_{X/k})$ なので零である。
+先と同様に Chow 『ホモロジー代数』の補題 \ref{chow-lemma-vanish-above-dimension} を用いればよい。
+
+\medskip\noindent
+なお、$f$ のファイバー $F$ 上で $\mathcal{N}$ が自明であることを示す必要がある。
+$f$ のファイバーは射影空間であり、
+$\Pic(\mathbf{P}^m_k) = \mathbf{Z}$
+であるから（『因子』の補題 \ref{divisors-lemma-Pic-projective-space-UFD}）、
+ファイバーに含まれる直線上で $\mathcal{N}$ の次数を計算すれば示せる。ここでは代わりに、
+$\mathcal{N}$ が零と代数的同値であることを証明する。まず、$k$ 上の連結な有限型
+スキーム $T$、$T \times X$ 上の可逆加群 $\mathcal{L}'$、および $k$-有理点
+$p, q \in T$ であって、$\mathcal{M}_p \cong \mathcal{O}_X$ かつ
+$\mathcal{M}_q = \mathcal{L}$ を満たすものが存在すると主張する。実際、
+$\mathcal{L} = \mathcal{O}_X(x - x')$ なので、
+$T = X$, $p = x'$, $q = x$ および
+$\mathcal{L}' = \mathcal{O}_{X \times X}(\Delta)
+\otimes \text{pr}_2^*\mathcal{O}_X(-x')$
+と取れる。次に $i = 1, \ldots, n$ に対し、$T \times X^n$ 上の
+$\mathcal{L}'_i$ を、$\text{id}_T \times \text{pr}_i : T \times X^n \to T \times X$
+による $\mathcal{L}'$ の引き戻しとする。最後に $T \times S^n(X)$ 上で
+$\mathcal{N}' = \text{Norm}_{\text{id}_T \times \pi}(\mathcal{L}'_1)$
+とおく。構成により $\mathcal{N}'_p = \mathcal{O}_{S^n(X)}$ かつ
+$\mathcal{N}'_q = \mathcal{N}$ である。したがって
+$$
+\mathcal{N}'|_{T \times F}
+$$
+は $T \times F \cong T \times \mathbf{P}^m_k$ 上の可逆加群であり、$p$ 上の
+ファイバーは自明な可逆加群、$q$ 上のファイバーは $\mathcal{N}|_F$ である。
+自明束の Euler 標数は $1$ であり、この Euler 標数は族において局所定数なので
+（『スキームの導来圏』の補題 \ref{perfect-lemma-chi-locally-constant-geometric}）、すべての $s \in \mathbf{Z}$ に対して
+$\chi(F, \mathcal{N}^{\otimes s}|_F) = 1$ である。これは
+$\mathcal{N}|_F \cong \mathcal{O}_F$ の場合に限り起こりうる
+（『スキームのコホモロジー』の補題 \ref{coherent-lemma-cohomology-projective-space-over-ring} を参照）。これで証明は完了する。
+若干の詳細は省略した。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Weil コホモロジー理論 I}
+\label{weil-section-axioms}
+
+\noindent
+この節は、任意の体上における第 \ref{weil-section-axioms-classical} 節の類似である。
+すなわち、モチーフの圏から次数付きベクトル空間の圏への対称モノイド圏の函手 $G$ で、
+$G(\mathbf{1}(1))$ が次数 $-2$ にあるものに対応するデータと公理を求める。
+第 \ref{weil-section-old} 節では、一つの補足条件を加えることによって Weil
+コホモロジー理論を定義する。
+
+\medskip\noindent
+体 $k$（基礎体）を固定する。標数 $0$ の体 $F$（係数体）を固定する。
+データは次で与えられる：
+\begin{enumerate}
+\item[(D0)] $1$-次元 $F$-ベクトル空間 $F(1)$。
+\item[(D1)] $k$ 上の滑らかな射影スキームの圏から次数付き可換 $F$-代数の圏への
+反変函手 $H^*$。
+\item[(D2)] $k$ 上の各滑らかな射影スキーム $X$ に対する群準同型
+$\gamma : \CH^i(X) \to H^{2i}(X)(i)$。
+\item[(D3)] $k$ 上の空でない滑らかな射影スキーム $X$ で、次元 $d$ の等次元な
+ものごとに写像 $\int_X : H^{2d}(X)(d) \to F$。
+\end{enumerate}
+これらの意味を説明し、関連する用語を導入するために、いくつか注意を述べる。
+
+\medskip\noindent
+(D0) に関する注意。
+ベクトル空間 $F(1)$ は $F$-ベクトル空間の圏上に {\it Tate 捻り}を与える。
+具体的には、$n \in \mathbf{Z}$ に対して、$n \geq 0$ ならば
+$F(n) = F(1)^{\otimes n}$ とおき、$F(-1) = \Hom_F(F(1), F)$ とおき、
+$n < 0$ ならば $F(n) = F(-1)^{\otimes - n}$ とおく。『代数の続論』の第 \ref{more-algebra-section-picard} 節と比較せよ。$F$-ベクトル空間 $V$ に対し、
+{\it 第 $n$ Tate 捻り}を
+$$
+V(n) = V \otimes_F F(n)
+$$
+で定義する。明らかな記法を用いる。例えば、$F$-ベクトル空間 $U$, $V$, $W$ と
+線形写像 $U \otimes_F V \to W$ が与えられれば、$n, m \in \mathbf{Z}$ に対して
+線形写像 $U(n) \otimes_F V(m) \to W(n + m)$ が得られる。
+
+\medskip\noindent
+(D1) に関する注意。
+$k$ 上の滑らかな射影スキーム $X$ に対し、$H^*(X)$ を $X$ の {\it コホモロジー}
+という。$k$ 上の滑らかな射影スキームの射 $f : X \to Y$ に対し、写像
+$H^*(f)$ を $f^* : H^*(Y) \to H^*(X)$ と表し、これを {\it 引き戻し写像}という。
+
+\medskip\noindent
+(D2) に関する注意。写像 $\gamma$ を {\it サイクル類写像}という。
+$\gamma(\alpha)$ を $\alpha$ の {\it コホモロジー類}という。
+$Z \subset Y \subset X$ が閉部分スキームで、$Y$ と $X$ が $k$ 上滑らかかつ射影的、
+$Z$ が整であるとする。このとき $[Z]$ は、$\CH^*(Y)$ または $\CH^*(X)$ における
+サイクル $[Z]$ の類のどちらも意味しうる。この場合、記法 $\gamma([Z])$ は曖昧であり、
+意図した意味を文脈から判断しなければならない。
+
+\medskip\noindent
+(D3) に関する注意。写像 $\int_X$ を {\it トレース写像}と呼ぶことがあり、
+$\text{Tr}_X$ と表すこともある。
+
+\medskip\noindent
+最初の公理はしばしば {\it Poincar\'e 双対性}と呼ばれる。
+\begin{enumerate}
+\item[(A)] $X$ を $k$ 上の空でない滑らかな射影スキームで、次元 $d$ の等次元な
+ものとする。このとき
+\begin{enumerate}
+\item すべての $i$ に対して $\dim_F H^i(X) < \infty$ であり、
+\item すべての $i$ に対し
+$H^i(X) \times H^{2d - i}(X)(d) \rightarrow
+H^{2d}(X)(d) \rightarrow F$
+は完全対である。ここで最後の写像はトレース写像 $\int_X$ である。
+\end{enumerate}
+\end{enumerate}
+$f : X \to Y$ を空でない滑らかな射影スキームの射とし、$X$ は次元 $d$ の等次元、
+$Y$ は次元 $e$ の等次元であるとする。Poincar\'e 双対性を用いて、{\it 押し出し}
+$$
+f_* : H^{2d - i}(X)(d) \longrightarrow H^{2e - i}(Y)(e)
+$$
+を、線形写像 $f^* : H^i(Y) \to H^i(X)$ の双対写像として定義できる。
+式で書けば、$a \in H^{2d - i}(X)(d)$ に対して、元
+$f_*a \in H^{2e - i}(Y)(e)$ は、すべての $b \in H^i(Y)$ に対する
+$$
+\int_X f^*b \cup a = \int_Y b \cup f_*a
+$$
+によって特徴づけられる。
+
+\begin{lemma}
+\label{weil-lemma-pushforward}
+(A) を満たす (D0), (D1), (D3) が与えられたとする。$f : X \to Y$ を $k$ 上の
+空でない等次元な滑らかな射影スキームの射とすれば、
+$f_*(f^*b \cup a) = b \cup f_*a$ である。$g : Y \to Z$ を第2の射とし、$Z$ が
+空でなく滑らかかつ射影的で等次元ならば、$g_* \circ f_* = (g \circ f)_*$ である。
+\end{lemma}
+
+\begin{proof}
+第1の等式は
+$$
+\int_Y c \cup b \cup f_*a =
+\int_X f^*c \cup f^*b \cup a =
+\int_Y c \cup f_*(f^*b \cup a).
+$$
+から成り立つ。第2の等式は
+$$
+\int_Z c \cup (g \circ f)_*a = \int_X (g \circ f)^*c \cup a =
+\int_X f^* g^* c \cup a = \int_Y g^*c \cup f_*a = \int_Z c \cup g_*f_*a
+$$
+から成り立つ。これで証明は終わる。
+\end{proof}
+
+\noindent
+第2の公理は、$H^*$ が積によるモノイド構造を {\it K\"unneth 公式}を介して
+保つことを述べる。
+\begin{enumerate}
+\item[(B)] $X$ と $Y$ を $k$ 上の滑らかな射影スキームとする。
+\begin{enumerate}
+\item 写像 $H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y)$,
+$\alpha \otimes \beta \mapsto \text{pr}_1^*\alpha \cup \text{pr}_2^*\beta$
+は同型である。
+\item $X$ と $Y$ が空でなく等次元ならば、(a) を介して
+$\int_{X \times Y} = \int_X \otimes \int_Y$ である。
+\end{enumerate}
+\end{enumerate}
+公理 (B)(b) を用いると、射影に沿う押し出しを計算できる。
+
+\begin{lemma}
+\label{weil-lemma-pr2star}
+(A), (B) を満たす (D0), (D1), (D3) が与えられたとする。$X$ と $Y$ を $k$ 上の
+空でない滑らかな射影スキームで、それぞれ次元 $d$, $e$ の等次元なものとする。
+このとき $\text{pr}_{2, *} : H^*(X \times Y)(d + e) \to H^*(Y)(e)$ は
+$a \otimes b$ を $(\int_X a) b$ へ送る。
+\end{lemma}
+
+\begin{proof}
+公理 (B)(a), (B)(b) から従う。
+\end{proof}
+
+\noindent
+第3の公理はサイクル類写像に関するものである。
+\begin{enumerate}
+\item[(C)] サイクル類写像は次の規則を満たす。
+\begin{enumerate}
+\item $k$ 上の滑らかな射影スキームの射 $f : X \to Y$ と
+$\beta \in \CH^*(Y)$ に対し $\gamma(f^!\beta) = f^*\gamma(\beta)$ である。
+\item $k$ 上の空でない等次元な滑らかな射影スキームの射 $f : X \to Y$ と
+$\alpha \in \CH^*(X)$ に対し $\gamma(f_*\alpha) = f_*\gamma(\alpha)$ である。
+\item $k$ 上の任意の滑らかな射影スキーム $X$ と
+$\alpha, \beta \in \CH^*(X)$ に対し
+$\gamma(\alpha \cdot \beta) = \gamma(\alpha) \cup \gamma(\beta)$ である。
+\item $\int_{\Spec(k)} \gamma([\Spec(k)]) = 1$ である。
+\end{enumerate}
+\end{enumerate}
+公理 (C)(b) を詳しく説明しよう。$f : X \to Y$ は (C)(b) のとおりで、
+$\dim(X) = d$, $\dim(Y) = e$ とする。このとき Chow 群上の押し出しは
+$$
+f_* : \CH^{d - i}(X) = \CH_i(X) \to \CH_i(Y) = \CH^{e - i}(Y)
+$$
+を与える。$\alpha \in \CH^{d - i}(X)$ とする。一方では
+$f_*\alpha \in \CH^{e - i}(Y)$ であり、したがって
+$\gamma(f_*\alpha) \in H^{2e - 2i}(Y)(e - i)$ である。他方では
+$\gamma(\alpha) \in H^{2d - 2i}(X)(d - i)$ であり、したがって同様に
+$f_*\gamma(\alpha) \in H^{2e - 2i}(Y)(e - i)$ である。ゆえに条件
+$\gamma(f_*\alpha) = f_*\gamma(\alpha)$ は意味をもつ。
+
+\begin{remark}
+\label{weil-remark-replace-cup-product}
+(A), (B), (C)(a) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の滑らかな射影スキームとする。写像
+$$
+H^*(X) \otimes_F H^*(X) \longrightarrow H^*(X \times X)
+\xrightarrow{\Delta^*} H^*(X)
+$$
+を得る。最初の矢印は公理 (B) のものであり、$\Delta^*$ は対角射
+$\Delta : X \to X \times X$ に沿う引き戻しである。引き戻しは代数準同型であり、
+$\text{pr}_i \circ \Delta = \text{id}$ なので、この合成はカップ積である。
+他方、$X$ 上のサイクル $\alpha, \beta$ に対し、交叉積は式
+$$
+\alpha \cdot \beta =
+\Delta^!(\alpha \times \beta)
+$$
+で定義される。言い換えれば、$\alpha \cdot \beta$ は $X \times X$ 上の外積
+$\alpha \times \beta$ の対角射による引き戻しである。また
+$\CH^*(X \times X)$ において
+$\alpha \times \beta = \text{pr}_1^*\alpha \cdot \text{pr}_2^*\beta$
+であることにも注意する（証明は省略する）。したがって公理 (C)(a) のもとでは、
+公理 (C)(c) は、$\gamma(\alpha \times \beta)$ が
+$\text{pr}_1^*\gamma(\alpha) \cup \text{pr}_2^*\gamma(\beta)$ に等しいという意味で
+$\gamma$ が外積と両立することと同値である。
+\end{remark}
+
+\begin{lemma}
+\label{weil-lemma-base}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。このとき
+$i \not = 0$ に対して $H^i(\Spec(k)) = 0$ であり、唯一の $F$-代数同型
+$F = H^0(\Spec(k))$ が存在する。また $\gamma([\Spec(k)]) = 1$ かつ
+$\int_{\Spec(k)} 1 = 1$ である。
+\end{lemma}
+
+\begin{proof}
+公理 (C)(d) により $H^0(\Spec(k))$ は零でなく、さらに
+$\gamma([\Spec(k)])$ も零でない。$\Spec(k) \times \Spec(k) = \Spec(k)$ なので、
+公理 (B)(a) により
+$$
+H^*(\Spec(k)) \otimes_F H^*(\Spec(k)) = H^*(\Spec(k))
+$$
+を得る。次元を比較すれば、$H^0$ のみが零でなく、その次元は $1$ である。
+したがって、$1 \in F$ を $1 \in H^0(\Spec(k))$ へ送る唯一の $F$-代数同型により
+$F = H^0(\Spec(k))$ である。$\Spec(k)$ の Chow 環において
+$[\Spec(k)] \cdot [\Spec(k)] = [\Spec(k)]$ なので、公理 (C)(c) により
+$\gamma([\Spec(k)) \cup \gamma([\Spec(k)]) = \gamma([\Spec(k)])$
+を得る。$\gamma([\Spec(k)])$ は零でないことが既に分かっているから、これは $1$ に
+等しくなければならない。最後に、公理 (C)(d) により
+$\int_{\Spec(k)} \gamma([\Spec(k)]) = 1$ なので、
+$\int_{\Spec(k)} 1 = 1$ である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-unit}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の滑らかな射影スキームとする。$X = \emptyset$ ならば
+$H^*(X) = 0$ である。$X$ が空でなければ $\gamma([X]) = 1$ であり、
+$H^0(X)$ において $1 \not = 0$ である。
+\end{lemma}
+
+\begin{proof}
+まず $X$ は空でないと仮定する。$[X]$ は構造射 $p : X \to \Spec(k)$ による
+$[\Spec(k)]$ の引き戻しであることに注意する。したがって、公理 (C)(a) と
+補題 \ref{weil-lemma-base} により $\gamma([X]) = 1$ である。
+$X' \subset X$ を既約成分とする。函手性により、$H^0(X')$ において
+$1 \not = 0$ であることを示せば十分である。したがって、$X$ は既約であると仮定して
+よいし、以後そう仮定する。特にこれは空でなく、ある次元 $d$ の等次元である。
+$1 \not = 0$ を示すには $H^*(X)$ が零でないことを示せば十分である。
+
+\medskip\noindent
+$x \in X$ を、剰余体 $k'$ が $k$ 上分離的である閉点とする。『多様体』の補題 \ref{varieties-lemma-smooth-separable-closed-points-dense} を参照せよ。
+$i : \Spec(k') \to X$ を包含射とし、$p : X \to \Spec(k)$ を構造射とする。
+$\CH_0(\Spec(k))$ において
+$p_*i_*[\Spec(k')] = [k' : k][\Spec(k)]$ である。公理 (C)(b) を2回用い、
+補題 \ref{weil-lemma-base} を用いると、
+$$
+p_*i_*\gamma([\Spec(k')]) = \gamma([k' : k][\Spec(k)]) = [k' : k]
+\in F = H^0(\Spec(k))
+$$
+は零でない。したがって $i_*\gamma([\Spec(k)]) \in H^{2d}(X)(d)$ は零でない
+（$p_*$ により零でないものへ写るため）。これで $X$ が空でない場合の証明は完了する。
+
+\medskip\noindent
+最後に空スキームの場合を考える。公理 (B)(a) は
+$H^*(\emptyset) \otimes H^*(\emptyset) = H^*(\emptyset)$ を与える。したがって
+$H^*(\emptyset)$ は零であるか、次数 $0$ の $1$-次元空間である。さらに公理 (B)(a) は、
+$k$ 上のすべての滑らかな射影スキーム $X$ に対して
+$H^*(\emptyset) \otimes H^*(X) = H^*(\emptyset)$ を与える。公理 (A)(b) と上で示した
+$H^0(X)$ の非消滅により、$\dim(X) > 0$ ならば $H^*(X)$ は少なくとも二つの次数で
+零でない。したがって $H^*(\emptyset)$ は零でなければならない。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-push-unit}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$i : X \to Y$ を $k$ 上の空でない等次元な滑らかな射影スキームの閉埋め込みとする。
+このとき $c = \dim(Y) - \dim(X)$ とおけば、$H^{2c}(Y)(c)$ において
+$\gamma([X]) = i_*1$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-unit} により $H^0(X)$ において $1 = \gamma([X])$ であり、
+これに公理 (C)(b) を適用すればよい。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-class-diagonal}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の空でない滑らかな射影スキームで、次元 $d$ の等次元なものとする。
+$H^i(X)$ の $F$ 上の基底 $e_{i, j}, j = 1, \ldots, \beta_i$ を選ぶ。
+K\"unneth 公式を用いて
+$$
+\gamma([\Delta]) =
+\sum\nolimits_i
+\sum\nolimits_j e_{i, j} \otimes e'_{2d - i , j}
+\quad\text{in}\quad
+\bigoplus\nolimits_i H^i(X) \otimes_F H^{2d - i}(X)(d)
+$$
+と書く。ここで $e'_{2d - i, j} \in H^{2d - i}(X)(d)$ である。このとき
+$\int_X e_{i, j} \cup e'_{2d - i, j'} = (-1)^i\delta_{jj'}$ である。
+\end{lemma}
+
+\begin{proof}
+$\Delta^* : H^*(X \times X) \to H^*(X)$ はカップ積写像
+$H^*(X) \otimes_F H^*(X) \to H^*(X)$ に等しいことを思い出そう。
+注意 \ref{weil-remark-replace-cup-product} を参照せよ。他方、
+$\gamma([\Delta]) = \Delta_*1$ であることにも注意する
+（補題 \ref{weil-lemma-push-unit}）。したがって補題 \ref{weil-lemma-pushforward} により
+$$
+\int_{X \times X} \gamma([\Delta]) \cup a \otimes b =
+\int_{X \times X} \Delta_*1 \cup a \otimes b =
+\int_X a \cup b
+$$
+である。他方、公理 (B)(b) により
+$$
+\int_{X \times X} (\sum e_{i, j} \otimes e'_{2d -i , j}) \cup a \otimes b =
+\sum (\int_X a \cup e_{i, j})(\int_X e'_{2d - i, j} \cup b)
+$$
+である。各項の符号が $1$ となるように順序を2回入れ替えたことに注意する。
+そこで、$\int_X a \cup e_{i, j} = 1$ で他のすべての対が零となるように $a$ を
+選べば、すべての $b$ に対して
+$\int_X e'_{2d - i, j} \cup b = \int_X a \cup b$ である。すなわち
+$e'_{2d - i, j} = a$ である。これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-cohomology-P1}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。このとき
+$H^*(\mathbf{P}^1_k)$ は次数 $0$ と $2$ で $1$-次元、その他の次数では零である。
+\end{lemma}
+
+\begin{proof}
+$x \in \mathbf{P}^1_k$ を $k$-有理点とする。
+$\Delta = \text{pr}_1^*x + \text{pr}_2^*x$ は
+$\mathbf{P}^1_k \times \mathbf{P}^1_k$ 上の因子としての等式である。公理 (C)(a) と
+$\gamma$ の加法性により
+$$
+\gamma([\Delta]) =
+\text{pr}_1^*\gamma([x]) +
+\text{pr}_2^*\gamma([x]) =
+\gamma([x]) \otimes 1 + 1 \otimes \gamma([x])
+$$
+が $H^*(\mathbf{P}^1_k \times \mathbf{P}^1_k) =
+H^*(\mathbf{P}^1_k) \otimes_F H^*(\mathbf{P}^1_k)$ において成り立つ。
+しかし補題 \ref{weil-lemma-class-diagonal} により、$\gamma([\Delta])$ は
+$\sum \beta_i$ 個未満の純粋テンソルの和としては書けない。ここで
+$\beta_i = \dim_F H^i(\mathbf{P}^1_k)$ である。したがって
+$\sum \beta_i \leq 2$ である。補題 \ref{weil-lemma-unit} により
+$H^0(\mathbf{P}^1_k) \not = 0$ である。Poincar\'e 双対性、より正確には公理 (A)(b)
+により $\beta_0 = \beta_2$ である。以上から補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-weil-additive}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ と $Y$ が $k$ 上の滑らかな射影スキームならば、余射影を $i$, $j$ としたとき
+$H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$,
+$a \mapsto (i^*a, j^*a)$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$X$ または $Y$ が空ならば、補題 \ref{weil-lemma-unit} により
+$H^*(\emptyset) = 0$ なので主張は成り立つ。したがって $X$, $Y$ はともに空でないと
+仮定してよい。
+
+\medskip\noindent
+まず写像が単射であることを示す。滑らかな射影スキームの射 $X' \to X$ と
+$Y' \to Y$ であって、$X'$, $Y'$ が同じ次元の等次元であり、さらに
+$X' \to X$, $Y' \to Y$ がそれぞれ切断をもつものを見つけられることに注意する。
+実際、$X = \coprod X_d$ と $Y = \coprod Y_e$ を、それぞれ次元 $d$, $e$ の
+等次元な開閉部分スキームへ分解する。十分大きいある $n$ に対して
+$X' = \coprod X_d \times \mathbf{P}^{n - d}$ および
+$Y' = \coprod Y_e \times \mathbf{P}^{n - e}$ と取ればよい。したがって
+$X' \amalg Y' \to X \amalg Y$ による引き戻しは（切断があるので）単射であり、
+次の段落で行うように $X', Y'$ に対して単射性を示せば十分である。
+
+\medskip\noindent
+$X$ と $Y$ がともに次元 $d$ の等次元である場合に写像が単射であることを示そう。
+$\CH^0(X \amalg Y)$ において $[X \amalg Y] = [X] + [Y]$ であり、$[X]$ と $[Y]$ は
+$\CH^0(X \amalg Y)$ における互いに直交する冪等元である。したがって
+$$
+1 = \gamma([X \amalg Y] = \gamma([X]) + \gamma([Y]) = i_*1 + j_*1
+$$
+は直交する冪等元への分解である。ここで補題 \ref{weil-lemma-unit} および \ref{weil-lemma-push-unit} および公理 (C)(c) を用いた。射影公式
+（補題 \ref{weil-lemma-pushforward}）により
+$$
+a = a \cup 1 = a \cup i_*1 + a \cup j_*1 =
+i_*(i^*a) + j_*(j^*a)
+$$
+なので、写像は単射である。
+
+\medskip\noindent
+写像が全射であることを示す。$e = \gamma([X])$ と $f = \gamma([Y])$ を
+$H^0(X \amalg Y)$ の元とみなす。公理 (C)(a) により
+$i^*e = 1$, $i^*f = 0$, $j^*e = 0$, $j^*f = 1$ である。したがって
+$i^* : H^*(X \amalg Y) \to  H^*(X)$ と
+$j^* : H^*(X \amalg Y) \to H^*(Y)$ が全射ならば、$(i^*, j^*)$ も全射である。
+実際、$a, a' \in H^*(X \amalg Y)$ に対して
+$$
+(i^*a, j^*a') = (i^*(a \cup e + a' \cup f), j^*(a \cup e + a' \cup f))
+$$
+である。対称性により $i^* : H^*(X \amalg Y) \to  H^*(X)$ が全射であることを
+示せば十分である。射 $Y \to X$ が存在すれば、$g \circ i = \text{id}_X$ を満たす
+射 $g : X \amalg Y \to X$ が存在し、結論が従う。証明を完了するため、$i^*$ の
+全射性は、零でない次数付き $F$-ベクトル空間をテンソルした後で示せば十分であることに
+注意する。したがって、公理 (B)(b) とコホモロジーの非消滅
+（補題 \ref{weil-lemma-unit}）により、ある有限分離拡大 $k'/k$ に対して $X$, $Y$ を
+$X \times \Spec(k')$, $Y \times \Spec(k')$ で置き換えた後に $i^*$ の全射性を
+示せば十分である。$\kappa(x) = k'$ を満たす閉点 $x \in X$ が存在するように
+$k'$ を選べる（『多様体』の補題 \ref{varieties-lemma-smooth-separable-closed-points-dense} を参照）。このとき射
+$Y \times \Spec(k') \to X \times \Spec(k')$ が存在するので、証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-from-functor-to-weil}
+$k$ を体、$F$ を標数 $0$ の体とする。対称モノイド圏の $\mathbf{Q}$-線形函手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+であって、$G(\mathbf{1}(1))$ が次数 $-2$ でのみ零でないものが与えられたとする。
+このとき、上の (A), (B), (C) のすべてを満たすデータ (D0), (D1), (D2), (D3)
+が得られる。
+\end{lemma}
+
+\begin{proof}
+この証明は補題 \ref{weil-lemma-from-functor-to-weil-classical} の証明と同じである。
+読者には、代わりにそちらの補題の証明を読むことを強く勧める。
+
+\medskip\noindent
+$H^*(X) = G(h(X))$ とおくことにより、$k$ 上の滑らかな射影スキームの圏から
+次数付き $F$-ベクトル空間の圏への反変函手を得る。仮定により、引き戻しと両立する
+標準的同型
+$$
+H^*(X \times Y) = G(h(X \times Y)) = G(h(X) \otimes h(Y)) =
+G(h(X)) \otimes G(h(Y)) = H^*(X) \otimes H^*(Y)
+$$
+がある。対角射 $\Delta : X \to X \times X$ に沿う引き戻しを用いると、
+引き戻しと両立する次数付きベクトル空間の標準的写像
+$$
+H^*(X) \otimes H^*(X) = H^*(X \times X) \to H^*(X)
+$$
+を得る。これにより $H^*(X)$ 上に函手的な次数付き $F$-代数構造が定まる。
+$\Delta$ は可換性制約 $h(X) \otimes h(X) \to h(X) \otimes h(X)$
+（因子の交換）と可換であり、$G$ は対称モノイド圏の函手なので可換性制約と両立する。
+さらに『ホモロジー代数』の例 \ref{homology-example-graded-vector-spaces} の規約により、
+$H^*(X)$ は次数付き可換代数である。したがってデータ (D1) を得る。
+
+\medskip\noindent
+$\mathbf{1}(1)$ はモチーフの圏で可逆なので、$G(\mathbf{1}(1))$ は次数付き
+$F$-ベクトル空間の圏で可逆である。したがって
+$\sum_i \dim_F G^i(\mathbf{1}(1)) = 1$ である。仮定により次数 $-2$ でのみ
+零でない。データ (D0) はベクトル空間 $F(1) = G^{-2}(\mathbf{1}(1))$ である。
+$G$ は対称モノイド函手なので、すべての $n \in \mathbf{Z}$ に対して
+$F(n) = G^{-2n}(\mathbf{1}(n))$ である。したがって
+$$
+H^{2r}(X)(r) = G^{2r}(h(X)) \otimes G^{-2r}(\mathbf{1}(r)) =
+G^0(h(X)(r))
+$$
+を得る。この式を以下で頻繁に用いる。
+
+\medskip\noindent
+$X$ を $k$ 上の滑らかな射影スキームとする。補題 \ref{weil-lemma-composition-correspondences} により
+$$
+\CH^r(X) \otimes \mathbf{Q} = \text{Corr}^r(\Spec(k), X) =
+\Hom(\mathbf{1}(-r), h(X)) = \Hom(\mathbf{1}, h(X)(r))
+$$
+である。函手 $G$ を適用すると、これは $\Hom(G(\mathbf{1}), G(h(X)(r)))$ へ写る。
+$G^0(\mathbf{1}) = F$ の $1$ の像を $G^0(h(X)(r)) = H^{2r}(X)(r)$ に取ると、
+$$
+\gamma :
+\CH^r(X) \otimes \mathbf{Q} \longrightarrow H^{2r}(X)(r)
+$$
+を得る。これがデータ (D2) である。
+
+\medskip\noindent
+$X$ を $k$ 上の空でない滑らかな射影スキームで、次元 $d$ の等次元なものとする。
+補題 \ref{weil-lemma-composition-correspondences} により
+$$
+\Mor(h(X)(d), \mathbf{1}) = \Mor((X, 1, d), (\Spec(k), 1, 0)) =
+\text{Corr}^{-d}(X, \Spec(k)) = \CH_d(X)
+$$
+である。したがって $\CH_d(X)$ におけるサイクル $[X]$ の類は射
+$h(X)(d) \to \mathbf{1}$ を定める。$G$ を適用して次数 $0$ 部分を取ると
+$$
+H^{2d}(X)(d) = G^0(h(X)(d)) \longrightarrow G^0(\mathbf{1}) = F
+$$
+を得る。この写像 $\int_X : H^{2d}(X)(d) \to F$ がデータ (D3) である。
+
+\medskip\noindent
+$X$ を $k$ 上の空でない滑らかな射影スキームで、次元 $d$ の等次元なものとする。
+補題 \ref{weil-lemma-dual} により $h(X)(d)$ は $h(X)$ の左双対である。したがって
+$G(h(X)(d)) = H^*(X) \otimes_F F(d)[2d]$ は、次数付き $F$-ベクトル空間の圏で
+$H^*(X)$ の左双対である。ここで $[n]$ は次数付きベクトル空間のシフト函手である。
+『ホモロジー代数』の補題 \ref{homology-lemma-left-dual-graded-vector-spaces} により
+$\sum_i \dim_F H^i(X) < \infty$ であり、
+$\epsilon : h(X)(d) \otimes h(X) \to \mathbf{1}$ は非退化な対
+$H^{2d - i}(X)(d) \otimes_F H^i(X) \to F$ を与える。
+補題 \ref{weil-lemma-dual} の証明では、同一視
+$$
+\Hom(h(X)(d) \otimes h(X), \mathbf{1}) =
+\text{Corr}^{-d}(X \times X, \Spec(k)) =
+\CH_d(X \times X)
+$$
+を介して $\epsilon$ が $[\Delta]$ で与えられることを見た。したがって
+$\epsilon$ は $[X] : h(X)(d) \to \mathbf{1}$ と
+$h(\Delta)(d) : h(X)(d) \otimes h(X) \to h(X)(d)$ の合成である。
+ゆえに上の対は、カップ積に続けて $\int_X$ を適用することで与えられる。
+これで公理 (A) が証明された。
+
+\medskip\noindent
+公理 (B) は、$G$ がテンソル構造と両立するという仮定、および上で行ったカップ積の
+構成から従う。
+
+\medskip\noindent
+公理 (C)。$\gamma$ の構成では、$X$ 上のサイクル $\alpha$ を、ある次数の
+$\Spec(k)$ から $X$ への対応 $a$ と解釈し、次に $G$ を適用する。
+$f : Y \to X$ を $k$ 上の空でない等次元な滑らかな射影スキームの射とする。このとき
+$f^!\alpha$ は、$X$ から $Y$ への対応 $[\Gamma_f]$ による $\alpha$ の押し出し（！）で
+ある。補題 \ref{weil-lemma-functor-and-cycles} を参照せよ。したがって
+$f^!\alpha$ を $\Spec(k)$ から $Y$ への対応とみなしたものは
+$a \circ [\Gamma_f]$ に等しい。補題 \ref{weil-lemma-composition-correspondences} を参照せよ。
+$G$ は函手なので、$\gamma$ は引き戻しと両立する。すなわち公理 (C)(a) が成り立つ。
+
+\medskip\noindent
+$f : Y \to X$ を $k$ 上の空でない等次元な滑らかな射影スキームの射とし、
+$\beta \in \CH^r(Y)$ を $Y$ 上のサイクルとする。すべての $c \in H^*(X)$ に対して
+$$
+\int_Y \gamma(\beta) \cup f^*c = \int_X \gamma(f_*\beta) \cup c
+$$
+を示さなければならない。$a, a^t, \eta_X, \eta_Y, [X], [Y]$ を補題 \ref{weil-lemma-prep-dual} のものとする。$b$ を、$\Spec(k)$ から $Y$ への次数 $r$ の
+対応とみなした $\beta$ とする。このとき $f_*\beta$ を $\Spec(k)$ から $X$ への
+対応とみなしたものは $a^t \circ b$ に等しい。補題 \ref{weil-lemma-functor-and-cycles} および \ref{weil-lemma-composition-correspondences} を参照せよ。
+上の表示等式を示すには、
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{b \otimes 1}
+h(Y)(r) \otimes h(X)
+\xrightarrow{1 \otimes a}
+h(Y)(r) \otimes h(Y)
+\xrightarrow{\eta_Y}
+h(Y)(r)
+\xrightarrow{[Y]}
+\mathbf{1}(r - e)
+$$
+が
+$$
+h(X) = \mathbf{1} \otimes h(X)
+\xrightarrow{a^t \circ b \otimes 1}
+h(X)(r + d - e) \otimes h(X)
+\xrightarrow{\eta_X}
+h(X)(r + d - e)
+\xrightarrow{[X]}
+\mathbf{1}(r - e)
+$$
+に等しいことを示せばよい。これは補題 \ref{weil-lemma-prep-dual} から直ちに従う。
+ゆえに公理 (C)(b) を得る。
+
+\medskip\noindent
+公理 (C)(c) を証明するため、注意 \ref{weil-remark-replace-cup-product-classical} の議論を
+用いる。したがって $\gamma$ が外積と両立することを示せば十分である。
+$X$, $Y$ を $k$ 上の空でない滑らかな射影スキームとし、$\alpha$, $\beta$ を
+それぞれその上のサイクルとする。$a$, $b$ を、これらに対応する $\Spec(k)$ から
+$X$, $Y$ への対応とする。このとき $\alpha \times \beta$ は、$\Spec(k)$ から
+$X \otimes Y = X \times Y$ への対応 $a \otimes b$ に対応する。したがって所望の主張は、
+$G$ が両辺のテンソル構造と両立することから従う。
+
+\medskip\noindent
+サイクル $[\Spec(k)]$ は $h(\Spec(k))$ 上の恒等射に対応するので、公理 (C)(d) が
+従う。これで補題の証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-from-weil-to-functor}
+$k$ を体、$F$ を標数 $0$ の体とする。(A), (B), (C) を満たす
+(D0), (D1), (D2), (D3) が与えられたとき、対称モノイド圏の $\mathbf{Q}$-線形函手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+であって $H^*(X) = G(h(X))$ を満たすものを構成できる。
+\end{lemma}
+
+\begin{proof}
+この補題の証明は補題 \ref{weil-lemma-from-weil-to-functor-classical} の証明と同じである。
+読者には、代わりにそちらの補題の証明を読むことを強く勧める。
+
+\medskip\noindent
+補題 \ref{weil-lemma-characterize-motives} により、$k$ 上の滑らかな射影スキームを対象とし、
+次数 $0$ の対応を射とする圏上で函手 $G$ を構成し、$G(\mathbf{P}^1_k)$ 上の
+$G(c_2)$ の像が可逆な次数付き $F$-ベクトル空間となることを示せば十分である。
+
+\medskip\noindent
+$X$ を $k$ 上の滑らかな射影スキームとする。標準的な分解
+$$
+X = \coprod\nolimits_{0 \leq d \le \dim(X)} X_d
+$$
+があり、$X_d$ は次元 $d$ の等次元な開閉部分スキームである。補題 \ref{weil-lemma-weil-additive} により、対応する写像
+$$
+H^*(X) \longrightarrow \prod\nolimits_{0 \leq d \le \dim(X)} H^*(X_d)
+$$
+がある。$Y$ を $k$ 上の第2の滑らかな射影スキームとし、同様に
+$Y = \coprod Y_e$ と分解すると、
+$$
+\text{Corr}^0(X, Y) = \bigoplus \text{Corr}^0(X_d, Y_e)
+$$
+である。また、対応の圏において $X \otimes Y = \coprod X_d \otimes Y_e$ である。
+これらの観察から、対象を $k$ 上の等次元な滑らかな射影スキーム、射を次数 $0$ の
+対応とする圏上で $G$ を構成すれば十分である（若干の詳細は省略する）。
+
+\medskip\noindent
+$X$ を $k$ 上の等次元な滑らかな射影スキームとし、$G(X) = H^*(X)$ とおく。
+$X = \emptyset$ ならば $G(X) = 0$ であることに注意する
+（補題 \ref{weil-lemma-unit}）。したがって $G(\emptyset)$ から、またはそこへの写像は零であり、
+以下の議論ではスキームが空でないと仮定してよいし、以後そう仮定する。
+
+\medskip\noindent
+$k$ 上の空でない等次元な滑らかな射影スキーム間の対応
+$c \in \text{Corr}^0(X, Y)$ に対し、規則
+$$
+a \longmapsto
+G(c)(a) = \text{pr}_{2, *}(\gamma(c) \cup \text{pr}_1^*a)
+$$
+で与えられる写像 $G(c) : G(X) = H^*(X) \to G(Y) = H^*(Y)$ を考える。
+$G(c)$ が $c$ に関して加法的であり、したがって $\mathbf{Q}$-線形であることは明らかである。
+公理 (C)(a), (C)(b), (C)(c) が与える、$\gamma$ と引き戻し、押し出し、交叉積との
+両立性から、$c' \in \text{Corr}^0(Y, Z)$ ならば
+$G(c' \circ c) = G(c') \circ G(c)$ であることが分かる。実際、$a \in H^*(X)$ に対して
+\begin{align*}
+(G(c') \circ G(c))(a)
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{23, *}_2(\text{pr}^{12}_{2, *}(\gamma(c) \cup
+\text{pr}^{12, *}_1a))) \\
+& =
+\text{pr}^{23}_{3, *}(\gamma(c') \cup
+\text{pr}^{123}_{23, *}(\text{pr}^{123, *}_{12}(\gamma(c) \cup
+\text{pr}^{12, *}_1 a))) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\text{pr}^{123, *}_{23}\gamma(c') \cup
+\text{pr}^{123, *}_{12}\gamma(c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{23}_{3, *}
+\text{pr}^{123}_{23, *}(
+\gamma(\text{pr}^{123, *}_{23}c') \cup
+\gamma(\text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}
+\text{pr}^{123}_{13, *}(
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) \cup
+\text{pr}^{123, *}_1 a) \\
+& =
+\text{pr}^{13}_{3, *}(
+\gamma(\text{pr}^{123}_{13, *}(\text{pr}^{123, *}_{23}c' \cdot
+\text{pr}^{123, *}_{12}c)) \cup
+\text{pr}^{13, *}_1 a) \\
+& =
+G(c' \circ c)(a)
+\end{align*}
+を得る。記法の意味は明らかであろう。最初の等式は定義から従う。第2の等式は、
+補題 \ref{weil-lemma-pr2star} における射影に沿う押し出しの記述から直ちに得られる
+$\text{pr}^{23, *}_2 \circ \text{pr}^{12}_{2, *} =
+\text{pr}^{123}_{23, *} \circ \text{pr}^{123, *}_{12}$
+による。第3の等式は補題 \ref{weil-lemma-pushforward} と、$H^*$ が函手であることから
+従う。第4の等式は公理 (C)(a)、および平坦射に対して Gysin 写像が平坦引き戻しと
+一致することによる（Chow 『ホモロジー代数』の補題 \ref{chow-lemma-lci-gysin-flat}）。第5の等式では公理 (C)(c) と補題 \ref{weil-lemma-pushforward} を用いて
+$\text{pr}^{23}_{3, *} \circ \text{pr}^{123}_{23, *} =
+\text{pr}^{13}_{3, *} \circ \text{pr}^{123}_{13, *}$
+を得る。第6の等式では補題 \ref{weil-lemma-pushforward} の射影公式と公理 (C)(b)
+を用いて、$
+\text{pr}^{123}_{13, *}
+\gamma(\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c) =
+\gamma(\text{pr}^{123}_{13, *}(
+\text{pr}^{123, *}_{23}c' \cdot \text{pr}^{123, *}_{12}c))$
+を得る。最後の等式は定義そのものである。
+
+\medskip\noindent
+$G$ が函手であることの証明を完了するには、恒等射が保たれることを示さなければ
+ならない。すなわち、$1 = [\Delta] \in \text{Corr}^0(X, X)$ が対応の圏の恒等射ならば
+（補題 \ref{weil-lemma-category-correspondences}）、$G([\Delta]) = \text{id}$ を示す必要がある。
+これは補題 \ref{weil-lemma-class-diagonal} による $\gamma([\Delta])$ の決定と
+補題 \ref{weil-lemma-pr2star} から従う。これで、$k$ 上の滑らかな射影スキームと次数 $0$ の
+対応からなる圏上の函手 $G$ の構成が完了した。
+
+\medskip\noindent
+補題 \ref{weil-lemma-base} により、$G(\Spec(k)) = H^*(\Spec(k))$ は $F$-代数として
+$F$ と標準的に同型である。K\"unneth 公理 (B)(a) により、この函手はテンソル積と
+両立する。したがって、これは対称モノイド圏の函手である。
+
+\medskip\noindent
+なお、$G(\mathbf{P}^1_k) = H^*(\mathbf{P}^1_k)$ 上の $G(c_2)$ の像が可逆な次数付き
+$F$-ベクトル空間であることを確認しなければならない（特に、現時点では $G$ が
+$M_k$ へ拡張されることはまだ分かっていない）。補題 \ref{weil-lemma-cohomology-P1}
+により、コホモロジーは次数 $0$ と $2$ でのみ零でなく、どちらも次元 $1$ である。
+$1 = c_0 + c_2$ は、$\text{Corr}^0(\mathbf{P}^1_k, \mathbf{P}^1_k)$ における恒等射を
+互いに直交する冪等元の和に分解したものである。例 \ref{weil-example-decompose-P1} を参照せよ。さらに $c_0 = a \circ b$ であり、ここで
+$a \in \text{Corr}^0(\Spec(k), \mathbf{P}^1_k)$,
+$b \in \text{Corr}^0(\mathbf{P}^1_k, \Spec(k))$ かつ
+$b \circ a = 1$ が $\text{Corr}^0(\Spec(k), \Spec(k))$ において成り立つ。
+補題 \ref{weil-lemma-inverse-h2} の証明を参照せよ。したがって $G(c_0)$ は次数 $0$ 部分への
+射影子である。ゆえに $G(c_2)$ は次数 $2$ 部分への射影子でなければならず、証明は完了する。
+\end{proof}
+
+\begin{proposition}
+\label{weil-proposition-weil-cohomology-theory}
+$k$ を体、$F$ を標数 $0$ の体とする。次の間には $1$ 対 $1$ の対応がある。
+\begin{enumerate}
+\item (A), (B), (C) を満たすデータ (D0), (D1), (D2), (D3)。
+\item 対称モノイド $\mathbf{Q}$-線形函手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+であって、$G(\mathbf{1}(1))$ が次数 $-2$ でのみ零でないもの。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(2) のような $G$ が与えられたとき、$H^*(X) = G(h(X))$ とおくことにより、
+(A), (B), (C) を満たすデータ (D0), (D1), (D2), (D3) を得る。
+補題 \ref{weil-lemma-from-functor-to-weil} とその証明を参照せよ。
+
+\medskip\noindent
+逆に、(A), (B), (C) を満たすデータ (D0), (D1), (D2), (D3) が与えられたとき、
+補題 \ref{weil-lemma-from-weil-to-functor} の証明の構成により (2) のような函手 $G$ を得る。
+
+\medskip\noindent
+これらの構成が互いに逆であることの詳しい証明は省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{さらなる性質}
+\label{weil-section-further}
+
+\noindent
+この節では、第 \ref{weil-section-axioms} 節のように (A), (B), (C) を満たすデータ
+(D0), (D1), (D2), (D3) が与えられたときに得られる結果をさらにいくつか証明する。
+
+\begin{lemma}
+\label{weil-lemma-trace-disjoint-union}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X, Y$ を $k$ 上の空でない滑らかな射影スキームで、ともに次元 $d$ の等次元な
+ものとする。このとき $\int_{X \amalg Y} = \int_X + \int_Y$ である。
+\end{lemma}
+
+\begin{proof}
+$i : X \to X \amalg Y$ と $j : Y \to X \amalg Y$ を余射影とする。補題 \ref{weil-lemma-weil-additive} により写像
+$(i^*, j^*) : H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$ は同型である。
+補題の主張は、同型
+$(i^*, j^*) : H^{2d}(X \amalg Y)(d) \to H^{2d}(X)(d) \oplus H^{2d}(Y)(d)$
+のもとで写像 $\int_X + \int_Y$ が $\int_{X \amalg Y}$ に移されることを意味する。
+実際、
+$$
+\int_{X \amalg Y} a =
+\int_{X \amalg Y} i_*(i^*a) + j_*(j^*a) =
+\int_X i^*a + \int_Y j^*a
+$$
+である。ここで等式 $a = i_*(i^*a) + j_*(j^*a)$ は補題 \ref{weil-lemma-weil-additive} の証明で示した。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-dim-0}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の零次元の滑らかな射影スキームとする。このとき
+\begin{enumerate}
+\item $i \not = 0$ に対して $H^i(X) = 0$ である。
+\item $H^0(X)$ は $F$ 上の有限分離代数である。
+\item $\dim_F H^0(X) = \deg(X \to \Spec(F))$ である。
+\item $\int_X : H^0(X) \to F$ はトレース写像である。
+\item $\gamma([X]) = 1$ である。
+\item $\int_X \gamma([X]) = \deg(X \to \Spec(k))$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(k')$ と書ける。ここで $k'$ は $k$ 上の有限分離代数である。
+$\deg(X \to \Spec(k)) = [k' : k]$ であることに注意する。$k'$ の各因子を含む
+有限 Galois 拡大 $k''/k$ を選ぶ（有限分離 $k$-代数は $k$ の有限分離体拡大の
+積であることを思い出そう）。$\Sigma = \Hom_k(k', k'')$ とおく。このとき
+$$
+k' \otimes_k k'' = \prod\nolimits_{\sigma \in \Sigma} k''
+$$
+を得る。$Y = \Spec(k'')$ とおけば、公理 (B)(a) と補題 \ref{weil-lemma-weil-additive} により、次数付き可換 $F$-代数として
+$$
+H^*(X) \otimes_F H^*(Y) =
+\prod\nolimits_{\sigma \in \Sigma} H^*(Y)
+$$
+である。補題 \ref{weil-lemma-unit} により $F$-代数 $H^*(Y)$ は零でない。
+表示等式の両辺の次元を比較すると、$H^*(X)$ は次数 $0$ にのみあり、
+$\dim_F H^0(X) = [k' : k]$ である。これを $Y$ に適用すると
+$H^*(Y) = H^0(Y)$ を得る。$F$-代数として
+$$
+H^0(X) \otimes_F H^0(Y) = H^0(Y) \times \ldots \times H^0(Y)
+$$
+であるから、$F \to H^0(Y)$ という忠実平坦基底変換の後で確認すればよく、
+$H^0(X)$ は分離 $F$-代数である。
+
+\medskip\noindent
+上の表示同型は写像
+$$
+H^0(X) \otimes_F H^0(Y) \longrightarrow
+\prod\nolimits_{\sigma \in \Sigma} H^0(Y),\quad
+a \otimes b \longmapsto \prod\nolimits_\sigma \Spec(\sigma)^*a \cup b
+$$
+で与えられる。この同型を介して、補題 \ref{weil-lemma-trace-disjoint-union} により
+$\int_{X \times Y} = \sum_\sigma \int_Y$ である。したがって $H^0(Y)$ において
+$$
+\int_X a = \text{pr}_{1, *}(a \otimes 1) = \sum \Spec(\sigma)^*a
+$$
+である。第1の等式は補題 \ref{weil-lemma-pr2star} により、第2の等式は今の観察に
+よる。代数閉包 $\overline{F}$ と $F$-代数写像
+$\tau : H^0(Y) \to \overline{F}$ を選ぶ。上の同型を基底変換すると同型
+$$
+H^0(X) \otimes_F \overline{F} \longrightarrow
+\prod\nolimits_{\sigma \in \Sigma} \overline{F},\quad
+a \otimes b \longmapsto \prod\nolimits_\sigma \tau(\Spec(\sigma)^*a) b
+$$
+を得る。したがって $a \mapsto \tau(\Spec(\sigma)^*a)$ は
+$H^0(X)$ の $\overline{F}$ への埋め込みの全体をなす。上で得た $\int_X a$ の式に
+$\tau$ を適用すると、$\int_X$ はトレース写像であることが分かる。
+補題 \ref{weil-lemma-unit} により $\gamma([X]) = 1$ である。最後に、
+$\gamma([X]) = 1$ であり $1$ のトレースは $[k' : k]$ に等しいので、
+$\int_X \gamma([X]) = \deg(X \to \Spec(k))$ である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-degrees-cycles}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の空でない滑らかな射影スキームで、次元 $d$ の等次元なものとする。
+図式
+$$
+\xymatrix{
+\CH^d(X) \ar[r]_-\gamma \ar@{=}[d] &
+H^{2d}(X)(d) \ar[d]^{\int_X} \\
+\CH_0(X) \ar[r]^\deg & F
+}
+$$
+は可換である。ここで $\deg : \CH_0(X) \to \mathbf{Z}$ は Chow 『ホモロジー代数』の第 \ref{chow-section-degree-zero-cycles} 節で論じた零サイクルの次数である。
+\end{lemma}
+
+\begin{proof}
+$x$ を $X$ の閉点で、その剰余体が $k$ 上分離的なものとする。$x$ をスキームとみなし、
+$i : x \to X$ を包含射とする。混同を避けるため、$x$ に対するサイクル類写像を
+$\gamma' : \CH_0(x) \to H^0(x)$ と書く。このとき
+$$
+\int_X \gamma([x]) = \int_X \gamma(i_*[x]) =
+\int_X i_*\gamma'([x]) = \int_x \gamma'([x]) = \deg(x \to \Spec(k))
+$$
+である。第2の等式は公理 (C)(b) であり、第3の等式はコホモロジー上の $i_*$ の
+定義である。最後の等式は補題 \ref{weil-lemma-dim-0} である。補題 \ref{weil-lemma-generated-by-separable} により $\CH_0(X)$ は上のような点 $x$ の類で
+生成されるから、これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-square-diagonal}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の空でない滑らかな射影スキームで、次元 $d$ の等次元なものとする。
+このとき
+$$
+\sum\nolimits_i (-1)^i\dim_F H^i(X) =
+\deg(\Delta \cdot \Delta) = \deg(c_d(\mathcal{T}_{X/k}))
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+右側の等式を示す。Chow 『ホモロジー代数』の補題 \ref{chow-lemma-intersect-regularly-embedded} により
+$[\Delta] \cdot [\Delta] = \Delta_*(\Delta^![\Delta])$ である。
+$\Delta_*$ は $0$-サイクルの次数を保つので、$\Delta^![\Delta]$ の次数を計算すれば
+十分である。類 $\Delta^![\Delta]$ は、$[\Delta]$ と
+$\Delta \subset X \times X$ の法層の最高 Chern 類とのキャップ積で与えられる
+（Chow 『ホモロジー代数』の補題 \ref{chow-lemma-gysin-fundamental}）。
+$\Delta$ の余法層は $\Omega_{X/k}$ なので
+（『スキームの射』の補題 \ref{morphisms-lemma-differentials-diagonal}）、法層は所望のとおり
+接層 $\mathcal{T}_{X/k} = \SheafHom_{\mathcal{O}_X}(\Omega_{X/k}, \mathcal{O}_X)$
+に等しい。
+
+\medskip\noindent
+左側の等式を示す。補題 \ref{weil-lemma-degrees-cycles} により
+\begin{align*}
+\deg([\Delta] \cdot [\Delta])
+& =
+\int_{X \times X} \gamma([\Delta]) \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*1 \cup \gamma([\Delta]) \\
+& =
+\int_{X \times X} \Delta_*(\Delta^*\gamma([\Delta])) \\
+& =
+\int_X \Delta^*\gamma([\Delta])
+\end{align*}
+である。補題 \ref{weil-lemma-push-unit} および \ref{weil-lemma-pushforward} を用いた。
+補題 \ref{weil-lemma-class-diagonal} のように
+$\gamma([\Delta]) = \sum  e_{i, j} \otimes e'_{2d - i , j}$ と書く。
+$\Delta^*$ はカップ積で与えられることを思い出せば
+（注意 \ref{weil-remark-replace-cup-product}）、
+$$
+\int_X \sum\nolimits_{i, j} e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} \int_X e_{i, j} \cup e'_{2d - i, j} =
+\sum\nolimits_{i, j} (-1)^i = \sum (-1)^i\beta_i
+$$
+を得る。これが所望の等式である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-algebra-relations}
+$F$ を標数 $0$ の体とする。$F'$ および $F_i$, $i = 1, \ldots, r$ を有限分離
+$F$-代数とし、$A$ を有限 $F$-代数とする。$\sigma, \sigma' : A \to F'$ と
+$\sigma_i : A \to F_i$ を $F$-代数写像とし、$\sigma$, $\sigma'$ は全射であると
+仮定する。$n > 1$ かつ $m_i$ が整数であるような関係
+$$
+\text{Tr}_{F'/F} \circ \sigma - \text{Tr}_{F'/F} \circ \sigma' =
+n(\sum m_i \text{Tr}_{F_i/F} \circ \sigma_i)
+$$
+が存在するならば、$\sigma = \sigma'$ である。
+\end{lemma}
+
+\begin{proof}
+$A = \prod A_j$ を局所 Artin $F$-代数 $(A_j, \mathfrak m_j, \kappa_j)$ の有限積として
+書ける。『可換代数』の補題 \ref{algebra-lemma-finite-dimensional-algebra} および
+命題 \ref{algebra-proposition-dimension-zero-ring} を参照せよ。
+$\kappa_j/k$ が分離的である $j$ 全体にわたる積を $A' = \prod \kappa_j$ とする。
+写像 $\sigma, \sigma', \sigma_i$ はすべて写像 $A \to A'$ を経由する。
+$A$ を $A'$ で置き換えることにより、$A$ は有限分離 $F$-代数であると仮定してよい。
+
+\medskip\noindent
+代数閉包 $\overline{F}$ を選び、
+$\overline{A} = A \otimes_F \overline{F}$,
+$\overline{F}' = F' \otimes_F \overline{F}$,
+$\overline{F}_i = F_i \otimes_F \overline{F}$
+とおく。$\sigma$, $\sigma'$, $\sigma_i$ を基底変換して、$\overline{F}$-代数写像
+$\overline{A} \to \overline{F}'$ および $\overline{A} \to \overline{F}_i$ を得る。
+さらに $\text{Tr}_{\overline{F}'/\overline{F}}$ は $\text{Tr}_{F'/F}$ の基底変換であり、
+$\text{Tr}_{F_i/F}$ についても同様である。したがって $F$ を $\overline{F}$ で
+置き換えてよく、次の段落で論じる場合へ帰着する。
+
+\medskip\noindent
+$F$ は代数閉で、$A$ は有限分離 $F$-代数であると仮定する。このとき
+$A$, $F'$, $F_i$ はいずれも $F$ のコピーの積である。$F$ のコピーの積
+$F \times \ldots \times F$ の元 $e$ が因子の一つを生成するとき、すなわち
+$e = (0, \ldots, 0, 1, 0, \ldots, 0)$ であるとき、これを極小冪等元と呼ぶことにする。
+$e \in A$ を極小冪等元とする。$\sigma$, $\sigma'$ は全射なので、$\sigma(e)$ と
+$\sigma'(e)$ は極小冪等元または零である。$\sigma \not = \sigma'$ ならば、
+$\sigma(e) = 0$ かつ $\sigma'(e) \not = 0$、またはその逆となる極小冪等元
+$e \in A$ を選べる。このとき $\text{Tr}_{F'/F}(\sigma(e)) = 0$ かつ
+$\text{Tr}_{F'/F}(\sigma'(e)) = 1$、またはその逆である。他方、$\sigma_i(e)$ は
+冪等元なので $\text{Tr}_{F_i/F}(\sigma_i(e)) = r_i$ は整数である。したがって
+$$
+-1 = \sum n m_i r_i = n (\sum m_i r_i)
+\quad\text{or}\quad
+1 = \sum n m_i r_i = n (\sum m_i r_i)
+$$
+を得るが、これは不可能である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-relations-classes-points}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$k'/k$ を有限分離拡大、$X$ を $k'$ 上の滑らかな射影スキーム、
+$x, x' \in X$ を $k'$-有理点とする。$\gamma(x) \not = \gamma(x')$ ならば、
+$[x] - [x']$ は $\CH_0(X)$ においてどの整数 $n > 1$ でも割り切れない。
+\end{lemma}
+
+\begin{proof}
+$x$ と $x'$ が $X$ の異なる既約成分上にあるならば、結果は明らかである。したがって
+$X$ は次元 $d$ の既約スキームであると仮定してよい。$[x] - [x']$ が
+$\CH_0(X)$ において $n > 1$ で割り切れるとする。補題 \ref{weil-lemma-generated-by-separable} により、剰余体が $k$ 上分離的である閉点
+$x_i \in X$ と整数係数を用いて
+$[x] - [x'] = n(\sum m_i [x_i])$ と $\CH_0(X)$ において書ける。このとき
+$$
+\gamma([x]) - \gamma([x']) = n (\sum m_i \gamma([x_i]))
+$$
+が $H^{2d}(X)(d)$ において成り立つ。$i^*, (i')^*, i_i^*$ をそれぞれ引き戻し写像
+$H^0(X) \to H^0(x)$, $H^0(X) \to H^0(x')$, $H^0(X) \to H^0(x_i)$ とする。
+$H^0(x)$ は有限分離 $F$-代数であり、$\int_x : H^0(x) \to F$ はトレース写像で
+あることを思い出そう（補題 \ref{weil-lemma-dim-0}）。これを $\text{Tr}_x$ と表す。
+$x'$, $x_i$ についても同様である。このとき Poincar\'e 双対性、すなわち公理
+(A)(b) により、上の等式は $\Hom_F(H^0(X), F)$ における等式
+$$
+\text{Tr}_x \circ i^* - \text{Tr}_{x'} \circ (i')^* =
+n(\sum m_i \text{Tr}_{x_i} \circ i_i^*)
+$$
+と双対である。最後に、$x$, $x'$ は $k'$-有理点なので $i^*$ と $(i')^*$ は全射で
+あることに注意する。実際、合成
+$H^0(\Spec(k')) \to H^0(X) \to H^0(x)$ および
+$H^0(\Spec(k')) \to H^0(X) \to H^0(x')$ は同型である。
+補題 \ref{weil-lemma-algebra-relations} により $i^* = (i')^*$ となるが、これは
+$\gamma([x]) \not = \gamma([x'])$ という仮定に反する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-classes-points}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$k'/k$ を有限分離拡大、$X$ を $k'$ 上の次元 $d$ の幾何学的既約な滑らかな
+射影スキームとする。このとき $\gamma : \CH_0(X) \to H^{2d}(X)(d)$ は
+$\deg : \CH_0(X) \to \mathbf{Z}$ を経由する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-generated-by-separable} により、剰余体が $k$ 上分離的である閉点
+$x, x' \in X$ に対して
+$\deg(x') \gamma([x]) = \deg(x) \gamma([x'])$ を示せば十分である。
+
+\medskip\noindent
+まず $k'$-有理点の場合へ帰着する。$\kappa(x)$ と $\kappa(x')$ が $k$ 上で
+$k''$ に埋め込まれるような Galois 拡大 $k''/k'$ を取る。
+$Y = X \times_{\Spec(k')} \Spec(k'')$ とおき、$p : Y \to X$ を射影とする。
+$k''/k'$ の選び方により、$x$ および $x'$ へそれぞれ写る $Y$ 上の
+$k''$-有理点 $y$\ および $y'$\ が存在する。このとき $\CH_0(X)$ において
+$p_*[y] = [k'' : \kappa(x)][x]$ かつ
+$p_*[y'] = [k'' : \kappa(x')][x']$ である。公理 (C)(b) が与える押し出しとの
+両立性により、$\CH^{2d}(Y)(d)$ において
+$\gamma([y]) = \gamma([y'])$ を証明すれば十分である。これで次の段落の議論へ帰着した。
+
+\medskip\noindent
+$x$ と $x'$ は $k'$-有理点であると仮定する。補題 \ref{weil-lemma-divide-difference-points} により有限分離体拡大 $k''/k'$ であって、
+$Y = X \times_{\Spec(k')} \Spec(k'')$ 上で差 $[x] - [x']$ の引き戻し
+$[y] - [y']$ が整数 $n > 1$ で割り切れるものが存在する
+（$y, y' \in Y$ は $k''$-有理点であることに注意する）。補題 \ref{weil-lemma-relations-classes-points} により $H^{2d}(Y)(d)$ において
+$\gamma([y]) = \gamma([y'])$ である。公理 (C)(b) の押し出しとの両立性により、
+$x$ と $x'$ についても同じ結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-injective}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$f : X \to Y$ を $k$ 上の既約な滑らかな射影スキームの支配射とする。このとき
+$H^*(Y) \to H^*(X)$ は単射である。
+\end{lemma}
+
+\begin{proof}
+$Y$ と同じ次元をもち $Y$ へ全射的に写る整閉部分スキーム $Z \subset X$ が存在する。
+したがって、ある $m > 0$ に対して $f_*[Z] = m[Y]$ である。補題 \ref{weil-lemma-unit} により、$H^*(Y)$ において
+$f_* \gamma([Z]) = m \gamma([Y]) = m$ である。したがって射影公式
+（補題 \ref{weil-lemma-pushforward}）により
+$f_*(f^*a \cup \gamma([Z])) = m a$ であり、結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-otimes}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$k''/k'/k$ を有限分離代数とし、$X$ を $k'$ 上の滑らかな射影スキームとする。
+このとき
+$$
+H^*(X) \otimes_{H^0(\Spec(k'))} H^0(\Spec(k'')) =
+H^*(X \times_{\Spec(k')} \Spec(k''))
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-dim-0} の結果を以下では断りなく用いる。ある有限分離
+$k'$-代数 $l$ に対して
+$$
+k' \otimes_k k'' = k'' \times l
+$$
+と書く。$F' = H^0(\Spec(k'))$, $F'' = H^0(\Spec(k''))$ および
+$G = H^0(\Spec(l))$ と書く。
+$\Spec(k') \times \Spec(k'') = \Spec(k'') \amalg \Spec(l)$ なので、公理 (B)(a) と
+補題 \ref{weil-lemma-weil-additive} から
+$$
+F' \otimes_F F'' = F'' \times G
+$$
+を得る。左辺から右辺への写像は $F''$ を $F' \otimes_{F'} F''$ と同一視する。
+同様に、$F' \otimes_F F'' = F'' \times G$ 上の加群として
+$$
+H^*(X) \otimes_F F'' = H^*(X \times_{\Spec(k')} \Spec(k''))
+\times H^*(X \times_{\Spec(k')} \Spec(l))
+$$
+である。これで補題が証明された。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Weil コホモロジー理論 II}
+\label{weil-section-old}
+
+\noindent
+本章でいう Weil コホモロジー理論とは、基礎体 $k$ が代数閉でない場合における
+古典的 Weil コホモロジー理論（第 \ref{weil-section-axioms-classical} 節）の類似物である。
+第 \ref{weil-section-axioms} 節では、このコホモロジー理論が $k$ 上のモチーフの圏上の
+対称モノイダル関手から生ずることを保証する公理を列挙した。これまでの公理には、
+$i < 0$ に対する条件 $H^i(X) = 0$ と、次元 $d$ の等次元な $X$ に対する
+$H^{2d}(X)(d)$ に関する条件であって古典的公理 (A)(c), (A)(d) に対応するものが、
+まだ欠けている。まず、そのような条件を課す必要があることを確かめよう。
+
+\begin{example}
+\label{weil-example-weird-weil}
+$k = \mathbf{C}$ および $F = \mathbf{C}$ はともに複素数体であるとする。$k$ 上滑らかで射影的な $X$ に対し、
+$H^{p, q}(X) = H^q(X, \Omega^p_{X/k})$ と書く。$(H')^*$ を、$X$ を通常のカップ積を備えた
+$(H')^*(X) = \bigoplus H^{p, q}(X)$ へ送る関手とする。
+これは古典的 Weil コホモロジー理論である（将来の参照をここに挿入する）。
+命題 \ref{weil-proposition-weil-cohomology-theory-classical} により、$M_k$ から次数付き
+$F$-ベクトル空間の圏への $\mathbf{Q}$-線形対称モノイダル関手 $G'$ を得る。
+この場合、各 $M$ が $M_k$ に属するとき、$G'(M)$ は自然に二重次数付きである。すなわち
+$$
+(G')(M) = \bigoplus (G')^{p, q}(M),\quad
+(G')^n = \bigoplus\nolimits_{n = p + q} (G')^{p, q}(M)
+$$
+であり、表示のとおり $(G')^{p, q}$ は全次数 $p + q$ に置かれる。
+ここで、
+$$
+G^n(M) = \bigoplus\nolimits_{n = 3p - q} (G')^{p, q}(M)
+$$
+とおくことにより、次数付き $F$-ベクトル空間の圏への $\mathbf{Q}$-線形対称モノイダル関手
+$G$ を構成する。これが対称モノイダル関手を定めることの検証は省略する
+（技術的な要点は、上で奇数 $3$ と $-1$ を選んだため、関手 $G$ が可換性制約と両立することである）。
+$G(\mathbf{1}(1))$ は依然として次数 $-2$ に置かれることに注意せよ。
+したがって補題 \ref{weil-lemma-from-functor-to-weil-classical} により、古典的公理 (A), (B), (C) をすべて満たす
+関手 $H^*$、サイクル類 $\gamma$、およびトレース写像を得る。ただし、古典的公理 (A)(a), (A)(d) は
+満たさない可能性がある。実際、$E$ が $k$ 上の楕円曲線ならば
+$\dim H^{-1}(E) = 1$ であるから、公理 (A)(a) は実際に破られる。
+\end{example}
+
+\begin{lemma}
+\label{weil-lemma-H-0-separable}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+$X$ を $k$ 上の滑らかな射影スキームとする。
+$k' = \Gamma(X, \mathcal{O}_X)$ とおく。次の条件は同値である。
+\begin{enumerate}
+\item 剩余体が $k$ 上分離的である有限個の閉点 $x_1, \ldots, x_r \in X$ が存在し、
+$H^0(X) \to H^0(x_1) \oplus \ldots \oplus H^0(x_r)$ が単射である。
+\item 写像 $H^0(\Spec(k')) \to H^0(X)$ は同型である。
+\end{enumerate}
+これらが成り立つならば、$H^0(X)$ は $F$ 上の有限分離代数である。
+$X$ が次元 $d$ の等次元ならば、(1), (2) はさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(3)] 閉点の類が $H^0(X)$-加群として $H^{2d}(X)(d)$ を生成する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$k'$ は $k$ 上の有限分離代数であり（『多様体』の補題 \ref{varieties-lemma-proper-geometrically-reduced-global-sections}）、したがって
+$\Spec(k')$ は $k$ 上滑らかで射影的なので、命題は意味をもつ。
+$H^*$ と直和との両立性
+（補題 \ref{weil-lemma-weil-additive} および \ref{weil-lemma-trace-disjoint-union}）から、$X$ が連結の場合に補題を証明すれば十分である。
+ゆえに $X$ は既約であると仮定でき、(1), (2), (3) の同値性を示せばよい。
+$d = \dim(X)$ とおく。これにより、$k'$ は $k$ 上の有限分離体であり、
+$X$ は $k'$ 上幾何的既約である。『多様体』の補題 \ref{varieties-lemma-proper-geometrically-reduced-global-sections} および \ref{varieties-lemma-baby-stein} を参照せよ。
+
+\medskip\noindent
+補題 \ref{weil-lemma-generated-by-separable} により、(3) の閉点は剩余体が $k$ 上分離的であると仮定できる。
+公理 (A)(a), (A)(b) により、条件 (1), (3) は同値である。
+
+\medskip\noindent
+(2) が成り立つとする。剩余体が $k'$ 上有限分離である任意の閉点 $x \in X$ を選ぶ。
+すると、例えば補題 \ref{weil-lemma-injective} により
+$H^0(\Spec(k')) = H^0(X) \to H^0(x)$ は単射である。
+
+\medskip\noindent
+同値な条件 (1), (3) が成り立つと仮定する。(1) のように
+$x_1, \ldots, x_r \in X$ を選び、有限分離拡大 $k''/k'$ を選ぶ。
+補題 \ref{weil-lemma-otimes} により
+$$
+H^0(X) \otimes_{H^0(\Spec(k'))} H^0(\Spec(k'')) =
+H^0(X \times_{\Spec(k')} \Spec(k''))
+$$
+である。したがって、$H^0(\Spec(k')) \to H^0(X)$ が同型であることを示すには、
+$k'$ を $k''$ で置き換えてよい。ゆえに $x_1, \ldots, x_r$ は $k'$-有理点であると仮定できる
+（このとき各 $x_i$ は複数の点で置き換えられるため、この段階で $r$ は増加する）。
+補題 \ref{weil-lemma-classes-points} により
+$\gamma(x_1) = \gamma(x_2) = \ldots = \gamma(x_r)$ である。公理 (A)(b) により、写像
+$H^0(X) \to H^0(x_i)$ はすべて同じである。したがって (2) が成り立つ。
+
+\medskip\noindent
+最後に、補題 \ref{weil-lemma-dim-0} により、(1) が成り立つならば
+$H^0(X)$ は分離 $F$-代数である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-negative-cohomology}
+(A), (B), (C) を満たす (D0), (D1), (D2), (D3) が与えられたとする。
+ある $i < 0$ に対して $H^i(Y)$ が零でないような、$k$ 上の滑らかな射影スキーム $Y$ が
+存在するとする。このとき、$k$ 上の等次元で滑らかな射影スキーム $X$ が存在し、
+この $X$ に対して補題 \ref{weil-lemma-H-0-separable} の同値な条件は成り立たない。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-weil-additive} により、$Y$ は既約であると仮定でき、したがって特に等次元である。
+$i$ が奇数ならば、$Y$ を $Y \times Y$ で置き換えることにより、$Y$ が等次元で、
+ある $l > 0$ に対して $i = -2l$ である例を得る。$X = Y \times (\mathbf{P}^1_k)^l$ とおく。
+公理 (B)(a) を用いると
+$$
+H^0(X) \supset H^0(Y) \oplus
+H^i(Y) \otimes_F H^2(\mathbf{P}^1_k)^{\otimes_F l}
+$$
+を得る。両方の直和因子は零でない。したがって、
+$\Gamma(X, \mathcal{O}_X) = \Gamma(Y, \mathcal{O}_Y)$ のスペクトルの $H^0$ は第一直和因子に入るので、
+$H^0(X)$ がそれと同型にはならないことは明らかである。
+\end{proof}
+
+\noindent
+したがって、ようやく次の定義を与えることができる。
+
+\begin{definition}
+\label{weil-definition-weil-cohomology-theory}
+$k$ を体とし、$F$ を標数 $0$ の体とする。
+$k$ 上の $F$ 係数の {\it Weil コホモロジー理論} とは、
+Poincar\'e 双対性、K\"unneth 公式、およびサイクル類との両立性を満たすデータ
+(D0), (D1), (D2), (D3)、より正確には第 \ref{weil-section-axioms} 節の公理 (A), (B), (C) を満たし、
+かつすべての $k$ 上の滑らかな射影スキーム $X$ に対して
+補題 \ref{weil-lemma-H-0-separable} の同値な条件 (1), (2) を満すデータである。
+\end{definition}
+
+\noindent
+補題 \ref{weil-lemma-negative-cohomology} により、これはまた、零でない負次のコホモロジー群が存在しないことを意味する。
+特に $k$ が代数閉ならば、上のような Weil コホモロジー理論と同型
+$F \to F(1)$ の組は、古典的 Weil コホモロジー理論と同じものである。
+
+\begin{remark}
+\label{weil-remark-betti-numbers-in-some-sense}
+$H^*$ を Weil コホモロジー理論（定義 \ref{weil-definition-weil-cohomology-theory}）とする。
+$k'/k$ を体の有限分離拡大とし、$X$ を $k'$ 上の次元 $d$ の幾何的既約な滑らかな射影スキームとする。
+ある体 $F_i$ に対して
+$$
+H^0(\Spec(k')) = F_1 \times \ldots \times F_r
+$$
+であると仮定する。これに応じて
+$$
+H^*(X) = \prod\nolimits_{i = 1, \ldots, r}
+H^*(X) \otimes_{H^0(\Spec(k'))} F_i
+$$
+と書ける。定義 \ref{weil-definition-weil-cohomology-theory} の最後の仮定により、
+$H^0(X)$ は $\prod F_i$ 上階数 $1$ の自由加群である。言い換えれば、各因子
+$H^0(X) \otimes_{H^0(\Spec(k'))} F_i$ は $F_i$ 上次元 $1$ である。
+Poincar\'e 双対性により、次数 $2d$ のコホモロジーについても同じことが成り立つ。
+しかし、他の次数でも同じことが成り立つかは明らかでない。すなわち、
+$0 < n < \dim(X)$ を与えたとき、整数
+$$
+\dim_{F_i} H^n(X) \otimes_{H^0(\Spec(k'))} F_i
+$$
+が $i$ に依存しないかどうかは不明である。この問題は次の未解決問題と密接に関連する。
+代数閉基礎体 $\overline{k}$、標数零の体 $F$、係数体 $F$ をもつ $\overline{k}$ 上の古典的 Weil コホモロジー理論
+$H^*$、および $\overline{k}$ 上の滑らかな射影多様体 $X$ が与えられたとき、$X$ の Betti 数
+$$
+\beta_i = \dim_F H^i(X)
+$$
+は $F$ および Weil コホモロジー理論 $H^*$ に依存しないか。
+\end{remark}
+
+\begin{proposition}
+\label{weil-proposition-weil-cohomology-theory-again}
+$k$ を体とし、$F$ を標数 $0$ の体とする。
+Weil コホモロジー理論は、次の条件を満たす $\mathbf{Q}$-線形対称モノイダル関手
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+と同じデータである。
+\begin{enumerate}
+\item $G(\mathbf{1}(1))$ は次数 $-2$ でのみ零でない。
+\item $k$ 上の任意の滑らかな射影スキーム $X$ に対し、
+$k' = \Gamma(X, \mathcal{O}_X)$ とおくと、次数付き $F$-ベクトル空間の準同型
+$G(h(\Spec(k'))) \to G(h(X))$ は次数 $0$ で同型である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+命題 \ref{weil-proposition-weil-cohomology-theory} および
+定義 \ref{weil-definition-weil-cohomology-theory} の直接の帰結である。もちろん (2) は、
+剩余体が $k$ 上分離的である閉点 $x_1, \ldots, x_r \in X$ を適当に選ぶと、
+$G(h(X)) \to \bigoplus G(h(x_i))$ が次数 $0$ で単射であるという条件で置き換えてもよい。
+\end{proof}
+
+
+
+
+
+
+
+\section{Chern 類}
+\label{weil-section-chern}
+
+\noindent
+本節では、第一 Chern 類と射影空間束公式からすべての Chern 類を得る方法を論ずる。
+公理は若干異なるが、本節の参考文献は \cite{Grothendieck-chern} である。
+
+\medskip\noindent
+$\mathcal{C}$ を次の性質をもつスキームの圏とする。
+\begin{enumerate}
+\item すべての $X \in \Ob(\mathcal{C})$ は準コンパクトかつ準分離的である。
+\item $X \in \Ob(\mathcal{C})$ で、$U \subset X$ が開かつ閉ならば、$U \to X$ は $\mathcal{C}$ の射である。
+$X' \to X$ が $U$ を経由する $\mathcal{C}$ の射ならば、$X' \to U$ は $\mathcal{C}$ の射である。
+\item $X \in \Ob(\mathcal{C})$ で、$\mathcal{E}$ が有限局所自由 $\mathcal{O}_X$-加群ならば次が成り立つ。
+\begin{enumerate}
+\item $p : \mathbf{P}(\mathcal{E}) \to X$ は $\mathcal{C}$ の射である。
+\item $\mathcal{C}$ の射 $f : X' \to X$ に対し、誘導される射
+$\mathbf{P}(f^*\mathcal{E}) \to \mathbf{P}(\mathcal{E})$ は $\mathcal{C}$ の射である。
+\item $\mathcal{E} \to \mathcal{F}$ が別の有限局所自由 $\mathcal{O}_X$-加群への全射ならば、閉埋め込み
+$\mathbf{P}(\mathcal{F}) \to \mathbf{P}(\mathcal{E})$ は $\mathcal{C}$ の射である。
+\end{enumerate}
+\end{enumerate}
+次に、圏 $\mathcal{C}$ から次数付き代数の圏への反変関手 $A$ が与えられたとする。
+ここで次数付き代数 $A$ とは、次数付け
+$A = \bigoplus_{i \geq 0} A^i$ を備えた、単位元をもつ結合的で必ずしも可換でない $\mathbf{Z}$-代数 $A$ である。
+$\mathcal{C}$ の射 $f : X' \to X$ が与えられたとき、誘導される代数写像を
+$f^* : A(X) \to A(X')$ と書く。$a, b \in A(X)$ の積を $a \cup b$ と書く。
+最後に、$\mathcal{C}$ の各対象 $X$ に対して加法的写像
+$$
+c_1^A : \Pic(X) \longrightarrow A^1(X)
+$$
+が与えられたとする。次の公理を仮定する。
+\begin{enumerate}
+\item $X \in \Ob(\mathcal{C})$ および $\mathcal{L} \in \Pic(X)$ に対し、元 $c_1^A(\mathcal{L})$ は代数 $A(X)$ の中心に属する。
+\item $X \in \Ob(\mathcal{C})$ で、$X = U \amalg V$ が開かつ閉な $U$, $V$ による分解ならば、
+誘導写像 $A(X) \to A(U)$, $A(X) \to A(V)$ を介して $A(X) = A(U) \times A(V)$ である。
+\item $f : X' \to X$ が $\mathcal{C}$ の射で、$\mathcal{L}$ が可逆 $\mathcal{O}_X$-加群ならば
+$f^*c_1^A(\mathcal{L}) =
+c_1^A(f^*\mathcal{L})$ である。
+\item $X \in \Ob(\mathcal{C})$ とし、$\mathcal{E}$ を一定階数 $r$ の局所自由 $\mathcal{O}_X$-加群とする。
+$\mathcal{C}$ の射 $p : P = \mathbf{P}(\mathcal{E}) \to X$ を考える。このとき写像
+$$
+\bigoplus\nolimits_{i = 0, \ldots, r - 1} A(X)
+\longrightarrow A(P),\quad
+(a_0, \ldots, a_{r - 1}) \longmapsto
+\sum c_1^A(\mathcal{O}_P(1))^i \cup p^*(a_i)
+$$
+は全単射である。
+\item $X \in \Ob(\mathcal{C})$ とし、$\mathcal{E} \to \mathcal{F}$ を、それぞれ階数 $r + 1$, $r$ の
+有限局所自由 $\mathcal{O}_X$-加群の全射とする。対応する埋め込み射を
+$i : P' = \mathbf{P}(\mathcal{F}) \to \mathbf{P}(\mathcal{E}) = P$ と書く。これは $\mathcal{C}$ の射であり、
+$P'$ を $P$ 上の有効 Cartier 因子として表す。$i^*a = 0$ を満す $a \in A(P)$ に対して
+$a \cup c_1^A(\mathcal{O}_P(P')) = 0$ である。
+\end{enumerate}
+結果を述べるため、$\textit{Vect}(X)$ は有限局所自由 $\mathcal{O}_X$-加群の（完全）圏を表すことを思い出そう。
+『スキームの導来圏』の第 \ref{perfect-section-K-groups} 節では、この圏の第零 $K$-群
+$K_0(\textit{Vect}(X))$ を定義した。さらに $K_0(\textit{Vect}(X))$ が環であることも見た。
+『スキームの導来圏』の注意 \ref{perfect-remark-K-ring} を参照せよ。
+
+\begin{proposition}
+\label{weil-proposition-chern-class}
+上の状況で、各 $X \in \Ob(\mathcal{C})$ に「全 Chern 類」
+$$
+c^A : K_0(\textit{Vect}(X)) \longrightarrow  \prod\nolimits_{i \geq 0} A^i(X)
+$$
+を対応させ、次の性質をもつ規則が一意的に存在する。
+\begin{enumerate}
+\item $X \in \Ob(\mathcal{C})$ に対して
+$c^A(\alpha + \beta) = c^A(\alpha) c^A(\beta)$ および $c^A(0) = 1$ が成り立つ。
+\item $f : X' \to X$ が $\mathcal{C}$ の射ならば
+$f^* \circ c^A =  c^A \circ f^*$ である。
+\item $X \in \Ob(\mathcal{C})$ および $\mathcal{L} \in \Pic(X)$ に対して
+$c^A([\mathcal{L}]) = 1 + c_1^A(\mathcal{L})$ である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathcal{C})$ とし、$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群とする。
+まず元 $c^A(\mathcal{E}) \in A(X)$ の定義方法を示す。
+
+\medskip\noindent
+第一段階として、$X = \bigcup X_r$ を、$\mathcal{E}|_{X_r}$ が一定階数 $r$ をもつような
+開かつ閉な部分スキームへの分解とする。$X$ は準コンパクトなので、この分解は有限である。
+したがって $A(X) = \prod A(X_r)$ である。ゆえに、$\mathcal{E}$ が一定階数 $r$ をもつ場合に
+$c^A(\mathcal{E})$ を定義すれば十分である。この場合、$p : P \to X$ を $\mathcal{E}$ の射影束とする。
+$i \geq 0$ に対し、$c_0^A(\mathcal{E}) = 1$ であり、方程式
+\begin{equation}
+\label{weil-equation-chern-classes}
+\sum\nolimits_{i = 0}^r
+(-1)^i c_1(\mathcal{O}_P(1))^i \cup p^*c^A_{r - i}(\mathcal{E})
+= 0
+\end{equation}
+が成り立つように元 $c_i^A(\mathcal{E}) \in A^i(X)$ を一意的に定義できる。通常のように、$A(X)$ において
+$c^A(\mathcal{E}) = c_0^A(\mathcal{E}) + c_1^A(\mathcal{E}) + \ldots
++ c_r^A(\mathcal{E})$ とおく。
+
+\medskip\noindent
+$\mathcal{E}$ が可逆ならば
+$c^A(\mathcal{E}) = 1 + c_1^A(\mathcal{L})$ である。これは上の構成から直ちに従う。
+
+\medskip\noindent
+各元 $c_i^A(\mathcal{E})$ は $A(X)$ の中心に属する。これを証明するには、$\mathcal{E}$ が一定階数 $r$ をもつと仮定してよい。
+$p : P \to X$ を対応する射影束とする。$a \in A(X)$ ならば
+$p^*a \cup (-1)^r c_1(\mathcal{O}_P(1))^r =
+(-1)^r c_1(\mathcal{O}_P(1))^r \cup p^*a$ である。したがって、$c_i^A(\mathcal{E})$ を定める式の
+その他の項すべてについても同じことが成り立ち、結論を得る。
+
+\medskip\noindent
+$f : X' \to X$ が $\mathcal{C}$ の射ならば
+$f^*c_i^A(\mathcal{E}) = c_i^A(f^*\mathcal{E})$ である。これを証明するには、$\mathcal{E}$ が一定階数 $r$ をもつと仮定してよい。
+$p : P \to X$, $p' : P' \to X'$ をそれぞれ $\mathcal{E}$, $f^*\mathcal{E}$ に対応する射影束とする。
+誘導される射 $g : P' \to P$ は $\mathcal{C}$ の射である。
+$c_i^A(\mathcal{E})$ を定める等式の $g$ による引き戻しは、$f^*\mathcal{E}$ に対応する方程式であるから、結論が従う。
+
+\medskip\noindent
+$X \in \Ob(\mathcal{C})$ とする。$\mathcal{L}$ が可逆であるような有限局所自由 $\mathcal{O}_X$-加群の短完全列
+$$
+0 \to \mathcal{L} \to \mathcal{E} \to \mathcal{F} \to 0
+$$
+を考える。このとき
+$$
+c^A(\mathcal{E}) = c^A(\mathcal{L}) c^A(\mathcal{F})
+$$
+である。実際、$c^A_i$ の構成により、$\mathcal{E}$ は一定階数 $r + 1$ をもち、
+$\mathcal{F}$ は一定階数 $r$ をもつと仮定できる。包含
+$$
+i : P' = \mathbf{P}(\mathcal{F}) \longrightarrow \mathbf{P}(\mathcal{E}) = P
+$$
+は $\mathcal{C}$ の射であり、可逆加群 $\mathcal{L}^{\otimes -1} \otimes \mathcal{O}_P(1)$ の正則切断の零点スキームである。
+元
+$$
+\sum\nolimits_{i = 0}^r (-1)^i c_1^A(\mathcal{O}_P(1))^i \cup
+p^*c^A_i(\mathcal{F})
+$$
+は定義により $P'$ 上で零に引き戻される。したがって、このコホモロジー $A$ に関する仮定 (5) により、
+$A^*(P)$ において
+$$
+\left(c_1^A(\mathcal{O}_P(1)) - c_1^A(\mathcal{L})\right) \cup
+\left(\sum\nolimits_{i = 0}^r (-1)^i c_1^A(\mathcal{O}_P(1))^i \cup
+p^*c^A_i(\mathcal{F})\right) = 0
+$$
+である。$c_1^A(\mathcal{E})$ の定義から、これは望む等式を与える。
+
+\medskip\noindent
+$X \in \Ob(\mathcal{C})$ とする。有限局所自由 $\mathcal{O}_X$-加群の短完全列
+$$
+0 \to \mathcal{E} \to \mathcal{F} \to \mathcal{G} \to 0
+$$
+を考える。このとき
+$$
+c^A(\mathcal{F}) = c^A(\mathcal{E}) c^A(\mathcal{G})
+$$
+である。実際、$c^A_i$ の構成により、$\mathcal{E}$, $\mathcal{F}$, $\mathcal{G}$ はそれぞれ
+一定階数 $r$, $s$, $t$ をもつと仮定できる。$r$ に関する帰納法で証明する。
+$r = 1$ の場合は上で証明した。$r > 1$ のとき、射 $\mathbf{P}(\mathcal{E}^\vee) \to X$ により引き戻した後で
+確かめれば十分である。したがって、可逆部分加群 $\mathcal{L} \subset \mathcal{E}$ であって、
+$\mathcal{E}' = \mathcal{E}/\mathcal{L}$ および $\mathcal{F}' = \mathcal{E}/\mathcal{L}$ がともに有限局所自由
+（それぞれ階数 $s - 1$, $t - 1$）であるものが存在すると仮定できる。すると
+$$
+c^A(\mathcal{E}) = c^A(\mathcal{L}) c^A(\mathcal{E}')
+\quad\text{and}\quad
+c^A(\mathcal{F}) = c^A(\mathcal{L}) c^A(\mathcal{F}')
+$$
+である。短完全列
+$$
+0 \to \mathcal{E}' \to \mathcal{F}' \to \mathcal{G} \to 0
+$$
+があるので、帰納法の仮定により
+$$
+c^A(\mathcal{F}') = c^A(\mathcal{E}') c^A(\mathcal{G})
+$$
+である。よって結果は形式的な計算から従う。
+
+\medskip\noindent
+これで $X \in \Ob(\mathcal{C})$ に対して
+$c^A : K_0(\textit{Vect}(X)) \to A(X)$ を定義できる。すなわち、生成元 $[\mathcal{E}]$ を
+$c^A(\mathcal{E})$ へ送り、乗法的に拡張する。したがって、例えば
+$c^A(-[\mathcal{E}]) = c^A(\mathcal{E})^{-1}$ は $a^A([\mathcal{E}])$ の形式的な逆元である。
+上で示した短完全列に対する乗法性が、この定義が適切であることを保証する。
+
+\medskip\noindent
+一意性。$X \in \Ob(\mathcal{C})$ とし、$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群とする。
+補題の条件 (1), (2), (3) が $c^A([\mathcal{E}])$ を一意的に定めることを示したい。
+これを証明するには、$\mathcal{E}$ が一定階数 $r$ をもつと仮定できる。ここですでに (2) を用いた。
+そこで $r$ に関する帰納法を用いる。$r = 1$ ならば一意性は (3) から従う。
+$r > 1$ ならば、(2) を用いて射影束 $p : P \to X$ へ引き戻すことにより、短完全列
+$0 \to \mathcal{E}' \to \mathcal{E} \to \mathcal{E}'' \to 0$
+で、$\mathcal{E}'$, $\mathcal{E}''$ の階数がより小さいものがあると仮定できる。
+帰納法の仮定により、$c^A(\mathcal{E}')$, $c^A(\mathcal{E}'')$ は一意的に定まる。
+ゆえに公理 (1) により $\mathcal{E}$ に対する一意性が従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-splitting-principle}
+上の状況で、$X \in \Ob(\mathcal{C})$ とする。$\mathcal{E}_i$ を階数 $r_i$ の局所自由 $\mathcal{O}_X$-加群の有限集合とする。
+次を満す $\mathcal{C}$ の射 $p : P \to X$ が存在する。
+\begin{enumerate}
+\item $p^* : A(X) \to A(P)$ は単射である。
+\item 各 $p^*\mathcal{E}_i$ はフィルトレーションをもち、その逐次商
+$\mathcal{L}_{i, 1}, \ldots, \mathcal{L}_{i, r_i}$ は可逆 $\mathcal{O}_P$-加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+すべての $i$ に対して $r_i \geq 1$ と仮定できる。$\sum (r_i - 1)$ に関する帰納法で証明する。
+この整数が $0$ ならば、すべての $i$ に対して $\mathcal{E}_i$ は可逆であり、
+$\pi = \text{id}_X$ とすれば結論を得る。そうでなければ、$r_i > 1$ を満す $i$ を選び、
+$\mathcal{E}_i$ に対応する射影束 $p : P \to X$ を考える。階数がそれぞれ $r_i - 1$, $r_i$, $1$ の
+有限局所自由 $\mathcal{O}_P$-加群の短完全列
+$$
+0 \to \mathcal{F} \to p^*\mathcal{E}_i \to \mathcal{O}_P(1) \to 0
+$$
+がある。仮定により $p^* : A(X) \to A(P)$ は単射である。
+$i' \not = i$ に対する有限局所自由 $\mathcal{O}_P$-加群 $\mathcal{F}$ および $p^*\mathcal{E}_{i'}$ に
+帰納法の仮定を適用すると、補題に述べた性質をもつ射 $p' : P' \to P$ を得る。
+すると合成 $p \circ p' : P' \to X$ が求める射である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-chern-classes-E-tensor-L}
+$X \in \Ob(\mathcal{C})$ とする。$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群とし、$\mathcal{L}$ を可逆 $\mathcal{O}_X$-加群とする。
+このとき
+$$
+c^A_i({\mathcal E} \otimes {\mathcal L})
+=
+\sum\nolimits_{j = 0}^i
+\binom{r - i + j}{j} c^A_{i - j}({\mathcal E}) \cup c^A_1({\mathcal L})^j
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$c^A_i$ の構成により、$\mathcal{E}$ は一定階数 $r$ をもつと仮定できる。
+$p : P \to X$, $p' : P' \to X$ をそれぞれ $\mathcal{E}$, $\mathcal{E} \otimes \mathcal{L}$ に対応する射影束とする。
+このとき、$g^*\mathcal{O}_{P'}(1) = \mathcal{O}_P(1) \otimes p^*\mathcal{L}$ を満す同型 $g : P \to P'$ が存在する。
+『スキームの構成』の補題 \ref{constructions-lemma-twisting-and-proj} を参照せよ。したがって
+$$
+g^*c_1^A(\mathcal{O}_{P'}(1)) =
+c_1^A(\mathcal{O}_P(1)) + p^*c_1^A(\mathcal{L})
+$$
+である。求める等式は、これと方程式 (\ref{weil-equation-chern-classes}) を用いた Chern 類の定義から形式的に従う。
+\end{proof}
+
+\begin{proposition}
+\label{weil-proposition-chern-character}
+上の状況で、すべての $X \in \Ob(\mathcal{C})$ に対して $A(X)$ が $\mathbf{Q}$-代数であると仮定する。
+このとき、各 $X \in \Ob(\mathcal{C})$ に「Chern 指標」
+$$
+ch^A : K_0(\textit{Vect}(X)) \longrightarrow
+\prod\nolimits_{i \geq 0} A^i(X)
+$$
+を対応させ、次の性質をもつ規則が一意的に存在する。
+\begin{enumerate}
+\item すべての $X \in \Ob(\mathcal{C})$ に対して $ch^A$ は環準同型である。
+\item $f : X' \to X$ が $\mathcal{C}$ の射ならば $f^* \circ ch^A =  ch^A \circ f^*$ である。
+\item $X \in \Ob(\mathcal{C})$ および $\mathcal{L} \in \Pic(X)$ に対して
+$ch^A([\mathcal{L}]) = \exp(c_1^A(\mathcal{L}))$ である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathcal{C})$ とし、$\mathcal{E}$ を有限局所自由 $\mathcal{O}_X$-加群とする。まず階数
+$r^A(\mathcal{E}) \in A^0(X)$ の定義方法を示す。$X = \bigcup X_r$ を、$\mathcal{E}|_{X_r}$ が一定階数 $r$ をもつような
+開かつ閉な部分スキームへの分解とする。$X$ は準コンパクトなのでこの分解は有限であり、
+$X = X_0 \amalg X_1 \amalg \ldots \amalg X_n$ と書ける。すると
+$A(X) = A(X_0) \times A(X_1) \times \ldots \times A(X_n)$ である。よって
+$r^A(\mathcal{E}) = (0, 1, \ldots, n) \in A^0(X)$ と定義できる。
+
+\medskip\noindent
+$P_p(c_1, \ldots, c_p)$ を Chow 『ホモロジー代数』の例 \ref{chow-example-power-sum} で構成した多項式とする。
+このとき
+$$
+ch^A(\mathcal{E}) = r^A(\mathcal{E}) +
+\sum\nolimits_{i \geq 1} (1/i!)
+P_i(c^A_1(\mathcal{E}), \ldots, c^A_i(\mathcal{E}))
+\in \prod\nolimits_{i \geq 0} A^i(X)
+$$
+と定義できる。ここで $ci^A$ は命題 \ref{weil-proposition-chern-class} の Chern 類である。
+補題の性質 (2), (3) はここから直ちに従う。
+
+\medskip\noindent
+残るのは次の三つの主張を示すことである。
+\begin{enumerate}
+\item $0 \to \mathcal{E}_1 \to \mathcal{E} \to \mathcal{E}_2 \to 0$ が $X \in \Ob(\mathcal{C})$ 上の有限局所自由
+$\mathcal{O}_X$-加群の短完全列ならば、$ch^A(\mathcal{E}) = ch^A(\mathcal{E}_1) + ch^A(\mathcal{E}_2)$ である。
+\item $\mathcal{E}_1$ および $\mathcal{E}_2 \to 0$ が $X \in \Ob(\mathcal{C})$ 上の有限局所自由 $\mathcal{O}_X$-加群ならば
+$ch^A(\mathcal{E}_1 \otimes \mathcal{E}_2) =
+ch^A(\mathcal{E}_1) ch^A(\mathcal{E}_2)$ である。
+\end{enumerate}
+第一の主張により $ch^A$ は $K_0(\textit{Vect}(X))$ を経由し、第一と第二を合わせると
+$ch^A$ が環準同型であることが従う。
+
+\medskip\noindent
+これらの主張を証明するには、$\mathcal{E}_1$, $\mathcal{E}_2$ がそれぞれ一定階数 $r_1$, $r_2$ をもつ場合に帰着できる。
+この場合、$A^0(X)$ における等式は明らかである。より高い次数での等式を示すため、
+補題 \ref{weil-lemma-splitting-principle} により、$\mathcal{E}_1$, $\mathcal{E}_2$ は次の可逆加群を次数付き部分とする
+フィルトレーションをもつと仮定できる。
+$\mathcal{L}_{1, j}$, $j = 1, \ldots, r_1$ および
+$\mathcal{L}_{2, j}$, $j = 1, \ldots, r_2$.
+Chern 類の乗法性を用いると
+$$
+c_i^A(\mathcal{E}_1) =
+s_i(c_1^A(\mathcal{L}_{1, 1}), \ldots, c_1^A(\mathcal{L}_{1, r_1}))
+$$
+を得る。ここで $s_i$ は Chow 『ホモロジー代数』の例 \ref{chow-example-power-sum} における $i$ 番目の基本対称式である。
+$c_i^A(\mathcal{E}_2)$ についても同様である。場合 (1) では
+$$
+c_i^A(\mathcal{E}) =
+s_i(c_1^A(\mathcal{L}_{1, 1}), \ldots, c_1^A(\mathcal{L}_{1, r_1}),
+c_1^A(\mathcal{L}_{2, 1}), \ldots, c_1^A(\mathcal{L}_{2, r_2}))
+$$
+を得、場合 (2) では
+$$
+c_i^A(\mathcal{E}_1 \otimes \mathcal{E}_2) =
+s_i(c_1^A(\mathcal{L}_{1, 1}) + c_1^A(\mathcal{L}_{2, 1}),
+\ldots, c_1^A(\mathcal{L}_{1, r_1}) + c_1^A(\mathcal{L}_{2, r_2}))
+$$
+を得る。多項式 $P_i$ の定義から、これは
+$$
+P_i(c^A_1(\mathcal{E}_1), \ldots, c^A_i(\mathcal{E}_1)) =
+\sum\nolimits_{j = 1, \ldots, r_1} c_1^A(\mathcal{L}_{1, j})^i
+$$
+を意味する。$\mathcal{E}_2$ についても同様である。場合 (1) ではさらに
+$$
+P_i(c^A_1(\mathcal{E}), \ldots, c^A_i(\mathcal{E})) =
+\sum\nolimits_{j = 1, \ldots, r_1} c_1^A(\mathcal{L}_{1, j})^i +
+\sum\nolimits_{j = 1, \ldots, r_2} c_1^A(\mathcal{L}_{2, j})^i
+$$
+である。場合 (2) では対応して
+$$
+P_i(c^A_1(\mathcal{E}_1 \otimes \mathcal{E}_2), \ldots,
+c^A_i(\mathcal{E}_1 \otimes \mathcal{E}_2)) =
+\sum\nolimits_{j = 1, \ldots, r_1}
+\sum\nolimits_{j' = 1, \ldots, r_2}
+(c_1^A(\mathcal{L}_{1, j}) + c_1^A(\mathcal{L}_{2, j'}))^i
+$$
+を得る。これで、求める等式は対称多項式の初等的な恒等式から従う。
+
+\medskip\noindent
+一意性の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-adams-and-chern}
+上の状況で $X \in \Ob(\mathcal{C})$ とする。$\psi^2$ を Chow 『ホモロジー代数』の補題 \ref{chow-lemma-second-adams-operator} のようにとり、$c^A$, $ch^A$ を命題 \ref{weil-proposition-chern-class} および \ref{weil-proposition-chern-character} のようにとると、すべての
+$\alpha \in K_0(\textit{Vect}(X))$ に対して
+$c^A_i(\psi^2(\alpha)) = 2^i c^A_i(\alpha)$ および
+$ch^A_i(\psi^2(\alpha)) = 2^i ch^A_i(\alpha)$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\prod_{i \geq 0} A^i(X) \to \prod_{i \geq 0} A^i(X)$ の $A^i(X)$ 上で $2^i$ を掛ける写像は環準同型である。
+$\psi^2$ も環準同型なので、$K_0(\textit{Vect}(X))$ の加法的生成元に対して公式を証明すれば十分である。
+したがって、ある有限局所自由 $\mathcal{O}_X$-加群 $\mathcal{E}$ に対して
+$\alpha = [\mathcal{E}]$ であると仮定できる。$\mathcal{E}$ の Chern 類の構成により、
+$\mathcal{E}$ が一定階数 $r$ をもつ場合に直ちに帰着する。この場合、制限写像 $A^*(X) \to A^*(P)$ が単射で、
+$p^*\mathcal{E}$ が可逆 $\mathcal{O}_P$-加群 $\mathcal{L}_j$ を次数付き部分とする有限フィルトレーションをもつような
+射影的滑らかな射 $p : P \to X$ を選べる。補題 \ref{weil-lemma-splitting-principle} を参照せよ。
+すると $[p^*\mathcal{E}] = \sum [\mathcal{L}_j]$ であり、$\psi^2$ の定義により
+$\psi^2([p^*\mathcal{E}]) = \sum [\mathcal{L}_j^{\otimes 2}]$ である。$x_j  = c^A_1(\mathcal{L}_j)$ とおくと
+$$
+c^A(\alpha) = \prod (1 + x_j)
+\quad\text{and}\quad
+c^A(\psi^2(\alpha)) = \prod (1 + 2 x_j)
+$$
+が $\prod A^i(P)$ において成り立ち、また
+$$
+ch^A(\alpha) = \sum \exp(x_j)
+\quad\text{and}\quad
+ch^A(\psi^2(\alpha)) = \sum \exp(2 x_j)
+$$
+が $\prod A^i(P)$ において成り立つ。これらの公式から望む結果が従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{外冪と K 群}
+\label{weil-section-lambda-operations}
+
+\noindent
+ラムダ演算子を定義するために必要な最小限の作業を行う。$X$ をスキームとする。
+$\textit{Vect}(X)$ は有限局所自由 $\mathcal{O}_X$-加群の圏を表すことを思い出そう。
+また、『スキームの導来圏』の第 \ref{perfect-section-K-groups} 節で、この圏に対応する第零 $K$-群
+$K_0(\textit{Vect}(X))$ を構成した。最後に、$K_0(\textit{Vect}(X))$ は環である。
+『スキームの導来圏』の注意 \ref{perfect-remark-K-ring} を参照せよ。
+
+\begin{lemma}
+\label{weil-lemma-lambda-operations}
+$X$ をスキームとする。写像
+$$
+\lambda^r : K_0(\textit{Vect}(X)) \longrightarrow K_0(\textit{Vect}(X))
+$$
+が存在し、$\mathcal{E}$ が有限局所自由 $\mathcal{O}_X$-加群のとき $[\mathcal{E}]$ を
+$[\wedge^r(\mathcal{E})]$ へ送る。これらの写像は引き戻しと両立する。
+\end{lemma}
+
+\begin{proof}
+$t$ を変数とし、環 $R = K_0(\textit{Vect}(X))[[t]]$ を考える。有限局所自由 $\mathcal{O}_X$-加群
+$\mathcal{E}$ に対し、$R$ の中で
+$$
+c(\mathcal{E}) = \sum\nolimits_{i = 0}^\infty [\wedge^i(\mathcal{E})] t^i
+$$
+とおく。有限局所自由 $\mathcal{O}_X$-加群の短完全列
+$$
+0 \to \mathcal{E}' \to \mathcal{E} \to \mathcal{E}'' \to 0
+$$
+が与えられたとき、$c(\mathcal{E}) = c(\mathcal{E}') c(\mathcal{E}'')$ であると主張する。
+この主張から、$c$ は写像
+$$
+c :  K_0(\textit{Vect}(X)) \longrightarrow R
+$$
+に拡張され、$K_0(\textit{Vect}(X))$ の加法を $R$ の乗法へ移す。
+$c(\alpha) = \sum \lambda^i(\alpha) t^i$ と書くと、求める演算子 $\lambda^i$ を得る。
+
+\medskip\noindent
+主張を確かめるため、この短完全列を $\mathcal{E}$ 上の $2$ 段のフィルトレーションとみなす。
+$\wedge^r(\mathcal{E})$ 上に $r + 1$ 段の誘導されるフィルトレーションを得、その部分商は
+$$
+\wedge^r(\mathcal{E}'),
+\wedge^{r - 1}(\mathcal{E}') \otimes \mathcal{E}'',
+\wedge^{r - 2}(\mathcal{E}') \otimes \wedge^2(\mathcal{E}''), \ldots
+\wedge^r(\mathcal{E}'')
+$$
+である。したがって $[\wedge^r(\mathcal{E})]$ は
+$$
+\sum\nolimits_{i = 0}^r
+[\wedge^{r - i}(\mathcal{E}')] [\wedge^i(\mathcal{E}'')]
+$$
+に等しい。これと初等代数から結果は容易に従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Weil コホモロジー理論 III}
+\label{weil-section-c1}
+
+\noindent
+$k$ を体とし、$F$ を標数零の体とする。次のデータが与えられたとする。
+\begin{enumerate}
+\item[(D0)] $1$ 次元 $F$-ベクトル空間 $F(1)$.
+\item[(D1)] $k$ 上の滑らかな射影スキームの圏から次数付き可換 $F$-代数の圏への反変関手 $H^*(-)$.
+\item[(D2')] 各 $k$ 上の滑らかな射影スキーム $X$ に対するアーベル群の準同型
+$c_1^H : \Pic(X) \to H^2(X)(1)$.
+\end{enumerate}
+(D0), (D1) に関しては、第 \ref{weil-section-axioms} 節で論じた用語、記法、規約を用いる。
+$X$ が $k$ 上の滑らかな射影スキームで、$\mathcal{L}$ が可逆 $\mathcal{O}_X$-加群のとき、
+(D2') のコホモロジー類 $c_1^H(\mathcal{L}) \in H^2(X)(1)$ を、
+{\it コホモロジーにおける $\mathcal{L}$ の第一 Chern 類} と呼ぶことがある。
+
+\medskip\noindent
+公理の一覧は次のとおりである。
+\begin{enumerate}
+\item[(A1)] $H^*$ は有限余積と両立する。
+\item[(A2)] $c_1^H$ は引き戻しと両立する。
+\item[(A3)] $X$ を $k$ 上の滑らかな射影スキームとする。$\mathcal{E}$ を階数 $r \geq 1$ の局所自由 $\mathcal{O}_X$-加群とする。
+射 $p : P = \mathbf{P}(\mathcal{E}) \to X$ を考える。このとき写像
+$$
+\bigoplus\nolimits_{i = 0, \ldots, r - 1} H^*(X)(-i)
+\longrightarrow H^*(P),\quad
+(a_0, \ldots, a_{r - 1}) \longmapsto
+\sum c_1^H(\mathcal{O}_P(1))^i \cup p^*(a_i)
+$$
+は $F$-ベクトル空間の同型である。
+\item[(A4)] $i : Y \to X$ を $k$ 上の有効 Cartier 因子の包含とし、$X$, $Y$ はともに $k$ 上滑らかで射影的であるとする。
+$i^*a = 0$ を満す $a \in H^*(X)$ に対して $a \cup c_1^H(\mathcal{O}_X(Y)) = 0$ である。
+\item[(A5)] $H^*$ は有限積と両立する。
+\item[(A6)] $X$ を $k$ 上の空でない、次元 $d$ の等次元な滑らかな射影スキームとする。
+$H^*(X)$ において $(\text{id} \otimes \lambda) \gamma([\Delta]) =  1$ を満す $F$-線形写像
+$\lambda : H^{2d}(X)(d) \to F$ が存在する。
+\item[(A7)] $b : X' \to X$ が $k$ 上の滑らかな射影スキーム $X$ の滑らかな中心に沿う吹き上げならば\footnote{このとき $X'$ も $k$ 上滑らかで射影的である。『射の続論』の補題 \ref{more-morphisms-lemma-blowup} を参照せよ。}、
+$b^* : H^*(X) \to H^*(X')$ は単射である。
+\item[(A8)] $X$ が $k$ 上の滑らかな射影スキームで、$k' = \Gamma(X, \mathcal{O}_X)$ とおくと、写像
+$H^0(\Spec(k')) \to H^0(X)$ は同型である。
+\item[(A9)] $X$ を $k$ 上の空でない、次元 $d$ の等次元な滑らかな射影スキームとする。
+$i : Y \to X$ を $k$ 上滑らかな空でない有効 Cartier 因子とする。$a \in H^{2d - 2}(X)(d - 1)$ に対して
+$\lambda_Y(i^*(a)) = \lambda_X(a \cup c_1^H(\mathcal{O}_X(Y))$ が成り立つ。ここで $\lambda_Y$, $\lambda_X$ は、それぞれ $X$, $Y$ に対する公理 (A6) の写像である。
+\end{enumerate}
+これらの各公理の意味をより正確に説明しよう。公理 (A3), (A4), (A7) は記載のとおり明確である。
+
+\medskip\noindent
+(A1) について。これは $H^*(\emptyset) = 0$ であり、余射を $i$, $j$ とするとき
+$(i^*, j^*) : H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$ が同型であることを意味する。
+
+\medskip\noindent
+(A2) について。$k$ 上の滑らかな射影スキームの射 $f : X \to Y$ と可逆 $\mathcal{O}_Y$-加群 $\mathcal{N}$ が与えられると、
+$f^*c_1^H(\mathcal{L}) = c_1^H(f^*\mathcal{L})$ が成り立つことを意味する。
+
+\medskip\noindent
+(A5) について。これは $H^*(\Spec(k)) = F$ であり、$X$, $Y$ が $k$ 上滑らかで射影的なとき、
+写像 $H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y)$、$a \otimes b \mapsto p^*(a) \cup q^*(b)$ が同型であることを意味する。
+ここで $p$, $q$ は射影である。
+
+\medskip\noindent
+(A6) について。$X$ を $k$ 上の空でない、次元 $d$ の等次元な滑らかな射影スキームとする。
+公理 (A1)--(A4) があると、補題 \ref{weil-lemma-cycle-classes} により対角線の類
+$$
+\gamma([\Delta]) \in
+H^{2d}(X \times X)(d) = \bigoplus\nolimits_i H^i(X) \otimes_F H^{2d - i}(X)(d)
+$$
+を考えられる。ここでテンソル分解は公理 (A5) から来る。
+$F$-線形写像 $\lambda : H^{2d}(X)(d) \to F$ が与えられたとき、$H^{2d}(X)(d)$ への射影を前合成することにより、
+$\lambda$ を $F$-線形写像 $\lambda : H^*(X)(d) \to F$ とみなすこともできる。これにより公理 (A6) は意味をもつ。
+
+\medskip\noindent
+(A8) について。$X$ を $k$ 上の滑らかな射影スキームとする。すると
+$k' = \Gamma(X, \mathcal{O}_X)$ は有限分離 $k$-代数である（『多様体』の補題 \ref{varieties-lemma-proper-geometrically-reduced-global-sections}）。したがって $\Spec(k')$ は $k$ 上滑らかで射影的である。
+よって $H^*$ を $\Spec(k')$ に適用でき、公理 (A8) は意味をもつ。
+
+\medskip\noindent
+(A9) について。公理 (A1)--(A7) があれば、公理 (A6) の写像 $\lambda$ は一意的であることを
+注意 \ref{weil-remark-trace} で見る。
+
+\begin{lemma}
+\label{weil-lemma-chern-classes}
+公理 (A1), (A2), (A3), (A4) を満たす (D0), (D1), (D2') が与えられたとする。
+各 $k$ 上の滑らかな射影スキーム $X$ に、引き戻しと両立する環準同型
+$$
+ch^H :
+K_0(\textit{Vect}(X))
+\longrightarrow
+\prod\nolimits_{i \geq 0} H^{2i}(X)(i)
+$$
+を対応させる規則で、任意の可逆 $\mathcal{O}_X$-加群 $\mathcal{L}$ に対して
+$ch^H(\mathcal{L}) = \exp(c_1^H(\mathcal{L}))$ を満すものが一意的に存在する。
+\end{lemma}
+
+\begin{proof}
+命題 \ref{weil-proposition-chern-character} を、$k$ 上の滑らかな射影スキームの圏、関手
+$A : X \mapsto \bigoplus_{i \geq 0} H^{2i}(X)(i)$、および写像 $c_1^H$ に適用すると直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-cycle-classes}
+公理 (A1), (A2), (A3), (A4) を満たす (D0), (D1), (D2') が与えられたとする。
+各 $k$ 上の滑らかな射影スキーム $X$ に、引き戻しと両立する次数付き環準同型
+$$
+\gamma : \CH^*(X) \longrightarrow \bigoplus\nolimits_{i \geq 0} H^{2i}(X)(i)
+$$
+を対応させ、$K_0(\textit{Vect}(X))$ の $\alpha$ に対して
+$ch^H(\alpha) = \gamma(ch(\alpha))$ を満す規則が一意的に存在する。
+\end{lemma}
+
+\begin{proof}
+同型
+$$
+K_0(\textit{Vect}(X)) \otimes \mathbf{Q}
+\longrightarrow \CH^*(X) \otimes \mathbf{Q},\quad
+\alpha \longmapsto ch(\alpha) \cap [X]
+$$
+があることを思い出そう。Chow 『ホモロジー代数』の補題 \ref{chow-lemma-K-tensor-Q} を参照せよ。
+Chow 『ホモロジー代数』の注意 \ref{chow-remark-chern-character-K} により、これは環の同型である。
+$ch^H$ を補題 \ref{weil-lemma-chern-classes} のようにとり、
+$\alpha' \in K_0(\textit{Vect}(X))$ を $\CH^*(X) \otimes \mathbf{Q}$ において
+$ch(\alpha') \cap [X] = \alpha$ を満すものとする。公式 $\gamma(\alpha) = ch^H(\alpha')$ によって $\gamma$ を定義する。
+
+\medskip\noindent
+構成 $\alpha \mapsto \gamma(\alpha)$ は引き戻しと両立する。実際、$ch^H$ も Chern 類をとる操作も引き戻しと両立する。
+補題 \ref{weil-lemma-chern-classes} および Chow 『ホモロジー代数』の注意 \ref{chow-remark-gysin-chern-classes} を参照せよ。
+
+\medskip\noindent
+残るのは $\gamma$ が次数付きであることを確かめることである。
+$\psi^2 : K_0(\textit{Vect}(X)) \to K_0(\textit{Vect}(X))$ を第二 Adams 演算子とする。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-second-adams-operator} を参照せよ。
+$\alpha \in \CH^i(X)$ とし、$\alpha' \in K_0(\textit{Vect}(X)) \otimes \mathbf{Q}$ を
+$ch(\alpha') \cap [X] = \alpha$ を満す一意的な元とする。Chow 『ホモロジー代数』の第 \ref{chow-section-intersection-regular} 節で $\psi^2(\alpha') = 2^i \alpha'$ を見た。したがって補題 \ref{weil-lemma-adams-and-chern} により、望むとおり $ch^H(\alpha') \in H^{2i}(X)(i)$ である。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-divide-pullback-good-blowing-up}
+$b : X' \to X$ を、$k$ 上の滑らかな射影スキームの滑らかな閉部分スキーム $Z \subset X$ に沿う吹き上げとする。図式は
+$$
+\xymatrix{
+E \ar[r]_j \ar[d]_\pi & X' \ar[d]^b \\
+Z \ar[r]^i & X
+}
+$$
+である。$K_0(X)$ の元で、$Z$ への制限が $K_0(Z)$ における $\mathcal{C}_{Z/X}$ の類に等しいものが存在すると仮定する。
+$Z$ の各既約成分は $X$ の中で余次元 $r$ をもつと仮定する。このときサイクル
+$\theta \in \CH^{r - 1}(X')$ であって、$\CH^r(X')$ において $b^![Z] = [E] \cdot \theta$ であり、
+$\CH^r(Z)$ において $\pi_*j^!(\theta) = [Z]$ であるものが存在する。
+\end{lemma}
+
+\begin{proof}
+スキーム $X$ は $k$ 上滑らかで射影的なので
+$K_0(X) = K_0(\textit{Vect}(X))$ である。『スキームの導来圏』の補題 \ref{perfect-lemma-resolution-property-ample} および \ref{perfect-lemma-K-is-old-K} を参照せよ。
+$\alpha \in K_0(\text{Vect}(X))$ を、$Z$ への制限が $\mathcal{C}_{Z/X}$ である元とする。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-minus-adams-operator} により、$\mathcal{C}_{Z/X}^\vee$ へ制限される元 $\alpha^\vee$ が存在する。
+吹き上げ公式（Chow 『ホモロジー代数』の補題 \ref{chow-lemma-blow-up-formula}）により
+$$
+b^![Z] = b^!i_*[Z] = j_* res(b^!)([Z]) =
+j_*(c_{r - 1}(\mathcal{F}^\vee) \cap \pi^*[Z]) =
+j_*(c_{r - 1}(\mathcal{F}^\vee) \cap [E])
+$$
+である。ここで $\mathcal{F}$ は全射 $\pi^*\mathcal{C}_{Z/X} \to \mathcal{C}_{E/X'}$ の核である。
+$b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]$ は $K_0(\text{Vect}(X'))$ の元であり、$E$ 上で
+$[\pi^*\mathcal{C}_{Z/X}^\vee] - [\mathcal{C}_{E/X'}^\vee] =
+[\mathcal{F}^\vee]$ に制限されることに注意せよ。Chern 類とのキャップ積は $j_*$ と可換なので、上の式は
+$$
+c_{r - 1}(b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]) \cap [E]
+$$
+に、$X'$ の Chow 群の中で等しい。したがって
+$$
+\theta = c_{r - 1}(b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]) \cap [X']
+$$
+とおけば、例えば Chow 『ホモロジー代数』の補題 \ref{chow-lemma-identify-chow-for-smooth} により第一の関係
+$\theta \cdot [E] = b^![Z]$ を得る。第二の関係については
+$$
+j^!\theta = j^!(c_{r - 1}(b^*\alpha^\vee - [\mathcal{O}_{X'}(E)]) \cap [X'])
+= c_{r - 1}(\mathcal{F}^\vee) \cap j^![X'] =
+c_{r - 1}(\mathcal{F}^\vee) \cap [E]
+$$
+であることに注意せよ。これは $E$ の Chow 群における等式である。
+これの $\pi_*$ が $[Z]$ に等しいことを示すには、$\pi$ のファイバー上で余次元 $r - 1$ のサイクル
+$(-1)^{r - 1}c_{r - 1}(\mathcal{F}) \cap [E]$ の次数が $1$ であることを示せば十分である。
+この計算は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-A5-A6-imply}
+公理 (A1)--(A4), (A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$X$ を $k$ 上の滑らかな射影スキームとし、$Z \subset X$ を滑らかな閉部分スキームで、
+$Z$ の各既約成分が $X$ の中で余次元 $r$ をもつものとする。$K_0(Z)$ における
+$\mathcal{C}_{Z/X}$ の類が $K_0(X)$ の元の制限であると仮定する。
+$a \in H^*(X)$ で、$H^*(Z)$ において $a|_Z = 0$ ならば $\gamma([Z]) \cup a = 0$ である。
+\end{lemma}
+
+\begin{proof}
+$b : X' \to X$ を吹き上げとする。(A7) により、次を示せば十分である。
+$$
+b^*(\gamma([Z]) \cup a) = b^*\gamma([Z]) \cup b^*a = 0
+$$
+補題 \ref{weil-lemma-divide-pullback-good-blowing-up} により
+$$
+b^*\gamma([Z]) = \gamma(b^*[Z]) =
+\gamma([E] \cdot \theta) =
+\gamma([E]) \cup \gamma(\theta)
+$$
+である。$b^*a$ は $E$ 上で零に制限され、また
+$\gamma([E]) = c^H_1(\mathcal{O}_{X'}(E))$ であるから、(A4) から求める結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-poincare-duality}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+このとき、公理 (A6) のように $\int_X = \lambda$ とおけば、第 \ref{weil-section-axioms} 節の公理 (A) が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$X$ を $k$ 上の空でない、次元 $d$ の等次元な滑らかな射影スキームとする。
+次数付き $F$-ベクトル空間 $H^*(X)(d)[2d]$ が $H^*(X)$ の左双対であることを示す。
+これにより『ホモロジー代数』の補題 \ref{homology-lemma-left-dual-graded-vector-spaces} から求める結果が従う。
+公理 (A5) を用いる。特にこの公理は
+$$
+H^*(X \times X)(d) =
+\bigoplus H^i(X) \otimes H^j(X)(d) =
+\bigoplus H^i(X)(d) \otimes H^j(X)
+$$
+という。写像
+$$
+\eta : F \longrightarrow H^*(X \times X)(d)
+$$
+を $\gamma([\Delta]) \in H^{2d}(X \times X)(d)$ との乗法によって定義する。一方、写像
+$$
+\epsilon :
+H^*(X \times X)(d) \longrightarrow H^*(X)(d) \xrightarrow{\lambda} F
+$$
+を次のように定義する。まず対角射 $\Delta : X \to X \times X$ による引き戻し $\Delta^*$ を用い、次に、
+公理 (A6) の $F$-線形写像 $\lambda : H^{2d}(X)(d) \to F$ に射影 $H^*(X)(d) \to H^{2d}(X)(d)$ を前合成したものを用いる。
+$H^*(X)(d)$ が $H^*(X)$ の左双対であることを示すには、写像
+$$
+\eta \otimes 1 :
+H^*(X) \longrightarrow H^*(X \times X \times X)(d)
+$$
+および
+$$
+1 \otimes \epsilon : H^*(X \times X \times X)(d) \longrightarrow H^*(X)
+$$
+の合成が恒等写像であることを示せばよい。$a \in H^*(X)$ のとき、この合成は $a$ を
+$$
+(1 \otimes \lambda)(\Delta_{23}^*(q_{12}^*\gamma([\Delta]) \cup q_3^*a)) =
+(1 \otimes \lambda)(\gamma([\Delta]) \cup p_2^*a)
+$$
+へ送る。ここで $q_i : X \times X \times X \to X$, $q_{ij} : X \times X \times X \to X \times X$ は射影、
+$\Delta_{23} : X \times X \to X \times X \times X$ は対角射、$p_i : X \times X \to X$ は射影である。
+等式は
+$\Delta_{23}^*(q_{12}^*\gamma([\Delta]) =
+\Delta_{23}^*\gamma([\Delta \times X]) = \gamma([\Delta])$ および $\Delta_{23}^* q_3^*a = p_2^*a$ から従う。
+$\gamma([\Delta]) \cup p_1^*a = \gamma([\Delta]) \cup p_2^*a$ なので（下を参照）、上の式は
+$$
+(1 \otimes \lambda)(\gamma([\Delta]) \cup p_1^*a) = a
+$$
+と簡約される。これは $\lambda$ の選び方から求める結果である。『圏論』の定義 \ref{categories-definition-dual} の第二条件 $(\epsilon \otimes 1) \circ (1 \otimes \eta) = \text{id}$ もまったく同様に証明される。
+
+\medskip\noindent
+$p_1^*a$, $\text{pr}_2^*a$ は $\Delta \subset X \times X$ 上で同じコホモロジー類に制限されることに注意せよ。
+さらに $\mathcal{C}_{\Delta/X \times X} = \Omega^1_\Delta$ は $p_1^*\Omega^1_X$ の制限である。したがって補題 \ref{weil-lemma-A5-A6-imply} により
+$\gamma([\Delta]) \cup p_1^*a = \gamma([\Delta]) \cup p_2^*a$ であり、証明が完了する。
+\end{proof}
+
+\begin{remark}[トレース写像の一意性]
+\label{weil-remark-trace}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$X$ を $k$ 上の空でない等次元な次元 $d$ の滑らかな射影スキームとする。
+補題 \ref{weil-lemma-poincare-duality} および
+『ホモロジー代数』の補題 \ref{homology-lemma-left-dual-graded-vector-spaces}
+の証明を合わせると、
+$$
+\gamma([\Delta]) \in \bigoplus\nolimits_i H^i(X) \otimes H^{2d - i}(X)(d)
+$$
+はすべての $i$ に対して $H^i(X)$ と $H^{2d - i}(X)(d)$ の間の
+完全双対性を定めることが分かる。
+特に、公理 (A6) の線形写像 $\int_X = \lambda : H^{2d}(X)(d) \to F$ は
+一意である。以後、線形写像 $\int_X$ を $X$ のトレース写像と呼ぶ。
+\end{remark}
+
+\begin{lemma}
+\label{weil-lemma-trace-product}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+このとき第 \ref{weil-section-axioms} 節の公理 (B) が成り立つ。
+\end{lemma}
+
+\begin{proof}
+公理 (B)(a) は公理 (A5) から直ちに従う。
+$X$ と $Y$ を、それぞれ次元 $d$ と $e$ の、$k$ 上の空でない等次元な
+滑らかな射影スキームとする。公理 (B)(b) を示すため、$X \times Y$ の対角
+$\Delta_{X \times Y}$ は、射影
+$p : X \times Y \times X \times Y \to X \times X$ および
+$q : X \times Y \times X \times Y \to Y \times Y$
+による $X$ の対角 $\Delta_X$ と $Y$ の対角 $\Delta_Y$ の引き戻しの
+交叉積であることに注意する。したがって、$\gamma$ と交叉積との両立性から
+$$
+\gamma([\Delta_{X \times Y}]) \in
+H^{2d + 2e}(X \times Y \times X \times Y)(d + e)
+$$
+は、$p$ と $q$ による $\gamma([\Delta_X])$ と $\gamma([\Delta_Y])$ の
+引き戻しのカップ積である。次のように書く。
+$$
+\gamma([\Delta_{X \times Y}]) = \sum \eta_{X \times Y, i}
+\text{ with }
+\eta_{X \times Y, i} \in
+H^i(X \times Y) \otimes H^{2d + 2e - i}(X \times Y)(d + e)
+$$
+また同様に $\gamma([\Delta_X]) = \sum \eta_{X, i}$ および
+$\gamma([\Delta_Y]) = \sum \eta_{Y, i}$ と書く。上の注意から
+$$
+\eta_{X \times Y, 0} =
+\sum\nolimits_{i \in \mathbf{Z}} p^*\eta_{X, i} \cup q^*\eta_{Y, -i}
+$$
+を得る。（コホモロジー理論が負次数で消滅するならば、これはほとんどすべての
+場合に成り立つが、そのとき寄与するのは $i = 0$ の項のみであり、期待どおり
+$\eta_{X \times Y, 0}$ は
+$H^0(X) \otimes H^0(Y) \otimes H^{2d}(X)(d) \otimes H^{2e}(Y)(e)$ に属する。
+ただし、この事実は必要ない。）$\lambda_X : H^{2d}(X)(d) \to F$ と 
+$\lambda_Y : H^{2e}(Y)(e) \to F$ は $\eta_{X, 0}$ と $\eta_{Y, 0}$ を
+$H^*(X)$ と $H^*(Y)$ の $1$ へ送るので、$\lambda_X \otimes \lambda_Y$ は
+$\eta_{X \times Y, 0}$ を
+$H^*(X) \otimes H^*(Y) = H^*(X \times Y)$ の $1$ へ送る。これで証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-trace-base}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+このとき第 \ref{weil-section-axioms} 節の公理 (C)(d) が成り立つ。
+\end{lemma}
+
+\begin{proof}
+構成により $\gamma([\Spec(k)]) = 1 \in H^*(\Spec(k))$ である。
+また
+$$
+H^0(\Spec(k)) = F,\quad
+H^0(\Spec(k) \times \Spec(k)) = H^0(\Spec(k)) \otimes_F H^0(\Spec(k))
+$$
+である。さらに補題 \ref{weil-lemma-trace-product} において
+$\int_{\Spec(k) \times \Spec(k)} = \int_{\Spec(k)} \int_{\Spec(k)}$
+であることを見たので、公理 (A6) の写像 $\int_{\Spec(k)} = \lambda$ は
+$1$ を $1$ へ送らなければならない。
+\end{proof}
+
+\noindent
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+すると第 \ref{weil-section-axioms} 節のデータ (D0), (D1), (D2), (D3) が得られ、
+第 \ref{weil-section-axioms} 節の公理 (A), (B), (C)(a), (C)(c), (C)(d) は
+補題 \ref{weil-lemma-poincare-duality}、\ref{weil-lemma-trace-product}、および
+\ref{weil-lemma-trace-base} により満たされる。
+さらに、第 \ref{weil-section-axioms} 節で構成した押し出し
+$f_* : H^*(X) \to H^*(Y)$ がある。まだ明らかでない公理は
+第 \ref{weil-section-axioms} 節の公理 (C)(b) だけである。
+
+\begin{lemma}
+\label{weil-lemma-ok-for-projective-bundle}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+公理 (A3) のように $p : P \to X$ をとり、$X$ は空でない等次元なものとする。
+このとき $\gamma$ は $p$ に沿う押し出しと両立する。
+\end{lemma}
+
+\begin{proof}
+$\CH_*(P)$ の生成元に対して示せば十分である。したがって、
+$0 \leq i \leq r - 1$, $\alpha \in \CH_*(X)$ を用いたサイクル類
+$\xi^i \cdot p^*\alpha$ について示せばよい。
+$i < r - 1$ ならば $p_*(\xi^i \cdot p^*\alpha) = 0$ であり、
+$p_*(\xi^{r - 1} \cdot p^*\alpha) = \alpha$ であることに注意せよ。
+一方
+$\gamma(\xi^i \cdot p^*\alpha) = c^i \cup p^*\gamma(\alpha)$ であり、投影公式 (補題 \ref{weil-lemma-pushforward}) により
+$$
+p_*\gamma(\xi^i \cdot p^*\alpha) = p_*(c^i) \cup \gamma(\alpha)
+$$
+である。よって $i < r - 1$ で $p_*c^i = 0$ および $p_*c^{r - 1} = 1$ を示せば十分である。
+同値に、
+$\lambda_P : H^{2d + 2r - 2}(P)(d + r - 1) \to F$ を、
+$$
+\lambda_P(c^i \cup p^*(a)) =
+\left\{
+\begin{matrix}
+0 & \text{if} & i < r - 1 \\
+\int_X(a) & \text{if} & i = r - 1
+\end{matrix}
+\right.
+$$
+という規則で定めたとき、公理 (A5) の条件を満たすことを示せばよい。
+これは補題 \ref{weil-lemma-diagonal-projective-bundle} における $P$ の対角線の類の計算から従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-integrate-1}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$k'/k$ が Galois 拡大ならば $\int_{\Spec(k')} 1 = [k' : k]$ である。
+\end{lemma}
+
+\begin{proof}
+$$
+\Spec(k') \times \Spec(k') =
+\coprod\nolimits_{\sigma \in \text{Gal}(k'/k)}
+(\Spec(\sigma) \times \text{id})^{-1} \Delta
+$$
+が $\Spec(k') \times \Spec(k')$ 上のサイクルとして成り立つこに注意する。
+$\gamma$ の構成は常に $[X]$ を $H^0(X)$ の $1$ へ送る。したがって
+$1 \otimes 1 = 1 = \sum (\Spec(\sigma) \times \text{id})^*\gamma([\Delta])$ である。
+$\lambda : H^0(\Spec(k')) \to F$ を公理 (A6) から得られる写像とする。すなわち
+$(\text{id} \otimes \lambda)(\gamma(\Delta)) = 1$ が $H^0(\Spec(k'))$ で成り立つ。すると
+\begin{align*}
+\lambda(1) 1
+& =
+(\text{id} \otimes \lambda)(1 \otimes 1) \\
+& =
+(\text{id} \otimes \lambda)(
+\sum (\Spec(\sigma) \times \text{id})^*\gamma([\Delta])) \\
+& =
+\sum (\Spec(\sigma) \times \text{id})^*(
+(\text{id} \otimes \lambda)(\gamma([\Delta])) \\
+& =
+\sum (\Spec(\sigma) \times \text{id})^*(1) \\
+& =
+[k' : k]
+\end{align*}
+$\lambda$ は $\int_{\Spec(k')}$ の別名であるから（注意 \ref{weil-remark-trace}）、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-enough}
+公理 (A1) -- (A7) を満たすデータ (D0), (D1), (D2') が与えられているとする。
+押し出しと $\gamma$ が可換であることを示すには十分である。
+$i_*(1) = \gamma([Z])$ を示す。ここで $i : Z \to X$ は閉埋め込みであり、空でない滑らかな射影等次元スキームの間の射である。
+$k$ 上のスキームを考えている。
+\end{lemma}
+
+\begin{proof}
+以下では特に断らずに、我々が
+補題 \ref{weil-lemma-cycle-classes} で構成したサイクル類写像 $\gamma$ が
+交差積および引き戻しと両立すること、また公理
+(A), (B), (C)(a), (C)(c), (C)(d) を第 \ref{weil-section-axioms} 節で
+すでに示したことを用いる。これは
+補題 \ref{weil-lemma-poincare-duality},
+注意 \ref{weil-remark-trace}, および
+補題 \ref{weil-lemma-trace-product} と \ref{weil-lemma-trace-base} による。
+特に、例えば補題 \ref{weil-lemma-pushforward} を用いて、$H^*$ 上の押し出しが合成と両立し、
+射影公式を満たすことが分かる。
+
+\medskip\noindent
+$f : X \to Y$ を $k$ 上の空でない
+等次元滑らかな射影スキームの射とする。
+$f_*\gamma(\alpha) = \gamma(f_*\alpha)$ を示す。これは任意のサイクル類 $\alpha$ on $X$ についてである。
+$\alpha$ は $\mathbf{Q}$-線形結合として、局所自由な $\mathcal{O}_X$-加群の積（Chow 『ホモロジー代数』の補題 \ref{chow-lemma-K-tensor-Q}）に書ける。
+したがって、$\alpha$ は有限局所自由 $\mathcal{O}_X$-加群
+$\mathcal{E}_1, \ldots, \mathcal{E}_r$ のチャーン類の積であるとしてよい。
+分解原理における $p : P \to X$ をとる
+(Chow 『ホモロジー代数』の補題 \ref{chow-lemma-splitting-principle})。
+Chow 『ホモロジー代数』の注意 \ref{chow-remark-the-proof-shows-more} により、
+$p$ は射影空間束の合成であり、$\alpha = p_*(\xi_1 \cap \ldots \cap \xi_d \cap \cdot p^*\alpha)$
+であることが分かる。ここで $\xi_i$ は可逆加群の第一チャーン類である。
+補題 \ref{weil-lemma-ok-for-projective-bundle} により、$p_*$ はサイクル類と可換する。
+したがって、合成 $f \circ p$ について性質を証明すれば十分である。$p^*\mathcal{E}_1, \ldots, p^*\mathcal{E}_r$
+は商が可逆加群となるフィルトレーションをもつので、これは $\alpha$ が
+$\xi_1 \cap \ldots \cap \xi_t \cap [X]$ の形である場合に帰着する。
+これは第一チャーン類 $\xi_i$ をもつ可逆加群 $\mathcal{L}_i$ による。
+
+\medskip\noindent
+$\alpha = c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_t) \cap [X]$
+であり、$\mathcal{L}_i$ は $X$ 上の可逆加群であるとする。
+$\mathcal{L}$ を ample な可逆 $\mathcal{O}_X$-加群とする。
+$n \gg 0$ のとき、可逆 $\mathcal{O}_X$-加群 $\mathcal{L}^{\otimes n}$ と
+$\mathcal{L}_1 \otimes \mathcal{L}^{\otimes n}$ はともに
+$X$ 上で $k$ 上非常に豊富である。『スキームの射』の補題 \ref{morphisms-lemma-invertible-add-enough-ample-very-ample} を参照。
+$c_1(\mathcal{L}_1) = c_1(\mathcal{L}_1 \otimes \mathcal{L}^{\otimes n})
+- c_1(\mathcal{L}^{\otimes n})$ なので、$\mathcal{L}_1$ が非常に豊富である場合に帰着する。
+$\mathcal{L}_i$ について、$i = 2, \ldots, t$ に対してこれを繰り返すと、$\mathcal{L}_i$ が
+$X$ 上 $k$ 上で非常に豊富である場合、すべての $i = 1, \ldots, t$ についてに帰着する。
+
+\medskip\noindent
+$k$ が無限で $\alpha = 
+c_1(\mathcal{L}_1) \cap \ldots \cap c_1(\mathcal{L}_t) \cap [X]$
+であり、$\mathcal{L}_i$ が $X$ 上 $k$ 上の非常に豊富な可逆加群であるとする。
+『多様体』の補題 \ref{varieties-lemma-bertini} の形の Bertini により、
+$\mathcal{L}_i$ の正則切断 $s_i$ を順次見つけ、$Z(s_1) \cap \ldots \cap Z(s_i)$
+が $k$ 上滑らかで、余次元 $i$ の $X$ 内のスキームとなるようにできる。
+可逆加群の第一類でキャップする構成（Chow 『ホモロジー代数』の定義 \ref{chow-definition-divisor-invertible-sheaf} に遡る）により、
+これは $\alpha = [Z]$ である場合、すなわち $Z \subset X$ が空でない滑らかな閉部分スキームで等次元である場合に帰着する。
+
+\medskip\noindent
+$\alpha = [Z]$ で、$Z \subset X$ が滑らかな閉部分スキームであるとする。
+$X \to \mathbf{P}^n$ という閉埋め込みを選ぶ。$f$ を
+$$
+X \to Y \times \mathbf{P}^n \to Y
+$$
+と分解できる。
+第二の射については補題 \ref{weil-lemma-ok-for-projective-bundle} により結果が分かっているので、
+それゆえ $\alpha = [Z]$ で $i : Z \to X$ が閉埋め込みかつ
+$f$ が閉埋め込みである場合を示せば十分である。
+すると $j = f \circ i$ も閉埋め込みである。
+$i$ と $j$ に対する仮定を使えばよい。
+
+\medskip\noindent
+$k$ が有限の場合の補題の証明が残っている。この証明の残りは飛ばしてよい。
+上で述べたことはすべて引き続き成り立つが、切断 $s_i$ によって $Z$ を $k$ 上で切り出せるとは限らず、$k$ は有限である。
+しかし、$s_i$ は代数閉包 $\overline{k}$ の上では（同じ補題により）見つけることができ、$k$ の上で考えればよい。
+したがって、$k'/k$ の有限拡大で、切断 $s_i$ をとれるものを選ぶ。
+$k'$ 上で定義される。$\pi : X_{k'} \to X$ を射影とする。
+上の議論により、補題の仮定から、サイクル $\pi^*\alpha$ と射
+$f \circ \pi : X_{k'} \to Y$ について望む結論を得る。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-finite-flat} により、$\pi_*\pi^*\alpha = [k' : k] \alpha$ である。
+一方、次を得る。
+$$
+\pi_*\gamma(\pi^*\alpha) = \pi_*\pi^*\gamma(\alpha) =
+\gamma(\alpha) \pi_*1
+$$
+これは我々のコホモロジー理論に対する射影公式による。
+$\pi$ は射影 (!) であるから、補題 \ref{weil-lemma-pr2star} により
+$\pi_*(1) = \int_{\Spec(k')}(1) 1$ であることに注意する。
+したがって有限体の場合の証明を終えるには、
+$\int_{\Spec(k')}(1) = [k' : k]$ を示せば十分であり、これは補題 \ref{weil-lemma-integrate-1} で示す。
+\end{proof}
+
+\noindent
+以下の補題では、『スキームの構成』の第 \ref{constructions-section-grassmannian} 節で定義・構成した Grassmann 多様体を用いる。
+
+\begin{lemma}
+\label{weil-lemma-grassmanian}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$0 < l < n$ を満たす整数と、$k$ 上の空でない等次元の滑らかな射影スキーム $X$ を考え、
+射影 $p : X \times \mathbf{G}(l, n) \to X$ をとる。このとき $\gamma$ は $p$ に沿う押し出しと両立する。
+\end{lemma}
+
+\begin{proof}
+$l = 1$ または $l = n - 1$ ならば $p$ は射影束であり、結果は補題 \ref{weil-lemma-ok-for-projective-bundle} から従う。
+一般に、写像
+$$
+h : Y \to X \times \mathbf{G}(l, n)
+$$
+で $h$ も $p \circ h$ もともに射影空間束の合成となるものが存在する。
+すなわち、部分旗多様体 $\mathbf{G}(1, 2, \ldots, l; n)$ をとる。写像
+$$
+\mathbf{G}(1, 2, \ldots, l; n) \to \mathbf{G}(l, n)
+$$
+は射影空間束の合成であり、構造写像 $\mathbf{G}(1, 2, \ldots, l; n) \to \Spec(k)$ も同様である。
+よって $Y = X \times \mathbf{G}(1, 2, \ldots, l; n)$ とおけばよい。
+$X \times \mathbf{G}(l, n)$ 上のすべてのサイクルは $Y$ 上のサイクルの押し出しである。
+$Y \to X$ と $Y \to X \times \mathbf{G}(l, n)$ についての結果から $p$ についての結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-enough-better}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$\gamma$ が押し出しと両立することを示すには、$i_*(1) = \gamma([Z])$ を示せば十分である。
+ここで $i : Z \to X$ は $k$ 上の空でない等次元の滑らかな射影スキームの閉埋め込みであり、
+$K_0(Z)$ の $\mathcal{C}_{Z/X}$ の類が $K_0(X)$ の類の引き戻しであるものとする。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{weil-lemma-enough} により、$i_*(1) = \gamma([Z])$ を示せばよい。
+$i : Z \to X$ は $k$ 上の空でない等次元の滑らかな射影スキームの閉埋め込みである。$Z$ の $X$ における余次元を $r$ とする。
+$X$ 上の十分に豊富な可逆加群 $\mathcal{L}$ をとる。$n > 0$ と全射
+$$
+\mathcal{O}_Z^{\oplus n} \to \mathcal{C}_{Z/X} \otimes \mathcal{L}|_Z
+$$
+を選ぶ。これは $k$ 上の Grassmann 多様体への写像
+$g : Z \to \mathbf{G}(n - r, n)$ を与える。『スキームの構成』の第 \ref{constructions-section-grassmannian} 節を参照せよ。
+合成
+$$
+Z \to X \times \mathbf{G}(n - r, n) \to X
+$$
+を考える。第二の射に沿う押し出しは補題 \ref{weil-lemma-grassmanian} によりサイクル類と両立する。
+$Z \to X \times \mathbf{G}(n - r, n)$ の閉埋め込みの正規余キュータント層 $\mathcal{C}$ は短完全列
+$$
+0 \to \mathcal{C}_{Z/X} \to \mathcal{C} \to
+g^*\Omega_{\mathbf{G}(n - r, n)} \to 0
+$$
+に入る。『射の続論』の補題 \ref{more-morphisms-lemma-two-unramified-morphisms-formally-smooth} を参照せよ。
+$\mathcal{C}_{Z/X} \otimes \mathcal{L}|_Z$ は $\mathbf{G}(n - r, n)$ 上の有限局所自由層の引き戻しなので、
+$K_0(Z)$ の $\mathcal{C}$ の類は $K_0(X \times \mathbf{G}(n - r, n))$ の類の引き戻しである。
+よって $Z \to X \times \mathbf{G}(n - r, n)$ について性質が成り立ち、結論が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-injective-H0}
+公理 (A1)--(A7) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$k''/k'/k$ が有限分離体拡大ならば、$H^0(\Spec(k')) \to H^0(\Spec(k''))$ は単射である。
+\end{lemma}
+
+\begin{proof}
+$k''$ を $k$ 上の正規閉包で、$k$ 上 Galois なものに置き換えてよい。『体』の補題 \ref{fields-lemma-normal-closure-galois} を参照せよ。
+そのとき $k''$ は $k'$ 上でも Galois である。『体』の補題 \ref{fields-lemma-galois-goes-up} を参照せよ。
+したがって同型
+$$
+k' \otimes_k k'' \longrightarrow
+\prod\nolimits_{\sigma \in \text{Gal}(k''/k')} k'',\quad
+\eta \otimes \zeta \longmapsto (\eta \sigma(\zeta))_\sigma
+$$
+がある。これは同型
+$\coprod_\sigma \Spec(k'') \to \Spec(k') \times \Spec(k'')$ を与え、コホモロジーにおいて
+$$
+H^*(\Spec(k')) \otimes_F H^*(\Spec(k''))
+\to
+\prod\nolimits_\sigma H^*(\Spec(k'')),\quad
+a' \otimes a'' \longmapsto (\pi^*a' \cup \Spec(\sigma)^*a'')_\sigma
+$$
+という同型を与える。ここで $\pi : \Spec(k'') \to \Spec(k')$ は $k'$ の $k''$ への包含に対応する射である。
+$a'' = 1$ ととれば補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-pushforward-blowup}
+公理 (A1)--(A8) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+$b : X' \to X$ を、$X$ を $k$ 上の空でない次元 $d$ の等次元な滑らかな射影スキームとして、滑らかな閉部分 $Z$ に沿って吹き上げたものとする。このとき $b_*(1) = 1$ である。
+\end{lemma}
+
+\begin{proof}
+$X$ を $X$ の連結成分の一つに置き換えてよい（詳細は省略）。よって $X$ は連結、したがって既約であると仮定できる。
+$k' = \Gamma(X, \mathcal{O}_X) = \Gamma(X', \mathcal{O}_{X'})$ とおく；等式の証明は省略する。
+例の除外因子に含まれず、剩余体 $k''$ が $k$ 上分離的であるような閉点 $x' \in X'$ を取る。
+『多様体』の補題 \ref{varieties-lemma-smooth-separable-closed-points-dense} により可能である。その像を $x \in X$ と書く（もちろん剩余体は同じ $k''$ である）。図式
+$$
+\xymatrix{
+x' \times X' \ar[r] \ar[d] & X' \times X' \ar[d] \\
+x \times X \ar[r] & X \times X
+}
+$$
+を考える。対角線 $\Delta = \Delta_X$ の類は引き戻しにより「対角点」$\delta_x : x \to x \times X$ の類になり、$\Delta'$ についても同様である。
+一方、$\delta_x$ は左の垂直矢印により $\delta_{x'}$ へ引き戻される。
+$\gamma([\Delta]) = \sum \eta_i$, $\eta_i \in H^i(X) \otimes H^{2d - i}(X)(d)$ と書き、
+$\gamma([\Delta']) = \sum \eta'_i$, $\eta'_i \in H^i(X') \otimes H^{2d - i}(X')(d)$ と書く。
+上の議論により $\eta_0$, $\eta'_0$ は同じ類に
+$$
+H^0(x') \otimes_F H^{2d}(X')(d)
+$$
+へ写る。公理 (A8) により $H^0(\Spec(k')) = H^0(X) = H^0(X')$ である。
+補題 \ref{weil-lemma-injective-H0} により、この共通の値は $H^0(x')$ へ単射的に写る。したがって写像
+$$
+H^0(X) \otimes_F H^{2d}(X)(d)
+\longrightarrow
+H^0(X') \otimes_F H^{2d}(X')(d)
+$$
+により $\eta_0$ は $\eta'_0$ へ写る。これは $\int_X$ が引き戻し写像を合成した $\int_{X'}$ に等しいことを意味する。よって補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{weil-lemma-done}
+公理 (A1)--(A8) を満たすデータ (D0), (D1), (D2') が与えられたとする。
+サイクル類写像 $\gamma$ は押し出しと両立する。
+\end{lemma}
+
+\begin{proof}
+$i : Z \to X$ を補題 \ref{weil-lemma-enough-better} のようにとる。図式
+$$
+\xymatrix{
+E \ar[r]_j \ar[d]_\pi & X' \ar[d]^b \\
+Z \ar[r]^i & X
+}
+$$
+を考える。$\theta \in \CH^{r - 1}(X')$ を補題 \ref{weil-lemma-divide-pullback-good-blowing-up} のようにとる。
+$\pi_*j^!\theta = [Z]$ が $\CH_*(Z)$ で成り立つので、$\pi$ は射影空間束であることと補題 \ref{weil-lemma-ok-for-projective-bundle} により
+$\pi_*\gamma(j^!\theta) = 1$ である。したがって
+$$
+i_*(1) = i_*(\pi_*(\gamma(j^!\theta))) =
+b_*j_*(j^*\gamma(\theta)) =
+b_*(j_*(1) \cup \gamma(\theta))
+$$
+を得る。(A9) により $j_*(1) = \gamma([E])$ である。よってこれは
+$$
+b_*(\gamma([E]) \cup \gamma(\theta)) =
+b_*(\gamma([E] \cdot \theta)) =
+b_*(\gamma(b^*[Z])) =
+b_*b^*\gamma([Z]) = b_*(1) \cup \gamma([Z])
+$$
+に等しい。補題 \ref{weil-lemma-pushforward-blowup} により $b_*(1) = 1$ であるから、証明が完了する。
+\end{proof}
+
+\begin{proposition}
+\label{weil-proposition-get-weil}
+公理 (A1)--(A8) を満たすデータ (D0), (D1), (D2') が与えられたとする。このとき Weil コホモロジー理論が得られる。
+\end{proposition}
+
+\begin{proof}
+第 \ref{weil-section-axioms} 節の公理 (A), (B), (C)(a), (C)(c), (C)(d) は補題 \ref{weil-lemma-poincare-duality}、\ref{weil-lemma-trace-product} および \ref{weil-lemma-trace-base} による。
+公理 (C)(b) は補題 \ref{weil-lemma-done} による。最後に、定義 \ref{weil-definition-weil-cohomology-theory} の追加条件は公理 (A8) と同じなので成り立つ。
+\end{proof}
+
+\noindent
+次の補題は、代数閉ではない体上の Weil コホモロジー理論を、代数閉な体上の理論に帰着することで示す際に時々有用である。
+
+\begin{lemma}
+\label{weil-lemma-check-over-extension}
+$k'/k$ を体の拡大、$F'/F$ を標数 $0$ の体の拡大とする。次のデータが与えられたとする。
+\begin{enumerate}
+\item $k$, $F$ に対する (D0), (D1), (D2') のデータを
+$F(1), H^*, c_1^H$ と書く。
+\item $k'$, $F'$ に対する (D0), (D1), (D2') のデータを
+$F'(1), (H')^*, c_1^{H'}$ と書く。
+\item 同型 $F(1) \otimes_F F' \to F'(1)$ と、$k$ 上の滑らかな射影スキーム $X$ の圏上の関手的同型
+$H^*(X) \otimes_F F' \to (H')^*(X_{k'})$ があり、次の図式を可換にするものとする。
+$$
+\xymatrix{
+\Pic(X) \ar[r]_{c_1^H} \ar[d] & H^2(X)(1) \ar[d] \\
+\Pic(X_{k'}) \ar[r]^{c_1^{H'}} & (H')^2(X_{k'})(1)
+}
+$$
+\end{enumerate}
+このとき、$F'(1), (H')^*, c_1^{H'}$ が公理 (A1)--(A9) を満たすならば、$F(1), H^*, c_1^H$ も同じ公理を満たす。
+\end{lemma}
+
+\begin{proof}
+公理を一つずつ証明する。
+
+\medskip\noindent
+公理 (A1)。$H^*(\emptyset) = 0$ および、$i$, $j$ を余射とするとき
+$(i^*, j^*) : H^*(X \amalg Y) \to H^*(X) \times H^*(Y)$ が同型であることを示す必要がある。
+$H^*(X) \otimes_F F' \to (H')^*(X_{k'})$ の関手的性により、これは線形代数に帰着する。
+すなわち、$\varphi : V \to W$ が $F$-ベクトル空間の $F$-線形写像ならば、$\varphi$ が同型であることと
+$\varphi_{F'} : V \otimes_F F' \to W \otimes_F F'$ が同型であることは同値である。
+
+\medskip\noindent
+公理 (A2)。$k$ 上の滑らかな射影スキームの射 $f : X \to Y$ と可逆 $\mathcal{O}_Y$-加群 $\mathcal{N}$ に対し、
+$f^*c_1^H(\mathcal{L}) = c_1^H(f^*\mathcal{L})$ となる。これは $c_1^{H'}$ の対応する性質、補題の可換図式、および任意の $F$-ベクトル空間 $V$ に対する標準写像
+$V \to V \otimes_F F'$ が単射であることから直ちに明らかである。
+
+\medskip\noindent
+公理 (A3)。これは公理 (A1) の証明で用いた原理と $c_1^H$, $c_1^{H'}$ の両立性から従う。
+
+\medskip\noindent
+公理 (A4)。$k$ 上の有効 Cartier 因子の包含 $i : Y \to X$ で、$X$, $Y$ ともに $k$ 上滑らかで射影的なものとする。
+$a \in H^*(X)$, $i^*a = 0$ に対して $a \cup c_1^H(\mathcal{O}_X(Y)) = 0$ を示す必要がある。
+$a$ の像を $a' \in (H')^*(X_{k'})$ と書く。仮定から、$i' : Y_{k'} \to X_{k'}$ を $i$ の基底変換とすると $(i')^*a' = 0$ である。
+よって $(H')^*$ の公理から $a' \cup c_1^{H'}(\mathcal{O}_{X_{k'}}(Y_{k'})) = 0$ を得る。
+この元 $a' \cup c_1^{H'}(\mathcal{O}_{X_{k'}}(Y_{k'}))$ は $a \cup c_1^H(\mathcal{O}_X(Y))$ の像であるから、公理 (A2) の証明で用いた原理により結論が得られる。
+
+\medskip\noindent
+公理 (A5)。これは $H^*(\Spec(k)) = F$ であり、$X$, $Y$ が $k$ 上滑らかで射影的なとき写像
+$H^*(X) \otimes_F H^*(Y) \to H^*(X \times Y)$、$a \otimes b \mapsto p^*(a) \cup q^*(b)$ が同型であることを意味する。
+$p$, $q$ は射影である。これも公理 (A1) の証明で用いた原理から従う。
+
+\medskip\noindent
+議論の流れを一旦中断し、すべての滑らかな射影スキーム $X$ を $k$ 上で考え、次の図式が可換であることを示す。
+$$
+\xymatrix{
+\CH^*(X) \ar[r]_-\gamma \ar[d]_{g^*} & \bigoplus H^{2i}(X)(i) \ar[d] \\
+\CH^*(X_{k'}) \ar[r]^-{\gamma'} & \bigoplus (H')^{2i}(X_{k'})(i)
+}
+$$
+$\gamma$ が存在するのはすでに公理 (A1)--(A4) を知っているからである。補題 \ref{weil-lemma-cycle-classes} を参照せよ。
+また、左の垂直矢印は基礎スキームの射 $g : \Spec(k') \to \Spec(k)$ に対する
+Chow 『ホモロジー代数』の第 \ref{chow-section-change-base} 節で論じたものである。正確には Chow 『ホモロジー代数』の補題 \ref{chow-lemma-pullback-base-change} の写像である。
+$\alpha \in \CH^*(X)$ をとる。$\CH^*(X) \otimes \mathbf{Q}$ において、ある
+$\beta \in K_0(\textit{Vect}(X)) \otimes \mathbf{Q}$ により $\alpha = ch(\beta) \cap [X]$ と書ける。
+これが $\gamma$ の構成であるから $\gamma(\alpha) = ch^{H}(\beta)$ である。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-pullback-base-change} の写像は、Chow 『ホモロジー代数』の補題 \ref{chow-lemma-pullback-base-change-chern-classes} により Chern 類とのキャップ積と両立する。
+よって $g^*\alpha = ch((X_{k'} \to X)^*\beta) \cap [X_{k'}]$ である。したがって $\gamma'(g^*\alpha) = ch^{H'}((X_{k'} \to X)^*\beta)$ である。
+したがって図式の可換性は、任意の階数 $r$ の局所自由 $\mathcal{O}_X$-加群 $\mathcal{E}$ と $0 \leq i \leq r$ に対して、
+$H^{2i}(X)(i)$ の元 $c_i^H(\mathcal{E})$ が $(H')^{2i}(X_{k'})(i)$ の元 $c_i^{H'}(\mathcal{E}_{k'})$ へ写ることと同値である。
+$X$, $X'$ の両方に射影空間束公式があるので、$X$ を $X$ 上の射影空間束で有限回置き換えてこれを示せばよい。
+よって $\mathcal{E}$ は可逆 $\mathcal{O}_X$-加群 $\mathcal{L}_1, \ldots, \mathcal{L}_r$ を次数付き部分とするフィルトレーションをもつと仮定できる。Chow 『ホモロジー代数』の補題 \ref{chow-lemma-splitting-principle} および注意 \ref{chow-remark-the-proof-shows-more} を参照せよ。
+$c^H_i(\mathcal{E}$ は $c^H_1(\mathcal{L}_1), \ldots, c^H_1(\mathcal{L}_r)$ の $i$ 次基本対称多項式であるから、第一 Chern 類の一致の仮定から結論が得られる。
+
+\medskip\noindent
+公理 (A6)。$F$-ベクトル空間 $V$, $W$ 、元 $v \in V$ 、テンソル $\xi \in V \otimes_F W$ をとる。
+$V' = V \otimes_F F'$, $W' = W \otimes_F F'$ とおき、$v'$, $\xi'$ を $v$, $\xi$ の $V'$, $V' \otimes_{F'} W'$ への像とする。
+公理 (A6) の証明で用いる線形代数の原理は次のとおりである。
+$F$-線形写像 $\lambda : W \to F$ で $(1 \otimes \lambda)\xi = v$ を満たすものが存在することと、$F'$-線形写像
+$\lambda' : W \otimes_F F' \to F'$ で $(1 \otimes \lambda')\xi' = v'$ を満たすものが存在することは同値である。
+
+\medskip\noindent
+$X$ を $k$ 上の次元 $d$ の空でない等次元な滑らかな射影スキームとする。特に断りのないファイバー積は $k$ 上とする。
+$\gamma = \gamma([\Delta])$ を $H^{2d}(X \times X)(d)$ の元と書く。これが意味をもつのは既に公理 (A1)--(A4) を知っているからである。補題 \ref{weil-lemma-cycle-classes} を参照せよ。K\"unneth 分解において
+$$
+\gamma = \sum \gamma_i, \quad
+\gamma_i \in H^i(X) \otimes_F H^{2d - i}(X)(d)
+$$
+と分解する。同様に $\gamma' = \gamma([\Delta']) = \sum \gamma'_i$ を
+$(H')^{2d}(X_{k'} \times_{k'} X_{k'})(d)$ の中で考える。上述の線形代数の原理により、
+$\gamma_0$ が $(H')^0(X) \otimes_{F'} (H')^{2d}(X')(d)$ において $\gamma'_0$ へ写ることを示せば十分である。
+K\"unneth 分解との両立性から、$\gamma$ が
+$$
+(H')^{2d}(X_{k'} \times_{k'} X_{k'})(d) = (H')^{2d}((X \times X)_{k'})(d)
+$$
+において $\gamma'$ へ写ることを示せばよい。$\Delta_{k'} = \Delta'$ なので、これは上の議論から従う。
+
+\medskip\noindent
+公理 (A7)。$F$-ベクトル空間の線形写像 $V \to W$ が単射であることと、$V \otimes_F F' \to W \otimes_F F'$ が単射であることは同値であることから従う。
+
+\medskip\noindent
+公理 (A8)。公理 (A1) の証明で用いた線形代数の事実から従う。
+
+\medskip\noindent
+公理 (A9)。$X$ を $k$ 上の空でない次元 $d$ の等次元な滑らかな射影スキーム、$i : Y \to X$ を $k$ 上滑らかな空でない有効 Cartier 因子の包含とする。
+$\lambda_Y$, $\lambda_X$ を $X$, $Y$ に対する公理 (A6) の写像とする。
+$a \in H^{2d - 2}(X)(d - 1)$ に対して $\lambda_Y(i^*(a)) = \lambda_X(a \cup c_1^H(\mathcal{O}_X(Y))$ を示す必要がある。
+注意 \ref{weil-remark-trace} により $\lambda_X : H^{2d}(X)(d) \to F$ および $\lambda_Y : H^{2d - 2}(Y)(d - 1)$ は公理 (A6) の条件で一意的に定まる。
+したがって、$H^{2d}(X)(d) \otimes_F F' = H^{2d}(X_{k'})(d)$ という与えられた同定により、上の $H^*$ に対する公理 (A6) の証明から $\lambda_X \otimes \text{id}_{F'}$ は $\lambda_{X_{k'}}$ に対応する。
+$F'(1), (H')^*, c_1^{H'}$ に対する公理 (A9) が分かっているので、図式追跡により $F(1), H^*, c_1^H$ についても公理が従う。これで補題の証明が完了する。
+\end{proof}

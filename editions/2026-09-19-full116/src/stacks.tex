@@ -1,0 +1,3485 @@
+% Generated mechanically from frozen input inputs/p01/ja/stacks.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{7}
+\chapter{スタック}
+
+
+
+\phantomsection
+\label{stacks-section-phantom}
+
+
+\section{序論}
+\label{stacks-section-introduction}
+
+\noindent
+このごく短い章では、スタックおよびグルーポイドのスタックを導入する。
+\cite{DM} および \cite{Vis2} を参照せよ。
+
+
+\section{ファイバー圏に付随する射の前層}
+\label{stacks-section-morphisms}
+
+\noindent
+$\mathcal{C}$ を圏とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする
+（Categories, Section \ref{categories-section-fibred-categories} を参照）。
+$x, y\in \Ob(\mathcal{S}_U)$ を $U$ 上のファイバー圏の対象と仮定する。
+ここで関手
+$$
+\mathit{Mor}(x, y) : (\mathcal{C}/U)^{opp} \longrightarrow \textit{Sets}.
+$$
+を定義する。言い換えれば、これは $\mathcal{C}/U$ 上の前層となる
+（Sites, Definition \ref{sites-definition-presheaf} を参照）。
+Categories,
+Definition \ref{categories-definition-pullback-functor-fibred-category}
+のように引き戻しを選ぶ。このとき $f : V \to U$ に対し
+$$
+\mathit{Mor}(x, y)(f : V \to U) =
+\Mor_{\mathcal{S}_V}(f^\ast x, f^\ast y).
+$$
+とおく。$f' : V' \to U$ を $\mathcal{C}/U$ の第二の対象とする。
+$\mathcal{C}/U$ における射 $g : V'/U  \to V/U$、すなわち
+$g : V' \to V$ かつ $f' = f \circ g$ に対応する制限写像も定義する必要がある。
+これは写像
+$$
+\Mor_{\mathcal{S}_V}(f^\ast x, f^\ast y)
+\longrightarrow
+\Mor_{\mathcal{S}_{V'}}({f'}^\ast x, {f'}^\ast y), \quad
+\phi \longmapsto \phi|_{V'}
+$$
+となる。この写像は本質的には $g^\ast$ であるが、左辺の元 $\phi$ を
+$\Mor_{\mathcal{S}_{V'}}(g^\ast f^\ast x, g^\ast f^\ast y)$ の元
+$g^\ast \phi$ に写す。この時点で Categories, Lemma
+\ref{categories-lemma-fibred} の変換 $\alpha_{g, f}$ を用いる。
+式で書けば、制限写像は
+$$
+\phi|_{V'} =
+(\alpha_{g, f})_y^{-1} \circ
+g^\ast \phi \circ
+(\alpha_{g, f})_x.
+$$
+で記述される。もちろん、このように制限写像を考える者はいない。
+次の補題を確かめるために限って、この記述を用いる。
+
+\begin{lemma}
+\label{stacks-lemma-painful}
+これは実際に前層を与える。
+\end{lemma}
+
+\begin{proof}
+$g : V'/U \to V/U$ を上のとおりとし、同様に
+$g' : V''/U \to V'/U$ を $\mathcal{C}/U$ の射とする。
+したがって $f' = f \circ g$ かつ $f'' = f' \circ g' = f \circ g \circ g'$ である。
+$\phi \in \Mor_{\mathcal{S}_V}(f^\ast x, f^\ast y)$ とする。このとき
+\begin{eqnarray*}
+& &
+(\alpha_{g \circ g', f})_y^{-1} \circ
+(g \circ g')^\ast \phi \circ
+(\alpha_{g \circ g', f})_x
+\\
+& = &
+(\alpha_{g \circ g', f})_y^{-1} \circ
+(\alpha_{g', g})_{f^*y}^{-1} \circ
+(g')^*g^\ast \phi \circ
+(\alpha_{g', g})_{f^*x} \circ
+(\alpha_{g \circ g', f})_x
+\\
+& = &
+(\alpha_{g', f'})_y^{-1} \circ
+(g')^*(\alpha_{g, f})_y^{-1} \circ
+(g')^* g^\ast \phi \circ
+(g')^*(\alpha_{g, f})_x
+\circ
+(\alpha_{g', f'})_x
+\\
+& = &
+(\alpha_{g', f'})_y^{-1} \circ
+(g')^*\Big(
+(\alpha_{g, f})_y^{-1} \circ
+g^\ast \phi \circ
+(\alpha_{g, f})_x
+\Big) \circ
+(\alpha_{g', f'})_x
+\end{eqnarray*}
+を得る。これはまさに望んだ等式
+$\phi|_{V''} = (\phi|_{V'})|_{V''}$ である。最初の等式は
+$\alpha_{g', g}$ が関手の変換であり、したがって
+$$
+\xymatrix{
+(g \circ g')^*f^*x
+\ar[rr]_{(g \circ g')^\ast \phi}
+\ar[d]_{(\alpha_{g', g})_{f^*x}} & &
+(g \circ g')^*f^*y
+\ar[d]^{(\alpha_{g', g})_{f^*y}} \\
+(g')^*g^*f^*x
+\ar[rr]^{(g')^*g^\ast \phi} & &
+(g')^*g^*f^*y
+}
+$$
+が可換であることから従う。第二の等式は $f' = f \circ g$ であるため、
+擬関手の性質 (d) から従う（Categories, Definition
+\ref{categories-definition-functor-into-2-category} を参照）。
+最後の等式は $(g')^*$ が関手であることから従う。
+\end{proof}
+
+\noindent
+以後は変換 $\alpha_{g, f}$ への言及をしばしば省略し、関手
+$g^* \circ f^*$ と $(f \circ g)^*$ を単に同一視する。特に、
+$g : V'/U \to V/U$ が与えられたとき、前層 $\mathit{Mor}(x, y)$ の
+制限写像を $\phi \mapsto g^*\phi$ と表すことがある。
+この構成を定義として形式化しておく。
+
+\begin{definition}
+\label{stacks-definition-mor-presheaf}
+$\mathcal{C}$ を圏とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする
+（Categories, Section \ref{categories-section-fibred-categories} を参照）。
+$\mathcal{C}$ の対象 $U$ とファイバー圏の対象 $x$, $y$ が与えられたとする。
+上で記述した前層
+$$
+(f : V \to U) \longmapsto \Mor_{\mathcal{S}_V}(f^*x, f^*y)
+$$
+を {\it $x$ から $y$ への射の前層}といい、$\mathit{Mor}(x, y)$ と表す。
+$V$ 上での値がファイバー圏 $\mathcal{S}_V$ における同型
+$f^*x \to f^*y$ の集合である部分前層 $\mathit{Isom}(x, y)$ を、
+{\it $x$ から $y$ への同型の前層}という。
+\end{definition}
+
+\noindent
+$\mathcal{S}$ がグルーポイドにファイバー化されているならば、もちろん
+$\mathit{Isom}(x, y) = \mathit{Mor}(x, y)$ であり、通常は
+$\mathit{Isom}$ という記法を用いる。
+
+\begin{lemma}
+\label{stacks-lemma-presheaf-mor-map-fibred-categories}
+$F : \mathcal{S}_1 \to \mathcal{S}_2$ を、圏 $\mathcal{C}$ 上の
+ファイバー圏の $1$-射とする。$U \in \Ob(\mathcal{C})$ および
+$x, y\in \Ob((\mathcal{S}_1)_U)$ とする。このとき $F$ は
+$\mathcal{C}/U$ 上の前層の標準的な射
+$$
+\mathit{Mor}_{\mathcal{S}_1}(x, y)
+\longrightarrow
+\mathit{Mor}_{\mathcal{S}_2}(F(x), F(y))
+$$
+を定める。
+\end{lemma}
+
+\begin{proof}
+Categories, Definition \ref{categories-definition-fibred-categories-over-C}
+により、関手 $F$ は強カルテシアン射を強カルテシアン射に写す。
+したがって $f : V \to U$ が $\mathcal{C}$ の射ならば、標準的な同型
+$\alpha_V : f^*F(x) \to F(f^*x)$ および
+$\beta_V : f^*F(y) \to F(f^*y)$ が存在し、
+$f^*F(x) \to F(f^*x) \to F(x)$ は標準的な射
+$f^*F(x) \to F(x)$ となる。$\beta_V$ についても同様である。
+そこで
+$$
+\xymatrix{
+\mathit{Mor}_{\mathcal{S}_1}(x, y)(f : V \to U) \ar@{=}[r] &
+\Mor_{\mathcal{S}_{1, V}}(f^\ast x, f^\ast y) \ar[d] \\
+\mathit{Mor}_{\mathcal{S}_2}(F(x), F(y))(f : V \to U) \ar@{=}[r] &
+\Mor_{\mathcal{S}_{2, V}}(f^\ast F(x), f^\ast F(y))
+}
+$$
+を $\phi \mapsto \beta_V^{-1} \circ F(\phi) \circ \alpha_V$ によって
+定義できる。これが制限写像と両立することの確認は省略する。
+\end{proof}
+
+\begin{remark}
+\label{stacks-remark-alternative}
+$p : \mathcal{S} \to \mathcal{C}$ がグルーポイドにファイバー化されていると仮定する。
+この場合、Lemma \ref{stacks-lemma-painful} は、$\mathcal{S} \to \mathcal{C}$ が
+反変関手 $F : \mathcal{C} \to \textit{Groupoids}$ に付随する圏と同値であると述べる
+Categories, Lemma \ref{categories-lemma-fibred-strict} を用いて証明できる。
+$F$ に付随するファイバー圏の場合、
+$g^* \circ f^* = (f \circ g)^*$ は文字どおり等しく、写像
+$\alpha_{g, f}$ を用いる必要がない。この場合、補題は（さらに）自明である。
+もちろんこのとき、同値なファイバー圏に移っても
+$\mathit{Mor}(x, y)$ の前層が変わらないことを用いるが、これは
+Lemma \ref{stacks-lemma-presheaf-mor-map-fibred-categories} から従う。
+\end{remark}
+
+\begin{lemma}
+\label{stacks-lemma-isom-as-2-fibre-product}
+$\mathcal{C}$ を圏とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする
+（Categories, Section \ref{categories-section-fibred-categories} を参照）。
+$U \in \Ob(\mathcal{C})$ かつ $x, y \in \Ob(\mathcal{S}_U)$ とする。
+% P01-E0178
+Categories, Lemma \ref{categories-lemma-yoneda-2category} のように、
+対応する $1$-射も $x, y : \mathcal{C}/U \to \mathcal{S}$ と表す。このとき
+\begin{enumerate}
+\item $2$-ファイバー積
+$\mathcal{S} \times_{\mathcal{S} \times \mathcal{S}, (x, y)} \mathcal{C}/U$
+は $\mathcal{C}/U$ 上セトイドにファイバー化された圏であり、
+\item $\mathit{Isom}(x, y)$ はこのセトイドにファイバー化された圏に対応する
+集合の前層である（Categories, Lemma
+\ref{categories-lemma-2-category-fibred-setoids} を参照）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：$2$-ファイバー積の対象は
+$(a : V \to U, z, (\alpha, \beta))$ であり、ここで
+$\alpha : z \to a^*x$ と $\beta : z \to a^*y$ は
+$\mathcal{S}_V$ における同型である。このような対象に同型
+$\beta \circ \alpha^{-1}$ を対応させることで、$\mathit{Isom}(x, y)$
+との関係が得られる。
+\end{proof}
+
+
+
+
+
+
+
+\section{ファイバー圏における降下データ}
+\label{stacks-section-descent-data}
+
+\noindent
+この節では、ファイバー圏という抽象的な設定で降下データの概念を定義する。
+その前に、これは準連接層の降下データ
+（Descent, Section \ref{descent-section-equivalence}）および
+概形上の概形の降下データ
+（Descent, Section \ref{descent-section-descent-datum}）と完全に類似していることを
+指摘しておく。
+
+\medskip\noindent
+射影写像 $\text{pr}_i : X \times \ldots \times X \to X$ の添字を
+$i = 0$ から始める規約を用いる。したがって
+$\text{pr}_0, \text{pr}_1 : X \times X  \to X$、
+$\text{pr}_0, \text{pr}_1, \text{pr}_2 : X \times X \times X  \to X$
+などとする。
+
+\begin{definition}
+\label{stacks-definition-descent-data}
+$\mathcal{C}$ を圏とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする。
+Categories,
+Definition \ref{categories-definition-pullback-functor-fibred-category}
+のように引き戻しを選ぶ。
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$ を
+$\mathcal{C}$ の射の族とする。すべてのファイバー積
+$U_i \times_U U_j$ および $U_i \times_U U_j \times_U U_k$ が存在すると仮定する。
+\begin{enumerate}
+\item 族 $\{f_i : U_i \to U\}$ に関する
+{\it $\mathcal{S}$ における降下データ $(X_i, \varphi_{ij})$} とは、
+各 $i \in I$ に対する $\mathcal{S}_{U_i}$ の対象 $X_i$ と、
+各対 $(i, j) \in I^2$ に対する $\mathcal{S}_{U_i \times_U U_j}$ の同型
+$\varphi_{ij} : \text{pr}_0^*X_i \to \text{pr}_1^*X_j$ であって、
+添字の任意の三つ組 $(i, j, k) \in I^3$ に対して図式
+$$
+\xymatrix{
+\text{pr}_0^*X_i \ar[rd]_{\text{pr}_{01}^*\varphi_{ij}}
+\ar[rr]_{\text{pr}_{02}^*\varphi_{ik}} & &
+\text{pr}_2^*X_k \\
+& \text{pr}_1^*X_j \ar[ru]_{\text{pr}_{12}^*\varphi_{jk}} &
+}
+$$
+が圏 $\mathcal{S}_{U_i \times_U U_j \times_U U_k}$ において可換となるものをいう。
+この条件を {\it コサイクル条件}という。
+\item {\it 降下データの射 $\psi : (X_i, \varphi_{ij}) \to
+(X'_i, \varphi'_{ij})$} とは、各 $\psi_i : X_i \to X'_i$ が
+$\mathcal{S}_{U_i}$ の射であるような射の族
+$\psi = (\psi_i)_{i\in I}$ であって、すべての図式
+$$
+\xymatrix{
+\text{pr}_0^*X_i \ar[r]_{\varphi_{ij}} \ar[d]_{\text{pr}_0^*\psi_i}
+& \text{pr}_1^*X_j \ar[d]^{\text{pr}_1^*\psi_j} \\
+\text{pr}_0^*X'_i \ar[r]^{\varphi'_{ij}} &
+\text{pr}_1^*X'_j \\
+}
+$$
+が圏 $\mathcal{S}_{U_i \times_U U_j}$ において可換となるものをいう。
+\item $\mathcal{U}$ に関する降下データの圏を $DD(\mathcal{U})$ と表す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+各射 $f_i : U_i \to U$ が {\it 表現可能}ならば、ファイバー積
+$U_i \times_U U_j$ と $U_i \times_U U_j \times_U U_k$ は存在する
+（Categories, Definition \ref{categories-definition-representable-morphism} を参照）。
+サイトにおける被覆 $\{U_i \to U\}$ の条件の一つは、各射が表現可能であることである
+（Sites, Definition \ref{sites-definition-site} の (3) を参照）。
+実際、上の定義が主に意味をもつのは、$\mathcal{C}$ がサイトであり、
+$\{U_i \to U\}$ が $\mathcal{C}$ の被覆である場合である。
+しかし降下データ自体は、上のように定義できる抽象的なデータにすぎない。
+これは有用である。例えば、$\mathcal{C}$ 上のファイバー圏が与えられたとき、
+どの射の族に関して降下データが有効となるかを集め、それらをサイトの被覆族として
+用いることを試みられる。
+
+\begin{remarks}
+\label{stacks-remarks-definition-descent-datum}
+Definition \ref{stacks-definition-descent-data} について二点注意する。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする。
+$\{f_i : U_i \to U\}_{i \in I}$ および $(X_i, \varphi_{ij})$ を
+Definition \ref{stacks-definition-descent-data} のとおりとする。
+\begin{enumerate}
+\item 対角射 $\Delta : U_i \to U_i \times_U U_i$ がある。
+$\varphi_{ii}$ をこの射で引き戻すと、自己同型
+$\Delta^\ast \varphi_{ii} \in \text{Aut}_{U_i}(X_i)$ を得る。
+三つ組 $(i, i, i)$ に対するコサイクル条件を
+$\Delta_{123} : U_i \to U_i \times_U U_i \times_U U_i$ で引き戻すと
+$\Delta^\ast \varphi_{ii} \circ \Delta^\ast \varphi_{ii} =
+\Delta^\ast \varphi_{ii}$ を得る。したがって
+$\Delta^\ast \varphi_{ii} = \text{id}_{X_i}$ である。
+\item 射
+$\Delta_{13}: U_i \times_U U_j \to U_i \times_U U_j \times_U U_i$
+があり、三つ組 $(i, j, i)$ に対するコサイクル条件を引き戻すと、等式
+$(\sigma^\ast \varphi_{ji}) \circ \varphi_{ij} =
+\text{id}_{\text{pr}_0^\ast X_i}$ を得る。ここで
+$\sigma : U_i \times_U U_j \to U_j \times_U U_i$ は入れ替え射である。
+\end{enumerate}
+\end{remarks}
+
+\begin{lemma}
+\label{stacks-lemma-pullback}
+（降下データの引き戻し。）
+$\mathcal{C}$ を圏とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする。
+% P01-E0179
+Categories,
+Definition \ref{categories-definition-pullback-functor-fibred-category}
+のように引き戻しを選ぶ。
+% P01-E0180
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$ と
+$\mathcal{V} = \{V_j \to V\}_{j \in J}$ を、終域を固定した
+$\mathcal{C}$ の射の族とする。すべてのファイバー積
+$U_i \times_U U_{i'}$, $U_i \times_U U_{i'} \times_U U_{i''}$,
+$V_j \times_V V_{j'}$, $V_j \times_V V_{j'} \times_V V_{j''}$
+が存在すると仮定する。$\alpha : I \to J$, $h : U \to V$ および
+$g_i : U_i \to V_{\alpha(i)}$ を、終域を固定した写像族の射とする
+（Sites, Definition \ref{sites-definition-morphism-coverings} を参照）。
+\begin{enumerate}
+\item $(Y_j, \varphi_{jj'})$ を族 $\{V_j \to V\}$ に関する降下データとする。
+系
+$$
+\left(
+g_i^*Y_{\alpha(i)},
+(g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')}
+\right)
+$$
+は $\mathcal{U}$ に関する降下データである。
+\item この構成は、$\mathcal{V}$ に関する降下データから
+$\mathcal{U}$ に関する降下データへの関手を定める。
+% P01-E0181
+\item 第二の $\alpha' : I \to J$, $h' : U \to V$ および
+$g'_i : U_i \to V_{\alpha'(i)}$ が、終域を固定した写像族の射を定めるとする。
+$h = h'$ ならば、得られる降下データ間の二つの関手は標準的に同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-pullback-functor}
+$\mathcal{U} = \{U_i \to U\}_{i \in I}$,
+$\mathcal{V} = \{V_j \to V\}_{j \in J}$,
+$\alpha : I \to J$, $h : U \to V$ および
+$g_i : U_i \to V_{\alpha(i)}$ を Lemma \ref{stacks-lemma-pullback} のとおりとする。
+同補題で構成した関手
+$$
+(Y_j, \varphi_{jj'}) \longmapsto
+(g_i^*Y_{\alpha(i)}, (g_i \times g_{i'})^*\varphi_{\alpha(i)\alpha(i')})
+$$
+を降下データ上の {\it 引き戻し関手}という。
+\end{definition}
+
+\noindent
+$h : U \to V$ が与えられたとする。$h$ を被覆する射
+$\tilde h : \mathcal{U} \to \mathcal{V}$ が存在するならば、
+Lemma \ref{stacks-lemma-pullback} で見たように $\tilde h^*$ は
+$\tilde h$ の選択に依存しない。したがって引き戻し関手を単に $h^*$ と表すことがある。
+
+\begin{definition}
+\label{stacks-definition-effective-descent-datum}
+$\mathcal{C}$ を圏とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする。
+Categories,
+Definition \ref{categories-definition-pullback-functor-fibred-category}
+のように引き戻しを選ぶ。
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$ を終域 $U$ をもつ射の族とする。
+すべてのファイバー積 $U_i \times_U U_j$ および
+$U_i \times_U U_j \times_U U_k$ が存在すると仮定する。
+\begin{enumerate}
+\item $\mathcal{S}_U$ の対象 $X$ が与えられたとき、
+{\it 自明な降下データ}とは、族 $\{\text{id}_U : U \to U\}$ に関する
+降下データ $(X, \text{id}_X)$ をいう。
+\item $\mathcal{S}_U$ の対象 $X$ が与えられたとき、自明な降下データ
+$(X, \text{id}_X)$ を明らかな写像
+$\{f_i : U_i \to U\} \to \{\text{id}_U : U \to U\}$ で引き戻すことにより、
+対象族 $f_i^*X$ 上の {\it 標準降下データ}を得る。
+この降下データを $(f_i^*X, can)$ と表す。
+\item $\{f_i : U_i \to U\}$ に関する降下データ
+$(X_i, \varphi_{ij})$ が {\it 有効}であるとは、ある $\mathcal{S}_U$ の対象 $X$ が存在して
+$(X_i, \varphi_{ij})$ が $(f_i^*X, can)$ と同型となることをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$X \in \mathcal{S}_U$ に $\mathcal{U}$ に関する標準降下データを対応させる規則は関手
+$$
+\mathcal{S}_U \longrightarrow DD(\mathcal{U}).
+$$
+を定めることに注意せよ。降下データが有効であることと、この関手の本質像に
+属することは同値である。標準降下データを次のように明示しておく。
+
+\begin{lemma}
+\label{stacks-lemma-trivial-cocycle}
+Definition \ref{stacks-definition-effective-descent-datum} の (2) の状況で、写像
+$can_{ij} : \text{pr}_0^*f_i^*X \to \text{pr}_1^*f_j^*X$ は
+$(\alpha_{\text{pr}_1, f_j})_X \circ (\alpha_{\text{pr}_0, f_i})_X^{-1}$
+に等しい。ここで $\alpha_{\cdot, \cdot}$ は Categories, Lemma
+\ref{categories-lemma-fibred} のとおりであり、写像
+$U_i \times_U U_j \to U$ の等式
+$f_i \circ \text{pr}_0 = f_j \circ \text{pr}_1$ を用いている。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-compare-descent-condition}
+$\mathcal{C}$ を圏とする。
+$\mathcal{V} = \{V_j \to U\}_{j \in J} \to
+\mathcal{U} = \{U_i \to U\}_{i \in I}$ を、
+$\text{id} : U \to U$、$\alpha : J \to I$ および
+$f_j : V_j \to U_{\alpha(j)}$ によって与えられる、終域を固定した
+$\mathcal{C}$ の写像族の射とする。
+$p : \mathcal{S} \to \mathcal{C}$ をファイバー圏とする。次を仮定する。
+\begin{enumerate}
+\item $0 \leq p \leq 3$, $0 \leq q \leq 3$, $p + q \geq 2$ であり、
+$i_1, \ldots, i_p \in I$ および $j_1, \ldots, j_q \in J$ ならば、
+ファイバー積 $U_{i_1} \times_U \ldots \times_U U_{i_p} \times_U
+V_{j_1} \times_U \ldots \times_U V_{j_q}$ が存在する。
+\item 関手 $\mathcal{S}_U \to DD(\mathcal{V})$ は同値である。
+\item すべての $i \in I$ に対して、関手
+$\mathcal{S}_{U_i} \to DD(\mathcal{V}_i)$ は忠実充満である。
+\item すべての $i, i' \in I$ に対して、関手
+$\mathcal{S}_{U_i \times_U U_{i'}} \to DD(\mathcal{V}_{ii'})$ は忠実である。
+\end{enumerate}
+ここで $\mathcal{V}_i = \{U_i \times_U V_j \to U_i\}_{j \in J}$ および
+$\mathcal{V}_{ii'} =
+\{U_i \times_U U_{i'} \times_U V_j \to U_i \times_U U_{i'}\}_{j \in J}$
+である。このとき $\mathcal{S}_U \to DD(\mathcal{U})$ は同値である。
+\end{lemma}
+
+\begin{proof}
+条件 (1) により、主張が意味をなすために十分なファイバー積が存在する。
+関手 $\mathcal{S}_U \to DD(\mathcal{U})$ が本質的全射であることを示す。
+$\mathcal{U}$ に関する降下データ $(X_i, \varphi_{ii'})$ が与えられたとする。
+Lemma \ref{stacks-lemma-pullback} により、これを $\mathcal{V}$ に関する降下データ
+$(X_j, \varphi_{jj'})$ に引き戻せる。仮定 (2) により、この降下データは有効である。
+したがって、$\mathcal{V} \to \{U \to U\}$ によって自明な降下データ
+$(X, \text{id}_X)$ を引き戻したものが $(X_j, \varphi_{jj'})$ と同型になるような
+$\mathcal{S}_U$ の対象 $X$ を得る。次に、終域を固定した $\mathcal{C}$ の
+写像族の射からなる図式
+$$
+\xymatrix{
+\mathcal{V}_i \ar[r] \ar[d] &
+\mathcal{V} \ar[r] &
+\mathcal{U} \ar[d] \\
+\{U_i \to U_i\} \ar[rr] \ar[rru] & &
+\{U \to U\}
+}
+$$
+があることに注意する。この図式は可換でないが、Lemma \ref{stacks-lemma-pullback} により、
+得られる降下データの引き戻し関手は標準的に同型である。
+したがって $(X, \text{id}_X)$ と $(X_i, \text{id}_{X_i})$ は
+$DD(\mathcal{V}_i)$ において同型な対象へ引き戻される。
+ゆえに仮定 (3) により、圏 $\mathcal{S}_{U_i}$ における同型
+$(U_i \to U)^*X \to X_i$ を得る。これらの矢が射 $\varphi_{ii'}$ と
+両立することの確認は省略する。ヒントとして、条件 (4) の関手の忠実性を用いよ。
+関手 $\mathcal{S}_U \to DD(\mathcal{U})$ が忠実充満であることの確認も省略する。
+\end{proof}
+
+
+
+\section{スタック}
+\label{stacks-section-definition}
+
+\noindent
+ここでスタックを定義する。この定義は、ファイバー圏の概念と
+降下の概念を組み合わせたものである。
+
+\begin{definition}
+\label{stacks-definition-stack}
+$\mathcal{C}$ をサイトとする。$\mathcal{C}$ 上の {\it スタック}とは、
+$\mathcal{C}$ 上の圏 $p : \mathcal{S} \to \mathcal{C}$ であって、
+次の条件を満たすものをいう。
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$ はファイバー圏である
+（Categories, Definition \ref{categories-definition-fibred-category} を参照）。
+\item 任意の $U \in \Ob(\mathcal{C})$ および任意の
+$x, y \in \mathcal{S}_U$ に対して、前層 $\mathit{Mor}(x, y)$
+（Definition \ref{stacks-definition-mor-presheaf} を参照）は
+サイト $\mathcal{C}/U$ 上の層である。
+\item サイト $\mathcal{C}$ の任意の被覆
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$ に対して、
+$\mathcal{U}$ に関する $\mathcal{S}$ の任意の降下データは有効である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+スタックについて考えるには、上の定式化が最も便利であると考える。
+すなわち、$\mathcal{C}$ 上の圏が与えられたとき、それがスタックであることを
+確かめるには、性質 (1), (2), (3) をこの順に検証する。
+もちろん、その圏がファイバー化されていなければ、性質 (2) と (3) は意味をなさない。
+(2) がなければ、(3) の降下が一意な同型を除いて一意であり、
+しかも関手的であることを証明できない。
+
+\medskip\noindent
+次の補題は別の定義を与える。
+
+\begin{lemma}
+\label{stacks-lemma-stack-equivalences}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ を $\mathcal{C}$ 上のファイバー圏とする。
+次は同値である。
+\begin{enumerate}
+\item $\mathcal{S}$ は $\mathcal{C}$ 上のスタックである。
+\item サイト $\mathcal{C}$ の任意の被覆
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$ に対して、
+対象にその標準降下データを対応させる関手
+$$
+\mathcal{S}_U \longrightarrow DD(\mathcal{U})
+$$
+は同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-substack}
+$p : \mathcal{S} \to \mathcal{C}$ をサイト $\mathcal{C}$ 上のスタックとする。
+$\mathcal{S}'$ を $\mathcal{S}$ の部分圏とする。次を仮定する。
+\begin{enumerate}
+\item $\varphi : y \to x$ が $\mathcal{S}$ の強カルテシアン射であり、
+$x$ が $\mathcal{S}'$ の対象ならば、$y$ は $\mathcal{S}'$ の対象と同型である。
+\item $\mathcal{S}'$ は $\mathcal{S}$ の充満部分圏である。
+\item $\{f_i : U_i \to U\}$ が $\mathcal{C}$ の被覆であり、
+$x$ が $U$ 上の $\mathcal{S}$ の対象であって、各 $i$ に対して
+$f_i^*x$ が $\mathcal{S}'$ の対象と同型ならば、
+$x$ は $\mathcal{S}'$ の対象と同型である。
+\end{enumerate}
+このとき $\mathcal{S}' \to \mathcal{C}$ はスタックである。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：
+第一の条件により $\mathcal{S}'$ はファイバー圏となる。
+% P01-E0182
+第二の条件により、$\mathcal{S}'$ の $\mathit{Isom}$ 前層は層となる
+（それらは $\mathcal{S}$ における対応物と同一だからである）。
+第三の条件により、まず $\mathcal{S}$ において降下させ、次いで (3) を用いて
+得られた対象が $\mathcal{S}'$ の対象と同型であると結論できるので、
+$\mathcal{S}'$ において降下条件が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-equivalent}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}_1$, $\mathcal{S}_2$ を $\mathcal{C}$ 上の圏とする。
+$\mathcal{S}_1$ と $\mathcal{S}_2$ が $\mathcal{C}$ 上の圏として同値であると仮定する。
+このとき $\mathcal{S}_1$ が $\mathcal{C}$ 上のスタックであることと、
+$\mathcal{S}_2$ が $\mathcal{C}$ 上のスタックであることは同値である。
+\end{lemma}
+
+\begin{proof}
+$F : \mathcal{S}_1 \to \mathcal{S}_2$,
+$G : \mathcal{S}_2 \to \mathcal{S}_1$ を $\mathcal{C}$ 上の関手とし、
+$i : F \circ G \to \text{id}_{\mathcal{S}_2}$,
+$j : G \circ F \to \text{id}_{\mathcal{S}_1}$ を
+$\mathcal{C}$ 上の関手の同型とする。
+Categories, Lemma \ref{categories-lemma-fibred-equivalent} により、
+$\mathcal{S}_1$ が $\mathcal{C}$ 上ファイバー化されていることと
+$\mathcal{S}_2$ がそうであることは同値である。したがって、
+$\mathcal{S}_1$ と $\mathcal{S}_2$ はともにファイバー化されていると
+仮定してよい。さらに、Categories, Lemma
+\ref{categories-lemma-fibred-equivalent} の証明から、$F$ と $G$ は
+強カルテシアン射を強カルテシアン射に写す。すなわち $F$ と $G$ は
+$\mathcal{C}$ 上のファイバー圏の $1$-射である。
+これは、$U \in \Ob(\mathcal{C})$ および
+$x, y \in \mathcal{S}_{1, U}$ が与えられたとき、前層
+% P01-E0183
+$$
+\mathit{Mor}_{\mathcal{S}_1}(x, y),
+\mathit{Mor}_{\mathcal{S}_1}(F(x), F(y)) :
+(\mathcal{C}/U)^{opp} \longrightarrow \textit{Sets}.
+$$
+が同一視されることを意味する。Lemma
+\ref{stacks-lemma-presheaf-mor-map-fibred-categories} を参照せよ。
+したがって、第一の前層が層であることと第二の前層が層であることは同値である。
+最後に、$\mathcal{S}_1$ のすべての降下データが有効ならば
+$\mathcal{S}_2$ のすべての降下データも有効であることを示さなければならない。
+そのため、$(X_i, \varphi_{ii'})$ をサイト $\mathcal{C}$ の被覆
+% P01-E0184
+$\{U_i \to U\}$ に関する $\mathcal{S}_2$ の降下データとする。
+すると $(G(X_i), G(\varphi_{ii'}))$ は
+$\{U_i \to U\}$ に関する
+$\mathcal{S}_1$ の降下データである。
+$X$ を $\mathcal{S}_{1, U}$ の対象で、降下データ
+$(f_i^*X, can)$ が $(G(X_i), G(\varphi_{ii'}))$ と同型となるものとする。
+このとき $F(X)$ は $\mathcal{S}_{2, U}$ の対象であり、その降下データ
+$(f_i^*F(X), can)$ は $(F(G(X_i)), F(G(\varphi_{ii'})))$ と同型である。
+後者はさらに $i$ によって元の降下データ $(X_i, \varphi_{ii'})$ と同型になる。
+\end{proof}
+
+\noindent
+$\mathcal{C}$ 上のスタックの $2$-圏を次のように定義する。
+
+\begin{definition}
+\label{stacks-definition-stacks-over-C}
+$\mathcal{C}$ をサイトとする。
+{\it $\mathcal{C}$ 上のスタックの $2$-圏}とは、$\mathcal{C}$ 上の
+ファイバー圏の $2$-圏（Categories, Definition
+\ref{categories-definition-fibred-categories-over-C} を参照）の
+次のように定める部分 $2$-圏である。
+\begin{enumerate}
+\item その対象はスタック $p : \mathcal{S} \to \mathcal{C}$ とする。
+\item その $1$-射 $(\mathcal{S}, p) \to (\mathcal{S}', p')$ は、
+$p' \circ G = p$ を満たし、$G$ が強カルテシアン射を強カルテシアン射に写す
+関手 $G : \mathcal{S} \to \mathcal{S}'$ とする。
+\item $G, H : (\mathcal{S}, p) \to (\mathcal{S}', p')$ の間の
+$2$-射 $t : G \to H$ は、すべての $x \in \Ob(\mathcal{S})$ に対して
+$p'(t_x) = \text{id}_{p(x)}$ を満たす関手の射とする。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{stacks-lemma-2-product-stacks}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{C}$ 上のスタックの $(2, 1)$-圏は 2-ファイバー積をもち、
+それらは Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} と同様に記述される。
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{X} \to \mathcal{S}$ と
+$g : \mathcal{Y} \to \mathcal{S}$ を、上で定義した
+$\mathcal{C}$ 上のスタックの $1$-射とする。
+Categories, Lemma \ref{categories-lemma-2-product-categories-over-C}
+で記述される圏 $\mathcal{X} \times_\mathcal{S} \mathcal{Y}$ は、
+Categories, Lemma
+\ref{categories-lemma-2-product-fibred-categories-over-C} により
+ファイバー圏である（ここで $f$ と $g$ が強カルテシアン射を保つことを用いる）。
+あとは、射の前層が層であり、$\mathcal{C}$ の被覆に関する降下が有効であることを
+示せばよい。
+
+\medskip\noindent
+$\mathcal{X} \times_\mathcal{S} \mathcal{Y}$ の対象は四つ組
+$(U, x, y, \phi)$ で与えられ、$\mathcal{C}$ の対象 $U$ 上にあることを思い出そう。
+% P01-E0185
+次に、$(U, x', y', \phi')$ を $U$ 上のもう一つの対象とする。
+$\phi : f(x) \to g(y)$ および $\phi' : f(x') \to g(y')$ は
+圏 $\mathcal{S}_U$ における同型であった。
+これらの同型を用いて $z = f(x) = g(y)$ および
+$z' = f(x') = g(y')$ と同一視する。
+% P01-E0186
+これらの同一視のもとで、前層として
+$$
+\mathit{Mor}((U, x, y, \phi), (U, x', y', \phi'))
+=
+\mathit{Mor}(x, x')
+\times_{\mathit{Mor}(z, z')}
+\mathit{Mor}(y, y')
+$$
+であることは明らかである。一方、前層の圏におけるファイバー積は層を保つので
+（Sites, Lemma \ref{sites-lemma-limit-sheaf}）、これは層である。
+
+\medskip\noindent
+$\mathcal{U} = \{f_i : U_i \to U\}_{i \in I}$ をサイト
+$\mathcal{C}$ の被覆とする。$(X_i, \chi_{ij})$ を $\mathcal{U}$ に関する
+$\mathcal{X} \times_\mathcal{S} \mathcal{Y}$ の降下データとする。
+上のように $X_i = (U_i, x_i, y_i, \phi_i)$ と書く。
+圏 $\mathcal{X} \times_\mathcal{S} \mathcal{Y}$ の定義
+（Categories, Lemma \ref{categories-lemma-2-product-categories-over-C} を参照）
+に従って $\chi_{ij} = (\varphi_{ij}, \psi_{ij})$ と書く。
+$(x_i, \varphi_{ij})$ が $\mathcal{X}$ の降下データであり、
+$(y_i, \psi_{ij})$ が $\mathcal{Y}$ の降下データであることは明らかである。
+$\mathcal{X}$ と $\mathcal{Y}$ はスタックなので、これらの降下データは有効である。
+したがって、降下データと両立するように
+$x_i = x|_{U_i}$ および $y_i = y|_{U_i}$ となる
+$x \in \Ob(\mathcal{X}_U)$ と $y \in \Ob(\mathcal{Y}_U)$ を得る。
+$z = f(x)$ および $z' = g(y)$ とおく。これらはともに
+$\mathcal{S}_U$ の対象である。射 $\phi_i$ は
+$\mathit{Isom}(z, z')(U_i)$ の元であり、
+$\phi_i|_{U_i \times_U U_j} = \phi_j|_{U_i \times_U U_j}$ を満たす。
+したがって $\mathit{Isom}(z, z')$ の層の性質により、同型
+$\phi : z = f(x) \to z' = g(y)$ を得る。
+$(\mathcal{X} \times_\mathcal{S} \mathcal{Y})_U$ の対象
+$(U, x, y, \phi)$ に付随する標準降下データが、最初に与えた
+降下データと同型であることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-characterize-ff}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}_1$, $\mathcal{S}_2$ を $\mathcal{C}$ 上のスタックとする。
+$F : \mathcal{S}_1 \to \mathcal{S}_2$ を $1$-射とする。
+次は同値である。
+\begin{enumerate}
+\item $F$ は忠実充満である。
+\item すべての $U \in \Ob(\mathcal{C})$ およびすべての
+$x, y \in \Ob(\mathcal{S}_{1, U})$ に対して、写像
+$$
+F :
+\mathit{Mor}_{\mathcal{S}_1}(x, y)
+\longrightarrow
+\mathit{Mor}_{\mathcal{S}_2}(F(x), F(y))
+$$
+は $\mathcal{C}/U$ 上の層の同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。(2) のとおりの $U, x, y$ に対し、表示された写像 $F$ を、
+$U$ 上にある $\mathcal{C}$ の対象 $V$ で評価すると写像
+$F : \Mor_{\mathcal{S}_{1, V}}(x|_V, y|_V) \to
+\Mor_{\mathcal{S}_{2, V}}(F(x|_V), F(y|_V))$
+を得る。$F$ は忠実充満なので、対応する写像
+$\Mor_{\mathcal{S}_1}(x|_V, y|_V) \to \Mor_{\mathcal{S}_2}(F(x|_V), F(y|_V))$
+は全単射である。ファイバー圏 $\mathcal{S}_{1, V}$ の射は、
+$\mathcal{S}_1$ における $x|_V$ から $y|_V$ への射のうち
+$\text{id}_V$ 上にあるものにほかならない。同様に、
+ファイバー圏 $\mathcal{S}_{2, V}$ の射は、$\mathcal{S}_2$ における
+$F(x|_V)$ から $F(y|_V)$ への射のうち $\text{id}_V$ 上にあるものに
+ほかならない。よって $F$ はこれらの間にも全単射を誘導する。
+したがって (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。$\mathcal{C}$ の対象 $U$, $V$ と、
+$x \in \Ob(\mathcal{S}_{1, U})$ および
+$y \in \Ob(\mathcal{S}_{1, V})$ が与えられたとする。
+$F$ が忠実充満であることを示すには、固定した $f : U \to V$ 上にある
+射について全単射を誘導することを示せば十分である。
+$f$ 上にある $\mathcal{S}_1$ の強カルテシアン射
+$f^*y \to y$ を選ぶ。すると、$f$ 上にある $\mathcal{S}_1$ の射
+$x \to y$ の集合と $\Mor_{\mathcal{S}_{1, U}}(x, f^*y)$ の間に
+全単射が得られる。$F$ は $\mathcal{C}$ 上のスタックの $2$-圏の
+$1$-射として強カルテシアン射を保つので、$f$ 上にある
+$\mathcal{S}_2$ の射 $F(x) \to F(y)$ の集合と
+$\Mor_{\mathcal{S}_{2, U}}(F(x), F(f^*y))$ の間にも全単射が得られる。
+$F$ は全単射
+$\Mor_{\mathcal{S}_{1, U}}(x, f^*y) \to
+\Mor_{\mathcal{S}_{2, U}}(F(x), F(f^*y))$
+を誘導するから、(1) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-characterize-essentially-surjective-when-ff}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}_1$, $\mathcal{S}_2$ を $\mathcal{C}$ 上のスタックとする。
+$F : \mathcal{S}_1 \to \mathcal{S}_2$ を忠実充満な $1$-射とする。
+次は同値である。
+\begin{enumerate}
+\item $F$ は同値である。
+\item すべての $U \in \Ob(\mathcal{C})$ およびすべての
+$x \in \Ob(\mathcal{S}_{2, U})$ に対して、各 $f_i^*x$ が関手
+$F : \mathcal{S}_{1, U_i} \to \mathcal{S}_{2, U_i}$ の本質像に入るような
+被覆 $\{f_i : U_i \to U\}$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) は直ちに従う。
+(2) から (1) が従うことを見るには、(2) のようなすべての $x$ が
+関手 $F$ の本質像に入ることを示さなければならない。
+そのため、(2) のような被覆と
+$x_i \in \Ob(\mathcal{S}_{1, U_i})$ および同型
+$\varphi_i : F(x_i) \to f_i^*x$ を選ぶ。このとき
+$$
+\varphi_{ij} :
+x_i|_{U_i \times_U U_j}
+\longrightarrow
+x_j|_{U_i \times_U U_j}
+$$
+を $F(\varphi_{ij}) = \varphi_j^{-1} \circ \varphi_i$ を満たす矢として
+取ることにより、$\{f_i : U_i \to U\}$ に関する
+$\mathcal{S}_1$ の降下データを得る。この降下データはスタックの公理により有効である。
+したがって $U$ 上の $\mathcal{S}_1$ の対象 $x_1$ を得る。
+$F(x_1)$ が $U$ 上で $x$ と同型であることの確認は省略する。
+\end{proof}
+
+\begin{remark}
+\label{stacks-remark-stack-make-small}
+（「大きな」スタックを切り縮めてスタックを得ること。）
+$\mathcal{C}$ をサイトとする。
+% P01-E0187
+$p : \mathcal{S} \to \mathcal{C}$ が「大きな」圏から
+$\mathcal{C}$ への関手である、すなわち $\mathcal{S}$ の対象全体が
+真の類をなすと仮定する。さらに $p : \mathcal{S} \to \mathcal{C}$ が
+Definition \ref{stacks-definition-stack} の条件 (1), (2), (3) を満たすと仮定する。
+一般には、$p : \mathcal{S} \to \mathcal{C}$ を同値な圏で置き換えて
+スタックを得る方法はない。
+% P01-E0188
+その理由は、ファイバー圏 $\mathcal{S}_U$ の対象の同型類が
+真の類をなすことがありうるからである。
+% P01-E0189
+一方、次を仮定する。
+\begin{enumerate}
+\item[(4)] すべての $U \in \Ob(\mathcal{C})$ に対して、集合
+$S_U \subset \Ob(\mathcal{S}_U)$ が存在し、$\mathcal{S}_U$ のすべての対象は
+$\mathcal{S}_U$ において $S_U$ の元と同型である。
+\end{enumerate}
+この場合、$\mathcal{S}$ の充満部分圏 $\mathcal{S}_{small}$ を、
+$p_{small} = p|_{\mathcal{S}_{small}}$ とおくと次が成り立つように選べる。
+\begin{enumerate}
+\item[(a)] 関手 $p_{small} : \mathcal{S}_{small} \to \mathcal{C}$ は
+スタックを定める。
+\item[(b)] 包含 $\mathcal{S}_{small} \to \mathcal{S}$ は
+忠実充満かつ本質的全射である。
+\end{enumerate}
+（ヒント：すべての $U \in \Ob(\mathcal{C})$ に対し、
+$\Ob(\mathcal{S}_U) \cap V_{\alpha(U)}$ が $\mathcal{S}_U$ の
+同型類の集合へ全射となる最小の順序数を $\alpha(U)$ とし、
+$\alpha = \sup_{U \in \Ob(\mathcal{C})} \alpha(U)$ とおく。
+そして
+$\Ob(\mathcal{S}_{small}) = \Ob(\mathcal{S}) \cap V_\alpha$
+とする。用いた記法については Sets, Section
+\ref{sets-section-sets-hierarchy} を参照せよ。）
+\end{remark}
+
+
+
+
+
+
+
+\section{グルーポイドのスタック}
+\label{stacks-section-stacks-in-groupoids}
+
+\noindent
+スタックのうち、グルーポイドにファイバー化されたものは幾分理解しやすい。
+これらを次のように改めて定義する。
+
+\begin{definition}
+\label{stacks-definition-stack-in-groupoids}
+サイト $\mathcal{C}$ 上の {\it グルーポイドのスタック}とは、
+$\mathcal{C}$ 上の圏 $p : \mathcal{S} \to \mathcal{C}$ であって、
+次を満たすものをいう。
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$ は $\mathcal{C}$ 上
+グルーポイドにファイバー化されている
+（Categories, Definition \ref{categories-definition-fibred-groupoids} を参照）。
+\item すべての $U \in \Ob(\mathcal{C})$ および
+すべての $x, y\in \Ob(\mathcal{S}_U)$ に対して、前層
+$\mathit{Isom}(x, y)$ はサイト $\mathcal{C}/U$ 上の層である。
+\item $\mathcal{C}$ のすべての被覆
+$\mathcal{U} = \{U_i \to U\}$ に対して、$\mathcal{U}$ に関する
+すべての降下データ $(x_i, \phi_{ij})$ は有効である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+通常、確認が最も難しいのは第三の条件である。
+次の補題は、この概念をスタックの概念と比較する。
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-stack}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ を $\mathcal{C}$ 上の圏とする。
+次は同値である。
+\begin{enumerate}
+\item $\mathcal{S}$ は $\mathcal{C}$ 上のグルーポイドのスタックである。
+\item $\mathcal{S}$ は $\mathcal{C}$ 上のスタックであり、
+すべてのファイバー圏はグルーポイドである。
+\item $\mathcal{S}$ は $\mathcal{C}$ 上グルーポイドにファイバー化されており、
+かつ $\mathcal{C}$ 上のスタックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ただし Categories, Lemma
+\ref{categories-lemma-fibred-groupoids} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-gives-stack-groupoids}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ をスタックとする。
+$p' : \mathcal{S}' \to \mathcal{C}$ を、Categories, Lemma
+\ref{categories-lemma-fibred-gives-fibred-groupoids} で構成される、
+$\mathcal{S}$ に付随してグルーポイドにファイバー化された圏とする。
+このとき $p' : \mathcal{S}' \to \mathcal{C}$ は
+グルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{S}'$ の射はちょうど $\mathcal{S}$ の強カルテシアン射であり、
+$\mathcal{S}$ の任意の同型がそのような射であることを思い出そう。
+したがって $\mathcal{S}'$ の降下データと $\mathcal{S}$ の降下データは
+まったく同じものである。ここで Lemma
+\ref{stacks-lemma-stack-equivalences} を適用する。細部の一部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-equivalent}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}_1$, $\mathcal{S}_2$ を $\mathcal{C}$ 上の圏とする。
+$\mathcal{S}_1$ と $\mathcal{S}_2$ が $\mathcal{C}$ 上の圏として
+同値であると仮定する。このとき $\mathcal{S}_1$ が
+$\mathcal{C}$ 上のグルーポイドのスタックであることと、
+$\mathcal{S}_2$ が $\mathcal{C}$ 上のグルーポイドのスタックであることは
+同値である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{stacks-lemma-stack-in-groupoids-stack} と
+\ref{stacks-lemma-stack-equivalent} を組み合わせれば従う。
+\end{proof}
+
+\noindent
+$\mathcal{C}$ 上のグルーポイドのスタックの $2$-圏を
+次のように定義する。
+
+\begin{definition}
+\label{stacks-definition-stacks-in-groupoids-over-C}
+$\mathcal{C}$ をサイトとする。
+{\it $\mathcal{C}$ 上のグルーポイドのスタックの $2$-圏}とは、
+$\mathcal{C}$ 上のスタックの $2$-圏
+（Definition \ref{stacks-definition-stacks-over-C} を参照）の、
+次のように定める部分 $2$-圏である。
+\begin{enumerate}
+\item その対象はグルーポイドのスタック
+$p : \mathcal{S} \to \mathcal{C}$ とする。
+\item その $1$-射 $(\mathcal{S}, p) \to (\mathcal{S}', p')$ は、
+$p' \circ G = p$ を満たす関手
+$G : \mathcal{S} \to \mathcal{S}'$ とする
+（すべての射が強カルテシアンなので、すべての関手がそれらを保つ）。
+\item $G, H : (\mathcal{S}, p) \to (\mathcal{S}', p')$ の間の
+$2$-射 $t : G \to H$ は、すべての $x \in \Ob(\mathcal{S})$ に対して
+$p'(t_x) = \text{id}_{p(x)}$ を満たす関手の射とする。
+\end{enumerate}
+\end{definition}
+
+\noindent
+任意の $2$-射は自動的に同型であることに注意せよ。
+したがって、$\mathcal{C}$ 上のグルーポイドのスタックの $2$-圏は
+実際には（狭義の）$(2, 1)$-圏である。
+
+\begin{lemma}
+\label{stacks-lemma-2-product-stacks-in-groupoids}
+% P01-E0190
+$\mathcal{C}$ を圏とする。
+$\mathcal{C}$ 上のグルーポイドのスタックの $2$-圏は
+2-ファイバー積をもち、それらは Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} と同様に記述される。
+\end{lemma}
+
+\begin{proof}
+これは Categories, Lemma
+\ref{categories-lemma-2-product-fibred-categories} および
+Lemmas \ref{stacks-lemma-stack-in-groupoids-stack},
+\ref{stacks-lemma-2-product-stacks} から明らかである。
+\end{proof}
+
+
+
+
+
+
+
+\section{セトイドのスタック}
+\label{stacks-section-stacks-in-setoids}
+
+\noindent
+これは、集合のスタックが集合の層と同じものであることを述べるだけの短い節である。
+記法については Categories, Section
+\ref{categories-section-fibred-in-setoids} を参照せよ。
+
+\begin{definition}
+\label{stacks-definition-stack-in-sets}
+$\mathcal{C}$ をサイトとする。
+\begin{enumerate}
+\item $\mathcal{C}$ 上の {\it セトイドのスタック}とは、
+すべてのファイバー圏がセトイドである $\mathcal{C}$ 上のスタックをいう。
+\item {\it 集合のスタック}、または {\it 離散圏のスタック}とは、
+すべてのファイバー圏が離散的である $\mathcal{C}$ 上のスタックをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+Section \ref{stacks-section-stacks-in-groupoids} の議論から、これは
+ファイバー圏がセトイド（それぞれ離散的）であるグルーポイドのスタックと
+同じものである。さらに、スタックでもある、セトイド（それぞれ集合）に
+ファイバー化された圏とも同じものである。
+
+\begin{lemma}
+\label{stacks-lemma-when-stack-in-sets}
+$\mathcal{C}$ をサイトとする。Categories, Lemma
+\ref{categories-lemma-2-category-fibred-sets} の同値
+$$
+\left\{
+\begin{matrix}
+\text{the category of presheaves}\\
+\text{of sets over }\mathcal{C}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\text{the category of categories}\\
+\text{fibred in sets over }\mathcal{C}
+\end{matrix}
+\right\}
+$$
+のもとで、集合のスタックはちょうど層に対応する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：降下の有効性が層条件にちょうど対応することを示せ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-setoids-characterize}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}$ を $\mathcal{C}$ 上セトイドにファイバー化された圏とする。
+$\mathcal{S}$ がセトイドのスタックであることと、集合にファイバー化され、
+それと同値な一意の圏 $\mathcal{S}'$
+（Categories, Lemma \ref{categories-lemma-setoid-fibres} を参照）が
+集合のスタックであることは同値である。言い換えれば、前層
+$$
+U \longmapsto \Ob(\mathcal{S}_U)/\!\!\cong
+$$
+が層であることと同値である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-setoids-equivalent}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}_1$, $\mathcal{S}_2$ を $\mathcal{C}$ 上の圏とする。
+$\mathcal{S}_1$ と $\mathcal{S}_2$ が $\mathcal{C}$ 上の圏として
+同値であると仮定する。このとき $\mathcal{S}_1$ が
+$\mathcal{C}$ 上のセトイドのスタックであることと、
+$\mathcal{S}_2$ が $\mathcal{C}$ 上のセトイドのスタックであることは
+同値である。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-setoid-fibres} により、
+$\mathcal{C}$ 上の圏 $\mathcal{S}$ が $\mathcal{C}$ 上
+セトイドにファイバー化されていることと、$\mathcal{C}$ 上で
+集合にファイバー化された圏と同値であることは同値である。
+したがって、$\mathcal{S}_1$ が $\mathcal{C}$ 上
+セトイドにファイバー化されていることと、$\mathcal{S}_2$ が
+$\mathcal{C}$ 上セトイドにファイバー化されていることは同値である。
+よって補題は Lemma
+\ref{stacks-lemma-stack-in-setoids-characterize} から従う。
+\end{proof}
+
+\noindent
+$\mathcal{C}$ 上のセトイドのスタックの $2$-圏を
+次のように定義する。
+
+\begin{definition}
+\label{stacks-definition-stacks-in-setoids-over-C}
+$\mathcal{C}$ をサイトとする。
+{\it $\mathcal{C}$ 上のセトイドのスタックの $2$-圏}とは、
+$\mathcal{C}$ 上のスタックの $2$-圏
+（Definition \ref{stacks-definition-stacks-over-C} を参照）の、
+次のように定める部分 $2$-圏である。
+\begin{enumerate}
+\item その対象はセトイドのスタック
+$p : \mathcal{S} \to \mathcal{C}$ とする。
+\item その $1$-射 $(\mathcal{S}, p) \to (\mathcal{S}', p')$ は、
+$p' \circ G = p$ を満たす関手
+$G : \mathcal{S} \to \mathcal{S}'$ とする
+（すべての射が強カルテシアンなので、すべての関手がそれらを保つ）。
+\item $G, H : (\mathcal{S}, p) \to (\mathcal{S}', p')$ の間の
+$2$-射 $t : G \to H$ は、すべての $x \in \Ob(\mathcal{S})$ に対して
+$p'(t_x) = \text{id}_{p(x)}$ を満たす関手の射とする。
+\end{enumerate}
+\end{definition}
+
+\noindent
+任意の $2$-射は自動的に同型であることに注意せよ。
+したがって、$\mathcal{C}$ 上のセトイドのスタックの $2$-圏は
+実際には（狭義の）$(2, 1)$-圏である。
+
+\begin{lemma}
+\label{stacks-lemma-2-product-stacks-in-setoids}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{C}$ 上のセトイドのスタックの $2$-圏は
+2-ファイバー積をもち、それらは Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} と同様に記述される。
+\end{lemma}
+
+\begin{proof}
+これは Categories, Lemmas
+\ref{categories-lemma-2-product-fibred-categories},
+\ref{categories-lemma-2-product-categories-fibred-setoids} および
+Lemmas \ref{stacks-lemma-stack-in-groupoids-stack},
+\ref{stacks-lemma-2-product-stacks} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-2-fibre-product-gives-stack-in-setoids}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}, \mathcal{T}$ を $\mathcal{C}$ 上の
+グルーポイドのスタックとし、$\mathcal{R}$ を
+$\mathcal{C}$ 上のセトイドのスタックとする。
+$f : \mathcal{T} \to \mathcal{S}$ および
+$g : \mathcal{R} \to \mathcal{S}$ を $1$-射とする。
+$f$ が忠実ならば、$2$-ファイバー積
+$$
+\mathcal{T} \times_{f, \mathcal{S}, g} \mathcal{R}
+$$
+は $\mathcal{C}$ 上のセトイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-2-product-categories-over-C}
+における $2$-ファイバー積の明示的な記述から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-2-fibre-product-stacks-in-setoids-over-stack-in-groupoids}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}$ を $\mathcal{C}$ 上のグルーポイドのスタックとし、
+$\mathcal{S}_i$, $i = 1, 2$ を $\mathcal{C}$ 上の
+セトイドのスタックとする。
+$f_i : \mathcal{S}_i \to \mathcal{S}$ を $1$-射とする。
+このとき $2$-ファイバー積
+$$
+\mathcal{S}_1 \times_{f_1, \mathcal{S}, f_2} \mathcal{S}_2
+$$
+は $\mathcal{C}$ 上のセトイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+$f_2$ は忠実なので、これは Lemma
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-faithful-descent}
+$\mathcal{C}$ をサイトとする。
+$$
+\xymatrix{
+\mathcal{T}_2 \ar[r] \ar[d]_{G'} & \mathcal{T}_1 \ar[d]^G \\
+\mathcal{S}_2 \ar[r]^F & \mathcal{S}_1
+}
+$$
+を $\mathcal{C}$ 上のグルーポイドのスタックの
+$2$-カルテシアン図式とする。次を仮定する。
+\begin{enumerate}
+\item すべての $U \in \Ob(\mathcal{C})$ および
+$x \in \Ob((\mathcal{S}_1)_U)$ に対して、各 $x|_{U_i}$ が
+$F : (\mathcal{S}_2)_{U_i} \to (\mathcal{S}_1)_{U_i}$ の本質像に入るような
+被覆 $\{U_i \to U\}$ が存在する。
+\item $G'$ は忠実である。
+\end{enumerate}
+このとき $G$ は忠実である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{T}_2$ は、Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} で記述される圏
+$\mathcal{S}_2 \times_{\mathcal{S}_1} \mathcal{T}_1$ であると
+仮定してよい。Categories, Lemma
+\ref{categories-lemma-equivalence-fibred-categories} により、
+$G, G'$ の忠実性はファイバー圏上で確認できる。
+$y, y'$ を $\mathcal{C}$ の対象 $U$ 上の $\mathcal{T}_1$ の対象とする。
+$\alpha, \beta : y \to y'$ を $(\mathcal{T}_1)_U$ の射で、
+$G(\alpha) = G(\beta)$ を満たすものとする。
+目標は $\alpha = \beta$ を示すことである。代わりに
+$\gamma = \alpha^{-1} \circ \beta$ を考えると
+$G(\gamma) = \text{id}_{G(y)}$ であり、
+$\gamma = \text{id}_y$ を示せばよい。仮定により、
+$G(y)|_{U_i}$ が
+$F :(\mathcal{S}_2)_{U_i} \to (\mathcal{S}_1)_{U_i}$ の本質像に入るような
+被覆 $\{U_i \to U\}$ を取れる。
+各 $i$ に対して $\gamma|_{U_i} = \text{id}$ を示せば十分なので、
+ある $U$ 上の $\mathcal{S}_2$ の対象 $x$ に対する
+% P01-E0191
+$f : F(x) \to G(y)$ があり、$f$ は $(\mathcal{S}_1)_U$ の同型であると
+仮定してよい。この場合、$U$ 上の
+$\mathcal{S}_2 \times_{\mathcal{S}_1} \mathcal{T}_1$ のファイバー圏に
+射
+$$
+(1, \gamma) : (U, x, y, f) \longrightarrow (U, x, y, f)
+$$
+を得る。その $G'$ による $\mathcal{S}_1$ における像は
+$\text{id}_x$ である。$G'$ は忠実なので、
+$\gamma = \text{id}_y$ と結論し、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-setoids-descent}
+$\mathcal{C}$ をサイトとする。
+$$
+\xymatrix{
+\mathcal{T}_2 \ar[r] \ar[d] & \mathcal{T}_1 \ar[d]^G \\
+\mathcal{S}_2 \ar[r]^F & \mathcal{S}_1
+}
+$$
+を $\mathcal{C}$ 上のグルーポイドのスタックの
+$2$-カルテシアン図式とする。次を仮定する。
+\begin{enumerate}
+\item $F : \mathcal{S}_2 \to \mathcal{S}_1$ は忠実充満である。
+\item すべての $U \in \Ob(\mathcal{C})$ および
+$x \in \Ob((\mathcal{S}_1)_U)$ に対して、各 $x|_{U_i}$ が
+$F : (\mathcal{S}_2)_{U_i} \to (\mathcal{S}_1)_{U_i}$ の本質像に入るような
+被覆 $\{U_i \to U\}$ が存在する。
+\item $\mathcal{T}_2$ はセトイドのスタックである。
+\end{enumerate}
+このとき $\mathcal{T}_1$ はセトイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{T}_2$ は、Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} で記述される圏
+$\mathcal{S}_2 \times_{\mathcal{S}_1} \mathcal{T}_1$ であると
+仮定してよい。$U \in \Ob(\mathcal{C})$ および
+$y \in \Ob((\mathcal{T}_1)_U)$ を選ぶ。
+$\mathcal{C}/U$ 上の層 $\mathit{Aut}(y)$ が自明であることを示さなければならない。
+% P01-E0192
+これを示すため、$U$ の被覆の各元で $U$ を置き換えてよい。
+したがって仮定 (2) により、対象
+$x \in \Ob((\mathcal{S}_2)_U)$ と同型
+$f : F(x) \to G(y)$ が存在すると仮定してよい。
+このとき $y' = (U, x, y, f)$ は $U$ 上の $\mathcal{T}_2$ の対象であり、
+射影 $\mathcal{T}_2 \to \mathcal{T}_1$ によって $y$ に写る。
+(1) により $F$ は忠実充満だから、写像
+$\mathit{Aut}(y') \to \mathit{Aut}(y)$ は全射である。
+Categories, Lemma \ref{categories-lemma-2-product-categories-over-C}
+における $\mathcal{T}_2$ の射の明示的な記述を用いよ。
+(3) により層 $\mathit{Aut}(y')$ は自明なので、補題の結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-relative-sheaf-over-stack-is-stack}
+$\mathcal{C}$ をサイトとする。
+$F : \mathcal{S} \to \mathcal{T}$ を、$\mathcal{C}$ 上
+グルーポイドにファイバー化された圏の $1$-射とする。
+次を仮定する。
+\begin{enumerate}
+\item $\mathcal{T}$ は $\mathcal{C}$ 上のグルーポイドのスタックである。
+\item すべての $U \in \Ob(\mathcal{C})$ に対して、ファイバー圏の関手
+$\mathcal{S}_U \to \mathcal{T}_U$ は忠実である。
+\item 各 $U$ および各 $y \in \Ob(\mathcal{T}_U)$ に対して、前層
+$$
+(h : V \to U)
+\longmapsto
+\{(x, f) \mid x \in \Ob(\mathcal{S}_V), f : F(x) \to f^*y\text{ over }V\}/\cong
+$$
+は $\mathcal{C}/U$ 上の層である。
+\end{enumerate}
+このとき $\mathcal{S}$ は $\mathcal{C}$ 上のグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+射の降下と対象の降下を証明しなければならない。
+
+\medskip\noindent
+射の降下。$\{U_i \to U\}$ を $\mathcal{C}$ の被覆とする。
+$x, x'$ を $U$ 上の $\mathcal{S}$ の対象とする。
+各 $i$ に対し $\alpha_i : x|_{U_i} \to x'|_{U_i}$ を $U_i$ 上の射で、
+$\alpha_i$ と $\alpha_j$ の制限が同じ射
+$x|_{U_i \times_U U_j} \to x'|_{U_i \times_U U_j}$ となるものとする。
+$\mathcal{T}$ はグルーポイドのスタックなので、その $U_i$ への制限が
+$F(\alpha_i)$ である $U$ 上の射 $\beta : F(x) \to F(x')$ が存在する。
+すると、仮定 (3) における $U$ 上の $y = F(x')$ に付随する前層の切断として
+$\xi = (x, \beta)$ および $\xi' = (x', \text{id}_{F(x')})$ を考えられる。
+一方、$\xi$ と $\xi'$ の $U_i$ への制限は
+$(x|_{U_i}, F(\alpha_i))$ および
+$(x'|_{U_i}, \text{id}_{F(x'|_{U_i})})$ である。
+これらは射 $\alpha_i$ によって互いに同型となる。
+したがって仮定 (3) により $\xi$ と $\xi'$ は同型である。
+これは $F(\alpha) = \beta$ を満たす $U$ 上の射
+$\alpha : x \to x'$ が存在することを意味する。
+$F$ はファイバー圏上忠実なので
+$\alpha|_{U_i} = \alpha_i$ を得る。
+
+\medskip\noindent
+対象の降下。$\{U_i \to U\}$ を $\mathcal{C}$ の被覆とする。
+$(x_i, \varphi_{ij})$ を、与えられた被覆に関する
+$\mathcal{S}$ の降下データとする。
+$\mathcal{T}$ はグルーポイドのスタックなので、
+$\mathcal{T}_U$ の対象 $y$ と同型
+$\beta_i : F(x_i) \to y|_{U_i}$ であって
+$F(\varphi_{ij}) = \beta_j|_{U_i \times_U U_j} \circ
+(\beta_i|_{U_i \times_U U_j})^{-1}$
+を満たすものが存在する。このとき $(x_i, \beta_i)$ は、
+仮定 (3) で定義した $U$ 上の $y$ に付随する前層の切断である。
+さらに $\varphi_{ij}$ は、対
+$(x_i, \beta_i)|_{U_i \times_U U_j}$ から
+対 $(x_j, \beta_j)|_{U_i \times_U U_j}$ への同型を定める。
+したがって仮定 (3) により、その $U_i$ への制限が
+$(x_i, \beta_i)$ と同型となる $U$ 上の対 $(x, \beta)$ が存在する。
+これは
+$\beta_i = \beta|_{U_i} \circ F(\alpha_i)$
+を満たす射 $\alpha_i : x_i \to x|_{U_i}$ が存在することを意味する。
+$F$ はファイバー圏上忠実なので、計算により
+$\varphi_{ij} = \alpha_j|_{U_i \times_U U_j} \circ
+(\alpha_i|_{U_i \times_U U_j})^{-1}$
+を得る。これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{惰性スタック}
+\label{stacks-section-the-inertia-stack}
+
+\noindent
+$p : \mathcal{S} \to \mathcal{C}$ および
+$p' : \mathcal{S}' \to \mathcal{C}$ を、圏 $\mathcal{C}$ 上の
+ファイバー圏とする。$F : \mathcal{S} \to \mathcal{S}'$ を
+$\mathcal{C}$ 上のファイバー圏の $1$-射とする。
+Categories, Definition \ref{categories-definition-inertia-fibred-category}
+において、{\it 相対惰性ファイバー圏}
+$\mathcal{I}_{\mathcal{S}/\mathcal{S}'} \to \mathcal{C}$ を、
+$x \in \Ob(\mathcal{S})$ および $F(\alpha) = \text{id}_{F(x)}$ を満たす
+$\alpha : x \to x$ からなる対 $(x , \alpha)$ を対象とする圏として
+定義したことを思い出そう。絶対版、すなわち
+$\mathcal{S}$ の {\it 惰性} $\mathcal{I}_\mathcal{S}$ もある。
+$\mathcal{S}$ と $\mathcal{S}'$ がスタックならば、これらの惰性圏は
+実際に $\mathcal{C}$ 上のスタックとなる。
+
+\begin{lemma}
+\label{stacks-lemma-inertia}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ および
+$p' : \mathcal{S}' \to \mathcal{C}$ を、サイト
+$\mathcal{C}$ 上のスタックとする。
+$F : \mathcal{S} \to \mathcal{S}'$ を
+$\mathcal{C}$ 上のスタックの $1$-射とする。
+\begin{enumerate}
+\item 惰性 $\mathcal{I}_{\mathcal{S}/\mathcal{S}'}$ および
+$\mathcal{I}_\mathcal{S}$ は $\mathcal{C}$ 上のスタックである。
+\item $\mathcal{S}, \mathcal{S}'$ が $\mathcal{C}$ 上の
+グルーポイドのスタックならば、
+$\mathcal{I}_{\mathcal{S}/\mathcal{S}'}$ と
+$\mathcal{I}_\mathcal{S}$ もそうである。
+\item $\mathcal{S}, \mathcal{S}'$ が $\mathcal{C}$ 上の
+セトイドのスタックならば、
+$\mathcal{I}_{\mathcal{S}/\mathcal{S}'}$ と
+$\mathcal{I}_\mathcal{S}$ もそうである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+最初の三つの主張は Lemmas
+\ref{stacks-lemma-2-product-stacks},
+\ref{stacks-lemma-2-product-stacks-in-groupoids},
+\ref{stacks-lemma-2-product-stacks-in-setoids} および
+Categories, Lemma
+\ref{categories-lemma-inertia-fibred-category} の (1) の同値から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-characterize-stack-in-setoids}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}$ がグルーポイドのスタックならば、標準的な $1$-射
+$\mathcal{I}_\mathcal{S} \to \mathcal{S}$ が同値であることと、
+$\mathcal{S}$ がセトイドのスタックであることは同値である。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma
+\ref{categories-lemma-characterize-fibred-setoids-inertia} から直ちに従う。
+\end{proof}
+
+
+
+
+\section{ファイバー圏のスタック化}
+\label{stacks-section-stackify}
+
+\noindent
+次の補題の手続きの結果を、サイト上のファイバー圏の
+{\it スタック化}という。
+
+\begin{lemma}
+\label{stacks-lemma-stackify}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ を $\mathcal{C}$ 上のファイバー圏とする。
+スタック $p' : \mathcal{S}' \to \mathcal{C}$ と、$\mathcal{C}$ 上の
+ファイバー圏の $1$-射
+$G : \mathcal{S} \to \mathcal{S}'$
+（Categories, Definition
+\ref{categories-definition-fibred-categories-over-C} を参照）が存在して、
+次を満たす。
+\begin{enumerate}
+\item すべての $U \in \Ob(\mathcal{C})$ および任意の
+$x, y \in \Ob(\mathcal{S}_U)$ に対して、$G$ が誘導する写像
+$$
+\mathit{Mor}(x, y) \longrightarrow \mathit{Mor}(G(x), G(y))
+$$
+は右辺を左辺の層化と同一視する。
+\item すべての $U \in \Ob(\mathcal{C})$ および任意の
+$x' \in \Ob(\mathcal{S}'_U)$ に対して、各 $i \in I$ について
+対象 $x'|_{U_i}$ が関手
+$G : \mathcal{S}_{U_i} \to \mathcal{S}'_{U_i}$ の本質像に入るような
+被覆 $\{U_i \to U\}_{i \in I}$ が存在する。
+\end{enumerate}
+さらに、これらの条件によりスタック $\mathcal{S}'$ は
+一意な $2$-同型を除いて決定される。
+\end{lemma}
+
+\begin{proof}[素朴な方法による証明]
+この証明法では段階を追って進む。
+
+\medskip\noindent
+まず、$U$ 上の $x$ と $\mathcal{S}$ の任意の対象 $y$ が与えられたとする。
+$\mathcal{S}$ の二つの射 $a, b : x \to y$ が
+$\mathcal{C}$ の同じ矢の上にあるとき、$\mathcal{C}$ の被覆
+$\{f_i : U_i \to U\}$ が存在して、合成
+$$
+f_i^*x \to x \xrightarrow{a} y,
+\quad
+f_i^*x \to x \xrightarrow{b} y
+$$
+が等しくなるならば、これらの射は {\it 局所的に等しい}という。
+これは $\mathcal{S}$ の矢上の同値関係 $\sim$ を与える。
+$b \sim b'$ ならば
+$a \circ b \circ c \sim a \circ b' \circ c$ である
+（確認は省略する）。したがって、この同値関係で商を取って、
+$\mathcal{C}$ 上の新しい圏 $\mathcal{S}^1$ と射
+$G^1 : \mathcal{S} \to \mathcal{S}^1$ を得る。
+
+\medskip\noindent
+$G^1$ が強カルテシアン射を保ち、$\mathcal{S}^1$ が
+$\mathcal{C}$ 上のファイバー圏であることを確認する。
+確認は省略する。こうして、局所的に等しい射が等しい場合に帰着する。
+
+\medskip\noindent
+次に、次のように射を追加する。
+$U$ 上の $x$ と $V$ 上の任意の対象 $y$ が与えられたとする。
+% P01-E0193
+{\it $x$ から $y$ への局所的に定義された射}とは、次のデータをいう。
+\begin{enumerate}
+\item 射 $f : U \to V$。
+\item $U$ の被覆 $\{f_i : U_i \to U\}$。
+\item $p(a_i) = f \circ f_i$ を満たす射
+$a_i : f_i^*x \to y$。
+\end{enumerate}
+ただし、合成
+$$
+(f_i \times f_j)^*x \to f_i^*x \xrightarrow{a_i} y,
+\quad
+(f_i \times f_j)^*x \to f_j^*x \xrightarrow{a_j} y
+$$
+は等しいものとする。通常の射 $a : x \to y$ は、局所的に定義された射
+$(p(a) : U \to V, \{\text{id}_U\}, a)$ を与えることに注意せよ。
+局所的に定義された二つの射
+$(f, \{f_i : U_i \to U\}, a_i)$ と
+$(g, \{g_j : U'_j \to U\}, b_j)$ が {\it 等しい}とは、
+$f = g$ であり、合成
+$$
+(f_i \times g_j)^*x \to f_i^*x \xrightarrow{a_i} y,
+\quad
+(f_i \times g_j)^*x \to g_j^*x \xrightarrow{b_j} y
+$$
+が等しいことをいう（局所的に等しい射が等しいという状況にあるため、
+これが正しい条件である）。
+$x$ から $y$ への局所的に定義された射
+$(f, \{f_i : U_i \to U\}, a_i)$ と、
+$y$ から $W$ 上の $z$ への局所的に定義された射
+$(g, \{g_j : V_j \to V\}, b_j)$ を合成するには、
+$g \circ f : U \to W$、被覆
+$\{U_i \times_V V_j \to U\}$、および写像として合成
+$$
+x|_{U_i \times_V V_j}
+\xrightarrow{\text{pr}_0^*a_i}
+y|_{V_j}
+\xrightarrow{b_j}
+z
+$$
+を取ればよい。これが局所的に定義された射であることの確認は省略する。
+
+\medskip\noindent
+$\mathcal{S}^2$ が、対象を $\mathcal{S}$ と同じくし、
+射を局所的に定義された射とする $\mathcal{C}$ 上の圏であること、
+$\mathcal{C}$ 上の関手
+$G^2 : \mathcal{S} \to \mathcal{S}^2$ が存在すること、
+% P01-E0194
+この関手が強カルテシアン対象を保つこと、および
+$\mathcal{S}^2$ が $\mathcal{C}$ 上のファイバー圏であることを確認する。
+確認は省略する。こうして、局所的に定義された射を用いる効果が
+（分離された）射の前層を層化することであると確認することにより、
+$\mathcal{S}$ の射の前層がすべて層である場合に帰着する。
+
+\medskip\noindent
+最後に、射の前層がすべて層である場合、最終結果で降下条件が有効となるように
+対象を追加しなければならない。これを行う最も簡単な方法は、
+対象が対 $(\mathcal{U}, \xi)$ である圏 $\mathcal{S}'$ を考えることである。
+ここで $\mathcal{U} = \{U_i \to U\}$ は $\mathcal{C}$ の被覆であり、
+% P01-E0195
+$\xi = (X_i, \varphi_{ii'})$ は $\mathcal{U}$ に関する降下データである。
+このような二つのデータ
+$(\mathcal{U}, \xi) = (\{f_i : U_i \to U\},  x_i, \varphi_{ii'})$ および
+$(\mathcal{V}, \eta) = (\{g_j : V_j \to V\},  y_j, \psi_{jj'})$
+が与えられたとする。
+$$
+\Mor_{\mathcal{S}'}((\mathcal{U}, \xi), (\mathcal{V}, \eta))
+$$
+を $(f, a_{ij})$ の集合として定義する。ここで $f : U \to V$ であり、
+$$
+a_{ij} :
+x_i|_{U_i \times_V V_j}
+\longrightarrow
+y_j
+$$
+は $U_i \times_V V_j \to V_j$ 上にある $\mathcal{S}$ の射である。
+これらには次の条件を課す。任意の $i, i' \in I$ および
+$j, j' \in J$ に対して
+$W = (U_i \times_U U_{i'}) \times_V (V_j \times_V V_{j'})$ とおく。
+このとき
+$$
+\xymatrix{
+x_i|_W \ar[r]_{a_{ij}|_W} \ar[d]_{\varphi_{ii'}|_W} &
+y_j|_W \ar[d]^{\psi_{jj'}|_W} \\
+x_{i'}|_W \ar[r]^{a_{i'j'}|_W} &
+y_{j'}|_W
+}
+$$
+は可換である。この時点で、次のことを確認しなければならない。
+\begin{enumerate}
+\item 上の射に、よく定義された合成が存在する。
+\item これによって $\mathcal{S}'$ は $\mathcal{C}$ 上の圏となる。
+\item $\mathcal{C}$ 上の関手
+$G : \mathcal{S} \to \mathcal{S}'$ が存在する。
+\item $\mathcal{S}$ の対象 $x, y$ に対して
+$\Mor_\mathcal{S}(x, y) = \Mor_{\mathcal{S}'}(G(x), G(y))$ である。
+\item $\mathcal{S}'$ の任意の対象は局所的に $\mathcal{S}$ の対象から来る。
+すなわち補題の (2) が成り立つ。
+\item $G$ は強カルテシアン射を保つ。
+\item $\mathcal{S}'$ は $\mathcal{C}$ 上のファイバー圏である。
+\item $\mathcal{S}'$ は $\mathcal{C}$ 上のスタックである。
+\end{enumerate}
+どれも難しくはないが、確認すべきことは多い。細部は省略する。
+\end{proof}
+
+\begin{proof}[より素朴でない証明]
+より素朴でない証明を与える。
+Categories, Lemma \ref{categories-lemma-fibred-strict} により、
+ファイバー圏の同値
+$\mathcal{S} \to \mathcal{S}'$ が存在し、$\mathcal{S}'$ は
+分裂ファイバー圏、すなわち引き戻し関手が文字どおり合成する
+ファイバー圏である。明らかに $\mathcal{S}'$ に対する補題から
+$\mathcal{S}$ に対する補題が従う。したがって $\mathcal{S}$ を
+圏に値をとる前層と考えてよい。
+
+\medskip\noindent
+$2$-圏 $\textit{Cat}$ の $2$-射を忘れて、一時的に圏とみなす。
+Categories, Section \ref{categories-section-definition-categories} のように、
+圏を五つ組 $(\text{Ob}, \text{Arrows}, s, t, \circ)$ と考える。
+忘却関手
+$$
+forget : \textit{Cat} \to \textit{Sets} \times \textit{Sets}, \quad
+(\text{Ob}, \text{Arrows}, s, t, \circ)
+\mapsto
+(\text{Ob}, \text{Arrows}).
+$$
+を考える。このとき $forget$ は忠実であり、$\textit{Cat}$ は極限をもち
+$forget$ は極限と可換であり、$\textit{Cat}$ は有向余極限をもち
+$forget$ はそれらと可換であり、さらに $forget$ は同型を反映する。
+$\textit{Cat}$ に値をとる前層を層化でき、Sites, Section
+\ref{sites-section-sheaves-algebraic-structures} の前半と同様の議論により、
+その結果は $forget$ と可換する。これを $\mathcal{S}$ に適用すると、
+対象の層と射の層をもつ層化 $\mathcal{S}^\#$ を得る。
+これら二つの層は、それぞれ $\mathcal{S}$ の対応する前層の層化である。
+この場合、写像 $\mathcal{S} \to \mathcal{S}^\#$ が
+補題の性質 (1), (2) をもつことは容易に分かる。
+
+\medskip\noindent
+しかし圏 $\mathcal{S}^\#$ はまだスタックとは限らない。
+実際、対象の前層は層であっても、降下条件はまだ満たされないかもしれない。
+これを直すには、さらに対象を追加する必要がある。
+ただし上の議論により、ある圏の層
+$F : \mathcal{C}^{opp} \to \textit{Cat}$ に対して
+$\mathcal{S} = \mathcal{S}_F$ である場合に帰着する。
+この場合、関手 $F' : \mathcal{C}^{opp} \to \textit{Cat}$ を
+次のように定義する。
+\begin{enumerate}
+\item 集合 $\Ob(F'(U))$ は対 $(\mathcal{U}, \xi)$ の集合である。
+ここで $\mathcal{U} = \{U_i \to U\}$ は $U$ の被覆であり、
+$\xi = (x_i, \varphi_{ii'})$ は $\mathcal{U}$ に関する降下データである。
+\item $F'(U)$ における $(\mathcal{U}, \xi)$ から
+$(\mathcal{V}, \eta)$ への射は
+$$
+\colim \Mor_{DD(\mathcal{W})}(a^*\xi, b^*\eta)
+$$
+の元である。ここで余極限は、すべての共通細分
+$a : \mathcal{W} \to \mathcal{U}$,
+$b : \mathcal{W} \to \mathcal{V}$ にわたる。
+この余極限はフィルター的である（確認は省略する）。
+% P01-E0196
+したがって、共通細分を見いだして $DD(\mathcal{W})$ で合成することにより、
+$F(U)$ における射の合成を定義する。
+\item $h : V \to U$ と $F'(U)$ の対象
+$(\mathcal{U}, \xi)$ が与えられたとき、
+$F'(h)(\mathcal{U}, \xi)$ を
+$(V \times_U \mathcal{U}, \text{pr}_1^*\xi)$ とおく。
+より詳しくは、$\mathcal{U} = \{U_i \to U\}$ および
+$\xi = (x_i, \varphi_{ii'})$ ならば、
+$V \times_U \mathcal{U} = \{V \times_U U_i \to V\}$ である。
+これには標準的な射
+$\text{pr}_1 : V \times_U \mathcal{U} \to \mathcal{U}$ が付随し、
+$\text{pr}_1^*\xi$ はこの射に関する $\xi$ の引き戻しである
+（Definition \ref{stacks-definition-pullback-functor} を参照）。
+\item $h : V \to U$、対象 $(\mathcal{U}, \xi)$,
+$(\mathcal{V}, \eta)$ およびそれらの間の射が与えられ、その射が
+$a : \mathcal{W} \to \mathcal{U}$,
+$b : \mathcal{W} \to \mathcal{V}$ と
+$\alpha : a^*\xi \to b^*\eta$ で表されているとする。
+このとき $F'(h)(\alpha)$ は
+$a' : V \times_U\mathcal{W} \to V \times_U\mathcal{U}$,
+$b' : V \times_U\mathcal{W} \to V \times_U\mathcal{V}$ および
+写像 $V \times_U \mathcal{W} \to \mathcal{W}$ による
+射 $\alpha$ の引き戻し $\alpha'$ で表される。
+$\mathcal{S}_F$ における引き戻しは文字どおり可換するので、これは機能する。
+\end{enumerate}
+写像 $F \to F'$ は、$F(U)$ の対象 $x$ に
+$F'(U)$ の対象 $(\{U \to U\}, (x, triv))$ を対応させることで与えられる。
+この時点で、対応する関手
+$\mathcal{S}_F \to \mathcal{S}_{F'}$ が補題の性質 (1), (2) をもつこと、
+そして最後に $\mathcal{S}_{F'}$ がスタックであることを確認しなければならない。
+細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackify-universal-property}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ を $\mathcal{C}$ 上のファイバー圏とする。
+$p' : \mathcal{S}' \to \mathcal{C}$ および
+$G : \mathcal{S} \to \mathcal{S}'$ を、Lemma
+\ref{stacks-lemma-stackify} で構成したスタックおよび $1$-射とする。
+% P01-E0197
+この構成は次の普遍性をもつ。スタック
+$q : \mathcal{X} \to \mathcal{C}$ と、$\mathcal{C}$ 上の
+ファイバー圏の $1$-射
+$F : \mathcal{S} \to \mathcal{X}$ が与えられたとき、図式
+$$
+\xymatrix{
+\mathcal{S} \ar[rr]_F \ar[rd]_G & & \mathcal{X} \\
+& \mathcal{S}' \ar[ru]_H
+}
+$$
+が $2$-可換となるような $1$-射
+$H : \mathcal{S}' \to \mathcal{X}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：$x' \in \Ob(\mathcal{S}'_U)$ とする。
+Lemma \ref{stacks-lemma-stackify} の結果により、ある
+$x_i \in \Ob(\mathcal{S}_{U_i})$ に対して
+$x'|_{U_i} = G(x_i)$ となるような被覆
+$\{U_i \to U\}_{i \in I}$ が存在する。
+さらに、被覆 $\{U_{ijk} \to U_i \times_U U_j\}$ と、
+$G(\alpha_{ijk}) = \text{id}_{x'|_{U_{ijk}}}$ を満たす同型
+$\alpha_{ijk} : x_i|_{U_{ijk}} \to x_j|_{U_{ijk}}$ が存在する。
+$y_i = F(x_i)$ とおく。このとき
+$$
+F(\alpha_{ijk}) : y_i|_{U_{ijk}} \to y_j|_{U_{ijk}}
+$$
+は重なり上で一致し、したがって $\mathcal{X}$ はスタックなので、射
+$\beta_{ij} : y_i|_{U_i \times_U U_j} \to y_j|_{U_i \times_U U_j}$
+を定めることを確認できる。次に、$\beta_{ij}$ が降下データを定めることを
+確認する。$\mathcal{X}$ はスタックなので、この降下データは有効であり、
+% P01-E0198
+$U_i$ 上で $G(x_i)$ と一致する $\mathcal{X}_U$ の対象 $y$ を得る。
+ヒントは $H(x') = y$ とおくことである。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackify-universal-property-more}
+記法と仮定を Lemma
+\ref{stacks-lemma-stackify-universal-property} と同じくする。
+前述の補題の証明における構成によって与えられる、圏の標準的な同値
+$$
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, \mathcal{X})
+=
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}', \mathcal{X})
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackification-fibre-product-fibred-categories}
+$\mathcal{C}$ をサイトとする。
+$f : \mathcal{X} \to \mathcal{Y}$ および
+$g : \mathcal{Z} \to \mathcal{Y}$ を、$\mathcal{C}$ 上の
+ファイバー圏の射とする。このとき、$2$-ファイバー積のスタック化は、
+各スタック化の $2$-ファイバー積である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X}', \mathcal{Y}', \mathcal{Z}'$ を各スタック化とし、
+$\mathcal{W}$ を
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ のスタック化と表す。
+$2$-ファイバー積の構成により、標準的な $1$-射
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to
+\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$
+が存在する。第二の $2$-ファイバー積はスタックなので
+（Lemma \ref{stacks-lemma-2-product-stacks} を参照）、この $1$-射は
+スタック化の普遍性により $1$-射
+$h : \mathcal{W} \to \mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$
+を誘導する。Lemma \ref{stacks-lemma-stackify-universal-property} を参照せよ。
+ここで $h$ はスタックの射であり、Lemmas
+\ref{stacks-lemma-characterize-ff},
+\ref{stacks-lemma-characterize-essentially-surjective-when-ff} を用いて
+同値であることを確認できる。
+
+\medskip\noindent
+まず、$h$ が $\mathit{Mor}$ の層の同型を誘導することを証明する。
+$\xi, \xi'$ を $U \in \Ob(\mathcal{C})$ 上の $\mathcal{W}$ の対象とする。
+写像
+$$
+h : \mathit{Mor}(\xi, \xi') \longrightarrow \mathit{Mor}(h(\xi), h(\xi'))
+$$
+が同型であることを示したい。このためには $U$ 上局所的に調べればよい
+（Sites, Section \ref{sites-section-glueing-sheaves} を参照）。
+したがって $\mathcal{W}$ の構成
+（Lemma \ref{stacks-lemma-stackify} を参照）により、
+$\xi, \xi'$ は実際に $U$ 上の
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ の対象
+$(x, z, \alpha)$ および $(x', z', \alpha')$ から来ると仮定してよい。
+同じ補題をもう一度用いると、この場合
+$\mathit{Mor}(\xi, \xi')$ は
+$$
+V/U \longmapsto
+\Mor_{\mathcal{X}_V}(x|_V, x'|_V)
+\times_{\Mor_{\mathcal{Y}_V}(f(x)|_V, f(x')|_V)}
+\Mor_{\mathcal{Z}_V}(z|_V, z'|_V)
+$$
+の層化であり、$\mathit{Mor}(h(\xi), h(\xi'))$ はファイバー積
+% P01-E0199
+$$
+\mathit{Mor}(i(x), i(x'))
+\times_{\mathit{Mor}(j(f(x)), j(f(x'))}
+\mathit{Mor}(k(z), k(z'))
+$$
+に等しい。ここで
+$i : \mathcal{X} \to \mathcal{X}'$,
+$j : \mathcal{Y} \to \mathcal{Y}'$,
+$k : \mathcal{Z} \to \mathcal{Z}'$ は標準的な関手である。
+したがって、層化は完全であるため
+（従って前層のファイバー積の層化は各層化のファイバー積であるため）、
+この段落で最初に表示した写像は同型である。
+
+\medskip\noindent
+最後に、$U$ 上の
+$\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$ の任意の対象が、
+$U$ 上局所的に $h$ の本質像に入ることを確認しなければならない。
+そのような対象を三つ組 $(x', z', \alpha)$ と書く。
+すると $x'$ は局所的に $\mathcal{X}$ の対象から来て、
+$z'$ は局所的に $\mathcal{Z}$ の対象から来る。
+$x'$, $z'$ を適切に置き換えた後、$\mathcal{Y}'_U$ の射
+$\alpha$ は局所的に $\mathcal{Y}$ の射から来る。
+言い換えれば、$U$ 上の
+$\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$ の任意の対象が
+$U$ 上局所的に
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to
+\mathcal{X}' \times_{\mathcal{Y}'} \mathcal{Z}'$
+の本質像に入ることを示した。従ってなおさら、
+それは局所的に $h$ の本質像に入る。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackification-inertia}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{X}$ を $\mathcal{C}$ 上のファイバー圏とする。
+惰性ファイバー圏 $\mathcal{I}_\mathcal{X}$ のスタック化は、
+% P01-E0200
+$\mathcal{X}$ のスタック化の惰性である。
+\end{lemma}
+
+\begin{proof}
+これは Lemma
+\ref{stacks-lemma-stackification-fibre-product-fibred-categories} により
+スタック化が $2$-ファイバー積と両立すること、および Categories, Lemma
+\ref{categories-lemma-inertia-fibred-category} のように
+$\mathcal{C}$ 上の圏の $2$-ファイバー積によって惰性を表す公式が
+存在することから従う。
+\end{proof}
+
+\section{グルーポイドにファイバー化された圏のスタック化}
+\label{stacks-section-stackify-groupoids}
+
+\noindent
+結果は次のとおりである。
+
+\begin{lemma}
+\label{stacks-lemma-stackify-groupoids}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ を、$\mathcal{C}$ 上グルーポイドに
+ファイバー化された圏とする。
+グルーポイドのスタック $p' : \mathcal{S}' \to \mathcal{C}$ と、
+$\mathcal{C}$ 上グルーポイドにファイバー化された圏の
+$1$-射 $G : \mathcal{S} \to \mathcal{S}'$
+（Categories, Definition
+\ref{categories-definition-categories-fibred-in-groupoids-over-C} を参照）で、
+次を満たすものが存在する。
+\begin{enumerate}
+\item 任意の $U \in \Ob(\mathcal{C})$ と任意の
+$x, y \in \Ob(\mathcal{S}_U)$ に対し、$G$ が誘導する写像
+$$
+\mathit{Mor}(x, y) \longrightarrow \mathit{Mor}(G(x), G(y))
+$$
+は右辺を左辺の層化と同一視する。
+\item 任意の $U \in \Ob(\mathcal{C})$ と任意の
+$x' \in \Ob(\mathcal{S}'_U)$ に対し、被覆
+$\{U_i \to U\}_{i \in I}$ が存在し、すべての $i \in I$ について
+対象 $x'|_{U_i}$ は関手
+$G : \mathcal{S}_{U_i} \to \mathcal{S}'_{U_i}$ の本質像に入る。
+\end{enumerate}
+さらに、これらの条件によってグルーポイドのスタック $\mathcal{S}'$ は
+一意な $2$-同型を除いて定まる。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-stackify} を適用する。
+Lemma \ref{stacks-lemma-stack-in-groupoids-stack} を適用すれば、
+得られるものはグルーポイドのスタックである。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackify-groupoids-universal-property}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{S} \to \mathcal{C}$ を、$\mathcal{C}$ 上グルーポイドに
+ファイバー化された圏とする。
+% P01-E0201
+$p' : \mathcal{S}' \to \mathcal{C}$ および
+$G : \mathcal{S} \to \mathcal{S}'$ を、Lemma
+\ref{stacks-lemma-stackify-groupoids} で構成したグルーポイドのスタックおよび
+$1$-射とする。この構成は次の普遍性をもつ。
+グルーポイドのスタック $q : \mathcal{X} \to \mathcal{C}$ と
+$\mathcal{C}$ 上の圏の $1$-射
+$F : \mathcal{S} \to \mathcal{X}$ が与えられたとき、図式
+$$
+\xymatrix{
+\mathcal{S} \ar[rr]_F \ar[rd]_G & & \mathcal{X} \\
+& \mathcal{S}' \ar[ru]_H
+}
+$$
+を $2$-可換にする $1$-射
+$H : \mathcal{S}' \to \mathcal{X}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{stacks-lemma-stackify-universal-property} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stackification-fibre-product-categories-fibred-in-groupoids}
+$\mathcal{C}$ をサイトとする。
+$f : \mathcal{X} \to \mathcal{Y}$ および $g : \mathcal{Z} \to \mathcal{Y}$ を、
+$\mathcal{C}$ 上グルーポイドにファイバー化された圏の射とする。
+このとき、$2$-ファイバー積のスタック化は、各スタック化の
+$2$-ファイバー積である。
+\end{lemma}
+
+\begin{proof}
+これは Lemma
+\ref{stacks-lemma-stackification-fibre-product-fibred-categories} の特別な場合である。
+\end{proof}
+
+\section{継承された位相}
+\label{stacks-section-topology}
+
+\noindent
+サイト上のファイバー圏は、基礎となるサイトから標準的な位相を
+継承することが分かる。
+
+\begin{lemma}
+\label{stacks-lemma-topology-inherited}
+$\mathcal{C}$ をサイトとする。$p : \mathcal{S} \to \mathcal{C}$ を
+ファイバー圏とする。$\text{Cov}(\mathcal{S})$ を、共通の終域をもつ
+$\mathcal{S}$ の射の族 $\{x_i \to x\}_{i \in I}$ で、
+(a) 各 $x_i \to x$ が強カルテシアンであり、かつ
+(b) $\{p(x_i) \to p(x)\}_{i \in I}$ が $\mathcal{C}$ の被覆であるもの
+全体の集合とする。このとき
+$(\mathcal{S}, \text{Cov}(\mathcal{S}))$ はサイトである。
+\end{lemma}
+
+\begin{proof}
+Sites, Definition \ref{sites-definition-site} の三条件を確かめる。
+\begin{enumerate}
+\item $x \to y$ が $\mathcal{S}$ の同型ならば、Categories, Lemma
+\ref{categories-lemma-composition-cartesian} により強カルテシアンであり、
+$p(x) \to p(y)$ は $\mathcal{C}$ の同型である。したがって
+$\{p(x) \to p(y)\}$ は $\mathcal{C}$ の被覆であり、ゆえに
+$\{x \to y\} \in \text{Cov}(\mathcal{S})$ である。
+\item $\{x_i \to x\}_{i\in I} \in \text{Cov}(\mathcal{S})$ であり、
+各 $i$ について
+$\{y_{ij} \to x_i\}_{j\in J_i} \in \text{Cov}(\mathcal{S})$ とする。
+Categories, Lemma \ref{categories-lemma-composition-cartesian} により、
+各合成 $y_{ij} \to x$ は強カルテシアンであり、
+$\{p(y_{ij}) \to p(x)\}_{i \in I, j\in J_i} \in \text{Cov}(\mathcal{C})$
+である。従って
+$\{y_{ij} \to x\}_{i \in I, j\in J_i} \in \text{Cov}(\mathcal{S})$
+でもある。
+\item $\{x_i \to x\}_{i\in I}\in \text{Cov}(\mathcal{S})$ であり、
+$y \to x$ が $\mathcal{S}$ の射であるとする。
+$\{p(x_i) \to p(x)\}$ は $\mathcal{C}$ の被覆だから、
+$p(x_i) \times_{p(x)} p(y)$ は存在する。従って Categories, Lemma
+\ref{categories-lemma-fibred-category-representable-goes-up} により、
+$x_i \times_x y$ が存在し、
+$p(x_i \times_x y) = p(x_i) \times_{p(x)} p(y)$ であり、かつ
+$x_i \times_x y \to y$ は強カルテシアンである。さらに
+$\{p(x_i) \times_{p(x)} p(y) \to p(y) \}_{i\in I} \in \text{Cov}(\mathcal{C})$
+でもあるから、
+$\{x_i \times_x y \to y \}_{i\in I} \in \text{Cov}(\mathcal{S})$
+を得る。
+\end{enumerate}
+以上で証明が完了する。
+\end{proof}
+
+\noindent
+$p : \mathcal{S} \to \mathcal{C}$ がグルーポイドにファイバー化されている場合、
+$\mathcal{S}$ のすべての射が強カルテシアンなので、Lemma
+\ref{stacks-lemma-topology-inherited} におけるサイト $\mathcal{S}$ の被覆は
+$$
+\{x_i \to x\} \in \text{Cov}(\mathcal{S})
+\Leftrightarrow
+\{p(x_i) \to p(x)\} \in \text{Cov}(\mathcal{C})
+$$
+によって特徴づけられる。
+
+\begin{definition}
+\label{stacks-definition-topology-inherited}
+$\mathcal{C}$ をサイトとする。$p : \mathcal{S} \to \mathcal{C}$ を
+ファイバー圏とする。
+% P01-E0202
+Lemma \ref{stacks-lemma-topology-inherited} における
+$(\mathcal{S}, \text{Cov}(\mathcal{S}))$ を、
+{it $\mathcal{C}$ から継承された $\mathcal{S}$ 上のサイト構造}という。
+これを、{it $\mathcal{S}$ には $\mathcal{C}$ から継承された位相が
+入っている}と言い表すこともある。
+\end{definition}
+
+\noindent
+特に、この状況では層のトポス $\Sh(\mathcal{S})$ を得る。
+このトポスはファイバー圏の $1$-射に関して関手的であることが分かる。
+
+\begin{lemma}
+\label{stacks-lemma-topology-inherited-functorial}
+$\mathcal{C}$ をサイトとする。
+$F : \mathcal{X} \to \mathcal{Y}$ を、$\mathcal{C}$ 上のファイバー圏の
+$1$-射とする。このとき $F$ は、$\mathcal{C}$ から継承されたサイト構造の間の
+連続かつ余連続な関手である。従って $F$ はトポスの射
+$f : \Sh(\mathcal{X}) \to \Sh(\mathcal{Y})$ を誘導し、
+$f_* = {}_sF = {}_pF$ および $f^{-1} = F^s = F^p$ を満たす。
+特に、$\mathcal{Y}$ 上の層 $\mathcal{G}$ と $\mathcal{X}$ の対象 $x$ に対し、
+$f^{-1}(\mathcal{G})(x) = \mathcal{G}(F(x))$ である。
+\end{lemma}
+
+\begin{proof}
+まず $F$ が連続であることを示す。
+$\{x_i \to x\}_{i \in I}$ を $\mathcal{X}$ の被覆とする。
+Categories, Definition \ref{categories-definition-fibred-categories-over-C}
+により、関手 $F$ は強カルテシアン射を強カルテシアン射に写すので、
+$\{F(x_i) \to F(x)\}_{i \in I}$ は $\mathcal{Y}$ の被覆である。
+これで Sites, Definition \ref{sites-definition-continuous} の (1) が示された。
+さらに、$x' \to x$ を $\mathcal{X}$ の射とする。Categories, Lemma
+\ref{categories-lemma-fibred-category-representable-goes-up} により、
+ファイバー積 $x_i \times_x x'$ は存在し、
+$x_i \times_x x' \to x'$ は強カルテシアンである。従って
+$F(x_i \times_x x') \to F(x')$ は強カルテシアンである。
+$\mathcal{Y}$ に Categories, Lemma
+\ref{categories-lemma-fibred-category-representable-goes-up} を適用すると、これは
+$F(x_i \times_x x') = F(x_i) \times_{F(x)} F(x')$ を意味する。
+これで Sites, Definition \ref{sites-definition-continuous} の (2) が示され、
+$F$ は連続であると結論できる。
+
+\medskip\noindent
+次に $F$ が余連続であることを示す。
+$x \in \Ob(\mathcal{X})$ とし、
+$\{y_i \to F(x)\}_{i \in I}$ を $\mathcal{Y}$ の被覆とする。
+$\mathcal{C}$ の対応する被覆を $\{U_i \to U\}_{i \in I}$ と表す。
+各 $i$ に対し、$U_i \to U$ 上にある $\mathcal{X}$ の強カルテシアン射
+$x_i \to x$ を一つ選ぶ。
+% P01-E0203
+$F(x_i) \to F(x)$ と $y_i \to F(x)$ はともに、$U_i \to U$ 上にある
+$\mathcal{Y}$ の強カルテシアン射である。従って、$F(x)$ への写像と
+両立する $\mathcal{Y}_{U_i}$ の一意な同型 $F(x_i) \to y_i$ が存在する。
+ゆえに $\{x_i \to x\}_{i \in I}$ は $\mathcal{X}$ の被覆であり、
+$\{F(x_i) \to F(x)\}_{i \in I}$ は
+$\{y_i \to F(x)\}_{i \in I}$ と同型である。従って $F$ は余連続である。
+Sites, Definition \ref{sites-definition-cocontinuous} を参照せよ。
+
+\medskip\noindent
+最後の主張は最初の二つから従う。Sites, Lemmas
+\ref{sites-lemma-cocontinuous-morphism-topoi},
+\ref{sites-lemma-pu-sheaf}, and
+\ref{sites-lemma-when-shriek} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-localizing}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{X} \to \mathcal{C}$ を、グルーポイドにファイバー化された圏とする。
+$x \in \Ob(\mathcal{X})$ は $U = p(x)$ 上にあるとする。
+関手 $p$ はサイトの同値
+$\mathcal{X}/x \to \mathcal{C}/U$ を誘導する。ここで $\mathcal{X}$ には
+$\mathcal{C}$ から継承された位相を入れる。
+\end{lemma}
+
+\begin{proof}
+ここで $\mathcal{C}/U$ はサイト $\mathcal{C}$ の対象 $U$ における局所化であり、
+$\mathcal{X}/x$ も同様である。Categories, Definition
+\ref{categories-definition-fibred-groupoids} から、規則
+$x'/x \mapsto p(x')/p(x)$ が圏の同値
+$\mathcal{X}/x \to \mathcal{C}/U$ を定めることが従う。
+そこで Definition \ref{stacks-definition-topology-inherited} から、
+$\mathcal{X}/x$ における $x'$ の被覆は $\mathcal{C}/U$ における
+$p(x')$ の被覆と一対一に対応する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-over-stack-in-groupoids}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{X} \to \mathcal{C}$ および
+$q : \mathcal{Y} \to \mathcal{C}$ をグルーポイドのスタックとする。
+$F : \mathcal{X} \to \mathcal{Y}$ を $\mathcal{C}$ 上の圏の $1$-射とする。
+$F$ によって $\mathcal{X}$ が $\mathcal{Y}$ 上グルーポイドに
+ファイバー化された圏となるならば、$\mathcal{X}$ は
+$\mathcal{Y}$ 上のグルーポイドのスタックである
+（位相は $\mathcal{C}$ から継承されたものとする）。
+\end{lemma}
+
+\begin{proof}
+対象の降下を示そう。$\{y_i \to y\}$ を $\mathcal{Y}$ の被覆とする。
+$(x_i, \varphi_{ij})$ を、この被覆に関する $\mathcal{X}$ の降下データとする。
+すると $(x_i, \varphi_{ij})$ は、$\mathcal{C}$ の被覆
+$\{q(y_i) \to q(y)\}$ に関する降下データでもある。
+$\mathcal{X}$ はグルーポイドのスタックだから、$q(y)$ 上の対象 $x$ と、
+$\varphi_{ij}$ と両立する $q(y_i)$ 上の同型
+$\psi_i : x|_{q(y_i)} \to x_i$ を得る。すなわち
+$$
+\varphi_{ij} = \psi_j|_{q(y_i) \times_{q(y)} q(y_j)}
+\circ \psi_i^{-1}|_{q(y_i) \times_{q(y)} q(y_j)}.
+$$
+$\mathcal{C}/p(x)$ 上の層
+$\mathit{I} = \mathit{Isom}_\mathcal{Y}(F(x), y)$ を考える。
+% P01-E0204
+$F(x_i) = y_i$ なので、
+$s_i = F(\psi_i) \in \mathit{I}(q(x_i))$ であることに注意する。
+（$\{y_i \to y\}$ 上の降下データから始めたので）
+$F(\varphi_{ij}) = \text{id}$ であるから、表示式は
+$s_i|_{q(y_i) \times_{q(y)} q(y_j)} = s_j|_{q(y_i) \times_{q(y)} q(y_j)}$
+を示す。従って局所切断 $s_i$ は $s : F(x) \to y$ に貼り合わさる。
+$F$ はグルーポイドにファイバー化されているので、$x$ は
+$F(x') = y$ を満たす対象 $x'$ と同型である。
+$y$ 上の $\mathcal{X}$ のファイバー圏における $x'$ が、降下データ
+$(x_i, \varphi_{ij})$ の提示する降下問題の解であることの確認は省略する。
+$\mathcal{X}/\mathcal{Y}$ の $\mathit{Isom}$-前層の層性の証明も省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-over-stack}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{X} \to \mathcal{C}$ をスタックとする。
+$\mathcal{X}$ に $\mathcal{C}$ から継承された位相を入れ、
+$q : \mathcal{Y} \to \mathcal{X}$ をスタックとする。
+このとき $\mathcal{Y}$ は $\mathcal{C}$ 上のスタックである。
+$p$ と $q$ がグルーポイドのスタックを定めるなら、
+$\mathcal{Y}$ は $\mathcal{C}$ 上のグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Y}$ が $\mathcal{C}$ 上のスタックであることを示すため、
+Definition \ref{stacks-definition-stack} の三条件を確かめる。
+Categories, Lemma \ref{categories-lemma-fibred-over-fibred} により、
+$\mathcal{Y}$ は $\mathcal{C}$ 上のファイバー圏である。従って条件 (1) が成り立つ。
+
+\medskip\noindent
+$U$ を $\mathcal{C}$ の対象とし、$y_1, y_2$ を $U$ 上の
+$\mathcal{Y}$ の対象とする。$\mathcal{X}$ において $x_i = q(y_i)$ と書く。
+Lemma \ref{stacks-lemma-presheaf-mor-map-fibred-categories} のように、
+$\mathcal{C}/U$ 上の前層の写像
+$$
+q : \mathit{Mor}_{\mathcal{Y}/\mathcal{C}}(y_1, y_2)
+\longrightarrow
+\mathit{Mor}_{\mathcal{X}/\mathcal{C}}(x_1, x_2)
+$$
+を考える。$\{U_i \to U\}$ を被覆とし、$\varphi_i$ を $U_i$ 上の
+左辺の前層の切断で、$\varphi_i$ と $\varphi_j$ が
+$U_i \times_U U_j$ 上で同じ切断に制限されるものとする。
+$\varphi_i$ に制限される射 $\varphi : y_1 \to y_2$ を見いだす必要がある。
+第二の前層は仮定により層だから、$U$ 上のある射
+$\psi : x_1 \to x_2$ に対して
+$q(\varphi_i) = \psi|_{U_i}$ であることに注意する。
+$\psi$ 上にある $\mathcal{Y}$ の強 $\mathcal{X}$-カルテシアン射を
+$y_{12} \to y_2$ とする。このとき $\varphi_i$ は、$x_1|_{U_i}$ 上の射
+$\varphi'_i : y_1|_{U_i} \to y_{12}|_{U_i}$ に対応する。
+言い換えれば、$\varphi'_i$ は今や、被覆
+$\{x_1|_{U_i} \to x_1\}$ の各要素上で前層
+$$
+\mathit{Mor}_{\mathcal{Y}/\mathcal{X}}(y_1, y_{12})
+$$
+の局所切断を定める。仮定により、これらは一意な射
+$y_1 \to y_{12}$ に貼り合わさり、これと与えられた射
+$y_{12} \to y_2$ を合成すると、求める射 $y_1 \to y_2$ が得られる。
+
+\medskip\noindent
+最後に、降下データが有効であることを示す。
+$\{f_i : U_i \to U\}$ を $\mathcal{C}$ の被覆とし、
+$(y_i, \varphi_{ij})$ をこの被覆に関する降下データとする
+（Definition \ref{stacks-definition-descent-data}）。
+$x_i = q(y_i)$ および $\psi_{ij} = q(\varphi_{ij})$ とおくと、
+$\mathcal{X}$ におけるこの被覆の降下データ $(x_i, \psi_{ij})$ を得る。
+$\mathcal{X}$ に関する仮定により、$x_i = x|_{U_i}$ であり、
+$\psi_{ij}$ は標準的な降下データ
+（Definition \ref{stacks-definition-effective-descent-datum}）に等しいと仮定してよい。
+この場合 $\{x|_{U_i} \to x\}$ は被覆であり、
+$(y_i, \varphi_{ij})$ をこの被覆に関する降下データとみなせる。
+% P01-E0205
+$\mathcal{Y}$ が $\mathcal{C}$ 上のスタックであるという仮定により、
+これは有効であり、条件 (3) の証明が完了する。
+
+\medskip\noindent
+最後の主張は、$\mathcal{Y}$ が $\mathcal{C}$ 上のスタックであり、Categories,
+Lemma \ref{categories-lemma-fibred-in-groupoids-over-fibred-in-groupoids}
+によりグルーポイドにファイバー化されていることから従う。
+\end{proof}
+
+\section{ジェルブ}
+\label{stacks-section-gerbes}
+
+\noindent
+ジェルブはグルーポイドのスタックの特殊な種類である。
+
+\begin{definition}
+\label{stacks-definition-gerbe}
+サイト $\mathcal{C}$ 上の {it ジェルブ}とは、次を満たす
+$\mathcal{C}$ 上の圏 $p : \mathcal{S} \to \mathcal{C}$ をいう。
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$ は $\mathcal{C}$ 上の
+グルーポイドのスタックである（Definition
+\ref{stacks-definition-stack-in-groupoids} を参照）。
+\item $U \in \Ob(\mathcal{C})$ に対し、$\mathcal{C}$ の被覆
+$\{U_i \to U\}$ で $\mathcal{S}_{U_i}$ が空でないものが存在する。
+\item $U \in \Ob(\mathcal{C})$ および
+$x, y \in \Ob(\mathcal{S}_U)$ に対し、$\mathcal{C}$ の被覆
+$\{U_i \to U\}$ で、$\mathcal{S}_{U_i}$ において
+$x|_{U_i} \cong y|_{U_i}$ となるものが存在する。
+\end{enumerate}
+\end{definition}
+
+\noindent
+言い換えれば、ジェルブとは、任意の二対象が局所的に同型であり、
+かつ対象が局所的に存在するようなグルーポイドのスタックである。
+
+\begin{lemma}
+\label{stacks-lemma-gerbe-equivalent}
+$\mathcal{C}$ をサイトとする。
+$\mathcal{S}_1$, $\mathcal{S}_2$ を $\mathcal{C}$ 上の圏とする。
+$\mathcal{S}_1$ と $\mathcal{S}_2$ が $\mathcal{C}$ 上の圏として
+同値であると仮定する。このとき、$\mathcal{S}_1$ が
+$\mathcal{C}$ 上のジェルブであることと、$\mathcal{S}_2$ が
+$\mathcal{C}$ 上のジェルブであることは同値である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{S}_1$ が $\mathcal{C}$ 上のジェルブであると仮定する。
+Lemma \ref{stacks-lemma-stack-in-groupoids-equivalent} により、
+$\mathcal{S}_2$ は $\mathcal{C}$ 上のグルーポイドのスタックである。
+$F : \mathcal{S}_1 \to \mathcal{S}_2$ および
+$G : \mathcal{S}_2 \to \mathcal{S}_1$ を、$\mathcal{C}$ 上の圏の同値とする。
+$U \in \Ob(\mathcal{C})$ が与えられたとき、被覆
+$\{U_i \to U\}$ で $(\mathcal{S}_1)_{U_i}$ が空でないものが存在する。
+$F$ を適用すると $(\mathcal{S}_2)_{U_i}$ が空でないことが分かる。
+$U \in \Ob(\mathcal{C})$ と
+$x, y \in \Ob((\mathcal{S}_2)_U)$ が与えられたとき、$\mathcal{C}$ の被覆
+$\{U_i \to U\}$ で、$(\mathcal{S}_1)_{U_i}$ において
+$G(x)|_{U_i} \cong G(y)|_{U_i}$ となるものが存在する。
+Categories, Lemma \ref{categories-lemma-equivalence-fibred-categories} により、
+これは $(\mathcal{S}_2)_{U_i}$ において
+$x|_{U_i} \cong y|_{U_i}$ であることを意味する。
+\end{proof}
+
+\noindent
+ジェルブの定義を少し一般化したい。すなわち、
+$F : \mathcal{X} \to \mathcal{Y}$ を、サイト $\mathcal{C}$ 上の
+グルーポイドのスタックの $1$-射とする。
+$\mathcal{X}$ が $\mathcal{Y}$ 上のジェルブであることの意味を定めたい。
+Section \ref{stacks-section-topology} により、圏 $\mathcal{Y}$ は
+$\mathcal{C}$ からサイトの構造を継承する。素朴には、上の意味で
+$\mathcal{X} \to \mathcal{Y}$ がジェルブ{it である}ことを要求すればよいと
+考えられる。しかし、このように得られる概念は、$\mathcal{X}$ を
+$\mathcal{C}$ 上同値なグルーポイドのスタックで置き換えても不変ではない。
+$\mathcal{Y}$ 上グルーポイドにファイバー化されているという性質についてさえ
+同じ問題がある。しかし、$\mathcal{X}$ を、$\mathcal{Y}$ 上グルーポイドに
+ファイバー化された、$\mathcal{C}$ 上同値なグルーポイドのスタックで
+置き換えることができ、そのとき $\mathcal{Y}$ 上のジェルブであるという性質は
+この選択に依存しない。正確な定式化は次のとおりである。
+
+\begin{lemma}
+\label{stacks-lemma-when-gerbe}
+$\mathcal{C}$ をサイトとする。
+$p : \mathcal{X} \to \mathcal{C}$ および
+$q : \mathcal{Y} \to \mathcal{C}$ をグルーポイドのスタックとする。
+$F : \mathcal{X} \to \mathcal{Y}$ を $\mathcal{C}$ 上の圏の
+$1$-射とする。次は同値である。
+\begin{enumerate}
+\item 分解 $F = F' \circ a$ で、
+$a : \mathcal{X} \to \mathcal{X}'$ が $\mathcal{C}$ 上の圏の同値であり、
+$F'$ がグルーポイドにファイバー化されているものを一つ
+（同値なことだが、どれでも）とると、写像
+$F' : \mathcal{X}' \to \mathcal{Y}$ はジェルブである
+（$\mathcal{Y}$ の位相は $\mathcal{C}$ から継承されたものとする）。
+\item 次の二条件が成り立つ。
+\begin{enumerate}
+\item $U \in \Ob(\mathcal{C})$ 上にある
+$y \in \Ob(\mathcal{Y})$ に対し、$\mathcal{C}$ の被覆
+$\{U_i \to U\}$ と、$U_i$ 上の $\mathcal{X}$ の対象 $x_i$ で、
+$\mathcal{Y}_{U_i}$ において
+$F(x_i) \cong y|_{U_i}$ となるものが存在する。
+\item $U \in \Ob(\mathcal{C})$、
+$x, x' \in \Ob(\mathcal{X}_U)$、および
+$\mathcal{Y}_U$ の射 $b : F(x) \to F(x')$ に対し、
+$\mathcal{C}$ の被覆 $\{U_i \to U\}$ と、
+$\mathcal{X}_{U_i}$ の射
+$a_i : x|_{U_i} \to x'|_{U_i}$ で
+$F(a_i) = b|_{U_i}$ となるものが存在する。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma
+\ref{categories-lemma-ameliorate-morphism-categories-fibred-groupoids}
+により、$a : \mathcal{X} \to \mathcal{X}'$ が $\mathcal{C}$ 上の圏の同値で、
+$F'$ がグルーポイドにファイバー化されているような分解
+$F = F' \circ a$ が存在する。Categories, Lemma
+\ref{categories-lemma-amelioration-unique} により、二つのそのような分解
+$F = F' \circ a = F'' \circ b$ が与えられたとき、
+$\mathcal{X}'$ と $\mathcal{X}''$ は $\mathcal{Y}$ 上の圏として同値である。
+従って Lemma \ref{stacks-lemma-gerbe-equivalent} は、条件 (1) が分解の選択に
+依存しないことを保証する。さらにこれは、Categories, Lemma
+\ref{categories-lemma-ameliorate-morphism-categories-fibred-groupoids}
+の証明のように
+$\mathcal{X}' = \mathcal{X} \times_{F, \mathcal{Y}, \text{id}} \mathcal{Y}$
+と仮定してよいことを意味する。
+
+\medskip\noindent
+(a) と (b) から $\mathcal{X}' \to \mathcal{Y}$ がジェルブであることを示そう。
+まず Lemma \ref{stacks-lemma-stack-in-groupoids-over-stack-in-groupoids} により、
+$\mathcal{X}' \to \mathcal{Y}$ はグルーポイドのスタックである。
+次に $y$ を、$U \in \Ob(\mathcal{C})$ 上にある $\mathcal{Y}$ の対象とする。
+(a) により、$\mathcal{C}$ の被覆 $\{U_i \to U\}$、$U_i$ 上の
+$\mathcal{X}$ の対象 $x_i$、および $\mathcal{Y}_{U_i}$ の同型
+$f_i : F(x_i) \to y|_{U_i}$ を見いだせる。このとき
+$(U_i, x_i, y|_{U_i}, f_i)$ は $\mathcal{X}'_{U_i}$ の対象である。
+すなわち Definition \ref{stacks-definition-gerbe} の第二条件が成り立つ。
+最後に $(U, x, y, f)$ と $(U, x', y, f')$ を、同じ対象
+$y \in \Ob(\mathcal{Y})$ 上にある $\mathcal{X}'$ の対象とする。
+$b = (f')^{-1} \circ f$ とおく。条件 (b) により、被覆
+$\{U_i \to U\}$ と $\mathcal{X}_{U_i}$ の同型
+$a_i : x|_{U_i} \to x'|_{U_i}$ で
+$F(a_i) = b|_{U_i}$ となるものを見いだせる。このとき
+$$
+(a_i, \text{id}) : (U, x, y, f)|_{U_i} \to (U, x', y, f')|_{U_i}
+$$
+は求める $\mathcal{X}'_{U_i}$ の射である。これで (2) から (1) が従う。
+
+\medskip\noindent
+(1) から (2) が従うことを示すには、前段落の議論を逆向きに読めばよい。
+詳細は省略する。
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-gerbe-over-stack-in-groupoids}
+$\mathcal{C}$ をサイトとする。$\mathcal{X}$ および $\mathcal{Y}$ を
+$\mathcal{C}$ 上のグルーポイドのスタックとする。
+$F : \mathcal{X} \to \mathcal{Y}$ を $\mathcal{C}$ 上の圏の
+$1$-射とする。Lemma \ref{stacks-lemma-when-gerbe} の同値な条件が
+満たされるとき、$\mathcal{X}$ は $\mathcal{Y}$ {it 上のジェルブ}であるという。
+\end{definition}
+
+\noindent
+この定義は Definition \ref{stacks-definition-gerbe} と矛盾しない。実際、
+$\mathcal{Y} = \mathcal{C}$ の場合、Lemma \ref{stacks-lemma-when-gerbe} の (1) で
+$\mathcal{X}' = \mathcal{X}$ ととれる。Lemma \ref{stacks-lemma-when-gerbe} の
+条件 (2)(a) と (2)(b) は、Definition \ref{stacks-definition-gerbe} の条件 (2) と
+(3) に趣旨の上でかなり近いことに注意する。すなわち (2)(a) は、
+対象の同型類の前層の写像が層化後に全射となることを述べる。
+さらに (2)(b) は、任意の $U$ および
+$x, x' \in \Ob(\mathcal{X}_U)$ に対して
+$$
+\mathit{Isom}_\mathcal{X}(x, x')
+\longrightarrow
+\mathit{Isom}_\mathcal{Y}(F(x), F(x'))
+$$
+が $\mathcal{C}/U$ 上の層の全射であることを述べる。
+
+\begin{lemma}
+\label{stacks-lemma-base-change-gerbe}
+$\mathcal{C}$ をサイトとする。
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_{G'} \ar[d]_{F'} & \mathcal{X} \ar[d]^F \\
+\mathcal{Y}' \ar[r]^G & \mathcal{Y}
+}
+$$
+を、$\mathcal{C}$ 上のグルーポイドのスタックの $2$-ファイバー積とする。
+$\mathcal{X}$ が $\mathcal{Y}$ 上のジェルブならば、
+$\mathcal{X}'$ は $\mathcal{Y}'$ 上のジェルブである。
+\end{lemma}
+
+\begin{proof}
+% P01-E0206
+$2$-ファイバー積の一意性により、Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} のように
+$\mathcal{X}' = \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ と仮定してよい。
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \to \mathcal{Y}'$ について
+Lemma \ref{stacks-lemma-when-gerbe} の性質 (2)(a) と (2)(b) を示そう。
+
+\medskip\noindent
+$y'$ を、$\mathcal{C}$ の対象 $U$ 上にある $\mathcal{Y}'$ の対象とする。
+仮定により、$U$ の被覆 $\{U_i \to U\}$ と
+$x_i \in \mathcal{X}_{U_i}$ で、同型
+$\alpha_i : G(y')|_{U_i} \to F(x_i)$ をもつものが存在する。
+このとき $(U_i, y'|_{U_i}, x_i, \alpha_i)$ は、$U_i$ 上の
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ の対象であり、
+$\mathcal{Y}'$ におけるその像は $y'|_{U_i}$ である。
+従って (2)(a) が成り立つ。
+
+\medskip\noindent
+$U \in \Ob(\mathcal{C})$ とし、$x'_1, x'_2$ を $U$ 上の
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ の対象とし、
+$b' : F'(x'_1) \to F'(x'_2)$ を $\mathcal{Y}'_U$ の射とする。
+$x'_i = (U, y'_i, x_i, \alpha_i)$ と書く。
+% P01-E0208
+$F'(x'_i) = x_i$ および $G'(x'_i) = y'_i$ であることに注意する。
+仮定により、$\mathcal{C}$ の被覆 $\{U_i \to U\}$ と
+$\mathcal{X}_{U_i}$ の射
+$a_i : x_1|_{U_i} \to x_2|_{U_i}$ で
+$F(a_i) = G(b')|_{U_i}$ となるものが存在する。このとき
+$(b'|_{U_i}, a_i)$ は、(2)(b) で要求される射
+$x'_1|_{U_i} \to x'_2|_{U_i}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-composition-gerbe}
+$\mathcal{C}$ をサイトとする。
+$F : \mathcal{X} \to \mathcal{Y}$ および
+$G : \mathcal{Y} \to \mathcal{Z}$ を、$\mathcal{C}$ 上の
+グルーポイドのスタックの $1$-射とする。
+$\mathcal{X}$ が $\mathcal{Y}$ 上のジェルブであり、
+$\mathcal{Y}$ が $\mathcal{Z}$ 上のジェルブならば、
+$\mathcal{X}$ は $\mathcal{Z}$ 上のジェルブである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{X} \to \mathcal{Z}$ について Lemma
+\ref{stacks-lemma-when-gerbe} の性質 (2)(a) と (2)(b) を示そう。
+
+\medskip\noindent
+$z$ を、$\mathcal{C}$ の対象 $U$ 上にある $\mathcal{Z}$ の対象とする。
+$G$ に関する仮定により、$U$ の被覆 $\{U_i \to U\}$ と
+$y_i \in \mathcal{Y}_{U_i}$ で
+$G(y_i) \cong z|_{U_i}$ となるものが存在する。
+$F$ に関する仮定により、被覆 $\{U_{ij} \to U_i\}$ と
+$x_{ij} \in \mathcal{X}_{U_{ij}}$ で
+$F(x_{ij}) \cong y_i|_{U_{ij}}$ となるものが存在する。
+すると $\{U_{ij} \to U\}$ は $\mathcal{C}$ の被覆であり、
+$(G \circ F)(x_{ij}) \cong z|_{U_{ij}}$ である。従って (2)(a) が成り立つ。
+
+\medskip\noindent
+$U \in \Ob(\mathcal{C})$ とし、$x_1, x_2$ を $U$ 上の
+$\mathcal{X}$ の対象とし、
+$c : (G \circ F)(x_1) \to (G \circ F)(x_2)$ を $\mathcal{Z}_U$ の射とする。
+$G$ に関する仮定により、$U$ の被覆 $\{U_i \to U\}$ と
+$\mathcal{Y}_{U_i}$ の射
+$b_i : F(x_1)|_{U_i} \to F(x_2)|_{U_i}$ で
+$G(b_i) = c|_{U_i}$ となるものが存在する。
+$F$ に関する仮定により、被覆 $\{U_{ij} \to U_i\}$ と
+$\mathcal{X}_{U_{ij}}$ の射
+$a_{ij} : x_1|_{U_{ij}} \to x_2|_{U_{ij}}$ で
+$F(a_{ij}) = b_i|_{U_{ij}}$ となるものが存在する。
+すると $\{U_{ij} \to U\}$ は $\mathcal{C}$ の被覆であり、
+要求どおり $(G \circ F)(a_{ij}) = c|_{U_{ij}}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-gerbe-descent}
+$\mathcal{C}$ をサイトとする。
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_{G'} \ar[d]_{F'} & \mathcal{X} \ar[d]^F \\
+\mathcal{Y}' \ar[r]^G & \mathcal{Y}
+}
+$$
+を、$\mathcal{C}$ 上のグルーポイドのスタックの $2$-カルテシアン図式とする。
+任意の $U \in \Ob(\mathcal{C})$ と
+$x \in \Ob(\mathcal{Y}_U)$ に対し、被覆 $\{U_i \to U\}$ で
+$x|_{U_i}$ が $G : \mathcal{Y}'_{U_i} \to \mathcal{Y}_{U_i}$ の
+本質像に入るものが存在すると仮定する。さらに $\mathcal{X}'$ が
+$\mathcal{Y}'$ 上のジェルブならば、$\mathcal{X}$ は
+$\mathcal{Y}$ 上のジェルブである。
+\end{lemma}
+
+\begin{proof}
+% P01-E0207
+$2$-ファイバー積の一意性により、Categories, Lemma
+\ref{categories-lemma-2-product-categories-over-C} のように
+$\mathcal{X}' = \mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ と仮定してよい。
+$\mathcal{X} \to \mathcal{Y}$ について Lemma
+\ref{stacks-lemma-when-gerbe} の性質 (2)(a) と (2)(b) を示そう。
+
+\medskip\noindent
+$y$ を、$\mathcal{C}$ の対象 $U$ 上にある $\mathcal{Y}$ の対象とする。
+仮定により、$U$ の被覆 $\{U_i \to U\}$ と
+$y'_i \in \mathcal{Y}'_{U_i}$ で
+$G(y'_i) \cong y|_{U_i}$ となるものが存在する。
+$\mathcal{X}' \to \mathcal{Y}'$ に対する (2)(a) により、被覆
+$\{U_{ij} \to U_i\}$ と $U_{ij}$ 上の $\mathcal{X}'$ の対象
+$x'_{ij}$ で、
+% P01-E0209
+$F'(x'_{ij})$ が $y'_i$ の $U_{ij}$ への制限と同型になるものが存在する。
+すると $\{U_{ij} \to U\}$ は $\mathcal{C}$ の被覆であり、
+$G'(x'_{ij})$ は $U_{ij}$ 上の $\mathcal{X}$ の対象で、その
+$\mathcal{Y}$ における像は制限 $y|_{U_{ij}}$ と同型である。
+これで $\mathcal{X} \to \mathcal{Y}$ に対する (2)(a) が示された。
+
+\medskip\noindent
+$U \in \Ob(\mathcal{C})$ とし、$x_1, x_2$ を $U$ 上の
+$\mathcal{X}$ の対象とし、$b : F(x_1) \to F(x_2)$ を
+$\mathcal{Y}_U$ の射とする。仮定により、被覆 $\{U_i \to U\}$ と
+$U_i$ 上の $\mathcal{Y}'$ の対象 $y'_i$ を、同型
+$\alpha_i : G(y'_i) \to F(x_1)|_{U_i}$ が存在するように選べる。
+このとき
+$$
+x'_{1i} = (U_i, y'_i, x_1|_{U_i}, \alpha_i)
+\quad\text{and}\quad
+x'_{2i} = (U_i, y'_i, x_2|_{U_i}, b|_{U_i} \circ \alpha_i)
+$$
+は $U_i$ 上の $\mathcal{X}'$ の対象である。
+$y'_i$ の恒等射は $F'(x'_{1i}) \to F'(x'_{2i})$ の射である。
+$\mathcal{X}' \to \mathcal{Y}'$ に対する (2)(b) により、被覆
+$\{U_{ij} \to U_i\}$ と射
+$a'_{ij} : x'_{1i}|_{U_{ij}} \to x'_{2i}|_{U_{ij}}$ で
+$F'(a'_{ij}) = \text{id}_{y'_i}|_{U_{ij}}$ となるものが存在する。
+$\mathcal{Y}' \times_\mathcal{Y} \mathcal{X}$ の射の定義を展開すると、
+$G'(a'_{ij}) : x_1|_{U_{ij}} \to x_2|_{U_{ij}}$ が探していた射であること、
+すなわち $\mathcal{X} \to \mathcal{Y}$ に対して (2)(b) が成り立つことが分かる。
+\end{proof}
+
+\noindent
+すべての自己同型層が可換であるジェルブは、代数幾何学で重要な役割を果たす。
+
+\begin{lemma}
+\label{stacks-lemma-gerbe-abelian-auts}
+$p : \mathcal{S} \to \mathcal{C}$ を、サイト $\mathcal{C}$ 上の
+ジェルブとする。すべての $U \in \Ob(\mathcal{C})$ および
+$x \in \Ob(\mathcal{S}_U)$ に対して、$\mathcal{C}/U$ 上の群の層
+$\mathit{Aut}(x) = \mathit{Isom}(x, x)$ が可換であると仮定する。
+このとき次が存在する。
+\begin{enumerate}
+\item $\mathcal{C}$ 上の可換群の層 $\mathcal{G}$。
+\item すべての $U \in \Ob(\mathcal{C})$ とすべての
+$x \in \Ob(\mathcal{S}_U)$ に対する同型
+$\mathcal{G}|_U \to \mathit{Aut}(x)$。
+\end{enumerate}
+これらは、すべての $U$ と $\mathcal{S}_U$ のすべての射
+$\varphi : x \to y$ に対し、図式
+$$
+\xymatrix{
+\mathcal{G}|_U \ar[d] \ar@{=}[rr] & & \mathcal{G}|_U \ar[d] \\
+\mathit{Aut}(x)
+\ar[rr]^{\alpha \mapsto \varphi \circ \alpha \circ \varphi^{-1}} & &
+\mathit{Aut}(y)
+}
+$$
+が可換になるように選べる。
+\end{lemma}
+
+\begin{proof}
+$x, y$ を、$U = p(x) = p(y)$ を満たす $\mathcal{S}$ の二対象とする。
+
+\medskip\noindent
+$U$ 上の射 $\varphi : x \to y$ が存在するなら、それは同型であり、実際
+$\alpha$ を $\varphi \circ \alpha \circ \varphi^{-1}$ に写す同型
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$ を得る。
+さらに $\mathit{Aut}(x)$ は可換であると仮定しているので、簡単な計算から
+この同型は $\varphi$ の選択に依存しない。実際、$\psi$ が第二のそのような
+写像ならば
+$$
+\varphi \circ \alpha \circ \varphi^{-1} =
+\psi \circ \psi^{-1} \circ \varphi \circ \alpha \circ \varphi^{-1} =
+\psi \circ \alpha \circ \psi^{-1} \circ \varphi \circ \varphi^{-1} =
+\psi \circ \alpha \circ \psi^{-1}
+$$
+である。従って層の標準的な同型
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$ が得られる。
+さらに、第三の対象 $z$ と射 $y \to z$ が存在すれば
+（従って射 $x \to z$ も存在すれば）、標準的な同型
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$、
+$\mathit{Aut}(y) \to \mathit{Aut}(z)$、および
+$\mathit{Aut}(x) \to \mathit{Aut}(z)$ は、図式
+$$
+\xymatrix{
+\mathit{Aut}(x) \ar[rd] \ar[rr] & &  \mathit{Aut}(z) \\
+& \mathit{Aut}(y) \ar[ru]
+}
+$$
+が可換になるという意味で両立する。
+
+\medskip\noindent
+$U$ 上で $x$ から $y$ への射が存在しないならば、射
+$x|_{U_i} \to y|_{U_i}$ が存在するような被覆
+$\{U_i \to U\}$ を選べる。これにより標準的な同型
+$$
+\mathit{Aut}(x)|_{U_i} \longrightarrow \mathit{Aut}(y)|_{U_i}
+$$
+が得られ、これらは（標準性により）$U_i \times_U U_j$ 上で一致する。
+層の貼り合わせ（Sites, Lemma \ref{sites-lemma-glue-maps}）により、
+各 $U_i$ への制限が前段落の標準的な同型となる一意な同型
+$\mathit{Aut}(x) \to \mathit{Aut}(y)$ を得る。
+上と同様に、これらの標準的な同型は $U$ 上の第三の対象がある場合にも
+両立性を満たす。
+
+\medskip\noindent
+$U$ 上の $\mathcal{S}$ のファイバー圏が空である場合はどうだろうか。
+この場合、被覆 $\{U_i \to U\}$ と $U_i$ 上の $\mathcal{S}$ の対象
+$x_i$ を見いだせる。そこで $\mathcal{G}_i = \mathit{Aut}(x_i)$ とおく。
+上の議論により標準的な同型
+$$
+\varphi_{ij} :
+\mathcal{G}_i|_{U_i \times_U U_j}
+\longrightarrow
+\mathcal{G}_j|_{U_i \times_U U_j}
+$$
+を得る。その $U_i \times_U U_j \times_U U_k$ への制限は、Sites, Section
+\ref{sites-section-glueing-sheaves} で説明されたコサイクル条件を満たす。
+Sites, Lemma \ref{sites-lemma-glue-sheaves} により、$U$ 上の層
+$\mathcal{G}$ で、その $U_i$ への制限が貼り合わせ写像
+$\varphi_{ij}$ と両立する仕方で $\mathcal{G}_i$ を与えるものが得られる。
+
+\medskip\noindent
+$\mathcal{C}$ が終対象 $U$ をもつならば、いま構成した層を
+$\mathcal{G}$ とすれば証明は完了する。一般の場合には、変動する $U$ 上で
+構成した層 $\mathcal{G}$ が標準的な仕方で両立することを確かめる必要がある。
+これは省略する。
+\end{proof}
+
+\section{スタックの関手性}
+\label{stacks-section-inverse-image}
+
+\noindent
+この節では、スタックの基礎サイトを変更すると何が起こるかを調べる。
+初読時にはこの節を飛ばしてよい。
+
+\medskip\noindent
+$u : \mathcal{C} \to \mathcal{D}$ を圏の間の関手とする。
+$p : \mathcal{S} \to \mathcal{D}$ を $\mathcal{D}$ 上の圏とする。
+この状況で、次のように定義される $\mathcal{C}$ 上の圏を
+$u^p\mathcal{S}$ と表す。
+\begin{enumerate}
+\item $u^p\mathcal{S}$ の対象は、$\mathcal{C}$ の対象 $U$ と
+$\mathcal{S}_{u(U)}$ の対象 $y$ からなる対 $(U, y)$ である。
+\item 射 $(a, \beta) : (U, y) \to (U', y')$ は、
+$\mathcal{C}$ の射 $a : U \to U'$ と $\mathcal{S}$ の射
+$\beta : y \to y'$ で $p(\beta) = u(a)$ を満たすものによって与えられる。
+\end{enumerate}
+これらの定義のもとで、$U$ 上の $u^p\mathcal{S}$ のファイバー圏は
+$u(U)$ 上の $\mathcal{S}$ のファイバー圏に等しいことに注意する。
+
+\begin{lemma}
+\label{stacks-lemma-fibred-category-pushforward}
+上の状況で、$\mathcal{S}$ が $\mathcal{D}$ 上のファイバー圏ならば、
+$u^p\mathcal{S}$ は $\mathcal{C}$ 上のファイバー圏である。
+\end{lemma}
+
+\begin{proof}
+この証明を読む前に、Categories, Definitions
+\ref{categories-definition-cartesian-over-C} および
+\ref{categories-definition-fibred-category} の周辺の議論を見てほしい。
+$(a, \beta) : (U, y) \to (U', y')$ を $u^p\mathcal{S}$ の射とする。
+$(a, \beta)$ が強カルテシアンであるための必要十分条件は、
+$\beta$ が強カルテシアンであることだと主張する。
+まず $\beta$ が強カルテシアンであると仮定する。
+$u^p\mathcal{S}$ の第二の任意の射
+$(a_1, \beta_1) : (U_1, y_1) \to (U', y')$ を考える。このとき
+\begin{align*}
+& \Mor_{u^p\mathcal{S}}((U_1, y_1), (U, y)) \\
+& =
+\Mor_\mathcal{C}(U_1, U)
+\times_{\Mor_\mathcal{D}(u(U_1), u(U))}
+\Mor_\mathcal{S}(y_1, y) \\
+& =
+\Mor_\mathcal{C}(U_1, U)
+\times_{\Mor_\mathcal{D}(u(U_1), u(U))}
+\Mor_\mathcal{S}(y_1, y')
+\times_{\Mor_\mathcal{D}(u(U_1), u(U'))}
+\Mor_\mathcal{D}(u(U_1), u(U)) \\
+& =
+\Mor_\mathcal{S}(y_1, y')
+\times_{\Mor_\mathcal{D}(u(U_1), u(U'))}
+\Mor_\mathcal{C}(U_1, U) \\
+& =
+\Mor_{u^p\mathcal{S}}((U_1, y_1), (U', y'))
+\times_{\Mor_\mathcal{C}(U_1, U')}
+\Mor_\mathcal{C}(U_1, U)
+\end{align*}
+であり、第二の等式では $\beta$ が強カルテシアンであることを用いた。
+従って確かに $(a, \beta)$ は強カルテシアンである。
+逆に $(a, \beta)$ が強カルテシアンであると仮定する。
+$p(\beta') = u(a)$ を満たす $\mathcal{S}$ の強カルテシアン射
+$\beta' : y'' \to y'$ を選ぶ。
+% P01-E0210
+% P01-E0211
+このとき $(a, \beta) : (U, y) \to (U, y')$ と
+$(a, \beta') : (U, y'') \to (U, y)$ はともに強カルテシアンであり、
+$a$ を持ち上げる。従って強カルテシアン射の一意性
+（Categories, Section \ref{categories-section-fibred-categories} の議論を参照）
+により、$\mathcal{S}_{u(U)}$ の同型 $\iota : y \to y''$ で
+$\beta = \beta' \circ \iota$ を満たすものが存在する。
+Categories, Lemma \ref{categories-lemma-composition-cartesian} により、
+これは $\beta$ が $\mathcal{S}$ で強カルテシアンであることを意味する。
+
+\medskip\noindent
+最後に、$(U', y')$ と $U \to U'$ が与えられたとき、射
+$U \to U'$ を持ち上げる $u^p\mathcal{S}$ の強カルテシアン射
+$(U, y) \to (U', y')$ を見いだせることを示す必要がある。
+これは、仮定により射 $u(U) \to u(U')$ を持ち上げる強カルテシアン射
+$y \to y'$ を見いだせることと、上の議論から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-pushforward}
+$u : \mathcal{C} \to \mathcal{D}$ をサイトの連続関手とする。
+$p : \mathcal{S} \to \mathcal{D}$ を $\mathcal{D}$ 上のスタックとする。
+このとき $u^p\mathcal{S}$ は $\mathcal{C}$ 上のスタックである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-fibred-category-pushforward} において、
+$u^p\mathcal{S}$ が $\mathcal{C}$ 上のファイバー圏であることを見た。
+さらに、その補題の証明で、$u^p\mathcal{S}$ の射 $(a, \beta)$ が
+強カルテシアンであるための必要十分条件は、$\beta$ が
+$\mathcal{S}$ で強カルテシアンであることだと見た。従って
+$\mathcal{C}$ の射 $a : U \to U'$ が与えられたとき、等式
+% P01-E0212
+$(u^p\mathcal{S})_U = \mathcal{S}_U$ および
+$(u^p\mathcal{S})_{U'} = \mathcal{S}_{U'}$ が成り立つだけでなく、
+これらの等式を通じて引き戻し関手も一致する。式で書けば
+$a^*(U', y') = (U, u(a)^*y')$ である。
+
+\medskip\noindent
+以上を踏まえ、$\mathcal{U} = \{U_i \to U\}$ を $\mathcal{C}$ の被覆とする。
+$u$ は連続なので、$\mathcal{V} = \{u(U_i) \to u(U)\}$ は
+$\mathcal{D}$ の被覆であり、
+$u(U_i \times_U U_j) = u(U_i) \times_{u(U)} u(U_j)$ である。
+三重ファイバー積 $U_i \times_U U_j \times_U U_k$ についても同様である。
+ファイバー圏と引き戻しの同一視があるので、
+% P01-E0213
+$\mathcal{U}$ に関する降下データは $\mathcal{V}$ に関する降下データと同一である。
+仮定により $\mathcal{S}$ では有効な降下が成り立つから、
+$u^p\mathcal{S}$ についても同じことが成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-stack-in-groupoids-pushforward}
+$u : \mathcal{C} \to \mathcal{D}$ をサイトの連続関手とする。
+$p : \mathcal{S} \to \mathcal{D}$ を $\mathcal{D}$ 上の
+グルーポイドのスタックとする。このとき $u^p\mathcal{S}$ は
+$\mathcal{C}$ 上のグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{stacks-lemma-stack-pushforward} と、すべてのファイバー圏が
+グルーポイドであることから直ちに従う。
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-pushforward-stack}
+$f : \mathcal{D} \to \mathcal{C}$ を、連続関手
+$u : \mathcal{C} \to \mathcal{D}$ によって与えられるサイトの射とする。
+$\mathcal{S}$ を $\mathcal{D}$ 上のファイバー圏とする。
+この状況では、上で定義したファイバー圏 $u^p\mathcal{S}$ を
+{it $f_*\mathcal{S}$} と書く。$f_*\mathcal{S}$ を、
+{it $f$ に沿う $\mathcal{S}$ の順像}という。
+\end{definition}
+
+\noindent
+上の結果から、$\mathcal{S}$ が（グルーポイドの）スタックならば、
+$f_*\mathcal{S}$ も（グルーポイドの）スタックであることが分かる。
+スタックの逆像を定義するのはより難しく、ここでの構成には追加の仮定が必要となる
+（より一般的な構成を書き上げて投稿してもらって構わない）。
+これをいくつかの段階に分けて行う。
+
+\medskip\noindent
+$u : \mathcal{C} \to \mathcal{D}$ を圏の間の関手とする。
+$p : \mathcal{S} \to \mathcal{C}$ を $\mathcal{C}$ 上の圏とする。
+この状況で、圏 $u_{pp}\mathcal{S}$ を次のように定義する。
+\begin{enumerate}
+\item $u_{pp}\mathcal{S}$ の対象は三つ組
+$(U, \phi : V \to u(U), x)$ である。ここで
+$U \in \Ob(\mathcal{C})$、写像 $\phi : V \to u(U)$ は
+$\mathcal{D}$ の射、$x \in \Ob(\mathcal{S}_U)$ である。
+\item $u_{pp}\mathcal{S}$ の射
+$$
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U_2, \phi_2 : V_2 \to u(U_2), x_2)
+$$
+は $(a, b, \alpha)$ によって与えられる。ここで
+$a : U_1 \to U_2$ は $\mathcal{C}$ の射、
+$b : V_1 \to V_2$ は $\mathcal{D}$ の射、そして
+% P01-E0214
+$\alpha : x_1 \to x_2$ は $\mathcal{S}$ の射であり、
+$p(\alpha) = a$ を満たし、図式
+$$
+\xymatrix{
+V_1 \ar[d]_{\phi_1} \ar[r]_b & V_2 \ar[d]^{\phi_2} \\
+u(U_1) \ar[r]^{u(a)} & u(U_2)
+}
+$$
+は $\mathcal{D}$ で可換である。
+\end{enumerate}
+$u_{pp}\mathcal{S}$ を、
+$$
+p_{pp} : u_{pp}\mathcal{S} \longrightarrow \mathcal{D},
+\quad
+(U, \phi : V \to u(U), x) \longmapsto V.
+$$
+によって $\mathcal{D}$ 上の圏とみなす。$\mathcal{D}$ の対象 $V$ 上の
+$u_{pp}\mathcal{S}$ のファイバー圏には簡単な記述がない。
+
+\begin{lemma}
+\label{stacks-lemma-right-multiplicative-system}
+上の状況で、次を仮定する。
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$ はファイバー圏である。
+\item $\mathcal{C}$ は空でない有限極限をもつ。
+\item $u : \mathcal{C} \to \mathcal{D}$ は空でない有限極限と可換である。
+\end{enumerate}
+この圏の射のうち、$\alpha$ が強カルテシアンであり、形
+$$
+(a, \text{id}_V, \alpha) :
+(U', \phi' : V \to u(U'), x')
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+をもつもの全体の集合を
+$R \subset \text{Arrows}(u_{pp}\mathcal{S})$ とする。
+このとき $R$ は右乗法系である。
+\end{lemma}
+
+\begin{proof}
+Categories, Definition \ref{categories-definition-multiplicative-system}
+に従い、RMS1, RMS2, RMS3 を確かめる。
+強カルテシアン射の合成は強カルテシアンなので RMS1 は成り立つ。
+Categories, Lemma \ref{categories-lemma-composition-cartesian} を参照せよ。
+
+\medskip\noindent
+RMS2 を確かめるため、$u_{pp}\mathcal{S}$ の射
+$$
+(a, b, \alpha) :
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+と、$R$ に属し $\gamma$ が強カルテシアンである射
+$$
+(c, \text{id}_V, \gamma) :
+(U', \phi' : V \to u(U'), x')
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+があると仮定する。この状況で $U'_1 = U_1 \times_U U'$ とおき、
+射影を $a' : U'_1 \to U'$ および $c' : U'_1 \to U_1$ と表す。
+$u(U'_1) = u(U_1) \times_{u(U)} u(U')$ なので、
+$\phi'_1 = (\phi_1, \phi') : V_1 \to u(U'_1)$ は $\mathcal{D}$ の射である。
+強カルテシアン射 $\gamma_1 : x_1' \to x_1$ を $\mathcal{S}$ において
+% P01-E0215
+$p(\gamma_1) = \phi'_1$ を満たすように選ぶ
+（$\mathcal{S}$ は $\mathcal{C}$ 上のファイバー圏なので存在する）。
+すると $\gamma : x' \to x$ は強カルテシアンだから、
+$p(\alpha') = a'$ を満たす一意な射 $\alpha' : x'_1 \to x'$ が存在する。
+この時点で、
+% P01-E0216
+$$
+(a', b, \alpha') :
+(U_1, \phi_1 : V_1 \to u(U'_1), x'_1)
+\longrightarrow
+(U, \phi : V \to u(U'), x')
+$$
+は射であり、
+% P01-E0217
+$$
+(c', \text{id}_{V_1}, \gamma_1) :
+(U'_1, \phi'_1 : V_1 \to u(U'_1), x'_1)
+\longrightarrow
+(U_1, \phi : V_1 \to u(U_1), x_1)
+$$
+は $R$ の元であることが分かる。
+% P01-E0218
+これは RMS2 が提示する存在問題の解を与える。
+
+\medskip\noindent
+最後に、
+$$
+(a, b, \alpha), (a', b', \alpha') :
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+が $u_{pp}\mathcal{S}$ の二つの射であり、$R$ の元
+$$
+(c, \text{id}_V, \gamma) :
+(U, \phi : V \to u(U), x)
+\longrightarrow
+(U', \phi : V \to u(U'), x')
+$$
+が射 $(a, b, \alpha)$ と $(a', b', \alpha')$ を等化すると仮定する。
+これは特に $b = b'$ を意味する。$a, a'$ の等化子を
+$d : U_2 \to U_1$ とする。これは Categories, Lemma
+\ref{categories-lemma-almost-finite-limits-exist} により存在する。
+さらに $u(d) : u(U_2) \to u(U_1)$ は $u(a), u(a')$ の等化子なので、
+（$b = b'$ だから）射 $\phi_2 : V_1 \to u(U_2)$ で
+% P01-E0219
+$\phi_1 = u(d) \circ \phi_1$ を満たすものが存在する。
+$\delta : x_2 \to x_1$ を、
+% P01-E0220
+$p(\delta) = u(d)$ を満たす $\mathcal{S}$ の強カルテシアン射とする。
+ここで $\alpha \circ \delta = \alpha' \circ \delta$ と主張する。
+実際、$\gamma$ は強カルテシアンであり、
+$\gamma \circ \alpha \circ \delta = \gamma \circ \alpha' \circ \delta$、かつ
+$p(\alpha \circ \delta) = p(\alpha' \circ \delta)$ だからである。
+従って射
+$$
+(d, \text{id}_{V_1}, \delta) :
+(U_2, \phi_2 : V_1 \to u(U_2), x_2)
+\longrightarrow
+(U_1, \phi_1 : V_1 \to u(U_1), x_1)
+$$
+は $R$ の元であり、$(a, b, \alpha)$ と $(a', b', \alpha')$ を等化する。
+従って $R$ は RMS3 も満たす。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-fibred-category-pullback}
+記法と仮定は Lemma \ref{stacks-lemma-right-multiplicative-system} のとおりとする。
+$u_p\mathcal{S} = R^{-1}u_{pp}\mathcal{S}$ とおく。
+Categories, Section \ref{categories-section-localization} を参照せよ。
+このとき $u_p\mathcal{S}$ は $\mathcal{D}$ 上のファイバー圏である。
+\end{lemma}
+
+\begin{proof}
+Categories, Lemma \ref{categories-lemma-right-localization} の直前で与えた
+$u_p\mathcal{S}$ の記述を用いる。関手
+$p_{pp} : u_{pp}\mathcal{S} \to \mathcal{D}$ は、$R$ のすべての元を
+恒等射に写すことに注意する。従って Categories, Lemma
+\ref{categories-lemma-properties-right-localization} により、与えられた関手を
+延長する標準的な関手 $p_p : u_p\mathcal{S} \to \mathcal{D}$ を得る。
+このようにして $u_p\mathcal{S}$ を $\mathcal{D}$ 上の圏とみなす。
+
+\medskip\noindent
+まず $u_p\mathcal{S}$ における $\mathcal{D}$-強カルテシアン射を特徴づけたい。
+$u_p\mathcal{S}$ の射 $f : X \to Y$ は、$r \in R$ を満たす対
+$(f' : X' \to Y, r : X' \to X)$ の同値類である。
+実際、明らかな記法のもとで $u_p\mathcal{S}$ において
+$f = (f', 1) \circ (r, 1)^{-1}$ である。
+同型は常に強カルテシアンであり、強カルテシアン射の合成も
+強カルテシアンであることに注意する。Categories, Lemma
+\ref{categories-lemma-composition-cartesian} を参照せよ。
+従って $f$ が強カルテシアンであるための必要十分条件は、
+$(f', 1)$ がそうであることだ。ゆえに次の主張が強カルテシアン射を
+完全に特徴づける。主張：$u_{pp}\mathcal{S}$ の射
+$$
+(a, b, \alpha) :
+X_1 = (U_1, \phi_1 : V_1 \to u(U_1), x_1)
+\longrightarrow
+(U_2, \phi_2 : V_2 \to u(U_2), x_2) = X_2
+$$
+の像 $f = ((a, b, \alpha), 1)$ が $u_p\mathcal{S}$ において
+強カルテシアンであるための必要十分条件は、$\alpha$ が
+$\mathcal{S}$ の強カルテシアン射であることである。
+
+\medskip\noindent
+$\alpha$ が強カルテシアンであると仮定する。
+$X = (U, \phi : V \to u(U), x)$ を別の対象とし、
+$f_2 : X \to X_2$ を $u_p\mathcal{S}$ の射で、ある
+% P01-E0221
+$b_1 : U \to U_1$ に対し $p_p(f_2) = b \circ b_1$ を満たすものとする。
+$f$ が強カルテシアンであることを示すには、$u_p\mathcal{S}$ の一意な射
+$f_1 : X \to X_1$ で、$p_p(f_1) = b_1$ および
+$u_p\mathcal{S}$ において $f_2 = f \circ f_1$ を満たすものが存在することを
+示さなければならない。
+$f_2 = (f'_2 : X' \to X_2, r : X' \to X)$ と書く。
+再び $u_p\mathcal{S}$ において
+$f_2 = (f'_2, 1) \circ (r, 1)^{-1}$ と書ける。
+$(r, 1)$ は $\mathcal{D}$ における像が恒等射である同型だから、
+要求された性質をもつ射 $f_1 : X \to X_1$ を見いだすことは、
+$u_p\mathcal{S}$ の射 $f'_1 : X' \to X_1$ で、
+% P01-E0222
+$p(f'_1) = b_1$ および $f'_2 = f \circ f'_1$ を満たすものを
+見いだすことと同じである。従って $f_2$ は、$b_2 = b \circ b_1$ を満たす
+$f_2 = ((a_2, b_2, \alpha_2), 1)$ という形であると仮定してよい。
+図で表すと
+$$
+\xymatrix{
+& & (U_1, V_1 \to u(U_1), x_1) \ar[d]^{(a, b, \alpha)} \\
+(U, V \to u(U), x) \ar[rr]^{(a_2, b_2, \alpha_2)} & &
+(U_2, V_2 \to u(U_2), x_2)
+}
+$$
+となる。ここから射 $f_1$ の構成は明らかである。すなわち
+$U' = U \times_{U_2} U_1$ とおき、射影を
+$c : U' \to U$ および $a_1 : U' \to U_1$ とする。
+射 $c$ を持ち上げる強カルテシアン射 $\gamma : x' \to x$ を選ぶ。
+$b_2 = b \circ b_1$ であり、
+$u(U') = u(U) \times_{u(U_2)} u(U_1)$ なので、
+$\phi' = (\phi, \phi_1 \circ b_1) : V \to u(U')$ である。
+$\alpha$ は強カルテシアンであり、
+$a \circ a_1 = a_2 \circ c = p(\alpha_2 \circ \gamma)$ だから、
+$a_1$ を持ち上げ、$\alpha \circ \alpha_1 = \alpha_2 \circ \gamma$ を
+満たす射 $\alpha_1 : x' \to x_1$ が存在する。
+$X' = (U', \phi' : V \to u(U'), x')$ とおく。すると
+$$
+f_1 =
+((a_1, b_1, \alpha_1) : X' \to X_1, (c, \text{id}_V, \gamma) : X' \to X) :
+X \longrightarrow X_1
+$$
+が機能することが分かる。実際、図式
+$$
+\xymatrix{
+(U', \phi' : V \to u(U'), x')
+\ar[d]_{(c, \text{id}_V, \gamma)}
+\ar[rr]_{(a_1, b_1, \alpha_1)}
+& & (U_1, V_1 \to u(U_1), x_1) \ar[d]^{(a, b, \alpha)} \\
+(U, V \to u(U), x) \ar[rr]^{(a_2, b_2, \alpha_2)} & &
+(U_2, V_2 \to u(U_2), x_2)
+}
+$$
+は構成により可換である。これで存在が示された。
+
+\medskip\noindent
+次に、なお $f = ((a, b, \alpha), 1)$ および
+$f_2 = ((a_2, b_2, \alpha_2), 1)$ という特別な場合に、一意性を示す。
+この部分は飛ばすことを強く勧める。
+$g_1, g'_1 : X \to X_1$ を、
+$p_p(g_1) = p_p(g'_1) = b_1$ および
+$f_2 = f \circ g_1 = f \circ g'_1$ を満たす $u_p\mathcal{S}$ の二射とする。
+$g_1 = g'_1$ を示すことが目標である。
+Categories, Lemma \ref{categories-lemma-morphisms-right-localization} により、
+ある $r \in R$ に対する
+$(f_1 : X' \to X_1, r : X' \to X)$ および
+$(f'_1 : X' \to X_1, r : X' \to X)$ の同値類として、
+$g_1$ と $g'_1$ を表せる。Categories, Lemma
+\ref{categories-lemma-equality-morphisms-right-localization} により、
+$f_2 = f \circ g_1 = f \circ g'_1$ は、$u_{pp}\mathcal{S}$ の射
+$r' : X'' \to X'$ で $r' \circ r \in R$ を満たし、かつ
+$$
+(a, b, \alpha) \circ f_1 \circ r' =
+(a, b, \alpha) \circ f'_1 \circ r' =
+(a_2, b_2, \alpha_2) \circ r'
+$$
+を $u_{pp}\mathcal{S}$ において満たすものが存在することを意味する。
+ここで $g_1$ は $(f_1 \circ r', r \circ r')$ で表され、
+$g'_1$ も同様であることに注意する。従って
+$$
+(a, b, \alpha) \circ f_1 =
+(a, b, \alpha) \circ f'_1 =
+(a_2, b_2, \alpha_2).
+$$
+と仮定してよい。
+$r = (c, \text{id}_V, \gamma) : (U', \phi' : V \to u(U'), x')$、
+$f_1 = (a_1, b_1, \alpha_1)$、および
+$f'_1 = (a'_1, b_1, \alpha'_1)$ と書く。
+ここでは条件 $p_p(g_1) = p_p(g'_1)$ を用いた。
+上の等式は
+$a \circ a_1 = a \circ a'_1 = a_2 \circ c$ および
+$\alpha \circ \alpha_1 = \alpha \circ \alpha'_1 = \alpha_2 \circ \gamma$
+と同値である。この状況で $a_1 = a'_1$ であるとは限らない。
+従って $R$ の元をもう一つ前合成しなければならない。
+すなわち $U'' = \text{Eq}(a_1, a'_1)$ を、$U'$ の部分対象である
+$a_1$ と $a'_1$ の等化子とする。標準的な単射を
+$c' : U'' \to U'$ と表す。上の射の間の関係から、
+$V \to u(U')$ は
+$u(U'') = u(\text{Eq}(a_1, a'_1)) = \text{Eq}(u(a_1), u(a'_1))$
+に写ることが分かる。従って新しい対象
+$(U'', \phi'' : V \to u(U''), x'')$ を得る。ここで
+% P01-E0223
+$\gamma' : x'' \to x'$ は $\gamma$ を持ち上げる強カルテシアン射である。
+このとき $f_1$ と $f'_1$ に $R$ の元
+$(c', \text{id}_V, \gamma')$ を前合成してよいことが分かる。
+これを行う、すなわち $(U', \phi' : V \to u(U'), x')$ を
+$(U'', \phi'' : V \to u(U''), x'')$ で置き換えると、さらに
+$a_1 = a'_1$ が成り立つ先の状況に戻る。この場合、$\alpha$ が
+強カルテシアンであることから形式的に（！）
+$\alpha_1 = \alpha'_1$ が従う。これで要求どおり $g_1 = g'_1$ が示された。
+
+\medskip\noindent
+$u_p\mathcal{S}$ の形 $((a, b, \alpha), 1)$ の任意の強カルテシアン射に
+対して、$\alpha$ が $\mathcal{S}$ で強カルテシアンであることの証明は省略する。
+（証明の残りでは強カルテシアン射の特徴づけを必要としないが、
+この節の後の箇所で用いる。）
+
+\medskip\noindent
+$(U, \phi : V \to u(U), x)$ を $u_p\mathcal{S}$ の対象とする。
+$b : V' \to V$ を $\mathcal{D}$ の射とする。このとき射
+$$
+(\text{id}_U, b, \text{id}_x) :
+(U, \phi \circ b : V' \to u(U), x)
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+は前段落までの結果により強カルテシアンであり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-fibred-groupoids-category-pullback}
+記法と仮定は Lemma \ref{stacks-lemma-fibred-category-pullback} のとおりとする。
+$\mathcal{S}$ がグルーポイドにファイバー化されているならば、
+$u_p\mathcal{S}$ もグルーポイドにファイバー化されている。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-fibred-category-pullback} により、
+$u_p\mathcal{S}$ がファイバー圏であることは分かっている。
+$f : X \to Y$ を、$p_p(f) = \text{id}_V$ を満たす
+$u_p\mathcal{S}$ の射とする。$f$ が可逆であることを示せばよい。
+Categories, Lemma \ref{categories-lemma-fibred-groupoids} を参照せよ。
+$f$ を、$r \in R$ を満たす対 $((a, b, \alpha), r)$ の同値類として書く。
+このとき $p_p(r) = \text{id}_V$ であり、従って
+$p_{pp}((a, b, \alpha)) = \text{id}_V$ である。ゆえに
+$b = \text{id}_V$ である。しかし $\mathcal{S}$ の任意の射は
+強カルテシアンである（Categories, Lemma
+\ref{categories-lemma-fibred-groupoids} を参照）。従って
+$(a, b, \alpha) \in R$ は要求どおり $u_p\mathcal{S}$ で可逆である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-adjointness-pullback-pushforward}
+$u : \mathcal{C} \to \mathcal{D}$ を関手とする。
+$p : \mathcal{S} \to \mathcal{C}$ および
+$q : \mathcal{T} \to \mathcal{D}$ を、それぞれ
+$\mathcal{C}$ および $\mathcal{D}$ 上の圏とする。次を仮定する。
+\begin{enumerate}
+\item $p : \mathcal{S} \to \mathcal{C}$ はファイバー圏である。
+\item $q : \mathcal{T} \to \mathcal{D}$ はファイバー圏である。
+\item $\mathcal{C}$ は空でない有限極限をもつ。
+\item $u : \mathcal{C} \to \mathcal{D}$ は空でない有限極限と可換である。
+\end{enumerate}
+このとき射の圏の標準的な同値
+$$
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+=
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+この証明では、$\mathcal{C}$ の $U$ 上にある $\mathcal{S}$ の対象
+$x$ を $x/U$ と書く。同様に、$\mathcal{D}$ の $V$ 上にある
+$\mathcal{T}$ の対象 $y$ を $y/V$ と書く。同じ流儀で
+$\alpha/a : x/U \to x'/U'$ は、$\mathcal{C}$ での像が
+$a : U \to U'$ である射 $\alpha : x \to x'$ を表す。
+
+\medskip\noindent
+$G : u_p\mathcal{S} \to \mathcal{T}$ を、$\mathcal{D}$ 上の
+ファイバー圏の $1$-射とする。
+% P01-E0224
+$G' : u_{pp}\mathcal{S} \to \mathcal{T}$ を、$G$ と標準的な
+（局所化）関手 $u_{pp}\mathcal{S} \to u_p\mathcal{S}$ との合成とする。
+このとき、対象上で
+$$
+H(x/U) = (U, G'(U, \text{id}_{u(U)} : u(U) \to u(U), x))
+$$
+により、また射上で
+% P01-E0225
+$$
+H((\alpha, a) : x/U \to x'/U') = G'(a, u(a), \alpha)
+$$
+により与えられる関手 $H : \mathcal{S} \to u^p\mathcal{T}$ を考える。
+$G$ は強カルテシアン射を強カルテシアン射に写すので、$\alpha$ が
+強カルテシアンならば $H(\alpha)$ も強カルテシアンである。
+実際、Lemma \ref{stacks-lemma-fibred-category-pullback} の証明で、この場合
+写像 $(a, u(a), \alpha)$ が $u_p\mathcal{S}$ において
+強カルテシアンになることを見た。この構成が $G$ に関して関手的であることは
+明らかであり、関手
+$$
+A :
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+\longrightarrow
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+$$
+を得る。
+
+\medskip\noindent
+逆に $H : \mathcal{S} \to u^p\mathcal{T}$ をファイバー圏の
+$1$-射とする。$u^p\mathcal{T}$ の対象は、
+$y \in \Ob(\mathcal{T}_{u(U)})$ を満たす対 $(U, y)$ であった。
+% P01-E0226
+$\text{pr} : u^p\mathcal{T} \to \mathcal{T}$ を関手
+$(U, y) \mapsto y$ と表す。この場合、関手
+$G' : u_{pp}\mathcal{S} \to \mathcal{T}$ を、対象上の規則
+$$
+G'(U, \phi : V \to u(U), x) = \phi^*\text{pr}(H(x))
+$$
+と、
+$$
+G'((a, b, \alpha) : (U, \phi : V \to u(U), x)
+\to (U', \phi' : V' \to u(U'), x'))
+=
+\beta
+$$
+が、$q(\beta) = b$ を満たし図式
+$$
+\xymatrix{
+\phi^*\text{pr}(H(x)) \ar[d] \ar[r]_-{\beta} &
+(\phi')^*\text{pr}(H(x')) \ar[d] \\
+\text{pr}(H(x)) \ar[r]^{\text{pr}(H(a, \alpha))} & \text{pr}(H(x'))
+}
+$$
+を可換にする一意な射
+$\beta : \phi^*\text{pr}(H(x)) \to (\phi')^*\text{pr}(H(x'))$
+となるという規則によって定義する。そのような射が存在して一意であるのは、
+$\mathcal{T}$ がファイバー圏だからである。
+
+\medskip\noindent
+$r \in R$ ならば $G'(r)$ が同型であることを確かめる。実際、
+$\alpha$ が強カルテシアンである
+$$
+(a, \text{id}_V, \alpha) :
+(U', \phi' : V \to u(U'), x')
+\longrightarrow
+(U, \phi : V \to u(U), x)
+$$
+が Lemma \ref{stacks-lemma-right-multiplicative-system} の右乗法系
+$R$ の元ならば、$H(\alpha)$ は強カルテシアンであり、Lemma
+\ref{stacks-lemma-fibred-category-pushforward} の証明から
+$\text{pr}(H(\alpha))$ も強カルテシアンである。
+従ってこの場合、射 $\beta$ は $q(\beta) = \text{id}_V$ を満たし、
+強カルテシアンである。ゆえに Categories, Lemma
+\ref{categories-lemma-composition-cartesian} により $\beta$ は同型である。
+Categories, Lemma \ref{categories-lemma-properties-right-localization} により、
+標準的な延長 $G : u_p\mathcal{S} \to \mathcal{T}$ を得る。
+
+\medskip\noindent
+次に、$G$ が強カルテシアン射を強カルテシアン射に写すことを示そう。
+% P01-E0227
+$f : X \to Y$ が強カルテシアンであると仮定する。
+$u_p\mathcal{S}$ における強カルテシアン射の特徴づけにより、
+% P01-E0228
+$r \in R$ かつ $\alpha$ が $\mathcal{S}$ で強カルテシアンとなるように、
+$f$ を $((a, b, \alpha) : X' \to Y, r : X' \to Y)$ と書ける。
+上の議論により、
+% P01-E0229
+$G'(a, b \alpha)$ が強カルテシアンであることを示せば十分である。
+前と同様、$\alpha$ が強カルテシアンであるという条件は、
+$\text{pr}(H(a, \alpha)) : \text{pr}(H(x)) \to \text{pr}(H(x'))$ が
+$\mathcal{T}$ で強カルテシアンであることを意味する。
+% P01-E0230
+上の可換正方形においては、いまや $\beta$ を除くすべての矢が
+強カルテシアンなので、$\beta$ も強カルテシアンであることが従う。
+構成 $H \mapsto G$ が $H$ に関して関手的であることは明らかであり、関手
+$$
+B :
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+\longrightarrow
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+$$
+を得る。補題の証明を完了するには、関手 $A$ と $B$ が互いに
+準逆であることを示さなければならない。確認は省略する。
+\end{proof}
+
+\begin{definition}
+\label{stacks-definition-pullback-stack}
+$f : \mathcal{D} \to \mathcal{C}$ を、Sites, Proposition
+\ref{sites-proposition-get-morphism} の仮定と結論を満たす連続関手
+$u : \mathcal{C} \to \mathcal{D}$ によって与えられるサイトの射とする。
+$\mathcal{S}$ を $\mathcal{C}$ 上のスタックとする。この状況で、
+上で構成した $\mathcal{D}$ 上のファイバー圏 $u_p\mathcal{S}$ の
+スタック化を {it $f^{-1}\mathcal{S}$} と書く。
+$f^{-1}\mathcal{S}$ を、{it $f$ に沿う $\mathcal{S}$ の逆像}という。
+\end{definition}
+
+\noindent
+もちろん、$\mathcal{S}$ がグルーポイドのスタックならば、Lemmas
+\ref{stacks-lemma-stackify-groupoids} および
+\ref{stacks-lemma-fibred-groupoids-category-pullback} により
+$f^{-1}\mathcal{S}$ もグルーポイドのスタックである。
+
+\begin{lemma}
+\label{stacks-lemma-adjointness-pullback-pushforward-stacks}
+$f : \mathcal{D} \to \mathcal{C}$ を、Sites, Proposition
+\ref{sites-proposition-get-morphism} の仮定と結論を満たす連続関手
+$u : \mathcal{C} \to \mathcal{D}$ によって与えられるサイトの射とする。
+$p : \mathcal{S} \to \mathcal{C}$ および
+$q : \mathcal{T} \to \mathcal{D}$ をスタックとする。
+このとき射の圏の標準的な同値
+$$
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}, f_*\mathcal{T})
+=
+\Mor_{\textit{Stacks}/\mathcal{D}}(f^{-1}\mathcal{S}, \mathcal{T})
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+$i = 1, 2$ に対して、スタックの $i$-射はファイバー圏の
+$i$-射と同じである。Definition \ref{stacks-definition-stacks-over-C} を参照せよ。
+Lemma \ref{stacks-lemma-adjointness-pullback-pushforward} により、すでに
+$$
+\Mor_{\textit{Fib}/\mathcal{C}}(\mathcal{S}, u^p\mathcal{T})
+=
+\Mor_{\textit{Fib}/\mathcal{D}}(u_p\mathcal{S}, \mathcal{T})
+$$
+を得ている。従って結果は Lemma
+\ref{stacks-lemma-stackify-universal-property-more} から従う。実際、
+$u^p\mathcal{T} = f_*\mathcal{T}$ であり、$f^{-1}\mathcal{S}$ は
+$u_p\mathcal{S}$ のスタック化である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-lemma-technical-up}
+$f : \mathcal{D} \to \mathcal{C}$ を、Sites, Proposition
+\ref{sites-proposition-get-morphism} の仮定と結論を満たす連続関手
+$u : \mathcal{C} \to \mathcal{D}$ によって与えられるサイトの射とする。
+$\mathcal{S} \to \mathcal{C}$ をファイバー圏とし、
+$\mathcal{S} \to \mathcal{S}'$ を $\mathcal{S}$ のスタック化とする。
+このとき $f^{-1}\mathcal{S}'$ は $u_p\mathcal{S}$ のスタック化である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：これは Sites, Lemma
+\ref{sites-lemma-technical-up} の類似である。
+\end{proof}
+
+\noindent
+次の補題は、$\Sch'_{fppf}$ が $\Sch_{fppf}$ を含むならば、
+$\Sch_{fppf}$ 上のスタックの $2$-圏が、$\Sch'_{fppf}$ 上の
+スタックの $2$-圏の「充満2部分圏」であることを述べる。
+Topologies, Section \ref{topologies-section-change-alpha} を参照せよ。
+
+\begin{lemma}
+\label{stacks-lemma-bigger-site}
+$\mathcal{C}$ と $\mathcal{D}$ をサイトとする。
+$u : \mathcal{C} \to \mathcal{D}$ を、Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす関手とする。
+$f : \mathcal{D} \to \mathcal{C}$ を対応するサイトの射とする。
+このとき次が成り立つ。
+\begin{enumerate}
+\item 任意のスタック $p : \mathcal{S} \to \mathcal{C}$ に対し、
+標準的な関手 $\mathcal{S} \to f_*f^{-1}\mathcal{S}$ は
+スタックの同値である。
+\item $\mathcal{C}$ 上のスタック $\mathcal{S}, \mathcal{S}'$ が
+与えられたとき、構成 $f^{-1}$ は射の圏の同値
+$$
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}, \mathcal{S}')
+\longrightarrow
+\Mor_{\textit{Stacks}/\mathcal{D}}(f^{-1}\mathcal{S}, f^{-1}\mathcal{S}')
+$$
+を誘導する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-adjointness-pullback-pushforward-stacks} により、圏の同値
+$$
+\Mor_{\textit{Stacks}/\mathcal{D}}(f^{-1}\mathcal{S}, f^{-1}\mathcal{S}')
+=
+\Mor_{\textit{Stacks}/\mathcal{C}}(\mathcal{S}, f_*f^{-1}\mathcal{S}')
+$$
+があることに注意する。従って (2) は (1) から従う。
+
+\medskip\noindent
+(1) を示すため、Lemma \ref{stacks-lemma-characterize-essentially-surjective-when-ff}
+を用いる。この補題によれば、
+$can : \mathcal{S} \to f_*f^{-1}\mathcal{S}$ が全忠実であり、
+$f_*f^{-1}\mathcal{S}$ のすべての対象が局所的に本質像に入ることを
+示さなければならない。
+
+\medskip\noindent
+関手 $can$ を手短に記述する。Lemma
+\ref{stacks-lemma-adjointness-pullback-pushforward} の証明を参照せよ。
+そのため、$c''(x/U) = (U, \text{id} : u(U) \to u(U), x)$ および
+$c''(\alpha/a) = (a, u(a), \alpha)$ によって定義される関手
+$c'' : \mathcal{S} \to u_{pp}\mathcal{S}$ を導入する。
+$c' : \mathcal{S} \to u_p\mathcal{S}$ を、$c''$ と標準的な関手
+$u_{pp}\mathcal{S} \to u_p\mathcal{S}$ との合成とする。
+$c : \mathcal{S} \to f^{-1}\mathcal{S}$ を、$c'$ と標準的な関手
+$u_p\mathcal{S} \to f^{-1}\mathcal{S}$ との合成とする。
+すると $can : \mathcal{S} \to f_*f^{-1}\mathcal{S}$ は、$x/U$ に
+対 $(U, c(x))$ を対応させ、$\alpha/a$ に射
+$(a, c(\alpha))$ を対応させる関手である。
+
+\medskip\noindent
+% P01-E0231
+全忠実性。これを示すため Lemma \ref{stacks-lemma-characterize-ff} を用いる。
+$U \in \Ob(\mathcal{C})$ とする。
+$x, y \in \mathcal{S}_U$ とする。
+まず $u$ は全忠実なので、$f_*$ の定義から直接
+$$
+\Mor_{(f_*f^{-1}\mathcal{S})_U}(can(x), can(y))
+=
+\Mor_{(f^{-1}\mathcal{S})_{u(U)}}(c(x), c(y))
+$$
+を得る。
+% P01-E0232
+任意の $U'/U$ に引き戻した後も同様のことが成り立つ。
+$f^{-1}\mathcal{S}$ は $u_p\mathcal{S}$ のスタック化であり、
+$u$ は連続かつ余連続なので、前層
+$$
+U'/U \longmapsto
+\Mor_{(f^{-1}\mathcal{S})_{u(U')}}(c(x|_{U'}), c(y|_{U'}))
+$$
+は前層
+$$
+U'/U \longmapsto
+\Mor_{(u_p\mathcal{S})_{u(U')}}(c'(x|_{U'}), c'(y|_{U'}))
+$$
+の層化である。従って全忠実性の証明を完了するには、任意の $U$ および
+$x, y$ に対して写像
+% P01-E0233
+$$
+\Mor_{\mathcal{S}_U}(x, y)
+\longrightarrow
+\Mor_{(u_p\mathcal{S})_U}(c'(x), c'(y))
+$$
+が全単射であることを示せば十分である。
+$u(U)$ 上の $u_p\mathcal{S}$ の射 $f : x \to y$ は、図式
+$$
+\xymatrix{
+(U', \phi : u(U) \to u(U'), x')
+\ar[d]_{(c, \text{id}_{u(U)}, \gamma)}
+\ar[r]_{(a, b, \alpha)} &
+(U, \text{id} : u(U) \to u(U), y)
+\\
+(U, \text{id} : u(U) \to u(U), x)
+}
+$$
+の同値類によって与えられる。ここで $\gamma$ は強カルテシアンであり、
+$b = \text{id}_{u(U)}$ である。しかし $u$ は全忠実なので、ある射
+$c' : U \to U'$ に対し $\phi = u(c')$ と書ける。このとき
+$a \circ c' = \text{id}_U$ および
+% P01-E0234
+$c \circ c' = \text{id}_{U'}$ であることが分かる。
+$\gamma$ は強カルテシアンなので、$c'$ を持ち上げ、
+$\gamma \circ \gamma' = \text{id}_x$ を満たす射
+$\gamma' : x \to x'$ を見いだせる。
+$u_p\mathcal{S}$ の射を定義する同値類の定義により、
+$u_{pp}\mathcal{S}$ の射
+$$
+\xymatrix{
+(U, \text{id} : u(U) \to u(U), x)
+\ar[rr]_{(\text{id}, \text{id}, \alpha \circ \gamma')} & &
+(U, \text{id} : u(U) \to u(U), y)
+}
+$$
+は $u_p\mathcal{S}$ における射 $f$ を誘導する。
+これで写像が全射であることが示された。単射であることの証明は省略する。
+
+\medskip\noindent
+最後に、$f_*f^{-1}\mathcal{S}$ の任意の対象が局所的に
+$\mathcal{S}$ の対象から来ることを示さなければならない。
+これは構成から明らかである（詳細は省略する）。
+\end{proof}
+
+\section{スタックと局所化}
+\label{stacks-section-localize}
+
+\noindent
+$\mathcal{C}$ をサイトとする。
+$U$ を $\mathcal{C}$ の対象とする。
+$\mathcal{C}/U$ 上のスタックを、$U$ への射を備えた
+$\mathcal{C}$ 上のスタックとして理解したい。
+次の補題は、前層 $h_U$ が層であるとこれを行いやすい理由を与える。
+
+\begin{lemma}
+\label{stacks-lemma-when-localization-stack}
+$\mathcal{C}$ をサイトとする。$U \in \Ob(\mathcal{C})$ とする。
+$j_U : \mathcal{C}/U \to \mathcal{C}$ が $\mathcal{C}$ 上の
+スタックであるための必要十分条件は、$h_U$ が層であることである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-lemma-stack-in-setoids-characterize} と Categories, Example
+\ref{categories-example-fibred-category-from-functor-of-points} を組み合わせる。
+\end{proof}
+
+\noindent
+$\mathcal{C}$ をサイトとし、$U$ を $\mathcal{C}$ の対象で、付随する
+表現可能前層が層となるものと仮定する。
+% P01-E1266
+局所化関手を $j : \mathcal{C}/U \to \mathcal{C}$ と表す。
+
+\medskip\noindent
+{\bf 構成 A.} $p : \mathcal{S} \to \mathcal{C}/U$ を、サイト
+$\mathcal{C}/U$ 上のスタックとする。スタック
+$j_!p : j_!\mathcal{S} \to \mathcal{C}$ を次のように定義する。
+\begin{enumerate}
+\item 圏として $j_!\mathcal{S} = \mathcal{S}$ である。
+\item 関手 $j_!p : j_!\mathcal{S} \to \mathcal{C}$ は単に合成
+$j \circ p$ である。
+\end{enumerate}
+これがスタックであることの確認は省略する
+（ヒント：$h_U$ が層であることを用いて $U$ への射を貼り合わせよ）。
+標準的な関手
+$$
+j_!\mathcal{S} \longrightarrow \mathcal{C}/U
+$$
+が存在する。すなわち関手 $p$ であり、これは $\mathcal{C}$ 上の
+スタックの $1$-射である。
+
+\medskip\noindent
+{\bf 構成 B.}
+$q : \mathcal{T} \to \mathcal{C}$ を $\mathcal{C}$ 上のスタックで、
+$\mathcal{C}$ 上のスタックの射
+$p : \mathcal{T} \to \mathcal{C}/U$ を備えたものとする。
+このとき $p : \mathcal{T} \to \mathcal{C}/U$ は自動的に
+$\mathcal{C}/U$ 上のスタックとなる。
+
+\begin{lemma}
+\label{stacks-lemma-localize-stacks}
+$\mathcal{C}$ をサイトとし、$U$ を $\mathcal{C}$ の対象で、付随する
+表現可能前層が層となるものと仮定する。上の構成 A と B は、$2$-圏の
+互いに逆な（！）関手
+$$
+\left\{
+\begin{matrix}
+\mathcal{C}/U\text{ 上のスタック}\\
+\text{のなす }2\text{-圏}
+\end{matrix}
+\right\}
+\leftrightarrow
+\left\{
+\begin{matrix}
+\mathcal{C}\text{ 上のスタック }\mathcal{T}\text{ と}\\
+\mathcal{C}\text{ 上のスタックの射 }p : \mathcal{T} \to \mathcal{C}/U\\
+\text{からなる組 }(\mathcal{T}, p)\text{ のなす }2\text{-圏}
+\end{matrix}
+\right\}
+$$
+を定める。
+\end{lemma}
+
+\begin{proof}
+これは明らかである。
+\end{proof}

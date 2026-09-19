@@ -1,0 +1,1322 @@
+% Generated mechanically from frozen input inputs/p10/ja/groupoids-quotients.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{82}
+\chapter{群亜群の商}
+
+
+
+\phantomsection
+\label{groupoids-quotients-section-phantom}
+
+
+\section{序論}
+\label{groupoids-quotients-section-introduction}
+
+\noindent
+本章では、群亜群と、その商が存在する限りにおける商についての一般論を扱う。
+この主題には多くの文献がある。例えば
+\cite{GIT}, \cite{seshadri_quotients}, \cite{KollarQuotients},
+\cite{K-M}, \cite{KollarFinite} などを参照されたい。
+
+
+
+
+
+\section{規約と記法}
+\label{groupoids-quotients-section-conventions-notation}
+
+\noindent
+本章では、『代数空間における群亜群』の Sections
+\ref{spaces-groupoids-section-conventions} および
+\ref{spaces-groupoids-section-notation} で導入した規約と記法を用いる。
+
+
+\section{不変射}
+\label{groupoids-quotients-section-invariant}
+
+\begin{definition}
+\label{groupoids-quotients-definition-invariant}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j = (t, s) : R \to U \times_B U$ を $B$ 上の代数空間の前関係とする。
+$B$ 上の代数空間の射 $\phi : U \to X$ が {\it $R$-不変} であるとは、
+図式
+$$
+\xymatrix{
+R \ar[r]_s \ar[d]_t & U \ar[d]^\phi \\
+U \ar[r]^\phi & X
+}
+$$
+が可換であることをいう。『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-groupoid-from-action} のように、
+$j : R \to U \times_B U$ が $B$ 上の群代数空間 $G$ の $U$ への作用から
+生じるとき、$\phi$ は {\it $G$-不変} であるという。
+\end{definition}
+
+\noindent
+言い換えると、射 $U \to X$ が $R$-不変であるとは、それが $s$ と $t$ を
+等化することをいう。これは付随する商層を用いて次のように言い換えられる。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-invariant}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j = (t, s) : R \to U \times_B U$ を $B$ 上の代数空間の前関係とする。
+代数空間の射 $\phi : U \to X$ が $R$-不変であるための必要十分条件は、
+それが
+$U \to U/R \to X$
+と分解することである。
+\end{lemma}
+
+\begin{proof}
+これは『代数空間における群亜群』節
+\ref{spaces-groupoids-section-quotient-sheaves} における商層の定義から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-base-change-on-invariant}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j = (t, s) : R \to U \times_B U$ を $B$ 上の代数空間の前関係とする。
+$U \to X$ を $B$ 上の代数空間の $R$-不変射とし、$X' \to X$ を
+代数空間の任意の射とする。
+\begin{enumerate}
+\item $U' = X' \times_X U$, $R' = X' \times_X R$ とおくと、前関係
+$j' : R' \to U' \times_B U'$ を得る。
+\item $j$ が関係ならば、$j'$ も関係である。
+\item $j$ が前同値関係ならば、$j'$ も前同値関係である。
+\item $j$ が同値関係ならば、$j'$ も同値関係である。
+\item $j$ が $B$ 上の代数空間における群亜群
+$(U, R, s, t, c)$ から生じるならば、
+\begin{enumerate}
+\item $(U, R, s, t, c)$ は $X$ 上の代数空間における群亜群であり、
+\item $j'$ はこの群亜群の $X'$ への基底変換
+$(U', R', s', t', c')$ から生じる。『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-base-change-groupoid} を参照されたい。
+\end{enumerate}
+\item 『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-groupoid-from-action} のように、$j$ が群代数空間
+$G/B$ の $U$ への作用から生じるならば、$j'$ は $G$ の $U'$ への誘導作用から
+生じる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：関手的な見方と次の図を組み合わせよ。
+$$
+\xymatrix{
+R' = X' \times_X R \ar[dd] \ar[rr] \ar[rd] & &
+X' \times_X U = U' \ar'[d][dd] \ar[rd] \\
+& R \ar[dd] \ar[rr] & & U \ar[dd] \\
+U' = X' \times_X U \ar'[r][rr] \ar[rd] & & X' \ar[rd] \\
+& U \ar[rr] & & X
+}
+$$
+\end{proof}
+
+\begin{definition}
+\label{groupoids-quotients-definition-base-change}
+補題 \ref{groupoids-quotients-lemma-base-change-on-invariant} の状況において、
+$j' : R' \to U' \times_B U'$ を前関係 $j$ の $X'$ への {\it 基底変換} と呼ぶ。
+$X' \to X$ が代数空間の平坦射であるとき、これは {\it 平坦基底変換} であるという。
+\end{definition}
+
+\noindent
+この種の基底変換は、商層および商スタックを取る操作とよく両立する。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-base-change-quotient-sheaf}
+補題 \ref{groupoids-quotients-lemma-base-change-on-invariant} の状況において、層の同型
+$$
+U'/R' = X' \times_X U/R
+$$
+が存在する。商層の構成については、『代数空間における群亜群』節
+\ref{spaces-groupoids-section-quotient-sheaves} を参照されたい。
+\end{lemma}
+
+\begin{proof}
+$U \to X$ は $R$-不変なので、写像 $U \to X$ が商層 $U/R$ を経由することは
+明らかである。定義により
+$$
+\xymatrix{
+R \ar@<1ex>[r] \ar@<-1ex>[r] &
+U \ar[r] &
+U/R
+}
+$$
+は $(\Sch/S)_{fppf}$ 上の集合の層の圏 $\Sh$ における余等化子図式である。
+実際、これはコンマ圏 $\Sh/X$ における余等化子図式である。
+基底変換関手
+$X' \times_X - : \Sh/X \to \Sh/X'$ は完全なので（任意のトポスで成り立つ）、
+結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-base-change-quotient-stack}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$(U, R, s, t, c)$ を $B$ 上の代数空間における群亜群とする。
+$U \to X$ を $B$ 上の代数空間の $R$-不変射とする。
+$g : X' \to X$ を $B$ 上の代数空間の射とし、
+$(U', R', s', t', c')$ を補題 \ref{groupoids-quotients-lemma-base-change-on-invariant} の基底変換とする。
+このとき
+$$
+\xymatrix{
+[U'/R'] \ar[r] \ar[d] & [U/R] \ar[d] \\
+\mathcal{S}_{X'} \ar[r] & \mathcal{S}_X
+}
+$$
+は $(\Sch/S)_{fppf}$ 上の群亜群に値を取るスタックの $2$-ファイバー積である。
+商スタックとこの図式の射の構成については、『代数空間における群亜群』節
+\ref{spaces-groupoids-section-stacks} を参照されたい。
+\end{lemma}
+
+\begin{proof}
+『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-quotient-stack-objects} で与えた商スタックの明示的記述を
+用いて証明する。ただし、読者には自分自身の証明を見つけることを強く勧める。
+まず、$(U, R, s, t, c)$ を $X$ 上の代数空間における群亜群とみなせるので、
+写像 $f : [U/R] \to \mathcal{S}_X$ を得る。『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-quotient-stack-arrows} を参照されたい。
+同様に $f' : [U'/R'] \to X'$ を得る。
+
+\medskip\noindent
+$S$ 上のスキーム $T$ 上の $2$-ファイバー積
+$\mathcal{S}_{X'} \times_{\mathcal{S}_X} [U/R]$ の対象は、射
+$x' : T \to X'$ と $T$ 上の $[U/R]$ の対象 $y$ であって、合成
+% P10-E0133
+$g \circ x'$ が $f(y)$ に等しいものにほかならない。
+これは、$T$ 上の $\mathcal{S}_X$ の対象が射 $T \to X$ であることから意味をもつ。
+『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-quotient-stack-objects} により、$y$ は fppf 被覆
+$\{T_i \to T\}$ に関する $[U/R]$-下降データ $(u_i, r_{ij})$ で与えられると
+仮定してよい。等式 $g \circ x' = f(y)$ は、図式
+$$
+\vcenter{
+\xymatrix{
+T_i \ar[rr]_{u_i} \ar[d] & & U \ar[d] \\
+T \ar[r]^{x'} & X' \ar[r]^g & X
+}
+}
+\quad\text{および}\quad
+\vcenter{
+\xymatrix{
+T_i \times_T T_j \ar[rr]_{r_{ij}} \ar[d] & & R \ar[d] \\
+T \ar[r]^{x'} & X' \ar[r]^g & X
+}
+}
+$$
+が可換であることを意味する。
+
+\medskip\noindent
+一方、『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-quotient-stack-objects} により、$S$ 上のスキーム $T$ 上の
+$[U'/R']$ の対象 $y'$ は、fppf 被覆 $\{T_i \to T\}$ に関する
+$[U'/R']$-下降データ $(u'_i, r'_{ij})$ で与えられる。
+$f'(y') = x' : T \to X'$ とおくと、図式
+$$
+\vcenter{
+\xymatrix{
+T_i \ar[r]_{u'_i} \ar[d] & U' \ar[d] \\
+T \ar[r]^{x'} & X'
+}
+}
+\quad\text{および}\quad
+\vcenter{
+% P10-E0135
+\xymatrix{
+T_i \times_T T_j \ar[r]_{r'_{ij}} \ar[d] & U' \ar[d] \\
+T \ar[r]^{x'} & X'
+}
+}
+$$
+が可換であることが分かる。
+
+\medskip\noindent
+以上の記法のもとで、関手
+$$
+[U'/R'] \longrightarrow \mathcal{S}_{X'} \times_{\mathcal{S}_X} [U/R]
+$$
+を次のように定義する。上の $y' = (u'_i, r'_{ij})$ を対象
+$(x', (u_i, r_{ij}))$ に送り、ここで $x' = f'(y')$ とし、$u_i$ は合成
+$T_i \to U' \to U$、$r_{ij}$ は合成 $T_i \times_T T_j \to R' \to R$ とする。
+逆に、右辺の対象
+% P10-E0134
+$(x', (u_i, r_{ij})$
+が与えられたとき、これを左辺の対象 $((x', u_i), (x', r_{ij}))$ に送る。
+射に対して何を行うかについての議論は省略する（まったく同様にできる）。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{圏論的商}
+\label{groupoids-quotients-section-categorical}
+
+\noindent
+これは考え得る最も基本的な種類の商である。
+
+\begin{definition}
+\label{groupoids-quotients-definition-categorical}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+% P10-E0137
+$j = (t, s) : R \to U \times_B U$ を $B$ 上の代数空間の前関係とする。
+\begin{enumerate}
+\item $B$ 上の代数空間の射 $\phi : U \to X$ が {\it 圏論的商} であるとは、
+それが $R$-不変であり、かつ $B$ 上の代数空間の任意の $R$-不変射
+$\psi : U \to Y$ に対し、次を満たす一意な射 $\chi : X \to Y$ が存在することをいう：
+% P10-E0132
+$\psi = \phi \circ \chi$。
+\item $\mathcal{C}$ を $B$ 上の代数空間の圏の充満部分圏とする。
+$U$, $R$ が $\mathcal{C}$ の対象であると仮定する。この状況で、$B$ 上の
+代数空間の射 $\phi : U \to X$ が {\it $\mathcal{C}$ における圏論的商}
+であるとは、$X \in \Ob(\mathcal{C})$ であり、$\phi$ が $R$-不変であり、
+かつ $Y \in \Ob(\mathcal{C})$ をもつ任意の $R$-不変射
+$\psi : U \to Y$ に対し、次を満たす一意な射 $\chi : X \to Y$ が存在することをいう：
+% P10-E0132
+$\psi = \phi \circ \chi$。
+\item $B = S$ であり、$\mathcal{C}$ が $S$ 上のスキームの圏であるとき、
+$U \to X$ を {\it スキームの圏における圏論的商}、または単に
+{\it スキームにおける圏論的商} と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+しばしば、ある分離公理によって $B$ 上の代数空間の圏 $\mathcal{C}$ を指定する。
+標準的な例については Example \ref{groupoids-quotients-example-categories} を参照されたい。
+$\phi : U \to X$ が圏論的商であるための必要十分条件は、$U \to X$ がその圏における
+射 $t, s : R \to U$ の余等化子であることである。したがって直ちに次の補題を得る。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-categorical-unique}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の代数空間の前関係とする。
+$B$ 上の代数空間の圏における圏論的商が存在すれば、それは一意な同型を除いて
+一意である。$\textit{Spaces}/B$ の充満部分圏における圏論的商についても同様である。
+\end{lemma}
+
+\begin{proof}
+『圏』節 \ref{categories-section-coequalizers} を参照されたい。
+\end{proof}
+
+\begin{example}
+\label{groupoids-quotients-example-categories}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+% P10-E0136
+定義 \ref{groupoids-quotients-definition-categorical} を適用するときに現れる標準的な圏
+$\mathcal{C}$ の例を挙げる：
+\begin{enumerate}
+\item $\mathcal{C}$ は $B$ 上のすべての代数空間の圏、
+\item $B$ は分離的であり、$\mathcal{C}$ は $B$ 上のすべての分離的な代数空間の圏、
+\item $B$ は準分離的であり、$\mathcal{C}$ は $B$ 上のすべての準分離的な代数空間の圏、
+\item $B$ は局所分離的であり、$\mathcal{C}$ は $B$ 上のすべての局所分離的な代数空間の圏、
+\item $B$ は decent であり、$\mathcal{C}$ は $B$ 上のすべての decent な代数空間の圏、そして
+\item $S = B$ であり、$\mathcal{C}$ は $S$ 上のスキームの圏。
+\end{enumerate}
+このとき、$\phi : U \to X$ が圏論的商ならば、$U \to X$ をそれぞれ
+(1) {\it 圏論的商}、
+(2) {\it 分離的な代数空間における圏論的商}、
+(3) {\it 準分離的な代数空間における圏論的商}、
+(4) {\it 局所分離的な代数空間における圏論的商}、
+(5) {\it decent な代数空間における圏論的商}、
+(6) {\it スキームにおける圏論的商} と呼ぶ。
+\end{example}
+
+\begin{definition}
+\label{groupoids-quotients-definition-universal-categorical}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$\mathcal{C}$ を、ファイバー積に関して閉じている $B$ 上の代数空間の圏の
+充満部分圏とする。
+% P10-E0137
+$j = (t, s) : R \to U \times_B U$ を $\mathcal{C}$ における前関係とし、
+$U \to X$ を $X \in \Ob(\mathcal{C})$ である $R$-不変射とする。
+\begin{enumerate}
+\item $\mathcal{C}$ における任意の射 $X' \to X$ に対し、射
+$U' = X' \times_X U \to X'$ が $j$ の基底変換
+% P10-E0138
+$j' : R' \to U'$ の $\mathcal{C}$ における圏論的商であるとき、
+$U \to X$ を $\mathcal{C}$ における {\it 普遍圏論的商} と呼ぶ。
+\item $\mathcal{C}$ における任意の平坦射 $X' \to X$ に対し、射
+$U' = X' \times_X U \to X'$ が $j$ の基底変換
+% P10-E0138
+$j' : R' \to U'$ の $\mathcal{C}$ における圏論的商であるとき、
+$U \to X$ を $\mathcal{C}$ における {\it 一様圏論的商} と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-categorical-reduced}
+定義 \ref{groupoids-quotients-definition-categorical} の状況にあるとする。
+$\phi : U \to X$ が圏論的商であり、$U$ が被約ならば、$X$ は被約である。
+Example \ref{groupoids-quotients-example-categories} に列挙した空間の圏 $\mathcal{C}$ における
+圏論的商についても同様である。
+\end{lemma}
+
+\begin{proof}
+$X_{red}$ を代数空間 $X$ の被約化とする。$U$ は被約なので、射
+$\phi : U \to X$ は $i : X_{red} \to X$ を経由する（『代数空間の性質』補題
+\ref{spaces-properties-lemma-map-into-reduction}）。この射を
+$\phi_{red} : U \to X_{red}$ と記す。$\phi \circ s = \phi \circ t$ であるから、
+$\phi_{red} \circ s = \phi_{red} \circ t$ でもある
+（$i : X_{red} \to X$ は単射である）。したがって $\phi$ の普遍性により、
+次を満たす射 $\chi : X \to X_{red}$ が存在する：
+% P10-E0132
+$\phi_{red} = \phi \circ \chi$。一意性により
+$i \circ \chi = \text{id}_X$ および $\chi \circ i = \text{id}_{X_{red}}$ である。
+ゆえに $i$ は同型であり、$X$ は被約である。
+
+\medskip\noindent
+この議論が圏 $\mathcal{C}$ において機能することを示すには、
+$\mathcal{C}$ の対象の被約化が $\mathcal{C}$ の対象であることを示せばよい。
+これが各標準例について成り立つことの確認は省略する。
+\end{proof}
+
+\section{軌道空間としての商}
+\label{groupoids-quotients-section-orbits}
+
+\noindent
+$j = (t, s) : R \to U \times_B U$ を前関係とする。
+$j$ が前同値関係ならば、大まかにいって $U$ 上の $R$ の「軌道」は
+$U$ の部分集合 $t(s^{-1}(\{u\}))$ である。しかし $j$ が単なる前関係ならば、
+$R$ によって生成される同値関係を取る必要がある。
+
+\begin{definition}
+\label{groupoids-quotients-definition-orbit}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。
+$u \in |U|$ の {\it 軌道}、より正確には $u$ の {\it $R$-軌道} を
+$$
+O_u =
+\left\{
+u' \in |U|\ :
+\begin{matrix}
+\exists n \geq 1, \ \exists u_0, \ldots, u_n \in |U|\text{ であって } \\
+u_0 = u \text{ かつ } u_n = u'
+\text{、各 }i \in \{0, \ldots, n - 1\}\text{ につき：} \\
+u_i = u_{i + 1}\text{または}
+\exists r \in |R|, \ s(r) = u_i, t(r) = u_{i + 1}
+\text{または} \\
+\exists r \in |R|, \ t(r) = u_i, s(r) = u_{i + 1}
+\end{matrix}
+\right\}
+$$
+と定める。
+\end{definition}
+
+\noindent
+これらがある同値関係の同値類であること、すなわち $u' \in O_u$ であるための
+必要十分条件が $u \in O_{u'}$ であることは明らかである。次の補題は
+『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-pre-equivalence-equivalence-relation-points}
+の言い換えである。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-pre-equivalence-equivalence-relation-points}
+節 \ref{groupoids-quotients-section-conventions-notation} のように $B \to S$ とする。
+$j : R \to U \times_B U$ を $B$ 上の代数空間の前同値関係とする。このとき
+$$
+O_u =
+\{u' \in |U| \text{ であって } \exists r \in |R|, \ s(r) = u, \ t(r) = u'\}.
+$$
+\end{lemma}
+
+\begin{proof}
+先に挙げた『代数空間における群亜群』補題
+\ref{spaces-groupoids-lemma-pre-equivalence-equivalence-relation-points}
+により、補題で定義した軌道 $O_u$ は $|U|$ の互いに素な和への分解を与える。
+したがって、それらは定義 \ref{groupoids-quotients-definition-orbit} で定めた軌道に等しい。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-invariant-map-constant-on-orbit}
+定義 \ref{groupoids-quotients-definition-orbit} の状況にあるとする。
+$\phi : U \to X$ を $B$ 上の代数空間の $R$-不変射とする。このとき
+$|\phi| : |U| \to |X|$ は各軌道上で定値である。
+\end{lemma}
+
+\begin{proof}
+これを見るには、$s(r) = u$ かつ $t(r) = u'$ となる $r \in |R|$ が存在する
+任意の $u, u' \in |U|$ に対して $\phi(u) = \phi(u')$ であることを示せばよい。
+$\phi$ は $s$ と $t$ を等化するので、これは明らかである。
+\end{proof}
+
+\noindent
+商写像の性質を特徴づける道具として軌道 $O_u \subset |U|$ を考えることには、
+いくつかの問題がある。その一つは次の通りである。
+$\Spec(k) \to B$ を $B$ の幾何点とし、標準写像
+$$
+U(k) \longrightarrow |U|.
+$$
+を考える。このとき通常、$j(R(k)) \subset U(k) \times U(k)$ によって生成される
+同値関係の同値類は、軌道 $O_u \subset |U|$ の逆像ではない。
+単純な例として $S = B = \Spec(\mathbf{Z})$、
+$U = R = \Spec(k)$、$s = t = \text{id}_k$ とすればよい。このとき
+$|U| = |R|$ は一点のみからなるが、$U(k)/R(k)$ は巨大である。
+より興味深い例として $S = B = \Spec(\mathbf{Q})$ とし、
+% P10-E0139
+数体 $K \subset L$ を選び、$U = \Spec(L)$、
+$R = \Spec(L \otimes_K L)$ とおき、$s, t : R \to U$ を明らかな写像とする。
+この場合も $|U|$ は一点のみをもつが、商
+$$
+U(k)/R(k) = \Hom(K, k)
+$$
+は複数の元からなる。両方の例から次のことが分かる。
+$U \to X$ が $R$-不変写像であり、それが「軌道を分離する」ことを望むならば、
+% P10-E0140
+誘導写像 $U(k) \to X(k)$ を考え、それらが軌道を分離することを要求することで、
+はるかに強く興味深い概念を得る。
+
+\medskip\noindent
+これにも問題がある。すなわち、$S = B = \Spec(\mathbf{R})$、
+$U = \Spec(\mathbf{C})$、ある体拡大 $\sigma : \mathbf{C} \to K$ に対して
+$R = \Spec(\mathbf{C}) \amalg \Spec(K)$ とする。
+写像 $s, t$ は成分 $\Spec(\mathbf{C})$ 上では恒等写像、第二成分上ではそれぞれ
+$\sigma, \sigma \circ \tau$ で与えられるものとする。ここで $\tau$ は複素共役である。
+$K$ が $\mathbf{C}$ の非自明な拡大ならば、二点 $1, \tau \in U(\mathbf{C})$ は
+$j(R(\mathbf{C}))$ のもとで同値ではない。しかし、十分大きな濃度をもつ拡大
+$\mathbf{C} \subset \Omega$（例えば $K$ の濃度より大きいもの）を選ぶと、
+$U(\Omega)$ における $1, \tau \in U(\mathbf{C})$ の像は同値になる。
+これは、$s, t : R \to U$ が局所有限型でないか、体 $k$ の濃度が十分大きくないかの
+いずれかによって起こることが、直観的には明らかと思われる。
+
+\medskip\noindent
+このことを念頭に、次の定義を置く。
+
+\begin{definition}
+\label{groupoids-quotients-definition-geometric-orbits}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。
+$\Spec(k) \to B$ を $B$ の幾何点とする。
+\begin{enumerate}
+\item $\overline{u}, \overline{u}' \in U(k)$ が {\it 弱 $R$-同値} であるとは、
+関係 $j(R(k)) \subset U(k) \times U(k)$ によって生成される同値関係について、
+同じ同値類に属することをいう。
+\item $\overline{u}, \overline{u}' \in U(k)$ が {\it $R$-同値} であるとは、
+ある上体 $k \subset \Omega$ における $U(\Omega)$ での像が弱 $R$-同値であることをいう。
+\item $\overline{u} \in U(k)$ の {\it 弱軌道}、より正確には
+% P10-E0141
+{\it 弱 $R$-軌道} は、$\overline{u}$ と弱 $R$-同値な $U(k)$ のすべての元からなる集合である。
+\item $\overline{u} \in U(k)$ の {\it 軌道}、より正確には
+% P10-E0141
+{\it $R$-軌道} は、$\overline{u}$ と $R$-同値な $U(k)$ のすべての元からなる集合である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+良い場合には軌道と弱軌道が一致することが分かる。補題
+\ref{groupoids-quotients-lemma-geometric-orbits} を参照されたい。次の補題は、前同値関係という
+特別な場合に両者の違いを示す。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-weak-orbit-pre-equivalence}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$\Spec(k) \to B$ を $B$ の幾何点とする。
+$j : R \to U \times_B U$ を $B$ 上の前同値関係とする。
+この場合、$\overline{u} \in U(k)$ の弱軌道は単に
+$$
+\{
+\overline{u}' \in U(k)
+\text{ であって }
+\exists \overline{r} \in R(k),
+\ s(\overline{r}) = \overline{u},
+\ t(\overline{r}) = \overline{u}'
+\}
+$$
+であり、$\overline{u} \in U(k)$ の軌道は
+$$
+\{
+\overline{u}' \in U(k) :
+\exists\text{ 体拡大 }K/k, \ \exists\ r \in R(K),
+\ s(r) = \overline{u}, \ t(r) = \overline{u}'\}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+前同値関係の定義により、像
+$j(R(k)) \subset U(k) \times U(k)$ が同値関係だからである。
+\end{proof}
+
+\noindent
+任意の前関係を前同値関係に変える手順を記述しよう。次の射を用いる：
+\begin{equation}
+\label{groupoids-quotients-equation-list}
+\begin{matrix}
+j_{diag} &
+: &
+U &
+\longrightarrow &
+U \times_B U, &
+u &
+\longmapsto &
+(u, u) \\
+j_{flip} &
+: &
+R &
+\longrightarrow &
+U \times_B U, &
+r &
+\longmapsto &
+(s(r), t(r)) \\
+j_{comp} &
+: &
+R \times_{s, U, t} R &
+\longrightarrow &
+U \times_B U, &
+(r, r') &
+\longmapsto &
+(t(r), s(r'))
+\end{matrix}
+\end{equation}
+式 (\ref{groupoids-quotients-equation-list}) の記法を用い、
+$j_1 = (t_1, s_1) : R_1 \to U \times_B U$ を射
+$$
+j \amalg j_{diag} \amalg j_{flip} :
+R \amalg U \amalg R
+\longrightarrow
+U \times_B U
+$$
+として定義する。$n > 1$ に対しては
+$$
+j_n = (t_n, s_n) :
+R_n = R_1 \times_{s_1, U, t_{n - 1}} R_{n - 1} \longrightarrow U \times_B U
+$$
+とおく。ここで $t_n$ は $R_1$ への射影を前合成した $t_1$ から生じ、
+$s_n$ は $R_{n - 1}$ への射影を前合成した $s_{n - 1}$ から生じる。最後に
+$$
+j_\infty = (t_\infty, s_\infty) :
+R_\infty = \coprod\nolimits_{n \geq 1} R_n
+\longrightarrow
+U \times_B U.
+$$
+と記す。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-make-pre-equivalence}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。このとき
+$j_\infty : R_\infty \to U \times_B U$ は $B$ 上の前同値関係である。さらに
+\begin{enumerate}
+\item $\phi : U \to X$ が $R$-不変であるための必要十分条件は、それが
+$R_\infty$-不変であることである。
+\item 商層の標準写像 $U/R \to U/R_\infty$ は同型である
+（『代数空間における群亜群』節
+\ref{spaces-groupoids-section-quotient-sheaves} を参照）。
+\item 弱 $R$-軌道は弱 $R_\infty$-軌道と一致する。
+\item $R$-軌道は $R_\infty$-軌道と一致する。
+\item $s, t$ が局所有限型ならば、$s_\infty$, $t_\infty$ も局所有限型である。
+% P10-E0142
+\item 必要に応じてここにさらに追加する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。(5) のヒント：合成と基底変換のもとで安定であり、始域上 Zariski 局所的な
+$s, t$ の任意の性質は、$s_\infty, t_\infty$ にも受け継がれる。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-geometric-orbits}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。
+$\Spec(k) \to B$ を $B$ の幾何点とする。
+\begin{enumerate}
+\item $s, t : R \to U$ が局所有限型ならば、$U(k)$ 上の弱 $R$-同値は
+$R$-同値と一致し、$U(k)$ 上の弱 $R$-軌道は $R$-軌道と一致する。
+\item $k$ の濃度が十分大きければ、$U(k)$ 上の弱 $R$-同値は $R$-同値と一致し、
+$U(k)$ 上の弱 $R$-軌道は $R$-軌道と一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず (1) を証明する。$s, t$ が局所有限型であると仮定する。補題
+\ref{groupoids-quotients-lemma-make-pre-equivalence} により、$R$ は前同値関係であると仮定してよい。
+$k$ を $B$ 上の代数閉体とする。
+$\overline{u}, \overline{u}' \in U(k)$ が $R$-同値であると仮定する。このとき、
+ある拡大体 $\Omega/k$ に対して、
+$(\overline{u}, \overline{u}') \in (U \times_B U)(\Omega)$ に写る点
+$\overline{r} \in R(\Omega)$ が存在する。補題
+\ref{groupoids-quotients-lemma-weak-orbit-pre-equivalence} を参照されたい。したがって
+$$
+Z = R \times_{j, U \times_B U, (\overline{u}, \overline{u}')} \Spec(k)
+$$
+は空でない。$s$ は局所有限型なので、$j$ も局所有限型である
+（『代数空間の射』補題
+\ref{spaces-morphisms-lemma-permanence-finite-type} を参照）。
+これは、$Z$ が代数閉体 $k$ 上の空でない局所有限型な代数空間であることを意味する
+（『代数空間の射』補題
+\ref{spaces-morphisms-lemma-base-change-finite-type} を用いる）。
+したがって $Z$ は $k$-値点をもつ。『代数空間の射』補題
+\ref{spaces-morphisms-lemma-locally-finite-type-surjective-geometric-points}
+を参照されたい。ゆえに
+$j(\overline{r}) = (\overline{u}, \overline{u}')$ を満たす
+$\overline{r} \in R(k)$ が存在し、
+% P10-E0143
+$\overline{u}, \overline{u}'$ は $R$-同値であると結論し、所望の主張を得る。
+
+\medskip\noindent
+(2) の証明も同じであるが、『代数空間の射』補題
+\ref{spaces-morphisms-lemma-large-enough}
+を『代数空間の射』補題
+\ref{spaces-morphisms-lemma-locally-finite-type-surjective-geometric-points}
+の代わりに用いる。
+これは、次の箇所で導入された $\lambda(R)$ に対して $|k| > \lambda(R)$ ならば
+主張が成り立つことを示す：『代数空間の射』補題
+\ref{spaces-morphisms-lemma-locally-finite-type-surjective-geometric-points}
+の直前。
+\end{proof}
+
+\noindent
+次の定義では、「$k$ が $B$ 上の体である」とは、$\Spec(k)$ に射
+$\Spec(k) \to B$ が備わっていることを意味するものとする。
+
+\begin{definition}
+\label{groupoids-quotients-definition-set-theoretically-invariant}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。
+\begin{enumerate}
+\item $B$ 上の任意の代数閉体 $k$ に対して写像 $U(k) \to X(k)$ が二つの写像
+$s, t : R(k) \to U(k)$ を等化するとき、かつそのときに限り、
+$\phi : U \to X$ は {\it 集合論的に $R$-不変} であるという。
+\item $\phi : U \to X$ が集合論的に $R$-不変であり、$B$ 上の任意の代数閉体
+$k$ に対して $X(k)$ における
+$\phi(\overline{u}) = \phi(\overline{u}')$ が
+$\overline{u}, \overline{u}' \in U(k)$ が同じ軌道に属することを含意するとき、
+このとき、その射は {\it 軌道を分離する}、または {\it $R$-軌道を分離する} という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+Example \ref{groupoids-quotients-example-not-invariant} では、代数空間の圏において集合論的に不変である
+という概念が「弱すぎる」ことを示す。集合論的に不変であること、または軌道を
+分離することの、より幾何学的な言い換えは補題
+\ref{groupoids-quotients-lemma-separates-orbits} にある。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-set-theoretic-invariant}
+定義 \ref{groupoids-quotients-definition-set-theoretically-invariant} の状況にあるとする。
+射 $\phi : U \to X$ が集合論的に $R$-不変であるための必要十分条件は、
+$B$ 上の任意の代数閉体 $k$ に対して写像 $U(k) \to X(k)$ が各軌道上で
+定値であることである。
+\end{lemma}
+
+\begin{proof}
+これは、その条件が $B$ 上のすべての代数閉体について成り立つものとされているからである。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-invariant-set-theoretically-invariant}
+定義 \ref{groupoids-quotients-definition-set-theoretically-invariant} の状況にあるとする。
+不変射は集合論的に不変である。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-set-theoretically-invariant-invariant-when-reduced}
+定義 \ref{groupoids-quotients-definition-set-theoretically-invariant} の状況にあるとする。
+$\phi : U \to X$ を $B$ 上の代数空間の射とする。次を仮定する：
+\begin{enumerate}
+\item $\phi$ は集合論的に $R$-不変である。
+\item $R$ は被約である。
+\item $X$ は $B$ 上局所分離的である。
+\end{enumerate}
+このとき $\phi$ は $R$-不変である。
+\end{lemma}
+
+\begin{proof}
+等化子である代数空間
+$$
+Z = R \times_{(\phi, \phi) \circ j, X \times_B X, \Delta_{X/B}} X
+$$
+を考える。このとき仮定 (3) により $Z \to R$ は没入である。
+仮定 (1) により $|Z| \to |R|$ は全射である。これは $Z \to R$ が全単射な
+閉没入であることを含意し（『スキーム』補題
+\ref{schemes-lemma-immersion-when-closed} を用いる）、仮定 (2) により
+$Z = R$ と結論する。
+\end{proof}
+
+\begin{example}
+\label{groupoids-quotients-example-not-invariant}
+すべての $k$-値点上では一致するが互いに等しくない射の組
+$a, b : Y \to X$ をもつ、被約準分離的な代数空間 $X$, $Y$ が存在する。
+例を得るには $Y = \Spec(k[[x]])$ とし、
+$$
+X = \mathbf{A}^1_k \Big/ \big(\Delta \amalg \{(x, -x) \mid x \not = 0\}\big)
+$$
+を『代数空間』Example \ref{spaces-example-affine-line-involution} の
+代数空間とする。二つの射 $a, b : Y \to X$ は、$Y$ から
+$\mathbf{A}^1_k = \Spec(k[x])$ への二つの写像 $x \mapsto x$ と
+$x \mapsto -x$ から生じる。生成点上では二つの写像は同じである。実際、空間 $X$ の
+開部分 $x \not = 0$ 上で関数 $x$ と $-x$ は等しい。閉点上でも写像は明らかに
+同じである。また $a \not = b$ である。これは、補題
+\ref{groupoids-quotients-lemma-set-theoretically-invariant-invariant-when-reduced} において仮定 (3) を
+$X$ が準分離的であるという仮定に置き換えると、補題が成り立たないことを意味する。
+実際、図式
+$$
+\xymatrix{
+Y \ar[d]_{-1} \ar[r]_1 & Y \ar[d]^a \\
+Y \ar[r]^a & X
+}
+$$
+を考えると、合成 $a \circ (-1) = b$ である。したがって $R = Y$、
+$U = Y$、$s = 1$、$t = -1$、$\phi = a$ とおけば、集合論的には不変だが
+不変ではない射の例を得る。
+\end{example}
+
+\noindent
+上の例は、写像 $Y \to X$ が軌道さえ分離するので示唆的である。これは、
+代数空間の圏には集合論的に不変な射があまりにも多く存在することを示している。
+次に、これを正しく機能させるには体拡大を許す必要があることを忘れずに、
+$R$ が集合論的同値関係であることの意味を定義しよう。
+
+\begin{definition}
+\label{groupoids-quotients-definition-set-theoretic-equivalence}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。
+\begin{enumerate}
+\item $B$ 上のすべての代数閉体 $k$ に対して、$U(k)$ 上の関係
+$\sim_R$ が
+$$
+\overline{u} \sim_R \overline{u}'
+\Leftrightarrow
+\begin{matrix}
+\exists\text{ 体拡大 }K/k, \ \exists\ r \in R(K), \\
+s(r) = \overline{u}, \ t(r) = \overline{u}'
+\end{matrix}
+$$
+によって定義されるとき、それが同値関係であれば、$j$ を
+{\it 集合論的前同値関係} と呼ぶ。
+\item $j$ が普遍単射的であり、かつ集合論的前同値関係であるとき、
+$j$ を {\it 集合論的同値関係} と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これをより幾何学的な言葉で言い換えよう。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-set-theoretic-pre-equivalence-geometric}
+定義 \ref{groupoids-quotients-definition-set-theoretic-equivalence} の状況にあるとする。
+次は同値である：
+\begin{enumerate}
+\item 射 $j$ は集合論的前同値関係である。
+\item 部分集合 $j(|R|) \subset |U \times_B U|$ は、式
+(\ref{groupoids-quotients-equation-list}) の任意の射 $j'$ に対する $|j'|$ の像を含む。
+\item $B$ 上の十分大きな濃度をもつ任意の代数閉体 $k$ に対して、部分集合
+$j(R(k)) \subset U(k) \times U(k)$ は同値関係である。
+\end{enumerate}
+$s, t$ が局所有限型ならば、これらはさらに次と同値である：
+\begin{enumerate}
+\item[(4)] $B$ 上の任意の代数閉体 $k$ に対して、部分集合
+$j(R(k)) \subset U(k) \times U(k)$ は同値関係である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) を仮定する。$k$ を $B$ 上の代数閉体とする。$\sim_R$ が同値関係であることを
+示す。$\overline{u}_i : \Spec(k) \to U$、$i = 1, 2$ を $U$ の $k$-値点とする。
+$(\overline{u}_1, \overline{u}_2)$ が $K$-値点 $r \in R(K)$ の像であると仮定する。
+実線部分が可換な図式
+$$
+\xymatrix{
+\Spec(K') \ar@{..>}[r] \ar@{..>}[d]
+&
+\Spec(k) \ar[d]_{(\overline{u}_2, \overline{u}_1)} &
+\Spec(K) \ar[d] \ar[l] \\
+R \ar[r]^-j &
+U \times_B U &
+R \ar[l]_-{j_{flip}}
+}
+$$
+を考える。$r$ の像も $r \in |R|$ と記す。
+仮定により $|j_{flip}|$ の像は $|j|$ の像に含まれる。言い換えれば、
+$|j|(r') = |j_{flip}|(r)$ を満たす $r' \in |R|$ が存在する。しかし
+$(\overline{u}_2, \overline{u}_1)$ は $|j|(r')$ を定める同値類に属する
+（図式の実線部分の可換性による）。これは、体拡大 $K'/k$ と射
+% P10-E0144
+$r' : \Spec(K) \to R$（これも濫用により $r'$ と記す）が存在して
+$j \circ r' = (\overline{u}_2, \overline{u}_1) \circ i$ を満たすことを意味する。
+ここで $i : \Spec(K') \to \Spec(K)$ は明らかな写像である。
+言い換えれば、図式の点線部分も可換である。これにより $\sim_R$ が $U(k)$ 上の
+対称な関係であることが分かる。同様に、$|j_{diag}|$ の像が $|j|$ の像に含まれる
+ことを用いると、$\sim_R$ が反射的であることが分かる（詳細は省略する）。
+
+\medskip\noindent
+$\sim_R$ が推移的であることを示すため、
+$\overline{u}_i : \Spec(k) \to U$、$i = 1, 2, 3$ と、体拡大 $K_i/k$ および点
+$r_i : \Spec(K_i) \to R$、$i = 1, 2$ が与えられ、
+$j(r_1) = (\overline{u}_1, \overline{u}_2)$ かつ
+% P10-E0145
+$j(r_1) = (\overline{u}_2, \overline{u}_3)$ であると仮定する。このとき、
+可換な体の図式
+$$
+\xymatrix{
+K & K_2 \ar[l] \\
+K_1 \ar[u] & k \ar[l] \ar[u]
+}
+$$
+を選べ、$r_1, r_2 \in R(K)$ とみなせる。実線部分が可換な図式
+$$
+\xymatrix{
+\Spec(K') \ar@{..>}[r] \ar@{..>}[d]
+&
+\Spec(k) \ar[d]_{(\overline{u}_1, \overline{u}_3)} &
+\Spec(K) \ar[d]^{(r_1, r_2)} \ar[l]
+\\
+R \ar[r]^-j &
+U \times_B U &
+R \times_{s, U, t} R \ar[l]_-{j_{comp}}
+}
+$$
+を考える。証明の最初の部分とまったく同じ議論を用いる。ただし今回は
+$|j_{comp}|((r_1, r_2))$ が $|j|$ の像に属することを用いると、図式を可換にする
+体 $K'$ と点線の矢印が存在すると結論できる。これにより $\sim_R$ は推移的であり、
+(2) が (1) を含意することの証明が完了する。
+
+\medskip\noindent
+(1) を仮定し、$k$ を $B$ 上の代数閉体で、その濃度が $\lambda(R)$ より大きい
+ものとする。『代数空間の射』補題
+\ref{spaces-morphisms-lemma-large-enough} を参照されたい。
+$\overline{u}, \overline{u}' \in U(k)$ が
+$\overline{u} \sim_R \overline{u}'$ を満たすと仮定する。仮定により
+$(\overline{u}, \overline{u}') \in |U \times_B U|$ に写る点が $|R|$ に存在する。
+したがって『代数空間の射』補題
+\ref{spaces-morphisms-lemma-large-enough} により、
+$j(\overline{r}) = (\overline{u}, \overline{u}')$ を満たす
+$\overline{r} \in R(k)$ が存在すると結論できる。このようにして (1) は (3) を含意する。
+
+\medskip\noindent
+(3) を仮定する。$\Im(|j_{comp}|) \subset \Im(|j|)$ を示そう。
+任意の点 $c \in |R \times_{s, U, t} R|$ を取る。これは、$B$ 上で十分大きな濃度を
+もつ $k$ による射 $\overline{c} : \Spec(k) \to R \times_{s, U, t} R$ で表せる。
+仮定により、$j_{comp}(\overline{c}) \in U(k) \times U(k) = (U \times_B U)(k)$ は、
+ある $\overline{r} \in R(k)$ の像 $j(\overline{r})$ でもある。したがって所望の通り
+$|U \times_B U|$ において $j_{comp}(c) = j(r)$ である（ここで $r \in |R|$ は
+$\overline{r}$ の同値類）。同じ議論により
+$\Im(|j_{diag}|) \subset \Im(|j|)$ および
+$\Im(|j_{flip}|) \subset \Im(|j|)$ も分かる（詳細は省略する）。
+このようにして (3) は (2) を含意する。ここまでで (1), (2), (3) がすべて
+同値であることを示した。
+
+\medskip\noindent
+(4) が (3) を含意することは明らかである（$s$, $t$ に仮定は不要）。
+補題の証明を終えるため、$s, t$ が局所有限型ならば (1) が (4) を含意することを
+示す。$k$ を $B$ 上の代数閉体とし、$\overline{u}, \overline{u}' \in U(k)$ が
+$\overline{u} \sim_R \overline{u}'$ を満たすと仮定する。仮定により代数空間
+$Z = R \times_{j, U \times_B U, (\overline{u}, \overline{u}')} \Spec(k)$
+は空でない。一方、$j = (t, s)$ は局所有限型なので、射
+$Z \to \Spec(k)$ も局所有限型である（『代数空間の射』補題
+\ref{spaces-morphisms-lemma-permanence-finite-type} および
+\ref{spaces-morphisms-lemma-base-change-finite-type} を用いる）。
+したがって『代数空間の射』補題
+\ref{spaces-morphisms-lemma-locally-finite-type-surjective-geometric-points}
+により $Z$ は $k$-点をもち、所望の通り
+$(\overline{u}, \overline{u}') \in j(R(k))$ と結論する。これで補題の証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-set-theoretic-equivalence-geometric}
+定義 \ref{groupoids-quotients-definition-set-theoretic-equivalence} の状況にあるとする。
+次は同値である：
+\begin{enumerate}
+\item 射 $j$ は集合論的同値関係である。
+\item 射 $j$ は普遍単射的であり、
+$j(|R|) \subset |U \times_B U|$ は式 (\ref{groupoids-quotients-equation-list}) の任意の射
+$j'$ に対する $|j'|$ の像を含む。
+\item $B$ 上の十分大きな濃度をもつ任意の代数閉体 $k$ に対して、写像
+$j : R(k) \to U(k) \times U(k)$ は単射であり、その像は同値関係である。
+\end{enumerate}
+$j$ が decent、局所分離的、または準分離的ならば、これらはさらに次と同値である：
+\begin{enumerate}
+\item[(4)] $B$ 上の任意の代数閉体 $k$ に対して、写像
+$j : R(k) \to U(k) \times U(k)$ は単射であり、その像は同値関係である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) および (2) $\Rightarrow$ (3) は補題
+\ref{groupoids-quotients-lemma-set-theoretic-pre-equivalence-geometric} と定義から従う。
+同じ補題により、(3) は $j$ が集合論的前同値関係であることを含意する。
+もちろん条件 (3) は $j$ が普遍単射的であることも含意する。『代数空間の射』補題
+\ref{spaces-morphisms-lemma-universally-injective} を参照されたい。したがって $j$ は
+確かに集合論的同値関係である。ここまでで (1), (2), (3) がすべて同値であることが分かった。
+
+\medskip\noindent
+条件 (4) は、$j$ にそれ以上の仮定を課さずに (3) を含意する。
+$j$ が decent、局所分離的、または準分離的であり、同値な条件 (1), (2), (3) が
+成り立つと仮定する。『代数空間の射についてさらに』補題
+\ref{spaces-more-morphisms-lemma-when-universally-injective-radicial}
+により $j$ は radicial である。$k$ を $B$ 上の任意の代数閉体とし、
+$\overline{u}, \overline{u}' \in U(k)$ が
+$\overline{u} \sim_R \overline{u}'$ を満たすとする。このとき
+$R \times_{U \times_B U, (\overline{u}, \overline{u}')} \Spec(k)$
+は空でない。したがって $j$ は radicial なので、その被約化は $k$ 上純非分離な
+体のスペクトルである。$k = \overline{k}$ なので、それは $k$ のスペクトルである。
+ゆえに、所望の通り $t(\overline{r}) = \overline{u}$ かつ
+$s(\overline{r}) = \overline{u}'$ を満たす点 $\overline{r} \in R(k)$ が存在する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-set-theoretic-equivalence}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を $B$ 上の前関係とする。
+\begin{enumerate}
+\item $j$ が前同値関係ならば、$j$ は集合論的前同値関係である。
+特に、$j$ が代数空間における群亜群、または群代数空間の $U$ への作用から
+生じるとき、このことが成り立つ。
+\item $j$ が同値関係ならば、$j$ は集合論的同値関係である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-separates-orbits}
+節 \ref{groupoids-quotients-section-conventions-notation} のように $B \to S$ とする。
+$j : R \to U \times_B U$ を前関係とする。
+$\phi : U \to X$ を $B$ 上の代数空間の射とする。図式
+$$
+\xymatrix{
+(U \times_X U) \times_{(U \times_B U)} R \ar[d]^q \ar[r]_-p & R \ar[d]^j \\
+U \times_X U \ar[r]^c & U \times_B U
+}
+$$
+を考える。このとき次が成り立つ：
+\begin{enumerate}
+\item 射 $\phi$ が集合論的に不変であるための必要十分条件は、$p$ が全射であることである。
+\item $j$ が集合論的前同値関係ならば、$\phi$ が軌道を分離するための必要十分条件は、
+$p$ と $q$ が全射であることである。
+\item $p$ と $q$ が全射ならば、$j$ は集合論的前同値関係である
+（そして $\phi$ は軌道を分離する）。
+\item $\phi$ が $R$-不変で、$j$ が集合論的前同値関係ならば、$\phi$ が軌道を
+分離するための必要十分条件は、誘導射 $R \to U \times_X U$ が全射であることである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\phi$ が集合論的に不変であると仮定する。これは、$B$ 上の任意の代数閉体 $k$ と
+任意の $\overline{r} \in R(k)$ に対して
+$\phi(s(\overline{r})) = \phi(t(\overline{r}))$ であることを意味する。したがって
+% P10-E0146
+$((\phi(t(\overline{r})), \phi(s(\overline{r}))), \overline{r})$
+はファイバー積の点を定め、$p$ によって $\overline{r}$ に写る。これにより $p$ は
+全射である。逆に $p$ が全射であると仮定し、$\overline{r} \in R(k)$ を取る。
+$p$ は全射なので、体拡大 $K/k$ とファイバー積の $K$-値点 $\tilde r$ で
+$p(\tilde r) = \overline{r}$ を満たすものが存在する。
+このとき $q(\tilde r) \in U \times_X U$ は $U \times_B U$ における
+$(t(\overline{r}), s(\overline{r}))$ に写るので、
+$\phi(s(\overline{r})) = \phi(t(\overline{r}))$ と結論する。
+これにより $\phi$ は集合論的に不変である。
+
+\medskip\noindent
+(2), (3), (4) の証明は省略する。ヒント：$k$ を $B$ 上の十分大きな濃度をもつ
+代数閉体と仮定し、付随する集合の図式
+$$
+\xymatrix{
+(U(k) \times_{X(k)} U(k)) \times_{U(k) \times U(k)} R(k) \ar[d]^q \ar[r]_-p &
+R(k) \ar[d]^j \\
+U(k) \times_{X(k)} U(k) \ar[r]^c & U(k) \times U(k)
+}
+$$
+を考えよ。上の補題により、(2), (3), (4) に提示された同値性は、今表示した図式に
+関する集合論的な問題となる。ここでは、全射性が $k$-値点上の全射性に移ることを
+『代数空間の射』補題 \ref{spaces-morphisms-lemma-large-enough} により用いる。
+\end{proof}
+
+\noindent
+代数空間の圏において集合論的に不変な射という概念がかなり弱いことを上で見たので、
+前関係の軌道空間を次のように定義する。
+
+\begin{definition}
+\label{groupoids-quotients-definition-orbit-space}
+節 \ref{groupoids-quotients-section-conventions-notation} のように $B \to S$ とする。
+$j : R \to U \times_B U$ を前関係とする。
+$\phi : U \to X$ が次を満たすとき、{\it $R$ の軌道空間} であるという：
+\begin{enumerate}
+\item $\phi$ は $R$-不変である。
+\item $\phi$ は $R$-軌道を分離する。
+\item $\phi$ は全射である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$R$-軌道を分離することの定義は、代数閉体に値をもつ点についての議論を含む。
+しかし既に見たように、多くの場合、これは標準的に付随する代数空間のある射の
+全射性にほかならない。上の議論の一部を、次の軌道空間の特徴づけにまとめる。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-orbit-space}
+節 \ref{groupoids-quotients-section-conventions-notation} のように $B \to S$ とする。
+$j : R \to U \times_B U$ を集合論的前同値関係とする。
+射 $\phi : U \to X$ が $R$ の軌道空間であるための必要十分条件は、次が成り立つことである：
+\begin{enumerate}
+\item $\phi \circ s = \phi \circ t$、すなわち $\phi$ は不変である。
+\item 誘導射 $(t, s) : R \to U \times_X U$ は全射である。
+\item 射 $\phi : U \to X$ は全射である。
+\end{enumerate}
+この特徴づけは、例えば $j$ が前同値関係である場合、$B$ 上の代数空間における
+群亜群から生じる場合、または $B$ 上の群代数空間の $U$ への作用から生じる場合に
+適用できる。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-quotients-lemma-separates-orbits} の (4) から直ちに従う。
+\end{proof}
+
+\noindent
+次の補題では、射 $s, t$ が局所有限型であることだけを仮定するのでは
+（おそらく）不十分である。ある写像 $\phi : U \to X$ が軌道空間ではあるが
+局所有限型でないことが起こり得るからである。その場合、$B$ 上のすべての代数閉体
+$k$ に対して $U(k) \to X(k)$ が全射であるとは限らない。
+
+\begin{lemma}
+\label{groupoids-quotients-lemma-orbit-space-locally-finite-type-over-base}
+節 \ref{groupoids-quotients-section-conventions-notation} のように $B \to S$ とする。
+$j = (t, s) : R \to U \times_B U$ を前関係とする。
+$R, U$ が $B$ 上局所有限型であると仮定する。
+$\phi : U \to X$ を $B$ 上の代数空間の $R$-不変射とする。
+$\phi$ が $R$ の軌道空間であるための必要十分条件は、$B$ 上のすべての代数閉体
+$k$ に対して自然写像
+$$
+U(k)/\big(j(R(k))\text{ により生成される同値関係}\big)
+\longrightarrow
+X(k)
+$$
+が全単射であることである。
+\end{lemma}
+
+\begin{proof}
+$U$, $R$ は $B$ 上局所有限型なので、すべての射 $s, t, j, \phi$ は
+局所有限型であることに注意する。『代数空間の射』補題
+\ref{spaces-morphisms-lemma-permanence-finite-type} を参照されたい。
+また、『代数空間の射』補題
+\ref{spaces-morphisms-lemma-locally-finite-type-surjective-geometric-points}
+を以後断りなく用いる。
+$\phi$ が軌道空間であると仮定する。$k$ を $B$ 上の任意の代数閉体とし、
+$\overline{x} \in X(k)$ を取る。
+$U \times_{\phi, X, \overline{x}} \Spec(k)$ を考える。これは $k$ 上局所有限型な
+空でない代数空間なので、$k$-値点をもつ。したがって補題に表示した写像は全射である。
+$\overline{u}, \overline{u}' \in U(k)$ が $X(k)$ の同じ元に写ると仮定する。
+定義 \ref{groupoids-quotients-definition-set-theoretically-invariant} により、これは
+$\overline{u}, \overline{u}'$ が同じ $R$-軌道に属することを意味する。
+補題 \ref{groupoids-quotients-lemma-geometric-orbits} により、これは両者が $j(R(k))$ により生成される
+同値関係のもとで同値であることを意味する。ゆえに表示した射は単射である。
+
+\medskip\noindent
+逆に、表示した写像が $B$ 上のすべての代数閉体 $k$ に対して全単射であると仮定する。
+この条件は明らかに $\phi$ が全射であることを含意する。$\phi$ が $R$-不変であることは
+既に仮定した。最後に、すべての表示した写像の単射性は $\phi$ が軌道を分離することを
+含意する。したがって $\phi$ は軌道空間である。
+\end{proof}
+
+\section{粗商}
+\label{groupoids-quotients-section-coarse}
+
+\noindent
+ここでこれを加えるのは、後で粗商が粗モジュライ空間（またはモジュライスキーム）に
+対応すると言えるようにするためだけである。
+
+\begin{definition}
+\label{groupoids-quotients-definition-coarse}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を前関係とする。
+$B$ 上の代数空間の射 $\phi : U \to X$ が次を満たすとき、{\it 粗商} と呼ぶ：
+\begin{enumerate}
+\item $\phi$ は圏論的商である。
+\item $\phi$ は軌道空間である。
+\end{enumerate}
+$S = B$ であり、$U$, $R$ がともにスキームであるとする。スキームの射
+$\phi : U \to X$ が次を満たすとき、{\it スキームにおける粗商} と呼ぶ：
+\begin{enumerate}
+\item $\phi$ はスキームにおける圏論的商である。
+\item $\phi$ は軌道空間である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+多くの状況で、代数空間 $R$, $U$ は $B$ 上局所有限型であり、軌道空間の条件は
+単に、すべての代数閉体 $k$ に対して
+$$
+U(k)/\big(j(R(k))\text{ により生成される同値関係}\big)
+\cong
+X(k)
+$$
+であることを意味する。補題
+\ref{groupoids-quotients-lemma-orbit-space-locally-finite-type-over-base} を参照されたい。
+$j$ がさらに（集合論的）前同値関係であれば、この条件は単に、すべての代数閉体
+$k$ に対して $U(k)/j(R(k)) \to X(k)$ が全単射であることと同値である。
+
+
+
+
+
+
+
+
+
+\section{位相的性質}
+\label{groupoids-quotients-section-topological}
+
+\noindent
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を前関係とする。
+部分集合 $T \subset |U|$ が {\it $R$-不変} であるとは、$|R|$ の部分集合として
+$s^{-1}(T) = t^{-1}(T)$ であることをいう。
+$T$ が閉であっても、対応する $U$ の被約閉部分空間は $R$-不変とは限らないことに
+注意されたい（『代数空間における群亜群』定義
+\ref{spaces-groupoids-definition-invariant-open} の意味で）。実際、引戻し
+$s^{-1}(T)$, $t^{-1}(T)$ は被約とは限らない。以下は、不変射
+$\phi : U \to X$ に対して考えられる条件である。
+
+\begin{definition}
+\label{groupoids-quotients-definition-topological}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を前関係とする。
+$\phi : U \to X$ を $B$ 上の代数空間の $R$-不変射とする。
+\begin{enumerate}
+\item
+\label{groupoids-quotients-item-submersive}
+射 $\phi$ は submersive である。
+\item
+\label{groupoids-quotients-item-invariant-closed}
+任意の $R$-不変閉部分集合 $Z \subset |U|$ に対して、像
+$\phi(Z)$ は $|X|$ において閉である。
+\item
+\label{groupoids-quotients-item-intersect-invariant-closed}
+条件 (\ref{groupoids-quotients-item-invariant-closed}) が成り立ち、任意の $R$-不変閉部分集合の組
+$Z_1, Z_2 \subset |U|$ に対して
+$$
+\phi(Z_1 \cap Z_2) = \phi(Z_1) \cap \phi(Z_2)
+$$
+が成り立つ。
+\item 射 $(t, s) : R \to U \times_X U$ は普遍的に submersive である。
+\label{groupoids-quotients-item-strong}
+\end{enumerate}
+これら各性質について、任意の平坦基底変換の後、または任意の基底変換の後にも
+成り立つことを要求できる。定義 \ref{groupoids-quotients-definition-base-change} を参照されたい。
+この場合、条件 (\ref{groupoids-quotients-item-submersive})、
+(\ref{groupoids-quotients-item-invariant-closed})、
+(\ref{groupoids-quotients-item-intersect-invariant-closed})、または
+(\ref{groupoids-quotients-item-strong}) が {\it 一様に}、または {\it 普遍的に} 成り立つという。
+\end{definition}
+
+
+
+
+
+
+
+
+\section{不変関数}
+\label{groupoids-quotients-section-functions}
+
+\noindent
+場合によっては、任意の不変関数が商の構造層の局所切断であることを要求して、
+商の構造層を特定すると便利である。
+
+\begin{definition}
+\label{groupoids-quotients-definition-functions}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を前関係とする。
+$\phi : U \to X$ を $R$-不変射とする。
+$\phi' = \phi \circ s = \phi \circ t : R \to X$ と記す。
+\begin{enumerate}
+\item $(\phi_*\mathcal{O}_U)^R$ を、二つの写像
+$$
+\xymatrix{
+\phi_*\mathcal{O}_U
+\ar@<1ex>[rr]^{\phi_*s^\sharp}
+\ar@<-1ex>[rr]_{\phi_*t^\sharp}
+& &
+\phi'_*\mathcal{O}_R
+}
+$$
+の $X_\etale$ 上の等化子である $\phi_*\mathcal{O}_U$ の
+$\mathcal{O}_X$-部分代数とする。これを {\it $X$ 上の $R$-不変関数の層} と呼ぶこともある。
+\item 自然写像 $\mathcal{O}_X \to (\phi_*\mathcal{O}_U)^R$ が同型であるとき、
+{\it $X$ 上の関数は $U$ 上の $R$-不変関数である} という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+もちろん、この性質が任意の基底変換（平坦なもの、またはすべてのもの）の後にも
+成り立つことを要求でき、それにより（一様な、または）普遍的な概念が得られる。
+この条件は、（より）一意な商を得るため、しばしば他の条件と併せて課される。
+そしてもちろん、この主題全体の動機の大部分は次の特別な場合から来る。
+$U = \Spec(A)$ は体 $S = B = \Spec(k)$ 上のアフィンスキームであり、
+$R = G \times U$、ただし $G$ は $k$ 上のアフィン群スキームである。この場合、商として
+$$
+X = \Spec(A^G)
+$$
+を取る選択肢があり、少なくとも上の定義の条件は満たされる。これは有用な構成だが、
+しばしば正しい商ではない。例えば $U = \text{GL}_{n, k}$ で、$G$ が上三角行列の群ならば、
+上の構成は $X = \Spec(k)$ を与えるが、はるかに良い商（すなわち旗多様体）が存在する。
+
+
+
+
+
+
+
+
+\section{良い商}
+\label{groupoids-quotients-section-good}
+
+\noindent
+特に群作用による商を取るとき、次の定義は有用である。
+
+\begin{definition}
+\label{groupoids-quotients-definition-good}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を前関係とする。
+$B$ 上の代数空間の射 $\phi : U \to X$ が次を満たすとき、{\it 良い商} と呼ぶ：
+\begin{enumerate}
+\item $\phi$ は不変である。
+\item $\phi$ はアフィンである。
+\item $\phi$ は全射である。
+\item 条件 (\ref{groupoids-quotients-item-intersect-invariant-closed}) が普遍的に成り立つ。
+\item $X$ 上の関数は $U$ 上の $R$-不変関数である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+\cite{seshadri_quotients} で Seshadri はほぼ同じ定義を与えているが、(4) の代わりに
+条件 (\ref{groupoids-quotients-item-intersect-invariant-closed}) が成り立つことだけを要求し、
+普遍的に成り立つことは要求していない。
+
+
+
+
+
+
+
+
+\section{幾何学的商}
+\label{groupoids-quotients-section-geometric}
+
+\noindent
+これは Mumford による幾何学的商の定義である（少なくとも GIT 初版の定義である。
+確認できる限り、後の版では「普遍的に submersive」が「submersive」に変更された）。
+
+\begin{definition}
+\label{groupoids-quotients-definition-geometric}
+$S$ をスキーム、$B$ を $S$ 上の代数空間とする。
+$j : R \to U \times_B U$ を前関係とする。
+$B$ 上の代数空間の射 $\phi : U \to X$ が次を満たすとき、{\it 幾何学的商} と呼ぶ：
+\begin{enumerate}
+\item $\phi$ は軌道空間である。
+\item 条件 (\ref{groupoids-quotients-item-submersive}) が普遍的に成り立つ、すなわち
+$\phi$ は普遍的に submersive である。
+\item $X$ 上の関数は $U$ 上の $R$-不変関数である。
+\end{enumerate}
+\end{definition}

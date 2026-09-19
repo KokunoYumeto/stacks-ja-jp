@@ -1,0 +1,2719 @@
+% Generated mechanically from frozen input inputs/p03/ja/tex/hypercovering.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{24}
+\chapter{超被覆}
+
+
+
+\phantomsection
+\label{hypercovering-section-phantom}
+
+
+\section{序論}
+\label{hypercovering-section-introduction}
+
+\noindent
+$\mathcal{C}$ をサイトとする（Sites, Definition
+\ref{sites-definition-site} を参照）。
+$X$ を $\mathcal{C}$ の対象とする。
+$\mathcal{C}$ 上のアーベル層 $\mathcal{F}$ が与えられたとき、その
+コホモロジー群
+$$
+H^i(X, \mathcal{F}).
+$$
+を計算したい。一般的な定義（Cohomology on Sites, Section
+\ref{sites-cohomology-section-cohomology-sheaves}）によれば、この
+コホモロジー群は入射分解
+$
+0 \to \mathcal{F} \to \mathcal{I}^0 \to \mathcal{I}^1 \to \ldots
+$
+を選び、
+$$
+H^i(X, \mathcal{F})
+=
+H^i(
+\Gamma(X, \mathcal{I}^0) \to
+\Gamma(X, \mathcal{I}^1) \to
+\Gamma(X, \mathcal{I}^2)\to \ldots)
+$$
+と置くことによって計算される。本章の目的は、$\mathcal{C}$ が
+ファイバー積をもつ場合には、入射分解を選ばずにこれらの
+コホモロジー群を計算できることを示すことである。そのために超被覆を用いる。
+
+\medskip\noindent
+サイトにおける超被覆は被覆の一般化である（
+\cite[Expos\'e V, Sec. 7]{SGA4} を参照）。対象 $X$ の超被覆 $K$ が
+与えられると、$X$ 上のアーベル層 $\mathcal{F}$ のコホモロジーを、
+$K$ の各成分 $K_n$ 上におけるこの層のコホモロジーによって表す
+{\v C}ech コホモロジーからコホモロジーへのスペクトル系列がある。
+超被覆は常に十分多く存在することが分かるので、すべての超被覆に
+わたって余極限を取ると、このスペクトル系列は退化し、$X$ 上の
+$\mathcal{F}$ のコホモロジーは {\v C}ech コホモロジー群の余極限によって
+計算される。
+
+\medskip\noindent
+さらに一般的な構成として、コホモロジー降下をもつ単体的増大を
+考えることができる（\cite[Expos\'e Vbis]{SGA4} を参照）。
+コホモロジー降下についての優れた手稿として Brian Conrad の文献
+\url{https://math.stanford.edu/~conrad/papers/hypercover.pdf}。
+がある。単体空間の章でこの問題に戻り、例えば ``局所コンパクト''
+位相空間の固有超被覆がコホモロジー降下をもつことを示す
+（Simplicial Spaces, Section
+\ref{spaces-simplicial-section-proper-hypercovering}）。
+そこでの方針は、この主張を本章で構成する {\v C}ech コホモロジーから
+コホモロジーへのスペクトル系列へ帰着させることである。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{半表現可能対象}
+\label{hypercovering-section-semi-representable}
+
+\noindent
+まず次の定義を置く。
+文字 ``SR'' は Semi-Representable の略である。
+
+\begin{definition}
+\label{hypercovering-definition-SR}
+$\mathcal{C}$ を圏とする。次のように定義される
+{\it 半表現可能対象}の圏を $\text{SR}(\mathcal{C})$ と書く：
+\begin{enumerate}
+\item 対象は対象の族 $\{U_i\}_{i \in I}$ であり、
+\item 射 $\{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$ は、写像
+$\alpha : I \to J$ と、各 $i \in I$ に対する $\mathcal{C}$ の射
+$f_i : U_i \to V_{\alpha(i)}$ によって与えられる。
+\end{enumerate}
+$X \in \Ob(\mathcal{C})$ を $\mathcal{C}$ の対象とする。
+{\it $X$ 上の半表現可能対象}の圏とは、圏
+$\text{SR}(\mathcal{C}, X) = \text{SR}(\mathcal{C}/X)$
+のことである。
+\end{definition}
+
+\noindent
+この定義は本質的には
+\cite[Expos\'e V, Subsection 7.3.0]{SGA4} のものと同値である。
+これは ``大きな'' 圏であることに注意しよう。後で、$X$ の超被覆に
+必要な添字集合 $I$ の大きさを ``制限'' する。その段階で
+$\text{SR}(\mathcal{C}, X)$ を改めて定義して圏にすることができる。
+$\text{SR}(\mathcal{C}, X)$ の対象と射を明記すると次のようになる：
+\begin{enumerate}
+\item 対象は射の族 $\{U_i \to X\}_{i \in I}$ であり、
+\item 射 $\{U_i \to X\}_{i \in I} \to
+\{V_j \to X\}_{j \in J}$ は、写像 $\alpha : I \to J$ と、
+各 $i \in I$ に対する $X$ 上の射
+$f_i : U_i \to V_{\alpha(i)}$ によって与えられる。
+\end{enumerate}
+忘却関手
+$\text{SR}(\mathcal{C}, X) \to \text{SR}(\mathcal{C})$
+がある。
+
+\begin{definition}
+\label{hypercovering-definition-SR-F}
+$\mathcal{C}$ を圏とする。
+{\it 半表現可能対象に前層を対応させる関手}を $F$ と書く。式では
+\begin{eqnarray*}
+F : \text{SR}(\mathcal{C}) & \longrightarrow & \textit{PSh}(\mathcal{C}) \\
+\{U_i\}_{i \in I} & \longmapsto & \amalg_{i\in I} h_{U_i}
+\end{eqnarray*}
+であり、$h_U$ は対象 $U$ に付随する表現可能前層を表す。
+\end{definition}
+
+\noindent
+射 $U \to X$ が与えられると、表現可能前層の射 $h_U \to h_X$ を得る。
+したがって、$\text{SR}(\mathcal{C}, X)$ 上の $F$ を、$h_X$ 上の
+集合値前層の圏、すなわち $\textit{PSh}(\mathcal{C})/h_X$ への関手と
+みなすことが多い。図式で表すと
+$$
+\xymatrix{
+\text{SR}(\mathcal{C}, X) \ar[r]_F \ar[d] &
+\textit{PSh}(\mathcal{C})/h_X \ar[d] \\
+\text{SR}(\mathcal{C}) \ar[r]^F &
+\textit{PSh}(\mathcal{C})
+}
+$$
+となる。次に、半表現可能対象の圏における極限の存在を論じる。
+
+\begin{lemma}
+\label{hypercovering-lemma-coprod-prod-SR}
+$\mathcal{C}$ を圏とする。
+\begin{enumerate}
+\item 圏 $\text{SR}(\mathcal{C})$ は余積をもち、$F$ は余積と可換する。
+\item 関手 $F : \text{SR}(\mathcal{C}) \to \textit{PSh}(\mathcal{C})$
+は極限と可換する。
+\item $\mathcal{C}$ がファイバー積をもつなら、
+$\text{SR}(\mathcal{C})$ もファイバー積をもつ。
+\item $\mathcal{C}$ が二項積をもつなら、
+$\text{SR}(\mathcal{C})$ も二項積をもつ。
+\item $\mathcal{C}$ が等化子をもつなら、
+$\text{SR}(\mathcal{C})$ も等化子をもつ。
+\item $\mathcal{C}$ が終対象をもつなら、
+$\text{SR}(\mathcal{C})$ も終対象をもつ。
+\end{enumerate}
+$X \in \Ob(\mathcal{C})$ とする。
+\begin{enumerate}
+\item 圏 $\text{SR}(\mathcal{C}, X)$ は余積をもち、
+$F$ は余積と可換する。
+\item $\mathcal{C}$ がファイバー積をもつなら、
+$\text{SR}(\mathcal{C}, X)$ は有限極限をもち、
+$F : \text{SR}(\mathcal{C}, X) \to \textit{PSh}(\mathcal{C})/h_X$
+は有限極限と可換する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず $\text{SR}(\mathcal{C})$ に関する主張を証明する。
+(1) の証明。$\{U_i\}_{i \in I}$ と $\{V_j\}_{j \in J}$ の余積は
+$\{U_i\}_{i \in I} \amalg \{V_j\}_{j \in J}$ である。言い換えれば、
+添字集合が $I \amalg J$ であり、$k = i \in I$ なら $U_i$ を、
+$k = j \in J$ なら $V_j$ を与える対象族である。対象族の族の余積も
+同様である。$F$ がこれらの余積と可換することは明らかである。
+
+\medskip\noindent
+(2) の証明。$U \in \Ob(\mathcal{C})$ に対して、
+$\text{SR}(\mathcal{C})$ の対象 $\{U\}$ を考える。明らかに
+$\Mor_{\text{SR}(\mathcal{C})}(\{U\}, K)) = F(K)(U)$
+が $K \in \Ob(\text{SR}(\mathcal{C}))$ に対して成り立つ。前層の極限は
+切断のレベルで計算されるので（Sites, Section
+\ref{sites-section-limits-colimits-PSh}）、$F$ は極限と可換する。
+
+\medskip\noindent
+(3) の証明。射
+$(\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+と射
+$(\beta, g_k) : \{W_k\}_{k \in K} \to \{V_j\}_{j \in J}$
+が与えられたとする。これらの射のファイバー積は
+$$
+\{ U_i \times_{f_i, V_j, g_k} W_k\}_{(i, j, k) \in I \times J \times K
+\text{ ただし } j = \alpha(i) = \beta(k)}
+$$
+で与えられる。$\mathcal{C}$ がファイバー積をもつなら、これらは存在する。
+
+\medskip\noindent
+(4) の証明。$\{U_i\}_{i \in I}$ と $\{V_j\}_{j \in J}$ の積は
+$\{U_i \times V_j\}_{i \in I, j \in J}$ である。
+$\mathcal{C}$ が積をもつなら、これらは存在する。
+
+\medskip\noindent
+(5) の証明。二つの写像
+$(\alpha, f_i), (\alpha', f'_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+の等化子は
+$$
+\{
+\text{Eq}(f_i, f'_i : U_i \to V_{\alpha(i)})
+\}_{i \in I,\ \alpha(i) = \alpha'(i)}
+$$
+である。$\mathcal{C}$ が等化子をもつなら、これらは存在する。
+
+\medskip\noindent
+(6) の証明。$X$ が $\mathcal{C}$ の終対象なら、$\{X\}$ は
+$\text{SR}(\mathcal{C})$ の終対象である。
+
+\medskip\noindent
+次に $\text{SR}(\mathcal{C}, X)$ に関する主張を証明する。
+上の結果を圏 $\mathcal{C}/X$ に適用し、
+$\text{SR}(\mathcal{C}/X) = \text{SR}(\mathcal{C}, X)$ および
+$\textit{PSh}(\mathcal{C}/X) = \textit{PSh}(\mathcal{C})/h_X$
+を用いれば従う（密着位相を入れた $\mathcal{C}$ に Sites, Lemma
+\ref{sites-lemma-essential-image-j-shriek} を適用する）。ただし、次のように
+直接論じることもできる。明らかに、$\{U_i \to X\}_{i \in I}$ と
+$\{V_j \to X\}_{j \in J}$ の余積は
+$\{U_i \to X\}_{i \in I} \amalg \{V_j \to X\}_{j \in J}$ であり、
+終域が $X$ である射の族の族の余積も同様である。対象 $\{X \to X\}$ は
+$\text{SR}(\mathcal{C}, X)$ の終対象である。射
+$(\alpha, f_i) : \{U_i \to X\}_{i \in I} \to \{V_j \to X\}_{j \in J}$
+と射
+$(\beta, g_k) : \{W_k \to X\}_{k \in K} \to \{V_j \to X\}_{j \in J}$
+が与えられたとする。これらの射のファイバー積は
+$$
+\{ U_i \times_{f_i, V_j, g_k} W_k \to X \}_{(i, j, k) \in I \times J \times K
+\text{ ただし } j = \alpha(i) = \beta(k)}
+$$
+で与えられる。$\mathcal{C}$ がファイバー積をもつという仮定により、
+これらは存在する。したがって $\text{SR}(\mathcal{C}, X)$ は有限極限をもつ
+（Categories, Lemma \ref{categories-lemma-finite-limits-exist} を参照）。
+この場合の関手 $F$ に関する主張の確認は省略する。
+\end{proof}
+
+
+
+
+
+\section{超被覆}
+\label{hypercovering-section-hypercoverings}
+
+\noindent
+圏がさらにサイトであると仮定すれば、次の定義を置くことができる。
+
+\begin{definition}
+\label{hypercovering-definition-covering-SR}
+$\mathcal{C}$ をサイトとする。
+$f = (\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+を圏 $\text{SR}(\mathcal{C})$ の射とする。各 $j \in J$ に対して
+射の族 $\{U_i \to V_j\}_{i \in I, \alpha(i) = j}$ がサイト
+$\mathcal{C}$ の被覆であるとき、$f$ を{\it 被覆}という。
+$X$ を $\mathcal{C}$ の対象とする。$\text{SR}(\mathcal{C}, X)$ の射
+$K \to L$ の $\text{SR}(\mathcal{C})$ における像が被覆であるとき、
+この射を{\it 被覆}という。
+\end{definition}
+
+\begin{lemma}
+\label{hypercovering-lemma-covering-permanence}
+$\mathcal{C}$ をサイトとする。
+\begin{enumerate}
+\item $\text{SR}(\mathcal{C})$ における被覆の合成は被覆である。
+\item $K \to L$ が $\text{SR}(\mathcal{C})$ における被覆で、
+$L' \to L$ が射なら、$L' \times_L K$ が存在し、
+$L' \times_L K \to L'$ は被覆である。
+\item $\mathcal{C}$ が二項積をもち、$A \to B$ と $K \to L$ が
+$\text{SR}(\mathcal{C})$ における被覆なら、
+$A \times K \to B \times L$ は被覆である。
+\end{enumerate}
+$X \in \Ob(\mathcal{C})$ とする。このとき (1) と (2) は
+$\text{SR}(\mathcal{C}, X)$ について成り立ち、$\mathcal{C}$ が
+ファイバー積をもつなら (3) も成り立つ。
+\end{lemma}
+
+\begin{proof}
+(1) はサイトの公理から直ちに従う。(2) は、補題
+\ref{hypercovering-lemma-coprod-prod-SR} の証明における
+$\text{SR}(\mathcal{C})$ のファイバー積の構成と、$\mathcal{C}$ の
+被覆をなす射が表現可能でなければならないことから従う。
+$A \times K \to B \times L$ を合成
+$A \times K \to B \times K \to B \times L$ とみなせば、
+被覆の基底変換の合成となるので (3) が従う。最後の主張は
+$\text{SR}(\mathcal{C}, X) = \text{SR}(\mathcal{C}/X)$ から従う。
+\end{proof}
+
+\noindent
+補題 \ref{hypercovering-lemma-coprod-prod-SR} と Simplicial, Lemma
+\ref{simplicial-lemma-existence-cosk} により、$\mathcal{C}$ が
+ファイバー積をもつなら、$\text{SR}(\mathcal{C}, X)$ の切断された
+単体的対象の余骨格が存在する。したがって次の定義は意味をもつ。
+
+\begin{definition}
+\label{hypercovering-definition-hypercovering}
+$\mathcal{C}$ をファイバー積をもつサイトとし、
+$X \in \Ob(\mathcal{C})$ とする。{\it $X$ の超被覆}とは、
+次を満たす $\text{SR}(\mathcal{C}, X)$ の単体的対象 $K$ である：
+\begin{enumerate}
+\item 対象 $K_0$ はサイト $\mathcal{C}$ における $X$ の被覆である。
+\item 各 $n \geq 0$ に対する標準射
+$$
+K_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n K)_{n + 1}
+$$
+は上で定義した意味での被覆である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+条件 (1) が意味をもつのは、$\text{SR}(\mathcal{C}, X)$ の各対象が
+終域 $X$ をもつ射の族だからである。同じ条件を、$K_0$ から
+$\text{SR}(\mathcal{C}, X)$ の終対象への射が被覆である、と述べてもよい。
+
+\begin{example}[{\v C}ech 超被覆]
+\label{hypercovering-example-cech}
+$\mathcal{C}$ をファイバー積をもつサイトとし、
+$\{U_i \to X\}_{i \in I}$ を $\mathcal{C}$ の被覆とする。
+$K_0 = \{U_i \to X\}_{i \in I}$ と置く。このとき $K_0$ は
+$\text{SR}(\mathcal{C}, X)$ の $0$-切断単体的対象なので、
+$$
+K = \text{cosk}_0 K_0.
+$$
+を構成できる。$K$ が定義 \ref{hypercovering-definition-hypercovering} の条件 (1) を
+満たすことは明らかである。また Simplicial, Lemma
+\ref{simplicial-lemma-cosk-up} により、すべての射
+$K_{n + 1} \to (\text{cosk}_n \text{sk}_n K)_{n + 1}$ は同型なので、
+条件 (2) も満たす。各項 $K_n$ は通常の
+$$
+K_n = \{
+U_{i_0} \times_X U_{i_1} \times_X \ldots \times_X U_{i_n} \to X
+\}_{(i_0, i_1, \ldots, i_n) \in I^{n + 1}}
+$$
+であることに注意しよう。この形の $X$ の超被覆を
+$X$ の{\it {\v C}ech 超被覆}という。
+\end{example}
+
+\begin{example}[サイトの単体的対象による超被覆]
+\label{hypercovering-example-hypercovering-in-C}
+$\mathcal{C}$ をファイバー積をもつサイトとし、
+$X \in \Ob(\mathcal{C})$ とする。$U$ を $\mathcal{C}$ の単体的対象とし、
+通常どおり $U_n = U([n])$ と書く。さらに、増大
+$$
+a : U \to X
+$$
+が与えられていると仮定する。このとき、各項が
+$K_n = \{U_n \to X\}$ である $\text{SR}(\mathcal{C}, X)$ の
+単体的対象 $K$ を考えられる。$K$ が定義
+\ref{hypercovering-definition-hypercovering} の意味で $X$ の超被覆となるための
+必要十分条件は、次の三条件
+\footnote{$\mathcal{C}$ はファイバー積をもつので、圏
+$\mathcal{C}/X$ はすべての有限極限をもつ。したがって
+Simplicial, Lemma \ref{simplicial-lemma-existence-cosk} により、
+必要な余骨格が存在する。}
+が成り立つことである：
+\begin{enumerate}
+\item $\{U_0 \to X\}$ は $\mathcal{C}$ の被覆である。
+\item $\{U_1 \to U_0 \times_X U_0\}$ は $\mathcal{C}$ の被覆である。
+\item $\{U_{n + 1} \to (\text{cosk}_n\text{sk}_n U)_{n + 1}\}$
+は $n \geq 1$ に対して $\mathcal{C}$ の被覆である。
+\end{enumerate}
+直接の確認は省略する。
+\end{example}
+
+\begin{example}[被覆に付随する {\v C}ech 超被覆]
+\label{hypercovering-example-cech-cover}
+$\mathcal{C}$ をファイバー積をもつサイトとする。$U \to X$ を
+$\mathcal{C}$ の射で、$\{U \to X\}$ が $\mathcal{C}$ の被覆となるもの
+\footnote{$\mathcal{C}$ におけるこの性質をもつ射を ``被覆'' と
+呼ぶことがある。}
+とする。各項が次である $\text{SR}(\mathcal{C}, X)$ の単体的対象 $K$ を考える：
+$$
+K_n = \{U \times_X U \times_X \ldots \times_X U \to X\}
+\quad (n + 1 \text{ 個の因子})
+$$
+このとき $K$ は $X$ の超被覆である。この例は
+例 \ref{hypercovering-example-cech} と例 \ref{hypercovering-example-hypercovering-in-C} の
+双方の特別な場合である。
+\end{example}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercoverings-set}
+$\mathcal{C}$ をファイバー積をもつサイトとし、
+$X \in \Ob(\mathcal{C})$ とする。$X$ のすべての超被覆からなる集まりは
+集合をなす。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$ はサイトなので、$X$ のすべての被覆からなる集まりは
+集合をなす。したがって、可能な $K_0$ の集まりは集合である。
+可能な $K_0, \ldots, K_n$ の集まりが集合をなすことを示したとする。
+このとき、$K_0, \ldots, K_n$ を固定して、可能な $K_{n + 1}$ の
+集まりが集合をなすことを示せば十分である。これは明らかである。
+実際、$K_{n + 1}$ は
+$(\text{cosk}_n \text{sk}_n K)_{n + 1}$ の可能な被覆全体から
+選ばなければならない。
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-hypercoverings-really-set}
+この補題は、集合をなす超被覆の選択からなる共終系が存在することだけでなく、
+超被覆そのものが実際に集合をなすことを述べている。
+\end{remark}
+
+\noindent
+$\mathcal{C}$ 上の前層の圏は有限（余）極限をもつ。したがって、
+集合値前層に対して関手 $\text{cosk}_n$ が存在する。
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-F}
+$\mathcal{C}$ をファイバー積をもつサイトとし、
+$X \in \Ob(\mathcal{C})$ とする。$K$ を $X$ の超被覆とする。
+$\textit{PSh}(\mathcal{C})$ の単体的対象 $F(K)$ に、定数単体的前層
+$h_X$ への増大を入れたものを考える。
+\begin{enumerate}
+\item 前層の射 $F(K)_0 \to h_X$ は層化すると全射になる。
+\item 射
+$$
+(d^1_0, d^1_1) :
+F(K)_1
+\longrightarrow
+F(K)_0 \times_{h_X} F(K)_0
+$$
+は層化すると全射になる。
+\item 各 $n \geq 1$ に対して、射
+$$
+F(K)_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n F(K))_{n + 1}
+$$
+は層化すると全射になる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+次の事実を用いる。$\{U_i \to U\}_{i \in I}$ がサイト
+$\mathcal{C}$ の被覆なら、射
+$$
+\amalg_{i \in I} h_{U_i} \to h_U
+$$
+は層化すると全射になる（Sites, Lemma
+\ref{sites-lemma-covering-surjective-after-sheafification} を参照）。
+したがって最初の主張は直ちに従う。
+
+\medskip\noindent
+第二の主張については、Simplicial, Example
+\ref{simplicial-example-cosk0} によれば、単体的対象
+$\text{cosk}_0 \text{sk}_0 K$ の各項は
+$K_0 \times \ldots \times K_0$ である。したがって超被覆の定義により、
+$(d^1_0, d^1_1) : K_1 \to K_0 \times K_0$ は被覆である。
+上の主張と、$F$ が積を $h_X$ 上のファイバー積へ移すことから (2) が従う。
+
+\medskip\noindent
+第三の主張について、
+$\text{cosk}_n \text{sk}_n F(K) =
+F(\text{cosk}_n \text{sk}_n K)$
+が $n \geq 1$ に対して成り立つと主張する。これを示すため、一時的に
+関手 $\text{SR}(\mathcal{C}, X) \to
+\textit{PSh}(\mathcal{C})/h_X$ を $F'$ と書く。
+補題 \ref{hypercovering-lemma-coprod-prod-SR} により、関手 $F'$ は有限極限と可換する。
+Simplicial, Section \ref{simplicial-section-skeleton} における
+関手 $\text{cosk}_n$ の記述から、
+$\text{cosk}_n \text{sk}_n F'(K) =
+F'(\text{cosk}_n \text{sk}_n K)$
+を得る。Simplicial, Lemma \ref{simplicial-lemma-existence-cosk} で
+$(\text{cosk}_n U)_m$ を記述するために用いる圏は
+$(\Delta/[m])^{opp}_{\leq n}$ であることを思い出そう。
+$n \geq 1$ なら圏 $(\Delta/[m])_{\leq n}$ が連結であることを示すのは
+面白い演習である（Categories, Definition
+\ref{categories-definition-category-connected} を参照）。
+したがって Categories, Lemma
+\ref{categories-lemma-connected-limit-over-X} により、
+$\text{cosk}_n \text{sk}_n F'(K) =
+\text{cosk}_n \text{sk}_n F(K)$
+を得て、主張が従う。これから性質 (2) が従う。実際、(2) の射は
+定義 \ref{hypercovering-definition-covering-SR} の意味での被覆に関手 $F$ を
+適用して得られる射であり、結論は本証明の冒頭で述べた最初の事実から従う。
+\end{proof}
+
+
+
+\section{非輪状性}
+\label{hypercovering-section-acyclicity}
+
+\noindent
+$\mathcal{C}$ をサイトとする。集合の前層 $\mathcal{F}$ に対し、
+$\mathbf{Z}_\mathcal{F}$ で次の規則により定まるアーベル群の前層を表す：
+$$
+\mathbf{Z}_\mathcal{F}(U) = \mathcal{F}(U)\text{ 上の自由アーベル群}.
+$$
+これを{\it $\mathcal{F}$ 上の自由アーベル前層}と呼ぶことがある。
+もちろん、構成 $\mathcal{F} \mapsto \mathbf{Z}_\mathcal{F}$ は関手であり、
+忘却関手
+$\textit{PAb}(\mathcal{C}) \to \textit{PSh}(\mathcal{C})$
+の左随伴である。層化 $\mathbf{Z}_\mathcal{F}^\#$ はアーベル群の層であり、
+関手 $\mathcal{F} \mapsto \mathbf{Z}_\mathcal{F}^\#$ も左随伴である。
+$\mathbf{Z}_\mathcal{F}^\#$ を
+{\it $\mathcal{F}$ 上の自由アーベル層}と呼ぶことがある。
+
+\medskip\noindent
+サイト $\mathcal{C}$ の対象 $X$ に対し、$\mathbf{Z}_X$ で
+$h_X$ 上の自由アーベル前層を表し、$\mathbf{Z}_X^\#$ でその層化を表す。
+
+\begin{definition}
+\label{hypercovering-definition-homology}
+$\mathcal{C}$ をサイトとし、$K$ を $\textit{PSh}(\mathcal{C})$
+の単体的対象とする。上の構成により $\textit{Ab}(\mathcal{C})$ の
+単体的対象 $\mathbf{Z}_K^\#$ が得られる。その付随する
+アーベル前層の複体 $s(\mathbf{Z}_K^\#)$ を取ることができる；
+Simplicial, Section \ref{simplicial-section-complexes} を参照。
+$K$ の{\it ホモロジー}とは、アーベル層の複体
+$s(\mathbf{Z}_K^\#)$ のホモロジーである。
+\end{definition}
+
+\noindent
+言い換えると、$K$ の{\it 第 $i$ ホモロジー $H_i(K)$}とは
+アーベル群の層 $H_i(K) = H_i(s(\mathbf{Z}_K^\#))$ である。
+本節では、$K$ が $\mathcal{C}$ の対象 $X$ の超被覆である場合の
+ホモロジーを調べる。
+
+\begin{lemma}
+\label{hypercovering-lemma-compare-cosk0}
+$\mathcal{C}$ をサイトとし、$\mathcal{F} \to \mathcal{G}$ を
+集合の前層の射とする。$K$ で $\textit{PSh}(\mathcal{C})$ の
+単体的対象であって、その第 $n$ 項が $\mathcal{F}$ の
+$\mathcal{G}$ 上の $(n + 1)$ 重ファイバー積であるものを表す；
+Simplicial, Example
+\ref{simplicial-example-fibre-products-simplicial-object} を参照。
+$\mathcal{F} \to \mathcal{G}$ が層化後に全射ならば、
+$$
+H_i(K) =
+\left\{
+\begin{matrix}
+0 & \text{（} & i > 0\text{ のとき）}\\
+\mathbf{Z}_\mathcal{G}^\# & \text{（} & i = 0\text{ のとき）}
+\end{matrix}
+\right.
+$$
+である。次数 $0$ における同型は、写像
+$(\mathbf{Z}_K^\#)_0 =
+\mathbf{Z}_\mathcal{F}^\# \to \mathbf{Z}_\mathcal{G}^\#$
+から生じる射 $H_0(K) \to \mathbf{Z}_\mathcal{G}^\#$ により与えられる。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}' \subset \mathcal{G}$ を射
+$\mathcal{F} \to \mathcal{G}$ の像とする。$U \in \Ob(\mathcal{C})$ を取り、
+$A = \mathcal{F}(U)$ および $B = \mathcal{G}'(U)$ と置く。
+このとき単体集合 $K(U)$ は、第 $n$ 単体が
+$$
+A \times_B A \times_B \ldots \times_B A\ (n + 1 \text{ 個の因子)}
+$$
+で与えられる単体集合に等しい。Simplicial, Lemma
+\ref{simplicial-lemma-cosk-minus-one-equivalence} により、
+射 $K(U) \to B$ は自明 Kan ファイブレーションである。したがってこれは
+ホモトピー同値である（Simplicial, Lemma
+\ref{simplicial-lemma-trivial-kan-homotopy}）。これに
+「上の自由アーベル群」関手を適用すると、
+$$
+\mathbf{Z}_K(U) \longrightarrow \mathbf{Z}_B
+$$
+もホモトピー同値であることが分かる。$s(\mathbf{Z}_B)$ は複体
+$$
+\ldots \to
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \xrightarrow{0}
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \xrightarrow{1}
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \xrightarrow{0}
+\bigoplus\nolimits_{b \in B}\mathbf{Z} \to 0
+$$
+であることに注意する；Simplicial, Lemma
+\ref{simplicial-lemma-homology-eilenberg-maclane} を参照。
+したがって $i > 0$ に対して
+$H_i(s(\mathbf{Z}_K(U))) = 0$ であり、
+$H_0(s(\mathbf{Z}_K(U))) = \bigoplus_{b \in B}\mathbf{Z}
+= \bigoplus_{s \in \mathcal{G}'(U)} \mathbf{Z}$
+である。これらの同一視は制限写像と両立する。
+
+\medskip\noindent
+以上より、$i > 0$ に対して $H_i(s(\mathbf{Z}_K)) = 0$ であり、
+$H_0(s(\mathbf{Z}_K)) = \mathbf{Z}_{\mathcal{G}'}$ であると結論する。
+ここでホモロジー群は $\textit{PAb}(\mathcal{C})$ において計算している。
+層化は完全関手なので、補題の結論を得る。すなわち、完全性から
+$H_0(s(\mathbf{Z}_K))^\# = H_0(s(\mathbf{Z}_K^\#))$
+が従い、他の次数についても同様である。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-acyclicity}
+$\mathcal{C}$ をサイトとし、$f : L \to K$ を
+$\textit{PSh}(\mathcal{C})$ の単体的対象の間の射とする。
+また、$n \geq 0$ を整数とする。次を仮定する：
+\begin{enumerate}
+\item $i < n$ に対して射 $L_i \to K_i$ は同型である；
+\item 射 $L_n \to K_n$ は層化後に全射である；
+\item 標準写像 $L \to \text{cosk}_n \text{sk}_n L$ は同型である；
+\item 標準写像 $K \to \text{cosk}_n \text{sk}_n K$ は同型である。
+\end{enumerate}
+このとき $H_i(f) : H_i(L) \to H_i(K)$ は同型である。
+\end{lemma}
+
+\begin{proof}
+この証明は上の補題 \ref{hypercovering-lemma-compare-cosk0} の証明とまったく同じである。
+まず、$K_n' \subset K_n$ を写像 $L_n \to K_n$ の像である部分前層とする。
+仮定 (2) は、$K_n'$ の層化が $K_n$ の層化に等しいことを意味する。
+さらに、すべての $i < n$ に対して $L_i = K_i$ なので、
+$U_0 = L_0 = K_0, \ldots, U_{n - 1} = L_{n - 1} = K_{n - 1}, U_n = K'_n$.
+と取ることにより $n$-切断単体的前層 $U$ を得る。
+単体的前層 $K' = \text{cosk}_n U$ と置く。$K'_m$ は有限極限として
+構成でき、層化は完全なので、$(K'_m)^\# = K_m$ である。
+言い換えると $(K')^\# = K^\#$ である。再び層化の完全性により
+$H_i(K) = H_i(K')$ と結論する。したがって射 $L \to K'$ に対して
+補題を証明すれば十分である。すなわち、$L_n \to K_n$ は
+{\it 前層}の全射であると仮定してよい！
+
+\medskip\noindent
+この場合、$\mathcal{C}$ の任意の対象 $U$ に対して、単体集合の射
+$$
+L(U) \longrightarrow K(U)
+$$
+は Simplicial, Lemma \ref{simplicial-lemma-section} のすべての仮定を
+満たす。したがってこれは自明 Kan ファイブレーションであり、特に
+ホモトピー同値である（Simplicial, Lemma
+\ref{simplicial-lemma-trivial-kan-homotopy}）。ゆえに
+$$
+\mathbf{Z}_L(U) \longrightarrow \mathbf{Z}_K(U)
+$$
+もホモトピー同値である。これはすべての $U$ に対して成り立つので、
+結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-acyclic-hypercover-sheaves}
+$\mathcal{C}$ をサイトとし、$K$ を単体的前層、$\mathcal{G}$ を前層とする。
+また、$K \to \mathcal{G}$ を $K$ から $\mathcal{G}$ への増大とする。
+次を仮定する：
+\begin{enumerate}
+\item 前層の射 $K_0 \to \mathcal{G}$ は層化後に全射となる；
+\item 射
+$$
+(d^1_0, d^1_1) :
+K_1
+\longrightarrow
+K_0 \times_\mathcal{G} K_0
+$$
+は層化後に全射となる；
+\item すべての $n \geq 1$ に対して射
+$$
+K_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n K)_{n + 1}
+$$
+は層化後に全射となる。
+\end{enumerate}
+このとき $i > 0$ に対して $H_i(K) = 0$ であり、
+$H_0(K) = \mathbf{Z}_\mathcal{G}^\#$ である。
+\end{lemma}
+
+\begin{proof}
+$n \geq 1$ に対して $K^n = \text{cosk}_n \text{sk}_n K$ と置く。
+$K^0$ を、その項 $(K^0)_n$ が $(n + 1)$ 重ファイバー積
+$K_0 \times_\mathcal{G} \ldots \times_\mathcal{G} K_0$ に等しい
+単体的対象として定義する；Simplicial, Example
+\ref{simplicial-example-fibre-products-simplicial-object} を参照。
+射
+$$
+K \longrightarrow \ldots \to K^n \to K^{n - 1} \to \ldots \to K^1 \to K^0.
+$$
+がある。射 $K \to K^i$ および $j \geq i \geq 1$ に対する
+$K^j \to K^i$ は、各関手 $\text{cosk}_n$ の普遍性から得られる。
+射 $K^1 \to K^0$ は Simplicial, Remark
+\ref{simplicial-remark-augmentation} の標準射である。また、
+$K^0 \to \text{cosk}_1 \text{sk}_1 K^0$ が同型であることも思い出そう；
+Simplicial, Lemma \ref{simplicial-lemma-cosk-minus-one} を参照。
+
+\medskip\noindent
+補題 \ref{hypercovering-lemma-compare-cosk0} により、$i > 0$ に対して
+$H_i(K^0) = 0$ であり、$H_0(K^0) = \mathbf{Z}_\mathcal{G}^\#$ である。
+
+\medskip\noindent
+$n \geq 1$ を取り、射 $K^n \to K^{n - 1}$ を考える。
+これは次数 $< n$ の各項上で同型である。また、
+$K^n \to \text{cosk}_n \text{sk}_n K^n$ および
+$K^{n - 1} \to \text{cosk}_n \text{sk}_n K^{n - 1}$ は同型である。
+さらに $(K^n)_n = K_n$ であり、
+$(K^{n - 1})_n = (\text{cosk}_{n - 1} \text{sk}_{n - 1} K)_n$ である。
+したがって仮定により、$(K^n)_n \to (K^{n - 1})_n$ は層化後に
+全射となる前層の射である。補題 \ref{hypercovering-lemma-acyclicity} により
+$H_i(K^n) = H_i(K^{n - 1})$ を得る。これを上の結果と合わせれば、
+補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-acyclic}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。$K$ を $X$ の超被覆とする。
+単体的前層 $F(K)$ のホモロジーは、次数 $> 0$ では $0$ であり、
+次数 $0$ では $\mathbf{Z}_X^\#$ に等しい。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{hypercovering-lemma-acyclic-hypercover-sheaves} と
+\ref{hypercovering-lemma-hypercovering-F} を組み合わせればよい。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{{\v C}ech コホモロジーと超被覆}
+\label{hypercovering-section-hyper-cech}
+
+\noindent
+$\mathcal{C}$ をサイトとする。サイト $\mathcal{C}$ 上の
+アーベル群の前層 $\mathcal{F}$ を考える。これは関手
+\begin{eqnarray*}
+\mathcal{F} : \text{SR}(\mathcal{C})^{opp}
+& \longrightarrow &
+\textit{Ab} \\
+\{U_i\}_{i \in I} &
+\longmapsto &
+\prod\nolimits_{i \in I} \mathcal{F}(U_i)
+\end{eqnarray*}
+を定める。したがって、$\text{SR}(\mathcal{C})$ の単体的対象 $K$ は
+$\textit{Ab}$ の余単体的対象 $\mathcal{F}(K)$ に移される。
+$\mathcal{F}(K)$ に付随するコチェイン複体 $s(\mathcal{F}(K))$
+（Simplicial, Section
+\ref{simplicial-section-dold-kan-cosimplicial}）を、単体的対象 $K$ に
+関する $\mathcal{F}$ の {\v C}ech 複体という。次のように置く：
+$$
+\check{H}^i(K, \mathcal{F})
+=
+H^i(s(\mathcal{F}(K))).
+$$
+これを $K$ に関する $\mathcal{F}$ の第 $i$ {\v C}ech コホモロジー群という。
+本節では、Cohomology, Sections \ref{cohomology-section-cech},
+\ref{cohomology-section-cech-functor},
+\ref{cohomology-section-cech-cohomology-cohomology} で証明された
+開被覆の {\v C}ech コホモロジーに関するいくつかの結果の類似を証明する。
+
+\begin{lemma}
+\label{hypercovering-lemma-h0-cech}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。$K$ を $X$ の超被覆とし、
+$\mathcal{F}$ を $\mathcal{C}$ 上のアーベル群の層とする。
+このとき $\check{H}^0(K, \mathcal{F}) = \mathcal{F}(X)$ である。
+\end{lemma}
+
+\begin{proof}
+次が成り立つ：
+$$
+\check{H}^0(K, \mathcal{F})
+=
+\Ker(\mathcal{F}(K_0) \longrightarrow \mathcal{F}(K_1))
+$$
+$K_0 = \{U_i \to X\}$ と書く。これはサイト $\mathcal{C}$ における
+被覆である。また、$K_1 \to K_0 \times K_0$ は
+$\text{SR}(\mathcal{C}, X)$ における被覆である。したがって
+$K_1 = \amalg_{i_0, i_1 \in I} \{V_{i_0i_1j} \to X\}$ と書けて、
+射 $K_1 \to K_0 \times K_0$ は、サイト $\mathcal{C}$ の被覆
+$\{V_{i_0i_1j} \to U_{i_0} \times_X U_{i_1}\}$ により与えられる。
+ゆえに、さらに
+$$
+\check{H}^0(K, \mathcal{F})
+=
+\Ker(
+\prod\nolimits_i \mathcal{F}(U_i)
+\longrightarrow
+\prod\nolimits_{i_0i_1 j} \mathcal{F}(V_{i_0i_1j})
+)
+$$
+と同一視できる。ここで写像は明らかなものである。
+$\mathcal{F}$ の層条件から
+$\check{H}^0(K, \mathcal{F}) = H^0(X, \mathcal{F})$ が従う。
+\end{proof}
+
+\noindent
+実際、この性質はもちろん、$\mathcal{C}$ 上のすべてのアーベル前層のうち
+アーベル層を特徴づける。この場合の Cohomology, Lemma
+\ref{hypercovering-lemma-injective-trivial-cech} の類似は次のとおりである。
+
+\begin{lemma}
+\label{hypercovering-lemma-injective-trivial-cech}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆、$\mathcal{I}$ を
+$\mathcal{C}$ 上の入射的アーベル群の層とする。このとき
+$$
+\check{H}^p(K, \mathcal{I}) =
+\left\{
+\begin{matrix}
+\mathcal{I}(X) & \text{（} & p = 0\text{ のとき）} \\
+0 & \text{（} & p > 0\text{ のとき）}
+\end{matrix}
+\right.
+$$
+\end{lemma}
+
+\begin{proof}
+$\text{SR}(\mathcal{C}, X)$ の任意の対象
+$Z = \{U_i \to X\}$ と、$\mathcal{C}$ 上の任意のアーベル層
+$\mathcal{F}$ に対して、次が成り立つことに注意する：
+\begin{eqnarray*}
+\mathcal{F}(Z)
+& = &
+\prod \mathcal{F}(U_i) \\
+& = &
+\prod \Mor_{\textit{PSh}(\mathcal{C})}(h_{U_i}, \mathcal{F})\\
+& = &
+\Mor_{\textit{PSh}(\mathcal{C})}(F(Z), \mathcal{F})\\
+& = &
+\Mor_{\textit{PAb}(\mathcal{C})}(\mathbf{Z}_{F(Z)}, \mathcal{F}) \\
+& = &
+\Mor_{\textit{Ab}(\mathcal{C})}(\mathbf{Z}_{F(Z)}^\#, \mathcal{F})
+\end{eqnarray*}
+したがって、$\text{SR}(\mathcal{C}, X)$ の任意の単体的対象 $K$ に対して
+\begin{equation}
+\label{hypercovering-equation-identify-cech}
+s(\mathcal{F}(K))
+=
+\Hom_{\textit{Ab}(\mathcal{C})}(s(\mathbf{Z}_{F(K)}^\#), \mathcal{F})
+\end{equation}
+である。記法については定義 \ref{hypercovering-definition-homology} を参照。
+$K$ が超被覆なら、層の複体 $s(\mathbf{Z}_{F(K)}^\#)$ は
+$\mathbf{Z}_X^\#$ と擬同型である；補題
+\ref{hypercovering-lemma-hypercovering-acyclic} を参照。したがって、
+$\mathcal{I}$ が入射的アーベル層で $K$ が超被覆なら、複体
+$s(\mathcal{I}(K))$ は次数 $0$ を除いて非輪状である。言い換えると、
+$$
+\check{H}^i(K, \mathcal{I}) = 0
+$$
+が $i > 0$ に対して成り立つ。これを補題 \ref{hypercovering-lemma-h0-cech} と
+合わせれば補題が従う。
+\end{proof}
+
+\noindent
+次に Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-spectral-sequence} の類似を述べる。
+$\mathcal{C}$ をサイトとし、$\mathcal{F}$ を $\mathcal{C}$ 上の
+アーベル群の層とする。$\underline{H}^i(\mathcal{F})$ は、規則
+$\underline{H}^i(\mathcal{F}) : U \longmapsto H^i(U, \mathcal{F})$
+により定まる $\mathcal{C}$ 上のアーベル群の前層を表すことを思い出そう。
+本節の序論と同様に、これを $\text{SR}(\mathcal{C})$ へ拡張する。
+
+\begin{lemma}
+\label{hypercovering-lemma-cech-spectral-sequence}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆、$\mathcal{F}$ を
+$\mathcal{C}$ 上のアーベル群の層とする。$D^{+}(\textit{Ab})$ に、
+$\mathcal{F}$ に関して関手的な写像
+$$
+s(\mathcal{F}(K))
+\longrightarrow
+R\Gamma(X, \mathcal{F})
+$$
+があり、これは関手 $\textit{Ab}(\mathcal{C}) \to \textit{Ab}$ の間の
+自然変換
+$$
+\check{H}^i(K, -) \longrightarrow H^i(X, -)
+$$
+を誘導する。さらに、
+$$
+E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))
+$$
+をもつスペクトル系列 $(E_r, d_r)_{r \geq 0}$ が存在し、
+$H^{p + q}(X, \mathcal{F})$ に収束する。このスペクトル系列は
+$\mathcal{F}$ および超被覆 $K$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+Cohomology の章の対応する補題と同じ方法で証明することもできるが、
+ここでは二重複体による議論で証明する。
+
+\medskip\noindent
+$\mathcal{C}$ 上のアーベル層の圏で入射分解
+$\mathcal{F} \to \mathcal{I}^\bullet$ を選ぶ。項が
+$$
+A^{p, q} = \mathcal{I}^q(K_p)
+$$
+である二重複体 $A^{\bullet, \bullet}$ を考える。ここで微分
+$d_1^{p, q} : A^{p, q} \to A^{p + 1, q}$ は、余単体的アーベル群
+$\mathcal{I}^p(K)$ に付随する複体 $s(\mathcal{I}^q(K))$ の微分から
+得られ、微分 $d_2^{p, q} : A^{p, q} \to A^{p, q + 1}$ は微分
+$\mathcal{I}^q \to \mathcal{I}^{q + 1}$ から得られる。
+$\text{Tot}(A^{\bullet, \bullet})$ で二重複体
+$A^{\bullet, \bullet}$ に付随する全複体を表す；Homology, Section
+\ref{homology-section-double-complexes} を参照。この二重複体に付随する
+二つのスペクトル系列 $({}'E_r, {}'d_r)$ と $({}''E_r, {}''d_r)$ を用いる；
+Homology, Section \ref{homology-section-double-complex} を参照。
+
+\medskip\noindent
+補題 \ref{hypercovering-lemma-injective-trivial-cech} により、複体
+$s(\mathcal{I}^q(K))$ は正次数で非輪状であり、その $H^0$ は
+$\mathcal{I}^q(X)$ に等しい。したがって Homology, Lemma
+\ref{homology-lemma-double-complex-gives-resolution} により、自然な写像
+$$
+\mathcal{I}^\bullet(X) \longrightarrow \text{Tot}(A^{\bullet, \bullet})
+$$
+はアーベル群の複体の擬同型である。特に、
+$H^n(\text{Tot}(A^{\bullet, \bullet})) = H^n(X, \mathcal{F})$ である。
+
+\medskip\noindent
+補題の写像 $s(\mathcal{F}(K)) \longrightarrow R\Gamma(X, \mathcal{F})$
+は、写像 $s(\mathcal{F}(K)) \to \text{Tot}(A^{\bullet, \bullet})$ と
+上で表示した擬同型の逆との合成である。これは
+$\mathcal{I}^\bullet(X)$ が $R\Gamma(X, \mathcal{F})$ の代表だからである。
+
+\medskip\noindent
+スペクトル系列 $({}'E_r, {}'d_r)_{r \geq 0}$ を考える。
+Homology, Lemma \ref{homology-lemma-ss-double-complex} により
+$$
+{}'E_2^{p, q} = H^p_I(H^q_{II}(A^{\bullet, \bullet}))
+$$
+である。言い換えると、まず $d_2$ に関してコホモロジーを取り、群
+${}'E_1^{p, q} = \underline{H}^q(\mathcal{F})(K_p)$。
+を得る。したがって、微分 ${}'d_1$ の記述により、実際に
+${}'E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))$。
+上の結果と Homology, Lemma
+\ref{homology-lemma-first-quadrant-ss} により、これは所望のとおり
+$H^n(X, \mathcal{F})$ に収束する。
+
+\medskip\noindent
+上の構成がアーベル層 $\mathcal{F}$ および超被覆 $K$ に関して
+関手的であるという主張の証明は省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Verdier による超被覆}
+\label{hypercovering-section-hypercoverings-verdier}
+
+\noindent
+注意深い読者は、対象 $X$ の超被覆に対する {\v C}ech コホモロジーから
+コホモロジーへのスペクトル系列を得るために必要なのは、補題
+\ref{hypercovering-lemma-hypercovering-F} の結論だけであることに気づくだろう。
+したがって次の定義は意味をもつ。
+
+\begin{definition}
+\label{hypercovering-definition-hypercovering-variant}
+$\mathcal{C}$ をサイトとし、$\mathcal{C}$ は等化子とファイバー積を
+もつと仮定する。$\mathcal{G}$ を集合の前層とする。
+{\it $\mathcal{G}$ の超被覆}とは、増大 $F(K) \to \mathcal{G}$ を
+備えた $\text{SR}(\mathcal{C})$ の単体的対象 $K$ であって、
+\begin{enumerate}
+\item $F(K_0) \to \mathcal{G}$ は層化後に全射となる；
+\item $F(K_1) \to F(K_0) \times_\mathcal{G} F(K_0)$
+は層化後に全射となる；
+\item $F(K_{n + 1}) \longrightarrow F((\text{cosk}_n \text{sk}_n K)_{n + 1})$
+$n \geq 1$ に対して層化後に全射となる
+\end{enumerate}
+ものをいう。$\text{SR}(\mathcal{C})$ の単体的対象 $K$ が
+$\textit{PSh}(\mathcal{C})$ の終対象 $*$ の超被覆であるとき、
+$K$ を{\it 超被覆}という。
+\end{definition}
+
+\noindent
+$\mathcal{C}$ がファイバー積と等化子をもつという仮定から、
+$\text{SR}(\mathcal{C})$ もファイバー積と等化子をもち、$F$ はこれらと
+可換することが保証される（補題 \ref{hypercovering-lemma-coprod-prod-SR}）。これは、
+使用する余骨格関手を定義するのに十分である（Simplicial, Remark
+\ref{simplicial-remark-existence-cosk} および Categories, Lemma
+\ref{categories-lemma-fibre-products-equalizers-exist} を参照）。
+一般の $\mathcal{C}$ に対しては、条件 (3) を、
+$F(K_{n + 1}) \longrightarrow ((\text{cosk}_n \text{sk}_n F(K))_{n + 1})$
+が $n \geq 1$ に対して層化後に全射となるという条件で置き換えれば、
+本節の結果はそのまま成り立つ。
+
+\medskip\noindent
+$\mathcal{F}$ を $\mathcal{C}$ 上のアーベル層とする。前節では、
+$\text{SR}(\mathcal{C})$ の単体的対象 $K$ に関する $\mathcal{F}$ の
+{\v C}ech 複体を定義した。次に、前層 $\mathcal{G}$ が与えられたとき
+$$
+H^0(\mathcal{G}, \mathcal{F}) =
+\Mor_{\textit{PSh}(\mathcal{C})}(\mathcal{G}, \mathcal{F}) =
+\Mor_{\Sh(\mathcal{C})}(\mathcal{G}^\#, \mathcal{F}) =
+H^0(\mathcal{G}^\#, \mathcal{F})
+$$
+と置く。記法は Cohomology on Sites, Section
+\ref{sites-cohomology-section-limp} と同じである。これは左完全関手であり、
+その高次導来関手（Cohomology on Sites, Section
+\ref{sites-cohomology-section-limp} で簡単に扱われている）を
+$H^i(\mathcal{G}, \mathcal{F})$ と表す。$\mathcal{G}$ の超被覆 $K$ が
+与えられたとき、コホモロジー $H^i(\mathcal{G}, \mathcal{F})$ に収束する
+{\v C}ech コホモロジーからコホモロジーへのスペクトル系列が存在することを
+示す。$\mathcal{G} = *$ なら、
+$H^i(*, \mathcal{F}) = H^i(\mathcal{C}, \mathcal{F})$ は
+サイト $\mathcal{C}$ 上の $\mathcal{F}$ のコホモロジーを復元する。
+
+\begin{lemma}
+\label{hypercovering-lemma-h0-cech-variant}
+$\mathcal{C}$ を等化子とファイバー積をもつサイトとする。
+$\mathcal{G}$ を $\mathcal{C}$ 上の前層、$K$ を $\mathcal{G}$ の超被覆、
+$\mathcal{F}$ を $\mathcal{C}$ 上のアーベル群の層とする。このとき
+$\check{H}^0(K, \mathcal{F}) = H^0(\mathcal{G}, \mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+$H^0(\mathcal{G}, \mathcal{F})$ の定義と、次の図式が層化後に
+余等化子図式となることから従う：
+$$
+\xymatrix{
+F(K_1) \ar@<1ex>[r] \ar@<-1ex>[r] &
+F(K_0) \ar[r] & \mathcal{G}
+}
+$$
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-injective-trivial-cech-variant}
+$\mathcal{C}$ を等化子とファイバー積をもつサイトとする。
+$\mathcal{G}$ を $\mathcal{C}$ 上の前層、$K$ を $\mathcal{G}$ の超被覆、
+$\mathcal{I}$ を $\mathcal{C}$ 上の入射的アーベル群の層とする。このとき
+$$
+\check{H}^p(K, \mathcal{I}) =
+\left\{
+\begin{matrix}
+H^0(\mathcal{G}, \mathcal{I}) & \text{（} & p = 0\text{ のとき）} \\
+0 & \text{（} & p > 0\text{ のとき）}
+\end{matrix}
+\right.
+$$
+\end{lemma}
+
+\begin{proof}
+(\ref{hypercovering-equation-identify-cech}) により
+$$
+s(\mathcal{F}(K))
+=
+\Hom_{\textit{Ab}(\mathcal{C})}(s(\mathbf{Z}_{F(K)}^\#), \mathcal{F})
+$$
+である。複体 $s(\mathbf{Z}_{F(K)}^\#)$ は
+$\mathbf{Z}_\mathcal{G}^\#$ と擬同型である；補題
+\ref{hypercovering-lemma-acyclic-hypercover-sheaves} を参照。したがって
+$\mathcal{I}$ が入射的アーベル層なら、複体 $s(\mathcal{I}(K))$ は
+次数 $0$ を除いて非輪状である。言い換えると、$i > 0$ に対して
+$\check{H}^i(K, \mathcal{I}) = 0$ である。これを補題
+\ref{hypercovering-lemma-h0-cech-variant} と合わせれば補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-cech-spectral-sequence-variant}
+$\mathcal{C}$ を等化子とファイバー積をもつサイトとする。
+$\mathcal{G}$ を $\mathcal{C}$ 上の前層、$K$ を $\mathcal{G}$ の超被覆、
+$\mathcal{F}$ を $\mathcal{C}$ 上のアーベル群の層とする。
+$D^{+}(\textit{Ab})$ に、$\mathcal{F}$ に関して関手的な写像
+$$
+s(\mathcal{F}(K)) \longrightarrow R\Gamma(\mathcal{G}, \mathcal{F})
+$$
+があり、これは関手 $\textit{Ab}(\mathcal{C}) \to \textit{Ab}$ の間の自然変換
+$$
+\check{H}^i(K, -) \longrightarrow H^i(\mathcal{G}, -)
+$$
+を誘導する。さらに、
+$$
+E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))
+$$
+をもつスペクトル系列 $(E_r, d_r)_{r \geq 0}$ が存在し、
+$H^{p + q}(\mathcal{G}, \mathcal{F})$ に収束する。このスペクトル系列は
+$\mathcal{F}$ および超被覆 $K$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{C}$ 上のアーベル層の圏で入射分解
+$\mathcal{F} \to \mathcal{I}^\bullet$ を選ぶ。項が
+$$
+A^{p, q} = \mathcal{I}^q(K_p)
+$$
+である二重複体 $A^{\bullet, \bullet}$ を考える。ここで微分
+$d_1^{p, q} : A^{p, q} \to A^{p + 1, q}$ は微分
+$\mathcal{I}^p \to \mathcal{I}^{p + 1}$ から得られ、微分
+$d_2^{p, q} : A^{p, q} \to A^{p, q + 1}$ は、上で説明したように、
+余単体的アーベル群 $\mathcal{I}^p(K)$ に付随する複体
+$s(\mathcal{I}^p(K))$ の微分から得られる。この二重複体に付随する
+二つのスペクトル系列 $({}'E_r, {}'d_r)$ と $({}''E_r, {}''d_r)$ を用いる；
+Homology, Section \ref{homology-section-double-complex} を参照。
+
+\medskip\noindent
+補題 \ref{hypercovering-lemma-injective-trivial-cech-variant} により、複体
+$s(\mathcal{I}^p(K))$ は正次数で非輪状であり、その $H^0$ は
+$H^0(\mathcal{G}, \mathcal{I}^p)$ に等しい。したがって Homology, Lemma
+\ref{homology-lemma-double-complex-gives-resolution} とその証明により、
+スペクトル系列 $({}'E_r, {}'d_r)$ は退化し、自然な写像
+$$
+H^0(\mathcal{G}, \mathcal{I}^\bullet) \longrightarrow
+\text{Tot}(A^{\bullet, \bullet})
+$$
+はアーベル群の複体の擬同型である。補題の写像
+$s(\mathcal{F}(K)) \longrightarrow R\Gamma(\mathcal{G}, \mathcal{F})$ は、
+自然な写像 $s(\mathcal{F}(K)) \to \text{Tot}(A^{\bullet, \bullet})$ と
+上で表示した擬同型の逆との合成である。これは
+$H^0(\mathcal{G}, \mathcal{I}^\bullet)$ が
+$R\Gamma(\mathcal{G}, \mathcal{F})$ の代表だからである。
+
+\medskip\noindent
+スペクトル系列 $({}''E_r, {}''d_r)_{r \geq 0}$ を考える。
+Homology, Lemma \ref{homology-lemma-ss-double-complex} により
+$$
+{}''E_2^{p, q} = H^p_{II}(H^q_I(A^{\bullet, \bullet}))
+$$
+である。言い換えると、まず $d_1$ に関してコホモロジーを取り、群
+${}''E_1^{p, q} = \underline{H}^p(\mathcal{F})(K_q)$。
+を得る。したがって、微分 ${}''d_1$ の記述により、実際に
+${}''E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))$。
+このスペクトル系列は $\text{Tot}(A^{\bullet, \bullet})$ の
+コホモロジーに収束するので、証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-cech-spectral-sequence-verdier}
+$\mathcal{C}$ を等化子とファイバー積をもつサイトとし、$K$ を超被覆、
+$\mathcal{F}$ をアーベル層とする。このとき
+$$
+E_2^{p, q} = \check{H}^p(K, \underline{H}^q(\mathcal{F}))
+$$
+をもつスペクトル系列 $(E_r, d_r)_{r \geq 0}$ が存在し、
+大域コホモロジー群 $H^{p + q}(\mathcal{F})$ に収束する。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{hypercovering-lemma-cech-spectral-sequence-variant} の特別な場合である。
+\end{proof}
+
+
+
+
+
+
+
+\section{被覆による超被覆の細分}
+\label{hypercovering-section-covering}
+
+\noindent
+超被覆を構成するいくつかの方法を述べる。圏
+$\text{SR}(\mathcal{C}, X)$ はファイバー積をもつので、その単体的対象の
+圏もファイバー積をもつことに注意する；Simplicial, Lemma
+\ref{simplicial-lemma-fibre-product} を参照。
+
+\begin{lemma}
+\label{hypercovering-lemma-funny-gamma}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。$K,L,M$ を
+$\text{SR}(\mathcal{C}, X)$ の単体的対象とし、
+$a : K \to L$、$b : M \to L$ を射とする。次を仮定する：
+\begin{enumerate}
+\item $K$ は $X$ の超被覆である；
+\item 射 $M_0 \to L_0$ は被覆である；
+\item すべての $n \geq 0$ に対し、次の図式の矢印 $\gamma$ は被覆である：
+$$
+\xymatrix{
+M_{n + 1} \ar[dd] \ar[rr] \ar[rd]^\gamma &
+&
+(\text{cosk}_n \text{sk}_n M)_{n + 1} \ar[dd] \\
+&
+L_{n + 1}
+\times_{(\text{cosk}_n \text{sk}_n L)_{n + 1}}
+(\text{cosk}_n \text{sk}_n M)_{n + 1}
+\ar[ld] \ar[ru]
+& \\
+L_{n + 1} \ar[rr] & & (\text{cosk}_n \text{sk}_n L)_{n + 1}
+}
+$$
+\end{enumerate}
+このときファイバー積 $K \times_L M$ は $X$ の超被覆である。
+\end{lemma}
+
+\begin{proof}
+(2) により、射 $(K \times_L M)_0 = K_0 \times_{L_0} M_0 \to K_0$
+は被覆の基底変換であり、したがって被覆である；補題
+\ref{hypercovering-lemma-covering-permanence} を参照。(1) により
+$K_0 \to \{X \to X\}$ は被覆である。ゆえに補題
+\ref{hypercovering-lemma-covering-permanence} により、
+$(K \times_L M)_0 \to \{X \to X\}$ は被覆である。したがって
+$K \times_L M$ は定義 \ref{hypercovering-definition-hypercovering} の第一条件を満たす。
+
+\medskip\noindent
+さらに、すべての $n \geq 0$ に対して射
+$$
+K_{n + 1} \times_{L_{n + 1}} M_{n + 1} = (K \times_L M)_{n + 1}
+\longrightarrow
+(\text{cosk}_n \text{sk}_n (K \times_L M))_{n + 1}
+$$
+が被覆であることを確かめなければならない。次のように略記する：
+$A = (\text{cosk}_n \text{sk}_n K)_{n + 1}$,
+$B = (\text{cosk}_n \text{sk}_n L)_{n + 1}$, および
+$C = (\text{cosk}_n \text{sk}_n M)_{n + 1}$.
+関手 $\text{cosk}_n \text{sk}_n$ はファイバー積と可換する；
+Simplicial, Lemma \ref{simplicial-lemma-cosk-fibre-product} を参照。
+したがって上の右辺は $A \times_B C$ に等しい。次の可換図式を考える：
+$$
+\xymatrix{
+K_{n + 1} \times_{L_{n + 1}} M_{n + 1} \ar[r] \ar[d] &
+M_{n + 1} \ar[d] \ar[rd]_\gamma \ar[rrd] &
+& \\
+K_{n + 1} \ar[r] \ar[rd] &
+L_{n + 1} \ar[rrd] &
+L_{n + 1} \times_B C \ar[l] \ar[r] &
+C \ar[d] \\
+&
+A \ar[rr] &
+&
+B
+}
+$$
+この図式は
+$$
+K_{n + 1} \times_{L_{n + 1}} M_{n + 1}
+=
+(K_{n + 1} \times_B C)
+\times_{(L_{n + 1} \times_B C), \gamma}
+M_{n + 1}
+$$
+を示す。さて、$K_{n + 1} \times_B C \to A \times_B C$ は、被覆
+$K_{n + 1} \to A$ の射 $A \times_B C \to A$ による基底変換なので、
+被覆である。仮定 (3) により射 $\gamma$ は被覆である。したがって射
+$$
+(K_{n + 1} \times_B C)
+\times_{(L_{n + 1} \times_B C), \gamma}
+M_{n + 1}
+\longrightarrow
+K_{n + 1} \times_B C
+$$
+も被覆の基底変換として被覆である。被覆の合成は被覆なので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-product-hypercoverings}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。$K,L$ が $X$ の超被覆なら、
+$K \times L$ は $X$ の超被覆である。
+\end{lemma}
+
+\begin{proof}
+直接確かめてもよいし、上の補題 \ref{hypercovering-lemma-funny-gamma} を適用して
+$L \to \{X \to X\}$ が性質 (3) をもつことを確かめてもよい。
+\end{proof}
+
+
+\noindent
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。圏 $\text{SR}(\mathcal{C}, X)$ は余積と
+有限極限をもつので、ある種の単体集合 $U$（例えば非退化単体を有限個しか
+もたないもの）と $\text{SR}(\mathcal{C}, X)$ の任意の単体的対象 $K$ に
+対して、対象 $U \times K$ と $\Hom(U, K)$ を考えることができる。
+Simplicial, Sections
+\ref{simplicial-section-product-with-simplicial-sets} および
+\ref{simplicial-section-hom-from-simplicial-sets} を参照。
+
+\begin{lemma}
+\label{hypercovering-lemma-covering}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆とする。$k \geq 0$ を整数とし、
+$u : Z \to K_k$ を $\text{SR}(\mathcal{C}, X)$ における被覆とする。
+このとき、$L_k \to K_k$ が $u$ を経由して分解するような
+超被覆の射 $f: L \to K$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$Y = K_k$ と置く。$C[k]$ を Simplicial, Example
+\ref{simplicial-example-simplex-cosimplicial-set} で定義された
+余単体集合とする。Simplicial, Lemma
+\ref{simplicial-lemma-morphism-into-product} で与えられる
+$\Hom(C[k], Y)$ と $\Hom(C[k], Z)$ の記述を用いる。
+$\text{id} : K_k = Y \to Y$ に対応する標準射
+$K \to \Hom(C[k], Y)$ がある。射
+$\Hom(C[k], Z) \to \Hom(C[k], Y)$ を考える。その次数 $n$ の項上の射は
+$$
+\prod\nolimits_{\alpha : [k] \to [n]} Z
+\longrightarrow
+\prod\nolimits_{\alpha : [k] \to [n]} Y
+$$
+であり、各因子上で与えられた射 $Z \to Y$ を用いる。次のように置く：
+$$
+L = K \times_{\Hom(C[k], Y)} \Hom(C[k], Z).
+$$
+射 $L_k \to K_k$ は可換図式
+$$
+\xymatrix{
+L_k \ar[r] \ar[d] &
+\prod_{\alpha : [k] \to [k]} Z \ar[r]^-{\text{pr}_{\text{id}_{[k]}}} \ar[d] &
+Z \ar[d] \\
+K_k \ar[r] &
+\prod_{\alpha : [k] \to [k]} Y \ar[r]^-{\text{pr}_{\text{id}_{[k]}}} &
+Y
+}
+$$
+に入る。下側の二つの矢印の合成は恒等射なので、所望の分解を得る。
+
+\medskip\noindent
+$L$ が $X$ の超被覆であることを示す必要がある。そのために補題
+\ref{hypercovering-lemma-funny-gamma} を用いる。条件 (1) は仮定により満たされる。
+(2) については、射
+$$
+\Hom(C[k], Z)_0 \to \Hom(C[k], Y)_0
+$$
+は被覆である。実際、射 $[k] \to [0]$ は一つしかないので、これは
+$Z \to Y$ と同型である。
+
+\medskip\noindent
+$n = 0$ に対する条件 (3) を考える。
+$(\text{cosk}_0 T)_1 = T \times T$
+（Simplicial, Example \ref{simplicial-example-cosk0}）であり、かつ
+$\Hom(C[k], Z)_1 = \prod_{\alpha : [k] \to [1]} Z$ なので、図式
+$$
+\xymatrix{
+\prod\nolimits_{\alpha : [k] \to [1]} Z \ar[r] \ar[d] &
+Z \times Z \ar[d] \\
+\prod\nolimits_{\alpha : [k] \to [1]} Y \ar[r] &
+Y \times Y
+}
+$$
+を得る。ここで水平な矢印は、二つの非全射 $\alpha$ に対応する因子への
+射影に対応する。したがって矢印 $\gamma$ は射
+$$
+\prod\nolimits_{\alpha : [k] \to [1]} Z
+\longrightarrow
+\prod\nolimits_{\alpha : [k] \to [1]\text{ 非全射}} Z
+\times
+\prod\nolimits_{\alpha : [k] \to [1]\text{ 全射}} Y
+$$
+である。これは被覆の積であり、したがって補題
+\ref{hypercovering-lemma-covering-permanence} により被覆である。
+
+\medskip\noindent
+$n > 0$ に対する条件 (3) を考える。有限集合の単射
+$\tau : S' \to S$ であって、$\text{SR}(\mathcal{C}, X)$ の任意の対象
+$T$ に対して射
+\begin{equation}
+\label{hypercovering-equation-map}
+\Hom(C[k], T)_{n + 1} \to
+(\text{cosk}_n \text{sk}_n \Hom(C[k], T))_{n + 1}
+\end{equation}
+が $T$ に関して関手的に射影
+$\prod_{s \in S} T \to \prod_{s' \in S'} T$ と同型となるものが
+存在すると主張する。この主張が正しければ、前段落と同様に、矢印
+$\gamma$ は射
+$$
+\prod\nolimits_{s \in S} Z
+\longrightarrow
+\prod\nolimits_{s \in S'} Z
+\times
+\prod\nolimits_{s \not\in \tau(S')} Y
+$$
+であることが分かる。これは被覆の積であり、したがって補題
+\ref{hypercovering-lemma-covering-permanence} により被覆である。構成により
+$\Hom(C[k], T)_{n + 1} = \prod_{\alpha : [k] \to [n + 1]} T$
+である（Simplicial, Lemma
+\ref{simplicial-lemma-morphism-into-product} を参照）。したがって
+$S = \text{Map}([k], [n + 1])$ と取る。一方、Simplicial, Lemma
+\ref{simplicial-lemma-formula-limit} は
+$(\text{cosk}_n \text{sk}_n \Hom(C[k], T))_{n + 1}$
+の点を、$\Hom(C[k], T)_n$ の点の列
+$(f_0, \ldots, f_{n + 1})$ で
+$d^n_{j - 1} f_i = d^n_i f_j$（$0 \leq i < j \leq n + 1$）。
+を満たすものとして記述する。$f_i = (f_{i, \alpha})$ と書ける。ここで
+$f_{i, \alpha}$ は $T$ の点で、
+$\alpha \in \text{Map}([k], [n])$ である。条件は
+$$
+f_{i, \delta^n_{j - 1} \circ \beta} = f_{j, \delta_i^n \circ \beta}
+$$
+が任意の $0 \leq i < j \leq n + 1$ と
+$\beta : [k] \to [n - 1]$ に対して成り立つというものになる。したがって
+$$
+S' = \{0, \ldots, n + 1\} \times \text{Map}([k], [n]) / \sim
+$$
+であり、ここで同値関係は
+$$
+(i, \delta^n_{j - 1} \circ \beta) \sim (j, \delta_i^n \circ \beta)
+$$
+（$0 \leq i < j \leq n + 1$、$\beta : [k] \to [n - 1]$）という
+同値関係で生成される。計算（省略）により、射
+(\ref{hypercovering-equation-map}) は、$(i, \alpha)$ を
+$\delta^{n + 1}_i \circ \alpha \in S$ に送る写像 $S' \to S$ に対応する。
+（Simplicial, Lemma
+\ref{simplicial-lemma-relations-face-degeneracy} の (1) により、この写像が
+良定義であることが分かるので、読者には安心材料になるかもしれない。）
+証明を終えるには、$\alpha, \alpha' : [k] \to [n]$ と
+$0 \leq i < j \leq n + 1$ が
+$$
+\delta^{n + 1}_i \circ \alpha = \delta^{n + 1}_j \circ \alpha'
+$$
+を満たすなら、ある $\beta : [k] \to [n - 1]$ に対して
+$\alpha = \delta^n_{j - 1} \circ \beta$ および
+$\alpha' = \delta_i^n \circ \beta$ となることを示せば十分である。
+これは容易に分かるので省略する。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-covering-sheaf}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆とする。$n \geq 0$ を整数とする。
+$u : \mathcal{F} \to F(K_n)$ を、層化後に全射となる前層の射とする。
+このとき、$F(f_n) : F(L_n) \to F(K_n)$ が $u$ を経由して分解するような
+超被覆の射 $f: L \to K$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$K_n = \{U_i \to X\}_{i \in I}$ と書く。このとき写像 $u$ は
+集合の前層の射 $u : \mathcal{F} \to \amalg h_{u_i}$ である。
+$u$ に関する仮定は、各 $i \in I$ に対してサイト $\mathcal{C}$ の被覆
+$\{U_{ij} \to U_i\}_{j \in I_i}$ と前層の射
+$t_{ij} : h_{U_{ij}} \to \mathcal{F}$ が存在し、$u \circ t_{ij}$ が
+射 $U_{ij} \to U_i$ から生じる写像
+$h_{U_{ij}} \to h_{U_i}$ となることを意味する。
+$J = \amalg_{i \in I} I_i$ と置き、$\alpha : J \to I$ を明らかな写像とする。
+$j \in J$ に対して $V_j = U_{\alpha(j)j}$ と書き、
+$Z = \{V_j \to X\}_{j \in J}$ と置く。最後に、$\alpha : J \to I$ と
+上の射 $V_j = U_{\alpha(j)j} \to U_{\alpha(j)}$ により与えられる射
+$u' : Z \to K_n$ を考える。これは明らかに圏
+$\text{SR}(\mathcal{C}, X)$ における被覆であり、構成により
+$F(u') : F(Z) \to F(K_n)$ は $u$ を経由して分解する。
+したがって上の補題 \ref{hypercovering-lemma-covering} から結論が従う。
+\end{proof}
+
+
+\section{単体の付加}
+\label{hypercovering-section-adding-simplices}
+
+\noindent
+本節では後で必要となるいくつかの技術的補題を証明する。
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。上の Section \ref{hypercovering-section-covering} で
+指摘したように、ある種の単体集合 $U$ と
+$\text{SR}(\mathcal{C}, X)$ の任意の単体的対象 $K$ に対して、対象
+$U \times K$ と $\Hom(U, K)$ が定義される。Simplicial, Sections
+\ref{simplicial-section-product-with-simplicial-sets} および
+\ref{simplicial-section-hom-from-simplicial-sets} を参照。
+
+\begin{lemma}
+\label{hypercovering-lemma-one-more-simplex}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆とする。
+$U \subset V$ を単体集合とし、すべての $n$ に対して $U_n,V_n$ は
+有限かつ空でないとする。$U$ は非退化単体を有限個しかもたないと仮定する。
+$n \geq 0$ および $x \in V_n$、$x \not \in U_n$ が次を満たすとする：
+\begin{enumerate}
+\item $i < n$ に対して $V_i = U_i$；
+\item $V_n = U_n \cup \{x\}$；
+\item $j > n$ に対して、$z \in V_j$、$z \not \in U_j$ なら $z$ は退化している。
+\end{enumerate}
+このとき $\text{SR}(\mathcal{C}, X)$ における射
+$$
+\Hom(V, K)_0
+\longrightarrow
+\Hom(U, K)_0
+$$
+は被覆である。
+\end{lemma}
+
+\begin{proof}
+$n = 0$ なら、$V = U \amalg \Delta[0]$ であることが容易に従う
+（下記参照）。この場合
+$\Hom(V, K)_0 = \Hom(U, K)_0 \times K_0$ であり、結論は補題
+\ref{hypercovering-lemma-covering-permanence} から従う。
+
+\medskip\noindent
+$a : \Delta[n] \to V$ を Simplicial, Lemma
+\ref{simplicial-lemma-simplex-map} において $x$ に付随する射とする。
+$\partial \Delta[n] = i_{(n-1)!} \text{sk}_{n - 1} \Delta[n]$ と書き、
+これを $\Delta[n]$ の $(n - 1)$-骨格とする。
+$b : \partial \Delta[n] \to U$ を、$a$ の $\Delta[n]$ の
+$(n - 1)$-骨格への制限とする。Simplicial, Lemma
+\ref{simplicial-lemma-glue-simplex} により
+$V = U \amalg_{\partial \Delta[n]} \Delta[n]$ である。Simplicial, Lemma
+\ref{simplicial-lemma-hom-from-coprod} により、図式
+$$
+\xymatrix{
+\Hom(V, K)_0 \ar[r] \ar[d] &
+\Hom(U, K)_0 \ar[d] \\
+\Hom(\Delta[n], K)_0 \ar[r] &
+\Hom(\partial \Delta[n], K)_0
+}
+$$
+はファイバー積の正方形である。したがって下側の水平矢印が被覆であることを
+示せば十分である。Simplicial, Lemma
+\ref{simplicial-lemma-cosk-shriek} により、この矢印は
+$$
+K_n \to (\text{cosk}_{n - 1} \text{sk}_{n - 1} K)_n
+$$
+と同一視され、したがって超被覆の定義により被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-add-simplices}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆とする。
+$U \subset V$ を単体集合とし、すべての $n$ に対して $U_n,V_n$ は
+有限かつ空でないとする。$U$ と $V$ はともに非退化単体を有限個しか
+もたないと仮定する。このとき $\text{SR}(\mathcal{C}, X)$ における射
+$$
+\Hom(V, K)_0
+\longrightarrow
+\Hom(U, K)_0
+$$
+は被覆である。
+\end{lemma}
+
+\begin{proof}
+上の補題 \ref{hypercovering-lemma-one-more-simplex} により、この補題に現れるような
+単体集合の包含 $U \subset V$ に関する簡単な補題を証明すれば十分である。
+これはまさに Simplicial, Lemma
+\ref{simplicial-lemma-add-simplices} の結論である。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-degeneracy-maps-coverings}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$K$ を $X$ の超被覆とする。このとき
+\begin{enumerate}
+\item 各 $n \geq 0$ に対して、$K_n$ は $X$ の被覆である；
+\item すべての $n \geq 1$ と $0 \leq i \leq n$ に対して、
+$d^n_i : K_n \to K_{n - 1}$ は被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+定義 \ref{hypercovering-definition-hypercovering} により、$K_0$ は $X$ の被覆である
+ことを思い出そう。これは、$K_0 \to \{X \to X\}$ が定義
+\ref{hypercovering-definition-covering-SR} の意味で被覆であることと同値である。
+したがって (1) は (2) から従う。実際、(2) により合成
+$K_n \to K_{n - 1} \to \ldots \to K_0 \to \{X \to X\}$
+が補題 \ref{hypercovering-lemma-covering-permanence} によって被覆となる。
+
+\medskip\noindent
+(2) の証明。Simplicial, Lemma
+\ref{simplicial-lemma-exists-hom-from-simplicial-set-finite} により
+$\Mor(\Delta[n], K)_0 = K_n$ である。したがって、補題
+\ref{hypercovering-lemma-add-simplices} を $n + 1$ 個の相異なる包含
+$\Delta[n - 1] \to \Delta[n]$ に適用すれば (2) が従う。
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-P-covering}
+補題 \ref{hypercovering-lemma-add-simplices} と
+\ref{hypercovering-lemma-degeneracy-maps-coverings} の有用な特別な場合を述べる。
+圏 $\mathcal{C}$ はファイバー積をもつとする。
+$P \subset \text{Arrows}(\mathcal{C})$ を、基底変換と合成の下で安定で、
+すべての同型を含む部分集合とする。{\it $P$-超被覆}とは、
+$\mathcal{C}$ の単体的対象からの増大 $a : U \to X$ であって、
+\begin{enumerate}
+\item $U_0 \to X$ は $P$ に属する；
+\item $U_1 \to U_0 \times_X U_0$ は $P$ に属する；
+\item $U_{n + 1} \to (\text{cosk}_n\text{sk}_n U)_{n + 1}$
+$n \geq 1$ に対して $P$ に属する
+\end{enumerate}
+ものをいう。圏 $\mathcal{C}/X$ はすべての有限極限をもつので、上の定式化で
+用いた余骨格は存在する（Categories, Lemma
+\ref{categories-lemma-finite-limits-exist} を参照）。このとき、射
+$U_n \to X$ と $d^n_i : U_n \to U_{n - 1}$ は $P$ に属すると主張する。
+$\mathcal{C}$ を、$f \in P$ を満たす $\{f : V \to U\}$ を被覆とする
+サイトにし、$K_n = \{U_n \to X\}$ で与えられる $K$ を取れば、
+この主張は上記の補題から従う。
+\end{remark}
+
+
+\section{ホモトピー}
+\label{hypercovering-section-homotopies}
+
+\noindent
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。$L$ を $\text{SR}(\mathcal{C}, X)$ の
+単体的対象とする。Simplicial, Lemma
+\ref{simplicial-lemma-exists-hom-from-simplicial-set-finite} により、
+関手
+$$
+T
+\longmapsto
+\Mor_{\text{Simp}(\text{SR}(\mathcal{C}, X))}(\Delta[1] \times T, L)
+$$
+を表現する対象 $\Hom(\Delta[1], L)$ が圏
+$\text{Simp}(\text{SR}(\mathcal{C}, X))$ に存在する。
+$e_i : \Delta[0] \to \Delta[1]$ と同一視
+$\Hom(\Delta[0], L) = L$ から標準射
+$$
+\Hom(\Delta[1], L) \to L \times L
+$$
+が得られる。
+
+\begin{lemma}
+\label{hypercovering-lemma-hom-hypercovering}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象、$L$ を $\text{SR}(\mathcal{C}, X)$ の
+単体的対象とする。$n \geq 0$ とする。上で定義した射から生じる可換図式
+\begin{equation}
+\label{hypercovering-equation-diagram}
+\xymatrix{
+\Hom(\Delta[1], L)_{n + 1} \ar[r] \ar[d] &
+(\text{cosk}_n \text{sk}_n \Hom(\Delta[1], L))_{n + 1} \ar[d] \\
+(L \times L)_{n + 1} \ar[r] &
+(\text{cosk}_n \text{sk}_n (L \times L))_{n + 1}
+}
+\end{equation}
+を考える。この図式の各項は次のように同一視できる。ここで
+$\partial \Delta[n + 1] = i_{n!}\text{sk}_n \Delta[n + 1]$
+は $(n + 1)$-単体の $n$-骨格である：
+\begin{eqnarray*}
+\Hom(\Delta[1], L)_{n + 1}
+& = &
+\Hom(\Delta[1] \times \Delta[n + 1], L)_0 \\
+(\text{cosk}_n \text{sk}_n \Hom(\Delta[1], L))_{n + 1}
+& = &
+\Hom(\Delta[1] \times \partial \Delta[n + 1], L)_0 \\
+(L \times L)_{n + 1}
+& = &
+\Hom(
+(\Delta[n + 1] \amalg \Delta[n + 1], L)_0 \\
+(\text{cosk}_n \text{sk}_n (L \times L))_{n + 1}
+& = &
+\Hom(
+\partial \Delta[n + 1]
+\amalg
+\partial \Delta[n + 1], L)_0
+\end{eqnarray*}
+また、$\text{SR}(\mathcal{C}, X)$ におけるこれらの対象間の射は、
+単体集合の可換図式
+\begin{equation}
+\label{hypercovering-equation-dual-diagram}
+\xymatrix{
+\Delta[1] \times \Delta[n + 1] &
+\Delta[1] \times \partial\Delta[n + 1] \ar[l] \\
+\Delta[n + 1] \amalg \Delta[n + 1] \ar[u] &
+\partial\Delta[n + 1] \amalg \partial\Delta[n + 1]
+\ar[l] \ar[u]
+}
+\end{equation}
+から生じる。さらに、図式 (\ref{hypercovering-equation-diagram}) の下側の矢印と
+右側の矢印とのファイバー積は
+$$
+\Hom(U, L)_0
+$$
+に等しい。ここで $U \subset \Delta[1] \times \Delta[n + 1]$ は、
+$\Delta[n + 1] \amalg \Delta[n + 1]$ と
+$\Delta[1] \times \partial\Delta[n + 1]$ の双方がそこへ写るような
+最小の単体的部分集合である。
+\end{lemma}
+
+\begin{proof}
+第一および第三の等式は Simplicial, Lemma
+\ref{simplicial-lemma-exists-hom-from-simplicial-set-finite} である。
+第二および第四の等式は、この補題と Simplicial, Lemma
+\ref{simplicial-lemma-cosk-shriek} を合わせて従う。最後の主張は、
+$U$ が図式 (\ref{hypercovering-equation-dual-diagram}) の下側と右側の矢印の押し出しで
+あることから、Simplicial, Lemma
+\ref{simplicial-lemma-hom-from-coprod} を介して従う。
+$U$ がこの押し出しに等しいことを見るには、
+$\Delta[n + 1] \amalg \Delta[n + 1]$ と
+$\Delta[1] \times \partial\Delta[n + 1]$ の
+$\Delta[1] \times \Delta[n + 1]$ における共通部分が
+$\partial\Delta[n + 1] \amalg \partial\Delta[n + 1]$ に等しいことを
+確かめれば十分である。これは読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-homotopy}
+$\mathcal{C}$ をファイバー積をもつサイトとし、$X$ を
+$\mathcal{C}$ の対象とする。$K,L$ を $X$ の超被覆とし、
+$a,b : K \to L$ を超被覆の射とする。このとき、
+$a \circ c$ が $b \circ c$ とホモトピックになるような
+超被覆の射 $c : K' \to K$ が存在する。
+\end{lemma}
+
+\begin{proof}
+次の可換図式を考える：
+$$
+\xymatrix{
+K' \ar@{=}[r]^-{def} \ar[rd]_c &
+K \times_{(L \times L)} \Hom(\Delta[1], L)
+\ar[r] \ar[d] & \Hom(\Delta[1], L) \ar[d] \\
+& K \ar[r]^{(a, b)} & L \times L
+}
+$$
+$\Hom(\Delta[1], L)$ の関手性により、水平な射の合成は射
+$K' \times \Delta[1] \to L$ に対応し、これは $c \circ a$ と
+$c \circ b$ の間のホモトピーを定める。したがって、$K'$ が $X$ の
+超被覆であることを示せば補題を得る。そのため、補題
+\ref{hypercovering-lemma-funny-gamma} を射の対 $K \to L \times L$ と
+$\Hom(\Delta[1], L) \to L \times L$ に適用する。補題
+\ref{hypercovering-lemma-funny-gamma} の条件 (1) は満たされる。補題
+\ref{hypercovering-lemma-funny-gamma} の条件 (2) も成り立つ。
+実際、$\Hom(\Delta[1], L)_0 = L_1$ であり、$L$ が超被覆であるという
+仮定により、射
+$(d^1_0, d^1_1) : L_1 \to L_0 \times L_0$
+は $\text{SR}(\mathcal{C}, X)$ における被覆だからである。補題
+\ref{hypercovering-lemma-funny-gamma} の条件 (3) を証明するため、上の補題
+\ref{hypercovering-lemma-hom-hypercovering} を用いる。この補題によれば、補題
+\ref{hypercovering-lemma-funny-gamma} の条件 (3) の射 $\gamma$ は射
+$$
+\Hom(\Delta[1] \times \Delta[n + 1], L)_0
+\longrightarrow
+\Hom(U, L)_0
+$$
+である。ここで $U \subset \Delta[1] \times \Delta[n + 1]$ である。
+補題 \ref{hypercovering-lemma-add-simplices} によりこれは被覆なので、主張が証明された。
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-contractible-category}
+証明の要点は補題 \ref{hypercovering-lemma-add-simplices} を用いることにある。
+この補題は完全に一般的であり、単体集合の正確な形には依存しない
+（非退化単体が有限個しかなければよい）。したがって、次のような結果を
+期待するのはきわめて自然である。$K,L$ を超被覆とし、任意の射
+$a : K \times \partial \Delta[k] \to L$ が与えられたとする。このとき、
+超被覆の射 $c : K' \to K$ と射 $g : K' \times \Delta[k] \to L$ であって
+$g|_{K' \times \partial \Delta[k]} =
+a \circ (c \times \text{id}_{\partial \Delta[k]})$.
+を満たすものが存在する。言い換えると、超被覆の圏は適切な意味で可縮である。
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{コホモロジーと超被覆}
+\label{hypercovering-section-cohomology}
+
+\noindent
+$\mathcal{C}$ をファイバー積をもつサイトとする。
+$X$ を $\mathcal{C}$ の対象とし、$\mathcal{F}$ を $\mathcal{C}$ 上の
+アーベル群の層とする。$K,L$ を $X$ の超被覆とする。
+$a,b : K \to L$ がホモトピックな射ならば、
+$\mathcal{F}(a), \mathcal{F}(b) : \mathcal{F}(K) \to \mathcal{F}(L)$
+もホモトピックな射である。Simplicial, Lemma
+\ref{simplicial-lemma-functorial-homotopy} を参照せよ。
+したがって、付随するコチェイン複体のコホモロジー群上で同じ作用をもつ。
+Simplicial, Lemma \ref{simplicial-lemma-homotopy-s-Q} を参照せよ。
+これを用いて、すべての超被覆にわたる余極限を定義する。
+
+\medskip\noindent
+一時的に、$X$ の超被覆を対象とし、$X$ の超被覆の間の射を
+ホモトピーで割ったものを射とする圏を $\text{HC}(\mathcal{C}, X)$ と書く。
+これは圏であって「大きな」圏ではないことを既に見た。
+補題 \ref{hypercovering-lemma-hypercoverings-set} を参照せよ。
+$\text{HC}(\mathcal{C}, X)$ の反対圏を次の図式の添字圏とする。
+用語については Categories, Section \ref{categories-section-limits} を参照せよ。
+図式
+$$
+\check{H}^i(-, \mathcal{F}) :
+\text{HC}(\mathcal{C}, X)^{opp}
+\longrightarrow
+\textit{Ab}.
+$$
+を考える。補題 \ref{hypercovering-lemma-product-hypercoverings}、
+\ref{hypercovering-lemma-homotopy} および上のホモトピーに関する注意により、
+この図式は有向である。Categories, Definition
+\ref{categories-definition-directed} を参照せよ。したがって余極限
+$$
+\check{H}^i_{\text{HC}}(X, \mathcal{F}) =
+\colim_{K \in \text{HC}(\mathcal{C}, X)} \check{H}^i(K, \mathcal{F})
+$$
+は特に単純に記述できる（引用箇所を参照せよ）。
+
+\begin{theorem}
+\label{hypercovering-theorem-cohomology-hypercoverings}
+$\mathcal{C}$ をファイバー積をもつサイトとする。
+$X$ を $\mathcal{C}$ の対象とし、$i \geq 0$ とする。関手
+\begin{eqnarray*}
+\textit{Ab}(\mathcal{C}) & \longrightarrow & \textit{Ab} \\
+\mathcal{F} & \longmapsto & H^i(X, \mathcal{F}) \\
+\mathcal{F} & \longmapsto & \check{H}^i_{\text{HC}}(X, \mathcal{F})
+\end{eqnarray*}
+は標準同型である。
+\end{theorem}
+
+\begin{proof}[スペクトル系列を用いる証明]
+ある $p \geq 0$ に対して $\xi \in H^p(X, \mathcal{F})$ とする。
+$X$ のある超被覆 $K$ に対し、$\xi$ が補題
+\ref{hypercovering-lemma-cech-spectral-sequence} の写像
+$\check{H}^p(X, \mathcal{F}) \to H^p(X, \mathcal{F})$ の像に属することを示す。
+
+\medskip\noindent
+$p = 0$ なら、これは補題 \ref{hypercovering-lemma-h0-cech} による。
+$p = 1$ なら、サイト $\mathcal{C}$ において $\xi|_{U_i} = 0$ を満たす被覆
+$K_0 = \{U_i \to X\}$ から始め、例 \ref{hypercovering-example-cech} のように
+$X$ の {\v C}ech 超被覆 $K$ を選ぶ。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering} を参照せよ。
+この場合、補題 \ref{hypercovering-lemma-cech-spectral-sequence} のスペクトル系列から直ちに、
+$\xi$ は $\check{H}^1(K, \mathcal{F})$ の元から来ることが従う。
+一般の場合には、$\xi$ の $\underline{H}^p(\mathcal{F})(K_0)$ における像が
+零になるような $X$ の超被覆 $K$ を任意に選ぶ（ここでも例
+\ref{hypercovering-example-cech} と Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering} を用いる）。
+補題 \ref{hypercovering-lemma-cech-spectral-sequence} のスペクトル系列によれば、
+$\xi$ が $\check{H}^p(K, \mathcal{F})$ の元から来ることへの障害は、
+次を満たす元の列 $\xi_1, \ldots, \xi_{p - 1}$ である：
+$\xi_q \in \check{H}^{p - q}(K, \underline{H}^q(\mathcal{F}))$
+（より正確には、これらの群のある部分商における $\xi_q$ の像である）。
+
+\medskip\noindent
+超被覆 $K$ を細分で帰納的に置き換えることにより、障害
+$\xi_1, \ldots, \xi_{p - 1}$ の制限を零にできる
+（部分商における像だけでなく元そのものを零にするので、ここに微妙な点はない）。
+実際、既に $\xi_{q + 1}, \ldots, \xi_{p - 1}$ が零となる状況に
+到達したと仮定する。次の元
+$\xi_q \in \check{H}^{p - q}(K, \underline{H}^q(\mathcal{F}))$
+は、ある元
+$$
+\tilde \xi_q \in
+\underline{H}^q(\mathcal{F})(K_{p - q}) =
+\prod H^q(U_i, \mathcal{F})
+$$
+の類であることに注意せよ。ここで $K_{p - q} = \{U_i \to X\}_{i \in I}$ とする。
+$\xi_{q, i}$ を $\tilde \xi_q$ の $H^q(U_i, \mathcal{F})$ における成分とする。
+$q \geq 1$ なので、再び Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering} を用いて、
+各制限 $\xi_{q, i}|_{U_{i, j}} = 0$ となるようなサイトの被覆
+$\{U_{i, j} \to U_i\}$ を選べる。圏 $\text{SR}(\mathcal{C}, X)$ の対象
+$Z = \{U_{i, j} \to X\}$ と、その明らかな射
+$u : Z \to K_{p - q}$ を考える。定義 \ref{hypercovering-definition-covering-SR} により、
+$u$ は明らかに被覆である。補題 \ref{hypercovering-lemma-covering} により、
+$L_{p - q} \to K_{p - q}$ が $u$ を経由して分解するような、$X$ の超被覆の射
+$L \to K$ が存在する。すると $\xi_q$ の
+$\underline{H}^q(\mathcal{F})(L_{p - q})$ における像は明らかに零である。
+補題 \ref{hypercovering-lemma-cech-spectral-sequence} のスペクトル系列は関手的なので、
+$K$ を $L$ で置き換えた後には $\xi_q, \ldots, \xi_{p - 1}$ がすべて
+零である状況に到達する。この操作を続ければ、最終的にそれらがすべて
+零となる超被覆を得る。したがって $\xi$ は写像
+$\check{H}^p(X, \mathcal{F}) \to H^p(X, \mathcal{F})$ の像に属する。
+
+\medskip\noindent
+$K$ を $X$ の超被覆とし、$\xi \in \check{H}^p(K, \mathcal{F})$ とする。
+また、補題 \ref{hypercovering-lemma-cech-spectral-sequence} の写像
+$\check{H}^p(X, \mathcal{F}) \to H^p(X, \mathcal{F})$ による
+$\xi$ の像が零であるとする。定理の証明を終えるには、$\xi$ の
+$\check{H}^p(L, \mathcal{F})$ への制限が零となるような超被覆の射
+$L \to K$ が存在することを示さなければならない。補題
+\ref{hypercovering-lemma-cech-spectral-sequence} のスペクトル系列により、$\xi$ の
+$H^p(X, \mathcal{F})$ における像が消えることは、次を満たす元
+$\xi_1, \ldots, \xi_{p - 2}$ が存在することを意味する：
+$\xi_q \in \check{H}^{p - 1 - q}(K, \underline{H}^q(\mathcal{F}))$
+（より正確には、それらのある部分商における像である）。しかも、
+スペクトル系列における像 $d_{q + 1}^{p - 1 - q, q}\xi_q$ の和が
+$\xi$ である。したがって上とまったく同じ仕組みにより、元
+$\xi_q$（$q = 1, \ldots, p - 2$）の
+$\check{H}^{p - 1 - q}(L, \underline{H}^q(\mathcal{F}))$ における制限が
+零となるような超被覆の射 $L \to K$ を見つけられる。
+補題 \ref{hypercovering-lemma-cech-spectral-sequence} により、射 $L \to K$ は
+スペクトル系列の射を誘導するので、$\xi$ は零である。
+\end{proof}
+
+\begin{proof}[スペクトル系列を用いない証明]
+$i = 0$ の場合の結果は既に見た。補題 \ref{hypercovering-lemma-h0-cech} を参照せよ。
+関手 $H^i(X, -)$ が普遍 $\delta$-関手をなすことが分かっている。
+Derived Categories, Lemma \ref{derived-lemma-higher-derived-functors} を参照せよ。
+定理を証明するには、関手列 $\check{H}^i_{HC}(X, -)$ が
+$\delta$-関手をなすことを示せば十分である。実際、{\v C}ech コホモロジーは
+入射的な層上で零であることが分かっており（補題
+\ref{hypercovering-lemma-injective-trivial-cech}）、Homology, Lemma
+\ref{homology-lemma-efface-implies-universal} を適用できる。
+
+\medskip\noindent
+次を $\mathcal{C}$ 上のアーベル群の層の短完全列とする：
+$$
+0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0
+$$
+$\xi \in \check{H}^p_{HC}(X, \mathcal{H})$ とする。$X$ の超被覆 $K$ と、
+コホモロジーにおいて $\xi$ を表す元 $\sigma \in \mathcal{H}(K_p)$ を選ぶ。
+対応する複体の完全列
+$$
+0 \to s(\mathcal{F}(K)) \to s(\mathcal{G}(K)) \to s(\mathcal{H}(K))
+$$
+があるが、右端にも零があるとは限らない。これだけが、蛇の補題を単純に
+適用して $\delta(\xi)$ を定義することを妨げている。
+$K_p = \{U_i \to X\}$ ならば
+$$
+\mathcal{H}(K_p) = \prod \mathcal{H}(U_i)
+$$
+であることを思い出そう。$\sigma =\prod \sigma_i$ と書く。ここで
+$\sigma_i \in \mathcal{H}(U_i)$ である。$\mathcal{G} \to \mathcal{H}$ は
+層の全射なので、$\sigma_i|_{U_{i, j}}$ がある元
+$\tau_{i, j} \in \mathcal{G}(U_{i, j})$ の像となるような被覆
+$\{U_{i, j} \to U_i\}$ が存在する。圏 $\text{SR}(\mathcal{C}, X)$ の対象
+$Z = \{U_{i, j} \to X\}$ と、その明らかな射 $u : Z \to K_p$ を考える。
+定義 \ref{hypercovering-definition-covering-SR} により、$u$ は明らかに被覆である。
+補題 \ref{hypercovering-lemma-covering} により、$L_p \to K_p$ が $u$ を経由して
+分解するような $X$ の超被覆の射 $L \to K$ が存在する。したがって
+$K$ を $L$ で置き換えた後、$\sigma$ はある元
+$\tau \in \mathcal{G}(K_p)$ の像であると仮定してよい。
+$d(\sigma) = 0$ であるが、必ずしも $d(\tau) = 0$ ではないことに注意せよ。
+したがって $d(\tau) \in \mathcal{F}(K_{p + 1})$ はコサイクルである。
+この状況で、$\delta(\xi)$ をコサイクル $d(\tau)$ の
+$\check{H}^{p + 1}_{HC}(X, \mathcal{F})$ における類として定義する。
+
+\medskip\noindent
+ここで確認すべきことがいくつかある：(a) $\delta(\xi)$ は $\tau$ の選択に
+依存しないこと、(b) $\delta(\xi)$ は $\sigma$ が持ち上がるような超被覆の射
+$L \to K$ の選択に依存しないこと、(c) $\delta(\xi)$ は $\xi$ を表すために
+最初に選んだ超被覆と $\sigma$ に依存しないことである。
+(a)、(b)、(c) の確認は省略する。超被覆の選択からの独立性は、実際には
+補題 \ref{hypercovering-lemma-product-hypercoverings} と \ref{hypercovering-lemma-homotopy} に帰着する。
+また、$\mathcal{C}$ 上のアーベル群の層の短完全列の間の射に関して
+$\delta$ が関手的であることの確認も省略する。
+
+\medskip\noindent
+最後に、この $\delta$ の定義によって、上のアーベル群の層の短完全列から
+{\v C}ech コホモロジー群の長完全列が得られることを確認しなければならない。
+まず、$\delta(\xi) = 0$（$\xi$ は上のとおり）ならば、$\xi$ はある元
+$\xi' \in \check{H}^p_{HC}(X, \mathcal{G})$ の像であることを示す。
+実際、$\delta(\xi) = 0$ ならば、上の記法のもとで $d(\tau)$ の類は
+$\check{H}^{p + 1}_{HC}(X, \mathcal{F})$ において零である。
+したがって、$d(\tau)$ の制限を $\mathcal{F}(L_{p + 1})$ の元とみたものが、
+ある $\upsilon \in \mathcal{F}(L_p)$ に対する $d(\upsilon)$ に等しくなるような
+超被覆の射 $L \to K$ が存在する。これは $\tau|_{L_p} + \upsilon$ が
+コサイクルをなし、$\xi$ に写る類 $\xi' \in \check{H}^p(L, \mathcal{G})$
+を定めることを意味する。
+
+\medskip\noindent
+次の主張の証明は省略する：
+$\xi' \in \check{H}^{p + 1}_{HC}(X, \mathcal{F})$ が
+$\check{H}^{p + 1}_{HC}(X, \mathcal{G})$ において零に写るならば、
+ある $\xi \in \check{H}^p_{HC}(X, \mathcal{H})$ に対して
+$\xi' = \delta(\xi)$ である。
+\end{proof}
+
+\noindent
+次に、一工夫によって定理 \ref{hypercovering-theorem-cohomology-hypercoverings} の
+Verdier の場合を導く。
+
+\begin{proposition}
+\label{hypercovering-proposition-cohomology-hypercoverings}
+$\mathcal{C}$ をファイバー積と二項積をもつサイトとする。
+$\mathcal{F}$ を $\mathcal{C}$ 上のアーベル群の層とし、$i \geq 0$ とする。
+このとき：
+\begin{enumerate}
+\item 任意の $\xi \in H^i(\mathcal{F})$ に対して、$\xi$ が標準写像
+$\check{H}^i(K, \mathcal{F}) \to H^i(\mathcal{F})$ の像に属するような
+超被覆 $K$ が存在する；
+\item $K,L$ が超被覆で、$\xi_K \in \check{H}^i(K, \mathcal{F})$ と
+$\xi_L \in \check{H}^i(L, \mathcal{F})$ が $H^i(\mathcal{F})$ の同じ元に
+写るならば、超被覆 $M$ と射 $M \to K$、$M \to L$ が存在し、
+$\xi_K$ と $\xi_L$ は $\check{H}^i(M, \mathcal{F})$ の同じ元に写る。
+\end{enumerate}
+言い換えれば、集合論的な問題を除けば、$\mathcal{C}$ 上の $\mathcal{F}$ の
+コホモロジー群は、すべての超被覆にわたる $\mathcal{F}$ の
+{\v C}ech コホモロジー群の余極限である。
+\end{proposition}
+
+\begin{proof}
+この結果は定理 \ref{hypercovering-theorem-cohomology-hypercoverings} の自明な帰結である。
+実際、$\mathcal{C}$ を、人為的に少し大きなサイト $\mathcal{C}'$ で
+置き換えることができる。ここで (I) $\mathcal{C}'$ は終対象 $X$ をもち、
+(II) $\mathcal{C}$ の超被覆は $\mathcal{C}'$ における $X$ の超被覆と
+ほぼ同じものである。しかし、事情の性質上、かなり多くの整理が必要となる。
+
+\medskip\noindent
+$\mathcal{C}$ における共通の終域をもつ射の族 $\{U_i \to U\}$ を、写像
+$\coprod_{i \in I} h_{U_i} \to h_U$ が層化後に全射となるとき
+{\it 弱被覆}と呼ぶ。新しいサイト $\mathcal{C}'$ を次のように構成する：
+\begin{enumerate}
+\item 圏として $\Ob(\mathcal{C}') = \Ob(\mathcal{C}) \amalg \{X\}$ と置き、
+$\mathcal{C}'$ の各対象から $X$ への唯一の射を付け加える；
+\item $\mathcal{C}$ にファイバー積と二項積が存在することにより、
+$\mathcal{C}'$ はファイバー積をもつ；
+\item $\mathcal{C}'$ の被覆は、$\mathcal{C}$ の弱被覆と、次の条件を満たす
+$\{U_i \to X\}_{i \in I}$ からなる：ある $i$ に対して $U_i = X$ であるか、
+またはすべての $i$ に対して $U_i \not = X$ であり、$\mathcal{C}$ 上の
+前層の写像 $\coprod h_{U_i} \to *$ が $\mathcal{C}$ 上で層化した後に
+全射となる；
+\item Sets, Lemma \ref{sets-lemma-coverings-site} を適用して被覆を制限し、
+サイト $\mathcal{C}'$ を得る。
+\end{enumerate}
+包含関手 $\mathcal{C} \to \mathcal{C}'$ は特殊余連続関手なので、
+$\Sh(\mathcal{C}') = \Sh(\mathcal{C})$ である
+（Sites, Definition \ref{sites-definition-special-cocontinuous-functor} を参照せよ）。
+直接的な確認は省略する。
+
+\medskip\noindent
+$\mathcal{C}'$ の被覆 $\{U_i \to X\}$ で、すべての $i$ に対して $U_i$ が
+$\mathcal{C}$ の対象となるものを選ぶ（$\mathcal{C} \to \mathcal{C}'$ が
+特殊余連続なので、これは可能である）。すると
+$K_0 = \{U_i \to X\}$ は上で構成したサイト $\mathcal{C}'$ の被覆である。
+$K_0$ を $\text{SR}(\mathcal{C}', X)$ の対象とみなし、
+$K_{init} = \text{cosk}_0(K_0)$ と置く。例 \ref{hypercovering-example-cech} により、
+$K_{init}$ は $X$ の超被覆である。各 $K_{init, n}$ は
+$W_j \in \Ob(\mathcal{C})$ を満たす $\{W_j \to X\}$ という形をしている。
+
+\medskip\noindent
+(1) の証明。$\xi \in H^i(\mathcal{F}) = H^i(X, \mathcal{F}')$ を選ぶ。
+ここで $\mathcal{F}'$ は、$\mathcal{C}$ 上の $\mathcal{F}$ に対応する
+$\mathcal{C}'$ 上のアーベル群の層である。定理
+\ref{hypercovering-theorem-cohomology-hypercoverings} により、$\mathcal{C}'$ における
+$X$ の超被覆の射 $K' \to K_{init}$ で、$\xi$ が
+$\check{H}^i(K', \mathcal{F})$ の元から来るようなものが存在する。
+$K'_n = \{U_{n, j} \to X\}$ と書く。$K'_n$ は $K_{init, n}$ に写るので、
+$U_{n, j}$ は $\mathcal{C}$ の対象である。したがって
+$K_n = \{U_{n, j}\}$ と置くことにより、$\text{SR}(\mathcal{C})$ の
+単体的対象 $K$ を定義できる。$\mathcal{C}$ の射の族からなる
+$\mathcal{C}'$ の被覆は弱被覆なので、$K$ は定義
+\ref{hypercovering-definition-hypercovering-variant} の意味で超被覆である。
+最後に、$\mathcal{F}'$ は $\mathcal{C}'$ 上、その $\mathcal{C}$ への制限が
+$\mathcal{F}$ に等しい唯一の層なので、{\v C}ech 複体
+$s(\mathcal{F}(K))$ と $s(\mathcal{F}'(K'))$ は同一であり、(1) が従う。
+（コホモロジー群への写像との両立性は省略する。）
+
+\medskip\noindent
+(2) の証明。$K,L$ を $\mathcal{C}$ の超被覆とする。$K',L'$ を、関手
+$\text{SR}(\mathcal{C}) \to \text{SR}(\mathcal{C}', X)$,
+$\{U_i\} \mapsto \{U_i \to X\}$ によって $K,L$ から得られる
+$\text{SR}(\mathcal{C}', X)$ の単体的対象とする。上と同様に {\v C}ech 複体は
+等しいので、$\mathcal{C}'$ 上の $\mathcal{F}'$ の同じコホモロジー類に写る
+$\xi_{K'}$ と $\xi_{L'}$ を得る。集合論的な問題のため、必要なら
+$\mathcal{C}'$ における被覆の選択を拡大することで、$K',L'$ は
+$\mathcal{C}'$ における $X$ の超被覆であると仮定してよい。
+これは定義 \ref{hypercovering-definition-hypercovering-variant} における超被覆の定義と、
+$\mathcal{C}$ の弱被覆が $\mathcal{C}'$ の被覆を与えることから従う。
+定理 \ref{hypercovering-theorem-cohomology-hypercoverings} により、$\mathcal{C}'$ における
+$X$ の超被覆 $M'$ と、射 $M' \to K'$、$M' \to L'$、
+$M' \to K_{init}$ が存在し、$\xi_{K'}$ と $\xi_{L'}$ は
+$\check{H}^i(M', \mathcal{F})$ の同じ元へ制限される。
+この主張を上と同様に展開すれば、(2) が従う。
+\end{proof}
+
+
+
+
+
+\section{空間の超被覆}
+\label{hypercovering-section-hypercoverings-spaces}
+
+\noindent
+上の理論は、位相空間の場合にも多少興味深い。この場合には超被覆が
+何であるかを具体的に書き下し、結果が実際に何を述べているかを見ることができる。
+
+\medskip\noindent
+$X$ を位相空間とする。Sites, Example
+\ref{sites-example-site-topological} のサイト $X_{Zar}$ を考える。
+$X_{Zar}$ の対象は単に $X$ の開集合であり、$X_{Zar}$ の射は
+単に包含写像に対応することを思い出そう。では、サイト $X_{Zar}$ における
+$X$ の超被覆とは何であろうか。
+
+\medskip\noindent
+まず定義 \ref{hypercovering-definition-SR} を展開する。
+$\text{SR}(X_{Zar}, X)$ の対象は、集合 $I$ と、各 $i \in I$ に対する
+開集合 $U_i \subset X$ によって与えられる。射 $U_i \to X$ に混乱の余地は
+ないので、これを $\{U_i\}_{i \in I}$ と書く。このような二つの対象の間の射
+$\{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$ は、すべての $i \in I$ に対して
+$U_i \subset V_{\alpha(i)}$ を満たす集合の写像 $\alpha : I \to J$ によって
+与えられる。このような射が被覆となるのはいつか。それは、すべての
+$j \in J$ に対して
+$V_j = \bigcup_{i\in I, \ \alpha(i) = j} U_i$ であるとき、かつそのときに限る
+（そしてこれはサイト $X_{Zar}$ における被覆である）。
+
+\medskip\noindent
+以上から、サイト $X_{Zar}$ における超被覆を次のように記述できる。
+$X_{Zar}$ における $X$ の超被覆は、次のデータによって与えられる：
+\begin{enumerate}
+\item 単体集合 $I$（Simplicial, Section
+\ref{simplicial-section-simplicial-set} を参照せよ）；
+\item 各 $n \geq 0$ と各 $i \in I_n$ に対する開集合 $U_i \subset X$。
+\end{enumerate}
+このようなデータの組を $(I, \{U_i\})$ と書く。これが $X$ の超被覆となるために、
+次の性質を要求する：
+\begin{itemize}
+\item $i \in I_n$ と $0 \leq a \leq n$ に対して
+$U_i \subset U_{d^n_a(i)}$；
+\item $i \in I_n$ と $0 \leq a \leq n$ に対して
+$U_i = U_{s^n_a(i)}$；
+\item
+\begin{equation}
+\label{hypercovering-equation-covering-X}
+X = \bigcup\nolimits_{i \in I_0} U_i,
+\end{equation}
+\item 各 $i_0, i_1 \in I_0$ に対して
+\begin{equation}
+\label{hypercovering-equation-covering-two}
+U_{i_0} \cap U_{i_1} =
+\bigcup\nolimits_{i \in I_1, \ d^1_0(i) = i_0, \ d^1_1(i) = i_1} U_i,
+\end{equation}
+\item 各 $n \geq 1$ と、すべての $0\leq a < b\leq n + 1$ に対して
+$d^n_{b - 1}(i_a) = d^n_a(i_b)$ を満たす各
+$(i_0, \ldots, i_{n + 1}) \in (I_n)^{n + 2}$ に対して
+\begin{equation}
+\label{hypercovering-equation-covering-general}
+U_{i_0} \cap \ldots \cap U_{i_{n + 1}} =
+\bigcup\nolimits_{i \in I_{n + 1},
+\ d^{n + 1}_a(i) = i_a, \ a = 0, \ldots, n + 1} U_i,
+\end{equation}
+\item 開被覆 (\ref{hypercovering-equation-covering-X})、
+(\ref{hypercovering-equation-covering-two}) と (\ref{hypercovering-equation-covering-general})
+はすべて $\text{Cov}(X_{Zar})$ の元である
+（これは被覆の添字集合の大きさを制限する集合論的条件である）。
+\end{itemize}
+例えば条件 (\ref{hypercovering-equation-covering-X}) と
+(\ref{hypercovering-equation-covering-two}) は空間上の層の章から馴染み深いはずであり、
+条件 (\ref{hypercovering-equation-covering-general}) はその自然な一般化である。
+
+\begin{remark}
+\label{hypercovering-remark-not-covering-set}
+この記述の一つの特徴は、多重交叉
+$U_{i_0} \cap \ldots \cap U_{i_{n + 1}}$ の一つが空ならば、
+右辺の被覆が空被覆であり得ることである。したがって、写像
+$I_{n + 1} \to (\text{cosk}_n\text{sk}_n I)_{n + 1}$ が自動的に
+全射になるとは限らない。これは、$I$ の幾何学的実現が興味深い
+（非可縮な）空間であり得ることを意味する。
+
+\medskip\noindent
+実際、$I'_n \subset I_n$ を、$U_i \not = \emptyset$ を満たす単体
+$i \in I_n$ からなる部分集合とする。$I' \subset I$ が単体的部分集合であり、
+$(I', \{U_i\})$ が超被覆であることは容易に分かる。したがって、任意の超被覆を、
+どの開集合 $U_i$ も空でない超被覆へ常に細分できる。
+\end{remark}
+
+\begin{remark}
+\label{hypercovering-remark-repackage-into-simplicial-space}
+この情報をさらに別の仕方でまとめ直そう。$(I, \{U_i\})$ を位相空間
+$X$ の超被覆とする。このデータから、
+$$
+U_n = \coprod\nolimits_{i \in I_n} U_i,
+$$
+と置くことによって単体的位相空間 $U_\bullet$ を構成できる。また、
+$\varphi : [n] \to [m]$ が与えられたとき、射
+$U(\varphi) : U_n \to U_m$ を、各 $i \in I_n$ に対する包含
+$U_i \subset U_{\varphi(i)}$ から生じる射とする。この単体的位相空間は
+増大 $\epsilon : U_\bullet \to X$ をもつ。この射により、単体的空間
+$U_\bullet$ は $X$ の超被覆となり、これに沿って
+\cite[Expos\'e Vbis]{SGA4} の意味でコホモロジー降下が成り立つ。すなわち、
+$H^n(U_\bullet, \epsilon^*\mathcal{F}) = H^n(X, \mathcal{F})$。
+（単体的空間上のコホモロジー、およびこの言葉で定式化した
+コホモロジー降下について、ここに将来の参照を挿入する。）
+$\mathcal{F}$ を $X$ 上のアーベル群の層とする。この場合、補題
+\ref{hypercovering-lemma-cech-spectral-sequence} のスペクトル系列は、$E_1$-項が
+$$ 
+E_1^{p, q} = H^q(U_p, \epsilon_q^*\mathcal{F})
+\Rightarrow
+H^{p + q}(U_\bullet, \epsilon^*\mathcal{F}) = H^{p + q}(X, \mathcal{F})
+$$
+であるスペクトル系列となる。これは $\epsilon^*\mathcal{F}$ の全コホモロジーを、
+$U_\bullet$ の各部分上の $\mathcal{F}$ のコホモロジー群と比較する
+（このスペクトル系列について、ここに将来の参照を挿入する）。
+\end{remark}
+
+\noindent
+位相幾何学では、すべての $U_i$ が $X$ の位相の与えられた基底から来て、
+さらに被覆 (\ref{hypercovering-equation-covering-two}) と
+(\ref{hypercovering-equation-covering-general}) がすべて、与えられた共終的な被覆族から
+来るという性質をもつ $X$ の超被覆を見つけたいことが多い。
+以下に二つの例となる補題を挙げる。
+
+\begin{lemma}
+\label{hypercovering-lemma-basis-hypercovering}
+$X$ を位相空間とし、$\mathcal{B}$ を $X$ の位相の基底とする。
+各 $U_i$ が $\mathcal{B}$ の元であるような $X$ の超被覆
+$(I, \{U_i\})$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$n \geq 0$ とする。$X$ の{\it $n$-切断超被覆}とは、$n$-切断単体集合
+$I$ と、各 $i \in I_a$、$0 \leq a \leq n$ に対する $X$ の開集合
+$U_i$ であって、超被覆を定義する条件が意味をもつ限りそれを満たすものとする。
+言い換えれば、条件に現れるすべての単体が $a \leq n$ を満たす
+$a$-単体であるときにのみ、包含関係と被覆条件を要求する。
+すべての $U_i$ が $\mathcal{B}$ に属する $n$-切断超被覆
+$(I, \{U_i\})$ が与えられたとき、$a \leq n$ の $a$-単体を一つも
+付け加えずに、これを $(n + 1)$-切断超被覆へ拡張できることを示せば、
+補題が従う。これは次のように行う。まず、
+$I' = \text{sk}_{n + 1}(\text{cosk}_n I)$
+で定義される $(n + 1)$-切断単体集合 $I'$ を考える。次を思い出そう：
+$$
+I'_{n + 1} =
+\left\{
+\begin{matrix}
+(i_0, \ldots, i_{n + 1}) \in (I_n)^{n + 2} \text{ であって}\\
+d^n_{b - 1}(i_a) = d^n_a(i_b) \text{ がすべての }0\leq a < b\leq n + 1\text{ に対して成り立つ}
+\end{matrix}
+\right\}
+$$
+$i' \in I'_{n + 1}$ が退化しており、例えば $i' = s^n_a(i)$ ならば、
+$U_{i'} = U_i$ と置く（いずれにせよ、第二の条件によりこれは強制される）。
+この場合は $J_{i'} = \{i'\}$ とも置く。$i' \in I'_{n + 1}$ が非退化で、
+例えば $i' = (i_0, \ldots, i_{n + 1})$ ならば、集合 $J_{i'}$ と開被覆
+\begin{equation}
+\label{hypercovering-equation-choose-covering}
+U_{i_0} \cap \ldots \cap U_{i_{n + 1}} =
+\bigcup\nolimits_{i \in J_{i'}} U_i,
+\end{equation}
+を、各 $i \in J_{i'}$ に対して $U_i \in \mathcal{B}$ となるように選ぶ。次を置く：
+$$
+I_{n + 1} = \coprod\nolimits_{i' \in I'_{n + 1}} J_{i'}
+$$
+標準写像 $\pi : I_{n + 1} \to I'_{n + 1}$ があり、構成により、
+$I'_{n + 1}$ の退化単体の集合上で全単射である。
+$i \in I_{n + 1}$ に対して
+$d^{n + 1}_a(i) = d^{n + 1}_a(\pi(i))$ と定義する。$i \in I_n$ に対して、
+$s^n_a(i) \in I_{n + 1}$ を、退化単体 $s^n_a(i) \in I'_{n + 1}$ の上にある
+唯一の単体として定義する。これが $X$ の $(n + 1)$-切断超被覆を定義することの
+確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-quasi-separated-quasi-compact-hypercovering}
+$X$ を位相空間とし、$\mathcal{B}$ を $X$ の位相の基底とする。次を仮定する：
+\begin{enumerate}
+\item $X$ は準コンパクトである；
+\item 各 $U \in \mathcal{B}$ は準コンパクト開集合である；
+\item $X$ の任意の二つの準コンパクト開集合の共通部分は準コンパクトである。
+\end{enumerate}
+このとき、次の性質をもつ $X$ の超被覆 $(I, \{U_i\})$ が存在する：
+\begin{enumerate}
+\item 各 $U_i$ は基底 $\mathcal{B}$ の元である；
+\item 各 $I_n$ は有限集合であり、特に
+\item 被覆 (\ref{hypercovering-equation-covering-X})、
+(\ref{hypercovering-equation-covering-two}) と (\ref{hypercovering-equation-covering-general})
+はすべて有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{hypercovering-lemma-basis-hypercovering} の証明の構成において、
+(\ref{hypercovering-equation-choose-covering}) で $\mathcal{B}$ の元からなる
+有限被覆を選べば、これは直ちに従う。詳細は省略する。
+\end{proof}
+
+
+
+
+
+
+
+\section{超被覆の構成}
+\label{hypercovering-section-hypercovering-sites}
+
+\noindent
+サイト $\mathcal{C}$ をとる。本節では、$\text{SR}(\mathcal{C})$ の
+単体的対象を次のように考える。通常どおり $K_n = K([n])$ と置き、
+$\varphi : [m] \to [n]$ に付随する射を
+$K(\varphi) : K_n \to K_m$ と書く。
+$K_n = \{U_{n, i}\}_{i \in I_n}$ と書いてよい。
+$\varphi : [m] \to [n]$ に対し、射 $K(\varphi) : K_n \to K_m$ は、
+写像 $\alpha(\varphi) : I_n \to I_m$ と、各 $i \in I_n$ に対する射
+$f_{\varphi, i} : U_{n, i} \to U_{m, \alpha(\varphi)(i)}$ によって与えられる。
+$K$ が $\text{SR}(\mathcal{C})$ の単体的対象であることから、
+$(I_n, \alpha(\varphi))$ は単体集合であり、また
+$\psi : [l] \to [m]$ のとき
+$f_{\psi, \alpha(\varphi)(i)} \circ f_{\varphi, i} =
+f_{\varphi \circ \psi, i}$ である。
+
+\begin{lemma}
+\label{hypercovering-lemma-split}
+サイト $\mathcal{C}$ と、$\text{SR}(\mathcal{C})$ の
+$r$-切断単体的対象 $K$ をとる。次の条件は同値である：
+\begin{enumerate}
+\item $K$ は分裂している（Simplicial, Definition
+\ref{simplicial-definition-split}）；
+\item $f_{\varphi, i} : U_{n, i} \to U_{m, \alpha(\varphi)(i)}$
+は、$r \geq n \geq 0$、全射 $\varphi : [m] \to [n]$、
+$i \in I_n$ に対して同型である；
+\item $f_{\sigma^n_j, i} : U_{n, i} \to U_{n + 1, \alpha(\sigma^n_j)(i)}$
+は、$0 \leq j \leq n < r$、$i \in I_n$ に対して同型である。
+\end{enumerate}
+単体的対象についても同じことが成り立ち、その場合は (2) と (3) で
+$r = \infty$ と置けばよい。
+\end{lemma}
+
+\begin{proof}
+単体集合の分裂は一意であり、各次数 $n$ の非退化な添字
+$N(I_n)$ によって与えられる。Simplicial, Lemma
+\ref{simplicial-lemma-splitting-simplicial-sets} を参照されたい。
+$\text{SR}(\mathcal{C})$ の二つの対象
+$\{U_i\}_{i \in I}$ と $\{U_j\}_{j \in J}$ の余積は、明らかな記法のもとで
+$\{U_l\}_{l \in I \amalg J}$ によって与えられる。したがって、$K$ の分裂は
+$N(K_n) = \{U_i\}_{i \in N(I_n)}$ によって与えられなければならない。
+ここで定義を展開すれば (1) と (2) の同値性が従う。(2) と (3) の同値性は、
+任意の全射 $\varphi : [m] \to [n]$ が、$k = n, n + 1, \ldots, m - 1$
+に対する射 $\sigma^k_j$ の合成であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-object}
+ファイバー積をもつサイト $\mathcal{C}$ と、部分集合
+$\mathcal{B} \subset \Ob(\mathcal{C})$ をとる。次を仮定する：
+\begin{enumerate}
+\item $\mathcal{C}$ の任意の対象 $U$ は、$U_j \in \mathcal{B}$ を満たす
+被覆 $\{U_j \to U\}_{j \in J}$ をもつ；
+\item $\{U_j \to U\}_{j \in J}$ が $U_j \in \mathcal{B}$ を満たす被覆で、
+$\{U' \to U\}$ が $U' \in \mathcal{B}$ を満たす射ならば、
+$\{U_j \to U\}_{j \in J} \amalg \{U' \to U\}$ は被覆である。
+\end{enumerate}
+このとき、$\mathcal{C}$ の任意の $X$ に対し、$X$ の超被覆 $K$ であって、
+$K_n = \{U_{n, i}\}_{i \in I_n}$、かつすべての $i \in I_n$ に対して
+$U_{n, i} \in \mathcal{B}$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{hypercovering-lemma-basis-hypercovering} の証明は本証明の準備となるので、
+読者にはまずそちらの証明を読むことを勧める。
+
+\medskip\noindent
+まず $\mathcal{C}$ をサイト $\mathcal{C}/X$ で置き換える。
+すると、$X$ は $\mathcal{C}$ の終対象であり、$\mathcal{C}$ はすべての有限極限を
+もつと仮定できる（Categories, Lemma
+\ref{categories-lemma-finite-limits-exist}）。
+
+\medskip\noindent
+$n \geq 0$ とする。$X$ の{it $n$-切断 $\mathcal{B}$-超被覆}とは、
+$\text{SR}(\mathcal{C})$ の $n$-切断単体的対象 $K$ であって、
+$i \in I_a$、$0 \leq a \leq n$ に対して $U_{a, i} \in \mathcal{B}$、
+$K_0$ は $X$ の被覆、さらに
+$K_{a + 1} \to (\text{cosk}_a \text{sk}_a K)_{a + 1}$
+が $a = 0, \ldots, n - 1$ に対して定義
+\ref{hypercovering-definition-covering-SR} の意味で被覆であるものをいう。
+
+\medskip\noindent
+仮定により、$X$ は $U_i \in \mathcal{B}$ を満たす被覆
+$\{U_{0, i} \to X\}_{i \in I_0}$ をもつので、$X$ の
+$0$-切断 $\mathcal{B}$-超被覆を得る。$X$ の任意の
+$0$-切断 $\mathcal{B}$-超被覆は分裂していることに注意しよう。
+補題 \ref{hypercovering-lemma-split} を参照されたい。
+
+\medskip\noindent
+$n \geq 0$ に対し、$X$ の分裂した $n$-切断 $\mathcal{B}$-超被覆 $K$ が
+与えられたとき、それを $X$ の分裂した $(n + 1)$-切断
+$\mathcal{B}$-超被覆へ拡張できることを示せば、補題が従う。
+
+\medskip\noindent
+この拡張を構成する。$\text{SR}(\mathcal{C})$ の $(n + 1)$-切断単体的対象
+$K' = \text{sk}_{n + 1}(\text{cosk}_n K)$ を考え、
+$$
+K'_{n + 1} = \{U'_{n + 1, i}\}_{i \in I'_{n + 1}}
+$$
+と書く。$K = \text{sk}_n K'$ なので、$0 \leq a \leq n$ に対して
+$K_a = K'_a$ である。各 $i' \in I'_{n + 1}$ に対し、被覆
+\begin{equation}
+\label{hypercovering-equation-choose-covering-B}
+\{g_{n + 1, j} : U_{n + 1, j} \to U'_{n + 1, i'}\}_{j \in J_{i'}}
+\end{equation}
+を、$j \in J_{i'}$ に対して $U_{n + 1, j} \in \mathcal{B}$ となるように選ぶ。
+これは、補題における $\mathcal{B}$ についての仮定により可能である。
+$0 \leq m \leq n$ に対し、非退化な添字の部分集合を
+$N_m \subset I_m$ と書く。次を置く：
+$$
+I_{n + 1} =
+\coprod\nolimits_{\varphi : [n + 1] \to [m]\text{ 全射、}0\leq m \leq n}
+N_m \amalg
+\coprod\nolimits_{i' \in I'_{n + 1}} J_{i'}
+$$
+$j \in I_{n + 1}$ に対して次を置く：
+$$
+U_{n + 1, j} =
+\left\{
+\begin{matrix}
+U_{m, i} & \text{もし} &
+j = (\varphi, i) & \text{ただし} & \varphi : [n + 1] \to [m], i \in N_m \\
+U_{n + 1, j} & \text{もし} &
+j \in J_{i'} & \text{ただし} & i' \in I'_{n + 1}
+\end{matrix}
+\right.
+$$
+記法は明らかである。$K_{n + 1} = \{U_{n + 1, j}\}_{j \in I_{n + 1}}$
+と置く。構成により、すべての $j \in I_{n + 1}$ に対して
+$U_{n + 1, j}$ は $\mathcal{B}$ の元である。両立する写像
+$$
+I_{n + 1} \to I'_{n + 1}
+\quad\text{と}\quad
+K_{n + 1} \to K'_{n + 1}
+$$
+を定義しよう。具体的には、第一の写像は
+$(\varphi, i) \mapsto \alpha'(\varphi)(i)$ と
+$(j \in J_{i'}) \mapsto i'$ によって与えられる。第二の写像には射
+$$
+f'_{\varphi, i} : U_{m, i} \to U'_{n + 1, \alpha'(\varphi)(i)}
+\quad\text{と}\quad
+g_{n + 1, j} : U_{n + 1, j} \to U'_{n + 1, i'}
+$$
+を用いる。射
+$$
+K_{n + 1} \to K'_{n + 1} =
+(\text{cosk}_n \text{sk}_n K')_{n + 1} =
+(\text{cosk}_n K)_{n + 1}
+$$
+は、定義 \ref{hypercovering-definition-covering-SR} の意味で被覆であると主張する。
+実際、$i' \in I'_{n + 1}$ とする。$i'$ が非退化ならば、$I_{n + 1}$ における
+$i'$ の逆像は $J_{i'}$ に等しく、選択
+(\ref{hypercovering-equation-choose-covering-B}) によって $U'_{n + 1, i'}$ の被覆を得る。
+$i'$ が退化ならば、ある一意なペア $(\varphi, i)$ に対して
+$I_{n + 1}$ における $i'$ の逆像は
+$J_{i'} \amalg \{(\varphi, i)\}$ であり、選択
+(\ref{hypercovering-equation-choose-covering-B}) と補題の仮定 (2) によって被覆を得る。
+
+\medskip\noindent
+証明を完了するには、射 $\varphi : [m] \to [n + 1]$、
+$0 \leq m \leq n$ に対応する射 $K(\varphi) : K_{n + 1} \to K_m$ と、
+射 $\varphi : [n + 1] \to [m]$、$0 \leq m \leq n$ に対応する射
+$K(\varphi) : K_m \to K_{n + 1}$ を、適切な合成関係を満たすように
+定義しなければならない。第一の種類については、合成
+$$
+K_{n + 1} \to K'_{n + 1} \xrightarrow{K'(\varphi)} K'_m = K_m
+$$
+を用いて $K(\varphi) : K_{n + 1} \to K_m$ を定義する。
+第二の種類について、$\varphi : [n + 1] \to [m]$、
+$0 \leq m \leq n$ が与えられたとする。対応する射
+$K(\varphi) : K_m \to K_{n + 1}$ を次のように定義する：
+\begin{enumerate}
+\item $i \in I_m$ に対し、$\alpha(\psi)(i_0) = i$ を満たす一意な全射
+$\psi : [m] \to [m_0]$ と一意な非退化元 $i_0 \in I_{m_0}$ が存在する
+\footnote{例えば、$i$ が非退化ならば $m = m_0$ かつ
+$\psi = \text{id}_{[m]}$ である。}；
+\item $\varphi_0 = \psi_0 \circ \varphi : [n + 1] \to [m_0]$ と置き、
+$i \in I_m$ を $(\varphi_0, i_0) \in I_{n + 1}$ へ写す。言い換えれば、
+$\alpha(\varphi)(i) = (\varphi_0, i_0)$ とする；
+\item 射
+$f_{\varphi, i} : U_{m, i} \to U_{n + 1, \alpha(\varphi)(i)} = U_{m_0, i_0}$
+を、同型 $f_{\psi, i_0} : U_{m_0, i_0} \to U_{m, i}$ の逆とする
+（補題 \ref{hypercovering-lemma-split} を参照）。
+\end{enumerate}
+これが、与えられた $n$-切断 $\mathcal{B}$-超被覆を拡張する、$X$ の
+分裂した $(n + 1)$-切断 $\mathcal{B}$-超被覆を定義することの、
+直接的だが煩雑な確認は省略する。実際、$0 \leq a,b \leq n + 1$ を満たす
+すべての $\varphi : [a] \to [b]$ に対して射 $K(\varphi)$ が正しく合成されることの
+確認を除けば、すべては以上の構成から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-site}
+等化子とファイバー積をもつサイト $\mathcal{C}$ と、部分集合
+$\mathcal{B} \subset \Ob(\mathcal{C})$ をとる。$\mathcal{C}$ の任意の対象が、
+その各要素が $\mathcal{B}$ の元であるような被覆をもつと仮定する。
+このとき、$K_n = \{U_i\}_{i \in I_n}$ であり、すべての $i \in I_n$ に対して
+$U_i \in \mathcal{B}$ となる超被覆 $K$ が存在する。
+\end{lemma}
+
+\begin{proof}
+この証明は補題 \ref{hypercovering-lemma-hypercovering-object} の証明とほとんど同じである。
+相違点だけを説明する。
+
+\medskip\noindent
+$n \geq 1$ とする。{\it $n$-切断 $\mathcal{B}$-超被覆}とは、
+$\text{SR}(\mathcal{C})$ の $n$-切断単体的対象 $K$ であって、
+$i \in I_a$、$0 \leq a \leq n$ に対して $U_{a, i} \in \mathcal{B}$ であり、
+さらに次を満たすものをいう：
+\begin{enumerate}
+\item $F(K_0)^\# \to *$ は全射である；
+\item $F(K_1)^\# \to F(K_0)^\# \times F(K_0)^\#$ は全射である；
+\item $F(K_{a + 1})^\# \to F((\text{cosk}_a \text{sk}_a K)_{a + 1})^\#$
+は $a = 1, \ldots, n - 1$ に対して全射である。
+\end{enumerate}
+まず、分裂した $1$-切断 $\mathcal{B}$-超被覆を明示的に構成する。
+
+\medskip\noindent
+$I_0 = \mathcal{B}$ および $K_0 = \{U\}_{U \in \mathcal{B}}$ とする。
+$\mathcal{B}$ についての仮定により (1) が成り立つ。次を置く：
+$$
+\Omega =
+\{(U, V, W, a, b) \mid U, V, W \in \mathcal{B}, a : U \to V, b : U \to W\}
+$$
+次に $I_1 = I_0 \amalg \Omega$ と置く。$i \in I_1$ に対し、
+$i \in I_0$ ならば $U_{1, i} = U_{0, i}$ と置き、
+$i = (U, V, W, a, b) \in \Omega$ ならば $U_{1, i} = U$ と置く。
+写像 $K(\sigma^0_0) : K_0 \to K_1$ は、包含
+$\alpha(\sigma^0_0) : I_0 \to I_1$ と、対象上の恒等射
+$f_{\sigma^0_0, i} : U_{0, i} \to U_{1, i}$ に対応する。
+写像 $K(\delta^1_0), K(\delta^1_1) : K_1 \to K_0$ は、
+$I_0 \subset I_1$ 上で恒等であり、
+$(U, V, W, a, b) \in \Omega \subset I_1$ をそれぞれ $V$、$W$ へ写す
+二つの写像 $I_1 \to I_0$ に対応する。対応する射
+$f_{\delta^1_0, i}, f_{\delta^1_1, i} : U_{1, i} \to U_{0, i}$ は、
+$i \in I_0$ ならば恒等射であり、
+$i = (U, V, W, a, b) \in \Omega$ ならばそれぞれ $a,b$ である。
+(2) が成り立つ理由は次のとおりである。$\mathcal{C}$ の対象 $U$ 上の
+$F(K_0)^\# \times F(K_0)^\#$ の任意の切断は、$U$ をある被覆の要素で
+置き換えた後には、写像 $U \to F(K_0) \times F(K_0)$ から来る。
+これはさらに、$V,W \in \mathcal{B}$ と二つの射
+$U \to V$、$U \to W$ が存在することを意味する。$U$ をさらにある被覆の
+要素で置き換えれば、望みどおり $U \in \mathcal{B}$ と仮定できる。
+
+\medskip\noindent
+$n \geq 1$ に対し、分裂した $n$-切断 $\mathcal{B}$-超被覆 $K$ が
+与えられたとき、それを分裂した $(n + 1)$-切断 $\mathcal{B}$-超被覆へ
+拡張できることを示せば、補題が従う。ここでの議論は補題
+\ref{hypercovering-lemma-hypercovering-object} の証明とまったく同じように進む。
+次の点を除き、正確な詳細は省略する。第一に、本補題の証明では仮定 (2) は
+必要ない。というのも、射
+$K_{n + 1} \to (\text{cosk}_n K)_{n + 1}$ が被覆である必要はなく、
+集合の随伴層上で全射を誘導すれば十分だからである。これは Sites, Lemma
+\ref{sites-lemma-covering-surjective-after-sheafification} から従う。
+第二に、$\mathcal{C}$ がファイバー積と等化子をもつという仮定により、
+$\text{SR}(\mathcal{C})$ もファイバー積と等化子をもち、$F$ はこれらと可換する
+（補題 \ref{hypercovering-lemma-coprod-prod-SR}）。これは、用いられる余骨格関手の存在を
+保証するのに十分である（Simplicial, Remark
+\ref{simplicial-remark-existence-cosk} および Categories, Lemma
+\ref{categories-lemma-fibre-products-equalizers-exist} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-morphism-sites}
+$f : \mathcal{C} \to \mathcal{D}$ を、関手
+$u : \mathcal{D} \to \mathcal{C}$ によって与えられるサイトの射とする。
+$\mathcal{D}$ と $\mathcal{C}$ は等化子とファイバー積をもち、$u$ はこれらと
+可換すると仮定する。$\text{SR}(\mathcal{D})$ の単体的対象 $K$ が超被覆ならば、
+$u(K)$ も超被覆である。
+\end{lemma}
+
+\begin{proof}
+本節の冒頭のように $K_n = \{U_{n, i}\}_{i \in I_n}$ と書くと、$u(K)$ は
+$u(K_n) = \{u(U_i)\}_{i \in I_n}$ によって与えられる
+$\text{SR}(\mathcal{C})$ の対象である。Sites, Lemma
+\ref{sites-lemma-pullback-representable-sheaf} により、
+$U \in \Ob(\mathcal{D})$ に対して $f^{-1}h_U^\# = h_{u(U)}^\#$ である。
+これは、すべての $n$ に対して $f^{-1}F(K_n)^\# = F(u(K_n))^\#$
+であることを意味する。$u(K)$ が超被覆となるための、定義
+\ref{hypercovering-definition-hypercovering-variant} の条件 (1)、(2)、(3) を確認しよう。
+$f^{-1}$ は完全関手なので、
+$$
+F(u(K_0))^\# = f^{-1}F(K_0)^\# \to f^{-1}* = *
+$$
+は全射の引き戻しとして全射であり、(1) を得る。同様に、
+$$
+F(u(K_1))^\# = f^{-1}F(K_1)^\# \to
+f^{-1} (F(K_0) \times F(K_0))^\# = F(u(K_0))^\# \times F(u(K_0))^\#
+$$
+は引き戻しとして全射であり、(2) を得る。条件 (3) について同じ方法で
+結論を得るには、次が成り立てば十分である：
+$$
+F((\text{cosk}_n \text{sk}_n u(K))_{n + 1})^\# =
+f^{-1}F((\text{cosk}_n \text{sk}_n K)_{n + 1})^\#
+$$
+以上により $f^{-1}F(-) = F(u(-))$ である。したがって、$u$ が
+$n \geq 1$ に対する $(\text{cosk}_n \text{sk}_n K)_{n + 1}$ の定義に用いる
+極限と可換することを示せば十分である。Simplicial, Remark
+\ref{simplicial-remark-existence-cosk} により、これらは有限連結極限であり、
+仮定により $u$ はこれらと可換する。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-hypercovering-continuous-functor}
+$\mathcal{C},\mathcal{D}$ をサイトとし、
+$u : \mathcal{D} \to \mathcal{C}$ を連続関手とする。
+$\mathcal{D}$ と $\mathcal{C}$ はファイバー積をもち、$u$ はこれらと可換すると
+仮定する。$Y \in \mathcal{D}$ とし、
+$K \in \text{SR}(\mathcal{D}, Y)$ を $Y$ の超被覆とする。
+このとき $u(K)$ は $u(Y)$ の超被覆である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{hypercovering-lemma-hypercovering-morphism-sites} の証明より簡単である。
+対象の超被覆であるという概念のほうが強いからである。定義
+\ref{hypercovering-definition-hypercovering} と \ref{hypercovering-definition-covering-SR} を参照されたい。
+実際、サイトの射の定義により、$u$ は被覆を被覆へ送る。
+$u$ が $n \geq 1$ に対する $(\text{cosk}_n \text{sk}_n K)_{n + 1}$ の定義に
+用いる極限と可換することを確認すれば十分である。これは、誘導される関手
+$\mathcal{D}/Y \to \mathcal{C}/X$ がすべての有限極限と可換することから
+明らかである（また Categories, Lemma
+\ref{categories-lemma-finite-limits-exist} により、始域と終域はともに
+すべての有限極限をもつ）。
+\end{proof}
+
+\begin{lemma}
+\label{hypercovering-lemma-w-contractible}
+サイト $\mathcal{C}$ と、部分集合 $\mathcal{B} \subset \Ob(\mathcal{C})$
+をとる。次を仮定する：
+\begin{enumerate}
+\item $\mathcal{C}$ はファイバー積をもつ；
+\item すべての $X \in \Ob(\mathcal{C})$ に対して、$U_i \in \mathcal{B}$ を満たす
+有限被覆 $\{U_i \to X\}_{i \in I}$ が存在する；
+\item $\{U_i \to X\}_{i \in I}$ が $U_i \in \mathcal{B}$ を満たす有限被覆で、
+$U \to X$ が $U \in \mathcal{B}$ を満たす射ならば、
+$\{U_i \to X\}_{i \in I} \amalg \{U \to X\}$ は被覆である。
+\end{enumerate}
+このとき、各 $X$ に対して $X$ の超被覆 $K$ が存在し、各
+$K_n = \{U_{n, i} \to X\}_{i \in I_n}$ において $I_n$ は有限であり、
+$U_{n, i} \in \mathcal{B}$ である。
+\end{lemma}
+
+\begin{proof}
+本補題は、補題 \ref{hypercovering-lemma-quasi-separated-quasi-compact-hypercovering} の
+サイトに対する類似である。証明には、次の二点に注意しながら補題
+\ref{hypercovering-lemma-hypercovering-object} の証明をそのままたどればよい：
+\begin{enumerate}
+\item[(a)] 最初の被覆 $\{U_{0, i} \to X\}_{i \in I_0}$ を、
+$U_{0, i} \in \mathcal{B}$ であり、添字集合 $I_0$ が有限となるように選ぶ；
+\item[(b)] 被覆 (\ref{hypercovering-equation-choose-covering-B}) を選ぶ際に、
+$J_{i'}$ を有限に選ぶ。
+\end{enumerate}
+これらの変更により、すべての $n$ に対して有限の添字集合 $I_n$ が得られることは、
+読者にも容易にわかるであろう。
+\end{proof}
+
+\begin{remark}
+\label{hypercovering-remark-taking-disjoint-unions}
+$\mathcal{C}$ をサイトとし、$K,L$ を $\text{SR}(\mathcal{C})$ の対象とする。
+$K = \{U_i\}_{i \in I}$、$L = \{V_j\}_{j \in J}$ と書く。
+$U = \coprod_{i \in I} U_i$ と $V = \coprod_{j \in J} V_j$ が存在すると
+仮定する。このとき、次の写像を得る：
+$$
+\Mor_{\text{SR}(\mathcal{C})}(K, L) \longrightarrow \Mor_\mathcal{C}(U, V)
+$$
+構成は次のとおりである。$\alpha : I \to J$ と
+$f_i : U_i \to V_{\alpha(i)}$ によって与えられる $f : K \to L$ に対し、関手の変換
+$$
+\Mor_\mathcal{C}(V, -) =
+\prod\nolimits_{j \in J} \Mor_\mathcal{C}(V_j, -)
+\to
+\prod\nolimits_{i \in I} \Mor_\mathcal{C}(U_i, -) =
+\Mor_\mathcal{C}(U, -)
+$$
+であって $(g_j)_{j \in J}$ を
+$(g_{\alpha(i)} \circ f_i)_{i \in I}$ へ送るものを得る。したがって、米田の補題により
+対応する写像 $U \to V$ が得られる。もちろん、$U \to V$ は射 $f_i$ によって
+直和因子 $U_i$ を直和因子 $V_{\alpha(i)}$ へ写す。
+\end{remark}
+
+\begin{remark}
+\label{hypercovering-remark-take-unions-hypercovering}
+$\mathcal{C}$ をサイトとする。$\mathcal{C}$ はファイバー積と等化子をもつと仮定し、
+$K$ を超被覆とする。$K_n = \{U_{n, i}\}_{i \in I_n}$ と書く。次を仮定する：
+\begin{enumerate}
+\item[(a)] $U_n = \coprod_{i \in I_n} U_{n, i}$ が存在する；
+\item[(b)] $\coprod_{i \in I_n} h_{U_{n, i}} \to h_{U_n}$
+は層化において同型を誘導する。
+\end{enumerate}
+このとき、$L_n = \{U_n\}$ を満たす $\text{SR}(\mathcal{C})$ の別の単体的対象
+$L$ を得る。注意 \ref{hypercovering-remark-taking-disjoint-unions} を参照されたい。
+$L$ は超被覆であると主張する。これを示すため、定義
+\ref{hypercovering-definition-hypercovering-variant} の条件 (1)、(2)、(3) を確認する。
+条件 (1) は (b) と $K$ に対する (1) から従う。条件 (2) もまったく同様に従う。
+条件 (3) は、$n \geq 1$ に対する次の等式から従う：
+\begin{align*}
+F((\text{cosk}_n \text{sk}_n L)_{n + 1})^\#
+& =
+((\text{cosk}_n \text{sk}_n F(L)^\#)_{n + 1}) \\
+& =
+((\text{cosk}_n \text{sk}_n F(K)^\#)_{n + 1}) \\
+& =
+F((\text{cosk}_n \text{sk}_n K)_{n + 1})^\#
+\end{align*}
+したがって、(1) と (2) の場合とまったく同様に、$K$ に対する条件から
+$L$ に対する条件が従う。$F$ は連結極限と可換し、層化は完全であることに
+注意しよう。これにより最初と最後の等式が示される。中央の等式は、(b) により
+$F(K)^\# = F(L)^\#$ であることから従う。
+\end{remark}
+
+\begin{remark}
+\label{hypercovering-remark-take-unions-hypercovering-X}
+$\mathcal{C}$ をサイトとし、$X \in \Ob(\mathcal{C})$ とする。
+$\mathcal{C}$ はファイバー積をもつと仮定し、$K$ を $X$ の超被覆とする。
+$K_n = \{U_{n, i}\}_{i \in I_n}$ と書く。次を仮定する：
+\begin{enumerate}
+\item[(a)] $U_n = \coprod_{i \in I_n} U_{n, i}$ が存在する；
+\item[(b)] $\text{SR}(\mathcal{C})$ の射
+$(\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$ と
+$(\beta, g_k) : \{W_k\}_{k \in K} \to \{V_j\}_{j \in J}$
+が与えられ、$U = \coprod U_i$、$V = \coprod V_j$、$W = \coprod W_j$
+が存在するとき、$U \times_V W =
+\coprod_{(i, j, k), \alpha(i) = j = \beta(k)} U_i \times_{V_j} W_k$；
+\item[(c)] $(\alpha, f_i) : \{U_i\}_{i \in I} \to \{V_j\}_{j \in J}$
+が定義 \ref{hypercovering-definition-covering-SR} の意味で被覆であり、
+$U = \coprod U_i$ と $V = \coprod V_j$ が存在するならば、注意
+\ref{hypercovering-remark-taking-disjoint-unions} の対応する射 $U \to V$ は
+$\mathcal{C}$ の被覆である。
+\end{enumerate}
+このとき、$L_n = \{U_n\}$ を満たす $\text{SR}(\mathcal{C})$ の別の単体的対象
+$L$ を得る。注意 \ref{hypercovering-remark-taking-disjoint-unions} を参照されたい。
+$L$ は $X$ の超被覆であると主張する。これを示すため、定義
+\ref{hypercovering-definition-hypercovering} の条件 (1)、(2) を確認する。条件 (1) は (c) と
+$K$ に対する (1) から従う。実際、$K$ に対する (1) は
+$K_0 = \{U_{0, i}\}_{i \in I_0}$ が定義
+\ref{hypercovering-definition-covering-SR} の意味で $\{X\}$ の被覆であることを述べている。
+条件 (2) が従うのは、$\mathcal{C}/X$ がすべての有限極限をもち、したがって
+$\text{SR}(\mathcal{C}/X)$ もすべての有限極限をもち、条件 (b) が
+「非交和をとる」という構成がこれらの有限極限と可換することを述べているからである。
+よって射
+$$
+L_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n L)_{n + 1}
+$$
+は被覆である。なぜなら、これは「非交和をとる」関手を射
+$$
+K_{n + 1} \longrightarrow (\text{cosk}_n \text{sk}_n K)_{n + 1}
+$$
+に適用した結果であり、後者は $K$ に対する (2) により定義
+\ref{hypercovering-definition-covering-SR} の意味で被覆と仮定されているからである。
+この議論は意味をもつ。実際、性質 (b) は特に、非交和をとることのできる
+$X$ 上の半表現可能対象の有限図式から出発すると、その図式の
+$\text{SR}(\mathcal{C}/X)$ における極限も、非交和をとることのできる
+$X$ 上の半表現可能対象であることを保証する。
+\end{remark}

@@ -1,0 +1,4501 @@
+% Generated mechanically from frozen input inputs/p06/ja/dualizing.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{46}
+\chapter{双対化複体}
+
+
+
+\phantomsection
+\label{dualizing-section-phantom}
+
+
+\section{序論}
+\label{dualizing-section-introduction}
+
+\noindent
+本章では、可換代数における双対化複体を論じる。参考文献として \cite{RD} がある。
+
+\medskip\noindent
+まず、本質全射と本質単射、射影被覆、入射包絡、Artin 環に対する双対性を論じ、
+剰余体の入射包絡を調べる。これにより Matlis 双対性の証明へ速やかに到達する。
+第 \ref{dualizing-section-essential} 節、第 \ref{dualizing-section-injective-modules} 節、第 \ref{dualizing-section-projective-cover} 節、第 \ref{dualizing-section-injective-hull} 節、第 \ref{dualizing-section-artinian} 節および第 \ref{dualizing-section-hull-residue-field} 節および命題 \ref{dualizing-proposition-matlis} を参照されたい。
+
+\medskip\noindent
+続く三つの節では、局所コホモロジーを非常に一般的に論じる；第 \ref{dualizing-section-bad-local-cohomology} 節および第 \ref{dualizing-section-local-cohomology} 節, および
+\ref{dualizing-section-local-cohomology-noetherian} を参照されたい。その一部を第 \ref{dualizing-section-depth} 節における深さの議論へ応用する。別の応用として、環 $A$ の
+有限生成イデアル $I$ が与えられたとき、$A$ の導来圏における
+``$I$-完全'' 対象と ``$I$-ねじれ'' 対象が同値であることを示す；第 \ref{dualizing-section-torsion-and-complete} 節を参照されたい。局所コホモロジーについて、
+例えば（後述する局所双対性に依存する）有限性定理をさらに学ぶには、
+『局所コホモロジー』の第 \ref{local-cohomology-section-introduction} 節を参照されたい。
+
+\medskip\noindent
+本章の大部分は、環準同型に対する双対性と双対化複体に充てられる。第 \ref{dualizing-section-trivial} 節、第 \ref{dualizing-section-base-change-trivial-duality} 節、第 \ref{dualizing-section-dualizing} 節、第 \ref{dualizing-section-dualizing-local} 節、第 \ref{dualizing-section-dimension-function} 節、第 \ref{dualizing-section-local-duality} 節、第 \ref{dualizing-section-dualizing-module} 節、第 \ref{dualizing-section-CM} 節、第 \ref{dualizing-section-gorenstein} 節および第 \ref{dualizing-section-ubiquity-dualizing} 節, および
+\ref{dualizing-section-formal-fibres} を参照されたい。鍵となる定義は、Noether 環 $A$ 上の
+双対化複体 $\omega_A^\bullet$ を、コホモロジー加群 $H^i(\omega_A^\bullet)$ が
+有限 $A$-加群であり、有限入射次元をもち、写像
+$$
+A \longrightarrow R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)
+$$
+が擬同型となるような対象 $\omega_A^\bullet \in D^{+}(A)$ とするものである。
+双対化複体のいくつかの基本的性質を確立した後、双対化複体が次元関数を誘導する
+ことを示す。次に Grothendieck の局所双対性定理を証明する。双対化加群と
+Cohen--Macaulay 環を簡潔に論じた後、Gorenstein 環を導入し、多くの馴染み深い
+Noether 環が双対化複体をもつことを示す。最後の節では、形式的ファイバーが
+Gorenstein または局所完全交叉である Noether 局所環について、良好な理論が
+存在することを示すために以上の結果を応用する。
+
+\medskip\noindent
+最後の数節では、例えば \cite{RD} で代数幾何学に用いられる「上付きシュリーク函手」
+の代数的構成を記述する。この主題はスキームの双対性の章へ続く。『スキームの双対性』の第 \ref{duality-section-introduction} 節を参照されたい。
+
+
+
+
+
+
+
+\section{本質全射と本質単射}
+\label{dualizing-section-essential}
+
+\noindent
+主として加群の圏で作業するが、定義自体は一般に述べておく。
+
+\begin{definition}
+\label{dualizing-definition-essential}
+$\mathcal{A}$ をアーベル圏とする。
+\begin{enumerate}
+\item $\mathcal{A}$ の単射 $A \subset B$ が {\it 本質的} である、または $B$ が
+$A$ の {\it 本質拡大} であるとは、任意の非零部分対象 $B' \subset B$ が $A$ と
+非零の交わりをもつことをいう。
+\item $\mathcal{A}$ の全射 $f : A \to B$ が {\it 本質的} であるとは、任意の
+真部分対象 $A' \subset A$ に対し $f(A') \not = B$ となることをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この概念に関するいくつかの補題を述べる。
+
+\begin{lemma}
+\label{dualizing-lemma-essential}
+$\mathcal{A}$ をアーベル圏とする。
+\begin{enumerate}
+\item $A \subset B$ と $B \subset C$ が本質拡大ならば、$A \subset C$ も
+本質拡大である。
+\item $A \subset B$ が本質拡大であり、$C \subset B$ が部分対象ならば、
+$A \cap C \subset C$ は本質拡大である。
+\item $A \to B$ と $B \to C$ が本質全射ならば、$A \to C$ も本質全射である。
+\item 本質全射 $f : A \to B$ と、核が $K$ である全射 $A \to C$ が与えられると、
+射 $C \to B/f(K)$ は本質全射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-union-essential-extensions}
+$R$ を環、$M$ を $R$-加群とする。$E = \colim E_i$ を $R$-加群のフィルター
+余極限とする。$R$-加群の本質単射 $M \to E_i$ の整合的な系が与えられていると
+仮定する。このとき $M \to E$ は本質単射である。
+\end{lemma}
+
+\begin{proof}
+定義と、フィルター余極限が完全であることから直ちに従う（『可換代数』の補題 \ref{algebra-lemma-directed-colimit-exact}）。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-essential-extension}
+$R$ を環とし、$M \subset N$ を $R$-加群とする。次は同値である：
+\begin{enumerate}
+\item $M \subset N$ は本質拡大である；
+\item 任意の非零元 $x \in N$ に対し、$fx \in M$ かつ $fx \not = 0$ となる
+$f \in R$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定し、$x \in N$ を非零元とする。(1) により
+$Rx \cap M \not = 0$ である。従って (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。$N' \subset N$ を非零部分加群とし、非零元 $x \in N'$ を選ぶ。
+(2) により、$fx \in M$ かつ $fx \not = 0$ となる $f \in R$ をとれる。
+従って $N' \cap M \not = 0$ である。
+\end{proof}
+
+
+
+
+\section{入射加群}
+\label{dualizing-section-injective-modules}
+
+\noindent
+環上の入射加群に関するいくつかの結果を述べる。
+
+\begin{lemma}
+\label{dualizing-lemma-product-injectives}
+$R$ を環とする。入射 $R$-加群の任意の直積は入射的である。
+\end{lemma}
+
+\begin{proof}
+『ホモロジー代数』の補題 \ref{homology-lemma-product-injectives} の特殊な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-flat}
+$R \to S$ を平坦環準同型とする。$E$ が入射 $S$-加群ならば、$E$ は
+$R$-加群として入射的である。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-adjoint-tensor-restrict} により
+$\Hom_R(M, E) = \Hom_S(M \otimes_R S, E)$ であり、$S$ とのテンソル積をとる
+函手が完全であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-epimorphism}
+$R \to S$ を環のエピ射、$E$ を $S$-加群とする。$E$ が $R$-加群として
+入射的ならば、$E$ は入射 $S$-加群である。
+\end{lemma}
+
+\begin{proof}
+任意の $S$-加群 $N$ に対し $\Hom_R(N, E) = \Hom_S(N, E)$ であることから従う；
+『可換代数』の補題 \ref{algebra-lemma-epimorphism-modules} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-hom-injective}
+$R \to S$ を環準同型とする。$E$ が入射 $R$-加群ならば、
+$\Hom_R(S, E)$ は入射 $S$-加群である。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-adjoint-hom-restrict} により
+$\Hom_S(N, \Hom_R(S, E)) = \Hom_R(N, E)$ であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-essential-extensions-in-injective}
+$R$ を環、$I$ を入射 $R$-加群、$E \subset I$ を部分加群とする。次は同値である：
+\begin{enumerate}
+\item $E$ は入射的である；
+\item $E \subset E' \subset I$ かつ $E \subset E'$ が本質拡大であるような
+全ての場合に $E = E'$ である。
+\end{enumerate}
+特に、$R$-加群が入射的であることと、その全ての本質拡大が自明であることは
+同値である。
+\end{lemma}
+
+\begin{proof}
+最後の主張は最初の主張と、$R$-加群の圏が十分多くの入射対象をもつことから従う
+（『代数の続論』の第 \ref{more-algebra-section-injectives-modules} 節）。
+
+\medskip\noindent
+(1) を仮定し、$E \subset E' \subset I$ を (2) の通りとする。このとき写像
+$\text{id}_E : E \to E$ は写像 $\alpha : E' \to E$ へ延長できる。$\alpha$ の核は
+$E$ と自明にしか交わらず、$E'$ は本質拡大なので、零でなければならない。
+従って $E = E'$ である。
+
+\medskip\noindent
+(2) を仮定する。$M \subset N$ を $R$-加群、$\varphi : M \to E$ を $R$-加群準同型
+とする。(1) を示すには、$\varphi$ が射 $N \to E$ へ延長することを示せばよい。
+$M \subset M' \subset N$ であり、$\varphi' : M' \to E$ が $M$ 上で $\varphi$ と
+一致する $R$-加群準同型であるような対 $(M', \varphi')$ 全体の集合
+$\mathcal{S}$ を考える。$(M', \varphi') \leq (M'', \varphi'')$ を
+$M' \subset M''$ かつ $\varphi''|_{M'} = \varphi'$ により定義し、$\mathcal{S}$ を
+順序づける。
+$\mathcal{S}$ の全順序部分集合の上限をとれることは明らかである。従って Zorn の補題
+により、$(M, \varphi)$ が極大元であると仮定してよい。
+
+\medskip\noindent
+$\varphi$ と包含 $E \to I$ の合成の延長 $\psi : N \to I$ を選ぶ。$I$ は入射的
+なので、これは可能である。$\psi(N) \subset E$ ならば、$\psi$ が求める延長である。
+$\psi(N)$ が $E$ に含まれないならば、(2) により包含 $E \subset E + \psi(N)$ は
+本質的でない。従って $E$ と $0$ で交わる非零部分加群
+$K \subset E + \psi(N)$ をとれる。すると $M' = \psi^{-1}(E + K)$ は $M$ を真に
+含む。従って
+$$
+M' \xrightarrow{\psi|_{M'}} E + K \to (E + K)/K = E
+$$
+を用いて $\varphi$ を $M'$ へ延長できる。これは $(M, \varphi)$ の極大性に反する。
+\end{proof}
+
+\begin{example}
+\label{dualizing-example-reduced-ring-injective}
+$R$ を被約環とする。$K = R_\mathfrak p$ が体となるような極小素イデアル
+$\mathfrak p \subset R$ をとる（『可換代数』の補題 \ref{algebra-lemma-minimal-prime-reduced-ring}）。このとき $K$ は入射 $R$-加群である。
+実際、任意の $R$-加群 $M$ に対し
+$\Hom_R(M, K) = \Hom_K(M_\mathfrak p, K)$ である。局所化は完全函手であり、
+$K$-ベクトル空間上で双対をとる函手も完全なので、$\Hom_R(-, K)$ は完全函手である。
+すなわち $K$ は入射 $R$-加群である。
+\end{example}
+
+\begin{lemma}
+\label{dualizing-lemma-sum-injective-modules}
+$R$ を Noether 環とする。入射加群の直和は入射的である。
+\end{lemma}
+
+\begin{proof}
+$E_i$ を集合 $I$ で添字づけられた入射加群の族とし、$E = \bigoplus E_i$ とおく。
+$E$ が入射的であることを示すため、『入射対象』の補題 \ref{injectives-lemma-criterion-baer} を用いる。$R$ のイデアルから $E$ への加群準同型
+$\varphi : J \to E$ をとる。$R$ は Noether なので $J$ は有限 $R$-加群であり、
+$\varphi$ の像が $\bigoplus_{j = 1, \ldots, r} E_{i_j}$ に含まれるような有限個の元
+$i_1, \ldots, i_r \in I$ をとれる。加群 $E_{i_j}$ の入射性を用いると、$\varphi$ を
+$\bigoplus_{j = 1, \ldots, r} E_{i_j}$ の中で延長できる。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-localization-injective-modules}
+$R$ を Noether 環、$S \subset R$ を乗法的部分集合とする。$E$ が入射
+$R$-加群ならば、$S^{-1}E$ は入射 $S^{-1}R$-加群である。
+\end{lemma}
+
+\begin{proof}
+$R \to S^{-1}R$ は環のエピ射なので、補題 \ref{dualizing-lemma-injective-epimorphism} により、
+$S^{-1}E$ が $R$-加群として入射的であることを示せば十分である。このために
+『入射対象』の補題 \ref{injectives-lemma-criterion-baer} を用いる。$I \subset R$ を
+イデアル、$\varphi : I \to S^{-1} E$ を $R$-加群準同型とする。$R$ は Noether
+なので $I$ は有限表示 $R$-加群であり、$f\varphi$ が合成 $I \to E \to S^{-1}E$
+となるような $f \in S$ と $R$-加群準同型 $I \to E$ をとれる（『可換代数』の補題 \ref{algebra-lemma-hom-from-finitely-presented}）。$I \to E$ を準同型 $R \to E$ へ
+延長できる。このとき合成
+$$
+R \to E \to S^{-1}E \xrightarrow{f^{-1}} S^{-1}E
+$$
+は $\varphi$ の $R$ への求める延長である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-module-divide}
+$R$ を Noether 環、$I$ を入射 $R$-加群とする。
+\begin{enumerate}
+\item $f \in R$ とする。このとき $E = \bigcup I[f^n] = I[f^\infty]$ は $I$ の
+入射部分加群である。
+\item $J \subset R$ をイデアルとする。このとき $J$-冪ねじれ部分加群
+$I[J^\infty]$ は $I$ の入射部分加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を示すため補題 \ref{dualizing-lemma-essential-extensions-in-injective} を用いる。
+$E \subset E' \subset I$ かつ $E'$ が $E$ の本質拡大であると仮定する。
+$E' = E$ を示す。そうでなければ、$x \in E'$ かつ $x \not \in E$ となる元をとれる。
+$J = \{ a \in R \mid ax \in E\}$ とおく。$R$ は Noether なので、ある
+$g_i \in R$ により $J = (g_1, \ldots, g_t)$ と書ける。定義により $E$ は $f$ の
+冪で零化される $I$ の元全体なので、$f^{n_i}g_ix = 0$ となる整数 $n_i$ を選べる。
+$n = \mathrm{max}\{ n_i \}$ とおく。このとき $x' = f^n x$ は $E'$ に属するが
+$E$ には属さず、$J$ により零化される。$J' = \{ a \in R \mid ax' \in E \}$ と
+おけば $J \subset J'$ である。逆に、$a \in J'$ であることと $ax' \in E$ で
+あること、さらにある $m \geq 0$ に対し $f^m a x' = 0$ であることは同値である。
+しかし $f^m a x' = f^{m + n} a x$ ならば $ax \in E$、すなわち $a \in J$ である。
+従って $J = J'$ である。よって $J = J' = \text{Ann}(x')$ であり、
+$Rx' \cap E  = 0$ となる。これは $E'$ が $E$ の本質拡大であることに反する。
+
+\medskip\noindent
+(2) を示すため $J = (f_1, \ldots, f_t)$ と書く。このとき $I[J^\infty]$ は
+$$
+(\ldots((I[f_1^\infty])[f_2^\infty])\ldots)[f_t^\infty]
+$$
+に等しいので、(1) と帰納法から結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-dimension-over-polynomial-ring}
+$A$ を Noether 環、$E$ を入射 $A$-加群とする。このとき $E \otimes_A A[x]$ は
+$D(A[x])$ の対象として入射振幅 $[0, 1]$ をもつ。特に $E \otimes_A A[x]$ は
+$A[x]$-加群として有限入射次元をもつ。
+\end{lemma}
+
+\begin{proof}
+$E[x] = E \otimes_A A[x]$ と書く。$A[x]$-加群の短完全列
+$$
+0 \to E[x] \to \Hom_A(A[x], E[x]) \to \Hom_A(A[x], E[x]) \to 0
+$$
+を考える。最初の写像は $p \in E[x]$ を $f \mapsto fp$ へ送り、二番目の写像は
+$\varphi$ を $f \mapsto \varphi(xf) - x\varphi(f)$ へ送る。アーベル群として
+$\Hom_A(A[x], E[x]) = \prod_{n \geq 0} E[x]$ であり、二番目の写像は $(e_n)$ を
+全射な写像 $(e_{n + 1} - xe_n)$ へ送るので、全射である。$A$-加群として
+$E[x] \cong \bigoplus_{n \geq 0} E$ であり、補題 \ref{dualizing-lemma-sum-injective-modules} によりこれは入射的である。従って
+補題 \ref{dualizing-lemma-hom-injective} により $A[x]$-加群
+$\Hom_A(A[x], E[x])$ は入射的であり、証明が完了する。
+\end{proof}
+
+
+
+\section{射影被覆}
+\label{dualizing-section-projective-cover}
+
+\noindent
+この節では射影被覆を簡潔に論じる。
+
+\begin{definition}
+\label{dualizing-definition-projective-cover}
+$R$ を環とする。$R$-加群の全射 $P \to M$ が {\it 射影被覆}、または
+{\it 射影包絡} であるとは、$P$ が射影 $R$-加群であり、$P \to M$ が本質全射で
+あることをいう。
+\end{definition}
+
+\noindent
+射影被覆は常に存在するとは限らない。例えば $k$ を体、$R = k[x]$ を $k$ 上の
+多項式環とすると、加群 $M = R/(x)$ は射影被覆をもたない。実際、$P$ が $R$ 上
+射影的である任意の全射 $f : P \to M$ に対し、真部分加群 $(x - 1)P$ は $M$ へ
+全射する。従って $f$ は本質的でない。
+
+\begin{lemma}
+\label{dualizing-lemma-projective-cover-unique}
+$R$ を環、$M$ を $R$-加群とする。$M$ の射影被覆が存在すれば、同型を除いて
+一意である。
+\end{lemma}
+
+\begin{proof}
+$P \to M$ と $P' \to M$ を射影被覆とする。$P$ は射影 $R$-加群であり、
+$P' \to M$ は全射なので、$M$ への写像と整合する $R$-加群準同型
+$\alpha : P \to P'$ をとれる。$P' \to M$ は本質的なので $\alpha$ は全射である。
+$P'$ は射影 $R$-加群なので、直和分解 $P = \Ker(\alpha) \oplus P'$ を選べる。
+$P' \to M$ は全射であり、$P \to M$ は本質的なので、望む通り
+$\Ker(\alpha)$ は零である。
+\end{proof}
+
+\noindent
+射影被覆が存在する例を挙げる。
+
+\begin{lemma}
+\label{dualizing-lemma-projective-covers-local}
+$(R, \mathfrak m, \kappa)$ を局所環とする。任意の有限 $R$-加群は射影被覆をもつ。
+\end{lemma}
+
+\begin{proof}
+$M$ を有限 $R$-加群とし、$r = \dim_\kappa(M/\mathfrak m M)$ とおく。
+$M/\mathfrak m M$ の基底へ写る $x_1, \ldots, x_r \in M$ を選び、写像
+$f : R^{\oplus r} \to M$ を考える。Nakayama の補題により、これは全射である
+（『可換代数』の補題 \ref{algebra-lemma-NAK}）。$N \subset R^{\oplus r}$ が
+真部分加群ならば、再び Nakayama の補題により
+$N/\mathfrak m N \to \kappa^{\oplus r}$ は全射でなく、従って
+$N/\mathfrak m N \to M/\mathfrak m M$ も全射でない。よって $f$ は本質全射である。
+\end{proof}
+
+
+
+
+
+
+
+\section{入射包絡}
+\label{dualizing-section-injective-hull}
+
+\noindent
+この節では入射包絡を簡潔に論じる。
+
+\begin{definition}
+\label{dualizing-definition-injective-hull}
+$R$ を環とする。$R$-加群の単射 $M \to I$ が {\it 入射包絡} であるとは、
+$I$ が入射 $R$-加群であり、$M \to I$ が本質単射であることをいう。
+\end{definition}
+
+\noindent
+入射包絡は常に存在する。
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull}
+$R$ を環とする。任意の $R$-加群は入射包絡をもつ。
+\end{lemma}
+
+\begin{proof}
+$M$ を $R$-加群とする。『代数の続論』の第 \ref{more-algebra-section-injectives-modules} 節により、$R$-加群の圏は十分多くの
+入射対象をもつ。$I$ が入射 $R$-加群である単射 $M \to I$ を選ぶ。$E$ が $M$ の
+本質拡大であるような部分加群 $M \subset E \subset I$ 全体の集合
+$\mathcal{S}$ を考え、包含により $\mathcal{S}$ を順序づける。$\{E_\alpha\}$ が
+$\mathcal{S}$ の全順序部分集合ならば、$\bigcup E_\alpha$ も $M$ の本質拡大である
+（補題 \ref{dualizing-lemma-union-essential-extensions}）。従って Zorn の補題を適用して
+極大元 $E \in \mathcal{S}$ をとれる。$M \subset E$ は入射包絡、すなわち $E$ は
+入射 $R$-加群であると主張する。これは補題 \ref{dualizing-lemma-essential-extensions-in-injective} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-unique}
+$R$ を環とする。$M$, $N$ を $R$-加群とし、$M \to E$ と $N \to E'$ を
+入射包絡とする。このとき：
+\begin{enumerate}
+\item 任意の $R$-加群準同型 $\varphi : M \to N$ に対し、図式
+$$
+\xymatrix{
+M \ar[r] \ar[d]_\varphi & E \ar[d]^\psi \\
+N \ar[r] & E'
+}
+$$
+を可換にする $R$-加群準同型 $\psi : E \to E'$ が存在する；
+\item $\varphi$ が単射ならば、$\psi$ は単射である；
+\item $\varphi$ が本質単射ならば、$\psi$ は同型である；
+\item $\varphi$ が同型ならば、$\psi$ は同型である；
+\item $M \to I$ が $M$ の入射 $R$-加群への埋め込みならば、$M$ の埋め込みと
+整合する同型 $I \cong E \oplus I'$ が存在する。
+\end{enumerate}
+特に、$M$ の入射包絡 $E$ は同型を除いて一意である。
+\end{lemma}
+
+\begin{proof}
+(1) は $E'$ が入射 $R$-加群であることから従う。(2) は
+$\Ker(\psi) \cap M = 0$ であり、$E$ が $M$ の本質拡大であることから従う。
+$\varphi$ が本質単射であると仮定する。(2) により
+$E \cong \psi(E) \subset E'$ であり、$E$ は入射的なので
+$E' = \psi(E) \oplus E''$ となる。$E'$ は $M$ の本質拡大なので
+（補題 \ref{dualizing-lemma-essential}）、$E'' = 0$ を得る。(4) は (3) の特殊な場合である。
+(5) のような $M \to I$ を仮定する。写像 $M \to I$ を延長する写像
+$\alpha : E \to I$ を選ぶ。前と同様の議論により $\alpha$ は単射である。
+従って前と同様に $\alpha(E)$ は $I$ の直和因子である。これで (5) が示された。
+\end{proof}
+
+\begin{example}
+\label{dualizing-example-injective-hull-domain}
+$R$ を分数体 $K$ をもつ整域とする。このとき $R \subset K$ は $R$ の入射包絡である。
+実際、例 \ref{dualizing-example-reduced-ring-injective} により $K$ は入射 $R$-加群であり、
+補題 \ref{dualizing-lemma-essential-extension} により $R \subset K$ は本質拡大である。
+\end{example}
+
+\begin{definition}
+\label{dualizing-definition-indecomposable}
+加法圏の対象 $X$ が {\it 直既約} であるとは、それが非零であり、
+$X = Y \oplus Z$ ならば $Y = 0$ または $Z = 0$ となることをいう。
+\end{definition}
+
+\begin{lemma}
+\label{dualizing-lemma-indecomposable-injective}
+$R$ を環とし、$E$ を直既約な入射 $R$-加群とする。このとき：
+\begin{enumerate}
+\item $E$ は $E$ の任意の非零部分加群の入射包絡である；
+\item $E$ の任意の二つの非零部分加群の交わりは非零である；
+\item $\text{End}_R(E)$ は非可換局所環であり、その極大イデアルは、核が非零である
+$\varphi : E \to E$ 全体である；
+\item $E$ 上の零因子全体は $R$ の素イデアル $\mathfrak p$ であり、$E$ は入射
+$R_\mathfrak p$-加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{dualizing-lemma-injective-hull-unique} から従う。(2) は (1) と入射包絡の
+定義から従う。
+
+\medskip\noindent
+(3) を証明する。$A = \text{End}_R(E)$ および
+$I = \{\varphi \in A \mid \Ker(\varphi) \not = 0\}$ とおく。主張は、$I$ が
+両側イデアルであり、$\varphi \in A$, $\varphi \not \in I$ である任意の元が
+可逆であるということである。$\varphi$ と $\psi$ が単射でないと
+仮定する。(2) により $\Ker(\varphi) \cap \Ker(\psi)$ は非零である。従って
+$\varphi + \psi \in I$ であり、$I$ は両側イデアルとなる。
+$\varphi \in A$, $\varphi \not \in I$ ならば、$E \cong \varphi(E) \subset E$ は
+入射部分加群である。$E$ は直既約なので $E = \varphi(E)$ である。
+
+\medskip\noindent
+(4) を証明する。環準同型 $R \to A$ を考え、$\mathfrak p \subset R$ を極大
+イデアル $I$ の逆像とする。$\mathfrak p$ が素イデアルであり、$R \to A$ が
+$R_\mathfrak p \to A$ へ延長することは明らかである。従って $E$ は
+$R_\mathfrak p$-加群である。補題 \ref{dualizing-lemma-injective-epimorphism} により、$E$ は
+$R_\mathfrak p$-加群として入射的である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-indecomposable}
+$\mathfrak p \subset R$ を環 $R$ の素イデアルとし、$E$ を $R/\mathfrak p$ の
+入射包絡とする。このとき：
+\begin{enumerate}
+\item $E$ は直既約である；
+\item $E$ は $\kappa(\mathfrak p)$ の入射包絡である；
+\item $E$ は環 $R_\mathfrak p$ 上でも $\kappa(\mathfrak p)$ の入射包絡である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-essential-extension} により、包含
+$R/\mathfrak p \subset \kappa(\mathfrak p)$ は本質拡大である。従って補題 \ref{dualizing-lemma-injective-hull-unique} から (2) が従う。$f \in R$,
+$f \not \in \mathfrak p$ に対し、写像
+$f : \kappa(\mathfrak p) \to \kappa(\mathfrak p)$ は同型なので、補題 \ref{dualizing-lemma-injective-hull-unique} により写像 $f : E \to E$ も同型である。
+従って $E$ は $R_\mathfrak p$-加群であり、補題 \ref{dualizing-lemma-injective-epimorphism} により $R_\mathfrak p$-加群として入射的である。
+最後に、$E' \subset E$ を非零入射 $R$-部分加群とする。このとき
+$J = (R/\mathfrak p) \cap E'$ は非零である。$E'$ を小さくして、$E'$ が $J$ の
+入射包絡であると仮定してよい（例えば補題 \ref{dualizing-lemma-injective-hull-unique} を参照）。補題 \ref{dualizing-lemma-essential-extension} などにより $R/\mathfrak p$ は $J$ の本質拡大である。
+従って補題 \ref{dualizing-lemma-injective-hull-unique} (3) により $E' \to E$ は同型である。
+よって $E$ は直既約である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-indecomposable-injective-noetherian}
+$R$ を Noether 環、$E$ を直既約な入射 $R$-加群とする。このとき、$E$ が
+$\kappa(\mathfrak p)$ の入射包絡となるような $R$ の素イデアル $\mathfrak p$ が
+存在する。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p$ を補題 \ref{dualizing-lemma-indecomposable-injective} で得た素イデアルとし、
+$\mathfrak p = (f_1, \ldots, f_r)$ と書く。補題 \ref{dualizing-lemma-indecomposable-injective} により、非零元
+$x \in \bigcap \Ker(f_i : E \to E)$ を選ぶ。このとき $E$ の中で
+$(R_\mathfrak p)x$ は $\kappa(\mathfrak p)$ と同型な加群である。補題 \ref{dualizing-lemma-indecomposable-injective} から結論が従う。
+\end{proof}
+
+\begin{proposition}[Noether 環上の入射加群の構造]
+\label{dualizing-proposition-structure-injectives-noetherian}
+$R$ を Noether 環とする。任意の入射加群は直既約入射加群の直和である。
+任意の直既約入射加群は、ある素イデアルにおける剰余体の入射包絡である。
+\end{proposition}
+
+\begin{proof}
+第二の主張は補題 \ref{dualizing-lemma-indecomposable-injective-noetherian} である。
+第一の主張について、$I$ を入射 $R$-加群とする。超限帰納法を用い、順序数
+$\alpha$ に対して、$\beta < \alpha$ なる直既約入射 $R$-加群
+$E_{\beta + 1}$ の直和である $I_\alpha \subset I$ を構成する。
+$\alpha = 0$ のとき $I_0 = 0$ とする。$I_\alpha$ が構成された順序数 $\alpha$ を
+とる。補題 \ref{dualizing-lemma-sum-injective-modules} により $I_\alpha$ は入射
+$R$-加群である。従って $I \cong I_\alpha \oplus I'$ である。$I' = 0$ ならば
+終了である。そうでなければ、『可換代数』の補題 \ref{algebra-lemma-ass-zero} により
+$I'$ は伴随素イデアルをもつ。従って、ある素イデアル $\mathfrak p$ に対する
+$R/\mathfrak p$ のコピーを $I'$ は含む。補題 \ref{dualizing-lemma-injective-hull-unique} および
+\ref{dualizing-lemma-injective-hull-indecomposable} により、$I'$ は直既約部分加群 $E$ を含む。
+$I_{\alpha + 1} = I_\alpha \oplus E_\alpha$ とおく。$\alpha$ が極限順序数であり、
+$\beta < \alpha$ に対して $I_\beta$ が構成されているならば、
+$I_\alpha = \bigcup_{\beta < \alpha} I_\beta$ とおく。
+$I_\alpha = \bigoplus_{\beta < \alpha} E_{\beta + 1}$ であることに注意する。
+これで証明が完了する。
+\end{proof}
+
+
+
+\section{Artin 局所環上の双対性}
+\label{dualizing-section-artinian}
+
+\noindent
+$(R, \mathfrak m, \kappa)$ を Artin 局所環とする。このとき $R$ は Noether であり、
+$R$ は $R$-加群として有限長をもつことを想起する。さらに、$R$-加群が有限であることと
+有限長をもつことは同値である。この節では、以後これらの事実を断りなく用いる。
+詳しくは『可換代数』の第 \ref{algebra-section-length} 節および第 \ref{algebra-section-artinian} 節および『可換代数』の命題 \ref{algebra-proposition-dimension-zero-ring} を参照されたい。
+
+\begin{lemma}
+\label{dualizing-lemma-finite}
+$(R, \mathfrak m, \kappa)$ を Artin 局所環とし、$E$ を $\kappa$ の入射包絡とする。
+任意の有限 $R$-加群 $M$ に対し
+$$
+\text{length}_R(M) = \text{length}_R(\Hom_R(M, E))
+$$
+が成り立つ。特に、$\kappa$ の入射包絡 $E$ は有限 $R$-加群である。
+\end{lemma}
+
+\begin{proof}
+$E$ は $\kappa$ の本質拡大なので $\kappa = E[\mathfrak m]$ である。ここで
+$E[\mathfrak m]$ は $E$ の $\mathfrak m$-ねじれである（記法については『代数の続論』の第 \ref{more-algebra-section-torsion} 節を参照）。従って
+$\Hom_R(\kappa, E) \cong \kappa$ であり、長さの等式は $M = \kappa$ に対して
+成り立つ。補題の表示された等式を $M$ の長さに関する帰納法で証明する。
+$M$ が非零ならば、核が $M'$ である全射 $M \to \kappa$ が存在する。函手
+$M \mapsto \Hom_R(M, E)$ は完全なので、短完全列
+$$
+0 \to \Hom_R(\kappa, E) \to \Hom_R(M, E) \to \Hom_R(M', E) \to 0.
+$$
+を得る。この列と列 $0 \to M' \to M \to \kappa \to 0$ に対する長さの加法性、
+$M'$ に対する等式（帰納法の仮定）、および $\kappa$ に対する等式から、$M$ に
+対する等式が従う。補題の最後の主張は $E = \Hom_R(R, E)$ から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-evaluate}
+$(R, \mathfrak m, \kappa)$ を Artin 局所環とし、$E$ を $\kappa$ の入射包絡とする。
+任意の有限 $R$-加群 $M$ に対し、評価写像
+$$
+M \longrightarrow \Hom_R(\Hom_R(M, E), E)
+$$
+は同型である。特に $R = \Hom_R(E, E)$ である。
+\end{lemma}
+
+\begin{proof}
+表示された矢印は単射である。実際、$x \in M$ が非零元ならば、$x$ 上で零とならない
+写像 $\varphi : M \to E$ へ延長できる非零写像 $Rx \to \kappa$ が存在する。
+補題 \ref{dualizing-lemma-finite} により矢印の始域と終域は同じ長さをもつので、これは
+同型である。最後の主張は $M = R$ とおくことで従う。
+\end{proof}
+
+\noindent
+次の補題を述べるため、環 $R$ 上の有限 $R$-加群の圏を
+$\text{Mod}^{fg}_R$ と書く。
+
+\begin{lemma}
+\label{dualizing-lemma-duality}
+$(R, \mathfrak m, \kappa)$ を Artin 局所環とし、$E$ を $\kappa$ の入射包絡とする。
+函手 $D(-) = \Hom_R(-, E)$ は完全反同値
+$\text{Mod}^{fg}_R \to \text{Mod}^{fg}_R$ を誘導し、
+$D \circ D \cong \text{id}$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-evaluate} により、$\text{Mod}^{fg}_R$ 上で
+$D \circ D = \text{id}$ であることを見た。従って $D$ が反同値であることは
+直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-duality-torsion-cotorsion}
+補題 \ref{dualizing-lemma-duality} と同じ仮定および記法を用いる。$I \subset R$ をイデアル、
+$M$ を有限 $R$-加群とする。このとき
+$$
+D(M[I]) = D(M)/ID(M) \quad\text{and}\quad D(M/IM) = D(M)[I]
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_t)$ と書く。余核が $M/IM$ である写像
+$$
+M^{\oplus t} \xrightarrow{f_1, \ldots, f_t} M
+$$
+を考える。完全函手 $D$ を適用すると $D(M/IM)$ は $D(M)[I]$ であることが
+分かる。もう一方も同様に証明される。
+\end{proof}
+
+
+
+\section{剰余体の入射包絡}
+\label{dualizing-section-hull-residue-field}
+
+\noindent
+この節の結果の大部分では Noether 局所環を扱う。
+
+\begin{lemma}
+\label{dualizing-lemma-quotient}
+$R \to S$ を核が $I$ である局所環の全射とする。
+$E$ を $R$ の剰余体の $R$ 上の入射包絡とする。
+このとき $E[I]$ は $S$ の剰余体の $S$ 上の入射包絡である。
+\end{lemma}
+
+\begin{proof}
+$S = R/I$ なので $E[I] = \Hom_R(S, E)$ である。従って補題 \ref{dualizing-lemma-hom-injective} により $E[I]$ は入射 $S$-加群である。
+$E$ は $\kappa = R/\mathfrak m_R$ の本質拡大なので、$E[I]$ もまた
+$\kappa$ の本質拡大である。従って主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-submodule-sum-injective-hulls}
+$(R, \mathfrak m, \kappa)$ を局所環とし、$E$ を $\kappa$ の入射包絡とする。
+$M$ を $n = \dim_\kappa(M[\mathfrak m]) < \infty$ を満たす
+$\mathfrak m$-冪ねじれ $R$-加群とする。このとき $M$ は
+$E^{\oplus n}$ の部分加群と同型である。
+\end{lemma}
+
+\begin{proof}
+$E^{\oplus n}$ は $\kappa^{\oplus n} = M[\mathfrak m]$ の入射包絡である。
+従って、$M[\mathfrak m]$ 上で単射である $R$-加群写像
+$M \to E^{\oplus n}$ が存在する。$M$ は $\mathfrak m$-冪ねじれであるため、
+包含 $M[\mathfrak m] \subset M$ は本質拡大である（例えば補題 \ref{dualizing-lemma-essential-extension}）。従って $M \to E^{\oplus n}$ の核は零である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-union-artinian}
+$(R, \mathfrak m, \kappa)$ を Noether 局所環とする。
+$E$ を $\kappa$ の $R$ 上の入射包絡とし、$E_n$ を $\kappa$ の
+$R/\mathfrak m^n$ 上の入射包絡とする。このとき
+$E = \bigcup E_n$ かつ $E_n = E[\mathfrak m^n]$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-quotient} により $E_n = E[\mathfrak m^n]$ である。
+また $\bigcup E_n = E[\mathfrak m^\infty]$ は $\kappa$ を含む入射
+$R$-部分加群なので、補題 \ref{dualizing-lemma-injective-module-divide} により
+$E = \bigcup E_n$ である。
+\end{proof}
+
+\noindent
+次の補題は、Noether 局所環の剰余体の入射包絡がその完備化のみに依存することを示す。
+
+\begin{lemma}
+\label{dualizing-lemma-compare}
+$R \to S$ を、$R/\mathfrak m_R \cong S/\mathfrak m_R S$ を満たす
+局所 Noether 環の平坦局所準同型とする。このとき $R$ の剰余体の入射包絡は
+$S$ の剰余体の入射包絡である。
+\end{lemma}
+
+\begin{proof}
+前者による商が体なので $\mathfrak m_RS = \mathfrak m_S$ である。
+$\kappa = R/\mathfrak m_R = S/\mathfrak m_S$ とおく。
+$E_R$ を $\kappa$ の $R$ 上の入射包絡、$E_S$ を $\kappa$ の $S$ 上の
+入射包絡とする。補題 \ref{dualizing-lemma-injective-flat} により $E_S$ は入射
+$R$-加群である。剰余体の同一視を延長する写像 $E_R \to E_S$ を選ぶ。
+$R \to S$ はすべての $n$ に対して同型
+$R/\mathfrak m_R^n \to S/\mathfrak m_S^n$ を誘導するので、補題 \ref{dualizing-lemma-union-artinian} によりこの写像は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-endos}
+$(R, \mathfrak m, \kappa)$ を Noether 局所環とし、$E$ を $\kappa$ の
+$R$ 上の入射包絡とする。このとき $\Hom_R(E, E)$ は $R$ の完備化と
+標準的に同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-union-artinian} のように、$E_n = E[\mathfrak m^n]$ として
+$E = \bigcup E_n$ と書く。$E$ の任意の自己準同型はこのフィルトレーションを
+保つ。従って
+$$
+\Hom_R(E, E) = \lim \Hom_R(E_n, E_n)
+$$
+である。補題 \ref{dualizing-lemma-evaluate} により
+$\Hom_R(E_n, E_n) = \Hom_{R/\mathfrak m^n}(E_n, E_n) = R/\mathfrak m^n$
+なので、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-has-dcc}
+$(R, \mathfrak m, \kappa)$ を Noether 局所環とし、$E$ を $\kappa$ の
+$R$ 上の入射包絡とする。このとき $E$ は降鎖条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$E \supset M_1 \supset M_2 \supset \ldots$ を部分加群の列とすると、
+$$
+\Hom_R(E, E) \to \Hom_R(M_1, E) \to \Hom_R(M_2, E) \to \ldots
+$$
+は全射の列である。補題 \ref{dualizing-lemma-endos} により、これらはすべて完備化
+$R^\wedge = \Hom_R(E, E)$ 上の加群である。$R^\wedge$ は Noether なので
+（『可換代数』の補題 \ref{algebra-lemma-completion-Noetherian-Noetherian}）、列は安定する：
+$\Hom_R(M_n, E) = \Hom_R(M_{n + 1}, E) = \ldots$。$E$ は入射的なので、
+これは $\Hom_R(M_n/M_{n + 1}, E)$ が零である場合にのみ起こり得る。
+一方、$M_n/M_{n + 1}$ が非零ならば、補題 \ref{dualizing-lemma-union-artinian} により
+$E$ は $\mathfrak m$-冪ねじれなので、この商は
+$\mathfrak m$ で消される非零元を含む。このとき $M_n/M_{n + 1}$ から
+$E$ への非零写像があり、仮定した消滅に矛盾する。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-describe-categories}
+$(R, \mathfrak m, \kappa)$ を Noether 局所環とし、$E$ を $\kappa$ の入射包絡とする。
+\begin{enumerate}
+\item $R$-加群 $M$ について、次は同値である：
+\begin{enumerate}
+\item $M$ は昇鎖条件を満たす、
+\item $M$ は有限 $R$-加群である、
+\item ある $n, m$ と完全列
+$R^{\oplus m} \to R^{\oplus n} \to M \to 0$ が存在する。
+\end{enumerate}
+\item $R$-加群 $M$ について、次は同値である：
+\begin{enumerate}
+\item $M$ は降鎖条件を満たす、
+\item $M$ は $\mathfrak m$-冪ねじれであり、
+$\dim_\kappa(M[\mathfrak m]) < \infty$ である、
+\item ある $n, m$ と完全列
+$0 \to M \to E^{\oplus n} \to E^{\oplus m}$ が存在する。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明は省略する。
+
+\medskip\noindent
+$M$ を降鎖条件を満たす $R$-加群とし、$x \in M$ とする。
+$\mathfrak m^n x$ は部分加群の降鎖なので安定する。従って、ある $n$ に対し
+$\mathfrak m^nx = \mathfrak m^{n + 1}x$ である。Nakayama の補題
+（『可換代数』の補題 \ref{algebra-lemma-NAK}）により $\mathfrak m^n x = 0$、
+すなわち $x$ は $\mathfrak m$-冪ねじれである。また $M[\mathfrak m]$ は
+$\kappa$ 上のベクトル空間なので、降鎖条件を満たすには有限次元でなければならない。
+
+\medskip\noindent
+$M$ が $\mathfrak m$-冪ねじれであり、その $\mathfrak m$-ねじれ部分加群
+$M[\mathfrak m]$ が有限次元であると仮定する。補題 \ref{dualizing-lemma-torsion-submodule-sum-injective-hulls} により、ある $n$ に対して
+$M$ は $E^{\oplus n}$ の部分加群である。商 $N = E^{\oplus n}/M$ を考える。
+補題 \ref{dualizing-lemma-injective-hull-has-dcc} により加群 $E$ は降鎖条件を満たすので、
+$E^{\oplus n}$ と $N$ もこれを満たす。従って $N$ は (2)(a) を満たし、証明の
+第二段落により $N$ は (2)(b) を満たす。再び補題 \ref{dualizing-lemma-torsion-submodule-sum-injective-hulls} により、ある $m$ に対して
+$N$ は $E^{\oplus m}$ の部分加群である。従って短完全列
+$0 \to M \to E^{\oplus n} \to E^{\oplus m}$ を得る。
+
+\medskip\noindent
+短完全列 $0 \to M \to E^{\oplus n} \to E^{\oplus m}$ があると仮定する。
+補題 \ref{dualizing-lemma-injective-hull-has-dcc} により $E$ は降鎖条件を満たすので、
+$M$ もこれを満たす。
+\end{proof}
+
+\begin{proposition}[Matlis 双対性]
+\label{dualizing-proposition-matlis}
+$(R, \mathfrak m, \kappa)$ を完備 Noether 局所環とし、$E$ を $\kappa$ の
+$R$ 上の入射包絡とする。函手 $D(-) = \Hom_R(-, E)$ は反同値
+$$
+\left\{
+\begin{matrix}
+R\text{-modules with the} \\
+\text{descending chain condition}
+\end{matrix}
+\right\}
+\longleftrightarrow
+\left\{
+\begin{matrix}
+R\text{-modules with the} \\
+\text{ascending chain condition}
+\end{matrix}
+\right\}
+$$
+を誘導し、同値のいずれの側でも $D \circ D = \text{id}$ である。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-endos} により $R = \Hom_R(E, E) = D(E)$ である。
+また $E = \Hom_R(R, E) = D(R)$ である。$E$ は入射的なので函手 $D$ は完全である。
+従って補題 \ref{dualizing-lemma-describe-categories} における圏の記述から直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-matlis}
+$(R, \mathfrak m, \kappa)$ を Noether 局所環とし、$E$ を $\kappa$ の
+$R$ 上の入射包絡とする。Matlis 双対性には次の補足がある。
+$N$ が $\mathfrak m$-冪ねじれ加群であり、$M = \Hom_R(N, E)$ が $R$ の
+完備化上の有限加群ならば、$N$ は降鎖条件を満たす。実際、
+$N'' \subset N' \subset N$ かつ $N'' \not = N'$ である任意の部分加群に対し、
+埋め込み $\kappa \subset N''/N'$ が存在し、従って $N''$ を消す非零写像
+$N' \to E$ が存在する。この写像は $N''$ を消す写像 $N \to E$ に延長できる。
+従って $N \supset N' \mapsto M' = \Hom_R(N/N', E) \subset M$ は、$N$ の
+部分加群から $M$ の部分加群への包含関係を保つ写像であり、結論が従う。
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{ねじれ函手の導来化}
+\label{dualizing-section-bad-local-cohomology}
+
+\noindent
+$A$ を環、$I \subset A$ を有限生成イデアルとする（$I$ が有限生成でない場合には、
+別の定義を用いるべきかもしれない）。$Z = V(I) \subset \Spec(A)$ とおく。
+$I$-冪ねじれ加群の圏 $I^\infty\text{-torsion}$ は、$Z = V(I)$ を満たす
+有限生成イデアル $I$ の選択には依存せず、閉部分集合 $Z$ のみに依存することを
+想起する；『代数の続論』の補題 \ref{more-algebra-lemma-local-cohomology-closed} を参照。この節では函手
+$$
+H^0_{I} : \text{Mod}_A \longrightarrow I^\infty\text{-torsion},\quad
+M \longmapsto M[I^\infty] = \bigcup M[I^n]
+$$
+を考える。これは $M$ をその $I$-冪ねじれ部分加群へ送る。
+
+\medskip\noindent
+$A$ を環、$I$ を有限生成イデアルとする。$I^\infty\text{-torsion}$ は
+Grothendieck Abel 圏であることに注意する（直和が存在し、フィルター余極限は完全であり、
+『代数の続論』の補題 \ref{more-algebra-lemma-I-power-torsion-presentation}
+により $\bigoplus A/I^n$ は生成元である）。従って導来圏
+$D(I^\infty\text{-torsion})$ が存在する；『入射対象』の注意 \ref{injectives-remark-existence-D} を参照。函手 $H^0_I$ は左完全であり、
+その導来拡張を
+$$
+R\Gamma_I : D(A) \longrightarrow D(I^\infty\text{-torsion}).
+$$
+と書く。{\bf 警告：} 環 $A$ が Noether でない限り、この函手を局所コホモロジーと
+呼ぶのは適切でない。函手 $H^0_I$, $R\Gamma_I$ および衛星函手 $H^p_I$ は、
+$V(I) = Z$ を満たす有限生成イデアル $I$ の選択には依存せず、閉部分集合
+$Z \subset \Spec(A)$ のみに依存する。しかし上の函手には添字 $I$ を用いる。
+これは記法 $R\Gamma_Z$ を、(\ref{dualizing-equation-local-cohomology}) を参照、別の函手に
+用いるからである。その函手は、我々の知る限り $A$ が Noether の場合にのみ
+$R\Gamma_I$ と一致する（補題 \ref{dualizing-lemma-local-cohomology-noetherian} を参照）。
+
+\begin{lemma}
+\label{dualizing-lemma-adjoint}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。函手 $R\Gamma_I$ は函手
+$D(I^\infty\text{-torsion}) \to D(A)$ の右随伴である。
+\end{lemma}
+
+\begin{proof}
+$I$-冪ねじれ部分加群をとる函手が包含函手
+$I^\infty\text{-torsion} \to \text{Mod}_A$ の右随伴であることから従う。
+『導来圏』の補題 \ref{derived-lemma-derived-adjoint-functors} を参照。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-ext}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。$D(A)$ の任意の対象 $K$ に対し、
+$$
+R\Gamma_I(K) = \text{hocolim}\ R\Hom_A(A/I^n, K)
+$$
+が $D(A)$ において成り立ち、すべての $q \in \mathbf{Z}$ に対し加群として
+$$
+R^q\Gamma_I(K) = \colim_n \Ext_A^q(A/I^n, K)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+$K$ を表す K-入射複体を $J^\bullet$ とする。このとき
+$$
+R\Gamma_I(K) = J^\bullet[I^\infty] = \colim J^\bullet[I^n] =
+\colim \Hom_A(A/I^n, J^\bullet)
+$$
+であり、最初の等号は $R\Gamma_I(K)$ の定義である。『導来圏』の補題 \ref{derived-lemma-colim-hocolim} により、補題の第一の表示等式を得る。
+第二の表示等式は $H^q(\Hom_A(A/I^n, J^\bullet)) = \Ext^q_A(A/I^n, K)$
+であること、および Abel 群の圏でフィルター余極限が完全であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bad-local-cohomology-vanishes}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。$K^\bullet$ を $A$-加群の
+複体とし、ある $f \in I$ に対して $f : K^\bullet \to K^\bullet$ が同型、
+すなわち $K^\bullet$ が $A_f$-加群の複体であるとする。このとき
+$R\Gamma_I(K^\bullet) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+この場合 $R\Gamma_I(K^\bullet)$ のコホモロジー加群は $f$-冪ねじれである一方、
+$f$ が自己同型として作用する。従ってコホモロジー加群は零であり、対象も零である。
+\end{proof}
+
+\noindent
+$A$ を環、$I \subset A$ を有限生成イデアルとする。『代数の続論』の補題 \ref{more-algebra-lemma-I-power-torsion} により、$I$-冪ねじれ加群の圏は
+すべての $A$-加群の圏の Serre 部分圏である。従って函手
+\begin{equation}
+\label{dualizing-equation-compare-torsion}
+D(I^\infty\text{-torsion}) \longrightarrow D_{I^\infty\text{-torsion}}(A)
+\end{equation}
+がある。右辺は、コホモロジーが $I$-冪ねじれ加群であるような $D(A)$ の対象からなる
+充満部分圏である。この函手と圏はともに『導来圏』の第 \ref{derived-section-triangulated-sub} 節で論じられている。
+
+\begin{lemma}
+\label{dualizing-lemma-not-equal}
+$A$ を環、$I$ を有限生成イデアルとする。$M$ と $N$ を $I$-冪ねじれ加群とする。
+\begin{enumerate}
+\item $\Hom_{D(A)}(M, N) = \Hom_{D({I^\infty\text{-torsion}})}(M, N)$,
+\item $\Ext^1_{D(A)}(M, N) =
+\Ext^1_{D({I^\infty\text{-torsion}})}(M, N)$,
+\item $\Ext^2_{D({I^\infty\text{-torsion}})}(M, N) \to
+\Ext^2_{D(A)}(M, N)$ は一般には全射でない、
+\item (\ref{dualizing-equation-compare-torsion}) は一般には同値でない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) は、$I$-冪ねじれ加群が $\text{Mod}_A$ の Serre 部分圏をなすことから
+直ちに従う。(4) は (3) から従う。
+
+\medskip\noindent
+(3) のため、$f$ で消される非零元 $x$ を $A[f]$ が含み、かつ
+$f^nx_n = x$ を満たす元 $x_n$ を $A$ が含むような元 $f \in A$ をもつ環
+$A$ をとる。このような環 $A$ は、
+$$
+A = \mathbf{Z}[f, x, x_n]/(fx, f^nx_n - x)
+$$
+ととれば存在する。$A$ が与えられたとき $I = (f)$ とおく。すると完全列
+$$
+0 \to A[f] \to A \xrightarrow{f} A \to A/fA \to 0
+$$
+は $\Ext^2_A(A/fA, A[f])$ の元を定める。この元は
+$\Ext^2_{D(f^\infty\text{-torsion})}(A/fA, A[f])$ の元から来ないと主張する。
+もし来るならば、同じ $2$-拡大類を定める $f$-冪ねじれ加群 $M$, $N$ を用いた
+完全列
+$$
+0 \to A[f] \to M \to N \to A/fA \to 0
+$$
+が存在する。$A \to A$ は自由加群の複体であり、二つの $2$-拡大類が同じなので、
+写像
+$$
+\xymatrix{
+0 \ar[r] &
+A[f] \ar[r] \ar[d] &
+A \ar[r] \ar[d]_\varphi &
+A \ar[r] \ar[d]_\psi &
+A/fA \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+A[f] \ar[r] &
+M \ar[r] &
+N \ar[r] &
+A/fA \ar[r] & 0
+}
+$$
+を見いだせる（いくつかの詳細は省略する）。そこで $M$ を $\varphi$ の像に、
+$N$ を $\psi$ の像に置き換えられる。このとき $M$ は巡回加群となるので、ある
+$n$ に対し $f^n M = 0$ である。$\varphi(x_{n + 1})$ を考えると、
+$f^{n + 1}x_n = x$ が $A[f]$ で非零であることに矛盾する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{局所コホモロジー}
+\label{dualizing-section-local-cohomology}
+
+\noindent
+$A$ を環、$I \subset A$ を有限生成イデアルとし、$Z = V(I) \subset \Spec(A)$ とおく。
+包含函手の右随伴となる函手
+\begin{equation}
+\label{dualizing-equation-local-cohomology}
+R\Gamma_Z : D(A) \longrightarrow D_{I^\infty\text{-torsion}}(A).
+\end{equation}
+を構成する。記法については第 \ref{dualizing-section-bad-local-cohomology} 節を参照。
+$R\Gamma_Z(K)$ のコホモロジー加群を、{$K$ の $Z$ に関する \it 局所コホモロジー群}
+と呼ぶ。補題 \ref{dualizing-lemma-not-equal} により、$D(A)$ への函手とみなしても、
+この函手は一般には $R\Gamma_I( - )$ と {\bf 一致しない}。第 \ref{dualizing-section-local-cohomology-noetherian} 節では、$A$ が Noether ならば両者が
+一致することを示す。
+
+\medskip\noindent
+局所コホモロジーの議論は『局所コホモロジー』の第 \ref{local-cohomology-section-introduction} 節で続ける。例えばそこでは、
+$\Spec(A)$ 上の準連接層の付随複体に対し、$R\Gamma_Z$ が $Z$ に台をもつ
+コホモロジーを計算することを示す。『局所コホモロジー』の補題 \ref{local-cohomology-lemma-local-cohomology-is-local-cohomology} を参照。
+
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-adjoint}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。包含函手
+$D_{I^\infty\text{-torsion}}(A) \to D(A)$ には右随伴 $R\Gamma_Z$
+（\ref{dualizing-equation-local-cohomology}）が存在する。実際、$I$ が
+$f_1, \ldots, f_r \in A$ で生成されるならば、
+$$
+R\Gamma_Z(K) =
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}}
+\to \ldots \to A_{f_1\ldots f_r}) \otimes_A^\mathbf{L} K
+$$
+が $K \in D(A)$ に関して函手的に成り立つ。
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$ と書く。$K^\bullet$ を $A$-加群の複体とする。
+拡張 {\v C}ech 複体から $A$ への標準的な複体写像
+$$
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r}) \longrightarrow A.
+$$
+がある。$K^\bullet$ とテンソルをとり、付随する全複体をとると、$D(A)$ における写像
+$$
+\text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+\longrightarrow
+K^\bullet
+$$
+を得る。左辺の複体のコホモロジー加群は $I$-冪ねじれである、すなわち左辺は
+$D_{I^\infty\text{-torsion}}(A)$ の対象であると主張する。実際、『代数の続論』の補題 \ref{more-algebra-lemma-extended-alternating-Cech-is-colimit-koszul} により
+$$
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r}) = \colim K(A, f_1^n, \ldots, f_r^n)
+$$
+である。さらに『代数の続論』の補題 \ref{more-algebra-lemma-homotopy-koszul}
+により、複体 $K(A, f_1^n, \ldots, f_r^n)$ 上の $f_i^n$ 倍写像は零とホモトピックである。
+従って
+$$
+H^q\left( LHS \right) =
+\colim H^q(\text{Tot}(K^\bullet \otimes_A K(A, f_1^n, \ldots, f_r^n)))
+$$
+から主張を得る。一方、$K^\bullet$ が $D_{I^\infty\text{-torsion}}(A)$ の対象ならば、
+複体 $K^\bullet \otimes_A A_{f_{i_0} \ldots f_{i_p}}$ のコホモロジーは消滅する。
+従ってこの場合、写像 $LHS \to K^\bullet$ は $D(A)$ における同型である。構成
+$$
+R\Gamma_Z(K^\bullet) =
+\text{Tot}\left(
+K^\bullet \otimes_A
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r})\right)
+$$
+は $K^\bullet$ に関して函手的であり、三角圏の間の完全函手
+$D(A) \to D_{I^\infty\text{-torsion}}(A)$ を定める。上で与えた自然変換
+$R\Gamma_Z \to \text{id}$ が存在し、部分圏の $K^\bullet$ 上では同型に評価される
+ことから、$R\Gamma_Z$ が求める右随伴であることが形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-and-restriction}
+$A \to B$ を環準同型、$I \subset A$ を有限生成イデアルとする。
+$J = IB$, $Z = V(I)$, $Y = V(J)$ とおく。このとき
+$$
+R\Gamma_Z(M_A) = R\Gamma_Y(M)_A
+$$
+が $M \in D(B)$ に関して函手的に成り立つ。ここで $(-)_A$ は制限函手
+$D(B) \to D(A)$ および
+$D_{J^\infty\text{-torsion}}(B) \to D_{I^\infty\text{-torsion}}(A)$ を表す。
+\end{lemma}
+
+\begin{proof}
+$R\Gamma_Z((-)_A)$ と $R\Gamma_Y(-)_A$ はともに函手
+$D_{I^\infty\text{-torsion}}(A) \to D(B)$,
+$K \mapsto K \otimes_A^\mathbf{L} B$ の右随伴なので、随伴函手の一意性から従う。
+別の証明として、$R\Gamma_Z$ と $R\Gamma_Y$ の交代 {\v C}ech 複体による記述
+（補題 \ref{dualizing-lemma-local-cohomology-adjoint}）を用いてもよい。すなわち
+$I = (f_1, \ldots, f_r)$ ならば、$J$ は $f_1, \ldots, f_r$ の像
+$g_1, \ldots, g_r \in B$ で生成される。このとき、任意の $B$-加群 $M$ に対する
+標準的同型
+\begin{align*}
+& M_A \otimes_A (A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}}
+\to \ldots \to A_{f_1\ldots f_r}) \\
+& = 
+M \otimes_B (B \to \prod\nolimits_{i_0} B_{g_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} B_{g_{i_0}g_{i_1}}
+\to \ldots \to B_{g_1\ldots g_r})
+\end{align*}
+の存在から補題の主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-change-rings}
+$A \to B$ を環準同型、$I \subset A$ を有限生成イデアルとする。
+$J = IB$, $Z = V(I)$, $Y = V(J)$ とおく。このとき
+$$
+R\Gamma_Z(K) \otimes_A^\mathbf{L} B = R\Gamma_Y(K \otimes_A^\mathbf{L} B)
+$$
+が $K \in D(A)$ に関して函手的に成り立つ。
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$ と書く。$J$ は $f_1, \ldots, f_r$ の像
+$g_1, \ldots, g_r \in B$ で生成される。このとき $B$-加群の複体として
+$$
+(A \to \prod A_{f_{i_0}} \to \ldots \to A_{f_1\ldots f_r}) \otimes_A B =
+(B \to \prod B_{g_{i_0}} \to \ldots \to B_{g_1\ldots g_r})
+$$
+である。$K$ を $A$-加群の K-平坦複体 $K^\bullet$ で表す。次の二つに付随する全複体
+$$
+K^\bullet \otimes_A
+(A \to \prod A_{f_{i_0}} \to \ldots \to A_{f_1\ldots f_r}) \otimes_A B
+$$
+および
+$$
+K^\bullet \otimes_A B \otimes_B
+(B \to \prod B_{g_{i_0}} \to \ldots \to B_{g_1\ldots g_r})
+$$
+は補題の表示式の左辺と右辺を表すので（補題 \ref{dualizing-lemma-local-cohomology-adjoint} を参照）、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-vanishes}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。$K^\bullet$ を $A$-加群の
+複体とし、ある $f \in I$ に対して $f : K^\bullet \to K^\bullet$ が同型、
+すなわち $K^\bullet$ が $A_f$-加群の複体であるとする。このとき
+$R\Gamma_Z(K^\bullet) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+この場合 $R\Gamma_Z(K^\bullet)$ のコホモロジー加群は $f$-冪ねじれである一方、
+$f$ が自己同型として作用する。従ってコホモロジー加群は零であり、対象も零である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-tensor-product}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。$K, L \in D(A)$ に対し
+$$
+R\Gamma_Z(K \otimes_A^\mathbf{L} L) =
+K \otimes_A^\mathbf{L} R\Gamma_Z(L) =
+R\Gamma_Z(K) \otimes_A^\mathbf{L} L =
+R\Gamma_Z(K) \otimes_A^\mathbf{L} R\Gamma_Z(L)
+$$
+である。$K$ または $L$ が $D_{I^\infty\text{-torsion}}(A)$ に属するならば、
+$K \otimes_A^\mathbf{L} L$ もそこに属する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-local-cohomology-adjoint} により、ある $C \in D(A)$ に対し
+$R\Gamma_Z$ は $C \otimes^\mathbf{L} -$ で与えられる。従って一般の
+$K, L \in D(A)$ に対し
+$$
+R\Gamma_Z(K \otimes_A^\mathbf{L} L) =
+K \otimes^\mathbf{L} L \otimes_A^\mathbf{L} C =
+K \otimes_A^\mathbf{L} R\Gamma_Z(L)
+$$
+である。他の等式はこれから形式的に従い、補題の最後の主張も従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-ss}
+$A$ を環、$I, J \subset A$ を有限生成イデアルとする。
+$Z = V(I)$, $Y = V(J)$ とおく。このとき $Z \cap Y = V(I + J)$ であり、函手として
+$R\Gamma_Y \circ R\Gamma_Z = R\Gamma_{Y \cap Z}$,
+$D(A) \to D_{(I + J)^\infty\text{-torsion}}(A)$ である。
+$K \in D^+(A)$ に対して、『導来圏』の補題 \ref{derived-lemma-grothendieck-spectral-sequence} のようなスペクトル系列
+$$
+E_2^{p, q} = H^p_Y(H^q_Z(K)) \Rightarrow H^{p + q}_{Y \cap Z}(K)
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+厳密には $R\Gamma_Y$ と $R\Gamma_Z$ を合成できないため、補題の記法には多少の
+濫用がある。主張の意味は、$R\Gamma_Z$、包含
+$D_{I^\infty\text{-torsion}}(A) \to D(A)$、そして $R\Gamma_Y$ をこの順に
+合成するということである。このとき
+$R\Gamma_Y \circ R\Gamma_Z = R\Gamma_{Y \cap Z}$ は、
+$$
+D_{I^\infty\text{-torsion}}(A) \to D(A) \xrightarrow{R\Gamma_Y}
+D_{(I + J)^\infty\text{-torsion}}(A)
+$$
+が包含 $D_{(I + J)^\infty\text{-torsion}}(A) \to D_{I^\infty\text{-torsion}}(A)$
+の右随伴であることから従う。別の証明として、補題 \ref{dualizing-lemma-local-cohomology-adjoint} と、$f_1, \ldots, f_r$ および
+$g_1, \ldots, g_m$ 上の拡張 {\v C}ech 複体どうしのテンソル積が
+$f_1, \ldots, f_n. g_1, \ldots, g_m$ 上の拡張 {\v C}ech 複体であることを
+用いてもよい。最後の主張はこれと引用した補題から従う。
+\end{proof}
+
+\noindent
+次の補題は、ねじれコホモロジーをもつ複体に対する『代数の続論』の補題 \ref{more-algebra-lemma-restriction-derived-complete-equivalence} の類似である。
+
+\begin{lemma}
+\label{dualizing-lemma-torsion-flat-change-rings}
+$A \to B$ を平坦環写像、$I \subset A$ を $A/I = B/IB$ を満たす有限生成
+イデアルとする。このとき基底変換と制限は互いに準逆な同値
+$D_{I^\infty\text{-torsion}}(A) = D_{(IB)^\infty\text{-torsion}}(B)$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+より正確には、函手は $D_{I^\infty\text{-torsion}}(A)$ の $K$ に対する
+$K \mapsto K \otimes_A^\mathbf{L} B$ と、$D_{(IB)^\infty\text{-torsion}}(B)$ の
+$M$ に対する $M \mapsto M_A$ である。これが成り立つ理由は
+$H^i(K \otimes_A^\mathbf{L} B) = H^i(K) \otimes_A B = H^i(K)$ だからである。
+第一の等号は $A \to B$ が平坦であることから、第二の等号は『代数の続論』の補題 \ref{more-algebra-lemma-neighbourhood-isomorphism} から従う。
+\end{proof}
+
+\noindent
+次の補題は加群の $\Hom$ と $\Ext^1$ について『代数の続論』の補題 \ref{more-algebra-lemma-neighbourhood-equivalence} および
+\ref{more-algebra-lemma-neighbourhood-extensions} で示されている。
+
+\begin{lemma}
+\label{dualizing-lemma-neighbourhood-extensions}
+$A \to B$ を平坦環写像、$I \subset A$ を $A/I \to B/IB$ が同型となる有限生成
+イデアルとする。$K \in D_{I^\infty\text{-torsion}}(A)$ と $L \in D(A)$ に対し、写像
+$$
+R\Hom_A(K, L) \longrightarrow R\Hom_B(K \otimes_A B, L \otimes_A B)
+$$
+は擬同型である。特に $M$, $N$ が $A$-加群で、$M$ が $I$-冪ねじれならば、
+標準写像
+$$
+\Ext^i_A(M, N)
+\longrightarrow
+\Ext^i_B(M \otimes_A B, N \otimes_A B)
+$$
+はすべての $i$ に対して同型である。
+\end{lemma}
+
+\begin{proof}
+$Z = V(I) \subset \Spec(A)$, $Y = V(IB) \subset \Spec(B)$ とおく。
+$K$ のコホモロジー加群は $I$-冪ねじれなので、標準写像
+$R\Gamma_Z(L) \to L$ は $D(A)$ における同型
+$$
+R\Hom_A(K, R\Gamma_Z(L)) \to R\Hom_A(K, L)
+$$
+を誘導する。同様に $K \otimes_A B$ のコホモロジー加群は $IB$-冪ねじれであり、
+$D(B)$ における同型
+$$
+R\Hom_B(K \otimes_A B, R\Gamma_Y(L \otimes_A B)) \to 
+R\Hom_B(K \otimes_A B, L \otimes_A B)
+$$
+を得る。補題 \ref{dualizing-lemma-torsion-change-rings} により
+$R\Gamma_Z(L) \otimes_A B = R\Gamma_Y(L \otimes_A B)$ である。従って写像
+$$
+R\Hom_A(K, R\Gamma_Z(L)) \to R\Hom_B(K \otimes_A B, R\Gamma_Z(L) \otimes_A B)
+$$
+が擬同型であることを示せば十分であり、これは補題 \ref{dualizing-lemma-torsion-flat-change-rings} から従う。
+\end{proof}
+
+
+
+
+\section{Noether 環に対する局所コホモロジー}
+\label{dualizing-section-local-cohomology-noetherian}
+
+\noindent
+$A$ を環、$I \subset A$ を有限生成イデアルとし、$Z = V(I) \subset \Spec(A)$ とおく。
+(\ref{dualizing-equation-compare-torsion}) が函手
+$$
+D(I^\infty\text{-torsion}) \to D_{I^\infty\text{-torsion}}(A)
+$$
+であることを想起する。実際、函手の自然変換
+\begin{equation}
+\label{dualizing-equation-compare-torsion-functors}
+(\ref{dualizing-equation-compare-torsion}) \circ R\Gamma_I(-)
+\longrightarrow
+R\Gamma_Z(-)
+\end{equation}
+がある。すなわち $A$-加群の複体 $K^\bullet$ が与えられたとき、
+$R\Gamma_I(K^\bullet)$ は $I$-冪ねじれコホモロジー加群をもつので（補題 \ref{dualizing-lemma-adjoint} を参照）、$D(A)$ における標準写像
+$R\Gamma_I(K^\bullet) \to K^\bullet$ は $R\Gamma_Z(K^\bullet)$ を通して一意に
+分解する。一般にはこの写像は同型でない（補題 \ref{dualizing-lemma-not-equal} で見た）。
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-noetherian}
+$A$ を Noether 環、$I \subset A$ をイデアルとする。
+\begin{enumerate}
+\item $K \in D_{I^\infty\text{-torsion}}(A)$ に対し随伴射
+$R\Gamma_I(K) \to K$ は同型である、
+\item 函手 (\ref{dualizing-equation-compare-torsion})
+$D(I^\infty\text{-torsion}) \to D_{I^\infty\text{-torsion}}(A)$ は同値である、
+\item 函手の変換 (\ref{dualizing-equation-compare-torsion-functors}) は同型である、
+すなわち $K \in D(A)$ に対し $R\Gamma_I(K) = R\Gamma_Z(K)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する形式的議論により、(1) を証明すれば十分である。
+
+\medskip\noindent
+$M$ を $I$-冪ねじれ $A$-加群とする。入射 $A$-加群への埋め込み
+$M \to J$ を選ぶ。補題 \ref{dualizing-lemma-injective-module-divide} により
+$J[I^\infty]$ は入射 $A$-加群であり、埋め込み $M \to J[I^\infty]$ を得る。
+従って任意の $I$-冪ねじれ加群は、各 $J^n$ も $I$-冪ねじれである入射分解
+$M \to J^\bullet$ をもつ。よって $R\Gamma_I(M) = M$ である（これは自明ではなく、
+$A$ が Noether でなければ一般には正しくない）。次に
+$K \in D_{I^\infty\text{-torsion}}^+(A)$ とする。このときスペクトル系列
+$$
+R^q\Gamma_I(H^p(K)) \Rightarrow R^{p + q}\Gamma_I(K)
+$$
+（『導来圏』の補題 \ref{derived-lemma-two-ss-complex-functor}）は収束し、
+上で見たように $q = 0$ の項のみが非零である。従って
+$R\Gamma_I(K) \to K$ は同型である。
+
+\medskip\noindent
+$K$ を $D_{I^\infty\text{-torsion}}(A)$ の任意の対象とする。補題 \ref{dualizing-lemma-local-cohomology-ext} により
+$$
+R^q\Gamma_I(K) = \colim \Ext^q_A(A/I^n, K)
+$$
+である。$I$ を生成する $f_1, \ldots, f_r \in A$ を選び、
+$K_n^\bullet = K(A, f_1^n, \ldots, f_r^n)$ を次数 $-r, \ldots, 0$ に項をもつ
+Koszul 複体とする。『代数の続論』の補題 \ref{more-algebra-lemma-sequence-Koszul-complexes} により $D(A)$ の pro-対象
+$\{A/I^n\}$ と $\{K_n^\bullet\}$ は同じなので、
+$$
+R^q\Gamma_I(K) = \colim \Ext^q_A(K_n^\bullet, K)
+$$
+である。$K$ を表す任意の $A$-加群複体 $K^\bullet$ を選ぶ。$K_n^\bullet$ は
+有限自由加群の有限複体なので、
+$$
+\Ext^q_A(K_n, K) =
+H^q(\text{Tot}((K_n^\bullet)^\vee \otimes_A K^\bullet))
+$$
+である。ここで $(K_n^\bullet)^\vee$ は複体 $K_n^\bullet$ の双対である。
+『代数の続論』の補題 \ref{more-algebra-lemma-RHom-out-of-projective} を参照。
+$(K_n^\bullet)^\vee$ は次数 $0, \ldots, r$ に位置する有限自由 $A$-加群の複体なので、
+複体 $\text{Tot}((K_n^\bullet)^\vee \otimes_A K^\bullet)$ と
+$\text{Tot}((K_n^\bullet)^\vee \otimes_A \tau_{\geq q - r - 2} K^\bullet)$ の項は
+次数 $q - 1$ 以上で同じである。従って
+$$
+\Ext^q_A(K_n, K) = \text{Ext}^q_A(K_n, \tau_{\geq q - r - 2}K)
+$$
+がすべての $n$ に対して成り立つ。従って
+$$
+R^q\Gamma_I(K) = R^q\Gamma_I(\tau_{\geq q - r - 2}K) =
+H^q(\tau_{\geq q - r - 2}K) = H^q(K)
+$$
+である。よって写像 $R\Gamma_I(K) \to K$ は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-compute-local-cohomology-noetherian}
+$A$ を Noether 環、$I = (f_1, \ldots, f_r)$ を $A$ のイデアルとし、
+$Z = V(I) \subset \Spec(A)$ とおく。$D(A)$ における標準的同型
+$$
+R\Gamma_I(A) \to
+(A \to \prod\nolimits_{i_0} A_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} A_{f_{i_0}f_{i_1}} \to
+\ldots \to A_{f_1\ldots f_r}) \to R\Gamma_Z(A)
+$$
+がある。$M$ が $A$-加群ならば、同様に $D(A)$ において
+$$
+R\Gamma_I(M) \cong
+(M \to \prod\nolimits_{i_0} M_{f_{i_0}} \to
+\prod\nolimits_{i_0 < i_1} M_{f_{i_0}f_{i_1}} \to
+\ldots \to M_{f_1\ldots f_r}) \cong R\Gamma_Z(M)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-local-cohomology-noetherian} と補題 \ref{dualizing-lemma-local-cohomology-adjoint} における函手 $R\Gamma_Z$ の計算から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-change-rings}
+$A \to B$ を Noether 環の準同型、$I \subset A$ をイデアルとする。このとき
+$D(B)$ において
+$$
+R\Gamma_I(A) \otimes_A^\mathbf{L} B =
+R\Gamma_Z(A) \otimes_A^\mathbf{L} B =
+R\Gamma_Y(B) = R\Gamma_{IB}(B)
+$$
+である。ここで $Y = V(IB) \subset \Spec(B)$ とする。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-compute-local-cohomology-noetherian} と
+\ref{dualizing-lemma-torsion-change-rings} を組み合わせればよい。
+\end{proof}
+
+
+
+
+
+
+\section{深さ}
+\label{dualizing-section-depth}
+
+\noindent
+この節では『可換代数』の第 \ref{algebra-section-depth} 節で導入した深さの概念を再考する。
+
+\begin{lemma}
+\label{dualizing-lemma-depth}
+$A$ を Noether 環、$I \subset A$ をイデアル、$M$ を $IM \not = M$ を満たす有限
+$A$-加群とする。このとき次の整数は等しい：
+\begin{enumerate}
+\item $\text{depth}_I(M)$,
+\item $\Ext_A^i(A/I, M)$ が非零となる最小の整数 $i$,
+\item $H^i_I(M)$ が非零となる最小の整数 $i$。
+\end{enumerate}
+さらに、$I$ のある冪で消される任意の有限 $A$-加群 $N$ に対し、
+$i < \text{depth}_I(M)$ ならば $\Ext^i_A(N, M) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-depth-finite-noetherian} により許される
+$\text{depth}_I(M)$ に関する帰納法で (1) と (2) の等しさを証明する。
+
+\medskip\noindent
+基底の場合。$\text{depth}_I(M) = 0$ ならば、$I$ は $M$ の伴随素イデアルの
+合併に含まれる（『可換代数』の補題 \ref{algebra-lemma-ass-zero-divisors}）。
+素イデアル回避（『可換代数』の補題 \ref{algebra-lemma-silly}）により、ある伴随素イデアル
+$\mathfrak p$ に対し $I \subset \mathfrak p$ である。従って
+$\Hom_A(A/I, M)$ は非零であり、この場合に等しさが成り立つ。
+
+\medskip\noindent
+$\text{depth}_I(M) > 0$ と仮定する。$M$ 上の非零因子で
+$\text{depth}_I(M/fM) = \text{depth}_I(M) - 1$ を満たす $f \in I$ をとる。
+短完全列
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+と $\Ext^*_A(A/I, -)$ に対する付随長完全列を考える。
+$\Ext^i_A(A/I, M)$ は有限 $A/I$-加群であることに注意する（『可換代数』の補題 \ref{algebra-lemma-ext-noetherian} および \ref{algebra-lemma-annihilate-ext}）。従って
+$$
+\Hom_A(A/I, M/fM) = \Ext^1_A(A/I, M)
+$$
+および短完全列
+$$
+0 \to \Ext^i_A(A/I, M) \to \text{Ext}^i_A(A/I, M/fM) \to
+\Ext^{i + 1}_A(A/I, M) \to 0
+$$
+を得る。従って帰納法により (1) と (2) は等しい。
+
+\medskip\noindent
+例えば『可換代数』の補題 \ref{algebra-lemma-regular-sequence-powers} により、
+すべての $n \geq 1$ に対して $\text{depth}_I(M) = \text{depth}_{I^n}(M)$ である。
+従って (1) と (2) の等しさから、すべての $n$ と
+$i < \text{depth}_I(M)$ に対して $\Ext^i_A(A/I^n, M) = 0$ である。
+$N$ を $I$ のある冪で消される有限 $A$-加群とする。ある $n, m \geq 0$ に対し
+短完全列
+$$
+0 \to N' \to (A/I^n)^{\oplus m} \to N \to 0
+$$
+を選べる。このとき
+$\Hom_A(N, M) \subset \Hom_A((A/I^n)^{\oplus m}, M)$ および
+$i < \text{depth}_I(M)$ に対し
+$\Ext^i_A(N, M) \subset \text{Ext}^{i - 1}_A(N', M)$ である。従って単純な
+帰納法により補題の最後の主張が従う。
+
+\medskip\noindent
+最後に (3) が (1), (2) と等しいことを示す。補題 \ref{dualizing-lemma-local-cohomology-ext} により
+$H^p_I(M) = \colim \Ext^p_A(A/I^n, M)$ である。従って
+$i < \text{depth}_I(M)$ に対して $H^i_I(M) = 0$ である。
+$i = \text{depth}_I(M)$ のとき、$\Ext_A^{i - 1}(I/I^n, M)$ の消滅を用いると
+写像 $\Ext_A^i(A/I, M) \to H_I^i(M)$ が単射であることが分かり、正しい次数での
+非消滅が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-in-ses}
+$A$ を Noether 環とし、$0 \to N' \to N \to N'' \to 0$ を有限 $A$-加群の
+短完全列、$I \subset A$ をイデアルとする。
+\begin{enumerate}
+\item
+$\text{depth}_I(N) \geq \min\{\text{depth}_I(N'), \text{depth}_I(N'')\}$
+\item
+$\text{depth}_I(N'') \geq \min\{\text{depth}_I(N), \text{depth}_I(N') - 1\}$
+\item
+$\text{depth}_I(N') \geq \min\{\text{depth}_I(N), \text{depth}_I(N'') + 1\}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$IN \not = N$, $IN' \not = N'$, $IN'' \not = N''$ と仮定する。補題 \ref{dualizing-lemma-depth} の Ext 群 $\Ext^i(A/I, N)$ による深さの特徴づけと、『可換代数』の補題 \ref{algebra-lemma-long-exact-seq-ext} の長完全コホモロジー列
+$$
+\begin{matrix}
+0
+\to \Hom_A(A/I, N')
+\to \Hom_A(A/I, N)
+\to \Hom_A(A/I, N'')
+\\
+\phantom{0\ }
+\to \Ext^1_A(A/I, N')
+\to \Ext^1_A(A/I, N)
+\to \Ext^1_A(A/I, N'')
+\to \ldots
+\end{matrix}
+$$
+を用いればよい。$IN = N$ の場合も、すべての $i$ に対し
+$\Ext^i_A(A/I, N) = 0$ なので同じ議論が成り立つ。
+$IN' \not = N'$ および／または $IN'' \not = N''$ の場合も同様である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-drops-by-one}
+$A$ を Noether 環、$I \subset A$ をイデアル、$M$ を $IM \not = M$ を満たす有限
+$A$-加群とする。
+\begin{enumerate}
+\item $x \in I$ が $M$ 上の非零因子ならば、
+$\text{depth}_I(M/xM) = \text{depth}_I(M) - 1$ である。
+\item $I$ 内の任意の $M$-正則列 $x_1, \ldots, x_r$ は、長さ
+$\text{depth}_I(M)$ の $I$ 内の $M$-正則列へ延長できる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) は (1) の形式的帰結である。$x \in I$ を (1) のようにとる。短完全列
+$0 \to M \to M \to M/xM \to 0$ と補題 \ref{dualizing-lemma-depth-in-ses} により
+$\text{depth}_I(M/xM) \geq \text{depth}_I(M) - 1$ である。一方、
+$x_1, \ldots, x_r \in I$ が $M/xM$ の正則列ならば、$x, x_1, \ldots, x_r$ は
+$M$ の正則列である。従って (1) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-CM}
+$R$ を Noether 局所環とする。$M$ が有限 Cohen--Macaulay $R$-加群で、
+$I \subset R$ が非自明なイデアルならば
+$$
+\text{depth}_I(M) = \dim(\text{Supp}(M)) - \dim(\text{Supp}(M/IM)).
+$$
+\end{lemma}
+
+\begin{proof}
+$\text{depth}_I(M)$ に関する帰納法で証明する。
+
+\medskip\noindent
+$\text{depth}_I(M) = 0$ ならば、$I$ は $M$ のある伴随素イデアル
+$\mathfrak p$ に含まれる（『可換代数』の補題 \ref{algebra-lemma-ideal-nonzerodivisor}）。このとき
+$\mathfrak p \in \text{Supp}(M/IM)$ なので
+$\dim(\text{Supp}(M/IM)) \geq \dim(R/\mathfrak p) = \dim(\text{Supp}(M))$
+であり、等号は『可換代数』の補題 \ref{algebra-lemma-CM-ass-minimal-support} から従う。
+従ってこの場合に補題が成り立つ。
+
+\medskip\noindent
+$\text{depth}_I(M) > 0$ ならば、$M$ 上の非零因子 $x \in I$ を選ぶ。
+$(M/xM)/I(M/xM) = M/IM$ であることに注意する。一方、補題 \ref{dualizing-lemma-depth-drops-by-one} により
+$\text{depth}_I(M/xM) = \text{depth}_I(M) - 1$ であり、『可換代数』の補題 \ref{algebra-lemma-one-equation-module} により
+$\dim(\text{Supp}(M/xM)) = \dim(\text{Supp}(M)) -  1$ である。
+従って帰納法の仮定から結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-flat-CM}
+$R \to S$ を Noether 局所環の平坦局所準同型とし、極大イデアルを
+$\mathfrak m \subset R$ と書く。$I \subset S$ をイデアルとする。
+$S/\mathfrak mS$ が Cohen--Macaulay ならば
+$$
+\text{depth}_I(S) \geq \dim(S/\mathfrak mS) - \dim(S/\mathfrak mS + I)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-grothendieck-regular-sequence} により、
+$S/\mathfrak mS$ で正則列へ写る $S$ の任意の列は $S$ の正則列である。
+従って $R$ が体である場合を証明すれば十分であり、これは補題 \ref{dualizing-lemma-depth-CM} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-divide-by-torsion}
+$A$ を環、$I \subset A$ を有限生成イデアル、$M$ を $A$-加群とし、
+$Z = V(I)$ とおく。このとき $H^0_I(M) = H^0_Z(M)$ である。共通の値を $N$ とし、
+$M' = M/N$ とおく。このとき
+\begin{enumerate}
+\item $H^0_I(M') = 0$ であり、すべての $p > 0$ に対して
+$H^p_I(M) = H^p_I(M')$ かつ $H^p_I(N) = 0$ である、
+\item $H^0_Z(M') = 0$ であり、すべての $p > 0$ に対して
+$H^p_Z(M) = H^p_Z(M')$ かつ $H^p_Z(N) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+定義により $H^0_I(M) = M[I^\infty]$ は $I$-冪ねじれである。補題 \ref{dualizing-lemma-local-cohomology-adjoint} により、$I = (f_1, \ldots, f_r)$ ならば
+$$
+H^0_Z(M) = \Ker(M \longrightarrow M_{f_1} \times \ldots \times M_{f_r})
+$$
+である。従って $H^0_I(M) \subset H^0_Z(M)$ である。逆に
+$x \in H^0_Z(M)$ ならば、ある $e_i \geq 1$ に対して $f_i^{e_i}$ で消され、従って
+$I$ のある冪で消される。これで最初の等式が証明され、さらに $N$ は $I$-冪ねじれである。
+補題 \ref{dualizing-lemma-adjoint} により $R\Gamma_I(N) = N$、補題 \ref{dualizing-lemma-local-cohomology-adjoint} により $R\Gamma_Z(N) = N$ である。これで
+(1), (2) における $H^p_I(N)$ と $H^p_Z(N)$ の高次消滅が従う。
+$H^0_I(M')$ と $H^0_Z(M')$ の消滅は、以上の考察と『代数の続論』の補題 \ref{more-algebra-lemma-divide-by-torsion} により $M'$ が $I$-冪ねじれをもたない
+ことから従う。$M$ と $M'$ の高次コホモロジーの等しさは、長完全コホモロジー列から
+直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{ねじれ加群と完備加群}
+\label{dualizing-section-torsion-and-complete}
+
+\noindent
+$A$ を環、$I$ を有限生成イデアルとする。このとき、$I$-冪ねじれコホモロジー加群を
+もつ複体の導来圏 $D_{I^\infty\text{-torsion}}(A)$（第 \ref{dualizing-section-local-cohomology} 節）と、導来完備複体の導来圏 $D_{comp}(A, I)$
+（『代数の続論』の第 \ref{more-algebra-section-derived-completion} 節）を
+考えられる。この節ではこれらの圏が同値であることを示す。より一般的な主張は
+\cite{Dwyer-Greenlees} にある。
+
+\begin{lemma}
+\label{dualizing-lemma-complete-and-local}
+\begin{slogan}
+この種の結果は Greenlees--May 双対性と呼ばれることがある。
+\end{slogan}
+$A$ を環、$I$ を有限生成イデアルとする。$R\Gamma_Z$ を補題 \ref{dualizing-lemma-local-cohomology-adjoint} のものとし、${\ }^\wedge$ は『代数の続論』の補題 \ref{more-algebra-lemma-derived-completion} の導来完備化を表すものとする。
+$D(A)$ の対象 $K$ に対し
+$$
+R\Gamma_Z(K^\wedge) = R\Gamma_Z(K)
+\quad\text{and}\quad
+(R\Gamma_Z(K))^\wedge = K^\wedge
+$$
+が $D(A)$ において成り立つ。
+\end{lemma}
+
+\begin{proof}
+$I$ を生成する $f_1, \ldots, f_r \in A$ を選ぶ。『代数の続論』の補題 \ref{more-algebra-lemma-derived-completion} により
+$$
+K^\wedge = R\Hom_A\left((A \to \prod A_{f_{i_0}}
+\to \prod A_{f_{i_0i_1}} \to \ldots \to A_{f_1 \ldots f_r}), K\right)
+$$
+であることを想起する。従って錐 $C = \text{Cone}(K \to K^\wedge)$ は
+$$
+R\Hom_A\left((\prod A_{f_{i_0}}
+\to \prod A_{f_{i_0i_1}} \to \ldots \to A_{f_1 \ldots f_r}), K\right)
+$$
+で与えられる。これは有限フィルトレーションを備え、その逐次商が
+$$
+R\Hom_A(A_{f_{i_0} \ldots f_{i_p}}, K), \quad p > 0
+$$
+と同型である複体で表せる。補題 \ref{dualizing-lemma-local-cohomology-vanishes} により、
+これらの複体に $R\Gamma_Z$ を適用すると消滅する。完全三角形
+$K \to K^\wedge \to C \to K[1]$ に $R\Gamma_Z$ を適用すれば、補題の第一の
+公式が正しいことが分かる。
+
+\medskip\noindent
+補題 \ref{dualizing-lemma-local-cohomology-adjoint} により
+$$
+R\Gamma_Z(K) =
+K \otimes^\mathbf{L} (A \to \prod A_{f_{i_0}}
+\to \prod A_{f_{i_0i_1}} \to \ldots \to A_{f_1 \ldots f_r})
+$$
+であることを想起する。従って錐 $C = \text{Cone}(R\Gamma_Z(K) \to K)$ は、
+逐次商が
+$$
+K \otimes_A A_{f_{i_0} \ldots f_{i_p}}, \quad p > 0
+$$
+と同型である有限フィルトレーションを備えた複体で表せる。『代数の続論』の補題 \ref{more-algebra-lemma-derived-completion-vanishes} により、これらの複体に
+${\ }^\wedge$ を適用すると消滅する。完全三角形
+$R\Gamma_Z(K) \to K \to C \to R\Gamma_Z(K)[1]$ に導来完備化を適用すれば、
+補題の第二の公式が正しいことが分かる。
+\end{proof}
+
+\noindent
+次の結果は、三角圏の許容部分圏に関する非常に一般的な現象の特別な場合である。
+
+\begin{proposition}
+\label{dualizing-proposition-torsion-complete}
+\begin{reference}
+これは \cite[Theorem 1.1]{Porta-Liran-Yekutieli} の特別な場合である。
+\end{reference}
+$A$ を環、$I \subset A$ を有限生成イデアルとする。函手 $R\Gamma_Z$ と
+${\ }^\wedge$ は互いに準逆な圏同値
+$$
+D_{I^\infty\text{-torsion}}(A) \leftrightarrow D_{comp}(A, I)
+$$
+を定める。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-complete-and-local} から直ちに従う。
+\end{proof}
+
+\noindent
+上の命題への次の補足は、射に関する対応をより精密にする。
+
+\begin{lemma}
+\label{dualizing-lemma-compare-RHom}
+補題 \ref{dualizing-lemma-complete-and-local} と同じ記法を用いる。$D(A)$ の対象 $K, L$ に対し、
+$D(A)$ における標準的同型
+$$
+R\Hom_A(K^\wedge, L^\wedge) \longrightarrow R\Hom_A(R\Gamma_Z(K), R\Gamma_Z(L))
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_r)$ と書き、交代 {\v C}ech 複体を
+$C = (A \to \prod A_{f_i} \to \ldots \to A_{f_1 \ldots f_r})$ と書く。
+このとき導来完備化は $R\Hom_A(C, -)$（『代数の続論』の補題 \ref{more-algebra-lemma-derived-completion}）、局所コホモロジーは
+$C \otimes^\mathbf{L} -$（補題 \ref{dualizing-lemma-local-cohomology-adjoint}）で与えられる。
+同型
+$$
+R\Hom_A(K \otimes^\mathbf{L} C, L \otimes^\mathbf{L} C) =
+R\Hom_A(K, R\Hom_A(C,  L \otimes^\mathbf{L} C))
+$$
+（『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom}）と写像
+$$
+L \to R\Hom_A(C,  L \otimes^\mathbf{L} C)
+$$
+（『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-diagonal}）を
+組み合わせると、写像
+$$
+\gamma :
+R\Hom_A(K, L)
+\longrightarrow
+R\Hom_A(K \otimes^\mathbf{L} C, L \otimes^\mathbf{L} C)
+$$
+を得る。一方、右辺は
+$$
+R\Hom_A(C, R\Hom_A(K, L \otimes^\mathbf{L} C)).
+$$
+に等しいので導来完備である。従って導来完備化の普遍性により、$\gamma$ は
+$R\Hom_A(K, L)$ の導来完備化を通して分解する。しかし『代数の続論』の補題 \ref{more-algebra-lemma-completion-RHom} により導来完備化は $R\Hom_A$ の内側に入り、
+求める写像を得る。
+
+\medskip\noindent
+補題の写像が同型であることを示すため、$K$ と $L$ は導来完備、すなわち
+$K = K^\wedge$, $L = L^\wedge$ と仮定してよい。この場合、写像
+$$
+\gamma : R\Hom_A(K, L) \longrightarrow R\Hom_A(R\Gamma_Z(K), R\Gamma_Z(L))
+$$
+を考えている。命題 \ref{dualizing-proposition-torsion-complete} により、左辺と右辺の
+コホモロジー群は一致する。すなわち、写像 $\gamma$ が $D(A)$ の射
+$\alpha : K \to L$ を射 $R\Gamma_Z(\alpha) : R\Gamma_Z(K) \to R\Gamma_Z(L)$ へ
+送ることを確かめればよい。検証は省略する（ヒント：$R\Gamma_Z(\alpha)$ は写像
+$\alpha \otimes \text{id}_C :
+K \otimes^\mathbf{L} C
+\to
+L \otimes^\mathbf{L} C$ にほかならず、『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-diagonal} の写像の構成とほとんど同じである）。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-completion-local}
+$I$, $J$ を Noether 環 $A$ のイデアル、$M$ を有限 $A$-加群とする。
+$Z =V(J)$ とおき、局所コホモロジーの導来 $I$-進完備化
+$R\Gamma_Z(M)^\wedge$ を考える。このとき
+\begin{enumerate}
+\item $R\Gamma_Z(M)^\wedge = R\lim R\Gamma_Z(M/I^nM)$ であり、
+\item 短完全列
+$$
+0 \to R^1\lim H^{i - 1}_Z(M/I^nM) \to H^i(R\Gamma_Z(M)^\wedge) \to
+\lim H^i_Z(M/I^nM) \to 0
+$$
+がある。
+\end{enumerate}
+特に $R\Gamma_Z(M)^\wedge$ の負次数のコホモロジーは消滅する。
+\end{lemma}
+
+\begin{proof}
+$J = (g_1, \ldots, g_m)$ とする。補題 \ref{dualizing-lemma-local-cohomology-adjoint} により
+$R\Gamma_Z(M)$ は複体
+$$
+M \to \prod M_{g_{j_0}} \to \prod M_{g_{j_0}g_{j_1}} \to
+\ldots \to M_{g_1g_2\ldots g_m}
+$$
+で計算される。『代数の続論』の補題 \ref{more-algebra-lemma-when-derived-completion-is-completion} により、この複体の
+導来 $I$-進完備化は通常の完備化からなる複体
+$$
+\lim M/I^nM \to \prod \lim (M/I^nM)_{g_{j_0}} \to
+\ldots \to \lim (M/I^nM)_{g_1g_2\ldots g_m}
+$$
+で与えられる。$R\Gamma_Z(M/I^nM)$ は複体
+$ M/I^nM \to \prod (M/I^nM)_{g_{j_0}} \to
+\ldots \to (M/I^nM)_{g_1g_2\ldots g_m}$ で計算され、これらの複体間の遷移写像は
+全射なので、『代数の続論』の補題 \ref{more-algebra-lemma-compute-Rlim-modules}
+により (1) が成り立つ。(2) は『代数の続論』の補題 \ref{more-algebra-lemma-break-long-exact-sequence-modules} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-completion-local-H0}
+補題 \ref{dualizing-lemma-completion-local} と同じ記法と仮定の下で、$A$ は $I$-進完備とする。
+このとき
+$$
+H^0(R\Gamma_Z(M)^\wedge) = \colim H^0_{V(J')}(M)
+$$
+である。ここでフィルター余極限は $V(J') \cap V(I) = V(J) \cap V(I)$ を満たす
+$J' \subset J$ をわたる。
+\end{lemma}
+
+\begin{proof}
+$M$ は有限 $A$-加群なので、$M$ は $I$-進完備である。補題 \ref{dualizing-lemma-completion-local} の証明により
+$$
+H^0(R\Gamma_Z(M)^\wedge) =
+\Ker(M^\wedge \to \prod M_{g_j}^\wedge) =
+\Ker(M \to \prod M_{g_j}^\wedge)
+$$
+である。右辺では通常の $I$-進完備化を用いる。
+$M_{g_j} \to M_{g_j}^\wedge$ の核 $K_j$ は $\bigcap I^n M_{g_j}$ である。
+『可換代数』の補題 \ref{algebra-lemma-intersection-powers-ideal-module} により、任意の
+$\mathfrak p \in V(IA_{g_j})$ に対し、$(K_j)_f = 0$ を満たす
+$f \in A_{g_j}$, $f \not \in \mathfrak p$ が存在する。
+
+\medskip\noindent
+$s \in H^0(R\Gamma_Z(M)^\wedge)$ とする。以上により $s$ を $M$ の元とみなせる。
+$s$ の台 $Z'$ と $D(g_j)$ の交わりは、上の議論により
+$D(g_j) \cap V(I)$ と交わらない。従って $Z'$ は
+$Z' \cap V(I) \subset V(J)$ を満たす $\Spec(A)$ の閉部分集合である。
+このとき、ある $J' \subset J$ に対し $Z' \cup V(J) = V(J')$ かつ
+$V(J') \cap V(I) \subset V(J)$ であり、$s \in H^0_{V(J')}(M)$ である。
+逆に、$J' \subset J$ と $V(J') \cap V(I) \subset V(J)$ を満たす任意の
+$s \in H^0_{V(J')}(M)$ は、すべての $j$ に対して $M_{g_j}^\wedge$ で零へ写る。
+これで補題が証明された。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{環写像に対する自明な双対性}
+\label{dualizing-section-trivial}
+
+\noindent
+$A \to B$ を環準同型とし、函手
+$$
+\Hom_A(B, -) : \text{Mod}_A \longrightarrow \text{Mod}_B,\quad
+M \longmapsto \Hom_A(B, M)
+$$
+を考える。この函手は左完全であり、導来拡張
+$R\Hom(B, -) : D(A) \to D(B)$ をもつ。
+
+\begin{lemma}
+\label{dualizing-lemma-right-adjoint}
+$A \to B$ を環準同型とする。上で構成した函手 $R\Hom(B, -)$ は制限函手
+$D(B) \to D(A)$ の右随伴である。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-adjoint-hom-restrict} により制限と
+$\Hom_A(B, -)$ が随伴函手であることから従う。『導来圏』の補題 \ref{derived-lemma-derived-adjoint-functors} を参照。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-composition-right-adjoints}
+$A \to B \to C$ を環写像とする。このとき
+$R\Hom(C, -) \circ R\Hom(B, -) : D(A) \to D(C)$ は函手
+$R\Hom(C, -) : D(A) \to D(C)$ である。
+\end{lemma}
+
+\begin{proof}
+右随伴の一意性と補題 \ref{dualizing-lemma-right-adjoint} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-ext}
+$\varphi : A \to B$ を環準同型とする。$D(A)$ の $K$ に対し
+$$
+\varphi_*R\Hom(B, K) = R\Hom_A(B, K)
+$$
+である。ここで $\varphi_* : D(B) \to D(A)$ は制限である。特に
+$R^q\Hom(B, K) = \Ext_A^q(B, K)$ である。
+\end{lemma}
+
+\begin{proof}
+$K$ を表す K-入射複体 $I^\bullet$ を選ぶ。このとき $R\Hom(B, K)$ は
+$B$-加群の複体 $\Hom_A(B, I^\bullet)$ で表される。この複体は $A$-加群の複体と
+して $R\Hom_A(B, K)$ を表すので、補題が従う。
+\end{proof}
+
+\noindent
+$A$ を Noether 環とする。コホモロジー加群がすべて有限 $A$-加群である
+$D(A)$ の対象 $K$ からなる充満部分圏を
+$$
+D_{\textit{Coh}}(A) \subset D(A)
+$$
+と書く。$A$ は Noether なので有限 $A$-加群の部分圏は $\text{Mod}_A$ の
+Serre 部分圏であり、『導来圏』の第 \ref{derived-section-triangulated-sub} 節によりこれは意味をもつ。
+
+\begin{lemma}
+\label{dualizing-lemma-exact-support-coherent}
+上の記法の下で、$A \to B$ を Noether 環の有限環写像とする。このとき
+$R\Hom(B, -)$ は $D^+_{\textit{Coh}}(A)$ を $D^+_{\textit{Coh}}(B)$ へ写す。
+\end{lemma}
+
+\begin{proof}
+$K \in D^+(A)$ が有限コホモロジー加群をもつならば、複体 $R\Hom(B, K)$ も
+有限コホモロジー加群をもつことを示せばよい。補題 \ref{dualizing-lemma-RHom-ext} により、
+Ext 加群 $\Ext^i_A(B, K)$ が有限 $A$-加群であることを示せば十分である。
+$K$ は下に有界なので収束するスペクトル系列
+$$
+\Ext^p_A(B, H^q(K)) \Rightarrow \text{Ext}^{p + q}_A(B, K)
+$$
+がある。『可換代数』の補題 \ref{algebra-lemma-ext-noetherian} により
+$\Ext^p_A(B, H^q(K))$ は有限なので、証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-exact-support}
+$A$ を環、$I \subset A$ をイデアルとし、$B = A/I$ とおく。この場合、函手
+$\Hom_A(B, -)$ は函手
+$$
+\text{Mod}_A \longrightarrow \text{Mod}_B,\quad M \longmapsto M[I]
+$$
+に等しく、$M$ をその $I$-ねじれ部分加群へ送る。
+\end{remark}
+
+\begin{situation}
+\label{dualizing-situation-resolution}
+$R \to A$ を環写像とする。この章で後に有用となる $R\Hom(A, -)$ の別の構成を
+与える。$R$ 上の微分付き次数付き代数 $(E, d)$ と擬同型 $E \to A$ があるとする。
+ここで $A$ は微分が零である $R$ 上の微分付き次数付き代数とみなす。このとき可換図式
+$$
+\vcenter{
+\xymatrix{
+D(E, \text{d}) \ar[rd] & &  D(A) \ar[ll] \ar[ld] \\
+& D(R)
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+D(E, \text{d}) \ar[rr]_{- \otimes_E^\mathbf{L} A} & &  D(A) \\
+& D(R) \ar[lu]^{- \otimes_R^\mathbf{L} E} \ar[ru]_{- \otimes_R^\mathbf{L} A}
+}
+}
+$$
+がある。横向きの矢印は圏同値である（『微分次数付き代数』の補題 \ref{dga-lemma-qis-equivalence}）。第一の図式が可換であることは明らかである。
+第二の図式は、第一の図式が可換であり、各函手がその左随伴だから可換である
+（『微分次数付き代数』の例 \ref{dga-example-map-hom-tensor}）。または
+$E \otimes^\mathbf{L}_E A = E \otimes_E A$ と『微分次数付き代数』の補題 \ref{dga-lemma-compose-tensor-functors-general} を用いてもよい。
+\end{situation}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-dga}
+状況 \ref{dualizing-situation-resolution} において、函手 $R\Hom(A, -)$ は
+$R\Hom(E, -) : D(R) \to D(E, \text{d})$ と同値
+$- \otimes^\mathbf{L}_E A : D(E, \text{d}) \to D(A)$ との合成に等しい。
+\end{lemma}
+
+\begin{proof}
+『微分次数付き代数』の補題 \ref{dga-lemma-tensor-hom-adjoint} により
+$R\Hom(E, -)$ は $- \otimes^\mathbf{L}_R E$ の右随伴である。従ってこの函手は、
+写像 $R \to A$ に対する函手 $R\Hom(A, -)$ と同じ役割を果たす（補題 \ref{dualizing-lemma-right-adjoint}）。よってこれらの函手は同値
+$- \otimes^\mathbf{L}_E A : D(E, \text{d}) \to D(A)$ を介して対応する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-is-tensor}
+状況 \ref{dualizing-situation-resolution} において次を仮定する：
+\begin{enumerate}
+\item $D(R)$ の対象とみた $E$ はコンパクトである、
+\item $N = \Hom^\bullet_R(E^\bullet, R)$ は $R\Hom(E, R)$ を計算する。
+\end{enumerate}
+このとき $R\Hom(E, -) : D(R) \to D(E)$ は
+$K \mapsto K \otimes_R^\mathbf{L} N$ と同型である。
+\end{lemma}
+
+\begin{proof}
+『微分次数付き代数』の補題 \ref{dga-lemma-RHom-is-tensor} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-RHom-is-tensor-special}
+状況 \ref{dualizing-situation-resolution} において $A$ は完全 $R$-加群とする。このとき
+$$
+R\Hom(A, -) : D(R) \to D(A)
+$$
+は $K \mapsto K \otimes_R^\mathbf{L} M$ で与えられる。ここで
+$M = R\Hom(A, R) \in D(A)$ とする。
+\end{lemma}
+
+\begin{proof}
+『分羃代数』の補題 \ref{dpa-lemma-tate-resoluton-pseudo-coherent-ring-map} を適用して、$R$ 上の $A$ の
+Tate 分解 $(E, \text{d})$ を選ぶ。$i > 0$ に対して $E^i = 0$、
+$E^0 = R[x_1, \ldots, x_n]$ は多項式代数、$i < 0$ に対して $E^i$ は有限自由
+$E^0$-加群である。従って $E$ は $R$-加群の複体として上に有界な自由
+$R$-加群の複体である。補題 \ref{dualizing-lemma-RHom-is-tensor} の仮定を確認する。
+第一は $A$ が完全であることから成り立つ（従って『代数の続論』の命題 \ref{more-algebra-proposition-perfect-is-compact} によりコンパクトである）。第二は
+『代数の続論』の補題 \ref{more-algebra-lemma-RHom-out-of-projective} から従う。
+補題により $K \mapsto R\Hom(E, K)$ は、ある微分付き次数付き $E$-加群 $N$ に対する
+$K \mapsto K \otimes_R^\mathbf{L} N$ と同型である。$D(A)$ において
+$$
+(R \otimes_R E) \otimes_E^\mathbf{L} A = R \otimes_E E \otimes_E A
+$$
+であることに注意する。従って『微分次数付き代数』の補題 \ref{dga-lemma-compose-tensor-functors-general-algebra} により
+$- \otimes_R^\mathbf{L} N$ と $- \otimes_R^\mathbf{L} A$ の合成は、ある
+$M \in D(A)$ に対する $- \otimes_R M$ の形である。最後に補題 \ref{dualizing-lemma-RHom-dga} を適用する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-compute-for-effective-Cartier-algebraic}
+$R \to A$ を、核 $I$ が可逆 $R$-加群である全射環写像とする。函手
+$R\Hom(A, -) : D(R) \to D(A)$ は $K \mapsto K \otimes_R^\mathbf{L} N[-1]$ と
+同型である。ここで $N$ は可逆 $A$-加群 $I \otimes_R A$ の逆である。
+\end{lemma}
+
+\begin{proof}
+$A$ は有限射影分解
+$$
+0 \to I \to R \to A \to 0
+$$
+をもつので、$A$ は完全 $R$-加群である。補題 \ref{dualizing-lemma-RHom-is-tensor-special} により、
+$R\Hom(A, R)$ が $D(A)$ において $N[-1]$ で表されることを証明すれば十分である。
+これは $R\Hom(A, R)$ が次数 $1$ の $N$ という唯一の非零コホモロジー加群を
+もつことを意味する。$\text{Mod}_A \to \text{Mod}_R$ は充満忠実なので、制限函手
+$i_* : D(A) \to D(R)$ を適用した後に証明すれば十分である。補題 \ref{dualizing-lemma-RHom-ext} により
+$$
+i_*R\Hom(A, R) = R\Hom_R(A, R)
+$$
+である。上の有限射影分解を用いると、後者は次数 $0$ に $R$ を置いた複体
+$R \to I^{\otimes -1}$ で表される。写像 $R \to I^{\otimes -1}$ は単射であり、
+その余核は $N$ である。
+\end{proof}
+
+
+
+
+
+\section{自明な双対性に対する基底変換}
+\label{dualizing-section-base-change-trivial-duality}
+
+\noindent
+この節では環の余 Cartesian 正方形
+$$
+\xymatrix{
+A \ar[r]_\alpha & A' \\
+R \ar[u]^\varphi \ar[r]^\rho & R' \ar[u]_{\varphi'}
+}
+$$
+を考える。すなわち $A' = A \otimes_R R'$ である。$A$ と $R'$ が $R$ 上
+{\bf Tor 独立}ならば、$D(A')$ において $D(R)$ の $K$ に関して函手的な標準基底変換写像
+\begin{equation}
+\label{dualizing-equation-base-change}
+R\Hom(A, K) \otimes_A^\mathbf{L} A'
+\longrightarrow
+R\Hom(A', K \otimes_R^\mathbf{L} R')
+\end{equation}
+がある。実際、補題 \ref{dualizing-lemma-right-adjoint} の随伴性により、この矢印は
+$D(R')$ における写像
+$$
+\varphi'_*\left(R\Hom(A, K) \otimes_A^\mathbf{L} A'\right)
+\longrightarrow
+K \otimes_R^\mathbf{L} R'
+$$
+と同じことである。ここで $\varphi'_* : D(A') \to D(R')$ は制限函手である。
+左辺に『代数の続論』の補題 \ref{more-algebra-lemma-base-change-comparison} を
+適用すると、これは $D(R')$ における写像
+$$
+\varphi_*(R\Hom(A, K)) \otimes_R^\mathbf{L} R'
+\longrightarrow
+K \otimes_R^\mathbf{L} R'
+$$
+と同じである。ここで $\varphi_* : D(A) \to D(R)$ は制限函手である。
+これには $can \otimes^\mathbf{L} \text{id}_{R'}$ を選べる。ここで
+$can : \varphi_*(R\Hom(A, K)) \to K$ は $R\Hom(A, -)$ と $\varphi_*$ の
+随伴の余単位である。
+
+\begin{lemma}
+\label{dualizing-lemma-check-base-change-is-iso}
+上の状況で、写像 (\ref{dualizing-equation-base-change}) が同型であるための必要十分条件は、
+『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-diagonal-better} の写像
+$$
+R\Hom_R(A, K) \otimes_R^\mathbf{L} R'
+\longrightarrow
+R\Hom_R(A, K \otimes_R^\mathbf{L} R')
+$$
+が同型であることである。
+\end{lemma}
+
+\begin{proof}
+写像が同型であることを示すには、$\varphi'_*$ を適用した後に同型であることを
+示せば十分である。函手 $\varphi'_*$ を (\ref{dualizing-equation-base-change}) に適用し、
+$A' = A \otimes_R^\mathbf{L} R'$ を用いると、More on Algebra, Equation
+(\ref{more-algebra-equation-base-change-RHom}) の導来 Hom に対する基底変換写像
+$R\Hom_R(A, K) \otimes_R^\mathbf{L} R' \to
+R\Hom_{R'}(A \otimes_R^\mathbf{L} R', K \otimes_R^\mathbf{L} R')$ を得る。
+『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} の証明とまったく同様に
+左右を展開し、特に『代数の続論』の補題 \ref{more-algebra-lemma-upgrade-adjoint-tensor-RHom} を用いれば、求める結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-bc-surjection}
+$R \to A$ と $R \to R'$ を環写像とし、$A' = A \otimes_R R'$ とおく。次を仮定する：
+\begin{enumerate}
+\item $A$ は $R$-加群として擬連接である、
+\item $R'$ は $R$-加群として有限 Tor 次元をもつ（例えば $R \to R'$ は平坦）、
+\item $A$ と $R'$ は $R$ 上 Tor 独立である。
+\end{enumerate}
+このとき $K \in D^+(R)$ に対し (\ref{dualizing-equation-base-change}) は同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-check-base-change-is-iso} と『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-evaluate-tensor-isomorphism} の (4) から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bc-surjection}
+$R \to A$ と $R \to R'$ を環写像とし、$A' = A \otimes_R R'$ とおく。次を仮定する：
+\begin{enumerate}
+\item $A$ は完全 $R$-加群である、
+\item $A$ と $R'$ は $R$ 上 Tor 独立である。
+\end{enumerate}
+このときすべての $K \in D(R)$ に対し (\ref{dualizing-equation-base-change}) は同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-check-base-change-is-iso} と『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-evaluate-tensor-isomorphism} の (1) から従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{双対化複体}
+\label{dualizing-section-dualizing}
+
+\noindent
+この節では Noether 環に対する双対化複体を定義する。
+
+\begin{definition}
+\label{dualizing-definition-dualizing}
+$A$ を Noether 環とする。{\it 双対化複体}とは、次を満たす $A$-加群の複体
+$\omega_A^\bullet$ である：
+\begin{enumerate}
+\item $\omega_A^\bullet$ は有限入射次元をもつ、
+\item すべての $i$ に対し $H^i(\omega_A^\bullet)$ は有限 $A$-加群である、
+\item $A \to R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)$ は擬同型である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義に慣れるには少し時間がかかる。以下の補題のいくつかは、証明を読む前に
+自分で証明してみるとよいかもしれない。
+
+\begin{lemma}
+\label{dualizing-lemma-finite-ext-into-bounded-injective}
+$A$ を Noether 環とする。$K, L \in D_{\textit{Coh}}(A)$ とし、$L$ は有限入射次元を
+もつと仮定する。このとき $R\Hom_A(K, L)$ は $D_{\textit{Coh}}(A)$ に属する。
+\end{lemma}
+
+\begin{proof}
+整数 $n$ を選び、完全三角形
+$$
+\tau_{\leq n}K \to K \to \tau_{\geq n + 1}K \to \tau_{\leq n}K[1]
+$$
+を考える；『導来圏』の注意 \ref{derived-remark-truncation-distinguished-triangle} を参照。$L$ は有限入射次元を
+もつので、ある定数 $c$ に対し $R\Hom_A(\tau_{\geq n + 1}K, L)$ の
+次数 $\geq c - n$ のコホモロジーは消滅する。従って $i$ が与えられると、ある
+$n \gg - i$ に対し $\Ext^i_A(K, L) \to \Ext^i_A(\tau_{\leq n}K, L)$ は同型である。
+『スキームの導来圏』の補題 \ref{perfect-lemma-coherent-internal-hom} を
+$\tau_{\leq n}K$ と $L$ に適用すると、すべての $i$ に対して
+$\Ext^i_A(K, L)$ は有限 $A$-加群である。従って $R\Hom_A(K, L)$ は確かに
+$D_{\textit{Coh}}(A)$ の対象である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing}
+$A$ を Noether 環とする。$\omega_A^\bullet$ が双対化複体ならば、函手
+$$
+D : K \longmapsto R\Hom_A(K, \omega_A^\bullet)
+$$
+は反同値 $D_{\textit{Coh}}(A) \to D_{\textit{Coh}}(A)$ であり、
+$D^+_{\textit{Coh}}(A)$ と $D^-_{\textit{Coh}}(A)$ を交換し、反同値
+$D^b_{\textit{Coh}}(A) \to D^b_{\textit{Coh}}(A)$ を誘導する。さらに
+$D \circ D$ は恒等函手と同型である。
+\end{lemma}
+
+\begin{proof}
+$K$ を $D_{\textit{Coh}}(A)$ の対象とする。補題 \ref{dualizing-lemma-finite-ext-into-bounded-injective} により
+$R\Hom_A(K, \omega_A^\bullet)$ は $D_{\textit{Coh}}(A)$ の対象である。
+『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-evaluate-isomorphism-technical} と
+双対化複体に対する仮定により、標準的同型
+$$
+K = R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A^\mathbf{L} K
+\longrightarrow
+R\Hom_A(R\Hom_A(K, \omega_A^\bullet), \omega_A^\bullet)
+$$
+を得る。従ってこの函手は準逆をもち、証明が完了する。
+\end{proof}
+
+\noindent
+$R$ を環とする。$D(R)$ の対象 $L$ が、導来テンソル積から定まる $D(R)$ の対称
+モノイダル構造に関して可逆対象であるとき、これは {\it 可逆}であるという。
+『代数の続論』の補題 \ref{more-algebra-lemma-invertible-derived} で見たように、これは
+$L$ が完全で、$L = \bigoplus H^n(L)[-n]$ は有限直和、各 $H^n(L)$ は有限射影的であり、
+ある開被覆 $\Spec(R) = \bigcup D(f_i)$ と整数 $n_i$ に対して
+$L \otimes_R R_{f_i} \cong R_{f_i}[-n_i]$ となることを意味する。
+
+\begin{lemma}
+\label{dualizing-lemma-equivalence-comes-from-invertible}
+$A$ を Noether 環とし、$F : D^b_{\textit{Coh}}(A) \to D^b_{\textit{Coh}}(A)$ を
+$A$-線形圏同値とする。このとき $F(A)$ は $D(A)$ の可逆対象である。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak m \subset A$ を剰余体 $\kappa$ をもつ極大イデアルとし、対象
+$F(\kappa)$ を考える。$\kappa = \Hom_{D(A)}(\kappa, \kappa)$ なので、
+$F(\kappa)$ のすべてのコホモロジー群は $\mathfrak m$ で消される。また
+$$
+\Ext^i_A(\kappa, \kappa) = \text{Ext}^i_A(F(\kappa), F(\kappa))
+= \Hom_{D(A)}(F(\kappa), F(\kappa)[i])
+$$
+は $i < 0$ に対して零である。$a$ を最小、$b$ を最大として
+$H^a(F(\kappa)) \not = 0$, $H^b(F(\kappa)) \not = 0$ とする（特に
+$a \leq b$）。このとき $D(A)$ において非零写像
+$$
+F(\kappa) \to H^b(F(\kappa))[-b] \to H^a(F(\kappa))[-b]
+\to F(\kappa)[a - b]
+$$
+がある（コホモロジー上で非零写像を誘導するので非零である）。従って $b = a$ であり、
+$F(\kappa) = \kappa[-a]$ と結論する。
+
+\medskip\noindent
+$G$ を $F$ の準逆とする。同様の議論により、ある整数 $b$ に対して
+$G(\kappa) = \kappa[-b]$ である。合成すると $a + b = 0$ を得る。
+$E$ を $\mathfrak m$ のある冪で消される有限 $A$-加群とする。$E$ の長さに関する
+帰納法により、$\mathfrak m$ のある冪で消される有限 $A$-加群 $E'$ が存在して
+$G(E) = E'[-b]$ である。従って $E[-a] = F(E')$ である。次に群
+$$
+\Ext^i_A(A, E') = \text{Ext}^i_A(F(A), F(E')) =
+\Hom_{D(A)}(F(A), E[-a + i])
+$$
+を考える。左辺が非零であるための必要十分条件は $i = 0$ であり、そのとき $E'$ を
+得る。これを $E = E' = \kappa$ に適用して Nakayama の補題を用いると、
+$H^j(F(A))_\mathfrak m$ は $j > a$ に対して零で、$j = a$ に対して $1$ 元で
+生成される。一方、ある $j < a$ に対して $H^j(F(A))_\mathfrak m$ が非零ならば、
+ある $i < 0$ とある $E$ に対して写像 $F(A) \to E[-a + i]$ があり
+（『代数の続論』の補題 \ref{more-algebra-lemma-detect-cohomology}）、矛盾する。
+従って、$1$ 元で生成されるある $A_\mathfrak m$-加群 $M$ に対して
+$F(A)_\mathfrak m = M[-a]$ である。しかし
+$$
+A_\mathfrak m = \Hom_{D(A)}(A, A)_\mathfrak m =
+\Hom_{D(A)}(F(A), F(A))_\mathfrak m = \Hom_{A_\mathfrak m}(M, M)
+$$
+なので $M \cong A_\mathfrak m$ である。従って、ある
+$f \in A$, $f \not \in \mathfrak m$ に対して $F(A)_f$ は $A_f[-a]$ と同型である。
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-unique}
+$A$ を Noether 環とする。$\omega_A^\bullet$ と $(\omega'_A)^\bullet$ が双対化複体ならば、
+$D(A)$ のある可逆対象 $L$ に対して $(\omega'_A)^\bullet$ は
+$\omega_A^\bullet \otimes_A^\mathbf{L} L$ と擬同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing} と \ref{dualizing-lemma-equivalence-comes-from-invertible} により、
+函手 $K \mapsto R\Hom_A(R\Hom_A(K, \omega_A^\bullet), (\omega_A')^\bullet)$ は
+$A$ を可逆対象 $L$ へ写す。すなわち同型
+$$
+L \longrightarrow R\Hom_A(\omega_A^\bullet, (\omega_A')^\bullet)
+$$
+がある。$L$ は有限 Tor 次元をもつので、『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-evaluate-isomorphism-technical} を適用すると、
+$D^b_{\textit{Coh}}(A)$ の $K$ に対して
+$$
+R\Hom_A(\omega_A^\bullet, (\omega'_A)^\bullet) \otimes_A^\mathbf{L} K
+\longrightarrow
+R\Hom_A(R\Hom_A(K, \omega_A^\bullet), (\omega_A')^\bullet)
+$$
+が同型であることが分かる。特に $K = \omega_A^\bullet$ とおけば証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-localize}
+$A$ を Noether 環、$B = S^{-1}A$ を局所化とする。$\omega_A^\bullet$ が双対化複体ならば、
+$\omega_A^\bullet \otimes_A B$ は $B$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$I^\bullet$ を入射加群の有界複体として擬同型
+$\omega_A^\bullet \to I^\bullet$ をとる。このとき $S^{-1}I^\bullet$ は
+$B = S^{-1}A$-加群の入射加群からなる有界複体であり（補題 \ref{dualizing-lemma-localization-injective-modules}）、$\omega_A^\bullet \otimes_A B$ を表す。
+従って $\omega_A^\bullet \otimes_A B$ は有限入射次元をもつ。
+$A \to B$ の平坦性により
+$H^i(\omega_A^\bullet \otimes_A B) = H^i(\omega_A^\bullet) \otimes_A B$ なので、
+$\omega_A^\bullet \otimes_A B$ は有限コホモロジー加群をもつ。最後に写像
+$$
+B \longrightarrow
+R\Hom_A(\omega_A^\bullet \otimes_A B, \omega_A^\bullet \otimes_A B)
+$$
+は擬同型である。この場合、内部 Hom の形成は平坦基底変換と可換だからである；
+『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} を参照。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-glue}
+$A$ を Noether 環、$f_1, \ldots, f_n \in A$ を単位イデアルの生成元とする。
+$\omega_A^\bullet$ を $A$-加群の複体とし、すべての $i$ に対して
+$(\omega_A^\bullet)_{f_i}$ は $A_{f_i}$ の双対化複体であるとする。このとき
+$\omega_A^\bullet$ は $A$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+二重複体
+$$
+\prod\nolimits_{i_0} (\omega_A^\bullet)_{f_{i_0}}
+\to
+\prod\nolimits_{i_0 < i_1} (\omega_A^\bullet)_{f_{i_0}f_{i_1}}
+\to \ldots
+$$
+を考える。付随する全複体は、例えば『降下』の注意 \ref{descent-remark-standard-covering} または『スキームの導来圏』の補題 \ref{perfect-lemma-alternating-cech-complex-complex-computes-cohomology} により
+$\omega_A^\bullet$ と擬同型である。仮定により複体 $(\omega_A^\bullet)_{f_i}$ は
+$A_{f_i}$-加群の複体として有限入射次元をもつ。従って各複体
+$(\omega_A^\bullet)_{f_{i_0} \ldots f_{i_p}}$, $p > 0$ は
+$A_{f_{i_0} \ldots f_{i_p}}$ 上有限入射次元をもつ；補題 \ref{dualizing-lemma-localization-injective-modules} を参照。さらに補題 \ref{dualizing-lemma-injective-flat} により、各複体
+$(\omega_A^\bullet)_{f_{i_0} \ldots f_{i_p}}$, $p > 0$ は $A$ 上有限入射次元をもつ。
+従って $\omega_A^\bullet$ は $A$-加群の複体として有限入射次元をもつ
+（有限入射次元をもつ次数付き部分を備えた有限フィルトレーションをもつ複体で
+表せるからである）。各 $i$ に対し $H^n(\omega_A^\bullet)_{f_i}$ は有限
+$A_{f_i}$ 加群なので、『可換代数』の補題 \ref{algebra-lemma-cover} により
+$H^i(\omega_A^\bullet)$ は有限 $A$-加群である。最後に、写像
+$A \to R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)$ の $A_{f_i}$ への導来基底変換は、
+『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} により写像
+$A_{f_i} \to R\Hom_A((\omega_A^\bullet)_{f_i}, (\omega_A^\bullet)_{f_i})$ である。
+従って $A \to R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)$ は同型であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-finite}
+$A \to B$ を Noether 環の有限環写像とし、$\omega_A^\bullet$ を双対化複体とする。
+このとき $R\Hom(B, \omega_A^\bullet)$ は $B$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$I^\bullet$ を入射加群の有界複体として擬同型
+$\omega_A^\bullet \to I^\bullet$ をとる。このとき $\Hom_A(B, I^\bullet)$ は
+$B$-加群の入射加群からなる有界複体であり（補題 \ref{dualizing-lemma-hom-injective}）、
+$R\Hom(B, \omega_A^\bullet)$ を表す。従って $R\Hom(B, \omega_A^\bullet)$ は
+有限入射次元をもつ。補題 \ref{dualizing-lemma-exact-support-coherent} により、これは
+$D_{\textit{Coh}}(B)$ の対象である。最後に
+$$
+\Hom_{D(B)}(R\Hom(B, \omega_A^\bullet), R\Hom(B, \omega_A^\bullet)) =
+\Hom_{D(A)}(R\Hom(B, \omega_A^\bullet), \omega_A^\bullet) = B
+$$
+と計算し、$n \not = 0$ に対して
+$$
+\Hom_{D(B)}(R\Hom(B, \omega_A^\bullet), R\Hom(B, \omega_A^\bullet)[n]) =
+\Hom_{D(A)}(R\Hom(B, \omega_A^\bullet), \omega_A^\bullet[n]) = 0
+$$
+と計算する。これは双対化複体の最後の性質を証明する。表示式の第一の等号は
+補題 \ref{dualizing-lemma-right-adjoint}、第二の等号は補題 \ref{dualizing-lemma-dualizing} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-quotient}
+$A \to B$ を Noether 環の全射準同型とし、$\omega_A^\bullet$ を双対化複体とする。
+このとき $R\Hom(B, \omega_A^\bullet)$ は $B$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing-finite} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-polynomial-ring}
+$A$ を Noether 環とする。$\omega_A^\bullet$ が双対化複体ならば、
+$\omega_A^\bullet \otimes_A A[x]$ は $A[x]$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$B = A[x]$, $\omega_B^\bullet = \omega_A^\bullet \otimes_A B$ とおく。補題 \ref{dualizing-lemma-injective-dimension-over-polynomial-ring} と『代数の続論』の補題 \ref{more-algebra-lemma-finite-injective-dimension} により $\omega_B^\bullet$ は
+有限入射次元をもつ。$A \to B$ の平坦性により
+$H^i(\omega_B^\bullet) = H^i(\omega_A^\bullet) \otimes_A B$ なので、
+$\omega_A^\bullet \otimes_A B$ は有限コホモロジー加群をもつ。最後に写像
+$$
+B \longrightarrow R\Hom_B(\omega_B^\bullet, \omega_B^\bullet)
+$$
+は擬同型である。この場合、内部 Hom の形成は平坦基底変換と可換だからである；
+『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} を参照。
+\end{proof}
+
+\begin{proposition}
+\label{dualizing-proposition-dualizing-essentially-finite-type}
+$A$ を双対化複体をもつ Noether 環とする。このとき $A$ 上本質的有限型の任意の
+$A$-代数は双対化複体をもつ。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing-localize}、\ref{dualizing-lemma-dualizing-quotient} および \ref{dualizing-lemma-dualizing-polynomial-ring} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-find-function}
+$A$ を Noether 環、$\omega_A^\bullet$ を双対化複体とする。$\mathfrak m \subset A$ を
+極大イデアルとし、$\kappa = A/\mathfrak m$ とおく。このとき、ある
+$n \in \mathbf{Z}$ に対して
+$R\Hom_A(\kappa, \omega_A^\bullet) \cong \kappa[n]$ である。
+\end{lemma}
+
+\begin{proof}
+$R\Hom_A(\kappa, \omega_A^\bullet)$ は $\kappa$ 上の双対化複体であり
+（補題 \ref{dualizing-lemma-dualizing-quotient}）、$\kappa$ 上の双対化複体はシフトを除いて
+一意であり（補題 \ref{dualizing-lemma-dualizing-unique}）、さらに $\kappa$ 自身が
+$\kappa$ 上の双対化複体だからである。
+\end{proof}
+
+
+
+
+\section{局所環上の双対化複体}
+\label{dualizing-section-dualizing-local}
+
+\noindent
+本節では、$(A, \mathfrak m, \kappa)$ を双対化複体 $\omega_A^\bullet$ を備えた
+Noether 局所環で、補題 \ref{dualizing-lemma-find-function} の整数 $n$ が零であるものとする。
+より正確には、$R\Hom_A(\kappa, \omega_A^\bullet) = \kappa[0]$ と仮定する。
+この場合、双対化複体は {\it 正規化されている} という。正規化双対化複体は
+同型を除いて一意であり、$A$ のほかの任意の双対化複体は正規化双対化複体の
+シフトと同型であることに注意する（補題 \ref{dualizing-lemma-dualizing-unique}）。
+
+\begin{lemma}
+\label{dualizing-lemma-normalized-finite}
+$(A, \mathfrak m, \kappa) \to (B, \mathfrak m', \kappa')$ を Noether 局所環の
+有限局所写像とし、$\omega_A^\bullet$ を正規化双対化複体とする。このとき
+$\omega_B^\bullet = R\Hom(B, \omega_A^\bullet)$ は $B$ の正規化双対化複体である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing-finite} により複体 $\omega_B^\bullet$ は $B$ の双対化複体である。
+補題 \ref{dualizing-lemma-right-adjoint} により
+$$
+R\Hom_B(\kappa', \omega_B^\bullet) =
+R\Hom_B(\kappa', R\Hom(B, \omega_A^\bullet)) =
+R\Hom_A(\kappa', \omega_A^\bullet)
+$$
+である。$A$-加群として $\kappa'$ は $\kappa$ の有限個のコピーの直和と同型であり、
+$\omega_A^\bullet$ は正規化されているから、この複体のコホモロジーは次数 $0$ にしかない。
+従って $\omega_B^\bullet$ も正規化双対化複体である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-normalized-quotient}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$A \to B$ を全射とする。このとき
+$\omega_B^\bullet = R\Hom_A(B, \omega_A^\bullet)$ は $B$ の正規化双対化複体である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-normalized-finite} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-equivalence-finite-length}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環とする。$F$ を有限長 $A$-加群の圏の
+$A$-線形自己同値とする。このとき $F$ は恒等関手と同型である。
+\end{lemma}
+
+\begin{proof}
+$\kappa$ はこの圏の唯一の単純対象なので $F(\kappa) \cong \kappa$ である。
+この圏は Abel 圏だから $F$ は完全である。従って任意の有限長加群 $E$ に対し、
+$F(E)$ の長さは $E$ の長さと等しい。
+$\Hom(E, \kappa) = \Hom(F(E), F(\kappa)) \cong \Hom(F(E), \kappa)$
+なので、Nakayama の補題から $E$ と $F(E)$ の生成元の個数は等しい。従って
+$F(A/\mathfrak m^n)$ は巡回 $A$-加群である。生成元
+$e \in F(A/\mathfrak m^n)$ をとる。$F$ は $A$-線形なので
+$\mathfrak m^n e = 0$ である。長さが等しいため写像
+$A/\mathfrak m^n \to F(A/\mathfrak m^n)$ は同型でなければならない。すべての $n$ に
+対して生成元へ写る元
+$$
+e \in \lim F(A/\mathfrak m^n)
+$$
+をとる（小さな議論は省略する）。これにより、すべての $A$-加群写像
+$A/\mathfrak m^n \to A/\mathfrak m^{n'}$ と両立する同型系
+$A/\mathfrak m^n \to F(A/\mathfrak m^n)$ を得る（再び $F$ の $A$-線形性による）。
+任意の有限長加群は巡回加群の直和間の写像の余核だから、補題の同型を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-finite-length}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とし、
+$E$ を $\kappa$ の入射包絡とする。このとき有限長 $A$-加群 $N$ に関して関手的な同型
+$$
+R\Hom_A(N, \omega_A^\bullet) = \Hom_A(N, E)[0]
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+$N$ の長さに関する帰納法により、$R\Hom_A(N, \omega_A^\bullet)$ は次数 $0$ にある
+有限長加群である。従って $R\Hom_A(-, \omega_A^\bullet)$ は有限長加群の圏上に
+反同値を誘導する。命題 \ref{dualizing-proposition-matlis} により $\Hom_A(-, E)$ についても
+同じことが成り立つので、
+$$
+N \longmapsto \Hom_A(R\Hom_A(N, \omega_A^\bullet), E)
+$$
+は補題 \ref{dualizing-lemma-equivalence-finite-length} におけるような同値であり、従って
+恒等関手と同型である。$\Hom_A(-, E)$ を二度適用すると恒等関手になるから
+（命題 \ref{dualizing-proposition-matlis}）、補題の主張を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-sitting-in-degrees}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$M$ を有限 $A$-加群、$d = \dim(\text{Supp}(M))$ とする。このとき
+\begin{enumerate}
+\item $\Ext^i_A(M, \omega_A^\bullet)$ が零でなければ、$i \in \{-d, \ldots, 0\}$ である。
+\item $\Ext^i_A(M, \omega_A^\bullet)$ の台の次元は $-i$ 以下である。
+\item $\text{depth}(M)$ は $\Ext^{-\delta}_A(M, \omega_A^\bullet) \not = 0$ となる
+最小の整数 $\delta \geq 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$d$ に関する帰納法で証明する。$d = 0$ の場合は補題 \ref{dualizing-lemma-dualizing-finite-length} と Matlis 双対性（命題 \ref{dualizing-proposition-matlis}）から従う。後者は $M$ が零でなければ
+$\Hom_A(M, E)$ も零でないことを保証する。
+
+\medskip\noindent
+台の次元が $< d$ の加群について結果が成り立ち、$M$ の深さが $> 0$ であると仮定する。
+$M$ 上の非零因子 $f \in \mathfrak m$ をとり、短完全列
+$$
+0 \to M \to M \to M/fM \to 0
+$$
+を考える。$\dim(\text{Supp}(M/fM)) = d - 1$ なので（『可換代数』の補題 \ref{algebra-lemma-one-equation-module}）、帰納法の仮定を適用できる。
+$E^i = \Ext^i_A(M, \omega_A^\bullet)$ および
+$F^i = \Ext^i_A(M/fM, \omega_A^\bullet)$ と書けば、長完全列
+$$
+\ldots \to F^i \to E^i \xrightarrow{f} E^i \to F^{i + 1} \to \ldots
+$$
+を得る。帰納法により
+$i + 1 \not \in \{-\dim(\text{Supp}(M/fM)), \ldots, -\text{depth}(M/fM)\}$
+に対して $E^i/fE^i = 0$ である。Nakayama の補題（『可換代数』の補題 \ref{algebra-lemma-NAK}）と『可換代数』の補題 \ref{algebra-lemma-depth-drops-by-one} から
+$i \not \in \{-\dim(\text{Supp}(M)), \ldots, -\text{depth}(M)\}$
+に対して $E^i = 0$ と結論する。さらに境界の場合 $i = - \text{depth}(M)$ には、
+帰納法により $F^{i + 1}$ が零でないので $E^i$ も零でない。また
+$E^i/fE^i \subset F^{i + 1}$ だから
+$$
+\dim(\text{Supp}(F^{i + 1})) \geq \dim(\text{Supp}(E^i/fE^i))
+\geq \dim(\text{Supp}(E^i)) - 1
+$$
+を得て（上で用いた補題を参照）、次元評価 (2) も得る。
+
+\medskip\noindent
+$M$ の深さが $0$ で $d > 0$ の場合、$N = M[\mathfrak m^\infty]$ とし、
+$M' = M/N$ とおく（補題 \ref{dualizing-lemma-divide-by-torsion} と比較せよ）。このとき
+$M'$ の深さは $> 0$ で $\dim(\text{Supp}(M')) = d$ である。従って $M'$ について
+結果が分かっており、
+$R\Hom_A(N, \omega_A^\bullet) = \Hom_A(N, E)$
+（補題 \ref{dualizing-lemma-dualizing-finite-length}）なので、$\Ext$ の長完全コホモロジー列から
+$M$ についての結果を得る。
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-vanishing-for-arbitrary-modules}
+$(A, \mathfrak m)$ と $\omega_A^\bullet$ を補題 \ref{dualizing-lemma-sitting-in-degrees} におけるものとする。『代数の続論』の補題 \ref{more-algebra-lemma-injective-amplitude} の (3) が適用できるので、
+$\omega_A^\bullet$ の入射振幅は $[-d, 0]$ に含まれる。特に、任意の $A$-加群
+$M$（有限とは限らない）に対して、$i \not \in \{-d, \ldots, 0\}$ ならば
+$\Ext^i_A(M, \omega_A^\bullet) = 0$ である。
+\end{remark}
+
+\begin{lemma}
+\label{dualizing-lemma-local-CM}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環、
+$M$ を有限 $A$-加群とする。次は同値である。
+\begin{enumerate}
+\item $M$ は Cohen--Macaulay である。
+\item $\Ext^i_A(M, \omega_A^\bullet)$ が零でない $i$ は高々一つである。
+\item $i \not = \dim(\text{Supp}(M))$ ならば
+$\Ext^{-i}_A(M, \omega_A^\bullet)$ は零である。
+\end{enumerate}
+深さ $d$ の有限 Cohen--Macaulay $A$-加群の圏を $CM_d$ と書く。このとき
+$M \mapsto \Ext^{-d}_A(M, \omega_A^\bullet)$ は $CM_d$ の反自己同値を定める。
+\end{lemma}
+
+\begin{proof}
+以下では補題 \ref{dualizing-lemma-sitting-in-degrees} の結果を断りなく用いる。有限加群
+$M$ を固定する。$M$ が Cohen--Macaulay ならば
+$\Ext^{-d}_A(M, \omega_A^\bullet)$ だけが零でない可能性をもち、従って
+(1) $\Rightarrow$ (3) である。(3) $\Rightarrow$ (2) は直ちに従う。
+(2) を仮定し、$\delta = \text{depth}(M)$ として、零でない $\Ext$ を
+$N = \Ext^{-\delta}_A(M, \omega_A^\bullet)$ とおく。このとき
+$$
+M[0] = R\Hom_A(R\Hom_A(M, \omega_A^\bullet), \omega_A^\bullet) =
+R\Hom_A(N[\delta], \omega_A^\bullet)
+$$
+なので（補題 \ref{dualizing-lemma-dualizing}）、
+$M = \Ext_A^{-\delta}(N, \omega_A^\bullet)$ と結論する。従って
+$\delta \geq \dim(\text{Supp}(M))$ である。一方、
+$\delta \leq \dim(\text{Supp}(M))$ も分かっているので（『可換代数』の補題 \ref{algebra-lemma-bound-depth}）、$M$ は Cohen--Macaulay である。
+
+\medskip\noindent
+最後の主張を証明するには、$M$ が $CM_d$ に属するとき
+$N = \Ext^{-d}_A(M, \omega_A^\bullet)$ も $CM_d$ に属することを示せば十分である。
+上で $M[0] = R\Hom_A(N[d], \omega_A^\bullet)$ を見たから、(1) と (3) の同値により
+所望の結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-artinian}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$\dim(A) = 0$ ならば $\omega_A^\bullet \cong E[0]$ である。ここで $E$ は剰余体の
+入射包絡である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing-finite-length} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-divide-by-finite-length-ideal}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体をもつ Noether 局所環とする。
+$I \subset \mathfrak m$ を有限長のイデアルとし、$B = A/I$ とおく。このとき
+$D(A)$ に識別三角形
+$$
+\omega_B^\bullet \to \omega_A^\bullet \to \Hom_A(I, E)[0] \to
+\omega_B^\bullet[1]
+$$
+が存在する。ここで $E$ は $\kappa$ の入射包絡であり、$\omega_B^\bullet$ は
+$B$ の正規化双対化複体である。
+\end{lemma}
+
+\begin{proof}
+短完全列 $0 \to I \to A \to B \to 0$ と補題 \ref{dualizing-lemma-dualizing-finite-length} および \ref{dualizing-lemma-normalized-quotient} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-divide-by-nonzerodivisor}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$f \in \mathfrak m$ を非零因子とし、$B = A/(f)$ とおく。このとき $D(A)$ に識別三角形
+$$
+\omega_B^\bullet \to \omega_A^\bullet \to \omega_A^\bullet \to
+\omega_B^\bullet[1]
+$$
+が存在する。ここで $\omega_B^\bullet$ は $B$ の正規化双対化複体である。
+\end{lemma}
+
+\begin{proof}
+短完全列 $0 \to A \to A \to B \to 0$ と補題 \ref{dualizing-lemma-normalized-quotient} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-nonvanishing-generically-local}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$\mathfrak p$ を $\dim(A/\mathfrak p) = e$ を満たす $A$ の極小素イデアルとする。このとき
+$H^i(\omega_A^\bullet)_\mathfrak p$ が零でないことと $i = -e$ は同値である。
+\end{lemma}
+
+\begin{proof}
+$A_\mathfrak p$ の次元は零なので、$\mathfrak p^nA_\mathfrak p$ が零となる整数
+$n > 0$ が存在する。$B = A/\mathfrak p^n$ および
+$\omega_B^\bullet = R\Hom_A(B, \omega_A^\bullet)$ とおく。
+$B_\mathfrak p = A_\mathfrak p$ なので
+$$
+(\omega_B^\bullet)_\mathfrak p =
+R\Hom_A(B, \omega_A^\bullet) \otimes_A^\mathbf{L} A_\mathfrak p =
+R\Hom_{A_\mathfrak p}(B_\mathfrak p, (\omega_A^\bullet)_\mathfrak p) =
+(\omega_A^\bullet)_\mathfrak p
+$$
+である。第二の等号は『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} による。補題 \ref{dualizing-lemma-normalized-quotient} により $A$ を $B$ で置き換えてよい。その後は
+$\dim(A) = e$ である。従って補題 \ref{dualizing-lemma-sitting-in-degrees} の (1), (2) により、
+$H^i(\omega_A^\bullet)_\mathfrak p$ が零でない可能性があるのは $i = -e$ の場合だけである。
+一方、$(\omega_A^\bullet)_\mathfrak p$ は零でない環 $A_\mathfrak p$ の双対化複体なので
+（補題 \ref{dualizing-lemma-dualizing-localize}）、残る加群は零でなければならない。
+\end{proof}
+
+
+
+
+
+\section{双対化複体と次元関数}
+\label{dualizing-section-dimension-function}
+
+\noindent
+局所的な場合の結果から次が従う：双対化複体をもつ Noether 環は有限次元の
+普遍鎖状環である。
+
+\begin{lemma}
+\label{dualizing-lemma-nonvanishing-generically}
+$A$ を Noether 環、$\mathfrak p$ を $A$ の極小素イデアルとする。このとき
+$H^i(\omega_A^\bullet)_\mathfrak p$ が零でない $i$ はちょうど一つである。
+\end{lemma}
+
+\begin{proof}
+複体 $\omega_A^\bullet \otimes_A A_\mathfrak p$ は $A_\mathfrak p$ の双対化複体である
+（補題 \ref{dualizing-lemma-dualizing-localize}）。$\mathfrak p$ は極小なので
+$A_\mathfrak p$ の次元は零である。従って補題 \ref{dualizing-lemma-dualizing-artinian} から結果が従う。
+\end{proof}
+
+\noindent
+$A$ を Noether 環、$\omega_A^\bullet$ を双対化複体とする。補題 \ref{dualizing-lemma-find-function} により、関数
+$$
+\delta = \delta_{\omega_A^\bullet} : \Spec(A) \longrightarrow \mathbf{Z}
+$$
+を定義できる。すなわち、$\mathfrak p$ には補題 \ref{dualizing-lemma-find-function} の整数を
+対応させる。この補題を $A_\mathfrak p$ 上の双対化複体
+$(\omega_A^\bullet)_\mathfrak p$ と剰余体 $\kappa(\mathfrak p)$ に適用する
+（補題 \ref{dualizing-lemma-dualizing-localize}）。正確には、Noether 局所環 $A_\mathfrak p$ 上で
+$$
+(\omega_A^\bullet)_\mathfrak p[-\delta(\mathfrak p)]
+$$
+が正規化双対化複体となる一意な整数として $\delta(\mathfrak p)$ を定義する。
+
+\begin{lemma}
+\label{dualizing-lemma-quotient-function}
+$A$ を Noether 環、$\omega_A^\bullet$ を双対化複体とする。$A \to B$ を全射環写像とし、
+$\omega_B^\bullet = R\Hom(B, \omega_A^\bullet)$ を補題 \ref{dualizing-lemma-dualizing-quotient} の $B$ の双対化複体とする。このとき
+$$
+\delta_{\omega_B^\bullet} = \delta_{\omega_A^\bullet}|_{\Spec(B)}
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+関数の定義と補題 \ref{dualizing-lemma-normalized-quotient} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dimension-function}
+$A$ を Noether 環、$\omega_A^\bullet$ を双対化複体とする。上で定義した関数
+$\delta = \delta_{\omega_A^\bullet}$ は次元関数である（『位相』の定義 \ref{topology-definition-dimension-function}）。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p \subset \mathfrak q$ を直近の特殊化とする。
+$\delta(\mathfrak p) = \delta(\mathfrak q) + 1$ を示せばよい。補題 \ref{dualizing-lemma-quotient-function} により、$A$ を $A/\mathfrak p$ で、複体
+$\omega_A^\bullet$ を
+$\omega_{A/\mathfrak p}^\bullet = R\Hom(A/\mathfrak p, \omega_A^\bullet)$ で、
+素イデアル $\mathfrak p$ を $(0)$ で、素イデアル $\mathfrak q$ を
+$\mathfrak q/\mathfrak p$ で置き換えてよい。従って $A$ は整域、
+$\mathfrak p = (0)$、$\mathfrak q$ は高さ $1$ の素イデアルと仮定してよい。
+
+\medskip\noindent
+補題 \ref{dualizing-lemma-nonvanishing-generically} により、
+$H^i(\omega_A^\bullet)_{(0)}$ が零でない $i$ はちょうど一つであり、これを $i_0$ とする。
+実際、$(\omega_A^\bullet)_{(0)}[-\delta((0))]$ は体 $A_{(0)}$ 上の正規化双対化複体なので、
+$i_0 = -\delta((0))$ である。
+
+\medskip\noindent
+一方、$(\omega_A^\bullet)_\mathfrak q[-\delta(\mathfrak q)]$ は
+$A_\mathfrak q$ の正規化双対化複体である。補題 \ref{dualizing-lemma-nonvanishing-generically-local} により
+$$
+H^e((\omega_A^\bullet)_\mathfrak q[-\delta(\mathfrak q)])_{(0)} =
+H^{e - \delta(\mathfrak q)}(\omega_A^\bullet)_{(0)}
+$$
+が零でないのは $e = -\dim(A_\mathfrak q) = -1$ の場合だけである。従って
+$$
+-\delta((0)) = -1 - \delta(\mathfrak q)
+$$
+となり、所望の結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-universally-catenary}
+$A$ を双対化複体をもつ Noether 環とする。このとき $A$ は有限次元の普遍鎖状環である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dimension-function} により $\Spec(A)$ は次元関数をもつので鎖状である；
+『位相』の補題 \ref{topology-lemma-dimension-function-catenary} を参照。従って $A$ は
+鎖状である；『可換代数』の補題 \ref{algebra-lemma-catenary} を参照。命題 \ref{dualizing-proposition-dualizing-essentially-finite-type} から $A$ は普遍鎖状である。
+
+\medskip\noindent
+任意の双対化複体 $\omega_A^\bullet$ は $D^b_{\textit{Coh}}(A)$ に属するので、
+補題 \ref{dualizing-lemma-nonvanishing-generically} により極小素イデアルにおける関数
+$\delta_{\omega_A^\bullet}$ の値は有界である。一方、剰余体 $\kappa$ をもつ極大イデアル
+$\mathfrak m$ に対して、$i = -\delta(\mathfrak m)$ は
+$\Ext_A^i(\kappa, \omega_A^\bullet)$ が零でなくなる一意な整数である（補題 \ref{dualizing-lemma-find-function}）。$\omega_A^\bullet$ は有限入射次元をもつので、これらの値も
+有界である。$A$ の次元は、極小素イデアルと極大素イデアルからなる対
+$\mathfrak p \subset \mathfrak m$ にわたる
+$\delta(\mathfrak p) - \delta(\mathfrak m)$ の最大値なので、$\Spec(A)$ の次元は有界である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-depth-dualizing-module}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+$d = \dim(A)$ および $\omega_A = H^{-d}(\omega_A^\bullet)$ とおく。このとき
+\begin{enumerate}
+\item $\omega_A$ の台は $\Spec(A)$ の次元 $d$ の既約成分の合併である。
+\item $\omega_A$ は $(S_2)$ を満たす；『可換代数』の定義 \ref{algebra-definition-conditions} を参照。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+以下では補題 \ref{dualizing-lemma-sitting-in-degrees} を断りなく用いる。補題 \ref{dualizing-lemma-nonvanishing-generically-local} により $\omega_A$ の台は次元 $d$ の既約成分を含む。
+$\mathfrak p \subset A$ を素イデアルとする。補題 \ref{dualizing-lemma-dimension-function} により、複体
+$(\omega_A^\bullet)_{\mathfrak p}[-\dim(A/\mathfrak p)]$ は $A_\mathfrak p$ の正規化双対化複体である。
+従って $\dim(A/\mathfrak p) + \dim(A_\mathfrak p) < d$ ならば
+$(\omega_A)_\mathfrak p = 0$ である。これにより $\omega_A$ の台が次元 $d$ の既約成分の
+合併であることが分かる。実際、$A$ は鎖状なので（補題 \ref{dualizing-lemma-universally-catenary}）、この合併の補集合はちょうど
+$\dim(A/\mathfrak p) + \dim(A_\mathfrak p) < d$ となる $A$ の素イデアル
+$\mathfrak p$ からなる。一方、$\dim(A/\mathfrak p) + \dim(A_\mathfrak p) = d$ ならば
+$$
+(\omega_A)_\mathfrak p =
+H^{-\dim(A_\mathfrak p)}\left(
+(\omega_A^\bullet)_{\mathfrak p}[-\dim(A/\mathfrak p)] \right)
+$$
+である。従って $\omega_A$ が $(S_2)$ をもつことを示すには、$\omega_A$ の深さが
+$\min(\dim(A), 2)$ 以上であることを示せば十分である。$\dim(A)$ に関する帰納法で証明する。
+$\dim(A) = 0$ の場合は自明である。
+
+\medskip\noindent
+$\text{depth}(A) > 0$ と仮定する。非零因子 $f \in \mathfrak m$ をとり、
+$B = A/fA$ とおく。このとき $\dim(B) = \dim(A) - 1$ であり、$B$ に帰納法の仮定を
+適用できる。補題 \ref{dualizing-lemma-divide-by-nonzerodivisor} により $\omega_A$ 上の $f$ 倍写像は
+単射であり、$\omega_A/f\omega_A \subset \omega_B$ を得る。従って $\omega_A$ の深さは
+$1$ 以上である。$\dim(A) > 1$ ならば $\dim(B) > 0$ であり、$\omega_B$ の深さは
+$ > 0$ である。従って $\omega_A$ の深さは $> 1$ となり、この場合の結論を得る。
+
+\medskip\noindent
+$\dim(A) > 0$ かつ $\text{depth}(A) = 0$ と仮定する。
+$I = A[\mathfrak m^\infty]$ とし、$B = A/I$ とおく。このとき $B$ の深さは
+$\geq 1$ であり、補題 \ref{dualizing-lemma-divide-by-finite-length-ideal} により
+$\omega_A = \omega_B$ である。上で $\omega_B$ について結果を証明したので、証明は完了する。
+\end{proof}
+
+
+
+
+
+\section{局所双対定理}
+\label{dualizing-section-local-duality}
+
+\noindent
+本節の主要結果は Grothendieck による。
+
+\begin{lemma}
+\label{dualizing-lemma-local-cohomology-of-dualizing}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環とし、$\omega_A^\bullet$ を正規化双対化複体とする。
+$Z = V(\mathfrak m) \subset \Spec(A)$ とおく。このとき
+$E = R^0\Gamma_Z(\omega_A^\bullet)$ は $\kappa$ の入射包絡であり、
+$R\Gamma_Z(\omega_A^\bullet) = E[0]$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-local-cohomology-noetherian} により
+$R\Gamma_{\mathfrak m} = R\Gamma_Z$ である。従って補題 \ref{dualizing-lemma-local-cohomology-ext} により
+$$
+R\Gamma_Z(\omega_A^\bullet) =
+R\Gamma_{\mathfrak m}(\omega_A^\bullet) =
+\text{hocolim}\ R\Hom_A(A/\mathfrak m^n, \omega_A^\bullet)
+$$
+である。$E'$ を剰余体の入射包絡とする。補題 \ref{dualizing-lemma-dualizing-finite-length} により、遷移写像と両立する同型
+$$
+R\Hom_A(A/\mathfrak m^n, \omega_A^\bullet) \cong \Hom_A(A/\mathfrak m^n, E')[0]
+$$
+をとれる。補題 \ref{dualizing-lemma-union-artinian} により
+$E' = \bigcup E'[\mathfrak m^n] = \colim \Hom_A(A/\mathfrak m^n, E')$ なので、
+$E \cong E'$ であり、複体 $R\Gamma_Z(\omega_A^\bullet)$ のほかのすべての
+コホモロジー群は零である。
+\end{proof}
+
+\begin{remark}
+\label{dualizing-remark-specific-injective-hull}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+上の補題 \ref{dualizing-lemma-local-cohomology-of-dualizing} により、
+$R\Gamma_Z(\omega_A^\bullet)$ は次数 $0$ に置かれた剰余体の入射包絡である。実際、これは
+任意の入射包絡を一つ選ぶよりもわずかに標準的な、入射包絡の「構成」または「実現」を
+与える。すなわち、正規化双対化複体は同型を除いて一意で、その自己同型群は $A$ の
+単元群である。一方、$\kappa$ の入射包絡も同型を除いて一意だが、その自己同型群は
+$\mathfrak m$ に関する $A$ の完備化 $A^\wedge$ の単元群である。
+\end{remark}
+
+\noindent
+本節の主要結果を述べる。
+
+\begin{theorem}
+\label{dualizing-theorem-local-duality}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環とし、$\omega_A^\bullet$ を正規化双対化複体、
+$E$ を剰余体の入射包絡とする。$Z = V(\mathfrak m) \subset \Spec(A)$ とおく。
+${}^\wedge$ で $\mathfrak m$ に関する導来完備化を表す。このとき $D(A)$ の $K$ に対して
+$$
+R\Hom_A(K, \omega_A^\bullet)^\wedge \cong R\Hom_A(R\Gamma_Z(K), E[0])
+$$
+である。
+\end{theorem}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-local-cohomology-of-dualizing} により
+$E[0] \cong R\Gamma_Z(\omega_A^\bullet)$ である。『代数の続論』の補題 \ref{more-algebra-lemma-completion-RHom} により左辺の完備化は内部へ入る。従って
+$$
+R\Hom_A(K^\wedge, (\omega_A^\bullet)^\wedge)
+=
+R\Hom_A(R\Gamma_Z(K), R\Gamma_Z(\omega_A^\bullet))
+$$
+を証明すればよい。これは命題 \ref{dualizing-proposition-torsion-complete} が与える
+$D_{comp}(A, \mathfrak m)$ と $D_{\mathfrak m^\infty\text{-torsion}}(A)$ の同値から従う。
+より正確には補題 \ref{dualizing-lemma-compare-RHom} の特別な場合である。
+\end{proof}
+
+\noindent
+上の定理の特別な場合を述べる。
+
+\begin{lemma}
+\label{dualizing-lemma-special-case-local-duality}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環とし、$\omega_A^\bullet$ を正規化双対化複体、
+$E$ を剰余体の入射包絡とする。$K \in D_{\textit{Coh}}(A)$ とする。このとき
+$$
+\Ext^{-i}_A(K, \omega_A^\bullet)^\wedge =
+\Hom_A(H^i_{\mathfrak m}(K), E)
+$$
+である。ここで ${}^\wedge$ は $\mathfrak m$-進完備化を表す。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing} により $R\Hom_A(K, \omega_A^\bullet)$ は
+$D_{\textit{Coh}}(A)$ の対象である。従って『代数の続論』の補題 \ref{more-algebra-lemma-derived-completion-pseudo-coherent} により、
+$R\Hom_A(K, \omega_A^\bullet)$ の導来完備化のコホモロジー加群は通常の完備化
+$\Ext^i_A(K, \omega_A^\bullet)^\wedge$ に等しい。一方、補題 \ref{dualizing-lemma-local-cohomology-noetherian} により、$Z = V(\mathfrak m)$ に対して
+$R\Gamma_{\mathfrak m} = R\Gamma_Z$ である。さらに関手 $\Hom_A(-, E)$ は完全なので
+コホモロジーを経由する。従って補題は定理 \ref{dualizing-theorem-local-duality} の帰結である。
+\end{proof}
+
+
+
+
+
+\section{双対化加群}
+\label{dualizing-section-dualizing-module}
+
+\noindent
+$(A, \mathfrak m, \kappa)$ を Noether 局所環、$\omega_A^\bullet$ を正規化双対化複体とするとき、
+補題 \ref{dualizing-lemma-depth-dualizing-module} で記述した加群
+$\omega_A = H^{-\dim(A)}(\omega_A^\bullet)$ を $A$ の {\it 双対化加群} という。
+この加群は $A$ の標準加群である。Noether 局所環 $(A, \mathfrak m, \kappa)$ の
+{\it 標準加群} は、一般に
+$$
+\Hom_A(K, E) \cong H^{\dim(A)}_\mathfrak m(A)
+$$
+を満たす有限 $A$-加群 $K$ と定義することで合意されているようである。ここで $E$ は
+剰余体の入射包絡である。双対化加群が標準加群であることは、補題 \ref{dualizing-lemma-special-case-local-duality} により
+$$
+\Hom_A(H^{\dim(A)}_\mathfrak m(A), E) = (\omega_A)^\wedge
+$$
+であり、従って $\Hom_A(-, E)$ を適用すると
+\begin{align*}
+\Hom_A(\omega_A, E)
+& =
+\Hom_A((\omega_A)^\wedge, E) \\
+& =
+\Hom_A(\Hom_A(H^{\dim(A)}_\mathfrak m(A), E), E) \\
+& = H^{\dim(A)}_\mathfrak m(A)
+\end{align*}
+を得ることから分かる。第一の等号は $E$ が $\mathfrak m$-冪ねじれだからであり、第二は
+上の等式、第三は Matlis 双対性（命題 \ref{dualizing-proposition-matlis}）による。
+上で与えた標準加群の定義の利点は、$A$ が双対化複体をもたない場合にも意味をもつ点にある。
+
+
+
+
+\section{Cohen--Macaulay 環}
+\label{dualizing-section-CM}
+
+\noindent
+Cohen--Macaulay 加群と環は『可換代数』の第 \ref{algebra-section-CM} 節および
+\ref{algebra-section-CM-ring} で研究した。
+
+\begin{lemma}
+\label{dualizing-lemma-depth-in-terms-dualizing-complex}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ をもつ Noether 局所環とする。
+このとき $\text{depth}(A)$ は、$H^{-\delta}(\omega_A^\bullet) \not = 0$ となる最小の
+整数 $\delta \geq 0$ に等しい。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-sitting-in-degrees} から直ちに従う。これが正しいことを見る別の二つの方法を述べる。
+
+\medskip\noindent
+第一の方法。Nakayama の補題により、$\delta$ は
+$\Hom_A(H^{-\delta}(\omega_A^\bullet), \kappa) \not = 0$ となる最小の整数である。
+言い換えると、$\Ext_A^{-\delta}(\omega_A^\bullet, \kappa)$ が零でなくなる最小の整数である。
+補題 \ref{dualizing-lemma-dualizing} と $\omega_A^\bullet$ が正規化されていることを用いると、これは
+$\Ext_A^\delta(\kappa, A)$ が零でなくなる最小の整数に等しい。『可換代数』の補題 \ref{algebra-lemma-depth-ext} により、これは $A$ の深さに等しい。
+
+\medskip\noindent
+第二の方法。局所双対定理（補題 \ref{dualizing-lemma-special-case-local-duality} の形）により、
+$\delta$ は $H^\delta_\mathfrak m(A)$ が零でなくなる最小の整数である。補題 \ref{dualizing-lemma-depth} により、これは $A$ の深さに等しい。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-apply-CM}
+$(A, \mathfrak m, \kappa)$ を正規化双対化複体 $\omega_A^\bullet$ と双対化加群
+$\omega_A = H^{-\dim(A)}(\omega_A^\bullet)$ をもつ Noether 局所環とする。次は同値である。
+\begin{enumerate}
+\item $A$ は Cohen--Macaulay である。
+\item $\omega_A^\bullet$ は単一の次数に集中する。
+\item $\omega_A^\bullet = \omega_A[\dim(A)]$ である。
+\end{enumerate}
+この場合、$\omega_A$ は極大 Cohen--Macaulay 加群である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-local-CM} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-has-dualizing-module-CM}
+$A$ を Noether 環とする。$\omega_A[0]$ が双対化複体となる有限 $A$-加群
+$\omega_A$ が存在するならば、$A$ は Cohen--Macaulay である。
+\end{lemma}
+
+\begin{proof}
+$A$ を素イデアルにおける局所化で置き換えてよい（補題 \ref{dualizing-lemma-dualizing-localize} および『可換代数』の定義 \ref{algebra-definition-ring-CM}）。この場合、結果は補題 \ref{dualizing-lemma-apply-CM} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-CM-open}
+$A$ を双対化複体 $\omega_A^\bullet$ をもつ Noether 環、$M$ を有限 $A$-加群とする。このとき
+$$
+U = \{\mathfrak p \in \Spec(A) \mid M_\mathfrak p\text{ is Cohen-Macaulay}\}
+$$
+は $\Spec(A)$ の開部分集合であり、$\text{Supp}(M)$ との交わりは稠密である。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p$ が $\text{Supp}(M)$ の生成点ならば
+$\text{depth}(M_\mathfrak p) = \dim(M_\mathfrak p) = 0$ であり、従って
+$\mathfrak p \in U$ である。これは稠密性を証明する。$\mathfrak p \in U$ ならば
+$$
+R\Hom_A(M, \omega_A^\bullet)_\mathfrak p =
+R\Hom_{A_\mathfrak p}(M_\mathfrak p, (\omega_A^\bullet)_\mathfrak p)
+$$
+は補題 \ref{dualizing-lemma-local-CM} によりただ一つの零でないコホモロジー加群をもち、その次数を
+$i_0$ とする。$R\Hom_A(M, \omega_A^\bullet)$ の零でないコホモロジー加群 $H^i$ は有限個で、
+各々は有限 $A$-加群なので、$i \not = i_0$ に対して $(H^i)_f = 0$ となる
+$f \in A$, $f \not \in \mathfrak p$ を見つけられる。このとき
+$R\Hom_A(M, \omega_A^\bullet)_f$ はただ一つの零でないコホモロジー加群をもつので、
+先の議論を逆にたどると $D(f) \subset U$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-CM}
+$A$ を Noether 環とする。$A$ が双対化複体 $\omega_A^\bullet$ をもつならば
+$\{\mathfrak p \in \Spec(A) \mid A_\mathfrak p\text{ is Cohen-Macaulay}\}$
+は $\Spec(A)$ の稠密開部分集合である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-CM-open} と定義から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+\section{Gorenstein 環}
+\label{dualizing-section-gorenstein}
+
+\noindent
+これまでに具体的に見た双対化複体は、体 $\kappa$ に対する $\kappa$ 上の $\kappa$ だけである；補題 \ref{dualizing-lemma-find-function} の証明を参照。命題 \ref{dualizing-proposition-dualizing-essentially-finite-type} により、これは体上の任意の有限型代数が
+双対化複体をもつことを意味する。しかし、双対化複体をもたない Noether（局所）環も存在する。
+実際、双対化複体をもつ環は普遍鎖状であることを見たが（補題 \ref{dualizing-lemma-universally-catenary}）、鎖状でない Noether 局所環の例がある；『例』の第 \ref{examples-section-non-catenary-Noetherian-local} 節を参照。
+
+\medskip\noindent
+それでも、代数幾何に現れる多くの環は Gorenstein 環の商であるため双対化複体をもつ。
+実はこの条件は必要十分である。すなわち、Noether 環が双対化複体をもつことと、有限次元
+Gorenstein 環の商であることは同値である。これは Sharp の予想（\cite{Sharp}）であり、文献では
+\cite[Corollary 1.4]{Kawasaki} に見られる。現在の話題に戻り、Gorenstein 環を定義する。
+
+\begin{definition}
+\label{dualizing-definition-gorenstein}
+Gorenstein 環。
+\begin{enumerate}
+\item $A$ を Noether 局所環とする。$A[0]$ が $A$ の双対化複体ならば、$A$ は
+{\it Gorenstein} であるという。
+\item $A$ を Noether 環とする。$A$ の任意の素イデアル $\mathfrak p$ に対して
+$A_\mathfrak p$ が Gorenstein ならば、$A$ は {\it Gorenstein} であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$A[0]$ が $A$ の双対化複体ならば、補題 \ref{dualizing-lemma-dualizing-localize} により
+$S^{-1}A[0]$ は $S^{-1}A$ の双対化複体なので、この定義は意味をもつ。有限次元 Noether 環は、
+自身上の加群として有限入射次元をもつとき Gorenstein である；補題 \ref{dualizing-lemma-characterize-gorenstein} を参照。
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-CM}
+Gorenstein 環は Cohen--Macaulay である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-apply-CM} から従う。
+\end{proof}
+
+\noindent
+正則環は Gorenstein 環の一例である。
+
+\begin{lemma}
+\label{dualizing-lemma-regular-gorenstein}
+正則局所環は Gorenstein である。正則環は Gorenstein である。
+\end{lemma}
+
+\begin{proof}
+$A$ を次元 $d$ の正則環とする。『可換代数』の補題 \ref{algebra-lemma-finite-gl-dim-finite-dim-regular} により $A$ の大域次元は有限で $d$ に等しい。
+従って任意の $A$-加群 $M$ に対して $\Ext^{d + 1}_A(M, A) = 0$ である；『可換代数』の補題 \ref{algebra-lemma-projective-dimension-ext} を参照。『代数の続論』の補題 \ref{more-algebra-lemma-injective-amplitude} により $A$ は $A$-加群として有限入射次元をもつ。
+従って $A[0]$ は双対化複体であり、定義の後の注意により $A$ は Gorenstein である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein}
+$A$ を Noether 環とする。
+\begin{enumerate}
+\item $A$ が双対化複体 $\omega_A^\bullet$ をもつならば、
+\begin{enumerate}
+\item $A$ が Gorenstein である $\Leftrightarrow$ $\omega_A^\bullet$ が $D(A)$ の可逆対象である。
+\item $A_\mathfrak p$ が Gorenstein である $\Leftrightarrow$
+$(\omega_A^\bullet)_\mathfrak p$ が $D(A_\mathfrak p)$ の可逆対象である。
+\item $\{\mathfrak p \in \Spec(A) \mid A_\mathfrak p\text{ is Gorenstein}\}$ は開部分集合である。
+\end{enumerate}
+\item $A$ が Gorenstein ならば、$A$ が双対化複体をもつことと $A[0]$ が双対化複体であることは
+同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$D(A)$ の可逆対象については『代数の続論』の補題 \ref{more-algebra-lemma-invertible-derived} および第 \ref{dualizing-section-dualizing} 節の議論を参照。
+
+\medskip\noindent
+補題 \ref{dualizing-lemma-dualizing-localize} により、任意の $\mathfrak p$ に対して複体
+$(\omega_A^\bullet)_\mathfrak p$ は $A_\mathfrak p$ 上の双対化複体である。双対化複体の定義と
+一意性（補題 \ref{dualizing-lemma-dualizing-unique}）から (1)(b) が従う。
+
+\medskip\noindent
+(1)(c) を見るため、$A_\mathfrak p$ が Gorenstein であると仮定する。
+$H^{n_{x}}((\omega_A^\bullet)_\mathfrak p)$ が零でなく $A_\mathfrak p$ と同型になる一意な整数を
+$n_x$ とする。$\omega_A^\bullet$ は $D^b_{\textit{Coh}}(A)$ に属するので、零でない有限
+$A$-加群 $H^i(\omega_A^\bullet)$ は有限個である。従って、
+$H^{n_x}((\omega_A^\bullet)_f)$ だけが零でなく、$A_f$ 上 $1$ 元で生成されるような
+$f \in A$, $f \not \in \mathfrak p$ が存在する。双対化複体は忠実なので（定義による）、
+$A_f \cong H^{n_x}((\omega_A^\bullet)_f)$ と結論する。このようにして、任意の
+$\mathfrak q \in D(f)$ に対して $A_\mathfrak q$ が Gorenstein であることが分かる。従って
+(1)(c) の集合は開である。
+
+\medskip\noindent
+(1)(a) の証明。含意 $\Leftarrow$ は (1)(b) から従う。含意 $\Rightarrow$ は前段の議論から従う。
+そこでは、$A_\mathfrak p$ が Gorenstein ならば、ある
+$f \in A$, $f \not \in \mathfrak p$ に対して複体 $(\omega_A^\bullet)_f$ がただ一つの零でない
+コホモロジー加群をもち、それが可逆であることを示した。
+
+\medskip\noindent
+$A[0]$ が双対化複体ならば (1) により $A$ は Gorenstein である。逆に (1) により
+$\omega_A^\bullet$ は局所的に $A$ のシフトと同型である。双対化複体であるという性質は局所的なので
+（補題 \ref{dualizing-lemma-dualizing-glue}）、結果は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-ext}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環とする。$A$ が Gorenstein であることと
+$i \gg 0$ に対して $\Ext^i_A(\kappa, A)$ が零であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$A[0]$ が $A$ の双対化複体であることと、$A$ が $A$-加群として有限入射次元をもつことは同値である
+（定義 \ref{dualizing-definition-dualizing} から直ちに従う）。従って補題は『代数の続論』の補題 \ref{more-algebra-lemma-finite-injective-dimension-Noetherian-local} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-characterize-gorenstein}
+$A$ を Noether 環とする。次は同値である。
+\begin{enumerate}
+\item $A$ は自身上の加群として有限入射次元をもつ。
+\item $A$ は Gorenstein かつ有限次元である。
+\end{enumerate}
+この場合 $A[0]$ は双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$A$ が $A$ 上の加群として有限入射次元をもつならば、$A[0]$ は $A$ 上の双対化複体である
+（定義 \ref{dualizing-definition-dualizing} を参照）。従って補題 \ref{dualizing-lemma-universally-catenary} により $A$ は有限次元で、補題 \ref{dualizing-lemma-gorenstein} により Gorenstein である。$A$ が Gorenstein で
+$\dim(A) \leq d < \infty$ と仮定する。任意のイデアル $I \subset A$ に対して
+$i > d$ ならば $\Ext^i_A(A/I, A) = 0$ であると主張する。これにより『代数の続論』の補題 \ref{more-algebra-lemma-injective-amplitude} から $A$ が自身上の加群として有限入射次元を
+もつことが分かる。$\Ext$ 群の形成は局所化と可換である（例えば『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} を参照）。従って消滅を証明するため、$A$ は次元
+$e < d$ の局所環であると仮定してよい。$A$ は Gorenstein なので
+$\omega_A^\bullet = A[e]$ は正規化双対化複体である。従って例えば補題 \ref{dualizing-lemma-sitting-in-degrees} から主張した消滅が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-divide-by-nonzerodivisor}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環、$f \in \mathfrak m$ を非零因子とし、
+$B = A/(f)$ とおく。このとき $A$ が Gorenstein であることと $B$ が Gorenstein であることは
+同値である。
+\end{lemma}
+
+\begin{proof}
+$A$ が Gorenstein ならば、補題 \ref{dualizing-lemma-divide-by-nonzerodivisor} により
+$B$ も Gorenstein である。逆に $B$ が Gorenstein であると仮定する。このとき
+$i \gg 0$ に対して $\Ext^i_B(\kappa, B)$ は零である（補題 \ref{dualizing-lemma-gorenstein-ext}）。$R\Hom(B, -) : D(A) \to D(B)$ は制限関手の右随伴であった
+（補題 \ref{dualizing-lemma-right-adjoint}）。従って
+$$
+R\Hom_A(\kappa, A) = R\Hom_B(\kappa, R\Hom(B, A)) =
+R\Hom_B(\kappa, B[1])
+$$
+である。最後の等号は直接計算するか補題 \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic} を用いればよい。従って
+$i \gg 0$ に対して $\Ext^i_A(\kappa, A)$ は零であり、補題 \ref{dualizing-lemma-gorenstein-ext} により $A$ は Gorenstein である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-lci}
+$A \to B$ が環の局所完全交叉準同型で、$A$ が Noether Gorenstein 環ならば、
+$B$ は Gorenstein 環である。
+\end{lemma}
+
+\begin{proof}
+『代数の続論』の定義 \ref{more-algebra-definition-local-complete-intersection} により、
+$I$ を Koszul 正則イデアルとして $B = A[x_1, \ldots, x_n]/I$ と書ける。Gorenstein 環
+$A$ 上の多項式環は Gorenstein であることに注意する。実際、$A$ が局所環の場合に帰着し、
+補題 \ref{dualizing-lemma-dualizing-polynomial-ring} および \ref{dualizing-lemma-gorenstein} を用いればよい。
+定義により Koszul 正則イデアルは局所的に Koszul 正則列で生成される；『代数の続論』の第 \ref{more-algebra-section-ideals} 節を参照。$A[x_1, \ldots, x_n]$ の局所環を考えると、
+次を示せば十分である：$R$ が Noether 局所 Gorenstein 環で、
+$f_1, \ldots, f_c \in \mathfrak m_R$ が Koszul 正則列ならば
+$R/(f_1, \ldots, f_c)$ は Gorenstein である。これは補題 \ref{dualizing-lemma-gorenstein-divide-by-nonzerodivisor} と、$R$ の Koszul 正則列は正則列にほかならない
+という事実（『代数の続論』の補題 \ref{more-algebra-lemma-noetherian-finite-all-equivalent}）から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-under-gorenstein}
+$A \to B$ を Noether 局所環の平坦局所準同型とする。次は同値である。
+\begin{enumerate}
+\item $B$ は Gorenstein である。
+\item $A$ と $B/\mathfrak m_A B$ は Gorenstein である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+以下では、局所 Gorenstein 環が有限入射次元をもつことと補題 \ref{dualizing-lemma-gorenstein-ext} を断りなく用いる。『代数の続論』の補題 \ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext} により、すべての $i$ に対して
+$$
+\Ext^i_A(\kappa_A, A) \otimes_A B =
+\Ext^i_B(B/\mathfrak m_A B, B)
+$$
+である。
+
+\medskip\noindent
+(2) を仮定する。$R\Hom(B/\mathfrak m_A B, -) : D(B) \to D(B/\mathfrak m_A B)$ が
+制限関手の右随伴であること（補題 \ref{dualizing-lemma-right-adjoint}）を用いると
+$$
+R\Hom_B(\kappa_B, B) =
+R\Hom_{B/\mathfrak m_A B}(\kappa_B, R\Hom(B/\mathfrak m_A B, B))
+$$
+を得る。$R\Hom(B/\mathfrak m_A B, B)$ のコホモロジー加群は
+$\Ext^i_B(B/\mathfrak m_A B, B) =
+\Ext^i_A(\kappa_A, A) \otimes_A B$ である。$A$ は Gorenstein なので、このうち零でないものは
+有限個で、各々は $B/\mathfrak m_A B$ のコピーの直和と同型である。従って
+$B/\mathfrak m_A B$ が Gorenstein であることから、
+$R\Hom_B(B/\mathfrak m_B, B)$ の零でないコホモロジー加群は有限個であると結論する。
+従って $B$ は Gorenstein である。
+
+\medskip\noindent
+(1) を仮定する。$B$ は有限入射次元をもつので、$i \gg 0$ に対して
+$\Ext^i_B(B/\mathfrak m_A B, B)$ は $0$ である。$A \to B$ は忠実平坦なので、
+$i \gg 0$ に対して $\Ext^i_A(\kappa_A, A)$ は $0$ であると結論する。従って $A$ は
+Gorenstein である。これは $\Ext^i_A(\kappa_A, A)$ がちょうど一つの $i$、すなわち
+$i = \dim(A)$ に対してのみ零でなく、
+$\Ext^{\dim(A)}_A(\kappa_A, A) \cong \kappa_A$ であることを意味する
+（補題 \ref{dualizing-lemma-normalized-finite}、\ref{dualizing-lemma-apply-CM} および \ref{dualizing-lemma-gorenstein-CM} を参照）。従って
+$\Ext^i_B(B/\mathfrak m_A B, B)$ は一つの $i$、すなわち $i = \dim(A)$ を除いて零であり、
+$\Ext^{\dim(A)}_B(B/\mathfrak m_A B, B) \cong B/\mathfrak m_A B$ である。従って補題 \ref{dualizing-lemma-normalized-finite} により $B/\mathfrak m_A B$ は Gorenstein である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-tor-injective-hull}
+$(A, \mathfrak m, \kappa)$ を次元 $d$ の Noether 局所 Gorenstein 環とし、$E$ を
+$\kappa$ の入射包絡とする。このとき $i \not = d$ に対して
+$\text{Tor}_i^A(E, \kappa)$ は零であり、$\text{Tor}_d^A(E, \kappa) = \kappa$ である。
+\end{lemma}
+
+\begin{proof}
+$A$ は Gorenstein なので、$\omega_A^\bullet = A[d]$ は $A$ の正規化双対化複体である。
+また補題 \ref{dualizing-lemma-local-cohomology-of-dualizing} により、$E$ は
+$R\Gamma_\mathfrak m(\omega_A^\bullet)$ のただ一つの零でないコホモロジー加群であり、次数 $0$ にある。
+補題 \ref{dualizing-lemma-torsion-tensor-product} により
+$$
+E \otimes_A^\mathbf{L} \kappa =
+R\Gamma_\mathfrak m(\omega_A^\bullet) \otimes_A^\mathbf{L} \kappa =
+R\Gamma_\mathfrak m(\omega_A^\bullet \otimes_A^\mathbf{L} \kappa) =
+R\Gamma_\mathfrak m(\kappa[d]) = \kappa[d]
+$$
+であり、補題が従う。
+\end{proof}
+
+
+
+
+\section{双対化複体の遍在性}
+\label{dualizing-section-ubiquity-dualizing}
+
+\noindent
+多くの Noether 環は双対化複体をもつ。
+
+\begin{lemma}
+\label{dualizing-lemma-flat-unramified}
+$A \to B$ を Noether 局所環の局所準同型とし、$\omega_A^\bullet$ を正規化双対化複体とする。
+$A \to B$ が平坦で $\mathfrak m_A B = \mathfrak m_B$ ならば、
+$\omega_A^\bullet \otimes_A B$ は $B$ の正規化双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$\omega_A^\bullet \otimes_A B$ が $D^b_{\textit{Coh}}(B)$ に属することは明らかである。
+$\kappa_A$, $\kappa_B$ をそれぞれ $A$, $B$ の剰余体とする。『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} により
+$$
+R\Hom_B(\kappa_B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(\kappa_A, \omega_A^\bullet) \otimes_A B =
+\kappa_A[0] \otimes_A B = \kappa_B[0]
+$$
+である。従って『代数の続論』の補題 \ref{more-algebra-lemma-finite-injective-dimension-Noetherian-local} により
+$\omega_A^\bullet \otimes_A B$ は有限入射次元をもつ。最後に同じ議論から
+$$
+R\Hom_B(\omega_A^\bullet \otimes_A B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A B = A \otimes_A B = B
+$$
+を得て、所望の結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-iso-mod-I}
+$A \to B$ を Noether 環の平坦写像とする。$I \subset A$ を $A/I = B/IB$ かつ
+$IB$ が $B$ の Jacobson 根基に含まれるようなイデアルとする。
+$\omega_A^\bullet$ を双対化複体とする。このとき
+$\omega_A^\bullet \otimes_A B$ は $B$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$\omega_A^\bullet \otimes_A B$ が $D^b_{\textit{Coh}}(B)$ に属することは明らかである。
+『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} により、任意の
+$K \in D^b_{\textit{Coh}}(A)$ に対して
+$$
+R\Hom_B(K \otimes_A B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(K, \omega_A^\bullet) \otimes_A B
+$$
+である。任意のイデアル $IB \subset J \subset B$ に対して、
+$A/J' \otimes_A B = B/J$ となる一意なイデアル $I \subset J' \subset A$ が存在する。
+従って『代数の続論』の補題 \ref{more-algebra-lemma-finite-injective-dimension-Noetherian-radical} により
+$\omega_A^\bullet \otimes_A B$ は有限入射次元をもつ。最後に
+$$
+R\Hom_B(\omega_A^\bullet \otimes_A B, \omega_A^\bullet \otimes_A B) =
+R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A B = A \otimes_A B = B
+$$
+でもあり、所望の結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-completion-henselization-dualizing}
+$A$ を Noether 環、$I \subset A$ をイデアル、$\omega_A^\bullet$ を双対化複体とする。
+\begin{enumerate}
+\item $\omega_A^\bullet \otimes_A A^h$ は対 $(A, I)$ の Hensel 化
+$(A^h, I^h)$ 上の双対化複体である。
+\item $\omega_A^\bullet \otimes_A A^\wedge$ は $I$-進完備化 $A^\wedge$ 上の双対化複体である。
+\item $A$ が局所環ならば、$\omega_A^\bullet \otimes_A A^h$、resp.\ $\omega_A^\bullet \otimes_A A^{sh}$ は
+$A$ の Hensel 化、resp.\ 強 Hensel 化上の双対化複体である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-flat-unramified} および \ref{dualizing-lemma-flat-iso-mod-I} から直ちに従う。
+完備化と Hensel 化については『代数の続論』の第 \ref{more-algebra-section-henselian-pairs} 節、第 \ref{more-algebra-section-permanence-completion} 節および第 \ref{more-algebra-section-permanence-henselization} 節および『可換代数』の第 \ref{algebra-section-completion} 節および第 \ref{algebra-section-completion-noetherian} 節を参照。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-ubiquity-dualizing}
+次の種類の環は双対化複体をもつ。
+\begin{enumerate}
+\item 体。
+\item Noether 完備局所環。
+\item $\mathbf{Z}$。
+\item Dedekind 整域。
+\item 上のいずれかの環から、本質的有限型代数をとる操作、イデアル進完備化、Hensel 化、
+または強 Hensel 化によって得られる任意の環。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(5) は命題 \ref{dualizing-proposition-dualizing-essentially-finite-type} と補題 \ref{dualizing-lemma-completion-henselization-dualizing} から従う。補題 \ref{dualizing-lemma-regular-gorenstein} により正則局所環は双対化複体をもつ。Cohen 構造定理
+（『可換代数』の定理 \ref{algebra-theorem-cohen-structure-theorem}）により、Noether 完備局所環は
+正則局所環の商である。$A$ を Dedekind 整域とする。このとき任意のイデアル $I$ は有限射影
+$A$-加群である（『可換代数』の補題 \ref{algebra-lemma-finite-projective} と、$A$ の局所環が
+離散付値環、従って PID であることから従う）。従って『代数の続論』の補題 \ref{more-algebra-lemma-injective-amplitude} により任意の $A$-加群の入射次元は高々 $1$ である。
+従って $A[0]$ が双対化複体であることが容易に分かる。
+\end{proof}
+
+
+
+
+
+\section{形式的ファイバー}
+\label{dualizing-section-formal-fibres}
+
+\noindent
+本節は『代数の続論』の第 \ref{more-algebra-section-properties-formal-fibres} 節の続きである。
+そこでは、局所環が Cohen--Macaulay な形式的ファイバーをもつ Noether 環 $A$ について
+（かなり）よい理論があることを見た。すなわち、(1) 極大イデアルにおける局所化の形式的
+ファイバーが Cohen--Macaulay であることを調べれば十分であり、(2) この性質は $A$ 上有限型の
+環に継承され、(3) $A$ の任意の完備化 $A^\wedge$ に対して $A \to A^\wedge$ のファイバーは
+Cohen--Macaulay であり、(4) この性質は $A$ の Hensel 化に継承されることを証明した。
+『代数の続論』の補題 \ref{more-algebra-lemma-check-P-ring-maximal-ideals}, 命題 \ref{more-algebra-proposition-finite-type-over-P-ring}, 補題 \ref{more-algebra-lemma-map-P-ring-to-completion-P}, 補題 \ref{more-algebra-lemma-henselization-pair-P-ring} を参照。局所環の形式的ファイバーが幾何学的
+被約、幾何学的正規、$(S_n)$、または幾何学的 $(R_n)$ である Noether 環についても同様である。
+本節では、局所環の形式的ファイバーが Gorenstein または局所完全交叉である Noether 環にも
+同じことが成り立つことを見る。双対化複体をもつ Noether 環はその一例なので、これは本章に関係する。
+
+\begin{lemma}
+\label{dualizing-lemma-formal-fibres-gorenstein}
+『代数の続論』の第 \ref{more-algebra-section-properties-formal-fibres} 節の性質 (A), (B),
+(C), (D), (E) は、$P(k \to R) =$「$R$ は Gorenstein 環である」に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+Gorenstein を Cohen--Macaulay に置き換えた結果は既知なので、各段階で対象の環が
+Cohen--Macaulay であると仮定してよい。これは証明には特に役立たないが、心理的には有用かもしれない。
+
+\medskip\noindent
+(A)。$K/k$ を有限生成体拡大、$R$ を Gorenstein $k$-代数とする。$K$ が $A$ の分数体と
+同型になるような $k$ 上の大域完全交叉
+$A = k[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$ を見つけられる；『可換代数』の補題 \ref{algebra-lemma-colimit-syntomic} を参照。このとき $R \to R \otimes_k A$ は相対大域完全交叉である。
+従って補題 \ref{dualizing-lemma-gorenstein-lci} により $R \otimes_k A$ は Gorenstein である。
+その局所化である $R \otimes_k K$ も Gorenstein である。
+
+\medskip\noindent
+(B) の証明。環が Gorenstein であることと、そのすべての局所環が Gorenstein であることは
+同値なので明らかである。
+
+\medskip\noindent
+(C)。$A \to B \to C$ を Noether 環の平坦写像とし、$A \to B$ のファイバーは Gorenstein、
+$B \to C$ は正則と仮定する。$A \to C$ のファイバーが Gorenstein であることを示す。
+$A = k$ は体であると仮定してよい。さらに $B \to C$ は Noether 局所環の正則局所準同型と
+仮定してよい。このとき $B$ は Gorenstein で、$C/\mathfrak m_B C$ は正則、特に Gorenstein である
+（補題 \ref{dualizing-lemma-regular-gorenstein}）。従って補題 \ref{dualizing-lemma-flat-under-gorenstein} により $C$ は Gorenstein である。
+
+\medskip\noindent
+(D) は補題 \ref{dualizing-lemma-flat-under-gorenstein} から従う。(E) は条件が基礎体に言及しないので直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-dualizing-gorenstein-formal-fibres}
+$A$ を Noether 局所環とする。$A$ が双対化複体をもつならば、$A$ の形式的ファイバーは
+Gorenstein である。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak p$ を $A$ の素イデアルとする。$\mathfrak p$ における $A$ の形式的ファイバーは、
+$(0)$ における $A/\mathfrak p$ の形式的ファイバーと同型である。商 $A/\mathfrak p$ は双対化複体を
+もつ（補題 \ref{dualizing-lemma-dualizing-quotient}）。従って $A$ が局所整域で
+$\mathfrak p = (0)$ の場合を調べれば十分である。$\omega_A^\bullet$ を $A$ の双対化複体とする。
+このとき $\omega_A^\bullet \otimes_A A^\wedge$ は完備化 $A^\wedge$ の双対化複体である
+（補題 \ref{dualizing-lemma-flat-unramified}）。また $\omega_A^\bullet \otimes_A K$ は $A$ の分数体
+$K$ の双対化複体である（補題 \ref{dualizing-lemma-dualizing-localize}）。従って、ある
+$n \in \mathbf{Z}$ に対して $\omega_A^\bullet \otimes_A K$ は $K[n]$ と同型である。同様に、
+形式的ファイバー $A^\wedge \otimes_A K$ の双対化複体は
+$$
+\omega_A^\bullet \otimes_A A^\wedge \otimes_{A^\wedge} (A^\wedge \otimes_A K) =
+(\omega_A^\bullet \otimes_A K) \otimes_K (A^\wedge \otimes_A K) \cong
+(A^\wedge \otimes_A K)[n]
+$$
+であり、所望の結果を得る。
+\end{proof}
+
+\noindent
+『分羃代数』の注意 \ref{dpa-remark-no-good-ci-map} で約束した検証を与える。
+
+\begin{lemma}
+\label{dualizing-lemma-formal-fibres-lci}
+『代数の続論』の第 \ref{more-algebra-section-properties-formal-fibres} 節の性質 (A), (B),
+(C), (D), (E) は、$P(k \to R) =$「$R$ は局所完全交叉である」に対して成り立つ。
+『分羃代数』の定義 \ref{dpa-definition-lci} を参照。
+\end{lemma}
+
+\begin{proof}
+(A)。$K/k$ を有限生成体拡大とし、$R$ を局所完全交叉である $k$-代数とする。
+$K$ が $A$ の分数体と同型になるような $k$ 上の大域完全交叉
+$A = k[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$ を見つけられる；『可換代数』の補題 \ref{algebra-lemma-colimit-syntomic} を参照。このとき $R \to R \otimes_k A$ は相対大域完全交叉である。
+従って『分羃代数』の補題 \ref{dpa-lemma-avramov} により
+$R \otimes_k A$ は局所完全交叉である。
+
+\medskip\noindent
+(B) の証明。環が局所完全交叉であることと、そのすべての局所環が完全交叉であることは同値なので明らかである。
+
+\medskip\noindent
+(C)。$A \to B \to C$ を Noether 環の平坦写像とし、$A \to B$ のファイバーが局所完全交叉、
+$B \to C$ が正則であると仮定する。$A \to C$ のファイバーが局所完全交叉であることを示す。
+$A = k$ は体であると仮定してよい。さらに $B \to C$ は Noether 局所環の正則局所準同型と
+仮定してよい。このとき $B$ は完全交叉で、$C/\mathfrak m_B C$ は正則、特に（定義により）
+完全交叉である。従って『分羃代数』の補題 \ref{dpa-lemma-avramov} により $C$ は完全交叉である。
+
+\medskip\noindent
+(D) は (C) と同じ議論および『分羃代数』の補題 \ref{dpa-lemma-avramov} の逆向きの含意から従う。(E) は条件が基礎体に言及しないので直ちに従う。
+\end{proof}
+
+
+
+
+
+
+\section{代数的な上付きシュリーク}
+\label{dualizing-section-relative-dualizing-complex-algebraic}
+
+\noindent
+Noether 環の有限型準同型 $R \to A$ に対して、非一意な同型を除いて定まる関手
+$\varphi^! : D(R) \to D(A)$ を構成する。『スキームの双対性』の注意 \ref{duality-remark-local-calculation-shriek} で見るように、これはスキームの双対理論に現れる
+上付きシュリーク関手と同型を除いて一致する。構成の動機となる二つの付加的性質を挙げる。
+\begin{enumerate}
+\item $\varphi^!$ は、$R$ の双対化複体（存在する場合）を $A$ の双対化複体へ送る。
+\item $\omega_{A/R}^\bullet = \varphi^!(R)$ は一種の相対双対化複体である。すなわち
+$D^b_{\textit{Coh}}(A)$ に属し、$R \to A$ が平坦ならば各ファイバーへの制限は双対化複体である。
+\end{enumerate}
+これらは補題 \ref{dualizing-lemma-shriek-dualizing-algebraic} および \ref{dualizing-lemma-relative-dualizing-algebraic} の主張である。
+
+\medskip\noindent
+$\varphi : R \to A$ を Noether 環の有限型準同型とする。関手
+$\varphi^! : D(R) \to D(A)$ を次のように定義する。
+\begin{enumerate}
+\item $\varphi : R \to A$ が全射ならば、$\varphi^!(K) = R\Hom(A, K)$ とおく。ここでは
+第 \ref{dualizing-section-trivial} 節の関手 $R\Hom(A, -) : D(R) \to D(A)$ を用いる。
+\item 一般には、$P = R[x_1, \ldots, x_n]$ として全射 $\psi : P \to A$ を選び、
+$\varphi^!(K) = \psi^!(K \otimes_R^\mathbf{L} P)[n]$ とおく。ここでは『代数の続論』の第 \ref{more-algebra-section-derived-base-change} 節の関手
+$- \otimes_R^\mathbf{L} P : D(R) \to D(P)$ を用いる。
+\end{enumerate}
+多項式環の変数の個数によるシフト $[n]$ に注意せよ。この構成は {\bf 標準的ではなく}、関手
+$\varphi^!$ は関手の（非一意な）同型を除いてしか定まらない\footnote{構成を標準的にすることは
+可能である。構成中の $P[n]$ の代わりに $\Omega^n_{P/R}[n]$ を用い、補題 \ref{dualizing-lemma-well-defined} でもこれを用いればよい。そのようにすると本節の内容は大幅に複雑になる。}。
+
+\begin{lemma}
+\label{dualizing-lemma-well-defined}
+$\varphi : R \to A$ を Noether 環の有限型準同型とする。関手 $\varphi^!$ は同型を除いて
+良定義である。
+\end{lemma}
+
+\begin{proof}
+$\psi_1 : P_1 = R[x_1, \ldots, x_n] \to A$ と
+$\psi_2 : P_2 = R[y_1, \ldots, y_m] \to A$ を、多項式環から $A$ への二つの全射とする。
+このとき可換図式
+$$
+\xymatrix{
+R[x_1, \ldots, x_n, y_1, \ldots, y_m]
+\ar[d]^{x_i \mapsto g_i} \ar[rr]_-{y_j \mapsto f_j} & &
+R[x_1, \ldots, x_n] \ar[d] \\
+R[y_1, \ldots, y_m] \ar[rr] & & A
+}
+$$
+を得る。ここで $f_j$, $g_i$ は $\psi_1(f_j) = \psi_2(y_j)$ および
+$\psi_2(g_i) = \psi_1(x_i)$ となるように選ぶ。対称性により、$P \to A$ と
+$P[y_1, \ldots, y_m] \to A$ を用いて定義した関手が同型であることを証明すれば十分である。
+帰納法により $m = 1$ と仮定してよい。これで次段落の状況に帰着する。
+
+\medskip\noindent
+ここでは $\psi : P \to A$ が与えられ、$\chi : P[y] \to A$ は $P$ 上で $\psi$ を誘導するとする。
+$Q = P[y]$ と書く。$\psi(g) = \chi(y)$ となる $g \in P$ を選ぶ。
+$\pi(y) = g$ で定まる $P$-代数写像を $\pi : Q \to P$ と書く。このとき
+$\chi = \psi \circ \pi$ であり、第 \ref{dualizing-section-trivial} 節の内容により両辺とも制限関手
+$D(A) \to D(Q)$ の右随伴なので、$\chi^! = \psi^! \circ \pi^!$ である。従って
+$$
+\chi^!\left(K \otimes_R^\mathbf{L} Q\right)[n + 1] =
+\psi^!\left(\pi^!\left(K \otimes_R^\mathbf{L} Q\right)[1]\right)[n]
+$$
+である。従って $\pi^!(K \otimes_R^\mathbf{L} Q[1]) = K \otimes_R^\mathbf{L} P$ を示せば十分である。
+つまり、関手 $\pi^!(-) : D(Q) \to D(P)$ が
+$K \mapsto K \otimes_Q^\mathbf{L} P[-1]$ と同型であることを示せばよい。これは補題 \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-shriek-boundedness}
+$\varphi : R \to A$ を Noether 環の有限型準同型とする。
+\begin{enumerate}
+\item $\varphi^!$ は $D^+(R)$ を $D^+(A)$ へ、$D^+_{\textit{Coh}}(R)$ を
+$D^+_{\textit{Coh}}(A)$ へ写す。
+\item $\varphi$ が完全ならば、$\varphi^!$ は $D^-(R)$ を $D^-(A)$ へ、
+$D^-_{\textit{Coh}}(R)$ を $D^-_{\textit{Coh}}(A)$ へ、$D^b_{\textit{Coh}}(R)$ を
+$D^b_{\textit{Coh}}(A)$ へ写す。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\varphi^!$ の定義にある分解 $R \to P \to A$ を選ぶ。関手
+$- \otimes_R^\mathbf{L} : D(R) \to D(P)$ は部分圏
+$D^+, D^+_{\textit{Coh}}, D^-, D^-_{\textit{Coh}}, D^b_{\textit{Coh}}$ を保つ。
+補題 \ref{dualizing-lemma-exact-support-coherent} により、関手
+$R\Hom(A, -) : D(P) \to D(A)$ は $D^+$ と $D^+_{\textit{Coh}}$ を保つ。
+$R \to A$ が完全ならば、$A$ は完全 $P$-加群である；『代数の続論』の補題 \ref{more-algebra-lemma-perfect-ring-map} を参照。$R\Hom(A, K)$ の $D(P)$ への制限は
+$R\Hom_P(A, K)$ であった。『代数の続論』の補題 \ref{more-algebra-lemma-dual-perfect-complex} により、ある完全対象 $E \in D(P)$ に対して
+$R\Hom_P(A, K) = E \otimes_P^\mathbf{L} K$ である。$E$ は有限射影 $P$-加群からなる
+有限複体で表せるので、$K$ が属するならば $R\Hom_P(A, K)$ も
+$D^-(P), D^-_{\textit{Coh}}(P), D^b_{\textit{Coh}}(P)$ に属することは明らかである。
+制限関手 $D(A) \to D(P)$ はこれらの部分圏を反映するので、証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-shriek-dualizing-algebraic}
+$\varphi$ を Noether 環の有限型準同型とする。$\omega_R^\bullet$ が $R$ の双対化複体ならば、
+$\varphi^!(\omega_R^\bullet)$ は $A$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-dualizing-polynomial-ring} および \ref{dualizing-lemma-dualizing-quotient} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-flat-bc}
+$R \to R'$ を Noether 環の平坦準同型、$\varphi : R \to A$ を有限型環写像とする。
+$\varphi' : R' \to A' = A \otimes_R R'$ を $\varphi$ が誘導する写像とする。このとき $D(R)$ の
+$K$ に対して関手的な写像
+$$
+\varphi^!(K) \otimes_A^\mathbf{L} A' \longrightarrow
+(\varphi')^!(K \otimes_R^\mathbf{L} R')
+$$
+があり、$K \in D^+(R)$ ならば同型である。
+\end{lemma}
+
+\begin{proof}
+$P$ を $R$ 上の多項式環として分解 $R \to P \to A$ を選ぶ。基底変換により対応する分解
+$R' \to P' \to A'$ を得る。『代数の続論』の補題 \ref{more-algebra-lemma-double-base-change} により
+$(K \otimes_R^\mathbf{L} P) \otimes_P^\mathbf{L} P' =
+(K \otimes_R^\mathbf{L} R') \otimes_{R'}^\mathbf{L} P'$ なので、$K$ に関して関手的な写像
+$$
+R\Hom(A, K \otimes_R^\mathbf{L} P[n]) \otimes_A^\mathbf{L} A'
+\longrightarrow
+R\Hom(A', (K \otimes_R^\mathbf{L} P[n]) \otimes_P^\mathbf{L} P')
+$$
+を構成すれば十分である。このため、写像 (\ref{dualizing-equation-base-change})、すなわち第 \ref{dualizing-section-base-change-trivial-duality} 節で $P, A, P', A'$ に対して構成したものを用いる。補題 \ref{dualizing-lemma-flat-bc-surjection} により、この写像は $K \in D^+(R)$ に対して同型である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bc}
+$R \to R'$ を Noether 環の準同型とする。$\varphi : R \to A$ を完全環写像
+（『代数の続論』の定義 \ref{more-algebra-definition-pseudo-coherent-perfect}）で、$R'$ と $A$ は $R$ 上 Tor 独立であるとする。
+$\varphi' : R' \to A' = A \otimes_R R'$ を $\varphi$ が誘導する写像とする。このとき
+$D(R)$ の $K$ に対して関手的な同型
+$$
+\varphi^!(K) \otimes_A^\mathbf{L} A' =
+(\varphi')^!(K \otimes_R^\mathbf{L} R')
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$P$ を $R$ 上の多項式環とし、$A$ が完全 $P$-加群となるような分解 $R \to P \to A$ を
+選んでよい；『代数の続論』の補題 \ref{more-algebra-lemma-perfect-ring-map} を参照。
+基底変換により対応する分解 $R' \to P' \to A'$ を得る。『代数の続論』の補題 \ref{more-algebra-lemma-double-base-change} により
+$(K \otimes_R^\mathbf{L} P) \otimes_P^\mathbf{L} P' =
+(K \otimes_R^\mathbf{L} R') \otimes_{R'}^\mathbf{L} P'$ なので、$K$ に関して関手的な写像
+$$
+R\Hom(A, K \otimes_R^\mathbf{L} P[n]) \otimes_A^\mathbf{L} A'
+\longrightarrow
+R\Hom(A', (K \otimes_R^\mathbf{L} P[n]) \otimes_P^\mathbf{L} P')
+$$
+を構成すれば十分である。ここで
+$$
+A \otimes_P^\mathbf{L} P' = A \otimes_R^\mathbf{L} R' = A'
+$$
+である。第一の等号は $R, R', P, P'$ に『代数の続論』の補題 \ref{more-algebra-lemma-base-change-comparison} を適用して得られ、第二の等号は $A$ と $R'$ が
+$R$ 上 Tor 独立だからである。従って $A$ と $P'$ は $P$ 上 Tor 独立であり、写像
+(\ref{dualizing-equation-base-change})、すなわち第 \ref{dualizing-section-base-change-trivial-duality} 節で
+$P, A, P', A'$ に対して構成したものを用いて所望の射を得る。補題 \ref{dualizing-lemma-bc-surjection} により、
+証明を終えるには $A$ が完全 $P$-加群であることを示せば十分だが、これは上で見た。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-bc-flat}
+$R \to R'$ を Noether 環の準同型、$\varphi : R \to A$ を平坦有限型写像とする。
+$\varphi' : R' \to A' = A \otimes_R R'$ を $\varphi$ が誘導する写像とする。このとき
+$D(R)$ の $K$ に対して関手的な同型
+$$
+\varphi^!(K) \otimes_A^\mathbf{L} A' =
+(\varphi')^!(K \otimes_R^\mathbf{L} R')
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-bc} の特別な場合である。これは『代数の続論』の補題 \ref{more-algebra-lemma-flat-finite-presentation-perfect} による。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-composition-shriek-algebraic}
+$A \xrightarrow{a} B \xrightarrow{b} C$ を Noether 環の有限型準同型とする。このとき
+$D^+(A)$ 上で同型となる関手の変換 $b^! \circ a^! \to (b \circ a)^!$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A$ 上の多項式環 $P = A[x_1, \ldots, x_n]$ と全射 $P \to B$ を選ぶ。
+$B$ 上 $C$ を生成する元 $c_1, \ldots, c_m \in C$ を選ぶ。
+$Q = P[y_1, \ldots, y_m]$ とおき、$Q' = Q \otimes_P B = B[y_1, \ldots, y_m]$ と書く。
+$y_j$ を $c_j$ へ送る全射を $\chi : Q' \to C$ とする。図式は
+$$
+\xymatrix{
+& Q \ar[r]_{\psi'} & Q' \ar[r]_\chi & C \\
+A \ar[r] & P \ar[r]^\psi \ar[u] & B \ar[u]
+}
+$$
+である。補題 \ref{dualizing-lemma-flat-bc-surjection} により、$M \in D(P)$ に対して射
+$\psi^!(M) \otimes_B^\mathbf{L} Q' \to (\psi')^!(M \otimes_P^\mathbf{L} Q)$ があり、
+$M$ が下に有界ならば同型である。また第 \ref{dualizing-section-trivial} 節により両辺とも制限関手
+$D(C) \to D(Q)$ の右随伴なので、$\chi^! \circ (\psi')^! = (\chi \circ \psi')^!$ である。従って
+\begin{align*}
+b^!(a^!(K))
+& =
+\chi^!(\psi^!(K \otimes_A^\mathbf{L} P)[n] \otimes_B^\mathbf{L} Q)[m] \\
+& \to
+\chi^!((\psi')^!(K \otimes_A^\mathbf{L} P \otimes_P^\mathbf{L} Q))[n + m] \\
+& =
+(\chi \circ \psi')^!(K\otimes_A^\mathbf{L} Q)[n + m] \\
+& =
+(b \circ a)^!(K)
+\end{align*}
+を得る。ここでは上記に加えて『代数の続論』の補題 \ref{more-algebra-lemma-double-base-change} を用いた。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-upper-shriek-finite}
+$\varphi : R \to A$ を Noether 環の有限写像とする。このとき $\varphi^!$ は第 \ref{dualizing-section-trivial} 節の関手 $R\Hom(A, -) : D(R) \to D(A)$ と同型である。
+\end{lemma}
+
+\begin{proof}
+$A$ が $R$ 上 $n > 1$ 個の元で生成されるとする。このとき $R \to A$ を、どちらの段階でも
+生成元の個数が $< n$ となる二つの有限環写像の合成に分解できる。補題 \ref{dualizing-lemma-composition-shriek-algebraic} および \ref{dualizing-lemma-composition-right-adjoints} があるので、
+$A$ が $R$ 上一元で生成される場合を証明すれば十分である。$A$ は $R$ 上有限なので、
+$A$ は $x$ のモニック多項式 $f$ に対する $B = R[x]/(f)$ の商である（『可換代数』の補題 \ref{algebra-lemma-finite-is-integral}）。再び合成に関する補題と、全射については定義により一致する
+ことを用いると、$R \to B = R[x]/(f)$ の場合を証明すれば十分である。この場合、関手
+$\varphi^!$ は $K \mapsto K \otimes_R^\mathbf{L} B$ と同型である。これは写像 $R[x] \to B$ に
+補題 \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic} を用いて証明する（$\varphi^!$ の定義と
+補題中のシフトの和が零になることに注意せよ）。関手
+$R\Hom(B, -) : D(R) \to D(B)$ については補題 \ref{dualizing-lemma-RHom-is-tensor-special} により、$B$-加群として
+$\Hom_R(B, R) \cong B$ を示せば十分である。$f$ の次数を $d$ とする。このとき
+$B$ の $R$-基底は $1, x, \ldots, x^{d - 1}$ で与えられる。$\delta_i : B \to R$,
+$i = 0, \ldots, d - 1$ を、与えた基底に関する $x^i$ の係数を取り出す $R$-線形写像とする。
+このとき $\delta_0, \ldots, \delta_{d - 1}$ は $\Hom_R(B, R)$ の基底である。最後に、計算により
+$0 \leq i \leq d - 1$ に対して
+$$
+x^i \delta_{d - 1} =
+\delta_{d - 1 - i} + b_1 \delta_{d - i} + \ldots + b_i \delta_{d - 1}
+$$
+となる $c_1, \ldots, c_d \in R$ が存在する\footnote{
+$f = x^d + a_1 x^{d - 1} + \ldots + a_d$ ならば、
+$c_1 = -a_1$, $c_2 = a_1^2 - a_2$, $c_3 = -a_1^3 + 2a_1a_2 -a_3$ などである。}。
+従って $\Hom_R(B, R)$ は $\delta_{d - 1}$ で生成される単項 $B$-加群である。階数を見れば、
+これは階数 $1$ の自由 $B$-加群であると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-upper-shriek-localize}
+$R$ を Noether 環、$f \in R$ とする。$\varphi$ を写像 $R \to R_f$ とすると、$\varphi^!$ は
+$- \otimes_R^\mathbf{L} R_f$ と同型である。より一般に、$\varphi : R \to R'$ が
+$\Spec(R') \to \Spec(R)$ を開埋め込みにする写像ならば、$\varphi^!$ は
+$- \otimes_R^\mathbf{L} R'$ と同型である。
+\end{lemma}
+
+\begin{proof}
+表示 $R \to R[x] \to R[x]/(fx - 1) = R_f$ を選び、$fx - 1$ は $R[x]$ の非零因子であることに
+注意する。従って補題 \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic} を用いて関手
+$\varphi^!$ を計算できる。詳細は省略する。$\varphi^!$ の定義と補題中のシフトの和が零になることに
+注意せよ。
+
+\medskip\noindent
+一般の場合、$R' \otimes_R R' = R'$ であることに注意する。従って結果は上の基底変換結果から従う。
+補題 \ref{dualizing-lemma-flat-bc} と補題 \ref{dualizing-lemma-bc} のどちらを用いてもよい。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-upper-shriek-is-tensor-functor}
+$\varphi : R \to A$ を Noether 環の完全準同型とする（例えば $\varphi$ は平坦有限型である）。
+このとき $K \in D(R)$ に対して
+$\varphi^!(K) = K \otimes_R^\mathbf{L} \varphi^!(R)$ である。
+\end{lemma}
+
+\begin{proof}
+（括弧内の主張は『代数の続論』の補題 \ref{more-algebra-lemma-flat-finite-presentation-perfect} から従う。）$P$ を $R$ 上 $n$ 変数の
+多項式環とし、$A$ が完全 $P$-加群となる分解 $R \to P \to A$ を選べる；『代数の続論』の補題 \ref{more-algebra-lemma-perfect-ring-map} を参照。
+$\varphi^!(K) = R\Hom(A, K \otimes_R^\mathbf{L} P[n])$ であった。従って結果は補題 \ref{dualizing-lemma-RHom-is-tensor-special} と『代数の続論』の補題 \ref{more-algebra-lemma-double-base-change} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-if-have-omega}
+$\varphi : A \to B$ を Noether 環の有限型準同型とし、$\omega_A^\bullet$ を $A$ の双対化複体とする。
+$\omega_B^\bullet = \varphi^!(\omega_A^\bullet)$ とおく。
+$K \in D_{\textit{Coh}}(A)$ に対して $D_A(K) = R\Hom_A(K, \omega_A^\bullet)$、
+$L \in D_{\textit{Coh}}(B)$ に対して
+$D_B(L) = R\Hom_B(L, \omega_B^\bullet)$ と書く。このとき
+$K \in D_{\textit{Coh}}(A)$ に対して関手的な同型
+$$
+\varphi^!(K) = D_B(D_A(K) \otimes_A^\mathbf{L} B)
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-shriek-dualizing-algebraic} により $\omega_B^\bullet$ は $B$ の双対化複体である。
+$A \to B \to C$ を Noether 環の有限型準同型とする。補題が $A \to B$ と $B \to C$ に対して
+成り立つならば、$A \to C$ に対しても成り立つ。これは補題 \ref{dualizing-lemma-composition-shriek-algebraic} と、補題 \ref{dualizing-lemma-dualizing} による
+$D_B \circ D_B \cong \text{id}$ から従う。従って $A \to B$ が全射である場合と、$B$ が
+$A$ 上の多項式環である場合を証明すれば十分である。
+
+\medskip\noindent
+$B = A[x_1, \ldots, x_n]$ と仮定する。$D_A \circ D_A \cong \text{id}$ なので、
+$D_{\textit{Coh}}(A)$ の $K$ に対して
+$D_B(K \otimes_A B) \cong D_A(K) \otimes_A B[n]$ を証明すれば十分である。
+$\omega_A^\bullet$ を表す入射加群の有界複体 $I^\bullet$ を選ぶ。
+$J^\bullet$ を $B$-加群の有界複体として擬同型
+$I^\bullet \otimes_A B \to J^\bullet$ を選ぶ。$A$-加群の複体 $K^\bullet$ に対し、明らかな複体写像
+$$
+\Hom^\bullet(K^\bullet, I^\bullet) \otimes_A B[n]
+\longrightarrow
+\Hom^\bullet(K^\bullet \otimes_A B, J^\bullet[n])
+$$
+を考える。左辺は $D_A(K) \otimes_A B[n]$ を、右辺は $D_B(K \otimes_A B)$ を表す。従って
+$K^\bullet$ のコホモロジー加群が有限 $A$-加群ならば、この写像が擬同型であることを示せばよい。
+複体の次数 $r$ のコホモロジーは、どちらの辺でも有限個の $K^i$ にしか依存しない。従って
+$K^\bullet$ を切断で置き換えてよい。すなわち、$K^\bullet$ は
+$D^-_{\textit{Coh}}(A)$ の対象を表すと仮定してよい。このとき $K^\bullet$ は有限自由
+$A$-加群からなる上に有界な複体と擬同型である。従って $K^\bullet$ 自身が有限自由
+$A$-加群からなる上に有界な複体であると仮定してよい。この場合、表示した写像が複体の同型で
+あることは容易に分かり、この場合の証明が完了する。
+
+\medskip\noindent
+$A \to B$ が全射であると仮定する。制限関手を $i_* : D(B) \to D(A)$ と書き、
+$\varphi^!(-) = R\Hom(A, -)$ は $i_*$ の右随伴であることを思い出す（補題 \ref{dualizing-lemma-right-adjoint}）。$F \in D(B)$ に対して
+\begin{align*}
+\Hom_B(F, D_B(D_A(K) \otimes_A^\mathbf{L} B))
+& =
+\Hom_B((D_A(K) \otimes_A^\mathbf{L} B) \otimes_B^\mathbf{L} F,
+\omega_B^\bullet) \\
+& =
+\Hom_A(D_A(K) \otimes_A^\mathbf{L} i_*F, \omega_A^\bullet) \\
+& =
+\Hom_A(i_*F, D_A(D_A(K))) \\
+& =
+\Hom_A(i_*F, K) \\
+& =
+\Hom_B(F, \varphi^!(K))
+\end{align*}
+である。第一の等号は『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom} と $D_B$ の定義から従う。第二の等号は上記の随伴性と等式
+$i_*((D_A(K) \otimes_A^\mathbf{L} B) \otimes_B^\mathbf{L} F) =
+D_A(K) \otimes_A^\mathbf{L} i_*F$（『代数の続論』の補題 \ref{more-algebra-lemma-derived-base-change}）による。第三の等号は『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom} から従う。第四は $D_A \circ D_A = \text{id}$ だからである。
+最後の等号は再び随伴性による。従って Yoneda の補題から結果が従う。
+\end{proof}
+
+
+
+
+
+
+\section{Noether の場合の相対双対化複体}
+\label{dualizing-section-relative-dualizing-complexes-Noetherian}
+
+\noindent
+$\varphi : R \to A$ を Noether 環の有限型準同型とする。このとき $D(A)$ の対象
+$$
+\omega_{A/R}^\bullet = \varphi^!(R)
+$$
+を {\it $R$ 上の $A$ の相対双対化複体} と定義する。ここで $\varphi^!$ は第 \ref{dualizing-section-relative-dualizing-complex-algebraic} 節のものである。同節の内容から、
+$\omega_{A/R}^\bullet$ は（非一意な）同型を除いて良定義であることが分かる。
+
+\begin{lemma}
+\label{dualizing-lemma-base-change-relative-algebraic}
+$R \to R'$ を Noether 環の準同型、$R \to A$ を有限型写像とし、
+$A' = A \otimes_R R'$ とおく。次のいずれかを仮定する。
+\begin{enumerate}
+\item $R \to R'$ は平坦である。
+\item $R \to A$ は平坦である。
+\item $R \to A$ は完全で、$R'$ と $A$ は $R$ 上 Tor 独立である。
+\end{enumerate}
+このとき $D(A')$ に同型
+$\omega_{A/R}^\bullet \otimes_A^\mathbf{L} A' \to \omega^\bullet_{A'/R'}$ がある。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-flat-bc}、\ref{dualizing-lemma-bc-flat} および \ref{dualizing-lemma-bc} と定義から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-algebraic}
+$\varphi : R \to A$ を Noether 環の有限型写像とする。
+\begin{enumerate}
+\item $\varphi$ が完全ならば、
+\begin{enumerate}
+\item $\omega_{A/R}^\bullet$ は $D^b_{\textit{Coh}}(A)$ に属する。
+\item $\omega_{A/R}^\bullet$ は $R$ 上有限 Tor 次元をもつ。
+\item $A \to R\Hom_A(\omega_{A/R}^\bullet, \omega_{A/R}^\bullet)$ は同型である。
+\end{enumerate}
+\item $\varphi$ が平坦ならば (1)(a), (1)(b), (1)(c) が成り立ち、さらに
+\begin{enumerate}
+\item $\omega_{A/R}^\bullet$ は $R$-完全である（『代数の続論』の定義 \ref{more-algebra-definition-relatively-perfect}）。
+\item 体への任意の写像 $R \to k$ に対して、基底変換
+$\omega_{A/R}^\bullet \otimes_A^\mathbf{L} (A \otimes_R k)$ は
+$A \otimes_R k$ の双対化複体である。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$R \to A$ が完全であると仮定する。$\varphi^!$ の定義にある $R \to P \to A$ を選ぶ。
+このとき $A$ は完全 $P$-加群である（『代数の続論』の補題 \ref{more-algebra-lemma-perfect-ring-map}）。補題 \ref{dualizing-lemma-shriek-boundedness} により、これは
+$\omega_{A/R}^\bullet$ が $D^b_{\textit{Coh}}(A)$ に属することを示す。従って (1)(a) を得る。
+$\omega_{A/R}^\bullet$ が $R$-加群の複体として有限 Tor 次元をもつことを示すため、
+$\omega_{A/R}^\bullet = \varphi^!(R) = R\Hom(A, P)[n]$ は $D(P)$ において
+$R\Hom_P(A, P)[n]$ へ写り、後者は $D(P)$ の完全対象であることに注意する（『代数の続論』の補題 \ref{more-algebra-lemma-dual-perfect-complex}）。従って $R \to P$ が平坦であることから、
+$D(R)$ で有限 Tor 次元をもつ。これで (1)(b) を得る。$D(A)$ の対象
+$R\Hom_A(\omega_{A/R}^\bullet, \omega_{A/R}^\bullet)$ は $D(P)$ において
+\begin{align*}
+R\Hom_P(\omega_{A/R}^\bullet, R\Hom(A, P)[n])
+& =
+R\Hom_P(R\Hom_P(A, P)[n], P)[n] \\
+& =
+R\Hom_P(R\Hom_P(A, P), P)
+\end{align*}
+へ写る。すでに用いた『代数の続論』の補題 \ref{more-algebra-lemma-dual-perfect-complex} により、これは $A$ に等しい。従って (1)(c) を得る。
+
+\medskip\noindent
+$\varphi$ が平坦であると仮定する。このとき $R \to A$ は完全環写像であり（『代数の続論』の補題 \ref{more-algebra-lemma-flat-finite-presentation-perfect}）、(1)(a), (1)(b), (1)(c) が成り立つ。
+もちろん (1)(a), (1)(b) と定義により、$\omega_{A/R}^\bullet$ は $R$-完全である。
+$R \to k$ を (2)(b) におけるものとする。補題 \ref{dualizing-lemma-base-change-relative-algebraic} により同型
+$$
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L} (A \otimes_R k) \cong
+\omega^\bullet_{A \otimes_R k/k}
+$$
+があり、右辺は補題 \ref{dualizing-lemma-shriek-dualizing-algebraic} により双対化複体である。
+これで証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-base-change-dualizing-over-field}
+$K/k$ を体拡大、$A$ を有限型 $k$-代数とし、$A_K = A \otimes_k K$ とおく。
+$\omega_A^\bullet$ が $A$ の双対化複体ならば、
+$\omega_A^\bullet \otimes_A A_K$ は $A_K$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+双対化複体の一意性により $A$ のどの双対化複体を選んでもよい。詳細な証明は省略する。
+代数構造を $\varphi : k \to A$ と書く。補題 \ref{dualizing-lemma-shriek-dualizing-algebraic} により
+$\omega_A^\bullet = \varphi^!(k[0])$ ととってよい。補題 \ref{dualizing-lemma-relative-dualizing-algebraic} から結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-lci-shriek}
+$\varphi : R \to A$ を Noether 環の局所完全交叉準同型とする。このとき
+$\omega_{A/R}^\bullet$ は $D(A)$ の可逆対象であり、すべての $K \in D(R)$ に対して
+$\varphi^!(K) = K \otimes_R^\mathbf{L} \omega_{A/R}^\bullet$ である。
+\end{lemma}
+
+\begin{proof}
+『代数の続論』の補題 \ref{more-algebra-lemma-lci-perfect} により局所完全交叉準同型は完全環写像である。
+従って最後の主張は補題 \ref{dualizing-lemma-upper-shriek-is-tensor-functor} から従う。
+『代数の続論』の定義 \ref{more-algebra-definition-local-complete-intersection} により、
+$I$ を Koszul 正則イデアルとして $A = R[x_1, \ldots, x_n]/I$ と書ける。第 \ref{dualizing-section-relative-dualizing-complex-algebraic} 節における $\varphi^!$ の構成から、
+$I \subset R$ が Koszul 正則イデアルで $A = R/I$ の場合を示せば十分である。
+$\omega_{A/R}^\bullet$ が $D(A)$ で可逆であることは $\Spec(A)$ 上局所的である；『代数の続論』の補題 \ref{more-algebra-lemma-invertible-derived} を参照。さらに補題 \ref{dualizing-lemma-flat-bc} により、
+$\omega_{A/R}^\bullet$ の形成は $R$ 上の局所化と可換である。『代数の続論』の定義 \ref{more-algebra-definition-regular-ideal}, 補題 \ref{more-algebra-lemma-noetherian-finite-all-equivalent}, 『可換代数』の補題 \ref{algebra-lemma-regular-sequence-in-neighbourhood} を組み合わせると、$A$ で単位イデアルを生成し、
+$I_{g_j} \subset R_{g_j}$ が正則列で生成されるような $g_1, \ldots, g_r \in R$ を見つけられる。
+従って $f_1, \ldots, f_c$ を $R$ の正則列として
+$A = R/(f_1, \ldots, f_c)$ と仮定してよい。環写像
+$$
+R \to R/(f_1) \to R/(f_1, f_2) \to \ldots \to R/(f_1, \ldots, f_c) = A
+$$
+を考え、補題 \ref{dualizing-lemma-composition-shriek-algebraic}（および既に証明した最後の主張）を用いると、
+各段階について補題を証明すれば十分である。最後に、ある非零因子 $f$ に対して
+$A = R/(f)$ の場合、補題 \ref{dualizing-lemma-compute-for-effective-Cartier-algebraic} により
+$\varphi^!(R) = R\Hom(A, R)$ は可逆なので、補題は成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-gorenstein-shriek}
+$\varphi : R \to A$ を Noether 環の平坦有限型準同型とする。次は同値である。
+\begin{enumerate}
+\item すべての素イデアル $\mathfrak p \subset R$ に対してファイバー
+$A \otimes_R \kappa(\mathfrak p)$ は Gorenstein である。
+\item $\omega_{A/R}^\bullet$ は $D(A)$ の可逆対象である；『代数の続論』の補題 \ref{more-algebra-lemma-invertible-derived} を参照。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) が成り立つならば、ファイバー環 $A \otimes_R \kappa(\mathfrak p)$ は可逆な双対化複体をもち、
+従って Gorenstein である。補題 \ref{dualizing-lemma-relative-dualizing-algebraic} および \ref{dualizing-lemma-gorenstein} を参照。
+
+\medskip\noindent
+逆に (1) を仮定する。補題 \ref{dualizing-lemma-shriek-boundedness} により
+$\omega_{A/R}^\bullet$ は $D^b_{\textit{Coh}}(A)$ に属する（Noether 環の平坦有限型準同型は完全である；
+『代数の続論』の補題 \ref{more-algebra-lemma-flat-finite-presentation-perfect} を参照）。
+$\mathfrak p \subset R$ の上にある素イデアル $\mathfrak q \subset A$ をとる。このとき
+$$
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L} \kappa(\mathfrak q) =
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L}
+(A \otimes_R \kappa(\mathfrak p))
+\otimes_{(A \otimes_R \kappa(\mathfrak p))}^\mathbf{L}
+\kappa(\mathfrak q)
+$$
+である。補題 \ref{dualizing-lemma-relative-dualizing-algebraic} および \ref{dualizing-lemma-gorenstein} と仮定 (1) を
+適用すると、この複体は零でないコホモロジー群を $1$ 個もち、それは $1$-次元
+$\kappa(\mathfrak q)$-ベクトル空間である。『代数の続論』の補題 \ref{more-algebra-lemma-lift-bounded-pseudo-coherent-to-perfect} により、ある
+$f \in A$, $f \not \in \mathfrak q$ に対して $(\omega_{A/R}^\bullet)_f$ は $D(A_f)$ の
+可逆対象である。従って (2) が成り立つ。
+\end{proof}
+
+\noindent
+次の補題は、Noether 環上の有限型代数へ移るとき次元関数がどのように変わるかを見るのに有用である。
+
+\begin{lemma}
+\label{dualizing-lemma-shriek-normalized}
+$\varphi : R \to A$ を Noether 環の有限型準同型とする。$R$ は局所環で、
+$\mathfrak m \subset A$ を $R$ の極大イデアルの上にある極大イデアルとする。
+$\omega_R^\bullet$ が $R$ の正規化双対化複体ならば、
+$\varphi^!(\omega_R^\bullet)_\mathfrak m$ は $A_\mathfrak m$ の正規化双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$\varphi^!(\omega_R^\bullet)$ が $A$ の双対化複体であることは既知である；補題 \ref{dualizing-lemma-shriek-dualizing-algebraic} を参照。$\varphi^!$ の構成におけるように
+$P = R[x_1, \ldots, x_n]$ として分解 $R \to P \to A$ を選ぶ。$R \to P$ と、
+$\mathfrak m$ に対応する $P$ の極大イデアル $\mathfrak m'$ に対して補題を証明できれば、
+$P_{\mathfrak m'} \to A_\mathfrak m$ に補題 \ref{dualizing-lemma-normalized-quotient} を適用するか、
+$P \to A$ に補題 \ref{dualizing-lemma-quotient-function} を適用して $R \to A$ に対する結果を得る。
+$A = R[x_1, \ldots, x_n]$ の場合、例えば『可換代数』の補題 \ref{algebra-lemma-dimension-base-fibre-equals-total}（ファイバーの次元を計算するため『可換代数』の補題 \ref{algebra-lemma-dim-affine-space} と組み合わせる）により
+$\dim(A_\mathfrak m) = \dim(R) + n$ である。$\omega_R^\bullet$ が正規化されていることは、
+$i = -\dim(R)$ が $H^i(\omega_R^\bullet)$ が零でなくなる最小の添字であることを意味する
+（補題 \ref{dualizing-lemma-sitting-in-degrees} および \ref{dualizing-lemma-nonvanishing-generically-local} から従う）。
+従って $\varphi^!(\omega_R^\bullet)_\mathfrak m =
+\omega_R^\bullet \otimes_R A_\mathfrak m[n]$ の最初の零でないコホモロジー加群は次数
+$-\dim(R) - n$ にあり、ゆえにこれは $A_\mathfrak m$ の正規化双対化複体である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-trivial-vanishing}
+$R \to A$ を Noether 環の有限型準同型、$\mathfrak q \subset A$ を
+$\mathfrak p \subset R$ の上にある素イデアルとする。このとき
+$$
+H^i(\omega_{A/R}^\bullet)_\mathfrak q \not = 0
+\Rightarrow - d \leq i
+$$
+である。ここで $d$ は点 $\mathfrak q$ における、$\mathfrak p$ 上の
+$\Spec(A) \to \Spec(R)$ のファイバーの次元である。
+\end{lemma}
+
+\begin{proof}
+第 \ref{dualizing-section-relative-dualizing-complex-algebraic} 節におけるように、
+$P = R[x_1, \ldots, x_n]$ として分解 $R \to P \to A$ を選び、
+$\omega_{A/R}^\bullet = R\Hom(A, P)[n]$ とする。
+$R\Hom(A, P)_\mathfrak q$ の次数 $< n - d$ のコホモロジーが消滅することを示せばよい。
+補題 \ref{dualizing-lemma-RHom-ext} により、これは $\mathfrak q$ に対応する素イデアル
+$\mathfrak r \subset P$ と $P \to A$ の核 $I$ に対して、$i < n - d$ ならば
+$\Ext_P^i(P/I, P)_{\mathfrak r} = 0$ であることを示すという意味である。『代数の続論』の補題 \ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext} により、これは
+$\Ext_{P_\mathfrak r}^i(P_\mathfrak r/IP_\mathfrak r, P_\mathfrak r)$ と書き直せる。
+従って補題 \ref{dualizing-lemma-depth} により
+$$
+\text{depth}_{IP_\mathfrak r}(P_\mathfrak r) \geq n - d
+$$
+を示せばよい。補題 \ref{dualizing-lemma-depth-flat-CM} により
+$$
+\text{depth}_{IP_\mathfrak r}(P_\mathfrak r) \geq
+\dim((P \otimes_R \kappa(\mathfrak p))_\mathfrak r) -
+\dim((P/I \otimes_R \kappa(\mathfrak p))_\mathfrak r)
+$$
+である。右辺の二つの式は『可換代数』の補題 \ref{algebra-lemma-codimension} により一致する。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-flat-vanishing}
+$R \to A$ を Noether 環の平坦有限型準同型、$\mathfrak q \subset A$ を
+$\mathfrak p \subset R$ の上にある素イデアルとする。このとき
+$$
+H^i(\omega_{A/R}^\bullet)_\mathfrak q \not = 0
+\Rightarrow - d \leq i \leq 0
+$$
+である。ここで $d$ は点 $\mathfrak q$ における、$\mathfrak p$ 上の
+$\Spec(A) \to \Spec(R)$ のファイバーの次元である。
+$\Spec(A) \to \Spec(R)$ のすべてのファイバーの次元が $\leq d$ ならば、
+$\omega_{A/R}^\bullet$ は $R$-加群の複体として $[-d, 0]$ に Tor 振幅をもつ。
+\end{lemma}
+
+\begin{proof}
+下からの評価は補題 \ref{dualizing-lemma-relative-dualizing-trivial-vanishing} で証明した。
+第 \ref{dualizing-section-relative-dualizing-complex-algebraic} 節におけるように、
+$P = R[x_1, \ldots, x_n]$ として分解 $R \to P \to A$ を選び、
+$\omega_{A/R}^\bullet = R\Hom(A, P)[n]$ とする。上からの評価は
+$i > n$ に対して $\Ext^i_P(A, P)$ が零であることを意味する。これは『代数の続論』の補題 \ref{more-algebra-lemma-perfect-over-polynomial-ring} から従う。同補題は $A$ が
+$[-n, 0]$ に Tor 振幅をもつ完全 $P$-加群であることを示す。
+
+\medskip\noindent
+最後の主張を証明する。$R \to R'$ を Noether 環の環準同型とし、
+$A' = A \otimes_R R'$ とおく。このとき
+$$
+\omega_{A'/R'}^\bullet =
+\omega_{A/R}^\bullet \otimes_A^\mathbf{L} A' =
+\omega_{A/R}^\bullet \otimes_R^\mathbf{L} R'
+$$
+である。第一の同型は補題 \ref{dualizing-lemma-base-change-relative-algebraic}、$D(R')$ における第二の同型は
+『代数の続論』の補題 \ref{more-algebra-lemma-base-change-comparison} による。証明の前半から
+（$\Spec(A') \to \Spec(R')$ のファイバーの次元が $\leq d$ であることに注意して）、
+$\omega_{A/R}^\bullet \otimes_R^\mathbf{L} R'$ のコホモロジーは次数 $[-d, 0]$ にしかない。
+$R' = R \oplus M$ を有限 $R$-加群 $M$ による $R$ の二乗零肥厚とすると、任意の有限
+$R$-加群 $M$ に対して $R\Hom(A, P) \otimes_R^\mathbf{L} M$ のコホモロジーは区間
+$[-d, 0]$ にしかない。任意の $R$-加群は有限 $R$-加群のフィルター余極限であり、テンソル積は
+余極限と可換なので、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-CM-vanishing}
+$R \to A$ を Noether 環の有限型準同型、$\mathfrak p \subset R$ を素イデアルとする。次を仮定する。
+\begin{enumerate}
+\item $R_\mathfrak p$ は Cohen--Macaulay である。
+\item 任意の極小素イデアル $\mathfrak q \subset A$ に対して
+$\text{trdeg}_{\kappa(R \cap \mathfrak q)} \kappa(\mathfrak q) \leq r$ である。
+\end{enumerate}
+このとき
+$$
+H^i(\omega_{A/R}^\bullet)_\mathfrak p \not = 0 \Rightarrow - r \leq i
+$$
+であり、$H^{-r}(\omega_{A/R}^\bullet)_\mathfrak p$ は $A_\mathfrak p$-加群として $(S_2)$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-base-change-relative-algebraic} により $R$ を $R_\mathfrak p$ で置き換えてよい。
+従って $R$ は Cohen--Macaulay 局所環であると仮定してよく、$A$-加群
+$H^i(\omega_{A/R}^\bullet)$ に対して補題の主張を示せばよい。
+
+\medskip\noindent
+$R^\wedge$ を $R$ の完備化とする。写像 $R \to R^\wedge$ は平坦で、$R^\wedge$ は
+Cohen--Macaulay である（『代数の続論』の補題 \ref{more-algebra-lemma-completion-CM}）。$A \to A \otimes_R R^\wedge$ の平坦性により、
+$A \otimes_R R^\wedge$ の極小素イデアルは $A$ の極小素イデアルの上にあることに注意する
+（平坦性に対する下降については『可換代数』の補題 \ref{algebra-lemma-flat-going-down} を参照）。
+従って『スキームの射』の補題 \ref{morphisms-lemma-dimension-fibre-after-base-change} により、有限型環写像
+$R^\wedge \to A \otimes_R R^\wedge$ に対して条件 (2) が成り立つ。再び補題 \ref{dualizing-lemma-base-change-relative-algebraic} を用いると、$R^\wedge \to A \otimes_R R^\wedge$ に
+対して補題を証明すれば十分である。このようにして補題 \ref{dualizing-lemma-ubiquity-dualizing} を用い、
+$R$ は双対化複体 $\omega_R^\bullet$ をもつ Noether 局所 Cohen--Macaulay 環であると仮定してよい。
+
+\medskip\noindent
+$\mathfrak m \subset A$ を極大イデアルとする。補題の主張を
+$H^i(\omega_{A/R}^\bullet)_\mathfrak m$ に対して示せば十分である。$\mathfrak m$ が $R$ の極大
+イデアルの上になければ、$R$ を局所化で置き換えてこの場合に帰着する（小さな詳細は省略する）。
+
+\medskip\noindent
+$\omega_R^\bullet$ は正規化されていると仮定してよい。$d = \dim(R)$ とおくと、ある
+$R$-加群 $\omega_R$ に対して $\omega_R^\bullet = \omega_R[d]$ である；補題 \ref{dualizing-lemma-apply-CM} を参照。$\omega_A^\bullet = \varphi^!(\omega_R^\bullet)$ とおく。
+補題 \ref{dualizing-lemma-relative-dualizing-if-have-omega} により
+$$
+\omega_{A/R}^\bullet =
+R\Hom_A(\omega_R[d] \otimes_R^\mathbf{L} A, \omega_A^\bullet)
+$$
+である。次元公式により $\dim(A_\mathfrak m) \leq d + r$ である；『スキームの射』の補題 \ref{morphisms-lemma-dimension-formula-general} と、Hilbert の零点定理により
+$\kappa(\mathfrak m)$ が $R$ の剰余体上有限であることを用いる。補題 \ref{dualizing-lemma-shriek-normalized} により $(\omega_A^\bullet)_\mathfrak m$ は
+$A_\mathfrak m$ の正規化双対化複体である。従って補題 \ref{dualizing-lemma-sitting-in-degrees} により、$H^i((\omega_A^\bullet)_\mathfrak m)$ が零でないのは
+$-d - r \leq i \leq 0$ の場合だけである。$\omega_R[d] \otimes_R^\mathbf{L} A$ は次数
+$\leq -d$ にあるので、消滅が従う。最後に
+$$
+H^{-r}(\omega_{A/R}^\bullet)_\mathfrak m =
+\Hom_A(\omega_R \otimes_R A, H^{-d - r}(\omega_A^\bullet))_\mathfrak m
+$$
+でもある。補題 \ref{dualizing-lemma-depth-dualizing-module} により
+$H^{-d - r}(\omega_A^\bullet)_\mathfrak m$ は $(S_2)$ なので、『代数の続論』の補題 \ref{more-algebra-lemma-hom-into-S2} により最後の主張が成り立つ。
+\end{proof}
+
+
+
+\section{双対化複体についての補足}
+\label{dualizing-section-more-dualizing}
+
+\noindent
+ほかの場所には収まりにくいいくつかの補題を述べる。
+
+\begin{lemma}
+\label{dualizing-lemma-descent}
+$A \to B$ を Noether 環の忠実平坦写像とする。$K \in D(A)$ で、
+$K \otimes_A^\mathbf{L} B$ が $B$ の双対化複体ならば、$K$ は $A$ の双対化複体である。
+\end{lemma}
+
+\begin{proof}
+$A \to B$ は平坦なので $H^i(K) \otimes_A B = H^i(K \otimes_A^\mathbf{L} B)$ である。
+$K \otimes_A^\mathbf{L} B$ は $D^b_{\textit{Coh}}(B)$ に属するので、まず $K$ が $D^b(A)$ に
+属することが分かり、次に『可換代数』の補題 \ref{algebra-lemma-descend-properties-modules} により
+$H^i(K)$ が有限 $A$-加群であることが分かる。$M$ を有限 $A$-加群とする。このとき『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} により
+$$
+R\Hom_A(M, K) \otimes_A B = R\Hom_B(M \otimes_A B, K \otimes_A^\mathbf{L} B)
+$$
+である。$K \otimes_A^\mathbf{L} B$ は有限入射次元、例えば $[a, b]$ に入射振幅をもつので、
+右辺の次数 $> b$ のコホモロジーは消滅する。$A \to B$ は忠実平坦なので、
+$R\Hom_A(M, K)$ の次数 $> b$ のコホモロジーも消滅する。従って『代数の続論』の補題 \ref{more-algebra-lemma-injective-amplitude} により $K$ は有限入射次元をもつ。証明を終えるには写像
+$A \to R\Hom_A(K, K)$ が同型であることを示せばよい。このため再び『代数の続論』の補題 \ref{more-algebra-lemma-base-change-RHom} と、写像
+$B \to R\Hom_B(K \otimes_A^\mathbf{L} B, K \otimes_A^\mathbf{L} B)$ が同型であることを用いる。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-descent-ascent}
+$\varphi : A \to B$ を Noether 環の準同型とする。次のいずれかを仮定する。
+\begin{enumerate}
+\item $A \to B$ は syntomic で、スペクトル上に全射を誘導する。
+\item $A \to B$ は忠実平坦な局所完全交叉である。
+\item $A \to B$ は Gorenstein ファイバーをもつ忠実平坦有限型写像である。
+\end{enumerate}
+このとき $K \in D(A)$ が $A$ の双対化複体であることと
+$K \otimes_A^\mathbf{L} B$ が $B$ の双対化複体であることは同値である。
+\end{lemma}
+
+\begin{proof}
+『代数の続論』の補題 \ref{more-algebra-lemma-syntomic-lci} により、$A \to B$ が (1) を満たすことと
+$A \to B$ が (2) を満たすことは同値である。(2), (3) のどちらでも相対双対化複体
+$\varphi^!(A) = \omega_{B/A}^\bullet$ は $D(B)$ の可逆対象である；補題 \ref{dualizing-lemma-lci-shriek} および \ref{dualizing-lemma-gorenstein-shriek} を参照。また両方の場合に
+$\varphi^!(K) = K \otimes_A^\mathbf{L} \omega_{B/A}^\bullet$ である；(3) については補題 \ref{dualizing-lemma-upper-shriek-is-tensor-functor} を参照。従って $\varphi^!(K)$ は、$D(B)$ の可逆対象を
+テンソルすることを除けば $K \otimes_A^\mathbf{L} B$ と同じである。ゆえに
+$\varphi^!(K)$ が $B$ の双対化複体であることと $K \otimes_A^\mathbf{L} B$ がそうであることは
+同値である（双対化複体であることは局所的で、シフトで不変である）。従って $K$ が $A$ の
+双対化複体ならば、補題 \ref{dualizing-lemma-shriek-dualizing-algebraic} により
+$K \otimes_A^\mathbf{L} B$ は $B$ の双対化複体である。性質の下降には補題 \ref{dualizing-lemma-descent} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-hull-goes-up}
+$(A, \mathfrak m, \kappa) \to (B, \mathfrak n, l)$ を、
+$\mathfrak n = \mathfrak m B$ を満たす Noether 環の平坦局所準同型とする。$E$ が
+$\kappa$ の入射包絡ならば、$E \otimes_A B$ は $l$ の入射包絡である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-union-artinian} におけるように $E = \bigcup E_n$ と書く。
+$E_n \otimes_{A/\mathfrak m^n} B/\mathfrak n^n$ が $B/\mathfrak n$ 上の $l$ の入射包絡であることを
+示せば十分である。これにより $A$, $B$ が Artin 局所環である場合に帰着する。『可換代数』の補題 \ref{algebra-lemma-pullback-module} により
+$\text{length}_A(A) = \text{length}_B(B)$ および
+$\text{length}_A(E) = \text{length}_B(E \otimes_A B)$ である。補題 \ref{dualizing-lemma-finite} により
+$\text{length}_A(E) = \text{length}_A(A)$ であり、$E'$ を $B$ 上の $l$ の入射包絡とすると
+$\text{length}_B(E') = \text{length}_B(B)$ である。従って
+$\text{length}_B(E') = \text{length}_B(E \otimes_A B)$ と結論する。また
+$$
+\dim_l((E \otimes_A B)[\mathfrak n]) =
+\dim_l(E[\mathfrak m] \otimes_A B) =
+\dim_\kappa(E[\mathfrak m]) = 1
+$$
+である。ここでは $A \to B$ の平坦性と $\mathfrak n = \mathfrak mB$ を用いた。従って補題 \ref{dualizing-lemma-torsion-submodule-sum-injective-hulls} により単射 $B$-加群写像
+$E \otimes_A B \to E'$ が存在する。上で示した長さの等しさにより、これは同型である。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-injective-goes-up}
+$\varphi : A \to B$ を Noether 環の平坦準同型で、すべての素イデアル $\mathfrak q \subset B$ に対して
+$\mathfrak p = \varphi^{-1}(\mathfrak q)$ とおくと
+$\mathfrak p B_\mathfrak q = \mathfrak qB_\mathfrak q$ となるものとする。例えば $\varphi$ が
+\'etale ならばよい。$I$ が入射 $A$-加群ならば、$I \otimes_A B$ は入射 $B$-加群である。
+\end{lemma}
+
+\begin{proof}
+\'Etale 写像は『可換代数』の補題 \ref{algebra-lemma-etale-at-prime} により仮定を満たす。補題 \ref{dualizing-lemma-sum-injective-modules} と命題 \ref{dualizing-proposition-structure-injectives-noetherian} により、ある素イデアル
+$\mathfrak p \subset A$ に対する $\kappa(\mathfrak p)$ の入射包絡が $I$ であると仮定してよい。
+このとき $I$ は $A_\mathfrak p$ 上の加群である。補題 \ref{dualizing-lemma-injective-flat} により、
+$I \otimes_A B = I \otimes_{A_\mathfrak p} B_\mathfrak p$ が $B_\mathfrak p$-加群として入射であることを
+証明すれば十分である。従って $(A, \mathfrak m, \kappa)$ は Noether 局所環で、$I = E$ は剰余体
+$\kappa$ の入射包絡であると仮定してよい。仮定から Noether 環 $B/\mathfrak m B$ は体の積である
+（詳細は省略する）。従って $B$ において $\mathfrak m$ の上にある素イデアル
+$\mathfrak m_1, \ldots, \mathfrak m_n$ は有限個で、すべて極大イデアルである。補題 \ref{dualizing-lemma-union-artinian} におけるように $E = \bigcup E_n$ と書く。このとき
+$E \otimes_A B = \bigcup E_n \otimes_A B$ であり、$E_n \otimes_A B$ は台
+$\{\mathfrak m_1, \ldots, \mathfrak m_n\}$ をもつ有限 $B$-加群なので、各
+$\mathfrak m_i$ における局所化の積に分解する。従って
+$E \otimes_A B = \prod (E \otimes_A B)_{\mathfrak m_i}$ である。補題 \ref{dualizing-lemma-injective-hull-goes-up} により
+$(E \otimes_A B)_{\mathfrak m_i} = E \otimes_A B_{\mathfrak m_i}$ は
+$\mathfrak m_i$ の剰余体の入射包絡なので、結論を得る。
+\end{proof}
+
+
+
+
+
+
+\section{相対双対化複体}
+\label{dualizing-section-relative-dualizing-complexes}
+
+\noindent
+Noether 環の有限型環写像 $\varphi : R \to A$ に対しては、第 \ref{dualizing-section-relative-dualizing-complexes-Noetherian} 節で考察した相対双対化複体
+$\omega_{A/R}^\bullet = \varphi^!(R)$ がある。$R$ が Noether でなければ、同様に構成した
+複体は一般には良い性質をもたない。本節では、非 Noether 環の平坦かつ有限表示な環写像
+$R \to A$ に対する相対双対化複体を定義する。この定義は、スキームの平坦かつ有限表示な射へ
+大域化できるように選ばれている；『スキームの双対性』の第 \ref{duality-section-relative-dualizing-complexes} 節を参照する。相対双対化複体が
+（定義を適用できる場合に）存在し、（非標準的な）同型を除いて一意であり、Noether の場合には
+第 \ref{dualizing-section-relative-dualizing-complexes-Noetherian} 節の複体が回収されることを示す。
+
+\medskip\noindent
+Noether の場合だけに関心のある読者は、本節を飛ばして差し支えない。
+
+\begin{definition}
+\label{dualizing-definition-relative-dualizing-complex}
+$R \to A$ を平坦かつ有限表示な環写像とする。{\it 相対双対化複体}とは、次を満たす対象
+$K \in D(A)$ のことである。
+\begin{enumerate}
+\item $K$ は $R$-完全であり（『代数の続論』の定義 \ref{more-algebra-definition-relatively-perfect}）、
+\item $R\Hom_{A \otimes_R A}(A, K \otimes_A^\mathbf{L} (A \otimes_R A))$
+は $A$ と同型である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義を理解するには、以下の補題のいくつかを読んで理解する必要があるかもしれない。補題 \ref{dualizing-lemma-relative-dualizing-noetherian} および \ref{dualizing-lemma-uniqueness-relative-dualizing} は、この定義が第 \ref{dualizing-section-relative-dualizing-complexes-Noetherian} 節の定義と矛盾しないことを示す。
+
+\begin{lemma}
+\label{dualizing-lemma-uniqueness-relative-dualizing}
+$R \to A$ を平坦かつ有限表示な環写像とする。$R \to A$ に対する任意の二つの
+相対双対化複体は同型である。
+\end{lemma}
+
+\begin{proof}
+$K$ と $L$ を $R \to A$ に対する二つの相対双対化複体とする。第一および第二余射影
+$A \to A \otimes_R A$ による導来底変換を、それぞれ
+$K_1 = K \otimes_A^\mathbf{L} (A \otimes_R A)$ および
+$L_2 = (A \otimes_R A) \otimes_A^\mathbf{L} L$ と記す。対称性により、$L_2$ に関する仮定から
+$R\Hom_{A \otimes_R A}(A, L_2)$ は $A$ と同型である。『代数の続論』の補題 \ref{more-algebra-lemma-internal-hom-evaluate-tensor-isomorphism} の (3) を二度適用すると
+$$
+A \otimes_{A \otimes_R A}^\mathbf{L} L_2 \cong
+R\Hom_{A \otimes_R A}(A, K_1 \otimes_{A \otimes_R A}^\mathbf{L} L_2) \cong
+A \otimes_{A \otimes_R A}^\mathbf{L} K_1
+$$
+を得る。いずれかの余射影に関する制限関手 $D(A \otimes_R A) \to D(A)$ を適用すれば、
+求める結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-noetherian}
+$\varphi : R \to A$ を Noether 環の平坦有限型環写像とする。このとき第 \ref{dualizing-section-relative-dualizing-complexes-Noetherian} 節の相対双対化複体
+$\omega_{A/R}^\bullet = \varphi^!(R)$ は、定義 \ref{dualizing-definition-relative-dualizing-complex} の意味でも相対双対化複体である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dualizing-lemma-relative-dualizing-algebraic} より、$\varphi^!(R)$ は $R$-完全である。
+乗法写像を $\delta : A \otimes_R A \to A$、余射影を
+$p_1, p_2 : A \to A \otimes_R A$ と記す。すると補題 \ref{dualizing-lemma-flat-bc} により
+$$
+\varphi^!(R) \otimes_A^\mathbf{L} (A \otimes_R A) =
+\varphi^!(R) \otimes_{A, p_1}^\mathbf{L} (A \otimes_R A) =
+p_2^!(A)
+$$
+である。
+$
+R\Hom_{A \otimes_R A}(A, \varphi^!(R) \otimes_A^\mathbf{L} (A \otimes_R A))
+$
+は、$\delta^!(\varphi^!(R) \otimes_A^\mathbf{L} (A \otimes_R A))$ を制限写像
+$\delta_* : D(A) \to D(A \otimes_R A)$ で送った像であることを思い出そう。第 \ref{dualizing-section-relative-dualizing-complex-algebraic} 節の $\delta^!$ の定義と補題 \ref{dualizing-lemma-RHom-ext} を用いる。補題 \ref{dualizing-lemma-composition-shriek-algebraic} により
+$\delta^!(p_2^!(A)) \cong A$ なので、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-base-change-relative-dualizing}
+$R \to A$ を平坦かつ有限表示な環写像とする。このとき次が成り立つ。
+\begin{enumerate}
+\item $D(A)$ に相対双対化複体 $K$ が存在する。
+\item 任意の環写像 $R \to R'$ に対し $A' = A \otimes_R R'$ および
+$K' = K \otimes_A^\mathbf{L} A'$ とおくと、$K'$ は $R' \to A'$ に対する
+相対双対化複体である。
+\end{enumerate}
+さらに
+$$
+\xi : A \longrightarrow K \otimes_A^\mathbf{L} (A \otimes_R A)
+$$
+が巡回加群
+$\Hom_{D(A \otimes_R A)}(A, K \otimes_A^\mathbf{L} (A \otimes_R A))$
+の生成元ならば、(2) において $\xi$ を
+$A \otimes_R A \to A' \otimes_{R'} A'$ により導来底変換したものは、巡回加群
+$\Hom_{D(A' \otimes_{R'} A')}(A',
+K' \otimes_{A'}^\mathbf{L} (A' \otimes_{R'} A'))$
+の生成元である。
+\end{lemma}
+
+\begin{proof}
+まず Noether の場合に帰着する。『可換代数』の補題 \ref{algebra-lemma-flat-finite-presentation-limit-flat} により、有限型
+$\mathbf{Z}$-部分代数 $R_0 \subset R$ と平坦有限型環写像 $R_0 \to A_0$ で
+$A = A_0 \otimes_{R_0} R$ を満たすものが存在する。補題 \ref{dualizing-lemma-relative-dualizing-noetherian} により相対双対化複体
+$K_0 \in D(A_0)$ が存在する。従って $K_0$ に対して (2) を示せば、導来底変換の推移性により
+$K_0 \otimes_{A_0}^\mathbf{L} A$ は $R \to A$ に対する双対化複体であり、かつ (2) も満たす。
+すると相対双対化複体の一意性（補題 \ref{dualizing-lemma-uniqueness-relative-dualizing}）により、
+これは任意の相対双対化複体について成り立つ。
+
+\medskip\noindent
+$R$ を Noether とし、$K$ を $R \to A$ に対する相対双対化複体とする。環写像
+$R \to R'$ が与えられたとき、$A' = A \otimes_R R'$ および
+$K' = K \otimes_A^\mathbf{L} A'$ とおく。証明を終えるには、$K'$ が
+$R' \to A'$ に対する相対双対化複体であることを示せばよい。『代数の続論』の補題 \ref{more-algebra-lemma-base-change-relatively-perfect} により、いずれの場合にも
+$K'$ は $R'$-完全である。補題 \ref{dualizing-lemma-base-change-relative-algebraic} および \ref{dualizing-lemma-relative-dualizing-noetherian} により、$R'$ が Noether ならば $K'$ は
+$R' \to A'$ に対する（いずれの意味でも）相対双対化複体である。導来テンソル積の推移性から
+$K \otimes_A^\mathbf{L} (A \otimes_R A)
+\otimes_{A \otimes_R A}^\mathbf{L} (A' \otimes_{R'} A') =
+K' \otimes_{A'}^\mathbf{L} (A' \otimes_{R'} A')$
+である。$R \to A$ の平坦性により
+$A \otimes_{A \otimes_R A}^\mathbf{L} (A' \otimes_{R'} A') = A'$
+が保証される。実際、$A \otimes_R A$ と $R'$ は $R$ 上 Tor 独立なので、『代数の続論』の補題 \ref{more-algebra-lemma-base-change-comparison} を適用できる。最後に『代数の続論』の補題 \ref{more-algebra-lemma-more-relative-pseudo-coherent-is-moot} により、$A$ は
+$A \otimes_R A$-加群として擬コヒーレントである。従って『代数の続論』の補題 \ref{more-algebra-lemma-compute-RHom-relatively-perfect} のすべての仮定を確認できた。
+$R$-平坦な有限表示 $A \otimes_R A$-加群からなる下に有界な複体
+$E^\bullet$ で、$E^\bullet \otimes_R R'$ が
+$R\Hom_{A' \otimes_{R'} A'}(A',
+K' \otimes_{A'}^\mathbf{L} (A' \otimes_{R'} A'))$
+を表し、これらの同一視が導来底変換と両立するものが存在する。
+$n \in \mathbf{Z}$, $n \not = 0$ とし、完全列
+$$
+E^{n - 1} \to E^n \to Q^n \to 0
+$$
+により $Q^n$ を定める。$\kappa(\mathfrak p)$ は Noether 環なので、上の注意により
+$H^n(E^\bullet \otimes_R \kappa(\mathfrak p)) = 0$ である。図式追跡により、これは
+$$
+Q^n \otimes_R \kappa(\mathfrak p) \to E^{n + 1} \otimes_R \kappa(\mathfrak p)
+$$
+が単射であることを意味する。従って $\mathfrak p$ の上にある
+$A \otimes_R A$ の素イデアル $\mathfrak q$ に対し、$Q^n_\mathfrak q$ は
+$R_\mathfrak p$-平坦であり、
+$Q^n_\mathfrak p \to E^{n + 1}_\mathfrak q$ は $R_\mathfrak p$-普遍単射である；『可換代数』の補題 \ref{algebra-lemma-mod-injective} を参照する。これはすべての素イデアルについて
+成り立つので、$Q^n$ は $R$-平坦であり、$Q^n \to E^{n + 1}$ は
+$R$-普遍単射である。特に任意の環写像 $R \to R'$ に対して
+$H^n(E^\bullet \otimes_R R') = 0$ である。$Z^0 = \Ker(E^0 \to E^1)$ とおく。完全列
+$0 \to Z^0 \to E^0 \to E^1 \to Q^1 \to 0$ があるので、$Z^0$ は $R$-平坦であり、
+すべての $R \to R'$ に対して
+$Z^0 \otimes_R R' = \Ker(E^0 \otimes_R R' \to E^1 \otimes_R R')$
+である。そこで短完全列
+$0 \to Q^{-1} \to Z^0 \to H^0(E^\bullet) \to 0$
+から
+$$
+H^0(E^\bullet \otimes_R R') = H^0(E^\bullet) \otimes_R R'
+= A \otimes_R R' = A'
+$$
+を得る。これは求める等式であり、さらに補題の最後の主張も与える。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-RHom}
+$R \to A$ を平坦かつ有限表示な環写像とし、$K$ を相対双対化複体とする。このとき
+$A \to R\Hom_A(K, K)$ は同型である。
+\end{lemma}
+
+\begin{proof}
+『可換代数』の補題 \ref{algebra-lemma-flat-finite-presentation-limit-flat} により、有限型
+$\mathbf{Z}$-部分代数 $R_0 \subset R$ と平坦有限型環写像 $R_0 \to A_0$ で
+$A = A_0 \otimes_{R_0} R$ を満たすものが存在する。補題 \ref{dualizing-lemma-uniqueness-relative-dualizing}、\ref{dualizing-lemma-relative-dualizing-noetherian} および \ref{dualizing-lemma-base-change-relative-dualizing} により、相対双対化複体
+$K_0 \in D(A_0)$ で、その導来底変換が $K$ となるものが存在する。これで次の段落の状況に帰着する。
+
+\medskip\noindent
+$R$ を Noether とし、$K$ を $R \to A$ に対する相対双対化複体とする。環写像
+$R \to R'$ が与えられたとき、$A' = A \otimes_R R'$ および
+$K' = K \otimes_A^\mathbf{L} A'$ とおく。証明を終えるため
+$R\Hom_{A'}(K', K') = A'$ を示す。補題 \ref{dualizing-lemma-relative-dualizing-algebraic} により、
+$R'$ が Noether ならばこれは成り立つ。一般の $R'$ は Noether
+$R$-代数のフィルター付き余極限なので、『代数の続論』の補題 \ref{more-algebra-lemma-colimit-relatively-perfect} により結果を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dualizing-lemma-relative-dualizing-composition}
+$R \to A \to B$ を平坦かつ有限表示な環写像とする。$K_{A/R}$ および $K_{B/A}$ を、
+それぞれ $R \to A$ および $A \to B$ に対する相対双対化複体とする。このとき
+$K = K_{A/R} \otimes_A^\mathbf{L} K_{B/A}$ は $R \to B$ に対する相対双対化複体である。
+\end{lemma}
+
+\begin{proof}
+Noether の場合への帰着を用いる。すなわち『可換代数』の補題 \ref{algebra-lemma-flat-finite-presentation-limit-flat} により、有限型
+$\mathbf{Z}$-部分代数 $R_0 \subset R$ と平坦有限型環写像 $R_0 \to A_0$ で
+$A = A_0 \otimes_{R_0} R$ を満たすものが存在する。$R_0$ を大きくし、それに応じて
+$A_0$ を置き換えることにより、$B = B_0 \otimes_{R_0} R$ を満たす平坦有限型環写像
+$A_0 \to B_0$ が存在すると仮定してよい（同じ補題を用いる）。
+$R_0 \to A_0 \to B_0$ に対して補題を証明すれば、補題 \ref{dualizing-lemma-uniqueness-relative-dualizing}、\ref{dualizing-lemma-relative-dualizing-noetherian} および \ref{dualizing-lemma-base-change-relative-dualizing} により補題が従う。これで次の段落の状況に帰着する。
+
+\medskip\noindent
+$R$ を Noether とし、与えられた環写像を $\varphi : R \to A$ および
+$\psi : A \to B$ と記す。上で挙げた結果により
+$K_{A/R} \cong \varphi^!(R)$ および $K_{B/A} \cong \psi^!(A)$ である。すると
+$$
+K = K_{A/R} \otimes_A^\mathbf{L} K_{B/A} \cong
+\varphi^!(R) \otimes_A^\mathbf{L} \psi^!(A) \cong
+\psi^!(\varphi^!(R)) \cong (\psi \circ \varphi)^!(R)
+$$
+である；補題 \ref{dualizing-lemma-upper-shriek-is-tensor-functor} および \ref{dualizing-lemma-composition-shriek-algebraic} を用いた。従って $K$ は $R \to B$ に対する
+相対双対化複体である。
+\end{proof}

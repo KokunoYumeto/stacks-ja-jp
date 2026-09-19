@@ -1,0 +1,4849 @@
+% Generated mechanically from frozen input inputs/p08/ja/decent-spaces.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{67}
+\chapter{良好な代数空間}
+
+
+
+\phantomsection
+\label{decent-spaces-section-phantom}
+
+
+\section{はじめに}
+\label{decent-spaces-section-introduction}
+
+\noindent
+本章では、一般の代数空間、すなわち準分離的とは限らない代数空間の
+「局所的」性質を研究する。準分離的代数空間は \cite{Kn} で研究されている。
+より一般の代数空間では、とりわけ点および点の特殊化に関して、本質的に
+新しい現象が生じることが分かる。一方、代数空間に関する基本的な結果の
+大部分ではこれらの現象を気にする必要がない。このため、この内容を理論の
+標準的な展開に続く独立した章に置くことにした。
+
+
+
+\section{規約}
+\label{decent-spaces-section-conventions}
+
+\noindent
+すべてのスキームは大 fppf サイト $\Sch_{fppf}$ に含まれるものと仮定する。
+また、考えるすべての環 $A$ は、$\Spec(A)$ がこの大サイトの対象と
+（同型で）あるという性質をもつものとする。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。本章および次章では、
+$X$ 自身との積（$S$ 上の代数空間の圏における積）を $X \times X$ ではなく
+$X \times_S X$ と書く。
+
+
+
+\section{普遍的に有界なファイバー}
+\label{decent-spaces-section-universally-bounded}
+
+\noindent
+スキームから代数空間への射が普遍的に有界なファイバーをもつとは
+何を意味するかを簡潔に論じる。スキームの射に対する同様の定義と結果は、
+Morphisms, Section \ref{morphisms-section-universally-bounded}
+を参照せよ。
+
+\begin{definition}
+\label{decent-spaces-definition-universally-bounded}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とし、$U$ を $S$ 上の
+スキームとする。$f : U \to X$ を $S$ 上の射とする。任意の体 $k$ と
+任意の射 $\Spec(k) \to X$ に対し、ファイバー積
+$\Spec(k) \times_X U$ が $k$ 上有限で、その $k$ 上の次数が $\leq n$ となるような
+整数 $n$ が存在するとき、{\it $f$ のファイバーは普遍的に有界である}
+\footnote{これはおそらく標準的な用語ではない。}という。
+\end{definition}
+
+\noindent
+% P08-E269: frozen source's undefined Y and mismatched factors preserved; see ERRATA_CANDIDATES.jsonl.
+ファイバー積 $\Spec(k) \times_Y X$ はスキームなので、この定義には意味がある。
+さらに、$Y$ がスキームならば、Morphisms, Definition
+\ref{morphisms-definition-universally-bounded} の概念が、Morphisms, Lemma
+\ref{morphisms-lemma-characterize-universally-bounded} により得られる。
+
+\begin{lemma}
+\label{decent-spaces-lemma-composition-universally-bounded}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。
+$V \to U$ を $S$ 上のスキームの射とし、$U \to X$ を $U$ から $X$ への
+射とする。$V \to U$ および $U \to X$ のファイバーが普遍的に有界ならば、
+$V \to X$ のファイバーも普遍的に有界である。
+\end{lemma}
+
+\begin{proof}
+$V \to U$ に対して成り立つ整数を $n$ とし、Definition
+\ref{decent-spaces-definition-universally-bounded} において $U \to X$ に対して
+成り立つ整数を $m$ とする。$k$ を体とし、射 $\Spec(k) \to X$ を取る。
+射
+$$
+\Spec(k) \times_X V
+\longrightarrow
+\Spec(k) \times_X U
+\longrightarrow
+\Spec(k).
+$$
+を考える。仮定により、スキーム $\Spec(k) \times_X U$ は $k$ 上有限で
+次数は高々 $m$ であり、$n$ は第一の射のファイバーの次数を抑える整数である。
+したがって Morphisms, Lemma
+\ref{morphisms-lemma-composition-universally-bounded} により、
+$\Spec(k) \times_X V$ は $k$ 上有限で次数は高々 $nm$ である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-base-change-universally-bounded}
+$S$ をスキームとする。$Y \to X$ を $S$ 上の代数空間の表現可能な射とする。
+$U \to X$ を $X$ へのスキームからの射とする。$U \to X$ のファイバーが
+普遍的に有界ならば、$U \times_X Y \to Y$ のファイバーも普遍的に有界である。
+\end{lemma}
+
+\begin{proof}
+これは定義とファイバー積の性質から明らかである。
+（$Y \to X$ を表現可能と仮定したので $U \times_X Y$ はスキームであり、
+したがって定義を適用できることに注意。）
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-descent-universally-bounded}
+$S$ をスキームとする。$g : Y \to X$ を $S$ 上の代数空間の表現可能な射とし、
+$f : U \to X$ を $X$ へのスキームからの射とする。$f$ の基底変換を
+$f' : U \times_X Y \to Y$ とする。その像について
+$$
+\Im(|f| : |U| \to |X|) \subset \Im(|g| : |Y| \to |X|)
+$$
+が成り立ち、$f'$ が普遍的に有界なファイバーをもつならば、$f$ も普遍的に有界な
+ファイバーをもつ。
+\end{lemma}
+
+\begin{proof}
+$f'$ に対して Definition \ref{decent-spaces-definition-universally-bounded} の意味で
+$\Spec(k) \times_Y (U \times_X Y)$ のファイバー積の次数を抑える整数
+$n \geq 0$ を取る。この整数 $n$ が $f$ に対しても働くことを示す。
+$x : \Spec(k) \to X$ を体のスペクトルからの射とする。このとき
+$\Spec(k) \times_X U$ が空ならば示すことはない。空でなければ $x$ は $|f|$ の像に属する。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} と補題の仮定により、これはある体拡大
+$k'/k$ と可換図式
+$$
+\xymatrix{
+\Spec(k') \ar[r] \ar[d] & Y \ar[d] \\
+\Spec(k) \ar[r] & X
+}
+$$
+が存在することを意味する。したがって
+$$
+\Spec(k') \times_Y (U \times_X Y) =
+\Spec(k') \times_{\Spec(k)} (\Spec(k) \times_X U)
+$$
+である。スキーム $\Spec(k') \times_Y (U \times_X Y)$ は仮定により
+$k'$ 上有限で次数 $\leq n$ なので、$\Spec(k) \times_X U$ も $k$ 上有限で
+次数 $\leq n$ であることが従う。（細部は省略する。）
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-universally-bounded-permanence}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。可換図式
+$$
+\xymatrix{
+U \ar[rd]_g \ar[rr]_f & & V \ar[ld]^h \\
+& X &
+}
+$$
+を考える。ここで $U$ と $V$ はスキームである。$g$ が普遍的に有界なファイバーを
+もち、$f$ が全射平坦ならば、$h$ も普遍的に有界なファイバーをもつ。
+\end{lemma}
+
+\begin{proof}
+$g$ が普遍的に有界なファイバーをもち、$f$ が全射平坦だとする。
+Definition \ref{decent-spaces-definition-universally-bounded} の意味で、スキーム
+$\Spec(k) \times_X U$ の次数を抑える整数 $n \geq 0$ を取る。この整数 $n$ が $h$ に対しても
+働くことを示す。体のスペクトルから $X$ への射 $\Spec(k) \to X$ を取ると、
+スキームの射
+$$
+\Spec(k) \times_X V \longrightarrow \Spec(k) \times_X U
+$$
+を考えられる。これは平坦かつ全射である。仮定により左辺のスキームは
+$\Spec(k)$ 上有限で次数 $\leq n$ である。したがって Morphisms, Lemma
+\ref{morphisms-lemma-universally-bounded-permanence} により、右辺のスキームの次数も
+$n$ で抑えられる。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-universally-bounded-finite-fibres}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間、$U$ を $S$ 上のスキームとし、
+$\varphi : U \to X$ を $S$ 上の射とする。$\varphi$ のファイバーが普遍的に有界ならば、
+$|U| \to |X|$ の各ファイバーが高々 $n$ 個の元をもつような整数 $n$ が存在する。
+\end{lemma}
+
+\begin{proof}
+Definition \ref{decent-spaces-definition-universally-bounded} の整数 $n$ が働く。実際、
+$x \in |X|$ を取り、$x$ を射 $x : \Spec(k) \to X$ で表す。このとき可換図式
+$$
+\xymatrix{
+\Spec(k) \times_X U \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r]^x & X
+}
+$$
+を得る。これは Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により、$|U|$ における $x$ の逆像が
+上の水平射の像であることを示す。$\Spec(k) \times_X U$ は $k$ 上有限で次数
+$\leq n$ なので、点は高々 $n$ 個である。
+\end{proof}
+
+
+
+
+
+
+
+\section{有限性条件と点}
+\label{decent-spaces-section-points-monomorphisms}
+
+\noindent
+本節では、点が体のスペクトルから空間への単射によって表現されるのは
+どのような場合か、という問題を詳しく調べる。
+
+\begin{remark}
+\label{decent-spaces-remark-recall}
+次の補題を証明する前に、スキームのエタール射に関するいくつかの事実を
+思い出しておこう。
+\begin{enumerate}
+\item エタール射は平坦であり、したがって一般化はエタール射に沿って
+持ち上がる（Morphisms, Lemmas \ref{morphisms-lemma-etale-flat}
+および \ref{morphisms-lemma-generalizations-lift-flat}）。
+\item エタール射は不分岐であり、不分岐射は局所準有限であるから、
+そのファイバーは離散的である（Morphisms, Lemmas
+\ref{morphisms-lemma-flat-unramified-etale},
+\ref{morphisms-lemma-unramified-quasi-finite}, および
+\ref{morphisms-lemma-quasi-finite-at-point-characterize}）。
+\item 準コンパクトなエタール射は準有限であり、とくに有限なファイバーをもつ
+（Morphisms, Lemmas \ref{morphisms-lemma-quasi-finite-locally-quasi-compact}
+および \ref{morphisms-lemma-quasi-finite}）。
+\item 体 $k$ 上のエタール・スキームは、$k$ の有限分離拡大のスペクトルの
+非交和である（Morphisms, Lemma \ref{morphisms-lemma-etale-over-field}）。
+\end{enumerate}
+エタール射の一般論については、\'Etale Morphisms, Section
+\ref{etale-section-etale-morphisms} を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{decent-spaces-lemma-U-finite-above-x}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$x \in |X|$ とする。次の条件は同値である。
+\begin{enumerate}
+\item スキームの族 $U_i$ とエタール射 $\varphi_i : U_i \to X$ が存在し、
+$\coprod \varphi_i : \coprod U_i \to X$ は全射で、各 $i$ に対して
+$x$ 上の $|U_i| \to |X|$ のファイバーは有限である。
+\item 任意のアフィン・スキーム $U$ とエタール射 $\varphi : U \to X$ に対し、
+$x$ 上の $|U| \to |X|$ のファイバーは有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1) は自明である。(1) のようなエタール射の族
+$\varphi_i : U_i \to X$ を取る。アフィン・スキームから $X$ への
+エタール射 $\varphi : U \to X$ を取る。ファイバー積の図式
+$$
+\xymatrix{
+U \times_X U_i \ar[r]_-{p_i} \ar[d]_{q_i} & U_i \ar[d]^{\varphi_i} \\
+U \ar[r]^\varphi & X
+}
+\quad \quad
+\xymatrix{
+\coprod U \times_X U_i \ar[r]_-{\coprod p_i} \ar[d]_{\coprod q_i} &
+\coprod U_i \ar[d]^{\coprod \varphi_i} \\
+U \ar[r]^\varphi & X
+}
+$$
+を考える。$q_i$ はエタールなので開写像である（Remark
+\ref{decent-spaces-remark-recall} を参照）。さらに、射 $\coprod q_i$ は全射である。
+したがって、有限個の添字 $i_1, \ldots, i_n$ と、$U$ 上へ全射となる
+準コンパクト開集合 $W_{i_j} \subset U \times_X U_{i_j}$ が存在する。
+$p_i$ はエタールであり、したがって局所準有限である（上のエタール射に
+関する注意を参照）。ゆえに Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}
+を適用でき、
+% P08-E271: frozen source's codomain U_i is preserved; see ERRATA_CANDIDATES.jsonl.
+$p_{i_j}|_{W_{i_j}} : W_{i_j} \to U_i$ のファイバーは有限である。
+したがって Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} と $\varphi_i$ に関する仮定から、
+$x$ 上の $\varphi$ のファイバーは有限である。すなわち (2) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-R-finite-above-x}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$x \in |X|$ とする。次の条件は同値である。
+\begin{enumerate}
+\item スキーム $U$、エタール射 $\varphi : U \to X$、および $x$ に写る点
+$u, u' \in U$ が存在し、$R = U \times_X U$ とおくとき、
+$$
+|R| \to |U| \times_{|X|} |U|
+$$
+の $(u, u')$ 上のファイバーは有限である。
+\item 任意のスキーム $U$、エタール射 $\varphi : U \to X$、および $x$ に写る
+任意の点 $u, u' \in U$ に対し、$R = U \times_X U$ とおくとき、
+$$
+|R| \to |U| \times_{|X|} |U|
+$$
+の $(u, u')$ 上のファイバーは有限である。
+\item $x$ の同値類に属する射 $\Spec(k) \to X$ が存在し、$k$ は体であり、
+射影 $\Spec(k) \times_X \Spec(k) \to \Spec(k)$ はエタールかつ
+準コンパクトである。
+\item $x$ の同値類に属する単射 $\Spec(k) \to X$ が存在し、$k$ は体である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。すなわち、スキームから $X$ へのエタール射
+$\varphi : U \to X$ と、$x$ 上にある $U$ の点 $u, u'$ を取り、
+$|R| \to |U| \times_{|X|} |U|$ の $(u, u')$ 上のファイバーが有限集合であると
+仮定する。この証明では、点 $u = \Spec(\kappa(u))$ をスキームとみなす。
+$u \to U$, $u' \to U$ は単射なので（Schemes, Lemma
+\ref{schemes-lemma-injective-points-surjective-stalks}）、
+$u \times_X u' \to R = U \times_X U$ は単射である。この言葉では、仮定は
+$u \times_X u'$ がスキームで、その台位相空間が有限個の点をもつことを
+意味する。
+
+$\psi : W \to X$ をスキームから $X$ へのエタール射とし、
+$w, w' \in W$ を $x$ に写る $W$ の点とする。$w \times_X w'$ がスキームで、
+その台位相空間が有限個の点をもつことを示さなければならない。
+ファイバー積の図式
+$$
+\xymatrix{
+W \times_X U \ar[r]_p \ar[d]_q & U \ar[d]^\varphi \\
+W \ar[r]^\psi & X
+}
+$$
+を考える。$x$ は $u$ と $u'$ の像なので、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により、
+$q(\tilde w) = w$, $q(\tilde w') = w'$, $u = p(\tilde w)$,
+$u' = p(\tilde w')$ を満たす点 $\tilde w, \tilde w'$ を
+$W \times_X U$ 内に選べる。$p$, $q$ はエタールなので、Remark
+\ref{decent-spaces-remark-recall} により体の拡大
+$\kappa(w) \subset \kappa(\tilde w) \supset \kappa(u)$ および
+$\kappa(w') \subset \kappa(\tilde w') \supset \kappa(u')$ は有限分離である。
+すると可換図式
+% P08-E272: frozen source's lower-left X-product is preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+\xymatrix{
+w \times_X w' \ar[d] &
+\tilde w \times_X \tilde w' \ar[l] \ar[d] \ar[r] &
+u \times_X u' \ar[d] \\
+w \times_X w' &
+\tilde w \times_S \tilde w' \ar[l] \ar[r] &
+u \times_S u'
+}
+$$
+を得る。ここで各正方形はファイバー積である。下段の水平射はエタールかつ
+準コンパクトである。実際、$\Spec(k) \times_S \Spec(k')$ の形のスキームは
+すべてアフィンであり、上で見た体の拡大に関する事実が使える。
+したがって上段の水平矢印はエタールかつ準コンパクトであり、そのファイバーは
+有限である。すでに $|u \times_X u'|$ が有限であることを見たので、
+$|w \times_X w'|$ も有限である。すなわち (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。$U$ をスキームとし、$x$ が $|U| \to |X|$ の像に属するような
+エタール射 $U \to X$ を取る。$x$ に写る点 $u \in U$ を取る。前段落で、
+$u = \Spec(\kappa(u)) \to X$ は $u \times_X u$ の台位相空間が有限であるという
+性質をもつことを見た。一方、射影 $u \times_X u \to u$ は合成
+$$
+u \times_X u \longrightarrow
+u \times_X U \longrightarrow
+u \times_X X = u,
+$$
+すなわち単射（単射 $u \to U$ の基底変換）とエタール射（エタール射
+$U \to X$ の基底変換）の合成である。したがって $u \times_X U$ は
+$\kappa(u)$ の有限分離拡大のスペクトルの非交和である（Remark
+\ref{decent-spaces-remark-recall} を参照）。$u \times_X u$ は有限なので、その
+$u \times_X U$ における像は $\kappa(u)$ の有限分離拡大のスペクトルの
+有限非交和である。Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field} により、$u \times_X u$ 自身も
+$\kappa(u)$ の有限分離拡大のスペクトルの有限非交和である。
+すなわち $u \times_X u \to u$ は準コンパクトかつエタールである。
+これは (3) が成り立つことを意味する。
+
+\medskip\noindent
+(3) から (4) が従うことを示す。$x$ の同値類に属する、体のスペクトルから
+$X$ への射 $\Spec(k) \to X$ で、二つの射影
+$t, s : R = \Spec(k) \times_X \Spec(k)  \to \Spec(k)$ が
+準コンパクトかつエタールであるものを取る。とくに、$R$ は $\Spec(k)$ 上の
+エタール同値関係である。Spaces, Theorem \ref{spaces-theorem-presentation}
+により、商層 $X' = \Spec(k)/R$ は代数空間である。Groupoids, Lemma
+\ref{groupoids-lemma-quotient-groupoid-restrict} により、写像 $X' \to X$ は
+単射である。$s, t$ は準コンパクトなので $R$ は準コンパクトであり、
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-point-like-spaces}
+を $X'$ に適用できる。したがって、ある体 $k'$ に対して
+$X' = \Spec(k')$ である。ゆえに分解
+$$
+\Spec(k) \longrightarrow
+\Spec(k') \longrightarrow X
+$$
+を得る。これは $\Spec(k') \to X$ が $x \in |X|$ に写る単射であることを
+示す。すなわち (4) が成り立つ。
+
+\medskip\noindent
+最後に (4) から (1) が従うことを示す。$k$ を体とし、$x$ の同値類に属する
+単射 $\Spec(k) \to X$ を取る。スキーム $U$ から $X$ への全射エタール射
+$U \to X$ を取り、$x$ 上の点 $u \in U$ を取る。
+$\Spec(k) \times_X u$ は空でなく、$\Spec(k) \times_X u \to u$ は単射なので、
+$\Spec(k) \times_X u = u$ である（Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field} を参照）。したがって
+$u \to U \to X$ は $\Spec(k) \to X$ を経由する。図示すれば
+$$
+\xymatrix{
+u \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r] & X
+}
+$$
+となる。右の垂直矢印はエタールなので、$\kappa(u)/k$ は有限分離拡大である。
+したがって
+$$
+u \times_X u = u \times_{\Spec(k)} u
+$$
+は有限スキームであり、この証明の第一段落で述べた性質 (1) の意味から
+結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-weak-UR-finite-above-x}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$x \in |X|$ とする。
+$U$ をスキームとし、$\varphi : U \to X$ をエタール射とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $x$ は $|U| \to |X|$ の像に属し、$R = U \times_X U$ とおくとき、
+$$
+|U| \longrightarrow |X|
+\quad\text{および}\quad
+|R| \longrightarrow |X|
+$$
+の $x$ 上のファイバーはいずれも有限である。
+\item $x$ の同値類に属する単射 $\Spec(k) \to X$ が存在し、$k$ は体であり、
+ファイバー積 $\Spec(k) \times_X U$ は $k$ 上の空でない有限スキームである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。これは明らかに Lemma \ref{decent-spaces-lemma-R-finite-above-x} の第一条件を
+含意するので、$x$ の類に属する単射 $\Spec(k) \to X$ を得る。
+ファイバー積を取ると、$\Spec(k) \times_X U \to \Spec(k)$ は
+$\Spec(k)$ 上エタールなスキームで有限個の点をもち、したがって $k$ 上の
+空でない有限スキームである。すなわち (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。仮定により $x$ は $|U| \to |X|$ の像に属する。
+$x$ 上の $|U| \to |X|$ のファイバーは、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により
+$|\Spec(k) \times_X U|$ に等しいので有限である。
+$x$ 上の $|R| \to |X|$ のファイバーも、スキーム
+$$
+(\Spec(k) \times_X U) \times_{\Spec(k)} (\Spec(k) \times_X U)
+$$
+の台集合に等しく、これは $k$ 上有限なので、有限である。ゆえに (1) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-UR-finite-above-x}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$x \in |X|$ とする。次の条件は同値である。
+\begin{enumerate}
+\item 任意のアフィン・スキーム $U$ と任意のエタール射
+$\varphi : U \to X$ に対し、$R = U \times_X U$ とおくとき、
+$$
+|U| \longrightarrow |X|
+\quad\text{および}\quad
+|R| \longrightarrow |X|
+$$
+の $x$ 上のファイバーはいずれも有限である。
+\item スキーム $U_i$ とエタール射 $U_i \to X$ が存在し、
+$\coprod U_i \to X$ は全射で、各 $i$ に対して $R_i = U_i \times_X U_i$ と
+おくとき、
+$$
+|U_i| \longrightarrow |X|
+\quad\text{および}\quad
+|R_i| \longrightarrow |X|
+$$
+の $x$ 上のファイバーはいずれも有限である。
+\item $x$ の同値類に属する単射 $\Spec(k) \to X$ が存在し、$k$ は体であり、
+任意のアフィン・スキーム $U$ とエタール射 $U \to X$ に対し、
+ファイバー積 $\Spec(k) \times_X U$ は $k$ 上の有限スキームである。
+\item $x$ の同値類に属する準コンパクトな単射 $\Spec(k) \to X$ が存在し、
+$k$ は体である。
+\item $x$ の同値類に属する準コンパクトな射 $\Spec(k) \to X$ が存在し、
+$k$ は体である。
+\item $x$ の同値類に属する、体 $k$ からの任意の射 $\Spec(k) \to X$ は
+準コンパクトである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+すべてのアフィン $U$ からのエタール射 $U \to X$ に Lemma
+\ref{decent-spaces-lemma-weak-UR-finite-above-x} を適用すれば、(1) と (3) の同値性が従う。
+(3) が (2) を含意することは明らかである。(2) のような $U_i \to X$ と
+$R_i$ を仮定する。Lemma \ref{decent-spaces-lemma-U-finite-above-x} により、任意の
+アフィン・スキーム $U$ とエタール射 $U \to X$ に対し、$x$ 上の
+$|U| \to |X|$ のファイバーは有限である。このファイバーを
+$\{u_1, \ldots, u_n\}$ とする。$x$ が $|U_i| \to |X|$ の像に属するような
+ある $i$ に対して Lemma \ref{decent-spaces-lemma-R-finite-above-x} (1) を
+$U_i \to X$ に適用できるので、
+$|R = U \times_X U| \to |U| \times_{|X|} |U|$ の
+$(u_a, u_b)$ 上のファイバーは、$a, b \in \{1, \ldots, n\}$ に対して有限である。
+したがって $x$ 上の $|R| \to |X|$ のファイバーは有限である。
+これで (1) が成り立ち、(1), (2), (3) が同値であることが分かった。
+
+\medskip\noindent
+(4) が成り立つとする。このとき、任意のアフィン・スキーム $U$ とエタール射
+$U \to X$ に対し、スキーム $\Spec(k) \times_X U$ は一方では $k$ 上
+エタールであり（したがって Remark \ref{decent-spaces-remark-recall} により $k$ の
+有限分離拡大のスペクトルの非交和である）、他方では $U$ 上準コンパクトである
+（したがって準コンパクトである）。ゆえに (3) が成り立つ。
+逆に、$U_i \to X$ が (2) のようであり、$\Spec(k) \to X$ が (3) のような
+単射ならば、
+$$
+\coprod \Spec(k) \times_X U_i
+\longrightarrow
+\coprod U_i
+$$
+は準コンパクトである（各 $U_i$ 上で $\Spec(k) \times_X U_i$ は体の
+スペクトルの有限非交和だからである）。したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-local} により
+$\Spec(k) \to X$ は準コンパクトである。
+
+\medskip\noindent
+(4) が (5) を含意することは直ちに分かる。逆に、$x$ の同値類に属する
+準コンパクトな射 $\Spec(k) \to X$ を取り、$U$ をアフィンとして
+エタール射 $U \to X$ を取る。ファイバー積
+$$
+\xymatrix{
+F \ar[r] \ar[d] & U \ar[d] \\
+\Spec(k) \ar[r] & X
+}
+$$
+を考える。$F \to U$ は準コンパクトなので $F$ は準コンパクトである。
+一方、$F \to \Spec(k)$ はエタールなので、$F$ は $k$ の有限分離拡大の
+スペクトルの有限非交和である（Remark \ref{decent-spaces-remark-recall}）。
+$|F| \to |U|$ の像は $x$ 上の $|U| \to |X|$ のファイバーなので
+（Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}）、
+$x$ 上の $|U| \to |X|$ のファイバーは有限である。スキーム
+$F \times_{\Spec(k)} F$ も
+$\Spec(k)$ 上準コンパクトかつエタールなので、体のスペクトルの有限和である。
+単射 $F \times_X F \to F \times_{\Spec(k)} F$ があるから、Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field} により、$F \times_X F$ は
+体のスペクトルの有限非交和である。したがって
+$F \times_X F \to U \times_X U = R$ の像は有限である。
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-points-cartesian}
+により、この像は $x$ 上の $|R| \to |X|$ のファイバーなので、(1) が成り立つ。
+これで (1)--(5) が同値であることが分かった。
+
+\medskip\noindent
+(6) が (5) を含意することは明らかである。逆に、$\Spec(k) \to X$ が (4) の
+ようであると仮定し、$\Spec(k') \to X$ を $x$ の同値類に属する、体 $k'$ からの
+別の射とする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-equivalence-class-point-monomorphism} により、
+与えられた射は $\Spec(k') \to \Spec(k) \to X$ と分解する。
+これは準コンパクト射の合成なので、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-quasi-compact} により準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-U-universally-bounded}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。次の条件は同値である。
+\begin{enumerate}
+\item スキーム $U_i$ とエタール射 $U_i \to X$ が存在し、
+$\coprod U_i \to X$ は全射で、各 $U_i \to X$ は普遍的に有界なファイバーをもつ。
+\item 任意のアフィン・スキーム $U$ とエタール射 $\varphi : U \to X$ に対し、
+$U \to X$ のファイバーは普遍的に有界である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1) は自明である。(1) を仮定する。スキームから $X$ への
+エタール射で $X$ を被覆し、各 $\varphi_i$ が普遍的に有界なファイバーをもつ
+族 $(\varphi_i : U_i \to X)_{i \in I}$ を取る。アフィン・スキームから $X$ への
+エタール射 $\psi : U \to X$ を取る。各 $i$ に対し、ファイバー積の図式
+$$
+\xymatrix{
+U \times_X U_i \ar[r]_{p_i} \ar[d]_{q_i} & U_i \ar[d]^{\varphi_i} \\
+U \ar[r]^\psi & X
+}
+$$
+を考える。$q_i$ はエタールなので開写像である（Remark
+\ref{decent-spaces-remark-recall} を参照）。さらに、族 $(\varphi_i)_{i \in I}$ は全射なので、
+$U = \bigcup \Im(q_i)$ である。$U$ はアフィン、したがって準コンパクトなので、
+% P08-E273: frozen source's “finite finitely” is rendered by its intended finite choice; see ERRATA_CANDIDATES.jsonl.
+有限個の $i_1, \ldots, i_n \in I$ と準コンパクト開集合
+$W_j \subset U \times_X U_{i_j}$ を選べて、
+% P08-E274: frozen source's p-map in the cover formula is preserved; see ERRATA_CANDIDATES.jsonl.
+$U = \bigcup p_{i_j}(W_j)$ となる。
+$p_{i_j}$ はエタール、したがって局所準有限である（上のエタール射に関する
+注意を参照）。よって Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded} により、
+$p_{i_j}|_{W_j} : W_j \to U_{i_j}$ のファイバーは普遍的に有界である。
+したがって Lemma \ref{decent-spaces-lemma-composition-universally-bounded} により、
+$W_j \to X$ のファイバーも普遍的に有界である。
+それゆえ $\coprod_{j = 1, \ldots, n} W_j \to X$ も普遍的に有界な
+ファイバーをもつ。さらに $\coprod_{j = 1, \ldots, n} W_j \to X$ は
+全射エタール射
+$\coprod q_{i_j}|_{W_j} : \coprod_{j = 1, \ldots, n} W_j \to U$ を経由するので、
+Lemma \ref{decent-spaces-lemma-universally-bounded-permanence} により $U \to X$ のファイバーは
+普遍的に有界である。すなわち (2) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-characterize-very-reasonable}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。次の条件は同値である。
+\begin{enumerate}
+\item Zariski 被覆 $X = \bigcup X_i$ が存在し、各 $i$ に対してスキーム $U_i$ と
+準コンパクト全射エタール射 $U_i \to X_i$ が存在する。
+\item スキーム $U_i$ とエタール射 $U_i \to X$ が存在し、射影
+$U_i \times_X U_i \to U_i$ は準コンパクトで、$\coprod U_i \to X$ は全射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が成り立つとする。このとき射 $U_i \to X_i \to X$ はエタールである
+（Morphisms, Lemma \ref{morphisms-lemma-composition-etale} と Spaces, Lemmas
+\ref{spaces-lemma-composition-representable-transformations-property} および
+\ref{spaces-lemma-morphism-schemes-gives-representable-transformation-property}
+を組み合わせる）。さらに $U_i \times_X U_i = U_i \times_{X_i} U_i$ なので、
+二つの射影 $U_i \times_X U_i \to U_i$ は準コンパクトである。
+
+\medskip\noindent
+(2) が成り立つとする。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-image-open} に従い、開写像
+$|U_i| \to |X|$ の像に対応する開部分空間を $X_i \subset X$ とする。
+射 $U_i \to X_i$ は全射である。したがって $U_i \to X_i$ は全射エタールであり、
+$U_i \times_{X_i} U_i = U_i \times_X U_i$ なので、射影
+$U_i \times_{X_i} U_i \to U_i$ は準コンパクトである。ゆえに Spaces, Lemma
+\ref{spaces-lemma-representable-morphisms-spaces-property} により、
+射 $U_i \to X_i$ は準コンパクトである。
+\end{proof}
+
+
+\section{代数空間に対する条件}
+\label{decent-spaces-section-conditions}
+
+\noindent
+本節では、これまでに見た代数空間に対するさまざまな自然な条件の関係を論じる。
+これらの条件の意味をつかむには Section \ref{decent-spaces-section-reasonable-decent} を読まれたい。
+
+\begin{lemma}
+\label{decent-spaces-lemma-bounded-fibres}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$X$ に対する次の条件を考える。
+\begin{itemize}
+\item[] $(\alpha)$ すべての $x \in |X|$ に対し、Lemma
+\ref{decent-spaces-lemma-U-finite-above-x} の同値な条件が成り立つ。
+\item[] $(\beta)$ すべての $x \in |X|$ に対し、Lemma
+\ref{decent-spaces-lemma-R-finite-above-x} の同値な条件が成り立つ。
+\item[] $(\gamma)$ すべての $x \in |X|$ に対し、Lemma
+\ref{decent-spaces-lemma-UR-finite-above-x} の同値な条件が成り立つ。
+\item[] $(\delta)$ Lemma \ref{decent-spaces-lemma-U-universally-bounded} の同値な条件が成り立つ。
+\item[] $(\epsilon)$ Lemma \ref{decent-spaces-lemma-characterize-very-reasonable} の
+同値な条件が成り立つ。
+\item[] $(\zeta)$ 空間 $X$ は Zariski 局所的に準分離的である。
+\item[] $(\eta)$ 空間 $X$ は準分離的である。
+\item[] $(\theta)$ 空間 $X$ は表現可能、すなわち $X$ はスキームである。
+\item[] $(\iota)$ 空間 $X$ は準分離的スキームである。
+\end{itemize}
+次の含意が成り立つ。
+$$
+\xymatrix{
+& (\theta) \ar@{=>}[rd] & & & &  \\
+(\iota) \ar@{=>}[ru] \ar@{=>}[rd] & &
+(\zeta) \ar@{=>}[r] &
+(\epsilon) \ar@{=>}[r] &
+(\delta) \ar@{=>}[r] &
+(\gamma) \ar@{<=>}[r] & (\alpha) + (\beta) \\
+& (\eta) \ar@{=>}[ru] & & & &
+}
+$$
+\end{lemma}
+
+\begin{proof}
+含意 $(\gamma) \Leftrightarrow (\alpha) + (\beta)$ は直ちに分かる。
+左側の菱形にある含意は定義から明らかである。
+
+\medskip\noindent
+$(\zeta)$、すなわち $X$ が Zariski 局所的に準分離的であると仮定する。
+このとき Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-separated-quasi-compact-pieces} により
+$(\epsilon)$ が成り立つ。
+
+\medskip\noindent
+$(\epsilon)$ を仮定する。Lemma \ref{decent-spaces-lemma-characterize-very-reasonable} により、
+Zariski 開被覆 $X = \bigcup X_i$ が存在し、各 $i$ に対してスキーム $U_i$ と
+準コンパクト全射エタール射 $U_i \to X_i$ が存在する。$i$ を一つ選び、
+アフィン開部分スキーム $W \subset U_i$ を取る。これらすべての射 $W \to X$ の
+族が $X$ を被覆するので、$W \to X$ が普遍的に有界なファイバーをもつことを
+示せば十分である。そのため図式
+$$
+\xymatrix{
+W \times_X U_i \ar[r]_-p \ar[d]_q & U_i \ar[d] \\
+W \ar[r] & X
+}
+$$
+を考える。$W \to X$ は $X_i$ を経由するので
+$W \times_X U_i = W \times_{X_i} U_i$ であり、したがって $q$ は
+準コンパクトである。$W$ はアフィンなので、スキーム $W \times_X U_i$ は
+準コンパクトである。ゆえに Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}
+を適用でき、$p$ は普遍的に有界なファイバーをもつ。Lemma
+\ref{decent-spaces-lemma-descent-universally-bounded} により $W \to X$ も
+普遍的に有界なファイバーをもつ。
+
+\medskip\noindent
+$(\delta)$ を仮定する。$U$ をアフィン・スキームとし、$U \to X$ を
+エタール射とする。仮定により、射 $U \to X$ のファイバーは普遍的に有界である。
+したがって Lemma \ref{decent-spaces-lemma-base-change-universally-bounded} により、
+二つの射影 $R = U \times_X U \to U$ のファイバーも普遍的に有界である。
+さらに Lemma \ref{decent-spaces-lemma-composition-universally-bounded} により、
+$R \to X$ のファイバーも普遍的に有界である。ゆえに
+% P08-E275: frozen source quantifies x in X rather than x in |X|; formula preserved; see ERRATA_CANDIDATES.jsonl.
+任意の $x \in X$ に対し、$x$ 上の $|U| \to |X|$ と $|R| \to |X|$ の
+ファイバーは有限である（Lemma
+\ref{decent-spaces-lemma-universally-bounded-finite-fibres} を参照）。すなわち Lemma
+\ref{decent-spaces-lemma-UR-finite-above-x} の同値な条件が成り立つ。
+これで $(\delta) \Rightarrow (\gamma)$ が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-properties-local}
+$S$ をスキームとする。$\mathcal{P}$ を、Lemma
+\ref{decent-spaces-lemma-bounded-fibres} に挙げた代数空間の性質
+$(\alpha)$, $(\beta)$, $(\gamma)$, $(\delta)$, $(\epsilon)$, $(\zeta)$, $(\theta)$
+のいずれかとする。$X$ が $S$ 上の代数空間で、$X = \bigcup X_i$ が
+Zariski 開被覆であり、各 $X_i$ が $\mathcal{P}$ をもつならば、
+$X$ も $\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+% P08-E276: frozen source's malformed let-construction is rendered as intended; see ERRATA_CANDIDATES.jsonl.
+$X$ を $S$ 上の代数空間とし、$X = \bigcup X_i$ を、各 $X_i$ が
+$\mathcal{P}$ をもつ Zariski 開被覆とする。
+
+\medskip\noindent
+$\mathcal{P} = (\alpha)$ の場合。$X_i$ に対する条件 $(\alpha)$ は、
+すべての $x \in |X_i|$、すべてのアフィン・スキーム $U$、およびエタール射
+$\varphi : U \to X_i$ に対し、$x$ 上の $\varphi : |U| \to |X_i|$ の
+ファイバーが有限であることを意味する。
+% P08-E277: frozen source quantifies x in X rather than x in |X|; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$x \in X$、アフィン・スキーム $U$、およびエタール射 $U \to X$ を取る。
+$X = \bigcup X_i$ は Zariski 開被覆なので、
+% P08-E278: frozen source's “there exits” is rendered as intended; see ERRATA_CANDIDATES.jsonl.
+有限アフィン開被覆 $U = U_1 \cup \ldots \cup U_n$ で、各 $U_j \to X$ が
+ある $X_{i_j}$ を経由するものが存在する。仮定により、
+$j = 1, \ldots, n$ に対して $x$ 上の $|U_j | \to |X_{i_j}|$ のファイバーは
+有限である。これは明らかに $x$ 上の $|U| \to |X|$ のファイバーが有限で
+あることを意味する。これで $(\alpha)$ の場合が証明された。
+
+\medskip\noindent
+$\mathcal{P} = (\beta)$ の場合。$X_i$ に対する条件 $(\beta)$ は、
+すべての $x \in |X_i|$ が体のスペクトルから $X_i$ への単射によって
+表現されることを意味する。$X_i \to X$ は単射であり、
+$X = \bigcup X_i$ なので、$X$ についても同じことが成り立つ。
+
+\medskip\noindent
+$\mathcal{P} = (\gamma)$ の場合。Lemma \ref{decent-spaces-lemma-bounded-fibres} により
+$(\gamma) = (\alpha) + (\beta)$ なので、$(\gamma)$ に対する補題は
+上で扱った二つの場合から従う。
+
+\medskip\noindent
+$\mathcal{P} = (\delta)$ の場合。$X_i$ に対する条件 $(\delta)$ は、
+$X_i$ を被覆するスキーム $U_{ij}$ と、普遍的に有界なファイバーをもつ
+エタール射 $U_{ij} \to X_i$ が存在することを意味する。これらのスキームは
+全射エタール射 $\coprod U_{ij} \to X$ も与え、$U_{ij} \to X$ はなお
+普遍的に有界なファイバーをもつ。
+
+\medskip\noindent
+$\mathcal{P} = (\epsilon)$ の場合。$X_i$ に対する条件 $(\epsilon)$ は、
+集合 $J_i$ と射 $\varphi_{ij} : U_{ij} \to X_i$ で、各 $\varphi_{ij}$ が
+エタール、二つの射影 $U_{ij} \times_{X_i} U_{ij} \to U_{ij}$ が
+準コンパクト、かつ $\coprod_{j \in J_i} U_{ij} \to X_i$ が全射であるものを
+取れることを意味する。このとき合成 $U_{ij} \to X_i \to X$ はエタールである
+（Morphisms, Lemmas \ref{morphisms-lemma-composition-etale} および
+\ref{morphisms-lemma-open-immersion-etale} と Spaces, Lemmas
+\ref{spaces-lemma-composition-representable-transformations-property} および
+\ref{spaces-lemma-morphism-schemes-gives-representable-transformation-property}
+を組み合わせる）。$X_i \subset X$ は部分空間なので
+$U_{ij} \times_{X_i} U_{ij} = U_{ij} \times_X U_{ij}$ であり、
+ファイバー積に関する条件は保たれる。また
+$\coprod_{i, j} U_{ij} \to X$ は明らかに全射である。したがって $X$ は
+$(\epsilon)$ を満たす。
+
+\medskip\noindent
+$\mathcal{P} = (\zeta)$ の場合。$X_i$ に対する条件 $(\zeta)$ は、
+$X_i$ が Zariski 局所的に準分離的であることを意味する。これは直ちに、
+$X$ が Zariski 局所的に準分離的であることを意味する。
+
+\medskip\noindent
+$(\theta)$ については Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-representable-properties}
+$S$ をスキームとする。$\mathcal{P}$ を、Lemma \ref{decent-spaces-lemma-bounded-fibres} に
+挙げた代数空間の性質 $(\beta)$, $(\gamma)$, $(\delta)$, $(\epsilon)$, $(\theta)$
+のいずれかとする。$X$, $Y$ を $S$ 上の代数空間とし、$X \to Y$ を
+表現可能な射とする。$Y$ が性質 $\mathcal{P}$ をもつならば、$X$ ももつ。
+\end{lemma}
+
+\begin{proof}
+$f : X \to Y$ を代数空間の表現可能な射とし、$Y$ が $\mathcal{P}$ をもつと
+仮定する。$x \in |X|$ を取り、$y = f(x) \in |Y|$ とおく。
+
+\medskip\noindent
+$\mathcal{P} = (\beta)$ の場合。$Y$ に対する条件 $(\beta)$ は、$y$ を表す単射
+$\Spec(k) \to Y$ が存在することを意味する。ファイバー積
+$X_y = \Spec(k) \times_Y X$ はスキームであり、$x$ は $X_y$ の点、すなわち
+単射 $\Spec(k') \to X_y$ に対応する。$X_y \to X$ も単射なので、$x$ は
+単射 $\Spec(k') \to X_y \to X$ により表される。すなわち $X$ に対して
+$(\beta)$ が成り立つ。
+
+\medskip\noindent
+$\mathcal{P} = (\gamma)$ の場合。$(\gamma) \Rightarrow (\beta)$ なので、
+前段落により $y$ と $x$ は次の図式にある単射によって表される。
+$$
+\xymatrix{
+\Spec(k') \ar[r]_-x \ar[d] & X \ar[d] \\
+\Spec(k) \ar[r]^-y & Y
+}
+$$
+また、Lemma \ref{decent-spaces-lemma-UR-finite-above-x} (2) を通じた性質 $(\gamma)$ の
+定義により、スキーム $V_i$ とエタール射 $V_i \to Y$ が存在し、
+$\coprod V_i \to Y$ は全射で、各 $i$ に対し $R_i = V_i \times_Y V_i$ とおくと、
+$$
+|V_i| \longrightarrow |Y|
+\quad\text{および}\quad
+|R_i| \longrightarrow |Y|
+$$
+の $y$ 上のファイバーはいずれも有限である。これはスキーム $(V_i)_y$ と
+$(R_i)_y$ が $y = \Spec(k)$ 上有限であることを意味する。
+$X \to Y$ は表現可能なので、ファイバー積 $U_i = V_i \times_Y X$ は
+スキームである。射 $U_i \to X$ はエタールで、$\coprod U_i \to X$ は全射である。
+最後に、各 $i$ に対し
+$$
+(U_i)_x =
+(V_i \times_Y X)_x =
+(V_i)_y \times_{\Spec(k)} \Spec(k')
+$$
+および
+$$
+(U_i \times_X U_i)_x =
+\left((V_i \times_Y X) \times_X (V_i \times_Y X)\right)_x =
+(R_i)_y \times_{\Spec(k)} \Spec(k')
+$$
+であるから、これらは有限スキーム $(V_i)_y$ と $(R_i)_y$ の基底変換として
+$k'$ 上有限である。Lemma \ref{decent-spaces-lemma-UR-finite-above-x} の第二条件により、
+これは $X$ に対して $(\gamma)$ が成り立つことを含意する。
+
+\medskip\noindent
+$\mathcal{P} = (\delta)$ の場合。$V$ をアフィン・スキームとしてエタール射
+$V \to Y$ を取る。$Y$ は性質 $(\delta)$ をもつので、この射は普遍的に有界な
+ファイバーをもつ。Lemma \ref{decent-spaces-lemma-base-change-universally-bounded} により、
+基底変換 $V \times_Y X \to X$ も普遍的に有界なファイバーをもつ。
+したがって Lemma \ref{decent-spaces-lemma-U-universally-bounded} の第一条件を適用でき、
+% P08-E279: frozen source concludes Y instead of X; wording preserved; see ERRATA_CANDIDATES.jsonl.
+$Y$ も性質 $(\delta)$ をもつことが分かる。
+
+\medskip\noindent
+$\mathcal{P} = (\epsilon)$ の場合。Spaces, Lemma
+\ref{spaces-lemma-base-change-representable-transformations-property} を
+繰り返し用いる。$V_i \to Y$ を Lemma
+\ref{decent-spaces-lemma-characterize-very-reasonable} (2) のように取る。
+$U_i = X \times_Y V_i$ とおく。射 $U_i \to X$ はエタールであり、
+$\coprod U_i \to X$ は全射である。
+$U_i \times_X U_i = X \times_Y (V_i \times_Y V_i)$ なので、
+% P08-E280: frozen source's Y-subscript in the projection is preserved; see ERRATA_CANDIDATES.jsonl.
+射影 $U_i \times_Y U_i \to U_i$ は射影 $V_i \times_Y V_i \to V_i$ の
+基底変換であり、したがって準コンパクトである。ゆえに $X$ は Lemma
+\ref{decent-spaces-lemma-characterize-very-reasonable} (2) を満たす。
+
+\medskip\noindent
+$\mathcal{P} = (\theta)$ の場合。この場合、主張は Categories, Lemma
+\ref{categories-lemma-representable-over-representable} である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{妥当な代数空間と良好な代数空間}
+\label{decent-spaces-section-reasonable-decent}
+
+\noindent
+Lemma \ref{decent-spaces-lemma-bounded-fibres} では、アフィン・スキームから $X$ への
+エタール射の挙動や、スキームによる $X$ の特別なエタール被覆の存在に関係する、
+代数空間に対するいくつかの条件を見た。ここで条件の各型を表にまとめる。
+$$
+\boxed{
+\begin{matrix}
+(\alpha) & \text{アフィンからのエタール射のファイバーは有限} \\
+(\beta) & \text{点は体のスペクトルの単射から生じる} \\
+(\gamma) & \text{点は体のスペクトルの準コンパクトな単射から生じる} \\
+(\delta) & \text{アフィンからのエタール射のファイバーは普遍的に有界} \\
+(\epsilon) & \text{像の上で準コンパクトとなるスキームからのエタール射による被覆}
+\end{matrix}
+}
+$$
+
+\medskip\noindent
+次の定義にある条件は、厳密には $X$ の対角射に対する条件ではないが、
+ある意味では $X$ に対する分離性条件である。
+
+\begin{definition}
+\label{decent-spaces-definition-very-reasonable}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+\begin{enumerate}
+% P08-E281: frozen source quantifies x in X rather than x in |X|; formula preserved; see ERRATA_CANDIDATES.jsonl.
+\item すべての点 $x \in X$ に対して Lemma \ref{decent-spaces-lemma-UR-finite-above-x} の
+同値な条件、言い換えれば Lemma \ref{decent-spaces-lemma-bounded-fibres} の性質 $(\gamma)$ が
+成り立つとき、$X$ は \textit{良好}（decent）であるという。
+\item Lemma \ref{decent-spaces-lemma-U-universally-bounded} の同値な条件、言い換えれば
+Lemma \ref{decent-spaces-lemma-bounded-fibres} の性質 $(\delta)$ が成り立つとき、
+$X$ は \textit{妥当}（reasonable）であるという。
+\item Lemma \ref{decent-spaces-lemma-characterize-very-reasonable} の同値な条件、すなわち
+Lemma \ref{decent-spaces-lemma-bounded-fibres} の性質 $(\epsilon)$ が成り立つとき、
+$X$ は \textit{非常に妥当}（very reasonable）であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+代数空間に対するこれらの条件の間には次の含意がある。
+$$
+\xymatrix{
+\text{表現可能} \ar@{=>}[rd] & & & \\
+ & \text{非常に妥当} \ar@{=>}[r] &
+\text{妥当} \ar@{=>}[r] &
+\text{良好} \\
+\text{準分離的} \ar@{=>}[ru] & & &
+}
+$$
+非常に妥当な代数空間という概念は廃用である。これは、現在では良好な空間の
+クラスに対して証明されているいくつかの結果を証明する際に、かつて仮定が
+必要だったため導入された。良好な空間は、$|X|$ の位相と $X$ 自身の性質の間に
+良い関係が成り立つ空間 $X$ の最大のクラスである。
+
+\begin{example}
+\label{decent-spaces-example-not-decent}
+Spaces, Example \ref{spaces-example-affine-line-translation} で構成した代数空間
+$\mathbf{A}^1_{\mathbf{Q}}/\mathbf{Z}$ は良好ではない。実際、その「生成点」は
+体のスペクトルからの単射によって表現できない。
+\end{example}
+
+\begin{remark}
+\label{decent-spaces-remark-reasonable}
+妥当な代数空間は、技術的には非常に妥当な代数空間より扱いやすい。
+たとえば、$X \to Y$ が代数空間の準コンパクト全射エタール射で、$X$ が妥当ならば
+$Y$ も妥当である（Lemma \ref{decent-spaces-lemma-descent-conditions} を参照）。一方、
+このことが「非常に妥当」という性質についても正しいかどうかは分からない。
+以下では妥当な代数空間がもつ別の技術的性質を与える。
+\end{remark}
+
+\begin{lemma}
+\label{decent-spaces-lemma-fun-property-reasonable}
+$S$ をスキームとし、$X$ を準コンパクトで妥当な代数空間とする。
+このとき、準コンパクトかつ準分離的な代数空間の有向系 $X_i$ で、
+$X = \colim_i X_i$（層の圏における余極限）となるものが存在する。
+さらに、次を満たすようにできる。
+\begin{enumerate}
+\item $S$ 上の任意の準コンパクト・スキーム $T$ に対し
+$\colim X_i(T) = X(T)$ である。
+\item 系の遷移射 $X_i \to X_{i'}$ と余射影 $X_i \to X$ は全射かつ
+エタールである。
+\item $X$ がスキームならば、代数空間 $X_i$ はスキームで、遷移射
+$X_i \to X_{i'}$ と余射影 $X_i \to X$ は局所同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+証明を概説する。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} により、$U$ をアフィンとして
+$X = U/R$ と書ける。この場合、妥当であるとは $U \to X$ が普遍的に有界である
+ことを意味する。したがって Definition \ref{decent-spaces-definition-universally-bounded} により、
+$U \to X$ の「ファイバー」の次数が高々 $N$ となる整数 $N$ が存在する。
+$s, t : R \to U$ と $c : R \times_{s, U, t} R \to R$ を群亜群の構造写像とする。
+
+\medskip\noindent
+主張：任意の準コンパクト開集合 $A \subset R$ に対し、開集合 $R' \subset R$ で
+次を満たすものが存在する。
+\begin{enumerate}
+\item $A \subset R'$、
+\item $R'$ は準コンパクト、
+\item $(U, R', s|_{R'}, t|_{R'}, c|_{R' \times_{s, U, t} R'})$ は
+群亜群スキームである。
+\end{enumerate}
+$e : U \to R$ はエタール射 $s : R \to U$ の切断なので開写像である
+（\'Etale Morphisms, Proposition \ref{etale-proposition-properties-sections}）。
+また $U$ はアフィン、したがって準コンパクトである。
+% P08-E283: frozen construction does not close A under the groupoid inverse; preserved; see ERRATA_CANDIDATES.jsonl.
+よって $A$ を $A \cup e(U) \subset R$ で置き換え、$A$ が $e(U)$ を含むと
+仮定してよい。次に $A^1 = A$ とおき、帰納的に
+$$
+A^n = c(A^{n - 1} \times_{s, U, t} A) \subset R
+$$
+を $n \geq 2$ に対して定める。帰納的に、すべての $n \geq 2$ に対して
+$A^n$ は準コンパクトであることが分かる。実際、これは準コンパクトな
+ファイバー積 $A^{n - 1} \times_{s, U, t} A$ の像である。
+$k$ を $S$ 上の代数閉体とし、$k$-点を考えると、
+% P08-E282: frozen path formula omits the endpoint u_n = u' and is off by one; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+A^n(k) = \left\{(u, u') \in U(k)
+:
+\begin{matrix}
+\text{次を満たす } u = u_1, u_2, \ldots, u_n \in U(k)\text{ が存在する：} \\
+(u_i , u_{i + 1}) \in A \text{ が成り立つ。ここで }i = 1, \ldots, n - 1.
+\end{matrix}
+\right\}
+$$
+である。しかし $U(k) \to X(k)$ のファイバーの大きさは高々 $N$ なので、
+$n > N$ ならば上の列には反復があり、それを短くできる。したがって
+すべての $n \geq N$ に対し $A^N = A^n$ である。
+これは $R' = A^N$ が群亜群スキーム
+$(U, R', s|_{R'}, t|_{R'}, c|_{R' \times_{s, U, t} R'})$ を与えることを含意し、
+上の主張が証明された。
+
+\medskip\noindent
+$(\Sch/S)_{fppf}$ 上の層の写像
+$$
+\colim_{R' \subset R} U/R' \longrightarrow U/R
+$$
+を考える。ここで $R' \subset R$ は、上のようにエタール同値関係を与える
+$R$ の準コンパクト開部分スキームを走る。各商 $U/R'$ は代数空間である
+（Spaces, Theorem \ref{spaces-theorem-presentation} を参照）。
+$R'$ は準コンパクトで $U$ はアフィンなので、射
+$R' \to U \times_{\Spec(\mathbf{Z})} U$ は準コンパクトであり、したがって
+$U/R'$ は準分離的である。最後に $T$ が準コンパクト・スキームならば、
+$$
+\colim_{R' \subset R} U(T)/R'(T) \longrightarrow U(T)/R(T)
+$$
+は全単射である。実際、$T$ から $R$ への任意の射は、上の主張により
+開部分関係 $R'$ の一つに入る。これは層 $U/R'$ の余極限が $U/R$ であることを
+明らかに含意する。すなわち代数空間 $X = U/R$ は準分離的代数空間 $U/R'$ の
+余極限である。
+
+\medskip\noindent
+性質 (1) と (2) は上の議論から従う。$X$ がスキームならば、$U$ を $X$ の
+アフィン開集合の有限非交和として選べば (3) を得る。細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-representable-named-properties}
+$S$ をスキームとし、$X$, $Y$ を $S$ 上の代数空間とする。
+$X \to Y$ を表現可能な射とする。$Y$ が良好（resp.\ 妥当）ならば、
+$X$ も良好（resp.\ 妥当）である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-representable-properties} の言い換えである。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-etale-named-properties}
+$S$ をスキームとする。$X \to Y$ を $S$ 上の代数空間のエタール射とする。
+$Y$ が良好、resp.\ 妥当ならば、$X$ もそうである。
+\end{lemma}
+
+\begin{proof}
+$U$ をアフィン・スキームとし、$U \to X$ をエタール射とする。
+$R = U \times_X U$ および $R' = U \times_Y U$ とおく。
+$R \to R'$ は単射であることに注意する。
+
+\medskip\noindent
+$x \in |X|$ とする。$X$ が良好であることを示すには、$x$ 上の
+$|U| \to |X|$ と $|R| \to |X|$ のファイバーが有限であることを示せばよい。
+しかし $Y$ が良好ならば、$|U| \to |Y|$ と $|R'| \to |Y|$ の
+ファイバーは有限である。したがって「良好」の場合が従う。
+
+\medskip\noindent
+$X$ が妥当であることを示すには、$U \to X$ のファイバーが普遍的に有界で
+あることを示せばよい。しかし $Y$ が妥当ならば、$U \to Y$ のファイバーは
+普遍的に有界であり、これは直ちに $U \to X$ のファイバーについても
+同じことを含意する。したがって「妥当」の場合も従う。
+\end{proof}
+
+
+
+
+
+
+\section{点と特殊化}
+\label{decent-spaces-section-specializations}
+
+\noindent
+代数空間のエタール射 $f : X \to Y$ で、$|f| : |X| \to |Y|$ の
+一つのファイバー内の点の間に非自明な特殊化があるものが存在する。
+Examples, Lemma \ref{examples-lemma-specializations-fibre-etale} を参照せよ。
+射の始域がスキームならば、$Y$ に条件 ($\alpha$) を課すことでこれを避けられる。
+
+\begin{lemma}
+\label{decent-spaces-lemma-no-specializations-map-to-same-point}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$U \to X$ をスキームから $X$ へのエタール射とする。
+$u, u' \in |U|$ が $|X|$ の同じ点 $x$ に写り、$u' \leadsto u$ と仮定する。
+組 $(X, x)$ が Lemma \ref{decent-spaces-lemma-U-finite-above-x} の同値な条件を満たすならば、
+$u = u'$ である。
+\end{lemma}
+
+\begin{proof}
+組 $(X, x)$ が Lemma \ref{decent-spaces-lemma-U-finite-above-x} の同値な条件を満たすと
+仮定する。$U$ をスキーム、$U \to X$ をエタール射とし、
+$u, u' \in |U|$ が $|X|$ の点 $x$ に写り、$u' \leadsto u$ とする。
+$U$ を $u$ のアフィン近傍で置き換えてよく、実際そうする。
+$t, s : R = U \times_X U \to U$ をエタールな射影とする。
+
+\medskip\noindent
+$t(r) = u$ および $s(r) = u'$ を満たす点 $r \in R$ を選ぶ。
+これは Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-presentation} により可能である。
+エタール射 $t$ に沿って一般化が持ち上がるので（Remark
+\ref{decent-spaces-remark-recall}）、$t(r') = u'$ を満たす特殊化 $r' \leadsto r$ を取れる。
+$u'' = s(r')$ とおく。このとき $u'' \leadsto u'$ である。
+そこでこの操作を繰り返し、$t(r'') = u''$ を満たす $r'' \leadsto r'$ を取り、
+$u''' = s(r'')$ とおける。以下同様である。図示すれば
+$$
+\xymatrix{
+& r'' \ar[rd]^s \ar[ld]_t \ar@{~>}[d] & \\
+u'' \ar@{~>}[d] & r' \ar[rd]^s \ar[ld]_t \ar@{~>}[d] & u''' \ar@{~>}[d] \\
+u' \ar@{~>}[d] & r \ar[rd]^s \ar[ld]_t & u'' \ar@{~>}[d] \\
+u & & u'
+}
+$$
+となる。Remark \ref{decent-spaces-remark-recall} で、エタール射 $s$ のファイバー内の点の間には
+特殊化がないことを見た。したがって、ある $n$ に対して
+$u^{(n + 1)} = u^{(n)}$ ならば $r^{(n)} = r^{(n - 1)}$ であり、さらに $t$ を
+取れば $u^{(n)} = u^{(n - 1)}$ である。すると塔全体が潰れ、とくに
+$u = u'$ となる。ゆえに $u \not = u'$ ならば、すべての特殊化は真に異なり、
+$\{u, u', u'', \ldots\}$ は $U$ の点からなる無限集合で、そのすべてが
+$|X|$ の点 $x$ に写る。$U$ はアフィンに選んだので、これは Lemma
+\ref{decent-spaces-lemma-U-finite-above-x} の第二条件に矛盾する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-no-specializations-map-to-same-point-Noetherian}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$U \to X$ をスキームから $X$ へのエタール射とする。
+$u, u' \in |U|$ が $|X|$ の同じ点 $x$ に写り、$u' \leadsto u$ と仮定する。
+$X$ が局所 Noether 的ならば $u = u'$ である。
+\end{lemma}
+
+\begin{proof}
+Schemes, Section \ref{schemes-section-points} の議論により、
+$\mathcal{O}_{U, u'}$ は Noether 局所環 $\mathcal{O}_{U, u}$ の局所化である。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-pre-dimension-local-ring} により
+$\dim(\mathcal{O}_{U, u}) = \dim(\mathcal{O}_{U, u'})$ である。
+Noether 局所環の次元論から $u = u'$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-specialization}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$x, x' \in |X|$ とし、$x' \leadsto x$、すなわち $x$ は $x'$ の特殊化と仮定する。
+組 $(X, x')$ が Lemma \ref{decent-spaces-lemma-UR-finite-above-x} の同値な条件を満たすとする。
+このとき、スキーム $U$ からの任意のエタール射 $\varphi : U \to X$ と
+任意の $\varphi(u) = x$ を満たす $u \in U$ に対し、
+% P08-E284: frozen source omits “there” in the existential clause; intended proposition rendered; see ERRATA_CANDIDATES.jsonl.
+$\varphi(u') = x'$ を満たす点 $u'\in U$ と特殊化 $u' \leadsto u$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$U$ を $u$ のアフィン開近傍で置き換えてよい。したがって $U$ はアフィンと
+仮定してよい。$x$ は開写像 $|U| \to |X|$ の像に属するので、$x'$ も属する。
+したがって Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-image-open} に従い、$X$ を
+$|U| \to |X|$ の像に対応する Zariski 開部分空間で置き換えてよい。
+言い換えれば、$U \to X$ が全射エタールであると仮定してよい。
+$s, t : R = U \times_X U \to U$ を射影とする。
+組 $(X, x')$ が Lemma \ref{decent-spaces-lemma-UR-finite-above-x} の同値な条件を満たすという
+仮定により、$x'$ 上の $|U| \to |X|$ と $|R| \to |X|$ のファイバーは有限である。
+% P08-E285: frozen source places point sets in U and R rather than |U| and |R|; formulas preserved; see ERRATA_CANDIDATES.jsonl.
+$\{u'_1, \ldots, u'_n\} \subset U$ と $\{r'_1, \ldots, r'_m\} \subset R$ が
+$\{x'\}$ の完全逆像をなすとする。閉集合
+$$
+T = \overline{\{u'_1\}} \cup \ldots \cup \overline{\{u'_n\}} \subset |U|,
+\quad
+T' = \overline{\{r'_1\}} \cup \ldots \cup \overline{\{r'_m\}} \subset |R|.
+$$
+を考える。自明に $s(T') \subset T$ である。$R$ は同値関係であり、集合
+$\{r_j'\}$ は構成により $R$ の逆写像の下で不変なので、
+$t(T') = s(T')$ でもある。任意の点 $w \in T$ を取る。このとき、ある $i$ に
+対して $u'_i \leadsto w$ である。$s(r) = w$ を満たす $r \in R$ を選ぶ。
+$s : R \to U$ に沿って一般化が持ち上がるので（Remark \ref{decent-spaces-remark-recall}）、
+$s(r') = u_i'$ を満たす $r' \leadsto r$ を取れる。するとある $j$ に対し
+$r' = r'_j$ であり、$w \in s(T')$ と結論する。したがって
+$T = s(T') = t(T')$ は $|U|$ の $|R|$-不変閉集合である。
+これは $T$ が $|X|$ の閉集合 (!) $T'' = \varphi(T)$ の逆像であることを意味する
+（Properties of Spaces, Lemmas
+\ref{spaces-properties-lemma-points-presentation} および
+\ref{spaces-properties-lemma-topology-points} を参照）。ゆえに
+$T'' = \overline{\{x'\}}$ である。$x \in T''$ なので、$T$ は $x$ に写る
+点 $u_1$ を含む。すなわち、ある $i$ に対して、与えられた特殊化
+$x' \leadsto x$ に写る特殊化 $u'_i \leadsto u_1$ が存在する。
+
+\medskip\noindent
+証明を終えるため、$s(r) = u$ および $t(r) = u_1$ を満たす点 $r \in R$ を
+選ぶ（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を用いる）。$t$ に沿って一般化が
+持ち上がり、$u'_i \leadsto u_1$ なので、$t(r') = u'_i$ を満たす特殊化
+$r' \leadsto r$ を取れる。$u' = s(r')$ とおく。このとき望みどおり
+$u' \leadsto u$ かつ $\varphi(u') = x'$ である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-generalizations-lift-flat}
+$S$ をスキームとする。$f : Y \to X$ を $S$ 上の代数空間の平坦射とする。
+$x, x' \in |X|$ とし、$x' \leadsto x$、すなわち $x$ は $x'$ の特殊化と仮定する。
+組 $(X, x')$ が Lemma \ref{decent-spaces-lemma-UR-finite-above-x} の同値な条件を満たすとする
+（たとえば $X$ が良好、$X$ が準分離的、または $X$ が表現可能ならばそうである）。
+このとき、$f(y) = x$ を満たす任意の $y \in |Y|$ に対し、
+$f(y') = x'$ を満たす点 $y' \in |Y|$ と特殊化 $y' \leadsto y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+（括弧内の主張は、良好な空間の定義と Section
+\ref{decent-spaces-section-reasonable-decent} で述べたさまざまな分離性条件の間の含意から
+従う。）スキーム $V$ と全射エタール射 $V \to Y$ を選ぶ。
+$y$ に写る $v \in V$ を選ぶ。このとき、補題を $V \to X$ に対して
+証明すれば十分である。したがって $Y$ はスキームと仮定してよい。
+スキーム $U$ と全射エタール射 $U \to X$ を選ぶ。$x$ に写る $u \in U$ を
+選ぶ。Lemma \ref{decent-spaces-lemma-specialization} により、$x'$ に写る特殊化
+$u' \leadsto u$ を選べる。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により、$y$ と $u$ に写る
+$z \in U \times_X Y$ を選べる。これで平坦なスキームの射
+$U \times_X Y \to U$ の場合に帰着され、この場合は Morphisms, Lemma
+\ref{morphisms-lemma-generalizations-lift-flat} である。
+\end{proof}
+
+
+
+
+
+
+\section{スキームによる代数空間の層別化}
+\label{decent-spaces-section-stratifications}
+
+\noindent
+本節では、準コンパクトかつ準分離的な代数空間が、局所閉部分空間による
+有限層別化をもち、その各部分がスキームで、各部分の貼り合わせが基本
+distinguished square によって与えられることを証明する。まず、妥当な代数空間に
+対して少し弱い結果を証明する。
+
+\begin{lemma}
+\label{decent-spaces-lemma-quasi-compact-reasonable-stratification}
+$S$ をスキームとする。$W \to X$ を、スキーム $W$ から代数空間 $X$ への射で、
+平坦、局所有限表示、分離的、局所準有限、かつ普遍的に有界なファイバーを
+もつものとする。被約閉部分空間
+$$
+\emptyset = Z_{-1} \subset Z_0 \subset Z_1 \subset Z_2 \subset
+\ldots \subset Z_n = X
+$$
+で、$X_r = Z_r \setminus Z_{r - 1}$ とおくと、層別化
+$X = \coprod_{r = 0, \ldots, n} X_r$ が次の普遍性によって特徴づけられるものが
+存在する：$g : T \to X$ が与えられたとき、射影 $W \times_X T \to T$ が
+次数 $r$ の有限局所自由射であることと $g(|T|) \subset |X_r|$ であることは
+同値である。
+\end{lemma}
+
+\begin{proof}
+$W \to X$ のファイバーの次数を抑える整数を $n$ とする。
+スキーム $U$ と全射エタール射 $U \to X$ を選ぶ。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf-universally-bounded} を
+$W \times_X U \to U$ に適用する。閉集合
+$$
+\emptyset = Y_{-1} \subset Y_0 \subset Y_1 \subset Y_2 \subset
+\ldots \subset Y_n = U
+$$
+で、射 $W \times_X U \to U$ に対して補題で述べた性質によって特徴づけられる
+ものを得る。これらの閉集合の形成は明らかに基底変換と可換である。
+$R = U \times_X U$ とおき、射影を $s, t : R \to U$ とすると、閉集合として
+$$
+s^{-1}(Y_r) = t^{-1}(Y_r)
+$$
+が $R$ の閉集合として成り立つ。言い換えれば、閉集合 $Y_r \subset U$ は
+$R$-不変である。これは $|Y_r|$ が閉集合 $Z_r \subset |X|$ の逆像であることを
+意味する。
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space} に従い、$Z_r \subset X$ を
+被約誘導代数空間構造をもつ部分空間としても表す。
+
+\medskip\noindent
+$g : T \to X$ を代数空間の射とする。スキーム $V$ と全射エタール射
+$V \to T$ を選ぶ。補題の最後の主張を証明するには、合成 $V \to X$ に対して
+証明すれば十分である（有限局所自由射の定義については Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-finite-locally-free} を参照）。同様に、
+スキームの射 $W \times_X V \to V$ が次数 $r$ の有限局所自由射であることと、
+スキームの射
+$$
+W \times_X (U \times_X V)
+\longrightarrow
+U \times_X V
+$$
+が次数 $r$ の有限局所自由射であることは同値である（Descent, Lemma
+\ref{descent-lemma-descending-property-finite-locally-free} を参照）。
+構成により、これは $|U \times_X V| \to |U|$ が $|Y_r|$ に写ることと同値であり、
+さらに $|V| \to |X|$ が $|Z_r|$ に写ることと同値である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-stratify-flat-fp-lqf}
+$S$ をスキームとする。$W \to X$ を、スキーム $W$ から代数空間 $X$ への射で、
+平坦、局所有限表示、分離的、かつ局所準有限なものとする。このとき開部分空間
+$$
+X = X_0 \supset X_1 \supset X_2 \supset \ldots
+$$
+で、$k$ を体とする射 $\Spec(k) \to X$ が $X_d$ を経由することと
+$W \times_X \Spec(k)$ の $k$ 上の次数が $\geq d$ であることが同値となるものが
+存在する。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射エタール射 $U \to X$ を選ぶ。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf} を $W \times_X U \to U$ に
+適用する。開部分スキーム
+$$
+U = U_0 \supset U_1 \supset U_2 \supset \ldots
+$$
+で、射 $W \times_X U \to U$ に対して補題で述べた性質によって特徴づけられる
+ものを得る。
+% P08-E286: frozen source calls these open subschemes “closed subsets”; intended topology rendered; see ERRATA_CANDIDATES.jsonl.
+これらの開部分スキームの形成は明らかに基底変換と可換である。
+$R = U \times_X U$ とおき、射影を $s, t : R \to U$ とすると、$R$ の開部分
+スキームとして
+$$
+s^{-1}(U_d) = t^{-1}(U_d)
+$$
+であることが従う。言い換えれば、開部分スキーム $U_d \subset U$ は
+$R$-不変である。これは $U_d$ が開部分空間 $X_d \subset X$ の逆像であることを
+意味する（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subspaces-presentation}）。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-filter-quasi-compact}
+$S$ をスキームとし、$X$ を $S$ 上の準コンパクトな代数空間とする。
+次の性質をもつ開部分空間
+$$
+\ldots \subset U_4 \subset U_3 \subset U_2 \subset U_1 = X
+$$
+が存在する。
+\begin{enumerate}
+\item $T_p = U_p \setminus U_{p + 1}$（被約誘導部分空間構造をもたせる）とおくと、
+分離的スキーム $V_p$ と全射エタール射 $f_p : V_p \to U_p$ が存在し、
+$f_p^{-1}(T_p) \to T_p$ は同型である。
+\item $x \in |X|$ が体からの準コンパクトな射 $\Spec(k) \to X$ によって
+表現されるならば、ある $p$ に対して $x \in T_p$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} により、アフィン・スキーム
+$U$ と全射エタール射 $U \to X$ を選べる。
+% P08-E287: frozen source begins at p >= 0 although the p-fold construction starts at p = 1; bound preserved; see ERRATA_CANDIDATES.jsonl.
+$p \geq 0$ に対し
+$$
+W_p = U \times_X \ldots \times_X U \setminus \text{すべての対角線}
+$$
+とおく。ここでファイバー積は $p$ 個の因子をもつ。$U$ は分離的なので、
+射 $U \to X$ は分離的であり、すべてのファイバー積
+$U \times_X \ldots \times_X U$ は分離的スキームである。$U \to X$ は分離的なので、
+対角射 $U \to U \times_X U$ は閉埋め込みである。$U \to X$ はエタールなので、
+対角射 $U \to U \times_X U$ は開埋め込みでもある。Morphisms of Spaces,
+Lemmas \ref{spaces-morphisms-lemma-etale-unramified} および
+\ref{spaces-morphisms-lemma-diagonal-unramified-morphism} を参照せよ。
+同様に、すべての対角射は開かつ閉の埋め込みで、$W_p$ は
+$U \times_X \ldots \times_X U$ の開かつ閉の部分スキームである。さらに射
+$$
+U \times_X \ldots \times_X U \longrightarrow
+U \times_{\Spec(\mathbf{Z})} \ldots \times_{\Spec(\mathbf{Z})} U
+$$
+は局所準有限かつ分離的であり（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map}）、その終域はアフィン・スキーム
+である。したがって More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-over-affine} により、
+$U \times_X \ldots \times_X U$ の任意の有限点集合はあるアフィン開集合に
+含まれる。同じことが $W_p$ にも成り立つ。
+
+$W_p$ には対称群 $S_p$ が $X$ 上自由に作用する
+% P08-E288: frozen source says “fix point locus”; intended fixed-point term rendered; see ERRATA_CANDIDATES.jsonl.
+（$U \times_X \ldots \times_X U$ から不動点軌跡を除いたためである）。上の事実と
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-finite-flat-equivalence-global} により、商
+$V_p = W_p/S_p$ はスキームである。$W_p$ 上の $S_p$ の作用は $X$ 上の作用なので、
+射 $V_p \to X$ がある。$W_p \to X$ はエタールで、$W_p \to V_p$ は
+全射エタールなので、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-local} により $V_p \to X$ もエタールである。
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-quotient-separated}
+により $V_p$ は分離的スキームであることに注意する。
+
+\medskip\noindent
+$U_p \subset X$ を $V_p \to X$ の像である開部分空間とする。構成により、
+$k$ が代数閉体である射 $\Spec(k) \to X$ が $U_p$ を経由することと、
+$U \times_X \Spec(k)$ が $\geq p$ 個の点をもつことは同値である。いつものように、
+$U \times_X \Spec(k)$ はスキーム論的に $\Spec(k)$ の（無限個でもよい）コピーの
+非交和であることに注意する（Remark \ref{decent-spaces-remark-recall}）。
+したがって $U_p$ は補題で述べた $X$ のフィルトレーションを与える。
+さらに、射 $\Spec(k) \to X$ が $T_p$ を経由することと
+$U \times_X \Spec(k)$ がちょうど $p$ 個の点をもつことは同値である。
+この場合、$V_p \times_X \Spec(k)$ はちょうど一つの点をもつ。
+$Z_p = f_p^{-1}(T_p) \subset V_p$ とおく。これは $V_p$ の閉部分スキームである。
+すると $Z_p \to T_p$ は代数空間のエタール射で、任意の代数閉体 $k$ に対し
+$k$-値点上全単射を誘導する。確かに、これは $Z_p \to T_p$ が普遍的単射で
+あることを含意し、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-etale-universally-injective-open} により開埋め込み、
+したがって同型である。これで (1) が証明された。
+
+\medskip\noindent
+$x : \Spec(k) \to X$ を準コンパクトな射とし、$k$ を体とする。このとき合成
+$\Spec(\overline{k}) \to \Spec(k) \to X$ も準コンパクトである
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-quasi-compact}）。この場合、スキーム
+$U \times_X \Spec(\overline{k})$ は準コンパクトである。上で見たように、これは
+$\Spec(\overline{k})$ のコピーの非交和なので、有限個の点しかもたない。
+点の個数を $p$ とすれば、確かに $x \in T_p$ であり、証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-filter-reasonable}
+$S$ をスキームとし、$X$ を $S$ 上の準コンパクトで妥当な代数空間とする。
+整数 $n$ と開部分空間
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+で、次の性質をもつものが存在する：$T_p = U_p \setminus U_{p + 1}$
+（被約誘導部分空間構造をもたせる）とおくと、分離的スキーム $V_p$ と
+全射エタール射 $f_p : V_p \to U_p$ が存在し、
+$f_p^{-1}(T_p) \to T_p$ は同型である。
+\end{lemma}
+
+\begin{proof}
+この補題の証明は Lemma \ref{decent-spaces-lemma-filter-quasi-compact} の証明と同一である。
+$X$ は妥当なので、Definition \ref{decent-spaces-definition-very-reasonable} により
+$U \to X$ のファイバーの次数を抑える整数 $n$ が存在する。
+すると $U_{n + 1} = \emptyset$ であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-stratify-reasonable}
+$S$ をスキームとし、$X$ を $S$ 上の準コンパクトで妥当な代数空間とする。
+整数 $n$ と開部分空間
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+で、各 $T_p = U_p \setminus U_{p + 1}$（被約誘導部分空間構造をもたせる）が
+スキームとなるものが存在する。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-filter-reasonable} の直接の帰結である。
+\end{proof}
+
+\noindent
+次の結果は \cite[Proposition 5.7.8]{GruRay} とほとんど同一である。
+
+\begin{lemma}
+\label{decent-spaces-lemma-filter-quasi-compact-quasi-separated}
+\begin{reference}
+この結果は \cite[Proposition 5.7.8]{GruRay} とほとんど同一である。
+\end{reference}
+$X$ を $\Spec(\mathbf{Z})$ 上の準コンパクトかつ準分離的な代数空間とする。
+整数 $n$ と開部分空間
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+で、次の性質をもつものが存在する：$T_p = U_p \setminus U_{p + 1}$
+（被約誘導部分空間構造をもたせる）とおくと、準コンパクトな分離的スキーム
+$V_p$ と全射エタール射 $f_p : V_p \to U_p$ が存在し、
+$f_p^{-1}(T_p) \to T_p$ は同型である。
+\end{lemma}
+
+\begin{proof}
+この補題の証明は Lemma \ref{decent-spaces-lemma-filter-quasi-compact} の証明と同一である。
+準分離的な空間は妥当であることに注意する。Lemma
+\ref{decent-spaces-lemma-bounded-fibres} と Definition \ref{decent-spaces-definition-very-reasonable} を
+参照せよ。したがって Lemma \ref{decent-spaces-lemma-filter-reasonable} と同様に
+$U_{n + 1} = \emptyset$ を得る。議論の最後に、$X$ は準分離的なので、
+スキーム $U \times_X \ldots \times_X U$ はすべて準コンパクトであることを
+付け加える。したがってスキーム $W_p$ は準コンパクトであり、対称群 $S_p$ に
+よる商 $V_p = W_p/S_p$ は準コンパクト・スキームである。
+\end{proof}
+
+\noindent
+次の補題はおそらく別の場所に置くべきである。
+
+\begin{lemma}
+\label{decent-spaces-lemma-locally-constructible}
+$S$ をスキームとし、$X$ を $S$ 上の準分離的な代数空間とする。
+$E \subset |X|$ を部分集合とする。このとき $E$ がエタール局所構成可能であること
+（Properties of Spaces, Definition
+\ref{spaces-properties-definition-locally-constructible}）と、$E$ が位相空間
+$|X|$ の局所構成可能部分集合であること（Topology, Definition
+\ref{topology-definition-constructible}）は同値である。
+\end{lemma}
+
+\begin{proof}
+$E \subset |X|$ が位相空間 $|X|$ の局所構成可能部分集合であると仮定する。
+$U$ をスキームとして、$f : U \to X$ をエタール射とする。
+$f^{-1}(E)$ が $U$ で局所構成可能であることを示さなければならない。
+問題は $U$ と $X$ 上局所的なので、$X$ は準コンパクト、$E \subset |X|$ は
+構成可能、$U$ はアフィンと仮定してよい。この場合 $U \to X$ は準コンパクトで、
+したがって $f : |U| \to |X|$ は準コンパクトである。
+$|X|$、resp.\ $U$ の retrocompact な開集合は、$|X|$、resp.\ $U$ の
+準コンパクト開集合と同じであることに注意する（Topology, Lemma
+\ref{topology-lemma-topology-quasi-separated-scheme}）。したがって Topology, Lemma
+\ref{topology-lemma-inverse-images-constructibles} により $f^{-1}(E)$ は構成可能である。
+
+\medskip\noindent
+逆に、$E$ がエタール局所構成可能であると仮定する。$E$ が位相空間 $|X|$ で
+局所構成可能であることを示したい。問題は $X$ 上局所的なので、$X$ は
+準コンパクトかつ準分離的と仮定してよい。この場合 $E$ が $|X|$ で構成可能で
+あることを示す。Lemma \ref{decent-spaces-lemma-filter-quasi-compact-quasi-separated} のような
+開部分空間
+$$
+\emptyset = U_{n + 1} \subset
+U_n \subset U_{n - 1} \subset \ldots \subset U_1 = X
+$$
+と、同型 $f_p^{-1}(T_p) \to T_p = U_p \setminus U_{p + 1}$ を誘導する
+全射エタール射 $f_p : V_p \to U_p$ を選ぶ。ここで $V_p$ は準コンパクトな
+分離的スキームである。定義により $E$ の逆像 $E_p \subset V_p$ は
+$V_p$ で局所構成可能である。Properties, Lemma
+\ref{properties-lemma-constructible-quasi-compact-quasi-separated} により
+$E_p$ は $V_p$ で構成可能である。したがって Topology, Lemma
+\ref{topology-lemma-intersect-constructible-with-closed} により
+$E_p \cap |f_p^{-1}(T_p)| = E \cap |T_p|$ は $|T_p|$ で構成可能である
+（$V_p \setminus f_p^{-1}(T_p)$ は、準コンパクト射 $f_p$ による準コンパクト空間
+$U_{p + 1}$ の逆像なので、準コンパクトであることに注意する）。ゆえに
+$$
+E = (|T_n| \cap E) \cup (|T_{n - 1}| \cap E) \cup \ldots \cup
+(|T_1| \cap E)
+$$
+は Topology, Lemma
+\ref{topology-lemma-collate-constructible-from-constructible} により構成可能である。
+ここで $|T_p|$ が $|X|$ で構成可能であることを用いたが、これは上で述べたことから
+明らかである。
+\end{proof}
+
+
+\section{スキームによる整被覆}
+\label{decent-spaces-section-integral-cover}
+
+\noindent
+ここでは、任意の準コンパクトかつ準分離的な代数空間 $X$ に対して、
+スキーム $Y$ と全射整射 $Y \to X$ が存在することを証明する。
+代数空間の極限に関する理論をいくらか展開した後、これを有限射で行えることを
+証明する。Limits of Spaces, Section
+\ref{spaces-limits-section-finite-cover} を参照せよ。
+
+\begin{lemma}
+\label{decent-spaces-lemma-extend-integral-morphism}
+$S$ をスキームとする。$j : V \to Y$ を $S$ 上の代数空間の準コンパクトな
+開埋め込みとし、$\pi : Z \to V$ を整射とする。このとき整射
+$\nu : Y' \to Y$ で、$Z$ が $Y'$ における $V$ の逆像と $V$-同型となるものが
+存在する。
+\end{lemma}
+
+\begin{proof}
+$j$ と $\pi$ はいずれも準コンパクトかつ分離的なので、$j \circ \pi$ もそうである。
+$\nu : Y' \to Y$ を $Z$ における $Y$ の正規化とする。Morphisms of Spaces,
+Section \ref{spaces-morphisms-section-normalization-X-in-Y} を参照せよ。
+もちろん Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-normalization} により $\nu$ は整射である。
+最後の主張は Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-properties-normalization} および
+\ref{spaces-morphisms-lemma-normalization-in-integral} から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-there-is-a-scheme-integral-over}
+$S$ をスキームとし、$X$ を $S$ 上の準コンパクトかつ準分離的な代数空間とする。
+\begin{enumerate}
+\item $Y$ がスキームであるような全射整射 $Y \to X$ が存在する。
+\item 全射エタール射 $U \to X$ が与えられたとき、各 $y \in Y$ に対して
+開近傍 $V \subset Y$ があり、$V \to X$ が $U$ を経由するように
+$Y \to X$ を選べる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は (2) で $U = X$ とした特別な場合である。$U'$ がスキームであるような
+全射エタール射 $U' \to U$ を選ぶ。$U$ を $U'$ で置き換えてよいことは
+明らかなので、$U$ はスキームと仮定してよい。$X$ は準コンパクトなので、
+有限個のアフィン開集合 $U_i \subset U$ で
+$U' = \coprod U_i \to X$ が全射となるものが存在する。
+$U$ を再び $U'$ で置き換えれば、$U$ はアフィンと仮定してよい。
+$X$ は準分離的、したがって妥当なので、$U \to X$ の幾何学的ファイバーの
+次数を抑える整数 $d$ が存在する（Lemma \ref{decent-spaces-lemma-bounded-fibres} を参照）。
+$X$ 上へ全射エタールに写るすべての準コンパクトな分離的スキーム $U$ に対し、
+$d$ に関する帰納法で補題を証明する。$d = 1$ ならば $U = X$ で、
+$Y = U$ とすれば結果が成り立つ。$d > 1$ と仮定する。
+
+\medskip\noindent
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-separated-quasi-affine} を適用して、分解
+$$
+\xymatrix{
+U \ar[rr]_j \ar[rd] & & Y \ar[ld]^\pi \\
+& X
+}
+$$
+を得る。ここで $\pi$ は整射、$j$ は準コンパクトな開埋め込みである。
+$j(U)$ が $Y$ でスキーム論的に稠密であると仮定してよく、実際そうする。
+このとき $U \times_X Y$ は（$U$ 上整なので）準コンパクトな分離的スキームで、
+$$
+U \times_X Y = U \amalg W
+$$
+である。ここで第一の成分は $U \to U \times_X Y$ の像である。この像は
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-semi-diagonal} により閉であり、
+$Y$ 上エタールな代数空間の間の射としてエタールなので開でもある。
+第二の成分はその（開かつ閉の）補集合である。$W$ の像 $V \subset Y$ は
+$Y \setminus U$ を含む開部分空間である。
+
+\medskip\noindent
+エタール射 $W \to Y$ の幾何学的ファイバーの濃度は $< d$ である。
+実際、$U \subset Y$ の幾何学的点については直接明らかである。
+$|U| \subset |Y|$ は稠密なので、Lemma
+\ref{decent-spaces-lemma-quasi-compact-reasonable-stratification} により $Y$ のすべての
+幾何学的点について成り立つ（準コンパクトなエタール射のファイバーの次数は
+特殊化の下で増加しない）。したがって $W \to V$ に帰納法の仮定を適用し、
+$Z$ がスキームで、Zariski 局所的に $W$ を経由する全射整射 $Z \to V$ を得る。
+$Z' \to Y$ は整射、$Z \to Z'$ は開埋め込みであるような分解
+$Z \to Z' \to Y$ を選ぶ（Lemma \ref{decent-spaces-lemma-extend-integral-morphism}）。
+$Z'$ を $Z'$ における $Z$ のスキーム論的閉包で置き換え、$Z$ が $Z'$ で
+スキーム論的に稠密であると仮定してよい。この操作の後
+$Z' \times_Y V = Z$ である。最後に $T \subset Y$ を $Y \setminus V$ 上の
+誘導閉部分空間構造とする。射
+$$
+Z' \amalg T \longrightarrow X
+$$
+を考える。これは構成により全射整射である。$T \subset U$ なので、射
+$T \to X$ が $U$ を経由することは明らかである。一方、点 $z \in Z'$ を取る。
+$z \not \in Z$ ならば、$z$ は $Y \setminus V \subset U$ の点に写り、
+$z$ のある近傍上で射は $U$ を経由する。$z \in Z$ ならば、$Z$ における
+$z$ の開近傍（これは $Z'$ における $z$ の開近傍でもある）で、
+$W \subset U \times_X Y$、したがって $U$ を経由するものがある。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-there-is-a-scheme-integral-over-refined}
+$S$ をスキームとし、$X$ を $S$ 上の準コンパクトかつ準分離的な代数空間で、
+$|X|$ が有限個の既約成分をもつものとする。
+\begin{enumerate}
+% P08-E289: frozen source names an undefined f instead of the displayed morphism Y -> X; preserved; see ERRATA_CANDIDATES.jsonl.
+\item $Y$ がスキームであり、$f$ がある準コンパクト稠密開集合 $U \subset X$ 上
+有限エタールであるような全射整射 $Y \to X$ が存在する。
+\item 全射エタール射 $V \to X$ が与えられたとき、各 $y \in Y$ に対して
+開近傍 $W \subset Y$ があり、$W \to X$ が $V$ を経由するように
+$Y \to X$ を選べる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+証明は Lemma \ref{decent-spaces-lemma-there-is-a-scheme-integral-over} の証明と（おおむね）
+同じであり、稠密な準コンパクト開集合 $U$ を得るための技術的コメントを
+追加する（そして残念ながら $U$ を追跡するため記号を変更する）。
+
+\medskip\noindent
+(1) は (2) で $V = X$ とした特別な場合である。
+
+\medskip\noindent
+(2) の証明。$V'$ がスキームであるような全射エタール射 $V' \to V$ を選ぶ。
+$V$ を $V'$ で置き換えてよいことは明らかなので、$V$ はスキームと仮定してよい。
+$X$ は準コンパクトなので、有限個のアフィン開集合 $V_i \subset V$ で
+$V' = \coprod V_i \to X$ が全射となるものが存在する。
+$V$ を再び $V'$ で置き換えれば、$V$ はアフィンと仮定してよい。
+$X$ は準分離的、したがって妥当なので、$V \to X$ の幾何学的ファイバーの
+次数を抑える整数 $d$ が存在する（Lemma \ref{decent-spaces-lemma-bounded-fibres} を参照）。
+
+\medskip\noindent
+$d \geq 1$ に関する帰納法で、次の帰納法の仮定 $(H_d)$ を証明する。
+\begin{itemize}
+\item 有限個の既約成分をもつ任意の準コンパクトかつ準分離的な代数空間 $X$、
+任意の $m \geq 0$、任意の準コンパクトな分離的スキーム $V_j$,
+$j = 1, \ldots, m$、任意のエタール射 $\varphi_j : V_j \to X$,
+$j = 1, \ldots, m$ で、$d$ が $\varphi_j : V_j\to X$ の幾何学的ファイバーの
+次数を抑え、$\varphi = \coprod \varphi_j : V = \coprod V_j \to X$ が
+全射であるものに対し、補題の主張が $\varphi : V \to X$ について成り立つ。
+\end{itemize}
+$d = 1$ ならば、各 $\varphi_j$ は開埋め込みである。したがって $X$ はスキームで、
+% P08-E290: frozen base case chooses Y = V although the union of opens need not be integral; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$Y = V$ とすれば結果が成り立つ。$d > 1$ とし、$(H_{d - 1})$ を仮定し、
+$m$, $\varphi : V_j \to X$, $j = 1, \ldots, m$ を $(H_d)$ のように取る。
+
+\medskip\noindent
+$\eta_1, \ldots, \eta_n \in |X|$ を $|X|$ の既約成分の生成点とする。
+Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-locally-quasi-separated-open-dense-scheme} により、
+$\eta_1, \ldots, \eta_n \in U$ を満たす開部分スキーム $U \subset X$ がある。
+$U$ を縮小し、$U$ はアフィンであると仮定してよい。また Morphisms, Lemma
+\ref{morphisms-lemma-generically-finite} により、各 $\varphi_j : V_j \to X$ は
+$U$ 上有限エタールであると仮定してよい。もちろん、$U$ は $X$ で準コンパクト
+かつ稠密で、$\varphi_j^{-1}(U)$ は $V_j$ で稠密である。とくに各 $V_j$ は
+有限個の既約成分をもつ。
+
+\medskip\noindent
+$j \in \{1, \ldots, m\}$ を固定する。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-separated-quasi-affine} と同様に、
+$Y_j$ を $V_j$ における $X$ の正規化とする。分解
+$$
+\xymatrix{
+V_j \ar[rr] \ar[rd]_{\varphi_j} & & Y_j \ar[ld]^{\pi_j} \\
+& X
+}
+$$
+を得る。ここで $\pi_j$ は整射、$V_j \to Y_j$ は準コンパクトな開埋め込みである。
+$Y_j$ は $V_j$ における $X$ の正規化なので、Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-properties-normalization} および
+\ref{spaces-morphisms-lemma-normalization-in-integral} により
+$\varphi_j^{-1}(U) \to \pi_j^{-1}(U)$ は同型である。したがって $\pi_j$ は
+$U$ 上有限エタールである。$Y_j$ は $V_j$ における $X$ の正規化なので、
+$V_j$ は $Y_j$ でスキーム論的に稠密であることに注意する
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-characterize-normalization} における相対正規化の
+特徴づけから従う）。$V_j$ は準コンパクトなので、
+$|V_j| \subset |Y_j|$ は稠密である。Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-scheme-theoretic-closure}、とくに Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-quasi-compact-immersion} を参照せよ。
+したがって $|Y_j|$ は有限個の既約成分をもつ。
+% P08-E291: frozen source claims finiteness over V_j where only integrality is established; wording preserved; see ERRATA_CANDIDATES.jsonl.
+このとき $V_j \times_X Y_j$ は（$V_j$ 上有限なので）準コンパクトな
+分離的スキームであり、
+$$
+V_j \times_X Y_j = V_j \amalg W_j
+$$
+である。ここで第一の成分は $V_j \to V_j \times_X Y_j$ の像である。
+これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal} により閉であり、
+% P08-E292: frozen source names Y rather than Y_j as the étale base; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$Y$ 上エタールな代数空間の間の射としてエタールなので開でもある。
+第二の成分はその（開かつ閉の）補集合である。
+
+\medskip\noindent
+エタール射 $W_j \to Y_j$ の幾何学的ファイバーの濃度は $< d$ である。
+実際、$V_j \subset Y_j$ の幾何学的点については直接明らかである。
+$|V_j| \subset |Y_j|$ は稠密なので、Lemma
+\ref{decent-spaces-lemma-quasi-compact-reasonable-stratification} により $Y_j$ のすべての
+幾何学的点について成り立つ（準コンパクトなエタール射のファイバーの次数は
+特殊化の下で増加しない）。
+% P08-E294: frozen proof invokes H_{d-1} without establishing the required surjectivity; preserved; see ERRATA_CANDIDATES.jsonl.
+$(H_{d - 1})$ を $V_j \amalg W_j \to Y_j$ に適用し、$Y_j'$ がスキームで、
+Zariski 局所的に $V_j \amalg W_j$ を経由し、準コンパクト稠密開集合
+$U_j \subset Y_j$ 上有限エタールである全射整射 $Y_j' \to Y_j$ を得る。
+$U$ を縮小し、$\pi_j^{-1}(U) \subset U_j$ と仮定してよく、実際そうする
+（すべての $j$ に対して同じ $U$ を選べる。いくつかの細部を省略する）。
+
+\medskip\noindent
+$$
+Y = \coprod\nolimits_{j = 1, \ldots, m} Y'_j \longrightarrow X
+$$
+が問題の解であると主張する。第一に、この射は整射である。実際、各成分上では
+% P08-E293: frozen source routes the component through Y rather than Y_j; formula preserved; see ERRATA_CANDIDATES.jsonl.
+整射の合成 $Y'_j \to Y \to X$ がある（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-integral}）。第二に、この射は Zariski 局所的に
+$V = \coprod V_j$ を経由する。実際、各 $Y'_j \to Y_j$ は Zariski 局所的に
+$V_j \amalg W_j = V_j \times_X Y_j$ を経由することを上で見た。最後に、
+$Y'_j \to Y_j$ と $Y_j \to X$ はいずれも $U$ 上有限エタールなので、合成も
+そうである。これで証明が終わる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{スキーム軌跡}
+\label{decent-spaces-section-schematic}
+
+\noindent
+本節では、良好な代数空間がスキームである稠密開部分空間をもつことを証明する。
+まず妥当な代数空間についてこれを証明する。
+
+
+\begin{proposition}
+\label{decent-spaces-proposition-reasonable-open-dense-scheme}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$X$ が妥当ならば、
+$X$ にはスキームである稠密開部分空間が存在する。
+\end{proposition}
+
+\begin{proof}
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-subscheme} により、
+問題は $X$ 上局所的である。したがって、アフィン・スキーム $U$ と
+全射エタール射 $U \to X$ が存在すると仮定してよい（Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-cover-by-union-affines}）。$X$ は妥当なので、
+$U \to X$ のファイバーの次数を抑える整数 $n$ が存在する。Definition
+\ref{decent-spaces-definition-very-reasonable} を参照せよ。次の二条件が成り立つときには常に
+スキーム軌跡が $X$ で稠密であることを、$n$ に関する帰納法で証明する。
+\begin{enumerate}
+\item $U \to X$ は全射エタール射で、そのファイバーの次数は $\leq n$ である。
+\item $U$ はあるアフィン・スキームの局所閉部分スキームと同型である。
+\end{enumerate}
+
+\medskip\noindent
+$X_n \subset X$ を、射 $U \to X$ を用いて Lemma
+\ref{decent-spaces-lemma-quasi-compact-reasonable-stratification} で構成した閉部分空間
+$Z_{n - 1} \subset X$ の補集合である開部分空間とする。
+$U_n \subset U$ を $X_n$ の逆像とする。このとき $U_n \to X_n$ は次数 $n$ の
+有限局所自由射である。したがって Properties of Spaces, Proposition
+\ref{spaces-properties-proposition-finite-flat-equivalence-global} により
+$X_n$ はスキームである（また $U_n$ の任意の有限点集合は $U_n$ のある
+アフィン開集合に含まれる。Properties, Lemma
+\ref{properties-lemma-ample-finite-set-in-affine} を参照）。
+
+\medskip\noindent
+$X' \subset X$ を、$|X'|$ が $|X|$ における $|Z_{n - 1}|$ の内部となる
+開部分空間とする（Topology, Definition
+\ref{topology-definition-nowhere-dense} を参照）。$U' \subset U$ をその逆像とする。
+このとき $U' \to X'$ は全射エタールで、そのファイバーの次数は $n - 1$ で
+抑えられる。帰納法により、$X'$ のスキーム軌跡は開稠密部分空間
+$X'' \subset X'$ である。初等的な位相論により、$X'' \cup X_n \subset X$ は
+開かつ稠密であり、結論を得る。
+\end{proof}
+
+\begin{theorem}[David Rydh]
+\label{decent-spaces-theorem-decent-open-dense-scheme}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$X$ が良好ならば、
+$X$ にはスキームである稠密開部分空間が存在する。
+\end{theorem}
+
+\begin{proof}
+定理が成り立たない良好な代数空間 $X$ があると仮定する。
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-subscheme} により、
+スキームである最大の開部分空間 $X' \subset X$ が存在する。
+$X'$ は $X$ で稠密でないので、$|X''| \cap |X'| = \emptyset$ を満たす
+開部分空間 $X'' \subset X$ が存在する。$X$ を $X''$ で置き換えると、
+スキームである開部分空間を \textit{一つも} 含まない、空でない良好な代数空間
+$X$ を得る。
+
+\medskip\noindent
+空でないアフィン・スキーム $U$ とエタール射 $U \to X$ を選ぶ。
+% P08-E295: frozen source calls this image replacement an open subscheme; intended open subspace rendered; see ERRATA_CANDIDATES.jsonl.
+$X$ を $|U| \to |X|$ の像に対応する開部分空間で置き換えてよく、実際そうする。
+射 $U \to X$ に対して Lemma \ref{decent-spaces-lemma-stratify-flat-fp-lqf} で構成した
+開部分空間の列
+% P08-E296: frozen descending chains omit a relation symbol before the ellipses; formulas preserved; see ERRATA_CANDIDATES.jsonl.
+$$
+X = X_0 \supset X_1 \supset X_2 \ldots
+$$
+を考える。$U \to X$ は全射なので $X_0 = X_1$ であることに注意する。
+$U = U_0 = U_1 \supset U_2 \ldots$ を $U$ に誘導される開部分スキームの列とする。
+
+\medskip\noindent
+空でないアフィン開集合 $V_1 \subset U_1$ を選ぶ（たとえば $V_1 = U_1$）。
+$V_n \subset U_n$ を満たす空でないアフィン開集合の列
+$V_1 \supset V_2 \supset \ldots$ を帰納的に構成する。実際、
+$V_1, \ldots, V_{n - 1}$ を構成したとき、$V_{n - 1} \cap U_n = \emptyset$ で
+ない限り $V_n$ を選べる。しかし $V_{n - 1} \cap U_n = \emptyset$ ならば、
+$|X'| = \Im(|V_{n - 1}| \to |X|)$ を満たす開部分空間 $X' \subset X$ は
+$|X| \setminus |X_n|$ に含まれる。したがって $V_{n - 1} \to X'$ は
+ファイバーの次数が $n - 1$ で抑えられるエタール射である。
+言い換えれば、$X'$ は（定義により）妥当であり、したがって Proposition
+\ref{decent-spaces-proposition-reasonable-open-dense-scheme} により $X'$ は空でない開部分スキームを
+含む。これは矛盾であり、$V_n$ を選べることが分かる。
+
+\medskip\noindent
+Limits, Lemma \ref{limits-lemma-limit-nonempty} により、極限
+$V_\infty = \lim V_n$ は空でないスキームである。射 $\Spec(k) \to V_\infty$ を
+一つ取る。合成 $\Spec(k) \to V_\infty \to U \to X$ の像は、構成により
+すべての $X_d$ に含まれる。言い換えれば、
+% P08-E297: frozen source says “the fibred”; intended fibre rendered; see ERRATA_CANDIDATES.jsonl.
+ファイバー $U \times_X \Spec(k)$ は無限次数をもち、良好な空間の定義に矛盾する。
+この矛盾により定理が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-when-quotient-scheme-at-point}
+$S$ をスキームとする。$X \to Y$ を $S$ 上の代数空間の全射有限局所自由射とする。
+$y \in |Y|$ に対し、次の条件は同値である。
+\begin{enumerate}
+\item $y$ は $Y$ のスキーム軌跡に属する。
+\item $y$ の逆像を含むアフィン開集合 $U \subset X$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% P08-E298: frozen proof types the point as y in Y rather than y in |Y|; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$y \in Y$ がスキーム軌跡に属するならば、そのアフィン開近傍
+$V \subset Y$ をもち、$X$ における $V$ の逆像 $U$ は $V$ 上有限な開集合なので
+アフィンである。したがって (1) は (2) を含意する。
+
+\medskip\noindent
+逆に、(2) のような $U \subset X$ が与えられたと仮定する。
+$R = X \times_Y X$ とおき、射影を $s, t : R \to X$ とする。
+% P08-E299: frozen source omits parentheses around the intersection in the set difference; formula preserved; see ERRATA_CANDIDATES.jsonl.
+$Z = R \setminus s^{-1}(U) \cap t^{-1}(U)$ を考える。これは $R$ の閉部分集合である。
+像 $t(Z)$ は $X$ の閉部分集合であり、緩やかに言えば、$X \setminus U$ の点と
+$R$-同値である $X$ の点の集合である。したがって
+$U' = X \setminus t(Z)$ は $U$ に含まれる $X$ の $R$-不変な開部分空間で、
+$y$ 上の $X \to Y$ のファイバーを含む。$X \to Y$ は開写像なので
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-fppf-open}）、
+$U'$ の像は開部分空間 $V' \subset Y$ である。$U'$ は $R$-不変で、
+$R = X \times_Y X$ なので、$U'$ は $V'$ の逆像である
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を用いる）。$Y$ を $V'$ で、
+$X$ を $U'$ で置き換えれば、$X$ はアフィン・スキームの開部分スキームと
+同型なスキームであると仮定してよい。
+
+\medskip\noindent
+$X$ はアフィン・スキームの開部分スキームと同型なスキームであると仮定する。
+この場合、fppf 商層 $X/R$ はスキームである。Properties of Spaces,
+Proposition \ref{spaces-properties-proposition-finite-flat-equivalence-global} を
+参照せよ。$Y$ は fppf 位相の層なので、$X \to Y$ を経由させる標準写像
+$X/R \to Y$ を得る。$X \to Y$ は全射有限局所自由なので、層の写像として
+全射である（Spaces, Lemma
+\ref{spaces-lemma-surjective-flat-locally-finite-presentation}）。したがって
+$X/R \to Y$ は層の写像として全射である。一方、層として
+$R = X \times_Y X$ なので、$X/R \to Y$ は層の写像として単射でもある。
+ゆえに $X/R \to Y$ は同型であり、$Y$ は表現可能である。
+\end{proof}
+
+\noindent
+この時点で、次の補題を証明する方法がいくつもある。
+
+\begin{lemma}
+\label{decent-spaces-lemma-finite-etale-cover-dense-open-scheme}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$U$ がスキームであるような
+有限全射エタール射 $U \to X$ が存在するならば、$X$ にはスキームである
+稠密開部分空間が存在する。
+\end{lemma}
+
+\begin{proof}[第一の証明]
+射 $U \to X$ は有限局所自由である。したがって、$X$ は開かつ閉の部分空間
+$X_d \subset X$ に分解し、$U \times_X X_d \to X_d$ は次数 $d$ の
+有限局所自由射となる。ゆえに $U \to X$ は次数 $d$ の有限局所自由射であると
+仮定してよい。この場合、$U_i \subset U$, $i \in I$ をアフィン開集合全体とする。
+各 $i$ に対し、射 $U_i \to X$ はエタールで、普遍的に有界なファイバーをもつ
+（実際 $d$ で抑えられる）。言い換えれば $X$ は妥当であり、結果は Proposition
+\ref{decent-spaces-proposition-reasonable-open-dense-scheme} から従う。
+\end{proof}
+
+\begin{proof}[第二の証明]
+問題は $X$ 上局所的なので（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme}）、$X$ は準コンパクトと仮定してよい。
+すると $U$ も準コンパクトである。分離的な稠密開部分スキーム
+$W \subset U$ が存在する（Properties, Lemma
+\ref{properties-lemma-quasi-compact-dense-open-separated}）。
+$Z = U \setminus W$ とおく。$R = U \times_X U$ とし、射影を
+$s, t : R \to U$ とする。このとき $t^{-1}(Z)$ は $R$ で至る所稠密でなく
+（Topology, Lemma
+\ref{topology-lemma-open-inverse-image-closed-nowhere-dense}）、したがって
+$\Delta = s(t^{-1}(Z))$ は $U$ の $R$-不変な閉部分集合で至る所稠密でない
+（Morphisms, Lemma \ref{morphisms-lemma-image-nowhere-dense-finite}）。
+$u \in U \setminus \Delta$ を既約成分の生成点とする。これらの点は
+$U \setminus \Delta$ で稠密で、$\Delta$ は至る所稠密でないので、$u$ の像
+$x \in X$ が $X$ のスキーム軌跡に属することを示せば十分である。
+$t(s^{-1}(\{u\})) \subset W$ は $W$ の既約成分の生成点からなる有限集合である
+（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points} と比較せよ）。Properties, Lemma
+\ref{properties-lemma-maximal-points-affine} により、
+$t(s^{-1}(\{u\})) \subset V$ を満たすアフィン開集合 $V \subset W$ を取れる。
+$t(s^{-1}(\{u\}))$ は $x$ 上の $|U| \to |X|$ のファイバーなので、Lemma
+\ref{decent-spaces-lemma-when-quotient-scheme-at-point} により結論を得る。
+\end{proof}
+
+\begin{proof}[第三の証明]
+（この証明は本質的には第二の証明と同じだが、参照が少ない。）
+$X$ を代数空間、$U$ をスキームとし、$U \to X$ を有限全射エタール射とする。
+$R = U \times_X U$ と書き、通常どおり射影を $s, t : R \to U$ とする。
+$s, t$ は全射、有限、かつエタールであることに注意する。
+主張：$U$ の $R$-不変アフィン開集合の和集合は $U$ で位相的に稠密である。
+
+\medskip\noindent
+主張の証明。アフィン開集合 $W \subset U$ を取る。
+$W' = t(s^{-1}(W)) \subset U$ とおく。$s^{-1}(W)$ はアフィン
+（したがって準コンパクト）なので、$W' \subset U$ は準コンパクト開集合である。
+Properties, Lemma \ref{properties-lemma-quasi-compact-dense-open-separated} により、
+分離的スキームである稠密開集合 $W'' \subset W'$ が存在する。
+$\Delta' = W' \setminus W''$ とおく。これは $W''$ の閉部分集合で、
+至る所稠密でない。$t|_{s^{-1}(W)} : s^{-1}(W) \to W'$ はエタールなので
+開写像であり、したがって逆像
+$(t|_{s^{-1}(W)})^{-1}(\Delta') \subset s^{-1}(W)$ は閉部分集合で
+至る所稠密でない（Topology, Lemma
+\ref{topology-lemma-open-inverse-image-closed-nowhere-dense}）。ゆえに Morphisms,
+Lemma \ref{morphisms-lemma-image-nowhere-dense-finite} により、
+$$
+\Delta = s\left((t|_{s^{-1}(W)})^{-1}(\Delta')\right)
+$$
+は $W$ の閉部分集合で、至る所稠密でない。
+$\eta \not \in \Delta$ を満たし、$W$ の既約成分（したがって $U$ の既約成分）の
+生成点である任意の点 $\eta \in W$ を取る。上の選択により、有限集合
+$t(s^{-1}(\{\eta\})) = \{\eta_1, \ldots, \eta_n\}$ は分離的スキーム
+$W''$ に含まれる。$s$ のファイバーは有限離散空間であり、一般化はエタール射
+$t$ に沿って持ち上がることに注意する。Morphisms, Lemmas
+\ref{morphisms-lemma-etale-flat} および
+\ref{morphisms-lemma-generalizations-lift-flat} を参照せよ。
+このようにして、各 $\eta_i$ は $W''$ の既約成分の生成点であることが分かる。
+したがって Properties, Lemma \ref{properties-lemma-maximal-points-affine} により、
+$\{\eta_1, \ldots, \eta_n\} \subset V$ を満たすアフィン開集合
+$V \subset W''$ を取れる。Groupoids, Lemma
+\ref{groupoids-lemma-find-invariant-affine} により、これは $\eta$ が $U$ の
+$R$-不変アフィン開部分スキームに含まれることを含意する。
+$W$ は $U$ の任意のアフィン開集合として選ばれ、$W \setminus \Delta$ の
+既約成分の生成点の集合は $W$ で稠密なので、主張が従う。
+
+\medskip\noindent
+主張を用いて証明を終える。$W \subset U$ が $R$-不変アフィン開集合ならば、
+$W$ への $R$ の制限 $R_W$ は
+$R_W = s^{-1}(W) = t^{-1}(W)$ に等しい（Groupoids, Definition
+\ref{groupoids-definition-invariant-open} とその後の議論を参照）。
+とくに写像 $R_W \to W$ も有限エタールであり、したがって $R_W$ はアフィンである。
+Groupoids, Proposition \ref{groupoids-proposition-finite-flat-equivalence} により
+$W/R_W$ はスキームである。一方、Spaces, Lemma
+\ref{spaces-lemma-finding-opens} により $W/R_W$ は $X$ の開部分空間である。
+したがって、稠密な点集合が $U$ の $R$-不変アフィン開集合に含まれることは、
+$X$ のスキーム軌跡（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-subscheme} を参照）が $X$ で開かつ稠密であることを
+確かに含意する。
+\end{proof}
+
+\section{剰余体と Hensel 局所環}
+\label{decent-spaces-section-residue-fields-henselian-local-rings}
+
+\noindent
+良好な代数空間に対しては、点における剰余体と Hensel 局所環を定義できる。
+たとえば、次の補題は、良好な空間上の点の剰余体が定義されることを示す。
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-points-monomorphism}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。写像
+$$
+\{\Spec(k) \to X \text{ が単射で、}k\text{ は体}\}
+\longrightarrow
+|X|
+$$
+を考える。この写像は常に単射である。$X$ が良好ならば、この写像は全単射である。
+\end{lemma}
+
+\begin{proof}
+一般にこの写像が単射であることは、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-monomorphism} で見た。
+Lemma \ref{decent-spaces-lemma-bounded-fibres} により、$X$ が良好ならば全射である
+（実際、これは良好であることの定義の一部だと言ってもよい）。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+点 $x \in |X|$ が単射 $\Spec(k) \to X$ によって表されるなら、体 $k$ は
+一意な同型を除いて一意である。良好な代数空間では、Lemma
+\ref{decent-spaces-lemma-decent-points-monomorphism} により、すべての点に対してこのような
+単射が存在する。したがって、次の定義は意味をもつ。
+
+\begin{definition}
+\label{decent-spaces-definition-residue-field}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ とする。$x$ を表す単射
+$\Spec(\kappa(x)) \to X$ を備えた一意な体 $\kappa(x)$ を
+{\it $x$ における $X$ の剰余体}という。
+\end{definition}
+
+\noindent
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の良好な代数空間の射とする。
+$x \in |X|$ を点とし、$y = f(x) \in |Y|$ とおく。このとき合成
+$\Spec(\kappa(x)) \to Y$ は $y$ を定める同値類に属するので、
+$\Spec(\kappa(y)) \to Y$ を経由する。言い換えると、可換図式
+$$
+\xymatrix{
+\Spec(\kappa(x)) \ar[r]_-x \ar[d] & X \ar[d]^f \\
+\Spec(\kappa(y)) \ar[r]^-y & Y
+}
+$$
+を得る。左の垂直射は体の準同型
+$\kappa(y) \to \kappa(x)$ に対応する。しばしば、これを単に $f$ が誘導する
+準同型と呼ぶ。
+
+\begin{lemma}
+\label{decent-spaces-lemma-identifies-residue-fields}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の良好な代数空間の射とする。
+$x \in |X|$ を点とし、その像を $y = f(x) \in |Y|$ とする。
+次は同値である。
+\begin{enumerate}
+\item $f$ は同型 $\kappa(y) \to \kappa(x)$ を誘導する。
+\item 誘導される射 $\Spec(\kappa(x)) \to Y$ は単射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+直前の議論から直ちに従う。
+\end{proof}
+
+\noindent
+次の補題は、良好な代数空間上の点の Hensel 局所環が定義されることを示す。
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+すべての点 $x \in |X|$ に対してエタール射
+$$
+(U, u) \longrightarrow (X, x)
+$$
+が存在する。ここで $U$ はアフィン・スキーム、$u$ は $x$ の上にある $U$ の
+唯一の点であり、誘導される準同型 $\kappa(x) \to \kappa(u)$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$X$ を $x$ を含む準コンパクト開部分で置き換えることにより、$X$ は
+準コンパクトと仮定してよい。$x$ は体のスペクトルからの準コンパクトな（単）射に
+よって表されることを思い出そう（良好な空間の定義による）。
+% P08-E305: source grammar is recorded in the part-local errata sidecar.
+したがって、補題は Lemma \ref{decent-spaces-lemma-filter-quasi-compact} から従う。
+\end{proof}
+
+\begin{definition}
+\label{decent-spaces-definition-elemenary-etale-neighbourhood}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+% P08-E304: frozen source types the point as x in X; see the sidecar.
+$x \in X$ を点とする。{\it 基本エタール近傍}とは、$U$ がスキームであり、
+$u \in U$ が $x$ へ写る点で、射
+$u = \Spec(\kappa(u)) \to X$ が単射となるようなエタール射
+$(U, u) \to (X, x)$ のことである。{\it 基本エタール近傍の射}
+$(U, u) \to (U', u')$ とは、$u$ を $u'$ へ写す $X$ 上の射
+$U \to U'$ として定義する。
+\end{definition}
+
+\noindent
+$X$ が良好でなければ、基本エタール近傍の圏は空であることがある。
+
+\begin{lemma}
+\label{decent-spaces-lemma-elementary-etale-neighbourhoods}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$x$ を $X$ の点とする。$(X, x)$ の基本エタール近傍の圏は余フィルター的である
+（Categories, Definition \ref{categories-definition-codirected} を参照）。
+\end{lemma}
+
+\begin{proof}
+この圏が空でないことは Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood} による。
+二つの基本エタール近傍 $(U_i, u_i) \to (X, x)$ があるとする。
+このとき $U = U_1 \times_X U_2$ を考える。
+$\Spec(\kappa(u_i)) \to X$, $i = 1, 2$ はともに $x$ の類に属する単射なので
+（Lemma \ref{decent-spaces-lemma-identifies-residue-fields}）、
+% P08-E306: detached source comma is normalized in Japanese prose.
+$$
+u = \Spec(\kappa(u_1)) \times_X \Spec(\kappa(u_2))
+$$
+はある体 $\kappa(u)$ のスペクトルであり、誘導される写像
+$\kappa(u_i) \to \kappa(u)$ は同型であることが分かる。
+すると $u \to U$ は $U$ の点であり、$(U, u) \to (X, x)$ は
+$(U_i, u_i)$ を支配する基本エタール近傍である。
+基本エタール近傍の間の二つの射
+$a, b : (U_1, u_1) \to (U_2, u_2)$ があるなら、スキーム
+$$
+U = U_1 \times_{(a, b), (U_2 \times_X U_2), \Delta} U_2
+$$
+を考える。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-permanence} を用いると、$U \to X$ は
+エタールである。さらに、前とまったく同じ仕方で、$(U, u) \to (X, x)$ が
+基本エタール近傍となるような点 $u$ を $U$ がもつことが分かる。
+最後に $U \to U_1$ は $a$ と $b$ を等化し、証明が終わる。
+\end{proof}
+
+\begin{definition}
+\label{decent-spaces-definition-henselian-local-ring}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ とする。{\it $x$ における $X$ の Hensel 局所環}とは
+% P08-E308: the source comma between subject and predicate is omitted.
+$$
+\mathcal{O}_{X, x}^h = \colim \Gamma(U, \mathcal{O}_U)
+$$
+である。ここで余極限は基本エタール近傍 $(U, u) \to (X, x)$ 全体にわたる。
+\end{definition}
+
+\noindent
+これは Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-describe-etale-local-ring} の類似である。
+
+\begin{lemma}
+\label{decent-spaces-lemma-describe-henselian-local-ring}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ とする。$(U, u) \to (X, x)$ を基本エタール近傍とする。このとき
+$$
+\mathcal{O}_{X, x}^h = \mathcal{O}_{U, u}^h
+$$
+である。言い換えると、$x$ における $X$ の Hensel 局所環は、$u$ における
+$U$ の局所環 $\mathcal{O}_{U, u}$ の Hensel 化
+$\mathcal{O}_{U, u}^h$ に等しい。
+\end{lemma}
+
+\begin{proof}
+$(X, x)$ の基本エタール近傍の圏は余フィルター的なので
+（Lemma \ref{decent-spaces-lemma-elementary-etale-neighbourhoods}）、$(U, u)$ の
+基本エタール近傍の圏は $(X, x)$ の基本エタール近傍の圏において始対象的である。
+% P08-E307: the two intended plural category names are rendered normally.
+したがって、等式は More on Morphisms, Lemma
+\ref{more-morphisms-lemma-describe-henselization} および Categories, Lemma
+\ref{categories-lemma-cofinal} から従う（Hensel 局所環を定める余極限は
+基本エタール近傍の圏の反対圏上で取るため、始対象的は終対象的へ移る）。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-henselian-local-ring-strict}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$\overline{x}$ を $x \in |X|$ の上にある $X$ の幾何点とする。
+$\overline{x}$ における $X$ のエタール局所環 $\mathcal{O}_{X, \overline{x}}$
+（Properties of Spaces, Definition
+\ref{spaces-properties-definition-etale-local-rings}）は、$x$ における
+$X$ の Hensel 局所環 $\mathcal{O}_{X, x}^h$ の厳密 Hensel 化である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-describe-henselian-local-ring}、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-describe-etale-local-ring}、および、局所環
+$(R, \mathfrak m, \kappa)$ と $\kappa$ の指定された分離代数閉包
+$\kappa^{sep}$ に対して $(R^h)^{sh} = R^{sh}$ であることから従う。
+この等式は Algebra, Lemma
+\ref{algebra-lemma-uniqueness-henselian} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-residue-field-henselian-local-ring}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ とする。$x$ における $X$ の Hensel 局所環
+（Definition \ref{decent-spaces-definition-henselian-local-ring}）の剰余体は、
+$x$ における $X$ の剰余体
+（Definition \ref{decent-spaces-definition-residue-field}）である。
+\end{lemma}
+
+\begin{proof}
+基本エタール近傍 $(U, u) \to (X, x)$ を選ぶ。このとき
+$\kappa(u) = \kappa(x)$ かつ
+$\mathcal{O}_{X, x}^h = \mathcal{O}_{U, u}^h$
+である（Lemma \ref{decent-spaces-lemma-describe-henselian-local-ring}）。
+$\mathcal{O}_{U, u}^h$ の剰余体は、Algebra, Lemma
+\ref{algebra-lemma-henselization} により $\kappa(u)$ である
+（この補題の出力が局所環の Hensel 化の構成・定義である。Algebra,
+Definition \ref{algebra-definition-henselization} を参照）。
+\end{proof}
+
+\begin{remark}
+\label{decent-spaces-remark-functoriality-henselian-local-ring}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上の良好な代数空間の射とする。
+$x \in |X|$ とし、その像を $y \in |Y|$ とする。基本エタール近傍
+$(V, v) \to (Y, y)$ を選ぶ（Lemma
+\ref{decent-spaces-lemma-decent-space-elementary-etale-neighbourhood} により可能である）。
+すると $V \times_Y X$ は $X$ 上エタールな代数空間であり、$X$ の $x$ と
+$V$ の $v$ に写る唯一の点 $x'$ をもつ。（詳細は省略する。すべての点が
+体のスペクトルからの単射によって表されることを用いよ。）
+基本エタール近傍 $(U, u) \to (V \times_Y X, x')$ を選ぶ。
+すると次の可換図式を得る。
+% P08-E310: compatible geometric points used below are not introduced upstream.
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \overline{x}}) \ar[r] \ar[d] &
+\Spec(\mathcal{O}_{X, x}^h) \ar[r] \ar[d] &
+\Spec(\mathcal{O}_{U, u}) \ar[r] \ar[d] &
+U \ar[r] \ar[d] &
+X \ar[d] \\
+\Spec(\mathcal{O}_{Y, \overline{y}}) \ar[r] &
+\Spec(\mathcal{O}_{Y, y}^h) \ar[r] &
+\Spec(\mathcal{O}_{V, v}) \ar[r] &
+V \ar[r] &
+Y
+}
+$$
+これは同一視
+$\mathcal{O}_{X, \overline{x}} = \mathcal{O}_{U, u}^{sh}$、
+$\mathcal{O}_{X, x}^h = \mathcal{O}_{U, u}^h$、
+$\mathcal{O}_{Y, \overline{y}} = \mathcal{O}_{V, v}^{sh}$、
+$\mathcal{O}_{Y, y}^h = \mathcal{O}_{V, v}^h$
+から生じる。Lemma \ref{decent-spaces-lemma-describe-henselian-local-ring}、
+% P08-E309: malformed source citation grammar is normalized here.
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-describe-etale-local-ring}、および Algebra, Sections
+\ref{algebra-section-ind-etale} と
+\ref{algebra-section-henselization} で論じられている（厳密）Hensel 化の
+関手性を参照せよ。
+\end{remark}
+
+
+
+
+
+
+
+
+\section{良好な空間上の点}
+\label{decent-spaces-section-points}
+
+\noindent
+この節では、良好な代数空間上の点のいくつかの性質を証明する。
+次の補題は、良好な代数空間上では点の特殊化が適切に振る舞うことを示す。
+Spaces, Example \ref{spaces-example-infinite-product} は、一般にはこれが
+{\bf 成り立たない}ことを示している。
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-no-specializations-map-to-same-point}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$U \to X$ をスキームから $X$ へのエタール射とする。
+$u, u' \in |U|$ が $|X|$ の同じ点へ写り、$u' \leadsto u$ ならば、
+$u = u'$ である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{decent-spaces-lemma-bounded-fibres} と
+\ref{decent-spaces-lemma-no-specializations-map-to-same-point} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-specialization}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+$x, x' \in |X|$ かつ $x' \leadsto x$、すなわち $x$ は $x'$ の特殊化であると
+仮定する。このとき、スキーム $U$ からの任意のエタール射
+$\varphi : U \to X$ と、$\varphi(u) = x$ を満たす任意の $u \in U$ に対して、
+% P08-E311: source existential grammar is normalized; frozen math spacing retained.
+$\varphi(u') = x'$ を満たす点 $u'\in U$, $u' \leadsto u$ が存在する。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{decent-spaces-lemma-bounded-fibres} と
+\ref{decent-spaces-lemma-specialization} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-kolmogorov}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+このとき $|X|$ は Kolmogorov である（Topology, Definition
+\ref{topology-definition-generic-point} を参照）。
+\end{lemma}
+
+\begin{proof}
+$x_1, x_2 \in |X|$ が $x_1 \leadsto x_2$ かつ
+$x_2 \leadsto x_1$ を満たすとする。$x_1 = x_2$ を示さなければならない。
+$x_1, x_2$ がともに $|U| \to |X|$ の像に入るようなスキーム $U$ と
+エタール射 $U \to X$ を選ぶ。Lemma \ref{decent-spaces-lemma-decent-specialization} により、
+$x_1 \leadsto x_2$ へ写る $U$ の特殊化 $u_1 \leadsto u_2$ を見つけられる。
+Lemma \ref{decent-spaces-lemma-decent-specialization} により、$x_2 \leadsto x_1$ へ写る
+$u_2' \leadsto u_1$ を見つけられる。
+これは $u_2' \leadsto u_2$ が、$X$ の同じ点、すなわち $x_2$ へ写る
+$U$ の点の間の特殊化であることを意味する。Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により、これは
+$u_2' = u_2$ でない限り不可能である。したがって所望どおり
+$u_1 = u_2$ でもある。
+\end{proof}
+
+\begin{proposition}
+\label{decent-spaces-proposition-reasonable-sober}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。このとき位相空間
+$|X|$ は sober である（Topology, Definition
+\ref{topology-definition-generic-point} を参照）。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-kolmogorov} で $|X|$ が Kolmogorov であることを見た。
+したがって、すべての既約閉部分集合 $T \subset |X|$ が生成点をもつことを
+示せばよい。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} により、
+% P08-E312: frozen |T| notation is preserved; see the errata sidecar.
+$|Z| = |T|$ を満たす閉部分空間 $Z \subset X$ が存在する。
+定義により、これは $Z \to X$ が代数空間の表現可能な射であることを意味する。
+したがって Lemma \ref{decent-spaces-lemma-representable-properties} により $Z$ は良好な
+代数空間である。Theorem \ref{decent-spaces-theorem-decent-open-dense-scheme} により、
+スキームである開稠密部分空間 $Z' \subset Z$ が存在する。これは
+$|Z'| \subset T$ が開かつ稠密であることを意味する。したがって位相空間
+$|Z'|$ は既約であり、$Z'$ は既約スキームである。Schemes, Lemma
+\ref{schemes-lemma-scheme-sober} により、$|Z'|$ はある一点
+$\eta \in T$ の閉包である。ゆえに $T = \overline{\{\eta\}}$ でもあり、
+証明が終わる。
+\end{proof}
+
+\noindent
+良好な代数空間では、次元は期待どおりに振る舞う。
+
+\begin{lemma}
+\label{decent-spaces-lemma-dimension-decent-space}
+$S$ をスキームとする。Properties of Spaces, Section
+\ref{spaces-properties-section-dimension} で定義された次元は、$S$ 上の
+良好な代数空間 $X$ に対して適切に振る舞う。
+\begin{enumerate}
+\item $x \in |X|$ ならば、$\dim_x(|X|) = \dim_x(X)$ である。
+\item $\dim(|X|) = \dim(X)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明する。点 $u \in U$ をもつスキーム $U$ と、$u$ を $x$ へ写す
+エタール射 $h : U \to X$ を選ぶ。定義により、$x$ における $X$ の次元は
+$\dim_u(|U|)$ である。したがって、$\dim_x(X) = \dim(|U|)$ となるように
+$U$ を選んでよい。$d$ を整数とする。$\dim(U) \geq d$ ならば、$U$ には
+自明でない特殊化の列 $u_d \leadsto \ldots \leadsto u_0$ が存在する。
+像を取ると、対応する列
+$h(u_d) \leadsto \ldots \leadsto h(u_0)$ を得る。その各特殊化は Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により自明でない。
+したがって $|X|$ における $|U|$ の像の次元は少なくとも $d$ である。
+逆に、$x_d \leadsto \ldots \leadsto x_0$ を $|X|$ の特殊化の列で、
+$x_0$ が $|U| \to |X|$ の像に入るものとする。このとき Lemma
+\ref{decent-spaces-lemma-decent-specialization} により、これを $U$ の特殊化の列へ持ち上げられる。
+
+\medskip\noindent
+(2) は (1)、Topology, Lemma
+\ref{topology-lemma-dimension-supremum-local-dimensions}、および
+Properties of Spaces, Section
+\ref{spaces-properties-section-dimension} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-dimension-local-ring-quasi-finite}
+$S$ をスキームとし、$X \to Y$ を $S$ 上の代数空間の局所準有限射とする。
+$x \in |X|$ とし、その像を $y \in |Y|$ とする。このとき $y$ における
+$Y$ の局所環の次元は、$x$ における $X$ の局所環の次元に対して
+$\geq$ である。
+% P08-E313: redundant source comparison word is normalized in Japanese.
+\end{lemma}
+
+\begin{proof}
+代数空間上の点の局所環の次元の定義は Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring} にある。
+$V$ がスキームであるようなエタール射 $(V, v) \to (Y, y)$ を選ぶ。
+エタール射 $U \to V \times_Y X$ と、$x \in |X|$ および $v \in V$ へ写る点
+$u \in U$ を選ぶ。このとき $U \to V$ は局所準有限であり、示すべきことは
+$$
+\dim(\mathcal{O}_{V, v}) \geq \dim(\mathcal{O}_{U, u})
+$$
+である。これは Algebra, Lemma
+\ref{algebra-lemma-dimension-inequality-quasi-finite} である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-dimension-quasi-finite}
+$S$ をスキームとし、$X \to Y$ を $S$ 上の代数空間の局所準有限射とする。
+このとき $\dim(X) \leq \dim(Y)$ である。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{decent-spaces-lemma-dimension-local-ring-quasi-finite} と Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-dimension} から従う。
+\end{proof}
+
+\noindent
+次の補題は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-point-like-spaces} よりわずかに強い。
+Lemma \ref{decent-spaces-lemma-when-field} でこの補題を改善する。
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-point-like-spaces}
+$S$ をスキームとし、$k$ を体とする。$X$ を $S$ 上の代数空間とし、
+全射エタール射 $\Spec(k) \to X$ が存在すると仮定する。
+$X$ が良好ならば $X \cong \Spec(k')$ であり、ここで $k/k'$ は有限分離拡大である。
+\end{lemma}
+
+\begin{proof}
+仮定から $|X| = \{x\}$ は一元集合である。$X$ は良好なので、像が $x$ である
+準コンパクトな単射 $\Spec(k') \to X$ を見つけられる。このとき射影
+$U = \Spec(k') \times_X \Spec(k) \to \Spec(k)$ は単射なので、
+Schemes, Lemma \ref{schemes-lemma-mono-towards-spec-field} により
+$U = \Spec(k)$ である。したがって射影
+$\Spec(k) = U \to \Spec(k')$ はエタールであり、証明が終わる。
+\end{proof}
+
+\section{被約な一点空間}
+\label{decent-spaces-section-singleton}
+
+\noindent
+{\it 一点空間}とは、$|X|$ が一点集合であるような代数空間 $X$ のことである。
+これは単に体のスペクトルであるだけのものよりも興味深い場合がある。Spaces,
+Example \ref{spaces-example-Qbar} を参照せよ。これらを論じるための少しの道具を
+展開する。
+
+\begin{lemma}
+\label{decent-spaces-lemma-flat-cover-by-field}
+$S$ をスキームとし、$Z$ を $S$ 上の代数空間とする。$k$ を体とし、
+$\Spec(k) \to Z$ を全射平坦射とする。このとき、$k'$ が体であるような任意の射
+$\Spec(k') \to Z$ は全射かつ平坦である。
+\end{lemma}
+
+\begin{proof}
+ファイバー正方形
+$$
+\xymatrix{
+T \ar[d] \ar[r] & \Spec(k) \ar[d] \\
+\Spec(k') \ar[r] & Z
+}
+$$
+を考える。$T \to \Spec(k')$ は平坦かつ全射なので、$T$ は空でないことに注意する。
+一方、$k$ は体なので $T \to \Spec(k)$ は平坦である。したがって $T \to Z$ は
+平坦かつ全射である。よって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence} により $\Spec(k') \to Z$ は平坦である。
+また、仮定により $|Z|$ は一点集合なので、これは全射でもある。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-unique-point}
+$S$ をスキームとし、$Z$ を $S$ 上の代数空間とする。次は同値である。
+\begin{enumerate}
+\item $Z$ は被約であり、$|Z|$ は一点集合である。
+\item $k$ を体とする全射平坦射 $\Spec(k) \to Z$ が存在する。
+\item $k$ を体とする局所有限型、全射、平坦な射 $\Spec(k) \to Z$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を仮定する。$W$ をスキームとし、$W \to Z$ を全射エタール射とする。
+すると $W$ は被約スキームである。$W$ の既約成分の生成点を
+$\eta \in W$ とする。$W$ は被約なので $\mathcal{O}_{W, \eta} = \kappa(\eta)$ である。
+したがって標準射 $\eta = \Spec(\kappa(\eta)) \to W$ は平坦である。ゆえに
+\ref{spaces-morphisms-lemma-composition-flat} を用いると、合成
+$\eta \to Z$ は平坦である。また $|Z|$ は一点集合なので全射でもある。つまり
+(2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。$W$ をスキームとし、$W \to Z$ を全射エタール射とする。
+$k$ を体とする全射平坦射 $\Spec(k) \to Z$ を選ぶ。このとき
+$W \times_Z \Spec(k)$ は $k$ 上エタールなスキームである。したがって
+（Remark \ref{decent-spaces-remark-recall} を参照）、$W \times_Z \Spec(k)$ は体のスペクトルの非交和であり、特に被約である。
+$W \times_Z \Spec(k) \to W$ は全射かつ平坦なので、Descent, Lemma
+\ref{descent-lemma-descend-reduced} により $W$ は被約である。つまり (1) が成り立つ。
+
+\medskip\noindent
+(3) が (2) を含意することは明らかである。最後に (2) を仮定する。
+空でないアフィン・スキーム $W$ とエタール射 $W \to Z$ を選ぶ。閉点
+$w \in W$ を選び、$k = \kappa(w)$ とおく。合成
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow Z
+$$
+は Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-type} と
+\ref{spaces-morphisms-lemma-etale-locally-finite-type} により局所有限型である。
+また Lemma \ref{decent-spaces-lemma-flat-cover-by-field} により平坦かつ全射である。したがって
+(3) が成り立つ。
+\end{proof}
+
+\noindent
+次の補題は、直前の補題より少しよい一点代数空間のクラスを取り出す。
+
+\begin{lemma}
+\label{decent-spaces-lemma-unique-point-better}
+$S$ をスキームとし、$Z$ を $S$ 上の代数空間とする。次は同値である。
+\begin{enumerate}
+\item $Z$ は被約かつ局所 Noether で、$|Z|$ は一点集合である。
+\item $k$ を体とする局所有限表示、全射、平坦な射 $\Spec(k) \to Z$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) が成り立つとする。Lemma \ref{decent-spaces-lemma-unique-point} により、$Z$ は被約であり
+$|Z|$ は一点集合である。$W$ をスキームとし、$W \to Z$ を全射エタール射とする。
+$k$ を体とする局所有限表示、全射、平坦な射 $\Spec(k) \to Z$ を選ぶ。このとき
+$W \times_Z \Spec(k)$ は $k$ 上エタールなスキームであり、したがって体のスペクトルの
+非交和である（Remark \ref{decent-spaces-remark-recall} を参照）。ゆえに局所 Noether である。
+$W \times_Z \Spec(k) \to W$ は平坦、全射、局所有限表示なので、
+$\{W \times_Z \Spec(k) \to W\}$ は fppf 被覆である。したがって Descent, Lemma
+\ref{descent-lemma-Noetherian-local-fppf} により $W$ は局所 Noether である。
+つまり (1) が成り立つ。
+
+\medskip\noindent
+(1) を仮定する。空でないアフィン・スキーム $W$ とエタール射 $W \to Z$ を選ぶ。
+閉点 $w \in W$ を選び、$k = \kappa(w)$ とおく。$W$ は局所 Noether なので、
+射 $w : \Spec(k) \to W$ は有限表示である（Morphisms, Lemma
+\ref{morphisms-lemma-closed-immersion-finite-presentation} を参照）。したがって合成
+$$
+\Spec(k) \xrightarrow{w} W \longrightarrow Z
+$$
+は Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-composition-finite-presentation} と
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation} により局所有限表示である。
+また Lemma \ref{decent-spaces-lemma-flat-cover-by-field} により平坦かつ全射である。よって (2) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-monomorphism-into-point}
+$S$ をスキームとする。$Z' \to Z$ を $S$ 上の代数空間の単射とする。
+$k$ を体とする局所有限表示、全射、平坦な射 $\Spec(k) \to Z$ が存在すると仮定する。
+このとき $Z'$ は空であるか、または $Z' = Z$ である。
+\end{lemma}
+
+\begin{proof}
+$Z'$ は空でないと仮定してよい。このときファイバー積
+$T = Z' \times_Z \Spec(k)$ は空でない（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} を参照）。$T$ は代数空間であり、
+射影 $T \to \Spec(k)$ は単射である。したがって
+（Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-monomorphism-toward-field} により）
+$T = \Spec(k)$ である。ゆえに $\Spec(k) \to Z$ は $Z'$ を経由する。
+しかし $\Spec(k) \to Z$ は全射、平坦、局所有限表示なので、さらに $\Spec(k) \to Z$ は
+Spaces, Remark \ref{spaces-remark-warning} により $(\Sch/S)_{fppf}$ 上の層の写像として全射である。
+したがって $Z' = Z$ である。
+\end{proof}
+
+\noindent
+次の補題は、代数空間の各点に標準的な被約・局所 Noether・一点代数空間を対応させられることを示す。
+
+\begin{lemma}
+\label{decent-spaces-lemma-find-singleton-from-point}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$x \in |X|$ とする。
+$Z$ が Lemma \ref{decent-spaces-lemma-unique-point-better} の同値な条件を満たす $S$ 上の代数空間であり、
+$|Z| \to |X|$ の像が $\{x\}$ となるような、代数空間の単射 $Z \to X$ が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射エタール射 $U \to X$ を選ぶ。$R = U \times_X U$ とおくと、
+これは $X = U/R$ という表示である（Spaces, Section
+\ref{spaces-section-presentations} を参照）。
+$$
+U' = \coprod\nolimits_{u \in U\text{ lying over }x} \Spec(\kappa(u)).
+$$
+とおく。標準射 $U' \to U$ は単射である。さらに
+$$
+R' = U' \times_X U' = R \times_{(U \times_S U)} (U' \times_S U').
+$$
+とおく。$U' \to U$ は単射なので、射影
+$s', t' : R' \to U'$ は単射とエタール射の合成として因数分解する。
+したがって $U'$ が体のスペクトルの非交和であること、Remark \ref{decent-spaces-remark-recall}、および
+Schemes, Lemma \ref{schemes-lemma-mono-towards-spec-field} を用いると、$R'$ も体の
+スペクトルの非交和であり、射 $s', t' : R' \to U'$ はエタールであることが分かる。
+ゆえに Spaces, Theorem \ref{spaces-theorem-presentation} により
+$Z = U'/R'$ は代数空間である。$R'$ は $U' \to U$ による $R$ の制限なので、
+Groupoids, Lemma \ref{groupoids-lemma-quotient-groupoid-restrict} により
+$Z \to X$ は単射である。
+さらに $Z \to X$ は単射なので、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-injective-points} により
+$|Z| \to |X|$ は単射である。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により
+$$
+|U'| = |Z \times_X U'| \to |Z| \times_{|X|} |U'|
+$$
+は全射である。$U'$ の選び方から、これは $|Z| \to |X|$ の像が $\{x\}$ であることを
+意味する。したがって $|Z|$ は一点集合である。最後に、構成により $U'$ は局所 Noether
+かつ被約である。ゆえに $Z$ は Lemma \ref{decent-spaces-lemma-unique-point-better} の同値な条件を満たす。
+
+\medskip\noindent
+$Z \to X$ の一意性を証明する。$Z' \to X$ が同じ性質をもつ第二の単射だとする。
+このとき射影
+$$
+Z' \longleftarrow Z' \times_X Z \longrightarrow Z
+$$
+は単射である。中央の代数空間は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により空でない。したがって
+Lemma \ref{decent-spaces-lemma-monomorphism-into-point} により二つの射影は同型であり、証明が終わる。
+\end{proof}
+
+\noindent
+後で導入する残余ゲルブの先取りとなる次の用語を導入する。Properties of Stacks,
+Definition \ref{stacks-properties-definition-residual-gerbe} を参照せよ。
+
+\begin{definition}
+\label{decent-spaces-definition-residual-space}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$x \in |X|$ とする。
+{\it $x$ における $X$ の残余空間}（この記法は標準的ではない）とは、Lemma
+\ref{decent-spaces-lemma-find-singleton-from-point} で構成された単射 $Z_x \to X$ のことである。
+\end{definition}
+
+\noindent
+とくに $Z_x$ は局所 Noether、被約な一点代数空間であり、ある体と全射、平坦、
+局所有限表示射
+$$
+\Spec(k) \longrightarrow Z_x.
+$$
+が存在することが分かる。残余空間は、体のスペクトルからの単射によって与えられることが多い。
+
+\begin{lemma}
+\label{decent-spaces-lemma-residual-space-monomorphism}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$x \in |X|$ とする。
+$x$ における $X$ の残余空間 $Z_x$ が体のスペクトルと同型であることと、
+$k$ を体とする単射 $\Spec(k) \to X$ によって $x$ が表されることは同値である。
+$X$ が良好ならば、これはすべての $x \in |X|$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$Z_x \to X$ は単射なので、ある体 $k$ に対して $Z_x = \Spec(k)$ ならば、
+$x$ は単射 $\Spec(k) = Z_x \to X$ によって表される。
+逆に、$\Spec(k) \to X$ が $x$ を表す単射ならば、
+$Z_x \times_X \Spec(k) \to \Spec(k)$ は単射であり、その始域は Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-points-cartesian} により空でない。したがって
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-monomorphism-toward-field} により
+$Z_x \times_X \Spec(k) = \Spec(k)$ である。ゆえに単射 $\Spec(k) \to Z_x$ を得る。
+これは Lemma \ref{decent-spaces-lemma-monomorphism-into-point} により同型である。最後の主張は
+Lemma \ref{decent-spaces-lemma-decent-points-monomorphism} から従う。
+\end{proof}
+
+\noindent
+次の補題により残余空間は正則な代数空間である。
+
+\begin{lemma}
+\label{decent-spaces-lemma-residual-space-regular}
+被約かつ局所 Noether な一点代数空間 $Z$ は正則である。
+\end{lemma}
+
+\begin{proof}
+$Z$ をスキーム $S$ 上の被約、局所 Noether な一点代数空間とする。
+$W$ をスキームとし、$W \to Z$ を全射エタール射とする。$k$ を体とし、
+Lemma \ref{decent-spaces-lemma-unique-point-better} により $\Spec(k) \to Z$ を全射、平坦、
+局所有限表示射とする。スキーム
+$T = W \times_Z \Spec(k)$ は $k$ 上エタールであり、とくに正則である
+（Remark \ref{decent-spaces-remark-recall} を参照）。$T \to W$ は局所有限表示、平坦、全射なので、
+Descent, Lemma \ref{descent-lemma-descend-regular} により $W$ は正則である。
+定義により、これは $Z$ が正則であることを意味する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-factor-through-residual-space-Noetherian}
+$S$ をスキームとし、$f : Y \to X$ を $S$ 上の代数空間の射とする。$x \in |X|$ を点とする。
+次を仮定する。
+\begin{enumerate}
+\item $|f|(|Y|)$ は $\{x\} \subset |X|$ に含まれる。
+\item $Y$ は被約である。
+\item $X$ は局所 Noether である。
+\end{enumerate}
+このとき $f$ は $X$ の $x$ における残余空間 $Z_x$ を経由する。
+\end{lemma}
+
+\begin{proof}
+予備的注意：$Z_x \to X$ は単射なので、$Y' \to Y$ が全射エタール射であり、
+$Y' \to X$ が $Z_x$ を経由するようなものを見つければ十分である。
+$Y'$ も被約であることに注意する。
+
+\medskip\noindent
+$U$ をアフィン・スキームとし、$U \to X$ を $x$ が $|U| \to |X|$ の像に入るような
+エタール射とする。$X$ は局所 Noether なので、$U$ は Noether アフィン・スキームである。
+仮定 (1) により $Y' = U \times_X Y \to Y$ は全射かつエタールである。
+% P08-E314: source “Denote E” is rendered with a standard naming construction.
+$E \subset |U|$ を $x$ へ写る点全体の集合とする。
+$E$ の元の間には自明でない特殊化はない（Lemma
+\ref{decent-spaces-lemma-no-specializations-map-to-same-point-Noetherian} を参照）。
+$Y' \to U$ は $|Y'|$ を $E$ に写す。Lemma
+\ref{decent-spaces-lemma-find-singleton-from-point} の証明における $Z_x$ の構成により、
+$\coprod_{u \in E} u \to X$ は $Z_x$ を経由することが分かる。
+したがって $Y' \to U$ が
+$\coprod_{u \in E} u \to X$ を経由することを示せば十分である。
+% P08-E315: source permission wording is rendered as the intended operation.
+予備的注意により許されるように $Y'$ をスキームによるエタール被覆で置き換えれば、
+これは Morphisms, Lemma \ref{morphisms-lemma-factor-through-set-of-points} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-factor-through-residual-space-decent}
+$S$ をスキームとし、$f : Y \to X$ を $S$ 上の代数空間の射とする。$x \in |X|$ を点とする。
+次を仮定する。
+\begin{enumerate}
+\item $|f|(|Y|)$ は $\{x\} \subset |X|$ に含まれる。
+\item $Y$ は被約である。
+\item $x$ は、$k$ を体とする準コンパクトな単射
+$x : \Spec(k) \to X$ によって表される（たとえば $X$ が良好ならばそうである）。
+\end{enumerate}
+このとき $f$ は $X$ の $x$ における残余空間 $Z_x = \Spec(k)$ を経由する。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-residual-space-monomorphism} により $Z_x = \Spec(k)$ である。
+
+\medskip\noindent
+予備的注意：$\Spec(k) \to X$ は単射なので、$Y' \to Y$ が全射エタール射であり、
+$Y' \to X$ が $Z_x$ を経由するようなものを見つければ十分である。$Y'$ も被約である。
+
+\medskip\noindent
+$X$ を $x$ の準コンパクト開近傍で置き換えることにより、$X$ は準コンパクトと仮定してよい。
+Lemma \ref{decent-spaces-lemma-filter-quasi-compact} により、$x$ は
+$T \subset U \subset X$ の点である。ここで $T \to U$（それぞれ $U \to X$）は閉（それぞれ開）
+浸入であり、$T$ はスキームである。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-factor-through-open-subspace} により $f$ は $U$ を経由するので、
+$U = X$ と仮定してよい。さらに $Y$ は被約なので、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-map-into-reduction} により $f$ は $T$ を経由する。
+したがって $X = T$ はスキームと仮定できる。予備的注意により $Y$ もスキームと仮定できる。
+これは Morphisms, Lemma \ref{morphisms-lemma-factor-through-point} に帰着する。
+\end{proof}
+
+\begin{example}
+\label{decent-spaces-example-does-not-factor-through-residual-gerbe}
+$X$ が局所 Noether でも良好でもない場合の、Lemmas
+\ref{decent-spaces-lemma-factor-through-residual-space-Noetherian} および
+\ref{decent-spaces-lemma-factor-through-residual-space-decent} に対する反例を与える。
+$k$ を体とし、$G$ を無限プロ有限群とする。$Y$ を $G$ を零次元アフィン
+$k$-群スキームとみなしたもの、すなわち
+$Y = \Spec(\text{locally constant maps } G \to k)$
+とする。$\Gamma$ を $G$ を離散 $k$-群スキームとみなしたものとし、平行移動により $Y$ に作用させる。
+$X = Y/\Gamma$ とおく。これは射影 $q : Y \to X$ をもつ一点代数空間である。
+$e \in G$ を原点（任意の元でよい）とし、$Y$ の $k$-点とみなす。このとき
+$X \to \Spec(k)$ の切断なので単射である $k$-点 $x : \Spec(k) \to X$ を得る。
+（$Y$ はアフィンかつ被約で $|X| = \{x\}$ であるにもかかわらず）射 $q$ は
+体 $K$ に対するいかなる射 $\Spec(K) \to X$ も経由しない、と主張する。もし経由するならば
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-equivalence-class-point-monomorphism} により
+$x$ を経由することになる。しかし $x$ による $q$ の引き戻しは
+$\Gamma \to \Spec(k)$ であり、射影 $\Gamma \to Y$ は軌道写像 $g \mapsto g \cdot e$ である。
+後者は切断をもたないので、主張が従う。
+\end{example}
+
+\begin{lemma}
+\label{decent-spaces-lemma-residual-space-closed}
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。$x \in |X|$ とし、残余空間を
+$Z_x \subset X$ とする。$X$ は局所 Noether と仮定する。このとき $x$ が $|X|$ の閉点であることと、
+$Z_x \to X$ が閉浸入であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$Z_x \to X$ が閉浸入ならば、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-immersion-when-closed} により $x$ は $|X|$ の閉点である。
+逆に $x$ が $|X|$ の閉点だとする。$|Z| = \{x\}$ を満たす被約閉部分空間
+$Z \subset X$ を取る（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}）。すると Morphisms of Spaces,
+Lemmas \ref{spaces-morphisms-lemma-immersion-locally-finite-type} と
+\ref{spaces-morphisms-lemma-locally-finite-type-locally-noetherian} により $Z$ は局所 Noether である。
+% P08-E317: source has a stray “it” before the equality; Japanese states the intended conclusion.
+さらに $Z$ は被約で $|Z| = \{x\}$ なので、定義により $Z = Z_x$ は残余空間である。
+\end{proof}
+
+\section{良好な空間}
+\label{decent-spaces-section-decent}
+
+\noindent
+この節では、良好な空間について有用ないくつかの事実を集める。
+
+\begin{lemma}
+\label{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated}
+局所 Noether な良好な代数空間は、いずれも準分離的である。
+\end{lemma}
+
+\begin{proof}
+$X$ を、良好かつ局所 Noether な代数空間（ある基礎スキーム上、たとえば
+$\mathbf{Z}$ 上）とする。$U \to X$ および $V \to X$ を、$U$ と $V$ がアフィン・スキームである
+エタール射とする。$W = U \times_X V$ が準コンパクトであることを示せばよい
+（Properties of Spaces, Lemma \ref{spaces-properties-lemma-characterize-quasi-separated}）。
+$X$ は局所 Noether なので、$U$ と $V$ は Noether であり、$W$ も局所 Noether である。
+$X$ は良好なので、$W \to U$ のファイバーは有限である。実際、任意の
+$x \in |X|$ を、体のスペクトルからの準コンパクトな単射
+$\Spec(k) \to X$ で表せる。すると $U_k$ および $V_k$ は $k$ の有限分離拡大のスペクトルの
+有限個の非交和である（Remark \ref{decent-spaces-remark-recall}）。ゆえに
+$W_k = U_k \times_{\Spec(k)} V_k$ は有限である。
+$U$ の既約成分の生成点における $W \to U$ のファイバーの次数の最大値を $n$ とする。
+More on Morphisms, Lemma \ref{more-morphisms-lemma-stratify-flat-fp-lqf} における
+$W \to U$ に付随する層別化
+$$
+U = U_0 \supset U_1 \supset U_2 \supset \ldots
+$$
+を考える。上で選んだ $n$ により $U_{n + 1}$ は空である。したがって
+$W \to U$ のファイバーは普遍的に有界である。そこで More on Morphisms, Lemma
+\ref{more-morphisms-lemma-stratify-flat-fp-lqf-universally-bounded} を適用し、
+$$
+\emptyset = Z_{-1} \subset Z_0 \subset Z_1 \subset Z_2 \subset
+\ldots \subset Z_n = U
+$$
+という層別化を取る。ここで閉部分集合 $S_r = Z_r \setminus Z_{r - 1}$ に対して
+$W \times_U S_r \to S_r$ は有限局所自由である。$U$ は Noether なので $S_r$ も Noether であり、
+% P08-E318: frozen source’s coproduct equality is retained; the sidecar records its mathematical concern.
+したがって $W \times_U S_r$ も Noether である。ゆえに
+$W = \coprod W \times_U S_r$ は準コンパクトであり、証明が終わる。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-when-field}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。
+\begin{enumerate}
+\item $|X|$ が一点集合ならば、$X$ はスキームである。
+\item $|X|$ が一点集合で $X$ が被約ならば、ある体 $k$ に対して
+$X \cong \Spec(k)$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$|X|$ が一点集合だと仮定する。Theorem
+\ref{decent-spaces-theorem-decent-open-dense-scheme} から $X$ がスキームであることは直ちに従うが、
+次のように直接議論することもできる。アフィン・スキーム $U$ と全射エタール射
+$U \to X$ を選ぶ。$R = U \times_X U$ とおく。$U$ と $R$ は Lemma
+\ref{decent-spaces-lemma-UR-finite-above-x}（および良好な空間の定義）により有限個の点をもつ。
+これらの点はすべて Lemma \ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により
+$U$ および $R$ の閉点である。したがって $U$ と $R$ はアフィン・スキームである。
+$U$ を一点空間まで縮小してよい。このとき $U$ は Hensel 局所環のスペクトルである
+（Algebra, Lemma \ref{algebra-lemma-local-dimension-zero-henselian}）。射影
+$R \to U$ はエタールであり、$U$ は $0$ 次元 Hensel 局所環のスペクトルなので、
+Algebra, Lemma \ref{algebra-lemma-characterize-henselian} により有限エタールである。
+よって Groupoids, Proposition \ref{groupoids-proposition-finite-flat-equivalence} により
+$X$ はスキームである。
+
+\medskip\noindent
+(2) は (1) と、被約な一点スキームが体のスペクトルであることから従う。
+\end{proof}
+
+\begin{remark}
+\label{decent-spaces-remark-one-point-decent-scheme}
+Limits of Spaces, Lemma \ref{spaces-limits-lemma-reduction-scheme} により、
+被約化がスキームである代数空間はスキームであることが分かる。
+\end{remark}
+
+\begin{lemma}
+\label{decent-spaces-lemma-algebraic-residue-field-extension-closed-point}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。可換図式
+$$
+\xymatrix{
+\Spec(k) \ar[rr] \ar[rd] & & X \ar[ld] \\
+& S
+}
+$$
+を考える。$\Spec(k) \to S$ の像の点 $s \in S$ が閉点で、
+$\kappa(s) \subset k$ が代数的であると仮定する。このとき $\Spec(k) \to X$ の像 $x$ は
+$|X|$ の閉点である。
+\end{lemma}
+
+\begin{proof}
+ある $x' \in |X|$ に対して $x \leadsto x'$ と仮定する。$U$ がスキームである
+エタール射 $U \to X$ と、$x'$ へ写る点 $u' \in U'$ を選ぶ。
+% P08-E319: the frozen source’s U' typo is preserved and recorded in the sidecar.
+Lemma \ref{decent-spaces-lemma-decent-specialization} により、$X$ で $x$ へ写る特殊化
+$u \leadsto u'$ を $U$ に選ぶ。このとき $u$ を考える。
+$u$ はスキーム $W = \Spec(k) \times_X U$ の点 $w$ の像である。射影 $W \to \Spec(k)$ はエタールなので、
+$\kappa(w) \supset k$ は有限である。したがって $\kappa(w) \supset \kappa(s)$ は代数的であり、
+$\kappa(u) \supset \kappa(s)$ も代数的である。よって Morphisms, Lemma
+\ref{morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre} により $u$ は $U$ の閉点である。
+したがって $u = u'$ であり、$x = x'$ である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-finite-residue-field-extension-finite}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。可換図式
+$$
+\xymatrix{
+\Spec(k) \ar[rr] \ar[rd] & & X \ar[ld] \\
+& S
+}
+$$
+を考える。$\Spec(k) \to S$ の像の点 $s \in S$ が閉点で、体の拡大
+$k/\kappa(s)$ が有限であると仮定する。このとき $\Spec(k) \to X$ は有限射である。
+$\kappa(s) = k$ ならば、$\Spec(k) \to X$ は閉浸入である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-algebraic-residue-field-extension-closed-point} により、像の点
+$x \in |X|$ は閉点である。$|Z| = \{x\}$ を満たす被約閉部分空間
+$Z \subset X$ を取る（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace}）。$Z$ は Lemma
+\ref{decent-spaces-lemma-representable-named-properties} により良好な代数空間である。
+Lemma \ref{decent-spaces-lemma-when-field} により、ある体 $k'$ に対して $Z = \Spec(k')$ である。
+もちろん $k \supset k' \supset \kappa(s)$ である。したがって $\Spec(k) \to Z$ は
+スキームの有限射であり、$Z \to X$ は閉浸入なので有限射である。ゆえに
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-composition-integral} により
+$\Spec(k) \to X$ は有限である。$k = \kappa(s)$ ならば $\Spec(k) = Z$ であり、
+$\Spec(k) \to X$ は閉浸入である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-space-closed-point}
+$S$ をスキームとし、$X$ を $S$ 上の良好な代数空間とする。$x \in |X|$ を閉点とする。
+このとき、$x$ は体のスペクトルからの閉浸入
+$i : \Spec(k) \to X$ によって表される。
+\end{lemma}
+
+\begin{proof}
+$x$ は、体 $k$ に対する準コンパクトな単射
+$i : \Spec(k) \to X$ によって表されることを知っている
+（Definition \ref{decent-spaces-definition-very-reasonable}）。$U$ をアフィン・スキームとし、
+$U \to X$ をエタール射とする。$x$ は閉点で $X$ は良好なので、$|U| \to |X|$ の
+$x$ 上のファイバー $F$ は閉点からなる（Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point}）。$i$ は単射なので、
+$U_k = U \times_X \Spec(k) \to U$ も単射である。とくに $|U_k| \to F$ は単射である。
+$U_k$ は準コンパクトかつ体上エタールなので、Remark \ref{decent-spaces-remark-recall} により
+$U_k$ は有限個の体のスペクトルの非交和である。$U_k = \Spec(k_1) \amalg \ldots \amalg \Spec(k_r)$ と書く。
+$\Spec(k_i) \to U$ は単射なので、その像 $u_i$ の剰余体は $\kappa(u_i) = k_i$ である。
+$u_i \in F$ は閉点なので、$\Spec(k_i) \to U$ は閉浸入である。
+$u_i$ たちは相異なるから、$U_k \to U$ は閉浸入である。したがって
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-closed-immersion-local} により
+$i$ は閉浸入である。証明が終わる。
+\end{proof}
+\section{局所分離空間}
+\label{decent-spaces-section-locally-separated}
+
+\noindent
+局所分離な代数空間は良好であることが分かる。
+
+\begin{lemma}
+\label{decent-spaces-lemma-infinite-number}
+$A$ を環とする。$k$ を体とする。$A$ の相異なる素イデアルの列
+$\mathfrak p_n$（$n \geq 1$）を取る。さらに各 $n$ について
+$k \to \kappa(\mathfrak p_n)$ を埋め込みとする。このとき
+$$
+\coprod\nolimits_{n \not = m}
+\Spec(\kappa(\mathfrak p_n) \otimes_k \kappa(\mathfrak p_m))
+\longrightarrow
+\Spec(A \otimes A)
+$$
+の像の閉包は対角と交わる。
+\end{lemma}
+
+\begin{proof}
+$k_n = \kappa(\mathfrak p_n)$ とおく。$A = \prod k_n$ と仮定してよい。
+$A \to k_n$ に対応する開かつ閉点を
+$x_n = \Spec(k_n)$ と書く。このとき $Z$ を空でない閉集合として
+$\Spec(A) = Z \amalg \{x_n\}$ となる。実際、$Z = V(e_n; n \geq 1)$
+であり、ここで $e_n$ は因子 $k_n$ に対応する $A$ の冪等元である。
+$e_n$ で生成されるイデアルは $A$ と等しくないので、$Z$ は空でない。
+像の閉包が $ \Delta(Z)$ を含むことを示す。写像
+$$
+(\prod k_n) \otimes_k (\prod k_m)
+\longrightarrow
+\prod\nolimits_{n \not = m} k_n \otimes_k k_m
+$$
+の核は、$n \geq 1$ に対する $e_n \otimes e_n$ が生成するイデアルである。
+したがってスペクトル上の写像の像の閉包は
+$V(e_n \otimes e_n; n \geq 1)$ であり、これは
+$\Delta(\Spec(A))$ と交わると $\Delta(Z)$ になる。ゆえに
+$$
+\coprod\nolimits_{n \not = m} \Spec(k_n \otimes_k k_m)
+\longrightarrow
+\Spec(\prod\nolimits_{n \not = m} k_n \otimes_k k_m)
+$$
+が稠密な像をもつことを示せば十分である。これは
+$\prod_{n \not = m} k_n \otimes_k k_m \to k_n \otimes_k k_m$
+という環写像の族が同時に単射であることから従う。
+\end{proof}
+
+\begin{lemma}[David Rydh]
+\label{decent-spaces-lemma-locally-separated-decent}
+局所分離な代数空間は良好である。
+\end{lemma}
+
+\begin{proof}
+$S$ をスキームとし、$S$ 上の局所分離な代数空間 $X$ を取る。
+$S = \Spec(\mathbf{Z})$ と仮定してよい（Properties of Spaces,
+Definition \ref{spaces-properties-definition-separated}）。
+特に断らないファイバー積は $\mathbf{Z}$ 上で取るものとする。
+$x \in |X|$ とする。スキーム $U$、エタール射 $U \to X$、および
+$|X|$ で $x$ に写る点 $u \in U$ を選ぶ。通常どおり
+$u = \Spec(\kappa(u))$ と同一視する。$X$ が局所分離なので射
+$$
+u \times_X u \to u \times u
+$$
+は浸入である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-fibre-product-after-map}）。
+したがって More on Groupoids, Lemma
+\ref{more-groupoids-lemma-locally-closed-image-is-closed} により、
+これは閉浸入である（Schemes, Lemma
+\ref{schemes-lemma-immersion-when-closed} を用いる）。
+$u \times_X u \to u \times_X U$ は単射（$u \to U$ の基底変換）であり、
+$u \times_X U \to u$ はエタールなので、
+$u \times_X u$ は体のスペクトルの非交和であると分かる
+（Remark \ref{decent-spaces-remark-recall} および
+Schemes, Lemma \ref{schemes-lemma-mono-towards-spec-field} を参照）。
+さらにアフィン・スキーム $u \times u$ の中で閉じているので、
+$u \times_X u$ は体のスペクトルの有限個の非交和である。
+したがって $x$ は、体 $k$ に対する単射
+$\Spec(k) \to X$ によって表せる（Lemma
+\ref{decent-spaces-lemma-R-finite-above-x} を参照）。
+
+\medskip\noindent
+次に、$U = \Spec(A)$ をアフィン・スキームとし、$U \to X$ を
+エタール射とする。証明を終えるには
+$F = U \times_X \Spec(k)$ が有限であることを示せば十分である。
+$F = \coprod_{i \in I} \Spec(k_i)$ を $k$ の有限分離拡大の非交和と書く。
+$I$ が有限であることを示す必要がある。
+$R = U \times_X U$ とおく。$X$ は局所分離なので、
+$j : R \to U \times U$ は浸入である。$j$ が閉浸入
+$j' : R \to U'$ を経由するような開集合 $U' \subset U \times U$ を取る。
+$e : U \to R$ を対角写像とする。$e$ は $U$ 上エタールなスキーム間の射であり、
+$\Delta = j \circ e$ が閉浸入であることから、
+$R = e(U) \amalg W$（ある開かつ閉な部分スキーム $W \subset R$ に対して）
+と結論できる。$j'$ は閉浸入なので、$j'(W) \subset U'$ は閉じており、
+$j'(e(U))$ と互いに素である。したがって
+$\overline{j(W)} \cap \Delta(U) = \emptyset$
+が $U \times U$ で成り立つ。
+$W$ はすべての $i \not = i'$（$i, i' \in I$）について
+$\Spec(k_i \otimes_k k_{i'})$ を含むことに注意する。
+Lemma \ref{decent-spaces-lemma-infinite-number} により、所望どおり $I$ は有限である。
+\end{proof}
+
+\section{付値判定法}
+\label{decent-spaces-section-valuative-criterion-universally-closed}
+
+\noindent
+良好な空間からの準コンパクト射について、射が普遍閉であるためには
+付値判定法が必要条件となる。
+
+\begin{proposition}
+\label{decent-spaces-proposition-characterize-universally-closed}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は準コンパクトで、$X$ は良好であると仮定する。このとき $f$ が普遍閉であることと、
+付値判定法の存在部分が成り立つことは同値である。
+\end{proposition}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed} において
+同値の一方向はすでに示した。
+逆を示すため、$f$ が普遍閉であると仮定する。Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-valuative-criterion} にある図式
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(A) \ar[r] & Y
+}
+$$
+を取る。$X_A = \Spec(A) \times_Y X$ とおく。このとき
+$$
+\xymatrix{
+\Spec(K) \ar[r] \ar[rd] & X_A \ar[d] \\
+& \Spec(A)
+}
+$$
+を得る。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-compact} により、
+$X_A \to \Spec(A)$ は準コンパクトである。$X_A \to X$ は表現可能なので、
+Lemma \ref{decent-spaces-lemma-representable-properties} により $X_A$ も良好である。
+さらに $f$ は普遍閉なので、$X_A \to \Spec(A)$ も普遍閉である。
+したがって $X$ を $X_A$ に、$Y$ を $\Spec(A)$ に置き換えてよい。
+
+\medskip\noindent
+$x' \in |X|$ を $\Spec(K) \to X$ の同値類とする。
+$y \in |Y| = |\Spec(A)|$ を閉点とする。$y' = f(x')$ とおく。
+これは $\Spec(A)$ の生成点である。$f$ は普遍閉なので
+$f(\overline{\{x'\}})$ は $\overline{\{y'\}}$ を含み、したがって $y$ を含む。
+$f(x) = y$ を満たす $x \in \overline{\{x'\}}$ を取る。
+$U$ をスキームとし、$u \in U$ が存在して
+$\varphi(u) = x$ となるようなエタール射 $\varphi : U \to X$ を取る。
+Lemma \ref{decent-spaces-lemma-specialization} と $X$ が良好であるという仮定により、
+$\varphi(u') = x'$ を満たす $U$ 上の特殊化 $u' \leadsto u$ が存在する。
+これは、共通の体拡大
+$K \subset K' \supset \kappa(u')$ が存在して、次の可換図式
+$$
+\xymatrix{
+\Spec(K') \ar[r] \ar[d] & U \ar[d] \\
+\Spec(K) \ar[r] \ar[rd] & X \ar[d] \\
+& \Spec(A)
+}
+$$
+を得ることを意味する。このことから、環の次の可換図式が得られる。
+$$
+\xymatrix{
+K' & \mathcal{O}_{U, u} \ar[l] \\
+K \ar[u] & \\
+& A \ar[lu] \ar[uu]
+}
+$$
+Algebra, Lemma \ref{algebra-lemma-dominate} により、
+$K'$ の中で $\mathcal{O}_{U, u}$ の像を支配する付値環
+$A' \subset K'$ を取れる。構成により $\mathcal{O}_{U, u}$ は $A$ を支配するので、
+$A'$ も $A$ を支配する。したがって Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-valuative-criterion} の第二図式に
+似た図式が得られ、命題が証明された。
+\end{proof}
+\section{相対的条件}
+\label{decent-spaces-section-relative-conditions}
+
+\noindent
+これは、点に関係する代数空間上の条件を扱う（さらにもう一つの）技術的な節である。
+おそらくこの節は飛ばすのがよい。
+
+\begin{definition}
+\label{decent-spaces-definition-relative-conditions}
+$S$ をスキームとする。$S$ 上の代数空間 $X$ が
+{\it 性質 $(\beta)$ をもつ}とは、$X$ が Lemma
+\ref{decent-spaces-lemma-bounded-fibres} の対応する性質をもつこととする。
+$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+\begin{enumerate}
+\item 任意のスキーム $T$ と射 $T \to Y$ に対してファイバー積
+$T \times_Y X$ が性質 $(\beta)$ をもつとき、$f$ は
+{\it 性質 $(\beta)$ をもつ}という。
+\item 任意のスキーム $T$ と射 $T \to Y$ に対してファイバー積
+$T \times_Y X$ が良好な代数空間であるとき、$f$ は
+{\it 良好}であるという。
+\item 任意のスキーム $T$ と射 $T \to Y$ に対してファイバー積
+$T \times_Y X$ が妥当な代数空間であるとき、$f$ は
+{\it 妥当}であるという。
+\item 任意のスキーム $T$ と射 $T \to Y$ に対してファイバー積
+$T \times_Y X$ が非常に妥当な代数空間であるとき、$f$ は
+{\it 非常に妥当}であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+形式的でない議論については Remark \ref{decent-spaces-remark-very-reasonable} を参照する。
+非常に妥当な射の類はあまり有用でないことが分かるが、
+良好な射と妥当な射の類は有用である。
+
+\begin{lemma}
+\label{decent-spaces-lemma-properties-trivial-implications}
+$S$ をスキームとする。
+$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$f$ に関する条件の間には次の含意がある。
+$$
+\xymatrix{
+\text{representable} \ar@{=>}[rd] & & & & \\
+& \text{very reasonable} \ar@{=>}[r] & \text{reasonable} \ar@{=>}[r] &
+\text{decent} \ar@{=>}[r] & (\beta) \\
+\text{quasi-separated} \ar@{=>}[ru] & & & &
+}
+$$
+\end{lemma}
+
+\begin{proof}
+これは定義、Lemma \ref{decent-spaces-lemma-bounded-fibres}、および
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-separated-local} から明らかである。
+\end{proof}
+
+\noindent
+もう一つの健全性確認を示す。
+
+\begin{lemma}
+\label{decent-spaces-lemma-property-for-morphism-out-of-property}
+$S$ をスキームとする。$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$X$ が良好（それぞれ妥当、それぞれ Lemma
+\ref{decent-spaces-lemma-bounded-fibres} の性質 $(\beta)$ をもつ）ならば、$f$ は
+良好（それぞれ妥当、それぞれ性質 $(\beta)$ をもつ）。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$T \to Y$ を射とする。このとき $T \to Y$ は表現可能であり、
+したがって基底変換 $T \times_Y X \to X$ も表現可能である。
+ゆえに $X$ が良好（または妥当）ならば、$T \times_Y X$ もそうである。
+Lemma \ref{decent-spaces-lemma-representable-named-properties} を参照。
+同様に、性質 $(\beta)$ については Lemma
+\ref{decent-spaces-lemma-representable-properties} を参照する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-base-change-relative-conditions}
+性質 $(\beta)$ をもつこと、良好であること、または妥当であることは、
+任意の基底変換で保たれる。
+\end{lemma}
+
+\begin{proof}
+これは定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-property-over-property}
+$S$ をスキームとする。
+$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$\omega \in \{\beta, decent, reasonable\}$ とする。
+$Y$ が性質 $(\omega)$ をもち、$f : X \to Y$ が $(\omega)$ をもつと仮定する。
+このとき $X$ は $(\omega)$ をもつ。
+\end{lemma}
+
+\begin{proof}
+まず $\omega = \beta$ の場合に補題を証明する。この場合、任意の
+$x \in |X|$ が、体のスペクトルから $X$ への単射によって表されることを
+示す必要がある。$y = f(x) \in |Y|$ とおく。仮定により、体 $k$ と
+$y$ を表す単射 $\Spec(k) \to Y$ が存在する。すると $x$ は
+$\Spec(k) \times_Y X$ の点 $x'$ に対応する。仮定により $x'$ は
+単射
+$\Spec(k') \to \Spec(k) \times_Y X$ によって表される。
+明らかに合成 $\Spec(k') \to X$ は $x$ を表す単射である。
+
+\medskip\noindent
+$\omega = decent$ の場合に補題を証明する。
+$x \in |X|$ および $y = f(x) \in |Y|$ とする。直前の段落の結果により、
+水平射が単射である次の図式を選べる。
+$$
+\xymatrix{
+\Spec(k') \ar[r]_x \ar[d] & X \ar[d]^f \\
+\Spec(k) \ar[r]^y & Y
+}
+$$
+$Y$ は良好なので射 $y$ は準コンパクトである。$f$ は良好なので代数空間
+$\Spec(k) \times_Y X$ は良好である。したがって単射
+$\Spec(k') \to \Spec(k) \times_Y X$ は準コンパクトである。
+すると単射 $x : \Spec(k') \to X$ は、準コンパクト射の合成として準コンパクトである
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-quasi-compact} および
+\ref{spaces-morphisms-lemma-composition-quasi-compact} を用いる）。
+点 $x$ は任意だったので、これは $X$ が良好であることを意味する。
+
+\medskip\noindent
+$\omega = reasonable$ の場合に補題を証明する。
+$V \to Y$ を、$V$ がアフィン・スキームとなるエタール射として選ぶ。
+$U \to V \times_Y X$ を、$U$ がアフィン・スキームとなるエタール射として選ぶ。
+仮定により $V \to Y$ はファイバーが普遍的に有界である。Lemma
+\ref{decent-spaces-lemma-base-change-universally-bounded} により、射
+$V \times_Y X \to X$ のファイバーも普遍的に有界である。
+$f$ に関する仮定により、$U \to V \times_Y X$ のファイバーは普遍的に有界である。
+Lemma \ref{decent-spaces-lemma-composition-universally-bounded} により、
+合成 $U \to X$ のファイバーも普遍的に有界である。
+したがって、ファイバーが普遍的に有界なスキームからのエタール射
+$U \to X$ が十分多く存在し、$X$ は妥当であると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-composition-relative-conditions}
+性質 $(\beta)$ をもつこと、良好であること、または妥当であることは、
+合成で保たれる。
+\end{lemma}
+
+\begin{proof}
+$\omega \in \{\beta, decent, reasonable\}$ とする。
+スキーム $S$ 上の代数空間の射 $f : X \to Y$ および
+$g : Y \to Z$ を取る。$f$ と $g$ がともに性質 $(\omega)$ をもつと仮定する。
+任意のスキーム $T$ と射 $T \to Z$ に対して空間
+$T \times_Z X$ が $(\omega)$ をもつことを示す必要がある。Lemma
+\ref{decent-spaces-lemma-base-change-relative-conditions} により、これは次の主張に帰着する：
+$Y$ が性質 $(\omega)$ をもつ代数空間で、$f : X \to Y$ が $(\omega)$ をもつ射ならば、
+$X$ は $(\omega)$ をもつ。この内容は Lemma
+\ref{decent-spaces-lemma-property-over-property} である。
+\end{proof}
+\begin{lemma}
+\label{decent-spaces-lemma-fibre-product-conditions}
+$S$ をスキームとする。$S$ 上の代数空間の射
+$f : X \to Y$ および $g : Z \to Y$ を取る。$X$ と $Z$ が良好
+（それぞれ妥当、それぞれ Lemma \ref{decent-spaces-lemma-bounded-fibres} の性質
+$(\beta)$ をもつ）ならば、$X \times_Y Z$ もそうである。
+\end{lemma}
+
+\begin{proof}
+実際、Lemma \ref{decent-spaces-lemma-property-for-morphism-out-of-property} により
+射 $X \to Y$ はその性質をもつ。すると基底変換
+$X \times_Y Z \to Z$ も Lemma \ref{decent-spaces-lemma-base-change-relative-conditions} により
+その性質をもつ。最後にこれは Lemma \ref{decent-spaces-lemma-property-over-property} により
+$X \times_Y Z$ がその性質をもつことを意味する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-descent-conditions}
+$S$ をスキームとする。
+$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$\mathcal{P} \in \{(\beta), decent, reasonable\}$ とする。
+次を仮定する。
+\begin{enumerate}
+\item $f$ は準コンパクトである、
+\item $f$ はエタールである、
+\item $|f| : |X| \to |Y|$ は全射である、かつ
+\item 代数空間 $X$ は性質 $\mathcal{P}$ をもつ。
+\end{enumerate}
+このとき $Y$ は性質 $\mathcal{P}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+まず $\mathcal{P} = (\beta)$ の場合に証明する。点 $y \in |Y|$ が
+体からの単射によって $y$ が表されることを示す必要がある。$f(x) = y$ を満たす
+点 $x \in |X|$ を選ぶ。仮定により、$x$ を体 $k$ に対する単射
+$\Spec(k) \to X$ で表せる。Lemma \ref{decent-spaces-lemma-R-finite-above-x} により、
+射影
+$\Spec(k) \times_Y \Spec(k) \to \Spec(k)$
+がエタールかつ準コンパクトであることを示せば十分である。第一射影を
+$$
+\Spec(k) \times_Y \Spec(k)
+\longrightarrow
+\Spec(k) \times_Y X
+\longrightarrow
+\Spec(k)
+$$
+と分解できる。第一の射は単射であり、第二の射はエタールかつ準コンパクトである。
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-etale-over-field-scheme} により
+$\Spec(k) \times_Y X$ はスキームである。したがってこれは $k$ の有限分離な
+体拡大のスペクトルの有限個の非交和である。Schemes, Lemma
+\ref{schemes-lemma-mono-towards-spec-field} により、第一の矢印は
+$\Spec(k) \times_Y \Spec(k)$ を $k$ の有限分離な体拡大のスペクトルの
+有限個の非交和として同一視する。ゆえに射影射はエタールかつ準コンパクトである。
+
+\medskip\noindent
+次に $\mathcal{P} = decent$ の場合に証明する。
+証明の第一段落ですでに、任意の $y \in |Y|$ が単射
+$y : \Spec(k) \to Y$ によって表せることを見た。このような $y$ を一つ選ぶ。
+アフィン・スキーム $U$ とエタール射 $U \to X$ であって、
+$|U| \to |Y|$ の像が $y$ を含むものを選ぶ。Lemma
+\ref{decent-spaces-lemma-UR-finite-above-x} により、$U_y$ が $k$ 上有限なスキームであることを
+示せば十分である。ファイバー積 $X_y = \Spec(k) \times_Y X$ は $k$ 上の
+準コンパクトなエタール代数空間である。したがって Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-etale-over-field-scheme} によりこれは
+スキームである。ゆえに $k$ の有限分離拡大のスペクトルの有限個の非交和である。
+$X_y = \{x_1, \ldots, x_n\}$ と書くと、$x_i$ は
+$x_i : \Spec(k_i) \to X$（$[k_i : k] < \infty$）で与えられる。
+仮定により $X$ は良好なので、スキーム
+$U_{x_i} = \Spec(k_i) \times_X U$ は $k_i$ 上有限である。
+最後に、$U_y = \coprod U_{x_i}$ はスキームとして成り立つので、
+$U_y$ は所望どおり $k$ 上有限である。
+
+\medskip\noindent
+最後に $\mathcal{P} = reasonable$ の場合に証明する。
+アフィン・スキーム $V$ とエタール射 $V \to Y$ を選ぶ。
+$V \to Y$ のファイバーが普遍的に有界であることを示す必要がある。
+代数空間 $V \times_Y X$ は準コンパクトである。したがってアフィン・スキーム
+$W$ と全射エタール射
+$W \to V \times_Y X$ を取れる（Properties of Spaces,
+Lemma \ref{spaces-properties-lemma-quasi-compact-affine-cover}）。
+次が（実線の図式の）図である。
+$$
+\xymatrix{
+W \ar[r]  \ar[rd] &
+V \times_Y X \ar[r] \ar[d] &
+X \ar[d]_f & \Spec(k) \ar@{..>}[l]^x \ar@{..>}[ld]^y \\
+& V \ar[r] & Y
+}
+$$
+$X$ が妥当であるという仮定により、射 $W \to X$ は普遍的に有界である。
+$W \to X$ のファイバーの次数を上から抑える整数を $n$ とする。
+同じ整数が $V \to Y$ のファイバーを抑えると主張する。実際、点
+$y \in |Y|$ を取る。上で見たように、$f(x) = y$ を満たす
+$x \in |X|$ が存在する。これは体 $k$ と、上の図で点線矢印として示される
+射 $x,y$ を取れることを意味する。特に全射エタール射
+$$
+\Spec(k) \times_{x, X} W
+\to
+\Spec(k) \times_{x, X} (V \times_Y X) = \Spec(k) \times_{y, Y} V
+$$
+が得られる。これは $k$ 上の $\Spec(k) \times_{y, Y} V$ の次数が
+$k$ 上の $\Spec(k) \times_{x, X} W$ の次数以下、すなわち $\leq n$ であることを
+示し、主張が従う。（議論のこの最後の部分は Lemma
+\ref{decent-spaces-lemma-descent-universally-bounded} の証明と同じである。
+残念ながらこの補題は表現可能射にしか適用できないため、十分一般的ではない。）
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-relative-conditions-local}
+$S$ をスキームとする。
+$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$\mathcal{P} \in \{(\beta), decent, reasonable,\allowbreak very\ reasonable\}$ とする。
+次は同値である。
+\begin{enumerate}
+\item $f$ は $\mathcal{P}$ である、
+\item 任意のアフィン・スキーム $Z$ と任意の射 $Z \to Y$ に対して、
+$f$ の基底変換 $Z \times_Y X \to Z$ は $\mathcal{P}$ である、
+\item 任意のアフィン・スキーム $Z$ と任意の射 $Z \to Y$ に対して
+代数空間 $Z \times_Y X$ は $\mathcal{P}$ であり、かつ
+\item $Y = \bigcup Y_i$ というザリスキー被覆が存在し、各射
+$f^{-1}(Y_i) \to Y_i$ は $\mathcal{P}$ である。
+\end{enumerate}
+$\mathcal{P} \in \{(\beta), decent, reasonable\}$ ならば、これは次とも同値である：
+\begin{enumerate}
+\item[(5)] スキーム $V$ と全射エタール射 $V \to Y$ が存在し、
+基底変換 $V \times_Y X \to V$ が $\mathcal{P}$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) $\Rightarrow$ (3) $\Rightarrow$ (4) は自明である。
+(3) $\Rightarrow$ (1) は次のように見られる。始域が $S$ 上のスキームである射
+$Z \to Y$ を取る。代数空間 $Z \times_Y X$ を考える。(3) を仮定すると、
+任意のアフィン開集合 $W \subset Z$ に対して、$Z \times_Y X$ の開部分空間
+$W \times_Y X$ は性質 $\mathcal{P}$ をもつ。したがって Lemma
+\ref{decent-spaces-lemma-properties-local} により空間 $Z \times_Y X$ は性質 $\mathcal{P}$ をもち、
+すなわち (1) が成り立つ。同様の議論（省略）により (4) は (1) を含意する。
+
+\medskip\noindent
+(1) $\Rightarrow$ (5) は自明である。(5) にあるようなスキームからの
+エタール射 $V \to Y$ を取る。$Z$ をアフィン・スキームとし、$Z \to Y$ を射とする。
+次の図式を考える。
+$$
+\xymatrix{
+Z \times_Y V \ar[r]_q \ar[d]_p & V \ar[d] \\
+Z \ar[r] & Y
+}
+$$
+$p$ はエタール、したがって開なので、$Z = \bigcup p(W_i)$ となるように
+$W_i \subset Z \times_Y V$ がアフィン開部分スキームとなるものを有限個選べる。
+次の可換図式を考える。
+$$
+\xymatrix{
+V \times_Y X \ar[d] &
+(\coprod W_i) \times_Y X \ar[l] \ar[d] \ar[r] &
+Z \times_Y X \ar[d] \\
+V &
+\coprod W_i \ar[l] \ar[r] &
+Z
+}
+$$
+$V \times_Y X$ は性質 $\mathcal{P}$ をもつことが分かっている。
+Lemma \ref{decent-spaces-lemma-representable-properties} により、
+$(\coprod W_i) \times_Y X$ も性質 $\mathcal{P}$ をもつ。
+$(\coprod W_i) \times_Y X \to Z \times_Y X$ は
+$\coprod W_i \to Z$ の基底変換なのでエタールかつ準コンパクトであることに注意する。
+したがって Lemma \ref{decent-spaces-lemma-descent-conditions} により、
+$Z \times_Y X$ は性質 $\mathcal{P}$ をもつと結論する。
+\end{proof}
+
+\begin{remark}
+\label{decent-spaces-remark-very-reasonable}
+性質 $(\beta)$、良好、妥当、非常に妥当の形式的でない説明は
+Section \ref{decent-spaces-section-reasonable-decent} で与えた。
+射がこれらの性質の一つをもつとは、（非常に）大雑把に言えば、
+射のファイバーが対応する性質をもつということである。
+良好であることは $|X|$ 上の点の特殊化について議論するのに有用である。
+妥当であることは少し強いが、技術的にはかなり扱いやすい。
+
+\noindent
+\end{remark}
+
+\noindent
+ここで、先に約束した良好な射を用いる補題を示す。
+
+\begin{lemma}
+\label{decent-spaces-lemma-re-characterize-universally-closed}
+$S$ をスキームとする。
+$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$f$ は準コンパクトかつ良好であると仮定する。
+（例えば $f$ が表現可能、または準分離的ならばそうである。
+Lemma \ref{decent-spaces-lemma-properties-trivial-implications} を参照。）
+このとき $f$ が普遍閉であることと、
+付値判定法の存在部分が成り立つことは同値である。
+\end{lemma}
+
+\begin{proof}
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-existence-universally-closed} において、
+存在部分を満たす任意の準コンパクト射が普遍閉であることを証明した。
+逆を示すため、$f$ が普遍閉であると仮定する。
+Proposition \ref{decent-spaces-proposition-characterize-universally-closed} の証明で見たように、
+任意の付値環 $A$ と任意の射 $\Spec(A) \to Y$ に対して、
+基底変換 $f_A : X_A \to \Spec(A)$ が付値判定法の存在部分を満たすことを
+示せば十分である。定義により代数空間 $X_A$ は性質 $(\gamma)$ をもち、したがって
+Proposition \ref{decent-spaces-proposition-characterize-universally-closed} が射 $f_A$ に適用でき、
+証明が終わる。
+\end{proof}
+\section{ファイバーの点}
+\label{decent-spaces-section-points-fibres}
+
+\noindent
+$S$ をスキームとする。次のカルテシアン図式を考える。
+\begin{equation}
+\label{decent-spaces-equation-points-fibres}
+\xymatrix{
+W \ar[r]_q \ar[d]_p & Z \ar[d]^g \\
+X \ar[r]^f & Y
+}
+\end{equation}
+これは $S$ 上の代数空間の図式である。$x \in |X|$ および $z \in |Z|$ を、
+同じ点 $y \in |Y|$ に写る点とする。次を問うことができる：
+\begin{equation}
+\label{decent-spaces-equation-fibre}
+F_{x, z} = \{ w \in |W| \text{ such that }p(w) = x\text{ and }q(w) = z\}
+\end{equation}
+はいつ有限になるか。
+
+\begin{example}
+\label{decent-spaces-example-schemes}
+$X, Y, Z$ がスキームなら、集合 $F_{x, z}$ は
+$\kappa(x) \otimes_{\kappa(y)} \kappa(z)$ のスペクトルに等しい
+（Schemes, Lemma \ref{schemes-lemma-points-fibre-product}）。
+したがって、$\kappa(y) \subset \kappa(x)$ が有限であるか、
+$\kappa(y) \subset \kappa(z)$ が有限であれば有限集合を得る。
+特に、$g$ が $z$ で準有限なら常にそうである（Morphisms, Lemma
+\ref{morphisms-lemma-residue-field-quasi-finite}）。
+\end{example}
+
+\begin{example}
+\label{decent-spaces-example-not-finite}
+$K$ を無限位数の自己同型 $\sigma$ を備えた標数 $0$ の体とする。
+$Y = \Spec(K)/\mathbf{Z}$ とおき、$\mathbf{Z}$ が $\sigma$ を介して $K$ に作用し、
+$\mathbf{A}^1_K = \Spec(K[t])$ 上では $t \mapsto t + 1$ によって作用するものとして
+$X = \mathbf{A}^1_K/\mathbf{Z}$ とおく。
+$Z = \Spec(K)$ とする。このとき $W = \mathbf{A}^1_K$ である。図式は
+$$
+\xymatrix{
+\mathbf{A}^1_K \ar[r]_q \ar[d]_p & \Spec(K) \ar[d]^g \\
+\mathbf{A}^1_K/\mathbf{Z} \ar[r]^f & \Spec(K)/\mathbf{Z}
+}
+$$
+となる。$t = 0$ に対応する $x$ と、$\Spec(K)$ の唯一の点 $z$ を取る。
+このとき集合として $F_{x, z} = \mathbf{Z}$ であることが分かる。
+\end{example}
+
+\begin{lemma}
+\label{decent-spaces-lemma-surjective-on-fibres}
+（\ref{decent-spaces-equation-points-fibres}）の状況で、$Z' \to Z$ が射であり、
+$z' \in |Z'|$ が $z$ に写るなら、誘導される写像
+$F_{x, z'} \to F_{x, z}$ は全射である。
+\end{lemma}
+
+\begin{proof}
+$W' = X \times_Y Z' = W \times_Z Z'$ とおく。このとき
+$|W'| \to |W| \times_{|Z|} |Z'|$ は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により全射である。
+したがって $F_{x, z'} \to F_{x, z}$ の全射性が従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-qf-and-qc-finite-fibre}
+図式（\ref{decent-spaces-equation-points-fibres}）において、集合（\ref{decent-spaces-equation-fibre}）は、
+$f$ が有限型で $f$ は $x$ において準有限なら有限である。
+\end{lemma}
+
+\begin{proof}
+射 $q$ は $w \in F_{x, z}$ の任意の点において準有限である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus} を参照）。
+したがってこの補題は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-a-finite-number-of-points} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-finite-fibre}
+図式（\ref{decent-spaces-equation-points-fibres}）において、$y$ が体 $k$ に対する単射
+$\Spec(k) \to Y$ によって表され、$g$ が $z$ において準有限なら、
+集合（\ref{decent-spaces-equation-fibre}）は有限である。
+（特別な場合：$Y$ が良好で $g$ がエタール。）
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-surjective-on-fibres} を二度適用することにより、
+$Z$ を $Z_k = \Spec(k) \times_Y Z$ に、$X$ を
+$X_k = \Spec(k) \times_Y X$ に置き換えてよい。$Y$ も
+$\Spec(k)$ に置き換える。$Z_k \to \Spec(k)$ は $z$ において準有限であることに
+注意する（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus}）。
+スキーム $V$、点 $v \in V$、および $v$ を $z$ に写すエタール射
+$V \to Z_k$ を選ぶ。スキーム $U$、点 $u \in U$、および $u$ を $x$ に写す
+エタール射 $U \to X_k$ を選ぶ。再び Lemma \ref{decent-spaces-lemma-surjective-on-fibres} により、
+次の図式に対して $F_{u, v}$ が有限であることを示せば十分である。
+$$
+\xymatrix{
+U \times_{\Spec(k)} V \ar[r] \ar[d] & V \ar[d] \\
+U \ar[r] & \Spec(k)
+}
+$$
+射 $V \to \Spec(k)$ は $v$ において準有限である
+（Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-local-source-target} の一般論と、
+点において準有限であることの定義から従う）。
+ここでの有限性は Example \ref{decent-spaces-example-schemes} から従う。
+補題の主張における括弧内の注意は、良好な空間では点が体からの単射によって表されること、
+および代数空間のエタール射が局所的に準有限であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-topology-fibre}
+\begin{slogan}
+代数空間の体点のファイバーは、期待されるザリスキー位相をもつ。
+\end{slogan}
+$S$ をスキームとし、$S$ 上の代数空間の射 $f : X \to Y$ を取る。
+$y \in |Y|$ とし、$y$ が準コンパクトな単射
+$\Spec(k) \to Y$ によって表されると仮定する。このとき
+$|X_k| \to |X|$ は $f^{-1}(\{y\}) \subset |X|$ への同相写像であり、
+右辺には誘導位相を入れる。
+\end{lemma}
+
+\begin{proof}
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-etale-open} と
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-monomorphism-injective-points} を、
+これ以降断りなく用いる。
+$V \to Y$ を、$V$ がアフィンで、$y$ に写る $v \in V$ が存在するエタール射とする。
+$\Spec(k) \to Y$ は準コンパクトなので、$y$ に写る $V$ の点は有限個である
+（Lemma \ref{decent-spaces-lemma-UR-finite-above-x}）。$V$ を縮小して $v$ だけがそのような点で
+あると仮定してよい。スキーム $U$ と全射エタール射 $U \to X$ を選ぶ。
+次の可換図式を考える。
+$$
+\xymatrix{
+U \ar[d] & U_V \ar[l] \ar[d] & U_v \ar[l] \ar[d] \\
+X \ar[d] & X_V \ar[l] \ar[d] & X_v \ar[l] \ar[d] \\
+Y & V \ar[l] & v \ar[l]
+}
+$$
+$U_v \to U_V$ は、$U_v$ を誘導位相をもつ $U_V$ の部分集合と同一視する
+（Schemes, Lemma \ref{schemes-lemma-fibre-topological}）。また
+$|U_V| \to |X_V|$ と $|U_v| \to |X_v|$ は全射かつ開なので、
+$|X_v| \to |X_V|$ はその像への同相写像である（誘導位相付き）。
+一方、開写像 $|X_V| \to |X|$ による $f^{-1}(\{y\})$ の逆像は $|X_v|$ に等しい。
+したがって $|X_v| \to f^{-1}(\{y\})$ は開である。
+射 $X_v \to X$ は $X_k$ を経由し、Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により
+$|X_k| \to |X|$ は像 $f^{-1}(\{y\})$ への単射である。
+$|X_v| \to |X_k| \to f^{-1}(\{y\})$ を用い、$X_v \to X_k$ が全射であることから
+補題が従う。
+\end{proof}
+\begin{lemma}
+\label{decent-spaces-lemma-conditions-on-point-on-space-over-field}
+$X$ を体 $k$ 上局所有限型の代数空間とする。
+$x \in |X|$ を取る。次の条件を考える。
+\begin{enumerate}
+\item $\dim_x(|X|) = 0$、
+\item $x$ は $|X|$ で閉じており、$x' \leadsto x$ が
+$|X|$ で成り立つならば $x' = x$、
+\item $x$ は $|X|$ の孤立点である、
+\item $\dim_x(X) = 0$、
+\item $X \to \Spec(k)$ は $x$ において準有限である。
+\end{enumerate}
+このとき (2)、(3)、(4)、(5) は同値である。
+$X$ が良好ならば (1) も他の条件と同値である。
+\end{lemma}
+
+\begin{proof}
+(4) と (5) は、例えば Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part} および
+\ref{spaces-morphisms-lemma-quasi-finite-at-point} により同値である。
+
+\medskip\noindent
+$U \to X$ を、$U$ がアフィン・スキームであるエタール射とし、
+$u \in U$ を $x$ に写る点とする。さらに $x$ が閉点ならば、例えば (2) または (3)
+の場合には、$u$ も閉点であると仮定してよい。定義により
+$\dim_u(U) = \dim_x(X)$ であり、$u$ が閉点ならばこれは
+$\dim(\mathcal{O}_{U, u})$ に等しいことに注意する（Algebra, Lemma
+\ref{algebra-lemma-dimension-closed-point-finite-type-field}）。
+
+\medskip\noindent
+$\dim_x(X) > 0$ かつ $u$ が閉点なら、上の議論により
+$U$ で非自明な特殊化 $u' \leadsto u$ を選べる。このとき
+$\kappa(u')$ の $k$ 上の超越次数は $\kappa(u)$ の $k$ 上の超越次数を超える。
+したがって $X$ における像 $x$ と $x'$ は異なる。なぜなら $x/k$ と
+$x'/k$ の超越次数は well defined だからである（Morphisms of Spaces,
+Definition \ref{spaces-morphisms-definition-dimension-fibre}）。
+これは特に (2) と (3) の場合に適用でき、(2) と (3) は (4) を含意する。
+
+\medskip\noindent
+逆に、$X \to \Spec(k)$ が $x$ で局所準有限なら、
+$U \to \Spec(k)$ は $u$ で局所準有限であり、したがって $u$ は $U$ の孤立点である
+（Morphisms, Lemma \ref{morphisms-lemma-quasi-finite-at-point-characterize}）。
+$|U| \to |X|$ は連続かつ開なので、(5) は (2) と (3) を含意する。
+
+\medskip\noindent
+$X$ が良好で (1) が成り立つと仮定する。このとき Lemma
+\ref{decent-spaces-lemma-dimension-decent-space} により
+$\dim_x(X) = \dim_x(|X|)$ であり、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-conditions-on-space-over-field}
+$X$ を体 $k$ 上局所有限型の代数空間とする。
+次の条件を考える。
+\begin{enumerate}
+\item $|X|$ は有限集合である、
+\item $|X|$ は離散空間である、
+\item $\dim(|X|) = 0$、
+\item $\dim(X) = 0$、
+\item $X \to \Spec(k)$ は局所準有限である、
+\end{enumerate}
+このとき (2)、(3)、(4)、(5) は同値である。
+$X$ が良好ならば (1) は他の条件を含意する。
+\end{lemma}
+
+\begin{proof}
+(4) と (5) は、例えば Morphisms, Lemma
+\ref{spaces-morphisms-lemma-locally-finite-type-quasi-finite-part} により同値である。
+
+\medskip\noindent
+$U \to X$ を、$U$ がスキームである全射エタール射とする。
+
+\medskip\noindent
+$\dim(U) > 0$ なら、$U$ で非自明な特殊化
+$u \leadsto u'$ を選ぶ。このとき $\kappa(u)$ の $k$ 上の超越次数は
+$\kappa(u')$ の $k$ 上の超越次数を超える。したがって $X$ における像
+$x$ と $x'$ は異なる。なぜなら $x/k$ と $x'/k$ の超越次数は well defined
+だからである（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}）。
+ゆえに (2) と (3) は (4) を含意する。
+
+\medskip\noindent
+逆に、$X \to \Spec(k)$ が局所準有限なら、$U$ は局所 Noether である
+（Morphisms, Lemma \ref{morphisms-lemma-finite-type-noetherian}）。
+また次元 $0$ である（Morphisms, Lemma
+\ref{morphisms-lemma-locally-quasi-finite-rel-dimension-0}）ので、
+Artin 局所環のスペクトルの非交和である
+（Properties, Lemma \ref{properties-lemma-locally-Noetherian-dimension-0}）。
+したがって $U$ は離散位相空間であり、$|U| \to |X|$ が連続かつ開なので
+$|X|$ も同じである。言い換えれば、(4) は (2) と (3) を含意する。
+
+\medskip\noindent
+$X$ が良好で (1) が成り立つと仮定する。上の $U$ をアフィンに選べる。
+$|U| \to |X|$ のファイバーは有限である（これは良好な空間の定義の一部である）。
+したがって $U$ は $k$ 上有限型で点が有限個のスキームである。ゆえに
+$U$ は $k$ 上準有限である（Morphisms, Lemma
+\ref{morphisms-lemma-finite-fibre}）。これは定義により
+$X \to \Spec(k)$ が局所準有限であることを意味する。
+\end{proof}
+\begin{lemma}
+\label{decent-spaces-lemma-conditions-on-point-in-fibre-and-qf}
+$S$ をスキームとする。$S$ 上局所有限型の代数空間の射
+$f : X \to Y$ を取る。$x \in |X|$ をその像
+$y \in |Y|$ とともに取る。$F = f^{-1}(\{y\})$ に $|X|$ からの誘導位相を入れる。
+$k$ を体とし、$y$ を定める同値類に属する $\Spec(k) \to Y$ を取る。
+$X_k = \Spec(k) \times_Y X$ とおく。$x \in |X|$ に写る
+$\tilde x \in |X_k|$ を取る。次の条件を考える。
+\begin{enumerate}
+\item
+\label{decent-spaces-item-fibre-at-x-dim-0}
+$\dim_x(F) = 0$、
+\item
+\label{decent-spaces-item-isolated-in-fibre}
+$x$ は $F$ の孤立点である、
+\item
+\label{decent-spaces-item-no-specializations-in-fibre}
+$x$ は $F$ で閉じており、$x' \leadsto x$ が $F$ で成り立つならば
+$x = x'$ である、
+\item
+\label{decent-spaces-item-dimension-top-k-fibre}
+$\dim_{\tilde x}(|X_k|) = 0$、
+\item
+\label{decent-spaces-item-isolated-in-k-fibre}
+$\tilde x$ は $|X_k|$ の孤立点である、
+\item
+\label{decent-spaces-item-no-specializations-in-k-fibre}
+$\tilde x$ は $|X_k|$ で閉じており、$|X_k|$ で
+$\tilde x' \leadsto \tilde x$ が成り立つならば $\tilde x = \tilde x'$ である、
+\item
+\label{decent-spaces-item-k-fibre-at-x-dim-0}
+$\dim_{\tilde x}(X_k) = 0$、
+\item
+\label{decent-spaces-item-quasi-finite-at-x}
+$f$ は $x$ において準有限である。
+\end{enumerate}
+このとき
+$$
+\xymatrix{
+(\ref{decent-spaces-item-dimension-top-k-fibre}) \ar@{=>}[r]_{f\text{ decent}} &
+(\ref{decent-spaces-item-isolated-in-k-fibre}) \ar@{<=>}[r] &
+(\ref{decent-spaces-item-no-specializations-in-k-fibre}) \ar@{<=>}[r] &
+(\ref{decent-spaces-item-k-fibre-at-x-dim-0}) \ar@{<=>}[r] &
+(\ref{decent-spaces-item-quasi-finite-at-x})
+}
+$$
+が成り立つ。$Y$ が良好なら、条件
+(\ref{decent-spaces-item-isolated-in-fibre}) と (\ref{decent-spaces-item-no-specializations-in-fibre}) は互いに同値で、
+さらに条件
+(\ref{decent-spaces-item-isolated-in-k-fibre})、
+(\ref{decent-spaces-item-no-specializations-in-k-fibre})、
+(\ref{decent-spaces-item-k-fibre-at-x-dim-0})、および
+(\ref{decent-spaces-item-quasi-finite-at-x}) と同値である。
+$Y$ と $X$ が良好なら、すべての条件が同値である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-conditions-on-point-on-space-over-field} により、
+条件 (\ref{decent-spaces-item-isolated-in-k-fibre})、
+(\ref{decent-spaces-item-no-specializations-in-k-fibre})、および
+(\ref{decent-spaces-item-k-fibre-at-x-dim-0}) は互いに同値であり、
+$X_k \to \Spec(k)$ が $\tilde x$ において準有限であるという条件とも同値である。
+したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus} により、
+これらは (\ref{decent-spaces-item-quasi-finite-at-x}) とも同値である。
+$f$ が良好なら $X_k$ は良好な代数空間であり、Lemma
+\ref{decent-spaces-lemma-conditions-on-point-on-space-over-field} は
+(\ref{decent-spaces-item-dimension-top-k-fibre}) が
+(\ref{decent-spaces-item-isolated-in-k-fibre}) を含意することを示す。
+
+\medskip\noindent
+$Y$ が良好なら、$y$ の同値類に属する準コンパクトな単射
+$\Spec(k') \to Y$ を選べる。この場合 Lemma \ref{decent-spaces-lemma-topology-fibre} により
+$|X_{k'}| \to F$ は同相写像である。上の議論と合わせると、これが補題の
+残りの主張を含意する。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-conditions-on-fibre-and-qf}
+$S$ をスキームとする。$S$ 上局所有限型の代数空間の射
+$f : X \to Y$ を取る。$y \in |Y|$ を取る。$k$ を体とし、
+$y$ を定める同値類に属する $\Spec(k) \to Y$ を取る。
+$X_k = \Spec(k) \times_Y X$ とおき、$F = f^{-1}(\{y\})$ に
+$|X|$ からの誘導位相を入れる。次の条件を考える。
+\begin{enumerate}
+\item
+\label{decent-spaces-item-fibre-finite}
+$F$ は有限である、
+\item
+\label{decent-spaces-item-fibre-discrete}
+$F$ は離散位相空間である、
+\item
+\label{decent-spaces-item-fibre-no-specializations}
+$\dim(F) = 0$、
+\item
+\label{decent-spaces-item-k-fibre-finite}
+$|X_k|$ は有限集合である、
+\item
+\label{decent-spaces-item-k-fibre-discrete}
+$|X_k|$ は離散空間である、
+\item
+\label{decent-spaces-item-k-fibre-no-specializations}
+$\dim(|X_k|) = 0$、
+\item
+\label{decent-spaces-item-k-fibre-dim-0}
+$\dim(X_k) = 0$、
+\item
+\label{decent-spaces-item-quasi-finite-at-points-fibre}
+$f$ は $y$ の上にある $|X|$ のすべての点で準有限である。
+\end{enumerate}
+このとき
+$$
+\xymatrix{
+(\ref{decent-spaces-item-fibre-finite}) &
+(\ref{decent-spaces-item-k-fibre-finite}) \ar@{=>}[l] \ar@{=>}[r]_{f\text{ decent}} &
+(\ref{decent-spaces-item-k-fibre-discrete}) \ar@{<=>}[r] &
+(\ref{decent-spaces-item-k-fibre-no-specializations}) \ar@{<=>}[r] &
+(\ref{decent-spaces-item-k-fibre-dim-0}) \ar@{<=>}[r] &
+(\ref{decent-spaces-item-quasi-finite-at-points-fibre})
+}
+$$
+が成り立つ。$Y$ が良好なら、条件
+(\ref{decent-spaces-item-fibre-discrete}) と (\ref{decent-spaces-item-fibre-no-specializations}) は互いに同値であり、
+さらに条件 (\ref{decent-spaces-item-k-fibre-discrete})、
+(\ref{decent-spaces-item-k-fibre-no-specializations})、
+(\ref{decent-spaces-item-k-fibre-dim-0})、および
+(\ref{decent-spaces-item-quasi-finite-at-points-fibre}) と同値である。
+$Y$ と $X$ が良好なら、(\ref{decent-spaces-item-fibre-finite}) は他のすべての条件を含意する。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-conditions-on-space-over-field} により、条件
+(\ref{decent-spaces-item-k-fibre-discrete})、
+(\ref{decent-spaces-item-k-fibre-no-specializations})、および
+(\ref{decent-spaces-item-k-fibre-dim-0}) は互いに同値であり、
+$X_k \to \Spec(k)$ が局所準有限であるという条件とも同値である。
+したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-quasi-finite-locus} により、
+これらは (\ref{decent-spaces-item-quasi-finite-at-points-fibre}) とも同値である。
+$f$ が良好なら $X_k$ は良好な代数空間であり、Lemma
+\ref{decent-spaces-lemma-conditions-on-space-over-field} は
+(\ref{decent-spaces-item-k-fibre-finite}) が
+(\ref{decent-spaces-item-k-fibre-discrete}) を含意することを示す。
+
+\medskip\noindent
+$|X_k| \to F$ は Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-points-cartesian} により全射である。よって
+(\ref{decent-spaces-item-k-fibre-finite}) $\Rightarrow$ (\ref{decent-spaces-item-fibre-finite}) である。
+
+\medskip\noindent
+$Y$ が良好なら、$y$ の同値類に属する準コンパクトな単射
+$\Spec(k') \to Y$ を選べる。この場合 Lemma \ref{decent-spaces-lemma-topology-fibre} により
+$|X_{k'}| \to F$ は同相写像である。上の議論と合わせると、これが補題の
+残りの主張を含意する。詳細は省略する。
+\end{proof}
+\section{単射}
+\label{decent-spaces-section-monomorphisms}
+
+\noindent
+単射が表現可能となる別の場合を示す。詳しくは More on Morphisms of Spaces,
+Section \ref{spaces-more-morphisms-section-monomorphisms} を参照されたい。
+
+\begin{lemma}
+\label{decent-spaces-lemma-monomorphism-toward-disjoint-union-dim-0-rings}
+$S$ をスキームとする。$Y$ を $S$ 上の零次元局所環のスペクトルの
+非交和とする。$f : X \to Y$ を $S$ 上の代数空間の単射とする。
+このとき $f$ は表現可能、すなわち $X$ はスキームである。
+\end{lemma}
+
+\begin{proof}
+これは直ちに $Y = \Spec(A)$ の場合に帰着する。ここで $A$ は零次元局所環であり、
+すなわち $\Spec(A) = \{\mathfrak m_A\}$ は一点集合である。$X = \emptyset$ なら
+示すことはない。そうでなければ、空でないアフィン・スキーム
+$U = \Spec(B)$ とエタール射 $U \to X$ を選ぶ。
+$|X|$ の基礎空間は一点集合（$|Y|$ の部分集合として一点、Morphisms of Spaces,
+Lemma \ref{spaces-morphisms-lemma-monomorphism-injective-points} を参照）なので、
+$U \to X$ は全射である。さらに
+$U \times_X U = U \times_Y U = \Spec(B \otimes_A B)$ に注意する。
+したがって環写像 $B \to B \otimes_A B$ はエタールである。
+$$
+(B \otimes_A B)/\mathfrak m_A(B \otimes_A B)
+=
+(B/\mathfrak m_AB) \otimes_{A/\mathfrak m_A} (B/\mathfrak m_AB)
+$$
+であるから、
+$B/\mathfrak m_AB \to (B \otimes_A B)/\mathfrak m_A(B \otimes_A B)$
+は平坦であり、実際 $A/\mathfrak m_A$ ベクトル空間としての
+$B/\mathfrak m_AB$ の次元に等しい階数の自由射である。
+$B \to B \otimes_A B$ はエタールなので、これは次元が有限の場合にしか
+起こらない（例えば Morphisms, Lemmas
+\ref{morphisms-lemma-etale-universally-bounded} および
+\ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded} を参照）。
+$B$ のすべての素イデアルは $A$ の唯一の素イデアル $\mathfrak m_A$ の上にある。
+したがって位相空間として
+$\Spec(B) = \Spec(B/\mathfrak m_A)$ であり、この空間は有限離散集合である。
+実際 $B/\mathfrak m_A B$ は Artin 環である（Algebra, Lemmas
+\ref{algebra-lemma-finite-dimensional-algebra} および
+\ref{algebra-lemma-artinian-finite-length}）。
+ゆえに $B$ のすべての素イデアルは極大であり、
+$B = B_1 \times \ldots \times B_n$ は零次元の局所環の有限個の積である
+（Algebra, Lemma \ref{algebra-lemma-product-local}）。
+したがって各局所環 $B_i$ は Hensel であることから、
+$B \to B \otimes_A B$ は有限エタールである
+（Algebra, Lemma \ref{algebra-lemma-local-dimension-zero-henselian}）。
+よって Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence} により $X$ はアフィン・スキームである。
+\end{proof}
+
+\section{一般点}
+\label{decent-spaces-section-generic-points}
+
+\noindent
+この節は Properties of Spaces, Section \ref{spaces-properties-section-generic-points} の
+続きである。
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-generic-points}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ とする。次は同値である。
+\begin{enumerate}
+\item $x$ は $|X|$ の既約成分の一般点である。
+\item 点付き代数空間の任意のエタール射 $(Y, y) \to (X, x)$ に対して、
+$y$ は $|Y|$ の既約成分の一般点である。
+\item 点付き代数空間のあるエタール射 $(Y, y) \to (X, x)$ に対して、
+$y$ は $|Y|$ の既約成分の一般点である。
+\item $x$ における $X$ の局所環の次元は零である。
+\item $x$ は $X$ 上の余次元 $0$ の点である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+条件 (4) と (5) は、任意の代数空間について定義により同値である。Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring} を参照されたい。
+(2) および (3) のような任意の $Y$ は、Lemma \ref{decent-spaces-lemma-etale-named-properties} により
+良好であることに注意する。したがって (1) と (4) の同値性を示せば十分であり、
+そのとき $Y$ の $y$ における局所環の次元が $X$ の $x$ における局所環の次元に
+等しいことから (2) および (3) との同値性も従う。
+$f : U \to X$ をアフィン・スキームからのエタール射とし、$u \in U$ を $x$ に写る点とする。
+
+\medskip\noindent
+(1) を仮定する。$u' \leadsto u$ を $U$ における特殊化とする。
+このとき $f(u') = f(u) = x$ である。Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により $u' = u$ である。
+したがって $u$ は $U$ の既約成分の一般点である。
+ゆえに $\dim(\mathcal{O}_{U, u}) = 0$ であり、(4) が成り立つ。
+
+\medskip\noindent
+(4) を仮定する。点 $x$ は既約閉部分集合 $T \subset |X|$ に含まれる。
+$|X|$ はソーバーである（Proposition \ref{decent-spaces-proposition-reasonable-sober}）ので、
+$T$ には一般点 $x'$ がある。もちろん $x' \leadsto x$ である。
+するとこの特殊化を $U$ における $u' \leadsto u$ へ持ち上げられる
+(Lemma \ref{decent-spaces-lemma-decent-specialization})。これは
+$\dim(\mathcal{O}_{U, u}) = 0$ という仮定に反する。ただし $u' = u$、すなわち
+$x' = x$ の場合を除く。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-codimension-local-ring}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。
+$T \subset |X|$ を既約閉部分集合とし、$\xi \in T$ をその一般点とする
+(Proposition \ref{decent-spaces-proposition-reasonable-sober})。このとき
+$\text{codim}(T, |X|)$
+(Topology, Definition \ref{topology-definition-codimension}) は、$\xi$ における
+$X$ の局所環の次元である（Properties of Spaces, Definition
+\ref{spaces-properties-definition-dimension-local-ring}）。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキーム、$u \in U$ を点とし、$u$ を $\xi$ に写すエタール射
+$U \to X$ を選ぶ。非自明な特殊化の任意の列
+$\xi_e \leadsto \ldots \leadsto \xi_0 = \xi$ は、Lemma
+\ref{decent-spaces-lemma-decent-specialization} により、$U$ における列
+$u_e \leadsto \ldots \leadsto u_0 = u$ に持ち上げられる。
+逆に、$U$ における非自明な特殊化の任意の列
+$u_e \leadsto \ldots \leadsto u_0 = u$ は、Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により
+$\xi_e \leadsto \ldots \leadsto \xi_0 = \xi$ という非自明な特殊化の列へ写る。
+$|X|$ と $U$ はソーバーな位相空間なので、$|X|$ における $T$ の余次元と
+$U$ における $\overline{\{u\}}$ の余次元は同じであると結論できる。
+これによりこの補題はスキームの場合へ帰着する。その場合は Properties, Lemma
+\ref{properties-lemma-codimension-local-ring} である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-get-reasonable}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。次を仮定する。
+\begin{enumerate}
+\item $X$ 上エタールなすべての準コンパクト・スキームは有限個の既約成分を持つ。
+\item $X$ 上の余次元 $0$ の各 $x \in |X|$ は、単射
+$\Spec(k) \to X$ によって表現できる。
+\end{enumerate}
+このとき $X$ は妥当な代数空間である。
+\end{lemma}
+
+\begin{proof}
+$U$ をアフィン・スキームとし、$a : U \to X$ をエタール射とする。
+$a$ のファイバーが普遍的に有界であることを示さなければならない。
+仮定 (1) により、スキーム $U$ は有限個の既約成分を持つ。
+これらの既約成分の一般点を $u_1, \ldots, u_n \in U$ とする。
+$\{u_1, \ldots, u_n\}$ の像を
+$\{x_1, \ldots, x_m\} \subset |X|$ とする。各 $x_j$ は余次元 $0$ の点である。
+仮定 (2) により、$x_j$ を表現する単射 $\Spec(k_j) \to X$ を選べる。
+Properties of Spaces, Lemma \ref{spaces-properties-lemma-codimension-0-points} により
+$$
+U \times_X \Spec(k_j) = \coprod\nolimits_{a(u_i) = x_j} \Spec(\kappa(u_i))
+$$
+を得る。これは $\Spec(k_j)$ 上有限なスキームであり、その次数は
+$d_j = \sum_{a(u_i) = x_j} [\kappa(u_i) : k_j]$ である。$n = \max d_j$ と置く。
+
+\medskip\noindent
+$a$ は分離的であることに注意する（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-separated-cover}）。
+$U \to X$ に対する Lemma \ref{decent-spaces-lemma-stratify-flat-fp-lqf} の層別化
+$$
+X = X_0 \supset X_1 \supset X_2 \supset \ldots
+$$
+を考える。上で選んだ $n$ により、$X_{n + 1}$ は空であると結論できる。
+実際、そうでなければ $a^{-1}(X_{n + 1})$ は $U$ の空でない開集合であり、
+したがって $x_i$ のいずれかを含むはずである。これは $X_{n + 1}$ が
+$x_j = a(u_i)$ を含むことを意味し、矛盾である。
+よって $U \to X$ のファイバーは普遍的に有界である（実際、整数 $n$ により有界である）。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-finitely-many-irreducible-components}
+$S$ をスキームとする。$X$ を $S$ 上の代数空間とする。次は同値である。
+\begin{enumerate}
+\item $X$ は良好であり、$|X|$ は有限個の既約成分を持つ。
+\item $X$ 上エタールなすべての準コンパクト・スキームは有限個の既約成分を持ち、
+$X$ 上の余次元 $0$ の $x \in |X|$ は有限個であり、これらの各点は
+単射 $\Spec(k) \to X$ によって表現できる。
+\item スキームである稠密開部分空間 $X' \subset X$ が存在し、$X'$ は
+一般点が $\{x'_1, \ldots, x'_m\}$ である有限個の既約成分を持ち、
+$j = 1, \ldots, m$ に対して射 $x'_j \to X$ は準コンパクトである。
+\end{enumerate}
+さらに、これらの条件が成り立つならば $X$ は妥当であり、
+$x'_j \in |X|$ は $|X|$ の既約成分の一般点である。
+\end{lemma}
+
+\begin{proof}
+証明では Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points} を特に断らず用いる。
+(1) を仮定する。このとき $X$ は Theorem \ref{decent-spaces-theorem-decent-open-dense-scheme} により
+稠密開部分スキーム $X'$ を持つ。$|X'|$ の既約成分の閉包は $|X|$ の既約成分であるから、
+$|X'|$ は有限個の既約成分を持つことが分かる。したがって (3) が成り立つ。
+
+\medskip\noindent
+$X' \subset X$ が (3) のようなものだと仮定する。$\{x'_1, \ldots, x'_m\}$ を
+$X'$ の既約成分の一般点とする。$U$ を準コンパクトなスキームとし、
+$a : U \to X$ をエタール射とする。(2) を示すには、一般点が
+$\{x'_1, \ldots, x'_m\}$ の上にある $U$ の既約成分が有限個であることを示せば十分である。
+これは $U$ の有限アフィン開被覆の各メンバーについて示せばよいので、$U$ はアフィンであると
+仮定してよい。$U' = a^{-1}(X') \subset U$ は稠密開部分空間であることに注意する。
+$U' \to X'$ はスキームのエタール射なので、$U'$ の既約成分の一般点は
+$\{x'_1, \ldots, x'_m\}$ の上にある点である。$x'_j \to X$ は準コンパクトなので、
+$x'_j$ の上にある $U$ の点は有限個である（Lemma
+\ref{decent-spaces-lemma-UR-finite-above-x}）。したがって $U'$ は有限個の既約成分を持ち、
+これらの既約成分の閉包が $U$ の既約成分となる。ゆえに (2) が成り立つ。
+
+\medskip\noindent
+(2) を仮定する。これは Lemma \ref{decent-spaces-lemma-get-reasonable} により (1) および最後の
+主張を含意する。（妥当な代数空間は良好であることも用いる。これは
+Definition \ref{decent-spaces-definition-very-reasonable} の後の議論を参照されたい。）
+\end{proof}
+
+\section{一般有限射}
+\label{decent-spaces-section-generically-finite}
+
+\noindent
+この節では代数空間の射について、スキームの射に関する Morphisms, Section
+\ref{morphisms-section-generically-finite} および
+Varieties, Section \ref{varieties-section-generically-finite} で論じた内容を扱う。
+
+\begin{lemma}
+\label{decent-spaces-lemma-generically-finite}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は準分離かつ有限型であると仮定する。$y \in |Y|$ を $Y$ 上の余次元 $0$ の点とする。
+次は同値である。
+\begin{enumerate}
+\item $\Spec(k) \to Y$ が $y$ を表現するとき、空間 $|X_k|$ は有限である。
+\item $X \to Y$ は $y$ の上にある $|X|$ のすべての点で準有限である。
+\item $y \in |Y'|$ を満たす開部分空間 $Y' \subset Y$ が存在し、
+$Y' \times_Y X \to Y'$ が有限である。
+\end{enumerate}
+$Y$ が良好なら、これらはさらに次と同値である。
+\begin{enumerate}
+\item[(4)] 集合 $f^{-1}(\{y\})$ は有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は Lemma \ref{decent-spaces-lemma-conditions-on-fibre-and-qf} から従う
+（さらに、準分離射は Lemma \ref{decent-spaces-lemma-properties-trivial-implications} により良好である）。
+
+\medskip\noindent
+(1) および (2) の同値な条件を仮定する。アフィン・スキーム $V$ と、点 $v \in V$ を
+$y$ に写すエタール射 $V \to Y$ を選ぶ。Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points} により、$v$ は $V$ の既約成分の一般点である。
+アフィン・スキーム $U$ と全射エタール射 $U \to V \times_Y X$ を選ぶ。
+すると $U \to V$ は有限型である。(2) により、$U \to V$ は $v$ の上にあるすべての点で準有限である。
+したがって $v$ 上の $U \to V$ のファイバーは有限である（Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-a-finite-number-of-points}）。Morphisms, Lemma
+\ref{morphisms-lemma-generically-finite} により、$V$ を縮小すれば $U \to V$ は有限であると仮定できる。
+$$
+R = U \times_{V \times_Y X} U
+$$
+と置く。$f$ は準分離なので $V \times_Y X$ も準分離であり、したがって $R$ は準コンパクトな
+スキームである。さらに $R \to V$ は、エタール射 $R \to U$ と有限射 $U \to V$ の合成なので準有限である。
+ゆえに Morphisms, Lemma \ref{morphisms-lemma-generically-finite} をもう一度適用し、$V$ を縮小すれば
+$R \to V$ も有限であると仮定できる。これはもちろん二つの射影
+$R \to V$ が有限エタールであることを含意する。したがって
+$V/R = V \times_Y X$ はアフィン・スキームである（Groupoids, Proposition
+\ref{groupoids-proposition-finite-flat-equivalence}）。Morphisms, Lemma
+\ref{morphisms-lemma-image-proper-is-proper} により $V \times_Y X \to V$ はプロパーであり、
+Morphisms, Lemma \ref{morphisms-lemma-finite-proper} により $V \times_Y X \to V$ は有限であると結論する。
+最後に、$|V| \to |Y|$ の像に対応する $Y$ の開部分空間を $Y' \subset Y$ とする。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-integral-local} により、
+$Y' \times_Y X \to Y'$ は有限である。これは $V$ への基底変換が有限であり、
+$V \to Y'$ が全射エタール射だからである。
+
+\medskip\noindent
+$Y$ が良好で $f$ が準分離なら、$X$ も良好であることが分かる。Lemmas
+\ref{decent-spaces-lemma-properties-trivial-implications} および
+\ref{decent-spaces-lemma-property-over-property} を用いる。したがって Lemma
+\ref{decent-spaces-lemma-conditions-on-fibre-and-qf} を適用すると、(4) は (1) および (2) を含意する。
+一方、(2) は Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-finite-at-a-finite-number-of-points} により (4) を含意する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-generically-finite-reprise}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は準分離かつ局所有限型であり、$Y$ は準分離であると仮定する。
+$y \in |Y|$ を $Y$ 上の余次元 $0$ の点とする。次は同値である。
+\begin{enumerate}
+\item 集合 $f^{-1}(\{y\})$ は有限である。
+\item $\Spec(k) \to Y$ が $y$ を表現するとき、空間 $|X_k|$ は有限である。
+\item $f(X') \subset Y'$、$y \in |Y'|$、および $f^{-1}(\{y\}) \subset |X'|$ を満たす
+開部分空間 $X' \subset X$ と $Y' \subset Y$ が存在し、$f|_{X'} : X' \to Y'$ は有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+準分離な代数空間は良好なので、(1) と (2) の同値性は Lemma
+\ref{decent-spaces-lemma-conditions-on-fibre-and-qf} から従う。(1) および (2) が (3) を含意することを示すために、
+$Y$ を $y$ を含む準コンパクトな開部分空間に置き換えてよい。$f^{-1}(\{y\})$ は有限なので、
+ファイバーを含む $X' \subset X$ の準コンパクトな開部分空間を取れる。
+制限 $f|_{X'} : X' \to Y$ は準コンパクトかつ準分離である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-quasi-compact-quasi-separated-permanence}）。
+（ここで $Y$ が準分離であることを用いた。）Lemma \ref{decent-spaces-lemma-generically-finite} を
+$f|_{X'} : X' \to Y$ に適用すると (3) が従う。(3) が (2) を含意する証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-quasi-finiteness-over-generic-point}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は局所有限型であると仮定する。$X^0 \subset |X|$、それぞれ
+$Y^0 \subset |Y|$ を $X$、それぞれ $Y$ の余次元 $0$ の点の集合とする。
+$y \in Y^0$ とする。次は同値である。
+\begin{enumerate}
+\item $f^{-1}(\{y\}) \subset X^0$。
+\item $f$ は $y$ の上にあるすべての点で準有限である。
+\item $f$ は、$y$ の上にあるすべての $x \in X^0$ で準有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$V$ をスキームとし、$V \to Y$ を全射エタール射とする。$U$ をスキームとし、
+$U \to V \times_Y X$ を全射エタール射とする。このとき $u \in U$ の点の像 $x$ において
+$f$ が準有限であることと、$U \to V$ が $u$ で準有限であることは同値である。
+さらに、$x \in X^0$ であることと、$u$ が $U$ の既約成分の一般点であることは同値である
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-codimension-0-points})。
+したがってこの補題は射 $U \to V$ の場合、すなわち Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finiteness-over-generic-point} の場合に帰着する。
+\end{proof}
+\begin{lemma}
+\label{decent-spaces-lemma-finite-over-dense-open}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は局所有限型であると仮定する。$X^0 \subset |X|$、それぞれ
+$Y^0 \subset |Y|$ を $X$、それぞれ $Y$ の余次元 $0$ の点の集合とする。次を仮定する。
+\begin{enumerate}
+\item $Y$ は良好である。
+\item $X^0$ と $Y^0$ は有限であり、$f^{-1}(Y^0) = X^0$ である。
+\item $f$ は準コンパクト、または $f$ は分離的である。
+\end{enumerate}
+このとき $f^{-1}(V) \to V$ が有限となるような稠密開部分空間 $V \subset Y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{decent-spaces-lemma-finitely-many-irreducible-components} および
+\ref{decent-spaces-lemma-decent-generic-points} により、$Y$ は有限個の既約成分を持つスキームであると仮定できる。
+さらに縮小して、$Y$ は一般点 $y$ を持つ既約アフィン・スキームであると仮定してよい。
+すると $f$ の $y$ 上のファイバーは有限である。
+
+\medskip\noindent
+$f$ が準コンパクトで $Y$ が既約アフィンであると仮定する。このとき $X$ は準コンパクトであり、
+アフィン・スキーム $U$ と全射エタール射 $U \to X$ を選べる。すると $U \to Y$ は有限型であり、
+$U \to Y$ の $y$ 上のファイバーは、$U$ の既約成分の一般点の集合 $U^0$ である
+(Properties of Spaces, Lemma \ref{spaces-properties-lemma-codimension-0-points})。
+したがって $U^0$ は有限であり（Morphisms, Lemma
+\ref{morphisms-lemma-quasi-finite-at-a-finite-number-of-points}）、$Y$ を縮小すれば
+$U \to Y$ は有限であると仮定できる（Morphisms, Lemma \ref{morphisms-lemma-generically-finite}）。
+次に $R = U \times_X U$ と置く。射影 $s : R \to U$ はエタールなので、
+$R^0 = s^{-1}(U^0)$ は $y$ の上にある。$R \to U \times_Y U$ は単射なので、
+$U \times_Y U \to Y$ が有限であることから $R^0$ は有限であると結論できる。
+また $R$ は分離的である（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-separated-cover}）。したがって $Y$ をもう一度縮小して、
+$R$ が $Y$ 上有限となる状況に到達できる（Morphisms, Lemma
+\ref{morphisms-lemma-finite-over-dense-open}）。この場合、$X = U/R$ は $Y$ 上有限である。
+これは Lemma \ref{decent-spaces-lemma-generically-finite} の証明で与えたものとまったく同じ議論による
+（または、$X$ も準分離であることが直ちに従うので、その補題を単に適用してもよい）。
+
+\medskip\noindent
+$f$ が分離的で $Y$ が既約アフィンであると仮定する。Lemma
+\ref{decent-spaces-lemma-generically-finite-reprise} のような $V \subset Y$ と $U \subset X$ を選ぶ。
+$f|_U : U \to V$ は有限なので、$U \subset f^{-1}(V)$ は開であると同時に閉でもある
+(Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-universally-closed-permanence} および
+\ref{spaces-morphisms-lemma-finite-proper})。したがって、ある $X$ の開部分空間 $W$ に対して
+$f^{-1}(V) = U \amalg W$ である。しかし $U$ は $X$ の余次元 $0$ の点をすべて含むので、
+$W = \emptyset$ であると結論する（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-codimension-0-points-dense}）。これで示された。
+\end{proof}
+
+\section{双有理射}
+\label{decent-spaces-section-birational}
+
+\noindent
+次の代数空間の双有理射の定義は、スキームの双有理射に対する我々の定義
+(Morphisms, Definition \ref{morphisms-definition-birational}) に最も近いと思われる。
+
+\begin{definition}
+\label{decent-spaces-definition-birational}
+$S$ をスキームとする。$X$ および $Y$ を $S$ 上の代数空間とする。
+$X$ と $Y$ は良好で、$|X|$ と $|Y|$ は有限個の既約成分を持つと仮定する。
+射 $f : X \to Y$ が次を満たすとき、この射は {\it 双有理} であるという。
+\begin{enumerate}
+\item $|f|$ は、$|X|$ の既約成分の一般点の集合と $|Y|$ の既約成分の一般点の集合との間の
+全単射を誘導する。
+\item 既約成分の各一般点 $x \in |X|$ に対して、局所環写像
+$\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ は同型である（下の補足を参照）。
+\end{enumerate}
+\end{definition}
+
+\noindent
+補足：$X$ と $Y$ は良好なので、位相空間 $|X|$ と $|Y|$ はソーバーである
+(Proposition \ref{decent-spaces-proposition-reasonable-sober})。したがって条件 (1) は意味を持つ。
+さらに $|X|$ と $|Y|$ は有限個の既約成分を持つと仮定したので、
+一般点 $x_1, \ldots, x_n \in |X|$、それぞれ
+$y_1, \ldots, y_n \in |Y|$ は、$|X|$、それぞれ $|Y|$ の任意の稠密開集合に含まれる。
+特に Theorem \ref{decent-spaces-theorem-decent-open-dense-scheme} により、それらは $X$、それぞれ $Y$ の
+スキーム的軌跡に含まれる。そこで $\mathcal{O}_{X, x_i}$、それぞれ
+$\mathcal{O}_{Y, y_i}$ を、このスキームの $x_i$、それぞれ $y_i$ における局所環として定義できる。
+
+\medskip\noindent
+射 $f : X \to Y$ が双有理なら、次を満たす稠密開部分空間 $X' \subset X$ と $Y' \subset Y$ が
+存在すると結論できる。
+\begin{enumerate}
+\item $f(X') \subset Y'$。
+\item $X'$ と $Y'$ は表現可能である。
+\item $f|_{X'} : X' \to Y'$ は Morphisms, Definition
+\ref{morphisms-definition-birational} の意味で双有理である。
+\end{enumerate}
+ただし、$X$ と $Y$ が有限個の既約成分を持つ良好な空間であることは要求する。
+有限個の既約成分を持つ良好な代数空間の別の特徴付けは Lemma
+\ref{decent-spaces-lemma-finitely-many-irreducible-components} に与えられている。
+ほとんどの場合、双有理射は稠密開集合上の同型である。
+
+\begin{lemma}
+\label{decent-spaces-lemma-birational-dominant}
+$S$ をスキームとする。$f : X \to Y$ を、良好かつ有限個の既約成分を持つ
+$S$ 上の代数空間の射とする。$f$ が双有理なら $f$ は支配的である。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dominant} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-birational-generic-fibres}
+$S$ をスキームとする。$f : X \to Y$ を、良好かつ有限個の既約成分を持つ
+$S$ 上の代数空間の双有理射とする。$y \in Y$ が既約成分の一般点なら、基底変換
+$X \times_Y \Spec(\mathcal{O}_{Y, y}) \to \Spec(\mathcal{O}_{Y, y})$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$X' \subset X$ と $Y' \subset Y$ を、表現可能である最大の開部分空間とする。Lemma
+\ref{decent-spaces-lemma-finitely-many-irreducible-components} を参照されたい。
+% P08-E422: frozen English line 5044 has the grammatical defect `is consists`; reader-facing Japanese states the intended proposition while the sidecar preserves the candidate.
+Lemma \ref{decent-spaces-lemma-quasi-finiteness-over-generic-point} により、$y$ 上の $f$ のファイバーは
+$X$ の余次元 $0$ の点からなり、したがって $X'$ に含まれる。ゆえに
+$X \times_Y \Spec(\mathcal{O}_{Y, y}) =
+X' \times_{Y'} \Spec(\mathcal{O}_{Y', y})$ であり、結果は Morphisms, Lemma
+\ref{morphisms-lemma-birational-generic-fibres} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-birational-birational}
+$S$ をスキームとする。$f : X \to Y$ を、良好かつ有限個の既約成分を持つ
+$S$ 上の代数空間の双有理射とする。次の条件のいずれかが成り立つと仮定する。
+\begin{enumerate}
+% P08-E423: frozen English line 5057 equates reduced with integral; the canonical translation preserves the parenthetical and the sidecar records the mathematical defect.
+\item $f$ は局所有限型で、$Y$ は被約（すなわち整）である。
+\item $f$ は局所有限表示である。
+\end{enumerate}
+このとき、$f(U) \subset V$ かつ $f|_U : U \to V$ が同型となるような
+稠密開集合 $U \subset X$ と $V \subset Y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-finitely-many-irreducible-components} により、$X$ と $Y$ はスキームであると
+仮定してよい。この場合、結果は Morphisms, Lemma
+\ref{morphisms-lemma-birational-birational} である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-birational-isomorphism-over-dense-open}
+$S$ をスキームとする。$f : X \to Y$ を、良好かつ有限個の既約成分を持つ
+$S$ 上の代数空間の双有理射とする。次を仮定する。
+\begin{enumerate}
+\item $f$ は準コンパクト、または $f$ は分離的である。
+\item $f$ は局所有限型で $Y$ は被約、または $f$ は局所有限表示である。
+\end{enumerate}
+このとき、$f^{-1}(V) \to V$ が同型となるような稠密開集合 $V \subset Y$ が存在する。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-finitely-many-irreducible-components} により $Y$ はスキームであると仮定してよい。
+Lemma \ref{decent-spaces-lemma-finite-over-dense-open} により $f$ は有限であると仮定してよい。
+すると $X$ もスキームであり、結果は Morphisms, Lemma
+\ref{morphisms-lemma-birational-isomorphism-over-dense-open} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-birational-etale-localization}
+$S$ をスキームとする。$f : X \to Y$ を、良好かつ有限個の既約成分を持つ
+$S$ 上の代数空間の射とする。$f$ が双有理で、$V \to Y$ が $V$ をアフィンとするエタール射なら、
+$X \times_Y V$ は有限個の既約成分を持つ良好な空間であり、
+$X \times_Y V \to V$ は双有理である。
+\end{lemma}
+
+\begin{proof}
+代数空間 $U = X \times_Y V$ は良好である（Lemma \ref{decent-spaces-lemma-etale-named-properties}）。
+$V$ と $U$ の一般点は、$|Y|$ と $|X|$ の一般点の上にある $|V|$ と $|U|$ の要素である
+(Lemma \ref{decent-spaces-lemma-decent-generic-points})。$Y$ は良好なので、$V$ 上の一般点は有限個であると
+結論できる。$\xi \in |X|$ を既約成分の一般点とする。Definition
+\ref{decent-spaces-definition-birational} の後の議論により、Cartesian 図式
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \xi}) \ar[d] \ar[r] & X \ar[d] \\
+\Spec(\mathcal{O}_{Y, f(\xi)}) \ar[r] & Y
+}
+$$
+がある。水平射は局所環を同一視する単射であり、左の垂直射は同型である。
+したがって図式
+$$
+\xymatrix{
+\Spec(\mathcal{O}_{X, \xi}) \times_X U \ar[d] \ar[r] & U \ar[d] \\
+\Spec(\mathcal{O}_{Y, f(\xi)}) \times_Y V \ar[r] & V
+}
+$$
+において左の垂直射は同型である。水平射の像は $U$ と $V$ のスキーム的軌跡に含まれ、
+局所環を同一視する（いくつかの詳細は省略する）。水平射の像は、それぞれ $\xi$、
+それぞれ $f(\xi)$ の上にある $|U|$、それぞれ $|V|$ の点なので、結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-birational-induced-morphism-normalizations}
+$S$ をスキームとする。$f : X \to Y$ を、良好かつ有限個の既約成分を持つ
+$S$ 上の代数空間の間の双有理射とする。このとき正規化 $X^\nu \to X$ と
+$Y^\nu \to Y$ が存在し、$S$ 上の代数空間の可換図式
+$$
+\xymatrix{
+X^\nu \ar[r] \ar[d] &  Y^\nu \ar[d] \\
+X \ar[r] & Y
+}
+$$
+がある。射 $X^\nu \to Y^\nu$ は双有理である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-finitely-many-irreducible-components} により、$X$ と $Y$ は
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-prepare-normalization} の同値な条件を
+満たすので、正規化が定義される。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-normalization-normal} により、代数空間 $X^\nu$ は正規であり、
+余次元 $0$ の点を余次元 $0$ の点へ写す。$f$ は余次元 $0$ の点を余次元 $0$ の点へ写す
+（これは良好な空間上では Lemma \ref{decent-spaces-lemma-decent-generic-points} により一般点と同じである）ので、
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-normalization-normal} から、
+合成 $X^\nu \to X \to Y$ の $Y^\nu$ を経る分解を得る。
+
+\medskip\noindent
+$X^\nu$ と $Y^\nu$ は、例えば Lemma \ref{decent-spaces-lemma-representable-named-properties} により良好である。
+さらに写像 $X^\nu \to X$ と $Y^\nu \to Y$ は既約成分上の全単射を誘導する
+（上記の参照先を見よ）。したがって $X^\nu$ と $Y^\nu$ はともに有限個の既約成分を持ち、
+写像 $X^\nu \to Y^\nu$ はそれらの一般点の間の全単射を誘導する。
+$X^\nu \to Y^\nu$ が双有理であることを示すには、これらの点における局所環上に同型を
+誘導することを示せば十分である。このため $X$ と $Y$ をそれらの一般点の開近傍で置き換えてよく、
+$X$ と $Y$ は一般点 $x$ と $y$ を持つ既約アフィン・スキームであると仮定できる。
+% P08-E424: frozen English line 5174 reverses the canonical local-ring-map direction from Definition 4962; the displayed source formula is preserved here and recorded in the sidecar.
+$f$ は双有理なので、写像 $\mathcal{O}_{X, x} \to \mathcal{O}_{Y, y}$ は同型である。
+$x$ と $y$ の上にある点を $x^\nu \in X^\nu$ と $y^\nu \in Y^\nu$ とする。
+正規化の構成により
+$\mathcal{O}_{X^\nu, x^\nu} = \mathcal{O}_{X, x}/\mathfrak m_x$ であり、$Y$ についても同様である。
+したがって写像 $\mathcal{O}_{X^\nu, x^\nu} \to \mathcal{O}_{Y^\nu, y^\nu}$ も同型である。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-finite-birational-over-normal}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。次を仮定する。
+\begin{enumerate}
+\item $X$ と $Y$ は良好で、有限個の既約成分を持つ。
+\item $f$ は整かつ双有理である。
+\item $Y$ は正規である。
+\item $X$ は被約である。
+\end{enumerate}
+このとき $f$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$V$ をアフィンとするエタール射 $V \to Y$ を取る。
+$U = X \times_Y V \to V$ が同型であることを示せば十分である。Lemma
+\ref{decent-spaces-lemma-birational-etale-localization} とその証明により、$U$ と $V$ は良好で有限個の既約成分を持ち、
+$U \to V$ は双有理である。Properties, Lemma
+\ref{properties-lemma-normal-locally-finite-nr-irreducibles} により、$V$ は有限個の整スキームの非交和である。
+したがって $V$ は整であると仮定してよい。$f$ は双有理なので、$U$ は既約かつ被約、すなわち整である
+（$f$ は整、したがって表現可能なので $U$ はスキームであることに注意）。
+ゆえに $X$ と $Y$ は整スキームであると仮定でき、結果はスキームの場合、すなわち Morphisms, Lemma
+\ref{morphisms-lemma-finite-birational-over-normal} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-normalization-normal}
+$S$ をスキームとする。$f : X \to Y$ を、有限個の既約成分を持つ良好な $S$ 上の代数空間の
+整双有理射とする。このとき分解 $Y^\nu \to X \to Y$ が存在し、
+$Y^\nu \to X$ は $X$ の正規化である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{decent-spaces-lemma-birational-induced-morphism-normalizations} の写像 $X^\nu \to Y^\nu$ を考える。
+この写像は Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-finite-permanence} により整である。
+したがって Lemma \ref{decent-spaces-lemma-finite-birational-over-normal} により同型である。
+\end{proof}
+
+\section{Jacobson 空間}
+\label{decent-spaces-section-jacobson}
+
+\noindent
+代数空間の Jacobson 性は Properties of Spaces, Remark
+\ref{spaces-properties-remark-list-properties-local-etale-topology} で定義した。
+表現可能な代数空間については、これは Properties, Section
+\ref{properties-section-jacobson} で論じた性質と一致する。
+Jacobson 性と位相空間 $|X|$ の挙動との関係は、一般の代数空間 $|X|$ については明らかでない。
+しかし、良好な（例えば準分離または局所分離な）代数空間 $X$ が Jacobson であることと、
+$|X|$ が Jacobson であることは同値である（Lemma \ref{decent-spaces-lemma-decent-Jacobson} を参照）。
+
+\begin{lemma}
+\label{decent-spaces-lemma-Jacobson-universally-Jacobson}
+$S$ をスキームとする。$X$ を $S$ 上の Jacobson 代数空間とする。
+$X$ 上局所有限型な任意の代数空間は Jacobson である。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとする全射エタール射 $U \to X$ を取る。
+すると $U$ は（定義により）Jacobson であり、局所有限型なスキームの射 $V \to U$ に対して、
+スキームについての対応する結果（Morphisms, Lemma
+\ref{morphisms-lemma-Jacobson-universally-Jacobson}）により $V$ は Jacobson である。
+したがって $Y \to X$ が局所有限型な代数空間の射なら、$V = U \times_X Y$ と置くことにより、
+$Y$ は定義から Jacobson であると分かる。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-Jacobson-ft-points-lift-to-closed}
+$S$ をスキームとする。$X$ を $S$ 上の Jacobson 代数空間とする。
+$x \in X_{\text{ft-pts}}$ とし、$g : W \to X$ を $W$ がスキームである局所有限型射とする。
+$x \in \Im(|g|)$ なら、$x$ に写る $W$ の閉点が存在する。
+\end{lemma}
+
+\begin{proof}
+$U$ をスキームとするエタール射 $U \to X$ と、$x$ に写る閉点 $u \in U$ を取る。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-identify-finite-type-points} を参照されたい。
+$W$、$W \times_X U$、および $U$ は Lemma \ref{decent-spaces-lemma-Jacobson-universally-Jacobson} により
+Jacobson スキームであることに注意する。したがってこれらのスキーム上では、有限型点と閉点は
+Morphisms, Lemma \ref{morphisms-lemma-jacobson-finite-type-points} により同じものである。
+$u$ の逆像 $T \subset W \times_X U$ は、空でない（$x$ は $W \to X$ の像にあるため）閉部分集合である。
+Morphisms, Lemma \ref{morphisms-lemma-enough-finite-type-points} により、$u$ に写る
+$W \times_X U$ の閉点 $t$ がある。$W \times_X U \to W$ は局所有限型なので、
+$W$ における $t$ の像は Morphisms, Lemma
+\ref{morphisms-lemma-jacobson-finite-type-points} により閉じている。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-Jacobson-ft-pts}
+$S$ をスキームとする。$X$ を $S$ 上の良好な Jacobson 代数空間とする。
+このとき $X_{\text{ft-pts}} \subset |X|$ は閉点の集合である。
+\end{lemma}
+
+\begin{proof}
+$x \in |X|$ が閉じていれば、Lemma \ref{decent-spaces-lemma-decent-space-closed-point} により、
+$x$ を閉埋入 $\Spec(k) \to X$ で表現できる。したがって $x$ は確かに有限型点である。
+
+\medskip\noindent
+逆に $x \in |X|$ を有限型点とする。$x$ は、$k$ を体とする準コンパクトな単射
+$\Spec(k) \to X$ によって表現できる（Definition \ref{decent-spaces-definition-very-reasonable}）。
+一方、定義により、$x$ を表現する局所有限型射 $\Spec(k') \to X$ が存在する
+(Morphisms, Definition \ref{morphisms-definition-finite-type-point})。
+したがって分解 $\Spec(k') \to \Spec(k) \to X$ を得る。
+$U$ をアフィンとする任意のエタール射 $U \to X$ に対して、射
+$$
+\Spec(k') \times_X U \to \Spec(k) \times_X U \to U
+$$
+を考える。準コンパクト・スキーム $\Spec(k) \times_X U$ は $\Spec(k)$ 上エタールなので、
+体のスペクトルの有限非交和である（Remark \ref{decent-spaces-remark-recall}）。
+さらに第一の射は全射かつ局所有限型なので（Morphisms, Lemma
+\ref{morphisms-lemma-permanence-finite-type}）、有限型点上全射である
+(Morphisms, Lemma \ref{morphisms-lemma-finite-type-points-surjective-morphism})。
+また合成は局所有限型であり、$U$ は Jacobson なので有限型点を閉点へ写す
+(Morphisms, Lemma \ref{morphisms-lemma-jacobson-finite-type-points})。
+したがって $\Spec(k) \times_X U \to U$ の像は閉点からなる有限集合であり、ゆえに閉じている。
+これはすべてのアフィン $U$ とエタール射 $U \to X$ に対して成り立つので、
+$x \in |X|$ は閉じていると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-decent-Jacobson}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。
+$X$ が Jacobson であることと $|X|$ が Jacobson であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$X$ は Jacobson で、$T \subset |X|$ は閉部分集合であると仮定する。
+Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-enough-finite-type-points} により、
+$T \cap X_{\text{ft-pts}}$ は $T$ で稠密である。Lemma
+\ref{decent-spaces-lemma-decent-Jacobson-ft-pts} により、$X_{\text{ft-pts}}$ は $|X|$ の閉点である。
+したがって $|X|$ は確かに Jacobson である。
+
+\medskip\noindent
+$|X|$ は Jacobson であると仮定する。$f : U \to X$ を $U$ がアフィン・スキームである
+エタール射とする。$U$ が Jacobson であることを示さなければならない。
+$x \in |X|$ が閉点なら、ファイバー $F = f^{-1}(\{x\})$ は $U$ の有限な
+（良好性の定義による）閉（$|X|$ 上の位相の構成による）部分集合である。
+$F$ の点の間には特殊化がないので（Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point}）、$F$ の各点は $U$ で閉じている。
+$U$ が Jacobson でなければ、$\{u\}$ が局所閉となる非閉点 $u \in U$ が存在する
+(Topology, Lemma \ref{topology-lemma-non-jacobson-Noetherian-characterize})。
+$f(u) \in |X|$ が閉じていることを示す。このとき上記により $u$ は $U$ で閉じており、矛盾して
+証明が終わる。このため $U$ を $u$ のアフィン開近傍で置き換えてよい。
+したがって $\{u\}$ は $U$ で閉じていると仮定できる。
+$R = U \times_X U$ とし、射影を $s, t : R \to U$ とする。
+すると $s^{-1}(\{u\}) = \{r_1, \ldots, r_m\}$ は有限である（良好な空間の定義による）。
+$U$ を $u$ のより小さいアフィン開近傍で置き換えると、$j = 1, \ldots, m$ に対して
+$t(r_j) = u$ と仮定できる。したがって $\{u\}$ は $U$ の $R$-不変閉部分集合である。
+ゆえに $\{f(u)\}$ は $|X|$ の開集合 $|f|(|U|)$ の中で閉じているので、$X$ の局所閉部分集合である。
+$|X|$ は Jacobson なので、望みどおり $f(u)$ は $|X|$ で閉じていると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-punctured-spec}
+$S$ をスキームとする。$X$ を $S$ 上の良好な局所 Noether 代数空間とする。
+$x \in |X|$ とする。このとき
+$$
+W = \{x' \in |X| : x' \leadsto x,\ x' \not = x\}
+$$
+は Noether、スペクトル的、ソーバー、Jacobson な位相空間である。
+\end{lemma}
+
+\begin{proof}
+$x$ を含む任意の開部分空間で置き換えてよい。したがって $X$ は準コンパクトであると仮定できる。
+すると $|X|$ は Noether 位相空間である（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-Noetherian-topology}）。したがって $W$ は Noether 位相空間である
+(Topology, Lemma \ref{topology-lemma-Noetherian})。
+
+\medskip\noindent
+Lemma \ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated} と Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-quasi-separated-spectral} を組み合わせると、
+$|X|$ はスペクトル的位相空間であることが分かる。Topology, Lemma
+\ref{topology-lemma-make-spectral-space} により $W \cup \{x\}$ はスペクトル的位相空間である。
+いま $W$ は $W \cup \{x\}$ の準コンパクト開部分空間なので、Topology, Lemma
+\ref{topology-lemma-spectral-sub} により $W$ はスペクトル的である。
+
+\medskip\noindent
+$E \subset W$ を既約閉部分集合とする。$Z \subset |X|$ を $E$ の閉包とすると、$x \in Z$ である。
+Proposition \ref{decent-spaces-proposition-reasonable-sober} により、唯一の一般点 $\eta \in Z$ がある。
+もちろん $\eta \in W$、したがって $\eta \in E$ である。$E$ は唯一の一般点を持つ、
+すなわち $W$ はソーバーであると結論する。
+
+\medskip\noindent
+$x' \in W$ を、$\{x'\}$ が $W$ で局所閉となる点とする。証明を終えるには、
+$x'$ が $W$ の閉点であることを示さなければならない。そうでなければ、$W$ における
+非自明な特殊化 $x' \leadsto x'_1$ が存在する。$U$ をアフィン・スキーム、$u \in U$ を点とし、
+$U \to X$ を $u$ を $x$ に写すエタール射とする。Lemma
+\ref{decent-spaces-lemma-decent-specialization} により、$x' \leadsto x'_1 \leadsto x$ に写る特殊化
+$u' \leadsto u'_1 \leadsto u$ を選べる。$\mathfrak p' \subset \mathcal{O}_{U, u}$ を
+$u'$ に対応する素イデアルとする。これらの特殊化の存在は
+$\dim(\mathcal{O}_{U, u}/\mathfrak p') \geq 2$ を含意する。したがって
+$\Spec(\mathcal{O}_{U, u}/\mathfrak p')$ の空でない任意の開集合は、Algebra, Lemma
+\ref{algebra-lemma-Noetherian-local-domain-dim-2-infinite-opens} により無限である。
+Lemma \ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により、連続写像
+$$
+\Spec(\mathcal{O}_{U, u}/\mathfrak p')
+\setminus \{\mathfrak m_u/\mathfrak p'\}
+\longrightarrow
+W
+$$
+を得る。左辺の一般点は $x'$ に写るので、像は $\overline{\{x'\}}$ に含まれる。
+したがって表示された矢印による $\{x'\}$ の逆像は空でない開集合であり、ゆえに無限である。
+しかし $X$ は良好なので $U \to X$ のファイバーは有限であり、
+% P08-E425: frozen English line 5438 concludes that the singleton itself is infinite; the canonical formula is preserved and the sidecar records the intended fibre statement.
+$\{x'\}$ は無限であると結論する。この矛盾により証明が終わる。
+\end{proof}
+
+\section{局所既約性}
+\label{decent-spaces-section-irreducible-local-ring}
+
+\noindent
+一点における代数空間の幾何学的枝数は、すでに Properties of Spaces, Section
+\ref{spaces-properties-section-irreducible-local-ring} で定義した。
+一点における代数空間の枝数は、良好な代数空間についてのみ定義できる。
+
+\begin{lemma}
+\label{decent-spaces-lemma-irreducible-local-ring}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ を点とする。次は同値である。
+\begin{enumerate}
+\item 任意の初等エタール近傍 $(U, u) \to (X, x)$ に対して、局所環
+$\mathcal{O}_{U, u}$ は唯一の極小素イデアルを持つ。
+\item 任意の初等エタール近傍 $(U, u) \to (X, x)$ に対して、$u$ を通る $U$ の既約成分は
+唯一である。
+\item 任意の初等エタール近傍 $(U, u) \to (X, x)$ に対して、局所環
+$\mathcal{O}_{U, u}$ は単枝である。
+\item Hensel 局所環 $\mathcal{O}_{X, x}^h$ は唯一の極小素イデアルを持つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は、$u$ を通る $U$ の既約成分と $u$ における $U$ の局所環の
+極小素イデアルとの間に $1$-$1$ 対応があることから従う。
+環 $\mathcal{O}_{X, x}^h$ は $\mathcal{O}_{U, u}$ の Hensel 化である。Definition
+\ref{decent-spaces-definition-henselian-local-ring} の後の議論を参照されたい。
+特に (3) と (4) は More on Algebra, Lemma \ref{more-algebra-lemma-unibranch} により同値である。
+(2) と (3) の同値性は More on Morphisms, Lemma
+\ref{more-morphisms-lemma-nr-branches} から従う。
+\end{proof}
+
+\begin{definition}
+\label{decent-spaces-definition-unibranch}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。$x \in |X|$ とする。
+Lemma \ref{decent-spaces-lemma-irreducible-local-ring} の同値な条件が成り立つとき、$X$ は
+{it $x$ で単枝} であるという。すべての $x \in |X|$ において $X$ が単枝であるとき、
+$X$ は {it 単枝} であるという。
+\end{definition}
+
+\noindent
+これはスキームに対する定義（Properties, Definition
+\ref{properties-definition-unibranch}）と整合する。
+
+\begin{lemma}
+\label{decent-spaces-lemma-nr-branches-local-ring}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。
+$x \in |X|$ を点とし、$n \in \{1, 2, \ldots\}$ を整数とする。次は同値である。
+\begin{enumerate}
+\item 任意の初等エタール近傍 $(U, u) \to (X, x)$ に対して、局所環
+$\mathcal{O}_{U, u}$ の極小素イデアルの個数は $\leq n$ であり、少なくとも一つの
+$(U, u)$ の選択に対してその個数は $n$ である。
+\item 任意の初等エタール近傍 $(U, u) \to (X, x)$ に対して、$u$ を通る $U$ の既約成分の
+個数は $\leq n$ であり、少なくとも一つの $(U, u)$ の選択に対してその個数は $n$ である。
+\item 任意の初等エタール近傍 $(U, u) \to (X, x)$ に対して、$u$ における $U$ の枝数は
+$\leq n$ であり、少なくとも一つの $(U, u)$ の選択に対してその個数は $n$ である。
+\item $\mathcal{O}_{X, x}^h$ の極小素イデアルの個数は $n$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は、$u$ を通る $U$ の既約成分と $u$ における $U$ の局所環の
+極小素イデアルとの間に $1$-$1$ 対応があることから従う。
+% P08-E426: frozen English line 5523 drops the superscript h from the henselian local ring; the source formula is preserved and the sidecar records the mismatch.
+環 $\mathcal{O}_{X, x}$ は $\mathcal{O}_{U, u}$ の Hensel 化である。Definition
+\ref{decent-spaces-definition-henselian-local-ring} の後の議論を参照されたい。
+特に (3) と (4) は More on Algebra, Lemma \ref{more-algebra-lemma-unibranch} により同値である。
+(2) と (3) の同値性は More on Morphisms, Lemma
+\ref{more-morphisms-lemma-nr-branches} から従う。
+\end{proof}
+
+\begin{definition}
+\label{decent-spaces-definition-number-of-branches}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。$x \in |X|$ とする。
+{it $x$ における $X$ の枝数} は、Lemma \ref{decent-spaces-lemma-nr-branches-local-ring} の同値な条件が
+成り立つ場合は $n \in \mathbf{N}$、そうでなければ $\infty$ である。
+\end{definition}
+
+\section{鎖状代数空間}
+\label{decent-spaces-section-catenary}
+
+\noindent
+この節では Properties, Section \ref{properties-section-catenary} および
+Morphisms, Section \ref{morphisms-section-universally-catenary} の内容を代数空間へ拡張する。
+
+\begin{definition}
+\label{decent-spaces-definition-catenary}
+$S$ をスキームとする。$X$ を $S$ 上の良好な代数空間とする。
+$|X|$ が鎖状であるとき（Topology, Definition \ref{topology-definition-catenary}）、
+$X$ は {it 鎖状} であるという。
+\end{definition}
+
+\noindent
+$X$ が表現可能なら、これは $X$ を表現するスキームに対する対応する概念と同値である。
+
+\begin{lemma}
+\label{decent-spaces-lemma-scheme-with-dimension-function}
+$S$ を局所 Noether かつ普遍鎖状なスキームとする。
+$\delta : S \to \mathbf{Z}$ を次元関数とする。$X$ を $S$ 上の良好な代数空間とし、
+構造射 $X \to S$ は局所有限型であるとする。
+% P08-E427: frozen English line 5572 applies an undefined f to x; the formula is preserved and the sidecar records that the structure morphism needs a name.
+$\delta_X : |X| \to \mathbf{Z}$ を、$x$ を $\delta(f(x))$ と $x/f(x)$ の超越次数との和へ
+写す写像とする。このとき $\delta_X$ は $|X|$ 上の次元関数である。
+\end{lemma}
+
+\begin{proof}
+$\varphi : U \to X$ を、$U$ がスキームである全射エタール射とする。
+このとき同様に定義される関数 $\delta_U$ は Morphisms, Lemma
+\ref{morphisms-lemma-dimension-function-propagates} により $U$ 上の次元関数である。
+一方、相対超越次数の定義（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-dimension-fibre}）により
+$\delta_U(u) = \delta_X(\varphi(u))$ であることが分かる。
+
+\medskip\noindent
+$x \leadsto x'$ を $|X|$ の点の特殊化とする。Lemma \ref{decent-spaces-lemma-decent-specialization} により、
+$\varphi(u) = x$ および $\varphi(u') = x'$ を満たす $U$ の点の特殊化
+$u \leadsto u'$ を取れる。さらに Lemma
+\ref{decent-spaces-lemma-decent-no-specializations-map-to-same-point} により、$x = x'$ であることと
+$u = u'$ であることは同値である。したがって $\delta_U$ が次元関数であることから、
+$\delta_X$ も次元関数であることが従う。Topology, Definition
+\ref{topology-definition-dimension-function} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-universally-catenary-scheme}
+$S$ を局所 Noether かつ普遍鎖状なスキームとする。$X$ を $S$ 上の代数空間とし、
+$X$ は良好で、構造射 $X \to S$ は局所有限型であるとする。このとき $X$ は鎖状である。
+\end{lemma}
+
+\begin{proof}
+問題は $S$ 上局所的である（Topology, Lemma \ref{topology-lemma-catenary} を用いる）。
+したがって Topology, Lemma \ref{topology-lemma-locally-dimension-function} により、
+$S$ は次元関数を持つと仮定してよい。すると Lemma
+\ref{decent-spaces-lemma-scheme-with-dimension-function} により $|X|$ は次元関数を持つと結論する。
+$|X|$ はソーバーなので（Proposition \ref{decent-spaces-proposition-reasonable-sober}）、Topology, Lemma
+\ref{topology-lemma-dimension-function-catenary} により $|X|$ は鎖状であると結論する。
+\end{proof}
+
+\noindent
+Lemma \ref{decent-spaces-lemma-universally-catenary-scheme} により、次の定義は表現可能な代数空間について
+すでに存在する概念と整合する。
+
+\begin{definition}
+\label{decent-spaces-definition-universally-catenary}
+$S$ をスキームとする。$X$ を $S$ 上の良好かつ局所 Noether な代数空間とする。
+局所有限型で $Y$ が良好である代数空間の任意の射 $Y \to X$ に対して、代数空間 $Y$ が
+鎖状であるとき、$X$ は {it 普遍鎖状} であるという。
+\end{definition}
+
+\noindent
+$X$ が代数空間なら、条件「$X$ は良好かつ局所 Noether」と「$X$ は準分離かつ局所 Noether」は
+同値である。これは Lemma \ref{decent-spaces-lemma-locally-Noetherian-decent-quasi-separated} である。
+したがって上の定義は、準分離かつ局所有限型なすべての射 $Y \to X$ に対して $Y$ が鎖状であることと、
+$X$ が普遍鎖状であることが同値だと理解することもできる。
+
+\begin{lemma}
+\label{decent-spaces-lemma-universally-catenary}
+$S$ をスキームとする。$X$ を $S$ 上の良好、局所 Noether、かつ普遍鎖状な代数空間とする。
+$X$ 上局所有限型な任意の良好な代数空間は普遍鎖状である。
+\end{lemma}
+
+\begin{proof}
+これは定義と、局所有限型射の合成が局所有限型であることから形式的に従う
+(Morphisms of Spaces, Lemma \ref{spaces-morphisms-lemma-composition-finite-type})。
+\end{proof}
+
+\begin{lemma}
+\label{decent-spaces-lemma-check-dimension-function-finite-cover}
+$S$ をスキームとする。$f : Y \to X$ を、良好かつ局所 Noether な代数空間の全射有限射とする。
+$\delta : |X| \to \mathbf{Z}$ を関数とする。$\delta \circ |f|$ が次元関数なら、
+$\delta$ は次元関数である。
+\end{lemma}
+
+\begin{proof}
+$x \mapsto x'$、$x \not = x'$ を $|X|$ における特殊化とする。
+$|f|(y) = x$ となる $y \in |Y|$ を選ぶ。$|f|$ は閉写像なので（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-proper}）、$|f|(y') = x'$ となる特殊化 $y \leadsto y'$ が存在する。
+したがって
+$\delta(x) = \delta(|f|(y)) > \delta(|f|(y')) = \delta(x')$
+であると結論する（Topology, Definition \ref{topology-definition-dimension-function} を参照）。
+$x \leadsto x'$ が直近特殊化なら、$y \leadsto y'$ も直近特殊化である。
+実際、$y \leadsto y'' \leadsto y'$ なら、$|f|(y'')$ は $x$ または $x'$ のいずれかでなければならず、
+Lemma \ref{decent-spaces-lemma-conditions-on-fibre-and-qf} により $|f|$ のファイバーの点の間に非自明な特殊化はない。
+\end{proof}
+
+\noindent
+この議論は More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-catenary} で続ける。

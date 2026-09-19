@@ -1,0 +1,4522 @@
+% Generated mechanically from frozen input inputs/p11/ja/stacks-sheaves.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{95}
+\chapter{代数スタック上の層}
+
+
+
+\phantomsection
+\label{stacks-sheaves-section-phantom}
+
+
+\section{序論}
+\label{stacks-sheaves-section-introduction}
+
+\noindent
+代数スタック上の層を考える方法は無数にある。
+この章では、代数スタックに関する本書の基礎づけに特によく適合する一つの方法を論じる。
+ある種類の層を導入するたびに、文献中の類似概念との正確な関係を示す。
+この章の目的は、明らかに正しいか証明が直接的な結果を述べ、
+より複雑な構成を後に残すことである。
+
+\medskip\noindent
+実際、構成可能エタール層の十分な理論、またはコホモロジー層が準連接である
+$\mathcal{O}$-加群の複体の導来圏に関する適切な議論を展開するには、
+かなりの労力が必要である（\cite{olsson_sheaves} を参照）。
+これについては『スタックのコホモロジー』の節
+\ref{stacks-cohomology-section-introduction} で再び扱う。
+
+\medskip\noindent
+代数スタック上の層に関する文献や研究論文では、代数スタックの
+lisse-エタールサイトがしばしば重要な役割を果たす。
+しかし、これは扱いにくい対象である。実際、代数スタックの射は
+lisse-エタールトポスの射を誘導しないことが分かる。
+そこで本書では、可能な限り lisse-エタールサイトに言及しない方針を採った。
+従来 lisse-エタールサイトを用いる議論は、以下で定義するサイト
+$\mathcal{X}_{smooth}$ における {\v C}ech 被覆を用いる議論に置き換える。
+
+\medskip\noindent
+この章の記法、規約、用語には不自然なものがあり、経験豊かな読者には
+逆向きに思えるかもしれない。これは意図的である。
+説明については『Quot』の節 \ref{quot-section-conventions} を参照せよ。
+
+
+
+
+\section{規約}
+\label{stacks-sheaves-section-conventions}
+
+\noindent
+この章で用いる規約は代数スタックの章のものと同じである（『代数スタック』の節
+\ref{algebraic-section-conventions} を参照）。便宜のため、ここで繰り返す。
+
+\medskip\noindent
+『位相』の定義 \ref{topologies-definition-big-fppf-site} と同様の、
+適切な大 fppf サイト $\Sch_{fppf}$ で作業する。
+したがって、明記しない限り、すべてのスキームは $\Sch_{fppf}$ の対象である。
+大 fppf サイトを変更したときに何が変わるかは別の箇所に記す
+（将来の参照をここに挿入）。
+
+\medskip\noindent
+常に $\Sch_{fppf}$ に含まれる基底 $S$ に相対して作業し、
+大 fppf サイト $(\Sch/S)_{fppf}$ を用いる（『位相』の定義
+\ref{topologies-definition-big-small-fppf} を参照）。
+絶対的な場合は $S = \Spec(\mathbf{Z})$ と取ることで復元できる。
+
+
+
+
+
+\section{前層}
+\label{stacks-sheaves-section-presheaves}
+
+\noindent
+この節では $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏上の前層を
+定義するが、議論の大部分は任意の基底圏上の圏に対して成り立つ。
+この節では、後で用いる記法も導入する。
+
+\begin{definition}
+\label{stacks-sheaves-definition-presheaves}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+\begin{enumerate}
+\item {\it $\mathcal{X}$ 上の前層}とは、$\mathcal{X}$ の台となる圏上の前層である。
+\item {\it $\mathcal{X}$ 上の前層の射}とは、$\mathcal{X}$ の台となる圏上の
+前層の射である。
+\end{enumerate}
+$\mathcal{X}$ 上の前層の圏を $\textit{PSh}(\mathcal{X})$ と表す。
+\end{definition}
+
+\noindent
+これは集合の前層を定義している。もちろん、点付き集合、アーベル群、群、モノイド、環、
+固定した環上の加群、固定した体上の Lie 代数などの前層も考えられる。
+{\it アーベル前層}、すなわちアーベル群の前層の圏を
+$\textit{PAb}(\mathcal{X})$ と表す。
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+これは単に $f$ が $(\Sch/S)_{fppf}$ 上の関手であることを意味する。
+『サイト』の節 \ref{sites-section-more-functoriality-PSh} により、随伴関手の組\footnote{
+補題 \ref{stacks-sheaves-lemma-functoriality-sheaves} を証明した後は、これらの関手を
+$f^{-1}$ および $f_*$ と表す。}
+\begin{equation}
+\label{stacks-sheaves-equation-pushforward-pullback}
+f^p : \textit{PSh}(\mathcal{Y}) \longrightarrow \textit{PSh}(\mathcal{X})
+\quad\text{and}\quad
+{}_pf : \textit{PSh}(\mathcal{X}) \longrightarrow \textit{PSh}(\mathcal{Y}).
+\end{equation}
+を得る。随伴性は
+$$
+\Mor_{\textit{PSh}(\mathcal{X})}(f^p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_pf\mathcal{F})
+$$
+で与えられる。ここで $\mathcal{F} \in \Ob(\textit{PSh}(\mathcal{X}))$、
+$\mathcal{G} \in \Ob(\textit{PSh}(\mathcal{Y}))$ とする。
+$f^p\mathcal{G}$ を $\mathcal{G}$ の{\it 引き戻し}と呼ぶ。
+定義から、任意の $x \in \Ob(\mathcal{X})$ に対して
+$$
+f^p\mathcal{G}(x) = \mathcal{G}(f(x))
+$$
+である。前層 ${}_pf\mathcal{F}$ を $\mathcal{F}$ の{\it 順像}と呼び、公式
+$$
+({}_pf\mathcal{F})(y) = \lim_{f(x) \to y} \mathcal{F}(x).
+$$
+で記述される。この節の残りはサイトの章に移すべき内容であり、
+いずれにせよ初読では飛ばしてよい。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-1-morphisms-presheaves}
+$f : \mathcal{X} \to \mathcal{Y}$ および $g : \mathcal{Y} \to \mathcal{Z}$ を、
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+このとき $(g \circ f)^p = f^p \circ g^p$ であり、標準的な同型
+${}_p(g \circ f) \to {}_pg \circ {}_pf$
+が存在する。これは $(f^p, {}_pf)$、$(g^p, {}_pg)$、および
+$((g \circ f)^p, {}_p(g \circ f))$ の随伴性と両立する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{H}$ を $\mathcal{Z}$ 上の前層とする。このとき
+$(g \circ f)^p\mathcal{H} = f^p (g^p\mathcal{H})$ は等式
+$$
+(g \circ f)^p\mathcal{H}(x) = \mathcal{H}((g \circ f)(x))
+= \mathcal{H}(g(f(x))) = f^p (g^p\mathcal{H})(x).
+$$
+で与えられる。これが制限写像と両立することの確認は省略する。
+
+\medskip\noindent
+次に変換 ${}_p(g \circ f) \to {}_pg \circ {}_pf$ を定義する。
+$\mathcal{F}$ を $\mathcal{X}$ 上の前層とする。
+$z$ が $\mathcal{Z}$ の対象ならば、四つ組
+$(x, f(x) \to y, y, g(y) \to z)$ の圏 $\mathcal{J}$ と、組
+$(x, g(f(x)) \to z)$ の圏 $\mathcal{I}$ を得る。
+対象 $(x, \alpha : f(x) \to y, y, \beta : g(y) \to z)$ を
+$(x, \beta \circ f(\alpha) : g(f(x)) \to z)$ に送る標準的な関手
+$\mathcal{J} \to \mathcal{I}$ が存在する。これにより
+\begin{align*}
+({}_p(g \circ f)\mathcal{F})(z) & =
+\lim_{g(f(x)) \to z} \mathcal{F}(x) \\
+& = \lim_\mathcal{I} \mathcal{F} \\
+& \to \lim_\mathcal{J} \mathcal{F} \\
+& = \lim_{g(y) \to z}
+\Big(\lim_{f(x) \to y} \mathcal{F}(x)\Big) \\
+& =
+({}_pg \circ {}_pf\mathcal{F})(x)
+\end{align*}
+における矢印を得る（『圏』の補題
+\ref{categories-lemma-functorial-limit}）。
+これが制限写像と両立することの確認は省略する。
+この直接的な構成の代わりに、
+${}_p(g \circ f) \cong {}_pg \circ {}_pf$
+を随伴性と両立する一意な写像として定義してもよい。
+この方法には、両立性を別に証明する必要がないという利点もある。
+
+\medskip\noindent
+$(f^p, {}_pf)$、$(g^p, {}_pg)$、および
+$((g \circ f)^p, {}_p(g \circ f))$ の随伴性との両立性とは、
+上の前層 $\mathcal{H}$、$\mathcal{F}$ に対して可換図式
+$$
+\xymatrix@C=16pt{
+\Mor_{\textit{PSh}(\mathcal{X})}(f^pg^p\mathcal{H}, \mathcal{F})
+\ar@{=}[r] \ar@{=}[d] &
+\Mor_{\textit{PSh}(\mathcal{Y})}(g^p\mathcal{H}, {}_pf\mathcal{F})
+\ar@{=}[r] &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{H}, {}_pg{}_pf\mathcal{F})
+\\
+\Mor_{\textit{PSh}(\mathcal{X})}((g \circ f)^p\mathcal{G}, \mathcal{F})
+\ar@{=}[rr] & &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_p(g \circ f)\mathcal{F})
+\ar[u]
+}
+$$
+を持つことを意味する。証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-2-morphisms-presheaves}
+$f, g : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$t : f \to g$ を、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$2$-射とする。$t$ には関手の標準的な同型
+$$
+t^p : g^p \longrightarrow f^p
+\quad\text{and}\quad
+{}_pt : {}_pf \longrightarrow {}_pg
+$$
+が随伴し、これは $(f^p, {}_pf)$ および $(g^p, {}_pg)$ の随伴性、ならびに
+$2$-射の垂直合成と水平合成と両立する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}$ を $\mathcal{Y}$ 上の前層とする。このとき
+$t^p : g^p\mathcal{G} \to f^p\mathcal{G}$ は、
+$x \in \Ob(\mathcal{X})$ で添字付けられた写像族
+$$
+g^p\mathcal{G}(x) = \mathcal{G}(g(x))
+\xrightarrow{\mathcal{G}(t_x)}
+\mathcal{G}(f(x)) = f^p\mathcal{G}(x)
+$$
+で与えられる。これは $t_x : f(x) \to g(x)$ であり、$\mathcal{G}$ が反変関手なので
+意味を持つ。これが制限写像と両立することの確認は省略する。
+
+\medskip\noindent
+変換 ${}_pt$ を定義するため、$y \in \Ob(\mathcal{Y})$ に対し、
+${}_y^f\mathcal{I}$、それぞれ ${}_y^g\mathcal{I}$ を、組
+$(x, \psi : f(x) \to y)$、それぞれ $(x, \psi : g(x) \to y)$ の圏とする
+（『サイト』の節 \ref{sites-section-more-functoriality-PSh} を参照）。
+$t$ は規則
+${}_yt : {}_y^g\mathcal{I} \to {}_y^f\mathcal{I}$
+$$
+(x, g(x) \to y) \longmapsto (x, f(x) \xrightarrow{t_x} g(x) \to y).
+$$
+によってこの関手を定める。
+$\mathcal{F}$ を $\mathcal{X}$ 上の前層とすると、${}_yt$ と
+$\mathcal{F} : {}_y^f\mathcal{I}^{opp} \to \textit{Sets}$、
+$(x, f(x) \to y) \mapsto \mathcal{F}(x)$ との合成は
+$\mathcal{F} : {}_y^g\mathcal{I}^{opp} \to \textit{Sets}$ に等しい。
+したがって『圏』の補題 \ref{categories-lemma-functorial-limit} により、
+各 $y \in \Ob(\mathcal{Y})$ に対して標準的な写像
+$$
+({}_pf\mathcal{F})(y) = \lim_{{}_y^f\mathcal{I}} \mathcal{F}
+\longrightarrow
+\lim_{{}_y^g\mathcal{I}} \mathcal{F} = ({}_pg\mathcal{F})(y)
+$$
+を得る。これが制限写像と両立することの確認は省略する。
+この直接的な構成の代わりに、${}_pt$ を組 $(f^p, {}_pf)$ と
+$(g^p, {}_pg)$ の随伴性と両立する一意な写像として定義してもよい（下を参照）。
+この方法には、両立性を別に証明する必要がないという利点もある。
+
+\medskip\noindent
+$(f^p, {}_pf)$ と $(g^p, {}_pg)$ の随伴性との両立性とは、
+上の前層 $\mathcal{G}$、$\mathcal{F}$ に対して可換図式
+$$
+\xymatrix{
+\Mor_{\textit{PSh}(\mathcal{X})}(f^p\mathcal{G}, \mathcal{F})
+\ar@{=}[r] \ar[d]_{- \circ t^p} &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_pf\mathcal{F})
+\ar[d]^{{}_pt \circ -} \\
+\Mor_{\textit{PSh}(\mathcal{X})}(g^p\mathcal{G}, \mathcal{F})
+\ar@{=}[r] &
+\Mor_{\textit{PSh}(\mathcal{Y})}(\mathcal{G}, {}_pg\mathcal{F})
+}
+$$
+を持つことを意味する。証明は省略する。ヒント：『サイト』の補題
+\ref{sites-lemma-adjoints-pu} の証明をたどり、図式の水平写像と垂直写像の
+明示的な記述から両立性を確かめよ。
+
+\medskip\noindent
+これが垂直合成と水平合成と両立することの確認は省略する。
+ヒント：$t^p$ に対する証明は直接的であり、随伴性との両立性を用いれば
+${}_pt$ にも成り立つと結論できる。
+\end{proof}
+
+
+
+
+
+
+
+\section{層}
+\label{stacks-sheaves-section-sheaves}
+
+\noindent
+まず、重要かつ自明な観察を行う（特に集合論的な問題を気にしない読者にとっては
+自明である）。
+
+\medskip\noindent
+『位相』の定義 \ref{topologies-definition-big-fppf-site} と同様の
+大 fppf サイト $\Sch_{fppf}$ を考え、その台となる圏を $\Sch_\alpha$ と表す。
+圏 $\Sch_\alpha$ は fppf サイトの台となる圏であるだけでなく、
+大 Zariski サイト、大エタールサイト、大滑らかなサイト、
+大 syntomic サイトの台となる圏としても使える（『位相』の注
+\ref{topologies-remark-choice-sites} を参照）。
+これらのサイトを $\Sch_{Zar}$、$\Sch_\etale$、
+$\Sch_{smooth}$、$\Sch_{syntomic}$ と表す。
+この状況では、$S$ の大 Zariski サイト $(\Sch/S)_{Zar}$、
+$S$ の大エタールサイト $(\Sch/S)_\etale$、$S$ の大滑らかなサイト
+$(\Sch/S)_{smooth}$、$S$ の大 syntomic サイト $(\Sch/S)_{syntomic}$、
+$S$ の大 fppf サイト $(\Sch/S)_{fppf}$ を、それぞれこれらの（絶対的）大サイトの局所化
+（『サイト』の節 \ref{sites-section-localize} を参照）
+$\Sch_{Zar}/S$、$\Sch_\etale/S$、$\Sch_{smooth}/S$、
+$\Sch_{syntomic}/S$、$\Sch_{fppf}/S$ として定義した。
+したがって、これらはすべて同じ台となる圏、すなわち $\Sch_\alpha/S$ を持つ。
+
+\medskip\noindent
+したがって、グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ があれば、$\mathcal{X}$ は
+Zariski、エタール、滑らかな、syntomic、fppf の各位相を継承する
+（『スタック』の定義 \ref{stacks-definition-topology-inherited} を参照）。
+
+\begin{definition}
+\label{stacks-sheaves-definition-inherited-topologies}
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とする。
+\begin{enumerate}
+\item {\it 随伴 Zariski サイト} $\mathcal{X}_{Zar}$ とは、
+$(\Sch/S)_{Zar}$ から継承した $\mathcal{X}$ 上のサイト構造である。
+\item {\it 随伴エタールサイト} $\mathcal{X}_\etale$ とは、
+$(\Sch/S)_\etale$ から継承した $\mathcal{X}$ 上のサイト構造である。
+\item {\it 随伴滑らかなサイト} $\mathcal{X}_{smooth}$ とは、
+$(\Sch/S)_{smooth}$ から継承した $\mathcal{X}$ 上のサイト構造である。
+\item {\it 随伴 syntomic サイト} $\mathcal{X}_{syntomic}$ とは、
+$(\Sch/S)_{syntomic}$ から継承した $\mathcal{X}$ 上のサイト構造である。
+\item {\it 随伴 fppf サイト} $\mathcal{X}_{fppf}$ とは、
+$(\Sch/S)_{fppf}$ から継承した $\mathcal{X}$ 上のサイト構造である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+上の議論により、この定義は意味を持つ。$\mathcal{X}$ が代数スタックならば、
+文献では $\mathcal{X}_{fppf}$（またはこれと同値なサイト）を
+$\mathcal{X}$ の{\it 大 fppf サイト}と呼び、他の位相についても同様である。
+この構成を他の構成と区別するため、ときにこの用語を用いる。
+
+\begin{remark}
+\label{stacks-sheaves-remark-ambiguity}
+この記法は、記号 $\mathcal{X}$ がグルーポイドをファイバーとする圏を表す場合にのみ用い、
+スキームや代数空間などを表す場合には用いない。
+これにより、$X_\etale$ と表すスキームまたは代数空間の小エタールサイトとの混同を避ける
+（この場合はカリグラフィ体ではなくローマン体の大文字を用いる）。
+\end{remark}
+
+\noindent
+これらの位相を定義したので、$\mathcal{X}$ 上の層とは何か、すなわち対応するトポスを
+定義できる。
+
+\begin{definition}
+\label{stacks-sheaves-definition-sheaves}
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とし、
+$\mathcal{F}$ を $\mathcal{X}$ 上の前層とする。
+\begin{enumerate}
+\item $\mathcal{F}$ が随伴 Zariski サイト $\mathcal{X}_{Zar}$ 上の層ならば、
+$\mathcal{F}$ を{\it Zariski 層}、または{\it Zariski 位相に関する層}と呼ぶ。
+\item $\mathcal{F}$ が随伴エタールサイト $\mathcal{X}_\etale$ 上の層ならば、
+$\mathcal{F}$ を{\it エタール層}、または{\it エタール位相に関する層}と呼ぶ。
+\item $\mathcal{F}$ が随伴滑らかなサイト $\mathcal{X}_{smooth}$ 上の層ならば、
+$\mathcal{F}$ を{\it 滑らかな層}、または{\it 滑らかな位相に関する層}と呼ぶ。
+\item $\mathcal{F}$ が随伴 syntomic サイト $\mathcal{X}_{syntomic}$ 上の層ならば、
+$\mathcal{F}$ を{\it syntomic 層}、または{\it syntomic 位相に関する層}と呼ぶ。
+\item $\mathcal{F}$ が随伴 fppf サイト $\mathcal{X}_{fppf}$ 上の層ならば、
+$\mathcal{F}$ を{\it fppf 層}、{\it 層}、または{\it fppf 位相に関する層}と呼ぶ。
+\end{enumerate}
+層の射とは単に前層の射である。これらの層の圏を
+$\Sh(\mathcal{X}_{Zar})$,
+$\Sh(\mathcal{X}_\etale)$,
+$\Sh(\mathcal{X}_{smooth})$,
+$\Sh(\mathcal{X}_{syntomic})$, および
+$\Sh(\mathcal{X}_{fppf})$.
+と表す。
+\end{definition}
+
+\noindent
+もちろん、点付き集合、アーベル群、群、モノイド、環、固定した環上の加群、
+固定した体上の Lie 代数などの層も考えられる。
+{\it アーベル層}、すなわちアーベル群の層の圏を
+$\textit{Ab}(\mathcal{X}_{fppf})$ と表し、他の位相についても同様とする。
+$\mathcal{X}$ が代数スタックならば、$\Sh(\mathcal{X}_{fppf})$ は
+（集合論的な問題を除いて）文献でいう
+{\it $\mathcal{X}$ の大 fppf サイト上の層の圏}と圏同値である。
+他の位相についても同様である。この構成を他の構成と区別するため、
+ときにこの用語を用いる。
+
+\medskip\noindent
+各位相を強さの昇順に並べたので、次の充満な包含を得る。
+$$
+\Sh(\mathcal{X}_{fppf}) \subset
+\Sh(\mathcal{X}_{syntomic}) \subset
+\Sh(\mathcal{X}_{smooth}) \subset
+\Sh(\mathcal{X}_\etale) \subset
+\Sh(\mathcal{X}_{Zar}) \subset \textit{PSh}(\mathcal{X})
+$$
+前述の用語、すなわち $\mathcal{X}$ 上の層とは $\mathcal{X}$ 上の fppf 層であるという
+規約に従い、ときに
+$\Sh(\mathcal{X}_{fppf}) = \Sh(\mathcal{X})$
+および
+$\textit{Ab}(\mathcal{X}_{fppf}) = \textit{Ab}(\mathcal{X})$
+と書く。
+
+\medskip\noindent
+この設定では、これらのトポスの関手性は直接的であり、さらに上の包含関手と両立する。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-functoriality-sheaves}
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とし、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+(\ref{stacks-sheaves-equation-pushforward-pullback}) の関手 ${}_pf$ と $f^p$ は
+$\tau$-層を $\tau$-層に移し、トポスの射
+$f : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$.
+を定める。
+\end{lemma}
+
+\begin{proof}
+これは『スタック』の補題
+\ref{stacks-lemma-topology-inherited-functorial} から直ちに従う。
+\end{proof}
+
+\noindent
+言い換えると、節 \ref{stacks-sheaves-section-presheaves} で定義した前層の順像と引き戻しは、
+$\tau$-層の{\it 順像}と{\it 引き戻し}も与える。
+以上により、混同のおそれなく $f^p = f^{-1}$ および ${}_pf = f_*$ と書ける。
+
+\begin{definition}
+\label{stacks-sheaves-definition-morphism}
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の射とする。上で構成した
+$$
+f = (f^{-1}, f_*) :
+\Sh(\mathcal{X}_{fppf})
+\longrightarrow
+\Sh(\mathcal{Y}_{fppf})
+$$
+を{\it 随伴する fppf トポスの射}と呼ぶ。
+随伴する Zariski、エタール、滑らかな、syntomic の各トポスについても同様である。
+\end{definition}
+
+\noindent
+『サイト』の節 \ref{sites-section-sheaves-algebraic-structures} で論じたように、
+同じ公式（台となる集合の層上の公式）は、点付き集合、アーベル群、群、モノイド、環、
+固定した環上の加群、固定した体上の Lie 代数などの層
+（本書で用いるいずれかの位相に関する層）の順像と引き戻しを定義する。
+
+
+
+
+
+
+
+
+\section{順像の計算}
+\label{stacks-sheaves-section-pushforward}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。
+$\mathcal{F}$ を $\mathcal{X}$ 上の前層、$y \in \Ob(\mathcal{Y})$ とする。
+$f_*\mathcal{F}(y)$ は次のように計算できる。
+$y$ がスキーム $V$ 上にあり、$2$-米田の補題によって $y$ を $1$-射とみなすとする。
+射影
+$$
+\text{pr} :
+(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}
+\longrightarrow
+\mathcal{X}
+$$
+を考える。このとき標準的な同一視
+\begin{equation}
+\label{stacks-sheaves-equation-pushforward}
+f_*\mathcal{F}(y) = \Gamma\Big(
+(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+\end{equation}
+を得る。実際、$2$-ファイバー積の対象は三つ組
+$(h : U \to V, x, f(x) \to h^*y)$ である。記法から $h$ を省けば、
+これは $\mathcal{X}$ の対象 $x$ と $\mathcal{Y}$ の射
+$\alpha : f(x) \to y$ のデータに等しい。
+定義により $f_*\mathcal{F}(y) = \lim_{f(x) \to y} \mathcal{F}(x)$ なので、等式が従う。
+
+\medskip\noindent
+帰結として、順像に対する次の「基底変換」の結果を得る。
+これは自明な結果であり、「大」サイトを用いていることに依存する。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-base-change}
+$S$ をスキームとする。図式
+$$
+\xymatrix{
+\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \ar[r]_{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r]^g & \mathcal{Y}
+}
+$$
+を $S$ 上のグルーポイドをファイバーとする圏の $2$-カルテジアン図式とする。
+このとき標準的な同型
+$$
+g^{-1}f_*\mathcal{F} \longrightarrow f'_*(g')^{-1}\mathcal{F}
+$$
+が存在し、$\mathcal{X}$ 上の前層 $\mathcal{F}$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+$V$ 上の $\mathcal{Y}'$ の対象 $y'$ に対して圏同値
+$$
+(\Sch/V)_{fppf} \times_{g(y'), \mathcal{Y}} \mathcal{X}
+=
+(\Sch/V)_{fppf} \times_{y', \mathcal{Y}'}
+(\mathcal{Y}' \times_\mathcal{Y} \mathcal{X})
+$$
+が存在する。したがって (\ref{stacks-sheaves-equation-pushforward}) により全単射
+$g^{-1}f_*\mathcal{F}(y') \to f'_*(g')^{-1}\mathcal{F}(y')$ を得る。
+これが制限写像と両立することの確認は省略する。
+\end{proof}
+
+\noindent
+グルーポイドをファイバーとする圏の表現可能な射の場合、公式
+(\ref{stacks-sheaves-equation-pushforward}) は簡単になる。この節の残りは飛ばしてよい。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-representable}
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とする。次は同値である。
+\begin{enumerate}
+\item $f$ は表現可能である。
+\item 任意の $y \in \Ob(\mathcal{Y})$ に対し、関手
+$\mathcal{X}^{opp} \to \textit{Sets}$,
+$x \mapsto \Mor_\mathcal{Y}(f(x), y)$
+は表現可能である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『代数スタック』の節 \ref{algebraic-section-representable-morphism} の議論により、
+$f$ が表現可能であることと、$U$ 上にある任意の
+$y \in \Ob(\mathcal{Y})$ に対して $2$-ファイバー積
+$(\Sch/U)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+が表現可能、すなわち $U$ 上のあるスキーム $V_y$ に対して
+$(\Sch/V_y)_{fppf}$ の形であることとは同値である。
+この $2$-ファイバー積の対象は三つ組
+$(h : V \to U, x, \alpha : f(x) \to h^*y)$ であり、$\alpha$ は
+$\text{id}_V$ 上にある。記法から $h$ を省くと、これは
+$\mathcal{X}$ の対象 $x$ と射 $f(x) \to y$ のデータに等しい。
+したがって、$2$-ファイバー積が $V_y$ と射 $f(x_y) \to y$ によって
+表現されること（ここで $x_y$ は $V_y$ 上の $\mathcal{X}$ の対象）と、
+(2) の関手が $x_y$ によって表現され、その普遍対象が写像
+$f(x_y) \to y$ であることとは同値である。
+\end{proof}
+
+\noindent
+図式
+$$
+\xymatrix{
+\mathcal{X} \ar[rr]_f \ar[rd]_p & &  \mathcal{Y} \ar[ld]^q \\
+& (\Sch/S)_{fppf}
+}
+$$
+をグルーポイドをファイバーとする圏の $1$-射とし、$f$ は表現可能であると仮定する。
+各 $y \in \Ob(\mathcal{Y})$ に対し、補題 \ref{stacks-sheaves-lemma-representable} の関手
+$x \mapsto \Mor_\mathcal{Y}(f(x), y)$
+を表現する対象 $u(y) \in \Ob(\mathcal{X})$ を選ぶ
+（これは選択公理により可能である）。構成により、これらの対象には標準的な射
+$f(u(y)) \to y$ が付随する。
+$\mathcal{Y}$ の各射 $\beta : y' \to y$ に対して、図式
+$$
+\xymatrix{
+f(u(y')) \ar[d] \ar[rr]_{f(u(\beta))} & & f(u(y)) \ar[d] \\
+y' \ar[rr] & & y
+}
+$$
+を可換にする $\mathcal{X}$ の一意な射
+$u(\beta) : u(y') \to u(y)$ を得る。言い換えると、
+$u : \mathcal{Y} \to \mathcal{X}$ は関手である。
+実際、さらに次がいえる。$V' = q(y')$、$V = q(y)$、
+$U' = p(u(y'))$、$U = p(u(y))$ とする。このとき
+$$
+\xymatrix{
+U' \ar[rr]_{p(u(\beta))} \ar[d] & & U \ar[d] \\
+V' \ar[rr]^{q(\beta)} & & V
+}
+$$
+はファイバー積の正方形である。これは $U' \to U$ が、$V' \to V$ の基底変換
+$(\Sch/V')_{fppf} \times_{y', \mathcal{Y}} \mathcal{X} \to
+(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+を表現するからである。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-representable-pushforward}
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の表現可能な $1$-射とし、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+このとき関手 $u : \mathcal{Y}_\tau \to \mathcal{X}_\tau$ は連続であり、
+サイトの射 $\mathcal{X}_\tau \to \mathcal{Y}_\tau$ を定める。
+この射が誘導するトポスの射
+$\Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$
+は、補題 \ref{stacks-sheaves-lemma-functoriality-sheaves} で構成した射 $f$ と同じである。
+さらに、$\mathcal{X}$ 上の任意の前層 $\mathcal{F}$ に対して
+$f_*\mathcal{F}(y) = \mathcal{F}(u(y))$ である。
+\end{lemma}
+
+\begin{proof}
+$\{y_i \to y\}$ を $\mathcal{Y}$ における $\tau$-被覆とする。
+定義により、これは単に $\{q(y_i) \to q(y)\}$ がスキームの
+$\tau$-被覆であることを意味する。補題の直前の観察により、
+$\{p(u(y_i)) \to p(u(y))\}$ は $\tau$-被覆
+$\{q(y_i) \to q(y)\}$ の $p(u(y)) \to q(y)$ による基底変換である。
+したがってサイトの公理により、これ自身も $\tau$-被覆である。
+ゆえに $\{u(y_i) \to u(y)\}$ は $\mathcal{X}$ の $\tau$-被覆であり、
+$u$ は連続である。
+
+\medskip\noindent
+『サイト』の節 \ref{sites-section-functoriality-PSh} および
+\ref{sites-section-continuous-functors} の記法 $u_p, u_s, u^p, u^s$ を用いる。
+補題の最後の主張を示せば、上で示した $u$ の連続性により
+$f_* = u^p = u^s$ であり、随伴性により $f^{-1} = u_s$ となる。
+これにより $u_s$ が完全であること、したがって $u$ がサイトの射を定めることが分かり、
+射の一致も明らかになる。
+$f_*\mathcal{F}(y) = \mathcal{F}(u(y))$ を示すため、定義により
+$$
+f_*\mathcal{F}(y) = ({}_pf\mathcal{F})(y) =
+\lim_{f(x) \to y} \mathcal{F}(x).
+$$
+$u(y)$ は極限をとる圏の終対象なので、結論が従う。
+\end{proof}
+
+
+
+
+
+\section{構造層}
+\label{stacks-sheaves-section-structure-sheaf}
+
+\noindent
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の 2-圏は終対象、すなわち
+$\text{id} : (\Sch/S)_{fppf} \to (\Sch/S)_{fppf}$
+を持ち、$p$ は $\mathcal{X}$ からこの終対象への $1$-射である。
+したがって、$(\Sch/S)_{fppf}$ 上の任意の前層 $\mathcal{G}$ は、規則
+$p^{-1}\mathcal{G}(x) = \mathcal{G}(p(x))$ で定義される
+$\mathcal{X}$ 上の前層 $p^{-1}\mathcal{G}$ を与える。
+さらに節 \ref{stacks-sheaves-section-sheaves} の議論により、$\mathcal{G}$ が
+$\tau$-層ならば $p^{-1}\mathcal{G}$ も $\tau$-層である。
+
+\medskip\noindent
+サイト $(\Sch/S)_{fppf}$ は、規則
+$$
+(\Sch/S)^{opp} \longrightarrow \textit{Rings},
+\quad
+U/S \longmapsto \Gamma(U, \mathcal{O}_U)
+$$
+で定義される構造層 $\mathcal{O}$ を持つ環付きサイトであることを思い出そう
+（『降下』の定義 \ref{descent-definition-structure-sheaf} を参照）。
+
+\begin{definition}
+\label{stacks-sheaves-definition-structure-sheaf}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+{\it $\mathcal{X}$ の構造層}とは、環の層
+$\mathcal{O}_\mathcal{X} = p^{-1}\mathcal{O}$ である。
+\end{definition}
+
+\noindent
+$U$ 上にある $\mathcal{X}$ の対象 $x$ に対し、
+$\mathcal{O}_\mathcal{X}(x) = \mathcal{O}(U) = \Gamma(U, \mathcal{O}_U)$ である。
+いうまでもなく $\mathcal{O}_\mathcal{X}$ は Zariski、エタール、滑らかな、
+syntomic の各層でもある。したがって、各サイト
+$\mathcal{X}_{Zar}$、$\mathcal{X}_\etale$、$\mathcal{X}_{smooth}$、
+$\mathcal{X}_{syntomic}$、$\mathcal{X}_{fppf}$ は環付きサイトである。
+この構成も関手的である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-functoriality-structure-sheaf}
+$f : \mathcal{X} \to \mathcal{Y}$ を、$(\Sch/S)_{fppf}$ 上の
+グルーポイドをファイバーとする圏の $1$-射とし、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+標準的な同一視
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$
+が存在し、これにより
+$f : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$
+は環付きトポスの射となる。
+\end{lemma}
+
+\begin{proof}
+構造関手を $p : \mathcal{X} \to (\Sch/S)_{fppf}$ および
+$q : \mathcal{Y} \to (\Sch/S)_{fppf}$ と表す。
+$p = q \circ f$ なので、補題 \ref{stacks-sheaves-lemma-1-morphisms-presheaves} により
+$p^{-1} = f^{-1} \circ q^{-1}$ である。
+$\mathcal{O}_\mathcal{X} = p^{-1}\mathcal{O}$ かつ
+$\mathcal{O}_\mathcal{Y} = q^{-1}\mathcal{O}$ だから、結果が従う。
+\end{proof}
+
+\begin{remark}
+\label{stacks-sheaves-remark-flat}
+補題 \ref{stacks-sheaves-lemma-functoriality-structure-sheaf} の状況では、環付きトポスの射
+$f : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$
+は平坦である。これは等式
+$f^{-1}\mathcal{O}_\mathcal{X} = \mathcal{O}_\mathcal{Y}$.
+から明らかである。これはやや直観に反する。たとえば、代数スタックの閉埋め込みは、
+代数スタックの射としては通常平坦ではない。
+しかし、スキームの閉埋め込み $i : X \to Y$ を取る場合にもまったく同じことが起こる。
+この場合、随伴する大 $\tau$-サイトの射
+$i : (\Sch/X)_\tau \to (\Sch/Y)_\tau$
+も平坦である。
+\end{remark}
+
+
+
+
+\section{加群の層}
+\label{stacks-sheaves-section-modules}
+
+\noindent
+構造層があるので、加群を考えられる。
+
+\begin{definition}
+\label{stacks-sheaves-definition-modules}
+$\mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏とする。
+\begin{enumerate}
+\item {\it $\mathcal{X}$ 上の加群の前層}とは、
+$\mathcal{O}_\mathcal{X}$-加群の前層である。加群の前層の圏を
+$\textit{PMod}(\mathcal{O}_\mathcal{X})$ と表す。
+\item 加群の前層 $\mathcal{F}$ が fppf 層ならば、$\mathcal{F}$ を
+{\it $\mathcal{O}_\mathcal{X}$-加群}、より正確には
+{\it $\mathcal{O}_\mathcal{X}$-加群の層}と呼ぶ。
+$\mathcal{O}_\mathcal{X}$-加群の圏を
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ と表す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+これらの加群の（前）層は、文献では
+{\it $\mathcal{X}$ の大 fppf サイト上の $\mathcal{O}_\mathcal{X}$-加群の（前）層}
+として現れる。これらの圏を他の圏と区別したい場合には、ときにこの用語を用いる。
+また、Zariski、エタール、滑らかな、syntomic の各位相に関して層である
+加群の前層も扱う（必ずしも fppf 層とは限らない）。必要ならば、これらを
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+と表し、他の位相についても同様とする。
+
+\medskip\noindent
+次に関手性を扱う。まず加群の前層について考える。図式
+$$
+\xymatrix{
+\mathcal{X} \ar[rr]_f \ar[rd]_p & &  \mathcal{Y} \ar[ld]^q \\
+& (\Sch/S)_{fppf}
+}
+$$
+をグルーポイドをファイバーとする圏の $1$-射とする。
+アーベル前層上の関手 $f^{-1}$、$f_*$ は次の関手に拡張される。
+\begin{equation}
+\label{stacks-sheaves-equation-functoriality-presheaves-modules}
+f^{-1} :
+\textit{PMod}(\mathcal{O}_\mathcal{Y})
+\longrightarrow
+\textit{PMod}(\mathcal{O}_\mathcal{X})
+\quad\text{and}\quad
+f_* :
+\textit{PMod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{PMod}(\mathcal{O}_\mathcal{Y})
+\end{equation}
+$f^{-1}$ については、
+$f^{-1}\mathcal{G}(x) = \mathcal{G}(f(x))$ が
+$\mathcal{O}_\mathcal{Y}(f(x)) = \mathcal{O}(q(f(x))) = \mathcal{O}(p(x)) =
+\mathcal{O}_\mathcal{X}(x)$ 上の加群であるから、これは直ちに分かる。別の見方では、
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$
+であり、$f^{-1}$ が（前層上の）極限と可換であることからも従う。
+$f_*$ は右随伴なので、（前層上の）すべての極限、とりわけ積と可換する。
+したがって、『サイト上の加群』補題
+\ref{sites-modules-lemma-pushforward-module} の証明と同様に、
+$f_*$ を加群の前層上の関手へ拡張できる。
+関手 (\ref{stacks-sheaves-equation-functoriality-presheaves-modules}) は随伴対をなすと主張する：
+$$
+\Mor_{\textit{PMod}(\mathcal{O}_\mathcal{X})}(
+f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PMod}(\mathcal{O}_\mathcal{Y})}(
+\mathcal{G}, f_*\mathcal{F}).
+$$
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$ であるから、
+$\mathcal{X}$ と $\mathcal{Y}$ に密着位相を入れれば、これは
+『サイト上の加群』補題
+\ref{sites-modules-lemma-adjoint-push-pull-modules} から従う。
+
+\medskip\noindent
+次に、加群、すなわち fppf 位相における加群の層について関手性を論じる。
+誘導される環付きトポスの射も $f$ と表す。補題
+\ref{stacks-sheaves-lemma-functoriality-structure-sheaf} を見よ
+（ここでは fppf 位相について考えている）。関手
+(\ref{stacks-sheaves-equation-functoriality-presheaves-modules}) の $f^{-1}$ と $f_*$ は、
+加群の層からなる部分圏を保つことに注意する。補題
+\ref{stacks-sheaves-lemma-functoriality-sheaves} を見よ。したがって直ちに、
+\begin{equation}
+\label{stacks-sheaves-equation-functoriality-sheaves-modules}
+f^{-1} :
+\textit{Mod}(\mathcal{O}_\mathcal{Y})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\quad\text{and}\quad
+f_* :
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{Y})
+\end{equation}
+が随伴対をなすことが従う：
+$$
+\Mor_{\textit{Mod}(\mathcal{O}_\mathcal{X})}(
+f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{Mod}(\mathcal{O}_\mathcal{Y})}(
+\mathcal{G}, f_*\mathcal{F}).
+$$
+随伴の一意性により $f^* = f^{-1}$ を得る。ここで $f^*$ は、上の環付きトポスの射
+$f$ に対して『サイト上の加群』第
+\ref{sites-modules-section-functoriality-modules}節で定義されたものである。
+もちろん、次のことから直接これを確認することもできる：
+$f^*(-) = f^{-1}(-) \otimes_{f^{-1}\mathcal{O}_\mathcal{Y}}
+\mathcal{O}_\mathcal{X}$ かつ
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$.
+
+\medskip\noindent
+Zariski、\'etale、smooth、syntomic の各位相における加群の層についても同様である。
+
+
+
+\section{表現可能な圏}
+\label{stacks-sheaves-section-representable}
+
+\noindent
+この短い節では、ここでの定義を、問題の代数スタックが表現可能な場合に
+生じるものと比較する。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-with-scheme}
+スキーム $S$ と、$(\Sch/S)$ 上のグルーポイドをファイバーとする圏
+$\mathcal{X}$ を取る。$\mathcal{X}$ がスキーム $X$ により表現可能であると仮定する。
+$\tau \in \{Zar,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$
+に対して、環付きサイトの標準的同値
+$$
+(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X}) =
+((\Sch/X)_\tau, \mathcal{O}_X)
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の同値\newline
+$(\Sch/X)_\tau \to \mathcal{X}$ を選び、構成
+$\mathcal{X} \leadsto \mathcal{X}_\tau$ の関手性を用いれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-with-morphism-of-schemes}
+スキーム $S$ を取り、$f : \mathcal{X} \to \mathcal{Y}$ を
+$S$ 上のグルーポイドをファイバーとする圏の射とする。
+$\mathcal{X}$、$\mathcal{Y}$ がそれぞれスキーム $X$、$Y$ により
+表現可能であると仮定する。$f$ に対応するスキームの射を
+$f : X \to Y$ とする。$\tau \in \{Zar,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$
+に対し、環付きトポスの射
+$f : (\Sh(\mathcal{X}_\tau), \mathcal{O}_\mathcal{X}) \to
+(\Sh(\mathcal{Y}_\tau), \mathcal{O}_\mathcal{Y})$
+は、補題 \ref{stacks-sheaves-lemma-compare-with-scheme} の同一視のもとで、環付きトポスの射
+$f : (\Sh((\Sch/X)_\tau), \mathcal{O}_X) \to 
+(\Sh((\Sch/Y)_\tau), \mathcal{O}_Y)$ と一致する。
+\end{lemma}
+
+\begin{proof}
+定義を展開すれば従う。
+\end{proof}
+
+
+
+
+\section{制限}
+\label{stacks-sheaves-section-restriction}
+
+
+\noindent
+自明だが有用な観察として、グルーポイドをファイバーとする圏を
+一つの対象で局所化したものは、その対象が上にあるスキームの
+大サイトと同値である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-localizing}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+$U = p(x)$ 上にある $x \in \Ob(\mathcal{X})$ を取る。
+関手 $p$ はサイトの同値
+$\mathcal{X}_\tau/x \to (\Sch/U)_\tau$.
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+『スタック』補題 \ref{stacks-lemma-localizing} の特別な場合である。
+\end{proof}
+
+\noindent
+上の補題を用いて、（前）層のスキームへの引き戻しと制限を定める。
+
+\begin{definition}
+\label{stacks-sheaves-definition-pullback}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+$U = p(x)$ 上にある $x \in \Ob(\mathcal{X})$ を取り、
+$\mathcal{F}$ を $\mathcal{X}$ 上の前層とする。
+\begin{enumerate}
+\item {\it $\mathcal{F}$ の引き戻し $x^{-1}\mathcal{F}$}とは、
+補題 \ref{stacks-sheaves-lemma-localizing} の同値
+$\mathcal{X}/x \to (\Sch/U)_{fppf}$ によって $(\Sch/U)_{fppf}$ 上の前層とみなした
+制限 $\mathcal{F}|_{(\mathcal{X}/x)}$ のことである。
+\item {\it $\mathcal{F}$ の $U_\etale$ への制限}とは
+$x^{-1}\mathcal{F}|_{U_\etale}$ のことであり、記法を濫用して
+$\mathcal{F}|_{U_\etale}$.
+と書く。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この記法が意味を持つのは、$2$-Yoneda の補題（『代数スタック』第
+\ref{algebraic-section-2-yoneda}節を見よ）が対象 $x$ に対し、
+$p : \mathcal{X}/x \to (\Sch/U)_{fppf}$ の擬逆となる $1$-射
+$x : (\Sch/U)_{fppf} \to \mathcal{X}/x$ を対応させるからである。
+したがって $x^{-1}\mathcal{F}$ は、実際にこの $1$-射による
+$\mathcal{F}$ の引き戻しである。特に上の議論により、$\mathcal{F}$ が層
+（または Zariski、\'etale、smooth、syntomic 層）ならば、
+$x^{-1}\mathcal{F}$ は $(\Sch/U)_{fppf}$ 上の層（それぞれ
+$(\Sch/U)_{Zar}$, $(\Sch/U)_\etale$,
+$(\Sch/U)_{smooth}$, $(\Sch/U)_{syntomic}$).
+上の層）である。
+
+\medskip\noindent
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+$\varphi : x \to y$ を、スキームの射 $a : U \to V$ 上にある
+$\mathcal{X}$ の射とする。$a$ は小エタールサイトの射
+$a_{small} : U_\etale \to V_\etale$ を誘導することを思い出そう。
+『エタール・コホモロジー』第
+\ref{etale-cohomology-section-functoriality}節を見よ。
+$\mathcal{F}$ を $\mathcal{X}$ 上の前層とし、
+$\mathcal{F}|_{U_\etale}$ と $\mathcal{F}|_{V_\etale}$ をそれぞれ
+$x$ と $y$ による $\mathcal{F}$ の制限とする。自然な{\it 比較}写像
+\begin{equation}
+\label{stacks-sheaves-equation-comparison-push}
+c_\varphi :
+\mathcal{F}|_{V_\etale}
+\longrightarrow
+a_{small, *}(\mathcal{F}|_{U_\etale})
+\end{equation}
+が $U_\etale$ 上の前層の間に存在する。実際、$V' \to V$ がエタールなら、
+$U' = V' \times_V U$ と置き、$V'$ 上の切断における $c_\varphi$ を
+次によって定める：
+$$
+\xymatrix{
+a_{small, *}(\mathcal{F}|_{U_\etale})(V') &
+\mathcal{F}|_{U_\etale}(U') \ar@{=}[l] &
+\mathcal{F}(x') \ar@{=}[l] \\
+\mathcal{F}|_{V_\etale}(V') \ar@{=}[rr] \ar[u]^{c_\varphi} &
+&
+\mathcal{F}(y') \ar[u]_{\mathcal{F}(\varphi')}
+}
+$$
+ここで $\varphi' : x' \to y'$ は、可換図式
+$$
+\vcenter{
+\xymatrix{
+x' \ar[r] \ar[d]_{\varphi'} & x \ar[d]^\varphi \\
+y' \ar[r] & y
+}
+}
+\quad\text{の上にある}\quad
+\vcenter{
+\xymatrix{
+U' \ar[r] \ar[d] & U \ar[d]^a \\
+V' \ar[r] & V
+}
+}
+$$
+に入る $\mathcal{X}$ の射である。$\varphi'$ の存在と一意性は、
+グルーポイドをファイバーとする圏の公理から従う。
+このように定義した $c_\varphi$ が実際に前層の写像であること
+（すなわち制限写像と両立すること）、および $\mathcal{F}$ に関して
+関手的であることの確認は省略する。$\mathcal{F}$ がエタール位相に関する層ならば、
+{\it 比較}写像
+\begin{equation}
+\label{stacks-sheaves-equation-comparison}
+c_\varphi : a_{small}^{-1}(\mathcal{F}|_{V_\etale})
+\longrightarrow
+\mathcal{F}|_{U_\etale}
+\end{equation}
+を得る。表示したとおり、これも $c_\varphi$ と表す
+（随伴する写像同士を区別しない通常の記法の濫用である）。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-comparison}
+$\mathcal{F}$ を $\mathcal{X} \to (\Sch/S)_{fppf}$ 上のエタール層とする。
+\begin{enumerate}
+\item $\varphi : x \to y$ と $\psi : y \to z$ が、それぞれ
+$a : U \to V$ と $b : V \to W$ 上にある $\mathcal{X}$ の射ならば、合成
+$$
+a_{small}^{-1}(b_{small}^{-1} (\mathcal{F}|_{W_\etale}))
+\xrightarrow{a_{small}^{-1}c_\psi}
+a_{small}^{-1}(\mathcal{F}|_{V_\etale})
+\xrightarrow{c_\varphi}
+\mathcal{F}|_{U_\etale}
+$$
+は、同一視
+$$
+(b \circ a)_{small}^{-1}(\mathcal{F}|_{W_\etale}) =
+a_{small}^{-1}(b_{small}^{-1} (\mathcal{F}|_{W_\etale})).
+$$
+のもとで $c_{\psi \circ \varphi}$ に等しい。
+\item $\varphi : x \to y$ がスキームのエタール射
+$a : U \to V$ 上にあるならば、(\ref{stacks-sheaves-equation-comparison}) は同型である。
+\item $f : \mathcal{Y} \to \mathcal{X}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とし、
+$y$ をスキーム $U$ 上にある $\mathcal{Y}$ の対象で、その像を
+$x = f(y)$ とする。このとき標準的な同一視
+$f^{-1}\mathcal{F}|_{U_\etale} = \mathcal{F}|_{U_\etale}$.
+がある。
+\item さらに、$a : U' \to U$ 上にある $\mathcal{Y}$ の射
+$\psi : y' \to y$ が与えられると、比較写像
+$c_\psi : a_{small}^{-1}(f^{-1}\mathcal{F}|_{U_\etale}) \to
+f^{-1}\mathcal{F}|_{U'_\etale}$ は、(3) の同一視のもとで比較写像
+$c_{f(\psi)} : a_{small}^{-1}\mathcal{F}|_{U_\etale}
+\to \mathcal{F}|_{U'_\etale}$ に等しい。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これらの性質の確認は省略する。
+\end{proof}
+
+\noindent
+次に、加群の（前）層の制限を扱う。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-localizing-structure-sheaf}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とし、
+$U = p(x)$ 上にある $x \in \Ob(\mathcal{X})$ を取る。
+補題 \ref{stacks-sheaves-lemma-localizing} の同値は、環付きサイトの同値
+$(\mathcal{X}_\tau/x, \mathcal{O}_\mathcal{X}|_x) \to
+((\Sch/U)_\tau, \mathcal{O})$.
+へ拡張される。
+\end{lemma}
+
+\begin{proof}
+構造層の構成から直ちに従う。
+\end{proof}
+
+\noindent
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏
+$\mathcal{X}$ を取り、$\mathcal{F}$ を定義 \ref{stacks-sheaves-definition-modules} の意味での
+$\mathcal{X}$ 上の加群の（前）層とする。
+$x$ を $U$ 上にある $\mathcal{X}$ の対象とする。このとき補題
+\ref{stacks-sheaves-lemma-localizing-structure-sheaf} により、制限
+$x^{-1}\mathcal{F}$ は $(\Sch/U)_{fppf}$ 上の加群の（前）層である。
+この場合、ときに $x^*\mathcal{F} = x^{-1}\mathcal{F}$ と書く。
+同様に、$\mathcal{F}$ が Zariski、\'etale、smooth、syntomic のいずれかの
+位相に関する層ならば、$x^{-1}\mathcal{F}$ もそうである。さらに、$U$ への制限
+$\mathcal{F}|_{U_\etale} = x^{-1}\mathcal{F}|_{U_\etale}$
+は $\mathcal{O}_{U_\etale}$-加群の前層である。
+$\mathcal{F}$ がエタール位相に関する層ならば、
+$\mathcal{F}|_{U_\etale}$ は加群の層である。さらに、
+$\varphi : x \to y$ が $a : U \to V$ 上にある $\mathcal{X}$ の射ならば、
+比較写像 (\ref{stacks-sheaves-equation-comparison}) は $a_{small}^\sharp$ と両立し
+（『降下』の注意 \ref{descent-remark-change-topologies-ringed} を見よ）、
+{\it 比較}写像
+\begin{equation}
+\label{stacks-sheaves-equation-comparison-modules}
+c_\varphi : a_{small}^*(\mathcal{F}|_{V_\etale})
+\longrightarrow
+\mathcal{F}|_{U_\etale}
+\end{equation}
+を $\mathcal{O}_{U_\etale}$-加群の間に誘導する。
+補題 \ref{stacks-sheaves-lemma-comparison} の性質 (1)、(2)、(3)、(4) は、
+加群のエタール層の場合にも成り立つことに注意する。
+以下ではこれを断りなく用いる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-enough-points}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取り、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+サイト $\mathcal{X}_\tau$ は十分な点をもつ。
+\end{lemma}
+
+\begin{proof}
+『サイト』補題 \ref{sites-lemma-enough-points-local} により、
+$\mathcal{X}_\tau/x$ が十分な点をもち、かつ層 $h_x^\#$ が層の圏の終対象を
+被覆するような $\mathcal{X}$ の対象 $x$ の族が存在することを示せばよい。
+補題 \ref{stacks-sheaves-lemma-localizing} と『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-points-fppf} により、任意の対象 $x$ に対して
+$\mathcal{X}_\tau/x$ は十分な点をもつことが分かり、結論を得る。
+\end{proof}
+
+
+
+
+
+
+
+\section{代数空間への制限}
+\label{stacks-sheaves-section-restriction-algebraic-spaces}
+
+\noindent
+この節では、代数空間により表現可能な圏上の層を考える。
+次の補題は、『位相』補題
+\ref{topologies-lemma-at-the-bottom-etale} の代数空間に対する類似である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare}
+スキーム $S$ と、グルーポイドをファイバーとする圏
+$\mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+$\mathcal{X}$ が代数空間 $F$ により表現可能であると仮定する。このとき、
+連続かつ余連続な関手
+$
+F_\etale \to \mathcal{X}_\etale
+$
+であって、環付きサイトの射
+$$
+\pi_F :
+(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+\longrightarrow
+(F_\etale, \mathcal{O}_F)
+$$
+および環付きトポスの射
+$$
+i_F :
+(\Sh(F_\etale), \mathcal{O}_F)
+\longrightarrow
+(\Sh(\mathcal{X}_\etale), \mathcal{O}_\mathcal{X})
+$$
+を誘導し、$\pi_F \circ i_F = \text{id}$ を満たすものが存在する。
+さらに $\pi_{F, *} = i_F^{-1}$ である。
+\end{lemma}
+
+\begin{proof}
+同値 $j : \mathcal{S}_F \to \mathcal{X}$ を選ぶ。『代数スタック』第
+\ref{algebraic-section-split}節および第
+\ref{algebraic-section-representable-by-algebraic-spaces}節を見よ。
+$F_\etale$ の対象とは、スキーム $U$ とエタール射
+$\varphi : U \to F$ の組である。このとき $\varphi$ は $U$ 上の
+$\mathcal{S}_F$ の対象である。したがって $j(\varphi)$ は $U$ 上の
+$\mathcal{X}$ の対象である。このようにして $j$ は関手
+$u : F_\etale \to \mathcal{X}$ を誘導する。
+$u$ が $\mathcal{X}$ 上のエタール位相に関して連続かつ余連続であることは明らかである。
+$j$ は同値なので、関手 $u$ は充満忠実である。また、$F_\etale$ には
+ファイバー積と等化子が存在し、これらは $F_\etale$ において台となる
+スキームのレベルで計算されるので、$u$ はそれらと可換する。したがって
+『サイト』補題 \ref{sites-lemma-when-shriek}、
+\ref{sites-lemma-preserve-equalizers}、および
+\ref{sites-lemma-back-and-forth}
+を適用できる。特に $u$ はトポスの射
+$i_F : \Sh(F_\etale) \to \Sh(\mathcal{X}_\etale)$
+を定め、$i_F^{-1}$ にはファイバー積および等化子と可換する左随伴
+$i_{F, !}$ が存在する。
+
+\medskip\noindent
+$i_{F, !}$ は完全であると主張する。これが正しければ、
+$\pi_F^{-1} = i_{F, !}$ および $\pi_{F, *} = i_F^{-1}$ によって
+$\pi_F$ を定義でき、すべて明らかになる。この主張を示すため、$i_{F, !}$ は
+右完全でファイバー積を保つことがすでに分かっていることに注意する。
+したがって、集合の層の圏の終対象を $*$ と表すとき、
+$i_{F, !}* = *$ を示せば十分である。スキーム $U$ と全射エタール射
+$\varphi : U \to F$ を取り、$R = U \times_F U$ と置く。このとき
+$$
+\xymatrix{
+h_R \ar@<1ex>[r] \ar@<-1ex>[r] & h_U \ar[r] & {*}
+}
+$$
+は $\Sh(F_\etale)$ における余等化子図式である。
+$i_{F, !}$ の右完全性、$i_{F, !} = (u_p\ )^\#$、および
+『サイト』補題 \ref{sites-lemma-pullback-representable-presheaf} を用いると、
+$$
+\xymatrix{
+h_{u(R)} \ar@<1ex>[r] \ar@<-1ex>[r] & h_{u(U)} \ar[r] & i_{F, !}{*}
+}
+$$
+は $\Sh(\mathcal{X}_\etale)$ における余等化子図式であることが分かる。
+$j$ が同値であり、$F = U/R$ であることを用いれば、
+$\Sh(\mathcal{X}_\etale)$ における二つの写像
+$h_{u(R)} \to h_{u(U)}$ の余等化子が $*$ であることが従う。
+これらの射が構造層と両立することの証明は省略する。
+\end{proof}
+
+\begin{remark}
+\label{stacks-sheaves-remark-compare}
+補題 \ref{stacks-sheaves-lemma-compare} の構成はエタール局所化と両立する。
+正確には次のとおりである。スキーム $S$ を取り、
+$f : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の射とする。
+$\mathcal{X}$、$\mathcal{Y}$ が代数空間 $F$、$G$ により表現可能であり、
+誘導される代数空間の射 $f : F \to G$ がエタールであると仮定する。
+対応する環付きトポスの射を $f_{small} : F_\etale \to G_\etale$ と表す。このとき
+$$
+\xymatrix{
+(\Sh(F_\etale), \mathcal{O}_F) \ar[rr]_{f_{small}} \ar[d]_{i_F} & &
+(\Sh(G_\etale), \mathcal{O}_G) \ar[d]^{i_G} \\
+(\Sh(\mathcal{X}_\etale), \mathcal{O}_\mathcal{X})
+\ar[d]_{\pi_F} \ar[rr]_f & &
+(\Sh(\mathcal{Y}_\etale), \mathcal{O}_\mathcal{Y}) \ar[d]^{\pi_G} \\
+(\Sh(F_\etale), \mathcal{O}_F) \ar[rr]^{f_{small}} & &
+(\Sh(G_\etale), \mathcal{O}_G)
+}
+$$
+は環付きトポスの可換図式である。詳細は省略する。
+\end{remark}
+
+\noindent
+$\mathcal{X}$ が代数空間 $F$ により表現される代数スタックであると仮定する。
+$j : \mathcal{S}_F \to \mathcal{X}$ を同値とし、上の補題
+\ref{stacks-sheaves-lemma-compare} の証明における関手を
+$u : F_\etale \to \mathcal{X}_\etale$ と表す。
+$\mathcal{X}_\etale$ 上の層 $\mathcal{F}$ が与えられると、
+$$
+\pi_{F, *}\mathcal{F}(U) = i_F^{-1}\mathcal{F}(U) = \mathcal{F}(u(U)).
+$$
+となる。このため、定義 \ref{stacks-sheaves-definition-pullback} の場合、および
+スキームの大エタールサイト上の層をその小エタールサイトへ制限する場合と同様に、
+$i_F^{-1}$ をしばしば{\it 制限関手}と考える。この状況ではしばしば記法
+\begin{equation}
+\label{stacks-sheaves-equation-restrict}
+\mathcal{F}|_{F_\etale} = i_F^{-1}\mathcal{F} = \pi_{F, *}\mathcal{F}
+\end{equation}
+を用いる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-morphism}
+スキーム $S$ を取り、$f : \mathcal{X} \to \mathcal{Y}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の射とする。
+$\mathcal{X}$、$\mathcal{Y}$ が代数空間 $F$、$G$ により表現可能であると仮定する。
+誘導される代数空間の射を $f : F \to G$、対応する環付きトポスの射を
+$f_{small} : F_\etale \to G_\etale$ と表す。このとき
+$$
+\xymatrix{
+(\Sh(\mathcal{X}_\etale), \mathcal{O}_\mathcal{X})
+\ar[d]_{\pi_F} \ar[rr]_f & &
+(\Sh(\mathcal{Y}_\etale), \mathcal{O}_\mathcal{Y}) \ar[d]^{\pi_G} \\
+(\Sh(F_\etale), \mathcal{O}_F) \ar[rr]^{f_{small}} & &
+(\Sh(G_\etale), \mathcal{O}_G)
+}
+$$
+は環付きトポスの可換図式である。
+\end{lemma}
+
+\begin{proof}
+これは『位相』補題
+\ref{topologies-lemma-morphism-big-small-etale} (3) と同様であるが、
+$F \to G$ がスキームにより表現可能とは限らないため、小さな問題がある。
+特に、環付きサイトの可換図式は得られず、環付きトポスの可換図式だけが得られる。
+
+\medskip\noindent
+本来の証明を始める前に、補題 \ref{stacks-sheaves-lemma-compare} の証明と同様に関手
+$u : F_\etale \to \mathcal{X}$ および
+$u' : G_\etale \to \mathcal{Y}$ を誘導する同値
+$j : \mathcal{S}_F \to \mathcal{X}$ および
+$j' : \mathcal{S}_G \to \mathcal{Y}$ を選ぶ。
+$\Sch_{fppf}$ 上のグルーポイドをファイバーとする圏上の層の 2-関手性
+（節 \ref{stacks-sheaves-section-presheaves} の議論を見よ）により、
+$\mathcal{X} = \mathcal{S}_F$、$\mathcal{Y} = \mathcal{S}_G$ であり、
+$f : \mathcal{S}_F \to \mathcal{S}_G$ が射 $f : F \to G$ に随伴する関手であると
+仮定してよい。これに応じて、記法から $u$ と $u'$ を省く。すなわち、
+$F_\etale$ の対象 $U \to F$ に対応する $\mathcal{X}$ の対象を
+$U/F$ と表す。$G$ についても同様である。
+
+\medskip\noindent
+$\mathcal{G}$ を $\mathcal{X}_\etale$ 上の層とする。
+(2) を証明するため、$\pi_{G, *}f_*\mathcal{G}$ と
+$f_{small, *}\pi_{F, *}\mathcal{G}$ を計算する。そのため、
+$V \to G$ を $G_\etale$ の対象とする。このとき
+$$
+\pi_{G, *}f_*\mathcal{G}(V) = f_*\mathcal{G}(V/G) =
+\Gamma\Big(
+(\Sch/V)_{fppf} \times_{\mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{G}\Big)
+$$
+となる。(\ref{stacks-sheaves-equation-pushforward}) を見よ。この式のファイバー積は
+$$
+(\Sch/V)_{fppf} \times_{\mathcal{Y}} \mathcal{X} =
+(\Sch/V)_{fppf} \times_{\mathcal{S}_G} \mathcal{S}_F =
+\mathcal{S}_{V \times_G F}
+$$
+である。すなわち、代数空間 $V \times_G F$ に随伴する、グルーポイドを
+ファイバーとする分裂圏である。また $\text{pr}^{-1}\mathcal{G}$ は
+$\mathcal{S}_{V \times_G F}$ 上のエタール位相に関する層である。
+
+\medskip\noindent
+特に、$V \times_G F$ が表現可能、すなわちスキームであるならば、
+$\pi_{G, *}f_*\mathcal{G}(V) = \mathcal{G}(V \times_G F/F)$ であり、さらに
+$$
+f_{small, *}\pi_{F, *}\mathcal{G}(V) =
+\pi_{F, *}\mathcal{G}(V \times_G F) =
+\mathcal{G}(V \times_G F/F)
+$$
+となるので、この特別な場合には所望の等式が証明された。
+
+\medskip\noindent
+一般の場合には、スキーム $U$ と全射エタール射
+$U \to V \times_G F$ を選び、$R = U \times_{V \times_G F} U$ と置く。
+このとき $U/V \times_G F$ と $R/V \times_G F$ は、上のファイバー積圏の
+対象である。$\text{pr}^{-1}\mathcal{G}$ は
+$\mathcal{S}_{V \times_G F}$ 上のエタール位相に関する層なので、図式
+$$
+\xymatrix@C=12pt{
+\Gamma\Big(
+(\Sch/V)_{fppf} \times_{\mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{G}\Big)
+\ar[r] &
+\text{pr}^{-1}\mathcal{G}(U/V \times_G F) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\text{pr}^{-1}\mathcal{G}(R/V \times_G F)
+}
+$$
+は等化子図式である。引き戻しの定義により、
+$\text{pr}^{-1}\mathcal{G}(U/V \times_G F) = \mathcal{G}(U/F)$
+および $\text{pr}^{-1}\mathcal{G}(R/V \times_G F) = \mathcal{G}(R/F)$
+であることに注意する。さらに、『空間の性質』第
+\ref{spaces-properties-section-etale-site}節の議論
+（特に『空間の性質』注意
+\ref{spaces-properties-remark-explain-equivalence} および補題
+\ref{spaces-properties-lemma-functoriality-etale-site}）により、等化子図式
+$$
+\xymatrix{
+f_{small, *}\pi_{F, *}\mathcal{G}(V)
+\ar[r] &
+\pi_{F, *}\mathcal{G}(U/F) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\pi_{F, *}\mathcal{G}(R/F)
+}
+$$
+があることが分かる。さらに
+$\pi_{F, *}\mathcal{G}(U/F) = \mathcal{G}(U/F)$ および
+$\pi_{F, *}\mathcal{G}(U/F) = \mathcal{G}(U/F)$ であるから、標準的な同一視
+$f_{small, *}\pi_{F, *}\mathcal{G}(V) = \pi_{G, *}f_*\mathcal{G}(V)$ を得る。
+これが制限写像と両立し、$\mathcal{G}$ に関して関手的であることの証明は省略する。
+\end{proof}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ および $f : F \to G$ を
+上の補題の第二部のとおりとする。補題と
+(\ref{stacks-sheaves-equation-restrict}) から、$\mathcal{X}_\etale$ 上の任意の層
+$\mathcal{F}$ に対して
+\begin{equation}
+\label{stacks-sheaves-equation-compare-big-small}
+(f_*\mathcal{F})|_{G_\etale} =
+f_{small, *}(\mathcal{F}|_{F_\etale})
+\end{equation}
+となることが従う。さらに、$\mathcal{F}$ が $\mathcal{O}$-加群の層ならば、
+(\ref{stacks-sheaves-equation-compare-big-small}) は $G_\etale$ 上の
+$\mathcal{O}_G$-加群の同型である。
+
+\medskip\noindent
+最後に、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$1$-射からなる $2$-可換図式
+$$
+\xymatrix{
+\mathcal{U} \ar[r]^a \ar[dr]_f \drtwocell<\omit>{<-2>\varphi} &
+\mathcal{V} \ar[d]^g \\
+& \mathcal{X}
+}
+$$
+があり、$\mathcal{F}$ が $\mathcal{X}_\etale$ 上の層であり、
+$\mathcal{U}, \mathcal{V}$ が代数空間 $U, V$ により表現可能であると仮定する。
+このとき比較写像
+\begin{equation}
+\label{stacks-sheaves-equation-comparison-algebraic-spaces}
+c_\varphi : a_{small}^{-1}(g^{-1}\mathcal{F}|_{V_\etale})
+\longrightarrow
+f^{-1}\mathcal{F}|_{U_\etale}
+\end{equation}
+を得る。ここで $a : U \to V$ は $a$ に対応する代数空間の射を表す。
+これは (\ref{stacks-sheaves-equation-comparison}) の類似である。$c_\varphi$ を写像
+$$
+g^{-1}\mathcal{F}|_{V_\etale}
+\longrightarrow
+a_{small, *}(f^{-1}\mathcal{F}|_{U_\etale}) =
+(a_*f^{-1}\mathcal{F})|_{V_\etale}
+$$
+の随伴として定義する。ここで等式は
+(\ref{stacks-sheaves-equation-compare-big-small}) により、またこの写像は写像
+$$
+g^{-1}\mathcal{F} \to a_*a^{-1}g^{-1}\mathcal{F} = a_*f^{-1}\mathcal{F}
+$$
+の $V$ への制限 (\ref{stacks-sheaves-equation-restrict}) である。
+最後の等式には上の図式の $2$-可換性を用いた。
+$\mathcal{F}$ が $\mathcal{O}_\mathcal{X}$-加群の層である場合、
+$c_\varphi$ は{\it 比較}写像
+\begin{equation}
+\label{stacks-sheaves-equation-comparison-algebraic-spaces-modules}
+c_\varphi : a_{small}^*(g^*\mathcal{F}|_{V_\etale})
+\longrightarrow
+f^*\mathcal{F}|_{U_\etale}
+\end{equation}
+を $\mathcal{O}_{U_\etale}$-加群の間に誘導する。
+これは (\ref{stacks-sheaves-equation-comparison-modules}) の類似である。
+補題 \ref{stacks-sheaves-lemma-comparison} の性質 (1)、(2)、(3)、(4) は、
+この状況でも成り立つことに注意する。
+
+
+
+
+
+
+
+
+
+
+
+
+\section{準連接加群}
+\label{stacks-sheaves-section-quasi-coherent}
+
+\noindent
+ここで、準連接加群の一般的な定義を、この章で論じる状況に適用できる。
+
+\begin{definition}
+\label{stacks-sheaves-definition-quasi-coherent}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+{\it $\mathcal{X}$ 上の準連接加群}、または
+{\it 準連接 $\mathcal{O}_\mathcal{X}$-加群}とは、
+『サイト上の加群』定義 \ref{sites-modules-definition-site-local} の意味での、
+環付きサイト $(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$ 上の
+準連接加群のことである。$\mathcal{X}$ 上の準連接層の圏を
+$\QCoh(\mathcal{O}_\mathcal{X})$ と表す。
+\end{definition}
+
+\noindent
+$\mathcal{X}$ が代数スタックならば、この定義は文献にあるすべての定義と一致する。
+すなわち $\QCoh(\mathcal{O}_\mathcal{X})$ は、集合論的な問題を別にすれば、
+文献で定義されているこの圏のどの変種とも同値である。例えば、
+『スタック上のコホモロジー』補題 \ref{stacks-sheaves-lemma-quasi-coherent} で、
+ここでの定義と \cite[Definition 6.1]{olsson_sheaves} の定義が一致することを示す。
+後にはこの圏の別の構成も見る。
+
+\medskip\noindent
+一般に（スキームの射の場合と同様に）、$1$-射に沿う準連接層の順像は
+準連接とは限らない。引き戻しは準連接性を保つ。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-pullback-quasi-coherent}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取る。引き戻し関手
+$f^* = f^{-1} : \textit{Mod}(\mathcal{O}_\mathcal{Y}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+は準連接層を保つ。
+\end{lemma}
+
+\begin{proof}
+これは一般的な事実である。『サイト上の加群』補題
+\ref{sites-modules-lemma-local-pullback} を見よ。
+\end{proof}
+
+\noindent
+準連接層は、その引き戻しによって非常に簡潔に特徴付けられることが分かる。
+制限による特徴付けについては、補題 \ref{stacks-sheaves-lemma-quasi-coherent} も見よ。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-characterize-quasi-coherent}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取り、$\mathcal{F}$ を
+$\mathcal{O}_\mathcal{X}$-加群の層とする。このとき $\mathcal{F}$ が準連接であるための
+必要十分条件は、$U = p(x)$ を満たす $\mathcal{X}$ の任意の対象 $x$ に対して、
+$x^*\mathcal{F}$ が $(\Sch/U)_{fppf}$ 上の準連接層となることである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-pullback-quasi-coherent} により、この条件は必要である。
+逆に、$x^*\mathcal{F}$ は $\mathcal{X}_{fppf}/x$ への制限にほかならないので、
+準連接層の定義から、この条件が十分であることも直ちに分かる
+（準連接であることが加群の層の内在的性質であることも用いる。
+『サイト上の加群』第 \ref{sites-modules-section-intrinsic}節を見よ）。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-characterize-quasi-coherent-bis}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取り、$\mathcal{F}$ を
+$\mathcal{X}$ 上の加群の前層とする。次は同値である。
+\begin{enumerate}
+\item $\mathcal{F}$ は
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$
+の対象であり、かつ $\mathcal{F}$ は『サイト上の加群』定義
+\ref{sites-modules-definition-site-local} の意味での
+$(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$ 上の準連接加群である。
+\item $\mathcal{F}$ は
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+の対象であり、かつ $\mathcal{F}$ は『サイト上の加群』定義
+\ref{sites-modules-definition-site-local} の意味での
+$(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ 上の準連接加群である。
+\item $\mathcal{F}$ は定義 \ref{stacks-sheaves-definition-quasi-coherent} の意味での
+$\mathcal{X}$ 上の準連接加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)、(2)、(3) のいずれかが成り立つと仮定する。
+$x$ をスキーム $U$ 上にある $\mathcal{X}$ の対象とする。
+$x^*\mathcal{F} = x^{-1}\mathcal{F}$ は、$\tau = fppf$、$\tau = \etale$、
+または $\tau = Zar$ としたときの $\mathcal{X}/x = (\Sch/U)_\tau$ への
+制限にほかならないことを思い出そう。節 \ref{stacks-sheaves-section-restriction} を見よ。
+環付きサイト上の準連接加群の定義により、$\mathcal{F}$ が準連接ならば
+この制限も準連接である。『降下』命題
+\ref{descent-proposition-equivalence-quasi-coherent} により、
+$x^*\mathcal{F}$ は準連接 $\mathcal{O}_U$-加群に随伴する層であり、したがって
+fppf、\'etale、Zariski の各位相における準連接加群である。
+ここでは『降下』補題 \ref{descent-lemma-sheaf-condition-holds} および定義
+\ref{descent-definition-structure-sheaf} も用いる。
+これは $\mathcal{X}$ の任意の対象 $x$ について成り立つので、
+$\mathcal{F}$ は三つの位相のいずれにおいても層である。
+さらに、準連接であることの定義と、$x$ が $\mathcal{X}$ の任意の対象であることから、
+$\mathcal{F}$ は三つの位相のいずれにおいても準連接であることが直ちに分かる。
+\end{proof}
+
+
+
+
+
+
+
+\section{局所準連接加群}
+\label{stacks-sheaves-section-locally-quasi-coherent}
+
+\noindent
+Zariski 位相に対する変種もあるが、次の定義で用いる自然な位相は
+エタール位相であるように思われる。
+
+\begin{definition}
+\label{stacks-sheaves-definition-locally-quasi-coherent}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取り、$\mathcal{F}$ を
+$\mathcal{O}_\mathcal{X}$-加群の前層とする。$\mathcal{F}$ がエタール位相に
+関する層であり、$\mathcal{X}$ の任意の対象 $x$ に対して制限
+$x^*\mathcal{F}|_{U_\etale}$ が準連接層であるとき、$\mathcal{F}$ は
+{\it 局所準連接}であるという\footnote{これは標準的な用語ではない。}。
+ここで $U = p(x)$ である。
+\end{definition}
+
+\noindent
+局所準連接加群の圏を $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ と表す。
+いま、加群の圏の次の図式がある：
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_\mathcal{X}) \ar[r] \ar[d] &
+\textit{Mod}(\mathcal{O}_\mathcal{X}) \ar[d] \\
+\textit{LQCoh}(\mathcal{O}_\mathcal{X}) \ar[r] &
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+}
+$$
+ここで矢印は厳密充満埋め込みである。
+準連接層に関する多くの結果には、局所準連接加群に対する対応物があることが分かる。
+さらに、後で見るように、多くの観点からこれは考察すべき自然な圏である。
+例えば、準連接層とは、「デカルト的」、すなわち次の補題の第二条件を満たす
+局所準連接加群にほかならない。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-quasi-coherent}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取り、$\mathcal{F}$ を
+$\mathcal{O}_\mathcal{X}$-加群の前層とする。このとき $\mathcal{F}$ が
+準連接であるための必要十分条件は、次の二条件が成り立つことである。
+\begin{enumerate}
+\item $\mathcal{F}$ は局所準連接である。
+\item $f : U \to V$ 上にある $\mathcal{X}$ の任意の射
+$\varphi : x \to y$ に対し、(\ref{stacks-sheaves-equation-comparison-modules}) の比較写像
+$c_\varphi : f_{small}^*\mathcal{F}|_{V_\etale} \to
+\mathcal{F}|_{U_\etale}$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ が準連接であると仮定する。このとき $\mathcal{F}$ は
+fppf 位相に関する層であり、したがってエタール位相に関する層でもある。
+さらに、$\mathcal{F}$ の環付きトポスへの任意の引き戻しは準連接なので、
+制限 $x^*\mathcal{F}|_{U_\etale}$ は準連接である。
+これにより $\mathcal{F}$ は局所準連接である。
+$V = p(y)$ を満たす $\mathcal{X}$ の対象 $y$ を取る。
+$\mathcal{X}/y = (\Sch/V)_{fppf}$ であることは既に見た。
+『降下』命題 \ref{descent-proposition-equivalence-quasi-coherent} により、
+$y^*\mathcal{F}$ はスキーム $V$ 上の（通常の）準連接加群
+$\mathcal{F}_V$ に随伴する準連接加群である。したがって比較写像
+(\ref{stacks-sheaves-equation-comparison-modules}) は確かに同型である。
+
+\medskip\noindent
+逆に、$\mathcal{F}$ が (1) と (2) を満たすと仮定する。
+$V = p(y)$ を満たす $\mathcal{X}$ の対象 $y$ を取る。
+仮定 (1) により準連接である制限 $y^*\mathcal{F}|_{V_\etale}$ に対応する、
+スキーム $V$ 上の準連接加群を $\mathcal{F}_V$ と表す。
+『降下』命題 \ref{descent-proposition-equivalence-quasi-coherent} を見よ。
+このとき条件 (2) は、$y$ 上にある $x$ に対する各制限
+$x^*\mathcal{F}|_{U_\etale}$ が、対応するスキームの射 $U \to V$ による
+$\mathcal{F}_V$ の引き戻し（に随伴するエタール層）と同型であることを意味する。
+したがって $y^*\mathcal{F}$ は、$\mathcal{F}_V$ に随伴する
+$(\Sch/V)_{fppf}$ 上の層である。ゆえに、再び『降下』命題
+\ref{descent-proposition-equivalence-quasi-coherent} によりこれは準連接であり、
+補題 \ref{stacks-sheaves-lemma-characterize-quasi-coherent} により $\mathcal{F}$ は
+$\mathcal{X}$ 上で準連接である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-pullback-lqc}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取る。引き戻し関手
+$f^* = f^{-1} :
+\textit{Mod}(\mathcal{Y}_\etale, \mathcal{O}_\mathcal{Y})
+\to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+は局所準連接層を保つ。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{G}$ を $\mathcal{Y}$ 上の局所準連接層とする。
+スキーム $U$ 上にある $\mathcal{X}$ の対象 $x$ を選ぶ。制限
+$x^*f^*\mathcal{G}|_{U_\etale}$ は
+$(f \circ x)^*\mathcal{G}|_{U_\etale}$
+に等しく、したがって $\mathcal{G}$ に関する仮定により準連接層である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-lqc-colimits}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+\begin{enumerate}
+\item 圏 $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ は余極限をもち、
+それらは圏 $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+における余極限と一致する。
+\item 圏 $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ はアーベル圏であり、
+核と余核は $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+において計算される。言い換えれば、包含関手は完全である。
+\item 短完全列
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+が $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ に与えられたとき、
+三項のうち二項が局所準連接ならば、残りの一項も局所準連接である。
+\item $\mathcal{F}, \mathcal{G}$ を
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の対象とする。
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ で計算したテンソル積
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$ は
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の対象である。
+\item $\mathcal{F}, \mathcal{G}$ を
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の対象とし、$\mathcal{F}$ が
+$\mathcal{X}_\etale$ 上有限表示であるとする。このとき、
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の層
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$ は
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の対象である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+以下の議論で $x$ は、スキーム $U$ 上にある $\mathcal{X}$ の任意の対象を表す。
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象
+$\mathcal{H}$ が $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ に属することを示すため、
+制限 $x^*\mathcal{H}|_{U_\etale} = \mathcal{H}|_{U_\etale}$ が
+$\textit{Mod}(U_\etale, \mathcal{O}_U)$ の準連接対象であることを示す。
+
+\medskip\noindent
+（1）の証明。図式 $\mathcal{I} \to \textit{LQCoh}(\mathcal{O}_\mathcal{X})$、
+$i \mapsto \mathcal{F}_i$ を取る。
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象
+$\mathcal{F} = \colim_i \mathcal{F}_i$ を考える。
+引き戻し関手 $x^*$ は左随伴なので、すべての余極限と可換する。したがって
+$x^*\mathcal{F} = \colim_i x^*\mathcal{F}_i$ である。同様に
+$x^*\mathcal{F}|_{U_\etale} =
+\colim_i x^*\mathcal{F}_i|_{U_\etale}$.
+となる。仮定により各 $x^*\mathcal{F}_i|_{U_\etale}$ は準連接である。
+したがって『降下』補題 \ref{descent-lemma-properties-quasi-coherent} により、
+$\colim_i x^*\mathcal{F}_i|_{U_\etale}$ は準連接である。
+ゆえに、所望のとおり $x^*\mathcal{F}|_{U_\etale}$ は準連接である。
+
+\medskip\noindent
+（2）の証明。(1) により、$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ には
+余核が存在し、それは $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+で計算した余核と一致する。$\varphi : \mathcal{F} \to \mathcal{G}$ を
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の射とし、
+$\mathcal{K} = \Ker(\varphi)$ を
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ で計算する。
+$\mathcal{K}$ が局所準連接加群であることを示せば、(2) の証明は完了する。
+実際、核は前層の圏で計算されること（層化は不要である）に注意する。
+したがって $\mathcal{K}|_{U_\etale}$ は写像
+$\mathcal{F}|_{U_\etale} \to \mathcal{G}|_{U_\etale}$ の核、
+すなわち $U_\etale$ 上の準連接層の写像の核であり、『降下』補題
+\ref{descent-lemma-properties-quasi-coherent} により準連接である。
+これで (2) が証明された。
+
+\medskip\noindent
+（3）の証明。
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+を $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の短完全列とする。
+エタール位相を用いているので、制限
+$0 \to \mathcal{F}_1|_{U_\etale} \to
+\mathcal{F}_2|_{U_\etale} \to \mathcal{F}_3|_{U_\etale} \to 0$
+も短完全列である。したがって (3) は『降下』補題
+\ref{descent-lemma-properties-quasi-coherent} の対応する主張から従う。
+
+\medskip\noindent
+（4）の証明。$\mathcal{F}$ と $\mathcal{G}$ を
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の対象とする。
+$U_\etale$ への制限は環付きトポスの射
+$U_\etale \to (\Sch/U)_\etale \to \mathcal{X}_\etale$
+に沿う引き戻しで与えられるので、テンソル積
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$
+の $U_\etale$ への制限は
+$\mathcal{F}|_{U_\etale} \otimes_{\mathcal{O}_U} \mathcal{G}|_{U_\etale}$,
+に等しい。『サイト上の加群』補題
+\ref{sites-modules-lemma-tensor-product-pullback} を見よ。
+$\mathcal{F}|_{U_\etale}$ と $\mathcal{G}|_{U_\etale}$ は準連接なので、
+そのテンソル積も準連接である。『降下』補題
+\ref{descent-lemma-properties-quasi-coherent} を見よ。
+
+\medskip\noindent
+（5）の証明。$\mathcal{F}$ と $\mathcal{G}$ を
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ の対象とし、$\mathcal{F}$ は
+有限表示であるとする。
+$(\Sch/U)_\etale = \mathcal{X}_\etale/x$
+は $\mathcal{X}_\etale$ の一つの対象における局所化なので、
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+の $(\Sch/U)_\etale$ への制限は
+$$
+\mathcal{H} =
+\SheafHom_{\mathcal{O}|_{(\Sch/U)_\etale}}(
+\mathcal{F}|_{(\Sch/U)_\etale}, \mathcal{G}|_{(\Sch/U)_\etale})
+$$
+に等しい。『サイト上の加群』補題
+\ref{sites-modules-lemma-internal-hom-restriction} による。
+環付きトポスの射
+$(U_\etale, \mathcal{O}_U) \to ((\Sch/U)_\etale, \mathcal{O})$
+は平坦である。実際、$\mathcal{O}$ の引き戻しは $\mathcal{O}_U$ である。
+したがって、この射による $\mathcal{H}$ の引き戻しは
+$\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})$
+に等しい。『サイト上の加群』補題
+\ref{sites-modules-lemma-pullback-internal-hom} による。言い換えれば、
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+の $U_\etale$ への制限は
+$\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})$.
+である。$\mathcal{F}|_{U_\etale}$ と $\mathcal{G}|_{U_\etale}$ は
+準連接なので、
+$\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})$,
+も準連接である。『降下』補題
+\ref{descent-lemma-properties-quasi-coherent} を見よ。前と同様に結論を得る。
+\end{proof}
+
+\noindent
+ここで論じる一般性では、準連接層の圏はアーベル圏ではない。
+『例』第 \ref{examples-section-nonabelian-QCoh}節を見よ。
+これ以上の準備なしに証明できるのは次である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-qc-colimits}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+\begin{enumerate}
+\item 圏 $\QCoh(\mathcal{O}_\mathcal{X})$ は余極限をもち、それらは次の各圏に
+おける余極限と一致する：\newline
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$,\newline
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$,\newline
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$、および\newline
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X})$。
+\item $\mathcal{F}, \mathcal{G}$ を $\QCoh(\mathcal{O}_\mathcal{X})$ の対象とする。
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$、
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$、または
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算したテンソル積
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$ は一致し、
+その共通の値は $\QCoh(\mathcal{O}_\mathcal{X})$ の対象である。
+\item $\mathcal{F}, \mathcal{G}$ を $\QCoh(\mathcal{O}_\mathcal{X})$ の対象とし、
+$\mathcal{F}$ が有限局所自由（fppf 位相において、または同値なことに
+エタール位相において、または同値なことに Zariski 位相において）であるとする。
+$\textit{Mod}(\mathcal{X}_{Zar}, \mathcal{O}_\mathcal{X})$、
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$、または
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した内部 Hom
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+は一致し、その共通の値は $\QCoh(\mathcal{O}_\mathcal{X})$ の対象である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ 上にある $\mathcal{X}$ の任意の対象 $x$ を取る。
+\hspace*{-3pt}$\tau \in \{Zariski, \etale, fppf\}$ とする。
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の対象
+$\mathcal{H}$ が $\QCoh(\mathcal{O}_\mathcal{X})$ に属することを示すには、\newline
+制限 $x^*\mathcal{H}$（節 \ref{stacks-sheaves-section-restriction}）が
+$\textit{Mod}((\Sch/U)_\tau, \mathcal{O})$\newline
+の準連接対象であることを示せば十分である。
+補題 \ref{stacks-sheaves-lemma-characterize-quasi-coherent} および\newline
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis} を見よ。有限局所自由であることについても同様である。
+$(\Sch/U)_\tau = \mathcal{X}_\tau/x$ は、$\mathcal{X}_\tau$ の一つの対象における
+局所化であることを思い出そう。したがって制限は、余極限、テンソル積、
+内部 Hom の形成と可換する（『サイト上の加群』補題
+\ref{sites-modules-lemma-exactness-pushforward-pullback},
+\ref{sites-modules-lemma-tensor-product-pullback}、および
+\ref{sites-modules-lemma-internal-hom-restriction}).
+ゆえに、この補題は『降下』補題 \ref{descent-lemma-qc-colimits} に帰着する。
+\end{proof}
+
+
+
+
+
+
+\section{スタック化と層}
+\label{stacks-sheaves-section-stackification}
+
+\noindent
+グルーポイドをファイバーとする圏上の層の圏は、そのスタック化だけを
+「認識する」ことが分かる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-stackification}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取る。$f$ がスタック化の同値を誘導するならば、
+トポスの射
+$f : \Sh(\mathcal{X}_{fppf}) \to \Sh(\mathcal{Y}_{fppf})$
+は同値である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Y}$ が $\mathcal{X}$ のスタック化であると仮定してよい。
+$f : \mathcal{X} \to \mathcal{Y}$ は特別余連続関手であると主張する。
+『サイト』定義 \ref{sites-definition-special-cocontinuous-functor} を見よ。
+これにより補題が証明される。『スタック』補題
+\ref{stacks-lemma-topology-inherited-functorial} により、関手 $f$ は連続かつ余連続である。
+『スタック』補題 \ref{stacks-lemma-stackify} により、『サイト』補題
+\ref{sites-lemma-equivalence} の条件 (3)、(4)、(5) が成り立つことが分かる。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-stackification-quasi-coherent}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取る。$f$ がスタック化の同値を誘導するならば、
+$f^*$ は同値
+$\textit{Mod}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{Y})$
+および
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{Y})$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{Y}$ が $\mathcal{X}$ のスタック化であると仮定してよい。
+第一の主張は補題 \ref{stacks-sheaves-lemma-stackification} と
+$\mathcal{O}_\mathcal{X} = f^{-1}\mathcal{O}_\mathcal{Y}$ から明らかである。
+準連接層の引き戻しは準連接である。補題
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent} を見よ。
+したがって、$f^*\mathcal{G}$ が準連接ならば $\mathcal{G}$ も準連接であることを
+示せば十分である。そのため、$y$ を $\mathcal{Y}$ の対象とする。
+$\mathcal{Y}$ が $\mathcal{X}$ のスタック化であるという条件を言い換えると、
+$\mathcal{Y}$ に fppf 被覆 $\{y_i \to y\}$ が存在し、$\mathcal{X}$ のある対象
+$x_i$ に対して $y_i \cong f(x_i)$ となることが分かる。
+$x_i$ と $y_i$ はスキーム $U_i$ 上にあるとする。
+$f^*\mathcal{G}$ が準連接であるから、$x_i^*f^*\mathcal{G}$ は準連接である。
+$x_i^*f^*\mathcal{G}$ は $y_i^*\mathcal{G}$ と同型であるので
+（$(\Sch/U_i)_{fppf}$ 上の層として、$y_i^*\mathcal{G}$ は準連接であることが分かる。
+『サイト上の加群』補題 \ref{sites-modules-lemma-local-final-object} により、
+$\mathcal{G}$ の $\mathcal{Y}/y$ への制限は準連接である。したがって補題
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent} により $\mathcal{G}$ は準連接である。
+\end{proof}
+
+
+
+
+
+\section{準連接層と表示}
+\label{stacks-sheaves-section-quasi-coherent-presentation}
+
+\noindent
+まず準連接層を、スキームおよび代数空間について以前に定義した概念と対応させる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-locally-quasi-coherent}
+スキーム $S$ を取り、$\mathcal{X} \to (\Sch/S)_{fppf}$ を
+代数空間 $F$ により表現可能な、グルーポイドをファイバーとする圏とする。
+$\mathcal{F}$ が $\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ に属するならば、
+制限 $\mathcal{F}|_{F_\etale}$ (\ref{stacks-sheaves-equation-restrict}) は準連接である。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ が $F$ 上エタールであるとする。このとき
+$\mathcal{F}|_{U_\etale} = (\mathcal{F}|_{F_\etale})|_{U_\etale}$.
+これは明らかだが、注意 \ref{stacks-sheaves-remark-compare} も見よ。
+したがって主張は定義から従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-quasi-coherent}
+スキーム $S$ を取り、$\mathcal{X} \to (\Sch/S)_{fppf}$ を
+代数空間 $F$ により表現可能な、グルーポイドをファイバーとする圏とする。
+関手 (\ref{stacks-sheaves-equation-restrict}) は同値
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to \QCoh(\mathcal{O}_F),\quad
+\mathcal{F} \longmapsto \mathcal{F}|_{F_\etale}
+$$
+を定め、その擬逆は $\mathcal{G} \mapsto \pi_F^*\mathcal{G}$ で与えられる。
+この同値は、代数空間により表現可能な、グルーポイドをファイバーとする圏の
+間の射に対する引き戻しと両立する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis} により、エタール位相で考えてよい。
+以下、補題 \ref{stacks-sheaves-lemma-compare} の記法と結果を断りなく用いる。
+制限関手
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(F_\etale, \mathcal{O}_F)$,
+$\mathcal{F} \mapsto \mathcal{F}|_{F_\etale}$ は $i_F^*$ で与えられることを
+思い出そう。補題 \ref{stacks-sheaves-lemma-compare-locally-quasi-coherent} または
+『サイト上の加群』補題 \ref{sites-modules-lemma-local-pullback} により、
+$\mathcal{F}$ が準連接ならば $\mathcal{F}|_{F_\etale}$ も準連接である。
+したがって補題の主張に表示した向きの関手と、逆向きの関手 $\pi_F^*$ を得る。
+$\pi_F \circ i_F = \text{id}$ なので、
+$i_F^*\pi_F^*\mathcal{G} = \mathcal{G}$.
+である。
+
+\medskip\noindent
+次に、
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+の対象 $\mathcal{F}$ に対し、標準的な写像
+$\pi_F^*(\mathcal{F}|_{F_\etale}) \to \mathcal{F}$ がある。これは同一視
+$\mathcal{F}|_{F_\etale} = \pi_{F, *}\mathcal{F}$.
+に随伴する写像である。$\mathcal{F}$ が $\mathcal{X}$ 上の準連接加群ならば、
+この写像が同型であることを示す。スキーム $U$ と全射エタール射
+$U \to F$ を選ぶ。対応する $U$ 上の $\mathcal{X}$ の対象を
+$x : U \to \mathcal{X}$ と表す。
+$\mathcal{X}_\etale/x = (\Sch/U)_\etale$ へ制限した後に
+$\pi_F^*(\mathcal{F}|_{F_\etale}) \to \mathcal{F}$ が同型であることを示せば十分である。
+$U \to F$ はエタールなので、注意 \ref{stacks-sheaves-remark-compare} により
+$$
+\pi_F^*(\mathcal{F}|_{F_\etale})|_{\mathcal{X}_\etale/x} =
+\pi_U^*(\mathcal{F}|_{U_\etale})
+$$
+であり、また写像
+$\pi_F^*(\mathcal{F}|_{F_\etale}) \to \mathcal{F}$
+の $\mathcal{X}_\etale/x = (\Sch/U)_\etale$ への制限は、対応する写像
+$\pi_U^*(\mathcal{F}|_{U_\etale}) \to \mathcal{F}|_{(\Sch/U)_\etale}$.
+に等しい。スキームに対してこの結果が正しいことは『降下』第
+\ref{descent-section-quasi-coherent-sheaves}節で既に見たので\footnote{具体的には、
+$U$ がスキームで $\mathcal{F}$ が $(\Sch/U)_\etale$ 上準連接ならば、
+『降下』命題 \ref{descent-proposition-equivalence-quasi-coherent} により、
+スキーム $U$ 上のある準連接加群 $\mathcal{H}$ に対して
+$\mathcal{F} = \mathcal{H}^a$ である。言い換えれば、『降下』注意
+\ref{descent-remark-change-topologies-ringed-sites} により、記法を『降下』補題
+\ref{descent-lemma-compare-sites} のものとすれば、
+$\mathcal{F} = (\text{id}_{\etale,Zar})^*\mathcal{H}$ である。さらに
+$\text{id}_{\etale,Zar} = \pi_U \circ \text{id}_{small,\etale,Zar}$
+なので、$\mathcal{G} = (\text{id}_{small,\etale,Zar})^*\mathcal{H}$ と置けば、
+これは準連接であり、$\mathcal{F} = \pi_U^*\mathcal{G}$ となる。このとき
+$\pi_U^*i_U^*\mathcal{F} = \pi_U^*i_U^*\pi_U^*\mathcal{G} =
+\pi_U^*\mathcal{G} = \mathcal{F}$ となり、所望の結論を得る。}
+結論が従う。
+
+\medskip\noindent
+引き戻しとの両立性は、擬逆が $\pi_F^*$ で与えられることと、
+補題 \ref{stacks-sheaves-lemma-compare-morphism} の環付きトポスの可換図式から従う。
+\end{proof}
+
+\noindent
+『空間におけるグルーポイド』定義
+\ref{spaces-groupoids-definition-groupoid-module} で、任意のグルーポイド上の
+準連接加群という概念を定義した。次の（形式的な）命題により、
+商スタック上の準連接層を、表示上の準連接加群によって研究できる。
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-quasi-coherent}
+$(U, R, s, t, c)$ を $S$ 上の代数空間におけるグルーポイドとし、
+$\mathcal{X} = [U/R]$ を商スタックとする。$\mathcal{X}$ 上の準連接加群の圏は、
+$(U, R, s, t, c)$ 上の準連接加群の圏と同値である。
+\end{proposition}
+
+\begin{proof}
+擬逆となる関手
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\longleftrightarrow
+\QCoh(U, R, s, t, c).
+$$
+を構成する。ここで $\QCoh(U, R, s, t, c)$ は、グルーポイド
+$(U, R, s, t, c)$ 上の準連接加群の圏を表す。
+
+\enlargethispage{3pt}
+\medskip\noindent
+$\mathcal{F}$ を $\QCoh(\mathcal{O}_\mathcal{X})$ の対象とする。
+$U$ と $R$ に対応する、グルーポイドをファイバーとする圏を
+$\mathcal{U}$、$\mathcal{R}$ と表す。$U$ 上の $\mathcal{X}$ の（定義に現れる）
+対象を $x$ と表す。$2$-可換図式
+$$
+\xymatrix{
+\mathcal{R} \ar[r]_s \ar[d]_t & \mathcal{U} \ar[d]^x \\
+\mathcal{U} \ar[r]^x & \mathcal{X}
+}
+$$
+があることを思い出そう。『空間におけるグルーポイド』補題
+\ref{spaces-groupoids-lemma-quotient-stack-2-arrow} を見よ。
+補題 \ref{stacks-sheaves-lemma-2-morphisms-presheaves} により、図式に含まれる $2$-矢印は同型
+$\alpha : t^*x^*\mathcal{F} \to s^*x^*\mathcal{F}$
+を誘導し、これは $\mathcal{R} \times_{s, \mathcal{U}, t} \mathcal{R}$ 上で
+コサイクル条件を満たす。これは『空間におけるグルーポイド』補題
+\ref{spaces-groupoids-lemma-quotient-stack-cocycle} の帰結である。
+したがって $\mathcal{G} = x^*\mathcal{F}|_{U_\etale}$ と置くと、
+補題 \ref{stacks-sheaves-lemma-compare-quasi-coherent} の圏の同値を、引き戻しと両立する形で
+複数回用いることにより、同型
+$\alpha : t_{small}^*\mathcal{G} \to s_{small}^*\mathcal{G}$
+であって $R \times_{s, U, t} R$ 上のコサイクル条件を満たすものを得る。
+すなわち $(\mathcal{G}, \alpha)$ は $\QCoh(U, R, s, t, c)$ の対象である。
+規則 $\mathcal{F} \mapsto (\mathcal{G}, \alpha)$ を左から右への関手とする。
+
+\medskip\noindent
+逆向きの関手を構成する。
+$(\mathcal{G}, \alpha)$ を $\QCoh(U, R, s, t, c)$ の対象とする。
+補題 \ref{stacks-sheaves-lemma-stackification-quasi-coherent} によれば、スタック化写像
+$[U/_{\!p}R] \to [U/R]$（『空間におけるグルーポイド』定義
+\ref{spaces-groupoids-definition-quotient-stack} を見よ）は、準連接層の圏の
+同値を誘導する。したがって、$[U/_{\!p}R]$ 上の準連接加群
+$\mathcal{F}$ を構成すれば十分である。
+
+\medskip\noindent
+対象 $x = (T, u)$ が $[U/_{\!p}R]$ に属するとは、スキーム $T$ と射
+$u : T \to U$ が与えられることである。射 $(T, u) \to (T', u')$ は、
+$f : T \to T'$ および $r : T \to R$ からなる組 $(f, r)$ であって、
+$s \circ r = u$ および $t \circ r = u' \circ f$ を満たすものとして与えられる。
+形
+$(f, e \circ u' \circ f) : (T, u' \circ f) \to (T', u')$.
+の任意の射を{\it 特別な射}と呼ぶ。特別な射を射とする $(T, u)$ の圏は、
+$U$ 上のスキームの圏にほかならない。
+
+\medskip\noindent
+この記法のもとで、$[U/_{\!p}R]$ の対象 $(T, u)$ に対して
+$$
+\mathcal{F}(T, u) : = \Gamma(T, u_{small}^*\mathcal{G}).
+$$
+と置く。射 $(f, r) : (T, u) \to (T', u')$ が与えられると、写像
+\begin{align*}
+\mathcal{F}(T', u') & = \Gamma(T', (u')_{small}^*\mathcal{G}) \\
+& \to \Gamma(T, f_{small}^*(u')_{small}^*\mathcal{G}) =
+\Gamma(T, (u' \circ f)_{small}^*\mathcal{G}) \\
+& = \Gamma(T, (t \circ r)_{small}^*\mathcal{G}) =
+\Gamma(T, r_{small}^*t_{small}^*\mathcal{G}) \\
+& \to \Gamma(T, r_{small}^*s_{small}^*\mathcal{G}) =
+\Gamma(T, (s \circ r)_{small}^*\mathcal{G}) \\
+& = \Gamma(T, u_{small}^*\mathcal{G}) \\
+& = \mathcal{F}(T, u)
+\end{align*}
+を得る。第一の矢印は $f$ に沿う引き戻しであり、第二の矢印は
+$\alpha$ である。$(f, r)$ が特別な射ならば、グルーポイド上の準連接加群の
+層の公理により $e_{small}^*\alpha = \text{id}$ なので、この写像は
+$f$ に沿う引き戻しにほかならないことに注意する。
+コサイクル条件により $\mathcal{F}$ は加群の前層である（詳細は省略する）。
+特別な射の場合の $\mathcal{F}$ の制限写像の簡潔な記述から、
+$\mathcal{F}$ の $(\Sch/T)_{fppf}$ への制限は準連接であることが分かる。
+したがって $\mathcal{F}$ は $[U/_{\!p}R]$ 上の層であり、準連接である
+（補題 \ref{stacks-sheaves-lemma-characterize-quasi-coherent}）。
+
+\medskip\noindent
+上で構成した関手が互いに擬逆であることの確認は省略する。
+\end{proof}
+
+\noindent
+この節を、準連接層から出る写像に関する技術的補題で締めくくる。
+これは『スキーム』補題 \ref{schemes-lemma-compare-constructions} の類似である。
+グルーポイドに関する仮定から $\mathcal{X}$ が代数スタックとなることは、後に
+（『表現可能性の判定法』定理
+\ref{criteria-theorem-flat-groupoid-gives-algebraic-stack}）見る。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-map-from-quasi-coherent}
+$(U, R, s, t, c)$ を $S$ 上の代数空間におけるグルーポイドとし、
+$s, t$ は平坦かつ局所有限表示であると仮定する。
+$\mathcal{X} = [U/R]$ を商スタックとし、$U$ 上の $\mathcal{X}$ の対象を
+$x$ と表す。$\mathcal{F}$ を準連接 $\mathcal{O}_\mathcal{X}$-加群とし、
+$\mathcal{H}$ を $\textit{Mod}(\mathcal{O}_\mathcal{X})$ の任意の対象とする。写像
+$$
+\Hom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{H})
+\longrightarrow
+\Hom_{\mathcal{O}_U}(x^*\mathcal{F}|_{U_\etale},
+x^*\mathcal{H}|_{U_\etale}),
+\quad
+\phi \longmapsto x^*\phi|_{U_\etale}
+$$
+は単射であり、その像はちょうど、次の可換図式を与える写像
+$\varphi : x^*\mathcal{F}|_{U_\etale} \to
+x^*\mathcal{H}|_{U_\etale}$ 全体からなる：
+$$
+\xymatrix@C=12pt{
+s_{small}^*(x^*\mathcal{F}|_{U_\etale})
+\ar[r] \ar[d]^{s_{small}^*\varphi} &
+(x \circ s)^*\mathcal{F}|_{R_\etale} =
+(x \circ t)^*\mathcal{F}|_{R_\etale} &
+t_{small}^*(x^*\mathcal{F}|_{U_\etale})
+\ar[l] \ar[d]_{t_{small}^*\varphi} \\
+s_{small}^*(x^*\mathcal{H}|_{U_\etale})
+\ar[r] &
+(x \circ s)^*\mathcal{H}|_{R_\etale} =
+(x \circ t)^*\mathcal{H}|_{R_\etale} &
+t_{small}^*(x^*\mathcal{H}|_{U_\etale})
+\ar[l]
+}
+$$
+これは $R_\etale$ 上の加群の図式であり、横向きの矢印は比較写像
+(\ref{stacks-sheaves-equation-comparison-algebraic-spaces-modules}) である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-stackification-quasi-coherent} によれば、スタック化写像
+$[U/_{\!p}R] \to [U/R]$（『空間におけるグルーポイド』定義
+\ref{spaces-groupoids-definition-quotient-stack} を見よ）は、準連接層の圏と
+fppf $\mathcal{O}$-加群の圏の同値を誘導する。したがって
+$\mathcal{X} = [U/_{\!p}R]$ として補題を証明すれば十分である。
+命題 \ref{stacks-sheaves-proposition-quasi-coherent} とその証明により、
+$(U, R, s, t, c)$ 上の準連接加群 $(\mathcal{G}, \alpha)$ であって、
+$\mathcal{F}$ が規則 $\mathcal{F}(T, u) = \Gamma(T, u^*\mathcal{G})$ により
+与えられるものが存在する。特に
+$x^*\mathcal{F}|_{U_\etale} = \mathcal{G}$ であり、補題の主張にある写像が
+単射であることは明らかである。さらに、写像
+$\varphi : \mathcal{G} \to x^*\mathcal{H}|_{U_\etale}$ と
+$[U/_{\!p}R]$ の任意の対象 $y = (T, u)$ が与えられると、写像
+$$
+\mathcal{F}(y) = \Gamma(T, u^*\mathcal{G})
+\xrightarrow{u_{small}^*\varphi}
+\Gamma(T, u_{small}^*x^*\mathcal{H}|_{U_\etale})
+\rightarrow
+\Gamma(T, y^*\mathcal{H}|_{T_\etale}) = \mathcal{H}(y)
+$$
+を考えられる。ここで第二の矢印は、層 $\mathcal{H}$ に対する比較写像
+(\ref{stacks-sheaves-equation-comparison-modules}) である。
+補題のコサイクル条件が満たされるならば、この対応は $[U/_{\!p}R]$ の射に対する
+層 $\mathcal{F}$ と $\mathcal{G}$ の制限写像と両立する。証明は省略する。
+ヒント：命題 \ref{stacks-sheaves-proposition-quasi-coherent} の証明では、$\mathcal{F}$ の
+制限写像が $(\mathcal{G}, \alpha)$ によって明示的に記述されている。
+\end{proof}
+
+
+
+
+
+
+
+\section{代数スタック上の準連接層}
+\label{stacks-sheaves-section-quasi-coherent-algebraic-stacks}
+
+\noindent
+$\mathcal{X}$ を $S$ 上の代数スタックとする。『代数スタック』補題
+\ref{algebraic-lemma-stack-presentation} により、同値
+$[U/R] \to \mathcal{X}$ であって、$(U, R, s, t, c)$ が代数空間における
+滑らかなグルーポイドとなるものを取れる。このとき
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\cong
+\QCoh(\mathcal{O}_{[U/R]})
+\cong
+\QCoh(U, R, s, t, c)
+$$
+となる。第二の同値は命題 \ref{stacks-sheaves-proposition-quasi-coherent} による。
+したがって、代数スタック上の準連接層の圏は、代数空間における滑らかな
+グルーポイド上の準連接加群の圏と同値である。特に、
+『空間におけるグルーポイド』補題 \ref{spaces-groupoids-lemma-abelian} により、
+$\QCoh(\mathcal{O}_\mathcal{X})$ はアーベル圏である！
+
+\medskip\noindent
+現在の設定には少し気がかりな点がある。それは、充満忠実な埋め込み
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+$$
+が一般には{\bf 完全でない}ことである。しかし、スキームについても
+まったく同じことが起こる。ほとんどのスキーム $X$ に対して、埋め込み
+$$
+\QCoh(\mathcal{O}_X) \cong
+\QCoh((\Sch/X)_{fppf}, \mathcal{O}_X) \longrightarrow
+\textit{Mod}((\Sch/X)_{fppf}, \mathcal{O}_X)
+$$
+は完全ではない。『降下』補題
+\ref{descent-lemma-equivalence-quasi-coherent-limits} を見よ。
+ちなみに、『降下』補題
+\ref{descent-lemma-equivalence-quasi-coherent-limits} の証明中の例は、一般に
+厳密充満埋め込み
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}(\mathcal{O}_\mathcal{X})$ も完全でないことを示している。
+
+\medskip\noindent
+ここまでに得た結果を一つの主張にまとめる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-quasi-coherent-algebraic-stack}
+$\mathcal{X}$ を $S$ 上の代数スタックとする。
+\begin{enumerate}
+\item $[U/R] \to \mathcal{X}$ が $\mathcal{X}$ の表示ならば、標準的な同値
+$\QCoh(\mathcal{O}_\mathcal{X}) \cong
+\QCoh(U, R, s, t, c)$ がある。
+\item 圏 $\QCoh(\mathcal{O}_\mathcal{X})$ はアーベル圏である。
+\item 包含関手 $\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$ は右完全だが、一般には
+{\bf 完全ではない}。
+\item 圏 $\QCoh(\mathcal{O}_\mathcal{X})$ は余極限をもち、それらは圏
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ における余極限と一致する。
+\item $\mathcal{F}, \mathcal{G}$ を
+$\QCoh(\mathcal{O}_\mathcal{X})$ の対象とする。
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ におけるテンソル積
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$ は
+$\QCoh(\mathcal{O}_\mathcal{X})$ の対象である。
+\item $\mathcal{F}, \mathcal{G}$ を
+$\QCoh(\mathcal{O}_\mathcal{X})$ の対象とし、$\mathcal{F}$ は有限局所自由とする。
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ における層
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+は $\QCoh(\mathcal{O}_\mathcal{X})$ の対象である。
+\item 短完全列
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+が $\textit{Mod}(\mathcal{O}_\mathcal{X})$ に与えられ、
+$\mathcal{F}_1$ と $\mathcal{F}_3$ が準連接ならば、
+$\mathcal{F}_2$ も準連接である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+性質 (4)、(5)、(6) は補題 \ref{stacks-sheaves-lemma-qc-colimits} で証明した。
+(1) は命題 \ref{stacks-sheaves-proposition-quasi-coherent} である。
+(2) は、上で論じたように、(1) と『空間におけるグルーポイド』補題
+\ref{spaces-groupoids-lemma-abelian} から従う。
+(3) の包含関手の右完全性は (4) から従う。『ホモロジー』補題
+\ref{homology-lemma-exact-functor} と比較せよ。
+(3) の包含関手が完全でないことについては、『降下』補題
+\ref{descent-lemma-equivalence-quasi-coherent-limits} を見よ。
+(7) を見るには、$\mathcal{F}_2$ のスキームの大サイトへの制限が準連接であることを
+確認すれば十分である（補題 \ref{stacks-sheaves-lemma-characterize-quasi-coherent}）。
+したがって、これは『降下』補題
+\ref{descent-lemma-equivalence-quasi-coherent-limits} の対応する部分から従う。
+\end{proof}
+
+\noindent
+次に、代数スタック上の加群に対するコヒーレーターを構成する。
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-coherator}
+$\mathcal{X}$ を $S$ 上の代数スタックとする。
+\begin{enumerate}
+\item 圏 $\QCoh(\mathcal{O}_\mathcal{X})$ は Grothendieck アーベル圏である。
+したがって、$\QCoh(\mathcal{O}_\mathcal{X})$ は十分な単射的対象と
+すべての極限をもつ。
+\item 包含関手
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$ は右随伴\footnote{この関手は
+{\it コヒーレーター}と呼ばれることがある。}
+$$
+Q :
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+をもち、任意の準連接層 $\mathcal{F}$ に対して随伴写像
+$Q(\mathcal{F}) \to \mathcal{F}$ は同型である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+この証明は、スキームの場合の証明（『性質』命題
+\ref{properties-proposition-coherator}）および代数空間の場合の証明
+（『空間の性質』命題 \ref{spaces-properties-proposition-coherator}）の繰り返しである。
+読者には、まずそのいずれかの証明を読むことを勧める。
+
+\medskip\noindent
+(1) の意味は、$\QCoh(\mathcal{O}_\mathcal{X})$ が (a) すべての余極限をもち、
+(b) フィルター余極限が完全であり、(c) 生成対象をもつことである。
+『単射的対象』第 \ref{injectives-section-grothendieck-conditions}節を見よ。
+補題 \ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} により、
+$\QCoh(\mathcal{O}_X)$ に余極限が存在し、$\textit{Mod}(\mathcal{O}_X)$ における
+余極限と一致する。『サイト上の加群』補題
+\ref{sites-modules-lemma-limits-colimits} により、フィルター余極限は完全である。
+したがって (a) と (b) が成り立つ。
+
+\medskip\noindent
+$(U, R, s, t, c)$ が代数空間における滑らかなグルーポイドとなる表示
+$\mathcal{X} = [U/R]$ を選ぶ。特に $s$ と $t$ は代数空間の平坦射である。
+上の補題 \ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} により
+$\QCoh(\mathcal{O}_\mathcal{X}) = \QCoh(U, R, s, t, c)$ である。
+『空間におけるグルーポイド』補題
+\ref{spaces-groupoids-lemma-set-generators} により、集合 $T$ と
+$\mathcal{X}$ 上の準連接層の族 $(\mathcal{F}_t)_{t \in T}$ であって、
+$\mathcal{X}$ 上の任意の準連接層が、いずれかの $\mathcal{F}_t$ と同型な
+部分層たちの有向余極限となるものが存在する。したがって
+$\bigoplus_t \mathcal{F}_t$ は $\QCoh(\mathcal{O}_X)$ の生成対象であり、
+(c) が成り立つ。極限と単射的対象に関する主張は任意の Grothendieck
+アーベル圏で成り立つ。『単射的対象』定理
+\ref{injectives-theorem-injective-embedding-grothendieck} および補題
+\ref{injectives-lemma-grothendieck-products} を見よ。
+
+\medskip\noindent
+（2）の証明。$Q$ を構成するため、次の一般的手続きを用いる。
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ の対象 $\mathcal{F}$ に対し、関手
+$$
+\QCoh(\mathcal{O}_\mathcal{X})^{opp}
+\longrightarrow
+\textit{Sets},
+\quad
+\mathcal{G}
+\longmapsto
+\Hom_\mathcal{X}(\mathcal{G}, \mathcal{F})
+$$
+を考える。この関手は余極限を極限へ移すので表現可能である。
+『単射的対象』補題 \ref{injectives-lemma-grothendieck-brown} を見よ。
+したがって、準連接層 $Q(\mathcal{F})$ と関手的同型
+$\Hom_\mathcal{X}(\mathcal{G}, \mathcal{F}) =
+\Hom_\mathcal{X}(\mathcal{G}, Q(\mathcal{F}))$
+が、$\QCoh(\mathcal{O}_\mathcal{X})$ の $\mathcal{G}$ に対して存在する。
+Yoneda の補題（『圏』補題 \ref{categories-lemma-yoneda}）により、構成
+$\mathcal{F} \leadsto Q(\mathcal{F})$ は $\mathcal{F}$ に関して関手的である。
+構成により $Q$ は包含関手の右随伴である。
+$\mathcal{F}$ が準連接であるとき $Q(\mathcal{F}) \to \mathcal{F}$ が
+同型であることは、包含関手
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+が充満忠実であることの形式的帰結である。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{コホモロジー}
+\label{stacks-sheaves-section-cohomology-general}
+
+\noindent
+スキーム $S$ と、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏
+$\mathcal{X}$ を取る。任意の $\tau \in \{Zariski, \etale, smooth,
+syntomic, fppf\}$ に対して、圏 $\textit{Ab}(\mathcal{X}_\tau)$ と
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ は十分な単射的対象をもつ。
+『単射的対象』定理 \ref{injectives-theorem-sheaves-injectives} および
+\ref{injectives-theorem-sheaves-modules-injectives} を見よ。
+したがって、『サイト上のコホモロジー』第
+\ref{sites-cohomology-section-cohomology-sheaves}節の機構を用いて、コホモロジー群
+$$
+H^p(\mathcal{X}_\tau, \mathcal{F}) = H^p_\tau(\mathcal{X}, \mathcal{F})
+\quad\text{and}\quad
+H^p(x, \mathcal{F}) = H^p_\tau(x, \mathcal{F})
+$$
+を、任意の $x \in \Ob(\mathcal{X})$ および
+$\textit{Ab}(\mathcal{X}_\tau)$ または
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の任意の対象
+$\mathcal{F}$ に対して定義できる。さらに、
+$f : \mathcal{X} \to \mathcal{Y}$ が $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射ならば、$\textit{Ab}(\mathcal{Y}_\tau)$ または
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$ における高次順像
+$R^if_*\mathcal{F}$ を得る。もちろん、『サイト上のコホモロジー』第
+\ref{sites-cohomology-section-derived-functors}節で説明されているように、
+$H^p(-)$ と $R^if_*$ の導来版も存在する。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-cohomology-restriction}
+スキーム $S$ と、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏
+$\mathcal{X}$ を取る。$\tau \in \{Zariski, \etale, smooth,
+syntomic, fppf\}$ とする。$x \in \Ob(\mathcal{X})$ をスキーム $U$ 上にある
+対象とし、$\mathcal{F}$ を $\textit{Ab}(\mathcal{X}_\tau)$ または
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の対象とする。このとき
+$$
+H^p_\tau(x, \mathcal{F}) = H^p((\Sch/U)_\tau, x^{-1}\mathcal{F})
+$$
+であり、$\tau = \etale$ ならば、さらに
+$$
+H^p_\etale(x, \mathcal{F}) =
+H^p(U_\etale, \mathcal{F}|_{U_\etale}).
+$$
+\end{lemma}
+
+\begin{proof}
+第一の主張は、『サイト上のコホモロジー』補題
+\ref{sites-cohomology-lemma-cohomology-of-open} と補題
+\ref{stacks-sheaves-lemma-localizing-structure-sheaf} の同値から従う。
+第二の主張は、第一の主張と『エタール・コホモロジー』補題
+\ref{etale-cohomology-lemma-compare-cohomology-big-small} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{単射的層}
+\label{stacks-sheaves-section-lower-shriek}
+
+\noindent
+単射的アーベル層または単射的加群の順像は単射的である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-pushforward-injective}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取り、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+\begin{enumerate}
+\item $\mathcal{I}$ が $\textit{Ab}(\mathcal{X}_\tau)$ において単射的ならば、
+$f_*\mathcal{I}$ は $\textit{Ab}(\mathcal{Y}_\tau)$ において単射的である。
+\item $\mathcal{I}$ が
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ において単射的ならば、
+$f_*\mathcal{I}$ は
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$
+において単射的である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f^{-1}$ が $f_*$ の完全な左随伴であることから形式的に従う。
+『ホモロジー』補題 \ref{homology-lemma-adjoint-preserve-injectives} を見よ。
+\end{proof}
+
+\noindent
+この節の残りでは、引き戻し $f^{-1}$ がアーベル層および加群上で左随伴
+$f_!$ をもつことを証明する。$f$ が（スキームまたは代数空間により）
+表現可能ならば、$f_!$ は完全で、$f^{-1}$ は単射的対象を保つことが分かる。
+まず、グルーポイドをファイバーとする圏におけるファイバー積と等化子、
+および射に関するそれらの振る舞いについて、いくつかの準備的補題を証明する。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-fibre-products}
+グルーポイドをファイバーとする圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を取る。
+\begin{enumerate}
+\item 圏 $\mathcal{X}$ はファイバー積をもつ。
+\item $\mathcal{X}$ の $\mathit{Isom}$-前層が代数空間により表現可能ならば、
+$\mathcal{X}$ は等化子をもつ。
+\item $\mathcal{X}$ が代数スタック（より一般には商スタック）ならば、
+$\mathcal{X}$ は等化子をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は、$(\Sch/S)_{fppf}$ がファイバー積をもつことと、『圏』補題
+\ref{categories-lemma-fibred-groupoids-fibre-product-goes-up} から従う。
+
+\medskip\noindent
+$a, b : x \to y$ を $\mathcal{X}$ の射とする。
+$U = p(x)$、$V = p(y)$ と置く。スキームの圏は等化子をもつので、
+$W \to U$ を $p(a)$ と $p(b)$ の等化子とできる。
+$c : z \to x$ を $W \to U$ 上にある $\mathcal{X}$ の射と表す。
+$a$ と $b$ の等化子が存在するならば、それは $a \circ c$ と $b \circ c$ の
+等化子である。したがって $p(a) = p(b) = f : U \to V$ と仮定してよい。
+$\mathcal{X}$ はグルーポイドをファイバーとするので、$U$ 上の
+$\mathcal{X}$ のファイバー圏に一意な自己同型 $i : x \to x$ であって
+$a \circ i = b$ を満たすものが存在する。ここでも $a$ と $b$ の等化子は
+$\text{id}_x$ と $i$ の等化子である。
+$\mathit{Isom}_\mathcal{X}(x)$ は $(\Sch/U)_{fppf}$ 上の前層であり、
+$T/U$ に、$T$ 上の $\mathcal{X}$ のファイバー圏における $x|_T$ の
+自己同型全体の集合を対応させることを思い出そう。『スタック』定義
+\ref{stacks-definition-mor-presheaf} を見よ。
+$\mathit{Isom}_\mathcal{X}(x)$ が代数空間 $G \to U$ により表現可能ならば、
+$\text{id}_x$ と $i$ は $U$ 上の射 $e, i : U \to G$ を定める。
+$M = U \times_{e, G, i} U$ と置くと、『空間の射』補題
+\ref{spaces-morphisms-lemma-section-immersion} により、これはスキームである。
+このとき $x|_M \to x$ が $\mathcal{X}$ における写像
+$\text{id}_x$ と $i$ の等化子であることは明らかである。これで (2) が証明された。
+
+\medskip\noindent
+$\mathcal{X} = [U/R]$ が $S$ 上の代数空間におけるあるグルーポイド
+$(U, R, s, t, c)$ から得られるならば、『ブートストラップ』補題
+\ref{bootstrap-lemma-quotient-stack-isom} により (2) の仮定が成り立つ。
+$\mathcal{X}$ が代数スタックならば、『代数スタック』補題
+\ref{algebraic-lemma-stack-presentation} により表示
+$[U/R] \cong \mathcal{X}$ を選べる。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-fibre-products-morphism}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取る。
+\begin{enumerate}
+\item 関手 $f$ はファイバー積をファイバー積へ移す。
+\item $f$ が忠実ならば、$f$ は等化子を等化子へ移す。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『圏』補題 \ref{categories-lemma-fibred-groupoids-fibre-product-goes-up} により、
+$\mathcal{X}$ におけるファイバー積は、$(\Sch/S)_{fppf}$ における
+ファイバー積図式の上にある任意の可換正方形であることが分かる。
+$\mathcal{Y}$ についても同様である。したがって (1) は明らかである。
+
+\medskip\noindent
+$x \to x'$ を $\mathcal{X}$ における二射 $a, b : x' \to x''$ の等化子とする。
+$f(x) \to f(x')$ が $f(a)$ と $f(b)$ の等化子であることを示す。
+$y \to f(x')$ を、$f(a)$ と $f(b)$ を等化する $\mathcal{Y}$ の射とする。
+$x, x', x''$ はそれぞれスキーム $U, U', U''$ 上にあり、$y$ は $V$ 上にあるとする。
+スキームの圏における $y \to f(x')$ の像を $h : V \to U'$ と表す。
+ファイバー圏の公理により、射 $y \to f(x')$ は
+$f(h^*x') \to f(x')$ と同型である。したがって $f$ が忠実であることから、
+$h^*x' \to x'$ は $a$ と $b$ を等化することが分かる。
+ゆえに一意な射 $h^*x' \to x$ を得て、その像
+$y = f(h^*x') \to f(x)$ が $\mathcal{Y}$ における所望の射である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-fibre-products-preserve-properties}
+$f : \mathcal{X} \to \mathcal{Y}$、$g : \mathcal{Z} \to \mathcal{Y}$ を、
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の忠実な $1$-射とする。
+\begin{enumerate}
+\item 関手 $\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Y}$ は忠実である。
+\item $\mathcal{X}, \mathcal{Z}$ が等化子をもつならば、
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ も等化子をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+対象 $\mathcal{X} \times_\mathcal{Y} \mathcal{Z}$ を四つ組
+$(U, x, z, \alpha)$ と考える。ここで $\alpha : f(x) \to g(z)$ は
+$U$ 上の同型である。『圏』補題
+\ref{categories-lemma-2-product-categories-over-C} を見よ。
+射 $(U, x, z, \alpha) \to (U', x', z', \alpha')$ は、$\alpha$ および
+$\alpha'$ と両立する射 $a : x \to x'$ と $b : z \to z'$ の組である。
+したがって $f$ と $g$ が忠実ならば、関手
+$\mathcal{X} \times_\mathcal{Y} \mathcal{Z} \to \mathcal{Y}$.
+も忠実であることは明らかである。次に、
+$(a, b), (a', b') : (U, x, z, \alpha) \to (U', x', z', \alpha')$
+を $2$-ファイバー積の二つの射とする。$a$ と $a'$ の等化子
+$x'' \to x$、および $b$ と $b'$ の等化子 $z'' \to z$ を考える。
+$f$ は等化子と可換するので（補題 \ref{stacks-sheaves-lemma-fibre-products-morphism}）、
+$f(x'') \to f(x)$ は $f(a)$ と $f(a')$ の等化子である。
+同様に、$g(z'') \to g(z)$ は $g(b)$ と $g(b')$ の等化子である。図式は
+$$
+\xymatrix{
+f(x'') \ar[r] \ar@{..>}[d]_{\alpha''}&
+f(x) \ar[d]_\alpha
+\ar@<0.5ex>[r]^{f(a)}
+\ar@<-0.5ex>[r]_{f(a')}
+ &
+f(x') \ar[d]^{\alpha'} \\
+g(z'') \ar[r] &
+g(z)
+\ar@<0.5ex>[r]^{g(b)}
+\ar@<-0.5ex>[r]_{g(b')}
+ &
+g(z')
+}
+$$
+点線の矢印が存在し、同型であることは明らかである。
+しかし、スキームの圏における $\alpha''$ の像が、その始域の恒等射であるとは
+先験的には限らない。一方、$\alpha''$ が存在することから、$x''$ と $z''$ は
+同じスキーム上で定義され、射 $x'' \to x$ と $z'' \to z$ はスキームの圏で
+同じ像をもつと仮定できる。上の図式を作り直せば、点線の矢印は今度こそ
+恒等射へ射影することが分かり、結論を得る。詳細の一部は省略する。
+\end{proof}
+
+\noindent
+大サイトを扱っているため、次のやや直観に反する結果が成り立つ
+（スキームの大サイトの射についても成り立つ）。注意：$f$ が忠実であるという
+仮定を外すと、この結果は正しくない。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-pullback-injective}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取り、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。関手
+$f^{-1} : \textit{Ab}(\mathcal{Y}_\tau) \to \textit{Ab}(\mathcal{X}_\tau)$
+は左随伴
+$f_! : \textit{Ab}(\mathcal{X}_\tau) \to \textit{Ab}(\mathcal{Y}_\tau)$.
+をもつ。$f$ が忠実で $\mathcal{X}$ が等化子をもつならば、
+\begin{enumerate}
+\item $f_!$ は完全である。
+\item $\mathcal{I}$ が $\textit{Ab}(\mathcal{Y}_\tau)$ において単射的ならば、
+$f^{-1}\mathcal{I}$ は $\textit{Ab}(\mathcal{X}_\tau)$ において単射的である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+『スタック』補題 \ref{stacks-lemma-topology-inherited-functorial} により、
+関手 $f$ は連続かつ余連続である。したがって『サイト上の加群』補題
+\ref{sites-modules-lemma-g-shriek-adjoint} により、関手
+$f^{-1} : \textit{Ab}(\mathcal{Y}_\tau) \to \textit{Ab}(\mathcal{X}_\tau)$
+は左随伴
+$f_! : \textit{Ab}(\mathcal{X}_\tau) \to \textit{Ab}(\mathcal{Y}_\tau)$.
+をもつ。(1) を示すには、『サイト上の加群』補題
+\ref{sites-modules-lemma-exactness-lower-shriek} を適用し、その補題の仮定が
+満たされることを確認するには上の補題 \ref{stacks-sheaves-lemma-fibre-products} および
+\ref{stacks-sheaves-lemma-fibre-products-morphism} を用いる。(2) はここから形式的に従う。
+『ホモロジー』補題 \ref{homology-lemma-adjoint-preserve-injectives} を見よ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-pullback-injective-modules}
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射
+$f : \mathcal{X} \to \mathcal{Y}$ を取り、
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。関手
+$f^* : \textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y}) \to
+\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$
+は左随伴
+$f_! : \textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$ をもち、
+台となるアーベル層上では補題 \ref{stacks-sheaves-lemma-pullback-injective} の関手
+$f_!$ と一致する。$f$ が忠実で $\mathcal{X}$ が等化子をもつならば、
+\begin{enumerate}
+\item $f_!$ は完全である。
+\item $\mathcal{I}$ が
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{X})$ において単射的ならば、
+$f^{-1}\mathcal{I}$ は
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$
+において単射的である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f$ はサイトの連続かつ余連続な関手であり、
+$f^{-1}\mathcal{O}_\mathcal{Y} = \mathcal{O}_\mathcal{X}$ であることを思い出そう。
+したがって『サイト上の加群』補題
+\ref{sites-modules-lemma-lower-shriek-modules} により、$f^*$ は左随伴
+$f_!^{Mod}$ をもつ。$x$ をスキーム $U$ 上にある $\mathcal{X}$ の対象とする。
+このとき $f$ は環付きサイトの同値
+$$
+\mathcal{X}/x \longrightarrow \mathcal{Y}/f(x)
+$$
+を誘導する。実際、両辺は $(\Sch/U)_\tau$ と同値である。補題
+\ref{stacks-sheaves-lemma-localizing-structure-sheaf} を見よ。
+『サイト上の加群』注意 \ref{sites-modules-remark-when-shriek-equal} により、
+$f_!$ はアーベル層上の関手と一致する。
+
+\medskip\noindent
+いま $\mathcal{X}$ が等化子をもち、$f$ が忠実であると仮定する。
+補題 \ref{stacks-sheaves-lemma-pullback-injective} により $f_!$ は完全である。最後に、
+『ホモロジー』補題 \ref{homology-lemma-adjoint-preserve-injectives} から、
+単射的加群の引き戻しに関する主張が従う。
+\end{proof}
+
+
+
+
+\section{{\v C}ech 複体}
+\label{stacks-sheaves-section-cech}
+
+\noindent
+代数スタック上の層のコホモロジーを計算するため、与えられた代数スタックの
+被覆へ制限した層のコホモロジーと比較する。
+
+\medskip\noindent
+この節を通じて、状況は次のとおりとする。グルーポイドをファイバーとする圏の
+$1$-射
+\begin{equation}
+\label{stacks-sheaves-equation-covering}
+\vcenter{
+\xymatrix{
+\mathcal{U} \ar[rr]_f \ar[rd]_q & &  \mathcal{X} \ar[ld]^p \\
+& (\Sch/S)_{fppf}
+}
+}
+\end{equation}
+$\mathcal{U}$ を $\mathcal{X}$ の「被覆」と考える。そこで、
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の圏における単体的対象
+$$
+\xymatrix{
+\mathcal{U} \times_\mathcal{X} \mathcal{U} \times_\mathcal{X} \mathcal{U}
+\ar@<1ex>[r]
+\ar@<0ex>[r]
+\ar@<-1ex>[r]
+&
+\mathcal{U} \times_\mathcal{X} \mathcal{U}
+\ar@<0.5ex>[r]
+\ar@<-0.5ex>[r]
+&
+\mathcal{U}
+}
+$$
+を考えたい。しかし、これは圏ではなく $(2, 1)$-圏なので、意味するところを
+明示する必要がある。すなわち、$\mathcal{U}_n$ を、対象が
+$(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)$
+である圏とする。ここで $\alpha_i : f(u_i) \to x$ は $\mathcal{X}$ における同型である。
+$(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)$ に対象 $x$ を対応させる
+$1$-射を $f_n : \mathcal{U}_n \to \mathcal{X}$ と表す。
+$\mathcal{U}_0 = \mathcal{U}$ かつ $f_0 = f$ であることに注意する。
+写像 $\varphi : [m] \to [n]$ が与えられたとき、$1$-射
+$\mathcal{U}_\varphi : \mathcal{U}_n \longrightarrow \mathcal{U}_n$
+であって、対象上で
+$$
+(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)
+\longmapsto
+(u_{\varphi(0)}, \ldots, u_{\varphi(m)}, x,
+\alpha_{\varphi(0)}, \ldots, \alpha_{\varphi(m)})
+$$
+により与えられるものを考える。これらの $1$-射はすべて厳密に正しく合成され
+（$2$-射は不要である）、これらの $1$-射はすべて $\mathcal{X}$ 上の $1$-射である。
+この単体的対象を $\mathcal{U}_\bullet$ と表す。
+$\mathcal{F}$ が $\mathcal{X}$ 上の集合の前層ならば、余単体的集合
+$$
+\xymatrix{
+\Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F})
+\ar@<0.5ex>[r]
+\ar@<-0.5ex>[r]
+&
+\Gamma(\mathcal{U}_1, f_1^{-1}\mathcal{F})
+\ar@<1ex>[r]
+\ar@<0ex>[r]
+\ar@<-1ex>[r]
+&
+\Gamma(\mathcal{U}_2, f_2^{-1}\mathcal{F})
+}
+$$
+を得る。ここで矢印は、単体的対象の所与の射に沿う引き戻し写像である。
+$\mathcal{F}$ がアーベル群の前層ならば、これは余単体的アーベル群である。
+
+\medskip\noindent
+上のとおりの $\mathcal{U} \to \mathcal{X}$ を取り、$\mathcal{F}$ を
+$\mathcal{X}$ 上のアーベル前層とする。この状況に随伴する
+{\it {\v C}ech 複体}を
+$\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{F})$.
+と表す。これは上の余単体的アーベル群に随伴するコチェイン複体である。
+『単体的対象』第 \ref{simplicial-section-dold-kan-cosimplicial}節を見よ。
+その項は
+$$
+\check{\mathcal{C}}^n(\mathcal{U} \to \mathcal{X}, \mathcal{F})
+= \Gamma(\mathcal{U}_n, f_n^{-1}\mathcal{F}).
+$$
+である。境界写像は
+$$
+d^n = \sum\nolimits_{i = 0}^{n + 1} (-1)^i \delta^{n + 1}_i :
+\Gamma(\mathcal{U}_n, f_n^{-1}\mathcal{F})
+\longrightarrow
+\Gamma(\mathcal{U}_{n + 1}, f_{n + 1}^{-1}\mathcal{F})
+$$
+である。ここで $\delta^{n + 1}_i$ は、添字 $i$ を省く写像
+$[n] \to [n + 1]$ に対応する。写像
+$\Gamma(\mathcal{X}, \mathcal{F}) \to
+\Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F}_0)$
+が微分 $d^0$ の核に属することに注意する。そこで、{\it 拡大 {\v C}ech 複体}を
+複体
+$$
+\ldots \to 0 \to
+\Gamma(\mathcal{X}, \mathcal{F}) \to
+\Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F}_0) \to
+\Gamma(\mathcal{U}_1, f_1^{-1}\mathcal{F}_1) \to \ldots
+$$
+と定義する。ここで $\Gamma(\mathcal{X}, \mathcal{F})$ は次数 $-1$ に置く。
+拡大 {\v C}ech 複体が非輪状であるための必要十分条件は、標準写像
+$$
+\Gamma(\mathcal{X}, \mathcal{F})[0]
+\longrightarrow
+\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{F})
+$$
+が複体の擬同型であることである。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-generalities}
+{\v C}ech 複体に関する一般的事項。
+\begin{enumerate}
+\item
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_g \ar[r]_h & \mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar[r]^e & \mathcal{X}
+}
+$$
+が $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の
+$2$-可換図式ならば、{\v C}ech 複体の射
+$$
+\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{F})
+\longrightarrow
+\check{\mathcal{C}}^\bullet(\mathcal{V} \to \mathcal{Y}, e^{-1}\mathcal{F})
+$$
+が存在する。
+\item $h$ と $e$ が同値ならば、(1) の写像は同型である。
+\item $f, f' : \mathcal{U} \to \mathcal{X}$ が $2$-同型ならば、
+随伴する {\v C}ech 複体は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の状況で、$t : f \circ h \to e \circ g$ を $2$-射とする。
+複体上の写像は次数 $n$ において、規則
+$$
+(v_0, \ldots, v_n, y, \beta_0, \ldots, \beta_n)
+\longmapsto
+(h(v_0), \ldots, h(v_n), e(y),
+e(\beta_0) \circ t_{v_0}, \ldots, e(\beta_n) \circ t_{v_n}).
+$$
+で与えられる $1$-射 $\mathcal{V}_n \to \mathcal{U}_n$ に沿う引き戻しで定まる。
+(2) については、圏の同値に沿って引き戻すとき、任意の集合の前層について
+大域切断上の引き戻しが同型であることに注意する。(3) は (1) と (2) を
+組み合わせれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-homotopy}
+$f \circ s$ が $\text{id}_\mathcal{X}$ と $2$-同型となる $1$-射
+$s : \mathcal{X} \to \mathcal{U}$ が存在するならば、拡大 {\v C}ech 複体は
+零とホモトピックである。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{U}' = \mathcal{U} \times_\mathcal{X} \mathcal{X}$ を、『圏』補題
+\ref{categories-lemma-2-product-categories-over-C} で記述されたファイバー積とし、
+$f' : \mathcal{U}' \to \mathcal{X}$ を第二射影とする。このとき
+$\mathcal{U} \to \mathcal{U}'$、$u \mapsto (u, f(x), 1)$ は
+$\mathcal{X}$ 上の同値なので、補題 \ref{stacks-sheaves-lemma-generalities} により
+$(\mathcal{U}, f)$ を $(\mathcal{U}', f')$ で置き換えてよい。
+この利点は、いまや $f'$ が $f' \circ s' = \text{id}_\mathcal{X}$ を
+厳密に満たす切断 $s'$ をもつことである。実際、
+$t : s \circ f \to \text{id}_\mathcal{X}$ が $2$-同型ならば、
+$s'(x) = (s(x), x, t_x)$ と置ける。したがって
+$f \circ s = \text{id}_\mathcal{X}$ と仮定してよい。
+
+\medskip\noindent
+$f \circ s = \text{id}_\mathcal{X}$ の場合、結果は一般原理から従う。
+ホモトピーを明示する。すなわち、$n \geq 0$ に対して
+$s_n : \mathcal{U}_n \to \mathcal{U}_{n + 1}$ を、対象上の規則
+$$
+(u_0, \ldots, u_n, x, \alpha_0, \ldots, \alpha_n)
+\longmapsto
+(u_0, \ldots, u_n, s(x), x,
+\alpha_0, \ldots, \alpha_n, \text{id}_x).
+$$
+で定まる $1$-射とする。また
+$$
+h^{n + 1} :
+\Gamma(\mathcal{U}_{n + 1}, f_{n + 1}^{-1}\mathcal{F})
+\longrightarrow
+\Gamma(\mathcal{U}_n, f_n^{-1}\mathcal{F})
+$$
+を $s_n$ に沿う引き戻しとして定義する。さらに $s_{-1} = s$ と置き、
+$h^0 : \Gamma(\mathcal{U}_0, f_0^{-1}\mathcal{F}) \to
+\Gamma(\mathcal{X}, \mathcal{F})$ を $s_{-1}$ に沿う引き戻しとする。
+このとき写像族 $\{h^n\}_{n \geq 0}$ は、拡大 {\v C}ech 複体上の
+$1$ と $0$ の間のホモトピーである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{相対 {\v C}ech 複体}
+\label{stacks-sheaves-section-sheaf-cech-complex}
+
+\noindent
+(\ref{stacks-sheaves-equation-covering}) におけるように、$f : \mathcal{U} \to \mathcal{X}$ を
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $1$-射とする。
+付随する単体的対象 $\mathcal{U}_\bullet$ と写像
+$f_n : \mathcal{U}_n \to \mathcal{X}$ を考える。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+最後に、$\mathcal{F}$ は $\mathcal{X}_\tau$ 上の（集合の）層であると仮定する。このとき
+$$
+\xymatrix{
+f_{0, *}f_0^{-1}\mathcal{F}
+\ar@<0.5ex>[r]
+\ar@<-0.5ex>[r]
+&
+f_{1, *}f_1^{-1}\mathcal{F}
+\ar@<1ex>[r]
+\ar@<0ex>[r]
+\ar@<-1ex>[r]
+&
+f_{2, *}f_2^{-1}\mathcal{F}
+}
+$$
+は $\mathcal{X}_\tau$ 上の余単体的層である。ここでは
+『サイト』第 \ref{sites-section-pullback} 節で導入した引き戻し写像を用いている。
+$\mathcal{F}$ がアーベル層ならば、$f_{n, *}f_n^{-1}\mathcal{F}$ は
+$\mathcal{X}_\tau$ 上の余単体的アーベル層をなす。
+付随する複体（『単体的方法』第
+\ref{simplicial-section-dold-kan-cosimplicial} 節参照）
+$$
+\ldots \to 0 \to
+f_{0, *}f_0^{-1}\mathcal{F} \to
+f_{1, *}f_1^{-1}\mathcal{F} \to
+f_{2, *}f_2^{-1}\mathcal{F} \to \ldots
+$$
+をこの状況に付随する {\it 相対 {\v C}ech 複体}という。
+この複体を $\mathcal{K}^\bullet(f, \mathcal{F})$ と表す。
+{\it 拡張相対 {\v C}ech 複体}とは複体
+$$
+\ldots \to 0 \to
+\mathcal{F} \to
+f_{0, *}f_0^{-1}\mathcal{F} \to
+f_{1, *}f_1^{-1}\mathcal{F} \to
+f_{2, *}f_2^{-1}\mathcal{F} \to \ldots
+$$
+であって、$\mathcal{F}$ が次数 $-1$ にあるものをいう。拡張相対 {\v C}ech 複体が
+非輪状であるための必要十分条件は、写像
+$\mathcal{F}[0] \to \mathcal{K}^\bullet(f, \mathcal{F})$
+が層の複体の擬同型であることである。
+
+\begin{remark}
+\label{stacks-sheaves-remark-cech-complex-presheaves}
+$\mathcal{F}$ が前層の場合にも複体 $\mathcal{K}^\bullet(f, \mathcal{F})$ を
+定義できる。ただし、引き戻し写像の定義には
+『サイト』第 \ref{sites-section-pullback} 節を参照することはできない。
+引き戻し写像を説明するため、可換図式
+$$
+\xymatrix{
+\mathcal{V} \ar[rd]_g \ar[rr]_h & &  \mathcal{U} \ar[ld]^f \\
+& \mathcal{X}
+}
+$$
+が $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏について与えられ、
+$\mathcal{G}$ が $\mathcal{U}$ 上の前層であるとする。このとき引き戻し写像
+$f_*\mathcal{G} \to g_*h^{-1}\mathcal{G}$ を合成
+$$
+f_*\mathcal{G} \longrightarrow
+f_*h_*h^{-1}\mathcal{G} = g_*h^{-1}\mathcal{G}
+$$
+として定義できる。ここで写像は随伴写像
+$\mathcal{G} \to h_*h^{-1}\mathcal{G}$ から得られる。この構成が成り立つのは、
+この状況では関手 $h_*$ と $h^{-1}$ が前層について随伴し（かつ層における
+それぞれの対応物と一致し）ているからである。
+第 \ref{stacks-sheaves-section-presheaves} 節および第 \ref{stacks-sheaves-section-sheaves} 節を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-generalities-sheafified}
+相対 {\v C}ech 複体に関する一般論。
+\begin{enumerate}
+\item
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_g \ar[r]_h & \mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar[r]^e & \mathcal{X}
+}
+$$
+が $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $2$-可換図式ならば、射
+$e^{-1}\mathcal{K}^\bullet(f, \mathcal{F}) \to
+\mathcal{K}^\bullet(g, e^{-1}\mathcal{F})$ が存在する。
+\item $h$ と $e$ が同値ならば、(1) の写像は同型である。
+\item $f, f' : \mathcal{U} \to \mathcal{X}$ が $2$-同型ならば、
+付随する相対 {\v C}ech 複体は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-generalities} の証明において、
+注意 \ref{stacks-sheaves-remark-cech-complex-presheaves} の引き戻し写像を用いれば、
+全く同じ証明となる。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-homotopy-sheafified}
+$f \circ s$ が $\text{id}_\mathcal{X}$ と $2$-同型となる $1$-射
+$s : \mathcal{X} \to \mathcal{U}$ が存在するならば、
+拡張相対 {\v C}ech 複体は零にホモトピックである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-homotopy} の証明と全く同じである。
+\end{proof}
+
+\begin{remark}
+\label{stacks-sheaves-remark-cech-complex-sections}
+$\mathcal{X}$ の対象 $x$ における相対 {\v C}ech 複体の値を「計算」しよう。
+$p(x) = U$ とする。$2$-ファイバー積図式
+（これは記号 $g : \mathcal{V} \to \mathcal{Y}$ を導入するものでもある）
+$$
+\xymatrix{
+\mathcal{V} \ar@{=}[r] \ar[d]_g &
+(\Sch/U)_{fppf} \times_{x, \mathcal{X}} \mathcal{U} \ar[r] \ar[d] &
+\mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar@{=}[r] &
+(\Sch/U)_{fppf} \ar[r]^-x & \mathcal{X}
+}
+$$
+を考える。補題 \ref{stacks-sheaves-lemma-generalities} の証明における射
+$\mathcal{V}_n \to \mathcal{U}_n$ は同値
+$\mathcal{V}_n =
+(\Sch/U)_{fppf} \times_{x, \mathcal{X}} \mathcal{U}_n$
+を誘導することに注意せよ。したがって
+(\ref{stacks-sheaves-equation-pushforward}) から
+$$
+\Gamma(x, \mathcal{K}^\bullet(f, \mathcal{F})) =
+\check{\mathcal{C}}^\bullet(\mathcal{V} \to \mathcal{Y}, x^{-1}\mathcal{F})
+$$
+を得る。言い換えれば、$\mathcal{X}$ の対象 $x$ における相対 {\v C}ech 複体の値は、
+$f$ を $\mathcal{X}/x \cong (\Sch/U)_{fppf}$ へ基底変換して得られる
+{\v C}ech 複体である。このことから、例えば補題 \ref{stacks-sheaves-lemma-homotopy} は
+補題 \ref{stacks-sheaves-lemma-homotopy-sheafified} を含意し、より一般に（通常の）
+{\v C}ech 複体についての結果は相対 {\v C}ech 複体についての結果を含意する。
+\end{remark}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-base-change-cech-complex}
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_g \ar[r]_h & \mathcal{U} \ar[d]^f \\
+\mathcal{Y} \ar[r]^e & \mathcal{X}
+}
+$$
+を $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の $2$-ファイバー積とし、
+$\mathcal{F}$ を $\mathcal{X}$ 上のアーベル前層とする。このとき、
+補題 \ref{stacks-sheaves-lemma-generalities-sheafified} の写像
+$e^{-1}\mathcal{K}^\bullet(f, \mathcal{F}) \to
+\mathcal{K}^\bullet(g, e^{-1}\mathcal{F})$ はアーベル前層の複体の同型である。
+\end{lemma}
+
+\begin{proof}
+$y$ をスキーム $T$ 上にある $\mathcal{Y}$ の対象とし、$x = e(y)$ とおく。
+この写像が $y$ 上の切断に同型を誘導することを示す。まず
+$$
+\Gamma(y, e^{-1}\mathcal{K}^\bullet(f, \mathcal{F})) \!=\!
+\Gamma(x, \mathcal{K}^\bullet(f, \mathcal{F})) \!=\!
+\check{\mathcal{C}}^\bullet(
+(\Sch/T)_{fppf} \times_{x, \mathcal{X}} \mathcal{U} \to
+(\Sch/T)_{fppf}, x^{-1}\mathcal{F})
+$$
+であることが注意 \ref{stacks-sheaves-remark-cech-complex-sections} から分かる。一方、
+$$
+\Gamma(y, \mathcal{K}^\bullet(g, e^{-1}\mathcal{F})) =
+\check{\mathcal{C}}^\bullet(
+(\Sch/T)_{fppf} \times_{y, \mathcal{Y}} \mathcal{V} \to
+(\Sch/T)_{fppf}, y^{-1}e^{-1}\mathcal{F})
+$$
+も注意 \ref{stacks-sheaves-remark-cech-complex-sections} から従う。
+$y^{-1}e^{-1}\mathcal{F} = x^{-1}\mathcal{F}$ であり、また図式は
+$2$-カルテシアンだから、$1$-射
+$$
+(\Sch/T)_{fppf} \times_{y, \mathcal{Y}} \mathcal{V} \to
+(\Sch/T)_{fppf} \times_{x, \mathcal{X}} \mathcal{U}
+$$
+は同値である。したがって補題 \ref{stacks-sheaves-lemma-generalities} により、
+$y$ 上の切断における写像は同型である。
+\end{proof}
+
+\noindent
+完全性は「被覆」上で検査できる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-check-exactness-covering}
+$f : \mathcal{U} \to \mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射とする。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。
+$$
+\mathcal{F} \to \mathcal{G} \to \mathcal{H}
+$$
+を $\textit{Ab}(\mathcal{X}_\tau)$ における複体とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{X}$ の任意の対象 $x$ に対し、$\mathcal{X}_\tau$ における被覆
+$\{x_i \to x\}$ であって、各 $x_i$ が $\mathcal{U}$ のある対象 $u_i$ に対する
+$f(u_i)$ と同型となるものが存在する。
+\item $f^{-1}\mathcal{F} \to f^{-1}\mathcal{G} \to f^{-1}\mathcal{H}$ は完全である。
+\end{enumerate}
+このとき列 $\mathcal{F} \to \mathcal{G} \to \mathcal{H}$ は完全である。
+\end{lemma}
+
+\begin{proof}
+$x$ をスキーム $T$ 上にある $\mathcal{X}$ の対象とする。$(\Sch/T)_\tau$ 上の
+アーベル層の列
+$x^{-1}\mathcal{F} \to x^{-1}\mathcal{G} \to x^{-1}\mathcal{H}$
+を考える。この列が完全であることを示せば十分である。仮定により、
+$\tau$-被覆 $\{T_i \to T\}$ であって、$x|_{T_i}$ が $T_i$ 上の
+$\mathcal{U}$ のある対象 $u_i$ に対する $f(u_i)$ と同型となり、さらに
+$(\Sch/T_i)_\tau$ 上のアーベル層の列
+$u_i^{-1}f^{-1}\mathcal{F} \to u_i^{-1}f^{-1}\mathcal{G} \to
+u_i^{-1}f^{-1}\mathcal{H}$ は完全である。さらに
+$u_i^{-1}f^{-1}\mathcal{F} = x^{-1}\mathcal{F}|_{(\Sch/T_i)_\tau}$
+であるから、列
+$x^{-1}\mathcal{F} \to x^{-1}\mathcal{G} \to x^{-1}\mathcal{H}$
+は被覆の各要素に局所化した後に完全となる。ゆえにこの列は完全である。
+\end{proof}
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-exactness-cech-complex}
+$f : \mathcal{U} \to \mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射とする。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は $\mathcal{X}_\tau$ 上のアーベル層である。
+\item $\mathcal{X}$ の任意の対象 $x$ に対し、$\mathcal{X}_\tau$ における被覆
+$\{x_i \to x\}$ であって、各 $x_i$ が $\mathcal{U}$ のある対象 $u_i$ に対する
+$f(u_i)$ と同型となるものが存在する。
+\end{enumerate}
+このとき拡張相対 {\v C}ech 複体
+$$
+\ldots \to 0 \to
+\mathcal{F} \to
+f_{0, *}f_0^{-1}\mathcal{F} \to
+f_{1, *}f_1^{-1}\mathcal{F} \to
+f_{2, *}f_2^{-1}\mathcal{F} \to \ldots
+$$
+は $\textit{Ab}(\mathcal{X}_\tau)$ において完全である。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-check-exactness-covering} により、$\mathcal{U}$ へ引き戻した後に
+完全性を検査すれば十分である。補題 \ref{stacks-sheaves-lemma-base-change-cech-complex} により、
+拡張相対 {\v C}ech 複体の引き戻しは、射
+$\mathcal{U} \times_\mathcal{X} \mathcal{U} \to \mathcal{U}$
+と $\mathcal{U}_\tau$ 上のアーベル層に対する拡張相対 {\v C}ech 複体と同型である。
+切断 $\Delta_{\mathcal{U}/\mathcal{X}} : \mathcal{U} \to
+\mathcal{U} \times_\mathcal{X} \mathcal{U}$ が存在するので、完全性は
+補題 \ref{stacks-sheaves-lemma-homotopy-sheafified} から従う。
+\end{proof}
+
+\noindent
+これを用いると、{\v C}ech 複体からコホモロジーへのスペクトル系列を次のように
+構成できる。まず技術的で精密な形を与える。次節では代数スタックのみに適用する
+形を与える。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-cech-to-cohomology}
+$f : \mathcal{U} \to \mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射とする。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は $\mathcal{X}_\tau$ 上のアーベル層である。
+\item $\mathcal{X}$ の任意の対象 $x$ に対し、$\mathcal{X}_\tau$ における被覆
+$\{x_i \to x\}$ であって、各 $x_i$ が $\mathcal{U}$ のある対象 $u_i$ に対する
+$f(u_i)$ と同型となるものが存在する。
+\item 圏 $\mathcal{U}$ は等化子をもつ。
+\item 関手 $f$ は忠実である。
+\end{enumerate}
+このときアーベル群の第一象限スペクトル系列
+$$
+E_1^{p, q} = H^q((\mathcal{U}_p)_\tau, f_p^{-1}\mathcal{F})
+\Rightarrow
+H^{p + q}(\mathcal{X}_\tau, \mathcal{F})
+$$
+が存在し、$\tau$-位相における $\mathcal{F}$ のコホモロジーへ収束する。
+\end{lemma}
+
+\begin{proof}
+証明を始める前にいくつか注意しておく。補題
+\ref{stacks-sheaves-lemma-fibre-products-preserve-properties} と帰納法により、
+グルーポイドをファイバーとする圏 $\mathcal{U}_p$ はすべて等化子をもち、射
+$f_p : \mathcal{U}_p \to \mathcal{X}$ はすべて忠実である。
+$\mathcal{I}$ を $\textit{Ab}(\mathcal{X}_\tau)$ の単射的対象とする。
+補題 \ref{stacks-sheaves-lemma-pullback-injective} により、$f_p^{-1}\mathcal{I}$ は
+$\textit{Ab}((\mathcal{U}_p)_\tau)$ の単射的対象である。
+したがって補題 \ref{stacks-sheaves-lemma-pushforward-injective} により、
+$f_{p, *}f_p^{-1}\mathcal{I}$ は $\textit{Ab}(\mathcal{X}_\tau)$ の単射的対象である。
+ゆえに命題 \ref{stacks-sheaves-proposition-exactness-cech-complex} から、拡張相対 {\v C}ech 複体
+$$
+\ldots \to 0 \to
+\mathcal{I} \to
+f_{0, *}f_0^{-1}\mathcal{I} \to
+f_{1, *}f_1^{-1}\mathcal{I} \to
+f_{2, *}f_2^{-1}\mathcal{I} \to \ldots
+$$
+は $\textit{Ab}(\mathcal{X}_\tau)$ における完全複体で、その各項は単射的である。
+この複体の大域切断を取っても完全であり、{\v C}ech 複体
+$\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{I})$
+は $\Gamma(\mathcal{X}_\tau, \mathcal{I})[0]$ と擬同型であることが分かる。
+
+\medskip\noindent
+以上の準備のもとで、二重複体（『ホモロジー』第
+\ref{homology-section-double-complex} 節参照）
+$$
+\check{\mathcal{C}}^\bullet(\mathcal{U} \to \mathcal{X}, \mathcal{I}^\bullet)
+$$
+に付随する二つのスペクトル系列を考える。ここで
+$\mathcal{F} \to \mathcal{I}^\bullet$ は
+$\textit{Ab}(\mathcal{X}_\tau)$ における単射分解である。
+上の議論から『ホモロジー』の補題
+\ref{homology-lemma-double-complex-gives-resolution} が適用でき、
+$\Gamma(\mathcal{X}_\tau, \mathcal{I}^\bullet)$ は二重複体に付随する
+全複体と擬同型である。上の注意により、複体
+$f_p^{-1}\mathcal{I}^\bullet$ は $f_p^{-1}\mathcal{F}$ の単射分解である。
+したがって、もう一方のスペクトル系列は補題に記したものとなる。
+\end{proof}
+
+\noindent
+もちろん、加群に対する形もある。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-cech-to-cohomology-modules}
+$f : \mathcal{U} \to \mathcal{X}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射とする。
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ とする。次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の対象である。
+\item $\mathcal{X}$ の任意の対象 $x$ に対し、$\mathcal{X}_\tau$ における被覆
+$\{x_i \to x\}$ であって、各 $x_i$ が $\mathcal{U}$ のある対象 $u_i$ に対する
+$f(u_i)$ と同型となるものが存在する。
+\item 圏 $\mathcal{U}$ は等化子をもつ。
+\item 関手 $f$ は忠実である。
+\end{enumerate}
+このとき $\Gamma(\mathcal{O}_\mathcal{X})$-加群の第一象限スペクトル系列
+$$
+E_1^{p, q} = H^q((\mathcal{U}_p)_\tau, f_p^*\mathcal{F})
+\Rightarrow
+H^{p + q}(\mathcal{X}_\tau, \mathcal{F})
+$$
+が存在し、$\tau$-位相における $\mathcal{F}$ のコホモロジーへ収束する。
+\end{lemma}
+
+\begin{proof}
+この補題の証明は補題 \ref{stacks-sheaves-lemma-cech-to-cohomology} の証明と同一である。
+ただし、$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ における
+単射分解を用い、補題 \ref{stacks-sheaves-lemma-pullback-injective-modules} を
+補題 \ref{stacks-sheaves-lemma-pullback-injective} の代わりに用いる。
+\end{proof}
+
+\noindent
+次の補題は、より通常の種類の被覆を、上で扱った種類の被覆へと移すものである。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}
+$f : \mathcal{X} \to \mathcal{Y}$ を $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射とする。
+\begin{enumerate}
+\item $f$ は代数空間によって表現可能、全射、平坦、かつ局所有限表示であると
+仮定する。このとき $\mathcal{Y}$ の任意の対象 $y$ に対し、fppf 被覆
+$\{y_i \to y\}$ と $\mathcal{X}$ の対象 $x_i$ であって、$\mathcal{Y}$ において
+$f(x_i) \cong y_i$ となるものが存在する。
+\item $f$ は代数空間によって表現可能、全射、かつ滑らかであると仮定する。
+このとき $\mathcal{Y}$ の任意の対象 $y$ に対し、\'etale 被覆
+$\{y_i \to y\}$ と $\mathcal{X}$ の対象 $x_i$ であって、$\mathcal{Y}$ において
+$f(x_i) \cong y_i$ となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$y$ はスキーム $V$ 上にあるとする。
+$y$ を射 $(\Sch/V)_{fppf} \to \mathcal{Y}$ とみなしてよい。定義により、
+$2$-ファイバー積
+$\mathcal{X} \times_\mathcal{Y} (\Sch/V)_{fppf}$
+は代数空間 $W$ によって表現可能であり、射 $W \to V$ は全射、平坦、かつ
+局所有限表示である。スキーム $U$ と全射 \'etale 射 $U \to W$ を選ぶ。
+このとき $U \to V$ も全射、平坦、かつ局所有限表示である
+（『空間の射』の補題
+\ref{spaces-morphisms-lemma-etale-flat},
+\ref{spaces-morphisms-lemma-etale-locally-finite-presentation},
+\ref{spaces-morphisms-lemma-composition-surjective},
+\ref{spaces-morphisms-lemma-composition-finite-presentation}, および
+\ref{spaces-morphisms-lemma-composition-flat} 参照）。
+したがって $\{U \to V\}$ は fppf 被覆である。$1$-射
+$(\Sch/U)_{fppf} \to \mathcal{X}$ に対応する $U$ 上の
+$\mathcal{X}$ の対象を $x$ と表す。このとき $\{f(x) \to y\}$ は
+求める $\mathcal{Y}$ の fppf 被覆である。
+
+\medskip\noindent
+(2) の証明。$y$ はスキーム $V$ 上にあるとする。
+$y$ を射 $(\Sch/V)_{fppf} \to \mathcal{Y}$ とみなしてよい。定義により、
+$2$-ファイバー積
+$\mathcal{X} \times_\mathcal{Y} (\Sch/V)_{fppf}$
+は代数空間 $W$ によって表現可能であり、射 $W \to V$ は全射かつ滑らかである。
+スキーム $U$ と全射 \'etale 射 $U \to W$ を選ぶ。このとき $U \to V$ も
+全射かつ滑らかである（『空間の射』の補題
+\ref{spaces-morphisms-lemma-etale-smooth},
+\ref{spaces-morphisms-lemma-composition-surjective}, および
+\ref{spaces-morphisms-lemma-composition-smooth}).
+参照）。したがって $\{U \to V\}$ は滑らかな被覆である。
+『射についてさらに』の補題 \ref{more-morphisms-lemma-etale-dominates-smooth}
+により、各 $V_i \to V$ が $U$ を経由する \'etale 被覆
+$\{V_i \to V\}$ が存在する。$1$-射
+$$
+(\Sch/V_i)_{fppf} \to (\Sch/U)_{fppf} \to \mathcal{X}.
+$$
+に対応する $V_i$ 上の $\mathcal{X}$ の対象を $x_i$ と表す。このとき
+$\{f(x_i) \to y\}$ は求める $\mathcal{Y}$ の \'etale 被覆である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-cech-to-cohomology-relative}
+$f : \mathcal{U} \to \mathcal{X}$ と $g : \mathcal{X} \to \mathcal{Y}$ を、
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の合成可能な
+$1$-射とする。
+$\tau \in \{Zar, \etale, smooth, syntomic, \linebreak[0] fppf\}$ とする。
+次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は $\mathcal{X}_\tau$ 上のアーベル層である。
+\item $\mathcal{X}$ の任意の対象 $x$ に対し、$\mathcal{X}_\tau$ における被覆
+$\{x_i \to x\}$ であって、各 $x_i$ が $\mathcal{U}$ のある対象 $u_i$ に対する
+$f(u_i)$ と同型となるものが存在する。
+\item 圏 $\mathcal{U}$ は等化子をもつ。
+\item 関手 $f$ は忠実である。
+\end{enumerate}
+このとき $\mathcal{Y}_\tau$ 上のアーベル層の第一象限スペクトル系列
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が存在する。ここですべての高次順像は $\tau$-位相において計算される。
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{U} \to \mathcal{X}$ と $\mathcal{F}$ に関する仮定は、
+補題 \ref{stacks-sheaves-lemma-cech-to-cohomology} の仮定と同一であることに注意せよ。
+したがって、その補題の証明で述べた準備的注意はここでも成り立つ。
+とりわけ、これらの注意から
+$$
+0 \to g_*\mathcal{I} \to
+(g \circ f_0)_*f_0^{-1}\mathcal{I} \to
+(g \circ f_1)_*f_1^{-1}\mathcal{I} \to \ldots
+$$
+$\mathcal{I}$ が $\textit{Ab}(\mathcal{X}_\tau)$ の単射的対象ならば、
+この列は完全である。そこで、項
+$$
+\mathcal{C}^{p, q} = (g \circ f_p)_*\mathcal{I}^q
+$$
+をもつ二重複体 $\mathcal{C}^{\bullet, \bullet}$ に付随する
+『ホモロジー』第 \ref{homology-section-double-complex} 節の二つの
+スペクトル系列を考える。ここで $\mathcal{F} \to \mathcal{I}^\bullet$ は
+$\textit{Ab}(\mathcal{X}_\tau)$ における単射分解である。第一のスペクトル系列と
+『ホモロジー』の補題 \ref{homology-lemma-double-complex-gives-resolution} から、
+$g_*\mathcal{I}^\bullet$ は $\mathcal{C}^{\bullet, \bullet}$ に付随する全複体と
+擬同型である。$f_p^{-1}\mathcal{I}^\bullet$ は $f_p^{-1}\mathcal{F}$ の
+単射分解なので（補題 \ref{stacks-sheaves-lemma-pullback-injective} 参照）、第二の
+スペクトル系列の項は、補題の主張どおり
+$E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-cech-to-cohomology-relative-modules}
+$f : \mathcal{U} \to \mathcal{X}$ と $g : \mathcal{X} \to \mathcal{Y}$ を、
+$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏の合成可能な
+$1$-射とする。
+$\tau \in \{Zar, \etale, smooth, syntomic, \linebreak[0] fppf\}$ とする。
+次を仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ は
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の対象である。
+\item $\mathcal{X}$ の任意の対象 $x$ に対し、$\mathcal{X}_\tau$ における被覆
+$\{x_i \to x\}$ であって、各 $x_i$ が $\mathcal{U}$ のある対象 $u_i$ に対する
+$f(u_i)$ と同型となるものが存在する。
+\item 圏 $\mathcal{U}$ は等化子をもつ。
+\item 関手 $f$ は忠実である。
+\end{enumerate}
+このとき $\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$ における
+第一象限スペクトル系列
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が存在する。ここですべての高次順像は $\tau$-位相において計算される。
+\end{lemma}
+
+\begin{proof}
+証明は補題 \ref{stacks-sheaves-lemma-cech-to-cohomology-relative} の証明と同一である。
+ただし、$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ における
+単射分解を用い、補題 \ref{stacks-sheaves-lemma-pullback-injective-modules} を
+補題 \ref{stacks-sheaves-lemma-pullback-injective} の代わりに用いる。
+\end{proof}
+
+
+
+
+
+
+\section{代数スタック上のコホモロジー}
+\label{stacks-sheaves-section-cohomology}
+
+\noindent
+$\mathcal{X}$ を $S$ 上の代数スタックとする。上の各節で、$\mathcal{X}$ 上の
+\'etale, ..., fppf 位相に対する層の定義を見た。実際、各
+$\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ に対してサイト
+$\mathcal{X}_\tau$ を構成した。これらのサイト上のアーベル層
+$\mathcal{F}$ という概念がある。サイトのコホモロジーの章では、
+コホモロジーの定義を説明した。これらを合わせ、{\it 導来大域切断}
+または {\it 全コホモロジー}
+$$
+R\Gamma_{Zar}(\mathcal{X}, \mathcal{F}),
+R\Gamma_\etale(\mathcal{X}, \mathcal{F}), \ldots,
+R\Gamma_{fppf}(\mathcal{X}, \mathcal{F})
+$$
+を $\Gamma(\mathcal{X}_\tau, \mathcal{I}^\bullet)$ と定義する。ここで
+$\mathcal{F} \to \mathcal{I}^\bullet$ は
+$\textit{Ab}(\mathcal{X}_\tau)$ における単射分解である。
+$\mathcal{F}$ の第 $i$ コホモロジー群とは、全コホモロジーの第 $i$
+コホモロジーであり、これを
+$$
+H^i_{Zar}(\mathcal{X}, \mathcal{F}),
+H^i_\etale(\mathcal{X}, \mathcal{F}), \ldots,
+H^i_{fppf}(\mathcal{X}, \mathcal{F}).
+$$
+と表す。『射についてさらに』の補題
+\ref{more-morphisms-lemma-etale-dominates-smooth} により、後に
+$H^i_\etale = H^i_{smooth}$ であることが分かる。
+
+\medskip\noindent
+$\mathcal{F}$ が $\mathcal{O}_\mathcal{X}$-加群の前層であって
+$\tau$-位相における層ならば、その全コホモロジー、resp.\ コホモロジー群の
+計算には $\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ における
+単射分解を用いる。非常に一般的な『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cohomology-modules-abelian-agree} により、最終的な結果は、
+$\mathcal{F}$ をアーベル群の層とみなしたときのコホモロジーと
+擬同型、resp.\ 同型である。
+
+\medskip\noindent
+ここまで、コホモロジー群を計算するための唯一の道具は、上で証明した
+{\v C}ech 複体についての結果である。ここでは、それを \'etale 位相と fppf 位相に
+ついて代数スタックの言葉で言い換える。
+$f : \mathcal{U} \to \mathcal{X}$ を代数スタックの $1$-射とする。
+$$
+f_p : \mathcal{U}_p =
+\mathcal{U} \times_\mathcal{X} \ldots \times_\mathcal{X} \mathcal{U}
+\longrightarrow
+\mathcal{X}
+$$
+は $(p + 1)$ 個の因子をもつ構造射であることを思い出そう。また、
+$\mathcal{X}$ 上の層は fppf 位相に対する層である。$\mathcal{U}$ が代数空間ならば、
+$f : \mathcal{U} \to \mathcal{X}$ は代数空間によって表現可能であることにも
+注意せよ（『代数スタック』の補題
+\ref{algebraic-lemma-representable-diagonal} 参照）。したがって次の命題は、
+特にスキームによる代数スタック $\mathcal{X}$ の滑らかな被覆に適用できる。
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-smooth-covering-compute-cohomology}
+\begin{slogan}
+スタックのコホモロジーは表示の Cech 神経上で計算できる
+\end{slogan}
+$f : \mathcal{U} \to \mathcal{X}$ を代数スタックの $1$-射とする。
+\begin{enumerate}
+\item $\mathcal{F}$ を $\mathcal{X}$ 上のアーベル \'etale 層とする。
+$f$ は代数空間によって表現可能、全射、かつ滑らかであると仮定する。
+このときスペクトル系列
+$$
+E_1^{p, q} = H^q_\etale(\mathcal{U}_p, f_p^{-1}\mathcal{F})
+\Rightarrow
+H^{p + q}_\etale(\mathcal{X}, \mathcal{F})
+$$
+が存在する。
+\item $\mathcal{F}$ を $\mathcal{X}$ 上のアーベル層とする。
+$f$ は代数空間によって表現可能、全射、平坦、かつ局所有限表示であると仮定する。
+このときスペクトル系列
+$$
+E_1^{p, q} = H^q_{fppf}(\mathcal{U}_p, f_p^{-1}\mathcal{F})
+\Rightarrow
+H^{p + q}_{fppf}(\mathcal{X}, \mathcal{F})
+$$
+が存在する。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+これを示すため、補題 \ref{stacks-sheaves-lemma-cech-to-cohomology} の仮定 (1) -- (4) を
+検査する。『代数スタック』の補題
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces} により、
+$1$-射 $f$ は忠実である。これで (4) が従う。
+$\mathcal{U}$ が代数スタックであることから (3) が従う
+（補題 \ref{stacks-sheaves-lemma-fibre-products} 参照）。(2) は補題
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} を適用すればよい。
+条件 (1) は仮定そのものである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{高次順像と代数スタック}
+\label{stacks-sheaves-section-higher-direct-images}
+
+\noindent
+$g : \mathcal{X} \to \mathcal{Y}$ を $S$ 上の代数スタックの $1$-射とする。
+上の各節で、各 $\tau \in \{Zar, \etale, smooth, syntomic, fppf\}$ に対して
+環付きトポスの射 $g : \Sh(\mathcal{X}_\tau) \to \Sh(\mathcal{Y}_\tau)$ を
+構成した。サイトのコホモロジーの章では、高次順像の定義を説明した。
+したがって {\it 全順像} $Rg_*\mathcal{F}$ を $g_*\mathcal{I}^\bullet$ と
+定義する。ここで $\mathcal{F} \to \mathcal{I}^\bullet$ は
+$\textit{Ab}(\mathcal{X}_\tau)$ における単射分解である。第 $i$ 高次順像
+$R^ig_*\mathcal{F}$ は全順像の第 $i$ コホモロジーである。
+重要：ここでは、どの位相 $\tau$ を用いるかが問題となる。
+
+\medskip\noindent
+$\mathcal{F}$ が $\mathcal{O}_\mathcal{X}$-加群の前層であって
+$\tau$-位相における層ならば、全順像と高次順像の計算には
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ における
+単射分解を用いる。
+
+\medskip\noindent
+ここまで、$g_*$ の高次順像を計算するための唯一の道具は、上で証明した
+{\v C}ech 複体についての結果である。そのためには「被覆」
+$f : \mathcal{U} \to \mathcal{X}$ を選ぶ必要がある。$\mathcal{U}$ が代数空間ならば、
+$f : \mathcal{U} \to \mathcal{X}$ は代数空間によって表現可能である
+（『代数スタック』の補題 \ref{algebraic-lemma-representable-diagonal} 参照）。
+したがって次の命題は、特にスキームによる代数スタック $\mathcal{X}$ の
+滑らかな被覆に適用できる。
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-smooth-covering-compute-direct-image}
+$f : \mathcal{U} \to \mathcal{X}$ と $g : \mathcal{X} \to \mathcal{Y}$ を
+代数スタックの合成可能な $1$-射とする。
+\begin{enumerate}
+\item $f$ は代数空間によって表現可能、全射、かつ滑らかであると仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ が $\textit{Ab}(\mathcal{X}_\etale)$ の対象ならば、
+スペクトル系列
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が $\textit{Ab}(\mathcal{Y}_\etale)$ において存在する。ここで高次順像は
+\'etale 位相において計算される。
+\item $\mathcal{F}$ が
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象ならば、
+スペクトル系列
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が $\textit{Mod}(\mathcal{Y}_\etale, \mathcal{O}_\mathcal{Y})$ において存在する。
+\end{enumerate}
+\item $f$ は代数空間によって表現可能、全射、平坦、かつ局所有限表示であると仮定する。
+\begin{enumerate}
+\item $\mathcal{F}$ が $\textit{Ab}(\mathcal{X})$ の対象ならば、スペクトル系列
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が $\textit{Ab}(\mathcal{Y})$ において存在する。ここで高次順像は fppf 位相において
+計算される。
+\item $\mathcal{F}$ が $\textit{Mod}(\mathcal{O}_\mathcal{X})$ の対象ならば、
+スペクトル系列
+$$
+E_1^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が $\textit{Mod}(\mathcal{O}_\mathcal{Y})$ において存在する。
+\end{enumerate}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+これを示すため、補題 \ref{stacks-sheaves-lemma-cech-to-cohomology-relative} と補題
+\ref{stacks-sheaves-lemma-cech-to-cohomology-relative-modules} の仮定 (1) -- (4) を検査する。
+『代数スタック』の補題
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces} により、
+$1$-射 $f$ は忠実である。これで (4) が従う。
+$\mathcal{U}$ が代数スタックであることから (3) が従う
+（補題 \ref{stacks-sheaves-lemma-fibre-products} 参照）。(2) は補題
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} を適用すればよい。
+四つの場合のいずれでも、条件 (1) は仮定そのものである。
+\end{proof}
+
+\noindent
+代数スタックの射に対する高次順像を次に記述する。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-pushforward-restriction}
+$S$ をスキームとし、$f : \mathcal{X} \to \mathcal{Y}$ を $S$ 上の代数スタックの
+$1$-射\footnote{この結果は $(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする
+圏の任意の $1$-射について成り立つはずである。}とする。
+$\tau \in \{Zariski,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$ とする。
+$\mathcal{F}$ を $\textit{Ab}(\mathcal{X}_\tau)$ または
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の対象とする。
+このとき層 $R^if_*\mathcal{F}$ は前層
+$$
+y \longmapsto
+H^i_\tau\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+$$
+に付随する層である。ここで $y$ はスキーム $V$ 上にある $\mathcal{Y}$ の対象である。
+\end{lemma}
+
+\begin{proof}
+単射分解 $\mathcal{F}[0] \to \mathcal{I}^\bullet$ を選ぶ。順像の公式
+(\ref{stacks-sheaves-equation-pushforward}) により、$R^if_*\mathcal{F}$ は、$y$ に複体
+$$
+\begin{matrix}
+\Gamma\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{I}^{i - 1}\Big) \\
+\downarrow \\
+\Gamma\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{I}^i\Big) \\
+\downarrow \\
+\Gamma\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{I}^{i + 1}\Big)
+\end{matrix}
+$$
+のコホモロジーを対応させる前層に付随する層である。
+$\text{pr}^{-1}$ は完全なので、$\text{pr}^{-1}$ が単射的対象を保つことを
+示せば十分である。これは補題 \ref{stacks-sheaves-lemma-pullback-injective} と
+\ref{stacks-sheaves-lemma-pullback-injective-modules}、および $\text{pr}$ が代数スタックの
+表現可能な射であることから従う。実際、『代数スタック』の補題
+\ref{algebraic-lemma-characterize-representable-by-algebraic-spaces} により
+$\text{pr}$ は忠実であり、また
+$(\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X}$
+は補題 \ref{stacks-sheaves-lemma-fibre-products} により等化子をもつ。
+\end{proof}
+
+\noindent
+次は自明な基底変換の結果である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-base-change-higher-direct-images}
+$S$ をスキームとする。
+$\tau \in \{Zariski,\linebreak[0] \etale,\linebreak[0]
+smooth,\linebreak[0] syntomic,\linebreak[0] fppf\}$ とする。図式
+$$
+\xymatrix{
+\mathcal{Y}' \times_\mathcal{Y} \mathcal{X} \ar[r]_{g'} \ar[d]_{f'} &
+\mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r]^g & \mathcal{Y}
+}
+$$
+を $S$ 上の代数スタックの $2$-カルテシアン図式とする。このとき基底変換写像
+$$
+g^{-1}Rf_*\mathcal{F} \longrightarrow Rf'_*(g')^{-1}\mathcal{F}
+$$
+は同型であり、$\textit{Ab}(\mathcal{X}_\tau)$ の対象 $\mathcal{F}$、または
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の対象
+$\mathcal{F}$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+同型 $g^{-1}f_*\mathcal{F} = f'_*(g')^{-1}\mathcal{F}$ は補題
+\ref{stacks-sheaves-lemma-base-change} である（これは任意の前層について成り立つ）。
+射 $g$ と $g'$ は平坦なので、全順像に対しては基底変換写像が存在する
+（『サイト上のコホモロジー』第
+\ref{sites-cohomology-section-base-change-map} 節参照）。この写像が擬同型であることは、
+スキーム $V$ 上の $\mathcal{Y}'$ の対象 $y'$ に対して同値
+$$
+(\Sch/V)_{fppf} \times_{g(y'), \mathcal{Y}} \mathcal{X}
+=
+(\Sch/V)_{fppf} \times_{y', \mathcal{Y}'}
+(\mathcal{Y}' \times_\mathcal{Y} \mathcal{X})
+$$
+が存在することを用いて示せる。補題 \ref{stacks-sheaves-lemma-pushforward-restriction} により、
+誘導写像 $g^{-1}R^if_*\mathcal{F} \to R^if'_*(g')^{-1}\mathcal{F}$ は同型である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{比較}
+\label{stacks-sheaves-section-compare}
+
+\noindent
+本節では、スタックを用いて定義したコホモロジーと代数空間を用いて定義した
+コホモロジーを比較するいくつかの結果をまとめる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-injectives}
+$S$ をスキームとし、$\mathcal{X}$ を代数空間 $F$ によって表現可能な
+$S$ 上の代数スタックとする。
+\begin{enumerate}
+\item $\mathcal{I}$ が $\textit{Ab}(\mathcal{X}_\etale)$ において単射的ならば、
+$\mathcal{I}|_{F_\etale}$ は $\textit{Ab}(F_\etale)$ において単射的である。
+\item $\mathcal{I}^\bullet$ が $\textit{Ab}(\mathcal{X}_\etale)$ における
+K-単射的複体ならば、$\mathcal{I}^\bullet|_{F_\etale}$ は
+$\textit{Ab}(F_\etale)$ における K-単射的複体である。
+\end{enumerate}
+加群については同じことは成り立たない。
+\end{lemma}
+
+\begin{proof}
+これは、制限関手 $\pi_{F, *} = i_F^{-1}$（補題 \ref{stacks-sheaves-lemma-compare} 参照）が
+完全関手 $\pi_F^{-1}$ の右随伴であることから形式的に従う。
+『ホモロジー』の補題 \ref{homology-lemma-adjoint-preserve-injectives} および
+『導来圏』の補題 \ref{derived-lemma-adjoint-preserve-K-injectives} を参照せよ。
+加群について補題が成り立たないことについては、『エタール・コホモロジー』の補題
+\ref{etale-cohomology-lemma-compare-injectives} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-morphism-cohomology}
+$S$ をスキームとし、$f : \mathcal{X} \to \mathcal{Y}$ を $S$ 上の
+代数スタックの射とする。$\mathcal{X}$ と $\mathcal{Y}$ はそれぞれ代数空間
+$F$ と $G$ によって表現可能であると仮定する。誘導される代数空間の射を
+$f : F \to G$ と表す。
+\begin{enumerate}
+\item 任意の $\mathcal{F} \in \textit{Ab}(\mathcal{X}_\etale)$ に対して
+$$
+(Rf_*\mathcal{F})|_{G_\etale} =
+Rf_{small, *}(\mathcal{F}|_{F_\etale})
+$$
+が $D(G_\etale)$ において成り立つ。
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の
+任意の対象 $\mathcal{F}$ に対して
+$$
+(Rf_*\mathcal{F})|_{G_\etale} =
+Rf_{small, *}(\mathcal{F}|_{F_\etale})
+$$
+が $D(\mathcal{O}_G)$ において成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は $\mathcal{F}$ の単射分解を選び、補題 \ref{stacks-sheaves-lemma-compare-injectives} と
+(\ref{stacks-sheaves-equation-compare-big-small}) を用いれば直ちに従う。
+
+\medskip\noindent
+(2) は次のように証明できる。補題 \ref{stacks-sheaves-lemma-compare-morphism} で、環付きサイトの射として
+$\pi_G \circ f = f_{small} \circ \pi_F$ であることを見た。したがって、
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-derived-pushforward-composition} により
+$R\pi_{G, *} \circ Rf_* = Rf_{small, *} \circ R\pi_{F, *}$
+を得る。制限関手 $\pi_{F, *}$ と $\pi_{G, *}$ は完全なので、結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-representable-morphism-cohomology}
+$S$ をスキームとし、$S$ 上の代数スタックの $2$-ファイバー積の正方形
+$$
+\xymatrix{
+\mathcal{X}' \ar[r]_{g'} \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{Y}' \ar[r]^g & \mathcal{Y}
+}
+$$
+を考える。$f$ は代数空間によって表現可能で、$\mathcal{Y}'$ は代数空間
+$G'$ によって表現可能であると仮定する。このとき $\mathcal{X}'$ は代数空間
+$F'$ によって表現可能であり、誘導される代数空間の射を
+$f' : F' \to G'$ と表すと
+$$
+g^{-1}(Rf_*\mathcal{F})|_{G'_\etale} =
+Rf'_{small, *}((g')^{-1}\mathcal{F}|_{F'_\etale})
+$$
+が $\textit{Ab}(\mathcal{X}_\etale)$ または
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の任意の
+$\mathcal{F}$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{stacks-sheaves-lemma-base-change-higher-direct-images} と
+\ref{stacks-sheaves-lemma-compare-morphism-cohomology} を組み合わせれば形式的に従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{位相の変更}
+\label{stacks-sheaves-section-change-topology}
+
+\noindent
+次の技術的補題は、平坦射上にある $\mathcal{X}$ の射について比較写像が同型ならば、
+局所準連接層の fppf コホモロジーがその \'etale コホモロジーに等しいことを示す。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-lqc-flat-base-change-fppf-sheaf}
+$S$ をスキーム、$\mathcal{X}$ を $S$ 上の代数スタックとする。
+$\mathcal{F}$ を $\mathcal{O}_\mathcal{X}$-加群の前層とし、次を仮定する。
+\begin{enumerate}
+\item[(a)] $\mathcal{F}$ は局所準連接である。
+\item[(b)] 平坦かつ局所有限表示なスキームの射 $f : U \to V$ 上にある
+$\mathcal{X}$ の任意の射 $\varphi : x \to y$ に対して、
+(\ref{stacks-sheaves-equation-comparison-modules}) の比較写像
+$c_\varphi : f_{small}^*\mathcal{F}|_{V_\etale} \to
+\mathcal{F}|_{U_\etale}$ は同型である。
+\end{enumerate}
+このとき $\mathcal{F}$ は fppf 位相に対する層である。
+\end{lemma}
+
+\begin{proof}
+$\{x_i \to x\}$ を、$S$ 上のスキームの fppf 被覆
+$\{f_i : U_i \to U\}$ 上にある $\mathcal{X}$ の fppf 被覆とする。
+仮定により、制限 $\mathcal{G} = \mathcal{F}|_{U_\etale}$ は準連接であり、
+比較写像
+$f_{i, small}^*\mathcal{G} \to \mathcal{F}|_{U_{i, \etale}}$
+は同型である。したがって、$\mathcal{F}$ と被覆 $\{x_i \to x\}$ に対する
+層条件は、$(\Sch/U)_{fppf}$ 上の $\mathcal{G}^a$ と被覆
+$\{U_i \to U\}$ に対する層条件と同値である。後者は『降下』の補題
+\ref{descent-lemma-sheaf-condition-holds} により成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-compare-fppf-etale}
+$S$ をスキーム、$\mathcal{X}$ を $S$ 上の代数スタックとする。
+$\mathcal{F}$ を次を満たす前層 $\mathcal{O}_\mathcal{X}$-加群とする。
+\begin{enumerate}
+\item[(a)] $\mathcal{F}$ は局所準連接である。
+\item[(b)] 平坦かつ局所有限表示なスキームの射 $f : U \to V$ 上にある
+$\mathcal{X}$ の任意の射 $\varphi : x \to y$ に対して、
+(\ref{stacks-sheaves-equation-comparison-modules}) の比較写像
+$c_\varphi : f_{small}^*\mathcal{F}|_{V_\etale} \to
+\mathcal{F}|_{U_\etale}$ は同型である。
+\end{enumerate}
+このとき $\mathcal{F}$ は $\mathcal{O}_\mathcal{X}$-加群であり、次が成り立つ。
+\begin{enumerate}
+\item $\epsilon : \mathcal{X}_{fppf} \to \mathcal{X}_\etale$ が比較射ならば、
+$R\epsilon_*\mathcal{F} = \epsilon_*\mathcal{F}$ である。
+\item コホモロジー群 $H^p_{fppf}(\mathcal{X}, \mathcal{F})$ は、
+$\mathcal{X}$ 上の \'etale 位相で計算したコホモロジー群に等しい。
+コホモロジー群 $H^p_{fppf}(x, \mathcal{F})$ および導来版
+$R\Gamma(\mathcal{X}, \mathcal{F})$ と $R\Gamma(x, \mathcal{F})$ についても同様である。
+\item $f : \mathcal{X} \to \mathcal{Y}$ が $(\Sch/S)_{fppf}$ 上のグルーポイドを
+ファイバーとする圏の $1$-射ならば、$R^if_*\mathcal{F}$ は \'etale
+コホモロジーで計算した高次順像の fppf 層化に等しい。導来引き戻しについても同様である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ が $\mathcal{O}_\mathcal{X}$-加群であるという主張は、補題
+\ref{stacks-sheaves-lemma-lqc-flat-base-change-fppf-sheaf} から従う。
+$\epsilon$ は $\mathcal{X}$ 上の恒等関手によって与えられるサイトの射である。
+したがって層 $R^p\epsilon_*\mathcal{F}$ は前層
+$x \mapsto H^p_{fppf}(x, \mathcal{F})$ に付随する層である
+（『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-higher-direct-images} 参照）。(1) を証明するには、
+$x$ がアフィンスキーム $U$ 上にあるとき、$p > 0$ に対して
+$H^p_{fppf}(x, \mathcal{F}) = 0$ であることを示せば十分である。
+補題 \ref{stacks-sheaves-lemma-cohomology-restriction} により
+$H^p_{fppf}(x, \mathcal{F}) = H^p((\Sch/U)_{fppf}, x^{-1}\mathcal{F})$.
+である。『降下』の補題
+\ref{descent-lemma-quasi-coherent-and-flat-base-change} と
+『スキームのコホモロジー』の補題
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero} を組み合わせると、
+これらのコホモロジー群は零であることが分かる。
+
+\medskip\noindent
+上で見たように、$\epsilon_*\mathcal{F}$ と $\mathcal{F}$ はそれぞれ
+$\mathcal{X}_\etale$ と $\mathcal{X}_{fppf}$ 上の層であって、
+$\mathcal{X}$ 上の同じ前層に対応する（より一般に、これは $\mathcal{X}$ 上の
+fppf 位相における任意の層について成り立つ）。しばしば記号を濫用して
+$\mathcal{F}$ と $\epsilon_*\mathcal{F}$ を同一視する。補題の (2) と (3) は
+この意味で理解すべきである。したがって (2) は (1) と Leray スペクトル系列から
+形式的に従う。『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-apply-Leray} を参照せよ。
+
+\medskip\noindent
+最後に (3) を証明する。層 $R^if_*\mathcal{F}$
+（resp.\ $Rf_{\etale, *}\mathcal{F}$）は前層
+$$
+y \longmapsto
+H^i_\tau\Big((\Sch/V)_{fppf} \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+$$
+に付随する層である。ここで $\tau$ は $fppf$（resp.\ $\etale$）である
+（補題 \ref{stacks-sheaves-lemma-pushforward-restriction} 参照）。補題
+\ref{stacks-sheaves-lemma-pullback-lqc} と補題 \ref{stacks-sheaves-lemma-comparison} により、
+$\text{pr}^{-1}\mathcal{F}$ も性質 (a), (b) を満たすことに注意せよ。
+したがって (2) により、この二つの前層は等しい。これで直ちに (3) が従う。
+\end{proof}
+
+\noindent
+代数スタック上の層の \'etale コホモロジーと lisse-\'etale トポス上の
+コホモロジーを比較するために、次の補題を用いる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-cohomology-on-subcategory}
+$S$ をスキーム、$\mathcal{X}$ を $S$ 上の代数スタックとする。
+$\tau = \etale$（resp.\ $\tau = fppf$）とする。$\mathcal{X}' \subset \mathcal{X}$
+を次の性質をもつ充満部分圏とする。
+\begin{enumerate}
+\item $x \to x'$ がスキームの滑らかな（resp.\ 平坦かつ局所有限表示な）射上にある
+$\mathcal{X}$ の射で、$x' \in \Ob(\mathcal{X}')$ ならば、
+$x \in \Ob(\mathcal{X}')$ である。
+\item スキーム $U$ 上にある対象 $x \in \Ob(\mathcal{X}')$ であって、
+付随する $1$-射 $x : (\Sch/U)_{fppf} \to \mathcal{X}$ が滑らかかつ全射となるものが
+存在する。
+\end{enumerate}
+$\mathcal{X}'$ における射の族 $\{x_i \to x\}$ が $\mathcal{X}_\tau$ における被覆ならば
+$\mathcal{X}'$ の被覆であると宣言することにより、サイト $\mathcal{X}'_\tau$ を得る。
+このとき包含関手 $\mathcal{X}' \to \mathcal{X}_\tau$ は完全忠実、余連続、かつ連続であり、
+したがってトポスの射
+$$
+g : \Sh(\mathcal{X}'_\tau) \longrightarrow \Sh(\mathcal{X}_\tau)
+$$
+を定める。また、すべての $p \geq 0$ とすべての
+$\mathcal{F} \in \textit{Ab}(\mathcal{X}_\tau)$ に対して
+$H^p(\mathcal{X}'_\tau, g^{-1}\mathcal{F}) =
+H^p(\mathcal{X}_\tau, \mathcal{F})$ である。
+\end{lemma}
+
+\begin{proof}
+仮定 (1) から、$\{x_i \to x\}$ が $\mathcal{X}_\tau$ の被覆で
+$x \in \Ob(\mathcal{X}')$ ならば $x_i \in \Ob(\mathcal{X}')$ であることに注意せよ。
+したがって、$\mathcal{X}'_\tau$ の対象の被覆は、それを $\mathcal{X}_\tau$ の対象と
+みなしたときの被覆と一致するので、$\mathcal{X}' \to \mathcal{X}$ は連続かつ余連続である。
+これにより射 $g$ を得て、関手 $g^{-1}$ は制限関手と同一視される。
+『サイト』の補題 \ref{sites-lemma-when-shriek} を参照せよ。
+
+\medskip\noindent
+特に、$\{x_i \to x\}$ が $\mathcal{X}'_\tau$ における被覆ならば、
+$\mathcal{X}$ 上の任意のアーベル層 $\mathcal{F}$ に対して
+$$
+\check H^p(\{x_i \to x\}, g^{-1}\mathcal{F}) =
+\check H^p(\{x_i \to x\}, \mathcal{F})
+$$
+である。したがって、$\mathcal{I}$ が $\mathcal{X}_\tau$ 上の単射的アーベル層ならば、
+高次 {\v C}ech コホモロジー群は零である
+（『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-injective-trivial-cech}）。ゆえに
+$\mathcal{X}'$ のすべての対象 $x$ に対して $H^p(x, g^{-1}\mathcal{I}) = 0$ である
+（『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cech-vanish-collection}）。言い換えれば、
+$\mathcal{X}_\tau$ 上の単射的アーベル層は関手 $H^0(x, g^{-1}-)$ に関して右非輪状である。
+したがって、すべての $\mathcal{F} \in \textit{Ab}(\mathcal{X})$ とすべての
+$x \in \Ob(\mathcal{X}')$ に対して
+$H^p(x, g^{-1}\mathcal{F}) = H^p(x, \mathcal{F})$ である。
+
+\medskip\noindent
+仮定 (2) にあるような、スキーム $U$ 上にある対象 $x \in \mathcal{X}'$ を選ぶ。
+特に $\mathcal{X}/x \to \mathcal{X}$ は、代数空間によって表現可能、全射、かつ
+滑らかな代数スタックの射である（$\mathcal{X}/x$ は
+$(\Sch/U)_{fppf}$ と同値であることに注意せよ。補題 \ref{stacks-sheaves-lemma-localizing} 参照）。
+$\Sh(\mathcal{X}_\tau)$ における層の写像
+$$
+h_x \longrightarrow *
+$$
+は全射である。実際、$\mathcal{X}$ の任意の対象 $x'$ に対し、射
+$x'_i \to x$ が存在するような $\tau$-被覆 $\{x'_i \to x'\}$ が存在する。
+補題 \ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} を参照せよ。
+$g$ は完全なので、$\Sh(\mathcal{X}'_\tau)$ における層の写像
+$$
+g^{-1}h_x \longrightarrow * = g^{-1}*
+$$
+も全射である。$h_{x, n}$ を $(n + 1)$ 重積 $h_x \times \ldots \times h_x$ とする。
+このときスペクトル系列
+\begin{equation}
+\label{stacks-sheaves-equation-spectral-sequence-one}
+E_1^{p, q} = H^q(h_{x, p}, \mathcal{F}) \Rightarrow
+H^{p + q}(\mathcal{X}_\tau, \mathcal{F})
+\end{equation}
+および
+\begin{equation}
+\label{stacks-sheaves-equation-spectral-sequence-two}
+E_1^{p, q} = H^q(g^{-1}h_{x, p}, g^{-1}\mathcal{F}) \Rightarrow
+H^{p + q}(\mathcal{X}'_\tau, g^{-1}\mathcal{F})
+\end{equation}
+を得る。『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cech-to-cohomology-sheaf-sets} を参照せよ。
+
+\medskip\noindent
+場合 I：$\mathcal{X}$ が終対象 $x$ をもち、これが $\mathcal{X}'$ の対象でもある場合。
+この場合は上の第2段落の議論から直ちに従う。
+
+\medskip\noindent
+場合 II：$\mathcal{X}$ が代数空間 $F$ によって表現可能な場合。
+この場合、層 $h_{x, n}$ は $\mathcal{X}$ の対象 $x_n$ によって表現可能である。
+（すなわち、$\mathcal{S}_F = \mathcal{X}$ で $x : U \to F$ が与えられた対象ならば、
+$h_{x, n}$ は $\mathcal{S}_F$ の対象
+$U \times_F \ldots \times_F U \to F$ によって表現可能である。）したがって
+$H^q(h_{x, p}, \mathcal{F}) = H^q(x_p, \mathcal{F})$ である。
+射 $x_n \to x$ はスキームの滑らかな射上にあるので、すべての $n$ に対して
+$x_n \in \mathcal{X}'$ である。ゆえに
+$H^q(g^{-1}h_{x, p}, g^{-1}\mathcal{F}) = H^q(x_p, g^{-1}\mathcal{F})$ である。
+したがって、上の二つのスペクトル系列
+(\ref{stacks-sheaves-equation-spectral-sequence-one}) および
+(\ref{stacks-sheaves-equation-spectral-sequence-two}) において、第2段落の議論により
+$E_1^{p, q}$ 項は一致する。場合 II でも補題が従う。
+
+\medskip\noindent
+場合 III：$\mathcal{X}$ が代数スタックである場合。この場合、上の場合 II により
+コホモロジー群 $H^q(h_{x, p}, \mathcal{F})$ と
+$H^q(g^{-1}h_{x, n}, g^{-1}\mathcal{F})$ は一致すると主張する。
+これを証明すれば、先と同様に結果が従う。
+
+\medskip\noindent
+具体的には圏 $\mathcal{X}/h_{x, n}$ を考える。
+『サイト』の補題 \ref{sites-lemma-localize-topos-site} を参照せよ。
+$h_{x, n}$ は $h_x$ の $(n + 1)$ 重積なので、この圏の対象は
+$(n + 2)$-組 $(y, s_0, \ldots, s_n)$ である。ここで $y$ は
+$\mathcal{X}$ の対象、各 $s_i : y \to x$ は $\mathcal{X}$ の射である。
+これは $(\Sch/S)_{fppf}$ 上の圏である。$(\Sch/S)_{fppf}$ 上の同値
+$$
+\mathcal{X}/h_{x, n}
+\longrightarrow
+(\Sch/U)_{fppf} \times_\mathcal{X} \ldots \times_\mathcal{X} (\Sch/U)_{fppf}
+=: \mathcal{U}_n
+$$
+が存在する。具体的には、$x : (\Sch/U)_{fppf} \to \mathcal{X}$ が
+$x$ に付随する $1$-射をも表し、$p : \mathcal{X} \to (\Sch/S)_{fppf}$ が
+構造関手を表すならば、$(y, s_0, \ldots, s_n)$ を
+$(y, f_0, \ldots, f_n, \alpha_0, \ldots, \alpha_n)$
+とみなせる。ここで $y$ は $\mathcal{X}$ の対象、$f_i : p(y) \to p(x)$ は
+スキームの射、$\alpha_i : y \to x(f_i)$ は同型である。
+$2n+3$-組
+$(y, f_0, \ldots, f_n, \alpha_0, \ldots, \alpha_n)$
+からなる圏は、上に表示した代数スタックの $(n + 1)$ 重ファイバー積
+$\mathcal{U}_n$ の一つの実現である。これは第 \ref{stacks-sheaves-section-cech} 節で論じた。
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cohomology-on-sheaf-sets} により
+$$
+H^p(\mathcal{U}_n, \mathcal{F}|_{\mathcal{U}_n}) =
+H^p(\mathcal{X}/h_{x, n}, \mathcal{F}|_{\mathcal{X}/h_{x, n}}) =
+H^p(h_{x, n}, \mathcal{F}).
+$$
+最後に、これの「プライム付き」の類似物を論じる。すなわち、
+$\mathcal{X}'/h_{x, n}$ は上の同値を通じて、組
+$(y, f_0, \ldots, f_n, \alpha_0, \ldots, \alpha_n)$
+で $y \in \mathcal{X}'$ となるものからなる充満部分圏
+$\mathcal{U}'_n \subset \mathcal{U}_n$ に対応する。したがって補題の主張の性質 (1) は、
+包含 $\mathcal{U}'_n \subset \mathcal{U}_n$ に対して確かに成り立つ。
+性質 (2) を示すため、スキーム $W$ 上にある対象
+$\xi = (y, s_0, \ldots, s_n)$ であって、$(\Sch/W)_{fppf} \to \mathcal{U}_n$ が
+滑らかかつ全射となるものを選ぶ（$\mathcal{U}_n$ は代数スタックなので可能である）。
+このとき
+$(\Sch/W)_{fppf} \to \mathcal{U}_n \to (\Sch/U)_{fppf}$
+は射 $x : (\Sch/U)_{fppf} \to \mathcal{X}$ の基底変換の合成として滑らかである。
+『代数スタック』の補題
+\ref{algebraic-lemma-base-change-representable-transformations-property} および
+\ref{algebraic-lemma-composition-representable-transformations-property}.
+を参照せよ。したがって $\mathcal{X}$ に対する公理 (1) から、$y$ は
+$\mathcal{X}'$ の対象であり、ゆえに $\xi$ は $\mathcal{U}'_n$ の対象である。
+再び
+$$
+H^p(\mathcal{U}'_n, \mathcal{F}|_{\mathcal{U}'_n}) =
+H^p(\mathcal{X}'/h_{x, n}, \mathcal{F}|_{\mathcal{X}'/h_{x, n}}) =
+H^p(g^{-1}h_{x, n}, g^{-1}\mathcal{F}).
+$$
+を用いると、$\mathcal{U}'_n \subset \mathcal{U}_n$ に場合 II を適用して
+結論を得ることができる。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{アフィンへの制限}
+\label{stacks-sheaves-section-alternative}
+
+\noindent
+本節では、$(\Sch/S)_{fppf}$ 上のグルーポイドをファイバーとする圏
+$\mathcal{X}$ が与えられたとき、アフィンスキーム $U$ 上にある対象 $x$ からなる
+$\mathcal{X}$ の充満部分圏 $\mathcal{X}_{affine}$ を考える。Zariski 位相より細かい
+任意の位相 $\tau$ に対して、$\mathcal{X}$ 上の層の圏と
+$\mathcal{X}_{affine, \tau}$ 上の層の圏が一致することを見る。
+
+\begin{definition}
+\label{stacks-sheaves-definition-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+{\it 付随するアフィンサイト}とは、$\mathcal{X}$ の充満部分圏
+$\mathcal{X}_{affine}$ であって、その対象が、スキーム $U$ 上にある
+$x \in \Ob(\mathcal{X})$ で $U$ がアフィンであるものをいう。$\mathcal{X}_{affine}$ 上の位相は
+カオス位相、すなわち $\mathcal{X}_{affine}$ 上の層が前層と同じになる位相とする。
+\end{definition}
+
+\noindent
+したがって関手 $p : \mathcal{X} \to (\Sch/S)_{fppf}$ は関手
+$$
+p : \mathcal{X}_{affine} \longrightarrow (\textit{Aff}/S)_{fppf}
+$$
+へ制限される。右辺の記号は『位相』の定義
+\ref{topologies-definition-big-small-fppf} で導入したものである。
+$\mathcal{X}_{affine}$ が $(\textit{Aff}/S)_{fppf}$ 上でグルーポイドを
+ファイバーとすることは明らかである。したがって $\mathcal{X}_{affine}$ は
+$(\textit{Aff}/S)_{Zar}$, $(\textit{Aff}/S)_\etale$,
+$(\textit{Aff}/S)_{smooth}$, $(\textit{Aff}/S)_{syntomic}$, および
+$(\textit{Aff}/S)_{fppf}$ から Zariski, \'etale, smooth, syntomic, fppf 位相を
+継承する。『スタック』の定義 \ref{stacks-definition-topology-inherited} を参照せよ。
+
+\begin{definition}
+\label{stacks-sheaves-definition-alternative-inherited-topologies}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+\begin{enumerate}
+\item {\it 付随するアフィン Zariski サイト} $\mathcal{X}_{affine, Zar}$ とは、
+$(\textit{Aff}/S)_{Zar}$ から継承した $\mathcal{X}_{affine}$ 上のサイト構造である。
+\item {\it 付随するアフィン \'etale サイト} $\mathcal{X}_{affine, \etale}$ とは、
+$(\textit{Aff}/S)_\etale$ から継承した $\mathcal{X}_{affine}$ 上のサイト構造である。
+\item {\it 付随するアフィン smooth サイト} $\mathcal{X}_{affine, smooth}$ とは、
+$(\textit{Aff}/S)_{smooth}$ から継承した $\mathcal{X}_{affine}$ 上のサイト構造である。
+\item {\it 付随するアフィン syntomic サイト} $\mathcal{X}_{affine, syntomic}$ とは、
+$(\textit{Aff}/S)_{syntomic}$ から継承した $\mathcal{X}_{affine}$ 上のサイト構造である。
+\item {\it 付随するアフィン fppf サイト} $\mathcal{X}_{affine, fppf}$ とは、
+$(\textit{Aff}/S)_{fppf}$ から継承した $\mathcal{X}_{affine}$ 上のサイト構造である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+上の議論により、この定義は意味をもつ。各\newline
+\makebox[\linewidth][c]{$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$}\newline
+に対して、
+$\mathcal{X}_{affine}$ における固定した終域をもつ射の族\newline
+$\{x_i \to x\}_{i \in I}$\newline
+が $\mathcal{X}_{affine, \tau}$ における被覆であるための必要十分条件は、
+アフィンスキームの射の族\newline
+$\{p(x_i) \to p(x)\}_{i \in I}$\newline
+が『位相』の定義
+\ref{topologies-definition-standard-Zariski},
+\ref{topologies-definition-standard-etale},
+\ref{topologies-definition-standard-smooth},
+\ref{topologies-definition-standard-syntomic}, および
+\ref{topologies-definition-standard-fppf} で定義される標準 $\tau$-被覆であることである。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とし、
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。関手
+$\mathcal{X}_{affine, \tau} \to \mathcal{X}_\tau$ は特殊余連続関手である。
+したがって、$\Sh(\mathcal{X}_{affine, \tau})$ から
+$\Sh(\mathcal{X}_\tau)$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：証明は『位相』の補題
+\ref{topologies-lemma-affine-big-site-Zariski},
+\ref{topologies-lemma-affine-big-site-etale},
+\ref{topologies-lemma-affine-big-site-smooth},
+\ref{topologies-lemma-affine-big-site-syntomic}, および
+\ref{topologies-lemma-affine-big-site-fppf} の証明と全く同じである。
+\end{proof}
+
+\noindent
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+$\mathcal{O}$ を $\mathcal{O}_\mathcal{X}$ の $\mathcal{X}_{affine}$ への制限と表す。
+このとき $\mathcal{O}$ は $\mathcal{X}_{affine}$ 上の Zariski, \'etale, smooth,
+syntomic, fppf 位相における層である。さらに、補題 \ref{stacks-sheaves-lemma-alternative} の
+トポスの同値は、$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ に対する
+環付きトポスの同値
+\begin{equation}
+\label{stacks-sheaves-equation-alternative-ringed}
+(\Sh(\mathcal{X}_{affine, \tau}), \mathcal{O})
+\longrightarrow
+(\Sh(\mathcal{X}_\tau), \mathcal{O}_\mathcal{X})
+\end{equation}
+へ拡張される。
+
+
+
+
+
+
+
+
+
+\section{準連接加群とアフィン}
+\label{stacks-sheaves-section-alternative-quasi-coherent}
+
+\noindent
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+第 \ref{stacks-sheaves-section-alternative} 節で、これに環付きサイト
+$(\mathcal{X}_{affine}, \mathcal{O})$ を付随させた。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-quasi-coherent-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とし、
+$\mathcal{F}$ を $\mathcal{X}_{affine}$ 上の $\mathcal{O}$-加群とする。
+次は同値である。
+\begin{enumerate}
+\item $\mathcal{X}_{affine}$ の任意の射 $x \to x'$ に対して、写像
+$\mathcal{F}(x') \otimes_{\mathcal{O}(x')} \mathcal{O}(x) \to \mathcal{F}(x)$
+は同型である。
+\item $\mathcal{F}$ は『サイト上の加群』の定義
+\ref{sites-modules-definition-site-local} の意味で
+$(\mathcal{X}_{affine}, \mathcal{O})$ 上の準連接加群である。
+\item $\mathcal{F}$ は $\mathcal{X}_{affine}$ 上の Zariski 位相に対する層であり、
+『サイト上の加群』の定義 \ref{sites-modules-definition-site-local} の意味で
+$(\mathcal{X}_{affine, Zar}, \mathcal{O})$ 上の準連接加群である。
+\item \'etale 位相について (3) と同じである。
+\item smooth 位相について (3) と同じである。
+\item syntomic 位相について (3) と同じである。
+\item fppf 位相について (3) と同じである。
+\item 同値 (\ref{stacks-sheaves-equation-alternative-ringed}) を通じて、$\mathcal{F}$ は
+$\mathcal{X}$ 上の準連接加群に対応する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) の意味を明確にするため、$\mathcal{X}_{affine}$ は圏
+$\mathcal{X}_{affine}$ にカオス位相を入れて得られるサイトであることを思い出そう
+（定義 \ref{stacks-sheaves-definition-alternative}）。したがって $\mathcal{O}$-加群の層
+$\mathcal{F}$ は $\mathcal{O}$-加群の前層と同じものである。
+『サイト上の加群』の補題 \ref{sites-modules-lemma-chaotic-quasi-coherent} により、
+条件 (1) と (2) は同値である。
+$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ に対して、前層
+$\mathcal{F}$ が $\tau$-層であるための必要十分条件は、すべての
+$x \in \Ob(\mathcal{X}_{affine})$ に対し、その $\mathcal{X}_{affine}/x$ への制限が
+$\tau$-層であることである。$U = p(x)$ とおく。第 \ref{stacks-sheaves-section-restriction} 節の
+議論と同様に、$\mathcal{X}_{affine}$ の対象 $x$ はサイトの同値
+$\mathcal{X}_{affine, \etale}/x \to (\textit{Aff}/U)_\etale$ を誘導する。
+このようにして、(1) と (3) -- (7) の同値は、これら各サイトに『降下』の補題
+\ref{descent-lemma-quasi-coherent-alternative} を適用すれば従う。
+(8) と (7) の同値は、「準連接である」ことが加群の層の内在的性質であることから
+直ちに従う。『サイト上の加群』第 \ref{sites-modules-section-intrinsic} 節を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-locally-quasi-coherent-alternative}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とし、
+$\mathcal{F}$ を $\mathcal{X}_{affine}$ 上の $\mathcal{O}$-加群とする。
+次は同値である。
+\begin{enumerate}
+\item $p(x) \to p(x')$ が（アフィンスキームの）\'etale 射となる
+$\mathcal{X}_{affine}$ の任意の射 $x \to x'$ に対して、写像
+$\mathcal{F}(x') \otimes_{\mathcal{O}(x')} \mathcal{O}(x) \to \mathcal{F}(x)$
+は同型である。
+\item $\mathcal{F}$ は $\mathcal{X}_{affine}$ 上の \'etale 位相に対する層であり、
+$\mathcal{X}_{affine}$ のすべての対象 $x$ に対して、$U = p(x)$ とおけば制限
+$x^*\mathcal{F}|_{U_{affine, \etale}}$ は準連接である。
+\item \'etale 位相に対する同値 (\ref{stacks-sheaves-equation-alternative-ringed}) を通じて、
+$\mathcal{F}$ は $\mathcal{X}$ 上の局所準連接加群に対応する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+条件 (2) の意味を明確にするため、$U_{affine, \etale}$ はアフィン対象からなる
+$U_\etale$ の充満部分圏であることを思い出そう。
+『位相』の定義 \ref{topologies-definition-big-small-etale} を参照せよ。
+第 \ref{stacks-sheaves-section-restriction} 節の議論と同様に、$\mathcal{X}_{affine}$ の対象 $x$ は
+サイトの同値 $\mathcal{X}_{affine, \etale}/x \to (\textit{Aff}/U)_\etale$ を誘導する。
+このとき $x^*\mathcal{F}$ は、制限
+$\mathcal{F}|_{\mathcal{X}_{affine, \etale}/x}$ に対応する
+$(\textit{Aff}/U)_\etale$ 上の加群の層である。最後に、連続かつ余連続な包含関手
+$U_{affine, \etale} \to (\textit{Aff}/U)_\etale$ を用いてさらに制限し、
+$x^*\mathcal{F}|_{U_{affine, \etale}}$ を得る。
+
+\medskip\noindent
+(1) と (2) の同値は、上の注意と、アフィンスキーム $U$ 上にある
+$\mathcal{X}$ のすべての対象 $x$ について $\mathcal{F}$ の
+$U_{affine, \etale}$ への制限に適用した『降下』の補題
+\ref{descent-lemma-quasi-coherent-alternative-small} から従う。
+(2) と (3) の同値は、定義と、$U_{affine, \etale}$ 上の準連接加群と
+$U_\etale$ 上の準連接加群が対応することから直ちに従う（例えば、再び
+『降下』の補題 \ref{descent-lemma-quasi-coherent-alternative-small} による）。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{導来圏における準連接対象}
+\label{stacks-sheaves-section-QC}
+
+\noindent
+代数幾何学者は数十年にわたり、$\Sch/S$ 上の表現可能でない（集合または
+グルーポイドに値をもつ）関手 $X$ の不変量を考察してきた。例えば、
+スタックという概念が発明される前に、Mumford は楕円曲線のモジュライ関手
+$X$ に対する Picard グルーポイド $\Pic(X)$ を、$X$ への写像（すなわち
+楕円曲線の族）を備えたすべてのスキーム $U$ の圏上の $2$-極限
+$Pic(U)$ として定義した \cite{mumford_picard}。同様に Beilinson--Drinfeld は、
+ind-スキーム $X = \colim X_i$ に対する圏 $\QCoh(X)$ を $2$-極限
+$\lim \QCoh(X_i)$ として定義した \cite{BVGD}。
+この方針は $\QCoh(-)$ のような $1$-圏的な不変量を定義するには十分だが、
+三角圏の $2$-極限は振る舞いが悪いため、（準連接導来圏のような）
+導来圏的な不変量には不十分である。高次圏の技術と導来代数幾何の登場により、
+この問題は端正に解決できる。すなわち、関手 $X$ の準連接導来
+$\infty$-圏 $\mathcal{D}_{qc}(X)$ を、$U$ が X 上のすべての導来アフィンを
+走るときの極限 $\lim \mathcal{D}_{qc}(U)$ として定義できる
+（\cite{lurie-thesis} 参照）。
+
+\medskip\noindent
+本節の目的は、上のような（集合またはグルーポイドに値をもつ）関手 $X$ に
+三角圏 $\mathit{QC}(X)$ を付随させることである。実際、この構成は、分裂したものに
+限らず、グルーポイドをファイバーとする任意の圏
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ に対して成り立つ。よい場合には、圏
+$\mathit{QC}(\mathcal{X})$ が $\mathcal{D}_{qc}(\mathcal{X})$ のホモトピー圏と
+一致することを示せるが、この比較を説明することは本文書の範囲外である。
+構成の主要な特徴は次のとおりである。
+\begin{enumerate}
+\item[(a)] 構成により、$\mathit{QC}(\mathcal{X})$ は
+$D(\mathcal{X}_{affine}, \mathcal{O})$ の充満部分圏である。
+\item[(b)] $\mathcal{X}$ が代数空間 $X$ によって表現可能ならば、
+$\mathit{QC}(\mathcal{X})$ は $D_\QCoh(\mathcal{O}_X)$ と一致する。
+\item[(c)] $\mathcal{X}$ が代数スタックならば、$\mathit{QC}(\mathcal{X})$ は
+$D_\QCoh(\mathcal{O}_\mathcal{X})$ と一致する。
+\item[(d)] $X = \text{Spf}(A)$ が、イデアル $I$ に対する $I$-進位相を備えた
+ネーター環 $A$ に付随するアフィン形式代数空間ならば、三角圏
+$\mathit{QC}(X)$ は導来完備対象からなる充満部分圏
+$D_{comp}(A, I) \subset D(A)$ と一致する。
+\end{enumerate}
+これらの結果は、命題 \ref{stacks-sheaves-proposition-QC-compare}、
+『スタックの導来圏』の命題 \ref{stacks-perfect-proposition-QC-compare}、および
+命題 \ref{stacks-sheaves-proposition-QC-derived-complete} で証明される。
+
+\medskip\noindent
+$\mathit{QC}(\mathcal{X})$ の精密な定義の動機として、補題
+\ref{stacks-sheaves-lemma-quasi-coherent-alternative} における $\mathcal{X}$ 上の準連接加群の
+特徴づけを参照されたい。それは、ある種の基底変換性質を満たす
+$\mathcal{X}_{affine}$ 上の $\mathcal{O}$-加群の前層としての特徴づけである。
+
+\begin{definition}
+\label{stacks-sheaves-definition-QC}
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドをファイバーとする圏とする。
+$\mathcal{O}$ を第 \ref{stacks-sheaves-section-alternative} 節で導入した
+$\mathcal{X}_{affine}$ 上の環の層とする。{\it 導来圏における準連接対象の三角圏}を
+公式
+$$
+\mathit{QC}(\mathcal{X}) = \mathit{QC}(\mathcal{X}_{affine}, \mathcal{O})
+$$
+で定義する。右辺は『サイト上のコホモロジー』の定義
+\ref{sites-cohomology-definition-cartesian} において定義されたものである。
+\end{definition}
+
+\noindent
+これは意味をもつ。実際、$\mathcal{X}_{affine}$ は圏であり、カオス位相を入れて
+サイトとみなし、$\mathcal{O}$ はこの圏上の環の層である。これはちょうど
+『サイト上のコホモロジー』の定義
+\ref{sites-cohomology-definition-cartesian} で要求されている条件である。
+
+\medskip\noindent
+この定義と $\mathcal{X}$ 上の準連接加群の圏との関係は、一般にはそれほど明瞭でない。
+例えば $M$ を $\mathit{QC}(\mathcal{X})$ の対象とする。このとき $M$ の
+コホモロジー層 $H^i(M)$ は $\mathcal{X}_{affine}$ 上の $\mathcal{O}$-加群の
+（前）層だが、一般には準連接でない。ただし最後の非零コホモロジー層は準連接である。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-QC-bounded-above}
+定義 \ref{stacks-sheaves-definition-QC} の状況で、$M$ を $\mathit{QC}(\mathcal{X})$ の対象、
+$b \in \mathbf{Z}$ をすべての $i > b$ に対して $H^i(M) = 0$ となる整数とする。
+このとき $H^b(M)$ は $(\mathcal{X}_{affine}, \mathcal{O})$ 上の準連接加群である。
+補題 \ref{stacks-sheaves-lemma-quasi-coherent-alternative} を参照せよ。
+\end{lemma}
+
+\begin{proof}
+『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-QC-bounded-above} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-QC-compare}
+$S$ をスキームとし、$\mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドを
+ファイバーとする圏とする。比較射
+$\epsilon : \mathcal{X}_{affine, \etale} \to \mathcal{X}_{affine}$
+は『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cartesion-plus-topology} の仮定と結論を満たす。
+\end{lemma}
+
+\begin{proof}
+仮定 (1) は $\mathcal{X}_{affine}$ の定義により成り立つ。条件 (2) には、
+アフィンスキーム $U = p(x)$ 上にある $x \in \Ob(\mathcal{X})$ に対して、
+構造層と両立する同値
+$\mathcal{X}_{affine, \etale}/x = (\textit{Aff}/U)_\etale$ があることを用いる。
+第 \ref{stacks-sheaves-section-restriction} 節の議論を参照せよ。したがって、次を示せば十分である。
+アフィンスキーム $U = \Spec(R)$ と $R$-加群の複体 $M^\bullet$ が与えられたとき、
+$M^\bullet$ に付随する $(\textit{Aff}/U)_\etale$ 上の加群の複体の全コホモロジーは
+$M^\bullet$ と擬同型である。これは次の結果を組み合わせれば従う：
+『スキームの導来圏』の補題 \ref{perfect-lemma-affine-compare-bounded}
+（Zariski 位相におけるアフィン上の加群の複体の全コホモロジー）、
+『空間の導来圏』の注意 \ref{spaces-perfect-remark-match-total-direct-images}
+（準連接加群の複体について、小 Zariski 位相と小 \'etale 位相における
+全コホモロジーの一致）、および『エタール・コホモロジー』の補題
+\ref{etale-cohomology-lemma-compare-cohomology}
+（スキームの大 \'etale サイト上の加群の複体の \'etale コホモロジーは、
+小 \'etale サイトに制限した後で計算できること）。
+\end{proof}
+
+\noindent
+グルーポイドをファイバーとする圏 $\mathcal{X}$ が代数空間 $X$ によって
+表現可能な場合にこの定義を適用すると、$D_\QCoh(\mathcal{O}_X)$ が得られる。
+後で代数スタックに対する類似の結果を述べて証明する
+（ここに将来の参照を挿入する）。
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-QC-compare}
+$S$ をスキームとし、$\mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドを
+ファイバーとする圏とする。$\mathcal{X}$ は代数空間 $X$ によって表現可能であると
+仮定する。このとき $\mathit{QC}(\mathcal{X})$ は
+$D_\QCoh(\mathcal{O}_X)$ と標準的に同値である。
+\end{proposition}
+
+\begin{proof}
+$X_{affine}$ を、$X$ 上 \'etale なアフィンスキームの圏にカオス位相と構造層
+$\mathcal{O}_X$ を入れたものと表す。『空間の導来圏』第
+\ref{spaces-perfect-section-QC} 節を参照せよ。補題 \ref{stacks-sheaves-lemma-compare} の関手
+$u : X_\etale \to \mathcal{X}_\etale$ は関手
+$X_{affine} \to \mathcal{X}_{affine}$ を生じる。これは構造層と両立し、関手
+$$
+G :
+\mathit{QC}(\mathcal{X}) = \mathit{QC}(\mathcal{X}_{affine}, \mathcal{O})
+\longrightarrow
+\mathit{QC}(X_{affine}, \mathcal{O}_X)
+$$
+を生じる。『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cartesian-functorial} を参照せよ。
+『空間の導来圏』の補題
+\ref{spaces-perfect-lemma-DQCoh-alternative-small} により、三角圏
+$\mathit{QC}(X_{affine}, \mathcal{O}_X)$ は $D_\QCoh(\mathcal{O}_X)$ と同値である。
+したがって $G$ が同値であることを証明すれば十分である。
+
+\medskip\noindent
+環付きサイトの平坦な比較射
+$\epsilon_\mathcal{X} : \mathcal{X}_{affine, \etale} \to \mathcal{X}_{affine}$ と\newline
+$\epsilon_X : X_{affine, \etale} \to X_{affine}$ を考える。
+補題 \ref{stacks-sheaves-lemma-QC-compare} と『空間の導来圏』の補題
+\ref{spaces-perfect-lemma-DQCoh-alternative-small} の証明から、関手
+$\epsilon_\mathcal{X}^*$ と $\epsilon_X^*$
+は $\mathit{QC}(\mathcal{X}_{affine}, \mathcal{O})$ と
+$\mathit{QC}(X_{affine}, \mathcal{O}_X)$ をそれぞれ部分圏
+$Q_\mathcal{X} \subset D(\mathcal{X}_{affine, \etale}, \mathcal{O})$
+および $Q_X \subset D(X_{affine, \etale}, \mathcal{O}_X)$ と同一視する。
+これらの同一視のもとで、第1段落の関手 $G$ は関手
+$$
+Li_X^* = R\pi_{X, *}:
+D(\mathcal{X}_{affine, \etale}, \mathcal{O})
+\longrightarrow
+D(X_{affine, \etale}, \mathcal{O}_X)
+$$
+から誘導される。ここで $i_X$ と $\pi_X$ は補題 \ref{stacks-sheaves-lemma-compare} の射であるが、
+\'etale サイトを対応するアフィンサイトに置き換えている。この置換が許されることは、
+アフィンサイトについて補題を直接証明し直すか、トポスの同値
+$\Sh(\mathcal{X}_{affine, \etale}) = \Sh(\mathcal{X}_\etale)$ と
+$\Sh(X_{affine, \etale}) = \Sh(X_\etale)$ を用いれば示せる。
+また補題は、$Li_X^*$ が左随伴
+$$
+L\pi_X^*:
+D(X_{affine, \etale}, \mathcal{O}_X)
+\longrightarrow
+D(\mathcal{X}_{affine, \etale}, \mathcal{O})
+$$
+をもつことも示している。さらに $\pi_X \circ i_X$ は恒等射なので、
+$Li_X^* \circ L\pi_X^* = \text{id}$ である。したがって、(a) $L\pi_X^*$ が
+$Q_X$ を $Q_\mathcal{X}$ に送り、(b) $Li_X^*$ の核が $0$ であることを
+示せば十分である。『導来圏』の補題
+\ref{derived-lemma-fully-faithful-adjoint-kernel-zero} を参照せよ。
+
+\medskip\noindent
+(a) の証明。『空間の導来圏』の補題
+\ref{spaces-perfect-lemma-DQCoh-alternative-small} により
+$Q_X = D_\QCoh(X_{affine, \etale}, \mathcal{O}_X)$ である。
+$K$ を $Q_X$ の対象とする。$x$ をアフィンスキーム $U = p(x)$ 上にある
+$\mathcal{X}_{affine, \etale}$ の対象とし、$x$ に対応する射を
+$f : U \to X$ と表す。このとき
+$$
+R\Gamma(x, L\pi_X^*K) = R\Gamma(U, Lf^*K)
+$$
+である。これは引き戻しの推移性から従う。第
+\ref{stacks-sheaves-section-restriction-algebraic-spaces} 節の議論を参照せよ。
+次に、$x \to x'$ をアフィンスキームの射 $h : U \to U'$ 上にある
+$\mathcal{X}_{affine, \etale}$ の射とする。先と同様に、$x$ と $x'$ に対応する射を
+$f : U \to X$ と $f' : U' \to X$ と表すと、$f = f' \circ h$ である。このとき
+\begin{align*}
+R\Gamma(x, L\pi_X^*K)
+& =
+R\Gamma(U, Lf^*K) \\
+& =
+R\Gamma(U, Lh^*L(f')^*K) \\
+& =
+R\Gamma(U', L(f')^*K) \otimes_{\mathcal{O}(U')}^\mathbf{L} \mathcal{O}(U) \\
+& =
+R\Gamma(x', L\pi_X^*K) \otimes_{\mathcal{O}(x')}^\mathbf{L} \mathcal{O}(x)
+\end{align*}
+である。したがって『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cartesion-plus-topology} の主張にある脚注により (a) を得る。
+第3の等号は『スキームの導来圏』の補題
+\ref{perfect-lemma-quasi-coherence-pullback} である。
+
+\medskip\noindent
+(b) の証明。$M$ を $Li_X^*M = 0$ となる $Q_\mathcal{X}$ の対象とする。
+$x'$ をアフィンスキーム $U' = p(x')$ 上にある
+$\mathcal{X}_{affine, \etale}$ の対象とし、対応する射
+$f' : U' \to X$ は \'etale であると仮定する。このとき $f' : U' \to X$ は
+$X_{affine, \etale}$ の対象であり、条件 $Li_X^*M = 0$ から
+$M|_{U'_\etale} = 0$ が従う。特に $R\Gamma(x', M) = 0$ である。
+一方、サイト $\mathcal{X}_{affine, \etale}$ の任意の対象 $x$ に対し、被覆
+$\{x_i \to x\}$ であって、各 $i$ に対して射 $x_i \to x'_i$ が存在し、
+$x'_i$ が $X_{affine, \etale}$ の対象に対応するものが存在する。
+$M$ は $Q_\mathcal{X}$ に属するので
+$$
+R\Gamma(x_i, M) =
+R\Gamma(x_i', M) \otimes_{\mathcal{O}(x_i')}^\mathbf{L} \mathcal{O}(x_i) =
+0
+$$
+であり、求めるとおり $M$ は零であると結論する。
+\end{proof}
+
+\noindent
+この構成が別の場合にも興味深い圏を与えることを示すため、ネーター adic 環
+$A$ の形式スペクトルに対する $\mathit{QC}(\text{Spf}(A))$ の特徴づけを
+述べて証明する。
+
+\begin{proposition}
+\label{stacks-sheaves-proposition-QC-derived-complete}
+$S$ をスキームとする。$X = \text{Spf}(A)$ とし、$A$ は定義イデアル $I$ をもつ
+adic ネーター位相 $S$-代数であるとする。『代数についてさらに』の定義
+\ref{more-algebra-definition-topological-ring} および『形式空間』の定義
+\ref{formal-spaces-definition-affine-formal-spectrum} を参照せよ。
+$p : \mathcal{X} \to (\Sch/S)_{fppf}$ を関手 $X$ に付随する集合をファイバーとする圏とする。
+『圏』の例 \ref{categories-example-presheaf} を参照せよ。このとき
+$\mathit{QC}(\mathcal{X})$ は、$I$ に関して導来完備な $D(A)$ の対象からなる圏
+$D_{comp}(A, I)$ と標準的に同値である。
+\end{proposition}
+
+\begin{proof}
+fppf 層として $X = \colim \Spec(A/I^n)$ であることを思い出そう。
+$\mathcal{X}_{affine}$ の対象は、射 $f : U \to X$ を備えたアフィンスキーム
+$U = \Spec(R)$ と同じものである。『形式空間』の補題
+\ref{formal-spaces-lemma-factor-through-thickening} により、$f$ が単射
+$\Spec(A/I^n) \to X$ を経由するような $n \geq 1$ が存在する。
+対象 $\Spec(A/I^n) \to X$ からなる充満部分圏
+$\mathcal{C} \subset \mathcal{X}_{affine}$ を考える。今述べた注意と
+『微分次数付き層』の補題 \ref{sdga-lemma-cartesian-cofinal-subcategory} により、
+$\mathcal{C}$ への制限は完全な同値
+$\mathit{QC}(\mathcal{X}) \to
+\mathit{QC}(\mathcal{C}, \mathcal{O}|_\mathcal{C})$ である。簡単のため、
+すべての $n \geq 1$ に対して $I^n \not = I^{n + 1}$ であると仮定する。
+このとき $(\mathcal{C}, \mathcal{O}|_\mathcal{C})$ は環付きサイトとして
+環付きサイト $(\mathbf{N}, (A/I^n))$ と同型である。
+『微分次数付き層』第 \ref{sdga-section-qc-inverse-system} 節を参照せよ。
+したがって『微分次数付き層』の命題
+\ref{sdga-proposition-derived-complete} により結論を得る。
+\end{proof}
+
+\noindent
+次の補題は、$\mathcal{X}$ が代数スタックの場合に
+$\mathit{QC}(\mathcal{X})$ と $D_\QCoh(\mathcal{O}_\mathcal{X})$ を比較するために用いる。
+
+\begin{lemma}
+\label{stacks-sheaves-lemma-QC-compare-fppf}
+$S$ をスキームとし、$\mathcal{X} \to (\Sch/S)_{fppf}$ をグルーポイドを
+ファイバーとする圏とする。比較射
+$\epsilon : \mathcal{X}_{affine, fppf} \to \mathcal{X}_{affine}$
+は『サイト上のコホモロジー』の補題
+\ref{sites-cohomology-lemma-cartesion-plus-topology} の仮定と結論を満たす。
+\end{lemma}
+
+\begin{proof}
+証明は補題 \ref{stacks-sheaves-lemma-QC-compare} の証明と全く同じである。
+仮定 (1) は $\mathcal{X}_{affine}$ の定義により成り立つ。条件 (2) には、
+アフィンスキーム $U = p(x)$ 上にある $x \in \Ob(\mathcal{X})$ に対して、
+構造層と両立する同値
+$\mathcal{X}_{affine, \etale}/x = (\textit{Aff}/U)_\etale$ があることを用いる。
+第 \ref{stacks-sheaves-section-restriction} 節の議論を参照せよ。したがって、次を示せば十分である。
+アフィンスキーム $U = \Spec(R)$ と $R$-加群の複体 $M^\bullet$ が与えられたとき、
+$M^\bullet$ に付随する $(\textit{Aff}/U)_{fppf}$ 上の加群の複体の全コホモロジーは
+$M^\bullet$ と擬同型である。これは『エタール・コホモロジー』の補題
+\ref{etale-cohomology-lemma-cohomological-descent-complex-modules} である。
+\end{proof}

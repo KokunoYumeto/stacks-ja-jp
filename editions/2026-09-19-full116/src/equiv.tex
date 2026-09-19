@@ -1,0 +1,4063 @@
+% Generated mechanically from frozen input p07/ja/equiv.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{56}
+\chapter{多様体の導来圏}
+
+
+
+\phantomsection
+\label{equiv-section-phantom}
+
+
+\section{序論}
+\label{equiv-section-introduction}
+
+\noindent
+本章では，Derived Categories of Schemes, \ref{perfect-section-introduction} 節
+で始めた議論を続ける．Fourier--Mukai 変換を扱うが，これは
+Mukai により \cite{Mukai} で初めて研究された．また，導来同値に関する
+Orlov の定理（\cite{Orlov-K3}）を証明する．さらに，Anel と To\"en が
+\cite{AT} で証明した導来同値類の可算性についても論じる．
+
+\medskip\noindent
+この内容へのよい入門として，Daniel Huybrechts の著書
+\cite{Huybrechts} がある．この話題の普及に寄与した論文として，
+ほかに次のものがある．
+\begin{enumerate}
+\item Bondal と Kapranov の論文（\cite{Bondal-Kapranov} を参照）
+\item Bondal と Orlov の論文（\cite{Bondal-Orlov} を参照）
+\item Bondal と Van den Bergh の論文（\cite{BvdB} を参照）
+\item Beilinson の論文（\cite{Beilinson} および
+\cite{Beilinson-derived} を参照）
+\item Orlov の論文（\cite{Orlov-AV} を参照）
+\item Orlov の論文（\cite{Orlov-motives} を参照）
+\item Rouquier の論文（\cite{Rouquier-dimensions} を参照）
+\item このほかにも，ここで挙げうるものは数多い．
+\end{enumerate}
+
+
+
+
+\section{規約と記法}
+\label{equiv-section-conventions}
+
+\noindent
+体 $k$ をとる．$k$-線形三角圏 $\mathcal{T}$ とは，
+Derived Categories, \ref{derived-section-triangulated-definitions} 節
+の意味での三角圏であって，Differential Graded Algebra,
+\ref{dga-section-linear} 節の意味での $k$-線形構造を備え，
+移動関手 $[n] : \mathcal{T} \to \mathcal{T}$ が $k$-線形であるものをいう．
+ここでこれはすべての $n \in \mathbf{Z}$ に対して成り立つものとする．
+
+\medskip\noindent
+体 $k$ をとる．圏 $\text{Vect}_k$ で $k$-ベクトル空間の圏を表す．
+$k$-ベクトル空間 $V$ に対し，その双対を $V^\vee$ と書く．これは
+$k$-線形な $V$ の双対であり，すなわち $V^\vee = \Hom_k(V, k)$ である．
+
+\medskip\noindent
+スキーム $X$ をとる．$D_{perf}(\mathcal{O}_X)$ で，
+$D(\mathcal{O}_X)$ のうち完全複体からなる充満部分圏を表す（Cohomology,
+\ref{cohomology-section-perfect} 節）．$X$ が Noether スキームならば
+$D_{perf}(\mathcal{O}_X) \subset D^b_{\textit{Coh}}(\mathcal{O}_X)$ である．
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-perfect-on-noetherian} を参照せよ．$X$ が Noether かつ
+正則ならば
+$D_{perf}(\mathcal{O}_X) = D^b_{\textit{Coh}}(\mathcal{O}_X)$ である．
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-perfect-on-regular} を参照せよ．
+
+\medskip\noindent
+体 $k$ をとり，$X$ と $Y$ を $k$ 上のスキームとする．この状況では，
+$X \times Y$ で $X \times_{\Spec(k)} Y$ を表す．
+
+
+\medskip\noindent
+スキーム $S$ をとり，$X$, $Y$ を $S$ 上のスキームとする．
+$\mathcal{F}$ を $\mathcal{O}_X$-加群，$\mathcal{G}$ を
+$\mathcal{O}_Y$-加群とする．
+$$
+\mathcal{F} \boxtimes \mathcal{G} =
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_S Y}}
+\text{pr}_2^*\mathcal{G}
+$$
+によって，これを $\mathcal{O}_{X \times_S Y}$-加群として定める．また，
+$K \in D(\mathcal{O}_X)$ および $M \in D(\mathcal{O}_Y)$ に対しては，
+$$
+K \boxtimes M =
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} L\text{pr}_2^*M
+$$
+によって，これを $D(\mathcal{O}_{X \times_S Y})$ の対象として定める．
+したがってこの記法には曖昧さがありうるが，
+いずれの意味であるかは文脈から明らかであろう．
+
+
+
+
+
+\section{Serre 関手}
+\label{equiv-section-Serre-functors}
+
+\noindent
+本節の内容は \cite{Bondal-Kapranov} による．
+
+\begin{lemma}
+\label{equiv-lemma-Serre-functor-exists}
+体 $k$ をとる．$\mathcal{T}$ を $k$-線形三角圏とし，
+$\dim_k \Hom_\mathcal{T}(X, Y) < \infty$ がすべての
+$X, Y \in \Ob(\mathcal{T})$ に対して成り立つとする．
+このとき，次は同値である．
+\begin{enumerate}
+\item $k$-線形同値 $S : \mathcal{T} \to \mathcal{T}$ と，
+$k$-線形同型
+$c_{X, Y} : \Hom_\mathcal{T}(X, Y) \to \Hom_\mathcal{T}(Y, S(X))^\vee$
+であって $X, Y \in \Ob(\mathcal{T})$ に関して関手的なものが存在する．
+\item すべての $X \in \Ob(\mathcal{T})$ に対して，関手
+$Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$ は表現可能であり，関手
+$Y \mapsto \Hom_\mathcal{T}(Y, X)^\vee$ は余表現可能である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$(S, c)$ と $X \in \Ob(\mathcal{T})$ が与えられたとき，対象 $S(X)$ は
+関手 $Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$ を表現し，対象 $S^{-1}(X)$ は
+関手 $Y \mapsto \Hom_\mathcal{T}(Y, X)^\vee$ を余表現する．したがって
+(1) から (2) が従う．
+
+\medskip\noindent
+(2) を仮定する．以下では Yoneda の補題を繰り返し用いる．Categories,
+補題 \ref{categories-lemma-yoneda} を参照せよ．すべての $X$ に対し，
+$S(X)$ で関手 $Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$ を表現する対象を表す．
+$\varphi : X \to X'$ が与えられたとき，一意な射
+$S(\varphi) : S(X) \to S(X')$ を得る．これは対応する関手の変換
+$\Hom_\mathcal{T}(X, -)^\vee \to \Hom_\mathcal{T}(X', -)^\vee$ によって
+定まる．したがって $S$ は
+関手であり，構成により同型 $c_{X, Y}$ を得る．あとは $S$ が同値である
+ことを示せばよい．すべての $X$ に対し，$S'(X)$ で関手
+$Y \mapsto \Hom_\mathcal{T}(Y, X)^\vee$ を余表現する対象を表す．上と同様に
+$S'$ が関手であることが分かる．$S'$ は $S$ の擬逆であると主張する．
+実際，二変数に関して関手的に
+$$
+\Hom_\mathcal{T}(X, Y) = \Hom_\mathcal{T}(Y, S(X))^\vee =
+\Hom_\mathcal{T}(S'(S(X)), Y)
+$$
+であるから，$S' \circ S \cong \text{id}_\mathcal{T}$ を得る．同様に，
+$$
+\Hom_\mathcal{T}(Y, X) = \Hom_\mathcal{T}(S'(X), Y)^\vee =
+\Hom_\mathcal{T}(Y, S(S'(X)))
+$$
+であり，$S \circ S' \cong \text{id}_\mathcal{T}$ を得る．
+\end{proof}
+
+\begin{definition}
+\label{equiv-definition-Serre-functor}
+体 $k$ をとる．$\mathcal{T}$ を $k$-線形三角圏とし，
+$\dim_k \Hom_\mathcal{T}(X, Y) < \infty$ がすべての
+$X, Y \in \Ob(\mathcal{T})$ に対して成り立つとする．補題
+\ref{equiv-lemma-Serre-functor-exists} の同値な条件が成り立つとき，
+{\it Serre 関手が存在する}という．この場合の {\it Serre 関手}とは，
+$k$-線形同値 $S : \mathcal{T} \to \mathcal{T}$ であって，
+$k$-線形同型
+$c_{X, Y} : \Hom_\mathcal{T}(X, Y) \to \Hom_\mathcal{T}(Y, S(X))^\vee$
+で $X, Y \in \Ob(\mathcal{T})$ に関して関手的なものを備えたものをいう．
+\end{definition}
+
+\begin{remark}
+\label{equiv-remark-matress}
+% P07-ERR-1106 and P07-ERR-1107: non-rendering source pointers.
+% P07-ERR-1108: non-rendering source pointer.
+$X^0 \to X^1 \to X^2 \to X^0[1]$ と $Y^0 \to Y^1 \to Y^2 \to Y^0[1]$
+を三角圏の識別三角とする．$p \in \mathbf{Z}$ に対し，
+$p = 3n + i$（$i \in \{0, 1, 2\}$）と書き，$X^p = X^i[n]$ と定める．
+$Y^q$ についても同様に定める．項が
+$$
+K^{p, q} = \Hom(X^{-p}, Y^q)
+$$
+である二重複体を考える．微分 $d_1 : K^{p, q} \to K^{p + 1, q}$ は写像
+$X^{-p - 1} \to X^{-p}$（第一の識別三角の対応する写像をシフトしたもの）
+により与えられ，微分 $d_2 : K^{p, q} \to K^{p, q + 1}$ も同様に写像
+$Y^q \to Y^{q + 1}$ により与えられる．Derived Categories, 補題
+\ref{derived-lemma-representable-homological} から，この二重複体の行と列は
+完全である．さらに，$K^{p, q} = K^{p + 3, q - 3}$ であり，これらの等式は
+微分と両立する．最後に，公理 TR3 から次の性質も従う．
+$\alpha \in K^{p, q}$ と $\beta \in K^{p - 1, q + 1}$ が与えられ，
+$d_2 \alpha = d_1 \beta$ ならば，$\gamma \in K^{p - 2, q + 2}$ であって，
+$d_1 \gamma = d_2 \beta $ が $K^{p - 1, q + 2}$ において，かつ
+$d_2 \gamma = d_1 \alpha $ が
+$K^{p - 2, q + 3} = K^{p + 1, q}$ において成り立つものが存在する．
+（ヒント：$p = q = 0$ の場合，これはちょうど TR3 の主張である．ほかの
+添字の場合はシフトにより証明せよ．）この性質をもつ二重複体を
+{\it マットレス}と呼ぶ（\cite{Bondal-Kapranov} を参照）．
+\end{remark}
+
+\begin{remark}
+\label{equiv-remark-dual-matress}
+体 $k$ をとり，$K^{\bullet, \bullet}$ を有限次元 $k$-ベクトル空間の
+二重複体であって，注意 \ref{equiv-remark-matress} の意味でマットレスでもある
+ものとする．双対二重複体 $L^{p, q} = \Hom_k(K^{-q, -p}, k)$ もマットレス
+であると主張する．行と列の完全性および 3 周期性は直ちに分かる．残る
+条件を確かめるため，線形写像
+$$
+\partial :
+K^{p, q} \oplus K^{p - 1, q + 1} \oplus K^{p - 2, q + 2}
+\longrightarrow
+K^{p, q + 1} \oplus K^{p - 1, q + 2} \oplus K^{p - 2, q + 3}
+$$
+で，$(\alpha, \beta, \gamma)$ を
+$(d_2 \alpha - d_1 \beta, d_2 \gamma - d_1 \alpha, d_1 \gamma - d_2 \beta)$
+へ送るものを考える．ここでは注意 \ref{equiv-remark-matress} と同じ同一視を用いた．
+マットレスであるための条件は
+$$
+\Im(\partial) \cap
+\left( 0 \oplus K^{p - 1, q + 2} \oplus K^{p - 2, q + 3} \right)
+=
+\Im(\partial|_{0 \oplus 0 \oplus K^{p - 2, q + 2}})
+$$
+である．ベクトル空間または写像の双対を ${}^\wedge$ で表すと，双対を
+とることにより
+$$
+\Ker(\partial^\wedge) +
+\left(L^{-p, -q - 1} \oplus 0 \oplus 0 \right)
+=
+\Ker(\text{pr}_{L^{-p + 2, -q - 2}} \circ \partial^\wedge)
+$$
+を得る．ここで $\text{pr}$ は射影を表す．これにより
+$\Im(\partial^\wedge) \cap (L^{-p, -q} \oplus L^{-p + 1, -q - 1} \oplus 0)$
+は
+$\Im(\partial^\wedge|_{L^{-p, -q - 1} \oplus 0 \oplus 0})$ に等しい．これは
+$L^{\bullet, \bullet}$ に対するマットレス条件にほかならない．詳細の一部は
+省略する．
+\end{remark}
+
+\begin{lemma}
+\label{equiv-lemma-Serre-functor}
+定義 \ref{equiv-definition-Serre-functor} の状況において，Serre 関手が存在すれば，
+それは一意な同型を除いて一意であり，かつ三角圏の完全関手である．
+\end{lemma}
+
+\begin{proof}
+Serre 関手 $S$ が与えられると，対象 $S(X)$ は関手
+$Y \mapsto \Hom_\mathcal{T}(X, Y)^\vee$ を表現する．したがって，対象
+$S(X)$ と関手的同一視
+$\Hom_\mathcal{T}(X, Y)^\vee = \Hom_\mathcal{T}(Y, S(X))$ は，Yoneda の補題
+（Categories, 補題 \ref{categories-lemma-yoneda}）により一意な同型を除いて
+定まる．さらに，$\varphi : X \to X'$ に対する射
+$S(\varphi) : S(X) \to S(X')$ は，対応する関手の変換
+$\Hom_\mathcal{T}(X, -)^\vee \to \Hom_\mathcal{T}(X', -)^\vee$ により一意に
+定まる．
+
+\medskip\noindent
+$X, Y$ を $\mathcal{T}$ の対象とする．このとき，
+\begin{align*}
+\Hom(Y, S(X)[1])^\vee
+& =
+\Hom(Y[-1], S(X))^\vee \\
+& =
+\Hom(X, Y[-1]) \\
+& =
+\Hom(X[1], Y) \\
+& =
+\Hom(Y, S(X[1]))^\vee
+\end{align*}
+を得る．Yoneda の補題により，左上から右下への同型を誘導する一意な同型
+$S(X[1]) \to S(X)[1]$ が存在する．上の各同型は $X$ と $Y$ の双方に関して
+関手的であるから，これは関手の同型 $S \circ [1] \to [1] \circ S$ を定める．
+
+\medskip\noindent
+$(A, B, C, f, g, h)$ を $\mathcal{T}$ の識別三角とする．三角
+$(S(A), S(B), S(C), S(f), S(g), S(h))$ が識別三角であることを示す必要がある．
+ここでは，上で構成した標準同型 $S(A[1]) \to S(A)[1]$ を用いて，終域
+$S(A[1])$（$S(h)$ の終域）を $S(A)[1]$ と同一視する．まず，任意の $X$ が
+$\mathcal{T}$ に属するとき，三角 $(S(A), S(B), S(C), S(f), S(g), S(h))$ が長完全系列
+$$
+\ldots \to
+\Hom(X, S(A)) \to
+\Hom(X, S(B)) \to
+\Hom(X, S(C)) \to
+\Hom(X, S(A)[1]) \to \ldots
+$$
+を誘導することに注意する．これは有限次元 $k$-ベクトル空間の系列である．
+% P07-ERR-1109: non-rendering source pointer.
+実際，この系列は次の系列の $k$-線形双対である．
+$$
+\ldots \leftarrow
+\Hom(A, X) \leftarrow
+\Hom(B, X) \leftarrow
+\Hom(C, X) \leftarrow
+\Hom(A[1], X) \leftarrow
+\ldots
+$$
+この系列は Derived Categories, 補題
+\ref{derived-lemma-representable-homological} により完全である．次に，識別三角
+$(S(A), E, S(C), i, p, S(h))$ を選ぶ．これは公理 TR1 と TR2 により可能である．
+% P07-ERR-1110: non-rendering source pointer.
+次の図式を可換にする点線の射を構成したい．
+$$
+\xymatrix{
+S(C)[-1] \ar[r]_-{S(h[-1])} &
+S(A) \ar[r]_{S(f)} &
+S(B) \ar[r]_{S(g)} &
+S(C) \ar[r]_{S(h)} &
+S(A)[1] \\
+S(C)[-1] \ar[r]^-{S(h[-1])} \ar@{=}[u] &
+S(A) \ar[r]^i \ar@{=}[u] &
+E \ar[r]^p \ar@{..>}[u]^\varphi &
+S(C) \ar[r]^{S(h)} \ar@{=}[u] &
+S(A)[1] \ar@{=}[u]
+}
+$$
+実際，$\varphi$ が得られたとすれば，任意の $X$ に対して，得られる写像
+$\Hom(X, E) \to \Hom(X, S(B))$ は $k$-ベクトル空間の同型であると主張する．
+実際，可換図式
+$$
+\xymatrix{
+\Hom(X, S(C)[-1]) \ar[r] &
+\Hom(X, S(A)) \ar[r] &
+\Hom(X, S(B)) \ar[r] &
+\Hom(X, S(C)) \ar[r] &
+\Hom(X, S(A)[1]) \\
+\Hom(X, S(C)[-1]) \ar[r] \ar@{=}[u] &
+\Hom(X, S(A)) \ar[r] \ar@{=}[u] &
+\Hom(X, E) \ar[r] \ar[u]^\varphi &
+\Hom(X, S(C)) \ar[r] \ar@{=}[u] &
+\Hom(X, S(A)[1]) \ar@{=}[u]
+}
+$$
+を得る．その各行は完全であり（上を参照），五項補題（Homology, 補題
+\ref{homology-lemma-five-lemma}）を適用すると中央の射が同型であることが
+分かる．Yoneda の補題により，$\varphi$ が同型であると結論される．
+
+\medskip\noindent
+$\varphi$ を得るため，注意 \ref{equiv-remark-matress} のマットレスを識別三角
+$A \to B \to C \to A[1]$ と $S(A) \to E \to S(C) \to S(A)[1]$ から構成する．
+注意 \ref{equiv-remark-dual-matress} により，その $k$-線形双対もマットレスである．
+$S$ が Serre 関手であることを用いると，上と同様に，この双対マットレスは
+二つの三角（第二のものが識別三角であることはまだ分かっていない）
+$S(A) \to E \to S(C) \to S(A)[1]$ と
+$S(A) \to S(B) \to S(C) \to S(A)[1]$ からなる二重複体であることが分かる．
+しかしマットレス条件は，写像 $S(A) \to S(A)$ と $S(C) \to S(C)$ が三角の射
+をなすこと，すなわち上の図式を可換にする $\varphi$ が存在することを
+ちょうど意味する．
+\end{proof}
+
+
+
+
+
+
+\section{Serre 関手の例}
+\label{equiv-section-examples-Serre-functors}
+
+\noindent
+次の補題は標準的な例である．
+
+\begin{lemma}
+\label{equiv-lemma-Serre-functor-Gorenstein-proper}
+体 $k$ をとる．$X$ を $k$ 上固有な Gorenstein スキームとする．
+Duality for Schemes, 補題 \ref{duality-lemma-duality-proper-over-field} の複体
+$\omega_X^\bullet$ を考える．このとき，関手
+$$
+S : D_{perf}(\mathcal{O}_X) \longrightarrow D_{perf}(\mathcal{O}_X),\quad
+K \longmapsto S(K) = \omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K
+$$
+は Serre 関手である．
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-1111: non-rendering source pointer.
+Derived Categories of Schemes, 補題 \ref{perfect-lemma-ext-finite} により，
+$\dim \Hom_X(K, L) < \infty$ が
+$K, L \in D_{perf}(\mathcal{O}_X)$ に対して成り立つので，この主張は意味をもつ．
+$X$ は Gorenstein であるから，双対化複体 $\omega_X^\bullet$ は
+$D(\mathcal{O}_X)$ の可逆対象である．Duality for Schemes, 補題
+\ref{duality-lemma-gorenstein} を参照せよ．特に，$X$ 上局所的に，複体
+$\omega_X^\bullet$ は非零なコホモロジー層を一つだけもち，それは可逆加群で
+ある．Cohomology, 補題 \ref{cohomology-lemma-invertible-derived} を参照せよ．
+したがって $S(K)$ は $D_{perf}(\mathcal{O}_X)$ に属する．一方，
+$\omega_X^\bullet$ の可逆性から，$S$ が $D_{perf}(\mathcal{O}_X)$ の自己同値で
+あることは明らかに従う．最後に，同型
+$$
+c_{K, L} : \Hom_X(K, L) \longrightarrow
+\Hom_X(L, \omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K)^\vee
+$$
+を $K, L$ に関して二変数関手的に構成しなければならない．そのため，標準同型
+$$
+\Hom_X(K, L) = H^0(X, L \otimes_{\mathcal{O}_X}^\mathbf{L} K^\vee)
+$$
+と
+$$
+\Hom_X(L, \omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K) =
+H^0(X, 
+\omega_X^\bullet \otimes_{\mathcal{O}_X}^\mathbf{L} K
+\otimes_{\mathcal{O}_X}^\mathbf{L} L^\vee)
+$$
+を用いる．これらは Cohomology, 補題
+\ref{cohomology-lemma-dual-perfect-complex} で与えられている．
+$(L \otimes_{\mathcal{O}_X}^\mathbf{L} K^\vee)^\vee =
+(K^\vee)^\vee \otimes_{\mathcal{O}_X}^\mathbf{L} L^\vee$
+であり，さらに標準同型 $K \to (K^\vee)^\vee$ が存在するから，Duality for
+Schemes, 補題 \ref{duality-lemma-duality-proper-over-field-perfect} により，これらの
+$k$-ベクトル空間は標準的に双対である．これによって同型 $c_{K, L}$ が得られる．
+これらの同型が関手的であることの証明は省略する．
+\end{proof}
+
+
+
+
+
+\section{連接加群の特徴づけ}
+\label{equiv-section-coherent}
+
+\noindent
+本節は，ある意味で Derived Categories of Schemes,
+\ref{perfect-section-pseudo-coherent} 節および More on Morphisms,
+\ref{more-morphisms-section-characterize-pseudo-coherent} 節における議論の
+続きである．
+
+\medskip\noindent
+結果を述べる前に，いくらか記法を用意する必要がある．
+体 $k$ をとり，$n \geq 0$ を整数とする．
+$S = k[X_0, \ldots, X_n]$ とおく．整数 $e$ に対し，
+$S_e \subset S$ で次数 $e$ の斉次多項式全体を表す．
+次の（非可換）$k$-代数を考える．
+$$
+R =
+\left(
+\begin{matrix}
+S_0 & S_1 & S_2 & \ldots & \ldots \\
+0 & S_0 & S_1 & \ldots & \ldots\\
+0 & 0 & S_0 & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+0 & \ldots & \ldots & \ldots & S_0
+\end{matrix}
+\right)
+$$
+ここで行と列はいずれも $n + 1$ 個であり，乗法と加法は明らかなものとする．
+
+\begin{lemma}
+\label{equiv-lemma-perfect-for-R}
+上の $k$, $n$, $R$ のもとで，対象 $K$ が $D(R)$ に属するとき，次は同値である．
+\begin{enumerate}
+\item $\sum_{i \in \mathbf{Z}} \dim_k H^i(K) < \infty$ である．
+\item $K$ はコンパクト対象である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K$ がコンパクト対象ならば，$K$ は複体 $M^\bullet$ により表現でき，これは
+次数付き $R$-加群として有限射影的である．Differential Graded Algebra, 補題
+\ref{dga-lemma-compact} を参照せよ．$\dim_k R < \infty$ であるから
+$\sum \dim_k M^i < \infty$ であり，したがってなおさら
+$\sum \dim_k H^i(M^\bullet) < \infty$ である．
+（この含意は，より易しい Differential Graded Algebra, 命題
+\ref{dga-proposition-compact} からも容易に導ける．）
+
+\medskip\noindent
+$K$ が (1) を満たすと仮定する．
+% P07-ERR-1112: non-rendering source pointer.
+切断からなる識別三角 $\tau_{\leq m}K \to K \to \tau_{\geq m + 1}K$ を考える．
+Derived Categories, 注意
+\ref{derived-remark-truncation-distinguished-triangle} を参照せよ．
+$\tau_{\leq m}K$ と $\tau_{\geq m + 1} K$ がともに (1) を満たすことは明らかで
+ある．両者がコンパクトであることを示せれば $K$ もコンパクトである．
+Derived Categories, 補題 \ref{derived-lemma-compact-objects-subcategory} を
+参照せよ．したがって，$K$ の非零なコホモロジー加群の個数について論じることに
+より，$H^i(K)$ がただ一つの $i$ に対してのみ非零であると仮定してよい．
+シフトすることにより，$K$ はただ一つの有限次元 $R$-加群 $M$ からなり，
+それが次数 $0$ に置かれた複体で与えられると仮定してよい．
+
+\medskip\noindent
+$\dim_k(M) < \infty$ であるから，$M$ は $R$-加群として Artin 的である．
+したがって，任意の単純 $R$-加群が $D(R)$ のコンパクト対象を表すことを示せば
+十分である．次に注意する．
+$$
+I =
+\left(
+\begin{matrix}
+0 & S_1 & S_2 & \ldots & \ldots \\
+0 & 0 & S_1 & \ldots & \ldots\\
+0 & 0 & 0 & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots & \ldots \\
+0 & \ldots & \ldots & \ldots & 0
+\end{matrix}
+\right)
+$$
+これは $R$ の冪零両側イデアルであり，$R/I$ は $k$ の $n + 1$ 個のコピーの積に
+同型な可換 $k$-代数である（行列の対角成分に配置されている．すなわち，$R/I$ は
+$k$-部分代数として $R$ に持ち上げられる）．したがって $R$ は，単純加群の同型類を
+ちょうど $n + 1$ 個もつ．これらを $M_0, \ldots, M_n$ と書く（対角成分に対応する）．
+行ベクトルからなる右 $R$-加群 $P_i$ を考える．
+$$
+P_i =
+\left(
+\begin{matrix}
+0 &
+\ldots &
+0 &
+S_0 &
+\ldots &
+S_{i - 1} &
+S_i
+\end{matrix}
+\right)
+$$
+乗法 $P_i \times R \to P_i$ は明らかなものとする．このとき，
+$R \cong P_0 \oplus \ldots \oplus P_n$ が右 $R$-加群として成り立つ．$R$ は明らかに $D(R)$ の
+コンパクト対象であるから，各 $P_i$ も $D(R)$ のコンパクト対象である．
+（もちろん，各 $P_i$ が $R$-加群として射影的であることも従うが，この証明で
+示すべきことはそれではない．）明らかに $P_0 = M_0$ は上の単純 $R$-加群の
+最初のものである．$P_1$ に対しては短完全列
+$$
+0 \to P_0^{\oplus n + 1} \to P_1 \to M_1 \to 0
+$$
+がある．これにより，$M_1$ は他の項がコンパクト対象である識別三角に組み込まれる
+ことが分かり，したがって $M_1$ は $D(R)$ のコンパクト対象である．より一般に，
+短完全列
+$$
+0 \to C_i \to P_i \to M_i \to 0
+$$
+が存在する．ここで $C_i$ は有限次元 $R$-加群であり，その単純組成因子は
+$M_j$ に同型で，ここで $j < i$ である．帰納法により，まず $C_i$ が $D(R)$ の
+コンパクト対象を定めることが分かり，続いて $M_i$ もそうであることが分かる．
+これは望む結論である．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-coherent-on-projective-space}
+体 $k$ をとり，$n \geq 0$ とする．また，
+$K \in D_\QCoh(\mathcal{O}_{\mathbf{P}^n_k})$ とする．
+次は同値である．
+\begin{enumerate}
+\item $K$ は $D^b_{\textit{Coh}}(\mathcal{O}_{\mathbf{P}^n_k})$ に属する．
+\item $\sum_{i \in \mathbf{Z}}
+\dim_k H^i(\mathbf{P}^n_k, E \otimes^\mathbf{L} K) < \infty$
+が，完全対象 $E$ を $D(\mathcal{O}_{\mathbf{P}^n_k})$ から任意にとるたびに成り立つ．
+\item $\sum_{i \in \mathbf{Z}}
+\dim_k \Ext^i_{\mathbf{P}^n_k}(E, K) < \infty$
+が，完全対象 $E$ を $D(\mathcal{O}_{\mathbf{P}^n_k})$ から任意にとるたびに成り立つ．
+\item $\sum_{i \in \mathbf{Z}} \dim_k H^i(\mathbf{P}^n_k,
+K \otimes^\mathbf{L} \mathcal{O}_{\mathbf{P}^n_k}(d)) < \infty$
+が $d = 0, 1, \ldots, n$ に対して成り立つ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) と (3) は Cohomology, 補題
+\ref{cohomology-lemma-dual-perfect-complex} により同値である．
+(1) が成り立つならば，完全な $E$ に対する導来テンソル積
+$E \otimes^\mathbf{L} K$ は
+$D^b_{\textit{Coh}}(\mathcal{O}_{\mathbf{P}^n_k})$ に属する．したがって
+Derived Categories of Schemes, 補題 \ref{perfect-lemma-direct-image-coherent}
+により (2) が成り立つ．$\mathcal{O}_{\mathbf{P}^n_k}(d)$ は
+$\mathbf{P}^n_k$ の導来圏の完全対象とみなせるから，(2) が (4) を含意することは
+明らかである．よって，(4) が (1) を含意することを証明すれば十分である．
+
+\medskip\noindent
+(4) を仮定する．$R$ を補題 \ref{equiv-lemma-perfect-for-R} のものとし，
+$P = \bigoplus_{d = 0, \ldots, n} \mathcal{O}_{\mathbf{P}^n_k}(-d)$ とおく．
+$R = \text{End}_{\mathbf{P}^n_k}(P)$ であり，$P$ の他の自己 Ext はすべて零で
+あることを思い出そう．さらに，Derived Categories of Schemes, 補題
+\ref{perfect-lemma-Pn-module-category} により，$P$ は同値
+$- \otimes^\mathbf{L} P : D(R) \to D_\QCoh(\mathcal{O}_{\mathbf{P}^n_k})$
+を定める．$K$ が $L$ に対応し，後者が $D(R)$ に属するとしよう．このとき
+\begin{align*}
+H^i(L)
+& =
+\Ext^i_{D(R)}(R, L) \\
+& =
+\Ext^i_{\mathbf{P}^n_k}(P, K) \\
+& =
+H^i(\mathbf{P}^n_k, K \otimes P^\vee) \\
+& =
+\bigoplus\nolimits_{d = 0, \ldots, n}
+H^i(\mathbf{P}^n_k, K \otimes \mathcal{O}(d))
+\end{align*}
+である．ここでは Differential Graded Algebra, 補題
+\ref{dga-lemma-upgrade-tensor-with-complex-derived}（および
+$- \otimes^\mathbf{L} P$ が同値であること）と Cohomology, 補題
+\ref{cohomology-lemma-dual-perfect-complex} を用いた．
+% P07-ERR-1113: non-rendering source pointer.
+したがって，仮定 (4) により $L$ は補題 \ref{equiv-lemma-perfect-for-R} の条件 (2) を
+満たし，ゆえに $D(R)$ のコンパクト対象である．したがって $K$ は
+$D_\QCoh(\mathcal{O}_{\mathbf{P}^n_k})$ のコンパクト対象である．ゆえに，
+Derived Categories of Schemes, 命題
+\ref{perfect-proposition-compact-is-perfect} により $K$ は完全である．さらに
+Derived Categories of Schemes, 補題 \ref{perfect-lemma-perfect-on-regular} により
+$D_{perf}(\mathcal{O}_{\mathbf{P}^n_k}) =
+D^b_{\textit{Coh}}(\mathcal{O}_{\mathbf{P}^n_k})$ であるから，(1) が成り立つ．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-finiteness}
+$X$ を体 $k$ 上固有なスキームとする．
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$ とし，$E$ が $D(\mathcal{O}_X)$ の
+完全対象であるとする．このとき
+$\sum_{i \in \mathbf{Z}} \dim_k \Ext^i_X(E, K) < \infty$ である．
+\end{lemma}
+
+\begin{proof}
+これは，例えば Derived Categories of Schemes, 補題
+\ref{perfect-lemma-ext-finite} と
+\ref{perfect-lemma-ext-from-perfect-into-bounded-QCoh} を組み合わせれば従う．
+別証としては，Derived Categories of Schemes, 補題
+\ref{perfect-lemma-perfect-on-noetherian} と
+\ref{perfect-lemma-direct-image-coherent} を組み合わせればよい．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-characterize-dbcoh-projective}
+\begin{reference}
+射影的な場合，これは \cite[補題 7.46]{Rouquier-dimensions} の結果であり，
+\cite[定理 A.1]{BvdB} にも暗黙に含まれている．
+\end{reference}
+$X$ を体 $k$ 上固有なスキームとし，
+$K \in \Ob(D_\QCoh(\mathcal{O}_X))$ とする．次は同値である．
+\begin{enumerate}
+\item $K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$ である．
+\item $\sum_{i \in \mathbf{Z}} \dim_k \Ext^i_X(E, K) < \infty$
+が，完全な $E$ を $D(\mathcal{O}_X)$ から任意にとるたびに成り立つ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $\Rightarrow$ (2) は補題 \ref{equiv-lemma-finiteness} から従う．
+(2) $\Rightarrow$ (1) は More on Morphisms, 補題
+\ref{more-morphisms-lemma-characterize-relatively-perfect} から従う
+（体上相対的に完全な対象の意味については，Derived Categories of Schemes, 例
+\ref{perfect-example-relatively-perfect-field} を参照せよ）．射影的な場合のより
+易しい証明を次の段落で与える．
+
+\medskip\noindent
+(2) を仮定し，$X$ は $k$ 上射影的であるとする．閉埋め込み
+$i : X \to \mathbf{P}^n_k$ を選ぶ．$Ri_*K$ が
+$D^b_{\textit{Coh}}(\mathbf{P}^n_k)$ に属することを示せば十分である．実際，
+準連接加群 $\mathcal{F}$ が $X$ 上連接，それぞれ零であることと，
+$i_*\mathcal{F}$ が連接，それぞれ零であることは同値である．完全対象 $E$ を
+$D(\mathcal{O}_{\mathbf{P}^n_k})$ からとると，
+$Li^*E$ は $D(\mathcal{O}_X)$ の完全対象であり，
+$$
+\Ext^q_{\mathbf{P}^n_k}(E, Ri_*K) = \Ext^q_X(Li^*E, K)
+$$
+したがって仮定より
+$\sum_{q \in \mathbf{Z}} \dim_k \Ext^q_{\mathbf{P}^n_k}(E, Ri_*K) < \infty$
+である．補題 \ref{equiv-lemma-coherent-on-projective-space} により結論を得る．
+\end{proof}
+
+
+
+
+
+\section{表現可能性定理}
+\label{equiv-section-bondal-van-den-bergh}
+
+\noindent
+本節の内容は \cite{BvdB} による．
+
+\medskip\noindent
+$\mathcal{T}$ を $k$-線形三角圏とする．本節では，$k$-線形コホモロジー関手
+$H$ で，$\mathcal{T}$ から $k$-ベクトル空間の圏へのものを考える．
+これは，$H$ が関手
+$$
+H : \mathcal{T}^{opp} \longrightarrow \text{Vect}_k
+$$
+% P07-ERR-1114: non-rendering source pointer.
+であって，$k$-線形であり，任意の識別三角 $X \to Y \to Z$ が
+$\mathcal{T}$ に属するとき，系列 $H(Z) \to H(Y) \to H(X)$ が
+$k$-ベクトル空間の完全列となることを意味する．Derived Categories, 定義
+\ref{derived-definition-homological} および Differential Graded Algebra,
+\ref{dga-section-linear} 節を参照せよ．
+
+\begin{lemma}
+\label{equiv-lemma-maps-from-compact-filtered}
+$\mathcal{D}$ を三角圏とし，
+$\mathcal{D}' \subset \mathcal{D}$ を充満三角部分圏とする．また，
+$X \in \Ob(\mathcal{D})$ とする．$E \to X$ という形の射であって
+$E \in \Ob(\mathcal{D}')$ となるものの圏はフィルター圏である．
+\end{lemma}
+
+\begin{proof}
+Categories, 定義 \ref{categories-definition-directed} の条件を確かめる．
+この圏は $0 \to X$ を含むので空でない．$E_i \to X$, $i = 1, 2$ が対象ならば，
+$E_1 \oplus E_2 \to X$ も対象であり，射
+$(E_i \to X) \to (E_1 \oplus E_2 \to X)$ が存在する．最後に，
+$a, b : (E \to X) \to (E' \to X)$ が射であると仮定する．
+$E \xrightarrow{a - b} E' \to E''$ という識別三角を $\mathcal{D}'$ において選ぶ．
+公理 TR3 により三角の射
+$$
+\xymatrix{
+E \ar[r]_{a - b} \ar[d] &
+E' \ar[d] \ar[r] & E'' \ar[d] \\
+0 \ar[r] &
+X \ar[r] &
+X
+}
+$$
+を得る．得られる射 $(E' \to X) \to (E'' \to X)$ は $a$ と $b$ を等化する．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-van-den-bergh}
+\begin{reference}
+\cite[補題 2.14]{CKN}
+\end{reference}
+体 $k$ をとる．$\mathcal{D}$ を直和をもち，コンパクト生成される
+$k$-線形三角圏とする．$\mathcal{D}_c$ でコンパクト対象からなる充満部分圏を
+表す．$H : \mathcal{D}_c^{opp} \to \text{Vect}_k$ を $k$-線形コホモロジー関手
+であって，$\dim_k H(X) < \infty$ がすべての $X \in \Ob(\mathcal{D}_c)$ に
+対して成り立つものとする．このとき $H$ は関手 $X \mapsto \Hom(X, Y)$ と，
+ある $Y \in \Ob(\mathcal{D})$ に対して同型である．
+\end{lemma}
+
+\begin{proof}
+以下では Derived Categories, 補題
+\ref{derived-lemma-compact-objects-subcategory} を断りなく用いる．
+$G : \mathcal{D}_c \to \text{Vect}_k$ で，$k$-線形ホモロジー関手であって
+$X$ を $H(X)^\vee$ に送るものを表す．任意の対象 $Y$ を $\mathcal{D}$ からとり，
+$$
+G'(Y) = \colim_{X \to Y, X \in \Ob(\mathcal{D}_c)} G(X)
+$$
+とおく．この余極限は補題 \ref{equiv-lemma-maps-from-compact-filtered} によりフィルター
+余極限である．$G'$ は $k$-線形ホモロジー関手であり，$G'$ の
+$\mathcal{D}_c$ への制限は $G$ であり，さらに $G'$ は直和を直和へ送ると主張する．
+
+\medskip\noindent
+具体的に，$Y_1 \to Y_2 \to Y_3$ が識別三角であると仮定する．
+$\xi \in G'(Y_2)$ の $G'(Y_3)$ における像が零であるとする．余極限はフィルター
+余極限なので，$\xi$ はある $X \to Y_2$ と
+$X \in \Ob(\mathcal{D}_c)$ および $g \in G(X)$ により表される．
+$\xi$ の $G'(Y_3)$ における像が零であるとは，合成 $X \to Y_2 \to Y_3$ が
+$X \to X' \to Y_3$ と分解し，$X' \in \mathcal{D}_c$ であり，かつ $g$ の
+$G(X')$ における像が零であることを意味する．識別三角
+$X'' \to X \to X'$ を選ぶ．このとき $X'' \in \Ob(\mathcal{D}_c)$ である．
+$G$ はホモロジー関手なので，$g$ はある
+% P07-ERR-1115: non-rendering source pointer.
+$g'' \in G'(X'')$ の像であることが分かる．公理 TR3 により，写像
+$X \to Y_2$ と $X' \to Y_3$ は識別三角の射
+$(X'' \to X \to X') \to (Y_1 \to Y_2 \to Y_3)$ に組み込まれる．したがって
+$\xi$ は，$G'(Y_1)$ の元であって，$X'' \to Y_1$ と $g'' \in G(X'')$ により
+表されるものの像であることが分かる．
+
+\medskip\noindent
+$Y \in \Ob(\mathcal{D}_c)$ ならば，$\text{id} : Y \to Y$ は，
+$X \to Y$ という形の射で $X \in \Ob(\mathcal{D}_c)$ となるものの圏の終対象で
+ある．したがってこの場合 $G'(Y) = G(Y)$ であり，制限に関する主張が従う．
+$Y = \bigoplus_{i \in I} Y_i$ を直和とする．$a : X \to Y$ と
+$X \in \Ob(\mathcal{D}_c)$ および $g \in G(X)$ が，元 $\xi$ を $G'(Y)$ において
+表すとする．射 $a : X \to Y$ は，射 $a_i : X \to Y_i$ の和として一意に書け，
+$X$ が $\mathcal{D}$ のコンパクト対象なので，そのほとんどすべては零である．
+$I' = \{i \in I \mid a_i \not = 0\}$ とおく．このとき $a$ は合成
+$$
+X \xrightarrow{(1, \ldots, 1)}
+\bigoplus\nolimits_{i \in I'} X
+\xrightarrow{\bigoplus_{i \in I'} a_i}
+\bigoplus\nolimits_{i \in I} Y_i = Y
+$$
+と分解する．したがって，$\xi = \sum_{i \in I'} \xi_i$ は，元
+$\xi_i \in G'(Y_i)$ であって $a_i : X \to Y_i$ と $g \in G(X)$ に対応する
+ものの像の和である．ゆえに $\bigoplus G'(Y_i) \to G'(Y)$ は全射である．単射であることの
+（自明な）確認は省略する．
+
+\medskip\noindent
+したがって関手 $Y \mapsto G'(Y)^\vee$ はコホモロジー関手であり，直和を直積へ
+送る．よってブラウンの表現可能性定理，すなわち Derived Categories, 命題
+\ref{derived-proposition-brown} により，ある $Y \in \Ob(\mathcal{D})$ と同型
+$G'(Z)^\vee = \Hom(Z, Y)$ が存在し，これは $Z$ に関して関手的である．
+$X \in \Ob(\mathcal{D}_c)$ に対しては
+$G'(X)^\vee = G(X)^\vee = (H(X)^\vee)^\vee = H(X)$ である．これは
+$\dim_k H(X) < \infty$ によるので，証明が完了する．
+\end{proof}
+
+\begin{theorem}
+\label{equiv-theorem-bondal-van-den-bergh}
+\begin{reference}
+射影的な場合，これは \cite[定理 A.1]{BvdB} の結果である．
+\end{reference}
+$X$ を体 $k$ 上固有なスキームとする．
+$F : D_{perf}(\mathcal{O}_X)^{opp} \to \text{Vect}_k$ を $k$-線形
+コホモロジー関手であって，
+$$
+\sum\nolimits_{n \in \mathbf{Z}} \dim_k F(E[n]) < \infty
+$$
+がすべての $E \in D_{perf}(\mathcal{O}_X)$ に対して成り立つものとする．
+このとき $F$ は，$E \mapsto \Hom_X(E, K)$ という形の関手と，ある
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$ に対して同型である．
+\end{theorem}
+
+\begin{proof}
+導来圏 $D_\QCoh(\mathcal{O}_X)$ は直和をもち，コンパクト生成され，さらに
+$D_{perf}(\mathcal{O}_X)$ はコンパクト対象からなる充満部分圏である．
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-direct-sums}，定理
+\ref{perfect-theorem-bondal-van-den-Bergh}，および命題
+\ref{perfect-proposition-compact-is-perfect} を参照せよ．補題
+\ref{equiv-lemma-van-den-bergh} により，
+$F(E) = \Hom_X(E, K)$ がある $K \in \Ob(D_\QCoh(\mathcal{O}_X))$ に対して
+成り立つと仮定してよい．このとき補題
+\ref{equiv-lemma-characterize-dbcoh-projective} により，$K$ は
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$ に属する．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-homological-representable}
+$X$ を体 $k$ 上固有な正則スキームとする．
+$G : D_{perf}(\mathcal{O}_X) \to \text{Vect}_k$ を $k$-線形ホモロジー関手
+であって，
+$$
+\sum\nolimits_{n \in \mathbf{Z}} \dim_k G(E[n]) < \infty
+$$
+がすべての $E \in D_{perf}(\mathcal{O}_X)$ に対して成り立つものとする．
+このとき $G$ は，$E \mapsto \Hom_X(K, E)$ という形の関手と，ある
+$K \in D_{perf}(\mathcal{O}_X)$ に対して同型である．
+\end{lemma}
+
+\begin{proof}
+$E \mapsto E^\vee$ という $D_{perf}(\mathcal{O}_X)$ 上の反変関手を考える．
+Cohomology, 補題 \ref{cohomology-lemma-dual-perfect-complex} を参照せよ．
+この関手は $D_{perf}(\mathcal{O}_X)$ の完全な反自己同値である．したがって関手
+$F(E) = G(E^\vee)$ に定理 \ref{equiv-theorem-bondal-van-den-bergh} を適用すると，
+$K \in D_{perf}(\mathcal{O}_X)$ が存在し，これは
+$G(E^\vee) = \Hom_X(E, K)$ を満たす．したがって
+$G(E) = \Hom_X(E^\vee, K) = \Hom_X(K^\vee, E)$ であり，$K^\vee$ をとればよい．
+\end{proof}
+
+
+
+
+
+
+\section{随伴関手の存在}
+\label{equiv-section-adjoints}
+
+\noindent
+Bondal とファン・デン・ベルフの論文の結果から，随伴関手が自動的に存在するという
+次の帰結を得る．
+
+\begin{lemma}
+\label{equiv-lemma-always-right-adjoints}
+体 $k$ をとり，$X$ と $Y$ を $k$ 上固有なスキームとする．
+$X$ が正則ならば，任意の $k$-線形完全関手
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+は完全な右随伴関手と完全な左随伴関手をもつ．
+\end{lemma}
+
+\begin{proof}
+随伴関手が存在すれば，極めて一般的な Derived Categories, 補題
+\ref{derived-lemma-adjoint-is-exact} により，それは完全関手である．
+
+\medskip\noindent
+右随伴関手の存在を証明しよう．そのためには，
+$M \in D_{perf}(\mathcal{O}_Y)$ に対して反変関手
+$K \mapsto \Hom_Y(F(K), M)$ が表現可能であることを示せば十分である．
+この関手は反変，$k$-線形，かつコホモロジー的である．したがって定理
+\ref{equiv-theorem-bondal-van-den-bergh} により，次を示せば十分である．
+$$
+\sum\nolimits_{i \in \mathbf{Z}} \dim_k \Ext^i_Y(F(K), M) < \infty
+$$
+これは補題 \ref{equiv-lemma-finiteness} から従う．
+
+\medskip\noindent
+% P07-ERR-1116: non-rendering source pointer.
+左随伴関手の存在についても同様に論じるが，補題
+\ref{equiv-lemma-homological-representable} を定理
+\ref{equiv-theorem-bondal-van-den-bergh} の代わりに用いる．
+\end{proof}
+
+
+
+
+
+
+\section{Fourier--Mukai 関手}
+\label{equiv-section-fourier-mukai}
+
+\noindent
+これらの関手は \cite{Mukai} で初めて導入された．
+
+\begin{definition}
+\label{equiv-definition-fourier-mukai-functor}
+スキーム $S$ をとり，$X$ と $Y$ を $S$ 上のスキームとする．
+$K \in D(\mathcal{O}_{X \times_S Y})$ をとる．三角圏の完全関手
+$$
+\Phi_K : D(\mathcal{O}_X) \longrightarrow D(\mathcal{O}_Y),\quad
+M \longmapsto R\text{pr}_{2, *}(
+L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K)
+$$
+を {\it Fourier--Mukai 関手}と呼び，$K$ をこの関手の
+{\it Fourier--Mukai 核}と呼ぶ．さらに，次のようにいう．
+\begin{enumerate}
+\item $\Phi_K$ が $D_\QCoh(\mathcal{O}_X)$ を $D_\QCoh(\mathcal{O}_Y)$ の中へ
+送るならば，得られる完全関手
+$\Phi_K : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$
+を Fourier--Mukai 関手と呼ぶ．
+\item $\Phi_K$ が $D_{perf}(\mathcal{O}_X)$ を
+$D_{perf}(\mathcal{O}_Y)$ の中へ送るならば，得られる完全関手
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+を Fourier--Mukai 関手と呼ぶ．
+\item $X$ と $Y$ が Noether スキームであり，$\Phi_K$ が
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$ を $D^b_{\textit{Coh}}(\mathcal{O}_Y)$ の中へ
+送るならば，得られる完全関手
+$\Phi_K : D^b_{\textit{Coh}}(\mathcal{O}_X) \to
+D^b_{\textit{Coh}}(\mathcal{O}_Y)$
+を Fourier--Mukai 関手と呼ぶ．$D_{\textit{Coh}}$, $D^+_{\textit{Coh}}$,
+$D^-_{\textit{Coh}}$ についても同様である．
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-Mukai-QCoh}
+スキーム $S$ をとり，$X$ と $Y$ を $S$ 上のスキームとする．
+$K \in D(\mathcal{O}_{X \times_S Y})$ をとる．対応する Fourier--Mukai 関手
+$\Phi_K$ は $D_\QCoh(\mathcal{O}_X)$ を $D_\QCoh(\mathcal{O}_Y)$ の中へ送る．
+ただし，$K$ が $D_\QCoh(\mathcal{O}_{X \times_S Y})$ に属し，$X \to S$ が
+準コンパクトかつ準分離的であると仮定する．
+\end{lemma}
+
+\begin{proof}
+これは次の事実から従う．導来逆像は $D_\QCoh$ を保つ
+（Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-pullback}）．導来テンソル積は $D_\QCoh$ を保つ
+（Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-tensor-product}）．射影
+$\text{pr}_2 : X \times_S Y \to Y$ は準コンパクトかつ準分離的である
+（Schemes, 補題 \ref{schemes-lemma-quasi-compact-preserved-base-change} および
+\ref{schemes-lemma-separated-permanence}）．そして，準分離的かつ準コンパクトな
+射に沿う全導来順像は $D_\QCoh$ を保つ（Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-direct-image}）．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-compose-fourier-mukai}
+スキーム $S$ をとり，$X, Y, Z$ を $S$ 上のスキームとする．
+$X \to S$, $Y \to S$, $Z \to S$ は準コンパクトかつ準分離的であると仮定する．
+$K \in D_\QCoh(\mathcal{O}_{X \times_S Y})$ および
+$K' \in D_\QCoh(\mathcal{O}_{Y \times_S Z})$ をとる．Fourier--Mukai 関手
+$\Phi_K : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$
+と $\Phi_{K'} : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_Z)$ を考える．
+$X$ と $Z$ が $S$ 上 Tor 独立であり，$Y \to S$ が平坦ならば，
+$$
+\Phi_{K'} \circ \Phi_K = \Phi_{K''} :
+D_\QCoh(\mathcal{O}_X)
+\longrightarrow
+D_\QCoh(\mathcal{O}_Z)
+$$
+が成り立つ．ここで
+$$
+K'' = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*K')
+$$
+は $D_\QCoh(\mathcal{O}_{X \times_S Z})$ の対象である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-fourier-Mukai-QCoh} により，この主張は意味をもつ．以下では
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-pullback},
+\ref{perfect-lemma-quasi-coherence-tensor-product}，および
+\ref{perfect-lemma-quasi-coherence-direct-image}
+および Schemes, 補題
+\ref{schemes-lemma-quasi-compact-preserved-base-change} および
+\ref{schemes-lemma-separated-permanence}
+を断りなく用いる．Derived Categories of Schemes, 補題
+\ref{perfect-lemma-flat-base-change-tor-independent}
+により，$X \times_S Y$ と $Y \times_S Z$ は $Y$ 上 Tor 独立である．したがって，
+次のデカルト図式に対して基底変換が成り立つ．
+$$
+\xymatrix{
+X \times_S Y \times_S Z \ar[d] \ar[r] &
+Y \times_S Z \ar[d]^{p^{YZ}_Y} \\
+X \times_S Y \ar[r]^{p^{XY}_Y} & Y
+}
+$$
+これは準連接なコホモロジー層をもつ複体に対する主張である．Derived Categories
+of Schemes, 補題 \ref{perfect-lemma-compare-base-change} を参照せよ．
+$p^* = Lp^*$, $p_* = Rp_*$, $\otimes = \otimes^\mathbf{L}$ と略記すると，
+$M \in D_\QCoh(\mathcal{O}_X)$ に対して次の等式列を得る．
+\begin{align*}
+\Phi_{K'}(\Phi_K(M))
+& =
+p^{YZ}_{Z, *}(p^{YZ, *}_Y p^{XY}_{Y, *}(p^{XY, *}_X M \otimes K) \otimes K') \\
+& =
+p^{YZ}_{Z, *}(\text{pr}_{23, *} \text{pr}_{12}^*(p^{XY, *}_X M \otimes K)
+\otimes K') \\
+& =
+p^{YZ}_{Z, *}(\text{pr}_{23, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K)
+\otimes K') \\
+& =
+p^{YZ}_{Z, *}(\text{pr}_{23, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K')) \\
+& =
+\text{pr}_{3, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K') \\
+& =
+p^{XZ}_{Z, *}\text{pr}_{13, *}(\text{pr}_1^*M \otimes \text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K') \\
+& =
+p^{XZ}_{Z, *} (p^{XZ, *}_X M \otimes \text{pr}_{13, *}(\text{pr}_{12}^*K
+\otimes \text{pr}_{23}^*K'))
+\end{align*}
+これは望む等式である．ここで第 2 等号には上の基底変換に関する注意を用い，
+% P07-ERR-1117: non-rendering source pointer.
+第 $4$ 等号と最後の等号には Derived Categories of Schemes, 補題
+\ref{perfect-lemma-cohomology-base-change} を用いた．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai}
+スキーム $S$ をとり，$X$ と $Y$ を $S$ 上のスキームとする．
+$K \in D(\mathcal{O}_{X \times_S Y})$ をとる．対応する Fourier--Mukai 関手
+$\Phi_K$ は，次の条件のうち少なくとも一つが満たされれば，
+$D_{perf}(\mathcal{O}_X)$ を $D_{perf}(\mathcal{O}_Y)$ の中へ送る．
+\begin{enumerate}
+\item $S$ は Noether スキームであり，$X \to S$ と $Y \to S$ は有限型であり，
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_{X \times_S Y})$ であり，$H^i(K)$ の台は
+$Y$ 上固有であり，これはすべての $i$ について成り立つ．さらに $K$ は
+$D(\text{pr}_2^{-1}\mathcal{O}_Y)$ の対象として有限 Tor 次元をもつ．
+\item $X \to S$ は有限表示であり，$K$ は有界複体 $\mathcal{K}^\bullet$ で表現
+でき，その各項は有限表示 $\mathcal{O}_{X \times_S Y}$-加群である．この複体は
+$Y$ 上平坦で，その台は $Y$ 上固有である．
+\item $X \to S$ は有限表示な固有平坦射であり，$K$ は完全である．
+\item $S$ は Noether スキームであり，$X \to S$ は平坦かつ固有であり，$K$ は完全である．
+\item $X \to S$ は有限表示な固有平坦射であり，$K$ は $Y$-完全である．
+\item $S$ は Noether スキームであり，$X \to S$ は平坦かつ固有であり，$K$ は
+$Y$-完全である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M$ が $X$ 上完全ならば，$L\text{pr}_1^*M$ は $X \times_S Y$ 上完全である．
+Cohomology, 補題 \ref{cohomology-lemma-perfect-pullback} を参照せよ．以下では
+この事実を断りなく用いる．また，$X \to S$ が有限型，固有，平坦，または有限表示
+ならば，基底変換 $\text{pr}_2 : X \times_S Y \to Y$ もそれぞれ同じ性質をもつ．
+Morphisms, 補題
+\ref{morphisms-lemma-base-change-finite-type},
+\ref{morphisms-lemma-base-change-proper},
+\ref{morphisms-lemma-base-change-flat}，および
+\ref{morphisms-lemma-base-change-finite-presentation}.
+
+\medskip\noindent
+(1) は Derived Categories of Schemes, 補題
+\ref{perfect-lemma-perfect-direct-image} と Derived Categories of Schemes, 補題
+\ref{perfect-lemma-perfect-on-noetherian} を組み合わせれば従う．
+
+\medskip\noindent
+(2) は Derived Categories of Schemes, 補題
+\ref{perfect-lemma-base-change-tensor-perfect} から従う．
+
+\medskip\noindent
+(3) は Derived Categories of Schemes, 補題
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general} から従う．
+
+\medskip\noindent
+(4) は (3) と，Noether スキーム間の有限型射は有限表示であるという事実から
+従う．Morphisms, 補題
+\ref{morphisms-lemma-noetherian-finite-type-finite-presentation} を参照せよ．
+
+\medskip\noindent
+(5) は Derived Categories of Schemes, 補題
+\ref{perfect-lemma-derived-pushforward-rel-perfect} と Derived Categories of
+Schemes, 補題 \ref{perfect-lemma-perfect-relatively-perfect} を組み合わせれば従う．
+
+\medskip\noindent
+(6) は，(4) が (3) から従うのと同様に (5) から従う．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-Coh}
+Noether スキーム $S$ をとる．$X$ と $Y$ を $S$ 上有限型なスキームとする．
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_{X \times_S Y})$ をとる．対応する
+Fourier--Mukai 関手 $\Phi_K$ は，次の条件のうち少なくとも一つが満たされれば，
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$ を $D^b_{\textit{Coh}}(\mathcal{O}_Y)$ の中へ送る．
+\begin{enumerate}
+\item $H^i(K)$ の台は $Y$ 上固有であり，これはすべての $i$ について成り立つ．$K$ は
+$D(\text{pr}_1^{-1}\mathcal{O}_X)$ の対象として有限 Tor 次元をもつ．
+\item $K$ は有界複体 $\mathcal{K}^\bullet$ で表現でき，その各項は連接
+$\mathcal{O}_{X \times_S Y}$-加群である．この複体は $X$ 上平坦で，その台は $Y$ 上固有である．
+\item $H^i(K)$ の台は $Y$ 上固有であり，これはすべての $i$ について成り立つ．$X$ は正則スキームである．
+\item $K$ は完全であり，$H^i(K)$ の台は $Y$ 上固有であり，これはすべての $i$ について成り立つ．
+$Y \to S$ は平坦である．
+\end{enumerate}
+さらに，いずれの場合も $X \to S$ が固有ならば台に関する条件は自動的に成り立つ．
+\end{lemma}
+
+\begin{proof}
+$M$ を $D^b_{\textit{Coh}}(\mathcal{O}_X)$ の対象とする．いずれの場合も
+Derived Categories of Schemes, 補題 \ref{perfect-lemma-direct-image-coherent}
+を用いて
+$$
+\Phi_K(M) = R\text{pr}_{2, *}(
+L\text{pr}_1^*M
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+K)
+$$
+が $D^b_{\textit{Coh}}(\mathcal{O}_Y)$ に属することを示す．導来テンソル積
+$L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K$
+は $D(\mathcal{O}_{X \times_S Y})$ の擬連接対象である（Cohomology, 補題
+\ref{cohomology-lemma-pseudo-coherent-pullback}，Derived Categories of Schemes,
+補題 \ref{perfect-lemma-identify-pseudo-coherent-noetherian}，および Cohomology,
+補題 \ref{cohomology-lemma-tensor-pseudo-coherent} による）．したがって，その
+コホモロジー層は連接である（再び Derived Categories of Schemes, 補題
+\ref{perfect-lemma-identify-pseudo-coherent-noetherian} による）．いずれの場合も
+% P07-ERR-1118: non-rendering source pointer.
+$H^i(L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K)$
+の台は $Y$ 上固有である．実際，これらの台は $H^i(K)$ の台の合併に含まれる．
+したがって，いずれの場合もこのテンソル積が下に有界であることを示せば十分である．
+
+\medskip\noindent
+場合 (1)．Cohomology, 補題 \ref{cohomology-lemma-variant-derived-pullback} により
+$$
+L\text{pr}_1^*M
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+K
+\cong
+\text{pr}_1^{-1}M
+\otimes_{\text{pr}_1^{-1}\mathcal{O}_X}^\mathbf{L}
+K
+$$
+である．記法は明らかであろう．したがって，Tor 次元に関する仮定と，
+% P07-ERR-1119: non-rendering source pointer.
+$M$ が非零なコホモロジー層を有限個しかもたないという事実から，望む有界性が
+従う．
+
+\medskip\noindent
+場合 (2) では，仮定から $K$ が $D(\text{pr}_1^{-1}\mathcal{O}_X)$ の対象として
+有限 Tor 次元をもつことが従うので，前段落の議論を適用できる．
+
+\medskip\noindent
+場合 (3) でも，$K$ は $D(\text{pr}_1^{-1}\mathcal{O}_X)$ の対象として有限 Tor
+次元をもつ．実際，アフィン開集合 $U = \Spec(A)$ および $V = \Spec(B)$ を
+それぞれ $X$ と $Y$ から選び，これらがアフィン開集合 $W = \Spec(R)$（$S$ の
+開集合）の中へ写るものとする．
+このとき $K|_{U \times V}$ は，有限 $A \otimes_R B$-加群からなる有界複体
+$M^\bullet$ により与えられる．$A$ は有限次元の正則環であるから，各 $M^i$ は
+$A$-加群として有限射影次元をもち（Algebra, 補題
+\ref{algebra-lemma-finite-gl-dim-finite-dim-regular}），したがって $A$-加群として
+有限 Tor 次元をもつ．ゆえに $M^\bullet$ は $A$-加群の複体として有限 Tor 次元を
+もつ（More on Algebra, 補題
+\ref{more-algebra-lemma-complex-finite-tor-dimension-modules}）．
+% P07-ERR-1120: non-rendering source pointer.
+$X \times Y$ は準コンパクトなので，区間 $[a, b]$ であって，任意の点
+$z \in X \times Y$ における茎 $K_z$ が
+$[a, b]$ に Tor 振幅をもち，その基礎環が
+$\mathcal{O}_{X, \text{pr}_1(z)}$ であるものが存在する．
+これにより $K$ は $D(\text{pr}_1^{-1}\mathcal{O}_X)$ の対象として有界 Tor 次元を
+もつ．Cohomology, 補題 \ref{cohomology-lemma-tor-amplitude-stalk} を参照せよ．
+% P07-ERR-1121: non-rendering source pointer.
+以上の二つの段落と同様に結論を得る．
+
+\medskip\noindent
+場合 (4)．上の記法のもとで，環準同型 $R \to B$ は平坦である．したがって環準同型
+$A \to A \otimes_R B$ は平坦である．ゆえに任意の射影的
+$A \otimes_R B$-加群は $A$-平坦である．したがって
+$A \otimes_R B$-加群からなる任意の完全複体は，$A$-加群の複体として有限 Tor
+次元をもち，上と同様に結論を得る．
+\end{proof}
+
+\begin{example}
+\label{equiv-example-diagonal-fourier-mukai}
+スキームの分離射 $X \to S$ をとる．このとき対角射
+$\Delta : X \to X \times_S X$ は閉埋め込みであり，したがって
+$\mathcal{O}_\Delta = \Delta_*\mathcal{O}_X = R\Delta_*\mathcal{O}_X$
+は有限型準連接 $\mathcal{O}_{X \times_S X}$-加群であり，いずれの射影に関しても
+$X$ 上平坦である．この場合，Fourier--Mukai 関手
+$\Phi_{\mathcal{O}_\Delta}$ は恒等関手に等しい．実際，任意の
+$M \in D(\mathcal{O}_X)$ に対して
+\begin{align*}
+L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S X}}^\mathbf{L}
+\mathcal{O}_\Delta
+& =
+L\text{pr}_1^*M \otimes_{\mathcal{O}_{X \times_S X}}^\mathbf{L}
+R\Delta_*\mathcal{O}_X \\
+& =
+R\Delta_*(
+L\Delta^*L\text{pr}_1^*M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_X) \\
+& =
+R\Delta_*(M)
+\end{align*}
+を得る．第一の等式については上で論じた．第二の等式は Cohomology, 補題
+\ref{cohomology-lemma-projection-formula-closed-immersion} である．第三の等式は
+$\text{pr}_1 \circ \Delta = \text{id}_X$ と Cohomology, 補題
+\ref{cohomology-lemma-derived-pullback-composition} による．これを
+$X$ へ $R\text{pr}_{2, *}$ により押し出すと，$M$ を得る．これは Cohomology, 補題
+\ref{cohomology-lemma-derived-pushforward-composition} と
+$\text{pr}_2 \circ \Delta = \text{id}_X$ による．
+\end{example}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-right-adjoint}
+\begin{reference}
+\cite{Rizzardo} の議論と比較せよ．
+\end{reference}
+$X \to S$ と $Y \to S$ を準コンパクトかつ準分離的なスキームの射とする．
+$\Phi : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$ を，擬連接な核
+$K \in D_\QCoh(\mathcal{O}_{X \times_S Y})$ をもつ Fourier--Mukai 関手とする．
+$a : D_\QCoh(\mathcal{O}_Y) \to  D_\QCoh(\mathcal{O}_{X \times_S Y})$ を
+$R\text{pr}_{2, *}$ の右随伴とする．Duality for Schemes, 補題
+\ref{duality-lemma-twisted-inverse-image} を参照せよ．次で定める．
+$$
+K' = (Y \times_S X \to X \times_S Y)^*
+R\SheafHom_{\mathcal{O}_{X \times_S Y}}(K, a(\mathcal{O}_Y)) \in
+D_\QCoh(\mathcal{O}_{Y \times_S X})
+$$
+また，対応する Fourier--Mukai 変換を
+$\Phi' : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$ と書く．標準写像
+$$
+\Hom_X(M, \Phi'(N)) \longrightarrow \Hom_Y(\Phi(M), N)
+$$
+があり，$M$ を $D_\QCoh(\mathcal{O}_X)$ の中で，$N$ を
+$D_\QCoh(\mathcal{O}_Y)$ の中で動かすとき関手的である．これは次の場合に
+同型である．
+\begin{enumerate}
+\item $N$ は完全である．
+\item $K$ は完全で，$X \to S$ は有限表示な固有平坦射である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-fourier-Mukai-QCoh} により，主張に現れる関手 $\Phi$ が得られる．
+Duality for Schemes, 補題
+\ref{duality-lemma-twisted-inverse-image-bounded-below} により，
+$a(\mathcal{O}_Y)$ は $D^+_\QCoh(\mathcal{O}_{X \times_S Y})$ に属する．したがって
+$K$ が擬連接ならば，Derived Categories of Schemes, 補題
+\ref{perfect-lemma-quasi-coherence-internal-hom} により
+$K' \in D_\QCoh(\mathcal{O}_{Y \times_S X})$ であり，
+% P07-ERR-1122: non-rendering source pointer.
+指示した $\Phi'$ が得られる．
+
+\medskip\noindent
+以下，
+$\otimes^\mathbf{L} = \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}$
+および
+$\SheafHom = R\SheafHom_{\mathcal{O}_{X \times_S Y}}$.
+と略記する．$M$ を $D_\QCoh(\mathcal{O}_X)$ の対象，$N$ を
+$D_\QCoh(\mathcal{O}_Y)$ の対象とする．このとき
+\begin{align*}
+\Hom_Y(\Phi(M), N)
+& =
+\Hom_Y(R\text{pr}_{2, *}(L\text{pr}_1^*M \otimes^\mathbf{L} K), N) \\
+& =
+\Hom_{X \times_S Y}(L\text{pr}_1^*M \otimes^\mathbf{L} K, a(N)) \\
+& =
+\Hom_{X \times_S Y}(L\text{pr}_1^*M,
+R\SheafHom(K, a(N))) \\
+& =
+\Hom_X(M, R\text{pr}_{1, *}R\SheafHom(K, a(N)))
+\end{align*}
+である．ここでは Cohomology, 補題 \ref{cohomology-lemma-internal-hom} および
+\ref{cohomology-lemma-adjoint} を用いた．また標準写像
+$$
+L\text{pr}_2^*N \otimes^\mathbf{L} R\SheafHom(K, a(\mathcal{O}_Y))
+\xrightarrow{\alpha}
+R\SheafHom(K, L\text{pr}_2^*N \otimes^\mathbf{L} a(\mathcal{O}_Y))
+\xrightarrow{\beta}
+R\SheafHom(K, a(N))
+$$
+がある．ここで $\alpha$ は Cohomology, 補題
+\ref{cohomology-lemma-internal-hom-diagonal-better} であり，$\beta$ は
+Duality for Schemes, 式 (\ref{duality-equation-compare-with-pullback}) である．
+これらの射をすべて合成すると，補題の主張に掲げた関手的な射が得られる．
+
+\medskip\noindent
+射 $\alpha$ は，$K$ または $N$ のいずれかが完全ならば Derived Categories of
+Schemes, 補題 \ref{perfect-lemma-internal-hom-evaluate-tensor-isomorphism} により
+同型である．射 $\beta$ は，$N$ が完全ならば Duality for Schemes, 補題
+\ref{duality-lemma-compare-with-pullback-perfect} により同型であり，また一般に
+$X \to S$ が有限表示な平坦固有射ならば Duality for Schemes, 補題
+\ref{duality-lemma-compare-with-pullback-flat-proper} により同型である．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-left-adjoint}
+\begin{reference}
+\cite{Rizzardo} の議論と比較せよ．
+\end{reference}
+Noether スキーム $S$ をとる．$Y \to S$ を平坦かつ固有な Gorenstein 射とし，
+$X \to S$ を有限型射とする．$\omega^\bullet_{Y/S}$ で $Y$ の $S$ 上の相対双対化
+複体を表す．$\Phi : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$ を，完全な核
+$K \in D_\QCoh(\mathcal{O}_{X \times_S Y})$ をもつ Fourier--Mukai 関手とする．次で定める．
+$$
+K' = (Y \times_S X \to X \times_S Y)^*(K^\vee
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+L\text{pr}_2^*\omega^\bullet_{Y/S})
+\in
+D_\QCoh(\mathcal{O}_{Y \times_S X})
+$$
+また，対応する Fourier--Mukai 変換を
+$\Phi' : D_\QCoh(\mathcal{O}_Y) \to D_\QCoh(\mathcal{O}_X)$ と書く．標準同型
+$$
+\Hom_Y(N, \Phi(M)) \longrightarrow \Hom_X(\Phi'(N), M)
+$$
+があり，$M$ を $D_\QCoh(\mathcal{O}_X)$ の中で，$N$ を
+$D_\QCoh(\mathcal{O}_Y)$ の中で動かすとき関手的である．
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-fourier-Mukai-QCoh} により，主張に現れる関手 $\Phi$ が得られる．
+
+\medskip\noindent
+この状況では，相対双対化複体の形成は基底変換と可換である．Duality for Schemes,
+注意 \ref{duality-remark-relative-dualizing-complex} を参照せよ．したがって
+$L\text{pr}_2^*\omega^\bullet_{Y/S} = \omega^\bullet_{X \times_S Y/X}$ である．
+さらに，$\omega^\bullet_{Y/S}$ は導来圏の可逆対象であり，したがって特に完全で
+ある．Duality for Schemes, 補題
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein} を参照せよ．
+
+\medskip\noindent
+補題を実際に証明するため，少し技巧を用いる．すなわち，$X$ と $Y$，および
+$K$ と $K'$ の役割を入れ替えると，補題
+\ref{equiv-lemma-fourier-mukai-right-adjoint} の状況になり，結論が得られることを示す．
+$K'$ は完全対象のテンソル積として完全であることは明らかなので，補題
+\ref{equiv-lemma-fourier-mukai-right-adjoint} の議論を適用できる．補題
+\ref{equiv-lemma-fourier-mukai-right-adjoint} の手続きを $K'$ に対して
+$Y \times_S X$ 上で適用したとき，$K$ に同型な複体が得られることを示すには，
+次を示せば十分である（詳細は省略する）．
+$$
+R\SheafHom(R\SheafHom(K, \omega^\bullet_{X \times_S Y/X}),
+\omega^\bullet_{X \times_S Y/X}) = K
+$$
+これは $K$ が完全で，$\omega^\bullet_{X \times_S Y/X}$ が可逆であることから
+明らかである．詳細は省略する．したがって補題
+\ref{equiv-lemma-fourier-mukai-right-adjoint} は写像
+$$
+\Hom_Y(N, \Phi(M)) \longrightarrow \Hom_X(\Phi'(N), M)
+$$
+を与え，これは $M$ を $D_\QCoh(\mathcal{O}_X)$ の中で，$N$ を
+$D_\QCoh(\mathcal{O}_Y)$ の中で動かすとき関手的である．また $K'$ が完全なので
+同型である．以上で証明が完了する．
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-fourier-mukai-flat-proper-over-noetherian}
+Noether スキーム $S$ をとる．
+\begin{enumerate}
+\item $X$, $Y$ が $S$ 上固有かつ平坦で，$K$ が
+$D_{perf}(\mathcal{O}_{X \times_S Y})$ に属するとき，Fourier--Mukai 関手
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$.
+を得る．
+\item $X$, $Y$, $Z$ が $S$ 上固有かつ平坦で，$K \in
+D_{perf}(\mathcal{O}_{X \times_S Y})$, $K' \in
+D_{perf}(\mathcal{O}_{Y \times_S Z})$ ならば，合成
+$\Phi_{K'} \circ \Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Z)$
+は $\Phi_{K''}$ に等しい．ここで $K'' \in D_{perf}(\mathcal{O}_{X \times_S Z})$
+は補題 \ref{equiv-lemma-compose-fourier-mukai} のように計算される．
+\item $X$, $Y$, $K$, $\Phi_K$ が (1) のとおりで，$X \to S$ が Gorenstein
+ならば，$\Phi_{K'} : D_{perf}(\mathcal{O}_Y) \to D_{perf}(\mathcal{O}_X)$ は
+$\Phi_K$ の右随伴である．ここで $K' \in D_{perf}(\mathcal{O}_{Y \times_S X})$ は
+$L\text{pr}_1^*\omega_{X/S}^\bullet
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K^\vee$ の
+$Y \times_S X \to X \times_S Y$ による引き戻しである．
+\item $X$, $Y$, $K$, $\Phi_K$ が (1) のとおりで，$Y \to S$ が Gorenstein
+ならば，$\Phi_{K''} : D_{perf}(\mathcal{O}_Y) \to D_{perf}(\mathcal{O}_X)$ は
+$\Phi_K$ の左随伴である．ここで $K'' \in D_{perf}(\mathcal{O}_{Y \times_S X})$ は
+$L\text{pr}_2^*\omega_{Y/S}^\bullet
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K^\vee$ の
+$Y \times_S X \to X \times_S Y$ による引き戻しである．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{equiv-lemma-fourier-mukai} の (4) から直ちに従う．
+
+\medskip\noindent
+(2) は補題 \ref{equiv-lemma-compose-fourier-mukai} と，
+$K'' = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*K')$ が完全であるという事実から従う．後者は，例えば
+Derived Categories of Schemes, 補題
+\ref{perfect-lemma-flat-proper-perfect-direct-image} による．
+
+\medskip\noindent
+(3) の随伴性が準連接コホモロジー層をもつすべての複体上で成り立つことは，補題
+\ref{equiv-lemma-fourier-mukai-right-adjoint} から従う．ここで $K'$ は
+$R\SheafHom_{\mathcal{O}_{X \times_S Y}}(K, a(\mathcal{O}_Y))$
+の $Y \times_S X \to X \times_S Y$ による引き戻しであり，$a$ は
+$R\text{pr}_{2, *} : D_\QCoh(\mathcal{O}_{X \times_S Y}) \to
+D_\QCoh(\mathcal{O}_Y)$ の右随伴である．$f : X \to S$ で $X$ の構造射を表す．
+$f$ は固有なので，関手
+$f^! : D_\QCoh^+(\mathcal{O}_S) \to D_\QCoh^+(\mathcal{O}_X)$
+は，$D_\QCoh^+(\mathcal{O}_S)$ への制限として，
+$Rf_* : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_S)$ の右随伴に一致する．
+Duality for Schemes, \ref{duality-section-upper-shriek} 節を参照せよ．したがって，
+Duality for Schemes, 注意 \ref{duality-remark-relative-dualizing-complex} で定義された
+相対双対化複体 $\omega_{X/S}^\bullet$ は
+$\omega_{X/S}^\bullet = f^!\mathcal{O}_S$ に等しい．相対双対化複体の形成は
+基底変換と可換なので（Duality for Schemes, 注意
+\ref{duality-remark-relative-dualizing-complex} を参照），
+$a(\mathcal{O}_Y) = L\text{pr}_1^*\omega_{X/S}^\bullet$ を得る．したがって
+$$
+R\SheafHom_{\mathcal{O}_{X \times_S Y}}(K, a(\mathcal{O}_Y))
+\cong
+L\text{pr}_1^*\omega_{X/S}^\bullet
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} K^\vee
+$$
+である．これは Cohomology, 補題 \ref{cohomology-lemma-dual-perfect-complex} による．
+最後に，$X \to S$ は Gorenstein と仮定しているので，相対双対化複体は可逆である．
+これは Duality for Schemes, 補題
+\ref{duality-lemma-affine-flat-Noetherian-gorenstein} から従う．したがって
+$\omega_{X/S}^\bullet$ は完全である（Cohomology, 補題
+\ref{cohomology-lemma-invertible-derived}）．したがって $K'$ も完全である．ゆえに
+$\Phi_{K'}$ は実際に $D_{perf}(\mathcal{O}_Y)$ を
+$D_{perf}(\mathcal{O}_X)$ の中へ送り，これで (3) の証明が完了する．
+
+\medskip\noindent
+(4) の証明も (3) と同じであるが，補題
+\ref{equiv-lemma-fourier-mukai-left-adjoint} を補題
+\ref{equiv-lemma-fourier-mukai-right-adjoint} の代わりに用いる．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{分解と有界性}
+\label{equiv-section-tricks-smooth}
+
+\noindent
+滑らかで固有なスキームの対角は、扱いやすい分解をもつ。
+
+\begin{lemma}
+\label{equiv-lemma-on-product}
+$R$ を Noether 環とする。$X$, $Y$ を、分解性をもつ有限型
+$R$-スキームとする。任意の連接 $\mathcal{O}_{X \times_R Y}$-加群
+$\mathcal{F}$ に対し、全射
+$\mathcal{E} \boxtimes \mathcal{G} \to \mathcal{F}$ が存在する。
+ここで $\mathcal{E}$ は有限局所自由 $\mathcal{O}_X$-加群であり、
+$\mathcal{G}$ は有限局所自由 $\mathcal{O}_Y$-加群である。
+\end{lemma}
+
+\begin{proof}
+$U \subset X$ および $V \subset Y$ をアフィン開部分スキームとする。
+$\mathcal{I} \subset \mathcal{O}_X$ を、$X \setminus U$ 上の被約な誘導閉部分スキーム
+構造のイデアル層とする。同様に、$\mathcal{I}' \subset \mathcal{O}_Y$ を、
+$Y \setminus V$ 上の被約な誘導閉部分スキーム構造のイデアル層とする。
+このときイデアル層
+$$
+\mathcal{J} = \Im(\text{pr}_1^*\mathcal{I} \otimes_{\mathcal{O}_{X \times_R Y}}
+\text{pr}_2^*\mathcal{I}' \to \mathcal{O}_{X \times_R Y})
+$$
+は $V(\mathcal{J}) = X \times_R Y \setminus U \times_R V$ を満たす。
+任意の切断 $s \in \mathcal{F}(U \times_R V)$ に対し、整数 $n > 0$ と写像
+$\mathcal{J}^n \to \mathcal{F}$ であって、$U \times_R V$ への制限が $s$ を与えるものを
+取ることができる。スキームのコホモロジー、補題
+\ref{coherent-lemma-homs-over-open} を参照せよ。
+仮定により、全射 $\mathcal{E} \to \mathcal{I}$ および
+$\mathcal{G} \to \mathcal{I}'$ を選べる。これらは、それぞれ全射
+$$
+\mathcal{E} \boxtimes \mathcal{G} \to \mathcal{J}
+\quad\text{かつ}\quad
+\mathcal{E}^{\otimes n} \boxtimes \mathcal{G}^{\otimes n} \to \mathcal{J}^n
+$$
+を、したがって写像
+$\mathcal{E}^{\otimes n} \boxtimes \mathcal{G}^{\otimes n} \to \mathcal{F}$
+であって、その像が切断 $s$ を $U \times_R V$ 上で含むものを与える。
+$X \times_R Y$ は $U \times_R V$ という形の有限個のアフィン開集合で被覆でき、
+$\mathcal{F}|_{U \times_R V}$ は有限個の切断で生成されるので（性質、補題
+\ref{properties-lemma-finite-type-module}）、全射
+$$
+\bigoplus\nolimits_{j = 1, \ldots, N}
+\mathcal{E}_j^{\otimes n_j} \boxtimes \mathcal{G}_j^{\otimes n_j}
+\to \mathcal{F}
+$$
+が存在すると結論できる。ここで $\mathcal{E}_j$ は $X$ 上有限局所自由であり、
+$\mathcal{G}_j$ は $Y$ 上有限局所自由である。
+$\mathcal{E} = \bigoplus \mathcal{E}_j^{\otimes n_j}$ および
+$\mathcal{G} = \bigoplus \mathcal{G}_j^{\otimes n_j}$ と置けば、補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-on-product-general}
+$R$ を環とする。$X$, $Y$ を、分解性をもつ準コンパクトかつ準分離な
+$R$-スキームとする。任意の有限型準連接 $\mathcal{O}_{X \times_R Y}$-加群
+$\mathcal{F}$ に対し、全射 $\mathcal{E} \boxtimes \mathcal{G} \to \mathcal{F}$ が
+存在する。ここで $\mathcal{E}$ は有限局所自由 $\mathcal{O}_X$-加群であり、
+$\mathcal{G}$ は有限局所自由 $\mathcal{O}_Y$-加群である。
+\end{lemma}
+
+\begin{proof}
+極限論法によって補題 \ref{equiv-lemma-on-product} から従う。
+読者には証明を飛ばすことを勧める。
+$X \times_R Y$ は $X \times_\mathbf{Z} Y$ の閉部分スキームなので、
+$R$ を $\mathbf{Z}$ で置き換えても差し支えない。
+性質、補題 \ref{properties-lemma-finite-directed-colimit-surjective-maps} により、
+$\mathcal{F}$ を有限表示 $\mathcal{O}_{X \times_R Y}$-加群の商として書ける。
+したがって $\mathcal{F}$ は有限表示であると仮定してよい。次に、
+$X = \lim X_i$ を、各 $X_i$ が $\mathbf{Z}$ 上有限表示となるように書け、
+同様に $Y = \lim Y_j$ と書ける。極限、命題
+\ref{limits-proposition-approximate} を参照せよ。このとき $\mathcal{F}$ は
+$\mathcal{F}_{ij}$ に降下し、後者はある $X_i \times_R Y_j$ 上にある（極限、補題
+\ref{limits-lemma-descend-modules-finite-presentation}）、分解性をもつという性質も
+降下する（スキームの導来圏、補題
+\ref{perfect-lemma-resolution-property-descends}）。そこで $\mathcal{F}_{ij}$ に
+補題 \ref{equiv-lemma-on-product} を適用し、引き戻せばよい。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-diagonal-resolution}
+$R$ を Noether 環とする。$X$ を、分解性をもつ分離的有限型
+$R$-スキームとする。
+$\mathcal{O}_\Delta = \Delta_*(\mathcal{O}_X)$ と置く。ここで
+% P07-ERR-0590: non-rendering source pointer.
+$\Delta : X \to X \times_R X$ は $X/k$ の対角写像である。分解
+$$
+\ldots \to
+\mathcal{E}_2 \boxtimes \mathcal{G}_2 \to
+\mathcal{E}_1 \boxtimes \mathcal{G}_1 \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0 \to
+\mathcal{O}_\Delta \to 0
+$$
+が存在する。ここで各 $\mathcal{E}_i$ および $\mathcal{G}_i$ は
+有限局所自由 $\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+$X$ は分離的なので、対角射 $\Delta$ は閉埋入である。したがって
+$\mathcal{O}_\Delta$ は連接 $\mathcal{O}_{X \times_R X}$-加群である
+（スキームのコホモロジー、補題
+\ref{coherent-lemma-i-star-equivalence}）。ゆえに補題は直ちに
+補題 \ref{equiv-lemma-on-product} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-Ext-0-regular}
+$X$ を次元 $d < \infty$ の正則 Noether スキームとする。このとき
+\begin{enumerate}
+\item $\mathcal{F}$, $\mathcal{G}$ を連接 $\mathcal{O}_X$-加群とすると、
+$\Ext^n_X(\mathcal{F}, \mathcal{G}) = 0$ が $n > d$ に対して成り立つ。
+\item $K, L \in D^b_{\textit{Coh}}(\mathcal{O}_X)$ および
+$a \in \mathbf{Z}$ に対し、$H^i(K) = 0$ が $i < a + d$ で成り立ち、かつ
+$H^i(L) = 0$ が $i \geq a$ で成り立つならば、$\Hom_X(K, L) = 0$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明するため、スペクトル系列
+$$
+H^p(X, \SheafExt^q(\mathcal{F}, \mathcal{G})) \Rightarrow
+\Ext^{p + q}_X(\mathcal{F}, \mathcal{G})
+$$
+を用いる。コホモロジー、節 \ref{cohomology-section-ext} を参照せよ。
+$x \in X$ とする。このとき
+$$
+\SheafExt^q(\mathcal{F}, \mathcal{G})_x =
+\SheafExt^q_{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)
+$$
+である。コホモロジー、補題 \ref{cohomology-lemma-stalk-internal-hom} を
+参照せよ（ここでは、スキームの導来圏、補題
+\ref{perfect-lemma-identify-pseudo-coherent-noetherian} により
+$\mathcal{F}$ が擬連接であることも用いた）。
+$d_x = \dim(\mathcal{O}_{X, x})$ と置く。
+$\mathcal{O}_{X, x}$ は正則なので、環 $\mathcal{O}_{X, x}$ の大域次元は
+$d_x$ である。代数、命題 \ref{algebra-proposition-regular-finite-gl-dim} を
+参照せよ。したがって $\SheafExt^q_{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)$ は
+$q > d_x$ に対して零である。
+これより、加群 $\SheafExt^q(\mathcal{F}, \mathcal{G})$ の台の次元は
+高々 $d - q$ である。ゆえにコホモロジー、命題
+\ref{cohomology-proposition-vanishing-Noetherian} により、
+$H^p(X, \SheafExt^q(\mathcal{F}, \mathcal{G})) = 0$ が $p > d - q$ に対して成り立つ。
+これで (1) が証明された。
+
+\medskip\noindent
+(2) の証明。
+$K$ と $L$ の零でないコホモロジー層の個数に関する帰納法を用いてよい。
+これらの個数が $0, 1$ の場合は (1) から従う。$K$ の零でない
+コホモロジー層の個数が $> 1$ ならば、最小の $i \in \mathbf{Z}$ であって
+$H^i(K)$ が零でないものを取る。このとき識別三角
+$$
+H^i(K)[-i] \to K \to \tau_{\geq i + 1}K
+$$
+を得る（導来圏、注意
+\ref{derived-remark-truncation-distinguished-triangle}）。
+導来圏、補題 \ref{derived-lemma-representable-homological} により、
+$\Hom(K, L)$ の消滅は、$\Hom(H^i(K)[-i], L)$ と
+$\Hom(\tau_{\geq i + 1}K, L)$ の消滅から従う。$L$ が二つ以上の零でないコホモロジー層を
+もつ場合も同様である。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-split-complex-regular}
+$X$ を次元 $d < \infty$ の正則 Noether スキームとする。
+$K \in D^b_{\textit{Coh}}(\mathcal{O}_X)$ および $a \in \mathbf{Z}$ とする。
+$H^i(K) = 0$ が $a < i < a + d$ に対して成り立つならば、
+$K = \tau_{\leq a}K \oplus \tau_{\geq a + d}K$ である。
+\end{lemma}
+
+\begin{proof}
+仮定したコホモロジー層の消滅により
+$\tau_{\leq a}K = \tau_{\leq a + d - 1}K$ である。導来圏、注意
+\ref{derived-remark-truncation-distinguished-triangle} により識別三角
+$$
+\tau_{\leq a}K \to K \to \tau_{\geq a + d}K \xrightarrow{\delta}
+(\tau_{\leq a}K)[1]
+$$
+を得る。導来圏、補題 \ref{derived-lemma-split} により、射 $\delta$ が
+零であることを示せば十分である。これは補題 \ref{equiv-lemma-Ext-0-regular} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-diagonal-trick}
+$k$ を体とする。$X$ を $k$ 上準コンパクトかつ分離的な滑らかなスキームとする。
+有限局所自由 $\mathcal{O}_X$-加群 $\mathcal{E}$ および $\mathcal{G}$ であって、
+$$
+\mathcal{O}_\Delta \in \langle \mathcal{E} \boxtimes \mathcal{G} \rangle
+$$
+を $D(\mathcal{O}_{X \times X})$ において満たすものが存在する。記法は
+導来圏、節 \ref{derived-section-generators} のものとする。
+\end{lemma}
+
+\begin{proof}
+多様体、補題 \ref{varieties-lemma-smooth-regular} により $X$ は正則であることを
+思い出そう。したがってスキームの導来圏、補題
+\ref{perfect-lemma-regular-resolution-property} により $X$ は分解性をもつ。
+よって補題 \ref{equiv-lemma-diagonal-resolution} のような分解を選べる。
+$\dim(X) = d$ とする。$X \times X$ は $k$ 上滑らかなので正則である。
+したがって $X \times X$ は $\dim(X \times X) = 2d$ を満たす
+正則 Noether スキームである。対象
+$$
+K = (\mathcal{E}_{2d} \boxtimes \mathcal{G}_{2d} \to
+\ldots \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0)
+$$
+は $D_{perf}(\mathcal{O}_{X \times X})$ の対象であり、コホモロジー層
+$\mathcal{O}_\Delta$ を次数 $0$ にもち、
+$\Ker(\mathcal{E}_{2d} \boxtimes \mathcal{G}_{2d} \to
+\mathcal{E}_{2d-1} \boxtimes \mathcal{G}_{2d-1})$ を次数 $-2d$ にもち、他のすべての次数では
+零である。したがって補題 \ref{equiv-lemma-split-complex-regular} により、
+$\mathcal{O}_\Delta$ は $K$ の直和因子であることが
+$D_{perf}(\mathcal{O}_{X \times X})$ において分かる。明らかに、対象 $K$ は
+$$
+\left\langle
+\bigoplus\nolimits_{i = 0, \ldots, 2d} \mathcal{E}_i \boxtimes \mathcal{G}_i
+\right\rangle
+\subset
+\left\langle
+\left(\bigoplus\nolimits_{i = 0, \ldots, 2d} \mathcal{E}_i\right)
+\boxtimes
+\left(\bigoplus\nolimits_{i = 0, \ldots, 2d} \mathcal{G}_i\right)
+\right\rangle
+$$
+に属し、これで証明は完了する。（この対象がこの圏に含まれることについては、
+導来圏、補題 \ref{derived-lemma-generated-by-E-explicit} および
+\ref{derived-lemma-in-cone-n} を参照してもよい。）
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-smooth-proper-strong-generator}
+$k$ を体とする。$X$ を $k$ 上固有かつ滑らかなスキームとする。
+このとき $D_{perf}(\mathcal{O}_X)$ は強生成元をもつ。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-diagonal-trick} を用いて、有限局所自由 $\mathcal{O}_X$-加群
+$\mathcal{E}$ および $\mathcal{G}$ を、
+$\mathcal{O}_\Delta \in \langle \mathcal{E} \boxtimes \mathcal{G} \rangle$ が
+$D(\mathcal{O}_{X \times X})$ において成り立つように選ぶ。$\mathcal{G}$ が
+$D_{perf}(\mathcal{O}_X)$ の
+強生成元であることを示す。導来圏、節
+\ref{derived-section-operate-on-full} の記法を用い、次を満たす
+$m, n \geq 1$ を選ぶ：
+$$
+\mathcal{O}_\Delta \in
+smd(add(\mathcal{E} \boxtimes \mathcal{G}[-m, m])^{\star n})
+$$
+これは導来圏、補題 \ref{derived-lemma-find-smallest-containing-E} により可能である。
+$K$ を $D_{perf}(\mathcal{O}_X)$ の対象とする。
+$L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} -$ は
+完全関手であり、かつ
+$$
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+(\mathcal{E} \boxtimes \mathcal{G}) =
+(K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E}) \boxtimes \mathcal{G}
+$$
+であるから、導来圏、注意 \ref{derived-remark-operations-functor} より
+$$
+L\text{pr}_1^*K
+\otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+\mathcal{O}_\Delta
+\in
+smd(add(
+(K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E})
+\boxtimes \mathcal{G}[-m, m])^{\star n})
+$$
+を得る。完全関手 $R\text{pr}_{2, *}$ を適用し、
+$$
+R\text{pr}_{2, *}
+\left((K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E}) \boxtimes
+\mathcal{G}\right) =
+R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E})
+\otimes_k \mathcal{G}
+$$
+であることを用いる。これはスキームの導来圏、補題
+\ref{perfect-lemma-cohomology-base-change} による。したがって
+$$
+K = R\text{pr}_{2, *}(L\text{pr}_1^*K
+\otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} \mathcal{O}_\Delta)
+\in
+smd(add(R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{E})
+\otimes_k \mathcal{G}[-m, m])^{\star n})
+$$
+を得る。この等式は例 \ref{equiv-example-diagonal-fourier-mukai} の議論から従う。
+$K$ は完全なので、$a \leq b$ であって、$H^i(X, K)$ が
+$i \in [a, b]$ に対してのみ零でないものが存在する。$X$ は固有なので、各
+$H^i(X, K)$ は有限次元である。
+したがって右辺は $smd(add(\mathcal{G}[-m + a, m + b])^{\star n})$ に含まれ、
+これは上で挙げた参照の一つにより $\langle \mathcal{G} \rangle_n$ に含まれる。
+これで証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-diagonal-trick-proper}
+$k$ を体とする。$X$ を $k$ 上固有かつ滑らかなスキームとする。
+% P07-ERR-0591: non-rendering source pointer.
+整数 $m, n \geq 1$ と有限局所自由 $\mathcal{O}_X$-加群 $\mathcal{G}$ であって、
+任意の連接 $\mathcal{O}_X$-加群が
+$smd(add(\mathcal{G}[-m, m])^{\star n})$ に含まれるものが存在する。
+記法は導来圏、節 \ref{derived-section-operate-on-full} のものとする。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-smooth-proper-strong-generator} の証明において、
+$m', n \geq 1$ が存在し、任意の連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ に対して
+次が成り立つことを示した：
+$$
+\mathcal{F} \in smd(add(\mathcal{G}[-m' + a, m' + b])^{\star n})
+$$
+ここで $a \leq b$ は、$H^i(X, \mathcal{F})$ が $i \in [a, b]$ に対してのみ
+零でない任意の整数である。したがって $a = 0$ および $b = \dim(X)$ と取れる。
+$m = \max(m', m' + b)$ と取れば証明は完了する。
+\end{proof}
+
+\noindent
+次の補題が、この節の表題で言及した有界性の結果である。
+
+\begin{lemma}
+\label{equiv-lemma-boundedness}
+$k$ を体とする。$X$ を $k$ 上滑らかかつ固有なスキームとする。
+$\mathcal{A}$ をアーベル圏とする。$H : D_{perf}(\mathcal{O}_X) \to \mathcal{A}$ を、
+すべての $K$（$D_{perf}(\mathcal{O}_X)$ の対象）に対して、対象 $H^i(K)$ が
+有限個の $i \in \mathbf{Z}$ に対してのみ零でないようなホモロジー的関手とする
+（導来圏、定義 \ref{derived-definition-homological}）。このとき整数 $m \geq 1$ が
+存在して、$H^i(\mathcal{F}) = 0$ が任意の連接 $\mathcal{O}_X$-加群
+$\mathcal{F}$ と $i \not \in [-m, m]$ に対して成り立つ。
+コホモロジー的関手についても同様である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-diagonal-trick-proper} と導来圏、補題
+\ref{derived-lemma-forward-cone-n} を組み合わせればよい。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-bounded-fibres}
+$k$ を体とする。$X$, $Y$ を $k$ 上有限型スキームとする。
+$K_0 \to K_1 \to K_2 \to \ldots$ を $D_{perf}(\mathcal{O}_{X \times Y})$ の
+対象の系とし、$m \geq 0$ を次を満たす整数とする：
+\begin{enumerate}
+\item $H^q(K_i)$ は $q \leq m$ に対してのみ零でない。
+\item 任意の連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ で
+$\dim(\text{Supp}(\mathcal{F})) = 0$ を満たすものに対して、対象
+$$
+R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}^\mathbf{L}
+K_n)
+$$
+のコホモロジー層は $[-m, m] \cup [-m - n, m - n]$ の外の次数で消滅し、
+$n > 2m$ に対して遷移写像は $[-m, m]$ 内の次数のコホモロジー層上で
+同型を誘導する。
+\end{enumerate}
+このとき $K_n$ のコホモロジー層は $[-m, m] \cup [-m - n, m - n]$ の外の
+次数で消滅し、$n > 2m$ に対して遷移写像は $[-m, m]$ 内の次数の
+コホモロジー層上で同型を誘導する。さらに、$X$ と $Y$ が $k$ 上滑らかならば、
+十分大きい $n$ に対して $K_n = K \oplus C_n$ を
+$D_{perf}(\mathcal{O}_{X \times Y})$ において得る。ここで
+% P07-ERR-0592: non-rendering source pointer.
+$K$ は $[-m, m]$ 内の次数にのみコホモロジーをもち、$C_n$ は
+$[-m - n, m - n]$ 内の次数にのみコホモロジーをもち、遷移写像は
+$K$ の各コピーの間の同型を定める。
+\end{lemma}
+
+\begin{proof}
+$Z$ を (2) のような $\mathcal{F}$ のスキーム論的台とする。
+このとき $Z \to \Spec(k)$ は有限であり、したがって $Z \times Y \to Y$ は
+有限である。$M$ を $D_\QCoh(\mathcal{O}_{X \times Y})$ の対象で、
+$Z \times Y$ 上に台をもつコホモロジー層を備えたものとすると、
+$H^i(R\text{pr}_{2, *}(M)) = \text{pr}_{2, *}H^i(M)$ が成り立つ。また関手
+$\text{pr}_{2, *}$ は $Z \times Y$ 上に台をもつ準連接加群において忠実である。
+詳細は省略する。したがって、対象
+$$
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}^\mathbf{L} K_n
+$$
+は $D_{perf}(\mathcal{O}_{X \times Y})$ において、
+$[-m, m] \cup [-m - n, m - n]$ の外で消滅するコホモロジー層をもち、
+$n > 2m$ に対して遷移写像は $[-m, m]$ 内のコホモロジー層上で同型を誘導する。
+$z \in X \times Y$ を、閉点 $x \in X$ に写る閉点とする。このとき
+$$
+K_{n, z} \otimes_{\mathcal{O}_{X \times Y, z}}^\mathbf{L}
+\mathcal{O}_{X \times Y, z}/\mathfrak m_x^t\mathcal{O}_{X \times Y, z}
+$$
+は区間 $[-m, m] \cup [-m - n, m - n]$ 内にのみ零でないコホモロジーをもつ。
+さらに代数、補題 \ref{more-algebra-lemma-kollar-kovacs-pseudo-coherent} により、
+$K_{n, z}$ は次数 $[-m, m] \cup [-m - n, m - n]$ 内にのみ零でない
+コホモロジーをもつと結論できる。これは $X \times Y$ のすべての閉点に対して
+成り立つので、$K_n$ のコホモロジー層は次数
+$[-m, m] \cup [-m - n, m - n]$ 内にのみ零でない。
+まったく同様に、写像 $K_n \to K_{n + 1}$ は $[-m, m]$ 内の次数の
+コホモロジー層上で $n > 2m$ に対して同型であることが分かる。
+
+\medskip\noindent
+$X$ と $Y$ が $k$ 上滑らかならば、$X \times Y$ は $k$ 上滑らかであり、
+多様体、補題 \ref{varieties-lemma-smooth-regular} により正則である。
+したがって、$K_n$ の直和分解は、$n > 2m + \dim(X \times Y)$ となれば
+補題 \ref{equiv-lemma-split-complex-regular} により得られる。
+最後の主張はこれから明らかである。
+\end{proof}
+
+
+
+
+
+\section{同胞関手}
+\label{equiv-section-sibling}
+
+\noindent
+% P07-ERR-1126: non-rendering source pointer.
+この節では、次の概念に関するいくつかの圏論的結果を証明する。
+
+\begin{definition}
+\label{equiv-definition-siblings}
+$\mathcal{A}$ をアーベル圏、$\mathcal{D}$ を三角圏とする。三角圏の二つの完全関手
+$$
+F, F' : D^b(\mathcal{A}) \longrightarrow \mathcal{D}
+$$
+が次の二条件を満たすとき、これらを {\it 同胞} といい、または
+$F'$ は $F$ の {\it 同胞} であるという：
+\begin{enumerate}
+\item 関手 $F \circ i$ と $F' \circ i$ は同型である。ここで
+$i : \mathcal{A} \to D^b(\mathcal{A})$ は包含関手である。
+\item $F(K) \cong F'(K)$ が任意の $K$（$D^b(\mathcal{A})$ の対象）に対して
+成り立つ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+第二の条件が第一の条件から従うこともある。
+
+\begin{lemma}
+\label{equiv-lemma-sibling-fully-faithful}
+$\mathcal{A}$ をアーベル圏、$\mathcal{D}$ を三角圏とする。
+$F, F' : D^b(\mathcal{A}) \longrightarrow \mathcal{D}$ を
+三角圏の完全関手とする。次を仮定する：
+\begin{enumerate}
+\item 関手 $F \circ i$ と $F' \circ i$ は同型である。ここで
+$i : \mathcal{A} \to D^b(\mathcal{A})$ は包含関手である。
+\item すべての $X, Y \in \Ob(\mathcal{A})$ に対して、
+$\Ext^q_\mathcal{D}(F(X), F(Y)) = 0$ が $q < 0$ ならば成り立つ（例えば
+$F$ が充満忠実ならば成り立つ）。
+\end{enumerate}
+このとき $F$ と $F'$ は同胞である。
+\end{lemma}
+
+\begin{proof}
+$K \in D^b(\mathcal{A})$ とする。$F(K)$ が $F'(K)$ と同型であることを示す。
+$K$ は有界複体 $A^\bullet$ で表せ、その各項は $\mathcal{A}$ の対象である。
+$K$ を移動で置き換えることにより、$A^i = 0$ が $i > 0$ に対して成り立つと
+仮定してよい。$n \geq 0$ を、$A^{-i} = 0$ が $i > n$ に対して成り立つように
+選ぶ。対象
+$$
+M_i = (A^{-i} \to \ldots \to A^0)[-i],\quad i = 0, \ldots, n
+$$
+は、$D^b(\mathcal{A})$ において複体
+$A^\bullet = A^{-n} \to \ldots \to A^0$ のポストニコフ系をなす。
+ここで複体も $D^b(\mathcal{A})$ 内で考えている。導来圏、例
+\ref{derived-example-key-postnikov} を参照せよ。
+$F$ と $F'$ はともに三角圏の完全関手なので、
+$$
+F(M_i)
+\quad\text{および}\quad
+F'(M_i)
+$$
+も $\mathcal{D}$ において複体
+$$
+F(A^{-n}) \to \ldots \to F(A^0) =
+F'(A^{-n}) \to \ldots \to F'(A^0)
+$$
+のポストニコフ系をなす。仮定によりこれらの対象間の負次数の $\Ext$ は
+すべて消滅するから、ポストニコフ系の一意性（導来圏、補題
+\ref{derived-lemma-existence-postnikov-system}）により
+$F(K) = F(M_n[n]) \cong F'(M_n[n]) = F'(K)$ と結論できる。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-sibling-faithful}
+$F$ と $F'$ を定義 \ref{equiv-definition-siblings} の意味で同胞とする。このとき
+\begin{enumerate}
+\item $F$ が本質的全射ならば、$F'$ も本質的全射である。
+\item $F$ が充満忠実ならば、$F'$ も充満忠実である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は同胞の性質 (2) から直ちに従う。
+
+\medskip\noindent
+$F$ が充満忠実であると仮定する。$\mathcal{D}' \subset \mathcal{D}$ を
+$F$ の本質像と書くと、$F : D^b(\mathcal{A}) \to \mathcal{D}'$ は同値である。
+同胞の性質 (2) により関手 $F'$ は $\mathcal{D}'$ を経由するので、関手
+$H = F^{-1} \circ F' : D^b(\mathcal{A}) \to D^b(\mathcal{A})$ を考えられる。
+$H$ は恒等関手の同胞である。$H$ が充満忠実であることを示せば十分なので、
+次の段落で論じる問題に帰着する。
+
+\medskip\noindent
+$\mathcal{D} = D^b(\mathcal{A})$ と置く。恒等関手の同胞
+$F : \mathcal{D} \to \mathcal{D}$ が充満忠実であることを示さなければならない。
+% P07-ERR-1127: non-rendering source pointer.
+$a_X : X \to F(X)$ で、定義 \ref{equiv-definition-siblings} から得られる
+$X \in \Ob(\mathcal{A})$ に関する関手的同型を表す。
+任意の $K$（$\mathcal{D}$ の対象）と識別三角
+$K_1 \to K_2 \to K_3$（$\mathcal{D}$ の識別三角）に対し、写像
+$$
+F : \Hom(K, K_i[n]) \to \Hom(F(K), F(K_i[n]))
+$$
+がすべての $n \in \mathbf{Z}$ および $i = 1, 3$ に対して同型ならば、
+$i = 2$ およびすべての $n \in \mathbf{Z}$ に対しても同様である。ここでは
+$5$ 項補題（ホモロジー、補題 \ref{homology-lemma-five-lemma}）と
+導来圏、補題 \ref{derived-lemma-representable-homological} を用いる。詳細は省略する。
+同様に、写像
+$$
+F : \Hom(K_i[n], K) \to \Hom(F(K_i[n]), F(K))
+$$
+がすべての $n \in \mathbf{Z}$ および $i = 1, 3$ に対して同型ならば、
+$i = 2$ およびすべての $n \in \mathbf{Z}$ に対しても同様である。
+標準切断と零でないコホモロジー対象の個数に関する帰納法を用いると、
+$$
+F : \Ext^q(X, Y) \to \Ext^q(F(X), F(Y))
+$$
+がすべての $X, Y \in \Ob(\mathcal{A})$ およびすべての $q \in \mathbf{Z}$ に
+対して全単射であることを示せば十分である。$F$ は $\text{id}$ の同胞なので、
+$F(X) \cong X$ および $F(Y) \cong Y$ であり、したがって右辺は $q < 0$ で
+零である。$q = 0$ の場合は、$F$ が恒等関手の同胞であるという仮定からよい。
+残るのは $q > 0$ の場合である。
+
+\medskip\noindent
+$q = 1$ の場合：単射性。$\xi$ を $\Ext^1(X, Y)$ の元とすると、識別三角
+$$
+Y \to E \to X \xrightarrow{\xi} Y[1]
+$$
+$E \in \Ob(\mathcal{A})$ であることに注意する。$F$ は恒等関手の同胞なので、
+可換図式
+$$
+\xymatrix{
+E \ar[d] \ar[r] & X \ar[d] \\
+F(E) \ar[r] & F(X)
+}
+$$
+を得る。その縦矢印は同型 $a_E$ および $a_X$ である。
+TR3 により、最初の $\xi$ に付随する識別三角は識別三角
+$$
+F(Y) \to F(E) \to F(X) \xrightarrow{F(\xi)} F(Y[1]) = F(Y)[1]
+$$
+と同型である。したがって $\xi = 0$ であることと $F(\xi)$ が零であることは
+同値である。すなわち、
+$F : \Ext^1(X, Y) \to \Ext^1(F(X), F(Y))$ は単射である。
+
+\medskip\noindent
+$q = 1$ の場合：全射性。$\theta$ を $\Ext^1(F(X), F(Y))$ の元とする。
+これは $F(X)$ の $F(Y)$ による拡大を $\mathcal{A}$ において定める。
+$F(E)$ と書ける中間項を選べる。これは $F$ が恒等関手の同胞だからである。
+したがって識別三角
+$$
+F(Y) \xrightarrow{F(\alpha)} F(E)
+\xrightarrow{F(\beta)} F(X)
+\xrightarrow{\theta} F(Y[1]) = F(Y)[1]
+$$
+を得る。ここである射 $\alpha : Y \to E$ および $\beta : E \to X$ が存在する。
+$F$ は恒等関手の同胞なので、列 $0 \to Y \to E \to X \to 0$ は
+$\mathcal{A}$ における短完全列である！　したがって識別三角
+$$
+Y \xrightarrow{\alpha} E \xrightarrow{\beta} X \xrightarrow{\delta} Y[1]
+$$
+を得る。ここである射 $\delta : X \to Y[1]$ が存在する。完全関手 $F$ を適用すると
+識別三角
+$$
+F(Y) \xrightarrow{F(\alpha)} F(E) \xrightarrow{F(\beta)} F(X)
+\xrightarrow{F(\delta)} F(Y)[1]
+$$
+を得る。上と同様に論じると、これらの三角は同型である。したがって可換図式
+$$
+\xymatrix{
+F(X) \ar[d]^\gamma \ar[r]_{F(\delta)} & F(Y[1]) \ar[d]_\epsilon \\
+F(X) \ar[r]^\theta & F(Y[1])
+}
+$$
+が存在する。ここで $\gamma$, $\epsilon$ はある同型である（さらに多くを述べられるが、
+その情報は必要ない）。$\gamma = F(\gamma')$ および
+$\epsilon = F(\epsilon')$ と書ける。このとき
+$\theta = F(\epsilon' \circ \delta \circ (\gamma')^{-1})$ であり、全射性が従う。
+
+\medskip\noindent
+$q > 1$ の場合：全射性。Yoneda 拡大を用いると（導来圏、節
+\ref{derived-section-ext} を参照）、任意の元 $\xi$（$\Ext^q(F(X), F(Y))$ の元）に対し、
+$F(X) = B_0, B_1, \ldots, B_{q - 1}, B_q = F(Y) \in \Ob(\mathcal{A})$ と元
+$$
+\xi_i \in \Ext^1(B_{i - 1}, B_i)
+$$
+であって、$\xi$ が合成 $\xi_q \circ \ldots \circ \xi_1$ となるものを取れる。
+$B_i = F(A_i)$ と書く（もちろん $A_i = B_i$ だが、これを用いる必要はない）。
+すると
+$$
+\xi_i = F(\eta_i) \in \Ext^1(F(A_{i - 1}), F(A_i))
+\quad\text{ただし}\quad
+\eta_i \in \Ext^1(A_{i - 1}, A_i)
+$$
+である。これは $q = 1$ の場合の全射性による。このとき
+$\eta = \eta_q \circ \ldots \circ \eta_1$ は $\Ext^q(X, Y)$ の元であり、
+$F(\eta) = \xi$ を満たす。
+
+\medskip\noindent
+$q > 1$ の場合：単射性。$\xi$ を $\Ext^q(X, Y)$ の元とすると、識別三角
+$$
+Y[q - 1] \to E \to X \xrightarrow{\xi} Y[q]
+$$
+$F$ を適用すると識別三角
+$$
+F(Y)[q - 1] \to F(E) \to F(X) \xrightarrow{F(\xi)} F(Y)[q]
+$$
+$F(\xi) = 0$ ならば、$F(E) \cong F(Y)[q - 1] \oplus F(X)$ が
+$\mathcal{D}$ において成り立つ。導来圏、補題
+\ref{derived-lemma-split} を参照せよ。$F$ は恒等関手の同胞なので
+$E \cong F(E)$ であり、したがって
+$$
+E \cong F(E) \cong F(Y)[q - 1] \oplus F(X) \cong Y[q - 1] \oplus X
+$$
+言い換えると、$E$ はそのコホモロジー対象の直和と同型である。
+これは最初の識別三角が分裂すること、すなわち $\xi = 0$ を意味する。
+\end{proof}
+
+\noindent
+非標準的な定義を導入しよう。$\mathcal{A}$ をアーベル圏とする。
+$\mathcal{A}$ が {\it 十分多くの負対象をもつ} とは、任意の
+$X \in \Ob(\mathcal{A})$ に対し、次を満たす対象 $N$ が存在することをいう：
+\begin{enumerate}
+\item 全射 $N \to X$ が存在する。
+\item $\Hom(X, N) = 0$ である。
+\end{enumerate}
+命題 \ref{equiv-proposition-siblings-isomorphic} の証明に備えて、この概念に関する
+二つの補題を証明しよう。
+
+\begin{lemma}
+\label{equiv-lemma-good-map}
+$\mathcal{A}$ を十分多くの負対象をもつアーベル圏とする。
+$X \in D^b(\mathcal{A})$ とする。$b \in \mathbf{Z}$ が
+$H^i(X) = 0$ を $i > b$ に対して満たすとする。このとき写像
+$N[-b] \to X$ であって、誘導される写像 $N \to H^b(X)$ が全射であり、
+$\Hom(H^b(X), N) = 0$ を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+切断関手を用いると、$X$ を複体
+$A^a \to A^{a + 1} \to \ldots \to A^b$ で表せ、その各項は
+$\mathcal{A}$ の対象である。$N$ を $\mathcal{A}$ の対象で、全射
+$t : N \to A^b$ が存在し、かつ $\Hom(A^b, N) = 0$ を満たすものとして選ぶ。
+このとき全射 $t$ は所望の写像 $N[-b] \to X$ を定める。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-good-map-zero}
+$\mathcal{A}$ を十分多くの負対象をもつアーベル圏とする。
+$f : X \to X'$ を $D^b(\mathcal{A})$ の射とする。$b \in \mathbf{Z}$ が
+$H^i(X) = 0$ を $i > b$ に対して、また $H^i(X') = 0$ を $i \geq b$ に対して
+満たすとする。このとき写像 $N[-b] \to X$ であって、誘導される写像
+$N \to H^b(X)$ が全射であり、$\Hom(H^b(X), N) = 0$ を満たし、かつ合成
+$N[-b] \to X \to X'$ が零であるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$f$ は写像 $f^\bullet : A^\bullet \to B^\bullet$ で表せ、その両辺は
+$\mathcal{A}$ の対象からなる有界複体である。例えば導来圏、補題
+\ref{derived-lemma-bounded-derived} を参照せよ。対象
+$$
+C = \Ker(A^b \to A^{b + 1}) \times_{\Ker(B^b \to B^{b + 1})} B^{b - 1}
+$$
+を $\mathcal{A}$ において考える。$H^b(B^\bullet) = 0$ なので、
+$C \to H^b(A^\bullet)$ は全射である。一方、写像 $C \to A^b \to B^b$ は
+写像 $C \to B^{b - 1} \to B^b$ と同じであり、したがって合成
+$C[-b] \to X \to X'$ は零である。$\mathcal{A}$ は十分多くの負対象をもつので、
+対象 $N$ と全射 $N \to C \oplus H^b(X)$ であって
+$\Hom(C \oplus H^b(X), N) = 0$ を満たすものを取れる。この $N$ と写像
+$N[-b] \to X$ が補題で求める解である。
+\end{proof}
+
+\noindent
+次の命題の証明に込められた見事な着想については、原論文
+\cite[命題 2.16]{Orlov-K3} を読むことを勧める。
+
+\begin{proposition}
+\label{equiv-proposition-siblings-isomorphic}
+\begin{reference}
+\cite[命題 2.16]{Orlov-K3}。上の負対象の定義で
+$\Ext^q(N, X)$ の $q > 0$ における消滅を仮定する必要がないという事実は、
+\cite{Canonaco-Stellari} による。
+\end{reference}
+$F$ と $F'$ を定義 \ref{equiv-definition-siblings} の意味で同胞とする。
+$F$ が充満忠実であり、$\mathcal{A}$ が十分多くの負対象をもつと仮定する
+（上を参照）。このとき $F$ と $F'$ は同型な関手である。
+\end{proposition}
+
+\begin{proof}
+定義 \ref{equiv-definition-siblings} の (2) により、関手 $F'$ の像は関手 $F$ の
+本質像に含まれる。したがって関手 $H = F^{-1} \circ F'$ は恒等関手の同胞である。
+よって次の段落で述べる場合に帰着する。
+
+\medskip\noindent
+$\mathcal{D} = D^b(\mathcal{A})$ と置く。恒等関手の同胞
+$F : \mathcal{D} \to \mathcal{D}$ が恒等関手と同型であることを示さなければならない。
+$X$ を $\mathcal{D}$ の対象とする。$X$ が {\it 幅} $w = w(X)$ をもつとは、
+$w \geq 0$ が、整数 $a \in \mathbf{Z}$ であって $H^i(X) = 0$ が
+$i \not \in [a, a + w - 1]$ に対して成り立つものが存在するような最小の整数で
+あることをいう。$F$ は恒等関手の同胞であり、かつ
+$F \circ [n] = [n] \circ F$ なので、すでに同型
+$$
+c_X : X \to F(X)
+$$
+が $w(X) \leq 1$ に対して与えられており、移動と両立する。さらに、
+$X = A[-a]$ および $X' = A'[-a]$ がある $A, A' \in \Ob(\mathcal{A})$ に
+対して成り立つならば、任意の射 $f : X \to X'$ に対して図式
+\begin{equation}
+\label{equiv-equation-to-show}
+\vcenter{
+\xymatrix{
+X \ar[d]_{c_X} \ar[r]_f &
+X' \ar[d]^{c_{X'}} \\
+F(X) \ar[r]^{F(f)} &
+F(X')
+}
+}
+\end{equation}
+は可換である。
+
+\medskip\noindent
+次に、$f : X \to X'$ を $w(X), w(X') \leq 1$ を満たす任意の射とするとき、
+図式 (\ref{equiv-equation-to-show}) が可換であることを示そう。
+$X$ または $X'$ が零ならば明らかである。そうでなければ、
+$X = A[-a]$ および $X' = A'[-a']$ と、一意的な $A, A'$（$\mathcal{A}$ の対象）と
+$a, a' \in \mathbf{Z}$ により書ける。$a = a'$ の場合は上で論じた。
+$a' > a$ ならば $f = 0$ であり（導来圏、補題
+\ref{derived-lemma-negative-exts}）、結果は明らかである。
+$a' < a$ ならば $f$ は元 $\xi \in \Ext^q(A, A')$ に対応し、
+$q = a - a'$ である。Yoneda 拡大を用いると（導来圏、節
+\ref{derived-section-ext} を参照）、
+$A = A_0, A_1, \ldots, A_{q - 1}, A_q = A' \in \Ob(\mathcal{A})$ と元
+$$
+\xi_i \in \Ext^1(A_{i - 1}, A_i)
+$$
+であって、$\xi$ が合成 $\xi_q \circ \ldots \circ \xi_1$ となるものを取れる。
+言い換えると、$X_i = A_i[-a + i]$ と置くことにより、射
+$$
+X = X_0 \xrightarrow{f_1} X_1 \to \ldots \to X_{q - 1}
+\xrightarrow{f_q} X_q = X'
+$$
+を得る。その合成は
+% P07-ERR-0596: non-rendering source pointer.
+$f$ である。図式 (\ref{equiv-equation-to-show}) が $f_1, \ldots, f_q$ に対して可換ならば
+$f$ に対しても可換なので、$q = 1$ の場合に帰着する。この場合、移動した後で
+識別三角
+$$
+A' \to E \to A \xrightarrow{f} A'[1]
+$$
+$E$ は $\mathcal{A}$ の対象であることに注意する。次の図式を考える：
+$$
+\xymatrix{
+E \ar[d]_{c_E} \ar[r] &
+A \ar[d]_{c_A} \ar[r]_f &
+A'[1] \ar[d]^{c_{A'}[1]}
+\ar@{..>}@<-1ex>[d]_\gamma \ar@{..>}[ld]^\epsilon \ar[r] &
+E[1] \ar[d]^{c_E[1]} \\
+F(E) \ar[r] &
+F(A) \ar[r]^{F(f)} &
+F(A')[1] \ar[r] &
+F(E)[1]
+}
+$$
+その各行は識別三角である。右の正方形はすでに可換だが、中央の正方形が
+可換かどうかはまだ分からない。三角圏の公理により、図式を可換にする射
+$\gamma$ を取れる。このとき $\gamma - c_{A'}[1]$ と
+$F(A')[1] \to F(E)[1]$ の合成は零であるから、
+$\epsilon : A'[1] \to F(A)$ であって
+$\gamma - c_{A'}[1] = F(f) \circ \epsilon$ を満たすものを取れる。しかし任意の矢
+$A'[1] \to F(A)$ は、$\mathcal{A}$ の対象間の負次数 Ext 類なので零である。
+したがって $\gamma = c_{A'}[1]$ であり、中央の正方形も可換である。これが
+示したかったことである。
+
+\medskip\noindent
+証明を完了するため、$w$ に関する帰納法により、同型
+$c_X : X \to F(X)$ がすべての $X$ で $w(X) \leq w$ を満たすものに対して存在し、
+そのような対象間のすべての射と
+両立することを示す。基底の場合 $w = 1$ は上で示した。ある $w \geq 1$ に
+対して結果を知っていると仮定する。
+
+\medskip\noindent
+$X$ を $w(X) = w + 1$ を満たす対象とする。$a \in \mathbf{Z}$ を、
+$H^i(X) = 0$ が $i \not \in [a, a + w]$ に対して成り立つように選ぶ。
+$b = a + w$ と置くと、$H^b(X)$ は零でない。補題 \ref{equiv-lemma-good-map} のような
+$N[-b] \to X$ を選ぶ。
+% P07-ERR-1129: non-rendering source pointer.
+識別三角
+$$
+N[-b] \to X \to Y \to N[-b + 1]
+$$
+を選ぶ。コホモロジーの長完全列を計算すると $w(Y) \leq w$ を得る。
+したがって帰納法により、次の図式の実線矢印を得る：
+$$
+\xymatrix{
+N[-b] \ar[r] \ar[d]_{c_N[-b]} &
+X \ar[r] \ar@{..>}[d]_{c_{N[-b] \to X}} &
+Y \ar[r] \ar[d]^{c_Y} &
+N[-b + 1] \ar[d]^{c_N[-b + 1]} \\
+F(N)[-b] \ar[r] &
+F(X) \ar[r] &
+F(Y) \ar[r] &
+F(N)[-b + 1]
+}
+$$
+点線矢印 $c_{N[-b] \to X}$ を得る。導来圏、補題
+\ref{derived-lemma-uniqueness-third-arrow} により、この点線矢印は一意である。
+実際、$\Hom(X, F(N)[-b]) \cong \Hom(X, N[-b]) = 0$ である。これは
+$N$ の選び方による。より正確には、
+$c_{N[-b] \to X}$ は、頂点 $X, Y, F(X), F(Y)$ をもつ正方形を可換にする
+一意的な点線矢印である。
+
+\medskip\noindent
+$N'[-b] \to X$ を補題 \ref{equiv-lemma-good-map} のような別の写像とし、
+$c_{N[-b] \to X} = c_{N'[-b] \to X}$ を証明しよう。
+写像 $(N \oplus N')[-b] \to X$ も補題 \ref{equiv-lemma-good-map} の条件を満たす。
+したがって、$N'[-b] \to X$ は $N'[-b] \to N[-b] \to X$ と分解し、
+後者の第一の射がある射 $N' \to N$ から来ると仮定してよい。
+識別三角 $N[-b] \to X \to Y \to N[-b + 1]$ および
+$N'[-b] \to X \to Y' \to N'[-b + 1]$ を選ぶ。公理 TR3 により、
+% P07-ERR-0597: non-rendering source pointer.
+射 $g : Y' \to Y$ を、$\text{id}_X$ および $N' \to N$ とともに三角の射を
+なすように取れる。$g$ に対して (\ref{equiv-equation-to-show}) が成り立つので、
+$$
+(F(X) \to F(Y)) \circ c_{N'[-b] \to X} = (F(X) \to F(Y)) \circ c_{N[-b] \to X}
+$$
+と結論できる。上の構成で述べた $c_{N[-b] \to X}$ の一意性から、いま
+$c_{N'[-b] \to X} = c_{N[-b] \to X}$ が従う。
+
+\medskip\noindent
+したがって、$X$ が幅 $w + 1$ をもつときの同型 $c_X : X \to F(X)$ を、
+$c_{N[-b] \to X}$ の共通の値として定義できる。ここで $N[-b] \to X$ は
+補題 \ref{equiv-lemma-good-map} のような写像である。証明を完了するには、
+$f : X \to X'$ を、$w(X) \leq w + 1$ および $w(X') \leq w + 1$ を満たす
+対象間の任意の射とするとき、図式 (\ref{equiv-equation-to-show}) が可換であることを
+示さなければならない。$a \leq b \leq a + w$ を、$H^i(X) = 0$ が
+$i \not \in [a, b]$ に対して成り立つように選び、
+$a' \leq b' \leq a' + w$ を、$H^i(X') = 0$ が
+$i \not \in [a', b']$ に対して成り立つように選ぶ。
+主張を示すため $(b' - a') + (b - a)$ に関する帰納法を用いる。
+（この数が零の場合が基底であり、$w \geq 1$ なのでこれはよい。）
+二つの場合に分ける。
+
+\medskip\noindent
+場合 I：$b' < b$。この場合、補題 \ref{equiv-lemma-good-map-zero} により、
+補題 \ref{equiv-lemma-good-map} のような $N[-b] \to X$ を、合成
+$N[-b] \to X \to X'$ が零となるように選べる。
+% P07-ERR-0598: non-rendering source pointer.
+識別三角 $N[-b] \to X \to Y \to N[-b + 1]$ を選ぶ。
+$N[-b] \to X'$ は零なので、$f$ は $X \to Y \to X'$ と分解する。
+$H^i(Y)$ は $i \in [a, b - 1]$ に対してのみ零でないから、帰納法により
+(\ref{equiv-equation-to-show}) は $Y \to X'$ に対して可換である。
+図式 (\ref{equiv-equation-to-show}) は $X \to Y$ に対して、$w(X) = w + 1$ ならば
+構成により、$w(X) \leq w$ ならば第一の帰納法の仮定により可換である。
+したがって (\ref{equiv-equation-to-show}) は $f$ に対して可換である。
+
+\medskip\noindent
+場合 II：$b' \geq b$。この場合、補題 \ref{equiv-lemma-good-map} のような
+$N'[-b'] \to X'$ を選ぶ。さらに $\Hom(H^{b'}(X), N') = 0$ と仮定してよい
+（これは $b' = b$ の場合にのみ関係する）。実際、$N'$ を対象 $N''$ で
+置き換えればよい。この対象は $N' \oplus H^{b'}(X)$ への全射をもち、かつ
+$\Hom(N' \oplus H^{b'}(X), N'') = 0$ を満たす。
+識別三角 $N'[-b'] \to X' \to Y' \to N'[-b' + 1]$ を選ぶ。
+$\Hom(X, X') \to \Hom(X, Y')$ は $N'$ の選び方により単射なので（詳細は省略）、
+$\Hom(X, F(X')) \to \Hom(X, F(Y'))$ についても同じである。
+したがってこの場合、合成 $X \to Y'$（射 $X \to X' \to Y'$ の合成）に対して
+(\ref{equiv-equation-to-show}) が可換であることを確かめれば十分である。
+$H^i(Y')$ は $i \in [a', b' - 1]$ に対してのみ零でないので、帰納法の仮定から
+結論が従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{充満忠実性の導出}
+\label{equiv-section-get-fully-faithful}
+
+\noindent
+% P07-ERR-1132: non-rendering source pointer.
+% P07-ERR-0599: non-rendering source pointer.
+関手がいつ充満忠実となるかを知ることは有用である。そこで
+\cite[補題 2.15]{Orlov-K3} の次の変形を与える。
+
+\begin{lemma}
+\label{equiv-lemma-get-fully-faithful}
+\begin{reference}
+\cite[補題 2.15]{Orlov-K3} の変形
+\end{reference}
+$F : \mathcal{D} \to \mathcal{D}'$ を三角圏の完全関手とする。
+$S \subset \Ob(\mathcal{D})$ を対象の集合とする。次を仮定する：
+\begin{enumerate}
+\item $F$ は右随伴と左随伴の両方をもつ。
+\item $K \in \mathcal{D}$ に対し、$\Hom(E, K[i]) = 0$ がすべての
+$E \in S$ および $i \in \mathbf{Z}$ について成り立つならば $K = 0$ である。
+\item $K \in \mathcal{D}$ に対し、$\Hom(K, E[i]) = 0$ がすべての
+$E \in S$ および $i \in \mathbf{Z}$ について成り立つならば $K = 0$ である。
+\item 写像 $\Hom(E, E'[i]) \to \Hom(F(E), F(E')[i])$ で $F$ が誘導するものは、
+すべての $E, E' \in S$ および $i \in \mathbf{Z}$ に対して全単射である。
+\end{enumerate}
+このとき $F$ は充満忠実である。
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-1134: non-rendering source pointer.
+$F_r$ および $F_l$ で、それぞれ $F$ の右随伴および左随伴を表す。
+$E \in S$ に対して識別三角
+$$
+E \to F_r(F(E)) \to C \to E[1]
+$$
+を選ぶ。ここで第一の矢印は随伴の単位である。$E' \in S$ に対して
+$$
+\Hom(E', F_r(F(E))[i]) = \Hom(F(E'), F(E)[i]) = \Hom(E', E[i])
+$$
+である。最後の等式は仮定 (4) による。したがってホモロジー的関手
+$\Hom(E', -)$（導来圏、補題 \ref{derived-lemma-representable-homological}）を
+上の識別三角に適用すると、$\Hom(E', C[i]) = 0$ がすべての
+$i \in \mathbf{Z}$ および $E' \in S$ に対して成り立つと結論できる。仮定 (2) により
+$C = 0$ および $E = F_r(F(E))$ を得る。
+
+\medskip\noindent
+$K \in \Ob(\mathcal{D})$ に対して識別三角
+$$
+F_l(F(K)) \to K \to C \to F_l(F(K))[1]
+$$
+を選ぶ。ここで第一の矢印は随伴の余単位である。$E \in S$ に対して
+$$
+\Hom(F_l(F(K)), E[i]) = \Hom(F(K), F(E)[i]) =
+\Hom(K, F_r(F(E))[i]) = \Hom(K, E[i])
+$$
+である。最後の等式は第一段落の結果による。したがって前と同様に、
+$\Hom(C, E[i]) = 0$ がすべての $E \in S$ および $i \in \mathbf{Z}$ に対して
+成り立つと結論できる。ゆえに仮定 (3) により $C = 0$ である。
+したがって $F$ は圏、補題 \ref{categories-lemma-adjoint-fully-faithful} により
+充満忠実である。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-duality-at-point}
+$k$ を体とする。$X$ を $k$ 上有限型の正則スキームとする。
+$x \in X$ を閉点とする。連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ で $x$ に
+台をもつものに対し、連接 $\mathcal{O}_X$-加群 $\mathcal{F}'$ で $x$ に台をもち、
+$\mathcal{F}_x$ と $\mathcal{F}'_x$ が Matlis 双対となるものを選ぶ。
+このとき同型
+$$
+\Hom_X(\mathcal{F}, M) =
+H^0(X, M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{F}'[-d_x])
+$$
+が存在する。ここで $d_x = \dim(\mathcal{O}_{X, x})$ であり、
+% P07-ERR-1135: non-rendering source pointer.
+$M$（$D_{perf}(\mathcal{O}_X)$ の対象）に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ は $x$ に台をもつので、
+$$
+\Hom_X(\mathcal{F}, M) =
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, M_x)
+$$
+であり、同様に
+$$
+H^0(X, M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{F}'[-d_x]) =
+\text{Tor}^{\mathcal{O}_{X, x}}_{d_x}(M_x, \mathcal{F}'_x)
+$$
+である。したがって、次を示せば十分である。Noether 正則局所環 $A$（次元 $d$）と
+有限長 $A$-加群 $N$ が与えられ、$N'$ が $N$ の Matlis 双対ならば、関手的同型
+$$
+\Hom_A(N, K) = \text{Tor}^A_d(K, N')
+$$
+が $K$（$D_{perf}(A)$ の対象）に対して存在する。左辺は
+$H^0(R\Hom_A(N, A) \otimes_A^\mathbf{L} K)$ と書ける。これはさらに代数、補題
+\ref{more-algebra-lemma-dual-perfect-complex} と、$N$ が $D(A)$ の完全対象を
+定めるという事実による。したがって公式は、
+$$
+R\Hom_A(N, A) = R\Hom_A(N, A[d])[-d] = N'[-d]
+$$
+であることから従う。これは双対化複体、補題
+\ref{dualizing-lemma-dualizing-finite-length} と、$A[d]$ が $A$ 上の正規化された
+双対化複体であることによる（$A$ は双対化複体、補題
+\ref{dualizing-lemma-regular-gorenstein} により Gorenstein である）。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-orthogonal-point-sheaf}
+$k$ を体とする。$X$ を $k$ 上有限型の正則スキームとする。
+$x \in X$ を閉点とし、$\mathcal{O}_x$ で $x$ における値が $\kappa(x)$ である
+摩天楼層を表す。$K$ を $D_{perf}(\mathcal{O}_X)$ の対象とする。
+\begin{enumerate}
+\item $\Ext^i_X(\mathcal{O}_x, K) = 0$ ならば、開近傍 $U$ であって $x$ を含み、
+$H^{i - d_x}(K)|_U = 0$ を満たすものが存在する。ここで
+$d_x = \dim(\mathcal{O}_{X, x})$ である。
+\item $\Hom_X(\mathcal{O}_x, K[i]) = 0$ がすべての $i \in \mathbf{Z}$ に
+対して成り立つならば、$K$ は $x$ のある開近傍上で零である。
+\item $\Ext^i_X(K, \mathcal{O}_x) = 0$ ならば、開近傍 $U$ であって $x$ を含み、
+$H^i(K^\vee)|_U = 0$ を満たすものが存在する。
+\item $\Hom_X(K, \mathcal{O}_x[i]) = 0$ がすべての $i \in \mathbf{Z}$ に
+対して成り立つならば、$K$ は $x$ のある開近傍上で零である。
+\item $H^i(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x) = 0$ ならば、
+開近傍 $U$ であって $x$ を含み、$H^i(K)|_U = 0$ を満たすものが存在する。
+\item $H^i(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x) = 0$ が
+すべての $i \in \mathbf{Z}$ に対して成り立つならば、$K$ は $x$ のある
+開近傍上で零である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+次に注意する：$H^i(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x)$ は
+$K_x  \otimes_{\mathcal{O}_{X, x}}^\mathbf{L} \kappa(x)$ に等しい。
+したがって (5) はさらに代数、補題
+\ref{more-algebra-lemma-cut-complex-in-two} から従う。(6) は (5) から従う。
+(1) は (5)、補題 \ref{equiv-lemma-duality-at-point}、および $\kappa(x)$ の Matlis 双対が
+$\kappa(x)$ であるという事実から従う。(2) は (1) から従う。
+(3) は (5) と、
+$\Ext^i(K, \mathcal{O}_x) =
+H^i(X, K^\vee \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_x)$
+がコホモロジー、補題 \ref{cohomology-lemma-dual-perfect-complex} により
+成り立つことから従う。(4) は (3) と、いま引用した補題による
+$K \cong (K^\vee)^\vee$ から従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-hom-into-point-sheaf}
+$X$ を Noether スキームとする。$x \in X$ を閉点とし、$\mathcal{O}_x$ で
+$x$ における値が $\kappa(x)$ である摩天楼層を表す。
+$K$ を $D^b_{\textit{Coh}}(\mathcal{O}_X)$ の対象とする。
+$b \in \mathbf{Z}$ とする。次は同値である：
+\begin{enumerate}
+\item $H^i(K)_x = 0$ がすべての $i > b$ に対して成り立つ。
+\item $\Hom_X(K, \mathcal{O}_x[-i]) = 0$ がすべての $i > b$ に対して成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K_x$ を $D^b_{\textit{Coh}}(\mathcal{O}_{X, x})$ 内の複体として考える。
+% P07-ERR-0603: non-rendering source pointer.
+整数 $b_x \in \mathbf{Z}$ が存在して、$K_x$ は上に有界な複体
+$$
+\ldots \to
+\mathcal{O}_{X, x}^{\oplus n_{b_x - 2}} \to
+\mathcal{O}_{X, x}^{\oplus n_{b_x - 1}} \to
+\mathcal{O}_{X, x}^{\oplus n_{b_x}} \to 0 \to \ldots
+$$
+で表せる。ここで $\mathcal{O}_{X, x}^{\oplus n_i}$ は次数 $i$ に位置し、
+すべての遷移写像は係数が $\mathfrak m_x$ に属する行列で与えられる。
+さらに代数、補題
+\ref{more-algebra-lemma-lift-pseudo-coherent-from-residue-field} を参照せよ。
+結果はこれから容易に従う（そして同値な条件が成り立つことと
+$b \geq b_x$ は同値である）。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-get-fully-faithful-geometric}
+$k$ を体とする。$X$ と $Y$ を $k$ 上固有なスキームとする。
+$X$ は正則であると仮定する。このとき $k$-線形完全関手
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ が充満忠実であることと、
+任意の閉点 $x, x' \in X$ に対して写像
+$$
+F : \Ext^i_X(\mathcal{O}_x, \mathcal{O}_{x'})
+\longrightarrow
+\Ext^i_Y(F(\mathcal{O}_x), F(\mathcal{O}_{x'}))
+$$
+がすべての $i \in \mathbf{Z}$ に対して同型であることは同値である。
+ここで $\mathcal{O}_x$ は $x$ における値が $\kappa(x)$ である摩天楼層である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-always-right-adjoints} により関手 $F$ は左随伴と右随伴の両方をもつ。
+したがって補題 \ref{equiv-lemma-get-fully-faithful} の判定法を適用できる。実際、同補題の
+仮定 (2) と (3) は補題 \ref{equiv-lemma-orthogonal-point-sheaf} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-noah-pre}
+\begin{reference}
+ノア・オランダーからの 2020 年 6 月 9 日付電子メール
+\end{reference}
+$k$ を体とする。$X$ を $k$ 上固有な正則スキームとする。
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$ を $k$-線形完全関手とする。
+任意の連接 $\mathcal{O}_X$-加群 $\mathcal{F}$ で
+$\dim(\text{Supp}(\mathcal{F})) = 0$ を満たすものに対して、同型
+$\mathcal{F} \cong F(\mathcal{F})$ が存在すると仮定する。このとき $F$ は
+充満忠実である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-get-fully-faithful-geometric} により、写像
+$$
+F : \Ext^i_X(\mathcal{O}_x, \mathcal{O}_{x'})
+\longrightarrow
+\Ext^i_X(F(\mathcal{O}_x), F(\mathcal{O}_{x'}))
+$$
+がすべての $i \in \mathbf{Z}$ とすべての閉点 $x, x' \in X$ に対して同型であることを
+示せば十分である。仮定により、始域と終域は同型である。
+$x \not = x'$ ならば両辺は零であり、結果は成り立つ。
+$x = x'$ ならば、写像が単射または全射のいずれかであることを示せば十分である。
+$i < 0$ では両辺は零であり、結果は成り立つ。$i = 0$ のとき、零でない任意の写像
+$\alpha : \mathcal{O}_x \to \mathcal{O}_x$ で $\mathcal{O}_X$-加群の射であるものは
+同型である。したがって
+$F(\alpha)$ も同型であり、それゆえ $F(\alpha)$ は零でない。
+% P07-ERR-0604: non-rendering source pointer.
+よって $i = 0$ の場合の結果が従う。$i = 1$ のとき、零でない元
+$\xi$（$\Ext^1(\mathcal{O}_x, \mathcal{O}_x)$ の元）は非分裂短完全列
+$$
+0 \to \mathcal{O}_x \to \mathcal{F} \to \mathcal{O}_x \to 0
+$$
+に対応する。$F(\mathcal{F}) \cong \mathcal{F}$ なので、$F(\mathcal{F})$ も
+$\mathcal{O}_x$ の $\mathcal{O}_x$ による非分裂拡大である。
+$\mathcal{O}_x \cong F(\mathcal{O}_x)$ は単純 $\mathcal{O}_X$-加群であり、
+$\mathcal{F} \cong F(\mathcal{F})$ の長さは $2$ なので、識別三角
+$$
+F(\mathcal{O}_x) \to F(\mathcal{F}) \to F(\mathcal{O}_x)
+\xrightarrow{F(\xi)} F(\mathcal{O}_x)[1]
+$$
+における最初の二本の矢印は短完全列をなし、この短完全列は上の短完全列と
+同型でなければならず、したがって非分裂である。これより $F(\xi)$ は零でなく、
+$i = 1$ の場合が従う。$i > 1$ に対して Ext 類の合成は全射
+$$
+\Ext^1(F(\mathcal{O}_x), F(\mathcal{O}_x)) \otimes \ldots \otimes
+\Ext^1(F(\mathcal{O}_x), F(\mathcal{O}_x))
+\longrightarrow
+\Ext^i(F(\mathcal{O}_x), F(\mathcal{O}_x))
+$$
+を定める。スキームの双対性、補題 \ref{duality-lemma-regular-ideal-ext} を参照せよ。
+したがって次数 $1$ における全射性から $i > 0$ における全射性が従う。
+これで証明は完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{特殊な関手}
+\label{equiv-section-special-functors}
+
+\noindent
+この節では、この章の後半で用いる特殊な型の関手に関する結果をいくつか証明する。
+
+\begin{definition}
+\label{equiv-definition-siblings-geometric}
+$k$ を体とする。$X$, $Y$ を $k$ 上有限型スキームとする。
+$D^b_{\textit{Coh}}(\mathcal{O}_X) = D^b(\textit{Coh}(\mathcal{O}_X))$
+であることを思い出そう。これはスキームの導来圏、命題
+\ref{perfect-proposition-DCoh} による。二つの $k$-線形完全関手
+$$
+F, F' :
+D^b_{\textit{Coh}}(\mathcal{O}_X) = D^b(\textit{Coh}(\mathcal{O}_X))
+\longrightarrow
+D^b_{\textit{Coh}}(\mathcal{O}_Y)
+$$
+を {\it 同胞} という。または $F'$ は $F$ の {\it 同胞} であるという。
+これは $F$ と $F'$ が定義 \ref{equiv-definition-siblings} の意味で、アーベル圏を
+$\textit{Coh}(\mathcal{O}_X)$ として同胞であることを意味する。
+$X$ が正則ならば、
+$D_{perf}(\mathcal{O}_X) = D^b_{\textit{Coh}}(\mathcal{O}_X)$
+である。これはスキームの導来圏、補題
+\ref{perfect-lemma-perfect-on-noetherian} による。このとき $k$-線形完全関手
+$F, F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ にも同じ用語を用いる。
+\end{definition}
+
+\begin{lemma}
+\label{equiv-lemma-exact-functor-preserving-Coh}
+$k$ を体とする。$X$, $Y$ を $k$ 上有限型スキームとし、$X$ は分離的とする。
+$F : D^b_{\textit{Coh}}(\mathcal{O}_X) \to D^b_{\textit{Coh}}(\mathcal{O}_Y)$ を
+$k$-線形完全関手であって、
+$\textit{Coh}(\mathcal{O}_X) \subset D^b_{\textit{Coh}}(\mathcal{O}_X)$
+を
+$\textit{Coh}(\mathcal{O}_Y) \subset D^b_{\textit{Coh}}(\mathcal{O}_Y)$
+へ送るものとする。このとき Fourier--Mukai 関手
+$F' : D^b_{\textit{Coh}}(\mathcal{O}_X) \to D^b_{\textit{Coh}}(\mathcal{O}_Y)$
+であって、その核が連接 $\mathcal{O}_{X \times Y}$-加群 $\mathcal{K}$ で、
+$X$ 上平坦かつ $Y$ 上有限な台をもち、さらに $F$ の同胞であるものが存在する。
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-1138: non-rendering source pointer.
+$H : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_Y)$ で $F$ の制限を表す。
+$F$ は三角圏の完全関手なので、$H$ はアーベル圏の完全関手である。
+もちろん $H$ は $k$-線形であり、これは $F$ がそうだからである。関手と射、補題
+\ref{functors-lemma-functor-coherent-over-field} により、連接
+$\mathcal{O}_{X \times Y}$-加群 $\mathcal{K}$ であって、$X$ 上平坦かつ
+$Y$ 上有限な台をもつものを得る。$F'$ を $\mathcal{K}$ を用いて定義される
+Fourier--Mukai 関手で、$F'$ が $H$ に $ \textit{Coh}(\mathcal{O}_X)$ 上で
+制限されるものとする。関手 $F'$ は $D^b_{\textit{Coh}}(\mathcal{O}_X)$ を
+$D^b_{\textit{Coh}}(\mathcal{O}_Y)$ に送る。これは補題
+\ref{equiv-lemma-fourier-mukai-Coh} による。
+% P07-ERR-0605: non-rendering source pointer.
+$F$ と $F'$ は補題 \ref{equiv-lemma-sibling-fully-faithful} の第一条件と第二条件を
+満たすので、同胞である。
+\end{proof}
+
+\begin{remark}
+\label{equiv-remark-difficult}
+同胞 $F, F' : D^b_{\textit{Coh}}(\mathcal{O}_X) \to \mathcal{D}$ に対して、
+$F$ が充満忠実であり、$X$ が $k$ 上被約かつ射影的ならば $F \cong F'$ である。
+これは命題 \ref{equiv-proposition-siblings-isomorphic} から、定理
+\ref{equiv-theorem-fully-faithful} の証明で与える議論を通じて従う。
+しかし一般には、同胞が同型であるかどうかは分からない。
+補題 \ref{equiv-lemma-exact-functor-preserving-Coh} の状況でさえ、同胞 $F$ と $F'$ が
+同型な関手であることを証明するのは難しいように思われる。$X$ が $k$ 上滑らかかつ
+固有であり、$F$ が充満忠実ならば、\cite{Noah} が示すように $F \cong F'$ である。
+% P07-ERR-0606: non-rendering source pointer.
+より一般の状況で証明または反例をお持ちなら、次へ電子メールを送ってほしい：
+\href{mailto:stacks.project@gmail.com}{stacks.project@gmail.com}.
+\end{remark}
+
+\begin{lemma}
+\label{equiv-lemma-two-functors-pre}
+$k$ を体とする。$X$, $Y$ を $k$ 上固有なスキームとする。
+$X$ は正則であると仮定する。
+$F, G : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+を、次を満たす $k$-線形完全関手とする：
+\begin{enumerate}
+\item $F(\mathcal{F}) \cong G(\mathcal{F})$ が、任意の連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ で $\dim(\text{Supp}(\mathcal{F})) = 0$ を
+満たすものに対して成り立つ。
+\item $F$ は充満忠実である。
+\end{enumerate}
+このとき $G$ の本質像は $F$ の本質像に含まれる。
+\end{lemma}
+
+\begin{proof}
+$F$ と $G$ は両方の随伴をもつことを思い出そう。補題
+\ref{equiv-lemma-always-right-adjoints} を参照せよ。特に、本質像
+$\mathcal{A} \subset D_{perf}(\mathcal{O}_Y)$（$F$ の本質像）は導来圏、補題
+\ref{derived-lemma-right-adjoint} の同値な条件を満たす。
+$G$ は $\mathcal{A}$ を経由すると主張する。
+$\mathcal{A} = {}^\perp(\mathcal{A}^\perp)$ が導来圏、補題
+\ref{derived-lemma-right-adjoint} により成り立つので、
+$\Hom_Y(G(M), N) = 0$ が、すべての $M$（$D_{perf}(\mathcal{O}_X)$ の対象）
+および $N \in \mathcal{A}^\perp$ に対して成り立つことを示せば十分である。このとき
+$$
+\Hom_Y(G(M), N) = \Hom_X(M, G_r(N))
+$$
+である。ここで $G_r$ は $G$ の右随伴である。したがって $G_r(N) = 0$ を
+示せば十分である。$G(\mathcal{F}) \cong F(\mathcal{F})$ が (1) のような
+$\mathcal{F}$ に対して成り立つので、
+$$
+\Hom_X(\mathcal{F}, G_r(N)) =
+\Hom_Y(G(\mathcal{F}), N) =
+\Hom_Y(F(\mathcal{F}), N) = 0
+$$
+を得る。これは $N$ が本質像 $\mathcal{A}$（$F$ の本質像）の右直交に
+属するからである。もちろん、同じ消滅が
+$\Hom_X(\mathcal{F}, G_r(N)[i])$ について任意の $i \in \mathbf{Z}$ に対して
+成り立つ。したがって $G_r(N) = 0$ である。これは補題
+\ref{equiv-lemma-orthogonal-point-sheaf} により従い、証明できた。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-noah}
+\begin{reference}
+ノア・オランダーからの 2020 年 6 月 8 日付電子メール
+\end{reference}
+$k$ を体とする。$X$ を $k$ 上固有な正則スキームとする。
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$ を
+$k$-線形完全関手とする。任意の連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ で $\dim(\text{Supp}(\mathcal{F})) = 0$
+を満たすものに対し、同型 $\mathcal{F} \cong F(\mathcal{F})$ が存在すると仮定する。
+このとき自己同型 $f : X \to X$ が $k$ 上存在し、台となる位相空間上で
+恒等写像を誘導する\footnote{この条件からしばしば $f$ が恒等写像であることが
+従う。多様体、補題 \ref{varieties-lemma-automorphism} を参照せよ。}。さらに可逆な
+$\mathcal{O}_X$-加群 $\mathcal{L}$ が存在して、$F$ と
+$F'(M) = f^*M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{L}$ は同胞である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-noah-pre} により関手 $F$ は充満忠実である。
+補題 \ref{equiv-lemma-two-functors-pre} により恒等関手の本質像は $F$ の本質像に
+含まれる。すなわち $F$ は本質的全射である。したがって $F$ は同値である。
+擬逆 $F^{-1}$ は $F$ と同じ仮定を満たすことに注意する。
+
+\medskip\noindent
+$M \in D_{perf}(\mathcal{O}_X)$ とし、$H^i(M) = 0$ が $i > b$ に対して
+成り立つとする。$F$ は充満忠実なので、
+$$
+\Hom_X(M, \mathcal{O}_x[-i]) =
+\Hom_X(F(M), F(\mathcal{O}_x)[-i]) \cong
+\Hom_X(F(M), \mathcal{O}_x[-i])
+$$
+が任意の $i \in \mathbf{Z}$ および任意の閉点 $x$（$X$ の閉点）に対して
+成り立つ。したがって補題 \ref{equiv-lemma-hom-into-point-sheaf} により、$F(M)$ の
+コホモロジー層は次数 $> b$ で消滅する。
+
+\medskip\noindent
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。上の議論により
+$F(\mathcal{F})$ の非零コホモロジー層は次数 $\leq 0$ にしか現れない。
+$\mathcal{G} = H^0(F(\mathcal{F}))$ とおく。区別三角形
+$$
+K \to F(\mathcal{F}) \to \mathcal{G} \to K[1]
+$$
+を選ぶ。このとき $K$ の非零コホモロジー層は次数 $\leq -1$ にしか現れない。
+$F^{-1}$ を作用させると区別三角形
+% P07-ERR-0607: non-rendering source pointer.
+$$
+F^{-1}(K) \to \mathcal{F} \to F^{-1}(\mathcal{G}) \to F^{-1}(K')[1]
+$$
+を得る。$F^{-1}(K)$ の非零コホモロジー層は次数 $\leq -1$ にしか現れない
+（前段を $F^{-1}$ に適用する）ので、射 $F^{-1}(K) \to \mathcal{F}$ は零である
+（導来圏、補題 \ref{derived-lemma-negative-exts}）。したがって
+$K \to F(\mathcal{F})$ は零であり、最初の区別三角形の選び方から
+$F(\mathcal{F}) = \mathcal{G}$ が従う。
+
+\medskip\noindent
+前段から、$F$ は $\textit{Coh}(\mathcal{O}_X)$ を保ち、実際に同値
+$H : \textit{Coh}(\mathcal{O}_X) \to \textit{Coh}(\mathcal{O}_X)$ を定める。
+関手と射、補題 \ref{functors-lemma-equivalence-coherent-over-field} により、
+自己同型 $f : X \to X$ が $k$ 上存在し、可逆な $\mathcal{O}_X$-加群
+$\mathcal{L}$ が存在して、$H(\mathcal{F}) = f^*\mathcal{F} \otimes \mathcal{L}$
+となる。$F'(M) = f^*M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{L}$ とおく。
+補題 \ref{equiv-lemma-sibling-fully-faithful} により、$F$ と $F'$ は同胞である。
+$f$ が $X$ の台となる位相空間上で恒等写像であることは、
+$F(\mathcal{O}_x) \cong \mathcal{O}_x$ であり、$\mathcal{O}_x$ の台が $\{x\}$
+であることから分かる。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-two-functors}
+$k$ を体とする。$X$, $Y$ を $k$ 上固有なスキームとする。
+% P07-ERR-0608: non-rendering source pointer.
+$X$ は正則であると仮定する。
+$F, G : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ を、次を満たす
+$k$-線形完全関手とする：
+\begin{enumerate}
+\item $F(\mathcal{F}) \cong G(\mathcal{F})$ が、任意の連接
+$\mathcal{O}_X$-加群 $\mathcal{F}$ で $\dim(\text{Supp}(\mathcal{F})) = 0$ を
+満たすものに対して成り立つ。
+\item $F$ は充満忠実である。
+\item $G$ は、その核が $D_{perf}(\mathcal{O}_{X \times Y})$ に属する
+Fourier--Mukai 関手である。
+\end{enumerate}
+このとき、Fourier--Mukai 関手
+$F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ で、その核が
+$D_{perf}(\mathcal{O}_{X \times Y})$ に属するものが存在し、
+$F$ と $F'$ は同胞である。
+\end{lemma}
+
+\begin{proof}
+$G$ の本質像は $F$ の本質像に含まれる。これは補題
+\ref{equiv-lemma-two-functors-pre} による。関手 $H = F^{-1} \circ G$ を考える。
+$F$ は充満忠実なので、これは意味をもつ。補題 \ref{equiv-lemma-noah} により、
+自己同型 $f : X \to X$ と可逆な $\mathcal{O}_X$-加群 $\mathcal{L}$ が存在し、
+関手 $H' : K \mapsto f^*K \otimes \mathcal{L}$ は $H$ の同胞である。特に
+$H$ は補題 \ref{equiv-lemma-sibling-faithful} により自己同値であり、さらに $H$ は
+$\textit{Coh}(\mathcal{O}_X)$ の自己同値を誘導する（その同胞関手 $H'$ について
+そうだからである）。したがって擬逆 $H^{-1}$ と $(H')^{-1}$ が存在し、両者は
+同胞である（細部は省略する）。また $(H')^{-1}$ は $M$ を
+$(f^{-1})^*(M \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{L}^{\otimes -1})$
+へ送り、これは Fourier--Mukai 関手である（細部は省略する）。したがって当然、
+$F = G \circ H^{-1}$ は $G \circ (H')^{-1}$ の同胞である。
+Fourier--Mukai 関手の合成は補題 \ref{equiv-lemma-compose-fourier-mukai} により
+Fourier--Mukai 関手なので、結論を得る。
+\end{proof}
+
+
+
+
+
+\section{充満忠実関手}
+\label{equiv-section-fully-faithful}
+
+\noindent
+この節の目標は、\cite{Orlov-K3} と \cite{Ballard} に従い、導来圏の間の
+充満忠実関手が Fourier--Mukai 関手の同胞であることを証明することである。
+
+\begin{situation}
+\label{equiv-situation-fully-faithful}
+ここで $k$ は体である。$X$ と $Y$ は $k$ 上固有かつ滑らかなスキームとする。
+$k$-線形で完全かつ充満忠実な関手
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ が与えられている。
+\end{situation}
+
+\noindent
+先へ進む前に、導来圏、節 \ref{derived-section-postnikov} の少なくとも一部を
+読んでおくのがよい。
+
+\medskip\noindent
+$X$ は正則であり、したがって分解性をもつことを思い出そう
+（多様体、補題 \ref{varieties-lemma-smooth-regular} および
+スキームの導来圏、補題
+\ref{perfect-lemma-regular-resolution-property}）。したがって $X \times X$ 上で分解
+$$
+\ldots \to
+\mathcal{E}_2 \boxtimes \mathcal{G}_2 \to
+\mathcal{E}_1 \boxtimes \mathcal{G}_1 \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0 \to
+\mathcal{O}_\Delta \to 0
+$$
+を選べる。ここで各 $\mathcal{E}_i$ と $\mathcal{G}_i$ は有限局所自由
+$\mathcal{O}_X$-加群である。補題 \ref{equiv-lemma-diagonal-resolution} を参照せよ。
+複体
+\begin{equation}
+\label{equiv-equation-original-complex}
+\ldots \to
+\mathcal{E}_2 \boxtimes \mathcal{G}_2 \to
+\mathcal{E}_1 \boxtimes \mathcal{G}_1 \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0
+\end{equation}
+を $D_{perf}(\mathcal{O}_{X \times X})$ において、導来圏、例
+\ref{derived-example-key-postnikov} のように用いる。各 $n$ に対して
+$$
+M_n = (\mathcal{E}_n \boxtimes \mathcal{G}_n \to \ldots \to
+\mathcal{E}_0 \boxtimes \mathcal{G}_0)[-n]
+$$
+と表せば、複体 (\ref{equiv-equation-original-complex}) の無限ポストニコフ系を得る。
+これは、射 $M_0 \to M_1[1] \to M_2[2] \to \ldots$、
+$M_n \to \mathcal{E}_n \boxtimes \mathcal{G}_n$、および
+$\mathcal{E}_n \boxtimes \mathcal{G}_n \to M_{n - 1}$ が、導来圏、定義
+\ref{derived-definition-postnikov-system} に記された一定の条件を満たすことを意味する。
+次のようにおく：
+$$
+\mathcal{F}_n = \Ker(\mathcal{E}_n \boxtimes \mathcal{G}_n \to
+\mathcal{E}_{n - 1} \boxtimes \mathcal{G}_{n - 1})
+$$
+$\mathcal{O}_\Delta$ は $X$ 上 $\text{pr}_1$ を介して平坦なので、
+$\mathcal{F}_n$ も任意の $n$ に対して同様であることに注意する（これは便利だが
+本質的ではない観察である）。次が成り立つ：
+$$
+H^q(M_n[n]) = \left\{
+\begin{matrix}
+\mathcal{O}_\Delta & \text{の場合} & q = 0 \\
+\mathcal{F}_n & \text{の場合} & q = -n \\
+0 & \text{の場合} & q \not = 0, -n
+\end{matrix}
+\right.
+$$
+したがって $n \geq \dim(X \times X)$ に対して
+$$
+M_n[n] \cong \mathcal{O}_\Delta \oplus \mathcal{F}_n[n]
+$$
+が $D_{perf}(\mathcal{O}_{X \times X})$ で成り立つ。これは補題
+\ref{equiv-lemma-split-complex-regular} による。
+
+\medskip\noindent
+ここで関心があるのは複体
+\begin{equation}
+\label{equiv-equation-complex}
+\ldots \to
+\mathcal{E}_2 \boxtimes F(\mathcal{G}_2) \to
+\mathcal{E}_1 \boxtimes F(\mathcal{G}_1) \to
+\mathcal{E}_0 \boxtimes F(\mathcal{G}_0)
+\end{equation}
+を $D_{perf}(\mathcal{O}_{X \times Y})$ で考えたものである。この複体の
+「全複体化」が、構成しようとしている Fourier--Mukai 関手の核を与えるはずだからである。
+任意の $i, j \geq 0$ に対して
+\begin{align*}
+\Ext^q_{X \times Y}(\mathcal{E}_i \boxtimes F(\mathcal{G}_i),
+\mathcal{E}_j \boxtimes F(\mathcal{G}_j))
+& =
+\bigoplus\nolimits_p
+\Ext^{q + p}_X(\mathcal{E}_i, \mathcal{E}_j) \otimes_k
+\Ext^{-p}_Y(F(\mathcal{G}_i), F(\mathcal{G}_j)) \\
+& =
+\bigoplus\nolimits_p
+\Ext^{q + p}_X(\mathcal{E}_i, \mathcal{E}_j) \otimes_k
+\Ext^{-p}_X(\mathcal{G}_i, \mathcal{G}_j)
+\end{align*}
+となる。第二の等号は $F$ が充満忠実であることから従い、第一の等号は
+スキームの導来圏、補題 \ref{perfect-lemma-kunneth-Ext} による。
+これらの $\Ext^q$ は $q < 0$ に対して零である。したがって導来圏、補題
+\ref{derived-lemma-existence-postnikov-system} により、複体
+(\ref{equiv-equation-complex}) に対する無限ポストニコフ系
+$K_0, K_1, K_2, \ldots$ を $D_{perf}(\mathcal{O}_{X \times Y})$ の中に構成できる。
+$M_0, M_1, M_2, \ldots$ の場合と平行に、これは射
+$K_0 \to K_1[1] \to K_2[2] \to \ldots$、
+$K_n \to \mathcal{E}_n \boxtimes F(\mathcal{G}_n)$、および
+$\mathcal{E}_n \boxtimes F(\mathcal{G}_n) \to K_{n - 1}$ を
+$D_{perf}(\mathcal{O}_{X \times Y})$ の中に得ることを意味する。これらは導来圏、定義
+\ref{derived-definition-postnikov-system} に記された一定の条件を満たす。
+
+\medskip\noindent
+$\mathcal{F}$ を、台が有限個の点からなる連接 $\mathcal{O}_X$-加群、すなわち
+$\dim(\text{Supp}(\mathcal{F})) = 0$ を満たすものとする。三角圏の完全関手
+$$
+D_{perf}(\mathcal{O}_{X \times Y})
+\longrightarrow
+D_{perf}(\mathcal{O}_Y),\quad
+N \longmapsto R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} N)
+$$
+を考える。すると対象 $R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} K_i)$ は
+$D_{perf}(\mathcal{O}_Y)$ 内の複体に対するポストニコフ系をなし、その項は
+$$
+R\text{pr}_{2, *}(
+(\mathcal{F} \otimes \mathcal{E}_i) \boxtimes F(\mathcal{G}_i)) =
+\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k F(\mathcal{G}_i) =
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k \mathcal{G}_i)
+$$
+である。
+ここでは $\mathcal{F} \otimes \mathcal{E}_i$ の台が次元 $0$ なので、その高次
+コホモロジーが消滅することを用いた。一方、完全関手
+$$
+D_{perf}(\mathcal{O}_{X \times X})
+\longrightarrow
+D_{perf}(\mathcal{O}_Y),\quad
+N \longmapsto F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} N))
+$$
+を適用すると、対象
+$F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n))$
+は $D_{perf}(\mathcal{O}_Y)$ 内の複体に対する第二の無限ポストニコフ系をなし、その項は
+$$
+F(R\text{pr}_{2, *}(
+(\mathcal{F} \otimes \mathcal{E}_i) \boxtimes \mathcal{G}_i)) =
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k \mathcal{G}_i)
+$$
+である。
+これは先ほどと同じである。ポストニコフ系の一意性（導来圏、補題
+\ref{derived-lemma-existence-postnikov-system}）を適用できる。実際、
+$$
+\Ext^q_Y(
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_i) \otimes_k \mathcal{G}_i),
+F(\Gamma(X, \mathcal{F} \otimes \mathcal{E}_j) \otimes_k \mathcal{G}_j)) = 0,
+\quad q < 0
+$$
+が $F$ の充満忠実性により成り立つからである。したがって同型の系
+$$
+F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n[n]))
+\cong
+R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} K_n[n])
+$$
+を $D_{perf}(\mathcal{O}_Y)$ の中に得る。この系は、次の射から
+$D_{perf}(\mathcal{O}_Y)$ に誘導される射と両立する：
+$$
+M_{n - 1}[n - 1] \to M_n[n]
+\quad\text{および}\quad
+K_{n - 1}[n - 1] \to K_n[n]
+$$
+$$
+M_n \to \mathcal{E}_n \boxtimes \mathcal{G}_n
+\quad\text{および}\quad
+K_n \to \mathcal{E}_n \boxtimes F(\mathcal{G}_n)
+$$
+$$
+\mathcal{E}_n \boxtimes \mathcal{G}_n \to M_{n - 1}
+\quad\text{および}\quad
+\mathcal{E}_n \boxtimes F(\mathcal{G}_n) \to K_{n - 1}
+$$
+これらはポストニコフ系の構造の一部である。十分大きな $n$ に対して直和分解
+% P07-ERR-0609: non-rendering source pointer.
+$$
+F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n[n]))
+=
+F(\mathcal{F}) \oplus
+F(R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}} \mathcal{F}_n
+))[n]
+$$
+% P07-ERR-0610: non-rendering source pointer.
+を得る。これは上で構成した $M_n$ の直和分解に対応する（上の式で通常の
+テンソル積を書けるように、$\mathcal{F}_n$ が $X$ 上 $\text{pr}_1$ を介して
+平坦であることを用いたが、これは議論に本質的ではない）。補題
+\ref{equiv-lemma-boundedness} により整数 $m \geq 0$ が存在し、この直和分解の第一成分の
+非零コホモロジー層は区間 $[-m, m]$ にしか現れず、第二成分の非零コホモロジー層は
+区間 $[-m - n, m + \dim(X) - n]$ にしか現れない。したがって系
+$K_0 \to K_1[1] \to K_2[2] \to \ldots$ は
+$D_{perf}(\mathcal{O}_{X \times Y})$ の中で、必要なら $m$ をより大きな整数に
+置き換えることにより、補題 \ref{equiv-lemma-bounded-fibres} の仮定を満たす。ゆえに
+$$
+K_n[n] = K \oplus C_n
+$$
+と $n \gg 0$ に対して書け、これは遷移写像と両立し、$C_n$ の非零
+コホモロジー層は範囲 $[-m - n, m - n]$ にしか現れない。
+% P07-ERR-1143: non-rendering source pointer.
+$G$ で $K$ に対応する Fourier--Mukai 関手を表す。すべてを合わせると
+$$
+\begin{matrix}
+G(\mathcal{F}) \oplus
+R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}^\mathbf{L} C_n)
+\cong \\
+R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times Y}} K_n[n]) \cong \\
+F(R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F}
+\otimes^\mathbf{L}_{\mathcal{O}_{X \times X}} M_n[n]))
+\cong \\
+F(\mathcal{F}) \oplus
+F(R\text{pr}_{2, *}(
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}} \mathcal{F}_n
+))[n]
+\end{matrix}
+$$
+対象が存在する次数を調べると、$n \gg m$ に対して同型
+$$
+F(\mathcal{F}) \cong G(\mathcal{F})
+$$
+を得る。さらに、これは任意の連接 $\mathcal{F}$（$X$ 上）で、その台の次元が
+$0$ であるものに対して成り立つことを思い出そう。
+
+\begin{lemma}
+\label{equiv-lemma-fully-faithful}
+$k$ を体とする。$X$ と $Y$ を $k$ 上滑らかかつ固有なスキームとする。
+$k$-線形で完全かつ充満忠実な関手
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+が与えられると、Fourier--Mukai 関手
+$F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ が存在する。その核は
+$D_{perf}(\mathcal{O}_{X \times Y})$ に属し、これは $F$ の同胞である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-two-functors} を $F$ と上で構成した関手 $G$ に適用する。
+\end{proof}
+
+\noindent
+次の定理は $X$ が射影的であるという仮定なしでも成り立つ。
+\cite{Noah} を参照せよ。
+
+\begin{theorem}[Orlov]
+\label{equiv-theorem-fully-faithful}
+\begin{reference}
+\cite[定理 2.2]{Orlov-K3}；\cite{Noah} では $X$ が射影的であるという
+仮定なしに証明されている
+\end{reference}
+$k$ を体とする。$X$ と $Y$ を $k$ 上滑らかかつ固有なスキームとし、
+$X$ は $k$ 上射影的とする。任意の $k$-線形充満忠実完全関手
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ は、ある
+$D_{perf}(\mathcal{O}_{X \times Y})$ 内の核に対する Fourier--Mukai 関手である。
+\end{theorem}
+
+\begin{proof}
+$F'$ を、補題 \ref{equiv-lemma-fully-faithful} のような $F$ の同胞である
+Fourier--Mukai 関手とする。命題 \ref{equiv-proposition-siblings-isomorphic} により
+$F \cong F'$ である。ただし、$\textit{Coh}(\mathcal{O}_X)$ が十分多くの
+負対象をもつことを示せることを要する。しかし、たとえば $X = \Spec(k)$ ならば
+これは成り立たない。
+そこでまず $X = \coprod X_i$ をその連結（かつ既約）成分に分解し、各（充満忠実な）
+合成関手
+$$
+F_i :
+D_{perf}(\mathcal{O}_{X_i}) \to
+D_{perf}(\mathcal{O}_X) \to
+D_{perf}(\mathcal{O}_Y)
+$$
+について結果を証明すれば十分であることを示す。細部は省略する。
+したがって $X$ は既約であると仮定してよい。
+
+\medskip\noindent
+$\dim(X) = 0$ の場合。このとき $X$ は有限（分離）拡大 $k'/k$ のスペクトルであり、
+したがって $D_{perf}(\mathcal{O}_X)$ は次数付き $k'$-ベクトル空間の圏と同値である。
+この同値の下で $\mathcal{O}_X$ は自明な $1$-次元ベクトル空間（次数 $0$）に対応する。
+任意の二つの同胞
+$F, F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ が同型であることは
+直ちに分かる。実際、同型
+$F(\mathcal{O}_X) \cong F'(\mathcal{O}_X)$
+% P07-ERR-0611: non-rendering source pointer.
+が与えられており、これは $k$-代数の作用と両立する：
+$k' = \text{End}_{D_{perf}(\mathcal{O}_X)}(\mathcal{O}_X)$
+この同型は任意の次数付き $k'$-ベクトル空間上の同型へ標準的に延長される。
+
+\medskip\noindent
+$\dim(X) > 0$ の場合。このとき $X$ は次元 $> 1$ の射影的滑らかな多様体である。
+% P07-ERR-0612: non-rendering source pointer.
+$\mathcal{F}$ を連接 $\mathcal{O}_X$-加群とする。次を満たす連接加群
+$\mathcal{N}$ が存在することを示さなければならない：
+\begin{enumerate}
+\item 全射 $\mathcal{N} \to \mathcal{F}$ が存在する。
+\item $\Hom(\mathcal{F}, \mathcal{N}) = 0$ である。
+\end{enumerate}
+豊富な可逆 $\mathcal{O}_X$-加群 $\mathcal{L}$ を選ぶ。
+$\mathcal{N} = (\mathcal{L}^{\otimes n})^{\oplus r}$ は $n \ll 0$ かつ十分大きな
+$r$ に対して所望の性質をもつと主張する。条件 (1) は性質、命題
+\ref{properties-proposition-characterize-ample} から従う。最後に
+$$
+\Hom(\mathcal{F}, \mathcal{L}^{\otimes n}) =
+H^0(X, \SheafHom(\mathcal{F}, \mathcal{L}^{\otimes n})) =
+H^0(X, \SheafHom(\mathcal{F}, \mathcal{O}_X) \otimes \mathcal{L}^{\otimes n})
+$$
+である。双対 $\SheafHom(\mathcal{F}, \mathcal{O}_X)$ は捩れなしなので、これは
+$n \ll 0$ に対して消滅する。これは多様体、補題
+\ref{varieties-lemma-vanishin-h0-negative} による。これで証明が完了する。
+\end{proof}
+
+\begin{proposition}
+\label{equiv-proposition-equivalence}
+$k$ を体とする。$X$ と $Y$ を $k$ 上滑らかかつ固有なスキームとする。
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ が三角圏の
+$k$-線形完全同値ならば、Fourier--Mukai 関手
+$F' : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$ で、その核が
+$D_{perf}(\mathcal{O}_{X \times Y})$ に属し、同値かつ $F$ の同胞であるものが存在する。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{equiv-lemma-fully-faithful} の関手 $F'$ は補題
+\ref{equiv-lemma-sibling-faithful} により同値である。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-uniqueness}
+$k$ を体とする。$X$ を $k$ 上滑らかかつ固有なスキームとする。
+$K \in D_{perf}(\mathcal{O}_{X \times X})$ とする。Fourier--Mukai 関手
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$ が恒等関手と
+同型ならば、
+% P07-ERR-0613: non-rendering source pointer.
+$K \cong \Delta_*\mathcal{O}_X$ が $_{perf}(\mathcal{O}_{X \times X})$ で成り立つ。
+\end{lemma}
+
+\begin{proof}
+$i$ を、コホモロジー層 $H^i(K)$ が非零となる最小の整数とする。
+$\mathcal{E}$ と $\mathcal{G}$ を有限局所自由 $\mathcal{O}_X$-加群とする。このとき
+\begin{align*}
+H^i(X \times X, K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+(\mathcal{E} \boxtimes \mathcal{G}))
+& =
+H^i(X, R\text{pr}_{2, *}(K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+(\mathcal{E} \boxtimes \mathcal{G}))) \\
+& =
+H^i(X, \Phi_K(\mathcal{E}) \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{G}) \\
+& \cong
+H^i(X, \mathcal{E} \otimes \mathcal{G})
+\end{align*}
+となり、これは $i < 0$ ならば零である。一方、$\mathcal{E}$ と $\mathcal{G}$ を、全射
+$\mathcal{E}^\vee \boxtimes \mathcal{G}^\vee \to H^i(K)$
+が存在するように選べる。これは補題
+\ref{equiv-lemma-on-product} による。この場合、上の等号列の左辺は非零である。
+したがって $H^i(K) = 0$ が $i < 0$ に対して成り立つ。
+
+\medskip\noindent
+$i$ を $H^i(K)$ が非零となる最大の整数とする。$\mathcal{E}$ と $\mathcal{G}$ の
+台の次元を $0$ とした同じ議論により $i \leq 0$ が分かる。
+% P07-ERR-0614: non-rendering source pointer.
+したがって $K$ は、一つの連接 $\mathcal{O}_{X \times X}$-加群
+$\mathcal{K}$ を次数 $0$ に置いたものにより与えられる。
+
+\medskip\noindent
+$R\text{pr}_{2, *}(\text{pr}_1^*\mathcal{F} \otimes \mathcal{K})$ は
+$\mathcal{F}$ なので、$\mathcal{F}$ を閉点上に台をもつものとして選ぶと、
+$\mathcal{K}$ の台は $X$ 上 $\text{pr}_2$ を介して有限であることが分かる。
+$R\text{pr}_{2, *}(\mathcal{K}) \cong \mathcal{O}_X$ なので、関手と射、補題
+\ref{functors-lemma-pushforward-invertible-pre} により
+$\mathcal{K} = s_*\mathcal{O}_X$ である。ここで $s : X \to X \times X$ は
+第二射影のある切断である。
+このとき $\Phi_K(M) = f^*M$ であり、ここで $f = \text{pr}_1 \circ s$ である。
+これは $s$ が対角射である場合にしか起こらず、望む結論を得る。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{Fourier--Mukai 核の圏}
+\label{equiv-section-category-Fourier-Mukai-kernels}
+
+\noindent
+$S$ をスキームとする。次のような圏が存在すると主張する：
+\begin{enumerate}
+\item 対象は $S$ 上固有かつ滑らかなスキームである。
+\item $X$ から $Y$ への射は $D_{perf}(\mathcal{O}_{X \times_S Y})$ の
+対象の同型類である。
+\item
+$K \in D_{perf}(\mathcal{O}_{X \times_S Y})$
+の同型類と、$K'$ の $D_{perf}(\mathcal{O}_{Y \times_S Z})$ における同型類との合成は、
+$$
+R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*K')
+$$
+の同型類である。これは $D_{perf}(\mathcal{O}_{X \times_S Z})$ に属する。
+スキームの導来圏、補題
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general} による。
+\item $X$ から $X$ への恒等射は $\Delta_{X/S, *}\mathcal{O}_X$ の同型類である。
+これは $D_{perf}(\mathcal{O}_{X \times_S X})$ に属する。実際、射についてさらに、補題
+\ref{more-morphisms-lemma-perfect-closed-immersion-perfect-direct-image}、および
+$\Delta_{X/S}$ が完全射であるという事実を用いる。この事実は因子、補題
+\ref{divisors-lemma-immersion-smooth-into-smooth-regular-immersion} と
+射についてさらに、補題 \ref{more-morphisms-lemma-regular-immersion-perfect} による。
+\end{enumerate}
+射の合成の結合則が成り立つことを確認しよう。恒等射が実際に恒等射であることの
+確認は省略する。このため、$X, Y, Z, W$ と
+$c \in D_{perf}(\mathcal{O}_{X \times_S Y})$、
+$c' \in D_{perf}(\mathcal{O}_{Y \times_S Z})$、および
+$c'' \in D_{perf}(\mathcal{O}_{Z \times_S W})$ が与えられているとする。このとき
+\begin{align*}
+c'' \circ (c' \circ c)
+& \cong
+\text{pr}^{134}_{14, *}(
+\text{pr}^{134, *}_{13}
+\text{pr}^{123}_{13, *}(\text{pr}^{123, *}_{12}c \otimes
+\text{pr}^{123, *}_{23}c')
+\otimes \text{pr}^{134, *}_{34}c'') \\
+& \cong
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+\text{pr}^{1234, *}_{123}(\text{pr}^{123, *}_{12}c \otimes
+\text{pr}^{123, *}_{23}c')
+\otimes \text{pr}^{134, *}_{34}c'') \\
+& \cong
+\text{pr}^{134}_{14, *}(
+\text{pr}^{1234}_{134, *}
+(\text{pr}^{1234, *}_{12}c \otimes
+\text{pr}^{1234, *}_{23}c')
+\otimes \text{pr}^{134, *}_{34}c'') \\
+& \cong
+\text{pr}^{134}_{14, *}
+\text{pr}^{1234}_{134, *}
+((\text{pr}^{1234, *}_{12}c \otimes
+\text{pr}^{1234, *}_{23}c')
+\otimes \text{pr}^{1234, *}_{34}c'') \\
+& \cong
+\text{pr}^{1234}_{14, *}(
+(\text{pr}^{1234, *}_{12}c \otimes
+\text{pr}^{1234, *}_{23}c') \otimes
+\text{pr}^{1234, *}_{34}c'')
+\end{align*}
+% P07-ERR-0615: non-rendering source pointer.
+ここでは記法
+$$
+p^{1234}_{134} : X \times_S Y \times_S Z \times_S W
+\to X \times_S Z \times_S W
+\quad\text{および}\quad
+p^{134}_{14} : X \times_S Z \times_S W \to X \times_S W
+$$
+をこれらの射影に用い、他の添字についても同様とする。また
+$\text{pr}_*$ と書いて $R\text{pr}_*$ を表し、$\text{pr}^*$ と書いて
+$L\text{pr}^*$ を表す。さらに、$\otimes$ のすべての
+% P07-ERR-0616: non-rendering source pointer.
+上付き添字と下付き添字を省略する。第一の等号は合成の定義である。
+第二の等号は
+$\text{pr}^{134, *}_{13} \text{pr}^{123}_{13, *} =
+\text{pr}^{1234}_{134, *} \text{pr}^{1234, *}_{123}$
+が基底変換により成り立つことから従う（スキームの導来圏、補題
+\ref{perfect-lemma-compare-base-change}）。第三の等号は、引き戻しが正しく合成され、
+テンソル積を通過することから従う。コホモロジー、補題
+\ref{cohomology-lemma-derived-pullback-composition} および
+\ref{cohomology-lemma-pullback-tensor-product} を参照せよ。第四の等号は
+$p^{1234}_{134}$ に対する「射影公式」から従う。スキームの導来圏、補題
+\ref{perfect-lemma-cohomology-base-change} を参照せよ。第五の等号は、固有順像が
+合成と両立するという事実である。コホモロジー、補題
+\ref{cohomology-lemma-derived-pushforward-composition} を参照せよ。テンソル積は
+結合的なので、これで合成の結合則の証明が完了する。
+
+\begin{lemma}
+\label{equiv-lemma-base-change-is-functor}
+$S' \to S$ をスキームの射とする。次の規則を考える：
+\begin{enumerate}
+\item 滑らかかつ固有なスキーム $X$（$S$ 上）を $X' =  S' \times_S X$ へ送る。
+\item 対象 $K$（$D_{perf}(\mathcal{O}_{X \times_S Y})$ の対象）の同型類を
+$L(X' \times_{S'} Y' \to X \times_S Y)^*K$
+の $D_{perf}(\mathcal{O}_{X' \times_{S'} Y'})$ における同型類へ送る。
+\end{enumerate}
+これは $S$ に対して定義した圏から $S'$ に対して定義した圏への関手である。
+\end{lemma}
+
+\begin{proof}
+これを見るため、$X, Y, Z$ と
+$K \in D_{perf}(\mathcal{O}_{X \times_S Y})$ および
+$M \in D_{perf}(\mathcal{O}_{Y \times_S Z})$ が与えられているとする。
+% P07-ERR-1144: non-rendering source pointer.
+$K' \in D_{perf}(\mathcal{O}_{X' \times_{S'} Y'})$ および
+$M' \in D_{perf}(\mathcal{O}_{Y' \times_{S'} Z'})$
+で、補題の主張にあるそれぞれの引き戻しを表す。図式
+$$
+\xymatrix{
+X' \times_{S'} Y' \times_{S'} Z' \ar[r] \ar[d]_{\text{pr}'_{13}} &
+X \times_S Y \times_S Z \ar[d]^{\text{pr}_{13}} \\
+X' \times_{S'} Z' \ar[r] &
+X \times_S Z
+}
+$$
+はデカルトであり、$\text{pr}_{13}$ は固有かつ滑らかである。スキームの導来圏、補題
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general} により、下の水平射による
+合成の導来引き戻し
+$$
+R\text{pr}_{13, *}(
+L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S Z}}^\mathbf{L}
+L\text{pr}_{23}^*M)
+$$
+は確かに次と（標準的に）同型である：
+$$
+R\text{pr}'_{13, *}(
+L(\text{pr}'_{12})^*K'
+\otimes_{\mathcal{O}_{X' \times_{S'} Y' \times_{S'} Z'}}^\mathbf{L}
+L(\text{pr}'_{23})^*M')
+$$
+これは望むところである。いくつかの細部は省略する。
+\end{proof}
+
+
+
+
+
+\section{相対同値}
+\label{equiv-section-relative-equivalences}
+
+\noindent
+この節では、次の概念に関するいくつかの補題を証明する。
+
+\begin{definition}
+\label{equiv-definition-relative-equivalence-kernel}
+$S$ をスキームとする。$X \to S$ と $Y \to S$ を滑らかかつ固有な射とする。
+対象 $K \in D_{perf}(\mathcal{O}_{X \times_S Y})$ が
+{\it $X$ から $Y$ への、$S$ 上の相対同値の Fourier--Mukai 核}であるとは、
+% P07-ERR-0617: non-rendering source pointer.
+% P07-ERR-0618: non-rendering source pointer.
+対象 $K' \in D_{perf}(\mathcal{O}_{X \times_S Y})$ が存在して、
+$$
+\Delta_{X/S, *}\mathcal{O}_X \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S X}}^\mathbf{L}
+L\text{pr}_{23}^*K')
+$$
+が $D(\mathcal{O}_{X \times_S X})$ で成り立ち、かつ
+$$
+\Delta_{Y/S, *}\mathcal{O}_Y \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K'
+\otimes_{\mathcal{O}_{Y \times_S X \times_S Y}}^\mathbf{L}
+L\text{pr}_{23}^*K)
+$$
+が $D(\mathcal{O}_{Y \times_S Y})$ で成り立つことをいう。言い換えると、$K$ の同型類は
+節 \ref{equiv-section-category-Fourier-Mukai-kernels} で定義した圏の可逆射を定める。
+\end{definition}
+
+\noindent
+この言い回しは意図的に煩雑にしてある。
+
+\begin{lemma}
+\label{equiv-lemma-equivalences-rek}
+定義 \ref{equiv-definition-relative-equivalence-kernel} の記法を用い、$K$ を
+$X$ から $Y$ への、$S$ 上の相対同値の Fourier--Mukai 核とする。このとき対応する
+Fourier--Mukai 関手
+$\Phi_K : D_\QCoh(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_Y)$
+（補題 \ref{equiv-lemma-fourier-Mukai-QCoh}）および
+$\Phi_K : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+（補題 \ref{equiv-lemma-fourier-mukai}）は同値である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{equiv-lemma-compose-fourier-mukai} と例
+\ref{equiv-example-diagonal-fourier-mukai} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-base-change-rek}
+定義 \ref{equiv-definition-relative-equivalence-kernel} の記法を用い、$K$ を
+$X$ から $Y$ への、$S$ 上の相対同値の Fourier--Mukai 核とする。
+$S_1 \to S$ をスキームの射とする。
+$X_1 = S_1 \times_S X$ および $Y_1 = S_1 \times_S Y$ とおく。このとき引き戻し
+$K_1 = L(X_1 \times_{S_1} Y_1 \to X \times_S Y)^*K$ は
+$X_1$ から $Y_1$ への、$S_1$ 上の相対同値の Fourier--Mukai 核である。
+\end{lemma}
+
+\begin{proof}
+$K' \in D_{perf}(\mathcal{O}_{Y \times_S X})$ を、定義
+\ref{equiv-definition-relative-equivalence-kernel} で存在を仮定した対象とする。
+$K'_1$ で、$K'$ の
+$Y_1 \times_{S_1} X_1 \to Y \times_S X$ による引き戻しを表す。
+このとき、次を証明すれば十分である：
+% P07-ERR-0619: non-rendering source pointer.
+$$
+\Delta_{X_1/S_1, *}\mathcal{O}_X \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K_1
+\otimes_{\mathcal{O}_{X_1 \times_{S_1} Y_1 \times_{S_1} X_1}}^\mathbf{L}
+L\text{pr}_{23}^*K_1')
+$$
+これは $D(\mathcal{O}_{X_1 \times_{S_1} X_1})$ での同型であり、もう一方の
+条件についても同様である。さて
+$$
+\xymatrix{
+X_1 \times_{S_1} Y_1 \times_{S_1} X_1 \ar[r] \ar[d]_{\text{pr}_{13}} &
+X \times_S Y \times_S X \ar[d]^{\text{pr}_{13}} \\
+X_1 \times_{S_1} X_1 \ar[r] &
+X \times_S X
+}
+$$
+はデカルトなので、スキームの導来圏、補題
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general} により、次を証明すれば十分である：
+$$
+\Delta_{X_1/S_1, *}\mathcal{O}_{X_1}
+\cong
+L(X_1 \times_{S_1} X_1 \to X \times_S X)^*\Delta_{X/S, *}\mathcal{O}_X 
+$$
+さらにこれは、$X$ と $X_1 \times_{S_1} X_1$ が $X \times_S X$ 上 Tor 独立ならば
+成り立つ。スキームの導来圏、補題 \ref{perfect-lemma-compare-base-change} を参照せよ。
+この Tor 独立性は直接にも確認できるが、より一般的な射についてさらに、補題
+\ref{more-morphisms-lemma-case-of-tor-independence} を、頂点が
+$X, X, X, S$ である正方形とその $S_1 \to S$ による基底変換に適用しても従う。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-descend-rek}
+$S = \lim_{i \in I} S_i$ を、アフィンな遷移射
+$g_{i'i} : S_{i'} \to S_i$ をもつスキームの有向系の極限とする。
+$S_i$ は任意の $i \in I$ に対して準コンパクトかつ準分離的であると仮定する。
+$0 \in I$ とし、$X_0 \to S_0$ と $Y_0 \to S_0$ を滑らかかつ固有な射とする。
+$X_i = S_i \times_{S_0} X_0$ と $i \geq 0$ に対しておき、
+$X = S \times_{S_0} X_0$ とおく。$Y_0$ についても同様とする。$K$ が
+$X$ から $Y$ への、$S$ 上の相対同値の Fourier--Mukai 核ならば、ある
+$i \geq 0$ に対して、$X_i$ から $Y_i$ への、$S_i$ 上の相対同値の
+Fourier--Mukai 核が存在する。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{equiv-definition-relative-equivalence-kernel} で存在を仮定した対象を
+$K' \in D_{perf}(\mathcal{O}_{Y \times_S X})$ とする。
+$X \times_S Y = \lim X_i \times_{S_i} Y_i$ なので、ある $i$ と対象
+$K_i$ および $K'_i$ が存在し、これらは
+% P07-ERR-0620: non-rendering source pointer.
+$D_{perf}(\mathcal{O}_{Y_i \times_{S_i} X_i})$
+に属し、$Y \times_S X$ への引き戻しが $K$ と $K'$ を与える。
+スキームの導来圏、補題 \ref{perfect-lemma-descend-perfect} を参照せよ。
+スキームの導来圏、補題
+\ref{perfect-lemma-flat-proper-perfect-direct-image-general}
+により、対象
+$$
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K_i
+\otimes_{\mathcal{O}_{X_i \times_{S_i} Y_i \times_{S_i} X_i}}^\mathbf{L}
+L\text{pr}_{23}^*K_i')
+$$
+は完全であり、その $X \times_S X$ への引き戻しは
+$$
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K
+\otimes_{\mathcal{O}_{X \times_S Y \times_S X}}^\mathbf{L}
+L\text{pr}_{23}^*K') \cong \Delta_{X/S, *}\mathcal{O}_X
+$$
+に等しい。補題 \ref{equiv-lemma-base-change-rek} の証明を参照せよ。一方、
+% P07-ERR-0621: non-rendering source pointer.
+$X_i \to S$ は滑らかかつ分離的なので、対象
+$$
+\Delta_{i, *}\mathcal{O}_{X_i}
+$$
+（$D(\mathcal{O}_{X_i \times_{S_i} X_i})$ の対象）も完全である
+（射についてさらに、補題 \ref{more-morphisms-lemma-smooth-diagonal-perfect} および
+\ref{more-morphisms-lemma-perfect-proper-perfect-direct-image} による）。さらに、その
+$X \times_S X$ への引き戻しは
+$$
+\Delta_{X/S, *}\mathcal{O}_X
+$$
+に等しい。補題 \ref{equiv-lemma-base-change-rek} の証明を参照せよ。したがって
+スキームの導来圏、補題 \ref{perfect-lemma-descend-perfect} により、$i$ を
+大きくした後、次を仮定してよい：
+$$
+\Delta_{i, *}\mathcal{O}_{X_i} \cong
+R\text{pr}_{13, *}(L\text{pr}_{12}^*K_i
+\otimes_{\mathcal{O}_{X_i \times_{S_i} Y_i \times_{S_i} X_i}}^\mathbf{L}
+L\text{pr}_{23}^*K_i')
+$$
+これは望むところである。$K$ と $K'$ の役割を逆にしても同じ議論が成り立つ。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{変形なし}
+\label{equiv-section-no-deformations}
+
+\noindent
+この節の題名は補題 \ref{equiv-lemma-no-deformations} を指している。
+
+\begin{lemma}
+\label{equiv-lemma-deform-koszul}
+$(R, \mathfrak m, \kappa) \to (A, \mathfrak n, \lambda)$ を、本質的に有限表示な
+% P07-ERR-0622: non-rendering source pointer.
+局所環の平坦局所環準同型とする。
+$\overline{f}_1, \ldots, \overline{f}_r \in \mathfrak n/\mathfrak m A
+\subset A/\mathfrak m A$ を正則列とする。$K \in D(A)$ とし、次を仮定する：
+\begin{enumerate}
+\item $K$ は完全である。
+\item $K \otimes_A^\mathbf{L} A/\mathfrak m A$ は $D(A/\mathfrak m A)$ で
+$\overline{f}_1, \ldots, \overline{f}_r$ 上の Koszul 複体と同型である。
+\end{enumerate}
+このとき $K$ は $D(A)$ において、正則列
+$f_1, \ldots, f_r \in A$ 上の Koszul 複体と同型である。この列は与えられた元
+$\overline{f}_1, \ldots, \overline{f}_r$ を持ち上げる。さらに
+$A/(f_1, \ldots, f_r)$ は $R$ 上平坦である。
+\end{lemma}
+
+\begin{proof}
+この補題の証明では鎖複体を用いる。Koszul 複体
+$K_\bullet(\overline{f}_1, \ldots, \overline{f}_r)$ は代数についてさらに、定義
+\ref{more-algebra-definition-koszul-complex} で定義される。代数についてさらに、補題
+\ref{more-algebra-lemma-lift-complex-stably-frees} により、$K$ を複体
+$$
+K_\bullet :
+A \to A^{\oplus r} \to \ldots \to A^{\oplus r} \to A
+$$
+で表せる。この複体と $A/\mathfrak mA$ とのテンソル積は
+$K_\bullet(\overline{f}_1, \ldots, \overline{f}_r)$ に等しい（同型ではなく等しい）。
+% P07-ERR-1145: non-rendering source pointer.
+$f_1, \ldots, f_r \in A$ で射 $A^{\oplus r} \to A$ の成分を表す。
+これらの $f_i$ は $\overline{f}_i$ の持ち上げである。代数、補題
+\ref{algebra-lemma-grothendieck-regular-sequence-general} により、
+$f_1, \ldots, f_r$ は $A$ の正則列をなし、$A/(f_1, \ldots, f_r)$ は
+$R$ 上平坦である。$J = (f_1, \ldots, f_r) \subset A$ とおく。図式
+$$
+\xymatrix{
+K_\bullet \ar[rd] \ar@{..>}[rr]_{\varphi_\bullet} & &
+K_\bullet(f_1, \ldots, f_r) \ar[ld] \\
+& A/J
+}
+$$
+を考える。$f_1, \ldots, f_r$ は正則列なので、南西向きの射は擬同型である
+（代数についてさらに、補題 \ref{more-algebra-lemma-regular-koszul-regular} を参照せよ）。
+したがって、たとえば代数、補題 \ref{algebra-lemma-compare-resolutions} により、
+図式を可換にする点線の射を見つけられる。$\mathfrak m$ を法として還元すると
+可換図式
+$$
+\xymatrix{
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r)
+\ar[rd] \ar[rr]_{\overline{\varphi}_\bullet} & &
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r) \ar[ld] \\
+& (A/\mathfrak m A)/(\overline{f}_1, \ldots, \overline{f}_r)
+}
+$$
+を得る。これは $K_\bullet$ の選び方による。したがって $\overline{\varphi}$ は
+導来圏 $D(A/\mathfrak m A)$ で同型である。ゆえに
+$\overline{\varphi} \otimes_{A/\mathfrak m A}^\mathbf{L} \lambda$ は同型である。
+$\overline{f}_i \in \mathfrak n / \mathfrak m A$ なので、
+$$
+\text{Tor}_i^{A/\mathfrak m A}(
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r), \lambda)
+=
+K_i(\overline{f}_1, \ldots, \overline{f}_r) \otimes_{A/\mathfrak m A} \lambda
+$$
+となる。したがって $\varphi_i \bmod \mathfrak n$ は可逆である。
+$A$ は局所環なので、これは $\varphi_i$ が同型であることを意味し、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-limit-arguments}
+$R \to S$ を Noether 環の有限型平坦環写像とする。
+$\mathfrak q \subset S$ を $\mathfrak p \subset R$ の上にある素イデアルとする。
+$K \in D(S)$ を完全とする。
+$f_1, \ldots, f_r \in \mathfrak q S_\mathfrak q$ を正則列で、
+$S_\mathfrak q/(f_1, \ldots, f_r)$ が $R$ 上平坦であり、かつ
+$K \otimes_S^\mathbf{L} S_\mathfrak q$ が $f_1, \ldots, f_r$ 上の
+Koszul 複体と同型であるものとする。このとき $g \in S$ かつ
+$g \not \in \mathfrak q$ となる元が存在し、次を満たす：
+\begin{enumerate}
+\item $f_1, \ldots, f_r$ は $f'_1, \ldots, f'_r \in S_g$ の像である。
+\item $f'_1, \ldots, f'_r$ は $S_g$ の正則列をなす。
+\item $S_g/(f'_1, \ldots, f'_r)$ は $R$ 上平坦である。
+% P07-ERR-0623: non-rendering source pointer.
+\item $K \otimes_S^\mathbf{L} S_g$ は $f_1, \ldots, f_r$ 上の
+Koszul 複体と同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+局所化の定義により、性質 (1) を満たす $g \in S$、$g \not \in \mathfrak q$ を
+見つけられる。$g$ を $gg'$ で置き換えた後、(2) が成り立つと仮定してよい。
+ここで $g' \in S$、$g' \not \in \mathfrak q$ である。代数、補題
+\ref{algebra-lemma-regular-sequence-in-neighbourhood} を参照せよ。代数、定理
+\ref{algebra-theorem-openness-flatness} により、$S_g/(f'_1, \ldots, f'_r)$ は
+$R$ 上、$\mathfrak q$ のある開近傍で平坦である。したがって、さらに $g$ を
+$gg'$ で置き換えた後、(3) も成り立つと仮定してよい。ここでも
+$g' \in S$、$g' \not \in \mathfrak q$ である。最後に、代数についてさらに、補題
+\ref{more-algebra-lemma-colimit-perfect-complexes} により、もう一度置き換えれば
+(4) を得る。
+\end{proof}
+
+\noindent
+次の補題の一般化については、空間の射についてさらに、補題
+\ref{spaces-more-morphisms-lemma-where-isomorphism} を参照せよ。
+
+\begin{lemma}
+\label{equiv-lemma-isomorphism-in-neighbourhood}
+$S$ を Noether スキームとし、$s \in S$ とする。
+$p : X \to Y$ を $S$ 上のスキームの射とする。次を仮定する：
+\begin{enumerate}
+\item $Y \to S$ と $X \to S$ は固有である。
+\item $X$ は $S$ 上平坦である。
+\item $X_s \to Y_s$ は同型である。
+\end{enumerate}
+このとき、開集合 $U \subset S$ で $s$ の近傍となるものが存在し、
+基底変換 $X_U \to Y_U$ は同型である。
+\end{lemma}
+
+\begin{proof}
+射 $p$ は射、補題 \ref{morphisms-lemma-closed-immersion-proper} により固有である。
+スキームのコホモロジー、補題
+\ref{coherent-lemma-proper-finite-fibre-finite-in-neighbourhood} により、
+開集合 $Y_s \subset V \subset Y$ で、
+$p|_{p^{-1}(V)} : p^{-1}(V) \to V$ が有限となるものが存在する。
+射についてさらに、定理
+\ref{more-morphisms-theorem-criterion-flatness-fibre-Noetherian} により、
+開集合 $X_s \subset U \subset X$ で、$p|_U : U \to Y$ が平坦となるものが存在する。
+$X \setminus U$ と $Y \setminus V$ の像（いずれも $s$ を含まない閉部分集合）を
+取り除いた後、$p$ は平坦かつ有限であると仮定してよい。
+すると $p$ は開写像であり（射、補題 \ref{morphisms-lemma-fppf-open}）、
+$Y_s \subset p(X) \subset Y$ であるから、$S$ を縮小した後、
+$p$ は全射であると仮定してよい。
+$p_s : X_s \to Y_s$ は同型なので、写像
+$$
+p^\sharp : \mathcal{O}_Y \longrightarrow p_*\mathcal{O}_X
+$$
+は連接 $\mathcal{O}_Y$-加群の写像であり（$p$ は有限なので）、
+$i : Y_s \to Y$ により引き戻すと同型になる
+（たとえばスキームのコホモロジー、補題
+\ref{coherent-lemma-affine-base-change} による）。中山の補題により、これは
+$\mathcal{O}_{Y, y} \to (p_*\mathcal{O}_X)_y$ がすべての $y \in Y_s$ に対して
+全射であることを意味する。したがって開集合 $Y_s \subset V \subset Y$ で
+$p^\sharp|_V$ が全射となるものが存在する
+（加群、補題 \ref{modules-lemma-finite-type-surjective-on-stalk}）。
+ゆえに $S$ をもう一度縮小した後、$p^\sharp$ は全射であると仮定してよい。
+これは $p$ が閉埋入であることを意味する（$p$ はすでに有限である）。
+したがって今や $p$ は Noether スキームの全射な平坦閉埋入であり、ゆえに同型である。
+射、節 \ref{morphisms-section-flat-closed-immersions} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-no-deformations}
+$k$ を体とする。$S$ を $k$ 上有限型で、$k$-有理点 $s$ をもつスキームとする。
+$Y \to S$ を滑らかな固有射とする。$X = Y_s \times S \to S$ をファイバー
+$Y_s$ をもつ定値族とする。$K$ を $X$ から $Y$ への $S$ 上の相対同値の
+Fourier--Mukai 核とする。制限
+$$
+L(Y_s \times_S Y_s \to X \times_S Y)^*K \cong 
+\Delta_{Y_s/k, *} \mathcal{O}_{Y_s}
+$$
+が $D(\mathcal{O}_{Y_s \times Y_s})$ で成り立つと仮定する。このとき開近傍
+$s \in U \subset S$ が存在し、$Y|_U$ は $Y_s \times U$ と $U$ 上同型である。
+\end{lemma}
+
+\begin{proof}
+自然な閉埋入 $i : Y_s \times Y_s = X_s \times Y_s \to X \times_S Y$ をこの記号で表す。
+（以下、$Y_s$ と書き、$X_s$ とは書かない。これは $X$ の $s$ 上のファイバーである。）
+$z \in Y_s \times Y_s = (X \times_S Y)_s \subset X \times_S Y$ を閉点とする。
+上で述べたとおり、$z$ を $Y_s \times Y_s$ の閉点であると同時に
+$X \times_S Y$ の閉点ともみなす。
+
+\medskip\noindent
+場合 I：$z \not \in \Delta_{Y_s/k}(Y_s)$ とする。$\mathcal{O}_z$ で、連接
+$\mathcal{O}_{Y_s \times Y_s}$-加群であって、$z$ に台をもちその値が
+$\kappa(z)$ であるものを表す。すると $i_*\mathcal{O}_z$ は連接
+$\mathcal{O}_{X \times_S Y}$-加群であって、$z$ に台をもちその値が
+$\kappa(z)$ である。仮定は
+$$
+% P07-ERR-0624: non-rendering source pointer.
+K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} i_*\mathcal{O}_z =
+Li^*K \otimes_{\mathcal{O}_{Y_s \times Y_s}}^\mathbf{L} \mathcal{O}_z = 0
+$$
+を意味する。したがって補題 \ref{equiv-lemma-orthogonal-point-sheaf} により、開集合
+$U(z) \subset X \times_S Y$ で $z$ の近傍となり、$K|_{U(z)} = 0$ となるものが存在する。
+この場合、$Z(z) = \emptyset$ を $U(z)$ の閉部分スキームとしてとる。
+
+\medskip\noindent
+場合 II：$z \in \Delta_{Y_s/k}(Y_s)$ とする。$Y_s$ は $k$ 上滑らかなので、
+$\Delta_{Y_s/k} : Y_s \to Y_s \times Y_s$ は正則埋入である。
+射についてさらに、補題 \ref{more-morphisms-lemma-smooth-diagonal-perfect} を参照せよ。
+正則列 $\overline{f}_1, \ldots, \overline{f}_r \in
+\mathcal{O}_{Y_s \times Y_s, z}$ で、$\Delta_{Y_s/k}(Y_s)$ のイデアル層を
+切り出すものを選ぶ。正則列は Koszul 正則なので
+（代数についてさらに、補題 \ref{more-algebra-lemma-regular-koszul-regular}）、仮定は
+$$
+K_z \otimes_{\mathcal{O}_{X \times_S Y, z}}^\mathbf{L}
+\mathcal{O}_{Y_s \times Y_s, z}
+\in D(\mathcal{O}_{Y_s \times Y_s, z})
+$$
+が $\overline{f}_1, \ldots, \overline{f}_r$ 上の Koszul 複体で表されることを意味する。
+ここで係数環は $\mathcal{O}_{Y_s \times Y_s, z}$ である。
+補題 \ref{equiv-lemma-deform-koszul} を
+$\mathcal{O}_{S, s} \to \mathcal{O}_{X \times_S Y, z}$ に適用すると、
+$K_z \in D(\mathcal{O}_{X \times_S Y, z})$ は正則列
+$f_1, \ldots, f_r \in \mathcal{O}_{X \times_S Y, z}$ 上の Koszul 複体で表され、
+この正則列は $\overline{f}_1, \ldots, \overline{f}_r$ を持ち上げ、さらに
+$\mathcal{O}_{X \times_S Y}/(f_1, \ldots, f_r)$ は $\mathcal{O}_{S, s}$ 上平坦である。
+いくつかの極限に関する議論（補題 \ref{equiv-lemma-limit-arguments}）により、アフィン開集合
+$U(z) \subset X \times_S Y$ で $z$ の近傍となるものと、閉部分スキーム
+$Z(z) \subset U(z)$ が存在し、
+次を満たすことが分かる：
+\begin{enumerate}
+\item $Z(z) \to U(z)$ は正則閉埋入である。
+\item $K|_{U(z)}$ は $\mathcal{O}_{Z(z)}$ と擬同型である。
+\item $Z(z) \to S$ は平坦である。
+\item $Z(z)_s = \Delta_{Y_s/k}(Y_s) \cap U(z)_s$
+は $U(z)_s$ の閉部分スキームとしての等式である。
+\end{enumerate}
+
+\noindent
+性質 (2) により、$z, z' \in Y_s \times Y_s$ に対して
+$Z(z) \cap U(z') = Z(z') \cap U(z)$ が閉部分スキームとして成り立つ。
+したがって開近傍
+$$
+U = \bigcup\nolimits_{z \in Y_s \times Y_s\text{ 閉点}} U(z)
+$$
+を $Y_s \times Y_s$ の $X \times_S Y$ における近傍として得るとともに、閉部分スキーム
+$Z \subset U$ で、(1) $Z \to U$ が正則閉埋入、(2) $Z \to S$ が平坦、
+(3) $Z_s = \Delta_{Y_s/k}(Y_s)$ となるものを得る。
+$X \times_S Y \to S$ は固有なので、$S$ を $s$ の開近傍で置き換えた後、
+$U = X \times_S Y$ と仮定してよい。射影 $Z_s \to Y_s$ と $Z_s \to X_s$ は
+同型なので、$S$ を縮小した後、$Z \to Y$ と $Z \to X$ は同型であると仮定してよい。
+補題 \ref{equiv-lemma-isomorphism-in-neighbourhood} を参照せよ。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-no-deformations-better}
+$k$ を代数閉体とする。$X$ を $k$ 上滑らかで固有なスキームとする。
+$f : Y \to S$ を滑らかな固有射とし、$S$ は $k$ 上有限型であるとする。
+$K$ を $X \times S$ から $Y$ への $S$ 上の相対同値の Fourier--Mukai 核とする。
+このとき $S$ は開部分スキーム $U$ で被覆でき、各開集合上に $U$-同型
+$f^{-1}(U) \cong Y_0 \times U$ が存在する。ただし $Y_0$ は $k$ 上固有かつ滑らかである。
+\end{lemma}
+
+\begin{proof}
+閉点 $s \in S$ を選ぶ。$k$ は代数閉体なので、これは $k$-有理点である。
+$Y_0 = Y_s$ とおく。$K_0$ は $K$ の $X \times Y_0$ への制限であり、
+$X$ から $Y_0$ への $\Spec(k)$ 上の相対同値の Fourier--Mukai 核である
+（補題 \ref{equiv-lemma-base-change-rek}）。$K'_0$ を
+$D_{perf}(\mathcal{O}_{Y_0 \times X})$ において定義
+\ref{equiv-definition-relative-equivalence-kernel} で存在を仮定した対象とする。
+すると $K'_0$ は $Y_0$ から $X$ への $\Spec(k)$ 上の相対同値の Fourier--Mukai 核である。
+これは定義 \ref{equiv-definition-relative-equivalence-kernel} に内在する対称性による。
+したがって補題 \ref{equiv-lemma-base-change-rek} により、引き戻し
+$$
+M = (Y_0 \times X \times S \to Y_0 \times X)^*K'_0
+$$
+は $(Y_0 \times S) \times_S (X \times S) = Y_0 \times X \times S$ 上で、
+$Y_0 \times S$ から $X \times S$ への $S$ 上の相対同値の Fourier--Mukai 核である。
+ここで核
+$$
+K_{new} =
+R\text{pr}_{13, *}(L\text{pr}_{12}^*M
+\otimes_{\mathcal{O}_{(Y_0 \times S) \times_S (X \times S)
+\times_S Y}}^\mathbf{L}
+L\text{pr}_{23}^*K)
+$$
+を $(Y_0 \times S) \times_S Y$ 上で考える。これは $Y_0 \times S$ から $Y$ への
+$S$ 上の相対同値の Fourier--Mukai 核である。実際、これは節
+\ref{equiv-section-category-Fourier-Mukai-kernels} で構成した圏における二つの可逆射の合成である。
+さらに、この合成は基底変換を通過する（補題 \ref{equiv-lemma-base-change-is-functor}）。
+したがって、$K_{new}$ の
+$((Y_0 \times S) \times_S Y)_s = Y_0 \times Y_0$ への引き戻しは
+$K_0$ と $K'_0$ の合成に等しく、ゆえにこの圏の恒等射に等しい。言い換えると、
+$$
+L(Y_0 \times Y_0 \to (Y_0 \times S) \times_S Y)^*K_{new}
+\cong
+\Delta_{Y_0/k, *}\mathcal{O}_{Y_0}
+$$
+となる。したがって補題 \ref{equiv-lemma-no-deformations} により、$Y \to S$ は
+$Y_0 \times S$ と、$s$ のある開近傍上で同型である。これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+\section{可算性}
+\label{equiv-section-countability}
+
+\noindent
+本節では、ある種の集合の可算性に関する初等的な補題をいくつか証明する。
+$\mathcal{C}$ を圏とする。本節では、$\mathcal{C}$ が次を満たすとき
+{\it 可算}であるという：
+\begin{enumerate}
+\item 任意の $X, Y \in \Ob(\mathcal{C})$ に対して、集合
+$\Mor_\mathcal{C}(X, Y)$ は可算である。
+\item $\mathcal{C}$ の対象の同型類の集合は可算である。
+\end{enumerate}
+
+\begin{lemma}
+\label{equiv-lemma-countable-finite-type}
+$R$ を可算な Noether 環とする。このとき $R$ 上有限型なスキームの圏は可算である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-abelian}
+$\mathcal{A}$ を可算なアーベル圏とする。このとき $D^b(\mathcal{A})$ は可算である。
+\end{lemma}
+
+\begin{proof}
+% P07-ERR-0626: non-rendering source pointer.
+$D(\mathcal{A})$ について主張を証明すれば十分である。他の圏はその充満部分圏だからである。
+$D(\mathcal{A})$ の各対象は $\mathcal{A}$ の対象の複体なので、
+$D^b(\mathcal{A})$ の対象の同型類の集合が可算であることは直ちに分かる。
+さらに、有界複体 $A^\bullet$ と $B^\bullet$ が $\mathcal{A}$ の対象からなるとき、
+$\Hom_{K^b(\mathcal{A})}(A^\bullet, B^\bullet)$ が可算であることは明らかである。
+また
+$$
+\Hom_{D^b(\mathcal{A})}(A^\bullet, B^\bullet) =
+\colim_{s : (A')^\bullet \to A^\bullet
+\text{ 擬同型かつ }(A')^\bullet\text{ は有界}}
+\Hom_{K^b(\mathcal{A})}((A')^\bullet, B^\bullet)
+$$
+である。これは導来圏、補題 \ref{derived-lemma-bounded-derived} による。
+% P07-ERR-0627: non-rendering source pointer.
+したがって、これは可算集合の可算余極限として可算集合である。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-perfect}
+$X$ を可算な Noether 環上有限型なスキームとする。このとき圏
+$D_{perf}(\mathcal{O}_X)$ と $D^b_{\textit{Coh}}(\mathcal{O}_X)$ は可算である。
+\end{lemma}
+
+\begin{proof}
+射、補題 \ref{morphisms-lemma-finite-type-noetherian} により、$X$ は Noether である。
+したがってスキームの導来圏、補題
+\ref{perfect-lemma-perfect-on-noetherian} により、$D_{perf}(\mathcal{O}_X)$ は
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$ の充満部分圏である。ゆえに
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$ について結果を証明すれば十分である。
+スキームの導来圏、命題 \ref{perfect-proposition-DCoh} により
+$D^b_{\textit{Coh}}(\mathcal{O}_X) = D^b(\textit{Coh}(\mathcal{O}_X))$
+であることを想起しよう。したがって補題 \ref{equiv-lemma-countable-abelian} により、
+$\textit{Coh}(\mathcal{O}_X)$ が可算であることを証明すれば十分である。これは省略する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-isos}
+$K$ を代数閉体とする。$S$ を $K$ 上有限型なスキームとする。
+$X \to S$ と $Y \to S$ を有限型の射とする。このとき可算集合 $I$ と、
+各 $i \in I$ に対する組 $(S_i \to S, h_i)$ が存在し、次の性質をもつ：
+\begin{enumerate}
+\item $S_i \to S$ は有限型の射である。$X_i = X \times_S S_i$ および
+$Y_i = Y \times_S S_i$ とおく。
+\item $h_i : X_i \to Y_i$ は $S_i$ 上の同型である。
+\item 任意の閉点 $s \in S(K)$ に対し、$X_s \cong Y_s$ が
+$K = \kappa(s)$ 上成り立つならば、$s$ は $S_i \to S$ の像に属する。ただし添字はある $i$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+体 $K$ はその可算部分体のフィルター付き合併である。双対的に、$\Spec(K)$ は
+$K$ の可算部分体のスペクトルの余フィルター付き極限である。したがって極限、補題
+\ref{limits-lemma-descend-finite-presentation} により、可算部分体 $k$ と射
+$X_0 \to S_0$ および $Y_0 \to S_0$ で、$k$ 上有限型なスキームの射となり、
+$X \to S$ と $Y \to S$ がそれらの基底変換となるものを見つけられる。
+
+\medskip\noindent
+補題 \ref{equiv-lemma-countable-finite-type} により、可算集合 $I$ と組
+$(S_{0, i} \to S_0, h_{0, i})$ で次を満たすものが存在する：
+\begin{enumerate}
+\item $S_{0, i} \to S_0$ は有限型の射である。$X_{0, i} = X_0 \times_{S_0} S_{0, i}$ および
+$Y_{0, i} = Y_0 \times_{S_0} S_{0, i}$ とおく。
+\item $h_{0, i} : X_{0, i} \to Y_{0, i}$ は $S_{0, i}$ 上の同型である。
+\end{enumerate}
+さらに、任意の組 $(T \to S_0, h_T)$ で、$T \to S_0$ が有限型であり、
+$h_T : X_0 \times_{S_0} T \to Y_0 \times_{S_0} T$ が同型であるものは、
+これらの一つと同型である。
+$(S_i \to S, h_i)$ で、$(S_{0, i} \to S_0, h_{0, i})$ の
+$\Spec(K) \to \Spec(k)$ による基底変換を表す。これが求めるものだと主張する。
+
+\medskip\noindent
+$s \in S(K)$ とし、$h_s : X_s \to Y_s$ を $K = \kappa(s)$ 上の同型とする。
+$K$ はその有限生成 $k$-部分代数のフィルター付き合併として書ける。したがって極限、命題
+\ref{limits-proposition-characterize-locally-finite-presentation} および補題
+\ref{limits-lemma-descend-finite-presentation} により、そのような有限生成 $k$-部分代数
+$K \supset A \supset k$ で、次を満たすものを見つけられる：
+\begin{enumerate}
+\item 可換図式
+$$
+\xymatrix{
+\Spec(K) \ar[d]_s \ar[r] &
+\Spec(A) \ar[d]^{s'} \\
+S \ar[r] &
+S_0}
+$$
+が存在する。ここで $s' : \Spec(A) \to S_0$ はある $k$ 上の射である。
+\item $h_s$ は同型
+% P07-ERR-0628: non-rendering source pointer.
+$h_{s'} : X_0 \times_{S_0, s'} \Spec(A) \to
+X_0 \times_{S_0, s'} \Spec(A)$ の $A$ による基底変換である。
+\end{enumerate}
+するともちろん $(s' : \Spec(A) \to S_0, h_{s'})$ は、組
+$(S_{0, i} \to S_0, h_{0, i})$ と同型であり、その添字はある $i \in I$ である。
+(1) の可換図式は、$s$ が
+$s'$ の $\Spec(K)$ への基底変換の像に属することを示すので、証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{equiv-lemma-countable-equivs}
+$K$ を代数閉体とする。このとき可算集合 $I$ と、各 $i \in I$ に対する組
+$(S_i/K, X_i \to S_i, Y_i \to S_i, M_i)$ が存在し、次の性質をもつ：
+\begin{enumerate}
+\item $S_i$ は $K$ 上有限型なスキームである。
+\item $X_i \to S_i$ と $Y_i \to S_i$ は滑らかな固有射である。
+\item $M_i \in D_{perf}(\mathcal{O}_{X_i \times_{S_i} Y_i})$
+は $X_i$ から $Y_i$ への $S_i$ 上の相対同値の Fourier--Mukai 核である。
+\item 任意の滑らかで固有なスキーム $X$ と $Y$ で $K$ 上のものに対し、$K$-線形完全同値
+$D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$
+が存在するならば、$i \in I$ と $s \in S_i(K)$ で
+$X \cong (X_i)_s$ および $Y \cong (Y_i)_s$ を満たすものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+たとえば素体のような可算部分体 $k \subset K$ を選ぶ。補題
+\ref{equiv-lemma-countable-finite-type} と \ref{equiv-lemma-countable-perfect} により、
+補題の (1), (2), (3) を満たす $k$ 上の系の同型類は可算集合をなす。
+したがって可算集合 $I$ と、各 $i \in I$ に対してそのような系
+$$
+(S_{0, i}/k, X_{0, i} \to S_{0, i}, Y_{0, i} \to S_{0, i}, M_{0, i})
+$$
+を $k$ 上で選べ、各同型類が少なくとも一度現れるようにできる。
+$(S_i/K, X_i \to S_i, Y_i \to S_i, M_i)$ で、表示した系の $K$ への基底変換を表す。
+この系は性質 (1), (2), (3) をもつ。補題 \ref{equiv-lemma-base-change-rek} を参照せよ。
+性質 (4) を証明しよう。
+
+\medskip\noindent
+滑らかで固有なスキーム $X$ と $Y$ で $K$ 上のものをとり、$K$-線形完全同値
+$F : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$.
+が存在するものを考える。命題 \ref{equiv-proposition-equivalence} により、対象
+$M \in D_{perf}(\mathcal{O}_{X \times Y})$ が存在し、$F = \Phi_M$ が対応する
+Fourier--Mukai 関手であると仮定してよい。補題
+\ref{equiv-lemma-fourier-mukai-flat-proper-over-noetherian} により、
+$M'$ が $D_{perf}(\mathcal{O}_{Y \times X})$ の対象で、$\Phi_{M'}$ が $\Phi_M$ の
+右随伴となるものが存在する。$\Phi_M$ は同値なので、これは $\Phi_{M'}$ が
+$\Phi_M$ の擬逆であることを意味する。補題
+\ref{equiv-lemma-fourier-mukai-flat-proper-over-noetherian} により、対象
+$$
+A = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*M
+\otimes_{\mathcal{O}_{X \times Y \times X}}^\mathbf{L}
+L\text{pr}_{23}^*M')
+$$
+が $D_{perf}(\mathcal{O}_{X \times X})$ で定める Fourier--Mukai 関手と、対象
+$$
+B = R\text{pr}_{13, *}(
+L\text{pr}_{12}^*M'
+\otimes_{\mathcal{O}_{Y \times X \times Y}}^\mathbf{L}
+L\text{pr}_{23}^*M)
+$$
+が $D_{perf}(\mathcal{O}_{Y \times Y})$ で定める Fourier--Mukai 関手は、それぞれ
+$\text{id} : D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_X)$
+および
+$\text{id} : D_{perf}(\mathcal{O}_Y) \to D_{perf}(\mathcal{O}_Y)$
+と同型であることが分かる。したがって
+$A \cong \Delta_{X/K, *}\mathcal{O}_X$ および
+$B \cong \Delta_{Y/K, *}\mathcal{O}_Y$
+が補題 \ref{equiv-lemma-uniqueness} により成り立つ。ゆえに定義から、$M$ は
+$X$ から $Y$ への $K$ 上の相対同値の Fourier--Mukai 核である。
+
+\medskip\noindent
+$K$ はその有限型 $k$-部分代数 $A \subset K$ のフィルター付き余極限として書ける。
+極限、補題 \ref{limits-lemma-descend-finite-presentation} により、$X_0, Y_0$ で
+$A$ 上有限型であり、その $K$ への基底変換が $X$ と $Y$ を与えるものを見つけられる。
+極限、補題 \ref{limits-lemma-eventually-proper} と
+\ref{limits-lemma-descend-smooth} により、$A$ を大きくした後、$X_0$ と $Y_0$ は
+$A$ 上滑らかかつ固有であると仮定してよい。補題 \ref{equiv-lemma-descend-rek} により、
+$A$ を大きくした後、$M$ はある
+$M_0  \in D_{perf}(\mathcal{O}_{X_0 \times_{\Spec(A)} Y_0})$ の引き戻しであると仮定してよい。
+それは $X_0$ から $Y_0$ への $\Spec(A)$ 上の相対同値の Fourier--Mukai 核である。
+% P07-ERR-0629: non-rendering source pointer.
+% P07-ERR-0630: non-rendering source pointer.
+したがって $(S_0/k, X_0 \to S_0, Y_0 \to S_0, M_0)$ は
+$(S_{0, i}/k, X_{0, i} \to S_{0, i}, Y_{0, i} \to S_{0, i}, M_{0, i})$
+と、ある $i \in I$ に対して同型である。$S_i = S_{0, i} \times_{\Spec(k)} \Spec(K)$
+なので、(4) は $s : \Spec(K) \to S_i$ によって成り立つ。この射は、射
+$\Spec(K) \to \Spec(A) \cong S_{0, i}$ により誘導され、この後者は $A \subset K$ から得られる。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{導来同値な多様体の可算性}
+\label{equiv-section-countable-derived-equivalent}
+
+\noindent
+本節では Anel と To\"en の結果を証明する。\cite{AT} を参照せよ。
+
+\begin{definition}
+\label{equiv-definition-derived-equivalent}
+% P07-ERR-0631: non-rendering source pointer.
+$k$ を体とする。$X$ と $Y$ を $k$ 上滑らかで射影的なスキームとする。
+$X$ と $Y$ が{\it 導来同値}であるとは、$k$-線形完全同値
+$D_{perf}(\mathcal{O}_X) \to D_{perf}(\mathcal{O}_Y)$.
+が存在することをいう。
+\end{definition}
+
+\noindent
+結果は次のとおりである。
+
+\begin{theorem}
+\label{equiv-theorem-countable}
+\begin{reference}
+\cite{AT} のわずかな改良
+\end{reference}
+$K$ を代数閉体とする。$\mathbf{X}$ を $K$ 上滑らかで固有なスキームとする。
+$\mathbf{Y}$ で $K$ 上滑らかかつ固有であり、$\mathbf{X}$ と導来同値なものの
+同型類は高々可算個である。
+\end{theorem}
+
+\begin{proof}
+可算集合 $I$ と、各 $i \in I$ に対して補題 \ref{equiv-lemma-countable-equivs} の
+(1), (2), (3), (4) を満たす系 $(S_i/K, X_i \to S_i, Y_i \to S_i, M_i)$ を選ぶ。
+$i \in I$ を選び、$S = S_i$、$X = X_i$、$Y = Y_i$、$M = M_i$ とおく。
+% P07-ERR-0632: non-rendering source pointer.
+ファイバー $Y_s$ の同型類の集合が可算であることを示せば明らかに十分である。
+ここで $s \in S(K)$ は $X_s \cong \mathbf{X}$ を満たすものに限る。これを次の段落で証明する。
+
+\medskip\noindent
+$S$ を $K$ 上有限型なスキームとし、$X \to S$ と $Y \to S$ を滑らかな固有射とし、
+$M \in D_{perf}(\mathcal{O}_{X \times_S Y})$ を $X$ から $Y$ への $S$ 上の
+相対同値の Fourier--Mukai 核とする。ファイバー $Y_s$ の同型類の集合が可算であることを示す。
+ここで $s \in S(K)$ は $X_s \cong \mathbf{X}$ を満たすものに限る。
+補題 \ref{equiv-lemma-countable-isos} を族 $\mathbf{X} \times S \to S$ と $X \to S$ に
+適用すると、可算集合 $I$ と各 $i \in I$ に対する組 $(S_i \to S, h_i)$ が存在し、
+次の性質をもつ：
+\begin{enumerate}
+\item $S_i \to S$ は有限型の射である。$X_i = X \times_S S_i$ とおく。
+\item $h_i : \mathbf{X} \times S_i \to X_i$
+は $S_i$ 上の同型である。
+\item 任意の閉点 $s \in S(K)$ に対し、$\mathbf{X} \cong X_s$ が
+$K = \kappa(s)$ 上成り立つならば、$s$ は $S_i \to S$ の像に属する。ただし添字はある $i$ である。
+\end{enumerate}
+ここで $Y_i = Y \times_S S_i$ とおく。
+% P07-ERR-0633: non-rendering source pointer.
+$M_i \in D_{perf}(\mathcal{O}_{X_i \times_{S_i} Y_i})$
+で $M$ の引き戻しを表す。補題 \ref{equiv-lemma-base-change-rek} により、$M_i$ は
+$X_i$ から $Y_i$ への $S_i$ 上の相対同値の Fourier--Mukai 核である。
+$I$ は可算なので、性質 (3) により、ファイバー $Y_{i, s}$ の同型類の集合が
+$s \in S_i(K)$ にわたって可算であることを証明すれば十分である。
+実際、補題 \ref{equiv-lemma-no-deformations-better} によりこの数は有限であり、証明が完了する。
+\end{proof}

@@ -1,0 +1,5504 @@
+% Generated mechanically from frozen input inputs/p11/ja/quot.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{98}
+\chapter{Quot 空間と Hilbert 空間}
+
+
+\phantomsection
+\label{quot-section-phantom}
+
+
+
+
+
+\section{序論}
+\label{quot-section-introduction}
+
+\noindent
+当初の構想では、本章の目的は Quot 関手と Hilbert 関手を論じ、
+いくつかの技術的条件が満たされるならば、それらが代数空間であることを
+証明することであった。スキームの場合のこの内容は、
+Grothendieck による Bourbaki セミナーの講義で扱われている。次を参照せよ：
+\cite{Gr-I},
+\cite{Gr-II},
+\cite{Gr-III},
+\cite{Gr-IV},
+\cite{Gr-V}、および
+\cite{Gr-VI}。射影スキームの場合、Quot スキームと Hilbert スキームは、
+適切な非常に豊富な可逆層の切断空間の Grassmann 多様体の内部にあり、
+これによってそれらのスキームを構成する方法が得られる。
+本章の方針は異なり、Artin の公理を用いて Quot と Hilb が
+代数空間であることを証明する。
+
+\medskip\noindent
+さらに検討すると、Stacks project における理論の展開には、
+\cite{lieblich_remarks} で導入された、基礎上固有な台をもつ連接層の
+スタック $\Cohstack_{X/B}$ から議論を始めるほうが都合のよいことが
+わかった。ここで $f : X \to B$ は、適切な技術的条件を満たす
+代数空間の射である。ただし、この設定は一般化できる（下を参照せよ）。
+$X$ 上の加群 $\mathcal{F}$ と $\mathcal{G}$ が与えられているとする。
+適切な仮定のもとで、関手
+$T/B \mapsto \Hom_{X_T}(\mathcal{F}_T, \mathcal{G}_T)$
+は $B$ 上の代数空間 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$ である。
+第 \ref{quot-section-hom} 節を参照せよ。同型からなる部分関手
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})$ が代数空間であることは、
+第 \ref{quot-section-isom} 節で示す。続く各節では、この結果を用いて
+スタック $\Cohstack_{X/B}$ の対角射が表現可能であることを示す。
+$X \to B$ が平坦な場合には第 \ref{quot-section-stack-coherent-sheaves} 節で、
+一般の場合には第 \ref{quot-section-not-flat} 節で、
+$\Cohstack_{X/B}$ が代数スタックであることを証明する。
+文献案内については、同節の序論を参照されたい。
+
+\medskip\noindent
+これを証明すれば、
+$\Quotfunctor_{\mathcal{F}/X/B}$、$\Hilbfunctor_{X/B}$、および
+$\Picardfunctor_{X/B}$ が代数空間であり、
+$\Picardstack_{X/B}$ が代数スタックであることは比較的容易に従う。
+第 \ref{quot-section-quot}、\ref{quot-section-hilb}、
+\ref{quot-section-picard-functor}、\ref{quot-section-picard-stack} 節を参照せよ。
+
+\medskip\noindent
+通常の方法により、第 \ref{quot-section-relative-morphisms} 節では、
+相対射の関手 $\mathit{Mor}_B(Z, X)$ が（適切な仮定のもとで）
+代数空間であることを導く。
+
+\medskip\noindent
+第 \ref{quot-section-stack-of-spaces} 節では、固有な代数空間の平坦族を
+パラメータ付ける亜群のスタック
+$$
+\Spacesstack'_{fp, flat, proper}
+$$
+が、形式的有効性を除く Artin のすべての公理
+（versal 性の開性を含む）を満たすことを証明する。
+このスタックの性質を用いる際には注意が必要であるため、
+意図的に非常に扱いにくい記法を採用している。
+
+\medskip\noindent
+第 \ref{quot-section-polarized} 節では、偏極された固有代数空間の平坦族を
+パラメータ付けるスタック
+$\Polarizedstack$
+が代数スタックであることを証明する。固有代数空間の平坦族について
+すでに得た結果により、これは偏極スキームに対する形式的有効性を
+証明することに帰着する。この結果は、しばしば Grothendieck の
+代数化定理として知られている。
+
+\medskip\noindent
+第 \ref{quot-section-curves} 節では、曲線族をパラメータ付けるスタック
+$\Curvesstack$ が代数的であることを証明する。
+
+\medskip\noindent
+第 \ref{quot-section-moduli-complexes} 節では、固有射上の複体の
+モジュライを研究し、代数スタック $\Complexesstack_{X/B}$ を得る。
+主張と証明の着想は \cite{lieblich-complexes} による。
+
+\medskip\noindent
+本章で扱わないものは何か。得られるモジュライ空間および
+モジュライスタックの性質については、代数性を除けばほとんど論じない。
+この点については、Moduli Stacks の第
+\ref{moduli-section-introduction} 節を参照せよ。
+ここで扱う結果の多くでは、代数空間の射 $X \to B$ の代わりに
+代数スタックの射 $\mathcal{X} \to \mathcal{B}$ を考えることにより、
+構成を一般化できる。これについては今後論じる
+（今後参照を挿入）。Hilbert 空間の場合には、より一般的な
+「Hilbert スタック」という概念があり、これは別の章で論じる
+（今後参照を挿入）。
+
+
+
+
+\section{規約}
+\label{quot-section-conventions}
+
+\noindent
+本章ならびに「スタックの例」「代数スタック上の層」
+「表現可能性の判定条件」「Artin の公理」の各章は、
+代数スタックの一般理論を展開する前に意図的に配置してある。
+その理由は、次章以降（スタックの性質、第
+\ref{stacks-properties-section-conventions} 節を参照せよ）、
+スキームと、それが定める代数スタックとを区別しなくなるからである。
+これにより言葉遣いは柔軟になり、人間には解析しやすくなる一方、
+精密さは低下する。「代数スタック」で始まるこれら最初の数章は、
+代数スタックを捉えるさまざまな方法の間にある高度に技術的な相違の
+一部を、後に無視できるようにするための基礎を築く。
+しかし、とりわけ「Artin の公理」と「表現可能性の判定条件」の各章では、
+いくつかの構成が代数スタックまたは代数空間を与えることを
+示そうとしているため、扱う対象が正確に何であるかについて
+きわめて精密でなければならない。
+
+\medskip\noindent
+残念ながら、そのために一部の記法、規約、用語が扱いにくくなり、
+経験の深い読者には逆向きに見えることもある。
+どうか容赦していただきたい。
+
+\medskip\noindent
+すべてのスキームは大きな fppf サイト $\Sch_{fppf}$ に含まれるものと
+常に仮定する。また、考察するすべての環 $A$ は、$\Spec(A)$ が
+この大きなサイトの対象と（同型に）なるという性質をもつものとする。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+本章および続く各章では、$X$ とそれ自身との積
+（$S$ 上の代数空間の圏における積）を、$X \times X$ ではなく
+$X \times_S X$ と書く。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Hom 関手}
+\label{quot-section-hom}
+
+\noindent
+本節では、以下で定義する準同型の関手を調べる。
+
+\begin{situation}
+\label{quot-situation-hom}
+$S$ をスキームとする。$f : X \to B$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ と $\mathcal{G}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$B$ 上の任意のスキーム $T$ に対し、$\mathcal{F}$ と $\mathcal{G}$ の
+$T$ への基底変換、言い換えれば射影
+$X_T = X \times_B T \to X$ による引き戻しを、
+$\mathcal{F}_T$ と $\mathcal{G}_T$ で表す。関手
+\begin{equation}
+\label{quot-equation-hom}
+\mathit{Hom}(\mathcal{F}, \mathcal{G}) :
+(\Sch/B)^{opp}
+\longrightarrow
+\textit{Sets},\quad
+T
+\longrightarrow
+\Hom_{\mathcal{O}_{X_T}}(\mathcal{F}_T, \mathcal{G}_T)
+\end{equation}
+\end{situation}
+
+\noindent
+状況 \ref{quot-situation-hom} では、
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ を、射
+$\mathit{Hom}(\mathcal{F}, \mathcal{G}) \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなすことがある。
+実際、$T$ が $S$ 上のスキームなら、
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})(T)$ の元は対 $(h, u)$ からなる。
+ここで $h$ は射 $h : T \to B$ であり、
+$u : \mathcal{F}_T \to \mathcal{G}_T$ は
+$\mathcal{O}_{X_T}$ 加群の写像である。ただし
+$X_T = T \times_{h, B} X$ であり、$\mathcal{F}_T$ と
+$\mathcal{G}_T$ は $X_T$ への引き戻しである。
+したがって、$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ が
+代数空間であると言うとき、それは対応する関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ が代数空間であることを意味する。
+
+\begin{lemma}
+\label{quot-lemma-hom-sheaf}
+状況 \ref{quot-situation-hom} において、関手
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ 
+は fpqc 位相に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$\{T_i \to T\}_{i \in I}$ を $B$ 上のスキームの fpqc 被覆とする。
+$X_i = X_{T_i} = X \times_S T_i$、
+$\mathcal{F}_i = u_{T_i}$、$\mathcal{G}_i = \mathcal{G}_{T_i}$ とおく。
+$\{X_i \to X_T\}_{i \in I}$ は $X_T$ の fpqc 被覆である
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc} を参照せよ）。
+したがって、$u_i$ と $u_j$ の $X_{T_i \times_T T_j}$ への制限が
+一致するような写像族
+$u_i : \mathcal{F}_i \to \mathcal{G}_i$ は、降下により一意な写像
+$u : \mathcal{F}_T \to \mathcal{G}_T$ から得られる
+（Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}）。
+\end{proof}
+
+\noindent
+整合性の確認：$\mathit{Hom}$ 層は、$S$ 上の代数空間の間でも
+同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-hom-to-spaces}
+状況 \ref{quot-situation-hom} において、$T$ を $S$ 上の代数空間とする。
+このとき
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \mathit{Hom}(\mathcal{F}, \mathcal{G})) =
+\{(h, u) \mid h : T \to B, u : \mathcal{F}_T \to \mathcal{G}_T\}
+$$
+が成り立つ。ここで $\mathcal{F}_T,\mathcal{G}_T$ は、
+$\mathcal{F}$ と $\mathcal{G}$ の代数空間
+$X \times_{B, h} T$ への引き戻しを表す。
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射 \'etale 射 $p : U \to T$ を選ぶ。
+$R = U \times_T U$ とおき、その射影を $t, s : R \to U$ とする。
+
+\medskip\noindent
+自然変換 $v : T \to \mathit{Hom}(\mathcal{F}, \mathcal{G})$ をとる。
+このとき $v(p)$ は $U$ 上の対 $(h_U, u_U)$ に対応する。
+$v$ は関手の変換なので、$(h_U, u_U)$ の $s$ と $t$ による
+引き戻しは一致する。$T = U/R$ であるから
+（Spaces, Lemma \ref{spaces-lemma-space-presentation}）、
+$h_U = h \circ p$ を満たす射 $h : T \to B$ を得る。
+このとき $\mathcal{F}_U$ は $\mathcal{F}_T$ の $X_U$ への
+引き戻しであり、$\mathcal{G}_U$ についても同様である。
+したがって、Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent} により、
+$u_U$ は $\mathcal{O}_{X_T}$ 加群の写像
+$u : \mathcal{F}_T \to \mathcal{G}_T$ に降下する。
+
+\medskip\noindent
+逆に、$(h, u)$ を $T$ 上の対とする。スキーム $T'$ からの射
+$a : T' \to T$ を $(h \circ a, a^*u)$ に送ることにより、
+自然変換 $v : T \to \mathit{Hom}(\mathcal{F}, \mathcal{G})$ を得る。
+この構成と前段落の構成が互いに逆であることの確認は省略する。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-hom-base-change}
+状況 \ref{quot-situation-hom} において、$B' \to B$ を
+$S$ 上の代数空間の射とする。$X' = X \times_B B'$ とおき、
+$\mathcal{F}$ と $\mathcal{G}$ の $X'$ への引き戻しを
+$\mathcal{F}'$ と $\mathcal{G}'$ で表す。このとき基底変換
+$f' : X' \to B'$ に付随する関手
+$\mathit{Hom}(\mathcal{F}', \mathcal{G}') : (\Sch/B')^{opp} \to \textit{Sets}$
+を得る。$B'$ 上のスキーム $T$ に対して、明らかに
+$$
+\mathit{Hom}(\mathcal{F}', \mathcal{G}')(T) =
+\mathit{Hom}(\mathcal{F}, \mathcal{G})(T)
+$$
+が成り立つ。右辺では、合成 $T \to B' \to B$ により
+$T$ を $B$ 上のスキームとみなしている。
+この自明な注意は、基礎代数空間を変更するときに役立つことがある。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-hom-sheaf-in-X}
+状況 \ref{quot-situation-hom} において、
+$\{X_i \to X\}_{i \in I}$ を fppf 被覆とし、各 $i,j \in I$ に対して
+$\{X_{ijk} \to X_i \times_X X_j\}$ を fppf 被覆とする。
+$\mathcal{F}$ の $X_i$ への引き戻しを $\mathcal{F}_i$、
+$X_{ijk}$ への引き戻しを $\mathcal{F}_{ijk}$ と表す。
+$\mathcal{G}_i$ と $\mathcal{G}_{ijk}$ も同様に定める。
+$B$ 上の任意のスキーム $T$ に対し、図式
+$$
+\xymatrix{
+\mathit{Hom}(\mathcal{F}, \mathcal{G})(T) \ar[r] &
+\prod\nolimits_i
+\mathit{Hom}(\mathcal{F}_i, \mathcal{G}_i)(T)
+\ar@<1ex>[r]^-{\text{pr}_0^*} \ar@<-1ex>[r]_-{\text{pr}_1^*}
+&
+\prod\nolimits_{i, j, k}
+\mathit{Hom}(\mathcal{F}_{ijk}, \mathcal{G}_{ijk})(T)
+}
+$$
+は、最初の矢印を他の二つの矢印の等化子として表示する。
+\end{lemma}
+
+\begin{proof}
+写像 $u_i : \mathcal{F}_{i, T} \to \mathcal{G}_{i, T}$ を
+$\text{pr}_0^*$ と $\text{pr}_1^*$ の等化子の元とする。
+fppf 被覆の基底変換は fppf 被覆なので
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fppf}）、
+$\{X_{i, T} \to X_T\}_{i \in I}$ と
+$\{X_{ijk, T} \to X_{i, T} \times_{X_T} X_{j, T}\}$ は fppf 被覆である。
+Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+を一度適用すると、$u_i$ と $u_j$ の
+$X_{i, T} \times_{X_T} X_{j, T}$ 上への制限が同じ射であることがわかる。
+さらにもう一度適用すると、各 $i$ について $u_i$ に制限される一意な射
+$u : \mathcal{F}_T \to \mathcal{G}_T$ が存在することがわかる。
+これで証明が完了した。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-hom-limits}
+状況 \ref{quot-situation-hom} において、$\mathcal{F}$ が有限表示であり、
+$f$ が準コンパクトかつ準分離的ならば、
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は極限を保存する。
+\end{lemma}
+
+\begin{proof}
+$T = \lim_{i \in I} T_i$ をアフィン $B$ スキームの有向極限とする。
+示すべきことは
+$$
+\mathit{Hom}(\mathcal{F}, \mathcal{G})(T) =
+\colim \mathit{Hom}(\mathcal{F}, \mathcal{G})(T_i)
+$$
+である。$0 \in I$ を選ぶ。$B$ を $T_0$、$X$ を $X_{T_0}$、
+$\mathcal{F}$ を $\mathcal{F}_{T_0}$、$\mathcal{G}$ を
+$\mathcal{G}_{T_0}$、$I$ を $\{i \in I \mid i \geq 0\}$ で
+置き換えてよい。Remark \ref{quot-remark-hom-base-change} を参照せよ。
+したがって、$B = \Spec(R)$ はアフィンであると仮定してよい。
+
+\medskip\noindent
+$B$ がアフィンなら、$X$ は準コンパクトかつ準分離的である。
+$U$ がアフィンスキームであるような全射 \'etale 射
+$U \to X$ を選ぶ（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover}）。
+$X$ は準分離的なので、スキーム $U \times_X U$ は準コンパクトであり、
+$V$ がアフィンスキームであるような全射 \'etale 射
+$V \to U \times_X U$ を選べる。
+Lemma \ref{quot-lemma-hom-sheaf-in-X} を適用すると、
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は
+$$
+\mathit{Hom}(\mathcal{F}|_U, \mathcal{G}|_U)
+\quad\text{and}\quad
+\mathit{Hom}(\mathcal{F}|_V, \mathcal{G}|_V)
+$$
+の間の二つの写像の等化子であることがわかる。
+したがって $X$ がアフィンの場合に帰着する。
+
+\medskip\noindent
+アフィンの場合、補題の主張は次の問題に帰着する。
+環準同型 $R \to A$、二つの $A$ 加群 $M$、$N$、および
+$R$ 代数の有向系 $C = \colim C_i$ が与えられたとき、写像
+$$
+\colim \Hom_{A \otimes_R C_i}(M \otimes_R C_i, N \otimes_R C_i)
+\longrightarrow
+\Hom_{A \otimes_R C}(M \otimes_R C, N \otimes_R C)
+$$
+はいつ全単射となるか。Algebra, Lemma
+\ref{algebra-lemma-module-map-property-in-colimit} により、
+$M \otimes_R C$ が $A \otimes_R C$ 上有限表示であれば、
+すなわち $M$ が $A$ 上有限表示であれば、これは成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-hom-closed}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$i : X' \to X$ を $B$ 上の代数空間の閉埋め込みとする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群、
+$\mathcal{G}'$ を準連接 $\mathcal{O}_{X'}$ 加群とする。このとき
+$$
+\mathit{Hom}(\mathcal{F}, i_*\mathcal{G}') =
+\mathit{Hom}(i^*\mathcal{F}, \mathcal{G}')
+$$
+が $(\Sch/B)$ 上の関手として成り立つ。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$g : T \to B$ を射とする。
+$i$ の基底変換を $i_T : X'_T \to X_T$ と表し、
+射影を $h : X_T \to X$ および $h' : X'_T \to X'$ と表す。
+$(h')^*i^*\mathcal{F} = i_T^*h^*\mathcal{F}$ に注意する。
+閉埋め込みはアフィンなので（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-affine}）、
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-affine-base-change} により
+$h^*i_*\mathcal{G} = i_{T, *}(h')^*\mathcal{G}$ である。したがって
+\begin{align*}
+\mathit{Hom}(\mathcal{F}, i_*\mathcal{G}')(T)
+& =
+\Hom_{\mathcal{O}_{X_T}}(h^*\mathcal{F}, h^*i_*\mathcal{G}') \\
+& =
+\Hom_{\mathcal{O}_{X_T}}(h^*\mathcal{F}, i_{T, *}(h')^*\mathcal{G}) \\
+& =
+\Hom_{\mathcal{O}_{X'_T}}(i_T^*h^*\mathcal{F}, (h')^*\mathcal{G}) \\
+& =
+\Hom_{\mathcal{O}_{X'_T}}((h')^*i^*\mathcal{F}, (h')^*\mathcal{G}) \\
+& =
+\mathit{Hom}(i^*\mathcal{F}, \mathcal{G}')(T)
+\end{align*}
+となり、望む結果を得る。中央の等号は、関手 $i_{T, *}$ と
+$i_T^*$ の随伴性から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-cohomology-perfect-complex}
+$S$ をスキームとし、$B$ を $S$ 上の代数空間とする。
+$K$ を $D(\mathcal{O}_B)$ の擬連接対象とする。
+\begin{enumerate}
+\item $(\Sch/B)$ のすべての $g : T \to B$ に対してコホモロジー層
+$H^{-1}(Lg^*K)$ が零ならば、関手
+$$
+(\Sch/B)^{opp} \longrightarrow \textit{Sets},\quad
+(g : T \to B) \longmapsto H^0(T, H^0(Lg^*K))
+$$
+は $B$ 上アフィンかつ有限表示な代数空間である。
+\item $(\Sch/B)$ のすべての $g : T \to B$ に対し、
+$i < 0$ ならコホモロジー層 $H^i(Lg^*K)$ が零であるとする。
+このとき $K$ は完全であり、$K$ は局所的に $[0, b]$ 内の
+Tor 振幅をもち、関手
+$$
+(\Sch/B)^{opp} \longrightarrow \textit{Sets},\quad
+(g : T \to B) \longmapsto H^0(T, Lg^*K)
+$$
+は $B$ 上アフィンかつ有限表示な代数空間である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+（2）の仮定のもとでは
+$H^0(T, Lg^*K) = H^0(T, H^0(Lg^*K))$ である。
+規則 $T \mapsto H^0(T, H^0(Lg^*K))$ が fppf 位相に関する
+層条件を満たすことを証明しよう。そのために、$B$ 上のスキーム
+$g : T \to B$ の fppf 被覆 $\{h_i : T_i \to T\}$ が
+与えられているとする。$g_i = g \circ h_i$ とおく。
+$h_i$ は平坦なので
+$Lh_i^* = h_i^*$ であり、$h_i^*$ はコホモロジーをとる操作と
+可換である。したがって
+$$
+H^0(T_i, H^0(Lg_i^*K)) =
+H^0(T_i, H^0(h_i^*Lg^*K)) =
+H^0(T, h_i^*H^0(Lg^*K))
+$$
+$T_i \times_T T_j$ への引き戻しについても同様である。
+$Lg^*K$ は $T$ 上の擬連接複体なので
+（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pseudo-coherent-pullback}）、
+コホモロジー層 $\mathcal{F} = H^0(Lg^*K)$ は準連接である
+（Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-pseudo-coherent}）。
+したがって Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+により
+$$
+H^0(T, \mathcal{F}) = \Ker(
+\prod H^0(T_i, h_i^*\mathcal{F}) \to
+\prod H^0(T_i \times_T T_j, (T_i \times_T T_j \to T)^*\mathcal{F}))
+$$
+である。このようにして、（1）と（2）の規則は fppf 被覆に関する
+層条件を満たすことがわかる。したがって Bootstrap, Lemma
+\ref{bootstrap-lemma-locally-algebraic-space-finite-type} を適用すれば、
+表現可能性を $B$ 上 \'etale 局所的に証明すれば十分である。
+さらに、得られる空間がアフィンかつ有限表示かどうかも
+$B$ 上 \'etale 局所的に確認できる。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-affine-local} および
+\ref{spaces-morphisms-lemma-finite-presentation-local} を参照せよ。
+ゆえに $B$ はアフィンスキームであると仮定してよい。
+
+\medskip\noindent
+$B = \Spec(A)$ をアフィンスキームとする。Derived Categories of Spaces,
+Lemmas
+\ref{spaces-perfect-lemma-pseudo-coherent},
+\ref{spaces-perfect-lemma-derived-quasi-coherent-small-etale-site}、および
+\ref{spaces-perfect-lemma-descend-pseudo-coherent}
+の結果により、以下の証明では $K$ を、Zariski 位相における
+$B$ 上の加群複体の導来圏の完全対象とみなしてよい。
+Derived Categories of Schemes, Lemmas
+\ref{perfect-lemma-pseudo-coherent},
+\ref{perfect-lemma-affine-compare-bounded}、および
+\ref{perfect-lemma-pseudo-coherent-affine} により、$K$ が
+$D(\mathcal{O}_B)$ の対応する対象となるような
+$A$ 加群の擬連接複体 $M^\bullet$ を見つけられる。
+引き戻しに関する仮定から、すべての素イデアル
+$\mathfrak p \subset A$ に対し
+$M^\bullet \otimes^\mathbf{L}_A \kappa(\mathfrak p)$ の
+$H^{-1}$ は零である。More on Algebra, Lemma
+\ref{more-algebra-lemma-cut-complex-in-two} により
+$$
+M^\bullet =
+\tau_{\geq 0}M^\bullet \oplus \tau_{\leq - 1}M^\bullet
+$$
+と書ける。ここで、ある $b \geq 0$ に対して
+$\tau_{\geq 0}M^\bullet$ は完全であり、$[0, b]$ 内の
+Tor 振幅をもつ（ここでは More on Algebra, Lemmas
+\ref{more-algebra-lemma-glue-perfect} および
+\ref{more-algebra-lemma-glue-tor-amplitude} も用いた）。
+（2）の場合には $D(A)$ において
+$\tau_{\leq - 1}M^\bullet = 0$ であることもわかる。
+したがって $M^\bullet$ と $K$ は完全で、$[0, b]$ 内の
+Tor 振幅をもつ。任意の $B$ スキーム $g : T \to B$ に対して
+$$
+H^0(T, H^0(Lg^*K)) = H^0(T, H^0(Lg^*\tau_{\geq 0}K))
+$$
+である（Derived Categories, Lemma
+\ref{derived-lemma-negative-vanishing} の双対による）。
+したがって $K$ を $\tau_{\geq 0}K$ で、対応して
+$M^\bullet$ を $\tau_{\geq 0}M^\bullet$ で置き換えてよい。
+言い換えれば、$M^\bullet$ は $[0, b]$ 内の Tor 振幅をもつと
+仮定してよい。
+
+\medskip\noindent
+$M^\bullet$ は $[0, b]$ 内の Tor 振幅をもつとする。
+$M^\bullet$ は有限自由 $A$ 加群からなる上に有界な複体であると
+仮定してよい（擬連接複体の定義による。More on Algebra,
+Definition \ref{more-algebra-definition-pseudo-coherent} と
+その後の議論を参照せよ）。More on Algebra, Lemma
+\ref{more-algebra-lemma-last-one-flat} により、
+$M = \Coker(M^{- 1} \to M^0)$ は平坦である。
+Algebra, Lemma \ref{algebra-lemma-finite-projective} により、
+$M$ は有限局所自由である。したがって $M^\bullet$ は
+$$
+M \to M^1 \to M^2 \to \ldots \to M^d \to 0 \ldots
+$$
+と擬同型である。これは K-平坦複体なので
+（Cohomology, Lemma \ref{cohomology-lemma-bounded-flat-K-flat}）、
+射 $T \to B$ による $K$ の導来引き戻しは複体
+$$
+g^*\widetilde{M} \to g^*\widetilde{M^1} \to \ldots
+$$
+によって計算される。ゆえに、関手
+$$
+(g : T \to B) \longmapsto
+\Ker(
+\Gamma(T,g^*\widetilde{M})
+\to
+\Gamma(T, g^*(\widetilde{M^1})
+)
+$$
+が $B$ 上有限表示なアフィンスキームで表現されることを示せば十分である。
+
+\medskip\noindent
+この最後の主張を証明するためには、なお $B$ をアフィン開被覆の
+各メンバーで置き換えてよい。したがって $M$ は有限自由であると
+仮定できる（$M^1$ は初めから有限自由であったことを思い出そう）。
+$M = A^{\oplus n}$、$M^1 = A^{\oplus m}$ と書く。
+写像 $M \to M^1$ は $A$ 係数の $m \times n$ 行列
+$(a_{ij})$ で与えられるとする。このとき
+$\widetilde{M} = \mathcal{O}_B^{\oplus n}$ かつ
+$\widetilde{M^1} = \mathcal{O}_B^{\oplus m}$ である。
+したがって上の関手は
+$$
+(g : T \to B) \longmapsto
+\{(f_1, \ldots, f_n) \in \Gamma(T, \mathcal{O}_T) \mid
+\sum g^\sharp(a_{ij})f_i = 0,\ j = 1, \ldots, m\}
+$$
+という関手に等しい。これは明らかにアフィンスキーム
+$$
+\Spec\left(A[x_1, \ldots, x_n]/(\sum a_{ij}x_i; j = 1, \ldots, m)\right)
+$$
+によって表現される。これで補題が証明された。
+\end{proof}
+
+\noindent
+関手 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は多くの場合に
+表現可能である。本章の結果はすべて、次の基本的な場合に基づく。
+以下に与える補題の証明は、ある意味で
+\cite[III, Cor 7.7.8]{EGA} の証明の自然な一般化である。
+
+\begin{lemma}
+\label{quot-lemma-noetherian-hom}
+状況 \ref{quot-situation-hom} において、次を仮定する。
+\begin{enumerate}
+\item $B$ は Noether 代数空間である。
+\item $f$ は局所有限型かつ準分離的である。
+\item $\mathcal{F}$ は有限型 $\mathcal{O}_X$ 加群である。
+\item $\mathcal{G}$ は有限型 $\mathcal{O}_X$ 加群であり、
+$B$ 上平坦で、その台は $B$ 上固有である。
+\end{enumerate}
+このとき関手 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は、
+$B$ 上アフィンかつ有限表示な代数空間である。
+\end{lemma}
+
+\begin{proof}
+$X$ を $\mathcal{G}$ の台の準コンパクトな開近傍で
+置き換えられるので、$X$ は Noether であると仮定してよい。
+この場合 $X$ と $f$ は準コンパクトかつ準分離的である。
+三つ組 $(X, \mathcal{F}, -1)$ に対し、完全複体 $P$ による
+近似 $P \to \mathcal{F}$ を選ぶ。Derived Categories of Spaces,
+Definition
+\ref{spaces-perfect-definition-approximation-holds} および
+Theorem \ref{spaces-perfect-theorem-approximation} を参照せよ。
+このとき誘導される写像
+$$
+\Hom_{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})
+\longrightarrow
+\Hom_{D(\mathcal{O}_X)}(P, \mathcal{G})
+$$
+は同型である。実際、$P \to \mathcal{F}$ は同型
+$H^0(P) \to \mathcal{F}$ を誘導し、$i > 0$ なら
+$H^i(P) = 0$ だからである。さらに、任意の射 $g : T \to B$ に対し、
+射影を $h : X_T = T \times_B X \to X$ と表し、
+$P_T = Lh^*P$ とおく。このとき同様に
+$$
+\Hom_{\mathcal{O}_{X_T}}(\mathcal{F}_T, \mathcal{G}_T)
+\longrightarrow
+\Hom_{D(\mathcal{O}_{X_T})}(P_T, \mathcal{G}_T)
+$$
+は同型である。なぜなら
+$P_T = Lh^*P \to Lh^*\mathcal{F} \to \mathcal{F}_T$ は同型
+$H^0(P_T) \to \mathcal{F}_T$ を誘導するからである
+（$h^*$ は右完全であり、$i > 0$ なら $H^i(P) = 0$ である）。
+したがって関手
+$$
+T \longmapsto \Hom_{D(\mathcal{O}_{X_T})}(P_T, \mathcal{G}_T).
+$$
+について結果を証明すれば十分である。Leray スペクトル系列
+（Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-before-Leray} を参照せよ）により
+$$
+\Hom_{D(\mathcal{O}_{X_T})}(P_T, \mathcal{G}_T) =
+H^0(X_T, R\SheafHom(P_T, \mathcal{G}_T)) =
+H^0(T, Rf_{T, *}R\SheafHom(P_T, \mathcal{G}_T))
+$$
+である。ここで $f_T : X_T \to T$ は $f$ の基底変換である。
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-base-change-RHom}
+により
+$$
+Rf_{T, *}R\SheafHom(P_T, \mathcal{G}_T) = Lg^*Rf_*R\SheafHom(P, \mathcal{G}).
+$$
+また Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-ext-perfect}
+により、$D(\mathcal{O}_B)$ の対象
+$K = Rf_*R\SheafHom(P, \mathcal{G})$ は完全である。
+したがって、上のようなすべての $g : T \to B$ と $i < 0$ に対し
+コホモロジー層 $H^i(Lg^*K)$ が $0$ であることを証明できれば、
+Lemma \ref{quot-lemma-cohomology-perfect-complex} を適用できる。
+最後の表示式からこれは明らかである。実際、
+$Rf_{T, *}R\SheafHom(P_T, \mathcal{G}_T)$
+のコホモロジー層は負の次数で零である。
+これは、$P_T$ が完全で正の次数のコホモロジー層が零なので、
+$R\SheafHom(P_T, \mathcal{G}_T)$ のコホモロジー層が
+負の次数で零となることによる。
+\end{proof}
+
+\noindent
+Lemma \ref{quot-lemma-noetherian-hom} の容易な帰結を述べる。
+
+\begin{proposition}
+\label{quot-proposition-hom}
+状況 \ref{quot-situation-hom} において、次を仮定する。
+\begin{enumerate}
+\item $f$ は有限表示である。
+\item $\mathcal{G}$ は有限表示 $\mathcal{O}_X$ 加群であり、
+$B$ 上平坦で、その台は $B$ 上固有である。
+\end{enumerate}
+このとき関手 $\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は、
+$B$ 上アフィンな代数空間である。$\mathcal{F}$ が有限表示ならば、
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は $B$ 上有限表示である。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{quot-lemma-hom-sheaf} により、関手
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ は fppf 被覆に関する
+層条件を満たす。したがって\footnote{参照した補題の集合論的条件
+（3）の確認は省略する。} Bootstrap, Lemma
+\ref{bootstrap-lemma-locally-algebraic-space} を適用し、
+表現可能性を $B$ 上 \'etale 局所的に確認できる。
+さらに、得られる空間がアフィンまたは有限表示かどうかも
+$B$ 上 \'etale 局所的に確認できる。Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-affine-local} および
+\ref{spaces-morphisms-lemma-finite-presentation-local} を参照せよ。
+したがって $B$ はアフィンスキームであると仮定してよい。
+
+\medskip\noindent
+$B$ をアフィンスキームとする。$f$ は有限表示なので、
+$X$ は準コンパクトかつ準分離的である。したがって
+有限表示 $\mathcal{O}_X$ 加群のフィルター付き余極限
+$\mathcal{F} = \colim \mathcal{F}_i$ と書ける
+（Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-colimit-finitely-presented}）。明らかに
+$$
+\mathit{Hom}(\mathcal{F}, \mathcal{G}) =
+\lim \mathit{Hom}(\mathcal{F}_i, \mathcal{G})
+$$
+である。したがって、各
+$\mathit{Hom}(\mathcal{F}_i, \mathcal{G})$ がアフィンスキームで
+表現されることを示せば、
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ についても同じことが従う。
+Limits, Section \ref{limits-section-limits} および
+Limits of Spaces, Section \ref{spaces-limits-section-limits} の内容を
+用いよ。ゆえに $\mathcal{F}$ は有限表示であると仮定してよい。
+
+\medskip\noindent
+$B = \Spec(R)$ とする。各 $R_i$ が有限型 $\mathbf{Z}$ 代数となるように
+$R = \colim R_i$ と書き、$B_i = \Spec(R_i)$ とおく。
+Limits of Spaces, Lemmas
+\ref{spaces-limits-lemma-descend-finite-presentation} および
+\ref{spaces-limits-lemma-descend-modules-finite-presentation}
+の結果により、ある $i$、代数空間の射 $X_i \to B_i$、
+および有限表示 $\mathcal{O}_{X_i}$ 加群
+$\mathcal{F}_i$、$\mathcal{G}_i$ を、三つ組
+$(X_i, \mathcal{F}_i, \mathcal{G}_i)$ の $B$ への基底変換が
+$(X, \mathcal{F}, \mathcal{G})$ を復元するように選べる。
+Limits of Spaces, Lemma \ref{spaces-limits-lemma-descend-flat} により、
+$i$ を増大させた後、$\mathcal{G}_i$ が $B_i$ 上平坦であると
+仮定してよい。同様に Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-eventually-proper-support} により、
+$\mathcal{G}_i$ のスキーム論的台が $B_i$ 上固有であると仮定してよい。
+ここで Lemma \ref{quot-lemma-noetherian-hom} を適用すると、
+$H_i = \mathit{Hom}(\mathcal{F}_i, \mathcal{G}_i)$ は
+$B_i$ 上アフィンかつ有限表示な代数空間である。
+$B$ へ引き戻すと（Remark \ref{quot-remark-hom-base-change} を用いる）、
+$H_i \times_{B_i} B = \mathit{Hom}(\mathcal{F}, \mathcal{G})$ となり、
+証明が完了する。
+\end{proof}
+
+
+
+
+
+
+\section{Isom 関手}
+\label{quot-section-isom}
+
+\noindent
+状況 \ref{quot-situation-hom} では、部分関手
+$$
+\mathit{Isom}(\mathcal{F}, \mathcal{G}) \subset
+\mathit{Hom}(\mathcal{F}, \mathcal{G})
+$$
+を考えられる。その $B$ 上のスキーム $T$ における値は、
+{\it 可逆な} $\mathcal{O}_{X_T}$ 準同型
+$u : \mathcal{F}_T \to \mathcal{G}_T$ の集合である。
+
+\medskip\noindent
+しばしば $\mathit{Isom}(\mathcal{F}, \mathcal{G})$ を、射
+$\mathit{Isom}(\mathcal{F}, \mathcal{G}) \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなす。
+実際、$T$ が $S$ 上のスキームなら、
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})(T)$ の元は対 $(h, u)$ からなる。
+ここで $h$ は射 $h : T \to B$ であり、
+$u : \mathcal{F}_T \to \mathcal{G}_T$ は
+$\mathcal{O}_{X_T}$ 加群の同型である。ただし
+$X_T = T \times_{h, B} X$ であり、$\mathcal{F}_T$ と
+$\mathcal{G}_T$ は $X_T$ への引き戻しである。
+したがって、$\mathit{Isom}(\mathcal{F}, \mathcal{G})$ が
+代数空間であると言うとき、それは対応する関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ が代数空間であることを意味する。
+
+\begin{lemma}
+\label{quot-lemma-isom-sheaf}
+状況 \ref{quot-situation-hom} において、関手
+$\mathit{Isom}(\mathcal{F}, \mathcal{G})$ 
+は fpqc 位相に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$\mathit{Hom}(\mathcal{F}, \mathcal{G})$ が層条件を満たすことは
+すでに見た。したがって、次を示せばよい。
+$B$ 上のスキームの fpqc 被覆 $\{T_i \to T\}_{i \in I}$ と
+$\mathcal{O}_{X_T}$ 線形写像
+$u : \mathcal{F}_T \to \mathcal{G}_T$ が与えられ、
+すべての $i$ に対して $u_{T_i}$ が同型なら、$u$ も同型である。
+$\{X_i \to X_T\}_{i \in I}$ は $X_T$ の fpqc 被覆なので
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc} を参照せよ）、これは
+Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent} から従う。
+\end{proof}
+
+\noindent
+整合性の確認：$\mathit{Isom}$ 層は、$S$ 上の代数空間の間でも
+同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-isom-to-spaces}
+状況 \ref{quot-situation-hom} において、$T$ を $S$ 上の代数空間とする。
+このとき
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \mathit{Isom}(\mathcal{F}, \mathcal{G})) =
+\left\{(h, u) \mathrel{\Big|}
+\substack{h : T \to B,\\
+u : \mathcal{F}_T \to \mathcal{G}_T\text{ isomorphism}}\right\}
+$$
+が成り立つ。ここで $\mathcal{F}_T, \mathcal{G}_T$ は、
+$\mathcal{F}$ と $\mathcal{G}$ の代数空間
+$X \times_{B, h} T$ への引き戻しを表す。
+\end{lemma}
+
+\begin{proof}
+等式の左辺と右辺は、それぞれ Lemma
+\ref{quot-lemma-extend-hom-to-spaces} の等式の左辺と右辺の部分集合である。
+同補題の証明で与えた同一視のもとで、これらの部分集合が
+対応することの確認は省略する。
+\end{proof}
+
+\begin{proposition}
+\label{quot-proposition-isom}
+状況 \ref{quot-situation-hom} において、次を仮定する。
+\begin{enumerate}
+\item $f$ は有限表示である。
+\item $\mathcal{F}$ と $\mathcal{G}$ は有限表示
+$\mathcal{O}_X$ 加群であり、$B$ 上平坦で、その台は $B$ 上固有である。
+\end{enumerate}
+このとき関手 $\mathit{Isom}(\mathcal{F}, \mathcal{G})$ は、
+$B$ 上アフィンかつ有限表示な代数空間である。
+\end{proposition}
+
+\begin{proof}
+次の略記を用いる。
+$H = \mathit{Hom}(\mathcal{F}, \mathcal{G})$,
+$I = \mathit{Hom}(\mathcal{F}, \mathcal{F})$,
+$H' = \mathit{Hom}(\mathcal{G}, \mathcal{F})$、および
+$I' = \mathit{Hom}(\mathcal{G}, \mathcal{G})$ と置く。
+Proposition \ref{quot-proposition-hom} により、関手
+$H$、$I$、$H'$、$I'$ は代数空間であり、射
+$H \to B$、$I \to B$、$H' \to B$、$I' \to B$ は
+アフィンかつ有限表示である。写像の合成により、
+$B$ 上の代数空間の射
+$$
+c : H' \times_B H \longrightarrow I \times_B I',\quad
+(u', u) \longmapsto (u \circ u', u' \circ u)
+$$
+を得る。$I \times_B I' \to B$ は分離的なので、
+$(\text{id}_\mathcal{F}, \text{id}_\mathcal{G})$ に対応する切断
+$\sigma : B \to I \times_B I'$ は閉埋め込みである
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-section-immersion}）。
+さらに $\sigma$ は有限表示である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-permanence}）。したがって
+$$
+\mathit{Isom}(\mathcal{F}, \mathcal{G}) =
+(H' \times_B H) \times_{c, I \times_B I', \sigma} B
+$$
+も $B$ 上アフィンかつ有限表示な代数空間である。
+いくつかの詳細は省略する。
+\end{proof}
+
+
+
+
+
+
+\section{連接層のスタック}
+\label{quot-section-stack-coherent-sheaves}
+
+\noindent
+本節では、適切な仮定のもとで $X/B$ 上の連接層のスタックが
+代数的であることを証明する。これは、基礎上の Artin スタック上の
+連接層のスタックを扱う \cite[Theorem 2.1.1]{lieblich_remarks} の
+特別な場合である。
+
+\begin{situation}
+\label{quot-situation-coherent}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は有限表示であると仮定する。
+$\Cohstack_{X/B}$ を、次の条件を満たす三つ組
+$(T, g, \mathcal{F})$ を対象とする圏とする。
+\begin{enumerate}
+\item $T$ は $S$ 上のスキームである。
+\item $g : T \to B$ は $S$ 上の射であり、
+$X_T = T \times_{g, B} X$
+とおく。
+\item $\mathcal{F}$ は有限表示な準連接 $\mathcal{O}_{X_T}$ 加群であり、
+$T$ 上平坦で、その台は $T$ 上固有である。
+\end{enumerate}
+射 $(T, g, \mathcal{F}) \to (T', g', \mathcal{F}')$ は、
+次を満たす対 $(h, \varphi)$ によって与えられる。
+\begin{enumerate}
+\item $h : T \to T'$ は $B$ 上のスキームの射である
+（すなわち $g' \circ h = g$）。
+\item $\varphi : (h')^*\mathcal{F}' \to \mathcal{F}$ は
+$\mathcal{O}_{X_T}$ 加群の同型である。ここで
+$h' : X_T \to X_{T'}$ は $h$ の基底変換である。
+\end{enumerate}
+\end{situation}
+
+\noindent
+このように $\Cohstack_{X/B}$ は圏であり、規則
+$$
+p : \Cohstack_{X/B} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(T, g, \mathcal{F}) \longmapsto T
+$$
+は関手である。$S$ 上のスキーム $T$ に対し、$T$ 上の
+$p$ のファイバー圏を $\Cohstack_{X/B, T}$ と表す。
+これらのファイバー圏は亜群である。
+
+\begin{lemma}
+\label{quot-lemma-coherent-fibred-in-groupoids}
+状況 \ref{quot-situation-coherent} において、関手
+$p : \Cohstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+は亜群でファイバー化されている。
+\end{lemma}
+
+\begin{proof}
+$p$ が亜群でファイバー化されていることを、Categories, Definition
+\ref{categories-definition-fibred-groupoids} の条件（1）と（2）を
+確認して示す。$\Cohstack_{X/B}$ の対象
+$(T', g', \mathcal{F}')$ と、$S$ 上のスキームの射
+$h : T \to T'$ が与えられたとする。$g = h \circ g'$ および
+$\mathcal{F} = (h')^*\mathcal{F}'$ とおける。ここで
+$h' : X_T \to X_{T'}$ は $h$ の基底変換である。
+このとき $h$ 上にある $\Cohstack_{X/B}$ の射
+$(T, g, \mathcal{F}) \to (T', g', \mathcal{F}')$ が
+得られることは明らかである。これで（1）が示された。
+（2）のために、射
+$$
+(h_1, \varphi_1) : (T_1, g_1, \mathcal{F}_1) \to (T, g, \mathcal{F})
+\quad\text{and}\quad
+(h_2, \varphi_2) : (T_2, g_2, \mathcal{F}_2) \to (T, g, \mathcal{F})
+$$
+が $\Cohstack_{X/B}$ の射として与えられ、さらに
+$h_2 \circ h = h_1$ を満たす射 $h : T_1 \to T_2$ が
+与えられているとする。このとき $\varphi$ を合成
+$$
+(h')^*\mathcal{F}_2
+\xrightarrow{(h')^*\varphi_2^{-1}}
+(h')^*(h_2)^*\mathcal{F} = (h_1)^*\mathcal{F}
+\xrightarrow{\varphi_1}
+\mathcal{F}_1
+$$
+とすれば、射
+$(h, \varphi) : (T_1, g_1, \mathcal{F}_1) \to (T_2, g_2, \mathcal{F}_2)$
+を得る。これは条件（2）が成り立つことを示している。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-diagonal}
+状況 \ref{quot-situation-coherent} において、
+$\mathcal{X} = \Cohstack_{X/B}$ とおく。このとき
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$ は
+代数空間で表現可能である。
+\end{lemma}
+
+\begin{proof}
+スキーム $T$ 上の $\mathcal{X}$ の二つの対象
+$x = (T, g, \mathcal{F})$ と $y = (T, h, \mathcal{G})$ を考える。
+$\mathit{Isom}_\mathcal{X}(x, y)$ が $T$ 上の代数空間であることを
+示さなければならない。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。
+$a : T' \to T$ に対し、制限 $x|_{T'}$ と $y|_{T'}$ が
+ファイバー圏 $\mathcal{X}_{T'}$ で同型なら、
+$g \circ a = h \circ a$ である。したがって前層の変換
+$$
+\mathit{Isom}_\mathcal{X}(x, y) \longrightarrow \text{Equalizer}(g, h)
+$$
+が存在する。$B$ の対角射は（スキームで）表現可能なので、
+この等化子はスキームである。したがって $T$ をこの等化子で、
+層 $\mathcal{F}$ と $\mathcal{G}$ をそれぞれの引き戻しで
+置き換えてよい。ゆえに $g = h$ と仮定できる。この場合
+$\mathit{Isom}_\mathcal{X}(x, y) = \mathit{Isom}(\mathcal{F}, \mathcal{G})$
+であり、結果は Proposition \ref{quot-proposition-isom} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-stack}
+状況 \ref{quot-situation-coherent} において、関手
+$p : \Cohstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+は亜群のスタックである。
+\end{lemma}
+
+\begin{proof}
+$\Cohstack_{X/B}$ が亜群のスタックであることを証明するには、
+前層 $\mathit{Isom}$ が層であり、降下データが有効であることを
+示さなければならない。$\mathit{Isom}$ に関する主張は Lemma
+\ref{quot-lemma-coherent-diagonal} から従う。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。
+降下データに関する主張を証明しよう。
+$\{a_i : T_i \to T\}$ を $S$ 上のスキームの fppf 被覆とする。
+$(\xi_i, \varphi_{ij})$ を、$\Cohstack_{X/B}$ に値をもつ
+$\{T_i \to T\}$ に関する降下データとする。
+各 $i$ に対して $\xi_i = (T_i, g_i, \mathcal{F}_i)$ と書ける。
+射影を $\text{pr}_0 : T_i \times_T T_j \to T_i$ および
+$\text{pr}_1 : T_i \times_T T_j \to T_j$ と表す。
+条件 $\xi_i|_{T_i \times_T T_j} = \xi_j|_{T_i \times_T T_j}$ から、
+特に $g_i \circ \text{pr}_0 = g_j \circ \text{pr}_1$ が従う。
+したがって $g_i = g \circ a_i$ を満たす一意な射
+$g : T \to B$ が存在する。Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms} を参照せよ。
+$X_T = T \times_{g, B} X$ と表し、
+$X_i = X_{T_i} = T_i \times_{g_i, B} X = T_i \times_{a_i, T} X_T$
+とおく。また
+$$
+X_{ij} = X_{T_i} \times_{X_T} X_{T_j} = X_i \times_{X_T} X_j
+$$
+とおき、$X_i$ と $X_j$ への射影を
+$\text{pr}_i$ と $\text{pr}_j$ で表す。
+$(T_i, g_i, \mathcal{F}_i)$ の
+$\text{pr}_0 : T_i \times_T T_j \to T_i$ による引き戻しは
+$(T_i \times_T T_j, g_i \circ \text{pr}_0, \text{pr}_i^*\mathcal{F}_i)$.
+で与えられる。したがって、$\Cohstack_{X/B}$ における
+$\{T_i \to T\}$ に関する降下データは、対象
+$(T_i, g \circ a_i, \mathcal{F}_i)$ と、各対 $i, j$ に対する
+$\mathcal{O}_{X_{ij}}$ 加群の同型
+$$
+\varphi_{ij} :
+\text{pr}_i^*\mathcal{F}_i \longrightarrow \text{pr}_j^*\mathcal{F}_j
+$$
+によって与えられる。この同型は、$T_i \times_T T_j \times_T T_k$
+（への $X$ の引き戻し）上でコサイクル条件を満たす。
+ここで $\{X_i \to X_T\}$ が fppf 被覆であることを用いれば、
+$(\mathcal{F}_i, \varphi_{ij})$ をこの被覆に関する降下データと
+みなせる。Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+により、この降下データは有効であり、$X_i$ 上で
+$\mathcal{F}_i$ に制限される $X_T$ 上の準連接層
+$\mathcal{F}$ を得る。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence} により、
+$\mathcal{F}$ は $T$ 上平坦である。また Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-finite-presentation-descends}
+により、$\mathcal{F}$ は $\mathcal{O}_{X_T}$ 加群として
+有限表示である。最後に、$\mathcal{F}_i$ のスキーム論的台が
+$T_i$ 上固有であると仮定したので、Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-proper} により、
+$\mathcal{F}$ のスキーム論的台は $T$ 上固有である
+（スキーム論的台をとる操作は平坦な基底変換と可換である。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-pullback-support} を参照せよ）。
+このようにして、$T$ 上の望む対象が得られる。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-coherent-base-change}
+状況 \ref{quot-situation-coherent} において、規則
+$(T, g, \mathcal{F}) \mapsto (T, g)$ は $1$-射
+$$
+\Cohstack_{X/B} \longrightarrow \mathcal{S}_B
+$$
+を亜群のスタックの間に定める
+（Lemma \ref{quot-lemma-coherent-stack}、Algebraic Stacks, Section
+\ref{algebraic-section-split}、Examples of Stacks, Section
+\ref{examples-stacks-section-stack-associated-to-sheaf} を参照せよ）。
+$B' \to B$ を $S$ 上の代数空間の射とし、
+$\mathcal{S}_{B'} \to \mathcal{S}_B$ を、集合でファイバー化された
+スタックの対応する $1$-射とする。$X' = X \times_B B'$ とおく。
+基底変換 $f' : X' \to B'$ に付随する亜群のスタック
+$\Cohstack_{X'/B'} \to (\Sch/S)_{fppf}$ を得る。この状況で図式
+$$
+\vcenter{
+\xymatrix{
+\Cohstack_{X'/B'} \ar[r] \ar[d] & \Cohstack_{X/B} \ar[d] \\
+\mathcal{S}_{B'} \ar[r] & \mathcal{S}_B
+}
+}
+\quad
+\begin{matrix}
+\text{または} \\
+\text{別の} \\
+\text{記法では}
+\end{matrix}
+\quad
+\vcenter{
+\xymatrix{
+\Cohstack_{X'/B'} \ar[r] \ar[d] & \Cohstack_{X/B} \ar[d] \\
+\Sch/B' \ar[r] & \Sch/B
+}
+}
+$$
+は $2$-ファイバー積図式である。この自明な注意は、
+基礎代数空間を変更するときに役立つことがある。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-coherent-limits}
+状況 \ref{quot-situation-coherent} において、$B \to S$ は
+局所有限表示であると仮定する。このとき
+$p : \Cohstack_{X/B} \to (\Sch/S)_{fppf}$ は極限を保存する
+（Artin's Axioms, Definition
+\ref{artin-definition-limit-preserving}）。
+\end{lemma}
+
+\begin{proof}
+$S$-射 $T \to B$ を対象とする離散圏を $B(T)$ と書く。
+$T = \lim T_i$ を $S$ 上のアフィンスキームのフィルター付き極限とする。
+$\Cohstack_{X/B, T}$ の対象 $(T, h, \mathcal{F})$ に
+$B(T)$ の対象 $h$ を対応させると、ファイバー圏の可換図式
+$$
+\xymatrix{
+\colim \Cohstack_{X/B, T_i} \ar[r] \ar[d] &
+\Cohstack_{X/B, T} \ar[d] \\
+\colim B(T_i) \ar[r] & B(T)
+}
+$$
+を得る。上の水平矢印が同値であることを示す必要がある。
+$B$ は $S$ 上局所有限表示であると仮定したので、
+Limits of Spaces, Remark
+\ref{spaces-limits-remark-limit-preserving} により、
+下の水平矢印は同値である。したがって、$T = \lim T_i$ は
+$B$ 上のアフィンスキームのフィルター付き極限であると仮定してよい。
+対応する射を $g_i : T_i \to B$ および $g : T \to B$ と表す。
+$X_i = T_i \times_{g_i, B} X$、
+$X_T = T \times_{g, B} X$ とおく。
+$X_T = \colim X_i$ であり、代数空間 $X_i$ と $X_T$ は
+準分離的かつ準コンパクトであることに注意する
+（それぞれアフィン $T_i$ と $T$ 上有限表示だからである）。
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-modules-finite-presentation}
+により
+$$
+\colim \textit{FP}(X_i) = \textit{FP}(X_T).
+$$
+である。ここで $\textit{FP}(W)$ は有限表示
+$\mathcal{O}_W$ 加群の圏の略記である。Limits of Spaces, Lemmas
+\ref{spaces-limits-lemma-descend-flat} および
+\ref{spaces-limits-lemma-eventually-proper-support}
+の結果から、$\textit{FP}(X_i)$ と $\textit{FP}(X_T)$ を、
+それぞれ $T_i$ と $T$ 上平坦で、スキーム論的台が
+それぞれ $T_i$ と $T$ 上固有な対象からなる充満部分圏で
+置き換えても、同じことが成り立つ。これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-RS-star}
+状況 \ref{quot-situation-coherent} において、
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & Z' \ar[d] \\
+Y \ar[r] & Y'
+}
+$$
+を $S$ 上のスキームの圏における押し出しとする。ここで
+$Z \to Z'$ は肥厚であり、$Z \to Y$ はアフィンである。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を参照せよ。
+このときファイバー圏の間の関手
+$$
+\Cohstack_{X/B, Y'}
+\longrightarrow
+\Cohstack_{X/B, Y} \times_{\Cohstack_{X/B, Z}} \Cohstack_{X/B, Z'}
+$$
+は同値である。
+\end{lemma}
+
+\begin{proof}
+対応する写像
+$$
+B(Y') \longrightarrow B(Y) \times_{B(Z)} B(Z')
+$$
+は全単射である。Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-pushout-along-thickening-schemes} を参照せよ。
+したがって可換図式
+$$
+\xymatrix{
+\Cohstack_{X/B, Y'} \ar[r] \ar[d] &
+\Cohstack_{X/B, Y} \times_{\Cohstack_{X/B, Z}} \Cohstack_{X/B, Z'}
+\ar[d] \\
+B(Y') \ar[r] & B(Y) \times_{B(Z)} B(Z')
+}
+$$
+を用いると、$Y'$ は $B'$ 上のスキームであると仮定してよい。
+Remark \ref{quot-remark-coherent-base-change} により、$B$ を $Y'$ で、
+$X$ を $X \times_B Y'$ で置き換えてよい。
+したがって $B = Y'$ と仮定できる。この場合、主張は
+Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-space-over-pushout-flat-modules} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-over-first-order-thickening}
+次の図式を
+$$
+\xymatrix{
+X \ar[d] \ar[r]_i & X' \ar[d] \\
+T \ar[r] & T'
+}
+$$
+を代数空間の Cartesian 図式とし、$T \to T'$ は一次肥厚であるとする。
+$\mathcal{F}'$ を $T'$ 上平坦な $\mathcal{O}_{X'}$ 加群とし、
+$\mathcal{F} = i^*\mathcal{F}'$ とおく。次は同値である。
+\begin{enumerate}
+\item $\mathcal{F}'$ は有限表示な準連接 $\mathcal{O}_{X'}$ 加群である。
+\item $\mathcal{F}'$ は有限表示 $\mathcal{O}_{X'}$ 加群である。
+\item $\mathcal{F}$ は有限表示な準連接 $\mathcal{O}_X$ 加群である。
+\item $\mathcal{F}$ は有限表示 $\mathcal{O}_X$ 加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+有限表示加群は準連接であることを思い出せば、
+（1）と（2）、および（3）と（4）の同値性が従う。
+（2）と（4）の同値性は Deformation Theory, Lemma
+\ref{defos-lemma-deform-fp-module-ringed-topoi} の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-tangent-space}
+状況 \ref{quot-situation-coherent} において、$S$ は局所 Noether
+スキームであり、$B \to S$ は局所有限表示であると仮定する。
+$k$ を $S$ 上有限型な体とし、
+$x_0 = (\Spec(k), g_0, \mathcal{G}_0)$
+を $k$ 上の $\mathcal{X} = \Cohstack_{X/B}$ の対象とする。このとき空間
+$T\mathcal{F}_{\mathcal{X}, k, x_0}$ および
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0})$
+（Artin's Axioms, Section \ref{artin-section-tangent-spaces}）は
+有限次元である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{quot-lemma-coherent-RS-star} により、亜群のスタック
+$\mathcal{X}$ は Artin's Axioms, Section
+\ref{artin-section-inf} で定義された性質（RS*）を満たす。
+特に $\mathcal{X}$ は（RS）を満たす。
+したがって、付随するすべての前変形圏は変形圏であり
+（Artin's Axioms, Lemma
+\ref{artin-lemma-deformation-category}）、主張には意味がある。
+
+\medskip\noindent
+この段落では、$B = \Spec(k)$ の場合に帰着できることを示す。
+$X_0 = \Spec(k) \times_{g_0, B} X$ とおき、
+$\mathcal{X}_0 = \Cohstack_{X_0/k}$ と表す。
+Remark \ref{quot-remark-coherent-base-change} で、
+$(\Sch/S)_{fppf}$ 上の亜群でファイバー化された圏として、
+$\mathcal{X}_0$ は $\mathcal{X}$ と $\Spec(k)$ の
+$B$ 上の $2$-ファイバー積であることを見た。
+したがって Artin's Axioms, Lemma
+\ref{artin-lemma-fibre-product-tangent-spaces} により、
+$B$、$\Spec(k)$、$\mathcal{X}_0$ の接空間と無限小自己同型空間が
+有限次元であることの証明に帰着する。
+$B$ と $\Spec(k)$ の接空間は Artin's Axioms, Lemma
+\ref{artin-lemma-finite-dimension} により有限次元であり、
+もちろんこれらの $\text{Inf}$ は零である。
+ゆえに $\mathcal{X}_0$ を扱えば十分である。
+
+\medskip\noindent
+$k[\epsilon]$ を $k$ 上の双対数とする。
+$\Spec(k[\epsilon]) \to B$ を、$g_0 : \Spec(k) \to B$ と、
+包含 $k \to k[\epsilon]$ から得られる射
+$\Spec(k[\epsilon]) \to \Spec(k)$ との合成とする。
+$X_0 = \Spec(k) \times_B X$ および
+$X_\epsilon = \Spec(k[\epsilon]) \times_B X$ とおく。
+$X_\epsilon$ は $X_0$ の一次肥厚であり、一次肥厚
+$\Spec(k) \to \Spec(k[\epsilon])$ 上平坦であることに注意する。
+定義を展開し、Lemma
+\ref{quot-lemma-coherent-over-first-order-thickening} を用いると、
+$T\mathcal{F}_{\mathcal{X}_0, k, x_0}$ は $\mathcal{G}_0$ の
+$X_\epsilon$ 上の平坦加群への持ち上げの集合であることがわかる。
+Deformation Theory, Lemma
+\ref{defos-lemma-flat-ringed-topoi} により
+$$
+T\mathcal{F}_{\mathcal{X}_0, k, x_0} =
+\Ext^1_{\mathcal{O}_{X_0}}(\mathcal{G}_0, \mathcal{G}_0)
+$$
+である。ここでは $k[\epsilon]$ 加群の同一視
+$\epsilon k[\epsilon] \cong k$ を用いた。
+Deformation Theory, Lemma
+\ref{defos-lemma-flat-ringed-topoi} をもう一度用いると
+$$
+\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0}) =
+\Ext^0_{\mathcal{O}_{X_0}}(\mathcal{G}_0, \mathcal{G}_0)
+$$
+$\mathcal{G}_0$ の台は $\Spec(k)$ 上固有なので、
+これらの空間は $k$ 上有限次元である。実際、$X_0$ は
+$\Spec(k)$ 上有限表示なので Noether である。
+$\mathcal{G}_0$ は有限表示だから、連接
+$\mathcal{O}_{X_0}$ 加群である。したがって
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-ext-finite} を適用して、
+望む有限性を得る。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-existence}
+状況 \ref{quot-situation-coherent} において、$S$ は局所 Noether
+スキームであり、$f : X \to B$ は分離的であると仮定する。
+$\mathcal{X} = \Cohstack_{X/B}$ とおく。このとき
+Artin's Axioms, Equation
+（\ref{artin-equation-approximation}）の関手は同値である。
+\end{lemma}
+
+\begin{proof}
+$A$ を $S$ 代数であって、極大イデアル $\mathfrak m$ をもつ
+完備局所 Noether 環とし、その剰余体 $k$ は $S$ 上有限型であるとする。
+$A$ 上の対象の圏が、$A$ 上の形式対象の圏と同値であることを
+示さなければならない。Artin's Axioms, Lemma
+\ref{artin-lemma-effective} により、これは $B$ に付随する
+集合でファイバー化された圏 $\mathcal{S}_B$ について成り立つ。
+したがって、与えられた射 $\Spec(A) \to B$ 上にある対象について
+証明すれば十分である。
+
+\medskip\noindent
+$X_A = \Spec(A) \times_B X$、
+$X_n = \Spec(A/\mathfrak m^n) \times_B X$ とおく。
+Grothendieck の存在定理
+（More on Morphisms of Spaces, Theorem
+\ref{spaces-more-morphisms-theorem-grothendieck-existence}）により、
+$X_A$ 上で台が $\Spec(A)$ 上固有な連接加群 $\mathcal{F}$ の圏は、
+$X_n$ 上で台が $\Spec(A/\mathfrak m^n)$ 上固有な連接加群
+$\mathcal{F}_n$ の系 $(\mathcal{F}_n)$ の圏と同値である。
+この同値は $\mathcal{F}$ を系
+$(\mathcal{F} \otimes_A A/\mathfrak m^n)$ に送る。
+More on Morphisms of Spaces, Remark
+\ref{spaces-more-morphisms-remark-reformulate-existence-theorem} の
+議論を参照せよ。補題の証明を終えるには、
+$\mathcal{F}$ が $A$ 上平坦であることと、すべての
+$\mathcal{F} \otimes_A A/\mathfrak m^n$ が
+$A/\mathfrak m^n$ 上平坦であることが同値であると示せばよい。
+これは More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-flatness-over-Noetherian-ring} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-coherent-defo-thy}
+状況 \ref{quot-situation-coherent} において、$S$ は局所 Noether
+スキームであり、$S = B$ かつ $f : X \to B$ は平坦であると仮定する。
+$\mathcal{X} = \Cohstack_{X/B}$ とおく。このとき
+$\mathcal{X}$ に対して versal 性の開性が成り立つ
+（Artin's Axioms, Definition
+\ref{artin-definition-openness-versality} を参照せよ）。
+\end{lemma}
+
+\begin{proof}[第一の証明]
+この証明は Artin's Axioms, Lemma
+\ref{artin-lemma-dual-openness} の判定条件に基づく。
+$U \to S$ を有限型なスキームの射とし、$x$ を $U$ 上の
+$\mathcal{X}$ の対象、$u_0 \in U$ を、$x$ が $u_0$ で
+versal となる有限型点とする。$U$ を縮小した後、
+$u_0$ は閉点であると仮定してよい
+（Morphisms, Lemma \ref{morphisms-lemma-point-finite-type}）。
+また $U = \Spec(A)$ であり、$U \to S$ の像は $S$ の
+アフィン開集合 $\Spec(\Lambda)$ に含まれると仮定できる。
+与えられた対象 $x$ に対応する、$A$ 上平坦な
+$X_A = \Spec(A) \times_S X$ 上の連接加群を $\mathcal{F}$ とする。
+
+\medskip\noindent
+Deformation Theory, Lemma
+\ref{defos-lemma-flat-ringed-topoi} により、関手の同型
+$$
+T_x(M) = \Ext^1_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)
+$$
+をもつ。また、核 $I$ が平方零である任意の全射
+$A' \to A$ を $\Lambda$ 代数の全射とすると、障害類
+$$
+\xi_{A'} \in \Ext^2_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A I)
+$$
+をもつ。ここでは、上のような任意の $A' \to A$ に対し、
+基底変換 $X_{A'} = \Spec(A') \times_B X$ が $A'$ 上平坦であることを
+用いている。さらに Deformation Theory, Lemma
+\ref{defos-lemma-functorial-ringed-topoi} により、
+障害類の構成は（$A$ を固定したとき）全射 $A' \to A$ に関して
+関手的である。Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-compute-ext}
+を Ext 群
+$\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+の計算に、$m = 2$ として $i \leq m$ に対して適用する。
+完全対象 $K \in D(A)$ と関手的同型
+$$
+H^i(K \otimes_A^\mathbf{L} M)
+\longrightarrow
+\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)
+$$
+を得る。これは $i \leq m$ に対して境界写像と可換である。
+この対象 $K$ と上の表示された同一視により、Artin's Axioms,
+Situation \ref{artin-situation-dual} のデータが得られる。
+最後に、Artin's Axioms, Lemma
+\ref{artin-lemma-dual-obstruction} の条件（iv）は
+Deformation Theory, Lemma
+\ref{defos-lemma-verify-iv-ringed-topoi} により成り立つ。
+したがって Artin's Axioms, Lemma
+\ref{artin-lemma-dual-openness} は実際に適用でき、補題が証明された。
+\end{proof}
+
+\begin{proof}[第二の証明]
+この証明は Artin's Axioms, Lemma
+\ref{artin-lemma-get-openness-obstruction-theory} に基づく。
+同補題の条件（1）、（2）、（3）は、それぞれ Lemmas
+\ref{quot-lemma-coherent-diagonal}、
+\ref{quot-lemma-coherent-RS-star}、
+\ref{quot-lemma-coherent-limits} に対応する。
+
+\medskip\noindent
+変形理論の章で障害理論を構成した。すなわち、$S$ 代数 $A$ と、
+$X_A$ 上の $\mathcal{F}$ によって与えられる
+$\Spec(A)$ 上の $\Cohstack_{X/B}$ の対象 $x$ に対し、
+$\mathcal{O}_x(M) = \Ext^2_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+とおく。また、$A' \to A$ が核 $I$ をもつ全射ならば、
+障害元として
+$$
+o_x(A') = o(\mathcal{F}, \mathcal{F} \otimes_A I, 1) \in
+\mathcal{O}_x(I) = \Ext^2_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A I)
+$$
+をとる。これは Deformation Theory, Lemma
+\ref{defos-lemma-flat-ringed-topoi} の元である。
+Artin's Axioms, Definition
+\ref{artin-definition-obstruction-theory} で定義された障害理論の
+すべての性質は、定義の条件（ii）で述べられる障害類の関手性を除き、
+この補題から従う。しかし Artin's Axioms, Lemma
+\ref{artin-lemma-get-openness-obstruction-theory} の仮定（4）の
+脚注にあるように、固定した $A$ に対する障害類の関手性を
+確認すれば十分である。これは Deformation Theory, Lemma
+\ref{defos-lemma-functorial-ringed-topoi} から従う。
+Deformation Theory, Lemma
+\ref{defos-lemma-flat-ringed-topoi} からさらに
+$T_x(M) = \Ext^1_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+が任意の $A$ 加群 $M$ に対して成り立つ。
+
+\medskip\noindent
+証明を終えるには、
+$T_x(\prod M_n) = \prod T_x(M_n)$ かつ
+$\mathcal{O}_x(\prod M_n) = \prod \mathcal{O}_x(M)$
+を示せば十分である。Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-compute-ext}
+を Ext 群
+$\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)$
+の計算に、$m = 2$ として $i \leq m$ に対して適用する。
+完全対象 $K \in D(A)$ と関手的同型
+$$
+H^i(K \otimes_A^\mathbf{L} M)
+\longrightarrow
+\Ext^i_{X_A}(\mathcal{F}, \mathcal{F} \otimes_A M)
+$$
+を $i = 1, 2$ に対して得る。直接的な議論により、
+$$
+H^i(K \otimes_A^\mathbf{L} \prod M_n) =
+\prod H^i(K \otimes_A^\mathbf{L} M_n)
+$$
+が、$K$ が $D(A)$ の擬連接対象であるとき常に成り立つ。
+実際、この性質は（すべての $i$ に対して）擬連接複体を特徴付ける。
+More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherent-tensor} を参照せよ。
+\end{proof}
+
+\begin{theorem}[連接層のスタックの代数性：平坦な場合]
+\label{quot-theorem-coherent-algebraic}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は有限表示、分離的、かつ平坦であると仮定する\footnote{この仮定は
+必要ではない。第 \ref{quot-section-not-flat} 節を参照せよ。}。
+このとき $\Cohstack_{X/B}$ は $S$ 上の代数スタックである。
+\end{theorem}
+
+\begin{proof}
+$\mathcal{X} = \Cohstack_{X/B}$ とおく。$\mathcal{X}$ は
+$(\Sch/S)_{fppf}$ 上の亜群のスタックであり、その対角射は
+代数空間で表現可能であることを見た
+（Lemmas \ref{quot-lemma-coherent-stack} および
+\ref{quot-lemma-coherent-diagonal}）。したがって、スキーム $W$ と
+全射かつ滑らかな射 $W \to \mathcal{X}$ を見つければ十分である。
+
+\medskip\noindent
+$B'$ をスキームとし、$B' \to B$ を全射 \'etale 射とする。
+$X' = B' \times_B X$ とおき、射影を $f' : X' \to B'$ と表す。
+このとき $\mathcal{X}' = \Cohstack_{X'/B'}$ は、
+$B$ に付随する集合でファイバー化された圏上での、
+$\mathcal{X}$ と $B'$ に付随する集合でファイバー化された圏との
+$2$-ファイバー積に等しい
+（Remark \ref{quot-remark-coherent-base-change}）。
+Algebraic Stacks, Section
+\ref{algebraic-section-representable-properties} の内容により、
+射 $\mathcal{X}' \to \mathcal{X}$ は全射かつ \'etale である。
+したがって $\mathcal{X}'$ について結果を証明すれば十分である。
+言い換えれば、$B$ はスキームであると仮定してよい。
+
+\medskip\noindent
+$B$ をスキームとする。この場合 $S$ を $B$ で置き換えてよい。
+Algebraic Stacks, Section
+\ref{algebraic-section-change-base-scheme} を参照せよ。
+したがって $S = B$ と仮定してよい。
+
+\medskip\noindent
+$S = B$ と仮定する。アフィン開被覆 $S = \bigcup U_i$ を選ぶ。
+$\mathcal{X}$ の $(\Sch/U_i)_{fppf}$ への制限を
+$\mathcal{X}_i$ と表す。$U_i$ 上のスキーム $W_i$ と
+全射滑らかな射 $W_i \to \mathcal{X}_i$ を見つけられれば、
+$W = \coprod W_i$ とおくことにより、全射滑らかな射
+$W \to \mathcal{X}$ を得る。ゆえに $S = B$ はアフィンであると
+仮定してよい。
+
+\medskip\noindent
+$S = B$ はアフィンであり、$S = \Spec(\Lambda)$ とする。
+各 $\Lambda_i$ が $\mathbf{Z}$ 上有限型となるように、
+$\Lambda = \colim \Lambda_i$ をフィルター付き余極限として書く。
+ある $i$ に対し、有限表示、分離的、かつ平坦で、その
+$\Lambda$ への基底変換が $X$ となる代数空間の射
+$X_i \to \Spec(\Lambda_i)$ を見つけられる。
+Limits of Spaces, Lemmas
+\ref{spaces-limits-lemma-descend-finite-presentation},
+\ref{spaces-limits-lemma-descend-separated-morphism}、および
+\ref{spaces-limits-lemma-descend-flat} を参照せよ。
+$\Cohstack_{X_i/\Spec(\Lambda_i)}$ が代数スタックであることを示せば、
+基底変換により（Remark \ref{quot-remark-coherent-base-change} および
+Algebraic Stacks, Section
+\ref{algebraic-section-change-base-scheme}）、
+$\mathcal{X}$ が代数スタックであることが従う。
+したがって $\Lambda$ は有限型 $\mathbf{Z}$ 代数であると
+仮定してよい。
+
+\medskip\noindent
+$S = B = \Spec(\Lambda)$ は $\mathbf{Z}$ 上有限型な
+アフィンスキームであると仮定する。この場合、
+Artin's Axioms, Lemma
+\ref{artin-lemma-diagonal-representable} の条件
+（1）、（2）、（3）、（4）、（5）を確認して、
+$\mathcal{X}$ が代数スタックであると結論する。
+$\Lambda$ は G-環であることに注意する。More on Algebra,
+Proposition \ref{more-algebra-proposition-ubiquity-G-ring} を参照せよ。
+したがって $S$ のすべての局所環は G-環であり、（5）が成り立つ。
+Lemma \ref{quot-lemma-coherent-defo-thy} により、
+$\mathcal{X}$ は versal 性の開性を満たすので、（4）が成り立つ。
+（2）を確認するには、Artin's Axioms, Section
+\ref{artin-section-axioms} の公理
+［-1］、［0］、［1］、［2］、［3］を確認しなければならない。
+［-1］の確認は省略する。公理
+［0］、［1］、［2］、［3］は、それぞれ Lemmas
+\ref{quot-lemma-coherent-stack}、
+\ref{quot-lemma-coherent-limits},
+\ref{quot-lemma-coherent-RS-star},
+\ref{quot-lemma-coherent-tangent-space} に対応する。
+条件（3）は Lemma \ref{quot-lemma-coherent-existence} から従う。
+最後に、条件（1）は Lemma \ref{quot-lemma-coherent-diagonal} である。
+これで定理の証明が完了した。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{非平坦な場合の連接層のスタック}
+\label{quot-section-not-flat}
+
+\noindent
+Theorem \ref{quot-theorem-coherent-algebraic} における
+$f : X \to B$ の平坦性の仮定は不要である。本節では、
+Flatness on Spaces, Section \ref{spaces-flat-section-existence} および
+Artin's Axioms, Section
+\ref{artin-section-strong-formal-effectiveness} の結果を用いて、
+平坦性の仮定と versal 性の開性の確認とを回避する別の証明を与える。
+
+\medskip\noindent
+この問題への別の方針については、\cite{ArtinI} を参照し、
+次の論文で論じられた方法をたどるとよい：
+\cite{olsson-starr}, \cite{lieblich_remarks}, \cite{olsson_proper},
+\cite{Hall-Rydh}, \cite{Hall-Rydh-Hilbert}, \cite{rydh_representability}.
+これらの論文の一部は、代数スタック上の代数スタック上の
+連接層のスタックという、より一般的な場合を扱い、
+他の論文は Hilbert スタックまたは Quot 関手の場合の
+類似問題を扱っている。本章では、連接層のスタックの代数性から、
+いくつかの場合の Hilbert スタックおよび Quot 関手の代数性を
+帰結として示す。
+
+\begin{theorem}[連接層のスタックの代数性：一般の場合]
+\label{quot-theorem-coherent-algebraic-general}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は有限表示かつ分離的であると仮定する。
+このとき $\Cohstack_{X/B}$ は $S$ 上の代数スタックである。
+\end{theorem}
+
+\begin{proof}
+平坦な場合の証明と異なるのは最後の段階だけであるが、
+すべてが機能することを確かめるため、ここですべての議論を繰り返す。
+
+\medskip\noindent
+$\mathcal{X} = \Cohstack_{X/B}$ とおく。$\mathcal{X}$ は
+$(\Sch/S)_{fppf}$ 上の亜群のスタックであり、その対角射は
+代数空間で表現可能であることを見た
+（Lemmas \ref{quot-lemma-coherent-stack} および
+\ref{quot-lemma-coherent-diagonal}）。したがって、スキーム $W$ と
+全射かつ滑らかな射 $W \to \mathcal{X}$ を見つければ十分である。
+
+\medskip\noindent
+$B'$ をスキームとし、$B' \to B$ を全射 \'etale 射とする。
+$X' = B' \times_B X$ とおき、射影を $f' : X' \to B'$ と表す。
+このとき $\mathcal{X}' = \Cohstack_{X'/B'}$ は、
+$B$ に付随する集合でファイバー化された圏上での、
+$\mathcal{X}$ と $B'$ に付随する集合でファイバー化された圏との
+$2$-ファイバー積に等しい
+（Remark \ref{quot-remark-coherent-base-change}）。
+Algebraic Stacks, Section
+\ref{algebraic-section-representable-properties} の内容により、
+射 $\mathcal{X}' \to \mathcal{X}$ は全射かつ \'etale である。
+したがって $\mathcal{X}'$ について結果を証明すれば十分である。
+言い換えれば、$B$ はスキームであると仮定してよい。
+
+\medskip\noindent
+$B$ をスキームとする。この場合 $S$ を $B$ で置き換えてよい。
+Algebraic Stacks, Section
+\ref{algebraic-section-change-base-scheme} を参照せよ。
+したがって $S = B$ と仮定してよい。
+
+\medskip\noindent
+$S = B$ と仮定する。アフィン開被覆 $S = \bigcup U_i$ を選ぶ。
+$\mathcal{X}$ の $(\Sch/U_i)_{fppf}$ への制限を
+$\mathcal{X}_i$ と表す。$U_i$ 上のスキーム $W_i$ と
+全射滑らかな射 $W_i \to \mathcal{X}_i$ を見つけられれば、
+$W = \coprod W_i$ とおくことにより、全射滑らかな射
+$W \to \mathcal{X}$ を得る。ゆえに $S = B$ はアフィンであると
+仮定してよい。
+
+\medskip\noindent
+$S = B$ はアフィンであり、$S = \Spec(\Lambda)$ とする。
+各 $\Lambda_i$ が $\mathbf{Z}$ 上有限型となるように、
+$\Lambda = \colim \Lambda_i$ をフィルター付き余極限として書く。
+ある $i$ に対し、分離的かつ有限表示で、その $\Lambda$ への
+基底変換が $X$ となる代数空間の射
+$X_i \to \Spec(\Lambda_i)$ を見つけられる。
+Limits of Spaces, Lemmas
+\ref{spaces-limits-lemma-descend-finite-presentation} および
+\ref{spaces-limits-lemma-descend-separated-morphism} を参照せよ。
+$\Cohstack_{X_i/\Spec(\Lambda_i)}$ が代数スタックであることを示せば、
+基底変換により（Remark \ref{quot-remark-coherent-base-change} および
+Algebraic Stacks, Section
+\ref{algebraic-section-change-base-scheme}）、
+$\mathcal{X}$ が代数スタックであることが従う。
+したがって $\Lambda$ は有限型 $\mathbf{Z}$ 代数であると
+仮定してよい。
+
+\medskip\noindent
+$S = B = \Spec(\Lambda)$ は $\mathbf{Z}$ 上有限型な
+アフィンスキームであると仮定する。この場合、
+Artin's Axioms, Lemma
+\ref{artin-lemma-diagonal-representable} の条件
+（1）、（2）、（3）、（4）、（5）を確認して、
+$\mathcal{X}$ が代数スタックであると結論する。
+$\Lambda$ は G-環であることに注意する。More on Algebra,
+Proposition \ref{more-algebra-proposition-ubiquity-G-ring} を参照せよ。
+したがって $S$ のすべての局所環は G-環であり、（5）が成り立つ。
+（2）を確認するには、Artin's Axioms, Section
+\ref{artin-section-axioms} の公理
+［-1］、［0］、［1］、［2］、［3］を確認しなければならない。
+［-1］の確認は省略する。公理
+［0］、［1］、［2］、［3］は、それぞれ Lemmas
+\ref{quot-lemma-coherent-stack}、
+\ref{quot-lemma-coherent-limits},
+\ref{quot-lemma-coherent-RS-star},
+\ref{quot-lemma-coherent-tangent-space} に対応する。
+条件（3）は Lemma \ref{quot-lemma-coherent-existence} である。
+条件（1）は Lemma \ref{quot-lemma-coherent-diagonal} である。
+
+\medskip\noindent
+残るのは、versal 性の開性である条件（4）を示すことである。
+そのために Artin's Axioms, Lemma
+\ref{artin-lemma-SGE-implies-openness-versality} を用いる。
+$\mathcal{X}$ の対角射が代数空間で表現可能であり、
+また（RS*）をもち、極限を保存することはすでに見た
+（上で用いた補題を参照せよ）。
+したがって Artin's Axioms, Lemma
+\ref{artin-lemma-SGE-implies-openness-versality} で定式化された
+強形式的有効性を $\mathcal{X}$ が満たすことだけを示せばよい。
+これは Flatness on Spaces, Theorem
+\ref{spaces-flat-theorem-existence} であり、証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{商の関手}
+\label{quot-section-functor-quotients}
+
+\noindent
+本節では、以下で定義する関手 $Q_{\mathcal{F}/X/B}$ に関する
+一般論を述べる。記法 $\Quotfunctor_{\mathcal{F}/X/B}$ は
+$\text{Q}_{\mathcal{F}/X/B}$ のある部分関手のために取っておく。
+初読時には本節を飛ばすことを強く勧める。
+
+\begin{situation}
+\label{quot-situation-q}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$B$ 上の任意のスキーム $T$ に対し、$X$ の $T$ への基底変換を
+$X_T$ と表し、射影 $X_T = X \times_B T \to X$ による
+$\mathcal{F}$ の引き戻しを $\mathcal{F}_T$ と表す。
+このような $T$ に対して
+$$
+\text{Q}_{\mathcal{F}/X/B}(T) =
+\left\{
+\begin{matrix}
+\mathcal{F}_T \to \mathcal{Q}\text{ という商で、}\\
+\mathcal{Q}\text{ は準連接 }\\
+\mathcal{O}_{X_T}\text{ 加群かつ }T\text{ 上平坦}
+\end{matrix}
+\right\}
+$$
+とおく。同じ核をもつ商は同一視する。$T' \to T$ を
+$B$ 上のスキームの射とし、$\mathcal{F}_T \to \mathcal{Q}$ を
+$\text{Q}_{\mathcal{F}/X/B}(T)$ の元とする。このとき
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-module-flat} により、
+引き戻し $\mathcal{Q}' = (X_{T'} \to X_T)^*\mathcal{Q}$ は
+$T'$ 上平坦な準連接 $\mathcal{O}_{X_{T'}}$ 加群である。
+したがって関手
+\begin{equation}
+\label{quot-equation-q}
+\text{Q}_{\mathcal{F}/X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+を得る。これを {\it $\mathcal{F}/X/B$ の商の関手} と呼ぶ。
+部分関手
+\begin{equation}
+\label{quot-equation-q-fp}
+\text{Q}^{fp}_{\mathcal{F}/X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+を、$T$ に対して、$\mathcal{Q}$ が有限表示
+$\mathcal{O}_{X_T}$ 加群となるような商
+$\mathcal{F}_T \to \mathcal{Q}$ からなる
+$\text{Q}_{\mathcal{F}/X/B}(T)$ の部分集合を対応させるものとして
+定義する。Properties of Spaces, Section
+\ref{spaces-properties-section-properties-modules} により、
+これは部分関手である。
+\end{situation}
+
+\noindent
+状況 \ref{quot-situation-q} では、$\text{Q}_{\mathcal{F}/X/B}$ を、
+射 $\text{Q}_{\mathcal{F}/X/S} \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなすことがある。
+実際、$T$ が $S$ 上のスキームなら、
+$\text{Q}_{\mathcal{F}/X/B}(T)$ の元は対 $(h, \mathcal{Q})$ である。
+ここで $h$ は射 $h : T \to B$ であり、$\mathcal{Q}$ は
+$X_T = X \times_{B, h} T$ 上有限表示な $T$-平坦商
+$\mathcal{F}_T \to \mathcal{Q}$ である。特に
+$\text{Q}_{\mathcal{F}/X/S}$ が代数空間であると言うとき、
+対応する関手 $(\Sch/S)^{opp} \to \textit{Sets}$ が
+代数空間であることを意味する。
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$ についても同様である。
+
+\begin{remark}
+\label{quot-remark-q-base-change}
+状況 \ref{quot-situation-q} において、$B' \to B$ を
+$S$ 上の代数空間の射とする。$X' = X \times_B B'$ とおき、
+$\mathcal{F}$ の $X'$ への引き戻しを $\mathcal{F}'$ と表す。
+すると $B'$ 上のスキームの圏上の関手
+$Q_{\mathcal{F}'/X'/B'}$ を得る。$B'$ 上のスキーム $T$ に対し、
+明らかに
+$$
+Q_{\mathcal{F}'/X'/B'}(T) = Q_{\mathcal{F}/X/B}(T)
+$$
+である。右辺では、合成 $T \to B' \to B$ によって
+$T$ を $B$ 上のスキームとみなしている。
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$ についても同様である。
+これらの自明な注意は、基礎代数空間を変更するときに役立つことがある。
+\end{remark}
+
+\begin{remark}
+\label{quot-remark-q-sheaf}
+$S$ をスキーム、$X$ を $S$ 上の代数空間、$\mathcal{F}$ を
+準連接 $\mathcal{O}_X$ 加群とする。
+$\{f_i : X_i \to X\}_{i \in I}$
+を fpqc 被覆とし、各 $i, j \in I$ に対して fpqc 被覆
+$\{X_{ijk} \to X_i \times_X X_j\}$ が与えられているとする。
+この状況では全単射
+$$
+\left\{
+\begin{matrix}
+\mathcal{F} \to \mathcal{Q}\text{ という商で、}\\
+\mathcal{Q}\text{ は準連接}\\
+\end{matrix}
+\right\}
+\longrightarrow
+\left\{
+\begin{matrix}
+\text{商の族 }f_i^*\mathcal{F} \to \mathcal{Q}_i
+\text{ で、}\\
+\mathcal{Q}_i\text{ は準連接であり、}
+\mathcal{Q}_i\text{ と }\mathcal{Q}_j\text{ は}\\
+X_{ijk}\text{ 上で同じ商に制限される}
+\end{matrix}
+\right\}
+$$
+がある。実際、$(f_i^*\mathcal{F} \to \mathcal{Q}_i)_{i \in I}$ を
+右辺の元とする。$\{X_{ijk} \to X_i \times_X X_j\}$ は fpqc 被覆なので、
+$\mathcal{Q}_i$ と $\mathcal{Q}_j$ の引き戻しは、
+$\mathcal{F}$ の $X_i \times_X X_j$ への引き戻しの同じ商に制限される
+（Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent} の
+充満忠実性による）。したがって
+$\{X_i \to X\}_{i \in I}$ に関する準連接加群の降下データを得る。
+Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+により、$X_i$ への制限が与えられた写像
+$f_i^*\mathcal{F} \to \mathcal{Q}_i$ を復元する準連接
+$\mathcal{O}_X$ 加群の写像 $\mathcal{F} \to \mathcal{Q}$ を得る。
+射族 $\{X_i \to X\}$ は共同で全射かつ平坦なので、
+任意の点 $x \in |X|$ に対し、$x$ へ写る点
+$x_i \in |X_i|$ と $i$ が存在する。誘導される局所環の写像
+$\mathcal{O}_{X, \overline{x}} \to \mathcal{O}_{X_i, \overline{x_i}}$
+は忠実平坦である。Morphisms of Spaces, Section
+\ref{spaces-morphisms-section-flat} を参照せよ。
+したがって $\mathcal{F} \to \mathcal{Q}$ は全射である。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-q-sheaf}
+状況 \ref{quot-situation-q} において、関手
+$\text{Q}_{\mathcal{F}/X/B}$ および
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$
+は fpqc 位相に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$\{T_i \to T\}_{i \in I}$ を $S$ 上のスキームの fpqc 被覆とする。
+$X_i = X_{T_i} = X \times_S T_i$ および
+$\mathcal{F}_i = \mathcal{F}_{T_i}$ とおく。
+$\{X_i \to X_T\}_{i \in I}$ は $X_T$ の fpqc 被覆であり
+（Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-fpqc}）、
+$X_{T_i \times_T T_{i'}} = X_i \times_{X_T} X_{i'}$ である。
+$\mathcal{F}_i \to \mathcal{Q}_i$ を
+$\text{Q}_{\mathcal{F}/X/B}(T_i)$ の元の族とし、
+$\mathcal{Q}_i$ と $\mathcal{Q}_{i'}$ の制限は
+$\text{Q}_{\mathcal{F}/X/B}(T_i \times_T T_{i'})$ の
+同じ元であるとする。Remark \ref{quot-remark-q-sheaf} により、
+$X_i$ への制限が与えられた商を復元する準連接
+$\mathcal{O}_{X_T}$ 加群の全射
+$\mathcal{F}_T \to \mathcal{Q}$ を得る。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence} により、
+$\mathcal{Q}$ は $T$ 上平坦である。最後に
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$ の場合、すなわち
+$\mathcal{Q}_i$ が有限表示ならば、Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-finite-presentation-descends}
+により、$\mathcal{Q}$ は有限表示 $\mathcal{O}_{X_T}$ 加群である。
+\end{proof}
+
+\noindent
+整合性の確認：$\text{Q}_{\mathcal{F}/X/B}$ と
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$
+は $S$ 上の代数空間の間でも同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-q-to-spaces}
+状況 \ref{quot-situation-q} において、$T$ を $S$ 上の代数空間とする。
+このとき
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T,  \text{Q}_{\mathcal{F}/X/B}) =
+\left\{
+\begin{matrix}
+(h, \mathcal{F}_T \to \mathcal{Q}) \text{ で、}
+h : T \to B \text{ かつ}\\
+\mathcal{Q}\text{ は準連接で }T\text{ 上平坦}
+\end{matrix}
+\right\}
+$$
+が成り立つ。ここで $\mathcal{F}_T$ は $\mathcal{F}$ の
+代数空間 $X \times_{B, h} T$ への引き戻しを表す。同様に
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T,  \text{Q}^{fp}_{\mathcal{F}/X/B}) =
+\left\{
+\begin{matrix}
+(h, \mathcal{F}_T \to \mathcal{Q}) \text{ で、}
+h : T \to B \text{ かつ}\\
+\mathcal{Q}\text{ は有限表示で }T\text{ 上平坦}
+\end{matrix}
+\right\}
+$$
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射 \'etale 射 $p : U \to T$ を選ぶ。
+$R = U \times_T U$ とおき、その射影を $t, s : R \to U$ とする。
+
+\medskip\noindent
+自然変換 $v : T \to \text{Q}_{\mathcal{F}/X/B}$ をとる。
+このとき $v(p)$ は $U$ 上の対
+$(h_U, \mathcal{F}_U \to \mathcal{Q}_U)$ に対応する。
+$v$ は関手の変換なので、$(h_U, \mathcal{F}_U \to \mathcal{Q}_U)$ の
+$s$ と $t$ による
+引き戻しは一致する。$T = U/R$ であるから
+（Spaces, Lemma \ref{spaces-lemma-space-presentation}）、
+$h_U = h \circ p$ を満たす射 $h : T \to B$ を得る。
+Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+により、商 $\mathcal{Q}_U$ は $X_T$ 上の商
+$\mathcal{F}_T \to \mathcal{Q}$ に降下する。
+$U \to T$ は全射かつ平坦なので、Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence} により、
+$\mathcal{Q}$ は $T$ 上平坦である。
+
+\medskip\noindent
+逆に、$(h, \mathcal{F}_T \to \mathcal{Q})$ を $T$ 上の対とする。
+スキーム $T'$ からの射 $a : T' \to T$ を
+$(h \circ a, \mathcal{F}_{T'} \to a^*\mathcal{Q})$ に送ることにより、
+自然変換 $v : T \to \text{Q}_{\mathcal{F}/X/B}$ を得る。
+この構成と前段落の構成が互いに逆であることの確認は省略する。
+
+\medskip\noindent
+$\text{Q}^{fp}_{\mathcal{F}/X/B}$ の場合には、次を付け加える。
+射 $h : T \to B$ が与えられたとき、$X_T$ 上の準連接層が
+有限表示 $\mathcal{O}_{X_T}$ 加群であることと、その
+$X_U$ への引き戻しが有限表示 $\mathcal{O}_{X_U}$ 加群であることは
+同値である。これは $X_U \to X_T$ が全射 \'etale であることと、
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-finite-presentation-descends} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-q-sheaf-in-X}
+状況 \ref{quot-situation-q} において、$\{X_i \to X\}_{i \in I}$ を
+fpqc 被覆とし、各 $i,j \in I$ に対し
+$\{X_{ijk} \to X_i \times_X X_j\}$ を fpqc 被覆とする。
+$\mathcal{F}$ の $X_i$ への引き戻しを $\mathcal{F}_i$、
+$X_{ijk}$ への引き戻しを $\mathcal{F}_{ijk}$ と表す。
+$B$ 上の任意のスキーム $T$ に対し、図式
+$$
+\xymatrix{
+Q_{\mathcal{F}/X/B}(T) \ar[r] &
+\prod\nolimits_i
+Q_{\mathcal{F}_i/X_i/B}(T)
+\ar@<1ex>[r]^-{\text{pr}_0^*} \ar@<-1ex>[r]_-{\text{pr}_1^*}
+&
+\prod\nolimits_{i, j, k}
+Q_{\mathcal{F}_{ijk}/X_{ijk}/B}(T)
+}
+$$
+は最初の矢印を他の二つの矢印の等化子として表示する。
+関手 $\text{Q}^{fp}_{\mathcal{F}/X/B}$ についても同じことが成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}_{i, T} \to \mathcal{Q}_i$ を
+$\text{pr}_0^*$ と $\text{pr}_1^*$ の等化子の元とする。
+Remark \ref{quot-remark-q-sheaf} により、$X_{i, T}$ への制限が
+$\mathcal{F}_i \to \mathcal{Q}_i$ を復元する準連接
+$\mathcal{O}_{X_T}$ 加群の全射
+$\mathcal{F}_T \to \mathcal{Q}$ を得る。
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-permanence} により、
+望みどおり $\mathcal{Q}$ は $T$ 上平坦である。
+関手 $\text{Q}^{fp}_{\mathcal{F}/X/B}$ の場合、すなわち
+$\mathcal{Q}_i$ が有限表示なら、Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-finite-presentation-descends} により、
+$\mathcal{Q}$ も有限表示である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-q-limit-preserving}
+状況 \ref{quot-situation-q} において、さらに次を仮定する。
+（a）$f$ は準コンパクトかつ準分離的である。
+（b）$\mathcal{F}$ は有限表示である。
+このとき関手 $\text{Q}^{fp}_{\mathcal{F}/X/B}$ は次の意味で
+極限を保存する。$T = \lim T_i$ が $B$ 上の
+アフィンスキームの有向極限なら、
+$\text{Q}^{fp}_{\mathcal{F}/X/B}(T) =
+\colim \text{Q}^{fp}_{\mathcal{F}/X/B}(T_i)$.
+\end{lemma}
+
+\begin{proof}
+$T = \lim T_i$ を補題の主張のとおりとする。
+$i_0 \in I$ を選び、$I$ を $\{i \in I \mid i \geq i_0\}$ で置き換える。
+$B = S = T_{i_0}$ とおき、$X$ を $X_{T_0}$ で、
+$\mathcal{F}$ を $X_{T_0}$ への引き戻しで置き換えてよい。
+このとき $X_T = \lim X_{T_i}$ である。Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-directed-inverse-system-has-limit} を参照せよ。
+$\mathcal{F}_T \to \mathcal{Q}$ を
+$\text{Q}^{fp}_{\mathcal{F}/X/B}(T)$ の元とする。
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-modules-finite-presentation}
+により、ある $i$ と有限表示 $\mathcal{O}_{X_{T_i}}$ 加群の写像
+$\mathcal{F}_{T_i} \to \mathcal{Q}_i$ が存在し、
+その $X_T$ への引き戻しは与えられた商写像である。
+
+\medskip\noindent
+なお、$i$ を増大させた後、写像
+$\mathcal{F}_{T_i} \to \mathcal{Q}_i$ が全射であり、
+$\mathcal{Q}_i$ が $T_i$ 上平坦であることを確認しなければならない。
+そのために、アフィンスキーム $U$ と全射 \'etale 射
+$U \to X$ を選ぶ（Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-quasi-compact-affine-cover} を参照せよ）。
+全射性と $T_i$ 上の平坦性は、\'etale 被覆
+$U_{T_i} \to X_{T_i}$ へ引き戻した後に確認できる（定義による）。
+これにより、$X = \Spec(B_0)$ が
+$B = S = T_0 = \Spec(A_0)$ 上有限表示なアフィンスキームである場合に
+帰着する。$T_i = \Spec(A_i)$ と書けば、
+$A = \colim A_i$ として $T = \Spec(A)$ であり、次の代数の問題を得る。
+$M_i \to N_i$ を有限表示
+$B_0 \otimes_{A_0} A_i$ 加群の写像とし、
+$M_i \otimes_{A_i} A \to N_i \otimes_{A_i} A$ は全射、
+$N_i \otimes_{A_i} A$ は $A$ 上平坦であるとする。
+ある $i' \geq i$ に対して
+$M_i \otimes_{A_i} A_{i'} \to N_i \otimes_{A_i} A_{i'}$ が全射であり、
+$N_i \otimes_{A_i} A_{i'}$ が $A$ 上平坦であることを示せ。
+前者は Algebra, Lemma
+\ref{algebra-lemma-module-map-property-in-colimit} から、
+後者は Algebra, Lemma
+\ref{algebra-lemma-flat-finite-presentation-limit-flat} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-q-RS-star}
+状況 \ref{quot-situation-q} において、
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & Z' \ar[d] \\
+Y \ar[r] & Y'
+}
+$$
+を $B$ 上のスキームの圏における押し出しとする。ここで
+$Z \to Z'$ は肥厚であり、$Z \to Y$ はアフィンである。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を参照せよ。
+このとき自然な写像
+$$
+Q_{\mathcal{F}/X/B}(Y') \longrightarrow
+Q_{\mathcal{F}/X/B}(Y) \times_{Q_{\mathcal{F}/X/B}(Z)} Q_{\mathcal{F}/X/B}(Z')
+$$
+は全単射である。$X \to B$ が局所有限表示なら、
+$Q^{fp}_{\mathcal{F}/X/B}$ についても同じことが成り立つ。
+\end{lemma}
+
+\begin{proof}
+逆写像を構成しよう。すなわち、
+$\mathcal{F}_Y \to \mathcal{A}$,
+$\mathcal{F}_{Z'} \to \mathcal{B}'$、および同型
+$\mathcal{A}|_{X_Z} \to \mathcal{B}'|_{X_Z}$
+が与えられた全射と可換であるとする。
+Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-space-over-pushout-flat-modules}
+を適用すると、$Y'$ 上平坦な $X_{Y'}$ 上の準連接加群
+$\mathcal{A}'$ を得る。この層はファイバー積として構成されるので
+（引用した補題の証明を参照せよ）、標準的な写像
+$\mathcal{F}_{Y'} \to \mathcal{A}'$ がある。
+この写像が全射であることは、次のように分解されることからわかる：
+$$
+\begin{matrix}
+\mathcal{F}_{Y'} \\
+\downarrow \\
+(X_Y \to X_{Y'})_*\mathcal{F}_Y
+\times_{(X_Z \to X_{Y'})_*\mathcal{F}_Z}
+(X_{Z'} \to X_{Y'})_*\mathcal{F}_{Z'} \\
+\downarrow \\
+\mathcal{A}' =
+(X_Y \to X_{Y'})_*\mathcal{A}
+\times_{(X_Z \to X_{Y'})_*\mathcal{A}|_{X_Z}}
+(X_{Z'} \to X_{Y'})_*\mathcal{B}'
+\end{matrix}
+$$
+最初の矢印は More on Algebra, Lemma
+\ref{more-algebra-lemma-module-over-fibre-product-bis} により全射であり、
+二番目の矢印は More on Algebra, Lemma
+\ref{more-algebra-lemma-surjection-module-over-fibre-product} により
+全射である。
+
+\medskip\noindent
+$Q^{fp}_{\mathcal{F}/X/B}$ の場合には、上の構成が有限表示加群を
+与えることだけを示せばよい。可換代数の設定では、これは
+More on Algebra, Remark
+\ref{more-algebra-remark-relative-modules-over-fibre-product} で
+説明されている。代数空間上の加群という現在の場合は、
+\'etale 局所化によってそこから従う。
+\end{proof}
+
+\begin{remark}[商の障害]
+\label{quot-remark-q-obs}
+状況 \ref{quot-situation-q} において、$\mathcal{F}$ は $B$ 上平坦であると
+{\bf 仮定する}。$T \subset T'$ を、イデアル層 $\mathcal{J}$ をもつ
+$B$ 上のスキームの一次肥厚とする。このとき
+$X_T \subset X_{T'}$ は代数空間の一次肥厚であり、そのイデアル層
+$\mathcal{I}$ は $f_T^*\mathcal{J}$ の商である。
+More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-thickenings} で述べた基本同値を用いて、
+$X_{T'}$ 上の層を $X_T$ 上の層と、$T'$ 上の層を $T$ 上の層とみなす。
+次の列が
+$$
+0 \to \mathcal{K} \to \mathcal{F}_T \to \mathcal{Q} \to 0
+$$
+$Q_{\mathcal{F}/X/B}(T)$ の元 $x$ を定めるとする。
+$\mathcal{F}_{T'}$ は $T'$ 上平坦なので、短完全列
+$$
+0 \to f_T^*\mathcal{J} \otimes_{\mathcal{O}_{X_T}} \mathcal{F}_T
+\xrightarrow{i} \mathcal{F}_{T'} \xrightarrow{\pi} \mathcal{F}_T \to 0
+$$
+をもち、さらに
+$f_T^*\mathcal{J} \otimes_{\mathcal{O}_{X_T}} \mathcal{F}_T =
+\mathcal{I} \otimes_{\mathcal{O}_{X_T}} \mathcal{F}_T$
+である。Deformation Theory, Lemma
+\ref{defos-lemma-deform-module-ringed-topoi} を参照せよ。
+$\mathcal{O}_{X_T}$ 加群 $\mathcal{G}$ に対して略記
+$
+f_T^*\mathcal{J} \otimes_{\mathcal{O}_{X_T}} \mathcal{G} =
+\mathcal{G} \otimes_{\mathcal{O}_T} \mathcal{J}
+$
+を用いる。$\mathcal{Q}$ は $T$ 上平坦なので、短完全列
+$$
+0 \to
+\mathcal{K} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\mathcal{F}_T \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\to 0
+$$
+以上を組み合わせると、$\mathcal{O}_{X_T}$ 加群の標準的な拡大
+$$
+0 \to \mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\pi^{-1}(\mathcal{K})/i(\mathcal{K} \otimes_{\mathcal{O}_T} \mathcal{J}) \to
+\mathcal{K} \to 0
+$$
+を得る。これは標準的な類
+$$
+o_x(T') \in
+\Ext^1_{\mathcal{O}_{X_T}}(\mathcal{K},
+\mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J})
+$$
+$o_x(T')$ が零なら、それを定義する短完全列の分裂を得る。
+言い換えれば、短完全列
+$0 \to \mathcal{K} \otimes_{\mathcal{O}_T} \mathcal{J} \to
+\mathcal{K}' \to \mathcal{K} \to 0$
+に入る $\mathcal{O}_{X_{T'}}$ 部分加群
+$\mathcal{K}' \subset \pi^{-1}(\mathcal{K})$ を得る。
+すると上で参照した補題から
+$\mathcal{Q}' = \mathcal{F}_{T'}/\mathcal{K}'$
+は $x$ の $Q_{\mathcal{F}/X/B}(T')$ の元への持ち上げである。
+逆に、持ち上げが存在すれば $o_x(T')$ は零であることがわかる。
+さらに $x \in Q_{\mathcal{F}/X/B}^{fp}(T)$ なら、
+Deformation Theory, Lemma
+\ref{defos-lemma-deform-fp-module-ringed-topoi} により自動的に
+$x' \in Q_{\mathcal{F}/X/B}^{fp}(T')$ となる。
+この注意が必要になれば、これを補題にし、結果を精密に定式化して
+詳細な証明を与える（実際、以上は任意の環付きトポスの設定で成り立つ）。
+\end{remark}
+
+\begin{remark}[商の変形]
+\label{quot-remark-q-defos}
+状況 \ref{quot-situation-q} において、$\mathcal{F}$ は $B$ 上平坦であると
+{\bf 仮定する}。Remark \ref{quot-remark-q-obs} の議論を続ける。
+$o_x(T') = 0$ と仮定する。このとき持ち上げ
+$x' \in Q_{\mathcal{F}/X/B}(T')$ の集合は、群
+$$
+\Hom_{\mathcal{O}_{X_T}}(\mathcal{K},
+\mathcal{Q} \otimes_{\mathcal{O}_T} \mathcal{J})
+$$
+のもとでの主等質空間であると主張する。
+実際、商 $\mathcal{Q}$ を持ち上げる、$T'$ 上平坦な任意の
+$\mathcal{F}_{T'} \to \mathcal{Q}'$ が与えられると、
+行と列が完全な可換図式
+$$
+\xymatrix{
+& 0 \ar[d] & 0 \ar[d] & 0 \ar[d] \\
+0 \ar[r] &
+\mathcal{K} \otimes \mathcal{J} \ar[r] \ar[d] &
+\mathcal{F}_T \otimes \mathcal{J} \ar[r] \ar[d] &
+\mathcal{Q} \otimes \mathcal{J} \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+\mathcal{K}' \ar[r] \ar[d] &
+\mathcal{F}_{T'} \ar[r] \ar[d] &
+\mathcal{Q}' \ar[r] \ar[d] &
+0 \\
+0 \ar[r] &
+\mathcal{K} \ar[d] \ar[r] &
+\mathcal{F}_T \ar[d] \ar[r] &
+\mathcal{Q} \ar[d] \ar[r] &
+0 \\
+& 0 & 0 & 0
+}
+$$
+を得る（これを見るには前の注意で述べた事実を用いよ）。
+写像 $\varphi : \mathcal{K} \to \mathcal{Q} \otimes \mathcal{J}$ が
+与えられたとする。$\mathcal{F}_T$ における像が
+$\mathcal{K}$ の局所切断 $k$ であり、$\mathcal{Q}'$ における像が
+$\mathcal{Q} \otimes \mathcal{J}$ の局所切断 $\varphi(k)$ となるような
+局所切断 $s$ からなる部分層
+$\mathcal{K}'_\varphi \subset \mathcal{F}_{T'}$ を考えられる。
+$\mathcal{Q}'_\varphi = \mathcal{F}_{T'}/\mathcal{K}'_\varphi$ とおく。
+逆に、$x$ の任意の二番目の持ち上げは、この方法で構成される
+商の一つに対応する。この注意が必要になれば、これを補題にし、
+結果を精密に定式化して詳細な証明を与える
+（実際、以上は任意の環付きトポスの設定で成り立つ）。
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+\section{Quot 関手}
+\label{quot-section-quot}
+
+\noindent
+本節では、Quot 関手が代数空間であることを証明する。
+
+\begin{situation}
+\label{quot-situation-quot}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は有限表示であると仮定する。
+$\mathcal{F}$ を準連接 $\mathcal{O}_X$ 加群とする。
+$B$ 上の任意のスキーム $T$ に対し、$X$ の $T$ への基底変換を
+$X_T$ と表し、射影 $X_T = X \times_S T \to X$ による
+$\mathcal{F}$ の引き戻しを $\mathcal{F}_T$ と表す。
+このような $T$ に対して
+$$
+\Quotfunctor_{\mathcal{F}/X/B}(T) =
+\left\{
+\begin{matrix}
+\mathcal{F}_T \to \mathcal{Q}\text{ という商で、}\\
+\mathcal{Q}\text{ は有限表示な準連接 }
+\mathcal{O}_{X_T}\text{ 加群、}\\
+T\text{ 上平坦で、その台は }T\text{ 上固有}
+\end{matrix}
+\right\}
+$$
+とおく。Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-base-change-module-support-proper-over-base}
+により、これは第 \ref{quot-section-functor-quotients} 節で論じた関手
+$Q^{fp}_{\mathcal{F}/X/B}$ の部分関手である。
+したがって関手
+\begin{equation}
+\label{quot-equation-quot}
+\Quotfunctor_{\mathcal{F}/X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+を得る。これを $\mathcal{F}/X/B$ に付随する {\it Quot 関手} と呼ぶ。
+\end{situation}
+
+\noindent
+状況 \ref{quot-situation-quot} では、$\Quotfunctor_{\mathcal{F}/X/B}$ を、
+射 $\Quotfunctor_{\mathcal{F}/X/B} \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなすことがある。
+実際、$T$ が $S$ 上のスキームなら、
+$\Quotfunctor_{\mathcal{F}/X/B}(T)$ の元は対 $(h, \mathcal{Q})$ である。
+ここで $h$ は射 $h : T \to B$ であり、$Q$ は
+$X_T = X \times_{B, h} T$ 上の有限表示な $T$-平坦商
+$\mathcal{F}_T \to \mathcal{Q}$ で、その台は $T$ 上固有である。
+特に $\Quotfunctor_{\mathcal{F}/X/B}$ が代数空間であると言うとき、
+対応する関手 $(\Sch/S)^{opp} \to \textit{Sets}$ が
+代数空間であることを意味する。
+
+\begin{lemma}
+\label{quot-lemma-quot-sheaf}
+状況 \ref{quot-situation-quot} において、関手
+$\Quotfunctor_{\mathcal{F}/X/B}$ は fpqc 位相に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{quot-lemma-q-sheaf} で、関手
+$\text{Q}^{fp}_{\mathcal{F}/X/S}$ が層であることを見た。
+$S$ 上のスキーム $T$ に対し、部分集合
+$\Quotfunctor_{\mathcal{F}/X/S}(T) \subset \text{Q}_{\mathcal{F}/X/S}(T)$
+は、台が $T$ 上固有な商を選び出すことを思い出そう。
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-proper} と、
+スキーム論的台をとる操作が平坦な基底変換と可換であることを示す
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-pullback-support} を組み合わせると、
+これは部分層を定める。
+\end{proof}
+
+\noindent
+整合性の確認：$\Quotfunctor_{\mathcal{F}/X/B}$ は、
+$S$ 上の代数空間の間でも同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-quot-to-spaces}
+状況 \ref{quot-situation-quot} において、$T$ を $S$ 上の代数空間とする。
+このとき
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T,  \Quotfunctor_{\mathcal{F}/X/B}) =
+\left\{
+\begin{matrix}
+(h, \mathcal{F}_T \to \mathcal{Q}) \text{ で、}
+h : T \to B \text{ かつ}\\
+\mathcal{Q}\text{ は有限表示、}\\
+T\text{ 上平坦で、その台は }T\text{ 上固有}
+\end{matrix}
+\right\}
+$$
+が成り立つ。ここで $\mathcal{F}_T$ は $\mathcal{F}$ の
+代数空間 $X \times_{B, h} T$ への引き戻しを表す。
+\end{lemma}
+
+\begin{proof}
+等式の左辺と右辺は、それぞれ Lemma
+\ref{quot-lemma-extend-q-to-spaces} の二番目の等式の左辺と右辺の
+部分集合である。同補題の証明で与えた同一視のもとで
+これらの部分集合が対応することを見るには、次を示せば十分である。
+$h : T \to B$、全射 \'etale 射 $U \to T$、有限型な準連接
+$\mathcal{O}_{X_T}$ 加群 $\mathcal{Q}$ が与えられたとき、
+次は同値である：
+\begin{enumerate}
+\item $\mathcal{Q}$ のスキーム論的台は $T$ 上固有である。
+\item $(X_U \to X_T)^*\mathcal{Q}$ のスキーム論的台は
+$U$ 上固有である。
+\end{enumerate}
+これは Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-proper} と、
+スキーム論的台をとる操作が平坦な基底変換と可換であることを示す
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-flat-pullback-support} を組み合わせると従う。
+\end{proof}
+
+\begin{proposition}
+\label{quot-proposition-quot}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$\mathcal{F}$ を $X$ 上の準連接層とする。
+$f$ が有限表示かつ分離的なら、
+$\Quotfunctor_{\mathcal{F}/X/B}$
+は代数空間である。$\mathcal{F}$ が有限表示なら、
+$\Quotfunctor_{\mathcal{F}/X/B} \to B$ は局所有限表示である。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{quot-lemma-quot-sheaf} により、
+$\Quotfunctor_{\mathcal{F}/X/B}$ は fppf 位相の層である。
+$\textit{Quot}_{\mathcal{F}/X/B}$ を
+$\Quotfunctor_{\mathcal{F}/X/S}$ に対応する亜群のスタックとする。
+Algebraic Stacks, Section \ref{algebraic-section-split} を参照せよ。
+Algebraic Stacks, Proposition
+\ref{algebraic-proposition-algebraic-stack-no-automorphisms}
+により、$\textit{Quot}_{\mathcal{F}/X/B}$ が
+代数スタックであることを示せば十分である。
+$(\Sch/S)_{fppf}$ 上の亜群のスタックの $1$-射
+$$
+\textit{Quot}_{\mathcal{F}/X/S}
+\longrightarrow
+\Cohstack_{X/B}
+$$
+を考える。これは商 $\mathcal{F}_T \to \mathcal{Q}$ に
+加群 $\mathcal{Q}$ を対応させる。
+Theorem \ref{quot-theorem-coherent-algebraic-general} により、
+$\Cohstack_{X/B}$ は代数スタックである。
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-morphism-to-algebraic}
+により、この $1$-射が代数空間で表現可能であることを
+示せば十分である。
+
+\medskip\noindent
+$T$ を $S$ 上のスキームとし、$T$ 上の $\Cohstack_{X/B}$ の対象
+$(h, \mathcal{G})$ は $1$-射
+$\xi : (\Sch/T)_{fppf} \to \Cohstack_{X/B}$ に対応するとする。
+$2$-ファイバー積
+$$
+\mathcal{Z} =
+(\Sch/T)_{fppf}
+\times_{\xi, \Cohstack_{X/B}}
+\textit{Quot}_{\mathcal{F}/X/S}
+$$
+は setoid のスタックである。Stacks, Lemma
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids} を参照せよ。
+対応する集合の層（すなわち関手。Stacks, Lemmas
+\ref{stacks-lemma-2-fibre-product-gives-stack-in-setoids} および
+\ref{stacks-lemma-when-stack-in-sets} を参照せよ）は、スキーム
+$T'/T$ に、$X_{T'}$ 上の準連接加群の全射
+$u : \mathcal{F}_{T'} \to \mathcal{G}_{T'}$ の集合を対応させる。
+したがって Flatness on Spaces, Lemma
+\ref{spaces-flat-lemma-F-surj-open} により、$\mathcal{Z}$ は
+Proposition \ref{quot-proposition-hom} の代数空間
+$\mathit{Hom}(\mathcal{F}_T, \mathcal{G})$ の開部分空間で表現される。
+\end{proof}
+
+\begin{remark}[Artin の公理による Quot]
+\label{quot-remark-quot-via-artins-axioms}
+$S$ を、そのすべての局所環が G-環である Noether スキームとする。
+$X$ を $S$ 上の代数空間とし、その構造射
+$f : X \to S$ は有限表示かつ分離的であるとする。
+$\mathcal{F}$ を $X$ 上の有限表示準連接層で、$S$ 上平坦なものとする。
+この注意では、Proposition \ref{quot-proposition-quot} の証明のように
+連接層のスタックの代数性を用いる代わりに、Artin の公理を用いて
+$\Quotfunctor_{\mathcal{F}/X/S}$ が $S$ 上局所有限表示な代数空間で
+あることを証明する方法を概説する。
+
+\medskip\noindent
+Artin's Axioms, Proposition
+\ref{artin-proposition-spaces-diagonal-representable} に挙げられた
+条件を確認する。$\Quotfunctor_{\mathcal{F}/X/S}$ の対角射の
+表現可能性は次のようにわかる。二つの商
+$\mathcal{F}_T \to \mathcal{Q}_i$、$i = 1, 2$ があるとする。
+最初の商の核を $\mathcal{K}_1$ と表す。
+写像 $u : \mathcal{K}_1 \to \mathcal{Q}_2$ が零となる
+$T$ の部分が表現可能であることを示す必要がある。
+これは例えば Flatness on Spaces, Lemma
+\ref{spaces-flat-lemma-F-zero-closed-proper}、または本章で先に述べた
+$\mathit{Hom}$ 層の議論から従う。
+公理［0］（層）、［1］（極限）、［2］（Rim--Schlessinger）は
+Lemmas \ref{quot-lemma-quot-sheaf}、
+\ref{quot-lemma-q-limit-preserving}、
+\ref{quot-lemma-q-RS-star} から従う
+（固有性の条件を扱うため、いくらか追加の作業が必要である）。
+公理［3］（接空間の有限次元性）は、Remark
+\ref{quot-remark-q-defos} の無限小変形の記述と、体上の固有代数空間上の
+連接層のコホモロジーの有限性
+（Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-proper-pushforward-coherent}）から従う。
+公理［4］（形式対象の有効性）は Grothendieck の存在定理
+（More on Morphisms of Spaces, Theorem
+\ref{spaces-more-morphisms-theorem-grothendieck-existence}）から従う。
+通常どおり、確認が最も難しいのは公理［5］（versal 性の開性）である。
+例えば Remark \ref{quot-remark-q-obs} で述べた障害理論と
+Remark \ref{quot-remark-q-defos} の変形の記述を用い、
+Artin's Axioms, Lemma
+\ref{artin-lemma-get-openness-obstruction-theory} の判定条件によって
+これを証明できる。Lemma \ref{quot-lemma-coherent-defo-thy} の
+第二の証明と比較されたい。
+\end{remark}
+
+
+
+
+
+
+
+
+
+\section{Hilbert 関手}
+\label{quot-section-hilb}
+
+\noindent
+本節では、Hilb 関手が代数空間であることを証明する。
+
+\begin{situation}
+\label{quot-situation-hilb}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は有限表示であると仮定する。$B$ 上の任意のスキーム $T$ に対し、
+$X$ の $T$ への基底変換を $X_T$ と表す。このような $T$ に対して
+$$
+\Hilbfunctor_{X/B}(T) =
+\left\{
+\begin{matrix}
+\text{閉部分空間 }Z \subset X_T\text{ で、}Z \to T\text{ は}\\
+\text{有限表示、平坦、かつ固有}
+\end{matrix}
+\right\}
+$$
+とおく。基底変換は必要な性質を保存するので
+（Spaces, Lemma \ref{spaces-lemma-base-change-immersions} および
+Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-flat}、および
+\ref{spaces-morphisms-lemma-base-change-proper}）、関手
+\begin{equation}
+\label{quot-equation-hilb}
+\Hilbfunctor_{X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+\end{equation}
+を得る。これを $X/B$ に付随する {\it Hilbert 関手} と呼ぶ。
+\end{situation}
+
+\noindent
+状況 \ref{quot-situation-hilb} では、$\Hilbfunctor_{X/B}$ を、
+射 $\Hilbfunctor_{X/S} \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなすことがある。
+実際、$T$ が $S$ 上のスキームなら、
+$\Hilbfunctor_{X/B}(T)$ の元は対 $(h, Z)$ である。
+ここで $h$ は射 $h : T \to B$ であり、
+$Z \subset X_T = X \times_{B, h} T$ は閉部分スキームで、
+$T$ 上平坦、固有、かつ有限表示である。
+特に $\Hilbfunctor_{X/B}$ が代数空間であると言うとき、
+対応する関手 $(\Sch/S)^{opp} \to \textit{Sets}$ が
+代数空間であることを意味する。
+
+\medskip\noindent
+もちろん Hilbert 関手は Quot 関手の特別な場合にすぎない。
+
+\begin{lemma}
+\label{quot-lemma-hilb-is-quot}
+状況 \ref{quot-situation-hilb} において
+$\Hilbfunctor_{X/B} = \Quotfunctor_{\mathcal{O}_X/X/B}$.
+である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $B$ 上のスキームとする。元
+$Z \in \Hilbfunctor_{X/B}(T)$ が与えられたとき、商
+$\mathcal{O}_{X_T} \to i_*\mathcal{O}_Z$ を考えられる。
+ここで $i : Z \to X_T$ は包含射である。
+$i_*\mathcal{O}_Z$ は準連接であることに注意する。
+$Z \to T$ と $X_T \to T$ は有限表示なので、
+$i$ は有限表示である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-permanence}）。
+したがって $i_*\mathcal{O}_Z$ は有限表示
+$\mathcal{O}_{X_T}$ 加群である（Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-finite-finitely-presented-module}）。
+$Z \to T$ は固有なので、$i_*\mathcal{O}_Z$ の台は $T$ 上固有である
+（Derived Categories of Spaces, Section
+\ref{spaces-perfect-section-proper-over-base} で定義した意味で）。
+$\mathcal{O}_Z$ は $T$ 上平坦であり、$i$ はアフィンなので、
+$i_*\mathcal{O}_Z$ は $T$ 上平坦である
+（小さな議論は省略する）。したがって
+$\mathcal{O}_{X_T} \to i_*\mathcal{O}_Z$
+は $\Quotfunctor_{\mathcal{O}_X/X/B}(T)$ の元である。
+
+\medskip\noindent
+逆に、$\Quotfunctor_{\mathcal{O}_X/X/B}(T)$ の元
+$\mathcal{O}_{X_T} \to \mathcal{Q}$ が与えられたとする。
+準連接イデアル層
+$\mathcal{I} = \Ker(\mathcal{O}_{X_T} \to \mathcal{Q})$
+に対応する閉埋め込み $i : Z \to X_T$ を考えられる
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-ideals}）。
+$Z$ の構成により $\mathcal{Q} = i_*\mathcal{O}_Z$ である。
+上の議論を逆にたどると、$Z$ が
+$\Hilbfunctor_{X/B}(T)$ の元を定めることがわかる。
+例えば $\mathcal{I}$ は有限型準連接である
+（Modules on Sites, Lemma
+\ref{sites-modules-lemma-kernel-surjection-finite-onto-finite-presentation}）。
+したがって $i : Z \to X_T$ は有限表示であり
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-closed-immersion-finite-presentation}）、
+ゆえに $Z \to T$ は有限表示である
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-composition-finite-presentation}）。
+$Z \to T$ の固有性は Derived Categories of Spaces, Section
+\ref{spaces-perfect-section-proper-over-base} の議論から従う。
+$Z \to T$ の平坦性は $\mathcal{Q}$ の $T$ 上の平坦性から従う。
+
+\medskip\noindent
+上で与えた二つの構成が互いに逆であることの
+（直ちにできる）確認は省略する。
+\end{proof}
+
+\noindent
+整合性の確認：層 $\Hilbfunctor_{X/B}$ は、
+$S$ 上の代数空間の間でも同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-hilb-to-spaces}
+状況 \ref{quot-situation-hilb} において、$T$ を $S$ 上の代数空間とする。
+このとき
+$$
+\Mor_{\Sh((\Sch/S)_{fppf})}(T, \Hilbfunctor_{X/B}) =
+\left\{
+\begin{matrix}
+(h, Z)\text{ で、}h : T \to B,\ Z \subset X_T \\
+Z\text{ は }T\text{ 上有限表示、平坦、かつ固有}
+\end{matrix}
+\right\}
+$$
+が成り立つ。ここで $X_T = X \times_{B, h} T$ である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{quot-lemma-hilb-is-quot} により
+$\Hilbfunctor_{X/B} = \Quotfunctor_{\mathcal{O}_X/X/B}$ である。
+したがって Lemma \ref{quot-lemma-extend-quot-to-spaces} を適用すると、
+左辺は、有限表示、$T$ 上平坦、かつ台が $T$ 上固有であるような全射
+$\mathcal{O}_{X_T} \to \mathcal{Q}$ の集合と全単射になる。
+Lemma \ref{quot-lemma-hilb-is-quot} の証明とまったく同じ議論により、
+このような商は、$Z \to T$ が固有、平坦、かつ有限表示となる
+閉埋め込み $Z \to X_T$ とちょうど対応する。
+\end{proof}
+
+\begin{proposition}
+\label{quot-proposition-hilb}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ が有限表示かつ分離的なら、$\Hilbfunctor_{X/B}$ は
+$B$ 上局所有限表示な代数空間である。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{quot-lemma-hilb-is-quot} と Proposition
+\ref{quot-proposition-quot} から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+\section{Picard スタック}
+\label{quot-section-picard-stack}
+
+\noindent
+代数空間の射に対する Picard スタックは Examples of Stacks,
+Section \ref{examples-stacks-section-picard-stack} で導入した。
+次の補題から、（よい場合には）これが連接層のスタックの
+開部分スタックであることを導く。
+
+\begin{lemma}
+\label{quot-lemma-picard-stack-open-in-coh}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射で、
+平坦、有限表示、かつ固有なものとする。自然な写像
+$$
+\Picardstack_{X/B} \longrightarrow \Cohstack_{X/B}
+$$
+は開埋め込みで表現可能である。
+\end{lemma}
+
+\begin{proof}
+この写像は、Examples of Stacks, Section
+\ref{examples-stacks-section-picard-stack} における三つ組
+$(T, g, \mathcal{L})$ を同じ三つ組 $(T, g, \mathcal{L})$ に送る。
+ただし後者は Situation \ref{quot-situation-coherent} で述べた種類の
+三つ組とみなす。これは次の理由で成立する。
+可逆 $\mathcal{O}_{X_T}$ 加群 $\mathcal{L}$ は確かに
+有限表示 $\mathcal{O}_{X_T}$ 加群であり、$X_T \to T$ が
+平坦なので $T$ 上平坦であり、$X_T \to T$ が固有なので
+その台は $T$ 上固有である
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-flat} および
+\ref{spaces-morphisms-lemma-base-change-proper}）。
+したがって主張には意味がある。
+
+\medskip\noindent
+以上から、補題の内容が次であることは明らかである。
+$\Cohstack_{X/B}$ の対象 $(T, g, \mathcal{F})$ が与えられたとき、
+開部分スキーム $U \subset T$ が存在し、スキームの射
+$T' \to T$ に対して次は同値である：
+\begin{enumerate}
+\item[(a)] $T' \to T$ は $U$ を経由する。
+\item[(b)] $\mathcal{F}$ の $X_{T'} \to X_T$ による引き戻し
+$\mathcal{F}_{T'}$ は可逆である。
+\end{enumerate}
+$W \subset |X_T|$ を、$\mathcal{F}$ が $x$ の近傍で
+局所自由となるような点 $x \in |X_T|$ の集合とする。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-finite-free-open} により、
+$W$ は開であり、$W$ の形成は任意の基底変換と可換である。
+明らかに、$T' \to T$ が（b）を満たすなら、
+$|X_{T'}| \to |X_T|$ の像は $W$ に含まれる。
+したがって $U$ を構成するため、$T$ を開集合
+$T \setminus f_T(|X_T| \setminus W)$ で置き換えてよい。
+この置換後、$\mathcal{F}$ は有限局所自由となる。
+この場合、開かつ閉な部分空間への非交和分解
+$X_T = X_0 \amalg X_1 \amalg X_2 \amalg \ldots$
+を得て、$\mathcal{F}$ の $X_i$ への制限は階数 $i$ の
+局所自由加群となる。このとき明らかに
+$$
+U = T \setminus f_T(|X_0| \cup |X_2| \cup |X_3| \cup \ldots )
+$$
+とすればよい。（$T$ が準コンパクトであると仮定すると、
+$X_T$ も準コンパクトなので、空でない $X_i$ は有限個しかなく、
+$U$ は実際に開であることに注意する。）
+\end{proof}
+
+\begin{proposition}
+\label{quot-proposition-pic}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ が平坦、有限表示、かつ固有なら、
+$\Picardstack_{X/B}$ は代数スタックである。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{quot-lemma-picard-stack-open-in-coh}、Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-morphism-to-algebraic}
+および Theorem \ref{quot-theorem-coherent-algebraic} または
+Theorem \ref{quot-theorem-coherent-algebraic-general}
+から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{Picard 関手}
+\label{quot-section-picard-functor}
+
+\noindent
+本節では、Picard Schemes of Curves, Section
+\ref{pic-section-picard-functor} で論じた Picard 関手を再検討する。
+Picard スタックの節と同様に、代数空間の射の Picard 関手を
+研究したいので、議論はより一般的になる。
+第 \ref{quot-section-picard-stack} 節を参照せよ。
+
+\medskip\noindent
+$S$ をスキームとし、$X$ を $S$ 上の代数空間とする。
+$X$ 上の可逆層とは、$X_\etale$ 上の可逆 $\mathcal{O}_X$ 加群である。
+Modules on Sites, Definition
+\ref{sites-modules-definition-invertible-sheaf} を参照せよ。
+可逆加群の同型類の群を $\Pic(X)$ と表す。Modules on Sites,
+Definition \ref{sites-modules-definition-pic} を参照せよ。
+$S$ 上の代数空間の射 $f : X \to Y$ が与えられると、
+引き戻しは群準同型 $\Pic(Y) \to \Pic(X)$ を定める。
+対応 $X \leadsto \Pic(X)$ は、スキームの圏から Abel 群の圏への
+反変関手である。この関手は表現可能ではないが、
+この構成の相対版は表現可能となることがある。
+
+\begin{situation}
+\label{quot-situation-pic}
+$S$ をスキームとし、$f : X \to B$ を $S$ 上の代数空間の射とする。
+$$
+\Picardfunctor_{X/B} : (\Sch/B)^{opp} \longrightarrow \textit{Sets}
+$$
+を、$B$ 上のスキーム $T$ に群 $\Pic(X_T)$ を対応させる関手の
+fppf 層化として定義する。
+\end{situation}
+
+\noindent
+状況 \ref{quot-situation-pic} では、$\Picardfunctor_{X/B}$ を、
+射 $\Picardfunctor_{X/B} \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなすことがある。
+この観点では、$\Picardfunctor_{X/B}$ を関手
+$$
+T/S \longmapsto \{(h, \mathcal{L}) \mid
+h : T \to B,\ \mathcal{L} \in \Pic(X \times_{B, h} T)\}
+$$
+の fppf 層化として定義する。特に $\Picardfunctor_{X/B}$ が
+代数空間であると言うとき、対応する関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ が代数空間であることを意味する。
+
+\medskip\noindent
+しばしば用いる注意として、$T$ が $B$ 上のスキームなら、
+$\Picardfunctor_{X_T/T}$ は $\Picardfunctor_{X/B}$ の
+$(\Sch/T)_{fppf}$ への制限である。
+
+\begin{lemma}
+\label{quot-lemma-pic-over-pic}
+状況 \ref{quot-situation-pic} において、関手
+$\Picardfunctor_{X/B}$ は関手
+$T \mapsto \Ob(\Picardstack_{X/B, T})/\cong$ の層化である。
+\end{lemma}
+
+\begin{proof}
+Picard スタック $\Picardstack_{X/B}$ の $T$ 上のファイバー圏
+$\Picardstack_{X/B, T}$ は $X_T$ 上の可逆層の圏である
+（第 \ref{quot-section-picard-stack} 節および Examples of Stacks,
+Section \ref{examples-stacks-section-picard-stack} を参照せよ）。
+したがって定義から直ちに従う。
+\end{proof}
+
+\noindent
+$B$ 上のスキーム $T$ における $\Picardfunctor_{X/B}$ の値を
+求めることは自明ではない。次の補題が役立つ。
+
+\begin{lemma}
+\label{quot-lemma-flat-geometrically-connected-fibres}
+状況 \ref{quot-situation-pic} において、$B$ 上のすべてのスキーム $T$ に対し
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ が同型なら、
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/B}(T)
+$$
+はすべての $T$ に対して完全列である。
+\end{lemma}
+
+\begin{proof}
+記法を簡単にするため、$B$ を $T$ で、$X$ を $X_T$ で置き換え、
+$B = T$ と仮定してよい。$\mathcal{N}$ を可逆
+$\mathcal{O}_B$ 加群とする。$f^*\mathcal{N} \cong \mathcal{O}_X$ なら、
+仮定により
+$f_*f^*\mathcal{N} \cong f_*\mathcal{O}_X \cong \mathcal{O}_B$ である。
+$\mathcal{N}$ は局所自明なので、標準写像
+$\mathcal{N} \to f_*f^*\mathcal{N}$ は局所的に同型である
+（仮定により $\mathcal{O}_B \to f_*f^*\mathcal{O}_B$ が
+同型だからである）。したがって
+$\mathcal{N} \to f_*f^*\mathcal{N} \to \mathcal{O}_B$ は同型であり、
+$\mathcal{N}$ は自明である。これで最初の矢印が単射であることが示された。
+
+\medskip\noindent
+$\mathcal{L}$ を、$\Pic(X) \to \Picardfunctor_{X/B}(B)$ の核に属する
+可逆 $\mathcal{O}_X$ 加群とする。このとき fppf 被覆
+$\{B_i \to B\}$ が存在し、$\mathcal{L}$ の $X_{B_i}$ への
+引き戻しは自明な可逆層となる。自明化切断 $s_i$ を選ぶ。
+このとき $\text{pr}_0^*s_i$ と $\text{pr}_1^*s_j$ はともに
+$X_{B_i \times_B B_j}$ 上の $\mathcal{L}$ の自明化切断なので、
+乗法的単元
+$$
+f_{ij} \in
+\Gamma(X_{S_i \times_B B_j}, \mathcal{O}_{X_{B_i \times_B B_j}}^*) =
+\Gamma(B_i \times_B B_j, \mathcal{O}_{B_i \times_N B_j}^*)
+$$
+だけ異なる（等号は構造層の順像に関する仮定による）。
+もちろんこれらの元は $B_i \times_B B_j \times_B B_k$ 上で
+コサイクル条件を満たすので、fppf 被覆 $\{B_i \to B\}$ に関する
+可逆層の降下データを定める。
+Descent, Proposition
+\ref{descent-proposition-fpqc-descent-quasi-coherent} により、
+$B_i$ 上の自明化をもち、付随する降下データが $\{f_{ij}\}$ である
+可逆 $\mathcal{O}_B$ 加群 $\mathcal{N}$ が存在する。
+（証明の冒頭で行った置換により $B$ はスキームなので、
+この命題を適用できる。）降下データから加群への関手は
+充満忠実なので、$f^*\mathcal{N} \cong \mathcal{L}$ である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-flat-geometrically-connected-fibres-with-section}
+状況 \ref{quot-situation-pic} において、$\sigma : B \to X$ を切断とする。
+$B$ 上のすべての $T$ に対して
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ が同型であると仮定する。
+このとき
+$$
+0 \to \Pic(T) \to \Pic(X_T) \to \Picardfunctor_{X/B}(T) \to 0
+$$
+は分裂完全列であり、分裂は
+$\sigma_T^* : \Pic(X_T) \to \Pic(T)$ によって与えられる。
+\end{lemma}
+
+\begin{proof}
+$K(T) = \Ker(\sigma_T^* : \Pic(X_T) \to \Pic(T))$ と表す。
+$\sigma$ は $f$ の切断なので、$\Pic(X_T)$ は
+$\Pic(T)$ と $K(T)$ の直和である。
+したがって Lemma \ref{quot-lemma-flat-geometrically-connected-fibres} により、
+すべての $T$ に対して
+$K(T) \subset \Picardfunctor_{X/B}(T)$ である。
+さらに構成から、$\Picardfunctor_{X/B}$ は前層 $K$ の層化である。
+証明を終えるには、$K$ が fppf 被覆に関する層条件を満たすことを
+示せば十分であり、次の段落でこれを行う。
+
+\medskip\noindent
+$\{T_i \to T\}$ を fppf 被覆とする。$\mathcal{L}_i$ を
+$K(T_i)$ の元とし、すべての $i$ と $j$ に対して
+$K(T_i \times_T T_j)$ の同じ元に写るものとする。同型
+$\alpha_i : \mathcal{O}_{T_i} \to \sigma_{T_i}^*\mathcal{L}_i$
+を各 $i$ に対して選ぶ。また同型
+$$
+\varphi_{ij} :
+\mathcal{L}_i|_{X_{T_i \times_T T_j}}
+\longrightarrow
+\mathcal{L}_j|_{X_{T_i \times_T T_j}}
+$$
+を選ぶ。写像
+$$
+\alpha_j|_{T_i \times_T T_j} \circ
+\sigma_{T_i \times_T T_j}^*\varphi_{ij} \circ
+\alpha_i|_{T_i \times_T T_j} :
+\mathcal{O}_{T_i \times_T T_j} \to \mathcal{O}_{T_i \times_T T_j}
+$$
+が $1$ 倍写像ではなくある $u_{ij}$ 倍写像なら、
+$\varphi_{ij}$ を $u_{ij}^{-1}$ 倍して修正できる。
+この修正後、自己写像
+$$
+\varphi_{ki}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{jk}|_{X_{T_i \times_T T_j \times_T T_k}} \circ
+\varphi_{ij}|_{X_{T_i \times_T T_j \times_T T_k}}
+\quad\text{on}\quad
+\mathcal{L}_i|_{X_{T_i \times_T T_j \times_T T_k}}
+$$
+を考える。これは $X_{T_i \times_T T_j \times_T T_k}$ の
+構造層のある切断 $f_{ijk}$ による乗法として与えられる。
+$\varphi_{ij}$ の選び方により、この写像の $\sigma$ による
+引き戻しは $1$ 倍写像である。$X$ 上の関数に関する仮定から
+$f_{ijk} = 1$ である。したがって fppf 被覆
+$\{X_{T_i} \to X\}$ に関する降下データを得る。
+Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+により、可逆 $\mathcal{O}_{X_T}$ 加群 $\mathcal{L}$ と同型
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$ が存在し、
+$X_{T_i}$ への引き戻しは $(\mathcal{L}_i, \alpha_i)$ を復元する
+（小さな詳細は省略する）。したがって $\mathcal{L}$ は、
+望みどおり $K(T)$ の対象を定める。
+\end{proof}
+
+\noindent
+状況 \ref{quot-situation-pic} において、$\sigma : B \to X$ を切断とする。
+$\Picardstack_{X/B, \sigma}$ を次のように定義される圏とする：
+\begin{enumerate}
+\item 対象は四つ組 $(T, h, \mathcal{L}, \alpha)$ である。ここで
+$(T, h, \mathcal{L})$ は $T$ 上の $\Picardstack_{X/B}$ の対象であり、
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$
+は同型である。
+\item 射 $(g, \varphi) : (T, h, \mathcal{L}, \alpha)
+\to (T', h', \mathcal{L}', \alpha')$
+は、$h = h' \circ g$ を満たすスキームの射 $g : T \to T'$ と、
+$\sigma_T^*\varphi \circ g^*\alpha' = \alpha$ を満たす同型
+$\varphi : (g')^*\mathcal{L}' \to \mathcal{L}$ によって与えられる。
+ここで $g' : X_{T'} \to X_T$ は $g$ の基底変換である。
+\end{enumerate}
+自然な忠実忘却関手
+$$
+\Picardstack_{X/B, \sigma} \longrightarrow
+\Picardstack_{X/B}
+$$
+がある。このようにして $\Picardstack_{X/B, \sigma}$ を
+$(\Sch/S)_{fppf}$ 上の圏とみなす。
+
+\begin{lemma}
+\label{quot-lemma-pic-with-section-stack}
+状況 \ref{quot-situation-pic} において、$\sigma : B \to X$ を切断とする。
+このとき、上で定義した $\Picardstack_{X/B, \sigma}$ は
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+Examples of Stacks, Lemma \ref{examples-stacks-lemma-picard-stack} により、
+$\Picardstack_{X/B}$ が $(\Sch/S)_{fppf}$ 上のグルーポイドの
+スタックであることはすでに分かっている。
+$\Picardstack_{X/B, \sigma}$ の対象に対する降下を示そう。
+$\{T_i \to T\}$ を fppf 被覆とし、
+$\xi_i = (T_i, h_i, \mathcal{L}_i, \alpha_i)$ を $T_i$ 上にある
+$\Picardstack_{X/B, \sigma}$ の対象とし、
+$\varphi_{ij} : \text{pr}_0^*\xi_i \to \text{pr}_1^*\xi_j$
+を降下データとする。$\Picardstack_{X/B}$ に対する結果を適用すると、
+$T$ 上の $\Picardstack_{X/B}$ の対象 $(T, h, \mathcal{L})$ であって、
+各 $i$ について $\xi_i$ に引き戻されるものがあると仮定してよい。
+このとき
+$$
+\alpha_i : \mathcal{O}_{T_i} \to \sigma_{T_i}^*\mathcal{L}_i =
+(T_i \to T)^*\sigma_T^*\mathcal{L}
+$$
+を得る。写像 $\varphi_{ij}$ は $\alpha_i$ と両立するので、
+$\alpha_i$ と $\alpha_j$ は $T_i \times_T T_j$ 上で同じ写像に
+引き戻される。準連接層の降下（Descent, Proposition
+\ref{descent-proposition-fpqc-descent-quasi-coherent}）により、
+$\alpha_i$ はすべて、望みどおり一つの写像
+$\alpha : \mathcal{O}_T \to \sigma_T^*\mathcal{L}$ の制限である。
+射に対する降下の証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-compare-pic-with-section}
+状況 \ref{quot-situation-pic} において、$\sigma : B \to X$ を切断とする。
+射 $\Picardstack_{X/B, \sigma} \to \Picardstack_{X/B}$ は
+表現可能、全射かつ滑らかである。
+\end{lemma}
+
+\begin{proof}
+$T$ をスキームとし、$(\Sch/T)_{fppf} \to \Picardstack_{X/B}$ が
+$T$ 上の $\Picardstack_{X/B}$ の対象
+$\xi = (T, h, \mathcal{L})$ によって与えられているとする。
+$$
+(\Sch/T)_{fppf} \times_{\xi, \Picardstack_{X/B}} \Picardstack_{X/B, \sigma}
+$$
+がスキーム $V$ によって表現可能で、対応する射 $V \to T$ が
+全射かつ滑らかであることを示さなければならない。Algebraic Stacks,
+Sections \ref{algebraic-section-representable-morphism},
+\ref{algebraic-section-morphisms-representable-by-algebraic-spaces}, および
+\ref{algebraic-section-representable-properties} を参照せよ。
+忘却関手 $\Picardstack_{X/B, \sigma} \to \Picardstack_{X/B}$ は
+ファイバー圏上で忠実であり、$T'/T$ に対する同型類の集合は
+同型
+$$
+\alpha' : \mathcal{O}_{T'} \longrightarrow (T' \to T)^*\sigma_T^*\mathcal{L}
+$$
+の集合である。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-criterion-map-representable-spaces-fibred-in-groupoids}
+を参照せよ。Proposition \ref{quot-proposition-isom} を
+（$\text{id} : T \to T$、$\mathcal{O}_T$、および
+$\sigma^*\mathcal{L}$ に）適用すると、この関手は $T$ 上有限表示な
+アフィンスキーム $U$ によって表現可能であることが分かる。
+$T$ 上 Zariski 局所的に議論すれば、$\sigma_T^*\mathcal{L}$ は
+$\mathcal{O}_T$ と同型であると仮定でき、このときこの関手は
+$T$ 上の $\mathbf{G}_m \times T$ によって表現される。
+したがって $U \to T$ は $T$ 上 Zariski 局所的には射影
+$\mathbf{G}_m \times T \to T$ の形をしており、これは確かに
+滑らかかつ全射である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-flat-geometrically-connected-fibres-with-section-functor-stack}
+状況 \ref{quot-situation-pic} において、$\sigma : B \to X$ を切断とする。
+$B$ 上のすべての $T$ に対して
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ が同型ならば、
+$\Picardstack_{X/B, \sigma} \to (\Sch/S)_{fppf}$
+はセトイドをファイバーとし、$T$ 上の同型類の集合は
+$$
+\coprod\nolimits_{h : T \to B}
+\Ker(\sigma_T^* : \Pic(X \times_{B, h} T) \to \Pic(T))
+$$
+で与えられる。
+\end{lemma}
+
+\begin{proof}
+$\xi = (T, h, \mathcal{L}, \alpha)$ が $T$ 上の
+$\Picardstack_{X/B, \sigma}$ の対象ならば、$\xi$ の自己同型
+$\varphi$ は $X_T$ の構造層の可逆な大域切断 $u$ による乗法で
+与えられ、さらに $\sigma_T^*u = 1$ を満たす。
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ が同型であるという
+仮定により $u = 1$ である。したがって
+$\Picardstack_{X/B, \sigma}$ は $(\Sch/S)_{fppf}$ 上で
+セトイドをファイバーとする。
+$T$ と $h : T \to B$ を与えたとき、対
+$(\mathcal{L}, \alpha)$ の同型類の集合は、
+$\sigma_T^*\mathcal{L} \cong \mathcal{O}_T$ を満たす
+$\mathcal{L}$（同型は指定しない）の同型類の集合と同じである。
+実際、$\alpha$ の任意の二つの選択は $T$ 上の大域単元だけ異なり、
+これは $X_T$ 上の大域単元と同じものだからである。
+\end{proof}
+
+\begin{proposition}
+\label{quot-proposition-pic-functor}
+$S$ をスキームとする。$f : X \to B$ を $S$ 上の代数空間の射とする。
+次を仮定する：
+\begin{enumerate}
+\item $f$ は平坦、有限表示かつ固有であり、
+\item $B$ 上のすべてのスキーム $T$ に対して
+$\mathcal{O}_T \to f_{T, *}\mathcal{O}_{X_T}$ は同型である。
+\end{enumerate}
+このとき $\Picardfunctor_{X/B}$ は代数空間である。
+\end{proposition}
+
+\noindent
+この命題の状況では、代数スタック $\Picardstack_{X/B}$ は
+代数空間 $\Picardfunctor_{X/B}$ 上のジェルブである。
+ジェルブの一般論を展開した後ならば、これによって、この命題の
+より短い証明が得られる（ただし、より一般的な理論を用いる）。
+
+\begin{proof}
+$B'$ 上の基底変換 $X' = X \times_B B'$ が切断をもつような、
+代数空間の全射、平坦、有限表示な射 $B' \to B$ が存在する。
+実際、$B' = X$ と取ればよい。
+$\Picardfunctor_{X'/B'} = B' \times_B \Picardfunctor_{X/B}$
+であることに注意する。したがって
+$\Picardfunctor_{X'/B'} \to \Picardfunctor_{X/B}$ は
+代数空間によって表現可能、全射、平坦かつ有限表示である。
+ゆえに $\Picardfunctor_{X'/B'}$ が代数空間であることを示せれば、
+Bootstrap, Theorem \ref{bootstrap-theorem-final-bootstrap} により
+$\Picardfunctor_{X/B}$ も代数空間である。このようにして、
+次の段落で述べる場合に帰着する。
+
+\medskip\noindent
+命題の仮定に加えて、切断 $\sigma : B \to X$ があると仮定する。
+Proposition \ref{quot-proposition-pic} により、$\Picardstack_{X/B}$ は
+代数スタックである。Lemma \ref{quot-lemma-compare-pic-with-section} および
+Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-morphism-to-algebraic} により、
+$\Picardstack_{X/B, \sigma}$ は代数スタックである。
+Lemma
+\ref{quot-lemma-flat-geometrically-connected-fibres-with-section-functor-stack}
+および Algebraic Stacks, Lemma
+\ref{algebraic-lemma-characterize-representable-by-space} により、
+$T \mapsto \Ker(\sigma_T^* : \Pic(X_T) \to \Pic(T))$ は
+代数空間である。Lemma
+\ref{quot-lemma-flat-geometrically-connected-fibres-with-section} により、
+この関手は $\Picardfunctor_{X/B}$ と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-diagonal-pic}
+Proposition \ref{quot-proposition-pic-functor} と同じ仮定および記法のもとで、
+対角射
+$\Picardfunctor_{X/B} \to \Picardfunctor_{X/B} \times_B \Picardfunctor_{X/B}$
+ははめ込みによって表現可能である。言い換えると、
+$\Picardfunctor_{X/B} \to B$ は局所分離的である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $B$ 上のスキームとし、
+$s, t \in \Picardfunctor_{X/B}(T)$ とする。
+$s|_Z = t|_Z$ であり、かつ射 $T' \to T$ が $Z$ を経由することと
+$s|_{T'} = t|_{T'}$ であることとが同値になるような、局所閉部分スキーム
+$Z \subset T$ が存在することを示したい。
+
+\medskip\noindent
+まず一般の問題を、$s$ と $t$ が $X_T$ 上の可逆加群から来る場合に
+帰着する。読者はこの段階を飛ばしてもよい。すべての $i$ に対して
+$s|_{T_i}$ と $t|_{T_i}$ が $\Pic(X_{T_i})$ から来るような fppf 被覆
+$\{T_i \to T\}_{i \in I}$ を選ぶ。すべての対
+$s|_{T_i}, t|_{T_i}$ に対して結果を示せると仮定する。
+すると、所望の普遍性をもつ局所閉部分スキーム $Z_i \subset T_i$ を得る。
+このとき $Z_i$ と $Z_j$ は $T_i \times_T T_j$ において同じ
+スキーム論的逆像をもつ。これは $Z_i/T_i$ 上の降下データを定める。
+$Z_i \to T_i$ は局所準有限なので、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-separated-locally-quasi-finite-morphisms-fppf-descend}
+により、基底変換によって $Z_i \to T_i$ を復元する局所準有限射
+$Z \to T$ を得る。すると Descent, Lemma
+\ref{descent-lemma-descending-fppf-property-immersion} により、
+$Z \to T$ ははめ込みである。最後に、$\Picardfunctor_{X/B}$ は
+fppf 層なので、$s|_Z = t|_Z$ であり、$Z$ は上記の普遍性を満たす。
+
+\medskip\noindent
+$s$ と $t$ が $X_T$ 上の可逆加群 $\mathcal{V}$、$\mathcal{W}$ から
+来ると仮定する。$\mathcal{L} = \mathcal{V} \otimes \mathcal{W}^{\otimes -1}$
+と置く。$T' \to T$ が $Z$ を経由することと、
+$\mathcal{L}_{X_{T'}}$ が $T'$ 上の可逆層の引き戻しであることとが
+同値になるような、$T$ の局所閉部分スキーム $Z$ を探している。
+Lemma \ref{quot-lemma-flat-geometrically-connected-fibres} を参照せよ。
+したがって $Z$ の存在は More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-diagonal-picard-flat-proper} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{相対射}
+\label{quot-section-relative-morphisms}
+
+\noindent
+Criteria for Representability, Section
+\ref{criteria-section-relative-morphisms} の議論を続ける。
+そこでは、スキーム $S$ と $S$ 上の代数空間の射
+$Z \to B$ および $X \to B$ から出発して、関手
+$$
+\mathit{Mor}_B(Z, X) : (\Sch/B)^{opp} \longrightarrow \textit{Sets}, \quad
+T \longmapsto \{f : Z_T \to X_T\}
+$$
+を構成した。$\mathit{Mor}_B(Z, X)$ を、射
+$\mathit{Mor}_B(Z, X) \to B$ を備えた関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ とみなすこともある。
+すなわち、$T$ が $S$ 上のスキームならば、
+$\mathit{Mor}_B(Z, X)(T)$ の元は対 $(f, h)$ であり、ここで
+$h$ は射 $h : T \to B$、
+$f : Z \times_{B, h} T \to X \times_{B, h} T$ は
+$T$ 上の代数空間の射である。特に、$\mathit{Mor}_B(Z, X)$ が
+代数空間であるというとき、対応する関手
+$(\Sch/S)^{opp} \to \textit{Sets}$ が代数空間であることを意味する。
+
+\begin{lemma}
+\label{quot-lemma-Mor-into-Hilb}
+$S$ をスキームとする。$S$ 上の代数空間の射
+$Z \to B$ および $X \to B$ を考える。
+$X \to B$ が分離的であり、$Z \to B$ が有限表示、平坦かつ固有ならば、
+自然な単射的関手変換
+$$
+\mathit{Mor}_B(Z, X) \longrightarrow \Hilbfunctor_{Z \times_B X/B}
+$$
+があり、射 $f : Z_T \to X_T$ をそのグラフへ写す。
+\end{lemma}
+
+\begin{proof}
+$B$ 上のスキーム $T$ と $T$ 上の射 $f_T : Z_T \to X_T$ が
+与えられたとき、$f$ のグラフは射
+$\Gamma_f = (\text{id}, f) : Z_T \to Z_T \times_T X_T = (Z \times_B X)_T$.
+である。分離的、平坦、固有、または有限表示であることは、
+基底変換で保たれる代数空間の射の性質であることを思い出そう
+（Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-separated},
+\ref{spaces-morphisms-lemma-base-change-flat},
+\ref{spaces-morphisms-lemma-base-change-proper}, および
+\ref{spaces-morphisms-lemma-base-change-finite-presentation}).
+したがって Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-semi-diagonal} により、$\Gamma_f$ は閉はめ込みである。
+さらに、$\Gamma_f(Z_T)$ は $T$ 上平坦、固有かつ有限表示である。
+ゆえに $\Gamma_f(Z_T)$ は
+$\Hilbfunctor_{Z \times_B X/B}(T)$ の元を定める。
+この変換が単射であることを示すには、同じグラフをもつ二つの射が
+等しいことを示せば十分である。実際、
+$Y \subset (Z \times_B X)_T$ が射 $f$ のグラフならば、
+$\text{pr}_1|_Y : Y \to Z_T$ の逆写像と $\text{pr}_2|_Y$ を合成して
+$f$ を復元できる。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-Mor-into-Hilb-open}
+Lemma \ref{quot-lemma-Mor-into-Hilb} と同じ仮定および記法のもとで、変換
+$\mathit{Mor}_B(Z, X) \longrightarrow \Hilbfunctor_{Z \times_B X/B}$
+は開はめ込みによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+$T$ を $B$ 上のスキームとし、$Y \subset (Z \times_B X)_T$ を
+$\Hilbfunctor_{Z \times_B X/B}(T)$ の元とする。このとき、
+$Y$ が $T$ 上の射 $Z_T \to X_T$ のグラフであることと、
+$k = \text{pr}_1|_Y : Y \to Z_T$ が同型であることとは同値である。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-where-isomorphism}
+により、任意のスキームの射 $T' \to T$ に対して、
+$k_{T'} : Y_{T'} \to Z_{T'}$ が同型であることと $T' \to T$ が
+$V$ を経由することとが同値になるような開部分スキーム
+$V \subset T$ が存在する。これで補題が証明された。
+\end{proof}
+
+\begin{proposition}
+\label{quot-proposition-Mor}
+$S$ をスキームとする。$Z \to B$ および $X \to B$ を
+$S$ 上の代数空間の射とする。$X \to B$ が有限表示かつ分離的であり、
+$Z \to B$ が有限表示、平坦かつ固有であると仮定する。
+このとき $\mathit{Mor}_B(Z, X)$ は $B$ 上局所有限表示な代数空間である。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{quot-lemma-Mor-into-Hilb-open} と
+Proposition \ref{quot-proposition-hilb} の直ちに従う帰結である。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{代数空間のスタック}
+\label{quot-section-stack-of-spaces}
+\enlargethispage{2pt}
+
+\noindent
+この節では Examples of Stacks, Sections
+\ref{examples-stacks-section-stack-of-spaces},
+\ref{examples-stacks-section-stack-of-finite-type-spaces}, および
+\ref{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}
+で始めた議論を続ける。そこでの議論を $\mathbf{Z}$ 上で行うと、
+グルーポイドのスタック
+$$
+p'_{ft} : \Spacesstack'_{ft} \longrightarrow \Sch_{fppf}
+$$
+があり、有限型代数空間の（平坦とは限らない）族をパラメータ付けることが
+分かる。より正確には、$\Spacesstack'_{ft}$ の対象\footnote{常に
+Examples of Stacks, Lemma \ref{examples-stacks-lemma-stack-ft-spaces}
+におけるような置換を行う。}は、代数空間 $X$ からスキーム $S$ への
+有限型射 $X \to S$ である。また射
+$(X' \to S') \to (X \to S)$ は対 $(f, g)$ によって与えられる。
+ここで $f : X' \to X$ は代数空間の射、$g : S' \to S$ は
+スキームの射であり、これらは可換図式
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+に収まり、同型 $X' \to S' \times_S X$ を誘導する。言い換えると、
+この図式は代数空間の圏において Cartesian である。
+関手 $p'_{ft}$ は $(X \to S)$ を $S$ へ、$(f, g)$ を $g$ へ写す。
+充満部分圏
+$$
+\Spacesstack'_{fp, flat, proper} \subset
+\Spacesstack'_{ft}
+$$
+を、$X \to S$ が有限表示、平坦かつ固有であるような
+$\Spacesstack'_{ft}$ の対象 $X \to S$ からなるものとして定義する。
+$$
+p'_{fp, flat, proper} :
+\Spacesstack'_{fp, flat, proper}
+\longrightarrow
+\Sch_{fppf}
+$$
+を、関手 $p'_{ft}$ のこの部分圏への制限と表す。
+まず上に挙げた文献ですでに得られた結果を復習し、その後で
+さらに結果を加えていく。
+
+\begin{lemma}
+\label{quot-lemma-spaces-fibred-in-groupoids}
+圏 $\Spacesstack'_{ft}$ は $\Sch_{fppf}$ 上でグルーポイドを
+ファイバーとする。$\Spacesstack'_{fp, flat, proper}$ についても同様である。
+\end{lemma}
+
+\begin{proof}
+これは $\Spacesstack'_{ft}$ の場合について Examples of Stacks, Section
+\ref{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}
+ですでに見たことであり、そこからもう一方の場合も容易に従う。
+しかし Categories, Definition \ref{categories-definition-fibred-groupoids}
+の条件 (1) と (2) を確認して、直接にも証明しておこう。
+
+\medskip\noindent
+条件 (1)。$X \to S$ を $\Spacesstack'_{ft}$ の対象とし、
+$S' \to S$ をスキームの射とする。このとき
+$X' = S' \times_S X$ と置く。Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-finite-type}.
+により $X' \to S'$ は有限型であることに注意する。これにより、
+$S' \to S$ 上にある射 $(X' \to S') \to (X \to S)$ を得る。
+もう一方の場合も Morphisms of Spaces, Lemmas
+\ref{spaces-morphisms-lemma-base-change-finite-presentation},
+\ref{spaces-morphisms-lemma-base-change-flat}, および
+\ref{spaces-morphisms-lemma-base-change-proper} を用いて同様に論じる。
+
+\medskip\noindent
+条件 (2)。$\Spacesstack'_{ft}$ の射
+$(f, g) : (X' \to S') \to (X \to S)$ および
+$(a, b) : (Y \to T) \to (X \to S)$
+を考える。$g \circ h = b$ を満たす射 $h : T \to S'$ が与えられたとき、
+$\Spacesstack'_{ft}$ の射 $(k, h) : (Y \to T) \to (X' \to S')$ であって
+$(f, g) \circ (k, h) = (a, b)$.
+を満たすものが一意に存在することを示さなければならない。
+これは $X' = S' \times_S X$ であることから明らかである。
+したがって、(1) を満たす $\Spacesstack'_{ft}$ の任意の充満部分圏に
+対しても同じ議論が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-spaces-diagonal}
+対角射
+$$
+\Delta : \Spacesstack'_{fp, flat, proper} \longrightarrow
+\Spacesstack'_{fp, flat, proper} \times \Spacesstack'_{fp, flat, proper}
+$$
+は代数空間によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+Algebraic Stacks, Lemma \ref{algebraic-lemma-representable-diagonal}
+の判定条件 (2) を用いる。$S$ をスキームとし、$X$ と $Y$ を
+$S$ 上有限表示、$S$ 上平坦かつ $S$ 上固有な代数空間とする。関手
+$$
+\mathit{Isom}_S(X, Y) : (\Sch/S)_{fppf} \longrightarrow \textit{Sets}, \quad
+T \longmapsto \{f : X_T \to Y_T \text{ isomorphism}\}
+$$
+が代数空間であることを示さなければならない。初等的な議論により、
+$\mathit{Isom}_S(X, Y)$ はファイバー積図式
+$$
+\xymatrix{
+\mathit{Isom}_S(X, Y) \ar[r] \ar[d] & S \ar[d]_{(\text{id}, \text{id})} \\
+\mathit{Mor}_S(X, Y) \times \mathit{Mor}_S(Y, X) \ar[r] &
+\mathit{Mor}_S(X, X) \times \mathit{Mor}_S(Y, Y)
+}
+$$
+に入る。下の矢印は $(\varphi, \psi)$ を
+$(\psi \circ \varphi, \varphi \circ \psi)$ へ写す。
+Proposition \ref{quot-proposition-Mor} により、下段の関手は $S$ 上の
+代数空間である。したがって、$S$ 上の代数空間の圏がファイバー積を
+もつことから結果が従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-spaces-stack}
+圏 $\Spacesstack'_{ft}$ は $\Sch_{fppf}$ 上のグルーポイドの
+スタックである。$\Spacesstack'_{fp, flat, proper}$ についても同様である。
+\end{lemma}
+
+\begin{proof}
+この補題が成り立つ理由は、「代数空間に対する任意の fppf 降下データは
+有効である」という標語である。Bootstrap, Section
+\ref{bootstrap-section-applications} を参照せよ。より正確には、
+$\Spacesstack'_{ft}$ に対する補題は Examples of Stacks, Lemma
+\ref{examples-stacks-lemma-stack-of-finite-type-spaces}
+から従う。これは Examples of Stacks, Section
+\ref{examples-stacks-section-stack-in-groupoids-of-finite-type-spaces}
+で見たとおりである。しかし証明を復習しておこう。
+Stacks, Definition \ref{stacks-definition-stack-in-groupoids}
+の条件 (1)、(2)、(3) を確認する必要がある。
+
+\medskip\noindent
+性質 (1) は Lemma \ref{quot-lemma-spaces-fibred-in-groupoids} で見た。
+
+\medskip\noindent
+性質 (2) は $\Spacesstack'_{fp, flat, proper}$ の場合には
+Lemma \ref{quot-lemma-spaces-diagonal} から従う。
+$\Spacesstack'_{ft}$ の場合には Examples of Stacks, Lemma
+\ref{examples-stacks-lemma-pre-stack-of-spaces}
+から従う（実際、これが「正しい」参照先である）。
+
+\medskip\noindent
+$\Spacesstack'_{ft}$ に対する条件 (3) は次のように確認する。次が
+与えられているとする：
+\begin{enumerate}
+\item $\Sch_{fppf}$ における fppf 被覆 $\{U_i \to U\}_{i \in I}$、
+\item 各 $i \in I$ に対して、$U_i$ 上有限型な代数空間 $X_i$、および
+\item 各 $i, j \in I$ に対して、$U_i \times_U U_j$ 上の代数空間の同型
+$\varphi_{ij} : X_i \times_U U_j \to U_i \times_U X_j$ であって、
+$U_i \times_U U_j \times_U U_k$ 上でコサイクル条件を満たすもの。
+\end{enumerate}
+同型 $\varphi_{ij}$ を復元する、$U$ 上有限型な代数空間 $X$ と
+$U_i$ 上の同型 $X_{U_i} \cong X_i$ が存在することを示さなければならない。
+これは Bootstrap, Lemma \ref{bootstrap-lemma-descend-algebraic-space}
+の (2) から従う。Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-finite-type}
+により、$X \to U$ は有限型である。
+$\Spacesstack'_{fp, flat, proper}$ の場合には、最後の段階でさらに
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-finite-presentation},
+\ref{spaces-descent-lemma-descending-property-flat}, および
+\ref{spaces-descent-lemma-descending-property-proper}
+を用いる。
+\end{proof}
+
+\noindent
+整合性の確認：スタック $\Spacesstack'_{ft}$ と
+$\Spacesstack'_{fp, flat, proper}$ は、代数空間の間で同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-spaces-to-spaces}
+$T$ を $\mathbf{Z}$ 上の代数空間とする。対応する代数スタックを
+$\mathcal{S}_T$ と表す（Algebraic Stacks, Sections
+\ref{algebraic-section-split},
+\ref{algebraic-section-representable-by-algebraic-spaces}, および
+\ref{algebraic-section-stacks-spaces}).
+圏同値
+$$
+\left\{
+\begin{matrix}
+\text{代数空間の射 }\\
+X \to T\text{ で有限型なもの}
+\end{matrix}
+\right\}
+\longrightarrow
+\Mor_{\textit{Cat}/\Sch_{fppf}}(\mathcal{S}_T, \Spacesstack'_{ft})
+$$
+および圏同値
+$$
+\left\{
+\begin{matrix}
+\text{代数空間の射 }X \to T\text{ で}\\
+\text{有限表示、平坦かつ固有なもの}
+\end{matrix}
+\right\}
+\longrightarrow
+\Mor_{\textit{Cat}/\Sch_{fppf}}(\mathcal{S}_T,
+\Spacesstack'_{fp, flat, proper})
+$$
+\end{lemma}
+
+\begin{proof}
+この補題を、スキームについて成り立つという事実（本質的には
+スタックの構成による）と、代数空間上の代数空間に対する fppf 降下データが
+有効であるという事実から導く。読者には証明を飛ばすことを強く勧める。
+
+\medskip\noindent
+どちらの矢印についても、左から右への構成は直接的である。
+有限型な $X \to T$ が与えられたとき、関手
+$\mathcal{S}_T \to  \Spacesstack'_{ft}$ は $U/T$ に基底変換
+$X_U \to U$ を対応させる。擬逆の構成を説明しよう。
+
+\medskip\noindent
+$T$ がスキームならば、$2$-Yoneda の補題により擬逆がある。
+Categories, Lemma \ref{categories-lemma-yoneda-2category} を参照せよ。
+$U$ がスキームであるような全射 \'etale 射 $p : U \to T$ を取る。
+$R = U \times_T U$ とし、その射影を $s, t : R \to U$ とする。
+射
+$$
+\xymatrix{
+\mathcal{S}_{U \times_T U \times_T U} \ar@<2ex>[r] \ar[r] \ar@<-2ex>[r] &
+\mathcal{S}_R \ar@<1ex>[r] \ar@<-1ex>[r] &
+\mathcal{S}_U \ar[r] &
+\mathcal{S}_T
+}
+$$
+が得られ、それらが種々の両立条件を（厳密に）満たすことに注意する。
+
+\medskip\noindent
+$G : \mathcal{S}_T \to \Spacesstack'_{ft}$ を $\Sch_{fppf}$ 上の関手とする。
+上に表示した写像を介した $G$ の $\mathcal{S}_U$ への制限は、
+$2$-Yoneda の補題により、代数空間の有限型射 $X_U \to U$ に対応する。
+$p \circ s = p \circ t$ なので、$R \times_{s, U} X_U$ と
+$R \times_{t, U} X_U$ はともに $G$ の $\mathcal{S}_R$ への制限に対応する。
+したがって $R$ 上の標準的な同型
+$\varphi : X_U \times_{U, t} R \to R \times_{s, U} X_U$ を得る。
+上の図式の種々の両立性により、この同型はコサイクル条件を満たす。
+こうして降下データを得るが、これは Bootstrap, Lemma
+\ref{bootstrap-lemma-descend-algebraic-space} の (2) により有効である。
+言い換えると、右辺の圏の対象 $X \to T$ を得る。
+構成 $G \leadsto X$ が関手的であり、もう一方の構成の擬逆であることの
+確認は省略する。$\Spacesstack'_{fp, flat, proper}$ の場合には、
+最後の段階でさらに Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-finite-presentation},
+\ref{spaces-descent-lemma-descending-property-flat}, および
+\ref{spaces-descent-lemma-descending-property-proper}
+を用いて、$X \to T$ が有限表示、平坦かつ固有であることを確認する。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-spaces-base-change}
+$B$ を $\Spec(\mathbf{Z})$ 上の代数空間とする。
+$B\textit{-Spaces}'_{ft}$ を、対 $(X \to S, h : S \to B)$ からなる
+圏とする。ここで $X \to S$ は $\Spacesstack'_{ft}$ の対象であり、
+$h : S \to B$ は射である。$B\textit{-Spaces}'_{ft}$ における射
+$(X' \to S', h') \to (X \to S, h)$ は、$h \circ g = h'$ を満たす
+$\Spacesstack'_{ft}$ の射 $(f, g)$ である。この状況で図式
+$$
+\xymatrix{
+B\textit{-Spaces}'_{ft} \ar[r] \ar[d] & \Spacesstack'_{ft} \ar[d] \\
+(\Sch/B)_{fppf} \ar[r] & \Sch_{fppf}
+}
+$$
+は $2$-ファイバー積の正方形である。この自明な注意は、絶対的な場合
+$\Spacesstack'_{ft}$ から、与えられた基底代数空間上の族の場合へ
+結果を移す際にときどき有用である。もちろん、同様の構成が
+$B\textit{-Spaces}'_{fp, flat, proper}$ に対しても成り立つ。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-spaces-limits}
+スタック
+$p'_{fp, flat, proper} :
+\Spacesstack'_{fp, flat, proper} \to \Sch_{fppf}$ は極限を保つ
+（Artin's Axioms, Definition \ref{artin-definition-limit-preserving}）。
+\end{lemma}
+
+\begin{proof}
+$T = \lim T_i$ をアフィンスキームの有向逆系の極限とする。
+Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-descend-finite-presentation}
+により、$T$ 上有限表示な代数空間の圏は、$T_i$ 上有限表示な
+代数空間の圏の余極限である。証明を完了するには、平坦性と固有性が
+極限を通じて降下することを用いる。Limits of Spaces, Lemmas
+\ref{spaces-limits-lemma-descend-flat} および
+\ref{spaces-limits-lemma-eventually-proper} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-spaces-RS-star}
+図式
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+をスキームの圏における押し出しとし、$T \to T'$ は肥厚、
+$T \to S$ はアフィンであるとする。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を参照せよ。
+このときファイバー圏上の関手
+$$
+\begin{matrix}
+\Spacesstack'_{fp, flat, proper, S'} \\
+\downarrow \\
+\Spacesstack'_{fp, flat, proper, S}
+\times_{\Spacesstack'_{fp, flat, proper, T}}
+\Spacesstack'_{fp, flat, proper, T'}
+\end{matrix}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+条件のリストから「固有」を除き、「有限表示」を「局所有限表示」に
+置き換えれば、この関手は圏同値である。Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-pushout-flat}.
+を参照せよ。したがって、平坦かつ局所有限表示な、代数空間から $S'$ への射
+$X' \to S'$ が与えられたとき、$X' \to S'$ が固有であることと、
+$S \times_{S'} X' \to S$ および $T' \times_{S'} X' \to T'$ が
+固有であることとが同値であることを示せば十分である。
+一方の含意は、固有性が基底変換で保たれること
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-base-change-proper}）から従い、もう一方は
+$S \times_{S'} X' \to S$ の固有性が $X' \to S'$ の固有性を導くこと
+（More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thicken-property-morphisms-cartesian}）から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-spaces-tangent-space}
+$k$ を体とし、$x = (X \to \Spec(k))$ を $\Spec(k)$ 上の
+$\mathcal{X} = \Spacesstack'_{fp, flat, proper}$ の対象とする。
+\begin{enumerate}
+\item $k$ が $\mathbf{Z}$ 上有限型ならば、ベクトル空間
+$T\mathcal{F}_{\mathcal{X}, k, x}$ および
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x})$
+（Artin's Axioms, Section \ref{artin-section-tangent-spaces} を参照）は
+有限次元であり、
+\item 一般に、ベクトル空間 $T_x(k)$ および $\text{Inf}_x(k)$
+（Artin's Axioms, Section \ref{artin-section-inf} を参照）は有限次元である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Artin's Axioms, Section \ref{artin-section-tangent-spaces} の議論は、
+基底スキーム $\Spec(\mathbf{Z})$ 上有限型な体にしか適用できない。
+Lemma \ref{quot-lemma-spaces-RS-star} により、このスタックは (RS*) を満たすので、
+Artin's Axioms, Lemma \ref{artin-lemma-properties-lift-RS-star} を適用して、
+(2) で述べたベクトル空間 $T_x(k)$ と $\text{Inf}_x(k)$ を得られる。
+さらに有限型の場合、Artin's Axioms, Remark
+\ref{artin-remark-compare-deformation-spaces} により、これらの空間は
+(1) で述べたものと一致する。これを済ませたので証明を始められる。
+一次肥厚
+$\Spec(k) \to \Spec(k[\epsilon]) = \Spec(k[k])$
+の余法加群は $k$ であることに注意する。したがって、$X$ の無限小変形と
+$X$ の無限小自己同型を記述する Deformation Theory, Lemma
+\ref{defos-lemma-deform-spaces} の公式は
+$$
+T_x(k) = \Ext^1_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)
+\quad\text{and}\quad
+\text{Inf}_x(k) = \Ext^0_{\mathcal{O}_X}(\NL_{X/k}, \mathcal{O}_X)
+$$
+となる。More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-netherlander-fp}
+と $X$ が Noether 的であることから、$\NL_{X/k}$ のコホモロジー層は
+連接であり、次数 $0$ と $-1$ を除いて零である。
+Derived Categories of Spaces, Lemma \ref{spaces-perfect-lemma-ext-finite}
+により、表示した $\Ext$ 群は有限次元 $k$-ベクトル空間である。
+これで証明が完了する。
+\end{proof}
+
+\noindent
+次の補題で証明する versal 性の開性には少し奇妙な点があることに注意せよ。
+このスタックは形式的有効性を満たさないからである。Examples, Section
+\ref{examples-section-proper-spaces-not-algebraic} を参照せよ。
+後に、形式的有効性を満たす $\Spacesstack'_{fp, flat, proper}$ の適切な
+部分スタックに versal 性の開性を適用し、それらが代数的であると結論する。
+
+\begin{lemma}
+\label{quot-lemma-spaces-defo-thy}
+グルーポイドのスタック $\mathcal{X} = \Spacesstack'_{fp, flat, proper}$ は
+$\Spec(\mathbf{Z})$ 上で versal 性の開性を満たす。
+同様に、基底変換後（Remark \ref{quot-remark-spaces-base-change}）、
+任意の Noether 基底スキーム $S$ 上で versal 性の開性が成り立つ。
+\end{lemma}
+
+\begin{proof}
+この事実の「通常の」証明については、この証明に続く注意の議論を参照せよ。
+ここでは Artin's Axioms, Lemma
+\ref{artin-lemma-SGE-implies-openness-versality} を用いて証明する。
+$\mathcal{X}$ が代数空間によって表現可能な対角射をもち、(RS*) を満たし、
+極限を保つことはすでに見た。Lemmas \ref{quot-lemma-spaces-diagonal},
+\ref{quot-lemma-spaces-RS-star}, および \ref{quot-lemma-spaces-limits} を参照せよ。
+したがって、Artin's Axioms, Lemma
+\ref{artin-lemma-SGE-implies-openness-versality} で定式化された
+強い形式的有効性を $\mathcal{X}$ が満たすことだけを確認すればよい。
+
+\medskip\noindent
+$(R_n)$ を環の逆系とし、すべての $n \geq m$ に対して
+$R_n \to R_m$ は平方零の核をもつ全射であるとする。
+$X_n$ が代数空間であるような有限表示、平坦、固有な射
+$X_n \to \Spec(R_n)$ と、$\Spec(R_{n + 1})$ 上の射
+$X_{n + 1} \to X_n$ であって同型
+$X_n = X_{n + 1} \times_{\Spec(R_{n + 1})} \Spec(R_n)$ を誘導するものを取る。
+すべての $n$ に対して $X_n$ が $X$ の基底変換となるような、
+代数空間を始域とする平坦、固有、有限表示な射
+$X \to \Spec(\lim R_n)$ を見つけなければならない。
+
+\medskip\noindent
+ $I_n = \Ker(R_n \to R_1)$ と置く。
+$(X_1 \subset X_n) \to (\Spec(R_1) \subset \Spec(R_n))$
+を一次肥厚の射とみなせる。（先に More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-thickenings}
+にある代数空間の肥厚に関する内容をいくらか読んでから先へ進まれたい。）
+$X_n$ の構造層は、$0 \to I_n \to R_n \to R_1$ 上の拡大
+$$
+0 \to \mathcal{O}_{X_1} \otimes_{R_1} I_n \to
+\mathcal{O}_{X_n} \to \mathcal{O}_{X_1} \to 0
+$$
+である。More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-deform}.
+を参照せよ。$0 \to \lim I_n \to \lim R_n \to R_1 \to 0$ 上の拡大
+$$
+0 \to \lim \mathcal{O}_{X_1} \otimes_{R_1} I_n \to
+\lim \mathcal{O}_{X_n} \to \mathcal{O}_{X_1} \to 0
+$$
+を考えよう。Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-Rlim-quasi-coherent}.
+により、核の系の $R^1\lim$ は零なので、表示した列は完全である。
+写像
+$$
+\mathcal{O}_{X_1} \otimes_{R_1} \lim I_n \longrightarrow
+\lim \mathcal{O}_{X_1} \otimes_{R_1} I_n
+$$
+は、関手 $DQ_X$ を適用すると同型を誘導することに注意する。
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-pullback-and-limits}.
+を参照せよ。したがって、Deformation Theory, Lemma
+\ref{defos-lemma-thickening-over-thickening-space-quasi-coherent}
+の圏同値により、$0 \to \lim I_n \to \lim R_n \to R_1 \to 0$ 上の
+一意な拡大
+$$
+0 \to \mathcal{O}_{X_1} \otimes_{R_1} \lim I_n \to
+\mathcal{O}' \to \mathcal{O}_{X_1} \to 0
+$$
+を得る。More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-first-order-thickening}.
+により、層 $\mathcal{O}'$ は $\Spec(R_1) \subset \Spec(\lim R_n)$ 上の
+代数空間の一次肥厚 $X_1 \subset X$ を定める。
+すでに用いた More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-deform}.
+により $X \to \Spec(\lim R_n)$ は平坦であることに注意する。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-deform-property}
+により、$X \to \Spec(\lim R_n)$ は固有かつ有限表示である。
+これで証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-spaces-defo-thy}
+Lemma \ref{quot-lemma-spaces-defo-thy} は、Artin's Axioms, Lemma
+\ref{artin-lemma-dual-openness}（Lemma \ref{quot-lemma-coherent-defo-thy}
+の第一の証明と同様）を用いても、Artin's Axioms, Lemma
+\ref{artin-lemma-get-openness-obstruction-theory} におけるような障害理論
+（Lemma \ref{quot-lemma-coherent-defo-thy} の第二の証明と同様）を用いても
+示せる。どちらの場合も、Cotangent, Section
+\ref{cotangent-section-deformations-ringed-topoi} で展開された変形・障害理論を
+用いて、変形と障害に必要な性質を $\Ext$ 群へ翻訳し、そこへ
+Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-compute-ext} を適用する。
+第二の方法（障害理論を、したがって完全な余接複体を用いる方法）は、
+おそらくほとんどの文献で用いられる「標準的」な方法である。
+\end{remark}
+
+
+
+
+
+\section{偏極付き固有スキームのスタック}
+\label{quot-section-polarized}
+
+\noindent
+偏極付き固有スキームのスタックを研究するには、$\mathbf{Z}$ 上で
+議論すれば十分である。後で望む任意のスキームまたは代数空間へ
+引き戻せるからである（Remark \ref{quot-remark-polarized-base-change} を参照）。
+
+\begin{situation}
+\label{quot-situation-polarized}
+圏 $\Polarizedstack$ を次のように定義する。対象は対
+$(X \to S, \mathcal{L})$ であり、ここで
+\begin{enumerate}
+\item $X \to S$ は固有、平坦かつ有限表示なスキームの射であり、
+\item $\mathcal{L}$ は $X/S$ 上相対的に豊富な可逆
+$\mathcal{O}_X$ 加群である
+（Morphisms, Definition \ref{morphisms-definition-relatively-ample}）。
+\end{enumerate}
+対象の間の射 $(X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$ は
+三つ組 $(f, g, \varphi)$ によって与えられる。ここで
+$f : X' \to X$ と $g : S' \to S$ は可換図式
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+に収まるスキームの射であり、同型 $X' \to S' \times_S X$ を誘導する。
+言い換えると、この図式は Cartesian である。また
+$\varphi : f^*\mathcal{L} \to \mathcal{L}'$ は同型である。
+合成は明らかな仕方で定義する（Examples of Stacks, Sections
+\ref{examples-stacks-section-stack-of-spaces} および
+\ref{examples-stacks-section-stack-of-quasi-coherent-sheaves} を参照）。
+忘却関手
+$$
+p : \Polarizedstack \longrightarrow \Sch_{fppf},\quad
+(X \to S, \mathcal{L}) \longmapsto S
+$$
+によって $\Polarizedstack$ を $\Sch_{fppf}$ 上の圏とみなす
+（記法については Section \ref{quot-section-conventions} を参照）。
+\end{situation}
+
+\noindent
+前節では、有限表示、平坦、固有な代数空間のスタック
+$\Spacesstack'_{fp, flat, proper}$ について相当量の作業を行った。
+この内容を利用するため、忘却関手
+\begin{equation}
+\label{quot-equation-over-proper-spaces}
+\Polarizedstack \longrightarrow
+\Spacesstack'_{fp, flat, proper},\quad
+(X \to S, \mathcal{L}) \longmapsto (X \to S)
+\end{equation}
+を考える。この関手は以下で有用な道具となる。
+$(X \to S)$ が (\ref{quot-equation-over-proper-spaces}) の本質的像に属するならば、
+$X$ と $S$ はスキームであることに注意する。
+
+\begin{lemma}
+\label{quot-lemma-polarized-fibred-in-groupoids}
+圏 $\Polarizedstack$ は $\Spacesstack'_{fp, flat, proper}$ 上で
+グルーポイドをファイバーとする。
+圏 $\Polarizedstack$ は $\Sch_{fppf}$ 上でグルーポイドをファイバーとする。
+\end{lemma}
+
+\begin{proof}
+Categories, Definition \ref{categories-definition-fibred-groupoids}
+の条件 (1) と (2) を確認する。
+
+\medskip\noindent
+条件 (1)。$(X \to S, \mathcal{L})$ を $\Polarizedstack$ の対象とし、
+$(X' \to S') \to (X \to S)$ を
+$\Spacesstack'_{fp, flat, proper}$ の射とする。
+$\mathcal{L}'$ を $\mathcal{L}$ の $X'$ への引き戻しとする。
+$X, S, S'$ はスキームなので、$X'$ も（スキームのファイバー積として）
+スキームであることに注意する。このとき Morphisms, Lemma
+\ref{morphisms-lemma-ample-base-change} により、$\mathcal{L}'$ は
+$X'/S'$ 上豊富である。このようにして、
+$(X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$
+という、$(X' \to S') \to (X \to S)$ 上にある射を得る。
+
+\medskip\noindent
+条件 (2)。$\Polarizedstack$ の射
+$(f, g, \varphi) : (X' \to S', \mathcal{L}') \to (X \to S, \mathcal{L})$ および
+$(a, b, \psi) : (Y \to T, \mathcal{N}) \to (X \to S, \mathcal{L})$
+を考える。$\Spacesstack'_{fp, flat, proper}$ の射
+$(k, h) : (Y \to T) \to (X' \to S')$ で
+$(f, g) \circ (k, h) = (a, b)$ を満たすものが与えられたとき、
+$\Polarizedstack$ の一意な射
+$(k, h, \chi) : (Y \to T, \mathcal{N}) \to (X' \to S', \mathcal{L}')$
+$(f, g, \varphi) \circ (k, h, \chi) = (a, b, \psi)$.
+が存在することを示さなければならない。単に
+$$
+\chi = \psi \circ (k^*\varphi)^{-1}
+$$
+と取ればよい。これで条件 (2) が証明された。ファイバー圏を定める関手の
+合成はファイバー圏を定める。Categories, Lemma
+\ref{categories-lemma-fibred-over-fibred} を参照せよ。
+これにより、$\Polarizedstack$ は $\Sch_{fppf}$ 上でグルーポイドを
+ファイバーとすることが分かる（厳密には、ファイバー圏がグルーポイドで
+あることを確認し、Categories, Lemma
+\ref{categories-lemma-fibred-groupoids} を適用すべきである）。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-stack}
+圏 $\Polarizedstack$ は $\Spacesstack'_{fp, flat, proper}$ 上の
+グルーポイドのスタックである（継承された位相を入れる。
+Stacks, Definition \ref{stacks-definition-topology-inherited} を参照）。
+圏 $\Polarizedstack$ は $\Sch_{fppf}$ 上のグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+Stacks, Definition \ref{stacks-definition-stack-in-groupoids} の条件
+(1)、(2)、(3) を確認して、$\Polarizedstack$ が
+$\Spacesstack'_{fp, flat, proper}$ 上のグルーポイドのスタックであることを
+証明する。(1) は Lemma \ref{quot-lemma-polarized-fibred-in-groupoids}
+ですでに見た。
+
+\medskip\noindent
+$\Spacesstack'_{fp, flat, proper}$ の被覆は次のように生じる。
+$X \to S$ を $\Spacesstack'_{fp, flat, proper}$ の対象とする。
+$\{S_i \to S\}_{i \in I}$ を $\Sch_{fppf}$ の被覆と仮定する。
+$X_i = S_i \times_S X$ と置く。このとき
+$\{(X_i \to S_i) \to (X \to S)\}_{i \in I}$ は
+$\Spacesstack'_{fp, flat, proper}$ の被覆であり、
+$\Spacesstack'_{fp, flat, proper}$ の任意の被覆は
+この形のものと同型である。$S_{ij} = S_i \times_S S_j$ および
+$X_{ij} = S_{ij} \times_S X$ と置くと、
+$(X_{ij} \to S_{ij}) =
+(X_i \to S_i) \times_{(X \to S)} (X_j \to S_j)$ である。
+次に $\mathcal{L}, \mathcal{N}$ を $X/S$ 上の豊富な可逆層とし、
+$(X \to S, \mathcal{L})$ と $(X \to S, \mathcal{N})$ を
+対象 $(X \to S)$ 上の $\Polarizedstack$ の二つの対象とする。
+射に対する降下を確認するため、
+$(X_i \to S_i, \mathcal{L}|_{X_i})$ から
+$(X_i \to S_i, \mathcal{N}|_{X_i})$ への射
+$(\text{id}, \text{id}, \varphi_i)$ があり、その基底変換である
+$(X_{ij} \to S_{ij}, \mathcal{L}|_{X_{ij}})$ から
+$(X_{ij} \to S_{ij}, \mathcal{N}|_{X_{ij}})$ への射
+という射が一致すると仮定する。このとき
+$\varphi_i : \mathcal{L}|_{X_i} \to \mathcal{N}|_{X_i}$ は
+$X_i$ 上の可逆加群の同型であり、$\varphi_i$ と $\varphi_j$ は
+$X_{ij}$ 上の同じ同型へ制限される。準連接層の降下
+（Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent})
+により、$X_i$ への制限が $\varphi_i$ を復元する一意な同型
+$\varphi : \mathcal{L} \to \mathcal{N}$ を得る。
+
+\medskip\noindent
+対象に対する降下もまったく同じ方法で証明される。すなわち、上のような
+$\{(X_i \to S_i) \to (X \to S)\}_{i \in I}$
+が $\Spacesstack'_{fp, flat, proper}$ の被覆であると仮定する。
+$(X_i \to S_i)$ 上にある $\Polarizedstack$ の対象
+$(X_i \to S_i, \mathcal{L}_i)$ と降下データ
+$$
+(\text{id}, \text{id}, \varphi_{ij}) :
+(X_{ij} \to S_{ij}, \mathcal{L}_i|_{X_{ij}})
+\to
+(X_{ij} \to S_{ij}, \mathcal{L}_j|_{X_{ij}})
+$$
+があり、指標の任意の三つ組に対して $(X_{ijk} \to S_{ijk})$ 上で
+明らかなコサイクル条件を満たすとする。このとき準連接層の降下
+（Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent})
+により、一意な可逆 $\mathcal{O}_X$ 加群 $\mathcal{L}$ と、
+降下データ $\varphi_{ij}$ を復元する同型
+$\mathcal{L}|_{X_i} \to \mathcal{L}_i$ を得る。
+$(X \to S, \mathcal{L})$ が $\Polarizedstack$ の対象であることを
+示すには、$\mathcal{L}$ が豊富であることを証明しなければならない。
+これは Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-ample} から従う。
+
+\medskip\noindent
+$\Spacesstack'_{fp, flat, proper}$ が $\Sch_{fppf}$ 上のグルーポイドの
+スタックであることはすでに見たので（Lemma \ref{quot-lemma-spaces-stack}）、
+$\Polarizedstack$ が $\Sch_{fppf}$ 上のグルーポイドのスタックであることが
+形式的に従う。Stacks, Lemma \ref{stacks-lemma-stack-over-stack} を参照せよ。
+\end{proof}
+
+\noindent
+整合性の確認：スタック $\Polarizedstack$ は代数空間の間で同じ役割を果たす。
+
+\begin{lemma}
+\label{quot-lemma-extend-polarized-to-spaces}
+$T$ を $\mathbf{Z}$ 上の代数空間とする。対応する代数スタックを
+$\mathcal{S}_T$ と表す（Algebraic Stacks, Sections
+\ref{algebraic-section-split},
+\ref{algebraic-section-representable-by-algebraic-spaces}, および
+\ref{algebraic-section-stacks-spaces}).
+圏同値
+$$
+\left\{
+\begin{matrix}
+(X \to T, \mathcal{L})\text{ で、}X \to T\text{ が代数空間の射、}\\
+\text{固有、平坦かつ有限表示であり、}\\
+\mathcal{L}\text{ が }X/T\text{ 上豊富であるもの}
+\end{matrix}
+\right\}
+\!\!\longrightarrow\!\!
+\Mor_{\textit{Cat}/\Sch_{fppf}}(\mathcal{S}_T, \Polarizedstack)
+$$
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：Lemma \ref{quot-lemma-extend-spaces-to-spaces} の証明と
+まったく同様に論じ、Descent on Spaces, Proposition
+\ref{spaces-descent-proposition-fpqc-descent-quasi-coherent}
+を用いて、擬逆関手の構成における可逆層を降下させる。
+相対的豊富性は Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-descending-property-ample} により降下する。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-polarized-base-change}
+$B$ を $\Spec(\mathbf{Z})$ 上の代数空間とする。
+$B\textit{-Polarized}$ を、三つ組
+$(X \to S, \mathcal{L}, h : S \to B)$ からなる圏とする。ここで
+$(X \to S, \mathcal{L})$ は $\Polarizedstack$ の対象であり、
+$h : S \to B$ は射である。$B\textit{-Polarized}$ における射
+$(X' \to S', \mathcal{L}', h') \to (X \to S, \mathcal{L}, h)$ は、
+$h \circ g = h'$ を満たす $\Polarizedstack$ の射 $(f, g, \varphi)$ である。
+この状況で図式
+$$
+\xymatrix{
+B\textit{-Polarized} \ar[r] \ar[d] & \Polarizedstack \ar[d] \\
+(\Sch/B)_{fppf} \ar[r] & \Sch_{fppf}
+}
+$$
+は $2$-ファイバー積の正方形である。この自明な注意は、絶対的な場合
+$\Polarizedstack$ から、与えられた基底代数空間上の族の場合へ
+結果を移す際にときどき有用である。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-polarized-to-spaces-algebraic}
+関手 (\ref{quot-equation-over-proper-spaces}) は、$\Sch_{fppf}$ 上の
+グルーポイドのスタックの $1$-射
+$$
+\Polarizedstack \to \Spacesstack'_{fp, flat, proper}
+$$
+を定め、これは Criteria for Representability, Definition
+\ref{criteria-definition-algebraic} の意味で代数的である。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{quot-lemma-spaces-stack} および \ref{quot-lemma-polarized-stack} により、
+この主張には意味がある。証明するため、スキーム $S$ と、$S$ 上の
+$\Spacesstack'_{fp, flat, proper}$ の対象 $\xi = (X \to S)$ を選ぶ。
+$$
+\mathcal{X} = (\Sch/S)_{fppf} \times_{\xi, \Spacesstack'_{fp, flat, proper}}
+\Polarizedstack
+$$
+が $S$ 上の代数スタックであることを示さなければならない。
+$\mathcal{X}$ の対象は対 $(T/S, \mathcal{L})$ によって与えられる。
+ここで $T$ は $S$ 上のスキームであり、$\mathcal{L}$ は $X_T/T$ 上豊富な
+可逆 $\mathcal{O}_{X_T}$ 加群である。射は明らかな仕方で定義される。
+特に、$(\Sch/S)_{fppf}$ 上の圏の包含
+$$
+\mathcal{X} \subset \Picardstack_{X/S}
+$$
+があり、射の集合上では等号を誘導することが直ちに分かる。
+Proposition \ref{quot-proposition-pic} により $\Picardstack_{X/S}$ は
+代数スタックなので、上の包含が開はめ込みによって表現可能であることを
+示せば十分である。これはちょうど Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-ample-in-neighbourhood} の内容である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-diagonal}
+対角射
+$$
+\Delta : \Polarizedstack \longrightarrow
+\Polarizedstack \times \Polarizedstack
+$$
+は代数空間によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{quot-lemma-polarized-to-spaces-algebraic} および
+\ref{quot-lemma-spaces-diagonal} の形式的帰結である。
+Criteria for Representability, Lemma
+\ref{criteria-lemma-diagonals-and-algebraic-morphisms} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-limits}
+グルーポイドのスタック $\Polarizedstack$ は極限を保つ
+（Artin's Axioms, Definition \ref{artin-definition-limit-preserving}）。
+\end{lemma}
+
+\begin{proof}
+$I$ を有向集合とし、$(A_i, \varphi_{ii'})$ を $I$ 上の環の系とする。
+$S = \Spec(A)$ および $S_i = \Spec(A_i)$ と置く。ファイバー圏について
+$$
+\Polarizedstack_S = \colim \Polarizedstack_{S_i}
+$$
+を示さなければならない。$S$ 上有限表示なスキームの圏は、$S_i$ 上
+有限表示なスキームの圏の余極限である。Limits, Lemma
+\ref{limits-lemma-descend-finite-presentation} を参照せよ。
+さらに、有限表示な $X_i \to S_i$ とその極限 $X \to S$ が与えられたとき、
+可逆 $\mathcal{O}_X$ 加群 $\mathcal{L}$ の圏は、可逆
+$\mathcal{O}_{X_i}$ 加群 $\mathcal{L}_i$ の圏の余極限である。
+Limits, Lemma \ref{limits-lemma-descend-modules-finite-presentation} および
+\ref{limits-lemma-descend-invertible-modules} を参照せよ。
+$X \to S$ が固有かつ平坦ならば、十分大きな $i$ に対して射
+$X_i \to S_i$ も固有かつ平坦である。Limits, Lemmas
+\ref{limits-lemma-eventually-proper} および
+\ref{limits-lemma-descend-flat-finite-presentation} を参照せよ。
+最後に、$\mathcal{L}$ が $X$ 上豊富ならば、十分大きな $i$ に対して
+$\mathcal{L}_i$ は $X_i$ 上豊富である。Limits, Lemma
+\ref{limits-lemma-limit-ample} を参照せよ。
+以上を合わせれば証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-RS-star}
+Situation \ref{quot-situation-coherent} において、図式
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+をスキームの圏における押し出しとし、$T \to T'$ は肥厚、
+$T \to S$ はアフィンであるとする。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を参照せよ。
+このときファイバー圏上の関手
+$$
+\Polarizedstack_{S'}
+\longrightarrow
+\Polarizedstack_S \times_{\Polarizedstack_T} \Polarizedstack_{T'}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-equivalence-categories-schemes-over-pushout-flat}
+により圏同値
+$$
+\textit{flat-lfp}_{S'}
+\longrightarrow
+\textit{flat-lfp}_S \times_{\textit{flat-lfp}_T} \textit{flat-lfp}_{T'}
+$$
+がある。ここで $\textit{flat-lfp}_S$ は $S$ 上平坦かつ局所有限表示な
+スキームの圏を表す。左辺の $X'/S'$ が右辺の三つ組
+$(X/S, Y'/T', \varphi)$ に対応するとする。
+$Y = T \times_{T'} Y'$ と置くと、これは $\varphi$ を介して
+$T \times_S X$ と同型である。このとき More on Morphisms, Lemma
+\ref{more-morphisms-lemma-scheme-over-pushout-flat-modules}
+により圏同値
+$$
+\textit{QCoh-flat}_{X'/S'}
+\longrightarrow
+\textit{QCoh-flat}_{X/S}
+\times_{\textit{QCoh-flat}_{Y/T}} \textit{QCoh-flat}_{Y'/T'}
+$$
+がある。ここで $\textit{QCoh-flat}_{X/S}$ は $S$ 上平坦な準連接
+$\mathcal{O}_X$ 加群の圏を表す。$X \to S$、$Y \to T$、
+$X' \to S'$、$Y' \to T'$ は平坦なので、これは特に可逆加群に適用でき、
+圏同値
+$$
+\textit{Pic}(X')
+\longrightarrow
+\textit{Pic}(X) \times_{\textit{Pic}(Y)} \textit{Pic}(Y')
+$$
+を得る。ここで $\textit{Pic}(X)$ は可逆 $\mathcal{O}_X$ 加群の圏を表す。
+ここには小さな点がある。$\textit{QCoh-flat}_{X'/S'}$ の対象
+$\mathcal{F}'$ が $X$ と $Y'$ 上の可逆加群に引き戻されるならば、
+$\mathcal{F}'$ が可逆 $\mathcal{O}_{X'}$ 加群であることを示す必要がある。
+引用した補題により、$\mathcal{F}'$ は有限表示な
+$\mathcal{O}_{X'}$ 加群である。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-flat-and-free-at-point-fibre}
+により、$\mathcal{F}'$ の $X' \to S'$ の各ファイバーへの制限が
+可逆であることを確認すれば十分である。しかし $X' \to S'$ の
+ファイバーは $X \to S$ のファイバーと同じなので、これらの制限は可逆である。
+
+\medskip\noindent
+以上により、（$S$ 上の対象の圏について）$X \to S$ が固有であるという
+仮定と $\mathcal{L}$ が豊富であるという仮定を除けば、圏同値を得る。
+$X' \to S'$ が固有ならば、$X \to S$ と $Y' \to T'$ が固有であることは
+明らかである（Morphisms, Lemma
+\ref{morphisms-lemma-base-change-proper}）。逆に、$X \to S$ と
+$Y' \to T'$ が固有ならば、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-thicken-property-morphisms-cartesian}.
+により $X' \to S'$ は固有である。同様に、$\mathcal{L}'$ が
+$X'/S'$ 上豊富ならば、$\mathcal{L}'|_X$ は $X/S$ 上豊富であり、
+$\mathcal{L}'|_{Y'}$ は $Y'/T'$ 上豊富である
+（Morphisms, Lemma \ref{morphisms-lemma-ample-base-change}）。
+最後に、$\mathcal{L}'|_X$ が $X/S$ 上豊富であり、
+$\mathcal{L}'|_{Y'}$ が $Y'/T'$ 上豊富ならば、More on Morphisms, Lemma
+\ref{more-morphisms-lemma-thicken-property-relatively-ample} により、
+$\mathcal{L}'$ は $X'/S'$ 上豊富である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-tangent-space}
+$k$ を体とし、$x = (X \to \Spec(k), \mathcal{L})$ を $\Spec(k)$ 上の
+$\mathcal{X} = \Polarizedstack$ の対象とする。
+\begin{enumerate}
+\item $k$ が $\mathbf{Z}$ 上有限型ならば、ベクトル空間
+$T\mathcal{F}_{\mathcal{X}, k, x}$ および
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x})$
+（Artin's Axioms, Section \ref{artin-section-tangent-spaces} を参照）は
+有限次元であり、
+\item 一般に、ベクトル空間 $T_x(k)$ および $\text{Inf}_x(k)$
+（Artin's Axioms, Section \ref{artin-section-inf} を参照）は有限次元である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Artin's Axioms, Section \ref{artin-section-tangent-spaces} の議論は、
+基底スキーム $\Spec(\mathbf{Z})$ 上有限型な体にしか適用できない。
+Lemma \ref{quot-lemma-polarized-RS-star} により、このスタックは (RS*) を満たすので、
+Artin's Axioms, Lemma \ref{artin-lemma-properties-lift-RS-star} を適用して、
+(2) で述べたベクトル空間 $T_x(k)$ と $\text{Inf}_x(k)$ を得られる。
+さらに有限型の場合、Artin's Axioms, Remark
+\ref{artin-remark-compare-deformation-spaces} により、これらの空間は
+(1) で述べたものと一致する。これを済ませたので証明を始められる。
+
+\medskip\noindent
+一つの証明は Lemma \ref{quot-lemma-spaces-tangent-space} の証明と同様の議論を
+用いることである。ただし、そのためにはスキームと準連接加群からなる対の
+変形理論を展開する必要がある。別の証明では、Lemma
+\ref{quot-lemma-spaces-tangent-space} の結果、
+$\Polarizedstack \to \Spacesstack'_{fp, flat, proper}$ の代数性、
+および可逆加群の変形空間の計算を用いることができる。
+しかしここでは、問題を次数付き $k$-代数の変形問題に翻訳し、
+その方法で結果を導く。
+
+\medskip\noindent
+$\mathcal{C}_k$ を、剰余体が $k$ である Artin 局所 $k$-代数 $A$ の圏とする。
+$k$ 上の $\mathcal{X}$ の対象 $x$ から前変形圏
+$p : \mathcal{F} \to \mathcal{C}_k$ を得る。Artin's Axioms, Section
+\ref{artin-section-predeformation-categories} を参照せよ。
+したがって $\mathcal{F}(A)$ は三つ組
+$(X_A, \mathcal{L}_A, \alpha)$ の圏である。ここで
+$(X_A, \mathcal{L}_A)$ は $A$ 上の $\Polarizedstack$ の対象であり、
+$\alpha$ は同型
+$(X_A, \mathcal{L}_A) \times_{\Spec(A)} \Spec(k) \cong (X, \mathcal{L})$.
+である。一方、$q : \mathcal{G} \to \mathcal{C}_k$ を
+Deformation Problems, Example \ref{examples-defos-example-graded-algebras}
+で定義された、グルーポイドをファイバーとする余ファイバー圏とする。
+$d_0 \gg 0$ を選ぶ（どれほど大きくすべきかは後で見る）。
+$P$ を次数付き $k$-代数
+$$
+P = k \oplus \bigoplus\nolimits_{d \geq d_0} H^0(X, \mathcal{L}^{\otimes d})
+$$
+とする。このとき $y = (k, P)$ は $\mathcal{G}(k)$ の対象である。
+$\mathcal{G}_y$ を Formal Deformation Theory, Remark
+\ref{formal-defos-remark-localize-cofibered-groupoid} の前変形圏とする。
+上のような $(X_A, \mathcal{F}_A, \alpha)$ が与えられたとき、
+$$
+Q = A \oplus \bigoplus\nolimits_{d \geq d_0} H^0(X_A, \mathcal{L}_A^{\otimes d})
+$$
+と置く。同型 $\alpha$ は写像 $\beta : Q \to P$ を誘導する。
+射影スキームの変形理論（More on Morphisms, Lemma
+\ref{more-morphisms-lemma-deform-projective}）により、
+$\mathcal{C}_k$ 上のグルーポイドをファイバーとする余ファイバー圏の $1$-射
+$$
+\mathcal{F} \longrightarrow \mathcal{G}_y,\quad
+(X_A, \mathcal{F}_A, \alpha) \longmapsto (Q, \beta : Q \to P)
+$$
+を得る。実際、この関手は圏同値であり、その擬逆は
+$Q \mapsto \underline{\text{Proj}}_A(Q)$ によって与えられる。
+実際、Divisors, Lemma \ref{divisors-lemma-relative-proj-flat} により、
+スキーム $X_A = \underline{\text{Proj}}_A(Q)$ は $A$ 上平坦である。
+$\mathcal{L}_A = \mathcal{O}_{X_A}(1)$ と置く。同じ補題により、
+これは $A$ 上平坦である。$\beta$ から同型
+$(X_A, \mathcal{L}_A) \times_{\Spec(A)} \Spec(k) = (X, \mathcal{L})$
+を得る。すると More on Morphisms, Sections
+\ref{more-morphisms-section-morphisms-thickenings} および
+\ref{more-morphisms-section-deform} の手法を用いて、対
+$(X_A, \mathcal{L}_A)$ の所望の性質を、$(X, \mathcal{L})$ の
+対応する性質からすべて導ける。いくつかの詳細は省略する。
+
+\medskip\noindent
+以上から $T\mathcal{F} = T\mathcal{G}_y = T_y\mathcal{G}$ および
+$\text{Inf}(\mathcal{F}) = \text{Inf}_y(\mathcal{G})$ であることが分かる。
+Deformation Problems, Lemma \ref{examples-defos-lemma-graded-algebras-TI}
+により、これらのベクトル空間は有限次元である。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}[偏極付きスキームに対する強い形式的有効性]
+\label{quot-lemma-polarized-strong-effectiveness}
+\begin{slogan}
+平坦性と有限表示を仮定すれば、Grothendieck の代数化定理は
+非 Noether 的な状況でも成り立つ。
+\end{slogan}
+$(R_n)$ を、核が局所冪零である全射な遷移写像をもつ環の逆系とする。
+$R = \lim R_n$ と置く。$S_n = \Spec(R_n)$ および
+$S = \Spec(R)$ と置く。すべての正方形が Cartesian であるスキームの可換図式
+$$
+\xymatrix{
+X_1 \ar[r]_{i_1} \ar[d] & X_2 \ar[r]_{i_2} \ar[d] & X_3 \ar[r] \ar[d] &
+\ldots \\
+S_1 \ar[r] & S_2 \ar[r] & S_3 \ar[r] & \ldots
+}
+$$
+を考える。$(\mathcal{L}_n, \varphi_n)$ が与えられているとし、各
+$\mathcal{L}_n$ は $X_n$ 上の可逆層、
+$\varphi_n : i_n^*\mathcal{L}_{n + 1} \to \mathcal{L}_n$ は同型であるとする。
+もし
+\begin{enumerate}
+\item $X_n \to S_n$ は固有、平坦かつ有限表示であり、
+\item $\mathcal{L}_1$ は $X_1$ 上豊富である
+\end{enumerate}
+ならば、固有、平坦かつ有限表示なスキームの射 $X \to S$、
+豊富な可逆 $\mathcal{O}_X$ 加群 $\mathcal{L}$、および射 $i_n$ と
+$\varphi_n$ に両立する同型 $X_n \cong X \times_S S_n$ と
+$\mathcal{L}_n \cong \mathcal{L}|_{X_n}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+More on Morphisms, Lemma \ref{more-morphisms-lemma-deform-projective}
+におけるように、$X_1 \to S_1$ と $\mathcal{L}_1$ に対して $d_0$ を選ぶ。
+任意の $n \geq 1$ に対して
+$$
+A_n = R_n \oplus
+\bigoplus\nolimits_{d \geq d_0} H^0(X_n, \mathcal{L}_n^{\otimes d})
+$$
+と置く。この補題により、各 $A_n$ は有限表示な次数付き $R_n$-代数であり、
+その斉次部分 $(A_n)_d$ は有限射影 $R_n$-加群で、
+$X_n = \text{Proj}(A_n)$ および
+$\mathcal{L}_n = \mathcal{O}_{\text{Proj}(A_n)}(1)$ を満たす。
+同じ補題は、写像
+$$
+A_1 \leftarrow A_2 \leftarrow A_3 \leftarrow \ldots
+$$
+が $n \leq m$ に対して同型
+$A_n = A_m \otimes_{R_m} R_n$ を誘導することも保証する。
+$$
+B = \bigoplus\nolimits_{d \geq 0} B_d
+\quad\text{with}\quad
+B_d = \lim_n (A_n)_d
+$$
+と置く。More on Algebra, Lemma
+\ref{more-algebra-lemma-lim-finite-projective-gives-finite-projective}
+により、$B_d$ は有限射影 $R$-加群であり、
+$B \otimes_R R_n = A_n$ である。したがってスキームと層
+$$
+X = \text{Proj}(B)
+\quad\text{and}\quad
+\mathcal{L} = \mathcal{O}_X(1)
+$$
+について、前者は $S$ 上平坦であり、$\mathcal{L}$ は $S$ 上平坦な
+準連接 $\mathcal{O}_X$ 加群である。Divisors, Lemma
+\ref{divisors-lemma-relative-proj-flat} を参照せよ。
+Proj の形成は基底変換と可換なので（Constructions, Lemma
+\ref{constructions-lemma-base-change-map-proj}）、標準的な同型
+$$
+X \times_S S_n = X_n
+\quad\text{and}\quad
+\mathcal{L}|_{X_n} \cong \mathcal{L}_n
+$$
+を得て、これは系の遷移写像と両立する。したがって
+$X_1 \subset X$ を閉部分スキームとみなせる。
+以下で $B$ が $R$ 上有限表示であることを示す。
+Divisors, Lemmas \ref{divisors-lemma-relative-proj-proper} および
+\ref{divisors-lemma-relative-proj-finite-presentation}
+により、$X \to S$ は有限表示かつ固有であり、
+$\mathcal{L} = \mathcal{O}_X(1)$ は有限表示な $\mathcal{O}_X$ 加群である。
+$\mathcal{L}$ の基底変換 $X_1 \to S_1$ への制限は可逆なので、
+More on Morphisms, Lemma \ref{more-morphisms-lemma-finite-free-open} により、
+$\mathcal{L}$ は $X$ における $X_1$ のある開近傍上で可逆である。
+$X \to S$ は閉であり、$\Ker(R \to R_1)$ は Jacobson 根基に含まれるので
+（More on Algebra, Lemma \ref{more-algebra-lemma-limit-henselian}）、
+$X$ における $X_1$ の任意の開近傍は $X$ に等しい。
+したがって $\mathcal{L}$ は可逆である。最後に、$\mathcal{L}$ が
+ファイバー上豊富となる $S$ の点の集合は $S$ で開であり
+（More on Morphisms, Lemma \ref{more-morphisms-lemma-ample-in-neighbourhood}）、
+$S_1$ を含むので $S$ に等しい。したがって $X \to S$ と $\mathcal{L}$ は、
+補題の主張で要求されたすべての性質をもつ。
+
+\medskip\noindent
+上の主張を証明する。表示
+$A_1 = R_1[X_1, \ldots, X_s]/(F_1, \ldots, F_t)$ を選ぶ。ここで
+$X_i$ は次数 $d_i$ の変数であり、$F_j$ は $X_i$ に関する次数 $e_j$ の
+斉次多項式である。このとき写像
+$$
+\Psi : R[X_1, \ldots, X_s] \longrightarrow B
+$$
+を、写像 $R_1[X_1, \ldots, X_s] \to A_1$ の持ち上げとして選べる。
+各 $B_d$ は $R$ 上有限射影なので、Nakayama の補題
+（Algebra, Lemma \ref{algebra-lemma-NAK}；ここでも
+$\Ker(R \to R_1)$ が $R$ の Jacobson 根基に含まれることを用いる）から、
+$\Psi$ は全射である。$- \otimes_R R_1$ は右完全なので、
+$R_1[X_1, \ldots, X_s]$ において $F_1, \ldots, F_t$ へ写る
+$G_1, \ldots, G_t \in \Ker(\Psi)$ を見つけられる。
+すべての $d \geq 0$ に対して $\Ker(\Psi)_d$ は有限射影 $R$-加群の全射
+$R[X_1, \ldots, X_s]_d \to B_d$ の核として有限射影 $R$-加群である。
+もう一度 Nakayama の補題を用いると、$\Ker(\Psi)$ は
+$G_1, \ldots, G_t$ によって生成される。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-existence}
+基底スキーム $\Spec(\mathbf{Z})$ 上のスタック $\Polarizedstack$ を考える。
+このとき、すべての形式対象は有効である。
+\end{lemma}
+
+\begin{proof}
+補題に現れる概念の定義については Artin's Axioms, Section
+\ref{artin-section-formal-objects} を参照せよ。定義から、この補題は
+より一般的な Lemma \ref{quot-lemma-polarized-strong-effectiveness} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-polarized-defo-thy}
+グルーポイドのスタック $\Polarizedstack$ は
+$\Spec(\mathbf{Z})$ 上で versal 性の開性を満たす。
+同様に、基底変換後（Remark \ref{quot-remark-polarized-base-change}）、
+任意の Noether 基底スキーム $S$ 上で versal 性の開性が成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは Artin's Axioms, Lemma
+\ref{artin-lemma-SGE-implies-openness-versality} および Lemmas
+\ref{quot-lemma-polarized-diagonal},
+\ref{quot-lemma-polarized-RS-star},
+\ref{quot-lemma-polarized-limits}, および
+\ref{quot-lemma-polarized-strong-effectiveness} から従う。
+この事実の「通常の」証明については、この証明に続く注意の議論を参照せよ。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-polarized-defo-thy}
+Lemma \ref{quot-lemma-polarized-defo-thy} は、Artin's Axioms, Lemma
+\ref{artin-lemma-get-openness-obstruction-theory} におけるような障害理論
+（Lemma \ref{quot-lemma-coherent-defo-thy} の第二の証明と同様）を用いても示せる。
+そのためには、Cotangent, Section
+\ref{cotangent-section-deformations-ringed-topoi} で展開された変形・障害理論を、
+代数空間と準連接加群の対の場合へ一般化する必要がある。
+別の可能性は、$1$-射
+$\Polarizedstack \to \Spacesstack'_{fp, flat, proper}$ が代数的であること
+（Lemma \ref{quot-lemma-polarized-to-spaces-algebraic}）と、標的について
+versal 性の開性が分かっていること（Lemma \ref{quot-lemma-spaces-defo-thy} および
+Remark \ref{quot-remark-spaces-defo-thy}）を用いることである。
+\end{remark}
+
+\begin{theorem}[偏極付きスキームのスタックの代数性]
+\label{quot-theorem-polarized-algebraic}
+スタック $\Polarizedstack$（Situation \ref{quot-situation-polarized}）は代数的である。
+実際、任意の代数空間 $B$ に対して、スタック
+$B\textit{-Polarized}$（Remark \ref{quot-remark-polarized-base-change}）は代数的である。
+\end{theorem}
+
+\begin{proof}
+絶対的な場合は Artin's Axioms, Lemma
+\ref{artin-lemma-diagonal-representable} および Lemmas
+\ref{quot-lemma-polarized-diagonal},
+\ref{quot-lemma-polarized-RS-star},
+\ref{quot-lemma-polarized-limits},
+\ref{quot-lemma-polarized-existence}, および
+\ref{quot-lemma-polarized-defo-thy} から従う。
+$B$ 上の場合は、これと Remark \ref{quot-remark-polarized-base-change} における
+$B\textit{-Polarized}$ の $2$-ファイバー積としての記述、および
+代数スタックが $2$-ファイバー積をもつという事実から従う。
+Algebraic Stacks, Lemma \ref{algebraic-lemma-2-fibre-product} を参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{曲線のスタック}
+\label{quot-section-curves}
+
+\noindent
+この節では、曲線のスタックが代数的であることを証明する。
+曲線のモジュライについてのさらなる議論は Moduli of Curves, Section
+\ref{moduli-curves-section-introduction} を参照されたい。
+
+\medskip\noindent
+Stacks project における曲線とは次元 $1$ の多様体である。
+しかし、曲線族について述べるときには、ファイバーが可約または非被約である
+ことをしばしば許す。この節では、曲線のスタックは「次元 $\leq 1$ の
+固有スキームをパラメータ付ける」。ただし、族の正しい概念を得るには、
+族の全空間が代数空間であることを許す必要があると分かる。
+そこで次の定義に至る。
+
+\begin{situation}
+\label{quot-situation-curves}
+圏 $\Curvesstack$ を次のように定義する：
+\begin{enumerate}
+\item 対象は {\it 曲線族} である。より正確には、対象は射
+$f : X \to S$ であり、基底 $S$ はスキーム、{\it 全空間} $X$ は
+代数空間、$f$ は平坦、固有、有限表示かつ相対次元 $\leq 1$ である
+（Morphisms of Spaces, Definition
+\ref{spaces-morphisms-definition-relative-dimension}）。
+\item 対象間の射 $(X' \to S') \to (X \to S)$ は対 $(f, g)$ によって
+与えられる。ここで $f : X' \to X$ は代数空間の射、
+$g : S' \to S$ はスキームの射であり、これらは可換図式
+$$
+\xymatrix{
+X' \ar[d] \ar[r]_f & X \ar[d] \\
+S' \ar[r]^g & S
+}
+$$
+に収まり、同型 $X' \to S' \times_S X$ を誘導する。
+言い換えると、この図式は Cartesian である。
+\end{enumerate}
+忘却関手
+$$
+p : \Curvesstack \longrightarrow \Sch_{fppf},\quad
+(X \to S) \longmapsto S
+$$
+によって $\Curvesstack$ を $\Sch_{fppf}$ 上の圏とみなす
+（記法については Section \ref{quot-section-conventions} を参照）。
+\end{situation}
+
+\noindent
+Spaces over Fields, Lemma
+\ref{spaces-over-fields-lemma-codim-1-point-in-schematic-locus}
+および、より一般には More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-projective-over-complete}
+から次が従う。$S$ が体、Artin 局所環、または Noether 完備局所環の
+スペクトルならば、任意の曲線族 $X \to S$ の全空間 $X$ はスキームである。
+一方、$\mathbf{A}^1_k$ 上には、全空間がスキームでない曲線族が存在する。
+Examples, Section \ref{examples-section-family-of-curves} を参照せよ。
+
+\medskip\noindent
+包含
+\begin{equation}
+\label{quot-equation-curves-over-proper-spaces}
+\Curvesstack \subset \Spacesstack'_{fp, flat, proper}
+\end{equation}
+が成り立つことは明らかである。また、$\Spacesstack'_{fp, flat, proper}$ の
+対象 $X \to S$ が $\Curvesstack$ に属することと、$X \to S$ が
+相対次元 $\leq 1$ をもつこととは同値である。これを用いて
+$\Curvesstack$ に対する Artin の公理を確認する。
+
+\begin{lemma}
+\label{quot-lemma-curves-fibred-in-groupoids}
+圏 $\Curvesstack$ は $\Sch_{fppf}$ 上でグルーポイドをファイバーとする。
+\end{lemma}
+
+\begin{proof}
+埋め込み (\ref{quot-equation-curves-over-proper-spaces})、その像の記述、および
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-fibred-in-groupoids}）を用いると、
+これは次の主張に帰着する。$\Spacesstack'_{fp, flat, proper}$ における射
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & X \ar[d] \\
+S' \ar[r] & S
+}
+$$
+が与えられているとする（これは特に図式が Cartesian であることを
+含意することを思い出そう）。$X \to S$ が相対次元 $\leq 1$ ならば、
+$X' \to S'$ も相対次元 $\leq 1$ をもつ。この主張は
+Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-stack}
+圏 $\Curvesstack$ は $\Sch_{fppf}$ 上のグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+埋め込み (\ref{quot-equation-curves-over-proper-spaces})、その像の記述、および
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-stack}）を用いると、これは次の主張に帰着する。
+$\Spacesstack'_{fp, flat, proper}$ の対象 $X \to S$ と fppf 被覆
+$\{S_i \to S\}_{i \in I}$ が与えられたとき、次は同値である：
+\begin{enumerate}
+\item $X \to S$ は相対次元 $\leq 1$ をもち、
+\item 各 $i$ に対して基底変換 $X_i \to S_i$ は相対次元 $\leq 1$ をもつ。
+\end{enumerate}
+これは Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-diagonal}
+対角射
+$$
+\Delta : \Curvesstack \longrightarrow \Curvesstack \times \Curvesstack
+$$
+は代数空間によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+これは充満忠実な埋め込み (\ref{quot-equation-curves-over-proper-spaces}) と、
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-diagonal}）から直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-curves-base-change}
+$B$ を $\Spec(\mathbf{Z})$ 上の代数空間とする。
+$B\text{-}\Curvesstack$ を、対 $(X \to S, h : S \to B)$ からなる圏とする。
+ここで $X \to S$ は $\Curvesstack$ の対象であり、$h : S \to B$ は射である。
+$B\text{-}\Curvesstack$ における射
+$(X' \to S', h') \to (X \to S, h)$ は、$h \circ g = h'$ を満たす
+$\Curvesstack$ の射 $(f, g)$ である。この状況で図式
+$$
+\xymatrix{
+B\text{-}\Curvesstack \ar[r] \ar[d] & \Curvesstack \ar[d] \\
+(\Sch/B)_{fppf} \ar[r] & \Sch_{fppf}
+}
+$$
+は $2$-ファイバー積の正方形である。この自明な注意は、絶対的な場合
+$\Curvesstack$ から、与えられた基底代数空間上の曲線族の場合へ
+結果を移す際にときどき有用である。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-curves-limits}
+スタック $\Curvesstack \to \Sch_{fppf}$ は極限を保つ
+（Artin's Axioms, Definition \ref{artin-definition-limit-preserving}）。
+\end{lemma}
+
+\begin{proof}
+埋め込み (\ref{quot-equation-curves-over-proper-spaces})、その像の記述、および
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-limits}）を用いると、これは次の主張に帰着する。
+$T = \lim T_i$ をアフィンスキームの有向逆系の極限とする。
+$i \in I$ とし、$X_i \to T_i$ を $T_i$ 上の
+$\Spacesstack'_{fp, flat, proper}$ の対象とする。
+$T \times_{T_i} X_i \to T$ が相対次元 $\leq 1$ をもつと仮定する。
+このとき、ある $i' \geq i$ に対して射
+$T_{i'} \times_{T_i} X_i \to T_i$ は相対次元 $\leq 1$ をもつ。
+これは Limits of Spaces, Lemma
+\ref{spaces-limits-lemma-eventually-relative-dimension} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-RS-star}
+図式
+$$
+\xymatrix{
+T \ar[r] \ar[d] & T' \ar[d] \\
+S \ar[r] & S'
+}
+$$
+をスキームの圏における押し出しとし、$T \to T'$ は肥厚、
+$T \to S$ はアフィンであるとする。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を参照せよ。
+このときファイバー圏上の関手
+$$
+\Curvesstack_{S'}
+\longrightarrow
+\Curvesstack_S
+\times_{\Curvesstack_T}
+\Curvesstack_{T'}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+埋め込み (\ref{quot-equation-curves-over-proper-spaces})、その像の記述、および
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-RS-star}）を用いると、これは次の主張に帰着する。
+有限表示、平坦、固有な、代数空間から $S'$ への射 $X' \to S'$ が
+与えられたとき、$X' \to S'$ が相対次元 $\leq 1$ をもつことと、
+$S \times_{S'} X' \to S$ および $T' \times_{S'} X' \to T'$ が
+相対次元 $\leq 1$ をもつこととは同値である。一方の含意は、
+相対次元 $\leq 1$ をもつことが基底変換で保たれること
+（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-dimension-fibre-after-base-change}）から従う。
+もう一方は、相対次元 $\leq 1$ をもつことがファイバー上で確認できることと、
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} により $S \to S'$ が
+肥厚なので、$X' \to S'$ のファイバー（スキーム $S'$ の点上）が
+$S \times_{S'} X' \to S$ のファイバーと同じであることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-tangent-space}
+$k$ を体とし、$x = (X \to \Spec(k))$ を $\Spec(k)$ 上の
+$\mathcal{X} = \Curvesstack$ の対象とする。
+\begin{enumerate}
+\item $k$ が $\mathbf{Z}$ 上有限型ならば、ベクトル空間
+$T\mathcal{F}_{\mathcal{X}, k, x}$ および
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x})$
+（Artin's Axioms, Section \ref{artin-section-tangent-spaces} を参照）は
+有限次元であり、
+\item 一般に、ベクトル空間 $T_x(k)$ および $\text{Inf}_x(k)$
+（Artin's Axioms, Section \ref{artin-section-inf} を参照）は有限次元である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは充満忠実な埋め込み (\ref{quot-equation-curves-over-proper-spaces}) と、
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-tangent-space}）から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-existence}
+基底スキーム $\Spec(\mathbf{Z})$ 上のスタック $\Curvesstack$ を考える。
+このとき、すべての形式対象は有効である。
+\end{lemma}
+
+\begin{proof}
+補題に現れる概念の定義については Artin's Axioms, Section
+\ref{artin-section-formal-objects} を参照せよ。
+$(A, \mathfrak m, \kappa)$ を Noether 完備局所環とする。
+$(X_n \to \Spec(A/\mathfrak m^n))$ を $A$ 上の
+$\Curvesstack$ の形式対象とする。More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-formal-algebraic-space-proper-reldim-1}
+により、射影射 $X \to \Spec(A)$ と、両立する同型の系
+$X \times_{\Spec(A)} \Spec(A/\mathfrak m^n) \cong X_n$ が存在する。
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-check-flatness-on-infinitesimal-nbhds}
+により $X \to \Spec(A)$ は平坦である。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-dimension-fibres-proper-flat}
+により $X \to \Spec(A)$ は相対次元 $\leq 1$ をもつ。
+これで補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-defo-thy}
+グルーポイドのスタック $\mathcal{X} = \Curvesstack$ は
+$\Spec(\mathbf{Z})$ 上で versal 性の開性を満たす。
+同様に、基底変換後（Remark \ref{quot-remark-curves-base-change}）、
+任意の Noether 基底スキーム $S$ 上で versal 性の開性が成り立つ。
+\end{lemma}
+
+\begin{proof}
+これは充満忠実な埋め込み (\ref{quot-equation-curves-over-proper-spaces}) と、
+$\Spacesstack'_{fp, flat, proper}$ に対する対応する事実
+（Lemma \ref{quot-lemma-spaces-defo-thy}）から直ちに従う。
+\end{proof}
+
+\begin{theorem}[曲線のスタックの代数性]
+\label{quot-theorem-curves-algebraic}
+\begin{reference}
+\cite[Proposition 3.3, page 8]{dJHS} および
+\cite[Appendix B by Jack Hall, Theorem B.1]{Smyth} を参照せよ。
+\end{reference}
+スタック $\Curvesstack$（Situation \ref{quot-situation-curves}）は代数的である。
+実際、任意の代数空間 $B$ に対して、スタック
+$B\text{-}\Curvesstack$（Remark \ref{quot-remark-curves-base-change}）は代数的である。
+\end{theorem}
+
+\begin{proof}
+絶対的な場合は Artin's Axioms, Lemma
+\ref{artin-lemma-diagonal-representable} および Lemmas
+\ref{quot-lemma-curves-diagonal},
+\ref{quot-lemma-curves-RS-star},
+\ref{quot-lemma-curves-limits},
+\ref{quot-lemma-curves-existence}, および \ref{quot-lemma-curves-defo-thy} から従う。
+$B$ 上の場合は、これと Remark \ref{quot-remark-curves-base-change} における
+$B\text{-}\Curvesstack$ の $2$-ファイバー積としての記述、および
+代数スタックが $2$-ファイバー積をもつという事実から従う。
+Algebraic Stacks, Lemma \ref{algebraic-lemma-2-fibre-product} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-curves-open-and-closed-in-spaces}
+$1$-射 (\ref{quot-equation-curves-over-proper-spaces})
+$$
+\Curvesstack \longrightarrow \Spacesstack'_{fp, flat, proper}
+$$
+は開かつ閉はめ込みによって表現可能である。
+\end{lemma}
+
+\begin{proof}
+(\ref{quot-equation-curves-over-proper-spaces}) は圏の充満忠実な埋め込みなので、
+次を示せば十分である。$\Spacesstack'_{fp, flat, proper}$ の対象
+$X \to S$ が与えられたとき、射 $S' \to S$ が $U$ を経由することと、
+$X \to S$ の基底変換 $X' \to S'$ が相対次元 $\leq 1$ をもつこととが
+同値になるような開かつ閉部分スキーム $U \subset S$ が存在する。
+これは More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-dimension-fibres-proper-flat} から直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-alternative-approach-curves}
+$2$-ファイバー積
+$$
+\xymatrix{
+\Curvesstack \times_{\Spacesstack'_{fp, flat, proper}}
+\Polarizedstack \ar[r] \ar[d] &
+\Polarizedstack \ar[d] \\
+\Curvesstack \ar[r] &
+\Spacesstack'_{fp, flat, proper}
+}
+$$
+を考える。このファイバー積は偏極付き曲線、すなわち相対的に豊富な
+可逆層を備えた曲線族をパラメータ付ける。左の縦矢印
+$$
+\textit{PolarizedCurves} \longrightarrow \Curvesstack
+$$
+は代数的、滑らかかつ全射である。実際、この $1$-射は
+代数的であり（Lemma \ref{quot-lemma-polarized-to-spaces-algebraic} の矢印の
+基底変換として）、すべての点が像に属し、曲線上の可逆層の変形には
+障害がない（Lemma \ref{quot-lemma-curves-existence} の証明を参照）。
+これにより $\Curvesstack$ の代数性への別の道が得られる。
+すなわち、Lemma \ref{quot-lemma-curves-open-and-closed-in-spaces} により、
+$\textit{PolarizedCurves}$ は代数スタック $\Polarizedstack$ の
+開かつ閉部分スタックである。また、代数スタックからの滑らかな代数的射の
+標的となる任意のグルーポイドのスタックは代数スタックである。
+\end{remark}
+
+
+
+
+
+
+
+
+
+\section{固有射上の複体のモジュライ}
+\label{quot-section-moduli-complexes}
+
+\noindent
+この節の題名と内容は \cite{lieblich-complexes} から取られている。
+$S$ をスキームとし、$f : X \to B$ を固有、平坦、有限表示な
+代数空間の射とする。負次数の自己 Ext が消える各ファイバーの
+$D^b_{\textit{Coh}}$ の対象の「族」をパラメータ付ける代数スタック
+$$
+\Complexesstack_{X/B}
+$$
+が存在することを証明する。より正確には、族は全空間の導来圏の
+相対完全対象によって与えられる。このやや技術的な概念は
+More on Morphisms of Spaces, Section
+\ref{spaces-more-morphisms-section-relatively-perfect} で研究されている。
+
+\medskip\noindent
+$X$ が体 $k$ 上の固有代数空間である場合だけでも、非常に興味深い
+代数スタックが得られる。実際、埋め込み
+$$
+\Cohstack_{X/k} \longrightarrow \Complexesstack_{X/k}
+$$
+がある。任意の（任意の環付きトポス上の）$\mathcal{O}$ 加群
+$\mathcal{F}$ に対し、$i < 0$ ならば
+$\Ext^i_\mathcal{O}(\mathcal{F}, \mathcal{F}) = 0$ だからである。
+これは確かにこのスタックが空でないことを示すが、
+$\Complexesstack_{X/k}$ を研究する真の動機は、負次数の自己 Ext が消え、
+複数の次数で非零のコホモロジー層をもつ導来圏
+$D^b_{\textit{Coh}}(\mathcal{O}_X)$ の対象がしばしば存在することである。
+例えば $X$ は、$k$ 上の別の固有代数空間 $Y$ と導来同値であり得る。
+すなわち $k$-線形同値
+$$
+F : D^b_{\textit{Coh}}(\mathcal{O}_Y)
+\longrightarrow
+D^b_{\textit{Coh}}(\mathcal{O}_X)
+$$
+がある。これが起こり、しかも $F$ が $X$ と $Y$ の間の同型から
+与えられない場合がある。例えば Abel 多様体とその双対の場合である。
+この状況で $F$ は代数スタックの同型
+$$
+\Complexesstack_{Y/k}
+\longrightarrow
+\Complexesstack_{X/k}
+$$
+を誘導し（将来の参照をここに挿入する）、特に $Y$ 上の連接層のスタックは
+$X$ 上の複体のスタックへ写る。逆に、$\Complexesstack_{X/k}$ の幾何を
+十分よく理解できれば、それを用いて導来同値となり得るすべての $Y$ を
+研究することができる。
+
+\begin{lemma}
+\label{quot-lemma-complexes-open-neg-exts-vanishing}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は固有、平坦かつ有限表示であると仮定する。
+$K, E \in D(\mathcal{O}_X)$ とする。$K$ は擬連接、$E$ は $Y$-完全であると
+仮定する（More on Morphisms of Spaces, Definition
+\ref{spaces-more-morphisms-definition-relatively-perfect}）。
+体 $k$ と射 $y : \Spec(k) \to Y$ に対し、ファイバー $X_y$ への
+引き戻しを $K_y$, $E_y$ と表す。
+\begin{enumerate}
+\item 次の性質で特徴付けられる開部分 $W \subset Y$ が存在する：
+$$
+y \in |W|
+\Leftrightarrow
+\Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y) = 0
+\text{、ただし }i < 0.
+$$
+\item $W$ を経由する任意の射 $V \to Y$ に対して
+$$
+\Ext^i_{\mathcal{O}_{X_V}}(K_V, E_V) = 0
+\quad\text{ただし}\quad i < 0
+$$
+である。ここで $X_V$ は $X$ の基底変換であり、$K_V$ と $E_V$ は
+$K$ と $E$ の $X_V$ への導来引き戻しである。
+\item 関手 $V \mapsto \Hom_{\mathcal{O}_{X_V}}(K_V, E_V)$ は
+$(\textit{Spaces}/W)_{fppf}$ 上の層であり、$W$ 上アフィンかつ
+有限表示な代数空間によって表現可能である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+任意の射 $V \to Y$ に対して、複体 $K_V$ は擬連接であり
+（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pseudo-coherent-pullback})
+、$E_V$ は $V$-完全である（More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-base-change-relatively-perfect}）。
+もう一つの注意として、$y : \Spec(k) \to Y$ と体拡大 $k'/k$ が与えられ、
+$y' : \Spec(k') \to Y$ を誘導された射とすると、
+$$
+\Ext^i_{\mathcal{O}_{X_{y'}}}(K_{y'}, E_{y'}) =
+\Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y) \otimes_k k'
+$$
+が Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-affine-morphism-and-hom-out-of-perfect} により成り立つ。
+したがって (1) における消滅は、実際には誘導された点
+$y \in |Y|$ の性質である。証明では、これら二つの注意を以後断らずに用いる。
+
+\medskip\noindent
+まず $Y$ がアフィンスキームであると仮定する。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-compute-ext-rel-perfect}
+を適用すると、その補題に記述された意味で
+$Rf_*R\SheafHom(K, E)$ を「普遍的に計算する」擬連接な
+$L \in D(\mathcal{O}_Y)$ が得られる。定義を展開すると、点
+$y \in Y$ に対して等式
+$$
+\Ext^i_{\kappa(y)}(L \otimes_{\mathcal{O}_Y}^\mathbf{L} \kappa(y),
+\kappa(y)) = \Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y)
+$$
+を得る。したがって
+$$
+H^i(L \otimes_{\mathcal{O}_Y}^\mathbf{L} \kappa(y)) = 0
+\text{、ただし } i > 0 \Leftrightarrow
+\Ext^i_{\mathcal{O}_{X_y}}(K_y, E_y) = 0 \text{、ただし }i < 0.
+$$
+Derived Categories of Schemes, Lemma \ref{perfect-lemma-jump-loci} により、
+これが成り立つ $y \in Y$ の集合 $W$ は $Y$ の開部分を定める。
+$L$ の「普遍性」により、この開部分 $W$ は体のスペクトルからの
+すべての射に対して (1) の要件を満たす。
+
+\medskip\noindent
+$Y$ が一般の代数空間である場合に戻ろう。アフィンスキーム $V_i$ による
+\'etale 被覆 $\{V_i \to Y\}$ を選ぶ。このとき部分集合 $W \subset |Y|$ は、
+$X_{V_i}$、$K_{V_i}$、$E_{V_i}$ に対する対応する部分集合
+$W_i \subset |V_i|$ へ引き戻される。前段落により $W_i$ は開なので、
+$W$ も開である。これで一般の場合に (1) が証明された。
+さらに (2) と (3) は、圏 $\textit{Spaces}/W$ と制限
+$X_W$、$K_W$、$E_W$ だけを用いて定式化されている。
+したがって $W = Y$ の場合に帰着する。
+
+\medskip\noindent
+$W = Y$ と仮定する。$Y$ 上の任意の代数空間 $V$ に対して、
+$Rf_{V, *}R\SheafHom(K_V, E_V)$ の次数 $< 0$ のコホモロジー層が
+消えると主張する。これにより (2) が証明される。実際、
+$$
+\Ext^i_{\mathcal{O}_{X_V}}(K_V, E_V) =
+H^i(X_V, R\SheafHom(K_V, E_V)) = 
+H^i(V, Rf_{V, *}R\SheafHom(K_V, E_V))
+$$
+が Cohomology on Sites, Lemmas
+\ref{sites-cohomology-lemma-section-RHom-over-U} および
+\ref{sites-cohomology-lemma-Leray-unbounded}
+により成り立ち、コホモロジー層の消滅は Derived Categories, Lemma
+\ref{derived-lemma-negative-vanishing} により、$i < 0$ に対して
+コホモロジー群 $H^i$ が零であることを導くからである。
+
+\medskip\noindent
+主張を証明するため、$V$ 上 \'etale 局所的に議論してよい。
+特に $Y$ はアフィンで $W = Y$ であると仮定してよい。
+$L \in D(\mathcal{O}_Y)$ を証明の第二段落におけるものとする。
+$Y$ 上の代数空間 $V$ に対し、$L$ の $V$ への導来引き戻しを $L_V$ と表す。
+（ここで用いる重要な特徴は、$L$ がアフィンな $V$ だけでなく、$Y$ 上の
+すべての代数空間 $V$ に対して「働く」ことである。）
+$W = Y$ なので、$i > 0$ に対して $H^i(L) = 0$ である
+（ファイバーから茎へ移るには More on Algebra, Lemma
+\ref{more-algebra-lemma-lift-pseudo-coherent-from-residue-field}
+を用いる）。したがって $i > 0$ に対して $H^i(L_V) = 0$ である。
+$L$ を定義する性質は
+$$
+Rf_{V, *}R\SheafHom(K_V, E_V) = R\SheafHom(L_V, \mathcal{O}_V)
+$$
+である。$L_V$ は次数 $\leq 0$ に集中するので、
+$R\SheafHom(L_V, \mathcal{O}_V)$ は次数 $\geq 0$ に集中する。
+これで主張が証明され、(2) の証明が完了する。
+
+\medskip\noindent
+$W = Y$ と仮定するが、代数空間 $Y$ には何も仮定しない。
+(2) が成り立つので、Simplicial Spaces, Lemma
+\ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom} により、
+$F(V) = \Hom_{\mathcal{O}_{X_V}}(K_V, E_V)$ で与えられる関手 $F$ は
+$(\textit{Spaces}/Y)_{fppf}$ 上の層である\footnote{被覆
+$\{V_i \to V\}_{i \in I}$ に対する層条件を確認するには、まず
+$V_n = \coprod_{i_0 \ldots i_n} V_{i_0} \times_V \ldots \times_V V_{i_n}$
+をもつ {\v C}ech fppf 超被覆 $a : V_\bullet \to V$ を考え、次に
+$U_\bullet = V_\bullet \times_{a, V} X_V$ と置く。このとき
+$U_\bullet \to X_V$ は fppf 超被覆なので、Simplicial Spaces, Lemma
+\ref{spaces-simplicial-lemma-fppf-neg-ext-zero-hom} を適用できる。}。
+したがって $F$ が代数空間であり、$F \to Y$ がアフィンかつ有限表示で
+あることを証明するには、$Y$ 上 \'etale 局所的に議論してよい。
+Bootstrap, Lemma \ref{bootstrap-lemma-locally-algebraic-space-finite-type} および
+Morphisms of Spaces, Lemmas \ref{spaces-morphisms-lemma-affine-local}、
+\ref{spaces-morphisms-lemma-finite-presentation-local} を参照せよ。
+したがって $Y$ がアフィンスキームの場合に、$F$ が $Y$ 上有限表示な
+アフィン代数空間であることを証明すれば十分である。この場合、
+擬連接複体 $L \in D(\mathcal{O}_Y)$ に戻る。
+$i > 0$ に対して $H^i(L) = 0$ なので、$L$ は形
+$$
+\ldots \to \mathcal{O}_Y^{\oplus m_1} \to \mathcal{O}_Y^{\oplus m_0}
+\to 0 \to \ldots
+$$
+の複体で表せ、最後の項は次数 $0$ にある。More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherent} を参照せよ。
+証明の先の二つの表示式を合わせると
+$$
+F(V) =
+\Ker(
+\Hom_V(\mathcal{O}_V^{\oplus m_0}, \mathcal{O}_V)
+\to 
+\Hom_V(\mathcal{O}_V^{\oplus m_1}, \mathcal{O}_V)
+)
+$$
+を得る。言い換えると、ファイバー積図式
+$$
+\xymatrix{
+F \ar[d] \ar[r] & Y \ar[d]^0 \\
+\mathbf{A}_Y^{m_0} \ar[r] & \mathbf{A}_Y^{m_1}
+}
+$$
+がある。これで望むことが証明された。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-complexes}
+$S$ をスキームとする。$f : X \to Y$ を $S$ 上の代数空間の射とする。
+$f$ は固有、平坦かつ有限表示であると仮定する。
+$E \in D(\mathcal{O}_X)$ とする。次を仮定する：
+\begin{enumerate}
+\item $E$ は $S$-完全であり（More on Morphisms of Spaces, Definition
+\ref{spaces-more-morphisms-definition-relatively-perfect}）、
+\item すべての点 $s \in S$ に対して
+$$
+\Ext^i_{\mathcal{O}_{X_s}}(E_s, E_s) = 0
+\quad\text{ただし}\quad i < 0
+$$
+である。ここで $E_s$ はファイバー $X_s$ への引き戻しである。
+\end{enumerate}
+このとき
+\begin{enumerate}
+\item[(a)] (1) と (2) は任意の基底変換 $V \to Y$ で保たれ、
+\item[(b)] $Y$ 上のすべての $V$ と $i < 0$ に対して
+$\Ext^i_{\mathcal{O}_{X_V}}(E_V, E_V) = 0$ であり、
+\item[(c)] $V \mapsto \Hom_{\mathcal{O}_{X_V}}(E_V, E_V)$ は、$Y$ 上
+アフィンかつ有限表示な代数空間によって表現可能である。
+\end{enumerate}
+ここで $X_V$ は $X$ の基底変換であり、$E_V$ は $E$ の
+$X_V$ への導来引き戻しである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{quot-lemma-complexes-open-neg-exts-vanishing} の直ちに従う帰結である。
+\end{proof}
+
+\begin{situation}
+\label{quot-situation-complexes}
+$S$ をスキームとする。$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は固有、平坦かつ有限表示であると仮定する。
+$\Complexesstack_{X/B}$ を、対象が三つ組 $(T, g, E)$ である圏とする。
+ここで
+\begin{enumerate}
+\item $T$ は $S$ 上のスキームであり、
+\item $g : T \to B$ は $S$ 上の射であり、
+$X_T = T \times_{g, B} X$
+と置き、
+\item $E$ は Lemma \ref{quot-lemma-complexes} の条件 (1) と (2) を満たす
+$D(\mathcal{O}_{X_T})$ の対象である。
+\end{enumerate}
+射 $(T, g, E) \to (T', g', E')$ は対 $(h, \varphi)$ によって
+与えられる。ここで
+\begin{enumerate}
+\item $h : T \to T'$ は $B$ 上のスキームの射
+（すなわち $g' \circ h = g$）であり、
+\item $\varphi : L(h')^*E' \to E$ は $D(\mathcal{O}_{X_T})$ における
+同型である。ここで $h' : X_T \to X_{T'}$ は $h$ の基底変換である。
+\end{enumerate}
+\end{situation}
+
+\noindent
+このように $\Complexesstack_{X/B}$ は圏であり、規則
+$$
+p : \Complexesstack_{X/B} \longrightarrow (\Sch/S)_{fppf},
+\quad
+(T, g, E) \longmapsto T
+$$
+は関手である。$S$ 上のスキーム $T$ に対して、$p$ の $T$ 上の
+ファイバー圏を $\Complexesstack_{X/B, T}$ と表す。これらの
+ファイバー圏はグルーポイドである。
+
+\begin{lemma}
+\label{quot-lemma-complexes-fibred-in-groupoids}
+Situation \ref{quot-situation-complexes} において、関手
+$p : \Complexesstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+はグルーポイドをファイバーとする。
+\end{lemma}
+
+\begin{proof}
+Categories, Definition \ref{categories-definition-fibred-groupoids} の条件
+(1) と (2) を確認して、$p$ がグルーポイドをファイバーとすることを示す。
+$\Complexesstack_{X/B}$ の対象 $(T', g', E')$ と、$S$ 上のスキームの射
+$h : T \to T'$ が与えられたとき、$g = h \circ g'$ および
+$E = L(h')^*E'$ と置ける。ここで $h' : X_T \to X_{T'}$ は $h$ の
+基底変換である。このとき $h$ 上にある $\Complexesstack_{X/B}$ の射
+$(T, g, E) \to (T', g', E')$ が得られることは明らかである。
+これで (1) が証明された。(2) について、$\Complexesstack_{X/B}$ の射
+$$
+(h_1, \varphi_1) : (T_1, g_1, E_1) \to (T, g, E)
+\quad\text{and}\quad
+(h_2, \varphi_2) : (T_2, g_2, E_2) \to (T, g, E)
+$$
+と、$h_2 \circ h = h_1$ を満たす射 $h : T_1 \to T_2$ が
+与えられているとする。このとき $\varphi$ を合成
+$$
+L(h')^*E_2
+\xrightarrow{L(h')^*\varphi_2^{-1}}
+L(h')^*L(h_2)^*E = L(h_1)^*E
+\xrightarrow{\varphi_1}
+E_1
+$$
+とすれば、条件 (2) の成立を示す射
+$(h, \varphi) : (T_1, g_1, E_1) \to (T_2, g_2, E_2)$
+を得る。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-complexes-diagonal}
+Situation \ref{quot-situation-complexes} において
+$\mathcal{X} = \Complexesstack_{X/B}$ と表す。このとき
+$\Delta : \mathcal{X} \to \mathcal{X} \times \mathcal{X}$ は
+代数空間によって表現可能である。
+\end{lemma}
+
+\begin{proof}
+スキーム $T$ 上の $\mathcal{X}$ の二対象
+$x = (T, g, E)$ と $y = (T, g', E')$ を考える。
+$\mathit{Isom}_\mathcal{X}(x, y)$ が $T$ 上の代数空間であることを
+示さなければならない。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。
+$h : T' \to T$ に対して制限 $x|_{T'}$ と $y|_{T'}$ がファイバー圏
+$\mathcal{X}_{T'}$ で同型ならば、$g \circ h = g' \circ h$ である。
+したがって前層の変換
+$$
+\mathit{Isom}_\mathcal{X}(x, y) \longrightarrow \text{Equalizer}(g, g')
+$$
+がある。$B$ の対角射は（スキームによって）表現可能なので、この等化子は
+スキームである。したがって $T$ をこの等化子で置き換え、$E$ と $E'$ を
+それらの引き戻しで置き換えてよい。よって $g = g'$ と仮定してよい。
+
+\medskip\noindent
+$g = g'$ と仮定する。$B$ を $T$ で、$X$ を $X_T$ で置き換えると、
+次の問題に至る。Lemma \ref{quot-lemma-complexes} の条件 (1)、(2) を満たす
+$E, E' \in D(\mathcal{O}_X)$ が与えられたとき、
+$\mathit{Isom}(E, E')$ が代数空間であることを示さなければならない。
+ここで $\mathit{Isom}(E, E')$ は関手
+$$
+(\Sch/B)^{opp} \to \textit{Sets},\quad
+T \mapsto \{\varphi : E_T \to E'_T
+\text{ が }D(\mathcal{O}_{X_T})\text{ における同型}\}
+$$
+であり、$E_T$ と $E'_T$ は $E$ と $E'$ の $X_T$ への導来引き戻しである。
+Lemma \ref{quot-lemma-complexes-open-neg-exts-vanishing} によって
+$E, E'$、それぞれ $E', E$ に付随する $B$ の開部分空間を、それぞれ
+$W \subset B$、$W' \subset B$ とする。
+$\mathit{Isom}(E, E')$ の定義におけるような同型
+$E_T \to E'_T$ が存在するならば、$T \to B$ は $W$ と $W'$ の両方を
+経由することは明らかである（$E$ と $E'$ に対して条件 (1) があり、
+明らかに $E_t \cong E'_t$ なので、$i > 0$ に対してファイバー $X_t$ 上の
+非零写像 $E_t[i] \to E_t$ または $E'_t[i] \to E_t$ はない）。
+したがって $B$ を開部分 $W \cap W'$ で置き換えてよい。
+この場合、関手 $H = \SheafHom(E, E')$
+$$
+(\Sch/B)^{opp} \to \textit{Sets},\quad T \mapsto
+\Hom_{\mathcal{O}_{X_T}}(E_T, E'_T)
+$$
+は Lemma \ref{quot-lemma-complexes-open-neg-exts-vanishing} により、$B$ 上
+アフィンかつ有限表示な代数空間である。同じことが
+$H' = \SheafHom(E', E)$,
+$I = \SheafHom(E, E)$, および
+$I' = \SheafHom(E', E')$
+についても成り立つ。したがって Proposition \ref{quot-proposition-isom} の
+証明の議論を繰り返すと
+$$
+\mathit{Isom}(E, E') = (H' \times_B H) \times_{c, I \times_B I', \sigma} B
+$$
+となるような射 $c$ と $\sigma$ が存在することが分かる。
+したがって $\mathit{Isom}(E, E')$ は代数空間である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-complexes-stack}
+Situation \ref{quot-situation-complexes} において、関手
+$p : \Complexesstack_{X/B} \longrightarrow (\Sch/S)_{fppf}$
+はグルーポイドのスタックである。
+\end{lemma}
+
+\begin{proof}
+$\Complexesstack_{X/B}$ がグルーポイドのスタックであることを証明するには、
+前層 $\mathit{Isom}$ が層であり、降下データが有効であることを
+示さなければならない。$\mathit{Isom}$ に関する主張は
+Lemma \ref{quot-lemma-complexes-diagonal} から従う。Algebraic Stacks, Lemma
+\ref{algebraic-lemma-representable-diagonal} を参照せよ。
+降下データに関する主張を証明しよう。
+
+\medskip\noindent
+$\{a_i : T_i \to T\}$ を $S$ 上のスキームの fppf 被覆とする。
+$(\xi_i, \varphi_{ij})$ を、$\Complexesstack_{X/B}$ に値をとる
+$\{T_i \to T\}$ に対する降下データとする。各 $i$ に対して
+$\xi_i = (T_i, g_i, E_i)$ と書ける。射影を
+$\text{pr}_0 : T_i \times_T T_j \to T_i$ および
+$\text{pr}_1 : T_i \times_T T_j \to T_j$ と表す。
+条件 $\xi_i|_{T_i \times_T T_j} \cong \xi_j|_{T_i \times_T T_j}$ は特に
+$g_i \circ \text{pr}_0 = g_j \circ \text{pr}_1$ を含意する。
+したがって $g_i = g \circ a_i$ を満たす一意な射 $g : T \to B$ が存在する。
+Descent on Spaces, Lemma
+\ref{spaces-descent-lemma-fpqc-universal-effective-epimorphisms}.
+を参照せよ。$X_T = T \times_{g, B} X$ と表す。
+$X_i = X_{T_i} = T_i \times_{g_i, B} X = T_i \times_{a_i, T} X_T$
+と置き、
+$$
+X_{ij} = X_{T_i} \times_{X_T} X_{T_j} = X_i \times_{X_T} X_j
+$$
+とし、$\text{pr}_i$ と $\text{pr}_j$ をそれぞれ $X_i$ と $X_j$ への
+射影とする。$(T_i, g_i, E_i)$ の
+$\text{pr}_0 : T_i \times_T T_j \to T_i$ による引き戻しは
+$(T_i \times_T T_j, g_i \circ \text{pr}_0, L\text{pr}_i^*E_i)$.
+によって与えられることに注意する。したがって $\Complexesstack_{X/B}$ に
+おける $\{T_i \to T\}$ に対する降下データは、対象
+$(T_i, g \circ a_i, E_i)$ と、各対 $i, j$ に対する
+$D\mathcal{O}_{X_{ij}})$
+における同型
+$$
+\varphi_{ij} :
+L\text{pr}_i^*E_i \longrightarrow L\text{pr}_j^*E_j
+$$
+であって、$X$ の $T_i \times_T T_j \times_T T_k$ への引き戻し上で
+コサイクル条件を満たすものによって与えられる。
+Lemma \ref{quot-lemma-complexes} の (b) が与える負次数 Ext の消滅を用いると、
+Simplicial Spaces, Lemma \ref{spaces-simplicial-lemma-fppf-glue-neg-ext-zero}
+を適用して、これらの複体に対する降下を得られる\footnote{これを確認するには、
+まず
+$T_n = \coprod_{i_0 \ldots i_n} T_{i_0} \times_T \ldots \times_T T_{i_n}$
+をもつ {\v C}ech fppf 超被覆 $a : T_\bullet \to T$ を考え、次に
+$U_\bullet = T_\bullet \times_{a, T} X_T$ と置く。このとき
+$U_\bullet \to X_T$ は fppf 超被覆なので、Simplicial Spaces, Lemma
+\ref{spaces-simplicial-lemma-fppf-glue-neg-ext-zero} を適用できる。}。
+言い換えると、$\varphi_{ij}$ と両立し、$X_{T_i}$ 上で $E_i$ に制限される
+$D_\QCoh(\mathcal{O}_{X_T})$ の対象 $E$ が存在する。
+$T$-完全とは、擬連接であり、$f^{-1}\mathcal{O}_T$ 上局所有限 Tor 次元を
+もつことを意味することを思い出そう。したがって More on Morphisms of
+Spaces, Lemmas
+\ref{spaces-more-morphisms-lemma-pseudo-coherent-descends-fpqc} および
+\ref{spaces-more-morphisms-lemma-tor-amplitude-descends-fppf} を適用すると、
+$E$ は $T$-完全である。最後に $E$ に対して Lemma
+\ref{quot-lemma-complexes} の条件 (2) を確認しなければならない。
+これは Lemma \ref{quot-lemma-complexes-open-neg-exts-vanishing} における開部分
+$W$ の記述と、$X_{T_i}/T_i$ 上の $E_i$ に対して (2) が成り立つことから
+直ちに従う。
+\end{proof}
+
+\begin{remark}
+\label{quot-remark-complexes-base-change}
+Situation \ref{quot-situation-complexes} において、規則
+$(T, g, E) \mapsto (T, g)$ はグルーポイドのスタックの $1$-射
+$$
+\Complexesstack_{X/B} \longrightarrow \mathcal{S}_B
+$$
+を定める（Lemma \ref{quot-lemma-complexes-stack}、Algebraic Stacks, Section
+\ref{algebraic-section-split}、および Examples of Stacks, Section
+\ref{examples-stacks-section-stack-associated-to-sheaf} を参照）。
+$B' \to B$ を $S$ 上の代数空間の射とする。
+$\mathcal{S}_{B'} \to \mathcal{S}_B$ を、集合をファイバーとする
+スタックの付随する $1$-射とする。$X' = X \times_B B'$ と置く。
+基底変換 $f' : X' \to B'$ に付随するグルーポイドのスタック
+$\Complexesstack_{X'/B'} \to (\Sch/S)_{fppf}$ を得る。この状況で図式
+$$
+\vcenter{\offinterlineskip
+\halign{\hfil\ensuremath{\displaystyle #}\hfil\cr
+\vcenter{\xymatrix{
+\Complexesstack_{X'/B'} \ar[r] \ar[d] &
+\Complexesstack_{X/B} \ar[d] \\
+\mathcal{S}_{B'} \ar[r] & \mathcal{S}_B
+}}\cr
+\noalign{\vskip 0.8em}
+\begin{matrix}
+\text{または別の記法では次の図式}
+\end{matrix}\cr
+\noalign{\vskip 0.8em}
+\vcenter{\xymatrix{
+\Complexesstack_{X'/B'} \ar[r] \ar[d] &
+\Complexesstack_{X/B} \ar[d] \\
+\Sch/B' \ar[r] & \Sch/B
+}}\cr
+}}
+$$
+は $2$-ファイバー積の正方形である。この自明な注意は、
+基底代数空間を変える際にときどき有用である。
+\end{remark}
+
+\begin{lemma}
+\label{quot-lemma-complexes-limits}
+Situation \ref{quot-situation-complexes} において、$B \to S$ が局所有限表示で
+あると仮定する。このとき
+$p : \Complexesstack_{X/B} \to (\Sch/S)_{fppf}$ は極限を保つ
+（Artin's Axioms, Definition \ref{artin-definition-limit-preserving}）。
+\end{lemma}
+
+\begin{proof}
+$B(T)$ を、対象が $S$-射 $T \to B$ である離散圏と表す。
+$T = \lim T_i$ を $S$ 上のアフィンスキームのフィルター極限とする。
+$\Complexesstack_{X/B, T}$ の対象 $(T, h, E)$ に $B(T)$ の対象 $h$ を
+対応させると、ファイバー圏の可換図式
+$$
+\xymatrix{
+\colim \Complexesstack_{X/B, T_i} \ar[r] \ar[d] &
+\Complexesstack_{X/B, T} \ar[d] \\
+\colim B(T_i) \ar[r] & B(T)
+}
+$$
+を得る。上の水平矢印が圏同値であることを示さなければならない。
+$B$ は $S$ 上局所有限表示であると仮定したので、Limits of Spaces, Remark
+\ref{spaces-limits-remark-limit-preserving} により、下の水平矢印は
+圏同値である。したがって $T = \lim T_i$ は $B$ 上のアフィンスキームの
+フィルター極限であると仮定してよい。対応する射を
+$g_i : T_i \to B$ および $g : T \to B$ と表す。
+$X_i = T_i \times_{g_i, B} X$ および $X_T = T \times_{g, B} X$ と置く。
+$X_T = \colim X_i$ であることに注意する。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-descend-relatively-perfect}
+により、$D(\mathcal{O}_{X_T})$ の $T$-完全対象の圏は、
+$D(\mathcal{O}_{X_{T_i}})$ の $T_i$-完全対象の圏の余極限である。
+したがって次を証明すればよい。$D(\mathcal{O}_{X_{T_i}})$ の
+$T_i$-完全対象 $E_i$ が与えられ、$E_i$ の $X_T$ への導来引き戻し $E$ が
+Lemma \ref{quot-lemma-complexes} の条件 (2) を満たすならば、$i$ を大きくした後、
+$E_i$ も Lemma \ref{quot-lemma-complexes} の条件 (2) を満たす。
+$W \subset |T_i|$ を、Lemma \ref{quot-lemma-complexes-open-neg-exts-vanishing}
+で $E_i$ と $E_i$ に対して構成された開部分とする。$E$ に関する仮定により、
+$T \to T_i$ は $T$ を経由する。したがって、$T_{i'} \to T_i$ が $W$ を
+経由するような $i' \geq i$ が存在する。Limits, Lemma
+\ref{limits-lemma-limit-contained-in-constructible} を参照せよ。
+$W$ の構成により、この $i'$ でよい。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-complexes-RS-star}
+Situation \ref{quot-situation-complexes} において、図式
+$$
+\xymatrix{
+Z \ar[r] \ar[d] & Z' \ar[d] \\
+Y \ar[r] & Y'
+}
+$$
+を $S$ 上のスキームの圏における押し出しとし、$Z \to Z'$ は有限位数の
+肥厚、$Z \to Y$ はアフィンであるとする。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-pushout-along-thickening} を参照せよ。
+このときファイバー圏上の関手
+$$
+\Complexesstack_{X/B, Y'}
+\longrightarrow
+\Complexesstack_{X/B, Y}
+\times_{\Complexesstack_{X/B, Z}}
+\Complexesstack_{X/B, Z'}
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+対応する写像
+$$
+B(Y') \longrightarrow B(Y) \times_{B(Z)} B(Z')
+$$
+は全単射であることに注意する。Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-pushout-along-thickening-schemes} を参照せよ。
+したがって可換図式
+$$
+\xymatrix{
+\Complexesstack_{X/B, Y'} \ar[r] \ar[d] &
+\Complexesstack_{X/B, Y}
+\times_{\Complexesstack_{X/B, Z}}
+\Complexesstack_{X/B, Z'}
+\ar[d] \\
+B(Y') \ar[r] & B(Y) \times_{B(Z)} B(Z')
+}
+$$
+を用いると、$Y'$ は $B'$ 上のスキームであると仮定してよい。
+Remark \ref{quot-remark-complexes-base-change} により、$B$ を $Y'$ で、
+$X$ を $X \times_B Y'$ で置き換えてよい。したがって $B = Y'$ と
+仮定してよい。
+
+\medskip\noindent
+$B = Y'$ と仮定する。まず関手の充満忠実性を証明する。
+$\xi_1, \xi_2$ を $Y'$ 上の $\Complexesstack_{X/B}$ の二対象とする。
+このとき写像
+$$
+\mathit{Isom}(\xi_1, \xi_2)(Y') \longrightarrow
+\mathit{Isom}(\xi_1, \xi_2)(Y)
+\times_{\mathit{Isom}(\xi_1, \xi_2)(Z)}
+\mathit{Isom}(\xi_1, \xi_2)(Z')
+$$
+が全単射であることを示さなければならない。しかし
+$\mathit{Isom}(\xi_1, \xi_2)$ は $B = Y'$ 上の代数空間であることが
+すでに分かっている。したがってこの全単射性は Artin's Axioms, Lemma
+\ref{artin-lemma-pushout}（または前述の Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-pushout-along-thickening-schemes}）から従う。
+
+\medskip\noindent
+本質的全射性。三つ組 $(E_Y, E_{Z'}, \alpha)$ を取る。ここで
+$E_Y \in D(\mathcal{O}_Y)$ と $E_{Z'} \in D(\mathcal{O}_{X_{Z'}})$ は、
+$(Y, Y \to B, E_Y)$ が $Y$ 上の $\Complexesstack_{X/B}$ の対象、
+$(Z', Z' \to B, E_{Z'})$ が $Z'$ 上の $\Complexesstack_{X/B}$ の対象と
+なるものであり、
+$\alpha : L(X_Z \to X_Y)^*E_Y \to L(X_Z \to X_{Z'})^*E_{Z'}$ は
+$D(\mathcal{O}_{Z'})$ における同型である。すなわち
+$$
+((Y, Y \to B, E_Y), (Z', Z' \to B, E_{Z'}), \alpha)
+$$
+は補題の矢印の標的の対象である。図式
+$$
+\xymatrix{
+X_Z \ar[r] \ar[d] & X_{Z'} \ar[d] \\
+X_Y \ar[r] & X_{Y'}
+}
+$$
+は押し出しであり、$X_Z \to X_Y$ はアフィン、$X_Z \to X_{Z'}$ は肥厚である
+ことに注意する（Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-equivalence-categories-spaces-pushout-flat} を参照）。
+したがって Pushouts of Spaces, Lemma
+\ref{spaces-pushouts-lemma-pushout-along-thickening-derived}
+により、対象 $E_{Y'} \in D(\mathcal{O}_{X_{Y'}})$ と同型
+$L(X_Y \to X_{Y'})^*E_{Y'} \to E_Y$ および
+$L(X_{Z'} \to X_{Y'})^*E_{Y'} \to E_Z$
+であって $\alpha$ と両立するものを得る。$E_{Y'}$ が $Y'$-完全であることを
+示せば完了することは明らかである。Lemma \ref{quot-lemma-complexes} の性質 (2) は
+点上の性質であり、$Y$ と $Y'$ は同じ点をもつからである。
+これは More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thickening-relatively-perfect} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-complexes-tangent-space}
+Situation \ref{quot-situation-complexes} において、$S$ は局所 Noether
+スキームであり、$B \to S$ は局所有限表示であると仮定する。
+$k$ を $S$ 上有限型な体とし、$x_0 = (\Spec(k), g_0, E_0)$ を
+$k$ 上の $\mathcal{X} = \Complexesstack_{X/B}$ の対象とする。
+このとき空間 $T\mathcal{F}_{\mathcal{X}, k, x_0}$ および
+$\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0})$
+（Artin's Axioms, Section \ref{artin-section-tangent-spaces}）は有限次元である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{quot-lemma-complexes-RS-star} により、グルーポイドのスタック
+$\mathcal{X}$ は Artin's Axioms, Section \ref{artin-section-RS-star}
+で定義された性質 (RS*) を満たすことに注意する。特に $\mathcal{X}$ は
+(RS) を満たす。したがって付随するすべての前変形圏は変形圏であり
+（Artin's Axioms, Lemma \ref{artin-lemma-deformation-category}）、
+この主張には意味がある。
+
+\medskip\noindent
+この段落では $B = \Spec(k)$ の場合に帰着できることを示す。
+$X_0 = \Spec(k) \times_{g_0, B} X$ と置き、
+$\mathcal{X}_0 = \Complexesstack_{X_0/k}$ と表す。
+Remark \ref{quot-remark-complexes-base-change} で、$(\Sch/S)_{fppf}$ 上で
+グルーポイドをファイバーとする圏として、$\mathcal{X}_0$ は
+$B$ 上の $\mathcal{X}$ と $\Spec(k)$ の $2$-ファイバー積であることを見た。
+したがって Artin's Axioms, Lemma
+\ref{artin-lemma-fibre-product-tangent-spaces} により、$B$、$\Spec(k)$、
+$\mathcal{X}_0$ が有限次元の接空間と無限小自己同型空間をもつことの
+証明に帰着する。Artin's Axioms, Lemma
+\ref{artin-lemma-finite-dimension} により、$B$ と $\Spec(k)$ の接空間は
+有限次元であり、もちろんそれらの $\text{Inf}$ は零である。
+したがって $\mathcal{X}_0$ を扱えば十分である。
+
+\medskip\noindent
+$k[\epsilon]$ を $k$ 上の双対数とする。
+$\Spec(k[\epsilon]) \to B$ を、$g_0 : \Spec(k) \to B$ と包含
+$k \to k[\epsilon]$ から来る射 $\Spec(k[\epsilon]) \to \Spec(k)$ の合成とする。
+$X_0 = \Spec(k) \times_B X$ および
+$X_\epsilon = \Spec(k[\epsilon]) \times_B X$ と置く。
+$X_\epsilon$ は一次肥厚 $\Spec(k) \to \Spec(k[\epsilon])$ 上平坦な
+$X_0$ の一次肥厚であることに注意する。また $X_0$ と $X_\epsilon$ は
+標準的に同値な小 \'etale トポスを与える。More on Morphisms of Spaces,
+Section \ref{spaces-more-morphisms-section-thickenings} を参照せよ。
+More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-thickening-relatively-perfect}
+により、$T\mathcal{F}_{\mathcal{X}_0, k, x_0}$ は Deformation Theory,
+Lemma \ref{defos-lemma-first-order-defos-complex} の意味での
+$E_0$ の $X_\epsilon$ への持ち上げの同型類の集合である。したがって
+$$
+T\mathcal{F}_{\mathcal{X}_0, k, x_0} =
+\Ext^1_{\mathcal{O}_{X_0}}(E_0, E_0)
+$$
+を得る。ここでは $k[\epsilon]$-加群の同一視
+$\epsilon k[\epsilon] \cong k$ を用いた。もう一度 Deformation Theory,
+Lemma \ref{defos-lemma-first-order-defos-complex} を用いると、
+$k$-ベクトル空間の全射
+$$
+\text{Inf}(\mathcal{F}_{\mathcal{X}, k, x_0})
+\leftarrow
+\Ext^0_{\mathcal{O}_{X_0}}(E_0, E_0)
+$$
+が存在する。$E_0$ は擬連接なので、Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-identify-pseudo-coherent-noetherian} により
+$D^-_{\textit{Coh}}(\mathcal{O}_{X_0})$ に属する。
+$E_0$ は局所有限 Tor 次元をもち、$X_0$ は準コンパクトなので、
+$E_0 \in D^b_{\textit{Coh}}(\mathcal{O}_{X_0})$ である。
+したがって Derived Categories of Spaces, Lemma
+\ref{spaces-perfect-lemma-ext-finite} により、上の $\Ext$ は
+有限次元 $k$-ベクトル空間である。
+\end{proof}
+
+\begin{lemma}
+\label{quot-lemma-complexes-strong-effectiveness}
+Situation \ref{quot-situation-complexes} において、$B = S$ は局所 Noether 的で
+あると仮定する。このとき Artin's Axioms, Remark
+\ref{artin-remark-strong-effectiveness} の意味での強い形式的有効性が
+$p : \Complexesstack_{X/S} \to (\Sch/S)_{fppf}$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$(R_n)$ を、核が局所冪零である全射な遷移写像をもつ $S$-代数の逆系とする。
+$R = \lim R_n$ と置く。$(\xi_n)$ を $(\Spec(R_n))$ 上にある
+$\Complexesstack_{X/B}$ の対象の系とする。$(\xi_n)$ が有効であること、
+すなわち $\Spec(R)$ 上にある $\Complexesstack_{X/B}$ の対象 $\xi$ が
+存在することを示さなければならない。
+
+\medskip\noindent
+$X_R = \Spec(R) \times_S X$ および $X_n = \Spec(R_n) \times_S X$ と書く。
+もちろん $X_n$ は $R \to R_n$ による $X_R$ の基底変換である。
+$S = B$ なので、$\xi_n$ は単に Lemma \ref{quot-lemma-complexes} の条件 (2) を
+満たす $R_n$-完全対象 $E_n \in D(\mathcal{O}_{X_n})$ に対応する。
+特に $E_n$ は擬連接である。同型
+$\xi_{n + 1}|_{\Spec(R_n)} \cong \xi_n$ は同型
+$L(X_n \to X_{n + 1})^*E_{n + 1} \to E_n$ に対応する。
+したがって Flatness on Spaces, Theorem
+\ref{spaces-flat-theorem-existence-derived} により、すべての $n$ について
+$E_n$ が遷移同型と両立する $E$ の導来引き戻しとなるような
+$D(\mathcal{O}_{X_R})$ の擬連接対象 $E$ を得る。
+
+\medskip\noindent
+$(R, \Ker(R \to R_1))$ は Hensel 対であることに注意する。
+More on Algebra, Lemma \ref{more-algebra-lemma-limit-henselian} を参照せよ。
+特に $\Ker(R \to R_1)$ は $R$ の Jacobson 根基に含まれる。
+そこで More on Morphisms of Spaces, Lemma
+\ref{spaces-more-morphisms-lemma-henselian-relatively-perfect}
+を適用すると、$E$ は $R$-完全である。
+
+\medskip\noindent
+最後に Lemma \ref{quot-lemma-complexes} の条件 (2) を確認しなければならない。
+Lemma \ref{quot-lemma-complexes-open-neg-exts-vanishing} により、$E_t$ の負次数の
+自己 Ext が消えるような $\Spec(R)$ の点 $t$ の集合は開である。
+この条件は $V(\Ker(R \to R_1))$ で成り立ち、$\Ker(R \to R_1)$ は
+$R$ の Jacobson 根基に含まれるので、すべての点で成り立つと結論できる。
+\end{proof}
+
+\begin{theorem}[固有射上の複体のモジュライの代数性]
+\label{quot-theorem-complexes-algebraic}
+\begin{reference}
+\cite{lieblich-complexes}
+\end{reference}
+$S$ をスキームとする。$f : X \to B$ を $S$ 上の代数空間の射とする。
+$f$ は固有、平坦かつ有限表示であると仮定する。
+このとき $\Complexesstack_{X/B}$ は $S$ 上の代数スタックである。
+\end{theorem}
+
+\begin{proof}
+$\mathcal{X} = \Complexesstack_{X/B}$ と置く。$\mathcal{X}$ は
+$(\Sch/S)_{fppf}$ 上のグルーポイドのスタックであり、その対角射は
+代数空間によって表現可能であることを見た
+（Lemmas \ref{quot-lemma-complexes-stack} および
+\ref{quot-lemma-complexes-diagonal}）。したがってスキーム $W$ と、
+全射かつ滑らかな射 $W \to \mathcal{X}$ を見つければ十分である。
+
+\medskip\noindent
+$B'$ をスキームとし、$B' \to B$ を全射 \'etale 射とする。
+$X' = B' \times_B X$ と置き、射影を $f' : X' \to B'$ と表す。
+このとき $\mathcal{X}' = \Complexesstack_{X'/B'}$ は、$B$ に付随する
+集合をファイバーとする圏上で、$\mathcal{X}$ と $B'$ に付随する
+集合をファイバーとする圏との $2$-ファイバー積に等しい
+（Remark \ref{quot-remark-complexes-base-change}）。Algebraic Stacks, Section
+\ref{algebraic-section-representable-properties} の内容により、射
+$\mathcal{X}' \to \mathcal{X}$ は全射かつ \'etale である。
+したがって $\mathcal{X}'$ に対して結果を証明すれば十分である。
+言い換えると、$B$ はスキームであると仮定してよい。
+
+\medskip\noindent
+$B$ がスキームであると仮定する。この場合、$S$ を $B$ で置き換えてよい。
+Algebraic Stacks, Section \ref{algebraic-section-change-base-scheme} を
+参照せよ。したがって $S = B$ と仮定してよい。
+
+\medskip\noindent
+$S = B$ と仮定する。アフィン開被覆 $S = \bigcup U_i$ を選ぶ。
+$\mathcal{X}$ の $(\Sch/U_i)_{fppf}$ への制限を $\mathcal{X}_i$ と表す。
+$U_i$ 上のスキーム $W_i$ と全射かつ滑らかな射
+$W_i \to \mathcal{X}_i$ を見つけられれば、$W = \coprod W_i$ と置くことで、
+全射かつ滑らかな射 $W \to \mathcal{X}$ を得る。
+したがって $S = B$ はアフィンであると仮定してよい。
+
+\medskip\noindent
+$S = B$ はアフィン、例えば $S = \Spec(\Lambda)$ であると仮定する。
+$\Lambda = \colim \Lambda_i$ を、各 $\Lambda_i$ が $\mathbf{Z}$ 上有限型な
+フィルター余極限として書く。ある $i$ に対して、固有、平坦、有限表示であり、
+$\Lambda$ への基底変換が $X$ となる代数空間の射
+$X_i \to \Spec(\Lambda_i)$ を見つけられる。Limits of Spaces, Lemmas
+\ref{spaces-limits-lemma-descend-finite-presentation},
+\ref{spaces-limits-lemma-descend-flat}, および
+\ref{spaces-limits-lemma-eventually-proper} を参照せよ。
+$\Complexesstack_{X_i/\Spec(\Lambda_i)}$ が代数スタックであることを
+示せば、基底変換により（Remark \ref{quot-remark-complexes-base-change} および
+Algebraic Stacks, Section \ref{algebraic-section-change-base-scheme}）、
+$\mathcal{X}$ は代数スタックである。したがって $\Lambda$ は有限型
+$\mathbf{Z}$-代数であると仮定してよい。
+
+\medskip\noindent
+$S = B = \Spec(\Lambda)$ は $\mathbf{Z}$ 上有限型なアフィンであると仮定する。
+この場合、Artin's Axioms, Lemma
+\ref{artin-lemma-diagonal-representable} の条件 (1)、(2)、(3)、(4)、(5) を
+確認し、$\mathcal{X}$ が代数スタックであると結論する。
+$\Lambda$ は G-環であることに注意する。More on Algebra, Proposition
+\ref{more-algebra-proposition-ubiquity-G-ring} を参照せよ。
+したがって $S$ のすべての局所環は G-環であり、(5) が成り立つ。
+(2) を確認するには、Artin's Axioms, Section \ref{artin-section-axioms}
+の公理 [-1]、[0]、[1]、[2]、[3] を確認しなければならない。
+[-1] の確認は省略し、公理 [0]、[1]、[2]、[3] はそれぞれ
+Lemmas \ref{quot-lemma-complexes-stack},
+\ref{quot-lemma-complexes-limits},
+\ref{quot-lemma-complexes-RS-star},
+\ref{quot-lemma-complexes-tangent-space}.
+に対応する。条件 (3) は Lemma \ref{quot-lemma-complexes-strong-effectiveness}
+から従う。条件 (1) は Lemma \ref{quot-lemma-complexes-diagonal} である。
+
+\medskip\noindent
+versal 性の開性である条件 (4) を示すことが残る。そのために
+Artin's Axioms, Lemma \ref{artin-lemma-SGE-implies-openness-versality}
+を用いる。$\mathcal{X}$ が代数空間によって表現可能な対角射をもち、
+(RS*) を満たし、極限を保つことはすでに見た（上で用いた補題を参照）。
+したがって、Artin's Axioms, Lemma
+\ref{artin-lemma-SGE-implies-openness-versality} で定式化された
+強い形式的有効性を $\mathcal{X}$ が満たすことだけを確認すればよい。
+これは Lemma \ref{quot-lemma-complexes-strong-effectiveness} から従い、
+証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\raggedbottom

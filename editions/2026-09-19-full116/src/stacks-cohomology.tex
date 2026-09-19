@@ -1,0 +1,3864 @@
+% Generated mechanically from frozen input inputs/p12/ja/stacks-cohomology.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{102}
+\chapter{代数スタックのコホモロジー}
+
+
+\phantomsection
+\label{stacks-cohomology-section-phantom}
+
+
+
+
+
+\section{はじめに}
+\label{stacks-cohomology-section-introduction}
+
+\noindent
+本章では，代数スタックのコホモロジーについて論じる．
+とくに準連接層のコホモロジーを扱い，
+「スキームのコホモロジー」および「代数空間のコホモロジー」と題する章の
+結果に対応する類似結果を証明する．
+本章の結果が \cite{LM-B} の結果と異なる主な理由は，
+一貫して「大サイト」を用いることにある．
+本章を読む前に「代数スタック上の層」の章に目を通し，
+そこで導入された用語に慣れておかれたい．
+Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-introduction} を参照されたい．
+
+
+
+\section{規約と言葉の濫用}
+\label{stacks-cohomology-section-conventions}
+
+\noindent
+引き続き，Properties of Stacks, Section
+\ref{stacks-properties-section-conventions} で導入した規約および
+言葉の濫用を用いる．
+
+
+
+
+
+
+
+
+
+
+
+
+\section{記法}
+\label{stacks-cohomology-section-notation}
+
+\noindent
+種々の位相．代数スタックは $\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ のような
+カリグラフィー体で表す．このとき，次の記法を用いる．
+
+$\mathcal{X}_{Zar}, \mathcal{X}_\etale, \mathcal{X}_{smooth},
+\mathcal{X}_{syntomic}, \mathcal{X}_{fppf}$ は
+Sheaves on Stacks, Definition
+\ref{stacks-sheaves-definition-inherited-topologies}
+で導入したサイトを表す．
+（「大サイト」と考えればよい．）したがって，$\mathcal{X}$ の構造層は
+$\mathcal{X}_{fppf}$ 上の層である．
+一方，代数空間およびスキームは通常 $X, Y, Z$ のような
+ローマン体の大文字で表し，この場合 $X_\etale$ は $X$ の小 \'etale サイトを表す
+（Topologies, Definition
+\ref{topologies-definition-big-small-etale}
+または Properties of Spaces, Definition
+\ref{spaces-properties-definition-etale-site} で定義したもの）．
+この区別は十分明確であろう．
+
+\medskip\noindent
+既定の位相は fppf 位相である．したがって，$\mathcal{X}_{fppf}$ 上の層または
+$\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$ の対象を意味して，
+「$\mathcal{X}$ 上の層」または「$\mathcal{O}_\mathcal{X}$-加群の層」と
+いうことがある．
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする．
+前層上で定義される関手 $f_*$ および $f^{-1}$ は，上で述べたどの位相についても
+層を層へ移す．したがって，層の順像または逆像を論じる際には，
+どの位相を用いているかを明記する必要はない．
+コホモロジー群や高次順像を計算する場合には同じことは成り立たず，
+その場合には用いる位相を常に明記する．
+
+\medskip\noindent
+$f : X \to \mathcal{Y}$ を代数空間 $X$ から代数スタック $\mathcal{Y}$ への射とし，
+$\mathcal{G}$ をある位相 $\tau$ に関する $\mathcal{Y}_\tau$ 上の層とする．
+このとき $f^{-1}\mathcal{G}$ は，$X$ に付随する代数スタック
+$\mathcal{S}_X$ 上の $\tau$ 位相に関する層である．
+実際，われわれの規約では $f$ は $1$-射
+$f : \mathcal{S}_X \to \mathcal{Y}$ だからである．
+$\tau = \etale$ またはそれより強い位相の場合，$X$ の \'etale サイトへの制限を
+$f^{-1}\mathcal{G}|_{X_\etale}$
+と書く．Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-compare} を参照されたい．
+$\mathcal{G}$ が $\mathcal{O}_\mathcal{X}$-加群ならば，代わりに
+$f^*\mathcal{G}$ および $f^*\mathcal{G}|_{X_\etale}$ と書くこともある．
+
+
+
+
+\section{準連接加群の引き戻し}
+\label{stacks-cohomology-section-pullback}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする．
+環付きトポス上の準連接加群が引き戻しと両立することは，きわめて一般的な事実である．
+とくに，引き戻し $f^*$ は準連接加群を準連接加群へ移し，関手
+$$
+f^* :
+\QCoh(\mathcal{O}_\mathcal{Y})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X}),
+$$
+を与える．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent} を参照されたい．
+一般にこの関手は完全とは限らないが，$f$ が平坦ならば完全である．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-pullback-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$ が代数スタックの平坦射ならば，
+$f^* : \QCoh(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$ は完全関手である．
+\end{lemma}
+
+\begin{proof}
+スキーム $V$ と全射な滑らかな射 $V \to \mathcal{Y}$ を選ぶ．
+スキーム $U$ と全射な滑らかな射
+$U \to V \times_\mathcal{Y} \mathcal{X}$ を選ぶ．
+このとき $U \to \mathcal{X}$ は，そのような二つの射の合成として，
+やはり滑らかかつ全射である．可換図式
+$$
+\xymatrix{
+U \ar[d] \ar[r]_{f'} & V \ar[d] \\
+\mathcal{X} \ar[r]^f & \mathcal{Y}
+}
+$$
+から，可換図式
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_U) & \QCoh(\mathcal{O}_V) \ar[l] \\
+\QCoh(\mathcal{O}_\mathcal{X}) \ar[u] &
+\QCoh(\mathcal{O}_\mathcal{Y}) \ar[l] \ar[u]
+}
+$$
+を得る．これはアーベル圏の図式である．
+この図式の下段の二つの圏がアーベル圏であることを示した証明により，
+縦の関手は忠実完全関手である
+（Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} の証明を参照）．
+$f'$ はスキームの平坦射であるから
+（これは代数スタックの平坦射の定義による），$(f')^*$ は $V$ 上の
+準連接層の圏における完全関手である．これで結論が従う．
+\end{proof}
+
+
+
+
+
+
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-check-exact}
+$\mathcal{X}$ を代数スタックとし，$I$ を集合とする．
+各 $i \in I$ に対して，$x_i : U_i \to \mathcal{X}$ を
+$\mathcal{X}$ の対象とする．$x_i$ は平坦であり，
+$\coprod x_i : \coprod U_i \to \mathcal{X}$ は全射であると仮定する．
+$\varphi : \mathcal{F} \to \mathcal{G}$ を
+$\QCoh(\mathcal{O}_\mathcal{X})$ の射とし，$\varphi_i$ を
+$\varphi$ の $(U_i)_\etale$ への制限とする．
+このとき，$\varphi$ が単射，resp.\ 全射，resp.\ 同型であるための
+必要十分条件は，各 $\varphi_i$ がそれぞれ同じ性質をもつことである．
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射な滑らかな射 $x : U \to \mathcal{X}$ を選ぶ．
+$x$ を $\mathcal{X}$ の対象とみなし，以下でもそのように扱う．
+これにより，空間のある亜群 $(U, R, s, t, c)$ に対する表示
+$\mathcal{X} = [U/R]$ と，対応する圏同値
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) = \QCoh(U, R, s, t, c)
+$$
+が得られる．Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks} の議論を参照されたい．
+右辺のアーベル圏の構造は，$\varphi$ が単射，resp.\ 全射，resp.\ 同型であることと，
+その制限 $\varphi|_{U_\etale}$ が同じ性質をもつこととが同値になるように定められている．
+Groupoids in Spaces, Lemma \ref{spaces-groupoids-lemma-abelian} を参照されたい．
+
+\medskip\noindent
+% P12-ERR-0010: preserve the frozen source's undefined V at the two following loci.
+各 $i$ に対し，スキームによる \'etale 被覆
+$\{W_{i, j} \to V \times_\mathcal{X} U_i\}_{j \in J_i}$
+を選ぶ．$g_{i, j} : W_{i, j} \to V$ および
+$h_{i, j} : W_{i, j} \to U_i$ を明らかな射とする．
+スキームの射 $g_{i, j} : W_{i, j} \to U$ はいずれも平坦であり，
+それらは共同で全射である．
+同様に，各 $i$ を固定すると，スキームの射
+$h_{i, j} : W_{i, j} \to U_i$ は平坦かつ共同で全射である．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-quasi-coherent} により，
+制限 $\varphi|_{U_\etale}$ の $(g_{i, j})_{small}$ による引き戻しは
+制限 $\varphi|_{(W_{i, j})_\etale}$ であり，
+制限 $\varphi|_{(U_i)_\etale}$ の $(h_{i, j})_{small}$ による引き戻しも
+制限 $\varphi|_{(W_{i, j})_\etale}$ である．
+スキームの平坦射による準連接加群の引き戻しは完全であり，
+平坦射の共同全射族による引き戻しは準連接加群の射が単射，resp.\ 全射，resp.\ 全単射であることを反映する
+（実際，茎で完全性を確認できるので，これはすべての加群に対して成り立つ）．
+したがって，
+$$
+\varphi|_{U_\etale} \text{ は単射}
+\Leftrightarrow
+\varphi|_{(W_{i, j})_\etale} \text{ はすべて単射：}i, j
+\Leftrightarrow
+\varphi|_{(U_i)_\etale} \text{ はすべて単射：}i
+$$
+を得る．これで証明が完了する．
+\end{proof}
+
+
+
+
+\section{ある型の加群の高次順像}
+\label{stacks-cohomology-section-key}
+
+\noindent
+次の補題は，ある型の加群の層の高次順像を理解するための基礎である．
+これには \'etale 位相に関するものと fppf 位相に関するものの二つの版がある．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-general-pushforward}
+各代数スタック $\mathcal{X}$ に
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の部分圏
+$\mathcal{M}_\mathcal{X}$ を対応させる規則を $\mathcal{M}$ とし，
+次を仮定する．
+\begin{enumerate}
+\item 任意の代数スタック $\mathcal{X}$ に対し，
+$\mathcal{M}_\mathcal{X}$ は
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の
+弱 Serre 部分圏である
+（Homology, Definition \ref{homology-definition-serre-subcategory} を参照）．
+\item 代数スタックの滑らかな射
+$f : \mathcal{Y} \to \mathcal{X}$ に対して，関手 $f^*$ は
+$\mathcal{M}_\mathcal{X}$ を $\mathcal{M}_\mathcal{Y}$ の中へ写す．
+\item $f_i : \mathcal{X}_i \to \mathcal{X}$ が
+$|\mathcal{X}| = \bigcup |f_i|(|\mathcal{X}_i|)$ を満たす
+代数スタックの滑らかな射の族ならば，
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象
+$\mathcal{F}$ が $\mathcal{M}_\mathcal{X}$ に属するための必要十分条件は，
+すべての $i$ に対して $f_i^*\mathcal{F}$ が
+$\mathcal{M}_{\mathcal{X}_i}$ に属することである．
+\item $f : \mathcal{Y} \to \mathcal{X}$ が代数スタックの射で，
+$\mathcal{X}$ および $\mathcal{Y}$ がアフィンスキームによって表現可能ならば，
+$R^if_*$ は $\mathcal{M}_\mathcal{Y}$ を $\mathcal{M}_\mathcal{X}$ の中へ写す．
+\end{enumerate}
+このとき，代数スタックの準コンパクトかつ準分離的な任意の射
+$f : \mathcal{Y} \to \mathcal{X}$ に対して，$R^if_*$ は
+$\mathcal{M}_\mathcal{Y}$ を $\mathcal{M}_\mathcal{X}$ の中へ写す
+（高次順像は \'etale 位相で計算する）．
+\end{lemma}
+
+\begin{proof}
+$f : \mathcal{Y} \to \mathcal{X}$ を代数スタックの準コンパクトかつ準分離的な射とし，
+$\mathcal{F}$ を $\mathcal{M}_\mathcal{Y}$ の対象とする．
+スキームによって表現可能な $\mathcal{U}$ と全射な滑らかな射
+$\mathcal{U} \to \mathcal{X}$ を選ぶ．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-base-change-higher-direct-images} により，
+高次順像を取ることは基底変換と可換である．
+射影 $\mathcal{U} \times_\mathcal{X} \mathcal{Y} \to \mathcal{Y}$ は
+滑らかな射の基底変換として滑らかなので，仮定 (2) により
+$\mathcal{F}$ の $\mathcal{U} \times_\mathcal{X} \mathcal{Y}$ への引き戻しは
+$\mathcal{M}_{\mathcal{U} \times_\mathcal{X} \mathcal{Y}}$ に属する．
+したがって (3) により，$\mathcal{Y} \to \mathcal{X}$ を射影
+$\mathcal{U} \times_\mathcal{X} \mathcal{Y} \to \mathcal{U}$ で置き換えてよい．
+言い換えれば，$\mathcal{X}$ がスキームによって表現可能であると仮定してよい．
+もう一度 (3) を用いると，問題は $\mathcal{X}$ 上 Zariski 局所的であると分かるので，
+$\mathcal{X}$ がアフィンスキームによって表現可能であると仮定してよい．
+$f$ は準コンパクトであるから，$\mathcal{Y}$ も準コンパクトである．
+そこで，アフィンスキームによって表現可能な $\mathcal{V}$ と
+全射な滑らかな射 $g : \mathcal{V} \to \mathcal{Y}$ を選ぶ．
+
+\medskip\noindent
+この状況では，Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-smooth-covering-compute-direct-image} の
+スペクトル系列
+$$
+E_2^{p, q} = R^q(f \circ g_p)_*g_p^*\mathcal{F}
+\Rightarrow
+R^{p + q}f_*\mathcal{F}
+$$
+がある．これは第1象限スペクトル系列なので，Homology, Lemma
+\ref{homology-lemma-first-quadrant-ss} の最後の部分を用いてよいことを思い出そう．
+射
+$$
+g_p : \mathcal{V}_p =
+\mathcal{V} \times_\mathcal{Y} \ldots \times_\mathcal{Y} \mathcal{V}
+\longrightarrow
+\mathcal{Y}
+$$
+は滑らかな射 $g$ の基底変換の合成として滑らかである．
+したがって (2) により，層 $g_p^*\mathcal{F}$ は
+$\mathcal{M}_{\mathcal{V}_p}$ に属する．ゆえに，射
+$$
+\mathcal{V}_p =
+\mathcal{V} \times_\mathcal{Y} \ldots \times_\mathcal{Y} \mathcal{V}
+\longrightarrow
+\mathcal{X}
+$$
+による $\mathcal{M}_{\mathcal{V}_p}$ の対象の高次順像が
+$\mathcal{M}_\mathcal{X}$ に属することを示せば十分である．
+Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence} により，
+代数スタック $\mathcal{V}_p$ は準コンパクトかつ準分離的である．
+また，各 $\mathcal{V}_p$ はもちろん代数空間によって表現可能である
+（代数スタック $\mathcal{Y}$ の対角射は代数空間によって表現可能である）．
+これにより，$\mathcal{Y}$ が代数空間によって表現可能で，
+$\mathcal{X}$ がアフィンスキームによって表現可能な場合に帰着する．
+
+\medskip\noindent
+$\mathcal{Y}$ が代数空間によって表現可能で，$\mathcal{X}$ が
+アフィンスキームによって表現可能な状況で，アフィンスキームによって表現可能な
+$\mathcal{V}$ と全射な滑らかな射 $\mathcal{V} \to \mathcal{Y}$ を改めて選ぶ．
+上の議論をもう一度たどると，再び射 $\mathcal{V}_p \to \mathcal{X}$ に帰着する．
+しかし今度は，代数スタック $\mathcal{V}_p$ は準コンパクトかつ準分離的な
+スキームによって表現可能である
+（代数空間の対角射はスキームによって表現可能である）．
+
+\medskip\noindent
+したがって，$\mathcal{Y}$ がスキームによって表現可能で，
+$\mathcal{X}$ がアフィンスキームによって表現可能であると仮定してよい．
+アフィンスキームによって表現可能な $\mathcal{V}$ と全射な滑らかな射
+$\mathcal{V} \to \mathcal{Y}$ を（再び）選ぶ．
+この場合，代数スタック $\mathcal{V}_p$ はすべて分離スキームによって表現可能である
+（スキームの対角射は分離的である）．
+
+\medskip\noindent
+したがって，$\mathcal{Y}$ が分離スキームによって表現可能で，
+$\mathcal{X}$ がアフィンスキームによって表現可能であると仮定してよい．
+アフィンスキームによって表現可能な $\mathcal{V}$ と全射な滑らかな射
+$\mathcal{V} \to \mathcal{Y}$ をさらにもう一度選ぶ．
+この場合，代数スタック $\mathcal{V}_p$ はすべてアフィンスキームによって表現可能である
+（分離スキームの対角射は閉埋め込みであり，したがってアフィンである）．
+この場合は仮定 (4) により処理される．これで証明が完了する．
+\end{proof}
+
+\noindent
+以下が fppf 位相に関する版である．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-general-pushforward-fppf}
+各代数スタック $\mathcal{X}$ に
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ の部分圏
+$\mathcal{M}_\mathcal{X}$ を対応させる規則を $\mathcal{M}$ とし，
+次を仮定する．
+\begin{enumerate}
+% P12-ERR-0011: preserve the frozen source's O_X in place of the defined M_X.
+\item 任意の代数スタック $\mathcal{X}$ に対し，
+$\mathcal{O}_\mathcal{X}$ は
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ の弱 Serre 部分圏である．
+\item 代数スタックの滑らかな射
+$f : \mathcal{Y} \to \mathcal{X}$ に対して，関手 $f^*$ は
+$\mathcal{M}_\mathcal{X}$ を $\mathcal{M}_\mathcal{Y}$ の中へ写す．
+\item $f_i : \mathcal{X}_i \to \mathcal{X}$ が
+$|\mathcal{X}| = \bigcup |f_i|(|\mathcal{X}_i|)$ を満たす
+代数スタックの滑らかな射の族ならば，
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ の対象 $\mathcal{F}$ が
+$\mathcal{M}_\mathcal{X}$ に属するための必要十分条件は，
+すべての $i$ に対して $f_i^*\mathcal{F}$ が
+$\mathcal{M}_{\mathcal{X}_i}$ に属することである．
+\item $f : \mathcal{Y} \to \mathcal{X}$ が代数スタックの射で，
+$\mathcal{X}$ および $\mathcal{Y}$ がアフィンスキームによって表現可能ならば，
+$R^if_*$ は $\mathcal{M}_\mathcal{Y}$ を $\mathcal{M}_\mathcal{X}$ の中へ写す．
+\end{enumerate}
+このとき，代数スタックの準コンパクトかつ準分離的な任意の射
+$f : \mathcal{Y} \to \mathcal{X}$ に対して，$R^if_*$ は
+$\mathcal{M}_\mathcal{Y}$ を $\mathcal{M}_\mathcal{X}$ の中へ写す
+（高次順像は fppf 位相で計算する）．
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-cohomology-lemma-general-pushforward} の証明と同一である．
+\end{proof}
+
+
+\section{局所準連接加群}
+\label{stacks-cohomology-section-locally-quasi-coherent}
+
+\noindent
+$\mathcal{X}$ を代数スタックとし，$\mathcal{F}$ を
+$\mathcal{O}_\mathcal{X}$-加群の前層とする．
+$\mathcal{F}$ が {\it 局所準連接} であるかを問うことができる．
+Sheaves on Stacks, Definition
+\ref{stacks-sheaves-definition-locally-quasi-coherent} を参照されたい．
+簡単に言えば，これは $\mathcal{F}$ が \'etale 位相に関する
+$\mathcal{O}_\mathcal{X}$-加群であって，任意の射
+$f : U \to \mathcal{X}$ に対し，制限
+$f^*\mathcal{F}|_{U_\etale}$ が $U_\etale$ 上準連接であることを意味する
+（実際の定義は少し異なるが，同値である）．有用な事実として，
+$$
+\textit{LQCoh}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+$$
+は弱 Serre 部分圏である．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-colimits} を参照されたい．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-lqc-on-etale-covering}
+$\mathcal{X}$ を代数スタックとする．
+$f_j : \mathcal{X}_j \to \mathcal{X}$ を
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$ を満たす
+代数スタックの滑らかな射の族とする．
+$\mathcal{F}$ を $\mathcal{X}_\etale$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．
+各 $f_j^{-1}\mathcal{F}$ が局所準連接ならば，$\mathcal{F}$ も局所準連接である．
+\end{lemma}
+
+\begin{proof}
+各代数スタック $\mathcal{X}_j$ をスキーム $U_j$ で置き換えてよい
+（任意の代数スタックはスキームによる滑らかな被覆をもち，滑らかな射の合成は
+滑らかであることを用いる．Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-composition-smooth} を参照）．
+$\mathcal{F}$ の $(\Sch/U_j)_\etale$ への引き戻しは，依然として局所準連接である．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-pullback-lqc} を参照されたい．
+すると $f = \coprod f_j : U = \coprod U_j \to \mathcal{X}$ は
+全射な滑らかな射である．$x$ を $\mathcal{X}$ の対象とする．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} により，
+各 $x_i$ が $(\Sch/U)_\etale$ の対象 $u_i$ へ持ち上がるような \'etale 被覆
+$\{x_i \to x\}_{i \in I}$ が存在する．
+これは，$x$ および $x_i$ がそれぞれスキーム $V$ および $V_i$ 上にあり，
+$\{V_i \to V\}$ が \'etale 被覆で，$x_i$ が射
+$u_i : V_i \to U$ から来るということにほかならない．
+制限 $x_i^*\mathcal{F}|_{V_{i, \etale}}$ は
+$f^*\mathcal{F}$ の $V_{i, \etale}$ への制限に等しい．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-comparison} を参照されたい．
+したがって，$x^*\mathcal{F}|_{V_\etale}$ は $V$ の小 \'etale サイト上の層であり，
+各 $i$ について $V_{i, \etale}$ へ制限すると準連接である．
+ゆえに，それ自身も準連接である（これが所望の結論である）．たとえば
+Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-characterize-quasi-coherent} を参照されたい．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-pushforward-locally-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの準コンパクトかつ
+準分離的な射とする．$\mathcal{F}$ を $\mathcal{X}_\etale$ 上の
+局所準連接 $\mathcal{O}_\mathcal{X}$-加群とする．
+このとき（\'etale 位相で計算した）$R^if_*\mathcal{F}$ は
+$\mathcal{Y}_\etale$ 上局所準連接である．
+\end{lemma}
+
+\begin{proof}
+これを証明するために Lemma \ref{stacks-cohomology-lemma-general-pushforward} を用いる．
+その仮定 (1)--(4) を確認しよう．(1) および (2) は
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-lqc-colimits} から従う．
+(3) は Lemma \ref{stacks-cohomology-lemma-check-lqc-on-etale-covering} から従う．
+したがって，(4) を示せば十分である．
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とし，
+$\mathcal{X}$ および $\mathcal{Y}$ がそれぞれアフィンスキーム
+$X$ および $Y$ によって表現可能であると仮定する．
+$\mathcal{Y}$ の任意の対象 $y$ で，あるスキーム $V$ 上にあるものを選ぶ．
+明確さのため，$V$ に対応する代数スタックを
+$\mathcal{V} = (\Sch/V)_{fppf}$ と書く．次のカルテジアン図式を考える．
+$$
+\xymatrix{
+% P12-ERR-0012: preserve both source vertical-arrow commands on Z.
+\mathcal{Z} \ar[d] \ar[r]_g \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{V} \ar[r]^y & \mathcal{Y}
+}
+$$
+すると $\mathcal{Z}$ はスキーム $Z = V \times_Y X$ によって表現可能であり，
+$f'$ は準コンパクトかつ分離的である（実際，アフィンである）．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-representable-morphism-cohomology} により，
+$$
+R^if_*\mathcal{F}|_{V_\etale} =
+R^if'_{small, *}\big(g^*\mathcal{F}|_{Z_\etale}\big)
+$$
+を得る．右辺は Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-higher-direct-image} により
+$V_\etale$ 上の準連接層である．したがって左辺も準連接であり，
+これが示すべきことであった．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-lqc-on-flat-covering}
+$\mathcal{X}$ を代数スタックとする．
+$f_j : \mathcal{X}_j \to \mathcal{X}$ を，
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$ を満たす
+代数スタックの平坦かつ局所有限表示な射の族とする．
+$\mathcal{F}$ を $\mathcal{X}_{fppf}$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．
+各 $f_j^{-1}\mathcal{F}$ が局所準連接ならば，$\mathcal{F}$ も局所準連接である．
+\end{lemma}
+
+\begin{proof}
+まず，全射，平坦，局所有限表示，準コンパクト，かつ準分離的な射
+$a : \mathcal{U} \to \mathcal{X}$ で，$a^*\mathcal{F}$ が
+局所準連接となるものが存在すると仮定する．このとき完全列
+$$
+0 \to \mathcal{F} \to a_*a^*\mathcal{F} \to b_*b^*\mathcal{F}
+$$
+がある．ここで $b$ は射
+$b : \mathcal{U} \times_\mathcal{X} \mathcal{U} \to \mathcal{X}$ である．
+Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-exactness-cech-complex} および Lemma
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} を参照されたい．
+さらに，引き戻し $b^*\mathcal{F}$ は $a^*\mathcal{F}$ を一方の射影で
+引き戻したものなので，局所準連接である
+（Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-pullback-lqc}）．
+Lemma \ref{stacks-cohomology-lemma-pushforward-locally-quasi-coherent} により，加群
+$a_*a^*\mathcal{F}$ および $b_*b^*\mathcal{F}$ は局所準連接である
+（$a_*$ と $b_*$ の計算は，用いる位相に依存しないことに注意せよ）．
+したがって $\mathcal{F}$ は局所準連接である．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-colimits} を参照されたい．
+
+\medskip\noindent
+一般の場合の証明を最初の段落の状況へ帰着させる．
+$x$ をスキーム $U$ 上にある $\mathcal{X}$ の対象とする．
+$\mathcal{F}|_{U_\etale}$ が準連接 $\mathcal{O}_U$-加群であることを
+示さなければならない．これは $U$ 上（Zariski）局所的に示せばよいので，
+$U$ はアフィンであると仮定してよい．Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-surjective-family-flat-locally-finite-presentation}
+により，各 $x \circ a_i$ がいずれかの $f_j$ を経由するような fppf 被覆
+$\{a_i : U_i \to U\}$ が存在する．したがって $a_i^*\mathcal{F}$ は
+$(\Sch/U_i)_{fppf}$ 上局所準連接である．被覆を細分して，
+$\{U_i \to U\}_{i = 1, \ldots, n}$ が標準 fppf 被覆であると仮定してよい．
+すると $x^*\mathcal{F}$ は $(\Sch/U)_{fppf}$ 上の fppf 加群であり，射
+$a : U_1 \amalg \ldots \amalg U_n \to U$ によるその引き戻しは
+局所準連接である．ゆえに最初の段落から $x^*\mathcal{F}$ は局所準連接である．
+したがって，もちろん $\mathcal{F}|_{U_\etale}$ は準連接である．
+\end{proof}
+
+
+
+
+
+
+\section{平坦比較写像}
+\label{stacks-cohomology-section-flat-comparison}
+
+\noindent
+$\mathcal{X}$ を代数スタックとし，$\mathcal{F}$ を
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象とする．
+スキーム $U$ 上にある $\mathcal{X}$ の対象 $x$ が与えられたとき，
+制限 $\mathcal{F}|_{U_\etale}$ は $x^{-1}\mathcal{F}$ の
+$U$ の小 \'etale サイトへの制限である．Sheaves on Stacks, Definition
+\ref{stacks-sheaves-definition-pullback} を参照されたい．
+次に，$\varphi : x \to x'$ を，スキームの射 $f : U \to U'$ の上にある
+$\mathcal{X}$ の射とする．したがって，$2$-可換図式
+$$
+\xymatrix{
+U \ar[rd]_x \ar[rr]_f & & U' \ar[ld]^{x'} \\
+& \mathcal{X}
+}
+$$
+がある．$\varphi$ に付随して，制限の間の比較写像
+\begin{equation}
+\label{stacks-cohomology-equation-comparison-modules}
+c_\varphi :
+f_{small}^*(\mathcal{F}|_{U'_\etale})
+\longrightarrow
+\mathcal{F}|_{U_\etale}
+\end{equation}
+を得る．Sheaves on Stacks, Equation
+(\ref{stacks-sheaves-equation-comparison-modules}) を参照されたい．
+この状況で，$\mathcal{F}$ に関する次の性質を考えることができる．
+
+\begin{definition}
+\label{stacks-cohomology-definition-flat-base-change}
+$\mathcal{X}$ を代数スタックとし，$\mathcal{F}$ を
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象とする．
+$f$ が平坦であるたびに $c_\varphi$ が同型となることを，
+$\mathcal{F}$ が {\it 平坦基底変換性}をもつ\footnote{これは標準的でない記法かもしれない．}
+という．
+\end{definition}
+
+\noindent
+この概念のいくつかの性質をまとめた補題を与える．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering}
+$\mathcal{X}$ を代数スタックとし，$\mathcal{F}$ を
+$\mathcal{X}_\etale$ 上の $\mathcal{O}_\mathcal{X}$-加群とする．
+\begin{enumerate}
+\item $\mathcal{F}$ が平坦基底変換性をもつならば，代数スタックの任意の射
+$g : \mathcal{Y} \to \mathcal{X}$ に対し，引き戻し $g^*\mathcal{F}$ も
+平坦基底変換性をもつ．
+\item 平坦基底変換性をもつ加群からなる
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の充満部分圏は，
+弱 Serre 部分圏である．
+\item $f_i : \mathcal{X}_i \to \mathcal{X}$ を，
+$|\mathcal{X}| = \bigcup_i |f_i|(|\mathcal{X}_i|)$ を満たす
+代数スタックの滑らかな射の族とする．
+各 $f_i^*\mathcal{F}$ が平坦基底変換性をもつならば，$\mathcal{F}$ も
+平坦基底変換性をもつ．
+\item $\mathcal{X}_\etale$ 上の平坦基底変換性をもつ
+$\mathcal{O}_\mathcal{X}$-加群の圏は余極限をもつ．
+
+それらは
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ における
+余極限と一致する．
+\item $\mathcal{F}$ および $\mathcal{G}$ が
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象で，
+ともに平坦基底変換性をもつならば，テンソル積
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$ も
+平坦基底変換性をもつ．
+\item $\mathcal{F}$ および $\mathcal{G}$ が
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象で，
+$\mathcal{F}$ が有限表示，$\mathcal{G}$ が平坦基底変換性をもつならば，層
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$ も
+平坦基底変換性をもつ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$g : \mathcal{Y} \to \mathcal{X}$ を (1) の射とする．
+$y$ をスキーム $V$ 上にある $\mathcal{Y}$ の対象とする．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-comparison} により，
+$(g^*\mathcal{F})|_{V_\etale} = \mathcal{F}|_{V_\etale}$
+である．さらに，$\mathcal{Y}$ 上の層 $g^*\mathcal{F}$ に対する比較写像は，
+$\mathcal{X}$ 上の層 $\mathcal{F}$ に対する比較写像の特別な場合である．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-comparison} を参照されたい．
+これで (1) は明らかである．
+
+\medskip\noindent
+(2) の証明．Homology, Lemma
+\ref{homology-lemma-characterize-weak-serre-subcategory} による
+弱 Serre 部分圏の特徴付けを用いる．
+平坦基底変換性をもつ層の間の射の核と余核も，平坦基底変換性をもつ．
+実際，スキームの平坦射に対して $f_{small}^*$ は完全であり，
+制限関手 $(-)|_{U_\etale}$ も完全である
+（\'etale 位相を用いているからである）．最後に，
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+を $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の短完全列とし，
+外側の二つの層が平坦基底変換性をもつとする．
+このとき中央の層も同じ性質をもつ．これも $f_{small}^*$ と制限関手の完全性
+（および5補題）から従う．
+
+\medskip\noindent
+(3) の証明．$f_i : \mathcal{X}_i \to \mathcal{X}$ を
+代数スタックの滑らかな射の共同全射族とし，各 $f_i^*\mathcal{F}$ が
+平坦基底変換性をもつと仮定する．(1)，代数スタックの定義，および
+滑らかな射の合成が滑らかであること
+（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-composition-smooth} を参照）により，
+各 $\mathcal{X}_i$ はスキームによって表現可能であると仮定してよい．
+$\varphi : x \to x'$ を，スキームの平坦射 $a : U \to U'$ の上にある
+$\mathcal{X}$ の射とする．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} により，
+$U'_i \to U' \to \mathcal{X}$ が $\mathcal{X}_i$ を経由するような
+\'etale 射の共同全射族 $U'_i \to U'$ が存在する．
+したがって，可換図式
+$$
+\xymatrix{
+U_i = U \times_{U'} U_i' \ar[r]_-{a_i} \ar[d] &
+U_i' \ar[r]_{x_i'} \ar[d] & \mathcal{X}_i \ar[d]^{f_i} \\
+U \ar[r]^a & U' \ar[r]^{x'} & \mathcal{X}
+}
+$$
+を得る．各 $a_i$ は $a$ の基底変換としてスキームの平坦射であることに注意せよ．
+$\psi_i : x_i \to x'_i$ を，$a_i$ の上にあり，終域を $x_i'$ とする
+$\mathcal{X}_i$ の射とする．仮定により，比較写像
+$c_{\psi_i} :
+(a_i)_{small}^*\big(f_i^*\mathcal{F}|_{(U'_i)_\etale}\big)
+\to f_i^*\mathcal{F}|_{(U_i)_\etale}
+$
+は同型である．縦の射 $U_i' \to U'$ および $U_i \to U$ は \'etale なので，
+層 $f_i^*\mathcal{F}|_{(U_i')_\etale}$ および
+$f_i^*\mathcal{F}|_{(U_i)_\etale}$ はそれぞれ
+$\mathcal{F}|_{U'_\etale}$ および $\mathcal{F}|_{U_\etale}$ の制限であり，
+写像 $c_{\psi_i}$ は $c_\varphi$ の $(U_i)_\etale$ への制限である．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-comparison} を参照されたい．
+$\{U_i \to U\}$ は \'etale 被覆なので，比較写像 $c_\varphi$ は同型である．
+これが示すべきことであった．
+
+\medskip\noindent
+(4) の証明．$\mathcal{I} \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$，
+$i \mapsto \mathcal{F}_i$ を図式とし，各 $\mathcal{F}_i$ が
+平坦基底変換性をもつと仮定する．
+$\varphi : x \to x'$ を，スキームの平坦射 $f : U \to U'$ の上にある
+$\mathcal{X}$ の射とする．$\colim_i \mathcal{F}_i$ は前層の余極限の層化であることを
+思い出そう．\'etale 位相を用いているので，
+$$
+(\colim_i \mathcal{F}_i)|_{U_\etale} =
+\colim_i {\mathcal{F}_i}|_{U_\etale}
+$$
+であり，$U'_\etale$ への制限についても同様である．したがって，
+\begin{align*}
+f_{small}^*((\colim_i \mathcal{F}_i)|_{U'_\etale})
+& =
+f_{small}^*(\colim_i {\mathcal{F}_i}|_{U'_\etale}) \\
+& =
+\colim_i f_{small}^*({\mathcal{F}_i}|_{U'_\etale}) \\
+& \xrightarrow{\colim c_\varphi}
+\colim_i \mathcal{F}_i|_{U_\etale} \\
+& =
+(\colim_i \mathcal{F}_i)|_{U_\etale}
+\end{align*}
+を得る．第2の等式では，$f_{small}^*$ が左随伴として余極限と可換することを用いた．
+各 $\mathcal{F}_i$ が平坦基底変換性をもつので，矢印は同型である．
+ゆえに余極限も平坦基底変換性をもち，(4) が成り立つ．
+
+\medskip\noindent
+(5) はテンソル積が引き戻しと可換することから成り立つ．
+Modules on Sites, Lemma \ref{sites-modules-lemma-tensor-product-pullback} を参照されたい．
+詳細は省略する．
+
+\medskip\noindent
+$\mathcal{F}$ および $\mathcal{G}$ を (6) のとおりとする．
+$\mathcal{F}$ は準連接なので，Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent} により平坦基底変換性をもつ．
+$\varphi : x \to x'$ を，スキームの平坦射 $f : U \to U'$ の上にある
+$\mathcal{X}$ の射とする．\'etale 位相を用いているので，
+$$
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U_\etale} =
+\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale})
+$$
+であり，$U'_\etale$ への制限についても同様である（詳細は省略する）．ゆえに，
+\begin{align*}
+f_{small}^*(
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U'_\etale})
+& =
+f_{small}^*(
+\SheafHom_{\mathcal{O}_{U'}}(
+\mathcal{F}|_{U'_\etale}, \mathcal{G}|_{U'_\etale})) \\
+& =
+% P12-ERR-0013: preserve the frozen source's O_{U'} after pullback.
+\SheafHom_{\mathcal{O}_{U'}}(
+f_{small}^*(\mathcal{F}|_{U'_\etale}),
+f_{small}^*(\mathcal{G}|_{U'_\etale})) \\
+& \xrightarrow{c_\varphi}
+\SheafHom_{\mathcal{O}_U}(\mathcal{F}|_{U_\etale}, \mathcal{G}|_{U_\etale}) \\
+& =
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U_\etale}
+\end{align*}
+を得る．ここで第2の等式は Modules on Sites, Lemma
+\ref{sites-modules-lemma-pullback-internal-hom} であり，
+$f : U \to U'$ が平坦，したがって環付きサイトの射 $f_{small}$ も平坦であることを用いる．
+$\mathcal{F}$ と $\mathcal{G}$ はともに平坦基底変換性をもつので，矢印は同型である．
+したがって，所望どおりこの $\SheafHom$ も平坦基底変換性をもつ．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-comparison}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの準コンパクトかつ
+準分離的な射とする．$\mathcal{F}$ を
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の対象で，
+局所準連接かつ平坦基底変換性をもつものとする．
+このとき（\'etale 位相で計算した）各 $R^if_*\mathcal{F}$ は
+平坦基底変換性をもつ．
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-cohomology-lemma-general-pushforward} を用いて証明する．
+各代数スタック $\mathcal{X}$ に対し，
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ を，
+局所準連接かつ平坦基底変換性をもつ層からなる
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の充満部分圏とする．
+Lemma \ref{stacks-cohomology-lemma-general-pushforward} の条件 (1)--(4) を確認すれば，
+補題が従う．性質 (1)，(2)，(3) は Sheaves on Stacks, Lemmas
+\ref{stacks-sheaves-lemma-pullback-lqc}，
+\ref{stacks-sheaves-lemma-lqc-colimits}，Lemma
+\ref{stacks-cohomology-lemma-check-lqc-on-etale-covering}，および Lemma
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering} から従う．
+したがって，(4) を示せば十分である．
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とし，
+$\mathcal{X}$ および $\mathcal{Y}$ がそれぞれアフィンスキーム
+$X$ および $Y$ によって表現可能であると仮定する．
+また，$\psi : y \to y'$ を，スキームの平坦射 $b : V \to V'$ の上にある
+$\mathcal{Y}$ の射とする．明確さのため，対応する代数スタックを
+$\mathcal{V} = (\Sch/V)_{fppf}$ および
+$\mathcal{V}' = (\Sch/V')_{fppf}$ と書く．
+両方の正方形がカルテジアンである代数スタックの図式
+$$
+\xymatrix{
+\mathcal{Z} \ar[d]_{f''} \ar[r]_a &
+\mathcal{Z}' \ar[r]_{x'} \ar[d]_{f'} & \mathcal{X} \ar[d]^f \\
+\mathcal{V} \ar[r]^b & \mathcal{V}' \ar[r]^{y'} & \mathcal{Y}
+}
+$$
+を考える．$f$ はスキームによって表現可能である
+（しかも準コンパクトかつ分離的，実際にはアフィンである）から，
+$\mathcal{Z}$ および $\mathcal{Z}'$ はスキーム $Z$ および $Z'$ によって
+表現可能であり，実際 $Z = V \times_{V'} Z'$ である．
+$\mathcal{F}$ は平坦基底変換性をもつので，
+$$
+a_{small}^*\big(\mathcal{F}|_{Z'_\etale}\big)
+\longrightarrow
+\mathcal{F}|_{Z_\etale}
+$$
+は同型である．さらに，
+$$
+R^if_*\mathcal{F}|_{V'_\etale} =
+R^i(f')_{small, *}\big(\mathcal{F}|_{Z'_\etale}\big)
+$$
+および
+$$
+R^if_*\mathcal{F}|_{V_\etale} =
+R^i(f'')_{small, *}\big(\mathcal{F}|_{Z_\etale}\big)
+$$
+が Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-representable-morphism-cohomology} により成り立つ．
+したがって，比較写像
+$$
+c_\psi :
+b_{small}^*(R^if_*\mathcal{F}|_{V'_\etale})
+\longrightarrow
+R^if_*\mathcal{F}|_{V_\etale}
+$$
+は Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-flat-base-change-cohomology} により同型である．
+ゆえに $R^if_*\mathcal{F}$ は平坦基底変換性をもつ．
+さらに Lemma \ref{stacks-cohomology-lemma-pushforward-locally-quasi-coherent} により
+$R^if_*\mathcal{F}$ は局所準連接なので，結論を得る．
+\end{proof}
+
+
+
+
+
+\section{平坦基底変換性をもつ局所準連接加群}
+\label{stacks-cohomology-section-loc-qcoh-flat-base-change}
+
+\noindent
+$\mathcal{X}$ を代数スタックとする．われわれは\footnote{ひどい記法で申し訳ない．}
+$$
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\subset
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+$$
+によって，局所準連接
+（Section \ref{stacks-cohomology-section-locally-quasi-coherent}）であり，かつ
+平坦基底変換性
+（Section \ref{stacks-cohomology-section-flat-comparison}）をもつ \'etale
+$\mathcal{O}_\mathcal{X}$-加群 $\mathcal{F}$ を対象とする充満部分圏を表す．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-quasi-coherent} により，
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \subset
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+$$
+である．
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-loc-qcoh-flat-base-change}
+平坦基底変換性をもつ局所準連接加群に関する結果をまとめる．
+\begin{enumerate}
+\item $\mathcal{X}$ を代数スタックとする．
+$\mathcal{F}$ が $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するならば，
+$\mathcal{F}$ は fppf 位相に関する層，すなわち
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ の対象である．
+\item 圏 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ は，
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ および
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ の双方の
+弱 Serre 部分圏である．
+\item 代数スタックの任意の射
+$f : \mathcal{X} \to \mathcal{Y}$ に沿う引き戻し $f^*$ は関手
+$f^* : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ を誘導する．
+\item $f : \mathcal{X} \to \mathcal{Y}$ を
+代数スタックの準コンパクトかつ準分離的な射とし，
+$\mathcal{F}$ を $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象とする．
+このとき，
+\begin{enumerate}
+\item 全導来順像 $Rf_*\mathcal{F}$ および高次順像
+$R^if_*\mathcal{F}$ は，\'etale 位相と fppf 位相のいずれで計算しても
+同じ結果を与え，
+\item 各 $R^if_*\mathcal{F}$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$ の対象である．
+\end{enumerate}
+\item 圏 $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ は余極限をもち，
+それらは $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+および $\textit{Mod}(\mathcal{O}_\mathcal{X})$ における余極限と一致する．
+\item $\mathcal{F}$ および $\mathcal{G}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するならば，テンソル積
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$ も
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+\item $\mathcal{F}$ が有限表示で，$\mathcal{G}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するならば，
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$ も
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) は Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-flat-base-change-fppf-sheaf} である．
+
+\medskip\noindent
+埋め込み
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+に関する (2) は，Lemma \ref{stacks-cohomology-lemma-flat-comparison} の証明で既に見た．
+埋め込み
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+に関する (2) を証明しよう．
+$\varphi : \mathcal{F} \to \mathcal{G}$ を
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象間の射とする．
+$\Ker(\varphi)$ は \'etale 位相で計算しても fppf 位相で計算しても同じなので，
+\'etale の場合により $\Ker(\varphi)$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+一方，fppf 位相で計算した余核は，\'etale 位相で計算した余核の
+fppf 層化である．しかしこの \'etale 余核は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属し，したがって (1) により
+既に fppf 層である．ゆえに余核も
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．最後に，
+% P12-ERR-0014: frozen outer-term/middle-term wording retained; see sidecar.
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+を $\textit{Mod}(\mathcal{O}_\mathcal{X})$ における
+（すなわち fppf 位相を用いた）完全列とし，$\mathcal{F}_1$，$\mathcal{F}_2$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するとする．
+$\mathcal{F}_2$ が $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象であることを
+示すには，この列が \'etale 位相でも完全であることを示せば十分である．
+そのためには，$\mathcal{X}$ の任意の対象 $x$ に対し，
+$H^1_{fppf}(x, \mathcal{F}_1)$ の任意の元が $x$ のある \'etale 被覆の各要素上で
+零になることを示せば十分である．これは Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-fppf-etale} により
+$H^1_{fppf}(x, \mathcal{F}_1) = H^1_\etale(x, \mathcal{F}_1)$ であり，かつ
+コホモロジーの局所性による．Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-kill-cohomology-class-on-covering} を参照されたい．
+これで (2) が証明された．
+
+\medskip\noindent
+(3) は Lemma \ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering} および
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-pullback-lqc} から従う．
+
+\medskip\noindent
+\'etale コホモロジーで計算した $R^if_*\mathcal{F}$ に関する (4)(b) は
+Lemma \ref{stacks-cohomology-lemma-flat-comparison} から従う．これと上の (1) を
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-compare-fppf-etale}
+と組み合わせれば (4)(a) が従う．
+
+\medskip\noindent
+\'etale 位相に関する (5) は Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-colimits} および
+Lemma \ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering} から従う．
+この \'etale 位相での余極限は (1) により既に fppf 層なので，
+fppf 版も従う．
+
+\medskip\noindent
+(6) および (7) は Lemma
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering} と Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-colimits} の対応する部分から従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-lqc-fbc-on-covering}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$ を，
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$ を満たす
+代数スタックの滑らかな射の族とする．
+$\mathcal{F}$ を $\mathcal{X}_\etale$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．
+% P12-ERR-0015: frozen fpc and X_i indices retained; see sidecar.
+各 $f_j^{-1}\mathcal{F}$ が
+$\textit{LQCoh}^{fpc}(\mathcal{O}_{\mathcal{X}_i})$ に属するならば，
+$\mathcal{F}$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$ を，
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$ を満たす
+代数スタックの平坦かつ局所有限表示な射の族とする．
+$\mathcal{F}$ を $\mathcal{X}_{fppf}$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．
+各 $f_j^{-1}\mathcal{F}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_{\mathcal{X}_i})$ に属するならば，
+$\mathcal{F}$ は $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は Lemmas \ref{stacks-cohomology-lemma-check-lqc-on-etale-covering} および
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering} を組み合わせれば従う．
+(2) の証明は Lemma \ref{stacks-cohomology-lemma-check-lqc-on-flat-covering} の証明と同様である．
+$\mathcal{F}$ を $\mathcal{X}_{fppf}$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．
+
+\medskip\noindent
+まず，全射，平坦，局所有限表示，準コンパクトかつ準分離的な射
+$a : \mathcal{U} \to \mathcal{X}$ が存在し，$a^*\mathcal{F}$ が
+局所準連接で平坦基底変換性をもつと仮定する．このとき完全列
+$$
+0 \to \mathcal{F} \to a_*a^*\mathcal{F} \to b_*b^*\mathcal{F}
+$$
+が存在する．ここで $b$ は射
+$b : \mathcal{U} \times_\mathcal{X} \mathcal{U} \to \mathcal{X}$ である．
+Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-exactness-cech-complex} および Lemma
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation} を参照されたい．
+さらに，引き戻し $b^*\mathcal{F}$ は，一方の射影を介した
+$a^*\mathcal{F}$ の引き戻しであるから，局所準連接で平坦基底変換性をもつ．
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} を参照されたい．
+加群 $a_*a^*\mathcal{F}$ および $b_*b^*\mathcal{F}$ は，Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により局所準連接で平坦基底変換性をもつ．
+再び Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により，
+$\mathcal{F}$ も局所準連接で平坦基底変換性をもつと結論できる．
+
+\medskip\noindent
+スキーム $U$ と全射滑らかな射 $x : U \to \mathcal{X}$ を選ぶ．
+(1) により，$x^*\mathcal{F}$ が局所準連接で平坦基底変換性をもつことを
+示せば十分である．再び (1) により，これは $U$ 上 Zariski 局所的に示せば十分なので，
+$U$ はアフィンであると仮定してよい．Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-surjective-family-flat-locally-finite-presentation}
+により，合成 $x \circ a_i$ がいずれかの $f_j$ を経由するような
+fppf 被覆 $\{a_i : U_i \to U\}$ が存在する．したがって
+$(\Sch/U_i)_{fppf}$ 上の加群 $a_i^*\mathcal{F}$ は，
+局所準連接で平坦基底変換性をもつ．被覆を細分して，
+$\{U_i \to U\}_{i = 1, \ldots, n}$ が標準 fppf 被覆であると仮定してよい．
+このとき $x^*\mathcal{F}$ は $(\Sch/U)_{fppf}$ 上の fppf 加群であり，射
+$a : U_1 \amalg \ldots \amalg U_n \to U$ によるその引き戻しは
+局所準連接で平坦基底変換性をもつ．したがって前段落により，
+$x^*\mathcal{F}$ も望みどおり局所準連接で平坦基底変換性をもつ．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-loc-qcoh-fbc-compute-higher-direct-image}
+$f : \mathcal{X} \to \mathcal{Y}$ を，準コンパクト，準分離的，かつ
+代数空間によって表現可能な代数スタックの射とする．
+$\mathcal{F}$ を $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象とする．
+このとき，$\mathcal{Y}$ の対象 $y : V \to \mathcal{Y}$ に対し，
+$$
+(R^if_*\mathcal{F})|_{V_\etale} = R^if'_{small, *}(\mathcal{F}|_{U_\etale})
+$$
+である．ここで $f' : U = V \times_\mathcal{Y} \mathcal{X} \to V$ は
+$f$ の基底変換である．
+\end{lemma}
+
+\begin{proof}
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-base-change-higher-direct-images} により，
+$\mathcal{X}$ が $U$ によって表現され，$\mathcal{Y}$ が $V$ によって表現される場合へ
+帰着できる．もちろんここでは Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により，$\mathcal{F}$ の $U$ への引き戻しが
+$\textit{LQCoh}^{fbc}(\mathcal{O}_U)$ に属することも用いる．
+この場合，結果は Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-morphism-cohomology}，および Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により $R^if_*$ を
+\'etale 位相で計算できることから従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-loc-qcoh-fbc-affine-direct-image}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックのアフィン射とする．関手
+$f_* : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$ は完全であり，直和と可換する．
+$i > 0$ に対する関手 $R^if_*$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ 上で零となる．
+\end{lemma}
+
+\begin{proof}
+これらの関手は Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により存在する．
+Lemma \ref{stacks-cohomology-lemma-loc-qcoh-fbc-compute-higher-direct-image} により，これは
+代数空間のアフィン射について，代数空間上の準連接加群の枠内で
+高次順像を取る場合へ帰着される．Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-higher-direct-image} の議論により，
+さらにスキームのアフィン射の場合へ帰着される．
+スキームのアフィン射については，Cohomology of Schemes, Lemma
+\ref{coherent-lemma-relative-affine-vanishing} により，
+準連接加群の高次順像は消滅する．
+$R^1f_*$ の消滅は $f_*$ の完全性を含意する．
+直和との可換性は，例えば Morphisms, Lemma
+\ref{morphisms-lemma-affine-equivalence-modules} から従う．
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{寄生加群}
+\label{stacks-cohomology-section-parasitic}
+
+\noindent
+次の定義は Descent, Definition \ref{descent-definition-parasitic} と整合する．
+
+\begin{definition}
+\label{stacks-cohomology-definition-parasitic}
+$\mathcal{X}$ を代数スタックとする．
+$\mathcal{O}_\mathcal{X}$-加群の前層 $\mathcal{F}$ が
+{\it 寄生的}であるとは，$\mathcal{X}$ の任意の対象 $x$ であって，
+あるスキーム $U$ 上にあり，対応する射 $x : U \to \mathcal{X}$ が
+平坦であるものに対し，$\mathcal{F}(x) = 0$ が成り立つことをいう．
+\end{definition}
+
+\noindent
+この概念のいくつかの性質を与える補題は次のとおりである．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-parasitic}
+$\mathcal{X}$ を代数スタックとし，$\mathcal{F}$ を
+$\mathcal{O}_\mathcal{X}$-加群の前層とする．
+\begin{enumerate}
+\item $\mathcal{F}$ が寄生的で，
+$g : \mathcal{Y} \to \mathcal{X}$ が代数スタックの平坦射ならば，
+$g^*\mathcal{F}$ は寄生的である．
+\item $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ に対し，
+\begin{enumerate}
+\item 寄生的な加群の前層の $\tau$-層化は寄生的であり，
+\item 寄生加群からなる
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の充満部分圏は
+Serre 部分圏である．
+\end{enumerate}
+\item $\mathcal{F}$ が \'etale 位相に関する層であるとする．
+$f_i : \mathcal{X}_i \to \mathcal{X}$ を，
+$|\mathcal{X}| = \bigcup_i |f_i|(|\mathcal{X}_i|)$ を満たす
+代数スタックの滑らかな射の族とする．各 $f_i^*\mathcal{F}$ が寄生的ならば，
+$\mathcal{F}$ も寄生的である．
+\item $\mathcal{F}$ が fppf 位相に関する層であるとする．
+$f_i : \mathcal{X}_i \to \mathcal{X}$ を，
+$|\mathcal{X}| = \bigcup_i |f_i|(|\mathcal{X}_i|)$ を満たす
+代数スタックの平坦かつ局所有限表示な射の族とする．
+各 $f_i^*\mathcal{F}$ が寄生的ならば，$\mathcal{F}$ も寄生的である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を示すため，$y$ を $\mathcal{Y}$ の対象で，あるスキーム $V$ 上にあり，
+対応する射 $y : V \to \mathcal{Y}$ が平坦なものとする．
+このとき $g(y) : V \to \mathcal{Y} \to \mathcal{X}$ は平坦射の合成として平坦である
+（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-composition-flat} を参照）．したがって仮定により
+$\mathcal{F}(g(y))$ は零である．
+% P12-ERR-0525: frozen type-inconsistent evaluation formula retained; see sidecar.
+$g^*\mathcal{F} = g^{-1}\mathcal{F}(y) = \mathcal{F}(g(y))$ なので，
+$g^*\mathcal{F}$ は寄生的であると結論できる．
+
+\medskip\noindent
+(2)(a) を示すため，$\{x_i \to x\}$ が $\mathcal{X}$ の $\tau$-被覆ならば，
+各射 $x_i \to x$ はスキームの平坦射の上にあることに注意する．
+したがって $x$ がスキーム $U$ 上にあり，$x : U \to \mathcal{X}$ が平坦ならば，
+すべての対象 $x_i$ も同様である．ゆえに前層 $\mathcal{F}$ が寄生的ならば，
+前層 $\mathcal{F}^+$（Sites, Section
+\ref{sites-section-sheafification} を参照）も寄生的である．
+$\mathcal{F}$ の層化は $(\mathcal{F}^+)^+$ なので，これで (2)(a) が証明された．
+
+\medskip\noindent
+$\mathcal{F}$ を寄生的な $\tau$-加群とする．
+$\mathcal{F}$ の任意の部分加群が寄生的であることは定義から直ちに分かる．
+一方，$\mathcal{F}' \subset \mathcal{F}$ が部分加群ならば，前層
+$x \mapsto \mathcal{F}(x)/\mathcal{F}'(x)$
+が寄生的であることも同様に明らかである．したがって (2)(a) により，
+商 $\mathcal{F}/\mathcal{F}'$ は寄生加群である．最後に，
+$\mathcal{F}_1$ および $\mathcal{F}_3$ が寄生的である短完全列
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+が与えられたとき，$\mathcal{F}_2$ も寄生的であることを示す必要がある．
+これは $\mathcal{X}$ 上平坦なスキームの上にある $x$ で評価すれば直ちに従う．
+これで (2)(b) が証明された．Homology, Lemma
+\ref{homology-lemma-characterize-serre-subcategory} を参照されたい．
+
+\medskip\noindent
+$f_i : \mathcal{X}_i \to \mathcal{X}$ を代数スタックの滑らかな射の
+共同全射族とし，各 $f_i^*\mathcal{F}$ が寄生的であると仮定する．
+$x$ を $\mathcal{X}$ の対象で，あるスキーム $U$ 上にあり，
+$x : U \to \mathcal{X}$ が平坦なものとする．
+全射滑らかな被覆 $W_i \to U \times_{x, \mathcal{X}} \mathcal{X}_i$ を考える．
+射影を $y_i : W_i \to \mathcal{X}_i$ と書く．すると
+$\{f_i(y_i) \to x\}$ は $\mathcal{X}$ の滑らかな位相に関する被覆である．
+平坦射の合成は平坦なので，$f_i^*\mathcal{F}(y_i) = 0$ である．
+一方，(1) の証明で見たように
+$f_i^*\mathcal{F}(y_i) = \mathcal{F}(f_i(y_i))$ である．
+したがって，$\mathcal{X}$ のある滑らかな被覆
+$\{x_i \to x\}_{i \in I}$ に対し $\mathcal{F}(x_i) = 0$ である．
+滑らかな位相は \'etale 位相と同じなので，これは $\mathcal{F}(x) = 0$ を含意する．
+More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-dominates-smooth} を参照されたい．
+実際，$\{x_i \to x\}_{i \in I}$ はスキームの滑らかな被覆
+$\{U_i \to U\}_{i \in I}$ の上にある．いま引用した補題により，
+$\{U_i \to U\}_{i \in I}$ を細分する \'etale 被覆
+$\{V_j \to U\}_{j \in J}$ が存在する．$x'_j = x|_{V_j}$ と書く．
+すると $\{x'_j \to x\}$ は $\mathcal{X}$ の \'etale 被覆で，
+$\{x_i \to x\}_{i \in I}$ を細分する．したがって写像
+$\mathcal{F}(x) \to \prod_{j \in J} \mathcal{F}(x'_j)$ は，
+$\mathcal{F}$ が \'etale 位相に関する層なので単射であり，かつ
+零写像である $\mathcal{F}(x) \to \prod_{i \in I} \mathcal{F}(x_i)$
+を経由する．ゆえに望みどおり $\mathcal{F}(x) = 0$ である．
+
+\medskip\noindent
+(4) の証明は省略する．ヒント：(3) の証明と同様だが，より簡単である．
+\end{proof}
+
+\noindent
+寄生加群は，まったく任意の順像によって保たれる．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-pushforward-parasitic}
+$\tau \in \{\etale, fppf\}$ とする．
+$\mathcal{X}$ を代数スタックとし，$\mathcal{F}$ を
+$\textit{Mod}(\mathcal{X}_\tau, \mathcal{O}_\mathcal{X})$ の
+寄生的な対象とする．
+\begin{enumerate}
+\item すべての $i$ に対し $H^i_\tau(\mathcal{X}, \mathcal{F}) = 0$ である．
+\item $f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする．
+このとき（$\tau$-位相で計算した）$R^if_*\mathcal{F}$ は
+$\textit{Mod}(\mathcal{Y}_\tau, \mathcal{O}_\mathcal{Y})$ の寄生的な対象である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず (2) を (1) に帰着する．
+Sheaves on Stacks, Lemma \ref{stacks-sheaves-lemma-pushforward-restriction}
+により，$R^if_*\mathcal{F}$ は前層
+$$
+y \longmapsto
+H^i_\tau\Big(V \times_{y, \mathcal{Y}} \mathcal{X},
+\ \text{pr}^{-1}\mathcal{F}\Big)
+$$
+に付随する層である．ここで $y$ はスキーム $V$ 上にある
+$\mathcal{Y}$ の典型的な対象である．Lemma \ref{stacks-cohomology-lemma-parasitic} により，
+$y : V \to \mathcal{Y}$ が平坦なときにこれらのコホモロジー群が
+零であることを示せば十分である．
+$\text{pr} : V \times_{y, \mathcal{Y}} \mathcal{X} \to \mathcal{X}$ は
+$y$ の基底変換として平坦であることに注意せよ．したがって Lemma
+\ref{stacks-cohomology-lemma-parasitic} により $\text{pr}^{-1}\mathcal{F}$ は寄生的である．
+ゆえに (1) を証明すれば十分である．
+
+\medskip\noindent
+(1) を示すには，Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-smooth-covering-compute-cohomology} の
+スペクトル系列を用いて，$\mathcal{X}$ が代数空間によって表現可能な
+代数スタックである場合へ帰着できる．
+このスペクトル系列では，各
+$f_p^{-1}\mathcal{F} = f_p^*\mathcal{F}$ は Lemma
+\ref{stacks-cohomology-lemma-parasitic} により寄生加群であることに注意せよ．
+実際，射
+$f_p : \mathcal{U}_p =
+\mathcal{U} \times_\mathcal{X} \ldots
+\times_\mathcal{X} \mathcal{U} \to \mathcal{X}$
+は平坦である．このスペクトル系列をもう一度用いると
+（Lemma \ref{stacks-cohomology-lemma-general-pushforward} の証明と同様に），
+代数スタック $\mathcal{X}$ がスキーム $X$ によって表現可能な場合へ帰着される．
+このとき
+$H^i_\tau(\mathcal{X}, \mathcal{F}) = H^i((\Sch/X)_\tau, \mathcal{F})$ である．
+この場合の消滅は {\v C}ech 被覆を用いる議論から容易に従う．
+Descent, Lemma \ref{descent-lemma-cohomology-parasitic} を参照されたい．
+\end{proof}
+
+\noindent
+次の補題は，寄生加群を考える主要な理由の一つである．
+主張を理解するため，関手
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+および
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+は一般には完全でないことを思い出そう．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-exact-sequence-quasi-coherent-parasitic-cohomology}
+$\mathcal{X}$ を代数スタックとする．
+$\alpha : \mathcal{F} \to \mathcal{G}$ および
+$\beta : \mathcal{G} \to \mathcal{H}$ を
+$\beta \circ \alpha = 0$ を満たす
+$\QCoh(\mathcal{O}_\mathcal{X})$ の射とする．次は同値である．
+\begin{enumerate}
+\item Abel 圏 $\QCoh(\mathcal{O}_\mathcal{X})$ において，複体
+$\mathcal{F} \to \mathcal{G} \to \mathcal{H}$ は
+$\mathcal{G}$ で完全である．
+\item $\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+または $\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$
+のいずれかで計算した $\Ker(\beta)/\Im(\alpha)$ は寄生的である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Section \ref{stacks-cohomology-section-loc-qcoh-flat-base-change} を参照すれば，
+$\QCoh(\mathcal{O}_\mathcal{X}) \subset
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ である．
+
+したがって，
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$ または
+$\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_\mathcal{X})$ で計算した
+$\Ker(\beta)/\Im(\alpha)$ は一致する．Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} を参照されたい．
+以下では $\mathcal{X}$ 上の \'etale 位相を用いる．
+
+\medskip\noindent
+$\mathcal{E}$ を Abel 圏 $\QCoh(\mathcal{O}_\mathcal{X})$ で計算した
+$\mathcal{F} \to \mathcal{G} \to \mathcal{H}$ のコホモロジーとする．
+$x : U \to \mathcal{X}$ を平坦射とし，$U$ はスキームであるとする．
+\'etale 位相を用いているので，制限関手
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+\to \textit{Mod}(U_\etale, \mathcal{O}_U)$ は完全である．
+一方，Lemma \ref{stacks-cohomology-lemma-flat-pullback-quasi-coherent} および
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-quasi-coherent} により，制限関手
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \xrightarrow{x^*}
+\QCoh((\Sch/U)_\etale, \mathcal{O}) \xrightarrow{{-}|_{U_\etale}}
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+も完全である．したがって
+$\mathcal{E}|_{U_\etale} = (\Ker(\beta)/\Im(\alpha))|_{U_\etale}$ である．
+
+\medskip\noindent
+(1) が成り立つならば $\mathcal{E} = 0$ なので，
+$\mathcal{X}$ 上平坦なすべての $U$ に対して
+$\Ker(\beta)/\Im(\alpha)$ の $U_\etale$ への制限は零である．
+これは寄生加群の定義にほかならない．
+(2) が成り立つならば，$\mathcal{X}$ 上平坦なすべての $U$ に対して
+$\Ker(\beta)/\Im(\alpha)$ の $U_\etale$ への制限は零であり，したがって
+$\mathcal{X}$ 上平坦なすべての $U$ に対して
+$\mathcal{E}$ の $U_\etale$ への制限も零である．
+これは準連接加群 $\mathcal{E}$ が零であることを確かに含意する．
+例えば写像 $0 \to \mathcal{E}$ に Lemma
+\ref{stacks-cohomology-lemma-quasi-coherent-check-exact} を適用すればよい．
+\end{proof}
+
+
+
+
+
+\section{準連接加群}
+\label{stacks-cohomology-section-quasi-coherent}
+
+\noindent
+代数スタック上の準連接加群の圏は，ある表示上の準連接加群の圏と同値であることを
+既に見た．Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks} を参照されたい．
+この事実が次の結果の基礎となる．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-adjoint}
+$\mathcal{X}$ を代数スタックとする．
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ を，
+平坦基底変換性をもつ局所準連接加群の圏とする．
+Section \ref{stacks-cohomology-section-loc-qcoh-flat-base-change} を参照されたい．
+包含関手
+$i : \QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$
+は右随伴
+$$
+Q : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+をもち，$Q \circ i$ は恒等関手である．
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射滑らかな射 $f : U \to \mathcal{X}$ を選ぶ．
+$R = U \times_\mathcal{X} U$ とおくと，代数空間の滑らかな亜群
+$(U, R, s, t, c)$ で $\mathcal{X} = [U/R]$ を満たすものが得られる．
+Algebraic Stacks, Lemma \ref{algebraic-lemma-stack-presentation} を参照されたい．
+$\mathcal{X}$ を $[U/R]$ で置き換えてよいし，そうする．
+Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-quasi-coherent} により，同値
+$$
+q_1 :
+\QCoh(U, R, s, t, c)
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+が存在する．関手
+$$
+q_2 :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U, R, s, t, c)
+$$
+を次の規則で構成しよう．
+$\mathcal{F}$ が $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象ならば，
+$$
+q_2(\mathcal{F}) = (f^*\mathcal{F}|_{U_\etale}, \alpha)
+$$
+とおく．ここで $\alpha$ は同型
+$$
+t_{small}^*(f^*\mathcal{F}|_{U_\etale})
+\to
+t^*f^*\mathcal{F}|_{R_\etale} \to
+s^*f^*\mathcal{F}|_{R_\etale} \to
+s_{small}^*(f^*\mathcal{F}|_{U_\etale})
+$$
+であり，外側の二つの射は比較写像である．
+$q_2(\mathcal{F})$ が準連接であるのは，まさに $\mathcal{F}$ が
+局所準連接だからであること，また降下データ $\alpha$ の構成には
+平坦基底変換性を用いた（そして必要とした）ことに注意せよ．
+コサイクル条件（Groupoids in Spaces, Definition
+\ref{spaces-groupoids-definition-groupoid-module} を参照）の確認は省略する．
+Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-quasi-coherent} の証明を見ると，
+$q_2 \circ i$ は $q_1$ の準逆である．$Q = q_1 \circ q_2$ と定義する．
+$\mathcal{F}$ を
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象とし，
+$\mathcal{G}$ を $\QCoh(\mathcal{O}_\mathcal{X})$ の対象とする．このとき
+\begin{align*}
+\Mor_{\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})}
+(i(\mathcal{G}), \mathcal{F})
+& =
+\Mor_{\QCoh(U, R, s, t, c)}(q_2(i(\mathcal{G})), q_2(\mathcal{F})) \\
+& =
+\Mor_{\QCoh(\mathcal{O}_\mathcal{X})}(\mathcal{G}, Q(\mathcal{F}))
+\end{align*}
+である．第1の等式は Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-map-from-quasi-coherent} である．
+% P12-ERR-0016: frozen q_1 o i / q_2 quasi-inverse wording retained; see sidecar.
+第2の等式は，$q_1 \circ i$ と $q_2$ が圏の準逆同値だから成り立つ．
+主張 $Q \circ i \cong \text{id}$ は，$i$ が充満忠実であることの形式的帰結である．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-adjoint-kernel-parasitic}
+$\mathcal{X}$ を代数スタックとする．
+$Q : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$
+を Lemma \ref{stacks-cohomology-lemma-adjoint} で構成した関手とする．
+\begin{enumerate}
+\item $Q$ の核は，
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の寄生的な対象全体にちょうど一致する．
+\item $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の任意の対象
+$\mathcal{F}$ に対し，随伴写像 $Q(\mathcal{F}) \to \mathcal{F}$ の
+核と余核はいずれも寄生的である．
+\item 関手 $Q$ は完全で，すべての極限および余極限と可換する．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-cohomology-lemma-adjoint} の証明と同様に
+$\mathcal{X} = [U/R]$ と書く．
+$\mathcal{F}$ を
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象とする．
+Lemma \ref{stacks-cohomology-lemma-adjoint} の証明から，$\mathcal{F}$ が $Q$ の核に属することと
+$\mathcal{F}|_{U_\etale} = 0$ は同値であることが明らかである．
+特に，$\mathcal{F}$ が寄生的ならば $\mathcal{F}$ は核に属する．
+次に，$x : V \to \mathcal{X}$ を平坦射とし，$V$ はスキームであるとする．
+$W = V \times_\mathcal{X} U$ とおき，図式
+$$
+\xymatrix{
+W \ar[d]_p \ar[r]_q & V \ar[d] \\
+U \ar[r] & \mathcal{X}
+}
+$$
+を考える．射影 $p : W \to U$ は平坦で，射影 $q : W \to V$ は
+滑らかかつ全射であることに注意せよ．したがって $q_{small}^*$ は
+準連接加群上忠実な関手である．仮定により $\mathcal{F}$ は
+平坦基底変換性をもつので，
+$p_{small}^*\mathcal{F}|_{U_\etale} \cong
+q_{small}^*\mathcal{F}|_{V_\etale}$ を得る．
+ゆえに $\mathcal{F}$ が $Q$ の核に属するならば
+$\mathcal{F}|_{V_\etale} = 0$ であり，これで (1) の証明が完了する．
+
+\medskip\noindent
+(2) は上の議論，および写像 $Q(\mathcal{F}) \to \mathcal{F}$ が
+$U_\etale$ へ制限すると同型になることから従う．
+
+\medskip\noindent
+(3) を示すため，$Q$ は右随伴なので左完全であることに注意する．
+$0 \to \mathcal{F} \to \mathcal{G} \to \mathcal{H} \to 0$ を
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の短完全列とする．
+次の可換図式を考える．
+$$
+\xymatrix{
+0 \ar[r] &
+Q(\mathcal{F}) \ar[r] \ar[d]_a &
+Q(\mathcal{G}) \ar[r] \ar[d]_b &
+Q(\mathcal{H}) \ar[r] \ar[d]_c & 0 \\
+0 \ar[r] &
+\mathcal{F} \ar[r] &
+\mathcal{G} \ar[r] &
+\mathcal{H} \ar[r] & 0
+}
+$$
+(2) により $a$，$b$，$c$ の核と余核は寄生的であり，下段は短完全列なので，
+上段は $\mathcal{O}_\mathcal{X}$-加群の複体として寄生的なコホモロジー層をもつ
+（詳細は省略する．ここでは寄生加群の圏が全加群の圏の Serre 部分圏であることを
+用いる）．$Q$ の左完全性により，問題となるのは $Q(\mathcal{H})$ における
+完全性だけである．しかし，
+% P12-ERR-0017: frozen extra closing parenthesis retained; see sidecar.
+$Q(\mathcal{G}) \to Q(\mathcal{H}))$
+の余核 $\mathcal{Q}$ は，
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ でも
+$\QCoh(\mathcal{O}_\mathcal{X})$ でも同じ結果として計算できる．
+実際，包含関手
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$
+は左随伴なので右完全である．したがって
+$\mathcal{Q} = Q(\mathcal{Q})$ は準連接かつ寄生的であり，
+(1) により望みどおり $0$ である．
+
+\medskip\noindent
+右随伴として $Q$ はすべての極限と可換する．
+$Q$ は完全なので，$Q$ がすべての余極限と可換することを示すには，
+$Q$ が直和と可換することを示せば十分である．Categories, Lemma
+\ref{categories-lemma-colimits-coproducts-coequalizers} を参照されたい．
+$\mathcal{F}_i$，$i \in I$ を
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象の族とする．
+$Q(\bigoplus \mathcal{F}_i)$ が $\bigoplus Q(\mathcal{F}_i)$ と等しいことを
+見るため，Lemma \ref{stacks-cohomology-lemma-adjoint} の証明における $Q$ の構成を見る．
+そこでは $U$ がスキームである表示 $\mathcal{X} = [U/R]$ を用いる．
+このとき $Q(\mathcal{F})$ は，まず
+$(\mathcal{F}|_{U_\etale}, \alpha)$ を
+$\QCoh(U, R, s, t, c)$ の対象として取り，次に同値
+$\QCoh(U, R, s, t, c) \cong \QCoh(\mathcal{O}_\mathcal{X})$
+を用いて計算される．制限関手
+$\textit{Mod}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_{U_\etale})$，
+$\mathcal{F} \mapsto \mathcal{F}|_{U_\etale}$ は直和と可換するので，
+求める等式は明らかである．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-morphism-and-Q}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの平坦射とする．
+このとき
+$Q_\mathcal{X} \circ f^* = f^* \circ Q_\mathcal{Y}$ である．
+ここで $Q_\mathcal{X}$ および $Q_\mathcal{Y}$ は
+Lemma \ref{stacks-cohomology-lemma-adjoint} のとおりである．
+\end{lemma}
+
+\begin{proof}
+$f^*$ は $\QCoh$ および $\textit{LQCoh}^{fbc}$ の双方を保つことに注意せよ．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent} および Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} を参照されたい．
+$\mathcal{F}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$ に属するならば，
+Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} により
+$Q_\mathcal{Y}(\mathcal{F}) \to \mathcal{F}$ は寄生的な核と余核をもつ．
+$f$ は平坦なので，Lemma \ref{stacks-cohomology-lemma-parasitic} により
+$f^*Q_\mathcal{Y}(\mathcal{F}) \to f^*\mathcal{F}$ も
+寄生的な核と余核をもつ．したがって誘導写像
+$f^*Q_\mathcal{Y}(\mathcal{F}) \to Q_\mathcal{X}(f^*\mathcal{F})$
+は寄生的な核と余核をもち，ゆえに同型である．例えば
+Lemma \ref{stacks-cohomology-lemma-exact-sequence-quasi-coherent-parasitic-cohomology}
+を参照されたい．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-object-and-Q}
+$\mathcal{X}$ を代数スタックとする．$x$ を $\mathcal{X}$ の対象で，
+スキーム $U$ 上にあり，$x : U \to \mathcal{X}$ が平坦なものとする．
+% P12-ERR-0018: frozen QCoh^{fbc} domain retained; see sidecar.
+$\mathcal{F}$ が $\QCoh^{fbc}(\mathcal{O}_\mathcal{X})$ に属するならば，
+$Q(\mathcal{F})|_{U_\etale} = \mathcal{F}|_{U_\etale}$ である．
+\end{lemma}
+
+\begin{proof}
+$Q(\mathcal{F}) \to \mathcal{F}$ の核と余核が寄生的だからである．
+Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} を参照されたい．
+\end{proof}
+
+\begin{remark}
+\label{stacks-cohomology-remark-QCoh-abelian}
+$\mathcal{X}$ を代数スタックとする．圏
+$\QCoh(\mathcal{O}_\mathcal{X})$ は Abel 圏であり，包含関手
+$\QCoh(\mathcal{O}_\mathcal{X}) \to \textit{Mod}(\mathcal{O}_\mathcal{X})$
+は右完全だが，一般には完全でない．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} を参照されたい．
+Lemmas \ref{stacks-cohomology-lemma-adjoint} および
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} の関手 $Q$ を用いて，これを理解できる．
+実際，$\varphi : \mathcal{F} \to \mathcal{G}$ を
+準連接 $\mathcal{O}_\mathcal{X}$-加群の射とする．このとき
+\begin{enumerate}
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した余核
+$\Coker(\varphi)$ は準連接であり，
+$\QCoh(\mathcal{O}_\mathcal{X})$ における $\varphi$ の余核である．
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した像
+$\Im(\varphi)$ は準連接であり，
+$\QCoh(\mathcal{O}_\mathcal{X})$ における $\varphi$ の像である．
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した核
+$\Ker(\varphi)$ は次の命題を用いて記述できる．
+
+Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属し，
+$Q(\Ker(\varphi))$ は $\QCoh(\mathcal{O}_\mathcal{X})$ における核である．
+\end{enumerate}
+これは与えた参照から従う．
+\end{remark}
+
+\begin{remark}
+\label{stacks-cohomology-remark-QCoh-tensor}
+$\mathcal{X}$ を代数スタックとする．
+二つの準連接 $\mathcal{O}_\mathcal{X}$-加群
+$\mathcal{F}$ および $\mathcal{G}$ が与えられたとき，テンソル積加群
+$\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}$
+は準連接である．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} の (5) を参照されたい．
+同様に，平坦基底変換性をもつ二つの局所準連接加群が与えられたとき，
+それらのテンソル積も同じ性質をもつ．Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} を参照されたい．
+したがって包含関手
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+$$
+は対称モノイダル圏の関手である．さらに興味深いのは，関手
+$$
+Q :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{X})
+$$
+も対称モノイダル圏の関手であることである．
+実際，$\mathcal{F}$ および $\mathcal{G}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するとき，図式
+$$
+\xymatrix{
+Q(\mathcal{F})
+\otimes_{\mathcal{O}_\mathcal{X}}
+Q(\mathcal{G}) \ar[rr] \ar[rd] & &
+\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{X}}
+\mathcal{G} \\
+&
+Q(\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G}) \ar[ru]
+}
+$$
+を得る．ここで南西向きの矢印は，北西向きの矢印の普遍性
+（および左上隅の対象が準連接であるという既述の事実）から得られる．
+この図式を，平坦な $U \to \mathcal{X}$ に対して
+$U_\etale$ へ制限すると，三つの矢印はすべて同型になる
+（Lemmas \ref{stacks-cohomology-lemma-adjoint}，\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}
+および Definition \ref{stacks-cohomology-definition-parasitic} を参照）．
+したがって
+$Q(\mathcal{F}) \otimes_{\mathcal{O}_\mathcal{X}}
+Q(\mathcal{G}) \to
+Q(\mathcal{F} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{G})$
+は同型である．例えば Lemma \ref{stacks-cohomology-lemma-quasi-coherent-check-exact}
+を参照されたい．
+\end{remark}
+
+\begin{remark}
+\label{stacks-cohomology-remark-bousfield-colocalization}
+$\mathcal{X}$ を代数スタックとする．
+$\textit{Parasitic}(\mathcal{O}_\mathcal{X}) \subset
+\textit{Mod}(\mathcal{O}_\mathcal{X})$
+を，寄生加群からなる充満部分圏とする．Lemmas
+\ref{stacks-cohomology-lemma-adjoint} および \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}
+の結果は
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) =
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) /
+\textit{Parasitic}(\mathcal{O}_\mathcal{X})
+\cap \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+$$
+を含意する．言い換えると，準連接加群の圏は，
+平坦基底変換性をもつ局所準連接加群の圏を，寄生的な対象からなる
+Serre 部分圏で割ったものである．Homology, Lemma
+\ref{homology-lemma-serre-subcategory-is-kernel} を参照されたい．
+商関手の左随伴である包含関手
+$i : \QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$
+が存在することは，この状況の重要な特徴である．
+Derived Categories of Stacks, Section
+\ref{stacks-perfect-section-derived}，特に Lemma
+\ref{stacks-perfect-lemma-bousfield-colocalization} で，
+導来圏の水準でも同様の結果が成り立つことを証明する．
+\end{remark}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-internal-hom-fp-into-qcoh}
+$\mathcal{X}$ を代数スタックとする．
+$\mathcal{F}$ を有限表示な $\mathcal{O}_\mathcal{X}$-加群とし，
+$\mathcal{G}$ を準連接 $\mathcal{O}_\mathcal{X}$-加群とする．
+$\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+または $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した内部 Hom
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+は一致し，その共通の値は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象である．
+準連接加群
+$
+hom(\mathcal{F}, \mathcal{G}) =
+Q(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))
+$
+は，$\QCoh(\mathcal{O}_\mathcal{X})$ に属する $\mathcal{H}$ に対し，
+次の普遍性をもつ．
+$$
+\Hom_\mathcal{X}(\mathcal{H}, hom(\mathcal{F}, \mathcal{G})) =
+\Hom_\mathcal{X}(\mathcal{H} \otimes_{\mathcal{O}_\mathcal{X}} \mathcal{F},
+\mathcal{G})
+$$
+\end{lemma}
+
+\begin{proof}
+Modules on Sites, Section \ref{sites-modules-section-internal-hom}
+における
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+の構成は，加群の前層としての $\mathcal{F}$ および $\mathcal{G}$ のみに依存する．
+出力 $\SheafHom$ は fppf 位相に関する層である．実際，
+$\mathcal{F}$ および $\mathcal{G}$ は fppf 位相に関する層と仮定されている．
+Modules on Sites, Lemma \ref{sites-modules-lemma-internal-hom}
+を参照されたい．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-colimits} により，
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+は局所準連接である．Lemma
+\ref{stacks-cohomology-lemma-check-flat-comparison-on-etale-covering} により，
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+は平坦基底変換性をもつ．したがって
+$\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})$
+は $\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象であり，
+Lemma \ref{stacks-cohomology-lemma-adjoint} の関手 $Q$ を適用することに意味がある．
+$Q$ の普遍性により，準連接な $\mathcal{H}$ に対して
+$$
+\Hom_\mathcal{X}(\mathcal{H},
+Q(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))) =
+\Hom_\mathcal{X}(\mathcal{H},
+\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))
+$$
+である．したがって補題の表示式は Modules on Sites, Lemma
+\ref{sites-modules-lemma-internal-hom-adjoint-tensor} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-flat-morphism-and-hom}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの平坦射とする．
+$\mathcal{F}$ を有限表示な $\mathcal{O}_\mathcal{Y}$-加群とし，
+$\mathcal{G}$ を準連接 $\mathcal{O}_\mathcal{Y}$-加群とする．
+このとき Lemma \ref{stacks-cohomology-lemma-internal-hom-fp-into-qcoh} の記法で
+$f^*hom(\mathcal{F}, \mathcal{G}) = hom(f^*\mathcal{F}, f^*\mathcal{G})$
+である．
+\end{lemma}
+
+\begin{proof}
+Sites 上の加群に関する Lemma
+\ref{sites-modules-lemma-pullback-internal-hom} により，
+$f^*\SheafHom_{\mathcal{O}_\mathcal{Y}}(\mathcal{F}, \mathcal{G}) =
+\SheafHom_{\mathcal{O}_\mathcal{X}}(f^*\mathcal{F}, f^*\mathcal{G})$
+である．
+（この段階で $f$ の平坦性を用いているのではないことに注意せよ．
+$f$ に付随する環付きトポスの射は常に平坦だからである．
+Sheaves on Stacks, Remark \ref{stacks-sheaves-remark-flat} を参照されたい．）
+次に Lemma \ref{stacks-cohomology-lemma-flat-morphism-and-Q} を適用する
+（そしてここでは $f$ の平坦性を用いる）．
+\end{proof}
+
+
+
+
+
+
+
+
+\section{準連接加群の順像}
+\label{stacks-cohomology-section-pushforward-quasi-coherent}
+
+\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする．順像
+$$
+f_* :
+\textit{Mod}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(\mathcal{O}_\mathcal{Y})
+$$
+を考える．この関手は，準連接層の部分圏をほとんど決して保たないことが分かる．
+例えば，スキームの射
+$$
+j : X = \mathbf{A}^2_k \setminus \{0\} \longrightarrow \mathbf{A}^2_k = Y.
+$$
+を考える．これには，対応する代数スタックの射
+$$
+f = j_{big} : \mathcal{X} = (\Sch/X)_{fppf} \to
+(\Sch/Y)_{fppf} = \mathcal{Y}
+$$
+が付随する．構造層の順像 $f_*\mathcal{O}_\mathcal{X}$ の大域切断は
+$k[x, y]$ である．したがって，もし
+$f_*\mathcal{O}_\mathcal{X}$ が $\mathcal{Y}$ 上準連接ならば，
+$f_*\mathcal{O}_\mathcal{X} = \mathcal{O}_\mathcal{Y}$ となるはずである．
+しかし，$0$ に写る
+$T = \Spec(k) \to \mathbf{A}^2_k = Y$ を考えよう．
+$X \times_Y T = \emptyset$ なので
+$\Gamma(T, f_*\mathcal{O}_\mathcal{X}) = 0$ である一方，
+$\Gamma(T, \mathcal{O}_\mathcal{Y}) = k$ である．
+肯定的な側面として，任意の平坦射 $T \to Y$ に対し，
+$\Gamma(T, f_*\mathcal{O}_\mathcal{X}) = \Gamma(T, \mathcal{O}_\mathcal{Y})$
+が成り立つ．これは $j$ が準コンパクトかつ準分離的であることを用いて，
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-flat-base-change-cohomology} から従う．
+
+\medskip\noindent
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの
+準コンパクトかつ準分離的な射とする．上で述べた問題には，次の三つの観察を用いて
+対処する．
+\begin{enumerate}
+\item $f_*$ は局所準連接加群を保つ
+（Lemma \ref{stacks-cohomology-lemma-pushforward-locally-quasi-coherent}）．
+\item $f_*$ は準連接層を，平坦比較写像が同型である局所準連接層へ移す
+（Lemma \ref{stacks-cohomology-lemma-flat-comparison}）．
+\item 平坦基底変換性をもつ局所準連接
+$\mathcal{O}_\mathcal{Y}$-加群は，$\mathcal{Y}$ の表示上の準連接加群を，
+したがって $\mathcal{Y}$ 上の準連接加群を与える．
+Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks} を参照されたい．
+\end{enumerate}
+このようにして関手
+$$
+f_{\QCoh, *} :
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{Y})
+$$
+を得る．これは
+$f^* : \QCoh(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$
+の右随伴であり，さらに，付随する $1$-射
+$y : V \to \mathcal{Y}$ が平坦である任意の
+$y \in \Ob(\mathcal{Y})$ に対して
+$$
+\Gamma(y, f_*\mathcal{F}) = \Gamma(y, f_{\QCoh, *}\mathcal{F})
+$$
+を満たす．Lemma \ref{stacks-cohomology-lemma-direct-image-quasi-coherent-over-flat}
+を参照されたい．さらに，同様の構成により関手
+$R^if_{\QCoh, *}$ が得られる．
+しかし，これらの結果だけでは（準連接なコホモロジー層をもつ複体の）
+全順像関手を構成するには不十分である．
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-direct-image-quasi-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$ を
+代数スタックの準コンパクトかつ準分離的な射とする．関手
+$f^* : \QCoh(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$
+は右随伴
+$$
+f_{\QCoh, *} :
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(\mathcal{O}_\mathcal{Y})
+$$
+をもつ．これは合成
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\xrightarrow{f_*} \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})
+\xrightarrow{Q} \QCoh(\mathcal{O}_\mathcal{Y})
+$$
+として定義できる．ここで関手 $f_*$ および $Q$ はそれぞれ
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} および
+Lemma \ref{stacks-cohomology-lemma-adjoint} のとおりである．さらに
+$R^if_{\QCoh, *}$ を合成
+$$
+\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\xrightarrow{R^if_*} \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})
+\xrightarrow{Q} \QCoh(\mathcal{O}_\mathcal{Y})
+$$
+として定義すれば，関手列
+$\{R^if_{\QCoh, *}\}_{i \geq 0}$ はコホモロジー的 $\delta$-関手をなす．
+\end{proposition}
+
+\begin{proof}
+これは主張で言及した結果の組合せである．随伴性は次のように示せる．
+$\mathcal{F}$ を準連接 $\mathcal{O}_\mathcal{X}$-加群とし，
+$\mathcal{G}$ を準連接 $\mathcal{O}_\mathcal{Y}$-加群とする．このとき
+\begin{align*}
+\Mor_{\QCoh(\mathcal{O}_\mathcal{X})}(f^*\mathcal{G}, \mathcal{F})
+& =
+\Mor_{\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})}
+(\mathcal{G}, f_*\mathcal{F}) \\
+& =
+\Mor_{\QCoh(\mathcal{O}_\mathcal{Y})}(\mathcal{G}, Q(f_*\mathcal{F}))
+\\
+& =
+\Mor_{\QCoh(\mathcal{O}_\mathcal{Y})}(\mathcal{G},
+f_{\QCoh, *}\mathcal{F})
+\end{align*}
+である．第1の等式は（任意の加群の層に対する）$f_*$ と $f^*$ の随伴性による．
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により，
+$f_*\mathcal{F}$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$ の対象である
+（しかも fppf 位相と \'etale 位相のいずれでも計算できる）．
+Lemma \ref{stacks-cohomology-lemma-adjoint} により第2の等式を得る．
+第3の等式は $f_{\QCoh, *}$ の定義である．
+
+\medskip\noindent
+$\{R^if_{\QCoh, *}\}_{i \geq 0}$ が Homology, Definition
+\ref{homology-definition-cohomological-delta-functor} で定義される
+コホモロジー的 $\delta$-関手であることを示そう．
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+を $\QCoh(\mathcal{O}_\mathcal{X})$ の短完全列とする．
+この列は $\textit{Mod}(\mathcal{O}_\mathcal{X})$ では完全列でないかもしれないが，
+寄生加群を除けば完全であることを知っている．Lemma
+\ref{stacks-cohomology-lemma-exact-sequence-quasi-coherent-parasitic-cohomology} を参照されたい．
+したがってこの列を，$\mathcal{P}_i$ が寄生的である
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ の短完全列
+$$
+\begin{matrix}
+0 \to \mathcal{P}_1 \to \mathcal{F}_1 \to \mathcal{I}_2 \to 0 \\
+0 \to \mathcal{I}_2 \to \mathcal{F}_2 \to \mathcal{Q}_2 \to 0 \\
+0 \to \mathcal{P}_2 \to \mathcal{Q}_2 \to \mathcal{I}_3 \to 0 \\
+0 \to \mathcal{I}_3 \to \mathcal{F}_3 \to \mathcal{P}_3 \to 0
+\end{matrix}
+$$
+に分解できる．各層
+$\mathcal{P}_j$，$\mathcal{I}_j$，$\mathcal{Q}_j$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象であることに注意せよ．
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} を参照されたい．
+$R^if_*$ を適用すると，長完全列
+$$
+\begin{matrix}
+0 \to f_*\mathcal{P}_1 \to f_*\mathcal{F}_1 \to f_*\mathcal{I}_2 \to
+R^1f_*\mathcal{P}_1 \to \ldots \\
+0 \to f_*\mathcal{I}_2 \to f_*\mathcal{F}_2 \to f_*\mathcal{Q}_2 \to
+R^1f_*\mathcal{I}_2 \to \ldots \\
+0 \to f_*\mathcal{P}_2 \to f_*\mathcal{Q}_2 \to f_*\mathcal{I}_3 \to
+R^1f_*\mathcal{P}_2 \to \ldots \\
+0 \to f_*\mathcal{I}_3 \to f_*\mathcal{F}_3 \to f_*\mathcal{P}_3 \to
+R^1f_*\mathcal{I}_3 \to \ldots
+\end{matrix}
+$$
+を得る．
+% P12-ERR-0022: source's duplicated finite verb has no Japanese analogue; see sidecar.
+ここに現れる項はすべて Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y})$ の対象である．
+Lemma \ref{stacks-cohomology-lemma-pushforward-parasitic} により
+層 $R^if_*\mathcal{P}_j$ は寄生的なので，関手 $Q$ を適用すると消滅する．
+Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} を参照されたい．
+$Q$ は完全なので，写像
+$$
+Q(R^if_*\mathcal{F}_3)
+\cong
+Q(R^if_*\mathcal{I}_3)
+\cong
+Q(R^if_*\mathcal{Q}_2)
+\rightarrow
+Q(R^{i + 1}f_*\mathcal{I}_2)
+\cong
+Q(R^{i + 1}f_*\mathcal{F}_1)
+$$
+は，関手族 $\{R^if_{\QCoh, *}\}_{i \geq 0}$ を
+コホモロジー的 $\delta$-関手にする連結射として用いることができる．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-direct-image-quasi-coherent-over-flat}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの
+準コンパクトかつ準分離的な射とする．
+$y : V \to \mathcal{Y}$ を $\Ob(\mathcal{Y})$ の対象で，
+$y$ が平坦射であるものとする．
+$\mathcal{F}$ を $\QCoh(\mathcal{O}_\mathcal{X})$ の対象とする．
+このとき
+$(f_*\mathcal{F})(y) = (f_{\QCoh, *}\mathcal{F})(y)$
+かつ，すべての $i \in \mathbf{Z}$ に対し
+$(R^if_*\mathcal{F})(y) = (R^if_{\QCoh, *}\mathcal{F})(y)$ である．
+\end{lemma}
+
+\begin{proof}
+これは Proposition \ref{stacks-cohomology-proposition-direct-image-quasi-coherent} における
+関手 $R^if_{\QCoh, *}$ の構成，Definition
+\ref{stacks-cohomology-definition-parasitic} における寄生加群の定義，および Lemma
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} の (2) から従う．
+\end{proof}
+
+\begin{remark}
+\label{stacks-cohomology-remark-direct-image-quasi-coherent-tensor}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの
+準コンパクトかつ準分離的な射とする．
+$\mathcal{F}$ および $\mathcal{G}$ を
+$\QCoh(\mathcal{O}_\mathcal{X})$ の対象とする．
+このとき標準的な可換図式
+$$
+\xymatrix{
+f_{\QCoh, *}\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{Y}}
+f_{\QCoh, *}\mathcal{G} \ar[r] \ar[d] &
+f_*\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{Y}}
+f_*\mathcal{G} \ar[d]^c \\
+f_{\QCoh, *}(\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{X}}
+\mathcal{G}) \ar[r] &
+f_*(\mathcal{F}
+\otimes_{\mathcal{O}_\mathcal{X}}
+\mathcal{G})
+}
+$$
+が存在する．右側の縦矢印 $c$ は（次数 $0$ の）素朴な相対カップ積である．
+Cohomology on Sites, Section
+\ref{sites-cohomology-section-cup-product} を参照されたい．
+% P12-ERR-0019: frozen O_X category retained; see sidecar.
+$c$ の始域と終域は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} を参照されたい．
+$c$ に $Q$ を適用すると，$Q$ はテンソル積と可換するので，
+左側の縦矢印を得る．Remark \ref{stacks-cohomology-remark-QCoh-tensor} を参照されたい．
+この構成は $\mathcal{F}$ および $\mathcal{G}$ に関して関手的である．
+\end{remark}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-leray}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの
+準コンパクトかつ準分離的な射とし，$\mathcal{F}$ を
+$\mathcal{X}$ 上の準連接層とする．このとき $E_2$-頁
+$$
+E_2^{p, q} = H^p(\mathcal{Y}, R^qf_{\QCoh, *}\mathcal{F})
+$$
+をもち，$H^{p + q}(\mathcal{X}, \mathcal{F})$ に収束する
+スペクトル系列が存在する．
+\end{lemma}
+
+\begin{proof}
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-Leray} により，次の第2頁
+$$
+E_2^{p, q} = H^p(\mathcal{Y}, R^qf_*\mathcal{F})
+$$
+をもつ Leray スペクトル系列は
+$H^{p + q}(\mathcal{X}, \mathcal{F})$ に収束する．
+随伴写像
+$$
+R^qf_{\QCoh, *}\mathcal{F} \longrightarrow R^qf_*\mathcal{F}
+$$
+の核と余核は $\mathcal{Y}$ 上の寄生加群である
+（Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}）から，
+そのコホモロジーは消滅する
+（Lemma \ref{stacks-cohomology-lemma-pushforward-parasitic}）．したがって形式的に
+$H^p(\mathcal{Y}, R^qf_{\QCoh, *}\mathcal{F}) =
+H^p(\mathcal{Y}, R^qf_*\mathcal{F})$ となり，結論を得る．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-relative-leray}
+$f : \mathcal{X} \to \mathcal{Y}$ および
+$g : \mathcal{Y} \to \mathcal{Z}$ を
+代数スタックの準コンパクトかつ準分離的な射とする．
+$\mathcal{F}$ を $\mathcal{X}$ 上の準連接層とする．
+このとき $E_2$-頁
+$$
+E_2^{p, q} = R^pg_{\QCoh, *}(R^qf_{\QCoh, *}\mathcal{F})
+$$
+をもち，$R^{p + q}(g \circ f)_{\QCoh, *}\mathcal{F}$ に収束する
+スペクトル系列が存在する．
+\end{lemma}
+
+\begin{proof}
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-relative-Leray} により，
+次の第2頁
+$$
+E_2^{p, q} = R^pg_*(R^qf_*\mathcal{F})
+$$
+をもつ Leray スペクトル系列は
+$R^{p + q}(g \circ f)_*\mathcal{F}$ に収束する．
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} の結果により，
+このスペクトル系列のすべての項は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Z})$ の対象である．
+完全関手
+$Q_\mathcal{Z} : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Z}) \to
+\QCoh(\mathcal{O}_\mathcal{Z})$
+を適用すると，$\QCoh(\mathcal{O}_\mathcal{Z})$ において
+$R^{p + q}(g \circ f)_{\QCoh, *}\mathcal{F}$ に収束する
+スペクトル系列を得る．
+% P12-ERR-0023: source's “covering to” typo is rendered by its mathematical intent; see sidecar.
+したがって，次を示せば結果が従う．
+% P12-ERR-0020/P12-ERR-0021: frozen Q_X subscripts and unmatched parenthesis retained.
+$$
+Q_\mathcal{Z}(R^pg_*(R^qf_*\mathcal{F})) =
+Q_\mathcal{Z}(R^pg_*(Q_\mathcal{X}(R^qf_*\mathcal{F}))
+$$
+これは写像
+$$
+Q_\mathcal{X}(R^qf_*\mathcal{F}) \longrightarrow R^qf_*\mathcal{F}
+$$
+の核と余核が寄生的であり
+（Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic}），かつ
+$R^pg_*$ が寄生加群を寄生加群へ移す
+（Lemma \ref{stacks-cohomology-lemma-pushforward-parasitic}）ことから従う．
+\end{proof}
+
+\noindent
+この節の最後に，スキームによる滑らかな被覆に付随する
+スペクトル系列を明示する．Sheaves on Stacks, Sections
+\ref{stacks-sheaves-section-cohomology} および
+\ref{stacks-sheaves-section-higher-direct-images} と比較されたい．
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-smooth-covering-compute-cohomology}
+$f : \mathcal{U} \to \mathcal{X}$ を代数スタックの射とする．
+$f$ は代数空間によって表現可能，全射，平坦，かつ局所有限表示であると仮定する．
+$\mathcal{F}$ を準連接 $\mathcal{O}_\mathcal{X}$-加群とする．
+このときスペクトル系列
+$$
+E_2^{p, q} = H^q(\mathcal{U}_p, f_p^*\mathcal{F})
+\Rightarrow
+H^{p + q}(\mathcal{X}, \mathcal{F})
+$$
+が存在する．ここで $f_p$ は射
+$\mathcal{U} \times_\mathcal{X} \ldots \times_\mathcal{X} \mathcal{U} \to
+\mathcal{X}$（$p + 1$ 個の因子）である．
+\end{proposition}
+
+\begin{proof}
+これは Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-smooth-covering-compute-cohomology}
+の特別な場合である．
+\end{proof}
+
+\begin{proposition}
+\label{stacks-cohomology-proposition-smooth-covering-compute-direct-image}
+$f : \mathcal{U} \to \mathcal{X}$ および
+$g : \mathcal{X} \to \mathcal{Y}$ を
+合成可能な代数スタックの射とする．次を仮定する．
+\begin{enumerate}
+\item $f$ は代数空間によって表現可能，全射，平坦，局所有限表示，
+準コンパクト，かつ準分離的である．
+\item $g$ は準コンパクトかつ準分離的である．
+\end{enumerate}
+$\mathcal{F}$ が $\QCoh(\mathcal{O}_\mathcal{X})$ に属するならば，
+$\QCoh(\mathcal{O}_\mathcal{Y})$ においてスペクトル系列
+$$
+E_2^{p, q} = R^q(g \circ f_p)_{\QCoh, *}f_p^*\mathcal{F}
+\Rightarrow
+R^{p + q}g_{\QCoh, *}\mathcal{F}
+$$
+が存在する．
+\end{proposition}
+
+\begin{proof}
+各射
+$f_p : \mathcal{U} \times_\mathcal{X} \ldots \times_\mathcal{X} \mathcal{U} \to
+\mathcal{X}$
+は準コンパクトかつ準分離的なので，$g \circ f_p$ も
+準コンパクトかつ準分離的であり，したがって主張には意味がある
+（すなわち関手 $R^q(g \circ f_p)_{\QCoh, *}$ は定義される）．
+Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-smooth-covering-compute-direct-image}
+により，スペクトル系列
+$$
+E_2^{p, q} = R^q(g \circ f_p)_*f_p^{-1}\mathcal{F}
+\Rightarrow
+R^{p + q}g_*\mathcal{F}
+$$
+が存在する．完全関手
+$Q_\mathcal{Y} : \textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{Y}) \to
+\QCoh(\mathcal{O}_\mathcal{Y})$
+を適用すると，$\QCoh(\mathcal{O}_\mathcal{Y})$ における
+求めるスペクトル系列が得られる．
+\end{proof}
+
+
+
+
+
+
+
+\section{準連接加群に関するさらなる注意}
+\label{stacks-cohomology-section-further-remarks}
+
+\noindent
+% P12-ERR-0024: source's extra “to” is rendered by its grammatical intent; see sidecar.
+本節では，代数スタック上の準連接加群をどのように用いるかを
+理解するのに役立ついくつかの結果を集める．
+
+\medskip\noindent
+$f : \mathcal{U} \to \mathcal{X}$ を代数スタックの射とする．
+$\mathcal{U}$ は代数空間 $U$ によって表現されると仮定する．
+関手
+$$
+a :
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})
+\longrightarrow
+\textit{Mod}(U_\etale, \mathcal{O}_U),\quad
+\mathcal{F}
+\longmapsto
+f^*\mathcal{F}|_{U_\etale}
+$$
+を考える．これは引き戻し
+（Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-modules}）に続いて制限
+（Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-restriction-algebraic-spaces}）
+を施すことにより与えられる．
+この関手を局所準連接加群に適用すると関手
+$$
+b : \textit{LQCoh}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+を得る．Sheaves on Stacks, Lemmas
+\ref{stacks-sheaves-lemma-pullback-lqc} および
+\ref{stacks-sheaves-lemma-compare-locally-quasi-coherent}
+を参照されたい．さらに小さい部分圏へ制限すれば，関手
+$$
+c :
+\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+および
+$$
+d :
+\QCoh(\mathcal{O}_\mathcal{X})
+\longrightarrow
+\QCoh(U_\etale, \mathcal{O}_U)
+$$
+を得る．これらの関手について次が成り立つ：\footnote{以下の主張が
+なぜ成り立つかは，挙げた参照先を追う代わりに紙片の上で確かめることを
+勧める．}
+\begin{enumerate}
+\item 関手 $a$ は完全である．実際，引き戻し $f^* = f^{-1}$ は完全であり
+（Sheaves on Stacks, Section \ref{stacks-sheaves-section-modules}），
+$U_\etale$ への制限も完全である．Sheaves on Stacks, Equation
+(\ref{stacks-sheaves-equation-restrict}) を参照されたい．
+\item 関手 $b$ は完全である．実際，Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-lqc-colimits} により，包含
+$\textit{LQCoh}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+は完全である．
+\item 関手 $c$ は完全である．実際，Proposition
+\ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により，次の包含関手は
+完全である．
+
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+\item 関手 $d$ は右完全であるが，一般には完全ではない．
+実際，Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-qc-colimits} により，包含関手
+$\QCoh(\mathcal{O}_\mathcal{X}) \to
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+は右完全である．完全でないことを示す例は省略する．
+\item $f$ が平坦ならば $d$ は完全である．これは Lemma
+\ref{stacks-cohomology-lemma-flat-pullback-quasi-coherent} と
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-quasi-coherent}
+を組み合わせれば従う．
+\item $f$ が平坦ならば，$c$ は寄生対象を消す．
+% P12-ERR-0025: source singular/plural mismatch is rendered naturally; see sidecar.
+実際，Lemma \ref{stacks-cohomology-lemma-parasitic} により $f^*$ は寄生対象を保つ．
+そこで $U$ 上 \'etale，したがって $\mathcal{X}$ 上平坦な任意の
+スキーム $V$ に対して，\'etale 局所化と制限の両立性
+（Sheaves on Stacks, Remark \ref{stacks-sheaves-remark-compare}）
+により
+$0 = f^*\mathcal{F}|_{V_\etale} = c(\mathcal{F})|_{V_\etale}$
+である．ゆえに明らかに $c(\mathcal{F}) = 0$ である．
+\item $f$ が平坦ならば $c = d \circ Q$ である．実際，
+$Q(\mathcal{F}) \to \mathcal{F}$ の核と余核は Lemma
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} により寄生的である．
+したがって $c$ は完全であり (3)，かつ寄生対象を消す (6) ので，
+$Q(\mathcal{F}) \to \mathcal{F}$ に $c$ を適用したものは
+同型である．
+\item 関手 $a, b, c, d$ は余極限および任意直和と可換する．
+これは $f^*$ と制限が左随伴であることから $a$ について成り立つ．
+すると上記の参照先により $b$, $c$, $d$ についても従う．
+\item 関手 $a, b, c, d$ はテンソル積と可換する．
+\item $f$ が平坦かつ全射で，$\mathcal{F}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属し，
+$c(\mathcal{F}) = 0$ ならば，$\mathcal{F}$ は寄生的である．
+実際，(7) により $d(Q(\mathcal{F})) = 0$ を得る．
+制限と \'etale 局所化の両立性（上記の参照先）により，
+$U$ はスキームであると仮定してよい．そこで
+$0 \to Q(\mathcal{F})$ および射 $f : U \to \mathcal{X}$ に
+Lemma \ref{stacks-cohomology-lemma-quasi-coherent-check-exact} を適用すると
+$Q(\mathcal{F}) = 0$ となる．ゆえに Lemma
+\ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} により $\mathcal{F}$ は寄生的である．
+\item $f$ が平坦かつ全射ならば，関手 $d$ は完全性を反映する．
+より正確には，$\mathcal{F}^\bullet$ を
+$\QCoh(\mathcal{O}_\mathcal{X})$ の複体とする．このとき
+$\mathcal{F}^\bullet$ が $\QCoh(\mathcal{O}_\mathcal{X})$ において
+完全であることと，$d(\mathcal{F}^\bullet)$ が完全であることは同値である．
+一方の含意は (5) ですでに見た．逆に
+$H^i(d(\mathcal{F}^\bullet)) = 0$ と仮定する．このとき
+$\mathcal{G} = H^i(\mathcal{F}^\bullet)$ は
+$\QCoh(\mathcal{O}_\mathcal{X})$ の対象であり，
+$d(\mathcal{G}) = 0$ を満たす．したがって (10) により
+$\mathcal{G}$ は準連接かつ寄生的であり，例えば Remark
+\ref{stacks-cohomology-remark-bousfield-colocalization} により $0$ である．
+\item
+\label{stacks-cohomology-item-hom-restriction}
+% P12-ERR-0026: source's broken clause is rendered by its intended syntax; see sidecar.
+$f$ が平坦で，
+$\mathcal{F}, \mathcal{G} \in \Ob(\QCoh(\mathcal{O}_\mathcal{X}))$，
+かつ $\mathcal{F}$ が有限表示ならば，
+$$
+d(hom(\mathcal{F}, \mathcal{G})) =
+\SheafHom_{\mathcal{O}_U}(d(\mathcal{F}), d(\mathcal{G}))
+$$
+である．記法は Lemma \ref{stacks-cohomology-lemma-internal-hom-fp-into-qcoh}
+のとおりとする．おそらく最も容易な確認方法は次である：
+\begin{align*}
+d(hom(\mathcal{F}, \mathcal{G}))
+& =
+d(Q(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G}))) \\
+& =
+c(\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})) \\
+& =
+f^*\SheafHom_{\mathcal{O}_\mathcal{X}}(\mathcal{F}, \mathcal{G})|_{U_\etale} \\
+& =
+\SheafHom_{\mathcal{O}_\mathcal{U}}(f^*\mathcal{F},
+f^*\mathcal{G})|_{U_\etale} \\
+& =
+\SheafHom_{\mathcal{O}_U}(f^*\mathcal{F}|_{U_\etale},
+f^*\mathcal{G}|_{U_\etale})
+\end{align*}
+第1の等号は $hom$ の構成による．第2の等号は (7) による．
+第3の等号は $c$ の定義による．第4の等号は
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-pullback-internal-hom} による．
+最後の等号は，Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare} の環付きトポスの平坦射
+$i_U (U_\etale, \mathcal{O}_U) \to
+(\mathcal{U}_\etale, \mathcal{O}_\mathcal{U})$
+に同じ参照先を適用して得られる．
+\item ここにさらに追加する．
+\end{enumerate}
+
+
+
+
+
+
+\section{余極限とコホモロジー}
+\label{stacks-cohomology-section-colimits}
+
+\noindent
+次の補題は，とりわけ準連接層の図式に適用できる．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-colimits}
+$\mathcal{X}$ を準コンパクトかつ準分離的な代数スタックとする．
+このとき
+$$
+\colim_i H^p(\mathcal{X}, \mathcal{F}_i)
+\longrightarrow
+H^p(\mathcal{X}, \colim_i \mathcal{F}_i)
+$$
+は，$\mathcal{X}$ 上のアーベル層の任意のフィルター図式に対して
+同型である．$\mathcal{X}_\etale$ 上のアーベル層について
+\'etale 位相でコホモロジーを取る場合にも同じことが成り立つ．
+\end{lemma}
+
+\begin{proof}
+$\tau = fppf$，resp.\ $\tau = \etale$ とする．補題は
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-colim-global} をサイト
+$\mathcal{X}_\tau$ に適用すれば従う．仮定を確認するために
+Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-colim-global} を用いる．
+すなわち，アフィンスキーム上にある対象全体を
+$\mathcal{B} \subset \Ob(\mathcal{X}_\tau)$ とする．言い換えると，
+$\mathcal{B}$ の元は $U$ がアフィンであるような射
+$x : U \to \mathcal{X}$ である．この注意の条件 (1)--(4) を順に確かめる：
+\begin{enumerate}
+\item $\mathcal{X}$ は準コンパクトなので，$U$ がアフィンである
+全射かつ滑らかな射 $x : U \to \mathcal{X}$ が存在する
+（Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-quasi-compact-stack}）．
+このとき $h_x^\# \to *$ は $\mathcal{X}_\tau$ 上の層の全射である．
+\item $\mathcal{X}_\tau$ の被覆は fppf，resp.\ \'etale
+被覆なので，$U \in \mathcal{B}$ の任意の被覆は
+有限アフィン fppf 被覆によって細分される．Topologies, Lemma
+\ref{topologies-lemma-fppf-affine}，resp.\ Lemma
+\ref{topologies-lemma-etale-affine} を参照されたい．
+\item $x : U \to \mathcal{X}$ および
+$x' : U' \to \mathcal{X}$ を $\mathcal{B}$ の対象とする．
+$\Sh(\mathcal{X}_\tau)$ における積
+$h_x^\# \times h_{x'}^\#$ は，
+$\mathcal{X}$ 上の代数空間
+$W = U \times_{x, \mathcal{X}, x'} U'$ が
+$\mathcal{X}_\tau$ 上に定める層に等しい．実際，
+$\mathcal{X}_\tau$ の対象 $y : V \to \mathcal{X}$ に対して
+$(h_x^\# \times h_{x'}^\#)(y) = \{f : V \to W \mid y =
+x \circ \text{pr}_1 \circ f = x' \circ \text{pr}_2 \circ f\}$
+である．
+例えば Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}
+により，$\mathcal{X}$ が準分離的であることから代数空間 $W$ は
+準コンパクトである．したがって，アフィンスキーム $U''$ と
+全射 \'etale 射 $U'' \to W$ を選べる．
+$U'' \to W$ と $W \to \mathcal{X}$ の合成を
+$x'' : U'' \to \mathcal{X}$ と書く．すると所望のとおり
+$h_{x''}^\# \to h_x^\# \times h_{x'}^\#$ は全射である．
+\item $x : U \to \mathcal{X}$ および
+$x' : U' \to \mathcal{X}$ を $\mathcal{B}$ の対象とする．
+$a, b : U \to U'$ を $\mathcal{X}$ 上の射，すなわち
+$a, b  : x \to x'$ を $\mathcal{X}_\tau$ の射とする．
+このとき $h_a$ と $h_b$ の等化子は $a, b : U \to U'$ の
+等化子によって表現される．これは $\mathcal{X}$ 上の
+アフィンスキームであり，したがって $\mathcal{B}$ に属する．
+\end{enumerate}
+% P12-ERR-0027: source tense error is rendered by its grammatical intent; see sidecar.
+以上で証明は完了する．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-colimit-cohomology}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの
+準コンパクトかつ準分離的な射とする．
+$\mathcal{F} = \colim \mathcal{F}_i$ を $\mathcal{X}$ 上の
+アーベル層のフィルター余極限とする．このとき任意の
+$p \geq 0$ に対して
+$$
+R^pf_*\mathcal{F} = \colim R^pf_*\mathcal{F}_i.
+$$
+である．$\mathcal{X}_\etale$ 上のアーベル層について
+\'etale 位相で高次順像を取る場合にも同じことが成り立つ．
+\end{lemma}
+
+\begin{proof}
+fppf 位相の場合を証明する．\'etale 位相の場合も同様である．
+$R^if_*\mathcal{F}$ は，前層
+$$
+(y : V \to \mathcal{Y})
+\longmapsto
+H^i(V \times_{y, \mathcal{Y}} \mathcal{X}, \text{pr}^{-1}\mathcal{F})
+$$
+に付随する $\mathcal{Y}_{fppf}$ 上の層であることを思い出そう．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-pushforward-restriction} を参照されたい．
+また，余極限は前層の余極限に付随する層である．
+$V$ がアフィンならば，ファイバー積
+$V \times_\mathcal{Y} \mathcal{X}$ は準コンパクトかつ準分離的である．
+したがって $V$ がアフィンである場合の
+$H^p(V \times_\mathcal{Y} \mathcal{X}, -)$ に
+Lemma \ref{stacks-cohomology-lemma-colimits} を適用できる．
+任意の $V$ はアフィン対象による fppf 被覆をもつから，
+これで補題が証明される．いくつかの詳細は省略する．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-pushforward-direct-sums}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの
+準コンパクトかつ準分離的な射とする．関手
+$f_{\QCoh, *}$ および関手 $R^if_{\QCoh, *}$ は
+直和およびフィルター余極限と可換する．
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-cohomology-lemma-colimit-cohomology} により，関手 $f_*$ および
+$R^if_*$ はすべての加群上で直和およびフィルター余極限と可換する．
+$f_{\QCoh, *} = Q \circ f_*$ および
+$R^if_{\QCoh, *} = Q \circ R^if_*$ であり，かつ $Q$ は
+すべての余極限と可換するので，補題が従う．
+Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} を参照されたい．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-pushforward-affine}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックのアフィン射とする．
+関手 $R^if_{\QCoh, *}$ は $i > 0$ に対して消滅し，関手
+$f_{\QCoh, *}$ は完全であり，直和およびすべての余極限と可換する．
+\end{lemma}
+
+\begin{proof}
+$R^if_{\QCoh, *} = Q \circ R^if_*$ であるから，Lemma
+\ref{stacks-cohomology-lemma-loc-qcoh-fbc-affine-direct-image} より消滅を得る．
+$\{R^if_{\QCoh, *}\}_{i \geq 0}$ は $\delta$-関手をなすので，
+この消滅から $f_{\QCoh, *}$ が完全であることが従う．
+Proposition \ref{stacks-cohomology-proposition-direct-image-quasi-coherent} を参照されたい．
+次に，例えば Lemma
+\ref{stacks-cohomology-lemma-quasi-coherent-pushforward-direct-sums} により，
+$f_{\QCoh, *}$ は直和と可換する．直和と可換する完全関手は
+すべての余極限と可換する．
+\end{proof}
+
+\noindent
+次の補題は，準コンパクトかつ準分離的な代数スタックにおいて，
+有限表示加群が期待どおりに振る舞うことを述べる．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-finite-presentation-quasi-compact-colimit}
+$\mathcal{X}$ を準コンパクトかつ準分離的な代数スタックとする．
+$I$ を有向集合とし，$(\mathcal{F}_i, \varphi_{ii'})$ を
+$I$ 上の $\mathcal{O}_\mathcal{X}$-加群の系とする．
+$\mathcal{G}$ を有限表示の $\mathcal{O}_\mathcal{X}$-加群とする．
+このとき
+$$
+\colim_i \Hom_\mathcal{X}(\mathcal{G}, \mathcal{F}_i)
+=
+\Hom_\mathcal{X}(\mathcal{G}, \colim_i \mathcal{F}_i).
+$$
+特に，$\Hom_\mathcal{X}(\mathcal{G}, -)$ は
+$\QCoh(\mathcal{O}_\mathcal{X})$ におけるフィルター余極限と可換する．
+\end{lemma}
+
+\begin{proof}
+表示された等式は Modules on Sites, Lemma
+\ref{sites-modules-lemma-finite-presentation-quasi-compact-colimit}
+の特別な場合である．これを適用するためには，サイト
+$\mathcal{X}_{fppf}$ に対する Sites, Lemma
+\ref{sites-lemma-directed-colimits-global-sections} の part (4)
+の仮定を確認する必要がある．そのため，Sites, Remark
+\ref{sites-remark-stronger-conditions} の仮定
+(2)(a), (2)(b), (2)(c) を確認する．
+すなわち，$\mathcal{B} \subset \Ob(\mathcal{X}_{fppf})$ を
+アフィンスキーム上にある対象全体の集合とする．言い換えると，
+$\mathcal{B}$ の元とは，$U$ がアフィンであるような射
+$x : U \to \mathcal{X}$ である．この Remark の条件
+(2)(a), (2)(b), (2)(c) を順に確認する：
+\begin{enumerate}
+\item $\mathcal{X}$ は準コンパクトなので，$U$ がアフィンである
+全射かつ滑らかな射 $x : U \to \mathcal{X}$ が存在する
+（Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-quasi-compact-stack}）．
+このとき $h_x^\# \to *$ は $\mathcal{X}_{fppf}$ 上の層の全射である．
+\item $\mathcal{X}_{fppf}$ における被覆は fppf 被覆なので，
+$U \in \mathcal{B}$ の任意の被覆は有限アフィン fppf 被覆によって
+細分される．Topologies, Lemma
+\ref{topologies-lemma-fppf-affine} を参照されたい．
+\item $x : U \to \mathcal{X}$ および
+$x' : U' \to \mathcal{X}$ を $\mathcal{B}$ に属するものとする．
+$\Sh(\mathcal{X}_{fppf})$ における積
+$h_x^\# \times h_{x'}^\#$ は，$\mathcal{X}$ 上の代数空間
+$W = U \times_{x, \mathcal{X}, x'} U'$ によって定まる
+$\mathcal{X}_{fppf}$ 上の層に等しい．すなわち，
+$\mathcal{X}_{fppf}$ の対象 $y : V \to \mathcal{X}$ に対して
+$(h_x^\# \times h_{x'}^\#)(y) = \{f : V \to W \mid y =
+x \circ \text{pr}_1 \circ f = x' \circ \text{pr}_2 \circ f\}$ である．
+$\mathcal{X}$ は準分離的なので，代数空間 $W$ は準コンパクトである．
+例えば Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}
+を参照されたい．したがって，アフィンスキーム $U''$ と
+全射な \'etale 射 $U'' \to W$ を選ぶことができる．
+$U'' \to W$ と $W \to \mathcal{X}$ の合成を
+$x'' : U'' \to \mathcal{X}$ と書く．このとき所望のとおり
+$h_{x''}^\# \to h_x^\# \times h_{x'}^\#$ は全射である．
+\end{enumerate}
+最後の主張については，包含関手
+% P12-ERR-0028: frozen O_X subscripts retained; see sidecar.
+$\QCoh(\mathcal{O}_X) \to \textit{Mod}(\mathcal{O}_X)$
+が余極限と可換し，有限表示加群が準連接であることに注意すればよい．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} を参照されたい．
+\end{proof}
+
+
+
+\section{lisse-\'etale サイトと flat-fppf サイト}
+\label{stacks-cohomology-section-lisse-etale}
+
+\noindent
+文献 \cite{LM-B} では，上の結果の多くが代数スタックの
+lisse-\'etale サイトを用いて証明されている．ここでこのサイトを定義する．
+Examples, Section \ref{examples-section-lisse-etale-not-functorial} では，
+lisse-\'etale サイトが関手的でないことを示す．
+また，その類似物である flat-fppf サイトも定義する．これは
+Stacks project で与えられる代数スタックの理論展開により適している
+（基礎位相として fppf 位相を用いるためである）．もちろん，
+flat-fppf サイトも関手的ではない．
+
+\begin{definition}
+\label{stacks-cohomology-definition-lisse-etale}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item $\mathcal{X}$ の {\it lisse-\'etale サイト} とは，
+$\mathcal{X}_{lisse,\etale}$\footnote{文献では，この
+サイトは $\text{Lis-\'et}(\mathcal{X})$ または
+$\text{Lis-Et}(\mathcal{X})$ と書かれ，付随するトポスは
+$\mathcal{X}_{\text{lis-\'e}t}$ または
+$\mathcal{X}_{\text{lis-et}}$ と書かれる．
+Stacks project では，サイトに名前を付け，対応するトポスを
+$\Sh(\mathcal{C})$ と表すことを規約とする．} という
+$\mathcal{X}$ の充満部分圏であって，
+その対象が，スキーム $U$ 上にある $x \in \Ob(\mathcal{X})$ で
+$x : U \to \mathcal{X}$ が滑らかであるものからなるものをいう．
+$\mathcal{X}_{lisse,\etale}$ の被覆とは，
+$\mathcal{X}_{lisse,\etale}$ の射の族
+$\{x_i \to x\}_{i \in I}$ であって，
+$\mathcal{X}_\etale$ の被覆をなすものをいう．
+\item $\mathcal{X}$ の {\it flat-fppf サイト} とは，
+$\mathcal{X}_{flat,fppf}$ という $\mathcal{X}$ の充満部分圏であって，
+その対象が，
+スキーム $U$ 上にある $x \in \Ob(\mathcal{X})$ で
+$x : U \to \mathcal{X}$ が平坦であるものからなるものをいう．
+$\mathcal{X}_{flat,fppf}$ の被覆とは，
+$\mathcal{X}_{flat,fppf}$ の射の族
+$\{x_i \to x\}_{i \in I}$ であって，
+$\mathcal{X}_{fppf}$ の被覆をなすものをいう．
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$ を
+$\mathcal{O}_\mathcal{X}$ の lisse-\'etale サイトへの制限と書き，
+$\mathcal{O}_{\mathcal{X}_{flat,fppf}}$ についても同様とする．
+lisse-\'etale サイトと \'etale サイトの関係は次のとおりである
+（この補題では主として「位相的」な性質に限る）．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item 包含関手
+$\mathcal{X}_{lisse,\etale} \to \mathcal{X}_\etale$
+は充満忠実，連続かつ余連続である．このことから次が従う．
+\begin{enumerate}
+\item トポスの射
+$$
+g :
+\Sh(\mathcal{X}_{lisse,\etale})
+\longrightarrow
+\Sh(\mathcal{X}_\etale)
+$$
+が存在し，$g^{-1}$ は制限によって与えられる．
+\item 関手 $g^{-1}$ は，集合の層に対して左随伴関手
+$g_!^{Sh}$ をもつ．
+\item 随伴写像 $g^{-1}g_* \to \text{id}$ および
+$\text{id} \to g^{-1}g_!^{Sh}$ は同型である．
+\item 関手 $g^{-1}$ は，アーベル層に対して左随伴関手
+$g_!$ をもつ．
+\item 随伴写像 $\text{id} \to g^{-1}g_!$ は同型である．
+\item $g^{-1}\mathcal{O}_\mathcal{X} =
+\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$ が成り立つ．したがって，
+$g$ は $g^{-1} = g^*$ となる環付きトポスの平坦射を誘導する．
+\end{enumerate}
+\item 包含関手
+$\mathcal{X}_{flat,fppf} \to \mathcal{X}_{fppf}$
+は充満忠実，連続かつ余連続である．このことから次が従う．
+\begin{enumerate}
+\item トポスの射
+$$
+g :
+\Sh(\mathcal{X}_{flat,fppf})
+\longrightarrow
+\Sh(\mathcal{X}_{fppf})
+$$
+が存在し，$g^{-1}$ は制限によって与えられる．
+\item 関手 $g^{-1}$ は，集合の層に対して左随伴関手
+$g_!^{Sh}$ をもつ．
+\item 随伴写像 $g^{-1}g_* \to \text{id}$ および
+$\text{id} \to g^{-1}g_!^{Sh}$ は同型である．
+\item 関手 $g^{-1}$ は，アーベル層に対して左随伴関手
+$g_!$ をもつ．
+\item 随伴写像 $\text{id} \to g^{-1}g_!$ は同型である．
+\item $g^{-1}\mathcal{O}_\mathcal{X} =
+\mathcal{O}_{\mathcal{X}_{flat,fppf}}$ が成り立つ．したがって，
+$g$ は $g^{-1} = g^*$ となる環付きトポスの平坦射を誘導する．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+いずれの場合も，この関手が充満忠実，連続かつ余連続であることは
+直ちに分かる（Sites, Definitions
+\ref{sites-definition-continuous} および
+\ref{sites-definition-cocontinuous} を参照）．
+したがって，性質 (a), (b), (c) は Sites, Lemmas
+\ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-back-and-forth} から従う．
+部分 (d), (e) は Modules on Sites, Lemmas
+\ref{sites-modules-lemma-g-shriek-adjoint} および
+\ref{sites-modules-lemma-back-and-forth} から従う．
+部分 (f) は直ちに分かる．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-cohomology}
+$\mathcal{X}$ を代数スタックとする．記法は
+Lemma \ref{stacks-cohomology-lemma-lisse-etale} と同じとする．
+\begin{enumerate}
+\item $\mathcal{X}_\etale$ 上のアーベル層 $\mathcal{F}$ に対して，
+\begin{enumerate}
+\item $H^p(\mathcal{X}_\etale, \mathcal{F}) =
+H^p(\mathcal{X}_{lisse,\etale}, g^{-1}\mathcal{F})$ であり，
+\item $H^p(x, \mathcal{F}) =
+H^p(\mathcal{X}_{lisse,\etale}/x, g^{-1}\mathcal{F})$
+が $\mathcal{X}_{lisse,\etale}$ の任意の対象 $x$ に対して成り立つ．
+\end{enumerate}
+加群の層についても同じ主張が成り立つ．
+\item $\mathcal{X}_{fppf}$ 上のアーベル層 $\mathcal{F}$ に対して，
+\begin{enumerate}
+\item $H^p(\mathcal{X}_{fppf}, \mathcal{F}) =
+H^p(\mathcal{X}_{flat,fppf}, g^{-1}\mathcal{F})$ であり，
+\item $H^p(x, \mathcal{F}) =
+H^p(\mathcal{X}_{flat,fppf}/x, g^{-1}\mathcal{F})$
+が $\mathcal{X}_{flat,fppf}$ の任意の対象 $x$ に対して成り立つ．
+\end{enumerate}
+加群の層についても同じ主張が成り立つ．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (1)(a) は包含関手
+$\mathcal{X}_{lisse,\etale} \to \mathcal{X}_\etale$ に
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-cohomology-on-subcategory}
+を適用すれば従う．Part (1)(b) は part (1)(a) から従う．
+実際，$x$ がスキーム $U$ 上にあるならば，サイト
+$\mathcal{X}_\etale/x$ は $(\Sch/U)_\etale$ と同値であり，
+% P12-ERR-0029: frozen unsliced lisse-etale site retained; see sidecar.
+$\mathcal{X}_{lisse,\etale}$ は $U_{lisse,\etale}$ と同値である．
+Part (2) も同様に証明される．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-modules}
+$\mathcal{X}$ を代数スタックとする．記法は
+Lemma \ref{stacks-cohomology-lemma-lisse-etale} と同じとする．
+\begin{enumerate}
+\item 関手
+$$
+g_! :
+\textit{Mod}(\mathcal{X}_{lisse,\etale},
+\mathcal{O}_{\mathcal{X}_{lisse,\etale}})
+\longrightarrow
+\textit{Mod}(\mathcal{X}_\etale, \mathcal{O}_{\mathcal{X}})
+$$
+が存在し，$g^*$ の左随伴である．さらに，これはアーベル層上の
+関手 $g_!$ と一致し，$g^*g_! = \text{id}$ である．
+\item 関手
+$$
+g_! :
+\textit{Mod}(\mathcal{X}_{flat,fppf},
+\mathcal{O}_{\mathcal{X}_{flat,fppf}})
+\longrightarrow
+\textit{Mod}(\mathcal{X}_{fppf}, \mathcal{O}_{\mathcal{X}})
+$$
+が存在し，$g^*$ の左随伴である．さらに，これはアーベル層上の
+関手 $g_!$ と一致し，$g^*g_! = \text{id}$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+いずれの場合も，関手 $g_!$ の存在は Modules on Sites, Lemma
+\ref{sites-modules-lemma-lower-shriek-modules} から従う．
+$g_!$ がアーベル層上の関手と一致することを示すために，
+Modules on Sites, Equation
+(\ref{sites-modules-equation-compare-on-localizations})
+の写像が同型であることを示す．
+
+\medskip\noindent
+Lisse-\'etale の場合．$x \in \Ob(\mathcal{X}_{lisse,\etale})$ を，
+スキーム $U$ 上にあり $x : U \to \mathcal{X}$ が滑らかである
+対象とする．誘導される充満忠実関手
+$$
+g' :
+\mathcal{X}_{lisse,\etale}/x
+\longrightarrow
+\mathcal{X}_\etale/x
+$$
+を考える．右辺は $(\Sch/U)_\etale$ と同一視され，左辺は
+合成 $U' \to U \to \mathcal{X}$ が滑らかであるような
+スキーム $U'/U$ の充満部分圏と同一視される．したがって
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-compare-structure-sheaves}
+を適用できる．
+
+\medskip\noindent
+Flat-fppf の場合．$x \in \Ob(\mathcal{X}_{flat,fppf})$ を，
+スキーム $U$ 上にあり $x : U \to \mathcal{X}$ が平坦である
+対象とする．誘導される充満忠実関手
+$$
+g' :
+\mathcal{X}_{flat,fppf}/x
+\longrightarrow
+\mathcal{X}_{fppf}/x
+$$
+を考える．右辺は $(\Sch/U)_{fppf}$ と同一視され，左辺は
+合成 $U' \to U \to \mathcal{X}$ が平坦であるような
+スキーム $U'/U$ の充満部分圏と同一視される．したがって
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-compare-structure-sheaves}
+を適用できる．
+
+\medskip\noindent
+いずれの場合も，等式 $g^*g_! = \text{id}$ は
+$g^* = g^{-1}$ と Lemma \ref{stacks-cohomology-lemma-lisse-etale} における
+アーベル層についての等式から従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-structure-sheaf}
+$\mathcal{X}$ を代数スタックとする．記法は Lemmas
+\ref{stacks-cohomology-lemma-lisse-etale} および \ref{stacks-cohomology-lemma-lisse-etale-modules}
+と同じとする．
+\begin{enumerate}
+\item $g_!\mathcal{O}_{\mathcal{X}_{lisse,\etale}} =
+\mathcal{O}_\mathcal{X}$ である．
+\item $g_!\mathcal{O}_{\mathcal{X}_{flat, fppf}} =
+\mathcal{O}_\mathcal{X}$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+この証明では
+$\mathcal{C} = \mathcal{X}_\etale$
+（resp.\ $\mathcal{C} = \mathcal{X}_{fppf}$）と書き，
+$\mathcal{C}' = \mathcal{X}_{lisse,\etale}$
+（resp.\ $\mathcal{C}' = \mathcal{X}_{flat, fppf}$）と書く．
+このとき $\mathcal{C}'$ は $\mathcal{C}$ の充満部分圏である．
+この証明では，$\mathcal{C}$ の対象 $V$ を $\mathcal{X}$ 上の
+スキームと考え，$\mathcal{C}'$ の対象 $U$ を $\mathcal{X}$ 上
+滑らかな（resp.\ 平坦な）スキームと考える．最後に，
+$\mathcal{O} = \mathcal{O}_\mathcal{X}$ および
+$\mathcal{O}' = \mathcal{O}_{\mathcal{X}_{lisse,\etale}}$
+（resp.\ $\mathcal{O}' = \mathcal{O}_{\mathcal{X}_{flat,fppf}}$）
+と書く．上の記法では
+$\mathcal{O}(V) = \Gamma(V, \mathcal{O}_V)$ および
+$\mathcal{O}'(U) = \Gamma(U, \mathcal{O}_U)$ である．
+同一視 $\mathcal{O}' = g^{-1}\mathcal{O}$ に随伴する
+$\mathcal{O}$-加群準同型
+$g_!\mathcal{O}' \to \mathcal{O}$
+を考える．
+
+\medskip\noindent
+$g_!\mathcal{O}'$ は，規則
+$$
+V \longmapsto \colim_{V \to U} \mathcal{O}'(U)
+$$
+によって与えられる前層 $g_{p!}\mathcal{O}'$ に付随する層であることを
+思い出そう．ここで余極限はアーベル群の圏で取る
+（Modules on Sites, Definition
+\ref{sites-modules-definition-g-shriek}）．以下ではしばしば，
+$$
+V \to U \to U'
+$$
+が射であり，$f' \in \mathcal{O}'(U')$ の制限が
+$f \in \mathcal{O}'(U)$ であるならば，
+$(V \to U, f)$ と $(V \to U', f')$ が余極限の同じ元を
+定めることを用いる．また，$g_!\mathcal{O}' \to \mathcal{O}$ は
+元 $(V \to U, f)$ を単に $f$ の $V$ への引き戻しへ送る．
+
+\medskip\noindent
+$g_!\mathcal{O}' \to \mathcal{O}$ が全射であることを示そう．
+$V$ を $\mathcal{C}$ の対象とし，$h \in \mathcal{O}(V)$ とする．
+$h$ が局所的に像に属することを示せば十分である．
+全射かつ滑らかな射 $U \to \mathcal{X}$ に対応する
+$\mathcal{C}'$ の対象 $U$ を選ぶ．
+$U \times_\mathcal{X} V \to V$ は全射かつ滑らかなので，
+$V$ を $V$ の \'etale 被覆の各元で置き換えた後，射
+$V \to U$ が存在すると仮定してよい．Topologies on Spaces, Lemma
+\ref{spaces-topologies-lemma-etale-dominates-smooth}
+を参照されたい．$h$ を用いて射 $V \to U \times \mathbf{A}^1$
+を得る．$\mathbf{A}^1 = \Spec(\mathbf{Z}[t])$ と書けば，
+元 $t \in \mathcal{O}(U \times \mathbf{A}^1)$ の引き戻しは
+$h$ である．$U \times \mathbf{A}^1$ は $\mathcal{C}'$ の対象なので，
+$(V \to U \times \mathbf{A}^1, t)$ は上の余極限の元であり，
+所望のとおり $h \in \mathcal{O}(V)$ へ写る．
+
+\medskip\noindent
+$s \in g_!\mathcal{O}'(V)$ を $\mathcal{O}(V)$ の零へ写る切断とする．
+証明を終えるには $s$ が零であることを示せばよい．
+$V$ をある被覆の各元で置き換えた後，$s$ は余極限
+$$
+\colim_{V \to U} \mathcal{O}'(U)
+$$
+の元であると仮定してよい．
+$s = \sum (\varphi_i, s_i)$ を有限和とし，
+$\varphi_i : V \to U_i$，$U_i$ は $\mathcal{X}$ 上滑らか
+（resp.\ 平坦），かつ $s_i \in \Gamma(U_i, \mathcal{O}_{U_i})$
+であるとする．代数空間
+$U = U_1 \times_\mathcal{X} \ldots \times_\mathcal{X} U_n$
+上で全射 \'etale なスキーム $W$ を選ぶ．
+$W$ はなお $\mathcal{X}$ 上滑らか（resp.\ 平坦）であり，
+すなわち $\mathcal{C}'$ の対象を定めることに注意する．
+ファイバー積
+$$
+V' = V \times_{(\varphi_1, \ldots, \varphi_n), U} W
+$$
+は $V$ 上全射 \'etale であるから，$s$ が
+$g_!\mathcal{O}'(V')$ において零へ写ることを示せば十分である．
+制限 $\sum (\varphi_i, s_i)|_{V'}$ は，関数 $s_i$ の $W$ への
+引き戻しの和に対応することに注意する．言い換えると，
+$\varphi : V \to U$ が $\mathcal{C}'$ の $U$ への射であり，
+$s \in \mathcal{O}'(U)$ の $\mathcal{O}(V)$ への制限が零である
+$(\varphi, s)$ の場合に帰着した．可換図式
+$$
+\xymatrix{
+V \ar[rr]_-{(\varphi, 0)} \ar[rrd]_\varphi & & U \times \mathbf{A}^1 \\
+& & U \ar[u]_{(\text{id}, 0)}
+}
+$$
+により，
+% P12-ERR-0030: frozen coordinate x retained at both occurrences; see sidecar.
+$((\varphi, 0) : V \to U \times \mathbf{A}^1, \text{pr}_2^*x)$
+は上の余極限における零を表す．したがって $U$ を
+$U \times \mathbf{A}^1$ で，$\varphi$ を $(\varphi, 0)$ で，
+$s$ を $\text{pr}_1^*s + \text{pr}_2^*x$ で置き換えてよい．
+ゆえに $U$ における $s$ の零点集合 $Z : s = 0$ は
+$\mathcal{X}$ 上滑らか（resp.\ 平坦）であると仮定してよい．
+すると $(V \to Z, 0)$ と $(\varphi, s)$ は余極限において
+同じ値をもつ．すなわち所望のとおり元 $s$ は零である．
+\end{proof}
+
+\noindent
+lisse-\'etale サイトと flat-fppf サイトを用いると，
+寄生加群を次のように特徴づけられる．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-parasitic-in-terms-flat-fppf}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item $\mathcal{F}$ を $\mathcal{X}_\etale$ 上で平坦基底変換性をもつ
+$\mathcal{O}_\mathcal{X}$-加群とする．次は同値である：
+\begin{enumerate}
+\item $\mathcal{F}$ は寄生的である．
+\item $g^*\mathcal{F} = 0$ である．ここで
+$g : \Sh(\mathcal{X}_{lisse,\etale}) \to
+\Sh(\mathcal{X}_\etale)$ は Lemma \ref{stacks-cohomology-lemma-lisse-etale}
+のものとする．
+\end{enumerate}
+\item $\mathcal{F}$ を $\mathcal{X}_{fppf}$ 上の
+$\mathcal{O}_\mathcal{X}$-加群とする．次は同値である：
+\begin{enumerate}
+\item $\mathcal{F}$ は寄生的である．
+\item $g^*\mathcal{F} = 0$ である．ここで
+$g :  \Sh(\mathcal{X}_{flat,fppf}) \to \Sh(\mathcal{X}_{fppf})$
+は Lemma \ref{stacks-cohomology-lemma-lisse-etale} のものとする．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (2) は定義から直ちに従う
+（これは lisse-\'etale サイトに対する flat-fppf サイトの利点の一つである）．
+含意 (1)(a) $\Rightarrow$ (1)(b) も直ちに従う．
+(1)(b) $\Rightarrow$ (1)(a) を示すため，$U$ をスキームとし，
+$x : U \to \mathcal{X}$ を全射かつ滑らかな射とする．
+このとき $x$ は $\mathcal{X}$ の lisse-\'etale サイトの対象である．
+したがって (1)(b) から $\mathcal{F}|_{U_\etale} = 0$ が従う．
+% P12-ERR-0031: source's article error is rendered grammatically; see sidecar.
+$V$ をスキームとし，$V \to \mathcal{X}$ を平坦射とする．
+$W = U \times_\mathcal{X} V$ とおき，図式
+$$
+\xymatrix{
+W \ar[d]_p \ar[r]_q & V \ar[d] \\
+U \ar[r] & \mathcal{X}
+}
+$$
+を考える．射影 $p : W \to U$ は平坦であり，射影
+$q : W \to V$ は滑らかかつ全射であることに注意する．
+したがって $q_{small}^*$ は準連接加群上の忠実関手である．
+仮定により $\mathcal{F}$ は平坦基底変換性をもつから，
+$p_{small}^*\mathcal{F}|_{U_\etale} \cong
+q_{small}^*\mathcal{F}|_{V_\etale}$
+を得る．ゆえに $\mathcal{F}$ が $g^*$ の核に属するならば，
+所望のとおり $\mathcal{F}|_{V_\etale} = 0$ である．
+\end{proof}
+
+
+
+
+
+
+\section{lisse-\'etale サイトおよび flat-fppf サイトの関手性}
+\label{stacks-cohomology-section-lisse-etale-functorial}
+
+\noindent
+lisse-\'etale サイトは代数スタックの滑らかな射に関して関手的であり，
+flat-fppf サイトは代数スタックの平坦射に関して関手的である．
+ただし，lisse-\'etale トポスと flat-fppf トポスは
+代数スタックのすべての射に関して関手的ではないことに注意されたい．
+Examples, Section
+\ref{examples-section-lisse-etale-not-functorial} を参照されたい．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-functorial}
+$f : \mathcal{X} \to \mathcal{Y}$ を代数スタックの射とする．
+\begin{enumerate}
+\item $f$ が滑らかならば，$f$ は連続かつ余連続な関手
+$\mathcal{X}_{lisse,\etale} \to \mathcal{Y}_{lisse,\etale}$
+に制限され，次の可換図式に入る環付きトポスの射を与える：
+$$
+\xymatrix{
+\Sh(\mathcal{X}_{lisse,\etale}) \ar[r]_{g'} \ar[d]_{f'} &
+\Sh(\mathcal{X}_\etale) \ar[d]^f \\
+\Sh(\mathcal{Y}_{lisse,\etale}) \ar[r]^g &
+\Sh(\mathcal{Y}_\etale)
+}
+$$
+$f'_*(g')^{-1} = g^{-1}f_*$ および
+$g'_!(f')^{-1} = f^{-1}g_!$ である．
+\item $f$ が平坦ならば，$f$ は連続かつ余連続な関手
+$\mathcal{X}_{flat,fppf} \to \mathcal{Y}_{flat,fppf}$
+に制限され，次の可換図式に入る環付きトポスの射を与える：
+$$
+\xymatrix{
+\Sh(\mathcal{X}_{flat,fppf}) \ar[r]_{g'} \ar[d]_{f'} &
+\Sh(\mathcal{X}_{fppf}) \ar[d]^f \\
+\Sh(\mathcal{Y}_{flat,fppf}) \ar[r]^g &
+\Sh(\mathcal{Y}_{fppf})
+}
+$$
+$f'_*(g')^{-1} = g^{-1}f_*$ および
+$g'_!(f')^{-1} = f^{-1}g_!$ である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+冒頭の主張は次の事実から従う．
+$x \in \Ob(\mathcal{X})$ がスキーム $U$ 上にあり，
+$x : U \to \mathcal{X}$ が滑らか（resp.\ 平坦）で，かつ $f$ が
+滑らか（resp.\ 平坦）ならば，$f(x) : U \to \mathcal{Y}$ は
+滑らか（resp.\ 平坦）である．Morphisms of Stacks, Lemmas
+\ref{stacks-morphisms-lemma-composition-smooth} および
+\ref{stacks-morphisms-lemma-composition-flat} を参照されたい．
+誘導される関手
+$\mathcal{X}_{lisse,\etale} \to \mathcal{Y}_{lisse,\etale}$
+（resp.\ $\mathcal{X}_{flat,fppf} \to \mathcal{Y}_{flat,fppf}$）
+は，これらの圏における被覆の定義により連続かつ余連続である．
+最後に，図式の可換性は，水平射が包含関手によって与えられること
+（Lemma \ref{stacks-cohomology-lemma-lisse-etale} を参照）と，
+Sites, Lemma \ref{sites-lemma-composition-cocontinuous}
+から従う．
+
+\medskip\noindent
+$f'_*(g')^{-1} = g^{-1}f_*$ を示すために，
+$\mathcal{F}$ を $\mathcal{X}_\etale$ 上
+（resp.\ $\mathcal{X}_{fppf}$ 上）の層とする．
+標準的な引き戻し写像
+$$
+g^{-1}f_*\mathcal{F} \longrightarrow f'_*(g')^{-1}\mathcal{F}
+$$
+が存在する．Sites, Section \ref{sites-section-pullback}
+を参照されたい．この写像が同型であると主張する．
+これを証明するために，$\mathcal{Y}_{lisse,\etale}$ の対象 $y$
+（resp.\ $\mathcal{Y}_{flat,fppf}$ の対象）を選ぶ．
+$y$ はスキーム $V$ 上にあり，$y : V \to \mathcal{Y}$ は滑らか
+（resp.\ 平坦）であるとする．$g^{-1}$ は制限なので，
+$$
+\left(g^{-1}f_*\mathcal{F}\right)(y) =
+\Gamma(V \times_{y, \mathcal{Y}} \mathcal{X},\ \text{pr}^{-1}\mathcal{F})
+$$
+を得る．Sheaves on Stacks, Equation
+(\ref{stacks-sheaves-equation-pushforward}) による．
+$(V \times_{y, \mathcal{Y}} \mathcal{X})' \subset
+V \times_{y, \mathcal{Y}} \mathcal{X}$
+を，対象 $z : W \to V \times_{y, \mathcal{Y}} \mathcal{X}$ のうち，
+誘導される射 $W \to \mathcal{X}$ が滑らか
+（resp.\ 平坦）であるものからなる充満部分圏とする．
+上の公式で用いた関手 $\text{pr}$ の制限を
+$$
+\text{pr}' :
+(V \times_{y, \mathcal{Y}} \mathcal{X})'
+\longrightarrow
+\mathcal{X}_{lisse,\etale}
+\ (\text{resp. }\mathcal{X}_{flat,fppf})
+$$
+と書く．Sheaves on Stacks, Equation
+(\ref{stacks-sheaves-equation-pushforward}) を証明する議論と
+全く同じ議論により，$\mathcal{X}_{lisse,\etale}$ 上
+（resp.\ $\mathcal{X}_{flat,fppf}$ 上）の任意の層 $\mathcal{H}$
+に対して
+\begin{equation}
+\label{stacks-cohomology-equation-pushforward-lisse-etale}
+f'_*\mathcal{H}(y) =
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ (\text{pr}')^{-1}\mathcal{H})
+\end{equation}
+である．$(g')^{-1}$ は制限なので，
+$$
+\left(f'_*(g')^{-1}\mathcal{F}\right)(y) =
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ \text{pr}^{-1}\mathcal{F}|_{(V \times_{y, \mathcal{Y}} \mathcal{X})'})
+$$
+を得る．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-cohomology-on-subcategory} により
+$$
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ \text{pr}^{-1}\mathcal{F}|_{(V \times_{y, \mathcal{Y}} \mathcal{X})'})
+=
+\Gamma(V \times_{y, \mathcal{Y}} \mathcal{X},\ \text{pr}^{-1}\mathcal{F})
+$$
+という所望の等式を得る．補題の仮定の検証は省略するが，
+$V \to \mathcal{Y}$ が滑らか（resp.\ 平坦）であるという事実が
+第2条件の検証に用いられることを注意しておく．
+
+\medskip\noindent
+最後に，等式 $g'_!(f')^{-1} = f^{-1}g_!$ は，
+等式 $f'_*(g')^{-1} = g^{-1}f_*$ と，
+$f^{-1}$ と $f_*$ の随伴性，$g_!$ と $g^{-1}$ の随伴性，および
+それらの「プライム付き」のものから形式的に従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-functorial-pushforward}
+仮定と記法は Lemma \ref{stacks-cohomology-lemma-lisse-etale-functorial}
+と同じとする．$\mathcal{H}$ を $\mathcal{X}_{lisse,\etale}$ 上
+（resp.\ $\mathcal{X}_{flat,fppf}$ 上）のアーベル層とする．このとき
+\begin{equation}
+\label{stacks-cohomology-equation-higher-direct-image-lisse-etale}
+R^pf'_*\mathcal{H} =
+\text{次に付随する層：}y \longmapsto
+H^p((V \times_{y, \mathcal{Y}} \mathcal{X})', (\text{pr}')^{-1}\mathcal{H})
+\end{equation}
+である．ここで $y$ は $\mathcal{Y}_{lisse,\etale}$ の対象
+（resp.\ $\mathcal{Y}_{flat,fppf}$ の対象）で，スキーム $V$ 上にあり，
+$(V \times_{y, \mathcal{Y}} \mathcal{X})'$ および
+$\text{pr}'$ の記法は証明中で説明される．
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{stacks-cohomology-lemma-lisse-etale-functorial} の証明と同様に，
+$(V \times_{y, \mathcal{Y}} \mathcal{X})' \subset
+V \times_{y, \mathcal{Y}} \mathcal{X}$ を，
+$\mathcal{X}_{lisse,\etale}$ の対象
+（resp.\ $\mathcal{X}_{flat,fppf}$ の対象）$x$ と，
+$\mathcal{Y}$ における射 $\varphi : f(x) \to y$ の組
+$(x, \varphi)$ からなる充満部分圏とする．Equation
+(\ref{stacks-cohomology-equation-pushforward-lisse-etale}) により
+$$
+f'_*\mathcal{H}(y) =
+\Gamma((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ (\text{pr}')^{-1}\mathcal{H})
+$$
+を得る．ここで $\text{pr}'$ は射影である．
+$(V \times_{y, \mathcal{Y}} \mathcal{X})'$ の対象
+$(x, \varphi)$ に対して，$\varphi$ は $x$ 上の
+$(f')^{-1}h_y$ の切断と考えられる．したがって
+$(V \times_\mathcal{Y} \mathcal{X})'$ は，集合の層
+$(f')^{-1}h_y$ によるサイト $\mathcal{X}_{lisse,\etale}$
+（resp. $\mathcal{X}_{flat,fppf}$）の局所化である．Sites, Lemma
+\ref{sites-lemma-localize-topos-site} を参照されたい．射
+$$
+\text{pr}' : (V \times_{y, \mathcal{Y}} \mathcal{X})'
+\to \mathcal{X}_{lisse,\etale}
+\ (\text{resp. }
+\text{pr}' : (V \times_{y, \mathcal{Y}} \mathcal{X})'
+\to \mathcal{X}_{flat,fppf})
+$$
+は局所化射である．特に，引き戻し $(\text{pr}')^{-1}$ は
+単射アーベル層を保つ．Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-on-sheaf-sets}
+を参照されたい．
+
+\medskip\noindent
+$\mathcal{X}_{lisse,\etale}$ 上
+（resp.\ $\mathcal{X}_{flat,fppf}$ 上）の単射分解
+$\mathcal{H} \to \mathcal{I}^\bullet$ を選ぶ．
+順像の公式により，$R^if'_*\mathcal{H}$ は，$y$ に複体
+$$
+\begin{matrix}
+\Gamma\Big((V \times_{y, \mathcal{Y}} \mathcal{X})',
+(\text{pr}')^{-1}\mathcal{I}^{i - 1}\Big) \\
+\downarrow \\
+\Gamma\Big((V \times_{y, \mathcal{Y}} \mathcal{X})',
+(\text{pr}')^{-1}\mathcal{I}^i\Big) \\
+\downarrow \\
+\Gamma\Big((V \times_{y, \mathcal{Y}} \mathcal{X})',
+(\text{pr}')^{-1}\mathcal{I}^{i + 1}\Big)
+\end{matrix}
+$$
+のコホモロジーを対応させる前層に付随する層である．
+$(\text{pr}')^{-1}$ は完全で単射対象を保つので，複体
+$(\text{pr}')^{-1}\mathcal{I}^\bullet$ は
+$(\text{pr}')^{-1}\mathcal{H}$ の単射分解である．これで証明が完了する．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-lisse-etale-functorial-cohomology}
+Lemma \ref{stacks-cohomology-lemma-lisse-etale-functorial} と同じ仮定および記法のもとで，
+標準的な（基底変換）写像
+$$
+g^{-1}Rf_*\mathcal{F} \longrightarrow Rf'_*(g')^{-1}\mathcal{F}
+$$
+は，$\mathcal{X}_\etale$（resp.\ $\mathcal{X}_{fppf}$）上の
+任意のアーベル層 $\mathcal{F}$ に対して同型である．
+\end{lemma}
+
+\begin{proof}
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-pushforward-restriction} および Lemma
+\ref{stacks-cohomology-lemma-lisse-etale-functorial-pushforward} で与えられる
+$g^{-1}R^pf_*\mathcal{F}$ と
+$R^pf'_*(g')^{-1}\mathcal{F}$ の公式を比較すると，次を示せば十分である：
+$$
+H^p((V \times_{y, \mathcal{Y}} \mathcal{X})',
+\ \text{pr}^{-1}\mathcal{F}|_{(V \times_{y, \mathcal{Y}} \mathcal{X})'})
+=
+H^p_\tau(V \times_{y, \mathcal{Y}} \mathcal{X},\ \text{pr}^{-1}\mathcal{F})
+$$
+ここで $\tau = \etale$（resp.\ $\tau = fppf$）である．
+また $y$ はスキーム $V$ 上にある $\mathcal{Y}$ の対象で，射
+$y : V \to \mathcal{Y}$ が滑らか（resp.\ 平坦）であるものとする．
+この等式は Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-cohomology-on-subcategory} から従う．
+この補題の仮定の検証は省略するが，
+$V \to \mathcal{Y}$ が滑らか（resp.\ 平坦）であるという事実が
+第2条件の検証に用いられることを注意しておく．
+\end{proof}
+
+
+
+
+
+
+
+\section{準連接加群と lisse-\'etale および flat-fppf サイト}
+\label{stacks-cohomology-section-quasi-coherent-modules-II}
+
+\noindent
+本節では，代数スタック上の準連接加群を，その lisse-\'etale サイト
+または flat-fppf サイトを用いて捉える方法を説明する．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-check-qc-on-etale-covering}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$ を代数スタックの
+滑らかな射の族で，
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$
+を満たすものとする．$\mathcal{F}$ を $\mathcal{X}_\etale$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．各
+$f_j^{-1}\mathcal{F}$ が準連接ならば，$\mathcal{F}$ も準連接である．
+\item $f_j : \mathcal{X}_j \to \mathcal{X}$ を代数スタックの
+平坦かつ局所有限表示な射の族で，
+$|\mathcal{X}| =\bigcup |f_j|(|\mathcal{X}_j|)$
+を満たすものとする．$\mathcal{F}$ を $\mathcal{X}_{fppf}$ 上の
+$\mathcal{O}_\mathcal{X}$-加群の層とする．各
+$f_j^{-1}\mathcal{F}$ が準連接ならば，$\mathcal{F}$ も準連接である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明．各代数スタック $\mathcal{X}_j$ をスキーム
+$U_j$ で置き換えてよい（任意の代数スタックがスキームによる
+滑らかな被覆をもち，滑らかな射の合成が滑らかであることを用いる．
+Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-composition-smooth} を参照されたい）．
+$\mathcal{F}$ の $(\Sch/U_j)_\etale$ への引き戻しも準連接である．
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-local-pullback} を参照されたい．
+このとき $f = \coprod f_j : U = \coprod U_j \to \mathcal{X}$ は
+滑らかかつ全射である．$x : V \to \mathcal{X}$ を
+$\mathcal{X}$ の対象とする．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}
+により，各 $x_i$ が $(\Sch/U)_\etale$ の対象 $u_i$ に持ち上がるような
+\'etale 被覆 $\{x_i \to x\}_{i \in I}$ が存在する．
+これは，$x_i$ がスキーム $V_i$ 上にあり，
+$\{V_i \to V\}$ が \'etale 被覆であり，かつ $x_i$ が射
+$u_i : V_i \to U$ から得られるということにほかならない．
+このとき $x_i^*\mathcal{F} = u_i^*f^*\mathcal{F}$ は準連接である．
+したがって，$(\Sch/V)_\etale$ 上の $x^*\mathcal{F}$ は準連接である．
+たとえば Modules on Sites, Lemma
+\ref{sites-modules-lemma-local-final-object} を参照されたい．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis}
+により，$x^*\mathcal{F}$ は fppf 層である．$x$ は任意であったから，
+$\mathcal{F}$ は fppf 位相に関する層である．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent}
+を適用すると，$\mathcal{F}$ が準連接であることが分かる．
+
+\medskip\noindent
+(2) の証明．まったく同じ議論によるが，ここでは完全に書き下す．
+各代数スタック $\mathcal{X}_j$ をスキーム $U_j$ で置き換えてよい
+（任意の代数スタックがスキームによる滑らかな被覆をもち，
+平坦かつ局所有限表示な射が合成で保たれることを用いる．Morphisms of
+Stacks, Lemmas \ref{stacks-morphisms-lemma-composition-flat} および
+\ref{stacks-morphisms-lemma-composition-finite-presentation}
+を参照されたい）．$\mathcal{F}$ の $(\Sch/U_j)_\etale$ への引き戻しも
+% P12-ERR-0032: frozen English reads "locally finite presented"; Japanese records the intended property.
+局所準連接である．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-pullback-quasi-coherent} を参照されたい．
+このとき $f = \coprod f_j : U = \coprod U_j \to \mathcal{X}$ は
+全射，平坦かつ局所有限表示である．$x : V \to \mathcal{X}$ を
+$\mathcal{X}$ の対象とする．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-surjective-flat-locally-finite-presentation}
+により，各 $x_i$ が $(\Sch/U)_\etale$ の対象 $u_i$ に持ち上がるような
+fppf 被覆 $\{x_i \to x\}_{i \in I}$ が存在する．
+これは，$x_i$ がスキーム $V_i$ 上にあり，
+$\{V_i \to V\}$ が fppf 被覆であり，かつ $x_i$ が射
+$u_i : V_i \to U$ から得られるということにほかならない．
+このとき $x_i^*\mathcal{F} = u_i^*f^*\mathcal{F}$ は準連接である．
+したがって，$(\Sch/V)_\etale$ 上の $x^*\mathcal{F}$ は準連接である．
+たとえば Modules on Sites, Lemma
+\ref{sites-modules-lemma-local-final-object} を参照されたい．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent}
+により，$\mathcal{F}$ は準連接である．
+\end{proof}
+
+\noindent
+任意の環付きトポス上の準連接加群という概念を
+Modules on Sites, Section \ref{sites-modules-section-local}
+で定義したことを思い出そう．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-shriek-quasi-coherent}
+$\mathcal{X}$ を代数スタックとする．記法は
+Lemma \ref{stacks-cohomology-lemma-lisse-etale} と同じとする．
+\begin{enumerate}
+\item $\mathcal{H}$ を $\mathcal{X}$ の lisse-\'etale サイト上の
+準連接 $\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$-加群とする．
+このとき $g_!\mathcal{H}$ は $\mathcal{X}$ 上の準連接加群である．
+\item $\mathcal{H}$ を $\mathcal{X}$ の flat-fppf サイト上の
+準連接 $\mathcal{O}_{\mathcal{X}_{flat,fppf}}$-加群とする．
+このとき $g_!\mathcal{H}$ は $\mathcal{X}$ 上の準連接加群である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と滑らかかつ全射な射
+$x : U \to \mathcal{X}$ を選ぶ．Modules on Sites, Definition
+\ref{sites-modules-definition-site-local} により，各引き戻し
+$f_i^{-1}\mathcal{H}$ が大域表示をもつような \'etale
+（resp.\ fppf）被覆 $\{U_i \to U\}_{i \in I}$ が存在する
+（Modules on Sites, Definition
+\ref{sites-modules-definition-global} を参照）．ここで
+$f_i : U_i \to \mathcal{X}$ は代数スタックの射である合成
+$U_i \to U \to \mathcal{X}$ である．（引き戻しは
+$\mathcal{X}/f_i$ への制限「そのもの」であることを思い出そう．
+Sheaves on Stacks, Definition
+\ref{stacks-sheaves-definition-pullback} およびその後の議論を参照されたい．）
+各 $f_i$ は Lemma \ref{stacks-cohomology-lemma-lisse-etale-functorial} により
+滑らか（resp.\ 平坦）なので，
+$f_i^{-1}g_!\mathcal{H} = g_{i, !}(f'_i)^{-1}\mathcal{H}$ である．
+Lemma \ref{stacks-cohomology-lemma-check-qc-on-etale-covering} を用いると，
+補題の主張は $\mathcal{H}$ が大域表示をもつ場合に帰着される．すなわち
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O} \longrightarrow
+\bigoplus\nolimits_{i \in I} \mathcal{O} \longrightarrow
+\mathcal{H} \longrightarrow 0
+$$
+という $\mathcal{O}$-加群の列があるとする．ここで
+$\mathcal{O} = \mathcal{O}_{\mathcal{X}_{lisse,\etale}}$
+（resp.\ $\mathcal{O} = \mathcal{O}_{\mathcal{X}_{flat,fppf}}$）である．
+$g_!$ は左随伴関手として任意の余極限と可換するので（Lemma
+\ref{stacks-cohomology-lemma-lisse-etale-modules} および Categories, Lemma
+\ref{categories-lemma-adjoint-exact} を参照），完全列
+$$
+\bigoplus\nolimits_{j \in J} g_!\mathcal{O} \longrightarrow
+\bigoplus\nolimits_{i \in I} g_!\mathcal{O} \longrightarrow
+g_!\mathcal{H} \longrightarrow 0
+$$
+が存在すると結論できる．Lemma
+\ref{stacks-cohomology-lemma-lisse-etale-structure-sheaf} により
+$g_!\mathcal{O} = \mathcal{O}_\mathcal{X}$ である．
+場合 (2) ではこれで証明が終わる．場合 (1) では Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis}
+を適用して結論を得る．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item lisse-\'etale サイトについて，$g$ を
+Lemma \ref{stacks-cohomology-lemma-lisse-etale} と同じものとすると，次が成り立つ．
+\begin{enumerate}
+\item 関手 $g^{-1}$ および $g_!$ は，次の互いに逆な関手を定める：
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_\mathcal{X}) \ar@<1ex>[r]^-{g^{-1}} &
+\QCoh(\mathcal{X}_{lisse,\etale},
+\mathcal{O}_{\mathcal{X}_{lisse,\etale}}) \ar@<1ex>[l]^-{g_!}
+}
+$$
+\item $\mathcal{F}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するならば，
+$g^{-1}\mathcal{F}$ は
+$\QCoh(\mathcal{O}_{\mathcal{X}_{lisse,\etale}})$ に属する．
+\item $Q$ を Lemma \ref{stacks-cohomology-lemma-adjoint} と同じものとすると，
+$Q(\mathcal{F}) = g_!g^{-1}\mathcal{F}$ である．
+\end{enumerate}
+\item flat-fppf サイトについて，$g$ を
+Lemma \ref{stacks-cohomology-lemma-lisse-etale} と同じものとすると，次が成り立つ．
+\begin{enumerate}
+\item 関手 $g^{-1}$ および $g_!$ は，次の互いに逆な関手を定める：
+$$
+\xymatrix{
+\QCoh(\mathcal{O}_\mathcal{X}) \ar@<1ex>[r]^-{g^{-1}} &
+\QCoh(\mathcal{X}_{flat,fppf},
+\mathcal{O}_{\mathcal{X}_{flat,fppf}}) \ar@<1ex>[l]^-{g_!}
+}
+$$
+\item $\mathcal{F}$ が
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属するならば，
+$g^{-1}\mathcal{F}$ は
+$\QCoh(\mathcal{O}_{\mathcal{X}_{flat,fppf}})$ に属する．
+\item $Q$ を Lemma \ref{stacks-cohomology-lemma-adjoint} と同じものとすると，
+$Q(\mathcal{F}) = g_!g^{-1}\mathcal{F}$ である．
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+環付きトポスの任意の射による引き戻しは準連接加群の圏を保つ．
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-local-pullback} を参照されたい．
+したがって $g^{-1}$ は準連接加群の圏を保つ．ここでは Sheaves on Stacks,
+Lemma \ref{stacks-sheaves-lemma-characterize-quasi-coherent-bis} による等式
+$\QCoh(\mathcal{O}_\mathcal{X}) =
+\QCoh(\mathcal{X}_\etale, \mathcal{O}_\mathcal{X})$
+を用いている．$g_!$ についても Lemma
+\ref{stacks-cohomology-lemma-shriek-quasi-coherent} により同じことが成り立つ．
+Lemma \ref{stacks-cohomology-lemma-lisse-etale} により
+$\mathcal{H} \to g^{-1}g_!\mathcal{H}$ が同型であることが分かっている．
+逆に，$\mathcal{F}$ が $\QCoh(\mathcal{O}_\mathcal{X})$ に属するならば，
+写像 $g_!g^{-1}\mathcal{F} \to \mathcal{F}$ は
+$\mathcal{X}$ 上の準連接加群の写像であり，$\mathcal{X}$ 上滑らかな
+任意のスキームへの制限が同型となる．このとき Sheaves on Stacks,
+Sections \ref{stacks-sheaves-section-quasi-coherent-presentation} および
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}
+の議論（表示上の準連接加群との比較）により，この写像は同型である．
+これで (1)(a) および (2)(a) が証明された．
+
+\medskip\noindent
+$\mathcal{F}$ を
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象とする．
+Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} により，写像
+$Q(\mathcal{F}) \to \mathcal{F}$ の核と余核は寄生的である．
+したがって，Lemma \ref{stacks-cohomology-lemma-parasitic-in-terms-flat-fppf} と
+$g^* = g^{-1}$ が完全であることから，
+$g^*Q(\mathcal{F}) \to g^*\mathcal{F}$ は同型である．
+ゆえに $g^*\mathcal{F}$ は準連接である．
+これで (1)(b) および (2)(b) が証明された．最後に，上の議論により
+$g_!g^*Q(\mathcal{F}) \to Q(\mathcal{F})$ は同型なので，
+(1)(c) および (2)(c) が従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-quasi-coherent-weak-serre}
+$\mathcal{X}$ を代数スタックとする．
+\begin{enumerate}
+\item $\QCoh(\mathcal{O}_{\mathcal{X}_{lisse,\etale}})$ は
+$\textit{Mod}(\mathcal{O}_{\mathcal{X}_{lisse,\etale}})$ の
+弱 Serre 部分圏である．
+\item $\QCoh(\mathcal{O}_{\mathcal{X}_{flat,fppf}})$ は
+$\textit{Mod}(\mathcal{O}_{\mathcal{X}_{flat,fppf}})$ の
+弱 Serre 部分圏である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Homology, Lemma
+\ref{homology-lemma-characterize-weak-serre-subcategory}
+の条件 (1)，(2)，(3)，(4) を確認する．
+
+\medskip\noindent
+$0$ は任意の環付きサイト上で準連接なので，(1) が成り立つ．
+
+\medskip\noindent
+定義により $\QCoh(\mathcal{O})$ は
+% P12-ERR-0033: frozen English omits "of" before Mod(O).
+$\textit{Mod}(\mathcal{O})$ の厳密充満部分圏であるから，(2) が成り立つ．
+
+\medskip\noindent
+$\varphi : \mathcal{G} \to \mathcal{F}$ を
+$\mathcal{X}_{lisse,\etale}$ または $\mathcal{X}_{flat,fppf}$ 上の
+準連接加群の射とする．Lemma \ref{stacks-cohomology-lemma-lisse-etale-modules}
+を参照すると，$g^*g_!\mathcal{F} = \mathcal{F}$ であり，
+$\mathcal{G}$ および $\varphi$ についても同様である．Lemma
+\ref{stacks-cohomology-lemma-shriek-quasi-coherent} により，$g_!\mathcal{F}$ と
+$g_!\mathcal{G}$ は準連接 $\mathcal{O}_\mathcal{X}$-加群である．
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} により，
+$\Coker(g_!\varphi)$ は $\mathcal{X}$ 上の準連接加群である
+（かつ $\mathcal{X}$ 上の準連接加群の圏における余核である）．
+$g^*$ は完全なので（Lemma \ref{stacks-cohomology-lemma-lisse-etale} を参照），
+$g^*\Coker(g_!\varphi) = \Coker(g^*g_!\varphi) = \Coker(\varphi)$
+も準連接である（Lemma \ref{stacks-cohomology-lemma-quasi-coherent} を参照）．
+Proposition \ref{stacks-cohomology-proposition-loc-qcoh-flat-base-change} により，
+核 $\Ker(g_!\varphi)$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属する．
+$g^*$ は完全なので，
+$g^*\Ker(g_!\varphi) = \Ker(g^*g_!\varphi) = \Ker(\varphi)$
+である．Lemma \ref{stacks-cohomology-lemma-quasi-coherent} により $g^*$ は
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ の対象を準連接加群へ
+移すので，$\Ker(\varphi)$ も準連接である．これで (3) が証明された．
+
+\medskip\noindent
+最後に，
+$$
+0 \to \mathcal{F} \to \mathcal{E} \to \mathcal{G} \to 0
+$$
+を $\mathcal{O}_{\mathcal{X}_{lisse,\etale}}$-加群
+（resp.\ $\mathcal{O}_{\mathcal{X}_{flat,fppf}}$-加群）の拡大で，
+$\mathcal{F}$ と $\mathcal{G}$ が準連接であるものとする．
+(4) を証明して証明を終えるには，$\mathcal{E}$ が
+$\mathcal{X}_{lisse,\etale}$（resp.\ $\mathcal{X}_{flat,fppf}$）上で
+準連接であることを示さなければならない．$U$ を
+$\mathcal{X}_{lisse,\etale}$ の対象
+% P12-ERR-0034: frozen English leaves this resp. parenthesis unclosed.
+（resp.\ $\mathcal{X}_{flat,fppf}$ の対象）とする．$U$ を
+$\mathcal{X}$ 上滑らかな（resp.\ 平坦な）スキームと考える．
+$\mathcal{E}$ の $U_{lisse,\etale}$（resp.\ $=U_{flat,fppf}$）への制限が
+% P12-ERR-0035: the literal stray equality sign in the frozen source is retained above.
+準連接であることを示す必要がある．したがって
+$\mathcal{X} = U$ がスキームであると仮定してよい．
+$\mathcal{G}$ は $U_{lisse,\etale}$
+（resp.\ $U_{flat,fppf}$）上準連接なので，$U$ を \'etale
+（resp.\ fppf）被覆の各元で置き換えた後，$\mathcal{G}$ が表示
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O} \longrightarrow
+\bigoplus\nolimits_{i \in I} \mathcal{O} \longrightarrow
+\mathcal{G} \longrightarrow 0
+$$
+を $U_{lisse,\etale}$（resp.\ $U_{flat,fppf}$）上でもつと仮定してよい．
+ここで $\mathcal{O}$ はそのサイトの構造層である．さらに $U$ は
+アフィンであると仮定してよい．$\mathcal{F}$ は準連接なので，
+$$
+H^1(U_{lisse,\etale}, \mathcal{F}) = 0,
+\quad\text{resp.}\quad
+H^1(U_{flat,fppf}, \mathcal{F}) = 0
+$$
+である．実際，$\mathcal{F}$ は $U$ の大サイト上の準連接加群
+$\mathcal{F}'$ の引き戻しであり（Lemma \ref{stacks-cohomology-lemma-quasi-coherent}），
+$\mathcal{F}$ と $\mathcal{F}'$ のコホモロジーは一致し
+（Lemma \ref{stacks-cohomology-lemma-lisse-etale-cohomology}），アフィンスキーム $U$ の
+大サイト上で $\mathcal{F}'$ のコホモロジーは零であることが知られている
+（この状況でこれを得るには，Descent, Propositions
+\ref{descent-proposition-equivalence-quasi-coherent} および
+\ref{descent-proposition-same-cohomology-quasi-coherent} と
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherent-affine-cohomology-zero} を組み合わせる）．
+したがって写像
+$\bigoplus_{i \in I} \mathcal{O} \to \mathcal{G}$ を
+$\mathcal{E}$ へ持ち上げられる．図式追跡により完全列
+$$
+\bigoplus\nolimits_{j \in J} \mathcal{O} \to
+\mathcal{F} \oplus \bigoplus\nolimits_{i \in I} \mathcal{O}
+\to
+\mathcal{E} \to 0
+$$
+を得る．上で証明した (3) により，所望の通り
+$\mathcal{E}$ は準連接である．
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{局所 Noether 的スタック上の連接層}
+\label{stacks-cohomology-section-coherent-sheaves}
+
+\noindent
+本節は Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-coherent} に対応する．
+任意の環付きトポス上の連接加群という概念は
+Modules on Sites, Section \ref{sites-modules-section-local} で定義した．
+しかし，任意の代数スタック $\mathcal{X}$ に対して，連接
+$\mathcal{O}_\mathcal{X}$-加群の圏は零圏である．これは本質的には，
+サイト $\mathcal{X}$ が Noether 的でない対象をあまりに多く含むためである
+（たとえ $\mathcal{X}$ 自身が局所 Noether 的であっても）．その代わり，
+次の補題を用いて連接加群を定義する．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-Noetherian}
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．
+$\mathcal{F}$ を $\mathcal{O}_\mathcal{X}$-加群とする．
+次は同値である：
+\begin{enumerate}
+\item $\mathcal{F}$ は準連接かつ有限型の
+$\mathcal{O}_\mathcal{X}$-加群である，
+\item $\mathcal{F}$ は有限表示の $\mathcal{O}_\mathcal{X}$-加群である，
+\item $\mathcal{F}$ は準連接であり，$U$ が局所 Noether 的代数空間である
+任意の射 $f : U \to \mathcal{X}$ に対し，
+引き戻し $f^*\mathcal{F}|_{U_\etale}$ は連接である，および
+\item $\mathcal{F}$ は準連接であり，代数空間 $U$ と，
+局所有限型，平坦かつ全射な射 $f : U \to \mathcal{X}$ であって，
+引き戻し $f^*\mathcal{F}|_{U_\etale}$ が連接であるものが存在する．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$f : U \to \mathcal{X}$ を (4) のものとする．
+このとき $U$ は局所 Noether 的であり（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian}），
+補題の主張が意味をもつことが分かる．さらに，$f$ は Morphisms of Stacks,
+Lemma \ref{stacks-morphisms-lemma-noetherian-finite-type-finite-presentation}
+により局所有限表示である．スキーム $V$ 上にある
+$\mathcal{X}$ の対象を $x$ とする．(2) を証明するには，$V$ を
+$V$ の fppf 被覆の各元で置き換えた後，制限 $x^*\mathcal{F}$ が
+$\mathcal{X}/x \cong (\Sch/V)_{fppf}$ 上で大域的な有限表示を
+もつことを示せばよい．射影
+$W = U \times_\mathcal{X} V \to V$ は局所有限表示，平坦かつ全射である．
+したがって $V$ を，$W$ のスキームによる \'etale 被覆の各元で置き換え，
+$f \circ h = x$ を満たす射 $h : V \to U$ があると仮定してよい．
+$\mathcal{F}$ は準連接なので，制限 $x^*\mathcal{F}$ は
+$h_{small}^*(f^*\mathcal{F})|_{U_\etale}$ の $\pi_V$ による引き戻し
+であることが分かる．Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-compare-quasi-coherent} を参照されたい．
+仮定により $f^*\mathcal{F}|_{U_\etale}$ は \'etale 位相で局所的に
+有限表示をもつので，(4) $\Rightarrow$ (2) と結論できる．
+
+\medskip\noindent
+Part (2) は任意の環付きトポスについて (1) を含意する
+（定義から直ちに従う）．``有限型'' および ``準連接'' という性質は，
+環付きトポスの任意の射による引き戻しで保たれる．
+Modules on Sites, Lemma \ref{sites-modules-lemma-local-pullback}
+を参照されたい．したがって (1) は (3) を含意する．
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} を参照されたい．
+最後に，(3) が (4) を含意することは自明である．
+\end{proof}
+
+\begin{definition}
+\label{stacks-cohomology-definition-coherent}
+局所 Noether 的代数スタック $\mathcal{X}$ 上の
+$\mathcal{O}_\mathcal{X}$-加群 $\mathcal{F}$ を {\it 連接} と呼ぶのは，
+$\mathcal{F}$ が Lemma \ref{stacks-cohomology-lemma-coherent-Noetherian} の同値な条件の
+一つ（したがってすべて）を満たす場合である．
+% P12-ERR-0526: frozen English reads "is denote"; Japanese supplies the required verb.
+連接 $\mathcal{O}_\mathcal{X}$-加群の圏を
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$ と記す．
+\end{definition}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-elementary-coherent}
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．
+加群 $\mathcal{O}_\mathcal{X}$ は連接であり，任意の可逆
+$\mathcal{O}_\mathcal{X}$-加群は連接であり，さらに一般に任意の
+有限局所自由 $\mathcal{O}_\mathcal{X}$-加群は連接である．
+\end{lemma}
+
+\begin{proof}
+定義および Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-Noetherian} から従う．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-pullback-coherent}
+$f : \mathcal{X} \to \mathcal{Y}$ を局所 Noether 的
+代数スタックの射とする．このとき $f^*$ は $\mathcal{Y}$ 上の
+連接加群を $\mathcal{X}$ 上の連接加群へ移す．
+\end{lemma}
+
+\begin{proof}
+定義，および環付きトポスの任意の射に対する引き戻しが
+有限表示加群を保つという事実から直ちに従う．
+Modules on Sites, Lemma \ref{sites-modules-lemma-local-pullback}
+を参照されたい．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-abelian-Noetherian}
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．
+連接 $\mathcal{O}_\mathcal{X}$-加群の圏はアーベル圏である．
+$\varphi : \mathcal{F} \to \mathcal{G}$ を
+連接 $\mathcal{O}_\mathcal{X}$-加群の射とすると，
+\begin{enumerate}
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した余核
+$\Coker(\varphi)$ は連接 $\mathcal{O}_\mathcal{X}$-加群である，
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した像
+$\Im(\varphi)$ は連接 $\mathcal{O}_\mathcal{X}$-加群である，および
+\item $\textit{Mod}(\mathcal{O}_\mathcal{X})$ で計算した核
+$\Ker(\varphi)$ は連接とは限らない．しかし，
+
+$\textit{LQCoh}^{fbc}(\mathcal{O}_\mathcal{X})$ に属し，
+$Q(\Ker(\varphi))$ は連接であって，
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$ における $\varphi$ の核である．
+\end{enumerate}
+包含関手 $\textit{Coh}(\mathcal{O}_\mathcal{X}) \to
+\QCoh(\mathcal{O}_\mathcal{X})$ は完全である．
+\end{lemma}
+
+\begin{proof}
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$ における核，像，余核の取り方は，
+Remark \ref{stacks-cohomology-remark-QCoh-abelian} の準連接加群に対する規定と一致する．
+したがって，準連接加群 $\Coker(\varphi)$，$\Im(\varphi)$，
+$Q(\Ker(\varphi))$ が連接であることを示せば補題が従う．
+Lemma \ref{stacks-cohomology-lemma-coherent-Noetherian} により，全射かつ滑らかなある射
+$f : U \to \mathcal{X}$ に対して $U_\etale$ へ制限した後に
+これを証明すれば十分である．関手
+$\mathcal{F} \mapsto f^*\mathcal{F}|_{U_\etale}$ は完全である．
+したがって $f^*\Coker(\varphi)$ と $f^*\Im(\varphi)$ は
+連接 $\mathcal{O}_U$-加群間の射の余核および像であり，
+望みどおり連接である．関手
+$\mathcal{F} \mapsto f^*\mathcal{F}|_{U_\etale}$ は
+Lemma \ref{stacks-cohomology-lemma-parasitic} により寄生加群を零に移す．
+したがって Lemma \ref{stacks-cohomology-lemma-adjoint-kernel-parasitic} の part (2) により
+$f^*Q(\Ker(\varphi))|_{U_\etale} = f^*\Ker(\varphi)|_{U_\etale}$ である．
+よって，同じ方法で $Q(\Ker(\varphi))$ が連接であると結論できる．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-extension-coherent}
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．
+$\textit{Mod}(\mathcal{O}_\mathcal{X})$ における短完全列
+$0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0$
+が与えられ，$\mathcal{F}_1$ と $\mathcal{F}_3$ が連接ならば，
+$\mathcal{F}_2$ は連接である．
+\end{lemma}
+
+\begin{proof}
+Sheaves on Stacks, Lemma
+\ref{stacks-sheaves-lemma-quasi-coherent-algebraic-stack} part (7) により，
+$\mathcal{F}_2$ は準連接であることが分かる．次に，全射かつ滑らかな
+ある $U \to \mathcal{X}$ に対して $U_\etale$ へ制限することで，
+$\mathcal{F}_2$ が連接であることを確認できる．
+これは Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-coherent-abelian-Noetherian} から従う．
+いくつかの詳細は省略する．
+\end{proof}
+
+\noindent
+連接加群は，準連接 $\mathcal{O}_\mathcal{X}$-加群の圏の
+Serre 部分圏をなす．一般の環付きトポス上の加群については，
+これは成り立たない．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．
+このとき $\textit{Coh}(\mathcal{O}_\mathcal{X})$ は
+$\QCoh(\mathcal{O}_\mathcal{X})$ の Serre 部分圏である．
+$\varphi : \mathcal{F} \to \mathcal{G}$ を準連接
+$\mathcal{O}_\mathcal{X}$-加群の射とする．このとき，
+\begin{enumerate}
+\item $\mathcal{F}$ が連接で $\varphi$ が全射ならば，
+$\mathcal{G}$ は連接である，
+\item $\mathcal{F}$ が連接ならば，$\Im(\varphi)$ は連接である，および
+% P12-ERR-0527: frozen English omits "is" after G; Japanese supplies the predicate.
+\item $\mathcal{G}$ が連接で $\Ker(\varphi)$ が寄生的ならば，
+$\mathcal{F}$ は連接である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+スキーム $U$ と全射かつ滑らかな射
+$f : U \to \mathcal{X}$ を選ぶ．このとき関手
+$f^* : \QCoh(\mathcal{O}_\mathcal{X}) \to \QCoh(\mathcal{O}_U)$
+は完全であり（Lemma \ref{stacks-cohomology-lemma-flat-pullback-quasi-coherent}），
+さらに定義により $\textit{Coh}(\mathcal{O}_\mathcal{X})$ は
+$\QCoh(\mathcal{O}_\mathcal{X})$ の充満部分圏であって，
+$f^*\mathcal{F}$ が $\textit{Coh}(\mathcal{O}_U)$ に属するような
+対象 $\mathcal{F}$ からなる．
+$\textit{Coh}(\mathcal{O}_\mathcal{X})$ が
+$\QCoh(\mathcal{O}_\mathcal{X})$ の Serre 部分圏であるという主張は，
+このことと $U$ に対する対応する事実から直ちに従う．
+Cohomology of Spaces, Lemmas
+\ref{spaces-cohomology-lemma-coherent-abelian-Noetherian} および
+\ref{spaces-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+を参照されたい．(1)，(2)，(3) の証明は省略する．ヒント：Lemma
+\ref{stacks-cohomology-lemma-coherent-abelian-Noetherian} の証明と比較されたい．
+\end{proof}
+
+\noindent
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．
+$U$ を代数空間とし，$f : U \to \mathcal{X}$ を
+全射，局所有限表示かつ平坦とする．$U$ は局所 Noether 的である
+ことに注意する（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian}）．
+$(U, R, s, t, c)$ を代数空間の亜群とし，
+$f_{can} : [U/R] \to \mathcal{X}$ を Algebraic Stacks, Lemma
+\ref{algebraic-lemma-map-space-into-stack} および Remark
+\ref{algebraic-remark-flat-fp-presentation} で構成された同型とする．
+Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks}
+と同様に，同値
+$$
+\QCoh(\mathcal{O}_\mathcal{X})
+\cong
+\QCoh(\mathcal{O}_{[U/R]})
+\cong
+\QCoh(U, R, s, t, c)
+$$
+を得る．ここで二番目の同値は Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-quasi-coherent} である．
+Groupoids in Spaces, Section \ref{spaces-groupoids-section-colimits} では，
+充満部分圏
+$$
+\textit{Coh}(U, R, s, t, c) \subset \QCoh(U, R, s, t, c)
+$$
+を，$\mathcal{G}$ が連接 $\mathcal{O}_U$-加群であるような
+$(\mathcal{G}, \alpha)$ からなる {\it 連接加群} の圏として
+定義したことを思い出そう．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-presentation}
+上で論じた状況において，同値
+$\QCoh(\mathcal{O}_\mathcal{X}) \cong \QCoh(U, R, s, t, c)$
+は連接層を連接層へ移し，逆もまた成り立つ．すなわち，同値
+$\textit{Coh}(\mathcal{O}_\mathcal{X}) \cong \textit{Coh}(U, R, s, t, c)$
+を誘導する．
+\end{lemma}
+
+\begin{proof}
+これは連接 $\mathcal{O}_\mathcal{X}$-加群の定義から直ちに従う．
+参照関係を明記すると，上の議論では Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-locally-finite-type-locally-noetherian},
+Algebraic Stacks, Lemma \ref{algebraic-lemma-map-space-into-stack} および
+Remark \ref{algebraic-remark-flat-fp-presentation},
+Sheaves on Stacks, Section
+\ref{stacks-sheaves-section-quasi-coherent-algebraic-stacks},
+Sheaves on Stacks, Proposition
+\ref{stacks-sheaves-proposition-quasi-coherent},
+ならびに Groupoids in Spaces, Section
+\ref{spaces-groupoids-section-colimits} を用いている．
+\end{proof}
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-coherent-hom}
+$\mathcal{X}$ を局所 Noether 的代数スタックとする．$\mathcal{F}$
+% P12-ERR-0528: frozen English repeats/misplaces "be"; Japanese supplies normal predication.
+および $\mathcal{G}$ を連接 $\mathcal{O}_\mathcal{X}$-加群とする．このとき，
+Lemma \ref{stacks-cohomology-lemma-internal-hom-fp-into-qcoh} で構成した内部 Hom
+$hom(\mathcal{F}, \mathcal{G})$ は
+連接 $\mathcal{O}_\mathcal{X}$-加群である．
+\end{lemma}
+
+\begin{proof}
+スキームからの滑らかかつ全射な射 $U \to \mathcal{X}$ を取る．
+item (\ref{stacks-cohomology-item-hom-restriction})
+（Section \ref{stacks-cohomology-section-further-remarks}）により，
+$hom(\mathcal{F}, \mathcal{G})$ の $U$ への制限は，
+各制限の Hom 層であることが分かる．
+したがって本補題は代数空間の場合から従う．
+Cohomology of Spaces, Lemma
+\ref{spaces-cohomology-lemma-tensor-hom-coherent} を参照されたい．
+\end{proof}
+
+
+
+
+
+
+
+\section{Noether 的スタック上の連接層}
+\label{stacks-cohomology-section-coherent-on-noetherian}
+
+\noindent
+本節は Cohomology of Spaces, Section
+\ref{spaces-cohomology-section-coherent-quasi-compact} に対応する．
+
+\begin{lemma}
+\label{stacks-cohomology-lemma-directed-colimit-coherent}
+$\mathcal{X}$ を Noether 的代数スタックとする．任意の準連接
+$\mathcal{O}_\mathcal{X}$-加群は，その連接部分加群のフィルター余極限である．
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ を準連接 $\mathcal{O}_\mathcal{X}$-加群とする．
+$\mathcal{G}, \mathcal{H} \subset \mathcal{F}$ が連接
+$\mathcal{O}_\mathcal{X}$-部分加群ならば，射
+$\mathcal{G} \oplus \mathcal{H} \to \mathcal{F}$ の像は，
+両方を含む別の連接 $\mathcal{O}_\mathcal{X}$-部分加群である．
+Lemma \ref{stacks-cohomology-lemma-coherent-Noetherian-quasi-coherent-sub-quotient}
+を参照されたい．このようにして，この系が有向であることが分かる．
+したがって，$\mathcal{F}$ が連接加群のフィルター余極限として
+書けることを示せば十分である．実際，その場合にはこれらの加群の
+$\mathcal{F}$ における像を取れば，十分多くの連接部分加群があると
+結論できる．
+
+\medskip\noindent
+$U$ をアフィンスキームとし，$U \to \mathcal{X}$ を
+全射かつ滑らかな射とする（Properties of Stacks, Lemma
+\ref{stacks-properties-lemma-quasi-compact-stack}）．
+$R = U \times_\mathcal{X} U$ と置く．すると Algebraic Stacks, Lemma
+\ref{algebraic-lemma-stack-presentation} におけるように
+$\mathcal{X} = [U/R]$ である．
+Lemma \ref{stacks-cohomology-lemma-coherent-presentation} により，
+% P12-ERR-0529: frozen source uses O_X twice; literal subscripts are retained.
+$\QCoh(\mathcal{O}_X) = \QCoh(U, R, s, t, c)$ および
+$\textit{Coh}(\mathcal{O}_X) = \textit{Coh}(U, R, s, t, c)$
+を得る．このようにして，問題は
+$\QCoh(U, R, s, t, c)$ に対する対応する主張の証明へ帰着される．これは
+Groupoids in Spaces, Lemma \ref{spaces-groupoids-lemma-colimit-coherent}
+である．次の段落でその仮定を確認する．
+
+\medskip\noindent
+読者には，証明の残りを読み飛ばすことを強く勧める．
+アフィンスキーム $U$ は Noether 的である．これは
+$\mathcal{X}$ が局所 Noether 的であるという定義から従う．
+Properties of Stacks, Definition
+\ref{stacks-properties-definition-type-property} および
+Remark \ref{stacks-properties-remark-list-properties-local-smooth-topology}
+を参照されたい．射影 $s, t : R \to U$ は滑らかであり
+（上記の参照先を見よ），また準分離的かつ準コンパクトである
+（Morphisms of Stacks, Lemma
+\ref{stacks-morphisms-lemma-quasi-compact-quasi-separated-permanence}）．
+特に，$R$ は $U$ 上滑らかな準コンパクトかつ準分離的代数空間であり，
+したがって Noether 的である（Morphisms of Spaces, Lemma
+\ref{spaces-morphisms-lemma-finite-presentation-noetherian}）．
+\end{proof}

@@ -1,0 +1,6686 @@
+% Generated mechanically from frozen input inputs/p03/ja/tex/dga.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{21}
+\chapter{微分次数付き代数}
+
+
+
+\phantomsection
+\label{dga-section-phantom}
+
+
+\section{序論}
+\label{dga-section-introduction}
+
+\noindent
+本章では，微分次数付き代数，加群，圏などを扱う。基本的な参考文献は
+\cite{Keller-Deriving} であり，概説論文として \cite{Keller-survey} がある。
+
+\medskip\noindent
+Stacks プロジェクトでは記述の長さを気にしないので，まず微分次数付き加群の
+圏という設定で内容を展開する。その後，微分次数付き圏上の微分次数付き加群
+という設定で，同じ構成をあらためて行う。
+
+
+
+\section{規約}
+\label{dga-section-conventions}
+
+\noindent
+本章では，{\it 環}とは単位元 $1$ をもつ可換環を意味する，という規約を
+引き続き採用する。$R$ を環とするとき，{\it $R$-代数 $A$}とは，$R$-双線形写像
+$A \times A \to A$（乗法）を備えた $R$-加群 $A$ であって，その乗法が結合的で
+単位元をもつものとする。言い換えれば，これは構造写像 $R \to A$ の像が
+$A$ の中心に含まれる単位的結合 $R$-代数である。
+
+\medskip\noindent
+{\bf 符号規則。} 本章では，しばしば微分を備えた次数付き代数および次数付き加群を
+扱う。台となる複体に対する符号規則は，常に《代数詳論》第
+\ref{more-algebra-section-sign-rules} 節で導入したもの（と両立するもの）とする。
+このため，とりわけ左加群や左右の加群の関係を考える際には，乗法構造が予想外の
+仕方でねじれることがある。
+
+
+
+
+
+\section{微分次数付き代数}
+\label{dga-section-dga}
+
+
+\noindent
+定義だけを述べる。
+
+\begin{definition}
+\label{dga-definition-dga}
+$R$ を可換環とする。{\it $R$ 上の微分次数付き代数}とは，次のいずれかをいう。
+\begin{enumerate}
+\item $R$-双線形写像 $A_n \times A_m \to A_{n + m}$，
+$(a, b) \mapsto ab$ を備えた $R$-加群の鎖複体 $A_\bullet$ であって，
+$$
+\text{d}_{n + m}(ab) = \text{d}_n(a)b + (-1)^n a\text{d}_m(b)
+$$
+を満たし，かつ $\bigoplus A_n$ が結合的な単位的 $R$-代数となるもの。
+\item $R$-双線形写像 $A^n \times A^m \to A^{n + m}$，
+$(a, b) \mapsto ab$ を備えた $R$-加群の余鎖複体 $A^\bullet$ であって，
+$$
+\text{d}^{n + m}(ab) = \text{d}^n(a)b + (-1)^n a\text{d}^m(b)
+$$
+を満たし，かつ $\bigoplus A^n$ が結合的な単位的 $R$-代数となるもの。
+\end{enumerate}
+\end{definition}
+
+\noindent
+しばしば単に $A = \bigoplus A_n$ または $A = \bigoplus A^n$ と書き，これを
+$\mathbf{Z}$-次数付けと，平方が零で上記の Leibniz 則を満たす $R$-線形作用素
+$\text{d}$ とを備えた結合的な単位的 $R$-代数とみなす。この場合，しばしば
+「$(A, \text{d})$ を微分次数付き代数とする」と言う。
+
+\medskip\noindent
+微分次数付き $R$-代数 $A$ 上の微分と乗法を関係づける Leibniz 則は，乗法写像が
+余鎖複体の写像
+$$
+\text{Tot}(A^\bullet \otimes_R A^\bullet) \to A^\bullet
+$$
+を定めることにほかならない。ここで $A^\bullet$ は $A$ の台となる余鎖複体を表す。
+
+\begin{definition}
+\label{dga-definition-homomorphism-dga}
+{\it 微分次数付き代数の準同型}
+$f : (A, \text{d}) \to (B, \text{d})$ とは，次数付けおよび $\text{d}$ と両立する
+代数写像 $f : A \to B$ のことである。
+\end{definition}
+
+\begin{definition}
+\label{dga-definition-cdga}
+微分次数付き代数 $(A, \text{d})$ が {\it 可換}であるとは，次数 $n$ の $a$ と
+次数 $m$ の $b$ に対して $ab = (-1)^{nm}ba$ が成り立つことをいう。さらに，
+$\deg(a)$ が奇数ならば $a^2 = 0$ となるとき，$A$ は {\it 厳密可換}であるという。
+\end{definition}
+
+\noindent
+次の定義は一般にも意味をもつが，おそらく可換微分次数付き代数どうしのテンソル積を
+とる場合にのみ「正しい」定義である。
+
+\begin{definition}
+\label{dga-definition-tensor-product}
+$R$ を環とする。$(A, \text{d})$，$(B, \text{d})$ を $R$ 上の微分次数付き代数とする。
+$A$ と $B$ の {\it テンソル積微分次数付き代数}とは，乗法を
+$$
+(a \otimes b)(a' \otimes b') = (-1)^{\deg(a')\deg(b)} aa' \otimes bb'
+$$
+で定めた代数 $A \otimes_R B$ に，$m = \deg(a)$ として
+$\text{d}(a \otimes b) = \text{d}(a) \otimes b + (-1)^m a \otimes \text{d}(b)$
+という規則で定まる微分 $\text{d}$ を備えたものである。
+\end{definition}
+
+\begin{lemma}
+\label{dga-lemma-total-complex-tensor-product}
+$R$ を環とする。$(A, \text{d})$，$(B, \text{d})$ を $R$ 上の微分次数付き代数とし，
+その台となる余鎖複体を $A^\bullet$，$B^\bullet$ と書く。$R$-加群の余鎖複体として
+$$
+(A \otimes_R B)^\bullet = \text{Tot}(A^\bullet \otimes_R B^\bullet).
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+全複体の微分は $A^p \otimes_R B^q$ 上で
+$\text{d}_1^{p, q} + (-1)^p \text{d}_2^{p, q}$ により与えられることを思い出そう。
+これは定義 \ref{dga-definition-tensor-product} における $A \otimes_R B$ 上の微分の
+規則とまったく同じである。
+\end{proof}
+
+
+
+
+
+
+\section{微分次数付き加群}
+\label{dga-section-modules}
+
+\noindent
+本章では右加群を標準とする。左加群については第
+\ref{dga-section-left-modules} 節で論じる。
+
+\begin{definition}
+\label{dga-definition-dgm}
+$R$ を環とし，$(A, \text{d})$ を $R$ 上の微分次数付き代数とする。
+$A$ 上の（右）{\it 微分次数付き加群} $M$ とは，次数付け
+$M = \bigoplus M^n$ と微分 $\text{d}$ を備えた右 $A$-加群 $M$ であって，
+$M^n A^m \subset M^{n + m}$ および $\text{d}(M^n) \subset M^{n + 1}$ を満たし，さらに
+$$
+\text{d}(ma) = \text{d}(m)a + (-1)^n m\text{d}(a)
+$$
+が $a \in A$ および $m \in M^n$ に対して成り立つものをいう。
+{\it 微分次数付き加群の準同型} $f : M \to N$ とは，次数付けおよび微分と
+両立する $A$-加群写像である。（右）微分次数付き $A$-加群の圏を
+$\text{Mod}_{(A, \text{d})}$ と書く。
+\end{definition}
+
+\noindent
+$M$ は（右）$R$-加群の余鎖複体 $M^\bullet$ とみなせることに注意せよ。
+実際，$r \in R$ に対して $\text{d}(r) = 0$ であり，$r$ は $A$ の次数 $0$ の元へ
+写るので，$\text{d}(mr) = \text{d}(m)r$ となる。
+
+\medskip\noindent
+微分次数付き $R$-代数 $A$ 上の微分次数付き加群 $M$ において微分と乗法を
+関係づける Leibniz 則は，乗法写像が余鎖複体の写像
+$$
+\text{Tot}(M^\bullet \otimes_R A^\bullet) \to M^\bullet
+$$
+を定めることにほかならない。ここで $A^\bullet$ および $M^\bullet$ は，それぞれ
+$A$ および $M$ の台となる余鎖複体を表す。
+
+\begin{lemma}
+\label{dga-lemma-dgm-abelian}
+$(A, d)$ を微分次数付き代数とする。圏 $\text{Mod}_{(A, \text{d})}$ は
+アーベル圏であり，任意の極限と余極限をもつ。
+\end{lemma}
+
+\begin{proof}
+核および余核をとる操作は，台となる $A$-加群をとる操作と可換である。
+直和および余極限についても同様である。言い換えれば，
+$\text{Mod}_{(A, \text{d})}$ におけるこれらの操作は，$A$-加群の圏への忘却関手と
+可換である。積および極限については事情が異なる。実際，$N_i$，$i \in I$ を
+微分次数付き $A$-加群の族とすると，$\text{Mod}_{(A, \text{d})}$ における積
+$\prod N_i$ は $(\prod N_i)^n = \prod N_i^n$ および
+$\prod N_i = \bigoplus_n (\prod N_i)^n$ とおくことにより与えられる。したがって積は，
+次数付き $A$-加群の圏への忘却関手とは可換する。積と等化子をもつ圏は極限をもつ。
+《圏論》補題 \ref{categories-lemma-limits-products-equalizers} を参照せよ。
+\end{proof}
+
+\noindent
+したがって，$(A, \text{d})$ が $R$ 上の微分次数付き代数ならば，アーベル圏の
+完全関手
+$$
+\text{Mod}_{(A, \text{d})} \longrightarrow \text{Comp}(R)
+$$
+が存在する。微分次数付き加群 $M$ のコホモロジー群 $H^n(M)$ は，対応する
+$R$-加群の複体のコホモロジーとして定義される。したがって，微分次数付き加群の
+短完全列 $0 \to K \to L \to M \to 0$ から，コホモロジー加群の長完全列
+\begin{equation}
+\label{dga-equation-les}
+H^n(K) \to H^n(L) \to H^n(M) \to H^{n + 1}(K)
+\end{equation}
+が生じる。《ホモロジー》補題
+\ref{homology-lemma-long-exact-sequence-cochain} を参照せよ。
+
+\medskip\noindent
+さらに，以下では加群の複体に用いる用語をすべて借用する。たとえば，微分次数付き
+$A$-加群 $M$ が {\it 非輪状}であるとは，すべての $k \in \mathbf{Z}$ に対して
+$H^k(M) = 0$ となることをいう。微分次数付き $A$-加群の準同型 $M \to N$ が
+{\it 擬同型}であるとは，すべての $k \in \mathbf{Z}$ に対して同型
+$H^k(M) \to H^k(N)$ を誘導することをいう。以下同様である。
+
+\begin{definition}
+\label{dga-definition-shift}
+$(A, \text{d})$ を微分次数付き代数とする。$M$ を，台となる $R$-加群の複体が
+$M^\bullet$ である微分次数付き加群とする。任意の $k \in \mathbf{Z}$ に対し，
+{\it $k$-シフト加群} $M[k]$ を次のように定義する。
+\begin{enumerate}
+\item $M[k]$ の台となる $R$-加群の複体は $M^\bullet[k]$ である。すなわち，
+$M[k]^n = M^{n + k}$ および $\text{d}_{M[k]} = (-1)^k\text{d}_M$ が成り立つ。
+\item $A$-加群としての乗法
+$$
+(M[k])^n \times A^m \longrightarrow (M[k])^{n + m}
+$$
+は，与えられた乗法 $M^{n + k} \times A^m \to M^{n + k + m}$ に等しい。
+\end{enumerate}
+微分次数付き $A$-加群の射 $f : M \to N$ に対し，$f[k] : M[k] \to N[k]$ を，
+台となる $A$-加群上で $f$ に等しい写像とする。これにより関手
+$[k] : \text{Mod}_{(A, \text{d})} \to \text{Mod}_{(A, \text{d})}$
+が定まる。
+\end{definition}
+
+\noindent
+この選択により Leibniz 則が満たされることを確認しよう。
+$x \in M[k]^n = M^{n + k}$，$a \in A^m$ とし，$M[k]$ における積を
+$\cdot_{M[k]}$ と書くと，
+\begin{align*}
+\text{d}_{M[k]}(x \cdot_{M[k]} a)
+& =
+(-1)^k \text{d}_M(xa) \\
+& =
+(-1)^k \text{d}_M(x) a + (-1)^{k + n + k} x \text{d}(a) \\
+& =
+\text{d}_{M[k]}(x) a + (-1)^n x \text{d}(a) \\
+& =
+\text{d}_{M[k]}(x) \cdot_{M[k]} a + (-1)^n x \cdot_{M[k]} \text{d}(a)
+\end{align*}
+を得る。$x$ は $M[k]$ の斉次な元として次数 $n$ をもつので，これは望んだ式である。
+また，この選択のもとでは乗法写像を複体の写像
+$$
+\text{Tot}(M^\bullet[k] \otimes _R A^\bullet) \to
+\text{Tot}(M^\bullet \otimes _R A^\bullet)[k] \to
+M^\bullet[k]
+$$
+とみなせることにも注意しよう。ここで最初の矢印は《代数詳論》第
+\ref{more-algebra-section-sign-rules} 節の
+(\ref{more-algebra-item-shift-tensor}) であり，この場合は符号を伴わない。
+（実際，この観察から Leibniz 則が成り立つことを導くこともできた。）
+
+\medskip\noindent
+《ホモロジー》第 \ref{homology-section-homotopy-shift} 節の注意が適用できる。
+とりわけ，すべてのシフト $M[k]$ のコホモロジー群を符号を介さずに同一視する。
+
+\medskip\noindent
+ここまでで {\it 三角形}を論じるために十分な構造が得られた。《導来圏》定義
+\ref{derived-definition-triangle} を参照せよ。実際，次の目標は，微分次数付き加群の
+ホモトピー圏が三角圏であることを述べて証明できるだけの理論を展開することである。
+まずホモトピー圏を定義する。
+
+
+
+
+
+
+\section{ホモトピー圏}
+\label{dga-section-homotopy}
+
+\noindent
+ここでいうホモトピーは，$A$-加群構造と次数付けを考慮するが，微分は（もちろん）
+考慮しない。
+
+\begin{definition}
+\label{dga-definition-homotopy}
+$(A, \text{d})$ を微分次数付き代数とし，$f, g : M \to N$ を微分次数付き
+$A$-加群の準同型とする。{\it $f$ と $g$ の間のホモトピー}とは，次を満たす
+$A$-加群写像 $h : M \to N$ のことである。
+\begin{enumerate}
+\item すべての $n$ に対して $h(M^n) \subset N^{n - 1}$ である。
+\item すべての $x \in M$ に対して
+$f(x) - g(x) = \text{d}_N(h(x)) + h(\text{d}_M(x))$ である。
+\end{enumerate}
+ホモトピーが存在するとき，$f$ と $g$ は {\it ホモトピック}であるという。
+\end{definition}
+
+\noindent
+したがって $h$ は $A$-加群構造および次数付けと両立するが，微分とは両立しない。
+$f = g$ であり，$h$ が定義の意味でのホモトピーならば，$h$ は
+$\text{Mod}_{(A, \text{d})}$ における射 $h : M \to N[-1]$ を定める。
+
+\begin{lemma}
+\label{dga-lemma-compose-homotopy}
+$(A, \text{d})$ を微分次数付き代数とする。$f, g : L \to M$ を微分次数付き
+$A$-加群の準同型とし，さらに準同型 $a : K \to L$ および $c : M \to N$ が
+与えられているとする。$h : L \to M$ が $f$ と $g$ の間のホモトピーを定める
+$A$-加群写像ならば，$c \circ h \circ a$ は $c \circ f \circ a$ と
+$c \circ g \circ a$ の間のホモトピーを定める。
+\end{lemma}
+
+\begin{proof}
+《ホモロジー》補題 \ref{homology-lemma-compose-homotopy-cochain} から直ちに従う。
+\end{proof}
+
+\noindent
+この補題により，ホモトピー圏を次のように定義できる。
+
+\begin{definition}
+\label{dga-definition-complexes-notation}
+$(A, \text{d})$ を微分次数付き代数とする。{\it ホモトピー圏}
+$K(\text{Mod}_{(A, \text{d})})$ とは，対象が $\text{Mod}_{(A, \text{d})}$ の
+対象であり，射が微分次数付き $A$-加群の準同型のホモトピー類である圏をいう。
+\end{definition}
+
+\noindent
+記法 $K(\text{Mod}_{(A, \text{d})})$ は標準的ではないが，少なくとも Stacks
+プロジェクトの他の箇所における $K(-)$ の用法とは整合する。
+
+\begin{lemma}
+\label{dga-lemma-homotopy-direct-sums}
+$(A, \text{d})$ を微分次数付き代数とする。ホモトピー圏
+$K(\text{Mod}_{(A, \text{d})})$ は直和と直積をもつ。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：補題 \ref{dga-lemma-dgm-abelian} と同様に直和と直積を用いればよい。
+実際，これらの関手は次数付き $A$-加群の圏への忘却関手と可換することを見た。また，
+$\prod$ はアーベル群の族の圏上の完全関手である。
+\end{proof}
+
+
+
+
+
+
+
+\section{錐}
+\label{dga-section-cones}
+
+\noindent
+微分次数付き加群の圏に対する錐を導入する。
+
+\begin{definition}
+\label{dga-definition-cone}
+$(A, \text{d})$ を微分次数付き代数とし，$f : K \to L$ を微分次数付き
+$A$-加群の準同型とする。$f$ の {\it 錐}とは，$C(f) = L \oplus K$，次数付け
+$C(f)^n = L^n \oplus K^{n + 1}$，および微分
+$$
+d_{C(f)} =
+\left(
+\begin{matrix}
+\text{d}_L & f \\
+0 & -\text{d}_K
+\end{matrix}
+\right)
+$$
+で与えられる微分次数付き $A$-加群 $C(f)$ である。これには，明らかな写像
+$L \to C(f)$ および $C(f) \to K$ から誘導される複体の標準射
+$i : L \to C(f)$ および $p : C(f) \to K[1]$ が備わる。
+\end{definition}
+
+\noindent
+錐三角形の形成は，次の意味で関手的である。
+
+\begin{lemma}
+\label{dga-lemma-functorial-cone}
+$(A, \text{d})$ を微分次数付き代数とする。
+$$
+\xymatrix{
+K_1 \ar[r]_{f_1} \ar[d]_a & L_1 \ar[d]^b \\
+K_2 \ar[r]^{f_2} & L_2
+}
+$$
+が微分次数付き $A$-加群の準同型からなるホモトピー可換図式であるとする。
+このとき，$K(\text{Mod}_{(A, \text{d})})$ において三角形の射
+$$
+(a, b, c) : (K_1, L_1, C(f_1), f_1, i_1, p_1) \to
+(K_1, L_1, C(f_1), f_2, i_2, p_2)
+$$
+を与える射 $c : C(f_1) \to C(f_2)$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$h : K_1 \to L_2$ を $f_2 \circ a$ と $b \circ f_1$ の間のホモトピーとする。
+$c$ を行列
+$$
+c =
+\left(
+\begin{matrix}
+b & h \\
+0 & a
+\end{matrix}
+\right) :
+L_1 \oplus K_1 \to L_2 \oplus K_2
+$$
+によって定める。行列計算により $c$ は微分次数付き加群の射である。
+$c \circ i_1 = i_2 \circ b$ は明らかであり，$p_2 \circ c = a \circ p_1$ も
+直ちに確認できる。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{許容短完全列}
+\label{dga-section-admissible}
+
+\noindent
+許容短完全列は，微分次数付き加群の設定における，項ごとに分裂する完全列の類似物である。
+
+\begin{definition}
+\label{dga-definition-admissible-ses}
+$(A, \text{d})$ を微分次数付き代数とする。
+\begin{enumerate}
+\item 微分次数付き $A$-加群の準同型 $K \to L$ が {\it 許容単射}であるとは，
+$K \to L$ の左逆となる次数付き $A$-加群写像 $L \to K$ が存在することをいう。
+\item 微分次数付き $A$-加群の準同型 $L \to M$ が {\it 許容全射}であるとは，
+$L \to M$ の右逆となる次数付き $A$-加群写像 $M \to L$ が存在することをいう。
+\item 微分次数付き $A$-加群の短完全列 $0 \to K \to L \to M \to 0$ が
+{\it 許容短完全列}であるとは，次数付き $A$-加群の列として分裂することをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+したがって，分裂は微分を除くすべてのデータと両立する。許容短完全列が与えられると
+三角形が得られる。このため，分裂には $A$-加群構造との両立性を要求するのである。
+
+\begin{lemma}
+\label{dga-lemma-admissible-ses}
+$(A, \text{d})$ を微分次数付き代数とする。
+$0 \to K \to L \to M \to 0$ を微分次数付き $A$-加群の許容短完全列とする。
+$s : M \to L$ および $\pi : L \to K$ を，$\Ker(\pi) = \Im(s)$ を満たす
+分裂とする。このとき $\text{Mod}_{(A, \text{d})}$ の射
+$$
+\delta = \pi \circ \text{d}_L \circ s : M \to K[1]
+$$
+が得られ，これはコホモロジーの
+長完全列 (\ref{dga-equation-les}) の境界写像を誘導する。
+\end{lemma}
+
+\begin{proof}
+写像 $\pi \circ \text{d}_L \circ s$ は，構成により $A$-加群構造および次数付けと
+両立する。《ホモロジー》補題
+\ref{homology-lemma-ses-termwise-split-cochain} により，微分とも両立する。
+$R$ を，$A$ がその上の微分次数付き代数となる環とする。写像の一致は
+$R$-加群についての主張である。したがって，これは《ホモロジー》補題
+\ref{homology-lemma-ses-termwise-split-cochain} および
+\ref{homology-lemma-ses-termwise-split-long-cochain} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-make-commute-map}
+$(A, \text{d})$ を微分次数付き代数とする。
+$$
+\xymatrix{
+K \ar[r]_f \ar[d]_a & L \ar[d]^b \\
+M \ar[r]^g & N
+}
+$$
+を微分次数付き $A$-加群の準同型からなるホモトピー可換図式とする。
+\begin{enumerate}
+\item $f$ が許容単射ならば，$b$ は図式を可換にする準同型とホモトピックである。
+\item $g$ が許容全射ならば，$a$ は図式を可換にする射とホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$h : K \to N$ を $bf$ と $ga$ の間のホモトピーとする。すなわち，
+$bf - ga = \text{d}h + h\text{d}$ とする。$\pi : L \to K$ が $f$ の左逆である
+次数付き $A$-加群写像ならば，$b' = b - \text{d}h\pi - h\pi \text{d}$ とおく。
+$s : N \to M$ が $g$ の右逆である次数付き $A$-加群写像ならば，
+$a' = a + \text{d}sh + sh\text{d}$ とおく。計算は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-make-injective}
+$(A, \text{d})$ を微分次数付き代数とし，$\alpha : K \to L$ を微分次数付き
+$A$-加群の準同型とする。$\text{Mod}_{(A, \text{d})}$ において分解
+$$
+\xymatrix{
+K \ar[r]^{\tilde \alpha} \ar@/_1pc/[rr]_\alpha &
+\tilde L \ar[r]^\pi & L
+}
+$$
+が存在し，次を満たす。
+\begin{enumerate}
+\item $\tilde \alpha$ は許容単射である（定義
+\ref{dga-definition-admissible-ses} 参照）。
+\item $\pi \circ s = \text{id}_L$ を満たし，かつ $s \circ \pi$ が
+$\text{id}_{\tilde L}$ とホモトピックである射 $s : L \to \tilde L$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+証明は《導来圏》補題 \ref{derived-lemma-make-injective} の証明と同一である。
+すなわち，$\tilde L = L \oplus C(1_K)$ とおき，錐の構成の基本的性質を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-sequence-maps-split}
+$(A, \text{d})$ を微分次数付き代数とする。
+$L_1 \to L_2 \to \ldots \to L_n$ を，微分次数付き $A$-加群の合成可能な
+準同型の列とする。$\text{Mod}_{(A, \text{d})}$ において可換図式
+$$
+\xymatrix{
+L_1 \ar[r] &
+L_2 \ar[r] &
+\ldots \ar[r] &
+L_n \\
+M_1 \ar[r] \ar[u] &
+M_2 \ar[r] \ar[u] &
+\ldots \ar[r] &
+M_n \ar[u]
+}
+$$
+が存在し，各 $M_i \to M_{i + 1}$ は許容単射，各 $M_i \to L_i$ は
+ホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+$n = 1$ の場合は主張がない。補題 \ref{dga-lemma-make-injective} が $n = 2$ の場合である。
+$M_n$ を除く図式が構成済みであるとする。合成
+$M_{n - 1} \to L_{n - 1} \to L_n$ に補題 \ref{dga-lemma-make-injective} を適用する。
+その結果が，望む分解 $M_{n - 1} \to M_n \to L_n$ である。
+\end{proof}
+
+
+
+\begin{lemma}
+\label{dga-lemma-nilpotent}
+$(A, \text{d})$ を微分次数付き代数とする。
+$0 \to K_i \to L_i \to M_i \to 0$，$i = 1, 2, 3$ を微分次数付き $A$-加群の
+許容短完全列とする。$b : L_1 \to L_2$ および $b' : L_2 \to L_3$ を
+微分次数付き加群の準同型であって，
+$$
+\vcenter{
+\xymatrix{
+K_1 \ar[d]_0 \ar[r] &
+L_1 \ar[r] \ar[d]_b &
+M_1 \ar[d]_0 \\
+K_2 \ar[r] & L_2 \ar[r] & M_2
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+K_2 \ar[d]^0 \ar[r] &
+L_2 \ar[r] \ar[d]^{b'} &
+M_2 \ar[d]^0 \\
+K_3 \ar[r] & L_3 \ar[r] & M_3
+}
+}
+$$
+がホモトピー可換となるものとする。このとき $b' \circ b$ は $0$ とホモトピックである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{dga-lemma-make-commute-map} により，$b$ および $b'$ をホモトピックな写像で
+置き換え，左側の図式の右の正方形と，右側の図式の左の正方形とを可換にできる。
+言い換えれば，$\Im(b) \subset \Im(K_2 \to L_2)$ および
+$\Ker(b') \supset \Im(K_2 \to L_2)$ が成り立つ。したがって，加群の写像として
+$b' \circ b = 0$ である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{識別三角形}
+\label{dga-section-distinguished}
+
+\noindent
+次の補題により識別三角形が得られる。
+
+\begin{lemma}
+\label{dga-lemma-triangle-independent-splittings}
+$(A, \text{d})$ を微分次数付き代数とする。
+$0 \to K \to L \to M \to 0$ を微分次数付き $A$-加群の許容短完全列とする。
+補題 \ref{dga-lemma-admissible-ses} の $\delta$ を用いた三角形
+\begin{equation}
+\label{dga-equation-triangle-associated-to-admissible-ses}
+K \to L \to M \xrightarrow{\delta} K[1]
+\end{equation}
+は，$K(\text{Mod}_{(A, \text{d})})$ における標準同型を除いて，補題
+\ref{dga-lemma-admissible-ses} で行った選択に依存しない。
+\end{lemma}
+
+\begin{proof}
+具体的に，$(s', \pi')$ を補題 \ref{dga-lemma-admissible-ses} における分裂の第二の
+選択とする。このとき $\delta$ と $\delta'$ はホモトピックであると主張する。
+実際，次数 $-1$ の一意な $A$-加群準同型 $h : M \to K$ および $g : M \to K$ を用いて
+%% P03-STACKS-E883: frozen degree claim retained; see sidecar.
+$s' = s + \alpha \circ h$，$\pi' = \pi + g \circ \beta$ と書く。
+すると $g = -h$ であり，$g$ は $\delta$ と $\delta'$ の間のホモトピーである。
+計算は《ホモロジー》補題
+\ref{homology-lemma-ses-termwise-split-homotopy-cochain} の証明で行われている。
+\end{proof}
+
+\begin{definition}
+\label{dga-definition-distinguished-triangle}
+$(A, \text{d})$ を微分次数付き代数とする。
+\begin{enumerate}
+\item $0 \to K \to L \to M \to 0$ が微分次数付き $A$-加群の許容短完全列ならば，
+{\it $0 \to K \to L \to M \to 0$ に付随する三角形}とは，
+$K(\text{Mod}_{(A, \text{d})})$ の三角形
+(\ref{dga-equation-triangle-associated-to-admissible-ses}) をいう。
+\item $K(\text{Mod}_{(A, \text{d})})$ の三角形が {\it 識別三角形}であるとは，
+微分次数付き $A$-加群の許容短完全列に付随する三角形と同型であることをいう。
+\end{enumerate}
+\end{definition}
+
+
+
+
+
+
+
+
+
+\section{錐と識別三角形}
+\label{dga-section-cones-and-triangles}
+
+\noindent
+$(A, \text{d})$ を微分次数付き代数とし，$f : K \to L$ を微分次数付き
+$A$-加群の準同型とする。このとき $(K, L, C(f), f, i, p)$ は三角形
+$$
+K \to L \to C(f) \to K[1]
+$$
+を $\text{Mod}_{(A, \text{d})}$ において，したがって
+$K(\text{Mod}_{(A, \text{d})})$ においてなす。一般に錐は識別三角形では
+{\bf ない}が，両者の違いは符号または回転（どちらと見るかは任意）である。
+正確な二つの主張を述べる。
+
+\begin{lemma}
+\label{dga-lemma-rotate-cone}
+$(A, \text{d})$ を微分次数付き代数とし，$f : K \to L$ を微分次数付き加群の
+準同型とする。三角形 $(L, C(f), K[1], i, p, f[1])$ は，$f$ の錐の定義から
+得られる許容短完全列
+$$
+0 \to L \to C(f) \to K[1] \to 0
+$$
+に付随する三角形である。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-rotate-triangle}
+$(A, \text{d})$ を微分次数付き代数とする。$\alpha : K \to L$ および
+$\beta : L \to M$ が微分次数付き $A$-加群の許容短完全列
+$$
+0 \to K \to L \to M \to 0
+$$
+を定めるとする。$(K, L, M, \alpha, \beta, \delta)$ を付随する三角形とする。
+このとき三角形
+$$
+(M[-1], K, L, \delta[-1], \alpha, \beta)
+\quad\text{and}\quad
+(M[-1], K, C(\delta[-1]), \delta[-1], i, p)
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+分裂を選んで $L = K \oplus M$ と書き，$\alpha$ および $\beta$ を自然な包含写像と
+射影写像に同一視する。$\delta$ の構成により
+%% P03-STACKS-E523: frozen differential name retained; see sidecar.
+$$
+d_B =
+\left(
+\begin{matrix}
+d_K & \delta \\
+0 & d_M
+\end{matrix}
+\right)
+$$
+を得る。一方，$\delta[-1] : M[-1] \to K$ の錐は
+$C(\delta[-1]) = K \oplus M$ で与えられ，その微分は上の行列と同一である。
+これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-third-isomorphism}
+$(A, \text{d})$ を微分次数付き代数とする。$f_1 : K_1 \to L_1$ および
+$f_2 : K_2 \to L_2$ を微分次数付き $A$-加群の準同型とする。
+$$
+(a, b, c) :
+(K_1, L_1, C(f_1), f_1, i_1, p_1)
+\longrightarrow
+(K_1, L_1, C(f_1), f_2, i_2, p_2)
+$$
+を $K(\text{Mod}_{(A, \text{d})})$ の三角形の任意の射とする。
+$a$ および $b$ がホモトピー同値ならば，$c$ もホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+微分次数付き $A$-加群の準同型 $a^{-1} : K_2 \to K_1$ であって，
+$K(\text{Mod}_{(A, \text{d})})$ において $a$ の逆となるものをとる。同様に，
+$K(\text{Mod}_{(A, \text{d})})$ において $b$ の逆となる微分次数付き $A$-加群の
+準同型 $b^{-1} : L_2 \to L_1$ をとる。$c' : C(f_2) \to C(f_1)$ を，
+$f_1 \circ a^{-1} = b^{-1} \circ f_2$ に補題 \ref{dga-lemma-functorial-cone} を
+適用して得られる射とする。$c \circ c'$ および $c' \circ c$ が
+$K(\text{Mod}_{(A, \text{d})})$ において同型であることを示せばよい。
+したがって，次を証明すれば十分である。三角形の射
+$(1, 1, c) : (K, L, C(f), f, i, p)$
+が $K(\text{Mod}_{(A, \text{d})})$ において与えられたならば，$c$ は
+$K(\text{Mod}_{(A, \text{d})})$ における同型である。仮定により，図式
+$$
+\xymatrix{
+L \ar[r] \ar[d]_1 &
+C(f) \ar[r] \ar[d]_c &
+K[1] \ar[d]_1 \\
+L \ar[r] &
+C(f) \ar[r] &
+K[1]
+}
+$$
+の二つの正方形はホモトピー可換である。$C(f)$ の構成により，各行は許容短完全列を
+なす。ゆえに補題 \ref{dga-lemma-nilpotent} により，$K(\text{Mod}_{(A, \text{d})})$
+において $(c - 1)^2 = 0$ である。したがって $c$ は
+$K(\text{Mod}_{(A, \text{d})})$ における同型であり，その逆は $2 - c$ である。
+\end{proof}
+
+\noindent
+次の補題は，ホモトピー圏において錐によって与えられる三角形の集まりと識別三角形の
+集まりとが，少なくとも符号を除けば，同型を除いて同じであることを示す。
+
+\begin{lemma}
+\label{dga-lemma-the-same-up-to-isomorphisms}
+$(A, \text{d})$ を微分次数付き代数とする。
+\begin{enumerate}
+\item 微分次数付き $A$-加群の許容短完全列
+$0 \to K \xrightarrow{\alpha} L \to M \to 0$ が与えられると，図式
+$$
+\xymatrix{
+K \ar[r] \ar[d] & L \ar[d] \ar[r] &
+C(\alpha) \ar[r]_{-p} \ar[d] & K[1] \ar[d] \\
+K \ar[r]^\alpha & L \ar[r]^\beta &
+M \ar[r]^\delta & K[1]
+}
+$$
+が $K(\text{Mod}_{(A, \text{d})})$ における三角形の同型を定めるような
+ホモトピー同値 $C(\alpha) \to M$ が存在する。
+\item 複体の射 $f : K \to L$ が与えられると，三角形の同型
+$$
+\xymatrix{
+K \ar[r] \ar[d] & \tilde L \ar[d] \ar[r] &
+M \ar[r]_{\delta} \ar[d] & K[1] \ar[d] \\
+K \ar[r] & L \ar[r] &
+C(f) \ar[r]^{-p} & K[1]
+}
+$$
+が存在する。ここで上の三角形は許容短完全列 $K \to \tilde L \to M$ に付随する
+三角形である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$C(\alpha) = L \oplus K$ であり，$L$ への射影に続けて $\beta$ を
+施すことにより $C(\alpha) \to M$ を定義する。合成
+$K^{n + 1} \to L^{n + 1} \to M^{n + 1}$ は零なので，これは微分次数付き加群の射を
+定める。$\Ker(\pi) = \Im(s)$ を満たす分裂 $s : M \to L$ および
+$\pi : L \to K$ を選び，通常どおり $\delta = \pi \circ \text{d}_L \circ s$ とおく。
+ホモトピー逆として，$(s , -\delta)$ で与えられる $M \to C(\alpha)$ をとる。
+$\delta^n$ は，
+$\text{d} \circ s^n - s^{n + 1} \circ \text{d} = \alpha \circ \delta^n$
+を満たす一意な写像 $M^n \to K^{n + 1}$ として特徴づけられるので，これは微分と
+両立する。《ホモロジー》補題
+\ref{homology-lemma-ses-termwise-split-cochain} の証明を参照せよ。
+%% P03-STACKS-E525: frozen C(f) notation retained; see sidecar.
+合成 $M \to C(f) \to M$ は恒等写像である。合成 $C(f) \to M \to C(f)$ は射
+$$
+\left(
+\begin{matrix}
+s \circ \beta & 0 \\
+-\delta \circ \beta & 0
+\end{matrix}
+\right)
+$$
+に等しい。これが恒等写像とホモトピックであることを見るには，行列
+$$
+\left(
+\begin{matrix}
+0 & 0 \\
+\pi & 0
+\end{matrix}
+\right) :
+C(\alpha) = L \oplus K
+\to
+L \oplus K = C(\alpha)
+$$
+で与えられるホモトピー $h : C(\alpha) \to C(\alpha)$ を用いる。次の等式は
+直ちに確認できる。
+$$
+\left(
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right)
+-
+\left(
+\begin{matrix}
+s \\
+-\delta
+\end{matrix}
+\right)
+\left(
+\begin{matrix}
+\beta & 0
+\end{matrix}
+\right)
+=
+\left(
+\begin{matrix}
+\text{d} & \alpha \\
+0 & -\text{d}
+\end{matrix}
+\right)
+\left(
+\begin{matrix}
+0 & 0 \\
+\pi & 0
+\end{matrix}
+\right)
++
+\left(
+\begin{matrix}
+0 & 0 \\
+\pi & 0
+\end{matrix}
+\right)
+\left(
+\begin{matrix}
+\text{d} & \alpha \\
+0 & -\text{d}
+\end{matrix}
+\right)
+$$
+(1) の証明を終えるには，射 $-p : C(\alpha) \to K[1]$（定義
+\ref{dga-definition-cone} 参照）と合成 $C(\alpha) \to M \to K[1]$ とがホモトピーを
+除いて一致することを示さなければならない。これは上から明らかである。実際，
+ホモトピー逆 $(s, -\delta) : M \to C(\alpha)$ を用いて，代わりに二つの写像
+$M \to K[1]$ が一致することを確認できる。そして，望むとおり
+$p \circ (s, -\delta) = -\delta$ である。
+
+\medskip\noindent
+(2) の証明。$\tilde f : K \to \tilde L$，$s : L \to \tilde L$，および
+%% P03-STACKS-E526: frozen retraction type retained; see sidecar.
+$\pi : L \to L$ を補題 \ref{dga-lemma-make-injective} のものとする。
+補題 \ref{dga-lemma-functorial-cone} および \ref{dga-lemma-third-isomorphism} により，三角形
+$(K, L, C(f), i, p)$ と $(K, \tilde L, C(\tilde f), \tilde i, \tilde p)$ は同型である。
+三角形の同型は合成できることに注意せよ。したがって $L$ を $\tilde L$ で，$f$ を
+$\tilde f$ で置き換えてよい。言い換えれば，$f$ が許容単射であると仮定してよい。
+この場合，結果は (1) から従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{ホモトピー圏は三角圏である}
+\label{dga-section-homotopy-triangulated}
+
+\noindent
+まず，これが前三角圏であることを証明する。
+
+\begin{lemma}
+\label{dga-lemma-homotopy-category-pre-triangulated}
+$(A, \text{d})$ を微分次数付き代数とする。自然な移動関手と識別三角形を備えた
+ホモトピー圏 $K(\text{Mod}_{(A, \text{d})})$ は前三角圏である。
+\end{lemma}
+
+\begin{proof}
+TR1 の証明。定義により，識別三角形と同型な任意の三角形は識別三角形である。
+また，$0 \to K \to K \to 0 \to 0$ は許容短完全列なので，任意の三角形
+$(K, K, 0, 1, 0, 0)$ は識別三角形である。最後に，微分次数付き $A$-加群の
+任意の準同型 $f : K \to L$ に対し，補題
+\ref{dga-lemma-the-same-up-to-isomorphisms} により三角形
+$(K, L, C(f), f, i, -p)$ は識別三角形である。
+
+\medskip\noindent
+TR2 の証明。$(X, Y, Z, f, g, h)$ を三角形とし，
+$(Y, Z, X[1], g, h, -f[1])$ が識別三角形であると仮定する。このとき，付随する
+三角形 $(K, L, M, \alpha, \beta, \delta)$ が
+$(Y, Z, X[1], g, h, -f[1])$ と同型になるような許容短完全列
+$0 \to K \to L \to M \to 0$ が存在する。逆向きに回転すると，
+$(X, Y, Z, f, g, h)$ は $(M[-1], K, L, -\delta[-1], \alpha, \beta)$ と同型である。
+補題 \ref{dga-lemma-rotate-triangle} により，三角形
+$(M[-1], K, L, \delta[-1], \alpha, \beta)$ は
+$(M[-1], K, C(\delta[-1]), \delta[-1], i, p)$ と同型である。先の三角形の同型に
+$Y$ 上の $-1$ を前合成すると，$(X, Y, Z, f, g, h)$ は
+$(M[-1], K, C(\delta[-1]), \delta[-1], i, -p)$ と同型であることが従う。
+したがって補題 \ref{dga-lemma-the-same-up-to-isomorphisms} により識別三角形である。
+
+逆に，$(X, Y, Z, f, g, h)$ が識別三角形であるとする。補題
+\ref{dga-lemma-the-same-up-to-isomorphisms} により，これは
+$\text{Mod}_{(A, \text{d})}$ のある射 $f$ に対する三角形
+$(K, L, C(f), f, i, -p)$ と同型である。すると回転した三角形
+$(Y, Z, X[1], g, h, -f[1])$ は $(L, C(f), K[1], i, -p, -f[1])$ と同型であり，
+これはさらに三角形 $(L, C(f), K[1], i, p, f[1])$ と同型である。補題
+\ref{dga-lemma-rotate-cone} によりこの三角形は識別三角形である。したがって望むとおり
+$(Y, Z, X[1], g, h, -f[1])$ は識別三角形である。
+
+\medskip\noindent
+TR3 の証明。$(X, Y, Z, f, g, h)$ および $(X', Y', Z', f', g', h')$ を
+%% P03-STACKS-E527: frozen undefined category name retained; see sidecar.
+$K(\mathcal{A})$ の識別三角形とし，$a : X \to X'$ および $b : Y \to Y'$ を
+$f' \circ a = b \circ f$ を満たす射とする。補題
+\ref{dga-lemma-the-same-up-to-isomorphisms} により，
+$(X, Y, Z, f, g, h) = (X, Y, C(f), f, i, -p)$ かつ
+$(X', Y', Z', f', g', h') = (X', Y', C(f'), f', i', -p')$
+と仮定してよい。ここで，$f, f', a, b$ により与えられる可換図式に補題
+\ref{dga-lemma-functorial-cone} を適用すればよい。
+\end{proof}
+
+\noindent
+TR4 を一般に証明する前に，特別な場合を証明する。
+
+\begin{lemma}
+\label{dga-lemma-two-split-injections}
+$(A, \text{d})$ を微分次数付き代数とする。$\alpha : K \to L$ および
+$\beta : L \to M$ を微分次数付き $A$-加群の許容単射とする。このとき，TR4 が
+成り立つような識別三角形 $(K, L, Q_1, \alpha, p_1, d_1)$，
+$(K, M, Q_2, \beta \circ \alpha, p_2, d_2)$，および
+$(L, M, Q_3, \beta, p_3, d_3)$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$\pi_1 : L \to K$ および $\pi_3 : M \to L$ を，それぞれ $\alpha$ および
+$\beta$ の左逆である次数付き $A$-加群の準同型とする。このとき $K \to M$ も，
+左逆 $\pi_2 = \pi_1 \circ \pi_3$ をもつ許容単射である。$K \to L$，$K \to M$，
+$L \to M$ の余核をそれぞれ $Q_1$，$Q_2$，$Q_3$ と書く。すると次数付き
+$A$-加群として $Q_1 = \Ker(\pi_1)$，$Q_3 = \Ker(\pi_3)$，および
+$Q_2 = \Ker(\pi_2)$ と同一視できる。さらに，次数付き $A$-加群として
+$L = K \oplus Q_1$，$M = L \oplus Q_3$ であり，したがって
+$M = K \oplus Q_1 \oplus Q_3$ である。$\pi_2 = \pi_1 \circ \pi_3$ は $Q_1$ と
+$Q_3$ の双方の上で零であることに注意せよ。ゆえに $Q_2 = Q_1 \oplus Q_3$ である。
+可換図式
+$$
+\begin{matrix}
+0 & \to & K & \to & L & \to & Q_1 & \to & 0 \\
+  &     & \downarrow &     & \downarrow &     & \downarrow  & \\
+0 & \to & K & \to & M & \to & Q_2 & \to & 0 \\
+  &     & \downarrow &     & \downarrow &     & \downarrow  & \\
+0 & \to & L & \to & M & \to & Q_3 & \to & 0
+\end{matrix}
+$$
+を考える。この図式の各行は許容短完全列であり，したがって定義により識別三角形を
+定める。さらに，上の図式の下向きの矢印は選んだ分裂と両立するので，三角形の射
+$$
+(K \to L \to Q_1 \to K[1])
+\longrightarrow
+(K \to M \to Q_2 \to K[1])
+$$
+および
+$$
+(K \to M \to Q_2 \to K[1])
+\longrightarrow
+(L \to M \to Q_3 \to L[1]).
+$$
+を定める。図式の下段の列の分裂 $Q_3 \to M$ を $M \to Q_2$ と合成すると，分裂列
+$0 \to Q_1 \to Q_2 \to Q_3 \to 0$ の分裂が得られることに注意せよ。これから，
+対応する識別三角形
+$$
+(Q_1 \to Q_2 \to Q_3 \to Q_1[1])
+$$
+における射 $\delta : Q_3 \to Q_1[1]$ は，合成
+$Q_3 \to L[1] \to Q_1[1]$ に等しいことが容易に従う。したがって，公理 TR4 の
+結論にある構造が得られる。
+\end{proof}
+
+\noindent
+最終結果を述べる。
+
+\begin{proposition}
+\label{dga-proposition-homotopy-category-triangulated}
+$(A, \text{d})$ を微分次数付き代数とする。自然な移動関手と識別三角形を備えた
+微分次数付き $A$-加群のホモトピー圏 $K(\text{Mod}_{(A, \text{d})})$ は三角圏である。
+\end{proposition}
+
+\begin{proof}
+$K(\text{Mod}_{(A, \text{d})})$ は前三角圏であることが分かっている。したがって
+TR4 を証明すれば十分であり，そのために《導来圏》補題
+\ref{derived-lemma-easier-axiom-four} を用いることができる。$K \to L$ および
+$L \to M$ を $K(\text{Mod}_{(A, \text{d})})$ の合成可能な射とする。補題
+\ref{dga-lemma-sequence-maps-split} により，$K \to L$ および $L \to M$ が許容単射で
+あると仮定してよい。この場合，結果は補題 \ref{dga-lemma-two-split-injections} から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{左加群}
+\label{dga-section-left-modules}
+
+\noindent
+これまで述べたことはすべて左微分次数付き加群の設定にも類似物をもつが，いくつかの
+符号規則には注意が必要である。
+
+\medskip\noindent
+$(A, \text{d})$ を微分次数付き $R$-代数とする。右加群の場合とまったく同様に，
+{\it 左微分次数付き $A$-加群} $M$ を，次数付け $M = \bigoplus M^n$ と微分
+$\text{d}$ を備えた左 $A$-加群 $M$ であって，$A^n M^m \subset M^{n + m}$ および
+$\text{d}(M^n) \subset M^{n + 1}$ を満たし，さらに
+$$
+\text{d}(am) = \text{d}(a) m + (-1)^{\deg(a)}a \text{d}(m)
+$$
+が斉次元 $a \in A$ および $m \in M$ に対して成り立つものとして定義する。
+前と同様に，この Leibniz 則は乗法が複体の写像
+$$
+\text{Tot}(A^\bullet \otimes_R M^\bullet) \to M^\bullet
+$$
+を定めることにほかならない。ここで $A^\bullet$ および $M^\bullet$ は，それぞれ
+$A$ および $M$ の台となる $R$-加群の複体を表す。
+
+\begin{definition}
+\label{dga-definition-opposite-dga}
+$R$ を環とし，$(A, \text{d})$ を $R$ 上の微分次数付き代数とする。
+{\it 反対微分次数付き代数}とは，次数付き $R$-加群として $A^{opp} = A$，
+$\text{d} = \text{d}$ であり，乗法が斉次元 $a, b \in A$ に対して
+$$
+a \cdot_{opp} b = (-1)^{\deg(a)\deg(b)} b a
+$$
+で与えられる $R$ 上の微分次数付き代数 $(A^{opp}, \text{d})$ をいう。
+\end{definition}
+
+\noindent
+これは，望むとおり
+\begin{align*}
+\text{d}(a \cdot_{opp} b)
+& =
+(-1)^{\deg(a)\deg(b)} \text{d}(b a) \\
+& =
+(-1)^{\deg(a)\deg(b)} \text{d}(b) a +
+(-1)^{\deg(a)\deg(b) + \deg(b)}b\text{d}(a) \\
+& =
+(-1)^{\deg(a)}a \cdot_{opp} \text{d}(b) + \text{d}(a) \cdot_{opp} b
+\end{align*}
+となるので意味をもつ。台となる $R$-加群の複体を用いて言えば，これは図式
+$$
+\xymatrix{
+\text{Tot}(A^\bullet \otimes_R A^\bullet)
+\ar[rrr]_-{A^{opp}\text{ の乗法}}
+\ar[d]_{\text{可換性制約}} & & &
+A^\bullet \ar[d]^{\text{id}} \\
+\text{Tot}(A^\bullet \otimes_R A^\bullet)
+\ar[rrr]^-{A\text{ の乗法}} & & &
+A^\bullet
+}
+$$
+が可換であることを意味する。ここで $R$-加群の複体の対称モノイド圏における
+可換性制約は，《代数詳論》第 \ref{more-algebra-section-sign-rules} 節で与えられる。
+
+\medskip\noindent
+$(A, \text{d})$ を $R$ 上の微分次数付き代数とし，$M$ を左微分次数付き
+$A$-加群とする。$M$ を，斉次元 $a$ および $m$ に対して規則
+$$
+m \cdot_{opp} a = (-1)^{\deg(a)\deg(m)} a m
+$$
+で定義される乗法 $\cdot_{opp}$ を備えた右 $A^{opp}$-加群とみなしたものを
+$M^{opp}$ と書く。これは微分と両立する。実際，$M^{opp}$ 上の乗法
+$\cdot_{opp}$ を定義するために図式
+$$
+\xymatrix{
+\text{Tot}(M^\bullet \otimes_R A^\bullet)
+\ar[rrr]_-{M^{opp}\text{ 上の乗法}}
+\ar[d]_{\text{可換性制約}} & & &
+M^\bullet \ar[d]^{\text{id}} \\
+\text{Tot}(A^\bullet \otimes_R M^\bullet)
+\ar[rrr]^-{M\text{ 上の乗法}} & & &
+M^\bullet
+}
+$$
+を用いることもできた。これが結合的な乗法であることを見るため，斉次元
+$a, b \in A$ および $m \in M$ に対して計算すると
+\begin{align*}
+m \cdot_{opp} (a \cdot_{opp} b)
+& =
+(-1)^{\deg(a)\deg(b)} m \cdot_{opp} (ba) \\
+& =
+(-1)^{\deg(a)\deg(b) + \deg(ab)\deg(m)} bam \\
+& =
+(-1)^{\deg(a)\deg(b) + \deg(ab)\deg(m) + \deg(b)\deg(am)}
+(am) \cdot_{opp} b \\
+& =
+(-1)^{\deg(a)\deg(b) + \deg(ab)\deg(m) + \deg(b)\deg(am) + \deg(a)\deg(m)}
+(m \cdot_{opp} a) \cdot_{opp} b \\
+& =
+(m \cdot_{opp} a) \cdot_{opp} b
+\end{align*}
+を得る。もちろん，$R$-加群の複体の対称モノイド圏における結合性制約と
+可換性制約との両立性を用いてこれを示すこともできた。
+
+\begin{lemma}
+\label{dga-lemma-left-right}
+$(A, \text{d})$ を微分次数付き $R$-代数とする。左微分次数付き $A$-加群の圏から
+右微分次数付き $A^{opp}$-加群の圏への関手 $M \mapsto M^{opp}$ は同値である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+次にシフトを扱う。$(A, \text{d})$ を微分次数付き代数とし，$M$ を，台となる
+$R$-加群の複体を $M^\bullet$ と書く左微分次数付き $A$-加群とする。任意の
+$k \in \mathbf{Z}$ に対して，{\it $k$-シフト加群} $M[k]$ を次のように定義する。
+\begin{enumerate}
+\item $M[k]$ の台となる $R$-加群の複体は $M^\bullet[k]$ である。
+\item $A$-加群としての乗法
+$$
+A^n \times (M[k])^m \longrightarrow (M[k])^{n + m}
+$$
+は，与えられた乗法 $A^n \times M^{m + k} \to M^{n + m + k}$ の
+$(-1)^{nk}$ 倍に等しい。
+\end{enumerate}
+この選択により Leibniz 則が満たされることを確認しよう。$a \in A^n$ および
+$x \in M[k]^m = M^{m + k}$ とし，$M[k]$ における積を $\cdot_{M[k]}$ と書くと，
+\begin{align*}
+\text{d}_{M[k]}(a \cdot_{M[k]} x)
+& =
+(-1)^{k + nk} \text{d}_M(ax) \\
+& =
+(-1)^{k + nk} \text{d}(a) x + (-1)^{k + nk + n} a \text{d}_M(x) \\
+& =
+\text{d}(a) \cdot_{M[k]} x + (-1)^{nk + n} a \text{d}_{M[k]}(x) \\
+& =
+\text{d}(a) \cdot_{M[k]} x + (-1)^n a \cdot_{M[k]} \text{d}_{M[k]}(x)
+\end{align*}
+を得る。$a$ は $A$ の斉次元として次数 $n$ をもつので，これは望んだ式である。
+また，この選択のもとでは乗法写像を複体の写像
+$$
+\text{Tot}(A^\bullet \otimes_R M^\bullet[k]) \to
+\text{Tot}(A^\bullet \otimes_R M^\bullet)[k] \to
+M^\bullet[k]
+$$
+とみなせる。ここで最初の矢印は《代数詳論》第
+\ref{more-algebra-section-sign-rules} 節の
+(\ref{more-algebra-item-shift-tensor}) であり，この場合には上で選んだ符号が
+ちょうど現れる。（実際，この観察から Leibniz 則が成り立つことを導くこともできた。）
+
+\medskip\noindent
+上の規則により，符号を介さずに右微分次数付き $A^{opp}$-加群の標準的同一視
+$$
+(M[k])^{opp} = M^{opp}[k]
+$$
+が得られる。言い換えれば，補題 \ref{dga-lemma-left-right} の同値はシフト関手と両立する。
+
+\medskip\noindent
+上の選択により，次の定義が必要になる。
+
+\begin{definition}
+\label{dga-definition-shift-graded-module}
+$R$ を環とし，$A$ を $\mathbf{Z}$-次数付き $R$-代数とする。
+\begin{enumerate}
+\item 右次数付き $A$-加群 $M$ に対し，{\it 第 $k$ シフト $A$-加群} $M[k]$ を，
+右 $A$-加群としては同じで，次数付けを $(M[k])^n = M^{n + k}$ としたものと定義する。
+\item 左次数付き $A$-加群 $M$ に対し，{\it 第 $k$ シフト $A$-加群} $M[k]$ を，
+次数付け $(M[k])^n = M^{n + k}$ をもち，乗法
+$A^n \times (M[k])^m \to (M[k])^{n + m}$ が与えられた乗法
+$A^n \times M^{m + k} \to M^{n + m + k}$ の $(-1)^{nk}$ 倍に等しい加群と定義する。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(A, \text{d})$ を微分次数付き代数とし，$f, g : M \to N$ を左微分次数付き
+$A$-加群の準同型とする。{\it $f$ と $g$ の間のホモトピー}とは，次を満たす
+次数付き $A$-加群写像 $h : M \to N[-1]$（シフトに注意せよ）のことである。
+$$
+f(x) - g(x) = \text{d}_N(h(x)) + h(\text{d}_M(x))
+$$
+ここでこの等式はすべての $x \in M$ に対して成り立つ。ホモトピーが存在するとき，
+$f$ と $g$ は {\it ホモトピック}であるという。したがって $h$ は $A$-加群構造
+（$N$ 上ではシフトしたもの）および次数付け（$N$ 上ではシフトした次数付け）と
+両立するが，微分とは両立しない。$f = g$ で $h$ がホモトピーならば，$h$ は
+左微分次数付き $A$-加群の射 $h : M \to N[-1]$ を定める。
+
+\medskip\noindent
+上の規則により，$f, g : M \to N$ がホモトピックであるための必要十分条件は，
+誘導される射 $f^{opp}, g^{opp} : M^{opp} \to N^{opp}$ が右微分次数付き
+$A^{opp}$-加群の準同型として（同じホモトピーにより）ホモトピックであることである。
+
+\medskip\noindent
+ホモトピー圏，錐，許容短完全列，識別三角形はすべて，右微分次数付き加群の場合と
+まったく同じ仕方で定義する（また，台となる $R$-加群の複体上では，すべてが
+$R$-加群の複体に対する構成と一致する）。このようにして，左加群についても命題
+\ref{dga-proposition-homotopy-category-triangulated} の類似物を得る。あるいは，反対代数上の
+右加群を扱うことによりこれを導くこともできる。
+
+
+
+\section{テンソル積}
+\label{dga-section-tensor-product}
+
+\noindent
+$R$ を環とし，$A$ を $R$-代数とする（第 \ref{dga-section-conventions} 節参照）。
+右 $A$-加群 $M$ と左 $A$-加群 $N$ が与えられると，{\it テンソル積}
+$$
+M \otimes_A N
+$$
+がある。このテンソル積は $R$-加群である。$R$-加群として $M \otimes_A N$ は，
+$x \in M$ および $y \in N$ に対する記号 $x \otimes y$ により，関係式
+$$
+\begin{matrix}
+(x_1 + x_2) \otimes y - x_1 \otimes y - x_2 \otimes y, \\
+x \otimes (y_1 + y_2) - x \otimes y_1 - x \otimes y_2, \\
+xa \otimes y - x \otimes ay
+\end{matrix}
+$$
+（ここで $a \in A$，$x, x_1, x_2 \in M$，$y, y_1, y_2 \in N$）を課して生成される。
+テンソル積のいくつかの性質を挙げる。
+
+\medskip\noindent
+テンソル積は各変数について右完全であり，実際，直和および任意の余極限と可換する。
+
+\medskip\noindent
+テンソル積 $M \otimes_A N$ は普遍 $A$-双線形写像
+$M \times N \to M \otimes_A N$，$(x, y) \mapsto x \otimes y$ の受け皿である。
+式で書けば，任意の $R$-加群 $Q$ に対して
+$$
+\text{双線形}_A(M \times N, Q) = \Hom_R(M \otimes_A N, Q)
+$$
+である。
+
+\medskip\noindent
+$A$ が $\mathbf{Z}$-次数付き代数で，$M$，$N$ が次数付き $A$-加群ならば，
+$M \otimes_A N$ は次数付き $R$-加群である。このとき $M \otimes_A N$ の
+第 $n$ 次数成分 $(M \otimes_A N)^n$ は
+$$
+\Coker\left(
+\bigoplus\nolimits_{r + t + s = n}
+M^r \otimes_R A^t \otimes_R N^s \to
+\bigoplus\nolimits_{p + q = n} M^p \otimes_R N^q
+\right)
+$$
+に等しい。ここで写像は，$r + s + t = n$ を満たす
+$x \in M^r$，$y \in N^s$，$a \in A^t$ に対し，$x \otimes a \otimes y$ を
+$x \otimes ay - xa \otimes y$ へ送る。この場合，写像
+$M \times N \to M \otimes_A N$ は $A$-双線形で，次数付けと両立し，任意の
+次数付き $R$-加群 $Q$ に対して
+$$
+\text{次数付き双線形}_A(M \times N, Q) =
+\Hom_{\text{次数付き }R\text{-加群}}(M \otimes_A N, Q)
+$$
+という意味で普遍である。ここでは，次数付き双線形写像という明らかな概念を用いた。
+
+\medskip\noindent
+$(A, \text{d})$ が微分次数付き代数で，$M$ および $N$ がそれぞれ左および右の
+微分次数付き $A$-加群ならば，$M \otimes_A N$ は，斉次元 $x \in M$ および
+$y \in N$ に対して微分
+$$
+\text{d}(x \otimes y) =
+\text{d}(x) \otimes y + (-1)^{\deg(x)}x \otimes \text{d}(y)
+$$
+をもつ微分次数付き $R$-加群である。この場合，写像
+$M \times N \to M \otimes_A N$ は $A$-双線形で，次数付けおよび微分と両立し，
+任意の微分次数付き $R$-加群 $Q$ に対して
+$$
+\text{微分次数付き双線形}_A(M \times N, Q) =
+\Hom_{\text{Comp}(R)}(M \otimes_A N, Q)
+$$
+という意味で普遍である。ここでは，微分次数付き双線形写像という明らかな概念を用いた。
+
+
+
+
+
+
+\section{Hom 複体と微分次数付き加群}
+\label{dga-section-hom-complexes}
+
+\noindent
+読者には本節を読み飛ばすことを強く勧める。
+
+\medskip\noindent
+$R$ を環とし，$M^\bullet$ を $R$-加群の複体とする。《代数詳論》第
+\ref{more-algebra-section-hom-complexes} 節で導入した $R$-加群の複体
+$$
+E^\bullet = \Hom^\bullet(M^\bullet, M^\bullet)
+$$
+を考える。《代数詳論》補題 \ref{more-algebra-lemma-composition} により，標準的な
+合成則
+$$
+\text{Tot}(E^\bullet \otimes_R E^\bullet) \to E^\bullet
+$$
+があり，これは複体の写像である。したがって，この乗法を備えた $E^\bullet$ は
+微分次数付き $R$-代数であり，これを $(E, \text{d})$ と書く。さらに，
+$M^\bullet$ を $\Hom^\bullet(R, M^\bullet)$ とみなすと，合成により乗法
+$$
+\text{Tot}(E^\bullet \otimes_R M^\bullet) \to M^\bullet
+$$
+が定まり，$M^\bullet$ は {\bf 左}微分次数付き $E$-加群となる。これを $M$ と書く。
+
+\begin{lemma}
+\label{dga-lemma-left-module-structure}
+上の状況で，$A$ を微分次数付き $R$-代数とする。$M$ に左 $A$-加群構造を与えることと，
+微分次数付き $R$-代数の準同型 $A \to E$ を与えることとは同じである。
+\end{lemma}
+
+\begin{proof}
+証明は省略する。この対応には符号が介在しないことに注意せよ。
+\end{proof}
+
+\noindent
+上の議論を続け，別の $R$-加群の複体 $N^\bullet$ が与えられているとする。
+《代数詳論》第 \ref{more-algebra-section-hom-complexes} 節で導入した $R$-加群の複体
+$\Hom^\bullet(M^\bullet, N^\bullet)$ を考える。上と同様に，合成
+$$
+\text{Tot}(\Hom^\bullet(M^\bullet, N^\bullet) \otimes_R E^\bullet)
+\to \Hom^\bullet(M^\bullet, N^\bullet)
+$$
+は，$\Hom^\bullet(M^\bullet, N^\bullet)$ を {\bf 右}微分次数付き $E$-加群とする
+乗法を定める。補題 \ref{dga-lemma-left-module-structure} を用いると，左微分次数付き
+$A$-加群 $M$ と $R$-加群の複体 $N^\bullet$ が与えられれば，台となる $R$-加群の
+複体が $\Hom^\bullet(M^\bullet, N^\bullet)$ である標準的な右微分次数付き
+$A$-加群が存在することが分かる。その乗法
+$$
+\Hom^n(M^\bullet, N^\bullet) \times A^m \longrightarrow
+\Hom^{n + m}(M^\bullet, N^\bullet)
+$$
+は，$f_{p, q} \in \Hom(M^{-q}, N^p)$ をもつ
+$f = (f_{p, q})_{p + q = n}$ と $a \in A^m$ を元
+$f \cdot a = (f_{p, q} \circ a)$ へ送る。ここで $f_{p, q} \circ a$ は写像
+$$
+M^{-q - m} \xrightarrow{a} M^{-q} \xrightarrow{f_{p, q}} N^p, \quad
+x \longmapsto f_{p, q}(ax)
+$$
+であり，符号は介在しない。この右微分次数付き $A$-加群を
+$\Hom(M, N^\bullet)$ と書く。
+
+\begin{lemma}
+\label{dga-lemma-characterize-hom}
+$R$ を環，$(A, \text{d})$ を微分次数付き $R$-代数とする。$M'$ を右微分次数付き
+$A$-加群，$M$ を左微分次数付き $A$-加群とし，$N^\bullet$ を $R$-加群の複体とする。
+このとき
+$$
+\Hom_{\text{Mod}_{(A, d)}}(M', \Hom(M, N^\bullet)) =
+\Hom_{\text{Comp}(R)}(M' \otimes_A M, N^\bullet)
+$$
+が成り立つ。ここで，$M \otimes_A M$ は第 \ref{dga-section-tensor-product} 節のように
+%% P03-STACKS-E534: frozen missing prime retained; see sidecar.
+$R$-加群の複体とみなす。
+\end{lemma}
+
+\begin{proof}
+両辺が，微分と両立する次数付き $A$-双線形写像
+$$
+M' \times M \longrightarrow N^\bullet
+$$
+に対応することを示そう。右辺については，第 \ref{dga-section-tensor-product} 節で
+すでに見た。左辺の元 $g$ が与えられると，《代数詳論》補題
+\ref{more-algebra-lemma-compose} の等式により，$R$-加群の複体の写像
+$g' : \text{Tot}(M' \otimes_R M) \to N^\bullet$ が定まる。言い換えれば，微分と
+両立する次数付き $R$-双線形写像 $g'' : M' \times M \to N^\bullet$ が得られる。
+$g$ の $A$-線形性は，直ちに $g''$ の $A$-双線形性へ移る。
+\end{proof}
+
+\noindent
+$R$，$M^\bullet$，$E^\bullet$，$E$，$M$ を上のものとする。ただし今度は，
+微分次数付き $R$-代数 $A$ と，$M$ 上の {\bf 右}微分次数付き $A$-加群構造が
+与えられているとする。このとき写像
+$$
+\text{Tot}(A^\bullet \otimes_R M^\bullet)
+\xrightarrow{\psi}
+\text{Tot}(A^\bullet \otimes_R M^\bullet)
+\to
+M^\bullet
+$$
+を考えることができる。ここで最初の矢印は，$R$-加群の複体からなる微分次数付き圏の
+可換性制約である。これは $R$-加群の複体の写像
+$$
+\tau : A^\bullet \longrightarrow E^\bullet
+$$
+に対応する。$E^n = \prod_{p + q = n} \Hom_R(M^{-q}, M^p)$ を思い出し，
+$a \in A^n$ に対して $\tau(a) = (\tau_{p, q}(a))_{p + q = n}$ と書く。このとき
+$$
+\tau_{p, q}(a) : M^{-q} \longrightarrow M^p,\quad
+x \longmapsto (-1)^{\deg(a)\deg(x)}x a = (-1)^{-nq}xa
+$$
+これは，第 \ref{dga-section-left-modules} 節の議論から予想されるとおり，$A$ 上の積とは
+両立しない。実際，
+$$
+\tau(a a') = (-1)^{\deg(a)\deg(a')}\tau(a') \tau(a)
+$$
+である。したがって次の補題が成り立つ。
+
+\begin{lemma}
+\label{dga-lemma-right-module-structure}
+上の状況で，$A$ を微分次数付き $R$-代数とする。$M$ に右 $A$-加群構造を与えることと，
+微分次数付き $R$-代数の準同型 $\tau : A \to E^{opp}$ を与えることとは同じである。
+\end{lemma}
+
+\begin{proof}
+上の議論を参照せよ。乗法写像 $M^n \times A^m \to M^{n + m}$ から $\tau$ を
+構成する際には符号を用いることに注意せよ。
+\end{proof}
+
+\noindent
+$R$，$M^\bullet$，$E^\bullet$，$E$，$A$，$M$ を上のものとし，補題のように $M$ 上に
+右微分次数付き $A$-加群構造が与えられているとする。この場合，台となる $R$-加群の
+複体が $\Hom^\bullet(M^\bullet, N^\bullet)$ である標準的な左微分次数付き
+$A$-加群が存在する。実際，乗法には次を用いることができる。
+%% P03-STACKS-E536: frozen unclosed final expression retained; see sidecar.
+\begin{align*}
+\text{Tot}(A^\bullet \otimes_R \Hom^\bullet(M^\bullet, N^\bullet))
+& \xrightarrow{\psi}
+\text{Tot}(\Hom^\bullet(M^\bullet, N^\bullet) \otimes_R A^\bullet) \\
+& \xrightarrow{\tau}
+\text{Tot}(\Hom^\bullet(M^\bullet, N^\bullet) \otimes_R
+\Hom^\bullet(M^\bullet, M^\bullet)) \\
+& \to
+\text{Tot}(\Hom^\bullet(M^\bullet, N^\bullet)
+\end{align*}
+最初の矢印は $R$-加群の複体の圏の可換性制約を用い，第二の矢印は上で記述した
+ものであり，第三の矢印は Hom 複体の合成則である。各写像は複体の写像なので，
+その結果も複体の写像である。実際，この構成は
+$\Hom^\bullet(M^\bullet, N^\bullet)$ を左微分次数付き $A$-加群にする
+（乗法の結合性は，対称モノイド構造を用いるか，以下の式を用いた直接計算により
+示せる）。乗法を明示しよう。
+$$
+A^n \times \Hom^m(M^\bullet, N^\bullet) \longrightarrow
+\Hom^{n + m}(M^\bullet, N^\bullet)
+$$
+これは，$a \in A^n$ と，$f_{p, q} \in \Hom(M^{-q}, N^p)$ をもつ
+$f = (f_{p, q})_{p + q = m}$ を，成分
+$$
+(-1)^{nm}f_{p, q} \circ \tau_{-q, q + n}(a) =
+(-1)^{nm - n(q + n)}f_{p, q} \circ a =
+(-1)^{np + n} f_{p, q} \circ a
+$$
+$\Hom_R(M^{-q - n}, N^p)$ をもつ元 $a \cdot f$ へ送る。ここで
+$f_{p, q} \circ a$ は写像
+$$
+M^{-q - n} \xrightarrow{a} M^{-q} \xrightarrow{f_{p, q}} N^p,\quad
+x \longmapsto f_{p, q}(xa)
+$$
+である。ここでは符号 $(-1)^{np + n}$ が実際に介在する。この左微分次数付き
+$A$-加群を $\Hom(M, N^\bullet)$ と書く。
+
+\begin{lemma}
+\label{dga-lemma-characterize-hom-other-side}
+$R$ を環，$(A, \text{d})$ を微分次数付き $R$-代数とする。$M$ を右微分次数付き
+$A$-加群，$M'$ を左微分次数付き $A$-加群とし，$N^\bullet$ を $R$-加群の複体とする。
+このとき
+$$
+\Hom_{\text{左微分次数付き }A\text{-加群}}(M', \Hom(M, N^\bullet)) =
+\Hom_{\text{Comp}(R)}(M \otimes_A M', N^\bullet)
+$$
+が成り立つ。ここで，$M \otimes_A M'$ は第 \ref{dga-section-tensor-product} 節のように
+$R$-加群の複体とみなす。
+\end{lemma}
+
+\begin{proof}
+両辺が，微分と両立する次数付き $A$-双線形写像
+$$
+M \times M' \longrightarrow N^\bullet
+$$
+に対応することを示そう。右辺については，第 \ref{dga-section-tensor-product} 節で
+すでに見た。左辺の元 $g$ が与えられると，《代数詳論》補題
+\ref{more-algebra-lemma-compose} の等式により，複体の写像
+$g' : \text{Tot}(M' \otimes_R M) \to N^\bullet$ が定まる。これに可換性制約を
+前合成して
+$$
+\text{Tot}(M \otimes_R M') \xrightarrow{\psi}
+\text{Tot}(M' \otimes_R M) \xrightarrow{g'}
+N^\bullet
+$$
+を得る。これは微分と両立する次数付き $R$-双線形写像
+$g'' : M \times M' \to N^\bullet$ に対応する。$g$ の $A$-線形性は，直ちに $g''$ の
+$A$-双線形性へ移る。実際，$x \in M^e$，$x' \in (M')^{e'}$，$a \in A^n$ とする。
+一方では
+\begin{align*}
+g''(x, ax')
+& =
+(-1)^{e(n + e')} g'(ax' \otimes x) \\
+& =
+(-1)^{e(n + e')} g(ax')(x) \\
+& =
+(-1)^{e(n + e')} (a \cdot g(x'))(x) \\
+& =
+(-1)^{e(n + e') + n(n + e + e') + n} g(x')(xa)
+\end{align*}
+であり，他方では
+$$
+g''(xa, x') = (-1)^{(e + n)e'} g'(x' \otimes xa) =
+(-1)^{(e + n)e'} g(x')(xa) 
+$$
+である。指数についての自明な法 $2$ の計算により，両者は同じである。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-evaluation-map-left}
+$R$ を環，$A$ を微分次数付き $R$-代数とする。$M$ を左微分次数付き $A$-加群，
+$N^\bullet$ を $R$-加群の複体とする。上の構成により，右微分次数付き $A$-加群
+$\Hom(M, N^\bullet)$ が得られ，次いで左微分次数付き $A$-加群
+$\Hom(\Hom(M, N^\bullet), N^\bullet)$ が得られる。左微分次数付き $A$-加群の圏に
+評価写像
+$$
+ev : M \longrightarrow \Hom(\Hom(M, N^\bullet), N^\bullet)
+$$
+が存在すると主張する。これを定義するには，補題 \ref{dga-lemma-characterize-hom} により，
+次数付けおよび微分と両立する $A$-双線形対
+$$
+\Hom(M, N^\bullet) \times M \longrightarrow N^\bullet
+$$
+を構成すれば十分である。そのために
+$$
+(f, x) \longmapsto f(x)
+$$
+をとる。これが次数付けおよび微分と両立し，$A$-双線形であることの確認は読者に
+委ねる。台となる $R$-加群の複体上での写像 $ev$ は，《代数詳論》項目
+(\ref{more-algebra-item-evaluation}) の写像である。
+\end{remark}
+
+\begin{remark}
+\label{dga-remark-evaluation-map-right}
+$R$ を環，$A$ を微分次数付き $R$-代数とする。$M$ を右微分次数付き $A$-加群，
+$N^\bullet$ を $R$-加群の複体とする。上の構成により，左微分次数付き $A$-加群
+$\Hom(M, N^\bullet)$ が得られ，次いで右微分次数付き $A$-加群
+$\Hom(\Hom(M, N^\bullet), N^\bullet)$ が得られる。右微分次数付き $A$-加群の圏に
+評価写像
+$$
+ev : M \longrightarrow \Hom(\Hom(M, N^\bullet), N^\bullet)
+$$
+が存在すると主張する。これを定義するには，補題 \ref{dga-lemma-characterize-hom} により，
+次数付けおよび微分と両立する $A$-双線形対
+$$
+M \times \Hom(M, N^\bullet) \longrightarrow N^\bullet
+$$
+を構成すれば十分である。そのために
+$$
+(x, f) \longmapsto (-1)^{\deg(x)\deg(f)}f(x)
+$$
+をとる。これが次数付けおよび微分と両立し，$A$-双線形であることの確認は読者に
+委ねる。台となる $R$-加群の複体上での写像 $ev$ は，《代数詳論》項目
+(\ref{more-algebra-item-evaluation}) の写像である。
+\end{remark}
+
+\begin{remark}
+\label{dga-remark-shift-dual}
+$R$ を環，$A$ を微分次数付き $R$-代数とする。$M^\bullet$ および $N^\bullet$ を
+$R$-加群の複体とする。$k \in \mathbf{Z}$ とし，《代数詳論》項目
+(\ref{more-algebra-item-shift-hom}) で定義された $R$-加群の複体の同型
+$$
+\Hom^\bullet(M^\bullet, N^\bullet)[-k]
+\longrightarrow
+\Hom^\bullet(M^\bullet[k], N^\bullet)
+$$
+を考える。$M^\bullet$ が左（それぞれ右）微分次数付き $A$-加群の構造をもつならば，
+これは右（それぞれ左）微分次数付き $A$-加群の写像である（加群構造は本節で
+定義したものを用いる）。確認は省略する。左次数付き $A$-加群のシフト上の
+$A$-加群構造は符号を用いて定義されることに注意せよ。定義
+\ref{dga-definition-shift-graded-module} を参照せよ。
+\end{remark}
+
+
+
+
+
+
+\section{代数上の射影加群}
+\label{dga-section-projectives-over-algebras}
+
+\noindent
+本節では，《代数学》第 \ref{algebra-section-projective} 節と同様に，代数上の
+射影加群を論じる。本節はおそらく別の場所へ移すべきである。
+
+\medskip\noindent
+$R$ を環，$A$ を $R$-代数とする。規約については第
+\ref{dga-section-conventions} 節を参照せよ。任意の右 $A$-加群 $M$ に対して
+$\Hom_A(A, M) = M$ である（したがって $\Hom_A(A, -)$ は完全である）から，$A$ が
+射影右 $A$-加群であることは明らかである。逆に，$P$ を射影右 $A$-加群とする。
+$A$ 上の $P$ の生成元の集合 $\{p_i\}_{i \in I}$ を選ぶことにより，全射
+$\bigoplus_{i \in I} A \to P$ を選べる。$P$ は射影的なのでこの全射には左逆があり，
+可換な場合とまったく同様に，$P$ は自由加群の直和因子と同型であることが分かる
+（《代数学》補題 \ref{algebra-lemma-characterize-projective}）。
+
+\medskip\noindent
+次を得る。
+\begin{enumerate}
+\item $A$-加群の圏は十分な射影対象をもつ。
+\item $A$ は射影 $A$-加群である。
+\item 任意の $A$-加群は $A$ のコピーの直和の商である。
+\item 任意の射影 $A$-加群は $A$ のコピーの直和の直和因子である。
+\end{enumerate}
+
+
+
+\section{次数付き代数上の射影加群}
+\label{dga-section-projectives-over-graded-algebras}
+
+\noindent
+本節では，《代数学》第 \ref{algebra-section-projective} 節と同様に，次数付き代数上の
+射影次数付き加群を論じる。
+
+\medskip\noindent
+$R$ を環とし，$A$ を $R$ 上の $\mathbf{Z}$-次数付き代数とする。規約については第
+\ref{dga-section-conventions} 節を参照せよ。$\text{Mod}_A$ を次数付き右 $A$-加群の圏と
+書く。整数 $k$ に対し，$A[k]$ で $A$ のシフトを表す。次数付き右 $A$-加群 $M$ に
+対して
+$$
+\Hom_{\text{Mod}_A}(A[k], M) = M^{-k}
+$$
+である。関手 $M \mapsto M^{-k}$ は $\text{Mod}_A$ 上で完全なので，$A[k]$ は
+$\text{Mod}_A$ の射影対象である。逆に，$P$ を $\text{Mod}_A$ の射影対象とする。
+$A$-加群としての $P$ の斉次生成元の集合を選ぶことにより，全射
+$$
+\bigoplus\nolimits_{i \in I} A[k_i] \longrightarrow P
+$$
+を得る。したがって，$\text{Mod}_A$ の射影対象は，シフト $A[k]$ の直和の
+直和因子である。
+
+\medskip\noindent
+次を得る。
+\begin{enumerate}
+\item 次数付き $A$-加群の圏は十分な射影対象をもつ。
+\item すべての $k \in \mathbf{Z}$ に対して $A[k]$ は射影 $A$-加群である。
+\item 任意の次数付き $A$-加群は，さまざまな $k$ に対する加群 $A[k]$ のコピーの
+直和の商である。
+\item 任意の射影 $A$-加群は，さまざまな $k$ に対する加群 $A[k]$ のコピーの
+直和の直和因子である。
+\end{enumerate}
+
+
+
+
+\section{射影加群と微分次数付き代数}
+\label{dga-section-projective-over-differential-graded}
+
+\noindent
+$(A, \text{d})$ が微分次数付き代数で，$P$ が $\text{Mod}_{(A, \text{d})}$ の対象ならば，
+{\it $P$ は次数付き $A$-加群として射影的である}，またはときに
+{\it $P$ は次数付き射影的である}という。これは，第
+\ref{dga-section-projectives-over-graded-algebras} 節の次数付き $A$-加群のアーベル圏
+$\text{Mod}_A$ において $P$ が射影対象であることを意味する。
+
+\begin{lemma}
+\label{dga-lemma-target-graded-projective}
+$(A, \text{d})$ を微分次数付き代数とする。$M \to P$ を微分次数付き $A$-加群の
+全射準同型とする。$P$ が次数付き $A$-加群として射影的ならば，$M \to P$ は
+許容全射である。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-hom-from-shift-free}
+$(A, d)$ を微分次数付き代数とする。このとき任意の微分次数付き $A$-加群 $M$ に対して
+$$
+\Hom_{\text{Mod}_{(A, \text{d})}}(A[k], M) =
+\Ker(\text{d} : M^{-k} \to M^{-k + 1})
+$$
+および
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(A[k], M) = H^{-k}(M)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{代数上の入射加群}
+\label{dga-section-modules-noncommutative}
+
+\noindent
+本節では，《代数詳論》第 \ref{more-algebra-section-injectives-modules} 節と同様に，
+代数上の入射加群を論じる。本節はおそらく別の場所へ移すべきである。
+
+\medskip\noindent
+$R$ を環，$A$ を $R$-代数とする。規約については第
+\ref{dga-section-conventions} 節を参照せよ。右 $A$-加群 $M$ に対して
+$$
+M^\vee = \Hom_\mathbf{Z}(M, \mathbf{Q}/\mathbf{Z})
+$$
+とおき，乗法 $(a f)(x) = f(xa)$ によりこれを左 $A$-加群とみなす。実際，
+$((ab)f)(x) = f(xab) = (bf)(xa) = (a(bf))(x)$ である。逆に，$M$ が左
+$A$-加群ならば，$M^\vee$ は右 $A$-加群である。$\mathbf{Q}/\mathbf{Z}$ は入射
+アーベル群なので（《代数詳論》補題
+\ref{more-algebra-lemma-injective-abelian}），関手 $M \mapsto M^\vee$ は完全である
+（《代数詳論》補題 \ref{more-algebra-lemma-vee-exact}）。さらに，任意の加群 $M$ に
+対する評価写像 $M \to (M^\vee)^\vee$ は単射である（《代数詳論》補題
+\ref{more-algebra-lemma-ev-injective}）。
+
+\medskip\noindent
+$A^\vee$ は入射右 $A$-加群であると主張する。実際，右 $A$-加群 $N$ に対して
+$$
+\Hom_A(N, A^\vee) =
+\Hom_A(N, \Hom_\mathbf{Z}(A, \mathbf{Q}/\mathbf{Z})) = N^\vee
+$$
+であり，関手 $N \mapsto N^\vee$ は完全だから主張が従う。第2の等号は，
+$$
+\Hom_\mathbf{Z}(N, \Hom_\mathbf{Z}(A, \mathbf{Q}/\mathbf{Z})) =
+\Hom_\mathbf{Z}(N \otimes_\mathbf{Z} A, \mathbf{Q}/\mathbf{Z})
+$$
+が《代数学》補題 \ref{algebra-lemma-hom-from-tensor-product} により成り立つことから
+従う。この加群のうち $A$-線形なものは，$x \otimes a$ と $xa \otimes 1$ に同じ値を
+とる双線形写像 $\varphi : N \times A \to \mathbf{Q}/\mathbf{Z}$ にちょうど対応する。
+言い換えれば，それらは $N^\vee$ の元から得られる。
+
+\medskip\noindent
+最後に，任意の右 $A$-加群 $M$ に対して全射
+$\bigoplus_{i \in I} A \to M^\vee$ を選べるので，単射
+$M \to (M^\vee)^\vee \to \prod_{i \in I} A^\vee$ を得る。
+
+\medskip\noindent
+以上から次を得る。
+\begin{enumerate}
+\item $A$-加群の圏は十分な入射対象をもつ。
+\item $A^\vee$ は入射 $A$-加群である。
+\item 任意の $A$-加群は $A^\vee$ のコピーの直積に単射で埋め込まれる。
+\end{enumerate}
+
+
+
+
+
+\section{次数付き代数上の入射加群}
+\label{dga-section-modules-noncommutative-graded}
+
+\noindent
+本節では，《代数詳論》第 \ref{more-algebra-section-injectives-modules} 節と同様に，
+次数付き代数上の入射次数付き加群を論じる。
+
+\medskip\noindent
+$R$ を環とし，$A$ を $R$ 上の $\mathbf{Z}$-次数付き代数とする。規約については第
+\ref{dga-section-conventions} 節を参照せよ。$M$ が次数付き $R$-加群ならば，
+$$
+M^\vee =
+\bigoplus\nolimits_{n \in \mathbf{Z}}
+\Hom_\mathbf{Z}(M^{-n}, \mathbf{Q}/\mathbf{Z}) =
+\bigoplus\nolimits_{n \in \mathbf{Z}} (M^{-n})^\vee
+$$
+とおいて次数付き $R$-加群とする（各斉次部分への $R$ の作用には符号を付けない）。
+$M$ が左次数付き $A$-加群の構造をもつならば，$a \in A^m$ の作用を
+$$
+(M^{-n})^\vee \to (M^{-n - m})^\vee, \quad
+f \mapsto f \circ a
+$$
+と定めることにより，第 \ref{dga-section-hom-complexes} 節と同様に $M^\vee$ に右次数付き
+$A$-加群の構造を入れる。$M$ が右次数付き $A$-加群の構造をもつならば，
+$a \in A^n$ の作用を
+$$
+(M^{-m})^\vee \to (M^{-m - n})^\vee, \quad
+f \mapsto (-1)^{nm}f \circ a
+$$
+と定めることにより，第 \ref{dga-section-hom-complexes} 節と同様に $M^\vee$ に左次数付き
+$A$-加群の構造を入れる（微分次数付き加群を扱う場合にも同じ式を用いるため，この
+符号は不可避である。次数付き加群だけを考えるならば，ここで符号を省いてもよい）。
+（左または右）次数付き $A$-加群の圏上で関手 $M \mapsto M^\vee$ は完全である
+（次数付き各部分で確認すればよい）。さらに，単射な評価写像
+$$
+ev : M \longrightarrow (M^\vee)^\vee, \quad
+ev^n = (-1)^n \text{ 評価写像 }M^n \to ((M^n)^\vee)^\vee
+$$
+が次数付き $R$-加群の間に存在する。《代数詳論》項目
+(\ref{more-algebra-item-evaluation}) を参照せよ。$M$ が左（それぞれ右）$A$-加群ならば，
+この評価写像は左（それぞれ右）$A$-加群の準同型である。注意
+\ref{dga-remark-evaluation-map-left} および \ref{dga-remark-evaluation-map-right} を参照せよ。
+最後に，$k \in \mathbf{Z}$ に対し，符号を用いる標準同型
+$$
+M^\vee[-k] \longrightarrow (M[k])^\vee
+$$
+が次数付き $R$-加群の間に存在する。$M$ が左（それぞれ右）$A$-加群ならば，これは
+右（それぞれ左）$A$-加群の同型である。注意 \ref{dga-remark-shift-dual} を参照せよ。
+
+\medskip\noindent
+$A^\vee$ は次数付き右 $A$-加群の圏 $\text{Mod}_A$ の入射対象であると主張する。
+実際，次数付き右 $A$-加群 $N$ に対して
+%% P03-STACKS-E886: frozen unmatched closing parenthesis retained; see sidecar.
+$$
+\Hom_{\text{Mod}_A}(N, A^\vee) =
+\Hom_{\text{Comp}(\mathbf{Z})}(N \otimes_A A, \mathbf{Q}/\mathbf{Z})) =
+(N^0)^\vee
+$$
+である。これは補題 \ref{dga-lemma-characterize-hom} をすべての微分が零の場合に適用すれば
+よい。関手 $N \mapsto (N^0)^\vee = (N^\vee)^0$ は完全だから主張が従う。
+
+\medskip\noindent
+最後に，任意の次数付き右 $A$-加群 $M$ に対して，次数付き左 $A$-加群の全射
+$$
+\bigoplus\nolimits_{i \in I} A[k_i] \to M^\vee
+$$
+を選べる。ここで，$A[k_i]$ は $k_i \in \mathbf{Z}$ による $A$ のシフトを表す。
+これは $M^\vee$ の斉次生成元を選べばよい。このようにして単射
+$$
+M \to (M^\vee)^\vee \to \prod A[k_i]^\vee = \prod A^\vee[-k_i]
+$$
+を得る。上式の直積は次数付き加群の圏における直積であることに注意せよ（言い換えれば，
+各次数で直積をとり，その後に各部分の直和をとる）。
+
+\medskip\noindent
+以上から次を得る。
+\begin{enumerate}
+\item 次数付き $A$-加群の圏は十分な入射対象をもつ。
+\item 任意の $k \in \mathbf{Z}$ に対して加群 $A^\vee[k]$ は入射的である。
+\item 任意の $A$-加群は，次数付き加群の圏において，シフト $A^\vee[k]$ のコピーの
+直積に単射で埋め込まれる。
+\end{enumerate}
+
+
+
+
+
+\section{入射加群と微分次数付き代数}
+\label{dga-section-modules-noncommutative-differential-graded}
+
+\noindent
+$(A, \text{d})$ が微分次数付き代数で，$I$ が $\text{Mod}_{(A, \text{d})}$ の対象ならば，
+{\it $I$ は次数付き $A$-加群として入射的である}，またはときに
+{\it $I$ は次数付き入射的である}という。これは，次数付き $A$-加群のアーベル圏
+$\text{Mod}_A$ において $I$ が入射対象であることを意味する。
+
+\begin{lemma}
+\label{dga-lemma-source-graded-injective}
+$(A, \text{d})$ を微分次数付き代数とする。$I \to M$ を微分次数付き $A$-加群の
+単射準同型とする。$I$ が次数付き入射的ならば，$I \to M$ は許容単射である。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+\noindent
+$(A, \text{d})$ を微分次数付き代数とする。$M$ が左（それぞれ右）微分次数付き
+$A$-加群ならば，
+$$
+M^\vee = \Hom^\bullet(M^\bullet, \mathbf{Q}/\mathbf{Z})
+$$
+は，第 \ref{dga-section-modules-noncommutative-graded} 節で構成した $A$-加群構造により，
+第 \ref{dga-section-hom-complexes} 節の議論から右（それぞれ左）微分次数付き $A$-加群である。
+注意 \ref{dga-remark-evaluation-map-left} および \ref{dga-remark-evaluation-map-right} により，第
+\ref{dga-section-modules-noncommutative-graded} 節の評価写像
+$$
+M \longrightarrow (M^\vee)^\vee
+$$
+は左（それぞれ右）微分次数付き $A$-加群の準同型である。
+
+\begin{lemma}
+\label{dga-lemma-map-into-dual}
+$(A, \text{d})$ を微分次数付き代数とする。$M$ が左微分次数付き $A$-加群，$N$ が
+右微分次数付き $A$-加群ならば，
+\begin{align*}
+\Hom_{\text{Mod}_{(A, \text{d})}}(N, M^\vee)
+& =
+\Hom_{\text{Comp}(\mathbf{Z})}(N \otimes_A M, \mathbf{Q}/\mathbf{Z}) \\
+& =
+\text{微分次数付き双線形}_A(N \times M, \mathbf{Q}/\mathbf{Z})
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+第1の等号は補題 \ref{dga-lemma-characterize-hom} であり，第2の等号は第
+\ref{dga-section-tensor-product} 節で示した。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-hom-into-shift-dual-free}
+$(A, \text{d})$ を微分次数付き代数とする。このとき
+$$
+\Hom_{\text{Mod}_{(A, \text{d})}}(M, A^\vee[k]) =
+\Ker(\text{d} : (M^\vee)^k \to (M^\vee)^{k + 1})
+$$
+および
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(M, A^\vee[k]) = H^k(M^\vee)
+$$
+が微分次数付き $A$-加群 $M$ に関する関手として成り立つ。
+\end{lemma}
+
+\begin{proof}
+以上の議論から明らかである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{P-分解}
+\label{dga-section-P-resolutions}
+
+\noindent
+本節は《導来圏》第 \ref{derived-section-unbounded} 節の類似である。
+
+\medskip\noindent
+$(A, \text{d})$ を微分次数付き代数，$P$ を微分次数付き $A$-加群とする。微分次数付き
+部分加群によるフィルトレーション
+$$
+0 = F_{-1}P \subset F_0P \subset F_1P \subset \ldots \subset P
+$$
+で次を満たすものが存在するとき，$P$ は {\it 性質 (P) をもつ}という。
+\begin{enumerate}
+\item $P = \bigcup F_pP$ である。
+\item 包含 $F_iP \to F_{i + 1}P$ は許容単射である。
+\item 商 $F_{i + 1}P/F_iP$ は微分次数付き $A$-加群として $A[k]$ の直和と同型である。
+\end{enumerate}
+実際，条件 (2) は条件 (3) から従う。補題
+\ref{dga-lemma-target-graded-projective} を参照せよ。さらに，$P$ は次数付き $A$-加群として
+$A$ のシフトの直和と同型になることを読者は確認できる。
+
+\begin{lemma}
+\label{dga-lemma-property-P-sequence}
+$(A, \text{d})$ を微分次数付き代数，$P$ を微分次数付き $A$-加群とする。
+$F_\bullet$ が性質 (P) におけるフィルトレーションならば，微分次数付き $A$-加群の
+許容短完全列
+$$
+0 \to
+\bigoplus\nolimits F_iP \to
+\bigoplus\nolimits F_iP \to P \to 0
+$$
+を得る。
+\end{lemma}
+
+\begin{proof}
+第2の写像は包含写像の直和である。第1の写像は，始域の直和因子 $F_iP$ 上で恒等写像
+$F_iP \to F_iP$ と包含写像 $F_iP \to F_{i + 1}P$ の負との和である。包含写像の左逆となる
+次数付き $A$-加群の準同型 $s_i : F_{i + 1}P \to F_iP$ を選ぶ。合成により，すべての
+$j > i$ に対して写像 $s_{j, i} : F_jP \to F_iP$ を得る。このとき第1の矢印の左逆は，
+$x \in F_jP$ を
+$(s_{j, 0}(x), s_{j, 1}(x), \ldots, s_{j, j - 1}(x), 0, \ldots)$
+という $\bigoplus F_iP$ の元に送る。
+\end{proof}
+
+\noindent
+次の補題は，性質 (P) をもつ微分次数付き加群が K-入射加群の双対的概念であること
+（すなわち，ある意味で K-射影的であること）を示す。《導来圏》定義
+\ref{derived-definition-K-injective} を参照せよ。
+
+\begin{lemma}
+\label{dga-lemma-property-P-K-projective}
+$(A, \text{d})$ を微分次数付き代数とし，$P$ を性質 (P) をもつ微分次数付き
+$A$-加群とする。このとき
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(P, N) = 0
+$$
+が任意の非輪状微分次数付き $A$-加群 $N$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$K(\text{Mod}_{(A, \text{d})})$ が三角圏であること（命題
+\ref{dga-proposition-homotopy-category-triangulated}）を用いる。$F_\bullet$ を性質 (P) に
+おける $P$ のフィルトレーションとする。補題 \ref{dga-lemma-property-P-sequence} の
+短完全列は識別三角形を与える。したがって，《導来圏》補題
+\ref{derived-lemma-representable-homological} により，
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(F_iP, N) = 0
+$$
+を任意の非輪状微分次数付き $A$-加群 $N$ と任意の $i$ に対して示せば十分である。
+各微分次数付き加群 $F_iP$ は許容単射による有限フィルトレーションをもち，その
+次数付き部分はシフト $A[k]$ の直和である。したがって，
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(A[k], N) = 0
+$$
+を任意の非輪状微分次数付き $A$-加群 $N$ と任意の $k$ に対して示せばよい。これは
+補題 \ref{dga-lemma-hom-from-shift-free} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-good-quotient}
+$(A, \text{d})$ を微分次数付き代数，$M$ を微分次数付き $A$-加群とする。次の性質をもつ
+微分次数付き $A$-加群の準同型 $P \to M$ が存在する。
+\begin{enumerate}
+\item $P \to M$ は全射である。
+\item $\Ker(\text{d}_P) \to \Ker(\text{d}_M)$ は全射である。
+\item $P$ は許容短完全列 $0 \to P' \to P \to P'' \to 0$ に入り，$P'$ と $P''$ は
+$A$ のシフトの直和である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$P_k$ を，次数 $k$ と $k + 1$ の生成元 $x,y$ をもつ自由 $A$-加群とする。
+$\text{d}(x) = y$ および $\text{d}(y) = 0$ とおいて，$P_k$ に微分次数付き
+$A$-加群の構造を定める。任意の元 $m \in M^k$ に対し，$x$ を $m$ に，$y$ を
+$\text{d}(m)$ に送る準同型 $P_k \to M$ が存在する。したがって，$P_k$ のコピーの
+直和から $M$ への全射が存在することが分かる。これは明らかに性質 (1) と (3) をもつ
+$P \to M$ を与える。性質 (2) を得るには，次数 $k$ の元
+$m \in \Ker(\text{d}_M)$ に対して，$1$ を $m$ に送る写像
+%% P03-STACKS-E889: frozen shift sign retained; see sidecar.
+$A[k] \to M$ が存在するとされていることに注意する。したがって，$A$ のシフトの
+コピーの直和を加えることにより (2) を実現できる。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-resolve}
+$(A, \text{d})$ を微分次数付き代数，$M$ を微分次数付き $A$-加群とする。このとき，
+微分次数付き $A$-加群の準同型 $P \to M$ で次を満たすものが存在する。
+\begin{enumerate}
+\item $P \to M$ は擬同型である。
+\item $P$ は性質 (P) をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M = M_0$ とおく。写像 $P_i \to M_i$ を補題 \ref{dga-lemma-good-quotient} のように
+選び，短完全列
+$$
+0 \to M_{i + 1} \to P_i \to M_i \to 0
+$$
+を帰納的に選ぶ。これにより「分解」
+$$
+\ldots \to P_2 \xrightarrow{f_2} P_1 \xrightarrow{f_1} P_0 \to M \to 0
+$$
+を得る。そこで，$A$-加群として
+$$
+P = \bigoplus\nolimits_{i \geq 0} P_i
+$$
+とおき，次数を $P^n = \bigoplus_{a + b = n} P_{-a}^b$ で，微分を（二重複体に
+付随する全複体の構成と同様に）
+$$
+\text{d}_P(x) = f_{-a}(x) + (-1)^a \text{d}_{P_{-a}}(x)
+$$
+（$x \in P_{-a}^b$）で定める。この規約のもとで $P$ は実際に微分次数付き
+$A$-加群である。各 $P_i$ が2段フィルトレーション
+$0 \to P_i' \to P_i \to P_i'' \to 0$ をもつことを思い出し，
+$$
+F_{2i}P = \bigoplus\nolimits_{i \geq j \geq 0} P_j
+\subset
+\bigoplus\nolimits_{i \geq 0} P_i = P
+$$
+とおく。$F_{2i}P$ に $P'_{i + 1}$ を加えて $F_{2i + 1}$ を得る。これらは
+微分次数付き部分加群であり，逐次商は $A$ のシフトの直和である。補題
+\ref{dga-lemma-target-graded-projective} により，包含 $F_iP \to F_{i + 1}P$ は
+許容単射である。最後に，増大写像 $P_0 \to M$ が与える写像 $P \to M$ が
+擬同型であることを示さなければならない。これは《ホモロジー》補題
+\ref{homology-lemma-good-resolution-gives-qis} から従う。
+\end{proof}
+
+
+
+
+
+\section{I-分解}
+\label{dga-section-I-resolutions}
+
+\noindent
+本節は P-分解の節の双対である。
+
+\medskip\noindent
+$(A, \text{d})$ を微分次数付き代数，$I$ を微分次数付き $A$-加群とする。微分次数付き
+部分加群によるフィルトレーション
+$$
+I = F_0I \supset F_1I \supset F_2I \supset \ldots \supset 0
+$$
+で次を満たすものが存在するとき，$I$ は {\it 性質 (I) をもつ}という。
+\begin{enumerate}
+\item $I = \lim I/F_pI$ である。
+\item 写像 $I/F_{i + 1}I \to I/F_iI$ は許容全射である。
+\item 商 $F_iI/F_{i + 1}I$ は微分次数付き $A$-加群として，第
+\ref{dga-section-modules-noncommutative-differential-graded} 節で構成した加群
+$A^\vee[k]$ の直積と同型である。
+\end{enumerate}
+実際，条件 (2) は条件 (3) から従う。補題 \ref{dga-lemma-source-graded-injective} を
+参照せよ。$I$ は次数付き加群として $A^\vee[k]$ の直積と同型になることを読者は
+確認できる。
+
+\begin{lemma}
+\label{dga-lemma-property-I-sequence}
+$(A, \text{d})$ を微分次数付き代数，$I$ を微分次数付き $A$-加群とする。
+$F_\bullet$ が性質 (I) におけるフィルトレーションならば，微分次数付き $A$-加群の
+許容短完全列
+$$
+0 \to I \to
+\prod\nolimits I/F_iI \to
+\prod\nolimits I/F_iI \to 0
+$$
+を得る。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：これは補題 \ref{dga-lemma-property-P-sequence} の双対である。
+\end{proof}
+
+\noindent
+次の補題は，性質 (I) をもつ微分次数付き加群が K-入射加群の類似物であることを示す。
+《導来圏》定義 \ref{derived-definition-K-injective} を参照せよ。
+
+\begin{lemma}
+\label{dga-lemma-property-I-K-injective}
+$(A, \text{d})$ を微分次数付き代数とし，$I$ を性質 (I) をもつ微分次数付き
+$A$-加群とする。このとき
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(N, I) = 0
+$$
+が任意の非輪状微分次数付き $A$-加群 $N$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$K(\text{Mod}_{(A, \text{d})})$ が三角圏であること（命題
+\ref{dga-proposition-homotopy-category-triangulated}）を用いる。$F_\bullet$ を性質 (I) に
+おける $I$ のフィルトレーションとする。補題 \ref{dga-lemma-property-I-sequence} の
+短完全列は識別三角形を与える。したがって，《導来圏》補題
+\ref{derived-lemma-representable-homological} により，
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(N, I/F_iI) = 0
+$$
+を任意の非輪状微分次数付き $A$-加群 $N$ と任意の $i$ に対して示せば十分である。
+各微分次数付き加群 $I/F_iI$ は許容単射による有限フィルトレーションをもち，その
+次数付き部分は $A^\vee[k]$ の直積である。したがって，
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(N, A^\vee[k]) = 0
+$$
+を任意の非輪状微分次数付き $A$-加群 $N$ と任意の $k$ に対して示せばよい。これは
+補題 \ref{dga-lemma-hom-into-shift-dual-free} と，$(-)^\vee$ が完全関手であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-good-sub}
+$(A, \text{d})$ を微分次数付き代数，$M$ を微分次数付き $A$-加群とする。次の性質をもつ
+微分次数付き $A$-加群の準同型 $M \to I$ が存在する。
+\begin{enumerate}
+\item $M \to I$ は単射である。
+\item $\Coker(\text{d}_M) \to \Coker(\text{d}_I)$ は単射である。
+\item $I$ は許容短完全列 $0 \to I' \to I \to I'' \to 0$ に入り，$I'$ と $I''$ は
+$A^\vee$ のシフトの直積である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+第 \ref{dga-section-modules-noncommutative-differential-graded} 節で構成した，左から右の
+微分次数付き加群へ，また右から左の微分次数付き加群へ送る関手 $N \mapsto N^\vee$ と
+そのすべての性質を用いる。各 $k \in \mathbf{Z}$ に対し，$Q_k$ を次数 $k$ と
+$k + 1$ の生成元 $x,y$ をもつ自由左 $A$-加群とする。$\text{d}(x) = y$ および
+$\text{d}(y) = 0$ とおいて，$Q_k$ に左微分次数付き $A$-加群の構造を定める。
+補題 \ref{dga-lemma-good-quotient} の証明とまったく同様に論じると，左微分次数付き
+$A$-加群の全射
+$$
+\bigoplus\nolimits_{i \in I} Q_{k_i} \longrightarrow M^\vee
+$$
+を得る。このとき単射
+$$
+M \to (M^\vee)^\vee \to (\bigoplus\nolimits_{i \in I} Q_{k_i})^\vee =
+\prod\nolimits_{i \in I} I_{k_i}
+$$
+を考えられる。ここで
+%% P03-STACKS-E890: frozen dual-index definition retained; see sidecar.
+$I_k = Q_{-k}^\vee$ は「双対」右微分次数付き $A$-加群である。さらに，短完全列
+$0 \to A[-k - 1] \to Q_k \to A[-k] \to 0$ は短完全列
+$0 \to A^\vee[k] \to I_k \to A^\vee[k + 1] \to 0$ を与える。
+
+\medskip\noindent
+前段の結果は性質 (1) と (3) をもつ $M \to I$ を与える。性質 (2) を得るため，
+$\overline{m} \in \Coker(\text{d}_M)$ を次数 $k$ の非零元とする。
+$\Im(M^{k - 1} \to M^k)$ 上で消えるが $m$ 上では消えない写像
+$\lambda : M^k \to \mathbf{Q}/\mathbf{Z}$ を選ぶ。補題
+\ref{dga-lemma-hom-into-shift-dual-free} により，これは $m$ 上で消えない微分次数付き
+$A$-加群の準同型
+%% P03-STACKS-E891: frozen shift sign retained; see sidecar.
+$M \to A^\vee[k]$ に対応する。したがって，$A^\vee$ のシフトのコピーの直積を
+加えることにより (2) を実現できる。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-right-resolution}
+$(A, \text{d})$ を微分次数付き代数，$M$ を微分次数付き $A$-加群とする。このとき，
+微分次数付き $A$-加群の準同型 $M \to I$ で次を満たすものが存在する。
+\begin{enumerate}
+\item $M \to I$ は擬同型である。
+\item $I$ は性質 (I) をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$M = M_0$ とおく。写像 $M_i \to I_i$ を補題 \ref{dga-lemma-good-sub} のように選び，
+短完全列
+$$
+0 \to M_i \to I_i \to M_{i + 1} \to 0
+$$
+を帰納的に選ぶ。これにより「分解」
+%% P03-STACKS-E892: frozen repeated I_1 term retained; see sidecar.
+$$
+0 \to M \to I_0 \xrightarrow{f_0} I_1 \xrightarrow{f_1} I_1 \to \ldots
+$$
+を得る。次数付き部分
+$$
+I^n = \prod\nolimits_{i \geq 0} I^{n - i}_i
+$$
+と微分
+$$
+\text{d}_I(x) = f_i(x) + (-1)^i \text{d}_{I_i}(x)
+$$
+（$x \in I_i^{n - i}$）をもつ微分次数付き $A$-加群を $I$ と書く。この規約のもとで
+$I$ は実際に微分次数付き $A$-加群である。各 $I_i$ が2段フィルトレーション
+$0 \to I_i' \to I_i \to I_i'' \to 0$ をもつことを思い出し，
+$$
+F_{2i}I^n = \prod\nolimits_{j \geq i} I^{n - j}_j
+\subset
+\prod\nolimits_{i \geq 0} I^{n - i}_i = I^n
+$$
+とおく。
+%% P03-STACKS-E893: frozen intermediate-filtration instruction retained; see sidecar.
+$F_{2i}I$ に因子 $I'_{i + 1}$ を加えて $F_{2i + 1}I$ を得る。これらは微分次数付き
+部分加群であり，逐次商は $A^\vee$ のシフトの直積である。補題
+\ref{dga-lemma-source-graded-injective} により，包含 $F_{i + 1}I \to F_iI$ は許容単射である。
+最後に，増大写像 $M \to I_0$ が与える写像 $M \to I$ が擬同型であることを示さなければ
+ならない。これは《ホモロジー》補題
+\ref{homology-lemma-good-right-resolution-gives-qis} から従う。
+\end{proof}
+
+
+
+
+
+
+\section{導来圏}
+\label{dga-section-derived}
+
+\noindent
+非輪状微分次数付き加群および微分次数付き加群の擬同型という概念が定義されていることを
+思い出そう（第 \ref{dga-section-modules} 節を参照せよ）。
+
+\begin{lemma}
+\label{dga-lemma-acyclic}
+$(A, \text{d})$ を微分次数付き代数とする。非輪状加群からなる
+$K(\text{Mod}_{(A, \text{d})})$ の充満部分圏 $\text{Ac}$ は，
+$K(\text{Mod}_{(A, \text{d})})$ の厳密充満な飽和三角部分圏である。対応する
+$K(\text{Mod}_{(A, \text{d})})$ の飽和乗法的系（《導来圏》補題
+\ref{derived-lemma-operations} を参照せよ）は，擬同型の類 $\text{Qis}$ である。
+特に，局所化関手
+$$
+Q : K(\text{Mod}_{(A, \text{d})}) \to
+\text{Qis}^{-1}K(\text{Mod}_{(A, \text{d})})
+$$
+の核は $\text{Ac}$ である。さらに，関手 $H^0$ は $Q$ を経由する。
+\end{lemma}
+
+\begin{proof}
+ホモロジーの長完全列 (\ref{dga-equation-les}) により，$H^0$ はホモロジー的関手である。
+$H^0$ の核は非輪状対象の部分圏であり，すべての $H^i$ 上で同型を誘導する射は
+擬同型である。したがって，本補題は《導来圏》補題
+\ref{derived-lemma-acyclic-general} の特別な場合である。
+
+\medskip\noindent
+集合論的注意。《導来圏》命題 \ref{derived-proposition-construct-localization} における
+局所化の構成は，与えられた三角圏が「小さい」，すなわちその対象の集まりが集合を
+なすことを仮定する。$(A, \text{d})$ を含み，$\alpha$ の共終数が $\aleph_0$ より大きい
+部分宇宙 $V_\alpha$ をとる（《集合》第 \ref{sets-section-sets-hierarchy} 節および
+《集合》命題 \ref{sets-proposition-exist-ordinals-large-cofinality} を参照せよ）。
+このとき，$V_\alpha$ に含まれる微分次数付き $A$-加群の圏
+$\text{Mod}_{(A, \text{d}), \alpha}$ を考えられる。直接確認すれば，命題
+\ref{dga-proposition-homotopy-category-triangulated} の証明で用いたすべての構成が
+$\text{Mod}_{(A, \text{d}), \alpha}$ の内部で行えることが分かる（高々，微分次数付き
+加群の有限直和をとるだけだからである）。したがって三角圏
+$\text{Qis}_\alpha^{-1}K(\text{Mod}_{(A, \text{d}), \alpha})$ を得る。以下で見るように，
+$\beta > \alpha$ ならば遷移関手
+$$
+\text{Qis}_\alpha^{-1}K(\text{Mod}_{(A, \text{d}), \alpha})
+\longrightarrow
+\text{Qis}_\beta^{-1}K(\text{Mod}_{(A, \text{d}), \beta})
+$$
+は充満忠実である。実際，商圏の射の集合は，P-分解からホモトピー圏内の写像によって
+計算される（補題 \ref{dga-lemma-resolve} の証明における P-分解の構成では，可算直和と，
+与えられた加群の部分集合で添字付けられた直和をとる）。したがって，読者は補題の圏を
+これらの部分圏の合併と考えるべきである。
+\end{proof}
+
+\noindent
+前補題の証明末尾の集合論的注意を考慮し，導来圏を次のように定義する。
+
+\begin{definition}
+\label{dga-definition-unbounded-derived-category}
+$(A, \text{d})$ を微分次数付き代数とし，$\text{Ac}$ と $\text{Qis}$ を補題
+\ref{dga-lemma-acyclic} のものとする。{\it $(A, \text{d})$ の導来圏}とは三角圏
+$$
+D(A, \text{d}) =
+K(\text{Mod}_{(A, \text{d})})/\text{Ac} =
+\text{Qis}^{-1}K(\text{Mod}_{(A, \text{d})}).
+$$
+のことである。商関手との合成が上で定義した関手 $H^0$ に戻る一意な関手を
+$H^0 : D(A, \text{d}) \to \text{Mod}_R$ と書く。
+\end{definition}
+
+\noindent
+導来圏における射の集合を計算する，先に予告した補題を述べる。
+
+\begin{lemma}
+\label{dga-lemma-hom-derived}
+$(A, \text{d})$ を微分次数付き代数とし，$M,N$ を微分次数付き $A$-加群とする。
+\begin{enumerate}
+\item $P \to M$ を補題 \ref{dga-lemma-resolve} のような P-分解とする。このとき
+$$
+\Hom_{D(A, \text{d})}(M, N) =
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(P, N)
+$$
+\noindent
+が成り立つ。
+\item $N \to I$ を補題 \ref{dga-lemma-right-resolution} のような I-分解とする。このとき
+$$
+\Hom_{D(A, \text{d})}(M, N) =
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(M, I)
+$$
+\noindent
+が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$P \to M$ を (1) のものとする。$P \to M$ は擬同型なので，導来圏の定義により
+$$
+\Hom_{D(A, \text{d})}(P, N) = \Hom_{D(A, \text{d})}(M, N)
+$$
+である。$D(A, \text{d})$ における射 $f : P \to N$ は $s^{-1}f'$ に等しい。ここで
+$f' : P \to N'$ は射，$s : N \to N'$ は擬同型である。識別三角形
+$$
+N \to N' \to Q \to N[1]
+$$
+を選ぶ。$s$ は擬同型なので，$Q$ は非輪状である。したがって補題
+\ref{dga-lemma-property-P-K-projective} により，すべての $k$ に対して
+$\Hom_{K(\text{Mod}_{(A, \text{d})})}(P, Q[k]) = 0$ である。
+$\Hom_{K(\text{Mod}_{(A, \text{d})})}(P, -)$ はコホモロジー的だから，
+$f' : P \to N'$ を射 $f : P \to N$ に一意に持ち上げられる。これで証明は完了する。
+
+\medskip\noindent
+(2) の証明は，補題 \ref{dga-lemma-property-I-K-injective} を用いる点を除けば，補題
+\ref{dga-lemma-property-P-K-projective} を用いた (1) の証明の双対である。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-derived-products}
+$(A, \text{d})$ を微分次数付き代数とする。このとき
+\begin{enumerate}
+\item $D(A, \text{d})$ は直和と直積の両方をもつ。
+\item 直和は微分次数付き加群の直和をとることによって得られる。
+\item 直積は微分次数付き加群の直積をとることによって得られる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\text{Mod}_{(A, \text{d})}$ は任意の直和と直積をもつアーベル圏であり，これらが
+$K(\text{Mod}_{(A, \text{d})})$ の直和と直積を与えることを用いる。補題
+\ref{dga-lemma-dgm-abelian} および \ref{dga-lemma-homotopy-direct-sums} を参照せよ。
+
+\medskip\noindent
+$M_j$ を微分次数付き $A$-加群の族とする。次数付き直和
+$M = \bigoplus M_j$ を考える。これは自明な構造により微分次数付き $A$-加群である。
+微分次数付き $A$-加群 $N$ に対し，$I$ が性質 (I) をもつ微分次数付き $A$-加群である
+ような擬同型 $N \to I$ を選ぶ。補題 \ref{dga-lemma-right-resolution} を参照せよ。補題
+\ref{dga-lemma-hom-derived} を用いると，
+%% P03-STACKS-E899: frozen K(A,d) category notation retained; see sidecar.
+\begin{align*}
+\Hom_{D(A, \text{d})}(M, N)
+& =
+\Hom_{K(A, \text{d})}(M, I) \\
+& =
+\prod \Hom_{K(A, \text{d})}(M_j, I) \\
+& =
+\prod \Hom_{D(A, \text{d})}(M_j, N)
+\end{align*}
+を得る。したがって補題の (2) に記したとおり，$D(A, \text{d})$ に直和が存在する。
+
+\medskip\noindent
+$M_j$ を微分次数付き $A$-加群の族とする。微分次数付き $A$-加群の直積
+$M = \prod M_j$ を考える。微分次数付き $A$-加群 $N$ に対し，$P$ が性質 (P) をもつ
+微分次数付き $A$-加群であるような擬同型 $P \to N$ を選ぶ。補題
+\ref{dga-lemma-resolve} を参照せよ。補題 \ref{dga-lemma-hom-derived} を用いると，
+%% P03-STACKS-E899: frozen K(A,d) category notation retained; see sidecar.
+\begin{align*}
+\Hom_{D(A, \text{d})}(N, M)
+& =
+\Hom_{K(A, \text{d})}(P, M) \\
+& =
+\prod \Hom_{K(A, \text{d})}(P, M_j) \\
+& =
+\prod \Hom_{D(A, \text{d})}(N, M_j)
+\end{align*}
+を得る。
+%% P03-STACKS-E900: frozen direct-sums claim retained; see sidecar.
+したがって補題の (3) に記したとおり，$D(A, \text{d})$ に直和が存在する。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-P-resolution}
+$R$ を環，$(A, \text{d})$ を微分次数付き $R$-代数とする。P-分解を用いると，
+$D(A, \text{d})$ の一般の対象に関する主張を $A[k]$ に関する主張へ帰着できる場合がある。
+すなわち，$T$ を $D(A, \text{d})$ の対象の性質とし，次を仮定する。
+\begin{enumerate}
+\item $K_i$（$i \in I$）が $D(A, \text{d})$ の対象の族で，すべての $i \in I$ に対して
+$T(K_i)$ が成り立つならば，$T(\bigoplus K_i)$ が成り立つ。
+\item $K \to L \to M \to K[1]$ が $D(A, \text{d})$ の識別三角形で，二つの対象について
+$T$ が成り立つならば，第3の対象についても $T$ が成り立つ。
+\item すべての $k \in \mathbf{Z}$ に対して $T(A[k])$ が成り立つ。
+\end{enumerate}
+このとき，$D(A, \text{d})$ のすべての対象について $T$ が成り立つ。これは補題
+\ref{dga-lemma-property-P-sequence} および \ref{dga-lemma-resolve} から明らかである。
+\end{remark}
+
+
+
+
+
+
+
+\section{標準 $\delta$-関手}
+\label{dga-section-canonical-delta-functor}
+
+\noindent
+$(A, \text{d})$ を微分次数付き代数とする。関手
+$\text{Mod}_{(A, \text{d})} \to K(\text{Mod}_{(A, \text{d})})$ を考える。この関手は一般には
+$\delta$-関手では{\bf ない}。しかし，関手
+$\text{Mod}_{(A, \text{d})} \to D(A, \text{d})$ は $\delta$-関手であることが分かる。
+これを見るには，アーベル圏 $\text{Mod}_{(A, \text{d})}$ の短完全列
+$$
+0 \to K \xrightarrow{a} L \xrightarrow{b} M \to 0
+$$
+に付随する射 $\delta$ を定義しなければならない。射 $a$ の錐 $C(a)$ を考える。
+$C(a) = L \oplus K$ であり，$L$ への射影に続けて $b$ を合成することにより
+$q : C(a) \to M$ を定義する。こうして微分次数付き $A$-加群の準同型
+$$
+q : C(a) \longrightarrow M.
+$$
+を得る。ここで $i$ を定義 \ref{dga-definition-cone} のものとすれば，
+$q \circ i = b$ であることは明らかである。$a$ は単射なので，$q$ の核は
+$\text{id}_K$ の錐と同一視され，これは非輪状であることに注意せよ。したがって $q$ は
+擬同型である。補題 \ref{dga-lemma-the-same-up-to-isomorphisms} によれば，三角形
+$$
+(K, L, C(a), a, i, -p)
+$$
+は $K(\text{Mod}_{(A, \text{d})})$ の識別三角形である。局所化関手
+$K(\text{Mod}_{(A, \text{d})}) \to D(A, \text{d})$ は完全なので，
+$(K, L, C(a), a, i, -p)$ は $D(A, \text{d})$ の識別三角形である。$q$ は擬同型だから，
+$D(A, \text{d})$ における同型である。したがって
+$$
+(K, L, M, a, b, -p \circ q^{-1})
+$$
+は $D(A, \text{d})$ の識別三角形である。これは次の補題を示唆する。
+
+\begin{lemma}
+\label{dga-lemma-derived-canonical-delta-functor}
+$(A, \text{d})$ を微分次数付き代数とする。上で定義した関手
+$\text{Mod}_{(A, \text{d})} \to D(A, \text{d})$ は，$\delta$-関手の自然な構造をもち，
+$$
+\delta_{K \to L \to M} = - p \circ q^{-1}
+$$
+である。ここで $p,q$ は上で説明したものである。
+\end{lemma}
+
+\begin{proof}
+複体の短完全列が与えられれば，この選択が識別三角形を与えることはすでに見た。
+この構成の関手性を示さなければならない。《導来圏》定義
+\ref{derived-definition-delta-functor} を参照せよ。これは補題
+\ref{dga-lemma-functorial-cone} から少し計算すれば従う。《導来圏》補題
+\ref{derived-lemma-derived-canonical-delta-functor} と比較せよ。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-homotopy-colimit}
+$(A, \text{d})$ を微分次数付き代数とし，$M_n$ を微分次数付き加群の系とする。このとき，
+$D(A, \text{d})$ における導来余極限 $\text{hocolim} M_n$ は，微分次数付き加群
+$\colim M_n$ によって表現される。
+\end{lemma}
+
+\begin{proof}
+$M = \colim M_n$ とおく。《導来圏》補題
+\ref{derived-lemma-compute-colimit} を台となるアーベル群の複体に適用すると，
+微分次数付き加群の完全列
+$$
+0 \to \bigoplus M_n \to \bigoplus M_n \to M \to 0
+$$
+を得る。
+%% P03-STACKS-E905: frozen D(mathcal A) category retained; see sidecar.
+補題 \ref{dga-lemma-derived-products} により，これらの直和は $D(\mathcal{A})$ における直和である。
+したがって，主張は《導来圏》定義 \ref{derived-definition-derived-colimit} における
+導来余極限の定義と，複体の短完全列が識別三角形を与えるという事実（補題
+\ref{dga-lemma-derived-canonical-delta-functor}）から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{線形圏}
+\label{dga-section-linear}
+
+\noindent
+定義のみを述べる。
+
+\begin{definition}
+\label{dga-definition-linear-category}
+$R$ を環とする。{\it $R$-線形圏 $\mathcal{A}$}とは，各射集合に $R$-加群の構造が
+与えられ，$x,y,z \in \Ob(\mathcal{A})$ に対する合成則
+$$
+\Hom_\mathcal{A}(y, z) \times \Hom_\mathcal{A}(x, y)
+\longrightarrow
+\Hom_\mathcal{A}(x, z)
+$$
+が $R$-双線形であるような圏である。
+\end{definition}
+
+\noindent
+したがって，合成は $R$-加群の $R$-線形写像
+$$
+\Hom_\mathcal{A}(y, z) \otimes_R \Hom_\mathcal{A}(x, y)
+\longrightarrow
+\Hom_\mathcal{A}(x, z)
+$$
+を定める。$R$-線形圏が加法的であるとは仮定しないことに注意せよ。
+
+\begin{definition}
+\label{dga-definition-functor-linear-categories}
+$R$ を環とする。{\it $R$-線形圏の間の関手}，または {\it $R$-線形関手}とは，
+$\mathcal{A}$ の任意の対象 $x,y$ に対して写像
+$F : \Hom_\mathcal{A}(x, y) \to \Hom_\mathcal{B}(F(x), F(y))$
+が $R$-加群の準同型であるような関手 $F : \mathcal{A} \to \mathcal{B}$ である。
+\end{definition}
+
+
+
+
+
+
+
+\section{次数付き圏}
+\label{dga-section-graded}
+
+\noindent
+いくつかの定義のみを述べる。
+
+\begin{definition}
+\label{dga-definition-graded-category}
+$R$ を環とする。{\it $R$ 上の次数付き圏 $\mathcal{A}$}とは，各射集合に次数付き
+$R$-加群の構造が与えられ，$x,y,z \in \Ob(\mathcal{A})$ に対する合成が
+$R$-双線形で，次数付き $R$-加群の準同型
+$$
+\Hom_\mathcal{A}(y, z) \otimes_R \Hom_\mathcal{A}(x, y)
+\longrightarrow
+\Hom_\mathcal{A}(x, z)
+$$
+（すなわち，次数を保つ写像）を誘導するような圏である。
+\end{definition}
+
+\noindent
+この状況で，次数付き対象 $\Hom_\mathcal{A}(x, y)$ の次数 $i$ の部分を
+$\Hom_\mathcal{A}^i(x, y)$ と書く。したがって
+$$
+\Hom_\mathcal{A}(x, y) =
+\bigoplus\nolimits_{i \in \mathbf{Z}} \Hom_\mathcal{A}^i(x, y)
+$$
+は次数付き部分への直和分解である。
+
+\begin{definition}
+\label{dga-definition-functor-graded-categories}
+$R$ を環とする。{\it $R$ 上の次数付き圏の間の関手}，または {\it 次数付き関手}とは，
+$\mathcal{A}$ の任意の対象 $x,y$ に対して写像
+%% P03-STACKS-E908: frozen target-category subscript retained; see sidecar.
+$F : \Hom_\mathcal{A}(x, y) \to \Hom_\mathcal{A}(F(x), F(y))$
+が次数付き $R$-加群の準同型であるような関手 $F : \mathcal{A} \to \mathcal{B}$ である。
+\end{definition}
+
+\noindent
+次数付き圏が与えられると，次数 $0$ の写像からなる対応する「通常の」圏にしばしば
+関心がある。これを形式的に定義する。
+
+\begin{definition}
+\label{dga-definition-H0-of-graded-category}
+$R$ を環，$\mathcal{A}$ を $R$ 上の次数付き圏とする。{\it $\mathcal{A}^0$} を，
+$\mathcal{A}$ と同じ対象をもち，
+$$
+\Hom_{\mathcal{A}^0}(x, y) = \Hom^0_\mathcal{A}(x, y)
+$$
+を $\mathcal{A}$ の射の次数付き加群の次数 $0$ の部分とする圏とする。
+\end{definition}
+
+\begin{definition}
+\label{dga-definition-graded-direct-sum}
+$R$ を環，$\mathcal{A}$ を $R$ 上の次数付き圏とする。$\mathcal{A}$ における直和
+$(x, y, z, i, j, p, q)$（記法は《ホモロジー》注意
+\ref{homology-remark-direct-sum} のとおり）が {\it 次数付き直和}であるとは，
+$i,j,p,q$ が次数 $0$ の斉次射であることをいう。
+\end{definition}
+
+\begin{example}[次数付き対象の次数付き圏]
+\label{dga-example-graded-category-graded-objects}
+$\mathcal{B}$ を加法圏とする。《ホモロジー》定義
+\ref{homology-definition-graded} で，$\mathcal{B}$ の次数付き対象の圏
+$\text{Gr}(\mathcal{B})$ を定義したことを思い出そう。この例では，対応する圏
+$\text{Gr}^{gr}(\mathcal{B})^0$ が $\text{Gr}(\mathcal{B})$ を復元するような
+$R = \mathbf{Z}$ 上の次数付き圏 $\text{Gr}^{gr}(\mathcal{B})$ を構成する。
+$\text{Gr}^{gr}(\mathcal{B})$ の対象として $\mathcal{B}$ の次数付き対象をとる。
+$\mathcal{B}$ の次数付き対象 $A = (A^i)$ と $B = (B^i)$ に対して
+$$
+\Hom_{\text{Gr}^{gr}(\mathcal{B})}(A, B) =
+\bigoplus\nolimits_{n \in \mathbf{Z}} \Hom^n(A, B)
+$$
+とおく。ここで次数 $n$ の次数付き部分は，$A$ から $B$ への次数 $n$ の斉次写像がなす
+アーベル群である。具体的には
+$$
+\Hom^n(A, B) = \prod\nolimits_{p + q = n} \Hom_\mathcal{B}(A^{-q}, B^p)
+$$
+である（添字が反転していること，またここでは直和ではなく直積をとることに注意せよ）。
+言い換えれば，$A$ から $B$ への次数 $n$ の射 $f$ は，$p,q \in \mathbf{Z}$，
+$p + q = n$ に対して $\mathcal{B}$ の射 $f_{p, q} : A^{-q} \to B^p$ をもつ系
+$f = (f_{p, q})$ とみなせる。$\mathcal{B}$ の次数付き対象 $A,B,C$ に対し，
+$\text{Gr}^{gr}(\mathcal{B})$ における射の合成を写像
+$$
+\Hom^m(B, C) \times \Hom^n(A, B) \longrightarrow \Hom^{n + m}(A, C)
+$$
+によって定義する。これは次数付き対象の斉次写像の通常の合成
+$(g, f) \mapsto g \circ f$ である。成分で書けば
+$$
+(g \circ f)_{p, r} = g_{p, q} \circ f_{-q, r}
+$$
+である。ここで $q$ は $p + q = m$ および $-q + r = n$ を満たすものとする。
+\end{example}
+
+\begin{example}[次数付き加群の次数付き圏]
+\label{dga-example-gm-gr-cat}
+$A$ を環 $R$ 上の $\mathbf{Z}$-次数付き代数とする。対応する圏
+$(\text{Mod}^{gr}_A)^0$ が次数付き $A$-加群の圏となるような，$R$ 上の次数付き圏
+$\text{Mod}^{gr}_A$ を構成する。$\text{Mod}^{gr}_A$ の対象として右次数付き
+$A$-加群をとる
+%% P03-STACKS-E909: frozen ungraded-section reference retained; see sidecar.
+（第 \ref{dga-section-projectives-over-algebras} 節を参照せよ）。次数付き $A$-加群 $L,M$ に
+対して
+$$
+\Hom_{\text{Mod}^{gr}_A}(L, M) =
+\bigoplus\nolimits_{n \in \mathbf{Z}} \Hom^n(L, M)
+$$
+とおく。ここで $\Hom^n(L, M)$ は，次数 $n$ の斉次な右 $A$-加群写像 $L \to M$，
+すなわちすべての $i \in \mathbf{Z}$ に対して $f(L^i) \subset M^{i + n}$ を満たす
+写像の集合である。成分で書けば，
+$$
+\Hom^n(L, M) \subset \prod\nolimits_{p + q = n} \Hom_R(L^{-q}, M^p)
+$$
+（添字の反転に注意せよ）は，次を満たす $f = (f_{p, q})$ からなる部分集合である。
+$$
+f_{p, q}(m a) = f_{p - i, q + i}(m)a
+$$
+ここで $a \in A^i$，$m \in L^{-q - i}$ である。次数付き $A$-加群 $K,L,M$ に対し，
+$\text{Mod}^{gr}_A$ における合成を写像
+$$
+\Hom^m(L, M) \times \Hom^n(K, L) \longrightarrow \Hom^{n + m}(K, M)
+$$
+によって定義する。これは右 $A$-加群写像の通常の合成
+$(g, f) \mapsto g \circ f$ である。
+\end{example}
+
+\begin{remark}
+\label{dga-remark-graded-shift-functors}
+$R$ を環とする。$\mathcal{D}$ を，$n \in \mathbf{Z}$ で添字付けられた $R$-線形関手
+$[n] : \mathcal{D} \to \mathcal{D}$，$x \mapsto x[n]$ の族を備えた $R$-線形圏とし，
+$[n] \circ [m] = [n + m]$ および $[0] = \text{id}_\mathcal{D}$ が関手としての等号で
+成り立つとする。これにより，$\mathcal{D}$ と同じ対象をもつ $R$ 上の次数付き圏
+$\mathcal{D}^{gr}$ を，
+$$
+\Hom_{\mathcal{D}^{gr}}(x, y) =
+\bigoplus\nolimits_{n \in \mathbf{Z}} \Hom_\mathcal{D}(x, y[n])
+$$
+（$x,y \in \mathcal{D}$）とおいて構成できる。
+$(\mathcal{D}^{gr})^0 = \mathcal{D}$ であることに注意せよ（定義
+\ref{dga-definition-H0-of-graded-category} を参照せよ）。さらに，次数付き圏
+$\mathcal{D}^{gr}$ は，$[n] \circ [m] = [n + m]$ および
+$[0] = \text{id}_{\mathcal{D}^{gr}}$ を満たす $R$-線形次数付き関手 $[n]$ を継承し，
+$$
+\Hom_{\mathcal{D}^{gr}}(x, y[n]) = \Hom_{\mathcal{D}^{gr}}(x, y)[n]
+$$
+は射の合成と両立する次数付き $R$-加群の同型である。
+
+\medskip\noindent
+逆に，$R$ 上の次数付き圏 $\mathcal{A}$ に，$[n] \circ [m] = [n + m]$ および
+$[0] = \text{id}_\mathcal{A}$ を満たす $R$-線形次数付き関手 $[n]$ の族が与えられ，
+さらに同型
+$$
+\Hom_\mathcal{A}(x, y[n]) = \Hom_\mathcal{A}(x, y)[n]
+$$
+を備えているとする。これらは次数付き $R$-加群の同型であり，射の合成と両立するとする。
+このとき $\mathcal{A} = (\mathcal{A}^0)^{gr}$ であることを読者は容易に示せる。
+
+\medskip\noindent
+上で確立した関係 $\mathcal{D} \leftrightarrow \mathcal{A}$ の二つの例を挙げる。
+\begin{enumerate}
+\item $\mathcal{B}$ を加法圏とする。$\mathcal{D} = \text{Gr}(\mathcal{B})$ ならば，
+例 \ref{dga-example-graded-category-graded-objects} のように
+$\mathcal{A} = \text{Gr}^{gr}(\mathcal{B})$ である。
+\item $A$ が次数付き環で，$\mathcal{D} = \text{Mod}_A$ が次数付き右 $A$-加群の圏ならば，
+$\mathcal{A} = \text{Mod}^{gr}_A$ である。例 \ref{dga-example-gm-gr-cat} を参照せよ。
+\end{enumerate}
+\end{remark}
+
+
+
+
+
+
+\section{微分次数付き圏}
+\label{dga-section-dga-categories}
+
+\noindent
+$R$ が環ならば，$R$ はそれ自身の上の微分次数付き代数である
+（もちろん $R = R^0$ とする）ことに注意しよう。この場合，微分次数付き
+$R$-加群は $R$-加群の複体と同じものである。特に，二つの微分次数付き
+$R$-加群 $M$ と $N$ が与えられたとき，$M$ と $N$ に付随する
+$R$-加群の複体のテンソル積から得られる二重複体に付随する全複体に対応する
+微分次数付き $R$-加群を $M \otimes_R N$ と書く。
+% P03-STACKS-E911: frozen English omits “by” in the notation clause;
+% Japanese supplies only the required grammar.
+
+\begin{definition}
+\label{dga-definition-dga-category}
+$R$ を環とする。{\it $R$ 上の微分次数付き圏 $\mathcal{A}$}とは，
+各射集合に微分次数付き $R$-加群の構造が与えられ，
+$x, y, z \in \Ob(\mathcal{A})$ に対して合成が $R$-双線形であり，
+準同型
+$$
+\Hom_\mathcal{A}(y, z) \otimes_R \Hom_\mathcal{A}(x, y)
+\longrightarrow
+\Hom_\mathcal{A}(x, z)
+$$
+を微分次数付き $R$-加群の間に誘導するような圏である。
+\end{definition}
+
+\noindent
+定義の最後の条件は次を意味する。$f \in \Hom_\mathcal{A}^n(x, y)$ と
+$g \in \Hom_\mathcal{A}^m(y, z)$ がそれぞれ次数 $n$ と $m$ の斉次元ならば，
+$$
+\text{d}(g \circ f) = \text{d}(g) \circ f + (-1)^mg \circ \text{d}(f)
+$$
+が $\Hom_\mathcal{A}^{n + m + 1}(x, z)$ において成り立つ。これは二重複体の
+全複体上の微分に対する符号規則から従う。Homology, Definition
+\ref{homology-definition-associated-simple-complex} を見よ。
+
+\begin{definition}
+\label{dga-definition-functor-dga-categories}
+$R$ を環とする。{\it $R$ 上の微分次数付き圏の関手}とは，
+$\mathcal{A}$ の任意の対象 $x, y$ に対して写像
+% P03-STACKS-E912: frozen codomain Hom_A is retained although F(x),F(y)
+% are objects of B; see the ledger and the parallel defect E908.
+$F : \Hom_\mathcal{A}(x, y) \to \Hom_\mathcal{A}(F(x), F(y))$
+が微分次数付き $R$-加群の準同型であるような関手
+$F : \mathcal{A} \to \mathcal{B}$ である。
+\end{definition}
+
+\noindent
+微分次数付き圏が与えられたとき，それに対応する複体の圏とホモトピー圏に
+関心をもつことが多い。形式的な定義は次のとおりである。
+
+\begin{definition}
+\label{dga-definition-homotopy-category-of-dga-category}
+$R$ を環とし，$\mathcal{A}$ を $R$ 上の微分次数付き圏とする。このとき，
+\begin{enumerate}
+\item {\it $\mathcal{A}$ の複体の圏}\footnote{これは標準的でない用語かもしれない。}
+を，対象が $\mathcal{A}$ の対象と同じであり，
+$$
+\Hom_{\text{Comp}(\mathcal{A})}(x, y) =
+\Ker(d : \Hom^0_\mathcal{A}(x, y) \to \Hom^1_\mathcal{A}(x, y))
+$$
+を満たす圏 $\text{Comp}(\mathcal{A})$ とする。
+\item {\it $\mathcal{A}$ のホモトピー圏}を，対象が $\mathcal{A}$ の対象と
+同じであり，
+$$
+\Hom_{K(\mathcal{A})}(x, y) = H^0(\Hom_\mathcal{A}(x, y))
+$$
+を満たす圏 $K(\mathcal{A})$ とする。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ここでの記号 $K(\mathcal{A})$ の用法は標準的でないが，少なくとも
+Stacks プロジェクトの他章における $K(-)$ の用法とは両立している。
+
+\begin{definition}
+\label{dga-definition-dg-direct-sum}
+$R$ を環とし，$\mathcal{A}$ を $R$ 上の微分次数付き圏とする。
+$\mathcal{A}$ における直和 $(x, y, z, i, j, p, q)$
+（記法は Homology, Remark \ref{homology-remark-direct-sum} と同じ）が
+{\it 微分次数付き直和}であるとは，$i, j, p, q$ が次数 $0$ の斉次元で，
+かつ閉じていること，すなわち $\text{d}(i) = 0$ などが成り立つことをいう。
+\end{definition}
+
+\begin{lemma}
+\label{dga-lemma-functorial}
+$R$ を環とする。$R$ 上の微分次数付き圏の関手
+$F : \mathcal{A} \to \mathcal{B}$ は関手
+$\text{Comp}(\mathcal{A}) \to \text{Comp}(\mathcal{B})$
+および $K(\mathcal{A}) \to K(\mathcal{B})$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{example}[複体の微分次数付き圏]
+\label{dga-example-category-complexes}
+$\mathcal{B}$ を加法圏とする。付随する複体の圏が
+$\text{Comp}(\mathcal{B})$ であり，付随するホモトピー圏が
+$K(\mathcal{B})$ であるような，$R = \mathbf{Z}$ 上の微分次数付き圏
+$\text{Comp}^{dg}(\mathcal{B})$ を構成する。
+$\text{Comp}^{dg}(\mathcal{B})$ の対象には $\mathcal{B}$ の複体をとる。
+$\mathcal{B}$ の複体 $A^\bullet$ と $B^\bullet$ が与えられたとき，
+対応する $\mathcal{B}$ の次数付き対象（すなわち微分を忘れたもの）も
+$A^\bullet$ と $B^\bullet$ で表すことがある。この記法の濫用のもとで，
+$$
+\Hom_{\text{Comp}^{dg}(\mathcal{B})}(A^\bullet, B^\bullet) =
+\Hom_{\text{Gr}^{gr}(\mathcal{B})}(A^\bullet, B^\bullet) =
+\bigoplus\nolimits_{n \in \mathbf{Z}} \Hom^n(A, B)
+$$
+とおく。これは，Example \ref{dga-example-graded-category-graded-objects} の
+記法と定義による次数付き $\mathbf{Z}$-加群である。言い換えると，第 $n$
+次数部分は次数付き対象の間の次数 $n$ の斉次射からなるアーベル群
+% P03-STACKS-E913: frozen English has singular “morphism” after “group of”;
+% Japanese renders the required plural sense.
+$$
+\Hom^n(A^\bullet, B^\bullet) =
+\prod\nolimits_{p + q = n} \Hom_\mathcal{B}(A^{-q}, B^p)
+$$
+である。添字の順序が反転していること，また直和ではなく直積をとっていることに
+注意せよ。
+% P03-STACKS-E914: frozen English omits articles in both observation clauses;
+% Japanese supplies only normal grammar.
+次数 $n$ の元 $f \in \Hom^n(A^\bullet, B^\bullet)$ に対して，
+$$
+\text{d}(f) = \text{d}_B \circ f - (-1)^n f \circ \text{d}_A
+$$
+とおく。符号は More on Algebra, Section
+\ref{more-algebra-section-sign-rules} のものとまったく同じである。
+これを意味ある式として読むため，$\text{d}_B$ と $\text{d}_A$ を
+$\mathcal{B}$ の次数付き対象の間の次数 $1$ の斉次写像とみなし，右辺では
+圏 $\text{Gr}^{gr}(\mathcal{B})$ における合成を用いる。成分で書けば，
+$f = (f_{p, q})$ かつ $f_{p, q} : A^{-q} \to B^p$ のとき，
+\begin{equation}
+\label{dga-equation-differential-hom-complex}
+\text{d}(f_{p, q}) =
+\text{d}_B \circ f_{p, q} - (-1)^{p + q} f_{p, q} \circ \text{d}_A 
+\end{equation}
+を得る。この式の第1項は $\Hom_\mathcal{B}(A^{-q}, B^{p + 1})$ に属し，
+第2項は $\Hom_\mathcal{B}(A^{-q - 1}, B^p)$ に属することに注意せよ。
+読者は次を確かめられる。
+\begin{enumerate}
+\item $\text{d}$ の平方は零である。
+\item $\Hom^n(A^\bullet, B^\bullet)$ の元 $f$ について
+$\text{d}(f) = 0$ であることと，$\mathcal{B}$ の次数付き対象の射
+$f : A^\bullet \to B^\bullet[n]$ が実際に複体の写像であることとは同値である。
+\item 特に，$\text{Comp}^{dg}(\mathcal{B})$ の複体の圏は
+$\text{Comp}(\mathcal{B})$ に等しい。
+\item (2) のように $f$ が定める複体の射が零写像にホモトピックであることと，
+ある $g \in \Hom^{n - 1}(A^\bullet, B^\bullet)$ に対して
+$f = \text{d}(g)$ であることとは同値である。
+\item 特に，標準同型
+$$
+\Hom_{K(\mathcal{B})}(A^\bullet, B^\bullet)
+\longrightarrow
+H^0(\Hom_{\text{Comp}^{dg}(\mathcal{B})}(A^\bullet, B^\bullet))
+$$
+を得て，$\text{Comp}^{dg}(\mathcal{B})$ のホモトピー圏は
+$K(\mathcal{B})$ に等しい。
+\end{enumerate}
+複体 $A^\bullet$, $B^\bullet$, $C^\bullet$ が与えられたとき，合成
+$$
+\Hom^m(B^\bullet, C^\bullet) \times \Hom^n(A^\bullet, B^\bullet)
+\longrightarrow
+\Hom^{n + m}(A^\bullet, C^\bullet)
+$$
+を，次数付き圏 $\text{Gr}^{gr}(\mathcal{B})$ における合成
+$(g, f) \mapsto g \circ f$ によって定める。Example
+\ref{dga-example-graded-category-graded-objects} を見よ。これにより，
+微分次数付き加群の写像
+$$
+\Hom_{\text{Comp}^{dg}(\mathcal{B})}(B^\bullet, C^\bullet)
+\otimes_R
+\Hom_{\text{Comp}^{dg}(\mathcal{B})}(A^\bullet, B^\bullet)
+\longrightarrow
+\Hom_{\text{Comp}^{dg}(\mathcal{B})}(A^\bullet, C^\bullet)
+$$
+が得られる。実際，
+\begin{align*}
+\text{d}(g \circ f) & =
+\text{d}_C \circ g \circ f - (-1)^{n + m} g \circ f \circ \text{d}_A \\
+& =
+\left(\text{d}_C \circ g - (-1)^m g \circ \text{d}_B\right) \circ f +
+(-1)^m g \circ \left(\text{d}_B \circ f - (-1)^n f \circ \text{d}_A\right) \\
+& =
+\text{d}(g) \circ f + (-1)^m g \circ \text{d}(f)
+\end{align*}
+であるから，これは Definition \ref{dga-definition-dga-category} で要求された
+写像である。
+\end{example}
+
+\begin{lemma}
+\label{dga-lemma-additive-functor-induces-dga-functor}
+$F : \mathcal{B} \to \mathcal{B}'$ を加法圏の間の加法関手とする。このとき
+$F$ は，Example \ref{dga-example-category-complexes} の微分次数付き圏の間の関手
+% P03-STACKS-E915: Japanese makes explicit the attachment of the frozen,
+% grammatically compressed “of Example ...” clause.
+$$
+F : \text{Comp}^{dg}(\mathcal{B}) \to \text{Comp}^{dg}(\mathcal{B}')
+$$
+を誘導し，これは複体の圏およびホモトピー圏上に通常の関手を誘導する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{example}[微分次数付き加群の微分次数付き圏]
+\label{dga-example-dgm-dg-cat}
+$R$ を環とし，$(A, \text{d})$ を $R$ 上の微分次数付き代数とする。
+複体の圏が $\text{Mod}_{(A, \text{d})}$ であり，ホモトピー圏が
+$K(\text{Mod}_{(A, \text{d})})$ であるような $R$ 上の微分次数付き圏
+$\text{Mod}^{dg}_{(A, \text{d})}$ を構成する。
+$\text{Mod}^{dg}_{(A, \text{d})}$ の対象には微分次数付き $A$-加群をとる。
+微分次数付き $A$-加群 $L$ と $M$ に対して，
+% P03-STACKS-E916: the frozen direct-sum symbol below has no index; it is
+% retained while the ledger records the missing n-index.
+$$
+\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(L, M) =
+\Hom_{\text{Mod}^{gr}_A}(L, M) = \bigoplus \Hom^n(L, M)
+$$
+とおく。これは次数付き $R$-加群であり，右辺は Example
+\ref{dga-example-gm-gr-cat} のように定義される。言い換えると，第 $n$ 次数部分
+$\Hom^n(L, M)$ は，次数 $n$ の斉次な右 $A$-加群写像からなる $R$-加群である。
+$f \in \Hom^n(L, M)$ に対して，
+$$
+\text{d}(f) = \text{d}_M \circ f - (-1)^n f \circ \text{d}_L
+$$
+とおく。これを意味ある式として読むため，$\text{d}_M$ と $\text{d}_L$ を
+次数付き $R$-加群の写像とみなし，次数付き $R$-加群写像の合成を用いる。
+$\text{d}(f)$ は次数付き $R$-加群写像として次数 $n + 1$ の斉次写像である。
+また，これは $A$-線形である。実際，
+\begin{align*}
+\text{d}(f)(xa)
+& =
+\text{d}_M(f(x) a) - (-1)^n f (\text{d}_L(xa)) \\
+& =
+\text{d}_M(f(x)) a + (-1)^{\deg(x) + n} f(x) \text{d}(a) 
+- (-1)^n f(\text{d}_L(x)) a - (-1)^{n + \deg(x)} f(x) \text{d}(a) \\
+& = \text{d}(f)(x) a
+\end{align*}
+となる（$\Hom$ 上の微分の定義に符号がなければ，この計算は成り立たない
+ことに注意せよ）。$f$ の微分を成分で表す式については，Example
+\ref{dga-example-category-complexes} と同様の式が成り立つ。読者は Example
+\ref{dga-example-category-complexes} と同じ方法で次を確かめられる。
+\begin{enumerate}
+\item $\text{d}$ の平方は零である。
+\item $\Hom^n(L, M)$ の元 $f$ について $\text{d}(f) = 0$ であることと，
+$f : L \to M[n]$ が微分次数付き $A$-加群の準同型であることとは同値である。
+\item 特に，$\text{Mod}^{dg}_{(A, \text{d})}$ の複体の圏は
+$\text{Mod}_{(A, \text{d})}$ である。
+\item (2) のように $f$ が定める準同型が零写像にホモトピックであることと，
+ある $g \in \Hom^{n - 1}(L, M)$ に対して $f = \text{d}(g)$ であることとは
+同値である。
+\item 特に，標準同型
+$$
+\Hom_{K(\text{Mod}_{(A, \text{d})})}(L, M)
+\longrightarrow
+H^0(\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(L, M))
+$$
+を得て，$\text{Mod}^{dg}_{(A, \text{d})}$ のホモトピー圏は
+$K(\text{Mod}_{(A, \text{d})})$ である。
+\end{enumerate}
+微分次数付き $A$-加群 $K$, $L$, $M$ が与えられたとき，合成
+$$
+\Hom^m(L, M) \times \Hom^n(K, L) \longrightarrow \Hom^{n + m}(K, M)
+$$
+を，斉次な右 $A$-加群写像の合成 $(g, f) \mapsto g \circ f$ によって定める。
+これにより，微分次数付き加群の写像
+$$
+\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(L, M) \otimes_R
+\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(K, L) \longrightarrow
+\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(K, M)
+$$
+が得られる。実際，
+\begin{align*}
+\text{d}(g \circ f) & =
+\text{d}_M \circ g \circ f - (-1)^{n + m} g \circ f \circ \text{d}_K \\
+& =
+\left(\text{d}_M \circ g - (-1)^m g \circ \text{d}_L\right) \circ f +
+(-1)^m g \circ \left(\text{d}_L \circ f - (-1)^n f \circ \text{d}_K\right) \\
+& =
+\text{d}(g) \circ f + (-1)^m g \circ \text{d}(f)
+\end{align*}
+であるから，これは Definition \ref{dga-definition-dga-category} で要求された
+写像である。
+\end{example}
+
+\begin{lemma}
+\label{dga-lemma-homomorphism-induces-dga-functor}
+$\varphi : (A, \text{d}) \to (E, \text{d})$ を微分次数付き代数の準同型とする。
+このとき $\varphi$ は，Example \ref{dga-example-dgm-dg-cat} の微分次数付き圏の
+間の関手
+% P03-STACKS-E917: Japanese makes explicit the attachment of the frozen
+% “of Example ... inducing obvious ...” clause.
+$$
+F :
+\text{Mod}^{dg}_{(E, \text{d})}
+\longrightarrow
+\text{Mod}^{dg}_{(A, \text{d})}
+$$
+を誘導する。これは微分次数付き加群の圏およびホモトピー圏上に明らかな
+制限関手を誘導する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-construction}
+$R$ を環とし，$\mathcal{A}$ を $R$ 上の微分次数付き圏とする。
+$x$ を $\mathcal{A}$ の対象とする。
+$$
+(E, \text{d}) = \Hom_\mathcal{A}(x, x)
+$$
+を $x$ の自己準同型からなる微分次数付き $R$-代数とする。
+$E$ を $\mathcal{A}$ における合成によって
+$\Hom_\mathcal{A}(x, y)$ に作用させることにより，微分次数付き圏の関手
+$$
+\mathcal{A} \longrightarrow \text{Mod}^{dg}_{(E, \text{d})},\quad
+y \longmapsto \Hom_\mathcal{A}(x, y)
+$$
+を得る。この関手は Lemma \ref{dga-lemma-functorial} を適用することにより，
+関手
+% P03-STACKS-E918: the frozen target categories below use the undefined
+% algebra A instead of the endomorphism algebra E; formulas are retained.
+$$
+\text{Comp}(\mathcal{A}) \to \text{Mod}_{(A, \text{d})}
+\quad\text{and}\quad
+K(\mathcal{A}) \to K(\text{Mod}_{(A, \text{d})})
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+主張から明らかである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{三角圏の構成}
+\label{dga-section-review}
+
+\noindent
+本節では，Derived Categories, Proposition
+\ref{derived-proposition-homotopy-category-triangulated} および
+Proposition \ref{dga-proposition-homotopy-category-triangulated} を証明する議論が
+適用できる最も一般的な設定を論じる。
+
+\medskip\noindent
+$R$ を環とし，$\mathcal{A}$ を $R$ 上の微分次数付き圏とする。
+議論を機能させるため，$\mathcal{A}$ にいくつかの公理を課す。
+\begin{enumerate}
+\item[(A)] $\mathcal{A}$ は零対象および二対象の微分次数付き直和
+（Definition \ref{dga-definition-dg-direct-sum} の意味で）をもつ。
+\item[(B)] 微分次数付き圏の関手
+$[n] : \mathcal{A} \longrightarrow \mathcal{A}$ が存在し，
+$[0] = \text{id}_\mathcal{A}$ および $[n + m] = [n] \circ [m]$ を満たす。
+さらに，合成と両立する微分次数付き $R$-加群の同型
+$$
+\Hom_\mathcal{A}(x, y[n]) = \Hom_\mathcal{A}(x, y)[n]
+$$
+が与えられている。
+\end{enumerate}
+
+\noindent
+この微分次数付き圏 $\mathcal{A}$ に対して，次の用語を定める。
+\begin{enumerate}
+\item $\text{Comp}(\mathcal{A})$ の射の列 $x \to y \to z$ が
+{\it 許容短完全列}であるとは，基礎にある次数付き圏に同型
+$y \cong x \oplus z$ が存在し，$x \to z$ および $y \to z$ が
+（余）射影となることをいう。
+% P03-STACKS-E919: frozen source says x -> z although the sequence supplies
+% x -> y; the canonical target retains the stated arrow without repair.
+\item $\text{Comp}(\mathcal{A})$ の射 $x\to y$ が {\it 許容単射}であるとは，
+これが許容短完全列 $x\to y\to z$ に延長できることをいう。
+\item $\text{Comp}(\mathcal{A})$ の射 $y\to z$ が {\it 許容全射}であるとは，
+これが許容短完全列 $x\to y\to z$ に延長できることをいう。
+\end{enumerate}
+次の補題は，公理 (A) と (B) のもとで許容短完全列から三角形が得られることを
+述べる。
+
+\begin{lemma}
+\label{dga-lemma-get-triangle}
+$\mathcal{A}$ を公理 (A) と (B) を満たす微分次数付き圏とする。
+許容短完全列 $x \to y \to z$ が与えられると，（証明に述べるように）三角形
+$$
+x \to y \to z \to x[1]
+$$
+が $\text{Comp}(\mathcal{A})$ において得られ，
+$z[-1] \to x \to y \to z \to x[1]$ における任意の二つの連続する射の合成は
+$K(\mathcal{A})$ において零である。
+\end{lemma}
+
+\begin{proof}
+定義に現れる次数付き対象の同型 $y \cong x \oplus z$ を与える図式
+$$
+\xymatrix{
+x \ar[rr]_1 \ar[rd]_a & & x \\
+& y \ar[ru]_\pi \ar[rd]^b & \\
+z \ar[rr]^1 \ar[ru]^s & & z
+}
+$$
+を選ぶ。この状況では次の等式が成り立つ。
+\begin{enumerate}
+\item $1 = \pi a$，したがって $\text{d}(\pi) a = 0$。
+\item $1 = b s$，したがって $b \text{d}(s) = 0$。
+\item $1 = a \pi + s b$，したがって
+$a \text{d}(\pi) + \text{d}(s) b = 0$。
+\item $\pi s = 0$，したがって
+$\text{d}(\pi)s + \pi \text{d}(s) = 0$。
+\item $\text{d}(s) = (a \pi + s b)\text{d}(s)$ かつ
+$b\text{d}(s) = 0$ なので，$\text{d}(s) = a \pi \text{d}(s)$。
+\item $\text{d}(\pi) = \text{d}(\pi)(a \pi + s b)$ かつ
+$\text{d}(\pi)a = 0$ なので，
+$\text{d}(\pi) = \text{d}(\pi) s b$。
+\item $\text{d}(\pi \text{d}(s)) = 0$。実際，これを単射 $a$ と後合成すると
+$\text{d}(a\pi \text{d}(s)) = \text{d}(\text{d}(s)) = 0$ を得る。
+\item (4) により $\text{d}(\text{d}(\pi)s)$ は
+$\text{d}(\pi\text{d}(s))$ の負であり，後者は (7) により $0$ なので，
+零である。
+\end{enumerate}
+ここでは $\text{d}(a) = 0$，$\text{d}(b) = 0$，および
+$\text{d}(1) = 0$ を繰り返し用いた。(7) により，
+$$
+\delta = \pi \text{d}(s) = - \text{d}(\pi) s : z \to x[1]
+$$
+は $\text{Comp}(\mathcal{A})$ の射である。(5) により，合成
+$a \delta = a \pi \text{d}(s) = \text{d}(s)$ は零写像にホモトピックである。
+(6) により，合成 $\delta b = - \text{d}(\pi)sb = \text{d}(-\pi)$ も
+零写像にホモトピックである。
+\end{proof}
+
+\noindent
+公理 (A) と (B) に加えて，錐の存在に関する公理が必要である。
+全体を次のように形式化する。
+
+\begin{situation}
+\label{dga-situation-ABC}
+ここで $R$ は環であり，$\mathcal{A}$ は公理 (A)，(B)，および次の公理を
+満たす $R$ 上の微分次数付き圏である。
+\begin{enumerate}
+\item[(C)] $\text{d}(f) = 0$ を満たす次数 $0$ の射 $f : x \to y$ が
+与えられると，$\text{Comp}(\mathcal{A})$ に許容短完全列
+$y \to c(f) \to x[1]$ が存在し，Lemma \ref{dga-lemma-get-triangle} の写像
+$x[1] \to y[1]$ は $f[1]$ に等しい。
+\end{enumerate}
+\end{situation}
+
+\noindent
+$c(f)$ を射 $f$ の {\it 錐}と呼ぶ。(A)，(B)，(C) が成り立つとき，
+錐は弱い意味で関手的である。
+
+\begin{lemma}
+\label{dga-lemma-cone}
+\begin{slogan}
+ホモトピー圏は三角圏である。
+この補題は三角圏の公理の一部を証明する。
+\end{slogan}
+Situation \ref{dga-situation-ABC} において，
+$$
+\xymatrix{
+x_1 \ar[r]_{f_1} \ar[d]_a & y_1 \ar[d]^b \\
+x_2 \ar[r]^{f_2} & y_2
+}
+$$
+が $\text{Comp}(\mathcal{A})$ のホモトピー可換図式であるとする。
+このとき，三角形の射
+% P03-STACKS-E920: the frozen target triangle repeats the source triangle;
+% it is retained although (a,b,c) and c:c(f1)->c(f2) require the i=2 target.
+$$
+(a, b, c) : (x_1, y_1, c(f_1)) \to (x_1, y_1, c(f_1))
+$$
+を $K(\mathcal{A})$ に誘導する射 $c : c(f_1) \to c(f_2)$ が存在する。
+\end{lemma}
+
+\begin{proof}
+仮定は，$\text{d}(h) = b f_1 - f_2 a$ を満たす次数 $-1$ の射
+$h : x_1 \to y_2$ が存在することを意味する。射
+$y_i \to c(f_i) \to x_i[1]$ と両立する次数付き対象の同型
+$c(f_i) = y_i \oplus x_i[1]$ を選ぶ。与えられた射を
+$a_i : y_i \to c(f_i)$，$b_i : c(f_i) \to x_i[1]$，
+$s_i : x_i[1] \to c(f_i)$，および $\pi_i : c(f_i) \to y_i$ と書く。
+$x_i[1] \to y_i[1]$ は $\pi_i \text{d}(s_i)$ で与えられることを思い出そう。
+公理 (C) により，これは
+$$
+f_i = \pi_i \text{d}(s_i) = - \text{d}(\pi_i) s_i
+$$
+を意味する（シフト関手 $[1]$ を用いて $\Hom(x_i, y_i)$ と
+$\Hom(x_i[1], y_i[1])$ を同一視する）。
+% P03-STACKS-E921: the final frozen summand a_2 h b is ill-typed; the
+% subsequent differential computation uses the type-correct b_1.
+$c = a_2 b \pi_1 + s_2 a b_1 + a_2hb$ とおく。Lemma
+\ref{dga-lemma-get-triangle} の証明で得た等式を用いると，
+\begin{align*}
+\text{d}(c)
+& =
+a_2 b \text{d}(\pi_1) + \text{d}(s_2) a b_1 + a_2 \text{d}(h) b_1 \\
+& =
+- a_2 b f_1 b_1 + a_2 f_2 a b_1 + a_2 (b f_1 - f_2 a) b_1 \\
+& = 0
+\end{align*}
+を得る。ここでは特に，
+% P03-STACKS-E922: the frozen explanatory equality drops the minus sign
+% required by f_i=-d(pi_i)s_i and already used in the displayed computation.
+$\text{d}(\pi_1) = \text{d}(\pi_1) s_1 b_1 = f_1 b_1$ および
+$\text{d}(s_2) = a_2 \pi_2 \text{d}(s_2) = a_2 f_2$ を用いた。
+したがって $c$ は，所与の射 $y_i \to c(f_i) \to x_i[1]$ と両立する
+$\mathcal{A}$ の次数 $0$ の射 $c : c(f_1) \to c(f_2)$ である。
+\end{proof}
+
+\noindent
+Situation \ref{dga-situation-ABC} において，$K(\mathcal{A})$ の三角形
+$(x, y, z, f, g, h)$ が {\it 識別三角形}であるとは，許容短完全列
+$x' \to y' \to z'$ が存在し，$(x, y, z, f, g, h)$ が
+$K(\mathcal{A})$ の三角形として，Lemma \ref{dga-lemma-get-triangle} で構成した
+三角形 $(x', y', z', x' \to y', y' \to z', \delta)$ と同型であることをいう。
+以下で
+$$
+\boxed{
+K(\mathcal{A})\text{ は三角圏である}
+}
+$$
+ことを示す。この結果は，一見するほど一般的ではないものの，Stacks
+プロジェクトでこれまで扱った場合の自然な一般化のいくつかに適用できる。
+例を挙げよう。
+\begin{enumerate}
+\item $(X, \mathcal{O}_X)$ を環付き空間とし，$(A, d)$ を微分次数付き
+$\mathcal{O}_X$-代数の層とする。$\mathcal{A}$ を微分次数付き
+$A$-加群からなる微分次数付き圏とすると，$K(\mathcal{A})$ は三角圏である。
+\item $(\mathcal{C}, \mathcal{O})$ を環付きサイトとし，$(A, d)$ を
+微分次数付き $\mathcal{O}$-代数の層とする。$\mathcal{A}$ を微分次数付き
+$A$-加群からなる微分次数付き圏とすると，$K(\mathcal{A})$ は三角圏である。
+Differential Graded Sheaves, Proposition
+\ref{sdga-proposition-homotopy-category-triangulated} を見よ。
+\item 趣の異なる二つの例が Examples, Section
+\ref{examples-section-nongraded-differential-graded} にある。
+\end{enumerate}
+
+\noindent
+次の簡単な補題が構成の鍵となる。
+
+\begin{lemma}
+\label{dga-lemma-id-cone-null}
+Situation \ref{dga-situation-ABC} において，$\mathcal{A}$ の任意の対象 $x$ と，
+恒等射 $1_x : x \to x$ の錐 $C(1_x)$ が与えられると，$C(1_x)$ 上の恒等射は
+零写像にホモトピックである。
+\end{lemma}
+
+\begin{proof}
+公理 (C) が与える許容短完全列を考える。
+$$
+\xymatrix{
+x \ar@<0.5ex>[r]^a  &
+C(1_x) \ar@<0.5ex>[l]^{\pi} \ar@<0.5ex>[r]^b &
+x[1]\ar@<0.5ex>[l]^s
+}
+$$
+シフトによって Hom 集合を同一視すると，Lemma \ref{dga-lemma-get-triangle} により
+$1_x=\pi d(s)=-d(\pi)s$ である。ここで $s$ は
+$\Hom_{\mathcal{A}}^{-1}(x,C(1_x))$ の射とみなす。したがって，Lemma
+\ref{dga-lemma-get-triangle} の式 (5) により $a=a\pi d(s)=d(s)$ であり，
+Lemma \ref{dga-lemma-get-triangle} の式 (6) により
+$b=-d(\pi)sb=-d(\pi)$ である。ゆえに
+$$
+1_{C(1_x)} = a\pi + sb = d(s)\pi - sd(\pi) = d(s\pi)
+$$
+である。最後の等式では $s$ の次数が $-1$ であることを用いた。
+\end{proof}
+
+\noindent
+上の補題のより一般的な形は Lemma \ref{dga-lemma-cone-homotopy} に現れる。
+次の補題は Lemma \ref{dga-lemma-make-commute-map} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-homo-change}
+Situation \ref{dga-situation-ABC} において，$\text{Comp}(\mathcal{A})$ の
+ホモトピー可換図式
+$$
+\xymatrix{x\ar[r]^f\ar[d]_a & y\ar[d]^b\\
+z\ar[r]^g & w}
+$$
+が与えられたとする。このとき，
+\begin{enumerate}
+\item $f$ が許容単射ならば，$b$ は図式を可換にする射 $b'$ と
+ホモトピックである。
+\item $g$ が許容全射ならば，$a$ は図式を可換にする射 $a'$ と
+ホモトピックである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明する。仮定により，$bf-ga=d(h)$ を満たす次数 $-1$ の元
+$h\in\Hom_{\mathcal{A}}(x,w)$ が存在する。$f$ は許容単射なので，
+圏 $\mathcal{A}$ に次数 $0$ の射 $\pi : y \to x$ が存在する。
+$b' = b - d(h\pi)$ とおく。このとき，
+\begin{align*}
+b'f = bf - d(h\pi)f
+= &
+bf - d(h\pi f) \quad (\text{since }d(f) = 0) \\
+= &
+bf-d(h) \\
+= &
+ga
+\end{align*}
+となり，望む結果を得る。(2) の証明は省略する。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-make-injective} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-factor}
+Situation \ref{dga-situation-ABC} において，
+$\alpha : x \to y$ を $\text{Comp}(\mathcal{A})$ の射とする。このとき，
+$\text{Comp}(\mathcal{A})$ に分解
+$$
+\xymatrix{
+x \ar[r]^{\tilde{\alpha}}  &
+\tilde{y} \ar@<0.5ex>[r]^{\pi} &
+y\ar@<0.5ex>[l]^s
+}
+$$
+が存在し，次を満たす。
+\begin{enumerate}
+\item $\tilde{\alpha}$ は許容単射であり，
+$\pi\tilde{\alpha}=\alpha$ である。
+\item $\pi s=1_y$ を満たし，かつ $s\pi$ が $1_{\tilde{y}}$ と
+ホモトピックである射 $s:y\to\tilde{y}$ が
+$\text{Comp}(\mathcal{A})$ に存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+公理 (A) により，$\tilde{y}$ を $y$ と $C(1_x)$ の微分次数付き直和に
+とることができる。すなわち，図式
+$$
+\xymatrix@C=3pc{
+y \ar@<0.5ex>[r]^s  &
+y\oplus C(1_x) \ar@<0.5ex>[l]^{\pi} \ar@<0.5ex>[r]^{p} &
+C(1_x)\ar@<0.5ex>[l]^t
+}
+$$
+が存在し，すべての射は次数 $0$ で $\text{Comp}(\mathcal{A})$ に属する。
+$\tilde{y} = y \oplus C(1_x)$ とおく。このとき
+$1_{\tilde{y}} = s\pi + tp$ である。次に図式
+$$
+\xymatrix{
+x \ar[r]^{\tilde{\alpha}}  &
+\tilde{y} \ar@<0.5ex>[r]^{\pi} &
+y\ar@<0.5ex>[l]^s
+}
+$$
+を考える。ここで $\tilde{\alpha}$ は，射 $x\xrightarrow{\alpha}y$ と，
+許容短完全列
+$$
+\xymatrix{
+x \ar@<0.5ex>[r]  &
+C(1_x) \ar@<0.5ex>[l] \ar@<0.5ex>[r] &
+x[1]\ar@<0.5ex>[l]
+}
+$$
+に現れる自然な射 $x\to C(1_x)$ とによって誘導される。この図式の次数 $0$ の
+射 $C(1_x)\to x$ は，零射 $y\to x$ と合わせて次数 $0$ の射
+$\beta : \tilde{y} \to x$ を誘導する。すると $\tilde{\alpha}$ は許容短完全列
+$$
+\xymatrix{
+x\ar[r]^{\tilde{\alpha}} &
+\tilde{y} \ar[r] &
+x[1]
+}
+$$
+に入るので許容単射である。さらに，$\tilde{\alpha}$ の構成から
+$\pi\tilde{\alpha} = \alpha$ であり，最初の図式から $\pi s = 1_y$ である。
+残るのは，$s\pi$ が $1_{\tilde{y}}$ とホモトピックであることの証明である。
+% P03-STACKS-E923: frozen source writes 1_x=d(h), but the computation
+% and lemma-id-cone-null require the identity of C(1_x); text is retained.
+ある次数 $-1$ の写像 $h$ によって $1_x=d(h)$ と書く。このとき，最後の主張は
+\begin{align*}
+1_{\tilde{y}} - s\pi
+= &
+tp \\
+= &
+t(dh)p\quad\text{(by Lemma \ref{dga-lemma-id-cone-null})} \\
+= &
+d(thp)
+\end{align*}
+から従う。ここでは $dt = dp = 0$ であり，$t$ の次数が零であることを用いた。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-sequence-maps-split} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-analogue-sequence-maps-split}
+Situation \ref{dga-situation-ABC} において，
+$x_1 \to x_2 \to \ldots \to x_n$ を $\text{Comp}(\mathcal{A})$ の
+合成可能な射の列とする。このとき，$\text{Comp}(\mathcal{A})$ に可換図式
+$$
+\xymatrix{x_1\ar[r] & x_2\ar[r] & \ldots\ar[r] & x_n\\
+y_1\ar[r]\ar[u] & y_2\ar[r]\ar[u] & \ldots\ar[r] & y_n\ar[u]}
+$$
+が存在し，各 $y_i\to y_{i+1}$ は許容単射，各 $y_i\to x_i$ は
+ホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+$n=1$ の場合は自明である。$y_1 = x_1$ ととれば，$x_1$ 上の恒等射は特に
+ホモトピー同値である。$n = 2$ の場合は Lemma \ref{dga-lemma-factor} である。
+$x_{n - 1}$ まで図式が構成されたとする。合成
+$y_{n - 1} \to x_{n-1} \to x_n$ に Lemma \ref{dga-lemma-factor} を適用して
+$y_n$ を得る。このとき $y_{n - 1} \to y_n$ は許容単射であり，
+$y_n \to x_n$ はホモトピー同値である。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-nilpotent} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-triseq}
+Situation \ref{dga-situation-ABC} において，$x_i \to y_i \to z_i$
+を $\mathcal{A}$ の射とし（$i=1,2,3$），
+$x_2 \to y_2\to z_2$ は許容短完全列であるとする。
+$b : y_1 \to y_2$ および $b' : y_2\to y_3$ を
+$\text{Comp}(\mathcal{A})$ の射とし，
+$$
+\vcenter{
+\xymatrix{
+x_1 \ar[d]_0 \ar[r] &
+y_1 \ar[r] \ar[d]_b &
+z_1 \ar[d]_0 \\
+x_2 \ar[r] & y_2 \ar[r] & z_2
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+x_2 \ar[d]^0 \ar[r] &
+y_2 \ar[r] \ar[d]^{b'} &
+z_2 \ar[d]^0 \\
+x_3 \ar[r] & y_3 \ar[r] & z_3
+}
+}
+$$
+がホモトピー可換であるとする。このとき $b'\circ b$ は $0$ と
+ホモトピックである。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-homo-change} により，$b$ と $b'$ をそれぞれ
+ホモトピックな写像 $\tilde{b}$ と $\tilde{b}'$ に置き換えて，左の図式の
+右側の正方形と，右の図式の左側の正方形を可換にできる。
+$\mathcal{A}$ の次数 $-1$ の射 $h$ と $h'$ に対して
+$b = \tilde{b} + d(h)$ および $b'=\tilde{b}'+d(h')$ と書く。このとき，
+$$
+b'b = \tilde{b}'\tilde{b} + d(\tilde{b}'h + h'\tilde{b} + h'd(h))
+$$
+である。ここでは $d(\tilde{b})=d(\tilde{b}')=0$ を用いた。すなわち
+$b'b$ は $\tilde{b}'\tilde{b}$ とホモトピックである。そこで
+$\tilde{b}'\tilde{b}=0$ を示せばよい。
+$x_2\xrightarrow{f} y_2\xrightarrow{g} z_2$ は許容短完全列なので，
+$\text{id}_{y_2} = f\pi + sg$ を満たす次数 $0$ の射
+$\pi : y_2 \to x_2$ および $s : z_2 \to y_2$ が存在する。したがって
+$$
+\tilde{b}'\tilde{b} = \tilde{b}'(f\pi + sg)\tilde{b} = 0
+$$
+である。実際，二つの可換な正方形から $g\tilde{b} = 0$ および
+$\tilde{b}'f = 0$ が従う。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-triangle-independent-splittings} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-analogue-triangle-independent-splittings}
+Situation \ref{dga-situation-ABC} において，
+$0 \to x \to y \to z \to 0$ を $\text{Comp}(\mathcal{A})$ の
+許容短完全列とする。Lemma \ref{dga-lemma-get-triangle} で定義された
+$\delta : z \to x[1]$ を用いた三角形
+$$
+\xymatrix{x\ar[r] & y\ar[r] & z\ar[r]^{\delta} & x[1]}
+$$
+は，$K(\mathcal{A})$ における標準同型を除いて，Lemma
+\ref{dga-lemma-get-triangle} で行った選択に依存しない。
+\end{lemma}
+
+\begin{proof}
+$\delta$ が分裂
+$$
+\xymatrix{
+x \ar@<0.5ex>[r]^{a} &
+y \ar@<0.5ex>[r]^b\ar@<0.5ex>[l]^{\pi} &
+z \ar@<0.5ex>[l]^s
+}
+$$
+によって定義され，$\delta'$ は $\pi,s$ の代わりに $\pi',s'$ を用いた
+分裂によって定義されるとする。このとき
+$$
+s'-s = (a\pi + sb)(s'-s) = a\pi s'
+$$
+である。ここでは $bs' = bs = 1_z$ および $\pi s = 0$ を用いた。同様に，
+$$
+\pi' - \pi = (\pi' - \pi)(a\pi + sb) = \pi'sb
+$$
+である。Lemma \ref{dga-lemma-get-triangle} の構成により
+$\delta = \pi d(s)$ および $\delta' = \pi'd(s')$ なので，
+$$
+\delta' = \pi'd(s') = (\pi + \pi'sb)d(s + a\pi s') = \delta + d(\pi s')
+$$
+を得る。ここでは $\pi a = 1_x$，$ba = 0$，および Lemma
+\ref{dga-lemma-get-triangle} の式 (5) による
+$\pi'sbd(s') = \pi'sba\pi d(s') = 0$ を用いた。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-rotate-cone} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-restate-axiom-c}
+Situation \ref{dga-situation-ABC} において，
+$f: x \to y$ を $\text{Comp}(\mathcal{A})$ の射とする。
+三角形 $(y, c(f), x[1], i, p, f[1])$ は許容短完全列
+$$
+\xymatrix{y\ar[r] & c(f) \ar[r] & x[1]}
+$$
+に付随する三角形である。ここで錐 $c(f)$ は Lemma
+\ref{dga-lemma-get-triangle} のように定義される。
+\end{lemma}
+
+\begin{proof}
+公理 (C) から従う。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-rotate-triangle} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-cone-rotate-isom}
+Situation \ref{dga-situation-ABC} において，$\alpha : x \to y$ および
+$\beta : y \to z$ が $\text{Comp}(\mathcal{A})$ の許容短完全列
+$$
+\xymatrix{
+x \ar[r] &
+y\ar[r] &
+z
+}
+$$
+を定めるとする。$(x, y, z, \alpha, \beta, \delta)$ を
+$K(\mathcal{A})$ における付随する三角形とする。このとき，三角形
+$$
+(z[-1], x, y, \delta[-1], \alpha, \beta)
+\quad\text{and}\quad
+(z[-1], x, c(\delta[-1]), \delta[-1], i, p)
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+次の形の図式がある。
+$$
+\xymatrix{
+z[-1]\ar[r]^{\delta[-1]}\ar[d]^1 &
+x\ar@<0.5ex>[r]^{\alpha}\ar[d]^1 &
+y\ar@<0.5ex>[r]^{\beta}\ar@{.>}[d]\ar@<0.5ex>[l]^{\tilde{\alpha}} &
+z\ar[d]^1\ar@<0.5ex>[l]^{\tilde\beta} \\
+z[-1] \ar[r]^{\delta[-1]} &
+x\ar@<0.5ex>[r]^i &
+c(\delta[-1]) \ar@<0.5ex>[r]^p\ar@<0.5ex>[l]^{\tilde i} &
+z\ar@<0.5ex>[l]^{\tilde p}
+}
+$$
+ここで $\alpha, \beta, i, p$ の分裂はそれぞれ
+$\tilde{\alpha}, \tilde{\beta}, \tilde{i}, \tilde{p}$ によって与えられる。
+射 $y \to c(\delta[-1])$ を $i\tilde{\alpha} + \tilde{p}\beta$ により，
+射 $c(\delta[-1]) \to y$ を $\alpha \tilde{i} + \tilde{\beta} p$ により定める。
+まず，これらが $\text{Comp}(\mathcal{A})$ の射を定めることを確かめる。
+Lemma \ref{dga-lemma-get-triangle} の等式により，
+$\delta[-1] = \tilde{\alpha}d(\tilde{\beta}) = -d(\tilde{\alpha})\tilde{\beta}$
+および $\delta[-1] = \tilde{i}d(\tilde{p})$ が成り立つ。このとき
+\begin{align*}
+d(\tilde{\alpha})
+& =
+d(\tilde{\alpha})\tilde{\beta}\beta \\
+& =
+-\delta[-1]\beta
+\end{align*}
+である。第1の等式には Lemma \ref{dga-lemma-get-triangle} の式 (6) を，
+第2の等式には直前の注意を用いた。同様に
+$d(\tilde{p}) = i\delta[-1]$ を得る。したがって
+\begin{align*}
+d(i\tilde{\alpha} + \tilde{p}\beta)
+& =
+d(i)\tilde{\alpha} + id(\tilde{\alpha}) +
+d(\tilde{p})\beta + \tilde{p}d(\beta) \\
+& =
+id(\tilde{\alpha}) + d(\tilde{p})\beta \\
+& =
+-i\delta[-1]\beta + i\delta[-1]\beta \\
+& =
+0
+\end{align*}
+なので，$i\tilde{\alpha} + \tilde{p}\beta$ は確かに
+$\text{Comp}(\mathcal{A})$ の射である。同様の計算により，
+$\alpha \tilde{i} + \tilde{\beta} p$ も $\text{Comp}(\mathcal{A})$ の射である。
+これらの射が可換図式に収まることは直ちに分かる。さらに，
+\begin{align*}
+(i\tilde{\alpha} + \tilde{p}\beta)(\alpha \tilde{i} + \tilde{\beta} p)
+& =
+i\tilde{\alpha}\alpha\tilde{i} + i\tilde{\alpha}\tilde{\beta}p
++ \tilde{p}\beta\alpha\tilde{i} + \tilde{p}\beta\tilde{\beta}p \\
+& =
+i\tilde{i} + \tilde{p}p \\
+& =
+1_{c(\delta[-1])}
+\end{align*}
+を得る。ここでは Lemma \ref{dga-lemma-get-triangle} の等式を随時用いた。同様に
+$(\alpha \tilde{i} + \tilde{\beta} p)(i\tilde{\alpha} + \tilde{p}\beta) = 1_y$,
+を得るので，$y \cong c(\delta[-1])$ である。したがって，問題の二つの
+三角形は同型である。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-third-isomorphism} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-analogue-third-isomorphism}
+Situation \ref{dga-situation-ABC} において，$f_1 : x_1 \to y_1$ および
+$f_2 : x_2 \to y_2$ を $\text{Comp}(\mathcal{A})$ の射とする。
+% P03-STACKS-E924: the frozen target triangle repeats i_1,p_1 instead of
+% the structurally required i_2,p_2; canonical mathematics is retained.
+$$
+(a,b,c): (x_1,y_1,c(f_1), f_1, i_1, p_1) \to (x_2,y_2, c(f_2), f_2, i_1, p_1)
+$$
+を $K(\mathcal{A})$ における任意の三角形の射とする。
+$a$ と $b$ がホモトピー同値ならば，$c$ もホモトピー同値である。
+\end{lemma}
+
+\begin{proof}
+$a$ と $b$ はホモトピー同値なので $K(\mathcal{A})$ において可逆である。
+$K(\mathcal{A})$ におけるそれらの逆を $a^{-1}$ と $b^{-1}$ と書くと，
+可換図式
+$$
+\xymatrix{
+x_2\ar[d]^{a^{-1}}\ar[r]^{f_2} &
+y_2\ar[d]^{b^{-1}}\ar[r]^{i_2} &
+c(f_2)\ar[d]^{c'} \\
+x_1\ar[r]^{f_1} &
+y_1 \ar[r]^{i_1} &
+c(f_1)
+}
+$$
+を得る。ここで写像 $c'$ は，上の図式の左の可換な正方形に Lemma
+\ref{dga-lemma-cone} を適用して定める。この図式は $K(\mathcal{A})$ において
+可換なので，Lemma \ref{dga-lemma-triseq} により，次を示せば十分である。
+$K(\mathcal{A})$ における三角形の射
+$(1,1,c): (x,y,c(f),f,i,p)\to (x,y,c(f),f,i,p)$
+が与えられると，写像 $c$ は $K(\mathcal{A})$ における同型である。
+$K(\mathcal{A})$ に可換図式
+$$
+\vcenter{
+\xymatrix{
+y\ar[d]^{1}\ar[r] &
+c(f)\ar[d]^{c}\ar[r] &
+x[1]\ar[d]^{1} \\
+y\ar[r] &
+c(f) \ar[r] &
+x[1]
+}
+}
+\quad\Rightarrow\quad
+\vcenter{
+\xymatrix{
+y\ar[d]^{0}\ar[r] &
+c(f)\ar[d]^{c-1}\ar[r] &
+x[1]\ar[d]^{0} \\
+y\ar[r] &
+c(f) \ar[r] &
+x[1]
+}
+}
+$$
+がある。各行は許容短完全列なので，Lemma \ref{dga-lemma-triseq} により
+$(c-1)^2 = 0$ を得る。したがって $K(\mathcal{A})$ において
+$2-c$ は $c$ の逆であり，$c$ は同型である。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-the-same-up-to-isomorphisms} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-cone-homotopy}
+Situation \ref{dga-situation-ABC} において，次が成り立つ。
+\begin{enumerate}
+\item 許容短完全列
+$x\xrightarrow{\alpha} y\xrightarrow{\beta} z$ が与えられたとする。
+このとき，図式
+\begin{equation}
+\label{dga-equation-cone-isom-triangle}
+\vcenter{
+\xymatrix{
+x\ar[r]^{\alpha}\ar[d] &
+y\ar[r]^{b}\ar[d] &
+C(\alpha)\ar[r]^{-c}\ar@{.>}[d]^{e} &
+x[1]\ar[d] \\
+x\ar[r]^{\alpha} &
+y\ar[r]^{\beta} &
+z\ar[r]^{\delta} & x[1]
+}
+}
+\end{equation}
+が $K(\mathcal{A})$ における三角形の同型を定めるようなホモトピー同値
+$e:C(\alpha)\to z$ が存在する。ここで
+$y\xrightarrow{b}C(\alpha)\xrightarrow{c}x[1]$ は公理 (C) のように
+与えられる許容短完全列である。
+\item $\alpha : x \to y$ を $\text{Comp}(\mathcal{A})$ の射とし，
+$x \xrightarrow{\tilde{\alpha}} \tilde{y} \to y$ を Lemma
+\ref{dga-lemma-factor} のように与えられる分解とする。ここで許容単射
+% P03-STACKS-E925: frozen source writes x -> y here, but the displayed
+% admissible sequence and the factorization require x -> tilde y.
+$x \xrightarrow{\tilde{\alpha}} y$ は許容短完全列
+$$
+\xymatrix{
+x \ar[r]^{\tilde{\alpha}} &
+\tilde{y} \ar[r] & z
+}
+$$
+に延長される。このとき，三角形の同型
+$$
+\xymatrix{
+x \ar[r]^{\tilde{\alpha}} \ar[d] &
+\tilde{y} \ar[r] \ar[d] &
+z \ar[r]^{\delta} \ar@{.>}[d]^{e} &
+x[1] \ar[d] \\
+x \ar[r]^{\alpha} &
+y \ar[r] &
+C(\alpha) \ar[r]^{-c} &
+x[1]
+}
+$$
+が存在する。ここで上段の三角形は列
+$x \xrightarrow{\tilde{\alpha}} \tilde{y} \to z$ に付随する三角形である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) について，$c$ の符号を変えない，より完全な図式を考える。
+$$
+\xymatrix{
+x\ar@<0.5ex>[r]^{\alpha} \ar[d] &
+y\ar@<0.5ex>[l]^{\pi} \ar@<0.5ex>[r]^{b}\ar[d] &
+C(\alpha)\ar@<0.5ex>[l]^{p} \ar@<0.5ex>[r]^{c}\ar@{.>}@<0.5ex>[d]^{e} &
+x[1]\ar@<0.5ex>[l]^{\sigma} \ar[d]\ar@<0.5ex>[r]^{\alpha} &
+y[1]\ar@<0.5ex>[l]^{\pi} \\
+x\ar@<0.5ex>[r]^{\alpha} &
+y\ar@<0.5ex>[r]^{\beta} \ar@<0.5ex>[l]^{\pi} &
+z\ar[r]^{\delta}\ar@<0.5ex>[l]^{s} \ar@{.>}@<0.5ex>[u]^{f} &
+x[1]
+}
+$$
+ここで許容短完全列 $x\xrightarrow{\alpha} y\xrightarrow{\beta} z$ には
+分裂 $\pi,s$ が，許容短完全列
+$y\xrightarrow{b}C(\alpha)\xrightarrow{c}x[1]$ には分裂
+$p,\sigma$ が与えられている。シフトにより Hom 集合を同一視すると，
+$$
+\alpha = pd(\sigma) = -d(p)\sigma,\quad
+\delta = \pi d(s) = -d(\pi)s
+$$
+が Lemma \ref{dga-lemma-get-triangle} の構成により成り立つ。
+
+\medskip\noindent
+$e=\beta p$ および $f=bs-\sigma\delta$ と定める。まず，これらが
+$\text{Comp}(\mathcal{A})$ の射であることを確かめる。
+$d(e)=\beta d(p)$ が消えることを示すには，$\beta d(p)b$ と
+$\beta d(p)\sigma$ がともに消えることを示せば十分である。実際，
+$$
+\beta d(p)b = \beta d(pb) = \beta d(1_y) = 0,\quad
+\beta d(p)\sigma = -\beta\alpha = 0
+$$
+同様に，$d(f)=bd(s)-d(\sigma)\delta$ が消えることを確かめるには，
+$p$ および $c$ との後合成がともに消えることを確かめれば十分である。実際，
+\begin{align*}
+pbd(s) - pd(\sigma)\delta
+= &
+d(s)-\alpha\delta = d(s)-\alpha\pi d(s) = 0 \\
+cbd(s)-cd(\sigma)\delta
+= &
+-cd(\sigma)\delta = -d(c\sigma)\delta = 0
+\end{align*}
+図式 \ref{dga-equation-cone-isom-triangle} の左二つの正方形が可換であることは
+定義から直ちに従う。右の正方形がホモトピーまで可換であることを証明する前に，
+$e$ がホモトピー同値であることを確かめる。明らかに
+$$
+ef=\beta p (bs-\sigma\delta)=\beta s=1_z
+$$
+$fe$ が $1_{C(\alpha)}$ とホモトピックであることを確かめるため，まず
+% P03-STACKS-E926: the frozen first identity contains d(alpha), which
+% vanishes; the construction above instead gives alpha=p d(sigma).
+$$
+b\alpha = bpd(\alpha) = d(\sigma),\quad
+\alpha c = -d(p)\sigma c = -d(p),\quad
+d(\pi)p = d(\pi)s\beta p = -\delta\beta p
+$$
+であることに注意する。これらの等式を用いて，
+\begin{align*}
+1_{C(\alpha)} = &
+bp + \sigma c
+\quad (\text{from }y \xrightarrow{b} C(\alpha) \xrightarrow{c} x[1]) \\
+= &
+b(\alpha\pi + s\beta)p + \sigma(\pi\alpha)c
+\quad (\text{from }x \xrightarrow{\alpha} y \xrightarrow{\beta} z) \\
+= &
+d(\sigma)\pi p + bs\beta p - \sigma\pi d(p)
+\quad (\text{by the first two identities above}) \\
+= &
+d(\sigma)\pi p + bs\beta p - \sigma\delta\beta p
++ \sigma\delta\beta p - \sigma\pi d(p) \\
+= &
+(bs - \sigma\delta)\beta p + d(\sigma)\pi p
+- \sigma d(\pi)p - \sigma\pi d(p)\quad
+(\text{by the third identity above}) \\
+= &
+fe + d(\sigma \pi p)
+\end{align*}
+を得る。ここでは $\sigma \in \Hom^{-1}(x, C(\alpha))$ であることを用いた
+（Lemma \ref{dga-lemma-id-cone-null} の証明を参照）。したがって $e$ と $f$ は
+互いにホモトピー逆である。最後に，図式
+\ref{dga-equation-cone-isom-triangle} の右の正方形がホモトピーまで可換であることを
+確かめるには，$-cf=\delta$ を示せば十分である。これは
+$$
+-cf = -c(bs-\sigma\delta) = c\sigma\delta = \delta
+$$
+から従う。ここでは $cb=0$ を用いた。
+
+\medskip\noindent
+(2) について，Lemma \ref{dga-lemma-factor} のように与えられる分解
+$x\xrightarrow{\tilde{\alpha}}\tilde{y}\to y$ を考える。このとき第2の射は
+ホモトピー同値である。Lemmas \ref{dga-lemma-cone} および
+\ref{dga-lemma-analogue-third-isomorphism} により，三角形
+$$
+x \xrightarrow{\alpha} y \to C(\alpha) \to x[1]
+\quad\text{and}\quad
+x \xrightarrow{\tilde{\alpha}} \tilde{y} \to C(\tilde{\alpha}) \to x[1]
+$$
+の間に同型が存在する。三角形の同型は合成できるので，
+$\alpha$ を $\tilde{\alpha}$ に，$y$ を $\tilde{y}$ に，$C(\alpha)$ を
+$C(\tilde{\alpha})$ に置き換えることにより，$\alpha$ が許容単射であると
+仮定してよい。この場合，結果は (1) から従う。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-homotopy-category-pre-triangulated} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-analogue-homotopy-category-pre-triangulated}
+Situation \ref{dga-situation-ABC} において，ホモトピー圏 $K(\mathcal{A})$ は，
+自然な移動関手および識別三角形とともに前三角圏である。
+\end{lemma}
+
+\begin{proof}
+TR1，TR2，TR3 をそれぞれ確かめる。
+
+\medskip\noindent
+TR1 の証明。定義により，識別三角形と同型な三角形はすべて識別三角形である。
+$$
+\xymatrix{x\ar[r]^{1_x} & x\ar[r] & 0}
+$$
+は許容短完全列なので，$(x, x, 0, 1_x, 0, 0)$ は識別三角形である。
+さらに，$\text{Comp}(\mathcal{A})$ の射 $\alpha : x \to y$ が与えられると，
+$(x, y, c(\alpha), \alpha, i, -p)$ で与えられる三角形は Lemma
+\ref{dga-lemma-cone-homotopy} により識別三角形である。
+
+\medskip\noindent
+TR2 の証明。$(x,y,z,\alpha,\beta,\gamma)$ を三角形とし，
+$(y,z,x[1],\beta,\gamma,-\alpha[1])$ が識別三角形であるとする。このとき，
+付随する三角形 $(x',y',z',\alpha',\beta',\gamma')$ が
+$(y,z,x[1],\beta,\gamma,-\alpha[1])$ と同型になるような許容短完全列
+$0 \to x' \to y' \to z' \to 0$ が存在する。回転すると，
+$(x,y,z,\alpha,\beta,\gamma)$ は
+$(z'[-1],x',y', \gamma'[-1], \alpha',\beta')$ と同型である。Lemma
+\ref{dga-lemma-cone-rotate-isom} により，後者は
+$(z'[-1],x',c(\gamma'[-1]), \gamma'[-1], i, p)$ と同型である。
+次の図式に示す符号変更とともに二つの同型を合成する。
+$$
+\xymatrix@C=3pc{
+x\ar[r]^{\alpha}\ar[d] &
+y\ar[r]^{\beta}\ar[d] &
+z\ar[r]^{\gamma}\ar[d] &
+x[1]\ar[d] \\
+z'[-1]\ar[r]^{-\gamma'[-1]}\ar[d]_{-1_{z'[-1]}} &
+x \ar[r]^{\alpha'}\ar@{=}[d] &
+y' \ar[r]^{\beta'} \ar[d] &
+z'\ar[d]^{-1_{z'}} \\
+z'[-1]\ar[r]^{\gamma'[-1]} &
+x \ar[r]^{\alpha'} &
+c(\gamma'[-1]) \ar[r]^{-p} &
+z'
+}
+$$
+Lemma \ref{dga-lemma-cone-homotopy} (2) により
+$(x,y,z,\alpha,\beta,\gamma)$ は識別三角形である。逆に，
+$(x,y,z,\alpha,\beta,\gamma)$ が識別三角形であるとする。Lemma
+\ref{dga-lemma-cone-homotopy} (1) により，これは
+$\text{Comp}(\mathcal{A})$ のある射 $\alpha': x' \to y'$ に対する
+$(x',y', c(\alpha'), \alpha', i, -p)$ という形の三角形と同型である。
+% P03-STACKS-E927: the two frozen rotated target triangles use alpha[1]
+% although their displayed objects and preceding source triangle use alpha'.
+回転した三角形 $(y,z,x[1],\beta,\gamma, -\alpha[1])$ は
+$(y',c(\alpha'), x'[1], i, -p, -\alpha[1])$ と同型であり，これは
+$(y',c(\alpha'), x'[1], i, p, \alpha[1])$ と同型である。Lemma
+\ref{dga-lemma-restate-axiom-c} によりこの三角形は識別三角形である。したがって
+$(y,z,x[1], \beta,\gamma, -\alpha[1])$ は識別三角形である。
+
+\medskip\noindent
+TR3 の証明。$(x,y,z, \alpha,\beta,\gamma)$ および
+$(x',y',z',\alpha',\beta',\gamma')$ を
+$\text{Comp}(\mathcal{A})$ の識別三角形とし，
+% P03-STACKS-E928: distinguished triangles were defined in K(A), not
+% Comp(A); the frozen category name is retained.
+$f: x \to x'$ と $g: y \to y'$ を
+$\alpha' \circ f = g \circ \alpha$ を満たす射とする。Lemma
+\ref{dga-lemma-cone-homotopy} により，
+$(x,y,z,\alpha,\beta,\gamma)= (x,y,c(\alpha),\alpha, i, -p)$
+および
+$(x',y',z', \alpha',\beta',\gamma')= (x',y',c(\alpha'), \alpha',i',-p')$
+と仮定してよい。ここで Lemma \ref{dga-lemma-cone} を適用すれば証明が終わる。
+\end{proof}
+
+\noindent
+次の補題は Lemma \ref{dga-lemma-two-split-injections} の類似である。
+
+\begin{lemma}
+\label{dga-lemma-dgc-analogue-tr4}
+Situation \ref{dga-situation-ABC} において，$\mathcal{A}$ の許容単射
+% P03-STACKS-E933: admissibility was defined for morphisms of Comp(A);
+% the frozen ambient category A is retained.
+$x \xrightarrow{\alpha} y$，$y \xrightarrow{\beta} z$ が与えられると，
+TR4 を満たす識別三角形
+$(x,y,q_1,\alpha,p_1,\delta_1)$, $(x,z,q_2,\beta\alpha,p_2,\delta_2)$
+および $(y,z,q_3,\beta,p_3,\delta_3)$ が存在する。
+\end{lemma}
+
+\begin{proof}
+許容単射 $x\xrightarrow{\alpha} y$ および
+$y\xrightarrow{\beta}z$ が与えられたとする。これらを許容短完全列に
+延長することにより，識別三角形
+$$
+\xymatrix{
+x\ar@<0.5ex>[r]^{\alpha} &
+y\ar@<0.5ex>[l]^{\pi_1} \ar@<0.5ex>[r]^{p_1} &
+q_1 \ar[r]^{\delta_1} \ar@<0.5ex>[l]^{s_1} &
+x[1]
+}
+$$
+$$
+\xymatrix{
+x\ar@<0.5ex>[r]^{\beta\alpha} &
+z\ar@<0.5ex>[l]^{\pi_1\pi_3} \ar@<0.5ex>[r]^{p_2} &
+q_2 \ar[r]^{\delta_2} \ar@<0.5ex>[l]^{s_2} &
+x[1]
+}
+$$
+$$
+\xymatrix{
+y\ar@<0.5ex>[r]^{\beta} &
+z\ar@<0.5ex>[l]^{\pi_3} \ar@<0.5ex>[r]^{p_3} &
+q_3 \ar[r]^{\delta_3} \ar@<0.5ex>[l]^{s_3} &
+% P03-STACKS-E929: frozen third triangle ends at x[1], although its
+% first object is y and later p_1 delta_3 requires delta_3:q_3->y[1].
+x[1]
+}
+$$
+を得る。これらの図式において，写像 $\delta_i$ は Lemma
+\ref{dga-lemma-get-triangle} で定義した写像と同様に
+% P03-STACKS-E930: frozen notation invokes pi_2 although the second
+% splitting projection is displayed as pi_1 pi_3 and no pi_2 is introduced.
+$\delta_i = \pi_i d(s_i)$ と定義される。これらは次の実線部分の可換図式に収まる。
+$$
+\xymatrix@C=5pc@R=3pc{
+x\ar@<0.5ex>[r]^{\alpha} \ar@<0.5ex>[dr]^{\beta\alpha} &
+y\ar@<0.5ex>[d]^{\beta} \ar@<0.5ex>[l]^{\pi_1} \ar@<0.5ex>[r]^{p_1} &
+q_1 \ar[r]^{\delta_1} \ar@<0.5ex>[l]^{s_1} \ar@{.>}[dd]^{p_2\beta s_1} &
+x[1] \\
+ &
+z \ar@<0.5ex>[u]^{\pi_3}\ar@<0.5ex>[d]^{p_3}
+\ar@<0.5ex>[dr]^{p_2} \ar@<0.5ex>[ul]^{\pi_1\pi_3} & & \\
+ &
+q_3\ar@<0.5ex>[u]^{s_3} \ar[d]^{\delta_3} &
+q_2 \ar@{.>}[l]^{p_3s_2} \ar@<0.5ex>[ul]^{s_2} \ar[dr]^{\delta_2} \\
+ &
+y[1] & & x[1]}
+$$
+ここで破線の矢印は図示したように定義した。
+% P03-STACKS-E932: frozen source claims s_2 p_2=0, contradicting the
+% biproduct identity; the composition still vanishes via p_3 beta=0.
+$s_2p_2 = 0$ なので，その合成
+$p_3s_2p_2\beta s_1 = 0$ は明らかである。これらがともに
+$\text{Comp}(\mathcal{A})$ の射であると主張する。これは Lemma
+\ref{dga-lemma-get-triangle} の等式を用いて確かめられる。
+$$
+d(p_2\beta s_1) = p_2\beta d(s_1) = p_2\beta\alpha\pi_1 d(s_1) = 0
+$$
+である。ここでは $p_2\beta\alpha = 0$ を用いた。また，
+$$
+d(p_3s_2) = p_3d(s_2) = p_3\beta\alpha\pi_1\pi_3 d(s_2) = 0
+$$
+である。ここでは $p_3\beta = 0$ を用いた。
+$q_1\to q_2\to q_3$ が許容短完全列であることを確かめるには，
+基礎にある次数付き圏において $q_2 = q_1\oplus q_3$ であり，上の二つの射が
+余射影および射影であることを示せばよい。そのため，基礎にある次数付き圏
+$\mathcal{C}$ において
+$$
+y = x\oplus q_1,\quad
+z = y\oplus q_3 = x\oplus q_1\oplus q_3
+$$
+が成り立つことに注意する。ここで $\pi_1\pi_3$ は第1因子への射影
+% P03-STACKS-E931: frozen source gives x⊕q1⊕q3 -> z, the opposite of
+% the projection z -> x represented by pi_1 pi_3; the arrow is retained.
+$x\oplus q_1\oplus q_3\to z$ を与える。$\mathcal{A}$ の公理 (A) により
+$\mathcal{C}$ は加法圏なので，Homology, Lemma
+\ref{homology-lemma-additive-cat-biproduct-kernel} を適用して
+$$
+\Ker(\pi_1\pi_3) = q_1\oplus q_3
+$$
+を $\mathcal{C}$ において得る。$z = x\oplus q_2$ に Homology, Lemma
+\ref{homology-lemma-additive-cat-biproduct-kernel} をもう一度適用すると
+$\Ker(\pi_1\pi_3) = q_2$ を得る。したがって
+$\mathcal{C}$ において $q_2\cong q_1\oplus q_3$ である。
+上で定義した破線の射が余射影および射影を与えることは明らかである。
+
+\medskip\noindent
+最後に，許容短完全列 $q_1\to q_2\to q_3$ が誘導する射
+$\delta : q_3 \to q_1[1]$ が $p_1\delta_3$ と一致することを確かめる。
+Lemma \ref{dga-lemma-get-triangle} の構成により，射 $\delta$ は
+\begin{align*}
+p_1\pi_3s_2d(p_2s_3)
+= &
+p_1\pi_3s_2p_2d(s_3) \\
+= &
+p_1\pi_3(1-\beta\alpha\pi_1\pi_3)d(s_3) \\
+= &
+p_1\pi_3d(s_3)\quad (\text{since }\pi_3\beta = 0) \\
+= &
+p_1\delta_3
+\end{align*}
+で与えられ，望む結果を得る。これで証明は完了した。
+\end{proof}
+
+\noindent
+以上をまとめると，ついに Proposition
+\ref{dga-proposition-homotopy-category-triangulated} の類似を得る。
+
+\begin{proposition}
+\label{dga-proposition-ABC-homotopy-category-triangulated}
+Situation \ref{dga-situation-ABC} において，ホモトピー圏 $K(\mathcal{A})$ は，
+自然な移動関手および識別三角形とともに三角圏である。
+\end{proposition}
+
+\begin{proof}
+Lemma \ref{dga-lemma-analogue-homotopy-category-pre-triangulated} により，
+$K(\mathcal{A})$ は前三角圏である。Lemmas
+\ref{dga-lemma-analogue-sequence-maps-split} および
+\ref{dga-lemma-dgc-analogue-tr4} を Derived Categories, Lemma
+\ref{derived-lemma-easier-axiom-four} と組み合わせると，
+$K(\mathcal{A})$ は三角圏であると結論できる。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-functor-between-ABC}
+$R$ を環とする。$F : \mathcal{A} \to \mathcal{B}$ を，公理
+(A)，(B)，(C) を満たす $R$ 上の微分次数付き圏の間の関手とし，
+$F(x[1]) = F(x)[1]$ を満たすものとする。このとき $F$ は三角圏の完全関手
+$K(\mathcal{A}) \to K(\mathcal{B})$ を誘導する。
+\end{lemma}
+
+\begin{proof}
+実際，$x \to y \to z$ が $\text{Comp}(\mathcal{A})$ の許容短完全列ならば，
+$F(x) \to F(y) \to F(z)$ は $\text{Comp}(\mathcal{B})$ の
+許容短完全列である。さらに，Lemma \ref{dga-lemma-get-triangle} で構成した
+「境界」射 $\delta = \pi\text{d}(s) : z \to x[1]$ は射
+$F(\delta) : F(z) \to F(x[1]) = F(x)[1]$ を与える。これは許容短完全列
+$F(x) \to F(y) \to F(z)$ の境界写像
+$F(\pi) \text{d}(F(s))$ に等しい。
+\end{proof}
+
+
+
+
+
+\section{両側加群}
+\label{dga-section-bimodules}
+
+\noindent
+Section \ref{dga-section-tensor-product} で始めた議論を続ける。
+
+\begin{definition}
+\label{dga-definition-bimodule}
+両側加群を定義する。$R$ を環とする。
+\begin{enumerate}
+\item $A$ と $B$ を $R$-代数とする。{\it $(A, B)$-両側加群}とは，
+$R$-双線形写像
+% P03-STACKS-E934: frozen English misspells “equipped” as “equippend”.
+$$
+A \times M \to M, (a, x) \mapsto ax
+\quad\text{および}\quad
+M \times B \to M, (x, b) \mapsto xb
+$$
+を備えた $R$-加群 $M$ で，次を満たすものをいう。
+\begin{enumerate}
+\item $a'(ax) = (a'a)x$ および $(xb)b' = x(bb')$。
+\item $a(xb) = (ax)b$。
+\item $1 x = x = x 1$。
+\end{enumerate}
+\item $A$ と $B$ を $\mathbf{Z}$-次数付き $R$-代数とする。
+{\it 次数付き $(A, B)$-両側加群}とは，次数付け
+$M = \bigoplus M^n$ をもち，
+$A^n M^m \subset M^{n + m}$ および $M^n B^m \subset M^{n + m}$ を
+満たす $(A, B)$-両側加群 $M$ をいう。
+\item $A$ と $B$ を微分次数付き $R$-代数とする。
+{\it 微分次数付き $(A, B)$-両側加群}とは，次数 $1$ の斉次な微分
+$\text{d} : M \to M$ を備え，斉次元 $a \in A$，$x \in M$，$b \in B$ に
+対して
+$\text{d}(ax) = \text{d}(a)x + (-1)^{\deg(a)}a\text{d}(x)$ および
+$\text{d}(xb) = \text{d}(x)b + (-1)^{\deg(x)}x\text{d}(b)$ を満たす
+次数付き $(A, B)$-両側加群をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+微分次数付き $(A, B)$-両側加群 $M$ は，次数付けと微分が一致し，
+$A$-加群構造と $B$-加群構造が可換であるような，左微分次数付き
+$A$-加群でもある右微分次数付き $B$-加群と同じものである。
+正確な主張は次のとおりである。
+
+\begin{lemma}
+\label{dga-lemma-what-makes-a-bimodule-dg}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を
+$R$ 上の微分次数付き代数とする。$M$ を右微分次数付き $B$-加群とする。
+所与の微分次数付き $B$-加群構造と両立する $M$ 上の
+$(A, B)$-両側加群構造と，微分次数付き $R$-代数の準同型
+$$
+A
+\longrightarrow
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(M, M)
+$$
+との間には一対一対応がある。
+\end{lemma}
+
+\begin{proof}
+$\mu : A \times M \to M$ が，$M$ の基礎にある $R$-加群の複体
+$M^\bullet$ 上に左微分次数付き $A$-加群構造を定めるとする。
+Lemma \ref{dga-lemma-left-module-structure} により，構造 $\mu$ は
+微分次数付き $R$-代数の写像
+$\gamma : A \to \Hom^\bullet(M^\bullet, M^\bullet)$ に対応する。
+補題の主張は単に，$\mu$ が $B$ の作用と可換であることと，
+$\gamma$ の像が
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(M, M) \subset
+\Hom^\bullet(M^\bullet, M^\bullet)
+$$
+に含まれることが同値であるということである。詳しい計算は省略する。
+\end{proof}
+
+\noindent
+$M$ を微分次数付き $(A, B)$-両側加群とする。Section
+\ref{dga-section-left-modules} により，左微分次数付き $A$-加群構造は
+右微分次数付き $A^{opp}$-加群構造に対応することを思い出そう。
+$A$-加群構造と $B$-加群構造は可換なので，これにより $M$ は
+微分次数付き $A^{opp} \otimes_R B$-加群の構造をもつ。
+$$
+x \cdot (a \otimes b) = (-1)^{\deg(a)\deg(x)} axb
+$$
+逆に，微分次数付き $A^{opp} \otimes_R B$-加群 $M$ が与えられれば，
+上の式を用いて微分次数付き $(A, B)$-両側加群を得ることができる。
+
+\begin{lemma}
+\label{dga-lemma-bimodule-over-tensor}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を
+$R$ 上の微分次数付き代数とする。上の構成は圏同値
+$$
+\begin{matrix}
+\text{微分次数付き}\\
+(A, B)\text{-両側加群}
+\end{matrix}
+\longleftrightarrow
+\begin{matrix}
+\text{右微分次数付き }\\
+A^{opp} \otimes_R B\text{-加群}
+\end{matrix}
+$$
+を定める。
+\end{lemma}
+
+\begin{proof}
+上の議論から直ちに従う。
+% P03-STACKS-E935: frozen English says “from discussion the above”.
+\end{proof}
+
+\noindent
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を
+微分次数付き $R$-代数とする。$P$ を微分次数付き $(A, B)$-両側加群とする。
+$P$ が {\it 性質 (P) をもつ}とは，微分次数付き $(A, B)$-両側加群による
+フィルトレーション
+% P03-STACKS-E936: frozen English duplicates “if it there exists”.
+$$
+0 = F_{-1}P \subset F_0P \subset F_1P \subset \ldots \subset P
+$$
+が存在し，次を満たすことをいう。
+\begin{enumerate}
+\item $P = \bigcup F_pP$,
+\item 包含 $F_iP \to F_{i + 1}P$ は次数付き $(A, B)$-両側加群の
+写像として分裂する。
+\item 商 $F_{i + 1}P/F_iP$ は微分次数付き $(A, B)$-両側加群として，
+$(A \otimes_R B)[k]$ の直和と同型である。
+\end{enumerate}
+
+\begin{lemma}
+\label{dga-lemma-bimodule-resolve}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を
+微分次数付き $R$-代数とする。$M$ を微分次数付き $(A, B)$-両側加群とする。
+上で定義した性質 (P) を $P$ がもち，かつ擬同型であるような
+微分次数付き $(A, B)$-両側加群の準同型 $P \to M$ が存在する。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dga-lemma-bimodule-over-tensor} および
+\ref{dga-lemma-resolve} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-bimodule-property-P-sequence}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を
+微分次数付き $R$-代数とする。$P$ を性質 (P) をもつ
+微分次数付き $(A, B)$-両側加群とし，対応するフィルトレーションを
+$F_\bullet$ とする。このとき，微分次数付き $(A, B)$-両側加群の短完全列
+% P03-STACKS-E937: frozen English uses a comma-spliced “Let ..., then”.
+$$
+0 \to
+\bigoplus\nolimits F_iP \to
+\bigoplus\nolimits F_iP \to P \to 0
+$$
+が得られ，これは次数付き $(A, B)$-両側加群の列として分裂する。
+\end{lemma}
+
+\begin{proof}
+Lemmas \ref{dga-lemma-bimodule-over-tensor} および
+\ref{dga-lemma-property-P-sequence} から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{両側加群とテンソル積}
+\label{dga-section-bimodules-tensor}
+
+\noindent
+$R$ を環とし，$A$ と $B$ を $R$-代数とする。$M$ を右 $A$-加群，
+$N$ を $(A, B)$-両側加群とする。このとき $M \otimes_A N$ は右
+$B$-加群である。
+
+\medskip\noindent
+前段の状況で，$A$ と $B$ が $\mathbf{Z}$-次数付き代数，$M$ が次数付き
+$A$-加群，$N$ が次数付き $(A, B)$-両側加群であるならば，
+$M \otimes_A N$ は右次数付き $B$-加群である。この構成は $M$ に関して
+関手的であり，
+$$
+- \otimes_A N :
+\text{Mod}^{gr}_A
+\longrightarrow
+\text{Mod}^{gr}_B
+$$
+という Example \ref{dga-example-gm-gr-cat} の意味での次数付き圏の関手を定める。
+実際，$M$ と $M'$ が次数付き $A$-加群で，$f : M \to M'$ が次数 $n$ の
+斉次な $A$-加群準同型ならば，
+$f \otimes \text{id}_N : M \otimes_A N \to M' \otimes_A N$
+は次数 $n$ の斉次な $B$-加群準同型である。
+
+\medskip\noindent
+前段の状況で，$(A, \text{d})$ と $(B, \text{d})$ が微分次数付き代数，
+$M$ が微分次数付き $A$-加群，$N$ が微分次数付き $(A, B)$-両側加群で
+あるならば，$M \otimes_A N$ は右微分次数付き $B$-加群である。
+
+\begin{lemma}
+\label{dga-lemma-tensor}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を $R$ 上の
+微分次数付き代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+このとき $M \mapsto M \otimes_A N$ は微分次数付き圏の関手
+$$
+- \otimes_A N :
+\text{Mod}^{dg}_{(A, \text{d})}
+\longrightarrow
+\text{Mod}^{dg}_{(B, \text{d})}
+$$
+を定める。この関手は Lemma \ref{dga-lemma-functorial} を適用することにより，
+関手
+$$
+\text{Mod}_{(A, \text{d})} \to \text{Mod}_{(B, \text{d})}
+\quad\text{および}\quad
+K(\text{Mod}_{(A, \text{d})}) \to K(\text{Mod}_{(B, \text{d})})
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+この構成が基礎にある次数付き圏の関手を定めることは上で見た。したがって，
+この構成が微分と両立することを示せば十分である。$M$ と $M'$ を微分次数付き
+$A$-加群とし，$f : M \to M'$ を次数 $n$ の斉次な $A$-加群準同型とする。
+このとき
+$$
+\text{d}(f) = \text{d}_{M'} \circ f - (-1)^n f \circ \text{d}_M
+$$
+である。一方，
+$$
+\text{d}(f \otimes \text{id}_N) =
+\text{d}_{M' \otimes_A N} \circ
+(f \otimes \text{id}_N)
+- (-1)^n
+(f \otimes \text{id}_N) \circ \text{d}_{M \otimes_A N}
+$$
+である。これを，$x \in M$ と $y \in N$ が斉次である元 $x \otimes y$ に
+適用すると，
+% P03-STACKS-E939: the frozen final line applies d(f) directly to
+% x tensor y although d(f) has domain M; the tensor-id factor is missing.
+\begin{align*}
+\text{d}(f \otimes \text{id}_N)(x \otimes y)
+= &
+\text{d}_{M'}(f(x)) \otimes y + (-1)^{n + \deg(x)}f(x) \otimes \text{d}_N(y) \\
+& - (-1)^n f(\text{d}_M(x)) \otimes y
+- (-1)^{n + \deg(x)}f(x) \otimes \text{d}_N(y) \\
+= &
+\text{d}(f) (x \otimes y)
+\end{align*}
+を得る。したがって $\text{d}(f) \otimes \text{id}_N =
+\text{d}(f \otimes \text{id}_N)$ であり，証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-shift-tensor-no-sign}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を $R$ 上の
+微分次数付き代数とする。$N$ を微分次数付き $(A, B)$-両側加群，
+$M$ を右微分次数付き $A$-加群とする。このとき任意の
+$k \in \mathbf{Z}$ に対して，符号を介在させずに定義される右微分次数付き
+$B$-加群の同型
+$$
+(M \otimes_A N)[k] \longrightarrow
+M[k] \otimes_A N
+$$
+が存在する。《代数詳論》第 \ref{more-algebra-section-sign-rules} 節を参照せよ。
+\end{remark}
+
+\noindent
+$R$ を環，$A$，$B$，$C$ を $R$-代数，$M$ を右 $A$-加群，
+$N$ を $(A, B)$-両側加群，$N'$ を $(B, C)$-両側加群とすると，
+$N \otimes_B N'$ は $(A, C)$-両側加群であり，
+$$
+(M \otimes_A N) \otimes_B N' = M \otimes_A (N \otimes_B N')
+$$
+が成り立つ。
+% P03-STACKS-E938: frozen English says “continuous to hold” for
+% the verbal construction “continues to hold”.
+この等式は次数付きの場合および微分次数付きの場合にも引き続き成り立つ。
+符号規則については《代数詳論》第
+\ref{more-algebra-section-sign-rules} 節を参照せよ。
+
+
+
+
+
+
+\section{両側加群と内部 Hom}
+\label{dga-section-bimodules-hom}
+
+\noindent
+$R$ を環とする。$A$ が $R$-代数（Section \ref{dga-section-conventions} の
+規約を参照）で，$M$，$M'$ が右 $A$-加群ならば，通常どおり
+$$
+\Hom_A(M, M') = \{f : M \to M' \mid f \text{ は }A\text{-線形}\}
+$$
+と定義する。
+
+\medskip\noindent
+% P03-STACKS-E940: the two frozen introductions at source lines 4825
+% and 4834 say “R-be a ring” rather than “R be a ring”.
+$R$ を環，$A$ と $B$ を $R$-代数，$N$ を $(A, B)$-両側加群，
+$N'$ を右 $B$-加群とする。この状況では，前合成により
+$$
+\Hom_B(N, N')
+$$
+を右 $A$-加群とみなす。
+
+\medskip\noindent
+$R$ を環，$A$ と $B$ を $\mathbf{Z}$-次数付き $R$-代数，$N$ を次数付き
+$(A, B)$-両側加群，$N'$ を右次数付き $B$-加群とする。この状況では，
+Example \ref{dga-example-gm-gr-cat} で定義した次数付き $R$-加群
+$$
+\Hom_{\text{Mod}^{gr}_B}(N, N')
+$$
+を，前合成により右次数付き $A$-加群とみなす。この構成は $N'$ に関して
+関手的であり，
+$$
+\Hom_{\text{Mod}^{gr}_B}(N, -) :
+\text{Mod}^{gr}_B
+\longrightarrow
+\text{Mod}^{gr}_A
+$$
+という Example \ref{dga-example-gm-gr-cat} の意味での次数付き圏の関手を定める。
+実際，$N_1$ と $N_2$ が次数付き $B$-加群で，$f : N_1 \to N_2$ が
+次数 $n$ の斉次な $B$-加群準同型ならば，誘導される写像
+$\Hom_{\text{Mod}^{gr}_B}(N, N_1) \to \Hom_{\text{Mod}^{gr}_B}(N, N_2)$
+は次数 $n$ の斉次な $A$-加群準同型である。
+
+\medskip\noindent
+$R$ を環，$A$ と $B$ を微分 $\mathbf{Z}$-次数付き $R$-代数，
+$N$ を微分次数付き $(A, B)$-両側加群，$N'$ を右微分次数付き
+$B$-加群とする。この状況では，Example \ref{dga-example-dgm-dg-cat} で
+定義した微分次数付き $R$-加群
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, N')
+$$
+を，次数付きの場合と同様に前合成により右微分次数付き $A$-加群とみなす。
+これは微分と両立する。実際，乗法は次の合成である。
+% P03-STACKS-E941: the frozen display uniquely abbreviates the dg
+% module category by subscript B, omitting the defining (B,d) datum.
+$$
+\Hom_{\text{Mod}^{dg}_B}(N, N') \otimes_R A \to
+\Hom_{\text{Mod}^{dg}_B}(N, N') \otimes_R
+\Hom_{\text{Mod}^{dg}_B}(N, N) \to
+\Hom_{\text{Mod}^{dg}_B}(N, N')
+$$
+最初の矢印は Lemma \ref{dga-lemma-what-makes-a-bimodule-dg} の写像を用い，
+二番目の矢印は微分次数付き圏 $\text{Mod}^{dg}_{(B, \text{d})}$ に
+おける合成である。
+
+\begin{lemma}
+\label{dga-lemma-hom}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を $R$ 上の
+微分次数付き代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+上の構成は微分次数付き圏の関手
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, -) :
+\text{Mod}^{dg}_{(B, \text{d})}
+\longrightarrow
+\text{Mod}^{dg}_{(A, \text{d})}
+$$
+を定める。この関手は Lemma \ref{dga-lemma-functorial} を適用することにより，
+関手
+$$
+\text{Mod}_{(B, \text{d})} \to \text{Mod}_{(A, \text{d})}
+\quad\text{および}\quad
+K(\text{Mod}_{(B, \text{d})}) \to K(\text{Mod}_{(A, \text{d})})
+$$
+を誘導する。
+\end{lemma}
+
+\begin{proof}
+この構成が基礎にある次数付き圏の関手を定めることは上で見た。したがって，
+この構成が微分と両立することを示せば十分である。$N_1$ と $N_2$ を
+微分次数付き $B$-加群とし，
+$$
+H_{12} = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N_1, N_2),\quad
+H_1 = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, N_1),\quad
+H_2 = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, N_2)
+$$
+と書く。微分次数付き圏 $\text{Mod}^{dg}_{(B, \text{d})}$ における合成
+$$
+c : H_{12} \otimes_R H_1 \longrightarrow H_2
+$$
+を考える。$f : N_1 \to N_2$ を次数 $n$ の斉次な $B$-加群準同型，
+すなわち $f \in H_{12}^n$ とする。補題の関手は $f$ を
+$c_f : H_1 \to H_2$，$g \mapsto c(f, g)$ に写す。$\text{d}(f)$ についても
+同様である。一方，
+$$
+\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(H_1, H_2)
+$$
+上の微分は $c_f$ を
+$\text{d}_{H_2} \circ c_f - (-1)^n c_f \circ \text{d}_{H_1}$ に写す。
+$c$ は $R$-加群の複体の射なので，
+$\text{d} c(f, g) = c(\text{d}f, g) + (-1)^n c(f, \text{d}g)$.
+したがって
+\begin{align*}
+(\text{d}c_f)(g)
+& =
+\text{d}c(f,g) - (-1)^n c(f, \text{d}g) \\
+& =
+c(\text{d}f, g) + (-1)^n c(f, \text{d}g)  - (-1)^n c(f, \text{d}g) \\
+& =
+c(\text{d}f, g) = c_{\text{d}f}(g)
+\end{align*}
+を得て，証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-shift-hom-no-sign}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を $R$ 上の
+微分次数付き代数とする。$N$ を微分次数付き $(A, B)$-両側加群，
+$N'$ を右微分次数付き $B$-加群とする。このとき任意の
+$k \in \mathbf{Z}$ に対して，符号を介在させずに定義される右微分次数付き
+$A$-加群の同型
+$$
+\Hom_{\text{Mod}^{gr}_B}(N, N')[k]
+\longrightarrow
+\Hom_{\text{Mod}^{gr}_B}(N, N'[k])
+$$
+が存在する。《代数詳論》第 \ref{more-algebra-section-sign-rules} 節を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{dga-lemma-tensor-hom-adjunction}
+$R$ を環とし，$A$ と $B$ を $R$-代数とする。$M$ を右 $A$-加群，
+$N$ を $(A, B)$-両側加群，$N'$ を右 $B$-加群とする。このとき
+$R$-加群の標準同型
+$$
+\Hom_B(M \otimes_A N, N') = \Hom_A(M, \Hom_B(N, N'))
+$$
+が存在する。$A$，$B$，$M$，$N$，$N'$ に相互に整合する次数付けが
+与えられているならば，次数付き $R$-加群の標準同型
+$$
+\Hom_{\text{Mod}_B^{gr}}(M \otimes_A N, N') =
+\Hom_{\text{Mod}_A^{gr}}(M, \Hom_{\text{Mod}_B^{gr}}(N, N'))
+$$
+が存在する。
+% P03-STACKS-E942: the frozen English omits terminal punctuation after
+% “of graded R-modules” before beginning the next conditional sentence.
+$A$，$B$，$M$，$N$，$N'$ が相互に整合する微分次数付き対象ならば，
+$R$-加群の複体の標準同型
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(M \otimes_A N, N') =
+\Hom_{\text{Mod}^{dg}_{(A, \text{d})}}(M,
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, N'))
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：次数なしの場合，両辺を右側で $B$-線形な
+% P03-STACKS-E943: the frozen hint calls the tensor-product universal
+% maps A-bilinear; with a right A-module and a left A-action they are A-balanced.
+$A$-双線形写像 $\psi : M \times N \to N'$ と解釈する。
+（微分）次数付きの場合には，《代数詳論》補題
+\ref{more-algebra-lemma-compose} の同型を用い，それが加群構造と両立することを
+確かめればよい。あるいは Lemma \ref{dga-lemma-characterize-hom} の同型を用い，
+それが $B$-加群構造と両立することを示せばよい。
+\end{proof}
+
+
+
+
+
+
+
+\section{導来 Hom}
+\label{dga-section-restriction}
+
+\noindent
+本節は《代数詳論》第 \ref{more-algebra-section-RHom} 節と同様である。
+
+\medskip\noindent
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を $R$ 上の
+微分次数付き代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+Section \ref{dga-section-bimodules-hom} の関手
+\begin{equation}
+\label{dga-equation-restriction}
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, -) :
+\text{Mod}_{(B, \text{d})}
+\longrightarrow
+\text{Mod}_{(A, \text{d})}
+\end{equation}
+を考える。
+
+\begin{lemma}
+\label{dga-lemma-restriction-homotopy}
+関手 (\ref{dga-equation-restriction}) は三角圏の完全関手
+$K(\text{Mod}_{(B, \text{d})}) \to K(\text{Mod}_{(A, \text{d})})$
+を定める。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-hom} および Remark
+\ref{dga-remark-shift-hom-no-sign} を介して，Lemma
+\ref{dga-lemma-functor-between-ABC} の一般原理から従う。
+\end{proof}
+
+\noindent
+三角圏の完全関手
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, -) :
+K(\text{Mod}_{(B, \text{d})}) \to K(\text{Mod}_{(A, \text{d})})
+$$
+が存在することを思い出そう。Lemma \ref{dga-lemma-restriction-homotopy} を
+参照せよ。図式
+$$
+\xymatrix{
+K(\text{Mod}_{(B, \text{d})}) \ar[d] \ar[rr]_{\text{上記参照}} \ar[rrd]_F & &
+K(\text{Mod}_{(A, \text{d})}) \ar[d] \\
+D(B, \text{d}) \ar@{..>}[rr] & &
+D(A, \text{d})
+}
+$$
+を考える。合成 $F$ の {\it 右導来関手}として破線の矢印を構成したい。
+（{\it 注意}：興味深い場合の大半では，この図式は可換にならない。）
+すなわち，《導来圏》第 \ref{derived-section-derived-functors} 節の
+一般的設定において，
+% P03-STACKS-E567: the frozen source names quasi-isomorphisms in K(Mod_A),
+% although F has source K(Mod_B) and its derived functor has domain D(B).
+$K(\text{Mod}_{(A, \text{d})})$ の擬同型の乗法的系に関する $F$ の
+右導来関手を計算したい。
+
+\begin{lemma}
+\label{dga-lemma-derived-restriction}
+上の状況では $F$ の右導来関手が存在する。これを
+$R\Hom(N, -) : D(B, \text{d}) \to D(A, \text{d})$ と書く。
+\end{lemma}
+
+\begin{proof}
+これを証明するために，《導来圏》補題
+\ref{derived-lemma-find-existence-computes} を用いる。対象の族
+$\mathcal{I}$ として，性質 (I) をもつ対象を用いる。性質 (1) は Lemma
+\ref{dga-lemma-right-resolution} で示した。性質 (2) も成り立つ。実際，
+$s : I \to I'$ が性質 (I) をもつ加群の擬同型ならば，Lemma
+\ref{dga-lemma-hom-derived} により $s$ はホモトピー同値である。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-functoriality-derived-restriction}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を
+微分次数付き $R$-代数とする。$f : N \to N'$ を微分次数付き
+$(A, B)$-両側加群の準同型とする。このとき $f$ は関手の射
+$$
+- \circ f : R\Hom(N', -) \longrightarrow R\Hom(N, -)
+$$
+を誘導する。
+% P03-STACKS-E568: the frozen conclusion and proof reverse the
+% precomposition notation from “- o f” to the ill-typed “f o -”.
+$f$ が擬同型ならば，$f \circ -$ は関手の同型である。
+\end{lemma}
+
+\begin{proof}
+% P03-STACKS-E944: frozen English omits “for” in “Write B = ... the category”.
+微分次数付き $B$-加群の微分次数付き圏を
+$\mathcal{B} = \text{Mod}^{dg}_{(B, \text{d})}$ と書く。Example
+\ref{dga-example-dgm-dg-cat} を参照せよ。$I$ を性質 (I) をもつ
+微分次数付き $B$-加群とする。このとき
+% P03-STACKS-E568: the same frozen reversed composition notation recurs here.
+$f \circ - : \Hom_\mathcal{B}(N', I) \to \Hom_\mathcal{B}(N, I)$
+は微分次数付き $A$-加群の写像である。さらに，これは $I$ に関して関手的である。
+関手 $R\Hom(N', -)$ および $R\Hom(N, -)$ は，性質 (I) をもつ対象への
+$\Hom_\mathcal{B}$ の適用によって計算されるので（Lemma
+\ref{dga-lemma-derived-restriction}），表示した関手の変換を得る。
+
+\medskip\noindent
+ここで $f$ が擬同型であると仮定する。$F_\bullet$ を $I$ 上の所与の
+フィルトレーションとする。$I = \lim I/F_pI$ なので，
+$\Hom_\mathcal{B}(N', I) = \lim \Hom_\mathcal{B}(N', I/F_pI)$ および
+$\Hom_\mathcal{B}(N, I) = \lim \Hom_\mathcal{B}(N, I/F_pI)$ である。
+系 $I/F_pI$ の遷移写像は次数付き加群として分裂するので，系
+$\Hom_\mathcal{B}(N', I/F_pI)$ および
+$\Hom_\mathcal{B}(N, I/F_pI)$ の遷移写像は全射である。したがって，
+アーベル群の複体とみなした $\Hom_\mathcal{B}(N', I)$ および
+$\Hom_\mathcal{B}(N, I)$ は，それぞれ複体系
+$\Hom_\mathcal{B}(N', I/F_pI)$ および
+$\Hom_\mathcal{B}(N, I/F_pI)$ の $R\lim$ を計算する。
+《代数詳論》補題 \ref{more-algebra-lemma-compute-Rlim} を参照せよ。
+したがって，各写像
+$$
+\Hom_\mathcal{B}(N', I/F_pI) \to \Hom_\mathcal{B}(N, I/F_pI)
+$$
+が擬同型であることを示せば十分である。全射
+$I/F_{p + 1}I \to I/F_pI$ は次数付き $B$-加群の写像として分裂するので，
+$$
+0 \to \Hom_\mathcal{B}(N', F_pI/F_{p + 1}I) \to
+\Hom_\mathcal{B}(N', I/F_{p + 1}I) \to
+\Hom_\mathcal{B}(N', I/F_pI) \to 0
+$$
+は微分次数付き $A$-加群の短完全列である。$N$ についても同様の列があり，
+$f$ は短完全列の写像を誘導する。したがって，$p$ に関する帰納法
+（$I/F_0I = 0$ となる $p = 0$ から始める）により，写像
+$\Hom_\mathcal{B}(N', F_pI/F_{p + 1}I) \to \Hom_\mathcal{B}(N, F_pI/F_{p + 1}I)$
+が擬同型であることを示せば十分である。$F_pI/F_{p + 1}I$ は
+% P03-STACKS-E569: I is a B-module and property (I) gives products of
+% shifts of B-dual, while the frozen source says A-dual here.
+$A^\vee$ のシフトの直積なので，
+% P03-STACKS-E570: frozen English says “it suffice”.
+$\Hom_\mathcal{B}(N', B^\vee[k]) \to \Hom_\mathcal{B}(N, B^\vee[k])$
+が擬同型であることを示せば十分である。Lemma
+\ref{dga-lemma-hom-into-shift-dual-free} により，さらに
+$(N')^\vee \to N^\vee$ が擬同型であることを示せば十分である。
+これは，$f$ が擬同型であり，$(\ )^\vee$ が完全関手であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-derived-restriction-exts}
+$(A, \text{d})$ と $(B, \text{d})$ を環 $R$ 上の微分次数付き代数とし，
+$N$ を微分次数付き $(A, B)$-両側加群とする。このとき任意の
+$n \in \mathbf{Z}$ に対して $R$-加群の同型
+$$
+H^n(R\Hom(N, M)) = \Ext^n_{D(B, \text{d})}(N, M)
+$$
+が存在し，$M$ に関して関手的である。また，Lemma
+\ref{dga-lemma-functoriality-derived-restriction} で述べた操作に関して
+$N$ にも関手的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-derived-restriction} の証明で，
+$$
+R\Hom(N, M) =
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, I)
+$$
+が微分次数付き $A$-加群として成り立つことを見た。ここで $M \to I$ は，
+$M$ から性質 (I) をもつ微分次数付き $B$-加群への擬同型である。
+したがって，Lemma \ref{dga-lemma-hom-derived} により，この複体は正しい
+コホモロジー加群をもつ。これらの同一視の関手性に関する議論は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-compute-derived-restriction}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。すべての
+$N' \in K(B, \text{d})$ に対して
+$\Hom_{D(B, \text{d})}(N, N') = \Hom_{K(\text{Mod}_{(B, \text{d})})}(N, N')$
+が成り立つならば，たとえば $N$ が微分次数付き $B$-加群として性質 (P) を
+もつならば，
+$$
+R\Hom(N, M) = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, M)
+$$
+が $D(B, \text{d})$ の $M$ に関して関手的に成り立つ。
+\end{lemma}
+
+\begin{proof}
+構成により（Lemma \ref{dga-lemma-derived-restriction}），
+$R\Hom(N, M)$ を求めるには，性質 (I) をもつ微分次数付き $B$-加群 $I$ への
+擬同型 $M \to I$ を選び，
+$R\Hom(N, M) = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, I)$
+とおく。仮定により，$M \to I$ が誘導する写像
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, M) \longrightarrow
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, I)
+$$
+は擬同型である。Example \ref{dga-example-dgm-dg-cat} の議論を参照せよ。
+これで補題が証明された。$N$ が $B$-加群として性質 (P) をもつならば，
+Lemma \ref{dga-lemma-hom-derived} により仮定が満たされる。
+\end{proof}
+
+
+
+
+\section{導来 Hom の変種}
+\label{dga-section-variant}
+
+\noindent
+$\mathcal{A}$ をアーベル圏とする。$\mathcal{A}$ の複体からなる微分次数付き圏
+$\text{Comp}^{dg}(\mathcal{A})$ を考える。Example
+\ref{dga-example-category-complexes} を参照せよ。$K^\bullet$ を
+$\mathcal{A}$ の複体とし，
+$$
+(E, \text{d}) = \Hom_{\text{Comp}^{dg}(\mathcal{A})}(K^\bullet, K^\bullet)
+$$
+とおく。Lemma \ref{dga-lemma-construction} の微分次数付き圏の関手
+$$
+\text{Comp}^{dg}(\mathcal{A}) \longrightarrow \text{Mod}^{dg}_{(E, \text{d})},
+\quad
+X^\bullet
+\longmapsto
+\Hom_{\text{Comp}^{dg}(\mathcal{A})}(K^\bullet, X^\bullet)
+$$
+を考える。
+
+\begin{lemma}
+\label{dga-lemma-existence-of-derived}
+% P03-STACKS-E945: frozen English splits “In the situation above. If ...”
+% into a sentence fragment followed by a conditional clause.
+上の状況にあるとする。関手
+$\Hom(K^\bullet, -) : K(\mathcal{A}) \to D(\textit{Ab})$ の右導来関手
+$R\Hom(K^\bullet, -)$ が $D(\mathcal{A})$ のすべての対象で定義されるならば，
+三角圏の標準的な完全関手
+$$
+R\Hom(K^\bullet, -) : D(\mathcal{A}) \longrightarrow D(E, \text{d})
+$$
+が得られ，付随するアーベル群の複体をとると通常の関手に帰着する。
+% P03-STACKS-E946: frozen English has a doubled space in “usual one  on”.
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-construction} により，付随する関手
+$K(\mathcal{A}) \to K(\text{Mod}_{(E, \text{d})})$ が存在する。
+この関手は三角圏の完全関手であると主張する。実際，
+$f : A^\bullet \to B^\bullet$ を $\mathcal{A}$ の複体の写像とすると，
+計算により
+$$
+\Hom_{\text{Comp}^{dg}(\mathcal{A})}(K^\bullet, C(f)^\bullet)
+=
+C\left(
+\Hom_{\text{Comp}^{dg}(\mathcal{A})}(K^\bullet, A^\bullet) \to
+\Hom_{\text{Comp}^{dg}(\mathcal{A})}(K^\bullet, B^\bullet)
+\right)
+$$
+が成り立つ。ここで右辺は，本章で先に定義した
+$\text{Mod}_{(E, \text{d})}$ における錐である。したがって，この関手は
+錐と両立し，ゆえに識別三角形とも両立する。
+$X^\bullet$ を $K(\mathcal{A})$ の対象とし，擬同型
+$s : X^\bullet \to Y^\bullet$ の圏を考える。仮定により，関手
+% P03-STACKS-E947: the frozen formula switches from the defined
+% dg-complex Hom to Hom_A on two complexes at this decisive locus.
+$(s : X^\bullet \to Y^\bullet) \mapsto \Hom_\mathcal{A}(K^\bullet, Y^\bullet)$
+は $D(\textit{Ab})$ でみると本質的に定値である。しかし忘却関手
+$D(E, \text{d}) \to D(\textit{Ab})$ はコホモロジーをとることと
+両立するので，同じことが $D(E, \text{d})$ でも成り立つ。これで補題が証明された。
+\end{proof}
+
+\noindent
+{\bf 注意：} この補題は記述どおりに成り立ち，その形のままで有用かもしれないが，
+微分代数 $E$ は，
+$H^n(E) = \Ext^n_{D(\mathcal{A})}(K^\bullet, K^\bullet)$
+がすべての $n \in \mathbf{Z}$ に対して成り立たない限り「正しい」ものではない。
+
+
+
+
+
+\section{導来テンソル積}
+\label{dga-section-base-change}
+
+\noindent
+本節は《代数詳論》第
+\ref{more-algebra-section-derived-base-change} 節と同様である。
+
+\medskip\noindent
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を $R$ 上の
+微分次数付き代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+Section \ref{dga-section-bimodules-tensor} で定義した関手
+\begin{equation}
+\label{dga-equation-bc}
+\text{Mod}_{(A, \text{d})}
+\longrightarrow
+\text{Mod}_{(B, \text{d})},\quad
+M \longmapsto M \otimes_A N
+\end{equation}
+を考える。
+
+\begin{lemma}
+\label{dga-lemma-bc-homotopy}
+関手 (\ref{dga-equation-bc}) は三角圏の完全関手
+$K(\text{Mod}_{(A, \text{d})}) \to K(\text{Mod}_{(B, \text{d})})$
+を定める。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-tensor} および Remark
+\ref{dga-remark-shift-tensor-no-sign} を介して，Lemma
+\ref{dga-lemma-functor-between-ABC} の一般原理から従う。
+\end{proof}
+
+\noindent
+ここで図式
+$$
+\xymatrix{
+K(\text{Mod}_{(A, \text{d})}) \ar[d] \ar[rr]_{- \otimes_A N} \ar[rrd]_F & &
+K(\text{Mod}_{(B, \text{d})}) \ar[d] \\
+D(A, \text{d}) \ar@{..>}[rr] & &
+D(B, \text{d})
+}
+$$
+を考えることができる。以下で構成する破線の矢印は，合成 $F$ の
+{\it 左導来関手}となる。（{\it 注意}：この図式は可換にならない。）
+すなわち，《導来圏》第 \ref{derived-section-derived-functors} 節の
+一般的設定において，$K(\text{Mod}_{(A, \text{d})})$ の擬同型の
+乗法的系に関する $F$ の左導来関手を計算したい。
+
+\begin{lemma}
+\label{dga-lemma-derived-bc}
+上の状況では $F$ の左導来関手が存在する。これを
+$- \otimes_A^\mathbf{L} N : D(A, \text{d}) \to D(B, \text{d})$ と書く。
+\end{lemma}
+
+\begin{proof}
+これを証明するために，《導来圏》補題
+\ref{derived-lemma-find-existence-computes} を用いる。対象の族
+$\mathcal{P}$ として，性質 (P) をもつ対象を用いる。性質 (1) は Lemma
+\ref{dga-lemma-resolve} で示した。性質 (2) も成り立つ。実際，
+$s : P \to P'$ が性質 (P) をもつ加群の擬同型ならば，Lemma
+\ref{dga-lemma-hom-derived} により $s$ はホモトピー同値である。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-functoriality-bc}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$f : N \to N'$ を微分次数付き $(A, B)$-両側加群の
+準同型とする。このとき $f$ は関手の射
+$$
+1\otimes f :
+- \otimes_A^\mathbf{L} N
+\longrightarrow
+- \otimes_A^\mathbf{L} N'
+$$
+を誘導する。$f$ が擬同型ならば，$1 \otimes f$ は関手の同型である。
+\end{lemma}
+
+\begin{proof}
+$M$ を性質 (P) をもつ微分次数付き $A$-加群とする。このとき
+$1 \otimes f : M \otimes_A N \to M \otimes_A N'$ は微分次数付き
+$B$-加群の写像である。さらに，これは $M$ に関して関手的である。関手
+$- \otimes_A^\mathbf{L} N$ および $- \otimes_A^\mathbf{L} N'$ は，
+性質 (P) をもつ対象上でテンソル積をとることにより計算されるので
+（Lemma \ref{dga-lemma-derived-bc}），表示した関手の変換を得る。
+
+\medskip\noindent
+ここで $f$ が擬同型であると仮定する。$F_\bullet$ を $M$ 上の所与の
+フィルトレーションとする。
+$M \otimes_A N = \colim F_i(M) \otimes_A N$ および
+$M \otimes_A N' = \colim F_i(M) \otimes_A N'$ であることに注意せよ。
+したがって，
+$F_n(M) \otimes_A N \to F_n(M) \otimes_A N'$
+が擬同型であることを示せば十分である（フィルター余極限は完全である。
+《代数》補題 \ref{algebra-lemma-directed-colimit-exact} を参照せよ）。
+包含 $F_n(M) \to F_{n + 1}(M)$ は次数付き $A$-加群の写像として分裂するので，
+$$
+0 \to F_n(M) \otimes_A N \to F_{n + 1}(M) \otimes_A N \to
+F_{n + 1}(M)/F_n(M) \otimes_A N \to 0
+$$
+は微分次数付き $B$-加群の短完全列である。$N'$ についても同様の列があり，
+$f$ は短完全列の写像を誘導する。したがって，$n$ に関する帰納法
+（$F_{-1}(M) = 0$ となる $n = -1$ から始める）により，写像
+$F_{n + 1}(M)/F_n(M) \otimes_A N \to
+F_{n + 1}(M)/F_n(M) \otimes_A N'$ が擬同型であることを示せば十分である。
+$F_{n + 1}(M)/F_n(M)$ は $A$ のシフトの直和であり，$f : N \to N'$ が
+擬同型なので $A[k]$ に対して結果が成り立つ。ゆえに主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-compute-bc}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$N$ を，左微分次数付き $A$-加群として性質 (P) をもつ
+微分次数付き $(A, B)$-両側加群とする。このとき，任意の微分次数付き
+$A$-加群 $M$ に対して $M \otimes_A^\mathbf{L} N$ は
+$M \otimes_A N$ により計算される。
+\end{lemma}
+
+\begin{proof}
+$f : M \to M'$ を擬同型である微分次数付き $A$-加群の準同型とする。
+$f \otimes \text{id} : M \otimes_A N \to M' \otimes_A N$ は擬同型であると
+主張する。これが成り立てば，Lemma \ref{dga-lemma-derived-bc} の証明における
+導来テンソル積の構成から望む結果を得る。写像 $f \otimes \text{id}$ の構成は，
+$N$ 上の左微分次数付き $A$-加群構造だけに依存する。さらに，$N$ は
+微分次数付き $A^{opp}$-加群として性質 (P) をもつので，
+$M \otimes_A N = N \otimes_{A^{opp}} M =
+N \otimes_{A^{opp}}^\mathbf{L} M$ である。したがって主張は Lemma
+\ref{dga-lemma-functoriality-bc} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-tensor-hom-adjoint}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+このとき，Lemma \ref{dga-lemma-derived-bc} の関手
+$$
+- \otimes_A^\mathbf{L} N : D(A, \text{d}) \longrightarrow D(B, \text{d})
+$$
+は，Lemma \ref{dga-lemma-derived-restriction} の関手
+$$
+R\Hom(N, -) : D(B, \text{d}) \longrightarrow D(A, \text{d})
+$$
+の左随伴である。
+\end{lemma}
+
+\begin{proof}
+《導来圏》補題
+\ref{derived-lemma-pre-derived-adjoint-functors-general} と，
+Lemma \ref{dga-lemma-tensor-hom-adjunction} により
+$- \otimes_A N$ と
+$\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, -)$ が随伴であることから従う。
+\end{proof}
+
+\begin{example}
+\label{dga-example-map-hom-tensor}
+$R$ を環とし，$(A, \text{d}) \to (B, \text{d})$ を微分次数付き
+$R$-代数の準同型とする。このとき $B$ を微分次数付き $(A, B)$-両側加群と
+みなすことができ，関手
+% P03-STACKS-E948: the frozen display omits the derived L although its
+% domain is D(A,d), its cited construction is derived, and line 5460 uses L.
+$$
+- \otimes_A B : D(A, \text{d}) \longrightarrow D(B, \text{d})
+$$
+を得る。
+% P03-STACKS-E573: frozen source calls RHom the left rather than right
+% adjoint of extension of scalars.
+Lemma \ref{dga-lemma-tensor-hom-adjoint} により，この関手の左随伴は
+$R\Hom(B, -)$ である。微分次数付き $B$-加群 $N$ に対し，
+% P03-STACKS-E949: frozen English says “denote N_A the ...” without “by”.
+$A \to B$ による制限で $N$ から得られる微分次数付き $A$-加群を
+$N_A$ と書く。このとき，$B$-加群 $N$ に関して関手的な標準同型
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(B, N) \longrightarrow N_A,\quad
+f \longmapsto f(1)
+$$
+が明らかに存在する。したがって $R\Hom(B, -)$ は制限関手であり，
+$$
+\Hom_{D(A, \text{d})}(M, N_A) =
+\Hom_{D(B, \text{d})}(M \otimes^\mathbf{L}_A B, N)
+$$
+$M$ と $N$ に関して二変数関手的に，可換環の場合とまったく同様に成り立つ。
+最後に，制限もテンソル関手であることに注意しよう。実際，
+${}_BB_A$ を微分次数付き $(B, A)$-両側加群とみなした $B$ とすると，
+$N_A = N \otimes_B {}_BB_A = N \otimes_B^\mathbf{L} {}_BB_A$ である。
+\end{example}
+
+\begin{lemma}
+\label{dga-lemma-tensor-with-compact-fully-faithful}
+% P03-STACKS-E950: frozen English leaves “With notation and assumptions ...”
+% as a sentence fragment before “Assume”.
+Lemma \ref{dga-lemma-tensor-hom-adjoint} と同じ記法と仮定を用いる。次を仮定する。
+\begin{enumerate}
+\item $N$ は $D(B, \text{d})$ のコンパクト対象を定める。
+\item 写像 $H^k(A) \to \Hom_{D(B, \text{d})}(N, N[k])$ は，すべての
+$k \in \mathbf{Z}$ に対して同型である。
+\end{enumerate}
+このとき関手 $-\otimes_A^\mathbf{L} N$ は充満忠実である。
+\end{lemma}
+
+\begin{proof}
+% P03-STACKS-E574: frozen proof again calls RHom the left adjoint,
+% contrary to the cited tensor-Hom adjunction.
+Lemma \ref{dga-lemma-tensor-hom-adjoint} により，この関手は
+$R\Hom(N, -)$ で与えられる左随伴をもつ。《圏論》補題
+\ref{categories-lemma-adjoint-fully-faithful} により，微分次数付き
+$A$-加群 $M$ に対して写像
+$$
+M \longrightarrow R\Hom(N, M \otimes_A^\mathbf{L} N)
+$$
+が $D(A, \text{d})$ で同型であることを示せば十分である。そのためには，
+$$
+H^n(M) \longrightarrow
+\text{Ext}^n_{D(B, \text{d})}(N, M \otimes_A^\mathbf{L} N)
+$$
+が同型であることを示せば十分である。Lemma
+\ref{dga-lemma-derived-restriction-exts} を参照せよ。$N$ はコンパクト対象なので，
+右辺は直和と可換する。したがって Remark \ref{dga-remark-P-resolution} により，
+$M = A[k]$ に対してこの写像が同型であることを証明すれば十分である。
+Remark \ref{dga-remark-shift-tensor-no-sign} により
+$(A[k] \otimes_A^\mathbf{L} N) = N[k]$ なので，これらについて結果が
+成り立つという主張はちょうど $N$ に関する仮定 (2) である。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-base-change-K-flat}
+$R \to R'$ を環準同型とする。$(A, \text{d})$ を微分次数付き
+$R$-代数とし，$(A', \text{d})$ をその基底変換，すなわち
+$A' = A \otimes_R R'$ とする。$A$ が $R$-加群の複体として K-平坦ならば，
+次が成り立つ。
+\begin{enumerate}
+\item $- \otimes_A^\mathbf{L} A' : D(A, \text{d}) \to D(A', \text{d})$
+は，次の関手の右導来関手に等しい。
+% P03-STACKS-E575: frozen source says right derived functor for tensor.
+$$
+K(A, \text{d}) \longrightarrow K(A', \text{d}),\quad
+M \longmapsto M \otimes_R R'
+$$
+\item 図式
+$$
+\xymatrix{
+D(A, \text{d}) \ar[r]_{- \otimes_A^\mathbf{L} A'} \ar[d]_{\text{制限}} &
+D(A', \text{d}) \ar[d]^{\text{制限}} \\
+D(R) \ar[r]^{- \otimes_R^\mathbf{L} R'} & D(R')
+}
+$$
+は可換する。
+\item $M$ が $R$-加群の複体として K-平坦ならば，微分次数付き
+$A'$-加群 $M \otimes_R R'$ は $M \otimes_A^\mathbf{L} A'$ を表す。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+任意の微分次数付き $A$-加群 $M$ に対して標準写像
+$$
+c_M : M \otimes_R R' \longrightarrow M \otimes_A A'
+$$
+が存在する。$P$ を性質 (P) をもつ微分次数付き $A$-加群とする。
+$c_P$ は同型であり，$P$ は $R$-加群の複体として K-平坦であると主張する。
+これにより，Lemma \ref{dga-lemma-derived-bc} における導来テンソル積の定義と
+《代数詳論》第 \ref{more-algebra-section-derived-tensor-product} 節を用いる
+形式的な議論から，補題のすべての結論が証明される。
+
+\medskip\noindent
+$F_\bullet$ を，$P$ が性質 (P) をもつことを示すフィルトレーションとする。
+仮定により $c_A$ は同型であり，$A$ は $R$-加群の複体として K-平坦である。
+したがって，$A$ のシフトの直和についても同じことが成り立つ
+（直和を扱うには《代数詳論》補題
+\ref{more-algebra-lemma-colimit-K-flat} を用いてもよい）。
+ゆえに複体 $F_{p + 1}P/F_pP$ についても成り立つ。短完全列
+$$
+0 \to F_pP \to F_{p + 1}P \to F_{p + 1}P/F_pP \to 0
+$$
+は次数付き加群の列として分裂完全なので，帰納法により，すべての $p$ に対して
+$c_{F_pP}$ が同型であり，$F_pP$ が $R$-加群の複体として K-平坦であることを
+示せる（《代数詳論》補題
+\ref{more-algebra-lemma-K-flat-two-out-of-three} を用いる）。
+最後に $P = \colim F_pP$ を用いると，$c_P$ が同型であり，$P$ が
+$R$-加群の複体として K-平坦であると結論できる
+（《代数詳論》補題 \ref{more-algebra-lemma-colimit-K-flat} を用いる）。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-RHom-is-tensor}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$T$ を微分次数付き $(A, B)$-両側加群とする。次を仮定する。
+\begin{enumerate}
+\item $T$ は $D(B, \text{d})$ のコンパクト対象を定める。
+\item $S = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(T, B)$
+は $D(A, \text{d})$ において $R\Hom(T, B)$ を表す。
+\end{enumerate}
+このとき $S$ は微分次数付き $(B, A)$-両側加群の構造をもち，同型
+$$
+N \otimes_B^\mathbf{L} S \longrightarrow R\Hom(T, N)
+$$
+が $D(B, \text{d})$ の $N$ に関して関手的に存在する。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{B} = \text{Mod}^{dg}_{(B, \text{d})}$ と書く。$S$ 上の右
+$A$-加群構造は，写像 $A \to \Hom_\mathcal{B}(T, T)$ と，Example
+\ref{dga-example-dgm-dg-cat} で定義した合成
+$\Hom_\mathcal{B}(T, B) \otimes \Hom_\mathcal{B}(T, T)
+\to \Hom_\mathcal{B}(T, B)$ から得られる。この乗法をもう一度用いると，
+$N$ に関して関手的な写像
+$$
+c_N :
+N \otimes_B S = \Hom_\mathcal{B}(B, N) \otimes_B \Hom_\mathcal{B}(T, B)
+\longrightarrow
+\Hom_\mathcal{B}(T, N)
+$$
+が存在する。$N$ が与えられたとき，擬同型 $P \to N \to I$ を選べる。
+ここで $P$，それぞれ $I$ は，性質 (P)，それぞれ (I) をもつ微分次数付き
+$B$-加群である。このとき $c_N$ を用いて，対象
+% P03-STACKS-E576: frozen source reverses the factors here to S tensor N,
+% whereas the map and lemma statement use N tensor S.
+$S \otimes_B^\mathbf{L} N$ および $R\Hom(T, N)$ を表す対象の間の写像
+$P \otimes_B S \to \Hom_\mathcal{B}(T, I)$ を得る。これは明らかに，
+補題で述べた関手の変換 $c$ を定める。
+
+\medskip\noindent
+$c$ が関手の同型であることを証明するには，$N$ が性質 (P) をもつ
+微分次数付き $B$-加群であると仮定してよい。$T$ は
+$D(B, \text{d})$ のコンパクト対象を定め，矢印の両辺は三角圏の完全関手を
+定めるので，Lemma \ref{dga-lemma-property-P-sequence} を用いると，
+$N$ が有限フィルトレーションをもち，その次数付き商が $B[k]$ の直和である
+場合に帰着する。矢印の両辺が三角圏の完全関手であることと $T$ の
+コンパクト性をもう一度用いると，$N = B[k]$ の場合に帰着する。仮定 (2) は，
+この場合に $c$ が同型であるという仮定にほかならない。
+\end{proof}
+
+
+
+
+
+
+\section{導来テンソル積の合成}
+\label{dga-section-compose-tensor-functors}
+
+\noindent
+読者には本節を読み飛ばすことを勧める。
+
+\medskip\noindent
+$R$ を環とし，$(A, \text{d})$，$(B, \text{d})$，$(C, \text{d})$ を
+微分次数付き $R$-代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+% P03-STACKS-E951: frozen source twice calls N' a (B,C)-module rather
+% than the bimodule required by both tensor actions and used later.
+$N'$ を微分次数付き $(B, C)$-加群とする。
+% P03-STACKS-E952: frozen English omits “by” in both temporary denote clauses.
+$A$-構造を忘れて微分次数付き $B$-加群とみなした両側加群 $N$ を
+$N_B$ と書く。このとき $D(C, \text{d})$ に標準写像
+\begin{equation}
+\label{dga-equation-plain-versus-derived}
+N_B \otimes_B^\mathbf{L} N'
+\longrightarrow
+(N \otimes_B N')_C
+\end{equation}
+が存在する。ここで $(N \otimes_B N')_C$ は，$(A, C)$-両側加群
+$N \otimes_B N'$ を微分次数付き $C$-加群とみなしたものを表す。
+この写像は，導来テンソル積から通常のテンソル積への写像が常に存在する
+（導来テンソル積は左導来関手だからである）ことから得られる。
+
+\begin{lemma}
+\label{dga-lemma-compose-tensor-functors-general}
+$R$ を環とし，$(A, \text{d})$，$(B, \text{d})$，$(C, \text{d})$ を
+微分次数付き $R$-代数とする。$N$ を微分次数付き $(A, B)$-両側加群とする。
+% P03-STACKS-E951: the same frozen missing “bi” recurs in this lemma.
+$N'$ を微分次数付き $(B, C)$-加群とする。
+(\ref{dga-equation-plain-versus-derived}) が同型であると仮定する。このとき合成
+$$
+\xymatrix{
+D(A, \text{d}) \ar[rr]^{- \otimes_A^\mathbf{L} N} & &
+D(B, \text{d}) \ar[rr]^{- \otimes_B^\mathbf{L} N'} & &
+D(C, \text{d})
+}
+$$
+は $- \otimes_A^\mathbf{L} N''$ と同型である。ここで
+$N'' = N \otimes_B N'$ は $(A, C)$-両側加群とみなす。
+\end{lemma}
+
+\begin{proof}
+関手の変換
+$$
+(- \otimes_A^\mathbf{L} N) \otimes_B^\mathbf{L} N'
+\longrightarrow
+- \otimes_A^\mathbf{L} N''
+$$
+を定義しよう。そのために，$M$ を性質 (P) をもつ微分次数付き $A$-加群とする。
+Lemma \ref{dga-lemma-derived-bc} の証明における関手
+$- \otimes_A^\mathbf{L} N''$ の構成によれば，通常のテンソル積
+$M \otimes_A N''$ は $D(C, \text{d})$ において
+$M \otimes_A^\mathbf{L} N''$ を表す。また，
+$$
+M \otimes_A N'' =
+M \otimes_A (N \otimes_B N') =
+(M \otimes_A N) \otimes_B N'
+$$
+と書ける。加群 $M \otimes_A N$ は $D(B, \text{d})$ において
+$M \otimes_A^\mathbf{L} N$ を表す。$Q$ が性質 (P) をもつ微分次数付き
+$B$-加群であるような擬同型 $Q \to M \otimes_A N$ を選ぶ。このとき
+$Q \otimes_B N'$ は $D(C, \text{d})$ において
+$(M \otimes_A^\mathbf{L} N) \otimes_B^\mathbf{L} N'$ を表す。
+したがって，写像を
+$$
+(M \otimes_A^\mathbf{L} N) \otimes_B^\mathbf{L} N' =
+Q \otimes_B N' \to
+M \otimes_A N \otimes_B N' =
+M \otimes_A^\mathbf{L} N''
+$$
+によって定義できる。この写像の構成は $M$ に関して関手的であり，
+識別三角形および直和と両立する。詳細は省略する。この写像が同型であるという
+$D(A, \text{d})$ の対象 $M$ の性質を $T$ とする。このとき，
+\begin{enumerate}
+\item 各 $M_i$ について $T$ が成り立つならば，$\bigoplus M_i$ についても
+$T$ が成り立つ。
+\item 識別三角形の三対象のうち二対象について $T$ が成り立つならば，
+第三の対象についても成り立つ。
+% P03-STACKS-E953: frozen English says “T holds for 2-out-of-3 ... then
+% it holds for the third”, conflating the hypothesis with the closure rule.
+\item $A[k]$ について $T$ が成り立つ。実際，この場合には，同型であると仮定した
+写像 (\ref{dga-equation-plain-versus-derived}) のシフトを得る。
+\end{enumerate}
+したがって Remark \ref{dga-remark-P-resolution} により性質 $T$ は常に成り立ち，
+証明が完了する。
+\end{proof}
+
+\noindent
+$R$ を環とし，$(A, \text{d})$，$(B, \text{d})$，$(C, \text{d})$ を
+微分次数付き $R$-代数とする。
+% P03-STACKS-E952: the second frozen temporary-denote clause also omits “by”.
+微分次数付き代数 $A \otimes_R B$ を（右）微分次数付き $B$-加群とみなしたものを
+一時的に $(A \otimes_R B)_B$ と書き，微分次数付き代数
+$B \otimes_R C$ を微分次数付き $(B, C)$-両側加群とみなしたものを
+${}_B(B \otimes_R C)_C$ と書く。このとき標準写像
+\begin{equation}
+\label{dga-equation-plain-versus-derived-algebras}
+(A \otimes_R B)_B \otimes_B^\mathbf{L} {}_B(B \otimes_R C)_C
+\longrightarrow
+(A \otimes_R B \otimes_R C)_C
+\end{equation}
+が $D(C, \text{d})$ に存在する。ここで $(A \otimes_R B \otimes_R C)_C$ は，
+微分次数付き $R$-代数 $A \otimes_R B \otimes_R C$ を（右）微分次数付き
+$C$-加群とみなしたものを表す。この写像は同一視
+$$
+(A \otimes_R B)_B \otimes_B {}_B(B \otimes_R C)_C =
+(A \otimes_R B \otimes_R C)_C
+$$
+と，導来テンソル積から通常のテンソル積への写像が常に存在する
+（導来テンソル積は左導来関手だからである）ことから得られる。
+
+\begin{lemma}
+\label{dga-lemma-compose-tensor-functors-general-algebra}
+$R$ を環とし，$(A, \text{d})$，$(B, \text{d})$，$(C, \text{d})$ を
+微分次数付き $R$-代数とする。
+(\ref{dga-equation-plain-versus-derived-algebras}) が同型であると仮定する。
+$N$ を微分次数付き $(A, B)$-両側加群，$N'$ を微分次数付き
+$(B, C)$-両側加群とする。このとき合成
+$$
+\xymatrix{
+D(A, \text{d}) \ar[rr]^{- \otimes_A^\mathbf{L} N} & &
+D(B, \text{d}) \ar[rr]^{- \otimes_B^\mathbf{L} N'} & &
+D(C, \text{d})
+}
+$$
+は，証明で記述する微分次数付き $(A, C)$-両側加群 $N''$ に対する
+$- \otimes_A^\mathbf{L} N''$ と同型である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-functoriality-bc} により，$N$ と $N'$ を擬同型な
+両側加群で置き換えてよい。したがって，$N$，それぞれ $N'$ が
+微分次数付き $(A, B)$-両側加群，それぞれ $(B, C)$-両側加群として
+性質 (P) をもつと仮定してよい。Lemma \ref{dga-lemma-bimodule-resolve} を
+参照せよ。$(A, C)$-両側加群 $N'' = N \otimes_B N'$ により補題が
+成り立つと主張する。これを証明するには，
+$$
+N_B \otimes_B^\mathbf{L} N' \longrightarrow (N \otimes_B N')_C
+$$
+が $D(C, \text{d})$ で同型であることを示せば十分である。Lemma
+\ref{dga-lemma-compose-tensor-functors-general} を参照せよ。
+
+\medskip\noindent
+$F_\bullet$ を，両側加群に対する性質 (P) に現れる $N$ 上の
+フィルトレーションとする。Lemma \ref{dga-lemma-bimodule-property-P-sequence}
+により，微分次数付き $(A, B)$-両側加群の短完全列
+$$
+0 \to
+\bigoplus\nolimits F_iN \to
+\bigoplus\nolimits F_iN \to N \to 0
+$$
+が存在し，これは次数付き $(A, B)$-両側加群の列として分裂する。特に，
+これは微分次数付き $B$-加群の許容短完全列であり，$D(B, \text{d})$ に
+識別三角形
+$$
+\bigoplus\nolimits F_iN_B \to
+\bigoplus\nolimits F_iN_B \to N_B \to
+\bigoplus\nolimits F_iN_B[1]
+$$
+を生じる。$- \otimes_B^\mathbf{L} N'$ が三角圏の完全関手であって
+直和と可換すること，および $- \otimes_B N'$ が許容完全列を
+許容完全列へ写して直和と可換することを用いると，すべての $p$ に対して
+$$
+(F_pN)_B \otimes_B^\mathbf{L} N' \longrightarrow (F_pN)_B \otimes_B N'
+$$
+が擬同型であることを証明する問題に帰着する。$(A, B)$-両側加群の短完全列
+$$
+0 \to F_pN \to F_{p + 1}N \to F_{p + 1}N/F_pN \to 0
+$$
+を用いて同じ議論を繰り返す。この列は次数付き $(A, B)$-両側加群として
+分裂するので，$F_{p + 1}N/F_pN$ に対する同じ主張を示す問題に帰着する。
+これらの加群は $(A \otimes_R B)_B$ のシフトの直和なので，
+$$
+(A \otimes_R B)_B \otimes_B^\mathbf{L} N'
+\longrightarrow
+(A \otimes_R B)_B \otimes_B N'
+$$
+が擬同型であることを示す問題に帰着する。
+
+\medskip\noindent
+両側加群に対する性質 (P) に現れる $N'$ 上のフィルトレーション
+$F_\bullet$ を選ぶ。また，$P$ が性質 (P) をもつような微分次数付き
+$B$-加群の擬同型 $P \to (A \otimes_R B)_B$ を選ぶ。Lemma
+\ref{dga-lemma-derived-bc} の構成により，$P \otimes_B N'$ は
+$D(C, \text{d})$ において
+$(A \otimes_R B)_B \otimes_B^\mathbf{L} N'$ を表す。したがって，
+$P \otimes_B N' \to (A \otimes_R B)_B \otimes_B N'$ が
+擬同型であることを示さなければならない。
+$N' = \colim F_pN'$ なので，
+$P \otimes_B F_pN' \to (A \otimes_R B)_B \otimes_B F_pN'$
+が擬同型であることを示せば十分である。次数付き $(B, C)$-両側加群として
+分裂する短完全列
+$0 \to F_pN' \to F_{p + 1}N' \to F_{p + 1}N'/F_pN' \to 0$
+を用いると，
+$P \otimes_B F_{p + 1}N'/F_pN' \to
+(A \otimes_R B)_B \otimes_B F_{p + 1}N'/F_pN'$
+がすべての $p$ に対して擬同型であることを示す問題に帰着する。
+最後に，$F_{p + 1}N'/F_pN'$ が
+${}_B(B \otimes_R C)_C$ のシフトの直和であることを用いると，
+次の写像が擬同型であることを示せば十分であると結論できる。
+$$
+P \otimes_B {}_B(B \otimes_R C)_C \to
+(A \otimes_R B)_B \otimes_B {}_B(B \otimes_R C)_C
+$$
+は擬同型である。$P \to (A \otimes_R B)_B$ は性質 (P) を満たす加群による
+分解なので，この微分次数付き $C$-加群の写像は $D(C, \text{d})$ において
+射 (\ref{dga-equation-plain-versus-derived-algebras}) を表す。これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-compose-tensor-functors}
+$R$ を環とし，$(A, \text{d})$，$(B, \text{d})$，$(C, \text{d})$ を
+微分次数付き $R$-代数とする。$C$ が $R$-加群の複体として K-平坦ならば，
+(\ref{dga-equation-plain-versus-derived-algebras})
+は同型であり，Lemma \ref{dga-lemma-compose-tensor-functors-general-algebra} の
+結論が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$P$ が性質 (P) をもつような微分次数付き $B$-加群の擬同型
+$P \to (A \otimes_R B)_B$ を選ぶ。このとき，
+$$
+P \otimes_B (B \otimes_R C) \longrightarrow
+(A \otimes_R B) \otimes_B (B \otimes_R C)
+$$
+が擬同型であることを示さなければならない。同値なこととして，写像
+$$
+P \otimes_R C \longrightarrow
+A \otimes_R B \otimes_R C
+$$
+を考える。《代数詳論》補題
+\ref{more-algebra-lemma-K-flat-quasi-isomorphism} により，$C$ が
+$R$-加群の複体として K-平坦ならば，これは擬同型である。
+\end{proof}
+
+
+
+
+
+\section{導来テンソル積の変種}
+\label{dga-section-variant-base-change}
+
+\noindent
+$(\mathcal{C}, \mathcal{O})$ を環付きサイトとする。このとき関手
+$$
+\text{Comp}(\mathcal{O}) \to K(\mathcal{O}) \to D(\mathcal{O})
+$$
+があり，上で見たように微分次数付き増強
+$\text{Comp}^{dg}(\mathcal{O})$ がある。すなわち，これはアーベル圏
+$\textit{Mod}(\mathcal{O})$ に付随する例
+\ref{dga-example-category-complexes} の微分次数付き圏である。
+$K^\bullet$ を $\mathcal{O}$-加群の複体，言い換えれば
+$\text{Comp}^{dg}(\mathcal{O})$ の対象とする。次のようにおく。
+$$
+(E, \text{d}) =
+\Hom_{\text{Comp}^{dg}(\mathcal{O})}(K^\bullet, K^\bullet)
+$$
+これは微分次数付き $\mathbf{Z}$-代数である。この状況にも導来基底変換の
+類似物があると主張する。
+
+\begin{lemma}
+\label{dga-lemma-tensor-with-complex}
+上の状況において，微分次数付き圏の関手
+$$
+- \otimes_E K^\bullet :
+\text{Mod}^{dg}_{(E, \text{d})}
+\longrightarrow
+\text{Comp}^{dg}(\mathcal{O})
+$$
+がある。この関手は $E$ を $K^\bullet$ に送り，直和と可換である。
+\end{lemma}
+
+\begin{proof}
+$M$ を微分次数付き $E$-加群とする。$\mathcal{C}$ の各対象 $U$ に対し，
+複体 $K^\bullet(U)$ は左微分次数付き $E$-加群であると同時に，右
+$\mathcal{O}(U)$-加群でもある。これらの作用は可換なので，両側加群を得る。
+したがって，Sections \ref{dga-section-tensor-product} および
+\ref{dga-section-bimodules} の構成により，テンソル積
+$$
+M \otimes_E K^\bullet(U)
+$$
+を作ることができる。これは微分次数付き $\mathcal{O}(U)$-加群，すなわち
+$\mathcal{O}(U)$-加群の複体である。この構成は $U$ に関して関手的であるから，
+層化して $\mathcal{O}$-加群の複体を得ることができ，これを
+$$
+M \otimes_E K^\bullet
+$$
+と書く。さらに，各 $U$ に対してこの構成は，Lemma \ref{dga-lemma-tensor} により
+微分次数付き圏の関手
+$\text{Mod}^{dg}_{(E, \text{d})} \to \text{Comp}^{dg}(\mathcal{O}(U))$
+を定める。したがって，補題で述べた関手が得られることは明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-tensor-with-complex-homotopy}
+Lemma \ref{dga-lemma-tensor-with-complex} の関手は，三角圏の完全関手
+$K(\text{Mod}_{(E, \text{d})}) \to K(\mathcal{O})$ を定める。
+を定める。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-functorial} により，この関手はホモトピー圏の間の関手を誘導する。
+$- \otimes_E K^\bullet$ が識別三角形を識別三角形に移すことを示さなければならない。
+$0 \to K \to L \to M \to 0$ を微分次数付き $E$-加群の許容短完全列とする。
+% P03-STACKS-E577: frozen source calls the section M -> L a left inverse
+% of L -> M twice, although its typed composition makes it a right inverse.
+$s : M \to L$ を，$L \to M$ の左逆である次数付き $E$-加群準同型とする。
+このとき $s$ は，次数付き $\mathcal{O}$-加群の写像（すなわち，
+$\mathcal{O}$-加群構造と次数付けは保つが，微分は保つとは限らない写像）
+$M \otimes_E K^\bullet \to L \otimes_E K^\bullet$ を定め，これは
+$L \otimes_E K^\bullet \to M \otimes_E K^\bullet$ の左逆である。
+したがって，
+$$
+0 \to K \otimes_E K^\bullet \to L \otimes_E K^\bullet \to
+M \otimes_E K^\bullet \to 0
+$$
+% P03-STACKS-E578: frozen English has a number disagreement and duplicated article.
+は項ごとに分裂する複体の短完全列であり，したがって $K(\mathcal{O})$ の
+識別三角形を定める。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-tensor-with-complex-derived}
+Lemma \ref{dga-lemma-tensor-with-complex-homotopy} の関手
+$K(\text{Mod}_{(E, \text{d})}) \to K(\mathcal{O})$ には，
+$D(E, \text{d})$ 全体で定義された左導来版がある。これを
+$- \otimes_E^\mathbf{L} K^\bullet : D(E, \text{d}) \to D(\mathcal{O})$
+と書く。
+\end{lemma}
+
+\begin{proof}
+これを証明するために《導来圏》補題
+\ref{derived-lemma-find-existence-computes} を用いる。対象の集まり
+$\mathcal{P}$ として，性質 (P) をもつ対象を用いる。性質 (1) は Lemma
+\ref{dga-lemma-resolve} で示した。性質 (2) が成り立つのは，$s : P \to P'$ が
+性質 (P) をもつ加群の擬同型なら，Lemma \ref{dga-lemma-hom-derived} により
+$s$ はホモトピー同値だからである。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-upgrade-tensor-with-complex-derived}
+$R$ を環，$\mathcal{C}$ をサイト，$\mathcal{O}$ を可換 $R$-代数の層とする。
+$K^\bullet$ を $\mathcal{O}$-加群の複体とする。Lemma
+\ref{dga-lemma-tensor-with-complex-derived} の関手は次の性質をもつ：
+$D(E, \text{d})$ の任意の $M$, $N$ に対して，標準写像
+$$
+R\Hom(M, N)
+\longrightarrow
+R\Hom_\mathcal{O}(M \otimes_E^\mathbf{L} K^\bullet,
+N \otimes_E^\mathbf{L} K^\bullet)
+$$
+が $D(R)$ に存在し，コホモロジー加群上では，関手
+$- \otimes_E^\mathbf{L} K^\bullet$ が誘導する写像
+$$
+\Ext^n_{D(E, \text{d})}(M, N) \to
+\Ext^n_{D(\mathcal{O})}
+(M \otimes_E^\mathbf{L} K^\bullet, N \otimes_E^\mathbf{L} K^\bullet)
+$$
+を与える。
+\end{lemma}
+
+\begin{proof}
+矢印の右辺は《サイト上のコホモロジー》Section
+\ref{sites-cohomology-section-global-RHom} で導入した大域導来 Hom であり，
+これは正しいコホモロジー加群をもつ。
+% P03-STACKS-E579: frozen source calls M an (R,A)-bimodule although
+% this lemma places it in the E-module category.
+左辺については $M$ を $(R, A)$-両側加群とみなし，Section
+\ref{dga-section-restriction} で導入した導来 $\Hom$ を用いる。これも正しい
+コホモロジー加群をもつ。補題を証明するため，$M$ と $N$ は性質 (P) をもつ
+微分次数付き $E$-加群であると仮定してよい；Lemma
+\ref{dga-lemma-functoriality-derived-restriction} により，これは矢印の左辺を変えない。
+Lemma \ref{dga-lemma-compute-derived-restriction} により，このとき矢印の左辺は
+% P03-STACKS-E580: both frozen Hom complexes below use B although the
+% objects and the constructed DG functor are E-linear.
+$\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(M, N)$.
+となる。Lemmas \ref{dga-lemma-tensor-with-complex},
+\ref{dga-lemma-tensor-with-complex-homotopy},
+\ref{dga-lemma-tensor-with-complex-derived} では，微分次数付き圏の関手
+$$
+- \otimes_E K^\bullet :
+\text{Mod}^{dg}_{(E, \text{d})}
+\longrightarrow
+\text{Comp}^{dg}(\mathcal{O})
+$$
+を構成し，$- \otimes_E^\mathbf{L} K^\bullet$ は，この関手を性質 (P) をもつ
+微分次数付き $E$-加群で評価することにより計算されることを示した。
+したがって，$R$-加群の複体の写像
+$$
+\Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(M, N)
+\longrightarrow
+\Hom_{\text{Comp}^{dg}(\mathcal{O})}
+(M \otimes_E K^\bullet, N \otimes_E K^\bullet)
+$$
+を得る。$\mathcal{O}$-加群の任意の複体
+$\mathcal{F}^\bullet$, $\mathcal{G}^\bullet$ に対して標準写像
+$$
+\Hom_{\text{Comp}^{dg}(\mathcal{O})}
+(\mathcal{F}^\bullet, \mathcal{G}^\bullet) =
+\Gamma(\mathcal{C},
+\SheafHom^\bullet(\mathcal{F}^\bullet, \mathcal{G}^\bullet))
+\longrightarrow
+R\Hom_\mathcal{O}(\mathcal{F}^\bullet, \mathcal{G}^\bullet).
+$$
+がある。これらの写像を合成すると，補題で求める写像を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-tensor-with-complex-hom-adjoint}
+$(\mathcal{C}, \mathcal{O})$ を環付きサイトとし，$K^\bullet$ を
+$\mathcal{O}$-加群の複体とする。このとき，Lemma
+\ref{dga-lemma-tensor-with-complex-derived} の関手
+$$
+- \otimes_E^\mathbf{L} K^\bullet :
+D(E, \text{d})
+\longrightarrow
+D(\mathcal{O})
+$$
+は，Lemma \ref{dga-lemma-existence-of-derived} の関手
+$$
+R\Hom(K^\bullet, -) : D(\mathcal{O}) \longrightarrow D(E, \text{d})
+$$
+の左随伴である。
+\end{lemma}
+
+\begin{proof}
+主張は，$M$ と $L^\bullet$ に関して双関手的に
+$$
+\Hom_{D(E, \text{d})}(M, R\Hom(K^\bullet, L^\bullet)) =
+\Hom_{D(\mathcal{O})}(M \otimes^\mathbf{L}_E K^\bullet, L^\bullet)
+$$
+が成り立つということである。これを見るため，$M$ を性質 (P) をもつ
+微分次数付き $E$-加群 $P$ で置き換えてよい。また $L^\bullet$ を
+$\mathcal{O}$-加群の K-入射複体 $I^\bullet$ で置き換えてよい。
+主張で参照した補題における導来関手の計算と Lemma
+\ref{dga-lemma-hom-derived} を組み合わせると，上の等式は
+$$
+\Hom_{K(\text{Mod}_{(E, \text{d})})}
+(P, \Hom_\mathcal{B}(K^\bullet, I^\bullet)) =
+\Hom_{K(\mathcal{O})}(P \otimes_E K^\bullet, I^\bullet)
+$$
+となる。ここで $\mathcal{B} = \text{Comp}^{dg}(\mathcal{O})$ である。
+右辺から左辺への，$P$ と $I^\bullet$ に関して関手的な評価写像がある
+（詳細は省略する）。性質 (P) の定義にあるような $P$ 上のフィルトレーション
+$F_\bullet$ を選ぶ。Lemma \ref{dga-lemma-property-P-sequence} と，等式の両辺が
+$K(\text{Mod}_{(E, \text{d})})$ 上で $P$ に関するホモロジー関手であることにより，
+$P$ を微分次数付き $E$-加群 $\bigoplus F_iP$ で置き換えた場合に帰着する。
+両辺は変数 $P$ における直和を直積に移すので，$P$ が微分次数付き
+$E$-加群 $F_iP$ のいずれかである場合に帰着する。各 $F_iP$ は，
+次数付き部分が次数付き射影 $E$-加群であるような有限フィルトレーション
+（許容単射で与えられる）をもつので，$P$ が次数付き射影 $E$-加群である場合に
+帰着する。この場合，明らかに
+$$
+\Hom_{\text{Mod}^{dg}_{(E, \text{d})}}
+(P, \Hom_\mathcal{B}(K^\bullet, I^\bullet)) =
+\Hom_{\text{Comp}^{dg}(\mathcal{O})}(P \otimes_E K^\bullet, I^\bullet)
+$$
+が次数付き $\mathbf{Z}$-加群として成り立つ（この主張は，明らかな場合
+$P = E[k]$ に帰着するからである）。この同型は微分と両立するので，結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-fully-faithful-in-compact-case}
+$(\mathcal{C}, \mathcal{O})$ を環付きサイトとし，$K^\bullet$ を
+$\mathcal{O}$-加群の複体とする。次を仮定する。
+\begin{enumerate}
+\item $K^\bullet$ は $D(\mathcal{O})$ のコンパクト対象を表す。
+\item $E = \Hom_{\text{Comp}^{dg}(\mathcal{O})}(K^\bullet, K^\bullet)$
+は $D(\mathcal{O})$ における $K^\bullet$ の Ext 群を計算する。
+\end{enumerate}
+このとき，Lemma \ref{dga-lemma-tensor-with-complex-derived} の関手
+$$
+- \otimes_E^\mathbf{L} K^\bullet :
+D(E, \text{d})
+\longrightarrow
+D(\mathcal{O})
+$$
+は充満忠実である。
+\end{lemma}
+
+\begin{proof}
+% P03-STACKS-E581: frozen proof calls RHom the left adjoint although the
+% cited lemma makes tensor left adjoint and RHom right adjoint.
+Lemma \ref{dga-lemma-tensor-with-complex-hom-adjoint} により，この関手は
+$R\Hom(K^\bullet, -)$ で与えられる左随伴をもつので，微分次数付き
+$E$-加群 $M$ に対して写像
+$$
+H^0(M) \longrightarrow
+\Hom_{D(\mathcal{O})}(K^\bullet, M \otimes_E^\mathbf{L} K^\bullet)
+$$
+が同型であることを示せば十分である。$M = P$ は性質 (P) をもつ微分次数付き
+$E$-加群であると仮定してよい。$K^\bullet$ はコンパクト対象を定めるので，
+Lemma \ref{dga-lemma-property-P-sequence} を用いて，$P$ が，次数付き部分が
+$E[k]$ の直和であるような有限フィルトレーションをもつ場合に帰着する。
+もう一度コンパクト性を用いて，$P = E[k]$ の場合に帰着する。
+$K^\bullet$ に関する仮定は，これらの場合に結果が成り立つというものである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{コンパクト対象の特徴付け}
+\label{dga-section-compact}
+
+\noindent
+加法圏のコンパクト対象は《導来圏》Definition
+\ref{derived-definition-compact-object} で定義されている。
+この節では，微分次数付き代数の導来圏のコンパクト対象を特徴付ける。
+
+\begin{remark}
+\label{dga-remark-source-graded-projective}
+$(A, \text{d})$ を微分次数付き代数とする。すべての微分次数付き
+$A$-加群 $M$ に対して
+$$
+\Hom_{K(A, \text{d})}(P, M) =  \Hom_{D(A, \text{d})}(P, M)
+$$
+が成り立つ微分次数付き $A$-加群 $P$ を特徴付けられるだろうか。
+上の条件を満たす対象 $P$ を対象とする充満部分圏を
+$\mathcal{D} \subset K(A, \text{d})$ とする。このとき $\mathcal{D}$ は
+$K(A, \text{d})$ の厳密充満な飽和三角部分圏である。
+% P03-STACKS-E582: frozen English uses “where” for the membership question.
+$P$ が次数付き $A$-加群として射影的なら，$P$ が $\mathcal{D}$ の対象であるかを
+調べるには，$M$ が非輪状であるたびに
+$\Hom_{K(A, \text{d})}(P, M) = 0$ となることを確認すれば十分である。
+しかし一般には，$P$ が次数付き $A$-加群として射影的であると仮定するだけでは
+不十分である。例えば，$k$ を体とし，
+$A = R = k[\epsilon]$ とする。ここで
+$k[\epsilon] = k[x]/(x^2)$ は双対数の環である。
+すべての $n \in \mathbf{Z}$ に対して $P^n = R$ であり，微分が
+$\epsilon$ による乗法で与えられる対象 $P$ をとる。このとき
+$\text{id}_P \in \Hom_{K(A, \text{d})}(P, P)$ は零でない元であるが，
+$P$ は非輪状である。
+\end{remark}
+
+\begin{remark}
+\label{dga-remark-graded-projective-is-compact}
+$(A, \text{d})$ を微分次数付き代数とする。微分次数付き $A$-加群 $M$ が，
+右 $A$-加群として有限個の元で生成されるとき，$M$ は{\it 有限}であるという。
+$P$ が有限かつ次数付き射影的な微分次数付き $A$-加群なら，
+$P$ は $D(A, \text{d})$ のコンパクト対象を与えるだろうか。
+一般には成り立たないと思われるが，反例は知られていない。しかし $P$ がさらに
+Remark \ref{dga-remark-source-graded-projective} の圏 $\mathcal{D}$ の対象であれば，
+これは成り立つ（$D(A, \text{d})$ の直和が加群の直和で与えられることから従う；
+詳細は省略する）。
+\end{remark}
+
+\begin{lemma}
+\label{dga-lemma-factor-through-nicer}
+$(A, \text{d})$ を微分次数付き代数とし，$E$ を $D(A, \text{d})$ の
+コンパクト対象とする。$P$ を，微分次数付き部分加群による有限フィルトレーション
+$$
+0 = F_{-1}P \subset F_0P \subset F_1P \subset \ldots \subset F_nP = P
+$$
+をもち，ある集合 $J_i$ と整数 $k_{i,j}$ に対して微分次数付き $A$-加群として
+$$
+F_{i + 1}P/F_iP \cong \bigoplus\nolimits_{j \in J_i} A[k_{i, j}]
+$$
+となるものとする。$E \to P$ を $D(A, \text{d})$ の射とする。
+このとき，ある有限部分集合 $J'_i \subset J_i$ に対して
+$F_{i + 1}P \cap P'/(F_iP \cap P')$ が
+$\bigoplus_{j \in J'_i} A[k_{i, j}]$ に等しく，かつ $E \to P$ が
+$P'$ を経由するような微分次数付き部分加群 $P' \subset P$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$-1 \leq m \leq n$ に関する帰納法により，次を満たす微分次数付き部分加群
+$P' \subset P$ が存在することを証明する。
+\begin{enumerate}
+\item $F_mP \subset P'$,
+\item $i \geq m$ に対して，商
+$F_{i + 1}P \cap P'/(F_iP \cap P')$ は，ある有限部分集合
+$J'_i \subset J_i$ に対する
+$\bigoplus_{j \in J'_i} A[k_{i, j}]$ と同型である。
+\item $E \to P$ は $P'$ を経由する。
+\end{enumerate}
+基底の場合は $m = n$ であり，$P' = P$ ととればよい。
+
+\medskip\noindent
+帰納段階。$P'$ が $m$ に対して条件を満たすと仮定する。
+$i \geq m$ および $j \in J'_i$ に対し，
+$x_{i, j} \in F_{i + 1}P \cap P'$ を，商
+$F_{i + 1}P \cap P'/(F_iP \cap P')$ における像が
+$j \in J_i$ に対応する直和因子の生成元となる，次数 $k_{i, j}$ の斉次元とする。
+$x_{i, j}$ は $A$-加群として $P'/F_mP$ を生成する。次のように書く。
+$$
+\text{d}(x_{i, j}) = \sum x_{i', j'} a_{i, j}^{i', j'} + y_{i, j}
+$$
+ここで $y_{i, j} \in F_mP$ かつ $a_{i, j}^{i', j'} \in A$ である。
+各 $y_{i, j}$ の $F_mP/F_{m - 1}P$ における像が部分加群
+$\bigoplus_{j \in J'_{m - 1}} A[k_{m - 1, j}]$ に属するような有限部分集合
+$J'_{m - 1} \subset J_{m - 1}$ が存在する。$P'' \subset F_mP$ を，写像
+$F_mP \to F_mP/F_{m - 1}P$ による
+$\bigoplus_{j \in J'_{m - 1}} A[k_{m - 1, j}]$ の逆像とする。このとき
+$A$-部分加群
+$$
+P'' + \sum x_{i, j}A
+$$
+は求める型の微分次数付き部分加群である。さらに
+$$
+P'/(P'' + \sum x_{i, j}A) =
+\bigoplus\nolimits_{j \in J_{m - 1} \setminus J'_{m - 1}} A[k_{m - 1, j}]
+$$
+である。$E$ はコンパクトだから，与えられた写像 $E \to P'$ と商写像との合成は，
+上に表示した加群の有限直部分和を経由する。したがって $J'_{m-1}$ を拡大すれば，
+望むとおり $E \to P'$ が $P'' + \sum x_{i, j}A$ を経由すると仮定できる。
+\end{proof}
+
+\noindent
+$D(A, \text{d})$ のすべてのコンパクト対象が，有限次数付き射影的な
+微分次数付き $A$-加群から生じるわけではない。《例》Section
+\ref{examples-section-interesting-compact} を参照せよ。
+
+\begin{proposition}
+\label{dga-proposition-compact}
+$(A, \text{d})$ を微分次数付き代数とし，$E$ を $D(A, \text{d})$ の
+対象とする。このとき次は同値である。
+\begin{enumerate}
+\item $E$ はコンパクト対象である。
+\item $E$ は $D(A, \text{d})$ のある対象の直和因子であり，その対象は，
+微分次数付き部分加群による有限フィルトレーション $F_\bullet$ をもち，
+$F_iP/F_{i - 1}P$ が $A$ のシフトの有限直和となるような微分次数付き加群
+$P$ によって表される。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$E$ はコンパクトであると仮定する。Lemma \ref{dga-lemma-resolve} により，
+$E$ は性質 (P) をもつ微分次数付き $A$-加群 $P$ によって表されると
+仮定してよい。Lemma \ref{dga-lemma-property-P-sequence} の許容短完全列から
+生じる識別三角形
+$$
+\bigoplus F_iP \to \bigoplus F_iP \to P
+\xrightarrow{\delta} \bigoplus F_iP[1]
+$$
+を考える。$E$ はコンパクトなので，ある
+$\delta_i : P \to F_iP[1]$ に対して
+$\delta = \sum_{i = 1, \ldots, n} \delta_i$ である。$\delta$ と写像
+$\bigoplus F_iP[1] \to \bigoplus F_iP[1]$ との合成は零であるから
+（《導来圏》Lemma \ref{derived-lemma-composition-zero}），
+$\delta = 0$ が従う（これは，$\bigoplus F_iP \to \bigoplus F_iP$ が
+直和因子 $F_iP$ を，$\text{id}$ と $F_{i-1}P$ への包含写像との差によって
+写すことから従う）。したがって《導来圏》Lemma
+\ref{derived-lemma-split} により，$E$ 上の恒等写像は
+$D(A, \text{d})$ において $\bigoplus F_iP$ を経由する。
+次にもう一度 $P$ のコンパクト性を用いると，写像
+$E \to \bigoplus F_iP$ は，ある $n$ に対して
+$\bigoplus_{i = 1, \ldots, n} F_iP$ を経由する。言い換えれば，
+$E$ 上の恒等写像は $\bigoplus_{i = 1, \ldots, n} F_iP$ を経由する。
+Lemma \ref{dga-lemma-factor-through-nicer} により，$E$ の恒等写像は
+$E \to P \to E$ と分解する。ここで $P$ は補題の主張の (2) にあるとおりの
+対象である。以上で (1) が (2) を含意することを証明した。
+
+\medskip\noindent
+(2) を仮定する。《導来圏》Lemma
+\ref{derived-lemma-compact-objects-subcategory} により，$P$ が
+コンパクト対象を与えることを示せば十分である。$P$ は性質 (P) をもつので，
+Lemma \ref{dga-lemma-hom-derived} により，任意の微分次数付き加群 $M$ に対して
+$$
+\Hom_{D(A, \text{d})}(P, M) = \Hom_{K(A, \text{d})}(P, M)
+$$
+である。$D(A, \text{d})$ の直和は次数付き加群の直和によって与えられるので
+（Lemma \ref{dga-lemma-derived-products}），
+$\Hom_{K(A, \text{d})}(P, M)$ が直和と可換であることを示す問題に帰着する。
+$K(A, \text{d})$ が三角圏であること，$\Hom$ が第1変数に関する
+コホモロジー関手であること，および $P$ 上のフィルトレーションを用いると，
+$P$ が $A$ のシフトの有限直和である場合に帰着する。したがって，
+明らかな場合 $P = A[k]$ に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{dga-lemma-compact-implies-bounded}
+$(A, \text{d})$ を微分次数付き代数とする。$D(A, \text{d})$ の
+任意のコンパクト対象 $E$ に対して，$i \in [a, b]$ について
+$H^i(M) = 0$ ならば $\Hom_{D(A, \text{d})}(E, M) = 0$ となるような
+整数 $a \leq b$ が存在する。
+\end{lemma}
+
+\begin{proof}
+そのような整数の組が存在する $D(A, \text{d})$ の対象全体は，
+$D(A, \text{d})$ の飽和した厳密充満三角部分圏をなす。したがって
+Proposition \ref{dga-proposition-compact} により，$E$ が，微分次数付き部分加群による
+有限フィルトレーション $F_\bullet$ をもち，各 $F_iP/F_{i-1}P$ が
+$A$ のシフトの有限直和となる微分次数付き加群 $P$ によって表される場合を
+証明すれば十分である。三角形との両立性を用いると，$P=A$ の場合を
+証明すれば十分であることが分かる。この場合
+$\Hom_{D(A, \text{d})}(A, M)=H^0(M)$ であり，$a=b=0$ とすればよい。
+\end{proof}
+
+\noindent
+$(A, \text{d})$ が次数 $0$ に置かれ微分が零である通常の代数である場合，
+またはより一般に有限個の次数にしか存在しない場合には，コンパクト対象の
+より精密な記述が得られる。
+
+\begin{lemma}
+\label{dga-lemma-compact}
+$(A, \text{d})$ を微分次数付き代数とし，$|n| \gg 0$ に対して
+$A^n=0$ と仮定する。$E$ を $D(A, \text{d})$ の対象とする。
+次は同値である。
+\begin{enumerate}
+\item $E$ はコンパクト対象である。
+\item $E$ は，次数付き $A$-加群として有限射影的であり，すべての
+微分次数付き $A$-加群 $M$ に対して
+$\Hom_{K(A, \text{d})}(P, M) = \Hom_{D(A, \text{d})}(P, M)$
+を満たす微分次数付き $A$-加群 $P$ によって表される。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Remark \ref{dga-remark-source-graded-projective} で論じた三角部分圏を
+$\mathcal{D} \subset K(A, \text{d})$ とする。$P$ を $\mathcal{D}$ の対象で，
+次数付き $A$-加群として有限射影的なものとする。このとき Remark
+\ref{dga-remark-graded-projective-is-compact} により，$P$ は
+$D(A, \text{d})$ のコンパクト対象を表す。
+
+\medskip\noindent
+逆を証明するため，$E$ を $D(A, \text{d})$ のコンパクト対象とする。
+Lemma \ref{dga-lemma-compact-implies-bounded} にある $a \leq b$ を固定する。
+必要なら $a$ を小さくし $b$ を大きくして，$i \not\in [a, b]$ に対して
+$H^i(E)=0$ と仮定してもよい（これは Proposition
+\ref{dga-proposition-compact} と $A$ に関する仮定から従う）。
+さらに，$|n| \geq c$ なら $A^n=0$ となる整数 $c>0$ を固定する。
+
+\medskip\noindent
+Proposition \ref{dga-proposition-compact} により，$E$ は $D(A, \text{d})$ において，
+微分次数付き部分加群による有限フィルトレーション $F_\bullet$ をもち，
+$F_iP/F_{i-1}P$ が $A$ のシフトの有限直和となる微分次数付き
+$A$-加群 $P$ の直和因子である。特に $P$ は性質 (P) をもち，Lemma
+\ref{dga-lemma-hom-derived} により，任意の微分次数付き加群 $M$ に対して
+$\Hom_{D(A, \text{d})}(P, M) = \Hom_{K(A, \text{d})}(P, M)$ である。
+言い換えれば，$P$ は Remark \ref{dga-remark-source-graded-projective} で論じた
+三角部分圏 $\mathcal{D} \subset K(A, \text{d})$ の対象である。
+$P$ は次数付き $A$-加群として有限自由であることに注意せよ。
+
+\medskip\noindent
+$b + 4c - n < a$ となる $n>0$ を選ぶ。$E$ への射影子を微分次数付き
+$A$-加群の自己準同型 $\varphi : P \to P$ で表す。$K(A, \text{d})$ における
+識別三角形
+$$
+P \xrightarrow{1 - \varphi} P \to C \to P[1]
+$$
+を考える。ここで $C$ は最初の矢印の錐である。このとき $C$ は
+$\mathcal{D}$ の対象で，$D(A, \text{d})$ において
+$C \cong E \oplus E[1]$ であり，$C$ は有限次数付き自由 $A$-加群である。
+次に，$K(A, \text{d})$ における識別三角形
+$$
+C[1] \to C \to C' \to C[2]
+$$
+を考える。ここで $C'$ は，$D(A, \text{d})$ における合成
+$$
+C[1] \cong E[1] \oplus E[2] \to E[1] \to E \oplus E[1] \cong C
+$$
+を表す射 $C[1] \to C$ の錐である。このとき $C'$ は
+$E \oplus E[2]$ を表す。このように続けると，$\mathcal{D}$ の対象であり，
+% P03-STACKS-E583: frozen English contains the spurious article in
+% “is a finite free as a graded A-module”.
+次数付き $A$-加群として有限自由であり，$E \oplus E[n]$ を表す
+微分次数付き $A$-加群 $P$ が得られる。
+
+\medskip\noindent
+$P$ の $A$-加群としての斉次元の基底 $x_i$, $i \in I$ を選び，
+$d_i=\deg(x_i)$ とする。$P_1$ を，$d_i \leq a-c-1$ を満たす
+$x_i$ と $\text{d}(x_i)$ が生成する $P$ の $A$-部分加群とする。
+$P_2$ を，$d_i \geq b-n+c$ を満たす $x_i$ と $\text{d}(x_i)$ が
+生成する $P$ の $A$-部分加群とする。次が成り立つ。
+\begin{enumerate}
+\item $P_1$ と $P_2$ は $P$ の微分次数付き部分加群である。
+\item $t \geq a$ に対して $P_1^t = 0$ である。
+\item $t \leq a - 2c$ に対して $P_1^t = P^t$ である。
+\item $t \leq b - n$ に対して $P_2^t = 0$ である。
+\item $t \geq b - n + 2c$ に対して $P_2^t = P^t$ である。
+\end{enumerate}
+% P03-STACKS-E584: the frozen inequality below is reversed relative to
+% b + 4c - n < a; it is preserved and the correction remains sidecar-only.
+$n$ の選び方により $b - n + 2c \geq a - 2c$ であるから，
+微分次数付き $A$-加群の短完全列
+$$
+0 \to P_1 \cap P_2 \to P_1 \oplus P_2 \xrightarrow{\pi} P \to 0
+$$
+を得る。$P$ は次数付き $A$-加群として射影的だから，これは許容短完全列である
+（Lemma \ref{dga-lemma-target-graded-projective}）。したがって
+$K(A, \text{d})$ における境界写像
+$\delta : P \to (P_1 \cap P_2)[1]$ を得る；Lemma
+\ref{dga-lemma-admissible-ses} を参照せよ。
+$P=E\oplus E[n]$ であり，$P_1\cap P_2$ は次数 $(b-n,a)$ にのみ存在するので，
+$\Hom_{D(A, \text{d})}(E \oplus E[n], (P_1 \cap P_2)[1])$ は零である。
+したがって，$P$ は $\mathcal{D}$ の対象であるから，$\delta$ は
+$K(A, \text{d})$ の射として零である。《導来圏》Lemma
+\ref{derived-lemma-split} により，ある次数 $-1$ の $h:P\to P$ に対して
+$\pi \circ s = \text{id}_P + \text{d}h + h\text{d}$ となる写像
+$s : P \to P_1 \oplus P_2$ が存在する。$P_1 \oplus P_2 \to P$ は全射であり，
+$P$ は次数付き $A$-加群として射影的だから，$h$ の斉次持ち上げ
+$\tilde h : P \to P_1 \oplus P_2$ を選べる。そこで $s$ を
+$s+\text{d}\tilde h+\tilde h\text{d}$ に取り替えると，
+$\pi\circ s=\text{id}_P$ を得る。したがって直和分解
+$P=s^{-1}(P_1)\oplus s^{-1}(P_2)$ を得る。
+$s^{-1}(P_2)$ は次数 $\geq b-n+2c$ で $P$ に等しいので，
+$s^{-1}(P_2) \to P \to E$ は擬同型，すなわち $D(A, \text{d})$ における
+同型である。これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{導来圏の同値}
+\label{dga-section-equivalence}
+
+\noindent
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。自然に生じる問題は，$D(A, \text{d})$ と
+$D(B, \text{d})$ が $R$-線形三角圏として同値であるとは何を意味するか，
+というものである。これはかなり微妙な問題であり，必ずしも問うべき正しい問題では
+ないことが分かる。それでもこの節では，そのような同値を保証するいくつかの条件を
+集める。
+% P03-STACKS-E585: frozen English uses the noun “collection” where
+% the verb “collect” is required.
+
+\medskip\noindent
+この話題に関する画期的な論文 \cite{Rickard} をぜひ参照されたい。
+
+\begin{lemma}
+\label{dga-lemma-qis-equivalence}
+$R$ を環とする。$(A, \text{d}) \to (B, \text{d})$ を，コホモロジー代数上の
+同型を誘導する微分次数付き $R$-代数の準同型とする。このとき
+$$
+- \otimes_A^\mathbf{L} B : D(A, \text{d}) \to D(B, \text{d})
+$$
+は三角圏の $R$-線形同値を与え，その擬逆は制限関手 $N \mapsto N_A$ である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-tensor-with-compact-fully-faithful} により，関手
+$M \longmapsto M \otimes_A^\mathbf{L} B$ は充満忠実である。
+Lemma \ref{dga-lemma-tensor-hom-adjoint} により，関手
+$N \longmapsto R\Hom(B, N)=N_A$ は右随伴である；Example
+\ref{dga-example-map-hom-tensor} を参照せよ。$R\Hom(B,-)$ の核が零であることは
+明らかである。したがって《導来圏》Lemma
+\ref{derived-lemma-fully-faithful-adjoint-kernel-zero} から結果が従う。
+\end{proof}
+
+\noindent
+上の証明を調べると，次の一般化が直ちに得られる。
+
+\begin{lemma}
+\label{dga-lemma-tilting-equivalence}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$N$ を微分次数付き $(A,B)$-両側加群とする。次を仮定する。
+\begin{enumerate}
+\item $N$ は $D(B, \text{d})$ のコンパクト対象を定める。
+\item $N' \in D(B, \text{d})$ であり，すべての $n \in \mathbf{Z}$ に対して
+$\Hom_{D(B, \text{d})}(N, N'[n]) = 0$
+ならば $N'=0$ である。
+\item 写像 $H^k(A) \to \Hom_{D(B, \text{d})}(N, N[k])$ は，
+すべての $k \in \mathbf{Z}$ に対して同型である。
+\end{enumerate}
+このとき
+$$
+- \otimes_A^\mathbf{L} N : D(A, \text{d}) \to D(B, \text{d})
+$$
+は三角圏の $R$-線形同値を与える。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-tensor-with-compact-fully-faithful} により，関手
+$M \longmapsto M \otimes_A^\mathbf{L} N$ は充満忠実である。
+Lemma \ref{dga-lemma-tensor-hom-adjoint} により，関手
+$N' \longmapsto R\Hom(N,N')$ は右随伴である。
+% P03-STACKS-E586: frozen proof cites assumption (3), but zero kernel
+% is precisely the generator condition in assumption (2).
+仮定 (3) により，$R\Hom(N,-)$ の核は零である。したがって《導来圏》Lemma
+\ref{derived-lemma-fully-faithful-adjoint-kernel-zero} から結果が従う。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-tilting-equivalence}
+Lemma \ref{dga-lemma-tilting-equivalence} では，条件 (2) を，$N$ が
+$D_{compact}(B,d)$ の古典的生成子であるという条件に置き換えられる；
+《導来圏》Proposition
+\ref{derived-proposition-generator-versus-classical-generator} を参照せよ。
+さらに，$R\Hom(N,B)$ が $D(A,\text{d})$ のコンパクト対象であることが
+分かっているなら，$N$ が $D_{compact}(B,\text{d})$ の弱生成子であることを
+確認すれば十分である。証明は省略する；Stacks project で必要になればここに加える。
+\end{remark}
+
+\noindent
+次の補題の $B$-加群 $P$ は，``$(A, B)$-ティルティング複体'' と呼ばれることがある。
+
+\begin{lemma}
+\label{dga-lemma-rickard}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。$A = H^0(A)$ と仮定する。次は同値である。
+\begin{enumerate}
+\item $D(A, \text{d})$ と $D(B, \text{d})$ は $R$-線形三角圏として同値である。
+\item 次を満たす $D(B, \text{d})$ の対象 $P$ が存在する。
+\begin{enumerate}
+\item $P$ は $D(B, \text{d})$ のコンパクト対象である。
+\item $N \in D(B, \text{d})$ が，すべての $i \in \mathbf{Z}$ に対して
+$\Hom_{D(B, \text{d})}(P, N[i]) = 0$ を満たすなら，$N = 0$ である。
+\item $\Hom_{D(B, \text{d})}(P, P[i])$ は $i \not = 0$ に対して零であり，
+$i = 0$ に対して $A$ に等しい。
+\end{enumerate}
+\end{enumerate}
+(2) で構成される同値 $D(A, \text{d}) \to D(B, \text{d})$ は $A$ を $P$ に送る。
+\end{lemma}
+
+\begin{proof}
+$F : D(A, \text{d}) \to D(B, \text{d})$ を同値とする。このとき $F$ は
+コンパクト対象をコンパクト対象に送る。したがって $P = F(A)$ はコンパクト，
+すなわち (2)(a) が成り立つ。条件 (2)(b) と (2)(c) は，$F$ が同値であることから
+直ちに従う。
+
+\medskip\noindent
+(2) にあるような対象 $P$ をとる。$P$ を性質 (P) をもつ微分次数付き加群で表す。
+次のようにおく。
+$$
+(E, \text{d}) = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(P, P)
+$$
+Lemma \ref{dga-lemma-hom-derived} と仮定 (2)(c) により，
+$H^0(E) = A$ かつ $k \not = 0$ に対して $H^k(E) = 0$ である。
+$P$ を $(E, B)$-両側加群とみなし，Lemma
+\ref{dga-lemma-tilting-equivalence} と仮定 (2)(b) を用いると，$E$ を $P$ に送る同値
+$$
+D(E, \text{d}) \to D(B, \text{d})
+$$
+を得る。$E' \subset E$ を，次で定まる微分次数付き $R$-部分代数とする。
+$$
+(E')^i = \left\{
+\begin{matrix}
+E^i & \text{if }i < 0 \\
+\Ker(E^0 \to E^1) & \text{if }i = 0 \\
+0 & \text{if }i > 0
+\end{matrix}
+\right.
+$$
+このとき，微分次数付き代数の擬同型
+$(A, \text{d}) \leftarrow (E', \text{d}) \rightarrow (E, \text{d})$ がある。
+したがって Lemma \ref{dga-lemma-qis-equivalence} により同値
+$$
+D(A, \text{d}) \leftarrow D(E', \text{d}) \rightarrow D(E, \text{d})
+\rightarrow D(B, \text{d})
+$$
+を得る。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-lift-equivalence-to-dga}
+$R$ を環とし，$(A, \text{d})$ と $(B, \text{d})$ を微分次数付き
+$R$-代数とする。三角圏の $R$-線形同値
+$$
+F : D(A, \text{d}) \longrightarrow D(B, \text{d})
+$$
+が与えられているとする。$N=F(A)$ とおく。このとき $N$ は微分次数付き
+$B$-加群である。$F$ は同値であり，$A$ は $D(A,\text{d})$ の
+コンパクト対象だから，$N$ は $D(B,\text{d})$ のコンパクト対象である。
+$A$ は $D(A,\text{d})$ を生成し，$F$ は同値だから，$N$ は
+$D(B,\text{d})$ を生成する。最後に
+$H^k(A)=\Hom_{D(A,\text{d})}(A,A[k])$ であり，
+% P03-STACKS-E955: frozen English omits “is” in “as F an equivalence”.
+$F$ は同値であるから，すべての $k$ に対して $F$ は同型
+$H^k(A)=\Hom_{D(B,\text{d})}(N,N[k])$ を誘導する。
+Lemma \ref{dga-lemma-tilting-equivalence} の構成から生じる同値
+$D(A,\text{d})\longrightarrow D(B,\text{d})$ が存在すると結論するために
+必要なのは，微分と両立し，与えられた右 $B$-加群構造と可換する左
+$A$-加群構造を $N$ に入れることだけである。実際，$N$ を擬同型な
+微分次数付き $B$-加群で置き換えた後にこれを行えば十分である。
+この加群構造は，ある場合には構成できる。例えば，$F$ が微分次数付き関手
+$$
+F^{dg} :
+\text{Mod}^{dg}_{(A, \text{d})}
+\longrightarrow
+\text{Mod}^{dg}_{(B, \text{d})}
+$$
+へ持ち上げられると仮定すれば，これは成り立つ
+（記法については Example \ref{dga-example-dgm-dg-cat} を参照せよ）。
+別の場合を次の命題で論じる。
+\end{remark}
+
+\begin{proposition}
+\label{dga-proposition-rickard}
+$R$ を環とし，$(A,\text{d})$ と $(B,\text{d})$ を微分次数付き
+$R$-代数とする。$F:D(A,\text{d})\to D(B,\text{d})$ を三角圏の
+$R$-線形同値とする。次を仮定する。
+\begin{enumerate}
+\item $A=H^0(A)$ である。
+\item $B$ は $R$-加群の複体として K-平坦である。
+\end{enumerate}
+このとき，Lemma \ref{dga-lemma-tilting-equivalence} にあるような
+$(A,B)$-両側加群 $N$ が存在する。
+\end{proposition}
+
+\begin{proof}
+上の Remark \ref{dga-remark-lift-equivalence-to-dga} と同様に，
+$D(B,\text{d})$ において $N=F(A)$ とおく。$N$ は性質 (P) をもつ
+微分次数付き $B$-加群であると仮定してよい。次のようにおく。
+$$
+(E, \text{d}) = \Hom_{\text{Mod}^{dg}_{(B, \text{d})}}(N, N)
+$$
+Lemma \ref{dga-lemma-hom-derived} により，$H^0(E)=A$ かつ $k\not=0$ に対して
+$H^k(E)=0$ である。さらに，Remark
+\ref{dga-remark-lift-equivalence-to-dga} の議論と Lemma
+\ref{dga-lemma-tilting-equivalence} により，$(E,B)$-両側加群としての $N$ は同値
+$-\otimes_E^\mathbf{L}N:D(E,\text{d})\to D(B,\text{d})$ を誘導する。
+$E'\subset E$ を，次で定まる微分次数付き $R$-部分代数とする。
+$$
+(E')^i = \left\{
+\begin{matrix}
+E^i & \text{if }i < 0 \\
+\Ker(E^0 \to E^1) & \text{if }i = 0 \\
+0 & \text{if }i > 0
+\end{matrix}
+\right.
+$$
+このとき，微分次数付き代数の擬同型
+$(A,\text{d})\leftarrow(E',\text{d})\rightarrow(E,\text{d})$ がある。
+したがって Lemma \ref{dga-lemma-qis-equivalence} により同値
+$$
+D(A, \text{d}) \leftarrow D(E', \text{d}) \rightarrow D(E, \text{d})
+\rightarrow D(B, \text{d})
+$$
+を得る。
+% P03-STACKS-E956: the frozen source calls the left arrow in the
+% horizontal display above a “vertical” arrow.
+左の縦矢印の擬逆 $D(A,\text{d})\to D(E',\text{d})$ は，
+$A$ を $(A,E')$-両側加群とみなしたときの
+$M\mapsto M\otimes_A^\mathbf{L}A$ で与えられることに注意せよ；
+Example \ref{dga-example-map-hom-tensor} を参照せよ。一方，関手
+$D(E',\text{d})\to D(B,\text{d})$ は，上の $N$ による
+$M\mapsto M\otimes_{E'}^\mathbf{L}N$ で与えられる。
+Lemma \ref{dga-lemma-compose-tensor-functors} により結論を得る。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-rickard}
+$A,B,F,N$ は Proposition \ref{dga-proposition-rickard} にあるものとする。
+$F$ と関手 $G(-)=-\otimes_A^\mathbf{L}N$ が同型であるかは明らかでない。
+構成により，$D(B,\text{d})$ における同型 $N=G(A)\to F(A)$ がある。
+% P03-STACKS-E957: frozen English says “for M is” instead of
+% “when M is” (or “for M which is”).
+$M$ が次数付き射影的な微分次数付き $A$-加群である場合
+（例えば $A$ のシフトの直和である場合），これを関手的同型
+$G(M)\to F(M)$ に拡張することは容易である。さらに $M$ がそのような加群の間の
+写像の錐である場合，$G(M)\cong F(M)$ と結論できる。一般にこれ以上のことが
+成り立つかは分からない。
+\end{remark}
+
+\begin{lemma}
+\label{dga-lemma-rickard-rings}
+$R$ を環とし，$A$ と $B$ を $R$-代数とする。次は同値である。
+\begin{enumerate}
+\item 三角圏の $R$-線形同値 $D(A)\to D(B)$ が存在する。
+\item 次を満たす $D(B)$ の対象 $P$ が存在する。
+\begin{enumerate}
+\item $P$ は有限射影 $B$-加群の有限複体によって表される。
+\item $K\in D(B)$ が，すべての $i\in\mathbf{Z}$ に対して
+$\Ext^i_B(P,K)=0$ を満たすなら，$K=0$ である。
+\item $\Ext^i_B(P,P)$ は $i\not=0$ に対して零であり，
+$i=0$ に対して $A$ に等しい。
+\end{enumerate}
+\end{enumerate}
+さらに，$B$ が $R$-加群として平坦なら，これらは次とも同値である。
+\begin{enumerate}
+\item[(3)] $-\otimes_A^\mathbf{L}N:D(A)\to D(B)$ が同値となるような
+$(A,B)$-両側加群 $N$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値は，Lemma \ref{dga-lemma-rickard} と，$D(B)$ の
+コンパクト対象を特徴付ける Lemma \ref{dga-lemma-compact} の結果とを
+組み合わせた特殊な場合である（細部を一つ省略した）。
+$B$ が $R$-平坦な場合の (3) との同値は Proposition
+\ref{dga-proposition-rickard} から従う。
+\end{proof}
+
+\begin{remark}
+\label{dga-remark-centers}
+$R$ を環とし，$A$ と $B$ を $R$-代数とする。$D(A)$ と $D(B)$ が
+$R$-線形三角圏として同値なら，$A$ と $B$ の中心は $R$-代数として同型である。
+特に，$A$ と $B$ が可換なら $A\cong B$ である。かなり技巧的な証明は
+\cite[Proposition 9.2]{Rickard} または \cite[Proposition 6.3.2]{KZ} にある。
+別の方法として Hochschild コホモロジーを用いることも考えられる
+（次の注意を参照せよ）。
+\end{remark}
+
+\begin{remark}
+\label{dga-remark-hochschild-cohomology}
+$R$ を環とし，$(A,\text{d})$ と $(B,\text{d})$ を導来同値な微分次数付き
+$R$-代数，すなわち三角圏の $R$-線形同値
+$D(A,\text{d})\to D(B,\text{d})$ が存在するものとする。
+$(A,\text{d})$ と $(B,\text{d})$ のある種の不変量が一致することを
+示したい。多くの場合，状況をさらに制御できる。例えば，ある微分次数付き
+$(A,B)$-両側加群 $\Omega$ に対して，次の形の同値が存在することがある。
+% P03-STACKS-E587: frozen display omits the derived L on the tensor functor.
+$$
+- \otimes_A \Omega : D(A, \text{d}) \longrightarrow D(B, \text{d})
+$$
+これは Proposition \ref{dga-proposition-rickard} の状況で起こり，同値が
+幾何学的構成から生じる場合にもしばしば成り立つ。
+% P03-STACKS-E958: frozen English begins an “If also ...” condition,
+% ends it as a sentence fragment, and moves the consequent to the next sentence.
+さらに，ある微分次数付き
+$(B,A)$-両側加群 $\Omega'$ に対して，この関手の擬逆も
+$$
+- \otimes_B^\mathbf{L} \Omega' : D(B, \text{d}) \longrightarrow D(A, \text{d})
+$$
+で与えられるとする（上と同様に，実際にはそのような加群 $\Omega'$ が
+存在することが多い）。このとき，両側加群の導来圏の間の関手
+$$
+D(A^{opp} \otimes_R A, \text{d})
+\longrightarrow
+D(B^{opp} \otimes_R B, \text{d}),\quad
+M \longmapsto \Omega' \otimes^\mathbf{L}_A M \otimes_A^\mathbf{L} \Omega
+$$
+を考えることができる（両側加群を右加群に直すには Lemma
+\ref{dga-lemma-bimodule-over-tensor} を用いる）。この関手は $(A,A)$-両側加群
+$A$ を $(B,B)$-両側加群 $B$ に送ることに注意せよ。適切な条件の下では
+（例えば $A,B,\Omega$ の $R$ 上の平坦性など），この関手も同値になる。
+この場合，Hochschild コホモロジー群の同型
+$$
+HH^i(A, \text{d}) =
+\Hom_{D(A^{opp} \otimes_R A, \text{d})}(A, A[i])
+\longrightarrow
+\Hom_{D(B^{opp} \otimes_R B, \text{d})}(B, B[i]) =
+HH^i(B, \text{d}).
+$$
+を得る。例えば $A=H^0(A)$ なら，$HH^0(A,\text{d})$ は $A$ の中心に等しく，
+これは Remark \ref{dga-remark-centers} で述べた結果の概念的な証明を与える。
+この注意が必要になれば，ここに精密な主張と詳しい証明を与える。
+\end{remark}
+
+
+
+\section{微分次数付き代数の分解}
+\label{dga-section-resolution-dgas}
+
+\noindent
+$R$ を環とする。本書の仮定の下で，集合 $S$ 上の自由 $R$-代数
+$R\langle S\rangle$ は，式
+$$
+s_1 s_2 \ldots s_n
+$$
+を $R$-基底とする代数である。ここで $n\geq0$ であり，
+% P03-STACKS-E959: frozen English gives the plural list s_1,...,s_n
+% the singular predicate “is a sequence”.
+$s_1,\ldots,s_n\in S$ は $S$ の元の列をなす。乗法は連結
+$$
+(s_1 s_2 \ldots s_n) \cdot (s'_1 s'_2 \ldots s'_m) =
+s_1 \ldots s_n s'_1 \ldots s'_m
+$$
+によって与えられる。この代数は，任意の $R$-代数 $A$ に対して写像
+$$
+\Mor_{R\text{-alg}}(R\langle S \rangle, A) \to
+\text{Map}(S, A),\quad
+\varphi \longmapsto (s \mapsto \varphi(s))
+$$
+が全単射であるという性質によって特徴付けられる。
+
+\medskip\noindent
+次数付き $R$-代数の圏では，集合 $S$ は次数付けを備えるべきであり，
+これを写像 $\deg:S\to\mathbf{Z}$ とみなす。このとき
+$R\langle S\rangle$ は，単項式の次数が
+$$
+\deg(s_1 s_2 \ldots s_n) = \deg(s_1) + \ldots + \deg(s_n)
+$$
+となる次数付けをもつ。この設定では，任意の次数付き $R$-代数 $A$ に対して写像
+$$
+\Mor_{\text{graded }R\text{-alg}}(R\langle S \rangle, A) \to
+\text{Map}_{\text{graded sets}}(S, A),\quad
+\varphi \longmapsto (s \mapsto \varphi(s))
+$$
+が全単射である。
+
+\medskip\noindent
+$A$ が次数付き $R$-代数で $S$ が次数付き集合なら，同様に
+$A\langle S\rangle$ を作ることができる。$A\langle S\rangle$ の元は，
+$$
+a_0 s_1 a_1 s_2 \ldots a_{n - 1} s_n a_n
+$$
+という形の元の和であり，$a_i\in A$ とし，これらの式が
+$(a_0,\ldots,a_n)$ に関して $R$-多重線形であるという関係で割る。
+したがって，$S$ の元の各列 $s_1,\ldots,s_n$ に対して包含
+$$
+A \otimes_R \ldots \otimes_R A \subset A\langle S \rangle
+$$
+があり，この代数はこれらの直和である。この定義の下で，読者は写像
+$$
+\Mor_{\text{graded }R\text{-alg}}(A\langle S \rangle, B) \to
+\Mor_{\text{graded }R\text{-alg}}(A, B) \times
+\text{Map}_{\text{graded sets}}(S, B),
+$$
+$\varphi$ を $(\varphi|_A,(s\mapsto\varphi(s)))$ に送るものが，
+% P03-STACKS-E588: the frozen conclusion quantifies over A although
+% the displayed universal-property target variable is B.
+任意の次数付き $R$-代数 $A$ に対して全単射であることを示す。
+$A$ が自由次数付き $R$-代数なら，$A\langle S\rangle$ もそうである。
+
+\medskip\noindent
+$A$ を微分次数付き $R$-代数とし，$S$ を次数付き集合とする。さらに，
+各 $s\in S$ に対して，$\deg(f_s)=\deg(s)+1$ かつ
+$\text{d}f_s=0$ を満たす斉次元 $f_s\in A$ が与えられているとする。
+このとき，$\text{d}(s)=f_s$ を満たす $A\langle S\rangle$ 上の
+微分次数付き代数構造が一意に存在する。例えば，$a,b,c\in A$ および
+$s,t\in S$ に対して次のように定義する。
+\begin{align*}
+\text{d}(asbtc)
+& =
+\text{d}(a)sbtc + (-1)^{\deg(a)}a f_s b t c +
+(-1)^{\deg(a) + \deg(s)} as\text{d}(b)tc \\
+& + (-1)^{\deg(a) + \deg(s) + \deg(b)} asb f_t c +
+(-1)^{\deg(a) + \deg(s) + \deg(b) + \deg(t)} asbt\text{d}(c)
+\end{align*}
+詳細は省略する。
+
+\begin{lemma}
+\label{dga-lemma-K-flat-resolution}
+$R$ を環とし，$(B,\text{d})$ を微分次数付き $R$-代数とする。
+次の性質をもつ微分次数付き $R$-代数の擬同型
+$(A,\text{d})\to(B,\text{d})$ が存在する。
+\begin{enumerate}
+\item $A$ は $R$-加群の複体として K-平坦である。
+\item $A$ は自由次数付き $R$-代数である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず，(1), (2) を満たし，コホモロジー上の全射を誘導する
+$(A_0,\text{d})\to(B,\text{d})$ を見つけられると主張する。
+実際，次数付き集合 $S$ と，各 $s\in S$ に対する次数 $\deg(s)$ の斉次元
+$b_s\in\Ker(d:B\to B)$ を，$H^*(B)$ における類 $\overline b_s$ が
+$R$-加群として $H^*(B)$ を生成するようにとる。このとき
+$A_0=R\langle S\rangle$ に零微分を入れ，$s$ を $b_s$ に送ることによって
+$A_0\to B$ を定められる。
+
+\medskip\noindent
+コホモロジー上の全射を誘導する $A_0\to B$ が与えられたとき，帰納的に列
+$$
+% P03-STACKS-E589: the frozen sequence omits an arrow before B.
+A_0 \to A_1 \to A_2 \to \ldots B
+$$
+を構成する。$A_n\to B$ が与えられたとき，$S_n$ を次数付き集合とし，
+% P03-STACKS-E596: frozen English says “set S_n be”.
+各 $s\in S_n$ に対して，次数 $\deg(s)+1$ の斉次元
+$a_s\in\Ker(\text{d}:A_n\to A_n)$ を，$H^*(A_n)$ における類
+$\overline a_s$ が $H^*(B)$ で零に写るようにとる。元 $\overline a_s$ が
+$R$-加群として $\Ker(H^*(A_n)\to H^*(B))$ を生成するよう，$S_n$ を
+十分大きく選ぶ。次のようにおく。
+$$
+A_{n + 1} = A_n\langle S_n \rangle
+$$
+微分は $\text{d}(s)=a_s$ で与える；上の議論を参照せよ。
+このとき各 $(A_n,\text{d})$ は (1), (2) を満たす。詳細は省略する。
+$n=0$ でそうであったから，写像 $H^*(A_n)\to H^*(B)$ は全射である。
+
+\medskip\noindent
+$A=\colim A_n$ が自由次数付き $R$-代数であることは明らかである。
+《代数詳論》Lemma \ref{more-algebra-lemma-colimit-K-flat} により K-平坦である。
+写像 $H^*(A)\to H^*(B)$ は全射かつ単射なので同型である：$H^*(A)$ の各元は
+ある $n$ に対する $H^*(A_n)$ の元から生じ，それが $H^*(B)$ で零になるなら，
+$H^*(A_{n+1})$ で零になり，したがって $H^*(A)$ で零になる。
+\end{proof}
+
+\noindent
+応用として，Lemma \ref{dga-lemma-compose-tensor-functors-general-algebra} の
+``正しい'' 版を証明する。
+
+\begin{lemma}
+\label{dga-lemma-compose-tensor-functors-tor}
+$R$ を環とし，$(A,\text{d})$, $(B,\text{d})$, $(C,\text{d})$ を
+微分次数付き $R$-代数とする。$A\otimes_R C$ が $D(R)$ において
+$A\otimes_R^\mathbf{L}C$ を表すと仮定する。$N$ を微分次数付き
+$(A,B)$-両側加群，$N'$ を微分次数付き $(B,C)$-両側加群とする。
+このとき合成
+$$
+\xymatrix{
+D(A, \text{d}) \ar[rr]^{- \otimes_A^\mathbf{L} N} & &
+D(B, \text{d}) \ar[rr]^{- \otimes_B^\mathbf{L} N'} & &
+D(C, \text{d})
+}
+$$
+は，ある微分次数付き $(A,C)$-両側加群 $N''$ に対する
+$-\otimes_A^\mathbf{L}N''$ と同型である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{dga-lemma-K-flat-resolution} により，$B'$ が $R$-加群の複体として
+K-平坦であるような擬同型 $(B',\text{d})\to(B,\text{d})$ を選ぶ。
+Lemma \ref{dga-lemma-qis-equivalence} により，関手
+$-\otimes_{B'}^\mathbf{L}B:D(B',\text{d})\to D(B,\text{d})$ は同値であり，
+その擬逆は制限によって与えられる。制限は，$B$ を $(B,B')$-両側加群と
+みなしたときの関手
+$-\otimes_B^\mathbf{L}B:D(B,\text{d})\to D(B',\text{d})$ と
+標準的に同型であることに注意せよ。したがって，次の合成について
+補題を証明すれば十分である。
+$$
+D(A) \to D(B) \to D(B'),\quad
+D(B') \to D(B) \to D(C),\quad
+D(A) \to D(B') \to D(C).
+$$
+第1の合成については，$B'$ が $R$-加群の複体として K-平坦なので
+Lemma \ref{dga-lemma-compose-tensor-functors} から従う。第2の合成については，
+$B \otimes_B^\mathbf{L} N' = N' = B \otimes_B N'$
+であるから Lemma \ref{dga-lemma-compose-tensor-functors-general} が適用できる。
+したがって，$B$ が $R$-加群の複体として K-平坦である場合に帰着する。
+
+\medskip\noindent
+$B$ が $R$-加群の複体として K-平坦であると仮定する。
+(\ref{dga-equation-plain-versus-derived-algebras}) が同型であることを示せば十分である；
+Lemma \ref{dga-lemma-compose-tensor-functors-general-algebra} を参照せよ。
+$L$ が性質 (P) をもつ微分次数付き $R$-加群であるような擬同型
+$L\to A$ を選ぶ。このとき $P=L\otimes_RB$ が微分次数付き $B$-加群として
+性質 (P) をもつことは明らかである。したがって，$P\to A\otimes_RB$ が擬同型
+$$
+P \otimes_B (B \otimes_R C)
+\longrightarrow
+(A \otimes_R B) \otimes_B (B \otimes_R C)
+$$
+を誘導することを示さなければならない。これを次のように書き換えられる。
+$$
+% P03-STACKS-E590: frozen rewrite introduces an extra B factor on the left.
+P \otimes_R B \otimes_R C \longrightarrow A \otimes_R B \otimes_R C
+$$
+$B$ は $R$-加群の複体として K-平坦だから，《代数詳論》Lemma
+\ref{more-algebra-lemma-K-flat-quasi-isomorphism} により，
+$$
+P \otimes_R C \to A \otimes_R C
+$$
+が擬同型であることを示せば十分である。これはちょうど仮定である。
+\end{proof}
+
+\noindent
+次の補題は本来この節に属するものではないが，自然な置き場所が他にないようである。
+
+\begin{lemma}
+\label{dga-lemma-countable}
+$(A,\text{d})$ を，各 $i$ に対して $H^i(A)$ が可算である微分次数付き代数とし，
+$M$ を $D(A,\text{d})$ の対象とする。このとき次は同値である。
+\begin{enumerate}
+\item $M=\text{hocolim}E_n$ であり，各 $E_n$ は $D(A,\text{d})$ で
+コンパクトである。
+\item 各 $i$ に対して $H^i(M)$ は可算である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) が成り立つと仮定する。《導来圏》Lemma
+\ref{derived-lemma-cohomology-of-hocolim} により
+$H^i(M)=\colim H^i(E_n)$ である。したがって，各 $n$ に対して
+$H^i(E_n)$ が可算であることを証明すれば十分である。Proposition
+\ref{dga-proposition-compact} により，$E_n$ は $D(A,\text{d})$ において，
+微分次数付き部分加群による有限フィルトレーション $F_\bullet$ をもち，
+$F_jP/F_{j-1}P$ が $A$ のシフトの有限直和となる微分次数付き加群 $P$ の
+直和因子と同型である。仮定により，群 $H^i(F_jP/F_{j-1}P)$ は可算である。
+フィルトレーションの長さに関する帰納法とコホモロジー長完全列を用いると，
+(2) が成り立つと結論できる。興味深いのは逆の含意である。
+
+\medskip\noindent
+包含写像 $A'\to A$ がコホモロジー上の同型を定めるような，可算な
+微分次数付き部分代数 $A'\subset A$ が存在すると主張する。
+$A'$ を構成するため，可算な微分次数付き部分代数
+$$
+A_1 \subset A_2 \subset A_3 \subset \ldots
+$$
+を，(a) $H^i(A_1)\to H^i(A)$ が全射であり，(b) $n>1$ に対して写像
+$H^i(A_{n-1})\to H^i(A_n)$ の核が写像
+$H^i(A_{n-1})\to H^i(A)$ の核と同じになるように選ぶ。
+$A_1$ を構成するには，$A$ のコホモロジーを環または次数付きアーベル群として
+生成するコチェインの任意の可算集合 $S\subset A$ をとり，$A_1$ を $S$ が生成する
+$A$ の微分次数付き部分代数とする。
+% P03-STACKS-E591: frozen source says “cochain” although d(s_a)=a
+% requires a cocycle whose cohomology class dies in H^i(A).
+$A_{n-1}$ から $A_n$ を構成するには，$H^i(A)$ で零に写る各コチェイン
+$a\in A_{n-1}^i$ に対して，$\text{d}(s_a)=a$ となる
+$s_a\in A^{i-1}$ を選び，$A_n$ を $A_{n-1}$ と元 $s_a$ が生成する
+$A$ の微分次数付き部分代数とする。最後に $A'=\bigcup A_n$ とおく。
+
+\medskip\noindent
+Lemma \ref{dga-lemma-qis-equivalence} により，制限写像
+$D(A,\text{d})\to D(A',\text{d})$, $M\mapsto M_{A'}$ は同値である。
+$M$ と $M_{A'}$ のコホモロジー群は同じなので，$(A',\text{d})$ に対して
+(2) $\Rightarrow$ (1) を証明すれば十分である。
+
+\medskip\noindent
+$A$ は可算であると仮定する。上とまったく同じ型の議論により，
+$D(A,\text{d})$ の $M$ に対して，次が同値であることが分かる：
+各 $i$ に対して $H^i(M)$ が可算であることと，$M$ が可算な微分次数付き加群で
+表されることである。したがって (2) $\Rightarrow$ (1) を証明する問題は，
+次の段落で述べる状況に帰着する。
+
+\medskip\noindent
+$A$ は可算で，$M$ は $A$ 上の可算な微分次数付き加群であると仮定する。
+次を満たす微分次数付き $A$-加群の準同型 $P\to M$ が存在すると主張する。
+\begin{enumerate}
+\item $P\to M$ は擬同型である。
+\item $P$ は性質 (P) をもつ。
+\item $P$ は可算である。
+\end{enumerate}
+Lemma \ref{dga-lemma-resolve} における P-分解の構成の証明を見ると，
+可算な微分次数付き加群の設定で Lemma \ref{dga-lemma-good-quotient} を
+証明できることを示せば十分である。これはその証明から直ちに従う。
+
+\medskip\noindent
+% P03-STACKS-E592: frozen paragraph assumes M has property (P) but
+% immediately filters the newly constructed module P throughout.
+$A$ は可算で，$M$ は性質 (P) をもつ可算な微分次数付き加群であると仮定する。
+微分次数付き部分加群によるフィルトレーション
+$$
+0 = F_{-1}P \subset F_0P \subset F_1P \subset \ldots \subset P
+$$
+を，次を満たすように選ぶ。
+\begin{enumerate}
+\item $P=\bigcup F_pP$ である。
+\item $F_iP\to F_{i+1}P$ は許容単射である。
+\item ある集合 $J_i$ と整数 $k_j$ に対して，微分次数付き加群の同型
+$F_iP/F_{i - 1}P \to \bigoplus_{j \in J_i} A[k_j]$
+がある。
+\end{enumerate}
+もちろん各 $i$ に対して $J_i$ は可算である。各 $i$ と $j\in J_i$ に対し，
+$F_iP/F_{i-1}P$ における像が $j$ に対応する直和因子を生成するような，
+次数 $k_j$ の $x_{i,j}\in F_iP$ を選ぶ。
+
+\medskip\noindent
+主張：$n$ と有限部分集合 $S_i\subset J_i$, $i=1,\ldots,n$ が与えられたとき，
+有限部分集合 $S_i\subset T_i\subset J_i$, $i=1,\ldots,n$ で，
+% P03-STACKS-E593: frozen ranges omit index 0 although the proof uses it.
+% P03-STACKS-E594: frozen claim writes left summands Ax_{i,j} in a right module.
+$P'=\bigoplus_{i\leq n}\bigoplus_{j\in T_i}Ax_{i,j}$ が $P$ の
+微分次数付き部分加群となるものが存在する。これは Lemma
+\ref{dga-lemma-factor-through-nicer} の証明で示したが，直接示すことも容易である：
+元 $x_{i,j}$ は右 $A$-加群として $P$ を自由に生成する。$P$ の構造から
+$$
+% P03-STACKS-E595: j' is unbound in the frozen summation subscript.
+\text{d}(x_{i, j}) = \sum\nolimits_{i' < i} x_{i', j'}a_{i', j'}
+$$
+であり，もちろん和は有限である。したがって $S_0,\ldots,S_n$ が与えられたとき，
+まず $S_0\subset S'_0,\ldots,S_{n-1}\subset S'_{n-1}$ を，すべての
+$j\in S_n$ に対して
+$\text{d}(x_{n, j}) \in \bigoplus_{i' < n, j' \in S'_{i'}} x_{i', j'}A$
+となるように選べる。次に $n$ に関する帰納法により，
+$S'_0\subset T_0,\ldots,S'_{n-1}\subset T_{n-1}$ を，
+$\bigoplus_{i'<n,j'\in T_{i'}}x_{i',j'}A$ が微分次数付き
+$A$-部分加群となるように選べる。$T_n=S_n$ とおけば，
+$P'=\bigoplus_{i\leq n,j\in T_i}x_{i,j}A$ は求めるものである。
+
+\medskip\noindent
+主張から，$P=\bigcup P'_n$ が上の $P'_n$ の可算増大和であることは明らかである。
+構成により，各 $P'_n$ は性質 (P) をもつ微分次数付き加群で，フィルトレーションは
+有限であり，逐次商は $A$ のシフトの有限直和である。したがって $P'_n$ は
+$D(A,\text{d})$ のコンパクト対象を定める；例えば Proposition
+\ref{dga-proposition-compact} を参照せよ。Lemma
+\ref{dga-lemma-homotopy-colimit} により $D(A,\text{d})$ で
+$P=\text{hocolim}P'_n$ だから，(2) $\Rightarrow$ (1) の証明が完了する。
+\end{proof}

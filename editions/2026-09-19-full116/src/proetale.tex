@@ -1,0 +1,5680 @@
+% Generated mechanically from frozen input inputs/p08/ja/proetale.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{60}
+\chapter{プロエタール・コホモロジー}
+
+
+
+\phantomsection
+\label{proetale-section-phantom}
+
+
+\section{序論}
+\label{proetale-section-introduction}
+
+\noindent
+本章の内容およびそれを超える結果は、プレプリント \cite{BS} に収められている。
+
+\medskip\noindent
+本章の目的は、プロエタール位相を導入し、この位相における
+アーベル群の層のコホモロジーの基礎理論を展開することである。
+第二の目的は、プロエタール位相を用いることで、代数幾何における
+$\ell$-進コホモロジーの導入がどのように簡明になるかを示すことである。
+
+\medskip\noindent
+以下に、われわれが理解している $\ell$-進エタール・コホモロジーの歴史を
+簡潔に概観する。
+\cite[Expos\'es V and VI]{SGA5} において Grothendieck らは、
+$\mathbf{Z}/\ell^n\mathbf{Z}$-加群の層の逆系として
+$\ell$-進層を扱う理論を発展させた。
+Weil 予想に関する第二論文 (\cite{WeilII}) で Deligne は、
+スキーム $X$ のエタールサイト上の
+$\mathbf{Z}/\ell^n\mathbf{Z}$-加群の層の複体の圏のある 2-極限として、
+$\ell$-進層の導来圏を導入した。この方法は Beilinson、Bernstein、
+Deligne の論文 (\cite{BBD}) で、偏屈層の美しい理論の基礎として用いられている。
+Uwe Jannsen は ``Continuous \'Etale Cohomology'' と題する論文
+(\cite{Jannsen}) において、体上の多様体における $\ell$-進層の
+コホモロジーの重要な変種を論じた。
+それに続く Torsten Ekedahl の論文 (\cite{Ekedahl}) は、
+極限として定義される導来圏を円滑に扱うために必要な進形式論を論じている。
+
+\medskip\noindent
+スキームのプロエタールサイトを用いれば、これらの著者が直面した
+技術的困難のいくつかを回避できることが分かる。
+その代償として、代数閉体上の多様体における $\ell$-進層とその
+コホモロジーだけに関心がある場合でさえ、非ネーター・スキームを
+扱わなければならない。
+
+\medskip\noindent
+スキームの（小）プロエタールサイトのきわめて重要かつ注目すべき特徴は、
+準コンパクトな w-可縮対象を十分にもつことである。このような対象の存在から、
+アーベル群の層の導来圏および層の逆系について、有用で（おそらく）通常とは
+異なるいくつもの帰結が得られる。
+まさにこの特徴によって $\ell$-進層を扱う際の複雑さを処理できるのであり、
+後に見るように、それ以外にも多くの利点がある。
+
+
+
+
+\section{位相論の準備}
+\label{proetale-section-topology}
+
+\noindent
+まず若干の準備を行う。{\it スペクトル空間}およびスペクトル空間の
+{\it スペクトル写像}は
+Topology, Section \ref{topology-section-spectral} で定義した。
+環のスペクトルはスペクトル空間である。Algebra, Lemma
+\ref{algebra-lemma-spec-spectral} を参照せよ。
+
+\begin{lemma}
+\label{proetale-lemma-spectral-split}
+$X$ をスペクトル空間とし、$X_0 \subset X$ を閉点全体の集合とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $X$ の任意の開被覆は、各 $U_i$ が $X$ において開かつ閉であるような
+有限非交和分解 $X = \coprod U_i$ によって細分される。
+\item 合成写像 $X_0 \to X \to \pi_0(X)$ は全単射である。
+\end{enumerate}
+さらに、$X_0$ が $X$ において閉であり、$X$ の各点が $X_0$ の一意な点へ
+特殊化するなら、これらの条件は満たされる。
+\end{lemma}
+
+\begin{proof}
+以下では、$X_0$ が準コンパクトであること
+(Topology, Lemma \ref{topology-lemma-closed-points-quasi-compact})、および
+$\pi_0(X)$ が副有限であること
+(Topology, Lemma \ref{topology-lemma-spectral-pi0}) を断りなく用いる。
+次の図式を考える。
+$$
+\xymatrix{
+X_0 \ar[rd]_f \ar[r] & X \ar[d]^\pi \\
+& \pi_0(X)
+}
+$$
+条件 (2) が成り立つとする。連続全単射 $f : X_0 \to \pi_0(X)$ は
+Topology, Lemma \ref{topology-lemma-bijective-map} により同相写像である。
+開被覆 $X = \bigcup U_i$ が与えられると、開被覆
+$\pi_0(X) = \bigcup f(X_0 \cap U_i)$ を得る。Topology, Lemma
+\ref{topology-lemma-profinite-refine-open-covering} により、この被覆を
+細分する $\pi_0(X) = \coprod V_j$ の形の有限開被覆を取ることができる。
+$X_0 \to \pi_0(X)$ は全単射なので、$X$ の各連結成分は一意な閉点をもち、
+したがってその閉点へ特殊化する点全体の集合に等しい。ゆえに
+$\pi^{-1}(V_j)$ は $f^{-1}(V_j)$ の点へ特殊化する点全体の集合である。
+ここで $f^{-1}(V_j) \subset X_0 \cap U_i \subset U_i$ ならば
+$\pi^{-1}(V_j) \subset U_i$ である（開集合 $U_i$ は一般化に関して閉じて
+いるからである）。したがって開被覆
+$X = \coprod \pi^{-1}(V_j)$ は最初の被覆を細分する。以上より (2) は (1) を
+含意する。
+
+\medskip\noindent
+条件 (1) を仮定する。$x, y \in X$ を閉点とする。このとき開被覆
+$X = (X \setminus \{x\}) \cup (X \setminus \{y\})$
+を得る。(1) より、$U$ と $V$ が開（したがって閉）で、$x \in U$ および
+$y \in V$ を満たす非交和分解 $X = U \amalg V$ が存在する。したがって
+$X$ の各連結成分は高々一つの閉点しかもたない。一方、Topology, Lemma
+\ref{topology-lemma-quasi-compact-closed-point} により、各連結成分は
+（閉集合なので）閉点をもつ。ゆえに $X_0 \to \pi_0(X)$ は全単射である。
+以上より (1) は (2) を含意する。
+
+\medskip\noindent
+$X_0$ が $X$ において閉であり、各点が $X_0$ の一意な点へ特殊化すると
+仮定する。このとき $X_0$ はスペクトル空間
+(Topology, Lemma \ref{topology-lemma-spectral-sub}) であり、その全ての点は
+閉点なので副有限である
+(Topology, Lemma \ref{topology-lemma-characterize-profinite-spectral})。
+相異なる $x, y \in X_0$ を取る。Topology, Lemma
+\ref{topology-lemma-profinite-refine-open-covering} により、$U_0$ と $V_0$ が
+開かつ閉で、$x \in U_0$ および $y \in V_0$ を満たす非交和分解
+$X_0 = U_0 \amalg V_0$ を取ることができる。$U \subset X$（それぞれ
+$V \subset X$）を、$U_0$（それぞれ $V_0$）へ特殊化する点全体の集合とする。
+$X = U \amalg V$ であることに注意する。Topology, Lemma
+\ref{topology-lemma-make-spectral-space} により、$U$ は
+準コンパクト開部分集合の共通部分である。したがって $U$ は構成可能位相において
+閉である。さらに
+$U$ は特殊化に関して閉じているので、Topology, Lemma
+\ref{topology-lemma-constructible-stable-specialization-closed} により
+$U$ は閉である。
+対称性により $V$ も閉であり、したがって $U$ と $V$ はともに開かつ閉である。
+よって $x, y$ は $X$ の同じ連結成分には属さない。すなわち
+$X_0 \to \pi_0(X)$ は単射である。また、Topology, Lemma
+\ref{topology-lemma-quasi-compact-closed-point} および連結成分が閉であることから、
+この写像は全射でもある。以上より最後の条件は (2) を含意する。
+\end{proof}
+
+\begin{example}
+\label{proetale-example-not-w-local}
+$T$ を副有限空間とする。点 $t \in T$ を取り、$T \setminus \{t\}$ は
+準コンパクトでないと仮定する。$X = T \times \{0, 1\}$ とおく。
+$U \subset T$ が開であるときの $U \times \{0, 1\}$、集合
+$X \setminus \{(t, 0)\}$、および $t \not \in U$ を満たす開集合
+$U \subset T$ に対する $U \times \{1\}$ を準開基とする $X$ 上の位相を考える。
+$X$ の閉点全体の集合は $X_0 = T \times \{0\}$ であり、$(t, 1)$ は
+$X_0$ の閉包に属する。さらに $X_0 \to \pi_0(X)$ は全単射である。
+この例は、Lemma \ref{proetale-lemma-spectral-split} の条件 (1) と (2) からは閉点全体の
+集合が閉であることは従わないことを示す。
+\end{example}
+
+\noindent
+Lemma \ref{proetale-lemma-spectral-split} の最後の主張に現れた、やや強い性質をもつ
+スペクトル空間を扱う方が便利であることが分かる。この性質に名前を付ける。
+
+\begin{definition}
+\label{proetale-definition-w-local}
+スペクトル空間 $X$ が {\it w-局所的}であるとは、閉点全体の集合 $X_0$ が
+閉であり、$X$ の各点が一意な閉点へ特殊化することをいう。w-局所空間の
+連続写像 $f : X \to Y$ が {\it w-局所的}であるとは、それがスペクトル写像で
+あり、$X$ の各閉点を $Y$ の閉点へ写すことをいう。
+\end{definition}
+
+\noindent
+Lemma \ref{proetale-lemma-spectral-split} の証明で見たように、この場合には
+$X_0 \to \pi_0(X)$ は同相写像であり、$X_0 \cong \pi_0(X)$ は副有限空間で
+ある。さらに、$X$ の一つの連結成分は、ある $x \in X_0$ へ特殊化する点全体の
+集合にほかならない。
+
+\begin{lemma}
+\label{proetale-lemma-closed-subspace-w-local}
+$X$ を w-局所スペクトル空間とする。$Y \subset X$ が閉ならば、$Y$ は
+w-局所的である。
+\end{lemma}
+
+\begin{proof}
+閉点全体からなる部分集合 $Y_0 \subset Y$ は、$Y_0 = X_0 \cap Y$ なので閉である。
+$X$ は $w$-局所的だから、各 $y \in Y$ は $X_0$ の一意な点へ特殊化する。
+$\overline{\{y\}}\subset Y$ なので、この特殊化は $Y$ に属し、したがって
+$Y_0$ にも属する。ゆえに $Y$ は $w$-局所的である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-silly}
+$X$ をスペクトル空間とする。位相空間の圏におけるカルテシアン図式
+$$
+\xymatrix{
+Y \ar[r] \ar[d] & T \ar[d] \\
+X \ar[r] & \pi_0(X)
+}
+$$
+が与えられ、$T$ は副有限であるとする。このとき $Y$ はスペクトル空間であり、
+$T = \pi_0(Y)$ である。さらに $X$ が w-局所的なら、$Y$ は w-局所的であり、
+$Y \to X$ は w-局所的であり、$Y$ の閉点全体の集合は $X$ の閉点全体の集合の
+逆像である。
+\end{lemma}
+
+\begin{proof}
+$\pi_0(X)$ は副有限空間であり、したがってハウスドルフなので、$Y$ は
+$X \times T$ の閉部分空間であることに注意する
+(Topology, Lemmas \ref{topology-lemma-spectral-pi0} および
+\ref{topology-lemma-fibre-product-closed} を用いよ)。$X \times T$ は
+スペクトル空間なので
+(Topology, Lemma \ref{topology-lemma-product-spectral-spaces})、$Y$ も
+スペクトル空間である
+(Topology, Lemma \ref{topology-lemma-spectral-sub})。標準的な分解
+$Y \to \pi_0(Y) \to T$ を考える
+(Topology, Lemma \ref{topology-lemma-space-connected-components})。
+$\pi_0(Y) \to T$ が全射であることは明らかである。$Y \to T$ の各ファイバーは
+$X \to \pi_0(X)$ の対応するファイバーと同相である。したがってこれらの
+ファイバーは連結であり、$\pi_0(Y) \to T$ は単射となる。Topology, Lemma
+\ref{topology-lemma-bijective-map} により、$\pi_0(Y) \to T$ は同相写像である。
+
+\medskip\noindent
+次に $X$ が w-局所的であると仮定し、$X_0 \subset X$ を閉点全体の集合とする。
+$Y$ における $X_0$ の逆像 $Y_0 \subset Y$ は、Lemma
+\ref{proetale-lemma-spectral-split} により $X_0 \to \pi_0(X)$ が全単射なので、
+$T$ に全単射で写る。さらに $Y_0$ はスペクトル空間 $Y$ の閉部分集合
+なので準コンパクトである。したがって Topology, Lemma
+\ref{topology-lemma-bijective-map} により
+$Y_0 \to \pi_0(Y) = T$ は同相写像である。ゆえに $Y_0$ の全ての点は $Y$ に
+おける閉点である。逆に $y \in Y$ が閉点なら、それは
+$Y \to \pi_0(Y) = T$ のファイバーにおいて閉であり、したがってその像
+$x$ は $X$ の $X \to \pi_0(X)$ による（同相な）対応するファイバーにおいて
+閉である。これから $x \in X_0$、したがって $y \in Y_0$ が従う。
+ゆえに $Y_0$ は $Y$ の閉点全体の集合であり、各 $y \in Y_0$ に対し、$y$ の
+一般化全体の集合は $Y \to \pi_0(Y)$ のファイバーである。これで補題が従う。
+\end{proof}
+
+
+
+
+\section{局所同型}
+\label{proetale-section-local-isomorphism}
+
+\noindent
+まず定義を与える。
+
+\begin{definition}
+\label{proetale-definition-local-isomorphism}
+$\varphi : A \to B$ を環準同型とする。
+\begin{enumerate}
+\item 任意の素イデアル $\mathfrak q \subset B$ に対し、$g \not \in \mathfrak q$
+を満たす $g \in B$ が存在して、$A \to B_g$ が開埋め込み
+$\Spec(B_g) \to \Spec(A)$ を誘導するとき、$A \to B$ は
+{\it 局所同型}であるという。
+\item 任意の素イデアル $\mathfrak q \subset B$ に対し、標準写像
+$A_{\varphi^{-1}(\mathfrak q)} \to B_\mathfrak q$ が同型であるとき、
+$A \to B$ は{\it 局所環を同一視する}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+いくつかの初等的な性質を列挙する。
+
+\begin{lemma}
+\label{proetale-lemma-base-change-local-isomorphism}
+$A \to B$ および $A \to A'$ を環準同型とし、$B' = B \otimes_A A'$ を
+$B$ の基底変換とする。
+\begin{enumerate}
+\item $A \to B$ が局所同型なら、$A' \to B'$ も局所同型である。
+\item $A \to B$ が局所環を同一視するなら、$A' \to B'$ も局所環を同一視する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-composition-local-isomorphism}
+$A \to B$ および $B \to C$ を環準同型とする。
+\begin{enumerate}
+\item $A \to B$ と $B \to C$ が局所同型なら、$A \to C$ も局所同型である。
+\item $A \to B$ と $B \to C$ が局所環を同一視するなら、$A \to C$ も
+局所環を同一視する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-local-isomorphism-permanence}
+$A$ を環とし、$B \to C$ を $A$-代数準同型とする。
+\begin{enumerate}
+\item $A \to B$ と $A \to C$ が局所同型なら、$B \to C$ も局所同型である。
+\item $A \to B$ と $A \to C$ が局所環を同一視するなら、$B \to C$ も
+局所環を同一視する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-local-isomorphism-implies}
+$A \to B$ を局所同型とする。このとき
+\begin{enumerate}
+\item $A \to B$ は \'etale であり、
+\item $A \to B$ は局所環を同一視し、
+\item $A \to B$ は準有限である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-structure-local-isomorphism}
+$A \to B$ を局所同型とする。このとき、$(g_1, \ldots, g_n) = B$ および
+$A_{f_i} \cong B_{g_i}$ を満たす $n \geq 0$、$g_1, \ldots, g_n \in B$、
+$f_1, \ldots, f_n \in A$ が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-fully-faithful-spaces-over-X}
+$p : (Y, \mathcal{O}_Y) \to (X, \mathcal{O}_X)$ および
+$q : (Z, \mathcal{O}_Z) \to (X, \mathcal{O}_X)$ を局所環付き空間の射とする。
+$\mathcal{O}_Y = p^{-1}\mathcal{O}_X$ ならば、写像
+$$
+\Mor_{\text{LRS}/(X, \mathcal{O}_X)}((Z, \mathcal{O}_Z), (Y, \mathcal{O}_Y))
+\longrightarrow
+\Mor_{\textit{Top}/X}(Z, Y),\quad
+(f, f^\sharp) \longmapsto f
+$$
+は全単射である。ここで $\text{LRS}/(X, \mathcal{O}_X)$ は $X$ 上の
+局所環付き空間の圏、$\textit{Top}/X$ は $X$ 上の位相空間の圏である。
+\end{lemma}
+
+\begin{proof}
+これは定義から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-local-isomorphism-fully-faithful}
+$A$ を環とし、$X = \Spec(A)$ とおく。関手
+$$
+B \longmapsto \Spec(B)
+$$
+は、$A \to B$ が局所環を同一視するような $A$-代数 $B$ の圏から
+$X$ 上の位相空間の圏への充満忠実関手である。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{proetale-lemma-fully-faithful-spaces-over-X} と次の事実から従う。
+$A \to B$ が局所環を同一視するなら、$p : \Spec(B) \to \Spec(A)$ による
+$\Spec(A)$ の構造層の引き戻しは $\Spec(B)$ の構造層に等しい。
+\end{proof}
+
+
+
+
+\section{Ind-Zariski 代数}
+\label{proetale-section-ind-zariski}
+
+\noindent
+まず定義を与える。論文 \cite{BS} の対応する定義との比較については
+Remark \ref{proetale-remark-slightly-stronger} を参照せよ。
+
+\begin{definition}
+\label{proetale-definition-ind-zariski}
+環準同型 $A \to B$ が {\it ind-Zariski} であるとは、各 $A \to B_i$ が
+局所同型となるようなフィルター付き余極限 $B = \colim B_i$ として $B$ を
+表せることをいう。
+\end{definition}
+
+\noindent
+局所化 $A \to S^{-1}A$ は ind-Zariski 写像の一例である。Algebra, Lemma
+\ref{algebra-lemma-localization-colimit} を参照せよ。ind-Zariski 代数の圏は
+いくつかの自然な操作の下で閉じている。
+
+\begin{lemma}
+\label{proetale-lemma-base-change-ind-zariski}
+$A \to B$ および $A \to A'$ を環準同型とし、$B' = B \otimes_A A'$ を
+$B$ の基底変換とする。$A \to B$ が ind-Zariski なら、$A' \to B'$ も
+ind-Zariski である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-composition-ind-zariski}
+$A \to B$ および $B \to C$ を環準同型とする。$A \to B$ と $B \to C$ が
+ind-Zariski なら、$A \to C$ も ind-Zariski である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-ind-zariski-permanence}
+$A$ を環とし、$B \to C$ を $A$-代数準同型とする。$A \to B$ と
+$A \to C$ が ind-Zariski なら、$B \to C$ も ind-Zariski である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-ind-ind-zariski}
+ind-Zariski $A$-代数のフィルター付き余極限は $A$ 上 ind-Zariski である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-ind-zariski-implies}
+$A \to B$ を ind-Zariski とする。このとき $A \to B$ は局所環を同一視する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+
+
+\section{w-局所アフィンスキームの構成}
+\label{proetale-section-construction}
+
+\noindent
+アフィンスキーム $X$ の台位相空間が w-局所的であるとき、
+{\it w-局所的}であるという (Definition \ref{proetale-definition-w-local})。
+任意の環 $A$ に対し、$\Spec(A_w)$ が w-局所的となる標準的な忠実平坦
+ind-Zariski 環準同型 $A \to A_w$ が存在することが分かる。$A_w$ を構成する鍵は
+次の簡単な補題である。
+
+\begin{lemma}
+\label{proetale-lemma-localization}
+$A$ を環とし、$X = \Spec(A)$ とおく。$Z \subset X$ を、ある $f \in A$ と
+イデアル $I \subset A$ に対して $D(f) \cap V(I)$ の形をした局所閉部分スキームと
+する。このとき
+\begin{enumerate}
+\item $\Spec(S^{-1}A)$ が $X$ のうち $Z$ へ特殊化する点全体の集合へ
+同相に写るような乗法的部分集合 $S \subset A$ が存在し、
+\item $A$-代数 $A_Z^\sim = S^{-1}A$ は台となる局所閉部分集合
+$Z \subset X$ のみに依存し、
+\item $Z$ は $\Spec(A_Z^\sim)$ の閉部分スキームである。
+\end{enumerate}
+さらに $A \to A'$ が環準同型で、$Z' \subset X' = \Spec(A')$ が同じ形の
+局所閉部分スキームであって $Z$ に写るなら、一意な $A$-代数準同型
+$A_Z^\sim \to (A')_{Z'}^\sim$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$S \subset A$ を、$\Gamma(Z, \mathcal{O}_Z) = (A/I)_f$ の可逆元へ写る元全体から
+なる乗法的集合とする。$A$ の素イデアル $\mathfrak p$ が $Z$ へ特殊化しないなら、
+$\mathfrak p$ は $(A/I)_f$ において単位イデアルを生成する。したがって、ある
+$n \geq 0$、$g \in \mathfrak p$、$h \in I$ に対して $f^n =  g + h$ と書ける。
+このとき $g \in S$ であり、$\mathfrak p$ は $S^{-1}A$ のスペクトルに属さない。
+逆に $\mathfrak p$ が $Z$ へ特殊化するなら、$f \not \in \mathfrak q$ を満たす
+$\mathfrak p \subset \mathfrak q \supset I$ がある。このとき $S^{-1}A$ から
+$A_\mathfrak q$ への写像があり、したがって $\mathfrak p$ は $S^{-1}A$ の
+スペクトルに属する。これで (1) が示された。
+
+\medskip\noindent
+局所化 $S^{-1}A$ の同型類は、対応する部分集合
+$\Spec(S^{-1}A) \subset \Spec(A)$ のみに依存するので (2) が成り立つ。構成により
+$S^{-1}A$ は $(A/I)_f$ へ全射で写るので (3) も成り立つ。最後の主張は、$Z'$ に
+対応する乗法的部分集合 $S' \subset A'$ が乗法的部分集合 $S$ の像を含むことから
+従う。
+\end{proof}
+
+\noindent
+$A$ を環とし、$E \subset A$ を有限部分集合とする。$E$ の元の消滅の様相を見る
+ことにより、$X = \Spec(A)$ の局所閉部分スキームへの層別化を得る。より正確には、
+非交和分解 $E = E' \amalg E''$ が与えられたとき
+\begin{equation}
+\label{proetale-equation-stratum}
+Z(E', E'') =
+\bigcap\nolimits_{f \in E'} D(f) \cap \bigcap\nolimits_{f \in E''} V(f) =
+D(\prod\nolimits_{f \in E'} f) \cap V( \sum\nolimits_{f \in E''} fA)
+\end{equation}
+$Z(E', E'')$ の点は、$f \in E'$ が $\kappa(x)$ の非零元へ写り、かつ
+$f \in E''$ が $\kappa(x)$ の零元へ写るような $x \in X$ にちょうど一致する。
+したがって、集合として
+\begin{equation}
+\label{proetale-equation-stratify}
+X = \coprod\nolimits_{E = E' \amalg E''} Z(E', E'')
+\end{equation}
+であることは明らかである。各層が構成可能であることに注意する。
+
+\begin{lemma}
+\label{proetale-lemma-refine}
+上と同じく $X = \Spec(A)$ とする。構成可能部分集合による任意の有限層別化
+$X = \coprod T_i$ が与えられると、層別化 (\ref{proetale-equation-stratify}) が
+$X = \coprod T_i$ を細分するような有限部分集合 $E \subset A$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$X$ の準コンパクト開部分集合 $U_{i, j}$ および $V_{i, j}$ を用いて、有限和
+$T_i = \bigcup_j U_{i, j} \cap V_{i, j}^c$ と書ける。さらに
+$U_{i, j} = \bigcup D(f_{i, j, k})$ および
+$V_{i, j} = \bigcup D(g_{i, j, l})$ と書ける。ここで
+$E = \{f_{i, j, k}\} \cup \{g_{i, j, l}\}$ とおく。このとき層別化
+(\ref{proetale-equation-stratify}) の各層は $E$ の元の消滅パターンによって添字付けられ、
+与えられた層別化を明らかに細分するので、これでよい。
+\end{proof}
+
+\noindent
+議論を続ける。有限部分集合 $E \subset A$ が与えられたとき
+\begin{equation}
+\label{proetale-equation-ring}
+A_E = \prod\nolimits_{E = E' \amalg E''} A_{Z(E', E'')}^\sim
+\end{equation}
+とおく。記号は Lemma \ref{proetale-lemma-localization} のものを用いた。この定義が意味を
+もつのは、(\ref{proetale-equation-stratum}) により各 $Z(E', E'')$ が所要の形をしている
+からである。この環のスペクトルを取り、
+\begin{equation}
+\label{proetale-equation-spectrum}
+X_E = \Spec(A_E) = \coprod\nolimits_{E = E' \amalg E''} X_{E', E''}
+\end{equation}
+と書く。ここで $X_{E', E''} = \Spec(A_{Z(E', E'')}^\sim)$ である。また、
+\begin{equation}
+\label{proetale-equation-closed}
+Z_E = \coprod\nolimits_{E = E' \amalg E''} Z(E', E'')
+\longrightarrow
+X_E
+\end{equation}
+は閉部分スキームである。$X_{E', E''}$ の各点は $Z(E', E'')$ のある点へ
+特殊化するので、構成により閉部分スキーム $Z_E$ はアフィンスキーム $X_E$ の
+全ての閉点を含む。
+
+\medskip\noindent
+$I(A)$ を $A$ の有限部分集合全体からなる半順序集合とする。これは有向半順序
+集合である。$E_1 \subset E_2$ に対して、標準的な $A$-代数の遷移写像
+$A_{E_1} \to A_{E_2}$ がある。実際、分解 $E_2 = E'_2 \amalg E''_2$ が
+与えられたとき、$E'_1 = E_1 \cap E'_2$ および
+$E''_1 = E_1 \cap E''_2$ とおく。このとき
+$Z(E'_2, E''_2) \subset Z(E'_1, E''_1)$ なので、Lemma
+\ref{proetale-lemma-localization} により一意な $A$-代数準同型
+$A_{Z(E'_1, E''_1)}^\sim \to A_{Z(E'_2, E''_2)}^\sim$ がある。これらの写像を
+まとめて用いると、所望の環準同型 $A_{E_1} \to A_{E_2}$ を得る。対応する
+アフィンスキームの写像
+\begin{equation}
+\label{proetale-equation-transition}
+X_{E_2} \longrightarrow X_{E_1}
+\end{equation}
+は $Z_{E_2}$ を $Z_{E_1}$ の中へ写す。一意性により $I(A)$ 上の $A$-代数系を
+得るので、
+\begin{equation}
+\label{proetale-equation-colimit-ring}
+A_w = \colim_{E \in I(A)} A_E
+\end{equation}
+とおく。この $A$-代数は $A$ 上 ind-Zariski かつ忠実平坦である。最後に
+$X_w = \Spec(A_w)$ とおき、閉部分スキーム
+$Z = \lim_{E \in I(A)} Z_E$ を備える。式で書けば
+\begin{equation}
+\label{proetale-equation-final}
+X_w = \lim_{E \in I(A)} X_E \supset Z = \lim_{E \in I(A)} Z_E
+\end{equation}
+
+\begin{lemma}
+\label{proetale-lemma-make-w-local}
+$X = \Spec(A)$ をアフィンスキームとする。$A \to A_w$、
+$X_w = \Spec(A_w)$、および $Z \subset X_w$ は上のものとする。
+\begin{enumerate}
+\item $A \to A_w$ は ind-Zariski かつ忠実平坦であり、
+\item $X_w \to X$ は全単射 $Z \to X$ を誘導し、
+\item $Z$ は $X_w$ の閉点全体の集合であり、
+\item $Z$ は被約スキームであり、
+\item $X_w$ の各点は $Z$ の一意な点へ特殊化する。
+\end{enumerate}
+特に $X_w$ は w-局所的である (Definition \ref{proetale-definition-w-local})。
+\end{lemma}
+
+\begin{proof}
+構成により写像 $A \to A_w$ は ind-Zariski である。全ての $E$ に対して射
+$Z_E \to X$ は全単射なので (2) が成り立つ。$Z \subset X_w$ であることから
+$X_w \to X$ は全射であり、Algebra, Lemma \ref{algebra-lemma-ff-rings} により
+$A \to A_w$ は忠実平坦である。これで (1) が示された。
+
+\medskip\noindent
+$y \in X_w$、$y \not \in Z$ と仮定する。このとき、$X_E$ における $y$ の像が
+$Z_E$ に含まれないような $E$ が存在する。すると任意の $E \subset E'$ に対して、
+$y$ は $X_{E'}$ の元へ写り、
+$Z_{E'}$ には含まれない。$T_{E'} \subset X_{E'}$ を、$y$ の像の閉包である
+被約閉部分スキームとする。$T = \lim_{E \subset E'} T_{E'}$ が $X_w$ における
+$y$ の閉包であることは明らかである。任意の $E \subset E'$ に対し、$X_{E'}$ の
+構成によりスキーム $T_{E'} \cap Z_{E'}$ は空でない。したがって
+$\lim T_{E'} \cap Z_{E'}$ は空でなく、$T \cap Z$ も空でないと結論できる。
+ゆえに $y$ は閉点でない。したがって $X_w$ の全ての閉点は $Z$ に属する。
+
+\medskip\noindent
+$y \in X_w$ が $z, z' \in Z$ へ特殊化すると仮定する。(3) の証明を完了し、
+同時に (5) を導くため、$z = z'$ を示す。$z$ と $z'$ の像を
+$x, x' \in X$ とする。$Z \to X$ は全単射なので、$x = x'$ を示せば十分である。
+$x \not = x'$ なら、$x \in D(f)$ かつ $x' \in V(f)$（またはその逆）を満たす
+$f \in A$ が存在する。$E = \{f\}$ とおけば
+$$
+X_E = \Spec(A_f) \amalg \Spec(A_{V(f)}^\sim)
+$$
+である。このとき $z$ と $z'$ の像 $x_E$ と $x'_E$ は、上に与えた $X_E$ の
+分解の異なる成分に属する。しかしその場合、$x_E$ と $x'_E$ が共通の点の
+特殊化であることは不可能である。これは求める矛盾である。
+
+\medskip\noindent
+有限部分集合 $E \subset A$ が与えられたとき、$Z_E$ は局所閉部分スキーム
+$Z(E', E'')$ の非交和であることを思い出そう。各部分スキームは
+$(A/I)_f$ のスペクトルと同型である。ここで $I$ は $E''$ が生成するイデアル、
+$f$ は $E'$ の元の積である。$(A/I)_f$ の任意の冪零元 $b$ は、ある
+$g \in A$ に対する $g/f^n$ の類である。このとき $E' = E \cup \{g\}$ とおけば、
+系の遷移写像 $Z_{E'} \to Z_E$ による $b$ の引き戻しが零になることを読者は
+確認できる。これで (4) が示された。
+\end{proof}
+
+\begin{remark}
+\label{proetale-remark-size-w}
+$A$ を環とする。$\kappa$ を $A$ の濃度以上の無限基数とする。このとき
+$A_w$ (Lemma \ref{proetale-lemma-make-w-local}) の濃度は高々 $\kappa$ である。実際、各
+$A_E$ の濃度は高々 $\kappa$ であり、$A$ の有限部分集合全体の集合の濃度も
+高々 $\kappa$ である。したがって $\kappa \otimes \kappa = \kappa$ から結果が
+従う。Sets, Section \ref{sets-section-cardinals} を参照せよ。
+\end{remark}
+
+\begin{lemma}[この構成の普遍性]
+\label{proetale-lemma-universal}
+$A$ を環とし、$A \to A_w$ を Lemma \ref{proetale-lemma-make-w-local} で構成した環準同型と
+する。$\Spec(B)$ が w-局所的であるような任意の環準同型 $A \to B$ に対して、
+$\Spec(B) \to \Spec(A_w)$ が w-局所的となる一意な分解
+$A \to A_w \to B$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$Y = \Spec(B)$ と書き、$Y_0 \subset Y$ を閉点全体の集合とする。また、与えられた
+射を $f : Y \to X$ と書く。$Y_0$ は副有限であり、特に $Y_0$ の任意の
+構成可能部分集合は開かつ閉であることを思い出そう。$E \subset A$ を有限部分集合と
+する。$A_w = \colim A_E$ であり、$\Spec(A_w)$ の閉点全体の集合は閉部分集合
+$Z_E \subset X_E = \Spec(A_E)$ の極限である。したがって、$Y \to X_E$ が
+$Y_0$ を $Z_E$ の中へ写すような一意な分解 $A \to A_E \to B$ が存在することを
+示せば十分である。$Z_E \to X = \Spec(A)$ は全単射であり、各層
+$Z(E', E'')$ は構成可能なので、
+$$
+Y_0 = \coprod f^{-1}(Z(E', E'')) \cap Y_0
+$$
+は開閉部分集合への非交和分解である。$Y_0 = \pi_0(Y)$ なので、対応する $Y$ の
+開閉部分への分解を得る。したがって、ある分解 $E = E' \amalg E''$ に対して
+$f(Y_0) \subset Z(E', E'')$ である場合に分解を構成すれば十分である。この場合、
+$f(Y)$ は $X$ のうち $Z(E', E'')$ へ特殊化する点全体の集合に含まれ、この集合は
+$X_{E', E''}$ と同相である。したがって $X$ 上の一意な連続写像
+$Y \to X_{E', E''}$ を得る。Lemma \ref{proetale-lemma-fully-faithful-spaces-over-X} により、
+これは $X$ 上の一意なスキームの射 $Y \to X_{E', E''}$ に対応する。これで証明が
+完了する。
+\end{proof}
+
+\noindent
+環のスペクトルが副有限であることと、その全ての点が閉であることは同値である。
+実際、これを含意する同値な条件が数多くある。Algebra, Lemma
+\ref{algebra-lemma-ring-with-only-minimal-primes} または Topology, Lemma
+\ref{topology-lemma-characterize-profinite-spectral} を参照せよ。
+
+\begin{lemma}
+\label{proetale-lemma-profinite-goes-up}
+$\Spec(A)$ が副有限であるような環 $A$ と環準同型 $A \to B$ を取る。次の
+いずれの場合にも $\Spec(B)$ は副有限である。
+\begin{enumerate}
+\item $\mathfrak q,\mathfrak q' \subset B$ が $A$ の同じ素イデアルの上にあるなら、
+$\mathfrak q \subset \mathfrak q'$ と $\mathfrak q' \subset \mathfrak q$ の
+いずれも成り立たない。
+\item $A \to B$ は剰余体の代数拡大を誘導する。
+\item $A \to B$ は局所同型である。
+\item $A \to B$ は局所環を同一視する。
+\item $A \to B$ は弱 \'etale である。
+\item $A \to B$ は準有限である。
+\item $A \to B$ は不分岐である。
+\item $A \to B$ は \'etale である。
+\item $B$ は (1) -- (8) のような $A$-代数のフィルター付き余極限である。
+\item その他の場合。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+上で挙げた参照先
+(Algebra, Lemma \ref{algebra-lemma-ring-with-only-minimal-primes} または
+Topology, Lemma \ref{topology-lemma-characterize-profinite-spectral}) により、
+$\Spec(A)$ の相異なる点の間には特殊化は存在せず、$\Spec(B)$ が副有限であることは
+$\Spec(B)$ の相異なる点の間に特殊化が存在しないことと同値である。そのような
+特殊化は $\Spec(B) \to \Spec(A)$ のファイバー内でしか起こり得ない。以上より
+(1) が成り立つ。
+
+\medskip\noindent
+(2) の仮定から、Algebra, Lemma
+\ref{algebra-lemma-finite-residue-extension-closed} により $B$ の全ての
+素イデアルは極大である。したがって (2) が成り立つ。$A \to B$ が局所同型であるか
+局所環を同一視するなら、剰余体拡大は自明なので、(3) と (4) は (2) から従う。
+$A \to B$ が弱 \'etale なら、More on Algebra, Lemma
+\ref{more-algebra-lemma-weakly-etale-residue-field-extensions} により分離代数的な
+剰余体拡大を誘導するので、(5) は (2) から従う。$A \to B$ が準有限なら、その
+ファイバーは有限離散位相空間である。したがって (6) は (1) から従う。
+したがって (3) は (1) から従う。(7) と (8) は、不分岐および \'etale な
+環準同型が準有限であることから従う
+(Algebra, Lemmas
+\ref{algebra-lemma-unramified-quasi-finite} および
+\ref{algebra-lemma-etale-quasi-finite})。
+$B = \colim B_i$ が $A$-代数のフィルター付き余極限なら、Limits, Lemma
+\ref{limits-lemma-inverse-limit-top} により、位相空間の圏において
+$\Spec(B) = \lim \Spec(B_i)$ である。したがって各 $\Spec(B_i)$ が副有限なら、
+Topology, Lemma \ref{topology-lemma-directed-inverse-limit-profinite} により
+$\Spec(B)$ も副有限である。これで (9) が示された。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-localize-along-closed-profinite}
+$A$ を環とする。$V(I) \subset \Spec(A)$ を、副有限位相空間である閉部分集合と
+する。このとき、$\Spec(B)$ が w-局所的で、閉点全体の集合が $V(IB)$ であり、
+$A/I \cong B/IB$ となる ind-Zariski 環準同型 $A \to B$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A \to A_w$ および $Z \subset Y = \Spec(A_w)$ を Lemma
+\ref{proetale-lemma-make-w-local} のものとする。$T \subset Z$ を $V(I)$ の逆像とする。
+Topology, Lemma \ref{topology-lemma-bijective-map} により
+$T \to V(I)$ は同相写像である。$B = (A_w)_T^\sim$ とおく。Lemma
+\ref{proetale-lemma-localization} を参照せよ。$B$ が w-局所的で、閉点全体の集合が
+$V(IB)$ であることは明らかである。環準同型 $A/I \to B/IB$ は ind-Zariski で、
+台位相空間の同相写像を誘導する。したがって Lemma
+\ref{proetale-lemma-local-isomorphism-fully-faithful} により同型である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-w-local-algebraic-residue-field-extensions}
+$X = \Spec(A)$ が w-局所的となるような環 $A$ を取る。$I \subset A$ を、$X$ の
+閉点全体の集合 $X_0$ を切り出す根基イデアルとする。$A \to B$ を、各素イデアルの
+剰余体上に代数拡大を誘導する環準同型とする。このとき
+\begin{enumerate}
+\item $Z = V(IB)$ の各点は $\Spec(B)$ の閉点であり、
+\item 次を満たす ind-Zariski 環準同型 $B \to C$ が存在する。
+\begin{enumerate}
+\item $B/IB \to C/IC$ は同型である。
+\item 空間 $Y = \Spec(C)$ は w-局所的である。
+\item 誘導写像 $p : Y \to X$ は w-局所的である。
+\item $p^{-1}(X_0)$ は $Y$ の閉点全体の集合である。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A/I \to B/IB$ に Lemma \ref{proetale-lemma-profinite-goes-up} を適用すると、
+$Z = V(IB) = \Spec(B/IB)$ の全ての点は閉点であり、実際 $\Spec(B/IB)$ は
+副有限空間である。証明を完了するには、$IB \subset B$ に Lemma
+\ref{proetale-lemma-localize-along-closed-profinite} を適用すればよい。
+\end{proof}
+
+
+
+
+
+\section{局所環の同一視と ind-Zariski}
+\label{proetale-section-connected-components}
+
+\noindent
+ind-Zariski 環準同型 $A \to B$ は局所環を同一視する
+(Lemma \ref{proetale-lemma-ind-zariski-implies})。逆は成り立たない
+(Examples, Section \ref{examples-section-not-ind-etale})。しかし、局所環を
+同一視する環準同型について、ind-Zariski 環準同型を用いた一種の構造定理が
+成り立つ。Proposition \ref{proetale-proposition-maps-wich-identify-local-rings} を参照せよ。
+
+\medskip\noindent
+$A$ を環とし、$X = \Spec(A)$ とする。連結成分の空間 $\pi_0(X)$ は
+Topology, Lemma \ref{topology-lemma-spectral-pi0}
+（および Algebra, Lemma \ref{algebra-lemma-spec-spectral}）により副有限空間である。
+
+\begin{lemma}
+\label{proetale-lemma-construct}
+$A$ を環とし、$X = \Spec(A)$ とする。$T \subset \pi_0(X)$ を閉部分集合とする。
+$\Spec(B) \to \Spec(A)$ が $\Spec(B)$ と $X$ における $T$ の逆像との同相写像を
+誘導するような、全射 ind-Zariski 環準同型 $A \to B$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$Z \subset X$ を $T$ の逆像とする。このとき $Z$ は、$Z$ を含む $X$ の開閉
+部分集合の共通部分 $Z = \bigcap Z_\alpha$ である。Topology, Lemma
+\ref{topology-lemma-closed-union-connected-components} を参照せよ。各 $\alpha$ に
+対して $Z_\alpha = \Spec(A_\alpha)$ と書け、$A \to A_\alpha$ は局所同型
+（冪等元による局所化）である。$B = \colim A_\alpha$ とおけば補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-construct-profinite}
+$A$ を環とし、$X = \Spec(A)$ とする。$T$ を副有限空間、
+$T \to \pi_0(X)$ を連続写像とする。$Y = \Spec(B)$ とおくとき、図式
+$$
+\xymatrix{
+Y \ar[r] \ar[d] & \pi_0(Y) \ar[d] \\
+X \ar[r] & \pi_0(X)
+}
+$$
+が位相空間の圏でカルテシアンであり、かつ $\pi_0(X)$ 上の空間として
+$\pi_0(Y) = T$ となるような ind-Zariski 環準同型 $A \to B$ が存在する。
+\end{lemma}
+
+\begin{proof}
+実際、$T = \lim T_i$ を、有向集合上の有限離散空間の逆系の極限として書く
+(Topology, Lemma \ref{topology-lemma-profinite} を参照せよ)。各 $i$ に対して
+$Z_i = \Im(T \to \pi_0(X) \times T_i)$ とおく。これは閉部分集合である。
+$X \times T_i$ は $A_i = \prod_{t \in T_i} A$ のスペクトルであり、
+$A \to A_i$ は局所同型であることに注意する。Lemma \ref{proetale-lemma-construct} により、
+$Z_i \subset \pi_0(X \times T_i) = \pi_0(X) \times T_i$ は、
+$X \times T_i$ の部分集合として
+$\Spec(B_i) = X \times_{\pi_0(X)} Z_i$ となるような ind-Zariski 全射
+$A_i \to B_i$ に対応する。遷移写像 $T_i \to T_{i'}$ は写像
+$Z_i \to Z_{i'}$ および
+$X \times_{\pi_0(X)} Z_i \to X \times_{\pi_0(X)} Z_{i'}$ を誘導する。
+したがって環準同型 $B_{i'} \to B_i$ を得る
+(Lemmas \ref{proetale-lemma-local-isomorphism-fully-faithful} および
+\ref{proetale-lemma-ind-zariski-implies})。$B = \colim B_i$ とおく。
+$T = \lim Z_i$ なので
+$X \times_{\pi_0(X)} T = \lim  X \times_{\pi_0(X)} Z_i$ であり、したがって
+$Y = \Spec(B) = \lim \Spec(B_i)$ は位相空間のカルテシアン図式
+$$
+\xymatrix{
+Y \ar[r] \ar[d] & T \ar[d] \\
+X \ar[r] & \pi_0(X)
+}
+$$
+に入る。Lemma \ref{proetale-lemma-silly} により $T = \pi_0(Y)$ と結論する。
+\end{proof}
+
+\begin{example}
+\label{proetale-example-construct-space}
+$k$ を体、$T$ を副有限位相空間とする。$\Spec(A)$ が $T$ と同相になるような
+ind-Zariski 環準同型 $k \to A$ が存在する。実際、
+$T \to \pi_0(\Spec(k)) = \{*\}$ に Lemma \ref{proetale-lemma-construct-profinite} を
+適用すればよい。この場合、$T = \lim T_i$ を各 $T_i$ が有限であるような
+フィルター付き極限として書けば、実際
+$$
+A = \colim \text{Map}(T_i, k)
+$$
+である。
+\end{example}
+
+\begin{lemma}
+\label{proetale-lemma-w-local-morphism-equal-points-stalks-is-iso}
+$A \to B$ を次を満たす環準同型とする。
+\begin{enumerate}
+\item $A \to B$ は局所環を同一視する。
+\item 位相空間 $\Spec(B)$ と $\Spec(A)$ は w-局所的である。
+\item $\Spec(B) \to \Spec(A)$ は w-局所的である。
+\item $\pi_0(\Spec(B)) \to \pi_0(\Spec(A))$ は全単射である。
+\end{enumerate}
+このとき $A \to B$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$X_0 \subset X = \Spec(A)$ および $Y_0 \subset Y = \Spec(B)$ を閉点全体の集合と
+する。仮定により $Y_0$ は $X_0$ の中へ写り、誘導写像
+$Y_0 \to X_0$ は全単射である。空間として $\Spec(A)$ は、閉点における $A$ の
+局所環のスペクトルの非交和である。$B$ についても同様である。したがって
+$X \to Y$ は全単射である。$A \to B$ は平坦なので下降定理が成り立つ
+(Algebra, Lemma \ref{algebra-lemma-flat-going-down})。ゆえに Algebra, Lemma
+\ref{algebra-lemma-unique-prime-over-localize-below} により、
+$\mathfrak p \subset A$ の上にある任意の素イデアル $\mathfrak q \subset B$ に
+対して $B_\mathfrak q = B_\mathfrak p$ である。仮定により
+$B_\mathfrak q = A_\mathfrak p$ なので、$A$ の全ての素イデアル $\mathfrak p$ に
+対して $A_\mathfrak p = B_\mathfrak p$ である。したがって Algebra, Lemma
+\ref{algebra-lemma-characterize-zero-local} により $A = B$ である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-w-local-morphism-equal-stalks-is-ind-zariski}
+$A \to B$ を次を満たす環準同型とする。
+\begin{enumerate}
+\item $A \to B$ は局所環を同一視する。
+\item 位相空間 $\Spec(B)$ と $\Spec(A)$ は w-局所的である。
+\item $\Spec(B) \to \Spec(A)$ は w-局所的である。
+\end{enumerate}
+このとき $A \to B$ は ind-Zariski である。
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$ および $Y = \Spec(B)$ とおく。$X_0 \subset X$ と
+$Y_0 \subset Y$ を閉点全体の集合とする。$A \to A'$ を、
+$X' = \Spec(A')$ とおくとき図式
+$$
+\xymatrix{
+X' \ar[r] \ar[d] & \pi_0(X') \ar[d] \\
+X \ar[r] & \pi_0(X)
+}
+$$
+が位相空間の圏でカルテシアンであり、かつ $\pi_0(X)$ 上の空間として
+$\pi_0(X') = \pi_0(Y)$ となるようなアフィンスキームの ind-Zariski 射とする。
+Lemma \ref{proetale-lemma-construct-profinite} を参照せよ。Lemma \ref{proetale-lemma-silly} により、
+$X'$ は w-局所的であり、閉点全体の集合 $X'_0 \subset X'$ は $X_0$ の逆像である。
+
+\medskip\noindent
+$\pi_0(Y)$ と $\pi_0(X')$ を同一視する、$X$ 上の台位相空間の連続写像
+$Y \to X'$ を得る。Lemma \ref{proetale-lemma-local-isomorphism-fully-faithful}
+（および Lemma \ref{proetale-lemma-ind-zariski-implies}）により、これは $X$ 上の
+アフィンスキームの射 $Y \to X'$ に対応する。$Y \to X$ は $Y_0$ を $X_0$ の中へ
+写すので、$Y \to X'$ は $Y_0$ を $X'_0$ の中へ写す。すなわち $Y \to X'$ は
+w-局所的である。Lemma \ref{proetale-lemma-w-local-morphism-equal-points-stalks-is-iso} により
+$Y \cong X'$ となり、証明が完了する。
+\end{proof}
+
+\noindent
+次の命題は、後に証明する種類の結果に向けた準備である。
+
+\begin{proposition}
+\label{proetale-proposition-maps-wich-identify-local-rings}
+$A \to B$ を局所環を同一視する環準同型とする。このとき、$A \to B'$ が
+ind-Zariski となるような忠実平坦 ind-Zariski 環準同型 $B \to B'$ が存在する。
+\end{proposition}
+
+\begin{proof}
+$A \to A_w$（それぞれ $B \to B_w$）を、Lemma \ref{proetale-lemma-make-w-local} で
+$A$（それぞれ $B$）に対して構成した忠実平坦 ind-Zariski 環準同型とする。
+$\Spec(B_w)$ は w-局所的なので、Lemma \ref{proetale-lemma-universal} により
+$\Spec(B_w) \to \Spec(A_w)$ が w-局所的となる一意な分解
+$A \to A_w \to B_w$ が存在する。$A_w \to B_w$ は局所環を同一視することに
+注意する。Lemma \ref{proetale-lemma-local-isomorphism-permanence} を参照せよ。Lemma
+\ref{proetale-lemma-w-local-morphism-equal-stalks-is-ind-zariski} により、これは
+$A_w \to B_w$ が ind-Zariski であることを意味する。$B \to B_w$ は忠実平坦かつ
+ind-Zariski であり (Lemma \ref{proetale-lemma-make-w-local})、合成
+$A \to B \to B_w$ は ind-Zariski なので
+(Lemma \ref{proetale-lemma-composition-ind-zariski})、命題が示された。
+\end{proof}
+
+\noindent
+上の命題により、アフィンスキームの pro-Zariski サイトにおけるアフィン弱可縮対象を
+特徴付けることができる。
+
+\begin{lemma}
+\label{proetale-lemma-w-local-extremally-disconnected}
+$A$ を環とする。次の条件は同値である。
+\begin{enumerate}
+\item 局所環を同一視する任意の忠実平坦環準同型 $A \to B$ はレトラクションをもつ。
+\item 任意の忠実平坦 ind-Zariski 環準同型 $A \to B$ はレトラクションをもつ。
+\item $A$ は次を満たす。
+\begin{enumerate}
+\item $\Spec(A)$ は w-局所的である。
+\item $\pi_0(\Spec(A))$ は極端不連結である。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は Proposition
+\ref{proetale-proposition-maps-wich-identify-local-rings} から直ちに従う。
+
+\medskip\noindent
+(3)(a) と (3)(b) を仮定し、$A \to B$ を忠実平坦かつ ind-Zariski とする。
+平坦写像 $A \to B$ が忠実平坦であることと、$\Spec(A)$ の全ての閉点が
+$\Spec(B) \to \Spec(A)$ の像に属することは同値であるという事実を、以下では
+断りなく用いる。$A \to B$ がレトラクションをもつことを示す。
+
+\medskip\noindent
+$I \subset A$ を、$V(I) \subset \Spec(A)$ が $\Spec(A)$ の閉点全体の集合となる
+イデアルとする。$B$ を、$A \to B$ と $I \subset A$ に対して Lemma
+\ref{proetale-lemma-w-local-algebraic-residue-field-extensions} で構成した環 $C$ に置き換えて
+よい。したがって $\Spec(B)$ は w-局所的であり、$\Spec(B)$ の閉点全体の集合は $V(IB)$
+であると仮定してよい。
+
+\medskip\noindent
+$\Spec(B)$ は w-局所的で、$\Spec(B)$ の閉点全体の集合は $V(IB)$ であると仮定する。
+全射連続写像 $V(IB) \to V(I)$ の連続切断を選ぶ。これは
+$V(I) \cong \pi_0(\Spec(A))$ が極端不連結だから可能である。Topology,
+Proposition \ref{topology-proposition-projective-in-category-hausdorff-qc} を参照せよ。
+その像は閉部分空間 $T \subset \pi_0(\Spec(B)) \cong V(IB)$ であり、
+$\pi_0(A)$ へ同相に写る。$B$ を Lemma \ref{proetale-lemma-construct} で構成した
+ind-Zariski 商環に置き換えると、
+$\pi_0(\Spec(B)) \to \pi_0(\Spec(A))$ は全単射であると仮定してよい。この時点で
+Lemma \ref{proetale-lemma-w-local-morphism-equal-points-stalks-is-iso} により
+$A \to B$ は同型である。
+
+\medskip\noindent
+(1)、または同値な (2) を仮定する。$A \to A_w$ を Lemma
+\ref{proetale-lemma-make-w-local} で構成した環準同型とする。(1) によりレトラクション
+$A_w \to A$ がある。したがって $\Spec(A)$ は $\Spec(A_w)$ の閉部分集合と同相で
+ある。Lemma \ref{proetale-lemma-closed-subspace-w-local} により (3)(a) が成り立つ。
+最後に、$T$ が極端不連結、準コンパクトかつハウスドルフな位相空間であるような
+全射 $T \to \pi_0(A)$ を取る
+(Topology, Lemma \ref{topology-lemma-existence-projective-cover})。
+$T \to \pi_0(\Spec(A))$ に適合する Lemma \ref{proetale-lemma-construct-profinite} の
+$A \to B$ を選ぶ。(1) によりレトラクション $B \to A$ がある。したがって
+$T = \pi_0(\Spec(B)) \to \pi_0(\Spec(A))$ は切断をもつ。Topology, Proposition
+\ref{topology-proposition-projective-in-category-hausdorff-qc} を用いた形式的な圏論的
+議論により、$\pi_0(\Spec(A))$ は極端不連結である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-find-Zariski-w-contractible}
+$A$ を環とする。$B$ が Lemma \ref{proetale-lemma-w-local-extremally-disconnected} の
+同値な条件を満たすような、忠実平坦 ind-Zariski 環準同型 $A \to B$ が存在する。
+\end{lemma}
+
+\begin{proof}
+まず Lemma \ref{proetale-lemma-make-w-local} を適用すれば、$\Spec(A)$ は w-局所的であると
+仮定してよい。極端不連結空間 $T$ と全射連続写像
+$T \to \pi_0(\Spec(A))$ を選ぶ。Topology, Lemma
+\ref{topology-lemma-existence-projective-cover} を参照せよ。$T$ は副有限であることに
+注意する。Lemma \ref{proetale-lemma-construct-profinite} を適用して、
+$\pi_0(\Spec(B)) \to \pi_0(\Spec(A))$ が $T \to \pi_0(\Spec(A))$ を実現し、かつ
+$$
+\xymatrix{
+\Spec(B) \ar[r] \ar[d] & \pi_0(\Spec(B)) \ar[d] \\
+\Spec(A) \ar[r] & \pi_0(\Spec(A))
+}
+$$
+が位相空間の圏でカルテシアンとなる ind-Zariski 環準同型 $A \to B$ を得る。
+$\Spec(B)$ は w-局所的であり、$\Spec(B) \to \Spec(A)$ は w-局所的であり、
+$\Spec(B)$ の閉点全体の集合は $\Spec(A)$ の閉点全体の集合の逆像であることに
+注意する。Lemma \ref{proetale-lemma-silly} を参照せよ。したがって $B$ について Lemma
+\ref{proetale-lemma-w-local-extremally-disconnected} の条件 (3) が成り立つ。
+\end{proof}
+
+\begin{remark}
+\label{proetale-remark-slightly-stronger}
+Lemmas \ref{proetale-lemma-construct}, \ref{proetale-lemma-construct-profinite}、Proposition
+\ref{proetale-proposition-maps-wich-identify-local-rings}、および Lemma
+\ref{proetale-lemma-find-Zariski-w-contractible} のそれぞれで、ある性質をもつ
+ind-Zariski 環準同型を得た。論文 \cite{BS} では、主局所化の有限積の
+フィルター付き余極限である ind-(Zariski localization) という概念が用いられて
+いる。上に列挙した各結果において ind-Zariski を ind-(Zariski localization) に
+置き換えることができる。しかし本書ではそれを必要とせず、ここで定義した環の
+ind-Zariski 準同型という概念の方が形式的性質がわずかに良い。さらに、
+ind-Zariski 環準同型という概念は、次節で定義する ind-\'etale 環準同型の概念の
+自然な類似物である。
+\end{remark}
+
+
+
+
+\section{Ind-\'etale 代数}
+\label{proetale-section-ind-etale}
+
+\noindent
+まず定義を与える。
+
+\begin{definition}
+\label{proetale-definition-ind-etale}
+環準同型 $A \to B$ が {\it ind-\'etale} であるとは、$B$ が \'etale $A$-代数の
+フィルター付き余極限として書けることをいう。
+\end{definition}
+
+\noindent
+ind-\'etale 代数の圏はいくつかの自然な操作の下で閉じている。
+
+\begin{lemma}
+\label{proetale-lemma-base-change-ind-etale}
+$A \to B$ および $A \to A'$ を環準同型とし、$B' = B \otimes_A A'$ を
+$B$ の基底変換とする。$A \to B$ が ind-\'etale なら、$A' \to B'$ も
+ind-\'etale である。
+\end{lemma}
+
+\begin{proof}
+これは Algebra, Lemma \ref{algebra-lemma-base-change-colimit-etale} である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-composition-ind-etale}
+$A \to B$ および $B \to C$ を環準同型とする。$A \to B$ と $B \to C$ が
+ind-\'etale なら、$A \to C$ も ind-\'etale である。
+\end{lemma}
+
+\begin{proof}
+これは Algebra, Lemma \ref{algebra-lemma-composition-colimit-etale} である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-ind-ind-etale}
+ind-\'etale $A$-代数のフィルター付き余極限は $A$ 上 ind-\'etale である。
+\end{lemma}
+
+\begin{proof}
+これは Algebra, Lemma \ref{algebra-lemma-colimit-colimit-etale} である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-ind-etale-permanence}
+$A$ を環とし、$B \to C$ を ind-\'etale $A$-代数間の $A$-代数準同型とする。
+このとき $C$ は ind-\'etale $B$-代数である。
+\end{lemma}
+
+\begin{proof}
+これは Algebra, Lemma \ref{algebra-lemma-colimits-of-etale} である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-ind-etale-implies}
+$A \to B$ を ind-\'etale とする。このとき $A \to B$ は弱 \'etale である
+(More on Algebra, Definition \ref{more-algebra-definition-weakly-etale})。
+\end{lemma}
+
+\begin{proof}
+これは More on Algebra, Lemma \ref{more-algebra-lemma-when-weakly-etale} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-lift-ind-etale}
+$A$ を環とし、$I \subset A$ をイデアルとする。基底変換関手
+$$
+\text{ind-\'etale }A\text{-代数}
+\longrightarrow
+\text{ind-\'etale }A/I\text{-代数},\quad
+C \longmapsto C/IC
+$$
+は充満忠実な右随伴 $v$ をもつ。特に、ind-\'etale $A/I$-代数
+$\overline{C}$ が与えられると、$\overline{C} = C/IC$ を満たす ind-\'etale
+$A$-代数 $C = v(\overline{C})$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$\overline{C}$ を ind-\'etale $A/I$-代数とする。$A \to B$ が \'etale であるような
+分解 $A \to B \to \overline{C}$ の圏 $\mathcal{C}$ を考える
+（この証明では集合論上の問題をいくつか無視する）。この圏が有向であり、
+$C = \colim_\mathcal{C} B$ が $\overline{C} = C/IC$ を満たす ind-\'etale
+$A$-代数であることを示す。
+
+\medskip\noindent
+まず $\mathcal{C}$ が有向であることを示す
+(Categories, Definition \ref{categories-definition-directed})。
+$A \to A \to \overline{C}$ は対象なので、この圏は空でない。
+$A \to B \to \overline{C}$ および $A \to B' \to \overline{C}$ を
+$\mathcal{C}$ の二つの対象とする。このとき
+$A \to B \otimes_A B' \to \overline{C}$ も対象である
+(Algebra, Lemma \ref{algebra-lemma-etale} を用いよ)。また、
+$f, g : B \to B'$ を $\mathcal{C}$ の対象 $A \to B \to \overline{C}$ と
+$A \to B' \to \overline{C}$ の間の二つの写像とする。このとき余等化子は
+$A \to B' \otimes_{f, B, g} B' \to \overline{C}$ である。これは Algebra,
+Lemmas \ref{algebra-lemma-etale} および
+\ref{algebra-lemma-map-between-etale} により $\mathcal{C}$ の対象である。
+したがって圏 $\mathcal{C}$ は有向である。
+
+\medskip\noindent
+$\overline{C} = \colim \overline{B_i}$ を、各 $\overline{B_i}$ が $A/I$ 上
+\'etale であるようなフィルター付き余極限として書く。各 $i$ に対して、
+$\overline{B_i} = B_i/IB_i$ を満たす \'etale 写像 $A \to B_i$ が存在する。
+Algebra, Lemma \ref{algebra-lemma-lift-etale} を参照せよ。したがって
+$C \to \overline{C}$ は全射である。$C/IC \to \overline{C}$ は ind-\'etale なので
+(Lemma \ref{proetale-lemma-ind-etale-permanence}) 平坦である。ゆえに $\overline{C}$ は、
+ある乗法的部分集合 $S \subset C/IC$ による $C/IC$ の局所化である
+(Algebra, Lemma \ref{algebra-lemma-pure})。$S \subset C/IC$ の元へ写る
+$f \in C$ を取る。$\mathcal{C}$ の対象 $A \to B \to \overline{C}$ と、余極限で
+$f$ へ写る $g \in B$ を選ぶ。このとき
+$A \to B_g \to \overline{C}$ も $\mathcal{C}$ の対象である。したがって $f$ は
+$C$ の可逆元である。ゆえに $C/IC = \overline{C}$ である。
+
+\medskip\noindent
+次に、$A$ 上の ind-\'etale 代数 $D$ に対して
+$$
+\Mor_A(D, C) = \Mor_{A/I}(D/ID, \overline{C})
+$$
+であると主張する。実際、$D/ID \to \overline{C}$ を $A/I$-代数準同型とする。
+$D = \colim_{i \in I} D_i$ を、有向集合 $I$ 上の余極限として書き、各 $D_i$ は
+$A$ 上 \'etale であるとする。$\mathcal{C}$ の取り方により変換
+$I \to \mathcal{C}$ を得て、したがって $\overline{C}$ への写像と両立する写像
+$D \to C$ を得る。これで主張が従う。
+
+\medskip\noindent
+したがって、規則
+$$
+\overline{C} 
+\longmapsto
+v(\overline{C}) = \colim_{A \to B \to \overline{C}} B
+$$
+で定義される関手 $v$ は、補題が要求する通り基底変換関手 $u$ の右随伴である。
+構成により $u \circ v = \text{id}$ なので、関手 $v$ は充満忠実である。
+Categories, Lemma \ref{categories-lemma-adjoint-fully-faithful} を参照せよ。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{ind-\'etale 代数の構成}
+\label{proetale-section-construction-ind-etale}
+
+\noindent
+$A$ を環とする。任意の \'etale 環準同型 $A \to B$ は、相対次元 $0$ の標準滑らかな
+環準同型と同型であることを思い出そう。そのような環準同型は
+$$
+A \longrightarrow A[x_1, \ldots, x_n]/(f_1, \ldots, f_n)
+$$
+の形をしており、成分 $\partial f_i/\partial x_j$ をもつ $n \times n$ 行列の行列式は
+商環において可逆である。Algebra, Lemma
+\ref{algebra-lemma-etale-standard-smooth} を参照せよ。
+
+\medskip\noindent
+$S(A)$ を相対次元 $0$ の全ての {\it 忠実平坦}\footnote{平坦性がある場合、
+例えば滑らかまたは \'etale な環準同型の場合、これは誘導されるスペクトル間の
+写像が全射であることを意味するにすぎない。Algebra, Lemma
+\ref{algebra-lemma-ff-rings} を参照せよ。}標準滑らか $A$-代数の集合とする。
+$I(A)$ を、$S(A)$ の有限部分集合 $E$ 全体からなる、包含関係で順序付けられた
+半順序集合とする。$I(A)$ は有向半順序集合であることに注意する。
+$E = \{A \to B_1, \ldots, A \to B_n\}$ に対して
+$$
+B_E = B_1 \otimes_A \ldots \otimes_A B_n
+$$
+とおく。$B_E$ は忠実平坦 \'etale $A$-代数である。$E \subset E'$ に対して、
+\'etale $A$-代数の標準的な遷移写像 $B_E \to B_{E'}$ がある。実際、
+$E = \{A \to B_1, \ldots, A \to B_n\}$ および
+$E' = \{A \to B_1, \ldots, A \to B_{n + m}\}$ とすると、
+$B_E \to B_{E'}$ は $b_1 \otimes \ldots \otimes b_n$ を $B_{E'}$ の元
+$b_1 \otimes \ldots \otimes b_n \otimes 1 \otimes \ldots \otimes 1$ へ写す。
+この構成は $I(A)$ 上の忠実平坦 \'etale $A$-代数系を定めるので、
+$$
+T(A) = \colim_{E \in I(A)} B_E
+$$
+とおく。$T(A)$ は忠実平坦 ind-\'etale $A$-代数である
+(Algebra, Lemma \ref{algebra-lemma-colimit-faithfully-flat})。構成により、任意の
+忠実平坦 \'etale $A$-代数 $B$ に対して、$A$-代数準同型 $B \to T(A)$ が
+（一意とは限らないが）存在する。実際、ある $(A \to B_0) \in S(A)$ と同型
+$B \cong B_0$ を選べば、標準的な余射影
+$$
+B \to B_0 \to 
+T(A) = \colim_{E \in I(A)} B_E
+$$
+が求める写像である。
+
+\begin{lemma}
+\label{proetale-lemma-first-construction}
+環 $A$ が与えられると、任意の忠実平坦 \'etale 環準同型 $C \to B$ が
+レトラクションをもつような忠実平坦 ind-\'etale $A$-代数 $C$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$T^1(A) = T(A)$ および $T^{n + 1}(A) = T(T^n(A))$ とおく。また、
+$$
+C = \colim T^n(A)
+$$
+とおく。この代数は各 $T^n(A)$ 上、したがって特に $A$ 上忠実平坦である。
+Algebra, Lemma \ref{algebra-lemma-colimit-faithfully-flat} を参照せよ。さらに
+Lemma \ref{proetale-lemma-ind-ind-etale} により $C$ は $A$ 上 ind-\'etale である。
+$C \to B$ が \'etale なら、ある $n$ と \'etale 環準同型
+$T^n(A) \to B'$ が存在して $B = C \otimes_{T^n(A)} B'$ となる。Algebra,
+Lemma \ref{algebra-lemma-etale} を参照せよ。$C \to B$ が忠実平坦なら、
+$\Spec(B) \to \Spec(C) \to \Spec(T^n(A))$ は全射なので、
+$\Spec(B') \to \Spec(T^n(A))$ も全射である。すなわち $T^n(A) \to B'$ は
+忠実平坦である。本構成により $T^n(A)$-代数準同型
+$B' \to T^{n + 1}(A)$ がある。これは $C$-代数準同型 $B \to C$ を誘導し、証明を
+完了する。
+\end{proof}
+
+\begin{remark}
+\label{proetale-remark-size-T}
+$A$ を環とし、$\kappa$ を $A$ の濃度以上の無限基数とする。このとき $T(A)$ の
+濃度は高々 $\kappa$ である。実際、各 $B_E$ の濃度は高々 $\kappa$ であり、
+添字集合 $I(A)$ の濃度も高々 $\kappa$ である。したがって
+$\kappa \otimes \kappa = \kappa$ から結果が従う。Sets, Section
+\ref{sets-section-cardinals} を参照せよ。Lemma \ref{proetale-lemma-first-construction} の
+証明で構成した環の濃度も高々 $\kappa$ であることが従う。
+\end{remark}
+
+\begin{remark}
+\label{proetale-remark-first-construction-functorial}
+構成 $A \mapsto T(A)$ は次の意味で関手的である。$A \to A'$ が環準同型なら、
+可換図式
+$$
+\xymatrix{
+A \ar[r] \ar[d] & T(A) \ar[d] \\
+A' \ar[r] & T(A')
+}
+$$
+を構成できる。実際、$S(A)$ の元
+$(A \to A[x_1, \ldots, x_n]/(f_1, \ldots, f_n))$ が与えられたとき、環準同型
+$\varphi : A \to A'$ を用いて、対応する $S(A')$ の元
+$(A' \to A'[x_1, \ldots, x_n]/(f^\varphi_1, \ldots, f^\varphi_n))$ を得る。
+ここで $f^\varphi$ は、多項式 $f$ の係数に $\varphi$ を適用して得られる多項式を
+表す。さらに環の圏に可換図式
+$$
+\xymatrix{
+A \ar[r] \ar[d] & A[x_1, \ldots, x_n]/(f_1, \ldots, f_n) \ar[d] \\
+A' \ar[r] & A'[x_1, \ldots, x_n]/(f^\varphi_1, \ldots, f^\varphi_n)
+}
+$$
+がある。有限部分集合 $E \subset S(A)$ に対して $E' = \varphi(E)$ とおき、
+$B_E \to B_{E'}$ を明らかな方法で定義する。余極限を取れば求める写像
+$T(A) \to T(A')$ を得る。Categories, Lemma
+\ref{categories-lemma-functorial-colimit} を参照せよ。
+\end{remark}
+
+\begin{lemma}
+\label{proetale-lemma-have-sections-quotient}
+$A$ を、任意の忠実平坦 \'etale 環準同型 $A \to B$ がレトラクションをもつような
+環とする。このとき任意の商環 $A/I$ についても同じことが成り立つ。
+\end{lemma}
+
+\begin{proof}
+$A/I \to \overline{B}$ を忠実平坦 \'etale とする。Algebra, Lemma
+\ref{algebra-lemma-lift-etale} により、ある \'etale 環準同型 $A \to B$ に対して
+$\overline{B} = B/IB$ と書ける。$\Spec(B) \to \Spec(A)$ の像 $U$ は開であり、
+$V(I)$ を含む。したがって補集合 $Z = \Spec(A) \setminus U$ は準コンパクトで、
+$V(I)$ と交わらない。ゆえに、ある $r \geq 0$ と $f_i \in I$ に対して
+$Z \subset D(f_1) \cup \ldots \cup D(f_r)$ である。このとき
+$A \to B' = B \times \prod A_{f_i}$ は忠実平坦 \'etale であり、
+$\overline{B} = B'/IB'$ である。したがって $A \to B'$ のレトラクション
+$B' \to A$ は $A/I \to \overline{B}$ のレトラクションを誘導する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-have-sections-strictly-henselian}
+$A$ を、任意の忠実平坦 \'etale 環準同型 $A \to B$ がレトラクションをもつような
+環とする。このとき $A$ の極大イデアルにおける各局所環は強 Hensel である。
+\end{lemma}
+
+\begin{proof}
+$\mathfrak m$ を $A$ の極大イデアルとする。$A \to B$ を \'etale 環準同型、
+$\mathfrak q \subset B$ を $\mathfrak m$ の上にある素イデアルとする。Algebra,
+Lemma \ref{algebra-lemma-strict-henselization-different} における強 Hensel 化
+$A_\mathfrak m^{sh}$ の記述により、$A_\mathfrak m = B_\mathfrak q$ を示せば十分で
+ある。$\mathfrak m$ の上にある素イデアル
+$\mathfrak q = \mathfrak q_1, \mathfrak q_2, \ldots, \mathfrak q_n$ は有限個であり、
+\'etale 環準同型は準有限なので、それらの間に特殊化は存在しない。Algebra,
+Lemma \ref{algebra-lemma-etale-quasi-finite} を参照せよ。したがって
+$\mathfrak q_i$ は極大イデアルであり、
+$g \in \mathfrak q_2 \cap \ldots \cap \mathfrak q_n$、$g \not \in \mathfrak q$ を
+満たす元を取れる (Algebra, Lemma \ref{algebra-lemma-silly})。$B$ を $B_g$ で
+置き換えると、$\mathfrak q$ は $\mathfrak m$ の上にある $B$ の唯一の素イデアルと
+なる。$\Spec(B) \to \Spec(A)$ の像 $U \subset \Spec(A)$ は開である
+(Algebra, Proposition \ref{algebra-proposition-fppf-open})。したがって補集合
+$\Spec(A) \setminus U$ は閉であり、$f \not \in \mathfrak p$ と
+$\Spec(A) = U \cup D(f)$ を満たす $f \in A$ が存在する。環準同型
+$A \to B \times A_f$ は忠実平坦かつ \'etale なので、$A$ に関する仮定により
+レトラクション $\sigma : B \times A_f \to A$ をもつ。$\sigma$ は \'etale
+$A$-代数間の写像として \'etale であり、したがって平坦である
+(Algebra, Lemma \ref{algebra-lemma-map-between-etale})。
+$\mathfrak q$ は $A$ の上にある $B \times A_f$ の唯一の素イデアルなので、
+$A_\mathfrak p \to B_\mathfrak q$ は平坦でもあるレトラクションをもつ。したがって
+$A_\mathfrak p \to B_\mathfrak q \to A_\mathfrak p$
+は合成が恒等写像となる平坦な局所環準同型である。局所環の平坦局所準同型は単射
+なので、これらの写像は所望の通り同型である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-have-sections-localize}
+$A$ を、任意の忠実平坦 \'etale 環準同型 $A \to B$ がレトラクションをもつような
+環とする。$Z \subset \Spec(A)$ を閉部分スキームとし、$A \to A_Z^\sim$ を
+Lemma \ref{proetale-lemma-localization} で構成した写像とする。このとき任意の忠実平坦
+\'etale 環準同型 $A_Z^\sim \to C$ はレトラクションをもつ。
+\end{lemma}
+
+\begin{proof}
+$A_Z^\sim$-代数として $C = B' \otimes_A A_Z^\sim$ となるような \'etale
+環準同型 $A \to B'$ が存在する。$\Spec(B') \to \Spec(A)$ の像
+$U' \subset \Spec(A)$ は開で $V(I)$ を含むので、
+$\Spec(A) = U' \cup D(f)$ を満たす $f \in I$ を取れる。このとき
+$A \to B' \times A_f$ は \'etale かつ忠実平坦である。仮定により
+レトラクション $B' \times A_f \to A$ がある。局所化すると、所望の
+レトラクション $C \to A_Z^\sim$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-get-w-local-algebraic-residue-field-extensions}
+$A \to B$ を剰余体上に代数拡大を誘導する環準同型とする。次の性質をもつ
+可換図式
+$$
+\xymatrix{
+B \ar[r] & D \\
+A \ar[r] \ar[u] & C \ar[u]
+}
+$$
+が存在する。
+\begin{enumerate}
+\item $A \to C$ は忠実平坦かつ ind-\'etale である。
+\item $B \to D$ は忠実平坦かつ ind-\'etale である。
+\item $\Spec(C)$ は w-局所的である。
+\item $\Spec(D)$ は w-局所的である。
+\item $\Spec(D) \to \Spec(C)$ は w-局所的である。
+\item $\Spec(D)$ の閉点全体の集合は $\Spec(C)$ の閉点全体の集合の逆像である。
+\item $\Spec(C)$ の閉点全体の集合は $\Spec(A)$ へ全射で写る。
+\item $\Spec(D)$ の閉点全体の集合は $\Spec(B)$ へ全射で写る。
+\item 極大イデアル $\mathfrak m \subset C$ に対し、局所環
+$C_\mathfrak m$ は強 Hensel である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\Spec(A')$ が w-局所的で、$\Spec(A')$ の閉点全体の集合が $\Spec(A)$ へ
+全射で写るような、忠実平坦 ind-Zariski 環準同型 $A \to A'$ が存在する。
+Lemma \ref{proetale-lemma-make-w-local} を参照せよ。$I \subset A'$ を、$V(I)$ が
+$\Spec(A')$ の閉点全体の集合となるイデアルとする。Lemma
+\ref{proetale-lemma-first-construction} のように $A' \to C'$ を選ぶ。Lemma
+\ref{proetale-lemma-have-sections-strictly-henselian} により、極大イデアル
+$\mathfrak m' \subset C'$ における局所環 $C'_{\mathfrak m'}$ は強 Hensel である。
+$A' \to C'$ と $I \subset A'$ に Lemma
+\ref{proetale-lemma-w-local-algebraic-residue-field-extensions} を適用し、
+$C'/IC' \cong C/IC$ を満たす $C' \to C$ を得る。$A' \to C'$ は忠実平坦なので、
+$\Spec(C'/IC')$ は $A'$ の閉点全体の集合へ、したがって特に $\Spec(A)$ へ
+全射で写ることに注意する。さらに、$V(IC) \subset \Spec(C)$ は $C$ の閉点全体の
+集合であり、$C' \to C$ は ind-Zariski である（かつ局所環を同一視する）ので、
+性質 (1)、(3)、(7)、(9) を得る。
+
+\medskip\noindent
+$J \subset C$ を、$V(J)$ が $\Spec(C)$ の閉点全体の集合となるイデアルとする。
+$D' = B \otimes_A C$ とおく。環準同型 $C \to D'$ は代数的な剰余体拡大を
+誘導する。$V(J) \to \Spec(A)$ は全射なので、写像
+$T = V(JD') \to \Spec(B)$ も全射であることを忘れない。$C \to D'$ と
+$J \subset C$ に Lemma \ref{proetale-lemma-w-local-algebraic-residue-field-extensions} を
+適用し、$D'/JD' \cong D/JD$ を満たす $D' \to D$ を得る。補題の残りの性質は
+全て Lemma \ref{proetale-lemma-w-local-algebraic-residue-field-extensions} の結果から直ちに
+従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{弱 \'etale と pro-\'etale}
+\label{proetale-section-weakly-etale}
+
+\noindent
+環準同型 $A \to B$ が {\it 弱 \'etale} であるとは、$A \to B$ が平坦で、かつ
+$B \otimes_A B \to B$ が平坦であることをいう。More on Algebra, Section
+\ref{more-algebra-section-weakly-etale} で、そのような環準同型のいくつかの性質を
+証明した。特に、$A \to B$ が局所準同型で、$A$ が強 Hensel 局所環なら
+$A = B$ である。More on Algebra, Theorem \ref{more-algebra-theorem-olivier} を
+参照せよ。この定理と上で行った仕事を用いて、弱 \'etale 環準同型に関する次の
+構造定理を得る。
+
+\begin{proposition}
+\label{proetale-proposition-weakly-etale}
+$A \to B$ を弱 \'etale 環準同型とする。このとき、$A \to B'$ が ind-\'etale と
+なるような忠実平坦 ind-\'etale 環準同型 $B \to B'$ が存在する。
+\end{proposition}
+
+\begin{proof}
+環準同型 $A \to B$ は剰余体の（分離）代数拡大を誘導する。More on Algebra,
+Lemma \ref{more-algebra-lemma-weakly-etale-residue-field-extensions} を参照せよ。
+したがって Lemma \ref{proetale-lemma-get-w-local-algebraic-residue-field-extensions} を適用し、
+図式
+$$
+\xymatrix{
+B \ar[r] & D \\
+A \ar[r] \ar[u] & C \ar[u]
+}
+$$
+を補題に列挙した性質をもつように選ぶ。More on Algebra, Lemma
+\ref{more-algebra-lemma-weakly-etale-permanence} により $C \to D$ は弱 \'etale で
+あることに注意する。極大イデアル $\mathfrak m \subset D$ を取る。構成により、
+これは極大イデアル $\mathfrak m' \subset C$ の上にある。More on Algebra,
+Theorem \ref{more-algebra-theorem-olivier} により環準同型
+$C_{\mathfrak m'} \to D_\mathfrak m$ は同型である。$\Spec(C)$ の各点は閉点へ
+特殊化するので、$C \to D$ は局所環を同一視すると結論できる。したがって
+Proposition \ref{proetale-proposition-maps-wich-identify-local-rings} を環準同型
+$C \to D$ に適用できる。$C \to D'$ が ind-Zariski となるような忠実平坦
+ind-Zariski 写像 $D \to D'$ を選ぶ。このとき $B \to D'$ が命題で求める解である。
+\end{proof}
+
+
+
+
+
+\section{V 位相と pro-h 位相}
+\label{proetale-section-V-versus-pro-h}
+
+\noindent
+V 位相は Topologies, Section \ref{topologies-section-V} で導入した。
+h 位相は More on Flatness, Section \ref{flat-section-h} で導入した。
+一種の中間的な位相、すなわち ph 位相は Topologies, Section
+\ref{topologies-section-ph} で導入した。
+
+\medskip\noindent
+スキームの適切な圏 $\mathcal{C}$ 上に位相 $\tau$ が与えられると、
+$\mathcal{C}$ 上の「pro-$\tau$ 位相」を次のように導入できる。$\mathcal{C}$ の対象
+$X$ に対し、$X$ に付随する表現可能前層を $h_X$ と書くことを思い出そう。
+一時的に、$\mathcal{C}$ の射 $X \to Y$ が $\tau$-被覆\footnote{これは被覆族の
+概念と混同してはならない。例えば $\tau = \etale$ のとき、切断をもつ任意の射
+$X \to Y$ は $\tau$-被覆である。しかし \'etale 被覆族
+$\{V_i \to Y\}_{i \in I}$ の定義では、各 $V_i \to Y$ が \'etale であることを
+要求する。}であるとは、$h_X \to h_Y$ の $\tau$-層化が全射であることをいう。
+このとき pro-$\tau$ 位相を、次を満たす最も粗い位相として定義できる。
+\begin{enumerate}
+\item pro-$\tau$ 位相は $\tau$ 位相より細かい。
+\item $Y$ がアフィンであり、$X = \lim X_\lambda$ が $Y$ 上のアフィンスキーム
+$X_\lambda$ の有向極限で、全ての $\lambda$ に対して
+$h_{X_\lambda} \to h_Y$ が $\tau$-被覆であるなら、$X \to Y$ は
+pro-$\tau$-被覆である。
+\end{enumerate}
+このような几帳面な定式化を用いるのは、pro-$\tau$ 被覆族の選択を指定したくない
+からである。異なる $\tau$ には異なる被覆族の集まりを選ぶのが適切である。
+例えば Section \ref{proetale-section-proetale} では、ある有限性を満たす弱 \'etale 射の族を
+考えることが pro-\'etale 位相の定義にうまく働くことを見る。より一般に、この段落で
+提案した構成は主として本節の結果を動機付けるためのものであり、この方法を用いて
+暗黙に pro-$\tau$ 位相を定義することは決してしない。
+
+\medskip\noindent
+次の補題は pro-V 位相が V 位相に等しいことを示す。
+
+\begin{lemma}
+\label{proetale-lemma-pro-V-V}
+$Y$ をアフィンスキームとし、$X = \lim X_i$ を $Y$ 上のアフィンスキームの有向極限と
+する。次の条件は同値である。
+\begin{enumerate}
+\item $\{X \to Y\}$ は標準 V 被覆である
+(Topologies, Definition \ref{topologies-definition-standard-V-covering})。
+\item 全ての $i$ に対して $\{X_i \to Y\}$ は標準 V 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+一元族 $\{X \to Y\}$ が標準 V 被覆であることは、任意の射
+$g : \Spec(V) \to Y$ に対して付値環の拡大 $V \subset W$ と可換図式
+$$
+\xymatrix{
+\Spec(W) \ar[r] \ar[d] & X \ar[d] \\
+\Spec(V) \ar[r]^g & Y
+}
+$$
+が存在することと同値である。したがって (1) $\Rightarrow$ (2) は定義から直ちに
+従う。逆に (2) を仮定し、上のような $g : \Spec(V) \to Y$ が与えられたとする。
+$\Spec(V) \times_Y X_i = \Spec(A_i)$ と書く。$\{X_i \to Y\}$ は標準 V 被覆なので、
+合成 $V \to A_i \to W_i$ が付値環の拡大となるような付値環 $W_i$ と環準同型
+$A_i \to W_i$ を選べる。特に、$A_i$ をその $V$-torsion で割った商 $A'_i$ は
+忠実平坦 $V$-代数である。平坦性は More on Algebra, Lemma
+\ref{more-algebra-lemma-valuation-ring-torsion-free-flat} により、スペクトル上の全射性は
+$A_i \to W_i$ が $A'_i$ を経由することによる。したがって
+$$
+A = \colim A'_i
+$$
+は忠実平坦 $V$-代数である
+(Algebra, Lemma \ref{algebra-lemma-colimit-faithfully-flat})。
+$\{\Spec(A) \to \Spec(V)\}$ は標準 fpqc 被覆なので、標準 V 被覆でもある
+(Topologies, Lemma \ref{topologies-lemma-standard-fpqc-standard-V})。したがって
+$V \to W$ が付値環の拡大となるような $\Spec(W) \to \Spec(A)$ を選べる。
+これを射 $\Spec(A) \to X = \Spec(\colim A_i)$ と合成できるので証明が完了する。
+\end{proof}
+
+\noindent
+次の補題は、pro-h 位相、pro-ph 位相、および V 位相が等しいことを示す。
+
+\begin{lemma}
+\label{proetale-lemma-pro-h-V}
+$X \to Y$ をアフィンスキームの射とする。次の条件は同値である。
+\begin{enumerate}
+\item $\{X \to Y\}$ は標準 V 被覆である
+(Topologies, Definition \ref{topologies-definition-standard-V-covering})。
+\item $X = \lim X_i$ は $Y$ 上のアフィンスキームの有向極限であり、各 $i$ に
+対して $\{X_i \to Y\}$ は ph 被覆である。
+\item $X = \lim X_i$ は $Y$ 上のアフィンスキームの有向極限であり、各 $i$ に
+対して $\{X_i \to Y\}$ は h 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) $\Rightarrow$ (1) の証明。アフィン間の一本の射からなる V 被覆は標準 V 被覆で
+あることを思い出そう。Topologies, Definition
+\ref{topologies-definition-V-covering} および Lemma
+\ref{topologies-lemma-refine-standard-V} を参照せよ。また、任意の ph 被覆は V 被覆で
+ある。Topologies, Lemma
+\ref{topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc-ph-V} を参照せよ。
+したがって (2) のように $X = \lim X_i$ なら、各 $i$ に対して
+$\{X_i \to Y\}$ は標準 V 被覆である。ゆえに Lemma \ref{proetale-lemma-pro-V-V} により
+(1) が成り立つ。
+
+\medskip\noindent
+(3) $\Rightarrow$ (2) の証明。h 被覆は常に ph 被覆なので明らかである。
+More on Flatness, Definition \ref{flat-definition-h-covering} を参照せよ。
+
+\medskip\noindent
+(1) $\Rightarrow$ (3) の証明。これは興味深い向きだが、その本質は More on
+Flatness, Lemma \ref{flat-lemma-equivalence-h-v-locally-finite-presentation} に
+含まれている。$X = \Spec(A)$ および $Y = \Spec(R)$ と書く。各 $A_i$ が $R$ 上
+有限表示であるように $A = \colim A_i$ と書ける。Algebra, Lemma
+\ref{algebra-lemma-ring-colimit-fp} を参照せよ。$X_i = \Spec(A_i)$ とおく。
+(1) と Topologies, Lemma \ref{topologies-lemma-refine-standard-V} により、全ての
+$i$ に対して $\{X_i \to Y\}$ は標準 V 被覆である。したがって More on Flatness,
+Definition \ref{flat-definition-h-covering} により $\{X_i \to Y\}$ は h 被覆である。
+これで証明が完了する。
+\end{proof}
+
+\noindent
+大まかにいえば、次の補題は極限を保存する h 層が V 被覆に対して層条件を満たすことを
+示す。Remark \ref{proetale-remark-h-limit-preserving} とも比較せよ。
+
+\begin{lemma}
+\label{proetale-lemma-h-limit-preserving}
+$S$ をスキームとし、$F$ を $S$ 上の全てのスキームの圏上に定義された反変関手と
+する。次を仮定する。
+\begin{enumerate}
+\item $F$ は h 位相に対して層条件を満たす。
+\item $F$ は極限を保存する
+(Limits, Remark \ref{limits-remark-limit-preserving})。
+\end{enumerate}
+このとき $F$ は V 位相に対して層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+Topologies, Lemma \ref{topologies-lemma-sheaf-property-V} の (1) と (2') を
+確認することで証明する。Zariski 被覆に対する層条件は、$F$ が全ての h 被覆に対して
+層条件を満たすことから従う。最後に $X \to Y$ を $S$ 上のアフィンスキームの射で、
+$\{X \to Y\}$ が V 被覆であるものとする。Lemma \ref{proetale-lemma-pro-h-V} により、
+$X = \lim X_i$ を $Y$ 上のアフィンスキームの有向極限として書け、各 $i$ に対して
+$\{X_i \to Y\}$ は h 被覆である。次を得る。
+\begin{align*}
+&
+\text{等化子}(
+\xymatrix{
+F(X) \ar@<1ex>[r] \ar@<-1ex>[r] &
+F(X \times_Y X)
+}
+)
+\\
+& =
+\text{等化子}(
+\xymatrix{
+\colim F(X_i) \ar@<1ex>[r] \ar@<-1ex>[r] &
+\colim F(X_i \times_Y X_i)
+}
+)
+\\
+& =
+\colim
+\text{等化子}(
+\xymatrix{
+F(X_i) \ar@<1ex>[r] \ar@<-1ex>[r] &
+F(X_i \times_Y X_i)
+}
+)
+\\
+& =
+\colim F(Y) = F(Y)
+\end{align*}
+これは示すべきことであった。第一の等号は $F$ が極限を保存し、
+$X = \lim X_i$ および $X \times_Y X = \lim X_i \times_Y X_i$ であることによる。
+第二の等号はフィルター付き余極限が完全であることによる。第三の等号は $F$ が
+h 被覆に対して層条件を満たすことによる。
+\end{proof}
+
+\begin{remark}
+\label{proetale-remark-h-limit-preserving}
+$S$ を大サイト $\Sch_h$ に含まれるスキームとする。$F$ を $(\Sch/S)_h$ 上の集合の
+層とし、$T = \lim T_i$ が $(\Sch/S)_h$ におけるアフィンスキームの有向極限なら常に
+$F(T) = \colim F(T_i)$ であるとする。このとき $F$ は $S$ 上の全てのスキームの
+圏上の反変関手 $F'$ へ一意に拡張し、(a) $F'$ は h 位相に対して層条件を満たし、
+(b) $F'$ は極限を保存する。More on Flatness, Lemma
+\ref{flat-lemma-extend-sheaf-h} を参照せよ。この状況で Lemma
+\ref{proetale-lemma-h-limit-preserving} は、$F'$ が V 位相に対して層条件を満たすことを示す。
+\end{remark}
+
+
+
+
+
+
+
+\section{w-可縮被覆の構成}
+\label{proetale-section-w-contractible}
+
+\noindent
+本節では、アフィンスキームの w-可縮被覆を構成する。
+
+\begin{definition}
+\label{proetale-definition-w-contractible}
+$A$ を環とする。任意の忠実平坦な弱 \'etale 環準同型 $A \to B$ が
+レトラクションをもつとき、$A$ は {\it w-可縮}であるという。
+\end{definition}
+
+\noindent
+Proposition \ref{proetale-proposition-weakly-etale} により、任意の忠実平坦
+ind-\'etale 環準同型 $A \to B$ がレトラクションをもつことを要求しても、
+同値な定義になることに注意する。次の重要な観察により、w-可縮環を構成できる。
+
+\begin{lemma}
+\label{proetale-lemma-w-local-strictly-henselian-extremally-disconnected}
+$A$ を環とする。次の条件は同値である。
+\begin{enumerate}
+\item $A$ は w-可縮である。
+\item 任意の忠実平坦 ind-\'etale 環準同型 $A \to B$ は
+レトラクションをもつ。
+\item $A$ は次を満たす。
+\begin{enumerate}
+\item $\Spec(A)$ は w-局所的である。
+\item $\pi_0(\Spec(A))$ は極端不連結である。
+\item 任意の極大イデアル $\mathfrak m \subset A$ に対し、
+局所環 $A_\mathfrak m$ は強 Hensel である。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は Proposition \ref{proetale-proposition-weakly-etale} から直ちに従う。
+
+\medskip\noindent
+(3)(a)、(3)(b)、(3)(c) を仮定する。$A \to B$ を忠実平坦かつ
+ind-\'etale とする。平坦写像 $A \to B$ が忠実平坦であることと、
+$\Spec(A)$ の全ての閉点が $\Spec(B) \to \Spec(A)$ の像に含まれることが
+同値であるという事実を、以下では断りなく用いる。$A \to B$ が
+レトラクションをもつことを示そう。
+
+\medskip\noindent
+$V(I) \subset \Spec(A)$ が $\Spec(A)$ の閉点全体の集合となるような
+イデアル $I \subset A$ を取る。$A \to B$ と $I \subset A$ に対し、
+Lemma \ref{proetale-lemma-w-local-algebraic-residue-field-extensions} で構成した環 $C$ で
+$B$ を置き換えてよい。したがって $\Spec(B)$ は w-局所的で、$\Spec(B)$ の閉点全体の集合は
+$V(IB)$ であると仮定してよい。この場合、$B$ の極大イデアルで $A$ の極大イデアルの
+上にあるものについて確認すれば十分であるから、条件 (3)(c) により $A \to B$ は
+局所環を同一視する。ゆえに Lemma \ref{proetale-lemma-w-local-extremally-disconnected} により
+$A \to B$ はレトラクションをもつ。
+
+\medskip\noindent
+(1)、または同値な条件 (2) を仮定する。Lemma
+\ref{proetale-lemma-have-sections-strictly-henselian} により (3)(c) が成り立つ。
+(3)(a) と (3)(b) は Lemma \ref{proetale-lemma-w-local-extremally-disconnected} から従う。
+\end{proof}
+
+\begin{proposition}
+\label{proetale-proposition-find-w-contractible}
+任意の環 $A$ に対し、$D$ が w-可縮となるような忠実平坦
+ind-\'etale 環準同型 $A \to D$ が存在する。
+\end{proposition}
+
+\begin{proof}
+$\text{id}_A : A \to A$ に Lemma
+\ref{proetale-lemma-get-w-local-algebraic-residue-field-extensions} を適用すると、
+$C$ が w-局所的で、$C$ の任意の極大イデアルにおける局所環が強 Hensel となるような
+忠実平坦 ind-\'etale 環準同型 $A \to C$ を得る。極端不連結空間 $T$ と全射連続写像
+$T \to \pi_0(\Spec(C))$ を選ぶ。Topology, Lemma
+\ref{topology-lemma-existence-projective-cover} を参照せよ。$T$ は profinite であることに
+注意する。Lemma \ref{proetale-lemma-construct-profinite} を適用し、
+$\pi_0(\Spec(D)) \to \pi_0(\Spec(C))$ が $T \to \pi_0(\Spec(C))$ を実現し、かつ
+$$
+\xymatrix{
+\Spec(D) \ar[r] \ar[d] & \pi_0(\Spec(D)) \ar[d] \\
+\Spec(C) \ar[r] & \pi_0(\Spec(C))
+}
+$$
+が位相空間の圏でカルテシアンとなるような ind-Zariski 環準同型 $C \to D$ を得る。
+$\Spec(D)$ は w-局所的で、$\Spec(D) \to \Spec(C)$ は w-局所的であり、
+$\Spec(D)$ の閉点全体の集合は $\Spec(C)$ の閉点全体の集合の逆像であることに
+注意する。Lemma \ref{proetale-lemma-silly} を参照せよ。したがって $D$ の極大イデアルにおける
+局所環はなお強 Hensel である（対応する $C$ の極大イデアルにおける局所環と
+同型だからである）。Lemma
+\ref{proetale-lemma-w-local-strictly-henselian-extremally-disconnected} により、$D$ は w-可縮である。
+\end{proof}
+
+\begin{remark}
+\label{proetale-remark-size-w-contractible}
+$A$ を環とする。$\kappa$ を $A$ の濃度以上の無限基数とする。このとき
+Proposition \ref{proetale-proposition-find-w-contractible} で構成した環 $D$ の濃度は高々
+$$
+\kappa^{2^{2^{2^\kappa}}}.
+$$
+である。実際、環準同型 $A \to D$ は合成
+$$
+A \to A_w = A' \to C' \to C \to D.
+$$
+として構成される。構成の最初の三段階は Lemma
+\ref{proetale-lemma-get-w-local-algebraic-residue-field-extensions} の証明の第一段落で行われる。
+第一段階について、Remark \ref{proetale-remark-size-w} により $|A_w| \leq \kappa$ である。
+Remark \ref{proetale-remark-size-T} により $|C'| \leq \kappa$ である。
+さらに $C$ は $(C')_w$ の局所化なので $|C| \leq \kappa$ である（Lemma
+\ref{proetale-lemma-localize-along-closed-profinite} を $C'$ に適用するこの構成は、Lemma
+\ref{proetale-lemma-w-local-algebraic-residue-field-extensions} の証明で行われる）。
+したがって $C$ の極大イデアルは高々 $2^\kappa$ 個である。最後に、環準同型
+$C \to D$ は局所環を同一視し、Topology, Remark
+\ref{topology-remark-size-projective-cover} により $D$ の極大イデアル全体の集合の濃度は
+高々 $2^{2^{2^\kappa}}$ である。$D \subset \prod_{\mathfrak m \subset D} D_\mathfrak m$
+だから、$D$ の濃度は高々上に表示した値である。
+\end{remark}
+
+\begin{lemma}
+\label{proetale-lemma-finite-finitely-presented-over-extremally-disconnected}
+$A \to B$ を準有限かつ有限表示な環準同型とする。$A$ の剰余体が分離代数閉であり、
+$\Spec(A)$ がハウスドルフかつ極端不連結なら、$\Spec(B)$ は極端不連結である。
+\end{lemma}
+
+\begin{proof}
+$X = \Spec(A)$ および $Y = \Spec(B)$ とおく。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-decompose-quasi-finite-morphism} のように、有限分割
+$X = \coprod X_i$ と $X'_i \to X_i$ を選ぶ。位相空間の写像
+$\coprod X_i \to X$（ここで始域は位相空間の圏での非交和）は Topology,
+Proposition \ref{topology-proposition-projective-in-category-hausdorff-qc} により切断をもつ。
+したがって $X$ は位相的に層 $X_i$ の非交和である。ゆえに $X$ を $X_i$ で置き換え、
+$(X' \times_X Y)_{red}$ が $X'_{red}$ の有限非交和と同型となるような全射有限局所自由射
+$X' \to X$ が存在すると仮定してよい。図式は
+$$
+\xymatrix{
+\coprod_{i = 1, \ldots, r} X' \ar[r] \ar[d] & Y \ar[d] \\
+X' \ar[r] & X
+}
+$$
+である。$A$ の剰余体に関する仮定から、この図式は点の台集合について
+ファイバー積図式となる（詳細は省略する）。$X$ は極端不連結で、$X'$ はハウスドルフ
+なので (Lemma \ref{proetale-lemma-profinite-goes-up})、連続写像 $X' \to X$ は連続切断
+$\sigma$ をもつ。このとき $\coprod_{i = 1, \ldots, r} \sigma(X) \to Y$ は全単射連続写像である。
+Topology, Lemma \ref{topology-lemma-bijective-map} により、これは同相写像である。
+以上で証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-finite-finitely-presented-over-w-contractible}
+$A \to B$ を有限かつ有限表示な環準同型とする。$A$ が w-可縮なら、$B$ も
+w-可縮である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-w-local-strictly-henselian-extremally-disconnected} の判定法を用いる。
+$X = \Spec(A)$、$Y = \Spec(B)$ とおき、誘導射を $f : Y \to X$ と書く。
+$f : Y \to X$ は有限射なので、$Y$ の閉点全体の集合 $Y_0$ は $X$ の閉点全体の集合
+$X_0$ の逆像である。$y \in Y$ を取り、その像を $x \in X$ とする。このとき $x$ は
+一意な閉点 $x_0 \in X$ へ特殊化する。$Y$ で閉な $y_i$ を用いて
+$f^{-1}(\{x_0\}) = \{y_1, \ldots, y_n\}$ と書く。$R = \mathcal{O}_{X, x_0}$ は強 Hensel で、
+$f$ は有限なので、$Y \times_{f, X} \Spec(R)$ は
+$\coprod_{i = 1, \ldots, n} \Spec(R_i)$ に等しい。ここで各 $R_i$ は $R$ 上有限な局所環で、
+その極大イデアルは $y_i$ に対応する。Algebra, Lemma
+\ref{algebra-lemma-characterize-henselian} の (10) を参照せよ。このとき $y$ はこれらの
+$\Spec(R_i)$ のちょうど一つに属するので、$y$ はちょうど一つの $y_i$ へ特殊化する。
+言い換えると、$Y$ の各点は $Y_0$ の一意な点へ特殊化する。したがって $Y$ は
+w-局所的である。$y \in Y_0$ の像を $x \in X_0$ とする。Algebra, Lemma
+\ref{algebra-lemma-finite-over-henselian} を
+$\mathcal{O}_{X, x} \to B \otimes_A \mathcal{O}_{X, x}$ に適用すると、
+$\mathcal{O}_{Y, y}$ は強 Hensel である。残るのは $Y_0$ が極端不連結であることを
+示すことである。このため、$X_0 \subset X$ に被約誘導スキーム構造を入れ、
+$X_0 \times_X Y \to X_0$ を考える。$X_0 \times_X Y$ の台位相空間は $Y_0$ と一致する。
+ここで Lemma \ref{proetale-lemma-finite-finitely-presented-over-extremally-disconnected} を適用すればよい。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-localization-w-contractible}
+$A$ を環とする。$Z \subset \Spec(A)$ を $Z = V(f_1, \ldots, f_r)$ の形の閉部分集合とする。
+$B = A_Z^\sim$ とおく。Lemma \ref{proetale-lemma-localization} を参照せよ。
+$A$ が w-可縮なら、$B$ も w-可縮である。
+\end{lemma}
+
+\begin{proof}
+$A_Z^\sim \to B$ を弱 \'etale かつ忠実平坦な環準同型とする。環準同型
+$$
+A \longrightarrow A_{f_1} \times \ldots \times A_{f_r} \times B
+$$
+を考える。これは忠実平坦かつ弱 \'etale である。$A$ が w-可縮なら、
+レトラクション $\sigma$ が存在する。射
+$$
+\Spec(A_Z^\sim) \to \Spec(A) \xrightarrow{\Spec(\sigma)}
+\coprod \Spec(A_{f_i}) \amalg \Spec(B)
+$$
+$Z \subset \Spec(A_Z^\sim)$ の各点は成分 $\Spec(B)$ へ写る。
+$\Spec(A_Z^\sim)$ の各点は $Z$ の点へ特殊化するので、求める射
+$\Spec(A_Z^\sim) \to \Spec(B)$ を得る。
+\end{proof}
+
+
+
+
+
+
+\section{pro-\'etale サイト}
+\label{proetale-section-proetale}
+
+\noindent
+本節では、さまざまな pro-\'etale サイトの実際の定義と構成、およびそれらの間の射だけを
+論じる。弱可縮対象の存在は Section \ref{proetale-section-weakly-contractible} で扱う。
+
+\medskip\noindent
+pro-\'etale 位相は fpqc 位相（Topologies の Section
+\ref{topologies-section-fpqc} を参照）といくぶん似ている。というのも、スキームの
+小 pro-\'etale サイト上の層のトポスは、基礎とするスキームの圏の選択に依存するからである。
+したがって、スキームの {\it その} pro-\'etale トポスというものについて語ることはできない。
+しかし、基礎とするスキームの圏を拡大しても層のコホモロジー群は変わらない。
+Section \ref{proetale-section-change-universe} を参照せよ。
+
+\medskip\noindent
+スキームの弱 \'etale 射を用いて pro-\'etale 被覆を定義する。More on Morphisms の
+Section \ref{more-morphisms-section-weakly-etale} を参照せよ。その理由は、一方では
+スキームの pro-\'etale 射という概念を定義するのがやや不自然であり、他方では
+Proposition \ref{proetale-proposition-weakly-etale} によって、次の定義でも同じ層が得られることが
+保証されるからである\footnote{正確には、ここで選ぶ被覆を用いて得られる
+pro-\'etale 位相は、Section \ref{proetale-section-V-versus-pro-h} で説明した一般手順を
+$\tau = \etale$ から始めて得られるものと同じである。}。
+
+\begin{definition}
+\label{proetale-definition-fpqc-covering}
+$T$ をスキームとする。スキームの射の族 $\{f_i : T_i \to T\}_{i \in I}$ が
+{\it $T$ の pro-\'etale 被覆}であるとは、各 $f_i$ が弱 \'etale であり、かつ任意の
+アフィン開集合 $U \subset T$ に対して、$n \geq 0$、写像
+$a : \{1, \ldots, n\} \to I$、およびアフィン開集合
+$V_j \subset T_{a(j)}$（$j = 1, \ldots, n$）が存在して
+$\bigcup_{j = 1}^n f_{a(j)}(V_j) = U$ となることをいう。
+\end{definition}
+
+\noindent
+もちろん、この条件から $T = \bigcup f_i(T_i)$ が従う。次の補題により
+pro-\'etale 被覆を判定でき、pro-\'etale 被覆に関する多くの補題を fpqc 被覆についての
+対応する結果へ帰着できる。
+
+\begin{lemma}
+\label{proetale-lemma-recognize-proetale-covering}
+$T$ をスキームとし、$\{f_i : T_i \to T\}_{i \in I}$ を終域 $T$ をもつ
+スキームの射の族とする。次の条件は同値である。
+\begin{enumerate}
+\item $\{f_i : T_i \to T\}_{i \in I}$ は pro-\'etale 被覆である。
+\item 各 $f_i$ は弱 \'etale で、$\{f_i : T_i \to T\}_{i \in I}$ は fpqc 被覆である。
+\item 各 $f_i$ は弱 \'etale であり、任意のアフィン開集合 $U \subset T$ に対して、
+ほとんど全てが空であるような準コンパクト開集合 $U_i \subset T_i$ が存在し、
+$U = \bigcup f_i(U_i)$ となる。
+\item 各 $f_i$ は弱 \'etale であり、アフィン開被覆
+$T = \bigcup_{\alpha \in A} U_\alpha$ が存在して、各 $\alpha \in A$ に対し
+$i_{\alpha, 1}, \ldots, i_{\alpha, n(\alpha)} \in I$ と準コンパクト開集合
+$U_{\alpha, j} \subset T_{i_{\alpha, j}}$ が存在し、
+$U_\alpha =
+\bigcup_{j = 1, \ldots, n(\alpha)} f_{i_{\alpha, j}}(U_{\alpha, j})$ となる。
+\end{enumerate}
+$T$ が準分離なら、これらはさらに次の条件とも同値である。
+\begin{enumerate}
+\item[(5)] 各 $f_i$ は弱 \'etale であり、任意の $t \in T$ に対して
+$i_1, \ldots, i_n \in I$ と準コンパクト開集合 $U_j \subset T_{i_j}$ が存在し、
+$\bigcup_{j = 1, \ldots, n} f_{i_j}(U_j)$ は $T$ における $t$ の
+（開とは限らない）近傍である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) の同値性は定義から直ちに従う。したがって補題は Topologies, Lemma
+\ref{topologies-lemma-recognize-fpqc-covering} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-etale-proetale}
+任意の \'etale 被覆および任意の Zariski 被覆は pro-\'etale 被覆である。
+\end{lemma}
+
+\begin{proof}
+これは fpqc 被覆についての対応する結果 (Topologies, Lemma
+\ref{topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc})、Lemma
+\ref{proetale-lemma-recognize-proetale-covering}、および \'etale 射が弱 \'etale 射であるという
+事実から従う。More on Morphisms, Lemma
+\ref{more-morphisms-lemma-when-weakly-etale} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-proetale}
+$T$ をスキームとする。
+\begin{enumerate}
+\item $T' \to T$ が同型なら、$\{T' \to T\}$ は $T$ の pro-\'etale 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が pro-\'etale 被覆であり、各 $i$ に対して
+$\{T_{ij} \to T_i\}_{j\in J_i}$ が pro-\'etale 被覆なら、
+$\{T_{ij} \to T\}_{i \in I, j\in J_i}$ は pro-\'etale 被覆である。
+\item $\{T_i \to T\}_{i\in I}$ が pro-\'etale 被覆で、$T' \to T$ がスキームの射なら、
+$\{T' \times_T T_i \to T'\}_{i\in I}$ は pro-\'etale 被覆である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは、弱 \'etale 射の合成と基底変換が弱 \'etale であるという事実
+(More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-composition-weakly-etale} および
+\ref{more-morphisms-lemma-base-change-weakly-etale})、Lemma
+\ref{proetale-lemma-recognize-proetale-covering}、ならびに fpqc 被覆についての対応する結果から従う。
+Topologies, Lemma \ref{topologies-lemma-fpqc} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-proetale-affine}
+$T$ をアフィンスキームとし、$\{T_i \to T\}_{i \in I}$ を $T$ の pro-\'etale 被覆とする。
+このとき、各 $U_j$ がアフィンスキームであるような、$\{T_i \to T\}_{i \in I}$ の細分
+$\{U_j \to T\}_{j = 1, \ldots, n}$ である pro-\'etale 被覆が存在する。さらに、各 $U_j$ を
+いずれかの $T_i$ のアフィン開部分として選べる。
+\end{lemma}
+
+\begin{proof}
+これは定義から直ちに従う。
+\end{proof}
+
+\noindent
+そこで、対応するアフィンの標準被覆を次のように定義する。
+
+\begin{definition}
+\label{proetale-definition-standard-proetale}
+$T$ をアフィンスキームとする。$T$ の {\it 標準 pro-\'etale 被覆}とは、
+各 $T_j$ がアフィンで、各 $f_i$ が弱 \'etale であり、
+$T = \bigcup f_i(T_i)$ となる族 $\{f_i : T_i \to T\}_{i = 1, \ldots, n}$ をいう。
+\end{definition}
+
+\noindent
+以下で用いる大 pro-\'etale サイトの構成には、Topologies, Section
+\ref{topologies-section-procedure} で与えた一般的な手順に従う。ただし、ある種の構成の
+大きさを収めるために少し大きな環が必要なので、その構成をわずかに修正する。
+
+\begin{definition}
+\label{proetale-definition-big-proetale-site}
+{\it 大 pro-\'etale サイト}とは、次のように構成される Sites, Definition
+\ref{sites-definition-site} の意味での任意のサイト $\Sch_\proetale$ をいう。
+\begin{enumerate}
+\item スキームの任意の集合 $S_0$ と、これらのスキームの間の pro-\'etale 被覆の
+任意の集合 $\text{Cov}_0$ を選ぶ。
+\item Sets, Equation (\ref{sets-equation-bound}) の関数 $Bound$ を
+$$
+Bound(\kappa) = \max\{\kappa^{2^{2^{2^\kappa}}}, \kappa^{\aleph_0}, \kappa^+\}.
+$$
+\item 集合 $S_0$ と関数 $Bound$ から始め、Sets, Lemma
+\ref{sets-lemma-construct-category} のように構成した任意の圏 $\Sch_\alpha$ を
+基礎圏として取る。
+\item 圏 $\Sch_\alpha$、pro-\'etale 被覆の類、および上で選んだ集合
+$\text{Cov}_0$ から始め、Sets, Lemma \ref{sets-lemma-coverings-site} のような
+被覆の任意の集合を選ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+大サイトの定義の動機と説明については、Topologies, Definition
+\ref{topologies-definition-big-zariski-site} に続く注釈を参照せよ。
+
+\medskip\noindent
+Lemma \ref{proetale-lemma-proetale-induced} で見るように、大 pro-\'etale サイト
+$\Sch_\proetale$ 上の位相は、ある意味で全スキームの圏上の pro-\'etale 位相から誘導される。
+
+\begin{definition}
+\label{proetale-definition-big-small-proetale}
+$S$ をスキームとし、$\Sch_\proetale$ を $S$ を含む大 pro-\'etale サイトとする。
+\begin{enumerate}
+\item $S$ の {\it 大 pro-\'etale サイト} $(\Sch/S)_\proetale$ とは、
+Sites, Section \ref{sites-section-localize} で導入したサイト $\Sch_\proetale/S$ をいう。
+\item $S$ の {\it 小 pro-\'etale サイト} $S_\proetale$ とは、$U \to S$ が弱 \'etale である
+ような $U/S$ を対象とする $(\Sch/S)_\proetale$ の充満部分圏をいう。
+$S_\proetale$ の被覆とは、$U \in \Ob(S_\proetale)$ であるような
+$(\Sch/S)_\proetale$ の任意の被覆 $\{U_i \to U\}$ をいう。
+\item $S$ の {\it 大アフィン pro-\'etale サイト} $(\textit{Aff}/S)_\proetale$ とは、
+アフィンな $U/S$ を対象とする $(\Sch/S)_\proetale$ の充満部分圏をいう。
+$(\textit{Aff}/S)_\proetale$ の被覆とは、標準 pro-\'etale 被覆であるような
+$(\Sch/S)_\proetale$ の任意の被覆 $\{U_i \to U\}$ をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+小 pro-\'etale サイトと大アフィン pro-\'etale サイトがサイトであることは、
+定義から完全には明らかでない。これを確認しよう。
+
+\begin{lemma}
+\label{proetale-lemma-verify-site-proetale}
+$S$ をスキームとし、$\Sch_\proetale$ を $S$ を含む大 pro-\'etale サイトとする。
+$S_\proetale$ と $(\textit{Aff}/S)_\proetale$ はいずれもサイトである。
+\end{lemma}
+
+\begin{proof}
+$S_\proetale$ がサイトであることを示そう。これは、終域を固定した射の族の集合が
+与えられた圏である。したがって Sites, Definition \ref{sites-definition-site} の
+性質 (1)、(2)、(3) を示せばよい。$(\Sch/S)_\proetale$ はサイトなので、
+$U \in \Ob(S_\proetale)$ であるような $(\Sch/S)_\proetale$ の任意の被覆
+$\{U_i \to U\}$ に対し、$U_i \in \Ob(S_\proetale)$ でもあることを示せば十分である。
+弱 \'etale 射の合成は弱 \'etale なので、これは定義から従う。
+
+\medskip\noindent
+同様に、$(\textit{Aff}/S)_\proetale$ がサイトであることを示すには、アフィンの標準
+pro-\'etale 被覆全体が Sites, Definition \ref{sites-definition-site} の性質 (1)、(2)、(3) を
+満たすことを示せば十分である。これは Lemma \ref{proetale-lemma-recognize-proetale-covering} と、
+標準 fpqc 被覆についての対応する結果 (Topologies, Lemma
+\ref{topologies-lemma-fpqc-affine-axioms}) から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-fibre-products-proetale}
+$S$ をスキームとし、$\Sch_\proetale$ を $S$ を含む大 pro-\'etale サイトとする。
+$\Sch$ を全スキームの圏とする。
+\begin{enumerate}
+\item 圏 $\Sch_\proetale$、$(\Sch/S)_\proetale$、$S_\proetale$、
+$(\textit{Aff}/S)_\proetale$ はファイバー積をもち、それは $\Sch$ における
+ファイバー積と一致する。
+\item 圏 $\Sch_\proetale$、$(\Sch/S)_\proetale$、$S_\proetale$ は等化子をもち、
+それは $\Sch$ における等化子と一致する。
+\item 圏 $(\Sch/S)_\proetale$ と $S_\proetale$ はともに終対象 $S/S$ をもつ。
+\item 圏 $\Sch_\proetale$ は $\Sch$ の終対象と一致する終対象、すなわち
+$\Spec(\mathbf{Z})$ をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+構成により、圏 $\Sch_\proetale$ は $\Spec(\mathbf{Z})$ を含み、積とファイバー積について
+閉じている。Sets, Lemma \ref{sets-lemma-what-is-in-it} を参照せよ。
+$U, V, W \in \Ob(\Sch_\proetale)$ であるようなスキームの射
+$U \to S$、$V \to U$、$W \to U$ があるとする。$\Sch_\proetale$ における
+ファイバー積 $V \times_U W$ は $\Sch$ におけるファイバー積であり、$S$ 上の
+全スキームの圏における $V/S$ と $W/S$ の $U/S$ 上のファイバー積でもある。
+したがって $(\Sch/S)_\proetale$ におけるファイバー積でもある。これで
+$(\Sch/S)_\proetale$ についての主張が示された。$U \to S$、$V \to U$、$W \to U$ が
+弱 \'etale なら $V \times_U W \to S$ も弱 \'etale である
+(More on Morphisms, Section \ref{more-morphisms-section-weakly-etale})。
+したがって $S_\proetale$ でもファイバー積を得る。$U, V, W$ がアフィンなら
+$V \times_U W$ もアフィンなので、$(\textit{Aff}/S)_\proetale$ でもファイバー積を得る。
+
+\medskip\noindent
+$a, b : U \to V$ を $\Sch_\proetale$ の二つの射とする。この場合、$a$ と $b$ の
+（スキームの圏における）等化子は
+$$
+V
+\times_{\Delta_{V/\Spec(\mathbf{Z})}, V \times_{\Spec(\mathbf{Z})} V, (a, b)}
+(U \times_{\Spec(\mathbf{Z})} U)
+$$
+であり、上で見たことから $\Sch_\proetale$ の対象である。したがって
+$\Sch_\proetale$ は等化子をもつ。$a$ と $b$ が $S$ 上の射なら、等化子
+（スキームの圏におけるもの）は
+$$
+V \times_{\Delta_{V/S}, V \times_S V, (a, b)} (U \times_S U)
+$$
+でも与えられるので、$(\Sch/S)_\proetale$ は等化子をもつ。さらに $U$ と $V$ が
+$S$ 上弱 \'etale なら、上の等化子は $S$ 上弱 \'etale なスキームのファイバー積として
+弱 \'etale である。したがって $S_\proetale$ は等化子をもつ。
+終対象に関する主張は明らかである。
+\end{proof}
+
+\noindent
+次に、大アフィン pro-\'etale サイトが大 pro-\'etale サイトと同じトポスを定めることを確認する。
+
+\begin{lemma}
+\label{proetale-lemma-affine-big-site-proetale}
+$S$ をスキームとし、$\Sch_\proetale$ を $S$ を含む大 pro-\'etale サイトとする。
+関手 $(\textit{Aff}/S)_\proetale \to (\Sch/S)_\proetale$ は特別余連続関手である。
+したがって、$\Sh((\textit{Aff}/S)_\proetale)$ から
+$\Sh((\Sch/S)_\proetale)$ へのトポスの同値を誘導する。
+\end{lemma}
+
+\begin{proof}
+特別余連続関手の概念は Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} で導入した。したがって Sites,
+Lemma \ref{sites-lemma-equivalence} の仮定 (1)--(5) を確認しなければならない。
+包含関手を $u : (\textit{Aff}/S)_\proetale \to (\Sch/S)_\proetale$ と書く。
+余連続であるとは、アフィンな $T$ に対し、$T/S$ の任意の pro-\'etale 被覆を
+$T$ の標準 pro-\'etale 被覆で細分できるということにほかならない。これは Lemma
+\ref{proetale-lemma-proetale-affine} の内容である。ゆえに (1) が成り立つ。標準 pro-\'etale 被覆は
+pro-\'etale 被覆なので、$u$ が連続であることも直ちに分かる。ゆえに (2) が成り立つ。
+(3) と (4) は $u$ が充満忠実であることから直ちに従う。最後に、任意のスキームが
+アフィン開被覆をもつことから条件 (5) が従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-put-in-T}
+$\Sch_\proetale$ を大 pro-\'etale サイトとし、$f : T \to S$ を
+$\Sch_\proetale$ の射とする。関手 $T_\proetale \to (\Sch/S)_\proetale$ は余連続であり、
+トポスの射
+$$
+i_f :
+\Sh(T_\proetale)
+\longrightarrow
+\Sh((\Sch/S)_\proetale)
+$$
+を誘導する。$(\Sch/S)_\proetale$ 上の層 $\mathcal{G}$ に対して
+$(i_f^{-1}\mathcal{G})(U/T) = \mathcal{G}(U/S)$ である。関手 $i_f^{-1}$ はさらに、
+ファイバー積および等化子と可換な左随伴 $i_{f, !}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+関手を $u : T_\proetale \to (\Sch/S)_\proetale$ と書く。すなわち、
+$T_\proetale$ の対象に対応する弱 \'etale 射 $j : U \to T$ に対して
+$u(U \to T) = (f \circ j : U \to S)$ とおく。この関手はファイバー積と可換である。
+Lemma \ref{proetale-lemma-fibre-products-proetale} を参照せよ。さらに Lemma
+\ref{proetale-lemma-fibre-products-proetale} により、$T_\proetale$ は等化子をもち、$u$ は
+それらと可換である。これが余連続であることは
+明らかである。また、$u$ は被覆を被覆へ写し、ファイバー積と可換なので連続でもある。
+したがって補題は Sites, Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-at-the-bottom}
+$S$ をスキームとし、$\Sch_\proetale$ を $S$ を含む大 pro-\'etale サイトとする。
+包含関手 $S_\proetale \to (\Sch/S)_\proetale$ は Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。したがってサイトの射
+$$
+\pi_S : (\Sch/S)_\proetale \longrightarrow S_\proetale
+$$
+およびトポスの射
+$$
+i_S : \Sh(S_\proetale) \longrightarrow \Sh((\Sch/S)_\proetale)
+$$
+を誘導し、$\pi_S \circ i_S = \text{id}$ となる。さらに、$i_S = i_{\text{id}_S}$ であり、
+ここで $i_{\text{id}_S}$ は Lemma \ref{proetale-lemma-put-in-T} のものとする。特に関手
+$i_S^{-1} = \pi_{S, *}$ は規則
+$i_S^{-1}(\mathcal{G})(U/S) = \mathcal{G}(U/S)$ により記述される。
+\end{lemma}
+
+\begin{proof}
+この場合、関手 $u : S_\proetale \to (\Sch/S)_\proetale$ は、上の Lemma
+\ref{proetale-lemma-put-in-T} の証明で見た性質に加えて充満忠実であり、終対象を終対象へ写す。
+補題は Sites, Lemma \ref{sites-lemma-bigger-site} から従う。
+\end{proof}
+
+\begin{definition}
+\label{proetale-definition-restriction-small-proetale}
+Lemma \ref{proetale-lemma-at-the-bottom} の状況で、関手 $i_S^{-1} = \pi_{S, *}$ はしばしば
+{\it 小 pro-\'etale サイトへの制限}と呼ばれる。大 pro-\'etale サイト上の層
+$\mathcal{F}$ に対し、この制限を $\mathcal{F}|_{S_\proetale}$ と書く。
+\end{definition}
+
+\noindent
+この記法のもとで、大サイト上の層 $\mathcal{F}$ と大サイト上の層
+$\mathcal{G}$ に対して
+\begin{align*}
+\Mor_{\Sh(S_\proetale)}(\mathcal{F}|_{S_\proetale}, \mathcal{G})
+& =
+\Mor_{\Sh((\Sch/S)_\proetale)}(\mathcal{F},
+i_{S, *}\mathcal{G}) \\
+\Mor_{\Sh(S_\proetale)}(\mathcal{G}, \mathcal{F}|_{S_\proetale})
+& =
+\Mor_{\Sh((\Sch/S)_\proetale)}(\pi_S^{-1}\mathcal{G}, \mathcal{F})
+\end{align*}
+が成り立つ。さらに $(i_{S, *}\mathcal{G})|_{S_\proetale} = \mathcal{G}$ および
+$(\pi_S^{-1}\mathcal{G})|_{S_\proetale} = \mathcal{G}$ が成り立つ。
+
+\begin{lemma}
+\label{proetale-lemma-morphism-big}
+$\Sch_\proetale$ を大 pro-\'etale サイトとし、$f : T \to S$ を
+$\Sch_\proetale$ の射とする。関手
+$$
+u : (\Sch/T)_\proetale \longrightarrow (\Sch/S)_\proetale, \quad
+V/T \longmapsto V/S
+$$
+は余連続であり、連続な右随伴
+$$
+v : (\Sch/S)_\proetale \longrightarrow (\Sch/T)_\proetale, \quad
+(U \to S) \longmapsto (U \times_S T \to T).
+$$
+をもつ。これらは同じトポスの射
+$$
+f_{big} :
+\Sh((\Sch/T)_\proetale)
+\longrightarrow
+\Sh((\Sch/S)_\proetale)
+$$
+を誘導する。$f_{big}^{-1}(\mathcal{G})(U/T) = \mathcal{G}(U/S)$ および
+$f_{big, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ である。
+また $f_{big}^{-1}$ は、ファイバー積および等化子と可換な左随伴 $f_{big!}$ をもつ。
+\end{lemma}
+
+\begin{proof}
+関手 $u$ は余連続かつ連続であり、ファイバー積および等化子と可換である
+（詳細は省略する。Lemma \ref{proetale-lemma-put-in-T} の証明と比較せよ）。したがって Sites,
+Lemmas \ref{sites-lemma-when-shriek} および
+\ref{sites-lemma-preserve-equalizers} を適用でき、$f_{big}^{-1}$ の公式と
+$f_{big!}$ の存在を得る。さらに、$U/T$ と $V/S$ が与えられたとき
+$\Mor_S(u(U), V) = \Mor_T(U, V \times_S T)$ となるので、関手 $v$ は右随伴である。
+ゆえに Sites, Lemmas \ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} を適用し、$f_{big, *}$ の公式を得る。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-morphism-big-small}
+$\Sch_\proetale$ を大 pro-\'etale サイトとし、$f : T \to S$ を
+$\Sch_\proetale$ の射とする。
+\begin{enumerate}
+\item Lemma \ref{proetale-lemma-put-in-T} の $i_f$ と Lemma
+\ref{proetale-lemma-at-the-bottom} の $i_T$ に対し、$i_f = f_{big} \circ i_T$ である。
+\item 関手 $S_\proetale \to T_\proetale$、
+$(U \to S) \mapsto (U \times_S T \to T)$ は連続であり、トポスの射
+$$
+f_{small} : \Sh(T_\proetale) \longrightarrow \Sh(S_\proetale).
+$$
+を誘導する。$f_{small, *}(\mathcal{F})(U/S) = \mathcal{F}(U \times_S T/T)$ である。
+\item サイトの射の可換図式
+$$
+\xymatrix{
+T_\proetale \ar[d]_{f_{small}} &
+(\Sch/T)_\proetale \ar[d]^{f_{big}} \ar[l]^{\pi_T}\\
+S_\proetale &
+(\Sch/S)_\proetale \ar[l]_{\pi_S}
+}
+$$
+があり、トポスの射として $f_{small} \circ \pi_T = \pi_S \circ f_{big}$ となる。
+\item $f_{small} = \pi_S \circ f_{big} \circ i_T = \pi_S \circ i_f$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+等式 $i_f = f_{big} \circ i_T$ は、上の関手の記述から明らかな等式
+$i_f^{-1} = i_T^{-1} \circ f_{big}^{-1}$ から従う。これで (1) が示された。
+
+\medskip\noindent
+関手 $u : S_\proetale \to T_\proetale$、
+$u(U \to S) = (U \times_S T \to T)$ は被覆を被覆へ写し、ファイバー積と可換である。
+Lemmas \ref{proetale-lemma-proetale} および \ref{proetale-lemma-fibre-products-proetale} を参照せよ。
+さらに $S_\proetale$ と $T_\proetale$ はともに終対象、すなわち $S/S$ と $T/T$ をもち、
+$u(S/S) = T/T$ である。したがって Sites, Proposition
+\ref{sites-proposition-get-morphism} により、関手 $u$ はサイトの射
+$T_\proetale \to S_\proetale$ に対応する。これはさらにトポスの射を与える。
+Sites, Lemma \ref{sites-lemma-morphism-sites-topoi} を参照せよ。順像の記述は
+これらの参照から明らかである。
+
+\medskip\noindent
+(3) は、$\pi_S$ と $\pi_T$ が包含関手によって、$f_{small}$ と $f_{big}$ が
+基底変換関手 $U \mapsto U \times_S T$ によって与えられることから従う。
+
+\medskip\noindent
+(4) は (3) の前に $i_T$ を合成することで従う。
+\end{proof}
+
+\noindent
+この補題の状況で Definition \ref{proetale-definition-restriction-small-proetale} の用語を使うと、
+$T$ の大 pro-\'etale サイト上の層 $\mathcal{F}$ に対して
+\begin{equation}
+\label{proetale-equation-compare-big-small}
+(f_{big, *}\mathcal{F})|_{S_\proetale} =
+f_{small, *}(\mathcal{F}|_{T_\proetale}),
+\end{equation}
+が成り立つ。この等式は補題のサイトの図式の可換性から明らかである。実際、$T$、
+それぞれ $S$ の小 pro-\'etale サイトへの制限は $\pi_{T, *}$、それぞれ
+$\pi_{S, *}$ によって与えられる。逆像と制限に関する同様の公式は偽である。
+
+\begin{lemma}
+\label{proetale-lemma-composition-proetale}
+$\Sch_\proetale$ のスキーム $X$、$Y$、$Y$ と射
+$f : X \to Y$、$g : Y \to Z$ が与えられると、
+$g_{big} \circ f_{big} = (g \circ f)_{big}$ および
+$g_{small} \circ f_{small} = (g \circ f)_{small}$ である。
+\end{lemma}
+
+\begin{proof}
+大サイト上の関手については、Lemma \ref{proetale-lemma-morphism-big} における順像と逆像の
+簡単な記述から従う。小サイト上の関手については、Lemma
+\ref{proetale-lemma-morphism-big-small} における順像関手の記述から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-morphism-big-small-cartesian-diagram}
+$\Sch_\proetale$ を大 pro-\'etale サイトとする。$\Sch_\proetale$ におけるカルテシアン図式
+$$
+\xymatrix{
+T' \ar[r]_{g'} \ar[d]_{f'} & T \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+を考える。このとき
+$i_g^{-1} \circ f_{big, *} = f'_{small, *} \circ (i_{g'})^{-1}$ および
+$g_{big}^{-1} \circ f_{big, *} = f'_{big, *} \circ (g'_{big})^{-1}$ である。
+\end{lemma}
+
+\begin{proof}
+図式はカルテシアンなので、$U'/S'$ に対して
+$U' \times_{S'} T' = U' \times_S T$ である。したがって
+$i_g^{-1} \circ f_{big, *}$ と $f'_{small, *} \circ (i_{g'})^{-1}$ はともに、
+$(\Sch/T)_\proetale$ 上の層 $\mathcal{F}$ を $S'_\proetale$ 上の層
+$U' \mapsto \mathcal{F}(U' \times_{S'} T')$ へ写す (Lemmas
+\ref{proetale-lemma-put-in-T} および \ref{proetale-lemma-morphism-big} を用いよ)。第二の等式も同様に
+証明でき、また非常に一般的な Sites, Lemma
+\ref{sites-lemma-localize-morphism} から導くこともできる。
+\end{proof}
+
+\noindent
+$S$ の大 pro-\'etale サイト上の層は、$S$ 上のスキームの小 pro-\'etale サイト上の
+層の集まりと考えられる。
+
+\begin{lemma}
+\label{proetale-lemma-characterize-sheaf-big}
+$S$ を大 pro-\'etale サイト $\Sch_\proetale$ に含まれるスキームとする。
+大 pro-\'etale サイト $(\Sch/S)_\proetale$ 上の層 $\mathcal{F}$ は、次のデータによって
+与えられる。
+\begin{enumerate}
+\item 各 $T/S \in \Ob((\Sch/S)_\proetale)$ に対し、$T_\proetale$ 上の層
+$\mathcal{F}_T$。
+\item $(\Sch/S)_\proetale$ の各 $f : T' \to T$ に対し、写像
+$c_f : f_{small}^{-1}\mathcal{F}_T \to \mathcal{F}_{T'}$。
+\end{enumerate}
+これらのデータは次の条件を満たす。
+\begin{enumerate}
+\item[(a)] $(\Sch/S)_\proetale$ の任意の $f : T' \to T$ と
+$g : T'' \to T'$ に対し、合成 $c_g \circ g_{small}^{-1}c_f$ は
+$c_{f \circ g}$ に等しい。
+\item[(b)] $(\Sch/S)_\proetale$ の $f : T' \to T$ が弱 \'etale なら、
+$c_f$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Topologies, Lemma \ref{topologies-lemma-characterize-sheaf-big-etale} の証明と同一である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-alternative}
+$S$ をスキームとする。$S_{affine, \proetale}$ を、アフィン対象からなる
+$S_\proetale$ の充満部分圏とする。$S_{affine, \proetale}$ の被覆は標準
+pro-\'etale 被覆とする。Definition \ref{proetale-definition-standard-proetale} を参照せよ。
+このとき制限
+$$
+\mathcal{F} \longmapsto \mathcal{F}|_{S_{affine, \etale}}
+$$
+はトポスの同値 $\Sh(S_\proetale) \cong \Sh(S_{affine, \proetale})$ を定める。
+\end{lemma}
+
+\begin{proof}
+これは定義から直接示すことができ、よい演習である。また、包含関手
+$S_{affine, \proetale} \to S_\proetale$ が特別余連続関手であることを確認すれば、
+Sites, Lemma \ref{sites-lemma-equivalence} からも直ちに従う
+(Sites, Definition \ref{sites-definition-special-cocontinuous-functor} を参照)。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-affine-alternative}
+$S$ をアフィンスキームとする。$S_{app}$ を、
+$\mathcal{O}(S) \to \mathcal{O}(U)$ が ind-\'etale であるようなアフィン対象 $U$ からなる
+$S_\proetale$ の充満部分圏とする。$S_{app}$ の被覆は標準 pro-\'etale 被覆とする。
+Definition \ref{proetale-definition-standard-proetale} を参照せよ。このとき制限
+$$
+\mathcal{F} \longmapsto \mathcal{F}|_{S_{app}}
+$$
+はトポスの同値 $\Sh(S_\proetale) \cong \Sh(S_{app})$ を定める。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-alternative} により、$S_\proetale$ を
+$S_{affine, \proetale}$ で置き換えてよい。包含関手
+$S_{app} \to S_{affine, \proetale}$ が特別余連続関手であることを確認すれば、補題は
+Sites, Lemma \ref{sites-lemma-equivalence} から従う。Sites, Definition
+\ref{sites-definition-special-cocontinuous-functor} を参照せよ。Sites, Lemma
+\ref{sites-lemma-equivalence} の条件は、定義と次の事実から直ちに従う。
+(a) $S_{affine, \proetale}$ の任意の対象 $U$ は、$V$ が $X$ 上 ind-\'etale であるような
+被覆 $\{V \to U\}$ をもつ (Proposition \ref{proetale-proposition-weakly-etale})。
+(b) 関手 $u$ は充満忠実である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-proetale-subcanonical}
+$S$ をスキームとする。pro-\'etale サイト $\Sch_\proetale$、$S_\proetale$、
+$(\Sch/S)_\proetale$、$S_{affine, \proetale}$、$(\textit{Aff}/S)_\proetale$ の
+各位相は準標準的である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-recognize-proetale-covering} と Descent, Lemma
+\ref{descent-lemma-fpqc-universal-effective-epimorphisms} を組み合わせればよい。
+\end{proof}
+
+
+
+
+
+\section{弱可縮対象}
+\label{proetale-section-weakly-contractible}
+
+\noindent
+本節では、ここで用いる pro-\'etale サイトが多くの弱可縮対象を含むという重要な事実を
+証明する。実際、Lemma \ref{proetale-lemma-get-many-weakly-contractible} の証明こそが、
+Definition \ref{proetale-definition-big-proetale-site} の関数 $Bound$ があの形をしている理由である
+（ただし、集合論的な問題を無視する読者にとって、この情報に実質的な内容はない）。
+
+\noindent
+まず、w-可縮環の概念を pro-\'etale 被覆によって表す。
+
+\begin{lemma}
+\label{proetale-lemma-w-contractible-proetale-cover}
+$T = \Spec(A)$ をアフィンスキームとする。次の条件は同値である。
+\begin{enumerate}
+\item $A$ は w-可縮である。
+\item $T$ の任意の pro-\'etale 被覆は、$T = \coprod_{i = 1, \ldots, n} U_i$ の形の
+Zariski 被覆で細分できる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$A$ が w-可縮であると仮定する。Lemma \ref{proetale-lemma-proetale-affine} により、任意の標準
+pro-\'etale 被覆 $\{f_i : T_i \to T\}_{i = 1, \ldots, n}$ を $T$ の Zariski 被覆で
+細分できることを示せば十分である。射 $\coprod T_i \to T$ はアフィンスキームの
+全射弱 \'etale 射である。したがって Definition \ref{proetale-definition-w-contractible} により、
+$T$ 上の射 $\sigma : T \to \coprod T_i$ が存在する。このとき Zariski 被覆
+$T = \coprod \sigma^{-1}(T_i)$ は $\{f_i : T_i \to T\}$ を細分する。
+
+\medskip\noindent
+逆に (2) を仮定する。$A \to B$ が忠実平坦かつ弱 \'etale なら、
+$\{\Spec(B) \to T\}$ は pro-\'etale 被覆である。したがって Zariski 被覆
+$T = \coprod U_i$ と $T$ 上の射 $U_i \to \Spec(B)$ が存在する。
+$T = \coprod U_i$ なので $T \to \Spec(B)$、すなわち $A$-代数準同型 $B \to A$ を得る。
+これは $A$ が w-可縮であることを意味する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-w-contractible-is-weakly-contractible}
+$\Sch_\proetale$ を Definition \ref{proetale-definition-big-proetale-site} のような
+大 pro-\'etale サイトとし、$T = \Spec(A)$ を $\Sch_\proetale$ のアフィン対象とする。
+次の条件は同値である。
+\begin{enumerate}
+\item $A$ は w-可縮である。
+\item $T$ は $\Sch_\proetale$ の弱可縮対象である
+(Sites, Definition \ref{sites-definition-w-contractible})。
+\item $T$ の任意の pro-\'etale 被覆は、$T = \coprod_{i = 1, \ldots, n} U_i$ の形の
+Zariski 被覆で細分できる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (3) の同値性は Lemma \ref{proetale-lemma-w-contractible-proetale-cover} で示した。
+
+\medskip\noindent
+(3) を仮定し、$\mathcal{F} \to \mathcal{G}$ を $\Sch_\proetale$ 上の層の全射とする。
+$s \in \mathcal{G}(T)$ を取る。(2) を示すため、$s$ が
+$\mathcal{F}(T) \to \mathcal{G}(T)$ の像に属することを示す。$s$ が $T_i$ 上で
+$\mathcal{F}$ の切断へ持ち上がるような $\Sch_\proetale$ の被覆 $\{T_i \to T\}$ を取れる
+(Sites, Definition \ref{sites-definition-sheaves-injective-surjective})。(3) により、開閉部分集合による
+有限被覆 $T = \coprod_{j = 1, \ldots, m} U_j$ があり、$s|_{U_j}$ へ写る
+$t_j \in \mathcal{F}(U_j)$ があると仮定してよい。Zariski 被覆は
+$\Sch_\proetale$ における被覆なので (Lemma \ref{proetale-lemma-etale-proetale})、
+$\mathcal{F}(T) = \prod \mathcal{F}(U_j)$ である。したがって
+$t = (t_1, \ldots, t_m) \in \mathcal{F}(T)$ は $s$ へ写る切断である。
+
+\medskip\noindent
+(2) を仮定する。$A \to D$ を Proposition \ref{proetale-proposition-find-w-contractible} のように
+取る。このとき $\{V \to T\}$ は $\Sch_\proetale$ の被覆である。（$V = \Spec(D)$ が
+$\Sch_\proetale$ の対象であることに注意せよ。これは Remark
+\ref{proetale-remark-size-w-contractible}、Definition \ref{proetale-definition-big-proetale-site} における
+関数 $Bound$ の選択、および Sets, Lemma \ref{sets-lemma-bound-size} における
+アフィンスキームの大きさの計算から従う。）$\Sch_\proetale$ の位相は準標準的なので
+(Lemma \ref{proetale-lemma-proetale-subcanonical})、$h_V \to h_T$ は層の全射である
+(Sites, Lemma \ref{sites-lemma-covering-surjective-after-sheafification})。
+$T$ は弱可縮と仮定したので、$h_T(T)$ における像が $\text{id}_T$ となる元
+$f \in h_V(T) = \Mor(T, V)$ が存在する。したがって $A \to D$ はレトラクション
+$\sigma : D \to A$ をもつ。ここで $A \to B$ が忠実平坦かつ弱 \'etale なら、
+$D \to D \otimes_A B$ も同じ性質をもつ。したがってレトラクション
+$D \otimes_A B \to D$ があり、これと $\sigma$ を合わせると $A \to B$ の
+レトラクション $B \to D \otimes_A B \to D \to A$ を得る。
+ゆえに $A$ は w-可縮であり、(1) が成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-get-many-weakly-contractible}
+$\Sch_\proetale$ を Definition \ref{proetale-definition-big-proetale-site} のような
+大 pro-\'etale サイトとする。$\Sch_\proetale$ の任意の対象 $T$ に対し、
+$\Sch_\proetale$ における被覆 $\{T_i \to T\}$ で、各 $T_i$ がアフィンかつ
+w-可縮環のスペクトルであるものが存在する。特に $T_i$ は $\Sch_\proetale$ で
+弱可縮である。
+\end{lemma}
+
+\begin{proof}
+集合論的な問題を気にしない読者にとって、この補題は Lemma
+\ref{proetale-lemma-w-contractible-is-weakly-contractible} と Proposition
+\ref{proetale-proposition-find-w-contractible} から自明に従う。詳細を述べよう。
+アフィン開被覆 $T = \bigcup U_i$ を選び、$U_i = \Spec(A_i)$ と書く。Proposition
+\ref{proetale-proposition-find-w-contractible} のように、$D_i$ が w-可縮となる忠実平坦
+ind-\'etale 環準同型 $A_i \to D_i$ を選ぶ。射の族 $\{\Spec(D_i) \to T\}$ は
+pro-\'etale 被覆である。$\Spec(D_i)$ が $\Sch_\proetale$ のある対象 $T_i$ と同型であることを
+示せれば、Definition \ref{proetale-definition-big-proetale-site} における $\Sch_\proetale$ の構成、
+より正確には最後の段階での Sets, Lemma \ref{sets-lemma-coverings-site} の適用により、
+$\{T_i \to T\}$ は $\Sch_\proetale$ の被覆と組合せ論的に同値になる。
+$\Spec(D_i)$ が $\Sch_\proetale$ の対象と同型であることを示すには、Definition
+\ref{proetale-definition-big-proetale-site} における $\Sch_\proetale$ の構成、より正確には段階 (3) での
+Sets, Lemma \ref{sets-lemma-construct-category} の適用により、
+$|D_i| \leq Bound(\text{size}(T))$ を示せば十分である。Sets, Lemmas
+\ref{sets-lemma-bound-affine} および \ref{sets-lemma-bound-finite-type} により
+$|A_i| \leq \text{size}(U_i) \leq \text{size}(T)$ なので、Remark
+\ref{proetale-remark-size-w-contractible} により、$\kappa = \text{size}(T)$ とおけば
+$|D_i| \leq \kappa^{2^{2^{2^\kappa}}}$ を得る。したがって Definition
+\ref{proetale-definition-big-proetale-site} における関数 $Bound$ の選択により結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-proetale-enough-w-contractible}
+$S$ をスキームとする。pro-\'etale サイト $S_\proetale$、$(\Sch/S)_\proetale$、
+$S_{affine, \proetale}$、$(\textit{Aff}/S)_\proetale$、および $S$ がアフィンなら
+$S_{app}$ は、（アフィンな）準コンパクト弱可縮対象を十分にもつ。Sites, Definition
+\ref{sites-definition-w-contractible} を参照せよ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-get-many-weakly-contractible} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-weakly-contractible-cover}
+$S$ をスキームとする。pro-\'etale サイト $\Sch_\proetale$、$S_\proetale$、
+$(\Sch/S)_\proetale$ は次の性質をもつ。任意の対象 $U$ に対し、$V$ が弱可縮対象である
+ような被覆 $\{V \to U\}$ が存在する。$U$ が準コンパクトなら、$V$ をアフィンかつ
+弱可縮に選べる。
+\end{lemma}
+
+\begin{proof}
+$V = \coprod_{j \in J} V_j$ を $(\Sch/S)_\proetale$ の対象で、弱可縮対象 $V_j$ の
+非交和であるものとする。非交和分解は pro-\'etale 被覆なので、任意の pro-\'etale 層
+$\mathcal{F}$ に対して $\mathcal{F}(V) = \prod_{j \in J} \mathcal{F}(V_j)$ である。
+$\mathcal{F} \to \mathcal{G}$ を集合の層の全射とする。$V_j$ は弱可縮なので、写像
+$\mathcal{F}(V_j) \to \mathcal{G}(V_j)$ は全射である。Sites, Definition
+\ref{sites-definition-w-contractible} を参照せよ。したがって
+$\mathcal{F}(V) \to \mathcal{G}(V)$ は集合の全射の積として全射であり、$V$ は
+弱可縮である。
+
+\medskip\noindent
+Lemma \ref{proetale-lemma-get-many-weakly-contractible} のように、各 $U_i$ がアフィンかつ
+弱可縮である被覆 $\{U_i \to U\}_{i \in I}$ を選ぶ。
+$V = \coprod_{i \in I} U_i$ とおく（ここには集合論的な問題があり、後で扱う）。
+このとき $\{V \to U\}$ は弱可縮対象による求める pro-\'etale 被覆である
+（被覆であることの確認には Lemma \ref{proetale-lemma-recognize-proetale-covering} を用いよ）。
+$U$ が準コンパクトなら、Lemma \ref{proetale-lemma-recognize-proetale-covering} から直ちに、
+$\{U_i \to U\}_{i \in I'}$ がなお被覆となるような有限部分集合 $I' \subset I$ を選べる。
+このとき $\{\coprod_{i \in I'} U_i \to U\}$ は、アフィン弱可縮対象による求める被覆である。
+
+\medskip\noindent
+この段落では集合論的問題を扱うが、読者には読み飛ばすことを強く勧める。非交和が
+我々の部分宇宙に属することを知るには、添字集合 $I$ の濃度を評価する必要がある。
+Lemma \ref{proetale-lemma-get-many-weakly-contractible} の証明における被覆
+$\{U_i \to U\}_{i \in I}$ の構成から、$|I| \leq \text{size}(U)$ が直ちに分かる。
+ここでスキームの大きさは Sets, Section \ref{sets-section-categories-schemes} で定義した
+ものである。さらに各 $i$ に対し、
+$\text{size}(U_i) \leq Bound(\text{size}(U))$ である。これは Lemma
+\ref{proetale-lemma-get-many-weakly-contractible} の証明における
+$\Gamma(U_i, \mathcal{O}_{U_i})$ の濃度の評価と Sets, Lemma
+\ref{sets-lemma-bound-affine} から従う。したがって Sets, Lemma
+\ref{sets-lemma-bound-size} により
+$\text{size}(\coprod_{i \in I} U_i)) \leq Bound(\text{size}(U))$ である。
+ゆえに Sets, Lemma \ref{sets-lemma-construct-category} による大 pro-\'etale サイトの構成から、
+$\coprod_{i \in I} U_i$ は我々のサイトの対象と同型である。以上で証明が完了する。
+\end{proof}
+
+
+
+
+
+
+\section{弱可縮超被覆}
+\label{proetale-section-hypercovering}
+
+\noindent
+Section \ref{proetale-section-weakly-contractible} の結果から、弱可縮対象からなる超被覆の存在が従う。
+
+\begin{lemma}
+\label{proetale-lemma-w-contractible-hypercovering}
+$X$ をスキームとする。
+\begin{enumerate}
+\item $X_\proetale$ の任意の対象 $U$ に対し、$X_\proetale$ における $U$ の超被覆
+$K$ で、各項 $K_n$ が $U$ を被覆する $X_\proetale$ の一つの弱可縮対象からなるものが
+存在する。
+\item $X_\proetale$ の任意の準コンパクト準分離対象 $U$ に対し、$X_\proetale$ における
+$U$ の超被覆 $K$ で、各項 $K_n$ が $U$ を被覆する $X_\proetale$ の一つのアフィン
+弱可縮対象からなるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{B} \subset \Ob(X_\proetale)$ を $X_\proetale$ の弱可縮対象全体の集合とする。
+Lemma \ref{proetale-lemma-weakly-contractible-cover} により、$X_\proetale$ の任意の対象 $T$ は、
+$I$ が有限で $T_i \in \mathcal{B}$ となる被覆 $\{T_i \to T\}_{i \in I}$ をもつ。
+Hypercoverings, Lemma \ref{hypercovering-lemma-w-contractible} により、
+$I_n$ が有限で $U_{n, i}$ が弱可縮となるような
+$K_n = \{U_{n, i}\}_{i \in I_n}$ をもつ $U$ の超被覆 $K$ を得る。
+ここで $K$ を、次数 $n$ において $\{U_n\}$ で与えられ、
+$U_n = \coprod_{i \in I_n} U_{n, i}$ となる $U$ の超被覆で置き換えられる。
+これは Hypercoverings, Remark
+\ref{hypercovering-remark-take-unions-hypercovering-X} により許される。
+
+\medskip\noindent
+$X_{qcqs, \proetale} \subset X_\proetale$ を準コンパクト準分離対象からなる充満部分圏とする。
+$X_{qcqs, \proetale}$ の被覆は有限 pro-\'etale 被覆とする。このとき
+$X_{qcqs, \proetale}$ はサイトであり、ファイバー積をもち、包含関手
+$X_{qcqs, \proetale} \to X_\proetale$ は連続でファイバー積と可換である。特に $K$ が
+$X_{qcqs, \proetale}$ の対象 $U$ の超被覆なら、Hypercoverings, Lemma
+\ref{hypercovering-lemma-hypercovering-continuous-functor} により、$K$ は
+$X_\proetale$ においても $U$ の超被覆である。
+$\mathcal{B} \subset \Ob(X_{qcqs, \proetale})$ をアフィン弱可縮対象全体の集合とする。
+Lemma \ref{proetale-lemma-get-many-weakly-contractible} と、アフィンの有限和がアフィンであるという
+事実により、$X_{qcqs, \proetale}$ の任意の対象 $U$ に対し、$V \in \mathcal{B}$ となる
+$X_{qcqs, \proetale}$ の被覆 $\{V \to U\}$ が存在する。Hypercoverings, Lemma
+\ref{hypercovering-lemma-w-contractible} により、$I_n$ が有限で $U_{n, i}$ がアフィンかつ
+弱可縮となるような $K_n = \{U_{n, i}\}_{i \in I_n}$ をもつ $U$ の超被覆 $K$ を得る。
+ここで $K$ を、次数 $n$ において $\{U_n\}$ で与えられ、
+$U_n = \coprod_{i \in I_n} U_{n, i}$ となる $U$ の超被覆で置き換えられる。
+これは Hypercoverings, Remark
+\ref{hypercovering-remark-take-unions-hypercovering-X} により許される。
+\end{proof}
+
+\noindent
+次の補題では、サイトにおける超被覆 $K$ に付随する {\v C}ech 複体
+$s(\mathcal{F}(K))$ を用いる。Hypercoverings, Section
+\ref{hypercovering-section-hyper-cech} を参照せよ。$K$ が $U$ の超被覆で
+$K_n = \{U_n \to U\}$ なら、{\v C}ech 複体は
+$$
+s(\mathcal{F}(K)) =
+\left(
+\mathcal{F}(U_0) \to \mathcal{F}(U_1) \to \mathcal{F}(U_2) \to \ldots
+\right)
+$$
+の形であり、$s(\mathcal{F}(U_n))$ はコホモロジー次数 $n$ に置かれる。
+
+\begin{lemma}
+\label{proetale-lemma-compute-cohomology}
+$X$ をスキームとする。$E \in D^+(X_\proetale)$ がアーベル層の下に有界な複体
+$\mathcal{E}^\bullet$ で表されているとする。$K$ を
+$U \in \Ob(X_\proetale)$ の超被覆で、$K_n = \{U_n \to U\}$ を満たし、$U_n$ が
+$X_\proetale$ の弱可縮対象であるものとする。このとき
+$$
+R\Gamma(U, E) = \text{Tot}(s(\mathcal{E}^\bullet(K)))
+$$
+が $D(\textit{Ab})$ で成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{E}$ が $X_\proetale$ 上のアーベル層なら、Hypercoverings, Lemma
+\ref{hypercovering-lemma-cech-spectral-sequence} のスペクトル系列から
+$$
+R\Gamma(X_\proetale, \mathcal{E}) = s(\mathcal{E}(K))
+$$
+が従う。実際、$U_n$ 上の任意の層の高次コホモロジー群は消える。Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-w-contractible} を参照せよ。
+
+\medskip\noindent
+$\mathcal{E}^\bullet$ が下に有界なら、単射分解
+$\mathcal{E}^\bullet \to \mathcal{I}^\bullet$ を選び、複体の写像
+$$
+\text{Tot}(s(\mathcal{E}^\bullet(K)))
+\longrightarrow
+\text{Tot}(s(\mathcal{I}^\bullet(K)))
+$$
+を考える。$U_n$ 上の切断を取ることは完全なので、各 $n$ に対して写像
+$\mathcal{E}^\bullet(U_n) \to \mathcal{I}^\bullet(U_n)$ は擬同型である。したがって表示した
+写像は Homology, Lemma \ref{homology-lemma-first-quadrant-ss} の一方のスペクトル系列により
+擬同型である。第一段落の結果を用いると、各 $p$ に対し、複体
+$s(\mathcal{I}^p(K))$ は次数 $n > 0$ で非輪体的であり、次数 $0$ で
+$\mathcal{I}^p(U)$ を計算する。したがって Homology, Lemma
+\ref{homology-lemma-first-quadrant-ss} のもう一方のスペクトル系列は、
+$\text{Tot}(s(\mathcal{I}^\bullet(K)))$ が
+$R\Gamma(U, E) = \mathcal{I}^\bullet(U)$ を計算することを示す。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-quasi-compact-quasi-separated-commutes-direct-sums}
+$X$ を準コンパクト準分離スキームとする。関手
+$R\Gamma(X, -) : D^+(X_\proetale) \to D(\textit{Ab})$ は直和およびホモトピー余極限と可換である。
+\end{lemma}
+
+\begin{proof}
+主張の意味は次のとおりである。$D^+(X_\proetale)$ の対象の族 $E_i$ で、
+$\bigoplus E_i$ が $D^+(X_\proetale)$ の対象であるものを取る。このとき
+$R\Gamma(X, \bigoplus E_i) = \bigoplus R\Gamma(X, E_i)$ である。これを見るため、
+$U_n$ がアフィン弱可縮スキームとなるような $K_n = \{U_n \to X\}$ をもつ
+$X$ の超被覆 $K$ を選ぶ。Lemma \ref{proetale-lemma-w-contractible-hypercovering} を参照せよ。
+$p < N$ に対して $H^p(E_i) = 0$ となる整数 $N$ を取る。
+$\mathcal{E}_i^p = 0$（$p < N$）を満たし $E_i$ を表すアーベル層の複体
+$\mathcal{E}_i^\bullet$ を選ぶ。項ごとの直和 $\bigoplus \mathcal{E}_i^\bullet$ は
+$D(X_\proetale)$ において $\bigoplus E_i$ を表す。Injectives, Lemma
+\ref{injectives-lemma-derived-products} を参照せよ。Lemma
+\ref{proetale-lemma-compute-cohomology} により
+$$
+R\Gamma(X, \bigoplus E_i) =
+\text{Tot}(s((\bigoplus \mathcal{E}^\bullet_i)(K)))
+$$
+であり、また
+$$
+R\Gamma(X, E_i) = \text{Tot}(s(\mathcal{E}^\bullet_i(K)))
+$$
+である。各 $U_n$ は準コンパクトなので
+$$
+\text{Tot}(s((\bigoplus \mathcal{E}^\bullet_i)(K))) =
+\bigoplus \text{Tot}(s(\mathcal{E}^\bullet_i(K)))
+$$
+が Modules on Sites, Lemma \ref{sites-modules-lemma-sections-over-quasi-compact} により
+成り立つ。ホモトピー余極限に関する主張は、$R\Gamma$ が三角圏の完全関手であることと、
+今示した直和と可換であることから形式的に従う。
+\end{proof}
+
+\begin{remark}
+\label{proetale-remark-extend-to-all}
+$X$ をスキームとする。$X_\proetale$ は弱可縮対象を十分にもつので、
+Cohomology on Sites, Proposition
+\ref{sites-cohomology-proposition-enough-weakly-contractibles} により、
+$D(X_\proetale)$ の全ての $K$ に対し $K = R\lim \tau_{\geq -n}K$ である。
+Injectives, Lemma \ref{injectives-lemma-RF-commutes-with-Rlim} により
+$R\Gamma$ は $R\lim$ と可換するので、
+$$
+R\Gamma(X, K) = R\lim R\Gamma(X, \tau_{\geq -n}K)
+$$
+が $D(\textit{Ab})$ で成り立つ。これにより、下に有界な複体についての結果を
+全ての複体へ拡張できることがある。
+\end{remark}
+
+
+
+
+
+
+
+\section{コンパクト生成}
+\label{proetale-section-compact-generation}
+
+\noindent
+本節では、ここで用いる pro-\'etale サイトに付随するさまざまな導来圏が、Derived
+Categories, Definition \ref{derived-definition-compactly-generated} の意味で
+コンパクト生成されることを証明する。
+
+\begin{lemma}
+\label{proetale-lemma-enough-compact-proetale}
+$S$ をスキームとし、$\Lambda$ を環とする。
+\begin{enumerate}
+\item $D(S_\proetale)$ はコンパクト生成される。
+\item $D(S_\proetale, \Lambda)$ はコンパクト生成される。
+\item $S_\proetale$ 上の任意の環の層 $\mathcal{A}$ に対し、
+$D(S_\proetale, \mathcal{A})$ はコンパクト生成される。
+\item $D((\Sch/S)_\proetale)$ はコンパクト生成される。
+\item $D((\Sch/S)_\proetale, \Lambda)$ はコンパクト生成される。
+\item $(\Sch/S)_\proetale$ 上の任意の環の層 $\mathcal{A}$ に対し、
+$D((\Sch/S)_\proetale, \mathcal{A})$ はコンパクト生成される。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) を証明する。$U$ を $S_\proetale$ のアフィン弱可縮対象とする。このとき
+$j_{U!}\mathcal{A}_U$ は導来圏 $D(S_\proetale, \mathcal{A})$ のコンパクト対象である。
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-quasi-compact-weakly-contractible-compact} を参照せよ。
+集合 $I$ と、各 $i \in I$ に対して $S_\proetale$ のアフィン弱可縮対象 $U_i$ を、
+$S_\proetale$ の任意のアフィン弱可縮対象がいずれかの $U_i$ と同型になるように選ぶ。
+$\Ob(S_\proetale)$ は集合なので、これは可能である。(3) の証明を終えるには、
+$\bigoplus j_{U_i, !}\mathcal{A}_{U_i}$ が $D(S_\proetale, \mathcal{A})$ の生成元であることを
+示せば十分である。Derived Categories, Definition
+\ref{derived-definition-generators} を参照せよ。これを見るため、$K$ を
+$D(S_\proetale, \mathcal{A})$ の非零対象とする。このとき、サイト $S_\proetale$ の対象
+$T$ と、$H^n(K)(T)$ の非零元 $\xi$ が存在する。言い換えると、$\xi$ は $K$ の
+第 $n$ コホモロジー層の非零切断である。$K$ は $\mathcal{A}$-加群の層の複体
+$\mathcal{K}^\bullet$ で表され、$\xi$ は $\text{d}(s) = 0$ を満たす切断
+$s \in \mathcal{K}^n(T)$ の類であると仮定してよい。すなわち $\xi$ は局所的に
+切断の類で表される（したがって $T$ を $T$ の被覆の一員で置き換えればこの状況になる）。
+次に Lemma \ref{proetale-lemma-get-many-weakly-contractible} のような被覆
+$\{T_j \to T\}_{j \in J}$ を選ぶ。$H^n(K)$ は層なので、ある $j$ に対して制限
+$\xi|_{T_j}$ はなお非零である。したがって $s|_{T_j}$ は
+$D(S_\proetale, \mathcal{A})$ における非零写像
+$j_{T_j, !}\mathcal{A}_{T_j} \to K$ を定める。ある $i \in I$ に対して
+$T_j \cong U_i$ なので結論が従う。
+
+\medskip\noindent
+まったく同じ議論が $S$ の大 pro-\'etale サイトにも適用できる。
+\end{proof}
+
+
+
+
+
+
+
+\section{位相の比較}
+\label{proetale-section-compare-topologies}
+
+\noindent
+本節は \'Etale Cohomology, Section
+\ref{etale-cohomology-section-compare-topologies} の類似物である。
+
+\begin{lemma}
+\label{proetale-lemma-presheaf-value-weakly-contractible}
+$X$ をスキームとし、$\mathcal{F}$ を有限非交和を積へ写す $X_\proetale$ 上の
+集合の前層とする。$W$ が $X_\proetale$ のアフィン弱可縮対象なら、
+$\mathcal{F}^\#(W) = \mathcal{F}(W)$ である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}^\#$ は $(\mathcal{F}^+)^+$ に等しいことを思い出そう。Sites, Theorem
+\ref{sites-theorem-plus} を参照せよ。ここで $\mathcal{F}^+$ は、$X_\proetale$ の対象 $U$ を
+$\colim H^0(\mathcal{U}, \mathcal{F})$ へ写す前層であり、余極限は $U$ の全ての
+pro-\'etale 被覆 $\mathcal{U}$ にわたる。したがって、(a) $\mathcal{F}^+$ が有限非交和を
+積へ写し、(b) $W$ を $\mathcal{F}(W)$ へ写すことを示せば十分である。
+$U = U_1 \amalg U_2$ とし、$\mathcal{U} = \{f_j : V_j \to U\}$ を $U$ の
+pro-\'etale 被覆とする。このとき pro-\'etale 被覆
+$\mathcal{U}_i = \{f_j^{-1}(U_i) \to U_i\}$ を得て、明らかに
+$$
+H^0(\mathcal{U}, \mathcal{F}) =
+H^0(\mathcal{U}_1, \mathcal{F}) \times
+H^0(\mathcal{U}_2, \mathcal{F})
+$$
+である。これは $\mathcal{F}$ が有限非交和を積へ写すからである（$\mathcal{F}$ が空スキームを
+一元集合へ写すという条件もここに含まれる）。これで (a) が示された。最後に Lemma
+\ref{proetale-lemma-w-contractible-is-weakly-contractible} により、$W$ の任意の pro-\'etale 被覆は
+有限非交和分解 $W = W_1 \amalg \ldots W_n$ で細分できる。$W$ における
+$\mathcal{F}$ の値は $W_j$ における $\mathcal{F}$ の値の積なので、ちょうど
+$\mathcal{F}^+(W) = \mathcal{F}(W)$ となる。これで (b) が示された。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-small-pullback-weakly-contractible}
+$f : X \to Y$ をスキームの射とし、$\mathcal{F}$ を $Y_\proetale$ 上の集合の層とする。
+$W$ が $X_\proetale$ のアフィン弱可縮対象なら、
+$$
+f_{small}^{-1}\mathcal{F}(W) = \colim_{W \to V} \mathcal{F}(V)
+$$
+である。ここで余極限は、$V \in Y_\proetale$ であるような $Y$ 上の射
+$W \to V$ にわたる。
+\end{lemma}
+
+\begin{proof}
+$f_{small}^{-1}\mathcal{F}$ は前層
+$$
+u_p\mathcal{F} : U \mapsto \colim_{U \to V} \mathcal{F}(V)
+$$
+に付随する $X_\etale$ 上の層であることを思い出そう。Sites, Sections
+\ref{sites-section-morphism-sites} および \ref{sites-section-continuous-functors} を参照せよ。
+この記法では、余極限が圏 $\{U \to V, V \in Y_\proetale\}$ の反対圏にわたることを
+省略している。Lemma \ref{proetale-lemma-presheaf-value-weakly-contractible} により、
+$u_p\mathcal{F}$ が有限非交和を積へ写すことを示せば十分である。
+$U = U_1 \amalg U_2$ を開閉部分スキームの非交和とする。関手
+$$
+\{U_1 \to V_1\} \times \{U_2 \to V_2\} \longrightarrow
+\{U \to V\},\quad
+(U_1 \to V_1, U_2 \to V_2) \longmapsto (U \to V_1 \amalg V_2)
+$$
+があり、これは始的である (Categories, Definition
+\ref{categories-definition-initial})。したがって反対圏上の対応する関手は余終であり、
+Categories, Lemma \ref{categories-lemma-cofinal} により、$U$ における
+$u_p\mathcal{F}$ は積圏にわたる値 $\mathcal{F}(V_1 \amalg V_2)$ の余極限である。
+$\mathcal{F}$ は層なので非交和を積へ写し、したがって $u_p\mathcal{F}$ も同様である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-describe-pullback}
+$S$ をスキームとする。Lemma \ref{proetale-lemma-at-the-bottom} の射
+$$
+\pi_S : (\Sch/S)_\proetale \longrightarrow S_\proetale
+$$
+を考える。$\mathcal{F}$ を $S_\proetale$ 上の層とする。このとき
+$\pi_S^{-1}\mathcal{F}$ は規則
+$$
+(\pi_S^{-1}\mathcal{F})(T) = \Gamma(T_\proetale, f_{small}^{-1}\mathcal{F})
+$$
+で与えられる。ここで $f : T \to S$ である。さらに $\pi_S^{-1}\mathcal{F}$ は
+fpqc 被覆に関する層条件を満たす。
+\end{lemma}
+
+\begin{proof}
+射 $i_f : \Sh(T_\proetale) \to \Sh(\Sch/S)_\proetale)$ があり、
+$T_\proetale \to S_\proetale$ の射として $\pi_S \circ i_f = f_{small}$ となることに
+注意する。Lemma \ref{proetale-lemma-put-in-T} を参照せよ。逆像の推移性により、望むとおり
+$i_f^{-1} \pi_S^{-1}\mathcal{F} = f_{small}^{-1}\mathcal{F}$ である。
+
+\medskip\noindent
+$\{g_i : T_i \to T\}_{i \in I}$ を fpqc 被覆とする。最後の主張の意味は次のとおりである。
+$T_\proetale$ 上の層 $\mathcal{G}$ と、$T_i \times_T T_j$ への逆像が一致する切断
+$s_i \in \Gamma(T_i, g_{i, small}^{-1}\mathcal{G})$ が与えられたとき、$T_i$ への逆像が
+$s_i$ と一致する $T$ 上の $\mathcal{G}$ の一意な切断 $s$ が存在する。この主張を、
+$T$ がアフィンで、被覆がアフィンの一本の全射平坦射 $T' \to T$ で与えられる場合に
+証明する。一般の場合をこの場合へ帰着する議論は省略する。
+
+\medskip\noindent
+$g : T' \to T$ をアフィンの全射平坦射とし、$s' \in g_{small}^{-1}\mathcal{G}(T')$ を
+$T' \times_T T'$ 上で $\text{pr}_0^*s' = \text{pr}_1^*s'$ を満たす切断とする。
+$W$ がアフィンかつ弱可縮となる全射弱 \'etale 射 $W \to T'$ を選ぶ。Lemma
+\ref{proetale-lemma-weakly-contractible-cover} を参照せよ。Lemma
+\ref{proetale-lemma-small-pullback-weakly-contractible} により、制限 $s'|_W$ は
+$\colim_{W \to U} \mathcal{G}(U)$ の元である。$s'$ に対応する
+$\phi : W \to U_0$ と $s_0 \in \mathcal{G}(U_0)$ を選ぶ。$V$ がアフィンかつ弱可縮となる
+全射弱 \'etale 射 $V \to W \times_T W$ を選び、誘導射を $a, b : V \to W$ と書く。
+$a^*(s'|_W) = b^*(s'|_W)$ であり、圏
+$\{V \to U, U \in T_\proetale\}$ は余フィルターなので（これは明らかだが、疑問なら
+Sites, Lemma \ref{sites-lemma-directed-morphism} を参照せよ）、二つの射
+$\phi \circ a , \phi \circ b : V \to U_0$ は等しくなければならない。Descent, Section
+\ref{descent-section-fpqc-universal-effective-epimorphisms} の結果、特に Descent, Lemma
+\ref{descent-lemma-fpqc-universal-effective-epimorphisms} により、一意な射
+$T \to U_0$ が存在し、$\phi$ は構造射 $W \to T$ とこの射の合成となる
+（細部は省略する）。そこで $s$ を、この射による $s_0$ の逆像とする。
+$s$ の $T'$ への逆像が $s'$ となることの確認は省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{大トポスと小トポスの比較}
+\label{proetale-section-compare}
+
+\noindent
+本節は \'Etale Cohomology, Section
+\ref{etale-cohomology-section-compare} の類似物である。以下ではしばしば、Lemma
+\ref{proetale-lemma-at-the-bottom} のトポスの射
+$i_S : \Sh(S_\proetale) \to \Sh((\Sch/S)_\proetale)$ に対応する逆像関手
+$i_S^{-1}$ を $\mathcal{F} \mapsto \mathcal{F}|_{S_\proetale}$ と表す。
+
+\begin{lemma}
+\label{proetale-lemma-compare-injectives}
+$S$ をスキームとし、$T$ を $(\Sch/S)_\proetale$ の対象とする。
+\begin{enumerate}
+\item $\mathcal{I}$ が $\textit{Ab}((\Sch/S)_\proetale)$ で単射的なら、
+\begin{enumerate}
+\item $i_f^{-1}\mathcal{I}$ は $\textit{Ab}(T_\proetale)$ で単射的である。
+\item $\mathcal{I}|_{S_\proetale}$ は $\textit{Ab}(S_\proetale)$ で単射的である。
+\end{enumerate}
+\item $\mathcal{I}^\bullet$ が $\textit{Ab}((\Sch/S)_\proetale)$ の K-単射複体なら、
+\begin{enumerate}
+\item $i_f^{-1}\mathcal{I}^\bullet$ は $\textit{Ab}(T_\proetale)$ の K-単射複体である。
+\item $\mathcal{I}^\bullet|_{S_\proetale}$ は $\textit{Ab}(S_\proetale)$ の
+K-単射複体である。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)(a) と (2)(a) を証明する。$i_f^{-1}$ は完全関手 $i_{f, !}$ の右随伴である。
+実際、$i_f$ は連続でファイバー積および等化子と可換な余連続関手
+$u : T_\proetale \to (\Sch/S)_\proetale$ に対応することを思い出そう。Lemma
+\ref{proetale-lemma-put-in-T} とその証明を参照せよ。したがって Modules on Sites, Lemma
+\ref{sites-modules-lemma-g-shriek-adjoint} により $i_{f, !}$ を得る。それが完全であることは
+Modules on Sites, Lemma \ref{sites-modules-lemma-exactness-lower-shriek} で示されている。
+ゆえに Homology, Lemma \ref{homology-lemma-adjoint-preserve-injectives} と Derived Categories,
+Lemma \ref{derived-lemma-adjoint-preserve-K-injectives} により (1)(a) と (2)(a) が成り立つ。
+
+\medskip\noindent
+$i_S = i_{\text{id}_S}$ なので、(1)(b) と (2)(b) は (1)(a) と (2)(a) の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-higher-direct-image}
+$f : T \to S$ をスキームの射とする。$D((\Sch/T)_\proetale)$ の
+$K$ に対して
+$$
+(Rf_{big, *}K)|_{S_\proetale} = Rf_{small, *}(K|_{T_\proetale})
+$$
+が $D(S_\proetale)$ で成り立つ。より一般に、$S' \in \Ob((\Sch/S)_\proetale)$
+を構造射 $g : S' \to S$ をもつ対象とする。ファイバー積
+$$
+\xymatrix{
+T' \ar[r]_{g'} \ar[d]_{f'} & T \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+を考える。このとき $D((\Sch/T)_\proetale)$ の $K$ に対して
+$$
+i_g^{-1}(Rf_{big, *}K) = Rf'_{small, *}(i_{g'}^{-1}K)
+$$
+が $D(S'_\proetale)$ で成り立ち、また
+$$
+g_{big}^{-1}(Rf_{big, *}K) = Rf'_{big, *}((g'_{big})^{-1}K)
+$$
+が $D((\Sch/S')_\proetale)$ で成り立つ。
+\end{lemma}
+
+\begin{proof}
+$K$ を表すアーベル群の層の K-単射複体を選べば、第一の等式は
+Lemma \ref{proetale-lemma-compare-injectives} と (\ref{proetale-equation-compare-big-small})
+から従う。第二の等式は、同じく $K$ を表すアーベル群の層の
+K-単射複体を選び、Lemma \ref{proetale-lemma-compare-injectives} と Lemma
+\ref{proetale-lemma-morphism-big-small-cartesian-diagram}
+を適用すれば従う。第三の等式も同様に、$K$ を表すアーベル群の層の
+K-単射複体を選び、Cohomology on Sites, Lemmas
+\ref{sites-cohomology-lemma-cohomology-of-open} および
+\ref{sites-cohomology-lemma-restrict-K-injective-to-open}
+と Lemma \ref{proetale-lemma-morphism-big-small-cartesian-diagram} を適用すれば従う。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$\mathcal{H}$ を $(\Sch/S)_\proetale$ 上の
+アーベル群の層とする。$H^n_\proetale(U, \mathcal{H})$ は
+$(\Sch/S)_\proetale$ の対象 $U$ 上の $\mathcal{H}$ のコホモロジーを
+表すことを思い出そう。
+
+\begin{lemma}
+\label{proetale-lemma-compare-cohomology-big-small}
+$f : T \to S$ をスキームの射とする。$D(S_\proetale)$ の $K$ に対して
+$$
+H^n_\proetale(S, \pi_S^{-1}K) = H^n(S_\proetale, K)
+$$
+および
+$$
+H^n_\proetale(T, \pi_S^{-1}K) = H^n(T_\proetale, f_{small}^{-1}K).
+$$
+が成り立つ。$D((\Sch/S)_\proetale)$ の $M$ に対しては
+$$
+H^n_\proetale(T, M) = H^n(T_\proetale, i_f^{-1}M).
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+最後の等式を示すには、$M$ をアーベル群の層の K-単射複体で表し、
+Lemma \ref{proetale-lemma-compare-injectives} を適用して定義を書き下せばよい。
+$i_f^{-1} \circ \pi_S^{-1} = f_{small}^{-1}$ なので、第二の等式は
+この等式から従う。第一の等式は第二の等式の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-cohomological-descent-proetale}
+$S$ をスキームとする。$K \in D(S_\proetale)$ に対して、写像
+$$
+K \longrightarrow R\pi_{S, *}\pi_S^{-1}K
+$$
+は同型である。
+\end{lemma}
+
+\begin{proof}
+$\pi_S^{-1}$ と $\pi_{S, *} = i_S^{-1}$ はともに完全関手であり、
+合成 $\pi_{S, *} \circ \pi_S^{-1}$ は恒等関手だからである。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{pro-\'etale サイトの点}
+\label{proetale-section-points}
+
+\noindent
+まず Deligne の判定条件を適用して、十分な点が存在することを示す。
+
+\begin{lemma}
+\label{proetale-lemma-points-proetale}
+$S$ をスキームとする。pro-\'etale サイト $\Sch_\proetale$、
+$S_\proetale$、$(\Sch/S)_\proetale$、$S_{affine, \proetale}$ および
+$(\textit{Aff}/S)_\proetale$ は十分な点をもつ。
+\end{lemma}
+
+\begin{proof}
+$S$ の大 pro-\'etale トポスは $(\textit{Aff}/S)_\proetale$ が定めるトポスと
+同値である。Lemma \ref{proetale-lemma-affine-big-site-proetale} を参照せよ。
+$S_\proetale$ 上の層のトポスは $S_{affine, \proetale}$ に付随するトポスと
+同値である。Lemma \ref{proetale-lemma-alternative} を参照せよ。サイト
+$(\textit{Aff}/S)_\proetale$ と $S_{affine, \proetale}$ に対する主張は、
+Deligne の結果 Sites, Lemma \ref{sites-lemma-criterion-points} から直ちに従う。
+$\Sch_\proetale$ は $(\Sch/\Spec(\mathbf{Z}))_\proetale$ に等しいので、
+この場合もこれで扱える。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$\overline{s} : \Spec(k) \to S$ を幾何学的点とする。
+$\overline{s}$ の {\it pro-\'etale 近傍}を、可換図式
+$$
+\xymatrix{
+\Spec(k) \ar[r]_-{\overline{u}} \ar[rd]_{\overline{s}} & U \ar[d] \\
+& S
+}
+$$
+であって $U \to S$ が弱 \'etale であるものと定義する。
+
+\begin{lemma}
+\label{proetale-lemma-cofinal-etale}
+$S$ をスキームとし、$\overline{s} : \Spec(k) \to S$ を幾何学的点とする。
+$\overline{s}$ の pro-\'etale 近傍の圏は余フィルター的である。
+\end{lemma}
+
+\begin{proof}
+証明は \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-cofinal-etale} の証明と同一である。ただし、
+More on Morphisms, Lemmas
+\ref{more-morphisms-lemma-composition-weakly-etale},
+\ref{more-morphisms-lemma-base-change-weakly-etale} および
+\ref{more-morphisms-lemma-weakly-etale-permanence} で証明された、
+弱 \'etale 射に関する対応する事実を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-geometric-lift-to-cover}
+$S$ をスキームとし、$\overline{s}$ を $S$ の幾何学的点とする。
+$\mathcal{U} = \{\varphi_i : S_i \to S\}_{i\in I}$ を pro-\'etale 被覆とする。
+このとき、ある $i \in I$ と、$\overline{s}$ に写る $S_i$ の幾何学的点
+$\overline{s}_i$ が存在する。
+\end{lemma}
+
+\begin{proof}
+これは、$\coprod \varphi_i$ が全射であり、弱 \'etale 射が誘導する剰余体拡大が
+分離代数的であることから直ちに従う（たとえば More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weakly-etale-strictly-henselian-local-rings}.
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$\overline{s}$ を $S$ の幾何学的点とする。
+$\Sh(S_\proetale)$ の $\mathcal{F}$ に対して、{\it $\overline{s}$ における
+$\mathcal{F}$ の茎}を公式
+$$
+\mathcal{F}_{\overline{s}} = \colim_{(U, \overline{u})} \mathcal{F}(U)
+$$
+で定義する。ここで余極限は、$U \in \Ob(S_\proetale)$ を満たす
+$\overline{s}$ のすべての pro-\'etale 近傍 $(U, \overline{u})$ にわたって取る。
+上の二つの補題から、関手
+$$
+S_\proetale \textit{Sets},\quad
+U \longmapsto
+\{\overline{u}\text{ は }U\text{ の幾何学的点で像が }\overline{s}\}
+$$
+はサイト $S_\proetale$ の一点を定める。Sites, Definition
+\ref{sites-definition-point} および Lemma
+\ref{sites-lemma-neighbourhoods-cofiltered} を参照せよ。したがって関手
+$\mathcal{F} \mapsto \mathcal{F}_{\overline{s}}$ はトポス
+$\Sh(S_\proetale)$ の一点を定める。Sites, Definition
+\ref{sites-definition-point-topos} および Lemma
+\ref{sites-lemma-point-site-topos} を参照せよ。特に、この関手は完全であり、
+任意の余極限と可換である。実際、この関手には別の記述がある。
+
+\begin{lemma}
+\label{proetale-lemma-classical-point}
+上の状況で、スキーム $\Spec(\mathcal{O}_{S, \overline{s}}^{sh})$ は
+$X_\proetale$ の対象であり、$\mathcal{F}$ に関して関手的な標準同型
+$$
+\mathcal{F}(\Spec(\mathcal{O}_{S, \overline{s}}^{sh})) =
+\mathcal{F}_{\overline{s}}
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+第一の主張は、厳密 Hensel 化を $S$ 上の \'etale 代数のフィルター余極限として
+構成することから明らかである。あるいは More on Morphisms, Lemma
+\ref{more-morphisms-lemma-weakly-etale-strictly-henselian-local-rings}.
+による弱 \'etale 射の特徴づけからも明らかである。第二の主張は Olivier の定理
+（More on Algebra, Theorem \ref{more-algebra-theorem-olivier}）から従う。
+実際、スキーム $\Spec(\mathcal{O}_{S, \overline{s}}^{sh})$ は
+$\overline{s}$ の pro-\'etale 近傍の圏の始対象である。
+\end{proof}
+
+\noindent
+$S$ の \'etale トポスの場合とは異なり、$\Sh(S_\proetale)$ のすべての点が
+この形であるとは限らず、幾何学的点に付随する点の族も保守的とは限らない。
+実際、$S = \Spec(k)$ で $k$ が代数閉体であると仮定し、$A$ を非零アーベル群とする。
+$S_\proetale$ 上の層 $\mathcal{F}$ を、$U$ がアフィンの場合には
+$$
+\mathcal{F}(U) =
+\frac{\{\text{写像 }U \to A\}}{\{\text{局所定数写像}\}}
+$$
+で定義し、一般の場合には層化によって定義する。Example
+\ref{proetale-example-functions-mod-locally-constant-functions} を参照せよ。
+$U = S = \Spec(k)$ なら $\mathcal{F}(U) = 0$ であるが、一般に
+$\mathcal{F}$ は零ではない。実際、$S_\proetale$ は無限個の点をもつアフィン対象を
+含む。たとえば、$E = \lim E_n$ を全射な遷移写像をもつ有限集合の逆極限とする。
+例として $E = \mathbf{Z}_p = \lim \mathbf{Z}/p^n\mathbf{Z}$ がある。
+$\colim \text{Map}(E_n, k)$ は $k$ 上で弱 \'etale（実際 ind-Zariski）なので、
+スキーム $U = \Spec(\colim \text{Map}(E_n, k))$ は $S_\proetale$ の対象である。
+局所定数でない写像 $E \to A$ が存在するので、$\mathcal{F}(U)$ は非零である。
+したがって $\mathcal{F}$ は非零なアーベル群の層であるが、その $S$ の唯一の
+幾何学的点における茎は零である。$S_\proetale$ が十分な点をもつことは既知なので、
+pro-\'etale サイトには上の構成から生じない点が存在しなければならない。
+
+\medskip\noindent
+点を用いる論法の代わりに、アフィン弱可縮対象を用いることができる。
+第一に、Lemma \ref{proetale-lemma-proetale-enough-w-contractible} により、
+アフィン弱可縮対象は十分多く存在する。第二に、
+$W \in \Ob(S_\proetale)$ がアフィン弱可縮なら、関手
+$$
+\Sh(S_\proetale) \longrightarrow \textit{Sets},\quad
+\mathcal{F} \longmapsto \mathcal{F}(W)
+$$
+はすべての極限と可換な完全関手
+$\Sh(S_\proetale) \to \textit{Sets}$ である。関手
+$$
+\textit{Ab}(S_\proetale) \longrightarrow \textit{Ab},\quad
+\mathcal{F} \longmapsto \mathcal{F}(W)
+$$
+は完全で直和と可換である（$W$ が準コンパクトであるため。Sites, Lemma
+\ref{sites-lemma-directed-colimits-sections} を参照せよ）。したがって、すべての
+極限および余極限と可換する。さらに、$S_\proetale$ のこれらのアフィン弱可縮対象で
+評価することにより、アーベル群の層の複体の完全性を判定できる。
+Cohomology on Sites, Proposition
+\ref{sites-cohomology-proposition-enough-weakly-contractibles}.
+
+\medskip\noindent
+最後に、$W$ がアフィン弱可縮であっても、関手
+$\mathcal{F} \mapsto \mathcal{F}(W)$ は一般には $S_\proetale$ の一点の茎関手では
+ないことを注意しておく。実際、$W$ が非連結なら、この関手は集合の層の余積を
+保たない。また、$W$ が $1$ 個より多くの閉点をもてば $W$ は非連結である。
+すなわち、$W$ が厳密 Hensel 局所環のスペクトルでないとき（上で論じたのは
+この特別な場合である）、非連結である。
+
+
+
+
+
+\section{\'etale サイトとの比較}
+\label{proetale-section-comparison}
+
+\noindent
+$X$ をスキームとする。サイトを適切に選べば\footnote{Definition
+\ref{proetale-definition-big-proetale-site} のように、$X$ を含む大 pro-\'etale サイト
+$\Sch_\proetale$ を選ぶ。次に、$\Sch_\proetale$ と同じ基礎圏をもち、被覆が
+pro-\'etale 被覆のうち \'etale 被覆でもあるものにちょうど一致するサイトを
+$\Sch_\etale$ とする。この選択のもとで、$X_\etale$ と $X_\proetale$ を
+Definition \ref{proetale-definition-big-small-proetale} および Topologies, Definition
+\ref{topologies-definition-big-small-etale} で定義された部分圏とする。
+Topologies, Remark \ref{topologies-remark-choice-sites} と比較せよ。}、
+$U/X$ を $U/X$ に送る関手 $u : X_\etale \to X_\proetale$ はサイトの射
+$$
+\epsilon : X_\proetale \longrightarrow X_\etale
+$$
+を定める。これは Sites, Proposition \ref{sites-proposition-get-morphism} から従う。
+
+\begin{lemma}
+\label{proetale-lemma-describe-pullback-from-etale}
+上の記号を用いる。$\mathcal{F}$ を $X_\etale$ 上の層とする。対応
+$$
+X_\proetale \longrightarrow \textit{Sets},\quad
+(f : Y \to X) \longmapsto \Gamma(Y_\etale, f_\etale^{-1}\mathcal{F})
+$$
+は層であり、$\epsilon^{-1}\mathcal{F}$ に等しい。ここで
+$f_\etale : Y_\etale \to X_\etale$ は \'Etale Cohomology, Section
+\ref{etale-cohomology-section-functoriality} で構成された小 \'etale サイトの射である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-recognize-proetale-covering} により、任意の pro-\'etale 被覆は
+fpqc 被覆である。したがって \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-describe-pullback} により、この公式は
+$X_\proetale$ 上の層を定める。$a : \Sh(X_\etale) \to \Sh(X_\proetale)$ を、
+$\mathcal{F}$ を補題の公式で与えられる層に送る関手とする。
+$a = \epsilon^{-1}$ を示すには、$a$ が $\epsilon_*$ の左随伴であることを示せば十分である。
+
+\medskip\noindent
+$\mathcal{G}$ を $\Sh(X_\proetale)$ の対象とする。
+$\epsilon_*\mathcal{G}$ は単に $\mathcal{G}$ を充満部分圏 $X_\etale$ に制限したもの
+であることを思い出そう。$f : Y \to X$ を $X_\proetale$ の対象とし、
+$Y_\etale$ を $X_\proetale$ の部分圏とみなす。層 $\mathcal{G}$ の制限写像は写像
+$$
+\epsilon_*\mathcal{G} = \mathcal{G}|_{X_\etale}
+\longrightarrow
+f_{\etale, *}(\mathcal{G}|_{Y_\etale})
+$$
+を定める。実際、$U$ が $X_\etale$ に属するとき、$U$ における
+$f_{\etale, *}(\mathcal{G}|_{Y_\etale})$ の値は $\mathcal{G}(Y \times_X U)$ であり、
+制限写像 $\mathcal{G}(U) \to \mathcal{G}(Y \times_X U)$ がある。
+随伴により、これは写像
+$$
+f_\etale^{-1}(\epsilon_*\mathcal{G}) \to \mathcal{G}|_{Y_\etale}
+$$
+を定める。$X_\proetale$ のすべての $f : Y \to X$ に対してこれらをまとめると、
+標準写像 $a(\epsilon_*\mathcal{G}) \to \mathcal{G}$ を得る。
+
+\medskip\noindent
+$\mathcal{F}$ を $\Sh(X_\etale)$ の対象とする。
+$\mathcal{F} = \epsilon_*a(\mathcal{F})$ であることは直ちに明らかである。
+
+\medskip\noindent 
+写像 $\mathcal{F} \to \epsilon_*a(\mathcal{F})$ と
+$a(\epsilon_*\mathcal{G}) \to \mathcal{G}$ は、この随伴の単位と余単位であると主張する
+（Categories, Section \ref{categories-section-adjoint} を参照せよ）。
+これを見るには、対応する写像
+$$
+\Mor_{\Sh(X_\proetale)}(a(\mathcal{F}), \mathcal{G}) \to
+\Mor_{\Sh(X_\etale)}(\mathcal{F}, \epsilon^{-1}\mathcal{G})
+$$
+および
+$$
+\Mor_{\Sh(X_\etale)}(\mathcal{F}, \epsilon^{-1}\mathcal{G}) \to
+\Mor_{\Sh(X_\proetale)}(a(\mathcal{F}), \mathcal{G})
+$$
+が互いに逆であることを示せば十分である。詳細な検証は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-fully-faithful}
+$X$ をスキームとする。$X_\etale$ 上の任意の層 $\mathcal{F}$ に対して、随伴写像
+$\mathcal{F} \to \epsilon_*\epsilon^{-1}\mathcal{F}$ は同型である。すなわち、
+$X_\etale$ の $U$ に対して
+$\epsilon^{-1}\mathcal{F}(U) = \mathcal{F}(U)$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-describe-pullback-from-etale} における
+$\epsilon^{-1}$ の記述から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-limit-pullback}
+$X$ をスキームとする。$Y = \lim Y_i$ を、アフィンな遷移射をもつ
+$X_\proetale$ の準コンパクトかつ準分離な対象の有向逆系の極限とする。
+$X_\etale$ 上の任意の層 $\mathcal{F}$ に対して
+$$
+\epsilon^{-1}\mathcal{F}(Y) = \colim \epsilon^{-1}\mathcal{F}(Y_i)
+$$
+が成り立つ。さらに、$Y_i$ が $X_\etale$ に属するなら、
+$\epsilon^{-1}\mathcal{F}(Y) = \colim \mathcal{F}(Y_i)$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-describe-pullback-from-etale} における
+$\epsilon^{-1}\mathcal{F}$ の記述により、表示された公式は \'Etale Cohomology,
+Theorem \ref{etale-cohomology-theorem-colimit} の特別な場合である。
+（$X$、$Y$ および $Y_i$ がすべてアフィンの場合には、より読みやすい
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-directed-colimit-cohomology} を参照せよ。）
+最後の主張は、これと Lemma \ref{proetale-lemma-fully-faithful} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-affine-vanishing}
+$X$ をアフィンスキームとする。$X_\etale$ 上の単射的アーベル群の層
+$\mathcal{I}$ に対して、$p > 0$ なら
+$H^p(X_\proetale, \epsilon^{-1}\mathcal{I}) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+これを証明するために Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-vanish-collection} を用いる。
+$\mathcal{B} \subset \Ob(X_\proetale)$ を、$\mathcal{O}(X) \to \mathcal{O}(U)$ が
+ind-\'etale となる $X_\proetale$ のアフィン対象 $U$ の集合とする。
+$\text{Cov}$ を、$U \in \mathcal{B}$ であり、$i = 1, \ldots, n$ に対して
+$\mathcal{O}(U) \to \mathcal{O}(U_i)$ が ind-\'etale となる pro-\'etale 被覆
+$\{U_i \to U\}_{i = 1, \ldots, n}$ の集合とする。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-vanish-collection} の性質 (1) と (2) は、Lemmas
+\ref{proetale-lemma-composition-ind-etale}、\ref{proetale-lemma-base-change-ind-etale}、
+\ref{proetale-lemma-proetale-affine} および Proposition
+\ref{proetale-proposition-weakly-etale} により $\mathcal{B}$ と $\text{Cov}$ に対して成り立つ。
+
+\medskip\noindent
+条件 (3) を確認するため、
+$\mathcal{U} = \{U_i \to U\}_{i = 1, \ldots, n}$ が
+$\text{Cov}$ の元であると仮定する。$\mathcal{U}$ に関する
+$\epsilon^{-1}\mathcal{I}$ の高次 \v{C}ech コホモロジー群が零であることを
+示さなければならない。まず、$U_{i, a} \to U$ が \'etale で
+$U_{i, a}$ がアフィンとなる有向逆極限として
+$U_i = \lim_{a \in A_i} U_{i, a}$ と書く。$A_1 \times \ldots \times A_n$ を、
+$i = 1, \ldots, n$ のすべてに対して $a_i \geq a_i'$ であるとき、かつそのときに限り
+$(a_1, \ldots, a_n) \geq (a_1', \ldots, a_n')$ とする順序をもつ有向集合とみなす。
+このとき
+$\mathcal{U}_{(a_1, \ldots, a_n)} = \{U_{i, a_i} \to U\}_{i = 1, \ldots, n}$
+は、すべての $a_1, \ldots, a_n \in A_1 \times \ldots \times A_n$ に対して
+\'etale 被覆である。また
+$$
+U_{i_0} \times_U U_{i_1} \times_U \ldots \times_U U_{i_p}
+=
+\lim_{(a_1, \ldots, a_n) \in A_1 \times \ldots \times A_n}
+U_{i_0, a_{i_0}} \times_U
+U_{i_1, a_{i_1}} \times_U \ldots \times_U U_{i_p, a_{i_p}}
+$$
+がすべての $i_0, \ldots, i_p \in \{1, \ldots, n\}$ に対して成り立つ。
+これは極限がファイバー積と可換するからである。したがって Lemma
+\ref{proetale-lemma-limit-pullback} とフィルター余極限の完全性により
+$$
+\check{H}^p(\mathcal{U}, \epsilon^{-1}\mathcal{I}) =
+\colim \check{H}^p(\mathcal{U}_{(a_1, \ldots, a_n)}, \epsilon^{-1}\mathcal{I}) 
+$$
+を得る。したがって、$U$ の \'etale 被覆について消滅を証明すれば十分である。
+
+\medskip\noindent
+$\mathcal{U} = \{U_i \to U\}_{i = 1, \ldots, n}$ を、各 $U_i$ がアフィンである
+\'etale 被覆とする。$U_b$ がアフィンで $U_b \to X$ が \'etale となる有向逆極限
+$U = \lim_{b \in B} U_b$ と書く。Limits, Lemmas
+\ref{limits-lemma-descend-finite-presentation}、\ref{limits-lemma-limit-affine} および
+\ref{limits-lemma-descend-etale} により、$i = 1, \ldots, n$ に対してアフィン間の
+\'etale 射 $U_{i, b_0} \to U_{b_0}$ が存在し、
+$U_i = U \times_{U_{b_0}} U_{i, b_0}$ となる $b_0 \in B$ を選べる。
+$b \geq b_0$ に対して $U_{i, b} = U_b \times_{U_{b_0}} U_{i, b_0}$ と置く。
+$b$ が十分大きければ、族
+$\mathcal{U}_b = \{U_{i, b} \to U_b\}_{i = 1, \ldots, n}$
+は \'etale 被覆である。Limits, Lemma \ref{limits-lemma-descend-surjective} を参照せよ。
+先ほどとまったく同様に
+$$
+\check{H}^p(\mathcal{U}, \epsilon^{-1}\mathcal{I}) =
+\colim \check{H}^p(\mathcal{U}_b, \epsilon^{-1}\mathcal{I}) =
+\colim \check{H}^p(\mathcal{U}_b, \mathcal{I})
+$$
+を得る。最後の等式は Lemma \ref{proetale-lemma-fully-faithful} による。
+右辺の各 {\v C}ech 複体は正次数で非輪状なので（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-injective-trivial-cech}）、左辺も同様である。
+これで Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cech-vanish-collection} の条件 (3) が証明された。
+$X \in \mathcal{B}$ なので補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-relative-comparison}
+$X$ をスキームとする。
+\begin{enumerate}
+\item $X_\etale$ 上のアーベル群の層 $\mathcal{F}$ に対して
+$R\epsilon_*(\epsilon^{-1}\mathcal{F}) = \mathcal{F}$ である。
+\item $K \in D^+(X_\etale)$ に対して写像
+$K \to R\epsilon_*\epsilon^{-1}K$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathcal{I}$ を $X_\etale$ 上の単射的アーベル群の層とする。
+$R^q\epsilon_*(\epsilon^{-1}\mathcal{I})$ は
+$U \mapsto H^q(U_\proetale, \epsilon^{-1}\mathcal{I})$ に付随する層であることを
+思い出そう。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-higher-direct-images} を参照せよ。Lemma
+\ref{proetale-lemma-affine-vanishing} により、$q > 0$ で $U$ がアフィンかつ $X$ 上
+\'etale なら、この層は零である。$X_\etale$ のすべての対象はアフィン対象による
+被覆をもつので、$q > 0$ に対して
+$R^q\epsilon_*(\epsilon^{-1}\mathcal{I}) = 0$ が従う。
+
+\medskip\noindent
+$K \in D^+(X_\etale)$ とする。$K$ を表す、$X_\etale$ 上の単射的アーベル群の層の
+下に有界な複体 $\mathcal{I}^\bullet$ を選ぶ。このとき $\epsilon^{-1}K$ は
+$\epsilon^{-1}\mathcal{I}^\bullet$ で表される。Leray の非輪状性補題
+（Derived Categories, Lemma \ref{derived-lemma-leray-acyclicity}）により、
+$R\epsilon_*\epsilon^{-1}K$ は $\epsilon_*\epsilon^{-1}\mathcal{I}^\bullet$ で表される。
+Lemma \ref{proetale-lemma-fully-faithful} により
+$R\epsilon_*\epsilon^{-1}\mathcal{I}^\bullet = \mathcal{I}^\bullet$ となり、
+(2) の証明が完了する。(1) は (2) の特別な場合である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-cohomology}
+$X$ をスキームとする。
+\begin{enumerate}
+\item $X_\etale$ 上のアーベル群の層 $\mathcal{F}$ に対して
+$$
+H^i(X_\etale, \mathcal{F}) =
+H^i(X_\proetale, \epsilon^{-1}\mathcal{F})
+$$
+がすべての $i$ に対して成り立つ。
+\item $K \in D^+(X_\etale)$ に対して
+$$
+R\Gamma(X_\etale, K) = R\Gamma(X_\proetale, \epsilon^{-1}K)
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-relative-comparison} と Leray スペクトル系列
+（Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-apply-Leray}）から
+直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-cohomology-nonabelian}
+$X$ をスキームとし、$\mathcal{G}$ を $X_\etale$ 上の（非可換でもよい）群の層とする。
+このとき
+$$
+H^1(X_\etale, \mathcal{G}) =
+H^1(X_\proetale, \epsilon^{-1}\mathcal{G})
+$$
+が成り立つ。ここで $H^1$ はトーサーの同型類の集合として定義される
+（Cohomology on Sites, Section \ref{sites-cohomology-section-h1-torsors} を参照せよ）。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-fully-faithful} により関手 $\epsilon^{-1}$ は充満忠実なので、写像
+$H^1(X_\etale, \mathcal{G}) \to H^1(X_\proetale, \epsilon^{-1}\mathcal{G})$ が
+単射であることは明らかである。全射性を示すには、任意の
+$\epsilon^{-1}\mathcal{G}$-トーサー $\mathcal{F}$ が \'etale 局所的に自明であることを
+示せば十分である。そのためには $X$ がアフィンであると仮定してよい。
+したがって、$X$ がアフィンの場合に全射性を証明することへ帰着する。
+
+\medskip\noindent
+(a) $U$ がアフィン、(b) $\mathcal{O}(X) \to \mathcal{O}(U)$ が ind-\'etale、
+(c) $\mathcal{F}(U)$ が空でない、という性質をもつ被覆 $\{U \to X\}$ を選ぶ。
+これは Proposition \ref{proetale-proposition-weakly-etale} と、$X$ の標準 pro-\'etale 被覆が
+$X$ のすべての pro-\'etale 被覆の中で余終的であるという事実
+（Lemma \ref{proetale-lemma-proetale-affine}）により可能である。
+$U = \lim U_i$ を、$X$ 上 \'etale なアフィンスキームの極限として書く。
+$s \in \mathcal{F}(U)$ を選ぶ。$\mathcal{F}(U \times_X U)$ において
+$g \cdot \text{pr}_1^*s = \text{pr}_2^*s$ となる一意な切断
+$g \in \epsilon^{-1}\mathcal{G}(U \times_X U)$ を取る。このとき $g$ はコサイクル条件
+$$
+\text{pr}_{12}^*g \cdot \text{pr}_{23}^*g = \text{pr}_{13}^*g
+$$
+を $\epsilon^{-1}\mathcal{G}(U \times_X U \times_X U)$ において満たす。
+Lemma \ref{proetale-lemma-limit-pullback} により
+$$
+\epsilon^{-1}\mathcal{G}(U \times_X U) =
+\colim \mathcal{G}(U_i \times_X U_i)
+$$
+および
+$$
+\epsilon^{-1}\mathcal{G}(U \times_X U \times_X U) =
+\colim \mathcal{G}(U_i \times_X U_i \times_X U_i)
+$$
+を得る。したがって、$g$ に写りコサイクル条件を満たす元
+$g_i \in \mathcal{G}(U_i \times_X U_i)$ と添字 $i$ を見いだせる。
+このときコサイクル $g_i$ は $X_\etale$ 上の $\mathcal{G}$-トーサーを定め、
+構成によりその引き戻しは $\mathcal{F}$ と同型である。いくつかの詳細は省略する
+（すなわち、サイト上のコホモロジーの章に追加されるべき、トーサーと
+1-コサイクルとの関係）。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-derived}
+$X$ をスキームとし、$\Lambda$ を環とする。
+\begin{enumerate}
+\item 充満忠実関手
+$\epsilon^{-1} : \textit{Mod}(X_\etale, \Lambda) \to
+\textit{Mod}(X_\proetale, \Lambda)$
+の本質的像は弱 Serre 部分圏 $\mathcal{C}$ である。
+\item 関手 $\epsilon^{-1}$ は $D^+(X_\etale, \Lambda)$ と
+$D^+_\mathcal{C}(X_\proetale, \Lambda)$ との圏同値を定め、その準逆は
+$R\epsilon_*$ で与えられる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明するため、Homology, Lemma
+\ref{homology-lemma-characterize-weak-serre-subcategory} の条件 (1) -- (4) を示す。
+$\epsilon^{-1}$ は充満忠実（Lemma \ref{proetale-lemma-fully-faithful}）かつ完全なので、
+条件 (4) を除けばすべて明らかである。しかし、
+$$
+0 \to \epsilon^{-1}\mathcal{F}_1 \to \mathcal{G} \to
+\epsilon^{-1}\mathcal{F}_2 \to 0
+$$
+が $X_\proetale$ 上の $\Lambda$-加群の層の短完全列なら、
+$$
+0 \to \epsilon_*\epsilon^{-1}\mathcal{F}_1 \to \epsilon_*\mathcal{G} \to
+\epsilon_*\epsilon^{-1}\mathcal{F}_2 \to
+R^1\epsilon_*\epsilon^{-1}\mathcal{F}_1
+$$
+を得る。Lemma \ref{proetale-lemma-relative-comparison} により、これは短完全列
+$$
+0 \to \mathcal{F}_1 \to \epsilon_*\mathcal{G} \to \mathcal{F}_2 \to 0
+$$
+と同じである。引き戻すと
+$\mathcal{G} = \epsilon^{-1}\epsilon_*\mathcal{G}$ を得る。これで (1) が示された。
+
+\medskip\noindent
+(2) は (1) と Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-equivalence-bounded} から従う。
+\end{proof}
+
+\noindent
+$\Lambda$ を環とする。Modules on Sites, Section
+\ref{sites-modules-section-locally-constant} で、サイト上の $\Lambda$-加群の
+局所定数層という概念を定義した。$M$ が $\Lambda$-加群なら、$\underline{M}$ が
+$\underline{\Lambda}$-加群の層として有限表示であることと、$M$ が有限表示
+$\Lambda$-加群であることは同値である。Modules on Sites, Lemma
+\ref{sites-modules-lemma-locally-constant-finite-type} を参照せよ。
+
+\begin{lemma}
+\label{proetale-lemma-compare-locally-constant}
+$X$ をスキームとし、$\Lambda$ を環とする。関手 $\epsilon^{-1}$ は圏同値
+$$
+\left\{
+\begin{matrix}
+\text{局所定数層}\\
+\text{係数環が }\Lambda\text{、サイトが }X_\etale\\
+\text{有限表示のもの}
+\end{matrix}
+\right\}
+\longleftrightarrow
+\left\{
+\begin{matrix}
+\text{局所定数層}\\
+\text{係数環が }\Lambda\text{、サイトが }X_\proetale\\
+\text{有限表示のもの}
+\end{matrix}
+\right\}
+$$
+を定める。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ を $X_\proetale$ 上の有限表示な $\Lambda$-加群の局所定数層とする。
+$\mathcal{F}|_{U_i}$ が定数となる pro-\'etale 被覆 $\{U_i \to X\}$ を選び、
+$\mathcal{F}|_{U_i} \cong \underline{M_i}_{U_i}$ と書く。
+$M_i$ と $M_j$ が同型でなければ $U_i \times_X U_j$ は空であることに注意せよ。
+各 $\Lambda$-加群 $M$ に対して $I_M = \{i \in I \mid M_i \cong M\}$ と置く。
+pro-\'etale 被覆は fpqc 被覆なので、Descent, Lemma
+\ref{descent-lemma-open-fpqc-covering} により
+$U_M = \bigcup_{i \in I_M} \Im(U_i \to X)$ は $X$ の開部分集合である。
+このとき $X = \coprod U_M$ は $X$ の互いに素な開被覆である。ある $M$ に対して
+$X$ を $U_M$ で置き換え、すべての $i$ について $M_i = M$ と仮定してよい。
+
+\medskip\noindent
+層 $\mathcal{I} = \mathit{Isom}(\underline{M}, \mathcal{F})$ を考える。
+この層は $\mathcal{G} = \mathit{Isom}(\underline{M}, \underline{M})$ の
+トーサーである。Modules on Sites, Lemma
+\ref{sites-modules-lemma-locally-constant} により、
+$G = \mathit{Isom}_\Lambda(M, M)$ とすれば $\mathcal{G} = \underline{G}$ である。
+Lemma \ref{proetale-lemma-compare-cohomology-nonabelian} により \'etale 位相と
+pro-\'etale 位相のトーサーは一致するので、$\mathcal{I}$ は $X$ 上 \'etale 局所的に
+切断をもつ。したがって $\mathcal{F}$ は \'etale 局所的に定数層であり、これが
+示すべきことであった。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-locally-constant-derived}
+$X$ をスキームとし、$\Lambda$ を Noether 環とする。
+$D_{flc}(X_\etale, \Lambda)$、resp.\ $D_{flc}(X_\proetale, \Lambda)$ を、
+$D(X_\etale, \Lambda)$、resp.\ $D(X_\proetale, \Lambda)$ の充満部分圏であって、
+コホモロジー層が有限型の $\Lambda$-加群の局所定数層である複体からなるものとする。
+このとき
+$$
+\epsilon^{-1} :
+D_{flc}^+(X_\etale, \Lambda)
+\longrightarrow
+D_{flc}^+(X_\proetale, \Lambda)
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+Modules on Sites, Lemma
+\ref{sites-modules-lemma-kernel-finite-locally-constant} および
+Derived Categories,
+Section \ref{derived-section-triangulated-sub} により、圏
+$D_{flc}(X_\etale, \Lambda)$ と $D_{flc}(X_\proetale, \Lambda)$ はそれぞれ
+$D(X_\etale, \Lambda)$ と $D(X_\proetale, \Lambda)$ の厳密充満かつ飽和な
+三角部分圏である。補題の主張は Lemmas \ref{proetale-lemma-compare-derived} と
+\ref{proetale-lemma-compare-locally-constant} を組み合わせれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-truncations}
+$X$ をスキームとし、$\Lambda$ を Noether 環とする。
+$K$ を $D(X_\proetale, \Lambda)$ の対象とし、
+$K_n = K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$ と置く。
+$K_1$ が
+\begin{enumerate}
+\item $\epsilon^{-1} :D(X_\etale, \Lambda/I) \to D(X_\proetale, \Lambda/I)$ の
+本質的像に属し、かつ
+\item ある $a \in \mathbf{Z}$ に対して Tor 振幅が $[a,\infty)$ に含まれる
+\end{enumerate}
+なら、$D(X_\proetale, \Lambda/I^n)$ の対象として $K_n$ に対しても (1) と (2) が
+成り立つ。
+\end{lemma}
+
+\begin{proof}
+$K_n$ に対する主張 (2) は、より一般的な Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-bounded} から従う。$K_n$ に対する主張 (1) は、
+区別三角形
+$$
+K \otimes_\Lambda^\mathbf{L} \underline{I^n/I^{n + 1}} \to
+K_{n + 1} \to
+K_n \to
+K \otimes_\Lambda^\mathbf{L} \underline{I^n/I^{n + 1}}[1]
+$$
+および同型
+$$
+K \otimes_\Lambda^\mathbf{L} \underline{I^n/I^{n + 1}} =
+K_1 \otimes_{\Lambda/I}^\mathbf{L} \underline{I^n/I^{n + 1}}
+$$
+と、Lemma \ref{proetale-lemma-compare-derived} で証明された
+$\epsilon^{-1}$ の本質的像が $D^+(X_\proetale, \Lambda/I^n)$ の三角部分圏である
+という事実から、$n$ に関する帰納法で従う。
+\end{proof}
+
+\begin{example}
+\label{proetale-example-functions-mod-locally-constant-functions}
+$X$ をスキームとし、$A$ をアーベル群とする。$U$ を点集合の写像
+$U \to A$ 全体の集合へ送る $X_\proetale$ 上の層を $fun(-, A)$ と表す。
+層の列
+$$
+0 \to \underline{A} \to fun(-, A) \to \mathcal{F} \to 0
+$$
+を $X_\proetale$ 上で考える。定数層は終トポスからの引き戻しなので、
+$\underline{A} = \epsilon^{-1}\underline{A}$ である。しかし $A$ が複数の元を
+もつなら、$fun(-, A)$ も $\mathcal{F}$ も $X$ の \'etale サイトからの引き戻しではない。
+いくつかの場合に $\mathcal{F}$ の値を計算するため、$X$ のすべての点が閉点で
+剰余体が分離閉であり、$U$ がアフィンであると仮定する。このとき $U$ のすべての点も
+閉点で剰余体が分離閉であり、
+$$
+H^1_\proetale(U, \underline{A}) =
+H^1_\etale(U, \underline{A}) = 0
+$$
+が Lemma \ref{proetale-lemma-compare-cohomology} と \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-affine-only-closed-points} により成り立つ。
+したがってこの場合、
+$$
+\mathcal{F}(U) = fun(U, A)/\underline{A}(U)
+$$
+\end{example}
+
+
+
+
+
+\section{定数 Noether の場合の導来完備化}
+\label{proetale-section-derived-completion-noetherian}
+
+\noindent
+Algebraic and Formal Geometry, Section
+\ref{algebraization-section-derived-completion} で始めた議論を続ける。
+読者は少なくともその節の一部を読んでいるものと仮定する。
+
+\medskip\noindent
+$\mathcal{C}$ をサイト、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+Modules on Sites, Lemma \ref{sites-modules-lemma-completion-flat} により
+$$
+\underline{\Lambda}^\wedge = \lim \underline{\Lambda/I^n}
+$$
+は平坦な $\underline{\Lambda}$-代数であり、写像
+$\underline{\Lambda} \to \underline{\Lambda}^\wedge$ は $I$ による商を同一視することを
+思い出そう。したがって Algebraic and Formal Geometry, Lemma
+\ref{algebraization-lemma-restriction-derived-complete-equivalence}
+により
+$$
+D_{comp}(\mathcal{C}, \Lambda) =
+D_{comp}(\mathcal{C}, \underline{\Lambda}^\wedge)
+$$
+を得る。特に、$D_{comp}(\mathcal{C}, \Lambda)$ の対象 $K$ のコホモロジー層
+$H^i(K)$ は $\underline{\Lambda}^\wedge$-加群の層である。記号上の便宜のため、
+しばしば $D_{comp}(\mathcal{C}, \Lambda)$ を用いる。
+
+\begin{lemma}
+\label{proetale-lemma-naive-completion}
+$\mathcal{C}$ をサイト、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+Algebraic and Formal Geometry, Proposition
+\ref{algebraization-proposition-derived-completion} の包含関手
+$D_{comp}(\mathcal{C}, \Lambda) \to D(\mathcal{C}, \Lambda)$
+の左随伴は $K$ を
+$$
+K^\wedge = R\lim(K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n})
+$$
+に送る。特に、$K$ が導来完備であるための必要十分条件は
+$K = R\lim(K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n})$ である。
+\end{lemma}
+
+\begin{proof}
+$I$ の生成元 $f_1, \ldots, f_r$ を選ぶ。Algebraic and Formal Geometry, Lemma
+\ref{algebraization-lemma-derived-completion-koszul}
+により
+$$
+K^\wedge = 
+R\lim (K \otimes_\Lambda^\mathbf{L} \underline{K_n})
+$$
+を得る。ここで $K_n = K(\Lambda, f_1^n, \ldots, f_r^n)$ である。
+More on Algebra, Lemma \ref{more-algebra-lemma-sequence-Koszul-complexes} で、
+$D(\Lambda)$ の pro-系 $\{K_n\}$ と $\{\Lambda/I^n\}$ が同型であることを見た。
+したがって補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-pushforward-Noetherian-case}
+$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとし、
+$f : \Sh(\mathcal{D}) \to \Sh(\mathcal{C})$ をトポスの射とする。このとき
+\begin{enumerate}
+\item $Rf_*$ は $D_{comp}(\mathcal{D}, \Lambda)$ を
+$D_{comp}(\mathcal{C}, \Lambda)$ に送る。
+\item 写像 $Rf_* : D_{comp}(\mathcal{D}, \Lambda) \to
+D_{comp}(\mathcal{C}, \Lambda)$ は左随伴
+$Lf_{comp}^* : D_{comp}(\mathcal{C}, \Lambda) \to
+D_{comp}(\mathcal{D}, \Lambda)$ をもち、これは $Lf^*$ の後に導来完備化を施すものである。
+\item $Rf_*$ は導来完備化と可換する。
+\item $D_{comp}(\mathcal{D}, \Lambda)$ の $K$ に対して
+$Rf_*K = R\lim Rf_*(K \otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n})$.
+\item $D_{comp}(\mathcal{C}, \Lambda)$ の $M$ に対して
+$Lf^*_{comp}M =
+R\lim Lf^*(M \otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) と (2) は Algebraic and Formal Geometry, Lemma
+\ref{algebraization-lemma-pushforward-derived-complete-adjoint}
+で見た。(3) は Algebraic and Formal Geometry, Lemma
+\ref{algebraization-lemma-pushforward-commutes-with-derived-completion}
+から従う。(4) のために $K$ を導来完備とする。このとき
+$$
+Rf_*K = Rf_*( R\lim K \otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n}) =
+R\lim Rf_*(K \otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n})
+$$
+を得る。第一の等式は Lemma \ref{proetale-lemma-naive-completion} により、第二の等式は
+$Rf_*$ が $R\lim$ と可換することによる（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-Rf-commutes-with-Rlim}）。これで (4) が示された。
+(5) を示すため、Lemma \ref{proetale-lemma-naive-completion} により
+$$
+Lf_{comp}^*M =
+R\lim ( Lf^*M \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n})
+$$
+を得る。Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-pullback-tensor-product} により $Lf^*$ は導来テンソル積と
+可換し、また $Lf^*\underline{\Lambda/I^n} = \underline{\Lambda/I^n}$ なので、(5) を得る。
+\end{proof}
+
+
+
+
+
+
+
+\section{導来完備化と弱可縮対象}
+\label{proetale-section-derived-completion-proetale}
+
+\noindent
+Section \ref{proetale-section-derived-completion-noetherian} の議論を続ける。
+本節では、弱可縮対象の存在が導来完備加群の研究をどのように簡単にするかを見る。
+
+\medskip\noindent
+$\mathcal{C}$ をサイト、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$D_{comp}(\mathcal{C}, \Lambda)$ に関する一般論は十分に満足できるものだが、
+導来完備複体の例を明示的に与えることは難しい。次のことが分かっている。
+\begin{enumerate}
+\item $D(\mathcal{C}, \Lambda/I^n)$ の任意の対象 $M$ は、係数制限により
+$D(\mathcal{C}, \Lambda)$ の導来完備対象となる。
+\item 任意の $K \in D(\mathcal{C}, \Lambda)$ に対して導来完備化
+$K^\wedge = R\lim (K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n})$
+は導来完備である。
+\end{enumerate}
+第一の型の対象は自明に完備であり、あまり興味深くないかもしれない。
+(2) の問題は、$K = \underline{\Lambda}$ の場合でさえ、一般の導来完備化が
+いくぶん捉えにくいことである。実際、ホモトピー極限の定義により区別三角形
+$$
+R\lim(\underline{\Lambda/I^n}) \to
+\prod \underline{\Lambda/I^n} \to
+\prod \underline{\Lambda/I^n} \to
+R\lim(\underline{\Lambda/I^n})[1]
+$$
+が $D(\mathcal{C}, \Lambda)$ にある。ここで積は $D(\mathcal{C}, \Lambda)$ における
+積である。これは単射分解の積を取ることで計算される
+（Injectives, Lemma \ref{injectives-lemma-derived-products}）。したがって層
+$H^p(\prod \underline{\Lambda/I^n})$ は前層
+$$
+U \longmapsto \prod H^p(U, \Lambda/I^n).
+$$
+の層化である。具体例として、$X = \Spec(\mathbf{C}[t, t^{-1}])$、
+$\mathcal{C} = X_\etale$、$\Lambda = \mathbf{Z}$、$I = (2)$、$p = 1$ とすると、前層
+$$
+U \mapsto \prod H^1(U_\etale, \mathbf{Z}/2^n\mathbf{Z})
+$$
+（$U$ は $X$ 上 \'etale）の層化を得る。
+$H^1(X_\etale, \mathbf{Z}/m\mathbf{Z})$ は位数 $m$ の巡回群であり、その生成元
+$\alpha_m$ は方程式 $t = s^m$ で与えられる有限 \'etale
+$\mathbf{Z}/m\mathbf{Z}$-被覆によって与えられることに注意せよ
+（\'Etale Cohomology, Section \ref{etale-cohomology-section-computation} を参照せよ）。
+このとき、上の前層の切断
+$$
+\alpha = (\alpha_{2^n}) \in \prod H^1(X_\etale, \mathbf{Z}/2^n\mathbf{Z})
+$$
+は $X$ 上の空でないどの \'etale スキームに制限しても零にならない。したがって、
+この前層に付随する層は零ではない。
+
+\medskip\noindent
+しかし、pro-\'etale サイトではこの現象は起こらない。その理由は、
+（準コンパクトな）弱可縮対象が十分に存在するからである。次の命題では、
+弱可縮対象を十分にもつサイトについて、定数 Noether の場合の導来完備化に関する
+いくつかの結果をまとめる（Sites, Definition
+\ref{sites-definition-w-contractible} を参照せよ）。
+
+\begin{proposition}
+\label{proetale-proposition-enough-weakly-contractibles}
+$\mathcal{C}$ をサイトとし、$\mathcal{C}$ は弱可縮対象を十分にもつと仮定する。
+$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+\begin{enumerate}
+\item 導来完備な $\Lambda$-加群の層の圏は
+$\textit{Mod}(\mathcal{C}, \Lambda)$ の弱 Serre 部分圏である。
+\item $\Lambda$-加群の層 $\mathcal{F}$ が
+$\mathcal{F} = \lim \mathcal{F}/I^n\mathcal{F}$ を満たすための必要十分条件は、
+$\mathcal{F}$ が導来完備であり、かつ $\bigcap I^n\mathcal{F} = 0$ であることである。
+\item 層 $\underline{\Lambda}^\wedge$ は導来完備である。
+\item $\ldots \to \mathcal{F}_3 \to \mathcal{F}_2 \to \mathcal{F}_1$ が
+導来完備な $\Lambda$-加群の層の逆系なら、$\lim \mathcal{F}_n$ は導来完備である。
+\item 対象 $K \in D(\mathcal{C}, \Lambda)$ が導来完備であるための必要十分条件は、
+各コホモロジー層 $H^p(K)$ が導来完備であることである。
+\item 対象 $K \in D_{comp}(\mathcal{C}, \Lambda)$ が上に有界であるための必要十分条件は、
+$K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I}$ が上に有界であることである。
+\item $K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I}$ が有限 Tor 次元をもつなら、
+対象 $K \in D_{comp}(\mathcal{C}, \Lambda)$ は有界である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$\mathcal{B} \subset \Ob(\mathcal{C})$ を、すべての $U \in \mathcal{B}$ が弱可縮であり、
+$\mathcal{C}$ のすべての対象が $\mathcal{B}$ の元による被覆をもつような部分集合とする。
+以下では Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-w-contractible} および Proposition
+\ref{sites-cohomology-proposition-enough-weakly-contractibles} の結果を断りなく用いる。
+
+\medskip\noindent
+$R\lim$ は $R\Gamma(U, -)$ と可換することを思い出そう。Injectives, Lemma
+\ref{injectives-lemma-RF-commutes-with-Rlim} を参照せよ。$f \in I$ とする。
+$T(K, f)$ は系
+$$
+\ldots \xrightarrow{f} K \xrightarrow{f} K \xrightarrow{f} K
+$$
+の $D(\mathcal{C}, \Lambda)$ におけるホモトピー極限であることを思い出そう。したがって
+$$
+R\Gamma(U, T(K, f)) = T(R\Gamma(U, K), f).
+$$
+$D(\mathcal{C}, \Lambda)$ の対象間の写像が同型かどうかは
+$U \in \mathcal{B}$ で評価して判定できるので、$D(\mathcal{C}, \Lambda)$ の対象 $K$ が
+導来完備であるための必要十分条件は、すべての $U \in \mathcal{B}$ に対して
+$R\Gamma(U, K)$ が $D(\Lambda)$ の対象として導来完備であることである。
+
+\medskip\noindent
+上の注意により、(1) と (5) は環上の加群に対する対応する結果から従う。
+More on Algebra, Lemmas \ref{more-algebra-lemma-hom-from-Af} および
+\ref{more-algebra-lemma-serre-subcategory} を参照せよ。同様に、(2) は
+More on Algebra, Proposition
+\ref{more-algebra-proposition-derived-complete-modules}
+から従う。実際、$U \in \mathcal{B}$ に対して
+$(I^n\mathcal{F})(U) = I^n \cdot \mathcal{F}(U)$ である
+（$U$ での評価が完全であることによる）。
+
+\medskip\noindent
+(4) を証明する。ホモトピー極限 $R\lim \mathcal{F}_n$ は
+$D_{comp}(X, \Lambda)$ に属する（Algebraic and Formal Geometry, Definition
+\ref{algebraization-definition-derived-complete}
+に続く議論を参照せよ）。いま証明した (5) により、
+$\lim \mathcal{F}_n = H^0(R\lim \mathcal{F}_n)$
+は導来完備である。(3) は (4) の特別な場合である。
+
+\medskip\noindent
+(6) と (7) を証明する。Lemma \ref{proetale-lemma-naive-completion}、Cohomology on Sites,
+Lemma \ref{sites-cohomology-lemma-bounded}、および Cohomology on Sites,
+Proposition \ref{sites-cohomology-proposition-enough-weakly-contractibles} における
+ホモトピー極限の計算から従う。
+\end{proof}
+
+
+
+
+
+
+\section{一点のコホモロジー}
+\label{proetale-section-cohomology-point}
+
+\noindent
+$\Lambda$ をイデアル $I \subset \Lambda$ に関して完備な Noether 環とし、
+$k$ を体とする。本節では
+$$
+H^i(\Spec(k)_\proetale, \underline{\Lambda}^\wedge)
+$$
+を「計算」する。ここで前と同様に
+$\underline{\Lambda}^\wedge = \lim_m \underline{\Lambda/I^m}$ である。
+$k^{sep}$ を $k$ の分離代数閉包とする。このとき
+$$
+\mathcal{U} = \{\Spec(k^{sep}) \to \Spec(k)\}
+$$
+は $\Spec(k)$ の pro-\'etale 被覆である。この被覆に関する {\v C}ech から
+コホモロジーへのスペクトル系列を用いる。$U_0 = \Spec(k^{sep})$ と置き、
+\begin{align*}
+U_n & =
+\Spec(k^{sep}) \times_{\Spec(k)}
+\Spec(k^{sep}) \times_{\Spec(k)} \ldots
+\times_{\Spec(k)} \Spec(k^{sep}) \\
+& =
+\Spec(k^{sep} \otimes_k k^{sep} \otimes_k \ldots \otimes_k k^{sep})
+\end{align*}
+とする（$n + 1$ 個の因子）。$U_0$ の台位相空間 $|U_0|$ は一点集合であり、
+$n \geq 1$ に対して
+$$
+|U_n| = G \times \ldots \times G\quad (n\text{ 個の因子})
+$$
+が副有限空間として成り立つ。ここで $G = \text{Gal}(k^{sep}/k)$ である。
+実際、$U_n$ の各点の剰余体は $k^{sep}$ であり、
+$(\sigma_1, \ldots, \sigma_n)$ を全射
+$$
+k^{sep} \otimes_k k^{sep} \otimes_k \ldots \otimes_k k^{sep}
+\longrightarrow k^{sep}, \quad
+\lambda_0 \otimes \lambda_1 \otimes \ldots \lambda_n
+\longmapsto \lambda_0 \sigma_1(\lambda_1) \ldots \sigma_n(\lambda_n)
+$$
+に対応する点と同一視する。このとき
+\begin{align*}
+R\Gamma((U_n)_\proetale, \underline{\Lambda}^\wedge)
+& =
+R\lim_m R\Gamma((U_n)_\proetale, \underline{\Lambda/I^m}) \\
+& =
+R\lim_m R\Gamma((U_n)_\etale, \underline{\Lambda/I^m}) \\
+& =
+\lim_m H^0(U_n, \underline{\Lambda/I^m}) \\
+& = 
+\text{Maps}_{cont}(G \times \ldots \times G, \Lambda)
+\end{align*}
+と計算できる。第一の等式は、$R\Gamma$ が導来極限と可換し、Proposition
+\ref{proetale-proposition-enough-weakly-contractibles} により $\Lambda^\wedge$ が層
+$\underline{\Lambda/I^m}$ の導来極限だからである。第二の等式は Lemma
+\ref{proetale-lemma-compare-cohomology} による。第三の等式は \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-affine-only-closed-points} による。第四の等式では、
+まず \'Etale Cohomology, Remark
+\ref{etale-cohomology-remark-constant-locally-constant-maps} を用いて定数層
+$\underline{\Lambda/I^m}$ の切断を同定する。次に、$\Lambda$ が $I$ に関して完備であり、
+したがって位相空間として $\lim_m \Lambda/I^m$ に等しいことを用いて
+$\lim_m \text{Map}_{cont}(G, \Lambda/I^m) = \text{Map}_{cont}(G, \Lambda)$ を得る。
+$G$ の高次冪についても同様である。ここで Cohomology on Sites, Lemmas
+\ref{sites-cohomology-lemma-cech-cohomology} および
+\ref{sites-cohomology-lemma-cech-spectral-sequence-application}
+により
+$$
+\Lambda \to \text{Maps}_{cont}(G, \Lambda) \to
+\text{Maps}_{cont}(G \times G, \Lambda) \to \ldots
+$$
+が pro-\'etale コホモロジーを計算する。言い換えると、
+$$
+H^i(\Spec(k)_\proetale, \underline{\Lambda}^\wedge)
+=
+H^i_{cont}(G, \Lambda)
+$$
+を得る。ここで右辺は Tate の連続コホモロジーである。
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-continuous-group-cohomology} を参照せよ。
+もちろん、これは当然期待される結果である。
+
+\begin{lemma}
+\label{proetale-lemma-more-general-point}
+$k$ を体とし、$G = \text{Gal}(k^{sep}/k)$ をその絶対 Galois 群とする。さらに、
+\begin{enumerate}
+\item $M$ を連続な $G$-作用をもつ副有限アーベル群とする、または
+\item $\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとし、
+$M$ を連続な $G$-作用をもつ $I$-進完備 $\Lambda$-加群とする。
+\end{enumerate}
+このとき、$M$ に付随する $\Spec(k)_\proetale$ 上の標準的な層
+$\underline{M}^\wedge$ であって
+$$
+H^i(\Spec(k), \underline{M}^\wedge) = H^i_{cont}(G, M)
+$$
+がアーベル群または $\Lambda$-加群として成り立つものが存在する。
+\end{lemma}
+
+\begin{proof}
+(2) の場合を証明する。$M_n = M/I^nM$ と置く。$M$ は $I$-進完備と仮定したので
+$M = \lim M_n$ である。$G$ の作用は連続なので、各 $M_n$ 上に $G$ の連続作用を得る。
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-equivalence-sheaves-point} により、この作用は
+$\Spec(k)_\etale$ 上の $\Lambda/I^n$-加群の（局所定数）層 $\underline{M_n}$ に対応する。
+比較射 $\epsilon$ によって $\Spec(k)_\proetale$ へ引き戻し、極限
+$$
+\underline{M}^\wedge = \lim \epsilon^{-1}\underline{M_n}
+$$
+を取ると、補題で述べた層を得る。本節の導入で与えたものとまったく同じ議論により、
+Tate の連続 Galois コホモロジーとの比較を得る。
+\end{proof}
+
+
+
+
+
+
+\section{pro-\'etale サイトの関手性}
+\label{proetale-section-morphism}
+
+\noindent
+$f : X \to Y$ をスキームの射とする。関手
+$Y_\proetale \to X_\proetale$、$V \mapsto X \times_Y V$ はサイトの射
+$f_\proetale : X_\proetale \to Y_\proetale$ を誘導する。Sites, Proposition
+\ref{sites-proposition-get-morphism} を参照せよ。実際、サイトの射の可換図式
+$$
+\xymatrix{
+X_\proetale \ar[r]_\epsilon \ar[d]_{f_\proetale} &
+X_\etale \ar[d]^{f_\etale} \\
+Y_\proetale \ar[r]^\epsilon & Y_\etale
+}
+$$
+を得る。ここで $\epsilon$ は Section \ref{proetale-section-comparison} のものとする。
+特に、$\epsilon^{-1} f_\etale^{-1} = f_\proetale^{-1} \epsilon^{-1}$ である。
+順像に対する対応する結果は次のとおりである。
+
+\begin{lemma}
+\label{proetale-lemma-morphism-comparison}
+$f : X \to Y$ を準コンパクトかつ準分離なスキームの射とする。
+\begin{enumerate}
+\item $\mathcal{F}$ を $X_\etale$ 上の集合の層とする。このとき
+$f_{\proetale, *}\epsilon^{-1}\mathcal{F} =
+\epsilon^{-1}f_{\etale, *}\mathcal{F}$.
+\item $\mathcal{F}$ を $X_\etale$ 上のアーベル群の層とする。このとき
+$Rf_{\proetale, *}\epsilon^{-1}\mathcal{F} =
+\epsilon^{-1}Rf_{\etale, *}\mathcal{F}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) を証明する。$\mathcal{F}$ を $X_\etale$ 上の集合の層とする。標準写像
+$\epsilon^{-1}f_{\etale, *}\mathcal{F} \to
+f_{\proetale, *}\epsilon^{-1}\mathcal{F}$ がある。Sites, Section
+\ref{sites-section-pullback} を参照せよ。これが同型であることを示すには
+$Y$ 上（Zariski）局所的に議論してよいので、$Y$ はアフィンと仮定してよい。
+この場合、$Y_\proetale$ の各対象は、$Y$ 上 \'etale なアフィンスキーム $V_i$ の
+極限 $V = \lim V_i$ である対象による被覆をもつ（たとえば Proposition
+\ref{proetale-proposition-weakly-etale} による）。写像
+$\epsilon^{-1}f_{\etale, *}\mathcal{F} \to
+f_{\proetale, *}\epsilon^{-1}\mathcal{F}$
+を $V$ で評価すると写像
+$$
+\colim \Gamma(X \times_Y V_i, \mathcal{F})
+\longrightarrow
+\Gamma(X \times_Y V, \epsilon^*\mathcal{F})
+$$
+を得る。左辺については Lemma \ref{proetale-lemma-limit-pullback} を参照せよ。
+Lemma \ref{proetale-lemma-describe-pullback-from-etale} により
+$$
+\Gamma(X \times_Y V, \epsilon^*\mathcal{F}) =
+\Gamma(X \times_Y V, g_\etale^{-1}\mathcal{F})
+$$
+である。ここで $g : X \times_Y V \to X$ は射影である。したがって結果は
+\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-directed-colimit-cohomology} から従う。
+
+\medskip\noindent
+(2) を証明する。上とまったく同様に議論すると、写像
+$$
+\colim H^i_\etale(X \times_Y V_i, \mathcal{F})
+\longrightarrow
+H^i_\etale(X \times_Y V, \mathcal{F})
+$$
+が同型であることを示せば十分である。これは再び \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-directed-colimit-cohomology} から従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{有限射と pro-\'etale サイト}
+\label{proetale-section-finite}
+
+\noindent
+スキームの有限射がアーベル pro-\'etale 層上の完全な順像を定めるかどうかは
+明らかでない。
+
+\begin{lemma}
+\label{proetale-lemma-finite}
+$f : Z \to X$ を局所有限表示なスキームの有限射とする。このとき
+$f_{\proetale, *} : \textit{Ab}(Z_\proetale) \to \textit{Ab}(X_\proetale)$
+は完全である。
+\end{lemma}
+
+\begin{proof}
+これを証明するには $X$ 上（Zariski）局所的に議論してよいので、$X$ はアフィン、
+たとえば $X = \Spec(A)$ と仮定してよい。このとき、ある有限表示な有限
+$A$-代数 $B$ に対して $Z = \Spec(B)$ である。Proposition
+\ref{proetale-proposition-find-w-contractible} の証明の構成により、$D$ が w-可縮となる
+忠実平坦 ind-\'etale 環写像 $A \to D$ を得る。層の列の完全性は、このような対象
+$U = \Spec(D)$ で評価して判定してよい。このとき $U$ における
+$f_{\proetale, *}\mathcal{F}$ の値は、$V = \Spec(D \otimes_A B)$ における
+$\mathcal{F}$ の値に等しい。Lemma
+\ref{proetale-lemma-finite-finitely-presented-over-w-contractible} により
+$D \otimes_A B$ は w-可縮なので、$V$ での評価は完全である。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{閉埋め込みと pro-\'etale サイト}
+\label{proetale-section-closed-immersion}
+
+\noindent
+スキームの閉埋め込みがアーベル pro-\'etale 層上の完全な順像を定めるかどうかは
+明らかでない（おそらく成り立たない）。
+
+\begin{lemma}
+\label{proetale-lemma-closed-immersion-affines}
+$i : Z \to X$ をアフィンスキームの閉埋め込み射とする。Lemma
+\ref{proetale-lemma-affine-alternative} で導入したサイトを $X_{app}$ と $Z_{app}$ で表す。
+基底変換関手
+$$
+u : X_{app} \to Z_{app},\quad U \longmapsto u(U) = U \times_X Z
+$$
+は連続であり、充満忠実な左随伴 $v$ をもつ。$Z_{app}$ の $V$ に対して、射
+$V \to v(V)$ は $V$ を $u(v(V)) = v(V) \times_X Z$ と同一視する閉埋め込みであり、
+$v(V)$ の各点は $V$ のある点へ特殊化する。関手 $v$ は余連続であり、被覆を被覆へ送る。
+\end{lemma}
+
+\begin{proof}
+随伴の存在は Lemma \ref{proetale-lemma-lift-ind-etale} と定義から直ちに従う。
+$u$ が連続であることは $X_{app}$ の被覆の定義から明らかである。
+
+\medskip\noindent
+$X = \Spec(A)$ および $Z = \Spec(A/I)$ と書く。$V = \Spec(\overline{C})$ を
+$Z_{app}$ の対象とし、$v(V) = \Spec(C)$ とする。Lemma
+\ref{proetale-lemma-lift-ind-etale} の主張で、$V$ が
+$v(V) \times_X Z = \Spec(C/IC)$ に等しいことを見た。
+$C/IC = \overline{C}$ の可逆元へ写る任意の $g \in C$ は $C$ で可逆である。
+実際、$A$-代数写像 $C \to C_g \to C/IC$ があり、随伴性により
+$C$-代数写像 $C_g \to C$ を得る。したがって $v(V)$ の各点は $V$ の点へ特殊化する。
+
+\medskip\noindent
+$\{V_i \to V\}$ を $Z_{app}$ の被覆と仮定する。このとき
+$\{v(V_i) \to v(V)\}$ は $Z_{app}$ の有限個の射の族であり、
+$V \subset v(V)$ の各点は写像 $v(V_i) \to v(V)$ のいずれかの像に含まれる。
+射 $v(V_i) \to v(V)$ は平坦なので（弱 \'etale だからである）、
+$\{v(V_i) \to v(V)\}$ は共同全射であると結論できる。
+これで $v$ が被覆を被覆へ送ることが示された。
+
+\medskip\noindent
+$V$ を $Z_{app}$ の対象とし、$\{U_i \to v(V)\}$ を $X_{app}$ の被覆とする。
+このとき $\{u(U_i) \to u(v(V)) = V\}$ は $Z_{app}$ の被覆である。
+随伴性により射 $v(u(U_i)) \to U_i$ を得る。したがって族
+$\{v(u(U_i)) \to v(V)\}$ は与えられた被覆を細分し、$v$ は余連続であると結論する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-closed-immersion-affines-apply}
+$Z \to X$ をアフィンスキームの閉埋め込み射とする。対応するトポスの射
+$i = i_\proetale$ は、Lemma \ref{proetale-lemma-closed-immersion-affines} の充満忠実な
+余連続関手 $v : Z_{app} \to X_{app}$ に付随するトポスの射に等しい。したがって、
+\begin{enumerate}
+\item $i^{-1}\mathcal{F}$ は前層 $V \mapsto \mathcal{F}(v(V))$ に付随する層である。
+\item $Z_{app}$ の弱可縮対象 $V$ に対して
+$i^{-1}\mathcal{F}(V) = \mathcal{F}(v(V))$,
+が成り立つ。
+\item $i^{-1} : \Sh(X_\proetale) \to \Sh(Z_\proetale)$ は左随伴 $i^{Sh}_!$ をもつ。
+\item $i^{-1} : \textit{Ab}(X_\proetale) \to \textit{Ab}(Z_\proetale)$ は
+左随伴 $i_!$ をもつ。
+\item $\text{id} \to i^{-1}i^{Sh}_!$、$\text{id} \to i^{-1}i_!$ および
+$i^{-1}i_* \to \text{id}$ は同型である。
+\item $i_*$、$i^{Sh}_!$ および $i_!$ は充満忠実である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-affine-alternative} により、$i_\proetale$ をサイトの射
+$u : X_{app} \to Z_{app}$、$V \mapsto V \times_X Z$ によって記述してよい。
+補題の最初の主張は Sites, Lemmas \ref{sites-lemma-have-functor-other-way} および
+\ref{sites-lemma-have-functor-other-way-morphism} から従う
+（ただし $u$ と $v$ の役割を入れ替える）。
+
+\medskip\noindent
+(1) を証明する。$i$ を $v$ に付随するトポスの射として記述すれば、これは構成から
+成り立つ。Sites, Lemma \ref{sites-lemma-cocontinuous-morphism-topoi} を参照せよ。
+
+\medskip\noindent
+(2) を証明する。Lemma \ref{proetale-lemma-closed-immersion-affines} により関手 $v$ は被覆を
+被覆へ送るので、前層 $\mathcal{G} : V \mapsto \mathcal{F}(v(V))$ は分離前層である
+（Sites, Definition \ref{sites-definition-separated}）。したがって
+$\mathcal{G}$ の層化は $\mathcal{G}^+$ である。Sites, Theorem
+\ref{sites-theorem-plus} を参照せよ。次に、$V$ を $Z_{app}$ の弱可縮対象とし、
+$\mathcal{V} = \{V_i \to V\}_{i = 1, \ldots, n}$
+を $Z_{app}$ の任意の被覆とする。
+$\mathcal{V}' = \{\coprod V_i \to V\}$ と置く。$v$ は有限直和と可換し
+（左随伴であること、または構成による）、$\mathcal{F}$ は有限直和を積へ送るので、
+$$
+H^0(\mathcal{V}, \mathcal{G}) = H^0(\mathcal{V}', \mathcal{G})
+$$
+を得る（記号については Sites, Section \ref{sites-section-sheafification}、また
+\'Etale Cohomology, Lemma \ref{etale-cohomology-lemma-cech-complex} と比較せよ）。
+したがって被覆は一つの射、たとえば $\{V' \to V\}$ で与えられると仮定してよい。
+$V$ は弱可縮なので、この被覆は自明な被覆 $\{V \to V\}$ によって細分される。
+ゆえに $V$ における $\mathcal{G}^+ = i^{-1}\mathcal{F}$ の値は単に
+$\mathcal{F}(v(V))$ であり、(2) が証明された。
+
+\medskip\noindent
+(3) を証明する。$Z_{app}$ の各対象は弱可縮対象による被覆をもつ
+（Lemma \ref{proetale-lemma-proetale-enough-w-contractible}）。上の議論により、
+$i^{Sh}_!$ が存在するなら、弱可縮な $V$ に対して
+$i^{Sh}_!h_V = h_{v(V)}$ となることが分かる。したがって $i^{Sh}_!$ の存在は
+Sites, Lemma \ref{sites-lemma-existence-lower-shriek} から従う。
+
+\medskip\noindent
+(4) を証明する。$Z_{app}$ の弱可縮な $V$ に対して
+$i_!\mathbf{Z}_V = \mathbf{Z}_{v(V)}$ と置き、直和について同様のことを用いて
+Homology, Lemma \ref{homology-lemma-partially-defined-adjoint} を適用すれば、
+$i_!$ の存在も同様に従う。詳細は省略する。
+
+\medskip\noindent
+(5) を証明する。$V$ を $Z_{app}$ の可縮対象とする。このとき
+$i^{-1}i^{Sh}_!h_V = i^{-1}h_{v(V)} = h_{u(v(V))} = h_V$ である
+（一般に $i^{-1}h_U = h_{u(U)}$ である）。可縮な $V$ に対する層 $h_V$ は
+$\Sh(Z_{app})$ を生成するので（Sites, Lemma
+\ref{sites-lemma-sheaf-coequalizer-representable}）、
+$\text{id} \to i^{-1}i^{Sh}_!$ は同型である。同様に、写像
+$\text{id} \to i^{-1}i_!$ も同型である。さらに
+$(i^{-1}i_*\mathcal{H})(V) = i_*\mathcal{H}(v(V)) =
+\mathcal{H}(u(v(V))) = \mathcal{H}(V)$ であるから、
+$i^{-1}i_* \to \text{id}$ は同型である。
+
+\medskip\noindent
+(6) の充満忠実性の主張は Categories, Lemma
+\ref{categories-lemma-adjoint-fully-faithful} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-closed-immersion}
+$i : Z \to X$ をスキームの閉埋め込みとする。このとき
+\begin{enumerate}
+\item $i_\proetale^{-1}$ は極限と可換する。
+\item $i_{\proetale, *}$ は充満忠実である。
+\item $i_\proetale^{-1}i_{\proetale, *} \cong \text{id}_{\Sh(Z_\proetale)}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Sites, Lemma \ref{sites-lemma-exactness-properties} により (2) と (3) は同値である。
+(1) と (3) は $X$ 上（Zariski）局所的なので、$X$ はアフィンと仮定してよい。
+この場合、結果は Lemma \ref{proetale-lemma-closed-immersion-affines-apply} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-thickening}
+$i : Z \to X$ を整かつ普遍的単射かつ全射なスキームの射とする。このとき
+$i_{\proetale, *}$ と $i_\proetale^{-1}$ は pro-\'etale トポスの圏の互いに準逆な
+圏同値である。
+\end{lemma}
+
+\begin{proof}
+$X$ がアフィンの場合へ直ちに帰着できる。このとき $Z$ もアフィンである。
+$A = \mathcal{O}(X)$、$B = \mathcal{O}(Z)$ と置く。
+$A$ 上と $B$ 上の \'etale 代数の圏は同値である。\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-topological-invariance} および Remark
+\ref{etale-cohomology-remark-affine-inside-equivalence} を参照せよ。したがって
+$A$ 上と $B$ 上の ind-\'etale 代数の圏も同値である。言い換えると、Lemma
+\ref{proetale-lemma-affine-alternative} の圏 $X_{app}$ と $Z_{app}$ は同値である。
+この同値が被覆を被覆へ送り、逆も成り立つことの検証は省略する。したがって結果は、
+pro-\'etale トポスが $X_{app}$ 上の層のトポスであると述べる Lemma
+\ref{proetale-lemma-affine-alternative} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compute-i-star}
+$i : Z \to X$ をスキームの閉埋め込みとする。$U \to X$ を、次を満たす
+$X_\proetale$ の対象とする。
+\begin{enumerate}
+\item $U$ はアフィンかつ弱可縮である。
+\item $U$ の各点は $U \times_X Z$ の点へ特殊化する。
+\end{enumerate}
+このとき、$X_\proetale$ 上のすべてのアーベル群の層に対して
+$i_\proetale^{-1}\mathcal{F}(U \times_X Z) = \mathcal{F}(U)$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+引き戻しは制限と可換するので、$X$ を $U$ で置き換えてよい。したがって
+$X$ はアフィンかつ弱可縮であり、$X$ の各点は $Z$ の点へ特殊化すると仮定してよい。
+Lemma \ref{proetale-lemma-closed-immersion-affines-apply} の (1) により、この場合に
+$v(Z) = X$ を示せば十分である。すなわち、次を示す必要がある。$A$ を w-可縮環、
+$I \subset A$ を $A$ の Jacobson 根基に含まれるイデアルとし、
+$A \to B \to A/I$ を $A \to B$ が ind-\'etale となる分解とする。このとき、
+$A/I$ への写像と両立する一意なレトラクション $B \to A$ が存在する。
+$A/I$-代数として $B/IB = A/I \times R$ であることに注意せよ。
+$B$ を局所化で置き換えれば、$B/IB = A/I$ と仮定してよい。
+$\Spec(B) \to \Spec(A)$ の像は $V(I)$、したがってすべての閉点を含み、特殊化で
+閉じているので、この写像は全射である。$A$ は w-可縮なので、レトラクション
+$B \to A$ が存在する。$B/IB = A/I$ なので、このレトラクションは $A/I$ への
+写像と両立する。一意性の証明は省略する（ヒント：$A$ と $B$ は $A$ の極大イデアルで
+同型な局所環をもつことを用いよ）。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-closed-immersion-complement-retrocompact-exact}
+$i : Z \to X$ をスキームの閉埋め込みとする。
+$X \setminus i(Z)$ が $X$ のレトロコンパクトな開部分なら、
+$i_{\proetale, *}$ は完全である。
+\end{lemma}
+
+\begin{proof}
+問題は $X$ 上局所的なので、$X$ はアフィンと仮定してよい。
+$X = \Spec(A)$、$Z = \Spec(A/I)$ と書く。集合として
+$Z = V(f_1, \ldots, f_r)$ となる $f_1, \ldots, f_r \in I$ が存在する。
+Algebra, Lemma \ref{algebra-lemma-qc-open} を参照せよ。Lemma
+\ref{proetale-lemma-thickening} により、$Z = \Spec(A/(f_1, \ldots, f_r))$ と仮定してよい。
+この場合、Lemma \ref{proetale-lemma-finite} により関手 $i_{\proetale, *}$ は完全である。
+\end{proof}
+
+
+
+
+
+\section{零による拡張}
+\label{proetale-section-extension-by-zero}
+
+\noindent
+Modules on Sites, Section
+\ref{sites-modules-section-localize} の一般論により、
+次の定義を与えることができる。
+
+\begin{definition}
+\label{proetale-definition-extension-zero}
+$j : U \to X$ をスキームの弱 \'etale 射とする。
+\begin{enumerate}
+\item 制限関手
+$j^{-1} : \Sh(X_\proetale) \to \Sh(U_\proetale)$
+は左随伴
+$j_!^{Sh} : \Sh(X_\proetale) \to \Sh(U_\proetale)$
+をもつ。
+\item 制限関手
+$j^{-1} : \textit{Ab}(X_\proetale) \to \textit{Ab}(U_\proetale)$
+は左随伴をもち、これを
+$j_! : \textit{Ab}(U_\proetale) \to \textit{Ab}(X_\proetale)$
+と書いて、{\it 零による拡張}と呼ぶ。
+\item $\Lambda$ を環とする。関手
+$j^{-1} : \textit{Mod}(X_\proetale, \Lambda) \to
+\textit{Mod}(U_\proetale, \Lambda)$
+は左随伴
+$j_! : \textit{Mod}(U_\proetale, \Lambda) \to
+\textit{Mod}(X_\proetale, \Lambda)$
+をもち、これを{\it 零による拡張}と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+通常どおり、これを \'etale の場合に起こることと比較する。
+
+\begin{lemma}
+\label{proetale-lemma-jshriek-comparison}
+$j : U \to X$ をスキームの \'etale 射とする。
+$\mathcal{G}$ を $U_\etale$ 上のアーベル層とする。このとき、
+$X_\proetale$ 上の層として
+$\epsilon^{-1} j_!\mathcal{G} = j_!\epsilon^{-1}\mathcal{G}$ である。
+\end{lemma}
+
+\begin{proof}
+両関手はいずれも
+$j_\proetale^{-1} \epsilon_* = \epsilon_* j_\etale^{-1}$ の左随伴なので、
+主張が成り立つ。この等式は Section \ref{proetale-section-morphism} の議論による。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-jshriek-zero}
+$j : U \to X$ をスキームの弱 \'etale 射とする。
+$i : Z \to X$ を $U \times_X Z = \emptyset$ を満たす閉埋め込みとする。
+$V \to X$ を $X_\proetale$ のアフィン対象で、$V$ の各点が
+$V_Z = Z \times_X V$ の点へ特殊化するものとする。このとき、
+$U_\proetale$ 上の任意のアーベル層に対して
+$j_!\mathcal{F}(V) = 0$ である。
+\end{lemma}
+
+\begin{proof}
+$\{V_i \to V\}$ を pro-\'etale 被覆とする。この被覆を、その各対象から
+$X$ 上 $U$ への射が存在しない被覆へ細分できれば補題が従う
+（Modules on Sites, Section \ref{sites-modules-section-localize} における
+$j_!$ の構成を参照せよ）。まず被覆を細分して、$V_i$ がアフィンである有限被覆を得る。
+各 $i$ に対し $V_i = \Spec(A_i)$ とし、$Z_i \subset V_i$ を $Z$ の逆像とする。
+Lemma \ref{proetale-lemma-localization} の記法で
+$W_i = \Spec(A_{i, Z_i}^\sim)$ とおく。このとき
+$\coprod W_i \to V$ は弱 \'etale であり、その像は $V_Z$ のすべての点を含む。
+したがって特殊化に関する仮定により、その像は $V$ のすべての点を含む。
+ゆえに $\{W_i \to V\}$ は与えられた被覆を細分する pro-\'etale 被覆である。
+一方、$W_i$ の各点は $Z$ 上の点へ特殊化するので、$X$ 上の射
+$W_i \to U$ は存在しない。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-open-immersion}
+$j : U \to X$ をスキームの開埋め込みとする。このとき
+$\text{id} \cong j^{-1}j_!$ および $j^{-1}j_* \cong \text{id}$ であり、
+関手 $j_!$ と $j_*$ は充満忠実である。
+\end{lemma}
+
+\begin{proof}
+Modules on Sites, Lemma \ref{sites-modules-lemma-restrict-back}、
+集合の層の場合には Sites, Lemma \ref{sites-lemma-restrict-back}、および
+Categories, Lemma \ref{categories-lemma-adjoint-fully-faithful} を参照せよ。
+\end{proof}
+
+\noindent
+零による拡張と、相補的な閉部分スキームへの制限との関係は次のとおりである。
+
+\begin{lemma}
+\label{proetale-lemma-ses-associated-to-open}
+$X$ をスキームとする。$Z \subset X$ を閉部分スキーム、$U \subset X$ をその補集合とする。
+包含射を $i : Z \to X$ および $j : U \to X$ と書く。$j$ は準コンパクト射と仮定する。
+$X_\proetale$ 上の任意のアーベル層に対し、標準的な短完全列
+$$
+0 \to j_!j^{-1}\mathcal{F} \to \mathcal{F} \to i_*i^{-1}\mathcal{F} \to 0
+$$
+が $X_\proetale$ 上に存在する。ここで、すべての関手は pro-\'etale 位相に関するものである。
+\end{lemma}
+
+\begin{proof}
+関与する関手の随伴性から各写像を得る。この列を評価すると短完全列になるような対象が
+$X_\proetale$ に十分多く存在することを示せばよい
+（Sites, Definition \ref{sites-definition-w-contractible}）。
+$V = \Spec(A)$ を $X_\proetale$ のアフィン対象で、$A$ が w-可縮であるものとする
+（この型の対象は十分多く存在する）。このとき $V \times_X Z$ はイデアル
+$I \subset A$ で切り出される。$j$ が準コンパクトであるという仮定から、
+$V(I) = V(f_1, \ldots, f_r)$ を満たす $f_1, \ldots, f_r \in I$ が存在する。
+忠実平坦な ind-Zariski 環準同型
+$$
+A \longrightarrow A_{f_1} \times \ldots \times A_{f_r} \times
+A_{V(I)}^\sim
+$$
+を得る。ここで $A_{V(I)}^\sim$ は Lemma \ref{proetale-lemma-localization} と同じ記法である。
+$V_i = \Spec(A_{f_i}) \to X$ は $U$ を経由するので、
+$$
+j_!j^{-1}\mathcal{F}(V_i) = \mathcal{F}(V_i)
+\quad\text{and}\quad
+i_*i^{-1}\mathcal{F}(V_i) = 0
+$$
+である。一方、スキーム $V^\sim = \Spec(A_{V(I)}^\sim)$ に対しては
+$$
+j_!j^{-1}\mathcal{F}(V^\sim) = 0
+\quad\text{and}\quad
+\mathcal{F}(V^\sim) = i_*i^{-1}\mathcal{F}(V^\sim)
+$$
+である。第1の等式は Lemma \ref{proetale-lemma-jshriek-zero} により、第2の等式は
+Lemmas \ref{proetale-lemma-compute-i-star} および \ref{proetale-lemma-localization-w-contractible} による。
+したがってこの列を
+$\Spec(A_{f_1} \times \ldots \times A_{f_r} \times A_{V(I)}^\sim)$ 上で評価すると
+完全列となり、補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-j-shriek-limits}
+$j : U \to X$ をスキームの準コンパクトな開埋め込みとする。関手
+$j_! : \textit{Ab}(U_\proetale) \to \textit{Ab}(X_\proetale)$
+は極限と可換である。
+\end{lemma}
+
+\begin{proof}
+$j_!$ は完全なので、$j_!$ が直積と可換であることを示せば十分である。
+問題は $X$ 上局所的なので、$X$ はアフィンと仮定してよい。
+$\mathcal{G}$ を $U_\proetale$ 上のアーベル層とする。
+$j^{-1}j_*\mathcal{G} = \mathcal{G}$ である。したがって
+Lemma \ref{proetale-lemma-ses-associated-to-open} の完全列を適用して、
+$$
+0 \to j_!\mathcal{G} \to j_*\mathcal{G} \to i_*i^{-1}j_*\mathcal{G} \to 0
+$$
+を得る。ここで $i : Z \to X$ は、補集合 $Z = X \setminus U$ に
+被約誘導スキーム構造を入れたものの包含である。
+関手 $j_*$ と $i_*$ は右随伴なので直積と可換する。
+Lemma \ref{proetale-lemma-closed-immersion} により、関手 $i^{-1}$ も直積と可換する。
+pro-\'etale サイト上では直積が完全なので、$j_!$ についても同じである
+（Cohomology on Sites, Proposition
+\ref{sites-cohomology-proposition-enough-weakly-contractibles}）。
+\end{proof}
+
+
+
+
+\section{pro-\'etale サイト上の構成可能層}
+\label{proetale-section-constructible}
+
+\noindent
+ここでは Noether 環上の $\Lambda$-加群の構成可能層に限る。
+将来、集合や群などの構成可能層についても論じる予定である。
+
+\begin{definition}
+\label{proetale-definition-constructible}
+$X$ をスキームとする。$\Lambda$ を Noether 環とする。
+$X_\proetale$ 上の $\Lambda$-加群の層が
+{\it 構成可能}であるとは、任意のアフィン開集合 $U \subset X$ に対し、
+$U$ を構成可能な局所閉部分スキームへ有限分解
+$U = \coprod_i U_i$ でき、すべての $i$ について
+$\mathcal{F}|_{U_i}$ が有限型かつ局所定数となることをいう。
+\end{definition}
+
+\noindent
+ここでも「新しい」ものは何も得られない。
+
+\begin{lemma}
+\label{proetale-lemma-compare-constructible}
+$X$ をスキーム、$\Lambda$ を Noether 環とする。
+関手 $\epsilon^{-1}$ は圏同値
+$$
+\left\{
+\begin{matrix}
+\text{次のサイト上の構成可能な}\\
+\Lambda\text{-加群の層： }X_\etale\\
+\end{matrix}
+\right\}
+\longleftrightarrow
+\left\{
+\begin{matrix}
+\text{次のサイト上の構成可能な}\\
+\Lambda\text{-加群の層： }X_\proetale\\
+\end{matrix}
+\right\}
+$$
+を定める。すなわち、$X_\etale$ 上の $\Lambda$-加群の構成可能層と
+$X_\proetale$ 上の $\Lambda$-加群の構成可能層との圏同値を定める。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-fully-faithful} により、関手 $\epsilon^{-1}$ は充満忠実であり、
+各ストラタへの引き戻し（制限）と可換する。したがって構成可能 \'etale 層の
+$\epsilon^{-1}$ は構成可能 pro-\'etale 層である。証明を完結させるため、
+$\mathcal{F}$ を Definition \ref{proetale-definition-constructible} の意味での
+$X_\proetale$ 上の $\Lambda$-加群の構成可能層とする。標準的な写像
+$$
+\epsilon^{-1}\epsilon_*\mathcal{F} \longrightarrow \mathcal{F}
+$$
+が存在する。この写像が同型であることを示す。これにより $\mathcal{F}$ が
+$\epsilon^{-1}$ の本質的像に属することが分かり、証明が完結する（詳細は省略する）。
+
+\medskip\noindent
+これを $X$ 上局所的に証明すれば十分なので、$X$ は準コンパクトかつ準分離的であり、
+$\mathcal{F}|_{X_i}$ が有限型局所定数となる構成可能局所閉ストラタによる有限分割
+$X = \coprod_{i = 1, \ldots, n} X_i$ が与えられていると仮定してよい。
+$n$ に関する帰納法を用いる。$n = 1$ の場合は
+Lemma \ref{proetale-lemma-compare-locally-constant} による。
+点 $x \in X$ を取ると、ある $k$ に対して $x \in X_k$ である。
+表示された写像が $x$ のある開近傍で同型であることを示せば十分である。
+したがって $X_k$ は $X$ で閉であると仮定してよい。$Z = X_k$ とおき、
+$U \subset X$ を $Z$ の補集合とする。帰納法の仮定は $\mathcal{F}$ の
+$Z$ および $U$ への制限に適用できる。Lemma \ref{proetale-lemma-ses-associated-to-open} により、
+短完全列
+$$
+0 \to j_!j^{-1}\mathcal{F} \to \mathcal{F} \to i_*i^{-1}\mathcal{F} \to 0
+$$
+が $X_\proetale$ 上に存在する。関手性から可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+\epsilon^{-1}\epsilon_*j_!j^{-1}\mathcal{F} \ar[r] \ar[d] &
+\epsilon^{-1}\epsilon_*\mathcal{F} \ar[r] \ar[d] &
+\epsilon^{-1}\epsilon_*i_*i^{-1}\mathcal{F} \ar[r] \ar[d] & 0 \\
+0 \ar[r] &
+j_!j^{-1}\mathcal{F} \ar[r] &
+\mathcal{F} \ar[r] &
+i_*i^{-1}\mathcal{F} \ar[r] & 0
+}
+$$
+を得る。帰納法により、一方では
+$\epsilon^{-1}\epsilon_*i^{-1}\mathcal{F} \to i^{-1}\mathcal{F}$
+および
+$\epsilon^{-1}\epsilon_*j^{-1}\mathcal{F} \to j^{-1}\mathcal{F}$
+が同型であり、他方では
+$i^{-1}\mathcal{F} = \epsilon^{-1}\mathcal{A}$
+および
+$j^{-1}\mathcal{F} = \epsilon^{-1}\mathcal{B}$
+が成り立つことが分かる。ここで $\mathcal{A}$ は $Z_\etale$ 上、
+$\mathcal{B}$ は $U_\etale$ 上の $\Lambda$-加群の構成可能層である。このとき
+$$
+\epsilon^{-1}\epsilon_*j_!j^{-1}\mathcal{F} =
+\epsilon^{-1}\epsilon_*j_!\epsilon^{-1}\mathcal{B} =
+\epsilon^{-1}\epsilon_*\epsilon^{-1}j_!\mathcal{B} =
+\epsilon^{-1}j_!\mathcal{B} =
+j_!\epsilon^{-1}\mathcal{B} =
+j_!j^{-1}\mathcal{F}
+$$
+第2の等式は Lemma \ref{proetale-lemma-jshriek-comparison}、第3の等式は
+Lemma \ref{proetale-lemma-fully-faithful}、第4の等式は再び
+Lemma \ref{proetale-lemma-jshriek-comparison} による。同様に
+$$
+\epsilon^{-1}\epsilon_*i_*i^{-1}\mathcal{F} =
+\epsilon^{-1}\epsilon_*i_*\epsilon^{-1}\mathcal{A} =
+\epsilon^{-1}\epsilon_*\epsilon^{-1}i_*\mathcal{A} =
+\epsilon^{-1}i_*\mathcal{A} =
+i_*\epsilon^{-1}\mathcal{A} =
+i_*i^{-1}\mathcal{F}
+$$
+を得る。今度は Lemma \ref{proetale-lemma-morphism-comparison} を用いた。
+五項補題により、大きな図式の中央の縦写像は同型である。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-constructible-serre}
+$X$ をスキーム、$\Lambda$ を Noether 環とする。
+$X_\proetale$ 上の $\Lambda$-加群の構成可能層の圏は
+$\textit{Mod}(X_\proetale, \Lambda)$ の弱 Serre 部分圏である。
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{proetale-lemma-compare-constructible} および
+\ref{proetale-lemma-compare-derived} と、\'etale サイトに対する結果
+（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-constructible-abelian}）から形式的に従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-constructible-derived}
+$X$ をスキーム、$\Lambda$ を Noether 環とする。
+$D_c(X_\etale, \Lambda)$ および $D_c(X_\proetale, \Lambda)$ を、それぞれ
+$D(X_\etale, \Lambda)$ および $D(X_\proetale, \Lambda)$ の充満部分圏で、
+コホモロジー層が $\Lambda$-加群の構成可能層である複体からなるものとする。このとき
+$$
+\epsilon^{-1} :
+D_c^+(X_\etale, \Lambda)
+\longrightarrow
+D_c^+(X_\proetale, \Lambda)
+$$
+は圏同値である。
+\end{lemma}
+
+\begin{proof}
+\'Etale Cohomology, Lemma \ref{etale-cohomology-lemma-constructible-abelian}、
+Lemma \ref{proetale-lemma-constructible-serre}、および
+Derived Categories, Section \ref{derived-section-triangulated-sub} により、
+圏 $D_c(X_\etale, \Lambda)$ と $D_c(X_\proetale, \Lambda)$ はそれぞれ
+$D(X_\etale, \Lambda)$ と $D(X_\proetale, \Lambda)$ の
+厳密充満かつ飽和な三角部分圏である。補題の主張は
+Lemmas \ref{proetale-lemma-compare-derived} と \ref{proetale-lemma-compare-constructible}
+を組み合わせれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-tensor-c}
+$X$ をスキーム、$\Lambda$ を Noether 環とする。
+$K, L \in D_c^-(X_\proetale, \Lambda)$ とする。このとき
+$K \otimes_\Lambda^\mathbf{L} L$ は $D_c^-(X_\proetale, \Lambda)$ に属する。
+\end{lemma}
+
+\begin{proof}
+$H^i(K \otimes_\Lambda^\mathbf{L} L)$ は
+$H^i(\tau_{\geq i - 1}K \otimes_\Lambda^\mathbf{L} \tau_{\geq i - 1}L)$ と同じである。
+したがって $K$ と $L$ は有界と仮定してよい。この場合、
+Lemma \ref{proetale-lemma-compare-constructible-derived} を適用して \'etale サイトの場合へ帰着できる。
+\'Etale Cohomology, Lemma \ref{etale-cohomology-lemma-tensor-c} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-compare-truncations-constructible}
+$X$ をスキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$K$ を $D(X_\proetale, \Lambda)$ の対象とし、
+$K_n = K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$ とおく。
+$K_1$ が $D^-_c(X_\proetale, \Lambda/I)$ に属するなら、すべての $n$ に対して
+$K_n$ は $D^-_c(X_\proetale, \Lambda/I^n)$ に属する。
+\end{lemma}
+
+\begin{proof}
+標準三角
+$$
+K \otimes_\Lambda^\mathbf{L} \underline{I^n/I^{n + 1}} \to
+K_{n + 1} \to
+K_n \to
+K \otimes_\Lambda^\mathbf{L} \underline{I^n/I^{n + 1}}[1]
+$$
+および同型
+$$
+K \otimes_\Lambda^\mathbf{L} \underline{I^n/I^{n + 1}} =
+K_1 \otimes_{\Lambda/I}^\mathbf{L} \underline{I^n/I^{n + 1}}
+$$
+を考える。Lemma \ref{proetale-lemma-tensor-c} により、このテンソル積のコホモロジー層は
+構成可能である（また、$K_1$ のコホモロジーが消える場合には消える）。
+したがって Lemma \ref{proetale-lemma-constructible-serre} を用いた $n$ に関する帰納法により、
+各 $K_n$ のコホモロジー層は構成可能である。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{構成可能 adic 層}
+\label{proetale-section-adic}
+
+\noindent
+本節では構成可能 $\Lambda$-層の概念と、そのいくつかの変種を定義する。
+
+\begin{definition}
+\label{proetale-definition-adic}
+$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$X$ をスキームとし、$\mathcal{F}$ を $X_\proetale$ 上の $\Lambda$-加群の層とする。
+\begin{enumerate}
+\item $\mathcal{F} = \lim \mathcal{F}/I^n\mathcal{F}$ であり、各
+$\mathcal{F}/I^n\mathcal{F}$ が $\Lambda/I^n$-加群の構成可能層であるとき、
+$\mathcal{F}$ を{\it 構成可能 $\Lambda$-層}という。
+\item $\mathcal{F}$ が構成可能 $\Lambda$-層であるとする。各
+$\mathcal{F}/I^n\mathcal{F}$ が局所定数なら、$\mathcal{F}$ を {\it lisse} という。
+\item $M/IM$ が有限である $I$-進完備 $\Lambda$-加群 $M$ が存在し、
+$\mathcal{F}$ が局所的に
+$$
+\underline{M}^\wedge = \lim \underline{M/I^nM}.
+$$
+と同型であるとき、$\mathcal{F}$ を {\it adic lisse}\footnote{これは
+非標準的な記法かもしれない。}という。
+\item 任意のアフィン開集合 $U \subset X$ に対し、構成可能な局所閉部分スキームへの分解
+$U = \coprod U_i$ が存在し、$\mathcal{F}|_{U_i}$ が adic lisse となるとき、
+$\mathcal{F}$ を {\it adic 構成可能}\footnote{これは非標準的な記法かもしれない。}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\Lambda = \mathbf{Z}_\ell$ かつ $I = (\ell)$ のとき、構成可能 $\Lambda$-層の定義は
+\cite[Expos\'e VI, Definition 1.1.1]{SGA5} の定義と同値である。
+次の含意が成り立つことは明らかである。
+$$
+\xymatrix{
+\text{adic lisse} \ar@{=>}[r] \ar@{=>}[d] &
+\text{adic 構成可能} \ar@{=>}[d] \\
+\text{lisse 構成可能 }\Lambda\text{-層} \ar@{=>}[r] &
+\text{構成可能 }\Lambda\text{-層}
+}
+$$
+場合によっては縦の矢印を逆にできる
+（Lemmas \ref{proetale-lemma-Noetherian-constructible} および
+\ref{proetale-lemma-Noetherian-adic-constructible} を参照せよ）。一般には、
+adic 構成可能層の圏も構成可能 $\Lambda$-層の圏も、核と余核のもとで閉じていない。
+
+\medskip\noindent
+実際、$X$ を、その台位相空間 $|X|$ が $\Lambda = \mathbf{Z}_\ell$ と同相である
+アフィンスキームとする。Example \ref{proetale-example-construct-space} を参照せよ。
+同相写像を $f : |X| \to \mathbf{Z}_\ell = \Lambda$ と書く。
+$f$ を $X$ 上の $\underline{\Lambda}^\wedge$ の切断とみなすことができ、
+$f$ による乗法は $X_\proetale$ 上の2項複体
+$$
+\underline{\Lambda}^\wedge \xrightarrow{f} \underline{\Lambda}^\wedge
+$$
+を定める。層 $\underline{\Lambda}^\wedge$ は adic lisse である。
+しかし上の写像の余核は adic 構成可能ではない。実際、この余核の茎の同型型は
+$\mathbf{Z}/\ell^n\mathbf{Z}$ および $\mathbf{Z}_\ell$ という無限に多くの値を取る。
+この余核は構成可能 $\mathbf{Z}_\ell$-層である。一方、核は非準コンパクトな開集合上で
+零でありながら自身は零でないため、構成可能 $\mathbf{Z}_\ell$-層ですらない。
+
+\begin{lemma}
+\label{proetale-lemma-Noetherian-constructible}
+$X$ を Noether スキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$\mathcal{F}$ を $X_\proetale$ 上の構成可能 $\Lambda$-層とする。このとき、局所閉部分スキームによる
+有限分割 $X = \coprod X_i$ で、制限 $\mathcal{F}|_{X_i}$ が lisse となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$R = \bigoplus I^n/I^{n + 1}$ とおく。$R$ は Noether 環である。
+各層 $\mathcal{F}/I^n\mathcal{F}$ は $\Lambda/I^n\Lambda$-加群の構成可能層なので、
+$I^n\mathcal{F}/I^{n + 1}\mathcal{F}$ も $\Lambda/I$-加群の構成可能層である。
+したがって Lemma \ref{proetale-lemma-compare-constructible} により、これは $X_\etale$ 上の
+構成可能層 $\mathcal{G}_n$ の引き戻しである。
+$\mathcal{G} = \bigoplus \mathcal{G}_n$ とおく。これは $X_\etale$ 上の
+$R$-加群の層であり、写像
+$$
+\mathcal{G}_0 \otimes_{\Lambda/I} \underline{R}
+\longrightarrow
+\mathcal{G}
+$$
+は全射である。これは写像
+$$
+\mathcal{F}/I\mathcal{F} \otimes \underline{I^n/I^{n + 1}} \to
+I^n\mathcal{F}/I^{n + 1}\mathcal{F}
+$$
+が全射だからである。したがって \'Etale Cohomology, Proposition
+\ref{etale-cohomology-proposition-constructible-over-noetherian} により、
+$\mathcal{G}$ は $R$-加群の構成可能層である。
+$\mathcal{G}|_{X_i}$ が有限型 $R$-加群の局所定数層となる分割
+$X = \coprod X_i$ を選ぶ（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-constructible-quasi-compact-quasi-separated}）。
+これが補題の分割であると主張する。実際、$X$ を $X_i$ で置き換えることにより、
+$\mathcal{G}$ は局所定数と仮定してよい。すると各層
+$I^n\mathcal{F}/I^{n + 1}\mathcal{F}$ も局所定数である。短完全列
+$$
+0 \to I^n\mathcal{F}/I^{n + 1}\mathcal{F} \to
+\mathcal{F}/I^{n + 1}\mathcal{F} \to \mathcal{F}/I^n\mathcal{F} \to 0
+$$
+と帰納法、および Modules on Sites, Lemma
+\ref{sites-modules-lemma-kernel-finite-locally-constant} を用いれば補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-weird}
+$X$ を弱可縮アフィンスキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$\mathcal{F}$ を $X_\proetale$ 上の $\Lambda$-加群の層で、次を満たすものとする。
+\begin{enumerate}
+\item $\mathcal{F} = \lim \mathcal{F}/I^n\mathcal{F}$,
+\item $\mathcal{F}/I^n\mathcal{F}$ は $\Lambda/I^n$-加群の定数層である。
+\item $\mathcal{F}/I\mathcal{F}$ は有限型である。
+\end{enumerate}
+このとき $\mathcal{F} \cong \underline{M}^\wedge$ である。ここで $M$ は
+有限生成 $\Lambda^\wedge$-加群である。
+\end{lemma}
+
+\begin{proof}
+条件 $\mathcal{F}/I^n\mathcal{F} \cong \underline{M_n}$ を満たす
+$\Lambda/I^n$-加群 $M_n$ を選ぶ。全射
+$\mathcal{F}/I^{n + 1}\mathcal{F} \to \mathcal{F}/I^n\mathcal{F}$
+があるので、同型 $M_{n + 1}/I^nM_{n + 1} \to M_n$ を誘導する全射
+$M_{n + 1} \to M_n$ が存在する。そのような全射を一つずつ選び、
+$M = \lim M_n$ とおく。このとき $M$ は $M/I^nM = M_n$ を満たす
+$I$-進完備 $\Lambda$-加群である。Algebra, Lemma
+\ref{algebra-lemma-limit-complete} を参照せよ。
+$M_1$ は有限型 $\Lambda$-加群なので（Modules on Sites, Lemma
+\ref{sites-modules-lemma-locally-constant-finite-type}）、
+$M$ は有限生成 $\Lambda^\wedge$-加群である。層
+$$
+\mathcal{I}_n = \mathit{Isom}(\underline{M_n}, \mathcal{F}/I^n\mathcal{F})
+$$
+を $X_\proetale$ 上で考える。$I^n$ で割ることにより遷移写像
+$$
+\mathcal{I}_{n + 1} \longrightarrow \mathcal{I}_n
+$$
+$M_n$ の選び方により、層 $\mathcal{I}_n$ は
+$$
+\mathit{Isom}(\underline{M_n}, \underline{M_n}) =
+\underline{\text{Isom}_\Lambda(M_n, M_n)}
+$$
+のもとでのトーサーである（Modules on Sites, Lemma
+\ref{sites-modules-lemma-locally-constant}）。実際、
+$\mathcal{F}/I^n\mathcal{F}$ は $\underline{M_n}$ と（\'etale）局所的に同型である。
+More on Algebra, Lemma \ref{more-algebra-lemma-hom-systems-ML} により、
+層の系 $(\mathcal{I}_n)$ は Mittag-Leffler である。
+各 $n$ に対し、$\mathcal{I}'_n \subset \mathcal{I}_n$ を、すべての
+$N \gg n$ に対する $\mathcal{I}_N \to \mathcal{I}_n$ の像とする。このとき
+$$
+\ldots \to \mathcal{I}'_3 \to \mathcal{I}'_2 \to \mathcal{I}'_1 \to *
+$$
+は $X_\proetale$ 上の集合の層の列で、遷移写像は全射である。
+$*(X)$ は一点集合で空でなく、また $X$ で評価すると集合の層の全射は
+集合の全射になるので、$s \in \lim \mathcal{I}'_n(X)$ を選べる。
+これらの切断は同型
+$\underline{M}^\wedge \to \lim \mathcal{F}/I^n\mathcal{F} = \mathcal{F}$
+を定め、証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-connected-lisse}
+$X$ を連結スキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$\mathcal{F}$ が $X_\proetale$ 上の lisse 構成可能 $\Lambda$-層なら、
+$\mathcal{F}$ は adic lisse である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-compare-locally-constant} により、ある
+$\Lambda/I^n$-加群の局所定数層 $\mathcal{G}_n$ に対して
+$\mathcal{F}/I^n\mathcal{F} = \epsilon^{-1}\mathcal{G}_n$
+である。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-connected-locally-constant}
+により、$\mathcal{G}_n$ が $\underline{M_n}$ と局所的に同型となるような
+有限生成 $\Lambda/I^n$-加群 $M_n$ が存在する。各 $W_t$ がアフィンかつ弱可縮である被覆
+$\{W_t \to X\}_{t \in T}$ を選ぶ。このとき $\mathcal{F}|_{W_t}$ は
+Lemma \ref{proetale-lemma-weird} の仮定を満たすので、ある有限生成
+$\Lambda^\wedge$-加群 $N_t$ に対して
+$\mathcal{F}|_{W_t} \cong \underline{N_t}^\wedge$ である。
+すべての $t$ と $n$ に対して $N_t/I^nN_t \cong M_n$ であることに注意せよ。
+したがってすべての $t, t' \in T$ に対して $N_t \cong N_{t'}$ である。
+More on Algebra, Lemma \ref{more-algebra-lemma-isomorphic-completions} を参照せよ。
+これで $\mathcal{F}$ が adic lisse であることが示された。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-Noetherian-adic-constructible}
+$X$ を Noether スキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$\mathcal{F}$ を $X_\proetale$ 上の構成可能 $\Lambda$-層とする。このとき
+$\mathcal{F}$ は adic 構成可能である。
+\end{lemma}
+
+\begin{proof}
+これは Lemmas \ref{proetale-lemma-Noetherian-constructible} および
+\ref{proetale-lemma-connected-lisse}、Noether スキームが局所連結であるという事実
+（Topology, Lemma \ref{topology-lemma-locally-Noetherian-locally-connected}）、
+ならびに各定義から従う。
+\end{proof}
+
+\noindent
+$\Lambda$-加群の導来完備層の圏の内部で構成可能 $\Lambda$-層を特徴づけることが有用である。
+More on Algebra, Lemma \ref{more-algebra-lemma-derived-complete-finite} の
+素朴な類似はこの状況では誤っている。しかし More on Algebra, Lemma
+\ref{more-algebra-lemma-derived-complete-zero} に対応するものは次のとおりである。
+
+\begin{lemma}
+\label{proetale-lemma-derived-complete-zero}
+$X$ をスキーム、$\Lambda$ を環、$I \subset \Lambda$ を有限生成イデアルとする。
+$\mathcal{F}$ を $X_\proetale$ 上の $\Lambda$-加群の層とする。
+$\mathcal{F}$ が導来完備で $\mathcal{F}/I\mathcal{F} = 0$ なら、
+$\mathcal{F} = 0$ である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}/I\mathcal{F}$ は零であると仮定する。$I = (f_1, \ldots, f_r)$ とする。
+$\mathcal{G} = \mathcal{F}/(f_1, \ldots, f_i)\mathcal{F}$ が零でないような
+最大の整数 $i < r$ を取る。そのような $i$ が存在しなければ、
+$\mathcal{F} = 0$ であり、示すべきことが成り立つ。
+$\mathcal{G}$ は導来完備加群間の写像の余核なので導来完備である。
+Proposition \ref{proetale-proposition-enough-weakly-contractibles} を参照せよ。
+$i$ の選び方により、$f_{i + 1} : \mathcal{G} \to \mathcal{G}$ は全射である。したがって
+$$
+\lim (\ldots \to \mathcal{G} \xrightarrow{f_{i + 1}} \mathcal{G}
+\xrightarrow{f_{i + 1}} \mathcal{G})
+$$
+は零でなく、$\mathcal{G}$ の導来完備性に矛盾する。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-derived-complete-limit}
+$X$ を弱可縮アフィンスキームとする。$\Lambda$ を Noether 環、
+$I \subset \Lambda$ をイデアルとする。$\mathcal{F}$ を $X_\proetale$ 上の
+$\Lambda$-加群の導来完備層で、$\mathcal{F}/I\mathcal{F}$ が
+有限型 $\Lambda/I$-加群の局所定数層であるものとする。
+このとき、ある整数 $t$ と全射
+$$
+(\underline{\Lambda}^\wedge)^{\oplus t} \to \mathcal{F}
+$$
+\end{lemma}
+
+\begin{proof}
+が存在する。$X$ は弱可縮なので、有限な互いに素な開被覆
+$X = \coprod U_i$ で、$\mathcal{F}/I\mathcal{F}|_{U_i}$ が有限生成
+$\Lambda/I$-加群 $M_i$ に付随する定数層と同型になるものが存在する。
+$M_i$ の有限個の生成元 $m_{ij}$ を選ぶ。$U_i$ 上の
+$\mathcal{F}/I\mathcal{F}$ の切断とみなした $m_{ij}$ に制限される切断
+$s_{ij} \in \mathcal{F}(X)$ を取れる。$t$ を $s_{ij}$ の総数とする。このとき写像
+$$
+\alpha : \underline{\Lambda}^{\oplus t} \longrightarrow \mathcal{F}
+$$
+を得る。構成により、これは $I$ を法として全射である。
+Lemma \ref{proetale-lemma-naive-completion} により、$\underline{\Lambda}^{\oplus t}$ の
+導来完備化は層 $(\underline{\Lambda}^\wedge)^{\oplus t}$ である。
+$\mathcal{F}$ は導来完備なので、$\alpha$ は写像
+$$
+\alpha^\wedge :
+(\underline{\Lambda}^\wedge)^{\oplus t}
+\longrightarrow
+\mathcal{F}
+$$
+を経由する。Proposition \ref{proetale-proposition-enough-weakly-contractibles} により、
+$\mathcal{Q} = \Coker(\alpha^\wedge)$ は $\Lambda$-加群の導来完備層である。
+構成により $\mathcal{Q}/I\mathcal{Q} = 0$ である。
+Lemma \ref{proetale-lemma-derived-complete-zero} から $\mathcal{Q} = 0$ が従い、示すべきことが成り立つ。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{適切な導来圏}
+\label{proetale-section-suitable-derived}
+
+\noindent
+$X$ をスキームとする。多くのスキーム $X$ に対して、$\ell$-進層の適切な導来圏は、
+$D(X_\proetale, \Lambda)$ の導来完備対象 $K$ で、
+$K \otimes_\Lambda^\mathbf{L} \mathbf{F}_\ell$ が有界かつ構成可能なコホモロジー層を
+もつものを考えることで得られる。一般の定義は次のとおりである。
+
+\begin{definition}
+\label{proetale-definition-Dbc}
+$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。$X$ をスキームとする。
+$D(X_\proetale, \Lambda)$ の対象 $K$ が {\it 構成可能}であるとは、次を満たすことをいう。
+\begin{enumerate}
+\item $K$ は $I$ に関して導来完備である。
+\item $K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I}$
+のコホモロジー層は構成可能であり、局所的に有限 Tor 次元をもつ。
+\end{enumerate}
+$D(X_\proetale, \Lambda)$ の構成可能な $K$ からなる充満部分圏を
+$D_{cons}(X, \Lambda)$ と書く。
+\end{definition}
+
+\noindent
+われわれの規約では、有限 Tor 次元の複体は有界であることを思い出そう
+（Cohomology on Sites, Definition
+\ref{sites-cohomology-definition-tor-amplitude}）。ここまでに証明したことを補題にまとめる。
+
+\begin{lemma}
+\label{proetale-lemma-describe-constructible-complexes}
+上の状況で、$K$ は $D_{cons}(X, \Lambda)$ に属し、$X$ は準コンパクトであるとする。
+$K_n = K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$ とおく。
+次を満たす $a, b$ が存在する。
+\begin{enumerate}
+\item $K = R\lim K_n$ かつ $i \not \in [a, b]$ に対して $H^i(K) = 0$ である。
+\item 各 $K_n$ の Tor 振幅は $[a, b]$ に含まれる。
+\item 各 $K_n$ は構成可能なコホモロジー層をもつ。
+\item 各 $K_n = \epsilon^{-1}L_n$ である。ここである
+$L_n \in D_{ctf}(X_\etale, \Lambda/I^n)$
+が存在する（\'Etale Cohomology, Definition
+\ref{etale-cohomology-definition-ctf}）。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$K$ は導来完備なので、Lemma \ref{proetale-lemma-naive-completion} により
+$K = R\lim K_n$ である。局所有限 Tor 次元の定義により、$K_1$ の Tor 振幅が
+$[a, b]$ に含まれるような $a, b$ を選べる。(2) は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-bounded} から従う。さらに $K$ は導来完備であり、
+Cohomology on Sites, Proposition
+\ref{sites-cohomology-proposition-enough-weakly-contractibles} における極限の記述と、
+$K_n = K_{n + 1} \otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n}$ によって
+$H^b(K_{n + 1}) \to H^b(K_n)$ が全射であることから (1) が従う。
+(3) は Lemma \ref{proetale-lemma-compare-truncations-constructible} から従い、
+(4) は Lemma \ref{proetale-lemma-compare-constructible-derived} と、$K_n$ が有限 Tor 次元を
+もつため $L_n$ も有限 Tor 次元をもつことから従う（短い議論は省略する）。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-local-structure-constructible-complex}
+$X$ を弱可縮アフィンスキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$K$ を $D_{cons}(X, \Lambda)$ の対象で、
+$K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I}$ のコホモロジー層が
+局所定数であるものとする。このとき有限な互いに素な開被覆 $X = \coprod U_i$ が存在し、
+各 $i$ に対して有限個の有限生成射影 $\Lambda^\wedge$-加群
+$M^a, \ldots, M^b$ が存在して、$K|_{U_i}$ は複体
+$$
+(\underline{M^a})^\wedge \to \ldots \to (\underline{M^b})^\wedge
+$$
+で $D(U_{i, \proetale}, \Lambda)$ において表される。ここで微分は $\Lambda$-加群の層の写像
+$(\underline{M^i})^\wedge \to (\underline{M^{i + 1}})^\wedge$ である。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-describe-constructible-complexes} の結果を自由に用いる。
+同補題のように $a, b$ を選ぶ。$b - a$ に関する帰納法で証明する。
+$\mathcal{F} = H^b(K)$ とおく。Proposition
+\ref{proetale-proposition-enough-weakly-contractibles} により、$\mathcal{F}$ は
+$\Lambda$-加群の導来完備層である。さらに $\mathcal{F}/I\mathcal{F}$ は
+有限型 $\Lambda/I$-加群の局所定数層である。
+Lemma \ref{proetale-lemma-derived-complete-limit} を適用して全射
+$\rho : (\underline{\Lambda}^\wedge)^{\oplus t} \to \mathcal{F}$ を得る。
+
+\medskip\noindent
+$a = b$ なら $K = \mathcal{F}[-b]$ である。この場合
+$$
+\mathcal{F} \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I} =
+\mathcal{F}/I\mathcal{F}
+$$
+である。$X$ は弱可縮で $\mathcal{F}/I\mathcal{F}$ は局所定数なので、
+アフィン開集合 $U_i$ による有限な互いに素な分解 $X = \coprod U_i$ と
+$\Lambda/I$-加群 $\overline{M}_i$ で、$\mathcal{F}/I\mathcal{F}$ の $U_i$ への制限が
+$\underline{\overline{M}_i}$ となるものを取れる。被覆を細分することで、写像
+$$
+\rho|_{U_i} \bmod I :
+\underline{\Lambda/I}^{\oplus t}
+\longrightarrow
+\underline{\overline{M}_i}
+$$
+は、ある全射加群準同型 $\alpha_i : \Lambda/I^{\oplus t} \to \overline{M}_i$ に対する
+$\underline{\alpha_i}$ に等しいと仮定してよい。Modules on Sites, Lemma
+\ref{sites-modules-lemma-morphism-locally-constant} を参照せよ。
+各 $\overline{M}_i$ は有限生成 $\Lambda/I$-加群である。
+$\mathcal{F}/I\mathcal{F}$ の Tor 振幅は $[0, 0]$ に含まれるので、
+$\overline{M}_i$ は平坦 $\Lambda/I$-加群である。したがって $\overline{M}_i$ は
+有限生成射影加群である（Algebra, Lemma \ref{algebra-lemma-finite-projective}）。
+ゆえに射影子 $\overline{p}_i : (\Lambda/I)^{\oplus t} \to (\Lambda/I)^{\oplus t}$ で、
+その像が写像 $\alpha_i$ によって $\overline{M}_i$ へ同型に写るものを取れる。
+$\overline{p}_i$ を射影子
+$p_i : (\Lambda^\wedge)^{\oplus t} \to
+(\Lambda^\wedge)^{\oplus t}$ へ持ち上げられる\footnote{証明：Algebra, Lemma
+\ref{algebra-lemma-lift-idempotents-noncommutative} により、$\overline{p}_i$ を
+両立する射影子の系 $p_{i, n} : (\Lambda/I^n)^{\oplus t} \to
+(\Lambda/I^n)^{\oplus t}$ へ持ち上げられる。そこで $p_i = \lim p_{i, n}$ とおけば、
+$\Lambda^\wedge = \lim \Lambda/I^n$ なのでよい。}。
+このとき $M_i = \Im(p_i)$ は $M_i/IM_i = \overline{M}_i$ を満たす有限生成
+$I$-進完備 $\Lambda^\wedge$-加群である。$U_i$ 上の写像
+$$
+\underline{M_i}^\wedge \to
+(\underline{\Lambda}^\wedge)^{\oplus t} \to
+\mathcal{F}|_{U_i}
+$$
+を考える。構成により、その合成は $I$ を法として同型を誘導する。
+始域と終域は導来完備なので、余核 $\mathcal{Q}$ と核 $\mathcal{K}$ も導来完備である。
+構成により $\mathcal{Q}/I\mathcal{Q} = 0$ なので、
+Lemma \ref{proetale-lemma-derived-complete-zero} により $\mathcal{Q}$ は零である。このとき
+$$
+0 \to \mathcal{K}/I\mathcal{K} \to
+\underline{\overline{M}_i}
+\to \mathcal{F}/I\mathcal{F} \to 0
+$$
+は完全である。これは本段落の冒頭で見た $\text{Tor}_1$ の消滅による。また、
+$\underline{\Lambda}^\wedge/I\overline{\Lambda}^\wedge$ を
+Modules on Sites, Lemma \ref{sites-modules-lemma-completion-flat} とともに用いて
+$\underline{M_i}^\wedge/I\underline{M_i}^\wedge = \underline{\overline{M}_i}$.
+を得る。したがって構成により $\mathcal{K}/I\mathcal{K} = 0$ であり、前と同様に
+$\mathcal{K} = 0$ と結論する。これで $a = b$ の場合が証明された。
+
+\medskip\noindent
+$b > a$ なら、写像 $\rho$ を写像
+$$
+\tilde \rho : (\underline{\Lambda}^\wedge)^{\oplus t}[-b] \longrightarrow K
+$$
+へ $D(X_\proetale, \Lambda)$ において持ち上げる。Section
+\ref{proetale-section-derived-completion-noetherian} の冒頭の議論により、$K$ を
+$\underline{\Lambda}^\wedge$-加群の複体とみなせる。また $X_\proetale$ は弱可縮なので、
+元 $\rho(e_s) \in H^0(X, \mathcal{F})$ を $H^b(X, K)$ の元へ持ち上げる障害はない。
+$\tilde \rho$ を標準三角
+$$
+(\underline{\Lambda}^\wedge)^{\oplus t}[-b] \to K \to L \to
+(\underline{\Lambda}^\wedge)^{\oplus t}[-b + 1]
+$$
+に組み込む。すると $L$ は $D_{cons}(X, \Lambda)$ の対象であり、
+$L \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I}$ の Tor 振幅は
+$[a, b - 1]$ に含まれる（詳細は省略する）。帰納法により、$L$ は補題の主張どおり
+局所的に記述できる。すなわち $L$ は
+$$
+(\underline{M^a})^\wedge \to \ldots \to (\underline{M^{b - 1}})^\wedge
+$$
+と同型である。写像
+$L \to (\underline{\Lambda}^\wedge)^{\oplus t}[-b + 1]$
+は写像
+$(\underline{M^{b - 1}})^\wedge \to (\underline{\Lambda}^\wedge)^{\oplus t}$
+に対応し、これにより複体を1項延長できる。三角圏の性質により、対応する複体は
+導来圏で $K$ と同型である。これで証明が完了する。
+\end{proof}
+
+\noindent
+構成可能 $\Lambda$-層の場合に起こることに動機づけられて、次の概念を導入する。
+
+\begin{definition}
+\label{proetale-definition-adic-constructible}
+$X$ をスキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$K \in D(X_\proetale, \Lambda)$ とする。
+\begin{enumerate}
+\item 有限生成射影 $\Lambda^\wedge$-加群の有限複体 $M^\bullet$ が存在し、
+$K$ が局所的に
+$$
+\underline{M^a}^\wedge \to \ldots \to \underline{M^b}^\wedge
+$$
+と同型であるとき、$K$ を {\it adic lisse}\footnote{これは非標準的な記法かもしれない。}という。
+\item 任意のアフィン開集合 $U \subset X$ に対し、構成可能な局所閉部分スキームへの分解
+$U = \coprod U_i$ が存在し、$K|_{U_i}$ が adic lisse となるとき、
+$K$ を {\it adic 構成可能}\footnote{これは非標準的な記法かもしれない。}という。
+\end{enumerate}
+\end{definition}
+
+\noindent
+Lemma \ref{proetale-lemma-local-structure-constructible-complex} で得られた局所構造と
+adic lisse 複体の構造との違いは、Lemma
+\ref{proetale-lemma-local-structure-constructible-complex} における写像
+$\underline{M^i}^\wedge \to \underline{M^{i + 1}}^\wedge$ は定数である必要がないのに対し、
+上の定義では定数であることを要求する点にある。
+
+\begin{lemma}
+\label{proetale-lemma-weakly-contractible-locally-constant-ML}
+$X$ を弱可縮アフィンスキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$K$ を $D_{cons}(X, \Lambda)$ の対象で、
+$K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$
+が $D(X_\proetale, \Lambda/I^n)$ において $\Lambda/I^n$-加群の定数層の複体と
+同型であるものとする。このとき
+$$
+H^0(X, K \otimes_\Lambda^\mathbf{L} \Lambda/I^n)
+$$
+は Mittag-Leffler 条件を満たす。
+\end{lemma}
+
+\begin{proof}
+$K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$ は、ある
+$D(\Lambda/I^n)$ の対象 $E_n$ に対する $\underline{E_n}$ と同型であるとする。
+$K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I}$ は有限 Tor 次元をもち、
+有限型コホモロジー層をもつので、$E_1$ は完全である
+（More on Algebra, Lemma \ref{more-algebra-lemma-perfect} を参照せよ）。遷移写像
+$$
+K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^{n + 1}}
+\to
+K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}
+$$
+は局所的には $D(\Lambda/I^{n + 1})$ における複体の写像
+$E_{n + 1} \to E_n$ から生じる（そのような写像は複数ありうる）。
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-locally-constant-map} を参照せよ。
+各 $n$ に対してそのような写像を一つ選ぶと、それは同型
+$E_{n + 1} \otimes_{\Lambda/I^{n + 1}}^\mathbf{L} \Lambda/I^n \to E_n$
+を $D(\Lambda/I^n)$ において誘導する。More on Algebra, Lemma
+\ref{more-algebra-lemma-Rlim-perfect-gives-complete} により、有限生成射影
+$\Lambda^\wedge$-加群の有限複体 $M^\bullet$ と、遷移写像と両立する
+$D(\Lambda/I^n)$ における同型 $M^\bullet/I^nM^\bullet \to E_n$ が存在する。
+
+\medskip\noindent
+ここで、添字の任意の有限列 $n > m > k$ に対して、写像の組
+$$
+H^0(X, K \otimes_\Lambda^\mathbf{L} \Lambda/I^n)
+\to
+H^0(X, K \otimes_\Lambda^\mathbf{L} \Lambda/I^m)
+\to
+H^0(X, K \otimes_\Lambda^\mathbf{L} \Lambda/I^k)
+$$
+は
+$$
+H^0(X, \underline{M^\bullet/I^nM^\bullet})
+\to
+H^0(X, \underline{M^\bullet/I^mM^\bullet})
+\to
+H^0(X, \underline{M^\bullet/I^kM^\bullet})
+$$
+と同型である。実際、任意の同型
+$$
+\underline{M^\bullet/I^nM^\bullet} \to
+K \otimes_\Lambda^\mathbf{L} \Lambda/I^n
+$$
+を選ぶと、$I^m$ および $I^k$ を法として同様の同型を誘導し、主張が分かる。
+したがって補題を証明するには、系
+$H^0(X, \underline{M^\bullet/I^nM^\bullet})$ が Mittag-Leffler であることを示せば十分である。
+$X$ 上の切断を取ることは完全なので、$\Lambda$-加群の系
+$$
+H^0(M^\bullet/I^nM^\bullet)
+$$
+が Mittag-Leffler であることを示せば十分である。$A = \Lambda^\wedge$ とおき、スペクトル系列
+$$
+\text{Tor}_{-p}^A(H^q(M^\bullet), A/I^nA) \Rightarrow
+H^{p + q}(M^\bullet/I^nM^\bullet)
+$$
+を考える。More on Algebra, Lemma \ref{more-algebra-lemma-tor-strictly-pro-zero} により、
+$p > 0$ に対して pro-系
+$\{\text{Tor}_{-p}^A(H^q(M^\bullet), A/I^nA)\}$ は零である。
+したがって pro-系 $\{H^0(M^\bullet/I^nM^\bullet)\}$ は pro-系
+$\{H^0(M^\bullet)/I^nH^0(M^\bullet)\}$ に等しく、補題が証明された。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-connected-adic-lisse}
+$X$ を連結スキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$K$ が $D_{cons}(X, \Lambda)$ に属し、
+$K \otimes_\Lambda \underline{\Lambda/I}$ が局所定数コホモロジー層をもつなら、
+$K$ は adic lisse である（Definition \ref{proetale-definition-adic-constructible}）。
+\end{lemma}
+
+\begin{proof}
+$K_n = K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$ と書く。
+Lemma \ref{proetale-lemma-describe-constructible-complexes} の結果を以下断りなく用いる。
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-locally-constant-bounded} により、
+すべての $n$ に対して $K_n$ は局所定数コホモロジー層をもつ。
+$K_n = \epsilon^{-1}L_n$ であり、ここで $L_n$ は局所定数コホモロジー層をもつ
+$D_{ctf}(X_\etale, \Lambda/I^n)$ の対象である。\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-connected-ctf-locally-constant}
+により、$L_n$ が \'etale 局所的に $\underline{M_n}$ と同型になる完全対象
+$M_n \in D(\Lambda/I^n)$ が存在する。$K_{n + 1} \to K_n$ に対応する写像
+$L_{n + 1} \to L_n$ は同型
+$L_{n + 1} \otimes_{\Lambda/I^{n + 1}}^\mathbf{L} \underline{\Lambda/I^n}
+\to L_n$ を誘導する。$X$ 上局所的に見ると、同型
+$M_{n + 1} \otimes_{\Lambda/I^{n + 1}} \Lambda/I^n \to M_n$
+を誘導する $D(\Lambda/I^{n + 1})$ における写像 $M_{n + 1} \to M_n$ が存在する。
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-locally-constant-map} を参照せよ。
+そのような写像を選び固定する。More on Algebra, Lemma
+\ref{more-algebra-lemma-Rlim-perfect-gives-complete} により、有限生成射影
+$\Lambda^\wedge$-加群の有限複体 $M^\bullet$ と、遷移写像と両立する
+$D(\Lambda/I^n)$ における同型 $M^\bullet/I^nM^\bullet \to M_n$ が存在する。
+証明を完結させるため、$K$ が局所的に
+$$
+\underline{M^\bullet}^\wedge =
+\lim \underline{M^\bullet/I^nM^\bullet} =
+R\lim \underline{M^\bullet/I^nM^\bullet}
+$$
+と同型であることを示す。$E^\bullet$ を $M^\bullet$ の双対複体とする。
+More on Algebra, Lemma \ref{more-algebra-lemma-dual-perfect-complex} とその証明を参照せよ。
+対象
+$$
+H_n =
+R\SheafHom_{\Lambda/I^n}(\underline{M^\bullet/I^nM^\bullet}, K_n) =
+\underline{E^\bullet/I^nE^\bullet} \otimes_{\Lambda/I^n}^\mathbf{L} K_n
+$$
+を $D(X_\proetale, \Lambda/I^n)$ で考える。$I^n$ で割ることにより遷移写像
+$H_{n + 1} \to H_n$ を得る。$H = R\lim H_n$ とおく。このとき $H$ は
+$D_{cons}(X, \Lambda)$ の対象であり（詳細は省略する）、
+$H \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n} = H_n$ を満たす。
+各 $W_t$ がアフィンかつ弱可縮である被覆 $\{W_t \to X\}_{t \in T}$ を選ぶ。
+$M^\bullet$ の選び方により
+\begin{align*}
+H_n|_{W_t} & \cong 
+R\SheafHom_{\Lambda/I^n}(\underline{M^\bullet/I^nM^\bullet},
+\underline{M^\bullet/I^nM^\bullet}) \\
+& =
+\underline{
+\text{Tot}(E^\bullet/I^nE^\bullet \otimes_{\Lambda/I^n} M^\bullet/I^nM^\bullet)
+}
+\end{align*}
+である。したがって $H = R\lim H_n$ に
+Lemma \ref{proetale-lemma-weakly-contractible-locally-constant-ML} を適用できる。
+系 $H^0(W_t, H_n)$ は Mittag-Leffler 条件を満たす。
+すべての $n \gg 1$ に対し、$H^0(W_t, H_n)$ の元で
+$$
+H^0(W_t, H_1) = \Hom(\underline{M^\bullet/IM^\bullet}, K_1)
+$$
+における同型へ写るものが存在するので、逆極限内の元 $(\varphi_{t, n})$ で、
+$I$ を法として同型を与えるものを得る。このとき
+$$
+R\lim \varphi_{t, n} :
+\underline{M^\bullet}^\wedge|_{W_t} =
+R\lim \underline{M^\bullet/I^nM^\bullet}|_{W_t}
+\longrightarrow
+R\lim K_n|_{W_t} = K|_{W_t}
+$$
+は同型である。これで証明が完了する。
+\end{proof}
+
+\begin{proposition}
+\label{proetale-proposition-Noetherian-adic-constructible}
+$X$ を Noether スキーム、$\Lambda$ を Noether 環、$I \subset \Lambda$ をイデアルとする。
+$K$ を $D_{cons}(X, \Lambda)$ の対象とする。このとき $K$ は adic 構成可能である
+（Definition \ref{proetale-definition-adic-constructible}）。
+\end{proposition}
+
+\begin{proof}
+これは Lemma \ref{proetale-lemma-connected-adic-lisse}、Noether スキームが局所連結であるという事実
+（Topology, Lemma \ref{topology-lemma-locally-Noetherian-locally-connected}）、
+および各定義から従う。
+\end{proof}
+
+
+
+
+
+
+
+\section{固有底変換}
+\label{proetale-section-proper-base-change}
+
+\noindent
+本節では、pro-\'etale 位相は「極限の問題」を扱うためだけに用い、それ以外は
+\'etale 位相について証明された結果で扱うという一般方針に従い、\'etale コホモロジーの
+固有底変換定理を用いて pro-\'etale サイト上の導来完備対象に対する
+固有底変換定理を証明する方法を説明する。
+
+\begin{theorem}
+\label{proetale-theorem-proper-base-change}
+$f : X \to Y$ をスキームの固有射とする。$g : Y' \to Y$ を、底変換図式
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+Y' \ar[r]^g & Y
+}
+$$
+を生じるスキームの射とする。$\Lambda$ を Noether 環、$I \subset \Lambda$ を
+$\Lambda/I$ が torsion となるイデアルとする。$K$ を $D(X_\proetale)$ の対象で、
+次を満たすものとする。
+\begin{enumerate}
+\item $K$ は導来完備である。
+\item $K \otimes_\Lambda^\mathbf{L} \underline{\Lambda/I^n}$ は下に有界で、
+そのコホモロジー層は $X_\etale$ から来る。
+\item $\Lambda/I^n$ は完全 $\Lambda$-加群である\footnote{$K$ が構成可能複体なら、
+この仮定は除ける。\cite{BS} を参照せよ。}。
+\end{enumerate}
+このとき底変換写像
+$$
+Lg_{comp}^*Rf_*K \longrightarrow Rf'_*L(g')^*_{comp}K
+$$
+は同型である。
+\end{theorem}
+
+\begin{proof}
+底変換写像の構成は省略する（これは導来順像と完備化導来引き戻しの形式的性質だけを用いる。
+Cohomology on Sites, Remark \ref{sites-cohomology-remark-base-change} と比較せよ）。
+$K_n = K \otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n}$ と書く。
+$K$ は導来完備なので、Lemma \ref{proetale-lemma-naive-completion} により $K = R\lim K_n$ である。
+Lemmas \ref{proetale-lemma-pushforward-Noetherian-case} および
+\ref{proetale-lemma-naive-completion} により、左辺を展開すると
+$$
+Lg_{comp}^* Rf_* K =
+R\lim Lg^*(Rf_*K)\otimes^\mathbf{L}_\Lambda \underline{\Lambda/I^n} =
+R\lim Lg^* Rf_* K_n
+$$
+となる。最後の等式は $\Lambda/I^n$ が完全加群であることと射影公式による
+（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-projection-formula}）。
+Lemma \ref{proetale-lemma-pushforward-Noetherian-case} を用いて右辺を展開すると
+$$
+Rf'_* L(g')^*_{comp} K =
+Rf'_* R\lim L(g')^* K_n  =
+R\lim Rf'_* L(g')^* K_n
+$$
+となる。最後の等式は $Rf'_*$ が $R\lim$ と可換することによる
+（Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-Rf-commutes-with-Rlim}）。したがって写像
+$$
+Lg^* Rf_* K_n \longrightarrow Rf'_* L(g')^* K_n
+$$
+が同型であることを示せば十分である。Lemma \ref{proetale-lemma-compare-derived} と第2の条件により、
+ある $L_n \in D^+(X_\etale, \Lambda/I^n)$ に対して
+$K_n = \epsilon^{-1}L_n$ と書ける。Lemma \ref{proetale-lemma-morphism-comparison} と、
+$\epsilon^{-1}$ が引き戻しと可換することにより
+$$
+Lg^* Rf_* K_n =
+Lg^* Rf_* \epsilon^*L_n =
+Lg^* \epsilon^{-1} Rf_* L_n =
+\epsilon^{-1} Lg^* Rf_* L_n
+$$
+および
+$$
+Rf'_* L(g')^* K_n =
+Rf'_* L(g')^* \epsilon^{-1} L_n =
+Rf'_* \epsilon^{-1} L(g')^* L_n =
+\epsilon^{-1} Rf'_* L(g')^* L_n
+$$
+を得る（ここでは $L_n$ が下に有界であることも用いた）。最後に、\'etale コホモロジーの
+固有底変換定理（\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-proper-base-change}）により
+$$
+Lg^* Rf_* L_n = Rf'_* L(g')^* L_n
+$$
+である（再び $L_n$ が下に有界であることを用いた）。これで定理が証明された。
+\end{proof}
+
+
+
+
+
+
+\section{部分宇宙の変更}
+\label{proetale-section-change-universe}
+
+\noindent
+読者には本節を読み飛ばすことを勧める。ここでは pro-\'etale 位相における層の
+コホモロジーが部分宇宙の選択に依存しないことを示す。すなわち、下の
+Lemma \ref{proetale-lemma-proetale-cohomology-independent-partial-universe} の関手 $g_*$ は、
+コホモロジーを変えない小 pro-\'etale トポスの埋め込みである。
+大 pro-\'etale サイトについては、本質的に同じことを述べる Lemmas
+\ref{proetale-lemma-change-alpha} および \ref{proetale-lemma-cohomology-enlarge-partial-universe} がある。
+
+\medskip\noindent
+まず、Section \ref{proetale-section-proetale} で約束したように、大 pro-\'etale サイト
+$\Sch_\proetale$ 上の位相が、ある意味ですべてのスキームの圏上の
+pro-\'etale 位相から誘導されることを証明する。
+
+\begin{lemma}
+\label{proetale-lemma-proetale-induced}
+$\Sch_\proetale$ を Definition \ref{proetale-definition-big-proetale-site} の意味での
+大 pro-\'etale サイトとする。$T \in \Ob(\Sch_\proetale)$ とする。
+$\{T_i \to T\}_{i \in I}$ を $T$ の任意の pro-\'etale 被覆とする。
+このとき、$\{T_i \to T\}_{i \in I}$ を細分する、サイト $\Sch_\proetale$ における
+$T$ の被覆 $\{U_j \to T\}_{j \in J}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+まず $\{V_k \to T\}$ を Lemma \ref{proetale-lemma-get-many-weakly-contractible} のような
+被覆とする。このとき pro-\'etale 被覆 $\{T_i \times_T V_k \to V_k\}$ は、有限な
+互いに素な開被覆 $V_k = V_{k, 1} \amalg \ldots \amalg V_{k, n_k}$ によって細分できる。
+Lemma \ref{proetale-lemma-w-contractible-proetale-cover} を参照せよ。
+すると $\{V_{k, i} \to T\}$ は $\{T_i \to T\}_{i \in I}$ を細分する
+$\Sch_\proetale$ の被覆である。
+\end{proof}
+
+\noindent
+まず小 pro-\'etale サイトに対する比較を述べ、証明する。スキームの小 pro-\'etale トポスが
+部分宇宙の選択に依存しないと主張しているのではないことに注意せよ。小 \'etale トポスの場合とは
+異なり、これは正しくない（\'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-etale-topos-independent-partial-universe}）。
+
+\begin{lemma}
+\label{proetale-lemma-proetale-cohomology-independent-partial-universe}
+$S$ をスキームとする。$S_\proetale \subset S_\proetale'$ を Definition
+\ref{proetale-definition-big-small-proetale} のように構成された $S$ の二つの小 pro-\'etale サイトとする。
+このとき包含関手は Sites, Lemma \ref{sites-lemma-bigger-site} の仮定を満たす。
+したがってトポスの射
+$$
+\xymatrix{
+\Sh(S_\proetale) \ar[r]^g &
+\Sh(S_\proetale') \ar[r]^f &
+\Sh(S_\proetale)
+}
+$$
+で、その合成が恒等射と同型であり、$f_* = g^{-1}$ を満たすものが存在する。さらに
+\begin{enumerate}
+\item $\mathcal{F}' \in \textit{Ab}(S_\proetale')$ に対して
+$H^p(S_\proetale', \mathcal{F}') = H^p(S_\proetale, g^{-1}\mathcal{F}')$,
+である。
+\item $\mathcal{F} \in \textit{Ab}(S_\proetale)$ に対して
+$$
+H^p(S_\proetale, \mathcal{F}) =
+H^p(S_\proetale', g_*\mathcal{F}) =
+H^p(S_\proetale', f^{-1}\mathcal{F}).
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+包含関手は充満忠実かつ連続である。$S_\proetale$ と $S_\proetale'$ がファイバー積と
+終対象をもち、この関手がそれらと可換することはすでに見た
+（Lemma \ref{proetale-lemma-fibre-products-proetale}）。Lemma \ref{proetale-lemma-proetale-induced} により、
+包含関手は余連続である。したがって $f$ と $g$ の存在は Sites, Lemma
+\ref{sites-lemma-bigger-site} から従う。(1) の等式は Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-cohomology-bigger-site} である。
+(2) は (1) と $\mathcal{F} = g^{-1}g_*\mathcal{F} = g^{-1}f^{-1}\mathcal{F}$ から従う。
+\end{proof}
+
+\noindent
+次に、大 pro-\'etale トポスに対する対応する結果を証明する。
+
+\begin{lemma}
+\label{proetale-lemma-change-alpha}
+Definition \ref{proetale-definition-big-proetale-site} の意味での大サイト
+$\Sch_\proetale$ と $\Sch'_\proetale$ が与えられているとする。
+$\Sch_\proetale$ は $\Sch'_\proetale$ に含まれると仮定する。
+包含関手 $\Sch_\proetale \to \Sch'_\proetale$ は Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。トポスの射
+\begin{eqnarray*}
+g : \Sh(\Sch_\proetale) &
+\longrightarrow &
+\Sh(\Sch'_\proetale) \\
+f : \Sh(\Sch'_\proetale) &
+\longrightarrow &
+\Sh(\Sch_\proetale)
+\end{eqnarray*}
+で $f \circ g \cong \text{id}$ を満たすものが存在する。
+$\Sch_\proetale$ の任意の対象 $S$ に対して、包含関手
+$(\Sch/S)_\proetale \to (\Sch'/S)_\proetale$ も Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。したがって同様に射
+\begin{eqnarray*}
+g : \Sh((\Sch/S)_\proetale) &
+\longrightarrow &
+\Sh((\Sch'/S)_\proetale) \\
+f : \Sh((\Sch'/S)_\proetale) &
+\longrightarrow &
+\Sh((\Sch/S)_\proetale)
+\end{eqnarray*}
+で $f \circ g \cong \text{id}$ を満たすものを得る。
+\end{lemma}
+
+\begin{proof}
+関手 $\Sch_\proetale \to \Sch'_\proetale$ および
+$(\Sch/S)_\proetale \to (\Sch'/S)_\proetale$ に対して、Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定 (b), (c), (e) は直ちに成り立つ。
+性質 (a) は Lemma \ref{proetale-lemma-proetale-induced} による。
+圏 $\Sch_\proetale$ と $\Sch'_\proetale$ にファイバー積が存在し、スキームの圏の
+ファイバー積と両立するので、性質 (d) も成り立つ。
+\end{proof}
+
+\begin{lemma}
+\label{proetale-lemma-cohomology-enlarge-partial-universe}
+$S$ をスキームとする。$(\Sch/S)_\proetale$ と $(\Sch'/S)_\proetale$ を Definition
+\ref{proetale-definition-big-small-proetale} の意味での $S$ の二つの大 pro-\'etale サイトとする。
+前者が後者に含まれると仮定する。このとき
+\begin{enumerate}
+\item $(\Sch'/S)_\proetale$ 上の任意のアーベル層 $\mathcal{F}'$ と
+$(\Sch/S)_\proetale$ の任意の対象 $U$ に対して
+$$
+H^p(U, \mathcal{F}'|_{(\Sch/S)_\proetale}) =
+H^p(U, \mathcal{F}')
+$$
+である。言い換えると、大きいサイトで計算した $U$ 上の $\mathcal{F}'$ のコホモロジーは、
+$\mathcal{F}'$ を小さいサイトへ制限して計算した $U$ 上のコホモロジーと一致する。
+\item $(\Sch/S)_\proetale$ 上の任意のアーベル層 $\mathcal{F}$ に対し、
+$(\Sch/S)_\proetale'$ 上のアーベル層 $\mathcal{F}'$ で、その
+$(\Sch/S)_\proetale$ への制限が $\mathcal{F}$ と同型となるものが存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{proetale-lemma-change-alpha} により、包含関手
+$(\Sch/S)_\proetale \to (\Sch'/S)_\proetale$ は Sites, Lemma
+\ref{sites-lemma-bigger-site} の仮定を満たす。これから (2) が従い、(1) は
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-cohomology-bigger-site} から従う。
+\end{proof}

@@ -1,0 +1,528 @@
+% Generated mechanically from frozen input inputs/p12/ja/stacks-introduction.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{104}
+\chapter{代数スタック入門}
+
+
+\phantomsection
+\label{stacks-introduction-section-phantom}
+
+
+
+
+
+\section{なぜこれを読むのか}
+\label{stacks-introduction-section-introduction}
+
+\noindent
+ここでは代数スタックへの非形式的な入門を与える．目標は，
+お気に入りのモジュライ問題の局所的・大域的性質を考えるために使える
+簡潔な言葉を，手早く導入することである．この準備を終えれば，
+一般論が存在すると仮定しながら，モジュライ問題について適切に定式化された
+問いを立て，その解決に着手できるはずである．興味深い結果が得られたなら，
+Stacks Project の他の部分にある一般論へ戻り，必要に応じて
+抜けている箇所を埋めればよい．
+
+\medskip\noindent
+ここで採る観点は，\cite{KatzMazur} および \cite{mumford_picard} の
+観点に近い．
+
+
+
+
+
+
+\section{準備}
+\label{stacks-introduction-section-preliminary}
+
+\noindent
+$S$ をスキームとする．$S$ 上の {\it 楕円曲線} とは三つ組
+$(E, f, 0)$ であって，$E$ がスキーム，
+$f : E \to S$ と $0 : S \to E$ がスキームの射であり，
+次を満たすものをいう．
+\begin{enumerate}
+\item $f : E \to S$ は固有かつ平滑で，相対次元は $1$ である．
+\item 各 $s \in S$ に対し，ファイバー $E_s$ は種数 $1$ の連結曲線である．
+すなわち $H^0(E_s, \mathcal{O})$ と $H^1(E_s, \mathcal{O})$ はともに
+$1$ 次元の $\kappa(s)$-ベクトル空間である．
+\item $0$ は $f$ の切断である．
+\end{enumerate}
+楕円曲線 $(E, f, 0)/S$ と $(E', f', 0')/S'$ が与えられたとき，
+{\it $a : S \to S'$ 上の楕円曲線の射} とは，図式
+$$
+\xymatrix{
+E \ar[rr]_\alpha \ar[d]^f & & E' \ar[d]_{f'}  \\
+S \ar@/^5ex/[u]^0 \ar[rr]^a & & S' \ar@/_5ex/[u]_{0'}
+}
+$$
+が可換で内側の正方形がカルテシアンとなるような射
+$\alpha : E \to E'$ をいう．言い換えれば，$\alpha$ は同型
+$E \to S \times_{S'} E'$ を誘導する．
+楕円曲線のスタック $\mathcal{M}_{1, 1}$ を定義しよう．
+Stacks Project の他の部分では，Deligne と Mumford の論文 \cite{DM} で
+導入された方法を展開し，$\mathcal{M}_{1, 1}$ を，関手
+$$
+p : \mathcal{M}_{1, 1} \longrightarrow \Sch, \quad
+(E, f, 0)/S \longmapsto S
+$$
+を備えた圏として表示する．これは，スキームの圏上にファイバー化された圏，
+位相，亜群にファイバー化された圏としてのスタック，被覆などを用いて
+議論することを意味する．
+% P12-ERR-0053: the frozen English source has plural “categories of schemes”; Japanese uses the intended singular.
+本章ではそれらをいったんすべて窓の外へ放り出し，少し異なる仕方で考える．
+おそらく，理論の創始者たち自身が当初考えていた仕方に近いであろう．
+
+
+\section{楕円曲線のモジュライスタック}
+\label{stacks-introduction-section-moduli-elliptic-curves}
+
+\noindent
+次のように進める．
+\begin{enumerate}
+\item お気に入りのスキームの圏 $\Sch$ から出発する．
+\item 新しい記号 $\mathcal{M}_{1, 1}$ を一つ加える．
+\item 射 $S \to \mathcal{M}_{1, 1}$ は，$S$ 上の楕円曲線
+$(E, f, 0)$ {\bf そのもの} とする．
+\item 図式
+$$
+\xymatrix{
+S \ar[rr]_a \ar[rd]_{(E, f, 0)} & & S' \ar[ld]^{(E', F', 0')} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+が可換であるとは，$a : S \to S'$ 上の楕円曲線の射
+$\alpha : E \to E'$ が存在すること {\bf と定める}．
+$\alpha$ はこの図式の可換性を {\it 証言する} という．
+% P12-ERR-0054: preserve the frozen uppercase F' in all four diagram labels.
+\item 可換図式は次のように貼り合わさることに注意する．
+$$
+\xymatrix{
+S \ar[rrr]_a \ar[rrrd]_{(E, f, 0)} & & &
+S' \ar[d]_{(E', F', 0')} \ar[rrr]_{a'} & & &
+S'' \ar[llld]^{(E'', F'', 0'')}
+\\
+& & & \mathcal{M}_{1, 1}
+}
+$$
+実際，$\alpha$ と $\alpha'$ がそれぞれ左と右の三角形の可換性を
+証言するなら，$\alpha' \circ \alpha$ は外側の三角形の可換性を証言する．
+\item 合成
+$$
+S \xrightarrow{a} S' \xrightarrow{(E', f', 0')} \mathcal{M}_{1, 1}
+$$
+は $(E' \times_{S'} S, f' \times_{S'} S, 0' \times_{S'} S)$ で与える．
+\end{enumerate}
+この手続きを終えると，スキームの圏 $\Sch$ にちょうど一つの対象を
+付け加えたことになる……．
+
+\medskip\noindent
+ただし，$\mathcal{M}_{1, 1}$ からスキーム $T$ への射をまだ定義していない．
+答えは，合成が意味をもつための最も弱い概念を採ることである．
+したがって射 $F : \mathcal{M}_{1, 1} \to T$ とは，各楕円曲線
+$(E, f, 0)/S$ に射 $F(E, f, 0) : S \to T$ を対応させる規則であって，
+任意の可換図式
+$$
+\xymatrix{
+S \ar[rr]_a \ar[rd]_{(E, f, 0)} & & S' \ar[ld]^{(E', F', 0')} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+に対して図式
+$$
+\xymatrix{
+S \ar[rr]_a \ar[rd]_{F(E, f, 0)} & & S' \ar[ld]^{F(E', F', 0')} \\
+& T
+}
+$$
+も可換となるものをいう．例として，聞いたことがあるかもしれない
+$j$-不変量
+$$
+j : \mathcal{M}_{1, 1} \longrightarrow \mathbf{A}^1_{\mathbf{Z}}
+$$
+がある．なるほど，これで完成した……．
+
+\medskip\noindent
+いや，まだである！
+射 $\mathcal{M}_{1, 1} \to \mathcal{M}_{1, 1}$ の概念も定義しなければならない．
+これも先ほどとまったく同様に行う．すなわち射
+$F : \mathcal{M}_{1, 1} \to \mathcal{M}_{1, 1}$ とは，各楕円曲線
+$(E, f, 0)/S$ に別の楕円曲線 $F(E, f, 0)$ を対応させ，上の図式の
+可換性を保つ規則である．しかし，そのような自明でない関手の例を
+筆者は知らないので，ここでは $\mathcal{M}_{1, 1}$ からそれ自身への
+射の集合を恒等射だけからなるものと定義しておく．
+
+\medskip\noindent
+この拡大された圏へ他の対象を加える方法も見えてきたと思う．
+何らかの意味で「よく振る舞う」モジュライ問題が与えられれば，
+上の構成を実行して圏に一つの対象を加えられることは直観的に明らかである．
+実際，現代の代数幾何学の多くは，$\Sch$ に可算個の（明示的に構成された）
+モジュライスタックを加えた宇宙の中で行われている．
+% P12-ERR-0055: Japanese is unaffected by the missing hyphen in frozen “modern day”.
+
+\medskip\noindent
+得られたものは圏ではない，と異議を唱えるかもしれない．
+なぜなら，図式がいつ可換であり，どの図式の組合せが引き続き可換なのかに
+「曖昧さ」があり，可換性の証言を作らなければならないからである．
+しかし実は，この「可換性の証言をもつ」という考え方は
+$2$-圏への正当なアプローチである！ したがって，これを採用する．
+
+
+
+
+
+
+\section{ファイバー積}
+\label{stacks-introduction-section-fibre-products}
+
+\noindent
+ここで問うのは，次の図式のファイバー積が何であるべきか，ということである．
+$$
+\xymatrix{
+& ? \ar@{..>}[rd] \ar@{..>}[ld] \\
+S \ar[rd]_{(E, f, 0)} & & S' \ar[ld]^{(E', f', 0')} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+答えはこうである．スキーム $T$ から $?$ への射は三つ組
+$(a, a', \alpha)$ であるべきで，ここで
+$a : T \to S$ と $a' : T \to S'$ はスキームの射，
+$\alpha : E \times_{S, a} T \to E' \times_{S', a'} T$ は
+$T$ 上の楕円曲線の同型である．これは，先に与えた合成および
+可換図式の定義と整合する．
+
+\begin{lemma}[基本事実]
+\label{stacks-introduction-lemma-key-fact}
+関手 $\Sch^{opp} \to \textit{Sets}$，
+$T \mapsto \{(a, a', \alpha)\text{ は上のとおり}\}$ は，
+スキーム $S \times_{\mathcal{M}_{1, 1}} S'$ によって表現可能である．
+\end{lemma}
+
+\begin{proof}
+証明の着想．この関手を
+$$
+\mathit{Isom}_{S \times S'}(E \times S', S \times E')
+$$
+と関係づけ，Grothendieck の Hilbert スキームの理論を用いる．
+\end{proof}
+
+\begin{remark}
+\label{stacks-introduction-remark-diagonal}
+公式
+$S \times_{\mathcal{M}_{1, 1}} S' =
+(S \times S')
+\times_{\mathcal{M}_{1, 1} \times \mathcal{M}_{1, 1}}
+\mathcal{M}_{1, 1}$
+が成り立つ．したがって基本事実は，$\mathcal{M}_{1, 1}$ の対角射
+$\Delta_{\mathcal{M}_{1, 1}}$ の性質である．
+\end{remark}
+
+\noindent
+いずれにせよ，基本事実によって次の定義が可能になる．
+
+\begin{definition}
+\label{stacks-introduction-definition-smooth}
+射 $S \to \mathcal{M}_{1, 1}$ が {\it 平滑} であるとは，任意の射
+$S' \to \mathcal{M}_{1, 1}$ に対し，射影
+$$
+S \times_{\mathcal{M}_{1, 1}} S' \longrightarrow S'
+$$
+が平滑であることをいう．
+\end{definition}
+
+\noindent
+平滑射の基底変換は平滑なので，これはスキームの平滑射の概念と両立する．
+さらに，この定義を $\mathcal{M}_{1, 1}$（またはお気に入りの
+モジュライスタック）への射の他の性質へ拡張する方法も明らかである．
+とくに，以下では {\it 全射} に対して用いる．
+
+
+
+
+
+\section{定義}
+\label{stacks-introduction-section-definition}
+
+\noindent
+これを結果ではなく定義として述べる．読者には，
+スタック $\mathcal{M}_{1, 1}$ や全スキームの圏 $\Sch$ だけでなく，
+他の場合も試してほしいからである．
+
+\begin{definition}
+\label{stacks-introduction-definition-algebraic-stack}
+$\mathcal{M}_{1, 1}$ が {\it 代数スタック} であるとは，次の三条件が
+成り立つことをいう．
+\begin{enumerate}
+\item $\Sch$ 上の \'etale 位相について，対象の降下が成り立つ．
+\item 基本事実が成り立つ．
+\item 全射かつ平滑な射 $S \to \mathcal{M}_{1, 1}$ が存在する．
+% P12-ERR-0056: capitalization is inapplicable in Japanese; the source observation remains sidecar-only.
+\end{enumerate}
+\end{definition}
+
+\noindent
+第一の条件は「層の性質」である．技術的な要点があるので，
+これを詳しく述べよう．スキーム $S$，\'etale 被覆 $\{S_i \to S\}$，
+および射 $e_i : S_i \to \mathcal{M}_{1, 1}$ が与えられ，図式
+$$
+\xymatrix{
+S_i \times_S S_j \ar[rd]_{e_i \circ \text{pr}_1} \ar[rr]_{\text{id}} & &
+S_i \times_S S_j \ar[ld]^{e_j \circ \text{pr}_2} \\
+& \mathcal{M}_{1, 1}
+}
+$$
+が可換であるとする．この状況で，層条件だけでは
+射 $e : S \to \mathcal{M}_{1, 1}$ の存在は {\it 保証されない}．
+実際，上の図式の証言 $\alpha_{ij}$ を選び，
+$$
+\text{pr}_{02}^*\alpha_{ik} =
+\text{pr}_{12}^*\alpha_{jk} \circ \text{pr}_{01}^*\alpha_{ij}
+$$
+が $S_i \times_S S_j \times_S S_k$ 上の証言として成り立つことを
+要求する必要がある．これが何を意味するかは明らかだと思う……．
+そうでなければ，残念ながら亜群にファイバー化された圏などの資料を
+読む必要がある．いずれにせよ，上の等式はしばしば
+{\it コサイクル条件} と呼ばれる．
+「層の性質」をより正確に述べれば，次のようになる．
+$\{S_i \to S\}$，$e_i : S_i \to \mathcal{M}_{1, 1}$，および
+コサイクル条件を満たす証言 $\alpha_{ij}$ が与えられたとき，
+$e_i \cong e|_{S_i}$ であって $\alpha_{ij}$ を復元するような
+$e : S \to \mathcal{M}_{1, 1}$ が，一意な同型を除いて一意に存在する．
+
+\medskip\noindent
+見てのとおり，正確な主張を定式化するだけでも少し手間がかかる．
+この「層の性質」の証明は，代数幾何学の基本的手法である降下理論に依存する．
+まずはこの「層の性質」が成り立つことを受け入れ，実際に何を含意するかを
+見ることを勧める．実際，「層の性質」をナプキン一枚に収まる扱いやすい
+主張へ煮詰めるには，ある程度の頭の柔軟さが必要である．
+すでに少し面白い最も単純な変形は，おそらく次のものである．
+体の有限 Galois 拡大 $L/K$ があり，Galois 群を
+$G = \text{Gal}(L/K)$ とする．$T = \Spec(L)$，$S = \Spec(K)$ とおく．
+すると $\{T \to S\}$ は \'etale 被覆である．
+$(E, f, 0)$ を $L$ 上の楕円曲線とする．
+（これは単に，$E \subset \mathbf{P}^2_L$ が Weierstrass 方程式で与えられ，
+$0$ が通常の無限遠点であることを意味する．）
+基底変換を $E_\sigma = E \times_{T, \Spec(\sigma)} T$ と書く．
+（これは Weierstrass 方程式の係数に $\sigma$ を作用させることに対応する．
+それとも $\sigma^{-1}$ だっただろうか？）
+さらに，各 $\sigma \in G$ に対して $T$ 上の同型
+$$
+\alpha_\sigma : E \longrightarrow E_\sigma
+$$
+が与えられているとする．この状況で，上のコサイクル条件は
+$$
+(\alpha_\tau)^\sigma \circ \alpha_\sigma = \alpha_{\tau\sigma}
+$$
+が $\sigma, \tau \in G$ に対して成り立つことを意味する．
+群コホモロジーを扱ったことがあれば，見覚えがあるはずである．
+ともかく，$\mathcal{M}_{1, 1}$ の「貼合せ」条件によれば，
+この連立方程式の解があるなら，$E \cong E' \times_S T$ を満たす
+$S$ 上の楕円曲線 $E'$ が存在する（$\alpha_\sigma$ の復元方法まで
+与えるので，実際にはもう少し多くを述べている）．
+
+\medskip\noindent
+挑戦問題：これを Weierstrass 方程式で定義された楕円曲線だけを用いて
+完全に証明できるだろうか？
+
+
+
+
+\section{平滑被覆}
+\label{stacks-introduction-section-smooth}
+
+\noindent
+最後に，$\mathcal{M}_{1, 1}$ の平滑被覆を見つけなければならない．
+実はある意味で，平滑被覆の存在は基本事実を
+{\it 含意する}\footnote{これは少しごまかしである．平滑性を確認する際には，
+基本事実に近いことを証明しなければならないからである．そもそも平滑性は
+ファイバー積によって定義されている．利点は，一方に平滑被覆を与えることを
+示そうとしている射がある場合についてだけ，これらのファイバー積の存在を
+証明すればよい点にある．}！
+楕円曲線の場合には，Weierstrass 方程式を用いて被覆を構成する．
+
+\medskip\noindent
+$$
+W = \Spec(\mathbf{Z}[a_1, a_2, a_3, a_4, a_6, 1/\Delta])
+$$
+とおく．ここで $\Delta \in \mathbf{Z}[a_1, a_2, a_3, a_4, a_6]$ は
+ある多項式である（後述）．さらに
+$$
+\mathbf{P}_W^2 \supset E_W :
+zy^2 + a_1 xyz + a_3 yz^2 = x^3 + a_2x^2z + a_4xz^2 + a_6z^3.
+$$
+とおく．射影を $f_W : E_W \to W$ と書く．最後に，$(0 : 1 : 0)$ で
+与えられる $f_W$ の切断を $0_W : W \to E_W$ と書く．
+% P12-ERR-0541: Japanese supplies the missing “by/as” relation in both frozen “Denote ... the projection/section” clauses.
+$\deg(a_i) = i$ とすると，$E_W \to W$ が平滑となるような
+$a_i$ の次数 $12$ の斉次多項式 $\Delta$ が存在することが分かる．
+Weierstrass 方程式の偏微分を計算すれば明示的に求められるが，
+もちろん表を参照してもよい．pari/gp に計算させることもできる．
+その式は
+\begin{align*}
+\Delta & = -a_6a_1^6 + a_4a_3a_1^5 + ((-a_3^2 - 12a_6)a_2 + a_4^2)a_1^4 + \\
+& (8a_4a_3a_2 + (a_3^3 + 36a_6a_3))a_1^3 + \\
+& ((-8a_3^2 - 48a_6)a_2^2 + 8a_4^2a_2 + (-30a_4a_3^2 + 72a_6a_4))a_1^2 + \\
+& (16a_4a_3a_2^2 + (36a_3^3 + 144a_6a_3)a_2 - 96a_4^2a_3)a_1 + \\
+& (-16a_3^2 - 64a_6)a_2^3 + 16a_4^2a_2^2 + (72a_4a_3^2 + 288a_6a_4)a_2 + \\
+& -27a_3^4 - 216a_6a_3^2  -64a_4^3 - 432a_6^2
+\end{align*}
+である．最後の二項は，判別式が
+$-64A^3 - 432B^2 = -16(4A^3 + 27B^2)$ である
+$y^2 = x^3 + Ax + B$ の場合から見覚えがあるかもしれない．
+
+\begin{lemma}
+\label{stacks-introduction-lemma-Weierstrass-smooth-cover}
+射 $W \xrightarrow{(E_W, f_W, 0_W)} \mathcal{M}_{1, 1}$ は平滑かつ全射である．
+\end{lemma}
+
+\begin{proof}
+全射性は，体上の任意の楕円曲線が Weierstrass 方程式をもつことから従う．
+平滑性を示す一つの方法の概略を述べる．部分群スキーム
+% P12-ERR-0057: Japanese uses the standard compound; the frozen split “sub group scheme” remains sidecar-only.
+$$
+H =
+\left\{
+\left(
+\begin{matrix}
+u^2 & s & 0 \\
+0 & u^3 & 0 \\
+r & t & 1
+\end{matrix}
+\right)
+\middle|
+\begin{matrix}
+u\text{ は単元} \\
+s, r, t\text{ は任意}
+\end{matrix}
+\right\}
+\subset
+\text{GL}_{3, \mathbf{Z}}
+$$
+を考える．Weierstrass スキーム $W$ には $H$ の作用
+$H \times W \to W$ がある．この作用を与える方程式は，$H$ の行列による
+座標変換を一般 Weierstrass 方程式に施して書き下せば得られる．
+すると次が成り立つ．
+\begin{enumerate}
+\item 任意の楕円曲線 $(E, f, 0)/S$ は，$S$ 上 Zariski 局所的に
+Weierstrass 方程式をもつ．
+\item $(E, f, 0)$ の任意の二つの Weierstrass 方程式は，
+Zariski 局所的に $H$ の元によって異なる．
+\end{enumerate}
+ファイバー積
+$S \times_{\mathcal{M}_{1, 1}} W =
+\mathit{Isom}_{S \times W}(E \times W, S \times E_W)$
+を考えると，これは射 $W \to \mathcal{M}_{1, 1}$ が
+$H$-トルソーであることを意味する．
+$H \to \Spec(\mathbf{Z})$ は平滑であり，平滑群スキームの
+トルソーは平滑なので，結論を得る．
+\end{proof}
+
+\begin{remark}
+\label{stacks-introduction-remark-quotient-stack}
+上で概略を述べた議論は，実際には
+$\mathcal{M}_{1, 1} = [W/H]$ が大域的商スタックであることを示す．
+あるモジュライスタックが代数的であることを証明する議論が，
+それが大域的商スタックであることまで示す確率は，およそ 50\% である．
+\end{remark}
+
+
+
+\section{代数スタックの性質}
+\label{stacks-introduction-section-properties}
+
+\noindent
+さて，$\mathcal{M}_{1, 1}$ が代数スタックであることが分かった．
+これで何ができるだろうか？ ここで役立つのは，代数スタックであるという
+事実そのものよりも，$\mathcal{M}_{1, 1}$ の性質は射
+$S \to \mathcal{M}_{1, 1}$，すなわち楕円曲線の族の性質に
+符号化されるべきだ，という観点である．いくつか例を挙げる．
+
+\medskip\noindent
+{\bf 局所的性質：}
+$$
+\mathcal{M}_{1, 1} \to \Spec(\mathbf{Z})\text{ は平滑}
+\Leftrightarrow
+W \to \Spec(\mathbf{Z})\text{ は平滑}
+$$
+{\bf 着想}．代数スタックの局所的性質は，その平滑被覆の局所的性質に
+符号化されている．
+
+\medskip\noindent
+{\bf 大域的性質：}
+$$
+\begin{matrix}
+\mathcal{M}_{1, 1}\text{ は準コンパクト} \Leftarrow W\text{ は準コンパクト}
+\\
+\mathcal{M}_{1, 1}\text{ は既約} \Leftarrow W\text{ は既約}
+\end{matrix}
+$$
+{\bf 着想}．代数スタックのある種の大域的性質は，
+{\it 適切な}\footnote{既約な平滑被覆をもたない既約代数スタックが
+存在する可能性はあると思うが，もし存在するなら，かなり厄介なものだろう！}
+平滑被覆の対応する性質から読み取れる．
+% P12-ERR-0058: Japanese supplies the complement relation missing from frozen English.
+
+\medskip\noindent
+{\bf 準連接層：}
+$$
+\QCoh(\mathcal{O}_{\mathcal{M}_{1, 1}}) =
+H\text{-同変準連接加群，定義されるスキームは }W
+$$
+{\bf 着想}．一方で，$\mathcal{M}_{1, 1}$ 上の準連接加群は，
+各射 $e : S \to \mathcal{M}_{1, 1}$ に対する $S$ 上の準連接層
+$\mathcal{F}_{S, e}$ に対応するはずである．とくに，射
+$(E_W, f_W, 0_W) :  W \to \mathcal{M}_{1, 1}$ に対してそうである．
+この射は $H$-同変なので，得られる準連接加群 $\mathcal{F}_W$ も
+$H$-同変であることが分かる．逆に，$H$-同変加群が与えられれば，
+$S \times_{e, \mathcal{M}_{1, 1}} W$ が $H$-トルソーであるという
+観察から出発し，降下理論によって層 $\mathcal{F}_{S, e}$ を復元できる．
+% P12-ERR-0059: the frozen doubled ASCII space has no Japanese rendering effect.
+
+\medskip\noindent
+{\bf Picard 群：}
+$$
+\Pic(\mathcal{M}_{1, 1}) = \Pic_H(W) = \mathbf{Z}/12\mathbf{Z}
+$$
+{\bf 着想}．第一の等式はすでに上で見た．環
+$\mathbf{Z}[a_1, a_2, a_3, a_4, a_6, 1/\Delta]$ の類群は自明なので，
+$\Pic(W) = 0$ であることに注意する．完全列
+$$
+\mathbf{Z}\Delta \to
+\Pic_H(\mathbf{A}^5_{\mathbf{Z}}) \to
+\Pic_H(W) \to 0
+$$
+がある．中央の群は $\Hom(H, \mathbf{G}_m) = \mathbf{Z}$ に等しい．
+$\Delta$ の像は，$\Delta$ の次数が $12$ なので $12$ である．
+% P12-ERR-0060: Japanese supplies the relation omitted in frozen “The image Delta”.
+この議論は概ね正しい．\cite{PicM11} を参照されたい．
+
+\medskip\noindent
+{\bf \'Etale コホモロジー：} $\Lambda$ を環とする．
+$H^{p + q}_\etale(\mathcal{M}_{1, 1}, \Lambda)$ に収束する
+第一象限スペクトル系列があり，その $E_2$-ページは
+$$
+E_2^{p, q} = H_\etale^q(W \times H \times \ldots \times H, \Lambda)
+\quad(p\text{ 個の }H)
+$$
+である．
+% P12-ERR-0061: preserve the frozen E_2 claim literally; the sidecar records that the displayed raw groups form the E_1 page.
+{\bf 着想}．
+$$
+W \times_{\mathcal{M}_{1, 1}} W \times_{\mathcal{M}_{1, 1}}
+\ldots \times_{\mathcal{M}_{1, 1}} W
+= W \times H \times \ldots \times H
+$$
+が成り立つことに注意する．これは $W \to \mathcal{M}_{1, 1}$ が
+$H$-トルソーだからである．このスペクトル系列は，平滑被覆
+$\{W \to \mathcal{M}_{1, 1}\}$ に対する
+{\v C}ech からコホモロジーへのスペクトル系列である．
+たとえば，$W$ は連結なので
+$H^0_\etale(\mathcal{M}_{1, 1}, \Lambda) = \Lambda$ であり，
+$H^1_\etale(W, \Lambda) = 0$ なので
+$H^1_\etale(\mathcal{M}_{1, 1}, \Lambda) = 0$ であることが分かる
+（もちろん，後者には証明が必要である）．
+もちろん，平滑被覆 $W \to \mathcal{M}_{1, 1}$ は
+\'etale コホモロジーの計算に「最適」とは限らない．

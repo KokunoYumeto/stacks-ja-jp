@@ -1,0 +1,3307 @@
+% Generated mechanically from frozen input inputs/p03/ja/tex/smoothing.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{15}
+\chapter{環準同型の平滑化}
+
+
+
+\phantomsection
+\label{smoothing-section-phantom}
+
+
+\section{序論}
+\label{smoothing-section-introduction}
+
+\noindent
+本章の主結果は次の定理である。
+$$
+\fbox{ネーター環の正則準同型は，滑らかな準同型の
+フィルター余極限である。}
+$$
+この定理は Popescu によるものである（\cite{popescu-letter} を参照）。
+Popescu の証明については，Richard Swan が読みやすい解説
+\cite{swan} を与えている。Swan は Andr\'e の講義ノートと
+Ogoma の論文 \cite{Ogoma} を用いた。
+
+\medskip\noindent
+本章の叙述は Swan に従うが，まず，より簡単な状況で議論できるようにする
+中間結果を証明する。全体の流れは次のとおりである。最初に，次の
+「持ち上げ問題」を解く：滑らかな代数のフィルター余極限の平坦な
+無限小変形は，再び滑らかな代数のフィルター余極限である。
+この結果は本質的に，主定理を被約ネーター環の間の準同型について
+証明すれば十分であることを述べている。次に，「持ち上げ補題」と
+「特異点解消補題」と呼ばれる二つの巧妙な補題を証明する。
+これらを組み合わせると，主定理は，体 $k$ 上の幾何学的に正則な
+ネーター代数 $\Lambda$ が滑らかな $k$-代数のフィルター余極限であることの
+証明に帰着される。続いて Popescu--Ogoma--Swan--Andr\'e の証明に必要な
+局所的技巧を述べ，最後の三節で証明を与える。
+
+\medskip\noindent
+この序論の最後に，いくつかの参考文献を挙げる。
+$A$ をヘンゼルなネーター局所環とする。任意の
+$f_1, \ldots, f_m \in A[x_1, \ldots, x_n]$ に対して，方程式系
+$f_1 = 0, \ldots, f_m = 0$ が $A$ の完備化で解をもつことと
+$A$ で解をもつことが同値であるとき，$A$ は{\it 近似性質}をもつという。
+この定義は Artin による。Artin はまず解析的方程式系について
+近似性質を証明した（\cite{Artin-Analytic-Approximation} を参照）。
+\cite{Artin-Algebraic-Approximation} では，優秀離散付値環上
+本質的有限型な局所環について近似性質を証明した。
+Artin は \cite{Artin-Algebraic-Approximation} の 26 ページで，
+すべての優秀ヘンゼル局所環が近似性質をもつはずであると予想した。
+
+\medskip\noindent
+その後，ネーター環の任意の正則準同型は滑らかな代数の
+フィルター余極限である，という予想が立てられた（例えば
+\cite{Raynaud-Rennes}, \cite{popescu-global}, \cite{Artin-power-series},
+\cite{Artin-Denef} を参照）。この予想\footnote{\cite{Artin-power-series},
+\cite{Artin-Denef}, \cite{popescu-global} で定式化された問題または予想は
+より強いものであり，\cite{Cipu} において元の形と同値であることが
+示された。}を誰に帰すべきかは明らかでない。近似性質との関係は次の
+とおりである。上のような $A$ に対して $A \to A^\wedge$ が滑らかな代数の
+余極限であれば，近似性質が成り立つ（ここに将来の参照を挿入する）。
+さらに，$A$ が優秀局所環ならば，優秀局所環の条件の一つとして
+形式的ファイバーが幾何学的に正則であるため，主定理を
+$A \to A^\wedge$ に適用できる。優秀局所環は Grothendieck によって
+定義され，その定義は 1965 年に刊行物に現れたことにも注意しよう。
+
+\medskip\noindent
+\cite{Artin-power-series} では，体上本質的有限型な任意の局所環 $R$ に
+対して，$R \to R^\wedge$ が滑らかな代数のフィルター余極限であることが
+示された。\cite{Rotthaus-Artin} では，優秀離散付値環上本質的有限型な
+任意の局所環 $R$ に対して，同じ結論が示された。最後に，先に述べたように
+主定理は
+\cite{popescu-GND}, \cite{popescu-GNDA}, \cite{popescu-letter}, 
+\cite{Ogoma}, \cite{swan} で証明された。
+
+\medskip\noindent
+逆に，上の結果のいくつかを用いて，近似性質をもつ任意のネーター局所環が
+優秀であることが \cite{Rotthaus-excellent} で示された。
+
+\medskip\noindent
+論文 \cite{Spivakovsky} は主定理への別のアプローチを与えるが，
+読み解くのは難しいように思われる（例えば
+\cite[Lemma 5.2]{Spivakovsky} は \cite[Lemma 3]{Elkik} を
+誤って定式化し直したもののように見える）。この内容については
+Bourbaki 講演もある（\cite{Teissier} を参照）。
+
+
+
+
+
+
+
+
+
+
+
+
+\section{特異イデアル}
+\label{smoothing-section-singular-ideal}
+
+\noindent
+$R \to A$ を環準同型とする。$R$ 上の $A$ の特異イデアルとは，射
+$\Spec(A) \to \Spec(R)$ の特異軌跡を定める $A$ の根基イデアルである。
+厳密には次のように定義する。
+
+\begin{definition}
+\label{smoothing-definition-singular-ideal}
+$R \to A$ を環準同型とする。{\it $R$ 上の $A$ の特異イデアル}とは，
+次を満たす一意な根基イデアル $H_{A/R} \subset A$ のことであり，
+$H_{A/R}$ と書く。
+$$
+V(H_{A/R}) = \{\mathfrak q \in \Spec(A) \mid R \to A
+\text{ は }\mathfrak q\text{ において滑らかでない}\}
+$$
+\end{definition}
+
+\noindent
+この定義が意味をもつのは，$R \to A$ が滑らかである素イデアルの集合が
+開集合だからである。《代数》定義
+\ref{algebra-definition-smooth-at-prime} を参照せよ。
+特異イデアルの明示的な生成元を求めるため，まず次の補題を証明する。
+
+\begin{lemma}
+\label{smoothing-lemma-find-strictly-standard}
+$R$ を環とし，$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ とする。
+$\mathfrak q \subset A$ を素イデアルとする。$R \to A$ が
+$\mathfrak q$ において滑らかであると仮定する。このとき，
+$a \in A$, $a \not \in \mathfrak q$，整数
+$c$, $0 \leq c \leq \min(n, m)$，および要素数が $c$ である部分集合
+$U \subset \{1, \ldots, n\}$, $V \subset \{1, \ldots, m\}$
+が存在し，
+$$
+a = a' \det(\partial f_j/\partial x_i)_{j \in V, i \in U}
+$$
+がある $a' \in A$ に対して成り立ち，さらに
+$$
+a f_\ell \in (f_j, j \in V) + (f_1, \ldots, f_m)^2
+$$
+がすべての $\ell \in \{1, \ldots, m\}$ に対して成り立つ。
+\end{lemma}
+
+\begin{proof}
+$I = (f_1, \ldots, f_m)$ とおく。このとき，$R$ 上の $A$ の素朴な
+余接複体は $I/I^2 \to \bigoplus A\text{d}x_i$ とホモトピー同値である。
+《代数》補題 \ref{algebra-lemma-NL-homotopy} を参照せよ。
+素朴な余接複体の構成が局所化と可換であることを用いる。
+《代数》\ref{algebra-section-netherlander} 節，特に
+《代数》補題 \ref{algebra-lemma-localize-NL} を参照せよ。
+《代数》定義 \ref{algebra-definition-smooth} および
+\ref{algebra-definition-smooth-at-prime} より，ある
+$a \in A$, $a \not \in \mathfrak q$ に対して
+$(I/I^2)_a \to \bigoplus A_a\text{d}x_i$ は分裂単射である。
+$x_1, \ldots, x_n$ と $f_1, \ldots, f_m$ の番号を付け替えることにより，
+$f_1, \ldots, f_c$ がベクトル空間
+$I/I^2 \otimes_A \kappa(\mathfrak q)$ の基をなし，
+$\text{d}x_{c + 1}, \ldots, \text{d}x_n$ の像が
+$\Omega_{A/R} \otimes_A \kappa(\mathfrak q)$ の基をなすと仮定できる。
+したがって，ある $a' \in A$, $a' \not \in \mathfrak q$ によって
+$a$ を $aa'$ で置き換えれば，$f_1, \ldots, f_c$ が
+$(I/I^2)_a$ の基をなし，$\text{d}x_{c + 1}, \ldots, \text{d}x_n$ の像が
+$(\Omega_{A/R})_a$ の基をなすと仮定できる。この状況では，十分大きな整数
+$N$ に対する $a^N$ が補題の条件を満たす
+（$U = V = \{1, \ldots, c\}$ とする）。
+\end{proof}
+
+\noindent
+$R$ 上の $A$ における{\it 厳密標準}元という概念を用いる。
+ここでの概念は Swan の論文 \cite{swan} におけるものよりわずかに弱い。
+また，上の補題で得られた型の元を{\it 初等標準}元と定義する。
+これらの異なる型の元は補題 \ref{smoothing-lemma-compare-standard} で比較する。
+
+\begin{definition}
+\label{smoothing-definition-strictly-standard}
+$R \to A$ を有限表示の環準同型とする。元 $a \in A$ が
+{\it $R$ 上の $A$ における初等標準元}であるとは，表示
+$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$
+および $0 \leq c \leq \min(n, m)$ を満たす整数 $c$ が存在して，
+\begin{equation}
+\label{smoothing-equation-elementary-standard-one}
+a = a' \det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}
+\end{equation}
+がある $a' \in A$ に対して成り立ち，かつ
+\begin{equation}
+\label{smoothing-equation-elementary-standard-two}
+a f_{c + j} \in (f_1, \ldots, f_c) + (f_1, \ldots, f_m)^2
+\end{equation}
+が $j = 1, \ldots, m - c$ に対して成り立つことをいう。
+元 $a \in A$ が{\it $R$ 上の $A$ における厳密標準元}であるとは，表示
+$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$
+および $0 \leq c \leq \min(n, m)$ を満たす整数 $c$ が存在して，
+\begin{equation}
+\label{smoothing-equation-strictly-standard-one}
+a = \sum\nolimits_{I \subset \{1, \ldots, n\},\ |I| = c}
+a_I \det(\partial f_j/\partial x_i)_{j = 1, \ldots, c,\ i \in I}
+\end{equation}
+がある $a_I \in A$ に対して成り立ち，かつ
+\begin{equation}
+\label{smoothing-equation-strictly-standard-two}
+a f_{c + j} \in (f_1, \ldots, f_c) + (f_1, \ldots, f_m)^2
+\end{equation}
+が $j = 1, \ldots, m - c$ に対して成り立つことをいう。
+\end{definition}
+
+\noindent
+次の補題は，式 (\ref{smoothing-equation-strictly-standard-one}) から得られる帰結を
+調べるのに有用である。
+
+\begin{lemma}
+\label{smoothing-lemma-parse-equation-strictly-standard-one}
+$R$ を環とし，$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ とする。
+$I = (f_1, \ldots, f_m)$ と書き，$a \in A$ とする。このとき
+(\ref{smoothing-equation-strictly-standard-one}) から，$A$-線形写像
+$\psi : \bigoplus\nolimits_{i = 1, \ldots, n} A \text{d}x_i \to A^{\oplus c}$
+が存在して，合成
+$$
+A^{\oplus c} \xrightarrow{(f_1, \ldots, f_c)}
+I/I^2 \xrightarrow{f \mapsto \text{d}f}
+\bigoplus\nolimits_{i = 1, \ldots, n} A \text{d}x_i
+\xrightarrow{\psi}
+A^{\oplus c}
+$$
+が $a$ 倍写像になることが従う。逆に，このような $\psi$ が存在するならば，
+$a^c$ は (\ref{smoothing-equation-strictly-standard-one}) を満たす。
+\end{lemma}
+
+\begin{proof}
+これは《代数》補題 \ref{algebra-lemma-matrix-left-inverse} の特別な場合である。
+\end{proof}
+
+\begin{lemma}[Elkik]
+\label{smoothing-lemma-elkik}
+$R \to A$ を有限表示の環準同型とする。特異イデアル $H_{A/R}$ は，
+$R$ 上の $A$ における厳密標準元が生成するイデアルの根基であり，
+同時に初等標準元が生成するイデアルの根基でもある。
+\end{lemma}
+
+\begin{proof}
+$a$ が $R$ 上の $A$ における厳密標準元であると仮定する。
+$A_a$ は $R$ 上滑らかであると主張する。これにより
+$a \in H_{A/R}$ が示される。実際，定義
+\ref{smoothing-definition-strictly-standard} にあるように
+$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$，$c$，$a' \in A$ をとる。
+$I = (f_1, \ldots, f_m)$ と書けば，$R$ 上の $A$ の素朴な余接複体は
+$I/I^2 \to \bigoplus A\text{d}x_i$ で与えられる。仮定
+(\ref{smoothing-equation-strictly-standard-two}) より，$(I/I^2)_a$ は
+$f_1, \ldots, f_c$ の類で生成される。仮定
+(\ref{smoothing-equation-strictly-standard-one}) より，微分
+$(I/I^2)_a \to \bigoplus A_a\text{d}x_i$ は左逆をもつ。
+補題 \ref{smoothing-lemma-parse-equation-strictly-standard-one} を参照せよ。
+したがって，定義および《代数》補題
+\ref{algebra-lemma-localize-NL} により $R \to A_a$ は滑らかである。
+
+\medskip\noindent
+$H_e, H_s \subset A$ を，それぞれ $R$ 上の $A$ における初等標準元，
+厳密標準元が生成するイデアルの根基とする。定義と上で示したことから
+$H_e \subset H_s \subset H_{A/R}$ である。包含
+$H_{A/R} \subset H_e$ は補題 \ref{smoothing-lemma-find-strictly-standard} から従う。
+\end{proof}
+
+\begin{example}
+\label{smoothing-example-not-quasi-compact}
+有限表示の環準同型が滑らかである点の集合は，擬コンパクトな開集合とは
+限らない。例えば，
+$R = k[x, y_1, y_2, y_3, \ldots]/(xy_i)$，$A = R/(x)$
+とする。このとき $R \to A$ の滑らかな軌跡は
+$\bigcup D(y_i)$ であり，これは擬コンパクトでない。
+\end{example}
+
+\begin{lemma}
+\label{smoothing-lemma-strictly-standard-base-change}
+$R \to A$ を有限表示の環準同型，$R \to R'$ を環準同型とする。
+$a \in A$ が $R$ 上の $A$ における初等標準元，それぞれ厳密標準元ならば，
+$a \otimes 1$ は $R'$ 上の $A \otimes_R R'$ における初等標準元，
+それぞれ厳密標準元である。
+\end{lemma}
+
+\begin{proof}
+$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$ が $R$ 上の $A$ の表示ならば，
+$A \otimes_R R' = R'[x_1, \ldots, x_n]/(f'_1, \ldots, f'_m)$
+は $R'$ 上の $A \otimes_R R'$ の表示である。ここで $f'_j$ は
+$R'[x_1, \ldots, x_n]$ における $f_j$ の像である。
+したがって結論は定義から従う。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-final-solve}
+$R \to A \to \Lambda$ を環準同型とし，$A$ は $R$ 上有限表示であるとする。
+$H_{A/R} \Lambda = \Lambda$ と仮定する。このとき，$B$ が $R$ 上滑らかである
+ような分解 $A \to B \to \Lambda$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$\Lambda$ において $\sum f_i\lambda_i = 1$ となるように
+$f_1, \ldots, f_r \in H_{A/R}$ および
+$\lambda_1, \ldots, \lambda_r \in \Lambda$ を選ぶ。
+$B = A[x_1, \ldots, x_r]/(f_1x_1 + \ldots + f_rx_r - 1)$
+とおき，$x_i$ を $\lambda_i$ に送ることにより $B \to \Lambda$ を定める。
+$B$ が $R$ 上滑らかであることを確かめるには，$H_{A/R}$ の定義により
+$A_{f_i}$ が $R$ 上滑らかであり，$B_{f_i}$ が $A_{f_i}$ 上滑らかである
+ことを用いればよい。詳細は省略する。
+\end{proof}
+
+
+
+
+
+\section{代数の表示}
+\label{smoothing-section-presentations}
+
+\noindent
+本節の結果のいくつかは Elkik による。次の補題に現れる代数 $C$ は
+$A$ 上の対称代数であることに注意せよ。さらに，$R$ がネーター環ならば，
+$C$ は $R$ 上有限表示である。
+
+\begin{lemma}
+\label{smoothing-lemma-improve-presentation}
+$R$ を環とし，$A$ を有限表示 $R$-代数とする。次の二つの性質をもち，
+かつレトラクションをもつ有限型 $R$-代数準同型 $A \to C$ が存在する。
+\begin{enumerate}
+\item $R \to A_a$ が局所完全交差となる各 $a \in A$ に対し
+（《代数詳論》定義
+\ref{more-algebra-definition-local-complete-intersection}），
+環 $C_a$ は $A_a$ 上滑らかであり，$J/J^2$ が自由 $C_a$-加群となる表示
+$C_a = R[y_1, \ldots, y_m]/J$ をもつ。
+\item $A_a$ が $R$ 上滑らかとなる各 $a \in A$ に対し，
+加群 $\Omega_{C_a/R}$ は自由 $C_a$-加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+表示 $A = R[x_1, \ldots, x_n]/I$ を選び，
+$I = (f_1, \ldots, f_m)$ と書く。短完全列
+$$
+0 \to K \to A^{\oplus m} \to I/I^2 \to 0
+$$
+によって $A$-加群 $K$ を定義する。ここで中央の第 $j$ 基底ベクトル $e_j$ は，
+右辺の $f_j$ の類へ写される。次のようにおく。
+$$
+C = \text{Sym}^*_A(I/I^2).
+$$
+レトラクションは $C$ の次数 $0$ の部分への射影にほかならない。
+$y_j$ を $I/I^2$ における $f_j$ の類へ送る全射
+$R[x_1, \ldots, x_n, y_1, \ldots, y_m] \to C$ がある。
+この写像の核 $J$ は，元 $f_1, \ldots, f_m$ と，
+$h_j \in R[x_1, \ldots, x_n]$ かつ $\sum h_j e_j$ が $K$ の元を定めるような
+元 $\sum h_jy_j$ によって生成される。上の表示および
+$R \to A \to C$ に《代数》補題 \ref{algebra-lemma-exact-sequence-NL} と
+《代数詳論》補題
+\ref{more-algebra-lemma-cotangent-complex-symmetric-algebra} を適用すると，
+次の $C$-加群の短完全列を得る。
+\begin{equation}
+\label{smoothing-equation-sequence}
+I/I^2 \otimes_A C \to J/J^2 \to K \otimes_A C \to 0
+\end{equation}
+$h \in R[x_1, \ldots, x_n]$ の $A$ における像を $a$ とする。
+局所化環の表示として
+$$
+A_a = R[x_0, x_1, \ldots, x_n]/I'
+\quad\text{および}\quad
+C_a = R[x_0, x_1, \ldots, x_n, y_1, \ldots, y_m]/J'
+$$
+を用いる。ここで $I' = (hx_0 - 1, I)$，$J' = (hx_0 - 1, J)$ である。
+したがって，$A_a$-加群として
+$I'/(I')^2 = A_a \oplus (I/I^2)_a$，$C_a$-加群として
+$J'/(J')^2 = C_a \oplus (J/J^2)_a$ である。ゆえに
+\begin{equation}
+\label{smoothing-equation-sequence-localized}
+C_a \oplus I/I^2 \otimes_A C_a \to
+C_a \oplus (J/J^2)_a \to
+K \otimes_A C_a \to 0
+\end{equation}
+を得る。これは $R \to A_a \to C_a$ と上の表示に対応する
+《代数》補題 \ref{algebra-lemma-exact-sequence-NL} の列である。
+
+\medskip\noindent
+次に，$A_a$ が $R$ 上の局所完全交差となる $a \in A$ を考える。
+このとき $(I/I^2)_a$ は有限射影 $A_a$-加群である。
+《代数詳論》補題
+\ref{more-algebra-lemma-quasi-regular-ideal-finite-projective} を参照せよ。
+したがって $K_a \oplus (I/I^2)_a \cong A_a^{\oplus m}$ は自由であり，
+特に $K_a$ も有限射影である。《代数詳論》補題
+\ref{more-algebra-lemma-transitive-lci-at-end} により，列
+(\ref{smoothing-equation-sequence-localized}) は左端でも完全である。したがって
+$$
+J'/(J')^2 \cong
+C_a \oplus I/I^2 \otimes_A C_a \oplus K \otimes_A C_a \cong
+C_a^{\oplus m + 1}
+$$
+これで (1) が示された。最後に，さらに $A_a$ が $R$ 上滑らかであるとする。
+同じ表示から，$\Omega_{C_a/R}$ は写像
+$$
+J'/(J')^2 \longrightarrow
+\bigoplus\nolimits_i C_a\text{d}x_i \oplus \bigoplus\nolimits_j C_a\text{d}y_j
+$$
+の余核である。上の分解における $J'/(J')^2$ の直和因子 $C_a$ は
+$hx_0 - 1$ に対応し，したがって直和因子 $C_a\text{d}x_0$ へ同型に写る。
+$J'/(J')^2$ の直和因子 $I/I^2 \otimes_A C_a$ は
+$\bigoplus_{i = 1, \ldots, n} C_a\text{d}x_i$
+へ単射に写り，その商は $\Omega_{A_a/R} \otimes_{A_a} C_a$ である。
+直和因子 $K \otimes_A C_a$ は
+$\bigoplus_{j \geq 1} C_a\text{d}y_j$ へ単射に写り，その商は
+$I/I^2 \otimes_A C_a$ と同型である。ゆえに，最後の表示写像の余核は
+$I/I^2 \otimes_A C_a \oplus \Omega_{A_a/R} \otimes_{A_a} C_a$ である。
+滑らかな環準同型の定義より
+$(I/I^2)_a \oplus \Omega_{A_a/R}$ は自由なので，(2) が従う。
+\end{proof}
+
+\noindent
+次の命題は，ヘンゼル対上の滑らかな環準同型について Elkik が
+\cite{Elkik} で証明した。滑らかな環準同型に関する記述は
+\cite{Arabia} にあり，そこでは滑らかな代数間の環準同型を
+持ち上げられることも証明されている。
+
+\begin{proposition}
+\label{smoothing-proposition-lift-smooth}
+\begin{slogan}
+滑らかな代数と syntomic 代数は全射に沿って持ち上がる
+\end{slogan}
+$R \to R_0$ を核が $I$ である全射環準同型とする。
+\begin{enumerate}
+\item $R_0 \to A_0$ が syntomic 環準同型ならば，
+$A/IA \cong A_0$ を満たす syntomic 環準同型 $R \to A$ が存在する。
+\item $R_0 \to A_0$ が滑らかな環準同型ならば，
+$A/IA \cong A_0$ を満たす滑らかな環準同型 $R \to A$ が存在する。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$R_0 \to A_0$ が syntomic であると仮定する。特にこれは局所完全交差である
+（《代数詳論》補題 \ref{more-algebra-lemma-syntomic-lci}）。
+表示 $A_0 = R_0[x_1, \ldots, x_n]/J_0$ を選び，
+$C_0 = \text{Sym}^*_{A_0}(J_0/J_0^2)$ とおく。
+$J_0/J_0^2$ は有限射影 $A_0$-加群であることに注意せよ
+（《代数》補題
+\ref{algebra-lemma-syntomic-presentation-ideal-mod-squares}）。
+補題 \ref{smoothing-lemma-improve-presentation} により環準同型
+$A_0 \to C_0$ は滑らかであり，$K_0/K_0^2$ が自由 $C_0$-加群となる表示
+$C_0 = R_0[y_1, \ldots, y_m]/K_0$ をとれる。
+《代数》補題 \ref{algebra-lemma-huber} により，
+$C_0 = R_0[y_1, \ldots, y_m]/(\overline{f}_1, \ldots, \overline{f}_c)$
+であり，$\overline{f}_1, \ldots, \overline{f}_c$ の像が
+$C_0$ 上の $K_0/K_0^2$ の基をなすと仮定できる。
+$\overline{f}_1, \ldots, \overline{f}_c$ の持ち上げ
+$f_1, \ldots, f_c \in R[y_1, \ldots, y_c]$ を選び，
+$$
+C = R[y_1, \ldots, y_m]/(f_1, \ldots, f_c)
+$$
+とおく。構成により $C_0 = C/IC$ である。《代数》補題
+\ref{algebra-lemma-localize-relative-complete-intersection} により，
+$C$ を $C_g$ で置き換えた後，$C$ が $R$ 上の相対大域完全交差であると
+仮定できる。したがって，ある有限射影 $A_0$-加群 $P_0$ と
+syntomic $R$-代数 $C$ が存在して，
+$C_0 = \text{Sym}^*_{A_0}(P_0)$ が $C/IC$ と同型になる。
+
+\medskip\noindent
+整数 $n$ と直和分解
+$A_0^{\oplus n} = P_0 \oplus Q_0$.
+を選ぶ。《代数詳論》補題
+\ref{more-algebra-lemma-lift-projective-module} により，同型
+$C/IC \to C'/IC'$ を誘導するエタール環準同型 $C \to C'$ と，
+$Q/IQ$ が $Q_0 \otimes_{A_0} C/IC$ と同型になる有限射影
+$C'$-加群 $Q$ をとれる。このとき
+$D = \text{Sym}_{C'}^*(Q)$ は滑らかな $C'$-代数である
+（《代数詳論》補題
+\ref{more-algebra-lemma-symmetric-algebra-smooth} を参照）。
+図式
+$$
+\xymatrix{
+R \ar[d] \ar[rr] & &
+C \ar[r] \ar[d] &
+C' \ar[r] \ar[d] &
+D \ar[d] \\
+R/I \ar[r] &
+A_0 \ar[r] &
+C/IC \ar[r]^{\cong} &
+C'/IC' \ar[r] &
+D/ID
+}
+$$
+$Q$ の選び方から次を得る。
+\begin{align*}
+D/ID & =
+\text{Sym}_{C/IC}^*(Q_0 \otimes_{A_0} C/IC) \\
+& =
+\text{Sym}_{A_0}^*(Q_0) \otimes_{A_0} C/IC \\
+& =
+\text{Sym}_{A_0}^*(Q_0) \otimes_{A_0}
+\text{Sym}_{A_0}^*(P_0) \\
+& =
+\text{Sym}_{A_0}^*(Q_0 \oplus P_0) \\
+& =
+\text{Sym}_{A_0}^*(A_0^{\oplus n}) \\
+& =
+A_0[x_1, \ldots, x_n]
+\end{align*}
+$D/ID = A_0[x_1, \ldots, x_n]$ において $x_1, \ldots, x_n$ へ写る
+$f_1, \ldots, f_n \in D$ を選び，$A = D/(f_1, \ldots, f_n)$ とおく。
+$A_0 = A/IA$ であることに注意せよ。$R \to A$ は $V(IA)$ の近傍で
+syntomic であると主張する。この主張が正しければ，$1 \in A_0$ へ写り，
+$A_f$ が $R$ 上 syntomic となる $f \in A$ をとることができ，
+(1) の証明は完了する。
+
+\medskip\noindent
+主張の証明。$R \to D$ は，syntomic 環準同型 $R \to C$，
+エタール環準同型 $C \to C'$，および滑らかな環準同型 $C' \to D$ の合成
+なので syntomic である（《代数》補題
+\ref{algebra-lemma-composition-syntomic} および
+\ref{algebra-lemma-smooth-syntomic}）。問題は $\Spec(D)$ 上局所的なので，
+$D$ が相対大域完全交差であると仮定できる
+（《代数》補題 \ref{algebra-lemma-syntomic}）。
+$D = R[y_1, \ldots, y_m]/(g_1, \ldots, g_s)$ と書く。
+$f_1, \ldots, f_n$ の持ち上げ
+$f'_1, \ldots, f'_n \in R[y_1, \ldots, y_m]$ をとる。
+すると《代数》補題
+\ref{algebra-lemma-localize-relative-complete-intersection} を適用して
+主張を得る。
+
+\medskip\noindent
+(2) の証明。滑らかな環準同型は syntomic なので，
+$A_0 = A/IA$ となる syntomic 環準同型 $R \to A$ をとれる。
+仮定より $R \to A$ のファイバーは $V(I)$ の素イデアル上で滑らかである。
+したがって $R \to A$ は $V(IA)$ のある開近傍上で滑らかである
+（《代数》補題 \ref{algebra-lemma-flat-fibre-smooth}）。
+ゆえに $A$ を局所化で置き換えれば，所望の結果を得る。
+\end{proof}
+
+\noindent
+任意の syntomic 環準同型 $R \to A$ は局所的に相対大域完全交差である
+（《代数》補題 \ref{algebra-lemma-syntomic}）。
+次の補題は，$\Spec(A)$ 上のベクトル束が相対大域完全交差であることを述べる。
+
+\begin{lemma}
+\label{smoothing-lemma-syntomic-complete-intersection}
+$R \to A$ を syntomic 環準同型とする。このとき，レトラクションをもつ
+滑らかな $R$-代数準同型 $A \to C$ で，$C$ が $R$ 上の相対大域完全交差，
+すなわち
+$$
+C \cong R[x_1, \ldots, x_n]/(f_1, \ldots, f_c)
+$$
+であって，$R$ 上平坦かつすべてのファイバーの次元が $n-c$ となるものが
+存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{smoothing-lemma-improve-presentation} を適用して $A \to C$ を得る。
+《代数》補題 \ref{algebra-lemma-huber} により，
+$C = R[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$ と書くことができ，
+$f_i$ の像は $J/J^2$ の基をなす。環準同型 $R \to C$ は syntomic 準同型と
+滑らかな準同型との合成なので syntomic，したがって平坦である。
+ファイバーは局所完全交差なので，《代数》補題
+\ref{algebra-lemma-lci} によりその次元は $n-c$ である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-smooth-standard-smooth}
+$R \to A$ を滑らかな環準同型とする。このとき，レトラクションをもつ
+滑らかな $R$-代数準同型 $A \to B$ で，$B$ が $R$ 上標準滑らか，
+すなわち
+$$
+B \cong R[x_1, \ldots, x_n]/(f_1, \ldots, f_c)
+$$
+であり，$\det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}$ が
+$B$ において可逆となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{smoothing-lemma-syntomic-complete-intersection} を適用し，
+レトラクションをもつ滑らかな $R$-代数準同型 $A \to C$ で，
+$C = R[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$ が
+$R$ 上の相対大域完全交差となるものを得る。$C$ は $R$ 上滑らかなので，
+短完全列
+$$
+0 \to
+\bigoplus\nolimits_{j = 1, \ldots, c} C f_j \to
+\bigoplus\nolimits_{i = 1, \ldots, n} C\text{d}x_i \to
+\Omega_{C/R} \to 0
+$$
+を得る。$\Omega_{C/R}$ は射影 $C$-加群なので，この列は分裂する。
+最初の写像の左逆 $t$ を選ぶ。次のように書く。
+$t(\text{d}x_i) = \sum c_{ij} f_j$
+すると
+$\sum_i \frac{\partial f_j}{\partial x_i}c_{i\ell}=\delta_{j\ell}$
+（Kronecker のデルタ）である。次のようにおく。
+$$
+B' = C[y_1, \ldots, y_c] =
+R[x_1, \ldots, x_n, y_1, \ldots, y_c]/(f_1, \ldots, f_c)
+$$
+$R$-代数準同型 $C \to B'$ は，$y_j$ を零へ送るレトラクションをもつ。
+写像
+$$
+R[z_1, \ldots, z_n] \longrightarrow B',\quad
+z_i \longmapsto x_i - \sum\nolimits_j c_{ij} y_j
+$$
+は $\Spec(C) \to \Spec(B')$ の像のすべての点でエタールであると主張する。
+$\Omega_{B'/R[z_1, \ldots, z_n]}$ において
+$$
+0 =
+\text{d}f_j - \sum\nolimits_i \frac{\partial f_j}{\partial x_i} \text{d}z_i
+\equiv
+\sum\nolimits_{i, \ell}
+\frac{\partial f_j}{\partial x_i} c_{i\ell} \text{d}y_\ell
+\equiv
+\text{d}y_j \bmod (y_1, \ldots, y_c)\Omega_{B'/R[z_1, \ldots, z_n]}
+$$
+である。また
+$\sum B'\text{d}y_j+(y_1,\ldots,y_c)\Omega_{B'/R[z_1,\ldots,z_n]}$
+を法として $0=\text{d}z_i=\text{d}x_i$ なので，
+$$
+\Omega_{B'/R[z_1, \ldots, z_n]}/
+(y_1, \ldots, y_c)\Omega_{B'/R[z_1, \ldots, z_n]} = 0.
+$$
+を得る。$\Omega_{B'/R[z_1, \ldots, z_n]}$ は有限 $B'$-加群なので，
+中山の補題により，$g \in 1+(y_1,\ldots,y_c)$ で
+$(\Omega_{B'/R[z_1,\ldots,z_n]})_g=0$ となるものが存在する。
+よって $R[z_1, \ldots, z_n] \to B'_g$ は不分岐である
+（《代数》定義 \ref{algebra-definition-unramified}）。
+$k$ を体とする任意の環準同型 $R \to k$ に対し，次元 $n$ の滑らかな
+$k$-代数の間の不分岐環準同型
+$k[z_1, \ldots, z_n] \to (B'_g) \otimes_R k$ を得る。
+《代数》補題 \ref{algebra-lemma-CM-over-regular-flat} および
+\ref{algebra-lemma-characterize-smooth-kbar} により，これは平坦である。
+ファイバーによる平坦性判定
+（《代数》補題 \ref{algebra-lemma-criterion-flatness-fibre}）から
+$R[z_1, \ldots, z_n] \to B'_g$ は平坦である。最後に
+《代数》補題 \ref{algebra-lemma-characterize-etale} により，これは
+エタールである。$B=B'_g$ とおく。$C \to B$ は滑らかでレトラクションを
+もつので，$A \to B$ も滑らかでレトラクションをもつ。さらに
+$R[z_1, \ldots, z_n] \to B$ はエタールである。
+《代数》補題 \ref{algebra-lemma-etale-standard-smooth} により
+$$
+B = R[z_1, \ldots, z_n, w_1, \ldots, w_m]/(g_1, \ldots, g_m)
+$$
+と書け，$\det(\partial g_j/\partial w_i)$ は $B$ において可逆である。
+これで補題が示された。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-colimit-standard-smooth}
+$R \to \Lambda$ を環準同型とする。$\Lambda$ が滑らかな $R$-代数の
+フィルター余極限ならば，$\Lambda$ は標準滑らかな $R$-代数の
+フィルター余極限である。
+\end{lemma}
+
+\begin{proof}
+$A$ が $R$ 上有限表示であるような $R$-代数準同型
+$A \to \Lambda$ をとる。《代数》補題
+\ref{algebra-lemma-when-colimit} によれば，この写像を標準滑らかな代数を
+通して分解すればよい。一方，$B$ が $R$ 上滑らかであるように
+$A \to B \to \Lambda$ と分解できることは分かっている。
+補題 \ref{smoothing-lemma-smooth-standard-smooth} により，$C$ が $R$ 上
+標準滑らかとなり，レトラクション $C \to B$ をもつ $R$-代数準同型
+$B \to C$ を選ぶ。このとき所望の分解は
+$A \to B \to C \to B \to \Lambda$ である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-standard-smooth-include-generators}
+$R \to A$ を標準滑らかな環準同型とする。
+$E \subset A$ を $|E|=n$ である有限部分集合とする。このとき，
+$A = R[x_1, \ldots, x_{n + m}]/(f_1, \ldots, f_c)$
+という表示で，$c \geq n$，
+$\det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}$ が
+$A$ において可逆であり，かつ $E$ が $x_1,\ldots,x_n$ の剰余類全体に
+なるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$\det(\partial g_j/\partial y_i)_{i, j = 1, \ldots, d}$ の像が
+$A$ において可逆となる表示
+$A = R[y_1, \ldots, y_m]/(g_1, \ldots, g_d)$ を選ぶ。
+$E=\{a_1,\ldots,a_n\}$ と番号を付け，$A$ における像が $a_i$ となる
+$h_i \in R[y_1,\ldots,y_m]$ を選ぶ。表示
+$$
+A = R[x_1, \ldots, x_n, y_1, \ldots, y_m]/
+(x_1 - h_1, \ldots, x_n - h_n, g_1, \ldots, g_d)
+$$
+を考え，$c=n+d$ とおく。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-compare-standard}
+$R \to A$ を有限表示の環準同型とし，$a \in A$ とする。
+$a$ に関する次の条件を考える。
+\begin{enumerate}
+\item $A_a$ は $R$ 上滑らかである。
+\item $A_a$ は $R$ 上滑らかで，$\Omega_{A_a/R}$ は安定自由である。
+\item $A_a$ は $R$ 上滑らかで，$\Omega_{A_a/R}$ は自由である。
+\item $A_a$ は $R$ 上標準滑らかである。
+\item $a$ は $R$ 上の $A$ における厳密標準元である。
+\item $a$ は $R$ 上の $A$ における初等標準元である。
+\end{enumerate}
+このとき次が成り立つ。
+\begin{enumerate}
+\item[(a)] (4) $\Rightarrow$ (3) $\Rightarrow$ (2) $\Rightarrow$ (1),
+\item[(b)] (6) $\Rightarrow$ (5),
+\item[(c)] (6) $\Rightarrow$ (4),
+\item[(d)] (5) $\Rightarrow$ (2),
+\item[(e)] (2) $\Rightarrow$ 元 $a^e$ は $e \geq e_0$ に対して
+$R$ 上の $A$ における厳密標準元である。
+\item[(f)] (4) $\Rightarrow$ 元 $a^e$ は $e \geq e_0$ に対して
+$R$ 上の $A$ における初等標準元である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) は定義および《代数》補題
+\ref{algebra-lemma-standard-smooth} から明らかである。
+(b) は定義 \ref{smoothing-definition-strictly-standard} から明らかである。
+
+\medskip\noindent
+(c) の証明。表示
+$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$
+を，(\ref{smoothing-equation-elementary-standard-one}) および
+(\ref{smoothing-equation-elementary-standard-two}) が成り立つように選ぶ。
+$a$ へ写る $h \in R[x_1,\ldots,x_n]$ を選ぶ。このとき
+$$
+A_a = R[x_0, x_1, \ldots, x_n]/(x_0h - 1, f_1, \ldots, f_m).
+$$
+$J=(x_0h-1,f_1,\ldots,f_m)$ と書く。
+(\ref{smoothing-equation-elementary-standard-two}) により，$A_a$-加群 $J/J^2$ は
+$x_0h-1,f_1,\ldots,f_c$ によって生成される。したがって
+《代数》補題 \ref{algebra-lemma-huber} の証明と同様に，
+$g \in 1+J$ を選んで
+$$
+A_a = R[x_0, \ldots, x_n, x_{n + 1}]/
+(x_0h - 1, f_1, \ldots, f_c, gx_{n + 1} - 1).
+$$
+とできる。このとき (\ref{smoothing-equation-elementary-standard-one}) より
+$R \to A_a$ は標準滑らかである（微分をとる座標として
+$x_0,x_1,\ldots,x_c,x_{n+1}$ を用いる）。
+
+\medskip\noindent
+(d) の証明。表示
+$A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)$
+を，(\ref{smoothing-equation-strictly-standard-one}) および
+(\ref{smoothing-equation-strictly-standard-two}) が成り立つように選ぶ。
+$I=(f_1,\ldots,f_m)$ と書く。補題 \ref{smoothing-lemma-elkik} により，
+$A_a$ が $R$ 上滑らかであることは既に分かっている。
+補題 \ref{smoothing-lemma-parse-equation-strictly-standard-one} により，
+$(I/I^2)_a$ は $f_1,\ldots,f_c$ を基とする自由加群であり，
+$\bigoplus A_a\text{d}x_i$ の直和因子へ同型に写る。
+$\Omega_{A_a/R}=(\Omega_{A/R})_a$ は写像
+$(I/I^2)_a \to \bigoplus A_a\text{d}x_i$ の余核なので，
+安定自由である。
+
+\medskip\noindent
+(e) の証明。$I$ が有限生成であるような表示
+$A = R[x_1, \ldots, x_n]/I$ を選ぶ。仮定により，分裂短完全列
+$$
+0 \to (I/I^2)_a \to \bigoplus\nolimits_{i = 1, \ldots, n} A_a\text{d}x_i \to
+\Omega_{A_a/R} \to 0
+$$
+をもつ。したがって
+$(I/I^2)_a \oplus \Omega_{A_a/R}$ は自由 $A_a$-加群である。
+$\Omega_{A_a/R}$ は安定自由なので，$(I/I^2)_a$ も安定自由である。
+ゆえに，上の表示を，ある $r$ に対する
+$J=(I,x_{n+1},\ldots,x_{n+r})$ を用いた
+$A=R[x_1,\ldots,x_n,x_{n+1},\ldots,x_{n+r}]/J$ で置き換えると，
+$(J/J^2)_a$ は有限自由になる。$(J/J^2)_a$ の基へ写る
+$f_1,\ldots,f_c \in J$ を選び，これを $J$ の生成元の列
+$f_1,\ldots,f_m \in J$ へ延長する。表示
+$A = R[x_1, \ldots, x_{n + r}]/(f_1, \ldots, f_m)$
+を考える。構成により，十分大きなすべての $e$ に対し，$a^e$ は
+(\ref{smoothing-equation-strictly-standard-two}) を満たす。さらに，
+$(J/J^2)_a \to \bigoplus\nolimits_{i = 1, \ldots, n + r} A_a\text{d}x_i$
+は分裂単射なので，$A_a$-線形な左逆をとれる。
+この左逆を基 $f_1,\ldots,f_c$ に関して書き，分母を払うと，
+線形写像
+$\psi_0 : A^{\oplus n + r} \to A^{\oplus c}$
+であって，合成
+$$
+A^{\oplus c} \xrightarrow{(f_1, \ldots, f_c)}
+J/J^2 \xrightarrow{f \mapsto \text{d}f}
+\bigoplus\nolimits_{i = 1, \ldots, n + r} A \text{d}x_i
+\xrightarrow{\psi_0}
+A^{\oplus c}
+$$
+がある $e_0 \geq 1$ に対する $a^{e_0}$ 倍写像となるものを得る。
+補題 \ref{smoothing-lemma-parse-equation-strictly-standard-one} により，
+(\ref{smoothing-equation-strictly-standard-one}) は $a^{ce_0}$ に対して成り立ち，
+したがって $e \geq ce_0$ であるすべての $e$ に対して $a^e$ にも成り立つ。
+
+\medskip\noindent
+(f) の証明。表示
+$A_a = R[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$
+を，$\det(\partial f_j/\partial x_i)_{i,j=1,\ldots,c}$ が
+$A_a$ において可逆となるように選ぶ。補題
+\ref{smoothing-lemma-standard-smooth-include-generators} により，ある $m<n$ に対して
+$x_1,\ldots,x_m$ の類が，$R$ 上の $A$ の生成元
+$a_1,\ldots,a_m \in A$ に対応する $a_i/1$ であると仮定できる。
+$m<i\leq n$ に対して $x_i$ を $a^Nx_i$ で置き換えることにより，
+$x_i$ の類が，ある $a_i\in A$ に対する $a_i/1\in A_a$ であると
+仮定できる。環準同型
+$$
+\Psi : R[x_1, \ldots, x_n] \longrightarrow A,\quad
+x_i \longmapsto a_i.
+$$
+を考える。これは全射環準同型である。$f_j$ を $a^Nf_j$ で置き換えることで，
+$f_j \in R[x_1,\ldots,x_n]$ かつ $\Psi(f_j)=0$ と仮定できる
+（実際，$A_a$ において
+$f_j(a_1/1,\ldots,a_n/1)=0$ だからである）。
+$J=\Ker(\Psi)$ とおく。このとき
+$A=R[x_1,\ldots,x_n]/J$ は表示であり，$f_1,\ldots,f_c \in J$ は，
+$(J/J^2)_a$ を自由に生成し，かつ
+$\det(\partial f_j/\partial x_i)_{i,j=1,\ldots,c}$ が
+$A_a$ の可逆元へ写るような元である。したがって，所望のとおり，
+十分大きなすべての $e$ に対して $a^e$ は
+(\ref{smoothing-equation-elementary-standard-one}) および
+(\ref{smoothing-equation-elementary-standard-two}) を満たす。
+\end{proof}
+
+
+
+
+
+
+\section{幕間：N\'eron の特異点解消}
+\label{smoothing-section-neron}
+
+\noindent
+Popescu の定理の一般の場合への取り組みをいったん中断し，
+より易しいが既に非常に興味深い場合，すなわち
+$R \to \Lambda$ が離散付値環の準同型である場合を扱う。
+これは \cite[Section 4]{Artin-Algebraic-Approximation} で論じられている。
+
+\begin{situation}
+\label{smoothing-situation-neron}
+ここで $R \subset \Lambda$ は分岐指数 $1$ の離散付値環の拡大である
+（《代数詳論》定義
+\ref{more-algebra-definition-extension-discrete-valuation-rings}）。
+分解
+$$
+R \to A \xrightarrow{\varphi} \Lambda
+$$
+が与えられ，$R \to A$ は平坦かつ有限型であると仮定する。
+$\mathfrak q=\Ker(\varphi)$，
+$\mathfrak p=\varphi^{-1}(\mathfrak m_\Lambda)$ とおく。
+\end{situation}
+
+\noindent
+状況 \ref{smoothing-situation-neron} において，$\pi\in R$ を素元とする。
+$A$ が $R$ 上平坦であるとは，$\pi$ が $A$ 上の非零因子であることを
+意味する（《代数詳論》補題
+\ref{more-algebra-lemma-valuation-ring-torsion-free-flat}）。
+$R\subset\Lambda$ に関する仮定から，$\pi$ は $\Lambda$ の素元へ写る。
+$\pi\in\mathfrak p$ なので，N\'eron のアフィン爆発代数
+（《代数》\ref{algebra-section-blow-up} 節を参照）
+$$
+\varphi' :
+A' = A[\textstyle{\frac{\mathfrak p}{\pi}}]
+\longrightarrow
+\Lambda
+$$
+を考えられる。これには，$a\in\mathfrak p^n$ に対する $a/\pi^n$ を
+$\Lambda$ の $\pi^{-n}\varphi(a)$ へ送る誘導写像が備わっている。
+対応する $A'$ の素イデアルを
+$\mathfrak q'\subset\mathfrak p'\subset A'$ と書く。
+$A'$ の同型類は素元の選び方に依存しないことに注意せよ。
+この構成を繰り返すと，列
+$$
+A \to A' \to A'' \to \ldots \to \Lambda
+$$
+を得る。
+
+\begin{lemma}
+\label{smoothing-lemma-neron-functorial}
+状況 \ref{smoothing-situation-neron} において，N\'eron の爆発は次の意味で関手的である。
+\begin{enumerate}
+\item $a\in A$, $a\notin\mathfrak p$ ならば，$A_a$ の N\'eron 爆発は
+$A'_a$ である。
+\item $B\to A$ が核 $I$ をもつ平坦有限型 $R$-代数の全射ならば，
+$A'$ は $B'/IB'$ をその $\pi$-冪捩れで割った商である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1), (2) はともに《代数》補題
+\ref{algebra-lemma-blowup-base-change} の特別な場合である。
+実際，$\mathfrak p_1A_2=\mathfrak p_2$ を満たす
+$A_1\to A_2\to\Lambda$ があるとき，$A'_2$ は
+$A'_1\otimes_{A_1}A_2$ をその $\pi$-冪捩れで割った商である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-neron-blowup-smooth}
+状況 \ref{smoothing-situation-neron} において，$R\to A$ が $\mathfrak p$ で滑らかで，
+$R/\pi R \subset \Lambda/\pi\Lambda$ が分離的体拡大であると仮定する。
+このとき $R\to A'$ は $\mathfrak p'$ で滑らかであり，短完全列
+$$
+0 \to
+\Omega_{A/R} \otimes_A A'_{\mathfrak p'} \to
+\Omega_{A'/R, \mathfrak p'} \to
+(A'/\pi A')_{\mathfrak p'}^{\oplus c} \to 0
+$$
+が存在する。ここで $c=\dim((A/\pi A)_\mathfrak p)$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{smoothing-lemma-neron-functorial} により，$A$ を
+$\mathfrak p$ に属さない元での局所化に置き換えてよい。以下，断りなく
+このことを用いる。$\kappa=R/\pi R$ と書く。滑らかさは基底変換で保たれる
+ので（《代数》補題 \ref{algebra-lemma-base-change-smooth}），
+$A/\pi A$ は $\mathfrak p$ において $\kappa$ 上滑らかである。
+したがって $(A/\pi A)_\mathfrak p$ は正則局所環である
+（《代数》補題
+\ref{algebra-lemma-characterize-smooth-over-field}）。
+$(A/\pi A)_\mathfrak p$ の正則パラメータ系へ写る
+$g_1,\ldots,g_c\in\mathfrak p$ を選ぶ。必要なら $A$ を局所化で
+置き換えることで，$\mathfrak p=(\pi,g_1,\ldots,g_c)$ となる。
+$\pi,g_1,\ldots,g_c$ は $A_\mathfrak p$ における正則列であることに
+注意せよ。まず $\pi$ は非零因子であり，残りには《代数》補題
+\ref{algebra-lemma-regular-ring-CM} を用いる。さらに $A$ を局所化で
+置き換えることで，$\pi,g_1,\ldots,g_c$ が $A$ における正則列であると
+仮定できる（《代数》補題
+\ref{algebra-lemma-regular-sequence-in-neighbourhood}）。したがって
+$$
+A' = A[y_1, \ldots, y_c]/(\pi y_1 - g_1, \ldots, \pi y_c - g_c) =
+A[y_1, \ldots, y_c]/I
+$$
+である（《代数詳論》補題
+\ref{more-algebra-lemma-blowup-regular-sequence}）。
+以下では，素朴な余接複体による滑らかさの定義
+（《代数》定義 \ref{algebra-definition-smooth}）および
+《代数》補題 \ref{algebra-lemma-smooth-at-point} の判定法を
+断りなく用いる。《代数》補題
+\ref{algebra-lemma-exact-sequence-NL} の
+$R\to A[y_1,\ldots,y_c]\to A'$ に対する完全列は次の形である。
+$$
+0 \to H_1(\NL_{A'/R}) \to I/I^2 \to
+\Omega_{A/R} \otimes_A A' \oplus
+\bigoplus\nolimits_{i = 1, \ldots, c} A' \text{d}y_i \to
+\Omega_{A'/R} \to 0
+$$
+ここで $I/I^2$ における $\pi y_i-g_i$ の類は，次の項の
+$-\text{d}g_i+\pi\text{d}y_i$ へ写る。
+ここでは《代数》補題 \ref{algebra-lemma-NL-surjection} によって
+$\NL_{A'/A[y_1,\ldots,y_c]}$ を計算した。また
+$R\to A[y_1,\ldots,y_c]$ は滑らかなので，
+$H_1(\NL_{A[y_1, \ldots, y_c]/R}) = 0$ であり，
+$\Omega_{A[y_1,\ldots,y_c]/R}$ は有限射影，したがって特に平坦な
+$A[y_1,\ldots,y_c]$-加群であり，実際
+$\Omega_{A/R}\otimes_AA[y_1,\ldots,y_c]$ と，$\text{d}y_i$ を基とする
+自由加群との直和である。証明を終えるには，
+$\text{d}g_1,\ldots,\text{d}g_c$ が有限自由加群
+$\Omega_{A/R,\mathfrak p}$ の基の一部をなすことを示せば十分である。
+実際，これにより $(I/I^2)_\mathfrak p$ は $\pi y_i-g_i$ を基とする
+自由加群となり，上の列の中央の写像を $\mathfrak p$ で局所化したものは
+単射となるので $H_1(\NL_{A'/R})_\mathfrak p=0$ であり，
+余核 $\Omega_{A'/R,\mathfrak p}$ は有限自由になる。
+このためには，$\text{d}g_i$ の像が
+$\Omega_{A/R, \mathfrak p}/\pi = \Omega_{(A/\pi A)/\kappa, \mathfrak p}$
+において $\kappa(\mathfrak p)$-線形独立であることを示せばよい
+（等号は《代数》補題
+\ref{algebra-lemma-differentials-base-change} による）。
+$\kappa\subset\kappa(\mathfrak p)\subset\Lambda/\pi\Lambda$ なので，
+$\kappa(\mathfrak p)$ は $\kappa$ 上分離的である
+（《代数》定義
+\ref{algebra-definition-separable-field-extension}）。
+所望の線形独立性は《代数》補題
+\ref{algebra-lemma-computation-differential} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-neron-when-smooth}
+状況 \ref{smoothing-situation-neron} において，$R\to A$ が $\mathfrak q$ で滑らかで，
+核 $I$ をもつ $R$-代数の全射 $B\to A$ が与えられていると仮定する。
+$R\to B$ が
+$\mathfrak p_B=(B\to A)^{-1}\mathfrak p$ で滑らかであるとする。写像
+$$
+I/I^2 \otimes_A \Lambda \to \Omega_{B/R} \otimes_B \Lambda
+$$
+の余核が自由 $\Lambda$-加群ならば，$R\to A$ は $\mathfrak p$ で滑らかである。
+\end{lemma}
+
+\begin{proof}
+写像 $I/I^2\to\Omega_{B/R}\otimes_BA$ の余核は $\Omega_{A/R}$ である
+（《代数》補題 \ref{algebra-lemma-differential-seq}）。
+$d=\dim_\mathfrak q(A/R)$ を，$\mathfrak q$ における $R\to A$ の相対次元，
+すなわち $\mathfrak q$ における $\Spec(A[1/\pi])$ の次元とする。
+《代数》定義 \ref{algebra-definition-relative-dimension} を参照せよ。
+すると $\Omega_{A/R,\mathfrak q}$ は階数 $d$ の自由
+$A_\mathfrak q$-加群である（《代数》補題
+\ref{algebra-lemma-characterize-smooth-over-field}）。
+したがって補題の仮定が成り立つならば，
+$\Omega_{A/R}\otimes_A\Lambda$ は階数 $d$ の自由加群である。
+ゆえに $\Omega_{A/R}\otimes_A\kappa(\mathfrak p)$ の次元は $d$ である
+（これは $\Lambda/\pi\Lambda$ とテンソルをとれば分かる）。
+$R\to A$ は平坦で，$\mathfrak p$ は $\mathfrak q$ の特殊化なので，
+《代数》補題
+\ref{algebra-lemma-dimension-fibres-bounded-open-upstairs} により
+$\dim_\mathfrak p(A/R)\geq d$ である。したがって《代数》補題
+\ref{algebra-lemma-flat-fibre-smooth} および
+\ref{algebra-lemma-characterize-smooth-over-field} により，
+$R\to A$ は $\mathfrak p$ で滑らかである。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-neron-desingularization}
+状況 \ref{smoothing-situation-neron} において，$R\to A$ が $\mathfrak q$ で滑らかで，
+$R/\pi R\subset\Lambda/\pi\Lambda$ が分離的体拡大であると仮定する。
+このとき有限回のアフィン N\'eron 爆発の後，代数 $A$ は
+$\mathfrak p$ において $R$ 上滑らかになる。
+\end{lemma}
+
+\begin{proof}
+$R$-代数 $B$ と全射 $B\to A$ を選ぶ。
+$\mathfrak p_B=(B\to A)^{-1}(\mathfrak p)$ とおき，
+$\mathfrak p_B$ における $R\to B$ の相対次元を $r$ と書く。
+$R\to B$ が $\mathfrak p_B$ で滑らかとなるように $B$ を選ぶ。
+例えば，$B$ を $R$ 上 $r$ 変数の多項式代数にとればよい。
+補題 \ref{smoothing-lemma-neron-when-smooth} の複体
+$$
+I/I^2 \otimes_A \Lambda \longrightarrow \Omega_{B/R} \otimes_B \Lambda
+$$
+を考える。$\Lambda$ 上の有限加群の構造
+（《代数詳論》補題 \ref{more-algebra-lemma-modules-PID}）により，
+その余核は
+$$
+\Lambda^{\oplus d} \oplus
+\bigoplus\nolimits_{i = 1, \ldots, n} \Lambda/\pi^{e_i} \Lambda
+$$
+という形である。ここで $d\geq0$, $n\geq0$, $e_i\geq1$ である。
+$d$ は $\mathfrak q$ における $A/R$ の相対次元であることに注意せよ
+（《代数》補題
+\ref{algebra-lemma-characterize-smooth-over-field}）。
+欠損量 $e=\sum_{i=1,\ldots,n}e_i$ が零ならば，補題
+\ref{smoothing-lemma-neron-when-smooth} により証明は完了する。
+
+\medskip\noindent
+次に N\'eron 爆発を行うと何が起こるかを考える。
+$A'$ は $B'/IB'$ をその $\pi$-冪捩れで割った商であり
+（補題 \ref{smoothing-lemma-neron-functorial}），$R\to B'$ は
+$\mathfrak p_{B'}$ で滑らかである
+（補題 \ref{smoothing-lemma-neron-blowup-smooth}）。したがって爆発後にも
+まったく同じ状況が得られる。図式
+$$
+\xymatrix{
+0 \ar[r] & I' \ar[r] & B' \ar[r] & A' \ar[r] & 0 \\
+0 \ar[r] & I \ar[u] \ar[r] & B \ar[u] \ar[r] & A \ar[r] \ar[u] & 0
+}
+$$
+$I\subset\mathfrak p_B$ なので，$I\to I'$ は $\pi I'$ を経由する。
+誘導される複体の写像を見ると，
+$$
+\xymatrix{
+I'/(I')^2 \otimes_{A'} \Lambda \ar[r] &
+\Omega_{B'/R} \otimes_{B'} \Lambda \ar@{=}[r] & M' \\
+I/I^2 \otimes_A \Lambda \ar[r] \ar[u] &
+\Omega_{B/R} \otimes_B \Lambda \ar[u] \ar@{=}[r] & M
+}
+$$
+を得る。このとき $M\subset M'$ は有限自由 $\Lambda$-加群であり，
+商 $M'/M$ は $\pi$ で消される。補題
+\ref{smoothing-lemma-neron-blowup-smooth} を参照せよ。横向きの写像の像を
+$N\subset M$ および $N'\subset M'$ とし，
+$Q=M/N$, $Q'=M'/N'$ と書く。可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+N' \ar[r] &
+M' \ar[r] &
+Q' \ar[r] &
+0 \\
+0 \ar[r] &
+N \ar[r] \ar[u] &
+M \ar[r] \ar[u] &
+Q \ar[r] \ar[u] &
+0
+}
+$$
+を得る。このとき $N\subset N'$ は階数 $r-d$ の自由 $\Lambda$-加群である。
+$I$ は $\pi I'$ へ写るので，$N\subset\pi N'$ である。
+
+\medskip\noindent
+$K=\Lambda_\pi$ を $\Lambda$ の分数体とする。可換図式
+$$
+\xymatrix{
+0 \ar[r] &
+N' \ar[r] &
+N'_K \cap M' \ar[r] &
+Q'_{tor} \ar[r] &
+0 \\
+0 \ar[r] &
+N \ar[r] \ar[u] &
+N_K \cap M \ar[r] \ar[u] &
+Q_{tor} \ar[r] \ar[u] &
+0
+}
+$$
+を得る。各行は短完全列である。したがって欠損量の変化は
+$$
+e - e' =
+\text{length}(Q_{tor}) - \text{length}(Q'_{tor})
+=
+\text{length}(N'/N) - \text{length}(N'_K \cap M' / N_K \cap M)
+$$
+で与えられる。$M'/M$ は $\pi$ で消されるので，
+$N'_K\cap M'/N_K\cap M$ も $\pi$ で消され，その長さは
+高々 $\dim_K(N_K)$ である。$N\subset\pi N'$ なので
+$\text{length}(N'/N)\geq\dim_K(N_K)$ であり，等号が成り立つことと
+$N=\pi N'$ は同値である。
+
+\medskip\noindent
+証明を終えるには，$A$ が $\mathfrak p$ で滑らかでないとき
+$N$ が $\pi N'$ より真に小さいことを示さなければならない。
+これが N\'eron の議論における要となる計算である。このため完全列
+$$
+I/I^2 \otimes_B \kappa(\mathfrak p_B)
+\to \Omega_{B/R} \otimes_B \kappa(\mathfrak p_B)
+\to \Omega_{A/R} \otimes_A \kappa(\mathfrak p) \to 0
+$$
+を考える（《代数》補題
+\ref{algebra-lemma-differential-seq} から従う）。
+$R\to A$ は $\mathfrak p$ で滑らかでないので，
+$\Omega_{A/R}\otimes_A\kappa(\mathfrak p)$ の次元 $s$ は $d$ より大きい。
+一方，最初の矢印は単射
+$$
+\mathfrak p B_\mathfrak p/\mathfrak p^2 B_\mathfrak p
+\to \Omega_{B/R} \otimes_B \kappa(\mathfrak p_B)
+$$
+を経由する（《代数》補題
+\ref{algebra-lemma-computation-differential}）。ここで
+$R/\pi R\subset\Lambda/\pi\Lambda$ に関する仮定により，
+$\kappa(\mathfrak p)$ は $k$ 上分離的であることに注意せよ。
+したがって，$j>r-s$ に対して $g_j\in\mathfrak p^2$ となる生成元
+$g_1,\ldots,g_t\in I$ をとれる。このとき $j>r-s$ に対して
+$g_j$ の $A'$ における像は $\pi^2I'$ に属する。
+$r-s<r-d$ なので，$N$ の極小生成元のうち少なくとも一つは
+$N'$ において $\pi^2$ で割り切れる。よって $e$ は少なくとも $1$ 減少し，
+証明が完了する。
+\end{proof}
+
+\noindent
+$R\to\Lambda$ が離散付値環の拡大ならば，$R\to\Lambda$ が正則であることは，
+(a) 分岐指数が $1$ であり，(b) 分数体の拡大が分離的であり，
+(c) $R/\mathfrak m_R\subset\Lambda/\mathfrak m_\Lambda$ が分離的である
+ことと同値である。したがって次の結果は，定理
+\ref{smoothing-theorem-popescu} の一般 N\'eron 特異点解消の特別な場合である。
+
+\begin{lemma}
+\label{smoothing-lemma-neron-colimit}
+\begin{slogan}
+離散付値環の不分岐拡大は ind-smooth である（N\'eron の特異点解消）
+\end{slogan}
+$R\subset\Lambda$ を，分岐指数が $1$ で，剰余体および分数体の
+分離拡大を誘導する離散付値環の拡大とする。このとき
+$\Lambda$ は滑らかな $R$-代数のフィルター余極限である。
+\end{lemma}
+
+\begin{proof}
+《代数》補題 \ref{algebra-lemma-when-colimit} により，状況
+\ref{smoothing-situation-neron} の任意の $R\to A\to\Lambda$ が，
+$B$ を滑らかな $R$-代数として $A\to B\to\Lambda$ と分解できることを
+示せば十分である。$A$ を $\Lambda$ におけるその像で置き換えることで，
+$A$ は整域で，その分数体 $K$ が $\Lambda$ の分数体の部分体であると
+仮定できる。特に，仮定により $A$ は $R$ の分数体上分離的である。
+したがって《代数》補題
+\ref{algebra-lemma-smooth-at-generic-point} により，
+$R\to A$ は $\mathfrak q=(0)$ で滑らかである。補題
+\ref{smoothing-lemma-neron-desingularization} により，有限回の N\'eron 爆発の後，
+$R\to A$ が $\mathfrak p$ で滑らかであると仮定できる。
+そこで $A$ を，$a\in A$, $a\notin\mathfrak p$ による局所化で置き換えれば，
+$A$ は $R$ 上滑らかとなり，補題が示される。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{持ち上げ問題}
+\label{smoothing-section-lifting}
+
+\noindent
+本節の目標は，滑らかな代数のフィルター余極限である代数の類が
+無限小平坦変形で閉じていることを証明することである
+（命題 \ref{smoothing-proposition-lift}）。証明は初等的であり，
+\ref{smoothing-section-presentations} 節の滑らかな代数の表示に関する結果だけを用いる。
+
+\begin{lemma}
+\label{smoothing-lemma-lift-once}
+$R\to\Lambda$ を環準同型，$I\subset R$ をイデアルとする。次を仮定する。
+\begin{enumerate}
+\item $I^2=0$。
+\item $\Lambda/I\Lambda$ は滑らかな $R/I$-代数のフィルター余極限である。
+\end{enumerate}
+$\varphi:A\to\Lambda$ を $R$-代数準同型とし，$A$ は $R$ 上有限表示であると
+する。このとき分解
+$$
+A \to B/J \to \Lambda
+$$
+が存在する。ここで $B$ は滑らかな $R$-代数であり，
+$J\subset IB$ は有限生成イデアルである。
+\end{lemma}
+
+\begin{proof}
+分解
+$$
+A/IA \to \bar B \to \Lambda/I\Lambda
+$$
+を，$\bar B$ が $R/I$ 上標準滑らかとなるように選ぶ。これは仮定と補題
+\ref{smoothing-lemma-colimit-standard-smooth} により可能である。次のように書く。
+$$
+\bar B = A/IA[t_1, \ldots, t_r]/(\bar g_1, \ldots, \bar g_s)
+$$
+また，$\bar B\to\Lambda/I\Lambda$ は $t_i$ を $I\Lambda$ を法とする
+$\lambda_i$ の類へ送るとする。$\bar g_1,\ldots,\bar g_s$ の持ち上げ
+$g_1,\ldots,g_s\in A[t_1,\ldots,t_r]$ を選ぶ。ある
+$\epsilon_{ij}\in I$ と $\mu_{ij}\in\Lambda$ によって
+$\varphi(g_i)(\lambda_1, \ldots, \lambda_r) =
+\sum \epsilon_{ij} \mu_{ij}$
+と書く。次を定義する。
+$$
+A' = A[t_1, \ldots, t_r, \delta_{i, j}]/
+(g_i - \sum \epsilon_{ij} \delta_{ij})
+$$
+そして写像
+$$
+A' \longrightarrow \Lambda,\quad
+a \longmapsto \varphi(a),\quad
+t_i \longmapsto \lambda_i,\quad
+\delta_{ij} \longmapsto \mu_{ij}
+$$
+を考える。次が成り立つ。
+$$
+A'/IA' = A/IA[t_1, \ldots, t_r]/(\bar g_1, \ldots, \bar g_s)[\delta_{ij}]
+\cong \bar B[\delta_{ij}]
+$$
+$\bar B$ は標準滑らかなので，これは $R/I$ 上標準滑らかな代数である。
+$\det(\partial\bar f_j/\partial x_i)_{i,j=1,\ldots,c}$ が
+$A'/IA'$ において可逆となる表示
+$A'/IA'=R/I[x_1,\ldots,x_n]/(\bar f_1,\ldots,\bar f_c)$ を選ぶ。
+$\bar f_1,\ldots,\bar f_c$ の持ち上げ
+$f_1,\ldots,f_c\in R[x_1,\ldots,x_n]$ を選ぶ。このとき
+$$
+B = R[x_1, \ldots, x_n, x_{n + 1}]/
+(f_1, \ldots, f_c,
+x_{n + 1}\det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c} - 1)
+$$
+は $R$ 上滑らかである。滑らかな環準同型は形式的に滑らかなので
+（《代数》命題
+\ref{algebra-proposition-smooth-formally-smooth}），
+$I$ を法として同型となる $R$-代数準同型 $B\to A'$ が存在する。
+中山の補題（《代数》補題 \ref{algebra-lemma-NAK}）により，
+$B\to A'$ は全射である。したがって $A'=B/J$ であり，
+$J\subset IB$ は有限生成である
+（《代数》補題
+\ref{algebra-lemma-finite-presentation-independent} を参照）。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-lift-twice}
+$R\to\Lambda$ を環準同型，$I\subset R$ をイデアルとする。次を仮定する。
+\begin{enumerate}
+\item $I^2=0$。
+\item $\Lambda/I\Lambda$ は滑らかな $R/I$-代数のフィルター余極限である。
+\item $R\to\Lambda$ は平坦である。
+\end{enumerate}
+$\varphi:B\to\Lambda$ を $R$-代数準同型とし，$B$ は $R$ 上滑らかであると
+する。$J\subset IB$ を $\varphi(J)=0$ を満たす有限生成イデアルとする。
+このとき $R$-代数準同型
+$$
+B \xrightarrow{\alpha} B' \xrightarrow{\beta} \Lambda
+$$
+で，$B'$ が $R$ 上滑らか，$\alpha(J)=0$，かつ
+$\beta\circ\alpha=\varphi$ となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+$J=(h)$ の場合に補題を証明できれば，$J$ の生成元の数に関する帰納法で
+一般の場合が従う。実際，$J$ が $n$ 個の元
+$h_1,\ldots,h_n$ で生成され，$n-1$ 個の元で生成されるすべての場合に
+補題が成り立つと仮定する。まず $n=1$ の場合を適用して，
+最初の写像が $h_n$ を零にする $B\to B'\to\Lambda$ を作る。
+次に，$h_1,\ldots,h_{n-1}$ の像が生成する $B'$ のイデアルを $J'$ とし，
+$n-1$ の場合を適用して $B'\to B''\to\Lambda$ を作る。
+$B\to B''\to\Lambda$ が所望の性質をもつことは容易に確かめられる。
+
+\medskip\noindent
+$J=(h)$ と仮定し，ある $\epsilon_i\in I$, $b_i\in B$ によって
+$h=\sum\epsilon_ib_i$ と書く。
+$0=\varphi(h)=\sum\epsilon_i\varphi(b_i)$ であることに注意せよ。
+$\Lambda$ は $R$ 上平坦なので，平坦性の方程式判定法
+（《代数》補題 \ref{algebra-lemma-flat-eq}）により，
+$j=1,\ldots,m$ に対する $\lambda_j\in\Lambda$ と
+$a_{ij}\in R$ で，
+$\varphi(b_i)=\sum_ja_{ij}\lambda_j$ かつ
+$\sum_i\epsilon_ia_{ij}=0$ を満たすものが存在する。次のようにおく。
+$$
+C = B[x_1, \ldots, x_m]/(b_i - \sum a_{ij} x_j)
+$$
+$C\to\Lambda$ は $\varphi$ および $x_j\mapsto\lambda_j$ で与える。
+補題 \ref{smoothing-lemma-lift-once} にあるような分解
+$$
+C \to B'/J' \to \Lambda
+$$
+を選ぶ。$B$ は $R$ 上滑らかなので，写像 $B\to C\to B'/J'$ を
+写像 $\alpha:B\to B'$ へ持ち上げられる。このとき
+$\varphi=\beta\circ\alpha$ である。証明を終えるため
+$\alpha(h)=0$ を確かめる。実際，$\alpha$ が $B\to C\to B'/J'$ を
+持ち上げることから，
+$$
+\alpha(b_i) = \sum a_{ij} \xi_j + \theta_i
+$$
+がある $\xi_j\in B'$ および $\theta_i\in J'\subset IB'$ に対して成り立つ。
+したがって
+$$
+\alpha(h) = \alpha(\sum \epsilon_i b_i) =
+\sum \epsilon_i a_{ij} \xi_j + \sum \epsilon_i \theta_i = 0
+$$
+である。これは上の関係式と $I^2=0$ による。
+\end{proof}
+
+\begin{proposition}
+\label{smoothing-proposition-lift}
+\begin{slogan}
+代数の ind-smooth 性は無限小変形で保たれる
+\end{slogan}
+$R\to\Lambda$ を環準同型，$I\subset R$ をイデアルとする。次を仮定する。
+\begin{enumerate}
+\item $I$ は冪零である。
+\item $\Lambda/I\Lambda$ は滑らかな $R/I$-代数のフィルター余極限である。
+\item $R\to\Lambda$ は平坦である。
+\end{enumerate}
+このとき $\Lambda$ は滑らかな $R$-代数のフィルター余極限である。
+\end{proposition}
+
+\begin{proof}
+ある $n$ に対して $I^n=0$ なので，$n$ に関する帰納法により
+$I^2=0$ の場合を考えれば十分である。$\varphi:A\to\Lambda$ を
+$R$-代数準同型とし，$A$ は $R$ 上有限表示であるとする。
+$B$ が $R$ 上滑らかとなる分解 $A\to B\to\Lambda$ を見つければよい
+（《代数》補題 \ref{algebra-lemma-when-colimit}）。
+補題 \ref{smoothing-lemma-lift-once} により，$B$ は $R$ 上滑らかで，
+$J\subset IB$ は有限生成イデアルであるように $A=B/J$ と仮定できる。
+補題 \ref{smoothing-lemma-lift-twice} により，可換図式
+$$
+\xymatrix{
+B \ar[rr]_\alpha \ar[rd]_\varphi & & B' \ar[ld]^\beta \\
+& \Lambda
+}
+$$
+を得る。これは $R$-代数の図式で，$B'$ は $R$ 上滑らかであり，
+$\alpha(J)=0$ を満たす。したがって $\alpha$ は
+$B\to A\to B'$ と分解し，証明が完了する。
+\end{proof}
+
+
+
+
+
+
+\section{持ち上げ補題}
+\label{smoothing-section-lifting-lemma}
+
+\noindent
+次は驚くほど巧妙な補題である。
+
+\begin{lemma}
+\label{smoothing-lemma-lifting}
+$R$ をネーター環，$\Lambda$ を $R$-代数とする。
+$\pi\in R$ とし，
+$\text{Ann}_R(\pi)=\text{Ann}_R(\pi^2)$ および
+$\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^2)$ を仮定する。
+$R$-代数準同型
+$R/\pi^2R \to \bar C \to \Lambda/\pi^2\Lambda$
+があり，$\bar C$ は有限表示であるとする。このとき，
+$R$-代数準同型 $D\to\Lambda$ と可換図式
+$$
+\xymatrix{
+R/\pi^2R \ar[r] \ar[d] &
+\bar C \ar[r] \ar[d] &
+\Lambda/\pi^2\Lambda \ar[d] \\
+R/\pi R \ar[r] &
+D/\pi D \ar[r] &
+\Lambda/\pi \Lambda
+}
+$$
+が存在し，次の性質を満たす。
+\begin{enumerate}
+\item[(a)] $D$ は有限表示である。
+\item[(b)] $\pi\notin\mathfrak q$ を満たす任意の素イデアル
+$\mathfrak q$ において $R\to D$ は滑らかである。
+\item[(c)] $\pi\in\mathfrak q$ であり，$R/\pi^2R\to\bar C$ が滑らかな
+$\bar C$ の素イデアルの上にある任意の素イデアル $\mathfrak q$ において，
+$R\to D$ は滑らかである。
+\item[(d)] $R/\pi^2R\to\bar C$ が滑らかな $\bar C$ の素イデアルの上にある
+任意の素イデアルにおいて，
+$\bar C/\pi\bar C\to D/\pi D$ は滑らかである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+表示
+$$
+\bar C = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)
+$$
+を選ぶ。また $I=(f_1,\ldots,f_m)$ と書き，
+$R/\pi^2R[x_1,\ldots,x_n]$ における $I$ の像を $\bar I$ と書く。
+$R$ はネーター環なので $\bar C$ もネーター環である。
+したがって $R/\pi^2R\to\bar C$ の滑らかな軌跡は擬コンパクトである
+（《位相》補題 \ref{topology-lemma-Noetherian}）。
+補題 \ref{smoothing-lemma-find-strictly-standard} を適用すると，
+元の有限列 $a_1,\ldots,a_r\in R[x_1,\ldots,x_n]$ を
+次の性質を満たすように選べる。
+\begin{enumerate}
+\item 開部分空間 $\Spec(\bar C_{a_k})\subset\Spec(\bar C)$ の合併は，
+$R/\pi^2R\to\bar C$ の滑らかな軌跡を被覆する。
+\item 各 $k=1,\ldots,r$ に対し，有限部分集合
+$E_k\subset\{1,\ldots,m\}$ が存在して，
+$(\bar I/\bar I^2)_{a_k}$ は $j\in E_k$ に対する $f_j$ の類で
+自由に生成される。
+\end{enumerate}
+$I_k=(f_j,j\in E_k)\subset I$ とおき，
+$R/\pi^2R[x_1,\ldots,x_n]$ における $I_k$ の像を $\bar I_k$ と書く。
+(2) と中山の補題により，ある $b'_k\in\bar I_{a_k}$ に対して
+$(\bar I/\bar I_k)_{a_k}$ は $1+b'_k$ で消される。
+$b'_k$ が，ある $b_k\in I$ と整数 $N$ に対する $b_k/(a_k)^N$ の像であると
+する。$a_k$ を $a_kb_k$ で置き換えると，
+\begin{enumerate}
+\item[(3)] $(\bar I_k)_{a_k} = (\bar I)_{a_k}$.
+\end{enumerate}
+を得る。したがって，必要なら $a_k$ を高い冪で置き換えることで，
+\begin{enumerate}
+\item[(4)]
+$a_k f_\ell = \sum\nolimits_{j \in E_k} h_{k, \ell}^jf_j + \pi^2 g_{k, \ell}$
+\end{enumerate}
+と書ける。これは任意の $\ell\in\{1,\ldots,m\}$ と，ある
+$h_{i,\ell}^j,g_{i,\ell}\in R[x_1,\ldots,x_n]$ に対して成り立つ。
+$\ell\in E_k$ ならば，
+$h_{k,\ell}^j=a_k\delta_{\ell,j}$（Kronecker のデルタ）および
+$g_{k,\ell}=0$ と選ぶ。次のようにおく。
+$$
+D = R[x_1, \ldots, x_n, z_1, \ldots, z_m]/
+(f_j - \pi z_j, p_{k, \ell}).
+$$
+ここで $j\in\{1,\ldots,m\}$，$k\in\{1,\ldots,r\}$，
+$\ell\in\{1,\ldots,m\}$ であり，
+$$
+p_{k, \ell} = a_k z_\ell - \sum\nolimits_{j \in E_k} h_{k, \ell}^j z_j
+- \pi g_{k, \ell}.
+$$
+上の選び方により，$\ell\in E_k$ に対して $p_{k,\ell}=0$ である。
+
+\medskip\noindent
+写像 $R\to D$ は所与のものである。
+$\bar C\to\Lambda/\pi^2\Lambda$ は $x_i$ を $\pi^2$ を法とする
+$\lambda_i$ の類へ送るとする。元
+$f\in R[x_1,\ldots,x_n]$ に対し，$x_i$ に $\lambda_i$ を代入した結果を
+$f(\lambda)\in\Lambda$ と書く。このとき，ある $\mu_j\in\Lambda$ に対して
+$f_j(\lambda)=\pi^2\mu_j$ である。$x_i\mapsto\lambda_i$ および
+$z_j\mapsto\pi\mu_j$ によって $D\to\Lambda$ を定める。
+これは次により矛盾なく定義される。
+\begin{align*}
+p_{k, \ell} & \mapsto
+a_k(\lambda) \pi \mu_\ell -
+\sum\nolimits_{j \in E_k} h_{k, \ell}^j(\lambda) \pi \mu_j
+- \pi g_{k, \ell}(\lambda) \\
+& =
+\pi\left(a_k(\lambda) \mu_\ell -
+\sum\nolimits_{j \in E_k} h_{k, \ell}^j(\lambda) \mu_j
+- g_{k, \ell}(\lambda)\right)
+\end{align*}
+上の (4) に $x_i=\lambda_i$ を代入すると，括弧内の式は $\pi^2$ で消される。
+$\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^2)$ と仮定したので，
+これは $\pi$ でも消される。写像 $\bar C\to D/\pi D$ は
+$x_i\mapsto x_i$ によって定まり，明らかに矛盾なく定義される。
+したがって (b), (c), (d) を証明すればよい。
+
+\medskip\noindent
+(4) を用いると，次の重要な等式を得る。
+\begin{align*}
+\pi p_{k, \ell} & =
+\pi a_k z_\ell - \sum\nolimits_{j \in E_k} \pi h_{k, \ell}^jz_j
+- \pi^2 g_{k, \ell} \\
+& =
+- a_k (f_\ell - \pi z_\ell) + a_k f_\ell +
+\sum\nolimits_{j \in E_k} h_{k, \ell}^j (f_j - \pi z_j) -
+\sum\nolimits_{j \in E_k} h_{k, \ell}^j f_j - \pi^2 g_{k, \ell} \\
+& =
+-a_k(f_\ell - \pi z_\ell) +
+\sum\nolimits_{j \in E_k} h_{k, \ell}^j(f_j - \pi z_j)
+\end{align*}
+最後の式は $f_j-\pi z_j$ が生成するイデアルの元である。
+特に $D[1/\pi]$ は
+$R[1/\pi][x_1, \ldots, x_n, z_1, \ldots, z_m]/(f_j - \pi z_j)$
+と同型であり，これは $R[1/\pi][x_1,\ldots,x_n]$ と同型なので
+$R$ 上滑らかである。これで (b) が示された。
+
+\medskip\noindent
+固定した $k\in\{1,\ldots,r\}$ に対し，環
+$$
+D_k = R[x_1, \ldots, x_n, z_1, \ldots, z_m]/
+(f_j - \pi z_j, j \in E_k, p_{k, \ell})
+$$
+を考える。$\ell\in E_k$ ならば $p_{k,\ell}=0$ なので，
+方程式の数は $m=|E_k|+(m-|E_k|)$ である。また，
+\begin{align*}
+(D_k/\pi D_k)_{a_k}
+& =
+R/\pi R[x_1, \ldots, x_n, 1/a_k, z_1, \ldots, z_m]/
+(f_j, j \in E_k, p_{k, \ell}) \\
+& =
+(\bar C/\pi \bar C)_{a_k}[z_1, \ldots, z_m]/
+(a_kz_\ell - \sum\nolimits_{j \in E_k} h_{k, \ell}^j z_j) \\
+& \cong
+(\bar C/\pi \bar C)_{a_k}[z_j, j \in E_k]
+\end{align*}
+特に $(D_k/\pi D_k)_{a_k}$ は $(\bar C/\pi\bar C)_{a_k}$ 上滑らかである。
+$a_k$ の選び方により，$(\bar C/\pi\bar C)_{a_k}$ は $R/\pi R$ 上
+相対次元 $n-|E_k|$ で滑らかである。(2) を参照せよ。
+したがって，$\pi$ を含み $\Spec(\bar C_{a_k})$ の上にある素イデアル
+$\mathfrak q_k\subset D_k$ に対し，$R\to D_k$ のファイバー環は
+$\mathfrak q_k$ で次元 $n$ の滑らかな環である。上で数えた方程式の数により，
+$R\to D_k$ は $\mathfrak q_k$ で syntomic である
+（《代数》補題
+\ref{algebra-lemma-localize-relative-complete-intersection}）。
+ゆえに $R\to D_k$ は $\mathfrak q_k$ で滑らかである
+（《代数》補題 \ref{algebra-lemma-flat-fibre-smooth}）。
+
+\medskip\noindent
+証明を終えるため，$\mathfrak q\subset D$ を，$\pi$ を含み，
+$R/\pi^2R\to\bar C$ が滑らかな素イデアルの上にある素イデアルとする。
+(1) により，ある $k$ に対して $a_k\notin\mathfrak q$ である。
+全射 $D_k\to D$ が $\mathfrak q$ における局所環の同型を誘導することを
+示す。前段落により，環準同型
+$\bar C/\pi\bar C\to D_k/\pi D_k$ および $R\to D_k$ は，
+対応する素イデアル $\mathfrak q_k$ で滑らかであることが分かっている。
+したがって，これにより (c), (d) が示され，証明が完了する。
+
+\medskip\noindent
+まず，任意の $\ell$ に対して上で証明した等式
+$\pi p_{k, \ell} = -a_k(f_\ell - \pi z_\ell) +
+\sum_{j \in E_k} h_{k, \ell}^j (f_j - \pi z_j)$
+は，$f_\ell-\pi z_\ell$ が $(D_k)_{a_k}$，したがって特に
+$(D_k)_{\mathfrak q_k}$ において零へ写ることを示す。
+関係式 (4) により，$I/I^2$ において
+$a_kf_\ell=\sum_{j\in E_k}h_{k,\ell}^jf_j$ である。
+$(\bar I_k/\bar I_k^2)_{a_k}$ は $j\in E_k$ に対する $f_j$ を基とする
+自由加群なので，
+$$
+a_{k'} h_{k, \ell}^j -
+\sum\nolimits_{j' \in E_{k'}} h_{k', \ell}^{j'} h_{k, j'}^j
+$$
+は，すべての $k,k',\ell$ および $j\in E_k$ に対して
+$\bar C_{a_k}$ で零である。したがって十分大きな整数 $N$ を選んで
+$$
+a_k^N\left(
+a_{k'} h_{k, \ell}^j -
+\sum\nolimits_{j' \in E_{k'}} h_{k', \ell}^{j'} h_{k, j'}^j
+\right)
+$$
+が $I_k+\pi^2R[x_1,\ldots,x_n]$ に属するようにできる。
+$\pi$ を法として計算すると，
+\begin{align*}
+&
+a_kp_{k', \ell} - a_{k'}p_{k, \ell} + \sum h_{k', \ell}^{j'} p_{k, j'}
+\\
+&
+=
+- a_k \sum h_{k', \ell}^{j'} z_{j'}
++ a_{k'} \sum h_{k, \ell}^j z_j
++ \sum h_{k', \ell}^{j'} a_k z_{j'}
+- \sum \sum h_{k', \ell}^{j'} h_{k, j'}^j z_j \\
+&
+=
+\sum \left(
+a_{k'} h_{k, \ell}^j
+- \sum h_{k', \ell}^{j'} h_{k, j'}^j
+\right) z_j
+\end{align*}
+を得る。ここでは Einstein の総和規約を用いた。上の結果と合わせると，
+$a_k^{N+1}p_{k',\ell}$ は
+$R[x_1,\ldots,x_n,z_1,\ldots,z_m]$ において $I_k$ と $\pi$ が生成する
+イデアルに属する。したがって $p_{k',\ell}$ は
+$\pi(D_k)_{a_k}$ へ写る。一方，等式
+$$
+\pi p_{k', \ell} =
+-a_{k'} (f_\ell - \pi z_\ell) +
+\sum\nolimits_{j' \in E_{k'}} h_{k', \ell}^{j'}(f_{j'} - \pi z_{j'})
+$$
+は $\pi p_{k',\ell}$ が $(D_k)_{a_k}$ において零であることを示す。
+$\text{Ann}_R(\pi)=\text{Ann}_R(\pi^2)$ と仮定しており，
+$(D_k)_{\mathfrak q_k}$ は滑らか，したがって $R$ 上平坦なので，
+$\text{Ann}_{(D_k)_{\mathfrak q_k}}(\pi) =
+\text{Ann}_{(D_k)_{\mathfrak q_k}}(\pi^2)$.
+である。ゆえに $p_{k',\ell}$ も零へ写る。したがって
+$D_{\mathfrak q}=(D_k)_{\mathfrak q_k}$ であり，証明が完了する。
+\end{proof}
+
+
+
+
+
+
+\section{特異点解消補題}
+\label{smoothing-section-desingularization-lemma}
+
+\noindent
+次は，もう一つの驚くほど巧妙な補題である。
+
+\begin{lemma}
+\label{smoothing-lemma-desingularize}
+$R$ をネーター環とする。
+$\Lambda$ を $R$-代数とする。$\pi \in R$ とし，
+$\text{Ann}_\Lambda(\pi) = \text{Ann}_\Lambda(\pi^2)$ を仮定する。
+$A \to \Lambda$ を $R$-代数準同型とし，$A$ は有限表示であるとする。さらに，
+\begin{enumerate}
+\item $\pi$ の像は $R$ 上 $A$ において厳密標準であり，
+\item $\Lambda/\pi^4 \Lambda$ への写像と可換な切断
+$\rho : A/\pi^4 A \to R/\pi^4 R$ が存在する
+\end{enumerate}
+と仮定する。このとき，$B$ が有限表示であり，
+$\mathfrak a B \subset H_{B/R}$ を満たす $R$-代数準同型
+$A \to B \to \Lambda$ が存在する。ここで
+$\mathfrak a = \text{Ann}_R(\text{Ann}_R(\pi^2)/\text{Ann}_R(\pi))$ である。
+\end{lemma}
+
+\begin{proof}
+表示
+$$
+A = R[x_1, \ldots, x_n]/(f_1, \ldots, f_m)
+$$
+と，$\pi$ について (\ref{smoothing-equation-strictly-standard-one}) が成り立ち，さらに
+\begin{equation}
+\label{smoothing-equation-star}
+\pi f_{c + j} \in (f_1, \ldots, f_c) + (f_1, \ldots, f_m)^2
+\end{equation}
+が $j = 1, \ldots, m - c$ に対して成り立つような
+$0 \leq c \leq \min(n, m)$ を選ぶ。$\rho$ は $x_i$ を
+$r_i \in R$ の類へ送るとする。このとき $x_i$ を $x_i-r_i$ で
+置き換えられる。したがって $R/\pi^4R$ において
+$\rho(x_i)=0$ と仮定してよい。これより $f_j(0)\in\pi^4R$ であり，
+またある $\lambda_i\in\Lambda$ に対して $A\to\Lambda$ は
+$x_i$ を $\pi^4\lambda_i$ へ送る。次のように書く。
+$$
+f_j = f_j(0) + \sum\nolimits_{i = 1, \ldots, n} r_{ji} x_i + \text{高次項}
+$$
+すると $\partial f_j/\partial x_i$ の定数項は $r_{ji}$ である。
+$\pi$ に対する (\ref{smoothing-equation-strictly-standard-one}) に $\rho$ を適用すると，
+ある $r_I\in R$ に対して
+$$
+\pi = \sum\nolimits_{I \subset \{1, \ldots, n\},\ |I| = c}
+r_I \det(r_{ji})_{j = 1, \ldots, c,\ i \in I} \bmod \pi^4R
+$$
+を得る。したがって，ある $u\in 1+\pi^3R$ に対して
+$$
+u\pi = \sum\nolimits_{I \subset \{1, \ldots, n\},\ |I| = c}
+r_I \det(r_{ji})_{j = 1, \ldots, c,\ i \in I}
+$$
+である。《代数》補題 \ref{algebra-lemma-matrix-left-inverse} により，
+これは次を満たす $n\times c$ 行列 $(s_{ik})$ が存在することを意味する。
+$$
+u\pi \delta_{jk} = \sum\nolimits_{i = 1, \ldots, n} r_{ji}s_{ik}\quad
+\text{すべての } j, k = 1, \ldots, c \text{ に対して}
+$$
+（Kronecker のデルタ）。補助変数
+$v_1, \ldots, v_c, w_1, \ldots, w_n$ を導入し，次のように置く。
+$$
+h_i = x_i - \pi^2 \sum\nolimits_{j = 1, \ldots c} s_{ij} v_j - \pi^3 w_i
+$$
+以下では，同一視
+$$
+R[x_1, \ldots, x_n, v_1, \ldots, v_c, w_1, \ldots, w_n]/
+(h_1, \ldots, h_n) = R[v_1, \ldots, v_c, w_1, \ldots, w_n]
+$$
+を断りなく用いる。
+$R[x_1, \ldots, x_n, v_1, \ldots, v_c, w_1, \ldots, w_n]/
+(h_1, \ldots, h_n)$ において
+\begin{align*}
+f_j & = f_j(x_1 - h_1, \ldots, x_n - h_n) \\
+& =
+\pi^2 \sum\nolimits_{k = 1}^c
+\left(\sum\nolimits_{i = 1}^n r_{ji} s_{ik}\right) v_k
++
+\pi^3 \sum\nolimits_{i = 1}^n r_{ji}w_i \bmod \pi^4 \\
+& =
+\pi^3 v_j + \pi^3 \sum\nolimits_{i = 1}^n r_{ji}w_i \bmod \pi^4
+\end{align*}
+が $1\leq j\leq c$ に対して成り立つ。したがって，
+$g_j=v_j+\sum r_{ji}w_i\bmod\pi$ であり，かつ $R$-代数
+$R[x_1, \ldots, x_n, v_1, \ldots, v_c, w_1, \ldots, w_n]/
+(h_1, \ldots, h_n)$ において $f_j=\pi^3g_j$ となるような元
+$g_j\in R[v_1,\ldots,v_c,w_1,\ldots,w_n]$ を選べる。次のように置く。
+$$
+B = R[x_1, \ldots, x_n, v_1, \ldots, v_c, w_1, \ldots, w_n]/
+(f_1, \ldots, f_m, h_1, \ldots, h_n, g_1, \ldots, g_c).
+$$
+写像 $A\to B$ は明らかである。$x_i\to\pi^4\lambda_i$，
+$v_i\mapsto0$，$w_i\mapsto\pi\lambda_i$ と送ることにより
+$B\to\Lambda$ を定める。このとき，元 $f_j$ と $h_i$ が
+$\Lambda$ の零へ写ることは明らかである。さらに $g_i$ は，
+$\pi^3t=0$ を満たす $\pi\Lambda$ の元 $t$ へ写る
+（$h$ たちが生成するイデアルを法として $f_i=\pi^3g_i$ だからである）。
+したがって，仮定 $\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^2)$
+より $t=0$ である。ゆえに滑らかさに関する主張を証明すればよい。
+
+\medskip\noindent
+方程式 $f_i=0$ から $g_i=0$ が従うので，
+$B_\pi\cong A_\pi[v_1,\ldots,v_c]$ であることに注意する。
+$\pi$ が $R$ 上 $A$ において厳密標準であるという仮定により
+$A_\pi$ は $R$ 上滑らかだから，$B_\pi$ も $R$ 上滑らかである。
+補題 \ref{smoothing-lemma-elkik} を参照せよ。
+
+\medskip\noindent
+$B'=R[v_1,\ldots,v_c,w_1,\ldots,w_n]/(g_1,\ldots,g_c)$ と置く。
+$g_i=v_i+\sum r_{ji}w_i\bmod\pi$ なので，
+$B'/\pi B'=R/\pi R[w_1,\ldots,w_n]$ である。したがって，
+《代数》の補題
+\ref{algebra-lemma-localize-relative-complete-intersection} および
+\ref{algebra-lemma-flat-fibre-smooth}
+により，$R\to B'$ は $V(\pi)$ のすべての点で相対次元 $n$ の
+滑らかな準同型である（最初の補題により，それらの素イデアルで
+syntomic，特に平坦であり，これを受けて二番目の補題により滑らかである）。
+
+\medskip\noindent
+$\mathfrak q\subset B$ を $\pi\in\mathfrak q$ であり，ある
+$r\in\mathfrak a$ に対して $r\notin\mathfrak q$ であるような素イデアルとする。
+$\mathfrak q'=B'\cap\mathfrak q$ と書く。全射 $B'\to B$ が局所環の同型
+$(B')_{\mathfrak q'}\to B_\mathfrak q$ を誘導することを主張する。
+これにより補題の証明は完了する。$B_\mathfrak q$ は
+$(B')_{\mathfrak q'}$ を，$j=1,\ldots,m-c$ に対する
+$f_{c+j}$ が生成するイデアルで割った商であることに注意する。
+次の二点を観察する。第一に，$(B')_{\mathfrak q'}$ における
+$f_{c+j}$ の像は $\pi^2$ で割り切れる。第二に，
+(\ref{smoothing-equation-star}) により，$(B')_{\mathfrak q'}$ における
+$\pi f_{c+j}$ の像は $\sum b_{j_1j_2}f_{c+j_1}f_{c+j_2}$ と書ける。
+したがって，各 $\pi f_{c+j}$ の像は，元 $\pi^2f_{c+j'}$ たちが生成する
+イデアルに含まれる。$(B')_{\mathfrak q'}$ はネーター局所環なので，
+$\pi f_{c+j}=0$ である。《代数》補題
+\ref{algebra-lemma-intersect-powers-ideal-module-zero} を参照せよ。
+$R\to(B')_{\mathfrak q'}$ は平坦なので，
+$$
+\left(\text{Ann}_R(\pi^2)/\text{Ann}_R(\pi)\right)
+\otimes_R (B')_{\mathfrak q'}
+=
+\text{Ann}_{(B')_{\mathfrak q'}}(\pi^2)/\text{Ann}_{(B')_{\mathfrak q'}}(\pi)
+$$
+である。$r\in\mathfrak a$ は $(B')_{\mathfrak q'}$ で可逆なので，
+この加群は零である。したがって望んだとおり，$f_{c+j}$ の像は
+$(B')_{\mathfrak q'}$ において零である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-desingularize-strictly-standard}
+$R$ をネーター環，$\Lambda$ を $R$-代数とする。
+$\pi\in R$ とし，$\text{Ann}_R(\pi)=\text{Ann}_R(\pi^2)$ および
+$\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^2)$ を仮定する。
+$A\to\Lambda$ と $D\to\Lambda$ を $R$-代数準同型とし，
+$A$ と $D$ は有限表示であるとする。さらに，
+\begin{enumerate}
+\item $\pi$ は $R$ 上 $A$ において厳密標準であり，
+\item $\Lambda/\pi^4\Lambda$ への写像と可換な $R$-代数準同型
+$A/\pi^4A\to D/\pi^4D$ が存在する
+\end{enumerate}
+と仮定する。このとき，$B$ が有限表示であるような $R$-代数準同型
+$B\to\Lambda$ と，$\Lambda$ への写像と可換な $R$-代数準同型
+$A\to B$ および $D\to B$ であって，
+$H_{D/R}B\subset H_{B/D}$ および $H_{D/R}B\subset H_{B/R}$ を
+満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{smoothing-lemma-desingularize} を
+$$
+D \longrightarrow A \otimes_R D \longrightarrow \Lambda
+$$
+と $D$ における $\pi$ の像に適用する。補題
+\ref{smoothing-lemma-strictly-standard-base-change} により，$\pi$ は $D$ 上
+$A\otimes_RD$ において厳密標準である。切断
+$\rho:(A\otimes_RD)/\pi^4(A\otimes_RD)\to D/\pi^4D$ として，
+(2) の写像から誘導される写像を取る。したがって補題
+\ref{smoothing-lemma-desingularize} を適用でき，$B$ が有限表示であり，
+$\mathfrak aB\subset H_{B/D}$ を満たす因子分解
+$A\otimes_RD\to B\to\Lambda$ を得る。ここで
+$$
+\mathfrak a = \text{Ann}_D(\text{Ann}_D(\pi^2)/\text{Ann}_D(\pi)).
+$$
+である。$D_\mathfrak q$ が $R$ 上平坦であるような $D$ の任意の
+素イデアル $\mathfrak q$ に対し，
+$\text{Ann}_{D_\mathfrak q}(\pi^2)/\text{Ann}_{D_\mathfrak q}(\pi) = 0$
+である。実際，元の零化イデアルを取る操作は平坦基底変換と可換であり，
+$\text{Ann}_R(\pi)=\text{Ann}_R(\pi^2)$ と仮定した。
+$D$ はネーター環なので，$\text{Ann}_D(\pi^2)/\text{Ann}_D(\pi)$ は
+有限 $D$-加群であり，したがってその零化イデアルの形成は局所化と可換である。
+ゆえに $\mathfrak a\not\subset\mathfrak q$ である。したがって
+$D\to B$ は，$\mathfrak q$ の上にある $B$ の任意の素イデアルで滑らかである。
+$R\to D$ が滑らかである $D$ の任意の素イデアル $\mathfrak q$ では
+$D_\mathfrak q$ が $R$ 上平坦なので，$H_{D/R}B\subset H_{B/D}$ を得る。
+最後の包含 $H_{D/R}B\subset H_{B/R}$ は，滑らかな環準同型の合成が
+滑らかであることから従う（《代数》補題
+\ref{algebra-lemma-compose-smooth}）。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-desingularize-lifting-apply}
+$R$ をネーター環，$\Lambda$ を $R$-代数とする。
+$\pi\in R$ とし，$\text{Ann}_R(\pi)=\text{Ann}_R(\pi^2)$ および
+$\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^2)$ を仮定する。
+$A\to\Lambda$ を $R$-代数準同型とし，$A$ は有限表示であるとする。
+また，$\pi$ は $R$ 上 $A$ において厳密標準であると仮定する。因子分解
+$$
+A/\pi^8A \to \bar C \to \Lambda/\pi^8\Lambda
+$$
+が与えられ，$\bar C$ は有限表示であるとする。このとき，$B$ が有限表示であり，
+$R_\pi\to B_\pi$ が滑らかで，かつ
+$$
+H_{\bar C/(R/\pi^8 R)} \cdot \Lambda/\pi^8\Lambda
+\subset
+\sqrt{H_{B/R} \Lambda} \bmod \pi^8\Lambda.
+$$
+を満たす因子分解 $A\to B\to\Lambda$ が存在する。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{smoothing-lemma-lifting} を適用して，因子分解
+$\bar C/\pi^4\bar C \to D/\pi^4 D \to \Lambda/\pi^4\Lambda$
+を備えた $R\to D\to\Lambda$ を得る。ここで $R\to D$ は，
+$\pi$ を含まない任意の素イデアル，および $R/\pi^8R\to\bar C$ が
+滑らかである $\bar C/\pi^4\bar C$ の素イデアルの上にある任意の
+素イデアルで滑らかである。補題
+\ref{smoothing-lemma-desingularize-strictly-standard} により，有限表示 $R$-代数 $B$ と，
+$H_{D/R}B\subset H_{B/R}$ を満たす因子分解 $A\to B\to\Lambda$ および
+$D\to B\to\Lambda$ を得る。これが補題で課された問題の解であることの
+確認は省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{準備：基礎体への帰着}
+\label{smoothing-section-reduction}
+
+\noindent
+本節では，前節までの補題を適用し，主結果は基礎環が体である場合に
+証明すれば十分であることを示す。補題 \ref{smoothing-lemma-reduce-to-field} を参照せよ。
+
+\begin{situation}
+\label{smoothing-situation-global}
+ここで $R\to\Lambda$ はネーター環の間の正則環準同型である。
+\end{situation}
+
+\noindent
+$R\to\Lambda$ は状況 \ref{smoothing-situation-global} のとおりであるとする。
+$\Lambda$ が滑らかな $R$-代数のフィルター余極限であるとき，
+{\it $R\to\Lambda$ に対して PT が成り立つ}という。
+
+\begin{lemma}
+\label{smoothing-lemma-product}
+$R_i\to\Lambda_i$（$i=1,2$）は状況 \ref{smoothing-situation-global} のとおりとする。
+$R_i\to\Lambda_i$（$i=1,2$）に対して PT が成り立つなら，
+$R_1\times R_2\to\Lambda_1\times\Lambda_2$ に対しても PT が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：フィルター余極限の積はフィルター余極限である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-delocalize-base}
+$R\to A\to\Lambda$ を環準同型とし，$A$ は $R$ 上有限表示であるとする。
+$S\subset R$ を乗法的集合とする。$B'$ が $S^{-1}R$ 上滑らかであるような
+因子分解 $S^{-1}A\to B'\to S^{-1}\Lambda$ が与えられているとする。
+このとき，ある $s\in S$ の像が $R$ 上 $B$ において初等標準元
+（定義 \ref{smoothing-definition-strictly-standard}）となるような因子分解
+$A\to B\to\Lambda$ が存在する。
+\end{lemma}
+
+\begin{proof}
+まず補題 \ref{smoothing-lemma-smooth-standard-smooth} を $S^{-1}R\to B'$ に適用する。
+したがって，$B'$ は $S^{-1}R$ 上標準滑らかであると仮定してよい。
+$A=R[x_1,\ldots,x_n]/(g_1,\ldots,g_t)$ と書き，$\Lambda$ において
+$x_i\mapsto\lambda_i$ であるとする。ある $c\geq n$ に対し
+$B' = S^{-1}R[x_1, \ldots, x_{n + m}]/(f_1, \ldots, f_c)$
+と書ける。ここで
+$\det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}$
+は $B'$ で可逆であり，$A\to B'$ は $x_i\mapsto x_i$ で与えられる。
+補題 \ref{smoothing-lemma-standard-smooth-include-generators} を参照せよ。
+$i>n$ に対する $x_i$ に $S$ の元を掛け，それに応じて方程式 $f_j$ を
+変更すれば，$i>n$ に対するある $\lambda_i\in\Lambda$ について
+$B'\to S^{-1}\Lambda$ が $x_i$ を $\lambda_i/1$ へ送ると仮定してよい。
+ある $a_j\in S^{-1}R[x_1,\ldots,x_{n+m}]$ に対して成り立つ関係式
+$$
+1 =
+a_0 \det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}
++
+\sum\nolimits_{j = 1, \ldots, c} a_jf_j
+$$
+を選ぶ。$S$ の各元は $B'$ で可逆なので，分母を払うことにより，
+$f_j,a_j\in R[x_1,\ldots,x_{n+m}]$ であり，ある $s_0\in S$ に対して
+$$
+s_0 = a_0 \det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}
++
+\sum\nolimits_{j = 1, \ldots, c} a_jf_j
+$$
+であると仮定してよい。$g_j$ は
+$S^{-1}R[x_1, \ldots, x_{n + m}]/(f_1, \ldots, x_c)$
+において零へ写るので，
+$R[x_1,\ldots,x_{n+m}]/(f_1,\ldots,f_c)$ において
+$s_jg_j=0$ となる元 $s_j\in S$ を取れる。また $f_j$ は
+$S^{-1}\Lambda$ において零へ写るので，$\Lambda$ において
+$s'_jf_j(\lambda_1,\ldots,\lambda_{n+m})=0$ となる元 $s'_j\in S$ を取れる。
+環
+$$
+B = R[x_1, \ldots, x_{n + m}]/
+(s'_1f_1, \ldots, s'_cf_c, g_1, \ldots, g_t)
+$$
+と，$B\to\Lambda$ が $x_i\mapsto\lambda_i$ で与えられる因子分解
+$A\to B\to\Lambda$ を考える。$s=s_0s_1\ldots s_ts'_1\ldots s'_c$ は
+$R$ 上 $B$ において初等標準であると主張する。これで証明は完了する。
+実際，$s_jg_j\in(f_1,\ldots,f_c)$ なので
+$sg_j\in(s'_1f_1,\ldots,s'_cf_c)$ である。最後に
+$$
+a_0\det(\partial s'_jf_j/\partial x_i)_{i, j = 1, \ldots, c}
++
+\sum\nolimits_{j = 1, \ldots, c}
+(s'_1 \ldots \hat{s'_j} \ldots s'_c) a_j s'_jf_j
+=
+s_0s'_1\ldots s'_c
+$$
+を得るが，右辺は望むとおり $s$ を割り切る。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-reduce-to-field}
+\begin{slogan}
+Popescu 近似の証明は体上の代数の場合に帰着される
+\end{slogan}
+$R$ が体であるすべての状況 \ref{smoothing-situation-global} において
+PT が成り立つなら，PT は一般にも成り立つ。
+\end{lemma}
+
+\begin{proof}
+$R$ が体である任意の状況 \ref{smoothing-situation-global} において
+PT が成り立つと仮定する。状況 \ref{smoothing-situation-global} の任意の
+$R\to\Lambda$ を取る。$R/I\to\Lambda/I\Lambda$ もネーター環の間の
+正則環準同型であることに注意する。《代数詳論》補題
+\ref{more-algebra-lemma-regular-base-change} を参照せよ。イデアルの集合
+$$
+\mathcal{I} = \{I \subset R \mid R/I \to \Lambda/I\Lambda
+\text{ に対して PT が成り立たない}\}
+$$
+を考える。$\mathcal I$ が空であることを示さなければならない。
+この集合が空でなければ，$R$ はネーター環なので極大元を含む。
+$R$ を $R/I$ で，$\Lambda$ を $\Lambda/I$ で置き換えると，
+$R$ の任意の非零イデアル $I$ に対して
+$R/I\to\Lambda/I\Lambda$ が PT を満たす状況を得る。特に命題
+\ref{smoothing-proposition-lift} を適用すると，$R$ は被約環であることが分かる。
+
+\medskip\noindent
+$A\to\Lambda$ を $R$-代数準同型とし，$A$ は有限表示であるとする。
+$B$ が $R$ 上滑らかであるような因子分解 $A\to B\to\Lambda$ を
+見つけなければならない。《代数》補題 \ref{algebra-lemma-when-colimit}
+を参照せよ。
+
+\medskip\noindent
+$S\subset R$ を非零因子全体の集合とし，$R$ の全商環
+$Q=S^{-1}R$ を考える。$Q=K_1\times\ldots\times K_n$ は体の積である。
+《代数》の補題 \ref{algebra-lemma-total-ring-fractions-no-embedded-points} および
+\ref{algebra-lemma-Noetherian-irreducible-components}。
+を参照せよ。補題 \ref{smoothing-lemma-product} と仮定により，環準同型
+$S^{-1}R\to S^{-1}\Lambda$ に対して PT が成り立つ。
+したがって，$B'$ が $S^{-1}R$ 上滑らかであるような因子分解
+$S^{-1}A\to B'\to S^{-1}\Lambda$ を取れる。
+
+\medskip\noindent
+補題 \ref{smoothing-lemma-delocalize-base} を適用し，ある $\pi\in S$ が
+$R$ 上 $B$ において初等標準となるような因子分解
+$A\to B\to\Lambda$ を得る。$A$ を $B$ で置き換えると，$\pi$ は
+$A$ において初等標準，したがって厳密標準であると仮定してよい。
+$R/\pi^8R\to\Lambda/\pi^8\Lambda$ は PT を満たす。したがって，
+$R/\pi^8R\to\bar C$ が滑らかであるような因子分解
+$R/\pi^8 R \to A/\pi^8A \to \bar C \to \Lambda/\pi^8\Lambda$
+を取れる。補題 \ref{smoothing-lemma-lifting} により，$D$ が $R$ 上滑らかであるような
+$R$-代数準同型 $D\to\Lambda$ と因子分解
+$R/\pi^4 R \to A/\pi^4A \to D/\pi^4D \to \Lambda/\pi^4\Lambda$。
+を得る。補題 \ref{smoothing-lemma-desingularize-strictly-standard} により，
+$B$ が $R$ 上滑らかであるような $A\to B\to\Lambda$ を取れる。
+これで証明は完了する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{局所的な技巧}
+\label{smoothing-section-local}
+
+
+\begin{situation}
+\label{smoothing-situation-local}
+ネーター環 $R$，$R$-代数準同型 $A\to\Lambda$，および素イデアル
+$\mathfrak q\subset\Lambda$ が与えられているとする。$A$ は $R$ 上
+有限表示であると仮定する。この状況では
+$\mathfrak h_A=\sqrt{H_{A/R}\Lambda}$ と書く。
+\end{situation}
+
+\noindent
+$R\to A\to\Lambda\supset\mathfrak q$ は状況
+\ref{smoothing-situation-local} のとおりであるとする。$B$ が有限表示であり，
+$\mathfrak h_A\subset\mathfrak h_B\not\subset\mathfrak q$ を満たす因子分解
+$A\to B\to\Lambda$ が存在するとき，
+{\it $R\to A\to\Lambda\supset\mathfrak q$ は解消可能である}という。
+この場合，因子分解 $A\to B\to\Lambda$ を
+{\it $R\to A\to\Lambda\supset\mathfrak q$ の解消}と呼ぶ。
+
+\begin{lemma}
+\label{smoothing-lemma-lift-solution}
+$R\to A\to\Lambda\supset\mathfrak q$ は状況 \ref{smoothing-situation-local} の
+とおりとする。$r\geq1$ とし，$\pi_1,\ldots,\pi_r\in R$ は
+それぞれ $\mathfrak q$ の元へ写るとする。次を仮定する。
+\begin{enumerate}
+\item $i=1,\ldots,r$ に対して
+$$
+\text{Ann}_{R/(\pi_1^8, \ldots, \pi_{i - 1}^8)R}(\pi_i)
+=
+\text{Ann}_{R/(\pi_1^8, \ldots, \pi_{i - 1}^8)R}(\pi_i^2)
+$$
+かつ
+$$
+\text{Ann}_{\Lambda/(\pi_1^8, \ldots, \pi_{i - 1}^8)\Lambda}(\pi_i)
+=
+\text{Ann}_{\Lambda/(\pi_1^8, \ldots, \pi_{i - 1}^8)\Lambda}(\pi_i^2)
+$$
+が成り立つ。
+\item $i=1,\ldots,r$ に対し，元 $\pi_i$ の像は $R$ 上 $A$ において
+厳密標準元である。
+\end{enumerate}
+このとき，
+$$
+R/(\pi_1^8, \ldots, \pi_r^8)R \to A/(\pi_1^8, \ldots, \pi_r^8)A
+\to \Lambda/(\pi_1^8, \ldots, \pi_r^8)\Lambda \supset
+\mathfrak q/(\pi_1^8, \ldots, \pi_r^8)\Lambda
+$$
+が解消可能なら，$R\to A\to\Lambda\supset\mathfrak q$ も解消可能である。
+\end{lemma}
+
+\begin{proof}
+$r$ に関する帰納法で証明する。
+
+\medskip\noindent
+$r=1$ の場合。この場合の仮定は，$\pi_1^8$ を法とする状況を解消する
+因子分解 $A/\pi_1^8\to\bar C\to\Lambda/\pi_1^8$ が存在することである。
+条件 (1) と (2) は，補題 \ref{smoothing-lemma-desingularize-lifting-apply} を
+適用するために必要な仮定である。したがって解消 $\bar C$ を
+「持ち上げ」て $R\to A\to\Lambda\supset\mathfrak q$ の解消を得られる。
+
+\medskip\noindent
+$r>1$ の場合。この場合，$r-1$ に対する帰納法の仮定を状況
+$R/\pi_1^8 \to A/\pi_1^8 \to \Lambda/\pi_1^8
+\supset \mathfrak q/\pi_1^8\Lambda$
+に適用する。性質 (2) は補題 \ref{smoothing-lemma-strictly-standard-base-change}
+により保たれることに注意する。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-delocalize-weak}
+\begin{reference}
+\cite[Lemma 12.2]{swan} または
+\cite[Lemma 2]{popescu-GND}
+\end{reference}
+$R\to A\to\Lambda\supset\mathfrak q$ は状況 \ref{smoothing-situation-local} の
+とおりとする。$\mathfrak p=R\cap\mathfrak q$ と置く。
+$\mathfrak q$ は $\mathfrak h_A$ 上極小であり，
+$R_\mathfrak p \to A_\mathfrak p \to \Lambda_\mathfrak q
+\supset \mathfrak q\Lambda_\mathfrak q$ は解消可能であると仮定する。
+このとき，$C$ が有限表示で，$H_{C/R}\Lambda\not\subset\mathfrak q$ を
+満たす因子分解 $A\to C\to\Lambda$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$A_\mathfrak p\to C\to\Lambda_\mathfrak q$ を
+$R_\mathfrak p \to A_\mathfrak p \to \Lambda_\mathfrak q
+\supset\mathfrak q\Lambda_\mathfrak q$ の解消とする。
+$\mathfrak q$ は $\mathfrak h_A$ 上極小であるという仮定により，これは
+$H_{C/R_\mathfrak p}\Lambda_\mathfrak q=\Lambda_\mathfrak q$ を意味する。
+補題 \ref{smoothing-lemma-final-solve} により，$C$ は $R_\mathfrak p$ 上滑らかであると
+仮定してよい。補題 \ref{smoothing-lemma-smooth-standard-smooth} により，さらに
+$C$ は $R_\mathfrak p$ 上標準滑らかであると仮定してよい。
+$A=R[x_1,\ldots,x_n]/(g_1,\ldots,g_t)$ と書き，$A\to\Lambda$ は
+$x_i\mapsto\lambda_i$ で与えられるとする。ある $c\geq n$ に対して
+$C=R_\mathfrak p[x_1,\ldots,x_{n+m}]/(f_1,\ldots,f_c)$ と書く。
+ここで $A\to C$ は $x_i$ を $x_i$ へ送り，
+$\det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}$
+は $C$ で可逆である。補題 \ref{smoothing-lemma-standard-smooth-include-generators}
+を参照せよ。分母を払えば，$f_1,\ldots,f_c$ は
+$R[x_1,\ldots,x_{n+m}]$ の元であると仮定してよい。もちろん
+$\det(\partial f_j/\partial x_i)_{i, j = 1, \ldots, c}$
+は $R[x_1,\ldots,x_{n+m}]/(f_1,\ldots,f_c)$ では可逆とは限らないが，
+ある元 $s_0\in R$，$s_0\notin\mathfrak p$ を逆にすれば可逆になる。
+$g_j$ は $R[x_1,\ldots,x_n]\to A\to C$ のもとで零へ写るので，
+$R[x_1,\ldots,x_{n+m}]/(f_1,\ldots,f_c)$ において $s_jg_j$ が
+零となるような $s_j\in R$，$s_j\notin\mathfrak p$ を取れる。
+多項式
+$F_j \in R[x_1, \ldots, x_n, X_{n + 1}, \ldots, X_{n + m + 1}]$
+で，$X_{n+1},\ldots,X_{n+m+1}$ に関して斉次であり，
+$f_j=F_j(x_1,\ldots,x_{n+m},1)$ を満たすものを取る。
+$\lambda_{n+m+1}\notin\mathfrak q$ であり，$\Lambda_\mathfrak q$ において
+$x_{n+i}$ が $\lambda_{n+i}/\lambda_{n+m+1}$ へ写るような
+$\lambda_{n+i}\in\Lambda$（$i=1,\ldots,m+1$）を選ぶ。このとき
+\begin{align*}
+F_j(\lambda_1, \ldots, \lambda_{n + m + 1})
+& =
+(\lambda_{n + m + 1})^{\deg(F_j)} F_j(\lambda_1, \ldots, \lambda_n,
+\frac{\lambda_{n + 1}}{\lambda_{n + m + 1}}, \ldots,
+\frac{\lambda_{n + m}}{\lambda_{n + m + 1}}, 1) \\
+& =
+(\lambda_{n + m + 1})^{\deg(F_j)} f_j(\lambda_1, \ldots, \lambda_n,
+\frac{\lambda_{n + 1}}{\lambda_{n + m + 1}}, \ldots,
+\frac{\lambda_{n + m}}{\lambda_{n + m + 1}}) \\
+& = 0
+\end{align*}
+が $\Lambda_\mathfrak q$ において成り立つ。したがって，$\Lambda$ において
+$\lambda_0F_j(\lambda_1,\ldots,\lambda_{n+m+1})=0$ となるような
+$\lambda_0\in\Lambda$，$\lambda_0\notin\mathfrak q$ を取れる。ここで
+$B$ を
+$$
+R[x_0, \ldots, x_{n + m + 1}]/
+(g_1, \ldots, g_t, x_0F_1(x_1, \ldots, x_{n + m + 1}), \ldots,
+x_0F_c(x_1, \ldots, x_{n + m + 1}))
+$$
+に等しいとし，$x_i$ を $\lambda_i$ へ送ることで $B$ を $\Lambda$ へ写す。
+$b$ を $B$ における $x_0x_{n+m+1}s_0s_1\ldots s_t$ の像とする。
+このとき $B_b$ は
+$$
+R_{s_0s_1 \ldots s_t}[x_0, x_1, \ldots, x_{n + m + 1}, 1/x_0x_{n + m + 1}]/
+(f_1, \ldots, f_c)
+$$
+と同型であり，これは構成により $R$ 上滑らかである。
+$b$ の像は $\mathfrak q$ に属さないので，目的を達した。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-delocalize-height-zero}
+$R\to A\to\Lambda\supset\mathfrak q$ は状況 \ref{smoothing-situation-local} の
+とおりとする。$\mathfrak p=R\cap\mathfrak q$ と置く。次を仮定する。
+\begin{enumerate}
+\item $\mathfrak q$ は $\mathfrak h_A$ 上極小である。
+\item $R_\mathfrak p \to A_\mathfrak p \to \Lambda_\mathfrak q
+\supset \mathfrak q\Lambda_\mathfrak q$ は解消可能である。
+\item $\dim(\Lambda_\mathfrak q) = 0$。
+\end{enumerate}
+このとき $R\to A\to\Lambda\supset\mathfrak q$ は解消可能である。
+\end{lemma}
+
+\begin{proof}
+(3) により $\Lambda_\mathfrak q$ はアルティン局所環なので，
+$\mathfrak q\Lambda_\mathfrak q$ は冪零である。したがって，ある $N>0$ に対して
+$(\mathfrak h_A)^N\Lambda_\mathfrak q=0$ である。ゆえに，$\Lambda$ において
+$\lambda(\mathfrak h_A)^N=0$ となるような
+$\lambda\in\Lambda$，$\lambda\notin\mathfrak q$ が存在する。
+$H_{A/R}=(a_1,\ldots,a_r)$ と書けば，$\Lambda$ において
+$\lambda a_i^N=0$ である。補題 \ref{smoothing-lemma-delocalize-weak} により，
+$C$ が有限表示で，$\mathfrak h_C\not\subset\mathfrak q$ を満たす
+因子分解 $A\to C\to\Lambda$ を取れる。
+$C=A[x_1,\ldots,x_n]/(f_1,\ldots,f_m)$ と書く。次のように置く。
+$$
+B = A[x_1, \ldots, x_n, y_1, \ldots, y_r, z, t_{ij}]/
+(f_j - \sum y_i t_{ij}, zy_i)
+$$
+ここで $t_{ij}$ は $rm$ 個の変数である。$t_{ij}$ を零にすることで定まる写像
+$B\to C[y_i,z]/(y_iz)$ があることに注意する。写像 $B\to\Lambda$ は合成
+$B\to C[y_i,z]/(y_iz)\to\Lambda$ とする。ここで
+$C[y_i,z]/(y_iz)\to\Lambda$ は，所与の写像 $C\to\Lambda$ であり，
+$z$ を $\lambda$ へ，$y_i$ を $\Lambda$ における $a_i^N$ の像へ送る。
+
+\medskip\noindent
+$B$ は $R\to A\to\Lambda\supset\mathfrak q$ の解消であると主張する。
+まず $B_z$ は $C[y_1,\ldots,y_r,z,z^{-1}]$ と同型であり，したがって
+滑らかであることに注意する。一方，
+$B_{y_\ell} \cong A[x_i, y_i, y_\ell^{-1}, t_{ij}, i \not = \ell]$
+は $A$ 上滑らかである。したがって $z$ とすべての $a_\ell y_\ell$ は
+$H_{B/R}$ の元である（滑らかな写像の合成は滑らかである）。
+これで補題が証明された。
+\end{proof}
+
+
+
+
+\section{分離的な剰余体}
+\label{smoothing-section-separable}
+
+\noindent
+本節では，剰余体拡大が分離的である場合に局所問題を解く方法を説明する。
+
+\begin{lemma}[Ogoma]
+\label{smoothing-lemma-ogoma}
+$A$ をネーター環，$M$ を有限 $A$-加群とする。
+$S\subset A$ を乗法的集合とする。$\pi\in A$ であり，
+$\Ker(\pi : S^{-1}M \to S^{-1}M) =
+\Ker(\pi^2 : S^{-1}M \to S^{-1}M)$
+なら，任意の $n>0$ に対して
+$\Ker(s^n\pi : M \to M) = \Ker((s^n\pi)^2 : M \to M)$
+となる $s\in S$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$K=\Ker(\pi:M\to M)$ および
+$K' = \{m \in M \mid \pi^2 m = 0\text{（}S^{-1}M\text{ において）}\}$，および
+$Q=K'/K$ と置く。仮定により $S^{-1}Q=0$ であることに注意する。
+$A$ はネーター環なので，$Q$ は有限 $A$-加群である。
+したがって $Q$ を零化する $s\in S$ を取れる。この $s$ が求めるものである。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-find-sequence}
+$\Lambda$ をネーター環，$I\subset\Lambda$ をイデアルとする。
+$I\subset\mathfrak q$ となる素イデアル $\mathfrak q$ を取る。
+$n,e$ を正の整数とする。
+$\mathfrak q^n\Lambda_\mathfrak q\subset I\Lambda_\mathfrak q$ であり，
+$\Lambda_\mathfrak q$ は次元 $d$ の正則局所環であると仮定する。
+このとき，ある $n>0$ と $\pi_1,\ldots,\pi_d\in\Lambda$ であって，
+\begin{enumerate}
+\item $(\pi_1, \ldots, \pi_d)\Lambda_\mathfrak q =
+\mathfrak q\Lambda_\mathfrak q$，
+\item $\pi_1^n,\ldots,\pi_d^n\in I$，および
+\item $i=1,\ldots,d$ に対して
+$$
+\text{Ann}_{\Lambda/(\pi_1^e, \ldots, \pi_{i - 1}^e)\Lambda}(\pi_i) =
+\text{Ann}_{\Lambda/(\pi_1^e, \ldots, \pi_{i - 1}^e)\Lambda}(\pi_i^2).
+$$
+\end{enumerate}
+を満たすものが存在する。
+\end{lemma}
+
+\begin{proof}
+$S=\Lambda\setminus\mathfrak q$ と置くと，
+$\Lambda_\mathfrak q=S^{-1}\Lambda$ である。まず (1) を満たす
+$\pi_1,\ldots,\pi_d$ を選ぶ。これは $\Lambda_\mathfrak q$ が正則なので可能である。
+仮定により $\pi_i^n\in I\Lambda_\mathfrak q$ である。したがって
+$s_i\pi_i^n\in I$ となる $s_1,\ldots,s_d\in S$ を取れる。
+$\pi_i$ を $s_i\pi_i$ で置き換えれば (2) を得る。
+(1) と (2) は，さらに $S$ の元を掛けても保たれることに注意する。
+ある $t\in\{0,\ldots,d\}$ について，$i=1,\ldots,t$ に対して (3) が
+成り立つと仮定する。$\pi_1,\ldots,\pi_d$ は $S^{-1}\Lambda$ の正則列である。
+《代数》補題 \ref{algebra-lemma-regular-ring-CM} を参照せよ。
+特に，《代数》補題 \ref{algebra-lemma-regular-sequence-powers} により，
+$\pi_1^e,\ldots,\pi_t^e,\pi_{t+1}$ は
+$S^{-1}\Lambda=\Lambda_\mathfrak q$ の正則列である。したがって
+$$
+\text{Ann}_{S^{-1}\Lambda/(\pi_1^e, \ldots, \pi_{i - 1}^e)}(\pi_i) =
+\text{Ann}_{S^{-1}\Lambda/(\pi_1^e, \ldots, \pi_{i - 1}^e)}(\pi_i^2).
+$$
+補題 \ref{smoothing-lemma-ogoma} により，ある $s\in S$ に対して $\pi_{t+1}$ を
+$s\pi_{t+1}$ で置き換えると，$i=t+1$ に対する (3) を得る。
+$t$ に関する帰納法により，(1), (2), (3) を満たす列が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-resolve-special}
+$k\to A\to\Lambda\supset\mathfrak q$ は状況 \ref{smoothing-situation-local} の
+とおりであり，次を満たすとする。
+\begin{enumerate}
+\item $k$ は体である。
+\item $\Lambda$ はネーター環である。
+\item $\mathfrak q$ は $\mathfrak h_A$ 上極小である。
+\item $\Lambda_\mathfrak q$ は正則局所環である。
+\item 体拡大 $\kappa(\mathfrak q)/k$ は分離的である。
+\end{enumerate}
+このとき $k\to A\to\Lambda\supset\mathfrak q$ は解消可能である。
+\end{lemma}
+
+\begin{proof}
+$d=\dim\Lambda_\mathfrak q$ と置く。$R=k[x_1,\ldots,x_d]$ と置く。
+$\mathfrak q$ は $\mathfrak h_A$ 上極小なので，
+$\mathfrak q^n\Lambda_\mathfrak q\subset\mathfrak h_A\Lambda_\mathfrak q$
+となる $n>0$ を選べる。$H_{A/R}$ の生成元
+$a_1,\ldots,a_r$ を選ぶ。次のように置く。
+$$
+B = A[x_1, \ldots, x_d, z_{ij}]/(x_i^n - \sum z_{ij}a_j)
+$$
+各 $B_{a_j}$ は $R$ 上滑らかである。実際，これは
+$A_{a_j}[x_1,\ldots,x_d]$ 上の多項式代数であり，$A_{a_j}$ は $k$ 上
+滑らかである。したがって $B_{x_i}$ は $R$ 上滑らかである。
+$B\to C$ を補題 \ref{smoothing-lemma-improve-presentation} で構成された
+$R$-代数準同型とする。これには $R$-代数のレトラクション $C\to B$ が
+付随する。特に，上の図式に組み込まれる写像 $C\to\Lambda$ が得られる。
+構成により $C_{x_i}$ は滑らかな $R$-代数であり，
+$\Omega_{C_{x_i}/R}$ は自由である。したがって，$x_i^c$ が $C/R$ において
+厳密標準となる $c>0$ を取れる。補題 \ref{smoothing-lemma-compare-standard} を参照せよ。
+ここで，補題 \ref{smoothing-lemma-find-sequence} にある
+$\pi_1,\ldots,\pi_d\in\Lambda$ を選ぶ。ただし
+$n=n$，$e=8c$，$\mathfrak q=\mathfrak q$，$I=\mathfrak h_A$ とする。
+ある $\pi_{ij}\in\Lambda$ に対して
+$\pi_i^n=\sum\lambda_{ij}a_j$ と書く。
+$x_i\mapsto\pi_i$，$z_{ij}\mapsto\lambda_{ij}$ で与えられる写像
+$B\to\Lambda$ がある。$R=k[x_1,\ldots,x_d]$ と置く。図式
+$$
+\xymatrix{
+R \ar[r] & B \ar[rd] \\
+k \ar[u] \ar[r] & A \ar[u] \ar[r] & \Lambda
+}
+$$
+ここで補題 \ref{smoothing-lemma-lift-solution} を
+$R\to C\to\Lambda\supset\mathfrak q$ と $R$ の元の列
+$x_1^c,\ldots,x_d^c$ に適用する。仮定 (2) は明らかである。
+仮定 (1) は $R$ については直接の確認により，$\Lambda$ については
+$\pi_1,\ldots,\pi_d$ の選び方により成り立つ
+（$\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^2)$ なら，
+すべての $c>0$ に対して
+$\text{Ann}_\Lambda(\pi)=\text{Ann}_\Lambda(\pi^c)$ であることに注意する）。
+したがって，$e=8c$ に対して
+$$
+R/(x_1^e, \ldots, x_d^e) \to C/(x_1^e, \ldots, x_d^e) \to
+\Lambda/(\pi_1^e, \ldots, \pi_d^e) \supset
+\mathfrak q/(\pi_1^e, \ldots, \pi_d^e)
+$$
+を解消すれば十分である。補題 \ref{smoothing-lemma-delocalize-height-zero} により，
+$\mathfrak q$ で局所化した後にこれを解消すれば十分である。
+$x_1,\ldots,x_d$ は $\Lambda_\mathfrak q$ の正則列へ写るので，
+$R_\mathfrak p\to\Lambda_\mathfrak q$ は平坦である。《代数》補題
+\ref{algebra-lemma-flat-over-regular} を参照せよ。したがって
+$$
+R_\mathfrak p/(x_1^e, \ldots, x_d^e) \to
+\Lambda_\mathfrak q/(\pi_1^e, \ldots, \pi_d^e)
+$$
+はアルティン局所環の間の平坦な環準同型である。
+さらに仮定により，この写像が剰余体上に誘導する体拡大は分離的である。
+したがって，《代数》補題 \ref{algebra-lemma-colimit-syntomic} と
+命題 \ref{smoothing-proposition-lift} により，この写像は滑らかな代数の
+フィルター余極限である。望む解消の存在は《代数》補題
+\ref{algebra-lemma-when-colimit} から従う。
+\end{proof}
+
+
+
+
+
+
+\section{非分離的な剰余体}
+\label{smoothing-section-inseparable}
+
+\noindent
+本節では，剰余体拡大が非分離的である場合に局所問題を解く方法を説明する。
+
+\begin{lemma}
+\label{smoothing-lemma-helper}
+$k$ を標数 $p>0$ の体とする。
+$(\Lambda,\mathfrak m,K)$ をアルティン局所 $k$-代数とする。
+$\dim H_1(L_{K/k})<\infty$ と仮定する。このとき $\Lambda$ は，
+各写像 $A\to\Lambda$ が平坦で，$\mathfrak m_A\Lambda=\mathfrak m$ であり，
+$A$ が $k$ 上本質的有限型であるようなアルティン局所 $k$-代数 $A$ の
+フィルター余極限である。
+\end{lemma}
+
+\begin{proof}
+$A\to\Lambda$ が平坦なら $A\to\Lambda$ は単射なので，この補題が実際に
+述べているのは，$\Lambda$ がこの種の部分環 $A\subset\Lambda$ の
+有向合併であるということである。$\mathfrak m^n=0$ となる最小の整数を
+$n$ とする。$n$ に関する帰納法で補題を証明する。$n=1$ の場合は，
+体拡大が有限生成体拡大の合併であることから明らかである。
+
+\medskip\noindent
+$\mathfrak m$ を生成する $\lambda_1,\ldots,\lambda_d\in\mathfrak m$ を選ぶ。
+$K$ は $\mathbf{F}_p$ 上形式的に滑らかなので（《代数》補題
+\ref{algebra-lemma-formally-smooth-extensions-easy} を参照），商写像
+$\Lambda\to K$ の切断となる環準同型 $\sigma:K\to\Lambda$ を取れる。
+一般には $\sigma$ は $k$-代数準同型{\bf ではない}。
+$\sigma$ が与えられたとき，
+$$
+\Psi_\sigma : K[x_1, \ldots, x_d] \longrightarrow \Lambda
+$$
+を，$K$ の元には $\sigma$ を用い，$x_i$ を $\lambda_i$ へ送ることで定める。
+次を主張する。$\sigma:K\to\Lambda$ と，$k$ 上有限生成な部分体
+$k\subset F\subset K$ であって，$\Lambda$ における $k$ の像が
+$\Psi_\sigma(F[x_1,\ldots,x_d])$ に含まれるものが存在する。
+
+\medskip\noindent
+$\mathfrak m^n=0$ となる最小の整数 $n$ に関する帰納法でこの主張を証明する。
+$n=1$ の場合は明らかである。$n>1$ なら
+$I=\mathfrak m^{n-1}$ および $\Lambda'=\Lambda/I$ と置く。
+帰納法により，$\sigma':K\to\Lambda'$ と $k$ 上有限生成な
+$k\subset F'\subset K$ が与えられ，$k\to\Lambda\to\Lambda'$ の像が
+$A'=\Psi_{\sigma'}(F'[x_1,\ldots,x_d])$ に含まれると仮定してよい。
+誘導される写像を $\tau':k\to A'$ と書く。
+$\sigma'$ の持ち上げ $\sigma:K\to\Lambda$ を選ぶ
+（これは先に述べた $K/\mathbf{F}_p$ の形式的滑らかさにより可能である）。
+後で用いるため，ある導分 $D:K\to I$ に対して $\sigma$ を
+$\sigma+D$ に変更できることに注意する。
+$A=F[x_1,\ldots,x_d]/(x_1,\ldots,x_d)^n$ と置く。
+すると $\Psi_\sigma$ は環準同型 $\Psi_\sigma:A\to\Lambda$ を誘導する。
+これと商写像 $\Lambda\to\Lambda'$ との合成は，冪零核をもつ全射
+$A\to A'$ を誘導する。$\tau'$ の持ち上げ $\tau:k\to A$ を選ぶ
+（$k/\mathbf{F}_p$ が形式的に滑らかなので可能である）。
+こうして二つの写像 $k\to\Lambda$，すなわち
+$\Psi_\sigma\circ\tau:k\to\Lambda$ と所与の写像 $i:k\to\Lambda$ を得る。
+これらの写像は $I$ を法として一致するので，その差は導分
+$\theta=i-\Psi_\sigma\circ\tau:k\to I$ である。
+$\sigma$ を $\sigma+D$ に変更すると，$\theta$ は
+$\theta-D|_k$ に変わることに注意する。
+
+\medskip\noindent
+$\text{d}y_j$ が $\Omega_{k/\mathbf{F}_p}$ の基底をなすような
+$k$ の元の集合 $\{y_j\}_{j\in J}$ を選ぶ。
+$\mathbf{F}_p\subset k\subset K$ に対する Jacobi--Zariski 列は
+$$
+0 \to H_1(L_{K/k}) \to \Omega_{k/\mathbf{F}_p} \otimes K \to
+\Omega_{K/\mathbf{F}_p} \to \Omega_{K/k} \to 0
+$$
+である。$\dim H_1(L_{K/k})<\infty$ なので，最初の写像の像が
+$\bigoplus_{j\in J_0}K\text{d}y_j$ に含まれるような有限部分集合
+$J_0\subset J$ を取れる。したがって，$j\in J\setminus J_0$ に対する
+元 $\text{d}y_j$ は $\Omega_{K/\mathbf{F}_p}$ の $K$-線形独立な元へ写る。
+ゆえに $\theta-D|_k=\xi\circ\text{d}$ となる導分 $D:K\to I$ を選べる。
+ここで $\xi$ は合成
+$$
+\Omega_{k/\mathbf{F}_p} = \bigoplus\nolimits_{j \in J} k \text{d}y_j
+\longrightarrow \bigoplus\nolimits_{j \in J_0} k \text{d}y_j
+\longrightarrow I
+$$
+である。$j\in J_0$ に対して $f_j=\xi(\text{d}y_j)\in I$ と置く。
+上のように $\sigma$ を $\sigma+D$ に変更する。このとき，$a\in k$ に対し，
+$\Omega_{k/\mathbf{F}_p}$ において $\text{d}a=\sum a_j\text{d}y_j$ と書けば，
+$\theta(a)=\sum_{j\in J_0}a_jf_j$ である。$I$ は，
+$\lambda_1,\ldots,\lambda_d$ に関する全次数
+$|E|=\sum e_i=n-1$ の単項式
+$\lambda^E=\lambda_1^{e_1}\ldots\lambda_d^{e_d}$ で生成されることに注意する。
+$c_{j,E}\in K$ を用いて $f_j=\sum_Ec_{j,E}\lambda^E$ と書く。
+$F'$ を $F=F'(c_{j,E})$ で置き換えると，主張が成り立つ。
+
+\medskip\noindent
+主張のとおりに $\sigma$ と $F$ を選ぶ。$\Psi_\sigma$ の核は有限個の多項式
+$g_1,\ldots,g_t\in K[x_1,\ldots,x_d]$ で生成される。有限個の元を添加して
+$F$ を拡大すれば，それらの係数は $F$ に属すると仮定してよい。
+この場合，写像
+$A = F[x_1, \ldots, x_d]/(g_1, \ldots, g_t) \to
+K[x_1, \ldots, x_d]/(g_1, \ldots, g_t) = \Lambda$
+が平坦であることは明らかである。主張により $A$ は $\Lambda$ の
+$k$-部分代数である。$K$ は部分体 $F$ たちのフィルター合併なので，
+$\Lambda$ がこれらの代数のフィルター余極限であることも明らかである。
+最後に，《代数》補題
+\ref{algebra-lemma-essentially-of-finite-type-into-artinian-local}
+により，これらの代数は $k$ 上本質的有限型である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-solution-modulo}
+$k$ を標数 $p>0$ の体とする。
+$\Lambda$ をネーターかつ幾何学的に正則な $k$-代数とする。
+$\mathfrak q\subset\Lambda$ を素イデアルとする。$n\geq1$ を整数とし，
+$E\subset\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ を
+有限部分集合とする。このとき，次の性質をもつ $m\geq0$ と
+$\varphi:k[y_1,\ldots,y_m]\to\Lambda$ が存在する。
+\begin{enumerate}
+\item $\mathfrak p=\varphi^{-1}(\mathfrak q)$ と置くと，
+$\mathfrak q\Lambda_\mathfrak q = \mathfrak p \Lambda_\mathfrak q$
+であり，$k[y_1,\ldots,y_m]_\mathfrak p\to\Lambda_\mathfrak q$ は平坦である。
+\item 局所アルティン環の準同型による因子分解
+$$
+k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p
+\to D \to
+\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+$$
+があり，最初の矢印は本質的に滑らかで，二番目は平坦である。
+\item $\mathfrak q^n\Lambda_\mathfrak q$ を法として $E$ は $D$ に含まれる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\bar\Lambda=\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ と置く。
+《代数詳論》命題
+\ref{more-algebra-proposition-characterization-geometrically-regular}
+により $\dim H_1(L_{\kappa(\mathfrak q)/k})<\infty$ であることに注意する。
+$E$ を含む $A\subset\bar\Lambda$ を，$A$ が局所アルティン環かつ
+$k$ 上本質的有限型で，写像 $A\to\bar\Lambda$ が平坦であり，
+$\mathfrak m_A$ が $\bar\Lambda$ の極大イデアルを生成するように選ぶ。
+補題 \ref{smoothing-lemma-helper} を参照せよ。剰余体を
+$F=A/\mathfrak m_A$ と書けば $k\subset F\subset K$ である。
+$\bar\Lambda$ において $A$ の元へ写り，さらに
+$\text{d}\lambda_1,\ldots,\text{d}\lambda_t$ の像が $\Omega_{F/k}$ の
+基底をなすような $\lambda_1,\ldots,\lambda_t\in\Lambda$ を選ぶ。
+$y_j$ を $\lambda_j$ へ送る写像
+$\varphi':k[y_1,\ldots,y_t]\to\Lambda$ を考える。
+$\mathfrak p'=(\varphi')^{-1}(\mathfrak q)$ と置く。《代数詳論》補題
+\ref{more-algebra-lemma-geometrically-regular-over-field}
+により，環準同型
+$k[y_1,\ldots,y_t]_{\mathfrak p'}\to\Lambda_\mathfrak q$ は平坦であり，
+$\Lambda_\mathfrak q/\mathfrak p'\Lambda_\mathfrak q$ は正則である。
+したがって，$A\subset\bar\Lambda$ の中へ写り，さらに
+$\Lambda_\mathfrak q/\mathfrak p'\Lambda_\mathfrak q$ の正則パラメータ系へ
+写る元 $\lambda_{t+1},\ldots,\lambda_m\in\Lambda$ を選べる。
+こうして，性質 (1) をもち，かつ
+$k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p
+\to \bar\Lambda$
+が $A$ を経由するような $\varphi:k[y_1,\ldots,y_m]\to\Lambda$ を得る。
+したがって，
+$k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p
+\to A$
+は《代数》補題 \ref{algebra-lemma-flatness-descends-more-general} により平坦である。
+構成により剰余体拡大 $F/\kappa(\mathfrak p)$ は有限生成で，
+$\Omega_{F/\kappa(\mathfrak p)}=0$ である。したがって《代数詳論》補題
+\ref{more-algebra-lemma-cartier-equality} により有限分離拡大である。
+ゆえに
+$k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p
+\to A$
+は《代数》補題
+\ref{algebra-lemma-essentially-of-finite-type-into-artinian-local} により有限である。
+最後に，《代数》補題 \ref{algebra-lemma-characterize-etale} により
+これはエタールである。エタール環準同型はもちろん本質的に滑らかなので，
+目的を達した。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-enlarge-solution-modulo}
+$\varphi:k[y_1,\ldots,y_m]\to\Lambda$，$n$，$\mathfrak q$，
+$\mathfrak p$，および
+$$
+k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n \to
+D \to \Lambda_\mathfrak q/\mathfrak q^n \Lambda_\mathfrak q
+$$
+は補題 \ref{smoothing-lemma-solution-modulo} のとおりとする。このとき，任意の
+$\lambda\in\Lambda\setminus\mathfrak q$ に対し，整数 $q>0$ と因子分解
+$$
+k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n \to
+D \to D' \to \Lambda_\mathfrak q/\mathfrak q^n \Lambda_\mathfrak q
+$$
+であって，$D\to D'$ が局所アルティン環の間の本質的に滑らかな写像で，
+最後の矢印が平坦であり，$\lambda^q$ が $D'$ に属するものが存在する。
+\end{lemma}
+
+\begin{proof}
+$\bar\Lambda=\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ と置く。
+$\bar\lambda$ を $\bar\Lambda$ における $\lambda$ の像とし，
+$\alpha\in\kappa(\mathfrak q)$ を剰余体における $\lambda$ の像とする。
+$k\subset F\subset\kappa(\mathfrak q)$ を $D$ の剰余体とする。
+$\alpha\in F$ なら，$x\bar\lambda=1\bmod\mathfrak q$ となる
+$x\in D$ を取れる。したがって $q$ が $p$ で割り切れるなら，
+$(x\bar\lambda)^q=1\bmod(\mathfrak q)^q$ である。ゆえに
+$\bar\lambda^q$ は $D$ に属する。$\alpha$ が $F$ 上超越的なら，
+$D$ と $\bar\lambda$ が生成する部分環を
+$\mathfrak m=D[\bar\lambda]\cap\mathfrak q\bar\Lambda$ で局所化した
+$D'=(D[\bar\lambda])_\mathfrak m$ を取れる。この場合
+$D[\bar\lambda]$ は実際に $D$ 上の多項式代数なので，これでよい。
+最後に，$\lambda\bmod\mathfrak q$ が $F$ 上代数的なら，
+$\alpha^q$ が $F$ 上分離代数的となる $p$ の冪 $q$ を取れる。
+《体》\ref{fields-section-algebraic} 節を参照せよ。
+$D$ と $\bar\Lambda$ はヘンゼル局所環であることに注意する
+（《代数》補題 \ref{algebra-lemma-local-dimension-zero-henselian}）。
+$D\to D'$ を，剰余体拡大が $F(\alpha^q)/F$ である有限エタール拡大とする
+（《代数》補題 \ref{algebra-lemma-henselian-cat-finite-etale}）。
+$\bar\Lambda$ はヘンゼルで，$F(\alpha^q)$ はその剰余体に含まれるので，
+因子分解 $D'\to\bar\Lambda$ を取れる。議論の最初の部分により，
+ある $q'>0$ に対して $\bar\lambda^{qq'}\in D'$ である。
+\end{proof}
+
+\begin{lemma}
+\label{smoothing-lemma-resolve-general}
+$k\to A\to\Lambda\supset\mathfrak q$ は状況 \ref{smoothing-situation-local} の
+とおりであり，次を満たすとする。
+\begin{enumerate}
+\item $k$ は標数 $p>0$ の体である。
+\item $\Lambda$ はネーター環であり，$k$ 上幾何学的に正則である。
+\item $\mathfrak q$ は $\mathfrak h_A$ 上極小である。
+\end{enumerate}
+このとき $k\to A\to\Lambda\supset\mathfrak q$ は解消可能である。
+\end{lemma}
+
+\begin{proof}
+次の手順を記した順に行うことで補題を証明する。
+各手順の正当性は後で説明する。
+\begin{enumerate}
+\item
+\label{smoothing-item-power}
+次を満たす整数 $N>0$ を選ぶ。
+$\mathfrak q^N\Lambda_\mathfrak q \subset H_{A/k}\Lambda_\mathfrak q$.
+\item
+\label{smoothing-item-generators}
+イデアル $H_{A/R}$ の生成元 $a_1,\ldots,a_t\in A$ を選ぶ。
+\item
+\label{smoothing-item-dimension}
+$d=\dim(\Lambda_\mathfrak q)$ と置く。
+\item
+\label{smoothing-item-standardizer}
+$B=A[x_1,\ldots,x_d,z_{ij}]/(x_i^{2N}-\sum z_{ij}a_j)$ と置く。
+\item
+\label{smoothing-item-elkik}
+$B$ を $k[x_1,\ldots,x_d]$-代数とみなし，$B\to C$ を
+補題 \ref{smoothing-lemma-improve-presentation} のとおりに取る。
+切断 $C\to B$ も得られる。
+\item
+\label{smoothing-item-strictly-standard}
+各 $x_i^c$ が $k[x_1,\ldots,x_d]$ 上 $C$ において厳密標準となる
+$c>0$ を選ぶ。
+\item
+\label{smoothing-item-set-n}
+$n=N+dc$ および $e=8c$ と置く。
+\item
+\label{smoothing-item-set-E}
+$E\subset\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ を，
+$k$-代数としての $A$ の生成元たちの像とする。
+\item
+\label{smoothing-item-NP}
+整数 $m$，$k$-代数準同型
+$\varphi:k[y_1,\ldots,y_m]\to\Lambda$，および局所アルティン環による因子分解
+$$
+k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p
+\to D \to
+\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+$$
+を選ぶ。ここで最初の矢印は本質的に滑らか，二番目は平坦であり，
+$E$ は $D$ に含まれる。また $\mathfrak p=\varphi^{-1}(\mathfrak q)$ とすると，
+写像 $k[y_1,\ldots,y_m]_\mathfrak p\to\Lambda_\mathfrak q$ は平坦で，
+$\mathfrak p\Lambda_\mathfrak q=\mathfrak q\Lambda_\mathfrak q$ である。
+\item
+\label{smoothing-item-choose-pii}
+$k[y_1,\ldots,y_m]_\mathfrak p$ の正則パラメータ系へ写る
+$\pi_1,\ldots,\pi_d\in\mathfrak p$ を選ぶ。
+\item
+\label{smoothing-item-set-R}
+$R=k[y_1,\ldots,y_m,t_1,\ldots,t_m]$ および $\gamma_i=\pi_it_i$ と置く。
+\item
+\label{smoothing-item-modify-pii}
+必要なら $\pi_i$ の選び方を変更し，$i=1,\ldots,d$ に対して
+$$
+\text{Ann}_{R/(\gamma_1^e, \ldots, \gamma_{i - 1}^e)R}(\gamma_i)
+=
+\text{Ann}_{R/(\gamma_1^e, \ldots, \gamma_{i - 1}^e)R}(\gamma_i^2)
+$$
+が成り立つようにする。
+\item
+\label{smoothing-item-choose-deltai}
+元 $\delta_1,\ldots,\delta_d\in\Lambda$，$\delta_i\notin\mathfrak q$ と因子分解
+$D \to D' \to \Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$
+が存在する。ここで $D'$ は局所アルティン環，$D\to D'$ は本質的に滑らか，
+$D'\to\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ は平坦であり，
+$\pi_i'=\delta_i\pi_i$ と置くと，$i=1,\ldots,d$ に対して次が成り立つ。
+\begin{enumerate}
+\item $\Lambda$ において $(\pi_i')^{2N}=\sum a_j\lambda_{ij}$ であり，
+$\lambda_{ij}\bmod\mathfrak q^n\Lambda_\mathfrak q$ は $D'$ の元である。
+\item $\text{Ann}_{\Lambda/({\pi'}_1^e, \ldots, {\pi'}_{i - 1}^e)}({\pi'}_i) =
+\text{Ann}_{\Lambda/({\pi'}_1^e, \ldots, {\pi'}_{i - 1}^e)}({\pi'}_i^2)$。
+\item $\delta_i\bmod\mathfrak q^n\Lambda_\mathfrak q$ は $D'$ の元である。
+\end{enumerate}
+\item
+\label{smoothing-item-map-B-Lambda}
+$x_i$ を $\pi_i'$ へ，$z_{ij}$ を上で得た $\lambda_{ij}$ へ送ることで
+$B\to\Lambda$ を定める。$B\to\Lambda$ とレトラクション $C\to B$ を
+合成して $C\to\Lambda$ を定める。
+\item
+\label{smoothing-item-set-map-R}
+$k[y_1,\ldots,y_m]$ 上では $\varphi$ を用い，$t_i$ を $\delta_i$ へ
+送ることで $R\to\Lambda$ を定める。さらに，$x_i$ を
+$\gamma_i=\pi_it_i$ へ送る写像
+$$
+k[x_1, \ldots, x_d]
+\longrightarrow
+R = k[y_1, \ldots, y_m, t_1, \ldots, t_d]
+$$
+を導入する。
+\item
+\label{smoothing-item-first-solve}
+次を解消すれば十分である。
+$$
+R
+\to
+C \otimes_{k[x_1, \ldots, x_d]} R
+\to
+\Lambda \supset \mathfrak q
+$$
+\item
+\label{smoothing-item-set-I}
+$I=(\gamma_1^e,\ldots,\gamma_d^e)\subset R$ と置く。
+\item
+\label{smoothing-item-second-resolve}
+次を解消すれば十分である。
+$$
+R/I
+\to
+C \otimes_{k[x_1, \ldots, x_d]} R/I
+\to
+\Lambda/I\Lambda \supset \mathfrak q/I\Lambda
+$$
+\item
+\label{smoothing-item-set-r}
+$\mathfrak q$ の逆像を
+$\mathfrak r\subset R=k[y_1,\ldots,y_m,t_1,\ldots,t_d]$ と書く。
+\item
+\label{smoothing-item-third-resolve}
+次を解消すれば十分である。
+$$
+(R/I)_\mathfrak r \to
+C \otimes_{k[x_1, \ldots, x_d]} (R/I)_\mathfrak r \to
+\Lambda_\mathfrak q/I\Lambda_\mathfrak q
+\supset
+\mathfrak q\Lambda_\mathfrak q/I\Lambda_\mathfrak q
+$$
+\item
+\label{smoothing-item-fourth-resolve}
+$k[y_1,\ldots,y_m]$ において $J=(\pi_1^e,\ldots,\pi_d^e)$ と置く。
+\item
+\label{smoothing-item-fifth-resolve}
+次を解消すれば十分である。
+$$
+(R/JR)_\mathfrak p \to
+C \otimes_{k[x_1, \ldots, x_d]} (R/JR)_\mathfrak p \to
+\Lambda_\mathfrak q/J\Lambda_\mathfrak q
+\supset
+\mathfrak q\Lambda_\mathfrak q/J\Lambda_\mathfrak q
+$$
+\item
+\label{smoothing-item-sixth-resolve}
+次を解消すれば十分である。
+$$
+(R/\mathfrak p^nR)_\mathfrak p \to
+C \otimes_{k[x_1, \ldots, x_d]} (R/\mathfrak p^nR)_\mathfrak p \to
+\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+\supset
+\mathfrak q\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+$$
+\item
+\label{smoothing-item-seventh-resolve}
+次を解消すれば十分である。
+$$
+(R/\mathfrak p^nR)_\mathfrak p \to
+B \otimes_{k[x_1, \ldots, x_d]} (R/\mathfrak p^nR)_\mathfrak p \to
+\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+\supset
+\mathfrak q\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+$$
+\item
+\label{smoothing-item-eighth-resolve}
+環 $D'[t_1,\ldots,t_d]$ に，所与の写像
+$k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p
+\to D'$
+と $t_i$ を $t_i$ へ送ることによって
+$R_\mathfrak p/\mathfrak p^nR_\mathfrak p$-代数の構造を入れる。
+次の因子分解を見つければ十分である。
+$$
+B \otimes_{k[x_1, \ldots, x_d]} (R/\mathfrak p^nR)_\mathfrak p
+\to D'[t_1, \ldots, t_d] \to
+\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q
+$$
+ここで二番目の矢印は $t_i$ を $\delta_i$ へ送り，所与の準同型
+$D'\to\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ を誘導する。
+\item
+\label{smoothing-item-done}
+このような因子分解は，上の $D'$ の選び方により存在する。
+\end{enumerate}
+以下では各手順の正当性を示す。ただし，記号を導入するだけの手順については
+説明を省く。
+
+\medskip\noindent
+(\ref{smoothing-item-power}) について。$\mathfrak q$ は
+$\mathfrak h_A=\sqrt{H_{A/k}\Lambda}$ 上極小なので，これは可能である。
+
+\medskip\noindent
+(\ref{smoothing-item-strictly-standard}) について。$A_{a_i}$ は $k$ 上滑らかである。
+したがって，$A_{a_j}[x_1,\ldots,x_d]$ 上の多項式代数と同型な $B_{a_j}$ は
+$k[x_1,\ldots,x_d]$ 上滑らかである。ゆえに $B_{x_i}$ は
+$k[x_1,\ldots,x_d]$ 上滑らかである。補題
+\ref{smoothing-lemma-improve-presentation} により，$C_{x_i}$ は
+$k[x_1,\ldots,x_d]$ 上滑らかで，その微分加群は有限自由である。
+したがって補題 \ref{smoothing-lemma-compare-standard} により，$x_i$ のある冪は
+$k[x_1,\ldots,x_n]$ 上 $C$ において厳密標準である。
+
+\medskip\noindent
+(\ref{smoothing-item-NP}) について。補題 \ref{smoothing-lemma-solution-modulo} を適用すれば従う。
+
+\medskip\noindent
+(\ref{smoothing-item-choose-pii}) について。構成により
+$k[y_1,\ldots,y_m]_\mathfrak p\to\Lambda_\mathfrak q$ は平坦で，
+$\mathfrak p\Lambda_\mathfrak q=\mathfrak q\Lambda_\mathfrak q$ である。
+したがって，《代数》補題 \ref{algebra-lemma-dimension-base-fibre-equals-total}
+により $\dim(k[y_1,\ldots,y_m]_\mathfrak p)=d$ である。
+ゆえに，$\Lambda_\mathfrak q$ の正則パラメータ系へ写る
+$\pi_1,\ldots,\pi_d\in\Lambda$ を取れる。
+
+\medskip\noindent
+(\ref{smoothing-item-modify-pii}) について。《代数》補題
+\ref{algebra-lemma-regular-ring-CM} により，列 $\pi_1,\ldots,\pi_d$ の
+任意の置換は $k[y_1,\ldots,y_m]_\mathfrak p$ の正則列である。
+したがって，《代数》補題
+\ref{algebra-lemma-regular-sequence-in-polynomial-ring} により，
+$\gamma_1=\pi_1t_1,\ldots,\gamma_d=\pi_dt_d$ は
+$R_\mathfrak p=k[y_1,\ldots,y_m]_\mathfrak p[t_1,\ldots,t_d]$ の正則列である。
+$S=k[y_1,\ldots,y_m]\setminus\mathfrak p$ と置けば
+$R_\mathfrak p=S^{-1}R$ である。$\pi_i$ に $S$ の元を掛けても，
+$\pi_1,\ldots,\pi_d$ と $\gamma_1,\ldots,\gamma_d$ は正則列のままである。
+ある $t\in\{0,\ldots,d\}$ について，$i=1,\ldots,t$ に対して
+$$
+\text{Ann}_{R/(\gamma_1^e, \ldots, \gamma_{i - 1}^e)R}(\gamma_i)
+=
+\text{Ann}_{R/(\gamma_1^e, \ldots, \gamma_{i - 1}^e)R}(\gamma_i^2)
+$$
+が成り立つと仮定する。《代数》補題
+\ref{algebra-lemma-regular-sequence-powers} により，
+$\gamma_1^e,\ldots,\gamma_t^e,\gamma_{t+1}$ は $S^{-1}R$ の正則列である。
+したがって
+$$
+\text{Ann}_{S^{-1}R/(\gamma_1^e, \ldots, \gamma_{i - 1}^e)}(\gamma_i) =
+\text{Ann}_{S^{-1}R/(\gamma_1^e, \ldots, \gamma_{i - 1}^e)}(\gamma_i^2).
+$$
+よって，補題 \ref{smoothing-lemma-ogoma} により，ある $s\in S$ に対して
+$\pi_{t+1}$ を $s\pi_{t+1}$ で置き換えると，
+$$
+\text{Ann}_{R/(\gamma_1^e, \ldots, \gamma_t^e)R}(\gamma_{t + 1})
+=
+\text{Ann}_{R/(\gamma_1^e, \ldots, \gamma_t^e)R}(\gamma_{t + 1}^2)
+$$
+を得る。$t$ に関する帰納法により，求める列が得られる。
+
+\medskip\noindent
+(\ref{smoothing-item-choose-deltai}) について。$S=\Lambda\setminus\mathfrak q$ と
+置けば $\Lambda_\mathfrak q=S^{-1}\Lambda$ である。
+$\bar\Lambda=\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ と置く。
+$t\in\{0,\ldots,d\}$，$\delta_1,\ldots,\delta_t\in S$，および
+(\ref{smoothing-item-choose-deltai}) のとおりの因子分解
+$D\to D'\to\bar\Lambda$ が与えられ，$i=1,\ldots,t$ に対して
+(a), (b), (c) が成り立つと仮定する。
+(\ref{smoothing-item-power}) により
+$\mathfrak q^N\Lambda_\mathfrak q\subset H_{A/k}\Lambda_\mathfrak q$ なので，
+$\pi_{t+1}^N\in H_{A/k}\Lambda_\mathfrak q$ であり，したがって
+$\pi_{t+1}^N\in H_{A/k}\bar\Lambda$ である。$D'\to\bar\Lambda$ は
+忠実平坦なので，$\pi_{t+1}^N\in H_{A/k}D'$ である。
+《代数》補題 \ref{algebra-lemma-faithfully-flat-universally-injective}
+を参照せよ。$H_{A/k}=(a_1,\ldots,a_t)$ であった。
+$D'$ において $\pi_{t+1}^N=\sum a_jd_j$ と書き，
+$d_j\in D'$ の持ち上げ $c_j\in\Lambda_\mathfrak q$ を選ぶ。このとき
+$\pi_{t+1}^N=\sum c_ja_j+\epsilon$ であり，
+$\epsilon \in \mathfrak q^n\Lambda_\mathfrak q \subset
+\mathfrak q^{n - N}H_{A/k}\Lambda_\mathfrak q$.
+ある $c'_j\in\mathfrak q^{n-N}\Lambda_\mathfrak q$ に対して
+$\epsilon=\sum a_jc'_j$ と書く。
+したがって
+$\pi_{t+1}^{2N}=\sum(\pi_{t+1}^Nc_j+\pi_{t+1}^Nc'_j)a_j$ である。
+$\pi_{t+1}^Nc'_j$ は $\bar\Lambda$ の零へ写ることに注意する。
+この自明だが重要な観察により，後で (a) が成り立つことが保証される。
+ここで，一方では
+$\pi_{t + 1}^N c_j + \pi_{t + 1}^N c'_j = \mu_{t + 1j}/s^{2N}$
+が $S^{-1}\Lambda$ において成り立ち，他方では
+$(s \pi_{t + 1})^{2N} = \sum \mu_{t + 1j}a_j$
+が $\Lambda$ において成り立つような $s\in S$ と
+$\mu_{t+1j}\in\Lambda$ を選ぶ（細部は省略する）。
+さらに $s$ をその冪で置き換え，$s$ が $D'$ の元へ写るように
+$D'$ を拡大してよい。この選び方のもとで $\mu_{t+1j}$ は
+$D'$ の元 $s^{2N}d_j$ へ写る。$\varphi$ の選び方により，
+$\pi_1,\ldots,\pi_d$ は $S^{-1}\Lambda$ の正則パラメータ列である。
+したがって，《代数》補題 \ref{algebra-lemma-regular-ring-CM} により，
+$\pi_1,\ldots,\pi_d$ は $\Lambda_\mathfrak q$ の正則列をなす。
+これより，《代数》補題 \ref{algebra-lemma-regular-sequence-powers} により，
+${\pi'}_1^e,\ldots,{\pi'}_t^e,s\pi_{t+1}$ は $S^{-1}\Lambda$ の正則列である。
+ゆえに
+$$
+\text{Ann}_{S^{-1}\Lambda/({\pi'}_1^e, \ldots, {\pi'}_t^e)}(s\pi_{t + 1}) =
+\text{Ann}_{S^{-1}\Lambda/({\pi'}_1^e, \ldots, {\pi'}_t^e)}((s\pi_{t + 1})^2).
+$$
+したがって補題 \ref{smoothing-lemma-ogoma} を適用し，任意の $q>0$ に対して
+$$
+\text{Ann}_{\Lambda/({\pi'}_1^e, \ldots, {\pi'}_t^e)}((s')^qs\pi_{t + 1})
+=
+\text{Ann}_{\Lambda/({\pi'}_1^e, \ldots, {\pi'}_t^e)}(((s')^qs\pi_{t + 1})^2).
+$$
+が成り立つ $s'\in S$ を取れる。補題
+\ref{smoothing-lemma-enlarge-solution-modulo} により，$(s')^q$ が $D'$ の元へ
+写るように $q$ を選び，$D'$ を拡大できる。
+$\delta_{t+1}=(s')^qs$ と置けば，$i=1,\ldots,t+1$ に対して
+(a), (b), (c) が成り立つ。(a) については
+$\lambda_{t+1j}=(s')^{2Nq}\mu_{t+1j}$ とすればよい。
+$t$ に関する帰納法により目的を達する。
+
+\medskip\noindent
+(\ref{smoothing-item-first-solve}) について。構成により，
+$H_{(C\otimes_{k[x_1,\ldots,x_d]}R)/R}\Lambda$ の根基は
+$\mathfrak h_A$ を含む。実際，元 $a_j\in H_{A/k}$ は
+$H_{B/k[x_1,\ldots,x_n]}$ の元へ，したがって
+$H_{C/k[x_1,\ldots,x_n]}$ の元へ写り，ゆえに $a_j\otimes1$ は
+$H_{C\otimes_{k[x_1,\ldots,x_d]}R/R}$ の元へ写る。さらに，
+$C\otimes_{k[x_1,\ldots,x_n]}R\to T\to\Lambda$ が
+$$
+R
+\to
+C \otimes_{k[x_1, \ldots, x_d]} R
+\to
+\Lambda \supset \mathfrak q
+$$
+の解消であるとする。$R$ は $k$ 上滑らかなので
+$H_{T/R}\subset H_{T/k}$ である。したがって $T$ は元の状況
+$k\to A\to\Lambda\supset\mathfrak q$ の解消でもある。
+
+\medskip\noindent
+(\ref{smoothing-item-second-resolve}) について。補題 \ref{smoothing-lemma-lift-solution} を
+$R \to C \otimes_{k[x_1, \ldots, x_d]} R
+\to\Lambda\supset\mathfrak q$ と元の列
+$\gamma_1^c,\ldots,\gamma_d^c$ に適用すれば従う。
+$x_i^c$ は $k[x_1,\ldots,x_d]$ 上 $C$ において厳密標準なので，
+補題 \ref{smoothing-lemma-strictly-standard-base-change} により，
+$\gamma_i^c$ は $R$ 上 $C\otimes_{k[x_1,\ldots,x_d]}R$ において
+厳密標準であることに注意する。補題 \ref{smoothing-lemma-lift-solution} の
+もう一つの仮定は，手順 (\ref{smoothing-item-modify-pii}) と
+(\ref{smoothing-item-choose-deltai}) により成り立つ。
+
+\medskip\noindent
+(\ref{smoothing-item-third-resolve}) について。
+補題 \ref{smoothing-lemma-delocalize-height-zero} を
+(\ref{smoothing-item-second-resolve}) の状況に適用する。以下の議論では終域の環は
+局所アルティン環なので，始域の環上滑らかな代数 $T$ による
+因子分解を求めることになる。
+
+\medskip\noindent
+(\ref{smoothing-item-fifth-resolve}) について。
+$C\otimes_{k[x_1,\ldots,x_d]}(R/JR)_\mathfrak p\to
+T\to\Lambda_\mathfrak q/J\Lambda_\mathfrak q$ が
+$$
+(R/JR)_\mathfrak p \to
+C \otimes_{k[x_1, \ldots, x_d]} (R/JR)_\mathfrak p \to
+\Lambda_\mathfrak q/J\Lambda_\mathfrak q
+\supset
+\mathfrak q\Lambda_\mathfrak q/J\Lambda_\mathfrak q
+$$
+の解消であると仮定する。このとき
+$C\otimes_{k[x_1,\ldots,x_d]}(R/I)_\mathfrak r\to T_\mathfrak r\to
+\Lambda_\mathfrak q/I\Lambda_\mathfrak q$ は
+(\ref{smoothing-item-third-resolve}) の状況の解消である。
+
+\medskip\noindent
+(\ref{smoothing-item-sixth-resolve}) について。$n=N+dc$ は十分大きいので，
+$\mathfrak p^nk[y_1,\ldots,y_m]_\mathfrak p\subset J_\mathfrak p$ および
+$\mathfrak q^n\Lambda_\mathfrak q\subset J\Lambda_\mathfrak q$ である。
+したがって，
+$C \otimes_{k[x_1, \ldots, x_d]} (R/\mathfrak p^nR)_\mathfrak p \to
+T \to \Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$
+が (\ref{smoothing-item-fifth-resolve} の解消であれば，$T/JT$ を
+(\ref{smoothing-item-sixth-resolve}) の解消として取れる。
+
+\medskip\noindent
+(\ref{smoothing-item-seventh-resolve}) について。$R$-代数の圏において切断
+$C\to B$ があるので成り立つ。
+
+\medskip\noindent
+(\ref{smoothing-item-eighth-resolve}) について。$D'$ は局所アルティン環
+$k[y_1, \ldots, y_m]_\mathfrak p/\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p$
+上本質的に滑らかであり，かつ
+$$
+R_\mathfrak p/\mathfrak p^nR_\mathfrak p =
+k[y_1, \ldots, y_m]_\mathfrak p/
+\mathfrak p^n k[y_1, \ldots, y_m]_\mathfrak p[t_1, \ldots, t_d].
+$$
+だから成り立つ。実際，$D'[t_1,\ldots,t_d]$ は滑らかな
+$R_\mathfrak p/\mathfrak p^nR_\mathfrak p$-代数のフィルター余極限であり，
+$B\otimes_{k[x_1,\ldots,x_d]}(R_\mathfrak p/\mathfrak p^nR_\mathfrak p)$
+はそのうちの一つを経由する。
+
+\medskip\noindent
+(\ref{smoothing-item-done}) について。証明の最後の工夫は，$x_i$ を $D'$ における
+$\pi_i'$ の像へ，$z_{ij}$ を $D'$ における $\lambda_{ij}$ の像へ送る
+写像 $B\to D'$ をそのまま使うことはできないという点である。実際，図式
+$$
+\xymatrix{
+B \ar[r] & D'[t_1, \ldots, t_d] \\
+k[x_1, \ldots, x_d] \ar[r] \ar[u] &
+R_\mathfrak p/\mathfrak p^nR_\mathfrak p \ar[u]
+}
+$$
+を可換にし，合成
+$B\to D'[t_1,\ldots,t_d]\to
+\Lambda_\mathfrak q/\mathfrak q^n\Lambda_\mathfrak q$ を
+(\ref{smoothing-item-map-B-Lambda}) の写像にしなければならない。
+そのためには $x_i$ を $D'[t_1,\ldots,t_d]$ における
+$\pi_it_i$ の像へ送る必要がある。そこで $z_{ij}$ を
+$D'[t_1,\ldots,t_d]$ における
+$\lambda_{ij}t_i^{2N}/\delta_i^{2N}$ の像へ送れば，すべて明らかである。
+\end{proof}
+
+
+
+
+
+
+
+\section{主定理}
+\label{smoothing-section-main}
+
+\noindent
+本節でこれまでの議論をまとめる。
+
+\begin{theorem}[Popescu]
+\label{smoothing-theorem-popescu}
+ネーター環の間の任意の正則準同型は，滑らかな環準同型の
+フィルター余極限である。
+\end{theorem}
+
+\begin{proof}
+補題 \ref{smoothing-lemma-reduce-to-field} により，$\Lambda$ がネーター環で
+$k$ 上幾何学的に正則である $k\to\Lambda$ について証明すれば十分である。
+$k\to A\to\Lambda$ を因子分解とし，$A$ は有限型 $k$-代数であるとする。
+$B$ が有限型で $\mathfrak h_B=\Lambda$ を満たす因子分解
+$A\to B\to\Lambda$ を構成すれば十分である。補題
+\ref{smoothing-lemma-final-solve} を参照せよ。したがってイデアル
+$\mathfrak h_A$ に関するネーター帰納法を用いてよい。
+$\mathfrak q\supset\mathfrak h_A$ であり，$\mathfrak h_A$ 上極小である
+素イデアル $\mathfrak q$ を選ぶ。ここで
+$k\to A\to\Lambda\supset\mathfrak q$ を解消すれば十分である
+（状況 \ref{smoothing-situation-local} の直後の定義を参照）。
+$k$ の標数が零なら補題 \ref{smoothing-lemma-resolve-special} から従う。
+$k$ の標数が $p>0$ なら補題 \ref{smoothing-lemma-resolve-general} から従う。
+\end{proof}
+
+
+
+
+\section{G-環の近似性質}
+\label{smoothing-section-approximation-G-rings}
+
+\noindent
+$R$ をネーター局所環とする。この場合，$R$ が G-環であることと，
+環準同型 $R\to R^\wedge$ が正則であることは同値である。
+《代数詳論》補題 \ref{more-algebra-lemma-check-G-ring-maximal-ideals}
+を参照せよ。また，$R$ のヘンゼル化 $R^h$ と狭義ヘンゼル化 $R^{sh}$ は
+G-環である。《代数詳論》補題
+\ref{more-algebra-lemma-henselization-G-ring} を参照せよ。
+さらに，体，完備局所環，$\mathbf{Z}$，または標数零の Dedekind 環上
+本質的有限型な任意の代数は G-環である。《代数詳論》命題
+\ref{more-algebra-proposition-ubiquity-G-ring} を参照せよ。
+したがって以下の結果を適用できる環は豊富にある。
+
+\medskip\noindent
+$R$ を環とし，$f_1,\ldots,f_m\in R[x_1,\ldots,x_n]$ とする。
+$S$ を $R$-代数とする。この状況で，ベクトル
+$(a_1,\ldots,a_n)\in S^n$ が {\it $S$ における解}であるとは，
+$$ 
+f_j(a_1, \ldots, a_n) = 0 \text{（} S\text{ において）}, \text{すべての }
+j = 1, \ldots, m \text{ に対して}
+$$
+が成り立つこととする。代数幾何学における重要な問題の一つは，
+多項式方程式系がいつ解をもつかを調べることである。
+次の定理は，ネーター局所環の完備化に解が存在すれば，その環の
+ヘンゼル化にも解が存在することを示すにはしばしば十分であると述べる。
+
+\begin{theorem}
+\label{smoothing-theorem-approximation-property}
+$R$ をネーター局所環とし，
+$f_1,\ldots,f_m\in R[x_1,\ldots,x_n]$ とする。
+$(a_1,\ldots,a_n)\in(R^\wedge)^n$ が $R^\wedge$ における解であるとする。
+$R$ がヘンゼル G-環なら，任意の整数 $N$ に対し，
+$a_i-b_i\in\mathfrak m^NR^\wedge$ を満たす $R$ における解
+$(b_1,\ldots,b_n)\in R^n$ が存在する。
+\end{theorem}
+
+\begin{proof}
+$a_i-c_i\in\mathfrak m^N$ となる元 $c_i\in R$ を選ぶ。
+生成元 $\mathfrak m^N=(d_1,\ldots,d_M)$ を選び，
+$a_i=c_i+\sum a_{i,l}d_l$ と書く。多項式環 $R[x_{i,l}]$ と元
+$$
+g_j = f_j(c_1 + \sum x_{1, l} d_l , \ldots, c_n + \sum x_{n, l} d_{n, l})
+\in R[x_{i, l}]
+$$
+を考える。方程式系 $g_j=0$ は解 $(a_{i,l})$ をもつ。
+$g_j$ が $R$ において解 $(b_{i,l})$ をもつことを示せたとする。
+すると $b_i=c_i+\sum b_{i,l}d_l$ は $f_j=0$ の解であり，
+$\mathfrak m^N$ を法として $a_i$ と合同である。
+したがって，$R^\wedge$ 上で解ければ $R$ 上でも解けることを
+示せば十分である。
+
+\medskip\noindent
+$A\subset R^\wedge$ を $a_1,\ldots,a_n$ が生成する $R$-部分代数とする。
+$R$ は G-環，すなわち $R\to R^\wedge$ は正則であると仮定したので，
+因子分解
+$$
+A \to B \to R^\wedge
+$$
+で，$B$ が $R$ 上滑らかなものが存在する。定理
+\ref{smoothing-theorem-popescu} を参照せよ。剰余体を
+$\kappa=R/\mathfrak m$ と書く。これは $R^\wedge$ の剰余体でもあるので，
+可換図式
+$$
+\xymatrix{
+B \ar[rd] \ar@{..>}[r] & R' \ar@{..>}[d] \\
+R \ar[r] \ar[u] & \kappa
+}
+$$
+を得る。縦の矢印は滑らかなので，《代数詳論》補題
+\ref{more-algebra-lemma-lift-section-smooth-morphism} により，
+同型 $R/\mathfrak m\to R'/\mathfrak mR'$ を誘導するエタール環準同型
+$R\to R'$ と，上の図式を可換にする $R$-代数準同型 $B\to R'$ が存在する。
+$R$ はヘンゼルなので，$R\to R'$ は切断をもつ。《代数》補題
+\ref{algebra-lemma-characterize-henselian} を参照せよ。
+$b_i\in R$ を，環準同型 $A\to B\to R'\to R$ のもとでの $a_i$ の像とする。
+これらはすべて $R$-代数準同型なので，$(b_1,\ldots,b_n)$ は
+$R$ における解である。
+\end{proof}
+
+\noindent
+$(R, \mathfrak m)$ をネーター局所環，$R \to R'$ をエタール環準同型，
+$\mathfrak m' \subset R'$ を $\mathfrak m$ 上にあり
+$\kappa(\mathfrak m) = \kappa(\mathfrak m')$ を満たす極大イデアルとすると，
+包含関係
+$$
+R \subset R_{\mathfrak m'} \subset R^h \subset R^\wedge,
+$$
+が成り立つ。これは《代数》補題
+\ref{algebra-lemma-henselian-functorial-prepare} および《代数詳論》補題
+\ref{more-algebra-lemma-henselization-noetherian} による。
+
+\begin{theorem}
+\label{smoothing-theorem-approximation-property-variant}
+$R$ をネーター局所環とし，
+$f_1, \ldots, f_m \in R[x_1, \ldots, x_n]$ とする。
+$(a_1, \ldots, a_n) \in (R^\wedge)^n$ が解であるとする。
+$R$ が G-環なら，任意の整数 $N$ に対し，次が存在する：
+\begin{enumerate}
+\item エタール環準同型 $R \to R'$，
+\item $\mathfrak m$ 上にある極大イデアル $\mathfrak m' \subset R'$，
+\item $R'$ における解 $(b_1, \ldots, b_n) \in (R')^n$。
+\end{enumerate}
+これらは $\kappa(\mathfrak m) = \kappa(\mathfrak m')$ および
+$a_i - b_i \in (\mathfrak m')^NR^\wedge$ を満たす。
+\end{theorem}
+
+\begin{proof}
+この定理は，定理 \ref{smoothing-theorem-approximation-property} に加えて，
+《代数詳論》補題 \ref{more-algebra-lemma-henselization-G-ring} により
+ヘンゼル化 $R^h$ が G-環であることと，$R^h$ をエタール拡大 $R'$ の
+有向余極限として書くことを用いれば導ける。
+ここでは代わりに，この場合について前の定理の証明を繰り返す。
+
+\medskip\noindent
+$a_i-c_i\in\mathfrak m^N$ を満たす元 $c_i\in R$ を選ぶ。
+生成元 $\mathfrak m^N=(d_1,\ldots,d_M)$ を選び，
+$a_i=c_i+\sum a_{i,l}d_l$ と書く。多項式環 $R[x_{i,l}]$ と元
+$$
+g_j = f_j(c_1 + \sum x_{1, l} d_l , \ldots, c_n + \sum x_{n, l} d_{n, l})
+\in R[x_{i, l}]
+$$
+を考える。方程式系 $g_j=0$ は解 $(a_{i,l})$ をもつ。
+あるエタール環準同型 $R\to R'$ と，
+$\kappa(\mathfrak m)=\kappa(\mathfrak m')$ を満たす極大イデアル
+$\mathfrak m'$ に対して，$g_j$ が $R'$ において解 $(b_{i,l})$ を
+もつことを示せたとする。すると
+$b_i=c_i+\sum b_{i,l}d_l$ は $f_j=0$ の解であり，
+$(\mathfrak m')^N$ を法として $a_i$ と合同である。
+したがって，$R^\wedge$ 上で解ければ，$\mathfrak m$ 上のある素イデアルで
+自明な剰余体拡大を誘導する何らかのエタール環拡大上でも解けることを
+示せば十分である。
+
+\medskip\noindent
+$A\subset R^\wedge$ を $a_1,\ldots,a_n$ が生成する $R$-部分代数とする。
+$R$ は G-環，すなわち $R\to R^\wedge$ は正則であると仮定したので，
+因子分解
+$$
+A \to B \to R^\wedge
+$$
+で，$B$ が $R$ 上滑らかなものが存在する。定理
+\ref{smoothing-theorem-popescu} を参照せよ。剰余体を
+$\kappa=R/\mathfrak m$ と書く。これは $R^\wedge$ の剰余体でもあるので，
+可換図式
+$$
+\xymatrix{
+B \ar[rd] \ar@{..>}[r] & R' \ar@{..>}[d] \\
+R \ar[r] \ar[u] & \kappa
+}
+$$
+を得る。縦の矢印は滑らかなので，《代数詳論》補題
+\ref{more-algebra-lemma-lift-section-smooth-morphism} により，
+同型 $R/\mathfrak m\to R'/\mathfrak mR'$ を誘導するエタール環準同型
+$R\to R'$ と，上の図式を可換にする $R$-代数準同型 $B\to R'$ が存在する。
+$b_i\in R'$ を，環準同型 $A\to B\to R'$ のもとでの $a_i$ の像とする。
+これらはすべて $R$-代数準同型なので，$(b_1,\ldots,b_n)$ は
+$R'$ における解である。
+\end{proof}
+
+\begin{example}
+\label{smoothing-example-describe-henselian}
+$(R,\mathfrak m)$ をネーター局所環とし，そのヘンゼル化を $R^h$ とする。
+完備化の間の準同型 $R^\wedge\to(R^h)^\wedge$ は同型である。
+《代数詳論》補題 \ref{more-algebra-lemma-henselization-noetherian} を参照せよ。
+さらに $R^h$ もネーターである（同所）から，$R^h$ をその完備化の
+部分環とみなせる（完備化は忠実平坦だからである）。このようにして，
+$R^h$ を $R^\wedge$ の部分環と同一視できる。
+
+\medskip\noindent
+$R^\wedge$ のどの元が $R^h$ に属するかを理解してみよう。簡単のため，
+$R$ は分数体 $K$ をもつ整域であると仮定する。明らかに，$R^h$ の任意の元
+$f$ は $R$ 上代数的である。すなわち，$n>0$，$a_n\not=0$ を満たす
+ある $a_i\in R$ に対して
+$a_n f^n+\ldots+a_1f+a_0=0$ という形の方程式が存在する。
+
+\medskip\noindent
+逆に，$f\in R^\wedge$，$n\in\mathbf{N}$，および $a_n\not=0$ を満たす
+$a_0,\ldots,a_n\in R$ があり，
+$a_nf^n+\ldots+a_1f+a_0=0$ であるとする。$R$ が G-環なら，
+任意の $N>0$ に対し，
+$a_ng^n+\ldots+a_1g+a_0=0$ および
+$f-g\in\mathfrak m^NR^\wedge$ を満たす元 $g\in R^h$ が存在する。
+定理 \ref{smoothing-theorem-approximation-property-variant} を参照せよ。
+$N\gg0$ のとき $f=g$ であると結論したい。
+これが成り立たなければ，$R^h$ において $P(T)$ の根 $g$ が無限個見つかる。
+しかし，(1) $R^h\subset R^h\otimes_RK$ であり，
+(2) $R^h\otimes_RK$ は $K$ の有限次体拡大の有限積であるから，
+これは不可能である。実際，$R\to K$ は単射で $R\to R^h$ は平坦なので，
+$R^h\to R^h\otimes_RK$ は単射であり，(2) は《代数詳論》補題
+\ref{more-algebra-lemma-fibres-henselization} から従う。
+
+\medskip\noindent
+結論として，$R$ が分数体 $K$ をもつネーター局所整域かつ G-環なら，
+$R^h\subset R^\wedge$ は $K$ 上代数的な元すべての集合である。
+\end{example}
+
+\noindent
+この節の主定理の別の変形を挙げる。
+
+\begin{lemma}
+\label{smoothing-lemma-approximation-property-variant}
+$R$ をネーター環，$\mathfrak p\subset R$ を素イデアルとし，
+$f_1,\ldots,f_m\in R[x_1,\ldots,x_n]$ とする。
+$(a_1,\ldots,a_n)\in((R_\mathfrak p)^\wedge)^n$ が解であるとする。
+$R_\mathfrak p$ が G-環なら，任意の整数 $N$ に対し，次が存在する：
+\begin{enumerate}
+\item エタール環準同型 $R\to R'$，
+\item $\mathfrak p$ 上にある素イデアル $\mathfrak p'\subset R'$，
+\item $R'$ における解 $(b_1,\ldots,b_n)\in(R')^n$。
+\end{enumerate}
+これらは $\kappa(\mathfrak p)=\kappa(\mathfrak p')$ および
+$a_i-b_i\in(\mathfrak p')^N(R'_{\mathfrak p'})^\wedge$ を満たす。
+\end{lemma}
+
+\begin{proof}
+定理 \ref{smoothing-theorem-approximation-property-variant} により，
+$R_\mathfrak p$ 上エタールなある環 $R''$ における解
+$(b'_1,\ldots,b'_n)$ と，$\mathfrak p$ 上にある素イデアル
+$\mathfrak p''$ で，$\kappa(\mathfrak p)=\kappa(\mathfrak p'')$ および
+$a_i-b'_i\in(\mathfrak p'')^N(R''_{\mathfrak p''})^\wedge$ を満たすものが
+見つかる。あるエタール $R$-代数 $R'$ を用いて
+$R''=R'\otimes_RR_\mathfrak p$ と書ける
+（《代数》補題 \ref{algebra-lemma-etale} を参照）。必要なら $R'$ を
+主局所化で置き換えることにより，$(b'_1,\ldots,b'_n)$ は $R'$ における
+解 $(b_1,\ldots,b_n)$ から来ると仮定できる。
+$\mathfrak p'=R'\cap\mathfrak p''$ とおけば
+$R''_{\mathfrak p''}=R'_{\mathfrak p'}$ であり，証明が完了する。
+\end{proof}
+
+
+
+\section{ヘンゼル対に対する近似}
+\label{smoothing-section-approximation-pairs}
+
+\noindent
+節 \ref{smoothing-section-approximation-G-rings} の議論をヘンゼル対の場合へ
+一般化できる。ヘンゼル対は《代数詳論》節
+\ref{more-algebra-section-henselian-pairs} で定義した。
+
+\begin{lemma}
+\label{smoothing-lemma-henselian-pair}
+\begin{slogan}
+ヘンゼル対に対する近似。
+\end{slogan}
+$(A,I)$ を，$A$ がネーターであるヘンゼル対とする。
+$A^\wedge$ を $A$ の $I$-進完備化とする。次の条件の少なくとも一つが
+成り立つと仮定する：
+\begin{enumerate}
+\item $A\to A^\wedge$ は正則環準同型である，
+\item $A$ はネーター G-環である，または
+\item $(A,I)$ は，$B$ がネーター G-環であるような対 $(B,J)$ の
+ヘンゼル化（《代数詳論》補題 \ref{more-algebra-lemma-henselization}）である。
+\end{enumerate}
+$f_1,\ldots,f_m\in A[x_1,\ldots,x_n]$ および
+$\hat{a}_1,\ldots,\hat{a}_n\in A^\wedge$ が与えられ，
+$j=1,\ldots,m$ に対して
+$f_j(\hat{a}_1,\ldots,\hat{a}_n)=0$ であるとする。このとき任意の
+$N\geq1$ に対し，$\hat{a}_i-a_i\in I^N$ および
+$j=1,\ldots,m$ に対して $f_j(a_1,\ldots,a_n)=0$ を満たす
+$a_1,\ldots,a_n\in A$ が存在する。
+\end{lemma}
+
+\begin{proof}
+《代数詳論》補題 \ref{more-algebra-lemma-henselization-pair-G-ring} により，
+(3) は (2) を含意する。《代数詳論》補題
+\ref{more-algebra-lemma-map-G-ring-to-completion-regular} により，
+(2) は (1) を含意する。したがって，$A\to A^\wedge$ が正則環準同型である
+場合に補題を証明すれば十分である。
+
+\medskip\noindent
+補題の主張における $\hat{a}_1,\ldots,\hat{a}_n$ をとる。
+定理 \ref{smoothing-theorem-popescu} により，$A\to P$ が滑らかで，
+$B$ において $f_j(b_1,\ldots,b_n)=0$ を満たす
+$b_1,\ldots,b_n\in B$ があるような因子分解
+$A\to B\to A^\wedge$ が見つかる。合成を
+$\sigma:B\to A^\wedge\to A/I^N$ と書く。《代数詳論》補題
+\ref{more-algebra-lemma-lift-section-smooth-morphism} により，
+同型 $A/I^N\to A'/I^NA'$ を誘導するエタール環準同型 $A\to A'$ と，
+$\sigma$ を持ち上げる $A$-代数準同型 $\tilde\sigma:B\to A'$ が見つかる。
+$(A,I)$ はヘンゼルなので，$A$-代数準同型 $\chi:A'\to A$ が存在する。
+《代数詳論》補題 \ref{more-algebra-lemma-characterize-henselian-pair} を参照せよ。
+そこで $a_i=\chi(\tilde\sigma(b_i))$ とおけば解を得る。
+\end{proof}

@@ -1,0 +1,4874 @@
+% Generated mechanically from frozen input inputs/p01/ja/sheaves.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% ここから開始。
+%
+
+\setcounter{chapter}{5}
+\chapter{空間上の層}
+
+
+
+\phantomsection
+\label{sheaves-section-phantom}
+
+
+\section{序論}
+\label{sheaves-section-introduction}
+
+\noindent
+本章では、位相空間上の層の基本的性質を説明する。
+参考文献として \cite{Godement} がある。
+
+\medskip\noindent
+この議論は、後の各章におけるサイト上の層の議論によって
+置き換えられることになる。しかし、ここでいくつかの概念を
+簡潔に定義しておくことには意味があるだろう。
+
+
+
+
+
+
+
+
+
+
+\section{基本概念}
+\label{sheaves-section-sheaves-basic}
+
+\noindent
+以下に位相の基本概念を列挙する。
+
+\begin{enumerate}
+\item 位相空間 $X$ をとる。「$U = \bigcup_{i \in I} U_i$ を
+開被覆とする」という表現は、次を意味する。$I$ は集合であり、
+各 $i \in I$ に対して開部分集合 $U_i \subset X$ が与えられ、
+$U$ は $U_i$ たちの合併である。$I = \emptyset$ としてもよく、
+その場合 $U_i$ は一つもなく、$U = \emptyset$ である。
+また、$I \not = \emptyset$ の場合でも、$U_i$ の一部または全部が
+空であってよい。
+\item その他同様。
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{前層}
+\label{sheaves-section-presheaves}
+
+
+\begin{definition}
+\label{sheaves-definition-presheaf}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item {\it 集合の前層 $\mathcal{F}$（$X$ 上）}とは、各開集合
+$U \subset X$ に集合 $\mathcal{F}(U)$ を、各包含 $V \subset U$ に写像
+$\rho^U_V : \mathcal{F}(U) \to \mathcal{F}(V)$ を対応させる規則であって、
+$\rho^U_U = \text{id}_{\mathcal{F}(U)}$ を満たし、かつ
+$W \subset V \subset U$ のとき
+$\rho^U_W = \rho^V_W \circ \rho ^U_V$ を満たすものをいう。
+\item {\it 集合の前層の射 $\varphi : \mathcal{F} \to \mathcal{G}$
+（$X$ 上）}とは、各開集合 $U \subset X$ に集合の写像
+$\varphi : \mathcal{F}(U) \to \mathcal{G}(U)$ を対応させる規則であって、
+制限写像と両立するものをいう。すなわち、$V \subset U \subset X$ が
+開集合であるとき、図式
+$$
+\xymatrix{
+\mathcal{F}(U) \ar[r]^\varphi \ar[d]^{\rho^U_V} &
+\mathcal{G}(U) \ar[d]^{\rho^U_V} \\
+\mathcal{F}(V) \ar[r]^\varphi & \mathcal{G}(V)
+}
+$$
+は可換である。
+\item $X$ 上の集合の前層の圏を
+$\textit{PSh}(X)$ と記す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+集合 $\mathcal{F}(U)$ の元を、$U$ 上の $\mathcal{F}$ の
+{\it 切断}という。各 $V \subset U$ に対して、写像
+$\rho^U_V : \mathcal{F}(U) \to \mathcal{F}(V)$ を
+{\it 制限写像}という。$s\in \mathcal{F}(U)$ のとき
+$s|_V := \rho^U_V(s)$ と記す。この記法は、位相における
+関数の制限という概念と整合する。実際、$W \subset V \subset U$ であり、
+$s$ が $U$ 上の $\mathcal{F}$ の切断ならば、上の定義で述べた
+制限写像の性質により $s|_W = (s|_V)|_W$ である。
+
+\medskip\noindent
+よく用いられる別の記法では、開集合 $U$ 上の切断を
+$\Gamma(U, -)$ または $H^0(U, -)$ で表す。言い換えると、
+次の等式は定義から明らかである。
+$$
+\Gamma(U, \mathcal{F}) = \mathcal{F}(U) = H^0(U, \mathcal{F}).
+$$
+本章ではこの記法を用いないが、他の章では用いる。
+
+\begin{definition}
+\label{sheaves-definition-constant-presheaf}
+$X$ を位相空間とし、$A$ を集合とする。
+{\it 値 $A$ の定数前層}とは、各開集合
+$U \subset X$ に集合 $A$ を対応させ、すべての制限写像が
+$\text{id}_A$ である前層をいう。
+\end{definition}
+
+\section{アーベル前層}
+\label{sheaves-section-abelian-presheaves}
+
+\noindent
+この節では、アーベル群の前層を定義できるようにする
+前層の圏のいくつかの特徴を簡潔に指摘する。
+
+\begin{example}
+\label{sheaves-example-singleton-presheaf}
+$X$ を位相空間とする。$X$ の各開部分集合に一点集合を対応させる
+規則 $\mathcal{F}$ を考える。任意の集合から一点集合への写像は
+一意であるから、一意な制限写像 $\rho^U_V$ が存在する。
+こうして得られる構造は $X$ 上の集合の前層である。
+上で述べた一点集合の性質により、これは $X$ 上の集合の前層の圏の
+終対象である。したがって、一意な同型を除いて一意でもある。
+この前層を $*$ と記すことがある。
+\end{example}
+
+\begin{lemma}
+\label{sheaves-lemma-product-presheaves}
+$X$ を位相空間とする。$X$ 上の集合の前層の圏は積をもつ
+（Categories, Definition \ref{categories-definition-product} を参照）。
+さらに、開集合 $U$ 上の積 $\mathcal{F} \times \mathcal{G}$ の
+切断の集合は、$U$ 上の $\mathcal{F}$ の切断の集合と
+$\mathcal{G}$ の切断の集合との積である。
+\end{lemma}
+
+\begin{proof}
+実際、$\mathcal{F}$ と $\mathcal{G}$ を位相空間 $X$ 上の
+集合の前層とする。$\mathcal{F} \times \mathcal{G}$ と記す規則
+$U \mapsto \mathcal{F}(U) \times \mathcal{G}(U)$ を考える。
+$V \subset U \subset X$ が開集合ならば、制限写像
+$$
+(\mathcal{F} \times \mathcal{G})(U)
+\longrightarrow
+(\mathcal{F} \times \mathcal{G})(V)
+$$
+を $(s, t) \mapsto (s|_V, t|_V)$ によって定める。このとき
+$\mathcal{F} \times \mathcal{G}$ が前層であることは直ちに分かる。
+また、射影写像
+$p : \mathcal{F} \times \mathcal{G} \to \mathcal{F}$ および
+$q : \mathcal{F} \times \mathcal{G} \to \mathcal{G}$ がある。
+任意の第三の前層 $\mathcal{H}$ に対して
+$\Mor(\mathcal{H}, \mathcal{F} \times \mathcal{G})
+= \Mor(\mathcal{H}, \mathcal{F}) \times
+\Mor(\mathcal{H}, \mathcal{G})$ が成り立つことは読者に委ねる。
+\end{proof}
+
+\noindent
+$(A, + : A \times A \to A, - : A \to A, 0\in A)$ が
+アーベル群ならば、零写像と負元をとる写像は加法則から一意に
+定まることを思い出そう。言い換えると、
+「$(A, +)$ をアーベル群とする」と述べることには意味がある。
+
+\begin{lemma}
+\label{sheaves-lemma-abelian-presheaves}
+$X$ を位相空間とする。
+$\mathcal{F}$ を集合の前層とする。
+$\mathcal{F}$ 上の次の種類の構造を考える。
+\begin{enumerate}
+\item 各開集合 $U$ に対する $\mathcal{F}(U)$ 上の
+アーベル群構造であって、すべての制限写像が
+アーベル群準同型となるもの。
+\item 前層の写像
+$+ : \mathcal{F} \times \mathcal{F} \to \mathcal{F}$、
+前層の写像 $- : \mathcal{F} \to \mathcal{F}$、および写像
+$0 : * \to \mathcal{F}$
+（Example \ref{sheaves-example-singleton-presheaf} を参照）であって、
+通常のアーベル群における $+, -, 0$ のすべての公理を満たすもの。
+\item 前層の写像
+$+ : \mathcal{F} \times \mathcal{F} \to \mathcal{F}$、
+前層の写像 $- : \mathcal{F} \to \mathcal{F}$、および写像
+$0 : * \to \mathcal{F}$ であって、各開集合 $U \subset X$ に対し
+四つ組 $(\mathcal{F}(U), +, -, 0)$ がアーベル群となるもの。
+\item 前層の写像 $+ : \mathcal{F} \times \mathcal{F}
+\to \mathcal{F}$ であって、各開集合 $U \subset X$ に対し
+写像 $+ : \mathcal{F}(U) \times \mathcal{F}(U) \to \mathcal{F}(U)$ が
+アーベル群構造を定めるもの。
+\end{enumerate}
+上のデータの種類 (1)--(4) の集まりの間には自然な全単射がある。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+\noindent
+この補題は、前層の圏におけるアーベル群対象 $\mathcal{F}$ を
+与えることが、各集合 $\mathcal{F}(U)$ にアーベル群構造が入り、
+すべての制限写像が群準同型となる集合の前層 $\mathcal{F}$ を
+与えることと同じである、と述べている。ほとんどの代数構造について、
+この方法でその種の対象の（前）層を扱う。すなわち、その種の対象の
+（前）層を、各切断集合 $\mathcal{F}(U)$ がその構造を備え、
+しかもその構造が制限写像と両立する集合の（前）層
+$\mathcal{F}$ として定義する。
+
+\begin{definition}
+\label{sheaves-definition-abelian-presheaves}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item {\it $X$ 上のアーベル群の前層}、または
+{\it $X$ 上のアーベル前層}とは、集合の前層 $\mathcal{F}$ であって、
+各開集合 $U \subset X$ に対して集合 $\mathcal{F}(U)$ が
+アーベル群構造を備え、すべての制限写像 $\rho^U_V$ が
+アーベル群準同型となるものをいう。上の
+Lemma \ref{sheaves-lemma-abelian-presheaves} を参照せよ。
+\item {\it $X$ 上のアーベル前層の射}
+$\varphi : \mathcal{F} \to \mathcal{G}$ とは、各開集合 $U \subset X$ に
+ついてアーベル群準同型 $\mathcal{F}(U) \to \mathcal{G}(U)$ を
+誘導する集合の前層の射をいう。
+\item $X$ 上のアーベル群の前層の圏を
+$\textit{PAb}(X)$ と記す。
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+\label{sheaves-example-direct-sum-points}
+$X$ を位相空間とする。各 $x \in X$ に対して
+アーベル群 $M_x$ が与えられているとする。開集合 $U \subset X$ に
+対して
+$$
+\mathcal{F}(U) = \bigoplus\nolimits_{x \in U} M_x.
+$$
+とおく。このアーベル群の典型的な元を
+$\sum_{i = 1}^n m_{x_i}$ と記す。ここで $x_i \in U$ かつ
+$m_{x_i} \in M_{x_i}$ である。（もちろん、$x_1, \ldots, x_n$ が
+互いに異なるような表示を常に選べる。）
+開集合 $V \subset U \subset X$ に対する制限写像
+$\mathcal{F}(U) \to \mathcal{F}(V)$ を、元
+$s = \sum_{i = 1}^n m_{x_i}$ を
+$s|_V = \sum_{x_i \in V} m_{x_i}$ に写すことによって定める。
+これがアーベル群の前層であることの確認は読者に委ねる。
+\end{example}
+
+
+
+\section{代数構造の前層}
+\label{sheaves-section-presheaves-structures}
+
+\noindent
+代数構造の前層の定義を明確にしよう。
+$\mathcal{C}$ を圏とし、$F : \mathcal{C} \to \textit{Sets}$ を
+忠実関手とする。典型的には $F$ は「忘却」関手である。
+対象 $M \in \Ob(\mathcal{C})$ に対し、$F(M)$ をしばしば
+対象 $M$ の{\it 台集合}という。$M \to M'$ が $\mathcal{C}$ の射ならば、
+$F(M) \to F(M')$ を{\it 台集合の写像}という。実際、しばしば対象と
+その台集合を区別せず、射についても同様にする。したがって、
+集合の写像 $F(M) \to F(M')$ が $\mathcal{C}$ におけるある射
+$f : M \to M'$ に対する $F(f)$ に等しいとき、これを
+{\it 代数構造の射}という。
+
+\medskip\noindent
+上の Definition \ref{sheaves-definition-abelian-presheaves} と同様に、
+「$\mathcal{C}$ の対象の前層」は次のデータによって定義できる。
+\begin{enumerate}
+\item 集合の前層 $\mathcal{F}$、および
+\item 各開集合 $U \subset X$ に対する対象
+$A(U) \in \Ob(\mathcal{C})$ の選択。
+\end{enumerate}
+これらには、上の言い方を用いて、次の条件を課す。
+\begin{enumerate}
+\item 各開集合 $U \subset X$ に対し、集合 $\mathcal{F}(U)$ は
+$A(U)$ の台集合であり、
+\item 各開集合 $V \subset U \subset X$ に対し、集合の写像
+$\rho_V^U: \mathcal{F}(U) \to \mathcal{F}(V)$ は
+代数構造の射である。
+\end{enumerate}
+言い換えると、$X$ の各開集合 $V \subset U$ に対し、
+制限写像 $\rho^U_V$ は、圏 $\mathcal{C}$ における一意な射
+$\alpha^U_V : A(U) \to A(V)$ の像 $F(\alpha^U_V)$ である。
+一意性は $F$ が忠実であるという条件から従い、さらに
+$W \subset V \subset U$ が $X$ の開集合ならば
+$\alpha^U_W = \alpha^V_W \circ \alpha^U_V$ であることも従う。
+系 $(A(-), \alpha^U_V)$ を、$X$ 上の $\mathcal{C}$ に値をとる
+前層として定義する。Sites, Definition
+\ref{sites-definition-presheaf} と比較せよ。規則
+$\mathcal{F}(U) = F(A(U))$ および
+$\rho_V^U = F(\alpha_V^U)$ により、集合の前層
+$(\mathcal{F}, \rho_V^U)$ が復元される。
+
+\begin{definition}
+\label{sheaves-definition-presheaf-values-in-category}
+$X$ を位相空間とする。
+$\mathcal{C}$ を圏とする。
+\begin{enumerate}
+\item {\it $\mathcal{C}$ に値をとる $X$ 上の前層 $\mathcal{F}$}は、
+各開集合 $U \subset X$ に $\mathcal{C}$ の対象
+$\mathcal{F}(U)$ を、各包含 $V \subset U$ に $\mathcal{C}$ の射
+$\rho_V^U : \mathcal{F}(U) \to \mathcal{F}(V)$ を対応させる規則であって、
+$W \subset V \subset U$ のとき
+$\rho_W^U = \rho_W^V \circ \rho_V^U$ を満たすものとして与えられる。
+\item {\it $\mathcal{C}$ に値をとる前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$}は、制限射と両立する
+$\mathcal{C}$ の射
+$\varphi : \mathcal{F}(U) \to \mathcal{G}(U)$ によって与えられる。
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+\label{sheaves-definition-underlying-presheaf-sets}
+$X$ を位相空間とし、$\mathcal{C}$ を圏とする。
+$F : \mathcal{C} \to \textit{Sets}$ を忠実関手とする。
+$\mathcal{F}$ を $\mathcal{C}$ に値をとる $X$ 上の前層とする。
+集合の前層 $U \mapsto F(\mathcal{F}(U))$ を
+{\it $\mathcal{F}$ の台集合の前層}という。
+\end{definition}
+
+\noindent
+台集合の前層にも同じ文字 $\mathcal{F}$ を用いるのが慣例であり、
+この記法は Definition \ref{sheaves-definition-presheaf-values-in-category} に
+先立つ議論に照らして妥当である。特に、「$s \in \mathcal{F}(U)$ とする」
+または「$s$ を $U$ 上の $\mathcal{F}$ の切断とする」という表現は、
+$s \in F(\mathcal{F}(U))$ を意味する。
+
+\medskip\noindent
+この記法とこれらの定義は、とりわけ次の場合に適用できる。
+{\it （必ずしもアーベルでない）群、環、固定された環上の加群、
+固定された体上のベクトル空間の前層}など、および
+{\it それらの間の射}である。
+
+\section{加群の前層}
+\label{sheaves-section-presheaves-modules}
+
+\noindent
+$\mathcal{O}$ を $X$ 上の環の前層とする。
+$X$ 上の $\mathcal{O}$-加群の前層という概念を定義したい。
+Definition \ref{sheaves-definition-abelian-presheaves} との類比から、
+これを次のような集合の前層 $\mathcal{F}$ と定義したくなる。
+各開集合 $U \subset X$ に対し、集合 $\mathcal{F}(U)$ は
+$\mathcal{O}(U)$-加群の構造を備え、その構造は
+（$\mathcal{F}$ と $\mathcal{O}$ の）制限写像と両立する。
+しかし、次の定義のように定義するのが慣例である
+（そして両者は同値である）。
+
+\begin{definition}
+\label{sheaves-definition-presheaf-modules}
+$X$ を位相空間とし、$\mathcal{O}$ を $X$ 上の環の前層とする。
+\begin{enumerate}
+\item {\it $\mathcal{O}$-加群の前層}とは、アーベル前層
+$\mathcal{F}$ と集合の前層の写像
+$$
+\mathcal{O} \times \mathcal{F} \longrightarrow \mathcal{F}
+$$
+との組であって、各開集合 $U \subset X$ に対し、写像
+$\mathcal{O}(U) \times \mathcal{F}(U) \to \mathcal{F}(U)$ が
+アーベル群 $\mathcal{F}(U)$ 上に $\mathcal{O}(U)$-加群構造を
+定めるものをいう。
+\item {\it $\mathcal{O}$-加群の前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$}とは、図式
+$$
+\xymatrix{
+\mathcal{O} \times \mathcal{F} \ar[r] \ar[d]_{\text{id} \times \varphi} &
+\mathcal{F} \ar[d]^{\varphi} \\
+\mathcal{O} \times \mathcal{G} \ar[r] &
+\mathcal{G}
+}
+$$
+が可換となるアーベル前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$ をいう。
+\item 上のような $\mathcal{O}$-加群の射の集合を
+$\Hom_\mathcal{O}(\mathcal{F}, \mathcal{G})$ と記す。
+\item $\mathcal{O}$-加群の前層の圏を
+$\textit{PMod}(\mathcal{O})$ と記す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\mathcal{O}_1 \to \mathcal{O}_2$ を $X$ 上の環の前層の射とする。
+このとき、$\mathcal{F}$ が $\mathcal{O}_2$-加群の前層ならば、
+合成
+$$
+\mathcal{O}_1 \times \mathcal{F}
+\to
+\mathcal{O}_2 \times \mathcal{F}
+\to
+\mathcal{F}.
+$$
+を用いて、$\mathcal{F}$ を $\mathcal{O}_1$-加群の前層とみなせる。
+環の制限を示すため、これを $\mathcal{F}_{\mathcal{O}_1}$ と
+記すことがある。これを $\mathcal{F}$ の{\it 制限}という。
+制限関手
+$$
+\textit{PMod}(\mathcal{O}_2)
+\longrightarrow
+\textit{PMod}(\mathcal{O}_1)
+$$
+を得る。
+
+\medskip\noindent
+一方、$\mathcal{O}_1$-加群の前層 $\mathcal{G}$ が与えられたとする。
+規則
+$$
+\left(\mathcal{O}_2 \otimes_{p, \mathcal{O}_1} \mathcal{G}\right)(U)
+=
+\mathcal{O}_2(U) \otimes_{\mathcal{O}_1(U)} \mathcal{G}(U)
+$$
+により、$\mathcal{O}_2$-加群の前層
+$\mathcal{O}_2 \otimes_{p, \mathcal{O}_1} \mathcal{G}$ を構成できる。
+添字 $p$ は「point」ではなく「presheaf」を表す。
+この前層を{\it テンソル積前層}という。{\it 環変更}関手
+$$
+\textit{PMod}(\mathcal{O}_1)
+\longrightarrow
+\textit{PMod}(\mathcal{O}_2)
+$$
+を得る。
+
+\begin{lemma}
+\label{sheaves-lemma-adjointness-tensor-restrict-presheaves}
+上の $X$、$\mathcal{O}_1$、$\mathcal{O}_2$、$\mathcal{F}$、
+$\mathcal{G}$ に対して標準的な全単射
+$$
+\Hom_{\mathcal{O}_1}(\mathcal{G}, \mathcal{F}_{\mathcal{O}_1})
+=
+\Hom_{\mathcal{O}_2}(
+\mathcal{O}_2 \otimes_{p, \mathcal{O}_1} \mathcal{G},
+\mathcal{F}
+)
+$$
+が存在する。言い換えると、制限関手と環変更関手は互いに随伴する。
+\end{lemma}
+
+\begin{proof}
+これは、環準同型 $A \to B$ に対して制限関手と
+環変更関手が互いに随伴することから従う。
+\end{proof}
+
+
+
+
+
+\section{層}
+\label{sheaves-section-sheaves}
+
+\noindent
+この節では層条件を説明する。
+
+\begin{definition}
+\label{sheaves-definition-sheaf}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item {\it 集合の層 $\mathcal{F}$（$X$ 上）}とは、次の追加条件を
+満たす集合の前層をいう。任意の開被覆
+$U = \bigcup_{i \in I} U_i$ と切断の族
+$s_i \in \mathcal{F}(U_i)$、$i \in I$ が与えられ、
+$\forall i, j\in I$ に対して
+$$
+s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}
+$$
+が成り立つならば、すべての $i \in I$ に対して
+$s_i = s|_{U_i}$ を満たす一意な切断
+$s \in \mathcal{F}(U)$ が存在する。
+\item {\it 集合の層の射}とは、単に集合の前層の射のことである。
+\item $X$ 上の集合の層の圏を $\Sh(X)$ と記す。
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\label{sheaves-remark-confusion}
+空集合 $\emptyset \subset X$ 上の層の切断集合について何かを
+述べる必要があるかどうかは、いつも多少の混乱を招く。
+これは必要であり、定義を正しく読めば、すでに述べられている。
+実際、空集合は空の開被覆によって被覆されることに注意せよ。
+したがって、上の定義の「切断の族 $s_i$」は、層が値をとる圏の
+終対象である空積の元を実際に成す。言い換えると、定義を正しく
+読めば、自動的に
+$\mathcal{F}(\emptyset) = \textit{a final object}$
+が導かれる。集合の層の場合、これは一点集合である。
+この議論が好みでなければ、
+$\mathcal{F}(\emptyset) = \{*\}$ と要求してもよい。
+
+\medskip\noindent
+特に、この条件から、$U, V \subset X$ が開かつ{\it 互いに素}ならば
+$$
+\mathcal{F}(U \cup V) = \mathcal{F}(U) \times \mathcal{F}(V).
+$$
+となることが分かる。（終対象上のファイバー積は積だからである。）
+\end{remark}
+
+\begin{example}
+\label{sheaves-example-basic-continuous-maps}
+$X$, $Y$ を位相空間とする。開集合 $U \subset X$ に集合
+$$
+\mathcal{F}(U) = \{ f : U \to Y \mid f \text{ is continuous}\}
+$$
+を対応させる規則 $\mathcal{F}$ を、明らかな制限写像とともに考える。
+$\mathcal{F}$ は層である。これを見るため、
+$U = \bigcup_{i\in I} U_i$ を開被覆とし、
+$f_i \in \mathcal{F}(U_i)$、$i\in I$ が、すべての $i, j \in I$ に対して
+$f_i |_{U_i \cap U_j} = f_j|_{U_i \cap U_j}$ を満たすとする。
+このとき、$u \in U_i$ となる任意の $i \in I$ に対する
+$f_i(u)$ の値を $f(u)$ として、$f : U \to Y$ を定める。
+仮定によりこれは良定義である。さらに、$f : U \to Y$ は
+$U_i$ への制限が連続写像 $f_i$ と一致する写像である。
+したがって $f$ は明らかに連続である。
+\end{example}
+
+\noindent
+この例の結果を用いて定数層を定義できる。
+$A$ を集合とし、$A$ に離散位相を入れる。
+$U \subset X$ を開部分集合とする。このとき
+$$
+\{ f : U \to A \mid f\text{ continuous}\}
+=
+\{ f : U \to A \mid f\text{ locally constant}\}.
+$$
+したがって、各開集合に $A$ へのすべての局所定数写像を
+対応させる規則は層である。
+
+\begin{definition}
+\label{sheaves-definition-constant-sheaf}
+$X$ を位相空間とし、$A$ を集合とする。
+$\underline{A}$ または $\underline{A}_X$ と記す
+{\it 値 $A$ の定数層}とは、開集合 $U \subset X$ に
+すべての局所定数写像 $U \to A$ の集合を対応させ、
+関数の制限を制限写像とする層をいう。
+\end{definition}
+
+\begin{example}
+\label{sheaves-example-sheaf-product-pointwise}
+$X$ を位相空間とする。集合 $A_x$ からなる、点 $x \in X$ で
+添字付けられた族 $(A_x)_{x \in X}$ をとる。このデータから
+集合の層 $\Pi$ を構成する。開集合 $U \subset X$ に対して
+$$
+\Pi(U) = \prod\nolimits_{x \in U} A_x.
+$$
+開集合 $V \subset U \subset X$ に対し、次の規則で制限写像を定める。
+元 $s = (a_x)_{x\in U} \in \Pi(U)$ の制限を
+$s|_V = (a_x)_{x \in V}$ とする。これが集合の前層を定めることは
+明らかである。これは層である。実際、
+$U = \bigcup U_i$ を開被覆とし、
+$s_i \in \Pi(U_i)$ をとり、$s_i$ が $U_i \cap U_j$ 上で
+$s_j$ と一致するとする。
+$s_i = (a_{i, x})_{x\in U_i}$ と書く。両立条件から、
+$x \in U_i \cap U_j$ のとき集合 $A_x$ において
+$a_{i, x} = a_{j, x}$ となる。したがって、
+$x \in U_i$ となるある $i$ に対して $a_x = a_{i, x}$ を満たす
+一意な元 $s = (a_x)_{x\in U}$ が
+$\Pi(U) = \prod_{x\in U} A_x$ に存在する。もちろん、この元 $s$ は
+すべての $i$ に対して $s|_{U_i} = s_i$ を満たす。
+\end{example}
+
+\begin{example}
+\label{sheaves-example-direct-sum-points-not-sheaf}
+$X$ を位相空間とする。各 $x\in X$ に対してアーベル群 $M_x$ が
+与えられているとする。Example \ref{sheaves-example-direct-sum-points} で
+定義した前層
+$\mathcal{F} : U \mapsto \bigoplus_{x \in U} M_x$ を考える。
+これは一般には層ではない。例えば、$X$ が離散位相を備えた
+無限集合ならば、層条件から
+$\mathcal{F}(X) = \prod_{x\in X} \mathcal{F}(\{x\})$
+が従うはずである。しかし定義により
+$\mathcal{F}(X)
+= \bigoplus_{x \in X} M_x = \bigoplus_{x \in X} \mathcal{F}(\{x\})$
+である。一般に、無限直和は無限直積とは異なる。
+
+\medskip\noindent
+ただし、$X$ のすべての開集合が準コンパクトであるような
+位相空間 $X$ ならば、$\mathcal{F}$ は{\it 層である}。
+これは読者への演習として残す。
+\end{example}
+
+
+
+\section{アーベル層}
+\label{sheaves-section-abelian-sheaves}
+
+\begin{definition}
+\label{sheaves-definition-abelian-sheaf}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item {\it $X$ 上のアーベル層}、または
+{\it $X$ 上のアーベル群の層}とは、台となる集合の前層が
+層であるような $X$ 上のアーベル前層をいう。
+\item アーベル群の層の圏を $\textit{Ab}(X)$ と記す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$X$ を位相空間とする。アーベル前層 $\mathcal{F}$ の場合、
+開被覆 $U = \bigcup U_i$ に関する層条件は、アーベル群の複体
+$$
+0 \to \mathcal{F}(U)
+\to \prod\nolimits_i \mathcal{F}(U_i)
+\to \prod\nolimits_{(i_0, i_1)} \mathcal{F}(U_{i_0} \cap U_{i_1})
+$$
+が完全である、と表現されることが多い。第一の写像は通常のものであり、
+第二の写像は元 $(s_i)_{i \in I}$ を元
+$$
+(
+s_{i_0}|_{U_{i_0} \cap U_{i_1}} -
+s_{i_1}|_{U_{i_0} \cap U_{i_1}}
+)_{(i_0, i_1)}
+\in \prod\nolimits_{(i_0, i_1)} \mathcal{F}(U_{i_0} \cap U_{i_1})
+$$
+に写す。
+
+\section{代数構造の層}
+\label{sheaves-section-sheaves-structures}
+
+\noindent
+ある種の構造の層の定義を明確にしよう。
+まず層条件を言い換える。位相空間 $X$ 上の集合の前層
+$\mathcal{F}$ をとる。層条件は次のように言い換えられる。
+$U = \bigcup_{i\in I} U_i$ を開被覆とし、図式
+$$
+\xymatrix{
+\mathcal{F}(U) \ar[r]
+&
+\prod\nolimits_{i\in I}
+\mathcal{F}(U_i)
+\ar@<1ex>[r] \ar@<-1ex>[r]
+&
+\prod\nolimits_{(i_0, i_1) \in I \times I}
+\mathcal{F}(U_{i_0} \cap U_{i_1})
+}
+$$
+を考える。左の写像は規則
+$s \mapsto \prod_{i \in I} s|_{U_i}$ によって定める。
+右の二つの写像は、それぞれ
+$$
+\prod\nolimits_i s_i
+\mapsto
+\prod\nolimits_{(i_0, i_1)} s_{i_0}|_{U_{i_0} \cap U_{i_1}}
+\text{ resp. }
+\prod\nolimits_i s_i
+\mapsto
+\prod\nolimits_{(i_0, i_1)} s_{i_1}|_{U_{i_0} \cap U_{i_1}}.
+$$
+である。層条件とは、左の矢印が右の二つの矢印の等化子であることに
+ほかならない。圏が積をもつ限り、これはその圏に値をとる前層の場合へ
+直ちに一般化される。
+
+\begin{definition}
+\label{sheaves-definition-sheaf-values-in-category}
+$X$ を位相空間とし、$\mathcal{C}$ を積をもつ圏とする。
+$X$ 上の $\mathcal{C}$ に値をとる前層 $\mathcal{F}$ が
+{\it 層}であるとは、各開被覆に対する図式
+$$
+\xymatrix{
+\mathcal{F}(U) \ar[r]
+&
+\prod\nolimits_{i\in I}
+\mathcal{F}(U_i)
+\ar@<1ex>[r] \ar@<-1ex>[r]
+&
+\prod\nolimits_{(i_0, i_1) \in I \times I}
+\mathcal{F}(U_{i_0} \cap U_{i_1})
+}
+$$
+が圏 $\mathcal{C}$ における等化子図式であることをいう。
+\end{definition}
+
+\noindent
+$\mathcal{C}$ を圏とし、
+$F : \mathcal{C} \to \textit{Sets}$ を忠実関手とする。
+念頭に置くべきよい例は、$\mathcal{C}$ がアーベル群の圏で、
+$F$ が忘却関手である場合である。$\mathcal{C}$ に値をとる
+$X$ 上の前層 $\mathcal{F}$ を考える。上の条件を、台となる集合の前層
+（Definition \ref{sheaves-definition-underlying-presheaf-sets}）によって
+言い換えたい。台となる集合の前層が集合の層であることは、
+すべての図式
+$$
+\xymatrix{
+F(\mathcal{F}(U)) \ar[r]
+&
+\prod\nolimits_{i\in I}
+F(\mathcal{F}(U_i))
+\ar@<1ex>[r] \ar@<-1ex>[r]
+&
+\prod\nolimits_{(i_0, i_1) \in I \times I}
+F(\mathcal{F}(U_{i_0} \cap U_{i_1}))
+}
+$$
+が、忘却関手 $F$ を適用した後の集合の等化子図式であることと同値で
+ある。したがって、$\mathcal{C}$ が積と等化子をもち、
+$F$ がそれらと可換することを望む。これは、$\mathcal{C}$ が極限をもち、
+$F$ がそれらと可換するという条件と同値である。
+Categories, Lemma \ref{categories-lemma-limits-products-equalizers} を
+参照せよ。しかし、これだけではまだ十分ではない
+（Example \ref{sheaves-example-sheaves-topological-spaces} を参照）。
+$F$ が{\it 同型を反映する}ことも必要である。この性質は、
+$\mathcal{C}$ の射 $f : A \to A'$ が与えられたとき、
+$F(f)$ が全単射であることと $f$ が同型であることが同値である、
+という意味である。
+
+\begin{lemma}
+\label{sheaves-lemma-sheaves-structure}
+圏 $\mathcal{C}$ と関手
+$F : \mathcal{C} \to \textit{Sets}$ が次の性質をもつとする。
+\begin{enumerate}
+\item $F$ は忠実である。
+\item $\mathcal{C}$ は極限をもち、$F$ はそれらと可換する。
+\item 関手 $F$ は同型を反映する。
+\end{enumerate}
+$X$ を位相空間とし、$\mathcal{F}$ を $\mathcal{C}$ に値をとる
+前層とする。このとき、$\mathcal{F}$ が層であることと、
+台となる集合の前層が層であることは同値である。
+\end{lemma}
+
+\begin{proof}
+$\mathcal{F}$ が層であると仮定する。このとき
+$\mathcal{F}(U)$ は上の図式の等化子であり、仮定によって
+$F(\mathcal{F}(U))$ は対応する集合の図式の等化子である。
+したがって、$F(\mathcal{F})$ は集合の層である。
+
+\medskip\noindent
+$F(\mathcal{F})$ が層であると仮定する。
+$E \in \Ob(\mathcal{C})$ を、Definition
+\ref{sheaves-definition-sheaf-values-in-category} の二つの平行な矢印の
+等化子とする。$\mathcal{F}$ が前層であることだけから、
+標準的な射 $\mathcal{F}(U) \to E$ を得る。
+仮定により、誘導される写像
+$F(\mathcal{F}(U)) \to F(E)$ は同型である。実際、
+$F(E)$ は対応する集合の図式の等化子だからである。
+したがって、補題の条件 (3) により
+$\mathcal{F}(U) \to E$ は同型である。
+\end{proof}
+
+\noindent
+この補題は特に、{\it 群、環、固定された環上の代数、
+固定された環上の加群、固定された体上のベクトル空間の層}などに
+適用される。言い換えると、これらは、台となる集合の前層が層である
+ような群、環、固定された環上の加群、固定された体上のベクトル空間
+などの前層である。
+
+\begin{example}
+\label{sheaves-example-C0-sheaf-rings}
+$X$ を位相空間とする。各開集合 $U \subset X$ に対して
+$\mathbf{R}$-代数
+$\mathcal{C}^{0}(U) = \{ f : U \to \mathbf{R} \mid f\text{ is continuous}\}$
+を考える。明らかな制限写像により、これは $X$ 上の
+$\mathbf{R}$-代数の前層となる。
+Example \ref{sheaves-example-basic-continuous-maps} により、これは集合の層である。
+したがって、Lemma \ref{sheaves-lemma-sheaves-structure} により、
+これは $X$ 上の $\mathbf{R}$-代数の層である。
+\end{example}
+
+\begin{example}
+\label{sheaves-example-sheaves-topological-spaces}
+位相空間の圏 $\textit{Top}$ を考える。
+積および等化子と可換する自然な忠実関手
+$\textit{Top} \to \textit{Sets}$ がある。しかし、この関手は
+同型を反映しない。実際、Lemma \ref{sheaves-lemma-sheaves-structure} の
+類似は誤りである。$X = \mathbf{N}$ に離散位相を入れる。
+各 $i \in \mathbf{N}$ に対し、$A_i$ を離散位相空間とする。
+任意の部分集合 $U \subset \mathbf{N}$ に対し、
+$\mathcal{F}(U) = \prod_{i\in U} A_i$ に離散位相を入れる。
+すると、これは位相空間の前層であり、台となる集合の前層は層である。
+Example \ref{sheaves-example-sheaf-product-pointwise} を参照せよ。
+しかし、各 $A_i$ が少なくとも二つの元をもつならば、これは
+Definition \ref{sheaves-definition-sheaf-values-in-category} の意味で
+位相空間の層ではない。各
+$\mathcal{F}(U) = \prod_{i\in U} A_i$ に{\it 積位相}を入れれば、
+$X$ 上の位相空間の層が得られることを読者は確認できる。
+\end{example}
+\section{加群の層}
+\label{sheaves-section-sheaves-modules}
+
+\begin{definition}
+\label{sheaves-definition-sheaf-modules}
+$X$ を位相空間とする。
+$\mathcal{O}$ を $X$ 上の環の層とする。
+\begin{enumerate}
+\item {\it $\mathcal{O}$-加群の層}とは、Definition
+\ref{sheaves-definition-presheaf-modules} の意味での
+$\mathcal{O}$-加群の前層 $\mathcal{F}$ であって、
+台となるアーベル群の前層 $\mathcal{F}$ が層であるものをいう。
+\item {\it $\mathcal{O}$-加群の層の射}とは、
+$\mathcal{O}$-加群の前層の射をいう。
+\item $\mathcal{O}$-加群の層 $\mathcal{F}$ と $\mathcal{G}$ に対し、
+$\Hom_\mathcal{O}(\mathcal{F}, \mathcal{G})$ で
+$\mathcal{O}$-加群の層の射の集合を表す。
+\item $\mathcal{O}$-加群の層の圏を
+$\textit{Mod}(\mathcal{O})$ と記す。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義は、$\mathcal{O}$ が単なる環の前層である場合にも
+ある程度意味をなす。ただし、それが有用となる例は知られておらず、
+$\mathcal{O}$ が環の層でない場合には
+「$\mathcal{O}$-加群の層」という用語を避ける。
+
+
+
+
+
+
+
+
+\section{茎}
+\label{sheaves-section-stalks}
+
+\noindent
+$X$ を位相空間、$x \in X$ を点とし、
+$\mathcal{F}$ を $X$ 上の集合の前層とする。
+{\it $x$ における $\mathcal{F}$ の茎}とは、集合
+$$
+\mathcal{F}_x
+=
+\colim_{x\in U} \mathcal{F}(U)
+$$
+をいう。ここで余極限は、$X$ における $x$ の開近傍 $U$ の集合に
+わたってとる。開近傍の集合は（逆）包含によって半順序付けられる。
+すなわち、$U \geq U' \Leftrightarrow U \subset U'$ と定める。
+この系の遷移写像は $\mathcal{F}$ の制限写像によって与えられる。
+系上の（余）極限に関する記法と用語については
+Categories, Section \ref{categories-section-posets-limits} を参照せよ。
+この余極限は有向余極限であることに注意せよ。
+したがって $\mathcal{F}_x$ は容易に記述できる。すなわち
+$$
+\mathcal{F}_x
+=
+\{
+(U, s)
+\mid
+x\in U, s\in \mathcal{F}(U)
+\}/\sim
+$$
+であり、同値関係は次で与えられる。
+$(U, s) \sim (U', s')$ であることと、$x \in U''$ となる開集合
+$U'' \subset U \cap U'$ が存在して
+$s|_{U''} = s'|_{U''}$ となることは同値である。
+組 $(U, s)$ が与えられたとき、$(U, s)$ の同値類に対応する
+$\mathcal{F}_x$ の元を $s_x$ と記すことがある。
+$s_x$ を指して「$\mathcal{F}_x$ における $s$ の像」という表現を
+用いることもある。例えば、二つの組 $(U, s)$ と $(U', s')$ に対し、
+$s_x = s'_x$ であることを「$\mathcal{F}_x$ において $s$ は $s'$ に
+等しい」と表現することがある。他の著者は「$x$ における $s$ の芽」
+という用語を用いる。
+
+\medskip\noindent
+この定義から直ちに、任意の開集合 $U \subset X$ に対して
+標準的な写像
+$$
+\mathcal{F}(U)
+\longrightarrow
+\prod\nolimits_{x \in U} \mathcal{F}_x
+$$
+がある。これは $s \mapsto \prod_{x \in U} (U, s)$ によって
+定められる。よく考えてみよう。
+
+\begin{lemma}
+\label{sheaves-lemma-sheaf-subset-stalks}
+$\mathcal{F}$ を位相空間 $X$ 上の集合の層とする。
+各開集合 $U \subset X$ に対する写像
+$$
+\mathcal{F}(U)
+\longrightarrow
+\prod\nolimits_{x \in U} \mathcal{F}_x
+$$
+は単射である。
+\end{lemma}
+
+\begin{proof}
+$s, s' \in \mathcal{F}(U)$ が、すべての $x \in U$ に対して
+各茎 $\mathcal{F}_x$ の同じ元に写るとする。これは、各 $x \in U$ に
+対して $x \in V^x$ となる開集合 $V^x \subset U$ が存在し、
+$s|_{V^x} = s'|_{V^x}$ となることを意味する。しかし
+$U = \bigcup_{x \in U} V^x$ は開被覆である。したがって、
+層条件の一意性により $s = s'$ である。
+\end{proof}
+
+\begin{definition}
+\label{sheaves-definition-separated}
+$X$ を位相空間とする。$X$ 上の集合の前層 $\mathcal{F}$ が
+{\it 分離的}であるとは、各開集合 $U \subset X$ に対して写像
+$\mathcal{F}(U) \to \prod_{x \in U} \mathcal{F}_x$ が
+単射であることをいう。
+\end{definition}
+
+\noindent
+もう一つの観察は、茎 $\mathcal{F}_x$ の構成が前層
+$\mathcal{F}$ に関して関手的であるということである。
+言い換えると、これは関手
+$$
+\textit{PSh}(X) \longrightarrow \textit{Sets},
+\ \mathcal{F} \longmapsto \mathcal{F}_x.
+$$
+を与える。この関手を{\it 茎関手}という。
+実際、$\varphi : \mathcal{F} \to \mathcal{G}$ が前層の射ならば、
+規則 $(U, s) \mapsto (U, \varphi(s))$ により
+$\varphi_x : \mathcal{F}_x \to \mathcal{G}_x$ を定める。
+これが正しく定義されることを確認するには、
+$\mathcal{F}_x$ において $(U, s) = (U', s')$ ならば
+$\mathcal{G}_x$ において
+$(U, \varphi(s)) = (U', \varphi(s'))$ でもあることを調べればよい。
+$\varphi$ は制限写像と両立するから、これは明らかである。
+
+\begin{example}
+\label{sheaves-example-stalk-constant-presheaf}
+$X$ を位相空間とし、$A$ を集合とする。
+値 $A$ の定数前層を一時的に $A_p$ と記す
+（$p$ は presheaf を表し、point を表すのではない）。
+値 $A$ の定数層への標準的な前層の写像
+$A_p \to \underline{A}$ がある。各点に対して標準的な全単射
+$A = (A_p)_x = \underline{A}_x$ がある。ここで第二の写像は、
+写像 $A_p \to \underline{A}$ から関手性によって誘導される。
+\end{example}
+
+
+
+
+\begin{example}
+\label{sheaves-example-germs-functions}
+$X = \mathbf{R}^n$ にユークリッド位相を入れる。
+$X$ 上の $\mathcal{C}^\infty$ 関数の前層
+$\mathcal{C}^\infty_{\mathbf{R}^n}$ を考える。言い換えると、
+$\mathcal{C}^\infty_{\mathbf{R}^n}(U)$ は
+$\mathcal{C}^\infty$-関数 $f : U \to \mathbf{R}$ の集合である。
+Example \ref{sheaves-example-basic-continuous-maps} と同様に、
+これが層であることは容易に示せる。実際、これは
+$\mathbf{R}$-ベクトル空間の層である。
+
+\medskip\noindent
+次に、$x \in X = \mathbf{R}^n$ を点とする。
+茎 $\mathcal{C}^\infty_{\mathbf{R}^n, x}$ の元をどのように
+考えればよいだろうか。そのような元は、定義域が $x$ を含む
+$\mathcal{C}^\infty$-関数 $f$ によって与えられる。
+そのような関数の組 $f$, $g$ は、$x$ のある近傍で一致するとき
+茎の同じ元を定める。言い換えると、
+$\mathcal{C}^\infty_{\mathbf{R}^n, x}$ の元は、しばしば
+{\it $x$ における $\mathcal{C}^\infty$-関数の芽}と
+呼ばれるものと同じである。
+\end{example}
+
+\begin{example}
+\label{sheaves-example-sheaf-product-pointwise-stalk}
+$X$ を位相空間とする。各 $x \in X$ に対して集合 $A_x$ をとる。
+Example \ref{sheaves-example-sheaf-product-pointwise} の層
+$\mathcal{F} : U \mapsto \prod_{x\in U} A_x$ を考える。
+ここで指摘したいのは、$x$ における $\mathcal{F}$ の茎
+$\mathcal{F}_x$ は、一般には集合 $A_x$ と{\it 等しくない}という
+ことである。もちろん写像 $\mathcal{F}_x \to A_x$ はあるが、
+一般に言えることはそれだけである。例えば、すべての $n \not = m$ に
+対して $x_n \not = x_m$ であるように $x = \lim x_n$ とし、
+すべての $y \in X$ に対して $A_y = \{0, 1\}$ とする。
+すると $\mathcal{F}_x$ は、$0$ と $1$ の列の末尾からなる
+（無限）集合の上へ写る。実際、$x$ の各開近傍は
+ほとんどすべての $x_n$ を含む。一方、$x$ の各近傍が
+$A_y = \emptyset$ となる点 $y$ を含むならば、
+$\mathcal{F}_x = \emptyset$ である。
+\end{example}
+
+
+
+\section{アーベル前層の茎}
+\label{sheaves-section-stalks-abelian-presheaves}
+
+\noindent
+まず、一般の場合の模型としてアーベル群の場合を扱う。
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-abelian-presheaf}
+$X$ を位相空間とし、$\mathcal{F}$ を $X$ 上の
+アーベル群の前層とする。$\mathcal{F}_x$ 上には、各開集合
+$U \subset X$ と $x\in U$ に対して写像
+$\mathcal{F}(U) \to \mathcal{F}_x$ が群準同型となるような
+一意なアーベル群構造が存在する。さらに
+$$
+\mathcal{F}_x
+=
+\colim_{x\in U} \mathcal{F}(U)
+$$
+はアーベル群の圏において成り立つ。
+\end{lemma}
+
+\begin{proof}
+二つの元 $(U, s)$ と $(V, t)$ の和を
+$(U \cap V, s|_{U\cap V} + t|_{U \cap V})$ と定める。
+残りは容易に確認できる。
+\end{proof}
+
+\noindent
+上の証明で本質的なのは、開近傍の半順序集合が有向集合であること
+である（Categories, Definition
+\ref{categories-definition-directed-set}）。
+実際、二つのアーベル群 $A, B$ の余積は直和 $A \oplus B$ である一方、
+集合の圏における余積は非交和 $A \amalg B$ である。
+したがって、一般にはアーベル群の圏における余極限は
+集合の圏における余極限と一致しない。
+
+
+
+\section{代数構造の前層の茎}
+\label{sheaves-section-stalks-presheaves-structures}
+
+\noindent
+Lemma \ref{sheaves-lemma-stalk-abelian-presheaf} の証明は、
+有向余極限が忘却関手と可換する任意の種類の代数構造に対して機能する。
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-presheaf-values-in-category}
+$\mathcal{C}$ を圏とし、$F : \mathcal{C} \to \textit{Sets}$ を
+関手とする。次を仮定する。
+\begin{enumerate}
+\item $F$ は忠実である。
+\item $\mathcal{C}$ に有向余極限が存在し、$F$ はそれらと可換する。
+\end{enumerate}
+$X$ を位相空間、$x \in X$ を点とし、$\mathcal{F}$ を
+$\mathcal{C}$ に値をとる前層とする。このとき
+$$
+\mathcal{F}_x = \colim_{x\in U} \mathcal{F}(U)
+$$
+は $\mathcal{C}$ において存在する。その台集合は
+$\mathcal{F}$ の台となる集合の前層の茎に等しい。
+さらに、構成 $\mathcal{F} \mapsto \mathcal{F}_x$ は、
+$\mathcal{C}$ に値をとる前層の圏から $\mathcal{C}$ への関手である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+定義そのものにより、すべての射
+$\mathcal{F}(U) \to \mathcal{F}_x$ は圏 $\mathcal{C}$ の射であり、
+忘却関手 $F$ を適用すると、台となる集合の層に対する対応する写像と
+なる。通常どおり、$\mathcal{C}$ の射とその台となる集合の写像を
+区別しない。$F$ が忠実であるから、これは許される。
+
+\medskip\noindent
+この補題は特に、{\it （必ずしもアーベルでない）群、環、
+固定された環上の加群、固定された体上のベクトル空間の前層}に
+適用される。
+
+\section{加群の前層の茎}
+\label{sheaves-section-stalk-presheaves-modules}
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-module}
+$X$ を位相空間とする。
+$\mathcal{O}$ を $X$ 上の環の前層とする。
+$\mathcal{F}$ を $\mathcal{O}$-加群の前層とする。
+$x \in X$ とする。乗法写像
+$\mathcal{O} \times \mathcal{F} \to \mathcal{F}$ から来る標準的な写像
+$\mathcal{O}_x \times \mathcal{F}_x
+\to \mathcal{F}_x$ は、アーベル群 $\mathcal{F}_x$ 上に
+$\mathcal{O}_x$-加群構造を定める。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-tensor-presheaf-modules}
+$X$ を位相空間とする。
+$\mathcal{O} \to \mathcal{O}'$ を $X$ 上の環の前層の射とする。
+$\mathcal{F}$ を $\mathcal{O}$-加群の前層とする。
+$x \in X$ とする。このとき
+$$
+\mathcal{F}_x \otimes_{\mathcal{O}_x} \mathcal{O}'_x
+=
+(\mathcal{F} \otimes_{p, \mathcal{O}} \mathcal{O}')_x
+$$
+が $\mathcal{O}'_x$-加群として成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+\section{代数構造}
+\label{sheaves-section-algebraic-structures}
+
+\noindent
+この節では、上の各節で現れた概念を少し形式化する。
+
+\begin{definition}
+\label{sheaves-definition-algebraic-structure}
+{\it 代数構造の型}とは、圏 $\mathcal{C}$ と関手
+$F : \mathcal{C} \to \textit{Sets}$ の組であって、
+次の性質をもつものをいう。
+\begin{enumerate}
+\item $F$ は忠実である。
+\item $\mathcal{C}$ は極限をもち、$F$ は極限と可換する。
+\item $\mathcal{C}$ はフィルター付き余極限をもち、
+$F$ はそれらと可換する。
+\item $F$ は同型を反映する。
+\end{enumerate}
+\end{definition}
+
+\noindent
+この定義は、以下の多くの議論で用いる性質を明示するためのものである。
+しかし、この概念そのものを詳しく研究することはしない。慣例により、
+Categories, Remark \ref{categories-remark-big-categories} に
+列挙されたものを除き、「大きな」圏を研究することは禁じられている
+からである。その列挙中、次の圏は必要な性質をもつ。
+
+\begin{lemma}
+\label{sheaves-lemma-list-algebraic-structures}
+次の圏は、明らかな忘却関手とともに、代数構造の型を定める。
+\begin{enumerate}
+\item 点付き集合の圏。
+\item アーベル群の圏。
+\item 群の圏。
+\item モノイドの圏。
+\item 環の圏。
+\item 固定された環 $R$ に対する $R$-加群の圏。
+\item 固定された体上のリー代数の圏。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+以下では、代数構造の（前）層とその茎を、台となる集合の
+（前）層によって考える。これは Lemma
+\ref{sheaves-lemma-sheaves-structure} および
+\ref{sheaves-lemma-stalk-presheaf-values-in-category} により許される。
+
+\medskip\noindent
+この節の残りでは、後で有用となる代数構造に関する結果をいくつか
+指摘する。
+
+\begin{lemma}
+\label{sheaves-lemma-properties-algebraic-structures}
+$(\mathcal{C}, F)$ を代数構造の型とする。
+\begin{enumerate}
+\item $\mathcal{C}$ は終対象 $0$ をもち、$F(0) = \{ * \}$ である。
+\item $\mathcal{C}$ は積をもち、
+$F(\prod A_i) = \prod F(A_i)$ である。
+\item $\mathcal{C}$ はファイバー積をもち、
+$F(A \times_B C) = F(A)\times_{F(B)}F(C)$ である。
+\item $\mathcal{C}$ は等化子をもち、$E \to A$ が
+$a, b : A \to B$ の等化子ならば、$F(E) \to F(A)$ は
+$F(a), F(b) : F(A) \to F(B)$ の等化子である。
+\item $A \to B$ がモノ射であることと
+$F(A) \to F(B)$ が単射であることは同値である。
+\item $F(a) : F(A) \to F(B)$ が全射ならば、
+$a$ はエピ射である。
+\item $A_1 \to A_2 \to A_3 \to \ldots$ が与えられたとき、
+$\colim A_i$ が存在して
+$F(\colim A_i) = \colim F(A_i)$ となる。より一般に、
+任意のフィルター付き余極限について同様である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。興味深い主張は (5) だけである。これは、
+$A \to B$ がモノ射であることと
+$A \to A \times_B A$ が同型であることが同値であることに、
+$F$ が同型を反映するという事実を適用すれば従う。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-image-contained-in}
+$(\mathcal{C}, F)$ を代数構造の型とする。
+$A, B, C \in \Ob(\mathcal{C})$ とする。
+$f : A \to B$ と $g : C \to B$ を $\mathcal{C}$ の射とする。
+$F(g)$ が単射で、$\Im(F(f)) \subset \Im(F(g))$ ならば、
+$f$ は、ある射 $t : A \to C$ によって
+$f = g \circ t$ と分解する。
+\end{lemma}
+
+\begin{proof}
+$A \times_B C$ を考える。仮定から
+$F(A \times_B C) = F(A) \times_{F(B)} F(C) = F(A)$ となる。
+$F$ は同型を反映するから $A = A \times_B C$ である。
+これより結論が従う。
+\end{proof}
+
+\begin{example}
+\label{sheaves-example-application-lemma-image-contained-in}
+この補題は、次の状況にしばしば適用される。
+$\mathcal{C}$ における図式
+$$
+\xymatrix{
+A \ar[r] & B \ar[d] \\
+C \ar[r] & D
+}
+$$
+があるとする。$C \to D$ が台集合上で単射であり、
+合成 $A \to B \to D$ の台集合上の像が
+$C \to D$ の像に含まれるとする。このとき
+$\mathcal{C}$ における可換図式
+$$
+\xymatrix{
+A \ar[r] \ar[d] & B \ar[d] \\
+C \ar[r] & D
+}
+$$
+を得る。
+\end{example}
+
+\begin{example}
+\label{sheaves-example-sheaf-product-pointwise-algebraic-structure}
+$F : \mathcal{C} \to \textit{Sets}$ を代数構造の型とする。
+$X$ を位相空間とする。各 $x \in X$ に対し、対象
+$A_x \in \Ob(\mathcal{C})$ が与えられているとする。
+明らかな制限写像とともに規則
+$\Pi(U) = \prod_{x \in U} A_x$ によって定められる、
+$\mathcal{C}$ に値をとる $X$ 上の前層 $\Pi$ を考える。
+対応する集合の前層
+$U \mapsto F(\Pi(U)) = \prod_{x \in U} F(A_x)$ は、
+Example \ref{sheaves-example-sheaf-product-pointwise} により層である。
+したがって、$\Pi$ は型 $(\mathcal{C} , F)$ の代数構造の層である。
+これにより、アーベル群、群、環などの層の例が多数得られる。
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{完全性と点}
+\label{sheaves-section-exactness-points}
+
+\noindent
+任意の圏において、エピ射、モノ射、同型などの概念がある。
+
+\begin{lemma}
+\label{sheaves-lemma-points-exactness}
+$X$ を位相空間とし、$\varphi : \mathcal{F} \to \mathcal{G}$ を
+$X$ 上の集合の層の射とする。
+\begin{enumerate}
+\item 写像 $\varphi$ が層の圏におけるモノ射であることと、
+すべての $x \in X$ に対して写像
+$\varphi_x : \mathcal{F}_x \to \mathcal{G}_x$ が
+単射であることは同値である。
+\item 写像 $\varphi$ が層の圏におけるエピ射であることと、
+すべての $x \in X$ に対して写像
+$\varphi_x : \mathcal{F}_x \to \mathcal{G}_x$ が
+全射であることは同値である。
+\item 写像 $\varphi$ が層の圏における同型であることと、
+すべての $x \in X$ に対して写像
+$\varphi_x : \mathcal{F}_x \to \mathcal{G}_x$ が
+全単射であることは同値である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+したがって、集合の層の圏におけるエピ射とモノ射は
+次のように記述できる。
+
+\begin{definition}
+\label{sheaves-definition-injective-surjective}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item 前層 $\mathcal{F}$ が前層 $\mathcal{G}$ の
+{\it 部分前層}であるとは、すべての開集合 $U \subset X$ に対して
+$\mathcal{F}(U) \subset \mathcal{G}(U)$ であり、
+$\mathcal{G}$ の制限写像が $\mathcal{F}$ の制限写像を誘導することを
+いう。$\mathcal{F}$ と $\mathcal{G}$ が層である場合、
+$\mathcal{F}$ を $\mathcal{G}$ の{\it 部分層}という。
+これを $\mathcal{F} \subset \mathcal{G}$ と記すことがある。
+\item $X$ 上の集合の前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$ が{\it 単射的}であるとは、
+$X$ のすべての開集合 $U$ に対して
+$\mathcal{F}(U) \to \mathcal{G}(U)$ が単射であることをいう。
+\item $X$ 上の集合の前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$ が{\it 全射的}であるとは、
+$X$ のすべての開集合 $U$ に対して
+$\mathcal{F}(U) \to \mathcal{G}(U)$ が全射であることをいう。
+\item $X$ 上の集合の層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$ が{\it 単射的}であるとは、
+$X$ のすべての開集合 $U$ に対して
+$\mathcal{F}(U) \to \mathcal{G}(U)$ が単射であることをいう。
+\item $X$ 上の集合の層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$ が{\it 全射的}であるとは、
+$X$ の各開集合 $U$ と $\mathcal{G}(U)$ の各切断 $s$ に対して、
+開被覆 $U = \bigcup U_i$ が存在し、すべての $i$ について
+$s|_{U_i}$ が $\mathcal{F}(U_i) \to \mathcal{G}(U_i)$ の像に
+属することをいう。
+\end{enumerate}
+\end{definition}
+
+
+\begin{lemma}
+\label{sheaves-lemma-characterize-epi-mono}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item 前層の圏におけるエピ射（resp.\ モノ射）は、ちょうど前層の
+全射的（resp.\ 単射的）写像である。
+\item 層の圏におけるエピ射（resp.\ モノ射）は、ちょうど層の
+全射的（resp.\ 単射的）写像であり、また、すべての茎上で
+全射的（resp.\ 単射的）となる写像にほかならない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+\begin{lemma}
+\label{sheaves-lemma-check-homomorphism-stalks}
+$X$ を位相空間とする。
+$(\mathcal{C}, F)$ を代数構造の型とする。
+$\mathcal{F}$、$\mathcal{G}$ を $\mathcal{C}$ に値をとる
+$X$ 上の層とする。$\varphi : \mathcal{F} \to \mathcal{G}$ を、
+台となる集合の層の写像とする。すべての点 $x \in X$ に対して
+写像 $\mathcal{F}_x \to \mathcal{G}_x$ が代数構造の射ならば、
+$\varphi$ は代数構造の層の射である。
+\end{lemma}
+
+\begin{proof}
+$U$ を $X$ の開部分集合とする。台集合の図式
+$$
+\xymatrix{
+\mathcal{F}(U) \ar[r] \ar[d] &
+\prod_{x \in U} \mathcal{F}_x \ar[d] \\
+\mathcal{G}(U) \ar[r] &
+\prod_{x \in U} \mathcal{G}_x
+}
+$$
+を考える。仮定とこれまでの結果により、左の垂直矢印以外は
+すべて代数構造の射である。さらに、下の水平矢印は単射である。
+Lemma \ref{sheaves-lemma-sheaf-subset-stalks} を参照せよ。
+したがって、Lemma \ref{sheaves-lemma-image-contained-in} により結論を得る。
+Example \ref{sheaves-example-application-lemma-image-contained-in} も参照せよ。
+\end{proof}
+
+\noindent
+アーベル層の短完全列などは、加群の層の章で議論する。
+Modules, Section \ref{modules-section-kernels} を参照せよ。
+
+
+
+
+\section{層化}
+\label{sheaves-section-sheafification}
+
+\noindent
+この節では、位相空間上の前層の層化を得る方法を説明する。
+この場合、茎を用いて層化を記述する。これは Sites, Section
+\ref{sites-section-sheafification} で述べる一般的手順とは異なり、
+おそらく多少理解しやすい。
+
+\medskip\noindent
+基本構成は次のとおりである。$\mathcal{F}$ を位相空間 $X$ 上の
+集合の前層とする。各開集合 $U \subset X$ に対して
+$$
+\mathcal{F}^{\#}(U)
+=
+\{
+(s_u) \in \prod\nolimits_{u \in U} \mathcal{F}_u
+\text{ such that }(*)
+\}
+$$
+と定める。ここで $(*)$ は次の性質である。
+\begin{itemize}
+\item[(*)] 各 $u \in U$ に対して、開近傍 $u \in V \subset U$ と
+切断 $\sigma \in \mathcal{F}(V)$ が存在し、すべての $v \in V$ に
+対して $\mathcal{F}_v$ において $s_v = (V, \sigma)$ となる。
+\end{itemize}
+$(*)$ は各 $u \in U$ に対する条件であり、$u \in U$ を固定したとき、
+その真偽は $u$ の任意の開近傍における各 $v$ での値
+$s_v$ だけに依存する。
+したがって、$V \subset U \subset X$ が開集合ならば、射影写像
+$$
+\prod\nolimits_{u \in U} \mathcal{F}_u
+\longrightarrow
+\prod\nolimits_{v \in V} \mathcal{F}_v
+$$
+が $\mathcal{F}^{\#}(U)$ の元を $\mathcal{F}^{\#}(V)$ の元に
+写すことは明らかである。これらの写像を制限写像として用いると、
+$\mathcal{F}^\#$ は $X$ 上の集合の前層となる。
+
+\medskip\noindent
+さらに、Section \ref{sheaves-section-stalks} で述べた写像
+$\mathcal{F}(U) \to \prod_{u \in U} \mathcal{F}_u$ の像は
+明らかに $\mathcal{F}^{\#}(U)$ に含まれる。また、
+$V \subset U \subset X$ が開集合ならば、可換図式
+$$
+\xymatrix{
+\mathcal{F}(U) \ar[r] \ar[d] &
+\mathcal{F}^{\#}(U) \ar[r] \ar[d] &
+\prod_{u\in U} \mathcal{F}_u \ar[d] \\
+\mathcal{F}(V) \ar[r] &
+\mathcal{F}^{\#}(V) \ar[r] &
+\prod_{v\in V} \mathcal{F}_v
+}
+$$
+がある。ここで垂直写像は制限写像から誘導される。したがって、
+標準的な前層の射 $\mathcal{F} \to \mathcal{F}^{\#}$ がある。
+
+\medskip\noindent
+Example \ref{sheaves-example-sheaf-product-pointwise} で、明らかな制限写像を
+もつ規則
+$\Pi(\mathcal{F}) : U \mapsto \prod_{u\in U} \mathcal{F}_u$ が
+層であることを見た。また、構成により $\mathcal{F}^{\#}$ は
+この層の部分前層である。言い換えると、前層の射
+$$
+\mathcal{F} \to \mathcal{F}^\# \to \Pi(\mathcal{F}).
+$$
+がある。さらに、$\mathcal{F}$ に上の列を対応させる規則は、
+前層 $\mathcal{F}$ に関して明らかに関手的である。
+この記法を以下の補題の証明で用いる。
+
+\begin{lemma}
+\label{sheaves-lemma-sheafification-sheaf}
+前層 $\mathcal{F}^{\#}$ は層である。
+\end{lemma}
+
+\begin{proof}
+読者にとっては、ここの証明を読むより自分で説明を見つける方が
+よいかもしれない。実際、この補題が成り立つ理由は、連続関数の前層が
+層である理由と同じである。Example
+\ref{sheaves-example-basic-continuous-maps} を参照せよ
+（この類比は「エタール空間」を用いて厳密にできる）。
+
+\medskip\noindent
+ともかく、$U = \bigcup U_i$ を開被覆とする。
+$s_i = (s_{i, u})_{u \in U_i} \in \mathcal{F}^{\#}(U_i)$ をとり、
+$s_i$ が $U_i \cap U_j$ 上で $s_j$ と一致するとする。
+$\Pi(\mathcal{F})$ は層であるから、
+$\prod_{u\in U} \mathcal{F}_u$ の元 $s = (s_u)_{u\in U}$ であって、
+$U_i$ への制限が $s_i$ となるものが得られる。性質 $(*)$ を
+確認しなければならない。$u \in U$ をとると、ある $i$ に対し
+$u \in U_i$ である。したがって、$s_i$ に対する $(*)$ により、
+$u \in V \subset U_i$ となる開集合 $V$ と
+$\sigma \in \mathcal{F}(V)$ が存在し、すべての $v \in V$ に対して
+$\mathcal{F}_v$ において $s_{i, v} = (V, \sigma)$ となる。
+$s_{i, v} = s_v$ であるから、$s$ に対する $(*)$ が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-sheafification}
+$X$ を位相空間とする。
+$\mathcal{F}$ を $X$ 上の集合の前層とする。
+$x \in X$ とする。このとき
+$\mathcal{F}_x = \mathcal{F}^\#_x$ である。
+\end{lemma}
+
+\begin{proof}
+写像 $\mathcal{F}_x \to \mathcal{F}^\#_x$ は単射である。
+実際、すでに写像
+$\mathcal{F}_x \to \Pi(\mathcal{F})_x$ が単射である。
+すなわち、標準的な写像
+$\Pi(\mathcal{F})_x \to \mathcal{F}_x$ があり、これは
+$\mathcal{F}_x \to \Pi(\mathcal{F})_x$ の左逆写像である。
+Example \ref{sheaves-example-sheaf-product-pointwise-stalk} を参照せよ。
+全射性を示すため、$\overline{s} \in \mathcal{F}^\#_x$ とする。
+$x$ の開近傍 $U$ であって、$\overline{s}$ が
+$s \in \mathcal{F}^\#(U)$ に対する $(U, s)$ の同値類となるものを
+とれる。定義により、これは $x$ の開近傍 $V \subset U$ と
+切断 $\sigma \in \mathcal{F}(V)$ が存在し、$s|_V$ が
+$\Pi(\mathcal{F})(V)$ における $\sigma$ の像となることを意味する。
+明らかに、$(V, \sigma)$ の類は $\overline{s}$ に写る
+$\mathcal{F}_x$ の元を定める。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-sheafify-universal}
+$\mathcal{F}$ を $X$ 上の集合の前層とする。
+集合の層への任意の写像 $\mathcal{F} \to \mathcal{G}$ は、
+一意に $\mathcal{F} \to \mathcal{F}^\# \to \mathcal{G}$ と分解する。
+\end{lemma}
+
+\begin{proof}
+明らかに可換図式
+$$
+\xymatrix{
+\mathcal{F} \ar[r] \ar[d] &
+\mathcal{F}^\# \ar[r] \ar[d] &
+\Pi(\mathcal{F}) \ar[d] \\
+\mathcal{G} \ar[r] &
+\mathcal{G}^\# \ar[r] &
+\Pi(\mathcal{G}) \\
+}
+$$
+がある。したがって、$\mathcal{G} = \mathcal{G}^\#$ を示せば十分である。
+これを見るには、Lemma \ref{sheaves-lemma-points-exactness} により、
+各点 $x \in X$ に対して写像
+$\mathcal{G}_x \to \mathcal{G}^\#_x$ が全単射であることを示せばよい。
+これは上の Lemma \ref{sheaves-lemma-stalk-sheafification} である。
+\end{proof}
+
+\noindent
+この補題は実際に、関手の随伴対
+$i : \Sh(X) \to \textit{PSh}(X)$（包含）と
+$\# : \textit{PSh}(X) \to \Sh(X)$（層化）がある、と述べている。
+公式は
+$$
+\Mor_{\textit{PSh}(X)}(\mathcal{F}, i(\mathcal{G}))
+=
+\Mor_{\Sh(X)}(\mathcal{F}^\#, \mathcal{G})
+$$
+であり、層化が包含関手の左随伴であることを述べる。
+Categories, Section \ref{categories-section-adjoint} を参照せよ。
+
+\begin{example}
+\label{sheaves-example-sheafify-constant}
+記法については Example \ref{sheaves-example-stalk-constant-presheaf} を参照せよ。
+写像 $A_p \to \underline{A}$ は写像
+$A_p^\# \to \underline{A}$ を誘導する。これが同型であることは
+容易に分かる。言葉で述べれば、値 $A$ の定数前層の層化は
+値 $A$ の定数層である。
+\end{example}
+
+\begin{lemma}
+\label{sheaves-lemma-separated-presheaf-into-sheaf}
+$X$ を位相空間とする。前層 $\mathcal{F}$ が分離的
+（Definition \ref{sheaves-definition-separated} を参照）であることと、
+標準的な写像 $\mathcal{F} \to \mathcal{F}^\#$ が
+単射的であることは同値である。
+\end{lemma}
+
+\begin{proof}
+これは、この節における $\mathcal{F}^\#$ の構成から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-sheafify-epi-mono}
+$X$ を位相空間とする。集合の前層の全射的（resp.\ 単射的）射の
+層化は全射的（resp.\ 単射的）である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+\section{アーベル前層の層化}
+\label{sheaves-section-sheafify-abelian-presheaves}
+
+\noindent
+次の一見奇妙な補題はおそらく不要であるが、
+代数構造の前層の層化を扱ううえで非常に便利である。
+
+\begin{lemma}
+\label{sheaves-lemma-diagram-fibre-product}
+$X$ を位相空間とする。$\mathcal{F}$ を $X$ 上の集合の前層とする。
+$U \subset X$ を開集合とする。標準的なファイバー積図式
+$$
+\xymatrix{
+\mathcal{F}^\#(U) \ar[d] \ar[r] &
+\Pi(\mathcal{F})(U) \ar[d] \\
+\prod_{x \in U} \mathcal{F}_x
+\ar[r] &
+\prod_{x \in U} \Pi(\mathcal{F})_x
+}
+$$
+が存在する。ここで各写像は次のとおりである。
+\begin{enumerate}
+\item 左の垂直写像の成分は
+$\mathcal{F}^\#(U) \to \mathcal{F}^\#_x = \mathcal{F}_x$
+である。この等号は Lemma \ref{sheaves-lemma-stalk-sheafification} による。
+\item 上の水平写像は、Section \ref{sheaves-section-sheafification} で述べた
+前層の写像 $\mathcal{F} \to \Pi(\mathcal{F})$ から得られる。
+\item 右の垂直写像は明らかな成分写像
+$\Pi(\mathcal{F})(U) \to \Pi(\mathcal{F})_x$ をもつ。
+\item 下の水平写像の成分は
+$\mathcal{F}_x \to \Pi(\mathcal{F})_x$
+であり、Section \ref{sheaves-section-sheafification} で述べた
+前層の写像 $\mathcal{F} \to \Pi(\mathcal{F})$ から得られる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+図式が可換であることは明らかである。これがファイバー積図式であることを
+示さなければならない。すべての写像
+$\mathcal{F}_x \to \Pi(\mathcal{F})_x$ は単射的なので、
+下の水平矢印は単射的である
+（Lemma \ref{sheaves-lemma-stalk-sheafification} の証明の冒頭を参照せよ）。
+切断 $s \in \Pi(\mathcal{F})(U)$ が $\mathcal{F}^\#$ に属することと、
+条件 $(*)$ が成り立つことは同値である。しかし $(*)$ は、各点の近傍で
+切断 $s$ が $\mathcal{F}$ の切断から来ることを述べている。
+茎関手の定義により、これは各茎 $\Pi(\mathcal{F})_x$ における
+$s$ の値が茎 $\mathcal{F}_x$ の元から来ることと同値である。
+以上で補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-sheafify-abelian-presheaf}
+$X$ を位相空間とする。$\mathcal{F}$ を $X$ 上のアーベル前層とする。
+このとき、$\mathcal{F} \to \mathcal{F}^\#$ がアーベル前層の射となるような
+$\mathcal{F}^\#$ 上のアーベル層の構造が一意に存在する。
+さらに、次の随伴性が成り立つ。
+$$
+\Mor_{\textit{PAb}(X)}(\mathcal{F}, i(\mathcal{G}))
+=
+\Mor_{\textit{Ab}(X)}(\mathcal{F}^\#, \mathcal{G}).
+$$
+\end{lemma}
+
+\begin{proof}
+Section \ref{sheaves-section-sheafification} で定義した集合の層
+$\Pi(\mathcal{F})$ を思い出そう。すべての茎 $\mathcal{F}_x$ は
+アーベル群である。Lemma \ref{sheaves-lemma-stalk-abelian-presheaf} を参照せよ。
+したがって Example
+\ref{sheaves-example-sheaf-product-pointwise-algebraic-structure} により、
+$\Pi(\mathcal{F})$ はアーベル群の層である。
+また、写像 $\mathcal{F} \to \Pi(\mathcal{F})$ が
+アーベル前層の射であることは明らかである。
+Section \ref{sheaves-section-sheafification} の条件 $(*)$ が、すべての開部分集合
+$U \subset X$ に対して $\Pi(\mathcal{F})(U)$ の部分群を定めることを示せば、
+$\mathcal{F}^\#$ は標準的にアーベル層の構造を受け継ぐ。
+これは直接示すことも容易であり、適切な簡単な議論を見つけることは
+読者に委ねる。ここでは、代数構造の前層にも一般化できる次の議論を用いる。
+Lemma \ref{sheaves-lemma-diagram-fibre-product} により、
+$\mathcal{F}^\#(U)$ はアーベル群の図式のファイバー積である。
+したがって望みどおり、$\mathcal{F}^\#$ はアーベル部分群である。
+
+\medskip\noindent
+この時点で、Lemma \ref{sheaves-lemma-stalk-abelian-presheaf} により
+$\mathcal{F}^\#_x$ はアーベル群であり、
+$\mathcal{F}_x \to \mathcal{F}^\#_x$ は
+全単射（Lemma \ref{sheaves-lemma-stalk-sheafification}）かつ
+アーベル群の準同型である。したがって
+$\mathcal{F}_x \to \mathcal{F}^\#_x$ はアーベル群の同型である。
+以下では、この事実を断りなく用いる。
+
+\medskip\noindent
+随伴性を証明するため、集合の前層の層化の随伴性を用いる。
+例えば、$\psi : \mathcal{F} \to i(\mathcal{G})$ が前層の射ならば、
+層の射 $\psi' : \mathcal{F}^\# \to \mathcal{G}$ が得られる。
+これがアーベル層の射であることを確かめればよい。
+例えば Lemma \ref{sheaves-lemma-stalk-sheafification} により
+茎上でそうであることに注意し、上の
+Lemma \ref{sheaves-lemma-check-homomorphism-stalks} を用いればよい。
+\end{proof}
+
+\section{代数構造の前層の層化}
+\label{sheaves-section-sheafification-presheaves-structures}
+
+\begin{lemma}
+\label{sheaves-lemma-sheafify-presheaf-structures}
+$X$ を位相空間とする。$(\mathcal{C}, F)$ を代数構造の型とする。
+$\mathcal{F}$ を $X$ 上の $\mathcal{C}$ に値をもつ前層とする。
+このとき、$\mathcal{C}$ に値をもつ層 $\mathcal{F}^\#$ と、
+$\mathcal{C}$ に値をもつ前層の射
+$\mathcal{F} \to \mathcal{F}^\#$ で、次の性質をもつものが存在する。
+\begin{enumerate}
+\item 写像 $\mathcal{F} \to \mathcal{F}^\#$ は、
+$\mathcal{F}^\#$ の基礎となる集合の層を、
+$\mathcal{F}$ の基礎となる集合の前層の層化と同一視する。
+\item $\mathcal{G}$ が $\mathcal{C}$ に値をもつ層であるような任意の射
+$\mathcal{F} \to \mathcal{G}$ に対して、一意な分解
+$\mathcal{F} \to \mathcal{F}^\# \to \mathcal{G}$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+証明は Lemma \ref{sheaves-lemma-sheafify-abelian-presheaf} の証明と同じであり、
+Lemma \ref{sheaves-lemma-image-contained-in} を繰り返し適用する
+（Example \ref{sheaves-example-application-lemma-image-contained-in} も参照せよ）。
+主要な考えは、$\mathcal{F}^\#(U)$ を次の図式の
+$\mathcal{C}$ におけるファイバー積として定義することである。
+$$
+\xymatrix{
+ &
+\Pi(\mathcal{F})(U) \ar[d] \\
+\prod_{x \in U} \mathcal{F}_x
+\ar[r] &
+\prod_{x \in U} \Pi(\mathcal{F})_x
+}
+$$
+Lemma \ref{sheaves-lemma-diagram-fibre-product} と比較せよ。
+\end{proof}
+
+\section{加群前層の層化}
+\label{sheaves-section-sheafification-presheaves-modules}
+
+\begin{lemma}
+\label{sheaves-lemma-sheafification-presheaf-modules}
+$X$ を位相空間とする。$\mathcal{O}$ を $X$ 上の環の前層とし、
+$\mathcal{F}$ を $\mathcal{O}$-加群の前層とする。
+$\mathcal{O}^\#$ を $\mathcal{O}$ の層化とする。
+$\mathcal{F}^\#$ を、$\mathcal{F}$ をアーベル群の前層とみたときの
+層化とする。このとき、集合の層の写像
+$$
+\mathcal{O}^\# \times \mathcal{F}^\#
+\longrightarrow
+\mathcal{F}^\#
+$$
+であって、図式
+$$
+\xymatrix{
+\mathcal{O} \times \mathcal{F} \ar[r] \ar[d] &
+\mathcal{F} \ar[d] \\
+\mathcal{O}^\# \times \mathcal{F}^\# \ar[r] &
+\mathcal{F}^\#
+}
+$$
+を可換にし、$\mathcal{F}^\#$ を $\mathcal{O}^\#$-加群の層とするものが
+存在する。さらに、$\mathcal{G}$ が $\mathcal{O}^\#$-加群の層ならば、
+$\mathcal{G}$ を $\mathcal{O}$-加群へ制限したものに値をもつ
+$\mathcal{O}$-加群の前層の任意の射
+$\mathcal{F} \to \mathcal{G}$ は、一意に
+$\mathcal{F} \to \mathcal{F}^\# \to \mathcal{G}$ と分解する。
+ここで $\mathcal{F}^\# \to \mathcal{G}$ は
+$\mathcal{O}^\#$-加群の射である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+この補題は実際、制限と層から前層への包含を組み合わせた関手
+$i : \textit{Mod}(\mathcal{O}^\#) \to \textit{PMod}(\mathcal{O})$
+と、補題の層化関手
+${}^\# : \textit{PMod}(\mathcal{O}) \to \textit{Mod}(\mathcal{O}^\#)$
+が随伴することを意味する。式で書けば
+$$
+\Mor_{\textit{PMod}(\mathcal{O})}(\mathcal{F}, i\mathcal{G})
+=
+\Mor_{\textit{Mod}(\mathcal{O}^\#)}(\mathcal{F}^\#, \mathcal{G})
+$$
+
+\medskip\noindent
+$X$ を位相空間とする。$\mathcal{O}_1 \to \mathcal{O}_2$ を
+$X$ 上の環の層の射とする。
+Section \ref{sheaves-section-presheaves-modules} では、この状況に付随する
+加群前層の制限関手と環変更関手を定義した。
+
+\medskip\noindent
+$\mathcal{F}$ が $\mathcal{O}_2$-加群の層ならば、
+$\mathcal{F}$ の制限 $\mathcal{F}_{\mathcal{O}_1}$ は明らかに
+$\mathcal{O}_1$-加群の層である。したがって制限関手
+$$
+\textit{Mod}(\mathcal{O}_2)
+\longrightarrow
+\textit{Mod}(\mathcal{O}_1)
+$$
+を得る。
+
+\medskip\noindent
+一方、$\mathcal{O}_1$-加群の層 $\mathcal{G}$ が与えられたとき、
+$\mathcal{O}_2$-加群の前層
+$\mathcal{O}_2 \otimes_{p, \mathcal{O}_1} \mathcal{G}$ は
+一般には層ではない。そこで、{\it テンソル積層}
+$\mathcal{O}_2 \otimes_{\mathcal{O}_1} \mathcal{G}$ を、
+前層に対する構成の層化として、式
+$$
+\mathcal{O}_2 \otimes_{\mathcal{O}_1} \mathcal{G}
+=
+(\mathcal{O}_2 \otimes_{p, \mathcal{O}_1} \mathcal{G})^\#
+$$
+によって定義する。これにより {\it 環変更}関手
+$$
+\textit{Mod}(\mathcal{O}_1)
+\longrightarrow
+\textit{Mod}(\mathcal{O}_2)
+$$
+を得る。
+
+\begin{lemma}
+\label{sheaves-lemma-adjointness-tensor-restrict}
+上の $X$、$\mathcal{O}_1$、$\mathcal{O}_2$、$\mathcal{F}$、
+$\mathcal{G}$ に対して、標準的な全単射
+$$
+\Hom_{\mathcal{O}_1}(\mathcal{G}, \mathcal{F}_{\mathcal{O}_1})
+=
+\Hom_{\mathcal{O}_2}(
+\mathcal{O}_2 \otimes_{\mathcal{O}_1} \mathcal{G},
+\mathcal{F}
+)
+$$
+が存在する。言い換えると、制限関手と環変更関手は互いに随伴する。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{sheaves-lemma-adjointness-tensor-restrict-presheaves} と、
+$\mathcal{F}$ が層であるため
+$\Hom_{\mathcal{O}_2}(
+\mathcal{O}_2 \otimes_{\mathcal{O}_1} \mathcal{G},
+\mathcal{F}
+)
+=
+\Hom_{\mathcal{O}_2}(
+\mathcal{O}_2 \otimes_{p, \mathcal{O}_1} \mathcal{G},
+\mathcal{F}
+)$
+となることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-tensor-sheaf-modules}
+$X$ を位相空間とする。$\mathcal{O} \to \mathcal{O}'$ を
+$X$ 上の環の層の射とする。$\mathcal{F}$ を
+$\mathcal{O}$-加群の層とし、$x \in X$ とする。このとき
+$$
+\mathcal{F}_x \otimes_{\mathcal{O}_x} \mathcal{O}'_x
+=
+(\mathcal{F} \otimes_\mathcal{O} \mathcal{O}')_x
+$$
+が $\mathcal{O}'_x$-加群として成り立つ。
+\end{lemma}
+
+\begin{proof}
+Lemma \ref{sheaves-lemma-stalk-tensor-presheaf-modules} と、
+茎を取る操作が層化と可換することから直ちに従う。
+\end{proof}
+\section{連続写像と層}
+\label{sheaves-section-presheaves-functorial}
+
+\noindent
+$f : X \to Y$ を位相空間の連続写像とする。
+前層および層に対する順像関手と逆像関手を定義する。
+
+\medskip\noindent
+$\mathcal{F}$ を $X$ 上の集合の前層とする。
+$\mathcal{F}$ の{\it 順像}を、任意の開集合 $V \subset Y$ に対する規則
+$$
+f_*\mathcal{F}(V) = \mathcal{F}(f^{-1}(V))
+$$
+によって定義する。$V_1 \subset V_2 \subset Y$ が開集合ならば、
+制限写像は図式
+$$
+\xymatrix{
+f_*\mathcal{F}(V_2) \ar[d] \ar@{=}[r] &
+\mathcal{F}(f^{-1}(V_2)) \ar[d]^{\text{restriction for }\mathcal{F}} \\
+f_*\mathcal{F}(V_1) \ar@{=}[r] &
+\mathcal{F}(f^{-1}(V_1))
+}
+$$
+の可換性によって与えられる。これが集合の前層を定義することは明らかである。
+この構成は前層 $\mathcal{F}$ に関して明らかに関手的であり、したがって関手
+$$
+f_* : \textit{PSh}(X) \longrightarrow \textit{PSh}(Y).
+$$
+を得る。
+
+\begin{lemma}
+\label{sheaves-lemma-pushforward-sheaf}
+$f : X \to Y$ を連続写像とする。$\mathcal{F}$ を $X$ 上の集合の層とする。
+このとき $f_*\mathcal{F}$ は $Y$ 上の層である。
+\end{lemma}
+
+\begin{proof}
+$V = \bigcup V_j$ が $Y$ の開被覆ならば
+$f^{-1}(V) = \bigcup f^{-1}(V_j)$ は $X$ の開被覆であることから、
+直ちに従う。
+\end{proof}
+
+\noindent
+したがって関手
+$$
+f_* : \Sh(X) \longrightarrow \Sh(Y).
+$$
+を得る。これは次の強い意味で合成と両立する。
+
+\begin{lemma}
+\label{sheaves-lemma-pushforward-composition}
+$f : X \to Y$ および $g : Y \to Z$ を位相空間の連続写像とする。
+関手 $(g \circ f)_*$ と $g_* \circ f_*$ は
+（集合の前層に対しても層に対しても）等しい。
+\end{lemma}
+
+\begin{proof}
+これは
+$(g \circ f)_*\mathcal{F}(W) =
+\mathcal{F}((g \circ f)^{-1}W)$、
+$(g_* \circ f_*)\mathcal{F}(W) = \mathcal{F}(f^{-1} g^{-1} W)$、
+および $(g \circ f)^{-1}W = f^{-1} g^{-1} W$ による。
+\end{proof}
+
+\noindent
+$\mathcal{G}$ を $Y$ 上の集合の前層とする。
+与えられた前層 $\mathcal{G}$ の{\it 逆像前層} $f_p\mathcal{G}$ を、
+前層上の順像 $f_*$ の左随伴として定義する。言い換えると、
+これは $X$ 上の前層 $f_p \mathcal{G}$ であって
+$$
+\Mor_{\textit{PSh}(X)}(f_p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PSh}(Y)}(\mathcal{G}, f_*\mathcal{F}).
+$$
+を満たすものである。米田の補題により、これは逆像を一意に定める。
+実際にそのような逆像が存在する。
+
+\begin{lemma}
+\label{sheaves-lemma-pullback-presheaves}
+$f : X \to Y$ を連続写像とする。
+$f_*$ の左随伴となる関手
+$f_p : \textit{PSh}(Y) \to \textit{PSh}(X)$ が存在する。
+前層 $\mathcal{G}$ に対して、これは規則
+$$
+f_p\mathcal{G}(U) = \colim_{f(U) \subset V} \mathcal{G}(V)
+$$
+によって定まる。ここで余極限は、$Y$ における $f(U)$ の
+開近傍 $V$ 全体にわたる。これらの余極限は有向半順序集合にわたる。
+（$f_p\mathcal{G}$ の制限写像は証明中で説明する。）
+\end{lemma}
+
+\begin{proof}
+余極限は、$f(U)$ を含む開部分集合 $V \subset Y$ からなる半順序集合に
+逆包含の順序を入れたものにわたる。$V, V'$ がこの集合に属すれば
+$V \cap V'$ も属するので、これは有向半順序集合である。
+さらに $U_1 \subset U_2$ ならば、$f(U_2)$ の任意の開近傍は
+$f(U_1)$ の開近傍でもある。したがって $f_p\mathcal{G}(U_2)$ を
+定義する系は $f_p\mathcal{G}(U_1)$ を定義する系の部分系であり、
+制限写像を得る（例えば Categories,
+Lemma \ref{categories-lemma-functorial-colimit} の一般論を適用せよ）。
+
+\medskip\noindent
+余極限の構成は $\mathcal{G}$ に関して明らかに関手的であり、
+制限写像についても同様である。したがって $f_p$ を関手として定義できた。
+
+\medskip\noindent
+有用な小さな注意として、標準的な写像
+$\mathcal{G}(U) \to f_p\mathcal{G}(f^{-1}(U))$ が存在する。
+実際、$f(f^{-1}(U))$ の開近傍からなる系は元 $U$ を含む。
+これは制限写像と両立する。言い換えると、標準的な写像
+$i_\mathcal{G} : \mathcal{G} \to f_* f_p \mathcal{G}$ がある。
+
+\medskip\noindent
+$\mathcal{F}$ を $X$ 上の集合の前層とする。集合の前層の写像
+$\psi : f_p\mathcal{G} \to \mathcal{F}$ があるとする。
+対応する写像 $\mathcal{G} \to f_*\mathcal{F}$ は
+$f_*\psi \circ i_\mathcal{G} :
+\mathcal{G} \to f_* f_p \mathcal{G} \to f_* \mathcal{F}$ である。
+
+\medskip\noindent
+もう一つの有用な小さな注意として、標準的な写像
+$c_\mathcal{F} : f_p f_* \mathcal{F} \to \mathcal{F}$ が存在する。
+実際、$U \subset X$ を開集合とする。$Y$ における
+$V \supset f(U)$ である各開近傍に対し、写像
+$f_*\mathcal{F}(V) = \mathcal{F}(f^{-1}(V))\to \mathcal{F}(U)$
+が存在する。これは $\mathcal{F}$ の制限写像である。
+また、これは $f(U)$ を含むさまざまな開集合の $f^{-1}$ 上における
+$\mathcal{F}$ の値の間の制限写像と両立する。
+したがって標準的な写像
+$f_p f_* \mathcal{F}(U) \to \mathcal{F}(U)$ を得る。
+さらに自明な確認により、これらの写像は制限写像と両立し、
+集合の前層の写像 $c_\mathcal{F}$ を定める。
+
+\medskip\noindent
+$\varphi : \mathcal{G} \to f_*\mathcal{F}$ が集合の前層の写像であるとする。
+$f_p\varphi : f_p \mathcal{G} \to f_p f_* \mathcal{F}$ を考える。
+$c_\mathcal{F}$ と後合成すれば、求める写像
+$c_\mathcal{F} \circ f_p\varphi : f_p\mathcal{G} \to \mathcal{F}$ が得られる。
+この構成が上で与えた逆方向の構成の逆であることの確認は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-pullback-presheaf}
+$f : X \to Y$ を連続写像とし、$x \in X$ とする。
+$\mathcal{G}$ を $Y$ 上の集合の前層とする。茎の標準的な全単射
+$(f_p\mathcal{G})_x = \mathcal{G}_{f(x)}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+これは次のように分かる。
+\begin{eqnarray*}
+(f_p\mathcal{G})_x
+& = &
+\colim_{x \in U} f_p\mathcal{G}(U) \\
+& = &
+\colim_{x \in U} \colim_{f(U) \subset V} \mathcal{G}(V) \\
+& = &
+\colim_{f(x) \in V} \mathcal{G}(V) \\
+& = &
+\mathcal{G}_{f(x)}
+\end{eqnarray*}
+ここでは Categories, Lemma \ref{categories-lemma-colimits-commute} と、
+$f(x)$ を含む $Y$ の任意の開集合 $V$ が上の第三の記述に現れることを
+用いた。詳細は省略する。
+\end{proof}
+
+\noindent
+$\mathcal{G}$ を $Y$ 上の集合の層とする。
+{\it 逆像層} $f^{-1}\mathcal{G}$ を式
+$$
+f^{-1}\mathcal{G} = (f_p\mathcal{G})^\# .
+$$
+によって定義する。逆像 $f^{-1}$ は層上の順像の左随伴である。
+言い換えると、
+$$
+\Mor_{\Sh(X)}(f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\Sh(Y)}(\mathcal{G}, f_*\mathcal{F}).
+$$
+である。実際、
+\begin{eqnarray*}
+\Mor_{\Sh(X)}(f^{-1}\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{PSh}(X)}(f_p\mathcal{G}, \mathcal{F}) \\
+& = &
+\Mor_{\textit{PSh}(Y)}(\mathcal{G}, f_*\mathcal{F}) \\
+& = &
+\Mor_{\Sh(Y)}(\mathcal{G}, f_*\mathcal{F})
+\end{eqnarray*}
+となる。第一の等号では、層化が層から前層への包含の左随伴であることを用いた。
+第二の等号では、$f_p$ が前層上で $f_*$ の左随伴であることを用いた。
+この主張には Lemma \ref{sheaves-lemma-f-map} の証明で再び戻る。
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-pullback}
+$x \in X$ とする。$\mathcal{G}$ を $Y$ 上の集合の層とする。
+茎の標準的な全単射
+$(f^{-1}\mathcal{G})_x = \mathcal{G}_{f(x)}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{sheaves-lemma-stalk-sheafification} と
+\ref{sheaves-lemma-stalk-pullback-presheaf} を組み合わせたものである。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-pullback-composition}
+$f : X \to Y$ および $g : Y \to Z$ を位相空間の連続写像とする。
+関手 $(g \circ f)^{-1}$ と $f^{-1} \circ g^{-1}$ は標準的に同型である。
+同様に、前層上で $(g \circ f)_p \cong f_p \circ g_p$ である。
+\end{lemma}
+
+\begin{proof}
+随伴関手は一意な同型を除いて一意であることと、
+Lemma \ref{sheaves-lemma-pushforward-composition} を用いれば分かる。
+\end{proof}
+
+\begin{definition}
+\label{sheaves-definition-f-map}
+$f : X \to Y$ を連続写像とする。$\mathcal{F}$ を $X$ 上の集合の層、
+$\mathcal{G}$ を $Y$ 上の集合の層とする。
+{\it $f$-写像 $\xi : \mathcal{G} \to \mathcal{F}$}とは、
+開部分集合 $V \subset Y$ で添字づけられた写像の族
+$\xi_V : \mathcal{G}(V) \to \mathcal{F}(f^{-1}(V))$ であって、
+$$
+\xymatrix{
+\mathcal{G}(V) \ar[r]_{\xi_V} \ar[d]_{\text{restriction of }\mathcal{G}} &
+\mathcal{F}(f^{-1}V) \ar[d]^{\text{restriction of }\mathcal{F}} \\
+\mathcal{G}(V') \ar[r]^{\xi_{V'}} &
+\mathcal{F}(f^{-1}V')
+}
+$$
+がすべての開集合 $V' \subset V \subset Y$ に対して可換となるものをいう。
+\end{definition}
+
+\noindent
+文献では、これを Lemma \ref{sheaves-lemma-f-map} の (4) のように
+別の形で定義していることもあるが、この補題が示すとおり実質的な違いはない。
+
+\begin{lemma}
+\label{sheaves-lemma-f-map}
+$f : X \to Y$ を連続写像とする。次の四つの集合の間には全単射がある。
+\begin{enumerate}
+\item 写像 $\mathcal{G} \to f_*\mathcal{F}$ 全体の集合、
+\item 写像 $f^{-1}\mathcal{G} \to \mathcal{F}$ 全体の集合、
+\item $f$-写像 $\xi : \mathcal{G} \to \mathcal{F}$ 全体の集合、および
+\item $U \subset X$ と $V \subset Y$ が $f(U) \subset V$ を満たす
+すべての開集合であるときの写像
+$\xi_{U, V} : \mathcal{G}(V) \to \mathcal{F}(U)$ の、
+すべての制限写像と両立する族全体の集合。
+\end{enumerate}
+これらの全単射は $\mathcal{F} \in \Sh(X)$ と
+$\mathcal{G} \in \Sh(Y)$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+層の写像 $a : \mathcal{G} \to f_*\mathcal{F}$ とは、定義により、
+$Y$ の各開集合 $V$ に写像
+$a_V : \mathcal{G}(V) \to f_*\mathcal{F}(V)$ を対応させる規則であり、
+$f_*\mathcal{F}(V) = \mathcal{F}(f^{-1}(V))$ である。
+したがって、少なくとも「データ」は $\mathcal{G}$ から
+$\mathcal{F}$ への $f$-写像 $\xi$ に必要なものと正確に対応する。
+集合 (1) と (3) が全単射で対応することを示すには、
+$a$ が層の写像であることと、対応する写像の族 $a_V$ が
+Definition \ref{sheaves-definition-f-map} の条件を満たすことが同値であると
+注意すればよい。
+
+\medskip\noindent
+$f^{-1}\mathcal{G}$ は $f_p\mathcal{G}$ の層化であることを思い出そう。
+層化の普遍性により、層の写像
+$b : f^{-1}\mathcal{G} \to \mathcal{F}$ を与えることは、
+$f_p$ がこの節で先に定義した関手であるときの前層の写像
+$b_p : f_p\mathcal{G} \to \mathcal{F}$ を与えることと同じである。
+このような写像 $b_p$ を与えるには、$X$ の各開集合 $U$ に対して
+写像
+$$
+b_{p, U} :
+\colim_{f(U) \subset V} \mathcal{G}(V)
+\longrightarrow
+\mathcal{F}(U)
+$$
+を制限写像と両立するように指定する必要がある。
+$b_{p, U}$ を、$f(U) \subset V$ を満たす $Y$ のすべての開集合
+$V$ に対する写像の族
+$b_{p, U, V} : \mathcal{G}(V) \to \mathcal{F}(U)$ とみなす。
+これらの写像は考え得るすべての制限写像と両立しなければならない。
+言い換えると、$b_p$ は (4) のような写像の族に対応する。
+もちろん逆に、そのような族は写像 $b_p$ を定め、さらに写像
+$b : f^{-1}\mathcal{G} \to \mathcal{F}$ を定める。
+
+\medskip\noindent
+補題の証明を終えるには、「構造を忘れる」ことにより、
+(4) のような族 $\xi_{U, V}$ に
+$\xi_V = \xi_{f^{-1}(V), V}$ をもつ $f$-写像 $\xi$ を対応させる規則が
+全単射であることを示せばよい。そのために、$\xi$ が通常の
+$f$-写像ならば、$\tilde \xi_{U, V}$ を
+$\xi_V : \mathcal{G}(V) \to \mathcal{F}(f^{-1}(V))$ と
+制限写像 $\mathcal{F}(f^{-1}(V)) \to \mathcal{F}(U)$ の合成として定義する。
+これは $f(U) \subset V$、すなわち $U \subset f^{-1}(V)$ だからこそ
+意味をもつ。これで証明が終わる。
+\end{proof}
+
+\noindent
+$X$ 上または $Y$ 上の層どうしの写像の代わりに
+$f$-写像を考えると便利なことがある。$f$-写像の合成を次のように定義する。
+
+\begin{definition}
+\label{sheaves-definition-composition-f-maps}
+$f : X \to Y$ と $g : Y \to Z$ を位相空間の連続写像とする。
+$\mathcal{F}$ を $X$ 上の層、$\mathcal{G}$ を $Y$ 上の層、
+$\mathcal{H}$ を $Z$ 上の層とする。
+$\varphi : \mathcal{G} \to \mathcal{F}$ を $f$-写像とし、
+$\psi : \mathcal{H} \to \mathcal{G}$ を $g$-写像とする。
+{\it $\varphi$ と $\psi$ の合成}とは、図式
+$$
+\xymatrix{
+\mathcal{H}(W) \ar[rr]_{(\varphi \circ \psi)_W}
+\ar[rd]_{\psi_W} & &
+\mathcal{F}(f^{-1}g^{-1}W) \\
+&
+\mathcal{G}(g^{-1}W)
+\ar[ru]_{\varphi_{g^{-1}W}}
+}
+$$
+の可換性によって定義される $(g \circ f)$-写像
+$\varphi \circ \psi$ のことをいう。
+\end{definition}
+
+\noindent
+これが正しく定義されることの確認は読者に委ねる。
+別の見方では、$\varphi \circ \psi$ は合成
+$$
+\mathcal{H}
+\xrightarrow{\psi}
+g_*\mathcal{G}
+\xrightarrow{g_*\varphi}
+g_* f_* \mathcal{F} = (g \circ f)_* \mathcal{F}
+$$
+である。$f$-写像を考える方が、どことなく容易に思えないだろうか。
+
+\medskip\noindent
+最後に、連続写像 $f : X \to Y$ と $f$-写像
+$\varphi : \mathcal{G} \to \mathcal{F}$ が与えられると、
+すべての $x \in X$ に対して茎上の自然な写像
+$$
+\varphi_x : \mathcal{G}_{f(x)} \longrightarrow \mathcal{F}_x
+$$
+がある。$\mathcal{G}_{f(x)}$ の元の代表元 $(V, s)$ は、
+代表元 $(f^{-1}V, \varphi_V(s))$ をもつ $\mathcal{F}_x$ の元に写る。
+これがよく定義されることの確認は読者に委ねる。
+別の言い方では、これはすべての図式
+$$
+\xymatrix{
+\mathcal{F}(f^{-1}V) \ar[r] &
+\mathcal{F}_x \\
+\mathcal{G}(V) \ar[r] \ar[u]^{\varphi_V} &
+\mathcal{G}_{f(x)} \ar[u]^{\varphi_x}
+}
+$$
+（$f(x) \in V \subset Y$ は開集合）が可換となる一意な写像である。
+
+\begin{lemma}
+\label{sheaves-lemma-compose-f-maps-stalks}
+$f : X \to Y$ と $g : Y \to Z$ を位相空間の連続写像とする。
+$\mathcal{F}$ を $X$ 上の層、$\mathcal{G}$ を $Y$ 上の層、
+$\mathcal{H}$ を $Z$ 上の層とする。
+$\varphi : \mathcal{G} \to \mathcal{F}$ を $f$-写像とし、
+$\psi : \mathcal{H} \to \mathcal{G}$ を $g$-写像とする。
+$x \in X$ を点とする。茎上の写像
+$(\varphi \circ \psi)_x : \mathcal{H}_{g(f(x))}
+\to \mathcal{F}_x$ は、合成
+$$
+\mathcal{H}_{g(f(x))}
+\xrightarrow{\psi_{f(x)}}
+\mathcal{G}_{f(x)}
+\xrightarrow{\varphi_x}
+\mathcal{F}_x
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+Definition \ref{sheaves-definition-composition-f-maps} と
+上の茎上の写像の定義から直ちに従う。
+\end{proof}
+\section{連続写像とアーベル層}
+\label{sheaves-section-abelian-presheaves-functorial}
+
+\noindent
+$f : X \to Y$ を連続写像とする。Section
+\ref{sheaves-section-presheaves-functorial} の対応する関手と同様の性質をもつ関手
+\begin{eqnarray*}
+f_* : \textit{PAb}(X) & \longrightarrow & \textit{PAb}(Y) \\
+f_* : \textit{Ab}(X) & \longrightarrow & \textit{Ab}(Y) \\
+f_p : \textit{PAb}(Y) & \longrightarrow & \textit{PAb}(X) \\
+f^{-1} : \textit{Ab}(Y) & \longrightarrow & \textit{Ab}(X)
+\end{eqnarray*}
+が存在すると主張する。これを見るため、次のように論じる。
+
+\medskip\noindent
+各関手は Section \ref{sheaves-section-presheaves-functorial} の対応する関手と
+同じ方法で構成する。同節の余極限がすべて有向余極限なので、この方法が
+機能する（以下で詳しく確認する）。
+
+\medskip\noindent
+まず、$\mathcal{F}$ を $X$ 上のアーベル前層、
+$\mathcal{G}$ を $Y$ 上のアーベル前層とし、
+\begin{eqnarray*}
+f_*\mathcal{F}(V) & = & \mathcal{F}(f^{-1}(V)) \\
+f_p\mathcal{G}(U) & = & \colim_{f(U) \subset V} \mathcal{G}(V)
+\end{eqnarray*}
+をアーベル群として定義する。制限写像は集合の前層に対する制限写像と
+同じであり、すべてアーベル群の準同型である。
+
+\medskip\noindent
+対応 $\mathcal{F} \mapsto f_*\mathcal{F}$ および
+$\mathcal{G} \to f_p\mathcal{G}$ はアーベル群の前層の圏上の関手である。
+これは明らかである。例えばアーベル前層の写像
+$\mathcal{G}_1 \to \mathcal{G}_2$ は有向系の写像
+$\{\mathcal{G}_1(V)\}_{f(U) \subset V} \to
+\{\mathcal{G}_2(V)\}_{f(U) \subset V}$ を誘導し、
+そのすべての写像は準同型であるため、アーベル群の準同型
+$f_p\mathcal{G}_1(U) \to f_p\mathcal{G}_2(U)$ を誘導する。
+
+\medskip\noindent
+関手 $f_*$ と $f_p$ はアーベル群の前層の圏上で随伴する。
+すなわち、
+$$
+\Mor_{\textit{PAb}(X)}(f_p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PAb}(Y)}(\mathcal{G}, f_*\mathcal{F}).
+$$
+である。これを証明するため、Lemma \ref{sheaves-lemma-pullback-presheaves} の
+証明に現れる写像
+$i_\mathcal{G} : \mathcal{G} \to f_* f_p\mathcal{G}$ が
+アーベル前層の写像であることに注意する。したがって
+$\psi : f_p\mathcal{G} \to \mathcal{F}$ がアーベル前層の写像ならば、
+対応する写像 $\mathcal{G} \to f_*\mathcal{F}$、すなわち
+$f_*\psi \circ i_\mathcal{G} :
+\mathcal{G} \to f_* f_p \mathcal{G} \to f_* \mathcal{F}$ も
+アーベル前層の写像である。逆方向については、
+Lemma \ref{sheaves-lemma-pullback-presheaves} の証明に現れる写像
+$c_\mathcal{F} : f_p f_* \mathcal{F} \to \mathcal{F}$ も
+アーベル前層の写像であることに注意する
+（これは、$\mathcal{F}$ の制限写像から作られ、それらがすべて
+準同型だからである）。したがってアーベル前層の写像
+$\varphi : \mathcal{G} \to f_*\mathcal{F}$ が与えられると、写像
+$c_\mathcal{F} \circ f_p\varphi : f_p\mathcal{G} \to \mathcal{F}$ も
+アーベル前層の写像である。これらの構成
+$\psi \mapsto f_*\psi$ と
+$\varphi \mapsto c_\mathcal{F} \circ f_p\varphi$ は、
+集合の前層の写像に対する構成として互いに逆なので、
+アーベル前層の写像に対しても互いに逆である。
+
+\medskip\noindent
+$\mathcal{F}$ が $Y$ 上のアーベル層ならば、$f_*\mathcal{F}$ は
+$X$ 上のアーベル層である。これはアーベル層の定義と、
+集合の層について同じことが成り立つことによる。
+Lemma \ref{sheaves-lemma-pushforward-sheaf} を参照せよ。
+これにより、アーベル層の圏上の関手 $f_*$ が定義される。
+
+\medskip\noindent
+以前と同様に $f^{-1}\mathcal{G} = (f_p\mathcal{G})^\#$ と定義する。
+$f_*$ と $f^{-1}$ の随伴性は、集合の前層の場合と同様に形式的に従う。
+議論は次のとおりである。
+\begin{eqnarray*}
+\Mor_{\textit{Ab}(X)}(f^{-1}\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{PAb}(X)}(f_p\mathcal{G}, \mathcal{F}) \\
+& = &
+\Mor_{\textit{PAb}(Y)}(\mathcal{G}, f_*\mathcal{F}) \\
+& = &
+\Mor_{\textit{Ab}(Y)}(\mathcal{G}, f_*\mathcal{F})
+\end{eqnarray*}
+
+\begin{lemma}
+\label{sheaves-lemma-pullback-abelian-stalk}
+$f : X \to Y$ を連続写像とする。
+\begin{enumerate}
+\item $\mathcal{G}$ を $Y$ 上のアーベル前層、$x \in X$ とする。
+Lemma \ref{sheaves-lemma-stalk-pullback-presheaf} の全単射
+$\mathcal{G}_{f(x)} \to (f_p\mathcal{G})_x$ はアーベル群の同型である。
+\item $\mathcal{G}$ を $Y$ 上のアーベル層、$x \in X$ とする。
+Lemma \ref{sheaves-lemma-stalk-pullback} の全単射
+$\mathcal{G}_{f(x)} \to (f^{-1}\mathcal{G})_x$ はアーベル群の同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+連続写像 $f : X \to Y$ と、$X$ 上のアーベル群の層
+$\mathcal{F}$、$Y$ 上のアーベル群の層 $\mathcal{G}$ が与えられたとき、
+{\it アーベル群の層の $f$-写像
+$\mathcal{G} \to \mathcal{F}$}という概念が意味をもつ。
+Definition \ref{sheaves-definition-f-map} とまったく同様に
+（集合の写像をアーベル群の準同型に置き換えて）定義してもよいし、
+単にアーベル層の写像 $\mathcal{G} \to f_*\mathcal{F}$ と
+同じものだと言ってもよい。以下ではこの概念を自由に用いる。
+$\mathcal{G}$ と $\mathcal{F}$ の間の $f$-写像の群は、群
+$\Mor_{\textit{Ab}(X)}(f^{-1}\mathcal{G}, \mathcal{F})$ および
+$\Mor_{\textit{Ab}(Y)}(\mathcal{G}, f_*\mathcal{F})$ と
+標準的に全単射で対応する。
+
+\medskip\noindent
+$f$-写像の合成は、集合の層の $f$-写像の場合とまったく同じ方法で
+定義される。さらに、上のような $f$-写像
+$\mathcal{G} \to \mathcal{F}$ が与えられると、誘導される茎上の写像
+$$
+\varphi_x : \mathcal{G}_{f(x)} \longrightarrow \mathcal{F}_x
+$$
+はアーベル群の準同型である。
+
+\section{連続写像と代数構造の層}
+\label{sheaves-section-presheaves-structures-functorial}
+
+\noindent
+$(\mathcal{C}, F)$ を代数構造の型とする。位相空間 $X$ に対して
+次の記法を導入する。
+\begin{enumerate}
+\item $\textit{PSh}(X, \mathcal{C})$ は $\mathcal{C}$ に値をもつ
+前層の圏を表す。
+\item $\Sh(X, \mathcal{C})$ は $\mathcal{C}$ に値をもつ層の圏を表す。
+\end{enumerate}
+$f : X \to Y$ を位相空間の連続写像とする。
+前節と同じ議論により、アーベル（前）層に対して構成した関手と
+同じ方法で構成され、同じ性質をもつ関手
+\begin{eqnarray*}
+f_* : \textit{PSh}(X, \mathcal{C}) &
+\longrightarrow &
+\textit{PSh}(Y, \mathcal{C}) \\
+f_* : \Sh(X, \mathcal{C}) &
+\longrightarrow &
+\Sh(Y, \mathcal{C}) \\
+f_p : \textit{PSh}(Y, \mathcal{C}) &
+\longrightarrow &
+\textit{PSh}(X, \mathcal{C}) \\
+f^{-1} : \Sh(Y, \mathcal{C}) &
+\longrightarrow &
+\Sh(X, \mathcal{C})
+\end{eqnarray*}
+が存在する。特に、可換図式
+$$
+\xymatrix{
+\textit{PSh}(X, \mathcal{C}) \ar[r]^{f_*} \ar[d]^F &
+\textit{PSh}(Y, \mathcal{C}) \ar[d]^F &
+\Sh(X, \mathcal{C}) \ar[r]^{f_*} \ar[d]^F &
+\Sh(Y, \mathcal{C}) \ar[d]^F
+\\
+\textit{PSh}(X) \ar[r]^{f_*} &
+\textit{PSh}(Y) &
+\Sh(X) \ar[r]^{f_*} &
+\Sh(Y)
+\\
+\textit{PSh}(Y, \mathcal{C}) \ar[r]^{f_p} \ar[d]^F &
+\textit{PSh}(X, \mathcal{C}) \ar[d]^F &
+\Sh(Y, \mathcal{C}) \ar[r]^{f^{-1}} \ar[d]^F &
+\Sh(X, \mathcal{C}) \ar[d]^F
+\\
+\textit{PSh}(Y) \ar[r]^{f_p} &
+\textit{PSh}(X) &
+\Sh(Y) \ar[r]^{f^{-1}} &
+\Sh(X)
+}
+$$
+がある。
+
+\medskip\noindent
+覚えておくべき主要な公式は次のとおりである。
+\begin{eqnarray*}
+f_*\mathcal{F}(V) & = & \mathcal{F}(f^{-1}(V)) \\
+f_p\mathcal{G}(U) & = & \colim_{f(U) \subset V} \mathcal{G}(V) \\
+f^{-1}\mathcal{G} & = & (f_p\mathcal{G})^\# \\
+(f_p\mathcal{G})_x & = & \mathcal{G}_{f(x)} \\
+(f^{-1}\mathcal{G})_x & = & \mathcal{G}_{f(x)}
+\end{eqnarray*}
+これらの公式はいずれも圏 $\mathcal{C}$ において成り立ち、
+台集合を取れば集合の前層に対する対応する公式が得られる。
+さらに随伴性
+\begin{eqnarray*}
+\Mor_{\textit{PSh}(X, \mathcal{C})}(f_p\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{PSh}(Y, \mathcal{C})}(\mathcal{G}, f_*\mathcal{F}) \\
+\Mor_{\Sh(X, \mathcal{C})}(f^{-1}\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\Sh(Y, \mathcal{C})}(\mathcal{G}, f_*\mathcal{F}).
+\end{eqnarray*}
+がある。これらを証明する際の主要な段階は、
+Lemma \ref{sheaves-lemma-pullback-presheaves} の証明に現れる写像
+$$
+i_\mathcal{G} : \mathcal{G} \longrightarrow f_*f_p\mathcal{G}
+$$
+および
+$$
+c_\mathcal{F} : f_p f_* \mathcal{F} \longrightarrow \mathcal{F}
+$$
+を $\mathcal{C}$ に値をもつ前層の射として構成することである。
+構成は集合の前層の場合とまったく同じなので、これは安心して読者に委ねられる。
+
+\medskip\noindent
+連続写像 $f : X \to Y$ と、$X$ 上の代数構造の層
+$\mathcal{F}$、$Y$ 上の代数構造の層 $\mathcal{G}$ が与えられたとき、
+{\it 代数構造の層の $f$-写像
+$\mathcal{G} \to \mathcal{F}$}という概念が意味をもつ。
+Definition \ref{sheaves-definition-f-map} とまったく同様に
+（集合の写像を $\mathcal{C}$ の射に置き換えて）定義してもよいし、
+単に代数構造の層の写像 $\mathcal{G} \to f_*\mathcal{F}$ と
+同じものだと言ってもよい。以下ではこの概念を自由に用いる。
+$\mathcal{G}$ と $\mathcal{F}$ の間の $f$-写像の集合は、集合
+$\Mor_{\Sh(X, \mathcal{C})}(f^{-1}\mathcal{G}, \mathcal{F})$ および
+$\Mor_{\Sh(Y, \mathcal{C})}(\mathcal{G}, f_*\mathcal{F})$ と
+標準的に全単射で対応する。
+
+\medskip\noindent
+$f$-写像の合成は、集合の層の $f$-写像の場合とまったく同じ方法で
+定義される。さらに、上のような $f$-写像
+$\mathcal{G} \to \mathcal{F}$ が与えられると、誘導される茎上の写像
+$$
+\varphi_x : \mathcal{G}_{f(x)} \longrightarrow \mathcal{F}_x
+$$
+は代数構造の準同型である。
+
+\begin{lemma}
+\label{sheaves-lemma-f-map-sets-algebraic-structures}
+$f : X \to Y$ を位相空間の連続写像とする。
+$X$ 上の代数構造の層 $\mathcal{F}$ と
+$Y$ 上の代数構造の層 $\mathcal{G}$ が与えられているとする。
+$\varphi : \mathcal{G} \to \mathcal{F}$ を、基礎となる集合の層の
+$f$-写像とする。すべての開集合 $V \subset Y$ に対して、
+集合の写像 $\varphi_V : \mathcal{G}(V) \to \mathcal{F}(f^{-1}V)$ が
+$\mathcal{C}$ のある射が台集合上に誘導する写像ならば、
+$\varphi$ は代数構造の層の間の一意な $f$-射から来る。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+\section{連続写像と加群の層}
+\label{sheaves-section-presheaves-modules-functorial}
+
+\noindent
+加群の層の場合はより複雑である。逆像関手と順像関手を定義する自然な
+枠組みが、以下で定義する環付き空間だからである。
+まず、いくつかの明らかな補題を述べる。
+
+\begin{lemma}
+\label{sheaves-lemma-pushforward-presheaf-module}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $X$ 上の環の前層とし、
+$\mathcal{F}$ を $\mathcal{O}$-加群の前層とする。
+基礎となる集合の前層の自然な写像
+$$
+f_*\mathcal{O} \times f_*\mathcal{F}
+\longrightarrow
+f_*\mathcal{F}
+$$
+が存在し、$f_*\mathcal{F}$ を $f_*\mathcal{O}$-加群の前層にする。
+この構成は $\mathcal{F}$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+$V \subset Y$ を開集合とする。補題の写像を
+$$
+f_*\mathcal{O}(V) \times f_*\mathcal{F}(V)
+=
+\mathcal{O}(f^{-1}V) \times \mathcal{F}(f^{-1}V)
+\to
+\mathcal{F}(f^{-1}V)
+=
+f_*\mathcal{F}(V).
+$$
+と定義する。ここで中央の矢印は $X$ 上の乗法写像である。
+これが制限写像と両立し、$f_*\mathcal{F}$ 上に
+$f_*\mathcal{O}$-加群の構造を定めることの確認は読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-pullback-presheaf-module}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $Y$ 上の環の前層とし、
+$\mathcal{G}$ を $\mathcal{O}$-加群の前層とする。
+基礎となる集合の前層の自然な写像
+$$
+f_p\mathcal{O} \times f_p\mathcal{G}
+\longrightarrow
+f_p\mathcal{G}
+$$
+が存在し、$f_p\mathcal{G}$ を $f_p\mathcal{O}$-加群の前層にする。
+この構成は $\mathcal{G}$ に関して関手的である。
+\end{lemma}
+
+\begin{proof}
+$U \subset X$ を開集合とする。補題の写像を
+\begin{eqnarray*}
+f_p\mathcal{O}(U) \times f_p\mathcal{G}(U)
+& = &
+\colim_{f(U) \subset V} \mathcal{O}(V)
+\times
+\colim_{f(U) \subset V} \mathcal{G}(V) \\
+& = &
+\colim_{f(U) \subset V} (\mathcal{O}(V)\times \mathcal{G}(V)) \\
+& \to &
+\colim_{f(U) \subset V} \mathcal{G}(V) \\
+& = &
+f_p\mathcal{G}(U).
+\end{eqnarray*}
+と定義する。ここで中央の矢印は $Y$ 上の乗法写像である。
+第二の等号は、有向余極限が有限極限と可換することによる。
+Categories, Lemma \ref{categories-lemma-directed-commutes} を参照せよ。
+これが制限写像と両立し、$f_p\mathcal{G}$ 上に
+$f_p\mathcal{O}$-加群の構造を定めることの確認は読者に委ねる。
+\end{proof}
+
+\noindent
+$f : X \to Y$ を連続写像とする。$\mathcal{O}_X$ を $X$ 上の環の前層、
+$\mathcal{O}_Y$ を $Y$ 上の環の前層とする。現時点で関手
+\begin{eqnarray*}
+f_* : \textit{PMod}(\mathcal{O}_X) &
+\longrightarrow &
+\textit{PMod}(f_*\mathcal{O}_X) \\
+f_p : \textit{PMod}(\mathcal{O}_Y) &
+\longrightarrow &
+\textit{PMod}(f_p\mathcal{O}_Y)
+\end{eqnarray*}
+を定義した。これらは次の両立性を満たす。
+
+\begin{lemma}
+\label{sheaves-lemma-adjoint-push-pull-presheaves-modules}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $Y$ 上の環の前層とする。
+$\mathcal{G}$ を $\mathcal{O}$-加群の前層とし、
+$\mathcal{F}$ を $f_p\mathcal{O}$-加群の前層とする。このとき
+$$
+\Mor_{\textit{PMod}(f_p\mathcal{O})}(f_p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PMod}(\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+$$
+である。ここでは Lemma \ref{sheaves-lemma-pullback-presheaf-module} と
+\ref{sheaves-lemma-pushforward-presheaf-module} を用い、$f_*\mathcal{F}$ を
+写像 $i_\mathcal{O} : \mathcal{O} \to f_*f_p\mathcal{O}$
+（Lemma \ref{sheaves-lemma-pullback-presheaves} の証明で最初に定義した）
+を通じて $\mathcal{O}$-加群とみなす。
+\end{lemma}
+
+\begin{proof}
+Section \ref{sheaves-section-abelian-presheaves-functorial} により
+$$
+\Mor_{\textit{PAb}(X)}(f_p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PAb}(Y)}(\mathcal{G}, f_*\mathcal{F}).
+$$
+であることに注意する。したがって、この対応のもとで加群写像からなる
+部分集合どうしが対応することを示せばよい。さらに、この対応は規則
+$$
+(\psi : f_p\mathcal{G} \to \mathcal{F})
+\longmapsto
+(f_*\psi \circ i_\mathcal{G} :
+\mathcal{G} \to f_* \mathcal{F})
+$$
+によって定まり、逆方向には規則
+$$
+(\varphi : \mathcal{G} \to f_* \mathcal{F})
+\longmapsto
+(c_\mathcal{F} \circ f_p\varphi : f_p\mathcal{G} \to \mathcal{F})
+$$
+によって定まる。ここで $i_\mathcal{G}$ と $c_\mathcal{F}$ は
+Section \ref{sheaves-section-abelian-presheaves-functorial} のとおりである。
+したがって $f_*$ と $f_p$ の関手性を用いると、写像
+$i_\mathcal{G} : \mathcal{G} \to f_* f_p \mathcal{G}$ および
+$c_\mathcal{F} : f_p f_* \mathcal{F} \to \mathcal{F}$ が
+加群構造と両立することを確かめれば十分であり、これは読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-adjoint-pull-push-presheaves-modules}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $X$ 上の環の前層とする。
+$\mathcal{F}$ を $\mathcal{O}$-加群の前層とし、
+$\mathcal{G}$ を $f_*\mathcal{O}$-加群の前層とする。このとき
+$$
+\Mor_{\textit{PMod}(\mathcal{O})}(
+\mathcal{O} \otimes_{p, f_pf_*\mathcal{O}} f_p\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{PMod}(f_*\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+$$
+である。ここでは Lemma \ref{sheaves-lemma-pullback-presheaf-module} と
+\ref{sheaves-lemma-pushforward-presheaf-module} を用い、テンソル積の定義に
+写像 $c_\mathcal{O} : f_pf_*\mathcal{O} \to \mathcal{O}$ を用いる。
+\end{lemma}
+
+\begin{proof}
+これは等式
+\begin{eqnarray*}
+\Mor_{\textit{PMod}(\mathcal{O})}(
+\mathcal{O} \otimes_{p, f_pf_*\mathcal{O}} f_p\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{PMod}(f_pf_*\mathcal{O})}(
+f_p\mathcal{G}, \mathcal{F}_{f_pf_*\mathcal{O}}) \\
+& = &
+\Mor_{\textit{PMod}(f_*\mathcal{O})}(\mathcal{G},
+f_*(\mathcal{F}_{f_pf_*\mathcal{O}})) \\
+& = &
+\Mor_{\textit{PMod}(f_*\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+\end{eqnarray*}
+から従う。第一の等号は
+Lemma \ref{sheaves-lemma-adjointness-tensor-restrict-presheaves} である。
+第二の等号は
+Lemma \ref{sheaves-lemma-adjoint-push-pull-presheaves-modules} である。
+第三の等号は、アーベル層の等式
+$f_*(\mathcal{F}_{f_pf_*\mathcal{O}}) = f_*\mathcal{F}$ が
+$f_*\mathcal{O}$-線型であることによる。実際、
+$\text{id}_{f_*\mathcal{O}}$ は
+Lemma \ref{sheaves-lemma-pullback-presheaves} の証明で述べた随伴のもとで
+$c_\mathcal{O}$ に対応し、したがって
+$\text{id}_{f_*\mathcal{O}} = f_*c_\mathcal{O} \circ i_{f_*\mathcal{O}}$
+である。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-pushforward-module}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $X$ 上の環の層とし、
+$\mathcal{F}$ を $\mathcal{O}$-加群の層とする。
+Lemma \ref{sheaves-lemma-pushforward-presheaf-module} で定義した順像
+$f_*\mathcal{F}$ は $f_*\mathcal{O}$-加群の層である。
+\end{lemma}
+
+\begin{proof}
+定義と Lemma \ref{sheaves-lemma-pushforward-sheaf} から明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-pullback-module}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $Y$ 上の環の層とし、
+$\mathcal{G}$ を $\mathcal{O}$-加群の層とする。
+基礎となる集合の前層の自然な写像
+$$
+f^{-1}\mathcal{O} \times f^{-1}\mathcal{G}
+\longrightarrow
+f^{-1}\mathcal{G}
+$$
+が存在し、$f^{-1}\mathcal{G}$ を
+$f^{-1}\mathcal{O}$-加群の層にする。
+\end{lemma}
+
+\begin{proof}
+$f^{-1}$ は関手 $f_p$ と層化の合成として定義されることを思い出そう。
+したがって補題は Lemma \ref{sheaves-lemma-pullback-presheaf-module} と
+Lemma \ref{sheaves-lemma-sheafification-presheaf-modules} を
+組み合わせたものである。
+\end{proof}
+
+\noindent
+$f : X \to Y$ を連続写像とする。$\mathcal{O}_X$ を $X$ 上の環の層、
+$\mathcal{O}_Y$ を $Y$ 上の環の層とする。これで関手
+\begin{eqnarray*}
+f_* : \textit{Mod}(\mathcal{O}_X) &
+\longrightarrow &
+\textit{Mod}(f_*\mathcal{O}_X) \\
+f^{-1} : \textit{Mod}(\mathcal{O}_Y) &
+\longrightarrow &
+\textit{Mod}(f^{-1}\mathcal{O}_Y)
+\end{eqnarray*}
+を定義した。これらは次の両立性を満たす。
+
+\begin{lemma}
+\label{sheaves-lemma-adjoint-push-pull-modules}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $Y$ 上の環の層とする。
+$\mathcal{G}$ を $\mathcal{O}$-加群の層とし、
+$\mathcal{F}$ を $f^{-1}\mathcal{O}$-加群の層とする。このとき
+$$
+\Mor_{\textit{Mod}(f^{-1}\mathcal{O})}(f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{Mod}(\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+$$
+である。ここでは Lemma \ref{sheaves-lemma-pullback-module} と
+\ref{sheaves-lemma-pushforward-module} を用い、
+$f_*\mathcal{F}$ を $\mathcal{O} \to f_*f^{-1}\mathcal{O}$ による
+制限を通じて $\mathcal{O}$-加群とみなす。
+\end{lemma}
+
+\begin{proof}
+等式
+\begin{eqnarray*}
+\Mor_{\textit{Mod}(f^{-1}\mathcal{O})}(f^{-1}\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{Mod}(f_p\mathcal{O})}(f_p\mathcal{G}, \mathcal{F}) \\
+& = &
+\Mor_{\textit{Mod}(\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+\end{eqnarray*}
+によって論じる。第二の等号は
+Lemmas \ref{sheaves-lemma-adjoint-push-pull-presheaves-modules} により、
+第一の等号は Lemma \ref{sheaves-lemma-sheafification-presheaf-modules} による。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-adjoint-pull-push-modules}
+$f : X \to Y$ を位相空間の連続写像とする。
+$\mathcal{O}$ を $X$ 上の環の層とする。
+$\mathcal{F}$ を $\mathcal{O}$-加群の層とし、
+$\mathcal{G}$ を $f_*\mathcal{O}$-加群の層とする。このとき
+$$
+\Mor_{\textit{Mod}(\mathcal{O})}(
+\mathcal{O} \otimes_{f^{-1}f_*\mathcal{O}} f^{-1}\mathcal{G}, \mathcal{F})
+=
+\Mor_{\textit{Mod}(f_*\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+$$
+である。ここでは Lemma \ref{sheaves-lemma-pullback-module} と
+\ref{sheaves-lemma-pushforward-module} を用い、テンソル積の定義に標準的な写像
+$f^{-1}f_*\mathcal{O} \to \mathcal{O}$ を用いる。
+\end{lemma}
+
+\begin{proof}
+これは等式
+\begin{eqnarray*}
+\Mor_{\textit{Mod}(\mathcal{O})}(
+\mathcal{O} \otimes_{f^{-1}f_*\mathcal{O}} f^{-1}\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{Mod}(f^{-1}f_*\mathcal{O})}(
+f^{-1}\mathcal{G}, \mathcal{F}_{f^{-1}f_*\mathcal{O}}) \\
+& = &
+\Mor_{\textit{Mod}(f_*\mathcal{O})}(\mathcal{G}, f_*\mathcal{F}).
+\end{eqnarray*}
+から従う。これらは Lemma \ref{sheaves-lemma-adjointness-tensor-restrict} と
+\ref{sheaves-lemma-adjoint-push-pull-modules} を組み合わせたものである。
+\end{proof}
+
+\noindent
+$f : X \to Y$ を連続写像とする。$\mathcal{O}_X$ を $X$ 上の環の
+（前）層、$\mathcal{O}_Y$ を $Y$ 上の環の（前）層とする。
+現時点で関手
+\begin{eqnarray*}
+f_* : \textit{PMod}(\mathcal{O}_X) &
+\longrightarrow &
+\textit{PMod}(f_*\mathcal{O}_X) \\
+f_* : \textit{Mod}(\mathcal{O}_X) &
+\longrightarrow &
+\textit{Mod}(f_*\mathcal{O}_X) \\
+f_p : \textit{PMod}(\mathcal{O}_Y) &
+\longrightarrow &
+\textit{PMod}(f_p\mathcal{O}_Y) \\
+f^{-1} : \textit{Mod}(\mathcal{O}_Y) &
+\longrightarrow &
+\textit{Mod}(f^{-1}\mathcal{O}_Y)
+\end{eqnarray*}
+を定義した。一般に、加群の層上の関手の対 $(f_*, f^{-1})$ は
+明らかに随伴しない。標的圏が一致しないからである。
+上で見たように、環の層 $\mathcal{O}_X, \mathcal{O}_Y$ が奇跡的に
+関係 $\mathcal{O}_X = f^{-1}\mathcal{O}_Y$ および
+$\mathcal{O}_Y = f_*\mathcal{O}_X$ を満たす場合に限って機能する。
+これは実際にはほとんど決して成り立たない。ここで議論を中断し、
+加群の層上の適切な随伴関手の対が存在するための正しい射の概念を定義する。
+\section{環付き空間}
+\label{sheaves-section-ringed-spaces}
+
+\noindent
+$X$ を位相空間とし、$\mathcal{O}_X$ を $X$ 上の環の層とする。
+環の層 $\mathcal{O}_X$ は $X$ 上の関数の層と考えるべきである。
+また、$f : X \to Y$ が「適切な」写像ならば、合成により
+$Y$ 上の関数は $X$ 上の関数になる。したがって
+$\mathcal{O}_Y$ から $\mathcal{O}_X$ への自然な $f$-写像が
+あるはずである。Definition \ref{sheaves-definition-f-map} と
+Lemma \ref{sheaves-lemma-f-map} を参照せよ。具体的な例については、
+下の Example \ref{sheaves-example-continuous-map-ringed} を参照せよ。
+関係する抽象的な定義は次のとおりである。
+
+\begin{definition}
+\label{sheaves-definition-ringed-space}
+{\it 環付き空間}とは、位相空間 $X$ と $X$ 上の環の層
+$\mathcal{O}_X$ からなる対 $(X, \mathcal{O}_X)$ のことをいう。
+{\it 環付き空間の射}
+$(X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ とは、
+連続写像 $f : X \to Y$ と環の層の $f$-写像
+$f^\sharp : \mathcal{O}_Y \to \mathcal{O}_X$ からなる対のことをいう。
+\end{definition}
+
+\begin{example}
+\label{sheaves-example-continuous-map-ringed}
+$f : X \to Y$ を位相空間の連続写像とする。
+$X$ 上の実数値連続関数の層 $\mathcal{C}^0_X$ と
+$Y$ 上の実数値連続関数の層 $\mathcal{C}^0_Y$ を考える。
+Example \ref{sheaves-example-C0-sheaf-rings} を参照せよ。
+$f$ に付随する自然な $f$-写像
+$f^\sharp : \mathcal{C}^0_Y \to \mathcal{C}^0_X$ があると主張する。
+実際、これを単に規則
+\begin{eqnarray*}
+\mathcal{C}^0_Y(V) & \longrightarrow & \mathcal{C}^0_X(f^{-1}V) \\
+h & \longmapsto & h \circ f
+\end{eqnarray*}
+によって定義する。厳密には
+$f^\sharp(h) = h \circ f|_{f^{-1}(V)}$ と書くべきである。
+これが Definition \ref{sheaves-definition-f-map} のような写像の族であり、
+$\mathbf{R}$-代数構造と両立することは明らかである。
+したがって Lemma \ref{sheaves-lemma-f-map-sets-algebraic-structures} により、
+これは $\mathbf{R}$-代数の層の $f$-写像である。
+
+\medskip\noindent
+もちろん、幾何学的な種類の射に付随する標準的な環付き空間の射が
+存在する状況はほかにも数多くある。例えば、$M$、$N$ が
+$\mathcal{C}^\infty$-多様体で、$f : M \to N$ が無限回微分可能な写像ならば、
+$f$ は標準的な環付き空間の射
+$(M, \mathcal{C}_M^\infty) \to (N, \mathcal{C}^\infty_N)$ を誘導する。
+この構成は上のものと同一であり、読者に委ねる。
+\end{example}
+
+\noindent
+環付き空間の射をどのように合成するかは完全には明らかでないかもしれないので、
+ここで詳しく述べる。
+
+\begin{definition}
+\label{sheaves-definition-composition-maps-ringed-spaces}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ と
+$(g, g^\sharp) : (Y, \mathcal{O}_Y) \to (Z, \mathcal{O}_Z)$ を
+環付き空間の射とする。{\it 環付き空間の射の合成}を規則
+$$
+(g, g^\sharp) \circ (f, f^\sharp) = (g \circ f, f^\sharp \circ g^\sharp).
+$$
+によって定義する。ここでは Definition
+\ref{sheaves-definition-composition-f-maps} で定義した $f$-写像の合成を用いる。
+\end{definition}
+
+\section{環付き空間の射と加群}
+\label{sheaves-section-ringed-spaces-functoriality-modules}
+
+\noindent
+環付き空間の射に沿う加群の引き戻しと順像を定義するのに十分な記法を
+導入できた。
+
+\begin{definition}
+\label{sheaves-definition-pushforward}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を
+環付き空間の射とする。
+\begin{enumerate}
+\item $\mathcal{F}$ を $\mathcal{O}_X$-加群の層とする。
+$\mathcal{F}$ の{\it 順像}を、アーベル群の層としては
+$f_*\mathcal{F}$ に等しく、加群構造は
+Lemma \ref{sheaves-lemma-pushforward-module} で与えられた加群構造を
+$f^\sharp : \mathcal{O}_Y \to f_*\mathcal{O}_X$ によって
+制限して得られる $\mathcal{O}_Y$-加群の層として定義する。
+\item $\mathcal{G}$ を $\mathcal{O}_Y$-加群の層とする。
+{\it 引き戻し} $f^*\mathcal{G}$ を、式
+$$
+f^*\mathcal{G}
+=
+\mathcal{O}_X \otimes_{f^{-1}\mathcal{O}_Y} f^{-1}\mathcal{G}
+$$
+によって定義される $\mathcal{O}_X$-加群の層とする。
+ここで環写像 $f^{-1}\mathcal{O}_Y \to \mathcal{O}_X$ は
+$f^\sharp$ に対応する写像であり、加群構造は
+Lemma \ref{sheaves-lemma-pullback-module} によって与えられる。
+\end{enumerate}
+\end{definition}
+
+\noindent
+こうして関手
+\begin{eqnarray*}
+f_* : \textit{Mod}(\mathcal{O}_X)
+& \longrightarrow &
+\textit{Mod}(\mathcal{O}_Y) \\
+f^* : \textit{Mod}(\mathcal{O}_Y)
+& \longrightarrow &
+\textit{Mod}(\mathcal{O}_X)
+\end{eqnarray*}
+を定義した。これらの関手に関する最後の結果は、期待どおり実際に
+随伴するというものである。
+
+\begin{lemma}
+\label{sheaves-lemma-adjoint-pullback-pushforward-modules}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を
+環付き空間の射とする。$\mathcal{F}$ を
+$\mathcal{O}_X$-加群の層、$\mathcal{G}$ を
+$\mathcal{O}_Y$-加群の層とする。標準的な全単射
+$$
+\Hom_{\mathcal{O}_X}(f^*\mathcal{G}, \mathcal{F})
+=
+\Hom_{\mathcal{O}_Y}(\mathcal{G}, f_*\mathcal{F}).
+$$
+が存在する。言い換えると、関手 $f^*$ は $f_*$ の左随伴である。
+\end{lemma}
+
+\begin{proof}
+これはこれまでの結果から従う。
+\begin{eqnarray*}
+\Hom_{\mathcal{O}_X}(f^*\mathcal{G}, \mathcal{F})
+& = &
+\Mor_{\textit{Mod}(\mathcal{O}_X)}(
+\mathcal{O}_X \otimes_{f^{-1}\mathcal{O}_Y} f^{-1}\mathcal{G}, \mathcal{F}) \\
+& = &
+\Mor_{\textit{Mod}(f^{-1}\mathcal{O}_Y)}(
+f^{-1}\mathcal{G}, \mathcal{F}_{f^{-1}\mathcal{O}_Y}) \\
+& = &
+\Hom_{\mathcal{O}_Y}(\mathcal{G}, f_*\mathcal{F}).
+\end{eqnarray*}
+ここでは Lemma \ref{sheaves-lemma-adjointness-tensor-restrict} と
+\ref{sheaves-lemma-adjoint-push-pull-modules} を用いる。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-push-pull-composition-modules}
+$f : X \to Y$ と $g : Y \to Z$ を環付き空間の射とする。
+関手 $(g \circ f)_*$ と $g_* \circ f_*$ は等しい。
+関手の標準的な同型 $(g \circ f)^* \cong f^* \circ g^*$ が存在する。
+\end{lemma}
+
+\begin{proof}
+順像に関する結果は Lemma \ref{sheaves-lemma-pushforward-composition} と
+定義から従う。引き戻しに関する結果は、Lemma
+\ref{sheaves-lemma-pullback-composition} の証明と同じ議論によってこれから従う。
+\end{proof}
+
+\noindent
+環付き空間の射
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$、
+$\mathcal{O}_X$-加群の層 $\mathcal{F}$、および
+$Y$ 上の $\mathcal{O}_Y$-加群の層 $\mathcal{G}$ が与えられると、
+{\it 加群の層の $f$-写像
+$\varphi : \mathcal{G} \to \mathcal{F}$}という概念が意味をもつ。
+これを、アーベル層の $f$-写像
+$\varphi : \mathcal{G} \to \mathcal{F}$
+（Definition \ref{sheaves-definition-f-map} と Lemma \ref{sheaves-lemma-f-map} を参照せよ）
+であって、すべての開集合 $V \subset Y$ に対して写像
+$$
+\mathcal{G}(V) \longrightarrow \mathcal{F}(f^{-1}V)
+$$
+が $\mathcal{O}_Y(V)$-加群写像であるものとして定義できる。
+ここで $\mathcal{F}(f^{-1}V)$ は、写像
+$f^\sharp_V : \mathcal{O}_Y(V) \to \mathcal{O}_X(f^{-1}V)$ によって
+$\mathcal{O}_Y(V)$-加群とみなす。
+$\mathcal{G}$ と $\mathcal{F}$ の間の $f$-写像の集合は、集合
+$\Mor_{\textit{Mod}(\mathcal{O}_X)}(f^*\mathcal{G}, \mathcal{F})$ および
+$\Mor_{\textit{Mod}(\mathcal{O}_Y)}(\mathcal{G}, f_*\mathcal{F})$ と
+標準的に全単射で対応する。上を参照せよ。
+
+\medskip\noindent
+$f$-写像の合成は、集合の層の $f$-写像の場合とまったく同じ方法で
+定義される。さらに、上のような $f$-写像
+$\mathcal{G} \to \mathcal{F}$ と $x \in X$ が与えられると、
+誘導される茎上の写像
+$$
+\varphi_x : \mathcal{G}_{f(x)} \longrightarrow \mathcal{F}_x
+$$
+は $\mathcal{O}_{Y, f(x)}$-加群写像である。ここで
+$\mathcal{F}_x$ 上の $\mathcal{O}_{Y, f(x)}$-加群構造は、
+写像 $f^\sharp_x : \mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ を通じて
+$\mathcal{O}_{X, x}$-加群構造から得られる。これに関連する補題を述べる。
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-pullback-modules}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を
+環付き空間の射とする。$\mathcal{G}$ を
+$\mathcal{O}_Y$-加群の層とし、$x \in X$ とする。このとき
+$$
+(f^*\mathcal{G})_x =
+\mathcal{G}_{f(x)}
+\otimes_{\mathcal{O}_{Y, f(x)}}
+\mathcal{O}_{X, x}
+$$
+が $\mathcal{O}_{X, x}$-加群として成り立つ。ここで右辺のテンソル積には
+$f^\sharp_x : \mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ を用いる。
+\end{lemma}
+
+\begin{proof}
+これは Lemma \ref{sheaves-lemma-stalk-tensor-sheaf-modules} と、
+$x$ における逆像層の茎を $f(x)$ における対応する茎と同一視することから
+従う。例えば Section \ref{sheaves-section-presheaves-structures-functorial} の
+公式を参照せよ。
+\end{proof}
+
+
+\section{摩天楼層と茎}
+\label{sheaves-section-skyscraper-sheaves}
+
+\begin{definition}
+\label{sheaves-definition-skyscraper-sheaf}
+$X$ を位相空間とする。
+\begin{enumerate}
+\item $x \in X$ を点とする。包含写像を $i_x : \{x\} \to X$ と書く。
+$A$ を集合とし、$A$ を一点空間 $\{x\}$ 上の層とみなす。
+$i_{x, *}A$ を、{\it 値 $A$ をもつ $x$ における摩天楼層}と呼ぶ。
+\item 上の (1) で $A$ がアーベル群なら、$i_{x, *}A$ を
+$X$ 上のアーベル群の層とみなす。
+\item 上の (1) で $A$ が代数的構造なら、$i_{x, *}A$ を
+代数的構造の層とみなす。
+\item $(X, \mathcal{O}_X)$ が環付き空間なら、
+$i_x : \{x\} \to X$ を環付き空間の射
+$(\{x\}, \mathcal{O}_{X, x}) \to (X, \mathcal{O}_X)$ とみなし、
+$A$ が $\mathcal{O}_{X, x}$-加群なら、$i_{x, *}A$ を
+$\mathcal{O}_X$-加群の層とみなす。
+\item 集合の層 $\mathcal{F}$ に対し、$X$ の点 $x$ と集合 $A$ が存在して
+$\mathcal{F} \cong i_{x, *}A$ となるとき、これを
+{\it 摩天楼層}という。
+\item アーベル群の層 $\mathcal{F}$ に対し、$X$ の点 $x$ と
+アーベル群 $A$ が存在して、アーベル群の層として
+$\mathcal{F} \cong i_{x, *}A$ となるとき、これを
+{\it 摩天楼層}という。
+\item 代数的構造の層 $\mathcal{F}$ に対し、$X$ の点 $x$ と
+代数的構造 $A$ が存在して、代数的構造の層として
+$\mathcal{F} \cong i_{x, *}A$ となるとき、これを
+{\it 摩天楼層}という。
+\item $(X, \mathcal{O}_X)$ が環付き空間で、$\mathcal{F}$ が
+$\mathcal{O}_X$-加群の層であるとする。点 $x \in X$ と
+$\mathcal{O}_{X, x}$-加群 $A$ が存在して、$\mathcal{O}_X$-加群の層として
+$\mathcal{F} \cong i_{x, *}A$ となるとき、$\mathcal{F}$ を
+{\it 摩天楼層}という。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{sheaves-lemma-skyscraper-stalks}
+$X$ を位相空間、$x \in X$ を点、$A$ を集合とする。
+任意の点 $x' \in X$ に対し、値 $A$ をもつ $x$ における摩天楼層の
+$x'$ における茎は
+$$
+(i_{x, *}A)_{x'} =
+\left\{
+\begin{matrix}
+A & \text{if} & x' \in \overline{\{x\}} \\
+\{*\} & \text{if} & x' \not\in \overline{\{x\}}
+\end{matrix}
+\right.
+$$
+である。アーベル群、代数的構造、および加群の層の場合にも
+同様の記述が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-stalk-skyscraper-adjoint}
+$X$ を位相空間、$x \in X$ を点とする。関手
+$\mathcal{F} \mapsto \mathcal{F}_x$ と $A \mapsto i_{x, *}A$ は随伴する。
+公式で書けば
+$$
+\Mor_{\textit{Sets}}(\mathcal{F}_x, A)
+=
+\Mor_{\Sh(X)}(\mathcal{F}, i_{x, *}A).
+$$
+アーベル群および代数的構造の場合にも同様の主張が成り立つ。
+加群の層の場合には
+$$
+\Hom_{\mathcal{O}_{X, x}}(\mathcal{F}_x, A)
+=
+\Hom_{\mathcal{O}_X}(\mathcal{F}, i_{x, *}A).
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：茎関手は射 $i_x : \{x\} \to X$ に対する
+引き戻し関手とみなせる。したがって、随伴性は $i_x^{-1}$ と $i_{x, *}$ の
+随伴性（加群の層の場合には、それぞれ $i_x^*$ と $i_{x, *}$ の随伴性）から従う。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{前層の極限と余極限}
+\label{sheaves-section-limits-presheaves}
+
+\noindent
+$X$ を位相空間とする。$\mathcal{I} \to \textit{PSh}(X)$,
+$i \mapsto \mathcal{F}_i$ を図式とする。
+\begin{enumerate}
+\item $\lim_i \mathcal{F}_i$ と $\colim_i \mathcal{F}_i$ はともに存在する。
+\item 任意の開集合 $U \subset X$ に対して
+$$
+(\lim_i \mathcal{F}_i)(U) =
+\lim_i \mathcal{F}_i(U)
+$$
+および
+$$
+(\colim_i \mathcal{F}_i)(U) =
+\colim_i \mathcal{F}_i(U).
+$$
+が成り立つ。
+\item $x \in X$ を点とする。一般に、$x$ における
+$\lim_i \mathcal{F}_i$ の茎は茎の極限に等しくない。しかし、添字圏が
+有限なら等しい。言い換えると、茎関手は左完全である
+（Categories, Definition \ref{categories-definition-exact} を参照せよ）。
+\item $x \in X$ とする。常に
+$$
+(\colim_i \mathcal{F}_i)_x =
+\colim_i \mathcal{F}_{i, x}.
+$$
+が成り立つ。
+\end{enumerate}
+証明はいずれも容易である。
+
+\section{層の極限と余極限}
+\label{sheaves-section-limits-sheaves}
+
+\noindent
+$X$ を位相空間とする。$\mathcal{I} \to \Sh(X)$,
+$i \mapsto \mathcal{F}_i$ を図式とする。
+\begin{enumerate}
+\item $\lim_i \mathcal{F}_i$ と $\colim_i \mathcal{F}_i$ はともに存在する。
+\item 包含関手 $i : \Sh(X) \to \textit{PSh}(X)$ は極限と可換する。
+言い換えると、層の圏における極限は前層の圏における極限として計算できる。
+特に、任意の開集合 $U \subset X$ に対して
+$$
+(\lim_i \mathcal{F}_i)(U) = \lim_i \mathcal{F}_i(U).
+$$
+が成り立つ。
+\item 包含関手 $i : \Sh(X) \to \textit{PSh}(X)$ は、一般には余極限と
+可換しない（有限余極限とさえ可換しない。全射を考えよ）。余極限は、前層の圏に
+おける余極限を層化することによって計算される：
+$$
+\colim_i \mathcal{F}_i =
+\Big(U \mapsto \colim_i \mathcal{F}_i(U)\Big)^\#.
+$$
+\item $x \in X$ を点とする。一般に、$x$ における
+$\lim_i \mathcal{F}_i$ の茎は茎の極限に等しくない。しかし、添字圏が
+有限なら等しい。言い換えると、茎関手は左完全である。
+\item $x \in X$ とする。常に
+$$
+(\colim_i \mathcal{F}_i)_x = \colim_i \mathcal{F}_{i, x}.
+$$
+が成り立つ。
+\item 層化関手 ${}^\# : \textit{PSh}(X) \to \Sh(X)$ は、すべての
+余極限および有限極限と可換する。しかし、すべての極限と可換するわけではない。
+\end{enumerate}
+証明はいずれも容易である。ここで、層の有向余極限について成り立つ事柄の
+一例を挙げる。
+
+\begin{lemma}
+\label{sheaves-lemma-directed-colimits-sections}
+$X$ を位相空間とする。$I$ を有向集合とする。
+$(\mathcal{F}_i, \varphi_{ii'})$ を $I$ 上の集合の層の系とする。
+Categories, Section \ref{categories-section-posets-limits} を参照せよ。
+$U \subset X$ を開部分集合とする。標準写像
+$$
+\Psi :
+\colim_i \mathcal{F}_i(U)
+\longrightarrow
+\left(\colim_i \mathcal{F}_i\right)(U)
+$$
+を考える。
+\begin{enumerate}
+\item すべての遷移写像が単射なら、任意の開集合 $U$ に対して
+$\Psi$ は単射である。
+\item $U$ が準コンパクトなら、$\Psi$ は単射である。
+\item $U$ が準コンパクトで、すべての遷移写像が単射なら、
+$\Psi$ は同型である。
+\item $U$ が、$J$ が有限で、すべての $j, j' \in J$ に対して
+$U_j \cap U_{j'}$ が準コンパクトであるような開被覆
+$\mathcal{U} : U = \bigcup_{j\in J} U_j$ の共終的な系をもつなら、
+$\Psi$ は全単射である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+すべての遷移写像が単射であると仮定する。この場合、前層
+$\mathcal{F}' : V \mapsto \colim_i \mathcal{F}_i(V)$ は分離的である
+（Definition \ref{sheaves-definition-separated} を参照せよ）。上の議論により
+$(\mathcal{F}')^\# = \colim_i \mathcal{F}_i$ である。
+Lemma \ref{sheaves-lemma-separated-presheaf-into-sheaf} により
+$\mathcal{F}' \to (\mathcal{F}')^\#$ は単射である。これで (1) が従う。
+
+\medskip\noindent
+$U$ が準コンパクトであると仮定する。
+$s \in \mathcal{F}_i(U)$ と $s' \in \mathcal{F}_{i'}(U)$ が左辺の元を定め、
+それらの $\Psi$ による像が等しいとする。$U$ は準コンパクトなので、有限開被覆
+$U = \bigcup_{j = 1, \ldots, m} U_j$ と、各 $j$ に対して
+$i_j \in I$, $i_j \geq i$, $i_j \geq i'$ が存在し、
+$\varphi_{ii_j}(s)$ と $\varphi_{i'i_j}(s')$ の $U_j$ への制限が等しい。
+すべての $i_j$ 以上、すなわち $\geq$ である $i''\in I$ を取る。すると
+$\varphi_{ii''}(s)$ と $\varphi_{i'i''}(s')$ はすべての $j$ に対して
+開集合 $U_j$ 上で一致し、したがって
+$\varphi_{ii''}(s) = \varphi_{i'i''}(s')$ である。これで (2) が従う。
+
+\medskip\noindent
+$U$ が準コンパクトで、すべての遷移写像が単射であると仮定する。
+$s$ を $\Psi$ の終域の元とする。$U$ は準コンパクトなので、有限開被覆
+$U = \bigcup_{j = 1, \ldots, m} U_j$、各 $j$ に対する添字 $i_j \in I$、および
+$s_j \in \mathcal{F}_{i_j}(U_j)$ が存在し、すべての $j$ に対して
+$s|_{U_j}$ は $s_j$ から来る。すべての $i_j$ 以上、すなわち $\geq$ である
+$i \in I$ を取る。
+(1) により、切断 $\varphi_{i_ji}(s_j)$ は共通部分
+$U_j \cap U_{j'}$ 上で一致する。したがって、これらは $\Psi$ によって $s$ に
+写る切断 $s' \in \mathcal{F}_i(U)$ に貼り合わさる。これで (3) が従う。
+
+\medskip\noindent
+(4) の仮定を置く。特に $U$ は準コンパクトであるから、(2) により
+$\Psi$ は単射である。$s$ を $\Psi$ の終域の元とする。仮定により、すべての
+$j, j' \in J$ に対して $U_j \cap U_{j'}$ が準コンパクトであるような有限開被覆
+$U = \bigcup_{j = 1, \ldots, m} U_j$ と、各 $j$ に対する添字 $i_j \in I$ および
+$s_j \in \mathcal{F}_{i_j}(U_j)$ が存在し、すべての $j$ に対して
+$s|_{U_j}$ は $s_j$ の像である。$U_j \cap U_{j'}$ は準コンパクトなので
+(2) を適用でき、$i_{jj'} \in I$ で
+$i_{jj'} \geq i_j$, $i_{jj'} \geq i_{j'}$ となり、
+$\varphi_{i_ji_{jj'}}(s_j)$ と $\varphi_{i_{j'}i_{jj'}}(s_{j'})$ が
+$U_j \cap U_{j'}$ 上で一致するものが存在する。すべての $i_{jj'}$ 以上である
+添字 $i \in I$ を取る。すると、$\mathcal{F}_i$ の切断
+$\varphi_{i_ji}(s_j)$ は $\mathcal{F}_i$ の $U$ 上の切断に貼り合わさる。
+この切断は望むとおり
+元 $s$ に写る。
+\end{proof}
+
+\begin{example}
+\label{sheaves-example-conditions-needed-colimit}
+集合として $X = \{s_1, s_2, \xi_1, \xi_2, \xi_3, \ldots\}$ とする。
+部分集合 $U \subset X$ が開であるとは、$s_1 \in U$ または $s_2 \in U$ ならば
+$U$ がすべての $\xi_i$ を含むことであると定める。
+$U_n = \{\xi_n, \xi_{n + 1}, \ldots\}$ とし、
+$j_n : U_n \to X$ を包含写像とする。
+$\mathcal{F}_n = j_{n, *}\underline{\mathbf{Z}}$ とおく。
+遷移写像 $\mathcal{F}_n \to \mathcal{F}_{n + 1}$ が存在する。
+$\mathcal{F} = \colim \mathcal{F}_n$ とする。
+$\{\xi_m\}$ は $U_n$ と交わらない $X$ の開部分集合なので、$m < n$ ならば
+$\mathcal{F}_{n, \xi_m} = 0$ であることに注意する。したがって、すべての $n$ に対して
+$\mathcal{F}_{\xi_n} = 0$ である。一方、$i = 1, 2$ に対して茎
+$\mathcal{F}_{s_i}$ は余極限
+$$
+M = \colim_n \prod\nolimits_{m \geq n} \mathbf{Z}
+$$
+であり、これは零ではない。したがって、層 $\mathcal{F}$ は、閉点 $s_1$ と $s_2$ に
+おける値 $M$ の摩天楼層の直和である。ゆえに
+$\Gamma(X, \mathcal{F}) = M \oplus M$ である。一方、読者は
+$\colim_n \Gamma(X, \mathcal{F}_n) = M$ であることを確かめられる。
+したがって、上の Lemma \ref{sheaves-lemma-directed-colimits-sections} の (4) には
+何らかの条件が必要である。
+\end{example}
+
+\noindent
+前の補題には、スペクトル空間の図式上の層を扱う版がある。それを述べるために
+いくつか記法を導入する。$\mathcal{I}$ を余フィルター添字圏とする。
+$i \mapsto X_i$ を $\mathcal{I}$ 上のスペクトル空間の図式とし、
+$\mathcal{I}$ の $a : j \to i$ に対応する写像
+$f_a : X_j \to X_i$ はスペクトルであるとする。
+$X = \lim X_i$ とおき、射影を $p_i : X \to X_i$ と書く。
+
+\begin{lemma}
+\label{sheaves-lemma-compute-pullback-to-limit}
+上の状況で、$i \in \Ob(\mathcal{I})$ とし、$\mathcal{G}$ を
+$X_i$ 上の層とする。準コンパクト開集合 $U_i \subset X_i$ に対して
+$$
+p_i^{-1}\mathcal{G}(p_i^{-1}(U_i)) =
+\colim_{a : j \to i} f_a^{-1}\mathcal{G}(f_a^{-1}(U_i))
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+標準写像
+$\colim_{a : j \to i} f_a^{-1}\mathcal{G}(f_a^{-1}(U_i)) \to
+p_i^{-1}\mathcal{G}(p_i^{-1}(U_i))$ が単射であることを示す。
+ある $a : j \to i$ に対し、$s, s'$ を $f_a^{-1}(U_i)$ 上の
+$f_a^{-1}\mathcal{G}$ の切断とする。$b : k \to j$ に対し、
+$Z_k \subset f_{a \circ b}^{-1}(U_i)$ を、$s$ と $s'$ の像が茎
+$(f_{a \circ b}^{-1}\mathcal{G})_x$ において異なるような点 $x$ 全体の
+閉部分集合とする。すべての $b : k \to j$ に対して $Z_k$ が非空なら、
+Topology, Lemma \ref{topology-lemma-inverse-limit-spectral-spaces-nonempty}
+により $\lim_{b : k \to j} Z_k$ も非空である。すると
+$x \in \lim_{b : k \to j} Z_k \subset X$ に対して
+（$\mathcal{I}/j \to \mathcal{I}$ が始であることに注意せよ）、
+上のすべての $b : k \to j$ について
+$(p_i^{-1}\mathcal{G})_x = (f_{b \circ a}^{-1}\mathcal{G})_{p_k(x)}$
+であるから、$s$ と $s'$ の像は $p_i^{-1}\mathcal{G}$ の $x$ における茎でも
+異なる。したがって、$p_i^{-1}\mathcal{G}(p_i^{-1}(U_i))$ における
+$s$ と $s'$ の像が等しければ、ある $b : k \to j$ に対して $Z_k$ は空である。
+これで単射性が従う。
+
+\medskip\noindent
+全射性を示す。$s$ を $p_i^{-1}(U_i)$ 上の $p_i^{-1}\mathcal{G}$ の切断とする。
+Topology, Lemma \ref{topology-lemma-directed-inverse-limit-spectral-spaces}
+により、$p_i^{-1}(U_i)$ はスペクトル空間 $X$ の準コンパクト開集合である。
+引き戻し層の構成により、開被覆
+$p_i^{-1}(U_i) = \bigcup_{l \in L} W_l$、開集合
+$V_{l, i} \subset X_i$、および切断 $s_{l, i} \in \mathcal{G}(V_{l, i})$ で、
+$p_i(W_l) \subset V_{l, i}$ かつ
+$p_i^{-1}s_{l, i}|_{W_l} = s|_{W_l}$ となるものを取れる。
+$X$ と $X_i$ はスペクトルで、$p_i^{-1}(U_i)$ は準コンパクト開集合なので、
+$L$ は有限で、すべての $l$ に対して $W_l$ と $V_{l, i}$ は
+準コンパクト開集合であると仮定できる。そこで
+Topology, Lemma \ref{topology-lemma-descend-opens} を適用すると、
+$a : j \to i$ と、準コンパクト開集合による開被覆
+$f_a^{-1}(U_i) = \bigcup_{l \in L} W_{l, j}$ で、その $X$ への引き戻しが
+被覆 $p_i^{-1}(U_i) = \bigcup_{l \in L} W_l$ であり、さらに
+$W_{l, j} \subset f_a^{-1}(V_{l, i})$ となるものが得られる。
+$s_{l, j}$ を、$s_{l, i}$ の $f_a$ による引き戻しの $W_{l, j}$ への制限とする。
+すると $s_{l, j}$ と $s_{l', j}$ は
+$(f_a^{-1}\mathcal{G})(W_{l, j} \cap W_{l', j})$ の元に制限され、それらは
+$(p_i^{-1}\mathcal{G})(W_l \cap W_{l'})$ の同じ元、すなわち $s$ の制限へ
+引き戻される。したがって単射性により、$b : k \to j$ で、切断
+$f_b^{-1}s_{l, j}$ が望むとおり $f_{a \circ b}^{-1}(U_i)$ 上の切断に
+貼り合わさるものを取れる。
+\end{proof}
+
+\noindent
+次に、スペクトル空間の余フィルター系 $X_i$ に加えて、次が与えられているとする：
+\begin{enumerate}
+\item すべての $i \in \Ob(\mathcal{I})$ に対する $X_i$ 上の層
+$\mathcal{F}_i$、
+\item $a : j \to i$ に対する $f_a$-写像
+$\varphi_a : \mathcal{F}_i \to \mathcal{F}_j$。
+\end{enumerate}
+$c = a \circ b$ のときは常に $\varphi_c = \varphi_b \circ \varphi_a$ とする。
+$X$ 上で $\mathcal{F} = \colim p_i^{-1}\mathcal{F}_i$ とおく。
+
+\begin{lemma}
+\label{sheaves-lemma-descend-opens}
+上の状況で、$i \in \Ob(\mathcal{I})$ とし、$U_i \subset X_i$ を
+準コンパクト開集合とする。このとき
+$$
+\colim_{a : j \to i} \mathcal{F}_j(f_a^{-1}(U_i)) = \mathcal{F}(p_i^{-1}(U_i))
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$p_i^{-1}(U_i)$ はスペクトル空間 $X$ の準コンパクト開集合であることを思い出す。
+Topology, Lemma \ref{topology-lemma-directed-inverse-limit-spectral-spaces}
+を参照せよ。したがって Lemma \ref{sheaves-lemma-directed-colimits-sections} を適用でき、
+$$
+\mathcal{F}(p_i^{-1}(U_i)) =
+\colim_{a : j \to i} p_j^{-1}\mathcal{F}_j(p_i^{-1}(U_i)).
+$$
+が成り立つ。形式的な議論により
+$$
+\colim_{a : j \to i} \mathcal{F}_j(f_a^{-1}(U_i)) =
+\colim_{a : j \to i} \colim_{b : k \to j}
+f_b^{-1}\mathcal{F}_j(f_{a \circ b}^{-1}(U_i))
+$$
+が分かる。したがって
+$$
+p_j^{-1}\mathcal{F}_j(p_i^{-1}(U_i)) =
+\colim_{b : k \to j} f_b^{-1}\mathcal{F}_j(f_{a \circ b}^{-1}(U_i))
+$$
+を示せば十分である。これは、$\mathcal{F}_j$ と準コンパクト開集合
+$f_a^{-1}(U_i)$ に適用した Lemma \ref{sheaves-lemma-compute-pullback-to-limit} である。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{基底と層}
+\label{sheaves-section-bases}
+
+\noindent
+位相の基底が、一般の開集合より扱いやすい開集合からなることがある。
+このような状況で（前）層を扱いやすくするため、便宜上いくつかの定義と
+簡単な補題をここで与える。
+
+\begin{definition}
+\label{sheaves-definition-presheaf-basis}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の基底とする。
+\begin{enumerate}
+\item {\it $\mathcal{B}$ 上の集合の前層 $\mathcal{F}$}とは、各
+$U \in \mathcal{B}$ に集合 $\mathcal{F}(U)$ を対応させ、$\mathcal{B}$ の
+元の各包含 $V \subset U$ に写像
+$\rho^U_V : \mathcal{F}(U) \to \mathcal{F}(V)$ を対応させる規則であって、
+すべての $U \in \mathcal{B}$ に対して
+$\rho^U_U = \text{id}_{\mathcal{F}(U)}$ であり、$\mathcal{B}$ において
+$W \subset V \subset U$ ならば
+$\rho^U_W = \rho^V_W \circ \rho ^U_V$ となるものをいう。
+\item {\it $\mathcal{B}$ 上の集合の前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$}とは、各元 $U \in \mathcal{B}$ に、
+制限写像と両立する集合の写像 $\varphi : \mathcal{F}(U)
+\to \mathcal{G}(U)$ を対応させる規則をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+通常の前層の場合と同じく、切断、切断の制限などの用語を用いる。
+特に、点 $x \in X$ における $\mathcal{F}$ の{\it 茎}を余極限
+$$
+\mathcal{F}_x = \colim_{U\in \mathcal{B}, x\in U} \mathcal{F}(U).
+$$
+によって定義できる。$X$ 上の前層の茎の場合と同じく、この極限は有向である。
+その理由は、$U\in \mathcal{B}$, $x \in U$ であるような開集合全体が
+$x$ の開近傍の基本系をなすからである。
+
+\medskip\noindent
+$X$ 上の前層という概念が、$X$ の位相の基底上の前層という概念と大きく異なる
+ことを示す例を作るのは容易である。層の場合にはこの現象は起こらない。
+したがって、次の概念の方がはるかに有用である。
+
+\begin{definition}
+\label{sheaves-definition-sheaf-basis}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の基底とする。
+\begin{enumerate}
+\item {\it $\mathcal{B}$ 上の集合の層 $\mathcal{F}$}とは、次の追加の性質を
+満たす $\mathcal{B}$ 上の集合の前層をいう。任意の $U \in \mathcal{B}$、
+$U_i \in \mathcal{B}$ による任意の被覆
+$U = \bigcup_{i \in I} U_i$、および $U_{ijk} \in \mathcal{B}$ による
+任意の被覆 $U_i \cap U_j = \bigcup_{k \in I_{ij}} U_{ijk}$ が与えられると、
+次の層条件が成り立つ：
+\begin{itemize}
+\item[(**)] 切断の族 $s_i \in \mathcal{F}(U_i)$, $i \in I$ が任意に与えられ、
+$\forall i, j\in I$, $\forall k\in I_{ij}$ に対して
+$$
+s_i|_{U_{ijk}} = s_j|_{U_{ijk}}
+$$
+であるなら、すべての $i \in I$ に対して $s_i = s|_{U_i}$ となる
+一意な切断 $s \in \mathcal{F}(U)$ が存在する。
+\end{itemize}
+\item {\it $\mathcal{B}$ 上の集合の層の射}とは、単に集合の前層の射をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+まず、層条件 $(**)$ は共終的な被覆系上で確認すれば十分であることを説明する。
+定義の状況で $U \in \mathcal{B}$ とする。当面、$U$ の
+$\mathcal{B}$ の元によるすべての被覆の集合を
+$\text{Cov}_\mathcal{B}(U)$ と書くことにする。
+$\text{Cov}_\mathcal{B}(U)$ は細分によって前順序付けられていることに注意する。
+部分集合 $C \subset \text{Cov}_\mathcal{B}(U)$ が共終系であるとは、
+各 $\mathcal{U} \in \text{Cov}_\mathcal{B}(U)$ に対して
+$\mathcal{U}$ を細分する被覆 $\mathcal{V} \in C$ が存在することをいう。
+
+\begin{lemma}
+\label{sheaves-lemma-cofinal-systems-coverings}
+上の記法を用いる。各 $U \in \mathcal{B}$ に対して、
+$C(U) \subset \text{Cov}_\mathcal{B}(U)$ を共終系とする。
+各 $U \in \mathcal{B}$ と $C(U)$ に属する各
+$\mathcal{U} : U = \bigcup U_i$ に対し、被覆
+$\mathcal{U}_{ij} : U_i \cap U_j = \bigcup U_{ijk}$,
+$U_{ijk} \in \mathcal{B}$ が与えられているとする。
+$\mathcal{F}$ を $\mathcal{B}$ 上の集合の前層とする。次は同値である。
+\begin{enumerate}
+\item 前層 $\mathcal{F}$ は $\mathcal{B}$ 上の層である。
+\item すべての $U \in \mathcal{B}$ と、$C(U)$ に属するすべての被覆
+$\mathcal{U} : U = \bigcup U_i$ に対して、層条件 $(**)$ が
+（与えられた被覆 $\mathcal{U}_{ij}$ について）成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(2) が (1) を含意することを示せばよい。
+$U \in \mathcal{B}$ とし、
+$\mathcal{U} : U = \bigcup_{i\in I} U_i$ を $\mathcal{B}$ の元による
+任意の被覆とする。系 $C(U)$ は共終なので、$\mathcal{U}$ を細分する
+$C(U)$ の元 $\mathcal{V} : U = \bigcup_{j \in J} V_j$ を取れる。
+これは、$V_j \subset U_{\alpha(j)}$ となる写像
+$\alpha : J \to I$ が存在することを意味する。
+
+\medskip\noindent
+$s, s' \in \mathcal{F}(U)$ を
+$s|_{U_i} = s'|_{U_i}$ となる切断とすると、
+$$
+s|_{V_j}
+= (s|_{U_{\alpha(j)}})|_{V_j}
+= (s'|_{U_{\alpha(j)}})|_{V_j}
+= s'|_{V_j}
+$$
+がすべての $j$ に対して成り立つことに注意する。したがって、被覆
+$\mathcal{V}$ に対する $(**)$ の一意性により $s = s'$ と結論できる。
+これで、任意の被覆 $\mathcal{U}$ に対する $(**)$ の一意性の部分が示された。
+
+\medskip\noindent
+さらに、$U_{ii'k} \in \mathcal{B}$ による任意の被覆
+$U_i \cap U_{i'} = \bigcup_{k \in I_{ii'}} U_{ii'k}$ が与えられているとする。
+系 $(\mathcal{U}, \mathcal{U}_{ij})$ に対する $(**)$ の存在の部分を示そう。
+そこで $s_i \in \mathcal{F}(U_i)$ とし、すべての $i, i', k$ に対して
+$$
+s_i|_{U_{ii'k}} = s_{i'}|_{U_{ii'k}}
+$$
+であると仮定する。上の $\mathcal{V}$ と $\alpha$ を用いて
+$t_j = s_{\alpha(j)}|_{V_j}$ とおく。
+
+\medskip\noindent
+ここで議論には一つ小さな問題がある。補題の主張によって与えられた被覆を
+$\mathcal{V}_{jj'} : V_j \cap V_{j'} = \bigcup_{l \in J_{jj'}} V_{jj'l}$
+とする。すべての $j, j', l$ に対して
+$$
+t_j|_{V_{jj'l}} = t_{j'}|_{V_{jj'l}}
+$$
+であることは先験的には明らかでない。これを見るため、元の族 $s_i$ に関する
+仮定により、すべての $k \in I_{\alpha(j)\alpha(j')}$ に対して
+$$
+t_j|_W = t_{j'}|_W \text{ for all } W \in \mathcal{B},
+W \subset V_{jj'l} \cap U_{\alpha(j)\alpha(j')k}
+$$
+が成り立つことに注意する。また
+$V_j \cap V_{j'} \subset U_{\alpha(j)} \cap U_{\alpha(j')}$
+なので、$t_j|_{V_{jj'l}}$ と $t_{j'}|_{V_{jj'l}}$ は、
+$V_{jj'l}$ の $\mathcal{B}$ の元によるある被覆の各元上で一致する。
+したがって、上で示した一意性の部分により、ついに
+$t_j|_{V_{jj'l}}$ と $t_{j'}|_{V_{jj'l}}$ が等しいことを得る。
+そこで $(\mathcal{V}, \mathcal{V}_{jj'})$ に対する性質 $(**)$ により
+元 $t \in \mathcal{F}(U)$ の存在が得られる。
+
+\medskip\noindent
+ここでも小さな問題がある。$t$ の $V_j$ への制限が $t_j$ であることは
+分かっているが、$t$ の $U_i$ への制限が $s_i$ であることはまだ分からない。
+これを結論するには、集合 $U_i \cap V_j$, $j \in J$ が $U_i$ を被覆することに
+注意する。したがって、集合
+$U_{i \alpha(j) k} \cap V_j$, $j\in J$, $k \in I_{i\alpha(j)}$ も
+$U_i$ を被覆する。これらの開集合の一つに含まれる任意の
+$W \in \mathcal{B}$ 上で、$t$ と $s_i$ が $\mathcal{F}$ の同じ切断に
+制限されることの確認は読者に委ねる。この開集合は
+$U_{i \alpha(j) k} \cap V_j$, $j\in J$, $k \in I_{i\alpha(j)}$
+のいずれかに含まれる。ゆえに、上で見た一意性の部分により
+主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-cofinal-systems-coverings-standard-case}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の基底とする。
+$U' \subset U$ および $U'' \subset U$ を満たすすべての三つ組
+$U, U', U'' \in \mathcal{B}$ に対して
+$U' \cap U'' \in \mathcal{B}$ であると仮定する。
+各 $U \in \mathcal{B}$ に対し、
+$C(U) \subset \text{Cov}_\mathcal{B}(U)$ を共終系とする。
+$\mathcal{F}$ を $\mathcal{B}$ 上の集合の前層とする。次は同値である。
+\begin{enumerate}
+\item 前層 $\mathcal{F}$ は $\mathcal{B}$ 上の層である。
+\item すべての $U \in \mathcal{B}$、$C(U)$ に属するすべての被覆
+$\mathcal{U} : U = \bigcup U_i$、および
+$s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$ を満たす任意の切断の族
+$s_i \in \mathcal{F}(U_i)$ に対し、$U_i$ への制限が $s_i$ となる
+一意な切断 $s \in \mathcal{F}(U)$ が存在する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これは、各被覆 $\mathcal{U}_{ij}$ が一つの元だけからなる特別な場合について、
+上の Lemma \ref{sheaves-lemma-cofinal-systems-coverings} を言い換えたものである。
+ただし、この場合ははるかに容易であり、直接示すことも簡単な演習である。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-condition-star-sections}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の基底とする。
+$U \in \mathcal{B}$ とする。$\mathcal{F}$ を $\mathcal{B}$ 上の
+集合の層とする。写像
+$$
+\mathcal{F}(U) \to \prod\nolimits_{x \in U} \mathcal{F}_x
+$$
+は $\mathcal{F}(U)$ を、次の性質をもつ元 $(s_x)_{x\in U}$ 全体と同一視する：
+\begin{itemize}
+\item[(*)] 任意の $x \in U$ に対し、$x \in V \subset U$ となる
+$V \in \mathcal{B}$ と切断 $\sigma \in \mathcal{F}(V)$ が存在し、
+すべての $y \in V$ に対して $\mathcal{F}_y$ において
+$s_y = (V, \sigma)$ となる。
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+まず、写像 $\mathcal{F}(U) \to \prod\nolimits_{x \in U} \mathcal{F}_x$ は、
+Definition \ref{sheaves-definition-sheaf-basis} の層条件の一意性により単射である。
+右辺の $(*)$ を満たす任意の元を $(s_x)$ とする。これは明らかに、
+被覆 $U = \bigcup U_i$, $U_i \in \mathcal{B}$ を取って、
+$(s_x)_{x \in U_i}$ がある $\sigma_i \in \mathcal{F}(U_i)$ から来るように
+できることを意味する。すべての $y \in U_i \cap U_j$ に対して、切断
+$\sigma_i$ と $\sigma_j$ は茎 $\mathcal{F}_y$ において一致する。
+したがって、$\sigma_i|_{V_{ijy}} = \sigma_j|_{V_{ijy}}$ となる
+$y \in V_{ijy}$ を満たす元 $V_{ijy} \in \mathcal{B}$ が存在する。
+ゆえに Definition \ref{sheaves-definition-sheaf-basis} の層条件 $(**)$ を
+$\sigma_i$ の系に適用でき、望む性質をもつ切断
+$s \in \mathcal{F}(U)$ が得られる。
+\end{proof}
+
+\noindent
+$X$ を位相空間とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$X$ 上の集合の層の圏から $\mathcal{B}$ 上の集合の層の圏への
+自然な制限関手がある。これは圏同値であることが分かる。
+具体的には、これは次を意味する。
+
+\begin{lemma}
+\label{sheaves-lemma-extend-off-basis}
+$X$ を位相空間とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$\mathcal{F}$ を $\mathcal{B}$ 上の集合の層とする。
+すべての $U \in \mathcal{B}$ に対して、制限写像と両立して
+$\mathcal{F}^{ext}(U) = \mathcal{F}(U)$ となる $X$ 上の集合の層
+$\mathcal{F}^{ext}$ が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+まず、望む性質をもつ前層 $\mathcal{F}^{ext}$ を構成する。
+すなわち、任意の開集合 $U \subset X$ に対して
+$\mathcal{F}^{ext}(U)$ を、Lemma \ref{sheaves-lemma-condition-star-sections} の
+$(*)$ を満たす元 $(s_x)_{x \in U}$ 全体の集合として定義する。
+$\mathcal{F}^{ext}$ を集合の前層にする制限写像が存在することは明らかである。
+また、Lemma \ref{sheaves-lemma-condition-star-sections} により、$U$ が基底
+$\mathcal{B}$ の元なら常に
+$\mathcal{F}(U) = \mathcal{F}^{ext}(U)$ である。
+$\mathcal{F}^{ext}$ が層であることを見るには、
+Lemma \ref{sheaves-lemma-sheafification-sheaf} の証明と同様に論じればよい。
+\end{proof}
+
+\noindent
+補題の状況では
+$$
+\mathcal{F}_x = \mathcal{F}_x^{ext}
+$$
+であることに注意する。これは、$x$ を含む $\mathcal{B}$ の元全体が
+$x$ の開近傍の基本系をなすからである。
+
+\begin{lemma}
+\label{sheaves-lemma-restrict-basis-equivalence}
+$X$ を位相空間とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$\mathcal{B}$ 上の層の圏を $\Sh(\mathcal{B})$ と書く。
+圏同値
+$$
+\Sh(X) \longrightarrow \Sh(\mathcal{B})
+$$
+が存在し、$X$ 上の層を $\mathcal{B}$ の元へのその制限に写す。
+\end{lemma}
+
+\begin{proof}
+逆関手は上の Lemma \ref{sheaves-lemma-extend-off-basis} で与えられる。
+明らかな関手性の確認は読者に委ねる。
+\end{proof}
+
+\noindent
+これで基底 $\mathcal{B}$ 上の集合の層についての議論を終える。
+$(\mathcal{C}, F)$ を代数構造の型とする。この節の最後に、上の構成が
+$\mathcal{C}$ に値をもつ層についても機能することを指摘したい。
+関連する概念を簡潔に定義する。
+
+\begin{definition}
+\label{sheaves-definition-sheaf-structures-basis}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の基底とする。
+$(\mathcal{C}, F)$ を代数構造の型とする。
+\begin{enumerate}
+\item {\it $\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ前層
+$\mathcal{F}$}とは、各 $U \in \mathcal{B}$ に $\mathcal{C}$ の対象
+$\mathcal{F}(U)$ を対応させ、$\mathcal{B}$ の元の各包含 $V \subset U$ に
+$\mathcal{C}$ の射
+$\rho^U_V : \mathcal{F}(U) \to \mathcal{F}(V)$ を対応させる規則であって、
+すべての $U \in \mathcal{B}$ に対して
+$\rho^U_U = \text{id}_{\mathcal{F}(U)}$ であり、$\mathcal{B}$ において
+$W \subset V \subset U$ ならば
+$\rho^U_W = \rho^V_W \circ \rho ^U_V$ となるものをいう。
+\item {\it $\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$}とは、各元
+$U \in \mathcal{B}$ に、制限写像と両立する代数的構造の射
+$\varphi : \mathcal{F}(U) \to \mathcal{G}(U)$ を対応させる規則をいう。
+\item $\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ前層
+$\mathcal{F}$ が与えられたとき、$U \mapsto F(\mathcal{F}(U))$ を
+台集合の前層という。
+\item {\it $\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ層
+$\mathcal{F}$}とは、台集合の前層が層であるような
+$\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ前層をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+ここで、$\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ前層の
+$x \in X$ における{\it 茎}を、有向余極限
+$$
+\mathcal{F}_x = \colim_{U\in \mathcal{B}, x\in U} \mathcal{F}(U).
+$$
+として定義できる。$\mathcal{C}$ に課した仮定により、これは
+$\mathcal{C}$ の対象として存在する。また、$\mathcal{F}_x$ の台集合は、
+$\mathcal{B}$ 上の台集合の前層の茎であることが分かる。
+
+\medskip\noindent
+Lemmas \ref{sheaves-lemma-cofinal-systems-coverings},
+\ref{sheaves-lemma-cofinal-systems-coverings-standard-case} and
+\ref{sheaves-lemma-condition-star-sections} は、対応する集合の前層によって定義した
+層の性質に関するものであることに注意する。したがって、これらは
+$\mathcal{C}$ に値をもつ前層の概念へ変更なく一般化される。
+Lemma \ref{sheaves-lemma-extend-off-basis} の類似には多少注意が必要である。
+次がその主張である。
+
+\begin{lemma}
+\label{sheaves-lemma-extend-off-basis-structures}
+$X$ を位相空間とする。$(\mathcal{C}, F)$ を代数構造の型とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$\mathcal{F}$ を $\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ層とする。
+すべての $U \in \mathcal{B}$ に対して、制限写像と両立して
+$\mathcal{F}^{ext}(U) = \mathcal{F}(U)$ となる $X$ 上の
+$\mathcal{C}$ に値をもつ層 $\mathcal{F}^{ext}$ が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+対 $(\mathcal{C}, F)$ に課した条件により、台集合の前層のレベルで正しい
+働きをする前層 $\mathcal{F}^{ext}$ を構成すれば十分である。
+したがって最初の課題は、すべての開集合 $U \subset X$ に対して適切な対象
+$\mathcal{F}^{ext}(U)$ を構成することである。
+これは $\mathcal{B}$ 上の前層という設定で
+Lemma \ref{sheaves-lemma-diagram-fibre-product} を模倣することによってもできる。
+しかし、少し異なる（本質的には同値な）方法は次のとおりである。
+次の有向余極限としてこれを定義する：
+$$
+\mathcal{F}^{ext}(U)
+:=
+\colim_\mathcal{U} FIB(\mathcal{U})
+$$
+ここで余極限は、すべての $U_i \in \mathcal{B}$ による被覆
+$\mathcal{U} : U = \bigcup_{i\in I} U_i$ にわたり、その項は
+ファイバー積
+$$
+\xymatrix{
+FIB(\mathcal{U}) \ar[r] \ar[d] &
+\prod\nolimits_{x\in U} \mathcal{F}_x \ar[d] \\
+\prod\nolimits_{i\in I} \mathcal{F}(U_i) \ar[r] &
+\prod\nolimits_{i \in I} \prod\nolimits_{x\in U_i} \mathcal{F}_x
+}
+$$
+である。通常の議論、すなわち
+Lemma \ref{sheaves-lemma-image-contained-in} と
+Example \ref{sheaves-example-application-lemma-image-contained-in} を参照すれば、
+この台集合上の構成が上で $(**)$ を用いて与えた定義と同じであることを
+示せば十分である。詳細は読者に委ねる。
+\end{proof}
+
+\noindent
+補題の状況では、$\mathcal{C}$ の対象として
+$$
+\mathcal{F}_x = \mathcal{F}_x^{ext}
+$$
+であることに注意する。これは、$x$ を含む $\mathcal{B}$ の元全体が
+$x$ の開近傍の基本系をなすからである。
+
+\begin{lemma}
+\label{sheaves-lemma-restrict-basis-equivalence-structures}
+$X$ を位相空間とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$(\mathcal{C}, F)$ を代数構造の型とする。
+$\mathcal{B}$ 上の $\mathcal{C}$ に値をもつ層の圏を
+$\Sh(\mathcal{B}, \mathcal{C})$ と書く。圏同値
+$$
+\Sh(X, \mathcal{C})
+\longrightarrow
+\Sh(\mathcal{B}, \mathcal{C})
+$$
+が存在し、$X$ 上の層を $\mathcal{B}$ の元へのその制限に写す。
+\end{lemma}
+
+\begin{proof}
+逆関手は上の Lemma \ref{sheaves-lemma-extend-off-basis-structures} で与えられる。
+明らかな関手性の確認は読者に委ねる。
+\end{proof}
+
+\noindent
+最後に、基底上の加群の（前）層の場合を扱う。基底上の集合の前層の圏は
+積をもち、その積は基底の元上の値の積を取ることによって記述されるという
+容易な事実を用いる。
+
+\begin{definition}
+\label{sheaves-definition-sheaf-modules-basis}
+$X$ を位相空間とする。$\mathcal{B}$ を $X$ の位相の基底とする。
+$\mathcal{O}$ を $\mathcal{B}$ 上の環の前層とする。
+\begin{enumerate}
+\item {\it $\mathcal{B}$ 上の $\mathcal{O}$-加群の前層
+$\mathcal{F}$}とは、$\mathcal{B}$ 上のアーベル群の前層と、集合の前層の射
+$\mathcal{O} \times \mathcal{F} \to \mathcal{F}$ との組であって、
+すべての $U \in \mathcal{B}$ に対して写像
+$\mathcal{O}(U) \times \mathcal{F}(U) \to \mathcal{F}(U)$ が群
+$\mathcal{F}(U)$ を $\mathcal{O}(U)$-加群にするものをいう。
+\item {\it $\mathcal{B}$ 上の $\mathcal{O}$-加群の前層の射
+$\varphi : \mathcal{F} \to \mathcal{G}$}とは、$\mathcal{B}$ 上の
+アーベル前層の射であって、各 $U \in \mathcal{B}$ に対して
+$\mathcal{O}(U)$-加群準同型
+$\mathcal{F}(U) \to \mathcal{G}(U)$ を誘導するものをいう。
+\item $\mathcal{O}$ が $\mathcal{B}$ 上の環の層であると仮定する。
+{\it $\mathcal{B}$ 上の $\mathcal{O}$-加群の層
+$\mathcal{F}$}とは、台となるアーベル群の前層が層であるような
+$\mathcal{B}$ 上の $\mathcal{O}$-加群の前層をいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$\mathcal{B}$ 上の $\mathcal{O}$-加群の前層の
+$x \in X$ における{\it 茎}を、有向余極限
+$$
+\mathcal{F}_x = \colim_{U\in \mathcal{B}, x\in U} \mathcal{F}(U).
+$$
+として定義できる。これは $\mathcal{O}_x$-加群である。
+
+\medskip\noindent
+Lemmas \ref{sheaves-lemma-cofinal-systems-coverings},
+\ref{sheaves-lemma-cofinal-systems-coverings-standard-case} and
+\ref{sheaves-lemma-condition-star-sections} は、対応する集合の前層によって定義した
+層の性質に関するものであることに注意する。したがって、これらは
+$\mathcal{O}$-加群の前層の概念へ変更なく一般化される。
+Lemma \ref{sheaves-lemma-extend-off-basis} の類似は次のとおりである。
+
+\begin{lemma}
+\label{sheaves-lemma-extend-off-basis-module}
+$X$ を位相空間とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$\mathcal{O}$ を $\mathcal{B}$ 上の環の層とする。
+$\mathcal{F}$ を $\mathcal{B}$ 上の $\mathcal{O}$-加群の層とする。
+$\mathcal{O}^{ext}$ を $\mathcal{O}$ を拡張する $X$ 上の環の層とし、
+$\mathcal{F}^{ext}$ を $\mathcal{F}$ を拡張する $X$ 上のアーベル層とする。
+Lemma \ref{sheaves-lemma-extend-off-basis-structures} を参照せよ。
+$\mathcal{B}$ の元上で与えられた写像と一致し、$\mathcal{F}^{ext}$ に
+$\mathcal{O}^{ext}$-加群の構造を与える標準写像
+$$
+\mathcal{O}^{ext} \times \mathcal{F}^{ext}
+\longrightarrow
+\mathcal{F}^{ext}
+$$
+が存在する。
+\end{lemma}
+
+\begin{proof}
+集合の前層のレベルで乗法写像を構成すれば十分である。
+これを見る最も容易な方法は、おそらく
+$(f_x)_{x \in U}$, $f_x \in \mathcal{O}_x$ と
+$(m_x)_{x \in U}$, $m_x \in \mathcal{F}_x$ が $(*)$ を満たすなら、
+元 $(f_xm_x)_{x \in U}$ も $(*)$ を満たすことを直接示すことである。
+すると望む結果が得られる。実際、Lemma \ref{sheaves-lemma-extend-off-basis} の
+証明では、$(*)$ を満たす茎の元の族を用いて拡張を構成した。
+\end{proof}
+
+\noindent
+補題の状況では、$\mathcal{O}_x$-加群として
+$$
+\mathcal{F}_x = \mathcal{F}_x^{ext}
+$$
+であることに注意する。これは、$x$ を含む $\mathcal{B}$ の元全体が
+$x$ の開近傍の基本系をなすからであり、あるいは単に台集合について
+正しいからである。
+
+\begin{lemma}
+\label{sheaves-lemma-restrict-basis-equivalence-modules}
+$X$ を位相空間とする。
+$\mathcal{B}$ を $X$ の位相の基底とする。
+$\mathcal{O}$ を $X$ 上の環の層とする。
+$\mathcal{B}$ 上の $\mathcal{O}|_\mathcal{B}$-加群の層の圏を
+$\textit{Mod}(\mathcal{O}|_\mathcal{B})$ と書く。圏同値
+$$
+\textit{Mod}(\mathcal{O})
+\longrightarrow
+\textit{Mod}(\mathcal{O}|_\mathcal{B})
+$$
+が存在し、$X$ 上の $\mathcal{O}$-加群の層を $\mathcal{B}$ の元への
+その制限に写す。
+\end{lemma}
+
+\begin{proof}
+逆関手は上の Lemma \ref{sheaves-lemma-extend-off-basis-module} で与えられる。
+明らかな関手性の確認は読者に委ねる。
+\end{proof}
+
+\noindent
+最後に、これと連続写像との関係を扱う。上の準備により、これは今や非常に
+容易である。まず、終域上に基底が与えられている場合を扱う。
+
+\begin{lemma}
+\label{sheaves-lemma-f-map-basis-below-structures}
+$f : X \to Y$ を位相空間の連続写像とする。
+$(\mathcal{C}, F)$ を代数構造の型とする。
+$\mathcal{F}$ を $X$ 上の $\mathcal{C}$ に値をもつ層とする。
+$\mathcal{G}$ を $Y$ 上の $\mathcal{C}$ に値をもつ層とする。
+$\mathcal{B}$ を $Y$ の位相の基底とする。
+各 $V \in \mathcal{B}$ に対して、制限写像と両立する
+$\mathcal{C}$ の射
+$$
+\varphi_V :
+\mathcal{G}(V)
+\longrightarrow
+\mathcal{F}(f^{-1}V)
+$$
+が与えられていると仮定する。このとき、$\varphi_V$ を各
+$V \in \mathcal{B}$ に対して復元する一意な $f$-写像
+（Definition \ref{sheaves-definition-f-map} および
+Section \ref{sheaves-section-presheaves-structures-functorial} の
+$f$-写像の議論を参照せよ）
+$\varphi : \mathcal{G} \to \mathcal{F}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+この写像の族は、$\mathcal{G}$ と $f_*\mathcal{F}$ の
+$\mathcal{B}$ への制限の間の射にほかならないので、自明である。
+Lemma \ref{sheaves-lemma-restrict-basis-equivalence-structures} により、
+これは $\mathcal{G}$ から $f_*\mathcal{F}$ への射を与えることと同じであり、
+Lemma \ref{sheaves-lemma-f-map} により $f$-写像を与えることと同じである。
+代数的構造の層の場合の扱い方については、
+Lemma \ref{sheaves-lemma-f-map-sets-algebraic-structures} およびその直前の議論も参照せよ。
+\end{proof}
+
+\noindent
+環付き空間に対する類似は次のとおりである。
+
+\begin{lemma}
+\label{sheaves-lemma-f-map-basis-below-modules}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を
+環付き空間の射とする。
+$\mathcal{F}$ を $\mathcal{O}_X$-加群の層とする。
+$\mathcal{G}$ を $\mathcal{O}_Y$-加群の層とする。
+$\mathcal{B}$ を $Y$ の位相の基底とする。
+各 $V \in \mathcal{B}$ に対して、制限写像と両立する
+$\mathcal{O}_Y(V)$-加群写像
+$$
+\varphi_V :
+\mathcal{G}(V)
+\longrightarrow
+\mathcal{F}(f^{-1}V)
+$$
+が与えられていると仮定する（ここで
+$\mathcal{F}(f^{-1}V)$ の加群構造には
+$f^\sharp_V : \mathcal{O}_Y(V) \to \mathcal{O}_X(f^{-1}V)$ を用いる）。
+このとき、各 $V \in \mathcal{B}$ に対して $\varphi_V$ を復元する
+一意な $f$-写像
+（Section \ref{sheaves-section-ringed-spaces-functoriality-modules} の
+$f$-写像の議論を参照せよ）
+$\varphi : \mathcal{G} \to \mathcal{F}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+上の代数的構造の層に対する対応する補題の証明と同じである。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-f-map-basis-above-and-below-structures}
+$f : X \to Y$ を位相空間の連続写像とする。
+$(\mathcal{C}, F)$ を代数構造の型とする。
+$\mathcal{F}$ を $X$ 上の $\mathcal{C}$ に値をもつ層とする。
+$\mathcal{G}$ を $Y$ 上の $\mathcal{C}$ に値をもつ層とする。
+$\mathcal{B}_Y$ を $Y$ の位相の基底とする。
+$\mathcal{B}_X$ を $X$ の位相の基底とする。
+各 $V \in \mathcal{B}_Y$ と、$f(U) \subset V$ を満たす
+$U \in \mathcal{B}_X$ に対して、制限写像と両立する $\mathcal{C}$ の射
+$$
+\varphi_V^U :
+\mathcal{G}(V)
+\longrightarrow
+\mathcal{F}(U)
+$$
+が与えられていると仮定する。このとき、上の各組 $(U, V)$ に対して
+$\varphi_V^U$ を合成
+$$
+\mathcal{G}(V) \xrightarrow{\varphi_V}
+\mathcal{F}(f^{-1}(V)) \xrightarrow{\text{restr.}}
+\mathcal{F}(U)
+$$
+として復元する一意な $f$-写像
+（Definition \ref{sheaves-definition-f-map} および
+Section \ref{sheaves-section-presheaves-structures-functorial} の
+$f$-写像の議論を参照せよ）
+$\varphi : \mathcal{G} \to \mathcal{F}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+まず集合の層について示す。開集合 $V \subset Y$ を固定する。
+$s \in \mathcal{G}(V)$ を取る。元
+$\varphi_V(s) \in \mathcal{F}(f^{-1}V)$ を構成する。
+各 $x \in f^{-1}V$ に対して茎 $\mathcal{F}_x$ の値
+$\varphi(s)_x$ を次のように定義できる。
+$x \in U \subset f^{-1}V$ となる $U \in \mathcal{B}_X$ を取り、
+$\varphi(s)_x$ を茎における $(U, \varphi_V^U(s))$ の同値類とする。
+変化する $U$ に対する写像 $\varphi_V^U$ は層 $\mathcal{F}$ の
+制限と両立するので、族 $(\varphi(s)_x)_{x \in f^{-1}V}$ は明らかに
+条件 $(*)$ を満たす。したがって、
+Lemma \ref{sheaves-lemma-extend-off-basis} の証明により、
+$(\varphi(s)_x)_{x \in f^{-1}V}$ は
+$\mathcal{F}(f^{-1}V)$ の一意な元 $\varphi_V(s)$ に対応する。
+これで集合の写像
+$\varphi_V : \mathcal{G}(V) \to \mathcal{F}(f^{-1}V)$ を定義した。
+$\varphi_V$ と $\varphi_V^U$ の両立性は
+Lemma \ref{sheaves-lemma-condition-star-sections} から従う。
+
+\medskip\noindent
+$V \in \mathcal{B}_Y$ を変化させたとき、$\varphi_V$ の構成が
+制限写像と両立することの確認は読者に委ねる。
+したがって、上の Lemma \ref{sheaves-lemma-f-map-basis-below-structures} を適用して、
+これらを望む $f$-写像に「貼り合わせる」ことができる。
+
+\medskip\noindent
+最後に、このように構成した集合の層の写像は、茎上の写像
+$$
+\mathcal{G}_{f(x)} \longrightarrow \mathcal{F}_x
+$$
+が、$f(x)$ を含む元にわたり $V \in \mathcal{B}_Y$ を変化させ、
+$x$ を含む元にわたり $U \in \mathcal{B}_X$ を変化させたときの
+写像 $\varphi_V^U$ の系の余極限になるという性質をもつ。
+特に、$\mathcal{G}$ と $\mathcal{F}$ が代数的構造の層の台集合の層なら、
+茎上の写像は代数的構造の射であることが分かる。
+したがって、対応する台集合の層の写像
+$f^{-1}\mathcal{G} \to \mathcal{F}$ は
+Lemma \ref{sheaves-lemma-f-map-sets-algebraic-structures} の仮定を満たす。
+ゆえに $f^{-1}\mathcal{G} \to \mathcal{F}$ は
+$\mathcal{C}$ に値をもつ層の射である。随伴性により、これは
+$\varphi$ が代数的構造の層の $f$-写像であることを意味する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-f-map-basis-above-and-below-modules}
+$(f, f^\sharp) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ を
+環付き空間の射とする。
+$\mathcal{F}$ を $\mathcal{O}_X$-加群の層とする。
+$\mathcal{G}$ を $\mathcal{O}_Y$-加群の層とする。
+$\mathcal{B}_Y$ を $Y$ の位相の基底とする。
+$\mathcal{B}_X$ を $X$ の位相の基底とする。
+各 $V \in \mathcal{B}_Y$ と、$f(U) \subset V$ を満たす
+$U \in \mathcal{B}_X$ に対して、制限写像と両立する
+$\mathcal{O}_Y(V)$-加群写像
+$$
+\varphi_V^U :
+\mathcal{G}(V)
+\longrightarrow
+\mathcal{F}(U)
+$$
+が与えられていると仮定する。ここで $\mathcal{F}(U)$ 上の
+$\mathcal{O}_Y(V)$-加群構造は、写像
+$f^\sharp_V : \mathcal{O}_Y(V)
+\to \mathcal{O}_X(f^{-1}V) \to \mathcal{O}_X(U)$ を通じて
+$\mathcal{O}_X(U)$-加群構造から得られる。
+このとき、上の各組 $(U, V)$ に対して $\varphi_V^U$ を合成
+$$
+\mathcal{G}(V) \xrightarrow{\varphi_V}
+\mathcal{F}(f^{-1}(V)) \xrightarrow{\text{restr.}}
+\mathcal{F}(U)
+$$
+として復元する一意な加群の層の $f$-写像
+（Definition \ref{sheaves-definition-f-map} および
+Section \ref{sheaves-section-ringed-spaces-functoriality-modules} の
+$f$-写像の議論を参照せよ）
+$\varphi : \mathcal{G} \to \mathcal{F}$ が存在する。
+\end{lemma}
+
+\begin{proof}
+上と同様なので省略する。
+\end{proof}
+
+
+\section{開埋め込みと（前）層}
+\label{sheaves-section-open-immersions}
+
+\noindent
+$X$ を位相空間とする。
+$j : U \to X$ を、開部分集合 $U$ の $X$ への包含写像とする。
+Section \ref{sheaves-section-presheaves-functorial} で、$j_*$ が $j^{-1}$ の
+右随伴となるような関手 $j_*$ と $j^{-1}$ を定義した。
+開埋め込みについては、$j^{-1}$ に左随伴が存在することが分かり、
+これを $j_!$ と書く。まず、開埋め込みの場合には $j^{-1}$ が
+特に簡単な記述をもつことを指摘する。
+
+\begin{lemma}
+\label{sheaves-lemma-j-pullback}
+$X$ を位相空間とする。
+$j : U \to X$ を、開部分集合 $U$ の $X$ への包含写像とする。
+\begin{enumerate}
+\item $\mathcal{G}$ を $X$ 上の集合の前層とする。
+前層 $j_p\mathcal{G}$（Section \ref{sheaves-section-presheaves-functorial} を参照せよ）は、
+開集合 $V \subset U$ に対する規則
+$V \mapsto \mathcal{G}(V)$ で与えられる。
+\item $\mathcal{G}$ を $X$ 上の集合の層とする。
+層 $j^{-1}\mathcal{G}$ は、開集合 $V \subset U$ に対する規則
+$V \mapsto \mathcal{G}(V)$ で与えられる。
+\item 任意の点 $u \in U$ と $X$ 上の任意の層 $\mathcal{G}$ に対して、
+茎の標準的な同一視
+$$
+j^{-1}\mathcal{G}_u = (\mathcal{G}|_U)_u = \mathcal{G}_u.
+$$
+がある。
+\item $U$ の前層の圏上で $j_pj_* = \text{id}$ が成り立つ。
+\item $U$ の層の圏上で $j^{-1}j_* = \text{id}$ が成り立つ。
+\end{enumerate}
+アーベル群の（前）層、代数的構造の（前）層、および加群の（前）層についても
+同じ記述が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$j_p\mathcal{G}(V)$ の定義に現れる余極限は、逆包含によって順序付けられた、
+$V \subset W$ を満たすすべての開集合 $W \subset X$ の集合にわたる。
+したがって、これは最大元、すなわち $V$ をもつ。これで (1) が示された。
+また、$\mathcal{G}$ が層なら、開集合 $V \subset U$ に対する対応
+$V \mapsto \mathcal{G}(V)$ は明らかに層なので、(2) が従う。
+$U$ に含まれる $u$ の開近傍全体は、$X$ における $u$ のすべての
+開近傍の集合で共終なので、(3) は (2) から従う。(4) と (5) は
+$j^{-1}j_*\mathcal{F}(V) = j_*\mathcal{F}(V) = \mathcal{F}(V)$
+を計算すれば従う。
+
+\medskip\noindent
+まったく同じ議論が、アーベル群の（前）層と代数的構造の（前）層にも通用する。
+\end{proof}
+
+\begin{definition}
+\label{sheaves-definition-restriction}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+\begin{enumerate}
+\item $\mathcal{G}$ を $X$ 上の集合、アーベル群、または代数的構造の前層とする。
+Lemma \ref{sheaves-lemma-j-pullback} で記述した前層 $j_p\mathcal{G}$ を
+{\it $\mathcal{G}$ の $U$ への制限}と呼び、$\mathcal{G}|_U$ と書く。
+\item $\mathcal{G}$ を $X$ 上の集合の層、または $X$ 上の
+アーベル群もしくは代数的構造の層とする。
+層 $j^{-1}\mathcal{G}$ を{\it $\mathcal{G}$ の $U$ への制限}と呼び、
+$\mathcal{G}|_U$ と書く。
+\item $(X, \mathcal{O})$ が環付き空間なら、対
+$(U, \mathcal{O}|_U)$ を、$U$ に対応する
+{\it $(X, \mathcal{O})$ の開部分空間}と呼ぶ。
+\item $\mathcal{G}$ が $\mathcal{O}$-加群の前層なら、
+$\mathcal{G}|_U$ と乗法写像
+$\mathcal{O}|_U \times \mathcal{G}|_U \to \mathcal{G}|_U$
+（Lemma \ref{sheaves-lemma-pullback-module} を参照せよ）の組を
+{\it $\mathcal{G}$ の $U$ への制限}と呼ぶ。
+\end{enumerate}
+\end{definition}
+
+\noindent
+加群の前層の制限の定義は読者に委ねる。さて、この節では制限関手の
+左随伴を論じる。集合の（前）層の場合の定義は次のとおりである。
+
+\begin{definition}
+\label{sheaves-definition-j-shriek}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+\begin{enumerate}
+\item $\mathcal{F}$ を $U$ 上の集合の前層とする。
+{\it $\mathcal{F}$ の空集合による延長 $j_{p!}\mathcal{F}$}を、
+次の規則で定義される $X$ 上の集合の前層と定義する：
+$$
+j_{p!}\mathcal{F}(V) =
+\left\{
+\begin{matrix}
+\emptyset & \text{if} & V \not \subset U \\
+\mathcal{F}(V) & \text{if} & V \subset U
+\end{matrix}
+\right.
+$$
+制限写像は明らかなものとする。
+\item $\mathcal{F}$ を $U$ 上の集合の層とする。
+{\it $\mathcal{F}$ の空集合による延長 $j_!\mathcal{F}$}を、
+前層 $j_{p!}\mathcal{F}$ の層化と定義する。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{sheaves-lemma-j-shriek}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+\begin{enumerate}
+\item 関手 $j_{p!}$ は制限関手 $j_p$ の左随伴である
+（Lemma \ref{sheaves-lemma-j-pullback} を参照せよ）。
+\item 関手 $j_!$ は制限の左随伴である。公式では
+$$
+\Mor_{\Sh(X)}(j_!\mathcal{F}, \mathcal{G})
+=
+\Mor_{\Sh(U)}(\mathcal{F}, j^{-1}\mathcal{G})
+=
+\Mor_{\Sh(U)}(\mathcal{F}, \mathcal{G}|_U)
+$$
+であり、$\mathcal{F}$ と $\mathcal{G}$ に関して双関手的である。
+\item $\mathcal{F}$ を $U$ 上の集合の層とする。
+層 $j_!\mathcal{F}$ の茎は次のように記述される：
+$$
+j_{!}\mathcal{F}_x =
+\left\{
+\begin{matrix}
+\emptyset & \text{if} & x \not \in U \\
+\mathcal{F}_x & \text{if} & x \in U
+\end{matrix}
+\right.
+$$
+\item $U$ の前層の圏上で $j_pj_{p!} = \text{id}$ が成り立つ。
+\item $U$ の層の圏上で $j^{-1}j_! = \text{id}$ が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$j_{p!}\mathcal{F}$ を $\mathcal{G}$ へ写すには、
+$V \subset U$ のときは常に、制限写像と両立するように
+$\mathcal{F}(V) \to \mathcal{G}(V)$ を写せば十分である。
+また Lemma \ref{sheaves-lemma-j-pullback} により、
+$\mathcal{F} \to \mathcal{G}|_U$ の写像にも同じ記述が成り立つ。
+$j_!$ と制限の随伴性は、これと層化の性質から従う。
+茎の同一視は、空集合による延長の定義と茎の定義から明らかである。
+(4) と (5) は、$U$ の任意の開集合上の層の値を計算すれば従う。
+\end{proof}
+
+\noindent
+$\mathcal{F}$ が $U$ 上のアーベル群の層である場合、一般に上で定義した
+$j_!\mathcal{F}$ はアーベル群の層ではないことに注意する。
+例えば、その茎のいくつかは空である（したがって確実にアーベル群ではない）。
+ゆえに、考える層の型に応じて $j_!$ の定義を修正する必要がある。
+空集合による延長の定義で空集合を選ぶ理由は、これが集合の圏の始対象だからである。
+したがって、アーベル群の場合には $0$ を用いる
+（より一般に、任意のアーベル圏に値をもつ層についても同様である）。
+
+\begin{definition}
+\label{sheaves-definition-j-shriek-structures}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+\begin{enumerate}
+\item $\mathcal{F}$ を $U$ 上のアーベル前層とする。
+{\it $\mathcal{F}$ の $0$ による延長 $j_{p!}\mathcal{F}$}を、
+次の規則で定義される $X$ 上のアーベル前層と定義する：
+$$
+j_{p!}\mathcal{F}(V) =
+\left\{
+\begin{matrix}
+0 & \text{if} & V \not \subset U \\
+\mathcal{F}(V) & \text{if} & V \subset U
+\end{matrix}
+\right.
+$$
+制限写像は明らかなものとする。
+\item $\mathcal{F}$ を $U$ 上のアーベル層とする。
+{\it $\mathcal{F}$ の $0$ による延長 $j_!\mathcal{F}$}を、
+アーベル前層 $j_{p!}\mathcal{F}$ の層化と定義する。
+\item $\mathcal{C}$ を始対象 $e$ をもつ圏とする。
+$\mathcal{F}$ を $U$ 上の $\mathcal{C}$ に値をもつ前層とする。
+{\it $\mathcal{F}$ の $e$ による延長 $j_{p!}\mathcal{F}$}を、
+次の規則で定義される $X$ 上の $\mathcal{C}$ に値をもつ前層と定義する：
+$$
+j_{p!}\mathcal{F}(V) =
+\left\{
+\begin{matrix}
+e & \text{if} & V \not \subset U \\
+\mathcal{F}(V) & \text{if} & V \subset U
+\end{matrix}
+\right.
+$$
+制限写像は明らかなものとする。
+\item $(\mathcal{C}, F)$ を、$\mathcal{C}$ が始対象 $e$ をもつような
+代数構造の型とする。$\mathcal{F}$ を $U$ 上の（与えられた型の）
+代数的構造の層とする。
+{\it $\mathcal{F}$ の $e$ による延長 $j_!\mathcal{F}$}を、
+上で定義した前層 $j_{p!}\mathcal{F}$ の層化と定義する。
+\item $\mathcal{O}$ を $X$ 上の環の前層とする。
+$\mathcal{F}$ を $\mathcal{O}|_U$-加群の前層とする。
+この場合、{\it $0$ による延長}を、アーベル前層として
+$j_{p!}\mathcal{F}$ に等しく、乗法写像
+$\mathcal{O} \times j_{p!}\mathcal{F} \to j_{p!}\mathcal{F}$
+を備えた $\mathcal{O}$-加群の前層と定義する。
+\item $\mathcal{O}$ を $X$ 上の環の層とする。
+$\mathcal{F}$ を $\mathcal{O}|_U$-加群の層とする。
+この場合、{\it $0$ による延長}を、アーベル層として
+$j_!\mathcal{F}$ に等しく、乗法写像
+$\mathcal{O} \times j_!\mathcal{F} \to j_!\mathcal{F}$ を備えた
+$\mathcal{O}$-加群と定義する。
+\end{enumerate}
+\end{definition}
+
+\noindent
+代数的構造の層という設定でも $j_!$ を定義できることは確かである
+（下を参照せよ）。しかし、結果として得られる対象は、関係する
+代数的構造の型に依存する。例えば、$\mathcal{O}$ が $U$ 上の環の層なら、
+環の圏の始対象は $\mathbf{Z}$ であり、アーベル群の圏の始対象は $0$ なので、
+$j_{!, rings}\mathcal{O} \not = j_{!, abelian}\mathcal{O}$ である。
+特に、これまで見てきたこととは対照的に、関手 $j_!$ は
+{\it 台集合の層を取ることと可換しない}。通常どおり、アーベル群の（前）層、
+代数的構造の（前）層、および加群の（前）層の場合を分けて扱う。
+
+\begin{lemma}
+\label{sheaves-lemma-j-shriek-abelian}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+アーベル（前）層に対する制限関手と $0$ による延長関手を考える。
+\begin{enumerate}
+\item 関手 $j_{p!}$ は制限関手 $j_p$ の左随伴である
+（Lemma \ref{sheaves-lemma-j-pullback} を参照せよ）。
+\item 関手 $j_!$ は制限の左随伴である。公式では
+$$
+\Mor_{\textit{Ab}(X)}(j_!\mathcal{F}, \mathcal{G})
+=
+\Mor_{\textit{Ab}(U)}(\mathcal{F}, j^{-1}\mathcal{G})
+=
+\Mor_{\textit{Ab}(U)}(\mathcal{F}, \mathcal{G}|_U)
+$$
+であり、$\mathcal{F}$ と $\mathcal{G}$ に関して双関手的である。
+\item $\mathcal{F}$ を $U$ 上のアーベル層とする。
+層 $j_!\mathcal{F}$ の茎は次のように記述される：
+$$
+j_{!}\mathcal{F}_x =
+\left\{
+\begin{matrix}
+0 & \text{if} & x \not \in U \\
+\mathcal{F}_x & \text{if} & x \in U
+\end{matrix}
+\right.
+$$
+\item $U$ のアーベル前層の圏上で $j_pj_{p!} = \text{id}$ が成り立つ。
+\item $U$ のアーベル層の圏上で $j^{-1}j_! = \text{id}$ が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-j-shriek-structures}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+$(\mathcal{C}, F)$ を、$\mathcal{C}$ が始対象 $e$ をもつような
+代数構造の型とする。上で定義した代数的構造の（前）層に対する
+制限関手と $e$ による延長関手を考える。
+\begin{enumerate}
+\item 関手 $j_{p!}$ は制限関手 $j_p$ の左随伴である
+（Lemma \ref{sheaves-lemma-j-pullback} を参照せよ）。
+\item 関手 $j_!$ は制限の左随伴である。公式では
+$$
+\Mor_{\Sh(X, \mathcal{C})}(j_!\mathcal{F}, \mathcal{G})
+=
+\Mor_{\Sh(U, \mathcal{C})}(\mathcal{F}, j^{-1}\mathcal{G})
+=
+\Mor_{\Sh(U, \mathcal{C})}(\mathcal{F}, \mathcal{G}|_U)
+$$
+であり、$\mathcal{F}$ と $\mathcal{G}$ に関して双関手的である。
+\item $\mathcal{F}$ を $U$ 上の層とする。
+層 $j_!\mathcal{F}$ の茎は次のように記述される：
+$$
+j_{!}\mathcal{F}_x =
+\left\{
+\begin{matrix}
+e & \text{if} & x \not \in U \\
+\mathcal{F}_x & \text{if} & x \in U
+\end{matrix}
+\right.
+$$
+\item $U$ 上の代数的構造の前層の圏上で
+$j_pj_{p!} = \text{id}$ が成り立つ。
+\item $U$ 上の代数的構造の層の圏上で
+$j^{-1}j_! = \text{id}$ が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-j-shriek-modules}
+$(X, \mathcal{O})$ を環付き空間とする。
+$j : (U, \mathcal{O}|_U) \to (X, \mathcal{O})$ を開部分空間とする。
+上で定義した加群の（前）層に対する制限関手と $0$ による延長関手を考える。
+\begin{enumerate}
+\item 関手 $j_{p!}$ は制限の左随伴である。公式では
+$$
+\Mor_{\textit{PMod}(\mathcal{O})}(j_{p!}\mathcal{F}, \mathcal{G})
+=
+\Mor_{\textit{PMod}(\mathcal{O}|_U)}(\mathcal{F}, \mathcal{G}|_U)
+$$
+であり、$\mathcal{F}$ と $\mathcal{G}$ に関して双関手的である。
+\item 関手 $j_!$ は制限の左随伴である。公式では
+$$
+\Mor_{\textit{Mod}(\mathcal{O})}(j_!\mathcal{F}, \mathcal{G})
+=
+\Mor_{\textit{Mod}(\mathcal{O}|_U)}(\mathcal{F}, \mathcal{G}|_U)
+$$
+であり、$\mathcal{F}$ と $\mathcal{G}$ に関して双関手的である。
+\item $\mathcal{F}$ を $U$ 上の $\mathcal{O}$-加群の層とする。
+層 $j_!\mathcal{F}$ の茎は次のように記述される：
+$$
+j_{!}\mathcal{F}_x =
+\left\{
+\begin{matrix}
+0 & \text{if} & x \not \in U \\
+\mathcal{F}_x & \text{if} & x \in U
+\end{matrix}
+\right.
+$$
+\item $U$ 上の $\mathcal{O}|_U$-加群の層の圏上で
+$j^{-1}j_! = \text{id}$ が成り立つ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+上の補題により、関手 $j_*$ と $j_!$ はともに、$U$ 上の層の圏から
+$X$ 上の層の圏への充満忠実な埋め込みであることに注意する。
+この関手の本質像を容易に記述できるのは、関手 $j_!$ についてだけである。
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-open}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+関手
+$$
+j_! : \Sh(U) \longrightarrow \Sh(X)
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus U$ に対して
+$\mathcal{G}_x = \emptyset$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+充満忠実性は $j^{-1} j_! = \text{id}$ から形式的に従う。
+関手の像に属する任意の層が、補題で述べた茎の性質をもつことはすでに見た。
+逆に、$\mathcal{G}$ が示された性質をもつと仮定する。
+すると
+$$
+j_! j^{-1} \mathcal{G} \to \mathcal{G}
+$$
+がすべての茎上で同型であり、したがって同型であることは容易に確認できる。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-open-abelian}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+関手
+$$
+j_! : \textit{Ab}(U) \longrightarrow \textit{Ab}(X)
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus U$ に対して
+$\mathcal{G}_x = 0$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-open-structures}
+$X$ を位相空間とする。
+$j : U \to X$ を開部分集合の包含写像とする。
+$(\mathcal{C}, F)$ を、$\mathcal{C}$ が始対象 $e$ をもつような
+代数構造の型とする。関手
+$$
+j_! : \Sh(U, \mathcal{C}) \longrightarrow \Sh(X, \mathcal{C})
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus U$ に対して
+$\mathcal{G}_x = e$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-open-modules}
+$(X, \mathcal{O})$ を環付き空間とする。
+$j : (U, \mathcal{O}|_U) \to (X, \mathcal{O})$ を開部分空間とする。
+関手
+$$
+j_! : \textit{Mod}(\mathcal{O}|_U) \longrightarrow \textit{Mod}(\mathcal{O})
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus U$ に対して
+$\mathcal{G}_x = 0$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{remark}
+\label{sheaves-remark-j-shriek-not-exact}
+$j : U \to X$ を上のような位相空間の開埋め込みとする。
+$x \in X$, $x \not \in U$ とする。$\mathcal{F}$ を $U$ 上の集合の層とする。
+このとき Lemma \ref{sheaves-lemma-j-shriek} により
+$j_!\mathcal{F}_x = \emptyset$ である。
+したがって、$U = X$ でない限り、$j_!$ は $\Sh(U)$ の終対象を
+$\Sh(X)$ の終対象へ移さない。
+Categories, Section \ref{categories-section-exact-functor} における
+規約によれば、これは関手 $j_!$ が集合の層の圏の間の関手として
+左完全でないことを意味する。アーベル層上の $j_!$ は完全であることを後で示す。
+Modules, Lemma \ref{modules-lemma-j-shriek-exact} を参照せよ。
+\end{remark}
+
+
+
+
+
+
+
+
+\section{閉埋め込みと（前）層}
+\label{sheaves-section-closed-immersions}
+
+\noindent
+$X$ を位相空間とする。
+$i : Z \to X$ を、閉部分集合 $Z$ の $X$ への包含写像とする。
+Section \ref{sheaves-section-presheaves-functorial} で、$i_*$ が $i^{-1}$ の
+右随伴となるような関手 $i_*$ と $i^{-1}$ を定義した。
+
+\begin{lemma}
+\label{sheaves-lemma-stalks-closed-pushforward}
+$X$ を位相空間とする。
+$i : Z \to X$ を、閉部分集合 $Z$ の $X$ への包含写像とする。
+$\mathcal{F}$ を $Z$ 上の集合の層とする。
+$i_*\mathcal{F}$ の茎は次のように記述される：
+$$
+i_*\mathcal{F}_x =
+\left\{
+\begin{matrix}
+\{*\} & \text{if} & x \not \in Z \\
+\mathcal{F}_x & \text{if} & x \in Z
+\end{matrix}
+\right.
+$$
+ここで $\{*\}$ は一元集合を表す。さらに、$Z$ 上の集合の層の圏上で
+$i^{-1}i_* = \text{id}$ が成り立つ。さらに、$Z$ 上のアーベル層、
+それぞれ $Z$ 上の代数的構造の層についても同じことが成り立ち、
+$\{*\}$ は $0$、それぞれ代数的構造の圏の終対象に置き換えなければならない。
+\end{lemma}
+
+\begin{proof}
+$x \not \in Z$ なら、$Z$ と交わらない $x$ の任意に小さい開近傍
+$U$ が存在する。$\mathcal{F}$ は層なので、そのような任意の $U$ に対して
+$\mathcal{F}(i^{-1}(U)) = \{*\}$ である。
+Remark \ref{sheaves-remark-confusion} を参照せよ。これで最初の場合が示された。
+第二の場合は、$z \in Z$ に対し、$z$ の任意の開近傍が、$X$ のある開集合
+$U$ に対して $Z \cap U$ の形であることから従う。
+$i^{-1}i_* = \text{id}$ という主張については、標準写像
+$i^{-1}i_*\mathcal{F} \to \mathcal{F}$ を考える。これは茎上で同型であり
+（上を参照せよ）、したがって同型である。
+
+\medskip\noindent
+アーベル群の層と代数的構造の層についても同様に論じる。
+\end{proof}
+
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-closed}
+$X$ を位相空間とする。
+$i : Z \to X$ を閉部分集合の包含写像とする。
+関手
+$$
+i_* : \Sh(Z) \longrightarrow \Sh(X)
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus Z$ に対して
+$\mathcal{G}_x = \{*\}$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+充満忠実性は $i^{-1} i_* = \text{id}$ から形式的に従う。
+関手の像に属する任意の層が、補題で述べた茎の性質をもつことはすでに見た。
+逆に、$\mathcal{G}$ が示された性質をもつと仮定する。すると
+$$
+\mathcal{G} \to i_* i^{-1} \mathcal{G}
+$$
+がすべての茎上で同型であり、したがって同型であることは容易に確認できる。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-closed-abelian}
+$X$ を位相空間とする。
+$i : Z \to X$ を閉部分集合の包含写像とする。
+関手
+$$
+i_* : \textit{Ab}(Z) \longrightarrow \textit{Ab}(X)
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus Z$ に対して
+$\mathcal{G}_x = 0$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-equivalence-categories-closed-structures}
+$X$ を位相空間とする。
+$i : Z \to X$ を閉部分集合の包含写像とする。
+$(\mathcal{C}, F)$ を終対象 $0$ をもつ代数構造の型とする。関手
+$$
+i_* : \Sh(Z, \mathcal{C}) \longrightarrow \Sh(X, \mathcal{C})
+$$
+は充満忠実である。その本質像は、すべての $x \in X \setminus Z$ に対して
+$\mathcal{G}_x = 0$ となる層 $\mathcal{G}$ だけからなる。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{remark}
+\label{sheaves-remark-i-star-not-exact}
+$i : Z \to X$ を上のような位相空間の閉埋め込みとする。
+$x \in X$, $x \not \in Z$ とする。$\mathcal{F}$ を $Z$ 上の集合の層とする。
+このとき Lemma \ref{sheaves-lemma-stalks-closed-pushforward} により
+$(i_*\mathcal{F})_x = \{ * \}$ である。
+したがって、$\mathcal{F} = * \amalg *$ で、$*$ が一元層なら、
+$i_*\mathcal{F}_x = \{*\} \not = i_*(*)_x \amalg i_*(*)_x$
+である。後者は二元集合だからである。
+Categories, Section \ref{categories-section-exact-functor} における
+規約によれば、これは関手 $i_*$ が集合の層の圏の間の関手として
+右完全でないことを意味する。特に、右随伴をもつことはできない。
+Categories, Lemma \ref{categories-lemma-exact-adjoint} を参照せよ。
+
+\medskip\noindent
+一方、アーベル層上の $i_*$ は完全で、右随伴をもつことを後で見る
+（Modules, Lemma \ref{modules-lemma-i-star-right-adjoint} を参照せよ）。
+その右随伴は、$X$ 上のアーベル層に、$Z$ に台をもつ切断の層を対応させる
+関手である。
+\end{remark}
+
+\begin{remark}
+\label{sheaves-remark-closed-immersion-spaces}
+閉埋め込みと環付き空間との関係については論じていない。
+これは、環付き空間の閉埋め込みという概念は準連接層という設定で論じるのが
+最適だからである。Modules, Section \ref{modules-section-closed-immersion}
+を参照せよ。
+\end{remark}
+
+\section{層の貼り合わせ}
+\label{sheaves-section-glueing-sheaves}
+
+\noindent
+この節では、$X$ の被覆をなす各開集合上で定義された層を貼り合わせる。
+まず写像を扱う。
+
+\begin{lemma}
+\label{sheaves-lemma-glue-maps}
+$X$ を位相空間とする。
+$X = \bigcup U_i$ を開被覆とする。
+$\mathcal{F}$, $\mathcal{G}$ を $X$ 上の集合の層とする。
+層の写像の族
+$$
+\varphi_i :
+\mathcal{F}|_{U_i}
+\longrightarrow
+\mathcal{G}|_{U_i}
+$$
+が与えられ、すべての $i, j \in I$ に対して写像
+$\varphi_i, \varphi_j$ の制限が同じ写像
+$\mathcal{F}|_{U_i \cap U_j} \to \mathcal{G}|_{U_i \cap U_j}$
+であるとする。このとき、各 $U_i$ への制限が $\varphi_i$ と一致する
+層の写像
+$$
+\varphi :
+\mathcal{F}
+\longrightarrow
+\mathcal{G}
+$$
+が一意に存在する。
+\end{lemma}
+
+\begin{proof}
+各開部分集合 $U \subset X$ に対して
+$$
+\varphi_U : \mathcal{F}(U) \to \mathcal{G}(U), \quad
+s \mapsto \varphi_U(s)
+$$
+を定める。ここで $\varphi_U(s)$ は
+$$
+(\varphi_U(s))|_{U \cap U_i}
+= (\varphi_i)_{U \cap U_i}(s|_{U \cap U_i}).
+$$
+を満たす一意な切断である。このような切断の存在と一意性は、
+次の等式と層の公理から従う。
+\begin{align*}
+((\varphi_i)_{U \cap U_i}(s|_{U \cap U_i}))|_{U \cap U_i \cap U_j}
+&= (\varphi_i)_{U \cap U_i \cap U_j}(s|_{U \cap U_i \cap U_j})\\
+&= (\varphi_j)_{U \cap U_i \cap U_j}(s|_{U \cap U_i \cap U_j})\\
+&= ((\varphi_j)_{U \cap U_j}(s|_{U \cap U_j}))|_{U \cap U_i \cap U_j}.
+\end{align*}
+この写像族は実際に層の写像を与える。実際、
+$V \subset U \subset X$ を開部分集合とすると、
+$$
+(\varphi_U(s))|_V
+= \varphi_V(s|_V)
+$$
+である。これは各 $i \in I$ に対して次が成り立つからである。
+\begin{align*}
+(\varphi_U(s))|_{V \cap U_i}
+&= ((\varphi_U(s))|_{U \cap U_i})|_{V \cap U_i}\\
+&= ((\varphi_i)_{U \cap U_i}(s|_{U \cap U_i}))|_{V \cap U_i}\\
+&= (\varphi_i)_{V \cap U_i}(s|_{V \cap U_i})\\
+&= \varphi_V(s_{V})|_{V \cap U_i}.
+\end{align*}
+さらに、その各 $U_i$ への制限は $\varphi_i$ と一致する。
+実際、開部分集合 $U \subset X$ と
+$s \in \mathcal{F}(U \cap U_i)$ が与えられると、
+\begin{align*}
+\varphi_{U \cap U_i}(s)
+&= \varphi_{U \cap U_i}(s)|_{U \cap U_i}\\
+&= (\varphi_i)_{U \cap U_i}(s|_{U \cap U_i})\\
+&= (\varphi_i)_{U \cap U_i}(s).
+\end{align*}
+\end{proof}
+
+\noindent
+前の補題から、位相空間 $X$ 上の二つの層 $\mathcal{F}$,
+$\mathcal{G}$ が与えられたとき、規則
+$$
+U \longmapsto
+\Mor_{\Sh(U)}(
+\mathcal{F}|_U, \mathcal{G}|_U)
+$$
+は層を定める。これは一種の{\it 内部 Hom 層}である。
+集合の層という設定ではほとんど使われず、加群の層という設定で
+より普通に使われる。Modules, Section \ref{modules-section-internal-hom}
+を参照せよ。
+
+\medskip\noindent
+$X$ を位相空間とする。
+$X = \bigcup_{i\in I} U_i$ を開被覆とする。
+各 $i \in I$ に対して、$\mathcal{F}_i$ を $U_i$ 上の集合の層とする。
+各組 $i, j \in I$ に対して、
+$$
+\varphi_{ij} :
+\mathcal{F}_i|_{U_i \cap U_j}
+\longrightarrow
+\mathcal{F}_j|_{U_i \cap U_j}
+$$
+を集合の層の同型とする。さらに、任意の三つの添字
+$i, j, k \in I$ に対して次の図式が可換であると仮定する。
+$$
+\xymatrix{
+\mathcal{F}_i|_{U_i \cap U_j \cap U_k}
+\ar[rr]_{\varphi_{ik}}
+\ar[rd]_{\varphi_{ij}} & &
+\mathcal{F}_k|_{U_i \cap U_j \cap U_k} \\
+&
+\mathcal{F}_j|_{U_i \cap U_j \cap U_k}
+\ar[ru]_{\varphi_{jk}}
+}
+$$
+このようなデータの族 $(\mathcal{F}_i, \varphi_{ij})$ を、
+被覆 $X = \bigcup U_i$ に関する{\it 集合の層の貼り合わせデータ}
+という。
+
+\begin{lemma}
+\label{sheaves-lemma-glue-sheaves}
+$X$ を位相空間とする。
+$X = \bigcup_{i\in I} U_i$ を開被覆とする。
+被覆 $X = \bigcup U_i$ に関する集合の層の任意の貼り合わせデータ
+$(\mathcal{F}_i, \varphi_{ij})$ が与えられたとする。このとき、
+$X$ 上の集合の層 $\mathcal{F}$ と同型
+$$
+\varphi_i : \mathcal{F}|_{U_i} \to \mathcal{F}_i
+$$
+であって、図式
+$$
+\xymatrix{
+\mathcal{F}|_{U_i \cap U_j} \ar[r]_{\varphi_i} \ar[d]_{\text{id}} &
+\mathcal{F}_i|_{U_i \cap U_j} \ar[d]^{\varphi_{ij}} \\
+\mathcal{F}|_{U_i \cap U_j} \ar[r]^{\varphi_j} &
+\mathcal{F}_j|_{U_i \cap U_j}
+}
+$$
+が可換となるものが存在する。
+\end{lemma}
+
+\begin{proof}
+第一の証明。この証明では、開集合 $W \subset X$ 上の
+$\mathcal{F}$ の切断全体の集合を式で与える。すなわち、
+$$
+\mathcal{F}(W) =
+\{
+(s_i)_{i \in I} \mid
+s_i \in \mathcal{F}_i(W \cap U_i),
+\varphi_{ij}(s_i|_{W \cap U_i \cap U_j}) = s_j|_{W \cap U_i \cap U_j}
+\}.
+$$
+$W' \subset W$ に対する制限写像は、各 $s_i$ を
+$W' \cap U_i$ に制限することで定める。$\mathcal{F}$ に対する層条件は、
+各 $\mathcal{F}_i$ に対する層条件から直ちに従う。
+
+\medskip\noindent
+なお、$\mathcal{F}|_{U_i}$ が $\mathcal{F}_i$ に同型に写ることを
+証明しなければならない。$W \subset U_i$ とする。この場合、
+$\mathcal{F}(W)$ の定義における条件から
+$s_j = \varphi_{ij}(s_i|_{W \cap U_j})$ が従う。
+また、貼り合わせデータの定義に現れる図式の可換性により、
+任意の切断 $s \in \mathcal{F}_i(W)$ から始めて、$s_i = s$ および
+$s_j = \varphi_{ij}(s_i|_{W \cap U_j})$ と置くことにより、
+両立する族を得ることができる。
+
+\medskip\noindent
+第二の証明（概略）。$\mathcal{B}$ を、ある $i \in I$ に対して
+$U \subset U_i$ となる開集合 $U \subset X$ 全体の集合とする。
+すると $\mathcal{B}$ は $X$ の位相の基底である。
+$U \in \mathcal{B}$ に対して $U \subset U_i$ となる
+$i \in I$ を選び、$\mathcal{F}(U) = \mathcal{F}_i(U)$ と置く。
+同型 $\varphi_{ij}$ を用いると、この処方は
+``$i$ の選択に依存しない''ことが分かる。
+$\mathcal{F}_i$ の制限写像を用いると、$\mathcal{F}$ は
+$\mathcal{B}$ 上の層となる。最後に Lemma \ref{sheaves-lemma-extend-off-basis}
+を用いて、$\mathcal{F}$ を $X$ 上の一意な層 $\mathcal{F}$ に拡張する。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-glue-sheaves-structures}
+$X$ を位相空間とする。
+$X = \bigcup U_i$ を開被覆とする。
+$(\mathcal{F}_i, \varphi_{ij})$ をアーベル群の層、あるいは代数的構造の層、
+あるいは $X$ 上のある環の層 $\mathcal{O}$ に対する
+$\mathcal{O}$-加群の層の貼り合わせデータとする。このとき、上の
+Lemma \ref{sheaves-lemma-glue-sheaves} の証明における構成は、それぞれ
+アーベル群の層、代数的構造の層、$\mathcal{O}$-加群の層を与える。
+\end{lemma}
+
+\begin{proof}
+これは、構成において開集合 $W$ 上の切断全体の集合
+$\mathcal{F}(W)$ が、写像の等化子
+$$
+\xymatrix{
+\prod_{i \in I} \mathcal{F}_i(W \cap U_i)
+\ar@<1ex>[r]
+\ar@<-1ex>[r]
+&
+\prod_{i, j\in I} \mathcal{F}_i(W \cap U_i \cap U_j)
+}
+$$
+として与えられるからである。想定した各場合において、この等化子は
+該当する圏の対象であって、その台集合が引用した補題で考えた対象となるものを
+与える。
+\end{proof}
+
+\begin{lemma}
+\label{sheaves-lemma-mapping-property-glue}
+$X$ を位相空間とする。
+$X = \bigcup_{i\in I} U_i$ を開被覆とする。
+集合の層 $\mathcal{F}$ に、被覆 $X = \bigcup U_i$ に関する
+次の貼り合わせデータ
+$$
+(\mathcal{F}|_{U_i},
+(\mathcal{F}|_{U_i})|_{U_i \cap U_j}
+\to
+(\mathcal{F}|_{U_j})|_{U_i \cap U_j}
+)
+$$
+を対応させる関手は、$\Sh(X)$ と貼り合わせデータの圏との間の
+圏同値を定める。同様の主張が、アーベル層、代数的構造の層、
+$\mathcal{O}$-加群の層について成り立つ。
+\end{lemma}
+
+\begin{proof}
+この関手は Lemma \ref{sheaves-lemma-glue-maps} により充満忠実であり、
+Lemma \ref{sheaves-lemma-glue-sheaves} により（明示的に与えられる準逆関手を通じて）
+本質的全射である。
+\end{proof}
+
+\noindent
+この補題の意味は次のとおりである。層 $\mathcal{F}$ が貼り合わせデータ
+$(\mathcal{F}_i, \varphi_{ij})$ から構成され、$\mathcal{G}$ が
+$X$ 上の層ならば、射 $f : \mathcal{F} \to \mathcal{G}$ を与えることは、
+貼り合わせ写像 $\varphi_{ij}$ と両立する層の射の族
+$$
+f_i : \mathcal{F}_i \longrightarrow \mathcal{G}|_{U_i}
+$$
+を与えることと同じである。同様に、層の射
+$g : \mathcal{G} \to \mathcal{F}$ を与えることは、貼り合わせ写像
+$\varphi_{ij}$ と両立する層の射の族
+$$
+g_i : \mathcal{G}|_{U_i} \longrightarrow \mathcal{F}_i
+$$
+を与えることと同じである。

@@ -1,0 +1,4556 @@
+% Generated mechanically from frozen input inputs/p06/ja/groupoids.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{38}
+\chapter{亜群スキーム}
+
+
+
+\phantomsection
+\label{groupoids-section-phantom}
+
+
+\section{序}
+\label{groupoids-section-introduction}
+
+\noindent
+本章では亜群スキームに関する一般論を扱う。例えば Keel と Mori の
+美しい論文 \cite{K-M} を参照されたい。
+
+
+
+
+
+\section{記法}
+\label{groupoids-section-notation}
+
+\noindent
+$S$ をスキームとする。$U$, $T$ が $S$ 上のスキームであるとき、
+$U$ の $S$ {\it 上の} $T$-値点の集合を $U(T)$ と書く。すなわち
+$U(T) = \Mor_S(T, U)$ である。以下の議論にならい、$S$ 上の
+「試験スキーム」を表すために文字 $T$ をできるだけ取り置く。
+$X$, $Y$ を $S$ 上のスキームとし、$f : X \to Y$ を $S$ 上の
+スキームの射とする。任意の $S$ 上のスキーム $T$ に対して、集合の写像
+$$
+f : X(T) \longrightarrow Y(T)
+$$
+が誘導され、これも同じ記号 $f$ で表す。この構成は実際 $T/S$ に関して
+関手的である。米田の補題（『圏論』補題
+\ref{categories-lemma-yoneda}）によれば、$f$ は関手の変換
+$f : h_X \to h_Y$ を定め、またこの変換によって一意に定まる。
+より一般に、ファイバー積の間の写像にも同じ記法を用いる。例えば
+$X$, $Y$, $Z$ が $S$ 上のスキームで、
+$m : X \times_S Y \to Z \times_S Z$ が $S$ 上のスキームの射ならば、
+$m$ は $T$-値点の間の写像の族
+$$
+X(T) \times Y(T) \longrightarrow Z(T) \times Z(T).
+$$
+に対応すると考える。以下も同様である。
+
+\medskip\noindent
+射影を添字 $0$ から始めて記すという規約を引き続き用いる。したがって
+$\text{pr}_0 : X \times_S Y \to X$ および
+$\text{pr}_1 : X \times_S Y \to Y$ である。
+
+
+
+
+
+
+\section{同値関係}
+\label{groupoids-section-equivalence-relations}
+
+\noindent
+集合 $A$ 上の {\it 関係} $R$ とは、単に部分集合
+$R \subset A \times A$ のことであった。通常、$(a, b) \in R$ を
+$a R b$ と書く。$a R b, b R c \Rightarrow a R c$ が成り立つとき、
+この関係は {\it 推移的} であるという。すべての $a \in A$ について
+$a R a$ が成り立つとき {\it 反射的}、また
+$a R b \Rightarrow b R a$ が成り立つとき {\it 対称的} であるという。
+推移的、反射的かつ対称的な関係を {\it 同値関係} という。
+
+\medskip\noindent
+スキームの場合には関係の概念を少し緩め、
+$R \to A \times A$ が写像であることだけを要求する。正確には次のように定める。
+
+\begin{definition}
+\label{groupoids-definition-equivalence-relation}
+$S$ をスキーム、$U$ を $S$ 上のスキームとする。
+\begin{enumerate}
+\item $S$ 上の $U$ の {\it 前関係} とは、任意のスキームの射
+$j : R \to U \times_S U$ のことである。このとき
+$t = \text{pr}_0 \circ j$ および $s = \text{pr}_1 \circ j$ と置けば、
+$j = (t, s)$ である。
+\item $S$ 上の $U$ の {\it 関係} とは、スキームのモノ射
+$j : R \to U \times_S U$ のことである。
+\item {\it 前同値関係} とは、すべての $T/S$ に対して
+$j : R(T) \to U(T) \times U(T)$ の像が同値関係となるような前関係
+$j : R \to U \times_S U$ のことである。
+\item スキームの射 $R \to U \times_S U$ が
+{\it $S$ 上の $U$ の同値関係} であるとは、任意の $S$ 上のスキーム $T$
+に対し、$R$ の $T$-値点が $U$ の $T$-値点の集合上に同値関係を
+定めることとする。
+\end{enumerate}
+\end{definition}
+
+\noindent
+言い換えれば、同値関係とは、$j$ が関係でもあるような前同値関係である。
+
+\begin{lemma}
+\label{groupoids-lemma-restrict-relation}
+$S$ をスキームとする。
+$U$ を $S$ 上のスキームとする。
+$j : R \to U \times_S U$ を前関係とする。
+$g : U' \to U$ をスキームの射とする。さらに
+$$
+R' = (U' \times_S U')\times_{U \times_S U} R
+\xrightarrow{j'}
+U' \times_S U'
+$$
+と置く。このとき $j'$ は $S$ 上の $U'$ の前関係である。
+$j$ が関係ならば $j'$ も関係である。
+$j$ が前同値関係ならば $j'$ も前同値関係である。
+$j$ が同値関係ならば $j'$ も同値関係である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{groupoids-definition-restrict-relation}
+$S$ をスキームとする。
+$U$ を $S$ 上のスキームとする。
+$j : R \to U \times_S U$ を前関係とする。
+$g : U' \to U$ をスキームの射とする。
+前関係 $j' : R' \to U' \times_S U'$ を、前関係 $j$ の $U'$ への
+{\it 制限}、または {\it 引き戻し} という。この状況では
+$R' = R|_{U'}$ と書くこともある。
+\end{definition}
+
+\begin{lemma}
+\label{groupoids-lemma-pre-equivalence-equivalence-relation-points}
+$j : R \to U \times_S U$ を前関係とする。スキーム $U$ の点の間の関係を
+$$
+x \sim y
+\Leftrightarrow
+\exists\ r \in R :
+t(r) = x,
+s(r) = y.
+$$
+によって定める。$j$ が前同値関係ならば、これは同値関係である。
+\end{lemma}
+
+\begin{proof}
+$x \sim y$ かつ $y \sim z$ と仮定する。
+$t(r) = x$, $s(r) = y$ を満たす $r \in R$ と、
+$t(r') = y$, $s(r') = z$ を満たす $r' \in R$ を取る。
+次の可換図式を満たす体 $K$ を取る。
+$$
+\xymatrix{
+\kappa(r) \ar[r] & K \\
+\kappa(y) \ar[u] \ar[r] & \kappa(r') \ar[u]
+}
+$$
+$x_K, y_K, z_K : \Spec(K) \to U$ を次の射とする。
+$$
+\begin{matrix}
+\Spec(K) \to \Spec(\kappa(r))
+\to
+\Spec(\kappa(x)) \to U \\
+\Spec(K) \to \Spec(\kappa(r))
+\to
+\Spec(\kappa(y)) \to U \\
+\Spec(K) \to \Spec(\kappa(r'))
+\to
+\Spec(\kappa(z)) \to U
+\end{matrix}
+$$
+構成により $(x_K, y_K) \in j(R(K))$ および
+$(y_K, z_K) \in j(R(K))$ である。$j$ は前同値関係なので
+$(x_K, z_K) \in j(R(K))$ も成り立つ。したがって $x \sim z$ である。
+
+\medskip\noindent
+$\sim$ が反射的かつ対称的であることの証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-etale-equivalence-relation}
+$j : R \to U \times_S U$ を前関係とし、次を仮定する。
+\begin{enumerate}
+\item $s, t$ は不分岐である。
+\item $S$ 上の任意の代数的閉体 $k$ に対して、写像
+$R(k) \to U(k) \times U(k)$ は同値関係である。
+\item 次の図式を可換にする射 $e : U \to R$, $i : R \to R$ および
+$c : R \times_{s, U, t} R \to R$ が存在する。
+$$
+\xymatrix{
+U \ar[r]_e \ar[d]_\Delta &
+R \ar[d]_j &
+R \ar[d]^j \ar[r]_i &
+R \ar[d]^j &
+R \times_{s, U, t} R \ar[d]^{j \times j} \ar[r]_c &
+R \ar[d]^j \\
+U \times_S U \ar[r] &
+U \times_S U &
+U \times_S U \ar[r]^{flip} &
+U \times_S U &
+U \times_S U \times_S U \ar[r]^{\text{pr}_{02}} &
+U \times_S U
+}
+$$
+\end{enumerate}
+このとき $j$ は同値関係である。
+\end{lemma}
+
+\begin{proof}
+条件 (1) と『射』補題 \ref{morphisms-lemma-unramified-permanence}
+により、$j$ は不分岐である。したがって『射』補題
+\ref{morphisms-lemma-diagonal-unramified-morphism} により、
+$\Delta_j : R \to R \times_{U \times_S U} R$ は開埋め込みである。
+一方、条件 (2) により $\Delta_j$ は $k$-値点上で全単射であるから、
+$\Delta_j$ は同型であり、従って $j$ はモノ射である。
+あとは可換図式から、任意の $S$ 上のスキーム $T$ に対して
+$R(T) \subset U(T) \times U(T)$ が同値関係であることが直ちに従う。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{群スキーム}
+\label{groupoids-section-group-schemes}
+
+\noindent
+{\it 群} とは対 $(G, m)$ であって、$G$ は集合、
+$m : G \times G \to G$ は次の性質を満たす集合の写像であった。
+\begin{enumerate}
+\item （結合律）すべての $g, g', g'' \in G$ に対して
+$m(g, m(g', g'')) = m(m(g, g'), g'')$ である。
+\item （単位元）$m(g, e) = m(e, g) = g$ がすべての $g \in G$ に
+対して成り立つような一意な元 $e \in G$ が存在する。この元を $G$ の
+{\it 恒等元}、{\it 単位元}、または $1$ という。
+\item （逆元）すべての $g \in G$ に対し、
+$m(g, i(g)) = m(i(g), g) = e$ を満たす $i(g) \in G$ が存在する。
+ここで $e$ は単位元である。
+\end{enumerate}
+従って写像 $e : \{*\} \to G$ と写像 $i : G \to G$ が得られ、
+4つ組 $(G, m, e, i)$ は上記の公理を満たす。
+
+\medskip\noindent
+{\it 群準同型} $\psi : (G, m) \to (G', m')$ とは、
+$m'(\psi(g), \psi(g')) = \psi(m(g, g'))$ を満たす集合の写像
+$\psi : G \to G'$ のことである。このとき自動的に
+$\psi(e) = e'$ および $i'(\psi(g)) = \psi(i(g))$ が成り立つ。
+記法の意味は明らかであり、以下でこの事実を用いる。
+
+\begin{definition}
+\label{groupoids-definition-group-scheme}
+$S$ をスキームとする。
+\begin{enumerate}
+\item {\it $S$ 上の群スキーム} とは対 $(G, m)$ であって、
+$G$ は $S$ 上のスキーム、$m : G \times_S G \to G$ は $S$ 上の
+スキームの射であり、任意の $S$ 上のスキーム $T$ に対して
+$(G(T), m)$ が群となるものをいう。
+\item {\it $S$ 上の群スキームの射
+$\psi : (G, m) \to (G', m')$} とは、任意の $T/S$ に対する誘導写像
+$\psi : G(T) \to G'(T)$ が群準同型となるような、$S$ 上のスキームの射
+$\psi : G \to G'$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(G, m)$ をスキーム $S$ 上の群スキームとする。上の議論と第
+\ref{groupoids-section-notation} 節の議論により、$S$ 上のスキームの射として
+単位元 $e : S \to G$ および逆元写像 $i : G \to G$ が得られ、
+任意の $T$ に対して4つ組 $(G(T), m, e, i)$ は上記の群の公理を満たす。
+
+\medskip\noindent
+$(G, m)$, $(G', m')$ を $S$ 上の群スキームとし、
+$f : G \to G'$ を $S$ 上のスキームの射とする。定義から、$f$ が
+$S$ 上の群スキームの射であることと、次の図式が可換であることは同値である。
+$$
+\xymatrix{
+G \times_S G \ar[r]_-{f \times f} \ar[d]_m &
+G' \times_S G' \ar[d]^{m'} \\
+G \ar[r]^f & G'
+}
+$$
+
+\begin{lemma}
+\label{groupoids-lemma-base-change-group-scheme}
+$(G, m)$ を $S$ 上の群スキームとし、$S' \to S$ をスキームの射とする。
+引き戻し $(G_{S'}, m_{S'})$ は $S'$ 上の群スキームである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{groupoids-definition-closed-subgroup-scheme}
+$S$ をスキーム、$(G, m)$ を $S$ 上の群スキームとする。
+\begin{enumerate}
+\item $G$ の {\it 閉部分群スキーム} とは、
+$m|_{H \times_S H}$ が $H$ を経由し、$H$ 上に $S$ 上の群スキーム構造を
+誘導するような閉部分スキーム $H \subset G$ のことである。
+\item $G$ の {\it 開部分群スキーム} とは、
+$m|_{G' \times_S G'}$ が $G'$ を経由し、$G'$ 上に $S$ 上の群スキーム構造を
+誘導するような開部分スキーム $G' \subset G$ のことである。
+\end{enumerate}
+\end{definition}
+
+\noindent
+同じことだが、$H$ が $G$ の閉部分群スキームであるとは、それが
+$S$ 上の群スキームであり、$H$ を $G$ の閉部分スキームと同一視する
+$S$ 上の群スキームの射 $i : H \to G$ を備えることだと言ってもよい。
+
+\begin{lemma}
+\label{groupoids-lemma-closed-subgroup-scheme}
+$S$ をスキーム、$(G, m, e, i)$ を $S$ 上の群スキームとする。
+\begin{enumerate}
+\item 閉部分スキーム $H \subset G$ が閉部分群スキームであるための
+必要十分条件は、$e : S \to G$、
+$m|_{H \times_S H} : H \times_S H \to G$、および
+$i|_H : H \to G$ がすべて $H$ を経由することである。
+\item 開部分スキーム $H \subset G$ が開部分群スキームであるための
+必要十分条件は、$e : S \to G$、
+$m|_{H \times_S H} : H \times_S H \to G$、および
+$i|_H : H \to G$ がすべて $H$ を経由することである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$T$-値点を考えれば、これは群の部分集合が部分群となるための周知の条件に帰着する。
+\end{proof}
+
+\begin{definition}
+\label{groupoids-definition-smooth-group-scheme}
+$S$ をスキーム、$(G, m)$ を $S$ 上の群スキームとする。
+\begin{enumerate}
+\item 構造射 $G \to S$ が滑らかであるとき、$G$ を
+{\it 滑らかな群スキーム} という。
+\item 構造射 $G \to S$ が平坦であるとき、$G$ を
+{\it 平坦な群スキーム} という。
+\item 構造射 $G \to S$ が分離的であるとき、$G$ を
+{\it 分離的な群スキーム} という。
+\end{enumerate}
+必要に応じて同様の用語を定める。
+\end{definition}
+
+
+
+
+
+
+\section{群スキームの例}
+\label{groupoids-section-examples-group-schemes}
+
+\begin{example}[乗法群スキーム]
+\label{groupoids-example-multiplicative-group}
+任意のスキーム $T$ に、構造層の大域切断の可逆元群
+$\Gamma(T, \mathcal{O}_T^*)$ を対応させる関手を考える。
+これはスキーム
+$$
+\mathbf{G}_m = \Spec(\mathbf{Z}[x, x^{-1}])
+$$
+によって表現される。群構造を与える射は
+\begin{eqnarray*}
+\mathbf{G}_m \times \mathbf{G}_m & \to & \mathbf{G}_m \\
+\Spec(\mathbf{Z}[x, x^{-1}] \otimes_{\mathbf{Z}} \mathbf{Z}[x, x^{-1}])
+& \to &
+\Spec(\mathbf{Z}[x, x^{-1}]) \\
+\mathbf{Z}[x, x^{-1}] \otimes_{\mathbf{Z}} \mathbf{Z}[x, x^{-1}]
+& \leftarrow &
+\mathbf{Z}[x, x^{-1}] \\
+x \otimes x & \leftarrow & x
+\end{eqnarray*}
+である。従って $\mathbf{G}_m$ は $\mathbf{Z}$ 上の群スキームである。
+任意のスキーム $S$ に対し、基底変換 $\mathbf{G}_{m, S}$ は $S$ 上の
+群スキームであり、その点関手は従来どおり
+$$
+T/S
+\longmapsto
+\mathbf{G}_{m, S}(T) = \mathbf{G}_m(T) = \Gamma(T, \mathcal{O}_T^*)
+$$
+である。
+\end{example}
+
+\begin{example}[1の冪根]
+\label{groupoids-example-roots-of-unity}
+$n \in \mathbf{N}$ とする。任意のスキーム $T$ に、
+$\Gamma(T, \mathcal{O}_T^*)$ のうち $n$ 乗して1となる元からなる部分群を
+対応させる関手を考える。これはスキーム
+$$
+\mu_n = \Spec(\mathbf{Z}[x]/(x^n - 1)).
+$$
+によって表現される。群構造を与える射は
+\begin{eqnarray*}
+\mu_n \times \mu_n & \to & \mu_n \\
+\Spec(
+\mathbf{Z}[x]/(x^n - 1)
+\otimes_{\mathbf{Z}}
+\mathbf{Z}[x]/(x^n - 1))
+& \to &
+\Spec(\mathbf{Z}[x]/(x^n - 1)) \\
+\mathbf{Z}[x]/(x^n - 1) \otimes_{\mathbf{Z}} \mathbf{Z}[x]/(x^n - 1)
+& \leftarrow &
+\mathbf{Z}[x]/(x^n - 1) \\
+x \otimes x & \leftarrow & x
+\end{eqnarray*}
+である。従って $\mu_n$ は $\mathbf{Z}$ 上の群スキームである。
+任意のスキーム $S$ に対し、基底変換 $\mu_{n, S}$ は $S$ 上の
+群スキームであり、その点関手は従来どおり
+$$
+T/S
+\longmapsto
+\mu_{n, S}(T) = \mu_n(T) = \{f \in \Gamma(T, \mathcal{O}_T^*) \mid f^n = 1\}
+$$
+である。
+\end{example}
+
+
+\begin{example}[加法群スキーム]
+\label{groupoids-example-additive-group}
+任意のスキーム $T$ に、構造層の大域切断の加法群
+$\Gamma(T, \mathcal{O}_T)$ を対応させる関手を考える。
+これはスキーム
+$$
+\mathbf{G}_a = \Spec(\mathbf{Z}[x])
+$$
+によって表現される。群構造を与える射は
+\begin{eqnarray*}
+\mathbf{G}_a \times \mathbf{G}_a & \to & \mathbf{G}_a \\
+\Spec(\mathbf{Z}[x] \otimes_{\mathbf{Z}} \mathbf{Z}[x])
+& \to &
+\Spec(\mathbf{Z}[x]) \\
+\mathbf{Z}[x] \otimes_{\mathbf{Z}} \mathbf{Z}[x]
+& \leftarrow &
+\mathbf{Z}[x] \\
+x \otimes 1 + 1 \otimes x & \leftarrow & x
+\end{eqnarray*}
+である。従って $\mathbf{G}_a$ は $\mathbf{Z}$ 上の群スキームである。
+任意のスキーム $S$ に対し、基底変換 $\mathbf{G}_{a, S}$ は $S$ 上の
+群スキームであり、その点関手は従来どおり
+$$
+T/S
+\longmapsto
+\mathbf{G}_{a, S}(T) = \mathbf{G}_a(T) = \Gamma(T, \mathcal{O}_T)
+$$
+である。
+\end{example}
+
+\begin{example}[一般線形群スキーム]
+\label{groupoids-example-general-linear-group}
+$n \geq 1$ とする。任意のスキーム $T$ に、構造層の大域切断環上の
+可逆な $n \times n$ 行列の群
+$$
+\text{GL}_n(\Gamma(T, \mathcal{O}_T))
+$$
+を対応させる関手を考える。これはスキーム
+$$
+\text{GL}_n = \Spec(\mathbf{Z}[\{x_{ij}\}_{1 \leq i, j \leq n}][1/d])
+$$
+によって表現される。ここで $d = \det((x_{ij}))$ であり、$(x_{ij})$ は
+$(i, j)$ 成分が $x_{ij}$ である $n \times n$ 行列である。
+群構造を与える射は
+\begin{eqnarray*}
+\text{GL}_n \times \text{GL}_n & \to & \text{GL}_n \\
+\Spec(\mathbf{Z}[x_{ij}, 1/d] \otimes_{\mathbf{Z}}
+\mathbf{Z}[x_{ij}, 1/d])
+& \to &
+\Spec(\mathbf{Z}[x_{ij}, 1/d]) \\
+\mathbf{Z}[x_{ij}, 1/d] \otimes_{\mathbf{Z}} \mathbf{Z}[x_{ij}, 1/d]
+& \leftarrow &
+\mathbf{Z}[x_{ij}, 1/d] \\
+\sum x_{ik} \otimes x_{kj} & \leftarrow & x_{ij}
+\end{eqnarray*}
+である。従って $\text{GL}_n$ は $\mathbf{Z}$ 上の群スキームである。
+任意のスキーム $S$ に対し、基底変換 $\text{GL}_{n, S}$ は $S$ 上の
+群スキームであり、その点関手は従来どおり
+$$
+T/S
+\longmapsto
+\text{GL}_{n, S}(T) = \text{GL}_n(T) =\text{GL}_n(\Gamma(T, \mathcal{O}_T))
+$$
+である。
+\end{example}
+
+\begin{example}
+\label{groupoids-example-determinant}
+行列式は $\mathbf{Z}$ 上の群スキームの射
+$$
+\det : \text{GL}_n \longrightarrow \mathbf{G}_m
+$$
+を定める。基底変換により、任意の基底スキーム $S$ 上の群スキームの射
+$\text{GL}_{n, S} \to \mathbf{G}_{m, S}$ を得る。
+\end{example}
+
+\begin{example}[定数群]
+\label{groupoids-example-constant-group}
+$G$ を抽象群とする。任意のスキーム $T$ に、局所定数写像
+$T \to G$ のなす群を対応させる関手を考える。ただし $T$ には
+Zariski 位相を、$G$ には離散位相を入れる。この関手はスキーム
+$$
+G_{\Spec(\mathbf{Z})} =
+\coprod\nolimits_{g \in G} \Spec(\mathbf{Z}).
+$$
+によって表現される。群構造を与える射は
+$$
+G_{\Spec(\mathbf{Z})}
+\times_{\Spec(\mathbf{Z})}
+G_{\Spec(\mathbf{Z})}
+\longrightarrow
+G_{\Spec(\mathbf{Z})}
+$$
+であり、組 $(g, g')$ に対応する成分を $gg'$ に対応する成分へ写す。
+任意のスキーム $S$ に対し、基底変換 $G_S$ は $S$ 上の群スキームであり、
+その点関手は従来どおり
+$$
+T/S
+\longmapsto
+G_S(T) = \{f : T \to G \text{ locally constant}\}
+$$
+である。
+\end{example}
+
+
+
+
+
+\section{群スキームの性質}
+\label{groupoids-section-properties-group-schemes}
+
+\noindent
+本節では、任意の基礎上で成り立つ群スキームのいくつかの基本的性質をまとめる。
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-separated}
+$S$ をスキームとし、$G$ を $S$ 上の群スキームとする。
+$G \to S$ が分離的（resp.\ 準分離的）であるための必要十分条件は、
+単位射 $e : S \to G$ が閉埋め込み（resp.\ 準コンパクト）であることである。
+\end{lemma}
+
+\begin{proof}
+『スキーム』補題 \ref{schemes-lemma-section-immersion} より、
+$e$ は埋め込みであり、$G \to S$ が分離的（resp.\ 準分離的）ならば
+閉埋め込み（resp.\ 準コンパクト）であることを思い出そう。
+逆向きには、次の図式を考える。
+$$
+\xymatrix{
+G \ar[r]_-{\Delta_{G/S}} \ar[d] &
+G \times_S G \ar[d]^{(g, g') \mapsto m(i(g), g')} \\
+S \ar[r]^e & G
+}
+$$
+代数幾何における函手的観点を用いれば、この図式がデカルトであることの確認は
+演習である。言い換えると、$\Delta_{G/S}$ は $e$ の基底変換である。
+したがって $e$ が閉埋め込み（resp.\ 準コンパクト）ならば
+$\Delta_{G/S}$ も同様である。『スキーム』補題
+\ref{schemes-lemma-base-change-immersion}
+（resp.\ 『スキーム』補題
+\ref{schemes-lemma-quasi-compact-preserved-base-change}）を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-flat-action-on-group-scheme}
+$S$ をスキーム、$G$ を $S$ 上の群スキームとする。
+$T$ を $S$ 上のスキームとし、$\psi : T \to G$ を $S$ 上の射とする。
+$T$ が $S$ 上平坦ならば、射
+$$
+T \times_S G \longrightarrow G, \quad
+(t, g) \longmapsto m(\psi(t), g)
+$$
+は平坦である。特に、$G$ が $S$ 上平坦ならば、
+$m : G \times_S G \to G$ は平坦である。
+\end{lemma}
+
+\begin{proof}
+次の図式を考える。
+$$
+\xymatrix{
+T \times_S G \ar[rrr]_{(t, g) \mapsto (t, m(\psi(t), g))} & & &
+T \times_S G \ar[r]_{\text{pr}} \ar[d] &
+G \ar[d] \\
+& & &
+T \ar[r] &
+S
+}
+$$
+左上の水平射は同型であり、正方形はデカルトである。
+したがって補題は『射』補題 \ref{morphisms-lemma-base-change-flat} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-module-differentials}
+\begin{reference}
+\cite[Proposition 3.15]{BookAV}
+\end{reference}
+$(G, m, e, i)$ をスキーム $S$ 上の群スキームとし、
+$f : G \to S$ を構造射とする。このとき標準同型
+$$
+\Omega_{G/S} \cong f^*\mathcal{C}_{S/G} \cong f^*e^*\Omega_{G/S}
+$$
+が存在する。ここで $\mathcal{C}_{S/G}$ は埋め込み $e$ の余法層を表す。
+特に、$S$ が体のスペクトルならば、$\Omega_{G/S}$ は自由
+$\mathcal{O}_G$-加群である。
+\end{lemma}
+
+\begin{proof}
+『射』補題 \ref{morphisms-lemma-base-change-differentials} より
+$$
+\Omega_{G \times_S G/G} = \text{pr}_0^*\Omega_{G/S}
+$$
+を得る。ここで左辺では、$\text{pr}_1$ により $G \times_S G$ を
+$G$ 上のスキームとみなしている。
+$\tau : G \times_S G \to G \times_S G$ を、点上で
+$(g, h) \mapsto (m(g, h), h)$ により与えられる「剪断写像」とする。
+これは、射影 $\text{pr}_1$ によって $G \times_S G$ を $G$ 上の
+スキームとみなしたときの自己同型である。以上の二つの所見を合わせると、同型
+$$
+\tau^*\text{pr}_0^*\Omega_{G/S} \to \text{pr}_0^*\Omega_{G/S}
+$$
+を得る。$\text{pr}_0 \circ \tau = m$ であるから、これは同型
+$$
+m^*\Omega_{G/S} \to \text{pr}_0^*\Omega_{G/S}
+$$
+と書き直せる。この同型を
+$(e \circ f, \text{id}_G) : G \to G \times_S G$
+によって引き戻し、$m \circ (e \circ f, \text{id}_G) = \text{id}_G$
+および $\text{pr}_0 \circ (e \circ f, \text{id}_G) = e \circ f$
+を用いると、所望の同型
+$$
+\Omega_{G/S} \to f^*e^*\Omega_{G/S}
+$$
+を得る。また『射』補題
+\ref{morphisms-lemma-differentials-relative-immersion-section} より
+$\mathcal{C}_{S/G} \cong e^*\Omega_{G/S}$ である。
+$S$ が体のスペクトルならば、$S$ 上の任意の $\mathcal{O}_S$-加群は
+自由であるから、最後の主張が従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-addition-tangent-vectors}
+$S$ をスキーム、$G$ を $S$ 上の群スキームとし、$s \in S$ とする。
+このとき合成
+$$
+T_{G/S, e(s)} \oplus T_{G/S, e(s)} = T_{G \times_S G/S, (e(s), e(s))}
+\rightarrow T_{G/S, e(s)}
+$$
+は接ベクトルの加法である。ここで $=$ は
+『多様体』補題 \ref{varieties-lemma-tangent-space-product} による等号であり、
+右の射は $m : G \times_S G \to G$ から
+『多様体』補題 \ref{varieties-lemma-map-tangent-spaces} を介して誘導される。
+\end{lemma}
+
+\begin{proof}
+『多様体』式 (\ref{varieties-equation-tangent-space-fibre}) を用い、
+ファイバー内の接ベクトルで議論する。第一因子 $T_{G_s/s, e(s)}$ の元
+$\theta$ は、$(1, e) : G_s \to G_s \times G_s$ から生じる写像
+$T_{G_s/s, e(s)} \to T_{G_s \times G_s/s, (e(s), e(s))}$
+による $\theta$ の像である。$m \circ (1, e) = 1$ なので、函手性により
+$\theta$ は $\theta$ に写る。写像は線形であるから、
+$(\theta_1, \theta_2)$ は $\theta_1 + \theta_2$ に写る。
+\end{proof}
+
+
+
+
+
+\section{体上の群スキームの性質}
+\label{groupoids-section-properties-group-schemes-field}
+
+\noindent
+本節では、体上の群スキームのいくつかの性質をまとめる。
+体上で（局所的に）代数的な群スキームについては、さらに多くのことが言える。
+第 \ref{groupoids-section-algebraic-group-schemes} 節を参照せよ。
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-over-field-open-multiplication}
+$(G, m)$ を体 $k$ 上の群スキームとすると、乗法写像
+$m : G \times_k G \to G$ は開写像である。
+\end{lemma}
+
+\begin{proof}
+乗法写像は射影
+$\text{pr}_0 : G \times_k G \to G$
+と同型である。実際、図式
+$$
+\xymatrix{
+G \times_k G \ar[d]^m \ar[rrr]_{(g, g') \mapsto (m(g, g'), g')} & & &
+G \times_k G \ar[d]^{(g, g') \mapsto g} \\
+G \ar[rrr]^{\text{id}} & & & G
+}
+$$
+は可換であり、その水平射はいずれも同型である。射影が開写像であることは
+『射』補題 \ref{morphisms-lemma-scheme-over-field-universally-open} による。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-over-field-translate-open}
+$(G, m)$ を体 $k$ 上の群スキームとする。$U \subset G$ を開集合とし、
+$T \to G$ をスキームの射とする。このとき合成
+$T \times_k U \to G \times_k G \to G$ の像は開である。
+\end{lemma}
+
+\begin{proof}
+任意の体拡大 $K/k$ に対して射 $G_K \to G$ は開である
+（『射』補題 \ref{morphisms-lemma-scheme-over-field-universally-open}）。
+$T \times_k U$ の任意の点 $\xi$ は、ある $K$ に対する射
+$(t, u) : \Spec(K) \to T \times_k U$ の像である。このとき
+$T_K \times_K U_K = (T \times_k U)_K \to G_K$ の像は、開集合である
+平行移動 $t \cdot U_K$ を含む。これらを合わせると、
+$T \times_k U \to G$ の像は $\xi$ の像の開近傍を含む。
+$\xi$ は任意であったから結論を得る。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-over-field-separated}
+$G$ を体上の群スキームとする。このとき $G$ は分離スキームである。
+\end{lemma}
+
+\begin{proof}
+$k$ を体として $S = \Spec(k)$ と書き、$G$ を $S$ 上の群スキームとする。
+補題 \ref{groupoids-lemma-group-scheme-separated} により、$e : S \to G$ が
+閉埋め込みであることを示せばよい。『射』補題
+\ref{morphisms-lemma-algebraic-residue-field-extension-closed-point-fibre}
+により、$e : S \to G$ の像は $G$ の閉点である。
+$e_*\mathcal{O}_S$ は $G$ の単位元に台をもち、その値が $k$ である
+スカイスクレーパー層なので、$\mathcal{O}_G \to e_*\mathcal{O}_S$ が
+全射であることは明らかである。したがって『スキーム』補題
+\ref{schemes-lemma-characterize-closed-immersions} により、$e$ は閉埋め込みである。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-field-geometrically-irreducible}
+$G$ を体 $k$ 上の群スキームとする。このとき
+\begin{enumerate}
+\item $G$ の各局所環 $\mathcal{O}_{G, g}$ は唯一の極小素イデアルをもつ。
+\item $e$ を通る $G$ の既約成分 $Z$ はただ一つである。
+\item $Z$ は $k$ 上幾何学的に既約である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+任意の点 $g \in G$ に対し、体拡大 $K/k$ と、$g$ に写る
+$K$-値点 $g' \in G(K)$ が存在する。$g'$ を群スキーム $G_K$ の
+$K$-有理点とみなすと、$\mathcal{O}_{G, g} \to \mathcal{O}_{G_K, g'}$
+は忠実平坦な局所環準同型である。実際、$G_K \to G$ は平坦であり、
+平坦な局所環準同型は忠実平坦である
+（『代数』補題 \ref{algebra-lemma-local-flat-ff} を参照）。
+$\mathcal{O}_{G_K, g'}$ に対する結果から $\mathcal{O}_{G, g}$ に対する
+結果が従う（『代数』補題
+\ref{algebra-lemma-injective-minimal-primes-in-image} を参照）。
+したがって (1) を示すには、$G$ の $k$-有理点 $g$ について示せば十分である。
+この場合、$g$ による平行移動は $e$ を $g$ に写す自己同型
+$G \to G$ を定める。ゆえに $\mathcal{O}_{G, g} \cong \mathcal{O}_{G, e}$ である。
+$e$ を通る既約成分と $\mathcal{O}_{G, e}$ の極小素イデアルは一対一に対応するので、
+この議論から (2) が (1) を含意することが分かる。
+
+\medskip\noindent
+(2) と (3) を示すには、$k$ が代数閉である場合に (2) を示せば十分である。
+この場合、$Z_1$, $Z_2$ を $e$ を通る $G$ の二つの既約成分とする。
+$k$ は代数閉なので、閉部分スキーム
+$Z_1 \times_k Z_2 \subset G \times_k G$ も既約である
+（『多様体』補題 \ref{varieties-lemma-bijection-irreducible-components}）。
+したがって $m(Z_1 \times_k Z_2)$ は $G$ のある既約成分に含まれる。
+一方、$m|_{e \times G} = \text{id}_G$ および
+$m|_{G \times e} = \text{id}_G$ であるから、その像は $Z_1$ と $Z_2$ を含む。
+よって所望の等式 $Z_1 = Z_2$ を得る。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-warning-group-scheme-geometrically-irreducible}
+注意：補題 \ref{groupoids-lemma-group-scheme-field-geometrically-irreducible} は、
+$G/k$ のすべての既約成分が幾何学的に既約であることを意味しない。
+例えば、$\mathbf{Q}$ 上の群スキーム
+$\mu_{3, \mathbf{Q}} = \Spec(\mathbf{Q}[x]/(x^3 - 1))$
+は、因数分解 $x^3 - 1 = (x - 1)(x^2 + x + 1)$ に対応する二つの
+既約成分をもつ。第一の因子は単位元を通る既約成分に対応するが、
+第二の既約成分は $\Spec(\mathbf{Q})$ 上幾何学的に既約ではない。
+\end{remark}
+
+\begin{lemma}
+\label{groupoids-lemma-reduced-subgroup-scheme-perfect}
+$G$ を完全体 $k$ 上の群スキームとする。このとき $G$ の被約化
+$G_{red}$ は $G$ の閉部分群スキームである。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：『多様体』補題 \ref{varieties-lemma-perfect-reduced}
+および \ref{varieties-lemma-geometrically-reduced-any-base-change} により、
+$G_{red} \times_k G_{red}$ が被約であることを用いよ。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-open-subgroup-closed-over-field}
+$k$ を体とし、$\psi : G' \to G$ を $k$ 上の群スキームの射とする。
+$\psi(G')$ が $G$ で開ならば、$\psi(G')$ は $G$ で閉である。
+\end{lemma}
+
+\begin{proof}
+$U = \psi(G') \subset G$ とおく。また
+$Z = G \setminus \psi(G') = G \setminus U$ に誘導される被約閉部分スキーム構造を
+入れる。補題 \ref{groupoids-lemma-group-scheme-over-field-translate-open} により、
+$$
+Z \times_k G' \longrightarrow
+Z \times_k U \longrightarrow G
+$$
+の像は開である（第一の射は全射である）。一方、$\psi$ は群スキームの
+準同型なので、$Z \times_k G' \to G$ の像は $Z$ に含まれる。
+実際、$G'$ の任意の点 $g'$ に対し、$\psi(g')$ による平行移動は
+$U$ を保つ（細部は省略する）。したがって $Z \subset G$ は開部分集合である
+（ただし、必ずしも開部分スキームではない）。ゆえに
+$U = \psi(G')$ は閉である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-immersion-group-schemes-closed-over-field}
+$i : G' \to G$ を体 $k$ 上の群スキームの埋め込みとする。
+このとき $i$ は閉埋め込みである。すなわち、$i(G')$ は
+$G$ の閉部分群スキームである。
+\end{lemma}
+
+\begin{proof}
+$i$ が閉埋め込みであることを示すには、$i(G')$ が $G$ の閉部分集合であることを
+示せば十分である。$k \subset k'$ を $k$ の完全拡大とする。
+$i(G'_{k'}) \subset G_{k'}$ が閉ならば、『射』補題
+\ref{morphisms-lemma-fpqc-quotient-topology} により
+$i(G') \subset G$ は閉である（$G_{k'} \to G$ は平坦、準コンパクトかつ全射である）。
+したがって $k$ は完全であると仮定してよく、実際そう仮定する。
+$k$ 上の被約スキームの積が被約であることを、以下では断りなく用いる。
+補題 \ref{groupoids-lemma-reduced-subgroup-scheme-perfect} により、$G'$ と $G$ を
+それぞれの被約化で置き換えてよい。$i(G')$ の閉包を被約閉部分スキームとみなし、
+$\overline{G'} \subset G$ と書く。『多様体』補題
+\ref{varieties-lemma-closure-of-product} により、
+$\overline{G'} \times_k \overline{G'}$ は
+$G' \times_k G' \to G \times_k G$ の像の閉包である。したがって
+$$
+m\Big(\overline{G'} \times_k \overline{G'}\Big)
+\subset \overline{G'}
+$$
+が成り立つ。実際、$m$ は連続である。ゆえに
+$\overline{G'} \subset G$ は（被約）閉部分群スキームである。
+補題 \ref{groupoids-lemma-open-subgroup-closed-over-field} により、
+$i(G') \subset \overline{G'}$ も閉である。したがって所望の等式
+$i(G') = \overline{G'}$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-irreducible-group-scheme-over-field-qc}
+$G$ を体 $k$ 上の群スキームとする。$G$ が既約ならば、
+$G$ は準コンパクトである。
+\end{lemma}
+
+\begin{proof}
+$K/k$ を体拡大とする。$G_K$ が準コンパクトならば、
+$G_K \to G$ は全射なので $G$ も準コンパクトである。
+補題 \ref{groupoids-lemma-group-scheme-field-geometrically-irreducible} により、
+$G_K$ は既約である。したがって、$k$ をある拡大で置き換えた後に
+補題を示せば十分である。$K$ を非常に大きな濃度をもつ代数閉体拡大に選ぶ。
+すると『多様体』補題 \ref{varieties-lemma-make-Jacobson} により、
+$G_K$ は、すべての閉点の剰余体が $K$ に等しい Jacobson スキームである。
+言い換えると、$G$ はすべての閉点の剰余体が $k$ に等しい
+Jacobson スキームであると仮定してよい。
+
+\medskip\noindent
+$U \subset G$ を空でないアフィン開集合とし、$g \in G(k)$ とする。
+このとき $gU \cap U \not = \emptyset$ である。したがって $g$ は射
+$$
+U \times_{\Spec(k)} U \longrightarrow G, \quad
+(u_1, u_2) \longmapsto u_1u_2^{-1}
+$$
+の像に属する。この射の像は開であるから
+（補題 \ref{groupoids-lemma-group-scheme-over-field-open-multiplication}）、その像は
+$G$ 全体である（$G$ は Jacobson であり、閉点は $k$-有理だからである）。
+$U$ はアフィンなので $U \times_{\Spec(k)} U$ もアフィンである。
+よって $G$ は準コンパクトなスキームの像であり、したがって準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-connected-group-scheme-over-field-irreducible}
+$G$ を体 $k$ 上の群スキームとする。$G$ が連結ならば、
+$G$ は既約である。
+\end{lemma}
+
+\begin{proof}
+『多様体』補題
+\ref{varieties-lemma-geometrically-connected-if-connected-and-point} により、
+$G$ は幾何学的に連結である。ある体拡大 $K/k$ に対して $G_K$ が
+既約であることを示せば補題が従う。そこで『多様体』補題
+\ref{varieties-lemma-make-Jacobson} を適用し、$k$ が代数閉であり、
+$G$ が Jacobson スキームで、すべての閉点が $k$-有理である場合に帰着する。
+
+\medskip\noindent
+$Z \subset G$ を、単位元を通る $G$ の唯一の既約成分とする
+（補題 \ref{groupoids-lemma-group-scheme-field-geometrically-irreducible} を参照）。
+$Z$ に誘導される被約閉部分スキーム構造を入れると、
+$Z \times_k Z$ は被約かつ既約である（『多様体』補題
+\ref{varieties-lemma-geometrically-reduced-any-base-change} および
+\ref{varieties-lemma-bijection-irreducible-components}）。
+したがって $m|_{Z \times_k Z} : Z \times_k Z \to G$ は $Z$ を経由する。
+ゆえに $Z$ は $G$ の閉部分群スキームとなる。
+
+\medskip\noindent
+矛盾を導くため、別の既約成分 $Z' \subset G$ が存在すると仮定する。
+補題 \ref{groupoids-lemma-group-scheme-field-geometrically-irreducible} により
+$Z \cap Z' = \emptyset$ である。補題
+\ref{groupoids-lemma-irreducible-group-scheme-over-field-qc} により $Z$ は
+準コンパクトである。したがって、$Z \subset U$ かつ
+$U \cap Z' = \emptyset$ を満たす準コンパクトな開集合 $U \subset G$ を選べる。
+$Z \times_k U \to G$ の像 $W$ は、補題
+\ref{groupoids-lemma-group-scheme-over-field-translate-open} により $G$ で開である。
+一方、$W$ は準コンパクト空間の像なので準コンパクトである。
+$W$ が閉であることを主張する。
+
+\medskip\noindent
+主張の証明。$W$ は準コンパクトであり、$G$ は分離的なので
+（補題 \ref{groupoids-lemma-group-scheme-over-field-separated}）、包含
+$W \to G$ は『スキーム』補題
+\ref{schemes-lemma-quasi-compact-permanence} により準コンパクトである。
+したがって $W$ の閉包の点は $W$ の点の特殊化である
+（『射』補題 \ref{morphisms-lemma-reach-points-scheme-theoretic-image}）。
+ゆえに、$W$ と交わる $G$ の任意の既約成分 $Z'' \subset G$ が
+$W$ に含まれることを示せばよい。$G$ は Jacobson で閉点は有理点だから、
+$Z'' \cap W$ は有理点 $g \in Z''(k) \cap W(k)$ をもち、したがって
+$Z'' = Zg$ である。一方、構成により $W = m(Z \times_k W)$ なので、
+$Z'' \cap W \not = \emptyset$ ならば $Z'' \subset W$ である。
+
+\medskip\noindent
+主張により $W \subset G$ は $G$ の開閉部分集合である。
+$W \cap Z' = \emptyset$ である。実際、そうでなければ前段落の議論により、
+ある $g \in W(k)$ に対して $Z' = Zg$ となる。
+さらに $Z$ は部分群なので $g \in U(k)$ と選ぶことができ、
+$Z' \cap U = \emptyset$ に矛盾する。したがって $W \subset G$ は
+真の開閉部分集合であり、$G$ が連結であるという仮定に矛盾する。
+\end{proof}
+
+\begin{proposition}
+\label{groupoids-proposition-connected-component}
+$G$ を体 $k$ 上の群スキームとする。このとき次の性質をもつ標準的な
+閉部分群スキーム $G^0 \subset G$ が存在する。
+\begin{enumerate}
+\item $G^0 \to G$ は平坦な閉埋め込みである。
+\item $G^0 \subset G$ は単位元の連結成分である。
+\item $G^0$ は幾何学的に既約である。
+\item $G^0$ は準コンパクトである。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$G^0$ を、その標準的なスキーム構造を備えた単位元の連結成分とする
+（『射』定義
+\ref{morphisms-definition-scheme-structure-connected-component}）。
+$G^0$ が閉部分群スキームであることを示すため、補題
+\ref{groupoids-lemma-closed-subgroup-scheme} の判定法を用いる。
+$G^0$ は $e$ を含む $G$ の連結成分として選んだので、射
+$e : \Spec(k) \to G$ は $G^0$ を経由する。
+$i : G \to G$ は $e$ を固定する自己同型であるから、$i$ は $G^0$ を
+それ自身の中へ写す。『多様体』補題
+\ref{varieties-lemma-geometrically-connected-criterion} により、
+スキーム $G^0$ は $k$ 上幾何学的に連結である。したがって
+$G^0 \times_k G^0$ は連結である（『多様体』補題
+\ref{varieties-lemma-bijection-connected-components}）。
+ゆえに集合論的に $m(G^0 \times_k G^0) \subset G^0$ である。
+したがって『射』補題
+\ref{morphisms-lemma-characterize-flat-closed-immersions} により、
+$m|_{G^0 \times_k G^0} : G^0 \times_k G^0 \to G$ は $G^0$ を経由する。
+よって $G^0$ は $G$ の閉部分群スキームである。
+補題 \ref{groupoids-lemma-connected-group-scheme-over-field-irreducible} により
+$G^0$ は既約である。補題
+\ref{groupoids-lemma-group-scheme-field-geometrically-irreducible} により
+$G^0$ は幾何学的に既約である。さらに補題
+\ref{groupoids-lemma-irreducible-group-scheme-over-field-qc} により
+$G^0$ は準コンパクトである。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-profinite-product-over-field}
+$k$ を体とする。$A$ を、$k$ のコピーの有限積である代数の有向余極限とし、
+$T = \Spec(A)$ とする。$k$ 上の任意のスキーム $X$ に対し、位相空間として
+$|T \times_k X| = |T| \times |X|$ である。
+\end{lemma}
+
+\begin{proof}
+アフィン開被覆を取ることにより、$X$ がアフィンの場合に帰着する。
+$X = \Spec(B)$ と書く。$T_i$ を有限集合として
+$A_i = \prod_{t \in T_i} k$ とし、$A = \colim A_i$ と書く。
+このとき $T_i = |\Spec(A_i)|$ は離散位相をもち、遷移射
+$A_i \to A_{i'}$ は集合写像 $T_{i'} \to T_i$ により与えられる。
+したがって位相空間として $|T| = \lim T_i$ である
+（『極限』補題 \ref{limits-lemma-topology-limit}）。同様に
+\begin{align*}
+|T \times_k X| & =
+|\Spec(A \otimes_k B)| \\
+& =
+|\Spec(\colim A_i \otimes_k B)| \\
+& =
+\lim |\Spec(A_i \otimes_k B)| \\
+& =
+\lim |\Spec(\prod\nolimits_{t \in T_i} B)| \\
+& =
+\lim T_i \times |X| \\
+& =
+(\lim T_i) \times |X| \\
+& =
+|T| \times |X|
+\end{align*}
+を得る。最後は上の補題と、極限どうしが可換することによる。
+\end{proof}
+
+\noindent
+次の補題は、実際には「代数的なプロ有限点族」を一つのアフィン開集合に
+収められることを述べている。まず補題 \ref{groupoids-lemma-points-in-affine} を
+読むことを強く勧める。
+
+\begin{lemma}
+\label{groupoids-lemma-compact-set-in-affine}
+$k$ を代数閉体とし、$G$ を $k$ 上の群スキームとする。
+$G$ は Jacobson で、すべての閉点は $k$-有理であると仮定する。
+$A$ を、$k$ のコピーの有限積である代数の有向余極限とし、
+$T = \Spec(A)$ とする。任意の射 $f : T \to G$ に対し、$f(T)$ を含む
+アフィン開集合 $U \subset G$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$G^0 \subset G$ を命題 \ref{groupoids-proposition-connected-component} で得た
+閉部分群スキームとする。最初の二段落で $G = G^0$ の場合に帰着する。
+
+\medskip\noindent
+$T$ は有限位相空間の有向逆極限であり
+（『極限』補題 \ref{limits-lemma-topology-limit}）、したがって位相空間として
+プロ有限である（『位相』定義 \ref{topology-definition-profinite}）。
+$W \subset G$ を $T \to G$ の像を含む準コンパクトな開集合とする。
+$W$ を $G^0 \times W \to G \times G \to G$ の像で置き換えることにより、
+$W$ は $G^0$ の左平行移動作用で不変であると仮定してよい
+（補題 \ref{groupoids-lemma-group-scheme-over-field-translate-open}）。合成
+$$
+\psi = \pi \circ f : T \xrightarrow{f} W \xrightarrow{\pi} \pi_0(W)
+$$
+を考える。空間 $\pi_0(W)$ はプロ有限である（『位相』補題
+\ref{topology-lemma-spectral-pi0} および『性質』補題
+\ref{properties-lemma-quasi-compact-quasi-separated-spectral}）。
+$F_\xi \subset T$ を、$\xi \in \pi_0(W)$ 上の $T \to \pi_0(W)$ の
+ファイバーとする。各 $\xi \in \pi_0(W)$ に対し
+$f(F_\xi) \subset U_\xi$ を満たすアフィン開集合
+$U_\xi \subset W$ が見つかったと仮定する。『位相』補題
+\ref{topology-lemma-closed-map} により $\psi$ は閉写像なので、
+$\psi(T \setminus f^{-1}(U_\xi))$ は $\xi$ を含まない $\pi_0(W)$ の閉部分集合である。
+したがって、その補集合 $V_\xi$ は $\xi$ の開近傍であり、
+$\psi^{-1}(V_\xi) \subseteq f^{-1}(U_\xi)$ である。
+$V_\xi$ からなる $\pi_0(W)$ の開被覆は、互いに素な開閉部分集合からなる
+有限被覆 $\pi_0(W) = V_1 \amalg \ldots \amalg V_n$ に細分できる
+（『位相』補題 \ref{topology-lemma-profinite-refine-open-covering}）。
+各 $i = 1, \ldots, n$ について $V_i \subset V_{\xi_i}$ を満たす
+$\xi_i \in \pi_0(W)$ を選ぶ。$V_i$ は閉で $U_{\xi_i}$ はアフィンなので、
+$U_{\xi_i} \cap \pi^{-1}(V_i)$ もアフィンである。
+$U_{\xi_i}$ を $U_{\xi_i} \cap \pi^{-1}(V_i)$ で置き換えると、
+$\psi^{-1}(V_i) = f^{-1}(U_{\xi_i})$ となる。$V_i$ たちは
+$\pi_0(W)$ を被覆するから、$f^{-1}(U_{\xi_i})$ たちは $T$ を被覆し、
+$f(T) \subseteq U = \bigcup_i U_{\xi_i}$ である。この $U$ は有限個の
+アフィン開集合の直和であり、したがって所望どおりアフィンである。
+
+\medskip\noindent
+$Z$ を $f(T)$ と交わる $G$ の連結成分とする。このとき $Z$ は
+$k$-有理点 $z$ をもつ（スキーム $T$ のすべての剰余体が $k$ と同型だからである）。
+したがって $Z = G^0 z$ である。$W$ の選び方から $Z \subset W$ である。
+前段落の議論により、問題は $W$ の中で $f(T) \cap Z$ のアフィン開近傍を
+見つけることに帰着する。有理点による平行移動の後、$Z = G^0$ と仮定してよい
+（細部は省略する）。スキーム論的逆像
+$T' = f^{-1}(G^0) \subset T$ は同じ型の閉部分スキームである。
+$T$ を $T'$ で置き換え、$f(T) \subset G^0$ と仮定してよい。
+$e \in G$ のアフィン開近傍 $U \subset G$ を選ぶ。このとき特に
+$U \cap G^0$ は空でない。$f(T) \subset g^{-1}U$ を満たす
+$g \in G^0(k)$ が存在することを示そう。$W$ は $G^0$ の左作用で不変なので
+$g^{-1}U \subset W$ となり、これで証明が完了する。
+
+\medskip\noindent
+前二段落の議論により $G^0$ へ移り、問題を次の形に帰着できる。
+$G$ は既約で、$U \subset G$ は $e$ のアフィン開近傍であると仮定する。
+ある $g \in G(k)$ に対して $f(T) \subset g^{-1}U$ であることを示す。
+射
+$$
+U \times_k T \longrightarrow G \times_k T,\quad
+(t, u) \longrightarrow (uf(t)^{-1}, t)
+$$
+を考える。これは開埋め込みである。実際、この射を
+$G \times_k T \to G \times_k T$ に拡張したものは同型である。
+$T$ に関する仮定と補題 \ref{groupoids-lemma-profinite-product-over-field} により、
+$|U \times_k T| = |U| \times |T|$ であり、$G \times_k T$ についても同様である。
+したがって、表示した開埋め込みの像は、$V_i \subset T$ と
+準コンパクトな開集合 $U_i \subset G$ を用いた箱の有限和
+$\bigcup_{i = 1, \ldots, n} U_i \times V_i$ である。
+これは、取りうる開集合 $Uf(t)^{-1}$（$t \in T$）が有限個、例えば
+$Uf(t_1)^{-1}, \ldots, Uf(t_r)^{-1}$ であることを意味する。
+$G$ は既約なので交わり
+$$
+Uf(t_1)^{-1} \cap \ldots \cap Uf(t_r)^{-1}
+$$
+は空でない。さらに $G$ は Jacobson で閉点は $k$-有理なので、
+この交わりの $k$-値点 $g \in G(k)$ を選べる。このとき任意の
+$t \in T$ に対して $g \in Uf(t)^{-1}$ であり、これは所望の
+$f(t) \in g^{-1}U$ を意味する。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-easy}
+$G$ が体上の群スキームであるとき、準コンパクトな開閉部分群スキームは
+常に存在するだろうか。命題 \ref{groupoids-proposition-connected-component} により、
+この問題が興味をもつのは、$G$ が（幾何学的に）無限個の連結成分をもつ場合だけである。
+\end{remark}
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-field-countable-affine}
+$G$ を体上の群スキームとする。このとき、可算個のアフィンスキームの和である
+開閉部分スキーム $G' \subset G$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$e \in U(k)$ を単位元の準コンパクトな開近傍とする。
+$U$ を $U \cap i(U)$ で置き換えることにより、$U$ は逆元写像で不変であると
+仮定してよい。$G$ は分離的なので、これはなお準コンパクトな集合である。
+$$
+G' = \bigcup\nolimits_{n \geq 1} m_n(U \times_k \ldots \times_k U)
+$$
+とおく。ここで $m_n : G \times_k \ldots \times_k G \to G$ は
+$n$ 個の因子を順に乗じる写像である。具体的には
+$(g_1, \ldots, g_n) \mapsto m(m(\ldots (m(g_1, g_2), g_3), \ldots ), g_n)$
+と書ける。これらの写像はいずれも開である
+（補題 \ref{groupoids-lemma-group-scheme-over-field-open-multiplication} を参照）。
+したがって $G'$ は開部分群スキームであり、補題
+\ref{groupoids-lemma-open-subgroup-closed-over-field} により閉部分群スキームでもある。
+\end{proof}
+
+
+
+
+
+
+\section{代数的群スキームの性質}
+\label{groupoids-section-algebraic-group-schemes}
+
+\noindent
+体 $k$ 上のスキームが（局所）代数的であるとは、$\Spec(k)$ 上
+（局所）有限型であることだった（『多様体』定義
+\ref{varieties-definition-algebraic-scheme}）。本節の表題における
+「代数的」はこの意味で用いる。
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-finite-type-field}
+$k$ を体とし、$G$ を $k$ 上の局所代数的群スキームとする。
+このとき $G$ は等次元で、すべての $g \in G$ に対し
+$\dim(G) = \dim_g(G)$ である。任意の閉点 $g \in G$ に対し
+$\dim(G) = \dim(\mathcal{O}_{G, g})$ である。
+\end{lemma}
+
+\begin{proof}
+まず、任意の点の組 $g, g' \in G$ に対して
+$\dim_g(G) = \dim_{g'}(G)$ であることを示す。
+『射』補題 \ref{morphisms-lemma-dimension-fibre-after-base-change} により、
+基礎体は自由に拡大してよい。したがって $g$ と $g'$ はともに
+$k$ 上定義されていると仮定してよい。このとき $g$ を $g'$ に写す
+$G$ の自己同型が存在し、等式が従う。『射』補題
+\ref{morphisms-lemma-dimension-fibre-at-a-point} により
+$\dim_g(G) = \dim(\mathcal{O}_{G, g}) +
+\text{trdeg}_k(\kappa(g))$
+である。一方、$G$（または $G$ の任意の開部分集合）の次元は、$G$ の
+局所環の次元の上限である（『性質』補題
+\ref{properties-lemma-codimension-local-ring}）。この値が閉点 $g$ で
+最大になることは明らかであり、その場合
+$\text{trdeg}_k(\kappa(g)) = 0$ である（Hilbert の零点定理による。
+『射』第 \ref{morphisms-section-points-finite-type} 節を参照）。
+よって補題が従う。
+\end{proof}
+
+\noindent
+次の結果は Cartier の定理と呼ばれることがある。
+
+\begin{lemma}
+\label{groupoids-lemma-group-scheme-characteristic-zero-smooth}
+$k$ を標数 $0$ の体とし、$G$ を $k$ 上の局所代数的群スキームとする。
+このとき構造射 $G \to \Spec(k)$ は滑らかである。すなわち、
+$G$ は滑らかな群スキームである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-group-scheme-module-differentials} により、$G$ の $k$ 上の
+微分加群は自由である。したがって滑らかさは『多様体』補題
+\ref{varieties-lemma-char-zero-differentials-free-smooth} から従う。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-when-reduced}
+標数 $0$ の体上の任意の群スキームは被約である。
+\cite[I, Theorem 1.1 and I, Corollary 3.9, and II, Theorem 2.4]{Perrin-thesis}
+および \cite[Proposition 4.2.8]{Perrin} を参照せよ。
+これは \cite[page 80]{Oort} で提起された問題であった。
+補題 \ref{groupoids-lemma-group-scheme-characteristic-zero-smooth} では、群スキームが
+局所有限型の場合にこのことを確認した。
+\end{remark}
+
+\begin{lemma}
+\label{groupoids-lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth}
+$k$ を標数 $p > 0$ の完全体とする（標数0の場合については補題
+\ref{groupoids-lemma-group-scheme-characteristic-zero-smooth} を参照）。
+$G$ を $k$ 上の局所代数的群スキームとする。$G$ が被約ならば、
+構造射 $G \to \Spec(k)$ は滑らかである。すなわち、$G$ は
+滑らかな群スキームである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-group-scheme-module-differentials} により層
+$\Omega_{G/k}$ は自由である。したがって補題は『多様体』補題
+\ref{varieties-lemma-char-p-differentials-free-smooth} から従う。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-reduced-smooth-not-true-general}
+$k$ を標数 $p > 0$ の体とし、$\alpha \in k$ を $p$ 乗ではない元とする。
+閉部分群スキーム
+$$
+G = V(x^p + \alpha y^p) \subset \mathbf{G}_{a, k}^2
+$$
+は被約かつ既約であるが滑らかではない（正規ですらない）。
+\end{remark}
+
+\noindent
+次の補題は補題 \ref{groupoids-lemma-compact-set-in-affine} の特殊な場合であり、
+証明はやや容易である。
+
+\begin{lemma}
+\label{groupoids-lemma-points-in-affine}
+$k$ を代数閉体とし、$G$ を $k$ 上の局所代数的群スキームとする。
+$g_1, \ldots, g_n \in G(k)$ を $k$-有理点とする。このとき
+$g_1, \ldots, g_n$ を含むアフィン開集合 $U \subset G$ が存在する。
+\end{lemma}
+
+\begin{proof}
+まず $n$ に関する帰納法により、すべての $g_i$ が $G$ の同じ連結成分上に
+あると仮定してよいことを示す。そうでなければ、$W_i$ が $G$ で開である
+分解 $G = W_1 \amalg W_2$ を取り、必要なら番号を付け替えて、ある
+$0 < r < n$ に対し $g_1, \ldots, g_r \in W_1$ および
+$g_{r + 1}, \ldots, g_n \in W_2$ とできる。帰納法により、$G$ の
+アフィン開集合 $U_1$ と $U_2$ で、$g_1, \ldots, g_r \in U_1$ および
+$g_{r + 1}, \ldots, g_n \in U_2$ を満たすものが存在する。このとき
+$$
+g_1, \ldots, g_n \in (U_1 \cap W_1) \cup (U_2 \cap W_2)
+$$
+が問題の解を与える。したがって $g_1, \ldots, g_n$ はすべて $G$ の
+同じ連結成分上にあると仮定してよい。$g_1^{-1}$ による平行移動により、
+命題 \ref{groupoids-proposition-connected-component} の $G^0 \subset G$ に対し
+$g_1, \ldots, g_n \in G^0$ と仮定してよい。
+$e$ のアフィン開近傍 $U$ を選ぶと、特に $U \cap G^0$ は空でない。
+$G^0$ は既約なので
+$$
+G^0 \cap (Ug_1^{-1} \cap \ldots \cap Ug_n^{-1})
+$$
+は空でない。$G \to \Spec(k)$ は局所有限型なので
+$G^0 \to \Spec(k)$ も局所有限型であり、したがって空でない任意の開集合は
+$k$-有理点をもつ。よって、すべての $i$ に対して $g \in Ug_i^{-1}$ を
+満たす $g \in G^0(k)$ を選べる。このとき、すべての $i$ に対して
+$g_i \in g^{-1}U$ であり、$g^{-1}U$ が求めるアフィン開集合である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-algebraic-quasi-projective}
+$k$ を体とし、$G$ を $k$ 上の代数的群スキームとする。
+このとき $G$ は $k$ 上準射影的である。
+\end{lemma}
+
+\begin{proof}
+『多様体』補題 \ref{varieties-lemma-ample-after-field-extension} により、
+$k$ は代数閉であると仮定してよい。命題
+\ref{groupoids-proposition-connected-component} のように、$G^0 \subset G$ を
+$G$ の単位元を含む連結成分とする。$G$ の他の各連結成分は
+$k$-有理点をもち、したがってスキームとして $G^0$ と同型である。
+$G$ は準コンパクトかつ Noether なので、このような連結成分は有限個である。
+したがって次段落で扱う場合に帰着する。
+
+\medskip\noindent
+$G$ を代数閉体 $k$ 上の連結な代数的群スキームとする。
+$k$ の標数が0ならば、補題
+\ref{groupoids-lemma-group-scheme-characteristic-zero-smooth} により $G$ は $k$ 上
+滑らかである。$k$ の標数が $p > 0$ ならば、$H = G_{red}$ を $G$ の
+被約化とする。『因子』命題 \ref{divisors-proposition-push-down-ample} により、
+$H$ が豊富な可逆層をもつことを示せば十分である。
+（$k$ 上の代数的スキームが豊富な可逆層をもつことは、$k$ 上準射影的であることと
+同値である。例えば、より一般的な『射の続論』補題
+\ref{more-morphisms-lemma-quasi-projective} を参照せよ。）
+補題 \ref{groupoids-lemma-reduced-subgroup-scheme-perfect} により $H$ は $k$ 上の
+群スキームである。補題
+\ref{groupoids-lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth} により
+$H$ は $k$ 上滑らかである。これで次段落で扱う状況に帰着した。
+
+\medskip\noindent
+$G$ を代数閉体 $k$ 上の準コンパクト、既約かつ滑らかな群スキームとする。
+$G$ の局所環は正則であり、したがって一意分解整域である
+（『多様体』補題 \ref{varieties-lemma-smooth-regular} および
+『代数の続論』補題 \ref{more-algebra-lemma-regular-local-UFD}）。
+$G$ の空でないアフィン開集合の補集合は、ある有効 Cartier 因子 $D$ の台である。
+これは『因子』補題
+\ref{divisors-lemma-complement-open-affine-effective-cartier-divisor} から従う。
+（補題 \ref{groupoids-lemma-group-scheme-over-field-separated} により $G$ は分離的である。）
+したがって、$G \setminus D$ がアフィンとなる有効 Cartier 因子
+$D \subset G$ が存在する。以下では、任意の $n \geq 1$ および
+$g_1, \ldots, g_n \in G(k)$ に対して補集合
+$G \setminus \bigcup D g_i$ がアフィンであることを用いる。
+実際、これは分離スキーム $G$ におけるアフィン開集合
+$G \setminus Dg_i \cong G \setminus D$ の交わりである。
+
+\medskip\noindent
+図式の上段
+$$
+\xymatrix{
+G & U \ar[l]_j \ar[r]^\pi & \mathbf{A}^d_k \\
+& W \ar[r]^{\pi'} \ar[u] & V \ar[u]
+}
+$$
+は、$U \not = \emptyset$、$j : U \to G$ が開埋め込み、かつ
+$\pi$ が \'etale となるように選べる（『射』補題
+\ref{morphisms-lemma-smooth-etale-over-affine-space}）。空でないアフィン開集合
+$V \subset \mathbf{A}^d_k$ で、$W = \pi^{-1}(V)$ とおくと射
+$\pi' = \pi|_W : W \to V$ が有限 \'etale となるものが存在する。
+特に $\pi'$ は有限局所自由であり、その次数を $n$ とする。
+有効 Cartier 因子
+$$
+\mathcal{D} = \{(g, w) \mid m(g, j(w)) \in D\} \subset G \times W
+$$
+を考える（これは、平坦射 $m : G \times G \to G$ による
+$D \subset G$ の引き戻しを $G \times W$ に制限したものである）。
+閉部分集合\footnote{『因子』第 \ref{divisors-section-norms} 節の内容を用いれば、
+有限局所自由射 $1 \times \pi'$ に沿った有効 Cartier 因子
+$\mathcal{D}$ のノルムを有効 Cartier 因子 $E$ として取ることにより、
+議論の一部を省略できる。}
+$T = (1 \times \pi')(\mathcal{D}) \subset G \times V$ を考える。
+$\pi'$ は有限局所自由なので、$T$ の各既約成分は $G \times V$ で余次元 $1$ をもつ。
+$G \times V$ は $k$ 上滑らかだから、これらの成分は有効 Cartier 因子である
+（『因子』補題 \ref{divisors-lemma-weil-divisor-is-cartier-UFD} および
+上で引用した補題）。したがって $T$ は $G \times V$ 上のある有効 Cartier 因子
+$E$ の台である。$v \in V(k)$ ならば
+$(\pi')^{-1}(v) = \{w_1, \ldots, w_n\} \subset W(k)$ であり、集合論的に
+$$
+E_v = \bigcup\nolimits_{i = 1, \ldots, n} D j(w_i)^{-1}
+$$
+が $G$ で成り立つ。特に $G \setminus E_v$ はアフィン開集合である
+（上を参照）。さらに、$g \in G(k)$ ならば、$g \not \in E_v$ を満たす
+$v \in V$ が存在する。実際、$g \not \in Dj(w)^{-1}$ を満たす
+$w \in W$ 全体の集合 $W'$ は空でない開集合であり、$W' \to V$ の
+$v$ 上のファイバーが $n$ 個の元をもつように $v$ を選べばよい。
+
+\medskip\noindent
+$G \times V$ 上の可逆層
+$\mathcal{M} = \mathcal{O}_{G \times V}(E)$ を考える。
+『多様体』補題 \ref{varieties-lemma-rational-equivalence-for-Pic} により、
+制限 $\mathcal{M}_v = \mathcal{O}_G(E_v)$ の同型類 $\mathcal{L}$ は
+$v \in V(k)$ に依存しない。一方、任意の $g \in G(k)$ に対し、
+$g \not \in E_v$ かつ $G \setminus E_v$ がアフィンとなる $v$ を選べる。
+したがって $\mathcal{O}_G(E_v)$ の標準切断
+（『因子』定義
+\ref{divisors-definition-invertible-sheaf-effective-Cartier-divisor}）は、
+$g$ で消えず、かつ $G_{s_v}$ がアフィンとなる $\mathcal{L}$ の切断
+$s_v$ に対応する。これは定義により $\mathcal{L}$ が豊富であることを意味する
+（『性質』定義 \ref{properties-definition-ample}）。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-algebraic-center}
+$k$ を体とし、$G$ を $k$ 上の局所代数的群スキームとする。
+このとき $G$ の中心は $G$ の閉部分群スキームである。
+\end{lemma}
+
+\begin{proof}
+$\text{Aut}(G)$ を、$k$ 上のスキームの圏上の反変函手で、$S/k$ に
+基底変換 $G_S$ の $S$ 上の群スキームとしての自己同型全体を対応させるものとする。
+自然変換
+$$
+G \longrightarrow \text{Aut}(G),\quad
+g \longmapsto \text{inn}_g
+$$
+があり、$G$ の $S$-値点 $g$ を、$g$ が定める $G$ の内部自己同型へ写す。
+$G$ の中心 $C$ は定義によりこの変換の核、すなわち $S$ に対して、
+対応する内部自己同型が恒等となる $g \in G(S)$ 全体を対応させる函手である。
+補題の主張は、この函手が $G$ の閉部分群スキームによって表現可能だということである。
+
+\medskip\noindent
+整数 $n \geq 1$ を選び、$G_n \subset G$ を $G$ の単位元 $e$ の
+$n$ 次無限小近傍とする。任意のスキーム $S/k$ に対して、基底変換
+$G_{n, S}$ は $e_S : S \to G_S$ の $n$ 次無限小近傍である。
+したがって自然変換 $\text{Aut}(G) \to \text{Aut}(G_n)$ が存在する。
+ここで右辺は、スキームとしての $G_n$ の自己同型函手である
+（一般に $G_n$ は群スキームではない）。$G_n$ は剰余体 $k$ をもち、
+$k$-ベクトル空間として有限次元である Artin 局所環 $A_n$ のスペクトルである
+（『多様体』補題 \ref{varieties-lemma-algebraic-scheme-dim-0}）。
+$G_n$ の各自己同型は特に可逆線形写像 $A_n \to A_n$ を誘導するので、函手の変換
+$$
+G \to \text{Aut}(G) \to \text{Aut}(G_n) \to \text{GL}(A_n)
+$$
+を得る。最後の群値函手は表現可能であり
+（例 \ref{groupoids-example-general-linear-group}）、最後の射が単射であることは明らかである。
+したがって各 $n$ に対して閉部分群スキーム
+$$
+H_n = \Ker(G \to \text{Aut}(G_n)) = \Ker(G \to \text{GL}(A_n)).
+$$
+を得る。第一近似として $H = \bigcap_{n \geq 1} H_n$ とおく
+（スキーム論的交わり）。これは中心 $C$ を含む閉部分群スキームである。
+
+\medskip\noindent
+$S$ を局所 Noether とし、$h$ を $H$ の $S$-値点とする。
+すると自己同型 $\text{inn}_h$ はすべての閉部分スキーム $G_{n, S}$ 上で
+恒等写像を誘導する。核
+$K = \Ker(\text{inn}_h : G_S \to G_S)$
+を考える。これは $S$ 上の $G_S$ の閉部分群スキームで、すべての
+$n \geq 1$ に対して閉部分スキーム $G_{n, S}$ を含む。
+したがって $K$ は $e(S) \subset G_S$ の開近傍を含む
+（『代数』注意 \ref{algebra-remark-intersection-powers-ideal}）。
+$G^0 \subset G$ を命題 \ref{groupoids-proposition-connected-component} のものとする。
+$G^0$ は幾何学的に既約だから、$K$ は $G^0_S$ を含む。
+実際、任意の空でない開集合 $U \subset G^0_{k'}$ と任意の体拡大
+$k'/k$ に対し $U \cdot U^{-1} = G^0_{k'}$ である
+（補題 \ref{groupoids-lemma-irreducible-group-scheme-over-field-qc} の証明を参照）。
+これを $S = H$ に適用すると、$G^0$ と $H$ は $G$ の部分群スキームで、
+その点どうしは可換することが分かる。すなわち、任意のスキーム $S$ と
+任意の $S$-値点 $g \in G^0(S)$, $h \in H(S)$ に対し
+$G(S)$ において $gh = hg$ である。
+
+\medskip\noindent
+$k$ が代数閉であると仮定する。$G$ の各既約成分 $G_i$ に
+$k$-値点 $g_i$ を一つ選べる。この場合、$G$ の連結成分は $G$ の既約成分と一致し、
+いずれも $g_i$ による $G^0$ の平行移動である。次を主張する。
+$$
+C = H \cap \bigcap\nolimits_i \Ker(\text{inn}_{g_i} : G \to G)
+\quad (\text{scheme theoretic intersection})
+$$
+確かに $C$ は右辺に含まれる。逆に、右辺の任意の $S$-値点 $h$ は
+$G^0$ および $g_i$ と可換し、したがって $G = \bigcup G^0g_i$ の
+すべての元と可換する。
+
+\medskip\noindent
+一般の基礎体 $k$ の場合は、代数閉包 $\overline{k}$ に対する結果から
+降下により従う。$A \subset G_{\overline{k}}$ を
+$G_{\overline{k}}$ の中心を表現する閉部分群スキームとする。
+中心の函手性により、$G_{\overline{k} \otimes_k \overline{k}}$ の
+閉部分スキームとして
+$$
+A \times_{\Spec(k)} \Spec(\overline{k}) =
+\Spec(\overline{k}) \times_{\Spec(k)} A
+$$
+が成り立つ。したがって『降下』補題 \ref{descent-lemma-closed-immersion}
+（および『降下』補題
+\ref{descent-lemma-descending-property-closed-immersion}）により、$A$ は
+閉部分群スキーム $Z \subset G$ に降下する。$Z$ は $C$ を表現し
+（短い議論は省略する）、証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+\section{アーベル多様体}
+\label{groupoids-section-abelian-varieties}
+
+\noindent
+この内容に関する優れた文献は Mumford のアーベル多様体についての著書
+\cite{AVar} である。参照することを勧める。同値な定義は多数あるが、
+ここではその一つを採用する。
+
+\begin{definition}
+\label{groupoids-definition-abelian-variety}
+$k$ を体とする。$k$ 上の群スキームで、同時に $k$ 上固有かつ
+幾何学的に整な多様体であるものを {\it アーベル多様体} という
+\footnote{同値な定義については注意 \ref{groupoids-remark-16-equivalent} を参照。}。
+\end{definition}
+
+\noindent
+この概念に関するいくつかの補題を証明した後、結果を命題
+\ref{groupoids-proposition-review-abelian-varieties} にまとめる。
+
+\begin{lemma}
+\label{groupoids-lemma-abelian-variety-projective}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+このとき $A$ は射影的である。
+\end{lemma}
+
+\begin{proof}
+これは補題 \ref{groupoids-lemma-algebraic-quasi-projective} および
+『射の続論』補題 \ref{more-morphisms-lemma-projective} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-abelian-variety-change-field}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+任意の体拡大 $K/k$ に対し、基底変換 $A_K$ は $K$ 上の
+アーベル多様体である。
+\end{lemma}
+
+\begin{proof}
+省略する。ここで $A$ が幾何学的に整であることを仮定した理由はこれである。
+この条件がなければ、この補題（および以下の多くの補題）は誤りとなる。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-abelian-variety-smooth}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+このとき $A$ は $k$ 上滑らかである。
+\end{lemma}
+
+\begin{proof}
+$k$ が完全ならば、標数0の場合は補題
+\ref{groupoids-lemma-group-scheme-characteristic-zero-smooth} から、正標数の場合は補題
+\ref{groupoids-lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth} から従う。
+一般の場合は、滑らかさの降下（『降下』補題
+\ref{descent-lemma-descending-property-smooth}）と、補題
+\ref{groupoids-lemma-abelian-variety-change-field} を用いて完全閉包へ移ることにより、
+この場合に帰着できる。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-abelian-variety-abelian}
+アーベル多様体は可換群スキームである。すなわち、その群法則は可換である。
+\end{lemma}
+
+\begin{proof}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+補題 \ref{groupoids-lemma-abelian-variety-change-field} により、$k$ をその代数閉包で
+置き換えてよい。射
+$$
+h : A \times_k A \longrightarrow A \times_k A,\quad
+(x, y) \longmapsto (x, xyx^{-1}y^{-1})
+$$
+を考える。これは両辺の第一射影を介して $A$ 上の射である。
+$e \in A(k)$ を単位元とすると、$h|_{e \times A}$ は値 $(e, e)$ の
+定値写像である。『射の続論』補題
+\ref{more-morphisms-lemma-flat-proper-family-cannot-collapse-fibre} により、
+$e$ の開近傍 $U \subset A$ と、$U$ 上有限なある $Z \subset U \times A$ が存在し、
+$h|_{U \times A}$ はそれを経由する。これは $x \in U(k)$ に対し射
+$A \to A$, $y \mapsto xyx^{-1}y^{-1}$ が有限個の値しか取らないことを意味する。
+もちろん、この射は値 $e$ の定値写像でなければならない。
+したがって $(x, y) \mapsto xyx^{-1}y^{-1}$ は $U \times A$ 上で
+値 $e$ の定値写像であり、$A$ の群法則は可換である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-apply-cube}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_A$-加群とする。このとき
+$A \times_k A \times_k A$ 上の可逆加群の同型
+$$
+m_{1, 2, 3}^*\mathcal{L} \otimes
+m_1^*\mathcal{L} \otimes
+m_2^*\mathcal{L} \otimes
+m_3^*\mathcal{L} \cong
+m_{1, 2}^*\mathcal{L} \otimes
+m_{1, 3}^*\mathcal{L} \otimes
+m_{2, 3}^*\mathcal{L}
+$$
+が存在する。ここで $m_{i_1, \ldots, i_t} : A \times_k A \times_k A \to A$
+は射 $(x_1, x_2, x_3) \mapsto \sum x_{i_j}$ である。
+\end{lemma}
+
+\begin{proof}
+立方体定理（『射の続論』定理
+\ref{more-morphisms-theorem-of-the-cube}）を差
+$$
+\mathcal{M} =
+m_{1, 2, 3}^*\mathcal{L} \otimes
+m_1^*\mathcal{L} \otimes
+m_2^*\mathcal{L} \otimes
+m_3^*\mathcal{L} \otimes
+m_{1, 2}^*\mathcal{L}^{\otimes -1} \otimes
+m_{1, 3}^*\mathcal{L}^{\otimes -1} \otimes
+m_{2, 3}^*\mathcal{L}^{\otimes -1}
+$$
+に適用する。これは、$\mathcal{M}$ の $A \times A \times e = A \times A$
+への制限が
+$$
+n_{1, 2}^*\mathcal{L} \otimes
+n_1^*\mathcal{L} \otimes
+n_2^*\mathcal{L} \otimes
+n_{1, 2}^*\mathcal{L}^{\otimes -1} \otimes
+n_1^*\mathcal{L}^{\otimes -1} \otimes
+n_2^*\mathcal{L}^{\otimes -1} \cong \mathcal{O}_{A \times_k A}
+$$
+に等しいことによる。ここで
+$n_{i_1, \ldots, i_t} : A \times_k A \to A$ は射
+$(x_1, x_2) \mapsto \sum x_{i_j}$ である。
+$A \times e \times A$ および $e \times A \times A$ についても同様である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-pullbacks-by-n}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+$\mathcal{L}$ を可逆 $\mathcal{O}_A$-加群とする。このとき
+$$
+[n]^*\mathcal{L} \cong
+\mathcal{L}^{\otimes n(n + 1)/2} \otimes
+([-1]^*\mathcal{L})^{\otimes n(n - 1)/2}
+$$
+である。ここで $[n] : A \to A$ は $x$ を $n$ 個の項からなる
+$x + x + \ldots + x$ に写し、$[-1] : A \to A$ は $A$ の逆元写像である。
+\end{lemma}
+
+\begin{proof}
+射 $A \to A \times_k A \times_k A$, $x \mapsto (x, x, -x)$ を考える。
+ここで $-x = [-1](x)$ である。補題 \ref{groupoids-lemma-apply-cube} の関係式を
+引き戻すと
+$$
+\mathcal{L} \otimes
+\mathcal{L} \otimes
+\mathcal{L} \otimes
+[-1]^*\mathcal{L} \cong
+[2]^*\mathcal{L}
+$$
+を得る。これで $n = 2$ の場合が示された。帰納法により、結果が
+$1, 2, \ldots, n$ について成り立つと仮定する。射
+$A \to A \times_k A \times_k A$, $x \mapsto (x, x, [n - 1]x)$ を考え、
+補題 \ref{groupoids-lemma-apply-cube} の関係式を引き戻すと
+$$
+[n + 1]^*\mathcal{L} \otimes
+\mathcal{L} \otimes
+\mathcal{L} \otimes
+[n - 1]^*\mathcal{L} \cong
+[2]^*\mathcal{L} \otimes
+[n]^*\mathcal{L} \otimes
+[n]^*\mathcal{L}
+$$
+を得る。あとは初等的な計算から従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-degree-multiplication-by-d}
+$k$ を体とし、$A$ を $k$ 上のアーベル多様体とする。
+$[d] : A \to A$ を $d$ 倍写像とする。このとき $[d]$ は次数
+$d^{2\dim(A)}$ の有限局所自由射である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-abelian-variety-projective}
+（および『射の続論』補題 \ref{more-morphisms-lemma-projective}）により、
+$A$ は豊富な可逆加群 $\mathcal{L}$ をもつ。
+$[-1] : A \to A$ は自己同型なので、$[-1]^*\mathcal{L}$ も豊富な可逆
+$\mathcal{O}_A$-加群である。したがって
+$\mathcal{N} = \mathcal{L} \otimes [-1]^*\mathcal{L}$ は豊富である
+（『性質』補題 \ref{properties-lemma-ample-tensor-globally-generated}）。
+$\mathcal{N} \cong [-1]^*\mathcal{N}$ なので、補題
+\ref{groupoids-lemma-pullbacks-by-n} により
+$[d]^*\mathcal{N} \cong \mathcal{N}^{\otimes d^2}$ である。
+
+\medskip\noindent
+矛盾を導くため、$C$ を $[d]$ のあるファイバーに含まれる固有曲線とする。
+すると $\mathcal{N}^{\otimes d^2}|_C \cong \mathcal{O}_C$ は次数 $0$ の
+豊富な可逆 $\mathcal{O}_C$-加群となり、例えば『多様体』補題
+\ref{varieties-lemma-ample-curve} に矛盾する
+（『多様体』補題 \ref{varieties-lemma-ample-positive} を用いてもよい）。
+したがって $[d]$ の各ファイバーは次元 $0$ であり、例えば
+『スキームのコホモロジー』補題 \ref{coherent-lemma-characterize-finite} により
+$[d]$ は有限である。さらに補題 \ref{groupoids-lemma-abelian-variety-smooth} により
+$A$ は $k$ 上滑らかであるから、『代数』補題
+\ref{algebra-lemma-CM-over-regular-flat} により $[d] : A \to A$ は平坦である。
+ここでは、体上滑らかなスキームは正則であり、正則環は Cohen--Macaulay であることも
+用いている（『多様体』補題 \ref{varieties-lemma-smooth-regular} および
+『代数』補題 \ref{algebra-lemma-regular-ring-CM}）。
+よって $[d]$ は有限平坦であり、『射』補題
+\ref{morphisms-lemma-finite-flat} により有限局所自由である。
+
+\medskip\noindent
+最後に次数の公式を示す。『多様体』補題
+\ref{varieties-lemma-degree-finite-morphism-in-terms-degrees} により
+$$
+\deg_{\mathcal{N}^{\otimes d^2}}(A) = \deg([d]) \deg_\mathcal{N}(A)
+$$
+である。$\mathcal{N}^{\otimes d^2}$ および $\mathcal{N}$ に関する $A$ の次数は、
+それぞれ多項式
+$$
+n \longmapsto \chi(A, \mathcal{N}^{\otimes nd^2}),\quad
+\text{respectively}\quad n \longmapsto \chi(A, \mathcal{N}^{\otimes n})
+$$
+における $n^{\dim(A)}$ の係数である。したがって
+$\deg([d]) = d^{2 \dim(A)}$ を得る。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-abelian-variety-multiplication-by-d-etale}
+\begin{slogan}
+アーベル多様体上の整数倍写像がエタール射であるための必要十分条件は、
+その整数が基礎体で可逆であることである。
+\end{slogan}
+$k$ を体とし、$A$ を $k$ 上の零でないアーベル多様体とする。
+このとき $[d] : A \to A$ が \'etale であるための必要十分条件は、
+$d$ が $k$ で可逆であることである。
+\end{lemma}
+
+\begin{proof}
+$[d](x + y) = [d](x) + [d](y)$ である。点による平行移動は $A$ の
+自己同型なので、$[d] : A \to A$ が \'etale となる点の集合は空であるか
+$A$ 全体である（細部は省略する）。したがって単位元 $e \in A(k)$ において
+$[d]$ が \'etale かどうかを調べれば十分である。補題
+\ref{groupoids-lemma-degree-multiplication-by-d} により $[d]$ は有限局所自由なので、
+$e$ において \'etale であることは
+$\text{d}[d] : T_{A/k, e} \to T_{A/k, e}$ が単射であることと同値である。
+『多様体』補題 \ref{varieties-lemma-injective-tangent-spaces-unramified} および
+『射』補題 \ref{morphisms-lemma-flat-unramified-etale} を参照せよ。
+補題 \ref{groupoids-lemma-group-scheme-addition-tangent-vectors} により、
+$\text{d}[d]$ は $T_{A/k, e}$ 上の $d$ 倍写像で与えられる。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-abelian-variety-multiplication-by-p}
+$k$ を標数 $p > 0$ の体とし、$A$ を $k$ 上の次元 $g$ の
+アーベル多様体とする。$0$ 上の $[p] : A \to A$ のファイバーは、
+相異なる点を高々 $p^g$ 個もつ。
+\end{lemma}
+
+\begin{proof}
+$k$ をその代数閉包で置き換えてよく、実際そうする。
+補題 \ref{groupoids-lemma-group-scheme-addition-tangent-vectors} により、$[p]$ の微分は
+写像 $T_{A/k, e} \to T_{A/k, e}$ として $p$ 倍写像であり、したがって零である
+（補題 \ref{groupoids-lemma-abelian-variety-multiplication-by-d-etale} の証明と比較せよ）。
+$[p]$ は平行移動と可換するので、$[p]$ の微分は至る所零である。
+すなわち、誘導写像 $[p]^*\Omega_{A/k} \to \Omega_{A/k}$ は零である。
+生成点で考えると、対応する関数体の写像 $[p]^* : k(A) \to k(A)$ は
+$\Omega_{k(A)/k}$ 上に零写像を誘導する。
+$t_1, \ldots, t_g$ を $k$ 上の $k(A)$ の p-基底とする
+（『代数の続論』定義 \ref{more-algebra-definition-p-basis} および補題
+\ref{more-algebra-lemma-p-basis}）。すると『代数』補題
+\ref{algebra-lemma-derivative-zero-pth-power} により、$[p]^*(t_i)$ は
+$p$ 乗根をもつ。したがって
+$k(A)[x_1, \ldots, x_g]/(x_1^p - t_1, \ldots, x_g^p - t_g)$ は
+$[p]^* : k(A) \to k(A)$ の部分拡大である。ゆえに
+$t_i \in \mathcal{O}_A(U)$ かつ $x_i \in \mathcal{O}_A([p]^{-1}(U))$ を
+満たすアフィン開集合 $U \subset A$ を取れる。$U$ 上で $[p]$ の分解
+$$
+[p]^{-1}(U)
+\xrightarrow{\pi_1}
+\Spec(\mathcal{O}(U)[x_1, \ldots, x_g]/(x_1^p - t_1, \ldots, x_g^p - t_g))
+\xrightarrow{\pi_2}
+U
+$$
+を得る。$U$ を縮小すれば、$\pi_1$ は有限局所自由であると仮定してよい
+（例えば一般平坦性による。実際にはこの場合、既に有限局所自由である）。
+補題 \ref{groupoids-lemma-degree-multiplication-by-d} により $[p]$ の次数は
+$p^{2g}$ である。$\pi_2$ の次数は $p^g$ なので、$\pi_1$ の次数も
+$p^g$ である。射 $\pi_2$ は普遍同相なので、そのファイバーは一点集合である。
+したがって $[p]^{-1}(U) \to U$ の集合論的ファイバーは $\pi_1$ の
+ファイバーであり、高々 $p^g$ 個の元をもつ。$[p]$ は $k$ 上の
+群スキームの準同型なので、$[p] : A(k) \to A(k)$ のファイバーの濃度は
+各 $a \in A(k)$ に対して同じである。これで証明が完了する。
+\end{proof}
+
+\begin{proposition}
+\label{groupoids-proposition-review-abelian-varieties}
+\begin{reference}
+\cite{AVar} に非常に明快な解説がある。
+\end{reference}
+$A$ を体 $k$ 上のアーベル多様体とする。このとき
+\begin{enumerate}
+\item $A$ は $k$ 上射影的である、
+\item $A$ は可換群スキームである、
+\item 射 $[n] : A \to A$ はすべての $n \geq 1$ に対して全射である、
+\item $k$ が代数閉ならば、$A(k)$ は可除可換群である、
+\item $A[n] = \Ker([n] : A \to A)$ は $k$ 上次数
+$n^{2\dim A}$ の有限群スキームである、
+\item $A[n]$ が $k$ 上 \'etale であるための必要十分条件は $n \in k^*$ である、
+\item $n \in k^*$ かつ $k$ が代数閉ならば、
+$A(k)[n] \cong (\mathbf{Z}/n\mathbf{Z})^{\oplus 2\dim(A)}$ である、
+\item $k$ が標数 $p > 0$ の代数閉体ならば、ある整数
+$0 \leq f \leq \dim(A)$ が存在して、すべての $m \geq 1$ に対し
+$A(k)[p^m] \cong (\mathbf{Z}/p^m\mathbf{Z})^{\oplus f}$
+である。
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) は補題 \ref{groupoids-lemma-abelian-variety-projective} から従う。
+(2) は補題 \ref{groupoids-lemma-abelian-variety-abelian} から従う。
+(3) は補題 \ref{groupoids-lemma-degree-multiplication-by-d} から従う。
+$k$ が代数閉ならば、$k$ 上の多様体の全射な射は $k$-有理点上に
+全射を誘導するので、(4) は (3) から従う。
+(5) は補題 \ref{groupoids-lemma-degree-multiplication-by-d} と、次数 $N$ の
+有限局所自由射の基底変換が次数 $N$ の有限局所自由射であることから従う。
+(6) は補題 \ref{groupoids-lemma-abelian-variety-multiplication-by-d-etale} から従う。
+実際、$n$ が $k$ で可逆ならば $[n]$ は \'etale であり、したがって
+$A[n]$ は $k$ 上 \'etale である。他方、$n$ が $k$ で可逆でなければ、
+$[n]$ は $e$ において \'etale でなく、したがって $A[n]$ は
+$e$ において $k$ 上 \'etale でない（『射』補題
+\ref{morphisms-lemma-flat-unramified-etale} および
+\ref{morphisms-lemma-set-points-where-fibres-unramified} を用いよ）。
+
+\medskip\noindent
+$k$ は代数閉であると仮定し、$g = \dim(A)$ とおく。(7) を証明する。
+$\ell$ を $k$ で可逆な素数とする。このとき
+$$
+A[\ell](k) = A(k)[\ell]
+$$
+は $\ell$ で零化され、位数が $\ell^{2g}$ の有限可換群である。
+有限可換群の構造定理により、これは
+$(\mathbf{Z}/\ell\mathbf{Z})^{2g}$ と同型である。次に短完全列
+$$
+0 \to A(k)[\ell] \to A(k)[\ell^2] \xrightarrow{\ell} A(k)[\ell] \to 0
+$$
+を考える。上と同様に論じると
+$A(k)[\ell^2] \cong (\mathbf{Z}/\ell^2\mathbf{Z})^{2g}$ を得る。
+指数に関する帰納法により
+$A(k)[\ell^m] \cong (\mathbf{Z}/\ell^m\mathbf{Z})^{2g}$ を得る。
+$k$ の標数と互いに素な合成数 $n$ に対しては、一次成分を取り、
+$A(k)$ の $n$-ねじれ部分の所要の形を得る。
+(8) の証明もまったく同様に進み、補題
+\ref{groupoids-lemma-abelian-variety-multiplication-by-p} が、ある $0 \leq f \leq g$ に対し
+$A(k)[p] \cong (\mathbf{Z}/p\mathbf{Z})^{\oplus f}$ を与えることを用いる。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-16-equivalent}
+$k$ を体とする。アーベル多様体には $2 \times 4 \times 2 = 16$ 通りの
+互いに同値な定義がある。次の三組の性質
+\begin{itemize}
+\item 射影的、固有、
+\item 幾何学的に既約、既約、幾何学的に連結、連結、
+\item 滑らか、幾何学的に被約
+\end{itemize}
+の各組から一つずつ選び、$A$ を $k$ 上の群スキームであって、選んだ性質を
+$k$ 上でもつものとする。このとき $A$ はアーベル多様体である。
+``固有、幾何学的に既約、幾何学的に被約'' を選べば、定義
+\ref{groupoids-definition-abelian-variety} が得られる
+（『多様体』補題 \ref{varieties-lemma-geometrically-integral} を用いよ）。
+最も弱い選択肢は ``固有、連結、幾何学的に被約'' である。例えば
+『射』補題 \ref{morphisms-lemma-locally-projective-proper} および
+『多様体』補題 \ref{varieties-lemma-smooth-geometrically-normal} を参照せよ。
+そこで $A$ を $k$ 上の固有、連結、幾何学的に被約な群スキームとする。
+このとき補題 \ref{groupoids-lemma-connected-group-scheme-over-field-irreducible} および
+\ref{groupoids-lemma-group-scheme-field-geometrically-irreducible} により $A$ は
+幾何学的に既約であり、したがってアーベル多様体である。
+最後に、$A/k$ がアーベル多様体ならば、$k$ 上射影的かつ滑らかであり
+（命題 \ref{groupoids-proposition-review-abelian-varieties}）、したがって最も強い選択肢
+"射影的、幾何学的に既約、滑らか" を満たす。
+\end{remark}
+
+
+
+
+
+
+
+\section{群スキームの作用}
+\label{groupoids-section-action-group-scheme}
+
+\noindent
+$(G, m)$ を群、$V$ を集合とする。$G$ の $V$ への {\it （左）作用}とは、
+次を満たす写像 $a : G \times V \to V$ で与えられることを思い出そう。
+\begin{enumerate}
+\item （結合律）すべての $g, g' \in G$ および $v \in V$ に対し
+$a(m(g, g'), v) = a(g, a(g', v))$ である。
+\item （単位元）すべての $v \in V$ に対し $a(e, v) = v$ である。
+\end{enumerate}
+$V$ を {\it $G$-集合}ともいう（通常これは、記法から $a$ を省略することを
+意味し、記法の濫用である）。{\it $G$-集合の写像} $\psi : V \to V'$ とは、
+すべての $v \in V$ に対し $\psi(a(g, v)) = a(g, \psi(v))$ を満たす
+任意の集合写像である。
+
+\begin{definition}
+\label{groupoids-definition-action-group-scheme}
+$S$ をスキーム、$(G, m)$ を $S$ 上の群スキームとする。
+\begin{enumerate}
+\item {\it $G$ のスキーム $X/S$ への作用}とは、各 $T/S$ に対して写像
+$a : G(T) \times X(T) \to X(T)$ が $X(T)$ に $G(T)$-集合の構造を
+定めるような、$S$ 上の射 $a : G \times_S X \to X$ である。
+\item $X$, $Y$ を、それぞれ $G$ の作用を備えた $S$ 上のスキームとする。
+{\it 同変}な、より正確には {\it $G$-同変}な射 $\psi : X \to Y$ とは、
+各 $T/S$ に対し写像 $\psi : X(T) \to Y(T)$ が $G(T)$-集合の写像となる
+$S$ 上のスキームの射である。
+\end{enumerate}
+\end{definition}
+
+\noindent
+(1) の条件は、図式
+\begin{equation}
+\label{groupoids-equation-action}
+\vcenter{
+\xymatrix{
+G \times_S G \times_S X \ar[r]_-{1_G \times a} \ar[d]_{m \times 1_X} &
+G \times_S X \ar[d]^a \\
+G \times_S X \ar[r]^a & X
+}
+}
+\quad\quad
+\vcenter{
+\xymatrix{
+G \times_S X \ar[r]_-a & X \\
+X\ar[u]^{e \times 1_X} \ar[ru]_{1_X}
+}
+}
+\end{equation}
+が可換であることを意味する。(2) の条件は、単に図式
+$$
+\xymatrix{
+G \times_S X \ar[r]_-{\text{id} \times \psi} \ar[d]_a &
+G \times_S Y \ar[d]^a \\
+X \ar[r]^\psi & Y
+}
+$$
+が可換であることを意味する。
+
+\begin{definition}
+\label{groupoids-definition-free-action}
+$S$, $G \to S$, $X \to S$ は定義
+\ref{groupoids-definition-action-group-scheme} のとおりとする。
+$a : G \times_S X \to X$ を $G$ の $X/S$ への作用とする。
+すべての $S$ 上のスキーム $T$ に対し、作用
+$a : G(T) \times X(T) \to X(T)$ が群 $G(T)$ の集合 $X(T)$ への自由作用ならば、
+この作用は {\it 自由}であるという。
+\end{definition}
+
+\begin{lemma}
+\label{groupoids-lemma-free-action}
+状況は定義 \ref{groupoids-definition-free-action} のとおりとする。作用 $a$ が自由である
+ための必要十分条件は
+$$
+G \times_S X \to X \times_S X, \quad (g, x) \mapsto (a(g, x), x)
+$$
+がモノ射であることである。
+\end{lemma}
+
+\begin{proof}
+定義から直ちに従う。
+\end{proof}
+
+
+
+
+
+
+\section{主等質空間}
+\label{groupoids-section-principal-homogeneous}
+
+\noindent
+『サイト上のコホモロジー』定義
+\ref{sites-cohomology-definition-torsor} では、サイト上の群の層に対する
+トーサーを定義した。$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ を
+位相とし、$(G, m)$ を $S$ 上の群スキームとする。$\tau$ は標準位相より強いので
+（『降下』補題 \ref{descent-lemma-fpqc-universal-effective-epimorphisms} を参照）、
+$\underline{G}$ は（『サイト』定義 \ref{sites-definition-representable-sheaf} を参照）
+$(\Sch/S)_\tau$ 上の群の層である。したがって、$(\Sch/S)_\tau$ 上の
+$\underline{G}$-トーサーの意味は既に分かっている。この層が表現可能な場合には
+特別な状況が生じる。以下の定義では、表現スキームが $G$-トーサーであることの
+意味を直接定義する。
+
+\begin{definition}
+\label{groupoids-definition-pseudo-torsor}
+$S$ をスキームとする。$(G, m)$ を $S$ 上の群スキームとする。
+$X$ を $S$ 上のスキームとし、$a : G \times_S X \to X$ を $G$ の $X$ への
+作用とする。
+\begin{enumerate}
+\item 誘導されるスキームの射 $G \times_S X \to X \times_S X$,
+$(g, x) \mapsto (a(g, x), x)$ が $S$ 上のスキームの同型ならば、
+$X$ を {\it 擬 $G$-トーサー}という。または、$X$ は
+{\it $G$ の下で形式的に主等質}であるという。
+\item 擬 $G$-トーサー $X$ が {\it 自明}であるとは、$G$ が左乗法により
+$G$ に作用するとき、$S$ 上の $G$-同変同型 $G \to X$ が存在することをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$S' \to S$ がスキームの射ならば、$S$ 上の擬 $G$-トーサーの引き戻し
+$X_{S'}$ が $S'$ 上の擬 $G_{S'}$-トーサーであることは明らかである。
+
+\begin{lemma}
+\label{groupoids-lemma-characterize-trivial-pseudo-torsors}
+状況は定義 \ref{groupoids-definition-pseudo-torsor} のとおりとする。
+\begin{enumerate}
+\item スキーム $X$ が擬 $G$-トーサーであるための必要十分条件は、すべての
+$S$ 上のスキーム $T$ に対して集合 $X(T)$ が空であるか、群 $G(T)$ の
+$X(T)$ への作用が単純推移的であることである。
+\item 擬 $G$-トーサー $X$ が自明であるための必要十分条件は、射
+$X \to S$ が切断をもつことである。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{groupoids-definition-principal-homogeneous-space}
+$S$ をスキームとする。$(G, m)$ を $S$ 上の群スキームとする。
+$X$ を $S$ 上の擬 $G$-トーサーとする。
+\begin{enumerate}
+\item 各 $X_{S_i} \to S_i$ が切断をもつ（すなわち自明な擬
+$G_{S_i}$-トーサーである）ような fpqc 被覆\footnote{これは、既定の
+トーサーが、fpqc 被覆上で自明となる擬トーサーであることを意味する。
+これは \cite[Expos\'e IV, 6.5]{SGA3} の定義である。われわれは fppf 位相で
+作業することが最も多いので、いくらか不便である。}
+$\{S_i \to S\}_{i \in I}$ が存在するとき、$X$ を
+{\it 主等質空間}または {\it $G$-トーサー}という。
+\item $\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。
+各 $X_{S_i} \to S_i$ が切断をもつような $\tau$-被覆
+$\{S_i \to S\}_{i \in I}$ が存在するとき、$X$ を
+{\it $\tau$ 位相における $G$-トーサー}、{\it $\tau$ $G$-トーサー}、
+または単に {\it $\tau$ トーサー}という。
+\item $X$ が $G$-トーサーであるとする。これが \'etale 位相に対する
+トーサーならば、{\it 準等自明}であるという。
+\item $X$ が $G$-トーサーであるとする。これが Zariski 位相に対する
+トーサーならば、{\it 局所自明}であるという。
+\end{enumerate}
+\end{definition}
+
+\noindent
+``$X$ を $S$ 上の $G$-トーサーとする'' ということがある。これは、$X$ が
+$S$ 上のスキームであって、$S$ 上の主等質空間とするような $G$ の作用を
+備えていることを意味する。次に、双方が適用できる場合、これが先に導入した
+記法と一致することを示す。
+
+\begin{lemma}
+\label{groupoids-lemma-torsor}
+$S$ をスキームとする。$(G, m)$ を $S$ 上の群スキームとする。
+$X$ を $S$ 上のスキームとし、$a : G \times_S X \to X$ を $G$ の $X$ への
+作用とする。$\tau \in \{Zariski, \etale, smooth, syntomic, fppf\}$ とする。
+$X$ が $\tau$-位相における $G$-トーサーであるための必要十分条件は、
+$\underline{X}$ が $(\Sch/S)_\tau$ 上の $\underline{G}$-トーサーであることである。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-fun-with-torsors}
+$(G, m)$ をスキーム $S$ 上の群スキームとする。この状況では、次のような
+自然な問題がある。
+\begin{enumerate}
+\item $X \to S$ が擬 $G$-トーサーかつ $X \to S$ が全射ならば、
+$X$ は必ず $G$-トーサーか。
+\item $(\Sch/S)_{fppf}$ 上のすべての $\underline{G}$-トーサーは表現可能か。
+言い換えれば、すべての $\underline{G}$-トーサーは fppf $G$-トーサーから
+生じるか。
+\item すべての $G$-トーサーは
+fppf（resp.\ smooth, resp.\ \'etale, resp.\ Zariski）トーサーか。
+\end{enumerate}
+一般には、これらの問題の答えは否である。肯定的な答えを得るには、
+$G \to S$ に追加の条件を課す必要がある。例えば、$S$ が体のスペクトルならば、
+$\{X \to S\}$ は $X$ を自明化する fpqc 被覆なので (1) の答えは肯定的である。
+$G \to S$ がアフィンならば (2) の答えは肯定的である
+（『降下』補題 \ref{descent-lemma-affine} から従う）。
+$G = \text{GL}_{n, S}$ ならば (3) の答えは肯定的であり、実際、任意の
+$\text{GL}_{n, S}$-トーサーは局所自明である
+（『降下』補題 \ref{descent-lemma-finite-locally-free-descends} から従う）。
+\end{remark}
+
+
+
+\section{同変準連接層}
+\label{groupoids-section-equivariant}
+
+\noindent
+``関数'' を ``空間'' の双対と考える。したがって空間の射に対し、関数上の写像は
+逆向きになる。さらに、加群の層の切断を ``関数'' と考える。この見方から、
+次の定義で選ぶ矢印の向きが自然に得られる。
+
+\begin{definition}
+\label{groupoids-definition-equivariant-module}
+$S$ をスキーム、$(G, m)$ を $S$ 上の群スキームとし、
+$a : G \times_S X \to X$ を群スキーム $G$ の $X/S$ への作用とする。
+{\it $G$-同変な準連接 $\mathcal{O}_X$-加群}、または単に
+{\it 同変な準連接 $\mathcal{O}_X$-加群}とは、対 $(\mathcal{F}, \alpha)$ であって、
+$\mathcal{F}$ が準連接 $\mathcal{O}_X$-加群であり、$\alpha$ が
+$\mathcal{O}_{G \times_S X}$-加群の写像
+$$
+\alpha : a^*\mathcal{F} \longrightarrow \text{pr}_1^*\mathcal{F}
+$$
+で、$\text{pr}_1 : G \times_S X \to X$ を射影として次を満たすものをいう。
+\begin{enumerate}
+\item 図式
+$$
+\xymatrix{
+(1_G \times a)^*\text{pr}_1^*\mathcal{F} \ar[r]_-{\text{pr}_{12}^*\alpha} &
+\text{pr}_2^*\mathcal{F} \\
+(1_G \times a)^*a^*\mathcal{F} \ar[u]^{(1_G \times a)^*\alpha} \ar@{=}[r] &
+(m \times 1_X)^*a^*\mathcal{F} \ar[u]_{(m \times 1_X)^*\alpha}
+}
+$$
+は $\mathcal{O}_{G \times_S G \times_S X}$-加群の圏で可換である。
+\item 引き戻し
+$$
+(e \times 1_X)^*\alpha : \mathcal{F} \longrightarrow \mathcal{F}
+$$
+は恒等写像である。
+\end{enumerate}
+説明については式 (\ref{groupoids-equation-action}) の対応する図式と比較せよ。
+\end{definition}
+
+\noindent
+第一の図式の可換性により、$(e \times 1_X)^*\alpha$ は $\mathcal{F}$ 上の
+冪等作用素である。したがって条件 (2) は、これが同型であるという条件にほかならない。
+
+\begin{lemma}
+\label{groupoids-lemma-pullback-equivariant}
+$S$ をスキーム、$G$ を $S$ 上の群スキームとする。$f : Y \to X$ を、
+$G$-作用を備えた $S$-スキーム間の $G$-同変射とする。対応
+$(\mathcal{F}, \alpha) \mapsto (f^*\mathcal{F}, (1_G \times f)^*\alpha)$ は、
+$G$-同変な準連接 $\mathcal{O}_X$-加群の圏から $G$-同変な準連接
+$\mathcal{O}_Y$-加群の圏への関手を定める。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+例を一つ挙げる。
+
+\begin{example}
+\label{groupoids-example-Gm-on-affine}
+$A$ を $\mathbf{Z}$-次数付き環とする。すなわち、$A$ は直和分解
+$A = \bigoplus_{n \in \mathbf{Z}} A_n$ をもち、
+$A_n \cdot A_m \subset A_{n + m}$ を満たす。$X = \Spec(A)$ とおく。
+このとき環準同型 $\mu : A \to A \otimes \mathbf{Z}[x, x^{-1}]$,
+$f \mapsto f \otimes x^{\deg(f)}$ により $\mathbf{G}_m$-作用
+$$
+a : \mathbf{G}_m \times X \longrightarrow X
+$$
+を得る。実際、これを確かめるには
+$$
+\xymatrix{
+A \ar[r]_\mu \ar[d]_\mu &
+A \otimes \mathbf{Z}[x, x^{-1}] \ar[d]^{\mu \otimes 1} \\
+A \otimes \mathbf{Z}[x, x^{-1}] \ar[r]^-{1 \otimes m} &
+A \otimes \mathbf{Z}[x, x^{-1}] \otimes \mathbf{Z}[x, x^{-1}]
+}
+$$
+を確かめればよい。ここで $m(x) = x \otimes x$ である。例
+\ref{groupoids-example-multiplicative-group} を参照せよ。斉次元上で評価すれば直ちに明らかである。
+$M$ を次数付き $A$-加群とする。このとき定義
+\ref{groupoids-definition-equivariant-module} の $\alpha$ として、
+$A \otimes \mathbf{Z}[x, x^{-1}]$-加群の写像
+$$
+M \otimes_{A, \mu} (A \otimes \mathbf{Z}[x, x^{-1}])
+\longrightarrow
+M \otimes_{A, \text{id}_A \otimes 1} (A \otimes \mathbf{Z}[x, x^{-1}])
+$$
+で、斉次な $m \in M$ に対し $m \otimes 1 \otimes 1$ を
+$m \otimes 1 \otimes x^{\deg(m)}$ に写すものに対応する構造を用いると、
+$\mathbf{G}_m$-同変な準連接 $\mathcal{O}_X$-加群
+$\mathcal{F} = \widetilde{M}$ を得る。
+\end{example}
+
+\begin{lemma}
+\label{groupoids-lemma-complete-reducibility-Gm}
+$a : \mathbf{G}_m \times X \to X$ をアフィンスキーム上の作用とする。
+このとき $X$ は $\mathbf{Z}$-次数付き環のスペクトルであり、作用は例
+\ref{groupoids-example-Gm-on-affine} のとおりである。
+\end{lemma}
+
+\begin{proof}
+$f \in A = \Gamma(X, \mathcal{O}_X)$ とする。このとき
+$$
+a^\sharp(f) = \sum\nolimits_{n \in \mathbf{Z}} f_n \otimes x^n
+\quad\text{in}\quad
+A \otimes \mathbf{Z}[x, x^{-1}] =
+\Gamma(\mathbf{G}_m \times X, \mathcal{O}_{\mathbf{G}_m \times X})
+$$
+と書ける。これは $f_n$ が $A$ の元で一意に定まる有限和である。
+したがって写像 $A \to A$, $f \mapsto f_n$ を得る。$a$ は作用なので、
+$x = 1$ で評価すると $f = \sum f_n$ を得る。また $a$ が作用であることから
+$$
+\sum (f_n)_m \otimes x^m \otimes x^n = \sum f_n x^n \otimes x^n
+$$
+を得る（例 \ref{groupoids-example-Gm-on-affine} の計算と比較せよ）。したがって
+$n \not = m$ ならば $(f_n)_m = 0$ であり、$(f_n)_n = f_n$ である。
+そこで
+$$
+A_n = \{f \in A \mid f_n = f\}
+$$
+とおけば $A = \sum A_n$ を得る。他方、上の状況で $f = 0$ ならば
+$f_n = 0$ なので、この和は直和でなければならない。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-Gm-equivariant-module}
+$A$ を次数付き環とする。$X = \Spec(A)$ に例 \ref{groupoids-example-Gm-on-affine} の作用
+$a : \mathbf{G}_m \times X \to X$ を入れる。$\mathcal{F}$ を
+$\mathbf{G}_m$-同変な準連接 $\mathcal{O}_X$-加群とする。このとき
+$M = \Gamma(X, \mathcal{F})$ には標準的な次数付けがあり、これにより次数付き
+$A$-加群となる。また同型 $\widetilde{M} \to \mathcal{F}$
+（『スキーム』補題 \ref{schemes-lemma-quasi-coherent-affine}）は
+$\mathbf{G}_m$-同変加群の同型である。ここで $\widetilde{M}$ 上の
+$\mathbf{G}_m$-同変構造は例 \ref{groupoids-example-Gm-on-affine} のものである。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-complete-reducibility-Gm} の議論を加群 $M$ に対して繰り返せばよい。
+別の方法として、$\mathcal{F}$ を平方零イデアルとみなしたスキーム
+$(X', \mathcal{O}_{X'}) = (X, \mathcal{O}_X \oplus \mathcal{F})$ を考えてもよい。
+$X$ および $\mathcal{F}$ 上の作用を用いて定まる自然な作用
+$a' : \mathbf{G}_m \times X' \to X'$ がある。そこで補題
+\ref{groupoids-lemma-complete-reducibility-Gm} を $X'$ に適用すれば結論を得る。
+（この議論のよい点は、$A$ と $M$ の次数付けが両立すること、すなわち $M$ が
+次数付き $A$-加群であることを直ちに示す点である。）細部は省略する。
+\end{proof}
+
+
+
+\section{亜群}
+\label{groupoids-section-groupoids}
+
+\noindent
+亜群とは、すべての射が同型である圏であることを思い出そう。『圏』定義
+\ref{categories-definition-groupoid} を参照せよ。したがって亜群は、対象の集合
+$\text{Ob}$、矢印の集合 $\text{Arrows}$、{\it 始域}写像と {\it 終域}写像
+$s, t : \text{Arrows} \to \text{Ob}$、および {\it 合成則}
+$c : \text{Arrows} \times_{s, \text{Ob}, t} \text{Arrows}
+\to \text{Arrows}$ をもつ。これらの写像はちょうど次の公理を満たす。
+\begin{enumerate}
+\item （結合律）写像
+$\text{Arrows} \times_{s, \text{Ob}, t}
+\text{Arrows} \times_{s, \text{Ob}, t}
+\text{Arrows} \to \text{Arrows}$ として
+$c \circ (1, c) = c \circ (c, 1)$ である。
+\item （単位元）次を満たす写像 $e : \text{Ob} \to \text{Arrows}$ が存在する。
+\begin{enumerate}
+\item 写像 $\text{Ob} \to \text{Ob}$ として
+$s \circ e = t \circ e = \text{id}$ である。
+\item 写像 $\text{Arrows} \to \text{Arrows}$ として
+$c \circ (1, e \circ s) = c \circ (e \circ t, 1) = 1$ である。
+\end{enumerate}
+\item （逆元）次を満たす写像 $i : \text{Arrows} \to \text{Arrows}$ が存在する。
+\begin{enumerate}
+\item 写像 $\text{Arrows} \to \text{Ob}$ として
+$s \circ i = t$, $t \circ i = s$ である。
+\item 写像 $\text{Arrows} \to \text{Arrows}$ として
+$c \circ (1, i) = e \circ t$ および $c \circ (i, 1) = e \circ s$ である。
+\end{enumerate}
+\end{enumerate}
+この場合、写像 $e$ と $i$ は一意に定まり、$i$ は全単射である。別の亜群圏
+$(\text{Ob}', \text{Arrows}', s', t', c')$ があるとき、関手
+$f : (\text{Ob}, \text{Arrows}, s, t, c) \to
+(\text{Ob}', \text{Arrows}', s', t', c')$ は集合写像の対
+$f : \text{Ob} \to \text{Ob}'$ および $f : \text{Arrows} \to \text{Arrows}'$
+であって、$s' \circ f = f \circ s$, $t' \circ f = f \circ t$, および
+$c' \circ (f, f) = f \circ c$ を満たすものによって与えられる。
+単位元および逆元との両立性は自動的である。以下でこれを用いる。
+（注意：一般の圏の場合には、単位元との両立性を課す必要がある。）
+
+\begin{definition}
+\label{groupoids-definition-groupoid}
+$S$ をスキームとする。
+\begin{enumerate}
+\item {\it $S$ 上の亜群スキーム}、または単に {\it $S$ 上の亜群}とは、
+五つ組 $(U, R, s, t, c)$ であって、$U$ と $R$ が $S$ 上のスキームであり、
+$s, t : R \to U$ および $c : R \times_{s, U, t} R \to R$ が $S$ 上の
+スキームの射で、次を満たすものをいう。すべての $S$ 上のスキーム $T$ に対し、
+五つ組
+$$
+(U(T), R(T), s, t, c)
+$$
+は上で述べた意味の亜群圏である。
+\item {\it $S$ 上の亜群スキームの射
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$} とは、スキームの射
+$f : U \to U'$ および $f : R \to R'$ であって、すべての $S$ 上の
+スキーム $T$ に対し、写像 $f$ が亜群圏 $(U(T), R(T), s, t, c)$ から
+亜群圏 $(U'(T), R'(T), s', t', c')$ への関手を定めるものによって与えられる。
+\end{enumerate}
+\end{definition}
+
+\noindent
+$(U, R, s, t, c)$ を $S$ 上の亜群とする。定義の前の注意と米田の補題により、
+一意な $S$ 上のスキームの射 $e : U \to R$ および $i : R \to R$ が存在し、
+すべての $S$ 上のスキーム $T$ に対し、誘導写像 $e : U(T) \to R(T)$ は
+恒等射を与え、$i : R(T) \to R(T)$ は亜群圏の逆元を与える。七つ組
+$(U, R, s, t, c, e, i)$ は、上の公理 (1), (2)(a), (2)(b), (3)(a), (3)(b)
+の各々に対応する可換図式を満たす。逆に、この性質をもつ七つ組が与えられれば、
+五つ組 $(U, R, s, t, c)$ は亜群スキームである。$i$ は同型であり、$e$ は
+$s$ と $t$ の双方の切断であることに注意せよ。さらに $S$ 上の亜群スキームに対し
+$$
+j = (t, s) : R \longrightarrow U \times_S U
+$$
+と書く。これは上の第 \ref{groupoids-section-equivalence-relations} 節の規約と両立する。
+恒等射と逆元の存在を強調するため、``$(U, R, s, t, c, e, i)$ を $S$ 上の
+亜群とする'' ということもある。
+
+\begin{lemma}
+\label{groupoids-lemma-groupoid-pre-equivalence}
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとすると、射
+$j : R \to U \times_S U$ は前同値関係である。
+\end{lemma}
+
+\begin{proof}
+省略する。定義のよい演習である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-equivalence-groupoid}
+$S$ 上の同値関係 $j : R \to U \times_S U$ を $S$ 上の亜群
+$(U, R, s, t, c)$ に拡張する方法は一意である。
+\end{lemma}
+
+\begin{proof}
+省略する。定義のよい演習である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-diagram}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群とする。可換図式
+$$
+\xymatrix{
+& U & \\
+R \ar[d]_s \ar[ru]^t &
+R \times_{s, U, t} R
+\ar[l]^-{\text{pr}_0} \ar[d]^{\text{pr}_1} \ar[r]_-c &
+R \ar[d]^s \ar[lu]_t \\
+U & R \ar[l]_t \ar[r]^s & U
+}
+$$
+において、下の二つの正方形はファイバー積図式である。さらに上の三角形
+（実際には正方形）も Cartesian である。
+\end{lemma}
+
+\begin{proof}
+省略する。定義と、代数幾何における関手的観点の演習である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-diagram-pull}
+$S$ をスキームとし、$(U, R, s, t, c, e, i)$ を $S$ 上の亜群とする。図式
+\begin{equation}
+\label{groupoids-equation-pull}
+\xymatrix{
+R \times_{t, U, t} R
+\ar@<1ex>[r]^-{\text{pr}_1} \ar@<-1ex>[r]_-{\text{pr}_0}
+\ar[d]_{(\text{pr}_0, c \circ (i, 1))} &
+R \ar[r]^t \ar[d]^{\text{id}_R} &
+U \ar[d]^{\text{id}_U} \\
+R \times_{s, U, t} R
+\ar@<1ex>[r]^-c \ar@<-1ex>[r]_-{\text{pr}_0} \ar[d]_{\text{pr}_1} &
+R \ar[r]^t \ar[d]^s &
+U \\
+R \ar@<1ex>[r]^s \ar@<-1ex>[r]_t &
+U
+}
+\end{equation}
+は可換である。上の二行は、表示された垂直写像により同型である。左下の二つの
+正方形は Cartesian である。
+\end{lemma}
+
+\begin{proof}
+図式の可換性は亜群の公理から従う。亜群の言葉では、左上の垂直矢印は、終域が
+等しい射の対 $(\alpha, \beta)$ に射の対
+$(\alpha, \alpha^{-1} \circ \beta)$ を対応させる。任意の亜群において、これは
+$\text{Arrows} \times_{t, \text{Ob}, t} \text{Arrows}$ と
+$\text{Arrows} \times_{s, \text{Ob}, t} \text{Arrows}$ の間の全単射を定める。
+したがって補題の第二の主張を得る。最後の主張は補題 \ref{groupoids-lemma-diagram} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-base-change-groupoid}
+$(U, R, s, t, c)$ をスキーム $S$ 上の亜群とし、$S' \to S$ を射とする。
+基底変換 $U' = S' \times_S U$, $R' = S' \times_S R$ に、射 $s, t, c$ の
+基底変換 $s'$, $t'$, $c'$ を入れると、$(U', R', s', t', c')$ は $S'$ 上の
+亜群スキームをなし、射影は $S$ 上の亜群スキームの射
+$(U', R', s', t', c') \to (U, R, s, t, c)$ を定める。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：
+$R' \times_{s', U', t'} R' = S' \times_S (R \times_{s, U, t} R)$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{亜群上の準連接層}
+\label{groupoids-section-groupoids-quasi-coherent}
+
+\noindent
+矢印の向きに関する規約については、第 \ref{groupoids-section-equivariant} 節の序を参照されたい。
+
+\begin{definition}
+\label{groupoids-definition-groupoid-module}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+{\it $(U, R, s, t, c)$ 上の準連接加群} とは対
+$(\mathcal{F}, \alpha)$ であって、$\mathcal{F}$ は準連接
+$\mathcal{O}_U$-加群、$\alpha$ は $\mathcal{O}_R$-加群準同型
+$$
+\alpha : t^*\mathcal{F} \longrightarrow s^*\mathcal{F}
+$$
+であり、次を満たすものをいう。
+\begin{enumerate}
+\item 図式
+$$
+\xymatrix{
+& \text{pr}_1^*t^*\mathcal{F} \ar[r]_-{\text{pr}_1^*\alpha} &
+\text{pr}_1^*s^*\mathcal{F} \ar@{=}[rd] & \\
+\text{pr}_0^*s^*\mathcal{F} \ar@{=}[ru] & & & c^*s^*\mathcal{F} \\
+& \text{pr}_0^*t^*\mathcal{F} \ar[lu]^{\text{pr}_0^*\alpha} \ar@{=}[r] &
+c^*t^*\mathcal{F} \ar[ru]_{c^*\alpha}
+}
+$$
+は $\mathcal{O}_{R \times_{s, U, t} R}$-加群の圏で可換である。
+\item 引き戻し
+$$
+e^*\alpha : \mathcal{F} \longrightarrow \mathcal{F}
+$$
+は恒等写像である。
+\end{enumerate}
+補題 \ref{groupoids-lemma-diagram} の可換図式と比較せよ。
+\end{definition}
+
+\noindent
+第1の図式の可換性により、作用素 $e^*\alpha$ は冪等となる。
+したがって第2の条件は、$e^*\alpha$ が同型であると言い換えられる。
+実際、この条件から $\alpha$ が同型であることが従う。
+
+\begin{lemma}
+\label{groupoids-lemma-isomorphism}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$(\mathcal{F}, \alpha)$ が $(U, R, s, t, c)$ 上の準連接加群ならば、
+$\alpha$ は同型である。
+\end{lemma}
+
+\begin{proof}
+定義 \ref{groupoids-definition-groupoid-module} の可換図式を、射
+$(i, 1) : R \to R \times_{s, U, t} R$ によって引き戻す。
+すると $i^*\alpha \circ \alpha = s^*e^*\alpha$ を得る。
+射 $(1, i)$ によって引き戻せば、関係
+$\alpha \circ i^*\alpha = t^*e^*\alpha$ を得る。第2の仮定により
+これらの射は恒等射である。したがって $i^*\alpha$ は
+$\alpha$ の逆である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-pullback}
+$S$ をスキームとし、$S$ 上の亜群スキームの射
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$ を考える。このとき
+$$
+(\mathcal{F}, \alpha) \mapsto (f^*\mathcal{F}, f^*\alpha)
+$$
+で与えられる引き戻し $f^*$ は、$(U', R', s', t', c')$ 上の
+準連接層の圏から $(U, R, s, t, c)$ 上の準連接層の圏への関手を定める。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-pushforward}
+$S$ をスキームとし、$S$ 上の亜群スキームの射
+$f : (U, R, s, t, c) \to (U', R', s', t', c')$ を考える。次を仮定する。
+\begin{enumerate}
+\item $f : U \to U'$ は準コンパクトかつ準分離である。
+\item 正方形
+$$
+\xymatrix{
+R \ar[d]_t \ar[r]_f & R' \ar[d]^{t'} \\
+U \ar[r]^f & U'
+}
+$$
+はデカルトである。
+\item $s'$ および $t'$ は平坦である。
+\end{enumerate}
+このとき
+$$
+(\mathcal{F}, \alpha) \mapsto (f_*\mathcal{F}, f_*\alpha)
+$$
+で与えられる順像 $f_*$ は、$(U, R, s, t, c)$ 上の準連接層の圏から
+$(U', R', s', t', c')$ 上の準連接層の圏への関手を定める。この関手は、
+補題 \ref{groupoids-lemma-pullback} で定めた引き戻しの右随伴である。
+\end{lemma}
+
+\begin{proof}
+$U \to U'$ は準コンパクトかつ準分離なので、$f_*$ は準連接層を
+準連接層に移す（『スキーム』補題
+\ref{schemes-lemma-push-forward-quasi-coherent}）。さらに、正方形
+$$
+\vcenter{
+\xymatrix{
+R \ar[d]_t \ar[r]_f & R' \ar[d]^{t'} \\
+U \ar[r]^f & U'
+}
+}
+\quad\text{and}\quad
+\vcenter{
+\xymatrix{
+R \ar[d]_s \ar[r]_f & R' \ar[d]^{s'} \\
+U \ar[r]^f & U'
+}
+}
+$$
+はいずれもデカルトなので、
+$(t')^*f_*\mathcal{F} = f_*t^*\mathcal{F}$ および
+$(s')^*f_*\mathcal{F} = f_*s^*\mathcal{F}$ を得る。『スキームのコホモロジー』補題
+\ref{coherent-lemma-flat-base-change-cohomology} を参照されたい。
+従って $f_*\alpha$ を写像
+$(t')^*f_*\mathcal{F} \to (s')^*f_*\mathcal{F}$ とみなすことができる。
+同様の議論により、$f_*\alpha$ はコサイクル条件を満たす。
+環付き空間上の加群について引き戻しと順像が随伴するので、この関手は
+引き戻し関手の右随伴である。細部は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-colimits}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$(U, R, s, t, c)$ 上の準連接加群の圏は余極限をもつ。
+\end{lemma}
+
+\begin{proof}
+$i \mapsto (\mathcal{F}_i, \alpha_i)$ を添字圏 $\mathcal{I}$ 上の図式とする。
+余極限
+$\mathcal{F} = \colim \mathcal{F}_i$
+を作ることができ、これは $U$ 上の準連接層である。『スキーム』第
+\ref{schemes-section-quasi-coherent} 節を参照されたい。
+余極限は引き戻しと可換なので、
+$s^*\mathcal{F} = \colim s^*\mathcal{F}_i$ であり、同様に
+$t^*\mathcal{F} = \colim t^*\mathcal{F}_i$ である。従って
+$\alpha = \colim \alpha_i$ と置ける。$(\mathcal{F}, \alpha)$ が
+$(U, R, s, t, c)$ 上の準連接加群の圏においてこの図式の余極限であることの
+証明は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-abelian}
+$S$ をスキームとする。
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$s$, $t$ が平坦ならば、$(U, R, s, t, c)$ 上の準連接加群の圏は
+アーベル圏である。
+\end{lemma}
+
+\begin{proof}
+$\varphi : (\mathcal{F}, \alpha) \to (\mathcal{G}, \beta)$ を
+$(U, R, s, t, c)$ 上の準連接加群の準同型とする。$s$ は平坦なので
+$$
+0 \to s^*\Ker(\varphi)
+\to s^*\mathcal{F} \to s^*\mathcal{G} \to s^*\Coker(\varphi) \to 0
+$$
+は完全であり、$t$ による引き戻しについても同様である。従って
+$\alpha$ と $\beta$ は、コサイクル条件を満たす同型
+$\kappa : t^*\Ker(\varphi) \to s^*\Ker(\varphi)$ および
+$\lambda : t^*\Coker(\varphi) \to s^*\Coker(\varphi)$
+を誘導する。$(\Ker(\varphi), \kappa)$ と
+$(\Coker(\varphi), \lambda)$ がそれぞれ
+$(U, R, s, t, c)$ 上の準連接加群の圏における核と余核であることは
+直ちに確かめられる。さらに、$U$ 上で成立することから
+$\Coim(\varphi) = \Im(\varphi)$ も成立する。
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{準連接加群の余極限}
+\label{groupoids-section-colimits}
+
+\noindent
+本節では、適切な仮定の下で、亜群上の任意の準連接加群が ``小さい''
+準連接加群のフィルター付き余極限となることを述べる技術的結果を証明する。
+
+\begin{lemma}
+\label{groupoids-lemma-construct-quasi-coherent}
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとし、$s, t$ は平坦、
+準コンパクト、準分離的であると仮定する。$U$ 上の任意の準連接加群
+$\mathcal{G}$ に対し、標準的同型
+$\alpha : t^*s_*t^*\mathcal{G} \to s^*s_*t^*\mathcal{G}$ が存在し、
+$(s_*t^*\mathcal{G}, \alpha)$ を $(U, R, s, t, c)$ 上の準連接加群にする。
+この構成は関手
+$$
+\QCoh(\mathcal{O}_U) \longrightarrow \QCoh(U, R, s, t, c)
+$$
+を定め、これは忘却関手 $(\mathcal{F}, \beta) \mapsto \mathcal{F}$ の右随伴である。
+\end{lemma}
+
+\begin{proof}
+準コンパクトかつ準分離的な射に沿う準連接加群の順像は準連接である。
+『スキーム』補題 \ref{schemes-lemma-push-forward-quasi-coherent} を参照せよ。
+したがって $s_*t^*\mathcal{G}$ は準連接である。補題 \ref{groupoids-lemma-diagram} の
+記法を用いると
+$$
+t^*s_*t^*\mathcal{G} =
+\text{pr}_{1, *}\text{pr}_0^*t^*\mathcal{G} =
+\text{pr}_{1, *}c^*t^*\mathcal{G} =
+s^*s_*t^*\mathcal{G}
+$$
+を得る。中間の等式は、射 $R \times_{s, U, t} R \to U$ として
+$t \circ c = t \circ \text{pr}_0$ だからである。最初と最後の等式は、
+『スキームのコホモロジー』補題
+\ref{coherent-lemma-flat-base-change-cohomology} により、これらの段階で
+基底変換と順像が可換するからである。
+
+\medskip\noindent
+$\alpha$ に対する定義 \ref{groupoids-definition-groupoid-module} のコサイクル条件と
+随伴性を確かめるため、構成 $\mathcal{G} \mapsto (s_*t^*\mathcal{G}, \alpha)$ を
+別の仕方で記述する。$R$ 上の同値関係 $R \times_{t, U, t} R$ に付随する
+亜群スキーム
+$(R, R \times_{t, U, t} R, \text{pr}_0, \text{pr}_1, \text{pr}_{02})$
+を考える。補題 \ref{groupoids-lemma-equivalence-groupoid} を参照せよ。亜群スキームの射
+$$
+f :
+(R, R \times_{t, U, t} R, \text{pr}_1, \text{pr}_0, \text{pr}_{02})
+\longrightarrow
+(U, R, s, t, c)
+$$
+で、$s : R \to U$ と、$(r_0, r_1) \mapsto r_0^{-1} \circ r_1$ で与えられる
+$R \times_{t, U, t} R \to R$ により定まるものがある。必要な図式の可換性の
+確認は省略する。$t, s : R \to U$ は準コンパクト、準分離的かつ平坦であり、
+補題 \ref{groupoids-lemma-diagram-pull} により Cartesian 図式
+$$
+\xymatrix{
+R \times_{t, U, t} R \ar[d]_{\text{pr}_0}
+\ar[rr]_-{(r_0, r_1) \mapsto r_0^{-1} \circ r_1} & & R \ar[d]^t \\
+R \ar[rr]^s & & U
+}
+$$
+があるので、補題 \ref{groupoids-lemma-pushforward} を $f$ に適用できる。したがって
+$f$ に沿う準連接加群の順像と引き戻しは随伴関手である。証明を終えるため、
+これらを上で述べた関手と同一視する。まず
+$$
+t^* :
+\QCoh(\mathcal{O}_U)
+\longrightarrow
+\QCoh(R, R \times_{t, U, t} R, \text{pr}_1, \text{pr}_0, \text{pr}_{02})
+$$
+は同値である。実際、$\{t : R \to U\}$ は fpqc 被覆なので、これは準連接層の
+降下理論による。『降下』命題
+\ref{descent-proposition-fpqc-descent-quasi-coherent} を参照せよ。
+
+\medskip\noindent
+同値 $t^*$ の後に $f$ に沿う順像を合成したものは、$\mathcal{G}$ を
+$(s_*t^*\mathcal{G}, \alpha)$ に写す。この仕方で得られる同型 $\alpha$ が
+上で構成したものと同じであることの確認は省略する。
+
+\medskip\noindent
+$f$ に沿う引き戻しの後に同値 $t^*$ の逆を合成したものは、
+$(\mathcal{F}, \beta)$ を次の降下に写す。すなわち $R \times_{t, U, t} R$ 上で
+$(r_0, r_1) \mapsto r_0^{-1} \circ r_1$ により $\beta$ を引き戻した降下データ
+$\gamma$ を備えた加群 $s^*\mathcal{F}$ の、$\{t : R \to U\}$ に関する降下である。
+同型 $\beta : t^*\mathcal{F} \to s^*\mathcal{F}$ を考える。$t^*\mathcal{F}$ 上の
+$\{t : R \to U\}$ に関する標準的降下データ（『降下』定義
+\ref{descent-definition-descent-datum-effective-quasi-coherent}）は、$\beta$ を通じて写像
+$$
+\text{pr}_0^*s^*\mathcal{F}
+\xrightarrow{\text{pr}_0^*\beta^{-1}}
+\text{pr}_0^*t^*\mathcal{F}
+\xrightarrow{can}
+\text{pr}_1^*t^*\mathcal{F}
+\xrightarrow{\text{pr}_1^*\beta}
+\text{pr}_1^*s^*\mathcal{F}
+$$
+に移される。$\beta$ はコサイクル条件を満たすので、これは
+$(r_0, r_1) \mapsto r_0^{-1} \circ r_1$ による $\beta$ の引き戻しに等しい。
+これを見るには、定義 \ref{groupoids-definition-groupoid-module} の実際のコサイクル関係を、
+補題 \ref{groupoids-lemma-diagram-pull} の可換図式にも現れる射
+$(\text{pr}_0, c \circ (i, 1)) : R \times_{t, U, t} R \to R \times_{s, U, t} R$
+で引き戻せばよい。したがって $(s^*\mathcal{F}, \gamma)$ は
+$(t^*\mathcal{F}, can)$ と同型である。以上により、$f$ による引き戻しの後に
+同値 $t^*$ の逆を合成したものは、忘却関手
+$(\mathcal{F}, \beta) \mapsto \mathcal{F}$ と同型である。
+\end{proof}
+
+\begin{remark}
+\label{groupoids-remark-adjunction-map}
+補題 \ref{groupoids-lemma-construct-quasi-coherent} の状況で、忘却関手を
+$$
+F : \QCoh(U, R, s, t, c) \to \QCoh(\mathcal{O}_U),\quad
+(\mathcal{F}, \beta) \mapsto \mathcal{F}
+$$
+と書き、補題で構成した右随伴を
+$$
+G : \QCoh(\mathcal{O}_U) \to \QCoh(U, R, s, t, c),\quad
+\mathcal{G} \mapsto (s_*t^*\mathcal{G}, \alpha)
+$$
+と書く。随伴の単位 $\eta : \text{id} \to G \circ F$ を
+$(\mathcal{F}, \beta)$ で評価したものは写像
+$$
+\mathcal{F} \to s_*s^*\mathcal{F} \xrightarrow{\beta^{-1}} s_*t^*\mathcal{F}
+$$
+で与えられる。確認は省略する。
+\end{remark}
+
+\begin{lemma}
+\label{groupoids-lemma-push-pull}
+$f : Y \to X$ をスキームの射とする。$\mathcal{F}$ を準連接
+$\mathcal{O}_X$-加群、$\mathcal{G}$ を準連接 $\mathcal{O}_Y$-加群とし、
+$\varphi : \mathcal{G} \to f^*\mathcal{F}$ を加群の写像とする。次を仮定する。
+\begin{enumerate}
+\item $\varphi$ は単射である。
+\item $f$ は準コンパクト、準分離的、平坦かつ全射である。
+\item $X$, $Y$ は局所 Noether である。
+\item $\mathcal{G}$ は連接 $\mathcal{O}_Y$-加群である。
+\end{enumerate}
+このとき、引き戻し
+$$
+\xymatrix{
+\mathcal{F} \ar[r] & f_*f^*\mathcal{F} \\
+\mathcal{F} \cap f_*\mathcal{G} \ar[u] \ar[r] &
+f_*\mathcal{G} \ar[u]
+}
+$$
+として定義される $\mathcal{F} \cap f_*\mathcal{G}$ は連接
+$\mathcal{O}_X$-加群である。
+\end{lemma}
+
+\begin{proof}
+『スキームのコホモロジー』補題 \ref{coherent-lemma-coherent-Noetherian} の
+連接加群の特徴付けと、連接加群が $\QCoh(\mathcal{O}_X)$ の Serre 部分圏をなす
+ことを自由に用いる。後者については『スキームのコホモロジー』補題
+\ref{coherent-lemma-coherent-Noetherian-quasi-coherent-sub-quotient} を参照せよ。
+$f$ が切断 $\sigma$ をもつならば、$\mathcal{F} \cap f_*\mathcal{G}$ は
+$\sigma^*\mathcal{G} \to \sigma^*f^*\mathcal{F} = \mathcal{F}$ の像に含まれるので
+連接である。一般に $\mathcal{F} \cap f_*\mathcal{G}$ が連接であることを示すには、
+$f^*(\mathcal{F} \cap f_*\mathcal{G})$ が連接であることを示せば十分である
+（『降下』補題 \ref{descent-lemma-finite-type-descends} を参照）。$f$ は平坦なので、
+これは $f^*\mathcal{F} \cap f^*f_*\mathcal{G}$ に等しい。$f$ は平坦、
+準コンパクトかつ準分離的なので、射影 $p, q : Y \times_X Y \to Y$ に対し
+$f^*f_*\mathcal{G} = p_*q^*\mathcal{G}$ である。『スキームのコホモロジー』補題
+\ref{coherent-lemma-flat-base-change-cohomology} を参照せよ。$p$ は切断をもつので
+結論を得る。
+\end{proof}
+
+\noindent
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上のスキームにおける亜群とし、
+$U$ は局所 Noether であると仮定する。以下の補題では、$(U, R, s, t, c)$ 上の
+準連接層 $(\mathcal{F}, \alpha)$ が {\it 連接}であるとは、$\mathcal{F}$ が
+連接 $\mathcal{O}_U$-加群であることをいう。
+
+\begin{lemma}
+\label{groupoids-lemma-colimit-coherent}
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。次を仮定する。
+\begin{enumerate}
+\item $U$, $R$ は Noether である。
+\item $s, t$ は平坦、準コンパクトかつ準分離的である。
+\end{enumerate}
+このとき $(U, R, s, t, c)$ 上の任意の準連接加群
+$(\mathcal{F}, \beta)$ は連接加群のフィルター付き余極限である。
+\end{lemma}
+
+\begin{proof}
+局所 Noether スキーム上の連接加群に関する『スキームのコホモロジー』補題
+\ref{coherent-lemma-coherent-Noetherian} の特徴付けを、以下断りなく用いる。
+『スキームのコホモロジー』補題
+\ref{coherent-lemma-directed-colimit-coherent} により、これを連接部分加群
+$\mathcal{H}_i \subset \mathcal{F}$ のフィルター付き余極限
+$\mathcal{F} = \colim \mathcal{H}_i$ と書ける。$U$ 上の準連接層 $\mathcal{H}$ に対し、
+補題 \ref{groupoids-lemma-construct-quasi-coherent} の $(U, R, s, t, c)$ 上の準連接層を
+$(s_*t^*\mathcal{H}, \alpha)$ と書く。注意 \ref{groupoids-remark-adjunction-map} の
+$\QCoh(U, R, s, t, c)$ における随伴写像
+$(\mathcal{F}, \beta) \to (s_*t^*\mathcal{F}, \alpha)$ を考え、
+$$
+(\mathcal{F}_i, \beta_i) =
+(\mathcal{F}, \beta)
+\times_{(s_*t^*\mathcal{F}, \alpha)}
+(s_*t^*\mathcal{H}_i, \alpha)
+$$
+を $\QCoh(U, R, s, t, c)$ において定める。補題
+\ref{groupoids-lemma-abelian} の証明により、$U$ への制限は
+$\QCoh(U, R, s, t, c)$ 上の完全関手なので、引き戻し図式
+$$
+\xymatrix{
+\mathcal{F} \ar[r] & s_*t^*\mathcal{F} \\
+\mathcal{F}_i \ar[r] \ar[u] & s_*t^*\mathcal{H}_i \ar[u]
+}
+$$
+を得る。すなわち $\mathcal{F}_i = \mathcal{F} \cap s_*t^*\mathcal{H}_i$ である。
+注意 \ref{groupoids-remark-adjunction-map} の随伴写像の記述により、この図式は
+$$
+\xymatrix{
+\mathcal{F} \ar[r] & s_*s^*\mathcal{F} \\
+\mathcal{F}_i \ar[r] \ar[u] & s_*t^*\mathcal{H}_i \ar[u]
+}
+$$
+と同型である。ここで右の垂直矢印は、写像
+$$
+t^*\mathcal{H}_i \to t^*\mathcal{F} \xrightarrow{\beta} s^*\mathcal{F}
+$$
+に $s_*$ を適用して得られる。この矢印は $t$ が平坦なので単射である。
+したがって補題 \ref{groupoids-lemma-push-pull} により $\mathcal{F}_i$ は連接である。
+最後に、$s$ は準コンパクトかつ準分離的なので、$s_*$ は余極限と可換する
+（『スキームのコホモロジー』補題
+\ref{coherent-lemma-colimit-cohomology} を参照）。よって
+$s_*t^*\mathcal{F} = \colim s_*t^*\mathcal{H}_i$ であり、所望どおり
+$(\mathcal{F}, \beta) = \colim (\mathcal{F}_i, \beta_i)$ となる。
+\end{proof}
+
+\noindent
+体上の亜群を扱う際に有用な興味深い補題を挙げる。実際、これは代数群の任意の
+表現が有限次元表現の余極限であることを示す標準的な議論である。
+
+\begin{lemma}
+\label{groupoids-lemma-colimit-finite-type}
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。次を仮定する。
+\begin{enumerate}
+\item $U$, $R$ はアフィンである。
+\item 元 $e_i \in \mathcal{O}_R(R)$ が存在し、任意の元
+$g \in \mathcal{O}_R(R)$ は、ある $f_i \in \mathcal{O}_U(U)$ により
+$\sum s^*(f_i)e_i$ と一意に書ける。
+\end{enumerate}
+このとき $(U, R, s, t, c)$ 上の任意の準連接加群
+$(\mathcal{F}, \alpha)$ は有限型準連接加群のフィルター付き余極限である。
+\end{lemma}
+
+\begin{proof}
+仮定は、$\mathcal{O}_R(R)$ が $s$ を通じて、基底 $e_i$ をもつ自由
+$\mathcal{O}_U(U)$-加群であることを意味する。したがって任意の準連接
+$\mathcal{O}_U$-加群 $\mathcal{G}$ に対し
+$s^*\mathcal{G}(R) = \bigoplus_i \mathcal{G}(U)e_i$ である。
+$s$ による切断の引き戻しを $s(-)$ と書き、他の射についても同様に書く。
+$(\mathcal{F}, \alpha)$ を $(U, R, s, t, c)$ 上の準連接加群とし、
+$\sigma \in \mathcal{F}(U)$ とする。上により
+$$
+\alpha(t(\sigma)) = \sum s(\sigma_i) e_i
+$$
+と書ける。ただし $\sigma_i \in \mathcal{F}(U)$ は一意であり、もちろん有限個を
+除いて零である。また $R \times_{s, U, t}R$ 上の関数として
+$$
+c(e_i) = \sum \text{pr}_1(f_{ij}) \text{pr}_0(e_j)
+$$
+と書ける。定義 \ref{groupoids-definition-groupoid-module} の図式の可換性は
+$$
+\sum \text{pr}_1(\alpha(t(\sigma_i))) \text{pr}_0(e_i)
+=
+\sum \text{pr}_1(s(\sigma_i)f_{ij}) \text{pr}_0(e_j)
+$$
+を意味する（計算は省略する）。$\text{pr}_0(e_l)$ の係数を取り出すと
+$\alpha(t(\sigma_l)) = \sum s(\sigma_i)f_{il}$ を得る。したがって元
+$\sigma_i$ で生成される部分加群 $\mathcal{G} \subset \mathcal{F}$ は、
+$\alpha$ で保たれる有限型準連接加群を定める。よってこれは
+$\QCoh(U, R, s, t, c)$ における $\mathcal{F}$ の部分対象である。この部分加群は
+$\sigma$ を含む（第一の関係を $e$ で引き戻せば分かる）。したがって結論を得る。
+\end{proof}
+
+\noindent
+読者には本節の残りを飛ばすことを勧める。$S$ をスキームとし、
+$(U, R, s, t, c)$ を $S$ 上のスキームにおける亜群とする。$\kappa$ を基数とする。
+以下では、$(U, R, s, t, c)$ 上の準連接層 $(\mathcal{F}, \alpha)$ が
+$\kappa$-生成であるとは、$\mathcal{F}$ が $\kappa$-生成
+$\mathcal{O}_U$-加群であることをいう。『性質』定義
+\ref{properties-definition-kappa-generated} を参照せよ。
+
+\begin{lemma}
+\label{groupoids-lemma-set-of-iso-classes}
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとし、$\kappa$ を基数とする。
+集合 $T$ と、$(U, R, s, t, c)$ 上の $\kappa$-生成準連接加群の族
+$(\mathcal{F}_t, \alpha_t)_{t \in T}$ であって、$(U, R, s, t, c)$ 上の任意の
+$\kappa$-生成準連接加群が $(\mathcal{F}_t, \alpha_t)$ のいずれかと同型となる
+ものが存在する。
+\end{lemma}
+
+\begin{proof}
+$U$ 上の各準連接加群 $\mathcal{F}$ に対し、$(\mathcal{F}, \alpha)$ が
+$(U, R, s, t, c)$ 上の準連接加群となるような写像
+$\alpha : t^*\mathcal{F} \to s^*\mathcal{F}$ の集合（空でもよい）がある。
+『性質』補題 \ref{properties-lemma-set-of-iso-classes} により、$\kappa$-生成な
+準連接 $\mathcal{O}_U$-加群の同型類は集合をなす。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-colimit-kappa}
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとし、$s, t$ は平坦であると仮定する。
+ある基数 $\kappa$ が存在して、$(U, R, s, t, c)$ 上の任意の準連接加群
+$(\mathcal{F}, \alpha)$ は、その $\kappa$-生成準連接部分加群の有向余極限となる。
+\end{lemma}
+
+\begin{proof}
+補題の主張と本証明において、準連接加群 $(\mathcal{F}, \alpha)$ の
+{\it 部分加群}とは、$s^*\mathcal{F}$ の部分層として
+$\alpha(t^*\mathcal{G}) = s^*\mathcal{G}$ を満たす準連接部分加群
+$\mathcal{G} \subset \mathcal{F}$ をいう。$s, t$ は平坦なので、引き戻し
+$s^*$ と $t^*$ は完全、すなわち部分層を保つから、これは意味をもつ。
+証明は『性質』補題 \ref{properties-lemma-colimit-kappa} の証明を繰り返す。
+まずそちらの証明を読むことを強く勧める。
+
+\medskip\noindent
+アフィン開被覆 $U = \bigcup_{i \in I} U_i$ を選ぶ。各対 $i, j$ に対し
+アフィン開被覆
+$$
+U_i \cap U_j = \bigcup\nolimits_{k \in I_{ij}} U_{ijk}
+\quad\text{and}\quad
+s^{-1}(U_i) \cap t^{-1}(U_j) = \bigcup\nolimits_{k \in J_{ij}} W_{ijk}.
+$$
+を選ぶ。$U_i = \Spec(A_i)$, $U_{ijk} = \Spec(A_{ijk})$,
+$W_{ijk} = \Spec(B_{ijk})$ と書く。$\kappa$ を、集合 $I$, $I_{ij}$, $J_{ij}$ の
+いずれの濃度以上でもある（$\geq$）任意の無限基数とする。
+
+\medskip\noindent
+$(\mathcal{F}, \alpha)$ を $(U, R, s, t, c)$ 上の準連接加群とする。
+$M_i = \mathcal{F}(U_i)$, $M_{ijk} = \mathcal{F}(U_{ijk})$ とおく。このとき
+$$
+M_i \otimes_{A_i} A_{ijk} = M_{ijk} = M_j \otimes_{A_j} A_{ijk}
+$$
+であり、$\alpha$ は同型
+$$
+\alpha|_{W_{ijk}} :
+M_i \otimes_{A_i, t} B_{ijk}
+\longrightarrow
+M_j \otimes_{A_j, s} B_{ijk}
+$$
+を与える。『スキーム』補題 \ref{schemes-lemma-widetilde-pullback} を参照せよ。
+選択公理を用いて写像
+$$
+(i, j, k, m) \mapsto S(i, j, k, m)
+$$
+を選ぶ。これは各 $i, j \in I$、$k \in I_{ij}$ または $k \in J_{ij}$、および
+$m \in M_i$ に、次を満たす有限部分集合
+$S(i, j, k, m) \subset M_j$ を対応させる。
+$$
+m \otimes 1 = \sum\nolimits_{m' \in S(i, j, k, m)} m' \otimes a_{m'}
+\quad\text{or}\quad
+\alpha(m \otimes 1) = \sum\nolimits_{m' \in S(i, j, k, m)} m' \otimes b_{m'}
+$$
+ここで等式は $M_{ijk}$ におけるもので、ある
+$a_{m'} \in A_{ijk}$ または $b_{m'} \in B_{ijk}$ を用いる。さらに
+$k \in I_{ij}$ のとき、すべての $i, j = i, k, m$ に対して
+$S(i, i, k, m) = \{m\}$ と約束する。このような族 $S(i, j, k, m)$ を固定する。
+
+\medskip\noindent
+濃度が高々 $\kappa$ の部分集合 $S_i \subset M_i$ の族
+$\mathcal{S} = (S_i)_{i \in I}$ が与えられたとき、$\mathcal{S}' = (S'_i)$ を
+$$
+S'_j = \bigcup\nolimits_{(i, j, k, m)\text{ such that }m \in S_i}
+S(i, j, k, m)
+$$
+で定める。$S_i \subset S'_i$ である。$S'_i$ は、濃度が高々 $\kappa$ の集合を
+添字とする有限集合の和集合なので、濃度が高々 $\kappa$ である。
+$\mathcal{S}^{(0)} = \mathcal{S}$, $\mathcal{S}^{(1)} = \mathcal{S}'$ とおき、
+帰納的に $\mathcal{S}^{(n + 1)} = (\mathcal{S}^{(n)})'$ とおく。さらに
+$\mathcal{S}^{(\infty)} = \bigcup_{n \geq 0} \mathcal{S}^{(n)}$ とおく。
+$\mathcal{S}^{(\infty)} = (S^{(\infty)}_i)$ と書くと、任意の元
+$m \in S^{(\infty)}_i$ に対し、$m$ の $M_{ijk}$ における像は、
+$m' \in S_j^{(\infty)}$ を
+用いて有限和 $\sum m' \otimes a_{m'}$ と書ける。したがって
+$$
+N_i = A_i\text{-submodule of }M_i\text{ generated by }S^{(\infty)}_i
+$$
+とおけば
+$$
+N_i \otimes_{A_i} A_{ijk} = N_j \otimes_{A_j} A_{ijk}
+\quad\text{and}\quad
+\alpha(N_i \otimes_{A_i, t} B_{ijk}) = N_j \otimes_{A_j, s} B_{ijk}
+$$
+が $M_{ijk}$ または $M_j \otimes_{A_j, s} B_{ijk}$ の部分加群として成り立つ。
+したがって、$\mathcal{G}(U_i) = N_i$ かつ $s^*\mathcal{F}$ の部分加群として
+$\alpha(t^*\mathcal{G}) = s^*\mathcal{G}$ を満たす準連接部分加群
+$\mathcal{G} \subset \mathcal{F}$ が存在する。言い換えれば
+$(\mathcal{G}, \alpha|_{t^*\mathcal{G}})$ は $(\mathcal{F}, \alpha)$ の部分加群である。
+さらに構成により $\mathcal{G}$ は $\kappa$-生成である。
+
+\medskip\noindent
+$\{(\mathcal{G}_t, \alpha_t)\}_{t \in T}$ を $(\mathcal{F}, \alpha)$ の
+$\kappa$-生成準連接部分加群の集合とする。$t, t' \in T$ ならば、
+$\mathcal{G}_t + \mathcal{G}_{t'}$ も、写像
+$\mathcal{G}_t \oplus \mathcal{G}_{t'} \to \mathcal{F}$ の像であるから
+$\kappa$-生成準連接部分加群である。したがって包含関係で順序付けたこの系は有向である。
+上の議論により、$U_i$ 上の $\mathcal{F}$ の任意の切断は、いずれかの
+$\mathcal{G}_t$ に属する（与えられた切断が $S_i$ の元となるような
+$\mathcal{S}$ から始めればよい）。したがって所望どおり
+$\colim_t \mathcal{G}_t \to \mathcal{F}$ は単射かつ全射である。
+\end{proof}
+
+
+
+
+
+\section{亜群と群スキーム}
+\label{groupoids-section-groupoids-group-schemes}
+
+\noindent
+群 $G$ の集合 $V$ への作用 $a$ から亜群を構成する方法は多数ある。ここでは
+元 $g \in G$ を、始域が $v$、終域が $a(g, v)$ である矢印とみなす方法を選ぶ。
+これにより、スキームの群作用について次の構成を得る。
+
+\begin{lemma}
+\label{groupoids-lemma-groupoid-from-action}
+$S$ をスキーム、$Y$ を $S$ 上のスキームとする。$(G, m)$ を $Y$ 上の
+群スキームとし、その単位元を $e_G$、逆元を $i_G$ とする。$X/Y$ を $Y$ 上の
+スキームとし、$a : G \times_Y X \to X$ を $G$ の $X/Y$ への作用とする。
+このとき、次のようにして $S$ 上の亜群スキーム $(U, R, s, t, c, e, i)$ を得る。
+\begin{enumerate}
+\item $U = X$, $R = G \times_Y X$ とおく。
+\item $s : R \to U$ を $(g, x) \mapsto x$ とおく。
+\item $t : R \to U$ を $(g, x) \mapsto a(g, x)$ とおく。
+\item $c : R \times_{s, U, t} R \to R$ を
+$((g, x), (g', x')) \mapsto (m(g, g'), x')$ とおく。
+\item $e : U \to R$ を $x \mapsto (e_G(x), x)$ とおく。
+\item $i : R \to R$ を $(g, x) \mapsto (i_G(g), a(g, x))$ とおく。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：集合の水準で成り立つことを示せば十分である。そのため、
+$g$ を $v$ から $a(g, v)$ への矢印とみなす補題の前の記述を用いよ。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-action-groupoid-modules}
+$S$ をスキーム、$Y$ を $S$ 上のスキームとし、$(G, m)$ を $Y$ 上の
+群スキームとする。$X$ を $Y$ 上のスキームとし、
+$a : G \times_Y X \to X$ を $Y$ 上の $G$ の $X$ への作用とする。
+$(U, R, s, t, c)$ を補題 \ref{groupoids-lemma-groupoid-from-action} で構成した
+亜群スキームとする。対応 $(\mathcal{F}, \alpha) \mapsto (\mathcal{F}, \alpha)$ は、
+$G$-同変 $\mathcal{O}_X$-加群の圏と、$(U, R, s, t, c)$ 上の準連接加群の圏との
+間の圏同値を定める。
+\end{lemma}
+
+\begin{proof}
+射 $R = G \times_Y X \to X$ として $t = a$ および $s = \text{pr}_1$ なので、
+この主張は意味をもつ。定義 \ref{groupoids-definition-equivariant-module} および
+\ref{groupoids-definition-groupoid-module} を参照せよ。補題
+\ref{groupoids-lemma-groupoid-from-action} の翻訳を用いると、二つの定義の可換性条件は
+正確に一致する。
+\end{proof}
+
+
+
+
+
+\section{安定化群スキーム}
+\label{groupoids-section-stabilizer}
+
+\noindent
+亜群スキームから次のように群スキームを得る。
+
+\begin{lemma}
+\label{groupoids-lemma-groupoid-stabilizer}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群とする。Cartesian 図式
+$$
+\xymatrix{
+G \ar[r] \ar[d] & R \ar[d]^{j = (t, s)} \\
+U \ar[r]^-{\Delta} & U \times_S U
+}
+$$
+で定義されるスキーム $G$ は $U$ 上の群スキームであり、その合成則 $m$ は
+合成則 $c$ から誘導される。
+\end{lemma}
+
+\begin{proof}
+亜群圏では、任意の対象の自己射の集合が群をなすからである。
+\end{proof}
+
+\noindent
+$\Delta$ ははめ込みなので、$G = j^{-1}(\Delta_{U/S})$ は $R$ の局所閉部分スキーム
+である。このようにみると、構造射 $j^{-1}(\Delta_{U/S}) \to U$ は $s$ または
+$t$ のいずれからも誘導され（両者は同じである）、$m$ は $c$ から誘導される。
+
+\begin{definition}
+\label{groupoids-definition-stabilizer-groupoid}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群とする。群スキーム
+$j^{-1}(\Delta_{U/S})\to U$ を {\it 亜群スキーム $(U, R, s, t, c)$ の安定化群}
+という。
+\end{definition}
+
+\noindent
+文献では、安定化群スキームをしばしば $S$ と書く（おそらく stabilizer が
+``s'' で始まるためである）。ここでは既に基礎スキームに $S$ を用いているので、
+この記法は使えない。
+
+\begin{lemma}
+\label{groupoids-lemma-groupoid-action-stabilizer}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群とし、$G/U$ をその安定化群と
+する。射 $t : R \to U$ により $R$ を $U$ 上のスキームとみたものを $R_t/U$ と
+書く。合成則 $c$ から誘導される標準的な左作用
+$$
+a : G \times_U R_t \longrightarrow R_t
+$$
+がある。
+\end{lemma}
+
+\begin{proof}
+$T/S$ 上の点で書けば、$a(g, r) = c(g, r)$ と定める。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-groupoid-action-stabilizer-pseudo-torsor}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとし、$G$ を $R$ の
+安定化群スキームとする。$U \times_S U$ 上の群スキームとして
+$$
+G_0 = G \times_{U, \text{pr}_0} (U \times_S U) = G \times_S U
+$$
+とおく。補題 \ref{groupoids-lemma-groupoid-action-stabilizer} の $G$ の $R$ への作用は、
+$U \times_S U$ 上の $G_0$ の $R$ への作用を誘導し、$R$ を
+$U \times_S U$ 上の擬 $G_0$-トーサーにする。
+\end{lemma}
+
+\begin{proof}
+亜群圏 $\mathcal{C}$ において、集合 $\Mor_\mathcal{C}(x, y)$ は群
+$\Mor_\mathcal{C}(y, y)$ の下で主等質集合だからである。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-fibres-j}
+$S$ をスキーム、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$p \in U \times_S U$ を点とする。$R_p$ を
+$j = (t, s) : R \to U \times_S U$ のスキーム論的ファイバーと書く。
+$R_p \not = \emptyset$ ならば、作用
+$$
+G_{0, \kappa(p)} \times_{\kappa(p)} R_p \longrightarrow R_p
+$$
+（補題 \ref{groupoids-lemma-groupoid-action-stabilizer-pseudo-torsor} を参照）は、$R_p$ を
+$\kappa(p)$ 上の $G_{\kappa(p)}$-トーサーにする。
+\end{lemma}
+
+\begin{proof}
+主張で引用した補題により、この作用は擬トーサーである。また $R_p$ が空スキーム
+でなければ、$\{R_p \to p\}$ はこの擬トーサーを自明化する fpqc 被覆である。
+\end{proof}
+
+
+
+
+
+
+
+\section{亜群の制限}
+\label{groupoids-section-restrict-groupoid}
+
+\noindent
+（通常の）亜群
+$\mathcal{C} = (\text{Ob}, \text{Arrows}, s, t, c)$
+を考える。集合の写像 $g : \text{Ob}' \to \text{Ob}$ が与えられているとする。
+このとき、$\text{Ob}'$ の元 $x', y'$ の間の射を、$\mathcal{C}$ における
+$g(x'), g(y')$ の間の射とみなすことにより、亜群
+$\mathcal{C}' = (\text{Ob}', \text{Arrows}', s', t', c')$
+を構成できる。言い換えれば、
+$$
+\text{Arrows}' =
+\text{Ob}'
+\times_{g, \text{Ob}, t}
+\text{Arrows}
+\times_{s, \text{Ob}, g}
+\text{Ob}'.
+$$
+とおき、$s'$, $t'$, $c'$ には明らかなものを選ぶ。標準的な関手
+$\mathcal{C}' \to \mathcal{C}$ があり、これは充満忠実であるが、本質的全射とは
+限らない。この関手 $\mathcal{C}' \to \mathcal{C}$ を備えた亜群
+$\mathcal{C}'$ を、亜群 $\mathcal{C}$ の $\text{Ob}'$ への
+{\it 制限}という。
+
+\begin{lemma}
+\label{groupoids-lemma-restrict-groupoid}
+$S$ をスキームとする。$(U, R, s, t, c)$ を $S$ 上の亜群スキームとし、
+$g : U' \to U$ をスキームの射とする。次の図式を考える。
+$$
+\xymatrix{
+R' \ar[d] \ar[r] \ar@/_3pc/[dd]_{t'} \ar@/^1pc/[rr]^{s'}&
+R \times_{s, U} U' \ar[r] \ar[d] &
+U' \ar[d]^g \\
+U' \times_{U, t} R \ar[d] \ar[r] &
+R \ar[r]^s \ar[d]_t &
+U \\
+U' \ar[r]^g &
+U
+}
+$$
+ここで、すべての正方形はファイバー積の正方形である。このとき、標準的な合成則
+$c' : R' \times_{s', U', t'} R' \to R'$ が存在し、
+$(U', R', s', t', c')$ は $S$ 上の亜群スキームとなり、かつ
+$U' \to U$, $R' \to R$ は $S$ 上の亜群スキームの射
+$(U', R', s', t', c') \to (U, R, s, t, c)$ を定める。さらに、$S$ 上の任意の
+スキーム $T$ に対し、亜群の関手
+$$
+(U'(T), R'(T), s', t', c') \to (U(T), R(T), s, t, c)
+$$
+は、写像 $U'(T) \to U(T)$ による $(U(T), R(T), s, t, c)$ の（上で述べた意味での）
+制限である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{groupoids-definition-restrict-groupoid}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$g : U' \to U$ をスキームの射とする。補題 \ref{groupoids-lemma-restrict-groupoid} で構成した
+亜群の射 $(U', R', s', t', c') \to (U, R, s, t, c)$ を
+{\it $(U, R, s, t, c)$ の $U'$ への制限}という。この場合、しばしば
+$R' = R|_{U'}$ と書く。
+\end{definition}
+
+\begin{lemma}
+\label{groupoids-lemma-restrict-groupoid-relation}
+定義 \ref{groupoids-definition-restrict-groupoid} および \ref{groupoids-definition-restrict-relation}
+で定めた亜群の制限と（前）同値関係の制限という概念は、補題
+\ref{groupoids-lemma-groupoid-pre-equivalence} および
+\ref{groupoids-lemma-equivalence-groupoid} の構成を介して一致する。
+\end{lemma}
+
+\begin{proof}
+ここで述べているのは、補題 \ref{groupoids-lemma-restrict-groupoid} の $R'$ が
+$$
+R' = (U' \times_S U')\times_{U \times_S U} R
+\longrightarrow
+U' \times_S U'
+$$
+にも等しいということである。実際、補題をこの形で述べた方が明瞭だったかもしれない。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-restrict-stabilizer}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$g : U' \to U$ をスキームの射とし、$(U', R', s', t', c')$ を $g$ による
+$(U, R, s, t, c)$ の制限とする。$G$ を $(U, R, s, t, c)$ の安定化群、
+$G'$ を $(U', R', s', t', c')$ の安定化群とする。このとき $G'$ は $g$ による
+$G$ の基底変換である。すなわち、標準的な同一視
+$G' = U' \times_{g, U} G$ が存在する。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+
+\section{不変部分スキーム}
+\label{groupoids-section-invariant}
+
+\noindent
+この節では、不変部分スキームという概念を簡単に論じる。
+
+\begin{definition}
+\label{groupoids-definition-invariant-open}
+$(U, R, s, t, c)$ を基礎スキーム $S$ 上の亜群スキームとする。
+\begin{enumerate}
+\item 部分集合 $W \subset U$ が{\it 集合論的に $R$-不変}であるとは、
+$t(s^{-1}(W)) \subset W$ が成り立つことをいう。
+\item 開集合 $W \subset U$ が{\it $R$-不変}であるとは、
+$t(s^{-1}(W)) \subset W$ が成り立つことをいう。
+\item 閉部分スキーム $Z \subset U$ が{\it $R$-不変}であるとは、
+$t^{-1}(Z) = s^{-1}(Z)$ が成り立つことをいう。ここではスキーム論的逆像を
+用いている。《スキーム》定義
+\ref{schemes-definition-inverse-image-closed-subscheme} を参照せよ。
+\item スキームのモノ射 $T \to U$ が{\it $R$-不変}であるとは、$R$ 上の
+スキームとして $T \times_{U, t} R = R \times_{s, U} T$ が成り立つことをいう。
+\end{enumerate}
+\end{definition}
+
+\noindent
+部分集合および開部分スキーム $W \subset U$ について、$R$-不変性は、$R$ の
+部分集合として $s^{-1}(W) = t^{-1}(W)$ が成り立つこととも同値である。
+$W \subset U$ が $R$-同変な開部分スキームならば、$R$ の $W$ への制限は
+単に $R_W = s^{-1}(W) = t^{-1}(W)$ である。同様に、$Z \subset U$ が
+$R$-不変な閉部分スキームならば、$R$ の $Z$ への制限は単に
+$R_Z = s^{-1}(Z) = t^{-1}(Z)$ である。
+
+\begin{lemma}
+\label{groupoids-lemma-constructing-invariant-opens}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+\begin{enumerate}
+\item 任意の部分集合 $W \subset U$ に対し、部分集合 $t(s^{-1}(W))$ は集合論的に
+$R$-不変である。
+\item $s$ と $t$ が開写像ならば、任意の開集合 $W \subset U$ に対して、開集合
+$t(s^{-1}(W))$ は $R$-不変な開部分スキームである。
+\item $s$ と $t$ が開かつ準コンパクトならば、$U$ は $R$-不変な準コンパクト
+開部分スキームからなる開被覆をもつ。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) は補題 \ref{groupoids-lemma-pre-equivalence-equivalence-relation-points} および
+\ref{groupoids-lemma-groupoid-pre-equivalence} から従う。すなわち、$t(s^{-1}(W))$ は
+$W$ の点と同値な $U$ の点全体の集合である。次に、$s$ と $t$ が開写像で、
+$W \subset U$ が開であると仮定する。$s$ が開写像なので、集合
+$W' = t(s^{-1}(W))$ は $U$ の開部分集合である。最後に、$s$, $t$ がともに
+開かつ準コンパクトであると仮定する。このとき $W \subset U$ が準コンパクトな
+開集合ならば、$W' = t(s^{-1}(W))$ も準コンパクトな開集合であり、上の議論により
+不変である。$W$ を $U$ のすべてのアフィン開集合にわたって動かせば (3) を得る。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-first-observation}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$s$ と $t$ が準コンパクトかつ平坦で、$U$ が準分離的であると仮定する。
+$W \subset U$ を準コンパクトな開集合とする。このとき $t(s^{-1}(W))$ は、
+$U$ の準コンパクトな開部分集合からなる空でない族の共通部分である。
+\end{lemma}
+
+\begin{proof}
+$s^{-1}(W)$ は $R$ の準コンパクトな開集合であることに注意せよ。連続写像として、
+$t$ は準コンパクトな部分集合 $s^{-1}(W)$ を準コンパクトな部分集合
+$t(s^{-1}(W))$ に写す。$t$ は平坦で、$s^{-1}(W)$ は一般化に関して閉じているので、
+$t(s^{-1}(W))$ もそうである（《射》補題
+\ref{morphisms-lemma-generalizations-lift-flat} および《位相》補題
+\ref{topology-lemma-lift-specializations-images} を参照）。$t(s^{-1}(W))$ を含む
+準コンパクトな開集合 $W' \subset U$ を選ぶ。《性質》補題
+\ref{properties-lemma-quasi-compact-quasi-separated-spectral} により、$W'$ は
+スペクトル空間である（ここで $U$ が準分離的であることを用いる）。したがって、
+$t(s^{-1}(W)) \subset W'$ に《位相》補題
+\ref{topology-lemma-make-spectral-space} を適用すれば、この補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-second-observation}
+補題 \ref{groupoids-lemma-first-observation} と同じ仮定および記法を用いる。このとき、
+$W \subset V \subset W' \subset U$ を満たす $R$-不変な開集合 $V \subset U$ と
+準コンパクトな開集合 $W'$ が存在する。
+\end{lemma}
+
+\begin{proof}
+$E = t(s^{-1}(W))$ とおく。$E$ は集合論的に $R$-不変であった（補題
+\ref{groupoids-lemma-constructing-invariant-opens}）。補題 \ref{groupoids-lemma-first-observation} により、
+$E$ を含む準コンパクトな開集合 $W'$ が存在する。$Z = U \setminus W'$ とおき、
+$T = t(s^{-1}(Z))$ を考える。$Z \subset T$ である。また
+$s^{-1}(E) = t^{-1}(E)$ は $s^{-1}(Z)$ と交わらないので、
+$E \cap T = \emptyset$ である。$T$ は閉部分集合 $s^{-1}(Z) \subset R$ の
+準コンパクト射 $t : R \to U$ による像だから、閉包 $\overline{T}$ の任意の点
+$\xi$ は $T$ のある点の特殊化である。《射》補題
+\ref{morphisms-lemma-reach-points-scheme-theoretic-image} を参照せよ（また、スキーム論的
+像が像の閉包であることについては《射》補題
+\ref{morphisms-lemma-quasi-compact-scheme-theoretic-image} を参照せよ）。
+$\xi' \in T$ かつ $\xi' \leadsto \xi$ と書く。$r \in R$ かつ
+$s(r) = \xi$ と仮定する。$s$ は平坦なので、$s(r') = \xi'$ を満たす特殊化
+$r' \leadsto r$ を $R$ の中にとれる（《射》補題
+\ref{morphisms-lemma-generalizations-lift-flat}）。すると $t(r') \leadsto t(r)$ である。
+補題 \ref{groupoids-lemma-constructing-invariant-opens} により $T$ は集合論的に不変だから、
+$t(r') \in T$ である。したがって、$\overline{T}$ は集合論的に $R$-不変な閉部分集合
+であり、$V = U \setminus \overline{T}$ が求める開集合である。これは $W'$ に
+含まれるので、証明が完了する。
+\end{proof}
+
+
+
+
+\section{商層}
+\label{groupoids-section-quotient-sheaves}
+
+\noindent
+$\tau \in \{Zariski, \etale, fppf, smooth, syntomic\}$ とし、$S$ をスキームとする。
+$j : R \to U \times_S U$ を $S$ 上の前関係とする。$U, R, S$ は
+$\tau$-サイト $\Sch_\tau$ の対象であるとする（《位相》節
+\ref{topologies-section-procedure} を参照）。このとき、関手
+$$
+h_U, h_R :
+(\Sch/S)_\tau^{opp}
+\longrightarrow
+\textit{Sets}.
+$$
+を考えることができる。これらは層である。《降下》補題
+\ref{descent-lemma-fpqc-universal-effective-epimorphisms} を参照せよ。
+射 $j$ は写像 $j : h_R \to h_U \times h_U$ を誘導する。各対象
+$T \in \Ob((\Sch/S)_\tau)$ に対して、$j(T) : R(T) \to U(T) \times U(T)$ により
+生成される同値関係 $\sim_T$ をとり、その商を考えることができる。したがって、前層
+\begin{equation}
+\label{groupoids-equation-quotient-presheaf}
+(\Sch/S)_\tau^{opp}
+\longrightarrow
+\textit{Sets}, \quad
+T \longmapsto U(T)/\sim_T
+\end{equation}
+を得る。
+
+\begin{definition}
+\label{groupoids-definition-quotient-sheaf}
+$\tau$, $S$ および前関係 $j : R \to U \times_S U$ を上のとおりとする。この状況で、
+$j$ に付随する{\it 商層 $U/R$} とは、前層
+(\ref{groupoids-equation-quotient-presheaf}) の $\tau$-位相における層化をいう。
+$j : R \to U \times_S U$ が補題 \ref{groupoids-lemma-groupoid-from-action} のように
+群スキーム $G/S$ の $U$ への作用から得られる場合には、商層を $U/G$ と書くこともある。
+\end{definition}
+
+\noindent
+これは、図式
+$$
+\xymatrix{
+h_R \ar@<1ex>[r] \ar@<-1ex>[r] &
+h_U \ar[r] &
+U/R
+}
+$$
+が $(\Sch/S)_\tau$ 上の集合の層の圏における余等化子図式であることをちょうど意味する。
+米田埋め込みを用いて、$(\Sch/S)_\tau$ を $(\Sch/S)_\tau$ 上の層の充満部分圏と
+みなすことができ、したがってスキームを表現可能関手と同一視できる。この記法の濫用により、
+上の図式をしばしば単に
+$$
+\xymatrix{
+R \ar@<1ex>[r]^s \ar@<-1ex>[r]_t &
+U \ar[r] &
+U/R
+}
+$$
+と描く。亜群または同値関係の商層を考えるときは、主として fppf 位相を用いる。
+
+\begin{definition}
+\label{groupoids-definition-representable-quotient}
+定義 \ref{groupoids-definition-quotient-sheaf} の状況において、層 $U/R$ が表現可能であるとき、
+前関係 $j$ は{\it 表現可能な商}をもつという。$j = (t, s)$ に対する商 $U/R$ が
+表現可能であるとき、亜群 $(U, R, s, t, c)$ は{\it 表現可能な商}をもつという。
+\end{definition}
+
+\noindent
+次の補題は、商を表現するスキーム $M$ を特徴づける。例えば、$\tau = fppf$ で、
+$U \to M$ が平坦、有限表示かつ全射であり、$R \cong U \times_M U$ ならば適用できる。
+
+\begin{lemma}
+\label{groupoids-lemma-criterion-quotient-representable}
+定義 \ref{groupoids-definition-quotient-sheaf} の状況とする。スキーム $M$ と射 $U \to M$ が
+存在し、次を満たすと仮定する。
+\begin{enumerate}
+\item 射 $U \to M$ は $s, t$ を等化する。
+\item 射 $U \to M$ は $\tau$-位相における層の全射
+$h_U \to h_M$ を誘導する。
+\item 誘導される写像 $(t, s) : R \to U \times_M U$ は $\tau$-位相における
+層の全射 $h_R \to h_{U \times_M U}$ を誘導する。
+\end{enumerate}
+この場合、$M$ は商層 $U/R$ を表現する。
+\end{lemma}
+
+\begin{proof}
+条件 (1) は $h_U \to h_M$ が $U/R$ を経由することをいう。条件 (2) は層の写像として
+$U/R \to h_M$ が全射であることをいい、条件 (3) は層の写像として
+$U/R \to h_M$ が単射であることをいう。よって補題が従う。
+\end{proof}
+
+\noindent
+次の補題は、$j$ を前同値関係と仮定しない場合（例えば単なる前関係の場合）には
+成り立たない。
+
+\begin{lemma}
+\label{groupoids-lemma-quotient-pre-equivalence}
+$\tau \in \{Zariski, \etale, fppf, smooth, syntomic\}$ とし、$S$ をスキームとする。
+$j : R \to U \times_S U$ を $S$ 上の前同値関係とする。$U, R, S$ は
+$\tau$-サイト $\Sch_\tau$ の対象であると仮定する。
+$T \in \Ob((\Sch/S)_\tau)$ および $a, b \in U(T)$ に対して、次は同値である。
+\begin{enumerate}
+\item $a$ と $b$ は $(U/R)(T)$ の同じ元に写る。
+\item $T$ の $\tau$-被覆 $\{f_i : T_i \to T\}$ と射
+$r_i : T_i \to R$ が存在して、$a \circ f_i = s \circ r_i$ および
+$b \circ f_i = t \circ r_i$ が成り立つ。
+\end{enumerate}
+言い換えれば、この場合、$\tau$-層の写像
+$$
+h_R \longrightarrow h_U \times_{U/R} h_U
+$$
+は全射である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：この主張が成り立つ理由は、この場合の前層
+(\ref{groupoids-equation-quotient-presheaf}) が実際には
+$T \mapsto U(T)/j(R(T))$ で与えられることにある。というのも、
+$j(R(T)) \subset U(T) \times U(T)$ は同値関係だからである。定義
+\ref{groupoids-definition-equivalence-relation} を参照せよ。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-quotient-pre-equivalence-relation-restrict}
+$\tau \in \{Zariski, \etale, fppf, smooth, syntomic\}$ とし、$S$ をスキームとする。
+$j : R \to U \times_S U$ を $S$ 上の前同値関係とし、$g : U' \to U$ を $S$ 上の
+スキームの射とする。$j' : R' \to U' \times_S U'$ を $j$ の $U'$ への制限とする。
+$U, U', R, S$ は $\tau$-サイト $\Sch_\tau$ の対象であると仮定する。商層の写像
+$$
+U'/R' \longrightarrow U/R
+$$
+は単射である。$g$ が $\tau$-位相における層の全射 $h_{U'} \to h_U$ を定めるならば
+（例えば $\{g : U' \to U\}$ が $\tau$-被覆ならば）、
+$U'/R' \to U/R$ は同型である。
+\end{lemma}
+
+\begin{proof}
+$\xi, \xi' \in (U'/R')(T)$ を $U/R$ の同じ切断に写る切断とする。
+$T$ の $\tau$-被覆 $\mathcal{T} = \{T_i \to T\}$ をとり、各
+$\xi|_{T_i}, \xi'|_{T_i}$ が $a_i, a_i' \in U'(T_i)$ により与えられるようにできる。
+補題 \ref{groupoids-lemma-quotient-pre-equivalence} とサイトの公理により、$\mathcal{T}$ を
+細分して、$g \circ a_i = s \circ r_i$, $g \circ a_i' = t \circ r_i$ を満たす射
+$r_i : T_i \to R$ が存在すると仮定してよい。構成により
+$R' = R \times_{U \times_S U} (U' \times_S U')$ だから、
+$(r_i, (a_i, a_i')) \in R'(T_i)$ である。これは $a_i$ と $a_i'$ が $T_i$ 上の
+$U'/R'$ の同じ切断を定めることを示す。層条件により $\xi = \xi'$ が従う。
+
+\medskip\noindent
+$h_{U'} \to h_U$ が層の全射ならば、もちろん $U'/R' \to U/R$ も全射である。
+$\{g : U' \to U\}$ が $\tau$-被覆ならば、層の写像 $h_{U'} \to h_U$ は全射である
+（《サイト》補題 \ref{sites-lemma-covering-surjective-after-sheafification} を参照）。
+したがって、この場合にも $U'/R' \to U/R$ は全射である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-quotient-groupoid-restrict}
+$\tau \in \{Zariski, \etale, fppf, smooth, syntomic\}$ とし、$S$ をスキームとする。
+$(U, R, s, t, c)$ を $S$ 上の亜群スキームとし、$g : U' \to U$ を $S$ 上の
+スキームの射とする。$(U', R', s', t', c')$ を $(U, R, s, t, c)$ の $U'$ への
+制限とする。$U, U', R, S$ は $\tau$-サイト $\Sch_\tau$ の対象であると仮定する。
+商層の写像
+$$
+U'/R' \longrightarrow U/R
+$$
+は単射である。合成
+$$
+\xymatrix{
+U' \times_{g, U, t} R \ar[r]_-{\text{pr}_1} \ar@/^3ex/[rr]^h
+& R \ar[r]_s & U
+}
+$$
+が $\tau$-位相における層の全射を定めるならば、この写像は全単射である。例えば、
+$\{h : U' \times_{g, U, t} R \to U\}$ が $\tau$-被覆である場合、または
+$U' \to U$ が $\tau$-位相における層の全射を定める場合、または
+$\{g : U' \to U\}$ が $\tau$-位相の被覆である場合には、この条件が成り立つ。
+\end{lemma}
+
+\begin{proof}
+単射性は、補題 \ref{groupoids-lemma-groupoid-pre-equivalence} と
+\ref{groupoids-lemma-quotient-pre-equivalence-relation-restrict} を組み合わせれば従う。
+全射性を示すため（層の全射の特徴づけについては《サイト》節
+\ref{sites-section-sheaves-injective} を参照）、次のように論じる。$T$ をスキームとし、
+$\sigma \in U/R(T)$ とする。ある被覆 $\{T_i \to T\}$ が存在して、
+$\sigma|_{T_i}$ はある元 $f_i \in U(T_i)$ の像である。したがって、$\sigma$ が
+$f \in U(T)$ の像であると仮定してよい。$h$ は層の全射であるという仮定により、
+$\tau$-被覆 $\{\varphi_i : T_i \to T\}$ と射
+$f_i : T_i \to U' \times_{g, U, t} R$ をとり、
+$f \circ \varphi_i = h \circ f_i$ とできる。
+$f'_i = \text{pr}_0 \circ f_i : T_i \to U'$ と書く。このとき、
+$f'_i \in U'(T_i)$ は $g \circ f'_i \in U(T_i)$ に写り、
+$g \circ f'_i \sim_{T_i} h \circ f_i = f \circ \varphi_i$ が成り立つ。記法は
+(\ref{groupoids-equation-quotient-presheaf}) のとおりである。実際、この関係を与える
+$R(T_i)$ の元は $\text{pr}_1 \circ f_i$ である。これは、$\sigma$ の $T_i$ への
+制限が $U'/R'(T_i) \to U/R(T_i)$ の像に属することを意味し、所望の結論を得る。
+
+\medskip\noindent
+$\{h\}$ が $\tau$-被覆ならば、層の全射を誘導する。《サイト》補題
+\ref{sites-lemma-covering-surjective-after-sheafification} を参照せよ。
+$U' \to U$ が全射ならば、$s$ は切断（すなわち亜群スキームの単位元 $e$）をもつので、
+$h$ も全射である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-criterion-fibre-product}
+$S$ をスキームとし、$f : (U, R, j) \to (U', R', j')$ を $S$ 上の同値関係の間の
+射とする。図式
+$$
+\xymatrix{
+R \ar[d]_s \ar[r]_f & R' \ar[d]^{s'} \\
+U \ar[r]^f & U'
+}
+$$
+が Cartesian であると仮定する。任意の
+$\tau \in  \{Zariski, \etale, fppf, smooth, syntomic\}$ に対して、図式
+$$
+\xymatrix{
+U \ar[d] \ar[r] & U/R \ar[d]^f \\
+U' \ar[r] & U'/R'
+}
+$$
+は $\tau$-層のファイバー積の正方形である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-quotient-pre-equivalence} により商層は簡明に記述できるので、以下では
+断りなくこの記述を用いる。まず、
+$$
+U \longrightarrow U' \times_{U'/R'} U/R
+$$
+が単射であることを示す。実際、$a, b \in U(T)$ が右辺の同じ元に写ると仮定する。
+すると $f(a) = f(b)$ である。$T$ をある $\tau$-被覆の各要素で置き換えることにより、
+$a = s(r)$ および $b = t(r)$ を満たす $r \in R(T)$ が存在すると仮定してよい。
+このとき $r' = f(r)$ は $s'(r') = t'(r')$ を満たす $R'$ の $T$-値点である。
+したがって $r' = e'(f(a))$ である（ここで $e'$ は $j'$ に付随する亜群スキームの
+単位射である。補題 \ref{groupoids-lemma-equivalence-groupoid} を参照）。補題の最初の図式が
+Cartesian なので、これは $r$ が $e(a)$ に等しくなければならないことを意味する。
+ゆえに $a = b$ である。
+
+\medskip\noindent
+最後に、表示した射が全射であることを示す。$T$ を $S$ 上のスキームとし、
+$(a', \overline{b})$ を $T$ 上の層 $U' \times_{U'/R'} U/R$ の切断とする。
+$T$ をある $\tau$-被覆の各要素で置き換えて、$\overline{b}$ がある元
+$b \in U(T)$ の類であると仮定してよい。再び $T$ をある $\tau$-被覆の各要素で
+置き換えて、$a' = t(r')$ および $s'(r') = f(b)$ を満たす
+$r' \in R'(T)$ が存在すると仮定してよい。補題の最初の図式は Cartesian なので、
+$s(r) = b$ および $f(r) = r'$ を満たす $r \in R(T)$ をとれる。このとき、
+$a = t(r) \in U(T)$ は $(a', \overline{b})$ に写る切断であることが明らかである。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{亜群による降下}
+\label{groupoids-section-groupoids-descent}
+
+\noindent
+Cartesian 射を次のように定義する。
+
+\begin{definition}
+\label{groupoids-definition-cartesian-morphism}
+$S$ をスキームとし、$f : (U', R', s', t', c') \to (U, R, s, t, c)$ を
+$S$ 上の亜群スキームの射とする。図式
+$$
+\xymatrix{
+R' \ar[r]_f \ar[d]_{s'} & R \ar[d]^s \\
+U' \ar[r]^f & U
+}
+$$
+がスキームの圏におけるファイバー積の正方形であるとき、$f$ は
+{\it Cartesian} である、または
+{\it $(U', R', s', t', c')$ は $(U, R, s, t, c)$ 上 Cartesian である}という。
+{\it $(U, R, s, t, c)$ 上 Cartesian な亜群スキームの射}とは、
+$(U, R, s, t, c)$ への構造射と両立する亜群スキームの射をいう。
+\end{definition}
+
+\noindent
+Cartesian 射は降下データと関係する。まず、固定した亜群スキーム上の Cartesian な
+亜群スキームの圏を記述する一般的な補題を証明する。
+
+\begin{lemma}
+\label{groupoids-lemma-characterize-cartesian-schemes}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$(U, R, s, t, c)$ 上 Cartesian な亜群スキームの圏は、次の対 $(V, \varphi)$ の圏と
+同値である。ここで $V$ は $U$ 上のスキームであり、
+$$
+\varphi :
+V \times_{U, t} R
+\longrightarrow
+R \times_{s, U} V
+$$
+は $R$ 上の同型で、$e^*\varphi = \text{id}_V$ を満たし、さらに
+$R \times_{s, U, t} R$ 上のスキームの射として
+$$
+c^*\varphi = \text{pr}_1^*\varphi \circ \text{pr}_0^*\varphi
+$$
+を満たす。
+\end{lemma}
+
+\begin{proof}
+補題の引き戻し記法は基底変換を表す。$R \times_{s, U, t} R$ 上のスキームとして
+$$
+(R \times_{s, U, t} R) \times_{\text{pr}_1, R, \text{pr}_1} (V \times_{U, t} R)
+=
+(R \times_{s, U, t} R) \times_{\text{pr}_0, R, \text{pr}_0} (R \times_{s, U} V)
+$$
+だから、表示した式は意味をもつ。
+
+\medskip\noindent
+$(V, \varphi)$ が与えられたとき、$U' = V$ および
+$R' = V \times_{U, t} R$ とおく。$t' : R' \to U'$ を射影
+$V \times_{U, t} R \to V$ とする。$s'$ を $\varphi$ と射影
+$R \times_{s, U} V \to V$ の合成とする。$c'$ を合成
+\begin{align*}
+R' \times_{s', U', t'} R'
+& \xrightarrow{\varphi, 1}
+(R \times_{s, U} V) \times_V (V \times_{U, t} R) \\
+& \xrightarrow{}
+R \times_{s, U} V \times_{U, t} R \\
+& \xrightarrow{\varphi^{-1}, 1}
+V \times_{U, t} (R \times_{s, U, t} R) \\
+& \xrightarrow{1, c}
+V \times_{U, t} R = R'
+\end{align*}
+とする。計算（省略する）により、$(U, R, s, t, c)$ 上の亜群スキームが得られる。
+この亜群スキームが $(U, R, s, t, c)$ 上 Cartesian であることは明らかである。
+
+\medskip\noindent
+逆に、Cartesian な $f : (U', R', s', t', c') \to (U, R, s, t, c)$ が与えられると、
+射
+$$
+U' \times_{U, t} R \xleftarrow{t', f} R' \xrightarrow{f, s'} R \times_{s, U} U'
+$$
+は同型である。そこで $V = U'$ とおき、$\varphi$ を合成
+$(f, s') \circ (t', f)^{-1}$ とおける。$\varphi$ が補題の条件を満たすことの証明、
+およびこれらの構成が互いに逆であることの証明は省略する。
+\end{proof}
+
+\noindent
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上のスキームの射とする。このとき、
+$S$ 上の亜群スキーム $(X, X \times_Y X, \text{pr}_1, \text{pr}_0, c)$ を得る。
+実際、$j : X \times_Y X \to X \times_S X$ は同値関係であり、それに付随する亜群を
+とればよい。補題 \ref{groupoids-lemma-equivalence-groupoid} を参照せよ。
+
+\begin{lemma}
+\label{groupoids-lemma-cartesian-equivalent-descent-datum}
+$S$ をスキームとし、$f : X \to Y$ を $S$ 上のスキームの射とする。補題
+\ref{groupoids-lemma-characterize-cartesian-schemes} の構成は、同値
+$$
+\begin{matrix}
+\text{category of groupoid schemes} \\
+\text{cartesian over } (X, X \times_Y X, \ldots)
+\end{matrix}
+\longrightarrow
+\begin{matrix}
+\text{ category of descent data} \\
+\text{ relative to } X/Y
+\end{matrix}
+$$
+を定める。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-characterize-cartesian-schemes} と、《降下》定義
+\ref{descent-definition-descent-datum} におけるスキーム上の降下データの定義から明らかである。
+\end{proof}
+
+
+
+
+
+
+
+\section{分離条件}
+\label{groupoids-section-separation}
+
+\noindent
+これは実際には、$S$ 上の亜群 $(U, R, s, t, c)$ が与えられたときの射
+$j : R \to U \times_S U$ に関する条件を意味する。前節と同様、まず対応する図式を述べる。
+
+\begin{lemma}
+\label{groupoids-lemma-diagram-diagonal}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群とする。
+$G \to U$ を安定化群スキームとする。可換図式
+$$
+\xymatrix{
+R \ar[d]^{\Delta_{R/U \times_S U}} \ar[rrr]_{f \mapsto (f, s(f))} & & &
+R \times_{s, U} U \ar[d] \ar[r] & U \ar[d] \\
+R \times_{(U \times_S U)} R \ar[rrr]^{(f, g) \mapsto (f, f^{-1} \circ g)} & & &
+R \times_{s, U} G \ar[r] & G
+}
+$$
+において、左側の二つの水平射は同型であり、右側の正方形はファイバー積の正方形である。
+\end{lemma}
+
+\begin{proof}
+省略する。定義と、代数幾何学における関手的観点についての演習である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-diagonal}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群とする。
+$G \to U$ を安定化群スキームとする。
+\begin{enumerate}
+\item 次の条件は同値である。
+\begin{enumerate}
+\item $j : R \to U \times_S U$ は分離的である。
+\item $G \to U$ は分離的である。
+\item $e : U \to G$ は閉はめ込みである。
+\end{enumerate}
+\item 次の条件は同値である。
+\begin{enumerate}
+\item $j : R \to U \times_S U$ は準分離的である。
+\item $G \to U$ は準分離的である。
+\item $e : U \to G$ は準コンパクトである。
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+群スキーム $G \to U$ は、対角射 $U \to U \times_S U$ による
+$R \to U \times_S U$ の基底変換である。補題 \ref{groupoids-lemma-groupoid-stabilizer} を
+参照せよ。したがって、$j$ が分離的（それぞれ\ 準分離的）ならば、$G \to U$ も
+分離的（それぞれ\ 準分離的）である（《スキーム》補題
+\ref{schemes-lemma-separated-permanence} を参照）。よって (1), (2) のいずれでも
+(a) $\Rightarrow$ (b) が成り立つ。
+
+\medskip\noindent
+$G \to U$ が分離的（それぞれ\ 準分離的）ならば、構造射 $G \to U$ の切断としての射
+$U \to G$ は閉はめ込み（それぞれ\ 準コンパクト）である。《スキーム》補題
+\ref{schemes-lemma-section-immersion} を参照せよ。よって (1), (2) のいずれでも
+(b) $\Rightarrow$ (a) が成り立つ。
+
+\medskip\noindent
+補題 \ref{groupoids-lemma-diagram-diagonal} の結果（および《スキーム》補題
+\ref{schemes-lemma-base-change-immersion} と
+\ref{schemes-lemma-quasi-compact-preserved-base-change}）により、$e$ が閉はめ込み
+（それぞれ\ 準コンパクト）ならば、$\Delta_{R/U \times_S U}$ は閉はめ込み
+（それぞれ\ 準コンパクト）である。よって (1), (2) のいずれでも
+(c) $\Rightarrow$ (a) が成り立つ。
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{有限平坦亜群：アフィンの場合}
+\label{groupoids-section-finite-flat}
+
+\noindent
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$U = \Spec(A)$ および $R = \Spec(B)$ はアフィンであると仮定する。この場合、
+二つの環準同型 $s^\sharp, t^\sharp : A \longrightarrow B$ を得る。
+$C$ を $s^\sharp$ と $t^\sharp$ の等化子とする。式で書けば
+\begin{equation}
+\label{groupoids-equation-invariants}
+C = \{a \in A \mid t^\sharp(a) = s^\sharp(a) \}.
+\end{equation}
+これを{\it $U$ 上の $R$-不変関数の環}と呼ぶこともある。$M = \Spec(C)$ は
+どのような性質をもつだろうか。まず、図式
+$$
+\xymatrix{
+R \ar[r]_s \ar[d]_t & U \ar[d] \\
+U \ar[r] & M
+}
+$$
+は可換である。すなわち、射 $U \to M$ は $s, t$ を等化する。さらに、$T$ を任意の
+アフィンスキームとし、$U \to T$ が $s, t$ を等化する射ならば、$U \to T$ は
+$U \to M$ を経由する。言い換えれば、$U \to M$ はアフィンスキームの圏における
+余等化子である。
+
+\medskip\noindent
+射 $U \to M$ がスキームの圏で真に「商」となることを保証する条件を求めたい。
+これについては別の箇所で詳しく論じる（将来の参照をここに挿入する）が、ここでは
+いくつかの特別な場合だけを扱う。すなわち、$s, t$ が有限局所自由である場合に注目する。
+
+\begin{example}
+\label{groupoids-example-quotient-projective-line}
+$k$ を体とし、$U = \text{GL}_{2, k}$ とする。$B \subset \text{GL}_2$ を上三角行列の
+閉部分群スキームとする。このとき商層 $\text{GL}_{2, k}/B$ は（Zariski、\'etale、
+または fppf 位相において。定義 \ref{groupoids-definition-quotient-sheaf} を参照）
+射影直線により表現される：$\mathbf{P}^1 = \text{GL}_{2, k}/B$。（詳細は省略する。）
+一方、この場合の不変関数環は単に $k$ である。この場合、射
+$s, t : R = \text{GL}_{2, k} \times_k B \to \text{GL}_{2, k} = U$ は相対次元
+$3$ の平滑射であることに注意せよ。
+\end{example}
+
+\noindent
+《演習》演習 \ref{exercises-exercise-trace-det} および
+\ref{exercises-exercise-trace-det-rings} では、有限局所自由加群および有限局所自由な
+環拡大に対して行列式とノルムを定義した。$\varphi : A \to B$ が有限局所自由な
+環準同型ならば、$b \in B$ のノルムを $\text{Norm}_\varphi(b) \in A$ と書く。
+スキームの有限局所自由射に対するノルムは、《因子》補題
+\ref{divisors-lemma-finite-locally-free-has-norm} で構成した。
+
+\begin{lemma}
+\label{groupoids-lemma-determinant-trick}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$U = \Spec(A)$ と $R = \Spec(B)$ はアフィンで、$s, t : R \to U$ は有限局所自由で
+あると仮定する。$C$ を (\ref{groupoids-equation-invariants}) のとおりとする。
+$f \in A$ とすれば、$\text{Norm}_{s^\sharp}(t^\sharp(f)) \in C$ である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-diagram} の可換図式
+$$
+\xymatrix{
+& U & \\
+R \ar[d]_s \ar[ru]^t &
+R \times_{s, U, t} R
+\ar[l]^-{\text{pr}_0} \ar[d]^{\text{pr}_1} \ar[r]_-c &
+R \ar[d]^s \ar[lu]_t \\
+U & R \ar[l]_t \ar[r]^s & U
+}
+$$
+を考える。$f \in \Gamma(U, \mathcal{O}_U)$ とみなす。図式上部の可換性から、
+$\Gamma(R \times_{S, U, t} R, \mathcal{O})$ の元として
+$\text{pr}_0^\sharp(t^\sharp(f)) = c^\sharp(t^\sharp(f))$ が成り立つ。右下の Cartesian
+な正方形をみると、ノルム構成と基底変換との両立性により
+$s^\sharp(\text{Norm}_{s^\sharp}(t^\sharp(f))) =
+\text{Norm}_{\text{pr}_1^\sharp}(c^\sharp(t^\sharp(f)))$ を得る。同様に
+$t^\sharp(\text{Norm}_{s^\sharp}(t^\sharp(f))) =
+\text{Norm}_{\text{pr}_1^\sharp}(\text{pr}_0^\sharp(t^\sharp(f)))$ を得る。
+したがって、この証明の最初の等式から、所望の
+$s^\sharp(\text{Norm}_{s^\sharp}(t^\sharp(f))) =
+t^\sharp(\text{Norm}_{s^\sharp}(t^\sharp(f)))$ が従う。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-finite-locally-free-disjoint-free}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$s, t : R \to U$ は有限局所自由であると仮定する。このとき
+$$
+U = \coprod\nolimits_{r \geq 1} U_r
+$$
+は $R$-不変な開集合の非交和であり、$R$ の $U_r$ への制限 $R_r$ に対して
+$s, t : R_r \to U_r$ は階数 $r$ の有限局所自由射である。
+\end{lemma}
+
+\begin{proof}
+《射》補題 \ref{morphisms-lemma-finite-locally-free} により、分解
+$U = \coprod\nolimits_{r \geq 0} U_r$ が存在し、
+$s : s^{-1}(U_r) \to U_r$ は階数 $r$ の有限局所自由射である。$s$ は全射だから
+$U_0 = \emptyset$ である。$u \in U_r \Leftrightarrow$ スキーム論的ファイバー
+$s^{-1}(u)$ の $\kappa(u)$ 上の次数が $r$ であることに注意せよ。ここで
+$z \in R$ が $s(z) = u$ および $t(z) = u'$ を満たすとする。補題
+\ref{groupoids-lemma-diagram} の記法を用いると、
+$$
+\text{pr}_1^{-1}(z) \to \Spec(\kappa(z))
+$$
+は、引用した補題により $s^{-1}(u) \to \Spec(\kappa(u))$ と
+$s^{-1}(u') \to \Spec(\kappa(u'))$ の双方の基底変換である。したがって
+$u \in U_r \Leftrightarrow u' \in U_r$ であり、言い換えれば開部分集合 $U_r$ は
+$R$-不変である。特に、$R$ の $U_r$ への制限は単に $s^{-1}(U_r)$ であり、
+$s : R_r \to U_r$ は階数 $r$ の有限局所自由射である。$t : R_r \to U_r$ は
+$R_r$ の逆元写像により $s$ と同型だから、これも階数 $r$ をもつ。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-integral-over-invariants}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$U = \Spec(A)$ と $R = \Spec(B)$ はアフィンで、$s, t : R \to U$ は有限局所自由で
+あると仮定する。$C \subset A$ を (\ref{groupoids-equation-invariants}) のとおりとする。
+このとき $A$ は $C$ 上整である。
+\end{lemma}
+
+\begin{proof}
+まず補題 \ref{groupoids-lemma-finite-locally-free-disjoint-free} により、
+$(U, R, s, t, c)$ は亜群スキーム $(U_r, R_r, s, t, c)$ の非交和であり、各
+$s, t : R_r \to U_r$ は定数階数 $r$ をもつ。$U$ は準コンパクトだから、
+ほとんどすべての $r$ に対して $U_r = \emptyset$ である。補題を各
+$(U_r, R_r, s, t, c)$ について証明すれば十分なので、$s, t$ は階数 $r$ の
+有限局所自由射であると仮定してよい。
+
+\medskip\noindent
+$s, t$ は階数 $r$ の有限局所自由射であると仮定する。$f \in A$ とし、
+$x$ を $\mathbf{A}^1$ の座標とみなして、元 $x - f \in A[x]$ を考える。
+$$
+(U \times \mathbf{A}^1, R \times \mathbf{A}^1,
+s \times \text{id}_{\mathbf{A}^1},
+t \times \text{id}_{\mathbf{A}^1},
+c \times \text{id}_{\mathbf{A}^1})
+$$
+も始域射と終域射が有限な亜群スキームだから、これに補題
+\ref{groupoids-lemma-determinant-trick} を適用すると、
+$P(x) = \text{Norm}_{s^\sharp}(t^\sharp(x - f))$ は $C[x]$ の元である。
+$s^\sharp : A \to B$ は階数 $r$ の有限局所自由射だから、$P$ は次数 $r$ の
+モニック多項式である。さらに Cayley--Hamilton の定理（《代数》補題
+\ref{algebra-lemma-charpoly}）により $P(f) = 0$ である。より正確には、
+Cayley--Hamilton の定理は、多項式 $s^\sharp(P) \in B[x]$ が元
+$t^\sharp(f)$ を零化することをいう。$P$ の係数は $C$ に属するので、
+$B$ において $t^\sharp(P(f)) = 0$ を得る。$t$ は忠実平坦だから $P(f) = 0$ である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-invariants-base-change}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$U = \Spec(A)$ と $R = \Spec(B)$ はアフィンで、$s, t : R \to U$ は有限局所自由で
+あると仮定する。$C \subset A$ を (\ref{groupoids-equation-invariants}) のとおりとする。
+$C \to C'$ を環準同型とし、$U' = \Spec(A \otimes_C C')$,
+$R' = \Spec(B \otimes_C C')$ とおく。このとき次が成り立つ。
+\begin{enumerate}
+\item 写像 $s, t, c$ は写像 $s', t', c'$ を誘導し、
+$(U', R', s', t', c')$ は亜群スキームとなる。$C^1 \subset A'$ を $U'$ 上の
+$R'$-不変関数とする。
+\item 標準写像 $\varphi : C' \to C^1$ は次を満たす。
+\begin{enumerate}
+\item 任意の $f \in C^1$ に対して、ある $n > 0$ と多項式 $P \in C'[x]$ が
+存在し、その $C^1[x]$ における像は $(x - f)^n$ である。
+\item 任意の $f \in \Ker(\varphi)$ に対して、$f^n = 0$ を満たす
+ある $n > 0$ が存在する。
+\end{enumerate}
+\item $C \to C'$ が平坦ならば $\varphi$ は同型である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明は省略する。$A' = A \otimes_C C'$ および
+$B' = B \otimes_C C'$ と書く。このとき
+$$
+C^1
+= \{a \in A' \mid (t')^\sharp(a) = (s')^\sharp(a) \}
+= \{a \in A \otimes_C C' \mid t^\sharp \otimes 1(a) = s^\sharp \otimes 1(a) \}.
+$$
+である。言い換えれば、$C^1$ は差写像 $(t^\sharp - s^\sharp) \otimes 1$ の核であり、
+これは $C$-線形写像 $t^\sharp - s^\sharp : A \to B$ の $C \to C'$ による
+基底変換にほかならない。したがって (3) が従う。
+
+\medskip\noindent
+(2)(b) を証明する。$C \to A$ は整かつ単射だから（補題
+\ref{groupoids-lemma-integral-over-invariants}）、$\Spec(A) \to \Spec(C)$ は全射である
+（《代数》補題 \ref{algebra-lemma-integral-overring-surjective}）。
+したがって、その基底変換 $\Spec(A') \to \Spec(C')$ も全射である
+（《射》補題 \ref{morphisms-lemma-base-change-surjective}）。よって
+$\Spec(C^1) \to \Spec(C')$ も全射である。例えば《代数》補題
+\ref{algebra-lemma-image-dense-generic-points} により、これは (2)(b) を含意する。
+
+\medskip\noindent
+(2)(a) を証明する。補題 \ref{groupoids-lemma-finite-locally-free-disjoint-free} により、
+亜群スキーム $(U, R, s, t, c)$ は亜群スキーム $(U_r, R_r, s, t, c)$ の有限非交和に
+分解し、$s, t : R_r \to U_r$ は階数 $r$ の有限局所自由射である。
+$U' = \Spec(C') \to U$ により引き戻すと、$U'$ と $U^1 = \Spec(C^1)$ にも同様の
+分解を得る。次の段落で、対応する環の系 $A_r, B_r, C_r, C'_r, C^1_r$ に対して
+$n = r$ として (2)(a) が成り立つことを示す。そこで $f \in C^1$ に対し、
+$P_r \in C_r[x]$ を、その $C^1_r[x]$ における像が $(x - f)^r$ の像となる多項式と
+する。十分可除な整数 $n$ を選べば、多項式 $P \in C'[x]$ が存在し、その
+$C^1[x]$ における像は $(x - f)^n$ となる。実際、$P$ を、各 $C'_r[x]$ における像が
+$P_r^{n/r}$ となる $C'[x]$ の一意な元とすればよい。
+
+\medskip\noindent
+この段落では、環準同型 $s^\sharp, t^\sharp : A \to B$ が固定した階数 $r$ の
+有限局所自由射である場合に (2)(a) を証明する。
+$f \in C^1 \subset A' = A \otimes_C C'$ とする。平坦な $C$-代数 $D$ と全射
+$D \to C'$ を選び、$f$ の持ち上げ $g \in A \otimes_C D$ を選ぶ。
+$(A \otimes_C D)[x]$ の多項式
+$$
+P = \text{Norm}_{s^\sharp \otimes 1}(t^\sharp \otimes 1(x - g))
+$$
+を考える。補題 \ref{groupoids-lemma-determinant-trick} とこの補題の (3) により、$P$ の係数は
+$D$ に属する（補題 \ref{groupoids-lemma-integral-over-invariants} の証明と比較せよ）。
+一方、$t^\sharp \otimes 1(x - f) = s^\sharp(x - f)$ であり、$s^\sharp$ は階数 $r$ の
+有限局所自由射だから、$P$ の $(A \otimes_C C')[x]$ における像は $(x - f)^r$ である。
+したがって、$D[x] \to C'[x]$ によるこの $P$ の像を命題 (2)(a) の $P$ とすれば、
+所望の主張が得られる。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-points}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$U = \Spec(A)$ と $R = \Spec(B)$ はアフィンで、$s, t : R \to U$ は有限局所自由で
+あると仮定する。$C \subset A$ を (\ref{groupoids-equation-invariants}) のとおりとする。
+このとき $U \to M = \Spec(C)$ は次の性質をもつ。
+\begin{enumerate}
+\item 点の写像 $|U| \to |M|$ は全射であり、$u_0, u_1 \in |U|$ が同じ点に写るための
+必要十分条件は、$t(r) = u_0$ かつ $s(r) = u_1$ を満たす $r \in |R|$ が
+存在することである。式で書けば
+$$
+|M| = |U|/|R|
+$$
+\item 任意の代数閉体 $k$ に対して
+$$
+M(k) = U(k)/R(k)
+$$
+である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$C \to A$ は整かつ単射だから（補題 \ref{groupoids-lemma-integral-over-invariants}）、
+$\Spec(A) \to \Spec(C)$ は全射である。《代数》補題
+\ref{algebra-lemma-integral-overring-surjective} を参照せよ。したがって
+$|U| \to |M|$ は全射である。
+
+\medskip\noindent
+$k$ を代数閉体とし、$C \to k$ を環準同型とする。全射は基底変換で保たれるので
+（《射》補題 \ref{morphisms-lemma-base-change-surjective}）、
+$A \otimes_C k$ は零でない。ここで $k \subset A \otimes_C k$ は零でない整拡大である。
+したがって $A \otimes_C k$ の任意の剰余体は $k$ の代数拡大であり、ゆえに $k$ に
+等しい。したがって $U(k) \to M(k)$ は全射である。
+
+\medskip\noindent
+$a_0, a_1 : A \to k$ を二つの環準同型とする。
+$a_0 = b \circ t^\sharp$ および $a_1 = b \circ s^\sharp$ を満たす環準同型
+$b : B \to k$ が存在すれば、定義により $a_0|_C = a_1|_C$ である。したがって、
+写像 $U(k) \to M(k)$ は二つの写像 $R(k) \to U(k)$ を等化する。逆に、
+$a_0|_C = a_1|_C$ と仮定し、この代数準同型を $c : C \to k$ と書く。図式
+$$
+\xymatrix{
+& &
+B \ar@{-->}[lld] \\
+k & &
+A
+\ar@<0.5ex>[ll]^{a_0}
+\ar@<-0.5ex>[ll]_{a_1}
+\ar@<1ex>[u]
+\ar@<-1ex>[u] \\
+& &
+C \ar[u] \ar[llu]^c
+}
+$$
+を考える。図式を可換にする点線の射を構成できれば、補題の (2) の証明は完了する。
+$s : A \to B$ は有限なので、$b_i \circ s^\sharp = a_1$ を満たす環準同型
+$b_1, \ldots, b_n : B \to k$ は有限個存在する。点線の射が存在しないならば、
+$a'_i = b_i \circ t^\sharp$, $i = 1, \ldots, n$ のいずれも $a_0$ に等しくない。
+したがって、$A \otimes_C k$ の極大イデアル
+$$
+\mathfrak m'_i = \Ker(a_i' \otimes 1 : A \otimes_C k \to k)
+$$
+は $\mathfrak m = \Ker(a_0 \otimes 1 : A \otimes_C k \to k)$ と異なる。
+《代数》補題 \ref{algebra-lemma-silly} により、$f \in \mathfrak m$ だが
+$i = 1, \ldots, n$ に対して $f \not \in \mathfrak m_i'$ である元
+$f \in A \otimes_C k$ が得られる。ノルム
+$$
+g = \text{Norm}_{s^\sharp \otimes 1}(t^\sharp \otimes 1(f))
+\in
+A \otimes_C k
+$$
+を考える。補題 \ref{groupoids-lemma-determinant-trick} により、これは写像
+$c : C \to k$ による基底変換亜群の不変関数
+$C^1 \subset A \otimes_C k$ に属する。一方、$a_1$ 上にあるすべての点
+（$b_1, \ldots, b_n$ に対応する）での $t^\sharp(f)$ の値は可逆だから、
+$a_1(g) \in k^*$ である（行列式の性質に関する将来の参照をここに挿入する）。
+他方、$f \in \mathfrak m$ なので $f$ は単元でなく、したがって
+$t^\sharp(f)$ も単元でない（$t^\sharp \otimes 1$ は忠実平坦だから）。
+ゆえに、そのノルムも単元でない（行列式の性質に関する将来の参照をここに挿入する）。
+したがって $C^1$ は、冪零でも単元でもない元を含む。これが矛盾を導くことを示そう。
+実際、写像 $c : C \to C' = k$ に補題 \ref{groupoids-lemma-invariants-base-change} を適用すると、
+$k$ から不変関数環 $C^1$ への写像は単射であり、さらに任意の元 $x \in C^1$ に対して
+$x^n \in k$ を満たす整数 $n > 0$ が存在する。したがって、$C^1$ の各元は単元または
+冪零元である。
+
+\medskip\noindent
+残る (1) の証明を完了する。$|U| \to |M|$ が全射であることは既に分かっている。
+$|U| \to |M|$ が $|R|$-不変であることは明らかである。最後に、
+$u_0, u_1 \in U$ が同じ点 $m \in M$ に写ると仮定する。誘導される体拡大
+$\kappa(u_0)/\kappa(m)$ と $\kappa(u_1)/\kappa(m)$ は代数的である（上で用いたように
+$A$ は $C$ 上整だから）。そこで $k$ を $\kappa(m)$ の代数閉包とすれば、
+$\kappa(m)$-埋め込み $\overline{u}_0 : \kappa(u_0) \to k$ および
+$\overline{u}_1 : \kappa(u_1) \to k$ をとれる。これらは $M(k)$ の同じ点に写る
+$k$-値点 $\overline{u}_0, \overline{u}_1 \in U(k)$ を定める。(2) により、
+$s(\overline{r}) = \overline{u}_0$ および
+$t(\overline{r}) = \overline{u}_1$ を満たす点 $\overline{r} \in R(k)$ が存在する。
+$\overline{r}$ の像 $r \in R$ は $s(r) = u_0$ と $t(r) = u_1$ を満たし、所望の点である。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-etale}
+$S$ をスキームとし、$f : (U', R', s', t') \to (U, R, s, t, c)$ を
+$S$ 上の亜群スキームの射とする。次を仮定する。
+\begin{enumerate}
+\item $U$, $R$, $U'$, $R'$ はアフィンである。
+\item $s, t, s', t'$ は有限局所自由である。
+\item $G$, $G'$ を安定化群スキームとすると、図式
+$$
+\xymatrix{
+R' \ar[d]_{s'} \ar[r]_f & R \ar[d]^s \\
+U' \ar[r]^f & U
+}
+\quad
+\quad
+\xymatrix{
+R' \ar[d]_{t'} \ar[r]_f & R \ar[d]^t \\
+U' \ar[r]^f & U
+}
+\quad
+\quad
+\xymatrix{
+G' \ar[d] \ar[r]_f & G \ar[d] \\
+U' \ar[r]^f & U
+}
+$$
+は Cartesian である。
+\item $f : U' \to U$ は \'etale である。
+\end{enumerate}
+このとき、$U$ 上の $R$-不変関数から $U'$ 上の $R'$-不変関数への写像
+$C \to C'$ は \'etale であり、$U' = \Spec(C') \times_{\Spec(C)} U$ である。
+\end{lemma}
+
+\begin{proof}
+$M = \Spec(C)$ および $M' = \Spec(C')$ とおく。
+$U = \Spec(A)$, $U' = \Spec(A')$, $R = \Spec(B)$,
+$R' = \Spec(B')$ と書く。以下、補題
+\ref{groupoids-lemma-integral-over-invariants}, \ref{groupoids-lemma-invariants-base-change},
+\ref{groupoids-lemma-points} の結果を断りなく用いる。
+
+\medskip\noindent
+$C$ は強 Hensel 局所環であると仮定する。$p \in M$ を閉点とし、
+$p' \in M'$ が $p$ に写るとする。主張：この場合、$(U, R, s, t, c)$ 上の非交和分解
+$(U', R', s', t', c') = (U, R, s, t, c) \amalg (U'', R'', s'', t'', c'')$
+が存在し、対応する $M$ 上の非交和分解 $M' = M \amalg M''$ において、点 $p'$ は
+$p \in M$ に対応する。
+
+\medskip\noindent
+この主張から補題が従う。$M_1 \to M$ をアフィンスキームの平坦射とする。このとき、
+仮定 (1) -- (4) を変えずに、すべてを $M_1$ へ基底変換できる。補題
+\ref{groupoids-lemma-invariants-base-change} により、$M_1$（それぞれ\ $M_1'$）は
+$U_1$ 上の $R_1$-不変関数（それぞれ\ $U'_1$ 上の $R'_1$-不変関数）の環の
+スペクトルである。$p' \in M'$ が $p \in M$ に写ると仮定する。
+$M_1$ を $\mathcal{O}_{M, p}$ の強 Hensel 化のスペクトルとし、
+$p_1 \in M_1$ をその閉点とする。$p_1$ と $p'$ に写る点
+$p'_1 \in M'_1$ を選ぶ。主張から
+$$
+(U'_1, R'_1, s'_1, t'_1, c'_1) =
+(U_1, R_1, s_1, t_1, c_1) \amalg
+(U''_1, R''_1, s''_1, t''_1, c''_1)
+$$
+を得て、それに対応して $M_1$ 上のスキームとして
+$M'_1 = M_1 \amalg M''_1$ を得る。$M_1 = \Spec(C_1)$ と書き、この環を
+\'etale $C$-代数のフィルター付き余極限 $C_1 = \colim C_i$ と書く。
+$M_i = \Spec(C_i)$ とおく。すると $M_1 = \lim M_i$ であり、他のスキームについても
+同様である。《極限》補題 \ref{limits-lemma-descend-opens} および
+\ref{limits-lemma-descend-isomorphism} により、ある $i$ に対して
+$$
+(U'_i, R'_i, s'_i, t'_i, c'_i) =
+(U_i, R_i, s_i, t_i, c_i) \amalg
+(U''_i, R''_i, s''_i, t''_i, c''_i)
+$$
+となる。したがって $M'_i = M_i \amalg M''_i$ である。特に、\'etale 基底変換の後、
+$M' \to M$ は $p'$ の上のある点で \'etale になる。これは $M' \to M$ が $p'$ で
+\'etale であることを含意する（例えば《射》補題
+\ref{morphisms-lemma-set-points-where-fibres-etale} による）。
+主張を証明した後で $U' \cong M' \times_M U$ を証明する。
+
+\medskip\noindent
+主張を証明する。$U_p$ と $U'_{p'}$ は有限個の点をもつことに注意せよ。
+$u \in U_p$ に対し $\kappa(u)/\kappa(p)$ は代数的だから、
+$\kappa(u)$ は分離閉である。$U' \to U$ は \'etale なので、射
+$U'_{p'} \to U_p$ は剰余体拡大上の同型を誘導する。
+$u \in U_p$ に写る $u' \in U'_{p'}$ をとる。仮定 (3) により、スキーム論的
+ファイバーの射 $(s')^{-1}(u') \to s^{-1}(u)$,
+$(t')^{-1}(u') \to t^{-1}(u)$ および $G'_{u'} \to G_u$ は同型である。
+集合論的に $U_p = t(s^{-1}(u))$ であることから、$U'_{p'}$ の点は $U_p$ の点へ
+全射的に写る。$u'_1$, $u'_2$ を $U'_{p'}$ の点で、$U_p$ の同じ点 $u$ に写るとする。
+すると $s'(r') = u'_1$ および $t'(r') = u'_2$ を満たす点
+$r' \in R'_{p'}$ が存在する。二つの体の塔
+$$
+\kappa(r')/\kappa(u'_1)/\kappa(u)/\kappa(p) \quad
+\kappa(r')/\kappa(u'_2)/\kappa(u)/\kappa(p)
+$$
+を考える。その二つの「両端」は、二つの塔
+$$
+\kappa(r')/\kappa(u'_1)/\kappa(p')/\kappa(p) \quad
+\kappa(r')/\kappa(u'_2)/\kappa(p')/\kappa(p)
+$$
+の二つの「両端」と同じである。$(U'_{p'}, R'_{p'}, s', t', c')$ は $p'$ 上の
+亜群なので、後者の二つは同じ写像 $\kappa(p') \to \kappa(r')$ を誘導する。
+$\kappa(u)/\kappa(p)$ は純非分離なので、前者が誘導する二つの写像
+$\kappa(u) \to \kappa(r')$ も同じである。したがって $r'$ はファイバー $G_u$ の
+ある点に写る。仮定 (3) により $r' \in (G')_{u'_1}$ である。実際、$G$ を $s$ により
+$U$ 上のスキームとみた $R$ の閉部分スキームと考え、$U'$ への基底変換が
+$G' \subset R'$ を与えることを用いればよい。特に $u'_1 = u'_2$ である。
+したがって、$U'_{p'} \to U_p$ は点集合上の全単射であり、剰余体上の同型を誘導する。
+よって $U'_{p'}$ は閉点の有限集合であり（《代数》補題
+\ref{algebra-lemma-finite-residue-extension-closed}）、したがって $U'_{p'}$ は $U'$ の閉集合である。
+$J' \subset A'$ を $U'_{p'}$ を集合論的に切り出す根基イデアルとする。
+
+\medskip\noindent
+主張の証明の第二段階に進む。$\mathfrak m \subset C$ を極大イデアルとする。
+《代数続論》補題 \ref{more-algebra-lemma-integral-over-henselian-pair} により、
+$(A, \mathfrak m A)$ は Hensel 対である。$J = \sqrt{\mathfrak m A}$ とおく。
+すると $(A, J)$ は Hensel 対であり（《代数続論》補題
+\ref{more-algebra-lemma-change-ideal-henselian-pair}）、上の議論により \'etale 環準同型
+$A \to A'$ は同型 $A/J \to A'/J'$ を誘導する。《代数続論》補題
+\ref{more-algebra-lemma-characterize-henselian-pair} により
+$A' = A \times A''$ を得る。対応する非交和分解 $U' = U \amalg U''$ を考える。
+開集合 $(s')^{-1}(U)$ は、$R'_{p'}$ の点へ特殊化する $R'$ の点全体の集合である。
+$(t')^{-1}(U)$ についても同様である。また、
+$(s')^{-1}(U'') = (t')^{-1}(U'')$ である。これは $R'_{p'}$ へ特殊化しない点全体の
+集合だからである。したがって、非交和分解
+$$
+(U', R', s', t', c') =
+(U, R, s, t, c) \amalg
+(U'', R'', s'', t'', c'')
+$$
+を得る。これは直ちに $M' = M \amalg M''$ を与え、主張の証明は完了する。
+
+\medskip\noindent
+あとは標準写像 $U' \to M' \times_M U$ が同型であることを証明すればよい。
+これは \'etale 射である（《射》補題 \ref{morphisms-lemma-etale-permanence}）。
+他方、強 Hensel 局所環への基底変換（証明の第三段落と同様）と、主張の証明中に
+確立した全単射 $U'_{p'} \to U_p$ を用いると、$U' \to M' \times_M U$ は普遍全単射
+である（いくつかの詳細は省略する）。しかし、普遍全単射な \'etale 射は同型である
+（《降下》補題 \ref{descent-lemma-universally-injective-etale-open-immersion}）。
+これで証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-basis}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+次を仮定する。
+\begin{enumerate}
+\item $U = \Spec(A)$ および $R = \Spec(B)$ はアフィンである。
+\item $B = \bigoplus_{i \in I} s^\sharp(A)t^\sharp(x_i)$ を満たす元
+$x_i \in A$, $i \in I$ が存在する。
+\end{enumerate}
+このとき $A = \bigoplus_{i\in I} Cx_i$ かつ $B \cong A \otimes_C A$ である。
+ここで $C \subset A$ は、(\ref{groupoids-equation-invariants}) のとおりの $U$ 上の
+$R$-不変関数である。
+\end{lemma}
+
+\begin{proof}
+この証明では $s^\sharp, t^\sharp$ の代わりに $s, t : A \to B$ と書き、同様に
+$c : B \to B \otimes_{s, A, t} B$ と書く。
+$p_0 : B \to B \otimes_{s, A, t} B$, $b \mapsto b \otimes 1$ および
+$p_1 : B \to B \otimes_{s, A, t} B$, $b \mapsto 1 \otimes b$ と書く。
+補題 \ref{groupoids-lemma-diagram-pull} と $C$ の定義により、可換図式
+$$
+\xymatrix{
+B \otimes_{s, A, t} B &
+B \ar@<-1ex>[l]_-c \ar@<1ex>[l]^-{p_0} &
+A \ar[l]^t \\
+B \ar[u]^{p_1} &
+A \ar@<-1ex>[l]_s \ar@<1ex>[l]^t \ar[u]_s &
+C \ar[u] \ar[l]
+}
+$$
+を得る。さらに、左側の二つの正方形は環の圏で余 Cartesian であり、上段は図式
+$$
+\xymatrix{
+B \otimes_{t, A, t} B &
+B \ar@<-1ex>[l]_-{p_1} \ar@<1ex>[l]^-{p_0} &
+A \ar[l]^t
+}
+$$
+と同型である。条件 (2) は特に $s$（したがって、これと同型な射 $t$ も）が忠実平坦
+であることを含意するので、《降下》補題 \ref{descent-lemma-ff-exact} により、
+これは等化子図式である。下段は $C$ の定義により等化子図式である。
+$x_i$ を用いて可換図式
+$$
+\xymatrix{
+B \otimes_{s, A, t} B &
+B \ar@<-1ex>[l]_-c \ar@<1ex>[l]^-{p_0} &
+A \ar[l]^t \\
+\bigoplus_{i \in I} B x_i \ar[u]^{p_1} &
+\bigoplus_{i \in I} A x_i \ar@<-1ex>[l]_s \ar@<1ex>[l]^t \ar[u]_s &
+\bigoplus_{i \in I} C x_i \ar[u] \ar[l]
+}
+$$
+を得る。ここで右の垂直射では $x_i$ を $x_i$ に写し、中央の垂直射では $x_i$ を
+$t(x_i)$ に写し、左の垂直射では $x_i$ を
+$c(t(x_i)) = t(x_i) \otimes 1 = p_0(t(x_i))$ に写す（等式は補題
+\ref{groupoids-lemma-diagram} の図式上部の可換性による）。すると図式は可換である。
+さらに、仮定により中央の垂直射は同型である。左側の二つの正方形は余 Cartesian
+だから、左の垂直射も同型である。他方、水平な二つの行は完全である（すなわち等化子で
+ある）。したがって、右の垂直射も同型である。
+\end{proof}
+
+\begin{proposition}
+\label{groupoids-proposition-finite-flat-equivalence}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+次を仮定する。
+\begin{enumerate}
+\item $U = \Spec(A)$ および $R = \Spec(B)$ はアフィンである。
+\item $s, t : R \to U$ は有限局所自由である。
+\item $j = (t, s)$ は同値関係である。
+\end{enumerate}
+この場合、$C \subset A$ を (\ref{groupoids-equation-invariants}) のとおりとする。このとき
+$U \to M = \Spec(C)$ は有限局所自由であり、$R = U \times_M U$ である。
+さらに、$M$ は fppf 位相における商層 $U/R$ を表現する
+（定義 \ref{groupoids-definition-quotient-sheaf} を参照）。
+\end{proposition}
+
+\begin{proof}
+この証明では $s^\sharp, t^\sharp$ の代わりに記法 $s, t : A \to B$ を用いる。
+補題 \ref{groupoids-lemma-criterion-quotient-representable} により、
+$C \to A$ が有限局所自由であり、写像
+$$
+t \otimes s : A \otimes_C A \longrightarrow B
+$$
+が同型であることを示せば十分である。まず、$j$ はモノ射であり、さらに有限である
+（$s$, $t$ が既に有限だから）。したがって《射》補題
+\ref{morphisms-lemma-finite-monomorphism-closed} により $j$ は閉はめ込みである。
+よって $A \otimes_C A \to B$ は全射である。
+
+\medskip\noindent
+補題 \ref{groupoids-lemma-invariants-base-change} のように、平坦な環準同型 $C \to C'$ による
+基底変換を行い、不変関数の形成が平坦基底変換と可換であることを用いる
+（引用した補題の (3) を参照）。以下で、各素イデアル $\mathfrak p \subset C$ に
+対して、局所平坦環準同型 $C_{\mathfrak p} \to C_{\mathfrak p}'$ が存在し、
+$C_{\mathfrak p}'$ への基底変換後に結論が成り立つことを示す。これは直ちに
+$A \otimes_C A \to B$ が単射であることを含意する
+（《代数》補題 \ref{algebra-lemma-characterize-zero-local} を用いよ）。
+また、《代数》補題 \ref{algebra-lemma-local-flat-ff},
+\ref{algebra-lemma-flat-localization}, \ref{algebra-lemma-flatness-descends} を
+組み合わせると、$C \to A$ が平坦であることも従う。さらに
+$U \to \Spec(C)$ も全射だから（補題 \ref{groupoids-lemma-points}）、$C \to A$ は忠実平坦である。
+すると同型 $B \cong A \otimes_C A$ により、$A$ は有限表示 $C$-加群である
+（《代数》補題 \ref{algebra-lemma-descend-properties-modules}）。したがって
+$A$ は $C$ 上有限局所自由である（《代数》補題
+\ref{algebra-lemma-finite-projective}）。
+
+\medskip\noindent
+補題 \ref{groupoids-lemma-finite-locally-free-disjoint-free} により、$A$ は環 $A_r$ の有限積、
+$B$ は環 $B_r$ の有限積であり、亜群スキームもそれに応じて分解する
+（補題 \ref{groupoids-lemma-integral-over-invariants} の証明を参照）。すると $C$ も環
+$C_r$ の積であり、それに応じて $C'$ も積に分解する。したがって、環準同型
+$s, t : A \to B$ は固定した階数 $r$ の有限局所自由射であると仮定してよいし、
+実際そう仮定する。
+
+\medskip\noindent
+ここで用いる局所環準同型 $C_{\mathfrak p} \to C_{\mathfrak p}'$ は、
+$C_{\mathfrak p}'$ の剰余体が無限であるような任意の局所平坦環準同型である。
+《代数》補題 \ref{algebra-lemma-flat-local-given-residue-field} により、そのような
+局所環準同型は存在する。
+
+\medskip\noindent
+$C$ を極大イデアル $\mathfrak m$ と無限剰余体をもつ局所環とし、
+$s, t : A \to B$ は定数階数 $r > 0$ の有限局所自由射であると仮定する。
+$C \subset A$ は整だから（補題 \ref{groupoids-lemma-integral-over-invariants}）、
+$\mathfrak m$ 上にあるすべての素イデアルは極大であり、$A$ のすべての極大イデアルは
+$\mathfrak m$ 上にある。$C \subset B$ についても同様である。
+$\mathfrak m$ 上にある $A$ の極大イデアル $\mathfrak m'$ を選ぶ
+（補題 \ref{groupoids-lemma-points} により存在する）。$t : A \to B$ は有限局所自由なので、
+$\mathfrak m'$ 上にある $B$ の極大イデアルは高々有限個である。したがって、再び補題
+\ref{groupoids-lemma-points} により、$A$ は有限個の極大イデアルをもつ、すなわち $A$ は
+半局所環である。すると $B$ も半局所環である。さて、
+$t \otimes s : A \otimes_C A \to B$ は全射なので、《代数》補題
+\ref{algebra-lemma-semi-local-module-basis-in-submodule} を、環準同型 $C \to A$、
+$A$-加群 $M = B$（$t$ により $A$-加群とみなす）、および $C$-部分加群
+$s(A) \subset B$ に適用できる。この補題により、$M$ が基底
+$s(x_1), \ldots, s(x_r)$ をもつ自由 $A$-加群となるような
+$x_1, \ldots, x_r \in A$ が存在する。したがって補題 \ref{groupoids-lemma-basis} を適用すると、
+$C \to A$ は有限自由であり、$B \cong A \otimes_C A$ である。
+\end{proof}
+
+
+
+\section{有限平坦亜群}
+\label{groupoids-section-finite-flat-general}
+
+\noindent
+この節では、各同値類があるアフィン開集合に含まれるならば、有限平坦同値関係による
+スキームの商がスキームであることを示すのに役立つ補題を証明する。《空間の性質》
+命題 \ref{spaces-properties-proposition-finite-flat-equivalence-global} を参照せよ。
+
+\begin{lemma}
+\label{groupoids-lemma-find-invariant-affine}
+$S$ をスキームとし、$(U, R, s, t, c)$ を $S$ 上の亜群スキームとする。
+$s$, $t$ は有限局所自由であると仮定する。$u \in U$ を、
+$t(s^{-1}(\{u\}))$ が $U$ のあるアフィン開集合に含まれる点とする。このとき、
+$U$ における $u$ の $R$-不変なアフィン開近傍が存在する。
+\end{lemma}
+
+\begin{proof}
+$s$ は有限局所自由なので、有限ファイバーをもつ。したがって
+$t(s^{-1}(\{u\})) = \{u_1, \ldots, u_n\}$ は有限集合である。
+$u \in \{u_1, \ldots, u_n\}$ であることに注意せよ。
+$W \subset U$ を $\{u_1, \ldots, u_n\}$ を含むアフィン開集合とする。特に
+$u \in W$ である。$Z = R \setminus s^{-1}(W) \cap t^{-1}(W)$ を考える。
+これは $R$ の閉部分集合である。その像 $t(Z)$ は $U$ の閉部分集合であり、
+大まかには $U \setminus W$ のある点と $R$-同値な $U$ の点全体の集合と記述できる。
+したがって $W' = U \setminus t(Z)$ は $W$ に含まれる $U$ の $R$-不変な開部分スキームで、
+$\{u_1, \ldots, u_n\} \subset W'$ である。包含関係は
+$$
+\{u_1, \ldots, u_n\} \subset W' \subset W \subset U.
+$$
+である。$\{u_1, \ldots, u_n\} \subset D(f) \subset W'$ を満たす元
+$f \in \Gamma(W, \mathcal{O}_W)$ をとる。そのような $f$ は《代数》補題
+\ref{algebra-lemma-silly} により存在する。$W'$ の選び方から
+$s^{-1}(W') \subset t^{-1}(W)$ であり、したがって図式
+$$
+\xymatrix{
+s^{-1}(W') \ar[d]_s \ar[r]_-t & W \\
+W'
+}
+$$
+を得る。仮定により垂直射は有限局所自由である。そこで
+$$
+g = \text{Norm}_s(t^\sharp f) \in \Gamma(W', \mathcal{O}_{W'})
+$$
+とおく。構成により $g$ は $W'$ 上の関数で、$u$ において零でない。実際、
+$f$ は $u_1, \ldots, u_n$ で零でないので、$t^\sharp(f)$ は $u$ 上にある $R$ の
+各点で零でない。同様に、$D(g) \subset W'$ は、$w$ と同値なすべての点において
+$f$ が零でないような点 $w$ 全体の集合に等しい。これは $D(g)$ が $W'$ の
+$R$-不変なアフィン開集合であることを意味する。最終的な包含関係は
+$$
+\{u_1, \ldots, u_n\} \subset D(g) \subset D(f) \subset W' \subset W \subset U
+$$
+であり、これで証明が完了する。
+\end{proof}
+
+
+
+
+
+
+
+\section{準射影スキームの降下}
+\label{groupoids-section-quasi-projective}
+
+\noindent
+補題 \ref{groupoids-lemma-find-invariant-affine} を用いて、ある種の降下データが有効であることを
+示せる。
+
+\begin{lemma}
+\label{groupoids-lemma-descend-along-finite-with-bound}
+$X \to Y$ を全射な有限局所自由射とし、$d$ を正の整数とする。任意の幾何学的点
+$\bar{y} : \mathrm{Spec}(k) \to Y$ に対して、ファイバー $X_{\bar{y}}$ の点の個数は
+高々 $d$ であると仮定する。$V$ を $X$ 上のスキームで、$y \in Y$ および
+$v_1, \ldots, v_d \in V_y$ を満たすすべての
+$(y, v_1, \ldots, v_d)$ に対して、$v_1, \ldots, v_d \in U$ を満たすアフィン開集合
+$U \subset V$ が存在するものとする。このとき $V/X/Y$ 上の任意の降下データは
+有効である。
+\end{lemma}
+
+\begin{proof}
+$\varphi$ を《降下》定義 \ref{descent-definition-descent-datum} の意味での降下データと
+する。$Y$ 上のスキームから $\{X \to Y\}$ に関する降下データへの関手は充満忠実で
+あった。《降下》補題 \ref{descent-lemma-refine-coverings-fully-faithful} を参照せよ。
+したがって《構成》補題 \ref{constructions-lemma-relative-glueing} により、$Y$ が
+アフィンである場合に補題を証明すれば十分である。いくつかの詳細は省略する
+（$Y$ が分離的またはアフィン対角をもつならば、アフィンスキームから $X$ へのすべての
+射がアフィンなので、この議論は不要である）。
+
+\medskip\noindent
+$Y$ はアフィンであると仮定する。$V$ もアフィンならば、《降下》補題
+\ref{descent-lemma-affine} により有効性が成り立つ。したがって《降下》補題
+\ref{descent-lemma-effective-for-fpqc-is-local-upstairs} により、$V$ の各点 $v$ が
+$\varphi$-不変なアフィン開近傍をもつことを証明すれば十分である。亜群
+$(X, X \times_Y X, \text{pr}_1, \text{pr}_0, \text{pr}_{02})$ を考える。
+補題 \ref{groupoids-lemma-cartesian-equivalent-descent-datum} により、降下データ $\varphi$ は
+$\Spec(\mathbf{Z})$ 上の亜群スキームの Cartesian 射
+$$
+(V, R, s, t, c)
+\longrightarrow
+(X, X \times_Y X, \text{pr}_1, \text{pr}_0, \text{pr}_{02})
+$$
+を定め、またそれによって定まる。$X \to Y$ は有限局所自由だから、
+$\text{pr}_i : X \times_Y X \to X$、したがって $s$ と $t$ は有限局所自由であり、
+それらの幾何学的ファイバーの点の個数は高々 $d$ である。特に、点
+$v \in V$ の $R$-軌道 $t(s^{-1}(\{v\}))$ の点の個数は高々 $d$ である。
+補題 \ref{groupoids-lemma-cartesian-equivalent-descent-datum} の圏同値をもう一度用いると、
+$V$ の $\varphi$-不変開集合は $V$ の $R$-不変開集合と同じものである。
+この軌道のすべての点は $Y$ の同じ点に写るので、仮定により
+$t(s^{-1}(\{v\}))$ を含む $V$ のアフィン開集合が存在する。したがって補題
+\ref{groupoids-lemma-find-invariant-affine} は $v$ を含む $R$-不変なアフィン開集合を与える。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-descend-along-finite}
+$X \to Y$ を全射な有限局所自由射とする。$V$ を $X$ 上のスキームで、
+$y \in Y$ および $v_1, \ldots, v_d \in V_y$ を満たすすべての
+$(y, v_1, \ldots, v_d)$ に対して、$v_1, \ldots, v_d \in U$ を満たすアフィン開集合
+$U \subset V$ が存在するものとする。このとき $V/X/Y$ 上の任意の降下データは
+有効である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-descend-along-finite-with-bound} の証明と同様に、$Y$ はアフィン、
+したがって特に準コンパクトであると仮定してよい。すると $X \to Y$ のすべての
+幾何学的ファイバーの点の個数が高々 $d$ となる整数 $d$ が存在する。《射》節
+\ref{morphisms-section-universally-bounded} の議論を参照せよ。$V$ に関する仮定から、
+補題 \ref{groupoids-lemma-descend-along-finite-with-bound} を適用できることは直ちに従い、
+証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-descend-along-finite-quasi-projective}
+$X \to Y$ を全射な有限局所自由射とする。$V$ を $X$ 上のスキームで、次のいずれかを
+満たすものとする。
+\begin{enumerate}
+\item $V \to X$ は射影的である。
+\item $V \to X$ は準射影的である。
+\item $V$ 上に豊富な可逆層が存在する。
+\item $V$ 上に $X$-豊富な可逆層が存在する。
+\item $V$ 上に $X$-非常に豊富な可逆層が存在する。
+\end{enumerate}
+このとき $V/X/Y$ 上の任意の降下データは有効である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{groupoids-lemma-descend-along-finite} の条件を確認する。$y \in Y$ とし、
+$v_1, \ldots, v_d \in V$ を $y$ 上の点とする。(1) は (2) の特別な場合である
+（《射》補題 \ref{morphisms-lemma-projective-quasi-projective}）。
+(2) は (4) の特別な場合である
+（《射》定義 \ref{morphisms-definition-quasi-projective}）。
+$V$ 上に豊富な可逆層が存在するならば、《性質》補題
+\ref{properties-lemma-ample-finite-set-in-affine} により
+$v_1, \ldots, v_d$ を含むアフィン開集合が存在する。したがって (3) の場合はよい。
+(4) と (5) の場合、$Y$ を $y$ のアフィン開近傍で置き換えても問題ない。
+すると $X$ もアフィンである。(4) の場合、《射》定義
+\ref{morphisms-definition-relatively-ample} により $V$ は豊富な可逆層をもち、
+(3) に帰着する。(5) の場合、$V$ を $v_1, \ldots, v_d$ を含む準コンパクトな
+開集合で置き換え、《射》補題 \ref{morphisms-lemma-ample-very-ample} により
+(4) に帰着する。
+\end{proof}
+
+\begin{lemma}
+\label{groupoids-lemma-descend-along-finite-radicial}
+$X \to Y$ を radicial な全射有限局所自由射とし、$V$ を $X$ 上のスキームとする。
+このとき $V/X/Y$ 上の任意の降下データは有効である。
+\end{lemma}
+
+\begin{proof}
+$d = 1$ として補題 \ref{groupoids-lemma-descend-along-finite-with-bound} を適用する。
+\end{proof}

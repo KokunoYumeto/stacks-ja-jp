@@ -1,0 +1,4133 @@
+% Generated mechanically from frozen input inputs/p08/ja/trace.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{63}
+\chapter{トレース公式}
+
+
+
+\phantomsection
+\label{trace-section-phantom}
+
+
+
+\section{はじめに}
+\label{trace-section-introduction}
+
+\noindent
+これは、2009年秋に Columbia University で Johan de Jong が行った
+エタールコホモロジー講義の後半部の講義ノートである。当初のノート作成者は
+Thibaut Pugin、Zachary Maddock、Min Lee であった。今後、Stacks project
+の他の部分にある背景資料への参照を追加し、すべての主張に厳密な証明を
+与えていく。
+
+
+
+
+
+
+
+
+
+\section{トレース公式}
+\label{trace-section-trace-formula}
+
+\noindent
+典型的なエタールコホモロジーの講義なら、通常は固有基底変換定理と
+滑らかな基底変換定理、純粋性、Poincar\'e 双対性を述べて証明するであろう。
+これらはすべて \cite[Arcata]{SGA4.5} に収められている。ここでは代わりに、
+\cite[Rapport]{SGA4.5} にある Deligne の解説に従って、フロベニウスの
+トレース公式を調べる。扱うのは次元 1 の場合だけだが、固有基底変換を
+用いれば一般の場合にはこれで十分である。以下で考えるコホモロジー群は
+すべてエタールコホモロジーなので、添字 $_\etale$ は省略する。
+まず、求める公式を記述しよう。$X$ を有限体 $k$ 上の次元 1 の
+有限型スキーム、$\ell$ を素数、$\mathcal{F}$ を構成可能な平坦
+$\mathbf{Z}/\ell^n\mathbf{Z}$ 層とする。このとき
+\begin{equation}
+\label{trace-equation-trace-formula-initial}
+\sum\nolimits_{x \in X(k)}
+\text{Tr}(\text{Frob} | \mathcal{F}_{\bar x}) =
+\sum\nolimits_{i = 0}^2
+(-1)^i \text{Tr}(\pi_X^* | H^i_c(X \otimes_k \bar k, \mathcal{F}))
+\end{equation}
+が $\mathbf{Z}/\ell^n\mathbf{Z}$ の元として成り立つ。後で見るように、
+この定式化はそのままでは少し誤っている。それでも、まずここに現れる
+記号を説明しよう。
+
+
+
+
+\section{フロベニウス}
+\label{trace-section-frobenii}
+
+\noindent
+この節では「不可解な」定理を証明する。この定理の位相的な類似物は
+次のとおりである。
+
+\begin{exercise}
+\label{trace-exercise-baffling}
+$X$ を位相空間、$g : X \to X$ を連続写像とし、$X$ の任意の開集合
+$U$ に対して $g^{-1}(U) = U$ が成り立つとする。このとき $g$ は
+$X$ のコホモロジー上に恒等写像を誘導する（係数は任意でよい）。
+\end{exercise}
+
+\noindent
+次に、エタールサイトに対する主張へ移ろう。
+
+\begin{lemma}
+\label{trace-lemma-baffling}
+$X$ をスキーム、$g : X \to X$ を射とする。任意のエタール射
+$\varphi : U \to X$ に対して
+$$
+\xymatrix{
+U \ar[rd]_\varphi \ar[rr]^-\sim & & {U
+\times_{\varphi, X, g} X} \ar[ld]^{\text{pr}_2} \\
+& X
+}
+$$
+という同型があり、しかも $U$ に関して関手的であると仮定する。
+このとき $g$ はコホモロジー上に恒等写像を誘導する（層は任意でよい）。
+\end{lemma}
+
+\begin{proof}
+証明は形式的であり、困難はない。
+\end{proof}
+
+\noindent
+フロベニウス射のさまざまな変種については、Varieties, Section
+\ref{varieties-section-frobenius} を参照されたい。
+
+\begin{theorem}[不可解定理]
+\label{trace-theorem-baffling}
+$X$ を標数 $p > 0$ のスキームとする。このとき絶対フロベニウスは
+（引き戻しにより）コホモロジー上に自明な写像を誘導する。すなわち、
+すべての整数 $j\geq 0$ に対して
+$$
+F_X^* : H^j (X, \underline{\mathbf{Z}/n\mathbf{Z}}) \longrightarrow H^j (X,
+\underline{\mathbf{Z}/n\mathbf{Z}})
+$$
+は恒等写像である。
+\end{theorem}
+
+\noindent
+この定理は純粋に形式的である。しかし、コホモロジー類の引き戻しを
+どのように計算するかを復習しておくとよい。コホモロジーと
+{\v C}ech コホモロジーが一致する場合には、サイト上のファイバー積を
+用いて {\v C}ech コサイクルを引き戻せば十分である、とだけ述べておく。
+一般の場合はかなり技術的である。Hypercoverings, Theorem
+\ref{hypercovering-theorem-cohomology-hypercoverings} を参照されたい。
+定理を証明するには、補題 \ref{trace-lemma-baffling} の仮定が
+フロベニウスに対して成り立つことを確認するだけでよい。
+
+\begin{proof}[定理 \ref{trace-theorem-baffling} の証明]
+上に述べた関手的同型の存在を確認すればよい。エタール射
+$\varphi : U \to X$ に対して、図式
+$$
+\xymatrix{
+U \ar@{-->}[rd] \ar@/^1pc/[rrd]^{F_U}
+\ar@/_1pc/[rdd]_\varphi \\
+& {U \times_{\varphi, X, F_X} X} \ar[r]_-{\text{pr}_1}
+\ar[d]^{\text{pr}_2} & U \ar[d]^\varphi \\
+& X \ar[r]^{F_X} & X.
+}
+$$
+を考える。点線の矢印はエタール射かつ普遍的同相射なので、同型である。
+\'Etale Morphisms, Lemma
+\ref{etale-lemma-relative-frobenius-etale} を参照されたい。
+\end{proof}
+
+%10.22.09
+
+\begin{definition}
+\label{trace-definition-geometric-frobenius}
+$k$ を $q = p^f$ 個の元をもつ有限体とし、$X$ を $k$ 上のスキームとする。
+$X$ の{\it 幾何学的フロベニウス}とは、$F_X^f$ に等しい
+$\Spec(k)$ 上の射 $\pi_X : X \to X$ のことである。
+\end{definition}
+
+\noindent
+$\pi_X$ は $k$ 上の射なので、任意の $k$ 上のスキームへ基底変換できる。
+特に代数閉包 $\bar k$ へ基底変換して、射
+$\pi_X : X_{\bar k} \to X_{\bar k}$ を得る。この基底変換にも
+$\pi_X$ という記号を用いて混乱は生じないはずである。実際、
+$X_{\bar k}$ はそれ自身の幾何学的フロベニウスをもたない。
+
+\begin{lemma}
+\label{trace-lemma-sheaf-over-finite-field-has-frobenius-descent}
+$\mathcal{F}$ を $X_\etale$ 上の層とする。このとき標準同型
+$\pi_X^{-1} \mathcal{F} \cong \mathcal{F}$ および
+$\mathcal{F} \cong {\pi_X}_*\mathcal{F}$ が存在する。
+\end{lemma}
+
+\noindent
+これは fppf サイトでは偽である。
+
+\begin{proof}
+$\varphi : U \to X$ をエタール射とする。
+${\pi_X}_* \mathcal{F} (U) = \mathcal{F} (U \times_{\varphi, X, \pi_X} X)$
+であることを思い出そう。$\pi_X = F_X^f$ なので、定理
+\ref{trace-theorem-baffling} の証明から、関手的同型
+$$
+\xymatrix{
+U \ar[rd]_{\varphi} \ar[rr]_-{\gamma_U}
+& & U \times_{\varphi, X, \pi_X} X \ar[ld]^{\text{pr}_2} \\
+& X
+}
+$$
+が存在する。ここで $\gamma_U = (\varphi, F_U^f)$ である。
+そこで、同型
+$$
+\mathcal{F} (U) \longrightarrow {\pi_X}_* \mathcal{F} (U) =
+\mathcal{F} (U \times_{\varphi, X, \pi_X} X)
+$$
+を、$\gamma_U^{-1}$ に沿う $\mathcal{F}$ の制限写像として定める。
+もう一方の同型も同様である。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-may-be-confusing}
+$F^f_U$ が $\pi_U$ に等しい場合もあれば、等しくない場合もある。
+\end{remark}
+
+\noindent
+$q = p^f$ 個の元をもつ有限体 $k$ 上のスキーム $X$ における
+層のコホモロジーについて、議論を続ける。$k$ の代数閉包 $\bar k$ を
+一つ固定し、$G_k = \text{Gal}(\bar k/k)$ と書いて $k$ の絶対
+Galois 群を表す。$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。
+コホモロジー群
+$H^j (X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$ に左 $G_k$ 加群の
+構造を次のように定める。$\sigma \in G_k$ ならば、図式
+$$
+\xymatrix{
+X_{\bar k} \ar[rd] \ar[rr]^{\Spec(\sigma) \times \text{id}_X} & &
+X_{\bar k} \ar[ld] \\
+& X
+}
+$$
+は可換である。したがって、
+$\xi \in H^j (X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$ に対し
+$$
+\sigma \cdot \xi := (\Spec(\sigma) \times \text{id}_X)^*\xi \in
+H^j(X_{\bar k}, (\Spec(\sigma) \times \text{id}_X)^{-1}
+\mathcal{F}|_{X_{\bar k}})
+= H^j (X_{\bar k}, \mathcal{F}|_{X_{\bar k}}),
+$$
+と置ける。最後の等号は直前の図式の可換性による。これにより、
+後者の群は $G_k$ 加群となる。
+
+\begin{lemma}
+\label{trace-lemma-two-actions-agree}
+上の状況で、$\alpha : X \to \Spec(k)$ を構造射とする。
+\'Etale Cohomology, Section
+\ref{etale-cohomology-section-galois-action-stalks} で述べた自然な
+Galois 作用を備えた茎
+$(R^j\alpha_*\mathcal{F})_{\Spec(\bar k)}$ を考える。このとき、
+\'Etale Cohomology, Theorem
+\ref{etale-cohomology-theorem-higher-direct-images} による同一視
+$$
+(R^j\alpha_*\mathcal{F})_{\Spec(\bar k)} \cong H^j (X_{\bar k},
+\mathcal{F}|_{X_{\bar k}})
+$$
+は $G_k$ 加群の同型である。
+\end{lemma}
+
+\noindent
+$(R^j\alpha_!\mathcal{F})_{\Spec(\bar k)}$ と
+$H^j_c (X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$ を比較する場合にも、
+同様の結果が成り立つ。
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{trace-definition-arithmetic-frobenius}
+{\it 算術的フロベニウス}とは、$G_k$ の元である写像
+$\text{frob}_k : \bar k \to \bar k$, $x \mapsto x^q$ のことである。
+\end{definition}
+
+\begin{theorem}
+\label{trace-theorem-geometric-arithmetic-inverse}
+$\mathcal{F}$ を $X_\etale$ 上のアーベル層とする。このときすべての
+$j\geq 0$ に対して、$\text{frob}_k$ のコホモロジー群
+$H^j(X_{\bar k}, \mathcal{F}|_{X_{\bar k}})$ 上の作用は、
+写像 $\pi_X^*$ の逆である。
+\end{theorem}
+
+\noindent
+写像 $\pi_X^*$ は、合成
+$$
+H^j(X_{\bar k}, \mathcal{F}|_{X_{\bar k}}) \xrightarrow{{\pi_X}_{\bar k}^*}
+H^j(X_{\bar k}, (\pi_X^{-1} \mathcal{F})|_{X_{\bar k}}) \cong
+H^j(X_{\bar k}, \mathcal{F}|_{X_{\bar k}}).
+$$
+によって定義される。最後の同型は、補題
+\ref{trace-lemma-sheaf-over-finite-field-has-frobenius-descent} の標準同型
+$\pi_X^{-1} \mathcal{F} \cong \mathcal{F}$ から得られる。
+
+\begin{proof}
+合成 $X_{\bar k} \xrightarrow{\Spec(\text{frob}_k)} X_{\bar k}
+\xrightarrow{\pi_X} X_{\bar k}$ は $F_{X_{\bar k}}^f$ に等しいので、
+非自明な係数へ適切に一般化した不可解定理から結論が従う。なお、上の合成は
+$F_{X_{\bar k}}^f = \pi_X \circ \Spec(\text{frob}_k) =
+\Spec(\text{frob}_k) \circ \pi_X$ という意味で可換である。
+\end{proof}
+
+\begin{definition}
+\label{trace-definition-geometric-frobenius-on-stalk}
+$x \in X(k)$ を有理点とし、$\bar x : \Spec(\bar k) \to X$ を
+$x$ の上にある幾何学的点とする。$\text{frob}_k^{-1}$ の作用を
+$\pi_x : \mathcal{F}_{\bar x} \to \mathcal{F}_{\bar x}$ と書き、
+これを{\it 幾何学的フロベニウス}と呼ぶ\footnote{この記法は標準的ではない。
+\cite{SGA4.5} ではこの作用素を $F_x$ と書く。将来この記法を
+変更する可能性が高い。}
+\end{definition}
+
+\noindent
+これで、トレース公式 (\ref{trace-equation-trace-formula-initial}) を
+さらに精密に述べられる（ただし、なお偽の主張である）。
+$X$ を有限体 $k$ 上の次元 1 の有限型スキーム、$\ell$ を素数、
+$\mathcal{F}$ を構成可能な平坦
+$\mathbf{Z}/\ell^n\mathbf{Z}$ 層とする。このとき
+\begin{equation}
+\label{trace-equation-trace-formula-second}
+\sum\nolimits_{x \in X(k)}
+\text{Tr}(\pi_x | \mathcal{F}_{\bar x})
+=
+\sum\nolimits_{i = 0}^2
+(-1)^i \text{Tr}(\pi_X^* | H^i_c(X_{\bar k}, \mathcal{F}))
+\end{equation}
+が $\mathbf{Z}/\ell^n\mathbf{Z}$ の元として成り立つ。この等式が
+誤っている理由は、ここで考えている種類の層に対して右辺のトレースが
+意味をもたないことにある。この問題を扱う前に、幾何学的フロベニウスが
+現れる理由を説明してみよう（それが自然な射であるという事実は別として）。
+
+\medskip\noindent
+$X = \mathbf{P}^1_k$ かつ
+$\mathcal{F} = \underline{\mathbf{Z}/\ell\mathbf{Z}}$ の場合を考える。
+どの点でも Galois 加群 $\mathcal{F}_{\bar x}$ は自明なので、
+$\mathcal{F}_{\bar x}$ に作用する任意の射 $\varphi$ に対して、左辺は
+$$
+\sum\nolimits_{x \in X(k)} \text{Tr}(\varphi | \mathcal{F}_{\bar x}) =
+\#\mathbf{P}^1_k(k) = q+1.
+$$
+となる。$\mathbf{P}^1_k$ は固有なので、コンパクト台付きコホモロジーは
+通常のコホモロジーと等しい。したがって、射
+$\pi : \mathbf{P}^1_k \to \mathbf{P}^1_k$ に対して右辺は
+$$
+\text{Tr}(\pi^* | H^0 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}})) + \text{Tr}(\pi^* | H^2
+(\mathbf{P}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}})).
+$$
+に等しい。Galois 加群
+$H^0 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}}) = \mathbf{Z}/\ell\mathbf{Z}$
+は自明である。実際、恒等写像の引き戻しは恒等写像である。
+したがって $\pi$ によらず、最初のトレースは 1 である。
+二番目のトレースについては、写像
+$\pi : \mathbf{P}^1_{\bar k} \to \mathbf{P}^1_{\bar k}$ に対する引き戻し
+$\pi^* : H^2(\mathbf{P}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}}))$
+を計算する必要がある。これはよい演習であり、答えは $\pi$ の次数による
+乗法である（証明は \'Etale Cohomology, Lemma
+\ref{etale-cohomology-lemma-pullback-on-h2-curve} を参照）。
+言い換えれば、これはよく知られた複素コホモロジーの場合と同じように
+振る舞う。特に $\pi$ が幾何学的フロベニウスなら
+$$
+\text{Tr}(\pi_X^* | H^2 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}})) = q
+$$
+を得る。一方、$\pi$ が算術的フロベニウスなら
+$$
+\text{Tr}(\text{frob}_k^* | H^2 (\mathbf{P}^1_{\bar k},
+\underline{\mathbf{Z}/\ell\mathbf{Z}})) = q^{-1}.
+$$
+を得る。後者の選択が明らかに誤りである。
+
+\begin{remark}
+\label{trace-remark-compute-degree-lifting}
+次数の計算は、（ある明白な意味で）標数 0 へ持ち上げて
+複素係数の場合を考えることでも行える。この方法はほとんど常に使えない。
+射影空間でないスキームは一般には持ち上げられないからである。
+\end{remark}
+
+\noindent
+なぜコンパクト台付きコホモロジーを考えなければならないのかという問題が
+残る。実際、Poincar\'e 双対性を考慮すれば、滑らかな多様体に対して
+厳密には必要ではないが、その場合は $q$ のあるべき乗を加えることになる。
+例えば、$X = \mathbf{A}^1_k$ かつ
+$\mathcal{F} = \underline{\mathbf{Z}/\ell\mathbf{Z}}$ の場合を考えよう。
+茎上の作用はやはり自明なので、コホモロジー上の作用だけを見ればよい。
+しかしこのとき $\pi_X^*$ は
+$H^0(\mathbf{A}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}})$
+上では恒等写像として作用し、
+$H^2_c(\mathbf{A}^1_{\bar k}, \underline{\mathbf{Z}/\ell\mathbf{Z}})$
+上では $q$ 倍として作用する。
+
+
+
+
+\section{トレース}
+\label{trace-section-traces}
+
+\noindent
+ここでは、非可換環上の加群の自己準同型のトレースをどのように取るかを
+説明する。濃度が $p$ と互いに素である有限環 $\Lambda$ を固定する。
+典型的には、$\Lambda$ はある有限群 $G$ に対する群環
+$(\mathbf{Z}/\ell^n\mathbf{Z})[G]$ である。規約として、以下で考える
+すべての $\Lambda$ 加群は左 $\Lambda$ 加群とする。
+
+\medskip\noindent
+次の記法を導入する。この環の交換子、すなわち
+$ab-ba$（$a, b \in \Lambda$）という形の元が生成する加法部分群で
+$\Lambda$ を割った商を $\Lambda^\natural$ と書く。
+$\Lambda^\natural$ は環ではないことに注意する。
+
+\medskip\noindent
+例えば、加群 $(\mathbf{Z}/\ell^n\mathbf{Z})[G]^\natural$ は
+類関数の双対であり、したがって
+$$
+(\mathbf{Z}/\ell^n\mathbf{Z})[G]^\natural
+=
+\bigoplus\nolimits_{\text{各共役類、ただし群は }G}
+\mathbf{Z}/\ell^n\mathbf{Z}.
+$$
+自由 $\Lambda$ 加群に対して
+$\text{End}_\Lambda(\Lambda^{\oplus m}) = \text{Mat}_m(\Lambda)$
+である。これらが左加群であるため、自己準同型の行列表示は右作用になる
+ことに注意する。すなわち、
+$a \in \text{End}(\Lambda^{\oplus m})$ の行列が $A$ であり、
+$v \in \Lambda$ ならば $a(v) = v A$ である。
+
+\begin{definition}
+\label{trace-definition-trace}
+自己準同型 $a$ の{\it トレース}とは、それを表す行列の対角成分の
+和である。これは加法写像
+$\text{Tr} :
+\text{End}_\Lambda(\Lambda^{\oplus m}) \to \Lambda^\natural$
+を定める。
+\end{definition}
+
+\begin{exercise}
+\label{trace-exercise-trace-is-trace}
+写像
+$$
+\Lambda^{\oplus m} \xrightarrow{a} \Lambda^{\oplus n}
+\quad\text{および}\quad
+\Lambda^{\oplus n} \xrightarrow{b} \Lambda^{\oplus m}
+$$
+が与えられたとき、$\text{Tr}(ab) = \text{Tr}(ba)$ を示せ。
+\end{exercise}
+
+\noindent
+トレースの定義を、有限射影 $\Lambda$ 加群 $P$ と $P$ の自己準同型
+$\varphi$ に次のように拡張する。$P$ を自由 $\Lambda$ 加群の
+直和因子として書く。すなわち、写像
+$P \xrightarrow{a} \Lambda^{\oplus n} \xrightarrow{b} P$ で
+\begin{enumerate}
+\item
+$\Lambda^{\oplus n} = \Im(a) \oplus \Ker(b)$、かつ
+\item
+$b\circ a = \text{id}_P$
+\end{enumerate}
+を満たすものを考える。そして
+$\text{Tr}(\varphi) = \text{Tr}(a\varphi b)$ と定める。直前の演習を
+用いれば、これが良定義であることは容易に確認できる。
+
+
+
+
+
+
+
+
+\section{なぜ導来圏なのか？}
+\label{trace-section-derived-categories-why}
+
+\noindent
+このトレースの定義を踏まえて、ここで述べた形の公式が抱える別の問題を
+議論しよう。$C$ を $k$ 上の滑らかな射影曲線とする。一方には、
+茎が ${(\mathbf{Z}/\ell^n\mathbf{Z})}^{\oplus m}$ に同型である
+$C_\etale$ 上の有限局所定数層 $\mathcal{F}$ があり、他方には
+（$\bar c$ を一つ固定して）
+連続表現 $\rho : \pi_1 (C, \bar c) \to
+\text{GL}_m(\mathbf{Z}/\ell^n\mathbf{Z}))$ がある。両者の間には
+対応がある。$\rho$ に対応する層を $\mathcal{F}_\rho$ と書く。
+このとき $H^2 (C_{\bar k}, \mathcal{F}_\rho)$ は、
+${(\mathbf{Z}/\ell^n\mathbf{Z})}^{\oplus m}$ 上の
+$\rho(\pi_1 (C, \bar c))$ の作用に関する余不変量群であり、
+短完全列
+$$
+0 \longrightarrow \pi_1 (C_{\bar k}, \bar c) \longrightarrow \pi_1 (C, \bar c)
+\longrightarrow G_k \longrightarrow 0.
+$$
+がある。例えば、$\mathbf{Z} = \mathbf{Z} \sigma$ が
+$\sigma(x) = (1+\ell) x$ によって
+$\mathbf{Z}/\ell^2\mathbf{Z}$ に作用するとする。余不変量は
+$(\mathbf{Z}/\ell^2\mathbf{Z})_{\sigma} = \mathbf{Z}/\ell\mathbf{Z}$
+であり、これは平坦な $\mathbf{Z}/\ell^2\mathbf{Z}$ 加群ではない。
+したがって、少なくとも前節の意味では
+$H^2(C_{\bar k}, \mathcal{F}_\rho)$ 上の何らかの作用のトレースを
+取ることができない。
+
+\medskip\noindent
+実際、目標は $\ell$ 進係数に対するトレース公式を考えることである。
+しかし $\mathbf{Q}_\ell = \mathbf{Z}_\ell[1/\ell]$ かつ
+$\mathbf{Z}_\ell = \lim \mathbf{Z}/\ell^n\mathbf{Z}$ であり、
+平坦な $\mathbf{Z}/\ell^n\mathbf{Z}$ 層であっても個々の
+コホモロジー群は平坦とは限らないので、トレースを計算できない。
+一つの解決策は、導来圏 $D(\mathbf{Z}/\ell^n\mathbf{Z})$ において
+全導来複体 $R\Gamma(C_{\bar k}, \mathcal{F}_\rho)$ を考え、
+それが完全対象であることを示すことである。これは、有限自由加群からなる
+有限複体に擬同型であることを意味する。そのような複体にはトレースを
+定義できるが、そのためには導来圏について説明する必要がある。
+
+
+
+
+
+
+\section{導来圏}
+\label{trace-section-derived-categories}
+
+\noindent
+記法を整えるため、$\mathcal{A}$ をアーベル圏とする。
+$\text{Comp}(\mathcal{A})$ を $\mathcal{A}$ における複体の
+アーベル圏とする。$K(\mathcal{A})$ をホモトピーまでの複体の圏、
+すなわち対象が $\mathcal{A}$ における複体で、射が複体の射の
+ホモトピー類である圏とする。これはアーベル圏ではない。
+大まかに言えば、$D(A)$ は $\text{Comp}(\mathcal{A})$、または
+同じことだが $K(\mathcal{A})$ のすべての擬同型を可逆にして得られる
+圏として定義される。さらに、下に有界な複体だけを用いて同様に
+$\text{Comp}^+(\mathcal{A}), K^+(\mathcal{A}), D^+(\mathcal{A})$
+を定義できる。同様に、上に有界な複体を用いて
+$\text{Comp}^-(\mathcal{A}), K^-(\mathcal{A}), D^-(\mathcal{A})$
+を定義でき、有界複体を用いて
+$\text{Comp}^b(\mathcal{A}), K^b(\mathcal{A}), D^b(\mathcal{A})$
+を定義できる。
+
+\begin{remark}
+\label{trace-remarks-derived-categories}
+導来圏についての注意を挙げる。
+\begin{enumerate}
+\item
+$\mathcal{A}$ がかなり任意である場合には集合論的な問題がいくつか
+生じるが、ここでは喜んで無視する。
+\item
+圏 $K(A)$ と $D(A)$ には三角圏の構造が備わっている。
+\item
+圏 $\text{Comp}(\mathcal{A})$ と $K(\mathcal{A})$ は、
+$\mathcal{A}$ が加法圏である場合にも定義できる。
+\end{enumerate}
+\end{remark}
+
+\noindent
+複体 $K^\bullet \mapsto H^i(K^\bullet)$ を与えるコホモロジー関手
+$H^i : \text{Comp}(\mathcal{A}) \to \mathcal{A}$ は、
+関手 $H^i : K(\mathcal{A}) \to \mathcal{A}$ および
+$H^i : D(\mathcal{A}) \to \mathcal{A}$ に拡張される。
+
+\begin{lemma}
+\label{trace-lemma-when-in-bounded}
+$D(\mathcal{A})$ の対象 $E$ が $D^+(\mathcal{A})$ に含まれることと、
+すべての $i \ll 0$ に対して $H^i(E) =0 $ であることは同値である。
+$D^-$ と $D^b$ についても同様の主張が成り立つ。
+\end{lemma}
+
+\begin{proof}
+ヒント：切断関手を用いる。Derived Categories, Lemma
+\ref{derived-lemma-complex-cohomology-bounded} を参照されたい。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-derived-categories}
+導来圏の対象間の射について、次が成り立つ。
+\begin{enumerate}
+\item
+$I^\bullet \in \text{Comp}^+(\mathcal{A})$ とし、すべての
+$n \in \mathbf{Z}$ に対して $I^n$ が入射的であるとする。このとき
+$$
+\Hom_{D(\mathcal{A})}(K^\bullet, I^\bullet)
+=
+\Hom_{K(\mathcal{A})}(K^\bullet, I^\bullet).
+$$
+\item
+$P^\bullet \in \text{Comp}^-(\mathcal{A})$ とし、すべての
+$n \in \mathbf{Z}$ に対して $P^n$ が射影的であるとする。このとき
+$$
+\Hom_{D(\mathcal{A})}(P^\bullet, K^\bullet)
+=
+\Hom_{K(\mathcal{A})}(P^\bullet, K^\bullet).
+$$
+\item
+$\mathcal{A}$ が十分な入射的対象をもち、
+$\mathcal{I} \subset \mathcal{A}$ が入射的対象からなる加法部分圏なら
+$
+D^+(\mathcal{A})\cong K^+(\mathcal{I})
+$
+である（三角圏として）。
+\item
+$\mathcal{A}$ が十分な射影的対象をもち、
+$\mathcal{P} \subset \mathcal{A}$ が射影的対象からなる加法部分圏なら
+$
+D^-(\mathcal{A}) \cong K^-(\mathcal{P}).
+$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\begin{definition}
+\label{trace-definition-derived-functor}
+$F: \mathcal{A} \to \mathcal{B}$ を左完全関手とし、
+$\mathcal{A}$ は十分な入射的対象をもつと仮定する。$F$ の
+{\it 全右導来関手}を、図式
+$$
+\xymatrix{
+D^+(\mathcal{A}) \ar[r]^{RF} & D^+(\mathcal{B}) \\
+K^+(\mathcal I) \ar[u] \ar[r]^F & K^+(\mathcal{B}). \ar[u]
+}
+$$
+に適合する関手 $RF: D^+(\mathcal{A}) \to D^+(\mathcal{B})$ として
+定義する。直前の補題により左の垂直矢印は可逆なので、これは可能である。
+同様に、$G: \mathcal{A} \to \mathcal{B}$ を右完全関手とし、
+$\mathcal{A}$ は十分な射影的対象をもつと仮定する。$G$ の
+{\it 全左導来関手}を、図式
+$$
+\xymatrix{
+D^-(\mathcal{A}) \ar[r]^{LG} & D^-(\mathcal{B}) \\
+K^-(\mathcal{P}) \ar[u] \ar[r]^G & K^-(\mathcal{B}). \ar[u]
+}
+$$
+に適合する関手 $LG: D^-(\mathcal{A})
+\to D^-(\mathcal{B})$ として定義する。直前の補題により左の垂直矢印は
+可逆なので、これは可能である。
+\end{definition}
+
+\begin{remark}
+\label{trace-remark-cohomology-of-derived-functor}
+この場合、$R^iF(K^\bullet) = H^i(RF(K^\bullet))$ が成り立つ。
+ここで左辺は、複体 $F(K^\bullet)$ の第 $i$ コホモロジーとして
+定義される。
+\end{remark}
+
+
+
+
+\section{フィルター付き導来圏}
+\label{trace-section-filtered-derived-category}
+
+\noindent
+結局、すべてをもう一度行い、フィルター付き導来圏も構成しなければ
+ならない。
+
+\begin{definition}
+\label{trace-definition-filtered}
+$\mathcal{A}$ をアーベル圏とする。
+\begin{enumerate}
+\item $\text{Fil}(\mathcal{A})$ を、$\mathcal{A}$ の
+フィルター付き対象 $(A, F)$ の圏とする。ここで $F$ は
+$$
+A \supset \ldots \supset F^n A \supset F^{n+1}A \supset \ldots
+\supset 0.
+$$
+という形のフィルトレーションである。これは加法圏である。
+\item $\text{Fil}(\mathcal{A})$ の対象 $(A, F)$ のうち
+フィルトレーションが有限であるものからなる充満部分圏を
+$\text{Fil}^f(\mathcal{A})$ と書く。これも加法圏である。
+\item 対象 $I \in \text{Fil}^f(\mathcal{A})$ は、すべての $p$ に対して
+$\text{gr}^p(I) = \text{gr}_F^p(I) = F^pI/F^{p+1}I$ が
+$\mathcal{A}$ において入射的（それぞれ射影的）であるとき、
+{\it フィルター付き入射的対象}（それぞれ{\it 射影的対象}）と呼ばれる。
+\item 複体の圏
+$\text{Comp}(\text{Fil}^f(\mathcal{A})) \supset
+\text{Comp}^+(\text{Fil}^f(\mathcal{A}))$
+およびそのホモトピー圏
+$K(\text{Fil}^f(\mathcal{A})) \supset K^+(\text{Fil}^f(\mathcal A))$
+を先と同じように定義する。
+\item $\text{Comp}(\text{Fil}^f(\mathcal{A}))$ における複体の射
+$\alpha : K^\bullet \to L^\bullet$ は、すべての
+$p \in \mathbf{Z}$ に対して
+$$
+\text{gr}^p(\alpha): \text{gr}^p(K^\bullet) \to \text{gr}^p(L^\bullet)
+$$
+が擬同型であるとき、{\it フィルター付き擬同型}と呼ばれる。
+\item $K(\text{Fil}^f(\mathcal{A}))$（それぞれ
+$K^+(\text{Fil}^f(\mathcal{A}))$）においてフィルター付き擬同型を
+可逆にすることにより、$DF(\mathcal{A})$（それぞれ
+$DF^+(\mathcal{A})$）を定義する。
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+\label{trace-lemma-filtered-derived-category}
+$\mathcal{A}$ が十分な入射的対象をもつなら
+$DF^+(\mathcal{A}) \cong K^+(\mathcal{I})$ である。ここで
+$\mathcal{I}$ は、フィルター付き入射的対象からなる
+$\text{Fil}^f(\mathcal{A})$ の充満加法部分圏である。同様に、
+$\mathcal{A}$ が十分な射影的対象をもつなら
+$DF^-(\mathcal{A}) \cong K^-(\mathcal{P})$ である。ここで
+$\mathcal P$ は、フィルター付き射影的対象からなる
+$\text{Fil}^f(\mathcal{A})$ の充満加法部分圏である。
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+\section{フィルター付き導来関手}
+\label{trace-section-filtered-derived-functors}
+
+\noindent
+さらに、フィルター付き導来関手がある。
+
+\begin{definition}
+\label{trace-definition-filtered-derived-functors}
+$T: \mathcal{A} \to \mathcal{B}$ を左完全関手とし、
+$\mathcal{A}$ は十分な入射的対象をもつと仮定する。
+$RT: DF^+(\mathcal{A}) \to D
+F^+(\mathcal{B})$ を、図式
+$$
+\xymatrix{
+DF^+(\mathcal{A}) \ar[r]^{RT} & DF^+(\mathcal{B}) \\
+K^+(\mathcal{I}) \ar[u] \ar[r]^{T \quad} & K^+(\text{Fil}^f(\mathcal{B})).
+\ar[u]}
+$$
+に適合するように定める。これは直前の補題により良定義である。
+$G: \mathcal{A} \to \mathcal{B}$ を右完全関手とし、
+$\mathcal{A}$ は十分な射影的対象をもつと仮定する。
+$LG: DF^-(\mathcal{A}) \to DF^-(\mathcal{B})$ を、図式
+$$
+\xymatrix{
+DF^-(\mathcal{A}) \ar[r]^{LG} & DF^-(\mathcal{B}) \\
+K^-(\mathcal{P}) \ar[u] \ar[r]^{G \quad} & K^-(\text{Fil}^f(\mathcal{B})).
+\ar[u]}
+$$
+に適合するように定める。これも直前の補題により良定義である。
+関手 $RT$、それぞれ $LG$ を、$T$、それぞれ $G$ の
+{\it フィルター付き導来関手}と呼ぶ。
+\end{definition}
+
+\begin{proposition}
+\label{trace-proposition-compare-filtered-graded}
+上の状況では
+$$
+\text{gr}^p \circ RT = RT \circ \text{gr}^p
+$$
+が成り立つ。ここで左辺の $RT$ はフィルター付き導来関手であり、
+右辺のものは全導来関手である。すなわち、可換図式
+$$
+\xymatrix{
+DF^+(\mathcal{A}) \ar[r]^{RT} \ar[d]_{\text{gr}^p} & DF^+(\mathcal{B})
+\ar[d]^{\text{gr}^p}\\
+D^+(\mathcal{A}) \ar[r]^{RT} & D^+(\mathcal{B}).}
+$$
+がある。
+\end{proposition}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+$K^\bullet \in DF^+(\mathcal{B})$ が与えられると、スペクトル系列
+$$
+E_1^{p, q} = H^{p+q}(\text{gr}^p K^\bullet) \Rightarrow
+H^{p+q}(\text{フィルトレーションを忘れる}(K^\bullet)).
+$$
+を得る。
+
+
+
+
+
+
+\section{フィルター付き複体の応用}
+\label{trace-section-applications-filtered}
+
+\noindent
+$\mathcal{A}$ を十分な入射的対象をもつアーベル圏とし、
+$0 \to L \to M \to N \to 0$ を $\mathcal{A}$ における短完全列とする。
+$M$ に、次で定めるフィルトレーションを備えた対象を
+$\widetilde M \in \text{Fil}^f(\mathcal{A})$ として考える。
+$$
+F^1M = L, \ F^nM = M
+\text{（条件：}n \leq 0\text{）、また }F^nM = 0\text{（条件：}n \geq 2.
+$$
+定義から
+$$
+\text{forget filt}(\widetilde M) = M, \quad
+\text{gr}^0(\widetilde M) = N, \quad
+\text{gr}^1(\widetilde M) = L
+$$
+であり、他のすべての $n \neq 0, 1$ に対して
+$\text{gr}^n(\widetilde M) = 0$ である。
+$T: \mathcal{A} \to \mathcal{B}$ を左完全関手とし、
+$\mathcal{A}$ は十分な入射的対象をもつと仮定する。このとき
+$RT(\widetilde M) \in DF^+(\mathcal{B})$ はフィルター付き複体であり、
+$$
+\text{gr}^p(RT(\widetilde M))
+\stackrel{\text{qis}}{=}
+\left\{
+\begin{matrix}
+0 & \text{条件} & p \neq 0, 1, \\
+RT(N) & \text{条件} & p = 0, \\
+RT(L) & \text{条件} & p = 1.
+\end{matrix}
+\right.
+$$
+を満たす。また
+$\text{forget filt}(RT(\widetilde M))\stackrel{\text{qis}}{ = } RT(M)$
+である。$RT(\widetilde M)$ にスペクトル系列を適用すると
+$$
+E_1^{p, q} = R^{p+q}T(\text{gr}^p(\widetilde M)) \Rightarrow
+R^{p+q}T(\text{forget filt}(\widetilde M)).
+$$
+を得る。このスペクトル系列を展開すると長完全列
+$$
+\xymatrix{
+0 \ar[r] & T(L) \ar[r] & T(M) \ar[r] & T(N) \ar@(rd, ul)[rdllllr] \\
+& R^1T(L) \ar[r] & R^1T(M) \ar[r] & \ldots
+}
+$$
+を得る。これは次のように用いる。$X/k$ を有限型スキームとし、
+$\mathcal{F}$ を平坦で構成可能な
+$\mathbf{Z}/\ell^n \mathbf{Z}$ 加群とする。このとき、トレース
+$$
+\text{Tr}( \pi_X^\ast | R\Gamma_c(X_{\bar k}, \mathcal{F})) \in
+\mathbf{Z}/\ell^n \mathbf{Z}
+$$
+が短完全列に関して加法的であることを示したい。そのためには
+$R\Gamma_c(X_{\bar k}, -) \in D^+(\mathbf{Z}/\ell^n \mathbf{Z})$
+だけで議論するのでは不十分であり、フィルター付き導来圏を
+用いなければならない。
+
+
+
+
+
+
+
+
+%10.29.09
+\section{完全性}
+\label{trace-section-perfect}
+
+\noindent
+$\Lambda$ を（可換とは限らない）環とし、
+$\text{Mod}_{\Lambda}$ を左 $\Lambda$ 加群の圏、
+$K(\Lambda) = K(\text{Mod}_\Lambda)$ をそのホモトピー圏、
+$D(\Lambda)= D(\text{Mod}_\Lambda)$ をその導来圏とする。
+
+\begin{definition}
+\label{trace-definition-perfect}
+有限射影 $\Lambda$ 加群の有界複体を対象とし、ホモトピーまでの
+複体の射を射とする圏を $K_{perf}(\Lambda)$ と書く。関手
+$K_{perf}(\Lambda)\to D(\Lambda)$ は充満忠実である
+（Derived Categories, Lemma
+\ref{derived-lemma-morphisms-from-projective-complex}）。
+その本質的像を $D_{perf}(\Lambda)$ と書く。
+$D(\Lambda)$ の対象が $D_{perf}(\Lambda)$ に属するとき、
+その対象を{\it 完全}と呼ぶ。
+\end{definition}
+
+\begin{proposition}
+\label{trace-proposition-trace-well-defined}
+$K\in D_{perf}(\Lambda)$ かつ
+$f\in \text{End}_{D(\Lambda)}(K)$ とする。このときトレース
+$\text{Tr}(f)\in \Lambda^\natural$ は良定義である。
+\end{proposition}
+
+\begin{proof}
+この証明では以後、Derived Categories, Lemma
+\ref{derived-lemma-morphisms-from-projective-complex} を断りなく用いる。
+$P^\bullet$ を有限射影 $\Lambda$ 加群の有界複体とし、
+$\alpha : P^\bullet \to K$ を $D(\Lambda)$ における同型とする。
+このとき $\alpha^{-1}\circ f\circ \alpha$ は、ホモトピーを除いて
+良定義な複体の射 $f^\bullet : P^\bullet \to P^\bullet$ に対応する。
+そこで
+$$
+\text{Tr}(f) = \sum_i (-1)^i \text{Tr}(f^i : P^i \to P^i) \in \Lambda^\natural.
+$$
+と定める。$P^\bullet$ と $\alpha$ を固定すれば、これは
+$f^\bullet$ の選び方によらない。実際、別の選び方は、ある
+$h^i : P^i \to P^{i-1}(i\in \mathbf{Z})$ によって
+$\tilde{f}^\bullet = f^\bullet + dh +hd$ と書ける。しかし
+\begin{eqnarray*}
+\text{Tr}(dh) & = & \sum_i (-1)^i \text{Tr}(P^i\xrightarrow{dh} P^i) \\
+& = & \sum_i (-1)^i \text{Tr}(P^{i-1}\xrightarrow{hd} P^{i-1}) \\
+& = & -\sum_i (-1)^{i-1}\text{Tr}(P^{i-1}\xrightarrow{hd} P^{i-1}) \\
+& = & - \text{Tr}(hd)
+\end{eqnarray*}
+なので、$\sum_i (-1)^i \text{Tr} ((dh+hd)|_{P^i})=0$ である。
+さらに、この定義は $(P^\bullet , \alpha)$ の選び方にもよらない。
+$(Q^\bullet, \beta)$ を別の選び方とする。合成
+$$
+Q^\bullet \xrightarrow{\beta} K \xrightarrow{\alpha^{-1}} P^\bullet
+\quad\text{および}\quad
+P^\bullet \xrightarrow{\alpha} K \xrightarrow{\beta^{-1}} Q^\bullet
+$$
+はそれぞれ複体の射 $\gamma_1^\bullet$ と $\gamma_2^\bullet$ で
+表され、$\gamma_1^\bullet \circ \gamma_2^\bullet$ は恒等写像と
+ホモトピックである。したがって、複体の射
+$\gamma_2^\bullet\circ f^\bullet\circ \gamma_1^\bullet :
+Q^\bullet\to Q^\bullet$ は、$D(\Lambda)$ における射
+$\beta^{-1}\circ f\circ\beta$ を表す。ここで
+\begin{eqnarray*}
+\text{Tr}(\gamma_2^\bullet\circ f^\bullet\circ\gamma_1^\bullet|_{Q^\bullet}) &
+= & \text{Tr}(\gamma_1^\bullet \circ\gamma_2^\bullet \circ
+f^\bullet|_{P^\bullet})\\
+& = & \text{Tr}(f^\bullet|_{P^\bullet})
+\end{eqnarray*}
+である。これは $\gamma_1^\bullet \circ \gamma_2^\bullet$ が
+恒等写像とホモトピックであることと、上で示した
+$f^\bullet$ の選び方からの独立性による。
+\end{proof}
+
+
+
+
+\section{フィルトレーションと完全複体}
+\label{trace-section-filtrations-perfect}
+
+\noindent
+ここでは、完全複体の圏のフィルター付き版を述べる。
+$\text{Fil}^f(\text{Mod}_\Lambda)$ の対象 $(M, F)$ は、
+すべての $p$ に対して $\text{gr}^p_F (M)$ が有限かつ射影的であるとき、
+{\it フィルター付き有限射影的}であるという。そこで、
+$\text{Fil}^f(\text{Mod}_\Lambda)$ のフィルター付き有限射影的対象からなる
+有界複体のホモトピー圏 $KF_{\text{perf}}(\Lambda)$ を考える。
+圏の図式
+$$
+\begin{matrix}
+KF(\Lambda) & \supset & KF_{\text{perf}}(\Lambda)\\
+\downarrow & & \downarrow\\
+DF(\Lambda) & \supset & DF_{\text{perf}}(\Lambda)
+\end{matrix}
+$$
+があり、以前と同様、右の垂直関手は充満忠実で、
+圏 $DF_{\text{perf}}(\Lambda)$ はその本質的像である。
+
+\begin{lemma}[加法性]
+\label{trace-lemma-additivity}
+$K\in DF_{\text{perf}}(\Lambda)$ かつ $f\in
+\text{End}_{DF}(K)$ とする。このとき
+$$
+\text{Tr}(f|_K) =
+\sum\nolimits_{p\in \mathbf{Z}} \text{Tr}(f|_{\text{gr}^p K}).
+$$
+\end{lemma}
+
+\begin{proof}
+命題 \ref{trace-proposition-trace-well-defined} により、
+$\text{Fil}^f(\text{Mod}_\Lambda)$ のフィルター付き有限射影的対象からなる
+有界複体 $P^\bullet$ と、
+$\text{Comp}(\text{Fil}^f(\text{Mod}_\Lambda))$ における写像
+$f^\bullet : P^\bullet\to P^\bullet$ が与えられていると仮定してよい。
+したがって補題は次の結果から従う。その証明は読者に委ねる。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-additive-filtered-finite-projective}
+$P \in \text{Fil}^f(\text{Mod}_\Lambda)$ をフィルター付き有限射影的対象、
+$f : P \to P$ を $\text{Fil}^f(\text{Mod}_\Lambda)$ における
+自己準同型とする。このとき
+$$
+\text{Tr}(f|_P) =
+\sum\nolimits_p \text{Tr}(f|_{\text{gr}^p(P)}).
+$$
+\end{lemma}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+
+
+
+
+
+
+
+\section{完全対象の特徴づけ}
+\label{trace-section-characterizing-perfect}
+
+\noindent
+可換の場合については、More on Algebra, Sections
+\ref{more-algebra-section-pseudo-coherent},
+\ref{more-algebra-section-tor}、および
+\ref{more-algebra-section-perfect} を参照されたい。
+
+\begin{definition}
+\label{trace-definition-finite-tor-dimension}
+$\Lambda$ を（可換とは限らない）環とする。
+$K\in D(\Lambda)$ が{\it 有限 $\text{Tor}$ 次元}をもつとは、
+$a, b \in \mathbf{Z}$ が存在して、任意の右 $\Lambda$ 加群 $N$ と
+すべての $i \not \in [a, b]$ に対して
+$H^i(N \otimes_{\Lambda}^\mathbf{L} K) = 0$ となることをいう。
+\end{definition}
+
+\noindent
+特にこれは、$N = \Lambda$ と取れば分かるように
+$K \in D^b(\Lambda)$ であることを意味する。
+
+\begin{lemma}
+\label{trace-lemma-characterize-perfect}
+$\Lambda$ を左 Noether 環、$K\in D(\Lambda)$ とする。このとき
+$K$ が完全であることと、次の二条件が成り立つことは同値である。
+\begin{enumerate}
+\item
+$K$ は有限 $\text{Tor}$ 次元をもち、
+\item
+すべての $i \in \mathbf{Z}$ に対して、$H^i(K)$ は
+有限 $\Lambda$ 加群である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+可換の場合の証明については More on Algebra, Lemma
+\ref{more-algebra-lemma-perfect} を参照されたい。
+\end{proof}
+
+\noindent
+読者には、この主張をぜひ自分で証明してみることを強く勧める。
+証明は、有限左表示環上の有限加群が平坦であることと射影的であることが
+同値であるという事実に基づく。
+
+\begin{remark}
+\label{trace-remark-variant}
+この補題の一つの変種では、Noether スキーム $X$ と、有限局所自由
+$\mathcal{O}_X$ 加群からなる有限複体に局所的に擬同型である複体の圏
+$D_{perf}(\mathcal{O}_X)$ を考える。
+$D_{perf}(\mathcal{O}_X)$ の対象 $K$ は、コヒーレントな
+コホモロジー層をもち、Tor 次元が有界であることによって特徴づけられる。
+\end{remark}
+
+
+
+
+
+\section{よい複体のコホモロジー}
+\label{trace-section-cohomology-ctf}
+
+\noindent
+次は、$D_{ctf}(X, \Lambda)$ の対象のコンパクト台付きコホモロジーに
+関する、より一般的な結果の特別な場合である。
+
+\begin{proposition}
+\label{trace-proposition-projective-curve-constructible-cohomology}
+$X$ を体 $k$ 上の射影曲線、$\Lambda$ を有限環、
+$K\in D_{ctf}(X, \Lambda)$ とする。このとき
+$R\Gamma(X_{\bar k}, K)\in D_{perf}(\Lambda)$ である。
+\end{proposition}
+
+\begin{proof}[証明の概略]
+最初の段階は、次を示すことである。
+\begin{enumerate}
+\item[(1)]
+{\it $R\Gamma(X_{\bar k}, K)$ のコホモロジーは有界である。}
+\end{enumerate}
+スペクトル系列
+$$
+H^i(X_{\bar k}, \underline H^j(K))
+\Rightarrow
+H^{i+j} (R\Gamma(X_{\bar k}, K)).
+$$
+を考える。$K$ は有界で $\Lambda$ は有限なので、
+層 $\underline H^j(K)$ は捩れ層である。さらに $X_{\bar k}$ の
+コホモロジー次元は有限なので、左辺が非零となる $i$ と $j$ は
+有限個しかない。したがって右辺についても同じである。
+\begin{enumerate}
+\item[(2)]
+{\it コホモロジー群
+$H^{i+j} (R\Gamma(X_{\bar k}, K))$ は有限である。}
+\end{enumerate}
+層 $\underline H^j(K)$ は構成可能なので、群
+$H^i(X_{\bar k}, \underline H^j(K))$ は有限である
+（\'Etale Cohomology, Section
+\ref{etale-cohomology-section-vanishing-torsion}）。したがって、
+再びスペクトル系列から結論が従う。
+\begin{enumerate}
+\item[(3)]
+{\it $R\Gamma(X_{\bar k}, K)$ は有限 $\text{Tor}$ 次元をもつ。}
+\end{enumerate}
+$N$ を右 $\Lambda$ 加群とする（実際、$\Lambda$ は有限なので
+$N$ も有限であると仮定すれば十分である）。射影公式
+（加群の変更）により
+$$
+N \otimes^\mathbf{L}_\Lambda R \Gamma(X_{\bar k}, K) = R\Gamma(X_{\bar k},
+N \otimes^\mathbf{L}_\Lambda K).
+$$
+したがって
+$$
+H^i (N \otimes^\mathbf{L}_\Lambda R\Gamma(X_{\bar k}, K)) =
+H^i(R\Gamma(X_{\bar k}, N \otimes_{\Lambda}^\mathbf{L} K)).
+$$
+ここでスペクトル系列
+$$
+H^i (X_{\bar k}, \underline H^j (N \otimes_{\Lambda}^\mathbf{L} K))
+\Rightarrow
+H^{i+j}(R\Gamma(X_{\bar k}, N \otimes_{\Lambda}^\mathbf{L} K)).
+$$
+を考える。$K$ は有限 $\text{Tor}$ 次元をもつので、十分小さい $j$ に
+対して $\underline H^j
+(N \otimes_{\Lambda}^\mathbf{L} K)$ は一様に消滅し、
+左辺は $i < 0$ なら消滅する。したがって、主張どおり
+$R\Gamma(X_{\bar k}, K)$ は有限 $\text{Tor}$ 次元をもつ。
+よって補題 \ref{trace-lemma-characterize-perfect} により完全複体である。
+\end{proof}
+
+
+
+
+
+\section{Lefschetz 数}
+\label{trace-section-lefschetz-numbers}
+
+\noindent
+有限 Tor 次元をもつ構成可能複体の全コホモロジーが完全複体であるという
+事実は、コホモロジーが良好に振る舞う主要な技術的理由であり、
+トレース公式に現れるトレースを厳密に定義できるようにする。
+
+\begin{definition}
+\label{trace-definition-global-lefschetz-number}
+$\Lambda$ を有限環、$X$ を有限体 $k$ 上の射影曲線とし、
+$K \in D_{ctf}(X, \Lambda)$ とする（例えば
+$K = \underline\Lambda$）。標準写像 $c_K : \pi_X^{-1}K \to K$ があり、
+その基底変換 $c_K|_{X_{\bar k}}$ は、完全複体
+$R\Gamma(X_{\bar k}, K|_{X_{\bar k}})$ 上に $\pi_X^*$ と書く作用を
+誘導する。$K$ の{\it 大域 Lefschetz 数}とは、その作用のトレース
+$\text{Tr}(\pi_X^* |_{R\Gamma(X_{\bar k}, K)})$ のことである。
+これは $\Lambda^\natural$ の元である。
+\end{definition}
+
+\begin{definition}
+\label{trace-definition-local-lefschetz-number}
+$\Lambda, X, k, K$ は定義
+\ref{trace-definition-global-lefschetz-number} と同じものとする。
+$K\in D_{ctf}(X, \Lambda)$ なので、$X$ の任意の幾何学的点
+$\bar x$ に対して、複体 $K_{\bar x}$ は完全複体
+（$D_{perf}(\Lambda)$ の対象）である。節 \ref{trace-section-frobenii} で
+見たように、フロベニウス $\pi_X$ は $K_{\bar x}$ に作用する。
+$K$ の{\it 局所 Lefschetz 数}とは、和
+$$
+\sum\nolimits_{x\in X(k)} \text{Tr}(\pi_x |_{K_{\overline{x}}})
+$$
+のことであり、これも $\Lambda^\natural$ の元である。
+\end{definition}
+
+\noindent
+ようやく、トレース公式を正確に定式化できる。
+
+\begin{theorem}[Lefschetz トレース公式]
+\label{trace-theorem-trace}
+$X$ を有限体 $k$ 上の射影曲線、$\Lambda$ を有限環とし、
+$K \in D_{ctf}(X, \Lambda)$ とする。このとき $K$ の大域 Lefschetz 数と
+局所 Lefschetz 数は等しい。すなわち
+\begin{equation}
+\label{trace-equation-trace-formula}
+\text{Tr}(\pi^*_X |_{R\Gamma(X_{\bar k}, K)})
+=
+\sum\nolimits_{x\in X(k)} \text{Tr}(\pi_X |_{K_{\bar x}})
+\end{equation}
+が $\Lambda^\natural$ において成り立つ。
+\end{theorem}
+
+\begin{proof}
+以下の議論を参照されたい。
+\end{proof}
+
+%11.5.09
+\noindent
+ここではトレース公式を証明せずに用いる。それでも、
+\cite{SGA4.5} に示された定理の証明について、かなり多くの詳細を
+説明する（十分に説明されていない事項の一部は節
+\ref{trace-section-list-skipped} に列挙する）。
+
+\medskip\noindent
+公式を述べたのは曲線についてだけであり、ある弱い意味で、
+それは次の結果の帰結である。
+
+\begin{theorem}[Weil]
+\label{trace-theorem-weil-trace-formula}
+$C$ を代数閉体 $k$ 上の非特異射影曲線とし、
+$\varphi : C \to C$ を恒等写像とは異なる $C$ の $k$ 自己準同型とする。
+$V(\varphi) = \Delta_C \cdot \Gamma_\varphi$ と置く。ここで
+$\Delta_C$ は対角線、$\Gamma_\varphi$ は $\varphi$ のグラフであり、
+交点数は $C \times C$ 上で取る。
+$J = \underline{\Picardfunctor}^0_{C/k}$ を $C$ のヤコビ多様体とし、
+引き戻しによって $\varphi$ が誘導する作用を
+$\varphi^* : J \to J$ と書く。このとき
+$$
+V(\varphi) = 1 - \text{Tr}_J(\varphi^*) + \deg \varphi.
+$$
+\end{theorem}
+
+\begin{proof}
+数 $V(\varphi)$ は $\varphi$ の固定点の個数であり、
+$$
+V(\varphi) =
+\sum\nolimits_{c \in |C| : \varphi(c) = c} m_{\text{Fix}(\varphi)} (c)
+$$
+に等しい。ここで $m_{\text{Fix}(\varphi)} (c)$ は、$\varphi$ の
+固定点としての $c$ の重複度、すなわち局所一意化元の
+$\varphi - \text{id}_C$ による像の消滅位数である。この定理の証明は
+\cite{Lang} および \cite{Weil} にある。
+\end{proof}
+
+\begin{example}
+\label{trace-example-elliptic-curve}
+$C = E$ を楕円曲線とし、$\varphi = [n]$ を $n$ 倍写像とする。
+このとき $\varphi^* = \varphi^t$ はヤコビ多様体上の $n$ 倍写像なので、
+トレースは $2n$、次数は $n^2$ である。他方、$\varphi$ の固定点は
+$n p = p$ を満たす点 $p \in E$、すなわち $(n-1)$ 捩れ点であり、
+その濃度は $(n-1)^2$ である。したがって定理は
+$$
+(n-1)^2 = 1 - 2n + n^2.
+$$
+という等式になる。
+\end{example}
+
+\noindent
+{\bf ヤコビ多様体。}
+ここでは、Weil の証明で用いられる曲線とそのヤコビ多様体の対応を、
+証明なしで説明する。$C$ を代数閉体 $k$ 上の非特異射影曲線とし、
+基点 $c_0 \in C(k)$ を一つ選ぶ。
+$A^1(C \times C)$（または $\Pic(C \times C)$、または
+$\text{CaCl}(C \times C)$）を $C \times C$ の余次元 1 の
+因子からなるアーベル群とする。このとき
+$$
+A^1(C \times C) = \text{pr}_1^* (A^1(C)) \oplus \text{pr}_2^* (A^1(C)) \oplus R
+$$
+である。ここで
+$$
+R = \{ Z \in A^1(C \times C) \ |
+\ Z|_{C \times \{c_0\}} \sim_\text{rat} 0
+\text{かつ}
+Z|_{\{c_0\} \times C} \sim_\text{rat} 0 \}.
+$$
+言い換えれば、$R$ は、どちらの射影によって引き戻しても自明になる
+直線束の部分群である。このときアーベル群の標準同型
+$R \cong \text{End}(J)$ があり、$R$ の因子 $Z$ を自己準同型
+$$
+\begin{matrix}
+J & \to & J \\
+\left[ \mathcal{O}_C(D) \right] & \mapsto & (\text{pr}_1 |_Z)_* (\text{pr}_2
+|_Z)^* (D).
+\end{matrix}
+$$
+へ写す。上述の対応は次の表のとおりである。因子を入れ替える
+$C \times C$ の自己同型を $\sigma$ と書く。
+$$
+\begin{matrix}
+\hline & \\
+\text{End}(J) & R \\
+& \\
+\hline & \\
+\text{合成：}\alpha, \beta &
+{\text{pr}_{13}}_* ({\text{pr}_{12}}^*(\alpha) \circ {\text{pr}_{23}}^*(\beta))
+\\
+& \\
+\text{id}_J &
+\Delta_C - \{c_0\} \times C - C \times \{c_0\} \\
+& \\
+\varphi^* &
+\Gamma_\varphi - C \times \{\varphi(c_0)\}
+- \sum_{\varphi(c) = c_0} \{c\} \times C \\
+& \\
+{
+\begin{matrix}
+\text{トレース形式} \\
+\alpha, \beta \mapsto \text{Tr}(\alpha \beta)
+\end{matrix}
+}
+&
+\alpha, \beta \mapsto - \int_{C \times C} \alpha . \sigma^*\beta
+\\
+& \\
+{
+\begin{matrix}
+\text{Rosati 対合} \\
+\alpha \mapsto \alpha^\dagger
+\end{matrix}
+}
+&
+\alpha \mapsto \sigma^*\alpha
+\\
+& \\
+{
+\begin{matrix}
+\text{Rosati の正値性} \\
+\text{Tr}(\alpha\alpha^\dagger) > 0
+\end{matrix}
+}
+&
+{
+\begin{matrix}
+\text{Hodge 指数定理：}C \times C \\
+- \int_{C \times C} \alpha \sigma^*\alpha > 0.
+\end{matrix}
+}
+\\
+& \\
+\hline
+\end{matrix}
+$$
+実際、Kunneth 公式に照らせば、部分群 $R$ は
+$H^1(C)\otimes H^1(C)$ における $1, 1$ 型の Hodge 類に対応する。
+
+\medskip\noindent
+{\bf Weil の証明。}
+この対応を用いてトレース公式を証明できる。実際
+\begin{eqnarray*}
+V(\varphi) & = & \int_{C \times C} \Gamma_\varphi.\Delta \\
+& = & \int_{C \times C} \Gamma_\varphi. \left(\Delta_C - \{c_0\} \times C - C
+\times \{c_0\}\right) + \int_{C \times C} \Gamma_\varphi. \left(\{c_0\} \times C
++ C \times \{c_0\}\right).
+\end{eqnarray*}
+である。一方では
+$$
+\int_{C \times C} \Gamma_\varphi. \left(\{c_0\} \times C + C \times
+\{c_0\}\right)
+=
+1 + \deg \varphi
+$$
+であり、他方では $R$ が豊富な因子
+$\{c_0\} \times C + C \times \{c_0\}$ の直交補空間なので
+\begin{eqnarray*}
+& &
+\int_{C \times C} \Gamma_\varphi. \left(\Delta_C - \{c_0\} \times C - C \times
+\{c_0\}\right) \\
+& = &
+\int_{C \times C} \left(\Gamma_\varphi - C \times \{\varphi(c_0)\} -
+\sum_{\varphi(c) = c_0} \{c\} \times C \right). \left(\Delta_C - \{c_0\} \times
+C - C \times \{c_0\}\right) \\
+& = & - \text{Tr}_J (\varphi^* \circ \text{id}_J).
+\end{eqnarray*}
+である。以上をまとめると
+$$
+V(\varphi) = 1 - \text{Tr}_J (\varphi^*) + \deg \varphi
+$$
+を得る。これがトレース公式である。
+
+\begin{lemma}
+\label{trace-lemma-weil-mod}
+定理 \ref{trace-theorem-weil-trace-formula} の状況を考え、
+$\ell$ を $k$ において可逆な素数とする。このとき
+$$
+\sum\nolimits_{i = 0}^2
+(-1)^i
+\text{Tr}(\varphi^* |_{H^i (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})})
+=
+V(\varphi) \mod \ell^n.
+$$
+\end{lemma}
+
+\begin{proof}[証明の概略]
+まず、この仮定が意味をもつことに注意する。実際、すべての $i$ に対して
+$H^i(C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})$ は自由
+$\mathbf{Z}/\ell^n \mathbf{Z}$ 加群である。
+$\varphi^*$ の 0 次コホモロジー上のトレースは 1 である。
+$k$ における 1 の原始 $\ell^n$ 乗根を選ぶと、
+幾何学的フロベニウスの作用と両立する同型
+$$
+H^i(C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}}) \cong H^i(C, \mu_{\ell^n})
+$$
+を得る。他方、$H^1(C, \mu_{\ell^n}) = J[\ell^n]$ である。したがって
+\begin{eqnarray*}
+\text{Tr}(\varphi^* |_{H^1 (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})})) & =
+& \text{Tr}_J (\varphi^*) \mod \ell^n \\
+& = & \text{Tr}_{\mathbf{Z}/\ell^n \mathbf{Z}} (\varphi^* : J[\ell^n] \to
+J[\ell^n]).
+\end{eqnarray*}
+さらに、
+$H^2(C, \mu_{\ell^n}) = \Pic(C)/\ell^n\Pic(C) \cong
+\mathbf{Z}/\ell^n \mathbf{Z}$ であり、ここで $\varphi^*$ は
+$\deg \varphi$ 倍として作用する。ゆえに
+$$
+\text{Tr} (\varphi^*|_{H^2 (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})}) =
+\deg \varphi.
+$$
+したがって
+$$
+\sum_{i = 0}^2 (-1)^i
+\text{Tr}(\varphi^* |_{H^i (C, \underline{\mathbf{Z}/\ell^n \mathbf{Z}})}) =
+1 - \text{Tr}_J(\varphi^*) + \deg \varphi \mod \ell^n
+$$
+であり、系は定理 \ref{trace-theorem-weil-trace-formula} から従う。
+\end{proof}
+
+\noindent
+この系のもう一つの証明方法は、
+$$
+X \mapsto H^* (X, \mathbf{Q}_\ell) =
+\mathbf{Q}_\ell \otimes
+\lim_n H^*(X, \mathbf{Z}/\ell^n\mathbf{Z})
+$$
+が $k$ 上の滑らかな射影多様体上の Weil コホモロジー理論を定めることを
+示すものである。するとトレース公式
+$$
+V(\varphi) = \sum_{i = 0}^2 (-1)^i
+\text{Tr}(\varphi^* |_{H^i(C, \mathbf{Q}_\ell)})
+$$
+は公理から形式的に従う（これは線形代数の演習であり、証明は位相的な
+場合と同じである）。
+
+
+
+
+%11.10.09
+\section{準備と一連の補題}
+\label{trace-section-preliminaries}
+
+\noindent
+記法：この節で用いる記法を固定する。$A$ を可換環、
+$\Lambda$ を（可換とは限らない）環とし、像が $\Lambda$ の中心に含まれる
+環準同型 $A\to \Lambda$ が与えられているとする。$G$ を有限群とし、
+$\Gamma$ を {\it $G$ の $\mathbf{N}$ によるモノイド拡大}とする。
+これは、完全列
+$$
+1\to G\to \tilde\Gamma\to \mathbf{Z}\to 1
+$$
+があり、$\Gamma$ が $\tilde\Gamma$ の元のうち像が非負であるものから
+なるという意味である。最後に、$P$ を $A[G]$ 加群として有限射影的な
+$A[\Gamma]$ 加群、$M$ を $\Lambda$ 加群として有限射影的な
+$\Lambda[\Gamma]$ 加群とする。
+
+\medskip\noindent
+目標は、$P \otimes_A M$ の $G$ による余不変量上で
+$1 \in \mathbf{N}$ が $\Lambda$ 上に誘導する作用のトレース、すなわち
+$$
+\text{Tr}_{\Lambda}\left(1; \left(P \otimes_A M\right)_G\right) \in
+\Lambda^\natural.
+$$
+を計算することである。元 $1\in \mathbf{N}$ はフロベニウスに対応する。
+
+\begin{lemma}
+\label{trace-lemma-epsilon}
+$e\in G$ を単位元とする。写像
+$$
+\begin{matrix}
+\Lambda[G] & \longrightarrow & \Lambda^{\natural}\\
+\sum \lambda_g\cdot g & \longmapsto & \lambda_e
+\end{matrix}
+$$
+は $\Lambda[G]^\natural$ を経由する。誘導された写像を
+$\varepsilon : \Lambda[G]^\natural\to \Lambda^\natural$ と書く。
+\end{lemma}
+
+\begin{proof}
+この写像が交換子を消すことを示せばよい。実際
+$$
+\left(\sum\lambda_g g\right)\left(\sum\mu_g g\right)-\left(\sum \mu_g
+g\right)\left(\sum\lambda_g g\right)
+= \sum_g\left(\sum_{g_1g_2=g}
+\lambda_{g_1}\mu_{g_2}-\mu_{g_1}\lambda_{g_2}\right)g
+$$
+である。$e$ の係数は
+$$
+\sum_g\left(\lambda_g\mu_{g^{-1}}-\mu_g\lambda_{g^{-1}}\right) =
+\sum_g\left(\lambda_g\mu_{g^{-1}}-\mu_{g^{-1}}\lambda_g\right)
+$$
+であり、これは交換子の和なので $\Lambda^\natural$ において零である。
+\end{proof}
+
+\begin{definition}
+\label{trace-definition-trace-G}
+$f : P\to P$ を、有限射影 $\Lambda[G]$ 加群 $P$ の自己準同型とする。
+$$
+\text{Tr}_{\Lambda}^G(f; P) := \varepsilon\left(\text{Tr}_{\Lambda[G]}(f;
+P)\right)
+$$
+を、{\it $P$ 上の $f$ の $G$-トレース}と定義する。
+\end{definition}
+
+\begin{lemma}
+\label{trace-lemma-lambda-trace}
+$f : P\to P$ を有限射影 $\Lambda[G]$ 加群 $P$ の自己準同型とする。
+このとき
+$$
+\text{Tr}_{\Lambda}(f; P) = \# G \cdot \text{Tr}_\Lambda^G(f; P).
+$$
+\end{lemma}
+
+\begin{proof}
+加法性により $P = \Lambda[G]$ の場合へ帰着する。この場合、
+$f$ は $\Lambda[G]$ のある元 $\sum\lambda_g\cdot g$ による
+右乗法で与えられる。基底 $(g)_{g \in G}$ に関して、$f$ の行列の
+$(g_1, g_2)$ 成分は $\lambda_{g_2^{-1}g_1}$ である。特にすべての
+対角成分は $\lambda_e$ であり、そのような成分は $\# G$ 個ある。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-A-module-structure}
+写像 $A\to \Lambda$ は $\Lambda^\natural$ 上に $A$ 加群構造を定める。
+\end{lemma}
+
+\begin{proof}
+明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-diagonal-action-projective-module}
+$P$ を有限射影 $A[G]$ 加群、$M$ を $\Lambda$ 加群として有限射影的な
+$\Lambda[G]$ 加群とする。このとき $P \otimes_A M$ は、
+$G$ の対角作用が誘導する構造に関して有限射影
+$\Lambda[G]$ 加群である。
+\end{lemma}
+
+\noindent
+$M$ と同様に、$P \otimes_A M$ は自然に
+$\Lambda$ 加群であることに注意する。
+対角作用と合わせると、具体的には
+$$
+\left(\sum\lambda_g g\right)\left(p \otimes m\right)
+=
+\sum g p \otimes \lambda_g g m.
+$$
+となる。
+
+\begin{proof}
+任意の $\Lambda[G]$ 加群 $N$ に対して
+$$
+\Hom_{\Lambda[G]}\left(P \otimes_A M, N\right)= \Hom_{A[G]}\left(P,
+\Hom_{\Lambda}(M, N)\right)
+$$
+である。ここで $\Hom_{\Lambda}(M, N)$ 上の $G$ 作用は
+$(g\cdot \varphi)(m) = g \varphi (g^{-1} m) $ で与えられる。
+$P$ と $M$ の射影性により右辺が完全関手の合成であることを
+観察すれば十分である。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-multiplicative-trace}
+補題 \ref{trace-lemma-diagonal-action-projective-module} と同じ仮定のもとで、
+$u\in \text{End}_{A[G]}(P)$ および
+$v\in \text{End}_{\Lambda[G]}(M)$ とする。このとき
+$$
+\text{Tr}_\Lambda^G \left(u \otimes v; P \otimes_A M\right) = \text{Tr}_A^G(u;
+P)\cdot \text{Tr}_\Lambda(v;M).
+$$
+\end{lemma}
+
+\begin{proof}[証明の概略]
+$P=A[G]$ の場合へ帰着する。この場合 $u$ は
+$A[G]$ のある元 $a = \sum a_gg$ による右乗法であり、
+$u = R_a$ と書く。$\Lambda[G]$ 加群の同型
+$$
+\begin{matrix}
+\varphi : & A[G]\otimes_A M & \cong & \left(A[G]\otimes_A M\right)'\\
+& g \otimes m & \longmapsto & g \otimes g^{-1}m
+\end{matrix}
+$$
+がある。ここで $\left(A[G]\otimes_A M\right)'$ の加群構造は、
+左 $G$ 作用と $M$ 上の $\Lambda$ 線形性によって与えられる。
+この構造の移送は、$u \otimes v$ を
+$\sum_ga_gR_g \otimes g^{-1}v$ に変える。言い換えれば
+$$
+\varphi \circ (u \otimes v) \circ \varphi^{-1}
+=
+\sum_ga_gR_g \otimes g^{-1}v.
+$$
+である。等式の両辺を具体的に計算すると、示すべきことは
+$$
+\text{Tr}_\Lambda^G\left(\sum_g a_gR_g \otimes g^{-1}v\right) = a_e\cdot
+\text{Tr}_\Lambda(v; M).
+$$
+となる。これは
+$$
+\text{Tr}_\Lambda^G\left(a_gR_g \otimes g^{-1}v\right) =
+\left\{
+\begin{matrix}
+0 & \text{条件} g\neq e\\
+a_e\text{Tr}_\Lambda\left(v; M\right) & \text{条件}g = e
+\end{matrix}
+\right.
+$$
+を示すことによって得られ、さらに $M=\Lambda$ の場合へ帰着できる。
+\end{proof}
+
+\noindent
+記法：モノイド拡大
+$1 \to G\to \Gamma\to \mathbf{N} \to 1$ と
+$\gamma\in \Gamma$ を考える。このとき
+$Z_\gamma = \{g\in G | g\gamma = \gamma g\}$ と書く。
+
+\begin{lemma}
+\label{trace-lemma-gamma-z-gamma-trace}
+$P$ を $\Lambda[G]$ 加群として有限射影的な
+$\Lambda[\Gamma]$ 加群とし、$\gamma \in \Gamma$ とする。このとき
+$$
+\text{Tr}_{\Lambda}(\gamma, P) =
+\# Z_\gamma \cdot \text{Tr}_\Lambda^{Z_\gamma}\left(\gamma, P\right).
+$$
+\end{lemma}
+
+\begin{proof}
+補題 \ref{trace-lemma-lambda-trace} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-weak-trace}
+$P$ を $A[G]$ 加群として有限射影的な $A[\Gamma]$ 加群とする。
+$M$ を $\Lambda$ 加群として有限射影的な
+$\Lambda[\Gamma]$ 加群とする。このとき
+$$
+\text{Tr}_{\Lambda}^{Z_\gamma}(\gamma, P \otimes_A M) =
+\text{Tr}_A^{Z_\gamma}(\gamma, P)\cdot \text{Tr}_\Lambda(\gamma, M).
+$$
+\end{lemma}
+
+\begin{proof}
+補題 \ref{trace-lemma-multiplicative-trace} から直接従う。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-trivial-trace}
+$P$ を $\Lambda[G]$ 加群として有限射影的な
+$\Lambda[\Gamma]$ 加群とする。このとき余不変量
+$P_G = \Lambda \otimes_{\Lambda[G]} P$ は有限射影 $\Lambda$ 加群をなし、
+$\Gamma/G = \mathbf{N}$ の作用を備える。さらに
+$$
+\text{Tr}_\Lambda(1; P_G) =
+\sum\nolimits'_{\gamma \mapsto 1} \text{Tr}_\Lambda^{Z_\gamma}(\gamma, P)
+$$
+である。ここで $\sum_{\gamma\mapsto 1}'$ は、$\Gamma$ における
+$G$-共役類にわたる和を意味する。
+\end{lemma}
+
+\begin{proof}[証明の概略]
+まず、両辺に $\# G$ を掛けた等式を証明する。
+$$
+\# G\cdot \text{Tr}_\Lambda(1; P_G)
+= \text{Tr}_\Lambda(\sum\nolimits_{\gamma\mapsto 1} \gamma, P_G)
+= \text{Tr}_\Lambda(\sum\nolimits_{\gamma\mapsto 1} \gamma, P)
+$$
+である。二番目の等号は、可換三角形
+$$
+\xymatrix{
+P^G \ar[rd]_a & & P_G \ar[ll]^c \\
+& P \ar[ur]_b
+}
+$$
+を考えれば従う。ここで $a$ は標準包含、$b$ は標準全射、
+$c = \sum_{\gamma \mapsto 1} \gamma$ である。このとき
+$$
+(\sum\nolimits_{\gamma \mapsto 1} \gamma) |_P = a \circ c \circ b
+\quad\text{かつ}\quad
+(\sum\nolimits_{\gamma \mapsto 1} \gamma) |_{P_G} = b \circ a \circ c
+$$
+なので、両者のトレースは等しい。さらに
+$$
+\# G\cdot \text{Tr}_\Lambda(1; P_G)
+=
+{\sum_{\gamma\mapsto 1}}'
+\frac{\# G}{\# Z_\gamma}\text{Tr}_\Lambda(\gamma, P)
+= \# G{\sum_{\gamma\mapsto 1}}' \text{Tr}_\Lambda^{Z_\gamma}(\gamma, P).
+$$
+を得る。証明を完了するには、何らかの普遍性の議論によって
+$\Lambda$ が捩れをもたない場合へ帰着する。詳細は
+\cite{SGA4.5} を参照されたい。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-content-trivial-trace}
+補題 \ref{trace-lemma-weak-trace} の公式の内容を説明してみよう。
+$\Lambda$ を自明な $\Gamma$ 加群と見たとき、
+$\Lambda[G]$ 加群として有限射影的なある
+$\Lambda[\Gamma]$ 加群 $P_i$ による有限分解
+$
+0\to P_r\to \ldots \to P_1 \to P_0\to \Lambda\to 0
+$
+が存在すると仮定する。この場合
+$$
+H_*\left(\left(P_\bullet\right)_G\right) =
+\text{Tor}_*^{\Lambda[G]}\left(\Lambda, \Lambda\right) = H_*(G, \Lambda)
+$$
+であり、
+$$
+\text{Tr}_\Lambda^{Z_\gamma}\left(\gamma, P_\bullet\right) =\frac{1}{\#
+Z_\gamma}\text{Tr}_\Lambda(\gamma, P_\bullet)=\frac{1}{\#
+Z_\gamma}\text{Tr}(\gamma, \Lambda) = \frac{1}{\# Z_\gamma}.
+$$
+である。したがって補題 \ref{trace-lemma-weak-trace} は
+$$
+\text{Tr}_\Lambda (1 , P_G)
+= \text{Tr}\left(1 |_{H_*(G, \Lambda)}\right)
+= {\sum_{\gamma\mapsto 1}}'\frac{1}{\# Z_\gamma}.
+$$
+を述べている。これはスタック $BG$ 上の点の数え上げと解釈できる。
+$\Lambda = \mathbf{F}_\ell$ で $\ell$ が $\# G$ と互いに素なら、
+$H_*(G, \Lambda)$ は次数 0 で $\mathbf{F}_\ell$、他の次数では
+$0$ であり、公式は
+$$
+1 =
+\sum\nolimits_{
+\frac{\sigma\text{-共役}}{\text{類}\langle\gamma\rangle}
+}
+\frac{1}{\# Z_\gamma} \mod \ell.
+$$
+となる。これはある意味で $G$ に対する「自明な」トレース公式である。
+後で、(\ref{trace-equation-trace-formula}) が場合によってはある種の群に対する
+きわめて非自明なトレース公式と見なせることを見る。節
+\ref{trace-section-abstract-trace-formula} を参照されたい。
+\end{remark}
+
+
+
+
+
+%11.12.09
+\section{トレース公式の証明}
+\label{trace-section-proof-trace-formula}
+
+\begin{theorem}
+\label{trace-theorem-trace-formula-again}
+$k$ を有限体とし、$X$ を $k$ 上の次元が高々 1 である
+有限型分離スキームとする。$\Lambda$ を、その濃度が $k$ の濃度と
+互いに素である有限環とし、$K\in D_{ctf}(X, \Lambda)$ とする。このとき
+\begin{equation}
+\label{trace-equation-trace-formula-again}
+\text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, K)})
+=
+\sum\nolimits_{x\in X(k)}
+\text{Tr}(\pi_x |_{K_{\bar x}})
+\end{equation}
+が $\Lambda^{\natural}$ において成り立つ。
+\end{theorem}
+
+\noindent
+この主張に関する注意については、注意
+\ref{trace-remark-on-trace-formula-again} を参照されたい。記法を簡略にするため、
+(\ref{trace-equation-trace-formula-again}) の右辺を
+$$
+T'(X, K) =
+\sum\nolimits_{x\in X(k)}
+\text{Tr}(\pi_x |_{K_{\bar x}})
+$$
+と書き、左辺を
+$$
+T''(X, K)
+=\text{Tr}(\pi_x^* |_{R\Gamma_c(X_{\bar k}, K)})
+$$
+と書く。
+
+\begin{proof}[定理 \ref{trace-theorem-trace-formula-again} の証明]
+証明はいくつかの段階に分けて進める。
+
+\medskip\noindent
+段階 1。{\it $j : \mathcal{U}\hookrightarrow X$ を開埋め込みとし、
+その補集合を $Y = X - \mathcal{U}$、$i : Y \hookrightarrow X$ とする。
+このとき
+$T''(X, K) = T''(\mathcal{U}, j^{-1} K)+ T''(Y, i^{-1}K)$ および
+$T'(X, K) = T'(\mathcal{U}, j^{-1} K)+ T'(Y, i^{-1}K)$ が成り立つ。}
+
+\medskip\noindent
+$T'$ については明らかである。$T''$ については完全列
+$$
+0\to j_!j^{-1} K \to K \to i_* i^{-1} K \to 0
+$$
+を用いて $K$ にフィルトレーションを与える。これにより
+$\widetilde K \in DF(X, \Lambda)$ が得られ、その次数付き部分は
+$j_!j^{-1}K$ と $i_*i^{-1}K$ であり、いずれも
+$D_{ctf}(X, \Lambda)$ に属する。するとフィルター付き導来圏に関する
+抽象的な一般論（参照を挿入）により
+$R\Gamma_c(X_{\bar k}, K)\in DF_{perf}(\Lambda)$ であり、
+$DF_{perf}(\Lambda)$ における $\pi_x^*$ を備える。
+フィルター付き複体上のトレースについての議論（参照を挿入）により
+\begin{eqnarray*}
+\text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, K)})
+& = & \text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, j_!j^{-1}K)}) +
+\text{Tr}(\pi_X^* |_{R\Gamma_c(X_{\bar k}, i_*i^{-1}K)}) \\
+& = & T''(U, i^{-1}K) + T''(Y, i^{-1}K).
+\end{eqnarray*}
+
+\noindent
+段階 2。{\it $\dim X\leq 0$ ならば定理は成り立つ。}
+
+\medskip\noindent
+実際、この場合
+$$
+R\Gamma_c(X_{\bar k}, K) = R\Gamma(X_{\bar k}, K) = \Gamma(X_{\bar k}, K) =
+\bigoplus\nolimits_{\bar x \in X_{\bar k}} K_{\bar x}
+$$
+であり、これは自己準同型 $\pi_X^*$ を備える。
+$\pi_X : X_{\bar k}\to X_{\bar k}$ の固定点は、$k$-有理点
+$x \in X(k)$ の上にある点 $\bar x \in X_{\bar k}$ にちょうど一致するので
+$$
+\text{Tr}\big(\pi_X^*|_{R\Gamma_c(X_{\bar k}, K)}\big) =
+\sum\nolimits_{x \in X(k)} \text{Tr}(\pi_x|_{K_{\bar x}}).
+$$
+を得る。これは所望の等式である。
+
+\medskip\noindent
+段階 3。{\it 次を満たす場合に等式
+$T'(\mathcal{U}, \mathcal{F}) = T''(\mathcal{U}, \mathcal{F})$
+を証明すれば十分である。
+\begin{itemize}
+\item $\mathcal{U}$ は $k$ 上の滑らかな既約アフィン曲線であり、
+\item $\mathcal{U}(k) = \emptyset$ であり、
+\item $K=\mathcal{F}$ は $\mathcal{U}$ 上の有限局所定数
+$\Lambda$ 加群層で、その茎は有限射影 $\Lambda$ 加群であり、
+\item $\Lambda$ は素数 $\ell$ のあるべきで消され、
+$\ell \in k^*$ である。
+\end{itemize}
+}
+
+\medskip\noindent
+実際、段階 2 により、任意の有限個の点を除いてよい。有理点は有限個しか
+ないので、有理点はないと仮定できる\footnote{ここでは、背景から邪悪な
+笑い声が聞こえるべきである。}。必要なら既約成分に移り、悪い点を除くことで、
+$\mathcal{U}$ は滑らかで既約かつアフィンであると仮定できる。
+$\mathcal{F}$ に関する仮定は $D_{ctf}(X, \Lambda)$ の定義を展開すれば
+得られ、$\Lambda$ に関する仮定はその一次分解を考えれば得られる。
+
+\medskip\noindent
+証明の残りでは、状況
+$$
+\xymatrix{
+\mathcal{V} \ar[d]_f \ar[r] & Y \ar[d]^{\bar f} \\
+\mathcal{U} \ar[r] & X
+}
+$$
+を考える。ここで $\mathcal{U}$ は上のとおりであり、$f$ は有限エタール
+Galois 被覆、$\mathcal{V}$ は連結で、水平矢印は射影的完備化である。
+$G=\text{Aut}(\mathcal{V}|\mathcal{U})$ と書く。さらに、そう仮定して
+よいように、$f^{-1}\mathcal{F} =\underline M$ は定数であるとする。
+ここで加群 $M = \Gamma(\mathcal{V}, f^{-1}\mathcal{F})$ は
+$\Lambda$ 上有限射影的な $\Lambda[G]$ 加群である。これは自明な
+モノイド拡大
+$$
+1\to G\to \Gamma = G \times \mathbf{N}\to \mathbf{N}\to 1.
+$$
+に対応する。この状況では、上の帰着を用いて
+$T''(\mathcal{U}, \mathcal{F}) = 0$ を示せばよい。
+
+\medskip\noindent
+段階 4。{\it $f_*f^{-1}\mathcal{F}$ 上には $G$ の自然な作用があり、
+トレース写像 $f_*f^{-1}\mathcal{F}\to \mathcal{F}$ は同型}
+$$
+(f_*f^{-1}\mathcal{F})\otimes_{\Lambda[G]} \Lambda =
+(f_*f^{-1}\mathcal{F})_G \cong \mathcal{F}.
+$$
+{\it を定める。}
+
+\medskip\noindent
+これを証明するには、幾何学的点での記述をすべて展開すればよい。
+
+\medskip\noindent
+段階 5。{\it $n\gg 0$ として
+$A = \mathbf{Z}/\ell^n \mathbf{Z}$ とする。このとき、対角 $G$ 作用のもとで
+$f_*f^{-1}\mathcal{F} \cong (f_*\underline A)
+\otimes_{\underline A} \underline M$ である。}
+
+\medskip\noindent
+段階 6。{\it 標準同型
+$(f_*\underline A \otimes_{\underline A} \underline M)
+\otimes_{\Lambda[G]} \underline \Lambda \cong \mathcal{F}$
+が存在する。}
+
+\medskip\noindent
+実際、$\mathcal{F}$ に関する射影性の仮定により、これは導来テンソル積である。
+
+\medskip\noindent
+段階 7。{\it $\pi^*_\mathcal{U}$ の作用と両立する標準同型
+$$
+R\Gamma_c(\mathcal{U}_{\bar k}, \mathcal{F})
+= (R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)\otimes_A^\mathbf{L}
+M)\otimes_{\Lambda[G]}^\mathbf{L} \Lambda,
+$$
+が存在する。}
+
+\medskip\noindent
+これは普遍係数定理、すなわち $R\Gamma_c$ が
+$\otimes^\mathbf{L}$ と交換するという事実と、$\mathcal{F}$ の
+$\Lambda$ 加群としての平坦性から従う。
+
+\medskip\noindent
+次の等式が成り立つ。
+\begin{eqnarray*}
+\text{Tr}(
+\pi_\mathcal{U}^* |_{R\Gamma_c(\mathcal{U}_{\bar k}, \mathcal{F})})
+& = &
+{\sum_{g \in G}}'
+\text{Tr}_{\Lambda}^{Z_g}
+\left(
+(g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)\otimes_A^\mathbf{L} M}
+\right) \\
+& = &
+{\sum_{g\in G}}'
+\text{Tr}_A^{Z_g}
+(
+(g, \pi_\mathcal{U}^*) |_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)}
+)
+\cdot
+\text{Tr}_\Lambda(g|_M)
+\end{eqnarray*}
+ここで $\Gamma$ は $G$ によって
+$R\Gamma_c(\mathcal{U}_{\bar k}, \mathcal{F})$ に作用し、
+$(e, 1)$ は $\pi_\mathcal{U}^*$ を通じて作用する。したがって
+モノイド拡大は
+$\Gamma = G \times \mathbf{N} \to \mathbf{N}$, $\gamma \mapsto 1$
+で与えられる。最初の等号は補題 \ref{trace-lemma-trivial-trace} から、
+二番目は補題 \ref{trace-lemma-weak-trace} から従う。
+
+\medskip\noindent
+段階 8。{\it
+$\text{Tr}_A^{Z_g}((g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)}) \in A$
+が $\Lambda$ において零へ写ることを示せば十分である。}
+
+\medskip\noindent
+次を思い出そう。
+\begin{eqnarray*}
+\# Z_g \cdot \text{Tr}_A^{Z_g}((g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)})
+& = & \text{Tr}_A((g, \pi_\mathcal{U}^*)
+|_{R\Gamma_c(\mathcal{U}_{\bar k}, f_*A)})\\
+& = &
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}_{\bar k}, A)}).
+\end{eqnarray*}
+最初の等号は補題 \ref{trace-lemma-gamma-z-gamma-trace} であり、
+二番目は $f$ の有限性と、トレースを $A$ 上でのみ取っていることを
+用いた Leray スペクトル系列である。ここで
+$A=\mathbf{Z}/\ell^n\mathbf{Z}$、$n \gg 0$ であり、ある固定した $a$ に
+対して $\# Z_g = \ell^a$ なので、次の結果を示せば十分である。
+
+\medskip\noindent
+段階 9。{\it
+$\text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}, A)}) = 0$
+が $A$ において成り立つ。}
+
+\medskip\noindent
+再び加法性により
+\begin{eqnarray*}
+& \text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}_{\bar k} A)})
++
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^*
+|_{R\Gamma_c(Y-\mathcal {V})_{\bar k}, A)}) \\
+& =
+\text{Tr}_A((g^{-1}\pi_Y)^* |_{R\Gamma(Y_{\bar k}, A)})
+\end{eqnarray*}
+である。後者のトレースは、Weil のトレース公式
+定理 \ref{trace-theorem-weil-trace-formula} により、$Y$ 上の
+$g^{-1}\pi_Y$ の固定点の個数である。さらに、段階 2 で既に証明した
+0 次元の場合により
+$$
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^*|_{R\Gamma_c(Y-\mathcal{V})_{\bar k}, A)})
+$$
+は $(Y-\mathcal{V})_{\bar k}$ 上の $g^{-1}\pi_Y$ の固定点の個数である。
+したがって
+$$
+\text{Tr}_A((g^{-1}\pi_\mathcal{V})^* |_{R\Gamma_c(\mathcal{V}_{\bar k}, A)})
+$$
+は $\mathcal{V}_{\bar k}$ 上の $g^{-1}\pi_Y$ の固定点の個数である。
+しかしそのような点はない。実際、
+$\bar y\in Y_{\bar k}$ が $g^{-1}\pi_Y$ によって固定されるなら、
+$\bar f(\bar y) \in X_{\bar k}$ は $\pi_X$ によって固定される。
+ところが $\mathcal{U}$ には $k$-有理点がないので
+$\bar f(\bar y)\in (X-\mathcal{U})_{\bar k}$ でなければならず、
+したがって $\bar y\notin \mathcal{V}_{\bar k}$ となり、矛盾する。
+これで証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-on-trace-formula-again}
+定理 \ref{trace-theorem-trace-formula-again} に関する注意を挙げる。
+\begin{enumerate}
+\item
+この公式は任意の次元で成り立つ。固有基底変換などを用いる
+d\'evissage の補題によって、その一般性でも現在の主張へ帰着される。
+\item
+複体 $R\Gamma_c(X_{\bar k}, K)$ は、$\bar X$ が $k$ 上の
+次元高々 1 の射影スキームであるような開埋め込み
+$j : X \hookrightarrow \bar X$ を選び、
+$$
+R\Gamma_c(X_{\bar k}, K) := R\Gamma(\bar X_{\bar k}, j_!K).
+$$
+と置くことによって定義される。これが $\bar X$ の選び方によらないことは
+（ここに参照を挿入）から従う。$H^i_c(X_{\bar k}, K)$ を
+$R\Gamma_c(X_{\bar k}, K)$ の第 $i$ コホモロジー群と定義する。
+\end{enumerate}
+\end{remark}
+
+\begin{remark}
+\label{trace-remark-stronger}
+ここまで行ったことは帰着と、ほとんど代数だけであるが、トレース公式
+定理 \ref{trace-theorem-trace-formula-again} は Weil の幾何学的トレース公式
+（定理 \ref{trace-theorem-weil-trace-formula}）よりはるかに強い。なぜなら、
+定数係数だけでなく係数系（層）にも適用できるからである。
+\end{remark}
+
+
+%11.17.09
+\section{応用}
+\label{trace-section-applications}
+
+\noindent
+さて、トレース公式の証明を概説したので、何かに使ってみよう。
+
+
+
+
+
+\section{\texorpdfstring{\ensuremath{\ell}}{l}進層について}
+\label{trace-section-l-adic-sheaves}
+
+\begin{definition}
+\label{trace-definition-l-adic-sheaf}
+$X$ を Noether スキームとする。$X$ 上の
+{\it $\mathbf{Z}_\ell$-層}、または単に{\it $\ell$-進層}
+$\mathcal{F}$ とは、次を満たす逆系
+$\left\{\mathcal{F}_n\right\}_{n\geq 1}$ のことである。
+\begin{enumerate}
+\item
+$\mathcal{F}_n$ は $X_\etale$ 上の構成可能な
+$\mathbf{Z}/\ell^n\mathbf{Z}$ 加群であり、
+\item
+遷移写像 $\mathcal{F}_{n+1}\to \mathcal{F}_n$ が同型
+$\mathcal{F}_{n+1} \otimes_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z} \cong \mathcal{F}_n$
+を誘導する。
+\end{enumerate}
+各 $\mathcal{F}_n$ が局所定数であるとき、$\mathcal{F}$ を
+{\it lisse} という。このような対象の{\it 射}とは、単に逆系の射である。
+\end{definition}
+
+\begin{lemma}
+\label{trace-lemma-eventually-constant}
+$\{\mathcal{G}_n\}_{n\geq 1}$ を、構成可能な
+$\mathbf{Z}/\ell^n\mathbf{Z}$ 加群の逆系とする。
+すべての $k\geq 1$ に対し、写像
+$$
+\mathcal{G}_{n+1}/\ell^k \mathcal{G}_{n+1}\to \mathcal{G}_n /\ell^k
+\mathcal{G}_n
+$$
+がすべての $n\gg 0$ で同型であると仮定する
+（この下限は $k$ に依存してよい）。言い換えれば、系
+$\{\mathcal{G}_n/\ell^k\mathcal{G}_n\}_{n\geq 1}$ が
+最終的に定常であると仮定し、対応する層を $\mathcal{F}_k$ と呼ぶ。
+このとき系 $\left\{\mathcal{F}_k\right\}_{k\geq 1}$ は
+$X$ 上の $\mathbf{Z}_\ell$-層をなす。
+\end{lemma}
+
+\begin{proof}
+証明は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-l-adic-abelian}
+$X$ 上の $\mathbf{Z}_\ell$-層の圏はアーベル圏である。
+\end{lemma}
+
+\begin{proof}
+$\mathbf{Z}_\ell$-層の射
+$\Phi = \left\{\varphi_n\right\}_{n\geq 1} :
+\left\{\mathcal{F}_n\right\}
+\to
+\left\{\mathcal{G}_n\right\}$
+を考える。
+$$
+\Coker(\Phi) =
+\left\{
+\Coker\left(\mathcal{F}_n \xrightarrow{\varphi_n} \mathcal{G}_n\right)
+\right\}_{n\geq 1}
+$$
+と置く。また $\Ker(\Phi)$ は、逆系
+$$
+\left\{
+\bigcap_{m\geq n}
+\Im\left(\Ker(\varphi_m) \to \Ker(\varphi_n)\right)
+\right\}_{n \geq 1}.
+$$
+に補題 \ref{trace-lemma-eventually-constant} を適用して得られる。
+これがアーベル圏を定めることは読者に委ねる。
+\end{proof}
+
+\begin{example}
+\label{trace-example-kernel}
+$X=\Spec(\mathbf{C})$ とし、
+$\Phi : \mathbf{Z}_\ell\to \mathbf{Z}_\ell$ を $\ell$ 倍写像とする。
+より正確には
+$$
+\Phi = \left\{ \mathbf{Z}/\ell^n\mathbf{Z} \xrightarrow{\ell}
+\mathbf{Z}/\ell^n\mathbf{Z}\right\}_{n \geq 1}.
+$$
+である。核を計算するため、逆系
+$$
+\ldots\to \mathbf{Z}/\ell\mathbf{Z}\xrightarrow{0}
+\mathbf{Z}/\ell\mathbf{Z}\xrightarrow{0}\mathbf{Z}/\ell\mathbf{Z}.
+$$
+を考える。像は常に零なので、系としての $\Ker(\Phi)$ は零である。
+\end{example}
+
+\begin{remark}
+\label{trace-remark-stalk-l-adic-sheaf}
+$\mathcal{F} = \left\{\mathcal{F}_n\right\}_{n\geq 1}$ を
+$X$ 上の $\mathbf{Z}_\ell$-層とし、$\bar x$ を幾何学的点とする。
+このとき $M_n = \left\{\mathcal{F}_{n, \bar x}\right\}$ は有限
+$\mathbf{Z}/\ell^n\mathbf{Z}$ 加群の逆系であり、
+$M_{n+1}\to M_n$ は全射で、
+$M_n = M_{n+1}/\ell^n M_{n+1}$ である。したがって
+$$
+M = \lim_n M_n = \lim \mathcal{F}_{n, \bar x}
+$$
+は有限 $\mathbf{Z}_\ell$ 加群である。これは Algebra, Lemmas
+\ref{algebra-lemma-limit-complete} と
+\ref{algebra-lemma-finite-over-complete-ring}、および
+$M/\ell M = M_1$ が $\mathbf{F}_\ell$ 上有限であることから従う。
+ゆえに、ある $r, t\geq 0$, $e_i\geq 1$ に対して
+$M\cong \mathbf{Z}_\ell^{\oplus r} \oplus \oplus_{i = 1}^t
+\mathbf{Z}_\ell/\ell^{e_i}\mathbf{Z}_\ell$ である。
+加群 $M = \mathcal{F}_{\bar x}$ を、$\bar x$ における
+$\mathcal{F}$ の{\it 茎}と呼ぶ。
+\end{remark}
+
+\begin{definition}
+\label{trace-definition-torsion-l-adic-sheaf}
+$\mathbf{Z}_\ell$-層 $\mathcal{F}$ は、ある $n$ に対して
+$\ell^n : \mathcal{F} \to \mathcal{F}$ が零写像であるとき
+{\it 捩れ}であるという。$X$ 上の $\mathbf{Q}_\ell$-層の
+アーベル圏とは、$\mathbf{Z}_\ell$-層のアーベル圏を捩れ層の
+Serre 部分圏で割った商である。言い換えれば、その対象は
+$X$ 上の $\mathbf{Z}_\ell$-層であり、
+$\mathcal{F}, \mathcal{G}$ が二つのそのような対象なら
+$$
+\Hom_{\mathbf{Q}_\ell} \left(\mathcal{F}, \mathcal{G} \right) =
+\Hom_{\mathbf{Z}_\ell} \left(\mathcal{F}, \mathcal{G}\right)
+\otimes_{\mathbf{Z}_\ell} \mathbf{Q}_\ell.
+$$
+である。商関手（包含の右随伴）を
+$\mathcal{F} \mapsto \mathcal{F} \otimes \mathbf{Q}_\ell$ と書く。
+$\mathcal{F} = \mathcal{F}' \otimes \mathbf{Q}_\ell$ で、
+$\mathcal{F}'$ が $\mathbf{Z}_\ell$-層、$\bar x$ が幾何学的点なら、
+$\bar x$ における $\mathcal{F}$ の{\it 茎}とは
+$\mathcal{F}_{\bar x} =
+\mathcal{F}'_{\bar x} \otimes \mathbf{Q}_\ell$ のことである。
+\end{definition}
+
+\begin{remark}
+\label{trace-remark-torsion-stalks}
+$\mathbf{Z}_\ell$-層は Noether スキーム上でしか定義されていないので、
+それが捩れであることと、そのすべての茎が捩れであることは同値である。
+\end{remark}
+
+\begin{definition}
+\label{trace-definition-cohomology-l-adic}
+$X$ を代数閉体 $k$ 上の有限型分離スキームとし、
+$\mathcal{F} = \left\{\mathcal{F}_n\right\}_{n\geq 1}$ を
+$X$ 上の $\mathbf{Z}_\ell$-層とする。このとき
+$$
+H^i(X, \mathcal{F}) := \lim_n H^i(X, \mathcal{F}_n)
+\quad\text{および}\quad
+H_c^i(X, \mathcal{F}) := \lim_n H_c^i(X, \mathcal{F}_n).
+$$
+と定義する。$\mathcal{F}'$ が $\mathbf{Z}_\ell$-層で
+$\mathcal{F} = \mathcal{F}'\otimes \mathbf{Q}_\ell$ なら
+$$
+H_c^i(X , \mathcal{F}) := H_c^i(X,
+\mathcal{F}')\otimes_{\mathbf{Z}_\ell}\mathbf{Q}_\ell.
+$$
+と置く。これらを、係数 $\mathcal{F}$ に関する $X$ の
+{\it $\ell$-進コホモロジー}と呼ぶ。
+\end{definition}
+
+
+\section{L-関数}
+\label{trace-section-L-function}
+
+\begin{definition}
+\label{trace-definition-L-function-finite-ring}
+$X$ を有限体 $k$ 上の有限型スキームとする。
+$\Lambda$ を位数が $k$ の標数と互いに素な有限環とし、
+$\mathcal{F}$ を $X_\etale$ 上の構成可能な平坦
+$\Lambda$-加群とする。このとき
+$$
+L(X, \mathcal{F}) :=
+\prod\nolimits_{x\in |X|}
+\det(1 - \pi_x^*T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1} \in \Lambda [[ T ]]
+$$
+と置く。ここで $|X|$ は $X$ の閉点の集合、
+$\deg x = [\kappa(x): k]$ であり、$\bar x$ は $x$ の上にある
+幾何学的点である。この定義は、$\mathcal{F}$ を
+$K \in D_{ctf}(X, \Lambda)$ で置き換えた場合にも明らかに一般化される。
+これを $\mathcal{F}$ の{\it $L$-関数}と呼ぶ。
+\end{definition}
+
+\begin{remark}
+\label{trace-remark-T}
+直観的には、$p^f = \# k$ とするとき、
+$T$ は $T = t^f$ であると考えるべきである。
+そうすれば定義は基礎体の大きさに依存しない。
+\end{remark}
+
+\begin{definition}
+\label{trace-definition-L-function-l-adic}
+今度は $\mathcal{F}$ が $X$ 上の $\mathbf{Q}_\ell$-層であると仮定する。
+この場合、
+$$
+L(X, \mathcal{F}) :=
+\prod\nolimits_{x \in |X|}
+\det(1 - \pi_x^*T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1}
+\in \mathbf{Q}_\ell[[T]].
+$$
+と定義する。各次数の点は有限個しかないので、この積は収束する。
+これを $\mathcal{F}$ の{\it $L$-関数}と呼ぶ。
+\end{definition}
+
+
+
+
+\section{コホモロジーによる解釈}
+\label{trace-section-L-cohomological}
+
+\noindent
+Grothendieck は $L$-関数を次のように解釈した。
+
+\begin{theorem}[有限係数]
+\label{trace-theorem-A}
+$X$ を有限体 $k$ 上の有限型スキームとする。
+$\Lambda$ を位数が $k$ の標数と互いに素な有限環とし、
+$\mathcal{F}$ を $X_\etale$ 上の構成可能な平坦
+$\Lambda$-加群とする。このとき
+$$
+L(X, \mathcal{F}) =
+\det(1 - \pi_X^*\ T |_{R\Gamma_c(X_{\bar k}, \mathcal{F})})^{-1}
+\in \Lambda[[T]].
+$$
+\end{theorem}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+ここまでは、各コホモロジー群
+$H^i_c(X_{\bar k}, \mathcal{F})$ が自由であるかどうかすら分かっていない。
+
+\begin{theorem}[進層]
+\label{trace-theorem-B}
+$X$ を有限体 $k$ 上の有限型スキームとし、
+$\mathcal{F}$ を $X$ 上の $\mathbf{Q}_\ell$-層とする。このとき
+$$
+L(X, \mathcal{F}) =
+\prod\nolimits_i
+\det(1 - \pi_X^*T |_{H_c^i(X_{\bar k} , \mathcal{F})})^{(-1)^{i + 1}}
+\in \mathbf{Q}_\ell[[T]].
+$$
+\end{theorem}
+
+\begin{proof}
+以下に概略を述べる。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-which-is-harder}
+ここでは行列式ではなくトレースの理論しか展開していないため、
+定理 \ref{trace-theorem-A} の方が定理 \ref{trace-theorem-B} より証明が難しい。
+後者だけを証明する。前者については \cite{SGA4.5} を参照されたい。
+また、$\ell$-捩れがないため、
+$\mathbf{Z}_\ell$ 係数についてこの定理をさらに一般化した版は存在しない。
+\end{remark}
+
+\noindent
+定理 \ref{trace-theorem-B} の証明をトレース公式に帰着させる。
+$\mathbf{Q}_\ell$ の標数は 0 なので、対数微分を取った後の等式を
+証明すれば十分である。より正確には、両辺に
+$T\frac{d}{dT} \log$ を適用する。一方で
+\begin{align*}
+T \frac{d}{dT} \log L(X, \mathcal{F})
+& =
+T\frac{d}{dT} \log
+\prod_{x \in |X|} \det(1 - \pi_x^* T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1} \\
+& =
+\sum_{x \in |X|} T \frac{d}{dT} \log
+( \det(1 - \pi_x^* T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1}) \\
+& =
+\sum_{x \in |X|} \deg x
+\sum_{n \geq 1} \text{Tr}((\pi_x^n)^* |_{\mathcal{F}_{\bar x}}) T^{n\deg x}
+\end{align*}
+となる。最後の等式には
+$$
+T\frac{d}{dT}\log\left(\det\left(1-fT|_M\right)^{-1}\right) = \sum_{n\geq 1}
+\text{Tr}(f^n|_M)T^n
+$$
+を用いた。これは任意の可換環 $\Lambda$ と、有限射影的
+$\Lambda$-加群 $M$ の任意の自己準同型 $f$ に対して成り立つ。
+他方で、同じ公式をもう一度用いると
+\begin{align*}
+& T\frac{d}{dT} \log\left(
+\prod\nolimits_i
+\det(1-\pi_X^*T |_{H_c^i\left(X_{\bar k} , \mathcal{F}\right)})^{(-1)^{i+1}}
+\right) \\
+& =
+\sum\nolimits_i (-1)^i \sum\nolimits_{n \geq 1}
+\text{Tr}\left((\pi_X^n)^* |_{H_c^i(X_{\bar k},\mathcal{F})}\right) T^n
+\end{align*}
+を得る。そこで $T$ の各べきを比較し、Möbius の反転公式を用いれば、
+定理 \ref{trace-theorem-B} は次の等式から従うことが分かる。
+$$
+\sum_{d | n} d \sum_{x \in |X| \atop \deg x = d}
+\text{Tr}((\pi_X^{n/d})^* |_{\mathcal{F}_{\bar x}}) =
+\sum_i (-1)^i \text{Tr}((\pi^n_X)^* |_{H^i_c(X_{\bar k}, \mathcal{F})}).
+$$
+$k_n$ を $k$ の次数 $n$ の拡大と書き、
+$X_n = X \times_{\Spec k} \Spec(k_n)$ および
+$_n\mathcal{F} = \mathcal{F}|_{X_n}$ と置くと、これは
+$$
+\sum_{x \in X_n(k_n)} \text{Tr}(\pi_X^* |_{_n\mathcal{F}_{\bar x}})
+=
+\sum_i (-1)^i \text{Tr}((\pi^n_X)^* |_{H^i_c({(X_n)}_{\bar k}, _n\mathcal{F})})
+$$
+に帰着する。この等式は定理 \ref{trace-theorem-C} の帰結である。
+
+%11.19.09
+
+
+\begin{theorem}
+\label{trace-theorem-D}
+$X/k$ を上のとおりとし、$\Lambda$ を $\#\Lambda \in k^*$ を満たす
+有限環、$K\in D_{ctf}(X, \Lambda)$ とする。このとき
+$R\Gamma_c(X_{\bar k}, K)\in D_{perf}(\Lambda)$ であり、
+$$
+\sum_{x\in X(k)}\text{Tr}\left(\pi_x |_{K_{\bar x}}\right) =
+\text{Tr}\left(\pi_X^* |_{R\Gamma_c(X_{\bar k}, K )}\right).
+$$
+が成り立つ。
+\end{theorem}
+
+\begin{proof}
+$\dim X \leq 1$ の場合には、これは既に証明した（参照箇所）。
+一般の場合は、その場合と固有基底変換定理から容易に従う。
+\end{proof}
+
+\begin{theorem}
+\label{trace-theorem-C}
+$X$ を有限体 $k$ 上の有限型分離スキームとし、
+$\mathcal{F}$ を $X$ 上の $\mathbf{Q}_\ell$-層とする。
+このとき、すべての $i$ に対して
+$\dim_{\mathbf{Q}_\ell}H_c^i(X_{\bar k}, \mathcal{F})$ は有限であり、
+$0\leq i \leq 2 \dim X$ の場合にしか 0 でないことはない。
+さらに
+$$
+\sum_{x\in X(k)} \text{Tr}\left(\pi_x |_{\mathcal{F}_{\bar x}}\right) =
+\sum_i (-1)^i\text{Tr}\left(\pi_X^* |_{H_c^i(X_{\bar k}, \mathcal{F})}\right).
+$$
+が成り立つ。
+\end{theorem}
+
+\begin{proof}
+これを定理 \ref{trace-theorem-D} から導く方法を説明する。
+まず、いくつかの étale コホモロジーの議論によって証明を
+代数的な命題に帰着させ、その命題を後で証明する。
+
+\medskip\noindent
+$\mathcal{F}$ を定理のとおりとする。
+$\mathcal{F}$ は $\mathcal{F}'\otimes \mathbf{Q}_\ell$ と書ける。
+ここで $\mathcal{F}' =
+\left\{\mathcal{F}'_n\right\}$ は捩れのない $\mathbf{Z}_\ell$-層、
+すなわち $\mathbf{Z}_\ell$-層の圏において
+$\ell : \mathcal{F}'\to \mathcal{F}'$ の核が自明なものである。
+このとき各 $\mathcal{F}_n'$ は $X_\etale$ 上の構成可能な平坦
+$\mathbf{Z}/\ell^n\mathbf{Z}$-加群なので、
+$\mathcal{F}'_n \in D_{ctf}(X, \mathbf{Z}/\ell^n\mathbf{Z})$ であり、
+$
+\mathcal{F}_{n+1}'
+\otimes^{\mathbf{L}}_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z} = \mathcal{F}_n'
+$
+が成り立つ。$\mathcal{F}'_n$ は平坦なので、最後の等式は
+通常の（非導来）テンソル積についても成り立つ
+（同じ等式である）。したがって次を得る。
+\begin{enumerate}
+\item
+複体 $K_n = R\Gamma_c\left(X_{\bar k}, \mathcal{F}_n'\right)$ は完全であり、
+$D(\mathbf{Z}/\ell^n\mathbf{Z})$ における自己準同型
+$\pi_n : K_n\to K_n$ を備える。
+\item
+$D_{perf}(\mathbf{Z}/\ell^n\mathbf{Z})$ において
+$$
+K_{n+1}
+\otimes^{\mathbf{L}}_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z}
+=
+K_n
+$$
+という同一視があり、これは自己準同型
+$\pi_{n+1}$ および $\pi_n$ と両立する
+（\cite[Rapport 4.12]{SGA4.5} を参照）。
+\item
+等式 $\text{Tr}\left(\pi_X^* |_{K_n}\right) =
+\sum_{x\in X(k)} \text{Tr}\left(\pi_x |_{(\mathcal{F}'_n)_{\bar x}}\right)$
+が成り立つ。
+\item
+各 $x\in X(k)$ に対して、元
+$\text{Tr}(\pi_x |_{\mathcal{F}'_{n, \bar x}}) \in \mathbf{Z}/\ell^n\mathbf{Z}$
+は $\mathbf{Z}_\ell$ の元を定め、その元は
+$\text{Tr}(\pi_x |_{\mathcal{F}_{\bar x}}) \in \mathbf{Q}_\ell$
+に等しい。
+\end{enumerate}
+したがって、次の代数補題を証明すれば十分である。
+\end{proof}
+
+\begin{lemma}
+\label{trace-lemma-piece-together}
+$K_n\in D_{perf}(\mathbf{Z}/\ell^n\mathbf{Z})$、
+$\pi_n : K_n\to K_n$ および同型
+$
+\varphi_n :
+K_{n+1} \otimes^\mathbf{L}_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z}
+\to K_n
+$
+が与えられ、これらが $\pi_{n+1}$ および $\pi_n$ と両立すると仮定する。
+このとき次が成り立つ。
+\begin{enumerate}
+\item
+元 $t_n = \text{Tr}(\pi_n |_{K_n})\in \mathbf{Z}/\ell^n\mathbf{Z}$ は
+$\mathbf{Z}_\ell$ の元 $t_\infty = \{t_n\}$ を定める。
+\item
+$\mathbf{Z}_\ell$-加群 $H_\infty^i = \lim_n H^i(k_n)$ は有限であり、
+有限個の $i$ を除いて 0 である。
+\item
+作用素 $H^i(\pi_n): H^i(K_n)\to H^i(K_n)$ は両立しており、
+次を満たす $\pi_\infty^i : H_\infty^i\to H_\infty^i$ を定める。
+$$
+\sum (-1)^i \text{Tr}(
+\pi_\infty^i |_{H_\infty^i \otimes_{\mathbf{Z}_\ell}\mathbf{Q}_\ell}) =
+t_\infty.
+$$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$\mathbf{Z}/\ell^n\mathbf{Z}$ は局所環であり、$K_n$ は完全なので、
+各 $K_n$ は、有限自由 $\mathbf{Z}/\ell^n \mathbf{Z}$-加群からなる
+有限複体 $K_n^\bullet$ であって、写像 $K_n^p \to K_n^{p+1}$ の像が
+$\ell K_n^{p+1}$ に含まれるものによって表せる。
+このような複体は同型を除いて一意であることが知られている。
+さらに $\pi_n$ は複体の射
+$\pi_n^\bullet : K_n^\bullet\to K_n^\bullet$ によって表せる
+（これはホモトピーを除いて一意である）。
+同じ理由により、同型
+$\varphi_n : K_{n+1} \otimes_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}^{\mathbf{L}}
+\mathbf{Z}/\ell^n\mathbf{Z}\to K_n$ は複体の写像
+$$
+\varphi_n^\bullet :
+K_{n+1}^\bullet
+\otimes_{\mathbf{Z}/\ell^{n+1}\mathbf{Z}}
+\mathbf{Z}/\ell^n\mathbf{Z} \to K_n^\bullet.
+$$
+によって表される。実際、$\varphi_n^\bullet$ は複体の同型である。
+したがって次が分かる。
+\begin{itemize}
+\item
+$n$ に依存しない $a, b\in \mathbf{Z}$ が存在し、
+すべての $i\notin[a, b]$ に対して $K_n^i = 0$ である。
+\item
+$K_n^i$ の階数は $n$ に依存しない。
+\end{itemize}
+したがって加群 $K_\infty^i = \lim_n \{K_n^i, \varphi_n^i\}$ は
+有限自由 $\mathbf{Z}_\ell$-加群であり、
+$K_\infty^\bullet$ は有限自由 $\mathbf{Z}_\ell$-加群からなる
+有限複体である。非零な項の個数に関する帰納法によって
+$H^i\left(K_\infty^\bullet\right) = \lim_n
+H^i\left(K_n^\bullet\right)$ を証明できる
+（これは非有界複体については正しくない）。
+したがって $H_\infty^i = H^i\left(K_\infty^\bullet\right)$ は有限
+$\mathbf{Z}_\ell$-加群である。これで {\it ii} が証明された。
+補題の残りを証明するには、図式
+$$
+\xymatrix{
+{K_{n+1}^\bullet} \ar[d]_{\pi_{n+1}^\bullet} \ar[r]^{\varphi_n^\bullet} &
+{K_n^\bullet} \ar[d]^{\pi_n^\bullet} \\
+{K_{n+1}^\bullet} \ar[r]_{\varphi_n^\bullet} & {K_n^\bullet.}
+}
+$$
+が可換でない可能性を克服しなければならない。
+しかし、この図式は導来圏では可換なので、ホモトピーを除いて可換である。
+$n\geq 2$ に対する $\pi_n^\bullet$ を、これらの図式が可換になるような
+ホモトピックな複体写像で帰納的に置き換える。
+実際、$h^i : K_{n+1}^i \to K_n^{i-1}$ がホモトピー、すなわち
+$$
+\pi_n^\bullet \circ \varphi_n^\bullet -
+\varphi_n^\bullet \circ \pi_{n + 1}^\bullet = dh + hd,
+$$
+であるとする。このとき $h^i$ を持ち上げる
+$\tilde h^i : K_{n+1}^i\to K_{n+1}^{i-1}$ を選ぶ。
+$K_{n+1}^i$ は自由で、$K_{n+1}^{i-1}\to K_n^{i-1}$ は全射なので、
+これは可能である。そこで $\pi_n^\bullet$ を、次で定義される
+$\tilde\pi_n^\bullet$ に置き換える。
+$$
+\tilde\pi_{n+1}^\bullet = \pi_{n+1}^\bullet + d\tilde h+\tilde hd.
+$$
+このように $\{\pi_n^\bullet\}$ を選べば、上の図式は可換になり、
+これらの写像は合わさって $K_\infty^\bullet$ の自己準同型
+$\pi_\infty^\bullet = \lim_n\pi_n^\bullet$ を定める。
+すると {\it i} は明らかである。元
+$t_n = \sum(-1)^i \text{Tr}\left(\pi_n^i |_{K_n^i}\right)$ は合わさって
+$\mathbf{Z}_\ell$ の元 $t_\infty$ を定める。さらに
+\begin{align*}
+t_\infty
+& =
+\sum (-1)^i \text{Tr}_{\mathbf{Z}_\ell}(\pi_\infty^i |_{K_\infty^i}) \\
+& =
+\sum (-1)^i \text{Tr}_{\mathbf{Q}_\ell}(
+\pi_\infty^i |_{K_\infty^i \otimes_{\mathbf{Z}_\ell}\mathbf{Q}_\ell}) \\
+& =
+\sum (-1)^i \text{Tr}(
+\pi_\infty |_{H^i(K_\infty^\bullet \otimes \mathbf{Q}_\ell)})
+\end{align*}
+が成り立つ。最後の等式は、$\mathbf{Q}_\ell$ が体であり、
+複体 $K_\infty^\bullet \otimes \mathbf{Q}_\ell$ がそのコホモロジー
+$H^i(K_\infty^\bullet \otimes \mathbf{Q}_\ell)$ と
+擬同型であることから従う。後者はまた
+$H^i(K_\infty^\bullet)\otimes_{\mathbf{Z}}\mathbf{Q}_\ell = H_\infty^i \otimes
+\mathbf{Q}_\ell$ に等しい。これで補題と定理 \ref{trace-theorem-C} の証明が
+ともに完了する。
+\end{proof}
+
+
+
+
+\section{上に追加すべき事項の一覧}
+\label{trace-section-list-skipped}
+
+\noindent
+これまでの講義で何の証明を省略したかを列挙する。
+\begin{enumerate}
+\item 曲線とその Jacobian、
+\item 固有基底変換定理、
+\item $R\Gamma_c$ に関する不十分な議論、
+\item より一般に、有限型の $f : X \to S$ が与えられ、
+$S$ が分離かつ準射影的であるときの étale 層上の $Rf_!$ に関する議論、
+\item $\otimes^{\mathbf{L}}$ に関する議論、
+\item $R\Gamma_c$ が $\otimes^{\mathbf{L}}$ と可換する理由に関する議論。
+\end{enumerate}
+
+
+
+
+
+
+%11.24.09
+\section{L-関数の例}
+\label{trace-section-examples-L-functions}
+
+\noindent
+曲線に対する定理 \ref{trace-theorem-B} を用いて、$L$-関数の例を与える。
+
+
+
+
+
+\section{定数層}
+\label{trace-section-L-function-constant-sheaf}
+
+\noindent
+$k$ を有限体、$X$ を $k$ 上の滑らかな幾何学的既約曲線とし、
+$\mathcal{F} = \underline{\mathbf{Q}_\ell}$ を定数層とする。
+$\bar x$ が $X$ の幾何学的点なら、Galois 加群
+$\mathcal{F}_{\bar x} = \mathbf{Q}_\ell$ は自明なので、
+$$
+\det(1-\pi_x^*\ T^{\deg x} |_{\mathcal{F}_{\bar x}})^{-1} =
+\frac{1}{1-T^{\deg x}}.
+$$
+である。定理 \ref{trace-theorem-B} を適用すると
+\begin{align*}
+L(X, \mathcal{F})
+& =
+\prod_{i = 0}^2
+\det(1 - \pi_X^*T |_{H_c^i(X_{\bar k}, \mathbf{Q}_\ell)})^{(-1)^{i+1}} \\
+& =
+\frac{\det(1 - \pi_X^*T |_{H_c^1(X_{\bar k}, \mathbf{Q}_\ell)})}{
+\det(1 - \pi_X^*T |_{H_c^0(X_{\bar k}, \mathbf{Q}_\ell)})
+\cdot \det(1 - \pi_X^*T |_{H_c^2(X_{\bar k}, \mathbf{Q}_\ell)})}.
+\end{align*}
+を得る。後者を計算するために、二つの場合を分ける。
+
+
+\medskip\noindent
+{\bf 射影的な場合。}
+$X$ が射影的であると仮定する。このとき
+$H_c^i(X_{\bar k}, \mathbf{Q}_\ell) =
+H^i(X_{\bar k}, \mathbf{Q}_\ell)$ であり、
+$$
+H^i(X_{\bar k}, \mathbf{Q}_\ell) =
+\left\{
+\begin{matrix}
+\mathbf{Q}_\ell & \pi_X^* = 1 & \text{もし }i = 0, \\
+\mathbf{Q}_\ell^{2g} & \pi_X^* = ? & \text{もし }i = 1, \\
+\mathbf{Q}_\ell & \pi_X^* = q & \text{もし }i = 2.
+\end{matrix}
+\right.
+$$
+を得る。$H^2$ 上の $\pi_X^*$ の作用の同定は、
+Étale Cohomology, Lemma \ref{etale-cohomology-lemma-pullback-on-h2-curve}
+と、$\pi_X$ の次数が $q = \#(k)$ であることから従う。
+次数 1 のコホモロジー上の $\pi_X^*$ の作用については、
+多くのことが分かっているわけではない。
+$\bar{\mathbf{Q}}_\ell$ におけるその固有値を
+$\alpha_1, \ldots, \alpha_{2g}$ と呼ぶことにする。
+以上をまとめると、定理 \ref{trace-theorem-B} から
+$$
+\prod\nolimits_{x \in |X|} \frac{1}{1 - T^{\deg x}} =
+\frac{\det(1- \pi_X^* T|_{H^1(X_{\bar k}, \mathbf{Q}_\ell)})}{(1-T)(1-qT)} =
+\frac{(1 - \alpha_1 T) \ldots (1 - \alpha_{2g}T)}{(1-T)(1-qT)}
+$$
+を得る。これから次の結果を導く。
+
+\begin{lemma}
+\label{trace-lemma-count-points-projective}
+$X$ を有限体 $k$ 上の滑らかで射影的な幾何学的既約曲線とする。
+このとき次が成り立つ。
+\begin{enumerate}
+\item $L$-関数 $L(X, \mathbf{Q}_\ell)$ は有理関数である。
+\item $H^1(X_{\bar k}, \mathbf{Q}_\ell)$ 上の $\pi_X^*$ の固有値
+$\alpha_1, \ldots, \alpha_{2g}$ は $\ell$ に依存しない代数的整数である。
+\item $[k_n : k] = n$ とするとき、$k_n$ 上の $X$ の有理点の個数は
+$$
+\# X(k_n) = 1 - \sum\nolimits_{i = 1}^{2g}\alpha_i^n + q^n,
+$$
+である。
+\item 各 $i$ に対して $|\alpha_i| < q$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(3) は、$X \otimes k_n$ 上の
+$\mathcal{F} = \underline{\mathbf{Q}_\ell}$ に定理 \ref{trace-theorem-C} を
+適用したものである。(4) には次の結果を用いる。
+\end{proof}
+
+\begin{exercise}
+\label{trace-exercise-powers}
+$\alpha_1, \ldots, \alpha_n \in \mathbf{C}$ とする。
+正の実軸を含む形
+$C_\varepsilon = \{ z \in
+\mathbf{C} \ | \ |\arg z| < \varepsilon \}$ の任意の円錐領域で
+$\varepsilon > 0$ であるものに対し、
+$\alpha_1^k, \ldots, \alpha_n^k \in C_\varepsilon$ を満たす整数
+$k \geq 1$ が存在する。
+\end{exercise}
+
+\noindent
+次に、すべての $i$ に対して $|\alpha_i| \leq q$ であることを示せ。
+さらに、複素数に関する初等的考察によって
+（素数定理の証明と同様に）$|\alpha_i| < q$ を示せ。
+実際、Riemann 予想は、すべての $i$ に対して
+$|\alpha_i| = \sqrt{q}$ であると述べる。これについては後で再び扱う。
+
+\medskip\noindent
+{\bf アフィンの場合。}
+今度は $X$ がアフィンであると仮定し、
+$X= \bar X-\left\{x_1, \ldots, x_n\right\}$ と書く。
+ここで $j : X \hookrightarrow \bar X$ は射影的非特異完備化である。
+このとき $H_c^0(X_{\bar k}, \mathbf{Q}_\ell) = 0$ かつ
+$H_c^2(X_{\bar k},
+\mathbf{Q}_\ell) = H^2(\bar X_{\bar k}, \mathbf{Q}_\ell)$ なので、
+定理 \ref{trace-theorem-B} は
+$$
+L(X, \mathbf{Q}_\ell) = \prod_{x \in |X|}\frac{1}{1 - T^{\deg x}} =
+\frac{\det(1-\pi_X^*T |_{H_c^1(X_{\bar k}, \mathbf{Q}_\ell)})}{1 - qT}.
+$$
+となる。他方、前の場合から
+\begin{eqnarray*}
+L(X, \mathbf{Q}_\ell) & = & L(\bar X,
+\mathbf{Q}_\ell)\prod_{i = 1}^n\left(1-T^{\deg x_i}\right) \\
+& = & \frac{\prod_{i = 1}^n(1-T^{\deg
+x_i})\prod_{j = 1}^{2g}(1-\alpha_jT)}{(1-T)(1-qT)}.
+\end{eqnarray*}
+を得る。したがって
+$\dim H_c^1(X_{\bar k}, \mathbf{Q}_\ell) =
+2g+\sum_{i = 1}^n \deg(x_i)-1$ であり、
+次数 1 のコホモロジーに作用する $\pi_{\bar X}^*$ の固有値
+$\alpha_1, \ldots, \alpha_{2g}$ は 1 のべき根であることが分かる。
+より正確には、各 $x_i$ は $\deg(x_i)$ 次の 1 のべき根の完全な集合を
+一つ与え、1 の出現を一つ除く。これを連接層を用いて直接見るには、
+$\bar X$ 上の短完全列
+$$
+0\to j_!\mathbf{Q}_\ell\to \mathbf{Q}_\ell\to\bigoplus_{i = 1}^n
+\mathbf{Q}_{\ell, x_i}\to 0.
+$$
+を考える。長完全コホモロジー列は
+$$
+0\to \mathbf{Q}_\ell \to \bigoplus_{i = 1}^n \mathbf{Q}_\ell^{\oplus \deg x_i}
+\to H_c^1(X_{\bar k}, \mathbf{Q}_\ell) \to H_c^1(\bar X_{\bar k},
+\mathbf{Q}_\ell)\to 0
+$$
+となる。ここで $\bigoplus_{i = 1}^n \mathbf{Q}_\ell^{\oplus
+\deg x_i}$ 上の Frobenius の作用は各項の巡回置換であり、
+$H_c^2(X_{\bar k},
+\mathbf{Q}_\ell) = H_c^2(\bar X_{\bar k}, \mathbf{Q}_\ell)$ である。
+
+
+
+
+
+\section{Legendre 族}
+\label{trace-section-legendre-family}
+
+\noindent
+$k$ を奇標数の有限体とし、
+$X = \Spec(k[\lambda, \frac{1}{\lambda(\lambda - 1)}])$ と置く。
+$\mathbf{P}^2_X$ 上で、アフィン方程式
+$y^2 = x(x - 1)(x - \lambda)$ を持つ楕円曲線の族
+$f : E \to X$ を考える。
+$\mathcal{F} = Rf_*^1\mathbf{Q}_\ell =
+\left\{R^1f_*\mathbf{Z}/\ell^n\mathbf{Z}\right\}_{n\geq 1} \otimes
+\mathbf{Q}_\ell$ と置く。この状況では次が成り立つ。
+\begin{itemize}
+\item 各 $n \geq 1$ に対して、層
+$R^1f_*(\mathbf{Z}/\ell^n\mathbf{Z})$ は有限局所定数である。
+実際、$\mathbf{Z}/\ell^n\mathbf{Z}$ 上階数 2 の自由加群である。
+\item 系 $\{R^1f_*\mathbf{Z}/\ell^n\mathbf{Z}\}_{n\geq 1}$ は
+lisse $\ell$-進層である。
+\item すべての $x\in |X|$ に対して
+$
+\det(1 - \pi_x\ T^{\deg x} |_{\mathcal{F}_{\bar x}}) =
+(1 - \alpha_x T^{\deg x})(1 - \beta_x T^{\deg x})
+$
+である。ここで $\alpha_x, \beta_x$ は
+$H^1(E_{\bar x}, \mathbf{Q}_\ell)$ 上に作用する $E_x$ の
+幾何学的 Frobenius の固有値である。
+\end{itemize}
+$E_x$ は $k$ 上ではなく $\kappa(x)$ 上でしか定義されないことに注意する。
+これらの事実の証明には、固有基底変換定理と滑らかな射の局所非輪状性を
+用いる。詳細は \cite{SGA4.5} を参照されたい。したがって
+$$
+L(E/X) := L(X, \mathcal{F}) = \prod_{x\in |X|}
+\frac{1}{(1-\alpha_xT^{\deg x})(1-\beta_xT^{\deg x })} .
+$$
+を得る。定理 \ref{trace-theorem-B} を適用すると
+$$
+L(E/X) =
+\prod_{i = 0}^2
+\det\left(1 - \pi_X^*T |_{H_c^i(X_{\bar k}, \mathcal{F})}\right)^{(-1)^{i+1}},
+$$
+となり、特にこれは有理関数であることが分かる。
+さらに、
+$H_c^0(X_{\bar k}, \mathcal{F}) = H_c^2(X_{\bar
+k}, \mathcal{F}) = 0$ を示すのは比較的容易なので、単に
+$$
+L(E/X) = \det(1 - \pi_X^*T |_{H_c^1(X, \mathcal{F})}).
+$$
+を得る。この行列式を明示的に計算するため、
+$\mathbf{Q}_\ell$ 上の固有射 $f : E \to X$ に対する Leray スペクトル系列
+$$
+H_c^i(X_{\bar k}, R^jf_*\mathbf{Q}_\ell) \Rightarrow H_c^{i+j}(E_{\bar
+k}, \mathbf{Q}_\ell)
+$$
+を考える。これは退化する。
+$f_*\mathbf{Q}_\ell = \mathbf{Q}_\ell$ かつ
+$R^1f_*\mathbf{Q}_\ell = \mathcal{F}$ である。
+層 $R^2f_*\mathbf{Q}_\ell = \mathbf{Q}_\ell(-1)$ は
+$\mathbf{Q}_\ell$ の{\it Tate 捩り}である。すなわち、
+これは $\mathbf{Q}_\ell$ という層であり、$\bar x$ における茎上の
+Galois 作用が $\#\kappa(x)$ 倍によって与えられるものである。
+したがって、すべての $n\geq 1$ に対して
+\begin{align*}
+\# E(k_n)
+& =
+\sum\nolimits_i (-1)^i
+\text{Tr}({\pi_E^n}^* |_{H_c^i(E_{\bar k}, \mathbf{Q}_\ell)}) \\
+& =
+\sum\nolimits_{i, j} (-1)^{i+j}
+\text{Tr}({\pi^n_X}^* |_{H_c^i(X_{\bar k}, R^jf_*\mathbf{Q}_\ell)}) \\
+& =
+(q^n - 2) +
+\text{Tr}({\pi_X^n}^* |_{H_c^1(X_{\bar k}, \mathcal{F})}) + q^n(q^n - 2) \\
+& =
+q^{2n} - q^n - 2 +
+\text{Tr}({\pi_X^n}^* |_{H_c^1(X_{\bar k}, \mathcal{F})})
+\end{align*}
+となる。最初の等式は定理 \ref{trace-theorem-C} から、二番目は
+Leray スペクトル系列から、三番目は $f$ による
+$\mathbf{Q}_\ell$ の高次順像を具体的に書き下すことから従う。
+別の方法として
+$$
+\# E(k_n) = \sum_{x \in X(k_n)} \# E_x(k_n)
+$$
+と書き、各曲線にトレース公式を用いてもよい。
+単に数え上げることでも $k_n$-有理点の個数を求められる。
+零切断からは $q^n -2$ 個の点が寄与する
+（$\lambda = 0, 1$ となる点は除く）ので、
+$$
+\# E(k_n) =
+q^n - 2 + \# \{y^2 = x(x - 1)(x - \lambda), \lambda\neq 0, 1\}.
+$$
+である。さらに
+$$
+\begin{matrix}
+\# \{y^2 = x(x - 1)(x - \lambda),\ \lambda\neq 0, 1\} \\
+\\
+\quad =
+\# \{y^2 = x(x - 1)(x - \lambda)\text{ in }\mathbf{A}^3\}
+- \# \{y^2 = x^2(x - 1)\} - \# \{y^2 = x(x - 1)^2\}\\
+\\
+\quad = \# \{\lambda = \frac{-y^2}{x(x - 1)} + x,\ x\neq 0, 1\} +
+\# \{y^2 = x(x - 1)(x - \lambda), x = 0, 1\} - 2(q^n - \varepsilon_n) \\
+\\
+\quad = q^n(q^n - 2)+2q^n - 2(q^n - \varepsilon_n)\\
+\\
+\quad = q^{2n}-2q^n+2\varepsilon_n
+\end{matrix}
+$$
+である。ここで $-1$ が $k_n$ の平方であるとき
+$\varepsilon_n = 1$、そうでなければ 0 であり、すなわち
+$$
+\varepsilon_n = \frac{1}{2}\left(1+\left(\frac{-1}{k_n}\right)\right) =
+\frac{1}{2}\left(1+(-1)^{\frac{q^n - 1}{2}}\right).
+$$
+である。したがって $ \# E(k_n) = q^{2n} - q^n - 2+ 2\varepsilon_n$ である。
+前の公式と比較すると
+$$
+\text{Tr}({\pi_X^n}^* |_{H_c^1(X_{\bar k}, \mathcal{F})}) =
+2 \varepsilon_n = 1 + (-1)^{\frac{q^n - 1}{2}},
+$$
+を得る。複素数の初等代数により、この等式から
+$-1$ が $k_n^*$ の平方であるなら
+$\dim H_c^1(X_{\bar k}, \mathcal{F}) = 2$ で、固有値は
+$1$ と $1$ であることが従う。したがって、この場合
+$$
+L(E/X) = (1 - T)^2.
+$$
+である。
+
+
+
+
+\section{指数和}
+\label{trace-section-exponential-sums}
+
+\noindent
+数論における標準的な問題の一つは、形
+$$
+S_{a, b}(p) = \sum_{x\in \mathbf{F}_p - \left\{0, 1\right\}} e^{\frac{2\pi
+ix^a(x - 1)^b}{p}}.
+$$
+の和を評価することである。ここでの文脈では、これは次のように
+コホモロジー的な和として解釈できる。基礎スキーム
+$S = \Spec(\mathbf{F}_p[x, \frac{1}{x(x - 1)}])$ と、
+方程式 $y^{p - 1} = x^a(x - 1)^b$ によって与えられる
+$S$ 上のアフィン曲線
+$f : X \to \mathbf{P}^1-\{0, 1, \infty\}$ を考える。
+これは群 $\mathbf{F}_p^*$ を持つ有限 étale Galois 被覆であり、
+分解
+$$
+f_*(\bar{\mathbf{Q}}_\ell^*) =
+\bigoplus_{\chi : \mathbf{F}_p^*\to \bar{\mathbf{Q}}_\ell^*} \mathcal{F}_\chi
+$$
+がある。ここで $\chi$ は $\mathbf{F}_p^*$ の指標を動き、
+$\mathcal{F}_\chi$ は、茎上で $\mathbf{F}_p^*$ が $\chi$ を通じて
+作用する階数 1 の lisse $\mathbf{Q}_\ell$-層である。
+これに対応する分解
+$$
+H_c^1(X_{\bar k}, \mathbf{Q}_\ell) = \bigoplus_\chi H^1(\mathbf{P}_{\bar
+k}^1-\{0, 1, \infty\}, \mathcal{F}_\chi)
+$$
+を得る。指数和のコホモロジー的解釈は、適切なある $\chi$ に対して
+$\mathbf{P}^1 - \{0, 1, \infty\}$ 上の $\mathcal{F}_\chi$ に
+トレース公式を適用することで与えられる。その式は
+$$
+S_{a, b}(p) =
+-\text{Tr}(\pi_X^*
+|_{H^1(\mathbf{P}_{\bar k}^1-\{0, 1, \infty\}, \mathcal{F}_\chi)}).
+$$
+である。Weil の一般原理から、この和には何らかの相殺があるはずだと予想される。
+Riemann--Hurwitz の公式を（概略的に）適用すると
+$$
+2g_X-2 \approx -2 (p-1) + 3(p-2) \approx p
+$$
+が分かるので、$g_X\approx p/2$ であり、このことも
+$\chi$-成分が小さいことを示唆する。
+
+
+
+%12.01.09
+\section{基本群によるトレース公式}
+\label{trace-section-trace-formula-fundamental-group}
+
+\noindent
+以下の節では、曲線が $\mathbf{P}^1$ である場合を除き、
+トレース公式を曲線の基本群だけを用いて完全に言い換える。
+
+
+
+
+\section{基本群}
+\label{trace-section-fundamental-groups}
+
+\noindent
+この内容は基本群の章でより詳しく論じられている。
+Fundamental Groups, Section \ref{pione-section-introduction} を参照されたい。
+$X$ を連結スキームとし、$\overline{x}\to X$ を幾何学的点とする。
+関手
+$$
+\begin{matrix}
+F_{\overline{x}}: &
+\text{有限 \'etale} \atop \text{スキーム / } X &
+\longrightarrow & \text{有限集合} \\
+&
+Y/X &
+\longmapsto &
+F_{\overline{x}}(Y) =
+\left\{\text{幾何学的点 }\overline y \atop \text{：} Y
+\text{ の点で、その像は }\overline{x}\right\} = Y_{\overline{x}}
+\end{matrix}
+$$
+を考える。
+$$
+\pi_1(X, \overline{x})
+=
+Aut(F_{\overline{x}})
+=
+\text{自己同型の集合（関手）}F_{\overline{x}}
+$$
+と置く。任意の有限 étale 射 $Y \to X$ に対して作用
+$$
+\pi_1(X, \overline{x}) \times F_{\overline{x}}(Y) \to F_{\overline{x}}(Y)
+$$
+があることに注意する。
+
+\begin{definition}
+\label{trace-definition-open}
+形
+$\text{Stab}(\overline y\in F_{\overline{x}}(Y))\subset \pi_1(X, \overline{x})$
+の部分群を{\it 開}という。
+\end{definition}
+
+\begin{theorem}[Grothendieck]
+\label{trace-theorem-fundamental-group}
+$X$ を連結スキームとする。
+\begin{enumerate}
+\item $\pi_1(X, \overline{x})$ 上には、
+開部分群が $e\in \pi_1(X, \overline x)$ の開近傍の基本系をなすような
+位相が存在する。
+\item (1) の位相に関して、群 $\pi_1(X, \overline{x})$ は
+副有限群である。
+\item 関手
+$$
+\begin{matrix}
+\text{有限スキーム} \atop \text{ \'etale / }X & \to &
+\text{有限離散連続} \atop \pi_1(X, \overline{x})\text{-集合}\\
+Y / X& \mapsto & F_{\overline{x}}(Y) \text{（自然な作用を備える）}
+\end{matrix}
+$$
+は圏同値である。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\cite{SGA1} を参照されたい。
+\end{proof}
+
+\begin{proposition}
+\label{trace-proposition-integral-normal-fundamental-group}
+$X$ を整正規 Noether スキームとする。
+$\overline y\to X$ を、一般点 $\eta\in X$ の上にある
+代数的幾何点とする。このとき
+$$
+\pi_x(X, \overline \eta) = Gal(M/\kappa(\eta))
+$$
+である。ここで $\kappa(\eta)$ は $X$ の関数体であり、
+$$
+\kappa(\overline \eta)\supset M\supset \kappa(\eta) = k(X)
+$$
+は次の性質を持つ最大の中間拡大である。すなわち、
+任意の有限中間拡大 $M\supset L\supset \kappa(\eta)$ に対して、
+$L$ における $X$ の正規化は $X$ 上有限 étale である。
+\end{proposition}
+
+\begin{proof}
+省略する。
+\end{proof}
+
+\noindent
+{\bf 基点の変更。}
+$X$ の任意の幾何学的点 $\overline{x}_1, \overline{x}_2$ に対して、
+ファイバー関手の同型
+$$
+\mathcal{F}_{\overline{x}_1} \cong \mathcal{F}_{\overline{x}_2}
+$$
+が存在する（これは $\overline{x}_1$ から $\overline{x}_2$ への道である）。
+この道による共役は、内部自己同型を除いて定まる同型
+$$
+\pi_1(X, \overline{x}_1) \cong \pi_1(X, \overline{x}_2)
+$$
+を与える。
+
+\medskip\noindent
+{\bf 関手性。}
+連結スキームの任意の射 $X_1\to X_2$ と任意の
+$\overline{x}\in X_1$ に対して、標準写像
+$$
+\pi_1(X_1, \overline{x}) \to \pi_1(X_2, \overline{x})
+$$
+がある（なぜならファイバー関手が……）。
+
+\medskip\noindent
+{\bf 基礎体。}
+$X$ を体 $k$ 上の多様体とする。このとき
+$$
+\pi_1(X, \overline{x}) \to
+\pi_1(Spec(k), \overline{x}) =^{\text{prop}} Gal(k^{\text{sep}}/k)
+$$
+を得る。この写像が全射であることと、
+$X$ が $k$ 上幾何学的連結であることは同値である。
+したがって幾何学的連結の場合には、副有限群の短完全列
+$$
+1 \to \pi_1(X_{\overline{k}}, \overline{x}) \to
+\pi_1(X, \overline{x}) \to
+Gal(k^{\text{sep}}/k) \to 1
+$$
+を得る（$\pi_1(X_{\overline{k}}, \overline{x})$ は $X$ の幾何学的基本群、
+$\pi_1(X, \overline{x})$ は $X$ の算術的基本群である）。
+
+\medskip\noindent
+{\bf 比較。}
+$X$ が $\mathbf{C}$ 上の多様体なら
+$$
+\pi_1(X, \overline{x}) =
+\text{次の群の副有限完備化：}
+\pi_1(X(\mathbf{C})(\text{通常の位相}), x)
+$$
+である（$x\in X(\mathbf{C})$ とする）。
+
+\medskip\noindent
+{\bf Frobenius 元。}
+$X$ を $k$ 上の多様体とし、$\# k < \infty$ とする。
+任意の閉点 $x \in X$ に対して
+$$
+F_x\in \pi_1(x, \overline{x}) =
+\text{Gal}(\kappa(x)^{\text{sep}}/\kappa(x))
+$$
+を幾何学的 Frobenius とする。
+$\overline\eta$ を代数的幾何学的一般点とする。このとき
+$$
+\pi_1(X, \overline\eta) \leftarrow^{\cong}
+\pi_1(X, \overline{x})
+{\text{関手性} \atop \leftarrow} \pi_1(x, \overline{x})
+$$
+である。
+
+\noindent
+次の簡単な事実がある。
+$$
+\begin{matrix}
+\pi_1(X, \overline \eta) & \to^{\deg} \pi_1(\Spec(k), \overline \eta) * &
+= Gal(k^{sep}/k) \\
+& & || \\
+& & \widehat{\mathbf{Z}}\cdot F_{\Spec(k)} \\
+F_x & \mapsto & \deg(x)\cdot F_{\Spec(k)}
+\end{matrix}
+$$
+ここで $\deg(x) = [\kappa(x):k]$ である。
+
+\medskip\noindent
+{\bf 基本群と lisse 層。}
+$X$ を連結スキーム、$\overline{x}$ を幾何学的点とする。
+次の圏同値がある。
+$$
+\begin{matrix}
+(\Lambda\text{ は有限環}) &
+\text{有限局所定数層 } \atop \Lambda\text{-加群 / }X_\etale & \leftrightarrow &
+\text{有限（離散）}\Lambda\text{-加群}
+\atop \text{連続な }\pi_1(X, \overline{x})\text{-作用を備える}\\
+\\
+(\ell\text{ は素数}) & \text{lisse }\ell\text{-進} \atop \text{層} &
+\leftrightarrow &
+\text{有限生成 }\mathbf{Z}_\ell
+\text{-加群 }M\text{ で連続な}
+\atop \pi_1(X, \overline{x})\text{-作用を備え、}
+\ell\text{-進位相を入れた加群 }M
+\end{matrix}
+$$
+
+特に lisse $\mathbf{Q}_l$-層は、連続準同型
+$$
+\pi_1(X, \overline{x}) \to \text{GL}_r(\mathbf{Q}_l), \quad r\geq 0
+$$
+に対応する。
+
+\noindent
+記法として、作用を備えた加群 $(M, \rho)$ に対応する層を
+$\mathcal{F}_\rho$ と書く。
+
+\medskip\noindent
+{\bf トレース公式。}
+$X$ を $k$ 上の多様体とし、$\# k < \infty$ とする。
+\begin{enumerate}
+\item $\Lambda$ を $(\# \Lambda, \# k)=1$ を満たす有限環とし、
+$$
+\rho : \pi_1(X, \overline{x})\to \text{GL}_r(\Lambda)
+$$
+を連続とする。すべての $n\geq 1$ に対して
+$$
+\sum_{d|n}d\left(
+\sum_{x\in |X|, \atop \deg(x)=d}
+\text{Tr}(\rho(F_x^{n/d}))\right) =
+\text{Tr}\left(
+(\pi_x^n)^* |_{R\Gamma_c(X_{\overline{k}}, \mathcal{F}_\rho)}\right)
+$$
+が成り立つ。
+\item $l\neq char(k)$ を素数とし、
+$\rho : \pi_1(X, \overline{x})\to
+\text{GL}_r(\mathbf{Q}_l)$ とする。任意の $n\geq 1$ に対して
+$$
+\sum_{d|n} d\left(
+\sum_{x\in |X| \atop \deg(x)=d}
+\text{Tr}
+\left(
+\rho(F_x^{n/d})
+\right)
+\right) =
+\sum_{i = 0}^{2\dim X}
+(-1)^i
+\text{Tr}\left(
+\pi_X^* |_{H_c^i(X_{\overline{k}}, \mathcal{F}_\rho)}\right)
+$$
+が成り立つ。
+\end{enumerate}
+
+\noindent
+{\bf Weil 予想。}
+(Deligne--Weil I, 1974)
+$X$ を $k$ 上滑らかかつ射影的とし、$\# k = q$ とする。
+このとき $H^i(X_{\overline{k}}, \mathbf{Q}_l)$ 上の $\pi_X^*$ の固有値は、
+$|\alpha|=q^{1/2}$ を満たす代数的整数 $\alpha$ である。
+
+\medskip\noindent
+{\bf Deligne の予想。}
+（Lafforgue と $\ldots$ によってほぼ完全に証明された。）
+$X$ を有限体 $k$ 上の正規多様体とし、
+$$
+\rho : \pi_1(X, \overline{x}) \longrightarrow \text{GL}_r(\mathbf{Q}_l)
+$$
+を連続とする。$\rho$ は既約で、$\det(\rho)$ の位数が有限であると仮定する。
+このとき次が予想される。
+\begin{enumerate}
+\item 数体 $E$ が存在し、すべての $x\in |X|$（閉点）に対して
+$\rho(F_x)$ の特性多項式の係数は $E$ に属する。
+\item 任意の $x\in |X|$ に対して、$\rho(F_x)$ の固有値
+$\alpha_{x, i}$、$i = 1, \ldots, r$ の複素絶対値は $1$ である。
+（これらは代数的数だが、整数とは限らない。）
+\item $E$ の $p$ を割らない任意の有限素点 $\lambda$ に対して
+（必要なら $E$ を少し拡大した後に）
+$$
+\rho\lambda : \pi_1(X, \overline{x}) \to \text{GL}_r(E_\lambda)
+$$
+が存在し、$\rho$ と両立する
+（$F_x$ たちの特性多項式が同じであるという意味で）。
+\end{enumerate}
+
+\begin{theorem}[Deligne, Weil II]
+\label{trace-theorem-weil-II}
+層 $\mathcal{F}_\rho$ について、$\rho$ が上の予想の結論を満たすとする。
+このとき $H_c^i(X_{\overline{k}},
+\mathcal{F}_{\rho})$ 上の $\pi_X^*$ の固有値は、絶対値が
+$$
+|\alpha|=q^{w/2}, \text{ここで }w\in \mathbf{Z},\ w\leq i
+$$
+である代数的数 $\alpha$ である。さらに、$X$ が滑らかかつ射影的なら
+$w = i$ である。
+\end{theorem}
+
+\begin{proof}
+\cite{WeilII} を参照されたい。
+\end{proof}
+
+
+
+
+%12.03.09
+
+\section{副有限群、コホモロジー、ホモロジー}
+\label{trace-section-profinite-cohomology}
+
+\noindent
+$G$ を副有限群とする。
+
+\medskip\noindent
+{\bf コホモロジー。}
+連続な $G$-作用を備えた離散加群の圏を考える。
+この圏には十分な単射的対象があり、
+$$
+H^i(G, M) = R^iH^0(G, M) = R^i(M\mapsto M^G)
+$$
+と定義できる。また導来版 $RH^0(G, -)$ もある。
+
+\medskip\noindent
+{\bf ホモロジー。}
+連続な $G$-作用を備えたコンパクト Abel 群の圏を考える。
+この圏には十分な射影的対象があり、
+$$
+H_i(G, M) = L_iH_0(G, M)=L_i(M\mapsto M_G)
+$$
+と定義できる。これにも導来版がある。
+
+\medskip\noindent
+{\bf 自明な双対性。}
+関手 $M\mapsto M^\wedge = \Hom_{cont}(M, S^1)$ は上の二つの圏を交換し、
+$$
+H^i(G, M)^\wedge = H_i(G, M^\wedge)
+$$
+が成り立つ。さらに、この関手は捩れ離散 $G$-加群を副有限連続
+$G$-加群へ写し、その逆も成り立つ。また $M$ が離散または副有限連続
+$G$-加群のいずれかなら、
+$M^\wedge = \Hom(M, \mathbf{Q}/\mathbf{Z})$ である。
+
+\medskip\noindent
+{\bf ホモロジーに関する注意。}
+\begin{enumerate}
+\item 有限環 $\Lambda$ 上の $\Lambda$-加群を考えると、
+$$
+H_i(G, M)=Tor_i^{\Lambda[[G]]}(M, \Lambda)
+$$
+と同一視できる。ここで $\Lambda[[G]]$ は $G$ の有限商の群環の
+逆極限である。
+\item $G$ が $\Gamma$ の正規部分群で、$\Gamma$ も副有限なら、
+\begin{itemize}
+\item $H^0(G, -)$：離散 $\Gamma$-加群 $\to$ 離散
+$\Gamma/G$-加群、
+\item $H_0(G, -)$：コンパクト $\Gamma$-加群 $\to$ コンパクト
+$\Gamma/G$-加群。
+\end{itemize}
+したがって副有限群 $\Gamma/G$ は、$\Gamma$-加群に値を取る
+$G$ のコホモロジー群に作用する。言い換えれば、導来関手
+$$
+RH^0(G, -) :
+D^{+}(\text{離散 }\Gamma\text{-加群})
+\longrightarrow
+D^{+}(\text{離散 }\Gamma/G\text{-加群})
+$$
+があり、$LH_0(G, -)$ についても同様である。
+\end{enumerate}
+
+
+
+
+
+
+
+
+\section{曲線のコホモロジー再論}
+\label{trace-section-cohomology-curves-revisited}
+
+\noindent
+$k$ を体とし、$X$ を $k$ 上の幾何学的連結な滑らかな曲線とする。
+基本的な短完全列
+$$
+1 \to
+\pi_1(X_{\overline{k}}, \overline \eta) \to
+\pi_1(X, \overline\eta) \to
+\text{Gal}(k^{^{sep}}/k) \to 1
+$$
+がある。$\Lambda$ を $\#\Lambda\in k^*$ を満たす有限環、
+$M$ を有限 $\Lambda$-加群とし、連続写像
+$$
+\rho : \pi_1(X, \overline\eta) \to \text{Aut}_{\Lambda}(M)
+$$
+が与えられているとする。このとき
+$\mathcal{F}_\rho$ は $X_\etale$ 上の対応する層を表す。
+
+\begin{lemma}
+\label{trace-lemma-identify-h2c}
+$\text{Gal}(k^{^{sep}}/k)$-加群として標準同型
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)=(M)_{\pi_1(X_{\overline{k}},
+\overline\eta)}(-1)
+$$
+がある。
+\end{lemma}
+
+\noindent
+ここで下添字 ${}_{\pi_1(X_{\overline{k}}, \overline\eta)}$
+は余不変商を表し、$(-1)$ は Tate 捩り、すなわち
+$\sigma\in \text{Gal}(k^{^{sep}}/k)$ が右辺上で
+$$
+\chi_{cycl}(\sigma)^{-1}.\sigma\text{ として作用する}
+$$
+ことを表す。ここで
+$$
+\chi_{cycl} :
+\text{Gal}(k^{^{sep}}/k)
+\to
+\prod\nolimits_{l\neq char(k)}\mathbf{Z}_l^*
+$$
+は円分指標である。
+
+\medskip\noindent
+言い換え（Deligne, Weil II, 338 頁）。
+$X$ 上の任意の有限局所定数層 $\mathcal{F}$ に対し、
+$\mathcal{F}''/X_{\overline{k}}$ が定数層となる最大の商
+$\mathcal{F}\to \mathcal{F}''$ が存在する。したがって
+$$
+\mathcal{F}'' = (X\to \Spec(k))^{-1}F''
+$$
+である。ここで $F''$ は $\Spec(k)$ 上の層、すなわち
+$\text{Gal}(k^{^{sep}}/k)$-加群である。このとき
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F})\to H_c^2(X_{\overline{k}},
+\mathcal{F}'')\to F''(-1)
+$$
+は同型である。
+
+\begin{proof}[補題 \ref{trace-lemma-identify-h2c} の証明]
+$\Ker(\rho) \subset \pi_1(X, \overline\eta)$ に対応する有限 étale
+Galois 被覆を $Y\to^{\varphi}X$ とする。したがって
+$$
+\text{Aut}(Y/X)=Ind(\rho)
+$$
+が Galois 群である。このとき
+$\varphi^*\mathcal{F}_\rho =\underline M_Y$ であり、
+$$
+\varphi_*\varphi^*\mathcal{F}_\rho\to \mathcal{F}_\rho
+$$
+を得る。これは
+\begin{align*}
+& H_c^2(X_{\overline{k}}, \varphi_*\varphi^*\mathcal{F}_\rho) \to
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)\\
+& =H_c^2(Y_{\overline{k}}, \varphi^*\mathcal{F}_\rho)\\
+& =H_c^2(Y_{\overline{k}}, \underline M) = \oplus_{\text{既約成分：}
+\atop Y_{\overline{k}}}M
+\end{align*}
+$$
+\Im(\rho) \to H_c^2(Y_{\overline{k}}, \underline M) =
+\oplus_{\text{既約成分：} \atop Y_{\overline{k}}}
+M \to_{\Im(\rho) \text{と同値}} H_c^2(X_{\overline{k}},
+\mathcal{F}_{\rho}) \to^{\text{自明な }
+\Im(\rho) \atop \text{作用}}
+$$
+を与える。既約曲線 $C/\overline{k}$ に対して
+$H_c^2(C, \underline M)=M$ である。
+
+\medskip\noindent
+また
+$$
+{\text{既約成分の} \atop \text{集合：}Y_k} =
+\frac{Im(\rho)}{Im(\rho|_{\pi_1(X_{\overline{k}}, \overline \eta)})}
+$$
+なので、$H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)$ は
+$M_{\pi_1(X_{\overline{k}}, \overline \eta)}$ の商であると結論できる。
+他方、全射
+$$
+\mathcal{F}_\rho\to \mathcal{F}'' = {\text{次の加群に対応する }
+X\text{ 上の層：} \atop (M)_{\pi_1(X_{\overline{k}}, \overline
+\eta)}\leftarrow\pi_1(X, \overline \eta)}
+$$
+があり、
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)\to
+M_{\pi_1(X_{\overline{k}}, \overline\eta)}
+$$
+を得る。Galois 作用における捩りは
+$H_c^2(X_{\overline{k}}, \mu_n)=^{\text{can}} \mathbf{Z}/n\mathbf{Z}$
+であることから生じる。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-projective}
+以上から、$X$ がさらに射影的なら、表現 $\rho$ に関手的な同一視
+$$
+H^0(X_{\overline{k}}, \mathcal{F}_\rho) =
+M^{\pi_1(X_{\overline{k}}, \overline\eta)}
+$$
+および
+$$
+H_c^2(X_{\overline{k}}, \mathcal{F}_\rho) =
+M_{\pi_1(X_{\overline{k}}, \overline \eta)}(-1)
+$$
+を得る。もちろん $X$ が射影的でなければ、
+$H^0_c(X_{\overline{k}}, \mathcal{F}_\rho) = 0$ である。
+\end{remark}
+
+
+\begin{proposition}
+\label{trace-proposition-curve-kpi1}
+$X/k$ を上のとおりとするが、
+$X_{\overline{k}}\neq \mathbf{P}^1_{\overline{k}}$ と仮定する。
+関手
+$
+(M, \rho)\mapsto H_c^{2-i}(X_{\overline{k}}, \mathcal{F}_\rho)
+$
+は $(M, \rho)\mapsto H_c^2(X_{\overline{k}}, \mathcal{F}_\rho)$ の
+左導来関手である。したがって
+$$
+H_c^{2-i}(X_{\overline{k}}, \mathcal{F}_\rho) =
+H_i(\pi_1(X_{\overline{k}}, \overline \eta), M)(-1)
+$$
+が成り立つ。さらに導来版
+$$
+R\Gamma_c(X_{\overline{k}}, \mathcal{F}_\rho)
+=
+LH_0(\pi_1(X_{\overline{k}}, \overline \eta), M(-1))
+=
+M(-1)
+\otimes_{\Lambda[[\pi_1(X_{\overline{k}}, \overline \eta)]]}^\mathbf{L}
+\Lambda
+$$
+が $D(\Lambda[[\widehat{\mathbf{Z}}]])$ において成り立つ。
+同様に、関手
+$(M, \rho)\mapsto H^i(X_{\overline{k}}, \mathcal{F}_\rho)$ は
+$(M, \rho)\mapsto M^{\pi_1(X_{\overline{k}}, \overline \eta)}$ の
+右導来関手であり、
+$$
+H^i(X_{\overline{k}}, \mathcal{F}_\rho) =
+H^i(\pi_1(X_{\overline{k}}, \overline \eta), M)
+$$
+が成り立つ。この場合にも導来版がある。
+\end{proposition}
+
+\begin{proof}
+（アイデア）両辺が普遍 $\delta$-関手であることを示す。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-poincare-groups}
+命題と自明な双対性から
+$$
+H^{2-i}_c(X_{\overline{k}}, \mathcal{F}_\rho)
+\times
+H^i(X_{\overline{k}}, \mathcal{F}_\rho^\wedge(1))
+\to
+\mathbf{Q}/\mathbf{Z}
+$$
+という完全対が得られる。$X$ が射影的なら、これは Poincaré 双対性である。
+\end{remark}
+
+
+\section{抽象トレース公式}
+\label{trace-section-abstract-trace-formula}
+
+\noindent
+副有限群の拡大
+$$
+1 \to G \to \Gamma \xrightarrow{\deg} \widehat{\mathbf{Z}} \to 1
+$$
+が与えられているとする。次が存在するとき、かつそのときに限り、
+$\Gamma$ は{\it 抽象トレース公式を持つ}という。
+\begin{enumerate}
+\item 整数 $q\geq 1$。
+\item 各 $d\geq 1$ に対する有限集合 $S_d$ と、各 $x\in S_d$ に対する
+$\deg(F_x) = d$ を満たす共役類 $F_x \in \Gamma$。
+\end{enumerate}
+これらには、さらに次を要求する。
+\begin{enumerate}
+\item $q$ を割らないすべての $\ell$ に対して
+$\text{cd}_\ell(G)<\infty$ である。
+\item $q\in \Lambda^*$ を満たす任意の有限環 $\Lambda$、
+連続な $\Gamma$-作用を備えた任意の有限射影的 $\Lambda$-加群 $M$、
+および任意の $n > 0$ に対して
+$$
+\sum\nolimits_{d|n}d \left(
+\sum\nolimits_{x \in S_d}
+\text{Tr}( F_x^{n/d} |_M)
+\right)
+=
+q^n \text{Tr}(F^n|_{M \otimes_{\Lambda[[G]]}^{\mathbf{L}}\Lambda})
+$$
+が $\Lambda^\natural$ において成り立つ。
+\end{enumerate}
+ここで $M \otimes_{\Lambda[[G]]}^{\mathbf{L}}\Lambda = LH_0(G, M)$ は
+導来ホモロジーを表し、
+$\Gamma/G = \widehat{\mathbf{Z}}$ において $F=1$ である。
+
+\begin{remark}
+\label{trace-remark-abstract-trace-formula}
+この概念について、いくつか注意を述べる。
+\begin{enumerate}
+\item 射影曲線をモデル化する場合には、コホモロジーを使えば
+因子 $q^n$ は不要である。
+\item 知られている例は、$X$ が有限体上の滑らかな幾何学的既約
+$K(\pi, 1)$ であるときの
+$\Gamma = \pi_1(X, \overline \eta)$ だけである。
+この場合 $q = (\# k)^{\dim X}$ である。
+命題を認めれば、この講義では曲線についてこれを証明した。
+\item 整数 $q$ が与えられれば、集合 $S_d$ は一意に定まる。
+（公式を変えずに、$q$ を整数 $m$ 倍し、$S_d$ を
+$S_d$ の $m^d$ 個のコピーで置き換えることができる。）
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\label{trace-example-commutative}
+整数 $q\geq 1$ を固定し、
+$$
+\begin{matrix}
+1 &
+\to &
+G = \widehat{\mathbf{Z}}^{(q)} &
+\to &
+\Gamma &
+\to &
+\widehat{\mathbf{Z}} &
+\to &
+1 \\
+&
+&
+= \prod_{l\not \mid q} \mathbf{Z}_l &
+&
+F &
+\mapsto &
+1
+\end{matrix}
+$$
+を考える。ただし $FxF^{-1} = ux$、
+$u \in (\widehat{\mathbf{Z}}^{(q)})^*$ とする。
+自明加群 $\mathbf{Z}/m\mathbf{Z}$ だけを用いても、
+すべての $(m, q)=1$ に対して $\mathbf{Z}/m\mathbf{Z}$ における
+$$
+q^n - (qu)^n \equiv \sum\nolimits_{d|n} d\# S_d
+$$
+を得る。これは（$u \to u^{-1}$ を除いて）
+$qu = a\in \mathbf{Z}$ かつ $|a| < q$ を導く。
+特殊な場合 $a = 1$ は実際に
+$$
+\Gamma = \pi_1^t(\mathbf{G}_{m, \mathbf{F}_p}, \overline \eta),
+\quad
+\# S_1 = q - 1,
+\quad\text{および}\quad
+\# S_2 = \frac{(q^2-1)-(q-1)}{2}
+$$
+で生じる。
+\end{example}
+
+
+
+%12.08.09
+
+\section{保型形式と層}
+\label{trace-section-automorphic}
+
+\noindent
+参考文献：特に Drinfeld の素晴らしい論文
+\cite{D1}、\cite{D2}、\cite{D0} を参照されたい。
+
+\medskip\noindent
+{\bf 不分岐尖点形式。}
+$k$ を標数 $p$ の有限体とする。
+$X$ を $k$ 上の幾何学的既約な射影的滑らかな曲線とする。
+$K = k(X)$ を $X$ の関数体と置く。
+$v$ を $K$ の素点とする。これは閉点 $x\in X$ と同じものである。
+$K_v$ を $v$ における $K$ の完備化とする。
+これは $x$ における $X$ の局所環の完備化の分数体と同じものである。
+整数環を $O_v\subset K_v$ と書く。さらに
+$$
+O = \prod\nolimits_v O_v \subset \mathbf{A} = \prod_v' K_v
+$$
+と置き、$\Lambda$ を $p$ が $\Lambda$ において可逆な任意の環とする。
+
+\begin{definition}
+\label{trace-definition-unramified}
+{\it $\text{GL}_2(\mathbf{A})$ 上の $\Lambda$ に値を取る
+不分岐尖点形式}\footnote{これは標準的でない記法である可能性が高い。}
+とは、次を満たす関数
+$$
+f : \text{GL}_2(\mathbf{A}) \to \Lambda
+$$
+のことである。
+\begin{enumerate}
+\item すべての $x\in \text{GL}_2(\mathbf{A})$ と
+$\gamma\in \text{GL}_2(K)$ に対して $f(x\gamma) = f(x)$。
+\item すべての $x\in \text{GL}_2(\mathbf{A})$ と
+$u\in \text{GL}_2(O)$ に対して $f(ux) = f(x)$。
+\item すべての $x\in \text{GL}_2(\mathbf{A})$ に対して
+$$
+\int_{\mathbf{A} \mod K} f
+\left(x
+\left(
+\begin{matrix}
+1 & z \\
+0 & 1
+\end{matrix}
+\right)
+\right) dz = 0
+$$
+である。$p$ が可逆な一般の環 $\Lambda$ に対してこの式をどう解釈するかは、
+\cite[Section 4.1]{dJ-conjecture} を参照されたい。
+\end{enumerate}
+\end{definition}
+
+\noindent
+{\bf Hecke 作用素。}
+$v$ を $K$ の素点、$f$ を不分岐尖点形式とするとき、
+$$
+T_v(f)(x) =
+\int_{g\in M_v}f(g^{-1}x)dg,
+$$
+および
+$$
+U_v(f)(x) =
+f\left(
+\left(
+\begin{matrix}
+\pi_v^{-1} & 0 \\
+0 & \pi_v^{-1}
+\end{matrix}
+\right)x\right)
+$$
+と置く。ここで用いた記法は次のとおりである。
+$\pi_v \in O_v$ は素元であり、
+$$
+M_v =
+\left\{
+h\in Mat(2\times 2, O_v) | \det h = \pi_vO_v^*\right\}
+$$
+である。また $dg = $ は $\text{GL}_2(K_v)$ 上の Haar 測度で、
+$\int_{\text{GL}_2(O_v)} dg = 1$ を満たす。明示的には
+$$
+T_v(f)(x) =
+f\left(
+\left(
+\begin{matrix}
+\pi_v^{-1}& 0 \\
+0 & 1
+\end{matrix}
+\right)
+x\right) +
+\sum_{i = 1}^{q_v}
+f\left(\left(
+\begin{matrix}
+1 & 0 \\
+-\pi_v^{-1}\lambda_i
+& \pi_v^{-1}
+\end{matrix}
+\right) x\right)
+$$
+である。ここで $\lambda_i\in O_v$ は
+$O_v/(\pi_v)=\kappa_v$ の代表元系であり、$q_v = \#\kappa_v$ である。
+
+\medskip\noindent
+{\bf 固有形式。}
+{\it 固有形式} $f$ とは、$f$ のある値が単元であり、ある（一意に定まる）
+$t_v, u_v \in \Lambda$ に対して $T_vf = t_vf$ および
+$U_vf = u_vf$ を満たす不分岐尖点形式である。
+
+\begin{theorem}
+\label{trace-theorem-drinfeld-make-rho}
+$\overline{\mathbf{Q}}_l$ に値を取り、固有値が
+$u_v\in \overline{\mathbf{Z}}_l^*$ である固有形式 $f$ が与えられたとする。
+このとき
+$$
+\rho : \pi_1(X)\to \text{GL}_2(E)
+$$
+という連続かつ絶対既約な表現が存在する。ここで $E$ は
+$\overline{\mathbf{Q}}_l$ に含まれる $\mathbf{Q}_\ell$ の有限拡大であり、
+すべての素点 $v$ に対して
+$t_v = \text{Tr}(\rho(F_v))$ および
+$u_v = q_v^{-1}\det\left(\rho(F_v)\right)$ が成り立つ。
+\end{theorem}
+
+\begin{proof}
+\cite{D0} を参照されたい。
+\end{proof}
+
+\begin{theorem}
+\label{trace-theorem-drinfeld-make-f}
+$\mathbf{Q}_l \subset E$ を有限拡大とし、
+$$
+\rho : \pi_1(X)\to \text{GL}_2(E)
+$$
+を絶対既約かつ連続とする。このとき
+$\overline{\mathbf{Q}}_l$ に値を取る固有形式 $f$ が存在し、
+その固有値 $t_v$、$u_v$ は
+$t_v = \text{Tr}(\rho(F_v))$ および
+$u_v = q_v^{-1}\det(\rho(F_v))$ を満たす。
+\end{theorem}
+
+\begin{proof}
+\cite{D1} を参照されたい。
+\end{proof}
+
+\begin{remark}
+\label{trace-remark-lafforgue}
+Lafforgue と多くの数学者のおかげで、現在では分岐も許した
+$\text{GL}_n$ に対する上の二つのような完全な定理が得られている。
+言い換えれば、有限体上の曲線の関数体に対する
+$\text{GL}_n$ の大域 Langlands 対応は既知である。
+同時に、これは有限体上の曲線の基本群について答えるべき興味深い問題が
+多く残っていないという意味ではない。以下でその一端を見る。
+\end{remark}
+
+\noindent
+{\bf 中心指標。}
+$f$ が固有形式なら、
+$$
+\begin{matrix}
+\chi_f : &
+O^*\backslash \mathbf{A}^*/K^* &
+\to &
+\Lambda^* \\
+&
+(1, \ldots, \pi_v, 1, \ldots, 1) &
+\mapsto &
+u_v^{-1}
+\end{matrix}
+$$
+を{\it 中心指標}という。上の正規化によって、これは
+$\rho$ の行列式に対応する。次を置く。
+$$
+C(\Lambda) =
+\left\{
+{\text{不分岐尖点形式 } f \text{（係数環：}\Lambda}
+\atop {\text{ただし } U_v f = \varphi_v^{-1}f\forall v}
+\right\}
+$$
+
+\begin{proposition}
+\label{trace-proposition-cusp-forms-finite}
+$\Lambda$ が Noether 環なら、$C(\Lambda)$ は有限生成
+$\Lambda$-加群である。さらに、$\Lambda$ が素体
+$\mathbf{F} \subset \Lambda$ を持つ体なら、
+$$
+C(\Lambda)=(C(\mathbf{F}))\otimes_{\mathbf{F}}\Lambda
+$$
+であり、この同一視は $T_v$ の作用と両立する。
+\end{proposition}
+
+\begin{proof}
+\cite[Proposition 4.7]{dJ-conjecture} を参照されたい。
+\end{proof}
+
+\noindent
+この命題から次の補題が直ちに従う。
+
+\begin{lemma}
+\label{trace-lemma-eigenvalues-algebraic}
+固有値の代数性。
+$\Lambda$ が体なら、$f\in C(\Lambda)$ に対する固有値 $t_v$ は
+素体 $\mathbf{F} \subset \Lambda$ 上代数的である。
+\end{lemma}
+
+\begin{proof}
+命題 \ref{trace-proposition-cusp-forms-finite} から従う。
+\end{proof}
+
+\noindent
+以上をすべて組み合わせると、次の非常に有用な技巧が得られる。
+
+\begin{lemma}
+\label{trace-lemma-switch-l}
+$l$ の切替え。$E$ を数体とする。絶対既約かつ連続な表現
+$$
+\rho : \pi_1(X)\to SL_2(E_\lambda)
+$$
+から始める。ここで $\lambda$ は $p$ の上にない $E$ の素点である。
+このとき、$p$ の上にない $E$ の任意の別の素点 $\lambda'$ に対して、
+有限拡大 $E'_{\lambda'}$ と絶対既約かつ連続な表現
+$$
+\rho': \pi_1(X)\to SL_2(E'_{\lambda'})
+$$
+が存在する。この表現は、すべての Frobenius 元の特性多項式が同じという
+意味で $\rho$ と両立する。
+\end{lemma}
+
+\noindent
+これはまさに Deligne の予想の一例であることに注意する。
+
+\begin{proof}
+切替え補題を証明するため、定理 \ref{trace-theorem-drinfeld-make-f} を用いて、
+$\rho$ に対応する固有形式
+$f\in C(\overline{\mathbf{Q}}_l)$ を得る。
+次に命題 \ref{trace-proposition-cusp-forms-finite} を用いれば、
+$E \subset E'$ が有限となるような $f\in C(E')$ を選べる。
+さらに $E'$ を完備化すると、$E'_{\lambda'}$ が
+$E_{\lambda'}$ の有限拡大であるような固有形式
+$f\in C(E'_{\lambda'})$ を得る。
+最後に定理 \ref{trace-theorem-drinfeld-make-rho} を用い、必要なら
+$E'_{\lambda'}$ をもう少し拡大して、絶対既約かつ連続な
+$\rho': \pi_1(X) \to SL_2(E_{\lambda'}')$ を得る。
+\end{proof}
+
+\noindent
+推測：ある（位相）環 $\Lambda$ に対して
+$$
+\left(
+{\rho : \pi_1(X)\to SL_2(\Lambda) \atop \text{絶対既約}}
+\right)
+\leftrightarrow
+\text{固有形式：} C(\Lambda)
+$$
+が成り立つなら、$\rho(F_v)$ のすべての固有値は代数的である
+（$\Lambda$ が有限環なら、この議論は簡単な形では機能しない。
+Langlands 対応が体上だけでなく、より一般に成り立つという推測に基づくと、
+次の予想に至る。
+
+\medskip\noindent
+{\bf 予想。}
+（\cite{dJ-conjecture} を参照。）
+任意の連続写像
+$$
+\rho : \pi_1(X)\to \text{GL}_n(\mathbf{F}_l[[t]])
+$$
+に対して $\# \rho(\pi_1(X_{\overline{k}}))<\infty$ である。
+
+\medskip\noindent
+層の言葉では、次のように言い換えられる。
+「$\overline{\mathbf{F}_l((t))}$-加群からなる任意の lisse 層について、
+幾何学的モノドロミーは有限である。」
+
+\begin{theorem}
+\label{trace-theorem-conjecture-n-2}
+$n\leq 2$ なら予想は成り立つ。
+\end{theorem}
+
+\begin{proof}
+\cite{dJ-conjecture} を参照されたい。
+\end{proof}
+
+\begin{theorem}
+\label{trace-theorem-conjecture-l-bigger-2n}
+いくつかの未証明の事柄を認めれば、$l > 2n$ のとき予想は成り立つ。
+\end{theorem}
+
+\begin{proof}
+\cite{Gaitsgory} を参照されたい。
+\end{proof}
+
+\noindent
+この予想は実際に何かの役に立つ。
+Kashiwara の予想に関する Drinfeld の研究を参照されたい。
+また、次のもっと具体的な応用もある。
+
+\begin{theorem}
+\label{trace-theorem-deformation-rings}
+（\cite[Theorem 3.5]{dJ-conjecture} を参照。）
+$$
+\rho_0: \pi_1(X)\to \text{GL}_n(\mathbf{F}_l)
+$$
+を連続とし、$l\neq p$ と仮定する。さらに次を仮定する。
+\begin{enumerate}
+\item 予想が $X$ に対して成り立つ。
+\item $\rho_0 |_{\pi_1(X_{\overline{k}})}$ は絶対既約である。
+\item $l$ は $n$ を割らない。
+\end{enumerate}
+このとき $\rho_0$ の普遍変形環 $R_{\text{univ}}$ は
+$\mathbf{Z}_l$ 上有限平坦である。
+\end{theorem}
+
+\noindent
+説明：表現 $\rho_{\text{univ}}:
+\pi_1(X)\to \text{GL}_n(R_{\text{univ}})$（普遍変形環）が存在する。
+$R_{\text{univ}}$ は局所完備で、剰余体は $\mathbf{F}_l$ であり、
+$(R_{\text{univ}}\to
+\mathbf{F}_l)\circ\rho_{\text{univ}}\cong\rho_0$ である。
+また、$R\to \mathbf{F}_l$ が与えられ、$R$ が局所完備で、
+$\rho : \pi_1(X)\to \text{GL}_n(R)$ であるなら、
+$\psi\circ\rho_{\text{univ}}\cong \rho$ を満たす
+$\psi : R_{\text{univ}}\to R$ が存在する。定理は射
+$$
+\Spec(R_{\text{univ}})
+\longrightarrow
+\Spec(\mathbf{Z}_l)
+$$
+が有限平坦であると述べる。特に、このような $\rho_0$ は
+$\rho : \pi_1(X) \to \text{GL}_n(\overline{\mathbf{Q}}_l)$ に持ち上がる。
+
+\medskip\noindent
+注意：
+\begin{enumerate}
+\item 変形に関する定理は容易である。
+\item 予想に向けたどの結果も難しいように見える。
+\item $\pi_1(X)$ に関するさらに多くの予想があると興味深いだろう。
+\end{enumerate}
+
+
+
+
+%12.10.09
+
+\section{点の計数}
+\label{trace-section-counting}
+
+\noindent
+$X$ を $k$ 上の滑らかな幾何学的既約射影曲線とし、
+$q = \# k$ とする。トレース公式から、代数的整数
+$w_1, \ldots, w_{2g}$ が存在して
+$$
+\# X(k_n) = q^n - \sum\nolimits_{i = 1}^{2g_X} w_i^n + 1.
+$$
+となる。$\sigma\in \text{Aut}(X)$ なら、すべての $i$ に対して、
+$\sigma(w_i)=w_j$ となる $j$ が存在する。
+
+\medskip\noindent
+{\bf Riemann 予想。}
+すべての $i$ に対して $|\omega_i| = \sqrt{q}$ である。
+
+\medskip\noindent
+これは 1924 年に Emil Artin が超楕円曲線について定式化し、
+1940 年に Weil が証明した。Weil は二つの証明を与えた。
+\begin{itemize}
+\item $X \times X$ 上の交叉理論と Hodge 指数定理を用いる証明。
+\item $X$ の Jacobian を用いる証明。
+\end{itemize}
+初期の着想が Stephanov による別の証明もあり、Bombieri が与えた。
+これは関数体 $k(X)$ とその Frobenius 作用素を用いる（1969 年）。
+出発点は、$f\in k(X)$ が与えられたとき、$f^q - f$ は
+$X$ のすべての $\mathbf{F}_q$-有理点で消える有理関数であり、
+この着想を用いて点の個数の上界を与えられると考えることである。
+
+
+\section{Chebotarev の精密形}
+\label{trace-section-chebotarev}
+
+\noindent
+最初の応用として、曲線の有限 étale Galois 被覆に対する
+Chebotarev の精密形を証明する。
+$\varphi : Y \to X$ を群 $G$ を持つ有限 étale Galois 被覆とする。
+これは準同型
+$$
+\pi_1(X) \longrightarrow G = \text{Aut}(Y/X)
+$$
+に対応する。$Y_{\overline{k}} = $ 既約と仮定する。
+$C\subset G$ が共役類なら、すべての $n > 0$ に対して
+$$
+| \# \{x \in X(k_n) \mid F_x \in C\} - \frac{\# C}{\# G} \cdot \# X(k_n) |
+\leq
+(\# C)(2g - 2) \sqrt{q^n}
+$$
+が成り立つ。
+（警告：使用前に、右辺の係数 $\# C$ を注意深く確認されたい。）
+
+\begin{proof}[概略]
+$$
+\varphi_*(\overline{\mathbf{Q}_l}) =
+\oplus_{\pi \in \widehat{G}} \mathcal{F}_{\pi}
+$$
+と書く。ここで $\widehat{G}$ は
+$\overline{\mathbf{Q}}_l$ 上の $G$ の既約表現の同型類の集合である。
+$\pi \in \widehat{G}$ に対し、
+$\chi_{\pi}: G \to \overline{\mathbf{Q}}_l$ を $\pi$ の指標とする。
+このとき
+$$
+H^*(Y_{\overline{k}}, \overline{\mathbf{Q}}_l) =
+\oplus_{\pi\in \widehat{G}}
+H^*(Y_{\overline{k}}, \overline{\mathbf{Q}}_l)_\pi
+=_{(\varphi\text{ は有限})}
+\oplus_{\pi\in \widehat{G}}
+H^*(X_{\overline{k}}, \mathcal{F}_\pi)
+$$
+である。$\pi\neq 1$ なら
+$$
+H^0(X_{\overline{k}}, \mathcal{F}_\pi) =
+H^2(X_{\overline{k}}, \mathcal{F}_\pi) = 0,\quad
+\dim H^1(X_{\overline{k}}, \mathcal{F}_\pi) = (2g_X - 2)d_\pi^2
+$$
+であり（これは作用に関するトレース公式から得られる……）、
+$$
+|\sum_{x \in X(k_n)} \chi_\pi(\mathcal{F}_x)| \leq
+(2g_X - 2) d_\pi^2\sqrt{q^n}
+$$
+が分かる。$1_C = \sum_\pi a_\pi \chi_\pi$ と書けば、
+$a_\pi = \langle 1_C, \chi_\pi\rangle$ であり、
+$
+a_1 = \langle 1_C, \chi_1\rangle = \frac{\# C}{\# G}
+$
+である。ここで
+$$
+\langle f, h\rangle = \frac{1}{\# G}\sum_{g \in G} f(g)\overline{h(g)}
+$$
+である。したがって関係式
+$$
+\frac{\# C}{\# G} = ||1_C||^2 = \sum|a_\pi|^2
+$$
+を得る。最後に
+\begin{align*}
+\#\left\{x \in X(k_n) \mid F_x \in C\right\}
+& =
+\sum_{x \in X(k_n)} 1_C(x) \\
+& =
+\sum_{x \in X(k_n)} \sum_\pi a_\pi \chi_\pi(F_x) \\
+& =
+\underbrace{\frac{\# C}{\# G} \# X(k_n)}_{
+\text{次の項：}\pi = 1}
++
+\underbrace{\sum_{\pi\neq 1}a_\pi\sum_{x\in X(k_n)}\chi_\pi(F_x)}_{
+\text{誤差項（次で上から評価する：}E)}
+\end{align*}
+となる。誤差項は
+\begin{align*}
+|E|
+& \leq
+\sum_{\pi \in \widehat{G}, \atop \pi \neq 1}
+|a_\pi| (2g - 2) d_\pi^2 \sqrt{q^n} \\
+& \leq
+\sum_{\pi \neq 1} \frac{\# C}{\# G} (2g_X - 2) d_\pi^3 \sqrt{q^n}
+\end{align*}
+と評価できる。Weil 予想により、$\# X(k_n)\sim q^n$ である。
+\end{proof}
+
+
+
+\section{完全分解する素点はいくつあるか？}
+\label{trace-section-how-many}
+
+\noindent
+この節では、有限体上の曲線に対する Riemann 予想の第二の応用を与える。
+数論家にとっては、Ihara の論文
+『How many primes decompose completely in an infinite unramified Galois
+extension of a global field?』（\cite{Ihara}）を参照するのも有益だろう。
+基本完全列
+$$
+1 \to
+\pi_1(X_{\overline{k}}) \to
+\pi_1(X) \xrightarrow{\deg}
+\widehat{\mathbf{Z}} \to 1
+$$
+を考える。
+
+\begin{proposition}
+\label{trace-proposition-finite-set-frobenii-generate-topologically}
+$X$ の閉点からなる有限集合 $x_1, \ldots, x_n$ であって、
+これらの点に対応する{\bf すべての} Frobenius 元の集合が
+$\pi_1(X)$ を位相的に生成するものが存在する。
+\end{proposition}
+
+\noindent
+これは次のようにも述べられる。
+$x_1, \ldots, x_n\in |X|$ であって、各 $x_i$ に対する
+Frobenius 元を $1$ 個ずつ含む $\pi_1(X)$ の最小の正規閉部分群
+$\Gamma$ が $\pi_1(X)$ 全体となるものが存在する。
+すなわち $\Gamma = \pi_1(X)$ である。
+
+\begin{proof}
+$N\gg 0$ を取り、
+$$
+\{x_1, \ldots, x_n\} =
+{\text{すべての閉点の集合：}
+\atop X \text{ の次数が} \leq N\text{（基礎体：} k}
+$$
+とする。これらの点に対して、言い換えた命題に現れる
+$\Gamma\subset \pi_1(X)$ を取る。
+$\Gamma \neq \pi_1(X)$ と仮定する。このとき $\Gamma$ を含む
+$\pi_1(X)$ の正規開部分群 $U$ で、
+$U \neq \pi_1(X)$ となるものを選べる。
+$X$ に対する Riemann 予想により、この点集合は次数 $N$ の点
+$x_{i_1}$ と次数 $N - 1$ の点 $x_{i_2}$ を含む。
+したがって $\deg : \Gamma \to \widehat{\mathbf{Z}}$ は全射であり、
+$U$ についても同じである。これはちょうど、$U$ に対応する
+有限 étale Galois 被覆を $Y \to X$ とすると
+$Y_{\overline{k}}$ が既約であることを意味する。
+$G = \text{Aut}(Y/X)$ と置く。図式的には
+$$
+Y \to^G X,\quad G = \pi_1(X)/U
+$$
+である。構成により、次数 $\leq N$ の $X$ のすべての点は
+$Y$ において完全分解する。したがって特に
+$$
+\# Y(k_N)\geq (\# G)\# X(k_N)
+$$
+である。両辺に Riemann 予想を用いると
+$$
+q^N+1+2g_Yq^{N/2}\geq \# G\# X(k_N)\geq \#
+G(q^N+1-2g_Xq^{N/2})
+$$
+を得る。$2g_Y-2 = (\# G)(2g_X-2)$ なので、これは
+$$
+q^N + 1 + (\# G)(2g_X - 1) + 1)q^{N/2}\geq
+\# G (q^N + 1 - 2g_Xq^{N/2})
+$$
+を意味する。したがって $N$ が十分大きければ、
+$G$ は自明群でなければならない。
+\end{proof}
+
+\noindent
+{\bf 奇妙な問い。}
+$W_X = \deg^{-1}(\mathbf{Z})\subset \pi_1(X)$ と置く。
+$X$ の閉点からなるある有限集合 $x_1, \ldots, x_n$ について、
+これらの点に対応するすべての Frobenius 元の集合は
+$W_X$ を{\it 代数的に}生成するだろうか？
+
+\medskip\noindent
+Baire のカテゴリー論法により、これはすべての Frobenius 元についての
+同じ問いに翻訳される。
+
+
+
+
+
+\section{実際には点はいくつあるか？}
+\label{trace-section-really}
+
+\noindent
+曲線の種数が $q$ に比べて大きい場合、公式
+$\# X(k) = q - \sum \omega_i + 1$ の主要項は $q$ ではなく、
+第二項 $\sum \omega_i$ である。これは（先験的には）
+およそ $2g_X\sqrt{q}$ の大きさになりうる。
+論文 \cite{Drinfeld-number} で、Drinfeld と Vladut は、
+この最大値が（Ihara が以前に予想したとおり）
+実際には高々およそ $g\sqrt{q}$ であることを示した。
+
+\medskip\noindent
+$q$ を固定し、$k$ を $k$ 個の元を持つ体とする。
+$$
+A(q) = \limsup_{g_X \to \infty} \frac{\# X(k)}{g_X}
+$$
+と置く。ここで $X$ は $k$ 上の幾何学的既約な滑らかな射影曲線を動く。
+この定義のもとで次の結果が成り立つ。
+\begin{itemize}
+\item RH $\Rightarrow A(q)\leq 2\sqrt{q}$。
+\item Ihara $\Rightarrow A(q)\leq \sqrt{2q}$。
+\item DV $\Rightarrow A(q)\leq \sqrt{q}-1$
+（実際、$q$ が平方数ならこれは鋭い）。
+\end{itemize}
+
+\begin{proof}
+$X$ が与えられたとし、$w_1, \ldots, w_{2g}$ および
+$g = g_X$ を上のとおりとする。
+$\alpha_i = \frac{w_i}{\sqrt{q}}$ と置けば $|\alpha_i| = 1$ である。
+$\alpha_i$ が現れるなら
+$\overline{\alpha}_i = \alpha_i^{-1}$ も現れる。このとき
+$$
+N = \# X(k) \leq X(k_r) = q^r + 1 - (\sum_i \alpha_i^r) q^{r/2}
+$$
+である。書き換えると、すべての $r \geq 1$ に対して
+$$
+-\sum_i \alpha_i^r \geq Nq^{-r/2} - q^{r/2} - q^{-r/2}
+$$
+を得る。また
+$$
+0 \leq |\alpha_i^n +\alpha_i^{n-1} +\ldots +\alpha_i +1|^2
+= (n + 1) + \sum_{j = 1}^n (n + 1 - j) (\alpha_i^j + \alpha_i^{-j})
+$$
+である。したがって
+\begin{align*}
+2g(n+1) & \geq - \sum_i \left(\sum_{j = 1}^n (n+1-j)(\alpha_i^j
++\alpha_i^{-j})\right)\\
+& =-\sum_{j = 1}^n (n+1-j)\left(\sum_i\alpha_i^j
++\sum_i\alpha_i^{-j}\right)
+\end{align*}
+となる。この半分を取ると
+\begin{align*}
+g(n+1)& \geq - \sum_{j = 1}^n (n+1-j)(\sum_i\alpha_i^j)\\
+& \geq N\sum_{j = 1}^n (n+1-j)q^{-j/2}-\sum_{j = 1}^n
+(n+1-j)(q^{j/2}+q^{-j/2})
+\end{align*}
+を得る。よって
+$$
+\frac{N}{g}\leq \left(\sum_{j = 1}^n \frac{n+1-j}{n+1}q^{-j/2} \right)^{-1}
+\cdot
+\left(
+1 + \frac{1}{g} \sum_{j = 1}^n \frac{n + 1 - j}{n + 1}(q^{j/2} + q^{-j/2})
+\right)
+$$
+である。$n$ を固定して $g\to \infty$ とすると
+$$
+A(q)\leq \left(\sum_{j = 1}^n \frac{n+1-j}{n+1}q^{-j/2}\right)^{-1}
+$$
+を得る。したがって
+$$
+A(q)\leq \lim_{n\to\infty}(\ldots) = \left(\sum_{j = 1}^\infty
+q^{-j/2}\right)^{-1}=\sqrt{q}-1
+$$
+である。
+\end{proof}

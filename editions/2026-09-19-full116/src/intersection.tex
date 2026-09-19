@@ -1,0 +1,3102 @@
+% Generated mechanically from frozen input inputs/p06/ja/intersection.tex.
+% Do not edit this generated file; edit the bound locale source instead.
+
+% OK, start here.
+%
+
+\setcounter{chapter}{42}
+\chapter{交点理論}
+
+
+
+\phantomsection
+\label{intersection-section-phantom}
+
+
+
+\section{序論}
+\label{intersection-section-introduction}
+
+\noindent
+本章では、代数閉体上の非特異射影多様体について、有理同値を法とする
+Chow 群上に交叉積を構成する。用いる道具は Serre の Tor 公式
+（\cite[Chapter V]{Serre_algebre_locale} を参照）、対角線への帰着、
+および移動補題である。
+
+\medskip\noindent
+まずサイクルを復習し、その固有押し出しと平坦引き戻しの構成を述べる。
+次にサイクルの有理同値を導入し、Chow 群 $\CH_*(X)$ を得る。
+固有押し出しと平坦引き戻しは有理同値を通して因子化し、
+Chow 群上の演算を与える。これらは
+\ref{intersection-section-cycles},
+\ref{intersection-section-cycle-of-closed},
+\ref{intersection-section-cycle-of-coherent-sheaf},
+\ref{intersection-section-pushforward},
+\ref{intersection-section-flat-pullback},
+\ref{intersection-section-rational-equivalence},
+\ref{intersection-section-alternative},
+\ref{intersection-section-pushforward-and-rational-equivalence}, および
+\ref{intersection-section-flat-pullback-and-rational-equivalence}
+節で扱う。証明については主として Chow ホモロジーの章を参照する。
+そこでは、普遍鎖状 Noether 基底上局所有限型なスキームという設定で
+これらの結果が証明されている。Chow 『ホモロジー代数』の第 \ref{chow-section-setup} 節 ff. を参照されたい。
+
+\medskip\noindent
+非特異射影多様体 $X$ を考えているので、二つの既約閉部分多様体の交わり
+$V \cap W$ の各既約成分の次元は
+$\dim(V) + \dim(W) - \dim(X)$ 以上である。すべての既約成分 $Z$ について
+等号が成り立つとき、$V$ と $W$ は proper に交わるという。この場合、
+交点重複度 $e_Z = e(X, V \cdot W, Z)$ を
+$$
+e_Z = \sum\nolimits_i
+(-1)^i
+\text{length}_{\mathcal{O}_{X, Z}}
+\text{Tor}_i^{\mathcal{O}_{X, Z}}(\mathcal{O}_{W, Z}, \mathcal{O}_{V, Z})
+$$
+で定める。簡単な場合にこの交点重複度が直観と一致すること、すなわち場合によっては
+$$
+e_Z = \text{length}_{\mathcal{O}_{X, Z}} \mathcal{O}_{V \cap W, Z},
+$$
+となり $\text{Tor}_0$ だけが寄与することを示すには、少し可換環論が必要である。
+これは $V$ と $W$ が $Z$ の一般点で Cohen--Macaulay である場合、または
+$W$ が $\mathcal{O}_{X, Z}$ の正則列で切り出され、その列が
+$\mathcal{O}_{V, Z}$ 上でも正則列をなす場合に起こる。しかし例
+\ref{intersection-example-naive-multiplicity-wrong} が示すように、一般には高次 Tor が必要である。
+さらに Samuel 重複度との関係もある。これらは
+\ref{intersection-section-intersect-properly},
+\ref{intersection-section-tor-formula},
+\ref{intersection-section-multiplicities},
+\ref{intersection-section-computing-intersection-multiplicities}, および
+\ref{intersection-section-intersection-product}
+節で論じる。
+
+\medskip\noindent
+対角線への帰着とは、$X \times X$ の対角線と $V \times W$ を交わらせることにより
+$V$ と $W$ を交わらせられる、という主張である。スキーム論的交叉の水準では明らかな
+この素朴な主張により、一般の二つの閉部分スキームの交叉は、その一方が局所的に
+正則列で切り出される場合へ帰着される。Serre に従い、これを用いて交点重複度の
+正値性を得る。また、対角線への帰着から交点重複度の加法性、結合性、および
+射影公式が導かれる。これらは
+\ref{intersection-section-exterior-product},
+\ref{intersection-section-reduction-diagonal},
+\ref{intersection-section-associative},
+\ref{intersection-section-flat-pullback-and-intersection-products}, および
+\ref{intersection-section-projection-formula-flat}
+節にある。
+
+\medskip\noindent
+最後に移動補題とその応用へ進む。移動補題は二つの部分からなる。
+第一は、$X$ が非特異である閉部分多様体
+$$
+Z \subset X \subset \mathbf{P}^N
+$$
+が与えられたとき、$X$ と proper に交わり、
+$$
+C \cdot X = [Z] + \sum m_j [Z_j]
+$$
+を満たし、しかも他の成分 $Z_j$ が $Z$ より「一般的」であるような
+部分多様体 $C \subset \mathbf{P}^N$ を見いだせるというものである。
+第二は、有理曲線に沿って $C \subset \mathbf{P}^N$ を動かし、与えられた任意の
+部分多様体の有限リストに対して一般の位置にある部分多様体へ移せるというものである。
+これらを合わせると、上で行ったように、$X$ 上で proper に交わるサイクルについて
+交叉積を定義すれば十分であることが分かる。もちろん、この交叉積が
+$\CH_*(X)$ 上の演算を与えるためには、本文で示すように、それが有理同値を通して
+定まることを証明しなければならない。このことと若干の応用は
+\ref{intersection-section-projection},
+\ref{intersection-section-moving-lemma},
+\ref{intersection-section-intersections-and-rational-equivalence},
+\ref{intersection-section-chow-rings},
+\ref{intersection-section-general-pullback}, および
+\ref{intersection-section-pullback-cycles}
+節で論じる。
+
+
+
+\section{規約}
+\label{intersection-section-conventions}
+
+\noindent
+任意の標数をもつ代数閉基礎体 $\mathbf{C}$ を固定する。
+すべてのスキームと多様体は $\mathbf{C}$ 上のものとし、すべての射も
+$\mathbf{C}$ 上のものとする。多様体 $X$ が {\it 非特異} であるとは、
+$X$ が正則スキームであることをいう（『スキームの性質』の定義 \ref{properties-definition-regular} を参照）。この設定では、これは射
+$X \to \Spec(\mathbf{C})$ が滑らかであることと同値である
+（『多様体』の補題 \ref{varieties-lemma-geometrically-regular-smooth} を参照）。
+
+
+\section{サイクル}
+\label{intersection-section-cycles}
+
+\noindent
+$X$ を多様体とする。$X$ の {\it 閉部分多様体} とは、整閉部分スキーム
+$Z \subset X$ のことである。$X$ 上の {\it $k$-サイクル} とは、各 $Z_i$ が
+次元 $k$ の閉部分多様体であるような有限形式和 $\sum n_i [Z_i]$ をいう。
+$k$-サイクルに対して記法 $\alpha = \sum n_i[Z_i]$ を用いるときは常に、
+部分多様体 $Z_i$ が互いに異なり、すべての $i$ について
+$n_i \not = 0$ であると仮定する。このとき $\alpha$ の {\it 台} は、
+次元 $k$ の閉部分集合
+$$
+\text{Supp}(\alpha) = \bigcup Z_i \subset X
+$$
+である。$k$-サイクルの群を $Z_k(X)$ と書く。
+Chow 『ホモロジー代数』の第 \ref{chow-section-cycles} 節を参照されたい。
+
+
+\section{閉部分スキームに付随するサイクル}
+\label{intersection-section-cycle-of-closed}
+
+\noindent
+$X$ を多様体、$Z \subset X$ を $\dim(Z) \leq k$ を満たす閉部分スキームとする。
+$Z_i$ を $Z$ の次元 $k$ の既約成分とし、$n_i$ を
+$$
+n_i = \text{length}_{\mathcal{O}_{X, Z_i}} \mathcal{O}_{Z, Z_i}
+$$
+で定まる {\it $Z$ における $Z_i$ の重複度} とする。ここで
+$\mathcal{O}_{X, Z_i}$, resp.\ $\mathcal{O}_{Z, Z_i}$ は、
+$Z_i$ の一般点における $X$, resp.\ $Z$ の局所環である。
+$Z$ に付随する $k$-サイクルを、次の $k$-サイクルとして
+$$
+[Z]_k = \sum n_i [Z_i].
+$$
+定める。Chow 『ホモロジー代数』の第 \ref{chow-section-cycle-of-closed-subscheme} 節を参照されたい。
+
+
+\section{連接層に付随するサイクル}
+\label{intersection-section-cycle-of-coherent-sheaf}
+
+\noindent
+$X$ を多様体とし、$\mathcal{F}$ を
+$\dim(\text{Supp}(\mathcal{F})) \leq k$ を満たす連接
+$\mathcal{O}_X$-加群とする。$Z_i$ を
+$\text{Supp}(\mathcal{F})$ の次元 $k$ の既約成分とし、$n_i$ を
+$$
+n_i = \text{length}_{\mathcal{O}_{X, Z_i}} \mathcal{F}_{\xi_i}
+$$
+で定まる {\it $\mathcal{F}$ における $Z_i$ の重複度} とする。
+ここで $\mathcal{O}_{X, Z_i}$ は $Z_i$ の一般点 $\xi_i$ における
+$X$ の局所環であり、$\mathcal{F}_{\xi_i}$ はこの点における
+$\mathcal{F}$ の茎である。$\mathcal{F}$ に付随する $k$-サイクルを、
+次の $k$-サイクルとして
+$$
+[\mathcal{F}]_k = \sum n_i [Z_i].
+$$
+定める。Chow 『ホモロジー代数』の第 \ref{chow-section-cycle-of-coherent-sheaf} 節を参照されたい。
+定義により、$Z \subset X$ が $\dim(Z) \leq k$ を満たす閉部分スキームならば
+$[Z]_k = [\mathcal{O}_Z]_k$ である。
+
+
+\section{固有押し出し}
+\label{intersection-section-pushforward}
+
+\noindent
+$f : X \to Y$ を多様体の固有射とする。$Z \subset X$ を
+次元 $k$ の閉部分多様体とする。$\dim(f(Z)) < k$ のとき
+$f_*[Z]$ を $0$ と定め、$\dim(f(Z)) = k$ のとき
+$d \cdot [f(Z)]$ と定める。ここで
+$$
+d = [\mathbf{C}(Z) : \mathbf{C}(f(Z))] = \deg(Z/f(Z))
+$$
+は優勢射 $Z \to f(Z)$ の次数である。『スキームの射』の定義 \ref{morphisms-definition-degree} を参照されたい。$X$ 上の $k$-サイクル
+$\alpha = \sum n_i [Z_i]$ に対し、$\alpha$ の {\it 押し出し} を
+$f_* \alpha = \sum n_i f_*[Z_i]$ と定める。各 $f_*[Z_i]$ は上の定義による。
+これにより準同型
+$$
+f_* : Z_k(X) \longrightarrow Z_k(Y)
+$$
+が得られる。Chow 『ホモロジー代数』の第 \ref{chow-section-proper-pushforward} 節を参照されたい。
+
+\begin{lemma}
+\label{intersection-lemma-push-coherent}
+\begin{reference}
+\cite[Chapter V]{Serre_algebre_locale} を参照。
+\end{reference}
+$f : X \to Y$ を多様体の固有射とする。$\mathcal{F}$ を
+$\dim(\text{Supp}(\mathcal{F})) \leq k$ を満たす連接層とする。このとき
+$f_*[\mathcal{F}]_k = [f_*\mathcal{F}]_k$ である。特に
+$Z \subset X$ が次元 $\leq k$ の閉部分スキームならば
+$f_*[Z]_k = [f_*\mathcal{O}_Z]_k$ である。
+\end{lemma}
+
+\begin{proof}
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-cycle-push-sheaf} を参照。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-compose-pushforward}
+$f : X \to Y$ および $g : Y \to Z$ を多様体の固有射とする。このとき
+$Z_k(X) \to Z_k(Z)$ の写像として
+$g_* \circ f_* = (g \circ f)_*$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-compose-pushforward} の特別な場合である。
+\end{proof}
+
+
+
+\section{平坦引き戻し}
+\label{intersection-section-flat-pullback}
+
+\noindent
+$f : X \to Y$ を多様体の平坦射とする。『スキームの射』の補題 \ref{morphisms-lemma-dimension-fibre-at-a-point-additive} により、
+$f$ の各ファイバーの次元は
+$r = \dim(X) - \dim(Y)$ である\footnote{逆に、$f : X \to Y$ が
+多様体の優勢射であり、$X$ が Cohen--Macaulay、$Y$ が非特異で、
+すべてのファイバーが同じ次元 $r$ をもつならば、$f$ は平坦である。
+これは『可換代数』の補題 \ref{algebra-lemma-CM-over-regular-flat} と、
+$\dim(X) = \dim(Y) + r$ を示す『多様体』の補題 \ref{varieties-lemma-dimension-fibres-locally-algebraic} から従う。}。
+$Z \subset Y$ を次元 $k$ の閉部分多様体とする。$f^*[Z]$ を
+スキーム論的逆像に付随する $(k + r)$-サイクル
+$f^*[Z] = [f^{-1}(Z)]_{k + r}$ と定める。$Y$ 上の $k$-サイクルを
+$\alpha = \sum n_i [Z_i]$ とする。$\alpha$ の {\it 引き戻し} を
+$f^* \alpha = \sum n_i f^*[Z_i]$ と定める。各 $f^*[Z_i]$ は上の定義による。
+これにより準同型
+$$
+f^* : Z_k(Y) \longrightarrow Z_{k + r}(X)
+$$
+が得られる。Chow 『ホモロジー代数』の第 \ref{chow-section-flat-pullback} 節を参照されたい。
+
+\begin{lemma}
+\label{intersection-lemma-pullback}
+$f : X \to Y$ を多様体の平坦射とし、
+$r = \dim(X) - \dim(Y)$ とおく。$\mathcal{F}$ が $Y$ 上の連接層で、
+$\mathcal{F}$ の台の次元が高々 $k$ ならば
+$f^*[\mathcal{F}]_k = [f^*\mathcal{F}]_{k + r}$ である。
+\end{lemma}
+
+\begin{proof}
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-pullback-coherent} を参照。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-compose-flat-pullback}
+$f : X \to Y$ および $g : Y \to Z$ を多様体の平坦射とする。
+このとき $g \circ f$ は平坦であり、
+$Z_k(Z) \to Z_{k + \dim(X) - \dim(Z)}(X)$ の写像として
+$f^* \circ g^* = (g \circ f)^*$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-compose-flat-pullback} の特別な場合である。
+\end{proof}
+
+
+\section{有理同値}
+\label{intersection-section-rational-equivalence}
+
+\noindent
+ここでは、一見すると通常の定義や \cite[Chapter I]{F}、
+あるいは Chow 『ホモロジー代数』の第 \ref{chow-section-rational-equivalence} 節の定義とは異なるように見える仕方で
+有理同値を定義する。しかし第 \ref{intersection-section-alternative} 節で、
+二つの概念が一致することを示す。
+
+\medskip\noindent
+$X$ を多様体とし、$W \subset X \times \mathbf{P}^1$ を次元
+$k + 1$ の閉部分多様体とする。$a, b$ を $\mathbf{P}^1$ の相異なる閉点とする。
+$X \times a$, $X \times b$ および $W$ が proper に交わる、すなわち
+$$
+\dim (W \cap X \times a) \leq k,\quad
+\dim (W \cap X \times b) \leq k.
+$$
+と仮定する。これは $W \to \mathbf{P}^1$ が優勢であれば成り立つ。また、
+$W$ が $a$ および $b$ と異なる閉点上の射影のファイバーに含まれる場合にも
+成り立つが、これは捨てるべき自明な場合である。この状況では、射
+$W \to \mathbf{P}^1$ のスキーム論的ファイバー $W_a$ は
+$X \times \mathbf{P}^1$ におけるスキーム論的交叉
+$W \cap X \times a$ に等しい。$X \times a$ と $X \times b$ を $X$ と
+同一視すれば、ファイバー $W_a$ と $W_b$ を、次元 $\leq k$ の
+$X$ の閉部分スキームとみなせる\footnote{$W_a$ を
+$X \times \mathbf{P}^1$ の閉部分スキームとみなすことも、$X$ の
+閉部分スキームとみなすこともある。どちらの見方を採るかは文脈から常に明らかである。}。
+有理同値の基本例は
+$$
+[W_a]_k \sim_{rat} [W_b]_k
+$$
+である。サイクル $[W_a]_k$ と $[W_b]_k$ は Cartier 因子との proper な交叉により
+得られるので、$W$ が与えられれば実際に容易に計算できる
+（第 \ref{intersection-section-intersection-product} 節でこれを見る）。
+$\mathbf{P}^1$ の自己同型群は $2$-重推移的なので、閉点の対 $a, b$ を
+任意の対へ移せる。伝統的には $a = 0$ と $b = \infty$ を選ぶ。
+
+\medskip\noindent
+より一般に、$\alpha = \sum n_i [W_i]$ を
+$X \times \mathbf{P}^1$ 上の $(k + 1)$-サイクルとする。
+$a_i, b_i$ を $\mathbf{P}^1$ の相異なる閉点の対とする。
+$X \times a_i$, $X \times b_i$ および $W_i$ が proper に交わる、
+すなわち各 $W_i, a_i, b_i$ が上で述べた条件を満たすと仮定する。
+{\it ゼロと有理同値なサイクル} とは
+$$
+\sum n_i([W_{i, a_i}]_k - [W_{i, b_i}]_k).
+$$
+という形の任意のサイクルをいう。これは確かに $k$-サイクルである。
+ゼロと有理同値な $k$-サイクル全体は、$k$-サイクルの群の加法部分群をなす。
+二つの $k$-サイクルが {\it 有理同値} であるとは、記号
+$\alpha \sim_{rat} \alpha'$ で、$\alpha - \alpha'$ がゼロと有理同値な
+サイクルであることをいう。
+
+\medskip\noindent
+$$
+\CH_k(X) = Z_k(X)/ \sim_{rat}
+$$
+を {\it $X$ 上の $k$-サイクルの Chow 群} と定める。補題
+\ref{intersection-lemma-rational-equivalence} で、これが Chow 『ホモロジー代数』の定義 \ref{chow-definition-rational-equivalence} で定義した
+Chow 群と一致することを見る。
+
+
+\section{有理同値と有理関数}
+\label{intersection-section-alternative}
+
+\noindent
+$X$ を多様体とし、$W \subset X$ を次元 $k + 1$ の部分多様体とする。
+$f \in \mathbf{C}(W)^*$ を $W$ 上のゼロでない有理関数とする。
+次元 $k$ の各部分多様体 $Z \subset W$ に対し、$Z$ における $f$ の
+消滅位数 $\text{ord}_{W, Z}(f)$ を定義できる。$f$ が局所環
+$\mathcal{O}_{W, Z}$ の元ならば
+$$
+\text{ord}_{W, Z}(f) =
+\text{length}_{\mathcal{O}_{X, Z}} \mathcal{O}_{W, Z}/f\mathcal{O}_{W, Z}
+$$
+である。ここで $\mathcal{O}_{X, Z}$, resp.\ $\mathcal{O}_{W, Z}$ は、
+$Z$ の一般点における $X$, resp.\ $W$ の局所環である。一般の場合には
+乗法性によって定義を拡張する。$f$ に付随する {\it 主因子} を
+$$
+\text{div}_W(f) = \sum \text{ord}_{W, Z}(f)[Z]
+$$
+という $Z_k(W)$ の元として定める。$W \subset X$ は閉部分多様体なので、
+$\text{div}_W(f)$ を $X$ 上のサイクルとみなせる。
+Chow 『ホモロジー代数』の第 \ref{chow-section-principal-divisors} 節を参照されたい。
+
+\begin{lemma}
+\label{intersection-lemma-rational-equivalence}
+$X$ を多様体、$W \subset X$ を次元 $k + 1$ の部分多様体とし、
+$f \in \mathbf{C}(W)^*$ を $W$ 上のゼロでない有理関数とする。
+このとき $\text{div}_W(f)$ は $X$ 上でゼロと有理同値である。逆に、
+これらの主因子は $X$ 上でゼロと有理同値なサイクルの Abel 群を生成する。
+\end{lemma}
+
+\begin{proof}
+第一の主張は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-rational-function} から従う。より詳しく、
+$W' \subset X \times \mathbf{P}^1$ を $f$ のグラフの閉包とすると、
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-rational-function} の (6) により、
+$Z_k(W) \subset Z_k(X)$ において
+$\text{div}_W(f) = [W'_0]_k - [W'_\infty]$ である。
+
+\medskip\noindent
+逆向きについて、$W' \subset X \times \mathbf{P}^1$ を
+$\mathbf{P}^1$ 上優勢な次元 $k + 1$ の閉部分多様体とする。
+$[W'_0]_k - [W'_\infty]_k$ が主因子であることを示せば証明は完了する。
+$W \subset X$ を $X$ への射影による $W'$ の像とする。このとき
+$W \subset X$ は閉部分多様体であり、$W' \to W$ は固有かつ優勢で、
+ファイバーの次元は $0$ または $1$ である。$\dim(W) = k$ ならば
+$W' = W \times \mathbf{P}^1$ であり、
+$[W'_0]_k - [W'_\infty]_k = [W] - [W] = 0$ である。
+$\dim(W) = k + 1$ ならば $W' \to W$ は生成的有限である\footnote{
+$W' \to W$ が双有理ならば、結論は Chow 『ホモロジー代数』の補題 \ref{chow-lemma-rational-function} から従う。ここで示すべきことは、
+$W' \to W$ の次数が $> 1$ であっても、基本的な有理同値
+$[W'_0]_k \sim_{rat} [W'_\infty]_k$ が $X$ のある部分多様体上の
+主因子から生じるということである。}。$f$ を射影
+$W' \to \mathbf{P}^1$ とし、$\mathbf{C}(W')^*$ の元とみなす。
+$g = \text{Nm}(f) \in \mathbf{C}(W)^*$ をそのノルムとする。
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-proper-pushforward-alteration} により
+$$
+\text{div}_W(g) = \text{pr}_{X, *}\text{div}_{W'}(f)
+$$
+である。Chow 『ホモロジー代数』の補題 \ref{chow-lemma-rational-function} により
+$\text{div}_{W'}(f) = [W'_0]_k - [W'_\infty]_k$ なので証明は完了する。
+\end{proof}
+
+
+\section{固有押し出しと有理同値}
+\label{intersection-section-pushforward-and-rational-equivalence}
+
+\noindent
+$f : X \to Y$ を多様体の固有射とする。$\alpha \sim_{rat} 0$ を
+$X$ 上で $0$ と有理同値な $k$-サイクルとする。このとき
+$\alpha$ の {押し出し} もゼロと有理同値であり、
+$f_* \alpha \sim_{rat} 0$ である。\cite{F} の Chapter I または
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-proper-pushforward-rational-equivalence} を参照されたい。
+
+\medskip\noindent
+したがって、$k$-サイクルの群について可換図式
+$$
+\xymatrix{
+Z_k(X) \ar[r] \ar[d]_{f_*} & \CH_k(X) \ar[d]^{f_*} \\
+Z_k(Y) \ar[r] & \CH_k(Y)
+}
+$$
+を得る。
+
+
+\section{平坦引き戻しと有理同値}
+\label{intersection-section-flat-pullback-and-rational-equivalence}
+
+\noindent
+$f : X \to Y$ を多様体の平坦射とし、
+$r = \dim(X) - \dim(Y)$ とおく。$\alpha \sim_{rat} 0$ を
+$Y$ 上で $0$ と有理同値な $k$-サイクルとする。このとき
+$\alpha$ の引き戻しもゼロと有理同値であり、
+$f^* \alpha \sim_{rat} 0$ である。\cite{F} の Chapter I または
+Chow 『ホモロジー代数』の補題 \ref{chow-lemma-flat-pullback-rational-equivalence} を参照されたい。
+
+\medskip\noindent
+したがって、$k$-サイクルの群について可換図式
+$$
+\xymatrix{
+Z_{k + r}(X) \ar[r] & \CH_{k + r}(X) \\
+Z_k(Y) \ar[r] \ar[u]^{f^*} & \CH_k(Y) \ar[u]_{f^*}
+}
+$$
+を得る。
+
+
+\section{開部分に対する短完全列}
+\label{intersection-section-ses}
+
+\noindent
+$X$ を多様体、$U \subset X$ を開部分多様体とする。
+$X \setminus U = \bigcup Z_i$ を既約成分への分解とする\footnote{
+本章では多様体の Chow 群しか考えないので、$Z_k(X \setminus U)$ および
+$\CH_k(X \setminus U)$ を取ることができない。このため多様体 $Z_i$ を用いる。}。
+このとき各 $k \geq 0$ に対し、行が完全な可換図式
+$$
+\xymatrix{
+\bigoplus Z_k(Z_i) \ar[r] \ar[d] &
+Z_k(X) \ar[r] \ar[d] &
+Z_k(U) \ar[d] \ar[r] &
+0 \\
+\bigoplus \CH_k(Z_i) \ar[r] &
+\CH_k(X) \ar[r] &
+\CH_k(U) \ar[r] &
+0
+}
+$$
+が存在する。ここで縦の射は標準的な商写像である。左の横射は閉埋め込み
+$Z_i \to X$ に沿う固有押し出しで与えられ、右の横射は開埋め込み
+$j : U \to X$ に沿う平坦引き戻しで与えられる。これらの写像は有理同値を
+通して因子化することをすでに見たので、各正方形は可換である。上段が完全なのは、
+$X$ の各部分多様体がある $Z_i$ に含まれるか、または $U$ との交わりが
+既約であることから直ちに従う。下段が完全なのは、$U$ 上の任意の主因子
+$\text{div}_W(f)$ が $X$ 上の主因子の制限だからである。より詳しく、
+$W \subset U$ を次元 $(k + 1)$ の閉部分多様体とし、
+$f \in \mathbf{C}(W)^*$ とする。$\overline{W}$ を $X$ における $W$ の
+閉包とする。すると $W \subset \overline{W}$ は開埋め込みなので
+$\mathbf{C}(W) = \mathbf{C}(\overline{W})$ であり、$f$ を
+$\overline{W}$ 上の非定数有理関数とみなせる。このとき明らかに
+$$
+j^*\text{div}_{\overline{W}}(f) = \text{div}_W(f)
+$$
+が $Z_k(X)$ で成り立つ。これから下段の完全性は容易に従う。
+詳しくは Chow 『ホモロジー代数』の補題 \ref{chow-lemma-restrict-to-open} を参照されたい。
+
+
+\section{Proper な交叉}
+\label{intersection-section-intersect-properly}
+
+\noindent
+まず、次元評価のための補題をいくつか述べる。
+
+\begin{lemma}
+\label{intersection-lemma-dimension-product-varieties}
+$X$ と $Y$ を多様体とする。このとき $X \times Y$ は多様体であり、
+$\dim(X \times Y) = \dim(X) + \dim(Y)$ である。
+\end{lemma}
+
+\begin{proof}
+『多様体』の補題 \ref{varieties-lemma-product-varieties} により、
+スキーム $X \times Y = X \times_{\Spec(\mathbf{C})} Y$ は多様体である。
+次元に関する主張は『多様体』の補題 \ref{varieties-lemma-dimension-product-locally-algebraic} である。
+\end{proof}
+
+\noindent
+スキームの正則埋め込み $i : X \to Y$ とは、対応するイデアル層が
+局所的に正則列で生成される閉埋め込みであった。『因子』の第 \ref{divisors-section-regular-immersions} 節を参照されたい。
+さらに余法層 $\mathcal{C}_{X/Y}$ は有限局所自由で、その階数は正則列の長さに等しい。
+$\mathcal{C}_{X/Y}$ が階数 $c$ の局所自由層であるとき、$i$ を
+{\it 余次元 $c$ の正則埋め込み} と呼ぶことにする。
+
+\medskip\noindent
+より一般に、『射の続論』の第 \ref{more-morphisms-section-lci} 節を想起する。$X$ を開集合 $U$ で被覆し、
+各開集合上で $f|_U$ を
+$$
+\xymatrix{
+U \ar[rr]_i \ar[rd] & & \mathbf{A}^n_Y \ar[ld] \\
+& Y
+}
+$$
+と分解でき、ここで $i$ が Koszul 正則埋め込みであるとき、
+$f : X \to Y$ を局所完全交叉射という。$Y$ が局所 Noether ならば、
+これは $i$ が正則埋め込みであることと同値である
+（『因子』の補題 \ref{divisors-lemma-regular-immersion-noetherian} を参照）。
+上の任意の分解について閉埋め込み $i$ の余法層の階数が $n - r$ であるとき、
+$f$ を {\it 相対次元 $r$ の局所完全交叉射} と呼ぶことにする。言い換えると、
+$i$ は余次元 $n - r$ の Koszul 正則埋め込みであり、Noether の場合には単に
+余次元 $n - r$ の正則埋め込みである。
+
+\begin{lemma}
+\label{intersection-lemma-pullback-by-regular-immersion}
+$f : X \to Y$ を多様体の射とする。
+\begin{enumerate}
+\item $Z \subset Y$ が次元 $d$ の部分多様体で、$f$ が余次元 $c$ の
+正則埋め込みならば、$f^{-1}(Z)$ の各既約成分の次元は $\geq d - c$ である。
+\item $Z \subset Y$ が次元 $d$ の部分多様体で、$f$ が相対次元 $r$ の
+局所完全交叉射ならば、$f^{-1}(Z)$ の各既約成分の次元は $\geq d + r$ である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。局所的に考えてよいので、$Y = \Spec(A)$ および
+$X = V(f_1, \ldots, f_c)$ と仮定できる。ここで $f_1, \ldots, f_c$ は
+$A$ の正則列である。$Z = \Spec(A/\mathfrak p)$ ならば
+$f^{-1}(Z) = \Spec(A/\mathfrak p + (f_1, \ldots, f_c))$ である。
+$V$ を $f^{-1}(Z)$ の既約成分とする。$f^{-1}(Z)$ の他のどの既約成分にも
+含まれない閉点 $v \in V$ を選べる。このとき
+$$
+\dim(Z) = \dim \mathcal{O}_{Z, v}
+\quad\text{and}\quad
+\dim(V) = \dim \mathcal{O}_{V, v} = \dim \mathcal{O}_{Z, v}/(f_1, \ldots, f_c)
+$$
+である。第一の等号は、例えば『可換代数』の補題 \ref{algebra-lemma-dimension-prime-polynomial-ring} により、第二の等号は
+閉点の選び方による。極大イデアルの元一つで割ると次元は高々 $1$ しか
+下がらないので、結論が従う。『可換代数』の補題 \ref{algebra-lemma-one-equation} を参照されたい。
+
+\medskip\noindent
+(2) の証明。局所完全交叉の定義にある分解を選び、(1) を適用する。
+若干の詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-diagonal-regular-immersion}
+$X$ を非特異多様体とする。このとき対角射
+$\Delta : X \to X \times X$ は余次元 $\dim(X)$ の正則埋め込みである。
+\end{lemma}
+
+\begin{proof}
+実際、非特異射影多様体の間の任意の閉埋め込みは正則埋め込みである。
+『因子』の補題 \ref{divisors-lemma-immersion-smooth-into-smooth-regular-immersion} を参照されたい。
+\end{proof}
+
+\noindent
+次の補題は、対角線への帰着がどのように働くかを示す。
+
+\begin{lemma}
+\label{intersection-lemma-intersect-in-smooth}
+$X$ を非特異多様体とし、$W,V \subset X$ を
+$\dim(W) = s$ および $\dim(V) = r$ を満たす閉部分多様体とする。
+このとき $V \cap W$ の各既約成分 $Z$ の次元は
+$\geq r + s - \dim(X)$ である。
+\end{lemma}
+
+\begin{proof}
+スキーム論的に $V \cap W = \Delta^{-1}(V \times W)$ なので、
+補題 \ref{intersection-lemma-diagonal-regular-immersion} および
+\ref{intersection-lemma-pullback-by-regular-immersion} から従う。
+\end{proof}
+
+\noindent
+この補題は次の定義を示唆する。
+
+\begin{definition}
+\label{intersection-definition-proper-intersection}
+$X$ を非特異多様体とする。
+\begin{enumerate}
+\item $W,V \subset X$ を $\dim(W) = s$ および $\dim(V) = r$ を満たす
+閉部分多様体とする。$\dim(V \cap W) \leq r + s - \dim(X)$ のとき、
+$W$ と $V$ は {\it proper に交わる} という。
+\item $\alpha = \sum n_i [W_i]$ を $s$-サイクル、
+$\beta = \sum_j m_j [V_j]$ を $X$ 上の $r$-サイクルとする。
+すべての $i$ と $j$ について $W_i$ と $V_j$ が proper に交わるとき、
+$\alpha$ と $\beta$ は {\it proper に交わる} という。
+\end{enumerate}
+\end{definition}
+
+
+\section{Tor 公式による交点重複度}
+\label{intersection-section-tor-formula}
+
+\noindent
+しばしば用いる基本事実を述べる。環付き空間 $(X, \mathcal{O}_X)$ 上の
+加群層 $\mathcal{F}$, $\mathcal{G}$ と点 $x \in X$ に対し、
+$\mathcal{O}_{X, x}$-加群として
+$$
+\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})_x =
+\text{Tor}_p^{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)
+$$
+が成り立つ。これは 『層のコホモロジー』の第 \ref{cohomology-section-flat} における導来テンソル積の構成から
+いくつかの方法で分かる。例えば 『層のコホモロジー』の補題 \ref{cohomology-lemma-check-K-flat-stalks} から従う。
+さらに $X$ がスキームで $\mathcal{F}$ と $\mathcal{G}$ が準連接ならば、
+加群 $\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$ も準連接である。
+『スキームの導来圏』の補題 \ref{perfect-lemma-quasi-coherence-tensor-product} を参照されたい。
+ここでより重要なのは次の結果である。
+
+\begin{lemma}
+\label{intersection-lemma-tensor-coherent}
+$X$ を局所 Noether スキームとする。
+\begin{enumerate}
+\item $\mathcal{F}$ と $\mathcal{G}$ が連接 $\mathcal{O}_X$-加群ならば、
+$\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$ も連接である。
+\item $L$ と $K$ が $D^-_{\textit{Coh}}(\mathcal{O}_X)$ に属するならば、
+$L \otimes_{\mathcal{O}_X}^\mathbf{L} K$ も同様である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の初等的な証明と、既に構築した一般論を用いる (2) の証明を説明する。
+
+\medskip\noindent
+(1) の証明。$\text{Tor}$ の形成は局所化と可換なので、
+$X$ はアフィンと仮定してよい。したがって、ある Noether 環 $A$ に対して
+$X = \Spec(A)$ であり、$\mathcal{F}$, $\mathcal{G}$ は有限 $A$-加群
+$M$ と $N$ に対応する（『スキームのコホモロジー』の補題 \ref{coherent-lemma-coherent-Noetherian}）。
+『スキームの導来圏』の補題 \ref{perfect-lemma-quasi-coherence-tensor-product} により、まず
+$A$ 上で $M$ と $N$ の $\text{Tor}$ を計算し、その後に付随する
+$\mathcal{O}_X$-加群を取ることで $\text{Tor}$ を計算できる。
+加群 $\text{Tor}_p^A(M, N)$ は 『可換代数』の補題 \ref{algebra-lemma-tor-noetherian} により有限なので、結論を得る。
+
+\medskip\noindent
+『スキームの導来圏』の補題 \ref{perfect-lemma-identify-pseudo-coherent-noetherian} により、
+仮定は $L$ と $K$ が（局所的に）擬連接であることと同値である。
+このとき 『層のコホモロジー』の補題 \ref{cohomology-lemma-tensor-pseudo-coherent} により
+$L \otimes_{\mathcal{O}_X}^\mathbf{L} K$ は擬連接である。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-compute-tor-nonsingular}
+$X$ を非特異多様体とし、$\mathcal{F}$, $\mathcal{G}$ を連接
+$\mathcal{O}_X$-加群とする。$\mathcal{O}_X$-加群
+$\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})$ は連接であり、
+$x$ における茎は
+$\text{Tor}_p^{\mathcal{O}_{X, x}}(\mathcal{F}_x, \mathcal{G}_x)$ に等しく、
+台は $\text{Supp}(\mathcal{F}) \cap \text{Supp}(\mathcal{G})$ に含まれ、
+$p \in \{0, \ldots, \dim(X)\}$ の場合にしかゼロでない。
+\end{lemma}
+
+\begin{proof}
+茎に関する結果は上で述べたとおりであり、台に関する条件はそれから従う。
+補題 \ref{intersection-lemma-tensor-coherent} により $\text{Tor}$ は連接である。
+負次数の $\text{Tor}$ の消滅は構成から直ちに従う。
+$p > \dim(X)$ に対する $\text{Tor}_p$ の消滅は次のように分かる。
+局所環 $\mathcal{O}_{X, x}$ は、$X$ が非特異なので正則であり、その次元は
+$\leq \dim(X)$ である
+（『可換代数』の補題 \ref{algebra-lemma-dimension-prime-polynomial-ring}）。
+したがって $\mathcal{O}_{X, x}$ の大域次元は有限で
+$\leq \dim(X)$ である
+（『可換代数』の補題 \ref{algebra-lemma-finite-gl-dim-finite-dim-regular}）。
+ゆえに加群の $\text{Tor}$ 群はその次元を超えると消滅する
+（『代数の続論』の補題 \ref{more-algebra-lemma-finite-gl-dim-tor-dimension}）。
+\end{proof}
+
+\noindent
+$X$ を非特異多様体とし、$W, V \subset X$ を
+$\dim(W) = s$ および $\dim(V) = r$ を満たす閉部分多様体とする。
+$V$ と $W$ が proper に交わると仮定する。この場合、補題
+\ref{intersection-lemma-intersect-in-smooth} により $V \cap W$ のすべての既約成分の次元は
+$r + s - \dim(X)$ に等しい。層
+$\text{Tor}_j^{\mathcal{O}_X}(\mathcal{O}_W, \mathcal{O}_V)$ は連接で、
+$V \cap W$ 上に台をもち、$j < 0$ または $j > \dim(X)$ ならばゼロである
+（補題 \ref{intersection-lemma-compute-tor-nonsingular}）。{\it 交叉積} を
+$$
+W \cdot V = \sum\nolimits_i (-1)^i
+[\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_W, \mathcal{O}_V)]_{r + s - \dim(X)}.
+$$
+と定める。これは $V$ と $W$ が proper に交わるという仮定があるからこそ
+意味をもつことを強調しておく。この事実のため、一般に交叉積を定義するには
+移動補題が必要となる。
+
+\medskip\noindent
+この記法のもとで、サイクル $V \cdot W$ は交叉 $V \cap W$ の既約成分
+$Z$ の形式的線形結合 $\sum e_Z Z$ である。整数 $e_Z$ を
+{\it 交点重複度} といい、
+$$
+e_Z = e(X, V \cdot W, Z) =
+\sum\nolimits_i
+(-1)^i
+\text{length}_{\mathcal{O}_{X, Z}}
+\text{Tor}_i^{\mathcal{O}_{X, Z}}(\mathcal{O}_{W, Z}, \mathcal{O}_{V, Z})
+$$
+である。ここで $\mathcal{O}_{X, Z}$, resp.\ $\mathcal{O}_{W, Z}$,
+resp.\ $\mathcal{O}_{V, Z}$ は、$Z$ の一般点における
+$X$, resp.\ $W$, resp.\ $V$ の局所環を表す。後で見るように、
+これらの $\text{Tor}$ の長さの交代和は多くの良い性質をもつ。
+
+\medskip\noindent
+横断的交叉の場合、交点数は $1$ である。
+
+\begin{lemma}
+\label{intersection-lemma-transversal}
+$X$ を非特異多様体とする。$V, W \subset X$ を proper に交わる
+閉部分多様体とする。$Z$ を $V \cap W$ の既約成分とし、
+閉部分スキーム $V \cap W$ における $Z$ の重複度
+（第 \ref{intersection-section-cycle-of-closed} 節 の意味で）が $1$ であると仮定する。
+このとき $e(X, V \cdot W, Z) = 1$ であり、$V$ と $W$ は
+$Z$ の一般点で滑らかである。
+\end{lemma}
+
+\begin{proof}
+$\xi \in Z$ を一般点とし、
+$(A, \mathfrak m, \kappa) =
+(\mathcal{O}_{X, \xi}, \mathfrak m_\xi, \kappa(\xi))$ とおく。
+『多様体』の補題 \ref{varieties-lemma-dimension-locally-algebraic} により
+$\dim(A) = \dim(X) - \dim(Z)$ である。$I, J \subset A$ を
+$\Spec(A)$ における $V$ と $W$ の跡を切り出すイデアルとする。
+$\overline{I} = I + \mathfrak m^2/\mathfrak m^2$ とおく。
+$\dim_\kappa \overline{I} \leq \dim(X) - \dim(V)$ であり、等号が
+成り立つことと $A/I$ が正則であることは同値である。これは上で引用した補題と
+正則環の定義から従う。『可換代数』の定義 \ref{algebra-definition-regular-local} とその直前の議論を参照されたい。
+$\overline{J}$ についても同様である。重複度が $1$ ならば
+$\text{length}_A(A/I + J) = 1$、したがって $I + J = \mathfrak m$、
+したがって $\overline{I} + \overline{J} = \mathfrak m/\mathfrak m^2$ である。
+交叉が proper なので、すべての箇所で等号を得る。したがって
+$f_1, \ldots, f_a \in I$ および $g_1, \ldots g_b \in J$ を、
+$\overline{f}_1, \ldots, \overline{g}_b$ が
+$\mathfrak m/\mathfrak m^2$ の基底となるように選べる。このとき
+$f_1, \ldots, g_b$ は正則パラメータ系かつ正則列である
+（『可換代数』の補題 \ref{algebra-lemma-regular-ring-CM}）。
+同じ補題により $A/(f_1, \ldots, f_a)$ は次元
+$\dim(X) - \dim(V)$ の正則局所環である。ゆえに
+$A/(f_1, \ldots, f_a) \to A/I$ は同型である。実際、核がゼロでなければ
+$A/I$ の次元は真に小さくなる
+（『可換代数』の補題 \ref{algebra-lemma-regular-domain} および
+\ref{algebra-lemma-one-equation}）。
+対称性により $I = (f_1, \ldots, f_a)$ および
+$J = (g_1, \ldots, g_b)$ を得る。したがって
+$f_1, \ldots, f_a$ に関する Koszul 複体
+$K_\bullet(A, f_1, \ldots, f_a)$ は $A/I$ の分解である。
+『代数の続論』の補題 \ref{more-algebra-lemma-regular-koszul-regular} を参照されたい。ゆえに
+\begin{align*}
+\text{Tor}_p^A(A/I, A/J)
+& =
+H_p(K_\bullet(A, f_1, \ldots, f_a) \otimes_A A/J) \\
+& =
+H_p(K_\bullet(A/J, f_1 \bmod J, \ldots, f_a \bmod J))
+\end{align*}
+となる。$f_1 \bmod J, \ldots, f_a \bmod J$ は正則局所環 $A/J$ の
+正則パラメータ系であることを上で見たので、ホモロジー群は一つ、
+すなわち $H_0 = A/(I + J) = \kappa$ だけである。これで証明は完了する。
+\end{proof}
+
+\begin{example}
+\label{intersection-example-naive-multiplicity-wrong}
+この例では、上の交点重複度の公式に高次 Tor を用いる必要があることを示す。
+$X$ を次元 $4$ の非特異多様体とし、$p \in X$ を閉点とする。
+$V, W \subset X$ を $X$ の閉部分多様体とする。同型
+$$
+\mathcal{O}_{X, p}^\wedge \cong \mathbf{C}[[x, y, z, w]]
+$$
+があり、この同型のもとで $V$ のイデアルが $(xz, xw, yz, yw)$、
+$W$ のイデアルが $(x - z, y - w)$ であると仮定する。計算により
+$$
+\text{length}\ \mathbf{C}[[x, y, z, w]]/
+(xz, xw, yz, yw, x - z, y - w) = 3
+$$
+となる。他方、重複度は $e(X, V \cdot W, p) = 2$ である。
+これは形式局所的に、$V$ が $p$ において二つの滑らかな平面
+$x = y = 0$ と $z = w = 0$ の合併であり、各平面と平面
+$x - z = y - w = 0$ との交点重複度が $1$ であることから分かる
+（補題 \ref{intersection-lemma-transversal}）。実際の例を作るには、次数 $> 1$ の
+$5$ 個の斉次多項式で与えられる一般の射
+$f : \mathbf{P}^2 \to \mathbf{P}^4$ を取る。その像
+$V \subset \mathbf{P}^4 = X$ は上で述べた型の特異点をもつ。
+実際、$f(p_1) = f(p_2)$ を満たす
+$p_1, p_2 \in \mathbf{P}^2$ が存在する。$W$ としては、
+そのような点を通る一般の平面を取ればよい。
+\end{example}
+
+
+
+
+
+
+\section{代数的重複度}
+\label{intersection-section-multiplicities}
+
+\noindent
+$(A, \mathfrak m, \kappa)$ を Noether 局所環とする。$M$ を有限
+$A$-加群、$I \subset A$ を定義イデアルとする
+（『可換代数』の定義 \ref{algebra-definition-ideal-definition}）。
+関数
+$$
+\chi_{I, M}(n) = \text{length}_A(M/I^nM) =
+\sum\nolimits_{p = 0, \ldots, n - 1} \text{length}_A(I^pM/I^{p + 1}M)
+$$
+は数値多項式であった
+（『可換代数』の命題 \ref{algebra-proposition-hilbert-function-polynomial}）。
+『可換代数』の補題 \ref{algebra-lemma-support-dimension-d} により、
+この多項式の次数は $\dim(\text{Supp}(M))$ に等しい。
+
+\begin{definition}
+\label{intersection-definition-multiplicity}
+上の状況で $d \geq \dim(\text{Supp}(M))$ と仮定する。
+$d > \dim(\text{Supp}(M))$ ならば $e_I(M, d) = 0$ とおく。
+$d = \dim(\text{Supp}(M))$ ならば、$e_I(M, d)$ を数値多項式
+$\chi_{I, M}$ の最高次係数の $d!$ 倍とする。したがって、いずれの場合にも
+$$
+\chi_{I, M}(n) \sim e_I(M, d) \frac{n^d}{d!} + \text{lower order terms}
+$$
+である。{\it 定義イデアル $I$ に関する $M$ の重複度} を
+$e_I(M) = e_I(M, \dim(\text{Supp}(M)))$ と定める。
+\end{definition}
+
+\noindent
+これらの重複度は次の性質をもつ。
+
+\begin{lemma}
+\label{intersection-lemma-multiplicity-ses}
+$A$ を Noether 局所環、$I \subset A$ を定義イデアルとする。
+$0 \to M' \to M \to M'' \to 0$ を有限 $A$-加群の短完全列とし、
+$d \geq \dim(\text{Supp}(M))$ とする。このとき
+$$
+e_I(M, d) = e_I(M', d) + e_I(M'', d)
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+定義と『可換代数』の補題 \ref{algebra-lemma-hilbert-ses-chi} から直ちに従う。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-multiplicity-as-a-sum}
+$A$ を Noether 局所環、$I \subset A$ を定義イデアル、
+$M$ を有限 $A$-加群とし、$d \geq \dim(\text{Supp}(M))$ とする。このとき
+$$
+e_I(M, d) =
+\sum \text{length}_{A_\mathfrak p}(M_\mathfrak p) e_I(A/\mathfrak p, d)
+$$
+である。和は $\dim(A/\mathfrak p) = d$ を満たす素イデアル
+$\mathfrak p \subset A$ にわたる。
+\end{lemma}
+
+\begin{proof}
+左辺と右辺はいずれも、次元 $\leq d$ の加群の短完全列について加法的である。
+補題 \ref{intersection-lemma-multiplicity-ses} および『可換代数』の補題 \ref{algebra-lemma-length-additive} を参照されたい。したがって『可換代数』の補題 \ref{algebra-lemma-filter-Noetherian-module} により、$A$ のある素イデアル
+$\mathfrak q$ について $M = A/\mathfrak q$ かつ
+$\dim(A/\mathfrak q) \leq d$ である場合を証明すれば十分である。
+この場合は明らかである。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-leading-coefficient}
+$P$ を次数 $r$、最高次係数 $a$ の多項式とする。任意の $t$ に対して
+$$
+r! a = \sum\nolimits_{i = 0, \ldots, r} (-1)^i{r \choose i} P(t - i)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+多項式 $P$ に $\Delta(P) = P(t) - P(t - 1)$ を対応させる作用素を
+$\Delta$ と書く。
+$$
+\Delta^r(P) = \sum\nolimits_{i = 0, \ldots, r} (-1)^i {r \choose i} P(t - i)
+$$
+と主張する。$r = 0, 1$ の場合は直接分かる。$r$ について成り立つと仮定すると
+\begin{align*}
+\Delta^{r + 1}(P)
+& =
+\sum\nolimits_{i = 0, \ldots, r} (-1)^i {r \choose i} \Delta(P)(t - i) \\
+& =
+\sum\nolimits_{n = -r, \ldots, 0} (-1)^i {r \choose i}
+(P(t - i) - P(t - i - 1))
+\end{align*}
+と計算できる。したがって等式
+$$
+{r + 1 \choose i} = {r \choose i} + {r \choose i - 1}
+$$
+から主張が従う。$P$ の次数が $r$ ならば $\Delta(P)$ の次数は
+$r - 1$、最高次係数は $ra$ なので、補題が従う。
+\end{proof}
+
+\noindent
+重要な事実として、重複度は Koszul 複体を用いて計算できる。
+$R$ を環、$f_1, \ldots, f_r \in R$ とするとき、
+$K_\bullet(f_1, \ldots, f_r)$ は Koszul 複体を表した。
+『代数の続論』の第 \ref{more-algebra-section-koszul} 節を参照されたい。
+
+\begin{theorem}
+\label{intersection-theorem-multiplicity-with-koszul}
+\begin{reference}
+\cite[Theorem 1 in part B of Chapter IV]{Serre_algebre_locale}
+\end{reference}
+$A$ を Noether 局所環、$I = (f_1, \ldots, f_r) \subset A$ を定義イデアル、
+$M$ を有限 $A$-加群とする。このとき
+$$
+e_I(M, r) = \sum
+(-1)^i\text{length}_A H_i(K_\bullet(f_1, \ldots, f_r) \otimes_A M)
+$$
+である。
+\end{theorem}
+
+\begin{proof}
+Koszul 複体 $K_\bullet(f_1, \ldots, f_r)$ を、
+$K^n = K_{-n}(f_1, \ldots, f_r)$ とおくことにより余鎖複体
+$K^\bullet$ に変える。すると $K^\bullet$ は次数 $-r, \ldots, 0$ にあり、
+$H^i(K^\bullet \otimes_A M) = H_{-i}(K_\bullet(f_1, \ldots, f_r) \otimes_A M)$
+である。加群 $H^i(K^\bullet \otimes M)$ は
+$f_1, \ldots, f_r$ で零化されるので、定理の主張は意味をもつ
+（『代数の続論』の補題 \ref{more-algebra-lemma-homotopy-koszul}）。したがってこれらは有限長である。
+複体 $K^\bullet$ 上のフィルトレーションを
+$$
+F^p(K^n \otimes_A M) =
+I^{\max(0, p + n)}(K^n \otimes_A M),\quad p \in \mathbf{Z}
+$$
+で定める。$f_i I^p \subset I^{p + 1}$ なので、これは部分複体による
+フィルトレーションである。こうしてフィルター付き複体を得て、
+スペクトル系列を得る。『ホモロジー代数』の第 \ref{homology-section-filtered-complex} 節を参照されたい。
+$$
+E_0 = \bigoplus\nolimits_{p, q} E_0^{p, q} =
+\bigoplus\nolimits_{p, q} \text{gr}^p(K^{p + q} \otimes_A M) =
+\text{Gr}_I(K^\bullet \otimes_A M)
+$$
+である。$K^n$ は有限自由なので
+$$
+\text{Gr}_I(K^\bullet \otimes_A M) =
+\text{Gr}_I(K^\bullet) \otimes_{\text{Gr}_I(A)} \text{Gr}_I(M)
+$$
+を得る。$\text{Gr}_I(K^\bullet)$ は
+$\text{Gr}_I(A)$ 上、元
+$\overline{f}_1, \ldots, \overline{f}_r \in I/I^2$ に関する
+Koszul 複体である。簡単な計算（省略）により、
+$E_0$ 上の微分 $d_0$ は Koszul 複体から来る微分と一致する。
+$\text{Gr}_I(M)$ は有限 $\text{Gr}_I(A)$-加群であり、
+$\text{Gr}_I(A)$ は Noether である。実際これは
+$x_i \mapsto \overline{f}_i$ による
+$A/I[x_1, \ldots, x_r]$ の商である。したがってコホモロジー加群
+$E_1 = \bigoplus E_1^{p, q}$ は有限
+$\text{Gr}_I(A)$-加群である。一方、上と同様に $E_1$ は
+$\overline{f}_1, \ldots, \overline{f}_r$ で零化される。
+ゆえに $E_1$ は有限長である。特に
+$p \gg 0$ に対して $\text{Gr}^p_F(K^\bullet \otimes M)$ は非輪状である。
+
+\medskip\noindent
+次に『ホモロジー代数』の補題 \ref{homology-lemma-filtered-complex-ss-converges} を用いて、
+上のスペクトル系列が収束することを確認する。必要な等式は、
+『可換代数』の補題 \ref{algebra-lemma-map-AR} の形の Artin--Rees 補題から
+容易に従う。したがって
+\begin{align*}
+\sum (-1)^i\text{length}_A(H^i(K^\bullet \otimes_A M))
+& =
+\sum (-1)^{p + q} \text{length}_A(E_\infty^{p, q}) \\
+& =
+\sum (-1)^{p + q} \text{length}_A(E_1^{p, q})
+\end{align*}
+である。上で見たように $E_1$ の長さが有限だからである
+（ここではもちろん長さの加法性を用いる）。
+$\text{Gr}^p_F(K^\bullet \otimes M)$ が $p \geq t$ に対して
+非輪状となるほど十分大きな $t$ を選ぶ。再び加法性を用いると
+$$
+\sum (-1)^{p + q} \text{length}_A(E_1^{p, q}) =
+\sum\nolimits_n \sum\nolimits_{p \leq t}
+(-1)^n \text{length}_A(\text{gr}^p(K^n \otimes_A M))
+$$
+を得る。上のフィルトレーションの選び方と、『可換代数』の第 \ref{algebra-section-Noetherian-local} 節における
+$\chi_{I, M}$ の定義により、これは
+$$
+\sum\nolimits_{n = -r, \ldots, 0} (-1)^n{r \choose |n|} \chi_{I, M}(t + n)
+$$
+に等しい。補題 \ref{intersection-lemma-leading-coefficient} と
+$e_I(M, r)$ の定義から結論が従う。
+\end{proof}
+
+\begin{remark}[自明な一般化]
+\label{intersection-remark-trivial-generalization}
+$(A, \mathfrak m, \kappa)$ を Noether 局所環、$M$ を有限 $A$-加群、
+$I \subset A$ をイデアルとする。次は同値である。
+\begin{enumerate}
+\item $I' = I + \text{Ann}(M)$ は定義イデアルである
+（『可換代数』の定義 \ref{algebra-definition-ideal-definition}）。
+\item $\overline{A} = A/\text{Ann}(M)$ における $I$ の像
+$\overline{I}$ は定義イデアルである。
+\item $\text{Supp}(M/IM) \subset \{\mathfrak m\}$ である。
+\item $\dim(\text{Supp}(M/IM)) \leq 0$ である。
+\item $\text{length}_A(M/IM) < \infty$ である。
+\end{enumerate}
+これは『可換代数』の補題 \ref{algebra-lemma-support-point} から従う
+（詳細は省略）。この場合、すべての $n$ について
+$M/I^nM = M/(I')^nM$ である。また $M$ を $\overline{A}$-加群とみなせば、
+すべての $n$ について $M/I^nM = M/\overline{I}^nM$ である。
+したがって
+$$
+\chi_{I, M}(n) = \text{length}_A(M/I^nM) =
+\sum\nolimits_{p = 0, \ldots, n - 1} \text{length}_A(I^pM/I^{p + 1}M)
+$$
+と定義でき、上の等式から、すべての $n$ について
+$$
+\chi_{I, M}(n) = \chi_{I', M}(n) = \chi_{\overline{I}, M}(n)
+$$
+を得る。『可換代数』の第 \ref{algebra-section-Noetherian-local} 節の
+すべての結果、および本節のすべての結果は、この設定でも類似をもつ。
+特に $d \geq \dim(\text{Supp}(M))$ に対して重複度
+$e_I(M, d)$ を定義でき、
+$$
+\chi_{I, M}(n) \sim e_I(M, d) \frac{n^d}{d!} + \text{lower order terms}
+$$
+が、$I$ が定義イデアルの場合と同様に成り立つ。
+\end{remark}
+
+
+
+\section{交点重複度の計算}
+\label{intersection-section-computing-intersection-multiplicities}
+
+\noindent
+本節では、交点重複度を別の方法で計算できる場合をいくつか論じる。
+まず一つ目の例を挙げる。
+
+\begin{lemma}
+\label{intersection-lemma-intersection-multiplicity-CM}
+$X$ を非特異多様体とし、$W, V \subset X$ を proper に交わる
+閉部分多様体とする。$Z$ を $V \cap W$ の既約成分、その一般点を
+$\xi$ とする。$\mathcal{O}_{W, \xi}$ と $\mathcal{O}_{V, \xi}$ が
+Cohen--Macaulay であると仮定する。このとき
+$$
+e(X, V \cdot W, Z) =
+\text{length}_{\mathcal{O}_{X, \xi}}(\mathcal{O}_{V \cap W, \xi})
+$$
+である。ここで $V \cap W$ はスキーム論的交叉である。特に
+$V$ と $W$ がともに Cohen--Macaulay ならば
+$V \cdot W = [V \cap W]_{\dim(V) + \dim(W) - \dim(X)}$ である。
+\end{lemma}
+
+\begin{proof}
+$A = \mathcal{O}_{X, \xi}$, $B = \mathcal{O}_{V, \xi}$, および
+$C = \mathcal{O}_{W, \xi}$ とおく。Auslander--Buchsbaum
+（『可換代数』の命題 \ref{algebra-proposition-Auslander-Buchsbaum}）により、長さ
+$$
+\text{depth}(A) - \text{depth}(B) =
+\dim(A) - \dim(B) = \dim(C)
+$$
+の有限自由分解 $F_\bullet \to B$ が存在する。第一の等号は
+$A$ と $B$ が Cohen--Macaulay であることから、第二の等号は
+$V$ と $W$ が proper に交わることから従う。このとき
+$F_\bullet \otimes_A C$ は $B \otimes_A^\mathbf{L} C$ を表す有限自由加群の
+複体であり、そのコホモロジー加群は $\{\mathfrak m_A\}$ 上に台をもつ。
+$C$ が Cohen--Macaulay なので非輪状性補題
+（『可換代数』の補題 \ref{algebra-lemma-acyclic}）を適用でき、
+$F_\bullet \otimes_A C$ のコホモロジーは次数 $0$ 以外でゼロである。
+これで証明は完了する。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-one-ideal-ci}
+$A$ を Noether 局所環とし、$I = (f_1, \ldots, f_r)$ を
+正則列で生成されるイデアル、$M$ を有限 $A$-加群とする。
+$\dim(\text{Supp}(M/IM)) = 0$ と仮定する。このとき
+$$
+e_I(M, r) = \sum (-1)^i\text{length}_A(\text{Tor}_i^A(A/I, M))
+$$
+である。ここで $e_I(M, r)$ は注意
+\ref{intersection-remark-trivial-generalization} におけるものとする。
+\end{lemma}
+
+\begin{proof}
+$f_1, \ldots, f_r$ は正則列なので、Koszul 複体
+$K_\bullet(f_1, \ldots, f_r)$ は $A$ 上の $A/I$ の分解である。
+『代数の続論』の補題 \ref{more-algebra-lemma-noetherian-finite-all-equivalent} を参照されたい。
+したがって右辺は
+$$
+\sum (-1)^i\text{length}_A H_i(K_\bullet(f_1, \ldots, f_r) \otimes_A M)
+$$
+に等しい。$I$ が定義イデアルならば、定理
+\ref{intersection-theorem-multiplicity-with-koszul} から直ちに結論が従う。
+一般には $A$ を $\overline{A} = A/\text{Ann}(M)$ で置き換え、
+$f_1, \ldots, f_r$ を
+$\overline{f}_1, \ldots, \overline{f}_r$ で置き換える。これは
+$$
+K_\bullet(f_1, \ldots, f_r) \otimes_A M =
+K_\bullet(\overline{f}_1, \ldots, \overline{f}_r) \otimes_{\overline{A}} M
+$$
+だから許される。ここで
+$\overline{I} = (\overline{f}_1, \ldots, \overline{f}_r) \subset \overline{A}$
+は定義イデアルであり、
+$e_I(M, r) = e_{\overline{I}}(M, r)$ なので、この場合も定理
+\ref{intersection-theorem-multiplicity-with-koszul} から結論が従う。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-multiplicity-with-lci}
+$X$ を非特異多様体とし、$W,V \subset X$ を proper に交わる
+閉部分多様体とする。$Z$ を $V \cap W$ の既約成分、その一般点を
+$\xi$ とする。$\mathcal{O}_{X, \xi}$ における $V$ のイデアルが
+正則列 $f_1, \ldots, f_c \in \mathcal{O}_{X, \xi}$ で切り出されると仮定する。
+このとき $e(X, V\cdot W, Z)$ は、Hilbert 多項式
+$$
+t \mapsto \text{length}_{\mathcal{O}_{X, \xi}}
+\mathcal{O}_{W, \xi}/(f_1, \ldots, f_c)^t,\quad t \gg 0.
+$$
+の最高次係数の $c!$ 倍に等しい。特に、この係数は $> 0$ である。
+\end{lemma}
+
+\begin{proof}
+等式
+$$
+e(X, V\cdot W, Z) = e_{(f_1, \ldots, f_c)}(\mathcal{O}_{W, \xi}, c)
+$$
+は、より一般的な補題 \ref{intersection-lemma-one-ideal-ci} から従う。
+$e_{(f_1, \ldots, f_c)}(\mathcal{O}_{W, \xi}, c)$ が $> 0$ であること、
+同値なこととして
+$e_{(f_1, \ldots, f_c)}(\mathcal{O}_{W, \xi}, c)$ が
+Hilbert 多項式の最高次係数であることを見るには、
+$\mathcal{O}_{W, \xi}$ の次元が $c$ であることを示せば十分である。
+Hilbert 多項式の次数は『可換代数』の命題 \ref{algebra-proposition-dimension} により次元に等しいからである。
+$\dim(V) = r$, $\dim(W) = s$, $\dim(X) = n$ とおく。
+交叉が proper なので $\dim(Z) = r + s - n$ である。したがって
+$\mathbf{C}$ 上の $\kappa(\xi)$ の超越次数は $r + s - n$ である。
+『可換代数』の補題 \ref{algebra-lemma-dimension-prime-polynomial-ring} を参照されたい。
+$V$ は $\xi$ の近傍で正則列により切り出されるので $r + c = n$ である。
+『因子』の補題 \ref{divisors-lemma-Noetherian-scheme-regular-ideal} を参照されたい。
+また、例えば補題 \ref{intersection-lemma-pullback-by-regular-immersion} を適用できる。
+したがって
+$$
+\dim(\mathcal{O}_{W, \xi}) = s - (r + s - n) = s - ((n - c) + s - n) = c
+$$
+である。第一の等号は『可換代数』の補題 \ref{algebra-lemma-dimension-at-a-point-finite-type-field} による。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-multiplicity-with-effective-Cartier-divisor}
+補題 \ref{intersection-lemma-multiplicity-with-lci} で $c = 1$、すなわち $V$ が
+有効 Cartier 因子であると仮定する。このとき
+$$
+e(X, V \cdot W, Z) =
+\text{length}_{\mathcal{O}_{X, \xi}}
+(\mathcal{O}_{W, \xi}/f_1\mathcal{O}_{W, \xi}).
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+この場合、交叉が proper であることにより
+$\mathcal{O}_{W, \xi}$ における $f_1$ の像はゼロでなく、したがって
+非零因子である。さらに $\mathcal{O}_{W, \xi}$ は次元 $1$ の
+Noether 局所整域である。したがって、すべての $t \geq 1$ について
+$$
+\text{length}_{\mathcal{O}_{X, \xi}}
+(\mathcal{O}_{W, \xi}/f_1^t\mathcal{O}_{W, \xi}) =
+t \text{length}_{\mathcal{O}_{X, \xi}}
+(\mathcal{O}_{W, \xi}/f_1\mathcal{O}_{W, \xi})
+$$
+が成り立つ。『可換代数』の補題 \ref{algebra-lemma-ord-additive} を参照されたい。これで補題が従う。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-multiplicity-lci-CM}
+補題 \ref{intersection-lemma-multiplicity-with-lci} で局所環
+$\mathcal{O}_{W, \xi}$ が Cohen--Macaulay であると仮定する。このとき
+$$
+e(X, V \cdot W, Z) =
+\text{length}_{\mathcal{O}_{X, \xi}} (\mathcal{O}_{W, \xi}/
+f_1\mathcal{O}_{W, \xi} + \ldots + f_c\mathcal{O}_{W, \xi}).
+$$
+である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{intersection-lemma-intersection-multiplicity-CM} から直ちに従う。
+別の方法として、補題 \ref{intersection-lemma-multiplicity-with-lci} からも導ける。
+実際、『可換代数』の補題 \ref{algebra-lemma-reformulate-CM} により
+$f_1, \ldots, f_c$ は $\mathcal{O}_{W, \xi}$ の正則列である。
+『可換代数』の補題 \ref{algebra-lemma-regular-quasi-regular} により
+$f_1, \ldots, f_c$ は準正則列である。これから容易に、
+$\mathcal{O}_{W, \xi}/(f_1, \ldots, f_c)^t$ の長さは
+$$
+{c + t \choose c}
+\text{length}_{\mathcal{O}_{X, \xi}} (\mathcal{O}_{W, \xi}/
+f_1\mathcal{O}_{W, \xi} + \ldots + f_c\mathcal{O}_{W, \xi}).
+$$
+に等しい。最高次係数を比較すれば結論を得る。
+\end{proof}
+
+
+\section{Tor 公式による交叉積}
+\label{intersection-section-intersection-product}
+
+\noindent
+$X$ を非特異多様体とする。$X$ 上の $r$-サイクルを
+$\alpha = \sum n_i [W_i]$ とし、$s$-サイクルを
+$\beta = \sum_j m_j [V_j]$ とする。
+$\alpha$ と $\beta$ が proper に交わると仮定する。定義
+\ref{intersection-definition-proper-intersection} を参照されたい。
+この場合、
+$$
+\alpha \cdot \beta = \sum\nolimits_{i,j} n_i m_j W_i \cdot V_j.
+$$
+と定める。ここで $W_i \cdot V_j$ は節
+\ref{intersection-section-tor-formula} で定めたものである。
+$\beta = [V]$ であり、$V$ が次元 $s$ の閉部分多様体であるとき、
+$\alpha \cdot \beta = \alpha \cdot V$ と書くこともある。
+
+\begin{lemma}
+\label{intersection-lemma-rational-equivalence-and-intersection}
+$X$ を非特異多様体とする。$a, b \in \mathbf{P}^1$ を相異なる閉点とし、
+$k \geq 0$ とする。
+\begin{enumerate}
+\item $W \subset X \times \mathbf{P}^1$ が次元 $k + 1$ の閉部分多様体で、
+$X \times a$ と proper に交わるならば、次が成り立つ。
+\begin{enumerate}
+\item $X \times \mathbf{P}^1$ 上のサイクルとして
+$[W_a]_k = W \cdot X \times a$ である。
+\item $X$ 上のサイクルとして
+$[W_a]_k = \text{pr}_{X, *}(W \cdot X \times a)$ である。
+\end{enumerate}
+\item $\alpha$ を $X \times \mathbf{P}^1$ 上の $(k + 1)$-サイクルで、
+$X \times a$ および $X \times b$ と proper に交わるものとする。このとき
+$pr_{X,*}( \alpha \cdot X \times a - \alpha \cdot X \times b)$
+はゼロと有理同値である。
+\item 逆に、$0$ と有理同値な任意の $k$-サイクルはこの形である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+まず、$X \times a$ は $X \times \mathbf{P}^1$ の有効 Cartier 因子であり、
+$W_a$ は $W$ と $X \times a$ のスキーム論的交叉である。
+したがって (1)(a) の等式は、定義と、Cartier 因子の場合の交点重複度を
+計算する補題 \ref{intersection-lemma-multiplicity-with-effective-Cartier-divisor} から
+直ちに従う。(1)(b) が成り立つのは、
+$W_a \to X \times \mathbf{P}^1 \to X$ がその像へ同型に写り、
+節 \ref{intersection-section-rational-equivalence} ではまさにこの仕方で $W_a$ を
+$X$ の閉部分スキームとみなしたからである。(2) と (3) は (1) および
+定義から形式的に従う。
+\end{proof}
+
+\noindent
+閉部分スキームの横断的交叉では、交点重複度は $1$ である。
+
+\begin{lemma}
+\label{intersection-lemma-transversal-subschemes}
+$X$ を非特異多様体とする。$r, s \geq 0$ とし、
+$Y, Z \subset X$ を $\dim(Y) \leq r$ および
+$\dim(Z) \leq s$ を満たす閉部分スキームとする。
+$[Y]_r = \sum n_i[Y_i]$ と $[Z]_s = \sum m_j[Z_j]$ が
+proper に交わると仮定する。ある $i_0$ と $j_0$ に対して、
+$T$ を $Y_{i_0} \cap Z_{j_0}$ の既約成分とし、閉部分スキーム
+$Y \cap Z$ における $T$ の重複度（節
+\ref{intersection-section-cycle-of-closed} の意味で）が $1$ であると仮定する。
+このとき、
+\begin{enumerate}
+\item $[Y]_r \cdot [Z]_s$ における $T$ の係数は $1$ である。
+\item $Y$ と $Z$ は $T$ の生成点で非特異である。
+\item $n_{i_0} = 1$、$m_{j_0} = 1$ である。
+\item $i \not = i_0$ および $j \not = j_0$ に対して、
+$T$ は $Y_i$ にも $Z_j$ にも含まれない。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$n = \dim(X)$、$a = n - r$、$b = n - s$ とおく。
+交叉が proper であるという仮定から
+$\dim(T) = r + s - n = n - a - b$ であることに注意する。
+$\xi \in T$ を生成点とし、$(A, \mathfrak m, \kappa) =
+(\mathcal{O}_{X, \xi}, \mathfrak m_\xi, \kappa(\xi))$ とおく。
+このとき $\dim(A) = a + b$ である。『多様体』の補題 \ref{varieties-lemma-dimension-locally-algebraic} を参照されたい。
+$I_0, I, J_0, J \subset A$ を、それぞれ $Y_{i_0}$、$Y$、$Z_{j_0}$、
+$Z$ の $\Spec(A)$ における跡を切り出すイデアルとする。
+同じ参照箇所により、$\dim(A/I) = \dim(A/I_0) = b$ および
+$\dim(A/J) = \dim(A/J_0) = a$ である。
+$\overline{I} = I + \mathfrak m^2/\mathfrak m^2$ とおく。
+さらに $I \subset I_0 \subset \mathfrak m$、
+$J \subset J_0 \subset \mathfrak m$、および $I + J = \mathfrak m$ である。
+補題 \ref{intersection-lemma-transversal} とその証明により、
+$I_0 = (f_1, \ldots, f_a)$ および $J_0 = (g_1, \ldots, g_b)$ であり、
+$f_1, \ldots, g_b$ は正則局所環 $A$ の正則パラメータ系である。
+$I + J = \mathfrak m$ なので、写像
+$$
+I \oplus J \to
+\mathfrak m/\mathfrak m^2 =
+\kappa f_1
+\oplus \ldots \oplus
+\kappa f_a
+\oplus
+\kappa g_1
+\oplus \ldots \oplus
+\kappa g_b
+$$
+は全射である。したがって、$\mathfrak m/\mathfrak m^2$ における剰余類が
+$f_1, \ldots, f_a$ および $g_1, \ldots, g_b$ の剰余類にそれぞれ等しい
+$f_1', \ldots, f_a' \in I$ と $g'_1, \ldots, g_b' \in J$ を選べる。
+すると $f'_1, \ldots, g'_b$ は $A$ の正則パラメータ系である。
+『可換代数』の補題 \ref{algebra-lemma-regular-ring-CM} により、
+$A/(f'_1, \ldots, f'_a)$ は次元 $b$ の正則局所環である。
+したがって $A/(f'_1, \ldots, f'_a)$ の任意の非自明な商は
+真に小さい次元をもつ（『可換代数』の補題 \ref{algebra-lemma-regular-domain} および \ref{algebra-lemma-one-equation}）。ゆえに
+$I = (f'_1, \ldots, f'_a) = I_0$ である。対称性により $J = J_0$ である。
+これで (2)、(3)、(4) が証明された。最後に、
+$[Y]_r \cdot [Z]_s$ における $T$ の係数は
+$Y_{i_0} \cdot Z_{j_0}$ における $T$ の係数であり、
+補題 \ref{intersection-lemma-transversal} によりこれは $1$ である。
+\end{proof}
+
+
+
+\section{外積}
+\label{intersection-section-exterior-product}
+
+\noindent
+$X$ と $Y$ を多様体とする。$V$ と $W$ をそれぞれ\ $X$ と\ $Y$ の
+閉部分多様体とする。積 $V\times W$ は
+$X\times Y$ の閉部分多様体である（補題
+\ref{intersection-lemma-dimension-product-varieties}）。$k$-サイクル
+$\alpha = \sum n_i [V_i]$ と、$Y$ 上の $l$-サイクル
+$\beta = \sum m_j [V_j]$ に対し、$\alpha$ と $\beta$ の
+{\it 外積}をサイクル
+$\alpha \times \beta = \sum n_i m_j [V_i \times W_j]$
+として定める。外積は $\mathbf{Z}$-線形写像
+$$
+Z_r(X) \otimes_\mathbf{Z} Z_s(Y) \longrightarrow Z_{r + s}(X \times Y)
+$$
+を定める。外積が有理同値を経由して因子化することを証明しよう。
+
+\begin{lemma}
+\label{intersection-lemma-exterior-product-rational-equivalence}
+$X$ と $Y$ を多様体とする。
+$\alpha \in Z_r(X)$、$\beta \in Z_s(Y)$ とする。
+$\alpha \sim_{rat} 0$ または $\beta \sim_{rat} 0$ ならば、
+$\alpha \times \beta \sim_{rat} 0$ である。
+\end{lemma}
+
+\begin{proof}
+$X$ と $Y$ に関する線形性と対称性により、次の場合を証明すれば十分である。
+すなわち、次元 $r$ のある部分多様体 $V \subset X$ に対して
+$\alpha = [V]$ であり、$Y \times a$ および $Y \times b$ と
+proper に交わる次元 $s + 1$ のある閉部分多様体
+$W \subset Y \times \mathbf{P}^1$ に対して
+$\beta = [W_a]_s - [W_b]_s$ である場合である。この場合、
+$$
+[(V \times W)_a]_{r + s} = [V] \times [W_a]_s
+$$
+および $a$ を $b$ に置き換えた同様の等式を示せば補題が従う。
+実際、そのとき望みどおり
+$\alpha \times \beta = [(V \times W)_a]_{r + s} - [(V \times W)_b]_{r + s}$
+となる。表示された等式を見るため、スキームの等式
+$$
+V \times W_a = (V \times W)_a
+$$
+に注意する。射影 $V \times W_a \to W_a$ は既約成分の全単射を誘導する
+（例えば『多様体』の補題 \ref{varieties-lemma-bijection-irreducible-components} を参照されたい）。
+$W' \subset W_a$ を生成点 $\zeta$ をもつ既約成分とする。このとき
+$V \times W'$ は $V \times W_a$ の対応する既約成分である
+（補題 \ref{intersection-lemma-dimension-product-varieties} を参照されたい）。
+$\xi$ を $V \times W'$ の生成点とする。示すべきことは
+$$
+\text{length}_{\mathcal{O}_{Y, \zeta}}(\mathcal{O}_{W_a, \zeta}) =
+\text{length}_{\mathcal{O}_{X \times Y, \xi}}(
+\mathcal{O}_{V \times W_a, \xi})
+$$
+である。この式では $\mathcal{O}_{Y, \zeta}$ を
+$\mathcal{O}_{W_a, \zeta}$ に置き換えることができ、また
+$\mathcal{O}_{X \times Y, \zeta}$ を
+$\mathcal{O}_{V \times W_a, \zeta}$ に置き換えることができる
+（『可換代数』の補題 \ref{algebra-lemma-length-independent} を参照されたい）。
+$\mathcal{O}_{W_a, \zeta} \to \mathcal{O}_{V \times W_a, \xi}$ は
+平坦なので、『可換代数』の補題 \ref{algebra-lemma-pullback-module} により、
+$$
+\text{length}_{\mathcal{O}_{V \times W_a, \xi}}(
+\mathcal{O}_{V \times W_a, \xi}/
+\mathfrak m_\zeta\mathcal{O}_{V \times W_a, \xi}) = 1
+$$
+を示せば十分である。この商は多様体の生成点における局所環
+$\mathcal{O}_{V \times W', \xi}$ であり、したがって
+$\kappa(\xi)$ に等しいので、これは成り立つ。
+\end{proof}
+
+\noindent
+以上から、任意の多様体の対 $X$ と $Y$ に対し、外積は可換図式
+$$
+\xymatrix{
+Z_r(X) \otimes_\mathbf{Z} Z_s(Y) \ar[r] \ar[d] &
+Z_{r + s}(X \times Y) \ar[d] \\
+\CH_r(X) \otimes_\mathbf{Z} \CH_s(Y) \ar[r] &
+\CH_{r + s}(X \times Y)
+}
+$$
+を定める。非特異多様体の場合、外積は引き戻しどうしの交叉積と
+みなすことができる。
+
+\begin{lemma}
+\label{intersection-lemma-exterior-product}
+$X$ と $Y$ を非特異多様体とする。
+$\alpha \in Z_r(X)$、$\beta \in Z_s(Y)$ とする。このとき、
+\begin{enumerate}
+\item $\text{pr}_Y^*(\beta) = [X] \times \beta$ および
+$\text{pr}_X^*(\alpha) = \alpha \times [Y]$ である。
+\item $\alpha \times [Y]$ と $[X]\times \beta$ は
+$X\times Y$ 上で proper に交わる。
+\item $Z_{r + s}(X \times Y)$ において
+$\alpha \times \beta =
+(\alpha \times [Y])\cdot ([X]\times\beta) =
+pr_Y^*(\alpha) \cdot pr_X^*(\beta)$
+である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+線形性により、$\alpha = [V]$、$\beta = [W]$ と仮定してよい。
+このとき (1) は $\text{pr}_Y^{-1}(W) = X \times W$ および
+$\text{pr}_X^{-1}(V) = V \times Y$ を述べており、これは明らかである。
+(2) は $X \times W \cap V \times Y = V \times W$ であり、補題
+\ref{intersection-lemma-dimension-product-varieties} により
+$\dim(V \times W) = r + s$ であることから従う。
+
+\medskip\noindent
+(3) の証明。
+$\xi$ を $V \times W$ の生成点とする。射影
+$X \times W \to W$ は $X \to \Spec(\mathbf{C})$ の基底変換として
+滑らかなので、$X \times W$ は $W$ の生成点上にあるすべての点、
+特に $\xi$ で非特異である。同様に $V \times Y$ についても成り立つ。
+したがって $\mathcal{O}_{X \times W, \xi}$ と
+$\mathcal{O}_{V \times Y, \xi}$ は Cohen-Macaulay 局所環であり、
+補題 \ref{intersection-lemma-intersection-multiplicity-CM} を適用できる。
+$V \times Y \cap X \times W = V \times W$ がスキーム論的に成り立つので、
+証明は完了する。
+\end{proof}
+
+
+
+\section{対角線への帰着}
+\label{intersection-section-reduction-diagonal}
+
+\noindent
+$X$ を非特異多様体とする。$\Delta$ は、対角射
+$\Delta : X \to X \times X$ またはその像
+$\Delta \subset X \times X$ のいずれかを表すものとする。
+対角線への帰着とは、$X$ 上の交叉積を、$X \times X$ 上で
+外積と対角線との交叉積に帰着できるという主張である。
+
+\begin{lemma}
+\label{intersection-lemma-tor-and-diagonal}
+$X$ を非特異多様体とする。
+\begin{enumerate}
+\item $\mathcal{F}$ と $\mathcal{G}$ が連接
+$\mathcal{O}_X$-加群ならば、標準同型
+$$
+\text{Tor}_i^{\mathcal{O}_{X \times X}}(\mathcal{O}_\Delta,
+\text{pr}_1^*\mathcal{F} \otimes_{\mathcal{O}_{X \times X}}
+\text{pr}_2^*\mathcal{G})
+=
+\Delta_*\text{Tor}_i^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})
+$$
+がある。
+\item $K$ と $M$ が $D_\QCoh(\mathcal{O}_X)$ に属するならば、
+$D_\QCoh(\mathcal{O}_X)$ における標準同型
+$$
+L\Delta^* \left(
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} L\text{pr}_2^*M
+\right)
+= K \otimes_{\mathcal{O}_X}^\mathbf{L} M
+$$
+と、$D_\QCoh(X \times X)$ における標準同型
+$$
+\mathcal{O}_\Delta \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L}
+L\text{pr}_1^*K \otimes_{\mathcal{O}_{X \times X}}^\mathbf{L} L\text{pr}_2^*M
+= \Delta_*(K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+$$
+がある。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) をより初等的な方法で証明する仕方と、より一般的な理論を用いて
+(2) を証明する仕方を説明する。(2) は (1) を含意するので、
+読者は (1) の証明を読み飛ばしてもよい。
+
+\medskip\noindent
+(1) の証明。アフィン開集合 $\Spec(A) \subset X$ を選ぶ。
+このとき $A$ は Noether $\mathbf{C}$-代数であり、
+$\mathcal{F}$、$\mathcal{G}$ は有限 $A$-加群
+$M$、$N$ に対応する（『スキームのコホモロジー』の補題 \ref{coherent-lemma-coherent-Noetherian}）。
+『スキームの導来圏』の補題 \ref{perfect-lemma-quasi-coherence-tensor-product} により、
+$\mathcal{O}_X$ 上の $\text{Tor}_i$ は、まず $A$ 上で
+$M$ と $N$ の $\text{Tor}$ を計算し、次に付随する
+$\mathcal{O}_X$-加群を取ることで計算できる。
+$\mathcal{O}_{X \times X}$ 上の $\text{Tor}_i$ については、
+$A \otimes_\mathbf{C} A$ 上で $A$ と
+$M \otimes_\mathbf{C} N$ の Tor を計算し、次に付随する
+$\mathcal{O}_{X \times X}$-加群を取る。したがって、このアフィン部分では
+$$
+\text{Tor}_i^{A \otimes_\mathbf{C} A}(A, M \otimes_\mathbf{C} N) =
+\text{Tor}_i^A(M, N)
+$$
+を証明すればよい。このため、有限自由 $A$-加群による分解
+$F_\bullet \to M$ と $G_\bullet \to M$ を選ぶ
+（『可換代数』の補題 \ref{algebra-lemma-resolution-by-finite-free}）。
+$\text{Tot}(F_\bullet \otimes_\mathbf{C} G_\bullet)$ は
+$M \otimes_\mathbf{C} N$ の分解であることに注意する。それは
+$\mathbf{C}$ 上の Tor 群を計算するからである！もちろん、
+$F_\bullet \otimes_\mathbf{C} G_\bullet$ の各項は有限自由
+$A \otimes_\mathbf{C} A$-加群である。したがって、表示された等式の
+左辺は加群
+$$
+H_i(A \otimes_{A \otimes_\mathbf{C} A}
+\text{Tot}(F_\bullet \otimes_\mathbf{C} G_\bullet))
+$$
+であり、右辺は加群
+$$
+H_i(\text{Tot}(F_\bullet \otimes_A G_\bullet))
+$$
+である。
+$A \otimes_{A \otimes_\mathbf{C} A} (F_p \otimes_\mathbf{C} G_q)
+= F_p \otimes_A G_q$ なので、これらの加群は等しい。
+これはアフィン開集合 $\Spec(A) \times \Spec(A)$ 上の同型を定める
+（交点数の等式への応用にはこれで十分である）。
+これらの同型が貼り合わさることの証明は省略する。
+
+\medskip\noindent
+(2) の証明。第 2 の主張は、『スキームの導来圏』の補題 \ref{perfect-lemma-cohomology-base-change} に述べられた射影公式により
+第 1 の主張から従う。第 1 の主張を見るため、$K$ と $M$ を K-flat 複体
+$\mathcal{K}^\bullet$ と $\mathcal{M}^\bullet$ で表す。
+引き戻しとテンソル積は K-flat 複体を保つので
+（『層のコホモロジー』の補題 \ref{cohomology-lemma-tensor-product-K-flat} および \ref{cohomology-lemma-pullback-K-flat}）、次を示せば十分である。
+$$
+\Delta^*\text{Tot}(
+\text{pr}_1^*\mathcal{K}^\bullet
+\otimes_{\mathcal{O}_{X \times X}} \text{pr}_2^*\mathcal{M}^\bullet)
+=
+\text{Tot}(
+\mathcal{K}^\bullet \otimes_{\mathcal{O}_X} \mathcal{M}^\bullet)
+$$
+したがって、$\mathcal{K}$ と $\mathcal{M}$ が
+$\mathcal{O}_X$-加群であるとき（準連接または平坦である必要はない）、
+標準同型
+$$
+\Delta^*(\text{pr}_1^*\mathcal{K}
+\otimes_{\mathcal{O}_{X \times X}} \text{pr}_2^*\mathcal{M})
+\longrightarrow
+\mathcal{K} \otimes_{\mathcal{O}_X} \mathcal{M}
+$$
+があることを見れば十分である。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-reduction-diagonal}
+$X$ を非特異多様体とする。$\alpha$ と\ $\beta$ をそれぞれ
+$X$ 上の $r$-サイクルと\ $s$-サイクルとする。
+$\alpha$ と $\beta$ が proper に交わると仮定する。このとき、
+\begin{enumerate}
+\item $\alpha \times \beta$ と $[\Delta]$ は proper に交わる。
+\item $X \times X$ 上のサイクルとして
+$\Delta_*(\alpha \cdot \beta) = [\Delta] \cdot \alpha\times\beta$
+である。
+\item $X$ が proper ならば
+$\text{pr}_{1, *}([\Delta] \cdot \alpha\times\beta) = \alpha\cdot\beta$
+である。ここで $pr_1 : X\times X \to X$ は射影である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+線形性により、proper に交わるある閉部分多様体
+$V \subset X$ と $W \subset Y$ に対して
+$\alpha = [V]$、$\beta = [W]$ である場合を証明すれば十分である。
+$V \times W$ は次元 $r + s$ の閉部分多様体であることを思い出そう。
+スキーム論的に $V \cap W = \Delta^{-1}(V \times W)$ および
+$\Delta(V \cap W) = \Delta \cap V \times W$ が成り立つことに注意する。
+これで (1) が証明された。
+
+\medskip\noindent
+(2) の証明。$Z \subset V \cap W$ を生成点 $\xi$ をもつ既約成分とする。
+$\alpha \cdot \beta$ における $Z$ の係数が、
+$[\Delta] \cdot \alpha \times \beta$ における $\Delta(Z)$ の係数と
+同じであることを示さなければならない。前者は整数
+$$
+\sum (-1)^i
+\text{length}_{\mathcal{O}_{X, \xi}}
+\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V, \mathcal{O}_W)_\xi
+$$
+で与えられ、後者は整数
+$$
+\sum (-1)^i
+\text{length}_{\mathcal{O}_{X \times Y, \Delta(\xi)}}
+\text{Tor}_i^{\mathcal{O}_{X \times Y}}(
+\mathcal{O}_\Delta, \mathcal{O}_{V \times W})_{\Delta(\xi)}
+$$
+で与えられる。しかし、補題 \ref{intersection-lemma-tor-and-diagonal} により
+$$
+\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V, \mathcal{O}_W)_\xi \cong
+\text{Tor}_i^{\mathcal{O}_{X \times Y}}(
+\mathcal{O}_\Delta, \mathcal{O}_{V \times W})_{\Delta(\xi)}
+$$
+が $\mathcal{O}_{X \times X, \Delta(\xi)}$-加群として成り立つ。
+したがって長さも等しい（正確には『可換代数』の補題 \ref{algebra-lemma-length-independent} による）。
+
+\medskip\noindent
+(2) から (3) が従う。実際、補題 \ref{intersection-lemma-compose-pushforward} により
+$\text{pr}_{1, *} \circ \Delta_* = \text{id}$ である。
+\end{proof}
+
+\begin{proposition}
+\label{intersection-proposition-positivity}
+\begin{reference}
+これは \cite{Serre_algebre_locale} の主要結果の一つである。
+\end{reference}
+$X$ を非特異多様体とする。$V \subset X$ と $W \subset Y$ を
+proper に交わる閉部分多様体とする。
+$Z \subset V \cap W$ を既約成分とする。このとき
+$e(X, V \cdot W, Z) > 0$ である。
+\end{proposition}
+
+\begin{proof}
+補題 \ref{intersection-lemma-reduction-diagonal} により
+$$
+e(X, V \cdot W, Z) = e(X \times X, \Delta \cdot V \times W, \Delta(Z))
+$$
+である。$\Delta : X \to X \times X$ は正則埋め込みなので
+（補題 \ref{intersection-lemma-diagonal-regular-immersion} を参照されたい）、
+補題 \ref{intersection-lemma-multiplicity-with-lci} により
+$e(X \times X, \Delta \cdot V \times W, \Delta(Z))$ は正の整数である。
+\end{proof}
+
+\noindent
+次の補題は、本章における理論の展開で鍵となる補題である。
+本質的には、交点数が適切な加法性をもつことを述べている。
+
+\begin{lemma}
+\label{intersection-lemma-tor-sheaf}
+\begin{reference}
+\cite[Chapter V]{Serre_algebre_locale}
+\end{reference}
+$X$ を非特異多様体とする。$\mathcal{F}$ と $\mathcal{G}$ を
+$X$ 上の連接層で、
+$\dim(\text{Supp}(\mathcal{F})) \leq r$、
+$\dim(\text{Supp}(\mathcal{G})) \leq s$、および
+$\dim(\text{Supp}(\mathcal{F}) \cap \text{Supp}(\mathcal{G}) )
+\leq r + s - \dim X$ を満たすものとする。この場合、
+$[\mathcal{F}]_r$ と $[\mathcal{G}]_s$ は proper に交わり、
+$$
+[\mathcal{F}]_r \cdot [\mathcal{G}]_s =
+\sum (-1)^p
+[\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})]_{r + s - \dim(X)}.
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$[\mathcal{F}]_r$ と $[\mathcal{G}]_s$ が proper に交わるという主張は
+直ちに分かる。サイクルの等式を証明するので、$X$ 上で局所的に
+議論してよい。（サイクルの交叉積の構成、$\text{Tor}$-層の構成、
+および連接層に付随するサイクルの構成は、いずれも開部分スキームへの
+制限と可換であることに注意する。）したがって $X$ はアフィンであると
+仮定してよく、実際そう仮定する。
+
+\medskip\noindent
+次のように記す。
+$$
+RHS(\mathcal{F}, \mathcal{G}) = [\mathcal{F}]_r \cdot [\mathcal{G}]_s
+\quad\text{and}\quad
+LHS(\mathcal{F}, \mathcal{G}) = \sum (-1)^p
+[\text{Tor}_p^{\mathcal{O}_X}(\mathcal{F}, \mathcal{G})]_{r + s - \dim(X)}
+$$
+$X$ 上の連接層の短完全列
+$$
+0 \to \mathcal{F}_1 \to \mathcal{F}_2 \to \mathcal{F}_3 \to 0
+$$
+で、$\text{Supp}(\mathcal{F}_i) \subset \text{Supp}(\mathcal{F})$
+を満たすものを考える。このとき $i = 1, 2, 3$ に対して
+$LHS(\mathcal{F}_i, \mathcal{G})$ と
+$RHS(\mathcal{F}_i, \mathcal{G})$ はともに定義され、
+$$
+RHS(\mathcal{F}_2, \mathcal{G}) =
+RHS(\mathcal{F}_1, \mathcal{G}) + RHS(\mathcal{F}_3, \mathcal{G})
+$$
+が成り立ち、LHS についても同様である。実際、台の条件により
+すべてが定義され、短完全列と長さの加法性から
+$$
+[\mathcal{F}_2]_r = [\mathcal{F}_1]_r  + [\mathcal{F}_3]_r
+$$
+を得る（Chow 『ホモロジー代数』の補題 \ref{chow-lemma-additivity-sheaf-cycle}）。これは RHS の加法性を
+含意する。$\text{Tor}$ の長完全列
+$$
+\ldots \to \text{Tor}_1(\mathcal{F}_3, \mathcal{G}) \to
+\text{Tor}_0(\mathcal{F}_1, \mathcal{G}) \to
+\text{Tor}_0(\mathcal{F}_2, \mathcal{G}) \to
+\text{Tor}_0(\mathcal{F}_3, \mathcal{G}) \to 0
+$$
+と先ほどと同じ長さの加法性は、LHS の加法性を含意する。
+
+\medskip\noindent
+『可換代数』の補題 \ref{algebra-lemma-filter-Noetherian-module} と
+$X$ がアフィンであることにより、$\mathcal{F}$ のフィルトレーションで、
+その次数付き部分が $\text{Supp}(\mathcal{F})$ の閉部分多様体の
+構造層となるものを取ることができる。前段落で示した加法性により、
+$\mathcal{F}$ を $\mathcal{O}_V$ に置き換えた場合の
+$LHS = RHS$ を証明すれば十分である。ここで
+$V \subset \text{Supp}(\mathcal{F})$ である。
+対称性により、$\mathcal{G}$ についても同様にできる。
+したがって
+$$
+LHS(\mathcal{O}_V, \mathcal{O}_W) = RHS(\mathcal{O}_V, \mathcal{O}_W)
+$$
+を証明する場合に帰着する。ここで
+$W \subset \text{Supp}(\mathcal{G})$ は閉部分多様体である。
+$\dim(V) = r$ かつ $\dim(W) = s$ ならば、この等式は
+$V \cdot W$ の {\bf 定義} である。一方、
+$\dim(V) < r$ または $\dim(W) < s$、すなわち
+$[V]_r = 0$ または $[W]_s = 0$ ならば、
+$RHS(\mathcal{O}_V, \mathcal{O}_W) = 0$ を証明しなければならない
+\footnote{$r = s = 1$ とし、$X$ を非特異曲面、$V = W$ を
+$X$ の閉点 $x$ とすれば、これが自明でないことが分かる。
+この場合、$x$ における長さが $1, 2, 1$ である非零な
+$\text{Tor}$ が $3$ 個ある。}。
+
+\medskip\noindent
+$Z \subset V \cap W$ を次元 $r + s - \dim(X)$ の既約成分とする。
+これは成分がもちうる最大の次元であり、$RHS$ における $Z$ の係数が
+ゼロであることを示せば十分である。$\xi \in Z$ を生成点とする。
+$A = \mathcal{O}_{X, \xi}$、$B = \mathcal{O}_{X \times X, \Delta(\xi)}$、
+$C = \mathcal{O}_{V \times W, \Delta(\xi)}$ と書く。
+補題 \ref{intersection-lemma-tor-and-diagonal} により
+$$
+\text{coeff of }Z\text{ in }
+RHS(\mathcal{O}_V, \mathcal{O}_W) = 
+\sum (-1)^i
+\text{length}_B \text{Tor}_i^B(A, C)
+$$
+である。$\dim(V) < r$ または $\dim(W) < s$ なので
+$\dim(V \times W) < r + s$ であり、これは
+$\dim(C) < \dim(X)$ を含意する（細部は省略する）。さらに、
+$B \to A$ の核 $I$ は長さ $\dim(X)$ の正則列で生成される
+（補題 \ref{intersection-lemma-diagonal-regular-immersion}）。
+したがって補題 \ref{intersection-lemma-one-ideal-ci} により消滅する。実際、
+『可換代数』の命題 \ref{algebra-proposition-dimension} により、
+$I$ に関する $C$ の Hilbert 関数の次数は $\dim(C) < n$ である。
+\end{proof}
+
+\begin{remark}
+\label{intersection-remark-Serre-conjectures}
+$(A, \mathfrak m, \kappa)$ を正則局所環とする。
+$M$ と $N$ を、$M \otimes_A N$ の台が
+$\{\mathfrak m\}$ に含まれる非零有限 $A$-加群とする。このとき
+$$
+\chi(M, N) = \sum (-1)^i \text{length}_A \text{Tor}_i^A(M, N)
+$$
+は有限である。$r = \dim(\text{Supp}(M))$、
+$s = \dim(\text{Supp}(N))$ とおく。
+\cite{Serre_algebre_locale} では $r + s \leq \dim(A)$ が示され、
+次の予想が述べられている。
+\begin{enumerate}
+\item $r + s < \dim(A)$ ならば $\chi(M, N) = 0$ である。
+\item $r + s = \dim(A)$ ならば $\chi(M, N) > 0$ である。
+\end{enumerate}
+補題 \ref{intersection-lemma-tor-sheaf} と命題 \ref{intersection-proposition-positivity} を証明する
+議論を用いると（Serre の文献でもそのように行われている）、
+$A$ が体を含む場合に (1) と (2) が成り立つことを示せる。
+現在では予想 (1) は一般に知られており、一般に
+$\chi(M, N) \geq 0$ であることも知られている（Gabber）。
+我々の知る限り、正値性はなお未解決問題である。
+\end{remark}
+
+
+
+\section{交叉の結合性}
+\label{intersection-section-associative}
+
+\noindent
+上で定めた proper な交叉が可換であることは明らかである。
+鍵となる補題 \ref{intersection-lemma-tor-sheaf} を用いると、（proper な）
+交叉積が結合的であることを証明できる。
+
+\begin{lemma}
+\label{intersection-lemma-associative}
+$X$ を非特異多様体とし、$U, V, W$ を閉部分多様体とする。
+$U, V, W$ は任意の二つが proper に交わり、さらに
+$\dim(U \cap V \cap W) \leq \dim(U) + \dim(V) + \dim(W) - 2\dim(X)$
+を満たすと仮定する。このとき、$X$ 上のサイクルとして
+$$
+U \cdot (V \cdot W) = (U \cdot V) \cdot W
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+以下では補題 \ref{intersection-lemma-tor-sheaf} を断りなく用いる。
+これにより
+\begin{align*}
+V \cdot W
+& =
+\sum (-1)^i [\text{Tor}_i(\mathcal{O}_V, \mathcal{O}_W)]_{b + c - n} \\
+U \cdot (V \cdot W)
+& =
+\sum (-1)^{i + j}
+[
+\text{Tor}_j(\mathcal{O}_U, \text{Tor}_i(\mathcal{O}_V, \mathcal{O}_W))
+]_{a + b + c - 2n} \\
+U \cdot V
+& =
+\sum (-1)^i [\text{Tor}_i(\mathcal{O}_U, \mathcal{O}_V)]_{a + b - n} \\
+(U \cdot V) \cdot W
+& =
+\sum (-1)^{i + j}
+[
+\text{Tor}_j(\text{Tor}_i(\mathcal{O}_U, \mathcal{O}_V), \mathcal{O}_W))
+]_{a + b + c - 2n}
+\end{align*}
+を得る。ここで $\dim(U) = a$、$\dim(V) = b$、
+$\dim(W) = c$、$\dim(X) = n$ である。補題の仮定は、上の諸式に現れる
+連接層の台の次元が、これらの式に意味を与えるために必要な上界を
+満たすことを保証する。ここで導来圏
+$D_{\textit{Coh}}(\mathcal{O}_X)$ の対象
+$$
+K =
+\mathcal{O}_U \otimes^\mathbf{L}_{\mathcal{O}_X} \mathcal{O}_V
+\otimes^\mathbf{L}_{\mathcal{O}_X} \mathcal{O}_W
+$$
+を考える。上で得た $U \cdot (V \cdot W)$ と
+$(U \cdot V) \cdot W$ の式はともに
+$$
+\sum (-1)^k [H^k(K)]_{a + b + c - 2n}
+$$
+に等しいと主張する。これを示せば補題が従う。
+対称性により、これらの等式の一方を証明すれば十分である。
+そのため $\mathcal{O}_U$ と
+$\mathcal{O}_V \otimes_{\mathcal{O}_X}^\mathbf{L} \mathcal{O}_W$ を
+K-flat 複体 $M^\bullet$ と $L^\bullet$ で表し、
+『ホモロジー代数』の第 \ref{homology-section-double-complex} 節の
+二重複体 $M^\bullet \otimes_{\mathcal{O}_X} L^\bullet$ に付随する
+スペクトル系列を用いる。このスペクトル系列の $E_2$ 項は
+$$
+E_2^{p, q} =
+\text{Tor}_{-p}(\mathcal{O}_U, \text{Tor}_{-q}(\mathcal{O}_V, \mathcal{O}_W))
+$$
+であり、$H^{p + q}(K)$ に収束する（詳細は省略する。『代数の続論』の例 \ref{more-algebra-example-tor} と比較されたい）。
+短完全列において長さは加法的なので、結論が従う。
+\end{proof}
+
+
+
+
+\section{平坦引き戻しと交叉積}
+\label{intersection-section-flat-pullback-and-intersection-products}
+
+\noindent
+交叉と平坦引き戻しの相互作用について簡単に述べる。
+
+\begin{lemma}
+\label{intersection-lemma-flat-pull-back-and-intersections-sheaves}
+$f : X \to Y$ を非特異多様体の平坦射とし、
+$e = \dim(X) - \dim(Y)$ とおく。$\mathcal{F}$ と $\mathcal{G}$ を
+$Y$ 上の連接層で、$\dim(\text{Supp}(\mathcal{F})) \leq r$、
+$\dim(\text{Supp}(\mathcal{G})) \leq s$、および
+$\dim(\text{Supp}(\mathcal{F}) \cap \text{Supp}(\mathcal{G}) )
+\leq r + s - \dim(Y)$ を満たすものとする。この場合、サイクル
+$[f^*\mathcal{F}]_{r + e}$ と $[f^*\mathcal{G}]_{s + e}$ は
+proper に交わり、
+$$
+f^*([\mathcal{F}]_r \cdot [\mathcal{G}]_s) =
+[f^*\mathcal{F}]_{r + e} \cdot [f^*\mathcal{G}]_{s + e}
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$[f^*\mathcal{F}]_{r + e}$ と $[f^*\mathcal{G}]_{s + e}$ が
+proper に交わるという主張は、$f$ の相対次元が $e$ であるという
+仮定から直ちに従う。補題 \ref{intersection-lemma-tor-sheaf} および
+\ref{intersection-lemma-pullback} により、$\mathcal{O}_X$-加群として
+$$
+f^*\text{Tor}_i^{\mathcal{O}_Y}(\mathcal{F}, \mathcal{G}) =
+\text{Tor}_i^{\mathcal{O}_X}(f^*\mathcal{F}, f^*\mathcal{G})
+$$
+であることを示せば十分である。これは『層のコホモロジー』の補題 \ref{cohomology-lemma-pullback-tensor-product} と、
+$f^*$ が完全なので $Lf^*\mathcal{F} = f^*\mathcal{F}$ であり、
+$\mathcal{G}$ についても同様であることから従う。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-flat-pullback-and-intersections}
+$f : X \to Y$ を非特異多様体の平坦射とする。
+$\alpha$ を $Y$ 上の $r$-サイクル、$\beta$ を $Y$ 上の
+$s$-サイクルとする。$\alpha$ と $\beta$ が proper に交わると仮定する。
+このとき $f^*\alpha$ と $f^*\beta$ は proper に交わり、
+$f^*( \alpha \cdot \beta ) = f^*\alpha \cdot f^*\beta$ が成り立つ。
+\end{lemma}
+
+\begin{proof}
+線形性により、次元 $r, s$ のある閉部分多様体
+$V, W \subset Y$ に対して $\alpha = [V]$、$\beta = [W]$ と仮定してよい。
+$f$ の相対次元を $e$ とする。このとき補題は補題
+\ref{intersection-lemma-flat-pull-back-and-intersections-sheaves} の特別な場合である。
+実際、$[V] = [\mathcal{O}_V]_r$、$[W] = [\mathcal{O}_W]_r$、
+$f^*[V] = [f^{-1}(V)]_{r + e} = [f^*\mathcal{O}_V]_{r + e}$、および
+$f^*[W] = [f^{-1}(W)]_{s + e} = [f^*\mathcal{O}_W]_{s + e}$ である。
+\end{proof}
+
+
+\section{平坦 proper 射に対する射影公式}
+\label{intersection-section-projection-formula-flat}
+
+\noindent
+平坦 proper 射に対する射影公式について簡単に述べる。
+
+\begin{lemma}
+\label{intersection-lemma-projection-formula-flat}
+\begin{reference}
+より一般的な公式については
+\cite[Chapter V, C), Section 7, formula (10)]{Serre_algebre_locale}
+を参照されたい。
+\end{reference}
+$f : X \to Y$ を非特異多様体の平坦 proper 射とし、
+$e = \dim(X) - \dim(Y)$ とおく。$\alpha$ を $X$ 上の
+$r$-サイクル、$\beta$ を $Y$ 上の $s$-サイクルとする。
+$\alpha$ と $f^*(\beta)$ が proper に交わると仮定する。
+このとき $f_*(\alpha)$ と $\beta$ は proper に交わり、
+$$
+f_*(\alpha) \cdot \beta = f_*( \alpha \cdot f^*\beta)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+線形性により、次元 $r$ と $s$ のある閉部分多様体
+$V \subset X$ と $W \subset Y$ に対して
+$\alpha = [V]$、$\beta = [W]$ である場合に帰着する。
+このとき $f^{-1}(W)$ は純次元 $s + e$ をもつ。
+サイクル $[V]$ と $f^*[W]$ は proper に交わると仮定する。
+$V \cap f^{-1}(W) \to f(V) \cap W$ が全射であることを、
+以下では断りなく用いる。
+
+\medskip\noindent
+$V \to f(V)$ の生成ファイバーの次元を $a$ とする。
+$a > 0$ ならば $f_*[V] = 0$ である。特に
+$f_*\alpha$ と $\beta$ は proper に交わる。この場合を終えるには
+$f_*([V] \cdot f^*[W]) = 0$ を示さなければならない。
+しかし $V \to f(V)$ のすべてのファイバーの次元は $\geq a$ なので
+（『スキームの射』の補題 \ref{morphisms-lemma-openness-bounded-dimension-fibres} を参照されたい）、
+$V \cap f^{-1}(W)$ の任意の既約成分 $Z$ は $f(Z)$ 上で
+次元 $\geq a$ のファイバーをもつ。これは望む結論を明らかに含意する。
+
+\medskip\noindent
+$V \to f(V)$ が生成的有限であると仮定する。
+$Z \subset f(V) \cap W$ を既約成分とする。
+$Z_i \subset V \cap f^{-1}(W)$、$i = 1, \ldots, t$ を、
+$Z$ を支配する $V \cap f^{-1}(W)$ の既約成分とする。
+仮定により各 $Z_i$ の次元は
+$r + s + e - \dim(X) = r + s - \dim(Y)$ である。
+したがって $\dim(Z) \leq r + s - \dim(Y)$ である。
+ゆえに $f(V)$ と $W$ は proper に交わり、
+$\dim(Z) = r + s - \dim(Y)$ であり、各 $Z_i \to Z$ は生成的有限である。
+特に、$V \to f(V)$ は $Z$ の生成点 $\xi$ 上で有限ファイバーをもつ。
+したがって $V \to Y$ は $\xi$ のある開近傍で有限である。
+『スキームのコホモロジー』の補題 \ref{coherent-lemma-proper-finite-fibre-finite-in-neighbourhood}
+を参照されたい。導来テンソル積に対する非常に一般的な射影公式を用いると
+$$
+Rf_*(\mathcal{O}_V \otimes_{\mathcal{O}_X}^\mathbf{L} Lf^*\mathcal{O}_W) =
+Rf_*\mathcal{O}_V \otimes_{\mathcal{O}_Y}^\mathbf{L} \mathcal{O}_W
+$$
+を得る。『スキームの導来圏』の補題 \ref{perfect-lemma-cohomology-base-change} を参照されたい。
+$f$ は平坦なので $Lf^*\mathcal{O}_W = f^*\mathcal{O}_W$ である。
+$f|_V$ は $\xi$ のある開近傍で有限なので、台が $V$ に含まれる
+$X$ 上の任意の連接層に対し
+$$
+(Rf_*\mathcal{F})_\xi = (f_*\mathcal{F})_\xi
+$$
+である（『スキームのコホモロジー』の補題 \ref{coherent-lemma-higher-direct-images-zero-finite-fibre}
+を参照されたい）。したがって、すべての $i$ に対して
+\begin{equation}
+\label{intersection-equation-stalks}
+\left(
+f_*\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V, f^*\mathcal{O}_W)
+\right)_\xi =
+\left(\text{Tor}_i^{\mathcal{O}_Y}(f_*\mathcal{O}_V, \mathcal{O}_W)\right)_\xi
+\end{equation}
+を得る。補題 \ref{intersection-lemma-pullback} により
+$f^*[W] = [f^*\mathcal{O}_W]_{s + e}$ なので、補題
+\ref{intersection-lemma-tor-sheaf} により
+$$
+[V] \cdot f^*[W] =
+\sum (-1)^i
+[\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V,
+f^*\mathcal{O}_W)]_{r + s - \dim(Y)}
+$$
+である。補題 \ref{intersection-lemma-push-coherent} を適用すると
+$$
+f_*([V] \cdot f^*[W]) =
+\sum (-1)^i
+[f_*\text{Tor}_i^{\mathcal{O}_X}(\mathcal{O}_V,
+f^*\mathcal{O}_W)]_{r + s - \dim(Y)}
+$$
+を得る。補題 \ref{intersection-lemma-push-coherent} により
+$f_*[V] = [f_*\mathcal{O}_V]_r$ なので、再び補題
+\ref{intersection-lemma-tor-sheaf} によって
+$$
+[f_*V] \cdot [W] =
+\sum (-1)^i
+[\text{Tor}_i^{\mathcal{O}_X}(f_*\mathcal{O}_V,
+\mathcal{O}_W)]_{r + s - \dim(Y)}
+$$
+である。$f_*([V] \cdot f^*[W])$ の式と
+$f_*[V] \cdot [W]$ の式を比較し、$\xi$ における茎の長さを取って
+$Z$ の係数を見ると、(\ref{intersection-equation-stalks}) により証明が完了する。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-transfer}
+$X \to P$ を非特異多様体の閉埋め込みとする。
+$C' \subset P \times \mathbf{P}^1$ を次元 $r + 1$ の閉部分多様体とする。
+次を仮定する。
+\begin{enumerate}
+\item ファイバー $C = C'_0$ は次元 $r$ をもつ。すなわち
+$C' \to \mathbf{P}^1$ は支配的である。
+\item $C'$ は $X \times \mathbf{P}^1$ と proper に交わる。
+\item $[C]_r$ は $X$ と proper に交わる。
+\end{enumerate}
+$\alpha = [C]_r \cdot X$ を $X$ 上のサイクルとみなし、
+$\beta = C' \cdot X \times \mathbf{P}^1$ を
+$X \times \mathbf{P}^1$ 上のサイクルとみなす。このとき、
+$\text{pr}_X : X \times \mathbf{P}^1 \to X$ を射影として、
+$X$ 上のサイクルの等式
+$$
+\alpha = \text{pr}_{X, *}(\beta \cdot X \times 0)
+$$
+が成り立つ。
+\end{lemma}
+
+\begin{proof}
+$\text{pr} : P \times \mathbf{P}^1 \to P$ を射影とする。
+サイクルの等式を証明するので、$\alpha$ と\ $\beta$ をそれぞれ
+$P$ と\ $P \times \mathbf{P}^1$ 上のサイクルとみなし、
+$\text{pr}$ による押し出しについて結論を証明すれば十分である。
+$\text{pr}^*X = X \times \mathbf{P}^1$ であり、
+$\text{pr}$ は $C'_0$ から $C$ への同型を定めるので、
+射影公式（補題 \ref{intersection-lemma-projection-formula-flat}）により
+$$
+\text{pr}_*([C'_0]_r \cdot X \times \mathbf{P}^1) = [C]_r \cdot X = \alpha
+$$
+である。一方、補題 \ref{intersection-lemma-rational-equivalence-and-intersection} により
+$P \times \mathbf{P}^1$ 上のサイクルとして
+$[C'_0]_r = C' \cdot P \times 0$ である。したがって、
+交叉積の結合性（補題 \ref{intersection-lemma-associative}）と可換性により
+$$
+[C'_0]_r \cdot X \times \mathbf{P}^1 =
+(C' \cdot P \times 0) \cdot X \times \mathbf{P}^1 =
+(C' \cdot X \times \mathbf{P}^1) \cdot P \times 0
+$$
+である。あとは、$P \times \mathbf{P}^1$ 上で
+$C' \cdot X \times \mathbf{P}^1$ と $P \times 0$ の交叉積が、
+$X \times \mathbf{P}^1$ 上で $\beta$ と $X \times 0$ の交叉積に
+サイクルとして等しいことを示せばよい。
+$C' \cdot X \times \mathbf{P}^1 = \sum n_k[E_k]$ と書く。
+したがって、ある部分多様体
+$E_k \subset X \times \mathbf{P}^1 \subset P \times \mathbf{P}^1$
+に対して $\beta = \sum n_k[E_k]$ である。補題
+\ref{intersection-lemma-rational-equivalence-and-intersection} を 2 回適用すると、
+両方の交叉は $\sum m_k[E_{k, 0}]$ に等しい。これで証明が完了する。
+\end{proof}
+
+
+
+
+\section{射影}
+\label{intersection-section-projection}
+
+\noindent
+固定した代数閉基礎体 $\mathbf{C}$ 上で議論していることを思い出そう。
+$V$ が $\mathbf{C}$ 上の有限次元ベクトル空間ならば
+$$
+\mathbf{P}(V) = \text{Proj}(\text{Sym}(V))
+$$
+とおく。ここで $\text{Sym}(V)$ は $\mathbf{C}$ 上の $V$ の対称代数である。
+『スキームの構成』の例 \ref{constructions-example-projective-space}
+を参照されたい。正規化は
+$V = \Gamma(\mathbf{P}(V), \mathcal{O}_{\mathbf{P}(V)}(1))$
+となるように選ぶ。もちろん $\dim(V) = n + 1$ ならば
+$\mathbf{P}(V) \cong \mathbf{P}^n_{\mathbf{C}}$ である。
+$\mathbf{P}(V)$ は非特異射影多様体であることに注意する。
+
+\medskip\noindent
+$p \in \mathbf{P}(V)$ を閉点とする。点 $p$ は、$\dim(L_p) = 1$ である
+ベクトル空間の全射 $V \to L_p$ に対応する。『スキームの構成』の補題 \ref{constructions-lemma-apply} を参照されたい。
+$W_p = \Ker(V \to L_p)$ と記す。
+{\it $p$ からの射影}とは、『スキームの構成』の補題 \ref{constructions-lemma-morphism-proj} の射
+$$
+r_p : \mathbf{P}(V) \setminus \{p\} \longrightarrow \mathbf{P}(W_p)
+$$
+である。まず準備となる補題を述べる。
+
+\begin{lemma}
+\label{intersection-lemma-projection-generically-finite}
+$V$ を次元 $n + 1$ のベクトル空間とし、
+$X \subset \mathbf{P}(V)$ を閉部分スキームとする。
+$X \not = \mathbf{P}(V)$ ならば、空でない Zariski 開集合
+$U \subset \mathbf{P}(V)$ が存在し、すべての閉点 $p \in U$ に対して
+射影 $r_p$ の制限は有限射
+$r_p|_X : X \to \mathbf{P}(W_p)$ を定める。
+\end{lemma}
+
+\begin{proof}
+$U = \mathbf{P}(V) \setminus X$ とすれば補題が成り立つと主張する。
+$U$ の閉点 $p$ に対し、実際に射
+$r_p|_X : X \to \mathbf{P}(W_p)$ を得る。
+$X$ は proper スキームなので、この射は proper である
+（『スキームの射』の補題 \ref{morphisms-lemma-locally-projective-proper} および \ref{morphisms-lemma-image-proper-scheme-closed}）。
+一方、直接計算すれば $r_p$ のファイバーはアフィン直線である。
+したがって $r_p|X$ のファイバーは proper かつアフィンであり、
+ゆえに有限である（『スキームの射』の補題 \ref{morphisms-lemma-finite-proper}）。最後に、有限ファイバーをもつ
+proper 射は有限である（『スキームのコホモロジー』の補題 \ref{coherent-lemma-characterize-finite}）。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-projection-generically-immersion}
+$V$ を次元 $n + 1$ のベクトル空間とし、
+$X \subset \mathbf{P}(V)$ を閉部分多様体とする。
+$x \in X$ を非特異点とする。
+\begin{enumerate}
+\item $\dim(X) < n - 1$ ならば、空でない Zariski 開集合
+$U \subset \mathbf{P}(V)$ が存在し、すべての閉点 $p \in U$ に対して
+射 $r_p|_X : X \to r_p(X)$ は $r_p(x)$ のある開近傍上で同型である。
+\item $\dim(X) = n - 1$ ならば、空でない Zariski 開集合
+$U \subset \mathbf{P}(V)$ が存在し、すべての閉点 $p \in U$ に対して
+射 $r_p|_X : X \to \mathbf{P}(W_p)$ は $x$ で \'etale である。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) の証明。$x, y \in X$ が $r_p$ によって同じ像をもつならば、
+$p$ は直線 $\overline{xy}$ 上にあることに注意する。
+有限型スキーム
+$$
+T = \{(y, p) \mid
+y \in X \setminus \{x\},\ p \in \mathbf{P}(V),\ p \in \overline{xy}\}
+$$
+と、$(y, p) \mapsto y$ および $(y, p) \mapsto p$ で与えられる射
+$T \to X$ と $T \to \mathbf{P}(V)$ を考える。
+$T \to X$ の各ファイバーは直線なので、
+$T$ の次元は $\dim(X) + 1 < \dim(\mathbf{P}(V))$ である。
+したがって $T \to \mathbf{P}(V)$ は全射でない。一方、有限型スキーム
+$$
+T' = \{p \mid
+p \in \mathbf{P}(V) \setminus \{x\},
+\ \overline{xp}\text{ tangent to }X\text{ at }x\}
+$$
+を考える。このとき $T'$ の次元は
+$\dim(X) < \dim(\mathbf{P}(V))$ である。
+したがって射 $T' \to \mathbf{P}(V)$ も全射でない。
+$U \subset \mathbf{P}(V) \setminus X$ を、これらの像と交わらない
+空でない開集合とする。このような $U$ が存在するのは、
+『スキームの射』の補題 \ref{morphisms-lemma-chevalley} により
+$\mathbf{P}(V)$ における $T$ と $T'$ の像が構成可能だからである。
+すると閉点 $p \in U$ に対し、射影
+$r_p|_X : X \to \mathbf{P}(W_p)$ は $x$ における接空間上で単射であり、
+$r_p^{-1}(\{r_p(x)\}) = \{x\}$ である。これは $r_p$ が $x$ で
+非分岐であることを意味する（『多様体』の補題 \ref{varieties-lemma-injective-tangent-spaces-unramified}）。
+また補題 \ref{intersection-lemma-projection-generically-finite} により有限であり、
+$r_p^{-1}(\{r_p(x)\}) = \{x\}$ である。したがって
+『スキームのエタール射（\'Etale Morphisms）』の補題 \ref{etale-lemma-finite-unramified-one-point} を適用でき、
+$\mathbf{P}(W_p)$ における $r_p(x)$ の開近傍 $R$ で、
+$(r_p|_X)^{-1}(R) \to R$ が閉埋め込みとなるものが存在する。
+これで (1) が証明された。
+
+\medskip\noindent
+(2) の証明。この場合も射 $T' \to \mathbf{P}(V)$ が全射でないと分かる。
+上と同様に議論すると、$X$ と $T'$ の像を避ける
+$U \subset \mathbf{P}(V)$ に対して、射影
+$r_p|_X : X \to \mathbf{P}(W_p)$ は $x$ で \'etale かつ有限である。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-projection-generically-immersion-refined}
+$V$ をベクトル空間とする。
+$Z \subset X \subset \mathbf{P}(V)$ を
+$Z \not = X \not = \mathbf{P}(V)$ を満たす閉部分多様体とする。
+$x \in Z$ を $X$ の非特異点とする。このとき、空でない Zariski 開集合
+$U \subset \mathbf{P}(V)$ が存在し、すべての閉点 $p \in U$ に対して
+射 $r_p|_Z : Z \to r_p(Z)$ は $r_p(x)$ のある開近傍上で同型である。
+\end{lemma}
+
+\begin{proof}
+補題 \ref{intersection-lemma-projection-generically-immersion} の証明と同様に議論すると、
+空でない Zariski 開集合 $U$ が存在し、$p \in U$ に対して
+$r_p|_X : X \to r_p(X)$ は $x$ で \'etale であり、
+$r_p^{-1}(r_p(\{x\})) \cap Z = \{x\}$ となる。詳細は省略する。
+$Z' = r_p(Z)$ を $\mathbf{P}(W_p)$ の閉部分多様体とみなす。
+このとき射 $\pi : Z \to Z'$ は有限であり
+（補題 \ref{intersection-lemma-projection-generically-finite}）、$x$ で非分岐であり
+（細部は省略する）、$\pi^{-1}(\pi(\{x\})) = \{x\}$ である。
+結論は『スキームのエタール射（\'Etale Morphisms）』の補題 \ref{etale-lemma-finite-unramified-one-point} から従う。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-projection-injective}
+$V$ を次元 $n + 1$ のベクトル空間とし、
+$Y, Z \subset \mathbf{P}(V)$ を閉部分多様体とする。
+空でない Zariski 開集合 $U \subset \mathbf{P}(V)$ が存在し、
+すべての閉点 $p \in U$ に対して
+$$
+Y \cap r_p^{-1}(r_p(Z)) = (Y \cap Z) \cup E
+$$
+となる。ここで $E \subset Y$ は閉であり、
+$\dim(E) \leq \dim(Y) + \dim(Z) + 1 - n$ である。
+\end{lemma}
+
+\begin{proof}
+$Y' = Y \setminus Y \cap Z$ とおく。
+$y \in Y'$、$z \in Z$ を $r_p(y) = r_p(z)$ を満たす閉点とする。
+このとき $p$ は $y$ と $z$ を通る直線 $\overline{yz}$ 上にある。
+有限型スキーム
+$$
+T = \{(y, z, p) \mid y \in Y', z \in Z, p \in \overline{yz}\}
+$$
+と、$(y, z, p) \mapsto p$ で与えられる射
+$T \to \mathbf{P}(V)$ を考える。$T$ は既約で、
+$\dim(T) = \dim(Y) + \dim(Z) + 1$ であることに注意する。
+したがって $T \to \mathbf{P}(V)$ の一般ファイバーの次元は高々
+$\dim(Y) + \dim(Z) + 1 - n$ である。より正確には、空でない開集合
+$U \subset \mathbf{P}(V) \setminus (Y \cup Z)$ が存在し、その上で
+ファイバーの次元は高々 $\dim(Y) + \dim(Z) + 1 - n$ である
+（『多様体』の補題 \ref{varieties-lemma-dimension-fibres-locally-algebraic}）。
+$p \in U$ を閉点とし、$F \subset T$ を $p$ 上の
+$T \to \mathbf{P}(V)$ のファイバーとする。このとき
+$$
+(Y \cap r_p^{-1}(r_p(Z))) \setminus (Y \cap Z)
+$$
+は $F \to Y$、$(y, z, p) \mapsto y$ の像である。
+再び『多様体』の補題 \ref{varieties-lemma-dimension-fibres-locally-algebraic} により、
+$F \to Y$ の像の閉包の次元は高々
+$\dim(Y) + \dim(Z) + 1 - n$ である。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-find-lines}
+$V$ をベクトル空間とし、
+$B \subset \mathbf{P}(V)$ を余次元 $\geq 2$ の閉部分多様体とする。
+$p \in \mathbf{P}(V)$ を $p \not \in B$ である閉点とする。
+このとき、$p \in \ell$ かつ $\ell \cap B = \emptyset$ を満たす直線
+$\ell \subset \mathbf{P}(V)$ が存在する。さらに、これらの直線は
+$\mathbf{P}(V)$ のある開部分集合を掃き尽くす。
+\end{lemma}
+
+\begin{proof}
+射影 $r_p : \mathbf{P}(V) \to \mathbf{P}(W_p)$ による $B$ の像を考える。
+$\dim(W_p) = \dim(V) - 1$ なので、$r_p(B)$ は
+$\mathbf{P}(W_p)$ において余次元 $\geq 1$ をもつ。
+$r_p(q) \not \in r_p(B)$ を満たす任意の
+$q \in \mathbf{P}(V)$ に対して、$p$ と $q$ を結ぶ直線
+$\ell = \overline{pq}$ が求めるものである。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-doubly-transitive}
+$V$ をベクトル空間とし、$G = \text{PGL}(V)$ とおく。
+このとき $G \times \mathbf{P}(V) \to \mathbf{P}(V)$ は二重推移的である。
+\end{lemma}
+
+\begin{proof}
+省略する。ヒント：$\text{GL}(V)$ が線形独立なベクトルの対に
+二重推移的に作用することから従う。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-determinant}
+$k$ を体とする。$n \geq 1$ を整数とし、
+$x_{ij}, 1 \leq i, j \leq n$ を変数とする。このとき
+$$
+\det
+\left(
+\begin{matrix}
+x_{11} & x_{12} & \ldots & x_{1n} \\
+x_{21} & \ldots & \ldots & \ldots \\
+\ldots & \ldots & \ldots & \ldots \\
+x_{n1} & \ldots & \ldots & x_{nn}
+\end{matrix}
+\right)
+$$
+は多項式環 $k[x_{ij}]$ の既約元である。
+\end{lemma}
+
+\begin{proof}
+$V$ を $n$ 次元ベクトル空間とする。幾何学に翻訳すると、この補題は
+非可逆な線形写像 $V \to V$ の軌跡 $C$ が既約であることを意味する
+（行列式は各変数について次数 $1$ なので平方因子をもたないことに
+注意する）。$W$ を次元 $n - 1$ のベクトル空間とする。
+初等線形代数により、射
+$$
+\Hom(W, V) \times \Hom(V, W) \longrightarrow \Hom(V, V),\quad
+(\psi, \varphi) \longmapsto \psi \circ \varphi
+$$
+の像は $C$ である。始域が既約なので、像も既約である。
+詳細は省略する。
+\end{proof}
+
+\noindent
+$V$ を次元 $n + 1$ のベクトル空間とし、$E = \text{End}(V)$ とおく。
+$E^\vee = \Hom(E, \mathbf{C})$ を双対ベクトル空間とし、
+$\mathbf{P} = \mathbf{P}(E^\vee)$ と書く。標準線形写像
+$$
+V \longrightarrow V \otimes_\mathbf{C} E^\vee = \Hom(E, V)
+$$
+があり、$v \in V$ を $\Hom(E, V)$ の写像 $g \mapsto g(v)$ に送る。
+標準写像 $E^\vee \to \Gamma(\mathbf{P}, \mathcal{O}_\mathbf{P}(1))$
+があり、これが同型であることを思い出そう。したがって、
+$\mathbf{P}$ 上の加群層の標準写像
+$$
+\psi : V \otimes \mathcal{O}_\mathbf{P} \to V \otimes \mathcal{O}_\mathbf{P}(1)
+$$
+を得る。この写像は大域切断上で与えられた写像を復元する。
+射影束 $\mathbf{P}(\mathcal{E})$ は $\mathcal{E}$ 上の対称代数の
+相対 Proj として定義されることを思い出そう。『スキームの構成』の定義 \ref{constructions-definition-projective-bundle} を参照されたい。
+$\psi$ に付随する
+$\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}(1))$ と
+$\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P})$ の間の有理写像を調べる。
+『スキームの構成』の補題 \ref{constructions-lemma-relative-proj-base-change} により標準同型
+$$
+\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}) = \mathbf{P} \times \mathbf{P}(V)
+$$
+がある。『スキームの構成』の補題 \ref{constructions-lemma-twisting-and-proj} により
+$$
+\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}(1)) =
+\mathbf{P}(V \otimes \mathcal{O}_\mathbf{P}) = \mathbf{P} \times \mathbf{P}(V)
+$$
+である。これを『スキームの構成』の補題 \ref{constructions-lemma-morphism-relative-proj} と組み合わせると
+\begin{equation}
+\label{intersection-equation-r-psi}
+\mathbf{P} \times \mathbf{P}(V) \supset
+U(\psi) \xrightarrow{r_\psi} \mathbf{P} \times \mathbf{P}(V)
+\end{equation}
+を得る。これをよりよく理解するため、$\mathbf{P}$ 上のファイバーで
+何が起こるかを具体化する。$g \in E$ を非零とする。
+これは非零写像 $E^\vee \to \mathbf{C}$、したがって点
+$[g] \in \mathbf{P}$ を定める。一方、$g$ は
+$\mathbf{C}$-線形写像 $g : V \to V$ を定める。
+したがって『スキームの構成』の補題 \ref{constructions-lemma-morphism-proj} により写像
+$$
+\mathbf{P}(V) \supset U(g) \xrightarrow{r_g} \mathbf{P}(V)
+$$
+を得る。以下で用いるのは、$U(g)$ がファイバー
+$U(\psi)_{[g]}$ であり、$r_g$ が点 $[g]$ 上の $r_\psi$ の
+ファイバーであることである。さらに、$\mathbf{P}(V)$ における
+$U(g)$ の補集合は閉埋め込み
+$$
+\mathbf{P}(\Coker(g)) \longrightarrow \mathbf{P}(V)
+$$
+の像であり、$r_g$ の像は閉埋め込み
+$$
+\mathbf{P}(\Im(g)) \longrightarrow \mathbf{P}(V)
+$$
+の像であることも用いる。
+
+\begin{lemma}
+\label{intersection-lemma-make-family}
+上の記法を用いる。$X, Y$ を $\mathbf{P}(V)$ の閉部分多様体で、
+proper に交わり、$X \not = \mathbf{P}(V)$ および
+$X \cap Y \not = \emptyset$ を満たすものとする。
+$[\text{id}_V] \in \ell$ を満たす一般の直線
+$\ell \subset \mathbf{P}$ に対して次が成り立つ。
+\begin{enumerate}
+\item すべての $[g] \in \ell$ に対して $X \subset U_g$ である。
+\item すべての $[g] \in \ell$ に対して $g(X)$ は $Y$ と
+proper に交わる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$B \subset \mathbf{P}$ を「悪い」点の集合、すなわち (1) または (2) の
+いずれかに反する点 $[g]$ の集合とする。仮定により
+$[\text{id}_V] \not \in B$ であることに注意する。さらに $B$ は閉である。
+したがって $\dim(B) \leq \dim(\mathbf{P}) - 2$ を示せば十分である
+（補題 \ref{intersection-lemma-find-lines}）。
+
+\medskip\noindent
+まず、$g : V \to V$ が可逆であるような点 $[g]$ からなる開集合
+$G = \text{PGL}(V) \subset \mathbf{P}$ を考える。
+$G$ は $\mathbf{P}(V)$ に二重推移的に作用するので
+（補題 \ref{intersection-lemma-doubly-transitive}）、
+$$
+T = \{(x, y, [g]) \mid x \in X, y \in Y, [g] \in G, r_g(x) = y\}
+$$
+は $X \times Y$ 上の局所自明ファイブレーションで、そのファイバーは
+$G$ における一点の安定化群に等しい。したがって $T$ は多様体である。
+$[g]$ 上の $T \to G$ のファイバーは $r_g(X) \cap Y$ であることに
+注意する。射 $T \to G$ は全射である。実際、$X$ の任意の移動は
+$Y$ と交わる（$X$ と $Y$ が proper に交わり、
+$X \cap Y \not = \emptyset$ であるという仮定から
+$\dim(X) + \dim(Y) \geq \dim(\mathbf{P}(V))$ となり、
+『多様体』の補題 \ref{varieties-lemma-intersection-in-projective-space} により
+$X$ のすべての移動が $Y$ と交わることに注意する）。
+多様体の支配射のファイバー次元は余次元 $1$ では跳躍しないので
+（『多様体』の補題 \ref{varieties-lemma-dimension-fibres-locally-algebraic}）、
+$B \cap G$ の余次元は $\geq 2$ である。
+
+\medskip\noindent
+次に補集合 $Z = \mathbf{P} \setminus G$ を調べる。
+行列式は既約多項式なので、これは既約多様体である
+（補題 \ref{intersection-lemma-determinant}）。したがって $B$ が $Z$ の
+生成点を含まないことを示せば十分である。一般の点 $[g] \in Z$ に対し、
+余核 $V \to \Coker(g)$ は次元 $1$ なので、$U(g)$ は一点の補集合である。
+$X \not = \mathbf{P}(V)$ なので、一般の $[g] \in Z$ に対して
+$X \subset U(g)$ である。さらに射
+$r_g|_X : X \to r_g(X)$ は有限なので、
+$\dim(r_g(X)) = \dim(X)$ である。一方、このような $g$ に対して
+$r_g$ の像は余次元 $1$ の閉部分空間
+$H = \mathbf{P}(\Im(g)) \subset \mathbf{P}(V)$ である。
+$Z$ の一般点では、$H \cap Y$ の次元は $Y$ の次元より $1$ 小さい
+（『多様体』の補題 \ref{varieties-lemma-exact-sequence-induction} と比較されたい）。
+したがって $r_g(X)$ と $H \cap Y$ が $H$ の中で proper に交わることを
+示さなければならない。$H$ を固定すると、$g$ の後に自己同型を合成して
+$r_g(X)$ を $H = \mathbf{P}(\Im(g))$ の任意の自己同型で移動できる。
+したがって上と同様に議論し、$H = \mathbf{P}(\Im(g))$ が与えられた
+一般の $g$ に対し、$H \cap Y$ と $r_g(X)$ の交叉は proper であると
+結論できる。いくつかの細部は省略する。
+\end{proof}
+
+
+
+
+
+
+
+\section{移動補題}
+\label{intersection-section-moving-lemma}
+
+\noindent
+移動補題は、$r$-サイクル $\alpha$ と $s$-サイクル $\beta$ が
+与えられたとき、$\alpha' \sim_{rat} \alpha$ であり、
+$\alpha'$ と $\beta$ が proper に交わるような $\alpha'$ が
+存在することを述べる（補題 \ref{intersection-lemma-moving-move}）。
+\cite{Samuel}、\cite{ChevalleyI}、\cite{ChevalleyII} を参照されたい。
+鍵となるのは補題 \ref{intersection-lemma-moving} である。読者は
+\cite[Example 11.4.1]{F} にここで述べる形の補題を見いだし、
+\cite{Roberts} にその証明を見いだせる。
+
+\begin{lemma}
+\label{intersection-lemma-moving}
+\begin{reference}
+\cite{Roberts} を参照されたい。
+\end{reference}
+$X \subset \mathbf{P}^N$ を非特異閉部分多様体とする。
+$n = \dim(X)$、$0 \leq d, d' < n$ とする。
+$Z \subset X$ を次元 $d$ の閉部分多様体とし、
+$T_i \subset X$、$i \in I$ を次元 $d'$ の閉部分多様体の
+有限族とする。このとき、部分多様体
+$C \subset \mathbf{P}^N$ で、$C$ が $X$ と proper に交わり、さらに
+$$
+C \cdot X = Z + \sum\nolimits_{j \in J} m_j Z_j
+$$
+を満たすものが存在する。ここで $Z_j \subset X$ は $Z$ と異なる
+次元 $d$ の既約部分多様体であり、
+$$
+\dim(Z_j \cap T_i) \leq \dim(Z \cap T_i)
+$$
+を満たす。$Z$ が $X$ の中で $T_i$ と proper に交わらない場合、
+この不等式は真に狭い。
+\end{lemma}
+
+\begin{proof}
+$\mathbf{P}^N = \mathbf{P}(V_N)$ と書けば
+$\dim(V_N) = N + 1$ である。節 \ref{intersection-section-projection} と同様に、
+点からの射影の列
+\begin{align*}
+& r_N : 
+\mathbf{P}(V_N) \setminus \{p_N\} \to \mathbf{P}(V_{N - 1}), \\
+& r_{N - 1} :
+\mathbf{P}(V_{N - 1}) \setminus \{p_{N - 1}\} \to \mathbf{P}(V_{N - 2}), \\
+& \ldots,\\
+& r_{n + 1} :
+\mathbf{P}(V_{n + 1}) \setminus \{p_{n + 1}\} \to \mathbf{P}(V_n)
+\end{align*}
+を選ぶ。各段階で $p_N, p_{N - 1}, \ldots, p_{n + 1}$ を
+適切な Zariski 開集合から選ぶ。閉点 $x \in Z \subset X$ を選ぶ。
+各 $i$ について閉点 $x_{it} \in T_i \cap Z$ を、
+$T_i \cap Z$ の各既約成分に少なくとも一つずつ選ぶ。
+合成を取ると、次の性質をもつ射
+$$
+\pi = (r_{n + 1} \circ \ldots \circ r_N)|_X :
+X \longrightarrow \mathbf{P}(V_n)
+$$
+を得る。
+\begin{enumerate}
+\item $\pi$ は有限である。
+\item $\pi$ は $x$ およびすべての $x_{it}$ で \'etale である。
+\item $\pi|_Z : Z \to \pi(Z)$ は $\pi(x_{it})$ のある開近傍上で
+同型である。
+\item $T_i \cap \pi^{-1}(\pi(Z)) = (T_i \cap Z) \cup E_i$ である。
+ここで $E_i \subset T_i$ は閉であり、
+$\dim(E_i) \leq d + d' + 1 - (n + 1) = d + d' - n$ である。
+\end{enumerate}
+補題 \ref{intersection-lemma-projection-generically-finite}、
+\ref{intersection-lemma-projection-generically-immersion}、
+\ref{intersection-lemma-projection-generically-immersion-refined}、
+\ref{intersection-lemma-projection-injective} と帰納法から、これが可能であることは
+直接従う。最後の射影が $\mathbf{P}(V_{n + 1})$ からの射影であり、
+$\dim(V_{n + 1}) = n + 2$ であることに注意すれば、
+(4) の不等式が説明される。もう少し詳しく述べる。
+$X_j, Z_j, T_{i, j} \subset \mathbf{P}(V_j)$ を、それぞれ
+$j = N, \ldots, n$ における $X$、$Z$、$T_i$ の像とする。このとき
+$T_{i, j + 1} \cap r_{j + 1}^{-1}(Z_j) = (T_{i, j + 1} \cap Z_{j + 1})
+\cup E_{i, j + 1}$ であり、補題 \ref{intersection-lemma-projection-injective} により
+$E_{i, j + 1}$ に対する次元の上界がある。また
+$T_i \cap \pi^{-1}(\pi(Z))$ は、$T_i \cap Z$ と
+$E_{i, j}$ の逆像との合併であることに注意する。
+$X_j$ の間の遷移射は有限なので、望む次元の上界を得る。
+
+\medskip\noindent
+$C \subset \mathbf{P}(V_N)$ を
+$(r_{n + 1} \circ \ldots \circ r_N)^{-1}(\pi(Z))$ の
+スキーム論的閉包とする。$\pi$ は $Z$ の点 $x$ で \'etale なので、
+閉部分スキーム $C \cap X = \pi^{-1}(\pi(Z))$ は $Z$ を
+重複度 $1$ で含む（局所計算は省略する）。
+したがって補題 \ref{intersection-lemma-transversal-subschemes} により、
+次元 $d$ のある部分多様体 $Z_j \subset X$ に対して
+$$
+C \cdot X = [Z] + \sum m_j[Z_j]
+$$
+を得る。集合論的に
+$$
+C \cap X = \pi^{-1}(\pi(Z))
+$$
+であることに注意する。したがって
+$T_i \cap Z_j \subset T_i \cap \pi^{-1}(\pi(Z)) \subset (T_i \cap Z) \cup E_i$
+である。$E_i$ に含まれる $T_i \cap Z_j$ の任意の既約成分については、
+望む次元の上界を得る。最後に、$V$ を $T_i \cap Z$ に含まれる
+$T_i \cap Z_j$ の既約成分とする。証明を終えるには、
+$V$ がどの点 $x_{it}$ も含まないことを示せば十分である。
+そうすれば $\dim(V) < \dim(Z \cap T_i)$ だからである。
+そのためには、すべての $i, t, j$ に対し
+$x_{it} \not \in Z_j$ を示せば十分である。
+
+\medskip\noindent
+$Z' = \pi(Z)$ とおき、$Z'' = \pi^{-1}(Z')$ をスキーム論的に取る。
+条件 (3) により、$\pi(x_{it})$ を含む開集合
+$U \subset \mathbf{P}(V_n)$ で
+$\pi^{-1}(U) \cap Z \to U \cap Z'$ が同型となるものを選べる。
+特に $Z \to Z'$ は $x_{it}$ で局所同型である。一方、
+条件 (2) により $Z'' \to Z'$ は $x_{it}$ で \'etale である。
+したがって閉埋め込み $Z \to Z''$ は $x_{it}$ で \'etale である
+（『スキームの射』の補題 \ref{morphisms-lemma-etale-permanence}）。
+ゆえに $x_{it}$ のある Zariski 近傍で $Z = Z''$ であり、
+これで主張が証明された。
+\end{proof}
+
+\noindent
+実際の移動は次の補題を用いて行う。
+
+\begin{lemma}
+\label{intersection-lemma-move}
+$C \subset \mathbf{P}^N$ を閉部分多様体とする。
+$X \subset \mathbf{P}^N$ を部分多様体とし、
+$T_i \subset X$ を閉部分多様体の有限族とする。
+$C$ と $X$ が proper に交わると仮定する。このとき、閉部分多様体
+$C' \subset \mathbf{P}^N \times \mathbf{P}^1$ で次を満たすものが存在する。
+\begin{enumerate}
+\item $C' \to \mathbf{P}^1$ は支配的である。
+\item スキーム論的に $C'_0 = C$ である。
+\item $C'$ と $X \times \mathbf{P}^1$ は proper に交わる。
+\item $C'_\infty$ は与えられた各 $T_i$ と proper に交わる。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+$C \cap X = \emptyset$ ならば定数族
+$C' = C \times \mathbf{P}^1$ を取る。したがって
+$C \cap X \not = \emptyset$ と仮定してよく、実際そう仮定する。
+
+\medskip\noindent
+$\mathbf{P}^N = \mathbf{P}(V)$ と書けば $\dim(V) = N + 1$ である。
+$E = \text{End}(V)$、$E^\vee = \Hom(E, \mathbf{C})$ とし、
+補題 \ref{intersection-lemma-make-family} と同様に
+$\mathbf{P} = \mathbf{P}(E^\vee)$ とおく。
+$\text{id}_V$ を通る一般の直線
+$\ell \subset \mathbf{P}$ を選ぶ。
+$C' \subset \ell \times \mathbf{P}(V)$ を、$[g] \in \ell$ 上の
+ファイバーが $r_g(C)$ である閉部分スキームとする。
+より正確には、$C'$ は射 (\ref{intersection-equation-r-psi}) による
+$$
+\ell \times C \subset \mathbf{P} \times \mathbf{P}(V)
+$$
+の像である。補題 \ref{intersection-lemma-make-family} により、これは意味をもつ。
+すなわち $\ell \times C \subset U(\psi)$ である。
+射 $\ell \times C \to C'$ は有限であり、すべての
+$[g] \in \ell$ に対して集合論的に
+$C'_{[g]} = r_g(C)$ である。
+$0 = [\text{id}_V] \in \ell$ とすれば (1) と (2) は明らかである。
+(3) は、すべての $[g] \in \ell$ に対して $r_g(C)$ と $X$ が
+proper に交わることから従う。(4) は、一般の点
+$\infty = [g] \in \ell$ が $\mathbf{P}$ の一般点であり、
+そのような点では $\mathbf{P}(V)$ の任意の閉部分多様体 $T$ に対して
+$r_g(C) \cap T$ が proper であることから従う。詳細は省略する。
+\end{proof}
+
+\begin{lemma}
+\label{intersection-lemma-moving-move}
+$X$ を非特異射影多様体とする。$\alpha$ を $X$ 上の
+$r$-サイクル、$\beta$ を $s$-サイクルとする。このとき、
+$\alpha' \sim_{rat} \alpha$ であり、$\alpha'$ と $\beta$ が
+proper に交わるような $r$-サイクル $\alpha'$ が存在する。
+\end{lemma}
+
+\begin{proof}
+次元 $s$ のある部分多様体 $T_i \subset X$ によって
+$\beta = \sum n_i[T_i]$ と書く。線形性により、次元 $r$ の
+ある既約閉部分多様体 $Z \subset X$ に対して
+$\alpha = [Z]$ と仮定してよい。整数
+$$
+\dim(Z \cap T_i)
+$$
+の最大値 $e$ に関する帰納法で補題を証明する。
+基底の場合は $e = r + s - \dim(X)$ である。
+この場合 $Z$ は $\beta$ と proper に交わり、補題は自明である。
+
+\medskip\noindent
+帰納段階。$e > r + s - \dim(X)$ と仮定する。
+埋め込み $X \subset \mathbf{P}^N$ を選び、補題
+\ref{intersection-lemma-moving} を適用して、$C \cdot X = [Z] + \sum m_j[Z_j]$
+を満たし、各 $Z_j$ に帰納法の仮定を適用できる閉部分多様体
+$C \subset \mathbf{P}^N$ を得る。次に補題 \ref{intersection-lemma-move} を
+$C$、$X$、$T_i$ に適用し、
+$C' \subset \mathbf{P}^N \times \mathbf{P}^1$ を得る。
+$\gamma = C' \cdot X \times \mathbf{P}^1$ を
+$X \times \mathbf{P}^1$ 上のサイクルとみなす。
+補題 \ref{intersection-lemma-transfer} により
+$$
+[Z] + \sum m_j[Z_j] = \text{pr}_{X, *}(\gamma \cdot X \times 0)
+$$
+である。一方、サイクル
+$\gamma_\infty = \text{pr}_{X, *}(\gamma \cdot X \times \infty)$
+の台は $C'_\infty \cap X$ に含まれるので、$\beta$ と proper に交わる。
+したがって補題 \ref{intersection-lemma-rational-equivalence-and-intersection} により
+$[Z] \sim_{rat} - \sum m_j[Z_j] + \gamma_\infty$ である。
+帰納法により各 $[Z_j]$ は $\beta$ と proper に交わるサイクルと
+有理同値なので、これで証明が完了する。
+\end{proof}
+
+
+
+\section{交叉積と有理同値}
+\label{intersection-section-intersections-and-rational-equivalence}
+
+\noindent
+上の定義のもとで、交叉積が有理同値を法として良定義であることを示す。
+まず特別な場合を扱う。
+
+\begin{lemma}
+\label{intersection-lemma-well-defined-special-case}
+$X$ を非特異多様体とする。
+$W \subset X \times \mathbf{P}^1$ を $\mathbf{P}^1$ を支配する
+$(s + 1)$-次元部分多様体とする。$W \to \mathbf{P}^1$ の
+$a$ 上のファイバーと\ $b$ 上のファイバーをそれぞれ
+$W_a$ と\ $W_b$ とする。$V$ を $X$ の $r$-次元部分多様体とする。
+この $V$ は $W_a$ および $W_b$ の双方と proper に交わると仮定する。このとき
+$[V] \cdot [W_a]_r \sim_{rat} [V] \cdot [W_b]_r$ である。
+\end{lemma}
+
+\begin{proof}
+$[W_a]_r = \text{pr}_{X,*}(W \cdot X \times a)$ であり、
+$[W_b]_r$ についても同様である。補題
+\ref{intersection-lemma-rational-equivalence-and-intersection} を参照されたい。
+したがって
+$$
+V \cdot \text{pr}_{X,*}( W \cdot X \times a) \sim_{rat} V \cdot
+\text{pr}_{X,*}( W \cdot X\times b).
+$$
+を示すことに帰着する。射影公式である補題
+\ref{intersection-lemma-projection-formula-flat} を適用すると
+$$
+V \cdot \text{pr}_{X,*}( W \cdot X\times a) =
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times a))
+$$
+を得て、$b$ についても同様である。したがって
+$$
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times a))
+\sim_{rat}
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times b))
+$$
+を示すことに帰着する。$V \times \mathbf{P}^1$ と $W$ が
+proper に交わるならば、交点重複度の結合性
+（補題 \ref{intersection-lemma-associative}）により
+$V \times \mathbf{P}^1 \cdot (W \cdot X\times a) =
+(V \times \mathbf{P}^1 \cdot W) \cdot X \times a$
+を得て、$b$ についても同様である。したがって
+$$
+\text{pr}_{X,*}((V \times \mathbf{P}^1 \cdot W) \cdot X\times a)
+\sim_{rat}
+\text{pr}_{X,*}((V \times \mathbf{P}^1 \cdot W) \cdot X\times b)
+$$
+を示すことに帰着し、これは補題
+\ref{intersection-lemma-rational-equivalence-and-intersection} により成り立つ。
+
+\medskip\noindent
+しかし、上の議論はそのままでは機能しない。障害は、
+$V \times \mathbf{P}^1$ と $W$ が proper に交わることが
+分からない点にある。分かっているのは、$V$ と $W_a$、
+および $V$ と $W_b$ が proper に交わることだけである。
+$Z_i$、$i \in I$ を $V \times \mathbf{P}^1 \cap W$ の既約成分とする。
+補題 \ref{intersection-lemma-intersect-in-smooth} により、$n = \dim(X)$ とおけば
+$\dim(Z_i) \geq r + 1 + s + 1 - n - 1 = r + s + 1 - n$ である。
+$V$ と $W_a$ が proper に交わると仮定したので、
+$\dim(Z_{i, a}) = r + s - n$ または $Z_{i, a} = \emptyset$ である。
+一方、$Z_{i, a} \not = \emptyset$ ならば
+$\dim(Z_{i, a}) \geq \dim(Z_i) - 1 = r + s - n$ である。
+したがって $Z_i$ が $X \times a$ と交わるならば
+$\dim(Z_i) = r + s + 1 - n$ であり、この場合
+$Z_i \to \mathbf{P}^1$ は全射である。
+そこで $I = I' \amalg I''$ と書く。ここで $I'$ は
+$Z_i \to \mathbf{P}^1$ が全射となる $i \in I$ の集合であり、
+$I''$ は $Z_i$ が閉点 $t_i \in \mathbf{P}^1$ 上にあり、
+$t_i \not = a$ かつ $t_i \not = b$ となる $i \in I$ の集合である。
+サイクル
+$$
+\gamma = \sum\nolimits_{i \in I'} e_i [Z_i]
+$$
+を考える。ここで
+$$
+e_i = \sum\nolimits_p (-1)^p
+\text{length}_{\mathcal{O}_{X \times \mathbf{P}^1, Z_i}}
+\text{Tor}_p^{\mathcal{O}_{X \times \mathbf{P}^1, Z_i}}(
+\mathcal{O}_{V \times \mathbf{P}^1, Z_i}, \mathcal{O}_{W, Z_i})
+$$
+とする。$\gamma$ を $V \times \mathbf{P}^1$ と $W$ の交叉積の
+代わりに用いられることを示す。
+
+\medskip\noindent
+これを、上とまったく同様に交叉積の結合性を用いて示す。
+$U = \mathbf{P}^1 \setminus \{t_i, i \in I''\}$ とおく。
+$X \times a$ と $X \times b$ は $X \times U$ に含まれることに注意する。
+部分多様体
+$$
+V \times U,\quad W_U,\quad X \times a\quad\text{of}\quad X \times U
+$$
+は、$U$ の選び方により任意の二つが横断的に交わり、さらに
+$\dim(V \times U \cap W_U \cap X \times a) = \dim(V \cap W_a)$
+は期待される次元をもつ。したがって補題
+\ref{intersection-lemma-associative} により、$X \times U$ 上のサイクルとして
+$$
+V \times U \cdot (W_U \cdot X \times a) =
+(V \times U \cdot W_U) \cdot X \times a
+$$
+である。構成により、$\gamma$ の $X \times U$ への制限は
+サイクル $V \times U \cdot W_U$ である。自明に、
+$V \times \mathbf{P}^1 \cdot (W \times X \times a)$ の
+$X \times U$ への制限は
+$V \times U \cdot (W_U \cdot X \times a)$ である。したがって
+$$
+V \times \mathbf{P}^1 \cdot (W \cdot X \times a) =
+\gamma \cdot X \times a
+$$
+が $X \times \mathbf{P}^1$ 上のサイクルとして成り立つ
+（両辺は $X \times U$ に含まれ、上で述べたように
+$X \times U$ へ制限すると等しいからである）。$b$ についても
+同じことが成り立つので、
+\begin{align*}
+V \cdot [W_a]
+& =
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times a)) \\
+& =
+\text{pr}_{X, *}(\gamma \cdot X \times a) \\
+& \sim_{rat} 
+\text{pr}_{X, *}(\gamma \cdot X \times b) \\
+& =
+\text{pr}_{X,*}(V \times \mathbf{P}^1 \cdot (W \cdot X\times b)) \\
+& =
+V \cdot [W_b]
+\end{align*}
+を得る。最初と最後の等式は証明の第 1 段落による。
+第 2 と最後から 2 番目の等式はこの段落で示した。
+中央の同値は補題 \ref{intersection-lemma-rational-equivalence-and-intersection}
+による。
+\end{proof}
+
+\begin{theorem}
+\label{intersection-theorem-well-defined}
+$X$ を非特異射影多様体とする。$\alpha$ と\ $\beta$ をそれぞれ
+$X$ 上の $r$-サイクルと\ $s$-サイクルとする。
+$\alpha$ と $\beta$ が proper に交わり、
+$\alpha \cdot \beta$ が定義されると仮定する。さらに
+$\alpha \sim_{rat} 0$ と仮定する。このとき
+$\alpha \cdot \beta \sim_{rat} 0$ である。
+\end{theorem}
+
+\begin{proof}
+閉埋め込み $X \subset \mathbf{P}^N$ を選ぶ。
+線形性により、$\alpha$ と proper に交わるある $s$-次元閉部分多様体
+$Z \subset X$ に対して $\beta = [Z]$ である場合を証明すれば十分である。
+条件 $\alpha \sim_{rat} 0$ は、有限個の $(r + 1)$-次元閉部分多様体
+$W_i \subset X \times \mathbf{P}^1$ が存在して、
+$\mathbf{P}^1$ のある点の対 $a_i, b_i$ に対し
+$$
+\alpha = \sum [W_{i, a_i}]_r - [W_{i, b_i}]_r
+$$
+となることを意味する。$W_{i, a_i}^t$ と $W_{i, b_i}^t$ を、
+$W_{i, a_i}$ と $W_{i, b_i}$ の既約成分とする。整数
+$$
+\dim(Z \cap W_{i, a_i}^t),\quad \dim(Z \cap W_{i, b_i}^t)
+$$
+の最大値 $d$ に関する帰納法を用いる。以下の証明における主な問題は、
+$Z$ が $\alpha$ と proper に交わることは分かっていても、
+$Z$ が「中間」の多様体 $W_{i, a_i}^t$ および
+$W_{i, b_i}^t$ と proper に交わるとは限らないことである。
+すなわち $d >  r + s - \dim(X)$ となることがある。
+
+\medskip\noindent
+基底の場合：$d = r + s - \dim(X)$。
+この場合、$Z$ と $W_{i, a_i}^t$ および $W_{i, b_i}^t$ との
+すべての交叉は proper であり、望む結論は補題
+\ref{intersection-lemma-well-defined-special-case} から従う。
+実際、この補題を適用すると、各 $i$ に対して
+$[Z] \cdot [W_{i, a_i}]_r \sim_{rat} [Z] \cdot [W_{i, b_i}]_r$
+である。
+
+\medskip\noindent
+帰納段階：$d >  r + s - \dim(X)$。
+補題 \ref{intersection-lemma-moving} を $Z \subset X$ と部分多様体の族
+$\{W_{i, a_i}^t, W_{i, b_i}^t\}$ に適用する。
+すると $X$ と proper に交わる閉部分多様体
+$C \subset \mathbf{P}^N$ で
+$$
+C \cdot X = [Z] + \sum m_j [Z_j]
+$$
+および
+$$
+\dim(Z_j \cap W_{i, a_i}^t) \leq \dim(Z \cap W_{i, a_i}^t),\quad
+\dim(Z_j \cap W_{i, b_i}^t) \leq \dim(Z \cap W_{i, b_i}^t)
+$$
+を満たすものを得る。右辺が $> r + s - \dim(X)$ ならば
+不等式は真に狭い。これは二つのことを含意する。
+(a) 各 $Z_j$ に帰納法の仮定を適用できる。
+(b) $C \cdot X$ と $\alpha$ は proper に交わる
+（$\alpha$ は、$Z$ と proper に交わる
+$[W_{i, a_i}^t]$ と $[W_{i, a_i}^t]$ の線形結合だからである）。
+次に、補題 \ref{intersection-lemma-move} に従って、$C$、$X$、および
+$W_{i, a_i}^t$、$W_{i, b_i}^t$ に関する
+$C' \subset \mathbf{P}^N \times \mathbf{P}^1$ を選ぶ。
+次元 $s + 1$ のある部分多様体
+$E_k \subset X \times \mathbf{P}^1$ によって
+$C' \cdot X \times \mathbf{P}^1 = \sum n_k [E_k]$ と書く。
+命題 \ref{intersection-proposition-positivity} により、すべての $k$ に対して
+$n_k > 0$ であることに注意する。補題 \ref{intersection-lemma-transfer} により
+$$
+[Z] + \sum m_j [Z_j] = \sum n_k[E_{k, 0}]_s
+$$
+である。$E_{k, 0} \subset C \cap X$ なので、
+$[E_{k, 0}]_s$ と $\alpha$ は proper に交わる。一方、サイクル
+$$
+\gamma = \sum n_k[E_{k, \infty}]_s
+$$
+の台は $C'_\infty \cap X$ に含まれるので、各
+$W_{i, a_i}^t$、$W_{i, b_i}^t$ と proper に交わる。
+したがって基底の場合と線形性により
+$$
+\gamma \cdot \alpha \sim_{rat} 0
+$$
+である。$E_{k, 0}$ と $E_{k, \infty}$ が
+$\alpha$ と proper に交わることは既に見たので、補題
+\ref{intersection-lemma-well-defined-special-case} を
+$E_k \subset X \times \mathbf{P}^1$ と $\alpha$ に適用すると
+$$
+[E_{k, 0}] \cdot \alpha \sim_{rat} [E_{k, \infty}] \cdot \alpha
+$$
+を得る。以上をまとめると
+\begin{align*}
+[Z] \cdot \alpha
+& =
+(\sum n_k[E_{k, 0}]_r - \sum m_j[Z_j]) \cdot \alpha \\
+& \sim_{rat}
+\sum n_k [E_{k, 0}] \cdot \alpha \quad (\text{by induction hypothesis})\\
+& \sim_{rat}
+\sum n_k [E_{k, \infty}] \cdot \alpha \quad (\text{by the lemma})\\
+& =
+\gamma \cdot \alpha \\
+& \sim_{rat}
+0 \quad (\text{by base case})
+\end{align*}
+となる。これで証明が完了する。
+\end{proof}
+
+\begin{remark}
+\label{intersection-remark-quasi-projective}
+補題 \ref{intersection-lemma-moving-move} と定理 \ref{intersection-theorem-well-defined} は、
+同じ証明により非特異準射影多様体に対しても成り立つ。
+変更点は、移動補題 \ref{intersection-lemma-moving} の次の版を証明する必要がある
+ことだけである。$X \subset \mathbf{P}^N$ を閉部分多様体とする。
+$n = \dim(X)$、$0 \leq d, d' < n$ とする。
+$X^{reg} \subset X$ を非特異点からなる開部分集合とする。
+$Z \subset X^{reg}$ を次元 $d$ の閉部分多様体とし、
+$T_i \subset X^{reg}$、$i \in I$ を次元 $d'$ の閉部分多様体の
+有限族とする。このとき、部分多様体
+$C \subset \mathbf{P}^N$ で、$C$ が $X$ と proper に交わり、
+さらに
+$$
+(C \cdot X)|_{X^{reg}} = Z + \sum\nolimits_{j \in J} m_j Z_j
+$$
+を満たすものが存在する。ここで $Z_j \subset X^{reg}$ は
+$Z$ と異なる次元 $d$ の既約部分多様体であり、
+$$
+\dim(Z_j \cap T_i) \leq \dim(Z \cap T_i)
+$$
+を満たす。$Z$ が $X^{reg}$ の中で $T_i$ と proper に交わらない場合、
+この不等式は真に狭い。
+\end{remark}
+
+
+
+\section{Chow 環}
+\label{intersection-section-chow-rings}
+
+\noindent
+$X$ を非特異射影多様体とする。交叉積
+$$
+\CH_r(X) \times \CH_s(X) \longrightarrow \CH_{r + s - \dim(X)}(X),\quad
+(\alpha, \beta) \longmapsto \alpha \cdot \beta
+$$
+を次のように定める。$\alpha \in Z_r(X)$、
+$\beta \in Z_s(X)$ とする。$\alpha$ と $\beta$ が proper に交わるならば、
+節 \ref{intersection-section-intersection-product} の定義を用いる。
+そうでなければ、補題 \ref{intersection-lemma-moving-move} のように
+$\alpha \sim_{rat} \alpha'$ を選び、
+$$
+\alpha \cdot \beta =
+\text{class of }\alpha' \cdot \beta \in \CH_{r + s - \dim(X)}(X)
+$$
+とおく。定理 \ref{intersection-theorem-well-defined} により、これは良定義であり、
+有理同値を経由する。$\CH_*(X)$ 上の交叉積は可換（これは明らか）、
+結合的（補題 \ref{intersection-lemma-associative}）であり、単位元
+$[X] \in \CH_{\dim(X)}(X)$ をもつ。
+
+\medskip\noindent
+余次元 $c$ のサイクルの Chow 群を表すため、
+$\CH^c(X) = \CH_{\dim X - c}(X)$ をしばしば用いる。
+Chow 『ホモロジー代数』の第 \ref{chow-section-cycles-codimension} 節
+を参照されたい。交叉積は積
+$$
+\CH^k(X) \times \CH^l(X) \longrightarrow \CH^{k + l}(X)
+$$
+を定め、これは可換かつ結合的で、単位元
+$1 = [X] \in \CH^0(X)$ をもつ。
+
+
+\section{一般の射に対する引き戻し}
+\label{intersection-section-general-pullback}
+
+\noindent
+$f : X \to Y$ を非特異射影多様体の射とする。写像
+$$
+f^* : \CH_k(Y) \to \CH_{k+\dim X - \dim Y}(X)
+$$
+を規則
+$$
+f^*(\alpha) = pr_{X, *}(\Gamma_f \cdot pr_Y^*(\alpha))
+$$
+によって定める。ここで $\Gamma_f \subset X\times Y$ は $f$ のグラフである。
+この一般性では、これはサイクル上ではなくサイクル類上でのみ
+定義されることに注意する。節 \ref{intersection-section-chow-rings} で導入した記法
+$\CH^*$ を用いると、引き戻しを写像
+$$
+f^* : \CH^*(Y) \to \CH^*(X)
+$$
+とみなせる。言い換えれば、これは次数付き Abel 群の写像である。
+
+\begin{lemma}
+\label{intersection-lemma-pullback-and-intersection-product}
+$f : X \to Y$ を非特異射影多様体の射とする。
+Chow 群上の引き戻し写像は次を満たす。
+\begin{enumerate}
+\item $f^* : \CH^*(Y) \to \CH^*(X)$ は環準同型である。
+\item 合成可能な射の対 $f, g$ に対して
+$(g \circ f)^* = f^* \circ g^*$ である。
+\item 射影公式 $f_*(\alpha) \cdot \beta =
+f_*( \alpha \cdot f^*\beta)$ が成り立つ。
+\item $f$ が平坦ならば、これは先の定義と一致する。
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+これらはすべて上の結果から容易に従う。
+
+\medskip\noindent
+(1) については、$X \times Y$ 上のサイクル $\alpha$、$\beta$ に対して
+$\text{pr}_{X,*}( \Gamma_f \cdot \alpha \cdot \beta) =
+\text{pr}_{X,*}(\Gamma_f \cdot \alpha) \cdot
+\text{pr}_{X,*}(\Gamma_f \cdot \beta)$
+を示せば十分である。$\alpha$ が $X \times Y$ 上のサイクルで
+$\Gamma_f$ と proper に交わるならば、$\Gamma_f$ はグラフなので、
+サイクルとして
+$$
+\Gamma_f \cdot \alpha =
+\Gamma_f \cdot \text{pr}_X^*(\text{pr}_{X,*}(\Gamma_f \cdot \alpha))
+$$
+であることが容易に分かる。したがって、次の第 1 の等式を得る。
+\begin{align*}
+\text{pr}_{X,*}(\Gamma_f \cdot \alpha \cdot \beta)
+& =
+\text{pr}_{X,*}(
+\Gamma_f \cdot
+\text{pr}_X^*(\text{pr}_{X,*}(\Gamma_f \cdot \alpha)) \cdot \beta) \\
+& =
+\text{pr}_{X,*}(\text{pr}_X^*(\text{pr}_{X,*}(\Gamma_f \cdot \alpha))
+\cdot (\Gamma_f \cdot \beta)) \\
+& =
+\text{pr}_{X,*}(\Gamma_f \cdot \alpha) \cdot
+\text{pr}_{X,*}(\Gamma_f \cdot \beta)
+\end{align*}
+最後の段階では平坦な場合の射影公式
+（補題 \ref{intersection-lemma-projection-formula-flat}）を用いた。
+
+\medskip\noindent
+$g : Y \to Z$ とする。このとき性質 (2) は、
+$Z_*(X \times Y \times Z)$ において
+$$
+\Gamma =
+\text{pr}_{X \times Y}^*\Gamma_f \cdot
+\text{pr}_{Y \times Z}^*\Gamma_g
+$$
+であることから形式的に従う。ここで
+$\Gamma = \{(x, f(x), g(f(x))\}$ であり、これは
+$X \times Z$ における $\Gamma_{g \circ f}$ へ同型に写る。
+この等式はスキーム論的等式と補題 \ref{intersection-lemma-transversal} から従う。
+
+\medskip\noindent
+(3) について、平坦射に対する射影公式を 2 回用いる。
+\begin{align*}
+f_*(\alpha \cdot pr_{X, *}(\Gamma_f \cdot pr_Y^*(\beta)))
+& =
+f_*(pr_{X, *}(pr_X^*\alpha \cdot \Gamma_f \cdot pr_Y^*(\beta))) \\
+& =
+pr_{Y, *}(pr_X^*\alpha \cdot \Gamma_f \cdot pr_Y^*(\beta))) \\
+& =
+pt_{Y, *}(pr_X^*\alpha \cdot \Gamma_f) \cdot \beta \\
+& =
+f_*(\alpha) \cdot \beta
+\end{align*}
+最後の等式では上で述べたグラフに関する注意を用いる。
+これで (3) が証明された。
+
+\medskip\noindent
+性質 (4) は、$f$ が平坦な場合の交叉積
+$\Gamma_f \cdot pr_Y^*\alpha$ の同定に基づく。
+実際、この場合 $V \subset Y$ が閉部分多様体ならば、
+スキーム $f^{-1}(V) \cong \Gamma_f \cap pr_Y^{-1}(V)$ の
+各生成点 $\xi$ は $V$ の生成点上にある。したがって
+$\xi$ における $pr_Y^{-1}(V) = X \times V$ の局所環は
+Cohen-Macaulay である。$\Gamma_f \subset X \times Y$ は
+滑らかな射影多様体の射として正則埋め込みなので、
+$$
+\Gamma_f \cdot pr_Y^*[V] = [\Gamma_f \cap pr_Y^{-1}(V)]_d
+$$
+を得る。ここで $d$ は $\Gamma_f \cap pr_Y^{-1}(V)$ の次元である。
+補題 \ref{intersection-lemma-multiplicity-lci-CM} を参照されたい。
+$\Gamma_f \cap pr_Y^{-1}(V)$ は $f^{-1}(V)$ へ同型に写るので、
+結論が従う。
+\end{proof}
+
+
+\section{サイクルの引き戻し}
+\label{intersection-section-pullback-cycles}
+
+\noindent
+$X$ と $Y$ を非特異射影多様体とし、
+$f : X \to Y$ を射とする。$Z \subset Y$ を閉部分多様体とする。
+$f^{-1}(Z)$ をスキーム論的逆像とする。すなわち
+$$
+\xymatrix{
+f^{-1}(Z) \ar[r] \ar[d] & Z \ar[d] \\
+X \ar[r] & Y
+}
+$$
+はスキームのファイバー積図式である。特に
+$f^{-1}(Z) \subset X$ は $X$ の閉部分スキームである。
+この場合、常に
+$$
+\dim f^{-1}(Z) \geq \dim Z + \dim X - \dim Y.
+$$
+が成り立つ。上式で等号が成り立ち、かつスキーム $Z$ が
+$f^{-1}(Z)$ の生成点の像で Cohen-Macaulay であるならば、
+$f^*[Z] = [f^{-1}(Z)]_{\dim Z + \dim X - \dim Y}$
+である。これは $f^{-1}(Z)$ を $\Gamma_f$ と $X \times Z$ の
+スキーム論的交叉と同一視し、補題
+\ref{intersection-lemma-multiplicity-lci-CM} を用いることから従う。
+詳細は上の補題 \ref{intersection-lemma-pullback-and-intersection-product}
+の (4) の証明と同様である。
